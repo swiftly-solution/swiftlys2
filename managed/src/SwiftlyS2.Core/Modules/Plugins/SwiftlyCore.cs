@@ -65,7 +65,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable {
       .AddSingleton(coreProvider.GetRequiredService<EngineService>())
       .AddSingleton(coreProvider.GetRequiredService<TraceManager>())
 
-      .AddSingleton<EventSubscriber>()
+      .AddSingleton<IEventSubscriber, EventSubscriber>()
       .AddSingleton<PluginConfigurationService>()
       .AddSingleton<GameEventService>()
       .AddSingleton<NetMessageService>()
