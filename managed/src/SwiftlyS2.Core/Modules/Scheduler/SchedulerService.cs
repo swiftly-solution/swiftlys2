@@ -60,6 +60,15 @@ internal class SchedulerService : ISchedulerService, IDisposable {
     return cts;
   }
 
+  public CancellationTokenSource AddTimer(int delayTick, Action task) {
+    CleanFinishedTimers();
+    var cts = SchedulerManager.AddTimer(delayTick, 0, task, _lifecycleCts.Token);
+    lock (_lock) {
+      _timers.Add(cts);
+    }
+    return cts;
+  }
+
   private void CleanFinishedTimers() {
     lock (_lock) {
       _timers.RemoveAll(timer => timer.IsCancellationRequested);

@@ -35,4 +35,12 @@ public interface ISchedulerService {
   /// <param name="task">The task to execute.</param>
   /// <returns>A CancellationTokenSource that can be used to cancel the timer.</returns>
   CancellationTokenSource DelayAndRepeat(int delayTick, int periodTick, bool stopOnMapChange, Action task);
+
+  /// <summary>
+  /// Add a timer to the scheduler with flexible delay and period configuration.
+  /// </summary>
+  /// <param name="delayTick">The delay of the timer in ticks.</param>
+  /// <param name="task">The task to execute.</param>
+  /// <returns>A CancellationTokenSource that can be used to cancel the timer.</returns>
+  CancellationTokenSource AddTimer(int delayTick, Action task);
 }
