@@ -29,4 +29,8 @@ internal class CGCStorePurchaseInit_LineItemImpl : TypedProtobuf<CGCStorePurchas
   public uint PurchaseType
   { get => Accessor.GetUInt32("purchase_type"); set => Accessor.SetUInt32("purchase_type", value); }
 
+
+  public ulong SupplementalData
+  { get => Accessor.GetUInt64("supplemental_data"); set => Accessor.SetUInt64("supplemental_data", value); }
+
 }

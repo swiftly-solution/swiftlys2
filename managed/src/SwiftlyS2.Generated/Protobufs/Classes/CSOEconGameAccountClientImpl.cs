@@ -18,6 +18,10 @@ internal class CSOEconGameAccountClientImpl : TypedProtobuf<CSOEconGameAccountCl
   { get => Accessor.GetUInt32("additional_backpack_slots"); set => Accessor.SetUInt32("additional_backpack_slots", value); }
 
 
+  public uint TradeBanExpiration
+  { get => Accessor.GetUInt32("trade_ban_expiration"); set => Accessor.SetUInt32("trade_ban_expiration", value); }
+
+
   public uint BonusXpTimestampRefresh
   { get => Accessor.GetUInt32("bonus_xp_timestamp_refresh"); set => Accessor.SetUInt32("bonus_xp_timestamp_refresh", value); }
 

@@ -30,10 +30,6 @@ internal class CSGOUserCmdPBImpl : TypedProtobuf<CSGOUserCmdPB>, CSGOUserCmdPB
   { get => Accessor.GetInt32("attack2_start_history_index"); set => Accessor.SetInt32("attack2_start_history_index", value); }
 
 
-  public int Attack3StartHistoryIndex
-  { get => Accessor.GetInt32("attack3_start_history_index"); set => Accessor.SetInt32("attack3_start_history_index", value); }
-
-
   public bool LeftHandDesired
   { get => Accessor.GetBool("left_hand_desired"); set => Accessor.SetBool("left_hand_desired", value); }
 

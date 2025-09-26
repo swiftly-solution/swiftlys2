@@ -22,9 +22,6 @@ public interface CSGOUserCmdPB : ITypedProtobuf<CSGOUserCmdPB>
   public int Attack2StartHistoryIndex { get; set; }
 
 
-  public int Attack3StartHistoryIndex { get; set; }
-
-
   public bool LeftHandDesired { get; set; }
 
 

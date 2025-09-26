@@ -34,11 +34,11 @@ internal class CSubtickMoveStepImpl : TypedProtobuf<CSubtickMoveStep>, CSubtickM
   { get => Accessor.GetFloat("analog_left_delta"); set => Accessor.SetFloat("analog_left_delta", value); }
 
 
-  public float AnalogPitchDelta
-  { get => Accessor.GetFloat("analog_pitch_delta"); set => Accessor.SetFloat("analog_pitch_delta", value); }
+  public float PitchDelta
+  { get => Accessor.GetFloat("pitch_delta"); set => Accessor.SetFloat("pitch_delta", value); }
 
 
-  public float AnalogYawDelta
-  { get => Accessor.GetFloat("analog_yaw_delta"); set => Accessor.SetFloat("analog_yaw_delta", value); }
+  public float YawDelta
+  { get => Accessor.GetFloat("yaw_delta"); set => Accessor.SetFloat("yaw_delta", value); }
 
 }

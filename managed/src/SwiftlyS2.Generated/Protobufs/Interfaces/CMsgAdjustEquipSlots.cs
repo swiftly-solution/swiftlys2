@@ -12,4 +12,7 @@ public interface CMsgAdjustEquipSlots : ITypedProtobuf<CMsgAdjustEquipSlots>
 
   public IProtobufRepeatedFieldSubMessageType<CMsgAdjustEquipSlot> Slots { get; }
 
+
+  public uint ChangeNum { get; set; }
+
 }

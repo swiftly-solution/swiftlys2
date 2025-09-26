@@ -13,6 +13,9 @@ public interface CSOEconGameAccountClient : ITypedProtobuf<CSOEconGameAccountCli
   public uint AdditionalBackpackSlots { get; set; }
 
 
+  public uint TradeBanExpiration { get; set; }
+
+
   public uint BonusXpTimestampRefresh { get; set; }
 
 

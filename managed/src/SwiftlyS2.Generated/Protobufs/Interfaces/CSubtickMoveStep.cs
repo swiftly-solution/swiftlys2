@@ -25,9 +25,9 @@ public interface CSubtickMoveStep : ITypedProtobuf<CSubtickMoveStep>
   public float AnalogLeftDelta { get; set; }
 
 
-  public float AnalogPitchDelta { get; set; }
+  public float PitchDelta { get; set; }
 
 
-  public float AnalogYawDelta { get; set; }
+  public float YawDelta { get; set; }
 
 }

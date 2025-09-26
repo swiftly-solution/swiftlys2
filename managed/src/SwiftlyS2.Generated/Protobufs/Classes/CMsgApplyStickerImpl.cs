@@ -33,4 +33,28 @@ internal class CMsgApplyStickerImpl : TypedProtobuf<CMsgApplySticker>, CMsgApply
   public float StickerWear
   { get => Accessor.GetFloat("sticker_wear"); set => Accessor.SetFloat("sticker_wear", value); }
 
+
+  public float StickerRotation
+  { get => Accessor.GetFloat("sticker_rotation"); set => Accessor.SetFloat("sticker_rotation", value); }
+
+
+  public float StickerScale
+  { get => Accessor.GetFloat("sticker_scale"); set => Accessor.SetFloat("sticker_scale", value); }
+
+
+  public float StickerOffsetX
+  { get => Accessor.GetFloat("sticker_offset_x"); set => Accessor.SetFloat("sticker_offset_x", value); }
+
+
+  public float StickerOffsetY
+  { get => Accessor.GetFloat("sticker_offset_y"); set => Accessor.SetFloat("sticker_offset_y", value); }
+
+
+  public float StickerOffsetZ
+  { get => Accessor.GetFloat("sticker_offset_z"); set => Accessor.SetFloat("sticker_offset_z", value); }
+
+
+  public float StickerWearTarget
+  { get => Accessor.GetFloat("sticker_wear_target"); set => Accessor.SetFloat("sticker_wear_target", value); }
+
 }

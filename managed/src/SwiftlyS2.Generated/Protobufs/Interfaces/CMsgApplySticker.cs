@@ -24,4 +24,22 @@ public interface CMsgApplySticker : ITypedProtobuf<CMsgApplySticker>
 
   public float StickerWear { get; set; }
 
+
+  public float StickerRotation { get; set; }
+
+
+  public float StickerScale { get; set; }
+
+
+  public float StickerOffsetX { get; set; }
+
+
+  public float StickerOffsetY { get; set; }
+
+
+  public float StickerOffsetZ { get; set; }
+
+
+  public float StickerWearTarget { get; set; }
+
 }

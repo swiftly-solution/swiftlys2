@@ -21,4 +21,7 @@ public interface CGCStorePurchaseInit_LineItem : ITypedProtobuf<CGCStorePurchase
 
   public uint PurchaseType { get; set; }
 
+
+  public ulong SupplementalData { get; set; }
+
 }
