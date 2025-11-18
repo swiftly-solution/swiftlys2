@@ -25,11 +25,6 @@ internal class CoreHookService : IDisposable
     _Logger = logger;
     _Core = core;
 
-    HookTouch();
-    HookCanAcquire();
-    HookCommandExecute();
-    HookICVarFindConCommand();
-    HookCCSPlayer_WeaponServices_CanUse();
     HookSteamServerAPIActivated();
   }
 
