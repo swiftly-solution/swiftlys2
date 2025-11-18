@@ -1,8 +1,5 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -14,16 +11,13 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventNextlevelChangedImpl : GameEvent<EventNextlevelChanged>, EventNextlevelChanged
 {
 
-  public EventNextlevelChangedImpl(nint address) : base(address)
-  {
-  }
+    public EventNextlevelChangedImpl( nint address ) : base(address)
+    {
+    }
 
-  public string NextLevel
-  { get => Accessor.GetString("nextlevel"); set => Accessor.SetString("nextlevel", value); }
+    public string NextLevel { get => Accessor.GetString("nextlevel"); set => Accessor.SetString("nextlevel", value); }
 
-  public string MapGroup
-  { get => Accessor.GetString("mapgroup"); set => Accessor.SetString("mapgroup", value); }
+    public string MapGroup { get => Accessor.GetString("mapgroup"); set => Accessor.SetString("mapgroup", value); }
 
-  public string SkirmishMode
-  { get => Accessor.GetString("skirmishmode"); set => Accessor.SetString("skirmishmode", value); }
+    public string SkirmishMode { get => Accessor.GetString("skirmishmode"); set => Accessor.SetString("skirmishmode", value); }
 }

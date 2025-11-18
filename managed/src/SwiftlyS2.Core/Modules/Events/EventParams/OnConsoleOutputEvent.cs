@@ -5,5 +5,5 @@ namespace SwiftlyS2.Core.Events;
 internal class OnConsoleOutputEvent : IOnConsoleOutputEvent
 {
 
-  public required string Message { get; set; }
+    public required string Message { get; set; }
 }

@@ -1,7 +1,8 @@
 namespace SwiftlyS2.Shared.Natives;
 
-public interface ISizedNativeHandle {
+public interface ISizedNativeHandle
+{
 
-  static abstract int GetSize();
+    public abstract static int GetSize();
 
 }

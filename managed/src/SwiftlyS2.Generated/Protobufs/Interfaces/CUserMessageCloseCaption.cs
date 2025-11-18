@@ -1,29 +1,28 @@
 
 using SwiftlyS2.Core.ProtobufDefinitions;
-using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.NetMessages;
 
 namespace SwiftlyS2.Shared.ProtobufDefinitions;
+
 using SwiftlyS2.Shared.NetMessages;
 
 public interface CUserMessageCloseCaption : ITypedProtobuf<CUserMessageCloseCaption>, INetMessage<CUserMessageCloseCaption>, IDisposable
 {
-  static int INetMessage<CUserMessageCloseCaption>.MessageId => 102;
-  
-  static string INetMessage<CUserMessageCloseCaption>.MessageName => "CUserMessageCloseCaption";
+    static int INetMessage<CUserMessageCloseCaption>.MessageId => 102;
 
-  static CUserMessageCloseCaption ITypedProtobuf<CUserMessageCloseCaption>.Wrap(nint handle, bool isManuallyAllocated) => new CUserMessageCloseCaptionImpl(handle, isManuallyAllocated);
+    static string INetMessage<CUserMessageCloseCaption>.MessageName => "CUserMessageCloseCaption";
 
-
-  public uint Hash { get; set; }
+    static CUserMessageCloseCaption ITypedProtobuf<CUserMessageCloseCaption>.Wrap( nint handle, bool isManuallyAllocated ) => new CUserMessageCloseCaptionImpl(handle, isManuallyAllocated);
 
 
-  public float Duration { get; set; }
+    public uint Hash { get; set; }
 
 
-  public bool FromPlayer { get; set; }
+    public float Duration { get; set; }
 
 
-  public int EntIndex { get; set; }
+    public bool FromPlayer { get; set; }
+
+
+    public int EntIndex { get; set; }
 
 }

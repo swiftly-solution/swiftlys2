@@ -5,7 +5,7 @@ namespace SwiftlyS2.Core.SchemaDefinitions;
 
 internal partial class CAttributeListImpl : CAttributeList
 {
-    public void SetOrAddAttribute(string attributeName, float value)
+    public void SetOrAddAttribute( string attributeName, float value )
     {
         GameFunctions.SetOrAddAttribute(Address, attributeName, value);
     }

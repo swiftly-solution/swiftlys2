@@ -8,7 +8,8 @@ namespace SwiftlyS2.Shared.Natives;
 /// between this and the `INativeHandle` from users' perspective, as allocation and destruction should be for internal use only 
 /// and handled within the core.
 /// </summary>
-public interface IAllocableNativeHandle : INativeHandle, IDisposable {
+public interface IAllocableNativeHandle : INativeHandle, IDisposable
+{
 
 
 }

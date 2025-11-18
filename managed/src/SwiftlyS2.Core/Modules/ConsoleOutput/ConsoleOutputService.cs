@@ -1,7 +1,5 @@
-using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.ConsoleOutput;
-using SwiftlyS2.Shared.Profiler;
 
 namespace SwiftlyS2.Core.ConsoleOutput;
 
@@ -26,7 +24,7 @@ internal class ConsoleOutputService : IConsoleOutputService, IDisposable
         NativeConsoleOutput.ReloadFilterConfiguration();
     }
 
-    public bool NeedsFiltering(string message)
+    public bool NeedsFiltering( string message )
     {
         return NativeConsoleOutput.NeedsFiltering(message);
     }
@@ -36,7 +34,7 @@ internal class ConsoleOutputService : IConsoleOutputService, IDisposable
         return NativeConsoleOutput.GetCounterText();
     }
 
-    public void WriteToServerConsole(string message)
+    public void WriteToServerConsole( string message )
     {
         NativeEngineHelpers.SendMessageToConsole(message);
     }

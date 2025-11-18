@@ -10,7 +10,7 @@ public class ManagedCUtlVector<T> : IDisposable where T : unmanaged
         _vector = new CUtlVector<T>(0, 1);
     }
 
-    public ManagedCUtlVector(int growSize, int initSize)
+    public ManagedCUtlVector( int growSize, int initSize )
     {
         _vector = new CUtlVector<T>(growSize, initSize);
     }
@@ -26,8 +26,8 @@ public class ManagedCUtlVector<T> : IDisposable where T : unmanaged
         GC.SuppressFinalize(this);
     }
 
-    
-    protected virtual void Dispose(bool disposing)
+
+    protected virtual void Dispose( bool disposing )
     {
         if (_disposed) return;
 

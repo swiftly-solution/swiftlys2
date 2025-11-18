@@ -1,9 +1,9 @@
-using SwiftlyS2.Shared.Misc;
 using System.Runtime.InteropServices;
+using SwiftlyS2.Shared.Misc;
 
 namespace SwiftlyS2.Shared.Natives;
 
-public enum CollisionGroup: byte
+public enum CollisionGroup : byte
 {
     /// <summary>
     /// Default layer, always collides with everything.
@@ -95,7 +95,7 @@ public enum CollisionGroup: byte
     MaxAllowed = 64
 }
 
-public enum InteractionLayer: sbyte
+public enum InteractionLayer : sbyte
 {
     ContentsSolid = 0,
     ContentsHitbox,
@@ -144,7 +144,7 @@ public enum InteractionLayer: sbyte
 }
 
 [Flags]
-public enum MaskTrace: ulong
+public enum MaskTrace : ulong
 {
     Empty = 0ul,
     Solid = 1ul << InteractionLayer.ContentsSolid,
@@ -190,7 +190,7 @@ public enum MaskTrace: ulong
 };
 
 [Flags]
-public enum RnQueryObjectSet: byte
+public enum RnQueryObjectSet : byte
 {
     Static = 1 << 0,
     Keyframed = 1 << 1,
@@ -214,44 +214,37 @@ public unsafe struct RnQueryShapeAttr_t
     [FieldOffset(0x2D)] public CollisionGroup CollisionGroup;
     [FieldOffset(0x2E)] private byte data;
 
-    public bool HitSolid
-    {
+    public bool HitSolid {
         get => BitFieldHelper.GetBit(ref data, 0);
         set => BitFieldHelper.SetBit(ref data, 0, value);
     }
 
-    public bool HitSolidRequiresGenerateContacts
-    {
+    public bool HitSolidRequiresGenerateContacts {
         get => BitFieldHelper.GetBit(ref data, 1);
         set => BitFieldHelper.SetBit(ref data, 1, value);
     }
 
-    public bool HitTrigger
-    {
+    public bool HitTrigger {
         get => BitFieldHelper.GetBit(ref data, 2);
         set => BitFieldHelper.SetBit(ref data, 2, value);
     }
 
-    public bool ShouldIgnoreDisabledPairs
-    {
+    public bool ShouldIgnoreDisabledPairs {
         get => BitFieldHelper.GetBit(ref data, 3);
         set => BitFieldHelper.SetBit(ref data, 3, value);
     }
 
-    public bool IgnoreIfBothInteractWithHitboxes
-    {
+    public bool IgnoreIfBothInteractWithHitboxes {
         get => BitFieldHelper.GetBit(ref data, 4);
         set => BitFieldHelper.SetBit(ref data, 4, value);
     }
 
-    public bool ForceHitEverything
-    {
+    public bool ForceHitEverything {
         get => BitFieldHelper.GetBit(ref data, 5);
         set => BitFieldHelper.SetBit(ref data, 5, value);
     }
 
-    public bool Unknown
-    {
+    public bool Unknown {
         get => BitFieldHelper.GetBit(ref data, 6);
         set => BitFieldHelper.SetBit(ref data, 6, value);
     }

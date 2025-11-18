@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace SwiftlyS2.Shared.Schemas;
@@ -33,4 +32,5 @@ public static class SchemaSize
 
             return Unsafe.SizeOf<T>();
         });
-    }}
+    }
+}

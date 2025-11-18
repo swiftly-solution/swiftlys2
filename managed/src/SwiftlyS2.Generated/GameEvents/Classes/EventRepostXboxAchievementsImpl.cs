@@ -1,8 +1,5 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -13,11 +10,10 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventRepostXboxAchievementsImpl : GameEvent<EventRepostXboxAchievements>, EventRepostXboxAchievements
 {
 
-  public EventRepostXboxAchievementsImpl(nint address) : base(address)
-  {
-  }
+    public EventRepostXboxAchievementsImpl( nint address ) : base(address)
+    {
+    }
 
-  // splitscreen ID
-  public short SplitScreenPlayer
-  { get => (short)Accessor.GetInt32("splitscreenplayer"); set => Accessor.SetInt32("splitscreenplayer", value); }
+    // splitscreen ID
+    public short SplitScreenPlayer { get => (short)Accessor.GetInt32("splitscreenplayer"); set => Accessor.SetInt32("splitscreenplayer", value); }
 }

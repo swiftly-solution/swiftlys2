@@ -6,5 +6,5 @@ namespace SwiftlyS2.Core.Events;
 internal class OnEntitySpawnedEvent : IOnEntitySpawnedEvent
 {
 
-  public required CEntityInstance Entity { get; set; }
-} 
+    public required CEntityInstance Entity { get; set; }
+}

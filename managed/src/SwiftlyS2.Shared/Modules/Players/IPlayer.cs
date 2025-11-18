@@ -1,4 +1,4 @@
-﻿using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Shared.SchemaDefinitions;

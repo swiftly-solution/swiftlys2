@@ -5,7 +5,7 @@ namespace SwiftlyS2.Core.Events;
 internal class OnClientPutInServerEvent : IOnClientPutInServerEvent
 {
 
-  public int PlayerId { get; set; }
+    public int PlayerId { get; set; }
 
-  public ClientKind Kind { get; set; }
-} 
+    public ClientKind Kind { get; set; }
+}

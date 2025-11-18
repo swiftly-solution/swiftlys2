@@ -1,8 +1,5 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -13,15 +10,13 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventDmBonusWeaponStartImpl : GameEvent<EventDmBonusWeaponStart>, EventDmBonusWeaponStart
 {
 
-  public EventDmBonusWeaponStartImpl(nint address) : base(address)
-  {
-  }
+    public EventDmBonusWeaponStartImpl( nint address ) : base(address)
+    {
+    }
 
-  // The length of time that this bonus lasts
-  public short Time
-  { get => (short)Accessor.GetInt32("time"); set => Accessor.SetInt32("time", value); }
+    // The length of time that this bonus lasts
+    public short Time { get => (short)Accessor.GetInt32("time"); set => Accessor.SetInt32("time", value); }
 
-  // Loadout position of the bonus weapon
-  public short Pos
-  { get => (short)Accessor.GetInt32("Pos"); set => Accessor.SetInt32("Pos", value); }
+    // Loadout position of the bonus weapon
+    public short Pos { get => (short)Accessor.GetInt32("Pos"); set => Accessor.SetInt32("Pos", value); }
 }

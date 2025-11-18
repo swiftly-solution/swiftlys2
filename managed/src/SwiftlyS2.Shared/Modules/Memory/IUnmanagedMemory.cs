@@ -32,7 +32,7 @@ public struct MidHookContext
 }
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public delegate void MidHookDelegate(ref MidHookContext context);
+public delegate void MidHookDelegate( ref MidHookContext context );
 
 public interface IUnmanagedMemory
 {
@@ -46,11 +46,11 @@ public interface IUnmanagedMemory
     /// The callback receives a context structure that allows reading and modifying CPU registers.
     /// </summary>
     /// <param name="callback">The callback to call when the code reaches that address.</param>
-    public Guid AddHook(MidHookDelegate callback);
+    public Guid AddHook( MidHookDelegate callback );
 
     /// <summary>
     /// Unhook a hook by its id.
     /// </summary>
     /// <param name="id">The id of the hook to unhook.</param>
-    public void RemoveHook(Guid id);
+    public void RemoveHook( Guid id );
 }

@@ -1,7 +1,6 @@
 using System.Runtime.InteropServices;
-using IntPtr = System.IntPtr;
-
 using System.Text;
+using IntPtr = nint;
 
 namespace SwiftlyS2.Shared.SteamAPI;
 
@@ -44,17 +43,17 @@ public class InteropHelp
     public static void TestIfAvailableClient()
     {
         TestIfPlatformSupported();
-        throw new System.InvalidOperationException("Steamworks Client is not available.");
+        throw new InvalidOperationException("Steamworks Client is not available.");
     }
 
     public static void TestIfAvailableGameServer()
     {
         TestIfPlatformSupported();
-        if (CSteamGameServerAPIContext.GetSteamClient() == System.IntPtr.Zero)
+        if (CSteamGameServerAPIContext.GetSteamClient() == IntPtr.Zero)
         {
             if (!CSteamGameServerAPIContext.Init())
             {
-                throw new System.InvalidOperationException("Steamworks GameServer is not initialized.");
+                throw new InvalidOperationException("Steamworks GameServer is not initialized.");
             }
         }
     }
@@ -67,7 +66,7 @@ public class InteropHelp
             return null;
         }
 
-        int len = 0;
+        var len = 0;
 
         while (Marshal.ReadByte(nativeUtf8, len) != 0)
         {
@@ -79,14 +78,14 @@ public class InteropHelp
             return string.Empty;
         }
 
-        byte[] buffer = new byte[len];
+        var buffer = new byte[len];
         Marshal.Copy(nativeUtf8, buffer, 0, buffer.Length);
         return Encoding.UTF8.GetString(buffer);
     }
 
     public static string ByteArrayToStringUTF8( byte[] buffer )
     {
-        int length = 0;
+        var length = 0;
         while (length < buffer.Length && buffer[length] != 0)
         {
             length++;
@@ -98,7 +97,7 @@ public class InteropHelp
     public static void StringToByteArrayUTF8( string str, byte[] outArrayBuffer, int outArrayBufferSize )
     {
         outArrayBuffer = new byte[outArrayBufferSize];
-        int length = Encoding.UTF8.GetBytes(str, 0, str.Length, outArrayBuffer, 0);
+        var length = Encoding.UTF8.GetBytes(str, 0, str.Length, outArrayBuffer, 0);
         outArrayBuffer[length] = 0;
     }
 
@@ -107,13 +106,13 @@ public class InteropHelp
     public class SteamParamStringArray
     {
         // The pointer to each AllocHGlobal() string
-        IntPtr[] m_Strings;
+        private readonly IntPtr[] m_Strings;
         // The pointer to the condensed version of m_Strings
-        IntPtr m_ptrStrings;
+        private readonly IntPtr m_ptrStrings;
         // The pointer to the StructureToPtr version of SteamParamStringArray_t that will get marshaled
-        IntPtr m_pSteamParamStringArray;
+        private readonly IntPtr m_pSteamParamStringArray;
 
-        public SteamParamStringArray( System.Collections.Generic.IList<string> strings )
+        public SteamParamStringArray( IList<string> strings )
         {
             if (strings == null)
             {
@@ -122,10 +121,10 @@ public class InteropHelp
             }
 
             m_Strings = new IntPtr[strings.Count];
-            for (int i = 0; i < strings.Count; ++i)
+            for (var i = 0; i < strings.Count; ++i)
             {
-                byte[] strbuf = new byte[Encoding.UTF8.GetByteCount(strings[i]) + 1];
-                Encoding.UTF8.GetBytes(strings[i], 0, strings[i].Length, strbuf, 0);
+                var strbuf = new byte[Encoding.UTF8.GetByteCount(strings[i]) + 1];
+                _ = Encoding.UTF8.GetBytes(strings[i], 0, strings[i].Length, strbuf, 0);
                 m_Strings[i] = Marshal.AllocHGlobal(strbuf.Length);
                 Marshal.Copy(strbuf, 0, m_Strings[i], strbuf.Length);
             }
@@ -145,7 +144,7 @@ public class InteropHelp
         {
             if (m_Strings != null)
             {
-                foreach (IntPtr ptr in m_Strings)
+                foreach (var ptr in m_Strings)
                 {
                     Marshal.FreeHGlobal(ptr);
                 }
@@ -173,8 +172,8 @@ public class InteropHelp
 // MatchMaking Key-Value Pair Marshaller
 public class MMKVPMarshaller
 {
-    private IntPtr m_pNativeArray;
-    private IntPtr m_pArrayEntries;
+    private readonly IntPtr m_pNativeArray;
+    private readonly IntPtr m_pArrayEntries;
 
     public MMKVPMarshaller( MatchMakingKeyValuePair_t[] filters )
     {
@@ -183,11 +182,11 @@ public class MMKVPMarshaller
             return;
         }
 
-        int sizeOfMMKVP = Marshal.SizeOf(typeof(MatchMakingKeyValuePair_t));
+        var sizeOfMMKVP = Marshal.SizeOf(typeof(MatchMakingKeyValuePair_t));
 
         m_pNativeArray = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(IntPtr)) * filters.Length);
         m_pArrayEntries = Marshal.AllocHGlobal(sizeOfMMKVP * filters.Length);
-        for (int i = 0; i < filters.Length; ++i)
+        for (var i = 0; i < filters.Length; ++i)
         {
             Marshal.StructureToPtr(filters[i], new IntPtr(m_pArrayEntries.ToInt64() + (i * sizeOfMMKVP)), false);
         }

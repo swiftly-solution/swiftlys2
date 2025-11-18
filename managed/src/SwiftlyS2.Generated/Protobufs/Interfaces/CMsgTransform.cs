@@ -7,15 +7,15 @@ namespace SwiftlyS2.Shared.ProtobufDefinitions;
 
 public interface CMsgTransform : ITypedProtobuf<CMsgTransform>
 {
-  static CMsgTransform ITypedProtobuf<CMsgTransform>.Wrap(nint handle, bool isManuallyAllocated) => new CMsgTransformImpl(handle, isManuallyAllocated);
+    static CMsgTransform ITypedProtobuf<CMsgTransform>.Wrap( nint handle, bool isManuallyAllocated ) => new CMsgTransformImpl(handle, isManuallyAllocated);
 
 
-  public Vector Position { get; set; }
+    public Vector Position { get; set; }
 
 
-  public float Scale { get; set; }
+    public float Scale { get; set; }
 
 
-  public CMsgQuaternion Orientation { get; }
+    public CMsgQuaternion Orientation { get; }
 
 }

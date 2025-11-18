@@ -5,14 +5,14 @@ namespace SwiftlyS2.Core.Hosting;
 
 internal static class TestServiceInjection
 {
-  public static IServiceCollection AddTestService(this IServiceCollection self)
-  {
-    self.AddSingleton<TestService>();
-    return self;
-  }
+    public static IServiceCollection AddTestService( this IServiceCollection self )
+    {
+        _ = self.AddSingleton<TestService>();
+        return self;
+    }
 
-  public static void UseTestService(this IServiceProvider self)
-  {
-    self.GetRequiredService<TestService>();
-  }
+    public static void UseTestService( this IServiceProvider self )
+    {
+        _ = self.GetRequiredService<TestService>();
+    }
 }

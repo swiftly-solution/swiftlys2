@@ -8,16 +8,16 @@ namespace SwiftlyS2.Shared.Events;
 /// </summary>
 public interface IOnMovementServicesRunCommandHookEvent
 {
-  /// <summary>
-  /// The movement services.
-  /// </summary>
-  public CCSPlayer_MovementServices MovementServices { get; }
-  /// <summary>
-  /// The button state.
-  /// </summary>
-  public CInButtonState ButtonState { get;  }
-  /// <summary>
-  /// The user command protobuf.
-  /// </summary>
-  public CSGOUserCmdPB UserCmdPB { get; }
+    /// <summary>
+    /// The movement services.
+    /// </summary>
+    public CCSPlayer_MovementServices MovementServices { get; }
+    /// <summary>
+    /// The button state.
+    /// </summary>
+    public CInButtonState ButtonState { get; }
+    /// <summary>
+    /// The user command protobuf.
+    /// </summary>
+    public CSGOUserCmdPB UserCmdPB { get; }
 }

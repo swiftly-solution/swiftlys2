@@ -7,10 +7,11 @@ namespace SwiftlyS2.Core.Events;
 internal class OnPrecacheResourceEvent : IOnPrecacheResourceEvent
 {
 
-  internal required nint pResourceManifest;
+    internal required nint pResourceManifest;
 
-  public void AddItem(string path) {
-    GameFunctions.CEntityResourceManifest_AddResource(pResourceManifest, path);
-  }
-  
+    public void AddItem( string path )
+    {
+        GameFunctions.CEntityResourceManifest_AddResource(pResourceManifest, path);
+    }
+
 }

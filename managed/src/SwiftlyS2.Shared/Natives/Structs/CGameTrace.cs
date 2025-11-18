@@ -1,10 +1,10 @@
-﻿using SwiftlyS2.Core.SchemaDefinitions;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using System.Runtime.InteropServices;
+using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.Natives;
 
-public enum RayType_t: byte
+public enum RayType_t : byte
 {
     RAY_TYPE_LINE = 0,
     RAY_TYPE_SPHERE,

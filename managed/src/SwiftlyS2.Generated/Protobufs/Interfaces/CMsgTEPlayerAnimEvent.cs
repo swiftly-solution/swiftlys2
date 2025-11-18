@@ -1,26 +1,25 @@
 
 using SwiftlyS2.Core.ProtobufDefinitions;
-using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.NetMessages;
 
 namespace SwiftlyS2.Shared.ProtobufDefinitions;
+
 using SwiftlyS2.Shared.NetMessages;
 
 public interface CMsgTEPlayerAnimEvent : ITypedProtobuf<CMsgTEPlayerAnimEvent>, INetMessage<CMsgTEPlayerAnimEvent>, IDisposable
 {
-  static int INetMessage<CMsgTEPlayerAnimEvent>.MessageId => 450;
-  
-  static string INetMessage<CMsgTEPlayerAnimEvent>.MessageName => "CMsgTEPlayerAnimEvent";
+    static int INetMessage<CMsgTEPlayerAnimEvent>.MessageId => 450;
 
-  static CMsgTEPlayerAnimEvent ITypedProtobuf<CMsgTEPlayerAnimEvent>.Wrap(nint handle, bool isManuallyAllocated) => new CMsgTEPlayerAnimEventImpl(handle, isManuallyAllocated);
+    static string INetMessage<CMsgTEPlayerAnimEvent>.MessageName => "CMsgTEPlayerAnimEvent";
 
-
-  public uint Player { get; set; }
+    static CMsgTEPlayerAnimEvent ITypedProtobuf<CMsgTEPlayerAnimEvent>.Wrap( nint handle, bool isManuallyAllocated ) => new CMsgTEPlayerAnimEventImpl(handle, isManuallyAllocated);
 
 
-  public uint Event { get; set; }
+    public uint Player { get; set; }
 
 
-  public int Data { get; set; }
+    public uint Event { get; set; }
+
+
+    public int Data { get; set; }
 
 }

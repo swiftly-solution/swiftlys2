@@ -1,7 +1,5 @@
-using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Core.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.GameEvents;
 
 namespace SwiftlyS2.Shared.GameEventDefinitions;
 
@@ -9,26 +7,27 @@ namespace SwiftlyS2.Shared.GameEventDefinitions;
 /// Event "nextlevel_changed"
 /// a game event, name may be 32 characters long
 /// </summary>
-public interface EventNextlevelChanged : IGameEvent<EventNextlevelChanged> {
+public interface EventNextlevelChanged : IGameEvent<EventNextlevelChanged>
+{
 
-  static EventNextlevelChanged IGameEvent<EventNextlevelChanged>.Create(nint address) => new EventNextlevelChangedImpl(address);
+    static EventNextlevelChanged IGameEvent<EventNextlevelChanged>.Create( nint address ) => new EventNextlevelChangedImpl(address);
 
-  static string IGameEvent<EventNextlevelChanged>.GetName() => "nextlevel_changed";
+    static string IGameEvent<EventNextlevelChanged>.GetName() => "nextlevel_changed";
 
-  static uint IGameEvent<EventNextlevelChanged>.GetHash() => 0xAD2E0EA9u;
-  /// <summary>
-  /// type: string
-  /// </summary>
-  string NextLevel { get; set; }
+    static uint IGameEvent<EventNextlevelChanged>.GetHash() => 0xAD2E0EA9u;
+    /// <summary>
+    /// type: string
+    /// </summary>
+    public string NextLevel { get; set; }
 
-  /// <summary>
-  /// type: string
-  /// </summary>
-  string MapGroup { get; set; }
+    /// <summary>
+    /// type: string
+    /// </summary>
+    public string MapGroup { get; set; }
 
-  /// <summary>
-  /// type: string
-  /// </summary>
-  string SkirmishMode { get; set; }
+    /// <summary>
+    /// type: string
+    /// </summary>
+    public string SkirmishMode { get; set; }
 
 }

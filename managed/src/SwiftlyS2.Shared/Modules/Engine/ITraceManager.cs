@@ -1,4 +1,4 @@
-﻿using SwiftlyS2.Shared.Natives;
+using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Shared.Services;
 
@@ -15,7 +15,7 @@ public interface ITraceManager
     /// <param name="filter">The trace filter used to determine which entities or surfaces are considered during the trace operation.</param>
     /// <param name="trace">A reference to a CGameTrace object that receives the results of the trace, including collision information and
     /// hit details.</param>
-    public void TracePlayerBBox(Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace);
+    public void TracePlayerBBox( Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace );
     /// <summary>
     /// Performs a trace operation from the specified start point to the end point using the given ray and filter, and
     /// populates the trace result with collision information.
@@ -26,5 +26,5 @@ public interface ITraceManager
     /// <param name="filter">The filter that determines which entities or surfaces are considered during the trace.</param>
     /// <param name="trace">A reference to a CGameTrace structure that receives the results of the trace, including hit information and
     /// surface details.</param>
-    public void TraceShape(Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace);
+    public void TraceShape( Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace );
 }

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Shared.SteamAPI;
@@ -27,7 +25,7 @@ public static class CallbackDispatcher
         var callbackId = CallbackIdentities.GetCallbackIdentity(typeof(T));
 
         // Add handler to dictionary
-        s_callbackHandlers.AddOrUpdate(
+        _ = s_callbackHandlers.AddOrUpdate(
             callbackId,
             _ => [handler],
             ( _, list ) => { list.Add(handler); return list; }
@@ -446,7 +444,7 @@ internal static class CCallbackBaseVTable
         Console.WriteLine($"GetCallbackSizeBytes");
         try
         {
-            int callbackId = self->m_iCallback;
+            var callbackId = self->m_iCallback;
 
             // Find the callback type by ID
             foreach (var type in typeof(CCallbackBase).Assembly.GetTypes())

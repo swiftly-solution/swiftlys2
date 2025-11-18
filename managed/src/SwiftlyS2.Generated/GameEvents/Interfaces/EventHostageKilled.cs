@@ -1,50 +1,50 @@
-using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Core.GameEventDefinitions;
+using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.GameEventDefinitions;
 
 /// <summary> 
 /// Event "hostage_killed"
 /// </summary>
-public interface EventHostageKilled : IGameEvent<EventHostageKilled> {
+public interface EventHostageKilled : IGameEvent<EventHostageKilled>
+{
 
-  static EventHostageKilled IGameEvent<EventHostageKilled>.Create(nint address) => new EventHostageKilledImpl(address);
+    static EventHostageKilled IGameEvent<EventHostageKilled>.Create( nint address ) => new EventHostageKilledImpl(address);
 
-  static string IGameEvent<EventHostageKilled>.GetName() => "hostage_killed";
+    static string IGameEvent<EventHostageKilled>.GetName() => "hostage_killed";
 
-  static uint IGameEvent<EventHostageKilled>.GetHash() => 0x0B1DFB8Au;
-  /// <summary>
-  /// player who killed the hostage
-  /// <br/>
-  /// type: player_controller_and_pawn
-  /// </summary>
-  CCSPlayerController UserIdController { get; }
+    static uint IGameEvent<EventHostageKilled>.GetHash() => 0x0B1DFB8Au;
+    /// <summary>
+    /// player who killed the hostage
+    /// <br/>
+    /// type: player_controller_and_pawn
+    /// </summary>
+    public CCSPlayerController UserIdController { get; }
 
-  /// <summary>
-  /// player who killed the hostage
-  /// <br/>
-  /// type: player_controller_and_pawn
-  /// </summary>
-  CCSPlayerPawn UserIdPawn { get; }
+    /// <summary>
+    /// player who killed the hostage
+    /// <br/>
+    /// type: player_controller_and_pawn
+    /// </summary>
+    public CCSPlayerPawn UserIdPawn { get; }
 
 
-  // player who killed the hostage
-  public IPlayer UserIdPlayer
-  { get => Accessor.GetPlayer("userid"); }
-  /// <summary>
-  /// player who killed the hostage
-  /// <br/>
-  /// type: player_controller_and_pawn
-  /// </summary>
-  int UserId { get; set; }
+    // player who killed the hostage
+    public IPlayer UserIdPlayer { get => Accessor.GetPlayer("userid"); }
+    /// <summary>
+    /// player who killed the hostage
+    /// <br/>
+    /// type: player_controller_and_pawn
+    /// </summary>
+    public int UserId { get; set; }
 
-  /// <summary>
-  /// hostage entity index
-  /// <br/>
-  /// type: short
-  /// </summary>
-  short Hostage { get; set; }
+    /// <summary>
+    /// hostage entity index
+    /// <br/>
+    /// type: short
+    /// </summary>
+    public short Hostage { get; set; }
 
 }

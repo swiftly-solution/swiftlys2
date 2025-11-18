@@ -9,7 +9,7 @@ public class ManagedCUtlMemory<T> : IDisposable where T : unmanaged
     {
         _memory = new CUtlMemory<T>(0, 1);
     }
-    public ManagedCUtlMemory(int growSize, int initSize)
+    public ManagedCUtlMemory( int growSize, int initSize )
     {
         _memory = new CUtlMemory<T>(growSize, initSize);
     }
@@ -25,7 +25,7 @@ public class ManagedCUtlMemory<T> : IDisposable where T : unmanaged
         GC.SuppressFinalize(this);
     }
 
-    protected virtual void Dispose(bool disposing)
+    protected virtual void Dispose( bool disposing )
     {
         if (_disposed) return;
 

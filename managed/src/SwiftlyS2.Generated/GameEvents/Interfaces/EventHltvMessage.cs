@@ -1,7 +1,5 @@
-using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Core.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.GameEvents;
 
 namespace SwiftlyS2.Shared.GameEventDefinitions;
 
@@ -9,16 +7,17 @@ namespace SwiftlyS2.Shared.GameEventDefinitions;
 /// Event "hltv_message"
 /// a HLTV message send by moderators
 /// </summary>
-public interface EventHltvMessage : IGameEvent<EventHltvMessage> {
+public interface EventHltvMessage : IGameEvent<EventHltvMessage>
+{
 
-  static EventHltvMessage IGameEvent<EventHltvMessage>.Create(nint address) => new EventHltvMessageImpl(address);
+    static EventHltvMessage IGameEvent<EventHltvMessage>.Create( nint address ) => new EventHltvMessageImpl(address);
 
-  static string IGameEvent<EventHltvMessage>.GetName() => "hltv_message";
+    static string IGameEvent<EventHltvMessage>.GetName() => "hltv_message";
 
-  static uint IGameEvent<EventHltvMessage>.GetHash() => 0x0E93862Bu;
-  /// <summary>
-  /// type: string
-  /// </summary>
-  string Text { get; set; }
+    static uint IGameEvent<EventHltvMessage>.GetHash() => 0x0E93862Bu;
+    /// <summary>
+    /// type: string
+    /// </summary>
+    public string Text { get; set; }
 
 }

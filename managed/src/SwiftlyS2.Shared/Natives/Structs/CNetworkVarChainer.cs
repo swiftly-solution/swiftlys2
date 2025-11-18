@@ -1,6 +1,6 @@
-﻿using SwiftlyS2.Core.SchemaDefinitions;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using System.Runtime.InteropServices;
+using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.Natives;
 

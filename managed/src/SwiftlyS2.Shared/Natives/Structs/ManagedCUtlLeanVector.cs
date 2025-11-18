@@ -12,7 +12,7 @@ public class ManagedCUtlLeanVector<T, I> : IDisposable where T : unmanaged where
         _vector = new CUtlLeanVector<T, I>(I.Zero, I.One);
     }
 
-    public ManagedCUtlLeanVector(I growSize, I initSize)
+    public ManagedCUtlLeanVector( I growSize, I initSize )
     {
         _vector = new CUtlLeanVector<T, I>(growSize, initSize);
     }
@@ -28,7 +28,7 @@ public class ManagedCUtlLeanVector<T, I> : IDisposable where T : unmanaged where
         GC.SuppressFinalize(this);
     }
 
-    protected virtual void Dispose(bool disposing)
+    protected virtual void Dispose( bool disposing )
     {
         if (_disposed) return;
 

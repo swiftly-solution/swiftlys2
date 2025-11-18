@@ -10,7 +10,7 @@ internal class UnmanagedMemory : NativeHandle, IUnmanagedMemory, IDisposable
     public new nint Address { get; private set; }
     private HookManager _HookManager { get; set; }
     private ILogger<UnmanagedMemory> _Logger { get; set; }
-    public List<Guid> Hooks { get; } = new();
+    public List<Guid> Hooks { get; } = [];
 
     public UnmanagedMemory( nint address, HookManager hookManager, ILoggerFactory loggerFactory ) : base(address)
     {
@@ -45,8 +45,8 @@ internal class UnmanagedMemory : NativeHandle, IUnmanagedMemory, IDisposable
     {
         try
         {
-            _HookManager.RemoveMidHook(new List<Guid> { id });
-            Hooks.Remove(id);
+            _HookManager.RemoveMidHook([id]);
+            _ = Hooks.Remove(id);
         }
         catch (Exception e)
         {

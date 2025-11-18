@@ -1,46 +1,46 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SwiftlyS2.Core.AttributeParsers;
+using SwiftlyS2.Core.CommandLine;
 using SwiftlyS2.Core.Commands;
 using SwiftlyS2.Core.ConsoleOutput;
+using SwiftlyS2.Core.Convars;
+using SwiftlyS2.Core.Database;
+using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Events;
+using SwiftlyS2.Core.FileSystem;
 using SwiftlyS2.Core.GameEvents;
+using SwiftlyS2.Core.Hooks;
+using SwiftlyS2.Core.Memory;
+using SwiftlyS2.Core.Menus;
 using SwiftlyS2.Core.Misc;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.NetMessages;
+using SwiftlyS2.Core.Permissions;
+using SwiftlyS2.Core.Players;
+using SwiftlyS2.Core.Profiler;
+using SwiftlyS2.Core.Scheduler;
+using SwiftlyS2.Core.Translations;
 using SwiftlyS2.Shared;
-using SwiftlyS2.Shared.Events;
-using SwiftlyS2.Shared.GameEvents;
+using SwiftlyS2.Shared.CommandLine;
 using SwiftlyS2.Shared.Commands;
 using SwiftlyS2.Shared.ConsoleOutput;
-using SwiftlyS2.Shared.NetMessages;
-using SwiftlyS2.Shared.Services;
-using SwiftlyS2.Core.AttributeParsers;
-using SwiftlyS2.Core.EntitySystem;
-using SwiftlyS2.Shared.EntitySystem;
-using SwiftlyS2.Core.Convars;
 using SwiftlyS2.Shared.Convars;
-using SwiftlyS2.Core.Hooks;
-using SwiftlyS2.Shared.Profiler;
-using SwiftlyS2.Core.Profiler;
-using SwiftlyS2.Shared.Memory;
-using SwiftlyS2.Core.Memory;
-using SwiftlyS2.Shared.Scheduler;
-using SwiftlyS2.Core.Scheduler;
-using SwiftlyS2.Core.Database;
 using SwiftlyS2.Shared.Database;
-using SwiftlyS2.Core.Translations;
-using SwiftlyS2.Core.Permissions;
-using SwiftlyS2.Shared.Permissions;
-using SwiftlyS2.Core.Menus;
-using SwiftlyS2.Shared.Menus;
-using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.Translation;
-using SwiftlyS2.Core.Players;
-using SwiftlyS2.Shared.CommandLine;
-using SwiftlyS2.Core.CommandLine;
-using SwiftlyS2.Shared.Helpers;
-using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.FileSystem;
+using SwiftlyS2.Shared.EntitySystem;
+using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.FileSystem;
+using SwiftlyS2.Shared.GameEvents;
+using SwiftlyS2.Shared.Helpers;
+using SwiftlyS2.Shared.Memory;
+using SwiftlyS2.Shared.Menus;
+using SwiftlyS2.Shared.NetMessages;
+using SwiftlyS2.Shared.Permissions;
+using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.Profiler;
+using SwiftlyS2.Shared.Scheduler;
+using SwiftlyS2.Shared.Services;
+using SwiftlyS2.Shared.Translation;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -114,7 +114,7 @@ internal class SwiftlyCore : ISwiftlyCore, IDisposable
             .AddSingleton<SchedulerService>()
             .AddSingleton<DatabaseService>()
             .AddSingleton<TranslationService>()
-            .AddSingleton<Localizer>(provider => provider.GetRequiredService<TranslationService>().GetLocalizer())
+            .AddSingleton(provider => provider.GetRequiredService<TranslationService>().GetLocalizer())
             .AddSingleton<RegistratorService>()
             // .AddSingleton<MenuManager>()
             .AddSingleton<MenuManagerAPI>()

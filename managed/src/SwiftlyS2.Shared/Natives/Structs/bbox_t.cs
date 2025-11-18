@@ -1,4 +1,3 @@
-﻿using SwiftlyS2.Shared.SchemaDefinitions;
 using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Shared.Natives;

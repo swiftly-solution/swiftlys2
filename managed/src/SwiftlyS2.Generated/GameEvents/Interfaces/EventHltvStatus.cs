@@ -1,7 +1,5 @@
-using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Core.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.GameEvents;
 
 namespace SwiftlyS2.Shared.GameEventDefinitions;
 
@@ -9,39 +7,40 @@ namespace SwiftlyS2.Shared.GameEventDefinitions;
 /// Event "hltv_status"
 /// general HLTV status
 /// </summary>
-public interface EventHltvStatus : IGameEvent<EventHltvStatus> {
+public interface EventHltvStatus : IGameEvent<EventHltvStatus>
+{
 
-  static EventHltvStatus IGameEvent<EventHltvStatus>.Create(nint address) => new EventHltvStatusImpl(address);
+    static EventHltvStatus IGameEvent<EventHltvStatus>.Create( nint address ) => new EventHltvStatusImpl(address);
 
-  static string IGameEvent<EventHltvStatus>.GetName() => "hltv_status";
+    static string IGameEvent<EventHltvStatus>.GetName() => "hltv_status";
 
-  static uint IGameEvent<EventHltvStatus>.GetHash() => 0x81C8CF76u;
-  /// <summary>
-  /// number of HLTV spectators
-  /// <br/>
-  /// type: long
-  /// </summary>
-  int Clients { get; set; }
+    static uint IGameEvent<EventHltvStatus>.GetHash() => 0x81C8CF76u;
+    /// <summary>
+    /// number of HLTV spectators
+    /// <br/>
+    /// type: long
+    /// </summary>
+    public int Clients { get; set; }
 
-  /// <summary>
-  /// number of HLTV slots
-  /// <br/>
-  /// type: long
-  /// </summary>
-  int Slots { get; set; }
+    /// <summary>
+    /// number of HLTV slots
+    /// <br/>
+    /// type: long
+    /// </summary>
+    public int Slots { get; set; }
 
-  /// <summary>
-  /// number of HLTV proxies
-  /// <br/>
-  /// type: short
-  /// </summary>
-  short Proxies { get; set; }
+    /// <summary>
+    /// number of HLTV proxies
+    /// <br/>
+    /// type: short
+    /// </summary>
+    public short Proxies { get; set; }
 
-  /// <summary>
-  /// disptach master IP:port
-  /// <br/>
-  /// type: string
-  /// </summary>
-  string Master { get; set; }
+    /// <summary>
+    /// disptach master IP:port
+    /// <br/>
+    /// type: string
+    /// </summary>
+    public string Master { get; set; }
 
 }

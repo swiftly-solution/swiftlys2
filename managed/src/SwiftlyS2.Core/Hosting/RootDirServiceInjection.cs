@@ -5,9 +5,9 @@ namespace SwiftlyS2.Core.Hosting;
 
 internal static class RootDirServiceInjection
 {
-  public static IServiceCollection AddRootDirService(this IServiceCollection self)
-  {
-    self.AddSingleton<RootDirService>();
-    return self;
-  }
+    public static IServiceCollection AddRootDirService( this IServiceCollection self )
+    {
+        _ = self.AddSingleton<RootDirService>();
+        return self;
+    }
 }

@@ -11,22 +11,22 @@ internal class CommandLineService : ICommandLine
 
     public bool HasParameters => NativeCommandLine.HasParameters();
 
-    public float GetParameterFloat(string paramName, float defaultValue = 0)
+    public float GetParameterFloat( string paramName, float defaultValue = 0 )
     {
         return NativeCommandLine.GetParameterValueFloat(paramName, defaultValue);
     }
 
-    public int GetParameterInt(string paramName, int defaultValue = 0)
+    public int GetParameterInt( string paramName, int defaultValue = 0 )
     {
         return NativeCommandLine.GetParameterValueInt(paramName, defaultValue);
     }
 
-    public string GetParameterString(string paramName, string defaultValue = "")
+    public string GetParameterString( string paramName, string defaultValue = "" )
     {
         return NativeCommandLine.GetParameterValueString(paramName, defaultValue);
     }
 
-    public bool HasParameter(string paramName)
+    public bool HasParameter( string paramName )
     {
         return NativeCommandLine.HasParameter(paramName);
     }

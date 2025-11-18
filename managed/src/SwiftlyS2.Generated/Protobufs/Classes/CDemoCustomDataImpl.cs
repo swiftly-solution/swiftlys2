@@ -1,24 +1,18 @@
-
-using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.NetMessages;
-using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 
 namespace SwiftlyS2.Core.ProtobufDefinitions;
 
 internal class CDemoCustomDataImpl : TypedProtobuf<CDemoCustomData>, CDemoCustomData
 {
-  public CDemoCustomDataImpl(nint handle, bool isManuallyAllocated): base(handle)
-  {
-  }
+    public CDemoCustomDataImpl( nint handle, bool isManuallyAllocated ) : base(handle)
+    {
+    }
 
 
-  public int CallbackIndex
-  { get => Accessor.GetInt32("callback_index"); set => Accessor.SetInt32("callback_index", value); }
+    public int CallbackIndex { get => Accessor.GetInt32("callback_index"); set => Accessor.SetInt32("callback_index", value); }
 
 
-  public byte[] Data
-  { get => Accessor.GetBytes("data"); set => Accessor.SetBytes("data", value); }
+    public byte[] Data { get => Accessor.GetBytes("data"); set => Accessor.SetBytes("data", value); }
 
 }

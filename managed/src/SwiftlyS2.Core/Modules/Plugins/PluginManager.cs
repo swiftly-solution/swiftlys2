@@ -2,8 +2,8 @@ using System.Reflection;
 using System.Runtime.Loader;
 using McMaster.NETCore.Plugins;
 using Microsoft.Extensions.Logging;
-using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Modules.Plugins;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Plugins;
@@ -15,13 +15,13 @@ internal class PluginManager
     private IServiceProvider _Provider { get; init; }
     private RootDirService _RootDirService { get; init; }
     private ILogger _Logger { get; init; }
-    private List<PluginContext> _Plugins { get; } = new();
+    private List<PluginContext> _Plugins { get; } = [];
     private FileSystemWatcher? _Watcher { get; set; }
     private InterfaceManager _InterfaceManager { get; set; } = new();
-    private List<Type> _SharedTypes { get; set; } = new();
+    private List<Type> _SharedTypes { get; set; } = [];
     private DataDirectoryService _DataDirectoryService { get; init; }
     private DateTime lastRead = DateTime.MinValue;
-    private readonly HashSet<string> reloadingPlugins = new();
+    private readonly HashSet<string> reloadingPlugins = [];
 
     public PluginManager(
       IServiceProvider provider,

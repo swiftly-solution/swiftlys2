@@ -1,13 +1,13 @@
-using Mono.Cecil;
 using Microsoft.Extensions.Logging;
+using Mono.Cecil;
 
 namespace SwiftlyS2.Core.Modules.Plugins;
 
 internal class DependencyResolver
 {
     private readonly ILogger _logger;
-    private readonly Dictionary<string, List<string>> _dependencyGraph = new();
-    private readonly Dictionary<string, string> _pluginPaths = new();
+    private readonly Dictionary<string, List<string>> _dependencyGraph = [];
+    private readonly Dictionary<string, string> _pluginPaths = [];
 
     public DependencyResolver( ILogger logger )
     {
@@ -31,7 +31,7 @@ internal class DependencyResolver
 
                     if (!_dependencyGraph.ContainsKey(assemblyName))
                     {
-                        _dependencyGraph[assemblyName] = new List<string>();
+                        _dependencyGraph[assemblyName] = [];
                     }
 
                     _logger.LogDebug($"Found export assembly: {assemblyName} at {exportFile}");
@@ -128,7 +128,7 @@ internal class DependencyResolver
             return;
         }
 
-        visiting.Add(assembly);
+        _ = visiting.Add(assembly);
 
         if (_dependencyGraph.TryGetValue(assembly, out var dependencies))
         {
@@ -138,8 +138,8 @@ internal class DependencyResolver
             }
         }
 
-        visiting.Remove(assembly);
-        visited.Add(assembly);
+        _ = visiting.Remove(assembly);
+        _ = visited.Add(assembly);
         result.Add(assembly);
     }
     private string BuildCyclePath( string start, HashSet<string> visiting )

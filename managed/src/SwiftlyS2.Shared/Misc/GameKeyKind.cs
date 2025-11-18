@@ -1,7 +1,7 @@
 namespace SwiftlyS2.Shared.Events;
 
 [Flags]
-public enum GameButtonFlags: ulong
+public enum GameButtonFlags : ulong
 {
     None = 0,
     Mouse1 = 1UL << GameButtons.Mouse1,
@@ -73,160 +73,205 @@ public enum GameButtonFlags: ulong
 public enum GameButtons : int
 {
 
-  Mouse1 = 0,
+    Mouse1 = 0,
 
-  Space = 1,
+    Space = 1,
 
-  Ctrl = 2,
+    Ctrl = 2,
 
-  W = 3,
+    W = 3,
 
-  S = 4,
+    S = 4,
 
-  E = 5,
+    E = 5,
 
-  Esc = 6,
+    Esc = 6,
 
-  A = 7,
+    A = 7,
 
-  D = 8,
+    D = 8,
 
-  A2 = 9,
+    A2 = 9,
 
-  D2 = 10,
+    D2 = 10,
 
-  Mouse2 = 11,
+    Mouse2 = 11,
 
-  UnknownKeyRun = 12,
+    UnknownKeyRun = 12,
 
-  R = 13,
+    R = 13,
 
-  Alt = 14,
+    Alt = 14,
 
-  Alt2 = 15,
+    Alt2 = 15,
 
-  Shift = 16,
+    Shift = 16,
 
-  UnknownKeySpeed = 17,
+    UnknownKeySpeed = 17,
 
-  Shift2 = 18,
+    Shift2 = 18,
 
-  UnknownKeyHudzoom = 19,
+    UnknownKeyHudzoom = 19,
 
-  UnknownKeyWeapon1 = 20,
+    UnknownKeyWeapon1 = 20,
 
-  UnknownKeyWeapon2 = 21,
+    UnknownKeyWeapon2 = 21,
 
-  UnknownKeyBullrush = 22,
+    UnknownKeyBullrush = 22,
 
-  UnknownKeyGrenade1 = 23,
+    UnknownKeyGrenade1 = 23,
 
-  UnknownKeyGrenade2 = 24,
+    UnknownKeyGrenade2 = 24,
 
-  UnknownKeyLookspin = 25,
+    UnknownKeyLookspin = 25,
 
-  UnknownKey26 = 26,
+    UnknownKey26 = 26,
 
-  UnknownKey27 = 27,
+    UnknownKey27 = 27,
 
-  UnknownKey28 = 28,
+    UnknownKey28 = 28,
 
-  UnknownKey29 = 29,
+    UnknownKey29 = 29,
 
-  UnknownKey30 = 30,
+    UnknownKey30 = 30,
 
-  UnknownKey31 = 31,
+    UnknownKey31 = 31,
 
-  UnknownKey32 = 32,
+    UnknownKey32 = 32,
 
-  Tab = 33,
+    Tab = 33,
 
-  UnknownKey34 = 34,
+    UnknownKey34 = 34,
 
-  F = 35,
+    F = 35,
 
-  UnknownKey36 = 36,
+    UnknownKey36 = 36,
 
-  UnknownKey37 = 37,
+    UnknownKey37 = 37,
 
-  UnknownKey38 = 38,
+    UnknownKey38 = 38,
 
-  UnknownKey39 = 39,
+    UnknownKey39 = 39,
 
-  UnknownKey40 = 40,
+    UnknownKey40 = 40,
 
-  UnknownKey41 = 41,
+    UnknownKey41 = 41,
 
-  UnknownKey42 = 42,
+    UnknownKey42 = 42,
 
-  UnknownKey43 = 43,
+    UnknownKey43 = 43,
 
-  UnknownKey44 = 44,
+    UnknownKey44 = 44,
 
-  UnknownKey45 = 45,
+    UnknownKey45 = 45,
 
-  UnknownKey46 = 46,
+    UnknownKey46 = 46,
 
-  UnknownKey47 = 47,
+    UnknownKey47 = 47,
 
-  UnknownKey48 = 48,
+    UnknownKey48 = 48,
 
-  UnknownKey49 = 49,
+    UnknownKey49 = 49,
 
-  UnknownKey50 = 50,
+    UnknownKey50 = 50,
 
-  UnknownKey51 = 51,
+    UnknownKey51 = 51,
 
-  UnknownKey52 = 52,
+    UnknownKey52 = 52,
 
-  UnknownKey53 = 53,
+    UnknownKey53 = 53,
 
-  UnknownKey54 = 54,
+    UnknownKey54 = 54,
 
-  UnknownKey55 = 55,
+    UnknownKey55 = 55,
 
-  UnknownKey56 = 56,
+    UnknownKey56 = 56,
 
-  UnknownKey57 = 57,
+    UnknownKey57 = 57,
 
-  UnknownKey58 = 58,
+    UnknownKey58 = 58,
 
-  UnknownKey59 = 59,
+    UnknownKey59 = 59,
 
-  UnknownKey60 = 60,
+    UnknownKey60 = 60,
 
-  UnknownKey61 = 61,
+    UnknownKey61 = 61,
 
-  UnknownKey62 = 62,
+    UnknownKey62 = 62,
 
-  UnknownKey63 = 63,
+    UnknownKey63 = 63,
 }
 
-internal static class GameKeyKindExtensions {
-  public static KeyKind ToKeyKind(this GameButtons keyKind) {
-    return keyKind switch {
-      GameButtons.Mouse1 => KeyKind.Mouse1,
-      GameButtons.Mouse2 => KeyKind.Mouse2,
-      GameButtons.Space => KeyKind.Space,
-      GameButtons.Ctrl => KeyKind.Ctrl,
-      GameButtons.W => KeyKind.W,
-      GameButtons.S => KeyKind.S,
-      GameButtons.E => KeyKind.E,
-      GameButtons.Esc => KeyKind.Esc,
-      GameButtons.A => KeyKind.A,
-      GameButtons.A2 => KeyKind.A,
-      GameButtons.D => KeyKind.D,
-      GameButtons.D2 => KeyKind.D,
-      GameButtons.R => KeyKind.R,
-      GameButtons.Alt => KeyKind.Alt,
-      GameButtons.Shift => KeyKind.Shift,
-      GameButtons.UnknownKeyWeapon1 => KeyKind.Weapon1,
-      GameButtons.UnknownKeyWeapon2 => KeyKind.Weapon2,
-      GameButtons.UnknownKeyGrenade1 => KeyKind.Grenade1,
-      GameButtons.UnknownKeyGrenade2 => KeyKind.Grenade2,
-      GameButtons.Tab => KeyKind.Tab,
-      GameButtons.F => KeyKind.F,
-      _ => throw new ArgumentException($"Unknown key kind: {keyKind}. Please report this to the SwiftlyS2 team.")
-    };
-  }
+internal static class GameKeyKindExtensions
+{
+    public static KeyKind ToKeyKind( this GameButtons keyKind )
+    {
+        return keyKind switch {
+            GameButtons.Mouse1 => KeyKind.Mouse1,
+            GameButtons.Mouse2 => KeyKind.Mouse2,
+            GameButtons.Space => KeyKind.Space,
+            GameButtons.Ctrl => KeyKind.Ctrl,
+            GameButtons.W => KeyKind.W,
+            GameButtons.S => KeyKind.S,
+            GameButtons.E => KeyKind.E,
+            GameButtons.Esc => KeyKind.Esc,
+            GameButtons.A => KeyKind.A,
+            GameButtons.A2 => KeyKind.A,
+            GameButtons.D => KeyKind.D,
+            GameButtons.D2 => KeyKind.D,
+            GameButtons.R => KeyKind.R,
+            GameButtons.Alt => KeyKind.Alt,
+            GameButtons.Shift => KeyKind.Shift,
+            GameButtons.UnknownKeyWeapon1 => KeyKind.Weapon1,
+            GameButtons.UnknownKeyWeapon2 => KeyKind.Weapon2,
+            GameButtons.UnknownKeyGrenade1 => KeyKind.Grenade1,
+            GameButtons.UnknownKeyGrenade2 => KeyKind.Grenade2,
+            GameButtons.Tab => KeyKind.Tab,
+            GameButtons.F => KeyKind.F,
+            GameButtons.UnknownKeyRun => throw new NotImplementedException(),
+            GameButtons.Alt2 => throw new NotImplementedException(),
+            GameButtons.UnknownKeySpeed => throw new NotImplementedException(),
+            GameButtons.Shift2 => throw new NotImplementedException(),
+            GameButtons.UnknownKeyHudzoom => throw new NotImplementedException(),
+            GameButtons.UnknownKeyBullrush => throw new NotImplementedException(),
+            GameButtons.UnknownKeyLookspin => throw new NotImplementedException(),
+            GameButtons.UnknownKey26 => throw new NotImplementedException(),
+            GameButtons.UnknownKey27 => throw new NotImplementedException(),
+            GameButtons.UnknownKey28 => throw new NotImplementedException(),
+            GameButtons.UnknownKey29 => throw new NotImplementedException(),
+            GameButtons.UnknownKey30 => throw new NotImplementedException(),
+            GameButtons.UnknownKey31 => throw new NotImplementedException(),
+            GameButtons.UnknownKey32 => throw new NotImplementedException(),
+            GameButtons.UnknownKey34 => throw new NotImplementedException(),
+            GameButtons.UnknownKey36 => throw new NotImplementedException(),
+            GameButtons.UnknownKey37 => throw new NotImplementedException(),
+            GameButtons.UnknownKey38 => throw new NotImplementedException(),
+            GameButtons.UnknownKey39 => throw new NotImplementedException(),
+            GameButtons.UnknownKey40 => throw new NotImplementedException(),
+            GameButtons.UnknownKey41 => throw new NotImplementedException(),
+            GameButtons.UnknownKey42 => throw new NotImplementedException(),
+            GameButtons.UnknownKey43 => throw new NotImplementedException(),
+            GameButtons.UnknownKey44 => throw new NotImplementedException(),
+            GameButtons.UnknownKey45 => throw new NotImplementedException(),
+            GameButtons.UnknownKey46 => throw new NotImplementedException(),
+            GameButtons.UnknownKey47 => throw new NotImplementedException(),
+            GameButtons.UnknownKey48 => throw new NotImplementedException(),
+            GameButtons.UnknownKey49 => throw new NotImplementedException(),
+            GameButtons.UnknownKey50 => throw new NotImplementedException(),
+            GameButtons.UnknownKey51 => throw new NotImplementedException(),
+            GameButtons.UnknownKey52 => throw new NotImplementedException(),
+            GameButtons.UnknownKey53 => throw new NotImplementedException(),
+            GameButtons.UnknownKey54 => throw new NotImplementedException(),
+            GameButtons.UnknownKey55 => throw new NotImplementedException(),
+            GameButtons.UnknownKey56 => throw new NotImplementedException(),
+            GameButtons.UnknownKey57 => throw new NotImplementedException(),
+            GameButtons.UnknownKey58 => throw new NotImplementedException(),
+            GameButtons.UnknownKey59 => throw new NotImplementedException(),
+            GameButtons.UnknownKey60 => throw new NotImplementedException(),
+            GameButtons.UnknownKey61 => throw new NotImplementedException(),
+            GameButtons.UnknownKey62 => throw new NotImplementedException(),
+            GameButtons.UnknownKey63 => throw new NotImplementedException(),
+            _ => throw new ArgumentException($"Unknown key kind: {keyKind}. Please report this to the SwiftlyS2 team.")
+        };
+    }
 }

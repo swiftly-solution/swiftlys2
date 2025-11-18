@@ -1,4 +1,4 @@
-﻿namespace SwiftlyS2.Shared.SchemaDefinitions;
+namespace SwiftlyS2.Shared.SchemaDefinitions;
 
 public partial interface CBasePlayerController
 {
@@ -6,5 +6,5 @@ public partial interface CBasePlayerController
     /// Sets the player pawn to the entity.
     /// </summary>
     /// <param name="pawn">The player pawn to associate. Can be null to remove the current association.</param>
-    public void SetPawn(CBasePlayerPawn? pawn);
+    public void SetPawn( CBasePlayerPawn? pawn );
 }

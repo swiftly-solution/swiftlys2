@@ -1,4 +1,4 @@
-﻿namespace SwiftlyS2.Shared.Players;
+namespace SwiftlyS2.Shared.Players;
 
 public interface IPlayerManagerService
 {

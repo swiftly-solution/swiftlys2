@@ -1,24 +1,20 @@
 using System.Runtime.InteropServices;
+using Spectre.Console;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.ProtobufDefinitions;
+using SwiftlyS2.Core.Scheduler;
+using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.ProtobufDefinitions;
-using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.SchemaDefinitions;
-using Spectre.Console;
-using System.Runtime.CompilerServices;
-using SwiftlyS2.Core.ProtobufDefinitions;
-using SwiftlyS2.Core.Extensions;
-using SwiftlyS2.Core.Scheduler;
-using SwiftlyS2.Shared.SteamAPI;
 
 namespace SwiftlyS2.Core.Events;
 
 internal static class EventPublisher
 {
 
-    private static List<EventSubscriber> _subscribers = new();
+    private static readonly List<EventSubscriber> _subscribers = [];
 
     public static void Subscribe( EventSubscriber subscriber )
     {
@@ -26,7 +22,7 @@ internal static class EventPublisher
     }
     public static void Unsubscribe( EventSubscriber subscriber )
     {
-        _subscribers.Remove(subscriber);
+        _ = _subscribers.Remove(subscriber);
     }
 
     public static void Register()
@@ -50,10 +46,10 @@ internal static class EventPublisher
             NativeEvents.RegisterOnClientProcessUsercmdsCallback((nint)(delegate* unmanaged< int, nint, int, byte, float, void >)&OnClientProcessUsercmds);
             NativeEvents.RegisterOnEntityTakeDamageCallback((nint)(delegate* unmanaged< nint, nint, byte >)&OnEntityTakeDamage);
             NativeEvents.RegisterOnPrecacheResourceCallback((nint)(delegate* unmanaged< nint, void >)&OnPrecacheResource);
-            NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated);
-            NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
-            NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
-            NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
+            _ = NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated);
+            _ = NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
+            _ = NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
+            _ = NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
         }
     }
 
@@ -63,7 +59,7 @@ internal static class EventPublisher
         if (_subscribers.Count == 0) return;
         try
         {
-            string convarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty;
+            var convarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty;
             OnConVarCreated @event = new() {
                 ConVarName = convarName
             };
@@ -85,7 +81,7 @@ internal static class EventPublisher
         if (_subscribers.Count == 0) return;
         try
         {
-            string commandName = Marshal.PtrToStringUTF8(commandNamePtr) ?? string.Empty;
+            var commandName = Marshal.PtrToStringUTF8(commandNamePtr) ?? string.Empty;
             OnConCommandCreated @event = new() {
                 CommandName = commandName
             };
@@ -107,9 +103,9 @@ internal static class EventPublisher
         if (_subscribers.Count == 0) return;
         try
         {
-            string convarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty;
-            string newValue = Marshal.PtrToStringUTF8(newValuePtr) ?? string.Empty;
-            string oldValue = Marshal.PtrToStringUTF8(oldValuePtr) ?? string.Empty;
+            var convarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty;
+            var newValue = Marshal.PtrToStringUTF8(newValuePtr) ?? string.Empty;
+            var oldValue = Marshal.PtrToStringUTF8(oldValuePtr) ?? string.Empty;
             OnConVarValueChanged @event = new() {
                 ConVarName = convarName,
                 PlayerId = playerid,
@@ -401,7 +397,7 @@ internal static class EventPublisher
         if (_subscribers.Count == 0) return;
         try
         {
-            string map = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty;
+            var map = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty;
             OnMapLoadEvent @event = new() {
                 MapName = map
             };
@@ -423,7 +419,7 @@ internal static class EventPublisher
         if (_subscribers.Count == 0) return;
         try
         {
-            string map = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty;
+            var map = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty;
             OnMapUnloadEvent @event = new() {
                 MapName = map
             };
@@ -448,7 +444,7 @@ internal static class EventPublisher
             unsafe
             {
                 ReadOnlySpan<nint> usercmdPtrs = new ReadOnlySpan<nint>(usercmdsPtr.ToPointer(), numcmds);
-                List<CSGOUserCmdPB> usercmds = new();
+                List<CSGOUserCmdPB> usercmds = [];
                 foreach (var pUsercmd in usercmdPtrs)
                 {
                     var usercmd = new CSGOUserCmdPBImpl(pUsercmd, false);

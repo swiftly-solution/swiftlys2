@@ -1,8 +1,7 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
 using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -14,31 +13,25 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventHltvRankEntityImpl : GameEvent<EventHltvRankEntity>, EventHltvRankEntity
 {
 
-  public EventHltvRankEntityImpl(nint address) : base(address)
-  {
-  }
+    public EventHltvRankEntityImpl( nint address ) : base(address)
+    {
+    }
 
-  // player slot
-  public CCSPlayerController UserIdController
-  { get => Accessor.GetPlayerController("userid"); }
+    // player slot
+    public CCSPlayerController UserIdController { get => Accessor.GetPlayerController("userid"); }
 
-  // player slot
-  public CCSPlayerPawn UserIdPawn
-  { get => Accessor.GetPlayerPawn("userid"); }
+    // player slot
+    public CCSPlayerPawn UserIdPawn { get => Accessor.GetPlayerPawn("userid"); }
 
-  // player slot
-  public IPlayer UserIdPlayer
-  { get => Accessor.GetPlayer("userid"); }
+    // player slot
+    public IPlayer UserIdPlayer { get => Accessor.GetPlayer("userid"); }
 
-  // player slot
-  public int UserId
-  { get => Accessor.GetInt32("userid"); set => Accessor.SetInt32("userid", value); }
+    // player slot
+    public int UserId { get => Accessor.GetInt32("userid"); set => Accessor.SetInt32("userid", value); }
 
-  // ranking, how interesting is this entity to view
-  public float Rank
-  { get => Accessor.GetFloat("rank"); set => Accessor.SetFloat("rank", value); }
+    // ranking, how interesting is this entity to view
+    public float Rank { get => Accessor.GetFloat("rank"); set => Accessor.SetFloat("rank", value); }
 
-  // best/closest target entity
-  public int Target
-  { get => Accessor.GetPlayerSlot("target"); set => Accessor.SetPlayerSlot("target", value); }
+    // best/closest target entity
+    public int Target { get => Accessor.GetPlayerSlot("target"); set => Accessor.SetPlayerSlot("target", value); }
 }

@@ -1,8 +1,5 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -14,11 +11,10 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventServerShutdownImpl : GameEvent<EventServerShutdown>, EventServerShutdown
 {
 
-  public EventServerShutdownImpl(nint address) : base(address)
-  {
-  }
+    public EventServerShutdownImpl( nint address ) : base(address)
+    {
+    }
 
-  // reason why server was shut down
-  public string Reason
-  { get => Accessor.GetString("reason"); set => Accessor.SetString("reason", value); }
+    // reason why server was shut down
+    public string Reason { get => Accessor.GetString("reason"); set => Accessor.SetString("reason", value); }
 }

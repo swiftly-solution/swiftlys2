@@ -1,8 +1,5 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -13,10 +10,9 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventUgcMapInfoReceivedImpl : GameEvent<EventUgcMapInfoReceived>, EventUgcMapInfoReceived
 {
 
-  public EventUgcMapInfoReceivedImpl(nint address) : base(address)
-  {
-  }
+    public EventUgcMapInfoReceivedImpl( nint address ) : base(address)
+    {
+    }
 
-  public ulong PublishedFileId
-  { get => Accessor.GetUInt64("published_file_id"); set => Accessor.SetUInt64("published_file_id", value); }
+    public ulong PublishedFileId { get => Accessor.GetUInt64("published_file_id"); set => Accessor.SetUInt64("published_file_id", value); }
 }

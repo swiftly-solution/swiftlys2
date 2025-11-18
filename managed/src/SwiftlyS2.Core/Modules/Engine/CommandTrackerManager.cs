@@ -1,8 +1,8 @@
-using System.Text;
 using System.Collections.Concurrent;
+using System.Text;
 using Spectre.Console;
-using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Events;
+using SwiftlyS2.Shared.Misc;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -70,13 +70,13 @@ internal sealed class CommandTrackerManager : IDisposable
             if (activeCommands.TryAdd(newCommandId, newCommand))
             {
                 var newContainer = new CommandIdContainer(newCommandId);
-                Interlocked.Exchange(ref currentCommandContainer, newContainer);
-                @event.Command.Tokenize($"{@event.Command[0]!.Replace("^wb^", string.Empty)} {@event.Command.ArgS}");
+                _ = Interlocked.Exchange(ref currentCommandContainer, newContainer);
+                _ = @event.Command.Tokenize($"{@event.Command[0]!.Replace("^wb^", string.Empty)} {@event.Command.ArgS}");
             }
         }
         else
         {
-            Interlocked.Exchange(ref currentCommandContainer, CommandIdContainer.Empty);
+            _ = Interlocked.Exchange(ref currentCommandContainer, CommandIdContainer.Empty);
         }
     }
 
@@ -90,17 +90,17 @@ internal sealed class CommandTrackerManager : IDisposable
             var output = new StringBuilder();
             while (command.Output.TryDequeue(out var line))
             {
-                if (output.Length > 0) output.AppendLine();
-                output.Append(line);
+                if (output.Length > 0) _ = output.AppendLine();
+                _ = output.Append(line);
             }
 
-            Task.Run(() => command.Callback.Invoke(output.ToString()));
+            _ = Task.Run(() => command.Callback.Invoke(output.ToString()));
         }
     }
 
     private void StartCleanupTimer()
     {
-        Task.Run(async () =>
+        _ = Task.Run(async () =>
         {
             while (!cancellationTokenSource.Token.IsCancellationRequested)
             {
@@ -124,7 +124,7 @@ internal sealed class CommandTrackerManager : IDisposable
         {
             if (kvp.Value.IsExpired)
             {
-                activeCommands.TryRemove(kvp.Key, out _);
+                _ = activeCommands.TryRemove(kvp.Key, out _);
             }
         }
     }

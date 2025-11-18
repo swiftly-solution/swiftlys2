@@ -5,5 +5,5 @@ namespace SwiftlyS2.Core.Events;
 internal class OnClientSteamAuthorizeEvent : IOnClientSteamAuthorizeEvent
 {
 
-  public int PlayerId { get; set; }
-} 
+    public int PlayerId { get; set; }
+}

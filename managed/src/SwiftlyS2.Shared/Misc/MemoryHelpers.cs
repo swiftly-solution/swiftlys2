@@ -1,13 +1,12 @@
-using System.Runtime.CompilerServices;
 using SwiftlyS2.Core.Natives;
 
 namespace SwiftlyS2.Shared.Misc;
 
 public static class MemoryHelpers
 {
-    public static int CalcNewDoublingCount(int oldCount, int requestedCount, int minCount, int maxCount)
+    public static int CalcNewDoublingCount( int oldCount, int requestedCount, int minCount, int maxCount )
     {
-        int newCount = oldCount;
+        var newCount = oldCount;
 
         while (newCount < requestedCount)
         {
@@ -27,18 +26,18 @@ public static class MemoryHelpers
         return newCount;
     }
 
-    public static void ShiftElementsRight(nint memory, int elem, int num, int size, int elementSize)
+    public static void ShiftElementsRight( nint memory, int elem, int num, int size, int elementSize )
     {
-        int numToMove = size - elem - num;
+        var numToMove = size - elem - num;
         if (numToMove > 0 && num > 0)
         {
             NativeAllocator.Move(memory + ((elem + num) * elementSize), memory + (elem * elementSize), (ulong)(numToMove * elementSize));
         }
     }
 
-    public static void ShiftElementsLeft(nint memory, int elem, int num, int size, int elementSize)
+    public static void ShiftElementsLeft( nint memory, int elem, int num, int size, int elementSize )
     {
-        int numToMove = size - elem - num;
+        var numToMove = size - elem - num;
         if (numToMove > 0 && num > 0)
         {
             NativeAllocator.Move(memory + (elem * elementSize), memory + ((elem + num) * elementSize), (ulong)(numToMove * elementSize));

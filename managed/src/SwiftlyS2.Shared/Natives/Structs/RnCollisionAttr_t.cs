@@ -1,8 +1,8 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Shared.Natives;
 
-public enum CollisionFunctionMask_t: byte
+public enum CollisionFunctionMask_t : byte
 {
     FCOLLISION_FUNC_ENABLE_SOLID_CONTACT = (1 << 0),
     FCOLLISION_FUNC_ENABLE_TRACE_QUERY = (1 << 1),

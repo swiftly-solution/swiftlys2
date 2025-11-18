@@ -1,23 +1,23 @@
 using System.Runtime.InteropServices;
-using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Core.Natives;
 
 namespace SwiftlyS2.Shared.Natives;
 
 [StructLayout(LayoutKind.Sequential, Size = 8)]
-public struct CUtlString {
+public struct CUtlString
+{
 
-  private nint _ptr;
+    private nint _ptr;
 
-  public string Value {
+    public string Value {
 
-    get {
-      if (!_ptr.IsValidPtr()) return string.Empty;
-      return Marshal.PtrToStringUTF8(_ptr)!;
+        get {
+            return !_ptr.IsValidPtr() ? string.Empty : Marshal.PtrToStringUTF8(_ptr)!;
+        }
+        set => _ptr = StringPool.Allocate(value);
     }
-    set => _ptr = StringPool.Allocate(value);
-  }
 
-  public static implicit operator string(CUtlString str) => str.Value;
-  public static implicit operator CUtlString(string str) => new() { _ptr = StringPool.Allocate(str) };
+    public static implicit operator string( CUtlString str ) => str.Value;
+    public static implicit operator CUtlString( string str ) => new() { _ptr = StringPool.Allocate(str) };
 }

@@ -6,8 +6,8 @@ namespace SwiftlyS2.Core.Events;
 internal class OnClientConnectedEvent : IOnClientConnectedEvent
 {
 
-  public int PlayerId { get; set; }
+    public int PlayerId { get; set; }
 
-  public HookResult Result { get; set; } = HookResult.Continue;
+    public HookResult Result { get; set; } = HookResult.Continue;
 
 }

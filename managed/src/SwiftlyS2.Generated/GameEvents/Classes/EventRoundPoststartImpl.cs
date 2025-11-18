@@ -1,8 +1,5 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -14,7 +11,7 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventRoundPoststartImpl : GameEvent<EventRoundPoststart>, EventRoundPoststart
 {
 
-  public EventRoundPoststartImpl(nint address) : base(address)
-  {
-  }
+    public EventRoundPoststartImpl( nint address ) : base(address)
+    {
+    }
 }

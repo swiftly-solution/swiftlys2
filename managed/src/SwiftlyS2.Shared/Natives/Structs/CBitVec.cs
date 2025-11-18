@@ -1,80 +1,82 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Shared.Natives;
 
 public interface ICBitVec
 {
-    bool IsFixedSize();
-    uint NumDWords();
-    uint GetNumBits();
-    void ClearAll();
-    void SetAll();
-    void Set(uint index);
-    void Set(int index);
-    void Clear(uint index);
-    void Clear(int index);
-    bool IsSet(uint index);
-    bool IsSet(int index);
-    int Count();
-    bool IsAllClear();
+    public bool IsFixedSize();
+    public uint NumDWords();
+    public uint GetNumBits();
+    public void ClearAll();
+    public void SetAll();
+    public void Set( uint index );
+    public void Set( int index );
+    public void Clear( uint index );
+    public void Clear( int index );
+    public bool IsSet( uint index );
+    public bool IsSet( int index );
+    public int Count();
+    public bool IsAllClear();
 }
 
 public static unsafe class CBitVecOperations
 {
-    public static void ClearAll(uint* buffer, int intCount)
+    public static void ClearAll( uint* buffer, int intCount )
     {
-        for (int i = 0; i < intCount; i++)
+        for (var i = 0; i < intCount; i++)
             buffer[i] = 0;
     }
 
-    public static void SetAll(uint* buffer, int intCount)
+    public static void SetAll( uint* buffer, int intCount )
     {
-        for (int i = 0; i < intCount; i++)
+        for (var i = 0; i < intCount; i++)
             buffer[i] = uint.MaxValue;
     }
 
-    public static void Set(uint* buffer, uint index, uint maxBits)
+    public static void Set( uint* buffer, uint index, uint maxBits )
     {
         if (index >= maxBits) throw new IndexOutOfRangeException($"The index {index} is out of range. Maximum allowed index is {maxBits - 1}");
         buffer[index >> 5] |= (uint)(1 << ((int)index & 31));
     }
 
-    public static void Set(uint* buffer, int index, uint maxBits)
+    public static void Set( uint* buffer, int index, uint maxBits )
     {
         if (index < 0 || index >= maxBits) throw new IndexOutOfRangeException($"The index {index} is out of range. Valid range is 0 to {maxBits - 1}");
         buffer[index >> 5] |= (uint)(1 << (index & 31));
     }
 
-    public static void Clear(uint* buffer, uint index, uint maxBits)
+    public static void Clear( uint* buffer, uint index, uint maxBits )
     {
         if (index >= maxBits) throw new IndexOutOfRangeException($"The index {index} is out of range. Maximum allowed index is {maxBits - 1}");
         buffer[index >> 5] &= ~(uint)(1 << ((int)index & 31));
     }
 
-    public static void Clear(uint* buffer, int index, uint maxBits)
+    public static void Clear( uint* buffer, int index, uint maxBits )
     {
         if (index < 0 || index >= maxBits) throw new IndexOutOfRangeException($"The index {index} is out of range. Valid range is 0 to {maxBits - 1}");
         buffer[index >> 5] &= ~(uint)(1 << (index & 31));
     }
 
-    public static bool IsSet(uint* buffer, uint index, uint maxBits)
+    public static bool IsSet( uint* buffer, uint index, uint maxBits )
     {
-        if (index >= maxBits) throw new IndexOutOfRangeException($"The index {index} is out of range. Maximum allowed index is {maxBits - 1}");
-        return (buffer[index >> 5] & ((uint)(1 << ((int)index & 31)))) != 0;
+        return index >= maxBits
+            ? throw new IndexOutOfRangeException($"The index {index} is out of range. Maximum allowed index is {maxBits - 1}")
+            : (buffer[index >> 5] & ((uint)(1 << ((int)index & 31)))) != 0;
     }
 
-    public static bool IsSet(uint* buffer, int index, uint maxBits)
+    public static bool IsSet( uint* buffer, int index, uint maxBits )
     {
-        if (index < 0 || index >= maxBits) throw new IndexOutOfRangeException($"The index {index} is out of range. Valid range is 0 to {maxBits - 1}");
-        return (buffer[index >> 5] & ((uint)(1 << (index & 31)))) != 0;
+        return index < 0 || index >= maxBits
+            ? throw new IndexOutOfRangeException($"The index {index} is out of range. Valid range is 0 to {maxBits - 1}")
+            : (buffer[index >> 5] & ((uint)(1 << (index & 31)))) != 0;
     }
 
-    public static int Count(uint* buffer, int intCount)
+    public static int Count( uint* buffer, int intCount )
     {
-        int count = 0;
-        for (int i = 0; i < intCount; i++)
+        var count = 0;
+        for (var i = 0; i < intCount; i++)
         {
-            uint v = buffer[i];
+            var v = buffer[i];
             while (v != 0)
             {
                 v &= v - 1;
@@ -84,7 +86,7 @@ public static unsafe class CBitVecOperations
         return count;
     }
 
-    public static bool IsAllClear(uint* buffer, int intCount)
+    public static bool IsAllClear( uint* buffer, int intCount )
     {
         return Count(buffer, intCount) == 0;
     }
@@ -120,7 +122,7 @@ public unsafe struct CBitVec64 : ICBitVec
         }
     }
 
-    public void Set(uint index)
+    public void Set( uint index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -128,7 +130,7 @@ public unsafe struct CBitVec64 : ICBitVec
         }
     }
 
-    public void Set(int index)
+    public void Set( int index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -136,7 +138,7 @@ public unsafe struct CBitVec64 : ICBitVec
         }
     }
 
-    public void Clear(uint index)
+    public void Clear( uint index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -144,7 +146,7 @@ public unsafe struct CBitVec64 : ICBitVec
         }
     }
 
-    public void Clear(int index)
+    public void Clear( int index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -152,7 +154,7 @@ public unsafe struct CBitVec64 : ICBitVec
         }
     }
 
-    public bool IsSet(uint index)
+    public bool IsSet( uint index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -160,7 +162,7 @@ public unsafe struct CBitVec64 : ICBitVec
         }
     }
 
-    public bool IsSet(int index)
+    public bool IsSet( int index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -215,7 +217,7 @@ public unsafe struct CBitVec16384 : ICBitVec
         }
     }
 
-    public void Set(uint index)
+    public void Set( uint index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -223,7 +225,7 @@ public unsafe struct CBitVec16384 : ICBitVec
         }
     }
 
-    public void Set(int index)
+    public void Set( int index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -231,7 +233,7 @@ public unsafe struct CBitVec16384 : ICBitVec
         }
     }
 
-    public void Clear(uint index)
+    public void Clear( uint index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -239,7 +241,7 @@ public unsafe struct CBitVec16384 : ICBitVec
         }
     }
 
-    public void Clear(int index)
+    public void Clear( int index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -247,7 +249,7 @@ public unsafe struct CBitVec16384 : ICBitVec
         }
     }
 
-    public bool IsSet(uint index)
+    public bool IsSet( uint index )
     {
         fixed (uint* ptr = _buffer)
         {
@@ -255,7 +257,7 @@ public unsafe struct CBitVec16384 : ICBitVec
         }
     }
 
-    public bool IsSet(int index)
+    public bool IsSet( int index )
     {
         fixed (uint* ptr = _buffer)
         {

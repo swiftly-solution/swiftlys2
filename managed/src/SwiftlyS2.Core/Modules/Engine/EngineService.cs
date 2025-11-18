@@ -1,11 +1,8 @@
-using SwiftlyS2.Shared;
-using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Shared.Services;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.SteamAPI;
-using Spectre.Console;
+using SwiftlyS2.Shared.Services;
 
 namespace SwiftlyS2.Core.Services;
 

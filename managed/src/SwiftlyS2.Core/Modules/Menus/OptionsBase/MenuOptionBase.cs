@@ -1,8 +1,8 @@
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
+using SwiftlyS2.Core.Menus.OptionsBase.Helpers;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Core.Menus.OptionsBase.Helpers;
 
 namespace SwiftlyS2.Core.Menus.OptionsBase;
 
@@ -11,12 +11,7 @@ namespace SwiftlyS2.Core.Menus.OptionsBase;
 /// </summary>
 public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 {
-    private string text = string.Empty;
     private string? dynamicText = null;
-    private float maxWidth = 26f;
-    private MenuOptionTextStyle textStyle = MenuOptionTextStyle.TruncateEnd;
-    private bool visible = true;
-    private bool enabled = true;
     private readonly DynamicTextUpdater? dynamicTextUpdater;
     private readonly ConcurrentDictionary<IPlayer, bool> playerVisible = new();
     private readonly ConcurrentDictionary<IPlayer, bool> playerEnabled = new();
@@ -61,9 +56,9 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
         }
 
         dynamicTextUpdater = new DynamicTextUpdater(
-            () => text,
-            () => textStyle,
-            () => maxWidth,
+            () => Text,
+            () => TextStyle,
+            () => MaxWidth,
             value => dynamicText = value,
             Math.Max((int)(1 / 64f * 1000), updateIntervalMs),
             Math.Max((int)(1 / 64f * 1000), pauseIntervalMs)
@@ -110,27 +105,27 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// This is a global property. Changing it will affect what all players see.
     /// </remarks>
     public string Text {
-        get => text;
+        get;
         set {
-            if (text == value)
+            if (field == value)
             {
                 return;
             }
 
-            text = value;
+            field = value;
             // dynamicText = null;
 
             TextChanged?.Invoke(this, new MenuOptionEventArgs { Player = null!, Option = this });
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// The maximum display width for menu option text in relative units.
     /// </summary>
     public float MaxWidth {
-        get => maxWidth;
+        get;
         set {
-            if (maxWidth == value)
+            if (field == value)
             {
                 return;
             }
@@ -140,10 +135,10 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
                 Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(MaxWidth), $"MaxWidth: value {value:F3} is out of range."));
             }
 
-            maxWidth = Math.Max(value, 1f);
+            field = Math.Max(value, 1f);
             // dynamicText = null;
         }
-    }
+    } = 26f;
 
     /// <summary>
     /// Gets or sets a value indicating whether this option is visible in the menu.
@@ -152,17 +147,17 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// This is a global property. Changing it will affect what all players see.
     /// </remarks>
     public bool Visible {
-        get => visible;
+        get;
         set {
-            if (visible == value)
+            if (field == value)
             {
                 return;
             }
 
-            visible = value;
+            field = value;
             VisibilityChanged?.Invoke(this, new MenuOptionEventArgs { Player = null!, Option = this });
         }
-    }
+    } = true;
 
     /// <summary>
     /// Gets or sets a value indicating whether this option can be interacted with.
@@ -171,17 +166,17 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// This is a global property. Changing it will affect what all players see.
     /// </remarks>
     public bool Enabled {
-        get => enabled;
+        get;
         set {
-            if (enabled == value)
+            if (field == value)
             {
                 return;
             }
 
-            enabled = value;
+            field = value;
             EnabledChanged?.Invoke(this, new MenuOptionEventArgs { Player = null!, Option = this });
         }
-    }
+    } = true;
 
     /// <summary>
     /// Gets or sets a value indicating whether the menu should be closed after handling the click.
@@ -202,17 +197,17 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// Gets or sets the text overflow style for this option.
     /// </summary>
     public MenuOptionTextStyle TextStyle {
-        get => textStyle;
+        get;
         set {
-            if (textStyle == value)
+            if (field == value)
             {
                 return;
             }
 
-            textStyle = value;
+            field = value;
             // dynamicText = null;
         }
-    }
+    } = MenuOptionTextStyle.TruncateEnd;
 
     /// <summary>
     /// Gets or sets a value indicating whether a sound should play when this option is selected.
@@ -461,7 +456,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// <returns>A task that represents the asynchronous operation.</returns>
     public virtual async ValueTask OnClickAsync( IPlayer player )
     {
-        if (!visible || !enabled || !GetVisible(player) || !GetEnabled(player))
+        if (!Visible || !Enabled || !GetVisible(player) || !GetEnabled(player))
         {
             return;
         }

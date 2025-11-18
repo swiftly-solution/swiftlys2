@@ -5,5 +5,5 @@ namespace SwiftlyS2.Core.Events;
 internal class OnMapLoadEvent : IOnMapLoadEvent
 {
 
-  public required string MapName { get; set; }
-} 
+    public required string MapName { get; set; }
+}

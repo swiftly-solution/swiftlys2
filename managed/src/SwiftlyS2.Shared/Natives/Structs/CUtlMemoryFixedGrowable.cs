@@ -1,5 +1,5 @@
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Shared.Natives;
 
@@ -9,9 +9,9 @@ public unsafe struct CUtlMemoryFixedGrowable<T, TBuffer>
     where TBuffer : unmanaged
 {
     private CUtlMemory<T> _memory;
-    private TBuffer _fixedMemory;
+    private readonly TBuffer _fixedMemory;
 
-    public CUtlMemoryFixedGrowable(int size, int growSize = 0)
+    public CUtlMemoryFixedGrowable( int size, int growSize = 0 )
     {
         _memory = new CUtlMemory<T>((nint)Unsafe.AsPointer(ref _fixedMemory), size, false);
     }

@@ -1,6 +1,6 @@
-﻿namespace SwiftlyS2.Shared.Players;
+namespace SwiftlyS2.Shared.Players;
 
-public enum MessageType: byte
+public enum MessageType : byte
 {
     Notify = 1,
     Console,

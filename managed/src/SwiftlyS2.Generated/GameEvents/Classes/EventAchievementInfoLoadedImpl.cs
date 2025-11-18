@@ -1,8 +1,5 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -13,7 +10,7 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventAchievementInfoLoadedImpl : GameEvent<EventAchievementInfoLoaded>, EventAchievementInfoLoaded
 {
 
-  public EventAchievementInfoLoadedImpl(nint address) : base(address)
-  {
-  }
+    public EventAchievementInfoLoadedImpl( nint address ) : base(address)
+    {
+    }
 }

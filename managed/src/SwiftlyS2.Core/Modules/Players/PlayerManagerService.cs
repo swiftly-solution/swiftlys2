@@ -1,8 +1,7 @@
-﻿using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.Services;
 
 namespace SwiftlyS2.Core.Players;
 
@@ -46,13 +45,13 @@ internal class PlayerManagerService : IPlayerManagerService
 
     private static ulong SteamIDToSteamID64( string steamID )
     {
-        string[] parts = steamID.Split(':');
+        var parts = steamID.Split(':');
         if (parts.Length != 3) return 0;
 
-        int X = int.Parse(parts[1]);
-        int Y = int.Parse(parts[2]);
+        var X = int.Parse(parts[1]);
+        var Y = int.Parse(parts[2]);
 
-        ulong steamID64 = (ulong)Y * 2 + (ulong)X + 76561197960265728UL;
+        var steamID64 = (ulong)Y * 2 + (ulong)X + 76561197960265728UL;
         return steamID64;
     }
 
@@ -61,7 +60,7 @@ internal class PlayerManagerService : IPlayerManagerService
     {
         IEnumerable<IPlayer> allPlayers = [];
 
-        for (int i = 0; i < PlayerCap; i++)
+        for (var i = 0; i < PlayerCap; i++)
         {
             if (!IsPlayerOnline(i))
                 continue;
@@ -142,7 +141,7 @@ internal class PlayerManagerService : IPlayerManagerService
             }
             else if (target.StartsWith('#'))
             {
-                if (int.TryParse(target[1..], out int id) && targetPlayer.PlayerID == id)
+                if (int.TryParse(target[1..], out var id) && targetPlayer.PlayerID == id)
                 {
                     allPlayers = allPlayers.Append(targetPlayer);
                 }
@@ -151,7 +150,7 @@ internal class PlayerManagerService : IPlayerManagerService
             {
                 allPlayers = allPlayers.Append(targetPlayer);
             }
-            else if (ulong.TryParse(target, out ulong steamId) && targetPlayer.SteamID == steamId)
+            else if (ulong.TryParse(target, out var steamId) && targetPlayer.SteamID == steamId)
             {
                 allPlayers = allPlayers.Append(targetPlayer);
             }

@@ -7,15 +7,15 @@ namespace SwiftlyS2.Shared.ProtobufDefinitions;
 
 public interface CUserMsg_ParticleManager_UpdateParticleOffset : ITypedProtobuf<CUserMsg_ParticleManager_UpdateParticleOffset>
 {
-  static CUserMsg_ParticleManager_UpdateParticleOffset ITypedProtobuf<CUserMsg_ParticleManager_UpdateParticleOffset>.Wrap(nint handle, bool isManuallyAllocated) => new CUserMsg_ParticleManager_UpdateParticleOffsetImpl(handle, isManuallyAllocated);
+    static CUserMsg_ParticleManager_UpdateParticleOffset ITypedProtobuf<CUserMsg_ParticleManager_UpdateParticleOffset>.Wrap( nint handle, bool isManuallyAllocated ) => new CUserMsg_ParticleManager_UpdateParticleOffsetImpl(handle, isManuallyAllocated);
 
 
-  public int ControlPoint { get; set; }
+    public int ControlPoint { get; set; }
 
 
-  public Vector OriginOffset { get; set; }
+    public Vector OriginOffset { get; set; }
 
 
-  public QAngle AngleOffset { get; set; }
+    public QAngle AngleOffset { get; set; }
 
 }

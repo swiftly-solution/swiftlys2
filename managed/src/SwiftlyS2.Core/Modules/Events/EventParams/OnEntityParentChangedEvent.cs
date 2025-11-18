@@ -6,7 +6,7 @@ namespace SwiftlyS2.Core.Events;
 internal class OnEntityParentChangedEvent : IOnEntityParentChangedEvent
 {
 
-  public required CEntityInstance Entity { get; set; }
+    public required CEntityInstance Entity { get; set; }
 
-  public CEntityInstance? NewParent { get; set; }
-} 
+    public CEntityInstance? NewParent { get; set; }
+}

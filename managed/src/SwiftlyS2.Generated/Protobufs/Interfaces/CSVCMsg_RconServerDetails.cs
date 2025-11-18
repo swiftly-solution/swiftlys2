@@ -1,23 +1,22 @@
 
 using SwiftlyS2.Core.ProtobufDefinitions;
-using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.NetMessages;
 
 namespace SwiftlyS2.Shared.ProtobufDefinitions;
+
 using SwiftlyS2.Shared.NetMessages;
 
 public interface CSVCMsg_RconServerDetails : ITypedProtobuf<CSVCMsg_RconServerDetails>, INetMessage<CSVCMsg_RconServerDetails>, IDisposable
 {
-  static int INetMessage<CSVCMsg_RconServerDetails>.MessageId => 71;
-  
-  static string INetMessage<CSVCMsg_RconServerDetails>.MessageName => "CSVCMsg_RconServerDetails";
+    static int INetMessage<CSVCMsg_RconServerDetails>.MessageId => 71;
 
-  static CSVCMsg_RconServerDetails ITypedProtobuf<CSVCMsg_RconServerDetails>.Wrap(nint handle, bool isManuallyAllocated) => new CSVCMsg_RconServerDetailsImpl(handle, isManuallyAllocated);
+    static string INetMessage<CSVCMsg_RconServerDetails>.MessageName => "CSVCMsg_RconServerDetails";
 
-
-  public byte[] Token { get; set; }
+    static CSVCMsg_RconServerDetails ITypedProtobuf<CSVCMsg_RconServerDetails>.Wrap( nint handle, bool isManuallyAllocated ) => new CSVCMsg_RconServerDetailsImpl(handle, isManuallyAllocated);
 
 
-  public string Details { get; set; }
+    public byte[] Token { get; set; }
+
+
+    public string Details { get; set; }
 
 }

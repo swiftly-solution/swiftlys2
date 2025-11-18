@@ -2,7 +2,6 @@ using System.Buffers;
 using System.Text;
 using Spectre.Console;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.Natives;
 
@@ -102,7 +101,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var keyLength = Encoding.UTF8.GetByteCount(key);
                 var keyBuffer = pool.Rent(keyLength + 1);
-                Encoding.UTF8.GetBytes(key, keyBuffer);
+                _ = Encoding.UTF8.GetBytes(key, keyBuffer);
                 keyBuffer[keyLength] = 0;
                 fixed (byte* pKey = keyBuffer)
                 {
@@ -191,7 +190,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var modelLength = Encoding.UTF8.GetByteCount(model);
                 var modelBuffer = pool.Rent(modelLength + 1);
-                Encoding.UTF8.GetBytes(model, modelBuffer);
+                _ = Encoding.UTF8.GetBytes(model, modelBuffer);
                 modelBuffer[modelLength] = 0;
                 fixed (byte* pModel = modelBuffer)
                 {
@@ -317,12 +316,12 @@ internal static class GameFunctions
         {
             unsafe
             {
-                void*** ppVTable = (void***)pThis;
+                var ppVTable = (void***)pThis;
                 var pGiveNamedItem = (delegate* unmanaged< nint, nint, nint >)ppVTable[0][GiveNamedItemOffset];
                 var pool = ArrayPool<byte>.Shared;
                 var nameLength = Encoding.UTF8.GetByteCount(name);
                 var nameBuffer = pool.Rent(nameLength + 1);
-                Encoding.UTF8.GetBytes(name, nameBuffer);
+                _ = Encoding.UTF8.GetBytes(name, nameBuffer);
                 nameBuffer[nameLength] = 0;
                 fixed (byte* pName = nameBuffer)
                 {
@@ -394,7 +393,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var pathLength = Encoding.UTF8.GetByteCount(path);
                 var pathBuffer = pool.Rent(pathLength + 1);
-                Encoding.UTF8.GetBytes(path, pathBuffer);
+                _ = Encoding.UTF8.GetBytes(path, pathBuffer);
                 pathBuffer[pathLength] = 0;
                 var pAddResource = (delegate* unmanaged< nint, nint, void >)GetVirtualFunction(pThis, AddResourceOffset);
                 fixed (byte* pPath = pathBuffer)
@@ -419,7 +418,7 @@ internal static class GameFunctions
                 var pool = ArrayPool<byte>.Shared;
                 var nameLength = Encoding.UTF8.GetByteCount(name);
                 var nameBuffer = pool.Rent(nameLength + 1);
-                Encoding.UTF8.GetBytes(name, nameBuffer);
+                _ = Encoding.UTF8.GetBytes(name, nameBuffer);
                 nameBuffer[nameLength] = 0;
                 fixed (byte* pName = nameBuffer)
                 {

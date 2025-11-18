@@ -1,8 +1,5 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -13,10 +10,9 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventEnableRestartVotingImpl : GameEvent<EventEnableRestartVoting>, EventEnableRestartVoting
 {
 
-  public EventEnableRestartVotingImpl(nint address) : base(address)
-  {
-  }
+    public EventEnableRestartVotingImpl( nint address ) : base(address)
+    {
+    }
 
-  public bool Enable
-  { get => Accessor.GetBool("enable"); set => Accessor.SetBool("enable", value); }
+    public bool Enable { get => Accessor.GetBool("enable"); set => Accessor.SetBool("enable", value); }
 }

@@ -1,6 +1,6 @@
-﻿using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using System.Runtime.InteropServices;
+using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.Natives;
 
@@ -72,7 +72,7 @@ public unsafe struct CTakeDamageInfo
         }
     }
 
-    public CTakeDamageInfo(CBaseEntity inflictor, CBaseEntity attacker, CBaseEntity ability, float flDamage, DamageTypes_t bitsDamageType)
+    public CTakeDamageInfo( CBaseEntity inflictor, CBaseEntity attacker, CBaseEntity ability, float flDamage, DamageTypes_t bitsDamageType )
     {
         Vector vec3_origin = Vector.Zero;
 
@@ -85,7 +85,7 @@ public unsafe struct CTakeDamageInfo
     public HitGroup_t ActualHitGroup => Trace->HitBox->m_nGroupId;
 }
 
-[StructLayout(LayoutKind.Sequential,Pack=8,Size=40)]
+[StructLayout(LayoutKind.Sequential, Pack = 8, Size = 40)]
 public unsafe struct CTakeDamageResult
 {
     public CTakeDamageInfo* OriginatingInfo;

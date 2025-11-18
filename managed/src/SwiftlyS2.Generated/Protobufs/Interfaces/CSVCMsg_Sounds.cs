@@ -1,23 +1,22 @@
 
 using SwiftlyS2.Core.ProtobufDefinitions;
-using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.NetMessages;
 
 namespace SwiftlyS2.Shared.ProtobufDefinitions;
+
 using SwiftlyS2.Shared.NetMessages;
 
 public interface CSVCMsg_Sounds : ITypedProtobuf<CSVCMsg_Sounds>, INetMessage<CSVCMsg_Sounds>, IDisposable
 {
-  static int INetMessage<CSVCMsg_Sounds>.MessageId => 49;
-  
-  static string INetMessage<CSVCMsg_Sounds>.MessageName => "CSVCMsg_Sounds";
+    static int INetMessage<CSVCMsg_Sounds>.MessageId => 49;
 
-  static CSVCMsg_Sounds ITypedProtobuf<CSVCMsg_Sounds>.Wrap(nint handle, bool isManuallyAllocated) => new CSVCMsg_SoundsImpl(handle, isManuallyAllocated);
+    static string INetMessage<CSVCMsg_Sounds>.MessageName => "CSVCMsg_Sounds";
 
-
-  public bool ReliableSound { get; set; }
+    static CSVCMsg_Sounds ITypedProtobuf<CSVCMsg_Sounds>.Wrap( nint handle, bool isManuallyAllocated ) => new CSVCMsg_SoundsImpl(handle, isManuallyAllocated);
 
 
-  public IProtobufRepeatedFieldSubMessageType<CSVCMsg_Sounds_sounddata_t> Sounds { get; }
+    public bool ReliableSound { get; set; }
+
+
+    public IProtobufRepeatedFieldSubMessageType<CSVCMsg_Sounds_sounddata_t> Sounds { get; }
 
 }

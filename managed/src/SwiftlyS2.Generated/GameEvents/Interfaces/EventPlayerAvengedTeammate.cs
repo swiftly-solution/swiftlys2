@@ -1,28 +1,27 @@
-using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Core.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.GameEvents;
 
 namespace SwiftlyS2.Shared.GameEventDefinitions;
 
 /// <summary> 
 /// Event "player_avenged_teammate"
 /// </summary>
-public interface EventPlayerAvengedTeammate : IGameEvent<EventPlayerAvengedTeammate> {
+public interface EventPlayerAvengedTeammate : IGameEvent<EventPlayerAvengedTeammate>
+{
 
-  static EventPlayerAvengedTeammate IGameEvent<EventPlayerAvengedTeammate>.Create(nint address) => new EventPlayerAvengedTeammateImpl(address);
+    static EventPlayerAvengedTeammate IGameEvent<EventPlayerAvengedTeammate>.Create( nint address ) => new EventPlayerAvengedTeammateImpl(address);
 
-  static string IGameEvent<EventPlayerAvengedTeammate>.GetName() => "player_avenged_teammate";
+    static string IGameEvent<EventPlayerAvengedTeammate>.GetName() => "player_avenged_teammate";
 
-  static uint IGameEvent<EventPlayerAvengedTeammate>.GetHash() => 0x8E286DACu;
-  /// <summary>
-  /// type: player_controller
-  /// </summary>
-  int AvengerId { get; set; }
+    static uint IGameEvent<EventPlayerAvengedTeammate>.GetHash() => 0x8E286DACu;
+    /// <summary>
+    /// type: player_controller
+    /// </summary>
+    public int AvengerId { get; set; }
 
-  /// <summary>
-  /// type: player_controller
-  /// </summary>
-  int AvengedPlayerId { get; set; }
+    /// <summary>
+    /// type: player_controller
+    /// </summary>
+    public int AvengedPlayerId { get; set; }
 
 }

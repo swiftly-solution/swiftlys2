@@ -1,9 +1,10 @@
 namespace SwiftlyS2.Core.Services;
 
-internal enum PluginStatus {
+internal enum PluginStatus
+{
 
-  Loaded,
-  Unloaded,
-  Loading,
-  Error,
+    Loaded,
+    Unloaded,
+    Loading,
+    Error,
 }

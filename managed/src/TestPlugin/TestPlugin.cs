@@ -1,41 +1,31 @@
+using System.Runtime.InteropServices;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Loggers;
+using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Toolchains.InProcess.NoEmit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Tomlyn.Extensions.Configuration;
-using System.Text.RegularExpressions;
+using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Commands;
+using SwiftlyS2.Shared.EntitySystem;
+using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.GameEventDefinitions;
 using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.NetMessages;
+using SwiftlyS2.Shared.Memory;
+using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.Plugins;
-using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.ProtobufDefinitions;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
-using SwiftlyS2.Shared.Events;
-using SwiftlyS2.Shared.Memory;
-using YamlDotNet.Core.Tokens;
-using Dapper;
-using SwiftlyS2.Shared.Sounds;
-using SwiftlyS2.Shared.EntitySystem;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Hosting;
+using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.Players;
-using BenchmarkDotNet.Running;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Toolchains.InProcess.NoEmit;
-using BenchmarkDotNet.Toolchains.InProcess.Emit;
-using BenchmarkDotNet.Jobs;
-using BenchmarkDotNet.Loggers;
-using SwiftlyS2.Shared.Menus;
+using SwiftlyS2.Shared.Plugins;
+using SwiftlyS2.Shared.ProtobufDefinitions;
+using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.Sounds;
 using SwiftlyS2.Shared.SteamAPI;
-using SwiftlyS2.Core.Menus.OptionsBase;
-using System.Collections.Concurrent;
-using Dia2Lib;
-using System.Reflection.Metadata;
+using Tomlyn.Extensions.Configuration;
 
 namespace TestPlugin;
 
@@ -49,8 +39,8 @@ public class InProcessConfig : ManualConfig
 {
     public InProcessConfig()
     {
-        AddLogger(ConsoleLogger.Default);
-        AddJob(Job.Default
+        _ = AddLogger(ConsoleLogger.Default);
+        _ = AddJob(Job.Default
             .WithToolchain(new InProcessNoEmitToolchain(true))
             .WithId("InProcess"));
     }
@@ -75,7 +65,7 @@ public class TestPlugin : BasePlugin
     public void Test2Command( ICommandContext context )
     {
         BenchContext.Controller = context.Sender!.RequiredController;
-        BenchmarkRunner.Run<PlayerBenchmarks>(new InProcessConfig());
+        _ = BenchmarkRunner.Run<PlayerBenchmarks>(new InProcessConfig());
     }
 
     [GameEventHandler(HookMode.Pre)]
@@ -144,23 +134,23 @@ public class TestPlugin : BasePlugin
             Console.WriteLine($"pong: {buffer}");
         });
 
-        Core.GameEvent.HookPre<EventShowSurvivalRespawnStatus>(@event =>
+        _ = Core.GameEvent.HookPre<EventShowSurvivalRespawnStatus>(@event =>
         {
             @event.LocToken = "test";
             return HookResult.Continue;
         });
 
-        Core.Configuration
+        _ = Core.Configuration
             .InitializeJsonWithModel<TestConfig>("test.jsonc", "Main")
             .Configure(( builder ) =>
             {
-                builder.AddJsonFile("test.jsonc", optional: false, reloadOnChange: true);
-                builder.AddTomlFile("test.toml", optional: true, reloadOnChange: true);
+                _ = builder.AddJsonFile("test.jsonc", optional: false, reloadOnChange: true);
+                _ = builder.AddTomlFile("test.toml", optional: true, reloadOnChange: true);
             });
 
         ServiceCollection services = new();
 
-        services
+        _ = services
             .AddSwiftly(Core);
 
         Core.Event.OnPrecacheResource += ( @event ) =>
@@ -203,7 +193,7 @@ public class TestPlugin : BasePlugin
 
         // Core.
 
-        int i = 0;
+        var i = 0;
 
         // var token2 = Core.Scheduler.Repeat(10, () => {
         //   Console.WriteLine(Core.Engine.TickCount);
@@ -253,7 +243,7 @@ public class TestPlugin : BasePlugin
             foreach (var player in players)
             {
                 Core.Profiler.StartRecording("OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player");
-                for (int i = 0; i < 1024; i++)
+                for (var i = 0; i < 1024; i++)
                 {
                     convar!.ReplicateToClient(player.PlayerID, (float)Random.Shared.NextDouble());
                 }
@@ -300,8 +290,8 @@ public class TestPlugin : BasePlugin
         Console.WriteLine($"2");
     }
 
-    CEntityKeyValues kv { get; set; }
-    CEntityInstance entity { get; set; }
+    private CEntityKeyValues kv { get; set; }
+    private CEntityInstance entity { get; set; }
 
     [Command("tt")]
     public void TestCommand( ICommandContext context )
@@ -318,7 +308,7 @@ public class TestPlugin : BasePlugin
         // entity.DispatchSpawn(kv);
         // Console.WriteLine("Spawned entity with keyvalues");
 
-        int j = 0;
+        var j = 0;
 
         var cvar = Core.ConVar.Find<bool>("sv_cheats")!;
         Console.WriteLine(cvar);
@@ -327,7 +317,7 @@ public class TestPlugin : BasePlugin
         Console.WriteLine(cvar2);
         Console.WriteLine(cvar2.Value);
 
-        var cvar3 = Core.ConVar.Create<string>("sw_test_cvar", "Test cvar", "ABCDEFG");
+        var cvar3 = Core.ConVar.Create("sw_test_cvar", "Test cvar", "ABCDEFG");
         Console.WriteLine(cvar3);
         Console.WriteLine(cvar3.Value);
 
@@ -344,17 +334,17 @@ public class TestPlugin : BasePlugin
     [Command("w")]
     public void TestCommand1( ICommandContext context )
     {
-        var ret = SteamGameServerUGC.DownloadItem(new PublishedFileId_t(3596198331), true);
+        _ = SteamGameServerUGC.DownloadItem(new PublishedFileId_t(3596198331), true);
         Console.WriteLine(SteamGameServer.GetPublicIP().ToIPAddress());
 
 
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    delegate nint DispatchSpawnDelegate( nint pEntity, nint pKV );
-    int order = 0;
+    private delegate nint DispatchSpawnDelegate( nint pEntity, nint pKV );
+    private int order = 0;
 
-    IUnmanagedFunction<DispatchSpawnDelegate>? _dispatchspawn;
+    private readonly IUnmanagedFunction<DispatchSpawnDelegate>? _dispatchspawn;
 
     [Command("h1")]
     public void TestCommand2( ICommandContext context )
@@ -376,7 +366,7 @@ public class TestPlugin : BasePlugin
             };
         });
 
-        _dispatchspawn.AddHook(( next ) =>
+        _ = _dispatchspawn.AddHook(( next ) =>
         {
             return ( pEntity, pKV ) =>
             {
@@ -394,7 +384,7 @@ public class TestPlugin : BasePlugin
         Console.WriteLine("TestPlugin OnEntityCreated222 " + @event.Entity.Entity?.DesignerName);
     }
 
-    Guid _hookId = Guid.Empty;
+    private readonly Guid _hookId = Guid.Empty;
 
     [Command("bad")]
     public void TestCommandBad( ICommandContext context )

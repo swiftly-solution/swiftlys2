@@ -1,7 +1,5 @@
-using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Core.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.GameEvents;
 
 namespace SwiftlyS2.Shared.GameEventDefinitions;
 
@@ -9,11 +7,12 @@ namespace SwiftlyS2.Shared.GameEventDefinitions;
 /// Event "game_init"
 /// sent when a new game is started
 /// </summary>
-public interface EventGameInit : IGameEvent<EventGameInit> {
+public interface EventGameInit : IGameEvent<EventGameInit>
+{
 
-  static EventGameInit IGameEvent<EventGameInit>.Create(nint address) => new EventGameInitImpl(address);
+    static EventGameInit IGameEvent<EventGameInit>.Create( nint address ) => new EventGameInitImpl(address);
 
-  static string IGameEvent<EventGameInit>.GetName() => "game_init";
+    static string IGameEvent<EventGameInit>.GetName() => "game_init";
 
-  static uint IGameEvent<EventGameInit>.GetHash() => 0xF1BFEF5Au;
+    static uint IGameEvent<EventGameInit>.GetHash() => 0xF1BFEF5Au;
 }

@@ -1,7 +1,5 @@
-using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.GameEvents;
 using SwiftlyS2.Core.GameEventDefinitions;
-using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.GameEvents;
 
 namespace SwiftlyS2.Shared.GameEventDefinitions;
 
@@ -9,18 +7,19 @@ namespace SwiftlyS2.Shared.GameEventDefinitions;
 /// Event "game_end"
 /// a game ended
 /// </summary>
-public interface EventGameEnd : IGameEvent<EventGameEnd> {
+public interface EventGameEnd : IGameEvent<EventGameEnd>
+{
 
-  static EventGameEnd IGameEvent<EventGameEnd>.Create(nint address) => new EventGameEndImpl(address);
+    static EventGameEnd IGameEvent<EventGameEnd>.Create( nint address ) => new EventGameEndImpl(address);
 
-  static string IGameEvent<EventGameEnd>.GetName() => "game_end";
+    static string IGameEvent<EventGameEnd>.GetName() => "game_end";
 
-  static uint IGameEvent<EventGameEnd>.GetHash() => 0x17FCFCCDu;
-  /// <summary>
-  /// winner team/user id
-  /// <br/>
-  /// type: byte
-  /// </summary>
-  byte Winner { get; set; }
+    static uint IGameEvent<EventGameEnd>.GetHash() => 0x17FCFCCDu;
+    /// <summary>
+    /// winner team/user id
+    /// <br/>
+    /// type: byte
+    /// </summary>
+    public byte Winner { get; set; }
 
 }

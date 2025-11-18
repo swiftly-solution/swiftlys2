@@ -1,8 +1,7 @@
 using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.GameEventDefinitions;
 using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameEventDefinitions;
 
@@ -13,27 +12,22 @@ namespace SwiftlyS2.Core.GameEventDefinitions;
 internal class EventLootCrateOpenedImpl : GameEvent<EventLootCrateOpened>, EventLootCrateOpened
 {
 
-  public EventLootCrateOpenedImpl(nint address) : base(address)
-  {
-  }
+    public EventLootCrateOpenedImpl( nint address ) : base(address)
+    {
+    }
 
-  // player entindex
-  public CCSPlayerController UserIdController
-  { get => Accessor.GetPlayerController("userid"); }
+    // player entindex
+    public CCSPlayerController UserIdController { get => Accessor.GetPlayerController("userid"); }
 
-  // player entindex
-  public CCSPlayerPawn UserIdPawn
-  { get => Accessor.GetPlayerPawn("userid"); }
+    // player entindex
+    public CCSPlayerPawn UserIdPawn { get => Accessor.GetPlayerPawn("userid"); }
 
-  // player entindex
-  public IPlayer UserIdPlayer
-  { get => Accessor.GetPlayer("userid"); }
+    // player entindex
+    public IPlayer UserIdPlayer { get => Accessor.GetPlayer("userid"); }
 
-  // player entindex
-  public int UserId
-  { get => Accessor.GetInt32("userid"); set => Accessor.SetInt32("userid", value); }
+    // player entindex
+    public int UserId { get => Accessor.GetInt32("userid"); set => Accessor.SetInt32("userid", value); }
 
-  // type of crate (metal, wood, or paradrop)
-  public string Type
-  { get => Accessor.GetString("type"); set => Accessor.SetString("type", value); }
+    // type of crate (metal, wood, or paradrop)
+    public string Type { get => Accessor.GetString("type"); set => Accessor.SetString("type", value); }
 }

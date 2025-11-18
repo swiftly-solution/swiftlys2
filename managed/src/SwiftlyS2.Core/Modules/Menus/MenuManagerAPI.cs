@@ -1,12 +1,11 @@
-using System.Globalization;
 using System.Collections.Concurrent;
+using System.Globalization;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared;
-using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Events;
-using SwiftlyS2.Shared.Sounds;
+using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.Sounds;
 
 namespace SwiftlyS2.Core.Menus;
 
@@ -145,7 +144,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     scrollSound.Recipients.AddRecipient(@event.PlayerId);
-                    scrollSound.Emit();
+                    _ = scrollSound.Emit();
                     scrollSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -156,7 +155,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     scrollSound.Recipients.AddRecipient(@event.PlayerId);
-                    scrollSound.Emit();
+                    _ = scrollSound.Emit();
                     scrollSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -167,7 +166,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     exitSound.Recipients.AddRecipient(@event.PlayerId);
-                    exitSound.Emit();
+                    _ = exitSound.Emit();
                     exitSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -181,7 +180,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                     if (menu.Configuration.PlaySound && option.PlaySound)
                     {
                         useSound.Recipients.AddRecipient(@event.PlayerId);
-                        useSound.Emit();
+                        _ = useSound.Emit();
                         useSound.Recipients.RemoveRecipient(@event.PlayerId);
                     }
                 }
@@ -196,7 +195,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     scrollSound.Recipients.AddRecipient(@event.PlayerId);
-                    scrollSound.Emit();
+                    _ = scrollSound.Emit();
                     scrollSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -207,7 +206,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     scrollSound.Recipients.AddRecipient(@event.PlayerId);
-                    scrollSound.Emit();
+                    _ = scrollSound.Emit();
                     scrollSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -217,7 +216,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 if (menu.Configuration.PlaySound)
                 {
                     exitSound.Recipients.AddRecipient(@event.PlayerId);
-                    exitSound.Emit();
+                    _ = exitSound.Emit();
                     exitSound.Recipients.RemoveRecipient(@event.PlayerId);
                 }
             }
@@ -231,7 +230,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                     if (menu.Configuration.PlaySound && option.PlaySound)
                     {
                         useSound.Recipients.AddRecipient(@event.PlayerId);
-                        useSound.Emit();
+                        _ = useSound.Emit();
                         useSound.Recipients.RemoveRecipient(@event.PlayerId);
                     }
                 }

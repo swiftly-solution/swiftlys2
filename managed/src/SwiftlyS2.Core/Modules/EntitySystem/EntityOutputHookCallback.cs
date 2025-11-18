@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+using System.Runtime.InteropServices;
+using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Profiler;
-using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Core.NetMessages;
 
@@ -15,11 +15,11 @@ internal class EntityOutputHookCallback : IDisposable
     public Guid Guid { get; init; }
     public IContextedProfilerService Profiler { get; }
 
-    private IEntitySystemService.EntityOutputHandler _callback;
-    private ILogger<EntityOutputHookCallback> _logger;
-    private EntityOutputHookCallbackDelegate _unmanagedCallback;
-    private nint _unmanagedCallbackPtr;
-    private ulong _nativeHookId;
+    private readonly IEntitySystemService.EntityOutputHandler _callback;
+    private readonly ILogger<EntityOutputHookCallback> _logger;
+    private readonly EntityOutputHookCallbackDelegate _unmanagedCallback;
+    private readonly nint _unmanagedCallbackPtr;
+    private readonly ulong _nativeHookId;
 
     public EntityOutputHookCallback( string className, string outputName, IEntitySystemService.EntityOutputHandler callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler )
     {

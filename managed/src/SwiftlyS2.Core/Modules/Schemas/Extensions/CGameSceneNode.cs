@@ -1,4 +1,4 @@
-﻿namespace SwiftlyS2.Shared.SchemaDefinitions;
+namespace SwiftlyS2.Shared.SchemaDefinitions;
 
 public partial interface CGameSceneNode
 {

@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
-using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Menus;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.Menus.OptionsBase;

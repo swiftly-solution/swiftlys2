@@ -21,9 +21,9 @@ public class PlayerBenchmarks
     [Benchmark]
     public void Test()
     {
-        for (int i = 0; i < 10000; i++)
+        for (var i = 0; i < 10000; i++)
         {
-            var a = _controller.Pawn.Value.WeaponServices.ActiveWeapon;
+            _ = _controller.Pawn.Value.WeaponServices.ActiveWeapon;
         }
     }
 }

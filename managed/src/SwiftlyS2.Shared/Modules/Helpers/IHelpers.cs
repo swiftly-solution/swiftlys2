@@ -93,27 +93,27 @@ public interface IHelpers
     /// <param name="unknown">Not sure what this argument is for, but in general it's -1.</param>
     /// <param name="key">The key of the weapon (usually item idx).</param>
     /// <returns>The weapon vdata.</returns>
-    public CCSWeaponBaseVData? GetWeaponCSDataFromKey(int unknown, string key);
+    public CCSWeaponBaseVData? GetWeaponCSDataFromKey( int unknown, string key );
 
     /// <summary>
     /// Get weapon vdata from item definition index.
     /// </summary>
     /// <param name="itemDefinitionIndex">The item definition index of the weapon.</param>
     /// <returns>The weapon vdata.</returns>
-    public CCSWeaponBaseVData? GetWeaponCSDataFromKey(int itemDefinitionIndex);
+    public CCSWeaponBaseVData? GetWeaponCSDataFromKey( int itemDefinitionIndex );
 
     /// <summary>
     /// Get weapon classname from item definition index.
     /// </summary>
     /// <param name="itemDefinitionIndex">The item definition index of the weapon.</param>
     /// <returns>The weapon classname (e.g., "weapon_awp") or null if not found.</returns>
-    public string? GetClassnameByDefinitionIndex(int itemDefinitionIndex);
+    public string? GetClassnameByDefinitionIndex( int itemDefinitionIndex );
 
     /// <summary>
     /// Get item definition index from weapon classname.
     /// </summary>
     /// <param name="classname">The weapon classname (e.g., "weapon_awp").</param>
     /// <returns>The item definition index or null if not found.</returns>
-    public int? GetDefinitionIndexByClassname(string classname);
+    public int? GetDefinitionIndexByClassname( string classname );
 
 }

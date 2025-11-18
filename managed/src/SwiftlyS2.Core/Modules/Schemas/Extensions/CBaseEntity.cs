@@ -1,4 +1,4 @@
-﻿using SwiftlyS2.Shared.Natives;
+using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
@@ -25,7 +25,7 @@ public partial interface CBaseEntity
     /// <param name="position">The target position to move the entity to. If null, the entity's position is not changed.</param>
     /// <param name="angle">The target orientation to set for the entity. If null, the entity's orientation is not changed.</param>
     /// <param name="velocity">The velocity to apply to the entity after teleportation. If null, the entity's velocity is not changed.</param>
-    public void Teleport(Vector? position, QAngle? angle, Vector? velocity);
+    public void Teleport( Vector? position, QAngle? angle, Vector? velocity );
 
 
     /// <summary>

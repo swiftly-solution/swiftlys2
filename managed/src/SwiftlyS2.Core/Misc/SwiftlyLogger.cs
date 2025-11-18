@@ -5,107 +5,107 @@ namespace SwiftlyS2.Core.Misc;
 
 internal class SwiftlyLoggerProvider : ILoggerProvider
 {
-  private readonly string _contextName;
+    private readonly string _contextName;
 
-  public SwiftlyLoggerProvider(string contextName)
-  {
-    _contextName = contextName;
-  }
+    public SwiftlyLoggerProvider( string contextName )
+    {
+        _contextName = contextName;
+    }
 
-  public ILogger CreateLogger(string categoryName)
-  {
-    return new SwiftlyLogger(categoryName, _contextName);
-  }
+    public ILogger CreateLogger( string categoryName )
+    {
+        return new SwiftlyLogger(categoryName, _contextName);
+    }
 
-  public void Dispose()
-  {
-  }
+    public void Dispose()
+    {
+    }
 }
 
 internal class SwiftlyLogger : ILogger
 {
-  private readonly string _categoryName;
-  private readonly string _contextName;
+    private readonly string _categoryName;
+    private readonly string _contextName;
 
-  public SwiftlyLogger(string categoryName, string contextName)
-  {
-    _categoryName = categoryName;
-    _contextName = contextName;
-  }
-
-  public IDisposable? BeginScope<TState>(TState state) where TState : notnull
-  {
-    return NullScope.Instance;
-  }
-
-  public bool IsEnabled(LogLevel logLevel)
-  {
-    return logLevel != LogLevel.None;
-  }
-
-  public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
-  {
-    if (!IsEnabled(logLevel)) return;
-
-    var timestamp = DateTime.Now.ToString("MM/dd HH:mm:ss");
-    var level = GetLogLevelString(logLevel);
-    var id = $"[{eventId.ToString()}]";
-    var color = GetLogLevelColor(logLevel);
-
-    AnsiConsole.MarkupLineInterpolated($"[lightsteelblue1 bold]{_contextName}[/] [lightsteelblue]|[/] [grey42]{timestamp}[/] [lightsteelblue]|[/] [{color}]{level}[/] [lightsteelblue]|[/] [lightsteelblue]{_categoryName}{id}[/]");
-
-    string? message = formatter != null ? formatter(state, exception) : state?.ToString();
-    if (!string.IsNullOrEmpty(message))
+    public SwiftlyLogger( string categoryName, string contextName )
     {
-      FileLogger.Log($"{_contextName} | {timestamp} | {level} | {_categoryName}{id} | {message}");
-      var lines = message.Split('\n');
-      for (int i = 0; i < lines.Length; i++)
-      {
-        var line = lines[i];
-        if (i == lines.Length - 1 && line == "") break;
-        AnsiConsole.MarkupLineInterpolated($"[lightsteelblue1 bold]{_contextName}[/] [lightsteelblue]|[/] [grey85]{line}[/]");
-      }
+        _categoryName = categoryName;
+        _contextName = contextName;
     }
 
-    if (exception != null)
+    public IDisposable? BeginScope<TState>( TState state ) where TState : notnull
     {
-      FileLogger.LogException(exception, $"{exception.Message}");
-      AnsiConsole.WriteException(exception);
+        return NullScope.Instance;
     }
-    AnsiConsole.Reset();
-  }
 
-  private static string GetLogLevelString(LogLevel logLevel)
-  {
-    return logLevel switch
+    public bool IsEnabled( LogLevel logLevel )
     {
-      LogLevel.Trace => "Trace      ",
-      LogLevel.Debug => "Debug      ",
-      LogLevel.Information => "Information",
-      LogLevel.Warning => "Warning    ",
-      LogLevel.Error => "Error      ",
-      LogLevel.Critical => "Critical   ",
-      _ => "Unknown    "
-    };
-  }
+        return logLevel != LogLevel.None;
+    }
 
-  private static string GetLogLevelColor(LogLevel logLevel)
-  {
-    return logLevel switch
+    public void Log<TState>( LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter )
     {
-      LogLevel.Trace => "grey42",
-      LogLevel.Debug => "grey42",
-      LogLevel.Information => "silver",
-      LogLevel.Warning => "yellow1",
-      LogLevel.Error => "red3",
-      LogLevel.Critical => "red3",
-      _ => "grey42"
-    };
-  }
+        if (!IsEnabled(logLevel)) return;
 
-  private sealed class NullScope : IDisposable
-  {
-    public static readonly NullScope Instance = new NullScope();
-    public void Dispose() { }
-  }
+        var timestamp = DateTime.Now.ToString("MM/dd HH:mm:ss");
+        var level = GetLogLevelString(logLevel);
+        var id = $"[{eventId}]";
+        var color = GetLogLevelColor(logLevel);
+
+        AnsiConsole.MarkupLineInterpolated($"[lightsteelblue1 bold]{_contextName}[/] [lightsteelblue]|[/] [grey42]{timestamp}[/] [lightsteelblue]|[/] [{color}]{level}[/] [lightsteelblue]|[/] [lightsteelblue]{_categoryName}{id}[/]");
+
+        var message = formatter != null ? formatter(state, exception) : state?.ToString();
+        if (!string.IsNullOrEmpty(message))
+        {
+            FileLogger.Log($"{_contextName} | {timestamp} | {level} | {_categoryName}{id} | {message}");
+            var lines = message.Split('\n');
+            for (var i = 0; i < lines.Length; i++)
+            {
+                var line = lines[i];
+                if (i == lines.Length - 1 && line == "") break;
+                AnsiConsole.MarkupLineInterpolated($"[lightsteelblue1 bold]{_contextName}[/] [lightsteelblue]|[/] [grey85]{line}[/]");
+            }
+        }
+
+        if (exception != null)
+        {
+            FileLogger.LogException(exception, $"{exception.Message}");
+            AnsiConsole.WriteException(exception);
+        }
+        AnsiConsole.Reset();
+    }
+
+    private static string GetLogLevelString( LogLevel logLevel )
+    {
+        return logLevel switch {
+            LogLevel.Trace => "Trace      ",
+            LogLevel.Debug => "Debug      ",
+            LogLevel.Information => "Information",
+            LogLevel.Warning => "Warning    ",
+            LogLevel.Error => "Error      ",
+            LogLevel.Critical => "Critical   ",
+            LogLevel.None => throw new NotImplementedException(),
+            _ => "Unknown    "
+        };
+    }
+
+    private static string GetLogLevelColor( LogLevel logLevel )
+    {
+        return logLevel switch {
+            LogLevel.Trace => "grey42",
+            LogLevel.Debug => "grey42",
+            LogLevel.Information => "silver",
+            LogLevel.Warning => "yellow1",
+            LogLevel.Error => "red3",
+            LogLevel.Critical => "red3",
+            LogLevel.None => throw new NotImplementedException(),
+            _ => "grey42"
+        };
+    }
+
+    private sealed class NullScope : IDisposable
+    {
+        public static readonly NullScope Instance = new();
+        public void Dispose() { }
+    }
 }

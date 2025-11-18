@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Menus;
-using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
@@ -106,7 +106,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
     // public event EventHandler<MenuEventArgs>? OptionLeaving;
 
     private readonly ISwiftlyCore core;
-    private readonly List<IMenuOption> options = new();
+    private readonly List<IMenuOption> options = [];
     private readonly Lock optionsLock = new(); // Lock for synchronizing modifications to the `options`
     private readonly ConcurrentDictionary<IPlayer, int> selectedOptionIndex = new(); // Stores the currently selected option index for each player
     // NOTE: Menu selection movement is entirely driven by changes to `desiredOptionIndex` (independent of any other variables)

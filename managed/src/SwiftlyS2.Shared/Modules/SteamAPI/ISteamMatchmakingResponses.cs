@@ -7,8 +7,6 @@
 
 
 
-using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Shared.SteamAPI;
@@ -32,13 +30,13 @@ public class ISteamMatchmakingServerListResponse
     // A list refresh you had initiated is now 100% completed
     public delegate void RefreshComplete( HServerListRequest hRequest, EMatchMakingServerResponse response );
 
-    private VTable m_VTable;
-    private IntPtr m_pVTable;
+    private readonly VTable m_VTable;
+    private readonly IntPtr m_pVTable;
     private GCHandle m_pGCHandle;
-    private ServerResponded m_ServerResponded;
-    private ServerFailedToRespond m_ServerFailedToRespond;
-    private RefreshComplete m_RefreshComplete;
-    private static readonly Dictionary<IntPtr, ISteamMatchmakingServerListResponse> m_Instances = new Dictionary<IntPtr, ISteamMatchmakingServerListResponse>();
+    private readonly ServerResponded m_ServerResponded;
+    private readonly ServerFailedToRespond m_ServerFailedToRespond;
+    private readonly RefreshComplete m_RefreshComplete;
+    private static readonly Dictionary<IntPtr, ISteamMatchmakingServerListResponse> m_Instances = [];
 
     public ISteamMatchmakingServerListResponse( ServerResponded onServerResponded, ServerFailedToRespond onServerFailedToRespond, RefreshComplete onRefreshComplete )
     {
@@ -69,7 +67,7 @@ public class ISteamMatchmakingServerListResponse
     {
         lock (m_Instances)
         {
-            m_Instances.Remove(m_pVTable);
+            _ = m_Instances.Remove(m_pVTable);
         }
 
         if (m_pVTable != IntPtr.Zero)
@@ -95,7 +93,7 @@ public class ISteamMatchmakingServerListResponse
         {
             m_ServerResponded(hRequest, iServer);
         }
-        catch (Exception e)
+        catch (Exception)
         {
         }
     }
@@ -105,7 +103,7 @@ public class ISteamMatchmakingServerListResponse
         {
             m_ServerFailedToRespond(hRequest, iServer);
         }
-        catch (Exception e)
+        catch (Exception)
         {
         }
     }
@@ -115,7 +113,7 @@ public class ISteamMatchmakingServerListResponse
         {
             m_RefreshComplete(hRequest, response);
         }
-        catch (Exception e)
+        catch (Exception)
         {
         }
     }
@@ -136,7 +134,7 @@ public class ISteamMatchmakingServerListResponse
         public InternalRefreshComplete m_VTRefreshComplete;
     }
 
-    public static explicit operator System.IntPtr( ISteamMatchmakingServerListResponse that )
+    public static explicit operator nint( ISteamMatchmakingServerListResponse that )
     {
         return that.m_pGCHandle.AddrOfPinnedObject();
     }
@@ -160,12 +158,12 @@ public class ISteamMatchmakingPingResponse
     // Server failed to respond to the ping request
     public delegate void ServerFailedToRespond();
 
-    private VTable m_VTable;
-    private IntPtr m_pVTable;
+    private readonly VTable m_VTable;
+    private readonly IntPtr m_pVTable;
     private GCHandle m_pGCHandle;
-    private ServerResponded m_ServerResponded;
-    private ServerFailedToRespond m_ServerFailedToRespond;
-    private static readonly Dictionary<IntPtr, ISteamMatchmakingPingResponse> m_Instances = new Dictionary<IntPtr, ISteamMatchmakingPingResponse>();
+    private readonly ServerResponded m_ServerResponded;
+    private readonly ServerFailedToRespond m_ServerFailedToRespond;
+    private static readonly Dictionary<IntPtr, ISteamMatchmakingPingResponse> m_Instances = [];
 
     public ISteamMatchmakingPingResponse( ServerResponded onServerResponded, ServerFailedToRespond onServerFailedToRespond )
     {
@@ -194,7 +192,7 @@ public class ISteamMatchmakingPingResponse
     {
         lock (m_Instances)
         {
-            m_Instances.Remove(m_pVTable);
+            _ = m_Instances.Remove(m_pVTable);
         }
         if (m_pVTable != IntPtr.Zero)
         {
@@ -232,7 +230,7 @@ public class ISteamMatchmakingPingResponse
         public InternalServerFailedToRespond m_VTServerFailedToRespond;
     }
 
-    public static explicit operator System.IntPtr( ISteamMatchmakingPingResponse that )
+    public static explicit operator nint( ISteamMatchmakingPingResponse that )
     {
         return that.m_pGCHandle.AddrOfPinnedObject();
     }
@@ -262,13 +260,13 @@ public class ISteamMatchmakingPlayersResponse
     // (ie, you won't get anymore AddPlayerToList callbacks)
     public delegate void PlayersRefreshComplete();
 
-    private VTable m_VTable;
-    private IntPtr m_pVTable;
+    private readonly VTable m_VTable;
+    private readonly IntPtr m_pVTable;
     private GCHandle m_pGCHandle;
-    private AddPlayerToList m_AddPlayerToList;
-    private PlayersFailedToRespond m_PlayersFailedToRespond;
-    private PlayersRefreshComplete m_PlayersRefreshComplete;
-    private static readonly Dictionary<IntPtr, ISteamMatchmakingPlayersResponse> m_Instances = new Dictionary<IntPtr, ISteamMatchmakingPlayersResponse>();
+    private readonly AddPlayerToList m_AddPlayerToList;
+    private readonly PlayersFailedToRespond m_PlayersFailedToRespond;
+    private readonly PlayersRefreshComplete m_PlayersRefreshComplete;
+    private static readonly Dictionary<IntPtr, ISteamMatchmakingPlayersResponse> m_Instances = [];
 
     public ISteamMatchmakingPlayersResponse( AddPlayerToList onAddPlayerToList, PlayersFailedToRespond onPlayersFailedToRespond, PlayersRefreshComplete onPlayersRefreshComplete )
     {
@@ -299,7 +297,7 @@ public class ISteamMatchmakingPlayersResponse
     {
         lock (m_Instances)
         {
-            m_Instances.Remove(m_pVTable);
+            _ = m_Instances.Remove(m_pVTable);
         }
         if (m_pVTable != IntPtr.Zero)
         {
@@ -347,7 +345,7 @@ public class ISteamMatchmakingPlayersResponse
         public InternalPlayersRefreshComplete m_VTPlayersRefreshComplete;
     }
 
-    public static explicit operator System.IntPtr( ISteamMatchmakingPlayersResponse that )
+    public static explicit operator nint( ISteamMatchmakingPlayersResponse that )
     {
         return that.m_pGCHandle.AddrOfPinnedObject();
     }
@@ -377,13 +375,13 @@ public class ISteamMatchmakingRulesResponse
     // (ie, you won't get anymore RulesResponded callbacks)
     public delegate void RulesRefreshComplete();
 
-    private VTable m_VTable;
-    private IntPtr m_pVTable;
+    private readonly VTable m_VTable;
+    private readonly IntPtr m_pVTable;
     private GCHandle m_pGCHandle;
-    private RulesResponded m_RulesResponded;
-    private RulesFailedToRespond m_RulesFailedToRespond;
-    private RulesRefreshComplete m_RulesRefreshComplete;
-    private static readonly Dictionary<IntPtr, ISteamMatchmakingRulesResponse> m_Instances = new Dictionary<IntPtr, ISteamMatchmakingRulesResponse>();
+    private readonly RulesResponded m_RulesResponded;
+    private readonly RulesFailedToRespond m_RulesFailedToRespond;
+    private readonly RulesRefreshComplete m_RulesRefreshComplete;
+    private static readonly Dictionary<IntPtr, ISteamMatchmakingRulesResponse> m_Instances = [];
 
     public ISteamMatchmakingRulesResponse( RulesResponded onRulesResponded, RulesFailedToRespond onRulesFailedToRespond, RulesRefreshComplete onRulesRefreshComplete )
     {
@@ -414,7 +412,7 @@ public class ISteamMatchmakingRulesResponse
     {
         lock (m_Instances)
         {
-            m_Instances.Remove(m_pVTable);
+            _ = m_Instances.Remove(m_pVTable);
         }
         if (m_pVTable != IntPtr.Zero)
         {
@@ -462,7 +460,7 @@ public class ISteamMatchmakingRulesResponse
         public InternalRulesRefreshComplete m_VTRulesRefreshComplete;
     }
 
-    public static explicit operator System.IntPtr( ISteamMatchmakingRulesResponse that )
+    public static explicit operator nint( ISteamMatchmakingRulesResponse that )
     {
         return that.m_pGCHandle.AddrOfPinnedObject();
     }

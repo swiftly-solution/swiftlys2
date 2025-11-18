@@ -25,34 +25,34 @@ public interface IConsoleOutputService
     /// Gets whether console filtering is enabled.
     /// </summary>
     /// <returns>True if filtering is enabled, false otherwise.</returns>
-    bool IsFilterEnabled();
+    public bool IsFilterEnabled();
 
     /// <summary>
     /// Toggles the console filter on/off.
     /// </summary>
-    void ToggleFilter();
+    public void ToggleFilter();
 
     /// <summary>
     /// Reloads the filter configuration from file.
     /// </summary>
-    void ReloadFilterConfiguration();
+    public void ReloadFilterConfiguration();
 
     /// <summary>
     /// Checks if a message needs filtering.
     /// </summary>
     /// <param name="message">The message to check.</param>
     /// <returns>True if the message should be filtered, false otherwise.</returns>
-    bool NeedsFiltering(string message);
+    public bool NeedsFiltering( string message );
 
     /// <summary>
     /// Gets the counter text showing how many messages were filtered.
     /// </summary>
     /// <returns>The counter text.</returns>
-    string GetCounterText();
+    public string GetCounterText();
 
     /// <summary>
     /// Writes a message to the server console using the tier0 logging system.
     /// </summary>
     /// <param name="message">The message</param>
-    void WriteToServerConsole(string message);
+    public void WriteToServerConsole( string message );
 }
