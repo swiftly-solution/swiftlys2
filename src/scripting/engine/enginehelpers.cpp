@@ -183,19 +183,13 @@ int Bridge_EngineHelpers_GetIP(char* out)
     return s.size();
 }
 
+extern std::string workshop_map;
+
 int Bridge_EngineHelpers_GetWorkshopId(char* out)
 {
-    auto networkServerService = g_ifaceService.FetchInterface<INetworkServerService>(NETWORKSERVERSERVICE_INTERFACE_VERSION);
-    if (!networkServerService) return 0;
+    if (out != nullptr) strcpy(out, workshop_map.c_str());
 
-    auto server = networkServerService->GetIGameServer();
-    if (!server) return 0;
-
-    std::string addonId = server->GetAddonName();
-
-    if (out != nullptr) strcpy(out, addonId.c_str());
-
-    return addonId.size();
+    return workshop_map.size();
 }
 
 DEFINE_NATIVE("EngineHelpers.GetIP", Bridge_EngineHelpers_GetIP);

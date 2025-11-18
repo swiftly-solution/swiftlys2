@@ -210,8 +210,14 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
         auto& pInfo = ppInfoList[i];
         int playerid = pInfo->m_nPlayerSlot.Get();
         if (!playermanager->IsPlayerOnline(playerid))
+        {
             continue;
+        }
         auto player = playermanager->GetPlayer(playerid);
+        if (!player)
+        {
+            continue;
+        }
 
         auto& blockedBits = player->GetBlockedTransmittingBits();
 
@@ -275,12 +281,21 @@ bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint6
     static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
     auto playerid = slot.Get();
     auto player = playermanager->RegisterPlayer(playerid);
-    player->Initialize(playerid);
+    // player->Initialize(playerid);
+    if (!player)
+    {
+        return false;
+    }
+
     player->SetUnauthorizedSteamID(xuid);
 
     if (g_pOnClientConnectCallback)
+    {
         if (reinterpret_cast<bool (*)(int)>(g_pOnClientConnectCallback)(playerid) == false)
+        {
             return false;
+        }
+    }
 
     return reinterpret_cast<decltype(&ClientConnectHook)>(g_pClientConnectHook->GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, unk1, pRejectReason);
 }
@@ -291,8 +306,8 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
     auto playerid = slot.Get();
     if (bFakePlayer)
     {
-        auto player = playermanager->RegisterPlayer(playerid);
-        player->Initialize(playerid);
+        playermanager->RegisterPlayer(playerid);
+        // player->Initialize(playerid);
     }
     else
     {
@@ -326,10 +341,11 @@ IPlayer* CPlayerManager::RegisterPlayer(int playerid)
     if (g_Players[playerid] != nullptr)
         UnregisterPlayer(playerid);
 
-    g_Players[playerid] = new CPlayer();
-    g_Players[playerid]->Initialize(playerid);
+    auto player = new CPlayer();
+    player->Initialize(playerid);
+    g_Players[playerid] = player;
 
-    return g_Players[playerid];
+    return player;
 }
 
 void CPlayerManager::UnregisterPlayer(int playerid)
@@ -341,11 +357,13 @@ void CPlayerManager::UnregisterPlayer(int playerid)
 
     static auto vgui = g_ifaceService.FetchInterface<IVGUI>(VGUI_INTERFACE_VERSION);
 
-    vgui->UnregisterForPlayer(g_Players[playerid]);
-
-    g_Players[playerid]->Shutdown();
-    delete g_Players[playerid];
+    auto player = g_Players[playerid];
     g_Players[playerid] = nullptr;
+
+    vgui->UnregisterForPlayer(player);
+
+    player->Shutdown();
+    delete player;
 }
 
 IPlayer* CPlayerManager::GetPlayer(int playerid)
