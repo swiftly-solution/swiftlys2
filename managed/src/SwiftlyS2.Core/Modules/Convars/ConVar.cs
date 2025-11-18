@@ -6,7 +6,7 @@ using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Core.Convars;
 
-internal delegate void ConVarCallbackDelegate(int playerId, nint name, nint value);
+internal delegate void ConVarCallbackDelegate( int playerId, nint name, nint value );
 
 internal class ConVar<T> : IConVar<T>
 {
@@ -27,25 +27,21 @@ internal class ConVar<T> : IConVar<T>
         && Type != EConVarType.EConVarType_String
         && Type != EConVarType.EConVarType_Color;
 
-    public T MinValue
-    {
+    public T MinValue {
         get => GetMinValue();
         set => SetMinValue(value);
     }
-    public T MaxValue
-    {
+    public T MaxValue {
         get => GetMaxValue();
         set => SetMaxValue(value);
     }
 
-    public T DefaultValue
-    {
+    public T DefaultValue {
         get => GetDefaultValue();
         set => SetDefaultValue(value);
     }
 
-    public ConvarFlags Flags
-    {
+    public ConvarFlags Flags {
         get => (ConvarFlags)NativeConvars.GetFlags(Name);
         set => NativeConvars.SetFlags(Name, (ulong)value);
     }
@@ -57,7 +53,7 @@ internal class ConVar<T> : IConVar<T>
 
     public string Name { get; set; }
 
-    internal ConVar(string name)
+    internal ConVar( string name )
     {
         Name = name;
 
@@ -88,16 +84,14 @@ internal class ConVar<T> : IConVar<T>
         }
     }
 
-    public T Value
-    {
+    public T Value {
         get => GetValue();
         set => SetValue(value);
     }
 
-    public void ReplicateToClient(int clientId, T value)
+    public void ReplicateToClient( int clientId, T value )
     {
-        var val = value switch
-        {
+        var val = value switch {
             bool boolValue => boolValue ? "1" : "0",
             short shortValue => shortValue.ToString(),
             ushort ushortValue => ushortValue.ToString(),
@@ -120,10 +114,10 @@ internal class ConVar<T> : IConVar<T>
         NativeConvars.SetClientConvarValueString(clientId, Name, val);
     }
 
-    public void QueryClient(int clientId, Action<string> callback)
+    public void QueryClient( int clientId, Action<string> callback )
     {
         Action? removeSelf = null;
-        void nativeCallback(int playerId, nint namePtr, nint valuePtr)
+        void nativeCallback( int playerId, nint namePtr, nint valuePtr )
         {
             if (clientId != playerId)
                 return;
@@ -169,7 +163,7 @@ internal class ConVar<T> : IConVar<T>
         }
     }
 
-    public void SetValue(T value)
+    public void SetValue( T value )
     {
         unsafe
         {
@@ -185,7 +179,7 @@ internal class ConVar<T> : IConVar<T>
         }
     }
 
-    public void SetInternal(T value)
+    public void SetInternal( T value )
     {
         unsafe
         {
@@ -233,7 +227,7 @@ internal class ConVar<T> : IConVar<T>
         }
     }
 
-    public void SetMinValue(T minValue)
+    public void SetMinValue( T minValue )
     {
         if (!IsMinMaxType)
         {
@@ -249,7 +243,7 @@ internal class ConVar<T> : IConVar<T>
         }
     }
 
-    public void SetMaxValue(T maxValue)
+    public void SetMaxValue( T maxValue )
     {
         if (!IsMinMaxType)
         {
@@ -280,7 +274,7 @@ internal class ConVar<T> : IConVar<T>
         }
     }
 
-    public void SetDefaultValue(T defaultValue)
+    public void SetDefaultValue( T defaultValue )
     {
         unsafe
         {
@@ -302,7 +296,7 @@ internal class ConVar<T> : IConVar<T>
         }
     }
 
-    public bool TryGetMinValue(out T minValue)
+    public bool TryGetMinValue( out T minValue )
     {
         if (!IsMinMaxType)
         {
@@ -318,7 +312,7 @@ internal class ConVar<T> : IConVar<T>
         return true;
     }
 
-    public bool TryGetMaxValue(out T maxValue)
+    public bool TryGetMaxValue( out T maxValue )
     {
         if (!IsMinMaxType)
         {
@@ -334,7 +328,7 @@ internal class ConVar<T> : IConVar<T>
         return true;
     }
 
-    public bool TryGetDefaultValue(out T defaultValue)
+    public bool TryGetDefaultValue( out T defaultValue )
     {
         if (!HasDefaultValue)
         {

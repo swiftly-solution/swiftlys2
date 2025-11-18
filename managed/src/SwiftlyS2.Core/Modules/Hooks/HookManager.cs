@@ -69,11 +69,7 @@ internal class HookManager
         {
             if (_chains.TryGetValue(functionAddress, out var chain))
             {
-                if (!chain.Hooked)
-                {
-                    return functionAddress;
-                }
-                return chain.Nodes.Count == 0 ? chain.OriginalFunctionAddress : chain.Nodes[^1].OriginalFuncPtr;
+                return !chain.Hooked ? functionAddress : chain.Nodes.Count == 0 ? chain.OriginalFunctionAddress : chain.Nodes[^1].OriginalFuncPtr;
             }
             return nint.Zero;
         }

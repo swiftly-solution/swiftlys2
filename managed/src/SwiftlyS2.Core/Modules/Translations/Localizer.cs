@@ -21,12 +21,9 @@ internal class Localizer : ILocalizer
 
     public string Get( string key )
     {
-        if (_Resource.ContainsKey(key))
-        {
-            return _Resource[key];
-        }
-
-        return _DefaultResource.ContainsKey(key) ? _DefaultResource[key] : throw new Exception($"Translation key {key} not found.");
+        return _Resource.ContainsKey(key)
+            ? _Resource[key]
+            : _DefaultResource.ContainsKey(key) ? _DefaultResource[key] : throw new Exception($"Translation key {key} not found.");
     }
 
 }

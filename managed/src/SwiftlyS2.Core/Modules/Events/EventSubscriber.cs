@@ -99,7 +99,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnClientConnected(OnClientConnectedEvent @event)
+    public void InvokeOnClientConnected( OnClientConnectedEvent @event )
     {
         try
         {
@@ -119,7 +119,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnClientDisconnected(OnClientDisconnectedEvent @event)
+    public void InvokeOnClientDisconnected( OnClientDisconnectedEvent @event )
     {
         try
         {
@@ -139,7 +139,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnClientKeyStateChanged(OnClientKeyStateChangedEvent @event)
+    public void InvokeOnClientKeyStateChanged( OnClientKeyStateChangedEvent @event )
     {
         try
         {
@@ -159,7 +159,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnClientPutInServer(OnClientPutInServerEvent @event)
+    public void InvokeOnClientPutInServer( OnClientPutInServerEvent @event )
     {
         try
         {
@@ -179,7 +179,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnClientSteamAuthorize(OnClientSteamAuthorizeEvent @event)
+    public void InvokeOnClientSteamAuthorize( OnClientSteamAuthorizeEvent @event )
     {
         try
         {
@@ -199,7 +199,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnClientSteamAuthorizeFail(OnClientSteamAuthorizeFailEvent @event)
+    public void InvokeOnClientSteamAuthorizeFail( OnClientSteamAuthorizeFailEvent @event )
     {
         try
         {
@@ -219,7 +219,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnEntityCreated(OnEntityCreatedEvent @event)
+    public void InvokeOnEntityCreated( OnEntityCreatedEvent @event )
     {
         try
         {
@@ -239,7 +239,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnEntityDeleted(OnEntityDeletedEvent @event)
+    public void InvokeOnEntityDeleted( OnEntityDeletedEvent @event )
     {
         try
         {
@@ -259,7 +259,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnEntityParentChanged(OnEntityParentChangedEvent @event)
+    public void InvokeOnEntityParentChanged( OnEntityParentChangedEvent @event )
     {
         try
         {
@@ -279,7 +279,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnEntitySpawned(OnEntitySpawnedEvent @event)
+    public void InvokeOnEntitySpawned( OnEntitySpawnedEvent @event )
     {
         try
         {
@@ -299,7 +299,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnMapLoad(OnMapLoadEvent @event)
+    public void InvokeOnMapLoad( OnMapLoadEvent @event )
     {
         try
         {
@@ -319,7 +319,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnMapUnload(OnMapUnloadEvent @event)
+    public void InvokeOnMapUnload( OnMapUnloadEvent @event )
     {
         try
         {
@@ -339,7 +339,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnClientProcessUsercmds(OnClientProcessUsercmdsEvent @event)
+    public void InvokeOnClientProcessUsercmds( OnClientProcessUsercmdsEvent @event )
     {
         try
         {
@@ -359,7 +359,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnEntityTakeDamage(OnEntityTakeDamageEvent @event)
+    public void InvokeOnEntityTakeDamage( OnEntityTakeDamageEvent @event )
     {
         try
         {
@@ -379,7 +379,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnPrecacheResource(OnPrecacheResourceEvent @event)
+    public void InvokeOnPrecacheResource( OnPrecacheResourceEvent @event )
     {
         try
         {
@@ -399,7 +399,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnEntityStartTouch(OnEntityStartTouchEvent @event)
+    public void InvokeOnEntityStartTouch( OnEntityStartTouchEvent @event )
     {
         try
         {
@@ -419,7 +419,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnEntityTouch(OnEntityTouchEvent @event)
+    public void InvokeOnEntityTouch( OnEntityTouchEvent @event )
     {
         try
         {
@@ -439,7 +439,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnEntityEndTouch(OnEntityEndTouchEvent @event)
+    public void InvokeOnEntityEndTouch( OnEntityEndTouchEvent @event )
     {
         try
         {
@@ -477,7 +477,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnItemServicesCanAcquireHook(OnItemServicesCanAcquireHookEvent @event)
+    public void InvokeOnItemServicesCanAcquireHook( OnItemServicesCanAcquireHookEvent @event )
     {
         try
         {
@@ -497,7 +497,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnWeaponServicesCanUseHook(OnWeaponServicesCanUseHookEvent @event)
+    public void InvokeOnWeaponServicesCanUseHook( OnWeaponServicesCanUseHookEvent @event )
     {
         try
         {
@@ -517,7 +517,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnConsoleOutput(OnConsoleOutputEvent @event)
+    public void InvokeOnConsoleOutput( OnConsoleOutputEvent @event )
     {
         try
         {
@@ -537,7 +537,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnConVarValueChanged(OnConVarValueChanged @event)
+    public void InvokeOnConVarValueChanged( OnConVarValueChanged @event )
     {
         try
         {
@@ -557,7 +557,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnConCommandCreated(OnConCommandCreated @event)
+    public void InvokeOnConCommandCreated( OnConCommandCreated @event )
     {
         try
         {
@@ -577,7 +577,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnConVarCreated(OnConVarCreated @event)
+    public void InvokeOnConVarCreated( OnConVarCreated @event )
     {
         try
         {
@@ -597,7 +597,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnCommandExecuteHook(OnCommandExecuteHookEvent @event)
+    public void InvokeOnCommandExecuteHook( OnCommandExecuteHookEvent @event )
     {
         try
         {
@@ -617,7 +617,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         }
     }
 
-    public void InvokeOnMovementServicesRunCommandHook(OnMovementServicesRunCommandHookEvent @event)
+    public void InvokeOnMovementServicesRunCommandHook( OnMovementServicesRunCommandHookEvent @event )
     {
         try
         {

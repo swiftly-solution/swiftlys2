@@ -10,7 +10,7 @@ internal static class MemoryPatch
     private static extern int mprotect( nint addr, nint len, int prot );
 
     [DllImport("kernel32.dll", SetLastError = true)]
-    private static     unsafe extern bool VirtualProtect( nint addr, int size, int newProt, int* oldProt );
+    private static unsafe extern bool VirtualProtect( nint addr, int size, int newProt, int* oldProt );
 
     public unsafe static bool SetMemAccess( nint addr, int size )
     {

@@ -281,8 +281,8 @@ internal static class CSteamGameServerAPIContext
 
     internal static bool Init()
     {
-        HSteamUser hSteamUser = GameServer.GetHSteamUser();
-        HSteamPipe hSteamPipe = GameServer.GetHSteamPipe();
+        var hSteamUser = GameServer.GetHSteamUser();
+        var hSteamPipe = GameServer.GetHSteamPipe();
         if (hSteamPipe == (HSteamPipe)0) { return false; }
 
         using (var pchVersionString = new InteropHelp.UTF8StringHandle(Constants.STEAMCLIENT_INTERFACE_VERSION))

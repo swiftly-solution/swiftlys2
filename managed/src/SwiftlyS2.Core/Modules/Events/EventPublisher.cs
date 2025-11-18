@@ -15,12 +15,12 @@ internal static class EventPublisher
 {
     private static readonly List<EventSubscriber> _subscribers = [];
 
-    public static void Subscribe(EventSubscriber subscriber)
+    public static void Subscribe( EventSubscriber subscriber )
     {
         _subscribers.Add(subscriber);
     }
 
-    public static void Unsubscribe(EventSubscriber subscriber)
+    public static void Unsubscribe( EventSubscriber subscriber )
     {
         _ = _subscribers.Remove(subscriber);
     }
@@ -30,74 +30,74 @@ internal static class EventPublisher
         unsafe
         {
             NativeEvents.RegisterOnGameTickCallback(
-                (nint)(delegate* unmanaged<byte, byte, byte, void>)&OnTick
+                (nint)(delegate* unmanaged< byte, byte, byte, void >)&OnTick
             );
             NativeEvents.RegisterOnPreworldUpdateCallback(
-                (nint)(delegate* unmanaged<byte, void>)&OnPreworldUpdate
+                (nint)(delegate* unmanaged< byte, void >)&OnPreworldUpdate
             );
             NativeEvents.RegisterOnClientConnectCallback(
-                (nint)(delegate* unmanaged<int, byte>)&OnClientConnected
+                (nint)(delegate* unmanaged< int, byte >)&OnClientConnected
             );
             NativeEvents.RegisterOnClientDisconnectCallback(
-                (nint)(delegate* unmanaged<int, int, void>)&OnClientDisconnected
+                (nint)(delegate* unmanaged< int, int, void >)&OnClientDisconnected
             );
             NativeEvents.RegisterOnClientKeyStateChangedCallback(
-                (nint)(delegate* unmanaged<int, GameButtons, byte, void>)&OnClientKeyStateChanged
+                (nint)(delegate* unmanaged< int, GameButtons, byte, void >)&OnClientKeyStateChanged
             );
             NativeEvents.RegisterOnClientPutInServerCallback(
-                (nint)(delegate* unmanaged<int, int, void>)&OnClientPutInServer
+                (nint)(delegate* unmanaged< int, int, void >)&OnClientPutInServer
             );
             NativeEvents.RegisterOnClientSteamAuthorizeCallback(
-                (nint)(delegate* unmanaged<int, void>)&OnClientSteamAuthorize
+                (nint)(delegate* unmanaged< int, void >)&OnClientSteamAuthorize
             );
             NativeEvents.RegisterOnClientSteamAuthorizeFailCallback(
-                (nint)(delegate* unmanaged<int, void>)&OnClientSteamAuthorizeFail
+                (nint)(delegate* unmanaged< int, void >)&OnClientSteamAuthorizeFail
             );
             NativeEvents.RegisterOnEntityCreatedCallback(
-                (nint)(delegate* unmanaged<nint, void>)&OnEntityCreated
+                (nint)(delegate* unmanaged< nint, void >)&OnEntityCreated
             );
             NativeEvents.RegisterOnEntityDeletedCallback(
-                (nint)(delegate* unmanaged<nint, void>)&OnEntityDeleted
+                (nint)(delegate* unmanaged< nint, void >)&OnEntityDeleted
             );
             NativeEvents.RegisterOnEntityParentChangedCallback(
-                (nint)(delegate* unmanaged<nint, nint, void>)&OnEntityParentChanged
+                (nint)(delegate* unmanaged< nint, nint, void >)&OnEntityParentChanged
             );
             NativeEvents.RegisterOnEntitySpawnedCallback(
-                (nint)(delegate* unmanaged<nint, void>)&OnEntitySpawned
+                (nint)(delegate* unmanaged< nint, void >)&OnEntitySpawned
             );
             NativeEvents.RegisterOnMapLoadCallback(
-                (nint)(delegate* unmanaged<nint, void>)&OnMapLoad
+                (nint)(delegate* unmanaged< nint, void >)&OnMapLoad
             );
             NativeEvents.RegisterOnMapUnloadCallback(
-                (nint)(delegate* unmanaged<nint, void>)&OnMapUnload
+                (nint)(delegate* unmanaged< nint, void >)&OnMapUnload
             );
             NativeEvents.RegisterOnClientProcessUsercmdsCallback(
                 (nint)
-                    (delegate* unmanaged<int, nint, int, byte, float, void>)&OnClientProcessUsercmds
+                    (delegate* unmanaged< int, nint, int, byte, float, void >)&OnClientProcessUsercmds
             );
             NativeEvents.RegisterOnEntityTakeDamageCallback(
-                (nint)(delegate* unmanaged<nint, nint, byte>)&OnEntityTakeDamage
+                (nint)(delegate* unmanaged< nint, nint, byte >)&OnEntityTakeDamage
             );
             NativeEvents.RegisterOnPrecacheResourceCallback(
-                (nint)(delegate* unmanaged<nint, void>)&OnPrecacheResource
+                (nint)(delegate* unmanaged< nint, void >)&OnPrecacheResource
             );
             _ = NativeConvars.AddConvarCreatedListener(
-                (nint)(delegate* unmanaged<nint, void>)&OnConVarCreated
+                (nint)(delegate* unmanaged< nint, void >)&OnConVarCreated
             );
             _ = NativeConvars.AddConCommandCreatedListener(
-                (nint)(delegate* unmanaged<nint, void>)&OnConCommandCreated
+                (nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated
             );
             _ = NativeConvars.AddGlobalChangeListener(
-                (nint)(delegate* unmanaged<nint, int, nint, nint, void>)&OnConVarValueChanged
+                (nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged
             );
             _ = NativeConsoleOutput.AddConsoleListener(
-                (nint)(delegate* unmanaged<nint, void>)&OnConsoleOutput
+                (nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput
             );
         }
     }
 
     [UnmanagedCallersOnly]
-    public static void OnConVarCreated(nint convarNamePtr)
+    public static void OnConVarCreated( nint convarNamePtr )
     {
         if (_subscribers.Count == 0)
             return;
@@ -119,7 +119,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnConCommandCreated(nint commandNamePtr)
+    public static void OnConCommandCreated( nint commandNamePtr )
     {
         if (_subscribers.Count == 0)
             return;
@@ -155,8 +155,7 @@ internal static class EventPublisher
             var convarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty;
             var newValue = Marshal.PtrToStringUTF8(newValuePtr) ?? string.Empty;
             var oldValue = Marshal.PtrToStringUTF8(oldValuePtr) ?? string.Empty;
-            OnConVarValueChanged @event = new()
-            {
+            OnConVarValueChanged @event = new() {
                 ConVarName = convarName,
                 PlayerId = playerid,
                 NewValue = newValue,
@@ -176,7 +175,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnTick(byte simulating, byte first, byte last)
+    public static void OnTick( byte simulating, byte first, byte last )
     {
         SchedulerManager.OnTick();
         // CallbackDispatcher.RunFrame(true);
@@ -195,7 +194,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnPreworldUpdate(byte simulating)
+    public static void OnPreworldUpdate( byte simulating )
     {
         SchedulerManager.OnWorldUpdate();
         if (_subscribers.Count == 0)
@@ -213,7 +212,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static byte OnClientConnected(int playerId)
+    public static byte OnClientConnected( int playerId )
     {
         if (_subscribers.Count == 0)
             return 1;
@@ -247,14 +246,13 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnClientDisconnected(int playerId, int reason)
+    public static void OnClientDisconnected( int playerId, int reason )
     {
         if (_subscribers.Count == 0)
             return;
         try
         {
-            OnClientDisconnectedEvent @event = new()
-            {
+            OnClientDisconnectedEvent @event = new() {
                 PlayerId = playerId,
                 Reason = (ENetworkDisconnectionReason)reason,
             };
@@ -273,14 +271,13 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnClientKeyStateChanged(int playerId, GameButtons key, byte pressed)
+    public static void OnClientKeyStateChanged( int playerId, GameButtons key, byte pressed )
     {
         if (_subscribers.Count == 0)
             return;
         try
         {
-            OnClientKeyStateChangedEvent @event = new()
-            {
+            OnClientKeyStateChangedEvent @event = new() {
                 PlayerId = playerId,
                 Key = key.ToKeyKind(),
                 Pressed = pressed != 0,
@@ -299,14 +296,13 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnClientPutInServer(int playerId, int clientKind)
+    public static void OnClientPutInServer( int playerId, int clientKind )
     {
         if (_subscribers.Count == 0)
             return;
         try
         {
-            OnClientPutInServerEvent @event = new()
-            {
+            OnClientPutInServerEvent @event = new() {
                 PlayerId = playerId,
                 Kind = (ClientKind)clientKind,
             };
@@ -324,7 +320,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnClientSteamAuthorize(int playerId)
+    public static void OnClientSteamAuthorize( int playerId )
     {
         if (_subscribers.Count == 0)
             return;
@@ -345,7 +341,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnClientSteamAuthorizeFail(int playerId)
+    public static void OnClientSteamAuthorizeFail( int playerId )
     {
         if (_subscribers.Count == 0)
             return;
@@ -366,7 +362,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnEntityCreated(nint entityPtr)
+    public static void OnEntityCreated( nint entityPtr )
     {
         if (_subscribers.Count == 0)
             return;
@@ -388,7 +384,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnEntityDeleted(nint entityPtr)
+    public static void OnEntityDeleted( nint entityPtr )
     {
         if (_subscribers.Count == 0)
             return;
@@ -410,7 +406,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnEntityParentChanged(nint entityPtr, nint newParentPtr)
+    public static void OnEntityParentChanged( nint entityPtr, nint newParentPtr )
     {
         if (_subscribers.Count == 0)
             return;
@@ -434,7 +430,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnEntitySpawned(nint entityPtr)
+    public static void OnEntitySpawned( nint entityPtr )
     {
         if (_subscribers.Count == 0)
             return;
@@ -456,7 +452,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnMapLoad(nint mapNamePtr)
+    public static void OnMapLoad( nint mapNamePtr )
     {
         if (_subscribers.Count == 0)
             return;
@@ -478,7 +474,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnMapUnload(nint mapNamePtr)
+    public static void OnMapUnload( nint mapNamePtr )
     {
         if (_subscribers.Count == 0)
             return;
@@ -522,8 +518,7 @@ internal static class EventPublisher
                     usercmds.Add(usercmd);
                 }
 
-                OnClientProcessUsercmdsEvent @event = new()
-                {
+                OnClientProcessUsercmdsEvent @event = new() {
                     PlayerId = playerId,
                     Usercmds = usercmds,
                     Paused = paused != 0,
@@ -544,7 +539,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static byte OnEntityTakeDamage(nint entityPtr, nint takeDamageInfoPtr)
+    public static byte OnEntityTakeDamage( nint entityPtr, nint takeDamageInfoPtr )
     {
         if (_subscribers.Count == 0)
             return 1;
@@ -553,8 +548,7 @@ internal static class EventPublisher
             unsafe
             {
                 var entity = new CEntityInstanceImpl(entityPtr);
-                OnEntityTakeDamageEvent @event = new()
-                {
+                OnEntityTakeDamageEvent @event = new() {
                     Entity = entity,
                     _infoPtr = takeDamageInfoPtr,
                 };
@@ -585,7 +579,7 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnPrecacheResource(nint pResourceManifest)
+    public static void OnPrecacheResource( nint pResourceManifest )
     {
         if (_subscribers.Count == 0)
             return;
@@ -605,7 +599,7 @@ internal static class EventPublisher
         }
     }
 
-    public static void InvokeOnEntityStartTouch(OnEntityStartTouchEvent @event)
+    public static void InvokeOnEntityStartTouch( OnEntityStartTouchEvent @event )
     {
         if (_subscribers.Count == 0)
             return;
@@ -626,7 +620,7 @@ internal static class EventPublisher
         }
     }
 
-    public static void InvokeOnEntityTouch(OnEntityTouchEvent @event)
+    public static void InvokeOnEntityTouch( OnEntityTouchEvent @event )
     {
         if (_subscribers.Count == 0)
             return;
@@ -647,7 +641,7 @@ internal static class EventPublisher
         }
     }
 
-    public static void InvokeOnEntityEndTouch(OnEntityEndTouchEvent @event)
+    public static void InvokeOnEntityEndTouch( OnEntityEndTouchEvent @event )
     {
         if (_subscribers.Count == 0)
             return;
@@ -689,7 +683,7 @@ internal static class EventPublisher
         }
     }
 
-    public static void InvokeOnCanAcquireHook(OnItemServicesCanAcquireHookEvent @event)
+    public static void InvokeOnCanAcquireHook( OnItemServicesCanAcquireHookEvent @event )
     {
         if (_subscribers.Count == 0)
             return;
@@ -714,7 +708,7 @@ internal static class EventPublisher
         }
     }
 
-    public static void InvokeOnWeaponServicesCanUseHook(OnWeaponServicesCanUseHookEvent @event)
+    public static void InvokeOnWeaponServicesCanUseHook( OnWeaponServicesCanUseHookEvent @event )
     {
         if (_subscribers.Count == 0)
             return;
@@ -734,14 +728,13 @@ internal static class EventPublisher
     }
 
     [UnmanagedCallersOnly]
-    public static void OnConsoleOutput(nint messagePtr)
+    public static void OnConsoleOutput( nint messagePtr )
     {
         if (_subscribers.Count == 0)
             return;
         try
         {
-            OnConsoleOutputEvent @event = new()
-            {
+            OnConsoleOutputEvent @event = new() {
                 Message = Marshal.PtrToStringUTF8(messagePtr) ?? string.Empty,
             };
             foreach (var subscriber in _subscribers)
@@ -757,7 +750,7 @@ internal static class EventPublisher
         }
     }
 
-    public static void InvokeOnCommandExecuteHook(OnCommandExecuteHookEvent @event)
+    public static void InvokeOnCommandExecuteHook( OnCommandExecuteHookEvent @event )
     {
         if (_subscribers.Count == 0)
             return;

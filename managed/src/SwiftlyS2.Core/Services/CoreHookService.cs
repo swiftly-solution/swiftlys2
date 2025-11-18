@@ -20,7 +20,7 @@ internal class CoreHookService : IDisposable
     private ILogger<CoreHookService> _Logger { get; init; }
     private ISwiftlyCore _Core { get; init; }
 
-    public CoreHookService(ILogger<CoreHookService> logger, ISwiftlyCore core)
+    public CoreHookService( ILogger<CoreHookService> logger, ISwiftlyCore core )
     {
         _Logger = logger;
         _Core = core;
@@ -65,14 +65,14 @@ internal class CoreHookService : IDisposable
 
       So we model it as a fixed 5-parameter function for interop purposes
     */
-    private delegate nint ExecuteCommandDelegate(nint a1, int a2, uint a3, nint a4, nint a5);
+    private delegate nint ExecuteCommandDelegate( nint a1, int a2, uint a3, nint a4, nint a5 );
 
     private delegate byte CCSPlayer_WeaponServices_CanUse(
         nint pWeaponServices,
         nint pBasePlayerWeapon
     );
-    private delegate nint CBaseEntity_Touch_Template(nint pBaseEntity, nint pOtherEntity);
-    private delegate void SteamServerAPIActivated(nint pServer);
+    private delegate nint CBaseEntity_Touch_Template( nint pBaseEntity, nint pOtherEntity );
+    private delegate void SteamServerAPIActivated( nint pServer );
     private delegate nint CPlayer_MovementServices_RunCommandDelegate(
         nint pMovementServices,
         nint pUserCmd
@@ -117,7 +117,7 @@ internal class CoreHookService : IDisposable
         );
         _SteamServerAPIActivatedGuid = _SteamServerAPIActivated.AddHook(next =>
         {
-            return (pServer) =>
+            return ( pServer ) =>
             {
                 if (!CSteamGameServerAPIContext.Init())
                 {
@@ -152,15 +152,14 @@ internal class CoreHookService : IDisposable
         );
         _CCSPlayer_WeaponServices_CanUseGuid = _CCSPlayer_WeaponServices_CanUse.AddHook(next =>
         {
-            return (pWeaponServices, pBasePlayerWeapon) =>
+            return ( pWeaponServices, pBasePlayerWeapon ) =>
             {
                 var result = next()(pWeaponServices, pBasePlayerWeapon);
 
                 var weaponServices = new CCSPlayer_WeaponServicesImpl(pWeaponServices);
                 var basePlayerWeapon = new CCSWeaponBaseImpl(pBasePlayerWeapon);
 
-                var @event = new OnWeaponServicesCanUseHookEvent
-                {
+                var @event = new OnWeaponServicesCanUseHookEvent {
                     WeaponServices = weaponServices,
                     Weapon = basePlayerWeapon,
                     OriginalResult = result != 0,
@@ -217,7 +216,7 @@ internal class CoreHookService : IDisposable
 
         _CBaseEntity_StartTouchGuid = _CBaseEntity_StartTouch.AddHook(next =>
         {
-            return (pBaseEntity, pOtherEntity) =>
+            return ( pBaseEntity, pOtherEntity ) =>
             {
                 var entity = new CBaseEntityImpl(pBaseEntity);
                 var otherEntity = new CBaseEntityImpl(pOtherEntity);
@@ -230,7 +229,7 @@ internal class CoreHookService : IDisposable
 
         _CBaseEntity_TouchGuid = _CBaseEntity_Touch.AddHook(next =>
         {
-            return (pBaseEntity, pOtherEntity) =>
+            return ( pBaseEntity, pOtherEntity ) =>
             {
                 var entity = new CBaseEntityImpl(pBaseEntity);
                 var otherEntity = new CBaseEntityImpl(pOtherEntity);
@@ -243,7 +242,7 @@ internal class CoreHookService : IDisposable
 
         _CBaseEntity_EndTouchGuid = _CBaseEntity_EndTouch.AddHook(next =>
         {
-            return (pBaseEntity, pOtherEntity) =>
+            return ( pBaseEntity, pOtherEntity ) =>
             {
                 var entity = new CBaseEntityImpl(pBaseEntity);
                 var otherEntity = new CBaseEntityImpl(pOtherEntity);
@@ -264,7 +263,7 @@ internal class CoreHookService : IDisposable
         _CanAcquire = _Core.Memory.GetUnmanagedFunctionByAddress<CanAcquireDelegate>(address);
         _CanAcquireGuid = _CanAcquire.AddHook(next =>
         {
-            return (pItemServices, pEconItemView, acquireMethod, unk1) =>
+            return ( pItemServices, pEconItemView, acquireMethod, unk1 ) =>
             {
                 var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
 
@@ -273,8 +272,7 @@ internal class CoreHookService : IDisposable
                 );
                 var econItemView = _Core.Memory.ToSchemaClass<CEconItemView>(pEconItemView);
 
-                var @event = new OnItemServicesCanAcquireHookEvent
-                {
+                var @event = new OnItemServicesCanAcquireHookEvent {
                     ItemServices = itemServices,
                     EconItemView = econItemView,
                     WeaponVData = _Core.Helpers.GetWeaponCSDataFromKey(
@@ -307,9 +305,9 @@ internal class CoreHookService : IDisposable
             address
         );
         _ExecuteCommandGuid = _ExecuteCommand.AddHook(
-            (next) =>
+            ( next ) =>
             {
-                return (a1, a2, a3, a4, a5) =>
+                return ( a1, a2, a3, a4, a5 ) =>
                 {
                     unsafe
                     {
@@ -344,7 +342,7 @@ internal class CoreHookService : IDisposable
         nint pConCommandName,
         int unk1
     );
-    private delegate nint FindConCommandDelegateLinux(nint pICvar, nint pConCommandName, int unk1);
+    private delegate nint FindConCommandDelegateLinux( nint pICvar, nint pConCommandName, int unk1 );
 
     private IUnmanagedFunction<FindConCommandDelegate>? _FindConCommandWindows;
     private IUnmanagedFunction<FindConCommandDelegateLinux>? _FindConCommandLinux;
@@ -367,9 +365,9 @@ internal class CoreHookService : IDisposable
             );
 
             _FindConCommandGuid = _FindConCommandLinux.AddHook(
-                (next) =>
+                ( next ) =>
                 {
-                    return (pICvar, pConCommandName, unk1) =>
+                    return ( pICvar, pConCommandName, unk1 ) =>
                     {
                         var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
                         if (commandName.StartsWith("^wb^"))
@@ -405,9 +403,9 @@ internal class CoreHookService : IDisposable
             );
 
             _FindConCommandGuid = _FindConCommandWindows.AddHook(
-                (next) =>
+                ( next ) =>
                 {
-                    return (pICvar, pRet, pConCommandName, unk1) =>
+                    return ( pICvar, pRet, pConCommandName, unk1 ) =>
                     {
                         var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
                         if (commandName.StartsWith("^wb^"))
@@ -449,9 +447,9 @@ internal class CoreHookService : IDisposable
             _CPlayer_MovementServices_RunCommand.Address
         );
         _CPlayer_MovementServices_RunCommandGuid = _CPlayer_MovementServices_RunCommand.AddHook(
-            (next) =>
+            ( next ) =>
             {
-                return (pMovementServices, pUserCmd) =>
+                return ( pMovementServices, pUserCmd ) =>
                 {
                     var movementService = new CCSPlayer_MovementServicesImpl(pMovementServices);
 
@@ -459,8 +457,7 @@ internal class CoreHookService : IDisposable
 
                     var buttonState = new CInButtonStateImpl(pUserCmd + 0x58);
 
-                    var @event = new OnMovementServicesRunCommandHookEvent
-                    {
+                    var @event = new OnMovementServicesRunCommandHookEvent {
                         MovementServices = movementService,
                         ButtonState = buttonState,
                         UserCmdPB = userCmdPb,
