@@ -1,11 +1,11 @@
-using System.Reflection;
 using System.Runtime;
+using System.Reflection;
 using System.Runtime.InteropServices;
-using Microsoft.Extensions.Logging;
 using Spectre.Console;
-using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.Plugins;
+using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared;
+using SwiftlyS2.Core.Plugins;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Commands;
 
 namespace SwiftlyS2.Core.Services;
