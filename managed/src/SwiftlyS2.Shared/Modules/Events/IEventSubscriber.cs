@@ -5,6 +5,7 @@ namespace SwiftlyS2.Shared.Events;
 /// </summary>
 public interface IEventSubscriber
 {
+
     /// <summary>
     /// Called when game has processed a tick. Won't be called if the server is in hibernation.
     /// This callback is a hot path, be careful with it and don't do anything expensive.
@@ -132,6 +133,9 @@ public interface IEventSubscriber
     /// Called when a command is executed.
     /// </summary>
     public event EventDelegates.OnCommandExecuteHook? OnCommandExecuteHook;
+
+    [Obsolete("OnEntityTouchHook is deprecated. Use OnEntityStartTouch, OnEntityTouch, or OnEntityEndTouch instead.")]
+    public event EventDelegates.OnEntityTouchHook? OnEntityTouchHook;
 
     /// <summary>
     /// Called when an entity starts touching another entity.

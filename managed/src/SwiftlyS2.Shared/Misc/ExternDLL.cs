@@ -41,7 +41,7 @@ internal class ExternDLL
         if (pFunc == IntPtr.Zero)
             throw new Exception("Export not found: " + functionName);
 
-        var func = Marshal.GetDelegateForFunctionPointer<T>(pFunc);
+        T func = Marshal.GetDelegateForFunctionPointer<T>(pFunc);
         CloseLibrary(hModule);
         return func;
     }
@@ -56,7 +56,7 @@ internal class ExternDLL
         if (pVar == IntPtr.Zero)
             throw new Exception("Export not found: " + variableName);
 
-        var v = Unsafe.Read<T>(pVar.ToPointer());
+        T v = Unsafe.Read<T>(pVar.ToPointer());
         CloseLibrary(hModule);
         return v;
     }

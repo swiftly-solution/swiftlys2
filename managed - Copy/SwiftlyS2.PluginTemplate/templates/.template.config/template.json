@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "SwiftlyS2",
+  "classifications": [ "SwiftlyS2", "Plugin", "CS2" ],
+  "identity": "PluginId.Template",
+  "name": "SwiftlyS2 CS2 Plugin",
+  "shortName": "swplugin",
+  "sourceName": "PluginId",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "PluginName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "My Plugin",
+      "replaces": "PluginName"
+    },
+    "PluginVersion": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "1.0.0",
+      "replaces": "PluginVersion"
+    },
+    "PluginAuthor": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Anonymous",
+      "replaces": "PluginAuthor"
+    },
+    "PluginDescription": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "No description.",
+      "replaces": "PluginDescription"
+    }
+
+  },
+  "primaryOutputs": [
+    { "path": "PluginId.csproj" }
+  ]
+} 

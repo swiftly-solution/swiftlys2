@@ -29,7 +29,7 @@ public struct CUtlLeanVector<T, I>
 
         public override bool Equals( object? obj )
         {
-            return obj is Iterator_t other && this == other;
+            return obj is Iterator_t other ? this == other : false;
         }
 
         public override int GetHashCode()
@@ -69,12 +69,12 @@ public struct CUtlLeanVector<T, I>
         if (num <= NumAllocated)
             return;
 
-        var minAllocated = I.CreateChecked((31 + ElementSize - 1) / ElementSize);
-        var maxAllocated = I.MaxValue;
+        I minAllocated = I.CreateChecked((31 + ElementSize - 1) / ElementSize);
+        I maxAllocated = I.MaxValue;
         if (I.CreateChecked(num) > maxAllocated)
             throw new ArgumentOutOfRangeException(nameof(num), $"num {num} exceeds max {maxAllocated}");
 
-        var newAllocated = I.CreateChecked(num);
+        I newAllocated = I.CreateChecked(num);
         if (!force)
             newAllocated = I.CreateChecked(MemoryHelpers.CalcNewDoublingCount(NumAllocated, num, int.CreateChecked(minAllocated), int.CreateChecked(maxAllocated)));
 
@@ -127,7 +127,7 @@ public struct CUtlLeanVector<T, I>
         if (Count == I.CreateChecked(0))
             return;
 
-        for (var i = I.CreateChecked(0); i < Count; i++)
+        for (I i = I.CreateChecked(0); i < Count; i++)
             this[i] = default;
 
         Count = I.CreateChecked(0);
@@ -166,7 +166,7 @@ public struct CUtlLeanVector<T, I>
 
     public I AddToTail( T element )
     {
-        var idx = AddToTail();
+        I idx = AddToTail();
         this[idx] = element;
         return idx;
     }
@@ -180,7 +180,7 @@ public struct CUtlLeanVector<T, I>
 
         if (Count > count)
         {
-            for (var i = count; i < Count; i++)
+            for (I i = count; i < Count; i++)
                 this[i] = default;
         }
 
@@ -189,7 +189,7 @@ public struct CUtlLeanVector<T, I>
 
     public I Find( T element )
     {
-        for (var i = I.CreateChecked(0); i < Count; i++)
+        for (I i = I.CreateChecked(0); i < Count; i++)
         {
             if (this[i].Equals(element))
                 return i;
@@ -227,7 +227,7 @@ public struct CUtlLeanVector<T, I>
         if (count <= I.Zero || !IsValidIndex(idx) || idx + count > Count)
             return;
 
-        for (var i = idx; i < idx + count; i++)
+        for (I i = idx; i < idx + count; i++)
             this[i] = default;
 
         MemoryHelpers.ShiftElementsLeft(Elements, int.CreateChecked(idx), int.CreateChecked(count), int.CreateChecked(Count), ElementSize);
@@ -244,7 +244,7 @@ public struct CUtlLeanVector<T, I>
         if (count <= I.Zero || count > Count)
             return;
 
-        for (var i = Count - count; i < Count; i++)
+        for (I i = Count - count; i < Count; i++)
             this[i] = default;
 
         Count -= count;
@@ -252,7 +252,7 @@ public struct CUtlLeanVector<T, I>
 
     public bool FindAndRemove( T value )
     {
-        var idx = Find(value);
+        I idx = Find(value);
         if (idx != -I.One)
         {
             Remove(idx);
@@ -263,7 +263,7 @@ public struct CUtlLeanVector<T, I>
 
     public bool FindAndFastRemove( T value )
     {
-        var idx = Find(value);
+        I idx = Find(value);
         if (idx != -I.One)
         {
             FastRemove(idx);
@@ -281,7 +281,7 @@ public struct CUtlLeanVector<T, I>
 
     public IEnumerator<T> GetEnumerator()
     {
-        for (var i = I.Zero; i < Count; i++)
+        for (I i = I.Zero; i < Count; i++)
         {
             yield return this[i];
         }

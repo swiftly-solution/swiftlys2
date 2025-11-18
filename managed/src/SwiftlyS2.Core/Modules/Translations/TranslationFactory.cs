@@ -46,9 +46,12 @@ internal class TranslationFactory
             resource.Resources[new Language(language)] = translation;
         }
 
-        return resource.Resources.Count == 0
-            ? throw new Exception("No translation files found.")
-            : !resource.Resources.ContainsKey(Language.English)
+        if (resource.Resources.Count == 0)
+        {
+            throw new Exception("No translation files found.");
+        }
+
+        return !resource.Resources.ContainsKey(Language.English)
             ? throw new Exception("English primary translation file not found.")
             : resource;
     }

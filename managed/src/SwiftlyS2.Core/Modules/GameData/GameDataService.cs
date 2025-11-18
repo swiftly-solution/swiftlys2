@@ -58,9 +58,14 @@ internal class GameDataService : IGameDataService
                 var offsets = JsonSerializer.Deserialize<Dictionary<string, Offset>>(File.ReadAllText(offsetPath))!;
                 foreach (var offset in offsets)
                 {
-                    _ = _Platform == OSPlatform.Windows
-                        ? _Offsets.TryAdd(offset.Key, offset.Value.windows)
-                        : _Offsets.TryAdd(offset.Key, offset.Value.linux);
+                    if (_Platform == OSPlatform.Windows)
+                    {
+                        _ = _Offsets.TryAdd(offset.Key, offset.Value.windows);
+                    }
+                    else
+                    {
+                        _ = _Offsets.TryAdd(offset.Key, offset.Value.linux);
+                    }
                 }
             }
 
@@ -83,7 +88,7 @@ internal class GameDataService : IGameDataService
 
     public bool HasSignature( string signatureName )
     {
-        return _Signatures.ContainsKey(signatureName) || NativeSignatures.Exists(signatureName);
+        return _Signatures.ContainsKey(signatureName) ? true : NativeSignatures.Exists(signatureName);
     }
 
     public nint GetSignature( string signatureName )
@@ -104,7 +109,7 @@ internal class GameDataService : IGameDataService
 
     public bool HasOffset( string offsetName )
     {
-        return _Offsets.ContainsKey(offsetName) || NativeOffsets.Exists(offsetName);
+        return _Offsets.ContainsKey(offsetName) ? true : NativeOffsets.Exists(offsetName);
     }
 
     public int GetOffset( string offsetName )
@@ -125,7 +130,7 @@ internal class GameDataService : IGameDataService
 
     public bool HasPatch( string patchName )
     {
-        return _Patches.ContainsKey(patchName) || NativePatches.Exists(patchName);
+        return _Patches.ContainsKey(patchName) ? true : NativePatches.Exists(patchName);
     }
 
     public void ApplyPatch( string patchName )

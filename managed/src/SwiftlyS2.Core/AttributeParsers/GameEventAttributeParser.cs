@@ -18,11 +18,17 @@ internal static class GameEventAttributeParser
                 var eventType = method.GetParameters()[0].ParameterType;
                 var handlerType = typeof(IGameEventService.GameEventHandler<>).MakeGenericType(eventType);
                 var eventHandler = method.CreateDelegate(handlerType, instance);
-                var hookMethod = gameEventHandlerAttribute.HookMode == HookMode.Pre
-                    ? typeof(IGameEventService).GetMethod("HookPre")!
-                    : gameEventHandlerAttribute.HookMode == HookMode.Post
+                MethodInfo hookMethod;
+                if (gameEventHandlerAttribute.HookMode == HookMode.Pre)
+                {
+                    hookMethod = typeof(IGameEventService).GetMethod("HookPre")!;
+                }
+                else
+                {
+                    hookMethod = gameEventHandlerAttribute.HookMode == HookMode.Post
                         ? typeof(IGameEventService).GetMethod("HookPost")!
                         : throw new InvalidOperationException($"Invalid hook mode: {gameEventHandlerAttribute.HookMode}");
+                }
                 var hookMethodGeneric = hookMethod.MakeGenericMethod(eventType);
                 _ = hookMethodGeneric.Invoke(self, new object[] { eventHandler });
             }

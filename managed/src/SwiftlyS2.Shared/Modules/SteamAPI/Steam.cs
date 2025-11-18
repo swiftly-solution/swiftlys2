@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using IntPtr = nint;
 
 namespace SwiftlyS2.Shared.SteamAPI;
@@ -251,7 +250,7 @@ public static class SteamEncryptedAppTicket
         InteropHelp.TestIfPlatformSupported();
         var punSecretData = NativeMethods.SteamEncryptedAppTicket_GetUserVariableData(rgubTicketDecrypted, cubTicketDecrypted, out pcubUserData);
         var ret = new byte[pcubUserData];
-        Marshal.Copy(punSecretData, ret, 0, (int)pcubUserData);
+        System.Runtime.InteropServices.Marshal.Copy(punSecretData, ret, 0, (int)pcubUserData);
         return ret;
     }
 
@@ -281,8 +280,8 @@ internal static class CSteamGameServerAPIContext
 
     internal static bool Init()
     {
-        var hSteamUser = GameServer.GetHSteamUser();
-        var hSteamPipe = GameServer.GetHSteamPipe();
+        HSteamUser hSteamUser = GameServer.GetHSteamUser();
+        HSteamPipe hSteamPipe = GameServer.GetHSteamPipe();
         if (hSteamPipe == (HSteamPipe)0) { return false; }
 
         using (var pchVersionString = new InteropHelp.UTF8StringHandle(Constants.STEAMCLIENT_INTERFACE_VERSION))

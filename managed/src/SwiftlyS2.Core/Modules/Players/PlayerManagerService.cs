@@ -65,7 +65,7 @@ internal class PlayerManagerService : IPlayerManagerService
             if (!IsPlayerOnline(i))
                 continue;
 
-            var targetPlayer = GetPlayer(i);
+            IPlayer targetPlayer = GetPlayer(i);
 
             if (searchMode.HasFlag(TargetSearchMode.NoBots) && targetPlayer.IsFakeClient)
                 continue;

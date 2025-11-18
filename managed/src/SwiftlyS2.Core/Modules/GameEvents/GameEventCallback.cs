@@ -54,12 +54,12 @@ internal abstract class GameEventCallback : IEquatable<GameEventCallback>, IDisp
 
     public bool Equals( GameEventCallback? other )
     {
-        return other is not null && Guid == other.Guid;
+        return other is null ? false : Guid == other.Guid;
     }
 
     public override bool Equals( object? obj )
     {
-        return ReferenceEquals(this, obj) || obj is GameEventCallback other && Equals(other);
+        return ReferenceEquals(this, obj) ? true : obj is GameEventCallback other && Equals(other);
     }
 
     public override int GetHashCode()
