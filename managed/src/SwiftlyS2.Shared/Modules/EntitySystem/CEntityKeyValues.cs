@@ -284,21 +284,17 @@ public class CEntityKeyValues : IDisposable
         {
             return (T)(object)GetColor(key);
         }
-        else if (typeof(T) == typeof(Vector))
-        {
-            return (T)(object)GetVector(key);
-        }
-        else if (typeof(T) == typeof(Vector2D))
-        {
-            return (T)(object)GetVector2D(key);
-        }
         else
         {
-            return typeof(T) == typeof(Vector4D)
-                ? (T)(object)GetVector4D(key)
-                : typeof(T) == typeof(QAngle)
-                            ? (T)(object)GetQAngle(key)
-                            : throw new InvalidOperationException($"Unsupported type: {typeof(T).Name}");
+            return typeof(T) == typeof(Vector)
+                ? (T)(object)GetVector(key)
+                : typeof(T) == typeof(Vector2D)
+                            ? (T)(object)GetVector2D(key)
+                            : typeof(T) == typeof(Vector4D)
+                                        ? (T)(object)GetVector4D(key)
+                                        : typeof(T) == typeof(QAngle)
+                                                    ? (T)(object)GetQAngle(key)
+                                                    : throw new InvalidOperationException($"Unsupported type: {typeof(T).Name}");
         }
     }
 }

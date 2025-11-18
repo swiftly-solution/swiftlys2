@@ -77,7 +77,7 @@
         "linux": "55 48 8D 87 ? ? ? ? 48 89 E5 41 57 41 56 41 89 CE 41 55 45 89 CD"
     },
     // The function contains "enter_buyzone", "exit_buyzone", "userid", "canbuy", "exit_rescue_zone"
-    "CCSPlayerPawnBase::PostThink": {
+    "CCSPlayerPawn::PostThink": {
         "lib": "server",
         "windows": "48 ? ? 55 53 56 57 41 ? 48 ? ? ? 48 ? ? ? ? ? ? 4C 89 68",
         "linux": "55 48 89 E5 41 56 41 55 41 54 53 48 89 FB 48 83 EC 40 E8 ? ? ? ? F3 0F 10 83"

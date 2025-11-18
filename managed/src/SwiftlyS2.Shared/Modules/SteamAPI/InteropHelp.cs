@@ -130,7 +130,7 @@ public class InteropHelp
             }
 
             m_ptrStrings = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(IntPtr)) * m_Strings.Length);
-            SteamParamStringArray_t stringArray = new SteamParamStringArray_t() {
+            var stringArray = new SteamParamStringArray_t() {
                 m_ppStrings = m_ptrStrings,
                 m_nNumStrings = m_Strings.Length
             };

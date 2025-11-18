@@ -5,7 +5,6 @@ namespace SwiftlyS2.Shared.Events;
 /// </summary>
 public class EventDelegates
 {
-
     /// <summary>
     /// Called when game has processed a tick. Won't be called if the server is in hibernation.
     /// This callback is a hot path, be careful with it and don't do anything expensive.
@@ -114,7 +113,9 @@ public class EventDelegates
     /// </summary>
     public delegate void OnPrecacheResource( IOnPrecacheResourceEvent @event );
 
-    [Obsolete("OnEntityTouchHook is deprecated. Use OnEntityStartTouch, OnEntityTouch, or OnEntityEndTouch instead.")]
+    [Obsolete(
+        "OnEntityTouchHook is deprecated. Use OnEntityStartTouch, OnEntityTouch, or OnEntityEndTouch instead."
+    )]
     public delegate void OnEntityTouchHook( IOnEntityTouchHookEvent @event );
 
     /// <summary>
@@ -155,5 +156,12 @@ public class EventDelegates
     /// <summary>
     /// Called when the movement services run command hook is triggered.
     /// </summary>
-    public delegate void OnMovementServicesRunCommandHook( IOnMovementServicesRunCommandHookEvent @event );
+    public delegate void OnMovementServicesRunCommandHook(
+        IOnMovementServicesRunCommandHookEvent @event
+    );
+
+    /// <summary>
+    /// Called when the player pawn post think hook is triggered.
+    /// </summary>
+    public delegate void OnPlayerPawnPostThink( IOnPlayerPawnPostThinkHookEvent @event );
 }

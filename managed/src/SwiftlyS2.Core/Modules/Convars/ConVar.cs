@@ -133,17 +133,13 @@ internal class ConVar<T> : IConVar<T>
         {
             val = $"{qAngleValue.Pitch},{qAngleValue.Yaw},{qAngleValue.Roll}";
         }
-        else if (value is Vector vectorValue)
-        {
-            val = $"{vectorValue.X},{vectorValue.Y},{vectorValue.Z}";
-        }
-        else if (value is Vector2D vector2DValue)
-        {
-            val = $"{vector2DValue.X},{vector2DValue.Y}";
-        }
         else
         {
-            val = value is Vector4D vector4DValue
+            val = value is Vector vectorValue
+                ? $"{vectorValue.X},{vectorValue.Y},{vectorValue.Z}"
+                : value is Vector2D vector2DValue
+                ? $"{vector2DValue.X},{vector2DValue.Y}"
+                : value is Vector4D vector4DValue
                 ? $"{vector4DValue.X},{vector4DValue.Y},{vector4DValue.Z},{vector4DValue.W}"
                 : value is string stringValue ? stringValue : throw new ArgumentException($"Invalid type {typeof(T).Name}");
         }

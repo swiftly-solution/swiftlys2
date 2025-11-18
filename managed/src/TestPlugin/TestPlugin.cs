@@ -128,6 +128,11 @@ public class TestPlugin : BasePlugin
         //   }
         // };
 
+        // Core.Event.OnPlayerPawnPostThink += ( @event ) =>
+        // {
+        //     Console.WriteLine($"PostThink -> {@event.PlayerPawn.OriginalController.Value?.PlayerName}");
+        // };
+
         Core.Engine.ExecuteCommandWithBuffer(
             "@ping",
             ( buffer ) =>
@@ -194,7 +199,7 @@ public class TestPlugin : BasePlugin
 
         // Core.
 
-        int i = 0;
+        var i = 0;
 
         // var token2 = Core.Scheduler.Repeat(10, () => {
         //   Console.WriteLine(Core.Engine.TickCount);
@@ -245,7 +250,7 @@ public class TestPlugin : BasePlugin
                 Core.Profiler.StartRecording(
                     "OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player"
                 );
-                for (int i = 0; i < 1024; i++)
+                for (var i = 0; i < 1024; i++)
                 {
                     convar!.ReplicateToClient(player.PlayerID, (float)Random.Shared.NextDouble());
                 }
@@ -312,7 +317,7 @@ public class TestPlugin : BasePlugin
         // entity.DispatchSpawn(kv);
         // Console.WriteLine("Spawned entity with keyvalues");
 
-        int j = 0;
+        var j = 0;
 
         var cvar = Core.ConVar.Find<bool>("sv_cheats")!;
         Console.WriteLine(cvar);
@@ -341,7 +346,7 @@ public class TestPlugin : BasePlugin
     [Command("w")]
     public void TestCommand1( ICommandContext context )
     {
-        var ret = SteamGameServerUGC.DownloadItem(new PublishedFileId_t(3596198331), true);
+        _ = SteamGameServerUGC.DownloadItem(new PublishedFileId_t(3596198331), true);
         Console.WriteLine(SteamGameServer.GetPublicIP().ToIPAddress());
     }
 

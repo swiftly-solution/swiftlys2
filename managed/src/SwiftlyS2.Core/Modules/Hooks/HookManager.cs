@@ -67,17 +67,15 @@ internal class HookManager
     {
         lock (_sync)
         {
-            if (_chains.TryGetValue(functionAddress, out var chain))
-            {
-                return !chain.Hooked ? functionAddress : chain.Nodes.Count == 0 ? chain.OriginalFunctionAddress : chain.Nodes[^1].OriginalFuncPtr;
-            }
-            return nint.Zero;
+            return _chains.TryGetValue(functionAddress, out var chain)
+                ? !chain.Hooked ? functionAddress : chain.Nodes.Count == 0 ? chain.OriginalFunctionAddress : chain.Nodes[^1].OriginalFuncPtr
+                : nint.Zero;
         }
     }
 
     public Guid AddMidHook( nint address, MidHookDelegate callback )
     {
-        MidHookNode node = new MidHookNode {
+        var node = new MidHookNode {
             Id = Guid.NewGuid(),
             BuiltDelegate = callback,
         };
@@ -117,7 +115,7 @@ internal class HookManager
 
     public Guid AddHook( nint functionAddress, Func<Func<nint>, Delegate> callbackBuilder )
     {
-        HookNode node = new HookNode {
+        var node = new HookNode {
             Id = Guid.NewGuid(),
             CallbackBuilder = callbackBuilder,
         };

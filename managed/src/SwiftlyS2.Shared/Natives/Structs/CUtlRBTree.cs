@@ -676,13 +676,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public bool IsValid()
     {
-        if (Count == 0)
-            return true;
-
-        if (LastAlloc.Index == -TKey.One)
-            return false;
-
-        return Elements.IsIdxValid(Root) && Parent(Root) == InvalidIndex();
+        return Count == 0 ? true : LastAlloc.Index != -TKey.One && Elements.IsIdxValid(Root) && Parent(Root) == InvalidIndex();
     }
 
     public void SetLessFunc( LessFunc func )

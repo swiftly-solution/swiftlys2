@@ -240,7 +240,7 @@ internal class PluginManager
             {
                 logger.LogWarning("Failed to unload plugin by id: {Id}", id);
             }
-            context?.Status = PluginStatus.Indeterminate;
+            _ = (context?.Status = PluginStatus.Indeterminate);
             return false;
         }
         finally
@@ -340,7 +340,7 @@ internal class PluginManager
             {
                 logger.LogWarning("Failed to load plugin by name: {Path}", pluginDir);
             }
-            newContext?.Status = PluginStatus.Indeterminate;
+            _ = (newContext?.Status = PluginStatus.Indeterminate);
             return false;
         }
         finally
