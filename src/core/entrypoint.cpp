@@ -301,11 +301,16 @@ void GameServerSteamAPIDeactivatedHook(void* _this)
     return reinterpret_cast<decltype(&GameServerSteamAPIDeactivatedHook)>(g_pGameServerSteamAPIDeactivated->GetOriginal())(_this);
 }
 
+std::string workshop_map = "";
+
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
 {
     bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_pLoopInitHook->GetOriginal())(_this, pKeyValues, pRegistry);
 
     g_SwiftlyCore.OnMapLoad(pKeyValues->GetString("levelname"));
+    if (pKeyValues->FindKey("customgamemode")) {
+        workshop_map = pKeyValues->GetString("customgamemode");
+    } else workshop_map = "";
 
     return ret;
 }
@@ -390,7 +395,7 @@ void* SwiftlyCore::GetInterface(const std::string& interface_name)
     }
 
     if (ifaceptr != nullptr)
-        g_mInterfacesCache.insert({interface_name, ifaceptr});
+        g_mInterfacesCache.insert({ interface_name, ifaceptr });
 
     return ifaceptr;
 }
