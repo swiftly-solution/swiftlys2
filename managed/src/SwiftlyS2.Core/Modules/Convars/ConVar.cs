@@ -6,11 +6,10 @@ using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Core.Convars;
 
-internal delegate void ConVarCallbackDelegate( int playerId, nint name, nint value );
+internal delegate void ConVarCallbackDelegate(int playerId, nint name, nint value);
 
 internal class ConVar<T> : IConVar<T>
 {
-
     private readonly Dictionary<int, ConVarCallbackDelegate> _callbacks = [];
     private readonly Lock _lock = new();
 
@@ -19,26 +18,34 @@ internal class ConVar<T> : IConVar<T>
 
     public EConVarType Type => (EConVarType)NativeConvars.GetConvarType(Name);
 
-    private bool IsValidType => Type > EConVarType.EConVarType_Invalid && Type < EConVarType.EConVarType_MAX;
+    private bool IsValidType =>
+        Type > EConVarType.EConVarType_Invalid && Type < EConVarType.EConVarType_MAX;
 
     // im not sure
-    private bool IsMinMaxType => IsValidType && Type != EConVarType.EConVarType_String && Type != EConVarType.EConVarType_Color;
+    private bool IsMinMaxType =>
+        IsValidType
+        && Type != EConVarType.EConVarType_String
+        && Type != EConVarType.EConVarType_Color;
 
-    public T MinValue {
+    public T MinValue
+    {
         get => GetMinValue();
         set => SetMinValue(value);
     }
-    public T MaxValue {
+    public T MaxValue
+    {
         get => GetMaxValue();
         set => SetMaxValue(value);
     }
 
-    public T DefaultValue {
+    public T DefaultValue
+    {
         get => GetDefaultValue();
         set => SetDefaultValue(value);
     }
 
-    public ConvarFlags Flags {
+    public ConvarFlags Flags
+    {
         get => (ConvarFlags)NativeConvars.GetFlags(Name);
         set => NativeConvars.SetFlags(Name, (ulong)value);
     }
@@ -50,7 +57,7 @@ internal class ConVar<T> : IConVar<T>
 
     public string Name { get; set; }
 
-    internal ConVar( string name )
+    internal ConVar(string name)
     {
         Name = name;
 
@@ -60,108 +67,69 @@ internal class ConVar<T> : IConVar<T>
     public void ValidateType()
     {
         if (
-          (typeof(T) == typeof(bool) && Type != EConVarType.EConVarType_Bool) ||
-          (typeof(T) == typeof(short) && Type != EConVarType.EConVarType_Int16) ||
-          (typeof(T) == typeof(ushort) && Type != EConVarType.EConVarType_UInt16) ||
-          (typeof(T) == typeof(int) && Type != EConVarType.EConVarType_Int32) ||
-          (typeof(T) == typeof(uint) && Type != EConVarType.EConVarType_UInt32) ||
-          (typeof(T) == typeof(float) && Type != EConVarType.EConVarType_Float32) ||
-          (typeof(T) == typeof(long) && Type != EConVarType.EConVarType_Int64) ||
-          (typeof(T) == typeof(ulong) && Type != EConVarType.EConVarType_UInt64) ||
-          (typeof(T) == typeof(double) && Type != EConVarType.EConVarType_Float64) ||
-          (typeof(T) == typeof(Color) && Type != EConVarType.EConVarType_Color) ||
-          (typeof(T) == typeof(QAngle) && Type != EConVarType.EConVarType_Qangle) ||
-          (typeof(T) == typeof(Vector) && Type != EConVarType.EConVarType_Vector3) ||
-          (typeof(T) == typeof(Vector2D) && Type != EConVarType.EConVarType_Vector2) ||
-          (typeof(T) == typeof(Vector4D) && Type != EConVarType.EConVarType_Vector4) ||
-          (typeof(T) == typeof(string) && Type != EConVarType.EConVarType_String)
+            (typeof(T) == typeof(bool) && Type != EConVarType.EConVarType_Bool)
+            || (typeof(T) == typeof(short) && Type != EConVarType.EConVarType_Int16)
+            || (typeof(T) == typeof(ushort) && Type != EConVarType.EConVarType_UInt16)
+            || (typeof(T) == typeof(int) && Type != EConVarType.EConVarType_Int32)
+            || (typeof(T) == typeof(uint) && Type != EConVarType.EConVarType_UInt32)
+            || (typeof(T) == typeof(float) && Type != EConVarType.EConVarType_Float32)
+            || (typeof(T) == typeof(long) && Type != EConVarType.EConVarType_Int64)
+            || (typeof(T) == typeof(ulong) && Type != EConVarType.EConVarType_UInt64)
+            || (typeof(T) == typeof(double) && Type != EConVarType.EConVarType_Float64)
+            || (typeof(T) == typeof(Color) && Type != EConVarType.EConVarType_Color)
+            || (typeof(T) == typeof(QAngle) && Type != EConVarType.EConVarType_Qangle)
+            || (typeof(T) == typeof(Vector) && Type != EConVarType.EConVarType_Vector3)
+            || (typeof(T) == typeof(Vector2D) && Type != EConVarType.EConVarType_Vector2)
+            || (typeof(T) == typeof(Vector4D) && Type != EConVarType.EConVarType_Vector4)
+            || (typeof(T) == typeof(string) && Type != EConVarType.EConVarType_String)
         )
         {
             throw new Exception($"Type mismatch for convar {Name}. The real type is {Type}.");
         }
     }
 
-    public T Value {
+    public T Value
+    {
         get => GetValue();
         set => SetValue(value);
     }
 
-    public void ReplicateToClient( int clientId, T value )
+    public void ReplicateToClient(int clientId, T value)
     {
-        var val = "";
-        if (value is bool boolValue)
+        var val = value switch
         {
-            val = boolValue ? "1" : "0";
-        }
-        else if (value is short shortValue)
-        {
-            val = shortValue.ToString();
-        }
-        else if (value is ushort ushortValue)
-        {
-            val = ushortValue.ToString();
-        }
-        else if (value is int intValue)
-        {
-            val = intValue.ToString();
-        }
-        else if (value is uint uintValue)
-        {
-            val = uintValue.ToString();
-        }
-        else if (value is float floatValue)
-        {
-            val = floatValue.ToString();
-        }
-        else if (value is long longValue)
-        {
-            val = longValue.ToString();
-        }
-        else if (value is ulong ulongValue)
-        {
-            val = ulongValue.ToString();
-        }
-        else if (value is double doubleValue)
-        {
-            val = doubleValue.ToString();
-        }
-        else if (value is Color colorValue)
-        {
-            val = $"{colorValue.R},{colorValue.G},{colorValue.B}";
-        }
-        else if (value is QAngle qAngleValue)
-        {
-            val = $"{qAngleValue.Pitch},{qAngleValue.Yaw},{qAngleValue.Roll}";
-        }
-        else if (value is Vector vectorValue)
-        {
-            val = $"{vectorValue.X},{vectorValue.Y},{vectorValue.Z}";
-        }
-        else if (value is Vector2D vector2DValue)
-        {
-            val = $"{vector2DValue.X},{vector2DValue.Y}";
-        }
-        else if (value is Vector4D vector4DValue)
-        {
-            val = $"{vector4DValue.X},{vector4DValue.Y},{vector4DValue.Z},{vector4DValue.W}";
-        }
-        else
-        {
-            val = value is string stringValue ? stringValue : throw new ArgumentException($"Invalid type {typeof(T).Name}");
-        }
+            bool boolValue => boolValue ? "1" : "0",
+            short shortValue => shortValue.ToString(),
+            ushort ushortValue => ushortValue.ToString(),
+            int intValue => intValue.ToString(),
+            uint uintValue => uintValue.ToString(),
+            float floatValue => floatValue.ToString(),
+            long longValue => longValue.ToString(),
+            ulong ulongValue => ulongValue.ToString(),
+            double doubleValue => doubleValue.ToString(),
+            Color colorValue => $"{colorValue.R},{colorValue.G},{colorValue.B}",
+            QAngle qAngleValue => $"{qAngleValue.Pitch},{qAngleValue.Yaw},{qAngleValue.Roll}",
+            Vector vectorValue => $"{vectorValue.X},{vectorValue.Y},{vectorValue.Z}",
+            Vector2D vector2DValue => $"{vector2DValue.X},{vector2DValue.Y}",
+            Vector4D vector4DValue =>
+                $"{vector4DValue.X},{vector4DValue.Y},{vector4DValue.Z},{vector4DValue.W}",
+            string stringValue => stringValue,
+            _ => throw new ArgumentException($"Invalid type {typeof(T).Name}"),
+        };
 
         NativeConvars.SetClientConvarValueString(clientId, Name, val);
     }
 
-    public void QueryClient( int clientId, Action<string> callback )
+    public void QueryClient(int clientId, Action<string> callback)
     {
-
         Action? removeSelf = null;
-        void nativeCallback( int playerId, nint namePtr, nint valuePtr )
+        void nativeCallback(int playerId, nint namePtr, nint valuePtr)
         {
-            if (clientId != playerId) return;
+            if (clientId != playerId)
+                return;
             var name = Marshal.PtrToStringAnsi(namePtr);
-            if (name != Name) return;
+            if (name != Name)
+                return;
             var value = Marshal.PtrToStringAnsi(valuePtr)!;
 
             // var convertedValue = (T)Convert.ChangeType(value, typeof(T))!;
@@ -169,8 +137,9 @@ internal class ConVar<T> : IConVar<T>
             removeSelf?.Invoke();
         }
 
-
-        var callbackPtr = Marshal.GetFunctionPointerForDelegate((ConVarCallbackDelegate)nativeCallback);
+        var callbackPtr = Marshal.GetFunctionPointerForDelegate(
+            (ConVarCallbackDelegate)nativeCallback
+        );
 
         var listenerId = NativeConvars.AddQueryClientCvarCallback(callbackPtr);
         lock (_lock)
@@ -200,7 +169,7 @@ internal class ConVar<T> : IConVar<T>
         }
     }
 
-    public void SetValue( T value )
+    public void SetValue(T value)
     {
         unsafe
         {
@@ -210,16 +179,13 @@ internal class ConVar<T> : IConVar<T>
             }
             else
             {
-                CUtlString str = new() {
-                    Value = (string)(object)value
-                };
+                CUtlString str = new() { Value = (string)(object)value };
                 NativeConvars.SetValuePtr(Name, (nint)(&str));
             }
         }
     }
 
-
-    public void SetInternal( T value )
+    public void SetInternal(T value)
     {
         unsafe
         {
@@ -229,14 +195,11 @@ internal class ConVar<T> : IConVar<T>
             }
             else
             {
-                CUtlString str = new() {
-                    Value = (string)(object)value
-                };
+                CUtlString str = new() { Value = (string)(object)value };
                 NativeConvars.SetValueInternalPtr(Name, (nint)(&str));
             }
         }
     }
-
 
     public T GetMinValue()
     {
@@ -269,7 +232,8 @@ internal class ConVar<T> : IConVar<T>
             return **(T**)_maxValuePtrPtr;
         }
     }
-    public void SetMinValue( T minValue )
+
+    public void SetMinValue(T minValue)
     {
         if (!IsMinMaxType)
         {
@@ -285,7 +249,7 @@ internal class ConVar<T> : IConVar<T>
         }
     }
 
-    public void SetMaxValue( T maxValue )
+    public void SetMaxValue(T maxValue)
     {
         if (!IsMinMaxType)
         {
@@ -310,11 +274,13 @@ internal class ConVar<T> : IConVar<T>
             {
                 throw new Exception($"Convar {Name} doesn't have a default value.");
             }
-            return Type != EConVarType.EConVarType_String ? *(T*)ptr : (T)(object)(*(CUtlString*)ptr).Value;
+            return Type != EConVarType.EConVarType_String
+                ? *(T*)ptr
+                : (T)(object)(*(CUtlString*)ptr).Value;
         }
     }
 
-    public void SetDefaultValue( T defaultValue )
+    public void SetDefaultValue(T defaultValue)
     {
         unsafe
         {
@@ -329,12 +295,14 @@ internal class ConVar<T> : IConVar<T>
             }
             else
             {
-                NativeConvars.GetDefaultValuePtr(Name).Write(StringPool.Allocate((string)(object)defaultValue));
+                NativeConvars
+                    .GetDefaultValuePtr(Name)
+                    .Write(StringPool.Allocate((string)(object)defaultValue));
             }
         }
     }
 
-    public bool TryGetMinValue( out T minValue )
+    public bool TryGetMinValue(out T minValue)
     {
         if (!IsMinMaxType)
         {
@@ -350,7 +318,7 @@ internal class ConVar<T> : IConVar<T>
         return true;
     }
 
-    public bool TryGetMaxValue( out T maxValue )
+    public bool TryGetMaxValue(out T maxValue)
     {
         if (!IsMinMaxType)
         {
@@ -366,7 +334,7 @@ internal class ConVar<T> : IConVar<T>
         return true;
     }
 
-    public bool TryGetDefaultValue( out T defaultValue )
+    public bool TryGetDefaultValue(out T defaultValue)
     {
         if (!HasDefaultValue)
         {

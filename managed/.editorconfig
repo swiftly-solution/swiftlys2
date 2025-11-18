@@ -177,3 +177,38 @@ csharp_indent_switch_labels = true
 csharp_new_line_before_open_brace = types, object_collection, methods, control_blocks, lambdas
 dotnet_sort_system_directives_first = true
 csharp_space_between_method_declaration_parameter_list_parentheses = true
+
+# Suppress compiler warnings for interop and generated code
+# Pointer and unsafe code warnings
+dotnet_diagnostic.CS8500.severity = none
+
+# Nullability warnings
+dotnet_diagnostic.CS8600.severity = none
+dotnet_diagnostic.CS8601.severity = none
+dotnet_diagnostic.CS8602.severity = none
+dotnet_diagnostic.CS8603.severity = none
+dotnet_diagnostic.CS8604.severity = none
+dotnet_diagnostic.CS8618.severity = none
+dotnet_diagnostic.CS8625.severity = none
+dotnet_diagnostic.CS8765.severity = none
+dotnet_diagnostic.CS8766.severity = none
+
+# XML Documentation warnings
+dotnet_diagnostic.CS1570.severity = none
+dotnet_diagnostic.CS1572.severity = none
+dotnet_diagnostic.CS1573.severity = none
+dotnet_diagnostic.CS1587.severity = none
+dotnet_diagnostic.CS0419.severity = suggestion
+
+# Obsolete API usage
+dotnet_diagnostic.CS0618.severity = suggestion
+
+# Generated SteamAPI code - suppress all warnings
+[**/SwiftlyS2.Generated/**/*.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none
+
+# TestPlugin - suppress test-specific warnings
+[**/TestPlugin/**/*.cs]
+dotnet_diagnostic.CS0219.severity = none
+dotnet_diagnostic.CS0649.severity = none

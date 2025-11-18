@@ -8,12 +8,12 @@ namespace SwiftlyS2.Core.Services;
 
 internal sealed class CommandTrackerManager : IDisposable
 {
-    private sealed record CommandIdContainer( Guid Value )
+    private sealed record CommandIdContainer(Guid Value)
     {
         public static readonly CommandIdContainer Empty = new(Guid.Empty);
     }
 
-    private readonly record struct ExecutingCommand( Action<string> Callback )
+    private readonly record struct ExecutingCommand(Action<string> Callback)
     {
         public ConcurrentQueue<string> Output { get; } = new();
         public DateTime Created { get; } = DateTime.UtcNow;
@@ -31,11 +31,14 @@ internal sealed class CommandTrackerManager : IDisposable
         StartCleanupTimer();
     }
 
-    public void ProcessCommand( IOnCommandExecuteHookEvent @event )
+    public void ProcessCommand(IOnCommandExecuteHookEvent @event)
     {
         if (@event.HookMode == HookMode.Pre)
         {
-            if (string.IsNullOrWhiteSpace(@event.Command[0]) || !@event.Command[0]!.StartsWith("^wb^"))
+            if (
+                string.IsNullOrWhiteSpace(@event.Command[0])
+                || !@event.Command[0]!.StartsWith("^wb^")
+            )
             {
                 return;
             }
@@ -47,12 +50,14 @@ internal sealed class CommandTrackerManager : IDisposable
         }
     }
 
-    public void ProcessOutput( IOnConsoleOutputEvent @event )
+    public void ProcessOutput(IOnConsoleOutputEvent @event)
     {
-        if (disposed) return;
+        if (disposed)
+            return;
 
         var commandId = currentCommandContainer?.Value ?? Guid.Empty;
-        if (commandId == Guid.Empty) return;
+        if (commandId == Guid.Empty)
+            return;
 
         if (activeCommands.TryGetValue(commandId, out var command) && command.Output.Count < 100)
         {
@@ -60,7 +65,7 @@ internal sealed class CommandTrackerManager : IDisposable
         }
     }
 
-    public void ProcessCommandStart( IOnCommandExecuteHookEvent @event )
+    public void ProcessCommandStart(IOnCommandExecuteHookEvent @event)
     {
         if (pendingCallbacks.TryDequeue(out var callback))
         {
@@ -71,7 +76,9 @@ internal sealed class CommandTrackerManager : IDisposable
             {
                 var newContainer = new CommandIdContainer(newCommandId);
                 _ = Interlocked.Exchange(ref currentCommandContainer, newContainer);
-                _ = @event.Command.Tokenize($"{@event.Command[0]!.Replace("^wb^", string.Empty)} {@event.Command.ArgS}");
+                _ = @event.Command.Tokenize(
+                    $"{@event.Command[0]!.Replace("^wb^", string.Empty)} {@event.Command.ArgS}"
+                );
             }
         }
         else
@@ -80,9 +87,13 @@ internal sealed class CommandTrackerManager : IDisposable
         }
     }
 
-    public void ProcessCommandEnd( IOnCommandExecuteHookEvent _ )
+#pragma warning disable IDE0058 // Expression value is never used
+    public void ProcessCommandEnd(IOnCommandExecuteHookEvent _)
     {
-        var previousContainer = Interlocked.Exchange(ref currentCommandContainer, CommandIdContainer.Empty);
+        var previousContainer = Interlocked.Exchange(
+            ref currentCommandContainer,
+            CommandIdContainer.Empty
+        );
         var commandId = previousContainer?.Value ?? Guid.Empty;
 
         if (commandId != Guid.Empty && activeCommands.TryRemove(commandId, out var command))
@@ -90,32 +101,42 @@ internal sealed class CommandTrackerManager : IDisposable
             var output = new StringBuilder();
             while (command.Output.TryDequeue(out var line))
             {
-                if (output.Length > 0) _ = output.AppendLine();
-                _ = output.Append(line);
+                if (output.Length > 0)
+                    output.AppendLine();
+
+                output.Append(line);
             }
 
-            _ = Task.Run(() => command.Callback.Invoke(output.ToString()));
+            Task.Run(() => command.Callback.Invoke(output.ToString()));
         }
     }
+#pragma warning restore IDE0058 // Expression value is never used
 
     private void StartCleanupTimer()
     {
-        _ = Task.Run(async () =>
-        {
-            while (!cancellationTokenSource.Token.IsCancellationRequested)
+        _ = Task.Run(
+            async () =>
             {
-                try
+                while (!cancellationTokenSource.Token.IsCancellationRequested)
                 {
-                    await Task.Delay(TimeSpan.FromMilliseconds(200), cancellationTokenSource.Token);
-                    CleanupExpiredCommands();
+                    try
+                    {
+                        await Task.Delay(
+                            TimeSpan.FromMilliseconds(200),
+                            cancellationTokenSource.Token
+                        );
+                        CleanupExpiredCommands();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!GlobalExceptionHandler.Handle(ex))
+                            return;
+                        AnsiConsole.WriteException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    if (!GlobalExceptionHandler.Handle(ex)) return;
-                    AnsiConsole.WriteException(ex);
-                }
-            }
-        }, cancellationTokenSource.Token);
+            },
+            cancellationTokenSource.Token
+        );
     }
 
     private void CleanupExpiredCommands()
@@ -129,16 +150,18 @@ internal sealed class CommandTrackerManager : IDisposable
         }
     }
 
-    public void EnqueueCommand( Action<string> callback )
+    public void EnqueueCommand(Action<string> callback)
     {
-        if (disposed) return;
+        if (disposed)
+            return;
 
         pendingCallbacks.Enqueue(callback);
     }
 
     public void Dispose()
     {
-        if (disposed) return;
+        if (disposed)
+            return;
         disposed = true;
 
         cancellationTokenSource.Cancel();
