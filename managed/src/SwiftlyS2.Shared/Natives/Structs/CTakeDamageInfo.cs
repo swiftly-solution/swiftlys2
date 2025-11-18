@@ -64,7 +64,7 @@ public unsafe struct CTakeDamageInfo
 
     public CTakeDamageInfo()
     {
-        Vector vec3_origin = Vector.Zero;
+        var vec3_origin = Vector.Zero;
 
         fixed (CTakeDamageInfo* info = &this)
         {
@@ -74,7 +74,7 @@ public unsafe struct CTakeDamageInfo
 
     public CTakeDamageInfo( CBaseEntity inflictor, CBaseEntity attacker, CBaseEntity ability, float flDamage, DamageTypes_t bitsDamageType )
     {
-        Vector vec3_origin = Vector.Zero;
+        var vec3_origin = Vector.Zero;
 
         fixed (CTakeDamageInfo* info = &this)
         {

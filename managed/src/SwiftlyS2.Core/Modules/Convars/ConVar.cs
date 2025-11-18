@@ -88,7 +88,7 @@ internal class ConVar<T> : IConVar<T>
 
     public void ReplicateToClient( int clientId, T value )
     {
-        var val = "";
+        string? val;
         if (value is bool boolValue)
         {
             val = boolValue ? "1" : "0";
@@ -141,13 +141,11 @@ internal class ConVar<T> : IConVar<T>
         {
             val = $"{vector2DValue.X},{vector2DValue.Y}";
         }
-        else if (value is Vector4D vector4DValue)
-        {
-            val = $"{vector4DValue.X},{vector4DValue.Y},{vector4DValue.Z},{vector4DValue.W}";
-        }
         else
         {
-            val = value is string stringValue ? stringValue : throw new ArgumentException($"Invalid type {typeof(T).Name}");
+            val = value is Vector4D vector4DValue
+                ? $"{vector4DValue.X},{vector4DValue.Y},{vector4DValue.Z},{vector4DValue.W}"
+                : value is string stringValue ? stringValue : throw new ArgumentException($"Invalid type {typeof(T).Name}");
         }
 
         NativeConvars.SetClientConvarValueString(clientId, Name, val);

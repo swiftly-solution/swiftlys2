@@ -6,5 +6,5 @@ internal enum PluginStatus
     Unloaded,
     Loading,
     Error,
-    Indeterminate
+    Indeterminate,
 }

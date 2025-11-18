@@ -8,12 +8,12 @@ namespace SwiftlyS2.Core.Services;
 
 internal sealed class CommandTrackerManager : IDisposable
 {
-    private sealed record CommandIdContainer(Guid Value)
+    private sealed record CommandIdContainer( Guid Value )
     {
         public static readonly CommandIdContainer Empty = new(Guid.Empty);
     }
 
-    private readonly record struct ExecutingCommand(Action<string> Callback)
+    private readonly record struct ExecutingCommand( Action<string> Callback )
     {
         public ConcurrentQueue<string> Output { get; } = new();
         public DateTime Created { get; } = DateTime.UtcNow;
@@ -31,7 +31,7 @@ internal sealed class CommandTrackerManager : IDisposable
         StartCleanupTimer();
     }
 
-    public void ProcessCommand(IOnCommandExecuteHookEvent @event)
+    public void ProcessCommand( IOnCommandExecuteHookEvent @event )
     {
         if (@event.HookMode == HookMode.Pre)
         {
@@ -50,7 +50,7 @@ internal sealed class CommandTrackerManager : IDisposable
         }
     }
 
-    public void ProcessOutput(IOnConsoleOutputEvent @event)
+    public void ProcessOutput( IOnConsoleOutputEvent @event )
     {
         if (disposed)
             return;
@@ -65,7 +65,7 @@ internal sealed class CommandTrackerManager : IDisposable
         }
     }
 
-    public void ProcessCommandStart(IOnCommandExecuteHookEvent @event)
+    public void ProcessCommandStart( IOnCommandExecuteHookEvent @event )
     {
         if (pendingCallbacks.TryDequeue(out var callback))
         {
@@ -88,7 +88,7 @@ internal sealed class CommandTrackerManager : IDisposable
     }
 
 #pragma warning disable IDE0058 // Expression value is never used
-    public void ProcessCommandEnd(IOnCommandExecuteHookEvent _)
+    public void ProcessCommandEnd( IOnCommandExecuteHookEvent _ )
     {
         var previousContainer = Interlocked.Exchange(
             ref currentCommandContainer,
@@ -150,7 +150,7 @@ internal sealed class CommandTrackerManager : IDisposable
         }
     }
 
-    public void EnqueueCommand(Action<string> callback)
+    public void EnqueueCommand( Action<string> callback )
     {
         if (disposed)
             return;

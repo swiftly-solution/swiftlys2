@@ -100,16 +100,16 @@ internal class CoreHookService : IDisposable
         {
             return ( pServer ) =>
         {
-              if (!CSteamGameServerAPIContext.Init())
-              {
-                  _Logger.LogError("Failed to initialize Steamworks GameServer API context.");
-                  return;
-              }
+            if (!CSteamGameServerAPIContext.Init())
+            {
+                _Logger.LogError("Failed to initialize Steamworks GameServer API context.");
+                return;
+            }
 
 
-              EventPublisher.InvokeOnSteamAPIActivatedHook();
-              next()(pServer);
-          };
+            EventPublisher.InvokeOnSteamAPIActivatedHook();
+            next()(pServer);
+        };
         });
     }
 
@@ -130,17 +130,17 @@ internal class CoreHookService : IDisposable
             return ( pWeaponServices, pBasePlayerWeapon ) =>
         {
 
-              var result = next()(pWeaponServices, pBasePlayerWeapon);
+            var result = next()(pWeaponServices, pBasePlayerWeapon);
 
-              var weaponServices = new CCSPlayer_WeaponServicesImpl(pWeaponServices);
-              var basePlayerWeapon = new CCSWeaponBaseImpl(pBasePlayerWeapon);
+            var weaponServices = new CCSPlayer_WeaponServicesImpl(pWeaponServices);
+            var basePlayerWeapon = new CCSWeaponBaseImpl(pBasePlayerWeapon);
 
-              var @event = new OnWeaponServicesCanUseHookEvent {
-                  WeaponServices = weaponServices,
-                  Weapon = basePlayerWeapon,
-                  OriginalResult = result != 0
-              };
-              EventPublisher.InvokeOnWeaponServicesCanUseHook(@event);
+            var @event = new OnWeaponServicesCanUseHookEvent {
+                WeaponServices = weaponServices,
+                Weapon = basePlayerWeapon,
+                OriginalResult = result != 0
+            };
+            EventPublisher.InvokeOnWeaponServicesCanUseHook(@event);
 
             return @event.Intercepted ? @event.OriginalResult ? (byte)1 : (byte)0 : result;
         };
@@ -170,36 +170,36 @@ internal class CoreHookService : IDisposable
         {
             return ( pBaseEntity, pOtherEntity ) =>
         {
-              var entity = new CBaseEntityImpl(pBaseEntity);
-              var otherEntity = new CBaseEntityImpl(pOtherEntity);
-              EventPublisher.InvokeOnEntityStartTouch(new OnEntityStartTouchEvent { Entity = entity, OtherEntity = otherEntity });
-              EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.StartTouch });
-              return next()(pBaseEntity, pOtherEntity);
-          };
+            var entity = new CBaseEntityImpl(pBaseEntity);
+            var otherEntity = new CBaseEntityImpl(pOtherEntity);
+            EventPublisher.InvokeOnEntityStartTouch(new OnEntityStartTouchEvent { Entity = entity, OtherEntity = otherEntity });
+            EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.StartTouch });
+            return next()(pBaseEntity, pOtherEntity);
+        };
         });
 
         _CBaseEntity_TouchGuid = _CBaseEntity_Touch.AddHook(next =>
         {
             return ( pBaseEntity, pOtherEntity ) =>
         {
-              var entity = new CBaseEntityImpl(pBaseEntity);
-              var otherEntity = new CBaseEntityImpl(pOtherEntity);
-              EventPublisher.InvokeOnEntityTouch(new OnEntityTouchEvent { Entity = entity, OtherEntity = otherEntity });
-              EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.Touch });
-              return next()(pBaseEntity, pOtherEntity);
-          };
+            var entity = new CBaseEntityImpl(pBaseEntity);
+            var otherEntity = new CBaseEntityImpl(pOtherEntity);
+            EventPublisher.InvokeOnEntityTouch(new OnEntityTouchEvent { Entity = entity, OtherEntity = otherEntity });
+            EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.Touch });
+            return next()(pBaseEntity, pOtherEntity);
+        };
         });
 
         _CBaseEntity_EndTouchGuid = _CBaseEntity_EndTouch.AddHook(next =>
         {
             return ( pBaseEntity, pOtherEntity ) =>
         {
-              var entity = new CBaseEntityImpl(pBaseEntity);
-              var otherEntity = new CBaseEntityImpl(pOtherEntity);
-              EventPublisher.InvokeOnEntityEndTouch(new OnEntityEndTouchEvent { Entity = entity, OtherEntity = otherEntity });
-              EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.EndTouch });
-              return next()(pBaseEntity, pOtherEntity);
-          };
+            var entity = new CBaseEntityImpl(pBaseEntity);
+            var otherEntity = new CBaseEntityImpl(pOtherEntity);
+            EventPublisher.InvokeOnEntityEndTouch(new OnEntityEndTouchEvent { Entity = entity, OtherEntity = otherEntity });
+            EventPublisher.InvokeOnEntityTouchHook(new OnEntityTouchHookEvent { Entity = entity, OtherEntity = otherEntity, TouchType = EntityTouchType.EndTouch });
+            return next()(pBaseEntity, pOtherEntity);
+        };
         });
     }
     private void HookCanAcquire()
@@ -215,29 +215,29 @@ internal class CoreHookService : IDisposable
 
             return ( pItemServices, pEconItemView, acquireMethod, unk1 ) =>
         {
-              var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
+            var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
 
-              var itemServices = _Core.Memory.ToSchemaClass<CCSPlayer_ItemServices>(pItemServices);
-              var econItemView = _Core.Memory.ToSchemaClass<CEconItemView>(pEconItemView);
+            var itemServices = _Core.Memory.ToSchemaClass<CCSPlayer_ItemServices>(pItemServices);
+            var econItemView = _Core.Memory.ToSchemaClass<CEconItemView>(pEconItemView);
 
-              var @event = new OnItemServicesCanAcquireHookEvent {
-                  ItemServices = itemServices,
-                  EconItemView = econItemView,
-                  WeaponVData = _Core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
-                  AcquireMethod = (AcquireMethod)acquireMethod,
-                  OriginalResult = (AcquireResult)result
-              };
+            var @event = new OnItemServicesCanAcquireHookEvent {
+                ItemServices = itemServices,
+                EconItemView = econItemView,
+                WeaponVData = _Core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
+                AcquireMethod = (AcquireMethod)acquireMethod,
+                OriginalResult = (AcquireResult)result
+            };
 
-              EventPublisher.InvokeOnCanAcquireHook(@event);
+            EventPublisher.InvokeOnCanAcquireHook(@event);
 
-              if (@event.Intercepted)
-              {
+            if (@event.Intercepted)
+            {
                 // original result is modified here.
-                  return (int)@event.OriginalResult;
-              }
+                return (int)@event.OriginalResult;
+            }
 
-              return result;
-          };
+            return result;
+        };
         });
     }
 
@@ -253,23 +253,23 @@ internal class CoreHookService : IDisposable
         {
             return ( a1, a2, a3, a4, a5 ) =>
         {
-              unsafe
-              {
-                  if (a5 != nint.Zero)
-                  {
-                      ref var command = ref Unsafe.AsRef<CCommand>((void*)a5);
-                      var @eventPre = new OnCommandExecuteHookEvent(ref command, HookMode.Pre);
-                      EventPublisher.InvokeOnCommandExecuteHook(@eventPre);
+            unsafe
+            {
+                if (a5 != nint.Zero)
+                {
+                    ref var command = ref Unsafe.AsRef<CCommand>((void*)a5);
+                    var @eventPre = new OnCommandExecuteHookEvent(ref command, HookMode.Pre);
+                    EventPublisher.InvokeOnCommandExecuteHook(@eventPre);
 
-                      var result = next()(a1, a2, a3, a4, a5);
+                    var result = next()(a1, a2, a3, a4, a5);
 
-                      var @eventPost = new OnCommandExecuteHookEvent(ref command, HookMode.Post);
-                      EventPublisher.InvokeOnCommandExecuteHook(@eventPost);
-                      return result;
-                  }
-                  return next()(a1, a2, a3, a4, a5);
-              }
-          };
+                    var @eventPost = new OnCommandExecuteHookEvent(ref command, HookMode.Post);
+                    EventPublisher.InvokeOnCommandExecuteHook(@eventPost);
+                    return result;
+                }
+                return next()(a1, a2, a3, a4, a5);
+            }
+        };
         });
     }
 
@@ -293,22 +293,22 @@ internal class CoreHookService : IDisposable
             {
                 return ( pICvar, pConCommandName, unk1 ) =>
           {
-                  var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
-                  if (commandName.StartsWith("^wb^"))
+              var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
+              if (commandName.StartsWith("^wb^"))
+              {
+                  commandName = commandName.Substring(4);
+                  var bytes = Encoding.UTF8.GetBytes(commandName);
+                  unsafe
                   {
-                      commandName = commandName.Substring(4);
-                      var bytes = Encoding.UTF8.GetBytes(commandName);
-                      unsafe
-                      {
-                          var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
-                          pStr.CopyFrom(bytes);
-                          var result = next()(pICvar, pStr, unk1);
-                          NativeMemory.Free((void*)pStr);
-                          return result;
-                      }
+                      var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
+                      pStr.CopyFrom(bytes);
+                      var result = next()(pICvar, pStr, unk1);
+                      NativeMemory.Free((void*)pStr);
+                      return result;
                   }
-                  return next()(pICvar, pConCommandName, unk1);
-              };
+              }
+              return next()(pICvar, pConCommandName, unk1);
+          };
             });
         }
         else
@@ -322,22 +322,22 @@ internal class CoreHookService : IDisposable
             {
                 return ( pICvar, pRet, pConCommandName, unk1 ) =>
           {
-                  var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
-                  if (commandName.StartsWith("^wb^"))
+              var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
+              if (commandName.StartsWith("^wb^"))
+              {
+                  commandName = commandName.Substring(4);
+                  var bytes = Encoding.UTF8.GetBytes(commandName);
+                  unsafe
                   {
-                      commandName = commandName.Substring(4);
-                      var bytes = Encoding.UTF8.GetBytes(commandName);
-                      unsafe
-                      {
-                          var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
-                          pStr.CopyFrom(bytes);
-                          var result = next()(pICvar, pRet, pStr, unk1);
-                          NativeMemory.Free((void*)pStr);
-                          return result;
-                      }
+                      var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
+                      pStr.CopyFrom(bytes);
+                      var result = next()(pICvar, pRet, pStr, unk1);
+                      NativeMemory.Free((void*)pStr);
+                      return result;
                   }
-                  return next()(pICvar, pRet, pConCommandName, unk1);
-              };
+              }
+              return next()(pICvar, pRet, pConCommandName, unk1);
+          };
             });
         }
     }
@@ -359,22 +359,22 @@ internal class CoreHookService : IDisposable
             return ( pMovementServices, pUserCmd ) =>
         {
 
-              var movementService = new CCSPlayer_MovementServicesImpl(pMovementServices);
+            var movementService = new CCSPlayer_MovementServicesImpl(pMovementServices);
 
-              var userCmdPb = new CSGOUserCmdPBImpl(pUserCmd + 0x10, false);
+            var userCmdPb = new CSGOUserCmdPBImpl(pUserCmd + 0x10, false);
 
-              var buttonState = new CInButtonStateImpl(pUserCmd + 0x58);
+            var buttonState = new CInButtonStateImpl(pUserCmd + 0x58);
 
-              var @event = new OnMovementServicesRunCommandHookEvent {
-                  MovementServices = movementService,
-                  ButtonState = buttonState,
-                  UserCmdPB = userCmdPb
-              };
-              EventPublisher.InvokeOnMovementServicesRunCommandHook(@event);
+            var @event = new OnMovementServicesRunCommandHookEvent {
+                MovementServices = movementService,
+                ButtonState = buttonState,
+                UserCmdPB = userCmdPb
+            };
+            EventPublisher.InvokeOnMovementServicesRunCommandHook(@event);
 
-              var result = next()(pMovementServices, pUserCmd);
-              return result;
-          };
+            var result = next()(pMovementServices, pUserCmd);
+            return result;
+        };
         });
     }
 

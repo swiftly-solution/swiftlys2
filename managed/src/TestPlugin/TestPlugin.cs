@@ -26,11 +26,6 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Sounds;
 using SwiftlyS2.Shared.SteamAPI;
 using Tomlyn.Extensions.Configuration;
-using SwiftlyS2.Core.Menus.OptionsBase;
-using System.Collections.Concurrent;
-using Dia2Lib;
-using System.Reflection.Metadata;
-using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsTCPIP;
 
 namespace TestPlugin;
 
@@ -45,16 +40,15 @@ public class InProcessConfig : ManualConfig
     public InProcessConfig()
     {
         _ = AddLogger(ConsoleLogger.Default);
-        _ = AddJob(Job.Default
-            .WithToolchain(new InProcessNoEmitToolchain(true))
-            .WithId("InProcess"));
+        _ = AddJob(Job.Default.WithToolchain(new InProcessNoEmitToolchain(true)).WithId("InProcess"));
     }
 }
 
 [PluginMetadata(Id = "sw2.testplugin", Version = "1.0.0")]
 public class TestPlugin : BasePlugin
 {
-    public TestPlugin( ISwiftlyCore core ) : base(core)
+    public TestPlugin( ISwiftlyCore core )
+        : base(core)
     {
         Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
         // Console.WriteLine($"sizeof(bool): {sizeof(bool)}");
@@ -62,7 +56,6 @@ public class TestPlugin : BasePlugin
         Core.Event.OnWeaponServicesCanUseHook += ( @event ) =>
         {
             // Console.WriteLine($"WeaponServicesCanUse: {@event.Weapon.WeaponBaseVData.AttackMovespeedFactor} {@event.OriginalResult}");
-
         };
     }
 
@@ -83,7 +76,8 @@ public class TestPlugin : BasePlugin
         var player = @event.UserIdPlayer.RequiredController;
         if (player.InGameMoneyServices?.IsValid == true)
         {
-            player.InGameMoneyServices.Account = Core.ConVar.Find<int>("mp_maxmoney")?.Value ?? 16000;
+            player.InGameMoneyServices.Account =
+                Core.ConVar.Find<int>("mp_maxmoney")?.Value ?? 16000;
             player.InGameMoneyServices.AccountUpdated();
         }
         return HookResult.Continue;
@@ -134,10 +128,13 @@ public class TestPlugin : BasePlugin
         //   }
         // };
 
-        Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) =>
-        {
-            Console.WriteLine($"pong: {buffer}");
-        });
+        Core.Engine.ExecuteCommandWithBuffer(
+            "@ping",
+            ( buffer ) =>
+            {
+                Console.WriteLine($"pong: {buffer}");
+            }
+        );
 
         _ = Core.GameEvent.HookPre<EventShowSurvivalRespawnStatus>(@event =>
         {
@@ -145,18 +142,18 @@ public class TestPlugin : BasePlugin
             return HookResult.Continue;
         });
 
-        _ = Core.Configuration
-            .InitializeJsonWithModel<TestConfig>("test.jsonc", "Main")
-            .Configure(( builder ) =>
-            {
-                _ = builder.AddJsonFile("test.jsonc", optional: false, reloadOnChange: true);
-                _ = builder.AddTomlFile("test.toml", optional: true, reloadOnChange: true);
-            });
+        _ = Core.Configuration.InitializeJsonWithModel<TestConfig>("test.jsonc", "Main")
+            .Configure(
+                ( builder ) =>
+                {
+                    _ = builder.AddJsonFile("test.jsonc", optional: false, reloadOnChange: true);
+                    _ = builder.AddTomlFile("test.toml", optional: true, reloadOnChange: true);
+                }
+            );
 
         ServiceCollection services = new();
 
-        _ = services
-            .AddSwiftly(Core);
+        _ = services.AddSwiftly(Core);
 
         Core.Event.OnPrecacheResource += ( @event ) =>
         {
@@ -165,14 +162,14 @@ public class TestPlugin : BasePlugin
 
         Core.Event.OnConVarValueChanged += ( @event ) =>
         {
-            Console.WriteLine($"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
+            Console.WriteLine(
+                $"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}"
+            );
         };
-
 
         // var provider = services.BuildServiceProvider();
 
         // provider.GetRequiredService<TestService>();
-
 
         // Host.CreateDefaultBuilder()
         //   .ConfigureLogging((context, logging) => {
@@ -191,14 +188,13 @@ public class TestPlugin : BasePlugin
         // This can be used everywhere and the value will be updated when the config is changed
         // Console.WriteLine(config.CurrentValue.Age);
 
-
         // var config = new TestConfig();
 
         // throw new Exception("TestPlugin loaded");
 
         // Core.
 
-        var i = 0;
+        int i = 0;
 
         // var token2 = Core.Scheduler.Repeat(10, () => {
         //   Console.WriteLine(Core.Engine.TickCount);
@@ -220,7 +216,6 @@ public class TestPlugin : BasePlugin
         //     next()(a, b);
         //   };
         // });
-
 
         // Entrypoint
 
@@ -247,12 +242,16 @@ public class TestPlugin : BasePlugin
             var players = Core.PlayerManager.GetAllPlayers();
             foreach (var player in players)
             {
-                Core.Profiler.StartRecording("OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player");
-                for (var i = 0; i < 1024; i++)
+                Core.Profiler.StartRecording(
+                    "OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player"
+                );
+                for (int i = 0; i < 1024; i++)
                 {
                     convar!.ReplicateToClient(player.PlayerID, (float)Random.Shared.NextDouble());
                 }
-                Core.Profiler.StopRecording("OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player");
+                Core.Profiler.StopRecording(
+                    "OnTick Send 1024 sv_cs_player_speed_has_hostage convar at player"
+                );
             }
         };
 
@@ -313,7 +312,7 @@ public class TestPlugin : BasePlugin
         // entity.DispatchSpawn(kv);
         // Console.WriteLine("Spawned entity with keyvalues");
 
-        var j = 0;
+        int j = 0;
 
         var cvar = Core.ConVar.Find<bool>("sv_cheats")!;
         Console.WriteLine(cvar);
@@ -330,19 +329,20 @@ public class TestPlugin : BasePlugin
 
         cvar2.ReplicateToClient(0, true);
 
-        cvar4.QueryClient(0, ( value ) =>
-        {
-            Console.WriteLine("QueryCallback " + value);
-        });
+        cvar4.QueryClient(
+            0,
+            ( value ) =>
+            {
+                Console.WriteLine("QueryCallback " + value);
+            }
+        );
     }
 
     [Command("w")]
     public void TestCommand1( ICommandContext context )
     {
-        _ = SteamGameServerUGC.DownloadItem(new PublishedFileId_t(3596198331), true);
+        var ret = SteamGameServerUGC.DownloadItem(new PublishedFileId_t(3596198331), true);
         Console.WriteLine(SteamGameServer.GetPublicIP().ToIPAddress());
-
-
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -362,24 +362,27 @@ public class TestPlugin : BasePlugin
         var addres = Core.GameData.GetSignature("CBaseEntity::DispatchSpawn");
         var func = Core.Memory.GetUnmanagedFunctionByAddress<DispatchSpawnDelegate>(addres);
 
-        var guid = func.AddHook(( next ) =>
-        {
-            return ( pEntity, pKV ) =>
+        var guid = func.AddHook(
+            ( next ) =>
             {
-                Console.WriteLine("TestPlugin DispatchSpawn " + order++);
-                return next()(pEntity, pKV);
-            };
-        });
+                return ( pEntity, pKV ) =>
+                {
+                    Console.WriteLine("TestPlugin DispatchSpawn " + order++);
+                    return next()(pEntity, pKV);
+                };
+            }
+        );
 
-        _ = _dispatchspawn.AddHook(( next ) =>
-        {
-            return ( pEntity, pKV ) =>
+        _ = _dispatchspawn.AddHook(
+            ( next ) =>
             {
-                Console.WriteLine("TestPlugin DispatchSpawn2 " + order++);
-                return next()(pEntity, pKV);
-            };
-        });
-
+                return ( pEntity, pKV ) =>
+                {
+                    Console.WriteLine("TestPlugin DispatchSpawn2 " + order++);
+                    return next()(pEntity, pKV);
+                };
+            }
+        );
     }
 
     [EventListener<EventDelegates.OnEntityCreated>]
@@ -439,7 +442,15 @@ public class TestPlugin : BasePlugin
         kv.Set<uint>("m_spawnflags", 256);
         ent.DispatchSpawn(kv);
         ent.SetModel("weapons/models/grenade/incendiary/weapon_incendiarygrenade.vmdl");
-        ent.Teleport(new Vector(context.Sender!.PlayerPawn!.AbsOrigin!.Value.X + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Y + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Z + 30), QAngle.Zero, Vector.Zero);
+        ent.Teleport(
+            new Vector(
+                context.Sender!.PlayerPawn!.AbsOrigin!.Value.X + 50,
+                context.Sender!.PlayerPawn!.AbsOrigin!.Value.Y + 50,
+                context.Sender!.PlayerPawn!.AbsOrigin!.Value.Z + 30
+            ),
+            QAngle.Zero,
+            Vector.Zero
+        );
     }
 
     [Command("tt4")]
@@ -470,25 +481,32 @@ public class TestPlugin : BasePlugin
     [Command("tt7")]
     public void TestCommand7( ICommandContext context )
     {
-        Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) =>
-        {
-            Console.WriteLine($"pong: {buffer}");
-        });
+        Core.Engine.ExecuteCommandWithBuffer(
+            "@ping",
+            ( buffer ) =>
+            {
+                Console.WriteLine($"pong: {buffer}");
+            }
+        );
     }
 
     [Command("tt8")]
     public unsafe void TestCommand8( ICommandContext context )
     {
-        Core.EntitySystem.GetAllEntitiesByDesignerName<CBuyZone>("func_buyzone").ToList().ForEach(zone =>
-        {
-            if ((zone?.IsValid ?? false))
+        Core.EntitySystem.GetAllEntitiesByDesignerName<CBuyZone>("func_buyzone")
+            .ToList()
+            .ForEach(zone =>
             {
-                zone.Despawn();
-            }
-        });
+                if ((zone?.IsValid ?? false))
+                {
+                    zone.Despawn();
+                }
+            });
 
         var sender = context.Sender!;
-        var target = Core.PlayerManager.GetAllPlayers().FirstOrDefault(p => p.PlayerID != sender.PlayerID)!;
+        var target = Core
+            .PlayerManager.GetAllPlayers()
+            .FirstOrDefault(p => p.PlayerID != sender.PlayerID)!;
 
         var origin = sender.RequiredPlayerPawn.AbsOrigin ?? Vector.Zero;
         var targetOrigin = target.RequiredPlayerPawn.AbsOrigin ?? Vector.Zero;
@@ -506,7 +524,8 @@ public class TestPlugin : BasePlugin
             // unk01 = 1,
             IterateEntities = true,
             QueryShapeAttributes = new RnQueryShapeAttr_t {
-                InteractsWith = MaskTrace.Player | MaskTrace.Solid | MaskTrace.Hitbox | MaskTrace.Npc,
+                InteractsWith =
+                    MaskTrace.Player | MaskTrace.Solid | MaskTrace.Hitbox | MaskTrace.Npc,
                 InteractsExclude = MaskTrace.Empty,
                 InteractsAs = MaskTrace.Player,
                 CollisionGroup = CollisionGroup.PlayerMovement,
@@ -517,7 +536,7 @@ public class TestPlugin : BasePlugin
                 // ShouldIgnoreDisabledPairs = true,
                 // IgnoreIfBothInteractWithHitboxes = true,
                 // ForceHitEverything = true
-            }
+            },
         };
 
         // filter.QueryShapeAttributes.EntityIdsToIgnore[0] = unchecked((uint)-1);
@@ -530,11 +549,21 @@ public class TestPlugin : BasePlugin
         var trace = new CGameTrace();
         Core.Trace.TraceShape(origin, targetOrigin, ray, filter, ref trace);
 
-        Console.WriteLine(trace.pEntity != null ? $"! Hit Entity: {trace.Entity.DesignerName}" : "! No entity hit");
-        Console.WriteLine($"! SurfaceProperties: {(nint)trace.SurfaceProperties}, pEntity: {(nint)trace.pEntity}, HitBox: {(nint)trace.HitBox}({trace.HitBox->m_name.Value}), Body: {(nint)trace.Body}, Shape: {(nint)trace.Shape}, Contents: {trace.Contents}");
-        Console.WriteLine($"! StartPos: {trace.StartPos}, EndPos: {trace.EndPos}, HitNormal: {trace.HitNormal}, HitPoint: {trace.HitPoint}");
-        Console.WriteLine($"! HitOffset: {trace.HitOffset}, Fraction: {trace.Fraction}, Triangle: {trace.Triangle}, HitboxBoneIndex: {trace.HitboxBoneIndex}");
-        Console.WriteLine($"! RayType: {trace.RayType}, StartInSolid: {trace.StartInSolid}, ExactHitPoint: {trace.ExactHitPoint}");
+        Console.WriteLine(
+            trace.pEntity != null ? $"! Hit Entity: {trace.Entity.DesignerName}" : "! No entity hit"
+        );
+        Console.WriteLine(
+            $"! SurfaceProperties: {(nint)trace.SurfaceProperties}, pEntity: {(nint)trace.pEntity}, HitBox: {(nint)trace.HitBox}({trace.HitBox->m_name.Value}), Body: {(nint)trace.Body}, Shape: {(nint)trace.Shape}, Contents: {trace.Contents}"
+        );
+        Console.WriteLine(
+            $"! StartPos: {trace.StartPos}, EndPos: {trace.EndPos}, HitNormal: {trace.HitNormal}, HitPoint: {trace.HitPoint}"
+        );
+        Console.WriteLine(
+            $"! HitOffset: {trace.HitOffset}, Fraction: {trace.Fraction}, Triangle: {trace.Triangle}, HitboxBoneIndex: {trace.HitboxBoneIndex}"
+        );
+        Console.WriteLine(
+            $"! RayType: {trace.RayType}, StartInSolid: {trace.StartInSolid}, ExactHitPoint: {trace.ExactHitPoint}"
+        );
         Console.WriteLine("\n");
     }
 
@@ -650,52 +679,82 @@ public class TestPlugin : BasePlugin
             }
         };
 
-        var confirmMenu = Core.MenusAPI
-            .CreateBuilder()
+        var confirmMenu = Core
+            .MenusAPI.CreateBuilder()
             .Design.SetMenuTitle("Confirmation Menu")
             .AddOption(buyButton)
             .AddOption(new ButtonMenuOption("Cancel") { CloseAfterClick = true })
             .Build();
 
-        var shopMenu = Core.MenusAPI
-            .CreateBuilder()
+        var shopMenu = Core
+            .MenusAPI.CreateBuilder()
             .Design.SetMenuTitle("Shop Menu")
-            .AddOption(new SubmenuMenuOption("Item 1", async () =>
-            {
-                await Task.Delay(100);
-                return confirmMenu;
-            }))
-            .AddOption(new SubmenuMenuOption("Item 2", async () =>
-            {
-                await Task.Delay(100);
-                return confirmMenu;
-            }))
-            .AddOption(new SubmenuMenuOption("Item 3", async () =>
-            {
-                await Task.Delay(100);
-                return confirmMenu;
-            }))
-            .AddOption(new SubmenuMenuOption("Item 4", async () =>
-            {
-                await Task.Delay(100);
-                return confirmMenu;
-            }))
+            .AddOption(
+                new SubmenuMenuOption(
+                    "Item 1",
+                    async () =>
+                    {
+                        await Task.Delay(100);
+                        return confirmMenu;
+                    }
+                )
+            )
+            .AddOption(
+                new SubmenuMenuOption(
+                    "Item 2",
+                    async () =>
+                    {
+                        await Task.Delay(100);
+                        return confirmMenu;
+                    }
+                )
+            )
+            .AddOption(
+                new SubmenuMenuOption(
+                    "Item 3",
+                    async () =>
+                    {
+                        await Task.Delay(100);
+                        return confirmMenu;
+                    }
+                )
+            )
+            .AddOption(
+                new SubmenuMenuOption(
+                    "Item 4",
+                    async () =>
+                    {
+                        await Task.Delay(100);
+                        return confirmMenu;
+                    }
+                )
+            )
             .Build();
 
-        var mainMenu = Core.MenusAPI
-            .CreateBuilder()
+        var mainMenu = Core
+            .MenusAPI.CreateBuilder()
             .Design.SetMenuTitle("Menu")
-            .AddOption(new SubmenuMenuOption("Shop", async () =>
-            {
-                await Task.Delay(100);
-                return shopMenu;
-            }))
+            .AddOption(
+                new SubmenuMenuOption(
+                    "Shop",
+                    async () =>
+                    {
+                        await Task.Delay(100);
+                        return shopMenu;
+                    }
+                )
+            )
             .Build();
 
-        Core.MenusAPI.OpenMenu(mainMenu, ( player, menu ) =>
-        {
-            Console.WriteLine($"{menu.Configuration.Title} closed for player: {player.Controller.PlayerName}");
-        });
+        Core.MenusAPI.OpenMenu(
+            mainMenu,
+            ( player, menu ) =>
+            {
+                Console.WriteLine(
+                    $"{menu.Configuration.Title} closed for player: {player.Controller.PlayerName}"
+                );
+            }
+        );
 
         // Core.MenusAPI.OpenMenuForPlayer(context.Sender!, menu, ( player, menu ) =>
         // {
@@ -714,7 +773,16 @@ public class TestPlugin : BasePlugin
     [Command("rmt")]
     public void RefactoredMenuTestCommand( ICommandContext context )
     {
-        var button = new ButtonMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 向这广袤世界致以温柔问候", "#FFE4E1", "#FFC0CB", "#FF69B4")) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop/*, CloseAfterClick = true*/ };
+        var button = new ButtonMenuOption(
+            HtmlGradient.GenerateGradientText(
+                "Swiftlys2 向这广袤世界致以温柔问候",
+                "#FFE4E1",
+                "#FFC0CB",
+                "#FF69B4"
+            )
+        ) {
+            TextStyle = MenuOptionTextStyle.ScrollLeftLoop, /*, CloseAfterClick = true*/
+        };
         button.Click += ( sender, args ) =>
         {
             args.Player.SendMessage(MessageType.Chat, "Swiftlys2 向这广袤世界致以温柔问候");
@@ -730,15 +798,19 @@ public class TestPlugin : BasePlugin
         var toggle = new ToggleMenuOption("12");
         toggle.ValueChanged += ( sender, args ) =>
         {
-            args.Player.SendChat($"OldValue: {args.OldValue}({args.OldValue.GetType().Name}), NewValue: {args.NewValue}({args.NewValue.GetType().Name})");
+            args.Player.SendChat(
+                $"OldValue: {args.OldValue}({args.OldValue.GetType().Name}), NewValue: {args.NewValue}({args.NewValue.GetType().Name})"
+            );
         };
 
         var player = context.Sender!;
-        var menu = Core.MenusAPI
-            .CreateBuilder()
+        var menu = Core
+            .MenusAPI.CreateBuilder()
             .SetPlayerFrozen(false)
             .Design.SetMaxVisibleItems(5)
-            .Design.SetMenuTitle($"{HtmlGradient.GenerateGradientText("Redesigned Menu", "#00FA9A", "#F5FFFA")}")
+            .Design.SetMenuTitle(
+                $"{HtmlGradient.GenerateGradientText("Redesigned Menu", "#00FA9A", "#F5FFFA")}"
+            )
             .Design.SetMenuTitleVisible(true)
             .Design.SetMenuFooterVisible(true)
             .Design.SetMenuFooterColor("#0F0")
@@ -751,41 +823,117 @@ public class TestPlugin : BasePlugin
             .AddOption(toggle)
             .AddOption(new ChoiceMenuOption("123", ["Option 1", "Option 2", "Option 3"]))
             .AddOption(new SliderMenuOption("1234"))
-            .AddOption(new ProgressBarMenuOption("12345", () => (float)new Random().NextDouble(), multiLine: false))
-            .AddOption(new SubmenuMenuOption("123456", async () =>
-            {
-                await Task.Delay(1000);
-                var menu = Core.MenusAPI.CreateBuilder()
-                    .SetPlayerFrozen(true)
-                    .Design.SetMenuTitle("Async Submenu")
-                    .AddOption(new TextMenuOption("123456"))
-                    .Build();
-                return menu;
-            }))
+            .AddOption(
+                new ProgressBarMenuOption(
+                    "12345",
+                    () => (float)new Random().NextDouble(),
+                    multiLine: false
+                )
+            )
+            .AddOption(
+                new SubmenuMenuOption(
+                    "123456",
+                    async () =>
+                    {
+                        await Task.Delay(1000);
+                        var menu = Core
+                            .MenusAPI.CreateBuilder()
+                            .SetPlayerFrozen(true)
+                            .Design.SetMenuTitle("Async Submenu")
+                            .AddOption(new TextMenuOption("123456"))
+                            .Build();
+                        return menu;
+                    }
+                )
+            )
             .AddOption(new InputMenuOption("1234567"))
-            .AddOption(new TextMenuOption() { Text = "12345678", TextStyle = MenuOptionTextStyle.ScrollLeftLoop })
+            .AddOption(
+                new TextMenuOption() {
+                    Text = "12345678",
+                    TextStyle = MenuOptionTextStyle.ScrollLeftLoop,
+                }
+            )
             .AddOption(new TextMenuOption("123456789"))
             .AddOption(new TextMenuOption("1234567890") { Visible = false })
             .AddOption(button)
-            .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 からこの広大なる世界へ温かい挨拶を", "#FFE5CC", "#FFAB91", "#FF7043")) { TextStyle = MenuOptionTextStyle.ScrollRightLoop })
-            .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 가 이 넓은 세상에 따뜻한 인사를 전합니다", "#E6E6FA", "#00FFFF", "#FF1493")) { TextStyle = MenuOptionTextStyle.ScrollLeftFade })
-            .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 приветствует этот прекрасный мир", "#AFEEEE", "#7FFFD4", "#40E0D0")) { TextStyle = MenuOptionTextStyle.ScrollRightFade })
-            .AddOption(new TextMenuOption("<font color='#F5FFFA'><b><invalid><font color='#00FA9A'>Swiftlys2</font> salută această lume minunată</invalid></b></font>") { TextStyle = MenuOptionTextStyle.TruncateEnd })
-            .AddOption(new TextMenuOption("<font color='#00FA9A'><b><invalid><font color='#F5FFFA'>Swiftlys2</font> extends warmest greetings to this wondrous world</invalid></b></font>") { TextStyle = MenuOptionTextStyle.TruncateBothEnds })
+            .AddOption(
+                new TextMenuOption(
+                    HtmlGradient.GenerateGradientText(
+                        "Swiftlys2 からこの広大なる世界へ温かい挨拶を",
+                        "#FFE5CC",
+                        "#FFAB91",
+                        "#FF7043"
+                    )
+                ) {
+                    TextStyle = MenuOptionTextStyle.ScrollRightLoop,
+                }
+            )
+            .AddOption(
+                new TextMenuOption(
+                    HtmlGradient.GenerateGradientText(
+                        "Swiftlys2 가 이 넓은 세상에 따뜻한 인사를 전합니다",
+                        "#E6E6FA",
+                        "#00FFFF",
+                        "#FF1493"
+                    )
+                ) {
+                    TextStyle = MenuOptionTextStyle.ScrollLeftFade,
+                }
+            )
+            .AddOption(
+                new TextMenuOption(
+                    HtmlGradient.GenerateGradientText(
+                        "Swiftlys2 приветствует этот прекрасный мир",
+                        "#AFEEEE",
+                        "#7FFFD4",
+                        "#40E0D0"
+                    )
+                ) {
+                    TextStyle = MenuOptionTextStyle.ScrollRightFade,
+                }
+            )
+            .AddOption(
+                new TextMenuOption(
+                    "<font color='#F5FFFA'><b><invalid><font color='#00FA9A'>Swiftlys2</font> salută această lume minunată</invalid></b></font>"
+                ) {
+                    TextStyle = MenuOptionTextStyle.TruncateEnd,
+                }
+            )
+            .AddOption(
+                new TextMenuOption(
+                    "<font color='#00FA9A'><b><invalid><font color='#F5FFFA'>Swiftlys2</font> extends warmest greetings to this wondrous world</invalid></b></font>"
+                ) {
+                    TextStyle = MenuOptionTextStyle.TruncateBothEnds,
+                }
+            )
             // .AddOption(new TextMenuOption("Swiftlys2 sendas korajn salutojn al ĉi tiu mirinda mondo"))
             .AddOption(new TextMenuOption("1234567890") { Visible = false })
             .AddOption(new TextMenuOption("123456789"))
-            .AddOption(new TextMenuOption("12345678") { TextStyle = MenuOptionTextStyle.ScrollRightLoop })
+            .AddOption(
+                new TextMenuOption("12345678") { TextStyle = MenuOptionTextStyle.ScrollRightLoop }
+            )
             .AddOption(new InputMenuOption("1234567"))
-            .AddOption(new SubmenuMenuOption("123456", () =>
-            {
-                var menu = Core.MenusAPI.CreateBuilder()
-                    .Design.SetMenuTitle("Async Submenu")
-                    .AddOption(new TextMenuOption("123456"))
-                    .Build();
-                return menu;
-            }))
-            .AddOption(new ProgressBarMenuOption("12345", () => (float)new Random().NextDouble(), multiLine: false))
+            .AddOption(
+                new SubmenuMenuOption(
+                    "123456",
+                    () =>
+                    {
+                        var menu = Core
+                            .MenusAPI.CreateBuilder()
+                            .Design.SetMenuTitle("Async Submenu")
+                            .AddOption(new TextMenuOption("123456"))
+                            .Build();
+                        return menu;
+                    }
+                )
+            )
+            .AddOption(
+                new ProgressBarMenuOption(
+                    "12345",
+                    () => (float)new Random().NextDouble(),
+                    multiLine: false
+                )
+            )
             .AddOption(new SliderMenuOption("1234"))
             .AddOption(new ChoiceMenuOption("123", ["Option 1", "Option 2", "Option 3"]))
             .AddOption(new ToggleMenuOption("12", false, "O", "X"))

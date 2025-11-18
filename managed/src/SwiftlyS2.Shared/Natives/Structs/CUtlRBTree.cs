@@ -59,10 +59,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
     public bool IsLeaf( TKey i ) => LeftChild(i) == -TKey.One && RightChild(i) == -TKey.One;
     public bool IsValidIndex( TKey i )
     {
-        if (!Elements.IsIdxValid(i))
-            return false;
-
-        return i > Elements.Count - TKey.One ? false : LeftChild(i) != i;
+        return Elements.IsIdxValid(i) && i <= Elements.Count - TKey.One && LeftChild(i) != i;
     }
     public TKey InvalidIndex() => -TKey.One;
     public int Depth() => Depth(Root);
@@ -114,7 +111,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public void RotateLeft( TKey elem )
     {
-        TKey right = RightChild(elem);
+        var right = RightChild(elem);
         SetRightChild(elem, LeftChild(right));
         if (LeftChild(right) != -TKey.One)
             SetParent(LeftChild(right), elem);
@@ -140,7 +137,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public void RotateRight( TKey elem )
     {
-        TKey left = LeftChild(elem);
+        var left = LeftChild(elem);
         SetLeftChild(elem, RightChild(left));
         if (RightChild(left) != -TKey.One)
             SetParent(RightChild(left), elem);
@@ -171,12 +168,12 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
         while (elem != Root && IsRed(Parent(elem)))
         {
-            TKey parent = Parent(elem);
-            TKey grandparent = Parent(parent);
+            var parent = Parent(elem);
+            var grandparent = Parent(parent);
 
             if (IsLeftChild(parent))
             {
-                TKey uncle = RightChild(grandparent);
+                var uncle = RightChild(grandparent);
                 if (IsValidIndex(uncle) && IsRed(uncle))
                 {
                     SetColor(parent, NodeColor_t.BLACK);
@@ -199,7 +196,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
             }
             else
             {
-                TKey uncle = LeftChild(grandparent);
+                var uncle = LeftChild(grandparent);
                 if (IsValidIndex(uncle) && IsRed(uncle))
                 {
                     SetColor(parent, NodeColor_t.BLACK);
@@ -249,7 +246,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public TKey InsertAt( TKey parent, bool leftchild )
     {
-        TKey i = NewNode();
+        var i = NewNode();
         LinkToParent(i, parent, leftchild);
         NumElements++;
         return i;
@@ -259,11 +256,11 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
     {
         while (elem != Root && IsBlack(elem))
         {
-            TKey parent = Parent(elem);
+            var parent = Parent(elem);
 
             if (elem == LeftChild(parent))
             {
-                TKey sibling = RightChild(parent);
+                var sibling = RightChild(parent);
                 if (IsRed(sibling))
                 {
                     SetColor(sibling, NodeColor_t.BLACK);
@@ -299,7 +296,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
             }
             else
             {
-                TKey sibling = LeftChild(parent);
+                var sibling = LeftChild(parent);
                 if (IsRed(sibling))
                 {
                     SetColor(sibling, NodeColor_t.BLACK);
@@ -369,7 +366,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
             else
                 Root = x;
 
-            NodeColor_t ycolor = Color(y);
+            var ycolor = Color(y);
             if (y != elem)
             {
                 SetParent(y, Parent(elem));
@@ -401,7 +398,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
     {
         if (elem != InvalidIndex())
         {
-            FindInsertionPosition(this[elem], out TKey parent, out var leftchild);
+            FindInsertionPosition(this[elem], out var parent, out var leftchild);
 
             LinkToParent(elem, parent, leftchild);
         }
@@ -412,7 +409,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
         parent = InvalidIndex();
         leftchild = false;
 
-        TKey current = Root;
+        var current = Root;
         while (IsValidIndex(current))
         {
             parent = current;
@@ -441,7 +438,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public bool Remove( TValue value )
     {
-        TKey node = Find(value);
+        var node = Find(value);
         if (node != -TKey.One)
             RemoveAt(node);
 
@@ -450,7 +447,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public TKey Find( TValue value )
     {
-        TKey current = Root;
+        var current = Root;
         while (IsValidIndex(current))
         {
             if (LFunc(ref value, ref this[current]))
@@ -475,7 +472,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
         if (LastAlloc.Index == -TKey.One)
             return;
 
-        for (TKey i = TKey.Zero; i <= LastAlloc.Index; i++)
+        for (var i = TKey.Zero; i <= LastAlloc.Index; i++)
         {
             if (IsValidIndex(i))
             {
@@ -508,7 +505,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public TKey FirstInorder()
     {
-        TKey current = Root;
+        var current = Root;
         if (!IsValidIndex(current))
             return -TKey.One;
 
@@ -531,7 +528,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
             return i;
         }
 
-        TKey parent = Parent(i);
+        var parent = Parent(i);
         while (IsValidIndex(parent) && i == RightChild(parent))
         {
             i = parent;
@@ -554,7 +551,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
             return i;
         }
 
-        TKey parent = Parent(i);
+        var parent = Parent(i);
         while (IsValidIndex(parent) && i == LeftChild(parent))
         {
             i = parent;
@@ -566,7 +563,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public TKey LastInorder()
     {
-        TKey current = Root;
+        var current = Root;
         if (!IsValidIndex(current))
             return -TKey.One;
 
@@ -592,7 +589,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
         if (IsValidIndex(RightChild(i)))
             return RightChild(i);
 
-        TKey parent = Parent(i);
+        var parent = Parent(i);
         while (IsValidIndex(parent))
         {
             if (IsLeftChild(i) && IsValidIndex(RightChild(parent)))
@@ -609,7 +606,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public TKey LastPreorder()
     {
-        TKey current = Root;
+        var current = Root;
         if (!IsValidIndex(current))
             return -TKey.One;
 
@@ -628,7 +625,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public TKey FirstPostorder()
     {
-        TKey current = Root;
+        var current = Root;
         if (!IsValidIndex(current))
             return -TKey.One;
 
@@ -651,7 +648,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
         if (IsRoot(i))
             return -TKey.One;
 
-        TKey parent = Parent(i);
+        var parent = Parent(i);
         if (IsLeftChild(i) && IsValidIndex(RightChild(parent)))
         {
             i = RightChild(parent);
@@ -685,10 +682,7 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
         if (LastAlloc.Index == -TKey.One)
             return false;
 
-        if (!Elements.IsIdxValid(Root))
-            return false;
-
-        return Parent(Root) == InvalidIndex();
+        return Elements.IsIdxValid(Root) && Parent(Root) == InvalidIndex();
     }
 
     public void SetLessFunc( LessFunc func )
@@ -698,16 +692,16 @@ public struct CUtlRBTree<TValue, TKey> : IDisposable
 
     public TKey Insert( TValue val )
     {
-        FindInsertionPosition(val, out TKey parent, out var leftchild);
+        FindInsertionPosition(val, out var parent, out var leftchild);
 
-        TKey newNode = InsertAt(parent, leftchild);
+        var newNode = InsertAt(parent, leftchild);
         this[newNode] = val;
         return newNode;
     }
 
     public TKey InsertIfNotFound( TValue val )
     {
-        TKey node = Find(val);
+        var node = Find(val);
         if (node == -TKey.One)
             node = Insert(val);
 

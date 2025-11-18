@@ -1,40 +1,139 @@
-using System.Runtime;
 using System.Reflection;
+using System.Runtime;
 using System.Runtime.InteropServices;
-using Spectre.Console;
 using Microsoft.Extensions.Logging;
-using SwiftlyS2.Shared;
-using SwiftlyS2.Core.Plugins;
+using Spectre.Console;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Plugins;
+using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Commands;
 
 namespace SwiftlyS2.Core.Services;
 
 internal class CoreCommandService
 {
-    private ILogger<CoreCommandService> _Logger { get; init; }
+    private readonly ILogger<CoreCommandService> logger;
+    private readonly ISwiftlyCore core;
+    private readonly PluginManager pluginManager;
+    private readonly RootDirService rootDirService;
+    private readonly ProfileService profileService;
 
-    private ISwiftlyCore _Core { get; init; }
-
-    private ICommandService _CommandService { get; init; }
-    private PluginManager _PluginManager { get; init; }
-    private ProfileService _ProfileService { get; init; }
-
-    public CoreCommandService( ILogger<CoreCommandService> logger, ISwiftlyCore core, PluginManager pluginManager, ProfileService profileService )
+    public CoreCommandService(
+        ILogger<CoreCommandService> logger,
+        ISwiftlyCore core,
+        PluginManager pluginManager,
+        RootDirService rootDirService,
+        ProfileService profileService
+    )
     {
-        _Logger = logger;
-        _Core = core;
-        _CommandService = core.Command;
-        _PluginManager = pluginManager;
-        _ProfileService = profileService;
-        _ = _CommandService.RegisterCommand("sw", OnCommand, true);
+        this.logger = logger;
+        this.core = core;
+        this.pluginManager = pluginManager;
+        this.rootDirService = rootDirService;
+        this.profileService = profileService;
+        _ = core.Command.RegisterCommand("sw", OnCommand, true);
     }
 
     private void OnCommand( ICommandContext context )
     {
+        void ShowPlayerList()
+        {
+            var output = string.Join(
+                "\n",
+                [
+                    $"Connected players: {core.PlayerManager.PlayerCount}/{core.Engine.GlobalVars.MaxClients}",
+                    .. core
+                        .PlayerManager.GetAllPlayers()
+                        .Select(player =>
+                            $"{player.PlayerID}. {player.Controller?.PlayerName}{(player.IsFakeClient ? " (BOT)" : "")} (steamid={player.SteamID})"
+                        ),
+                ]
+            );
+            logger.LogInformation("{Output}", output);
+        }
+
+        void ShowServerStatus()
+        {
+            var uptime = DateTime.Now - System.Diagnostics.Process.GetCurrentProcess().StartTime;
+            var output = string.Join(
+                "\n",
+                [
+                    $"Uptime: {uptime.Days}d {uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s",
+                    $"Managed Heap Memory: {GC.GetTotalMemory(false) / 1024.0f / 1024.0f:0.00} MB",
+                    $"Loaded Plugins: {pluginManager.GetPlugins().Count}",
+                    $"Players: {core.PlayerManager.PlayerCount}/{core.Engine.GlobalVars.MaxClients}",
+                    $"Map: {core.Engine.GlobalVars.MapName.Value}",
+                ]
+            );
+            logger.LogInformation("{Output}", output);
+        }
+
+        void ShowVersionInfo()
+        {
+            var output = string.Join(
+                "\n",
+                [
+                    $"SwiftlyS2 Version: {NativeEngineHelpers.GetNativeVersion()}",
+                    $"SwiftlyS2 Managed Version: {Assembly.GetExecutingAssembly().GetName().Version}",
+                    $"SwiftlyS2 Runtime Version: {Environment.Version}",
+                    $"SwiftlyS2 C++ Version: C++23",
+                    $"SwiftlyS2 .NET Version: {RuntimeInformation.FrameworkDescription}",
+                    $"GitHub URL: https://github.com/swiftly-solution/swiftlys2",
+                ]
+            );
+            logger.LogInformation("{Output}", output);
+        }
+
+        void ShowGarbageCollectionInfo()
+        {
+            var output = string.Join(
+                "\n",
+                [
+                    $"Garbage Collection Information:",
+                    $"  - Total Memory: {GC.GetTotalMemory(false) / 1024.0f / 1024.0f:0.00} MB",
+                    $"  - Is Server GC: {GCSettings.IsServerGC}",
+                    $"  - Max Generation: {GC.MaxGeneration}",
+                    .. Enumerable
+                        .Range(0, GC.MaxGeneration + 1)
+                        .Select(i =>
+                            $"    - Generation {i} Collection Count: {GC.CollectionCount(i)}"
+                        ),
+                    $"  - Latency Mode: {GCSettings.LatencyMode}",
+                ]
+            );
+            logger.LogInformation("{Output}", output);
+        }
+
+        void ShowCredits()
+        {
+            var output = string.Join(
+                "\n",
+                [
+                    "SwiftlyS2 was created and developed by Swiftly Solution SRL and the contributors.",
+                    "SwiftlyS2 is licensed under the GNU General Public License v3.0 or later.",
+                    "Website: https://swiftlys2.net/",
+                    "GitHub: https://github.com/swiftly-solution/swiftlys2",
+                ]
+            );
+            logger.LogInformation("{Output}", output);
+        }
+
+        bool RequireConsoleAccess()
+        {
+            if (context.IsSentByPlayer)
+            {
+                context.Reply("This command can only be executed from the server console.");
+                return false;
+            }
+            return true;
+        }
+
         try
         {
-            if (context.IsSentByPlayer) return;
+            if (context.IsSentByPlayer)
+            {
+                return;
+            }
 
             var args = context.Args;
             if (args.Length == 0)
@@ -43,83 +142,33 @@ internal class CoreCommandService
                 return;
             }
 
-            switch (args[0])
+            switch (args[0].Trim().ToLower())
             {
                 case "help":
                     ShowHelp(context);
                     break;
                 case "credits":
-                    _Logger.LogInformation(@"SwiftlyS2 was created and developed by Swiftly Solution SRL and the contributors.
-SwiftlyS2 is licensed under the GNU General Public License v3.0 or later.
-Website: https://swiftlys2.net/
-GitHub: https://github.com/swiftly-solution/swiftlys2");
+                    ShowCredits();
                     break;
                 case "list":
-                    var players = _Core.PlayerManager.GetAllPlayers();
-                    var outString = $"Connected players: {_Core.PlayerManager.PlayerCount}/{_Core.Engine.MaxPlayers}";
-                    foreach (var player in players)
-                    {
-                        outString += $"\n{player.PlayerID}. {player.Controller?.PlayerName}{(player.IsFakeClient ? " (BOT)" : "")} (steamid={player.SteamID})";
-                    }
-                    _Logger.LogInformation(outString);
+                    ShowPlayerList();
                     break;
                 case "status":
-                    var uptime = DateTime.Now - System.Diagnostics.Process.GetCurrentProcess().StartTime;
-                    var outStrings = $"Uptime: {uptime.Days}d {uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s";
-                    outStrings += $"\nManaged Heap Memory: {GC.GetTotalMemory(false) / 1024.0f / 1024.0f:0.00} MB";
-                    outStrings += $"\nLoaded Plugins: {_PluginManager.GetPlugins().Count()}";
-                    outStrings += $"\nPlayers: {_Core.PlayerManager.PlayerCount}/{_Core.Engine.GlobalVars.MaxClients}";
-                    outStrings += $"\nMap: {_Core.Engine.GlobalVars.MapName.Value}";
-                    _Logger.LogInformation(outStrings);
+                    ShowServerStatus();
                     break;
                 case "version":
-                    var outVersion = $"SwiftlyS2 Version: {NativeEngineHelpers.GetNativeVersion()}";
-                    outVersion += $"\nSwiftlyS2 Managed Version: {Assembly.GetExecutingAssembly().GetName().Version}";
-                    outVersion += $"\nSwiftlyS2 Runtime Version: {Environment.Version}";
-                    outVersion += $"\nSwiftlyS2 C++ Version: C++23";
-                    outVersion += $"\nSwiftlyS2 .NET Version: {RuntimeInformation.FrameworkDescription}";
-                    outVersion += $"\nGitHub URL: https://github.com/swiftly-solution/swiftlys2";
-                    _Logger.LogInformation(outVersion);
+                    ShowVersionInfo();
                     break;
-                case "gc":
-                    if (context.IsSentByPlayer)
-                    {
-                        context.Reply("This command can only be executed from the server console.");
-                        return;
-                    }
-                    var outGc = "Garbage Collection Information:";
-                    outGc += $"\n  - Total Memory: {GC.GetTotalMemory(false) / 1024.0f / 1024.0f:0.00} MB";
-                    outGc += $"\n  - Is Server GC: {GCSettings.IsServerGC}";
-                    outGc += $"\n  - Max Generation: {GC.MaxGeneration}";
-                    for (var i = 0; i <= GC.MaxGeneration; i++)
-                    {
-                        outGc += $"\n    - Generation {i} Collection Count: {GC.CollectionCount(i)}";
-                    }
-                    outGc += $"\n  - Latency Mode: {GCSettings.LatencyMode}";
-                    _Logger.LogInformation(outGc);
+                case "gc" when RequireConsoleAccess():
+                    ShowGarbageCollectionInfo();
                     break;
-                case "plugins":
-                    if (context.IsSentByPlayer)
-                    {
-                        context.Reply("This command can only be executed from the server console.");
-                        return;
-                    }
+                case "plugins" when RequireConsoleAccess():
                     PluginCommand(context);
                     break;
-                case "profiler":
-                    if (context.IsSentByPlayer)
-                    {
-                        context.Reply("This command can only be executed from the server console.");
-                        return;
-                    }
+                case "profiler" when RequireConsoleAccess():
                     ProfilerCommand(context);
                     break;
-                case "confilter":
-                    if (context.IsSentByPlayer)
-                    {
-                        context.Reply("This command can only be executed from the server console.");
-                        return;
-                    }
+                case "confilter" when RequireConsoleAccess():
                     ConfilterCommand(context);
                     break;
                 default:
@@ -129,24 +178,30 @@ GitHub: https://github.com/swiftly-solution/swiftlys2");
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
-            _Logger.LogError(e, "Error executing command");
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
+            logger.LogError(e, "Failed to execute command");
         }
     }
 
     private static void ShowHelp( ICommandContext context )
     {
-        var table = new Table().AddColumn("Command").AddColumn("Description");
-        _ = table.AddRow("credits", "List Swiftly credits");
-        _ = table.AddRow("help", "Show the help for Swiftly Commands");
-        _ = table.AddRow("list", "Show the list of online players");
-        _ = table.AddRow("status", "Show the status of the server");
+        var table = new Table()
+            .AddColumn("Command")
+            .AddColumn("Description")
+            .AddRow("credits", "List Swiftly credits")
+            .AddRow("help", "Show the help for Swiftly Commands")
+            .AddRow("list", "Show the list of online players")
+            .AddRow("status", "Show the status of the server");
         if (!context.IsSentByPlayer)
         {
-            _ = table.AddRow("confilter", "Console Filter Menu");
-            _ = table.AddRow("plugins", "Plugin Management Menu");
-            _ = table.AddRow("gc", "Show garbage collection information on managed");
-            _ = table.AddRow("profiler", "Profiler Menu");
+            _ = table
+                .AddRow("confilter", "Console Filter Menu")
+                .AddRow("plugins", "Plugin Management Menu")
+                .AddRow("gc", "Show garbage collection information on managed")
+                .AddRow("profiler", "Profiler Menu");
         }
         _ = table.AddRow("version", "Display Swiftly version");
         AnsiConsole.Write(table);
@@ -154,37 +209,79 @@ GitHub: https://github.com/swiftly-solution/swiftlys2");
 
     private void ConfilterCommand( ICommandContext context )
     {
+        void ShowConfilterHelp()
+        {
+            var table = new Table()
+                .AddColumn("Command")
+                .AddColumn("Description")
+                .AddRow("enable", "Enable console filtering")
+                .AddRow("disable", "Disable console filtering")
+                .AddRow("status", "Show the status of the console filter")
+                .AddRow("reload", "Reload console filter configuration");
+            AnsiConsole.Write(table);
+        }
+
+        void EnableFilter()
+        {
+            if (!core.ConsoleOutput.IsFilterEnabled())
+            {
+                core.ConsoleOutput.ToggleFilter();
+            }
+            logger.LogInformation("Console filtering has been enabled.");
+        }
+
+        void DisableFilter()
+        {
+            if (core.ConsoleOutput.IsFilterEnabled())
+            {
+                core.ConsoleOutput.ToggleFilter();
+            }
+            logger.LogInformation("Console filtering has been disabled.");
+        }
+
+        void ShowFilterStatus()
+        {
+            var status = core.ConsoleOutput.IsFilterEnabled() ? "enabled" : "disabled";
+            var output = string.Join(
+                "\n",
+                [
+                    $"Console filtering is currently {status}.",
+                    "Below are some statistics for the filtering process:",
+                    core.ConsoleOutput.GetCounterText(),
+                ]
+            );
+            logger.LogInformation("{Output}", output);
+        }
+
+        void ReloadFilter()
+        {
+            core.ConsoleOutput.ReloadFilterConfiguration();
+            logger.LogInformation("Console filter configuration reloaded.");
+        }
+
         var args = context.Args;
         if (args.Length == 1)
         {
-            var table = new Table().AddColumn("Command").AddColumn("Description");
-            _ = table.AddRow("enable", "Enable console filtering");
-            _ = table.AddRow("disable", "Disable console filtering");
-            _ = table.AddRow("status", "Show the status of the console filter");
-            _ = table.AddRow("reload", "Reload console filter configuration");
-            AnsiConsole.Write(table);
+            ShowConfilterHelp();
             return;
         }
 
-        switch (args[1])
+        switch (args[1].Trim().ToLower())
         {
             case "enable":
-                if (!_Core.ConsoleOutput.IsFilterEnabled()) _Core.ConsoleOutput.ToggleFilter();
-                _Logger.LogInformation("Console filtering has been enabled.");
+                EnableFilter();
                 break;
             case "disable":
-                if (_Core.ConsoleOutput.IsFilterEnabled()) _Core.ConsoleOutput.ToggleFilter();
-                _Logger.LogInformation("Console filtering has been disabled.");
+                DisableFilter();
                 break;
             case "status":
-                _Logger.LogInformation($"Console filtering is currently {(_Core.ConsoleOutput.IsFilterEnabled() ? "enabled" : "disabled")}.\nBelow are some statistics for the filtering process:\n{_Core.ConsoleOutput.GetCounterText()}");
+                ShowFilterStatus();
                 break;
             case "reload":
-                _Core.ConsoleOutput.ReloadFilterConfiguration();
-                _Logger.LogInformation("Console filter configuration reloaded.");
+                ReloadFilter();
                 break;
             default:
-                _Logger.LogWarning("Unknown command");
+                logger.LogWarning("Unknown command");
                 break;
         }
     }
@@ -194,96 +291,192 @@ GitHub: https://github.com/swiftly-solution/swiftlys2");
         var args = context.Args;
         if (args.Length == 1)
         {
-            var table = new Table().AddColumn("Command").AddColumn("Description");
-            _ = table.AddRow("enable", "Enable the profiler");
-            _ = table.AddRow("disable", "Disable the profiler");
-            _ = table.AddRow("status", "Show the status of the profiler");
-            _ = table.AddRow("save", "Save the profiler data to a file");
+            var table = new Table()
+                .AddColumn("Command")
+                .AddColumn("Description")
+                .AddRow("enable", "Enable the profiler")
+                .AddRow("disable", "Disable the profiler")
+                .AddRow("status", "Show the status of the profiler")
+                .AddRow("save", "Save the profiler data to a file");
             AnsiConsole.Write(table);
             return;
         }
 
-        switch (args[1])
+        switch (args[1].Trim().ToLower())
         {
             case "enable":
-                _ProfileService.Enable();
-                _Logger.LogInformation("The profiler has been enabled.");
+                profileService.Enable();
+                logger.LogInformation("The profiler has been enabled.");
                 break;
             case "disable":
-                _ProfileService.Disable();
-                _Logger.LogInformation("The profiler has been disabled.");
+                profileService.Disable();
+                logger.LogInformation("The profiler has been disabled.");
                 break;
             case "status":
-                _Logger.LogInformation($"Profiler is currently {(_ProfileService.IsEnabled() ? "enabled" : "disabled")}.");
+                logger.LogInformation(
+                    "Profiler is currently {Status}.",
+                    (profileService.IsEnabled() ? "enabled" : "disabled")
+                );
                 break;
             case "save":
-                var pluginId = args.Length >= 3 ? args[2] : "";
-                var basePath = Environment.GetEnvironmentVariable("SWIFTLY_MANAGED_ROOT")!;
-                if (!File.Exists(Path.Combine(basePath, "profilers")))
+                var pluginId = args.Length >= 3 ? args[2] : "core";
+                var profilerDir = Path.Combine(rootDirService.GetRoot(), "profilers");
+
+                if (!Directory.Exists(profilerDir))
                 {
-                    _ = Directory.CreateDirectory(Path.Combine(basePath, "profilers"));
+                    _ = Directory.CreateDirectory(profilerDir);
                 }
 
-                Guid guid = Guid.NewGuid();
-                File.WriteAllText(Path.Combine(basePath, "profilers", $"profiler.{guid}.{(pluginId == "" ? "core" : pluginId)}.json"), _ProfileService.GenerateJSONPerformance(pluginId));
-                _Logger.LogInformation($"Profile saved to {Path.Combine(basePath, "profilers", $"profiler.{guid}.{(pluginId == "" ? "core" : pluginId)}.json")}");
+                var fileName = $"{DateTime.Now:yyyyMMdd}.{Guid.NewGuid()}.{pluginId}.json";
+                var filePath = Path.Combine(profilerDir, fileName);
+
+                File.WriteAllText(
+                    filePath,
+                    profileService.GenerateJSONPerformance(
+                        args.Length >= 3 ? args[2] : string.Empty
+                    )
+                );
+                logger.LogInformation("Profile saved to {FilePath}.", filePath);
                 break;
             default:
-                _Logger.LogWarning("Unknown command");
+                logger.LogWarning("Unknown command");
                 break;
         }
     }
 
     private void PluginCommand( ICommandContext context )
     {
+        void ShowPluginList()
+        {
+            var table = new Table()
+                .AddColumn("Status")
+                .AddColumn("PluginId (ver.)")
+                .AddColumn("Author")
+                .AddColumn("Website")
+                .AddColumn("Location");
+
+            foreach (var plugin in pluginManager.GetPlugins())
+            {
+                var pluginId = plugin.Metadata?.Id ?? "<Unknown>";
+                var version = plugin.Metadata?.Version is { } v ? $" {v}" : string.Empty;
+                var statusText = GetColoredStatus(plugin.Status);
+
+                _ = table.AddRow(
+                    statusText,
+                    $"{pluginId}{version}",
+                    plugin.Metadata?.Author ?? "Anonymous",
+                    plugin.Metadata?.Website ?? string.Empty,
+                    plugin.PluginDirectory is { } dir
+                        ? Path.Join("(swRoot)", Path.GetRelativePath(rootDirService.GetRoot(), dir))
+                        : string.Empty
+                );
+            }
+
+            AnsiConsole.Write(table);
+        }
+
+        void ShowPluginHelp()
+        {
+            var table = new Table()
+                .AddColumn("Command")
+                .AddColumn("Description")
+                .AddRow("list", "List all plugins")
+                .AddRow("load", "Load a plugin")
+                .AddRow("unload", "Unload a plugin")
+                .AddRow("reload", "Reload a plugin");
+            AnsiConsole.Write(table);
+        }
+
+        bool ValidatePluginId( string[] args, string command, string usage )
+        {
+            if (args.Length >= 3)
+            {
+                return true;
+            }
+            logger.LogWarning("Usage: sw plugins {Command} {Usage}", command, usage);
+            return false;
+        }
+
+        string GetColoredStatus( PluginStatus? status ) =>
+            status switch {
+                // PluginStatus.Loaded => "[green]Loaded[/]",
+                // PluginStatus.Error => "[red]Error[/]",
+                // PluginStatus.Loading => "[yellow]Loading[/]",
+                // PluginStatus.Unloaded => "[grey]Unloaded[/]",
+                // _ => "[grey]Unknown[/]"
+                PluginStatus.Loaded => "Loaded",
+                PluginStatus.Error => "Error",
+                PluginStatus.Loading => "Loading",
+                PluginStatus.Unloaded => "Unloaded",
+                PluginStatus.Indeterminate => "Indeterminate",
+                _ => "Unknown",
+            };
+
         var args = context.Args;
         if (args.Length == 1)
         {
-            var table = new Table().AddColumn("Command").AddColumn("Description");
-            _ = table.AddRow("list", "List all plugins");
-            _ = table.AddRow("load", "Load a plugin");
-            _ = table.AddRow("unload", "Unload a plugin");
-            _ = table.AddRow("reload", "Reload a plugin");
-            AnsiConsole.Write(table);
+            ShowPluginHelp();
             return;
         }
 
-        switch (args[1])
+        switch (args[1].Trim().ToLower())
         {
             case "list":
-                var table = new Table().AddColumn("Name").AddColumn("Status").AddColumn("Version").AddColumn("Author").AddColumn("Website");
-                foreach (var plugin in _PluginManager.GetPlugins())
-                {
-                    _ = table.AddRow(plugin.Metadata?.Id ?? "<UNKNOWN>", plugin.Status?.ToString() ?? "Unknown", plugin.Metadata?.Version ?? "<UNKNOWN>", plugin.Metadata?.Author ?? "<UNKNOWN>", plugin.Metadata?.Website ?? "<UNKNOWN>");
-                }
-                AnsiConsole.Write(table);
+                ShowPluginList();
                 break;
             case "load":
-                if (args.Length < 3)
+                if (ValidatePluginId(args, "load", "<dllName>"))
                 {
-                    _Logger.LogWarning("Usage: sw plugins load <pluginId>");
-                    return;
+                    Console.WriteLine("\n");
+                    if (pluginManager.LoadPluginByDllName(args[2], true))
+                    {
+                        logger.LogInformation("Loaded plugin: {Format}", args[2]);
+                    }
+                    else
+                    {
+                        logger.LogWarning("Failed to load plugin: {Format}", args[2]);
+                    }
+                    Console.WriteLine("\n");
                 }
-                _ = _PluginManager.LoadPluginById(args[2]);
                 break;
             case "unload":
-                if (args.Length < 3)
+                if (ValidatePluginId(args, "unload", "<pluginId|dllName>"))
                 {
-                    _Logger.LogWarning("Usage: sw plugins unload <pluginId>");
-                    return;
+                    Console.WriteLine("\n");
+                    if (
+                        pluginManager.UnloadPluginById(args[2], true)
+                        || pluginManager.UnloadPluginByDllName(args[2], true)
+                    )
+                    {
+                        logger.LogInformation("Unloaded plugin: {Format}", args[2]);
+                    }
+                    else
+                    {
+                        logger.LogWarning("Failed to unload plugin: {Format}", args[2]);
+                    }
+                    Console.WriteLine("\n");
                 }
-                _ = _PluginManager.UnloadPlugin(args[2]);
                 break;
             case "reload":
-                if (args.Length < 3)
+                if (ValidatePluginId(args, "reload", "<pluginId|dllName>"))
                 {
-                    _Logger.LogWarning("Usage: sw plugins reload <pluginId>");
-                    return;
+                    Console.WriteLine("\n");
+                    if (
+                        pluginManager.ReloadPluginById(args[2], true)
+                        || pluginManager.ReloadPluginByDllName(args[2], true)
+                    )
+                    {
+                        logger.LogInformation("Reloaded plugin: {Format}", args[2]);
+                    }
+                    else
+                    {
+                        logger.LogWarning("Failed to reload plugin: {Format}", args[2]);
+                    }
+                    Console.WriteLine("\n");
                 }
-                _PluginManager.ReloadPlugin(args[2]);
                 break;
             default:
-                _Logger.LogWarning("Unknown command");
+                logger.LogWarning("Unknown command");
                 break;
         }
     }
