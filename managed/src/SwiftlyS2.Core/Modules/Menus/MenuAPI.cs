@@ -204,12 +204,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
         disposed = true;
 
         // Console.WriteLine($"{GetType().Name} has been disposed.");
-        if (core == null)
-        {
-            return;
-        }
 
-        core.PlayerManager
+        core?.PlayerManager
             .GetAllPlayers()
             .Where(player => player.IsValid && (selectedOptionIndex.TryGetValue(player.PlayerID, out var _) || desiredOptionIndex.TryGetValue(player.PlayerID, out var _)))
             .ToList()
