@@ -7,11 +7,12 @@ internal static class MenuManagerAPIServiceInjection
 {
     public static IServiceCollection AddMenuManagerAPIService( this IServiceCollection self )
     {
-        return self.AddSingleton<MenuManagerAPIService>();
+        _ = self.AddSingleton<MenuManagerAPIService>();
+        return self;
     }
 
     public static void UseMenuManagerAPIService( this IServiceProvider self )
     {
-        self.GetRequiredService<MenuManagerAPIService>();
+        _ = self.GetRequiredService<MenuManagerAPIService>();
     }
 }

@@ -5,10 +5,9 @@ namespace SwiftlyS2.Core.Hosting;
 
 internal static class CommandTrackerManagerInjection
 {
-    public static IServiceCollection AddCommandTrackerManager(this IServiceCollection self)
+    public static IServiceCollection AddCommandTrackerManager( this IServiceCollection self )
     {
-        return self.AddSingleton<CommandTrackerManager>();
+        _ = self.AddSingleton<CommandTrackerManager>();
+        return self;
     }
-
-    
 }

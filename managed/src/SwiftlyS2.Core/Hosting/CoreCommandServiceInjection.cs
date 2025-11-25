@@ -3,13 +3,16 @@ using SwiftlyS2.Core.Services;
 
 namespace SwiftlyS2.Core.Hosting;
 
-internal static class CoreCommandServiceInjection {
-  public static IServiceCollection AddCoreCommandService(this IServiceCollection services) {
-    services.AddSingleton<CoreCommandService>();
-    return services;
-  }
+internal static class CoreCommandServiceInjection
+{
+    public static IServiceCollection AddCoreCommandService( this IServiceCollection self )
+    {
+        _ = self.AddSingleton<CoreCommandService>();
+        return self;
+    }
 
-  public static void UseCoreCommandService(this IServiceProvider provider) {
-    provider.GetRequiredService<CoreCommandService>();
-  }
+    public static void UseCoreCommandService( this IServiceProvider self )
+    {
+        _ = self.GetRequiredService<CoreCommandService>();
+    }
 }

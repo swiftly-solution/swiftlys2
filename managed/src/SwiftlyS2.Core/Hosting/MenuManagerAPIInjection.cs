@@ -7,6 +7,7 @@ internal static class MenuManagerAPIInjection
 {
     public static IServiceCollection AddMenuManagerAPI( this IServiceCollection self )
     {
-        return self.AddSingleton<MenuManagerAPI>();
+        _ = self.AddSingleton<MenuManagerAPI>();
+        return self;
     }
 }
