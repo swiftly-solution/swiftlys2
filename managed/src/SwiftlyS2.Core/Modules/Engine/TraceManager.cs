@@ -1,9 +1,8 @@
-﻿using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Services;
+using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -14,7 +13,9 @@ internal class TraceManager : ITraceManager
         unsafe
         {
             fixed (CGameTrace* tracePtr = &trace)
+            {
                 GameFunctions.TracePlayerBBox(start, end, bounds, &filter, tracePtr);
+            }
         }
     }
 
@@ -23,7 +24,9 @@ internal class TraceManager : ITraceManager
         unsafe
         {
             fixed (CGameTrace* tracePtr = &trace)
+            {
                 GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &filter, tracePtr);
+            }
         }
     }
 

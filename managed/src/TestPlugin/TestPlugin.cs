@@ -1129,6 +1129,13 @@ public class TestPlugin : BasePlugin
             ?.Teleport(player.PlayerPawn!.AbsOrigin!.Value, player.PlayerPawn!.EyeAngles, Vector.Zero);
     }
 
+    [Command("los")]
+    public void LineOfSightCommand( ICommandContext context )
+    {
+        var player = context.Sender!;
+        context.Reply($"player.PlayerPawn.CameraServices.FOV: {player.PlayerPawn!.CameraServices!.FOV}, player.Controller.DesiredFOV: {player.Controller.DesiredFOV}, player.PlayerPawn.ViewmodelFOV: {player.PlayerPawn.ViewmodelFOV}");
+    }
+
     public override void Unload()
     {
         Console.WriteLine("TestPlugin unloaded");
