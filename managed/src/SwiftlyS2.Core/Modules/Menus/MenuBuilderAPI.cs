@@ -1,4 +1,3 @@
-using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Menus;
 
 namespace SwiftlyS2.Core.Menus;
@@ -10,18 +9,18 @@ internal sealed class MenuBuilderAPI : IMenuBuilderAPI
     /// </summary>
     public IMenuDesignAPI Design { get => design ??= new MenuDesignAPI(configuration, this, style => optionScrollStyle = style/*, style => optionTextStyle = style*/); }
 
-    private readonly ISwiftlyCore core;
+    private readonly MenuManagerAPI menuManager;
     private readonly MenuConfiguration configuration = new();
-    private readonly List<IMenuOption> options = new();
+    private readonly List<IMenuOption> options = [];
     private MenuKeybindOverrides keybindOverrides = new();
     private MenuOptionScrollStyle optionScrollStyle = MenuOptionScrollStyle.CenterFixed;
     // private MenuOptionTextStyle optionTextStyle = MenuOptionTextStyle.TruncateEnd;
     private IMenuAPI? parent = null;
     private IMenuDesignAPI? design = null;
 
-    public MenuBuilderAPI( ISwiftlyCore core )
+    public MenuBuilderAPI( MenuManagerAPI menuManager )
     {
-        this.core = core;
+        this.menuManager = menuManager;
         options.Clear();
     }
 
@@ -87,7 +86,18 @@ internal sealed class MenuBuilderAPI : IMenuBuilderAPI
 
     public IMenuAPI Build()
     {
-        var menu = new MenuAPI(core, configuration, keybindOverrides, this/*, parent*/, optionScrollStyle/*, optionTextStyle*/) { Parent = (parent, null) };
+        MenuAPI menu;
+        if (menuManager.IsInitialized)
+        {
+            // Core is initialized, create menu normally
+            menu = new MenuAPI(menuManager.Core, configuration, keybindOverrides, this/*, parent*/, optionScrollStyle/*, optionTextStyle*/) { Parent = (parent, null) };
+        }
+        else
+        {
+            // Core is not initialized yet, create menu with deferred initialization
+            menu = new MenuAPI(configuration, keybindOverrides, this, optionScrollStyle) { Parent = (parent, null) };
+            menuManager.RegisterPendingBuild(menu);
+        }
         options.ForEach(option => menu.AddOption(option));
         return menu;
     }
