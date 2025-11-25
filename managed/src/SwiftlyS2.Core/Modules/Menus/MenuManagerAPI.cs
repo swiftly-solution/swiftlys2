@@ -31,14 +31,6 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
     /// </summary>
     public event EventHandler<MenuManagerEventArgs>? MenuOpened;
 
-    /// <summary>
-    /// Gets whether the MenuManagerAPI has been fully initialized.
-    /// </summary>
-    internal bool IsInitialized => Core != null;
-
-    private readonly List<MenuAPI> pendingBuilds = [];
-    private readonly Lock pendingBuildsLock = new();
-
     private readonly ConcurrentDictionary<int, IMenuAPI> openMenus = new();
     private readonly ConcurrentDictionary<(int, IMenuAPI), Action<IPlayer, IMenuAPI>?> onClosedCallbacks = new();
     private readonly SoundEvent useSound = new();
@@ -101,10 +93,6 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
         buttonsExit = StringToKeyBind.GetValueOrDefault(Configuration.ButtonsExit.Trim().ToLower());
         buttonsUse = StringToKeyBind.GetValueOrDefault(Configuration.ButtonsUse.Trim().ToLower());
 
-        lock (pendingBuildsLock)
-        {
-            pendingBuilds.Clear();
-        }
         openMenus.Clear();
         onClosedCallbacks.Clear();
     }
@@ -113,10 +101,6 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
     {
         CloseAllMenus();
 
-        lock (pendingBuildsLock)
-        {
-            pendingBuilds.Clear();
-        }
         openMenus.Clear();
         onClosedCallbacks.Clear();
     }
@@ -262,32 +246,9 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
         CloseAllMenus();
     }
 
-    /// <summary>
-    /// Registers a pending build to be completed when Core is initialized.
-    /// </summary>
-    internal void RegisterPendingBuild( MenuAPI menu )
-    {
-        lock (pendingBuildsLock)
-        {
-            pendingBuilds.Add(menu);
-        }
-    }
-
-    /// <summary>
-    /// Processes all pending builds after Core has been initialized.
-    /// </summary>
-    internal void ProcessPendingBuilds()
-    {
-        lock (pendingBuildsLock)
-        {
-            pendingBuilds.ForEach(menu => menu.InitializeMenuManager(this));
-            pendingBuilds.Clear();
-        }
-    }
-
     public IMenuBuilderAPI CreateBuilder()
     {
-        return new MenuBuilderAPI(this);
+        return new MenuBuilderAPI(Core);
     }
 
     public IMenuAPI CreateMenu( MenuConfiguration configuration, MenuKeybindOverrides keybindOverrides, IMenuAPI? parent = null, MenuOptionScrollStyle optionScrollStyle = MenuOptionScrollStyle.CenterFixed, MenuOptionTextStyle optionTextStyle = MenuOptionTextStyle.TruncateEnd )
@@ -318,17 +279,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             }
         }
 
-        MenuAPI menu;
-        if (IsInitialized)
-        {
-            menu = new MenuAPI(Core, configuration, keybindOverrides, null/*, parent*/, optionScrollStyle/*, optionTextStyle*/) { Parent = (parent, null) };
-        }
-        else
-        {
-            menu = new MenuAPI(configuration, keybindOverrides, null, optionScrollStyle) { Parent = (parent, null) };
-            RegisterPendingBuild(menu);
-        }
-        return menu;
+        return new MenuAPI(Core, configuration, keybindOverrides, null/*, parent*/, optionScrollStyle/*, optionTextStyle*/) { Parent = (parent, null) };
     }
 
     public IMenuAPI? GetCurrentMenu( IPlayer player )

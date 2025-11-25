@@ -14,7 +14,6 @@ internal class MenuManagerAPIService : IDisposable
         this.menuManager = menuManager;
 
         menuManager.Core = core;
-        menuManager.ProcessPendingBuilds();
         core.Event.OnClientKeyStateChanged += menuManager.OnClientKeyStateChanged;
         core.Event.OnClientDisconnected += menuManager.OnClientDisconnected;
         core.Event.OnMapUnload += menuManager.OnMapUnload;

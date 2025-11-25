@@ -14,7 +14,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
     /// <summary>
     /// The menu manager that this menu belongs to.
     /// </summary>
-    public IMenuManagerAPI MenuManager { get; private set; } = default!;
+    public IMenuManagerAPI MenuManager { get; init; }
 
     /// <summary>
     /// Configuration settings for this menu.
@@ -105,7 +105,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
     // /// </summary>
     // public event EventHandler<MenuEventArgs>? OptionLeaving;
 
-    private ISwiftlyCore core = default!;
+    private readonly ISwiftlyCore core;
     private readonly List<IMenuOption> options = [];
     private readonly Lock optionsLock = new(); // Lock for synchronizing modifications to the `options`
     private readonly ConcurrentDictionary<int, int> selectedOptionIndex = new(); // Stores the currently selected option index for each player
@@ -156,39 +156,6 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
         // core.Event.OnTick += OnTick;
     }
 
-    /// <summary>
-    /// Constructor for deferred initialization when Core is not yet available.
-    /// </summary>
-    public MenuAPI( MenuConfiguration configuration, MenuKeybindOverrides keybindOverrides, IMenuBuilderAPI? builder = null, MenuOptionScrollStyle optionScrollStyle = MenuOptionScrollStyle.CenterFixed )
-    {
-        disposed = false;
-
-        Configuration = configuration;
-        KeybindOverrides = keybindOverrides;
-        OptionScrollStyle = optionScrollStyle;
-        Builder = builder;
-
-        lock (optionsLock)
-        {
-            options.Clear();
-        }
-        selectedOptionIndex.Clear();
-        desiredOptionIndex.Clear();
-        autoCloseCancelTokens.Clear();
-
-        maxOptions = 0;
-    }
-
-    /// <summary>
-    /// Initializes the MenuManager after Core has been initialized.
-    /// Called by MenuManagerAPI.ProcessPendingBuilds().
-    /// </summary>
-    internal void InitializeMenuManager( MenuManagerAPI menuManager )
-    {
-        core = menuManager.Core;
-        MenuManager = menuManager;
-    }
-
     ~MenuAPI()
     {
         Dispose();
@@ -201,9 +168,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             return;
         }
 
-        disposed = true;
-
         // Console.WriteLine($"{GetType().Name} has been disposed.");
+        disposed = true;
 
         core?.PlayerManager
             .GetAllPlayers()

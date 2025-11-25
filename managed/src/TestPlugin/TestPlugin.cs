@@ -96,22 +96,18 @@ public class TestPlugin : BasePlugin
         return HookResult.Continue;
     }
 
-    private IMenuAPI menus30;
     public override void OnAllPluginsLoaded()
     {
         base.OnAllPluginsLoaded();
 
-        var menus = new List<IMenuAPI>();
-
-        for (var i = 0; i < 30; i++)
+        for (var x = 0; x < 30; x++)
         {
             var builder = Core.MenusAPI
                 .CreateBuilder()
-                .Design.SetMenuTitle($"Test Menu {i + 1}");
-
+                .Design.SetMenuTitle($"Test Menu {x + 1}");
             for (var j = 0; j < 5; j++)
             {
-                var optionText = $"Menu # {i + 1} - Option # {j + 1}";
+                var optionText = $"Menu # {x + 1} - Option # {j + 1}";
                 var button = new ButtonMenuOption(optionText) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
                 button.Click += ( sender, args ) =>
                 {
@@ -121,20 +117,8 @@ public class TestPlugin : BasePlugin
                 _ = builder.AddOption(button);
             }
 
-            menus.Add(builder.Build());
+            var menu = builder.Build();
         }
-
-        var mainMenu = Core.MenusAPI
-            .CreateBuilder()
-            .Design.SetMenuTitle("Menu");
-
-        for (var i = 0; i < menus.Count; i++)
-        {
-            var menuIndex = i;
-            _ = mainMenu.AddOption(new SubmenuMenuOption($"Menu #{i + 1}", menus[menuIndex]));
-        }
-
-        menus30 = mainMenu.Build();
     }
 
     public override void Load( bool hotReload )
@@ -1098,7 +1082,40 @@ public class TestPlugin : BasePlugin
     [Command("mru")]
     public void MenuResourceUsageCommand( ICommandContext context )
     {
-        Core.MenusAPI.OpenMenuForPlayer(context.Sender!, menus30);
+        var menus = new List<IMenuAPI>();
+
+        for (var i = 0; i < 30; i++)
+        {
+            var builder = Core.MenusAPI
+                .CreateBuilder()
+                .Design.SetMenuTitle($"Test Menu {i + 1}");
+
+            for (var j = 0; j < 5; j++)
+            {
+                var optionText = $"Menu # {i + 1} - Option # {j + 1}";
+                var button = new ButtonMenuOption(optionText) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
+                button.Click += ( sender, args ) =>
+                {
+                    args.Player.SendChat($"Clicked: {optionText}");
+                    return ValueTask.CompletedTask;
+                };
+                _ = builder.AddOption(button);
+            }
+
+            menus.Add(builder.Build());
+        }
+
+        var mainMenu = Core.MenusAPI
+            .CreateBuilder()
+            .Design.SetMenuTitle("Menu");
+
+        for (var i = 0; i < menus.Count; i++)
+        {
+            var menuIndex = i;
+            _ = mainMenu.AddOption(new SubmenuMenuOption($"Menu #{i + 1}", menus[menuIndex]));
+        }
+
+        Core.MenusAPI.OpenMenuForPlayer(context.Sender!, mainMenu.Build());
     }
 
     [Command("tb2m")]

@@ -32,8 +32,9 @@ internal sealed partial class TextStyleProcessor : IDisposable
             return;
         }
 
-        disposed = true;
         // Console.WriteLine($"{GetType().Name} has been disposed.");
+        disposed = true;
+
         scrollOffsets.Clear();
         staticStyleCache.Clear();
 
