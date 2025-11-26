@@ -52,9 +52,6 @@ public struct Vector
     public readonly Vector Cross( Vector other ) => new((Y * other.Z) - (Z * other.Y), (Z * other.X) - (X * other.Z), (X * other.Y) - (Y * other.X));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly float Dot( Vector a, Vector b ) => (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly float Dot( Vector other ) => Dot(this, other);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -130,6 +127,9 @@ public struct Vector
     public static Vector FromBuiltin( Vector3 vector ) => new(vector.X, vector.Y, vector.Z);
     public static Vector Zero => new(0, 0, 0);
     public static Vector One => new(1, 1, 1);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static float Dot( Vector a, Vector b ) => (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector operator +( Vector a, Vector b ) => new(a.X + b.X, a.Y + b.Y, a.Z + b.Z);

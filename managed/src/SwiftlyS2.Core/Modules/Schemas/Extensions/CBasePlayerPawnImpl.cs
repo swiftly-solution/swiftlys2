@@ -91,9 +91,17 @@ internal partial class CBasePlayerPawnImpl : CBasePlayerPawn
         }
 
         var desiredFov = playerPawn.OriginalController.Value.DesiredFOV;
-        var halfFov = fieldOfViewDegrees ?? (desiredFov == 0 ? 52f : desiredFov / 2f);
-        var angleDelta = Math.Abs(playerPawn.EyeAngles.Yaw - (targetPlayer.EyePosition!.Value - this.EyePosition!.Value).ToQAngles().Yaw);
+        var halfFov = fieldOfViewDegrees ?? (desiredFov <= 0f ? 52f : desiredFov / 2f);
 
-        return Math.Min(angleDelta, 360f - angleDelta) <= halfFov;
+        // Calculate the angle between the player's view direction and the direction to the target
+        playerPawn.EyeAngles.ToDirectionVectors(out var playerForward, out var _, out var _);
+        var directionToTarget = targetPlayer.EyePosition!.Value - this.EyePosition!.Value;
+        directionToTarget.Normalize();
+
+        // Calculate the angle using the dot product to avoid coordinate system issues
+        var dotProduct = Math.Clamp(playerForward.Dot(directionToTarget), -1f, 1f);
+        var angleInDegrees = Math.Acos(dotProduct) * (180f / Math.PI);
+
+        return angleInDegrees <= halfFov;
     }
 }
