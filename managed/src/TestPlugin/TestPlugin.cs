@@ -1133,7 +1133,10 @@ public class TestPlugin : BasePlugin
     public void LineOfSightCommand( ICommandContext context )
     {
         var player = context.Sender!;
-        context.Reply($"player.PlayerPawn.CameraServices.FOV: {player.PlayerPawn!.CameraServices!.FOV}, player.Controller.DesiredFOV: {player.Controller.DesiredFOV}, player.PlayerPawn.ViewmodelFOV: {player.PlayerPawn.ViewmodelFOV}");
+        Core.PlayerManager.GetAlive()
+            .Where(p => p.PlayerID != player.PlayerID)
+            .ToList()
+            .ForEach(targetPlayer => context.Reply($"Line of sight to {targetPlayer.Controller!.PlayerName}: {player.PlayerPawn!.HasLineOfSight(targetPlayer.PlayerPawn!)}"));
     }
 
     public override void Unload()
