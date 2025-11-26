@@ -1,9 +1,9 @@
-﻿using SwiftlyS2.Core.Players;
-using SwiftlyS2.Core.SchemaDefinitions;
-using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.Schemas;
 using System.Runtime.InteropServices;
+using SwiftlyS2.Core.Players;
+using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.Schemas;
+using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.Natives;
 
@@ -69,23 +69,29 @@ public unsafe struct CGameTrace
     public readonly bool HitEntityByDesignerName<T>( string designerName, out T outEntity, NameMatchType matchType = NameMatchType.StartsWith ) where T : ISchemaClass<T>
     {
         outEntity = T.From(IntPtr.Zero);
+
         if (!DidHit)
+        {
             return false;
+        }
 
-        var entity = Entity;
-        if (entity.IsValid == false || entity is not T typedEntity)
+        if (Entity == null || !Entity.IsValid)
+        {
             return false;
+        }
 
-        var name = entity.DesignerName;
-        if (name == null)
+        var typedEntity = Entity.As<T>();
+        if (!typedEntity.IsValid)
+        {
             return false;
+        }
 
         var isMatch = matchType switch {
-            NameMatchType.Exact => name.Equals(designerName, StringComparison.Ordinal),
-            NameMatchType.StartsWith => name.StartsWith(designerName, StringComparison.Ordinal),
-            NameMatchType.EndsWith => name.EndsWith(designerName, StringComparison.Ordinal),
-            NameMatchType.Contains => name.Contains(designerName, StringComparison.Ordinal),
-            _ => false,
+            NameMatchType.Exact => Entity.DesignerName.Equals(designerName, StringComparison.OrdinalIgnoreCase),
+            NameMatchType.StartsWith => Entity.DesignerName.StartsWith(designerName, StringComparison.OrdinalIgnoreCase),
+            NameMatchType.EndsWith => Entity.DesignerName.EndsWith(designerName, StringComparison.OrdinalIgnoreCase),
+            NameMatchType.Contains => Entity.DesignerName.Contains(designerName, StringComparison.OrdinalIgnoreCase),
+            _ => false
         };
 
         if (isMatch)
@@ -103,38 +109,47 @@ public unsafe struct CGameTrace
 
     public readonly bool HitPlayer( out IPlayer? player )
     {
-        if (HitEntityByDesignerName<CCSPlayerPawn>("player", out var p, NameMatchType.StartsWith))
-        {
-            var controller = p.OriginalController;
-            if (!controller.IsValid)
-            {
-                player = null;
-                return false;
-            }
+        player = null;
 
-            player = new Player((int)(controller.Value!.Index - 1));
-            return true;
+        if (!DidHit || Entity == null || !Entity.IsValid)
+        {
+            return false;
         }
 
-        player = null;
-        return false;
+        if (!Entity.DesignerName?.StartsWith("player", StringComparison.OrdinalIgnoreCase) == true)
+        {
+            return false;
+        }
+
+        var playerPawn = Entity.As<CCSPlayerPawn>();
+        if (!playerPawn.IsValid)
+        {
+            return false;
+        }
+
+        var controller = playerPawn.OriginalController;
+        if (!controller.IsValid)
+        {
+            return false;
+        }
+
+        player = new Player((int)(controller.Value!.Index - 1));
+        return true;
+    }
+
+    public readonly bool HitPlayer()
+    {
+        return HitPlayer(out _);
     }
 
     public readonly bool HitEntity<T>( out T entity ) where T : ISchemaClass<T>
     {
-        if (T.ClassName == null)
-        {
-            entity = T.From(IntPtr.Zero);
-            return false;
-        }
-
-        if (HitEntityByDesignerName<T>(T.ClassName, out var e, NameMatchType.Exact))
-        {
-            entity = e;
-            return true;
-        }
-
         entity = T.From(IntPtr.Zero);
-        return false;
+        return T.ClassName != null && HitEntityByDesignerName(T.ClassName, out entity, NameMatchType.Exact);
+    }
+
+    public readonly bool HitEntity<T>() where T : ISchemaClass<T>
+    {
+        return HitEntity<T>(out _);
     }
 }
