@@ -1,153 +1,157 @@
-using System.Reflection;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Shared.Commands;
-using SwiftlyS2.Shared.Plugins;
-using SwiftlyS2.Shared.Profiler;
 using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Shared.Commands;
+using SwiftlyS2.Shared.Profiler;
 using SwiftlyS2.Shared.Permissions;
 
 namespace SwiftlyS2.Core.Commands;
 
 internal class CommandService : ICommandService, IDisposable
 {
+    private readonly ILoggerFactory loggerFactory;
+    private readonly IContextedProfilerService profiler;
+    private readonly IPlayerManagerService playerManagerService;
+    private readonly IPermissionManager permissionManager;
 
-  private List<CommandCallbackBase> _callbacks = new();
-  private ILogger<CommandService> _Logger { get; init; }
-  private ILoggerFactory _LoggerFactory { get; init; }
-  private IContextedProfilerService _Profiler { get; init; }
-  private IPlayerManagerService _PlayerManagerService { get; init; }
-  private IPermissionManager _PermissionManager { get; init; }
-  private List<ulong> _Aliases = new();
+    private readonly List<CommandCallbackBase> commandCallbacks = [];
+    private readonly List<ulong> commandAliases = [];
+    private readonly Lock commandLock = new();
 
-  private Lock _lock = new();
-
-  public CommandService( ILogger<CommandService> logger, ILoggerFactory loggerFactory, IContextedProfilerService profiler, IPlayerManagerService playerManagerService, IPermissionManager permissionManager )
-  {
-    _Logger = logger;
-    _LoggerFactory = loggerFactory;
-    _Profiler = profiler;
-    _PlayerManagerService = playerManagerService;
-    _PermissionManager = permissionManager;
-  }
-
-  public Guid RegisterCommand( string commandName, ICommandService.CommandListener handler, bool registerRaw = false, string permission = "" )
-  {
-    var callback = new CommandCallback(commandName, registerRaw, handler, permission, _PlayerManagerService, _PermissionManager, _LoggerFactory, _Profiler);
-    lock (_lock)
+    public CommandService( ILoggerFactory loggerFactory, IContextedProfilerService profiler, IPlayerManagerService playerManagerService, IPermissionManager permissionManager )
     {
-      _callbacks.Add(callback);
-    }
+        this.loggerFactory = loggerFactory;
+        this.profiler = profiler;
+        this.playerManagerService = playerManagerService;
+        this.permissionManager = permissionManager;
 
-    return callback.Guid;
-  }
-
-  public void RegisterCommandAlias( string commandName, string alias, bool registerRaw = false )
-  {
-    lock (_lock)
-    {
-      _Aliases.Add(NativeCommands.RegisterAlias(alias, commandName, registerRaw));
-    }
-  }
-
-  public void UnregisterCommand( Guid guid )
-  {
-    lock (_lock)
-    {
-      _callbacks.RemoveAll(callback =>
-      {
-        if (callback.Guid == guid)
+        lock (commandLock)
         {
-          callback.Dispose();
-          return true;
+            commandCallbacks.Clear();
+            commandAliases.Clear();
         }
-        return false;
-      });
     }
-  }
 
-  public void UnregisterCommand( string commandName )
-  {
-    lock (_lock)
+    public Guid RegisterCommand( string commandName, ICommandService.CommandListener handler, bool registerRaw = false, string permission = "" )
     {
-      _callbacks.RemoveAll(callback =>
-      {
-        if (callback is CommandCallback commandCallback && commandCallback.CommandName == commandName)
+        var callback = new CommandCallback(commandName, registerRaw, handler, permission, playerManagerService, permissionManager, loggerFactory, profiler);
+        lock (commandLock)
         {
-          commandCallback.Dispose();
-          return true;
+            commandCallbacks.Add(callback);
         }
-        return false;
-      });
+        return callback.Guid;
     }
-  }
 
-  public Guid HookClientCommand( ICommandService.ClientCommandHandler handler )
-  {
-    var callback = new ClientCommandListenerCallback(handler, _LoggerFactory, _Profiler);
-    lock (_lock)
+    public void RegisterCommandAlias( string commandName, string alias, bool registerRaw = false )
     {
-      _callbacks.Add(callback);
-    }
-    return callback.Guid;
-  }
-
-  public void UnhookClientCommand( Guid guid )
-  {
-    lock (_lock)
-    {
-      _callbacks.RemoveAll(callback =>
-      {
-        if (callback is ClientCommandListenerCallback clientCommandCallback && clientCommandCallback.Guid == guid)
+        lock (commandLock)
         {
-          clientCommandCallback.Dispose();
-          return true;
+            var commandId = NativeCommands.RegisterAlias(alias, commandName, registerRaw);
+            if (commandId != 0)
+            {
+                commandAliases.Add(commandId);
+            }
         }
-        return false;
-      });
     }
-  }
 
-  public Guid HookClientChat( ICommandService.ClientChatHandler handler )
-  {
-    var callback = new ClientChatListenerCallback(handler, _LoggerFactory, _Profiler);
-    lock (_lock)
+    public void UnregisterCommand( Guid guid )
     {
-      _callbacks.Add(callback);
-    }
-    return callback.Guid;
-  }
-
-  public void UnhookClientChat( Guid guid )
-  {
-    lock (_lock)
-    {
-      _callbacks.RemoveAll(callback =>
-      {
-        if (callback is ClientChatListenerCallback clientChatListenerCallback && clientChatListenerCallback.Guid == guid)
+        lock (commandLock)
         {
-          clientChatListenerCallback.Dispose();
-          return true;
+            _ = commandCallbacks.RemoveAll(callback =>
+            {
+                if (callback.Guid == guid)
+                {
+                    callback.Dispose();
+                    return true;
+                }
+                return false;
+            });
         }
-        return false;
-      });
     }
-  }
 
-  public void Dispose()
-  {
-    lock (_lock)
+    public void UnregisterCommand( string commandName )
     {
-      foreach (var callback in _callbacks)
-      {
-        callback.Dispose();
-      }
-      _callbacks.Clear();
-      foreach (var alias in _Aliases)
-      {
-        NativeCommands.UnregisterAlias(alias);
-      }
-      _Aliases.Clear();
+        lock (commandLock)
+        {
+            _ = commandCallbacks.RemoveAll(callback =>
+            {
+                if (callback is CommandCallback commandCallback && commandCallback.CommandName == commandName)
+                {
+                    commandCallback.Dispose();
+                    return true;
+                }
+                return false;
+            });
+        }
     }
-  }
+
+    public Guid HookClientCommand( ICommandService.ClientCommandHandler handler )
+    {
+        var callback = new ClientCommandListenerCallback(handler, loggerFactory, profiler);
+        lock (commandLock)
+        {
+            commandCallbacks.Add(callback);
+        }
+        return callback.Guid;
+    }
+
+    public void UnhookClientCommand( Guid guid )
+    {
+        lock (commandLock)
+        {
+            _ = commandCallbacks.RemoveAll(callback =>
+            {
+                if (callback is ClientCommandListenerCallback clientCommandCallback && clientCommandCallback.Guid == guid)
+                {
+                    clientCommandCallback.Dispose();
+                    return true;
+                }
+                return false;
+            });
+        }
+    }
+
+    public Guid HookClientChat( ICommandService.ClientChatHandler handler )
+    {
+        var callback = new ClientChatListenerCallback(handler, loggerFactory, profiler);
+        lock (commandLock)
+        {
+            commandCallbacks.Add(callback);
+        }
+        return callback.Guid;
+    }
+
+    public void UnhookClientChat( Guid guid )
+    {
+        lock (commandLock)
+        {
+            _ = commandCallbacks.RemoveAll(callback =>
+            {
+                if (callback is ClientChatListenerCallback clientChatListenerCallback && clientChatListenerCallback.Guid == guid)
+                {
+                    clientChatListenerCallback.Dispose();
+                    return true;
+                }
+                return false;
+            });
+        }
+    }
+
+    public void Dispose()
+    {
+        lock (commandLock)
+        {
+            foreach (var callback in commandCallbacks)
+            {
+                callback.Dispose();
+            }
+            commandCallbacks.Clear();
+            foreach (var alias in commandAliases)
+            {
+                NativeCommands.UnregisterAlias(alias);
+            }
+            commandAliases.Clear();
+        }
+    }
 }

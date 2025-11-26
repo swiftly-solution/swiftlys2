@@ -24,7 +24,10 @@
 int Bridge_Commands_HandleCommandForPlayer(int playerid, const char* command)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    if (!servercommands) return -1;
+    if (!servercommands)
+    {
+        return -1;
+    }
 
     return servercommands->HandleCommand(playerid, command);
 }
@@ -32,21 +35,28 @@ int Bridge_Commands_HandleCommandForPlayer(int playerid, const char* command)
 uint64_t Bridge_Commands_RegisterCommand(const char* commandName, void* callback, bool registerRaw)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    if (!servercommands) return 0;
+    if (!servercommands)
+    {
+        return 0;
+    }
 
     // i hate cpp compilers, i stood here for an hour and a half because it was `-> bool` instead of `-> void`
-    return servercommands->RegisterCommand(commandName, [callback](int playerid, std::vector<std::string> args, std::string originalCommandName, std::string selectedPrefix, bool isSilentCommand) -> void {
-        static std::string imploded_args;
-        imploded_args = implode(args, "\x01");
+    return servercommands->RegisterCommand(
+        commandName,
+        [callback](int playerid, std::vector<std::string> args, std::string originalCommandName, std::string selectedPrefix, bool isSilentCommand) -> void
+        {
+            static std::string imploded_args;
+            imploded_args = implode(args, "\x01");
 
-        static std::string original_name;
-        original_name = originalCommandName;
+            static std::string original_name;
+            original_name = originalCommandName;
 
-        static std::string selected_prefix;
-        selected_prefix = selectedPrefix;
+            static std::string selected_prefix;
+            selected_prefix = selectedPrefix;
 
-        reinterpret_cast<void(*)(int, const char*, const char*, const char*, uint8_t)>(callback)(playerid, imploded_args.c_str(), original_name.c_str(), selected_prefix.c_str(), isSilentCommand == true ? 1 : 0);
-    }, registerRaw);
+            reinterpret_cast<void (*)(int, const char*, const char*, const char*, uint8_t)>(callback)(playerid, imploded_args.c_str(), original_name.c_str(), selected_prefix.c_str(), isSilentCommand == true ? 1 : 0);
+        },
+        registerRaw);
 }
 
 void Bridge_Commands_UnregisterCommand(uint64_t callbackID)
@@ -70,9 +80,7 @@ void Bridge_Commands_UnregisterAlias(uint64_t callbackID)
 uint64_t Bridge_Commands_RegisterClientCommandsListener(void* callback)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    return servercommands->RegisterClientCommandsListener([callback](int playerid, const std::string& command) -> bool {
-        return reinterpret_cast<bool(*)(int, const char*)>(callback)(playerid, command.c_str());
-    });
+    return servercommands->RegisterClientCommandsListener([callback](int playerid, const std::string& command) -> bool { return reinterpret_cast<bool (*)(int, const char*)>(callback)(playerid, command.c_str()); });
 }
 
 void Bridge_Commands_UnregisterClientCommandsListener(uint64_t callbackID)
@@ -84,9 +92,7 @@ void Bridge_Commands_UnregisterClientCommandsListener(uint64_t callbackID)
 uint64_t Bridge_Commands_RegisterClientChatListener(void* callback)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    return servercommands->RegisterClientChatListener([callback](int playerid, const std::string& text, bool teamonly) -> bool {
-        return reinterpret_cast<int(*)(int, const char*, uint8_t)>(callback)(playerid, text.c_str(), teamonly ? 1 : 0);
-    });
+    return servercommands->RegisterClientChatListener([callback](int playerid, const std::string& text, bool teamonly) -> bool { return reinterpret_cast<int (*)(int, const char*, uint8_t)>(callback)(playerid, text.c_str(), teamonly ? 1 : 0); });
 }
 
 void Bridge_Commands_UnregisterClientChatListener(uint64_t callbackID)

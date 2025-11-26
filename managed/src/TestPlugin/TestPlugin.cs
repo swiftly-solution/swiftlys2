@@ -76,8 +76,14 @@ public class TestPlugin : BasePlugin
     [CommandAlias("beh", false)]
     public void Test2Command( ICommandContext context )
     {
-        Console.WriteLine("hello world");
-        Console.WriteLine("\n");
+        Console.WriteLine("hello world\n");
+    }
+
+    [Command("CommandAliasTest")]
+    [CommandAlias("cat", true)]
+    public void CommandAliasTest( ICommandContext context )
+    {
+        context.Reply("CommandAliasTest\n");
     }
 
     [GameEventHandler(HookMode.Pre)]
