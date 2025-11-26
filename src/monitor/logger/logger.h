@@ -19,8 +19,8 @@
 #ifndef src_monitor_logger_logger_h
 #define src_monitor_logger_logger_h
 
-#include <string>
 #include <api/monitor/logger/logger.h>
+#include <string>
 
 #include <set>
 
@@ -30,25 +30,33 @@ public:
     virtual void Log(LogType type, const std::string& message) override;
     virtual void Log(LogType type, const std::string& category, const std::string& message) override;
 
+    virtual void Trace(const std::string& message) override;
+    virtual void Debug(const std::string& message) override;
     virtual void Info(const std::string& message) override;
     virtual void Warning(const std::string& message) override;
     virtual void Error(const std::string& message) override;
-    virtual void Debug(const std::string& message) override;
+    virtual void Critical(const std::string& message) override;
 
+    virtual void Trace(const std::string& category, const std::string& message) override;
+    virtual void Debug(const std::string& category, const std::string& message) override;
     virtual void Info(const std::string& category, const std::string& message) override;
     virtual void Warning(const std::string& category, const std::string& message) override;
     virtual void Error(const std::string& category, const std::string& message) override;
-    virtual void Debug(const std::string& category, const std::string& message) override;
+    virtual void Critical(const std::string& category, const std::string& message) override;
 
     virtual void SetLogFile(LogType type, const std::string& path) override;
     virtual void ShouldOutputToFile(LogType type, bool enabled) override;
 
     virtual void ShouldColorCategoryInConsole(const std::string& category, bool enabled) override;
     virtual void ShouldOutputToConsole(LogType type, bool enabled) override;
+
 private:
-    bool m_bShouldOutputToConsole[4] = { true, true, true, true };
-    bool m_bShouldOutputToFile[4] = { false, false, false, false };
-    std::string m_sLogFilePaths[4] = { "", "", "", "" };
+    bool ShouldLog(LogType type);
+    LogType GetMinLogLevelFromEnv();
+
+    bool m_bShouldOutputToConsole[7] = {true, true, true, true, true, true, false};
+    bool m_bShouldOutputToFile[7] = {false, false, false, false, false, false, false};
+    std::string m_sLogFilePaths[7] = {"", "", "", "", "", "", ""};
     std::set<std::string> m_sNonColoredCategories;
 };
 

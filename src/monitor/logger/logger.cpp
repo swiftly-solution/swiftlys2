@@ -21,38 +21,42 @@
 #include <api/shared/string.h>
 #include <core/entrypoint.h>
 
-#include <fmt/format.h>
 #include <api/shared/files.h>
+#include <fmt/format.h>
 
+#include <algorithm>
 #include <api/interfaces/manager.h>
+#include <cctype>
+#include <cstdlib>
+#include <unordered_map>
 
-#define PREFIX "[Swiftly]"
+constexpr const char* PREFIX = "[Swiftly]";
+static const std::unordered_map<LogType, std::string> logTypeToString = {{LogType::TRACE, "TRACE"}, {LogType::DEBUG, "DEBUG"},       {LogType::INFO, "INFO"}, {LogType::WARNING, "WARNING"},
+                                                                         {LogType::ERR, "ERROR"},   {LogType::CRITICAL, "CRITICAL"}, {LogType::NONE, "NONE"}};
+static const std::unordered_map<std::string, LogType> stringToLogType = {{"TRACE", LogType::TRACE}, {"DEBUG", LogType::DEBUG},       {"INFO", LogType::INFO}, {"WARNING", LogType::WARNING},
+                                                                         {"ERROR", LogType::ERR},   {"CRITICAL", LogType::CRITICAL}, {"NONE", LogType::NONE}};
 
 std::string GetLogTypeString(LogType type)
 {
-    switch (type)
-    {
-    case LogType::INFO:
-        return "INFO";
-    case LogType::WARNING:
-        return "WARNING";
-    case LogType::ERR:
-        return "ERROR";
-    case LogType::DEBUG:
-        return "DEBUG";
-    default:
-        return "UNKNOWN";
-    }
+    auto it = logTypeToString.find(type);
+    return (it != logTypeToString.end()) ? it->second : "UNKNOWN";
 }
 
 void Logger::Log(LogType type, const std::string& message)
 {
+    if (!ShouldLog(type))
+    {
+        return;
+    }
+
     std::string final_output = fmt::format("{} [{}{}{}] {}", PREFIX, GetTerminalStringColor(GetLogTypeString(type)), GetLogTypeString(type), "[/]", message);
     std::string color_processed = TerminalProcessColor(final_output);
     std::string without_colors = ClearTerminalColors(final_output);
 
-    if (m_bShouldOutputToConsole[(int)type]) g_SwiftlyCore.SendConsoleMessage(color_processed);
-
+    if (m_bShouldOutputToConsole[(int)type])
+    {
+        g_SwiftlyCore.SendConsoleMessage(color_processed);
+    }
     if (m_bShouldOutputToFile[(int)type] && !m_sLogFilePaths[(int)type].empty())
     {
         Files::Append(m_sLogFilePaths[(int)type], without_colors);
@@ -61,10 +65,29 @@ void Logger::Log(LogType type, const std::string& message)
 
 void Logger::Log(LogType type, const std::string& category, const std::string& message)
 {
+    if (!ShouldLog(type))
+    {
+        return;
+    }
+
     if (m_bShouldOutputToConsole[(int)type] && !m_sNonColoredCategories.contains(category))
+    {
         Log(type, fmt::format("[{}{}{}] {}", GetTerminalStringColor(category), category, "[/]", message));
+    }
     else
+    {
         Log(type, fmt::format("[{}] {}", category, message));
+    }
+}
+
+void Logger::Trace(const std::string& message)
+{
+    Log(LogType::TRACE, message);
+}
+
+void Logger::Debug(const std::string& message)
+{
+    Log(LogType::DEBUG, message);
 }
 
 void Logger::Info(const std::string& message)
@@ -82,9 +105,19 @@ void Logger::Error(const std::string& message)
     Log(LogType::ERR, message);
 }
 
-void Logger::Debug(const std::string& message)
+void Logger::Critical(const std::string& message)
 {
-    Log(LogType::DEBUG, message);
+    Log(LogType::CRITICAL, message);
+}
+
+void Logger::Trace(const std::string& category, const std::string& message)
+{
+    Log(LogType::TRACE, category, message);
+}
+
+void Logger::Debug(const std::string& category, const std::string& message)
+{
+    Log(LogType::DEBUG, category, message);
 }
 
 void Logger::Info(const std::string& category, const std::string& message)
@@ -102,9 +135,9 @@ void Logger::Error(const std::string& category, const std::string& message)
     Log(LogType::ERR, category, message);
 }
 
-void Logger::Debug(const std::string& category, const std::string& message)
+void Logger::Critical(const std::string& category, const std::string& message)
 {
-    Log(LogType::DEBUG, category, message);
+    Log(LogType::CRITICAL, category, message);
 }
 
 void Logger::SetLogFile(LogType type, const std::string& path)
@@ -120,12 +153,43 @@ void Logger::ShouldOutputToFile(LogType type, bool enabled)
 void Logger::ShouldColorCategoryInConsole(const std::string& category, bool enabled)
 {
     if (!enabled)
+    {
         m_sNonColoredCategories.insert(category);
+    }
     else
+    {
+
         m_sNonColoredCategories.erase(category);
+    }
 }
 
 void Logger::ShouldOutputToConsole(LogType type, bool enabled)
 {
     m_bShouldOutputToConsole[static_cast<int>(type)] = enabled;
+}
+
+bool Logger::ShouldLog(LogType type)
+{
+    if (type == LogType::NONE)
+    {
+        return false;
+    }
+
+    static LogType minLevel = GetMinLogLevelFromEnv();
+    return static_cast<int>(type) >= static_cast<int>(minLevel);
+}
+
+LogType Logger::GetMinLogLevelFromEnv()
+{
+    const char* level = std::getenv("SWIFTLY_LOG_LEVEL");
+    if (!level)
+    {
+        return LogType::INFO;
+    }
+
+    std::string levelStr = level;
+    std::transform(levelStr.begin(), levelStr.end(), levelStr.begin(), ::toupper);
+
+    auto it = stringToLogType.find(levelStr);
+    return (it != stringToLogType.end()) ? it->second : LogType::INFO;
 }

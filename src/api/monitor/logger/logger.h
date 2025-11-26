@@ -23,10 +23,13 @@
 
 enum class LogType
 {
+    TRACE,
+    DEBUG,
     INFO,
     WARNING,
     ERR,
-    DEBUG
+    CRITICAL,
+    NONE
 };
 
 class ILogger
@@ -35,15 +38,19 @@ public:
     virtual void Log(LogType type, const std::string& message) = 0;
     virtual void Log(LogType type, const std::string& category, const std::string& message) = 0;
 
+    virtual void Trace(const std::string& message) = 0;
+    virtual void Debug(const std::string& message) = 0;
     virtual void Info(const std::string& message) = 0;
     virtual void Warning(const std::string& message) = 0;
     virtual void Error(const std::string& message) = 0;
-    virtual void Debug(const std::string& message) = 0;
+    virtual void Critical(const std::string& message) = 0;
 
+    virtual void Trace(const std::string& category, const std::string& message) = 0;
+    virtual void Debug(const std::string& category, const std::string& message) = 0;
     virtual void Info(const std::string& category, const std::string& message) = 0;
     virtual void Warning(const std::string& category, const std::string& message) = 0;
     virtual void Error(const std::string& category, const std::string& message) = 0;
-    virtual void Debug(const std::string& category, const std::string& message) = 0;
+    virtual void Critical(const std::string& category, const std::string& message) = 0;
 
     virtual void SetLogFile(LogType type, const std::string& path) = 0;
     virtual void ShouldOutputToFile(LogType type, bool enabled) = 0;
