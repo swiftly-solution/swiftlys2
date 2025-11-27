@@ -1,3 +1,4 @@
+using Spectre.Console;
 using SwiftlyS2.Shared.Menus;
 
 namespace SwiftlyS2.Core.Menus.OptionsBase.Helpers;
@@ -113,6 +114,12 @@ internal sealed class DynamicTextUpdater : IDisposable
                 pauseEndTime = now.AddMilliseconds(pauseIntervalMs);
             }
         }
-        catch { }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(e))
+            {
+                AnsiConsole.WriteException(e);
+            }
+        }
     }
 }

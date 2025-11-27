@@ -3,7 +3,8 @@ using SwiftlyS2.Shared.EntitySystem;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEntityInstance {
+public partial interface CEntityInstance
+{
 
 
   /// <summary>
@@ -19,24 +20,24 @@ public partial interface CEntityInstance {
   /// <summary>
   /// Fire an input to the entity.
   /// </summary>
-  /// <typeparam name="T">Param type. Support bool, int, uint, long, ulong, float, double, string</typeparam>
+  /// <typeparam name="T">Param type. Support bool, int, uint, long, ulong, float, double, string, Vector, Vector2D, Vector4D, QAngle, Color</typeparam>
   /// <param name="input">Input name.</param>
   /// <param name="value">Input value.</param>
   /// <param name="activator">Activator entity. Nullable.</param>
   /// <param name="caller">Caller entity. Nullable.</param>
   /// <param name="outputID">Output ID.</param>
-  public void AcceptInput<T>(string input, T value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0);
+  public void AcceptInput<T>( string input, T value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0 );
 
   /// <summary>
   /// Add an entity IO event to the entity.
   /// </summary>
-  /// <typeparam name="T">Param type. Support bool, int, uint, long, ulong, float, double, string</typeparam>
+  /// <typeparam name="T">Param type. Support bool, int, uint, long, ulong, float, double, string, Vector, Vector2D, Vector4D, QAngle, Color</typeparam>
   /// <param name="input">Input name.</param>
   /// <param name="value">Input value.</param>
   /// <param name="activator">Activator entity. Nullable.</param>
   /// <param name="caller">Caller entity. Nullable.</param>
   /// <param name="delay">Delay in seconds.</param>x
-  public void AddEntityIOEvent<T>(string input, T value, CEntityInstance? activator = null, CEntityInstance? caller = null, float delay = 0f);
+  public void AddEntityIOEvent<T>( string input, T value, CEntityInstance? activator = null, CEntityInstance? caller = null, float delay = 0f );
 
   /// <summary>
   /// Dispatch a spawn event to the entity.
@@ -49,7 +50,7 @@ public partial interface CEntityInstance {
   /// </summary>
   /// <param name="transmitting">Whether the entity should be transmitting.</param>
   /// <param name="playerId">The player ID to set the transmit state for.</param>
-  public void SetTransmitState( bool transmitting , int playerId );
+  public void SetTransmitState( bool transmitting, int playerId );
 
   /// <summary>
   /// Set the global transmit state of the entity.

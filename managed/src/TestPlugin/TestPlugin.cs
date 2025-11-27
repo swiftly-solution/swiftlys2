@@ -211,6 +211,11 @@ public class TestPlugin : BasePlugin
             Console.WriteLine($"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
         };
 
+        Core.Event.OnEntityIdentityAcceptInputHook += ( @event ) =>
+        {
+            Console.WriteLine($"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.InputName}");
+        };
+
 
         // var provider = services.BuildServiceProvider();
 
@@ -395,27 +400,12 @@ public class TestPlugin : BasePlugin
         // entity.DispatchSpawn(kv);
         // Console.WriteLine("Spawned entity with keyvalues");
 
-        int j = 0;
-
-        var cvar = Core.ConVar.Find<bool>("sv_cheats")!;
-        Console.WriteLine(cvar);
-        Console.WriteLine(cvar.Value);
-        var cvar2 = Core.ConVar.Find<bool>("sv_autobunnyhopping")!;
-        Console.WriteLine(cvar2);
-        Console.WriteLine(cvar2.Value);
-
-        var cvar3 = Core.ConVar.Create<string>("sw_test_cvar", "Test cvar", "ABCDEFG");
-        Console.WriteLine(cvar3);
-        Console.WriteLine(cvar3.Value);
-
-        var cvar4 = Core.ConVar.Find<bool>("r_drawworld")!;
-
-        cvar2.ReplicateToClient(0, true);
-
-        cvar4.QueryClient(0, ( value ) =>
+        var pawn = context.Sender!.RequiredPawn;
+        var weapons = pawn.WeaponServices!.MyValidWeapons;
+        foreach (var weapon in weapons)
         {
-            Console.WriteLine("QueryCallback " + value);
-        });
+            weapon.AcceptInput("SetAmmoAmount", "9999");
+        }
     }
 
     [Command("w")]

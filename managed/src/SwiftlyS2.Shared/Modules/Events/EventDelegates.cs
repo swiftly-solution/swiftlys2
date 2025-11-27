@@ -161,4 +161,9 @@ public class EventDelegates
     /// Called when the player pawn post think hook is triggered.
     /// </summary>
     public delegate void OnPlayerPawnPostThink( IOnPlayerPawnPostThinkHookEvent @event );
+
+    /// <summary>
+    /// Called when an entity identity accept input hook is triggered.
+    /// </summary>
+    public delegate void OnEntityIdentityAcceptInputHook( IOnEntityIdentityAcceptInputHookEvent @event );
 }

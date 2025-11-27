@@ -38,241 +38,31 @@ internal static class NativeEntitySystem {
     }
   }
 
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, int, int, void> _AcceptInputInt32;
+  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, nint, int, void> _AcceptInput;
 
-  public unsafe static void AcceptInputInt32(nint entity, string input, nint activator, nint caller, int value, int outputID) {
+  public unsafe static void AcceptInput(nint entity, string input, nint activator, nint caller, nint value, int outputID) {
     var pool = ArrayPool<byte>.Shared;
     var inputLength = Encoding.UTF8.GetByteCount(input);
     var inputBuffer = pool.Rent(inputLength + 1);
     Encoding.UTF8.GetBytes(input, inputBuffer);
     inputBuffer[inputLength] = 0;
     fixed (byte* inputBufferPtr = inputBuffer) {
-      _AcceptInputInt32(entity, inputBufferPtr, activator, caller, value, outputID);
+      _AcceptInput(entity, inputBufferPtr, activator, caller, value, outputID);
       pool.Return(inputBuffer);
     }
   }
 
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, uint, int, void> _AcceptInputUInt32;
+  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, nint, float, void> _AddEntityIOEvent;
 
-  public unsafe static void AcceptInputUInt32(nint entity, string input, nint activator, nint caller, uint value, int outputID) {
+  public unsafe static void AddEntityIOEvent(nint entity, string input, nint activator, nint caller, nint value, float delay) {
     var pool = ArrayPool<byte>.Shared;
     var inputLength = Encoding.UTF8.GetByteCount(input);
     var inputBuffer = pool.Rent(inputLength + 1);
     Encoding.UTF8.GetBytes(input, inputBuffer);
     inputBuffer[inputLength] = 0;
     fixed (byte* inputBufferPtr = inputBuffer) {
-      _AcceptInputUInt32(entity, inputBufferPtr, activator, caller, value, outputID);
+      _AddEntityIOEvent(entity, inputBufferPtr, activator, caller, value, delay);
       pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, long, int, void> _AcceptInputInt64;
-
-  public unsafe static void AcceptInputInt64(nint entity, string input, nint activator, nint caller, long value, int outputID) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AcceptInputInt64(entity, inputBufferPtr, activator, caller, value, outputID);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, ulong, int, void> _AcceptInputUInt64;
-
-  public unsafe static void AcceptInputUInt64(nint entity, string input, nint activator, nint caller, ulong value, int outputID) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AcceptInputUInt64(entity, inputBufferPtr, activator, caller, value, outputID);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, float, int, void> _AcceptInputFloat;
-
-  public unsafe static void AcceptInputFloat(nint entity, string input, nint activator, nint caller, float value, int outputID) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AcceptInputFloat(entity, inputBufferPtr, activator, caller, value, outputID);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, double, int, void> _AcceptInputDouble;
-
-  public unsafe static void AcceptInputDouble(nint entity, string input, nint activator, nint caller, double value, int outputID) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AcceptInputDouble(entity, inputBufferPtr, activator, caller, value, outputID);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, byte, int, void> _AcceptInputBool;
-
-  public unsafe static void AcceptInputBool(nint entity, string input, nint activator, nint caller, bool value, int outputID) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AcceptInputBool(entity, inputBufferPtr, activator, caller, value ? (byte)1 : (byte)0, outputID);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, byte*, int, void> _AcceptInputString;
-
-  public unsafe static void AcceptInputString(nint entity, string input, nint activator, nint caller, string value, int outputID) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    var valueLength = Encoding.UTF8.GetByteCount(value);
-    var valueBuffer = pool.Rent(valueLength + 1);
-    Encoding.UTF8.GetBytes(value, valueBuffer);
-    valueBuffer[valueLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      fixed (byte* valueBufferPtr = valueBuffer) {
-        _AcceptInputString(entity, inputBufferPtr, activator, caller, valueBufferPtr, outputID);
-        pool.Return(inputBuffer);
-        pool.Return(valueBuffer);
-      }
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, int, float, void> _AddEntityIOEventInt32;
-
-  public unsafe static void AddEntityIOEventInt32(nint entity, string input, nint activator, nint caller, int value, float delay) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AddEntityIOEventInt32(entity, inputBufferPtr, activator, caller, value, delay);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, uint, float, void> _AddEntityIOEventUInt32;
-
-  public unsafe static void AddEntityIOEventUInt32(nint entity, string input, nint activator, nint caller, uint value, float delay) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AddEntityIOEventUInt32(entity, inputBufferPtr, activator, caller, value, delay);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, long, float, void> _AddEntityIOEventInt64;
-
-  public unsafe static void AddEntityIOEventInt64(nint entity, string input, nint activator, nint caller, long value, float delay) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AddEntityIOEventInt64(entity, inputBufferPtr, activator, caller, value, delay);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, ulong, float, void> _AddEntityIOEventUInt64;
-
-  public unsafe static void AddEntityIOEventUInt64(nint entity, string input, nint activator, nint caller, ulong value, float delay) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AddEntityIOEventUInt64(entity, inputBufferPtr, activator, caller, value, delay);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, float, float, void> _AddEntityIOEventFloat;
-
-  public unsafe static void AddEntityIOEventFloat(nint entity, string input, nint activator, nint caller, float value, float delay) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AddEntityIOEventFloat(entity, inputBufferPtr, activator, caller, value, delay);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, double, float, void> _AddEntityIOEventDouble;
-
-  public unsafe static void AddEntityIOEventDouble(nint entity, string input, nint activator, nint caller, double value, float delay) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AddEntityIOEventDouble(entity, inputBufferPtr, activator, caller, value, delay);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, byte, float, void> _AddEntityIOEventBool;
-
-  public unsafe static void AddEntityIOEventBool(nint entity, string input, nint activator, nint caller, bool value, float delay) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      _AddEntityIOEventBool(entity, inputBufferPtr, activator, caller, value ? (byte)1 : (byte)0, delay);
-      pool.Return(inputBuffer);
-    }
-  }
-
-  private unsafe static delegate* unmanaged<nint, byte*, nint, nint, byte*, float, void> _AddEntityIOEventString;
-
-  public unsafe static void AddEntityIOEventString(nint entity, string input, nint activator, nint caller, string value, float delay) {
-    var pool = ArrayPool<byte>.Shared;
-    var inputLength = Encoding.UTF8.GetByteCount(input);
-    var inputBuffer = pool.Rent(inputLength + 1);
-    Encoding.UTF8.GetBytes(input, inputBuffer);
-    inputBuffer[inputLength] = 0;
-    var valueLength = Encoding.UTF8.GetByteCount(value);
-    var valueBuffer = pool.Rent(valueLength + 1);
-    Encoding.UTF8.GetBytes(value, valueBuffer);
-    valueBuffer[valueLength] = 0;
-    fixed (byte* inputBufferPtr = inputBuffer) {
-      fixed (byte* valueBufferPtr = valueBuffer) {
-        _AddEntityIOEventString(entity, inputBufferPtr, activator, caller, valueBufferPtr, delay);
-        pool.Return(inputBuffer);
-        pool.Return(valueBuffer);
-      }
     }
   }
 

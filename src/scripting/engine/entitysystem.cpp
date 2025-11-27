@@ -21,6 +21,9 @@
 
 #include <entityhandle.h>
 
+typedef void (*CEntityInstance_AcceptInput)(void*, const char*, void*, void*, void*, int);
+typedef void (*CEntitySystem_AddEntityIOEvent)(void*, void*, const char*, void*, void*, void*, float, int, void*, void*);
+
 void Bridge_EntitySystem_Spawn(void* pEntity, void* pKeyValues)
 {
     static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
@@ -39,100 +42,21 @@ void* Bridge_EntitySystem_CreateEntityByName(const char* name)
     return entsystem->CreateEntityByName(name);
 }
 
-void Bridge_EntitySystem_AcceptInputInt32(void* pEntity, const char* input, void* pActivator, void* pCaller, int32_t value, int32_t outputID)
+void Bridge_EntitySystem_AcceptInput(void* pEntity, const char* input, void* pActivator, void* pCaller, void* variant, int32_t outputID)
 {
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AcceptInput(pEntity, input, pActivator, pCaller, value, outputID);
+    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
+    static auto sig = gamedata->GetSignatures()->Fetch("CEntityInstance::AcceptInput");
+
+    reinterpret_cast<CEntityInstance_AcceptInput>(sig)(pEntity, input, pActivator, pCaller, variant, outputID);
 }
 
-void Bridge_EntitySystem_AcceptInputUInt32(void* pEntity, const char* input, void* pActivator, void* pCaller, uint32_t value, int32_t outputID)
+void Bridge_EntitySystem_AddEntityIOEvent(void* pEntity, const char* input, void* pActivator, void* pCaller, void* variant, float delay)
 {
     static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AcceptInput(pEntity, input, pActivator, pCaller, value, outputID);
-}
+    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
+    static auto sig = gamedata->GetSignatures()->Fetch("CEntitySystem::AddEntityIOEvent");
 
-void Bridge_EntitySystem_AcceptInputInt64(void* pEntity, const char* input, void* pActivator, void* pCaller, int64_t value, int32_t outputID)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AcceptInput(pEntity, input, pActivator, pCaller, value, outputID);
-}
-
-void Bridge_EntitySystem_AcceptInputUInt64(void* pEntity, const char* input, void* pActivator, void* pCaller, uint64_t value, int32_t outputID)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AcceptInput(pEntity, input, pActivator, pCaller, value, outputID);
-}
-
-void Bridge_EntitySystem_AcceptInputFloat(void* pEntity, const char* input, void* pActivator, void* pCaller, float value, int32_t outputID)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AcceptInput(pEntity, input, pActivator, pCaller, value, outputID);
-}
-
-void Bridge_EntitySystem_AcceptInputDouble(void* pEntity, const char* input, void* pActivator, void* pCaller, double value, int32_t outputID)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AcceptInput(pEntity, input, pActivator, pCaller, value, outputID);
-}
-
-void Bridge_EntitySystem_AcceptInputBool(void* pEntity, const char* input, void* pActivator, void* pCaller, bool value, int32_t outputID)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AcceptInput(pEntity, input, pActivator, pCaller, value, outputID);
-}
-
-void Bridge_EntitySystem_AcceptInputString(void* pEntity, const char* input, void* pActivator, void* pCaller, const char* value, int32_t outputID)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AcceptInput(pEntity, input, pActivator, pCaller, value, outputID);
-}
-
-void Bridge_EntitySystem_AddEntityIOEventInt32(void* pEntity, const char* input, void* pActivator, void* pCaller, int32_t value, float delay)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AddEntityIOEvent(pEntity, input, pActivator, pCaller, value, delay);
-}
-
-void Bridge_EntitySystem_AddEntityIOEventUInt32(void* pEntity, const char* input, void* pActivator, void* pCaller, uint32_t value, float delay)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AddEntityIOEvent(pEntity, input, pActivator, pCaller, value, delay);
-}
-
-void Bridge_EntitySystem_AddEntityIOEventInt64(void* pEntity, const char* input, void* pActivator, void* pCaller, int64_t value, float delay)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AddEntityIOEvent(pEntity, input, pActivator, pCaller, value, delay);
-}
-
-void Bridge_EntitySystem_AddEntityIOEventUInt64(void* pEntity, const char* input, void* pActivator, void* pCaller, uint64_t value, float delay)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AddEntityIOEvent(pEntity, input, pActivator, pCaller, value, delay);
-}
-
-void Bridge_EntitySystem_AddEntityIOEventFloat(void* pEntity, const char* input, void* pActivator, void* pCaller, float value, float delay)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AddEntityIOEvent(pEntity, input, pActivator, pCaller, value, delay);
-}
-
-void Bridge_EntitySystem_AddEntityIOEventDouble(void* pEntity, const char* input, void* pActivator, void* pCaller, double value, float delay)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AddEntityIOEvent(pEntity, input, pActivator, pCaller, value, delay);
-}
-
-void Bridge_EntitySystem_AddEntityIOEventBool(void* pEntity, const char* input, void* pActivator, void* pCaller, bool value, float delay)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AddEntityIOEvent(pEntity, input, pActivator, pCaller, value, delay);
-}
-
-void Bridge_EntitySystem_AddEntityIOEventString(void* pEntity, const char* input, void* pActivator, void* pCaller, const char* value, float delay)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    entsystem->AddEntityIOEvent(pEntity, input, pActivator, pCaller, value, delay);
+    reinterpret_cast<CEntitySystem_AddEntityIOEvent>(sig)(entsystem->GetEntitySystem(), pEntity, input, pActivator, pCaller, variant, delay, 0, nullptr, nullptr);
 }
 
 bool Bridge_EntitySystem_IsValidEntity(void* pEntity)
@@ -200,22 +124,8 @@ void* Bridge_EntitySystem_GetEntityByIndex(uint32_t index)
 DEFINE_NATIVE("EntitySystem.Spawn", Bridge_EntitySystem_Spawn);
 DEFINE_NATIVE("EntitySystem.Despawn", Bridge_EntitySystem_Despawn);
 DEFINE_NATIVE("EntitySystem.CreateEntityByName", Bridge_EntitySystem_CreateEntityByName);
-DEFINE_NATIVE("EntitySystem.AcceptInputInt32", Bridge_EntitySystem_AcceptInputInt32);
-DEFINE_NATIVE("EntitySystem.AcceptInputUInt32", Bridge_EntitySystem_AcceptInputUInt32);
-DEFINE_NATIVE("EntitySystem.AcceptInputInt64", Bridge_EntitySystem_AcceptInputInt64);
-DEFINE_NATIVE("EntitySystem.AcceptInputUInt64", Bridge_EntitySystem_AcceptInputUInt64);
-DEFINE_NATIVE("EntitySystem.AcceptInputFloat", Bridge_EntitySystem_AcceptInputFloat);
-DEFINE_NATIVE("EntitySystem.AcceptInputDouble", Bridge_EntitySystem_AcceptInputDouble);
-DEFINE_NATIVE("EntitySystem.AcceptInputBool", Bridge_EntitySystem_AcceptInputBool);
-DEFINE_NATIVE("EntitySystem.AcceptInputString", Bridge_EntitySystem_AcceptInputString);
-DEFINE_NATIVE("EntitySystem.AddEntityIOEventInt32", Bridge_EntitySystem_AddEntityIOEventInt32);
-DEFINE_NATIVE("EntitySystem.AddEntityIOEventUInt32", Bridge_EntitySystem_AddEntityIOEventUInt32);
-DEFINE_NATIVE("EntitySystem.AddEntityIOEventInt64", Bridge_EntitySystem_AddEntityIOEventInt64);
-DEFINE_NATIVE("EntitySystem.AddEntityIOEventUInt64", Bridge_EntitySystem_AddEntityIOEventUInt64);
-DEFINE_NATIVE("EntitySystem.AddEntityIOEventFloat", Bridge_EntitySystem_AddEntityIOEventFloat);
-DEFINE_NATIVE("EntitySystem.AddEntityIOEventDouble", Bridge_EntitySystem_AddEntityIOEventDouble);
-DEFINE_NATIVE("EntitySystem.AddEntityIOEventBool", Bridge_EntitySystem_AddEntityIOEventBool);
-DEFINE_NATIVE("EntitySystem.AddEntityIOEventString", Bridge_EntitySystem_AddEntityIOEventString);
+DEFINE_NATIVE("EntitySystem.AcceptInput", Bridge_EntitySystem_AcceptInput);
+DEFINE_NATIVE("EntitySystem.AddEntityIOEvent", Bridge_EntitySystem_AddEntityIOEvent);
 DEFINE_NATIVE("EntitySystem.IsValidEntity", Bridge_EntitySystem_IsValidEntity);
 DEFINE_NATIVE("EntitySystem.GetGameRules", Bridge_EntitySystem_GetGameRules);
 DEFINE_NATIVE("EntitySystem.GetEntitySystem", Bridge_EntitySystem_GetEntitySystem);

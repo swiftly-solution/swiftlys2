@@ -161,4 +161,9 @@ public interface IEventSubscriber
     /// Called when the player pawn post think hook is triggered.
     /// </summary>
     public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink;
+
+    /// <summary>
+    /// Called when an entity identity accept input hook is triggered.
+    /// </summary>
+    public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook;
 }

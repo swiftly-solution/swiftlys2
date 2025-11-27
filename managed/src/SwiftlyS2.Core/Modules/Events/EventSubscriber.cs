@@ -58,6 +58,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     public event EventDelegates.OnSteamAPIActivated? OnSteamAPIActivated;
     public event EventDelegates.OnMovementServicesRunCommandHook? OnMovementServicesRunCommandHook;
     public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink;
+    public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook;
 
     public void Dispose()
     {
@@ -617,6 +618,24 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         finally
         {
             _Profiler.StopRecording("Event::OnPlayerPawnPostThink");
+        }
+    }
+
+    public void InvokeOnEntityIdentityAcceptInputHook( OnEntityIdentityAcceptInputHookEvent @event )
+    {
+        try
+        {
+            if (OnEntityIdentityAcceptInputHook == null) return;
+            _Profiler.StartRecording("Event::OnEntityIdentityAcceptInput");
+            OnEntityIdentityAcceptInputHook?.Invoke(@event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(e)) _Logger.LogError(e, "Error invoking OnEntityIdentityAcceptInput.");
+        }
+        finally
+        {
+            _Profiler.StopRecording("Event::OnEntityIdentityAcceptInput");
         }
     }
 }

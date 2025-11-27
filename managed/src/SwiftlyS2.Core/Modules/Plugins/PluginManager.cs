@@ -3,6 +3,7 @@ using System.Runtime.Loader;
 using System.Collections.Concurrent;
 using McMaster.NETCore.Plugins;
 using Microsoft.Extensions.Logging;
+using Spectre.Console;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Services;
@@ -122,8 +123,12 @@ internal class PluginManager
                             }
                             Console.WriteLine("\n");
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            if (GlobalExceptionHandler.Handle(ex))
+                            {
+                                AnsiConsole.WriteException(ex);
+                            }
                         }
                     }, cts.Token);
                 }
@@ -536,7 +541,13 @@ internal class PluginManager
                 loader?.Dispose();
                 core?.Dispose();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                if (GlobalExceptionHandler.Handle(ex))
+                {
+                    AnsiConsole.WriteException(ex);
+                }
+            }
 
             logger.LogError(e, "Exception occurred while loading plugin: {PluginPath}", Path.Combine(dir, Path.GetFileName(dir)) + ".dll");
 
