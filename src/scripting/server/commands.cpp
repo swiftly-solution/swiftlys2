@@ -65,10 +65,10 @@ void Bridge_Commands_UnregisterCommand(uint64_t callbackID)
     servercommands->UnregisterCommand(callbackID);
 }
 
-void Bridge_Commands_RegisterAlias(const char* alias, const char* command, bool registerRaw)
+uint64_t Bridge_Commands_RegisterAlias(const char* alias, const char* command, bool registerRaw)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    servercommands->RegisterAlias(alias, command, registerRaw);
+    return servercommands->RegisterAlias(alias, command, registerRaw);
 }
 
 void Bridge_Commands_UnregisterAlias(uint64_t callbackID)
