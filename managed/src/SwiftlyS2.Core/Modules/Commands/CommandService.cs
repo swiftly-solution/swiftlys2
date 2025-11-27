@@ -142,16 +142,17 @@ internal class CommandService : ICommandService, IDisposable
     {
         lock (commandLock)
         {
-            foreach (var callback in commandCallbacks)
-            {
-                callback.Dispose();
-            }
-            commandCallbacks.Clear();
             foreach (var alias in commandAliases)
             {
                 NativeCommands.UnregisterAlias(alias);
             }
             commandAliases.Clear();
+
+            foreach (var callback in commandCallbacks)
+            {
+                callback.Dispose();
+            }
+            commandCallbacks.Clear();
         }
     }
 }
