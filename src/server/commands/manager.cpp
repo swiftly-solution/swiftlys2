@@ -320,26 +320,20 @@ void CServerCommands::UnregisterCommand(uint64_t commandId)
 
 uint64_t CServerCommands::RegisterAlias(std::string aliasCommand, std::string commandName, bool registerRaw)
 {
-    printf("[DEBUG-CPP] RegisterAlias: aliasCommand=%s, commandName=%s, registerRaw=%d\n", aliasCommand.c_str(), commandName.c_str(), registerRaw);
     std::transform(commandName.begin(), commandName.end(), commandName.begin(), ::tolower);
     if (!commandHandlers.contains(commandName))
     {
         commandName = "sw_" + commandName;
         if (!commandHandlers.contains(commandName))
         {
-            printf("[DEBUG-CPP] RegisterAlias FAILED: handler not found for %s\n", commandName.c_str());
             return 0;
         }
     }
-    printf("[DEBUG-CPP] RegisterAlias: resolved commandName=%s\n", commandName.c_str());
-    auto result = RegisterCommand(aliasCommand, commandHandlers[commandName], registerRaw);
-    printf("[DEBUG-CPP] RegisterAlias result: %llu\n", result);
-    return result;
+    return RegisterCommand(aliasCommand, commandHandlers[commandName], registerRaw);
 }
 
 void CServerCommands::UnregisterAlias(uint64_t aliasId)
 {
-    printf("[DEBUG-CPP] UnregisterAlias: aliasId=%llu\n", aliasId);
     return UnregisterCommand(aliasId);
 }
 

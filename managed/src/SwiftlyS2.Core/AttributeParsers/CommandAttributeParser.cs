@@ -20,13 +20,10 @@ internal static class CommandAttributeParser
                 var commandName = commandAttribute.Name;
                 var registerRaw = commandAttribute.RegisterRaw;
                 var permission = commandAttribute.Permission;
-                Console.WriteLine($"[DEBUG-Parser] RegisterCommand: {commandName}, registerRaw={registerRaw}");
-                var cmdGuid = self.RegisterCommand(commandName, method.CreateDelegate<ICommandService.CommandListener>(instance), registerRaw, permission);
-                Console.WriteLine($"[DEBUG-Parser] RegisterCommand result: guid={cmdGuid}");
 
+                var cmdGuid = self.RegisterCommand(commandName, method.CreateDelegate<ICommandService.CommandListener>(instance), registerRaw, permission);
                 foreach (var aliasAttr in commandAliasAttributes)
                 {
-                    Console.WriteLine($"[DEBUG-Parser] RegisterCommandAlias: commandName={commandName}, alias={aliasAttr.Alias}, aliasRegisterRaw={aliasAttr.RegisterRaw}");
                     self.RegisterCommandAlias(commandName, aliasAttr.Alias, aliasAttr.RegisterRaw);
                 }
             }

@@ -46,9 +46,7 @@ internal class CommandService : ICommandService, IDisposable
     {
         lock (commandLock)
         {
-            Console.WriteLine($"[DEBUG-CS] RegisterCommandAlias: alias={alias}, commandName={commandName}, registerRaw={registerRaw}");
             var commandId = NativeCommands.RegisterAlias(alias, commandName, registerRaw);
-            Console.WriteLine($"[DEBUG-CS] RegisterCommandAlias result: commandId={commandId}");
             if (commandId != 0)
             {
                 commandAliases.Add(commandId);
@@ -144,25 +142,17 @@ internal class CommandService : ICommandService, IDisposable
     {
         lock (commandLock)
         {
-            Console.WriteLine($"[DEBUG-CS] CommandService.Dispose: {commandAliases.Count} aliases, {commandCallbacks.Count} callbacks");
             foreach (var alias in commandAliases)
             {
-                Console.WriteLine($"[DEBUG-CS] UnregisterAlias: {alias}");
                 NativeCommands.UnregisterAlias(alias);
             }
             commandAliases.Clear();
-            Console.WriteLine("[DEBUG-CS] Aliases cleared, now disposing callbacks");
 
             foreach (var callback in commandCallbacks)
             {
-                if (callback is CommandCallback cmdCb)
-                    Console.WriteLine($"[DEBUG-CS] Disposing command: {cmdCb.CommandName}, guid={callback.Guid}");
-                else
-                    Console.WriteLine($"[DEBUG-CS] Disposing callback: {callback.Guid}");
                 callback.Dispose();
             }
             commandCallbacks.Clear();
-            Console.WriteLine("[DEBUG-CS] CommandService.Dispose complete");
         }
     }
 }
