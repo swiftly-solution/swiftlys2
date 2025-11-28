@@ -35,7 +35,7 @@ internal class SwiftlyLogger( string categoryName, string contextName ) : ILogge
         var timestamp = DateTime.Now.ToString("MM/dd HH:mm:ss");
         var (levelText, color) = LogLevelConfig.TryGetValue(logLevel, out var config) ? config : ("Unknown", "grey42");
         var eventIdText = eventId.Id != 0 ? $"[{eventId.Id}]" : string.Empty;
-        AnsiConsole.Profile.Width = int.MaxValue;
+        AnsiConsole.Profile.Width = 13337;
 
         // Console output
         AnsiConsole.MarkupLineInterpolated($"[lightsteelblue1 bold]{contextName}[/] [lightsteelblue]|[/] [grey42]{timestamp}[/] [lightsteelblue]|[/] [{color}]{levelText}[/] [lightsteelblue]|[/] [lightsteelblue]{categoryName}{eventIdText}[/]");
