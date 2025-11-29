@@ -129,7 +129,7 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
     {
         reinterpret_cast<void(*)()>(g_pOnStartupServerCallback)();
     }
-
+    
     if (g_bDone) return;
 
     auto pGameResService = g_ifaceService.FetchInterface<IGameResourceService>(GAMERESOURCESERVICESERVER_INTERFACE_VERSION);

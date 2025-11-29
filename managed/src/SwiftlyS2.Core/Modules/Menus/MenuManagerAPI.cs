@@ -204,7 +204,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 }
             }
             else if (KeyBind.A.HasFlag(@event.Key.ToKeyBind()))
-{
+            {
                 if (!menu.Configuration.DisableExit)
                 {
                     CloseMenuForPlayerInternal(player, menu, true);
