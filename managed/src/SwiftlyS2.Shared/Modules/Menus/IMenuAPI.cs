@@ -77,6 +77,11 @@ public record class MenuConfiguration
     public bool FreezePlayer { get; set; } = false;
 
     /// <summary>
+    /// Whether to disable the exit button for this menu.
+    /// </summary>
+    public bool DisableExit { get; set; } = false;
+
+    /// <summary>
     /// Time in seconds before the menu automatically closes. Set to 0 or less to disable auto-close.
     /// </summary>
     public float AutoCloseAfter { get; set; } = 0f;

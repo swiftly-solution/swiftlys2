@@ -38,6 +38,18 @@ public interface IMenuBuilderAPI
     public IMenuBuilderAPI DisableSound();
 
     /// <summary>
+    /// Enables the exit button for this menu.
+    /// </summary>
+    /// <returns>This builder for method chaining.</returns>
+    public IMenuBuilderAPI EnableExit();
+
+    /// <summary>
+    /// Disables the exit button for this menu.
+    /// </summary>
+    /// <returns>This builder for method chaining.</returns>
+    public IMenuBuilderAPI DisableExit();
+
+    /// <summary>
     /// Controls whether player movement is frozen while the menu is open.
     /// </summary>
     /// <param name="frozen">True to freeze player movement, false to allow movement. Default is false.</param>
