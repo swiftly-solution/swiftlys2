@@ -8,7 +8,7 @@ namespace SwiftlyS2.Core.Services;
 
 internal class TraceManager : ITraceManager
 {
-    public void TracePlayerBBox( Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace )
+    public void TracePlayerBBox(Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace)
     {
         unsafe
         {
@@ -19,7 +19,7 @@ internal class TraceManager : ITraceManager
         }
     }
 
-    public void TraceShape( Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace )
+    public void TraceShape(Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace)
     {
         unsafe
         {
@@ -30,11 +30,11 @@ internal class TraceManager : ITraceManager
         }
     }
 
-        public void TracePlayerBBoxWithResult(Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace, out bool result)
+    public void TracePlayerBBoxWithResult(Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace, out bool result)
     {
         unsafe
         {
-            fixed(CGameTrace* tracePtr = &trace)
+            fixed (CGameTrace* tracePtr = &trace)
             {
                 GameFunctions.TracePlayerBBox(start, end, bounds, &filter, tracePtr);
                 result = trace.DidHit;
@@ -53,12 +53,14 @@ internal class TraceManager : ITraceManager
             }
         }
     }
-    
-    public static void SimpleTrace( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, nint filterEntity, nint filterSecondEntity )
+
+    public static void SimpleTrace(Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, nint filterEntity, nint filterSecondEntity)
     {
-        var filter = new CTraceFilter(true) {
+        var filter = new CTraceFilter(true)
+        {
             IterateEntities = true,
-            QueryShapeAttributes = new RnQueryShapeAttr_t {
+            QueryShapeAttributes = new RnQueryShapeAttr_t
+            {
                 ObjectSetMask = objectQuery,
                 InteractsWith = interactWith,
                 InteractsExclude = interactExclude,
@@ -74,7 +76,8 @@ internal class TraceManager : ITraceManager
             filter.QueryShapeAttributes.EntityIdsToIgnore[1] = uint.MaxValue;
         }
 
-        var ray = new Ray_t {
+        var ray = new Ray_t
+        {
             Type = rayKind
         };
 
@@ -98,14 +101,14 @@ internal class TraceManager : ITraceManager
         }
     }
 
-    public void SimpleTrace( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null )
+    public void SimpleTrace(Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null)
     {
         var entityPtr = filterEntity?.Address ?? nint.Zero;
         var entitySecondPtr = filterSecondEntity?.Address ?? nint.Zero;
         SimpleTrace(start, end, rayKind, objectQuery, interactWith, interactExclude, interactAs, collision, ref trace, entityPtr, entitySecondPtr);
     }
 
-    public void SimpleTrace( Vector start, QAngle angle, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null )
+    public void SimpleTrace(Vector start, QAngle angle, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null)
     {
         angle.ToDirectionVectors(out var fwd, out var _, out var _);
         var end = start + new Vector(
@@ -128,7 +131,7 @@ internal class TraceManager : ITraceManager
         var pawn = player.PlayerPawn.Value;
         var start = pawn.AbsOrigin.Value;
         start.Z += 64f;
-        
+
         var trace = new CGameTrace();
         var ray = new Ray_t();
 
