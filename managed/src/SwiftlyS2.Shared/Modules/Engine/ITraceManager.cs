@@ -29,6 +29,28 @@ public interface ITraceManager
     /// surface details.</param>
     public void TraceShape( Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace );
 
+        /// <summary>
+    /// Performs a collision trace of a player-sized bounding box and returns the result as a boolean.
+    /// </summary>
+    /// <param name="start">The starting position of the trace.</param>
+    /// <param name="end">The ending position of the trace.</param>
+    /// <param name="bounds">The dimensions of the player's bounding box.</param>
+    /// <param name="filter">The trace filter to apply.</param>
+    /// <param name="trace">A reference to a CGameTrace object to store the results.</param>
+    /// <param name="result">Returns <c>true</c> if the native trace function executed successfully and hit an object, <c>false</c> otherwise.</param>
+    public void TracePlayerBBoxWithResult(Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace, out bool result);
+
+    /// <summary>
+    /// Performs a general shape (ray/hull) trace and returns the result as a boolean.
+    /// </summary>
+    /// <param name="start">The starting position of the trace.</param>
+    /// <param name="end">The ending position of the trace.</param>
+    /// <param name="ray">The ray definition used for the trace.</param>
+    /// <param name="filter">The filter that determines which entities or surfaces are considered.</param>
+    /// <param name="trace">A reference to a CGameTrace structure to store the results.</param>
+    /// <param name="result">Returns <c>true</c> if the native trace function executed successfully and hit an object, <c>false</c> otherwise.</param>
+    public void TraceShapeWithResult(Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace, out bool result);
+
     /// <summary>
     /// Performs a simple trace shape operation from the specified start point to the end point, using the provided
     /// object query and trace mask. The result of the trace is stored in the provided trace object.
@@ -64,4 +86,17 @@ public interface ITraceManager
     /// <param name="filterEntity">An optional entity to exclude from the trace.</param>
     /// <param name="filterSecondEntity">An optional second entity to exclude from the trace.</param>
     public void SimpleTrace( Vector start, QAngle angle, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null );
+
+    /// <summary>
+    /// Performs a line trace (raycast) from the player's eye position to a specified destination, using the given trace mask.
+    /// </summary>
+    /// <param name="player">The player controller whose eye position is used as the trace start point.</param>
+    /// <param name="destination">The world-space destination position to trace towards.</param>
+    /// <param name="mask">Trace mask flags as a ulong.</param>
+    /// <returns>A <see cref="CGameTrace"/> structure containing the result of the trace operation.</returns>
+    public CGameTrace GetGameTraceByEyePosition(
+        CCSPlayerController player,
+        Vector destination,
+        ulong mask
+    );
 }

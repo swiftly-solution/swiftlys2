@@ -30,6 +30,30 @@ internal class TraceManager : ITraceManager
         }
     }
 
+        public void TracePlayerBBoxWithResult(Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace, out bool result)
+    {
+        unsafe
+        {
+            fixed(CGameTrace* tracePtr = &trace)
+            {
+                GameFunctions.TracePlayerBBox(start, end, bounds, &filter, tracePtr);
+                result = trace.DidHit;
+            }
+        }
+    }
+
+    public void TraceShapeWithResult(Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace, out bool result)
+    {
+        unsafe
+        {
+            fixed (CGameTrace* tracePtr = &trace)
+            {
+                GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &filter, tracePtr);
+                result = trace.DidHit;
+            }
+        }
+    }
+    
     public static void SimpleTrace( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, nint filterEntity, nint filterSecondEntity )
     {
         var filter = new CTraceFilter(true) {
@@ -90,5 +114,28 @@ internal class TraceManager : ITraceManager
             fwd.Z * 8192f
         );
         SimpleTrace(start, end, rayKind, objectQuery, interactWith, interactExclude, interactAs, collision, ref trace, filterEntity, filterSecondEntity);
+    }
+
+    public CGameTrace GetGameTraceByEyePosition(
+        CCSPlayerController player,
+        Vector destination,
+        ulong mask
+    )
+    {
+        if (!player.PlayerPawn.IsValid || player.PlayerPawn.Value?.AbsOrigin is null)
+            return new CGameTrace();
+
+        var pawn = player.PlayerPawn.Value;
+        var start = pawn.AbsOrigin.Value;
+        start.Z += 64f;
+        
+        var trace = new CGameTrace();
+        var ray = new Ray_t();
+
+        var filter = new CTraceFilter();
+
+        TraceShape(start, destination, ray, filter, ref trace);
+
+        return trace;
     }
 }
