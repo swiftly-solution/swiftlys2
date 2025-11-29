@@ -70,12 +70,6 @@ internal class TraceManager : ITraceManager
             }
         };
 
-        unsafe
-        {
-            filter.QueryShapeAttributes.EntityIdsToIgnore[0] = uint.MaxValue;
-            filter.QueryShapeAttributes.EntityIdsToIgnore[1] = uint.MaxValue;
-        }
-
         var ray = new Ray_t
         {
             Type = rayKind
