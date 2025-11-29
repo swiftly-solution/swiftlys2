@@ -125,6 +125,11 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
 {
     reinterpret_cast<decltype(&StartupServerHook)>(g_pStartupServerHook->GetOriginal())(_this, config, a, b);
 
+    if (g_pOnStartupServerCallback)
+    {
+        reinterpret_cast<void(*)()>(g_pOnStartupServerCallback)();
+    }
+
     if (g_bDone) return;
 
     auto pGameResService = g_ifaceService.FetchInterface<IGameResourceService>(GAMERESOURCESERVICESERVER_INTERFACE_VERSION);
@@ -135,11 +140,6 @@ void StartupServerHook(void* _this, const GameSessionConfiguration_t& config, IS
     CGameEntitySystem* entSystem = *reinterpret_cast<CGameEntitySystem**>((uintptr_t)(pGameResService)+gamedata->GetOffsets()->Fetch("GameEntitySystem"));
     g_pGameEntitySystem = entSystem;
     g_pGameEntitySystem->AddListenerEntity(&g_entityListener);
-
-    if (g_pOnStartupServerCallback)
-    {
-        reinterpret_cast<void(*)()>(g_pOnStartupServerCallback)();
-    }
 
     g_bDone = true;
 }

@@ -885,6 +885,7 @@ public class TestPlugin : BasePlugin
         var player = context.Sender!;
         var menu = Core.MenusAPI
             .CreateBuilder()
+            .EnableExit()
             .SetPlayerFrozen(false)
             .Design.SetMaxVisibleItems(5)
             .Design.SetMenuTitle($"{HtmlGradient.GenerateGradientText("Redesigned Menu", "#00FA9A", "#F5FFFA")}")

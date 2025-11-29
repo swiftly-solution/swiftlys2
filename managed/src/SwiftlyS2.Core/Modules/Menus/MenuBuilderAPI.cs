@@ -49,6 +49,18 @@ internal sealed class MenuBuilderAPI : IMenuBuilderAPI
         return this;
     }
 
+    public IMenuBuilderAPI EnableExit()
+    {
+        configuration.DisableExit = false;
+        return this;
+    }
+
+    public IMenuBuilderAPI DisableExit()
+    {
+        configuration.DisableExit = true;
+        return this;
+    }
+
     public IMenuBuilderAPI SetPlayerFrozen( bool frozen = false )
     {
         configuration.FreezePlayer = frozen;

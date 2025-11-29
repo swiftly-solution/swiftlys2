@@ -423,17 +423,17 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 "wasd" => string.Concat(
                     "<br>", guideLine, "<br>",
                     "<font class='fontSize-s' color='#FFFFFF'>",
-                    $"<font color='{footerColor}'>Move:</font> W/S | ",
-                    $"<font color='{footerColor}'>Use:</font> D | ",
-                    $"<font color='{footerColor}'>Exit:</font> A",
+                    $"<font color='{footerColor}'>Move:</font> W/S",
+                    $" | <font color='{footerColor}'>Use:</font> D",
+                    Configuration.DisableExit ? string.Empty : $" | <font color='{footerColor}'>Exit:</font> A",
                     "</font>"
                 ),
                 _ => string.Concat(
                     "<br>", guideLine, "<br>",
                     "<font class='fontSize-s' color='#FFFFFF'>",
-                    $"<font color='{footerColor}'>Move:</font> {KeybindOverrides.Move?.ToString() ?? core.MenusAPI.Configuration.ButtonsScroll.ToUpper()}/{KeybindOverrides.MoveBack?.ToString() ?? core.MenusAPI.Configuration.ButtonsScrollBack.ToUpper()} | ",
-                    $"<font color='{footerColor}'>Use:</font> {KeybindOverrides.Select?.ToString() ?? core.MenusAPI.Configuration.ButtonsUse.ToUpper()} | ",
-                    $"<font color='{footerColor}'>Exit:</font> {KeybindOverrides.Exit?.ToString() ?? core.MenusAPI.Configuration.ButtonsExit.ToUpper()}",
+                    $"<font color='{footerColor}'>Move:</font> {KeybindOverrides.Move?.ToString() ?? core.MenusAPI.Configuration.ButtonsScroll.ToUpper()}/{KeybindOverrides.MoveBack?.ToString() ?? core.MenusAPI.Configuration.ButtonsScrollBack.ToUpper()}",
+                    $" | <font color='{footerColor}'>Use:</font> {KeybindOverrides.Select?.ToString() ?? core.MenusAPI.Configuration.ButtonsUse.ToUpper()}",
+                    Configuration.DisableExit ? string.Empty : $" | <font color='{footerColor}'>Exit:</font> {KeybindOverrides.Exit?.ToString() ?? core.MenusAPI.Configuration.ButtonsExit.ToUpper()}",
                     "</font>"
                 )
             };

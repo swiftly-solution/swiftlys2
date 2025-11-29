@@ -70,8 +70,7 @@ internal class TraceManager : ITraceManager
             }
         };
 
-        var ray = new Ray_t
-        {
+        var ray = new Ray_t {
             Type = rayKind
         };
 

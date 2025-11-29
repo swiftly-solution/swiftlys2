@@ -151,13 +151,16 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             }
             else if (exitKey.HasFlag(@event.Key.ToKeyBind()))
             {
-                CloseMenuForPlayerInternal(player, menu, true);
-
-                if (menu.Configuration.PlaySound)
+                if (!menu.Configuration.DisableExit)
                 {
-                    exitSound.Recipients.AddRecipient(@event.PlayerId);
-                    _ = exitSound.Emit();
-                    exitSound.Recipients.RemoveRecipient(@event.PlayerId);
+                    CloseMenuForPlayerInternal(player, menu, true);
+
+                    if (menu.Configuration.PlaySound)
+                    {
+                        exitSound.Recipients.AddRecipient(@event.PlayerId);
+                        _ = exitSound.Emit();
+                        exitSound.Recipients.RemoveRecipient(@event.PlayerId);
+                    }
                 }
             }
             else if (useKey.HasFlag(@event.Key.ToKeyBind()))
@@ -201,13 +204,17 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 }
             }
             else if (KeyBind.A.HasFlag(@event.Key.ToKeyBind()))
-            {
-                CloseMenuForPlayerInternal(player, menu, true);
-                if (menu.Configuration.PlaySound)
+{
+                if (!menu.Configuration.DisableExit)
                 {
-                    exitSound.Recipients.AddRecipient(@event.PlayerId);
-                    _ = exitSound.Emit();
-                    exitSound.Recipients.RemoveRecipient(@event.PlayerId);
+                    CloseMenuForPlayerInternal(player, menu, true);
+
+                    if (menu.Configuration.PlaySound)
+                    {
+                        exitSound.Recipients.AddRecipient(@event.PlayerId);
+                        _ = exitSound.Emit();
+                        exitSound.Recipients.RemoveRecipient(@event.PlayerId);
+                    }
                 }
             }
             else if (KeyBind.D.HasFlag(@event.Key.ToKeyBind()))
