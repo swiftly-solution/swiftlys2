@@ -1,0 +1,443 @@
+name: Build
+
+on: [push, workflow_dispatch, pull_request]
+
+env:
+  XMAKE_ROOT: y
+
+permissions:
+  contents: write
+
+jobs:
+  versioning:
+    runs-on: windows-latest
+    outputs:
+      fullSemVer: ${{ steps.version_step.outputs.fullSemVer }}
+      semVer: ${{ steps.version_step.outputs.semVer }}
+      informationalVersion: ${{ steps.version_step.outputs.informationalVersion }}
+      preReleaseLabel: ${{ steps.version_step.outputs.preReleaseLabel }}
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Fetch all tags
+      run: |
+        git fetch --tags --force
+        git tag
+    - name: Setup GitVersion
+      uses: gittools/actions/gitversion/setup@v3.2.1
+      with:
+        versionSpec: '5.12.x'
+    - name: Determine Version
+      id: version_step
+      uses: gittools/actions/gitversion/execute@v3.2.1
+  managed:
+    needs: versioning
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+    - name: Build managed
+      run: |
+        cd managed
+        dotnet build -c Release -p:Version=${{ needs.versioning.outputs.semVer }} -p:InformationalVersion=${{ needs.versioning.outputs.informationalVersion }} -p:FileVersion=${{ needs.versioning.outputs.semVer }}
+    - name: Upload plugin as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_managed
+        path: managed/build/Release
+  linux_core:
+    needs: versioning
+    runs-on: ubuntu-latest
+    container:
+      image: registry.gitlab.steamos.cloud/steamrt/sniper/sdk
+    steps:
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt install libreadline-dev
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+    - name: Setup xmake
+      uses: xmake-io/github-action-setup-xmake@v1
+      with:
+        xmake-version: latest
+        actions-cache-folder: '.xmake-cache'
+        actions-cache-key: xmake-${{ runner.os }}
+    - name: Build
+      run: |
+        chmod 777 vendor/s2sdk/devtools/bin/linux/protoc
+        xmake f --cc=gcc-14 --cxx=g++-14 -y
+        xmake build -y
+      env:
+        SWIFTLY_VERSION: ${{ needs.versioning.outputs.semVer }}
+    - name: Upload plugin as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_linux
+        path: build/package/addons
+
+  windows_core:
+    needs: versioning
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+    - name: Setup xmake
+      uses: xmake-io/github-action-setup-xmake@v1
+      with:
+        xmake-version: latest
+        actions-cache-key: xmake-${{ runner.os }}
+    - name: Build
+      run: |
+        xmake build -y
+      env:
+        SWIFTLY_VERSION: ${{ needs.versioning.outputs.semVer }}
+    - name: Upload plugin as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_windows
+        path: build/package/addons
+    - name: Upload PDB as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_windows_pdb
+        path: build/windows/x64/release/swiftlys2.pdb
+
+  linux_loader:
+    needs: versioning
+    runs-on: ubuntu-latest
+    container:
+      image: registry.gitlab.steamos.cloud/steamrt/sniper/sdk
+    steps:
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt install libreadline-dev
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        repository: swiftly-solution/swiftlys2-loader
+        submodules: recursive
+        fetch-depth: 0
+    - name: Setup xmake
+      uses: xmake-io/github-action-setup-xmake@v1
+      with:
+        xmake-version: latest
+        actions-cache-folder: '.xmake-cache'
+        actions-cache-key: xmake-loader-${{ runner.os }}
+    - name: Build
+      run: |
+        xmake f --cc=gcc-14 --cxx=g++-14 -y
+        xmake build -y
+      env:
+        SWIFTLY_VERSION: ${{ needs.versioning.outputs.semVer }}
+    - name: Upload plugin as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_loader_linux
+        path: build/package/addons
+
+  windows_loader:
+    needs: versioning
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        repository: swiftly-solution/swiftlys2-loader
+        submodules: recursive
+        fetch-depth: 0
+    - name: Setup xmake
+      uses: xmake-io/github-action-setup-xmake@v1
+      with:
+        xmake-version: latest
+        actions-cache-key: xmake-loader-${{ runner.os }}
+    - name: Build
+      run: |
+        xmake build -y
+      env:
+        SWIFTLY_VERSION: ${{ needs.versioning.outputs.semVer }}
+    - name: Upload plugin as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_loader_windows
+        path: build/package/addons
+    - name: Upload PDB as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_loader_windows_pdb
+        path: build/windows/x64/release/server.pdb
+
+  packaging:
+    needs: [versioning, linux_core, windows_core, managed, linux_loader, windows_loader]
+    runs-on: ubuntu-latest
+    env:
+      LINUX_FOLDER: swiftlys2-linux-v${{ needs.versioning.outputs.semVer }}
+      WINDOWS_FOLDER: swiftlys2-windows-v${{ needs.versioning.outputs.semVer }}
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_linux
+        path: ./${{ env.LINUX_FOLDER }}
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_loader_linux
+        path: ./${{ env.LINUX_FOLDER }}-loader
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_windows
+        path: ./${{ env.WINDOWS_FOLDER }}
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_windows_pdb
+        path: ./swiftlys2.pdb
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_loader_windows
+        path: ./${{ env.WINDOWS_FOLDER }}-loader
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_loader_windows_pdb
+        path: ./server.pdb
+    
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_managed
+        path: ./managed
+    - name: Download runtimes
+      run: |
+        mkdir -p ./linux-runtimes
+        cd ./linux-runtimes
+        wget https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.0/dotnet-runtime-10.0.0-linux-x64.tar.gz
+        mkdir -p content
+        tar -xzf dotnet-runtime-10.0.0-linux-x64.tar.gz -C content
+        cd ..
+        mkdir -p ./windows-runtimes
+        cd ./windows-runtimes
+        wget https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.0/dotnet-runtime-10.0.0-win-x64.zip
+        unzip dotnet-runtime-10.0.0-win-x64.zip -d content
+        cd ..
+      
+    - name: Create package
+      run: |
+        ls -la ./managed
+        cp -r managed/SwiftlyS2 ${{ env.LINUX_FOLDER }}/swiftlys2/bin/managed
+        cp -r managed/SwiftlyS2 ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/managed
+
+        cp -r ${{ env.LINUX_FOLDER }}-loader/* ${{ env.LINUX_FOLDER }}/
+        cp -r ${{ env.WINDOWS_FOLDER }}-loader/* ${{ env.WINDOWS_FOLDER }}/
+
+        cp -r ./swiftlys2.pdb/swiftlys2.pdb ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/win64/
+        cp -r ./server.pdb/server.pdb ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/win64/
+
+        mkdir -p ${{ env.LINUX_FOLDER }}/swiftlys2/plugins/
+        mkdir -p ${{ env.WINDOWS_FOLDER }}/swiftlys2/plugins/
+
+        cp -r ${{ env.LINUX_FOLDER }}/ ${{ env.LINUX_FOLDER }}-with-runtimes/
+        cp -r ${{ env.WINDOWS_FOLDER }}/ ${{ env.WINDOWS_FOLDER }}-with-runtimes/
+
+        cp -r linux-runtimes/content/ ${{ env.LINUX_FOLDER }}-with-runtimes/swiftlys2/bin/managed/dotnet
+        cp -r windows-runtimes/content/ ${{ env.WINDOWS_FOLDER }}-with-runtimes/swiftlys2/bin/managed/dotnet
+
+        cp linux-runtimes/content/host/fxr/10.0.0/libhostfxr.so ${{ env.LINUX_FOLDER }}-with-runtimes/swiftlys2/bin/linuxsteamrt64/libhostfxr.so
+        cp windows-runtimes/content/host/fxr/10.0.0/hostfxr.dll ${{ env.WINDOWS_FOLDER }}-with-runtimes/swiftlys2/bin/win64/hostfxr.dll
+
+        mkdir -p ${{ env.LINUX_FOLDER }}/addons/
+        mkdir -p ${{ env.WINDOWS_FOLDER }}/addons/
+        mkdir -p ${{ env.LINUX_FOLDER }}-with-runtimes/addons/
+        mkdir -p ${{ env.WINDOWS_FOLDER }}-with-runtimes/addons/
+
+        mv ${{ env.LINUX_FOLDER }}/* ${{ env.LINUX_FOLDER }}/addons/ || true
+        mv ${{ env.WINDOWS_FOLDER }}/* ${{ env.WINDOWS_FOLDER }}/addons/ || true
+        mv ${{ env.LINUX_FOLDER }}-with-runtimes/* ${{ env.LINUX_FOLDER }}-with-runtimes/addons/ || true
+        mv ${{ env.WINDOWS_FOLDER }}-with-runtimes/* ${{ env.WINDOWS_FOLDER }}-with-runtimes/addons/ || true
+
+        zip -r ${{ env.LINUX_FOLDER }}-with-runtimes.zip ${{ env.LINUX_FOLDER }}-with-runtimes
+        zip -r ${{ env.WINDOWS_FOLDER }}-with-runtimes.zip ${{ env.WINDOWS_FOLDER }}-with-runtimes
+        zip -r ${{ env.LINUX_FOLDER }}.zip ${{ env.LINUX_FOLDER }}
+        zip -r ${{ env.WINDOWS_FOLDER }}.zip ${{ env.WINDOWS_FOLDER }}
+
+    - name: Upload package
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2-package-${{ needs.versioning.outputs.semVer }}
+        path: |
+          ${{ env.LINUX_FOLDER }}.zip
+          ${{ env.WINDOWS_FOLDER }}.zip
+          ${{ env.LINUX_FOLDER }}-with-runtimes.zip
+          ${{ env.WINDOWS_FOLDER }}-with-runtimes.zip
+  
+  releasing:
+    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/beta') }}
+    needs: [versioning, packaging]
+    runs-on: ubuntu-latest
+    env:
+      TAG_NAME: v${{ needs.versioning.outputs.semVer }}
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Create tag
+      run: |
+        TAG_NAME="${{ env.TAG_NAME }}"
+        MSG="Release v${{ needs.versioning.outputs.semVer }}"
+
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+        if git rev-parse -q --verify "refs/tags/$TAG_NAME" >/dev/null; then
+          exit 0
+        fi
+        git tag -a "$TAG_NAME" -m "${MSG}"
+        git push origin "$TAG_NAME"
+    
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2-package-${{ needs.versioning.outputs.semVer }}
+        path: ./release
+
+    - name: Create release
+      uses: softprops/action-gh-release@v2
+      with:
+        generate_release_notes: true
+        files: |
+          release/swiftlys2-linux-v${{ needs.versioning.outputs.semVer }}.zip
+          release/swiftlys2-windows-v${{ needs.versioning.outputs.semVer }}.zip
+          release/swiftlys2-linux-v${{ needs.versioning.outputs.semVer }}-with-runtimes.zip
+          release/swiftlys2-windows-v${{ needs.versioning.outputs.semVer }}-with-runtimes.zip
+        prerelease: ${{ needs.versioning.outputs.preReleaseLabel != '' }}
+        tag_name: ${{ env.TAG_NAME }}
+        name: Release v${{ needs.versioning.outputs.semVer }}
+        body: ${{ needs.versioning.outputs.semVer  }}
+
+    - name: Get commit summary for beta
+      if: github.ref == 'refs/heads/beta'
+      id: beta_commits
+      run: |
+        # Get the previous tag
+        PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+
+        # Get commits since previous tag, or last 10 if no previous tag
+        if [ -n "$PREV_TAG" ]; then
+          COMMITS=$(git log ${PREV_TAG}..HEAD --pretty=format:"• %s (\`%h\`)" | head -c 900)
+        else
+          COMMITS=$(git log -10 --pretty=format:"• %s (\`%h\`)" | head -c 900)
+        fi
+
+        # If commits are empty, set a default message
+        if [ -z "$COMMITS" ]; then
+          COMMITS="No commit information available"
+        fi
+
+        echo "summary<<EOF" >> $GITHUB_OUTPUT
+        echo "$COMMITS" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Send Discord notification (Beta)
+      if: github.ref == 'refs/heads/beta'
+      uses: tsickert/discord-webhook@v6.0.0
+      with:
+        webhook-url: ${{ secrets.DISCORD_WEBHOOK_BETA }}
+        embed-title: "🚀 New Beta Release"
+        embed-description: |
+          **SwiftlyS2** v${{ needs.versioning.outputs.semVer }} has been released!
+
+          **📦 Version:** `${{ needs.versioning.outputs.semVer }}`
+          **🔖 Tag:** `${{ env.TAG_NAME }}`
+
+          **📝 Recent Commits:**
+          ${{ steps.beta_commits.outputs.summary }}
+
+          **📥 Download:** [View Release](https://github.com/${{ github.repository }}/releases/tag/${{ env.TAG_NAME }})
+        embed-color: 65261
+        embed-timestamp: ${{ github.event.head_commit.timestamp }}
+        embed-footer-text: "Beta Release • SwiftlyS2"
+        content: <@&1438068022706311279>
+
+    - name: Get commit summary for master
+      if: github.ref == 'refs/heads/master'
+      id: master_commits
+      run: |
+        # Get the previous tag
+        PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+
+        # Get commits since previous tag, or last 15 if no previous tag
+        if [ -n "$PREV_TAG" ]; then
+          COMMITS=$(git log ${PREV_TAG}..HEAD --pretty=format:"• %s (\`%h\`)" | head -c 900)
+        else
+          COMMITS=$(git log -15 --pretty=format:"• %s (\`%h\`)" | head -c 900)
+        fi
+
+        # If commits are empty, set a default message
+        if [ -z "$COMMITS" ]; then
+          COMMITS="No commit information available"
+        fi
+
+        echo "summary<<EOF" >> $GITHUB_OUTPUT
+        echo "$COMMITS" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Send Discord notification (Master)
+      if: github.ref == 'refs/heads/master'
+      uses: tsickert/discord-webhook@v6.0.0
+      with:
+        webhook-url: ${{ secrets.DISCORD_WEBHOOK_MASTER }}
+        embed-title: "✨ New Stable Release"
+        embed-description: |
+          **SwiftlyS2** v${{ needs.versioning.outputs.semVer }} is now available!
+
+          **📦 Version:** `${{ needs.versioning.outputs.semVer }}`
+          **🔖 Tag:** `${{ env.TAG_NAME }}`
+
+          **📝 Changelog Summary:**
+          ${{ steps.master_commits.outputs.summary }}
+
+          **📥 Download:** [View Release](https://github.com/${{ github.repository }}/releases/tag/${{ env.TAG_NAME }})
+        embed-color: 65261
+        embed-timestamp: ${{ github.event.head_commit.timestamp }}
+        embed-footer-text: "Stable Release • SwiftlyS2"
+        content: <@&1438068068587933706>
+
+  nuget:
+    if: ${{ github.event_name == 'push' && github.repository_owner == 'swiftly-solution' }}
+    needs: [versioning, releasing]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+    - name: Publish to nuget
+      run: |
+        cd managed
+        dotnet pack --include-symbols --output nupkgs -c Release -p:Version=${{ needs.versioning.outputs.semVer }}
+        dotnet nuget push nupkgs/SwiftlyS2.CS2.${{ needs.versioning.outputs.semVer }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://nuget.org/api/v2/package

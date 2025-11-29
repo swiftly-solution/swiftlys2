@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Community Discord
+    url: https://swiftlys2.net/discord
+    about: Join our Discord community for real-time help and discussions
+  - name: Website
+    url: https://swiftlys2.net
+    about: Check the website for guides and API reference
+  - name: Security Issue
+    url: https://github.com/swiftly-solution/swiftlys2/security/advisories/new
+    about: Report security vulnerabilities privately
