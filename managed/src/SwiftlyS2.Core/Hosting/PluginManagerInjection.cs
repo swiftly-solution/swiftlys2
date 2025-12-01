@@ -13,6 +13,6 @@ internal static class PluginManagerInjection
 
     public static void UsePluginManager( this IServiceProvider self )
     {
-        _ = self.GetRequiredService<PluginManager>();
+        self.GetRequiredService<PluginManager>().Initialize();
     }
 }

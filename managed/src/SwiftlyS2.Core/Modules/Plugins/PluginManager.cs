@@ -150,7 +150,13 @@ internal class PluginManager : IPluginManager
                 ? Assembly.GetExecutingAssembly()
                 : AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => loadingAssemblyName == a.GetName().Name);
         };
+    }
 
+    /// <summary>
+    /// Must be called after DI container is fully built to avoid circular dependency.
+    /// </summary>
+    internal void Initialize()
+    {
         LoadExports();
         LoadPlugins();
     }
