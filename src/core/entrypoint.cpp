@@ -78,10 +78,19 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry);
 
 extern ICvar* g_pCVar;
 
+CON_COMMAND(sw_crash, "")
+{
+    int* ptr = nullptr;
+    *ptr = 0;
+}
+
 bool SwiftlyCore::Load(BridgeKind_t kind)
 {
     m_iKind = kind;
     SetupConsoleColors();
+
+    auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
+    crashreporter->Init();
 
     s2binlib_initialize(Plat_GetGameDirectory(), "csgo");
 
@@ -289,6 +298,9 @@ bool SwiftlyCore::Unload()
     StopFixes();
 
     ShutdownGameSystem();
+
+    auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
+    crashreporter->Shutdown();
 
     return true;
 }
