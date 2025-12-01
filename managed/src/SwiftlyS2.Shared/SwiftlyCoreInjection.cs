@@ -29,7 +29,8 @@ public static class SwiftlyCoreInjection
             .AddSingleton(core.MenusAPI)
             .AddSingleton(core.CommandLine)
             .AddSingleton(core.GameFileSystem)
-            .AddSingleton(core.Translation);
+            .AddSingleton(core.Translation)
+            .AddSingleton(core.PluginManager);
 
         if (addLogger)
         {
