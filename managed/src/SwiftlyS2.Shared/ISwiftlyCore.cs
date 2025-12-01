@@ -167,10 +167,11 @@ public interface ISwiftlyCore
     /// Game file system interface.
     /// </summary>
     public IGameFileSystem GameFileSystem { get; }
+
     /// <summary>
     /// Plugin manager.
     /// </summary>
-    // public IPluginManager PluginManager { get; }
+    public IPluginManager PluginManager { get; }
 
     /// <summary>
     /// Gets the file path to the plugin directory.
