@@ -37,7 +37,16 @@ internal class ConVarService : IConVarService
     }
 
     return new ConVar<T>(name);
+  }
 
+  public IConVar? FindAsString( string name )
+  {
+    if (!NativeConvars.ExistsConvar(name))
+    {
+      return null;
+    }
+
+    return new ConVar(name);
   }
 
   public IConVar<T> Create<T>( string name, string helpMessage, T defaultValue, ConvarFlags flags = ConvarFlags.NONE )

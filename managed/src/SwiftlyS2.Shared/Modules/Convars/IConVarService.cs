@@ -11,6 +11,13 @@ public interface IConVarService {
   IConVar<T>? Find<T>(string name);
 
   /// <summary>
+  /// Find a existing convar by name with no type.
+  /// </summary>
+  /// <param name="name">The name of the convar.</param>
+  /// <returns>The convar if found, null otherwise.</returns>
+  IConVar? FindAsString(string name);
+
+  /// <summary>
   /// Create a new convar.
   /// </summary>
   /// <typeparam name="T">The type of the convar.</typeparam>
