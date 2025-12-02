@@ -37,30 +37,15 @@
 #ifdef _WIN32
 #include <DbgHelp.h>
 #include <Windows.h>
-#include <client/windows/handler/exception_handler.h>
 static PVOID g_vehHandle = nullptr;
 #else
-#include <client/linux/handler/exception_handler.h>
 #include <signal.h>
+#include <sys/resource.h>
+#include <unistd.h>
 #endif
 
 static std::string g_dumpPath;
 static bool g_dumpWritten = false;
-
-#ifndef _WIN32
-bool DumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* context, bool succeeded)
-{
-    if (succeeded)
-    {
-        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Info(std::format("Crash dump written: {}\n", descriptor.path()));
-    }
-    else
-    {
-        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Error("Failed to write crash dump!\n");
-    }
-    return succeeded;
-}
-#endif
 
 #ifdef _WIN32
 void OnCrash(PEXCEPTION_POINTERS exceptionInfo)
@@ -99,7 +84,7 @@ void OnCrash(PEXCEPTION_POINTERS exceptionInfo)
     }
 }
 #else
-void OnCrash()
+void OnCrash(int sig)
 {
     if (g_dumpWritten)
     {
@@ -107,9 +92,35 @@ void OnCrash()
     }
     g_dumpWritten = true;
 
-    google_breakpad::MinidumpDescriptor descriptor(g_dumpPath);
-    google_breakpad::ExceptionHandler handler(descriptor, nullptr, DumpCallback, nullptr, false, -1);
-    handler.WriteMinidump();
+    struct rlimit rl;
+    rl.rlim_cur = RLIM_INFINITY;
+    rl.rlim_max = RLIM_INFINITY;
+    setrlimit(RLIMIT_CORE, &rl);
+
+    // Change to dump directory so core file is generated there
+    chdir(g_dumpPath.c_str());
+
+    const char* sigName = "Unknown";
+    switch (sig)
+    {
+    case SIGSEGV:
+        sigName = "SIGSEGV";
+        break;
+    case SIGABRT:
+        sigName = "SIGABRT";
+        break;
+    case SIGFPE:
+        sigName = "SIGFPE";
+        break;
+    case SIGILL:
+        sigName = "SIGILL";
+        break;
+    case SIGBUS:
+        sigName = "SIGBUS";
+        break;
+    }
+
+    g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Info("CrashReporter", std::format("Caught signal {} ({}), core dump will be generated in: {}\n", sigName, sig, g_dumpPath));
 }
 #endif
 
@@ -226,7 +237,7 @@ void UnregisterCrashHandlers()
 #else
 void SignalHandler(int sig)
 {
-    OnCrash();
+    OnCrash(sig);
     signal(sig, SIG_DFL);
     raise(sig);
 }
