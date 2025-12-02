@@ -35,6 +35,9 @@ internal static class NativeFileSystem {
   private unsafe static delegate* unmanaged<byte*, byte*, int, int, void> _AddSearchPath;
 
   public unsafe static void AddSearchPath(string path, string pathId, int searchPathAdd, int searchPathPriority) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var pathLength = Encoding.UTF8.GetByteCount(path);
     var pathBuffer = pool.Rent(pathLength + 1);
@@ -156,6 +159,9 @@ internal static class NativeFileSystem {
   private unsafe static delegate* unmanaged<byte*, byte*, byte*, byte> _WriteFile;
 
   public unsafe static bool WriteFile(string fileName, string pathId, string content) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var fileNameLength = Encoding.UTF8.GetByteCount(fileName);
     var fileNameBuffer = pool.Rent(fileNameLength + 1);
@@ -251,6 +257,9 @@ internal static class NativeFileSystem {
   private unsafe static delegate* unmanaged<byte*, byte*, byte, byte> _SetFileWritable;
 
   public unsafe static bool SetFileWritable(string fileName, string pathId, bool writable) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var fileNameLength = Encoding.UTF8.GetByteCount(fileName);
     var fileNameBuffer = pool.Rent(fileNameLength + 1);

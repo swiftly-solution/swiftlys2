@@ -19,6 +19,8 @@
 #include "allocator.h"
 #include <cstring>
 
+#include "tier0/memdbgon.h"
+
 void* MemoryAllocator::Alloc(uint64_t size)
 {
     QueueLockGuard lock(m_mtxLock);

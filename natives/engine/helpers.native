@@ -2,7 +2,7 @@ class EngineHelpers
 
 string GetIP = void
 bool IsMapValid = string map_name // it can be map name, or workshop id
-void ExecuteCommand = string command
+sync void ExecuteCommand = string command
 ptr FindGameSystemByName = string name
 void SendMessageToConsole = string msg
 ptr GetTraceManager = void

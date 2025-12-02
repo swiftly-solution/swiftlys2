@@ -10,6 +10,8 @@
     "ConsoleFilter": true,
     "FollowCS2ServerGuidelines": true,
     "Language": "en",
+    "ManualLoadPlugins": false,
+    "PluginLoadOrder": [],
     "Menu": {
         "AvailableInputModes": [
             "button",

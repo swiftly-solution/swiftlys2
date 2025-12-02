@@ -1,6 +1,6 @@
 class Commands
 
-int32 HandleCommandForPlayer = int32 playerid, string command // 1 -> not silent, 2 -> silent, -1 -> invalid player, 0 -> no command
+sync int32 HandleCommandForPlayer = int32 playerid, string command // 1 -> not silent, 2 -> silent, -1 -> invalid player, 0 -> no command
 uint64 RegisterCommand = string commandName, ptr callback, bool registerRaw // callback should receive (int32 playerid, string arguments_list (separated by \x01), string commandName, string prefix, bool silent), if registerRaw is false, it will not put "sw_" before the command name
 void UnregisterCommand = uint64 callbackID
 bool IsCommandRegistered = string commandName

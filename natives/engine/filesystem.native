@@ -1,15 +1,15 @@
 class FileSystem
 
 string GetSearchPath = string pathId, int32 searchPathType, int32 searchPathsToGet
-void AddSearchPath = string path, string pathId, int32 searchPathAdd, int32 searchPathPriority
+sync void AddSearchPath = string path, string pathId, int32 searchPathAdd, int32 searchPathPriority
 bool RemoveSearchPath = string path, string pathId
 bool FileExists = string fileName, string pathId
 bool IsDirectory = string path, string pathId
 void PrintSearchPaths = void
 string ReadFile = string fileName, string pathId
-bool WriteFile = string fileName, string pathId, string content
+sync bool WriteFile = string fileName, string pathId, string content
 uint32 GetFileSize = string fileName, string pathId
 bool PrecacheFile = string fileName, string pathId
 bool IsFileWritable = string fileName, string pathId
-bool SetFileWritable = string fileName, string pathId, bool writable
+sync bool SetFileWritable = string fileName, string pathId, bool writable
 void FindFileAbsoluteList = ptr outVector, string wildcard, string pathId

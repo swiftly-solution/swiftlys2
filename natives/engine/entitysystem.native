@@ -1,10 +1,10 @@
 class EntitySystem
 
-void Spawn = ptr entity, ptr keyvalues
-void Despawn = ptr entity
+sync void Spawn = ptr entity, ptr keyvalues
+sync void Despawn = ptr entity
 ptr CreateEntityByName = string name
-void AcceptInput = ptr entity, string input, ptr activator, ptr caller, ptr value, int32 outputID
-void AddEntityIOEvent = ptr entity, string input, ptr activator, ptr caller, ptr value, float delay
+sync void AcceptInput = ptr entity, string input, ptr activator, ptr caller, ptr value, int32 outputID
+sync void AddEntityIOEvent = ptr entity, string input, ptr activator, ptr caller, ptr value, float delay
 bool IsValidEntity = ptr entity
 ptr GetGameRules = void
 ptr GetEntitySystem = void

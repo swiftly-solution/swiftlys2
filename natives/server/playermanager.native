@@ -3,6 +3,6 @@ class PlayerManager
 bool IsPlayerOnline = int32 playerid
 int32 GetPlayerCount = void
 int32 GetPlayerCap = void
-void SendMessage = int32 kind, string message, int32 duration
+sync void SendMessage = int32 kind, string message, int32 duration
 void ShouldBlockTransmitEntity = int32 entityidx, bool shouldBlockTransmit
 void ClearAllBlockedTransmitEntity = void

@@ -158,7 +158,15 @@ internal class PluginManager : IPluginManager
     internal void Initialize()
     {
         LoadExports();
-        LoadPlugins();
+        if (!NativeCore.PluginManualLoadState()) LoadPlugins();
+        else
+        {
+            var plugins = NativeCore.PluginLoadOrder().Split('\x01');
+            foreach (var plugin in plugins)
+            {
+                _ = LoadPluginById(plugin, silent: false);
+            }
+        }
     }
 
     public IReadOnlyList<PluginContext> GetPlugins() => plugins.AsReadOnly();

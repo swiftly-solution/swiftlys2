@@ -1,10 +1,10 @@
 class Schema
 
-void SetStateChanged = ptr entity, uint64 hash
+sync void SetStateChanged = ptr entity, uint64 hash
 uint32 FindChainOffset = string className
 int32 GetOffset = uint64 hash
 bool IsStruct = string className
 bool IsClassLoaded = string className
 ptr GetPropPtr = ptr entity, uint64 hash
-void WritePropPtr = ptr entity, uint64 hash, ptr value, uint32 size
+sync void WritePropPtr = ptr entity, uint64 hash, ptr value, uint32 size
 ptr GetVData = ptr entity
