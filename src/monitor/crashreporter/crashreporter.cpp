@@ -110,52 +110,48 @@ void OnCrash(int sig)
     case SIGBUS:
         sigName = "SIGBUS";
         break;
+    case SIGSYS:
+        sigName = "SIGSYS";
+        break;
+    case SIGXCPU:
+        sigName = "SIGXCPU";
+        break;
+    case SIGXFSZ:
+        sigName = "SIGXFSZ";
+        break;
+    case SIGIOT:
+        sigName = "SIGIOT";
+        break;
+    case SIGPWR:
+        sigName = "SIGPWR";
+        break;
+    case SIGSTKFLT:
+        sigName = "SIGSTKFLT";
+        break;
     }
 
-    printf("[CrashReporter] Caught signal %s (%d)\n", sigName, sig);
-    fflush(stdout);
+    g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Info("CrashReporter", std::format("Caught signal {} ({}), core dump will be generated in: {}\n", sigName, sig, g_dumpPath));
 
-    printf("[CrashReporter] Setting RLIMIT_CORE to 50MB\n");
-    fflush(stdout);
+    // Limit core dump size to 50MB
     struct rlimit rl;
-    rl.rlim_cur = 50 * 1024 * 1024; // 50MB
-    rl.rlim_max = 50 * 1024 * 1024;
-    if (setrlimit(RLIMIT_CORE, &rl) == 0)
-    {
-        printf("[CrashReporter] RLIMIT_CORE set successfully\n");
-    }
-    else
-    {
-        printf("[CrashReporter] Failed to set RLIMIT_CORE\n");
-    }
-    fflush(stdout);
+    rl.rlim_cur = 20 * 1024 * 1024;
+    rl.rlim_max = 20 * 1024 * 1024;
+    setrlimit(RLIMIT_CORE, &rl);
 
-    printf("[CrashReporter] Setting coredump_filter to 0x17\n");
-    fflush(stdout);
+    // Set coredump_filter to dump useful memory:
+    // bit 0 (1): anonymous private (stack, heap)
+    // bit 1 (2): anonymous shared
+    // bit 2 (4): file-backed private (code segments)
+    // bit 4 (16): ELF headers
+    // Total: 0x17 = 23
     FILE* filterFile = fopen("/proc/self/coredump_filter", "w");
     if (filterFile)
     {
         fprintf(filterFile, "0x17");
         fclose(filterFile);
-        printf("[CrashReporter] coredump_filter set successfully\n");
     }
-    else
-    {
-        printf("[CrashReporter] Failed to open coredump_filter\n");
-    }
-    fflush(stdout);
 
-    printf("[CrashReporter] Changing to dump directory: %s\n", g_dumpPath.c_str());
-    fflush(stdout);
-    if (chdir(g_dumpPath.c_str()) == 0)
-    {
-        printf("[CrashReporter] chdir successful, core dump will be generated here\n");
-    }
-    else
-    {
-        printf("[CrashReporter] chdir failed\n");
-    }
-    fflush(stdout);
+    chdir(g_dumpPath.c_str());
 }
 #endif
 
@@ -185,43 +181,6 @@ void CrashReporter::Init()
     }
 
     g_dumpPath = Files::GeneratePath(g_SwiftlyCore.GetCorePath() + "dumps");
-
-#ifndef _WIN32
-    // Pre-configure core dump settings
-    printf("[CrashReporter] Setting RLIMIT_CORE to 50MB\n");
-    fflush(stdout);
-    struct rlimit rl;
-    rl.rlim_cur = 50 * 1024 * 1024; // 50MB
-    rl.rlim_max = 50 * 1024 * 1024;
-    if (setrlimit(RLIMIT_CORE, &rl) == 0)
-    {
-        printf("[CrashReporter] RLIMIT_CORE set successfully\n");
-    }
-    else
-    {
-        printf("[CrashReporter] Failed to set RLIMIT_CORE\n");
-    }
-    fflush(stdout);
-
-    // Set coredump_filter to dump useful memory
-    printf("[CrashReporter] Setting coredump_filter to 0x17\n");
-    fflush(stdout);
-    FILE* filterFile = fopen("/proc/self/coredump_filter", "w");
-    if (filterFile)
-    {
-        fprintf(filterFile, "0x17");
-        fclose(filterFile);
-        printf("[CrashReporter] coredump_filter set successfully\n");
-    }
-    else
-    {
-        printf("[CrashReporter] Failed to open coredump_filter\n");
-    }
-    fflush(stdout);
-
-    printf("[CrashReporter] Dump path: %s\n", g_dumpPath.c_str());
-    fflush(stdout);
-#endif
 
     RegisterCrashHandlers();
 }
@@ -325,9 +284,6 @@ void RegisterCrashHandlers()
     signal(SIGXCPU, SignalHandler);
     signal(SIGXFSZ, SignalHandler);
     signal(SIGIOT, SignalHandler);
-    signal(SIGQUIT, SignalHandler);
-    signal(SIGHUP, SignalHandler);
-    signal(SIGPIPE, SignalHandler);
     signal(SIGPWR, SignalHandler);
     signal(SIGSTKFLT, SignalHandler);
 }
@@ -343,9 +299,6 @@ void UnregisterCrashHandlers()
     signal(SIGXCPU, SIG_DFL);
     signal(SIGXFSZ, SIG_DFL);
     signal(SIGIOT, SIG_DFL);
-    signal(SIGQUIT, SIG_DFL);
-    signal(SIGHUP, SIG_DFL);
-    signal(SIGPIPE, SIG_DFL);
     signal(SIGPWR, SIG_DFL);
     signal(SIGSTKFLT, SIG_DFL);
 }
