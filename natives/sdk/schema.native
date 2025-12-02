@@ -1,6 +1,6 @@
 class Schema
 
-void SetStateChanged = ptr entity, uint64 hash
+sync void SetStateChanged = ptr entity, uint64 hash
 uint32 FindChainOffset = string className
 int32 GetOffset = uint64 hash
 bool IsStruct = string className
