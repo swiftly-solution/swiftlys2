@@ -8,23 +8,31 @@ public interface IConVar {
     /// Also, setting value with this method will internally put it into a set queue,
     /// Which means that for some special case ( e.g. setting sv_enablebunnyhopping inside a hook ) it won't work,
     /// in such cases you should use the SetInternal method instead.
+    ///
+    /// <exception cref="ArgumentException">Thrown when the string value can't be parsed.</exception>
     /// </summary>
     public string ValueAsString { get; set;  }
 
     /// <summary>
     /// The max value of the convar in string.
+    ///
+    /// <exception cref="ArgumentException">Thrown when the string value can't be parsed.</exception>
     /// </summary>
-    string? MaxValueAsString { get; set; }
+    string MaxValueAsString { get; set; }
 
     /// <summary>
     /// The min value of the convar in string.
+    ///
+    /// <exception cref="ArgumentException">Thrown when the string value can't be parsed.</exception>
     /// </summary>
-    string? MinValueAsString { get; set; }
+    string MinValueAsString { get; set; }
 
     /// <summary>
     /// The default value of the convar in string.
+    ///
+    /// <exception cref="ArgumentException">Thrown when the string value can't be parsed.</exception>
     /// </summary>
-    string? DefaultValueAsString { get; set; }
+    string DefaultValueAsString { get; set; }
 
     /// <summary>
     /// Whether the convar has a default value.

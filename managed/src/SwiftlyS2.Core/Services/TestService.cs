@@ -55,15 +55,16 @@ internal class TestService {
   public void Test()
   {
     _Core.Command.RegisterCommand("tc", (args) => {
-        var cvar = _Core.ConVar.FindAsString("mp_warmuptime");
+        var cvar = _Core.ConVar.Find<float>("mp_warmuptime");
+
+        // cvar.MinValueAsString
 
 
         cvar!.ValueAsString = "10";
         cvar!.DefaultValueAsString = "50";
         cvar!.MaxValueAsString = "100";
         cvar!.MinValueAsString = "10";
-        Console.WriteLine("Set cvar.");
-        Console.WriteLine(cvar.HasDefaultValue);
+        cvar.ReplicateToClientAsString(0, "10");
     });
 
 
