@@ -5,3 +5,6 @@
 	path = vendor/s2sdk
 	url = https://github.com/swiftly-solution/s2sdk
 	branch = cs2
+[submodule "vendor/breakpad"]
+	path = vendor/breakpad
+	url = https://github.com/google/breakpad.git
