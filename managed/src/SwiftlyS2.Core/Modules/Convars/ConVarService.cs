@@ -4,27 +4,6 @@ using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Core.Convars;
 
-internal enum EConVarType : int
-{
-	EConVarType_Invalid = -1,
-	EConVarType_Bool,
-	EConVarType_Int16,
-	EConVarType_UInt16,
-	EConVarType_Int32,
-	EConVarType_UInt32,
-	EConVarType_Int64,
-	EConVarType_UInt64,
-	EConVarType_Float32,
-	EConVarType_Float64,
-	EConVarType_String,
-	EConVarType_Color,
-	EConVarType_Vector2,
-	EConVarType_Vector3,
-	EConVarType_Vector4,
-	EConVarType_Qangle,
-	EConVarType_MAX
-};
-
 internal class ConVarService : IConVarService
 {
 
@@ -281,7 +260,7 @@ internal class ConVarService : IConVarService
 		return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name) : Create(name, helpMessage, defaultValue, minValue, maxValue, flags);
 	}
 
-	public unsafe string? ReadValueAsString( string name )
+	public string? ReadValueAsString( string name )
 	{
 		if (!NativeConvars.ExistsConvar(name)) return null;
 
@@ -289,23 +268,28 @@ internal class ConVarService : IConVarService
 
 		var valuePtr = NativeConvars.GetValuePtr(name);
 
-		return type switch {
-			EConVarType.EConVarType_Bool => *(byte*)valuePtr == 1 ? "1" : "0",
+		return GetValueFromPtr(type, valuePtr);
+	}
+
+	private unsafe string GetValueFromPtr( EConVarType kind, nint ptr )
+	{
+		return kind switch {
+			EConVarType.EConVarType_Bool => *(byte*)ptr == 1 ? "1" : "0",
 			EConVarType.EConVarType_Invalid => string.Empty,
-			EConVarType.EConVarType_Int16 => (*(short*)valuePtr).ToString(),
-			EConVarType.EConVarType_UInt16 => (*(ushort*)valuePtr).ToString(),
-			EConVarType.EConVarType_Int32 => (*(int*)valuePtr).ToString(),
-			EConVarType.EConVarType_UInt32 => (*(uint*)valuePtr).ToString(),
-			EConVarType.EConVarType_Int64 => (*(long*)valuePtr).ToString(),
-			EConVarType.EConVarType_UInt64 => (*(ulong*)valuePtr).ToString(),
-			EConVarType.EConVarType_Float32 => (*(float*)valuePtr).ToString(),
-			EConVarType.EConVarType_Float64 => (*(double*)valuePtr).ToString(),
-			EConVarType.EConVarType_String => ((CUtlString*)valuePtr)->Value,
-			EConVarType.EConVarType_Color => $"{(*(Color*)valuePtr).R},{(*(Color*)valuePtr).G},{(*(Color*)valuePtr).B}",
-			EConVarType.EConVarType_Vector2 => $"{(*(Vector2D*)valuePtr).X},{(*(Vector2D*)valuePtr).Y}",
-			EConVarType.EConVarType_Vector3 => $"{(*(Vector*)valuePtr).X},{(*(Vector*)valuePtr).Y},{(*(Vector*)valuePtr).Z}",
-			EConVarType.EConVarType_Vector4 => $"{(*(Vector4D*)valuePtr).X},{(*(Vector4D*)valuePtr).Y},{(*(Vector4D*)valuePtr).Z},{(*(Vector4D*)valuePtr).W}",
-			EConVarType.EConVarType_Qangle => $"{(*(QAngle*)valuePtr).Pitch},{(*(QAngle*)valuePtr).Yaw},{(*(QAngle*)valuePtr).Roll}",
+			EConVarType.EConVarType_Int16 => (*(short*)ptr).ToString(),
+			EConVarType.EConVarType_UInt16 => (*(ushort*)ptr).ToString(),
+			EConVarType.EConVarType_Int32 => (*(int*)ptr).ToString(),
+			EConVarType.EConVarType_UInt32 => (*(uint*)ptr).ToString(),
+			EConVarType.EConVarType_Int64 => (*(long*)ptr).ToString(),
+			EConVarType.EConVarType_UInt64 => (*(ulong*)ptr).ToString(),
+			EConVarType.EConVarType_Float32 => (*(float*)ptr).ToString(),
+			EConVarType.EConVarType_Float64 => (*(double*)ptr).ToString(),
+			EConVarType.EConVarType_String => ((CUtlString*)ptr)->Value,
+			EConVarType.EConVarType_Color => $"{(*(Color*)ptr).R},{(*(Color*)ptr).G},{(*(Color*)ptr).B}",
+			EConVarType.EConVarType_Vector2 => $"{(*(Vector2D*)ptr).X},{(*(Vector2D*)ptr).Y}",
+			EConVarType.EConVarType_Vector3 => $"{(*(Vector*)ptr).X},{(*(Vector*)ptr).Y},{(*(Vector*)ptr).Z}",
+			EConVarType.EConVarType_Vector4 => $"{(*(Vector4D*)ptr).X},{(*(Vector4D*)ptr).Y},{(*(Vector4D*)ptr).Z},{(*(Vector4D*)ptr).W}",
+			EConVarType.EConVarType_Qangle => $"{(*(QAngle*)ptr).Pitch},{(*(QAngle*)ptr).Yaw},{(*(QAngle*)ptr).Roll}",
 			EConVarType.EConVarType_MAX => string.Empty,
 			_ => string.Empty,
 		};
@@ -474,5 +458,43 @@ internal class ConVarService : IConVarService
 	public EConVarType GetConVarType( string name )
 	{
 		return !NativeConvars.ExistsConvar(name) ? EConVarType.EConVarType_Invalid : (EConVarType)NativeConvars.GetConvarType(name);
+	}
+
+	public string? GetDefaultValue( string name )
+	{
+		if (!NativeConvars.ExistsConvar(name)) return null;
+
+		var type = (EConVarType)NativeConvars.GetConvarType(name);
+
+		var valuePtr = NativeConvars.GetDefaultValuePtr(name);
+		return valuePtr == 0 ? null : GetValueFromPtr(type, valuePtr);
+	}
+
+	public unsafe string? GetMinValue( string name )
+	{
+		if (!NativeConvars.ExistsConvar(name)) return null;
+
+		var type = (EConVarType)NativeConvars.GetConvarType(name);
+
+		if (type > EConVarType.EConVarType_Invalid && type < EConVarType.EConVarType_MAX && type != EConVarType.EConVarType_String && type != EConVarType.EConVarType_Color)
+		{
+			var valuePtr = *(void**)NativeConvars.GetMinValuePtrPtr(name);
+			return valuePtr == null ? null : GetValueFromPtr(type, (nint)valuePtr);
+		}
+		else return null;
+	}
+
+	public unsafe string? GetMaxValue( string name )
+	{
+		if (!NativeConvars.ExistsConvar(name)) return null;
+
+		var type = (EConVarType)NativeConvars.GetConvarType(name);
+
+		if (type > EConVarType.EConVarType_Invalid && type < EConVarType.EConVarType_MAX && type != EConVarType.EConVarType_String && type != EConVarType.EConVarType_Color)
+		{
+			var valuePtr = *(void**)NativeConvars.GetMaxValuePtrPtr(name);
+			return valuePtr == null ? null : GetValueFromPtr(type, (nint)valuePtr);
+		}
+		else return null;
 	}
 }

@@ -1,4 +1,5 @@
 using SwiftlyS2.Core.Convars;
+using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Shared.Convars;
 
@@ -93,4 +94,25 @@ public interface IConVarService
 	/// <param name="name">The name of the convar.</param>
 	/// <returns>The type of the convar.</returns>
 	public EConVarType GetConVarType( string name );
+
+	/// <summary>
+	/// Gets the default value of a convar by name.
+	/// </summary>
+	/// <param name="name">The name of the convar.</param>
+	/// <returns>The default value of the convar as a string.</returns>
+	public string? GetDefaultValue( string name );
+
+	/// <summary>
+	/// Gets the min value of a convar by name.
+	/// </summary>
+	/// <param name="name">The name of the convar.</param>
+	/// <returns>The min value of the convar as a string.</returns>
+	public string? GetMinValue( string name );
+
+	/// <summary>
+	/// Gets the max value of a convar by name.
+	/// </summary>
+	/// <param name="name">The name of the convar.</param>
+	/// <returns>The max value of the convar as a string.</returns>
+	public string? GetMaxValue( string name );
 }
