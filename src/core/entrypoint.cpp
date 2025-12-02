@@ -329,9 +329,9 @@ void __fastcall PreloadDLLHook(HMODULE hModule)
     DWORD len = GetModuleFileNameA(hModule, modulePath, MAX_PATH);
     if (len > 0 && len < MAX_PATH)
     {
-        // Skip DLLs in managed directory
-        static const std::regex managedPattern(R"([/\\]managed[/\\])", std::regex_constants::icase);
-        if (std::regex_search(modulePath, managedPattern))
+        // Skip DLLs in managed and plugins directory
+        static const std::regex skipPattern(R"([/\\](managed|swiftlys2[/\\]plugins)[/\\])", std::regex_constants::icase);
+        if (std::regex_search(modulePath, skipPattern))
         {
             auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
             if (logger)
