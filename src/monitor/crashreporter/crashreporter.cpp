@@ -29,16 +29,72 @@
 
 #include <fmt/format.h>
 
+#include <cstdio>
+#include <string>
+
 #ifdef _WIN32
+#include <DbgHelp.h>
 #include <Windows.h>
+#include <client/windows/handler/exception_handler.h>
 static PVOID g_vehHandle = nullptr;
 #else
+#include <client/linux/handler/exception_handler.h>
 #include <signal.h>
+#endif
+
+static std::string g_dumpPath;
+static bool g_dumpWritten = false;
+
+#ifdef _WIN32
+bool DumpCallback(const wchar_t* dumpPath, const wchar_t* minidumpId, void* context, EXCEPTION_POINTERS* exinfo, MDRawAssertionInfo* assertion, bool succeeded)
+{
+    if (succeeded)
+    {
+        printf("Crash dump written: %ls\\%ls.dmp\n", dumpPath, minidumpId);
+    }
+    else
+    {
+        printf("Failed to write crash dump!\n");
+    }
+    return succeeded;
+}
+#else
+bool DumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* context, bool succeeded)
+{
+    if (succeeded)
+    {
+        printf("Crash dump written: %s\n", descriptor.path());
+    }
+    else
+    {
+        printf("Failed to write crash dump!\n");
+    }
+    return succeeded;
+}
 #endif
 
 void OnCrash()
 {
-    printf("Crash detected!\n");
+    if (g_dumpWritten)
+    {
+        return;
+    }
+
+    g_dumpWritten = true;
+    printf("Crash detected! Writing dump...\n");
+    printf("Crash detected! Writing dump...\n");
+    printf("Crash detected! Writing dump...\n");
+
+#ifdef _WIN32
+    std::wstring dumpPathW(g_dumpPath.begin(), g_dumpPath.end());
+    google_breakpad::ExceptionHandler::WriteMinidump(dumpPathW, DumpCallback, nullptr,
+                                                     static_cast<MINIDUMP_TYPE>(MiniDumpWithFullMemory | MiniDumpWithFullMemoryInfo | MiniDumpWithHandleData | MiniDumpWithThreadInfo | MiniDumpWithUnloadedModules | MiniDumpWithProcessThreadData |
+                                                                                MiniDumpWithFullAuxiliaryState | MiniDumpWithTokenInformation | MiniDumpWithModuleHeaders | MiniDumpWithAvxXStateContext));
+#else
+    google_breakpad::MinidumpDescriptor descriptor(g_dumpPath);
+    google_breakpad::ExceptionHandler handler(descriptor, nullptr, DumpCallback, nullptr, false, -1);
+    handler.WriteMinidump();
+#endif
 }
 
 void RegisterCrashHandlers();
@@ -65,6 +121,7 @@ void CrashReporter::Init()
         }
     }
 
+    g_dumpPath = g_SwiftlyCore.GetCorePath() + "dumps";
     RegisterCrashHandlers();
 }
 
