@@ -6,464 +6,269 @@ namespace SwiftlyS2.Core.Convars;
 
 internal enum EConVarType : int
 {
-	EConVarType_Invalid = -1,
-	EConVarType_Bool,
-	EConVarType_Int16,
-	EConVarType_UInt16,
-	EConVarType_Int32,
-	EConVarType_UInt32,
-	EConVarType_Int64,
-	EConVarType_UInt64,
-	EConVarType_Float32,
-	EConVarType_Float64,
-	EConVarType_String,
-	EConVarType_Color,
-	EConVarType_Vector2,
-	EConVarType_Vector3,
-	EConVarType_Vector4,
-	EConVarType_Qangle,
-	EConVarType_MAX
+  EConVarType_Invalid = -1,
+  EConVarType_Bool,
+  EConVarType_Int16,
+  EConVarType_UInt16,
+  EConVarType_Int32,
+  EConVarType_UInt32,
+  EConVarType_Int64,
+  EConVarType_UInt64,
+  EConVarType_Float32,
+  EConVarType_Float64,
+  EConVarType_String,
+  EConVarType_Color,
+  EConVarType_Vector2,
+  EConVarType_Vector3,
+  EConVarType_Vector4,
+  EConVarType_Qangle,
+  EConVarType_MAX
 };
 
 internal class ConVarService : IConVarService
 {
 
-	public IConVar<T>? Find<T>( string name )
-	{
+  public IConVar<T>? Find<T>( string name )
+  {
 
-		if (!NativeConvars.ExistsConvar(name))
-		{
-			return null;
-		}
+    if (!NativeConvars.ExistsConvar(name))
+    {
+      return null;
+    }
 
-		return new ConVar<T>(name);
+    return new ConVar<T>(name);
 
-	}
+  }
 
-	public IConVar<T> Create<T>( string name, string helpMessage, T defaultValue, ConvarFlags flags = ConvarFlags.NONE )
-	{
-		if (NativeConvars.ExistsConvar(name))
-		{
-			throw new Exception($"Convar {name} already exists.");
-		}
+  public IConVar<T> Create<T>( string name, string helpMessage, T defaultValue, ConvarFlags flags = ConvarFlags.NONE )
+  {
+    if (NativeConvars.ExistsConvar(name))
+    {
+      throw new Exception($"Convar {name} already exists.");
+    }
 
-		if (defaultValue is bool boolValue)
-		{
-			NativeConvars.CreateConvarBool(name, (int)EConVarType.EConVarType_Bool, (ulong)flags, helpMessage, boolValue, 0, 0);
-		}
-		else if (defaultValue is short shortValue)
-		{
-			NativeConvars.CreateConvarInt16(name, (int)EConVarType.EConVarType_Int16, (ulong)flags, helpMessage, shortValue, 0, 0);
-		}
-		else if (defaultValue is ushort ushortValue)
-		{
-			NativeConvars.CreateConvarUInt16(name, (int)EConVarType.EConVarType_UInt16, (ulong)flags, helpMessage, ushortValue, 0, 0);
-		}
-		else if (defaultValue is int intValue)
-		{
-			NativeConvars.CreateConvarInt32(name, (int)EConVarType.EConVarType_Int32, (ulong)flags, helpMessage, intValue, 0, 0);
-		}
-		else if (defaultValue is uint uintValue)
-		{
-			NativeConvars.CreateConvarUInt32(name, (int)EConVarType.EConVarType_UInt32, (ulong)flags, helpMessage, uintValue, 0, 0);
-		}
-		else if (defaultValue is long longValue)
-		{
-			NativeConvars.CreateConvarInt64(name, (int)EConVarType.EConVarType_Int64, (ulong)flags, helpMessage, longValue, 0, 0);
-		}
-		else if (defaultValue is ulong ulongValue)
-		{
-			NativeConvars.CreateConvarUInt64(name, (int)EConVarType.EConVarType_UInt64, (ulong)flags, helpMessage, ulongValue, 0, 0);
-		}
-		else if (defaultValue is float floatValue)
-		{
-			NativeConvars.CreateConvarFloat(name, (int)EConVarType.EConVarType_Float32, (ulong)flags, helpMessage, floatValue, 0, 0);
-		}
-		else if (defaultValue is double doubleValue)
-		{
-			NativeConvars.CreateConvarDouble(name, (int)EConVarType.EConVarType_Float64, (ulong)flags, helpMessage, doubleValue, 0, 0);
-		}
-		else if (defaultValue is Vector2D vector2Value)
-		{
-			NativeConvars.CreateConvarVector2D(name, (int)EConVarType.EConVarType_Vector2, (ulong)flags, helpMessage, vector2Value, 0, 0);
-		}
-		else if (defaultValue is Vector vector3Value)
-		{
-			NativeConvars.CreateConvarVector(name, (int)EConVarType.EConVarType_Vector3, (ulong)flags, helpMessage, vector3Value, 0, 0);
-		}
-		else if (defaultValue is Vector4D vector4Value)
-		{
-			NativeConvars.CreateConvarVector4D(name, (int)EConVarType.EConVarType_Vector4, (ulong)flags, helpMessage, vector4Value, 0, 0);
-		}
-		else if (defaultValue is QAngle qAngleValue)
-		{
-			NativeConvars.CreateConvarQAngle(name, (int)EConVarType.EConVarType_Qangle, (ulong)flags, helpMessage, qAngleValue, 0, 0);
-		}
-		else if (defaultValue is Color colorValue)
-		{
-			NativeConvars.CreateConvarColor(name, (int)EConVarType.EConVarType_Color, (ulong)flags, helpMessage, colorValue, 0, 0);
-		}
-		else if (defaultValue is string stringValue)
-		{
-			NativeConvars.CreateConvarString(name, (int)EConVarType.EConVarType_String, (ulong)flags, helpMessage, stringValue, 0, 0);
-		}
-		else
-		{
-			throw new Exception($"Unsupported type {typeof(T)}.");
-		}
+    if (defaultValue is bool boolValue)
+    {
+      NativeConvars.CreateConvarBool(name, (int)EConVarType.EConVarType_Bool, (ulong)flags, helpMessage, boolValue, 0, 0);
+    }
+    else if (defaultValue is short shortValue)
+    {
+      NativeConvars.CreateConvarInt16(name, (int)EConVarType.EConVarType_Int16, (ulong)flags, helpMessage, shortValue, 0, 0);
+    }
+    else if (defaultValue is ushort ushortValue)
+    {
+      NativeConvars.CreateConvarUInt16(name, (int)EConVarType.EConVarType_UInt16, (ulong)flags, helpMessage, ushortValue, 0, 0);
+    }
+    else if (defaultValue is int intValue)
+    {
+      NativeConvars.CreateConvarInt32(name, (int)EConVarType.EConVarType_Int32, (ulong)flags, helpMessage, intValue, 0, 0);
+    }
+    else if (defaultValue is uint uintValue)
+    {
+      NativeConvars.CreateConvarUInt32(name, (int)EConVarType.EConVarType_UInt32, (ulong)flags, helpMessage, uintValue, 0, 0);
+    }
+    else if (defaultValue is long longValue)
+    {
+      NativeConvars.CreateConvarInt64(name, (int)EConVarType.EConVarType_Int64, (ulong)flags, helpMessage, longValue, 0, 0);
+    }
+    else if (defaultValue is ulong ulongValue)
+    {
+      NativeConvars.CreateConvarUInt64(name, (int)EConVarType.EConVarType_UInt64, (ulong)flags, helpMessage, ulongValue, 0, 0);
+    }
+    else if (defaultValue is float floatValue)
+    {
+      NativeConvars.CreateConvarFloat(name, (int)EConVarType.EConVarType_Float32, (ulong)flags, helpMessage, floatValue, 0, 0);
+    }
+    else if (defaultValue is double doubleValue)
+    {
+      NativeConvars.CreateConvarDouble(name, (int)EConVarType.EConVarType_Float64, (ulong)flags, helpMessage, doubleValue, 0, 0);
+    }
+    else if (defaultValue is Vector2D vector2Value)
+    {
+      NativeConvars.CreateConvarVector2D(name, (int)EConVarType.EConVarType_Vector2, (ulong)flags, helpMessage, vector2Value, 0, 0);
+    }
+    else if (defaultValue is Vector vector3Value)
+    {
+      NativeConvars.CreateConvarVector(name, (int)EConVarType.EConVarType_Vector3, (ulong)flags, helpMessage, vector3Value, 0, 0);
+    }
+    else if (defaultValue is Vector4D vector4Value)
+    {
+      NativeConvars.CreateConvarVector4D(name, (int)EConVarType.EConVarType_Vector4, (ulong)flags, helpMessage, vector4Value, 0, 0);
+    }
+    else if (defaultValue is QAngle qAngleValue)
+    {
+      NativeConvars.CreateConvarQAngle(name, (int)EConVarType.EConVarType_Qangle, (ulong)flags, helpMessage, qAngleValue, 0, 0);
+    }
+    else if (defaultValue is Color colorValue)
+    {
+      NativeConvars.CreateConvarColor(name, (int)EConVarType.EConVarType_Color, (ulong)flags, helpMessage, colorValue, 0, 0);
+    }
+    else if (defaultValue is string stringValue)
+    {
+      NativeConvars.CreateConvarString(name, (int)EConVarType.EConVarType_String, (ulong)flags, helpMessage, stringValue, 0, 0);
+    }
+    else
+    {
+      throw new Exception($"Unsupported type {typeof(T)}.");
+    }
 
-		return new ConVar<T>(name);
-	}
+    return new ConVar<T>(name);
+  }
 
-	public IConVar<T> Create<T>( string name, string helpMessage, T defaultValue, T? minValue, T? maxValue, ConvarFlags flags = ConvarFlags.NONE ) where T : unmanaged
-	{
+  public IConVar<T> Create<T>( string name, string helpMessage, T defaultValue, T? minValue, T? maxValue, ConvarFlags flags = ConvarFlags.NONE ) where T : unmanaged
+  {
 
-		if (NativeConvars.ExistsConvar(name))
-		{
-			throw new Exception($"Convar {name} already exists.");
-		}
-		unsafe
-		{
+    if (NativeConvars.ExistsConvar(name))
+    {
+      throw new Exception($"Convar {name} already exists.");
+    }
+    unsafe
+    {
 
-			if (defaultValue is short shortValue)
-			{
-				short* pMin = stackalloc short[1];
-				if (minValue.HasValue)
-				{
-					pMin[0] = (short)(object)minValue.Value;
-				}
+      if (defaultValue is short shortValue)
+      {
+        short* pMin = stackalloc short[1];
+        if (minValue.HasValue)
+        {
+          pMin[0] = (short)(object)minValue.Value;
+        }
 
-				short* pMax = stackalloc short[1];
-				if (maxValue.HasValue)
-				{
-					pMax[0] = (short)(object)maxValue.Value;
-				}
+        short* pMax = stackalloc short[1];
+        if (maxValue.HasValue)
+        {
+          pMax[0] = (short)(object)maxValue.Value;
+        }
 
-				NativeConvars.CreateConvarInt16(name, (int)EConVarType.EConVarType_Int16, (ulong)flags, helpMessage, shortValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
-			}
-			else if (defaultValue is ushort ushortValue)
-			{
-				ushort* pMin = stackalloc ushort[1];
-				if (minValue.HasValue)
-				{
-					pMin[0] = (ushort)(object)minValue.Value;
-				}
+        NativeConvars.CreateConvarInt16(name, (int)EConVarType.EConVarType_Int16, (ulong)flags, helpMessage, shortValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
+      }
+      else if (defaultValue is ushort ushortValue)
+      {
+        ushort* pMin = stackalloc ushort[1];
+        if (minValue.HasValue)
+        {
+          pMin[0] = (ushort)(object)minValue.Value;
+        }
 
-				ushort* pMax = stackalloc ushort[1];
-				if (maxValue.HasValue)
-				{
-					pMax[0] = (ushort)(object)maxValue.Value;
-				}
+        ushort* pMax = stackalloc ushort[1];
+        if (maxValue.HasValue)
+        {
+          pMax[0] = (ushort)(object)maxValue.Value;
+        }
 
-				NativeConvars.CreateConvarUInt16(name, (int)EConVarType.EConVarType_UInt16, (ulong)flags, helpMessage, ushortValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
-			}
-			else if (defaultValue is int intValue)
-			{
-				int* pMin = stackalloc int[1];
-				if (minValue.HasValue)
-				{
-					pMin[0] = (int)(object)minValue.Value;
-				}
+        NativeConvars.CreateConvarUInt16(name, (int)EConVarType.EConVarType_UInt16, (ulong)flags, helpMessage, ushortValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
+      }
+      else if (defaultValue is int intValue)
+      {
+        int* pMin = stackalloc int[1];
+        if (minValue.HasValue)
+        {
+          pMin[0] = (int)(object)minValue.Value;
+        }
 
-				int* pMax = stackalloc int[1];
-				if (maxValue.HasValue)
-				{
-					pMax[0] = (int)(object)maxValue.Value;
-				}
+        int* pMax = stackalloc int[1];
+        if (maxValue.HasValue)
+        {
+          pMax[0] = (int)(object)maxValue.Value;
+        }
 
-				NativeConvars.CreateConvarInt32(name, (int)EConVarType.EConVarType_Int32, (ulong)flags, helpMessage, intValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
-			}
-			else if (defaultValue is uint uintValue)
-			{
-				uint* pMin = stackalloc uint[1];
-				if (minValue.HasValue)
-				{
-					pMin[0] = (uint)(object)minValue.Value;
-				}
+        NativeConvars.CreateConvarInt32(name, (int)EConVarType.EConVarType_Int32, (ulong)flags, helpMessage, intValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
+      }
+      else if (defaultValue is uint uintValue)
+      {
+        uint* pMin = stackalloc uint[1];
+        if (minValue.HasValue)
+        {
+          pMin[0] = (uint)(object)minValue.Value;
+        }
 
-				uint* pMax = stackalloc uint[1];
-				if (maxValue.HasValue)
-				{
-					pMax[0] = (uint)(object)maxValue.Value;
-				}
+        uint* pMax = stackalloc uint[1];
+        if (maxValue.HasValue)
+        {
+          pMax[0] = (uint)(object)maxValue.Value;
+        }
 
-				NativeConvars.CreateConvarUInt32(name, (int)EConVarType.EConVarType_UInt32, (ulong)flags, helpMessage, uintValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
-			}
-			else if (defaultValue is long longValue)
-			{
-				long* pMin = stackalloc long[1];
-				if (minValue.HasValue)
-				{
-					pMin[0] = (long)(object)minValue.Value;
-				}
+        NativeConvars.CreateConvarUInt32(name, (int)EConVarType.EConVarType_UInt32, (ulong)flags, helpMessage, uintValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
+      }
+      else if (defaultValue is long longValue)
+      {
+        long* pMin = stackalloc long[1];
+        if (minValue.HasValue)
+        {
+          pMin[0] = (long)(object)minValue.Value;
+        }
 
-				long* pMax = stackalloc long[1];
-				if (maxValue.HasValue)
-				{
-					pMax[0] = (long)(object)maxValue.Value;
-				}
+        long* pMax = stackalloc long[1];
+        if (maxValue.HasValue)
+        {
+          pMax[0] = (long)(object)maxValue.Value;
+        }
 
-				NativeConvars.CreateConvarInt64(name, (int)EConVarType.EConVarType_Int64, (ulong)flags, helpMessage, longValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
-			}
-			else if (defaultValue is ulong ulongValue)
-			{
-				ulong* pMin = stackalloc ulong[1];
-				if (minValue.HasValue)
-				{
-					pMin[0] = (ulong)(object)minValue.Value;
-				}
+        NativeConvars.CreateConvarInt64(name, (int)EConVarType.EConVarType_Int64, (ulong)flags, helpMessage, longValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
+      }
+      else if (defaultValue is ulong ulongValue)
+      {
+        ulong* pMin = stackalloc ulong[1];
+        if (minValue.HasValue)
+        {
+          pMin[0] = (ulong)(object)minValue.Value;
+        }
 
-				ulong* pMax = stackalloc ulong[1];
-				if (maxValue.HasValue)
-				{
-					pMax[0] = (ulong)(object)maxValue.Value;
-				}
+        ulong* pMax = stackalloc ulong[1];
+        if (maxValue.HasValue)
+        {
+          pMax[0] = (ulong)(object)maxValue.Value;
+        }
 
-				NativeConvars.CreateConvarUInt64(name, (int)EConVarType.EConVarType_UInt64, (ulong)flags, helpMessage, ulongValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
-			}
-			else if (defaultValue is float floatValue)
-			{
-				float* pMin = stackalloc float[1];
-				if (minValue.HasValue)
-				{
-					pMin[0] = (float)(object)minValue.Value;
-				}
+        NativeConvars.CreateConvarUInt64(name, (int)EConVarType.EConVarType_UInt64, (ulong)flags, helpMessage, ulongValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
+      }
+      else if (defaultValue is float floatValue)
+      {
+        float* pMin = stackalloc float[1];
+        if (minValue.HasValue)
+        {
+          pMin[0] = (float)(object)minValue.Value;
+        }
 
-				float* pMax = stackalloc float[1];
-				if (maxValue.HasValue)
-				{
-					pMax[0] = (float)(object)maxValue.Value;
-				}
+        float* pMax = stackalloc float[1];
+        if (maxValue.HasValue)
+        {
+          pMax[0] = (float)(object)maxValue.Value;
+        }
 
-				NativeConvars.CreateConvarFloat(name, (int)EConVarType.EConVarType_Float32, (ulong)flags, helpMessage, floatValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
-			}
-			else if (defaultValue is double doubleValue)
-			{
-				double* pMin = stackalloc double[1];
-				if (minValue.HasValue)
-				{
-					pMin[0] = (double)(object)minValue.Value;
-				}
+        NativeConvars.CreateConvarFloat(name, (int)EConVarType.EConVarType_Float32, (ulong)flags, helpMessage, floatValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
+      }
+      else if (defaultValue is double doubleValue)
+      {
+        double* pMin = stackalloc double[1];
+        if (minValue.HasValue)
+        {
+          pMin[0] = (double)(object)minValue.Value;
+        }
 
-				double* pMax = stackalloc double[1];
-				if (maxValue.HasValue)
-				{
-					pMax[0] = (double)(object)maxValue.Value;
-				}
+        double* pMax = stackalloc double[1];
+        if (maxValue.HasValue)
+        {
+          pMax[0] = (double)(object)maxValue.Value;
+        }
 
-				NativeConvars.CreateConvarDouble(name, (int)EConVarType.EConVarType_Float64, (ulong)flags, helpMessage, doubleValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
-			}
-			else
-			{
-				throw new Exception($"You can't assign min and max values to {typeof(T)}.");
-			}
-		}
+        NativeConvars.CreateConvarDouble(name, (int)EConVarType.EConVarType_Float64, (ulong)flags, helpMessage, doubleValue, minValue.HasValue ? (nint)pMin : 0, maxValue.HasValue ? (nint)pMax : 0);
+      }
+      else
+      {
+        throw new Exception($"You can't assign min and max values to {typeof(T)}.");
+      }
+    }
 
-		return new ConVar<T>(name);
-	}
+    return new ConVar<T>(name);
+  }
 
-	public IConVar<T> CreateOrFind<T>( string name, string helpMessage, T defaultValue, ConvarFlags flags = ConvarFlags.NONE )
-	{
-		return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name) : Create(name, helpMessage, defaultValue, flags);
-	}
+  public IConVar<T> CreateOrFind<T>( string name, string helpMessage, T defaultValue, ConvarFlags flags = ConvarFlags.NONE )
+  {
+    return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name) : Create(name, helpMessage, defaultValue, flags);
+  }
 
-	public IConVar<T> CreateOrFind<T>( string name, string helpMessage, T defaultValue, T? minValue, T? maxValue, ConvarFlags flags = ConvarFlags.NONE ) where T : unmanaged
-	{
-		return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name) : Create(name, helpMessage, defaultValue, minValue, maxValue, flags);
-	}
-
-	public unsafe string? ReadValueAsString( string name )
-	{
-		if (!NativeConvars.ExistsConvar(name)) return null;
-
-		var type = (EConVarType)NativeConvars.GetConvarType(name);
-
-		var valuePtr = NativeConvars.GetValuePtr(name);
-
-		return type switch {
-			EConVarType.EConVarType_Bool => *(byte*)valuePtr == 1 ? "1" : "0",
-			EConVarType.EConVarType_Invalid => string.Empty,
-			EConVarType.EConVarType_Int16 => (*(short*)valuePtr).ToString(),
-			EConVarType.EConVarType_UInt16 => (*(ushort*)valuePtr).ToString(),
-			EConVarType.EConVarType_Int32 => (*(int*)valuePtr).ToString(),
-			EConVarType.EConVarType_UInt32 => (*(uint*)valuePtr).ToString(),
-			EConVarType.EConVarType_Int64 => (*(long*)valuePtr).ToString(),
-			EConVarType.EConVarType_UInt64 => (*(ulong*)valuePtr).ToString(),
-			EConVarType.EConVarType_Float32 => (*(float*)valuePtr).ToString(),
-			EConVarType.EConVarType_Float64 => (*(double*)valuePtr).ToString(),
-			EConVarType.EConVarType_String => ((CUtlString*)valuePtr)->Value,
-			EConVarType.EConVarType_Color => $"{(*(Color*)valuePtr).R},{(*(Color*)valuePtr).G},{(*(Color*)valuePtr).B}",
-			EConVarType.EConVarType_Vector2 => $"{(*(Vector2D*)valuePtr).X},{(*(Vector2D*)valuePtr).Y}",
-			EConVarType.EConVarType_Vector3 => $"{(*(Vector*)valuePtr).X},{(*(Vector*)valuePtr).Y},{(*(Vector*)valuePtr).Z}",
-			EConVarType.EConVarType_Vector4 => $"{(*(Vector4D*)valuePtr).X},{(*(Vector4D*)valuePtr).Y},{(*(Vector4D*)valuePtr).Z},{(*(Vector4D*)valuePtr).W}",
-			EConVarType.EConVarType_Qangle => $"{(*(QAngle*)valuePtr).Pitch},{(*(QAngle*)valuePtr).Yaw},{(*(QAngle*)valuePtr).Roll}",
-			EConVarType.EConVarType_MAX => string.Empty,
-			_ => string.Empty,
-		};
-	}
-
-	public unsafe void SetValueAsString( string name, string value )
-	{
-		if (!NativeConvars.ExistsConvar(name)) return;
-
-		var type = (EConVarType)NativeConvars.GetConvarType(name);
-
-		switch (type)
-		{
-			case EConVarType.EConVarType_Invalid:
-				return;
-			case EConVarType.EConVarType_Bool:
-				{
-					if (bool.TryParse(value, out var result))
-					{
-						byte boolValue = result ? (byte)1 : (byte)0;
-						NativeConvars.SetValuePtr(name, (nint)(&boolValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_Int16:
-				{
-					if (short.TryParse(value, out var shortValue))
-					{
-						NativeConvars.SetValuePtr(name, (nint)(&shortValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_UInt16:
-				{
-					if (ushort.TryParse(value, out var ushortValue))
-					{
-						NativeConvars.SetValuePtr(name, (nint)(&ushortValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_Int32:
-				{
-					if (int.TryParse(value, out var intValue))
-					{
-						NativeConvars.SetValuePtr(name, (nint)(&intValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_UInt32:
-				{
-					if (uint.TryParse(value, out var uintValue))
-					{
-						NativeConvars.SetValuePtr(name, (nint)(&uintValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_Int64:
-				{
-					if (long.TryParse(value, out var longValue))
-					{
-						NativeConvars.SetValuePtr(name, (nint)(&longValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_UInt64:
-				{
-					if (ulong.TryParse(value, out var ulongValue))
-					{
-						NativeConvars.SetValuePtr(name, (nint)(&ulongValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_Float32:
-				{
-					if (float.TryParse(value, out var floatValue))
-					{
-						NativeConvars.SetValuePtr(name, (nint)(&floatValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_Float64:
-				{
-					if (double.TryParse(value, out var doubleValue))
-					{
-						NativeConvars.SetValuePtr(name, (nint)(&doubleValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_String:
-				{
-					CUtlString str = new();
-					str.Value = value;
-					NativeConvars.SetValuePtr(name, (nint)(&str));
-				}
-				break;
-			case EConVarType.EConVarType_Color:
-				{
-					var parts = value.Split(',');
-					if (parts.Length >= 3 &&
-						byte.TryParse(parts[0], out var r) &&
-						byte.TryParse(parts[1], out var g) &&
-						byte.TryParse(parts[2], out var b))
-					{
-						var colorValue = new Color(r, g, b);
-						NativeConvars.SetValuePtr(name, (nint)(&colorValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_Vector2:
-				{
-					var parts = value.Split(',');
-					if (parts.Length >= 2 &&
-						float.TryParse(parts[0], out var x) &&
-						float.TryParse(parts[1], out var y))
-					{
-						var vector2Value = new Vector2D(x, y);
-						NativeConvars.SetValuePtr(name, (nint)(&vector2Value));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_Vector3:
-				{
-					var parts = value.Split(',');
-					if (parts.Length >= 3 &&
-						float.TryParse(parts[0], out var x) &&
-						float.TryParse(parts[1], out var y) &&
-						float.TryParse(parts[2], out var z))
-					{
-						var vector3Value = new Vector(x, y, z);
-						NativeConvars.SetValuePtr(name, (nint)(&vector3Value));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_Vector4:
-				{
-					var parts = value.Split(',');
-					if (parts.Length >= 4 &&
-						float.TryParse(parts[0], out var x) &&
-						float.TryParse(parts[1], out var y) &&
-						float.TryParse(parts[2], out var z) &&
-						float.TryParse(parts[3], out var w))
-					{
-						var vector4Value = new Vector4D(x, y, z, w);
-						NativeConvars.SetValuePtr(name, (nint)(&vector4Value));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_Qangle:
-				{
-					var parts = value.Split(',');
-					if (parts.Length >= 3 &&
-						float.TryParse(parts[0], out var pitch) &&
-						float.TryParse(parts[1], out var yaw) &&
-						float.TryParse(parts[2], out var roll))
-					{
-						var qAngleValue = new QAngle(pitch, yaw, roll);
-						NativeConvars.SetValuePtr(name, (nint)(&qAngleValue));
-					}
-				}
-				break;
-			case EConVarType.EConVarType_MAX:
-				break;
-		}
-	}
-
-	public EConVarType GetConVarType( string name )
-	{
-		return !NativeConvars.ExistsConvar(name) ? EConVarType.EConVarType_Invalid : (EConVarType)NativeConvars.GetConvarType(name);
-	}
+  public IConVar<T> CreateOrFind<T>( string name, string helpMessage, T defaultValue, T? minValue, T? maxValue, ConvarFlags flags = ConvarFlags.NONE ) where T : unmanaged
+  {
+    return NativeConvars.ExistsConvar(name) ? new ConVar<T>(name) : Create(name, helpMessage, defaultValue, minValue, maxValue, flags);
+  }
 }
