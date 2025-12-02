@@ -69,8 +69,6 @@ target("swiftlys2")
         metamod_path,
         metamod_path.."/core",
         metamod_path.."/core/sourcehook",
-
-        "vendor/breakpad/src",
     })
 
     --[[ -------------------------------- Flags Section -------------------------------- ]]
@@ -276,40 +274,6 @@ target("swiftlys2")
         "vendor/safetyhook/safetyhook.cpp",
         "vendor/safetyhook/Zydis.c"
     })
-
-    --[[ -------------------------------- Breakpad Section -------------------------------- ]]
-
-    if is_plat("windows") then
-        add_files({
-            "vendor/breakpad/src/client/windows/handler/exception_handler.cc",
-            "vendor/breakpad/src/client/windows/crash_generation/crash_generation_client.cc",
-            "vendor/breakpad/src/client/windows/crash_generation/minidump_generator.cc",
-            "vendor/breakpad/src/common/windows/guid_string.cc",
-        }, {defines = {"UNICODE", "_UNICODE"}})
-    else
-        add_files({
-            "vendor/breakpad/src/client/linux/handler/exception_handler.cc",
-            "vendor/breakpad/src/client/linux/handler/minidump_descriptor.cc",
-            "vendor/breakpad/src/client/linux/crash_generation/crash_generation_client.cc",
-            "vendor/breakpad/src/client/linux/dump_writer_common/thread_info.cc",
-            "vendor/breakpad/src/client/linux/dump_writer_common/ucontext_reader.cc",
-            "vendor/breakpad/src/client/linux/minidump_writer/minidump_writer.cc",
-            "vendor/breakpad/src/client/linux/minidump_writer/linux_dumper.cc",
-            "vendor/breakpad/src/client/linux/minidump_writer/linux_ptrace_dumper.cc",
-            "vendor/breakpad/src/client/linux/minidump_writer/pe_file.cc",
-            "vendor/breakpad/src/client/linux/log/log.cc",
-            "vendor/breakpad/src/client/minidump_file_writer.cc",
-            "vendor/breakpad/src/common/linux/elfutils.cc",
-            "vendor/breakpad/src/common/linux/file_id.cc",
-            "vendor/breakpad/src/common/linux/guid_creator.cc",
-            "vendor/breakpad/src/common/linux/linux_libc_support.cc",
-            "vendor/breakpad/src/common/linux/memory_mapped_file.cc",
-            "vendor/breakpad/src/common/linux/safe_readlink.cc",
-            "vendor/breakpad/src/common/linux/breakpad_getcontext.S",
-            "vendor/breakpad/src/common/convert_UTF.cc",
-            "vendor/breakpad/src/common/string_conversion.cc",
-        })
-    end
 
     --[[ -------------------------------- Protobuf Section -------------------------------- ]]
 
