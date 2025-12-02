@@ -119,9 +119,6 @@ void OnCrash(int sig)
     case SIGXFSZ:
         sigName = "SIGXFSZ";
         break;
-    case SIGIOT:
-        sigName = "SIGIOT";
-        break;
     case SIGPWR:
         sigName = "SIGPWR";
         break;
@@ -283,7 +280,6 @@ void RegisterCrashHandlers()
     signal(SIGSYS, SignalHandler);
     signal(SIGXCPU, SignalHandler);
     signal(SIGXFSZ, SignalHandler);
-    signal(SIGIOT, SignalHandler);
     signal(SIGPWR, SignalHandler);
     signal(SIGSTKFLT, SignalHandler);
 }
@@ -298,7 +294,6 @@ void UnregisterCrashHandlers()
     signal(SIGSYS, SIG_DFL);
     signal(SIGXCPU, SIG_DFL);
     signal(SIGXFSZ, SIG_DFL);
-    signal(SIGIOT, SIG_DFL);
     signal(SIGPWR, SIG_DFL);
     signal(SIGSTKFLT, SIG_DFL);
 }
