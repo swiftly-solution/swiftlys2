@@ -92,14 +92,6 @@ void OnCrash(int sig)
     }
     g_dumpWritten = true;
 
-    struct rlimit rl;
-    rl.rlim_cur = RLIM_INFINITY;
-    rl.rlim_max = RLIM_INFINITY;
-    setrlimit(RLIMIT_CORE, &rl);
-
-    // Change to dump directory so core file is generated there
-    chdir(g_dumpPath.c_str());
-
     const char* sigName = "Unknown";
     switch (sig)
     {
@@ -121,6 +113,28 @@ void OnCrash(int sig)
     }
 
     g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Info("CrashReporter", std::format("Caught signal {} ({}), core dump will be generated in: {}\n", sigName, sig, g_dumpPath));
+
+    // Limit core dump size to 50MB
+    struct rlimit rl;
+    rl.rlim_cur = 50 * 1024 * 1024; // 50MB
+    rl.rlim_max = 50 * 1024 * 1024;
+    setrlimit(RLIMIT_CORE, &rl);
+
+    // Set coredump_filter to dump useful memory:
+    // bit 0 (1): anonymous private (stack, heap)
+    // bit 1 (2): anonymous shared
+    // bit 2 (4): file-backed private (code segments)
+    // bit 4 (16): ELF headers
+    // Total: 0x17 = 23
+    FILE* filterFile = fopen("/proc/self/coredump_filter", "w");
+    if (filterFile)
+    {
+        fprintf(filterFile, "0x17");
+        fclose(filterFile);
+    }
+
+    // Change to dump directory so core file is generated there
+    chdir(g_dumpPath.c_str());
 }
 #endif
 
