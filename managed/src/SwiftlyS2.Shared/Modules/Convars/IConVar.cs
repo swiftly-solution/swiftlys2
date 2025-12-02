@@ -126,6 +126,25 @@ public interface IConVar<T> : IConVar {
   /// </summary>
   T DefaultValue { get; set; }
 
+  /// <summary>
+  /// Whether the convar has a default value.
+  /// </summary>
+  bool HasDefaultValue { get; }
+
+  /// <summary>
+  /// Whether the convar has a min value.
+  /// </summary>
+  bool HasMinValue { get; }
+
+  /// <summary>
+  /// Whether the convar has a max value.
+  /// </summary>
+  bool HasMaxValue { get; }
+
+  /// <summary>
+  /// The flags of the convar.
+  /// </summary>
+  ConvarFlags Flags { get; set; }
 
   /// <summary>
   /// Internally set the value of the convar.
@@ -133,6 +152,13 @@ public interface IConVar<T> : IConVar {
   /// </summary>
   /// <param name="value">The value to set.</param>
   void SetInternal(T value);
+
+  /// <summary>
+  /// Query the value of the convar from specified client.
+  /// </summary>
+  /// <param name="clientId"></param>
+  /// <param name="callback">The action to execute with the value.</param>
+  void QueryClient( int clientId, Action<string> callback );
 
   /// <summary>
   /// Replicate the value of the convar to specified client.
@@ -160,4 +186,6 @@ public interface IConVar<T> : IConVar {
   /// <param name="defaultValue">The default value of the convar.</param>
   /// <returns>True if the default value is found, false otherwise.</returns>
   bool TryGetDefaultValue(out T defaultValue);
+
+
 }
