@@ -95,6 +95,17 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
     m_iKind = kind;
     SetupConsoleColors();
 
+    m_sCorePath = CommandLine()->ParmValue(CUtlStringToken("-sw_path"), WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2"));
+    if (!ends_with(m_sCorePath, WIN_LINUX("\\", "/")))
+    {
+        m_sCorePath += WIN_LINUX("\\", "/");
+    }
+    m_sLogPath = CommandLine()->ParmValue(CUtlStringToken("-sw_logpath"), WIN_LINUX("addons\\swiftlys2\\logs", "addons/swiftlys2/logs"));
+    if (!ends_with(m_sLogPath, WIN_LINUX("\\", "/")))
+    {
+        m_sLogPath += WIN_LINUX("\\", "/");
+    }
+
     auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
     crashreporter->Init();
 
@@ -148,17 +159,6 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
             logger->Error("Entrypoint", "Unknown game detected. No engine interface available.");
         }
         return false;
-    }
-
-    m_sCorePath = CommandLine()->ParmValue(CUtlStringToken("-sw_path"), WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2"));
-    if (!ends_with(m_sCorePath, WIN_LINUX("\\", "/")))
-    {
-        m_sCorePath += WIN_LINUX("\\", "/");
-    }
-    m_sLogPath = CommandLine()->ParmValue(CUtlStringToken("-sw_logpath"), WIN_LINUX("addons\\swiftlys2\\logs", "addons/swiftlys2/logs"));
-    if (!ends_with(m_sLogPath, WIN_LINUX("\\", "/")))
-    {
-        m_sLogPath += WIN_LINUX("\\", "/");
     }
 
     auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);

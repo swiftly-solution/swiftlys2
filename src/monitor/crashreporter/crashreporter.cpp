@@ -20,12 +20,14 @@
 
 #include <api/interfaces/manager.h>
 #include <api/shared/files.h>
+#include <api/shared/plat.h>
 #include <api/shared/string.h>
 #include <api/shared/texttable.h>
 
 #include <public/eiface.h>
 
 #include <core/entrypoint.h>
+#include <core/managed/host/strconv.h>
 
 #include <fmt/format.h>
 
@@ -50,11 +52,11 @@ bool DumpCallback(const wchar_t* dumpPath, const wchar_t* minidumpId, void* cont
 {
     if (succeeded)
     {
-        printf("Crash dump written: %ls\\%ls.dmp\n", dumpPath, minidumpId);
+        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Info(std::format("Crash dump written: {}\\{}.dmp", StringTight(dumpPath), StringTight(minidumpId)));
     }
     else
     {
-        printf("Failed to write crash dump!\n");
+        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Error("Failed to write crash dump!\n");
     }
     return succeeded;
 }
@@ -63,11 +65,11 @@ bool DumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* c
 {
     if (succeeded)
     {
-        printf("Crash dump written: %s\n", descriptor.path());
+        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Info(std::format("Crash dump written: {}\n", descriptor.path()));
     }
     else
     {
-        printf("Failed to write crash dump!\n");
+        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Error("Failed to write crash dump!\n");
     }
     return succeeded;
 }
@@ -81,15 +83,9 @@ void OnCrash()
     }
 
     g_dumpWritten = true;
-    printf("Crash detected! Writing dump...\n");
-    printf("Crash detected! Writing dump...\n");
-    printf("Crash detected! Writing dump...\n");
 
 #ifdef _WIN32
-    std::wstring dumpPathW(g_dumpPath.begin(), g_dumpPath.end());
-    google_breakpad::ExceptionHandler::WriteMinidump(dumpPathW, DumpCallback, nullptr,
-                                                     static_cast<MINIDUMP_TYPE>(MiniDumpWithFullMemory | MiniDumpWithFullMemoryInfo | MiniDumpWithHandleData | MiniDumpWithThreadInfo | MiniDumpWithUnloadedModules | MiniDumpWithProcessThreadData |
-                                                                                MiniDumpWithFullAuxiliaryState | MiniDumpWithTokenInformation | MiniDumpWithModuleHeaders | MiniDumpWithAvxXStateContext));
+    google_breakpad::ExceptionHandler::WriteMinidump(StringWide(g_dumpPath), DumpCallback, nullptr, MiniDumpNormal);
 #else
     google_breakpad::MinidumpDescriptor descriptor(g_dumpPath);
     google_breakpad::ExceptionHandler handler(descriptor, nullptr, DumpCallback, nullptr, false, -1);
@@ -103,6 +99,7 @@ void UnregisterCrashHandlers();
 void CrashReporter::Init()
 {
     auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
+
     if (!Files::ExistsPath(g_SwiftlyCore.GetCorePath() + "dumps"))
     {
         if (!Files::CreateDir(g_SwiftlyCore.GetCorePath() + "dumps"))
@@ -121,7 +118,8 @@ void CrashReporter::Init()
         }
     }
 
-    g_dumpPath = g_SwiftlyCore.GetCorePath() + "dumps";
+    g_dumpPath = Files::GeneratePath(g_SwiftlyCore.GetCorePath() + "dumps");
+
     RegisterCrashHandlers();
 }
 
@@ -161,8 +159,7 @@ void CrashReporter::ReportPreventionIncident(std::string category, std::string r
 #ifdef _WIN32
 LONG CALLBACK VectoredExceptionHandler(PEXCEPTION_POINTERS exceptionInfo)
 {
-    DWORD code = exceptionInfo->ExceptionRecord->ExceptionCode;
-    switch (code)
+    switch (exceptionInfo->ExceptionRecord->ExceptionCode)
     {
     case EXCEPTION_ACCESS_VIOLATION:
     case EXCEPTION_STACK_OVERFLOW:
