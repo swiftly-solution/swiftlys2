@@ -47,20 +47,7 @@ static PVOID g_vehHandle = nullptr;
 static std::string g_dumpPath;
 static bool g_dumpWritten = false;
 
-#ifdef _WIN32
-bool DumpCallback(const wchar_t* dumpPath, const wchar_t* minidumpId, void* context, EXCEPTION_POINTERS* exinfo, MDRawAssertionInfo* assertion, bool succeeded)
-{
-    if (succeeded)
-    {
-        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Info(std::format("Crash dump written: {}\\{}.dmp", StringTight(dumpPath), StringTight(minidumpId)));
-    }
-    else
-    {
-        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Error("Failed to write crash dump!\n");
-    }
-    return succeeded;
-}
-#else
+#ifndef _WIN32
 bool DumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* context, bool succeeded)
 {
     if (succeeded)
@@ -75,23 +62,56 @@ bool DumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* c
 }
 #endif
 
+#ifdef _WIN32
+void OnCrash(PEXCEPTION_POINTERS exceptionInfo)
+{
+    if (g_dumpWritten)
+    {
+        return;
+    }
+    g_dumpWritten = true;
+
+    std::wstring dumpFile = StringWide(g_dumpPath + "\\" + get_uuid() + ".dmp");
+
+    HANDLE hFile = CreateFileW(dumpFile.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (hFile == INVALID_HANDLE_VALUE)
+    {
+        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Error("CrashReporter", "Failed to create dump file!\n");
+        return;
+    }
+
+    MINIDUMP_EXCEPTION_INFORMATION mei;
+    mei.ThreadId = GetCurrentThreadId();
+    mei.ExceptionPointers = exceptionInfo;
+    mei.ClientPointers = FALSE;
+
+    BOOL result = MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, static_cast<MINIDUMP_TYPE>(MiniDumpWithDataSegs | MiniDumpWithHandleData | MiniDumpWithThreadInfo | MiniDumpWithUnloadedModules), &mei, nullptr, nullptr);
+
+    CloseHandle(hFile);
+
+    if (result)
+    {
+        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Info("CrashReporter", std::format("Crash dump written: {}\n", StringTight(dumpFile)));
+    }
+    else
+    {
+        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Error("CrashReporter", "Failed to write crash dump!\n");
+    }
+}
+#else
 void OnCrash()
 {
     if (g_dumpWritten)
     {
         return;
     }
-
     g_dumpWritten = true;
 
-#ifdef _WIN32
-    google_breakpad::ExceptionHandler::WriteMinidump(StringWide(g_dumpPath), DumpCallback, nullptr, MiniDumpNormal);
-#else
     google_breakpad::MinidumpDescriptor descriptor(g_dumpPath);
     google_breakpad::ExceptionHandler handler(descriptor, nullptr, DumpCallback, nullptr, false, -1);
     handler.WriteMinidump();
-#endif
 }
+#endif
 
 void RegisterCrashHandlers();
 void UnregisterCrashHandlers();
@@ -182,7 +202,7 @@ LONG CALLBACK VectoredExceptionHandler(PEXCEPTION_POINTERS exceptionInfo)
     case EXCEPTION_GUARD_PAGE:
     case EXCEPTION_INVALID_HANDLE:
     case 0xC0000194:
-        OnCrash();
+        OnCrash(exceptionInfo);
         break;
     default:
         break;
