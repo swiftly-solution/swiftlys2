@@ -8,3 +8,6 @@
 [submodule "vendor/breakpad"]
 	path = vendor/breakpad
 	url = https://github.com/google/breakpad
+[submodule "vendor/third_party/lss"]
+	path = vendor/third_party/lss
+	url = https://chromium.googlesource.com/linux-syscall-support

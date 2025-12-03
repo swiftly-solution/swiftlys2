@@ -205,6 +205,7 @@ target("swiftlys2")
             "LUA_USE_LINUX",
 
             -- Breakpad config defines
+            "__STDC_FORMAT_MACROS",
             "HAVE_A_OUT_H=1",
             "HAVE_CXX17=1",
             "HAVE_GETCONTEXT=1",
