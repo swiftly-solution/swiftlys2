@@ -376,8 +376,11 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             while (currentMenu != null)
             {
                 var player = Core.PlayerManager.GetPlayer(kvp.Key);
-                currentMenu.HideForPlayer(player);
-                MenuClosed?.Invoke(this, new MenuManagerEventArgs { Player = player, Menu = currentMenu });
+                if (player?.IsValid ?? false)
+                {
+                    currentMenu.HideForPlayer(player);
+                    MenuClosed?.Invoke(this, new MenuManagerEventArgs { Player = player, Menu = currentMenu });
+                }
                 currentMenu = currentMenu.Parent.ParentMenu;
             }
             _ = openMenus.TryRemove(kvp.Key, out _);

@@ -680,17 +680,20 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
     //     return selectedDisplayLine.TryGetValue(player, out var line) ? line : -1;
     // }
 
-    private static void SetFreezeState( IPlayer player, bool freeze )
+    private void SetFreezeState( IPlayer player, bool freeze )
     {
         if (!player.IsValid || player.IsFakeClient || !(player.PlayerPawn?.IsValid ?? false))
         {
             return;
         }
 
-        var moveType = freeze ? MoveType_t.MOVETYPE_NONE : MoveType_t.MOVETYPE_WALK;
-        player.PlayerPawn.MoveType = moveType;
-        player.PlayerPawn.ActualMoveType = moveType;
-        player.PlayerPawn.MoveTypeUpdated();
+        core.Scheduler.NextTick(() =>
+        {
+            var moveType = freeze ? MoveType_t.MOVETYPE_NONE : MoveType_t.MOVETYPE_WALK;
+            player.PlayerPawn.MoveType = moveType;
+            player.PlayerPawn.ActualMoveType = moveType;
+            player.PlayerPawn.MoveTypeUpdated();
+        });
     }
 
     // private ValueTask OnOptionClick( object? sender, MenuOptionClickEventArgs args )
