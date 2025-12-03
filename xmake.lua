@@ -254,6 +254,7 @@ target("swiftlys2")
             breakpad_path.."/common/linux/memory_mapped_file.cc",
             breakpad_path.."/common/linux/safe_readlink.cc",
             breakpad_path.."/common/linux/breakpad_getcontext.S",
+            breakpad_path.."/common/linux/ucontext_reader.cc",
         })
     end
 
