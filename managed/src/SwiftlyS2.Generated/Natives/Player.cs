@@ -14,6 +14,9 @@ internal static class NativePlayer {
   private unsafe static delegate* unmanaged<int, int, byte*, int, void> _SendMessage;
 
   public unsafe static void SendMessage(int playerid, int kind, string message, int htmlDuration) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var messageLength = Encoding.UTF8.GetByteCount(message);
     var messageBuffer = pool.Rent(messageLength + 1);
@@ -91,6 +94,9 @@ internal static class NativePlayer {
   private unsafe static delegate* unmanaged<int, byte*, void> _PerformCommand;
 
   public unsafe static void PerformCommand(int playerid, string command) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var commandLength = Encoding.UTF8.GetByteCount(command);
     var commandBuffer = pool.Rent(commandLength + 1);
@@ -119,6 +125,9 @@ internal static class NativePlayer {
   private unsafe static delegate* unmanaged<int, byte*, int, void> _Kick;
 
   public unsafe static void Kick(int playerid, string reason, int gamereason) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var reasonLength = Encoding.UTF8.GetByteCount(reason);
     var reasonBuffer = pool.Rent(reasonLength + 1);
@@ -152,24 +161,36 @@ internal static class NativePlayer {
   private unsafe static delegate* unmanaged<int, int, void> _ChangeTeam;
 
   public unsafe static void ChangeTeam(int playerid, int newteam) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     _ChangeTeam(playerid, newteam);
   }
 
   private unsafe static delegate* unmanaged<int, int, void> _SwitchTeam;
 
   public unsafe static void SwitchTeam(int playerid, int newteam) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     _SwitchTeam(playerid, newteam);
   }
 
   private unsafe static delegate* unmanaged<int, nint, void> _TakeDamage;
 
   public unsafe static void TakeDamage(int playerid, nint dmginfo) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     _TakeDamage(playerid, dmginfo);
   }
 
   private unsafe static delegate* unmanaged<int, Vector, QAngle, Vector, void> _Teleport;
 
   public unsafe static void Teleport(int playerid, Vector pos, QAngle angle, Vector velocity) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     _Teleport(playerid, pos, angle, velocity);
   }
 
@@ -217,6 +238,9 @@ internal static class NativePlayer {
   private unsafe static delegate* unmanaged<int, byte*, void> _ExecuteCommand;
 
   public unsafe static void ExecuteCommand(int playerid, string command) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var commandLength = Encoding.UTF8.GetByteCount(command);
     var commandBuffer = pool.Rent(commandLength + 1);

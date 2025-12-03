@@ -465,12 +465,18 @@ internal static class NativeGameEvents {
   private unsafe static delegate* unmanaged<nint, byte, void> _FireEvent;
 
   public unsafe static void FireEvent(nint _event, bool dontBroadcast) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     _FireEvent(_event, dontBroadcast ? (byte)1 : (byte)0);
   }
 
   private unsafe static delegate* unmanaged<nint, int, void> _FireEventToClient;
 
   public unsafe static void FireEventToClient(nint _event, int playerid) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     _FireEventToClient(_event, playerid);
   }
 

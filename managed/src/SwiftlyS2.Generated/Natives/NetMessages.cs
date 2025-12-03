@@ -1123,6 +1123,9 @@ internal static class NativeNetMessages {
   private unsafe static delegate* unmanaged<nint, int, int, void> _SendMessage;
 
   public unsafe static void SendMessage(nint netmsg, int msgid, int playerid) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     _SendMessage(netmsg, msgid, playerid);
   }
 
@@ -1132,6 +1135,9 @@ internal static class NativeNetMessages {
   /// each bit in player_mask represents a playerid
   /// </summary>
   public unsafe static void SendMessageToPlayers(nint netmsg, int msgid, ulong playermask) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     _SendMessageToPlayers(netmsg, msgid, playermask);
   }
 

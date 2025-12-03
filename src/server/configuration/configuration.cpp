@@ -488,6 +488,9 @@ bool Configuration::Load()
         RegisterConfiguration(wasEdited, config_json, "core", "core", "Menu.Buttons.ScrollBack", "f");
         RegisterConfiguration(wasEdited, config_json, "core", "core", "Menu.Buttons.Exit", "tab");
 
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ManualLoadPlugins", false);
+        RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "PluginLoadOrder", {}, true, "\x01");
+
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "Menu.AvailableInputModes", { "button", "wasd" }, true, " ");
         RegisterConfiguration(wasEdited, config_json, "core", "core", "Menu.InputMode", "button");
 

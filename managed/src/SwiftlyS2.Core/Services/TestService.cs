@@ -48,27 +48,24 @@ internal class TestService {
     _Logger.LogWarning("TestService created");
     _Logger.LogWarning("TestService created");
 
-    Test2();
+    Test();
   }
 
 
   public void Test()
   {
-    _Core.Event.OnEntityCreated += (@event) =>
-    {
-      var name = _Core.Memory.GetObjectPtrVtableName(@event.Entity.Address);
-      Console.WriteLine("Entity spawned: " + name);
-      var hasVtable = _Core.Memory.ObjectPtrHasVtable(@event.Entity.Address + 1);
-      Console.WriteLine("Has vtable: " + hasVtable);
-      var vtable = _Core.Memory.ObjectPtrHasBaseClass(@event.Entity.Address, "CBaseEntity");
-      Console.WriteLine("Has base class: " + vtable);
-      var handle = _Core.EntitySystem.GetRefEHandle(@event.Entity);
-    };
-    // _Core.Event.OnItemServicesCanAcquireHook += (@event) => {
-    //   Console.WriteLine(@event.EconItemView.ItemDefinitionIndex);
+    _Core.Command.RegisterCommand("tc", (args) => {
+        var cvar = _Core.ConVar.Find<float>("mp_warmuptime");
 
-    //   @event.SetAcquireResult(AcquireResult.NotAllowedByProhibition);
-    // };
+        // cvar.MinValueAsString
+
+
+        cvar!.ValueAsString = "10";
+        cvar!.DefaultValueAsString = "50";
+        cvar!.MaxValueAsString = "100";
+        cvar!.MinValueAsString = "10";
+        cvar.ReplicateToClientAsString(0, "10");
+    });
 
 
   }

@@ -14,6 +14,9 @@ internal static class NativeConvars {
   private unsafe static delegate* unmanaged<int, byte*, void> _QueryClientConvar;
 
   public unsafe static void QueryClientConvar(int playerid, string cvarName) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
     var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
@@ -458,6 +461,9 @@ internal static class NativeConvars {
   private unsafe static delegate* unmanaged<int, byte*, byte*, void> _SetClientConvarValueString;
 
   public unsafe static void SetClientConvarValueString(int playerid, string cvarName, string defaultValue) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
     var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
@@ -494,6 +500,9 @@ internal static class NativeConvars {
   private unsafe static delegate* unmanaged<byte*, ulong, void> _SetFlags;
 
   public unsafe static void SetFlags(string cvarName, ulong flags) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
     var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
@@ -568,6 +577,9 @@ internal static class NativeConvars {
   private unsafe static delegate* unmanaged<byte*, nint, void> _SetDefaultValue;
 
   public unsafe static void SetDefaultValue(string cvarName, nint defaultValue) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
     var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
@@ -582,6 +594,9 @@ internal static class NativeConvars {
   private unsafe static delegate* unmanaged<byte*, byte*, void> _SetDefaultValueString;
 
   public unsafe static void SetDefaultValueString(string cvarName, string defaultValue) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
     var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
@@ -618,6 +633,9 @@ internal static class NativeConvars {
   private unsafe static delegate* unmanaged<byte*, nint, void> _SetValuePtr;
 
   public unsafe static void SetValuePtr(string cvarName, nint value) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
     var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
@@ -632,6 +650,9 @@ internal static class NativeConvars {
   private unsafe static delegate* unmanaged<byte*, nint, void> _SetValueInternalPtr;
 
   public unsafe static void SetValueInternalPtr(string cvarName, nint value) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
     var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
@@ -640,6 +661,214 @@ internal static class NativeConvars {
     fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
       _SetValueInternalPtr(cvarNameBufferPtr, value);
       pool.Return(cvarNameBuffer);
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, byte> _SetValueAsString;
+
+  public unsafe static bool SetValueAsString(string cvarName, string value) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    var valueLength = Encoding.UTF8.GetByteCount(value);
+    var valueBuffer = pool.Rent(valueLength + 1);
+    Encoding.UTF8.GetBytes(value, valueBuffer);
+    valueBuffer[valueLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      fixed (byte* valueBufferPtr = valueBuffer) {
+        var ret = _SetValueAsString(cvarNameBufferPtr, valueBufferPtr);
+        pool.Return(cvarNameBuffer);
+        pool.Return(valueBuffer);
+        return ret == 1;
+      }
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, int> _GetValueAsString;
+
+  public unsafe static string GetValueAsString(string cvarName) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      var ret = _GetValueAsString(null, cvarNameBufferPtr);
+      var retBuffer = pool.Rent(ret + 1);
+      fixed (byte* retBufferPtr = retBuffer) {
+        ret = _GetValueAsString(retBufferPtr, cvarNameBufferPtr);
+        var retString = Encoding.UTF8.GetString(retBufferPtr, ret);
+        pool.Return(retBuffer);
+        pool.Return(cvarNameBuffer);
+        return retString;
+      }
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, byte> _SetDefaultValueAsString;
+
+  public unsafe static bool SetDefaultValueAsString(string cvarName, string value) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    var valueLength = Encoding.UTF8.GetByteCount(value);
+    var valueBuffer = pool.Rent(valueLength + 1);
+    Encoding.UTF8.GetBytes(value, valueBuffer);
+    valueBuffer[valueLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      fixed (byte* valueBufferPtr = valueBuffer) {
+        var ret = _SetDefaultValueAsString(cvarNameBufferPtr, valueBufferPtr);
+        pool.Return(cvarNameBuffer);
+        pool.Return(valueBuffer);
+        return ret == 1;
+      }
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, int> _GetDefaultValueAsString;
+
+  public unsafe static string GetDefaultValueAsString(string cvarName) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      var ret = _GetDefaultValueAsString(null, cvarNameBufferPtr);
+      var retBuffer = pool.Rent(ret + 1);
+      fixed (byte* retBufferPtr = retBuffer) {
+        ret = _GetDefaultValueAsString(retBufferPtr, cvarNameBufferPtr);
+        var retString = Encoding.UTF8.GetString(retBufferPtr, ret);
+        pool.Return(retBuffer);
+        pool.Return(cvarNameBuffer);
+        return retString;
+      }
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, byte> _SetMinValueAsString;
+
+  public unsafe static bool SetMinValueAsString(string cvarName, string value) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    var valueLength = Encoding.UTF8.GetByteCount(value);
+    var valueBuffer = pool.Rent(valueLength + 1);
+    Encoding.UTF8.GetBytes(value, valueBuffer);
+    valueBuffer[valueLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      fixed (byte* valueBufferPtr = valueBuffer) {
+        var ret = _SetMinValueAsString(cvarNameBufferPtr, valueBufferPtr);
+        pool.Return(cvarNameBuffer);
+        pool.Return(valueBuffer);
+        return ret == 1;
+      }
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, int> _GetMinValueAsString;
+
+  public unsafe static string GetMinValueAsString(string cvarName) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      var ret = _GetMinValueAsString(null, cvarNameBufferPtr);
+      var retBuffer = pool.Rent(ret + 1);
+      fixed (byte* retBufferPtr = retBuffer) {
+        ret = _GetMinValueAsString(retBufferPtr, cvarNameBufferPtr);
+        var retString = Encoding.UTF8.GetString(retBufferPtr, ret);
+        pool.Return(retBuffer);
+        pool.Return(cvarNameBuffer);
+        return retString;
+      }
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, byte> _SetMaxValueAsString;
+
+  public unsafe static bool SetMaxValueAsString(string cvarName, string value) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    var valueLength = Encoding.UTF8.GetByteCount(value);
+    var valueBuffer = pool.Rent(valueLength + 1);
+    Encoding.UTF8.GetBytes(value, valueBuffer);
+    valueBuffer[valueLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      fixed (byte* valueBufferPtr = valueBuffer) {
+        var ret = _SetMaxValueAsString(cvarNameBufferPtr, valueBufferPtr);
+        pool.Return(cvarNameBuffer);
+        pool.Return(valueBuffer);
+        return ret == 1;
+      }
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, int> _GetMaxValueAsString;
+
+  public unsafe static string GetMaxValueAsString(string cvarName) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      var ret = _GetMaxValueAsString(null, cvarNameBufferPtr);
+      var retBuffer = pool.Rent(ret + 1);
+      fixed (byte* retBufferPtr = retBuffer) {
+        ret = _GetMaxValueAsString(retBufferPtr, cvarNameBufferPtr);
+        var retString = Encoding.UTF8.GetString(retBufferPtr, ret);
+        pool.Return(retBuffer);
+        pool.Return(cvarNameBuffer);
+        return retString;
+      }
+    }
+  }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, void> _SetValueInternalAsString;
+
+  public unsafe static void SetValueInternalAsString(string cvarName, string value) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    var valueLength = Encoding.UTF8.GetByteCount(value);
+    var valueBuffer = pool.Rent(valueLength + 1);
+    Encoding.UTF8.GetBytes(value, valueBuffer);
+    valueBuffer[valueLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      fixed (byte* valueBufferPtr = valueBuffer) {
+        _SetValueInternalAsString(cvarNameBufferPtr, valueBufferPtr);
+        pool.Return(cvarNameBuffer);
+        pool.Return(valueBuffer);
+      }
     }
   }
 }

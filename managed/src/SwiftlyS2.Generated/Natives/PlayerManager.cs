@@ -35,6 +35,9 @@ internal static class NativePlayerManager {
   private unsafe static delegate* unmanaged<int, byte*, int, void> _SendMessage;
 
   public unsafe static void SendMessage(int kind, string message, int duration) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var messageLength = Encoding.UTF8.GetByteCount(message);
     var messageBuffer = pool.Rent(messageLength + 1);

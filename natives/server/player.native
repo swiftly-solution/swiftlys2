@@ -1,6 +1,6 @@
 class Player
 
-void SendMessage = int32 playerid, int32 kind, string message, int32 htmlDuration
+sync void SendMessage = int32 playerid, int32 kind, string message, int32 htmlDuration
 bool IsFakeClient = int32 playerid
 bool IsAuthorized = int32 playerid
 uint32 GetConnectedTime = int32 playerid
@@ -10,20 +10,20 @@ ptr GetController = int32 playerid
 ptr GetPawn = int32 playerid
 ptr GetPlayerPawn = int32 playerid
 uint64 GetPressedButtons = int32 playerid
-void PerformCommand = int32 playerid, string command
+sync void PerformCommand = int32 playerid, string command
 string GetIPAddress = int32 playerid
-void Kick = int32 playerid, string reason, int32 gamereason
+sync void Kick = int32 playerid, string reason, int32 gamereason
 void ShouldBlockTransmitEntity = int32 playerid, int32 entityidx, bool shouldBlockTransmit
 bool IsTransmitEntityBlocked = int32 playerid, int32 entityidx
 void ClearTransmitEntityBlocked = int32 playerid
-void ChangeTeam = int32 playerid, int32 newteam
-void SwitchTeam = int32 playerid, int32 newteam
-void TakeDamage = int32 playerid, ptr dmginfo
-void Teleport = int32 playerid, vector pos, qangle angle, vector velocity
+sync void ChangeTeam = int32 playerid, int32 newteam
+sync void SwitchTeam = int32 playerid, int32 newteam
+sync void TakeDamage = int32 playerid, ptr dmginfo
+sync void Teleport = int32 playerid, vector pos, qangle angle, vector velocity
 string GetLanguage = int32 playerid
 void SetCenterMenuRender = int32 playerid, string text
 void ClearCenterMenuRender = int32 playerid
 bool HasMenuShown = int32 playerid
-void ExecuteCommand = int32 playerid, string command
+sync void ExecuteCommand = int32 playerid, string command
 bool IsFirstSpawn = int32 playerid
 int32 GetUserID = int32 playerid

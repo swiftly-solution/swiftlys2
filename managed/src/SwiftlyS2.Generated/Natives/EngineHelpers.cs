@@ -46,6 +46,9 @@ internal static class NativeEngineHelpers {
   private unsafe static delegate* unmanaged<byte*, void> _ExecuteCommand;
 
   public unsafe static void ExecuteCommand(string command) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var commandLength = Encoding.UTF8.GetByteCount(command);
     var commandBuffer = pool.Rent(commandLength + 1);

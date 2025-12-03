@@ -17,6 +17,9 @@ internal static class NativeCommands {
   /// 1 -> not silent, 2 -> silent, -1 -> invalid player, 0 -> no command
   /// </summary>
   public unsafe static int HandleCommandForPlayer(int playerid, string command) {
+    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+      throw new InvalidOperationException("This method can only be called from the main thread.");
+    }
     var pool = ArrayPool<byte>.Shared;
     var commandLength = Encoding.UTF8.GetByteCount(command);
     var commandBuffer = pool.Rent(commandLength + 1);

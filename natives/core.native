@@ -1,0 +1,4 @@
+class Core
+
+bool PluginManualLoadState = void
+string PluginLoadOrder = void

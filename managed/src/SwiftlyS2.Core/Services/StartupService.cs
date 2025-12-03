@@ -11,7 +11,6 @@ internal class StartupService : IHostedService
     public StartupService( IServiceProvider provider )
     {
         // this.provider = provider;
-        // provider.UseTestService();
         provider.UseCoreHookService();
         provider.UsePermissionManager();
         provider.UseCommandTrackerService();
@@ -20,6 +19,7 @@ internal class StartupService : IHostedService
         provider.UseCoreCommandService();
         // Initialize PluginManager after everything is ready
         provider.UsePluginManager();
+        // provider.UseTestService();
     }
 
     public Task StartAsync( CancellationToken cancellationToken )
