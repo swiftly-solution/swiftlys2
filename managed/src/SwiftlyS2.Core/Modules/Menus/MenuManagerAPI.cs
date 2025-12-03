@@ -113,9 +113,13 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
         }
 
         var player = Core.PlayerManager.GetPlayer(@event.PlayerId);
-        var menu = GetCurrentMenu(player);
+        if (player == null || !player.IsValid || player.IsFakeClient || player.IsFakeClient || !@event.Pressed)
+        {
+            return;
+        }
 
-        if (menu == null || !player.IsValid || player.IsFakeClient || !@event.Pressed)
+        var menu = GetCurrentMenu(player);
+        if (menu == null)
         {
             return;
         }
