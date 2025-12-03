@@ -318,12 +318,12 @@ public class TestPlugin : BasePlugin
         //   return HookResult.Continue;
         // });
 
-        Core.Event.OnEntityTakeDamage += ( @event ) =>
-        {
-            Console.WriteLine(@event.Entity.DesignerName);
-            @event.Info.DamageFlags = TakeDamageFlags_t.DFLAG_SUPPRESS_BREAKABLES;
-            @event.Result = HookResult.Stop;
-        };
+        // Core.Event.OnEntityTakeDamage += ( @event ) =>
+        // {
+        //     Console.WriteLine(@event.Entity.DesignerName);
+        //     @event.Info.DamageFlags = TakeDamageFlags_t.DFLAG_SUPPRESS_BREAKABLES;
+        //     @event.Result = HookResult.Stop;
+        // };
 
         // Core.Event.OnTick += () => {
 
@@ -888,7 +888,7 @@ public class TestPlugin : BasePlugin
             .EnableExit()
             .SetPlayerFrozen(false)
             .Design.SetMaxVisibleItems(5)
-            .Design.SetMenuTitle($"{HtmlGradient.GenerateGradientText("Redesigned Menu", "#00FA9A", "#F5FFFA")}")
+            .Design.SetMenuTitle($"{HtmlGradient.GenerateGradientText("SwiftlyS2", "#00FA9A", "#F5FFFA")}")
             .Design.SetMenuTitleVisible(true)
             .Design.SetMenuFooterVisible(true)
             .Design.SetMenuFooterColor("#0F0")
@@ -900,7 +900,7 @@ public class TestPlugin : BasePlugin
             .AddOption(new TextMenuOption("1") { Visible = false })
             .AddOption(toggle)
             .AddOption(new ChoiceMenuOption("123", ["Option 1", "Option 2", "Option 3"]))
-            .AddOption(new SliderMenuOption("1234"))
+            .AddOption(new SliderMenuOption("1234") { Comment = "This is a slider" })
             .AddOption(new ProgressBarMenuOption("12345", () => (float)new Random().NextDouble(), multiLine: false))
             .AddOption(new SubmenuMenuOption("123456", async () =>
             {

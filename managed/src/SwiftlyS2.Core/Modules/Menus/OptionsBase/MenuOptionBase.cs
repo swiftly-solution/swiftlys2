@@ -142,6 +142,14 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     }
 
     /// <summary>
+    /// Gets or sets the comment content displayed for this menu option.
+    /// </summary>
+    /// <remarks>
+    /// This is a global property. Changing it will affect what all players see.
+    /// </remarks>
+    public string Comment { get; set; }
+
+    /// <summary>
     /// The maximum display width for menu option text in relative units.
     /// </summary>
     public float MaxWidth {
