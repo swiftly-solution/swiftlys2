@@ -890,7 +890,7 @@ public class TestPlugin : BasePlugin
             .Design.SetMaxVisibleItems(5)
             .Design.SetMenuTitle($"{HtmlGradient.GenerateGradientText("SwiftlyS2", "#00FA9A", "#F5FFFA")}")
             .Design.SetMenuTitleVisible(true)
-            .Design.SetMenuFooterVisible(true)
+            .Design.SetMenuFooterVisible(false)
             .Design.SetMenuFooterColor("#0F0")
             .Design.SetNavigationMarkerColor("#F0F8FFFF")
             .Design.SetVisualGuideLineColor("#FFFFFF")

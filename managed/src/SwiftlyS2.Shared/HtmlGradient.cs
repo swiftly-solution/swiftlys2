@@ -8,7 +8,7 @@ public static class HtmlGradient
     /// <summary>
     /// Generates gradient colored text by interpolating between two colors.
     /// </summary>
-    /// <param name="text">The text to apply gradient to.</param>
+    /// <param name="text">The plain text to apply gradient to. Must not contain any HTML tags.</param>
     /// <param name="startColor">The starting color in hex format (e.g., "#FF0000").</param>
     /// <param name="endColor">The ending color in hex format (e.g., "#0000FF").</param>
     /// <returns>HTML string with each character wrapped in a colored font tag.</returns>
@@ -36,7 +36,7 @@ public static class HtmlGradient
     /// <summary>
     /// Generates gradient colored text by interpolating across multiple color stops.
     /// </summary>
-    /// <param name="text">The text to apply gradient to.</param>
+    /// <param name="text">The plain text to apply gradient to. Must not contain any HTML tags.</param>
     /// <param name="colors">Array of color stops in hex format (e.g., "#FF0000", "#00FF00", "#0000FF").</param>
     /// <returns>HTML string with each character wrapped in a colored font tag.</returns>
     public static string GenerateGradientText( string text, params string[] colors ) => (text, colors) switch {
@@ -49,7 +49,7 @@ public static class HtmlGradient
     /// <summary>
     /// Generates gradient colored text by interpolating between two SwiftlyS2 native colors.
     /// </summary>
-    /// <param name="text">The text to apply gradient to.</param>
+    /// <param name="text">The plain text to apply gradient to. Must not contain any HTML tags.</param>
     /// <param name="startColor">The starting SwiftlyS2 native color.</param>
     /// <param name="endColor">The ending SwiftlyS2 native color.</param>
     /// <returns>HTML string with each character wrapped in a colored font tag.</returns>
@@ -61,7 +61,7 @@ public static class HtmlGradient
     /// <summary>
     /// Generates gradient colored text by interpolating between two System.Drawing colors.
     /// </summary>
-    /// <param name="text">The text to apply gradient to.</param>
+    /// <param name="text">The plain text to apply gradient to. Must not contain any HTML tags.</param>
     /// <param name="startColor">The starting System.Drawing color.</param>
     /// <param name="endColor">The ending System.Drawing color.</param>
     /// <returns>HTML string with each character wrapped in a colored font tag.</returns>
@@ -73,7 +73,7 @@ public static class HtmlGradient
     /// <summary>
     /// Generates gradient colored text by interpolating across multiple SwiftlyS2 native color stops.
     /// </summary>
-    /// <param name="text">The text to apply gradient to.</param>
+    /// <param name="text">The plain text to apply gradient to. Must not contain any HTML tags.</param>
     /// <param name="colors">Array of SwiftlyS2 native color stops.</param>
     /// <returns>HTML string with each character wrapped in a colored font tag.</returns>
     public static string GenerateGradientText( string text, params Natives.Color[] colors )
@@ -84,7 +84,7 @@ public static class HtmlGradient
     /// <summary>
     /// Generates gradient colored text by interpolating across multiple System.Drawing color stops.
     /// </summary>
-    /// <param name="text">The text to apply gradient to.</param>
+    /// <param name="text">The plain text to apply gradient to. Must not contain any HTML tags.</param>
     /// <param name="colors">Array of System.Drawing color stops.</param>
     /// <returns>HTML string with each character wrapped in a colored font tag.</returns>
     public static string GenerateGradientText( string text, params System.Drawing.Color[] colors )
@@ -108,9 +108,9 @@ public static class HtmlGradient
             var (startR, startG, startB) = parsedColors[startIdx];
             var (endR, endG, endB) = parsedColors[endIdx];
 
-            var r = (int)(startR + (endR - startR) * ratio);
-            var g = (int)(startG + (endG - startG) * ratio);
-            var b = (int)(startB + (endB - startB) * ratio);
+            var r = (int)(startR + ((endR - startR) * ratio));
+            var g = (int)(startG + ((endG - startG) * ratio));
+            var b = (int)(startB + ((endB - startB) * ratio));
 
             return $"<font color='#{r:X2}{g:X2}{b:X2}'>{ch}</font>";
         }));

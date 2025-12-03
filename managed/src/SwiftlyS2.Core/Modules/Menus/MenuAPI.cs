@@ -418,13 +418,23 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             option.GetDisplayText(player, 0)
         )));
 
-        var comment = visibleOptions.Count > 0 && !string.IsNullOrWhiteSpace(visibleOptions[arrowPosition].Comment) ? $"<font class='fontSize-s'>{visibleOptions[arrowPosition].Comment}</font><br>" : string.Empty;
+        var comment = visibleOptions.Count > 0 && !string.IsNullOrWhiteSpace(visibleOptions[arrowPosition].Comment)
+            ? string.Concat(
+                "<br>",
+                guideLine,
+                "<br>",
+                $"<font class='fontSize-s'>{visibleOptions[arrowPosition].Comment}</font><br>"
+            )
+            : string.Concat(
+                "<br>",
+                guideLine,
+                "<br>",
+                $"<font class='fontSize-s'>Powered by <font color='#ff3c00ff'>❤️</font> {HtmlGradient.GenerateGradientText("SwiftlyS2", "#ffffffff", "#96d5ffff")}</font><br>"
+            );
 
         var footerSection = Configuration.HideFooter ? string.Empty :
             core.MenusAPI.Configuration.InputMode switch {
                 "wasd" => string.Concat(
-                    "<br>", guideLine, "<br>",
-                    comment,
                     "<font class='fontSize-s' color='#FFFFFF'>",
                     $"<font color='{footerColor}'>Move:</font> W/S",
                     $" | <font color='{footerColor}'>Use:</font> D",
@@ -432,8 +442,6 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                     "</font>"
                 ),
                 _ => string.Concat(
-                    "<br>", guideLine, "<br>",
-                    comment,
                     "<font class='fontSize-s' color='#FFFFFF'>",
                     $"<font color='{footerColor}'>Move:</font> {KeybindOverrides.Move?.ToString() ?? core.MenusAPI.Configuration.ButtonsScroll.ToUpper()}/{KeybindOverrides.MoveBack?.ToString() ?? core.MenusAPI.Configuration.ButtonsScrollBack.ToUpper()}",
                     $" | <font color='{footerColor}'>Use:</font> {KeybindOverrides.Select?.ToString() ?? core.MenusAPI.Configuration.ButtonsUse.ToUpper()}",
@@ -447,6 +455,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             "<font color='#FFFFFF' class='fontSize-sm'>",
             menuItems,
             "</font>",
+            comment,
             footerSection
         );
     }
