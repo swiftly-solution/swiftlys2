@@ -14,9 +14,6 @@ internal static class NativeSchema {
   private unsafe static delegate* unmanaged<nint, ulong, void> _SetStateChanged;
 
   public unsafe static void SetStateChanged(nint entity, ulong hash) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
-      throw new InvalidOperationException("This method can only be called from the main thread.");
-    }
     _SetStateChanged(entity, hash);
   }
 
