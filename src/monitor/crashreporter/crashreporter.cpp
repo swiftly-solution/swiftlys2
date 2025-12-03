@@ -32,6 +32,7 @@
 #include <fmt/format.h>
 
 #include <cstdio>
+#include <cstring>
 #include <string>
 
 static std::string g_dumpPath;
@@ -103,6 +104,8 @@ void CrashReporter::ReportPreventionIncident(std::string category, std::string r
 #ifdef _WIN32
 #include <DbgHelp.h>
 #include <Windows.h>
+#include <io.h>
+
 static PVOID g_vehHandle = nullptr;
 
 void BreakpadDumpCallback(PEXCEPTION_POINTERS exceptionInfo)
@@ -118,7 +121,8 @@ void BreakpadDumpCallback(PEXCEPTION_POINTERS exceptionInfo)
     HANDLE hFile = CreateFileW(dumpFile.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
     if (hFile == INVALID_HANDLE_VALUE)
     {
-        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Error("CrashReporter", "Failed to create dump file!\n");
+        const char* msg = "[CrashReporter] Failed to create dump file!\n";
+        _write(_fileno(stdout), msg, strlen(msg));
         return;
     }
 
@@ -133,11 +137,19 @@ void BreakpadDumpCallback(PEXCEPTION_POINTERS exceptionInfo)
 
     if (result)
     {
-        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Info("CrashReporter", std::format("Crash dump written: {}\n", StringTight(dumpFile)));
+        const char* msg = "[CrashReporter] Wrote minidump to: ";
+        _write(_fileno(stdout), msg, strlen(msg));
+        std::string path = StringTight(dumpFile);
+        _write(_fileno(stdout), path.c_str(), path.size());
+        _write(_fileno(stdout), "\n", 1);
     }
     else
     {
-        g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION)->Error("CrashReporter", "Failed to write crash dump!\n");
+        const char* msg = "[CrashReporter] Failed to write minidump to: ";
+        _write(_fileno(stdout), msg, strlen(msg));
+        std::string path = StringTight(dumpFile);
+        _write(_fileno(stdout), path.c_str(), path.size());
+        _write(_fileno(stdout), "\n", 1);
     }
 }
 
@@ -191,9 +203,12 @@ void UnregisterCrashHandlers()
 #include "client/linux/handler/exception_handler.h"
 #include "common/linux/linux_libc_support.h"
 #include "third_party/lss/linux_syscall_support.h"
+#include <linux/limits.h>
 #include <signal.h>
 #include <sys/resource.h>
 #include <unistd.h>
+
+static char g_linuxDumpPath[PATH_MAX];
 static google_breakpad::ExceptionHandler* g_exceptionHandler = nullptr;
 
 static bool BreakpadDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* context, bool succeeded)
@@ -213,7 +228,9 @@ static bool BreakpadDumpCallback(const google_breakpad::MinidumpDescriptor& desc
 
 void RegisterCrashHandlers()
 {
-    google_breakpad::MinidumpDescriptor descriptor(g_dumpPath);
+    strncpy(g_linuxDumpPath, g_dumpPath.c_str(), sizeof(g_linuxDumpPath) - 1);
+    g_linuxDumpPath[sizeof(g_linuxDumpPath) - 1] = '\0';
+    google_breakpad::MinidumpDescriptor descriptor(g_linuxDumpPath);
     g_exceptionHandler = new google_breakpad::ExceptionHandler(descriptor, nullptr, BreakpadDumpCallback, nullptr, true, -1);
 }
 
