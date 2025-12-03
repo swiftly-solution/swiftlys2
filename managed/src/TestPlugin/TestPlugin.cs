@@ -177,10 +177,10 @@ public class TestPlugin : BasePlugin
         //     Console.WriteLine($"PostThink -> {@event.PlayerPawn.OriginalController.Value?.PlayerName}");
         // };
 
-        Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) =>
-        {
-            Console.WriteLine($"pong: {buffer}");
-        });
+        // Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) =>
+        // {
+        //     Console.WriteLine($"pong: {buffer}");
+        // });
 
         Core.GameEvent.HookPre<EventShowSurvivalRespawnStatus>(@event =>
         {
@@ -942,6 +942,7 @@ public class TestPlugin : BasePlugin
             .AddOption(new TextMenuOption("1") { Visible = false })
             .Build();
 
+        // menu.DefaultComment = "No specific comment";
         Core.MenusAPI.OpenMenu(menu);
         // Core.MenusAPI.OpenMenuForPlayer(player, menu);
     }

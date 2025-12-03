@@ -253,6 +253,11 @@ public interface IMenuAPI : IDisposable
     public IMenuBuilderAPI? Builder { get; }
 
     /// <summary>
+    /// Gets or sets the default comment text to use when a menu option's <see cref="IMenuOption.Comment"/> is not set.
+    /// </summary>
+    public string DefaultComment { get; set; }
+
+    /// <summary>
     /// Gets or sets an object that contains data about this menu.
     /// </summary>
     public object? Tag { get; set; }

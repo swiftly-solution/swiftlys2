@@ -43,6 +43,11 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
     public IMenuBuilderAPI? Builder { get; init; }
 
     /// <summary>
+    /// Gets or sets the default comment text to use when a menu option's Comment is not set.
+    /// </summary>
+    public string DefaultComment { get; set; } = $"Powered by <font color='#ff3c00'>❤️</font> {HtmlGradient.GenerateGradientText("SwiftlyS2", "#ffffff", "#96d5ff")}";
+
+    /// <summary>
     /// Gets or sets an object that contains data about this menu.
     /// </summary>
     public object? Tag { get; set; }
@@ -434,7 +439,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 "<br>",
                 guideLine,
                 "<br>",
-                $"<font class='fontSize-s'>Powered by <font color='#ff3c00ff'>❤️</font> {HtmlGradient.GenerateGradientText("SwiftlyS2", "#ffffffff", "#96d5ffff")}</font><br>"
+                $"<font class='fontSize-s'>{DefaultComment}</font><br>"
             );
 
         var claimInfo = optionBase?.InputClaimInfo ?? MenuInputClaimInfo.Empty;
