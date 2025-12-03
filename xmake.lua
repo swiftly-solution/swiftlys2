@@ -205,6 +205,7 @@ target("swiftlys2")
             "LUA_USE_LINUX",
 
             -- Breakpad config defines
+            "BPLOG_MINIMUM_SEVERITY=SEVERITY_CRITICAL",
             "__STDC_FORMAT_MACROS",
             "HAVE_A_OUT_H=1",
             "HAVE_CXX17=1",
@@ -235,18 +236,24 @@ target("swiftlys2")
         })
 
         add_files({
+            breakpad_path.."/client/minidump_file_writer.cc",
             breakpad_path.."/client/linux/crash_generation/crash_generation_client.cc",
+            breakpad_path.."/client/linux/crash_generation/crash_generation_server.cc",
+            breakpad_path.."/client/linux/dump_writer_common/thread_info.cc",
+            breakpad_path.."/client/linux/dump_writer_common/ucontext_reader.cc",
             breakpad_path.."/client/linux/handler/exception_handler.cc",
             breakpad_path.."/client/linux/handler/minidump_descriptor.cc",
             breakpad_path.."/client/linux/log/log.cc",
+            breakpad_path.."/client/linux/microdump_writer/microdump_writer.cc",
+            breakpad_path.."/client/linux/minidump_writer/linux_core_dumper.cc",
             breakpad_path.."/client/linux/minidump_writer/linux_dumper.cc",
             breakpad_path.."/client/linux/minidump_writer/linux_ptrace_dumper.cc",
             breakpad_path.."/client/linux/minidump_writer/minidump_writer.cc",
             breakpad_path.."/client/linux/minidump_writer/pe_file.cc",
-            breakpad_path.."/client/minidump_file_writer.cc",
             breakpad_path.."/common/convert_UTF.cc",
             breakpad_path.."/common/md5.cc",
             breakpad_path.."/common/string_conversion.cc",
+            breakpad_path.."/common/linux/elf_core_dump.cc",
             breakpad_path.."/common/linux/elfutils.cc",
             breakpad_path.."/common/linux/file_id.cc",
             breakpad_path.."/common/linux/guid_creator.cc",
@@ -254,7 +261,6 @@ target("swiftlys2")
             breakpad_path.."/common/linux/memory_mapped_file.cc",
             breakpad_path.."/common/linux/safe_readlink.cc",
             breakpad_path.."/common/linux/breakpad_getcontext.S",
-            breakpad_path.."/common/linux/ucontext_reader.cc",
         })
     end
 
