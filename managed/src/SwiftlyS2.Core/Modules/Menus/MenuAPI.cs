@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
@@ -252,9 +253,10 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 
                 foreach (var option in options)
                 {
-                    if (option is OptionsBase.MenuOptionBase optionBase)
+                    if (option is MenuOptionBase optionBase)
                     {
                         optionBase.UpdateDynamicText(now);
+                        optionBase.UpdateCustomAnimations(now);
                     }
                 }
 
@@ -418,12 +420,15 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             option.GetDisplayText(player, 0)
         )));
 
-        var comment = visibleOptions.Count > 0 && !string.IsNullOrWhiteSpace(visibleOptions[arrowPosition].Comment)
+        var currentOption = visibleOptions.Count > 0 ? visibleOptions[arrowPosition] : null;
+        var optionBase = currentOption as MenuOptionBase;
+
+        var comment = !string.IsNullOrWhiteSpace(optionBase?.Comment)
             ? string.Concat(
                 "<br>",
                 guideLine,
                 "<br>",
-                $"<font class='fontSize-s'>{visibleOptions[arrowPosition].Comment}</font><br>"
+                $"<font class='fontSize-s'>{optionBase.Comment}</font><br>"
             )
             : string.Concat(
                 "<br>",
@@ -432,20 +437,30 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 $"<font class='fontSize-s'>Powered by <font color='#ff3c00ff'>❤️</font> {HtmlGradient.GenerateGradientText("SwiftlyS2", "#ffffffff", "#96d5ffff")}</font><br>"
             );
 
+        var claimInfo = optionBase?.InputClaimInfo ?? MenuInputClaimInfo.Empty;
+
         var footerSection = Configuration.HideFooter ? string.Empty :
             core.MenusAPI.Configuration.InputMode switch {
                 "wasd" => string.Concat(
                     "<font class='fontSize-s' color='#FFFFFF'>",
                     $"<font color='{footerColor}'>Move:</font> W/S",
-                    $" | <font color='{footerColor}'>Use:</font> D",
-                    Configuration.DisableExit ? string.Empty : $" | <font color='{footerColor}'>Exit:</font> A",
+                    claimInfo.ClaimsUse
+                        ? $" | <font color='{footerColor}'>{claimInfo.UseLabel ?? "Use"}:</font> D"
+                        : $" | <font color='{footerColor}'>Use:</font> D",
+                    claimInfo.ClaimsExit
+                        ? $" | <font color='{footerColor}'>{claimInfo.ExitLabel ?? "Exit"}:</font> A"
+                        : (Configuration.DisableExit ? string.Empty : $" | <font color='{footerColor}'>Exit:</font> A"),
                     "</font>"
                 ),
                 _ => string.Concat(
                     "<font class='fontSize-s' color='#FFFFFF'>",
                     $"<font color='{footerColor}'>Move:</font> {KeybindOverrides.Move?.ToString() ?? core.MenusAPI.Configuration.ButtonsScroll.ToUpper()}/{KeybindOverrides.MoveBack?.ToString() ?? core.MenusAPI.Configuration.ButtonsScrollBack.ToUpper()}",
-                    $" | <font color='{footerColor}'>Use:</font> {KeybindOverrides.Select?.ToString() ?? core.MenusAPI.Configuration.ButtonsUse.ToUpper()}",
-                    Configuration.DisableExit ? string.Empty : $" | <font color='{footerColor}'>Exit:</font> {KeybindOverrides.Exit?.ToString() ?? core.MenusAPI.Configuration.ButtonsExit.ToUpper()}",
+                    claimInfo.ClaimsUse
+                        ? $" | <font color='{footerColor}'>{claimInfo.UseLabel ?? "Use"}:</font> {KeybindOverrides.Select?.ToString() ?? core.MenusAPI.Configuration.ButtonsUse.ToUpper()}"
+                        : $" | <font color='{footerColor}'>Use:</font> {KeybindOverrides.Select?.ToString() ?? core.MenusAPI.Configuration.ButtonsUse.ToUpper()}",
+                    claimInfo.ClaimsExit
+                        ? $" | <font color='{footerColor}'>{claimInfo.ExitLabel ?? "Exit"}:</font> {KeybindOverrides.Exit?.ToString() ?? core.MenusAPI.Configuration.ButtonsExit.ToUpper()}"
+                        : (Configuration.DisableExit ? string.Empty : $" | <font color='{footerColor}'>Exit:</font> {KeybindOverrides.Exit?.ToString() ?? core.MenusAPI.Configuration.ButtonsExit.ToUpper()}"),
                     "</font>"
                 )
             };
@@ -512,7 +527,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 
                 lock (optionsLock)
                 {
-                    options.OfType<OptionsBase.MenuOptionBase>().ToList().ForEach(option => option.ResumeTextAnimation());
+                    options.OfType<MenuOptionBase>().ToList().ForEach(option => option.ResumeTextAnimation());
                 }
             }
         }
@@ -569,7 +584,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 
                     lock (optionsLock)
                     {
-                        options.OfType<OptionsBase.MenuOptionBase>().ToList().ForEach(option => option.PauseTextAnimation());
+                        options.OfType<MenuOptionBase>().ToList().ForEach(option => option.PauseTextAnimation());
                     }
                 }
             }
@@ -601,7 +616,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             // {
             //     submenuOption.SubmenuRequested += OnSubmenuRequested;
             // }
-            if (option is OptionsBase.MenuOptionBase baseOption)
+            if (option is MenuOptionBase baseOption)
             {
                 baseOption.Menu = this;
             }

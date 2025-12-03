@@ -93,7 +93,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// <summary>
     /// Pauses the dynamic text animation.
     /// </summary>
-    public void PauseTextAnimation()
+    public virtual void PauseTextAnimation()
     {
         dynamicTextUpdater?.Pause();
     }
@@ -101,7 +101,7 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// <summary>
     /// Resumes the dynamic text animation.
     /// </summary>
-    public void ResumeTextAnimation()
+    public virtual void ResumeTextAnimation()
     {
         dynamicTextUpdater?.Resume();
     }
@@ -537,12 +537,41 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     // }
 
     /// <summary>
+    /// Gets the input claim information for this option.
+    /// This is used internally to determine which keys this option claims for custom handling.
+    /// </summary>
+    internal MenuInputClaimInfo InputClaimInfo { get; set; } = MenuInputClaimInfo.Empty;
+
+    /// <summary>
+    /// Called when the claimed Exit key is pressed while this option is selected.
+    /// Override this method to handle custom Exit key behavior.
+    /// This method MUST be synchronous to ensure immediate UI feedback.
+    /// </summary>
+    /// <param name="player">The player who pressed the key.</param>
+    internal virtual void OnClaimedExit( IPlayer player ) { }
+
+    /// <summary>
+    /// Called when the claimed Use key is pressed while this option is selected.
+    /// Override this method to handle custom Use key behavior.
+    /// This method MUST be synchronous to ensure immediate UI feedback.
+    /// </summary>
+    /// <param name="player">The player who pressed the key.</param>
+    internal virtual void OnClaimedUse( IPlayer player ) { }
+
+    /// <summary>
+    /// Called to update custom animations for this option.
+    /// Override this method to implement custom animation logic.
+    /// </summary>
+    /// <param name="now">The current time.</param>
+    internal virtual void UpdateCustomAnimations( DateTime now ) { }
+
+    /// <summary>
     /// Updates dynamic text.
     /// </summary>
     /// <remarks>
     /// Called by MenuAPI's render loop.
     /// </remarks>
-    internal void UpdateDynamicText( DateTime now )
+    internal virtual void UpdateDynamicText( DateTime now )
     {
         dynamicTextUpdater?.TryUpdate(now);
     }

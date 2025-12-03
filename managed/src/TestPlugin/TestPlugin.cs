@@ -890,7 +890,7 @@ public class TestPlugin : BasePlugin
             .Design.SetMaxVisibleItems(5)
             .Design.SetMenuTitle($"{HtmlGradient.GenerateGradientText("SwiftlyS2", "#00FA9A", "#F5FFFA")}")
             .Design.SetMenuTitleVisible(true)
-            .Design.SetMenuFooterVisible(false)
+            .Design.SetMenuFooterVisible(true)
             .Design.SetMenuFooterColor("#0F0")
             .Design.SetNavigationMarkerColor("#F0F8FFFF")
             .Design.SetVisualGuideLineColor("#FFFFFF")
@@ -912,7 +912,7 @@ public class TestPlugin : BasePlugin
                     .Build();
                 return menu;
             }))
-            .AddOption(new InputMenuOption("1234567"))
+            .AddOption(new SelectorMenuOption<string>(["1234567", "一二三四五六七", "いちにさんよん", "One Two Three", "Один Два Три", "하나 둘 셋", "αβγδεζη"]) { TextStyle = MenuOptionTextStyle.TruncateBothEnds })
             .AddOption(new TextMenuOption() { Text = "12345678", TextStyle = MenuOptionTextStyle.ScrollLeftLoop })
             .AddOption(new TextMenuOption("123456789"))
             .AddOption(new TextMenuOption("1234567890") { Visible = false })

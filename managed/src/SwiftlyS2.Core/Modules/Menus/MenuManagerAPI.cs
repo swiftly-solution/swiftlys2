@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Collections.Concurrent;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Sounds;
@@ -155,7 +156,22 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             }
             else if (exitKey.HasFlag(@event.Key.ToKeyBind()))
             {
-                if (!menu.Configuration.DisableExit)
+                var option = menu.GetCurrentOption(player);
+                var optionBase = option as MenuOptionBase;
+                var claimInfo = optionBase?.InputClaimInfo ?? MenuInputClaimInfo.Empty;
+
+                if (claimInfo.ClaimsExit && optionBase != null)
+                {
+                    optionBase.OnClaimedExit(player);
+
+                    if (menu.Configuration.PlaySound && option!.PlaySound)
+                    {
+                        useSound.Recipients.AddRecipient(@event.PlayerId);
+                        _ = useSound.Emit();
+                        useSound.Recipients.RemoveRecipient(@event.PlayerId);
+                    }
+                }
+                else if (!menu.Configuration.DisableExit)
                 {
                     CloseMenuForPlayerInternal(player, menu, true);
 
@@ -170,7 +186,21 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             else if (useKey.HasFlag(@event.Key.ToKeyBind()))
             {
                 var option = menu.GetCurrentOption(player);
-                if (option != null && option.Enabled && option.GetEnabled(player) && option.IsClickTaskCompleted(player))
+                var optionBase = option as MenuOptionBase;
+                var claimInfo = optionBase?.InputClaimInfo ?? MenuInputClaimInfo.Empty;
+
+                if (claimInfo.ClaimsUse && optionBase != null)
+                {
+                    optionBase.OnClaimedUse(player);
+
+                    if (menu.Configuration.PlaySound && option!.PlaySound)
+                    {
+                        useSound.Recipients.AddRecipient(@event.PlayerId);
+                        _ = useSound.Emit();
+                        useSound.Recipients.RemoveRecipient(@event.PlayerId);
+                    }
+                }
+                else if (option != null && option.Enabled && option.GetEnabled(player) && option.IsClickTaskCompleted(player))
                 {
                     _ = Task.Run(async () => await option.OnClickAsync(player));
 
@@ -209,7 +239,22 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             }
             else if (KeyBind.A.HasFlag(@event.Key.ToKeyBind()))
             {
-                if (!menu.Configuration.DisableExit)
+                var option = menu.GetCurrentOption(player);
+                var optionBase = option as MenuOptionBase;
+                var claimInfo = optionBase?.InputClaimInfo ?? MenuInputClaimInfo.Empty;
+
+                if (claimInfo.ClaimsExit && optionBase != null)
+                {
+                    optionBase.OnClaimedExit(player);
+
+                    if (menu.Configuration.PlaySound && option!.PlaySound)
+                    {
+                        useSound.Recipients.AddRecipient(@event.PlayerId);
+                        _ = useSound.Emit();
+                        useSound.Recipients.RemoveRecipient(@event.PlayerId);
+                    }
+                }
+                else if (!menu.Configuration.DisableExit)
                 {
                     CloseMenuForPlayerInternal(player, menu, true);
 
@@ -224,7 +269,21 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
             else if (KeyBind.D.HasFlag(@event.Key.ToKeyBind()))
             {
                 var option = menu.GetCurrentOption(player);
-                if (option != null && option.Enabled && option.GetEnabled(player) && option.IsClickTaskCompleted(player))
+                var optionBase = option as MenuOptionBase;
+                var claimInfo = optionBase?.InputClaimInfo ?? MenuInputClaimInfo.Empty;
+
+                if (claimInfo.ClaimsUse && optionBase != null)
+                {
+                    optionBase.OnClaimedUse(player);
+
+                    if (menu.Configuration.PlaySound && option!.PlaySound)
+                    {
+                        useSound.Recipients.AddRecipient(@event.PlayerId);
+                        _ = useSound.Emit();
+                        useSound.Recipients.RemoveRecipient(@event.PlayerId);
+                    }
+                }
+                else if (option != null && option.Enabled && option.GetEnabled(player) && option.IsClickTaskCompleted(player))
                 {
                     _ = Task.Run(async () => await option.OnClickAsync(player));
 
