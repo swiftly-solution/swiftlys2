@@ -1421,6 +1421,111 @@ public class TestPlugin : BasePlugin
         ThrowLevel1();
     }
 
+    [Command("ex1")]
+    public void DeepExceptionCommand( ICommandContext _ )
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel1()
+        {
+            ThrowLevel2();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel2()
+        {
+            ThrowLevel3();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel3()
+        {
+            ThrowLevel4();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel4()
+        {
+            ThrowLevel5();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel5()
+        {
+            ThrowLevel6();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel6()
+        {
+            ThrowLevel7();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel7()
+        {
+            ThrowLevel8();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel8()
+        {
+            ThrowLevel9();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel9()
+        {
+            ThrowLevel10();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel10()
+        {
+            try
+            {
+                ThrowInnerLevel1();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Deep nested exception from level 10", ex);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowInnerLevel1()
+        {
+            try
+            {
+                ThrowInnerLevel2();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Inner exception level 1", ex);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowInnerLevel2()
+        {
+            try
+            {
+                ThrowInnerLevel3();
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Inner exception level 2", ex);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowInnerLevel3()
+        {
+            throw new NullReferenceException("Root cause exception");
+        }
+
+        ThrowLevel1();
+    }
+
     public override void Unload()
     {
         Console.WriteLine("TestPlugin unloaded");
