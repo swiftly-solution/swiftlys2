@@ -52,7 +52,10 @@ internal class SwiftlyLogger( string categoryName, string contextName ) : ILogge
         if (exception != null)
         {
             FileLogger.LogException(exception, exception.Message);
+            // Temporarily use a reasonable width for exception output to avoid visual empty lines
+            AnsiConsole.Profile.Width = 200;
             AnsiConsole.WriteException(exception);
+            AnsiConsole.Profile.Width = 13337;
         }
 
         AnsiConsole.Reset();

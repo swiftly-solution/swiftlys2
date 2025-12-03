@@ -14,6 +14,7 @@ using SwiftlyS2.Shared.Plugins;
 using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Memory;
@@ -1134,6 +1135,117 @@ public class TestPlugin : BasePlugin
             .Where(p => p.PlayerID != player.PlayerID)
             .ToList()
             .ForEach(targetPlayer => context.Reply($"Line of sight to {targetPlayer.Controller!.PlayerName}: {player.PlayerPawn!.HasLineOfSight(targetPlayer.PlayerPawn!)}"));
+    }
+
+    [Command("ex")]
+    public void ExceptionCommand( ICommandContext context )
+    {
+        throw new Exception();
+    }
+
+    [Command("ex1")]
+    public void DeepExceptionCommand( ICommandContext _ )
+    {
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel1()
+        {
+            ThrowLevel2();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel2()
+        {
+            ThrowLevel3();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel3()
+        {
+            ThrowLevel4();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel4()
+        {
+            ThrowLevel5();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel5()
+        {
+            ThrowLevel6();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel6()
+        {
+            ThrowLevel7();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel7()
+        {
+            ThrowLevel8();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel8()
+        {
+            ThrowLevel9();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel9()
+        {
+            ThrowLevel10();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowLevel10()
+        {
+            try
+            {
+                ThrowInnerLevel1();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Deep nested exception from level 10", ex);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowInnerLevel1()
+        {
+            try
+            {
+                ThrowInnerLevel2();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Inner exception level 1", ex);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowInnerLevel2()
+        {
+            try
+            {
+                ThrowInnerLevel3();
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Inner exception level 2", ex);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void ThrowInnerLevel3()
+        {
+            throw new NullReferenceException("Root cause exception");
+        }
+
+        ThrowLevel1();
     }
 
     public override void Unload()
