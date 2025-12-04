@@ -450,55 +450,25 @@ public class TestPlugin : BasePlugin
                await Task.Delay(1000);
                Console.WriteLine("ABC: "+Thread.CurrentThread.ManagedThreadId);
                Console.WriteLine("\n");
-               await Core.Scheduler.NextTickAsync(() =>
+               try
                {
-                   using var se = new SoundEvent() {
-                       Name = "123",
+                   using var se = new SoundEvent();
+                   se.Name = "Weapon_AK47.Single";
+                   for (int i = 0; i < 1000; i++)
+                   {
+                       se.EmitAsync();
+                   }
 
-                   };
 
-                   se.Emit();
-
-                   Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-                   Console.WriteLine("\n");
-                   Console.WriteLine(DateTime.Now.Nanosecond);
-                   Console.WriteLine("\n");
-                   Console.WriteLine(Core.Engine.GlobalVars.TickCount);
-                   Console.WriteLine("\n");
-               });
-               await Task.Delay(500);
-               Console.WriteLine("ABC: "+Thread.CurrentThread.ManagedThreadId);
-               Console.WriteLine("\n");
-
-               await Core.Scheduler.NextTickAsync(() =>
+                   await Task.Delay(1000);
+                   se.Dispose();
+                   Console.WriteLine(se.Name);
+               }
+               catch (Exception e)
                {
-                   using var se = new SoundEvent() {
-                       Name = "123",
-                   };
+                   Console.WriteLine(e.Message);
+               }
 
-                   se.Emit();
-                   Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-                   Console.WriteLine("\n");
-                   Console.WriteLine(DateTime.Now.Nanosecond);
-                   Console.WriteLine("\n");
-                   Console.WriteLine(Core.Engine.GlobalVars.TickCount);
-                   Console.WriteLine("\n");
-               });
-
-               await Core.Scheduler.NextTickAsync(() =>
-               {
-                   using var se = new SoundEvent() {
-                       Name = "123",
-                   };
-
-                   se.Emit();
-                   Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-                   Console.WriteLine("\n");
-                   Console.WriteLine(DateTime.Now.Nanosecond);
-                   Console.WriteLine("\n");
-                   Console.WriteLine(Core.Engine.GlobalVars.TickCount);
-                   Console.WriteLine("\n");
-               });
 
            });
     }

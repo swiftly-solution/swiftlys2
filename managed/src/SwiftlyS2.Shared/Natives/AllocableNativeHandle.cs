@@ -4,20 +4,31 @@ using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 using SwiftlyS2.Shared.Natives;
 
-public abstract class AllocableNativeHandle : SafeHandleZeroOrMinusOneIsInvalid, INativeHandle {
+public abstract class AllocableNativeHandle : SafeHandleZeroOrMinusOneIsInvalid, INativeHandle
+{
+    public bool IsValid {
+        get => !IsInvalid;
+    }
 
-  public bool IsValid { get => !IsInvalid; }
+    protected AllocableNativeHandle( nint handle, bool ownsHandle ) : base(ownsHandle)
+    {
+        SetHandle(handle);
+    }
 
-  protected AllocableNativeHandle(nint handle, bool ownsHandle) : base(ownsHandle) {
-    SetHandle(handle);
-  }
+    public nint Address =>
+        IsInvalid ? throw new ObjectDisposedException(GetType().FullName) : DangerousGetHandle();
 
-  public nint Address => DangerousGetHandle();
+    protected abstract bool Free();
 
-  protected abstract bool Free();
+    protected override bool ReleaseHandle()
+    {
+        var result = Free();
+        if (result)
+        {
+            SetHandle(0);
+            SetHandleAsInvalid();
+        }
 
-  protected override bool ReleaseHandle()
-  {
-      return Free();
-  }
+        return result;
+    }
 }
