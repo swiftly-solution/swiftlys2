@@ -1421,6 +1421,13 @@ public class TestPlugin : BasePlugin
         ThrowLevel1();
     }
 
+    [Command("cmt")]
+    [CommandAlias("cmat")]
+    public void CommandTestCommand( ICommandContext context )
+    {
+        Console.WriteLine(context);
+    }
+
     [Command("ex1")]
     public void DeepExceptionCommand( ICommandContext _ )
     {
