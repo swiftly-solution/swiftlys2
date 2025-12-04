@@ -1138,6 +1138,12 @@ public class TestPlugin : BasePlugin
             .ForEach(targetPlayer => context.Reply($"Line of sight to {targetPlayer.Controller!.PlayerName}: {player.PlayerPawn!.HasLineOfSight(targetPlayer.PlayerPawn!)}"));
     }
 
+    [Command("cmt")]
+    public void CommandTestCommand( ICommandContext context )
+    {
+        Console.WriteLine(context);
+    }
+
     [Command("ex1")]
     public void DeepExceptionCommand( ICommandContext _ )
     {

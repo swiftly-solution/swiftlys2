@@ -15,7 +15,7 @@ public interface ICommandContext
     public IPlayer? Sender { get; }
 
     /// <summary>
-    /// Gets the command name itself.
+    /// Gets the command prefix.
     /// </summary>
     public string Prefix { get; }
 
@@ -23,6 +23,11 @@ public interface ICommandContext
     /// Gets a value indicating whether the command should be executed silently without broadcasting to other players.
     /// </summary>
     public bool IsSlient { get; }
+
+    /// <summary>
+    /// Gets the command name itself.
+    /// </summary>
+    public string CommandName { get; }
 
     /// <summary>
     /// Gets the array of arguments passed with the command.
