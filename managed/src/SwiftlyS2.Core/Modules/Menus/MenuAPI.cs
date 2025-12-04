@@ -372,8 +372,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 .Skip(startIndex)
                 .Take(maxVisibleItems)
                 .ToList()
-                .AsReadOnly()
-            ;
+                .AsReadOnly();
 
         return (visibleOptions, arrowPosition);
     }

@@ -861,26 +861,47 @@ public class TestPlugin : BasePlugin
         // };
     }
 
+    private string? boundText = null;
+
+    [Command("cbt")]
+    public void ChangeBoundText( ICommandContext _ )
+    {
+        boundText = Guid.NewGuid().ToString();
+    }
+
     [Command("rmt")]
     public void RefactoredMenuTestCommand( ICommandContext context )
     {
-        var button = new ButtonMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 向这广袤世界致以温柔问候", "#FFE4E1", "#FFC0CB", "#FF69B4")) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop/*, CloseAfterClick = true*/ };
-        button.Click += ( sender, args ) =>
+        var mtoggle = new ToggleMenuOption("12");
+        mtoggle.ValueChanged += ( sender, args ) =>
         {
-            args.Player.SendMessage(MessageType.Chat, "Swiftlys2 向这广袤世界致以温柔问候");
-            button.Enabled = false;
-            _ = Task.Run(async () =>
+            args.Player.SendChat($"OldValue: {args.OldValue}({args.OldValue.GetType().Name}), NewValue: {args.NewValue}({args.NewValue.GetType().Name})");
+        };
+
+        var mtext = new TextMenuOption("123456789") { Enabled = true, BindingText = () => boundText };
+        mtext.Click += ( sender, args ) =>
+        {
+            boundText = null;
+            if (sender is MenuOptionBase option)
             {
-                await Task.Delay(1000);
-                button.Enabled = true;
-            });
+                option.Text = $"-> {Guid.NewGuid()}";
+            }
             return ValueTask.CompletedTask;
         };
 
-        var toggle = new ToggleMenuOption("12");
-        toggle.ValueChanged += ( sender, args ) =>
+        var mbutton = new ButtonMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 向这广袤世界致以温柔问候", "#FFE4E1", "#FFC0CB", "#FF69B4")) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop/*, CloseAfterClick = true*/ };
+        mbutton.Click += ( sender, args ) =>
         {
-            args.Player.SendChat($"OldValue: {args.OldValue}({args.OldValue.GetType().Name}), NewValue: {args.NewValue}({args.NewValue.GetType().Name})");
+            Core.Scheduler.NextTick(() => args.Player.SendMessage(MessageType.Chat, "Swiftlys2 向这广袤世界致以温柔问候"));
+
+            mbutton.Enabled = false;
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                mbutton.Enabled = true;
+            });
+
+            return ValueTask.CompletedTask;
         };
 
         var player = context.Sender!;
@@ -899,7 +920,7 @@ public class TestPlugin : BasePlugin
             .Design.EnableAutoAdjustVisibleItems()
             .Design.SetGlobalScrollStyle(MenuOptionScrollStyle.WaitingCenter)
             .AddOption(new TextMenuOption("1") { Visible = false })
-            .AddOption(toggle)
+            .AddOption(mtoggle)
             .AddOption(new ChoiceMenuOption("123", ["Option 1", "Option 2", "Option 3"]))
             .AddOption(new SliderMenuOption("1234") { Comment = "This is a slider" })
             .AddOption(new ProgressBarMenuOption("12345", () => (float)new Random().NextDouble(), multiLine: false))
@@ -915,9 +936,9 @@ public class TestPlugin : BasePlugin
             }))
             .AddOption(new SelectorMenuOption<string>(["1234567", "一二三四五六七", "いちにさんよん", "One Two Three", "Один Два Три", "하나 둘 셋", "αβγδεζη"]) { TextStyle = MenuOptionTextStyle.TruncateBothEnds })
             .AddOption(new TextMenuOption() { Text = "12345678", TextStyle = MenuOptionTextStyle.ScrollLeftLoop })
-            .AddOption(new TextMenuOption("123456789"))
+            .AddOption(mtext)
             .AddOption(new TextMenuOption("1234567890") { Visible = false })
-            .AddOption(button)
+            .AddOption(mbutton)
             .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 からこの広大なる世界へ温かい挨拶を", "#FFE5CC", "#FFAB91", "#FF7043")) { TextStyle = MenuOptionTextStyle.ScrollRightLoop })
             .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 가 이 넓은 세상에 따뜻한 인사를 전합니다", "#E6E6FA", "#00FFFF", "#FF1493")) { TextStyle = MenuOptionTextStyle.ScrollLeftFade })
             .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 приветствует этот прекрасный мир", "#AFEEEE", "#7FFFD4", "#40E0D0")) { TextStyle = MenuOptionTextStyle.ScrollRightFade })
