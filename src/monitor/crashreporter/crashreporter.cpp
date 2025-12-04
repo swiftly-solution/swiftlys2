@@ -508,10 +508,8 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             crashReport["memory"]["memoryLoad"] = memStatus.dwMemoryLoad;
         }
 #else
-        write(STDOUT_FILENO, "[DEBUG] 1: Linux branch start\n", 31);
         crashReport["processId"] = getpid();
         crashReport["threadId"] = static_cast<uint64_t>(pthread_self());
-        write(STDOUT_FILENO, "[DEBUG] 2: processId/threadId done\n", 35);
 
         // Helper to get signal name
         auto GetSignalName = [](int sig) -> std::string
@@ -519,19 +517,19 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             switch (sig)
             {
             case SIGSEGV:
-                return "SIGSEGV (Segmentation Fault)";
+                return "SIGSEGV";
             case SIGBUS:
-                return "SIGBUS (Bus Error)";
+                return "SIGBUS";
             case SIGFPE:
-                return "SIGFPE (Floating Point Exception)";
+                return "SIGFPE";
             case SIGILL:
-                return "SIGILL (Illegal Instruction)";
+                return "SIGILL";
             case SIGABRT:
-                return "SIGABRT (Abort)";
+                return "SIGABRT";
             case SIGTRAP:
-                return "SIGTRAP (Trace/Breakpoint Trap)";
+                return "SIGTRAP";
             case SIGSYS:
-                return "SIGSYS (Bad System Call)";
+                return "SIGSYS";
             default:
                 return fmt::format("Signal {}", sig);
             }
@@ -553,10 +551,10 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                 switch (g_linuxSigInfo->si_code)
                 {
                 case SEGV_MAPERR:
-                    accessType = "SEGV_MAPERR (Address not mapped)";
+                    accessType = "SEGV_MAPERR";
                     break;
                 case SEGV_ACCERR:
-                    accessType = "SEGV_ACCERR (Invalid permissions)";
+                    accessType = "SEGV_ACCERR";
                     break;
                 }
                 crashReport["exception"]["accessViolation"]["type"] = accessType;
@@ -569,7 +567,6 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             crashReport["exception"]["codeName"] = "Linux signal (context not captured)";
             crashReport["exception"]["address"] = "N/A";
         }
-        write(STDOUT_FILENO, "[DEBUG] 3: exception info done\n", 32);
 
         // Capture CPU register state from ucontext
         if (g_linuxContext)
@@ -595,7 +592,6 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             gpr["r13"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R13]));
             gpr["r14"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R14]));
             gpr["r15"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R15]));
-            write(STDOUT_FILENO, "[DEBUG] 4: GPR 64-bit done\n", 27);
 
             // Instruction Pointer
             crashReport["registers"]["rip"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RIP]));
@@ -619,7 +615,6 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             gpr32["edi"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rdi & 0xFFFFFFFF));
             gpr32["ebp"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rbp & 0xFFFFFFFF));
             gpr32["esp"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rsp & 0xFFFFFFFF));
-            write(STDOUT_FILENO, "[DEBUG] 5: GPR 32-bit done\n", 27);
 
             // Legacy 16-bit and 8-bit views
             auto& gprLow = crashReport["registers"]["legacy"];
@@ -635,7 +630,6 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             gprLow["bh"] = fmt::format("0x{:02X}", static_cast<uint8_t>((rbx >> 8) & 0xFF));
             gprLow["ch"] = fmt::format("0x{:02X}", static_cast<uint8_t>((rcx >> 8) & 0xFF));
             gprLow["dh"] = fmt::format("0x{:02X}", static_cast<uint8_t>((rdx >> 8) & 0xFF));
-            write(STDOUT_FILENO, "[DEBUG] 6: legacy regs done\n", 28);
 
             // Segment registers
             auto& segments = crashReport["registers"]["segments"];
@@ -645,7 +639,6 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             segments["ds"] = "N/A"; // Not directly available in ucontext
             segments["es"] = "N/A";
             segments["ss"] = "N/A";
-            write(STDOUT_FILENO, "[DEBUG] 7: segments done\n", 25);
 
             // Flags register
             uint64_t rflags = static_cast<uint64_t>(gregs[REG_EFL]);
@@ -668,7 +661,6 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             flags["VIF"] = (rflags & 0x80000) ? 1 : 0;
             flags["VIP"] = (rflags & 0x100000) ? 1 : 0;
             flags["ID"] = (rflags & 0x200000) ? 1 : 0;
-            write(STDOUT_FILENO, "[DEBUG] 8: flags done\n", 22);
 
             // FPU/XMM registers from fpregs
             auto& xmm = crashReport["registers"]["xmm"];
@@ -707,16 +699,15 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                     xmmReg["full"] = "N/A";
                 }
             }
-            write(STDOUT_FILENO, "[DEBUG] 9: XMM done\n", 20);
 
             // Debug registers (not available from ucontext)
             auto& debug = crashReport["registers"]["debug"];
-            debug["dr0"] = "N/A (requires ptrace)";
-            debug["dr1"] = "N/A (requires ptrace)";
-            debug["dr2"] = "N/A (requires ptrace)";
-            debug["dr3"] = "N/A (requires ptrace)";
-            debug["dr6"] = "N/A (requires ptrace)";
-            debug["dr7"] = "N/A (requires ptrace)";
+            debug["dr0"] = "N/A";
+            debug["dr1"] = "N/A";
+            debug["dr2"] = "N/A";
+            debug["dr3"] = "N/A";
+            debug["dr6"] = "N/A";
+            debug["dr7"] = "N/A";
 
             // Control registers (not available from userspace)
             crashReport["registers"]["control"]["contextFlags"] = "Linux ucontext";
@@ -727,34 +718,22 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             stackInfo["rbp"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RBP]));
             uint64_t frameSize = static_cast<uint64_t>(gregs[REG_RBP]) - static_cast<uint64_t>(gregs[REG_RSP]);
             stackInfo["frameSize"] = fmt::format("0x{:X} ({} bytes)", frameSize, frameSize);
-            write(STDOUT_FILENO, "[DEBUG] 10: stack info done\n", 28);
 
             // Call stack using backtrace
-            write(STDOUT_FILENO, "[DEBUG] 10a: callstack start\n", 29);
             auto& callStack = crashReport["callstack"];
             auto& nativeStack = callStack["native"];
-            nativeStack["capture_method"] = "backtrace + dladdr";
-            write(STDOUT_FILENO, "[DEBUG] 10b: calling backtrace\n", 31);
+            nativeStack["captureMethod"] = "backtrace + dladdr";
 
             void* buffer[128];
             int nptrs = backtrace(buffer, 128);
-            write(STDOUT_FILENO, "[DEBUG] 10c: backtrace done, frames=", 36);
-            char numBuf[16];
-            int numLen = snprintf(numBuf, sizeof(numBuf), "%d\n", nptrs);
-            write(STDOUT_FILENO, numBuf, numLen);
 
             nativeStack["frameCount"] = nptrs;
 
             auto& frames = nativeStack["frames"];
             frames = nlohmann::json::array();
-            write(STDOUT_FILENO, "[DEBUG] 10d: frames array created\n", 34);
 
             for (int i = 0; i < nptrs; i++)
             {
-                char fBuf[32];
-                int fLen = snprintf(fBuf, sizeof(fBuf), "[DEBUG] frame %d\n", i);
-                write(STDOUT_FILENO, fBuf, fLen);
-
                 nlohmann::json frame;
                 frame["index"] = i;
                 frame["address"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(buffer[i]));
@@ -762,13 +741,11 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                 Dl_info dlInfo;
                 if (dladdr(buffer[i], &dlInfo))
                 {
-                    write(STDOUT_FILENO, "[DEBUG] dladdr ok\n", 18);
-                    frame["module"] = dlInfo.dli_fname ? dlInfo.dli_fname : "unknown";
+                    frame["module"] = dlInfo.dli_fname ? dlInfo.dli_fname : "UNKNOWN";
                     frame["baseAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_fbase));
 
                     if (dlInfo.dli_sname)
                     {
-                        write(STDOUT_FILENO, "[DEBUG] has sym\n", 16);
                         frame["symbol"] = dlInfo.dli_sname;
                         frame["symbolAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_saddr));
                         ptrdiff_t offset = reinterpret_cast<char*>(buffer[i]) - reinterpret_cast<char*>(dlInfo.dli_saddr);
@@ -776,21 +753,19 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                     }
                     else
                     {
-                        frame["symbol"] = "unknown";
+                        frame["symbol"] = "UNKNOWN";
                         ptrdiff_t offset = reinterpret_cast<char*>(buffer[i]) - reinterpret_cast<char*>(dlInfo.dli_fbase);
                         frame["offset"] = fmt::format("+0x{:X}", offset);
                     }
                 }
                 else
                 {
-                    frame["module"] = "unknown";
-                    frame["symbol"] = "unknown";
+                    frame["module"] = "UNKNOWN";
+                    frame["symbol"] = "UNKNOWN";
                 }
 
-                write(STDOUT_FILENO, "[DEBUG] push\n", 13);
                 frames.push_back(frame);
             }
-            write(STDOUT_FILENO, "[DEBUG] 11: callstack done\n", 27);
 
             // Managed stack placeholder
             auto& managedStack = callStack["managed"];
@@ -821,11 +796,11 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
 
                     if (stackStart + i == rspVal)
                     {
-                        stackData[fmt::format("0x{:016X}_note", stackStart + i)] = "RSP";
+                        stackData[fmt::format("0x{:016X}Note", stackStart + i)] = "RSP";
                     }
                     else if (stackStart + i == static_cast<uint64_t>(gregs[REG_RBP]))
                     {
-                        stackData[fmt::format("0x{:016X}_note", stackStart + i)] = "RBP";
+                        stackData[fmt::format("0x{:016X}Note", stackStart + i)] = "RBP";
                     }
                 }
                 catch (...)
@@ -833,11 +808,9 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                     stackData[fmt::format("0x{:016X}", stackStart + i)] = "UNREADABLE";
                 }
             }
-            write(STDOUT_FILENO, "[DEBUG] 12: stack memory done\n", 30);
         }
         else
         {
-            write(STDOUT_FILENO, "[DEBUG] 3b: no context\n", 23);
             // No context available
             auto& gpr = crashReport["registers"]["general"];
             gpr["rax"] = "N/A";
@@ -860,7 +833,7 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
 
             auto& callStack = crashReport["callstack"];
             auto& nativeStack = callStack["native"];
-            nativeStack["capture_method"] = "backtrace (no context)";
+            nativeStack["captureMethod"] = "backtrace (no context)";
 
             void* buffer[128];
             int nptrs = backtrace(buffer, 128);
@@ -877,13 +850,13 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                 Dl_info dlInfo;
                 if (dladdr(buffer[i], &dlInfo))
                 {
-                    frame["module"] = dlInfo.dli_fname ? dlInfo.dli_fname : "unknown";
-                    frame["symbol"] = dlInfo.dli_sname ? dlInfo.dli_sname : "unknown";
+                    frame["module"] = dlInfo.dli_fname ? dlInfo.dli_fname : "UNKNOWN";
+                    frame["symbol"] = dlInfo.dli_sname ? dlInfo.dli_sname : "UNKNOWN";
                 }
                 else
                 {
-                    frame["module"] = "unknown";
-                    frame["symbol"] = "unknown";
+                    frame["module"] = "UNKNOWN";
+                    frame["symbol"] = "UNKNOWN";
                 }
                 frames.push_back(frame);
             }
@@ -922,11 +895,13 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             _write(_fileno(stdout), msg, strlen(msg));
             _write(_fileno(stdout), jsonPath.c_str(), jsonPath.size());
             _write(_fileno(stdout), "\n", 1);
+            _exit(1);
 #else
             const char* msg = "[CrashReporter] Wrote crash report JSON to: ";
             write(STDOUT_FILENO, msg, strlen(msg));
             write(STDOUT_FILENO, jsonPath.c_str(), jsonPath.size());
             write(STDOUT_FILENO, "\n", 1);
+            _exit(1);
 #endif
         }
     }
