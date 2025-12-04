@@ -44,18 +44,22 @@
 #include <Windows.h>
 #include <io.h>
 #include <process.h>
-
 #else
 #include "client/linux/handler/exception_handler.h"
 #include "common/linux/linux_libc_support.h"
 #include "third_party/lss/linux_syscall_support.h"
+#include <cxxabi.h>
+#include <dlfcn.h>
+#include <execinfo.h>
 #include <linux/limits.h>
 #include <pthread.h>
 #include <signal.h>
 #include <sys/resource.h>
 #include <sys/sysinfo.h>
+#include <ucontext.h>
 #include <unistd.h>
-
+static siginfo_t* g_linuxSigInfo = nullptr;
+static ucontext_t* g_linuxContext = nullptr;
 #endif
 
 static std::string g_dumpPath;
@@ -507,145 +511,382 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
         crashReport["processId"] = getpid();
         crashReport["threadId"] = static_cast<uint64_t>(pthread_self());
 
-        // Exception details
-        crashReport["exception"]["code"] = "N/A";
-        crashReport["exception"]["codeName"] = "Linux signal (details in minidump)";
-        crashReport["exception"]["address"] = "N/A";
-        crashReport["exception"]["flags"] = "N/A";
-
-        // Access violation details placeholder
-        crashReport["exception"]["accessViolation"]["type"] = "N/A";
-        crashReport["exception"]["accessViolation"]["address"] = "N/A";
-
-        // General Purpose Registers (64-bit)
-        auto& gpr = crashReport["registers"]["general"];
-        gpr["rax"] = "N/A";
-        gpr["rbx"] = "N/A";
-        gpr["rcx"] = "N/A";
-        gpr["rdx"] = "N/A";
-        gpr["rsi"] = "N/A";
-        gpr["rdi"] = "N/A";
-        gpr["rbp"] = "N/A";
-        gpr["rsp"] = "N/A";
-        gpr["r8"] = "N/A";
-        gpr["r9"] = "N/A";
-        gpr["r10"] = "N/A";
-        gpr["r11"] = "N/A";
-        gpr["r12"] = "N/A";
-        gpr["r13"] = "N/A";
-        gpr["r14"] = "N/A";
-        gpr["r15"] = "N/A";
-
-        crashReport["registers"]["rip"] = "N/A";
-
-        // 32-bit register view
-        auto& gpr32 = crashReport["registers"]["general32"];
-        gpr32["eax"] = "N/A";
-        gpr32["ebx"] = "N/A";
-        gpr32["ecx"] = "N/A";
-        gpr32["edx"] = "N/A";
-        gpr32["esi"] = "N/A";
-        gpr32["edi"] = "N/A";
-        gpr32["ebp"] = "N/A";
-        gpr32["esp"] = "N/A";
-
-        // Legacy registers
-        auto& gprLow = crashReport["registers"]["legacy"];
-        gprLow["ax"] = "N/A";
-        gprLow["bx"] = "N/A";
-        gprLow["cx"] = "N/A";
-        gprLow["dx"] = "N/A";
-        gprLow["al"] = "N/A";
-        gprLow["bl"] = "N/A";
-        gprLow["cl"] = "N/A";
-        gprLow["dl"] = "N/A";
-        gprLow["ah"] = "N/A";
-        gprLow["bh"] = "N/A";
-        gprLow["ch"] = "N/A";
-        gprLow["dh"] = "N/A";
-
-        // Segment registers
-        auto& segments = crashReport["registers"]["segments"];
-        segments["cs"] = "N/A";
-        segments["ds"] = "N/A";
-        segments["es"] = "N/A";
-        segments["fs"] = "N/A";
-        segments["gs"] = "N/A";
-        segments["ss"] = "N/A";
-
-        // Flags register
-        crashReport["registers"]["rflags"]["raw"] = "N/A";
-        auto& flags = crashReport["registers"]["rflags"]["bits"];
-        flags["CF"] = "N/A";
-        flags["PF"] = "N/A";
-        flags["AF"] = "N/A";
-        flags["ZF"] = "N/A";
-        flags["SF"] = "N/A";
-        flags["TF"] = "N/A";
-        flags["IF"] = "N/A";
-        flags["DF"] = "N/A";
-        flags["OF"] = "N/A";
-        flags["IOPL"] = "N/A";
-        flags["NT"] = "N/A";
-        flags["RF"] = "N/A";
-        flags["VM"] = "N/A";
-        flags["AC"] = "N/A";
-        flags["VIF"] = "N/A";
-        flags["VIP"] = "N/A";
-        flags["ID"] = "N/A";
-
-        // XMM registers structure
-        auto& xmm = crashReport["registers"]["xmm"];
-        xmm["mxcsr"] = "N/A";
-        for (int i = 0; i < 16; i++)
+        // Helper to get signal name
+        auto GetSignalName = [](int sig) -> std::string
         {
-            auto& xmmReg = xmm[fmt::format("xmm{}", i)];
-            xmmReg["low"] = "N/A";
-            xmmReg["high"] = "N/A";
-            xmmReg["full"] = "N/A";
+            switch (sig)
+            {
+            case SIGSEGV:
+                return "SIGSEGV (Segmentation Fault)";
+            case SIGBUS:
+                return "SIGBUS (Bus Error)";
+            case SIGFPE:
+                return "SIGFPE (Floating Point Exception)";
+            case SIGILL:
+                return "SIGILL (Illegal Instruction)";
+            case SIGABRT:
+                return "SIGABRT (Abort)";
+            case SIGTRAP:
+                return "SIGTRAP (Trace/Breakpoint Trap)";
+            case SIGSYS:
+                return "SIGSYS (Bad System Call)";
+            default:
+                return fmt::format("Signal {}", sig);
+            }
+        };
+
+        // Exception details from saved signal info
+        if (g_linuxSigInfo)
+        {
+            crashReport["exception"]["code"] = fmt::format("0x{:08X}", g_linuxSigInfo->si_signo);
+            crashReport["exception"]["codeName"] = GetSignalName(g_linuxSigInfo->si_signo);
+            crashReport["exception"]["address"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(g_linuxSigInfo->si_addr));
+            crashReport["exception"]["errno"] = g_linuxSigInfo->si_errno;
+            crashReport["exception"]["siCode"] = g_linuxSigInfo->si_code;
+
+            // For SIGSEGV, provide access violation details
+            if (g_linuxSigInfo->si_signo == SIGSEGV)
+            {
+                const char* accessType = "UNKNOWN";
+                switch (g_linuxSigInfo->si_code)
+                {
+                case SEGV_MAPERR:
+                    accessType = "SEGV_MAPERR (Address not mapped)";
+                    break;
+                case SEGV_ACCERR:
+                    accessType = "SEGV_ACCERR (Invalid permissions)";
+                    break;
+                }
+                crashReport["exception"]["accessViolation"]["type"] = accessType;
+                crashReport["exception"]["accessViolation"]["address"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(g_linuxSigInfo->si_addr));
+            }
         }
-        xmm["fpuControlWord"] = "N/A";
-        xmm["fpuStatusWord"] = "N/A";
-        xmm["fpuTagWord"] = "N/A";
+        else
+        {
+            crashReport["exception"]["code"] = "N/A";
+            crashReport["exception"]["codeName"] = "Linux signal (context not captured)";
+            crashReport["exception"]["address"] = "N/A";
+        }
 
-        // Debug registers
-        auto& debug = crashReport["registers"]["debug"];
-        debug["dr0"] = "N/A";
-        debug["dr1"] = "N/A";
-        debug["dr2"] = "N/A";
-        debug["dr3"] = "N/A";
-        debug["dr6"] = "N/A";
-        debug["dr7"] = "N/A";
+        // Capture CPU register state from ucontext
+        if (g_linuxContext)
+        {
+            mcontext_t* mctx = &g_linuxContext->uc_mcontext;
+            greg_t* gregs = mctx->gregs;
 
-        // Control registers
-        crashReport["registers"]["control"]["contextFlags"] = "N/A";
+            // General Purpose Registers (64-bit)
+            auto& gpr = crashReport["registers"]["general"];
+            gpr["rax"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RAX]));
+            gpr["rbx"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RBX]));
+            gpr["rcx"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RCX]));
+            gpr["rdx"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RDX]));
+            gpr["rsi"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RSI]));
+            gpr["rdi"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RDI]));
+            gpr["rbp"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RBP]));
+            gpr["rsp"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RSP]));
+            gpr["r8"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R8]));
+            gpr["r9"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R9]));
+            gpr["r10"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R10]));
+            gpr["r11"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R11]));
+            gpr["r12"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R12]));
+            gpr["r13"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R13]));
+            gpr["r14"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R14]));
+            gpr["r15"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_R15]));
 
-        // Stack pointer info
-        auto& stack = crashReport["registers"]["stackInfo"];
-        stack["rsp"] = "N/A";
-        stack["rbp"] = "N/A";
-        stack["frameSize"] = "N/A";
+            // Instruction Pointer
+            crashReport["registers"]["rip"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RIP]));
 
-        // Call stack structure
-        auto& callStack = crashReport["callstack"];
+            // Lower 32-bit portions (derived from 64-bit registers)
+            uint64_t rax = static_cast<uint64_t>(gregs[REG_RAX]);
+            uint64_t rbx = static_cast<uint64_t>(gregs[REG_RBX]);
+            uint64_t rcx = static_cast<uint64_t>(gregs[REG_RCX]);
+            uint64_t rdx = static_cast<uint64_t>(gregs[REG_RDX]);
+            uint64_t rsi = static_cast<uint64_t>(gregs[REG_RSI]);
+            uint64_t rdi = static_cast<uint64_t>(gregs[REG_RDI]);
+            uint64_t rbp = static_cast<uint64_t>(gregs[REG_RBP]);
+            uint64_t rsp = static_cast<uint64_t>(gregs[REG_RSP]);
 
-        // Native stack
-        auto& nativeStack = callStack["native"];
-        nativeStack["capture_method"] = "backtrace";
-        nativeStack["frames"] = nlohmann::json::array();
-        nativeStack["frameCount"] = 0;
-        nativeStack["symbolInitWarning"] = "Limited stack trace in signal handler context";
+            auto& gpr32 = crashReport["registers"]["general32"];
+            gpr32["eax"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rax & 0xFFFFFFFF));
+            gpr32["ebx"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rbx & 0xFFFFFFFF));
+            gpr32["ecx"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rcx & 0xFFFFFFFF));
+            gpr32["edx"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rdx & 0xFFFFFFFF));
+            gpr32["esi"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rsi & 0xFFFFFFFF));
+            gpr32["edi"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rdi & 0xFFFFFFFF));
+            gpr32["ebp"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rbp & 0xFFFFFFFF));
+            gpr32["esp"] = fmt::format("0x{:08X}", static_cast<uint32_t>(rsp & 0xFFFFFFFF));
 
-        // Managed stack placeholder
-        auto& managedStack = callStack["managed"];
-        managedStack["msg"] = "Managed stack capture not yet implemented";
+            // Legacy 16-bit and 8-bit views
+            auto& gprLow = crashReport["registers"]["legacy"];
+            gprLow["ax"] = fmt::format("0x{:04X}", static_cast<uint16_t>(rax & 0xFFFF));
+            gprLow["bx"] = fmt::format("0x{:04X}", static_cast<uint16_t>(rbx & 0xFFFF));
+            gprLow["cx"] = fmt::format("0x{:04X}", static_cast<uint16_t>(rcx & 0xFFFF));
+            gprLow["dx"] = fmt::format("0x{:04X}", static_cast<uint16_t>(rdx & 0xFFFF));
+            gprLow["al"] = fmt::format("0x{:02X}", static_cast<uint8_t>(rax & 0xFF));
+            gprLow["bl"] = fmt::format("0x{:02X}", static_cast<uint8_t>(rbx & 0xFF));
+            gprLow["cl"] = fmt::format("0x{:02X}", static_cast<uint8_t>(rcx & 0xFF));
+            gprLow["dl"] = fmt::format("0x{:02X}", static_cast<uint8_t>(rdx & 0xFF));
+            gprLow["ah"] = fmt::format("0x{:02X}", static_cast<uint8_t>((rax >> 8) & 0xFF));
+            gprLow["bh"] = fmt::format("0x{:02X}", static_cast<uint8_t>((rbx >> 8) & 0xFF));
+            gprLow["ch"] = fmt::format("0x{:02X}", static_cast<uint8_t>((rcx >> 8) & 0xFF));
+            gprLow["dh"] = fmt::format("0x{:02X}", static_cast<uint8_t>((rdx >> 8) & 0xFF));
 
-        // Stack memory dump
-        auto& stackMemory = crashReport["stackMemory"];
-        stackMemory["dumpStart"] = "N/A";
-        stackMemory["dumpSize"] = 0;
-        stackMemory["data"] = nlohmann::json::object();
-        stackMemory["note"] = "Stack memory dump not available in signal handler context";
+            // Segment registers
+            auto& segments = crashReport["registers"]["segments"];
+            segments["cs"] = fmt::format("0x{:04X}", static_cast<uint16_t>(gregs[REG_CSGSFS] & 0xFFFF));
+            segments["gs"] = fmt::format("0x{:04X}", static_cast<uint16_t>((gregs[REG_CSGSFS] >> 16) & 0xFFFF));
+            segments["fs"] = fmt::format("0x{:04X}", static_cast<uint16_t>((gregs[REG_CSGSFS] >> 32) & 0xFFFF));
+            segments["ds"] = "N/A"; // Not directly available in ucontext
+            segments["es"] = "N/A";
+            segments["ss"] = "N/A";
+
+            // Flags register
+            uint64_t rflags = static_cast<uint64_t>(gregs[REG_EFL]);
+            crashReport["registers"]["rflags"]["raw"] = fmt::format("0x{:016X}", rflags);
+            auto& flags = crashReport["registers"]["rflags"]["bits"];
+            flags["CF"] = (rflags & 0x0001) ? 1 : 0;
+            flags["PF"] = (rflags & 0x0004) ? 1 : 0;
+            flags["AF"] = (rflags & 0x0010) ? 1 : 0;
+            flags["ZF"] = (rflags & 0x0040) ? 1 : 0;
+            flags["SF"] = (rflags & 0x0080) ? 1 : 0;
+            flags["TF"] = (rflags & 0x0100) ? 1 : 0;
+            flags["IF"] = (rflags & 0x0200) ? 1 : 0;
+            flags["DF"] = (rflags & 0x0400) ? 1 : 0;
+            flags["OF"] = (rflags & 0x0800) ? 1 : 0;
+            flags["IOPL"] = static_cast<int>((rflags >> 12) & 0x3);
+            flags["NT"] = (rflags & 0x4000) ? 1 : 0;
+            flags["RF"] = (rflags & 0x10000) ? 1 : 0;
+            flags["VM"] = (rflags & 0x20000) ? 1 : 0;
+            flags["AC"] = (rflags & 0x40000) ? 1 : 0;
+            flags["VIF"] = (rflags & 0x80000) ? 1 : 0;
+            flags["VIP"] = (rflags & 0x100000) ? 1 : 0;
+            flags["ID"] = (rflags & 0x200000) ? 1 : 0;
+
+            // FPU/XMM registers from fpregs
+            auto& xmm = crashReport["registers"]["xmm"];
+            if (mctx->fpregs)
+            {
+                _fpstate* fpregs = mctx->fpregs;
+                xmm["mxcsr"] = fmt::format("0x{:08X}", fpregs->mxcsr);
+                xmm["fpuControlWord"] = fmt::format("0x{:04X}", fpregs->cwd);
+                xmm["fpuStatusWord"] = fmt::format("0x{:04X}", fpregs->swd);
+                xmm["fpuTagWord"] = fmt::format("0x{:04X}", fpregs->ftw);
+
+                for (int i = 0; i < 16; i++)
+                {
+                    auto& xmmReg = xmm[fmt::format("xmm{}", i)];
+                    uint64_t low = fpregs->_xmm[i].element[0];
+                    uint64_t high = fpregs->_xmm[i].element[1];
+                    xmmReg["low"] = fmt::format("0x{:016X}", low);
+                    xmmReg["high"] = fmt::format("0x{:016X}", high);
+                    xmmReg["full"] = fmt::format("0x{:016X}{:016X}", high, low);
+                }
+            }
+            else
+            {
+                xmm["mxcsr"] = "N/A";
+                xmm["fpuControlWord"] = "N/A";
+                xmm["fpuStatusWord"] = "N/A";
+                xmm["fpuTagWord"] = "N/A";
+                for (int i = 0; i < 16; i++)
+                {
+                    auto& xmmReg = xmm[fmt::format("xmm{}", i)];
+                    xmmReg["low"] = "N/A";
+                    xmmReg["high"] = "N/A";
+                    xmmReg["full"] = "N/A";
+                }
+            }
+
+            // Debug registers (not available from ucontext)
+            auto& debug = crashReport["registers"]["debug"];
+            debug["dr0"] = "N/A (requires ptrace)";
+            debug["dr1"] = "N/A (requires ptrace)";
+            debug["dr2"] = "N/A (requires ptrace)";
+            debug["dr3"] = "N/A (requires ptrace)";
+            debug["dr6"] = "N/A (requires ptrace)";
+            debug["dr7"] = "N/A (requires ptrace)";
+
+            // Control registers (not available from userspace)
+            crashReport["registers"]["control"]["contextFlags"] = "Linux ucontext";
+
+            // Stack pointer info
+            auto& stackInfo = crashReport["registers"]["stackInfo"];
+            stackInfo["rsp"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RSP]));
+            stackInfo["rbp"] = fmt::format("0x{:016X}", static_cast<uint64_t>(gregs[REG_RBP]));
+            uint64_t frameSize = static_cast<uint64_t>(gregs[REG_RBP]) - static_cast<uint64_t>(gregs[REG_RSP]);
+            stackInfo["frameSize"] = fmt::format("0x{:X} ({} bytes)", frameSize, frameSize);
+
+            // Call stack using backtrace
+            auto& callStack = crashReport["callstack"];
+            auto& nativeStack = callStack["native"];
+            nativeStack["capture_method"] = "backtrace + dladdr";
+
+            void* buffer[128];
+            int nptrs = backtrace(buffer, 128);
+            nativeStack["frameCount"] = nptrs;
+
+            auto& frames = nativeStack["frames"];
+            frames = nlohmann::json::array();
+
+            for (int i = 0; i < nptrs; i++)
+            {
+                nlohmann::json frame;
+                frame["index"] = i;
+                frame["address"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(buffer[i]));
+
+                Dl_info dlInfo;
+                if (dladdr(buffer[i], &dlInfo))
+                {
+                    frame["module"] = dlInfo.dli_fname ? dlInfo.dli_fname : "unknown";
+                    frame["baseAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_fbase));
+
+                    if (dlInfo.dli_sname)
+                    {
+                        int status = 0;
+                        char* demangled = abi::__cxa_demangle(dlInfo.dli_sname, nullptr, nullptr, &status);
+                        if (status == 0 && demangled)
+                        {
+                            frame["symbol"] = demangled;
+                            frame["mangledSymbol"] = dlInfo.dli_sname;
+                            free(demangled);
+                        }
+                        else
+                        {
+                            frame["symbol"] = dlInfo.dli_sname;
+                        }
+                        frame["symbolAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_saddr));
+                        ptrdiff_t offset = reinterpret_cast<char*>(buffer[i]) - reinterpret_cast<char*>(dlInfo.dli_saddr);
+                        frame["offset"] = fmt::format("+0x{:X}", offset);
+                    }
+                    else
+                    {
+                        frame["symbol"] = "unknown";
+                        ptrdiff_t offset = reinterpret_cast<char*>(buffer[i]) - reinterpret_cast<char*>(dlInfo.dli_fbase);
+                        frame["offset"] = fmt::format("+0x{:X}", offset);
+                    }
+                }
+                else
+                {
+                    frame["module"] = "unknown";
+                    frame["symbol"] = "unknown";
+                }
+
+                frames.push_back(frame);
+            }
+
+            // Managed stack placeholder
+            auto& managedStack = callStack["managed"];
+            managedStack["msg"] = "Managed stack capture not yet implemented";
+
+            // Stack memory dump
+            auto& stackMemory = crashReport["stackMemory"];
+            uint64_t rspVal = static_cast<uint64_t>(gregs[REG_RSP]);
+            const size_t dumpSize = 256;
+            const size_t beforeSize = 64;
+            uint64_t stackStart = rspVal >= beforeSize ? rspVal - beforeSize : 0;
+
+            stackMemory["dumpStart"] = fmt::format("0x{:016X}", stackStart);
+            stackMemory["dumpSize"] = dumpSize;
+
+            auto& stackData = stackMemory["data"];
+            uint8_t* stackPtr = reinterpret_cast<uint8_t*>(stackStart);
+
+            // Carefully read stack memory (may segfault if stack is corrupted)
+            for (size_t i = 0; i < dumpSize && i < 256; i += 8)
+            {
+                // Use mincore or similar to check if memory is readable would be ideal,
+                // but for simplicity we'll just try to read
+                try
+                {
+                    uint64_t value = *reinterpret_cast<uint64_t*>(stackPtr + i);
+                    stackData[fmt::format("0x{:016X}", stackStart + i)] = fmt::format("0x{:016X}", value);
+
+                    if (stackStart + i == rspVal)
+                    {
+                        stackData[fmt::format("0x{:016X}_note", stackStart + i)] = "RSP";
+                    }
+                    else if (stackStart + i == static_cast<uint64_t>(gregs[REG_RBP]))
+                    {
+                        stackData[fmt::format("0x{:016X}_note", stackStart + i)] = "RBP";
+                    }
+                }
+                catch (...)
+                {
+                    stackData[fmt::format("0x{:016X}", stackStart + i)] = "UNREADABLE";
+                }
+            }
+        }
+        else
+        {
+            // No context available
+            auto& gpr = crashReport["registers"]["general"];
+            gpr["rax"] = "N/A";
+            gpr["rbx"] = "N/A";
+            gpr["rcx"] = "N/A";
+            gpr["rdx"] = "N/A";
+            gpr["rsi"] = "N/A";
+            gpr["rdi"] = "N/A";
+            gpr["rbp"] = "N/A";
+            gpr["rsp"] = "N/A";
+            gpr["r8"] = "N/A";
+            gpr["r9"] = "N/A";
+            gpr["r10"] = "N/A";
+            gpr["r11"] = "N/A";
+            gpr["r12"] = "N/A";
+            gpr["r13"] = "N/A";
+            gpr["r14"] = "N/A";
+            gpr["r15"] = "N/A";
+            crashReport["registers"]["rip"] = "N/A";
+
+            auto& callStack = crashReport["callstack"];
+            auto& nativeStack = callStack["native"];
+            nativeStack["capture_method"] = "backtrace (no context)";
+
+            void* buffer[128];
+            int nptrs = backtrace(buffer, 128);
+            nativeStack["frameCount"] = nptrs;
+
+            auto& frames = nativeStack["frames"];
+            frames = nlohmann::json::array();
+            for (int i = 0; i < nptrs; i++)
+            {
+                nlohmann::json frame;
+                frame["index"] = i;
+                frame["address"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(buffer[i]));
+
+                Dl_info dlInfo;
+                if (dladdr(buffer[i], &dlInfo))
+                {
+                    frame["module"] = dlInfo.dli_fname ? dlInfo.dli_fname : "unknown";
+                    if (dlInfo.dli_sname)
+                    {
+                        int status = 0;
+                        char* demangled = abi::__cxa_demangle(dlInfo.dli_sname, nullptr, nullptr, &status);
+                        frame["symbol"] = (status == 0 && demangled) ? demangled : dlInfo.dli_sname;
+                        if (demangled)
+                        {
+                            free(demangled);
+                        }
+                    }
+                    else
+                    {
+                        frame["symbol"] = "unknown";
+                    }
+                }
+                else
+                {
+                    frame["module"] = "unknown";
+                    frame["symbol"] = "unknown";
+                }
+                frames.push_back(frame);
+            }
+
+            auto& stackMemory = crashReport["stackMemory"];
+            stackMemory["dumpStart"] = "N/A";
+            stackMemory["dumpSize"] = 0;
+            stackMemory["data"] = nlohmann::json::object();
+            stackMemory["note"] = "Stack memory dump not available without context";
+        }
 
         crashReport["system"]["processorArchitecture"] = "x86_64";
         crashReport["system"]["numberOfProcessors"] = sysconf(_SC_NPROCESSORS_ONLN);
@@ -796,6 +1037,30 @@ void UnregisterCrashHandlers()
 static char g_linuxDumpPath[PATH_MAX];
 static google_breakpad::ExceptionHandler* g_exceptionHandler = nullptr;
 
+static siginfo_t g_savedSigInfo;
+static ucontext_t g_savedContext;
+
+static void CrashSignalHandler(int sig, siginfo_t* info, void* uctx)
+{
+    // Save context for later use in crash report
+    if (info)
+    {
+        memcpy(&g_savedSigInfo, info, sizeof(siginfo_t));
+        g_linuxSigInfo = &g_savedSigInfo;
+    }
+    if (uctx)
+    {
+        memcpy(&g_savedContext, uctx, sizeof(ucontext_t));
+        g_linuxContext = &g_savedContext;
+    }
+
+    // Let Breakpad handle the actual crash
+    if (g_exceptionHandler)
+    {
+        g_exceptionHandler->HandleSignal(sig, info, uctx);
+    }
+}
+
 static bool BreakpadDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* context, bool succeeded)
 {
     if (succeeded)
@@ -822,15 +1087,43 @@ void RegisterCrashHandlers()
     strncpy(g_linuxDumpPath, g_dumpPath.c_str(), sizeof(g_linuxDumpPath) - 1);
     g_linuxDumpPath[sizeof(g_linuxDumpPath) - 1] = '\0';
     google_breakpad::MinidumpDescriptor descriptor(g_linuxDumpPath);
-    g_exceptionHandler = new google_breakpad::ExceptionHandler(descriptor, nullptr, BreakpadDumpCallback, nullptr, true, -1);
+
+    // Create Breakpad handler but don't let it install signal handlers directly
+    g_exceptionHandler = new google_breakpad::ExceptionHandler(descriptor, nullptr, BreakpadDumpCallback, nullptr, false, -1);
+
+    // Install our own signal handlers that capture context first
+    struct sigaction sa;
+    memset(&sa, 0, sizeof(sa));
+    sa.sa_sigaction = CrashSignalHandler;
+    sa.sa_flags = SA_SIGINFO | SA_ONSTACK;
+    sigemptyset(&sa.sa_mask);
+
+    sigaction(SIGSEGV, &sa, nullptr);
+    sigaction(SIGBUS, &sa, nullptr);
+    sigaction(SIGFPE, &sa, nullptr);
+    sigaction(SIGILL, &sa, nullptr);
+    sigaction(SIGABRT, &sa, nullptr);
+    sigaction(SIGTRAP, &sa, nullptr);
+    sigaction(SIGSYS, &sa, nullptr);
 }
 
 void UnregisterCrashHandlers()
 {
+    signal(SIGSEGV, SIG_DFL);
+    signal(SIGBUS, SIG_DFL);
+    signal(SIGFPE, SIG_DFL);
+    signal(SIGILL, SIG_DFL);
+    signal(SIGABRT, SIG_DFL);
+    signal(SIGTRAP, SIG_DFL);
+    signal(SIGSYS, SIG_DFL);
+
     if (g_exceptionHandler)
     {
         delete g_exceptionHandler;
         g_exceptionHandler = nullptr;
     }
+
+    g_linuxSigInfo = nullptr;
+    g_linuxContext = nullptr;
 }
 #endif
