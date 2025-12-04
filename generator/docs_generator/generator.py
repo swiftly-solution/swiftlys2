@@ -4,6 +4,7 @@ import yaml
 import shutil
 
 
+
 SOURCE_DIR = "../../api"
 DEST_DIR = "../../docs"
 
