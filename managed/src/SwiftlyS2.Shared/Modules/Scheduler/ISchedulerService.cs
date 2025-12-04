@@ -10,10 +10,98 @@ public interface ISchedulerService
   public void NextTick( Action task );
 
   /// <summary>
+  /// Never use this! you should never calls async callback in next tick,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public void NextTick( Func<Task?> task );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in next tick,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public void NextTick<T>( Func<Task<T?>> task );
+
+  /// <summary>
+  /// Add a task to be executed on the next tick asynchronously.
+  /// </summary>
+  /// <param name="task">The task to execute.</param>
+  public Task NextTickAsync( Action task );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in next tick,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public void NextTickAsync( Func<Task?> task );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in next tick,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public void NextTickAsync<T>( Func<Task<T?>> task );
+
+  /// <summary>
+  /// Add a task to be executed on the next tick asynchronously.
+  /// </summary>
+  /// <param name="task">The task to execute.</param>
+  public Task<T> NextTickAsync<T>( Func<T> task );
+
+  /// <summary>
   /// Add a task to be executed on the next world update.
   /// </summary>
   /// <param name="task">The task to execute.</param>
   public void NextWorldUpdate( Action task );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in next world update,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public void NextWorldUpdate( Func<Task?> task );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in next world update,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public void NextWorldUpdate<T>( Func<Task<T?>> task );
+
+  /// <summary>
+  /// Add a task to be executed on the next world update asynchronously.
+  /// </summary>
+  /// <param name="task">The task to execute.</param>
+  public Task NextWorldUpdateAsync( Action task );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in next world update,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public void NextWorldUpdateAsync( Func<Task?> task );
+
+  /// <summary>
+  /// Never use this! you should never calls async callback in next world update,
+  /// because async callback have chance to run in async context, which breaks the the synchronization safety this function gives.
+  /// </summary>
+  /// <exception cref="InvalidOperationException">Thrown when this method is called.</exception>
+  [Obsolete("Please remove the async modifier on your callback for safety reason. See comments for more details.")]
+  public Task<T> NextWorldUpdateAsync<T>( Func<Task<T?>> task );
+
+  /// <summary>
+  /// Add a task to be executed on the next world update asynchronously.
+  /// </summary>
+  /// <param name="task">The task to execute.</param>
+  public Task<T> NextWorldUpdateAsync<T>( Func<T> task );
 
   /// <summary>
   /// Add a delayed task to the scheduler.

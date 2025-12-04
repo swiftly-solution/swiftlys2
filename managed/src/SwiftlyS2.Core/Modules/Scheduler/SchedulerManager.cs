@@ -20,9 +20,11 @@ internal class Timer
 
 internal static class SchedulerManager
 {
-
     private static readonly Lock _lock = new();
     private static long _currentTick = 0;
+
+    private static readonly ConcurrentQueue<Action> _asyncOnTickTaskQueue = new();
+    private static readonly ConcurrentQueue<Action> _asyncOnWorldUpdateTaskQueue = new();
 
     // Min-heap keyed by DueTick
     private static readonly PriorityQueue<Timer, long> _timerQueue = new();
@@ -33,6 +35,29 @@ internal static class SchedulerManager
     private static readonly List<(Action action, CancellationToken ownerToken)> _nextWorldUpdateTasks = new();
 
     public static void OnWorldUpdate()
+    {
+        ExecuteOnWorldUpdateAsyncTasks();
+        ExecuteOnWorldUpdateTimers();
+    }
+
+    private static void ExecuteOnWorldUpdateAsyncTasks()
+    {
+        int batchCount = _asyncOnWorldUpdateTaskQueue.Count;
+        while (batchCount > 0 && _asyncOnWorldUpdateTaskQueue.TryDequeue(out var task))
+        {
+            batchCount--;
+            try
+            {
+                task.Invoke();
+            }
+            catch (Exception ex)
+            {
+                AnsiConsole.WriteException(ex);
+            }
+        }
+    }
+
+    private static void ExecuteOnWorldUpdateTimers()
     {
         List<(Action action, CancellationToken ownerToken)> nextWorldUpdateActions;
 
@@ -60,7 +85,31 @@ internal static class SchedulerManager
         }
     }
 
+
     public static void OnTick()
+    {
+        ExecuteOnTickAsyncTasks();
+        ExecuteOnTickTimers();
+    }
+
+    private static void ExecuteOnTickAsyncTasks()
+    {
+        int batchCount = _asyncOnTickTaskQueue.Count;
+        while (batchCount > 0 && _asyncOnTickTaskQueue.TryDequeue(out var task))
+        {
+            batchCount--;
+            try
+            {
+                task.Invoke();
+            }
+            catch (Exception ex)
+            {
+                AnsiConsole.WriteException(ex);
+            }
+        }
+    }
+
+    private static void ExecuteOnTickTimers()
     {
         List<(Action action, CancellationToken ownerToken)> nextTickActions;
         List<Timer> dueTimers = new();
@@ -130,9 +179,13 @@ internal static class SchedulerManager
                     {
                         timer.CancellationTokenSource.Cancel();
                     }
-                    catch (ObjectDisposedException) { }
+                    catch (ObjectDisposedException)
+                    {
+                    }
+
                     continue;
                 }
+
                 if (timer.CancellationTokenSource.IsCancellationRequested || timer.OwnerToken.IsCancellationRequested)
                 {
                     continue;
@@ -164,7 +217,8 @@ internal static class SchedulerManager
         }
     }
 
-    public static CancellationTokenSource AddTimer( int delayTick, int periodTick, Action task, CancellationToken ownerToken )
+    public static CancellationTokenSource AddTimer( int delayTick, int periodTick, Action task,
+        CancellationToken ownerToken )
     {
         var cancellationTokenSource = new CancellationTokenSource();
         var timer = new Timer {
@@ -182,5 +236,121 @@ internal static class SchedulerManager
         }
 
         return cancellationTokenSource;
+    }
+
+    public static Task NextTickAsync()
+    {
+        var tcs = new TaskCompletionSource<bool>();
+
+        _asyncOnTickTaskQueue.Enqueue(() =>
+        {
+            try
+            {
+                tcs.SetResult(true);
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+        });
+
+        return tcs.Task;
+    }
+
+    public static Task NextWorldUpdateAsync()
+    {
+        var tcs = new TaskCompletionSource<bool>();
+
+        _asyncOnWorldUpdateTaskQueue.Enqueue(() =>
+        {
+            try
+            {
+                tcs.SetResult(true);
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+        });
+
+        return tcs.Task;
+    }
+
+    public static Task<T> NextTickAsync<T>( Func<T> task )
+    {
+        var tcs = new TaskCompletionSource<T>();
+
+        _asyncOnTickTaskQueue.Enqueue(() =>
+        {
+            try
+            {
+                tcs.SetResult(task());
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+        });
+
+        return tcs.Task;
+    }
+
+    public static Task<T> NextWorldUpdateAsync<T>( Func<T> task )
+    {
+        var tcs = new TaskCompletionSource<T>();
+
+        _asyncOnWorldUpdateTaskQueue.Enqueue(() =>
+        {
+            try
+            {
+                tcs.SetResult(task());
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+        });
+
+        return tcs.Task;
+    }
+
+    public static Task NextTickAsync( Action action )
+    {
+        var tcs = new TaskCompletionSource<bool>();
+
+        _asyncOnTickTaskQueue.Enqueue(() =>
+        {
+            try
+            {
+                action();
+                tcs.SetResult(true);
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+        });
+
+        return tcs.Task;
+    }
+
+    public static Task NextWorldUpdateAsync( Action action )
+    {
+        var tcs = new TaskCompletionSource<bool>();
+
+        _asyncOnWorldUpdateTaskQueue.Enqueue(() =>
+        {
+            try
+            {
+                action();
+                tcs.SetResult(true);
+            }
+            catch (Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+        });
+
+        return tcs.Task;
     }
 }

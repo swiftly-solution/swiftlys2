@@ -440,37 +440,67 @@ public class TestPlugin : BasePlugin
     [Command("h1")]
     public void TestCommand2( ICommandContext _ )
     {
-        // var token = Core.Scheduler.DelayAndRepeat(500, 1000, () =>
-        // {
+           Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+           Console.WriteLine("\n");
+           Console.WriteLine(Core.Engine.GlobalVars.TickCount);
+           Console.WriteLine("\n");
+           Console.WriteLine("END");
+           Task.Run(async () =>
+           {
+               await Task.Delay(1000);
+               Console.WriteLine("ABC: "+Thread.CurrentThread.ManagedThreadId);
+               Console.WriteLine("\n");
+               await Core.Scheduler.NextTickAsync(() =>
+               {
+                   using var se = new SoundEvent() {
+                       Name = "123",
 
-        // });
+                   };
 
-        var addres = Core.GameData.GetSignature("CBaseEntity::DispatchSpawn");
+                   se.Emit();
 
-        var func = Core.Memory.GetUnmanagedFunctionByAddress<DispatchSpawnDelegate>(addres);
-        var guid = func.AddHook(( next ) =>
-        {
-            return ( pEntity, pKV ) =>
-            {
-                Console.WriteLine("TestPlugin DispatchSpawn " + order++);
-                return next()(pEntity, pKV);
-            };
-        });
+                   Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                   Console.WriteLine("\n");
+                   Console.WriteLine(DateTime.Now.Nanosecond);
+                   Console.WriteLine("\n");
+                   Console.WriteLine(Core.Engine.GlobalVars.TickCount);
+                   Console.WriteLine("\n");
+               });
+               await Task.Delay(500);
+               Console.WriteLine("ABC: "+Thread.CurrentThread.ManagedThreadId);
+               Console.WriteLine("\n");
 
-        var memory = Core.Memory.GetUnmanagedMemoryByAddress(addres);
-        var guid1 = memory.AddHook(( ref MidHookContext context ) =>
-        {
-            Core.Logger.LogInformation("MidHookContext:\n{Context}", context);
-        });
+               await Core.Scheduler.NextTickAsync(() =>
+               {
+                   using var se = new SoundEvent() {
+                       Name = "123",
+                   };
 
-        // _dispatchspawn.AddHook(( next ) =>
-        // {
-        //     return ( pEntity, pKV ) =>
-        //     {
-        //         Console.WriteLine("TestPlugin DispatchSpawn2 " + order++);
-        //         return next()(pEntity, pKV);
-        //     };
-        // });
+                   se.Emit();
+                   Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                   Console.WriteLine("\n");
+                   Console.WriteLine(DateTime.Now.Nanosecond);
+                   Console.WriteLine("\n");
+                   Console.WriteLine(Core.Engine.GlobalVars.TickCount);
+                   Console.WriteLine("\n");
+               });
+
+               await Core.Scheduler.NextTickAsync(() =>
+               {
+                   using var se = new SoundEvent() {
+                       Name = "123",
+                   };
+
+                   se.Emit();
+                   Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                   Console.WriteLine("\n");
+                   Console.WriteLine(DateTime.Now.Nanosecond);
+                   Console.WriteLine("\n");
+                   Console.WriteLine(Core.Engine.GlobalVars.TickCount);
+                   Console.WriteLine("\n");
+               });
+
+           });
     }
 
     [EventListener<EventDelegates.OnEntityCreated>]
