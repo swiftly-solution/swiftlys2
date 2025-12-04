@@ -48,6 +48,7 @@
 #include "client/linux/handler/exception_handler.h"
 #include "common/linux/linux_libc_support.h"
 #include "third_party/lss/linux_syscall_support.h"
+#include <backtrace.h>
 #include <cxxabi.h>
 #include <dlfcn.h>
 #include <execinfo.h>
@@ -60,6 +61,7 @@
 #include <unistd.h>
 static siginfo_t* g_linuxSigInfo = nullptr;
 static ucontext_t* g_linuxContext = nullptr;
+static struct backtrace_state* g_backtraceState = nullptr;
 #endif
 
 static std::string g_dumpPath;
@@ -720,53 +722,42 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             uint64_t frameSize = static_cast<uint64_t>(gregs[REG_RBP]) - static_cast<uint64_t>(gregs[REG_RSP]);
             stackInfo["frameSize"] = fmt::format("0x{:X} ({} bytes)", frameSize, frameSize);
 
-            // Call stack using backtrace
+            // Call stack using libbacktrace
             auto& callStack = crashReport["callstack"];
             auto& nativeStack = callStack["native"];
-            nativeStack["captureMethod"] = "backtrace + dladdr";
-
-            void* buffer[128];
-            int nptrs = backtrace(buffer, 128);
-
-            nativeStack["frameCount"] = nptrs;
+            nativeStack["captureMethod"] = "libbacktrace";
 
             auto& frames = nativeStack["frames"];
             frames = nlohmann::json::array();
 
-            for (int i = 0; i < nptrs; i++)
+            struct BacktraceData
             {
+                nlohmann::json* frames;
+                int frameIndex;
+            };
+            BacktraceData btData = {&frames, 0};
+
+            auto fullCallback = [](void* data, uintptr_t pc, const char* filename, int lineno, const char* function) -> int
+            {
+                auto* btData = static_cast<BacktraceData*>(data);
                 nlohmann::json frame;
-                frame["index"] = i;
-                frame["address"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(buffer[i]));
+                frame["index"] = btData->frameIndex++;
+                frame["address"] = fmt::format("0x{:016X}", pc);
+                frame["function"] = function ? function : "UNKNOWN";
+                frame["filename"] = filename ? filename : "UNKNOWN";
+                frame["line"] = lineno;
+                btData->frames->push_back(frame);
+                return 0;
+            };
 
-                Dl_info dlInfo;
-                if (dladdr(buffer[i], &dlInfo))
-                {
-                    frame["module"] = dlInfo.dli_fname ? dlInfo.dli_fname : "UNKNOWN";
-                    frame["baseAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_fbase));
+            auto errorCallback = [](void* data, const char* msg, int errnum) {};
 
-                    if (dlInfo.dli_sname)
-                    {
-                        frame["symbol"] = dlInfo.dli_sname;
-                        frame["symbolAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_saddr));
-                        ptrdiff_t offset = reinterpret_cast<char*>(buffer[i]) - reinterpret_cast<char*>(dlInfo.dli_saddr);
-                        frame["offset"] = fmt::format("+0x{:X}", offset);
-                    }
-                    else
-                    {
-                        frame["symbol"] = "UNKNOWN";
-                        ptrdiff_t offset = reinterpret_cast<char*>(buffer[i]) - reinterpret_cast<char*>(dlInfo.dli_fbase);
-                        frame["offset"] = fmt::format("+0x{:X}", offset);
-                    }
-                }
-                else
-                {
-                    frame["module"] = "UNKNOWN";
-                    frame["symbol"] = "UNKNOWN";
-                }
-
-                frames.push_back(frame);
+            if (g_backtraceState)
+            {
+                backtrace_full(g_backtraceState, 0, fullCallback, errorCallback, &btData);
             }
+
+            nativeStack["frameCount"] = btData.frameIndex;
 
             // Managed stack placeholder
             auto& managedStack = callStack["managed"];
@@ -1073,6 +1064,9 @@ void RegisterCrashHandlers()
 
     // Create Breakpad handler but don't let it install signal handlers directly
     g_exceptionHandler = new google_breakpad::ExceptionHandler(descriptor, nullptr, BreakpadDumpCallback, nullptr, false, -1);
+
+    // Initialize libbacktrace state for stack traces
+    g_backtraceState = backtrace_create_state(nullptr, 1, nullptr, nullptr);
 
     // Install our own signal handlers that capture context first
     struct sigaction sa;
