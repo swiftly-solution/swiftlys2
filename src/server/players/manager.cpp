@@ -291,6 +291,7 @@ bool ClientConnectHook(void* _this, CPlayerSlot slot, const char* pszName, uint6
     {
         if (reinterpret_cast<bool (*)(int)>(g_pOnClientConnectCallback)(playerid) == false)
         {
+            playermanager->UnregisterPlayer(playerid);
             return false;
         }
     }

@@ -69,7 +69,6 @@ public class TestPlugin : BasePlugin
         Core.Event.OnWeaponServicesCanUseHook += ( @event ) =>
         {
             // Console.WriteLine($"WeaponServicesCanUse: {@event.Weapon.WeaponBaseVData.AttackMovespeedFactor} {@event.OriginalResult}");
-
         };
     }
 
@@ -94,12 +93,14 @@ public class TestPlugin : BasePlugin
         {
             return HookResult.Continue;
         }
+
         var player = @event.UserIdPlayer.RequiredController;
         if (player.InGameMoneyServices?.IsValid == true)
         {
             player.InGameMoneyServices.Account = Core.ConVar.Find<int>("mp_maxmoney")?.Value ?? 16000;
             player.InGameMoneyServices.AccountUpdated();
         }
+
         return HookResult.Continue;
     }
 
@@ -115,7 +116,8 @@ public class TestPlugin : BasePlugin
             for (var j = 0; j < 5; j++)
             {
                 var optionText = $"Menu # {x + 1} - Option # {j + 1}";
-                var button = new ButtonMenuOption(optionText) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
+                var button = new ButtonMenuOption(optionText)
+                    { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
                 button.Click += ( sender, args ) =>
                 {
                     args.Player.SendChat($"Clicked: {optionText}");
@@ -202,19 +204,18 @@ public class TestPlugin : BasePlugin
         services
             .AddSwiftly(Core);
 
-        Core.Event.OnPrecacheResource += ( @event ) =>
-        {
-            @event.AddItem("soundevents/mvp_anthem.vsndevts");
-        };
+        Core.Event.OnPrecacheResource += ( @event ) => { @event.AddItem("soundevents/mvp_anthem.vsndevts"); };
 
         Core.Event.OnConVarValueChanged += ( @event ) =>
         {
-            Console.WriteLine($"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
+            Console.WriteLine(
+                $"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
         };
 
         Core.Event.OnEntityIdentityAcceptInputHook += ( @event ) =>
         {
-            Console.WriteLine($"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.InputName}");
+            Console.WriteLine(
+                $"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.InputName}");
         };
 
 
@@ -382,8 +383,6 @@ public class TestPlugin : BasePlugin
         Core.Trace.TraceShape(start, end, ray, filter, ref trace);
 
         Console.WriteLine(trace.Entity.IsValid);
-
-
     }
 
     [Command("tt")]
@@ -418,6 +417,7 @@ public class TestPlugin : BasePlugin
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     delegate nint DispatchSpawnDelegate( nint pEntity, nint pKV );
+
     int order = 0;
 
     IUnmanagedFunction<DispatchSpawnDelegate>? _dispatchspawn;
@@ -440,37 +440,24 @@ public class TestPlugin : BasePlugin
     [Command("h1")]
     public void TestCommand2( ICommandContext _ )
     {
-           Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-           Console.WriteLine("\n");
-           Console.WriteLine(Core.Engine.GlobalVars.TickCount);
-           Console.WriteLine("\n");
-           Console.WriteLine("END");
-           Task.Run(async () =>
-           {
-               await Task.Delay(1000);
-               Console.WriteLine("ABC: "+Thread.CurrentThread.ManagedThreadId);
-               Console.WriteLine("\n");
-               try
-               {
-                   using var se = new SoundEvent();
-                   se.Name = "Weapon_AK47.Single";
-                   for (int i = 0; i < 1000; i++)
-                   {
-                       se.EmitAsync();
-                   }
+        Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+        Console.WriteLine("\n");
+        Console.WriteLine(Core.Engine.GlobalVars.TickCount);
+        Console.WriteLine("\n");
+        Console.WriteLine("END");
+        var sender = _.Sender!;
+        for (int i = 0; i < 10000; i++)
+        {
+            Task.Run(async () =>
+            {
+                sender.SendChat("123s");
+                await Task.Delay(100);
+                sender.Controller.PawnHealth = (uint)Random.Shared.Next(1, 100);
+                sender.Controller.PawnHealthUpdated();
+                Console.WriteLine($"updating {i} {Thread.CurrentThread.ManagedThreadId}");
+            });
 
-
-                   await Task.Delay(1000);
-                   se.Dispose();
-                   Console.WriteLine(se.Name);
-               }
-               catch (Exception e)
-               {
-                   Console.WriteLine(e.Message);
-               }
-
-
-           });
+        }
     }
 
     [EventListener<EventDelegates.OnEntityCreated>]
@@ -530,7 +517,10 @@ public class TestPlugin : BasePlugin
         kv.Set<uint>("m_spawnflags", 256);
         ent.DispatchSpawn(kv);
         ent.SetModel("weapons/models/grenade/incendiary/weapon_incendiarygrenade.vmdl");
-        ent.Teleport(new Vector(context.Sender!.PlayerPawn!.AbsOrigin!.Value.X + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Y + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Z + 30), QAngle.Zero, Vector.Zero);
+        ent.Teleport(
+            new Vector(context.Sender!.PlayerPawn!.AbsOrigin!.Value.X + 50,
+                context.Sender!.PlayerPawn!.AbsOrigin!.Value.Y + 50,
+                context.Sender!.PlayerPawn!.AbsOrigin!.Value.Z + 30), QAngle.Zero, Vector.Zero);
     }
 
     [Command("tt4")]
@@ -561,10 +551,7 @@ public class TestPlugin : BasePlugin
     [Command("tt7")]
     public void TestCommand7( ICommandContext context )
     {
-        Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) =>
-        {
-            Console.WriteLine($"pong: {buffer}");
-        });
+        Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) => { Console.WriteLine($"pong: {buffer}"); });
     }
 
     [Command("tt8")]
@@ -622,10 +609,14 @@ public class TestPlugin : BasePlugin
         Core.Trace.TraceShape(origin, targetOrigin, ray, filter, ref trace);
 
         Console.WriteLine(trace.pEntity != null ? $"! Hit Entity: {trace.Entity.DesignerName}" : "! No entity hit");
-        Console.WriteLine($"! SurfaceProperties: {(nint)trace.SurfaceProperties}, pEntity: {(nint)trace.pEntity}, HitBox: {(nint)trace.HitBox}({trace.HitBox->m_name.Value}), Body: {(nint)trace.Body}, Shape: {(nint)trace.Shape}, Contents: {trace.Contents}");
-        Console.WriteLine($"! StartPos: {trace.StartPos}, EndPos: {trace.EndPos}, HitNormal: {trace.HitNormal}, HitPoint: {trace.HitPoint}");
-        Console.WriteLine($"! HitOffset: {trace.HitOffset}, Fraction: {trace.Fraction}, Triangle: {trace.Triangle}, HitboxBoneIndex: {trace.HitboxBoneIndex}");
-        Console.WriteLine($"! RayType: {trace.RayType}, StartInSolid: {trace.StartInSolid}, ExactHitPoint: {trace.ExactHitPoint}");
+        Console.WriteLine(
+            $"! SurfaceProperties: {(nint)trace.SurfaceProperties}, pEntity: {(nint)trace.pEntity}, HitBox: {(nint)trace.HitBox}({trace.HitBox->m_name.Value}), Body: {(nint)trace.Body}, Shape: {(nint)trace.Shape}, Contents: {trace.Contents}");
+        Console.WriteLine(
+            $"! StartPos: {trace.StartPos}, EndPos: {trace.EndPos}, HitNormal: {trace.HitNormal}, HitPoint: {trace.HitPoint}");
+        Console.WriteLine(
+            $"! HitOffset: {trace.HitOffset}, Fraction: {trace.Fraction}, Triangle: {trace.Triangle}, HitboxBoneIndex: {trace.HitboxBoneIndex}");
+        Console.WriteLine(
+            $"! RayType: {trace.RayType}, StartInSolid: {trace.StartInSolid}, ExactHitPoint: {trace.ExactHitPoint}");
         Console.WriteLine("\n");
     }
 
@@ -732,7 +723,9 @@ public class TestPlugin : BasePlugin
         Core.PlayerManager.GetAlive()
             .Where(player => player.PlayerID != context.Sender!.PlayerID && player.IsValid && player.IsFakeClient)
             .ToList()
-            .ForEach(player => player.PlayerPawn!.WeaponServices!.ActiveWeapon.Value!.SetTransmitState(false, context.Sender!.PlayerID));
+            .ForEach(player =>
+                player.PlayerPawn!.WeaponServices!.ActiveWeapon.Value!.SetTransmitState(false,
+                    context.Sender!.PlayerID));
     }
 
     [Command("sihb")]
@@ -741,7 +734,9 @@ public class TestPlugin : BasePlugin
         Core.PlayerManager.GetAlive()
             .Where(player => player.PlayerID != context.Sender!.PlayerID && player.IsValid && player.IsFakeClient)
             .ToList()
-            .ForEach(player => Console.WriteLine($"{player.Controller!.PlayerName} -> {(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID) ? "Hide" : "V")}"));
+            .ForEach(player =>
+                Console.WriteLine(
+                    $"{player.Controller!.PlayerName} -> {(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID) ? "Hide" : "V")}"));
     }
 
     [Command("hb")]
@@ -753,7 +748,8 @@ public class TestPlugin : BasePlugin
             .ForEach(player =>
             {
                 // Console.WriteLine($"{player.Controller!.PlayerName}(B) -> {player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID)}({player.PlayerPawn!.IsTransmitting(player.PlayerID)})");
-                player.PlayerPawn!.SetTransmitState(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID), context.Sender!.PlayerID);
+                player.PlayerPawn!.SetTransmitState(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID),
+                    context.Sender!.PlayerID);
                 // Console.WriteLine($"{player.Controller!.PlayerName} -> {player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID)}({player.PlayerPawn!.IsTransmitting(player.PlayerID)})");
             });
     }
@@ -842,10 +838,11 @@ public class TestPlugin : BasePlugin
             }))
             .Build();
 
-        Core.MenusAPI.OpenMenu(mainMenu, ( player, menu ) =>
-        {
-            Console.WriteLine($"{menu.Configuration.Title} closed for player: {player.Controller.PlayerName}");
-        });
+        Core.MenusAPI.OpenMenu(mainMenu,
+            ( player, menu ) =>
+            {
+                Console.WriteLine($"{menu.Configuration.Title} closed for player: {player.Controller.PlayerName}");
+            });
 
         // Core.MenusAPI.OpenMenuForPlayer(context.Sender!, menu, ( player, menu ) =>
         // {
@@ -864,7 +861,10 @@ public class TestPlugin : BasePlugin
     [Command("rmt")]
     public void RefactoredMenuTestCommand( ICommandContext context )
     {
-        var button = new ButtonMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 向这广袤世界致以温柔问候", "#FFE4E1", "#FFC0CB", "#FF69B4")) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop/*, CloseAfterClick = true*/ };
+        var button =
+            new ButtonMenuOption(
+                    HtmlGradient.GenerateGradientText("Swiftlys2 向这广袤世界致以温柔问候", "#FFE4E1", "#FFC0CB", "#FF69B4"))
+                { TextStyle = MenuOptionTextStyle.ScrollLeftLoop /*, CloseAfterClick = true*/ };
         button.Click += ( sender, args ) =>
         {
             args.Player.SendMessage(MessageType.Chat, "Swiftlys2 向这广袤世界致以温柔问候");
@@ -880,7 +880,8 @@ public class TestPlugin : BasePlugin
         var toggle = new ToggleMenuOption("12");
         toggle.ValueChanged += ( sender, args ) =>
         {
-            args.Player.SendChat($"OldValue: {args.OldValue}({args.OldValue.GetType().Name}), NewValue: {args.NewValue}({args.NewValue.GetType().Name})");
+            args.Player.SendChat(
+                $"OldValue: {args.OldValue}({args.OldValue.GetType().Name}), NewValue: {args.NewValue}({args.NewValue.GetType().Name})");
         };
 
         var player = context.Sender!;
@@ -913,16 +914,26 @@ public class TestPlugin : BasePlugin
                     .Build();
                 return menu;
             }))
-            .AddOption(new SelectorMenuOption<string>(["1234567", "一二三四五六七", "いちにさんよん", "One Two Three", "Один Два Три", "하나 둘 셋", "αβγδεζη"]) { TextStyle = MenuOptionTextStyle.TruncateBothEnds })
+            .AddOption(new SelectorMenuOption<string>([
+                "1234567", "一二三四五六七", "いちにさんよん", "One Two Three", "Один Два Три", "하나 둘 셋", "αβγδεζη"
+            ]) { TextStyle = MenuOptionTextStyle.TruncateBothEnds })
             .AddOption(new TextMenuOption() { Text = "12345678", TextStyle = MenuOptionTextStyle.ScrollLeftLoop })
             .AddOption(new TextMenuOption("123456789"))
             .AddOption(new TextMenuOption("1234567890") { Visible = false })
             .AddOption(button)
-            .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 からこの広大なる世界へ温かい挨拶を", "#FFE5CC", "#FFAB91", "#FF7043")) { TextStyle = MenuOptionTextStyle.ScrollRightLoop })
-            .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 가 이 넓은 세상에 따뜻한 인사를 전합니다", "#E6E6FA", "#00FFFF", "#FF1493")) { TextStyle = MenuOptionTextStyle.ScrollLeftFade })
-            .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 приветствует этот прекрасный мир", "#AFEEEE", "#7FFFD4", "#40E0D0")) { TextStyle = MenuOptionTextStyle.ScrollRightFade })
-            .AddOption(new TextMenuOption("<font color='#F5FFFA'><b><invalid><font color='#00FA9A'>Swiftlys2</font> salută această lume minunată</invalid></b></font>") { TextStyle = MenuOptionTextStyle.TruncateEnd })
-            .AddOption(new TextMenuOption("<font color='#00FA9A'><b><invalid><font color='#F5FFFA'>Swiftlys2</font> extends warmest greetings to this wondrous world</invalid></b></font>") { TextStyle = MenuOptionTextStyle.TruncateBothEnds })
+            .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 からこの広大なる世界へ温かい挨拶を", "#FFE5CC",
+                "#FFAB91", "#FF7043")) { TextStyle = MenuOptionTextStyle.ScrollRightLoop })
+            .AddOption(new TextMenuOption(HtmlGradient.GenerateGradientText("Swiftlys2 가 이 넓은 세상에 따뜻한 인사를 전합니다",
+                "#E6E6FA", "#00FFFF", "#FF1493")) { TextStyle = MenuOptionTextStyle.ScrollLeftFade })
+            .AddOption(new TextMenuOption(
+                HtmlGradient.GenerateGradientText("Swiftlys2 приветствует этот прекрасный мир", "#AFEEEE", "#7FFFD4",
+                    "#40E0D0")) { TextStyle = MenuOptionTextStyle.ScrollRightFade })
+            .AddOption(new TextMenuOption(
+                    "<font color='#F5FFFA'><b><invalid><font color='#00FA9A'>Swiftlys2</font> salută această lume minunată</invalid></b></font>")
+                { TextStyle = MenuOptionTextStyle.TruncateEnd })
+            .AddOption(new TextMenuOption(
+                    "<font color='#00FA9A'><b><invalid><font color='#F5FFFA'>Swiftlys2</font> extends warmest greetings to this wondrous world</invalid></b></font>")
+                { TextStyle = MenuOptionTextStyle.TruncateBothEnds })
             // .AddOption(new TextMenuOption("Swiftlys2 sendas korajn salutojn al ĉi tiu mirinda mondo"))
             .AddOption(new TextMenuOption("1234567890") { Visible = false })
             .AddOption(new TextMenuOption("123456789"))
@@ -1092,7 +1103,8 @@ public class TestPlugin : BasePlugin
             for (var j = 0; j < 5; j++)
             {
                 var optionText = $"Menu # {i + 1} - Option # {j + 1}";
-                var button = new ButtonMenuOption(optionText) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
+                var button = new ButtonMenuOption(optionText)
+                    { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
                 button.Click += ( sender, args ) =>
                 {
                     args.Player.SendChat($"Clicked: {optionText}");
@@ -1135,7 +1147,9 @@ public class TestPlugin : BasePlugin
         Core.PlayerManager.GetAlive()
             .Where(p => p.PlayerID != player.PlayerID)
             .ToList()
-            .ForEach(targetPlayer => context.Reply($"Line of sight to {targetPlayer.Controller!.PlayerName}: {player.PlayerPawn!.HasLineOfSight(targetPlayer.PlayerPawn!)}"));
+            .ForEach(targetPlayer =>
+                context.Reply(
+                    $"Line of sight to {targetPlayer.Controller!.PlayerName}: {player.PlayerPawn!.HasLineOfSight(targetPlayer.PlayerPawn!)}"));
     }
 
     [Command("cmt")]
