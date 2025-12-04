@@ -929,21 +929,13 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             crashReport["memory"]["memoryLoad"] = static_cast<uint32_t>((1.0 - static_cast<double>(si.freeram) / si.totalram) * 100);
         }
         write(STDOUT_FILENO, "[DEBUG] S10: sys done\n", 22);
+#endif
 
         std::string jsonPath = basePath + ".json";
-#ifndef _WIN32
-        write(STDOUT_FILENO, "[DEBUG] 14: writing JSON to file\n", 33);
-#endif
         std::ofstream jsonFile(jsonPath);
         if (jsonFile.is_open())
         {
-#ifndef _WIN32
-            write(STDOUT_FILENO, "[DEBUG] 15: file opened, dumping JSON\n", 38);
-#endif
             jsonFile << crashReport.dump(4);
-#ifndef _WIN32
-            write(STDOUT_FILENO, "[DEBUG] 16: JSON dumped, closing file\n", 38);
-#endif
             jsonFile.close();
 
 #ifdef _WIN32
