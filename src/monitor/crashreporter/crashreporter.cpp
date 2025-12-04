@@ -730,16 +730,24 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             write(STDOUT_FILENO, "[DEBUG] 10: stack info done\n", 28);
 
             // Call stack using backtrace
+            write(STDOUT_FILENO, "[DEBUG] 10a: callstack start\n", 29);
             auto& callStack = crashReport["callstack"];
             auto& nativeStack = callStack["native"];
             nativeStack["capture_method"] = "backtrace + dladdr";
+            write(STDOUT_FILENO, "[DEBUG] 10b: calling backtrace\n", 31);
 
             void* buffer[128];
             int nptrs = backtrace(buffer, 128);
+            write(STDOUT_FILENO, "[DEBUG] 10c: backtrace done, frames=", 36);
+            char numBuf[16];
+            int numLen = snprintf(numBuf, sizeof(numBuf), "%d\n", nptrs);
+            write(STDOUT_FILENO, numBuf, numLen);
+
             nativeStack["frameCount"] = nptrs;
 
             auto& frames = nativeStack["frames"];
             frames = nlohmann::json::array();
+            write(STDOUT_FILENO, "[DEBUG] 10d: frames array created\n", 34);
 
             for (int i = 0; i < nptrs; i++)
             {
