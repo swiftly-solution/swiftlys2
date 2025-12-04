@@ -898,9 +898,11 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
         write(STDOUT_FILENO, "[DEBUG] 12a: sys arch\n", 22);
         crashReport["system"]["processorArchitecture"] = "x86_64";
         write(STDOUT_FILENO, "[DEBUG] 12b: sys procs\n", 23);
-        crashReport["system"]["numberOfProcessors"] = sysconf(_SC_NPROCESSORS_ONLN);
+        long nprocs = sysconf(_SC_NPROCESSORS_ONLN);
+        crashReport["system"]["numberOfProcessors"] = nprocs > 0 ? static_cast<int>(nprocs) : 1;
         write(STDOUT_FILENO, "[DEBUG] 12c: sys page\n", 22);
-        crashReport["system"]["pageSize"] = sysconf(_SC_PAGESIZE);
+        long pageSize = sysconf(_SC_PAGESIZE);
+        crashReport["system"]["pageSize"] = pageSize > 0 ? static_cast<int>(pageSize) : 4096;
 
         write(STDOUT_FILENO, "[DEBUG] 12d: sysinfo\n", 21);
         struct sysinfo si;
