@@ -895,45 +895,40 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             stackMemory["note"] = "Stack memory dump not available without context";
         }
 
-        write(STDOUT_FILENO, "[DEBUG] 12a: sys arch\n", 22);
+        write(STDOUT_FILENO, "[DEBUG] S1: arch\n", 17);
         crashReport["system"]["processorArchitecture"] = "x86_64";
-        write(STDOUT_FILENO, "[DEBUG] 12a1: arch set\n", 23);
-        write(STDOUT_FILENO, "[DEBUG] 12b: sys procs call\n", 28);
-        long nprocs = sysconf(_SC_NPROCESSORS_ONLN);
-        write(STDOUT_FILENO, "[DEBUG] 12b1: sysconf done\n", 27);
-        int nprocInt = nprocs > 0 ? static_cast<int>(nprocs) : 1;
-        write(STDOUT_FILENO, "[DEBUG] 12b2: cast done\n", 24);
-        crashReport["system"]["numberOfProcessors"] = nprocInt;
-        write(STDOUT_FILENO, "[DEBUG] 12c: sys page call\n", 27);
-        long pageSz = sysconf(_SC_PAGESIZE);
-        write(STDOUT_FILENO, "[DEBUG] 12c1: pagesize done\n", 28);
-        int pageSzInt = pageSz > 0 ? static_cast<int>(pageSz) : 4096;
-        crashReport["system"]["pageSize"] = pageSzInt;
-        write(STDOUT_FILENO, "[DEBUG] 12c2: pagesize set\n", 27);
-
-        write(STDOUT_FILENO, "[DEBUG] 12d: sysinfo call\n", 26);
+        write(STDOUT_FILENO, "[DEBUG] S2: nproc call\n", 23);
+        long np = sysconf(_SC_NPROCESSORS_ONLN);
+        char npBuf[64];
+        int npLen = snprintf(npBuf, sizeof(npBuf), "[DEBUG] S2: nproc=%ld\n", np);
+        write(STDOUT_FILENO, npBuf, npLen);
+        crashReport["system"]["numberOfProcessors"] = np;
+        write(STDOUT_FILENO, "[DEBUG] S3: page call\n", 22);
+        long ps = sysconf(_SC_PAGESIZE);
+        char psBuf[64];
+        int psLen = snprintf(psBuf, sizeof(psBuf), "[DEBUG] S3: page=%ld\n", ps);
+        write(STDOUT_FILENO, psBuf, psLen);
+        crashReport["system"]["pageSize"] = ps;
+        write(STDOUT_FILENO, "[DEBUG] S4: sysinfo call\n", 25);
         struct sysinfo si;
         int siRet = sysinfo(&si);
-        write(STDOUT_FILENO, "[DEBUG] 12d1: sysinfo ret\n", 26);
+        char siBuf[64];
+        int siLen = snprintf(siBuf, sizeof(siBuf), "[DEBUG] S4: sysinfo ret=%d\n", siRet);
+        write(STDOUT_FILENO, siBuf, siLen);
         if (siRet == 0)
         {
-            write(STDOUT_FILENO, "[DEBUG] 12e: mem calc\n", 22);
-            uint64_t totalPhys = static_cast<uint64_t>(si.totalram) * static_cast<uint64_t>(si.mem_unit);
-            uint64_t freePhys = static_cast<uint64_t>(si.freeram) * static_cast<uint64_t>(si.mem_unit);
-            write(STDOUT_FILENO, "[DEBUG] 12e1: phys done\n", 24);
-            crashReport["memory"]["totalPhysical"] = totalPhys;
-            crashReport["memory"]["availablePhysical"] = freePhys;
-            write(STDOUT_FILENO, "[DEBUG] 12e2: virt calc\n", 24);
-            uint64_t totalVirt = (static_cast<uint64_t>(si.totalram) + static_cast<uint64_t>(si.totalswap)) * static_cast<uint64_t>(si.mem_unit);
-            uint64_t freeVirt = (static_cast<uint64_t>(si.freeram) + static_cast<uint64_t>(si.freeswap)) * static_cast<uint64_t>(si.mem_unit);
-            crashReport["memory"]["totalVirtual"] = totalVirt;
-            crashReport["memory"]["availableVirtual"] = freeVirt;
-            write(STDOUT_FILENO, "[DEBUG] 12e3: load calc\n", 24);
-            uint32_t memLoad = static_cast<uint32_t>((1.0 - static_cast<double>(si.freeram) / static_cast<double>(si.totalram)) * 100.0);
-            crashReport["memory"]["memoryLoad"] = memLoad;
+            write(STDOUT_FILENO, "[DEBUG] S5: totalram\n", 21);
+            crashReport["memory"]["totalPhysical"] = si.totalram * si.mem_unit;
+            write(STDOUT_FILENO, "[DEBUG] S6: freeram\n", 20);
+            crashReport["memory"]["availablePhysical"] = si.freeram * si.mem_unit;
+            write(STDOUT_FILENO, "[DEBUG] S7: totalvirt\n", 22);
+            crashReport["memory"]["totalVirtual"] = (si.totalram + si.totalswap) * si.mem_unit;
+            write(STDOUT_FILENO, "[DEBUG] S8: freevirt\n", 21);
+            crashReport["memory"]["availableVirtual"] = (si.freeram + si.freeswap) * si.mem_unit;
+            write(STDOUT_FILENO, "[DEBUG] S9: memload\n", 20);
+            crashReport["memory"]["memoryLoad"] = static_cast<uint32_t>((1.0 - static_cast<double>(si.freeram) / si.totalram) * 100);
         }
-        write(STDOUT_FILENO, "[DEBUG] 13: system/memory done\n", 31);
-#endif
+        write(STDOUT_FILENO, "[DEBUG] S10: sys done\n", 22);
 
         std::string jsonPath = basePath + ".json";
 #ifndef _WIN32
