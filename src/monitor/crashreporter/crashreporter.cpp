@@ -895,13 +895,18 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             stackMemory["note"] = "Stack memory dump not available without context";
         }
 
+        write(STDOUT_FILENO, "[DEBUG] 12a: sys arch\n", 22);
         crashReport["system"]["processorArchitecture"] = "x86_64";
+        write(STDOUT_FILENO, "[DEBUG] 12b: sys procs\n", 23);
         crashReport["system"]["numberOfProcessors"] = sysconf(_SC_NPROCESSORS_ONLN);
+        write(STDOUT_FILENO, "[DEBUG] 12c: sys page\n", 22);
         crashReport["system"]["pageSize"] = sysconf(_SC_PAGESIZE);
 
+        write(STDOUT_FILENO, "[DEBUG] 12d: sysinfo\n", 21);
         struct sysinfo si;
         if (sysinfo(&si) == 0)
         {
+            write(STDOUT_FILENO, "[DEBUG] 12e: mem info\n", 22);
             crashReport["memory"]["totalPhysical"] = si.totalram * si.mem_unit;
             crashReport["memory"]["availablePhysical"] = si.freeram * si.mem_unit;
             crashReport["memory"]["totalVirtual"] = (si.totalram + si.totalswap) * si.mem_unit;
