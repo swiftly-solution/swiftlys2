@@ -1139,6 +1139,7 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("cmt")]
+    [CommandAlias("cmat")]
     public void CommandTestCommand( ICommandContext context )
     {
         Console.WriteLine(context);
