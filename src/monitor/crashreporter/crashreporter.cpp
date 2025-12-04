@@ -421,6 +421,7 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                 }
 
                 auto& frame = frames[frameCount];
+                frame["index"] = frameCount;
                 frame["pc"] = fmt::format("0x{:016X}", stackFrame.AddrPC.Offset);
                 frame["sp"] = fmt::format("0x{:016X}", stackFrame.AddrStack.Offset);
                 frame["fp"] = fmt::format("0x{:016X}", stackFrame.AddrFrame.Offset);
