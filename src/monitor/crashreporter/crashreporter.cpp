@@ -33,6 +33,7 @@
 #include <nlohmann/json.hpp>
 
 #include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <ctime>
 #include <fstream>
@@ -128,12 +129,35 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
     try
     {
         nlohmann::json crashReport;
-
-        // Capture basic crash metadata
         std::time_t timestamp = std::time(nullptr);
         char timeBuffer[100];
         std::strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", std::localtime(&timestamp));
-        crashReport["timestamp"] = timeBuffer;
+
+        struct tm localtime;
+        struct tm utctime;
+#ifdef _WIN32
+        localtime_s(&localtime, &timestamp);
+        gmtime_s(&utctime, &timestamp);
+#else
+        localtime_r(&timestamp, &localtime);
+        gmtime_r(&timestamp, &utctime);
+#endif
+        // Calculate offset in hours and minutes
+        int offset_hours = localtime.tm_hour - utctime.tm_hour;
+        int offset_mins = localtime.tm_min - utctime.tm_min;
+        if (localtime.tm_mday != utctime.tm_mday)
+        {
+            if (localtime.tm_mday > utctime.tm_mday || localtime.tm_mon > utctime.tm_mon || localtime.tm_year > utctime.tm_year)
+            {
+                offset_hours += 24;
+            }
+            else
+            {
+                offset_hours -= 24;
+            }
+        }
+        crashReport["timestamp"] = fmt::format("{} UTC{:+03d}:{:02d}", timeBuffer, offset_hours, abs(offset_mins));
+        crashReport["timestampUTC"] = static_cast<uint64_t>(timestamp);
 
 #ifdef _WIN32
         crashReport["processId"] = GetCurrentProcessId();
@@ -214,20 +238,253 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             }
         }
 
-        // Capture CPU register state (x64 only!!!)
+        // Capture CPU register state
         if (pExceptionPointers && pExceptionPointers->ContextRecord)
         {
             auto* context = pExceptionPointers->ContextRecord;
-            crashReport["context"]["rip"] = fmt::format("0x{:016X}", context->Rip);
-            crashReport["context"]["rsp"] = fmt::format("0x{:016X}", context->Rsp);
-            crashReport["context"]["rbp"] = fmt::format("0x{:016X}", context->Rbp);
-            crashReport["context"]["rax"] = fmt::format("0x{:016X}", context->Rax);
-            crashReport["context"]["rbx"] = fmt::format("0x{:016X}", context->Rbx);
-            crashReport["context"]["rcx"] = fmt::format("0x{:016X}", context->Rcx);
-            crashReport["context"]["rdx"] = fmt::format("0x{:016X}", context->Rdx);
-            crashReport["context"]["rsi"] = fmt::format("0x{:016X}", context->Rsi);
-            crashReport["context"]["rdi"] = fmt::format("0x{:016X}", context->Rdi);
-            crashReport["context"]["flags"] = fmt::format("0x{:08X}", context->EFlags);
+
+            // General Purpose Registers (64-bit)
+            auto& gpr = crashReport["registers"]["general"];
+            gpr["rax"] = fmt::format("0x{:016X}", context->Rax);
+            gpr["rbx"] = fmt::format("0x{:016X}", context->Rbx);
+            gpr["rcx"] = fmt::format("0x{:016X}", context->Rcx);
+            gpr["rdx"] = fmt::format("0x{:016X}", context->Rdx);
+            gpr["rsi"] = fmt::format("0x{:016X}", context->Rsi);
+            gpr["rdi"] = fmt::format("0x{:016X}", context->Rdi);
+            gpr["rbp"] = fmt::format("0x{:016X}", context->Rbp);
+            gpr["rsp"] = fmt::format("0x{:016X}", context->Rsp);
+            gpr["r8"] = fmt::format("0x{:016X}", context->R8);
+            gpr["r9"] = fmt::format("0x{:016X}", context->R9);
+            gpr["r10"] = fmt::format("0x{:016X}", context->R10);
+            gpr["r11"] = fmt::format("0x{:016X}", context->R11);
+            gpr["r12"] = fmt::format("0x{:016X}", context->R12);
+            gpr["r13"] = fmt::format("0x{:016X}", context->R13);
+            gpr["r14"] = fmt::format("0x{:016X}", context->R14);
+            gpr["r15"] = fmt::format("0x{:016X}", context->R15);
+
+            // Instruction Pointer
+            crashReport["registers"]["rip"] = fmt::format("0x{:016X}", context->Rip);
+
+            // Lower 32-bit portions
+            auto& gpr32 = crashReport["registers"]["general32"];
+            gpr32["eax"] = fmt::format("0x{:08X}", static_cast<uint32_t>(context->Rax));
+            gpr32["ebx"] = fmt::format("0x{:08X}", static_cast<uint32_t>(context->Rbx));
+            gpr32["ecx"] = fmt::format("0x{:08X}", static_cast<uint32_t>(context->Rcx));
+            gpr32["edx"] = fmt::format("0x{:08X}", static_cast<uint32_t>(context->Rdx));
+            gpr32["esi"] = fmt::format("0x{:08X}", static_cast<uint32_t>(context->Rsi));
+            gpr32["edi"] = fmt::format("0x{:08X}", static_cast<uint32_t>(context->Rdi));
+            gpr32["ebp"] = fmt::format("0x{:08X}", static_cast<uint32_t>(context->Rbp));
+            gpr32["esp"] = fmt::format("0x{:08X}", static_cast<uint32_t>(context->Rsp));
+
+            // Lower 16-bit and 8-bit portions for RAX-RDX
+            auto& gprLow = crashReport["registers"]["legacy"];
+            gprLow["ax"] = fmt::format("0x{:04X}", static_cast<uint16_t>(context->Rax));
+            gprLow["bx"] = fmt::format("0x{:04X}", static_cast<uint16_t>(context->Rbx));
+            gprLow["cx"] = fmt::format("0x{:04X}", static_cast<uint16_t>(context->Rcx));
+            gprLow["dx"] = fmt::format("0x{:04X}", static_cast<uint16_t>(context->Rdx));
+            gprLow["al"] = fmt::format("0x{:02X}", static_cast<uint8_t>(context->Rax));
+            gprLow["bl"] = fmt::format("0x{:02X}", static_cast<uint8_t>(context->Rbx));
+            gprLow["cl"] = fmt::format("0x{:02X}", static_cast<uint8_t>(context->Rcx));
+            gprLow["dl"] = fmt::format("0x{:02X}", static_cast<uint8_t>(context->Rdx));
+            gprLow["ah"] = fmt::format("0x{:02X}", static_cast<uint8_t>(context->Rax >> 8));
+            gprLow["bh"] = fmt::format("0x{:02X}", static_cast<uint8_t>(context->Rbx >> 8));
+            gprLow["ch"] = fmt::format("0x{:02X}", static_cast<uint8_t>(context->Rcx >> 8));
+            gprLow["dh"] = fmt::format("0x{:02X}", static_cast<uint8_t>(context->Rdx >> 8));
+
+            // Segment Registers
+            auto& segments = crashReport["registers"]["segments"];
+            segments["cs"] = fmt::format("0x{:04X}", context->SegCs);
+            segments["ds"] = fmt::format("0x{:04X}", context->SegDs);
+            segments["es"] = fmt::format("0x{:04X}", context->SegEs);
+            segments["fs"] = fmt::format("0x{:04X}", context->SegFs);
+            segments["gs"] = fmt::format("0x{:04X}", context->SegGs);
+            segments["ss"] = fmt::format("0x{:04X}", context->SegSs);
+
+            // Flags Register (RFLAGS/EFLAGS) with detailed breakdown
+            crashReport["registers"]["rflags"]["raw"] = fmt::format("0x{:08X}", context->EFlags);
+            auto& flags = crashReport["registers"]["rflags"]["bits"];
+            flags["CF"] = (context->EFlags & 0x0001) ? 1 : 0;    // Carry Flag
+            flags["PF"] = (context->EFlags & 0x0004) ? 1 : 0;    // Parity Flag
+            flags["AF"] = (context->EFlags & 0x0010) ? 1 : 0;    // Auxiliary Carry Flag
+            flags["ZF"] = (context->EFlags & 0x0040) ? 1 : 0;    // Zero Flag
+            flags["SF"] = (context->EFlags & 0x0080) ? 1 : 0;    // Sign Flag
+            flags["TF"] = (context->EFlags & 0x0100) ? 1 : 0;    // Trap Flag
+            flags["IF"] = (context->EFlags & 0x0200) ? 1 : 0;    // Interrupt Enable Flag
+            flags["DF"] = (context->EFlags & 0x0400) ? 1 : 0;    // Direction Flag
+            flags["OF"] = (context->EFlags & 0x0800) ? 1 : 0;    // Overflow Flag
+            flags["IOPL"] = (context->EFlags >> 12) & 0x3;       // I/O Privilege Level
+            flags["NT"] = (context->EFlags & 0x4000) ? 1 : 0;    // Nested Task
+            flags["RF"] = (context->EFlags & 0x10000) ? 1 : 0;   // Resume Flag
+            flags["VM"] = (context->EFlags & 0x20000) ? 1 : 0;   // Virtual-8086 Mode
+            flags["AC"] = (context->EFlags & 0x40000) ? 1 : 0;   // Alignment Check
+            flags["VIF"] = (context->EFlags & 0x80000) ? 1 : 0;  // Virtual Interrupt Flag
+            flags["VIP"] = (context->EFlags & 0x100000) ? 1 : 0; // Virtual Interrupt Pending
+            flags["ID"] = (context->EFlags & 0x200000) ? 1 : 0;  // ID Flag
+
+            // SSE/AVX State (XMM Registers)
+            if (context->ContextFlags & CONTEXT_FLOATING_POINT)
+            {
+                auto& xmm = crashReport["registers"]["xmm"];
+                xmm["mxcsr"] = fmt::format("0x{:08X}", context->MxCsr); // MXCSR control/status register
+
+                for (int i = 0; i < 16; i++)
+                {
+                    auto& xmmReg = xmm[fmt::format("XMM{}", i)];
+                    M128A* xmmData = &context->Xmm0 + i;
+                    xmmReg["low"] = fmt::format("0x{:016X}", xmmData->Low);
+                    xmmReg["high"] = fmt::format("0x{:016X}", xmmData->High);
+                    xmmReg["full"] = fmt::format("{:016X}{:016X}", xmmData->High, xmmData->Low);
+                }
+
+                xmm["fpuControlWord"] = fmt::format("0x{:04X}", context->FltSave.ControlWord);
+                xmm["fpuStatusWord"] = fmt::format("0x{:04X}", context->FltSave.StatusWord);
+                xmm["fpuTagWord"] = fmt::format("0x{:02X}", context->FltSave.TagWord);
+            }
+
+            // Debug Registers (if available and ContextFlags includes CONTEXT_DEBUG_REGISTERS)
+            if (context->ContextFlags & CONTEXT_DEBUG_REGISTERS)
+            {
+                auto& debug = crashReport["registers"]["debug"];
+                debug["dr0"] = fmt::format("0x{:016X}", context->Dr0); // Breakpoint address 0
+                debug["dr1"] = fmt::format("0x{:016X}", context->Dr1); // Breakpoint address 1
+                debug["dr2"] = fmt::format("0x{:016X}", context->Dr2); // Breakpoint address 2
+                debug["dr3"] = fmt::format("0x{:016X}", context->Dr3); // Breakpoint address 3
+                debug["dr6"] = fmt::format("0x{:016X}", context->Dr6); // Debug status
+                debug["dr7"] = fmt::format("0x{:016X}", context->Dr7); // Debug control
+            }
+
+            // Control Registers info
+            crashReport["registers"]["control"]["contextFlags"] = fmt::format("0x{:08X}", context->ContextFlags);
+
+            // Stack pointer analysis
+            auto& stack = crashReport["registers"]["stackInfo"];
+            stack["rsp"] = fmt::format("0x{:016X}", context->Rsp);
+            stack["rbp"] = fmt::format("0x{:016X}", context->Rbp);
+            if (context->Rbp > context->Rsp)
+            {
+                stack["frameSize"] = fmt::format("0x{:X}", context->Rbp - context->Rsp);
+            }
+
+            // Capture call stack
+            auto& callStack = crashReport["callstack"];
+
+            // Native call stack
+            auto& nativeStack = callStack["native"];
+            nativeStack["captureMethod"] = "StackWalk64";
+
+            HANDLE process = GetCurrentProcess();
+            HANDLE thread = GetCurrentThread();
+
+            // Initialize symbol handler for module info
+            // Required for SymGetModuleBase64 to work properly
+            SymSetOptions(SYMOPT_UNDNAME | SYMOPT_DEFERRED_LOADS);
+            if (!SymInitialize(process, nullptr, TRUE))
+            {
+                nativeStack["symbolInitWarning"] = "Failed to initialize symbols, module info may be incomplete";
+            }
+
+            // Initialize stack walking
+            STACKFRAME64 stackFrame = {};
+            stackFrame.AddrPC.Offset = context->Rip;
+            stackFrame.AddrPC.Mode = AddrModeFlat;
+            stackFrame.AddrFrame.Offset = context->Rbp;
+            stackFrame.AddrFrame.Mode = AddrModeFlat;
+            stackFrame.AddrStack.Offset = context->Rsp;
+            stackFrame.AddrStack.Mode = AddrModeFlat;
+
+            // Capture up to 64 frames
+            const int maxFrames = 64;
+            int frameCount = 0;
+            auto& frames = nativeStack["frames"];
+
+            // Placeholder for managed stack
+            auto& managedStack = callStack["managed"];
+            managedStack["msg"] = "Managed stack capture not yet implemented";
+
+            // Walk the stack
+            while (frameCount < maxFrames)
+            {
+                if (!StackWalk64(IMAGE_FILE_MACHINE_AMD64, process, thread, &stackFrame, context, nullptr, SymFunctionTableAccess64, SymGetModuleBase64, nullptr))
+                {
+                    // Stack walk failed, stop here
+                    break;
+                }
+
+                if (stackFrame.AddrPC.Offset == 0)
+                {
+                    // Check if we have a valid frame
+                    break;
+                }
+
+                auto& frame = frames[frameCount];
+                frame["pc"] = fmt::format("0x{:016X}", stackFrame.AddrPC.Offset);
+                frame["sp"] = fmt::format("0x{:016X}", stackFrame.AddrStack.Offset);
+                frame["fp"] = fmt::format("0x{:016X}", stackFrame.AddrFrame.Offset);
+
+                // Get module info for this address
+                DWORD64 moduleBase = SymGetModuleBase64(process, stackFrame.AddrPC.Offset);
+                if (moduleBase != 0)
+                {
+                    char moduleName[MAX_PATH];
+                    if (GetModuleFileNameA((HMODULE)moduleBase, moduleName, MAX_PATH))
+                    {
+                        // Extract just the filename from the full path
+                        const char* fileName = strrchr(moduleName, '\\');
+                        frame["module"] = fileName ? (fileName + 1) : moduleName;
+                        frame["moduleBase"] = fmt::format("0x{:016X}", moduleBase);
+                        frame["offsetInModule"] = fmt::format("0x{:X}", stackFrame.AddrPC.Offset - moduleBase);
+                    }
+                }
+
+                // Skip symbol resolution to avoid allocating memory in a potentially corrupted heap
+                // Recorded addresses are sufficient for post-mortem analysis with external debuggers
+
+                frameCount++;
+            }
+
+            nativeStack["frameCount"] = frameCount;
+
+            auto& stackMemory = crashReport["stackMemory"];
+            try
+            {
+                // Try to read 256 bytes of stack (before and after RSP)
+                const size_t dumpSize = 256;
+                const size_t beforeSize = 64;
+                uint64_t stackStart = context->Rsp >= beforeSize ? context->Rsp - beforeSize : 0;
+
+                stackMemory["dumpStart"] = fmt::format("0x{:016X}", stackStart);
+                stackMemory["dumpSize"] = dumpSize;
+
+                // Read stack memory carefully (may fail if stack is corrupted)
+                auto& stackData = stackMemory["data"];
+                uint8_t* stackPtr = reinterpret_cast<uint8_t*>(stackStart);
+                for (size_t i = 0; i < dumpSize && i < 32; i += 8) // Limit to first 32 quadwords
+                {
+                    if (IsBadReadPtr(stackPtr + i, 8))
+                    {
+                        stackData[fmt::format("0x{:016X}", stackStart + i)] = "UNREADABLE";
+                    }
+                    else
+                    {
+                        uint64_t value = *reinterpret_cast<uint64_t*>(stackPtr + i);
+                        stackData[fmt::format("0x{:016X}", stackStart + i)] = fmt::format("0x{:016X}", value);
+
+                        // Mark if this is near RSP or RBP
+                        if (stackStart + i == context->Rsp)
+                        {
+                            stackData[fmt::format("0x{:016X}Note", stackStart + i)] = "RSP";
+                        }
+                        else if (stackStart + i == context->Rbp)
+                        {
+                            stackData[fmt::format("0x{:016X}Note", stackStart + i)] = "RBP";
+                        }
+                    }
+                }
+            }
+            catch (...)
+            {
+                stackMemory["error"] = "Failed to read stack memory";
+            }
         }
 
         SYSTEM_INFO sysInfo;
@@ -250,25 +507,145 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
         crashReport["processId"] = getpid();
         crashReport["threadId"] = static_cast<uint64_t>(pthread_self());
 
-        // Linux: No exception details available from breakpad callback
-        // But we maintain the same JSON structure for consistency
+        // Exception details
         crashReport["exception"]["code"] = "N/A";
         crashReport["exception"]["codeName"] = "Linux signal (details in minidump)";
         crashReport["exception"]["address"] = "N/A";
         crashReport["exception"]["flags"] = "N/A";
 
-        // Linux: Context not available in callback, but maintain structure
-        // These would need signal handler or ptrace to capture
-        crashReport["context"]["rip"] = "N/A";
-        crashReport["context"]["rsp"] = "N/A";
-        crashReport["context"]["rbp"] = "N/A";
-        crashReport["context"]["rax"] = "N/A";
-        crashReport["context"]["rbx"] = "N/A";
-        crashReport["context"]["rcx"] = "N/A";
-        crashReport["context"]["rdx"] = "N/A";
-        crashReport["context"]["rsi"] = "N/A";
-        crashReport["context"]["rdi"] = "N/A";
-        crashReport["context"]["flags"] = "N/A";
+        // Access violation details placeholder
+        crashReport["exception"]["accessViolation"]["type"] = "N/A";
+        crashReport["exception"]["accessViolation"]["address"] = "N/A";
+
+        // General Purpose Registers (64-bit)
+        auto& gpr = crashReport["registers"]["general"];
+        gpr["rax"] = "N/A";
+        gpr["rbx"] = "N/A";
+        gpr["rcx"] = "N/A";
+        gpr["rdx"] = "N/A";
+        gpr["rsi"] = "N/A";
+        gpr["rdi"] = "N/A";
+        gpr["rbp"] = "N/A";
+        gpr["rsp"] = "N/A";
+        gpr["r8"] = "N/A";
+        gpr["r9"] = "N/A";
+        gpr["r10"] = "N/A";
+        gpr["r11"] = "N/A";
+        gpr["r12"] = "N/A";
+        gpr["r13"] = "N/A";
+        gpr["r14"] = "N/A";
+        gpr["r15"] = "N/A";
+
+        crashReport["registers"]["rip"] = "N/A";
+
+        // 32-bit register view
+        auto& gpr32 = crashReport["registers"]["general32"];
+        gpr32["eax"] = "N/A";
+        gpr32["ebx"] = "N/A";
+        gpr32["ecx"] = "N/A";
+        gpr32["edx"] = "N/A";
+        gpr32["esi"] = "N/A";
+        gpr32["edi"] = "N/A";
+        gpr32["ebp"] = "N/A";
+        gpr32["esp"] = "N/A";
+
+        // Legacy registers
+        auto& gprLow = crashReport["registers"]["legacy"];
+        gprLow["ax"] = "N/A";
+        gprLow["bx"] = "N/A";
+        gprLow["cx"] = "N/A";
+        gprLow["dx"] = "N/A";
+        gprLow["al"] = "N/A";
+        gprLow["bl"] = "N/A";
+        gprLow["cl"] = "N/A";
+        gprLow["dl"] = "N/A";
+        gprLow["ah"] = "N/A";
+        gprLow["bh"] = "N/A";
+        gprLow["ch"] = "N/A";
+        gprLow["dh"] = "N/A";
+
+        // Segment registers
+        auto& segments = crashReport["registers"]["segments"];
+        segments["cs"] = "N/A";
+        segments["ds"] = "N/A";
+        segments["es"] = "N/A";
+        segments["fs"] = "N/A";
+        segments["gs"] = "N/A";
+        segments["ss"] = "N/A";
+
+        // Flags register
+        crashReport["registers"]["rflags"]["raw"] = "N/A";
+        auto& flags = crashReport["registers"]["rflags"]["bits"];
+        flags["CF"] = "N/A";
+        flags["PF"] = "N/A";
+        flags["AF"] = "N/A";
+        flags["ZF"] = "N/A";
+        flags["SF"] = "N/A";
+        flags["TF"] = "N/A";
+        flags["IF"] = "N/A";
+        flags["DF"] = "N/A";
+        flags["OF"] = "N/A";
+        flags["IOPL"] = "N/A";
+        flags["NT"] = "N/A";
+        flags["RF"] = "N/A";
+        flags["VM"] = "N/A";
+        flags["AC"] = "N/A";
+        flags["VIF"] = "N/A";
+        flags["VIP"] = "N/A";
+        flags["ID"] = "N/A";
+
+        // XMM registers structure
+        auto& xmm = crashReport["registers"]["xmm"];
+        xmm["mxcsr"] = "N/A";
+        for (int i = 0; i < 16; i++)
+        {
+            auto& xmmReg = xmm[fmt::format("XMM{}", i)];
+            xmmReg["low"] = "N/A";
+            xmmReg["high"] = "N/A";
+            xmmReg["full"] = "N/A";
+        }
+        xmm["fpuControlWord"] = "N/A";
+        xmm["fpuStatusWord"] = "N/A";
+        xmm["fpuTagWord"] = "N/A";
+
+        // Debug registers
+        auto& debug = crashReport["registers"]["debug"];
+        debug["dr0"] = "N/A";
+        debug["dr1"] = "N/A";
+        debug["dr2"] = "N/A";
+        debug["dr3"] = "N/A";
+        debug["dr6"] = "N/A";
+        debug["dr7"] = "N/A";
+
+        // Control registers
+        crashReport["registers"]["control"]["contextFlags"] = "N/A";
+
+        // Stack pointer info
+        auto& stack = crashReport["registers"]["stackInfo"];
+        stack["rsp"] = "N/A";
+        stack["rbp"] = "N/A";
+        stack["frameSize"] = "N/A";
+
+        // Call stack structure
+        auto& callStack = crashReport["callstack"];
+
+        // Native stack
+        auto& nativeStack = callStack["native"];
+        nativeStack["capture_method"] = "backtrace";
+        nativeStack["frames"] = nlohmann::json::array();
+        nativeStack["frameCount"] = 0;
+        nativeStack["symbolInitWarning"] = "Limited stack trace in signal handler context";
+
+        // Managed stack placeholder
+        auto& managedStack = callStack["managed"];
+        managedStack["msg"] = "Managed stack capture not yet implemented";
+
+        // Stack memory dump
+        auto& stackMemory = crashReport["stackMemory"];
+        stackMemory["dumpStart"] = "N/A";
+        stackMemory["dumpSize"] = 0;
+        stackMemory["data"] = nlohmann::json::object();
+        stackMemory["note"] = "Stack memory dump not available in signal handler context";
 
         crashReport["system"]["processorArchitecture"] = "x86_64";
         crashReport["system"]["numberOfProcessors"] = sysconf(_SC_NPROCESSORS_ONLN);
