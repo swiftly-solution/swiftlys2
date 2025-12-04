@@ -769,19 +769,7 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                     if (dlInfo.dli_sname)
                     {
                         write(STDOUT_FILENO, "[DEBUG] has sym\n", 16);
-                        int status = 0;
-                        char* demangled = abi::__cxa_demangle(dlInfo.dli_sname, nullptr, nullptr, &status);
-                        write(STDOUT_FILENO, "[DEBUG] demangle\n", 17);
-                        if (status == 0 && demangled)
-                        {
-                            frame["symbol"] = demangled;
-                            frame["mangledSymbol"] = dlInfo.dli_sname;
-                            free(demangled);
-                        }
-                        else
-                        {
-                            frame["symbol"] = dlInfo.dli_sname;
-                        }
+                        frame["symbol"] = dlInfo.dli_sname;
                         frame["symbolAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_saddr));
                         ptrdiff_t offset = reinterpret_cast<char*>(buffer[i]) - reinterpret_cast<char*>(dlInfo.dli_saddr);
                         frame["offset"] = fmt::format("+0x{:X}", offset);
@@ -882,10 +870,6 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             frames = nlohmann::json::array();
             for (int i = 0; i < nptrs; i++)
             {
-                char fBuf[32];
-                int fLen = snprintf(fBuf, sizeof(fBuf), "[DEBUG] frame %d\n", i);
-                write(STDOUT_FILENO, fBuf, fLen);
-
                 nlohmann::json frame;
                 frame["index"] = i;
                 frame["address"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(buffer[i]));
@@ -893,23 +877,8 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                 Dl_info dlInfo;
                 if (dladdr(buffer[i], &dlInfo))
                 {
-                    write(STDOUT_FILENO, "[DEBUG] dladdr ok\n", 18);
                     frame["module"] = dlInfo.dli_fname ? dlInfo.dli_fname : "unknown";
-                    if (dlInfo.dli_sname)
-                    {
-                        write(STDOUT_FILENO, "[DEBUG] has sym\n", 16);
-                        int status = 0;
-                        char* demangled = abi::__cxa_demangle(dlInfo.dli_sname, nullptr, nullptr, &status);
-                        frame["symbol"] = (status == 0 && demangled) ? demangled : dlInfo.dli_sname;
-                        if (demangled)
-                        {
-                            free(demangled);
-                        }
-                    }
-                    else
-                    {
-                        frame["symbol"] = "unknown";
-                    }
+                    frame["symbol"] = dlInfo.dli_sname ? dlInfo.dli_sname : "unknown";
                 }
                 else
                 {
