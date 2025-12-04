@@ -329,7 +329,7 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
 
                 for (int i = 0; i < 16; i++)
                 {
-                    auto& xmmReg = xmm[fmt::format("XMM{}", i)];
+                    auto& xmmReg = xmm[fmt::format("xmm{}", i)];
                     M128A* xmmData = &context->Xmm0 + i;
                     xmmReg["low"] = fmt::format("0x{:016X}", xmmData->Low);
                     xmmReg["high"] = fmt::format("0x{:016X}", xmmData->High);
@@ -599,7 +599,7 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
         xmm["mxcsr"] = "N/A";
         for (int i = 0; i < 16; i++)
         {
-            auto& xmmReg = xmm[fmt::format("XMM{}", i)];
+            auto& xmmReg = xmm[fmt::format("xmm{}", i)];
             xmmReg["low"] = "N/A";
             xmmReg["high"] = "N/A";
             xmmReg["full"] = "N/A";
