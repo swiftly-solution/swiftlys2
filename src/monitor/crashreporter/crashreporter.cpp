@@ -666,7 +666,7 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             auto& xmm = crashReport["registers"]["xmm"];
             if (mctx->fpregs)
             {
-                _fpstate* fpregs = mctx->fpregs;
+                auto* fpregs = mctx->fpregs;
                 xmm["mxcsr"] = fmt::format("0x{:08X}", fpregs->mxcsr);
                 xmm["fpuControlWord"] = fmt::format("0x{:04X}", fpregs->cwd);
                 xmm["fpuStatusWord"] = fmt::format("0x{:04X}", fpregs->swd);
@@ -675,8 +675,11 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                 for (int i = 0; i < 16; i++)
                 {
                     auto& xmmReg = xmm[fmt::format("xmm{}", i)];
-                    uint64_t low = fpregs->_xmm[i].element[0];
-                    uint64_t high = fpregs->_xmm[i].element[1];
+                    // _libc_fpxreg uses 'element' array for XMM data
+                    const auto& xmmData = fpregs->_xmm[i];
+                    uint32_t* data = const_cast<uint32_t*>(xmmData.element);
+                    uint64_t low = static_cast<uint64_t>(data[0]) | (static_cast<uint64_t>(data[1]) << 32);
+                    uint64_t high = static_cast<uint64_t>(data[2]) | (static_cast<uint64_t>(data[3]) << 32);
                     xmmReg["low"] = fmt::format("0x{:016X}", low);
                     xmmReg["high"] = fmt::format("0x{:016X}", high);
                     xmmReg["full"] = fmt::format("0x{:016X}{:016X}", high, low);
