@@ -450,11 +450,10 @@ public class TestPlugin : BasePlugin
         {
             Task.Run(async () =>
             {
-                sender.SendChat("123s");
+                await sender.SendChatAsync("123s");
                 await Task.Delay(100);
-                sender.Controller.PawnHealth = (uint)Random.Shared.Next(1, 100);
-                sender.Controller.PawnHealthUpdated();
-                Console.WriteLine($"updating {i} {Thread.CurrentThread.ManagedThreadId}");
+                using var se = new SoundEvent();
+                var guid = await se.EmitAsync();
             });
 
         }

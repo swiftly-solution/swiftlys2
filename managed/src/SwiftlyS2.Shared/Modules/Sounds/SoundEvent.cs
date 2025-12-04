@@ -158,7 +158,7 @@ public class SoundEvent : IDisposable
             throw new Exception("Failed to add reference to sound event.");
         }
 
-        return SchedulerManager.NextWorldUpdateAsync(() =>
+        return SchedulerManager.QueueOrNow(() =>
         {
             var result = Emit();
             this._handle.DangerousRelease();

@@ -93,7 +93,7 @@ internal class Player : IPlayer
 
     public Task SendMessageAsync( MessageType kind, string message )
     {
-        return SchedulerManager.NextWorldUpdateAsync(() => SendMessage(kind, message));
+        return SchedulerManager.QueueOrNow(() => SendMessage(kind, message));
     }
 
     public void SetListenOverride( int player, ListenOverride listenOverride )
@@ -156,7 +156,7 @@ internal class Player : IPlayer
 
     public Task SendMessageAsync( MessageType kind, string message, int htmlDuration = 5000 )
     {
-        return SchedulerManager.NextWorldUpdateAsync(() => SendMessage(kind, message, htmlDuration));
+        return SchedulerManager.QueueOrNow(() => SendMessage(kind, message, htmlDuration));
     }
 
     public void SendNotify( string message )

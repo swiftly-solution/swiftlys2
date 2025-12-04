@@ -353,4 +353,25 @@ internal static class SchedulerManager
 
         return tcs.Task;
     }
+
+    public static Task QueueOrNow( Action action )
+    {
+        if (NativeBinding.IsMainThread)
+        {
+            action();
+            return Task.CompletedTask;
+        }
+
+        return NextWorldUpdateAsync(action);
+    }
+
+    public static Task<T> QueueOrNow<T>( Func<T> task )
+    {
+        if (NativeBinding.IsMainThread)
+        {
+            return Task.FromResult(task());
+        }
+
+        return NextWorldUpdateAsync(task);
+    }
 }
