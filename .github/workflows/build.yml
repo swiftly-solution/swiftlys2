@@ -64,7 +64,14 @@ jobs:
     - name: Install dependencies
       run: |
         apt-get update
-        apt install -y libreadline-dev libboost-all-dev libomp-dev libbacktrace-dev
+        apt install -y libreadline-dev
+    - name: Build libbacktrace
+      run: |
+        git clone https://github.com/ianlancetaylor/libbacktrace.git
+        cd libbacktrace
+        ./configure --prefix=/usr
+        make -j$(nproc)
+        make install
     - name: Checkout repository and submodules
       uses: actions/checkout@v4
       with:
