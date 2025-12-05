@@ -206,7 +206,8 @@ public class TestPlugin : BasePlugin
             for (var j = 0; j < 5; j++)
             {
                 var optionText = $"Menu # {x + 1} - Option # {j + 1}";
-                var button = new ButtonMenuOption(optionText) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
+                var button = new ButtonMenuOption(optionText)
+                    { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
                 button.Click += ( sender, args ) =>
                 {
                     args.Player.SendChat($"Clicked: {optionText}");
@@ -1261,7 +1262,8 @@ public class TestPlugin : BasePlugin
             for (var j = 0; j < 5; j++)
             {
                 var optionText = $"Menu # {i + 1} - Option # {j + 1}";
-                var button = new ButtonMenuOption(optionText) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
+                var button = new ButtonMenuOption(optionText)
+                    { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
                 button.Click += ( sender, args ) =>
                 {
                     args.Player.SendChat($"Clicked: {optionText}");
