@@ -56,110 +56,10 @@
 #include <signal.h>
 #include <sys/resource.h>
 #include <sys/sysinfo.h>
-#include <sys/wait.h>
 #include <ucontext.h>
 #include <unistd.h>
-
 static siginfo_t* g_linuxSigInfo = nullptr;
 static ucontext_t* g_linuxContext = nullptr;
-static char g_demangledBuf[4096];
-
-inline bool ForkDemangle(const char* mangled, char* output, size_t outputSize)
-{
-    if (!mangled || !output || outputSize == 0)
-    {
-        write(STDERR_FILENO, "[ForkDemangle] Invalid params\n", 30);
-        return false;
-    }
-
-    int pipefd[2];
-    if (pipe(pipefd) == -1)
-    {
-        write(STDERR_FILENO, "[ForkDemangle] pipe() failed\n", 29);
-        return false;
-    }
-
-    pid_t pid = fork();
-    if (pid == -1)
-    {
-        write(STDERR_FILENO, "[ForkDemangle] fork() failed\n", 29);
-        close(pipefd[0]);
-        close(pipefd[1]);
-        return false;
-    }
-
-    if (pid == 0)
-    {
-        // Debug: child started
-        write(STDERR_FILENO, "[ForkDemangle Child] Started\n", 29);
-
-        // Unblock all signals
-        sigset_t allSigs;
-        sigfillset(&allSigs);
-        sigprocmask(SIG_UNBLOCK, &allSigs, nullptr);
-
-        // Reset signal handlers in child process
-        signal(SIGSEGV, SIG_DFL);
-        signal(SIGABRT, SIG_DFL);
-        signal(SIGFPE, SIG_DFL);
-        signal(SIGILL, SIG_DFL);
-        signal(SIGBUS, SIG_DFL);
-
-        close(pipefd[0]);
-        int status = 0;
-        char* demangled = abi::__cxa_demangle(mangled, nullptr, nullptr, &status);
-        const char* result = (status == 0 && demangled) ? demangled : mangled;
-        size_t len = strlen(result);
-        if (len >= outputSize)
-        {
-            len = outputSize - 1;
-        }
-
-        char debugBuf[128];
-        int debugLen = snprintf(debugBuf, sizeof(debugBuf), "[ForkDemangle Child] status=%d, len=%zu, demangled=%s\n", status, len, demangled ? "yes" : "no");
-        write(STDERR_FILENO, debugBuf, debugLen);
-
-        write(pipefd[1], &len, sizeof(len));
-        write(pipefd[1], result, len);
-        if (demangled)
-        {
-            free(demangled);
-        }
-
-        close(pipefd[1]);
-        _exit(0);
-    }
-
-    close(pipefd[1]);
-    size_t len = 0;
-    bool success = false;
-    ssize_t readLen = read(pipefd[0], &len, sizeof(len));
-
-    char debugBuf[128];
-    int debugLen = snprintf(debugBuf, sizeof(debugBuf), "[ForkDemangle Parent] readLen=%zd, len=%zu\n", readLen, len);
-    write(STDERR_FILENO, debugBuf, debugLen);
-
-    if (readLen == sizeof(len) && len < outputSize)
-    {
-        ssize_t dataRead = read(pipefd[0], output, len);
-        debugLen = snprintf(debugBuf, sizeof(debugBuf), "[ForkDemangle Parent] dataRead=%zd\n", dataRead);
-        write(STDERR_FILENO, debugBuf, debugLen);
-
-        if (dataRead == static_cast<ssize_t>(len))
-        {
-            output[len] = '\0';
-            success = true;
-        }
-    }
-
-    close(pipefd[0]);
-    waitpid(pid, nullptr, 0);
-
-    debugLen = snprintf(debugBuf, sizeof(debugBuf), "[ForkDemangle] success=%d\n", success);
-    write(STDERR_FILENO, debugBuf, debugLen);
-
-    return success;
-}
 #endif
 
 static std::string g_dumpPath;
@@ -847,14 +747,7 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
 
                     if (dlInfo.dli_sname)
                     {
-                        if (ForkDemangle(dlInfo.dli_sname, g_demangledBuf, sizeof(g_demangledBuf)))
-                        {
-                            frame["symbol"] = g_demangledBuf;
-                        }
-                        else
-                        {
-                            frame["symbol"] = dlInfo.dli_sname;
-                        }
+                        frame["symbol"] = dlInfo.dli_sname;
                         frame["symbolAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_saddr));
                         ptrdiff_t offset = reinterpret_cast<char*>(buffer[i]) - reinterpret_cast<char*>(dlInfo.dli_saddr);
                         frame["offset"] = fmt::format("+0x{:X}", offset);
