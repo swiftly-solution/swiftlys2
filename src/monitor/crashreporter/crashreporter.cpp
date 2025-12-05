@@ -747,7 +747,18 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
 
                     if (dlInfo.dli_sname)
                     {
-                        frame["symbol"] = dlInfo.dli_sname;
+                        int demangleStatus = 0;
+                        char* demangled = abi::__cxa_demangle(dlInfo.dli_sname, nullptr, nullptr, &demangleStatus);
+                        if (demangleStatus == 0 && demangled != nullptr)
+                        {
+                            frame["symbol"] = demangled;
+                            free(demangled);
+                        }
+                        else
+                        {
+                            // Demangling failed, use original symbol
+                            frame["symbol"] = dlInfo.dli_sname;
+                        }
                         frame["symbolAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_saddr));
                         ptrdiff_t offset = reinterpret_cast<char*>(buffer[i]) - reinterpret_cast<char*>(dlInfo.dli_saddr);
                         frame["offset"] = fmt::format("+0x{:X}", offset);
