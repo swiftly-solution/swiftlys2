@@ -11,3 +11,6 @@
 [submodule "vendor/third_party/lss"]
 	path = vendor/third_party/lss
 	url = https://chromium.googlesource.com/linux-syscall-support
+[submodule "vendor/demangler"]
+	path = vendor/demangler
+	url = https://github.com/ilobilo/demangler.git
