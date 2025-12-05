@@ -6,6 +6,7 @@ using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.SteamAPI;
 using Spectre.Console;
+using SwiftlyS2.Core.Scheduler;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -37,10 +38,20 @@ internal class EngineService : IEngineService
         NativeEngineHelpers.ExecuteCommand(command);
     }
 
+    public Task ExecuteCommandAsync( string command )
+    {
+        return SchedulerManager.QueueOrNow(() => ExecuteCommand(command));
+    }
+
     public void ExecuteCommandWithBuffer( string command, Action<string> bufferCallback )
     {
         _commandTrackedManager.EnqueueCommand(bufferCallback);
         NativeEngineHelpers.ExecuteCommand($"^wb^{command}");
+    }
+
+    public Task ExecuteCommandWithBufferAsync( string command, Action<string> bufferCallback )
+    {
+        return SchedulerManager.QueueOrNow(() => ExecuteCommandWithBuffer(command, bufferCallback));
     }
 
     public bool IsMapValid( string map )

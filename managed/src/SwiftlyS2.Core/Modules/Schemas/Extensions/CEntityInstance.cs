@@ -29,6 +29,17 @@ public partial interface CEntityInstance
   public void AcceptInput<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0 );
 
   /// <summary>
+  /// Fire an input to the entity asynchronously.
+  /// </summary>
+  /// <typeparam name="T">Param type. Support bool, int, uint, long, ulong, float, double, string, Vector, Vector2D, Vector4D, QAngle, Color</typeparam>
+  /// <param name="input">Input name.</param>
+  /// <param name="value">Input value.</param>
+  /// <param name="activator">Activator entity. Nullable.</param>
+  /// <param name="caller">Caller entity. Nullable.</param>
+  /// <param name="outputID">Output ID.</param>
+  public Task AcceptInputAsync<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0 );
+
+  /// <summary>
   /// Add an entity IO event to the entity.
   /// </summary>
   /// <typeparam name="T">Param type. Support bool, int, uint, long, ulong, float, double, string, Vector, Vector2D, Vector4D, QAngle, Color</typeparam>
@@ -40,10 +51,27 @@ public partial interface CEntityInstance
   public void AddEntityIOEvent<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, float delay = 0f );
 
   /// <summary>
+  /// Add an entity IO event to the entity asynchronously.
+  /// </summary>
+  /// <typeparam name="T">Param type. Support bool, int, uint, long, ulong, float, double, string, Vector, Vector2D, Vector4D, QAngle, Color</typeparam>
+  /// <param name="input">Input name.</param>
+  /// <param name="value">Input value.</param>
+  /// <param name="activator">Activator entity. Nullable.</param>
+  /// <param name="caller">Caller entity. Nullable.</param>
+  /// <param name="delay">Delay in seconds.</param>
+  public Task AddEntityIOEventAsync<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, float delay = 0f );
+  
+  /// <summary>
   /// Dispatch a spawn event to the entity.
   /// </summary>
   /// <param name="entityKV">Entity key values. Nullable.</param>
   public void DispatchSpawn( CEntityKeyValues? entityKV = null );
+
+  /// <summary>
+  /// Dispatch a spawn event to the entity asynchronously.
+  /// </summary>
+  /// <param name="entityKV">Entity key values. Nullable.</param>
+  public Task DispatchSpawnAsync( CEntityKeyValues? entityKV = null );
 
   /// <summary>
   /// Set the transmit state of the entity for one player.
@@ -67,4 +95,8 @@ public partial interface CEntityInstance
   /// <summary>
   /// Despawn the entity.
   public void Despawn();
+
+  /// <summary>
+  /// Despawn the entity asynchronously.
+  public Task DespawnAsync();
 }

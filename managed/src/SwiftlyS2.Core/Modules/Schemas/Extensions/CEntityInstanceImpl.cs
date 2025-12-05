@@ -1,6 +1,7 @@
 using System.Buffers;
 using System.Text;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.SchemaDefinitions;
@@ -12,7 +13,8 @@ internal partial class CEntityInstanceImpl : CEntityInstance
     public uint Index => Entity?.EntityHandle.EntityIndex ?? uint.MaxValue;
     public string DesignerName => Entity?.DesignerName ?? string.Empty;
 
-    public unsafe void AcceptInput<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0 )
+    public unsafe void AcceptInput<T>( string input, T? value, CEntityInstance? activator = null,
+        CEntityInstance? caller = null, int outputID = 0 )
     {
         var variant = new CVariant();
         switch (value)
@@ -81,10 +83,19 @@ internal partial class CEntityInstanceImpl : CEntityInstance
                 break;
         }
 
-        NativeEntitySystem.AcceptInput(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, (nint)(&variant), outputID);
+        NativeEntitySystem.AcceptInput(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero,
+            (nint)(&variant), outputID);
     }
 
-    public unsafe void AddEntityIOEvent<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, float delay = 0f )
+    public Task AcceptInputAsync<T>( string input, T? value, CEntityInstance? activator = null,
+        CEntityInstance? caller = null, int outputID = 0 )
+    {
+        return SchedulerManager.QueueOrNow(() => AcceptInput(input, value, activator, caller, outputID));
+    }
+
+
+    public unsafe void AddEntityIOEvent<T>( string input, T? value, CEntityInstance? activator = null,
+        CEntityInstance? caller = null, float delay = 0f )
     {
         var variant = new CVariant();
         switch (value)
@@ -153,7 +164,14 @@ internal partial class CEntityInstanceImpl : CEntityInstance
                 break;
         }
 
-        NativeEntitySystem.AddEntityIOEvent(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, (nint)(&variant), delay);
+        NativeEntitySystem.AddEntityIOEvent(Address, input, activator?.Address ?? nint.Zero,
+            caller?.Address ?? nint.Zero, (nint)(&variant), delay);
+    }
+
+    public Task AddEntityIOEventAsync<T>( string input, T? value, CEntityInstance? activator = null,
+        CEntityInstance? caller = null, float delay = 0f )
+    {
+        return SchedulerManager.QueueOrNow(() => AddEntityIOEvent(input, value, activator, caller, delay));
     }
 
     public void SetTransmitState( bool transmitting, int playerId )
@@ -176,8 +194,18 @@ internal partial class CEntityInstanceImpl : CEntityInstance
         NativeEntitySystem.Spawn(Address, entityKV?.Address ?? nint.Zero);
     }
 
+    public Task DispatchSpawnAsync( CEntityKeyValues? entityKV = null )
+    {
+        return SchedulerManager.QueueOrNow(() => DispatchSpawn(entityKV));
+    }
+
     public void Despawn()
     {
         NativeEntitySystem.Despawn(Address);
+    }
+
+    public Task DespawnAsync()
+    {
+        return SchedulerManager.QueueOrNow(Despawn);
     }
 }

@@ -66,6 +66,11 @@ internal class Player : IPlayer
         NativePlayer.ChangeTeam(Slot, (byte)team);
     }
 
+    public Task ChangeTeamAsync( Team team )
+    {
+        return SchedulerManager.QueueOrNow(() => ChangeTeam(team));
+    }
+
     public void ClearTransmitEntityBlocks()
     {
         NativePlayer.ClearTransmitEntityBlocked(Slot);
@@ -84,6 +89,11 @@ internal class Player : IPlayer
     public void Kick( string reason, ENetworkDisconnectionReason gameReason )
     {
         NativePlayer.Kick(Slot, reason, (int)gameReason);
+    }
+
+    public Task KickAsync( string reason, ENetworkDisconnectionReason gameReason )
+    {
+        return SchedulerManager.QueueOrNow(() => Kick(reason, gameReason));
     }
 
     public void SendMessage( MessageType kind, string message )
@@ -111,6 +121,11 @@ internal class Player : IPlayer
         NativePlayer.SwitchTeam(Slot, (byte)team);
     }
 
+    public Task SwitchTeamAsync( Team team )
+    {
+        return SchedulerManager.QueueOrNow(() => SwitchTeam(team));
+    }
+
     public void TakeDamage( CTakeDamageInfo damageInfo )
     {
         unsafe
@@ -119,9 +134,19 @@ internal class Player : IPlayer
         }
     }
 
+    public Task TakeDamageAsync( CTakeDamageInfo damageInfo )
+    {
+        return SchedulerManager.QueueOrNow(() => TakeDamage(damageInfo));
+    }
+
     public void Teleport( Vector pos, QAngle angle, Vector velocity )
     {
         NativePlayer.Teleport(Slot, pos, angle, velocity);
+    }
+
+    public Task TeleportAsync( Vector pos, QAngle angle, Vector velocity )
+    {
+        return SchedulerManager.QueueOrNow(() => Teleport(pos, angle, velocity));
     }
 
     public void Respawn()
@@ -132,6 +157,11 @@ internal class Player : IPlayer
     public void ExecuteCommand( string command )
     {
         NativePlayer.ExecuteCommand(Slot, command);
+    }
+
+    public Task ExecuteCommandAsync( string command )
+    {
+        return SchedulerManager.QueueOrNow(() => ExecuteCommand(command));
     }
 
     public bool Equals( IPlayer? other )

@@ -32,30 +32,68 @@ public interface IPlayerManagerService
     /// <param name="htmlDuration">The duration, in milliseconds, for which the message should be displayed in HTML format.</param>
     public void SendMessage( MessageType kind, string message, int htmlDuration = 5000 );
     /// <summary>
+    /// Sends a message of the specified type to the players asynchronously.
+    /// </summary>
+    /// <param name="kind">The type of message to send. Determines how the message is processed or displayed.</param>
+    /// <param name="message">The content of the message to send. Cannot be null.</param>
+    public Task SendMessageAsync( MessageType kind, string message );
+    /// <summary>
+    /// Sends a message of the specified type to the players asynchronously with a custom HTML duration.
+    /// </summary>
+    /// <param name="kind">The type of message to send. Determines how the message is processed or displayed.</param>
+    /// <param name="message">The content of the message to send. Cannot be null.</param>
+    /// <param name="htmlDuration">The duration, in milliseconds, for which the message should be displayed in HTML format.</param>
+    public Task SendMessageAsync( MessageType kind, string message, int htmlDuration = 5000 );
+    /// <summary>
     /// Sends a notify message to the players.
     /// </summary>
     /// <param name="message">The content of the message to send. Cannot be null.</param>
     public void SendNotify( string message );
+    /// <summary>
+    /// Sends a notify message to the players asynchronously.
+    /// </summary>
+    /// <param name="message">The content of the message to send. Cannot be null.</param>
+    public Task SendNotifyAsync( string message );
     /// <summary>
     /// Sends a console message to the players.
     /// </summary>
     /// <param name="message">The content of the message to send. Cannot be null.</param>
     public void SendConsole( string message );
     /// <summary>
+    /// Sends a console message to the players asynchronously.
+    /// </summary>
+    /// <param name="message">The content of the message to send. Cannot be null.</param>
+    public Task SendConsoleAsync( string message );
+    /// <summary>
     /// Sends a chat message to the players.
     /// </summary>
     /// <param name="message">The content of the message to send. Cannot be null.</param>
     public void SendChat( string message );
+    /// <summary>
+    /// Sends a chat message to the players asynchronously.
+    /// </summary>
+    /// <param name="message">The content of the message to send. Cannot be null.</param>
+    public Task SendChatAsync( string message );
     /// <summary>
     /// Sends a center message to the players.
     /// </summary>
     /// <param name="message">The content of the message to send. Cannot be null.</param>
     public void SendCenter( string message );
     /// <summary>
+    /// Sends a center message to the players asynchronously.
+    /// </summary>
+    /// <param name="message">The content of the message to send. Cannot be null.</param>
+    public Task SendCenterAsync( string message );
+    /// <summary>
     /// Sends an alert message to the players.
     /// </summary>
     /// <param name="message">The content of the message to send. Cannot be null.</param>
     public void SendAlert( string message );
+    /// <summary>
+    /// Sends an alert message to the players asynchronously.
+    /// </summary>
+    /// <param name="message">The content of the message to send. Cannot be null.</param>
+    public Task SendAlertAsync( string message );
     /// <summary>
     /// Sends a center HTML message to the players.
     /// </summary>
@@ -63,11 +101,22 @@ public interface IPlayerManagerService
     /// <param name="duration">The duration, in milliseconds, for which the message should be displayed in HTML format.</param>
     public void SendCenterHTML( string message, int duration = 5000 );
     /// <summary>
+    /// Sends a center HTML message to the players asynchronously.
+    /// </summary>
+    /// <param name="message">The content of the message to send. Cannot be null.</param>
+    /// <param name="duration">The duration, in milliseconds, for which the message should be displayed in HTML format.</param>
+    public Task SendCenterHTMLAsync( string message, int duration = 5000 );
+    /// <summary>
     /// Sends an end-of-text chat message to the players.
     /// </summary>
     /// <param name="message">The content of the message to send. Cannot be null.</param>
     public void SendChatEOT( string message );
 
+    /// <summary>
+    /// Sends an end-of-text chat message to the players asynchronously.
+    /// </summary>
+    /// <param name="message">The content of the message to send. Cannot be null.</param>
+    public Task SendChatEOTAsync( string message );
     /// <summary>
     /// Controls whether a specific entity should be blocked from being transmitted/synchronized to clients.
     /// </summary>

@@ -446,14 +446,15 @@ public class TestPlugin : BasePlugin
         Console.WriteLine("\n");
         Console.WriteLine("END");
         var sender = _.Sender!;
-        for (int i = 0; i < 10000; i++)
+        var cvar = Core.ConVar.FindAsString("sv_enablebunnyhopping");
+        for (int i = 0; i < 1000; i++)
         {
             Task.Run(async () =>
             {
-                await sender.SendChatAsync("123s");
                 await Task.Delay(100);
-                using var se = new SoundEvent();
-                var guid = await se.EmitAsync();
+                Console.WriteLine("Setting cvar value");
+                Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                cvar.DefaultValueAsString = "1";
             });
 
         }

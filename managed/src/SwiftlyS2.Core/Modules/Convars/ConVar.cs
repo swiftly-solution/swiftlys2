@@ -5,6 +5,7 @@ using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.Services;
 
 namespace SwiftlyS2.Core.Convars;
@@ -153,12 +154,12 @@ internal class ConVar : IConVar
             }
         };
 
-        NativeConvars.QueryClientConvar(clientId, Name);
+        SchedulerManager.QueueOrNow(() => NativeConvars.QueryClientConvar(clientId, Name));
     }
 
     public void ReplicateToClientAsString( int clientId, string value )
     {
-        NativeConvars.SetClientConvarValueString(clientId, Name, value);
+        SchedulerManager.QueueOrNow(() => NativeConvars.SetClientConvarValueString(clientId, Name, value));
     }
 
     public bool TryGetDefaultValueAsString( out string defaultValue )
@@ -321,7 +322,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
         }
         else throw new ArgumentException($"Invalid type {typeof(T).Name}");
 
-        NativeConvars.SetClientConvarValueString(clientId, Name, val);
+        SchedulerManager.QueueOrNow(() => NativeConvars.SetClientConvarValueString(clientId, Name, val));
     }
 
 
