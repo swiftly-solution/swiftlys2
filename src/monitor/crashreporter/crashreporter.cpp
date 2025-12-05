@@ -722,13 +722,17 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             uint64_t frameSize = static_cast<uint64_t>(gregs[REG_RBP]) - static_cast<uint64_t>(gregs[REG_RSP]);
             stackInfo["frameSize"] = fmt::format("0x{:X} ({} bytes)", frameSize, frameSize);
 
+            write(STDERR_FILENO, "Before callstack setup\n", 32);
             // Call stack using libbacktrace
             auto& callStack = crashReport["callstack"];
             auto& nativeStack = callStack["native"];
             nativeStack["captureMethod"] = "libbacktrace";
+            write(STDERR_FILENO, "After captureMethod set\n", 33);
 
+            write(STDERR_FILENO, "Before frames array init\n", 34);
             auto& frames = nativeStack["frames"];
             frames = nlohmann::json::array();
+            write(STDERR_FILENO, "After frames array init\n", 33);
 
             struct BacktraceData
             {
@@ -736,28 +740,59 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                 int frameIndex;
             };
             BacktraceData btData = {&frames, 0};
+            write(STDERR_FILENO, "BacktraceData initialized\n", 35);
 
             auto fullCallback = [](void* data, uintptr_t pc, const char* filename, int lineno, const char* function) -> int
             {
+                write(STDERR_FILENO, "fullCallback entered\n", 30);
                 auto* btData = static_cast<BacktraceData*>(data);
+                if (!btData || !btData->frames)
+                {
+                    write(STDERR_FILENO, "btData or frames is null!\n", 35);
+                    return 1;
+                }
+                write(STDERR_FILENO, "Creating frame json\n", 29);
                 nlohmann::json frame;
                 frame["index"] = btData->frameIndex++;
+                write(STDERR_FILENO, "Set index\n", 18);
                 frame["address"] = fmt::format("0x{:016X}", pc);
+                write(STDERR_FILENO, "Set address\n", 20);
                 frame["function"] = function ? function : "UNKNOWN";
+                write(STDERR_FILENO, "Set function\n", 21);
                 frame["filename"] = filename ? filename : "UNKNOWN";
+                write(STDERR_FILENO, "Set filename\n", 21);
                 frame["line"] = lineno;
+                write(STDERR_FILENO, "Before push_back\n", 25);
                 btData->frames->push_back(frame);
+                write(STDERR_FILENO, "After push_back\n", 24);
                 return 0;
             };
 
-            auto errorCallback = [](void* data, const char* msg, int errnum) {};
+            auto errorCallback = [](void* data, const char* msg, int errnum)
+            {
+                write(STDERR_FILENO, "errorCallback: ", 23);
+                if (msg)
+                {
+                    write(STDERR_FILENO, msg, strlen(msg));
+                }
+                write(STDERR_FILENO, "\n", 1);
+            };
 
+            write(STDERR_FILENO, "Before backtrace_full check\n", 37);
             if (g_backtraceState)
             {
+                write(STDERR_FILENO, "g_backtraceState valid, calling backtrace_full\n", 56);
                 backtrace_full(g_backtraceState, 0, fullCallback, errorCallback, &btData);
+                write(STDERR_FILENO, "backtrace_full returned\n", 33);
+            }
+            else
+            {
+                write(STDERR_FILENO, "g_backtraceState is NULL!\n", 35);
             }
 
+            write(STDERR_FILENO, "Setting frameCount\n", 28);
             nativeStack["frameCount"] = btData.frameIndex;
+            write(STDERR_FILENO, "frameCount set successfully\n", 37);
 
             // Managed stack placeholder
             auto& managedStack = callStack["managed"];
