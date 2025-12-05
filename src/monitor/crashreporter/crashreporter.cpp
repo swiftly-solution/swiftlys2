@@ -90,6 +90,14 @@ inline bool ForkDemangle(const char* mangled, char* output, size_t outputSize)
 
     if (pid == 0)
     {
+        // Debug: child started
+        write(STDERR_FILENO, "[ForkDemangle Child] Started\n", 29);
+
+        // Unblock all signals
+        sigset_t allSigs;
+        sigfillset(&allSigs);
+        sigprocmask(SIG_UNBLOCK, &allSigs, nullptr);
+
         // Reset signal handlers in child process
         signal(SIGSEGV, SIG_DFL);
         signal(SIGABRT, SIG_DFL);
