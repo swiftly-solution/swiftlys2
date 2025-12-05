@@ -49,7 +49,7 @@
 #include "common/linux/linux_libc_support.h"
 #include "third_party/lss/linux_syscall_support.h"
 #include <cxxabi.h>
-#include <demangler/include/demangler/Demangle.h>
+#include <demangler/Demangle.h>
 #include <dlfcn.h>
 #include <execinfo.h>
 #include <linux/limits.h>

@@ -74,6 +74,10 @@ target("swiftlys2")
         breakpad_path,
     })
 
+    if not is_plat("windows") then
+        add_includedirs("vendor/demangler/include")
+    end
+
     --[[ -------------------------------- Flags Section -------------------------------- ]]
 
     if is_plat("windows") then
