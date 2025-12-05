@@ -59,9 +59,48 @@
 #include <sys/sysinfo.h>
 #include <ucontext.h>
 #include <unistd.h>
+
+struct BacktraceData
+{
+    nlohmann::json* frames;
+    int frameIndex;
+};
+
 static siginfo_t* g_linuxSigInfo = nullptr;
 static ucontext_t* g_linuxContext = nullptr;
 static struct backtrace_state* g_backtraceState = nullptr;
+
+static int BacktraceFullCallback(void* data, uintptr_t pc, const char* filename, int lineno, const char* function)
+{
+    write(STDERR_FILENO, "fullCallback entered\n", 21);
+    auto* btData = static_cast<BacktraceData*>(data);
+    if (!btData || !btData->frames)
+    {
+        write(STDERR_FILENO, "btData or frames is null!\n", 26);
+        return 1;
+    }
+    write(STDERR_FILENO, "Creating frame json\n", 20);
+    nlohmann::json frame;
+    frame["index"] = btData->frameIndex++;
+    frame["address"] = fmt::format("0x{:016X}", pc);
+    frame["function"] = function ? function : "UNKNOWN";
+    frame["filename"] = filename ? filename : "UNKNOWN";
+    frame["line"] = lineno;
+    write(STDERR_FILENO, "Before push_back\n", 17);
+    btData->frames->push_back(frame);
+    write(STDERR_FILENO, "After push_back\n", 16);
+    return 0;
+}
+
+static void BacktraceErrorCallback(void* data, const char* msg, int errnum)
+{
+    write(STDERR_FILENO, "errorCallback: ", 15);
+    if (msg)
+    {
+        write(STDERR_FILENO, msg, strlen(msg));
+    }
+    write(STDERR_FILENO, "\n", 1);
+}
 #endif
 
 static std::string g_dumpPath;
@@ -734,65 +773,24 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             frames = nlohmann::json::array();
             write(STDERR_FILENO, "After frames array init\n", 33);
 
-            struct BacktraceData
-            {
-                nlohmann::json* frames;
-                int frameIndex;
-            };
             BacktraceData btData = {&frames, 0};
-            write(STDERR_FILENO, "BacktraceData initialized\n", 35);
+            write(STDERR_FILENO, "BacktraceData initialized\n", 26);
 
-            auto fullCallback = [](void* data, uintptr_t pc, const char* filename, int lineno, const char* function) -> int
-            {
-                write(STDERR_FILENO, "fullCallback entered\n", 30);
-                auto* btData = static_cast<BacktraceData*>(data);
-                if (!btData || !btData->frames)
-                {
-                    write(STDERR_FILENO, "btData or frames is null!\n", 35);
-                    return 1;
-                }
-                write(STDERR_FILENO, "Creating frame json\n", 29);
-                nlohmann::json frame;
-                frame["index"] = btData->frameIndex++;
-                write(STDERR_FILENO, "Set index\n", 18);
-                frame["address"] = fmt::format("0x{:016X}", pc);
-                write(STDERR_FILENO, "Set address\n", 20);
-                frame["function"] = function ? function : "UNKNOWN";
-                write(STDERR_FILENO, "Set function\n", 21);
-                frame["filename"] = filename ? filename : "UNKNOWN";
-                write(STDERR_FILENO, "Set filename\n", 21);
-                frame["line"] = lineno;
-                write(STDERR_FILENO, "Before push_back\n", 25);
-                btData->frames->push_back(frame);
-                write(STDERR_FILENO, "After push_back\n", 24);
-                return 0;
-            };
-
-            auto errorCallback = [](void* data, const char* msg, int errnum)
-            {
-                write(STDERR_FILENO, "errorCallback: ", 23);
-                if (msg)
-                {
-                    write(STDERR_FILENO, msg, strlen(msg));
-                }
-                write(STDERR_FILENO, "\n", 1);
-            };
-
-            write(STDERR_FILENO, "Before backtrace_full check\n", 37);
+            write(STDERR_FILENO, "Before backtrace_full check\n", 28);
             if (g_backtraceState)
             {
-                write(STDERR_FILENO, "g_backtraceState valid, calling backtrace_full\n", 56);
-                backtrace_full(g_backtraceState, 0, fullCallback, errorCallback, &btData);
-                write(STDERR_FILENO, "backtrace_full returned\n", 33);
+                write(STDERR_FILENO, "g_backtraceState valid, calling backtrace_full\n", 48);
+                backtrace_full(g_backtraceState, 0, BacktraceFullCallback, BacktraceErrorCallback, &btData);
+                write(STDERR_FILENO, "backtrace_full returned\n", 24);
             }
             else
             {
-                write(STDERR_FILENO, "g_backtraceState is NULL!\n", 35);
+                write(STDERR_FILENO, "g_backtraceState is NULL!\n", 26);
             }
 
-            write(STDERR_FILENO, "Setting frameCount\n", 28);
+            write(STDERR_FILENO, "Setting frameCount\n", 19);
             nativeStack["frameCount"] = btData.frameIndex;
-            write(STDERR_FILENO, "frameCount set successfully\n", 37);
+            write(STDERR_FILENO, "frameCount set successfully\n", 28);
 
             // Managed stack placeholder
             auto& managedStack = callStack["managed"];
