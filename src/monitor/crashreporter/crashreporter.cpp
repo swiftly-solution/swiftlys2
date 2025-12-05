@@ -68,18 +68,21 @@ inline bool ForkDemangle(const char* mangled, char* output, size_t outputSize)
 {
     if (!mangled || !output || outputSize == 0)
     {
+        write(STDERR_FILENO, "[ForkDemangle] Invalid params\n", 30);
         return false;
     }
 
     int pipefd[2];
     if (pipe(pipefd) == -1)
     {
+        write(STDERR_FILENO, "[ForkDemangle] pipe() failed\n", 29);
         return false;
     }
 
     pid_t pid = fork();
     if (pid == -1)
     {
+        write(STDERR_FILENO, "[ForkDemangle] fork() failed\n", 29);
         close(pipefd[0]);
         close(pipefd[1]);
         return false;
@@ -97,6 +100,10 @@ inline bool ForkDemangle(const char* mangled, char* output, size_t outputSize)
             len = outputSize - 1;
         }
 
+        char debugBuf[128];
+        int debugLen = snprintf(debugBuf, sizeof(debugBuf), "[ForkDemangle Child] status=%d, len=%zu, demangled=%s\n", status, len, demangled ? "yes" : "no");
+        write(STDERR_FILENO, debugBuf, debugLen);
+
         write(pipefd[1], &len, sizeof(len));
         write(pipefd[1], result, len);
         if (demangled)
@@ -111,9 +118,19 @@ inline bool ForkDemangle(const char* mangled, char* output, size_t outputSize)
     close(pipefd[1]);
     size_t len = 0;
     bool success = false;
-    if (read(pipefd[0], &len, sizeof(len)) == sizeof(len) && len < outputSize)
+    ssize_t readLen = read(pipefd[0], &len, sizeof(len));
+
+    char debugBuf[128];
+    int debugLen = snprintf(debugBuf, sizeof(debugBuf), "[ForkDemangle Parent] readLen=%zd, len=%zu\n", readLen, len);
+    write(STDERR_FILENO, debugBuf, debugLen);
+
+    if (readLen == sizeof(len) && len < outputSize)
     {
-        if (read(pipefd[0], output, len) == static_cast<ssize_t>(len))
+        ssize_t dataRead = read(pipefd[0], output, len);
+        debugLen = snprintf(debugBuf, sizeof(debugBuf), "[ForkDemangle Parent] dataRead=%zd\n", dataRead);
+        write(STDERR_FILENO, debugBuf, debugLen);
+
+        if (dataRead == static_cast<ssize_t>(len))
         {
             output[len] = '\0';
             success = true;
@@ -122,6 +139,10 @@ inline bool ForkDemangle(const char* mangled, char* output, size_t outputSize)
 
     close(pipefd[0]);
     waitpid(pid, nullptr, 0);
+
+    debugLen = snprintf(debugBuf, sizeof(debugBuf), "[ForkDemangle] success=%d\n", success);
+    write(STDERR_FILENO, debugBuf, debugLen);
+
     return success;
 }
 #endif
