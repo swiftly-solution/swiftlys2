@@ -60,6 +60,7 @@
 #include <unistd.h>
 static siginfo_t* g_linuxSigInfo = nullptr;
 static ucontext_t* g_linuxContext = nullptr;
+static char g_demangleBuffer[4096];
 #endif
 
 static std::string g_dumpPath;
@@ -747,16 +748,15 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
 
                     if (dlInfo.dli_sname)
                     {
+                        size_t length = sizeof(g_demangleBuffer);
                         int demangleStatus = 0;
-                        char* demangled = abi::__cxa_demangle(dlInfo.dli_sname, nullptr, nullptr, &demangleStatus);
+                        char* demangled = abi::__cxa_demangle(dlInfo.dli_sname, g_demangleBuffer, &length, &demangleStatus);
                         if (demangleStatus == 0 && demangled != nullptr)
                         {
                             frame["symbol"] = demangled;
-                            free(demangled);
                         }
                         else
                         {
-                            // Demangling failed, use original symbol
                             frame["symbol"] = dlInfo.dli_sname;
                         }
                         frame["symbolAddress"] = fmt::format("0x{:016X}", reinterpret_cast<uintptr_t>(dlInfo.dli_saddr));
