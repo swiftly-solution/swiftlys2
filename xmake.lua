@@ -74,10 +74,6 @@ target("swiftlys2")
         breakpad_path,
     })
 
-    if not is_plat("windows") then
-        add_includedirs("vendor/demangler/include")
-    end
-
     --[[ -------------------------------- Flags Section -------------------------------- ]]
 
     if is_plat("windows") then
@@ -265,9 +261,6 @@ target("swiftlys2")
             breakpad_path.."/common/linux/memory_mapped_file.cc",
             breakpad_path.."/common/linux/safe_readlink.cc",
             breakpad_path.."/common/linux/breakpad_getcontext.S",
-
-            -- Demangler library
-            "vendor/demangler/source/*.cpp",
         })
     end
 
