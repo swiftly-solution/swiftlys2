@@ -94,9 +94,11 @@ public partial interface CEntityInstance
 
   /// <summary>
   /// Despawn the entity.
+  /// </summary>    
   public void Despawn();
 
   /// <summary>
   /// Despawn the entity asynchronously.
+  /// </summary>    
   public Task DespawnAsync();
 }
