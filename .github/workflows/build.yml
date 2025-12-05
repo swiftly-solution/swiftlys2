@@ -64,7 +64,7 @@ jobs:
     - name: Install dependencies
       run: |
         apt-get update
-        apt install -y libreadline-dev libboost-all-dev libomp-dev
+        apt install -y libreadline-dev libboost-all-dev libomp-dev libbacktrace-dev
     - name: Checkout repository and submodules
       uses: actions/checkout@v4
       with:
