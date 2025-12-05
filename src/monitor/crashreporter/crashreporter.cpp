@@ -90,6 +90,13 @@ inline bool ForkDemangle(const char* mangled, char* output, size_t outputSize)
 
     if (pid == 0)
     {
+        // Reset signal handlers in child process
+        signal(SIGSEGV, SIG_DFL);
+        signal(SIGABRT, SIG_DFL);
+        signal(SIGFPE, SIG_DFL);
+        signal(SIGILL, SIG_DFL);
+        signal(SIGBUS, SIG_DFL);
+
         close(pipefd[0]);
         int status = 0;
         char* demangled = abi::__cxa_demangle(mangled, nullptr, nullptr, &status);
