@@ -1,7 +1,7 @@
+using System.Text.Json;
+using System.Reflection;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.Json;
 
 namespace SwiftlyS2.Core.Diagnostics;
 
@@ -24,66 +24,63 @@ internal static class StackTraceExport
 
         try
         {
-            var stackTrace = new StackTrace(1, true); // Skip this method
+            var stackTrace = new StackTrace(1, true); // Skip current method
             var frames = new List<object>();
 
             int frameIndex = 0;
             foreach (var frame in stackTrace.GetFrames())
             {
                 var method = frame.GetMethod();
-                if (method == null) continue;
-
-                var declaringType = method.DeclaringType;
-                var typeName = declaringType?.FullName ?? "<unknown>";
-                var methodName = method.Name;
-                var fileName = frame.GetFileName();
-                var lineNumber = frame.GetFileLineNumber();
-                var ilOffset = frame.GetILOffset();
+                if (method == null)
+                {
+                    continue;
+                }
 
                 var frameInfo = new Dictionary<string, object> {
                     ["index"] = frameIndex++,
-                    ["type"] = typeName,
-                    ["method"] = methodName,
-                    ["ilOffset"] = $"0x{ilOffset:X4}"
+                    ["type"] = method.DeclaringType?.FullName ?? "<unknown>",
+                    ["method"] = method.Name,
+                    ["ilOffset"] = $"0x{frame.GetILOffset():X4}"
                 };
 
-                if (!string.IsNullOrEmpty(fileName))
+                var fileName = frame.GetFileName();
+                if (!string.IsNullOrWhiteSpace(fileName))
                 {
                     frameInfo["file"] = Path.GetFileName(fileName);
-                    frameInfo["line"] = lineNumber;
+                    frameInfo["line"] = frame.GetFileLineNumber();
                 }
 
-                // Add method signature if available
-                var parameters = method.GetParameters();
-                if (parameters.Length > 0)
-                {
-                    var paramTypes = parameters.Select(p => p.ParameterType.Name).ToArray();
-                    frameInfo["parameters"] = string.Join(", ", paramTypes);
-                }
+                frameInfo["pattern"] = $"{(method is MethodInfo mi ? mi.ReturnType.Name : "Void")} ({string.Join(", ", method.GetParameters().Select(p => p.ParameterType.Name))})";
 
                 frames.Add(frameInfo);
             }
 
+            ThreadPool.GetAvailableThreads(out var availableWorkerThreads, out var availableCompletionPortThreads);
+            ThreadPool.GetMaxThreads(out var maxWorkerThreads, out var maxCompletionPortThreads);
+            var busyWorkerThreads = maxWorkerThreads - availableWorkerThreads;
+            var processThreadCount = System.Diagnostics.Process.GetCurrentProcess().Threads.Count;
+
             var result = new Dictionary<string, object> {
+                ["note"] = "This stack trace is for reference only and may not be fully accurate",
                 ["captureMethod"] = "StackTrace.GetFrames",
-                ["captureTimeUtc"] = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                ["threadId"] = Environment.CurrentManagedThreadId,
-                ["threadName"] = Thread.CurrentThread.Name ?? "(unnamed)",
                 ["frameCount"] = frames.Count,
-                ["frames"] = frames
+                ["frames"] = frames,
+                ["data"] = new Dictionary<string, object> {
+                    ["threadId"] = Environment.CurrentManagedThreadId,
+                    ["threadName"] = Thread.CurrentThread.Name ?? "(unnamed)",
+                    ["heapMemory"] = $"{GC.GetTotalMemory(false) / 1024.0f / 1024.0f:0.00} MB",
+                    ["processThreads"] = processThreadCount,
+                    ["workerThreads"] = $"{busyWorkerThreads}/{maxWorkerThreads} (Busy/Max)",
+                    ["completionPortThreads"] = $"{maxCompletionPortThreads - availableCompletionPortThreads}/{maxCompletionPortThreads} (Busy/Max)"
+                }
             };
 
-            var json = JsonSerializer.Serialize(result, new JsonSerializerOptions {
-                WriteIndented = false
-            });
+            var utf8 = JsonSerializer.SerializeToUtf8Bytes(result);
+            int len = Math.Min(utf8.Length, bufferSize - 1);
+            utf8.AsSpan(0, len).CopyTo(new Span<byte>(buffer, len));
+            buffer[len] = 0;
 
-            var bytes = Encoding.UTF8.GetBytes(json);
-            int copyLen = Math.Min(bytes.Length, bufferSize - 1);
-
-            Marshal.Copy(bytes, 0, (IntPtr)buffer, copyLen);
-            buffer[copyLen] = 0; // Null terminate
-
-            return copyLen;
+            return len;
         }
         catch
         {
