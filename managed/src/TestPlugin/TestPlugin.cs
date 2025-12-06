@@ -38,6 +38,7 @@ using System.Collections.Concurrent;
 using Dia2Lib;
 using System.Reflection.Metadata;
 using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsTCPIP;
+using Gee.External.Capstone.X86;
 
 namespace TestPlugin;
 
@@ -206,8 +207,7 @@ public class TestPlugin : BasePlugin
             for (var j = 0; j < 5; j++)
             {
                 var optionText = $"Menu # {x + 1} - Option # {j + 1}";
-                var button = new ButtonMenuOption(optionText)
-                    { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
+                var button = new ButtonMenuOption(optionText) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
                 button.Click += ( sender, args ) =>
                 {
                     args.Player.SendChat($"Clicked: {optionText}");
@@ -1262,8 +1262,7 @@ public class TestPlugin : BasePlugin
             for (var j = 0; j < 5; j++)
             {
                 var optionText = $"Menu # {i + 1} - Option # {j + 1}";
-                var button = new ButtonMenuOption(optionText)
-                    { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
+                var button = new ButtonMenuOption(optionText) { TextStyle = MenuOptionTextStyle.ScrollLeftLoop, MaxWidth = 16f };
                 button.Click += ( sender, args ) =>
                 {
                     args.Player.SendChat($"Clicked: {optionText}");
@@ -1316,6 +1315,13 @@ public class TestPlugin : BasePlugin
     public void CommandTestCommand( ICommandContext context )
     {
         Console.WriteLine(context);
+    }
+
+    [Command("mcrash")]
+    public async void ManagedCrashCommand( ICommandContext _ )
+    {
+        await Task.Delay(1);
+        throw new Exception();
     }
 
     [Command("ex1")]
