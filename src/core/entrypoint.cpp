@@ -325,22 +325,31 @@ bool SwiftlyCore::Unload()
 #ifdef _WIN32
 void __fastcall PreloadDLLHook(HMODULE hModule)
 {
-    char modulePath[MAX_PATH] = {0};
-    DWORD len = GetModuleFileNameA(hModule, modulePath, MAX_PATH);
-    if (len > 0 && len < MAX_PATH)
+    if (!g_pPreloadDLLHook || !g_pPreloadDLLHook->GetOriginal())
     {
-        // Skip DLLs in managed and plugins directory
-        static const std::regex skipPattern(R"([/\\](managed|swiftlys2[/\\]plugins)[/\\])", std::regex_constants::icase);
-        if (std::regex_search(modulePath, skipPattern))
+        return;
+    }
+
+    if (hModule)
+    {
+        char modulePath[MAX_PATH] = {0};
+        DWORD len = GetModuleFileNameA(hModule, modulePath, MAX_PATH);
+        if (len > 0 && len < MAX_PATH)
         {
-            auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-            if (logger)
+            // Skip DLLs in managed and plugins directory
+            static const std::regex skipPattern(R"([/\\](managed|swiftlys2[/\\]plugins)[/\\])", std::regex_constants::icase);
+            if (std::regex_search(modulePath, skipPattern))
             {
-                logger->Info("PreloadDLL", fmt::format("Skipping DLL: {}\n", modulePath));
+                auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
+                if (logger)
+                {
+                    logger->Info("PreloadDLL", fmt::format("Skipping DLL: {}\n", modulePath));
+                }
+                return;
             }
-            return;
         }
     }
+
     return reinterpret_cast<decltype(&PreloadDLLHook)>(g_pPreloadDLLHook->GetOriginal())(hModule);
 }
 #endif
