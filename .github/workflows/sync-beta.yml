@@ -13,16 +13,16 @@ permissions:
 
 jobs:
   on-pr-merged:
-    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    if: (github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'beta') || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Synchronize
-        run: |
-          git fetch origin
-          git checkout beta
-          git reset --hard origin/master
-          git push -f origin beta
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Synchronize
+      run: |
+        git fetch origin
+        git checkout beta
+        git reset --hard origin/master
+        git push -f origin beta
