@@ -27,6 +27,7 @@
 #include <public/eiface.h>
 
 #include <core/entrypoint.h>
+#include <core/managed/host/host.h>
 #include <core/managed/host/strconv.h>
 
 #include <fmt/format.h>
@@ -401,9 +402,33 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             int frameCount = 0;
             auto& frames = nativeStack["frames"];
 
-            // Placeholder for managed stack
+            // Capture managed (.NET) stack trace
             auto& managedStack = callStack["managed"];
-            managedStack["msg"] = "Managed stack capture not yet implemented";
+            if (IsManagedStackCaptureAvailable())
+            {
+                static char jsonBuffer[32768];
+                int len = GetManagedStackTraceJson(jsonBuffer, sizeof(jsonBuffer));
+                if (len > 0)
+                {
+                    try
+                    {
+                        managedStack = nlohmann::json::parse(jsonBuffer);
+                    }
+                    catch (const nlohmann::json::parse_error&)
+                    {
+                        managedStack["raw"] = jsonBuffer;
+                        managedStack["parseError"] = true;
+                    }
+                }
+                else
+                {
+                    managedStack["error"] = "Failed to capture managed stack trace";
+                }
+            }
+            else
+            {
+                managedStack["error"] = "Managed stack capture not initialized";
+            }
 
             // Walk the stack
             while (frameCount < maxFrames)
@@ -768,9 +793,33 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
                 frames.push_back(frame);
             }
 
-            // Managed stack placeholder
+            // Capture managed (.NET) stack trace
             auto& managedStack = callStack["managed"];
-            managedStack["msg"] = "Managed stack capture not yet implemented";
+            if (IsManagedStackCaptureAvailable())
+            {
+                static char jsonBuffer[32768];
+                int len = GetManagedStackTraceJson(jsonBuffer, sizeof(jsonBuffer));
+                if (len > 0)
+                {
+                    try
+                    {
+                        managedStack = nlohmann::json::parse(jsonBuffer);
+                    }
+                    catch (const nlohmann::json::parse_error&)
+                    {
+                        managedStack["raw"] = jsonBuffer;
+                        managedStack["parseError"] = true;
+                    }
+                }
+                else
+                {
+                    managedStack["error"] = "Failed to capture managed stack trace";
+                }
+            }
+            else
+            {
+                managedStack["error"] = "Managed stack capture not initialized";
+            }
 
             // Stack memory dump
             auto& stackMemory = crashReport["stackMemory"];

@@ -9,7 +9,7 @@ internal class Entrypoint
 {
     [UnmanagedCallersOnly]
     [SecurityCritical]
-    public unsafe static void Start( IntPtr nativeTable, int nativeTableSize, IntPtr basePath, IntPtr logsPath )
+    public static unsafe void Start( IntPtr nativeTable, int nativeTableSize, IntPtr basePath, IntPtr logsPath )
     {
         try
         {
