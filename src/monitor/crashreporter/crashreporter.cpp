@@ -65,6 +65,7 @@ static ucontext_t* g_linuxContext = nullptr;
 
 static std::string g_dumpPath;
 static bool g_dumpWritten = false;
+static char g_managedStackBuffer[32768];
 
 void RegisterCrashHandlers();
 void UnregisterCrashHandlers();
@@ -92,6 +93,7 @@ void CrashReporter::Init()
     }
 
     g_dumpPath = Files::GeneratePath(g_SwiftlyCore.GetCorePath() + "dumps");
+    memset(g_managedStackBuffer, 0, sizeof(g_managedStackBuffer));
 
     RegisterCrashHandlers();
 }
@@ -406,17 +408,16 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             auto& managedStack = callStack["managed"];
             if (IsManagedStackCaptureAvailable())
             {
-                static char jsonBuffer[32768];
-                int len = GetManagedStackTraceJson(jsonBuffer, sizeof(jsonBuffer));
+                int len = GetManagedStackTraceJson(g_managedStackBuffer, sizeof(g_managedStackBuffer));
                 if (len > 0)
                 {
                     try
                     {
-                        managedStack = nlohmann::json::parse(jsonBuffer);
+                        managedStack = nlohmann::json::parse(g_managedStackBuffer);
                     }
                     catch (const nlohmann::json::parse_error&)
                     {
-                        managedStack["raw"] = jsonBuffer;
+                        managedStack["raw"] = g_managedStackBuffer;
                         managedStack["parseError"] = true;
                     }
                 }
@@ -797,17 +798,16 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
             auto& managedStack = callStack["managed"];
             if (IsManagedStackCaptureAvailable())
             {
-                static char jsonBuffer[32768];
-                int len = GetManagedStackTraceJson(jsonBuffer, sizeof(jsonBuffer));
+                int len = GetManagedStackTraceJson(g_managedStackBuffer, sizeof(g_managedStackBuffer));
                 if (len > 0)
                 {
                     try
                     {
-                        managedStack = nlohmann::json::parse(jsonBuffer);
+                        managedStack = nlohmann::json::parse(g_managedStackBuffer);
                     }
                     catch (const nlohmann::json::parse_error&)
                     {
-                        managedStack["raw"] = jsonBuffer;
+                        managedStack["raw"] = g_managedStackBuffer;
                         managedStack["parseError"] = true;
                     }
                 }
