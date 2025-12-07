@@ -796,31 +796,30 @@ inline void ReportCrashIncident(const std::string& basePath, void* exceptionInfo
 
             // Capture managed (.NET) stack trace
             auto& managedStack = callStack["managed"];
-            // if (IsManagedStackCaptureAvailable())
-            // {
-            //     int len = GetManagedStackTraceJson(g_managedStackBuffer, sizeof(g_managedStackBuffer));
-            //     if (len > 0)
-            //     {
-            //         try
-            //         {
-            //             managedStack = nlohmann::json::parse(g_managedStackBuffer);
-            //         }
-            //         catch (const nlohmann::json::parse_error&)
-            //         {
-            //             managedStack["raw"] = g_managedStackBuffer;
-            //             managedStack["parseError"] = true;
-            //         }
-            //     }
-            //     else
-            //     {
-            //         managedStack["error"] = "Failed to capture managed stack trace";
-            //     }
-            // }
-            // else
-            // {
-            //     managedStack["error"] = "Managed stack capture not initialized";
-            // }
-            managedStack["error"] = "Failed to capture managed stack trace";
+            if (IsManagedStackCaptureAvailable())
+            {
+                int len = GetManagedStackTraceJson(g_managedStackBuffer, sizeof(g_managedStackBuffer));
+                if (len > 0)
+                {
+                    try
+                    {
+                        managedStack = nlohmann::json::parse(g_managedStackBuffer);
+                    }
+                    catch (const nlohmann::json::parse_error&)
+                    {
+                        managedStack["raw"] = g_managedStackBuffer;
+                        managedStack["parseError"] = true;
+                    }
+                }
+                else
+                {
+                    managedStack["error"] = "Failed to capture managed stack trace";
+                }
+            }
+            else
+            {
+                managedStack["error"] = "Managed stack capture not initialized";
+            }
 
             // Stack memory dump
             auto& stackMemory = crashReport["stackMemory"];

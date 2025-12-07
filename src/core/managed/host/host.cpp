@@ -53,33 +53,10 @@ typedef int(CORECLR_DELEGATE_CALLTYPE* GetStackTraceJsonFn)(char* buffer, int bu
 static GetStackTraceJsonFn g_getStackTraceJson = nullptr;
 static bool g_stackCaptureInitialized = false;
 
-bool InitManagedStackCapture()
+extern "C" void SetManagedStackTraceCallback(GetStackTraceJsonFn callback)
 {
-    if (g_stackCaptureInitialized)
-    {
-        return true;
-    }
-
-    if (!_load_assembly_and_get_function_pointer)
-    {
-        return false;
-    }
-
-#ifdef _WIN32
-    std::wstring dllPath = widenedOriginPath + L"bin\\managed\\SwiftlyS2.CS2.dll";
-#else
-    std::string dllPath = widenedOriginPath + "bin/managed/SwiftlyS2.CS2.dll";
-#endif
-
-    int rc = _load_assembly_and_get_function_pointer(dllPath.c_str(), STR("SwiftlyS2.Core.Diagnostics.StackTraceExport, SwiftlyS2.CS2"), STR("GetStackTraceJson"), UNMANAGEDCALLERSONLY_METHOD, nullptr, (void**)&g_getStackTraceJson);
-
-    if (rc != 0 || g_getStackTraceJson == nullptr)
-    {
-        return false;
-    }
-
-    g_stackCaptureInitialized = true;
-    return true;
+    g_getStackTraceJson = callback;
+    g_stackCaptureInitialized = (callback != nullptr);
 }
 
 bool IsManagedStackCaptureAvailable()
@@ -224,7 +201,7 @@ bool InitializeHostFXR(std::string origin_path)
 
 bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, std::string log_path)
 {
-    typedef void(CORECLR_DELEGATE_CALLTYPE * custom_loader_fn)(void*, int, const char*, const char*);
+    typedef void(CORECLR_DELEGATE_CALLTYPE * custom_loader_fn)(void*, int, const char*, const char*, void*);
     static custom_loader_fn custom_loader = nullptr;
 
     if (custom_loader == nullptr)
@@ -246,10 +223,8 @@ bool InitializeDotNetAPI(void* scripting_table, int scripting_table_size, std::s
 
         static std::string s = log_path;
 
-        custom_loader(scripting_table, scripting_table_size, original_path.c_str(), s.c_str());
-
-        // Initialize managed stack capture after .NET API is ready
-        InitManagedStackCapture();
+        // Pass the callback setter function pointer to C#
+        custom_loader(scripting_table, scripting_table_size, original_path.c_str(), s.c_str(), (void*)&SetManagedStackTraceCallback);
     }
 
     return true;

@@ -11,6 +11,7 @@ using SwiftlyS2.Core.Hosting;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.SteamAPI;
+using SwiftlyS2.Core.Diagnostics;
 
 namespace SwiftlyS2.Core;
 
@@ -18,6 +19,7 @@ internal static class Bootstrap
 {
     // how tf i forgot services can be collected hahahahahahahhaahhahaa FUCK
     private static IHost? sw2Host;
+    private unsafe delegate void SetStackTraceCallbackDelegate( delegate* unmanaged< byte*, int, int > callback );
 
     private static IntPtr SteamAPIDLLResolver( string libraryName, Assembly assembly, DllImportSearchPath? searchPath )
     {
@@ -37,8 +39,17 @@ internal static class Bootstrap
         return IntPtr.Zero;
     }
 
-    public static void Start( IntPtr nativeTable, int nativeTableSize, string basePath, string logPath )
+    public static void Start( IntPtr nativeTable, int nativeTableSize, string basePath, string logPath, IntPtr setStackTraceCallbackPtr )
     {
+        if (setStackTraceCallbackPtr != IntPtr.Zero)
+        {
+            var setCallback = Marshal.GetDelegateForFunctionPointer<SetStackTraceCallbackDelegate>(setStackTraceCallbackPtr);
+            unsafe
+            {
+                setCallback(&StackTraceExport.GetStackTraceJson);
+            }
+        }
+
         Environment.SetEnvironmentVariable("SWIFTLY_MANAGED_ROOT", basePath);
         Environment.SetEnvironmentVariable("SWIFTLY_MANAGED_LOG", logPath);
         NativeBinding.BindNatives(nativeTable, nativeTableSize);
@@ -92,6 +103,5 @@ internal static class Bootstrap
             .Build();
 
         sw2Host.Start();
-        // provider.UseTestService();
     }
 }
