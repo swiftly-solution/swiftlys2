@@ -480,7 +480,7 @@ void* SwiftlyCore::GetInterface(const std::string& interface_name)
 
     if (ifaceptr != nullptr)
     {
-        g_mInterfacesCache.insert({ interface_name, ifaceptr });
+        g_mInterfacesCache.insert({interface_name, ifaceptr});
     }
 
     return ifaceptr;
