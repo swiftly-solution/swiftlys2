@@ -1122,7 +1122,7 @@ static bool BreakpadDumpCallback(const google_breakpad::MinidumpDescriptor& desc
 {
     if (g_dumpWritten)
     {
-        return;
+        return false;
     }
     g_dumpWritten = true;
 
