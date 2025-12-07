@@ -55,24 +55,24 @@ internal static class StackTraceExport
                 frames.Add(frameInfo);
             }
 
-            ThreadPool.GetAvailableThreads(out var availableWorkerThreads, out var availableCompletionPortThreads);
-            ThreadPool.GetMaxThreads(out var maxWorkerThreads, out var maxCompletionPortThreads);
-            var busyWorkerThreads = maxWorkerThreads - availableWorkerThreads;
-            var processThreadCount = System.Diagnostics.Process.GetCurrentProcess().Threads.Count;
+            // ThreadPool.GetAvailableThreads(out var availableWorkerThreads, out var availableCompletionPortThreads);
+            // ThreadPool.GetMaxThreads(out var maxWorkerThreads, out var maxCompletionPortThreads);
+            // var busyWorkerThreads = maxWorkerThreads - availableWorkerThreads;
+            // var processThreadCount = System.Diagnostics.Process.GetCurrentProcess().Threads.Count;
 
             var result = new Dictionary<string, object> {
                 ["note"] = "This stack trace is for reference only and may not be fully accurate",
                 ["captureMethod"] = "StackTrace.GetFrames",
                 ["frameCount"] = frames.Count,
                 ["frames"] = frames,
-                ["data"] = new Dictionary<string, object> {
-                    ["threadId"] = Environment.CurrentManagedThreadId,
-                    ["threadName"] = Thread.CurrentThread.Name ?? "(unnamed)",
-                    ["heapMemory"] = $"{GC.GetTotalMemory(false) / 1024.0f / 1024.0f:0.00} MB",
-                    ["processThreads"] = processThreadCount,
-                    ["workerThreads"] = $"{busyWorkerThreads}/{maxWorkerThreads} (Busy/Max)",
-                    ["completionPortThreads"] = $"{maxCompletionPortThreads - availableCompletionPortThreads}/{maxCompletionPortThreads} (Busy/Max)"
-                }
+                // ["data"] = new Dictionary<string, object> {
+                //     ["threadId"] = Environment.CurrentManagedThreadId,
+                //     ["threadName"] = Thread.CurrentThread.Name ?? "(unnamed)",
+                //     ["heapMemory"] = $"{GC.GetTotalMemory(false) / 1024.0f / 1024.0f:0.00} MB",
+                //     ["processThreads"] = processThreadCount,
+                //     ["workerThreads"] = $"{busyWorkerThreads}/{maxWorkerThreads} (Busy/Max)",
+                //     ["completionPortThreads"] = $"{maxCompletionPortThreads - availableCompletionPortThreads}/{maxCompletionPortThreads} (Busy/Max)"
+                // }
             };
 
             var utf8 = JsonSerializer.SerializeToUtf8Bytes(result);
