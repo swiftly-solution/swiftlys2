@@ -1121,6 +1121,12 @@ static void CrashSignalHandler(int sig, siginfo_t* info, void* uctx)
 
 static bool BreakpadDumpCallback(const google_breakpad::MinidumpDescriptor& descriptor, void* context, bool succeeded)
 {
+    if (g_dumpWritten)
+    {
+        return;
+    }
+    g_dumpWritten = true;
+
     if (succeeded)
     {
         sys_write(STDOUT_FILENO, "[CrashReporter] Wrote minidump to: ", 35);
