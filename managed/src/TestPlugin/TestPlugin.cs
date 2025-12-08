@@ -730,6 +730,18 @@ public class TestPlugin : BasePlugin
         _authTicketResponse = Callback<GCMessageAvailable_t>.Create(AuthResponse);
     }
 
+    [Command("testmsg")]
+    public void TestMsgCommand( ICommandContext _ )
+    {
+        Core.PlayerManager.SendMessage(MessageType.Chat, ( player, localizer ) =>
+        {
+            Console.WriteLine(player.PlayerID);
+            Console.WriteLine(localizer.ToString());
+            Console.WriteLine("\n");
+            return "hello world";
+        });
+    }
+
     public void AuthResponse( GCMessageAvailable_t param )
     {
         Console.WriteLine($"AuthResponse {param.m_nMessageSize}");

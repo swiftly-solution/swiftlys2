@@ -77,7 +77,6 @@ internal static class Bootstrap
                     .AddTestService()
                     .AddRootDirService()
                     .AddDataDirectoryService()
-                    .AddPlayerManagerService()
                     .AddPluginManager()
                     .AddHookManager()
                     .AddTraceManagerService()

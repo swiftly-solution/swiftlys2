@@ -1,15 +1,23 @@
 ﻿using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Shared.Services;
 using SwiftlyS2.Shared.SteamAPI;
+using SwiftlyS2.Shared.Translation;
 
 namespace SwiftlyS2.Core.Players;
 
 internal class PlayerManagerService : IPlayerManagerService
 {
+    private ITranslationService _translationService;
+
+    public PlayerManagerService( ITranslationService translationService )
+    {
+        _translationService = translationService;
+    }
+
     public int PlayerCount => NativePlayerManager.GetPlayerCount();
 
     public int PlayerCap => NativePlayerManager.GetPlayerCap();
@@ -49,7 +57,7 @@ internal class PlayerManagerService : IPlayerManagerService
     {
         return Enumerable.Range(0, PlayerCap)
             .Where(IsPlayerOnline)
-            .Select(GetPlayer);
+            .Select(( pid ) => GetPlayer(pid)!);
     }
 
     public IEnumerable<IPlayer> FindTargettedPlayers( IPlayer player, string target, TargetSearchMode searchMode,
@@ -276,5 +284,35 @@ internal class PlayerManagerService : IPlayerManagerService
     public Task SendChatEOTAsync( string message )
     {
         return SendMessageAsync(MessageType.ChatEOT, message);
+    }
+
+    public void SendMessage( MessageType kind, Func<IPlayer, ILocalizer, string> messageCallback )
+    {
+        var players = GetAllPlayers();
+        foreach (var player in players)
+        {
+            var localizer = _translationService.GetPlayerLocalizer(player);
+            player.SendMessage(kind, messageCallback(player, localizer));
+        }
+    }
+
+    public void SendMessage( MessageType kind, Func<IPlayer, ILocalizer, string> messageCallback, int htmlDuration = 5000 )
+    {
+        var players = GetAllPlayers();
+        foreach (var player in players)
+        {
+            var localizer = _translationService.GetPlayerLocalizer(player);
+            player.SendMessage(kind, messageCallback(player, localizer), htmlDuration);
+        }
+    }
+
+    public Task SendMessageAsync( MessageType kind, Func<IPlayer, ILocalizer, string> messageCallback )
+    {
+        return SchedulerManager.QueueOrNow(() => SendMessage(kind, messageCallback));
+    }
+
+    public Task SendMessageAsync( MessageType kind, Func<IPlayer, ILocalizer, string> messageCallback, int htmlDuration = 5000 )
+    {
+        return SchedulerManager.QueueOrNow(() => SendMessage(kind, messageCallback, htmlDuration));
     }
 }
