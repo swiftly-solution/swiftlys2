@@ -1,6 +1,7 @@
 import os
 import re
 import yaml
+import shutil
 
 
 SOURCE_DIR = "../../api"
@@ -106,6 +107,7 @@ def format_type_link(type_info):
                 url = t.get('url', '')
                 if url.endswith('.html'):
                     url = "/docs/api/" + convert_to_path(url)
+                    url = url.replace('/api/shared/', '/api/').replace('/api/core/', '/api/')
                 parts.append((text, url))
             else:
                 parts.append((str(t), ''))
@@ -117,6 +119,7 @@ def format_type_link(type_info):
         url = type_info.get('url', '')
         if url.endswith('.html'):
             url = "/docs/api/" + convert_to_path(url)
+            url = url.replace('/api/shared/', '/api/').replace('/api/core/', '/api/')
         return text, url
     return str(type_info), ''
 
@@ -144,6 +147,7 @@ def generate_markdown(yaml_data):
                     fact_url = fact_value.get('url', '')
                     if fact_url and fact_url.endswith('.html'):
                         fact_url = "/docs/api/" + convert_to_path(fact_url)
+                        fact_url = fact_url.replace('/api/shared/', '/api/').replace('/api/core/', '/api/')
                         md += f"**{fact_name}**: [{escape_generics_in_link_text(fact_text)}]({fact_url})\n\n"
                     else:
                         md += f"**{fact_name}**: {fact_text}\n\n"
@@ -173,6 +177,7 @@ def generate_markdown(yaml_data):
                 if inherit_url:
                     if inherit_url.endswith('.html'):
                         inherit_url = "/docs/api/" + convert_to_path(inherit_url)
+                        inherit_url = inherit_url.replace('/api/shared/', '/api/').replace('/api/core/', '/api/')
                     md += f"- [{escape_generics_in_link_text(inherit_text)}]({inherit_url})\n"
                 else:
                     md += f"- {inherit_text}\n"
@@ -185,6 +190,7 @@ def generate_markdown(yaml_data):
                 if list_url:
                     if list_url.endswith('.html'):
                         list_url = "/docs/api/" + convert_to_path(list_url)
+                        list_url = list_url.replace('/api/shared/', '/api/').replace('/api/core/', '/api/')
                     md += f"- [{escape_generics_in_link_text(list_text)}]({list_url})\n"
                 else:
                     md += f"- {list_text}\n"
@@ -265,6 +271,8 @@ def convert_yaml_file(src_path, dest_path):
     else:
         os.makedirs(folder_path, exist_ok=True)
 
+    md_content = md_content.replace('/api/shared', '/api').replace('/api/core', '/api')
+
     with open(final_path, 'w', encoding='utf-8') as f:
         f.write(md_content)
 
@@ -273,7 +281,6 @@ for root, dirs, files in os.walk(SOURCE_DIR):
     for file in files:
         if file.endswith(".yml") or file.endswith(".yaml"):
             raw_base = os.path.splitext(file)[0]
-            # Remove Core and Shared from path
             for prefix in ["SwiftlyS2.Core.", "SwiftlyS2.Shared.", "SwiftlyS2."]:
                 if raw_base.startswith(prefix):
                     raw_base = raw_base[len(prefix):]
@@ -282,5 +289,14 @@ for root, dirs, files in os.walk(SOURCE_DIR):
             dest_file = os.path.join(DEST_DIR, "/".join(new_base.split(".")).lower() + ".mdx")
             convert_yaml_file(os.path.join(root, file), dest_file)
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+index_source = os.path.join(script_dir, "index.mdx")
+index_dest = os.path.join(DEST_DIR, "index.mdx")
+
+if os.path.exists(index_source):
+    shutil.copy2(index_source, index_dest)
+    print(f"Copied index.mdx to {index_dest}")
+else:
+    print(f"Warning: index.mdx not found at {index_source}")
 
 print("MDX generation complete!")

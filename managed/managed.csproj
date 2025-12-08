@@ -24,7 +24,7 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <PlatformTarget>x64</PlatformTarget>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
-
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
