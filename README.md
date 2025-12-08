@@ -108,9 +108,7 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## Acknowledgments
 
-- [Metamod:Source](https://github.com/alliedmodders/metamod-source) - Plugin architecture inspiration
-- [HL2SDK](https://github.com/alliedmodders/hl2sdk) - Source engine integration
-- All our [contributors](https://github.com/swiftly-solution/swiftlys2/graphs/contributors)
+All of the acknowledgments can be seen in [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md)
 
 ---
 
