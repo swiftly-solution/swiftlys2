@@ -435,7 +435,7 @@ internal class PluginManager : IPluginManager
 
             try
             {
-                var context = LoadPlugin(pluginDir, true, silent: false);
+                var context = LoadPlugin(pluginDir, false, silent: false);
                 if (context?.Status == PluginStatus.Loaded)
                 {
                     logger.LogInformation(
