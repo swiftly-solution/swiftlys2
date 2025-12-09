@@ -113,6 +113,25 @@ public interface IPlayerManagerService
     public Task SendMessageAsync( MessageType kind, string message, int htmlDuration = 5000 );
 
     /// <summary>
+    /// Broadcasts a message to players using different display methods based on the message type.
+    /// 
+    /// Thread unsafe, use async variant instead for non-main thread context.
+    /// </summary>
+    /// <param name="kind">The type of message display.</param>
+    /// <param name="messageCallback">The text callback to send to players.</param>
+    public Task SendMessageAsync( MessageType kind, Func<IPlayer, ILocalizer, string> messageCallback );
+
+    /// <summary>
+    /// Sends a message of the specified type to the players with a custom HTML duration.
+    /// 
+    /// Thread unsafe, use async variant instead for non-main thread context.
+    /// </summary>
+    /// <param name="kind">The type of message to send. Determines how the message is processed or displayed.</param>
+    /// <param name="messageCallback">The callback of the message to send. Cannot be null.</param>
+    /// <param name="htmlDuration">The duration, in milliseconds, for which the message should be displayed in HTML format.</param>
+    public Task SendMessageAsync( MessageType kind, Func<IPlayer, ILocalizer, string> messageCallback, int htmlDuration = 5000 );
+
+    /// <summary>
     /// Sends a notify message to the players.
     /// 
     /// Thread unsafe, use async variant instead for non-main thread context.
