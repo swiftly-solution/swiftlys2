@@ -87,15 +87,8 @@ internal partial class CMovementComponentUpdaterImpl : CAnimComponentUpdaterImpl
       return ref _Handle.AsRef<bool>(_NetworkFacingOffset!.Value);
     }
   }
-  private static nint? _ParamHandlesOffset;
-
-  public SchemaUntypedField ParamHandles {
-    get {
-      if (_ParamHandlesOffset == null) {
-        _ParamHandlesOffset = Schema.GetOffset(0xCAAB73FF6A771ED);
-      }
-      return new SchemaUntypedField(_Handle + _ParamHandlesOffset!.Value);
-    }
+  public ISchemaClassFixedArray<CAnimParamHandle> ParamHandles {
+    get => new SchemaClassFixedArray<CAnimParamHandle>(_Handle, 0xCAAB73FF6A771ED, 34, 2, 1);
   }
 
 

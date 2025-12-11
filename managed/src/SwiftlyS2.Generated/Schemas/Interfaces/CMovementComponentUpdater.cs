@@ -29,8 +29,7 @@ public partial interface CMovementComponentUpdater : CAnimComponentUpdater, ISch
   
   public ref bool NetworkFacing { get; }
   
-  // CAnimParamHandle
-  public SchemaUntypedField ParamHandles { get; }
+  public ISchemaClassFixedArray<CAnimParamHandle> ParamHandles { get; }
 
 
 }

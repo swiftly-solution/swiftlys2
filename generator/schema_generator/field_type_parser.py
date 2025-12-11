@@ -222,7 +222,7 @@ def convert_field_type(type, kind, all_class_names, all_enum_names, interface = 
 
   if type in all_class_names:
     if kind == "fixed_array":
-      return (f"SchemaUntypedField", False)
+      return (f"{prefix}SchemaClassFixedArray<{type}>", False)
     complex_type = get_impl_name(type) if not interface else get_interface_name(type)
     return (complex_type, False)
   

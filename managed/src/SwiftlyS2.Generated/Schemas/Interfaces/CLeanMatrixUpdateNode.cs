@@ -18,8 +18,7 @@ public partial interface CLeanMatrixUpdateNode : CLeafUpdateNode, ISchemaClass<C
   // int32[3]
   public SchemaUntypedField FrameCorners { get; }
   
-  // CPoseHandle
-  public SchemaUntypedField Poses { get; }
+  public ISchemaClassFixedArray<CPoseHandle> Poses { get; }
   
   public CAnimInputDamping Damping { get; }
   

@@ -15,8 +15,7 @@ public partial interface CCSPlayer_PingServices : CPlayerPawnComponent, ISchemaC
   static string? ISchemaClass<CCSPlayer_PingServices>.ClassName => null;
 
   
-  // GameTime_t
-  public SchemaUntypedField PlayerPingTokens { get; }
+  public ISchemaClassFixedArray<GameTime_t> PlayerPingTokens { get; }
   
   public ref CHandle<CPlayerPing> PlayerPing { get; }
 

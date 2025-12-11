@@ -27,15 +27,8 @@ internal partial class CLeanMatrixUpdateNodeImpl : CLeafUpdateNodeImpl, CLeanMat
       return new SchemaUntypedField(_Handle + _FrameCornersOffset!.Value);
     }
   }
-  private static nint? _PosesOffset;
-
-  public SchemaUntypedField Poses {
-    get {
-      if (_PosesOffset == null) {
-        _PosesOffset = Schema.GetOffset(0xDB33C9A6B851C9F5);
-      }
-      return new SchemaUntypedField(_Handle + _PosesOffset!.Value);
-    }
+  public ISchemaClassFixedArray<CPoseHandle> Poses {
+    get => new SchemaClassFixedArray<CPoseHandle>(_Handle, 0xDB33C9A6B851C9F5, 9, 4, 2);
   }
   private static nint? _DampingOffset;
 

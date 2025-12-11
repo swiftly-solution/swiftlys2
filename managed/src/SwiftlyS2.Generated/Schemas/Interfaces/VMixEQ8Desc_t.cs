@@ -15,8 +15,7 @@ public partial interface VMixEQ8Desc_t : ISchemaClass<VMixEQ8Desc_t> {
   static string? ISchemaClass<VMixEQ8Desc_t>.ClassName => null;
 
   
-  // VMixFilterDesc_t
-  public SchemaUntypedField Stages { get; }
+  public ISchemaClassFixedArray<VMixFilterDesc_t> Stages { get; }
 
 
 }

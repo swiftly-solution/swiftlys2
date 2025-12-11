@@ -145,6 +145,13 @@ internal static class NativeEngineHelpers {
     return ret;
   }
 
+  private unsafe static delegate* unmanaged<nint> _GetNetworkGameServer;
+
+  public unsafe static nint GetNetworkGameServer() {
+    var ret = _GetNetworkGameServer();
+    return ret;
+  }
+
   private unsafe static delegate* unmanaged<byte*, int> _GetCSGODirectoryPath;
 
   public unsafe static string GetCSGODirectoryPath() {

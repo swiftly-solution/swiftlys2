@@ -110,15 +110,8 @@ internal partial class CBeamImpl : CBaseModelEntityImpl, CBeam {
   public ISchemaFixedArray<CHandle<CBaseEntity>> AttachEntity {
     get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x4BCF3CE56BCDCAD1, 10, 4, 4);
   }
-  private static nint? _AttachIndexOffset;
-
-  public SchemaUntypedField AttachIndex {
-    get {
-      if (_AttachIndexOffset == null) {
-        _AttachIndexOffset = Schema.GetOffset(0x4BCF3CE5502E5BEC);
-      }
-      return new SchemaUntypedField(_Handle + _AttachIndexOffset!.Value);
-    }
+  public ISchemaClassFixedArray<AttachmentHandle_t> AttachIndex {
+    get => new SchemaClassFixedArray<AttachmentHandle_t>(_Handle, 0x4BCF3CE5502E5BEC, 10, 1, 1);
   }
   private static nint? _WidthOffset;
 

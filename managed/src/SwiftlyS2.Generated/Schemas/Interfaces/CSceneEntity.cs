@@ -117,8 +117,7 @@ public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
   
   public CEntityIOOutput OnResumed { get; }
   
-  // CEntityIOOutput
-  public SchemaUntypedField OnTrigger { get; }
+  public ISchemaClassFixedArray<CEntityIOOutput> OnTrigger { get; }
   
   public ref CHandle<CSceneEntity> InterruptScene { get; }
   

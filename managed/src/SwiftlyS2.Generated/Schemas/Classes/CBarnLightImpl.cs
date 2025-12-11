@@ -204,15 +204,8 @@ internal partial class CBarnLightImpl : CBaseModelEntityImpl, CBarnLight {
       return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_LightStyleTargetsOffset!.Value);
     }
   }
-  private static nint? _StyleEventOffset;
-
-  public SchemaUntypedField StyleEvent {
-    get {
-      if (_StyleEventOffset == null) {
-        _StyleEventOffset = Schema.GetOffset(0xB5E331D15EEF4062);
-      }
-      return new SchemaUntypedField(_Handle + _StyleEventOffset!.Value);
-    }
+  public ISchemaClassFixedArray<CEntityIOOutput> StyleEvent {
+    get => new SchemaClassFixedArray<CEntityIOOutput>(_Handle, 0xB5E331D15EEF4062, 4, 40, 8);
   }
   private static nint? _LightCookieOffset;
 

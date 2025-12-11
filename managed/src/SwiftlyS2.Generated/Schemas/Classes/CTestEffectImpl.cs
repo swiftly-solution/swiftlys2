@@ -37,25 +37,11 @@ internal partial class CTestEffectImpl : CBaseEntityImpl, CTestEffect {
       return ref _Handle.AsRef<int>(_BeamOffset!.Value);
     }
   }
-  private static nint? _Beam1Offset;
-
-  public SchemaUntypedField Beam1 {
-    get {
-      if (_Beam1Offset == null) {
-        _Beam1Offset = Schema.GetOffset(0xF4103FBFC4017428);
-      }
-      return new SchemaUntypedField(_Handle + _Beam1Offset!.Value);
-    }
+  public ISchemaClassFixedArray<CBeam> Beam1 {
+    get => new SchemaClassFixedArray<CBeam>(_Handle, 0xF4103FBFC4017428, 24, 8, 8);
   }
-  private static nint? _BeamTimeOffset;
-
-  public SchemaUntypedField BeamTime {
-    get {
-      if (_BeamTimeOffset == null) {
-        _BeamTimeOffset = Schema.GetOffset(0xF4103FBF60293F01);
-      }
-      return new SchemaUntypedField(_Handle + _BeamTimeOffset!.Value);
-    }
+  public ISchemaClassFixedArray<GameTime_t> BeamTime {
+    get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0xF4103FBF60293F01, 24, 4, 4);
   }
   private static nint? _StartTimeOffset;
 

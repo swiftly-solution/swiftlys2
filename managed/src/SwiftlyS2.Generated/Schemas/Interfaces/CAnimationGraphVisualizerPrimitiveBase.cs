@@ -17,8 +17,7 @@ public partial interface CAnimationGraphVisualizerPrimitiveBase : ISchemaClass<C
   
   public ref CAnimationGraphVisualizerPrimitiveType Type { get; }
   
-  // AnimNodeID
-  public SchemaUntypedField OwningAnimNodePaths { get; }
+  public ISchemaClassFixedArray<AnimNodeID> OwningAnimNodePaths { get; }
   
   public ref int OwningAnimNodePathCount { get; }
 

@@ -27,15 +27,8 @@ internal partial class CAnimationGraphVisualizerPrimitiveBaseImpl : SchemaClass,
       return ref _Handle.AsRef<CAnimationGraphVisualizerPrimitiveType>(_TypeOffset!.Value);
     }
   }
-  private static nint? _OwningAnimNodePathsOffset;
-
-  public SchemaUntypedField OwningAnimNodePaths {
-    get {
-      if (_OwningAnimNodePathsOffset == null) {
-        _OwningAnimNodePathsOffset = Schema.GetOffset(0x5204B08461A2E55C);
-      }
-      return new SchemaUntypedField(_Handle + _OwningAnimNodePathsOffset!.Value);
-    }
+  public ISchemaClassFixedArray<AnimNodeID> OwningAnimNodePaths {
+    get => new SchemaClassFixedArray<AnimNodeID>(_Handle, 0x5204B08461A2E55C, 11, 4, 4);
   }
   private static nint? _OwningAnimNodePathCountOffset;
 

@@ -57,15 +57,8 @@ internal partial class CLogicCaseImpl : CLogicalEntityImpl, CLogicCase {
   public ISchemaFixedArray<byte> UchShuffleCaseMap {
     get => new SchemaFixedArray<byte>(_Handle, 0x4B6BB20CF9FC41AE, 32, 1, 1);
   }
-  private static nint? _OnCaseOffset;
-
-  public SchemaUntypedField OnCase {
-    get {
-      if (_OnCaseOffset == null) {
-        _OnCaseOffset = Schema.GetOffset(0x4B6BB20CF8743C7C);
-      }
-      return new SchemaUntypedField(_Handle + _OnCaseOffset!.Value);
-    }
+  public ISchemaClassFixedArray<CEntityIOOutput> OnCase {
+    get => new SchemaClassFixedArray<CEntityIOOutput>(_Handle, 0x4B6BB20CF8743C7C, 32, 40, 8);
   }
   private static nint? _OnDefaultOffset;
 

@@ -604,15 +604,8 @@ internal partial class CSceneEntityImpl : CPointEntityImpl, CSceneEntity {
       return new CEntityIOOutputImpl(_Handle + _OnResumedOffset!.Value);
     }
   }
-  private static nint? _OnTriggerOffset;
-
-  public SchemaUntypedField OnTrigger {
-    get {
-      if (_OnTriggerOffset == null) {
-        _OnTriggerOffset = Schema.GetOffset(0x1099B70181E0BFEC);
-      }
-      return new SchemaUntypedField(_Handle + _OnTriggerOffset!.Value);
-    }
+  public ISchemaClassFixedArray<CEntityIOOutput> OnTrigger {
+    get => new SchemaClassFixedArray<CEntityIOOutput>(_Handle, 0x1099B70181E0BFEC, 16, 40, 8);
   }
   private static nint? _InterruptSceneOffset;
 

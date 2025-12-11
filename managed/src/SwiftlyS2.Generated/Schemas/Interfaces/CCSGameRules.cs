@@ -139,8 +139,7 @@ public partial interface CCSGameRules : CTeamplayRules, ISchemaClass<CCSGameRule
   
   public ISchemaFixedArray<float> TeamRespawnWaveTimes { get; }
   
-  // GameTime_t
-  public SchemaUntypedField NextRespawnWave { get; }
+  public ISchemaClassFixedArray<GameTime_t> NextRespawnWave { get; }
   
   public ref Vector MinimapMins { get; }
   

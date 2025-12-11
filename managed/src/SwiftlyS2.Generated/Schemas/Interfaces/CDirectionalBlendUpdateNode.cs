@@ -15,8 +15,7 @@ public partial interface CDirectionalBlendUpdateNode : CLeafUpdateNode, ISchemaC
   static string? ISchemaClass<CDirectionalBlendUpdateNode>.ClassName => null;
 
   
-  // HSequence
-  public SchemaUntypedField Sequences { get; }
+  public ISchemaClassFixedArray<HSequence> Sequences { get; }
   
   public CAnimInputDamping Damping { get; }
   

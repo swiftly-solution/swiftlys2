@@ -17,15 +17,8 @@ internal partial class CDirectionalBlendUpdateNodeImpl : CLeafUpdateNodeImpl, CD
   public CDirectionalBlendUpdateNodeImpl(nint handle) : base(handle) {
   }
 
-  private static nint? _SequencesOffset;
-
-  public SchemaUntypedField Sequences {
-    get {
-      if (_SequencesOffset == null) {
-        _SequencesOffset = Schema.GetOffset(0xD7E03CEC996DA947);
-      }
-      return new SchemaUntypedField(_Handle + _SequencesOffset!.Value);
-    }
+  public ISchemaClassFixedArray<HSequence> Sequences {
+    get => new SchemaClassFixedArray<HSequence>(_Handle, 0xD7E03CEC996DA947, 8, 4, 4);
   }
   private static nint? _DampingOffset;
 

@@ -623,15 +623,8 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules {
   public ISchemaFixedArray<float> TeamRespawnWaveTimes {
     get => new SchemaFixedArray<float>(_Handle, 0x6295CF65A15A30B1, 32, 4, 4);
   }
-  private static nint? _NextRespawnWaveOffset;
-
-  public SchemaUntypedField NextRespawnWave {
-    get {
-      if (_NextRespawnWaveOffset == null) {
-        _NextRespawnWaveOffset = Schema.GetOffset(0x6295CF65F28FB62F);
-      }
-      return new SchemaUntypedField(_Handle + _NextRespawnWaveOffset!.Value);
-    }
+  public ISchemaClassFixedArray<GameTime_t> NextRespawnWave {
+    get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0x6295CF65F28FB62F, 32, 4, 4);
   }
   private static nint? _MinimapMinsOffset;
 

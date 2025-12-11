@@ -159,8 +159,7 @@ public partial interface CScriptedSequence : CBaseEntity, ISchemaClass<CScripted
   
   public CEntityIOOutput OnCancelFailedSequence { get; }
   
-  // CEntityIOOutput
-  public SchemaUntypedField OnScriptEvent { get; }
+  public ISchemaClassFixedArray<CEntityIOOutput> OnScriptEvent { get; }
   
   public ref CTransform MatOtherToMain { get; }
   

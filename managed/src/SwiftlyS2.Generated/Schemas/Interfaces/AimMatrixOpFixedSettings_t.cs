@@ -19,8 +19,7 @@ public partial interface AimMatrixOpFixedSettings_t : ISchemaClass<AimMatrixOpFi
   
   public CAnimInputDamping Damping { get; }
   
-  // CPoseHandle
-  public SchemaUntypedField PoseCacheHandles { get; }
+  public ISchemaClassFixedArray<CPoseHandle> PoseCacheHandles { get; }
   
   public ref AimMatrixBlendMode BlendMode { get; }
   

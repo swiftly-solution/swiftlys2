@@ -37,15 +37,8 @@ internal partial class AimMatrixOpFixedSettings_tImpl : SchemaClass, AimMatrixOp
       return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
     }
   }
-  private static nint? _PoseCacheHandlesOffset;
-
-  public SchemaUntypedField PoseCacheHandles {
-    get {
-      if (_PoseCacheHandlesOffset == null) {
-        _PoseCacheHandlesOffset = Schema.GetOffset(0xE059B1E0E7BA8E61);
-      }
-      return new SchemaUntypedField(_Handle + _PoseCacheHandlesOffset!.Value);
-    }
+  public ISchemaClassFixedArray<CPoseHandle> PoseCacheHandles {
+    get => new SchemaClassFixedArray<CPoseHandle>(_Handle, 0xE059B1E0E7BA8E61, 10, 4, 2);
   }
   private static nint? _BlendModeOffset;
 

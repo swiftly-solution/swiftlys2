@@ -47,15 +47,8 @@ internal partial class CCSPlayer_RadioServicesImpl : CPlayerPawnComponentImpl, C
       return new GameTime_tImpl(_Handle + _C4PlantTalkTimerOffset!.Value);
     }
   }
-  private static nint? _RadioTokenSlotsOffset;
-
-  public SchemaUntypedField RadioTokenSlots {
-    get {
-      if (_RadioTokenSlotsOffset == null) {
-        _RadioTokenSlotsOffset = Schema.GetOffset(0x8E7F7B356FB722D0);
-      }
-      return new SchemaUntypedField(_Handle + _RadioTokenSlotsOffset!.Value);
-    }
+  public ISchemaClassFixedArray<GameTime_t> RadioTokenSlots {
+    get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0x8E7F7B356FB722D0, 3, 4, 4);
   }
   private static nint? _IgnoreRadioOffset;
 

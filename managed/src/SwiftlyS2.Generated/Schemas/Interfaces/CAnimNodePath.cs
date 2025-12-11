@@ -15,8 +15,7 @@ public partial interface CAnimNodePath : ISchemaClass<CAnimNodePath> {
   static string? ISchemaClass<CAnimNodePath>.ClassName => null;
 
   
-  // AnimNodeID
-  public SchemaUntypedField Path { get; }
+  public ISchemaClassFixedArray<AnimNodeID> Path { get; }
   
   public ref int Count { get; }
 

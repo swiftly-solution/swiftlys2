@@ -793,15 +793,8 @@ internal partial class CScriptedSequenceImpl : CBaseEntityImpl, CScriptedSequenc
       return new CEntityIOOutputImpl(_Handle + _OnCancelFailedSequenceOffset!.Value);
     }
   }
-  private static nint? _OnScriptEventOffset;
-
-  public SchemaUntypedField OnScriptEvent {
-    get {
-      if (_OnScriptEventOffset == null) {
-        _OnScriptEventOffset = Schema.GetOffset(0xBB0C45ED8A68F621);
-      }
-      return new SchemaUntypedField(_Handle + _OnScriptEventOffset!.Value);
-    }
+  public ISchemaClassFixedArray<CEntityIOOutput> OnScriptEvent {
+    get => new SchemaClassFixedArray<CEntityIOOutput>(_Handle, 0xBB0C45ED8A68F621, 8, 40, 8);
   }
   private static nint? _MatOtherToMainOffset;
 

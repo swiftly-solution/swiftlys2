@@ -1,3 +1,4 @@
+using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Menus;
 
@@ -100,6 +101,10 @@ internal sealed class MenuBuilderAPI : IMenuBuilderAPI
     {
         var menu = new MenuAPI(core, configuration, keybindOverrides, this/*, parent*/, optionScrollStyle/*, optionTextStyle*/) { Parent = (parent, null) };
         options.ForEach(option => menu.AddOption(option));
+        if (options.Count() <= 0)
+        {
+            menu.AddOption(new TextMenuOption("No options."));
+        }
         return menu;
     }
 }
