@@ -10,6 +10,7 @@ string GetCurrentGame = void
 string GetNativeVersion = void
 string GetMenuSettings = void
 ptr GetGlobalVars = void
+ptr GetNetworkGameServer = void
 string GetCSGODirectoryPath = void
 string GetGameDirectoryPath = void
 string GetWorkshopId = void

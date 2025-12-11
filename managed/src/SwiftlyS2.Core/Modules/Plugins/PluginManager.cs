@@ -9,6 +9,7 @@ using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.Plugins;
 using SwiftlyS2.Core.Modules.Plugins;
+using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Core.Plugins;
 
@@ -54,8 +55,13 @@ internal class PluginManager : IPluginManager
         };
         this.fileWatcher.Changed += ( sender, e ) =>
         {
-            static async Task WaitForFileAccess( CancellationToken token, string filePath, int maxRetries = 10, int initialDelayMs = 50 )
+            static async Task WaitForFileAccess( CancellationToken token, string filePath, int maxRetries = 10, int initialDelayMs = 50, ILogger<PluginManager> logger = null )
             {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    logger.LogWarning("Detected Linux OS, a 5 second delay for reload.");
+                    await Task.Delay(5000, token);
+                }
                 for (var i = 1; i <= maxRetries && !token.IsCancellationRequested; i++)
                 {
                     try
@@ -111,7 +117,7 @@ internal class PluginManager : IPluginManager
                     {
                         try
                         {
-                            await WaitForFileAccess(cts.Token, e.FullPath);
+                            await WaitForFileAccess(cts.Token, e.FullPath, logger: logger);
                             Console.WriteLine("\n");
                             if (ReloadPluginByDllName(directoryName, true))
                             {
@@ -319,7 +325,7 @@ internal class PluginManager : IPluginManager
             }
             if (!silent)
             {
-                logger.LogWarning("Failed to load plugin by name: {Path}", pluginDir);
+                logger.LogWarning(e, "Failed to load plugin by name: {Path}", pluginDir);
             }
             if (newContext != null)
             {

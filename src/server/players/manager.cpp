@@ -60,7 +60,7 @@ void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCou
 
 void CPlayerManager::Initialize()
 {
-    g_Players = new CPlayer*[g_SwiftlyCore.GetMaxGameClients()];
+    g_Players = new CPlayer * [g_SwiftlyCore.GetMaxGameClients()];
     for (int i = 0; i < g_SwiftlyCore.GetMaxGameClients(); i++)
     {
         g_Players[i] = nullptr;
@@ -178,6 +178,12 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
 {
     reinterpret_cast<decltype(&OnClientPutInServerHook)>(g_pClientPutInServerHook->GetOriginal())(_this, slot, pszName, type, xuid);
 
+    if (type == 0)
+    {
+        auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
+        cvarmanager->QueryClientConvar(slot.Get(), "cl_language");
+    }
+
     if (g_pOnClientPutInServerCallback)
         reinterpret_cast<void (*)(int, int)>(g_pOnClientPutInServerCallback)(slot.Get(), type);
 }
@@ -188,7 +194,7 @@ void* ProcessUsercmdsHook(void* pController, CUserCmd* cmds, int numcmds, bool p
 {
     auto playerid = ((CEntityInstance*)pController)->m_pEntity->m_EHandle.GetEntryIndex() - 1;
 
-    google::protobuf::Message** pMsg = new google::protobuf::Message*[numcmds];
+    google::protobuf::Message** pMsg = new google::protobuf::Message * [numcmds];
     for (int i = 0; i < numcmds; i++)
         pMsg[i] = (google::protobuf::Message*)&cmds[i].cmd;
 
@@ -307,11 +313,6 @@ void OnClientConnectedHook(void* _this, CPlayerSlot slot, const char* pszName, u
     {
         playermanager->RegisterPlayer(playerid);
         // player->Initialize(playerid);
-    }
-    else
-    {
-        auto cvarmanager = g_ifaceService.FetchInterface<IConvarManager>(CONVARMANAGER_INTERFACE_VERSION);
-        cvarmanager->QueryClientConvar(playerid, "cl_language");
     }
 
     reinterpret_cast<decltype(&OnClientConnectedHook)>(g_pOnClientConnectedHook->GetOriginal())(_this, slot, pszName, xuid, pszNetworkID, pszAddress, bFakePlayer);

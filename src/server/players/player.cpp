@@ -239,9 +239,6 @@ void CPlayer::SetUnauthorizedSteamID(uint64_t steamID)
 
 uint64_t CPlayer::GetUnauthorizedSteamID()
 {
-    if (IsFakeClient())
-        return 0;
-
     auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
     if (!engine)
         return m_uUnauthorizedSteamID;

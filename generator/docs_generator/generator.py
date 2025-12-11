@@ -19,11 +19,108 @@ def escape_generics(text):
 
 
 def fix_html_for_jsx(text):
-    """Fix HTML attributes for JSX compatibility."""
+    """Convert HTML to Markdown for MDX compatibility."""
     if not text:
         return text
-    # Replace class= with className=
-    return text.replace('class=', 'className=')
+    
+    # Convert pre/code blocks to markdown code fences first
+    def convert_code_block(match):
+        lang = ''
+        lang_match = re.search(r'class(?:Name)?="lang-(\w+)"', match.group(0))
+        if lang_match:
+            lang = lang_match.group(1)
+        code_match = re.search(r'<code[^>]*>(.*?)</code>', match.group(0), re.DOTALL)
+        if code_match:
+            content = code_match.group(1)
+            content = content.replace('&gt;', '>').replace('&lt;', '<').replace('&amp;', '&')
+            return f'\n\n```{lang}\n{content}\n```\n\n'
+        return match.group(0)
+    text = re.sub(r'<pre><code[^>]*>.*?</code></pre>', convert_code_block, text, flags=re.DOTALL)
+    
+    # Convert inline code tags to backticks
+    text = re.sub(r'<code>(.*?)</code>', r'`\1`', text)
+    
+    # Remove XML doc tags like <param>, <returns>, <typeparam>, etc.
+    text = re.sub(r'<param\s+name="([^"]+)">(.*?)</param>', r'- `\1`: \2', text)
+    text = re.sub(r'<typeparam\s+name="([^"]+)">(.*?)</typeparam>', r'- `\1`: \2', text)
+    text = re.sub(r'<returns>(.*?)</returns>', r'Returns: \1', text)
+    text = re.sub(r'<see\s+cref="([^"]+)"\s*/>', r'`\1`', text)
+    text = re.sub(r'<seealso\s+cref="([^"]+)"\s*/>', r'`\1`', text)
+    
+    # Fix HTML entities
+    text = text.replace('&gt;', '>').replace('&lt;', '<').replace('&amp;', '&')
+    
+    # Convert HTML lists to Markdown lists
+    if '<ul>' in text or '<li>' in text:
+        # Process nested lists
+        def convert_list(html):
+            result = []
+            depth = 0
+            parts = re.split(r'(</?(?:ul|li)>)', html)
+            current = ''
+            for part in parts:
+                if part == '<ul>':
+                    depth += 1
+                elif part == '</ul>':
+                    depth = max(0, depth - 1)
+                elif part == '<li>':
+                    current = ''
+                elif part == '</li>':
+                    if current.strip():
+                        indent = '  ' * max(0, depth - 1)
+                        result.append(f'{indent}- {current.strip()}')
+                    current = ''
+                else:
+                    current += part
+            return '\n'.join(result)
+        text = convert_list(text)
+    
+    # Convert p tags to paragraphs
+    def convert_p(match):
+        content = match.group(1)
+        # Don't collapse if contains code block
+        if '```' in content:
+            return f'{content.strip()}\n\n'
+        # Collapse whitespace for regular text
+        content = ' '.join(content.split())
+        return f'{content}\n\n'
+    text = re.sub(r'<p>\s*(.*?)\s*</p>', convert_p, text, flags=re.DOTALL)
+    
+    # Clean up extra newlines
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    
+    return text.strip()
+
+
+def convert_xref_tags(text):
+    """Convert DocFX <xref> tags to plain text or links."""
+    if not text:
+        return text
+    
+    import urllib.parse
+    
+    def replace_xref(match):
+        href = match.group(1)
+        # Parse the href to extract type and text
+        if '?' in href:
+            type_name, query = href.split('?', 1)
+            params = urllib.parse.parse_qs(query)
+            display_text = params.get('text', [type_name])[0]
+            display_text = urllib.parse.unquote_plus(display_text)
+        else:
+            type_name = href
+            display_text = type_name
+        
+        # Create link for System types to Microsoft docs
+        if type_name.startswith('System.'):
+            url = f"https://learn.microsoft.com/dotnet/api/{type_name.lower()}"
+            return f"[{display_text}]({url})"
+        
+        return display_text
+    
+    # Match <xref href="..." ...></xref> or <xref href="..." ... />
+    pattern = r'<xref\s+href="([^"]+)"[^>]*(?:></xref>|/>)'
+    return re.sub(pattern, replace_xref, text)
 
 
 def escape_generics_in_link_text(text):
@@ -155,14 +252,14 @@ def generate_markdown(yaml_data):
                     md += f"**{fact_name}**: {fact_value}\n\n"
         
         if 'markdown' in item:
-            md += f"{item['markdown']}\n\n"
+            md += f"{fix_html_for_jsx(item['markdown'])}\n\n"
         
         if 'h2' in item:
             md += f"## {item['h2']}\n\n"
         
         if 'h4' in item:
             h4_text = item['h4']
-            if h4_text in ['Parameters', 'Returns', 'Field Value', 'Property Value']:
+            if h4_text in ['Parameters', 'Returns', 'Field Value', 'Property Value', 'Type Parameters', 'Exceptions', 'Remarks', 'Event Type']:
                 md += f"<ApiLabel>{h4_text}</ApiLabel>\n\n"
             else:
                 md += f"#### {h4_text}\n\n"
@@ -178,9 +275,9 @@ def generate_markdown(yaml_data):
                     if inherit_url.endswith('.html'):
                         inherit_url = "/docs/api/" + convert_to_path(inherit_url)
                         inherit_url = inherit_url.replace('/api/shared/', '/api/').replace('/api/core/', '/api/')
-                    md += f"[{escape_generics_in_link_text(inherit_text)}]({inherit_url})\n"
+                    md += f"- [{escape_generics_in_link_text(inherit_text)}]({inherit_url})\n"
                 else:
-                    md += f"{inherit_text}\n"
+                    md += f"- {inherit_text}\n"
             md += "\n"
         
         if 'list' in item:
@@ -191,9 +288,9 @@ def generate_markdown(yaml_data):
                     if list_url.endswith('.html'):
                         list_url = "/docs/api/" + convert_to_path(list_url)
                         list_url = list_url.replace('/api/shared/', '/api/').replace('/api/core/', '/api/')
-                    md += f"[{escape_generics_in_link_text(list_text)}]({list_url})\n"
+                    md += f"- [{escape_generics_in_link_text(list_text)}]({list_url})\n"
                 else:
-                    md += f"{list_text}\n"
+                    md += f"- {list_text}\n"
             md += "\n"
         
         if 'parameters' in item:
@@ -219,17 +316,18 @@ def generate_markdown(yaml_data):
                 api_param = f"<ApiParam {' '.join(parts)} />"
                 
                 if param_description:
-                    md += f"{api_param} — {fix_html_for_jsx(param_description)}\n"
+                    md += f"- {api_param} — {fix_html_for_jsx(param_description)}\n"
                 elif param_default != '':
-                    md += f"{api_param} = {param_default}\n"
+                    md += f"- {api_param} = {param_default}\n"
                 else:
-                    md += f"{api_param}\n"
+                    md += f"- {api_param}\n"
             md += "\n"
         
         if 'api3' in item:
             src = item.get('src', '')
             api3_title = str(item.get('api3', ''))
-            api3_title = re.sub(r'<[^>]+>', '', api3_title)
+            # Escape generics for markdown heading (use backslash)
+            api3_title = api3_title.replace('<', '\\<').replace('>', '\\>')
             api3_title = re.sub(r'\[[^\]]+\]', '', api3_title)
             md += f"### {api3_title}\n\n"
             if src != '':
@@ -272,31 +370,35 @@ def convert_yaml_file(src_path, dest_path):
         os.makedirs(folder_path, exist_ok=True)
 
     md_content = md_content.replace('/api/shared', '/api').replace('/api/core', '/api')
+    md_content = convert_xref_tags(md_content)
+    # Escape < followed by numbers (like <1000) which MDX interprets as JSX tags
+    md_content = re.sub(r'<(\d)', r'\\<\1', md_content)
 
     with open(final_path, 'w', encoding='utf-8') as f:
         f.write(md_content)
 
 
-for root, dirs, files in os.walk(SOURCE_DIR):
-    for file in files:
-        if file.endswith(".yml") or file.endswith(".yaml"):
-            raw_base = os.path.splitext(file)[0]
-            for prefix in ["SwiftlyS2.Core.", "SwiftlyS2.Shared.", "SwiftlyS2."]:
-                if raw_base.startswith(prefix):
-                    raw_base = raw_base[len(prefix):]
-                    break
-            new_base = transform_filename(raw_base)
-            dest_file = os.path.join(DEST_DIR, "/".join(new_base.split(".")).lower() + ".mdx")
-            convert_yaml_file(os.path.join(root, file), dest_file)
+if __name__ == "__main__":
+    for root, dirs, files in os.walk(SOURCE_DIR):
+        for file in files:
+            if file.endswith(".yml") or file.endswith(".yaml"):
+                raw_base = os.path.splitext(file)[0]
+                for prefix in ["SwiftlyS2.Core.", "SwiftlyS2.Shared.", "SwiftlyS2."]:
+                    if raw_base.startswith(prefix):
+                        raw_base = raw_base[len(prefix):]
+                        break
+                new_base = transform_filename(raw_base)
+                dest_file = os.path.join(DEST_DIR, "/".join(new_base.split(".")).lower() + ".mdx")
+                convert_yaml_file(os.path.join(root, file), dest_file)
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-index_source = os.path.join(script_dir, "index.mdx")
-index_dest = os.path.join(DEST_DIR, "index.mdx")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    index_source = os.path.join(script_dir, "index.mdx")
+    index_dest = os.path.join(DEST_DIR, "index.mdx")
 
-if os.path.exists(index_source):
-    shutil.copy2(index_source, index_dest)
-    print(f"Copied index.mdx to {index_dest}")
-else:
-    print(f"Warning: index.mdx not found at {index_source}")
+    if os.path.exists(index_source):
+        shutil.copy2(index_source, index_dest)
+        print(f"Copied index.mdx to {index_dest}")
+    else:
+        print(f"Warning: index.mdx not found at {index_source}")
 
-print("MDX generation complete!")
+    print("MDX generation complete!")
