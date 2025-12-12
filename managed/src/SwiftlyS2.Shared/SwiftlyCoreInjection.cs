@@ -1,11 +1,46 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace SwiftlyS2.Shared;
 
 public static class SwiftlyCoreInjection
 {
+    /// <summary>
+    /// Binds configuration to options WITHOUT merging collections/dictionaries.
+    /// This shadows Microsoft's BindConfiguration to fix the default merge behavior.
+    /// </summary>
+    public static OptionsBuilder<T> BindConfiguration<T>(
+        this OptionsBuilder<T> builder,
+        string configSectionPath) where T : class
+    {
+        builder.Services.AddSingleton<IConfigureOptions<T>>(sp =>
+        {
+            var config = sp.GetRequiredService<IConfiguration>();
+            return new ConfigureNamedOptions<T>(builder.Name, options =>
+            {
+                var section = config.GetSection(configSectionPath);
+                var loaded = section.Get<T>();
+
+                if (loaded == null)
+                    return;
+
+                foreach (var prop in typeof(T).GetProperties())
+                {
+                    if (!prop.CanRead || !prop.CanWrite)
+                        continue;
+
+                    var value = prop.GetValue(loaded);
+                    if (value != null)
+                        prop.SetValue(options, value);
+                }
+            });
+        });
+
+        return builder;
+    }
+
     public static IServiceCollection AddSwiftly( this IServiceCollection self, ISwiftlyCore core, bool addLogger = true, bool addConfiguration = true )
     {
         _ = self
