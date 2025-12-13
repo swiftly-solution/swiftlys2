@@ -66,7 +66,7 @@ internal class PluginConfigurationService : IPluginConfigurationService
       throw new FileNotFoundException($"Template file not found: {templateAbsPath}");
     }
 
-    File.Copy(templateAbsPath, configPath);
+    File.Copy(templateAbsPath, configPath, overwrite: true);
     return this;
   }
 
