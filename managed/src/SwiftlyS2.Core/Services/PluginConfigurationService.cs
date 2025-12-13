@@ -57,7 +57,6 @@ internal class PluginConfigurationService : IPluginConfigurationService
     {
       Directory.CreateDirectory(dir);
     }
-    File.Create(configPath).Close();
 
     var templateAbsPath = Path.Combine(_Id.BaseDirectory, "resources", "templates", templatePath);
 
@@ -66,7 +65,7 @@ internal class PluginConfigurationService : IPluginConfigurationService
       throw new FileNotFoundException($"Template file not found: {templateAbsPath}");
     }
 
-    File.Copy(templateAbsPath, configPath, overwrite: true);
+    File.Copy(templateAbsPath, configPath);
     return this;
   }
 
