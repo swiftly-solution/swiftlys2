@@ -35,6 +35,7 @@ using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
 using System.Collections.Concurrent;
+using SwiftlyS2.Shared.Database;
 using Dia2Lib;
 using System.Reflection.Metadata;
 using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsTCPIP;
@@ -174,6 +175,44 @@ public class TestPlugin : BasePlugin
     public void CommandAliasTest( ICommandContext context )
     {
         context.Reply("CommandAliasTest\n");
+    }
+
+    [Command("dbtest")]
+    public void DatabaseTestCommand( ICommandContext context )
+    {
+        var connectionName = context.Args.Length > 0 ? context.Args[0] : "default";
+        Console.WriteLine($"[Database Test] Testing connection: {connectionName}");
+
+        // Test GetConnectionInfo
+        var info = Core.Database.GetConnectionInfo(connectionName);
+        Console.WriteLine($"[Database Test] Connection Info:");
+        Console.WriteLine($"  Driver: {info.Driver}");
+        Console.WriteLine($"  Host: {info.Host}");
+        Console.WriteLine($"  Database: {info.Database}");
+        Console.WriteLine($"  User: {info.User}");
+        Console.WriteLine($"  Pass: {(string.IsNullOrEmpty(info.Pass) ? "(empty)" : "****")}");
+        Console.WriteLine($"  Timeout: {info.Timeout}");
+        Console.WriteLine($"  Port: {info.Port}");
+        Console.WriteLine($"  ToString: {info}");
+
+        // Test connection
+        try
+        {
+            using var conn = Core.Database.GetConnection(connectionName);
+            conn.Open();
+            Console.WriteLine($"[Database Test] Connection opened successfully!");
+
+            // Simple query test
+            var result = conn.QueryFirstOrDefault<int>("SELECT 1");
+            Console.WriteLine($"[Database Test] Query 'SELECT 1' returned: {result}");
+
+            conn.Close();
+            Console.WriteLine($"[Database Test] Connection closed.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Database Test] Connection failed: {ex.Message}");
+        }
     }
 
     [GameEventHandler(HookMode.Pre)]

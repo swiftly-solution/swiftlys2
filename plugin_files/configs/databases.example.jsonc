@@ -1,31 +1,30 @@
 {
-    // Default database driver: "mysql", "sqlite", "mongodb", etc.
+    // Supported drivers: "mysql", "postgresql", "sqlite"
+    // Default driver used when connection specifies "driver": "default"
     "driver_default": "mysql",
-
-    // When specifying "host", you may use an IP address, a hostname, or a socket file path
-
+    // MySQL connection example
     "default": {
         "driver": "default",
         "host": "localhost",
-        "database": "sourcemod",
+        "database": "swiftly",
         "user": "root",
-        "pass": ""
-        //"timeout": 0,
-        //"port": 3306
+        "pass": "",
+        "timeout": 30,
+        "port": 3306
     },
-
-    "storage-local": {
-        "driver": "sqlite",
-        "database": "sourcemod-local"
-    },
-
-    "clientprefs": {
-        "driver": "sqlite",
+    // PostgreSQL connection example
+    "postgres": {
+        "driver": "postgresql",
         "host": "localhost",
-        "database": "clientprefs-sqlite",
-        "user": "root",
-        "pass": ""
-        //"timeout": 0,
-        //"port": 0
+        "database": "swiftly",
+        "user": "postgres",
+        "pass": "",
+        "timeout": 30,
+        "port": 5432
+    },
+    // SQLite connection example (only database path is required)
+    "local": {
+        "driver": "sqlite",
+        "database": "swiftly-local.db"
     }
 }
