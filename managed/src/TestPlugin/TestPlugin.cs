@@ -181,37 +181,25 @@ public class TestPlugin : BasePlugin
     public void DatabaseTestCommand( ICommandContext context )
     {
         var connectionName = context.Args.Length > 0 ? context.Args[0] : "default";
-        Console.WriteLine($"[Database Test] Testing connection: {connectionName}");
+        var connectionInfo = Core.Database.GetConnectionInfo(connectionName);
+        Core.Logger.LogInformation("[Database] Connection info: {Info}", connectionInfo);
 
-        // Test GetConnectionInfo
-        var info = Core.Database.GetConnectionInfo(connectionName);
-        Console.WriteLine($"[Database Test] Connection Info:");
-        Console.WriteLine($"  Driver: {info.Driver}");
-        Console.WriteLine($"  Host: {info.Host}");
-        Console.WriteLine($"  Database: {info.Database}");
-        Console.WriteLine($"  User: {info.User}");
-        Console.WriteLine($"  Pass: {(string.IsNullOrEmpty(info.Pass) ? "(empty)" : "****")}");
-        Console.WriteLine($"  Timeout: {info.Timeout}");
-        Console.WriteLine($"  Port: {info.Port}");
-        Console.WriteLine($"  ToString: {info}");
-
-        // Test connection
         try
         {
-            using var conn = Core.Database.GetConnection(connectionName);
-            conn.Open();
-            Console.WriteLine($"[Database Test] Connection opened successfully!");
+            using var connection = Core.Database.GetConnection(connectionName);
+            connection.Open();
+            Core.Logger.LogInformation("[Database] Connection opened successfully!");
 
             // Simple query test
-            var result = conn.QueryFirstOrDefault<int>("SELECT 1");
-            Console.WriteLine($"[Database Test] Query 'SELECT 1' returned: {result}");
+            var result = connection.QueryFirstOrDefault<int>("SELECT 1");
+            Core.Logger.LogInformation("[Database] Query 'SELECT 1' returned: {Result}", result);
 
-            conn.Close();
-            Console.WriteLine($"[Database Test] Connection closed.");
+            connection.Close();
+            Core.Logger.LogInformation("[Database] Connection closed.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[Database Test] Connection failed: {ex.Message}");
+            Core.Logger.LogError(ex, "[Database] Connection failed: {Message}", ex.Message);
         }
     }
 
