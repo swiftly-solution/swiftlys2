@@ -31,9 +31,93 @@
 
 using json = nlohmann::json;
 
+DatabaseConnection CDatabaseManager::ParseUri(const std::string& uri)
+{
+    DatabaseConnection conn;
+    conn.rawUri = uri;
+
+    // Format: driver://user:password@host:port/database
+    // SQLite format: sqlite://path/to/database.db
+    auto protoEnd = uri.find("://");
+    if (protoEnd == std::string::npos)
+    {
+        return conn;
+    }
+
+    conn.driver = uri.substr(0, protoEnd);
+    std::string rest = uri.substr(protoEnd + 3);
+
+    // Handle SQLite specially (no host/user/pass)
+    if (conn.driver == "sqlite")
+    {
+        conn.database = rest;
+        return conn;
+    }
+
+    // Find @ to separate credentials from host
+    auto atPos = rest.rfind('@');
+    if (atPos == std::string::npos)
+    {
+        // No credentials, just host:port/database
+        auto slashPos = rest.find('/');
+        if (slashPos != std::string::npos)
+        {
+            std::string hostPort = rest.substr(0, slashPos);
+            conn.database = rest.substr(slashPos + 1);
+
+            auto colonPos = hostPort.rfind(':');
+            if (colonPos != std::string::npos)
+            {
+                conn.host = hostPort.substr(0, colonPos);
+                conn.port = static_cast<uint16_t>(std::stoi(hostPort.substr(colonPos + 1)));
+            }
+            else
+            {
+                conn.host = hostPort;
+            }
+        }
+        return conn;
+    }
+
+    // Parse user:password
+    std::string credentials = rest.substr(0, atPos);
+    auto colonPos = credentials.find(':');
+    if (colonPos != std::string::npos)
+    {
+        conn.user = credentials.substr(0, colonPos);
+        conn.pass = credentials.substr(colonPos + 1);
+    }
+    else
+    {
+        conn.user = credentials;
+    }
+
+    // Parse host:port/database
+    std::string hostPart = rest.substr(atPos + 1);
+    auto slashPos = hostPart.find('/');
+    if (slashPos != std::string::npos)
+    {
+        std::string hostPort = hostPart.substr(0, slashPos);
+        conn.database = hostPart.substr(slashPos + 1);
+
+        auto portColonPos = hostPort.rfind(':');
+        if (portColonPos != std::string::npos)
+        {
+            conn.host = hostPort.substr(0, portColonPos);
+            conn.port = static_cast<uint16_t>(std::stoi(hostPort.substr(portColonPos + 1)));
+        }
+        else
+        {
+            conn.host = hostPort;
+        }
+    }
+
+    return conn;
+}
+
 void CDatabaseManager::Initialize()
 {
-    std::string filePath = g_SwiftlyCore.GetCorePath() + "configs/databases.jsonc";
+    std::string filePath = g_SwiftlyCore.GetCorePath() + "configs/database.jsonc";
     json j = parseJsonc(Files::Read(filePath));
 
     auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
@@ -44,29 +128,36 @@ void CDatabaseManager::Initialize()
         return;
     }
 
-    m_sDefaultDriver = j.value("driver_default", "mysql");
+    m_sDefaultConnectionName = j.value("default_connection", "");
 
-    for (auto& [key, value] : j.items())
+    if (!j.contains("connections") || !j["connections"].is_object())
     {
-        if (key == "driver_default")
-        {
-            continue;
-        }
+        logger->Error("Database Manager", "Database config missing 'connections' object.\n");
+        return;
+    }
 
-        if (!value.is_object())
-        {
-            continue;
-        }
+    for (auto& [key, value] : j["connections"].items())
+    {
         DatabaseConnection conn;
 
-        std::string driver = value.value("driver", "default");
-        conn.driver = (driver == "default") ? m_sDefaultDriver : driver;
-        conn.host = value.value("host", "");
-        conn.database = value.value("database", "");
-        conn.user = value.value("user", "");
-        conn.pass = value.value("pass", "");
-        conn.timeout = value.value("timeout", 0);
-        conn.port = value.value("port", static_cast<uint16_t>(0));
+        if (value.is_string())
+        {
+            conn = ParseUri(value.get<std::string>());
+        }
+        else if (value.is_object())
+        {
+            conn.driver = value.value("driver", "mysql");
+            conn.host = value.value("host", "localhost");
+            conn.database = value.value("database", "");
+            conn.user = value.value("user", "");
+            conn.pass = value.value("pass", "");
+            conn.timeout = value.value("timeout", 0u);
+            conn.port = value.value("port", static_cast<uint16_t>(0));
+        }
+        else
+        {
+            continue;
+        }
 
         m_mConnections[key] = conn;
 
@@ -76,12 +167,13 @@ void CDatabaseManager::Initialize()
         }
     }
 
-    logger->Info("Database Manager", fmt::format("Loaded {} database connections. (Default Driver: {}, Default Connection: {})\n", m_mConnections.size(), m_sDefaultDriver, m_sDefaultConnectionName));
+    logger->Info("Database Manager", fmt::format("Loaded {} database connections. (Default Connection: {})\n", m_mConnections.size(), m_sDefaultConnectionName));
 }
 
 std::string CDatabaseManager::GetDefaultDriver()
 {
-    return m_sDefaultDriver;
+    auto conn = GetDefaultConnection();
+    return conn.driver;
 }
 
 std::string CDatabaseManager::GetDefaultConnectionName()

@@ -35,7 +35,7 @@ public:
     virtual bool ConnectionExists(const std::string& connectionName) override;
 
 private:
-    std::string m_sDefaultDriver;
+    DatabaseConnection ParseUri(const std::string& uri);
     std::string m_sDefaultConnectionName;
     std::map<std::string, DatabaseConnection> m_mConnections;
 };

@@ -31,6 +31,7 @@ struct DatabaseConnection
     std::string pass;
     uint32_t timeout = 0;
     uint16_t port = 0;
+    std::string rawUri;  // Original URI if parsed from URI format
 };
 
 class IDatabaseManager

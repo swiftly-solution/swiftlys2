@@ -136,6 +136,21 @@ uint16_t Bridge_Database_GetConnectionPort(const char* connectionName)
     return conn.port;
 }
 
+int Bridge_Database_GetConnectionRawUri(char* out, const char* connectionName)
+{
+    static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
+    static std::string o;
+    auto conn = db->GetConnection(connectionName);
+    o = conn.rawUri;
+
+    if (out != nullptr)
+    {
+        strcpy(out, o.c_str());
+    }
+
+    return o.size();
+}
+
 bool Bridge_Database_ConnectionExists(const char* connectionName)
 {
     static auto db = g_ifaceService.FetchInterface<IDatabaseManager>(DATABASEMANAGER_INTERFACE_VERSION);
@@ -151,4 +166,5 @@ DEFINE_NATIVE("Database.GetConnectionUser", Bridge_Database_GetConnectionUser);
 DEFINE_NATIVE("Database.GetConnectionPass", Bridge_Database_GetConnectionPass);
 DEFINE_NATIVE("Database.GetConnectionTimeout", Bridge_Database_GetConnectionTimeout);
 DEFINE_NATIVE("Database.GetConnectionPort", Bridge_Database_GetConnectionPort);
+DEFINE_NATIVE("Database.GetConnectionRawUri", Bridge_Database_GetConnectionRawUri);
 DEFINE_NATIVE("Database.ConnectionExists", Bridge_Database_ConnectionExists);

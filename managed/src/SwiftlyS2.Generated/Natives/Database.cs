@@ -174,6 +174,27 @@ internal static class NativeDatabase {
     }
   }
 
+  private unsafe static delegate* unmanaged<byte*, byte*, int> _GetConnectionRawUri;
+
+  public unsafe static string GetConnectionRawUri(string connectionName) {
+    var pool = ArrayPool<byte>.Shared;
+    var connectionNameLength = Encoding.UTF8.GetByteCount(connectionName);
+    var connectionNameBuffer = pool.Rent(connectionNameLength + 1);
+    Encoding.UTF8.GetBytes(connectionName, connectionNameBuffer);
+    connectionNameBuffer[connectionNameLength] = 0;
+    fixed (byte* connectionNameBufferPtr = connectionNameBuffer) {
+      var ret = _GetConnectionRawUri(null, connectionNameBufferPtr);
+      var retBuffer = pool.Rent(ret + 1);
+      fixed (byte* retBufferPtr = retBuffer) {
+        ret = _GetConnectionRawUri(retBufferPtr, connectionNameBufferPtr);
+        var retString = Encoding.UTF8.GetString(retBufferPtr, ret);
+        pool.Return(retBuffer);
+        pool.Return(connectionNameBuffer);
+        return retString;
+      }
+    }
+  }
+
   private unsafe static delegate* unmanaged<byte*, byte> _ConnectionExists;
 
   public unsafe static bool ConnectionExists(string connectionName) {

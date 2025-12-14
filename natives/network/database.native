@@ -9,4 +9,5 @@ string GetConnectionUser = string connectionName
 string GetConnectionPass = string connectionName
 uint32 GetConnectionTimeout = string connectionName
 uint16 GetConnectionPort = string connectionName
+string GetConnectionRawUri = string connectionName
 bool ConnectionExists = string connectionName

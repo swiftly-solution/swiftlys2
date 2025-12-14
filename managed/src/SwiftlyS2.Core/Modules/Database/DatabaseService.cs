@@ -6,7 +6,6 @@ using Npgsql;
 using SQLitePCL;
 using MySqlConnector;
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.Database;
 
 namespace SwiftlyS2.Core.Database;
@@ -14,7 +13,6 @@ namespace SwiftlyS2.Core.Database;
 internal class DatabaseService : IDatabaseService
 {
     private readonly ILogger<DatabaseService> logger;
-    private readonly CoreContext context;
     private readonly ConcurrentDictionary<string, Func<IDbConnection>> connectionFactories = new();
 
     static DatabaseService()
@@ -22,10 +20,9 @@ internal class DatabaseService : IDatabaseService
         Batteries.Init();
     }
 
-    public DatabaseService( ILogger<DatabaseService> logger, CoreContext context )
+    public DatabaseService( ILogger<DatabaseService> logger )
     {
         this.logger = logger;
-        this.context = context;
         this.connectionFactories.Clear();
     }
 
@@ -46,7 +43,7 @@ internal class DatabaseService : IDatabaseService
         try
         {
             var factory = CreateConnectionFactory(resolvedName);
-            connectionFactories.TryAdd(resolvedName, factory);
+            _ = connectionFactories.TryAdd(resolvedName, factory);
             return factory;
         }
         catch (Exception e)
@@ -123,6 +120,11 @@ internal class DatabaseService : IDatabaseService
         return () => new NpgsqlConnection(connStr);
     }
 
+    public string GetConnectionString( string connectionName )
+    {
+        return GetConnectionInfo(connectionName).ToString();
+    }
+
     public DatabaseConnectionInfo GetConnectionInfo( string connectionName )
     {
         var resolvedName = ResolveConnectionName(connectionName);
@@ -133,7 +135,8 @@ internal class DatabaseService : IDatabaseService
             NativeDatabase.GetConnectionUser(resolvedName),
             NativeDatabase.GetConnectionPass(resolvedName),
             NativeDatabase.GetConnectionTimeout(resolvedName),
-            NativeDatabase.GetConnectionPort(resolvedName)
+            NativeDatabase.GetConnectionPort(resolvedName),
+            NativeDatabase.GetConnectionRawUri(resolvedName)
         );
     }
 
