@@ -33,44 +33,74 @@ using json = nlohmann::json;
 
 void CDatabaseManager::Initialize()
 {
-    std::string file_path = g_SwiftlyCore.GetCorePath() + "configs/database.jsonc";
-    json j = parseJsonc(Files::Read(file_path));
+    std::string filePath = g_SwiftlyCore.GetCorePath() + "configs/databases.jsonc";
+    json j = parseJsonc(Files::Read(filePath));
 
-    if (j.empty() || !j.contains("default_connection") || !j.contains("connections"))
+    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
+
+    if (j.empty())
     {
-        auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-        logger->Error("Database Manager", fmt::format("Failed to load database credentials. The '{}' file is missing or invalid.\n", file_path));
+        logger->Error("Database Manager", fmt::format("Failed to load database config. The '{}' file is missing or invalid.\n", filePath));
         return;
     }
 
-    m_sDefaultConnection = j["default_connection"].get<std::string>();
-    for (auto& [key, value] : j["connections"].items())
+    m_sDefaultDriver = j.value("driver_default", "mysql");
+
+    for (auto& [key, value] : j.items())
     {
-        m_mConnectionCredentials[key] = value.get<std::string>();
+        if (key == "driver_default")
+        {
+            continue;
+        }
+
+        if (!value.is_object())
+        {
+            continue;
+        }
+        DatabaseConnection conn;
+
+        std::string driver = value.value("driver", "default");
+        conn.driver = (driver == "default") ? m_sDefaultDriver : driver;
+        conn.host = value.value("host", "");
+        conn.database = value.value("database", "");
+        conn.user = value.value("user", "");
+        conn.pass = value.value("pass", "");
+        conn.timeout = value.value("timeout", 0);
+        conn.port = value.value("port", static_cast<uint16_t>(0));
+
+        m_mConnections[key] = conn;
+
+        if (m_sDefaultConnectionName.empty())
+        {
+            m_sDefaultConnectionName = key;
+        }
     }
 
-    auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
-    logger->Info("Database Manager", fmt::format("Loaded {} database credentials. (Default Connection: {})\n", m_mConnectionCredentials.size(), m_sDefaultConnection));
+    logger->Info("Database Manager", fmt::format("Loaded {} database connections. (Default Driver: {}, Default Connection: {})\n", m_mConnections.size(), m_sDefaultDriver, m_sDefaultConnectionName));
 }
 
-std::string CDatabaseManager::GetDefaultConnection()
+std::string CDatabaseManager::GetDefaultDriver()
 {
-    return m_sDefaultConnection;
+    return m_sDefaultDriver;
 }
 
-std::string CDatabaseManager::GetDefaultConnectionCredentials()
+std::string CDatabaseManager::GetDefaultConnectionName()
 {
-    return GetCredentials(m_sDefaultConnection);
+    return m_sDefaultConnectionName;
 }
 
-std::string CDatabaseManager::GetCredentials(const std::string& connectionName)
+DatabaseConnection CDatabaseManager::GetDefaultConnection()
 {
-    auto it = m_mConnectionCredentials.find(connectionName);
-    if (it != m_mConnectionCredentials.end()) return it->second;
-    else return "";
+    return GetConnection(m_sDefaultConnectionName);
+}
+
+DatabaseConnection CDatabaseManager::GetConnection(const std::string& connectionName)
+{
+    auto it = m_mConnections.find(connectionName);
+    return it != m_mConnections.end() ? it->second : DatabaseConnection{};
 }
 
 bool CDatabaseManager::ConnectionExists(const std::string& connectionName)
 {
-    return m_mConnectionCredentials.contains(connectionName);
+    return m_mConnections.contains(connectionName);
 }

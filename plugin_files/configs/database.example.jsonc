@@ -1,7 +1,0 @@
-{
-    "default_connection": "host",
-    "connections": {
-        "host": "mysql://<username>:<password>@<host>:<port>/<database>",
-        "mongodbhost": "mongodb://<username>:<password>@<host>:<port>/<database>"
-    }
-}

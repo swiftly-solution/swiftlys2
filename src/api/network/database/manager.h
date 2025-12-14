@@ -19,15 +19,29 @@
 #ifndef src_api_network_database_manager_h
 #define src_api_network_database_manager_h
 
+#include <cstdint>
 #include <string>
+
+struct DatabaseConnection
+{
+    std::string driver;
+    std::string host;
+    std::string database;
+    std::string user;
+    std::string pass;
+    uint32_t timeout = 0;
+    uint16_t port = 0;
+};
 
 class IDatabaseManager
 {
 public:
     virtual void Initialize() = 0;
-    virtual std::string GetDefaultConnection() = 0;
-    virtual std::string GetDefaultConnectionCredentials() = 0;
-    virtual std::string GetCredentials(const std::string& connectionName) = 0;
+
+    virtual std::string GetDefaultDriver() = 0;
+    virtual std::string GetDefaultConnectionName() = 0;
+    virtual DatabaseConnection GetDefaultConnection() = 0;
+    virtual DatabaseConnection GetConnection(const std::string& connectionName) = 0;
     virtual bool ConnectionExists(const std::string& connectionName) = 0;
 };
 

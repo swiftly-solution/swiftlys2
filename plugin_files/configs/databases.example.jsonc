@@ -1,0 +1,31 @@
+{
+    // Default database driver: "mysql", "sqlite", "mongodb", etc.
+    "driver_default": "mysql",
+
+    // When specifying "host", you may use an IP address, a hostname, or a socket file path
+
+    "default": {
+        "driver": "default",
+        "host": "localhost",
+        "database": "sourcemod",
+        "user": "root",
+        "pass": ""
+        //"timeout": 0,
+        //"port": 3306
+    },
+
+    "storage-local": {
+        "driver": "sqlite",
+        "database": "sourcemod-local"
+    },
+
+    "clientprefs": {
+        "driver": "sqlite",
+        "host": "localhost",
+        "database": "clientprefs-sqlite",
+        "user": "root",
+        "pass": ""
+        //"timeout": 0,
+        //"port": 0
+    }
+}

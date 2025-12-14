@@ -28,13 +28,16 @@ class CDatabaseManager : public IDatabaseManager
 public:
     virtual void Initialize() override;
 
-    virtual std::string GetDefaultConnection() override;
-    virtual std::string GetDefaultConnectionCredentials() override;
-    virtual std::string GetCredentials(const std::string& connectionName) override;
+    virtual std::string GetDefaultDriver() override;
+    virtual std::string GetDefaultConnectionName() override;
+    virtual DatabaseConnection GetDefaultConnection() override;
+    virtual DatabaseConnection GetConnection(const std::string& connectionName) override;
     virtual bool ConnectionExists(const std::string& connectionName) override;
+
 private:
-    std::string m_sDefaultConnection;
-    std::map<std::string, std::string> m_mConnectionCredentials;
+    std::string m_sDefaultDriver;
+    std::string m_sDefaultConnectionName;
+    std::map<std::string, DatabaseConnection> m_mConnections;
 };
 
 #endif
