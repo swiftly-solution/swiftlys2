@@ -10,6 +10,7 @@ using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.Plugins;
 using SwiftlyS2.Core.Modules.Plugins;
 using System.Runtime.InteropServices;
+using SwiftlyS2.Core.Events;
 
 namespace SwiftlyS2.Core.Plugins;
 
