@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SwiftlyS2.Core.Plugins;
 using SwiftlyS2.Shared.Misc;
 
 namespace SwiftlyS2.Shared.Plugins;
@@ -24,7 +25,7 @@ public abstract class BasePlugin : IPlugin
     {
       Core.Logger.LogCritical(e.Exception, "CRITICAL: Unobserved task exception in plugin. Aborting.");
       e.SetObserved();
-    };
+    }; 
 
     Console.SetOut(new ConsoleRedirector());
     Console.SetError(new ConsoleRedirector());
@@ -41,4 +42,10 @@ public abstract class BasePlugin : IPlugin
   public abstract void Load( bool hotReload );
 
   public abstract void Unload();
+
+  /// <summary>
+  /// You can choose when the plugin is allowed to reload.
+  /// </summary>
+  public virtual PluginReloadMethod ReloadMethod { get; set; } = PluginReloadMethod.Auto;
+
 }
