@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace SwiftlyS2.Shared.Plugins;
 
 public enum PluginReloadMethod
