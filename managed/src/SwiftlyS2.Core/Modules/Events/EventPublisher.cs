@@ -396,10 +396,21 @@ internal static class EventPublisher
         }
     }
 
+    internal static event Action? InternalOnMapLoad;
+
     [UnmanagedCallersOnly]
     public static void OnMapLoad( nint mapNamePtr )
     {
         if (_subscribers.Count == 0) return;
+        try
+        {
+            InternalOnMapLoad?.Invoke(); // calls before all plugins.
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return;
+            AnsiConsole.WriteException(e);
+        }
         try
         {
             string map = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty;
