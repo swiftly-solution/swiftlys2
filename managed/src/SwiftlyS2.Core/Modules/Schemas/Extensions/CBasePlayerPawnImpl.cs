@@ -1,6 +1,7 @@
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Services;
 using SwiftlyS2.Shared.Natives;
+using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
@@ -103,5 +104,10 @@ internal partial class CBasePlayerPawnImpl : CBasePlayerPawn
         var angleInDegrees = Math.Acos(dotProduct) * (180f / Math.PI);
 
         return angleInDegrees <= halfFov;
+    }
+
+    public IPlayer? ToPlayer()
+    {
+        return !IsValid ? null : (Controller.Value?.ToPlayer());
     }
 }
