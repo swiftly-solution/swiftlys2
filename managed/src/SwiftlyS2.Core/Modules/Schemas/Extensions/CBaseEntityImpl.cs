@@ -1,4 +1,4 @@
-﻿using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Players;
@@ -66,6 +66,20 @@ internal partial class CBaseEntityImpl : CBaseEntity
 
             GameFunctions.Teleport(Address, pos, ang, vel);
         }
+    }
+
+    public void TakeDamage( CTakeDamageInfo dmgInfo )
+    {
+        unsafe
+        {
+            GameFunctions.TakeDamage(Address, &dmgInfo);
+        }
+    }
+
+    public void TakeDamage( CBaseEntity inflictor, CBaseEntity attacker, CBaseEntity ability, float flDamage, DamageTypes_t bitsDamageType )
+    {
+        var info = new CTakeDamageInfo(inflictor, attacker, ability, flDamage, bitsDamageType);
+        TakeDamage(info);
     }
 
     public void CollisionRulesChanged()
