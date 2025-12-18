@@ -43,7 +43,7 @@ public partial interface CBaseEntity
     /// <summary>
     /// Applies damage to the entity based on the specified damage information.
     /// </summary>
-    public void TakeDamage( float damageAmount, DamageTypes_t? type = null, CEntityInstance? attacker = null, CEntityInstance? inflictor = null, CEntityInstance? ability = null );
+    public void TakeDamage( CBaseEntity inflictor, CBaseEntity attacker, CBaseEntity ability, float flDamage, DamageTypes_t bitsDamageType );
 
     /// <summary>
     /// Notify the game that the collision rules of the entity have changed.

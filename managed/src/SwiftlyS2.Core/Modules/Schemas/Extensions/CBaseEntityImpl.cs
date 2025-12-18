@@ -76,21 +76,9 @@ internal partial class CBaseEntityImpl : CBaseEntity
         }
     }
 
-    public void TakeDamage( float damageAmount, DamageTypes_t? type = null, CEntityInstance? attacker = null, CEntityInstance? inflictor = null, CEntityInstance? ability = null )
+    public void TakeDamage( CBaseEntity inflictor, CBaseEntity attacker, CBaseEntity ability, float flDamage, DamageTypes_t bitsDamageType )
     {
-        var info = new CTakeDamageInfo {
-            Damage = damageAmount
-        };
-        if (type.HasValue)
-        {
-            info.DamageType = type.Value;
-        }
-        attacker ??= this;
-        info.Attacker = attacker.Entity!.EntityHandle;
-        inflictor ??= attacker;
-        info.Inflictor = inflictor.Entity!.EntityHandle;
-        ability ??= inflictor;
-        info.Ability = ability.Entity!.EntityHandle;
+        var info = new CTakeDamageInfo(inflictor, attacker, ability, flDamage, bitsDamageType);
         TakeDamage(info);
     }
 
