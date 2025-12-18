@@ -1,4 +1,4 @@
-﻿using SwiftlyS2.Shared.Natives;
+using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
@@ -34,6 +34,16 @@ public partial interface CBaseEntity
     /// <param name="velocity">The velocity to apply to the entity after teleportation. If null, the entity's velocity is not changed.</param>
     public void Teleport( Vector? position, QAngle? angle, Vector? velocity );
 
+    /// <summary>
+    /// Applies damage to the entity based on the specified damage information.
+    /// </summary>
+    /// <param name="dmgInfo">An object containing details about the damage to be applied, including the amount, type, and source. Cannot be null.</param>
+    public void TakeDamage( CTakeDamageInfo dmgInfo );
+
+    /// <summary>
+    /// Applies damage to the entity based on the specified damage information.
+    /// </summary>
+    public void TakeDamage( float damageAmount, DamageTypes_t? type = null, CEntityInstance? attacker = null, CEntityInstance? inflictor = null, CEntityInstance? ability = null );
 
     /// <summary>
     /// Notify the game that the collision rules of the entity have changed.
