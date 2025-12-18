@@ -164,10 +164,10 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("be")]
-    [CommandAlias("beh", false)]
     public void Test2Command( ICommandContext context )
     {
-        Console.WriteLine("hello world\n");
+        var entity = context.Sender!.RequiredPawn;
+        entity.TakeDamage(100, DamageTypes_t.DMG_GENERIC);
     }
 
     [Command("CommandAliasTest")]

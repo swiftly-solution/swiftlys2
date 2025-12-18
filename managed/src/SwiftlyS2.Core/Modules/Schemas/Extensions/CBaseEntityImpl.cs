@@ -76,10 +76,24 @@ internal partial class CBaseEntityImpl : CBaseEntity
         }
     }
 
-    public void TakeDamage( CBaseEntity inflictor, CBaseEntity attacker, CBaseEntity ability, float flDamage, DamageTypes_t bitsDamageType )
+    public Task TakeDamageAsync( CTakeDamageInfo dmgInfo )
     {
-        var info = new CTakeDamageInfo(inflictor, attacker, ability, flDamage, bitsDamageType);
+        return SchedulerManager.QueueOrNow(() => TakeDamage(dmgInfo));
+    }
+
+    public void TakeDamage( float damage, DamageTypes_t damageType, CBaseEntity? inflictor = null, CBaseEntity? attacker = null, CBaseEntity? ability = null )
+    {
+        var info = new CTakeDamageInfo(damage, damageType, inflictor, attacker, ability);
+        if (inflictor is null)
+        {
+            info.Inflictor.Value = Entity!.EntityHandle.Value;
+        }
         TakeDamage(info);
+    }
+
+    public Task TakeDamageAsync( float damage, DamageTypes_t damageType, CBaseEntity? inflictor = null, CBaseEntity? attacker = null, CBaseEntity? ability = null )
+    {
+        return SchedulerManager.QueueOrNow(() => TakeDamage(damage, damageType, inflictor, attacker, ability));
     }
 
     public void CollisionRulesChanged()

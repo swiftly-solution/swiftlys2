@@ -10,7 +10,7 @@ internal static class GameFunctions
 {
     private static readonly bool IsWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
     public static unsafe delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void > pCTakeDamageInfo_Constructor;
-    public static unsafe delegate* unmanaged< nint, CTakeDamageInfo*, nint, void > pTakeDamage;
+    public static unsafe delegate* unmanaged< nint, CTakeDamageInfo*, CTakeDamageResult*, void > pTakeDamage;
     public static unsafe delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void > pTraceShape;
     public static unsafe delegate* unmanaged< Vector*, Vector*, BBox_t*, CTraceFilter*, CGameTrace*, void > pTracePlayerBBox;
     public static unsafe delegate* unmanaged< nint, IntPtr, void > pSetModel;
@@ -57,7 +57,7 @@ internal static class GameFunctions
         unsafe
         {
             pCTakeDamageInfo_Constructor = (delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void >)NativeSignatures.Fetch("CTakeDamageInfo::Constructor");
-            pTakeDamage = (delegate* unmanaged< nint, CTakeDamageInfo*, nint, void >)NativeSignatures.Fetch("CBaseEntity::TakeDamage");
+            pTakeDamage = (delegate* unmanaged< nint, CTakeDamageInfo*, CTakeDamageResult*, void >)NativeSignatures.Fetch("CBaseEntity::TakeDamage");
             pTraceShape = (delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void >)NativeSignatures.Fetch("TraceShape");
             pTracePlayerBBox = (delegate* unmanaged< Vector*, Vector*, BBox_t*, CTraceFilter*, CGameTrace*, void >)NativeSignatures.Fetch("TracePlayerBBox");
             pSetModel = (delegate* unmanaged< nint, IntPtr, void >)NativeSignatures.Fetch("CBaseModelEntity::SetModel");
@@ -358,14 +358,14 @@ internal static class GameFunctions
         }
     }
 
-    public static unsafe void TakeDamage( nint pEntity, CTakeDamageInfo* info )
+    public static unsafe void TakeDamage( nint pEntity, CTakeDamageInfo* info)
     {
         try
         {
             CheckPtr(pEntity, nameof(pEntity));
             unsafe
             {
-                pTakeDamage(pEntity, info, 0);
+                pTakeDamage(pEntity, info, (CTakeDamageResult*)0);
             }
         }
         catch (Exception e)
