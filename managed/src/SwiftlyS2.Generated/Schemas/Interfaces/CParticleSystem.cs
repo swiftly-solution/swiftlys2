@@ -14,49 +14,49 @@ public partial interface CParticleSystem : CBaseModelEntity, ISchemaClass<CParti
     static int ISchemaClass<CParticleSystem>.Size => 3408;
     static string? ISchemaClass<CParticleSystem>.ClassName => "info_particle_system";
 
-    
+
     public string SnapshotFileName { get; set; }
-    
+
     public ref bool Active { get; }
-    
+
     public ref bool Frozen { get; }
-    
+
     public ref float FreezeTransitionDuration { get; }
-    
+
     public ref int StopType { get; }
-    
+
     public ref bool AnimateDuringGameplayPause { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> EffectIndex { get; }
-    
+
     public GameTime_t StartTime { get; }
-    
+
     public ref float PreSimTime { get; }
-    
+
     public ISchemaFixedArray<Vector> ServerControlPoints { get; }
-    
+
     public ISchemaFixedArray<byte> ServerControlPointAssignments { get; }
-    
+
     public ISchemaFixedArray<CHandle<CBaseEntity>> ControlPointEnts { get; }
-    
+
     public ref bool NoSave { get; }
-    
+
     public ref bool NoFreeze { get; }
-    
+
     public ref bool NoRamp { get; }
-    
+
     public ref bool StartActive { get; }
-    
+
     public string EffectName { get; set; }
-    
+
     public string ControlPointNames { get; set; }
-    
+
     public ref int DataCP { get; }
-    
+
     public ref Vector DataCPValue { get; }
-    
+
     public ref int TintCP { get; }
-    
+
     public ref Color Tint { get; }
 
     public void SnapshotFileNameUpdated();

@@ -14,9 +14,9 @@ public partial interface C_OP_Decay : CParticleFunctionOperator, ISchemaClass<C_
     static int ISchemaClass<C_OP_Decay>.Size => 472;
     static string? ISchemaClass<C_OP_Decay>.ClassName => null;
 
-    
+
     public ref bool RopeDecay { get; }
-    
+
     public ref bool ForcePreserveParticleOrder { get; }
 
 

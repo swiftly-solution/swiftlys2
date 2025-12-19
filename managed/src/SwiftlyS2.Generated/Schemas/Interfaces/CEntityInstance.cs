@@ -14,11 +14,11 @@ public partial interface CEntityInstance : ISchemaClass<CEntityInstance>
     static int ISchemaClass<CEntityInstance>.Size => 56;
     static string? ISchemaClass<CEntityInstance>.ClassName => "root";
 
-    
+
     public string PrivateVScripts { get; set; }
-    
+
     public CEntityIdentity? Entity { get; }
-    
+
     public CScriptComponent? CScriptComponent { get; }
 
     public void EntityUpdated();

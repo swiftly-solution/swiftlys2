@@ -14,18 +14,18 @@ public partial interface CPointVelocitySensor : CPointEntity, ISchemaClass<CPoin
     static int ISchemaClass<CPointVelocitySensor>.Size => 1336;
     static string? ISchemaClass<CPointVelocitySensor>.ClassName => "point_velocitysensor";
 
-    
+
     public ref CHandle<CBaseEntity> TargetEntity { get; }
-    
+
     public ref Vector Axis { get; }
-    
+
     public ref bool Enabled { get; }
-    
+
     public ref float PrevVelocity { get; }
-    
+
     public ref float AvgInterval { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField Velocity { get; }
 
 

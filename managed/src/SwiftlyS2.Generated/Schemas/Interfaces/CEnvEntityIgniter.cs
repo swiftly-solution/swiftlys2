@@ -14,7 +14,7 @@ public partial interface CEnvEntityIgniter : CBaseEntity, ISchemaClass<CEnvEntit
     static int ISchemaClass<CEnvEntityIgniter>.Size => 1272;
     static string? ISchemaClass<CEnvEntityIgniter>.ClassName => "env_entity_igniter";
 
-    
+
     public ref float Lifetime { get; }
 
 

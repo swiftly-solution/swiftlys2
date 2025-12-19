@@ -14,11 +14,11 @@ public partial interface CTriggerSoundscape : CBaseTrigger, ISchemaClass<CTrigge
     static int ISchemaClass<CTriggerSoundscape>.Size => 2512;
     static string? ISchemaClass<CTriggerSoundscape>.ClassName => "trigger_soundscape";
 
-    
+
     public ref CHandle<CEnvSoundscapeTriggerable> Soundscape { get; }
-    
+
     public string SoundscapeName { get; set; }
-    
+
     public ref CUtlVector<CHandle<CBasePlayerPawn>> Spectators { get; }
 
 

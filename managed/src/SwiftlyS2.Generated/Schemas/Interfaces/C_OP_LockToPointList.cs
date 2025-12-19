@@ -14,15 +14,15 @@ public partial interface C_OP_LockToPointList : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_LockToPointList>.Size => 504;
     static string? ISchemaClass<C_OP_LockToPointList>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref CUtlVector<PointDefinition_t> PointList { get; }
-    
+
     public ref bool PlaceAlongPath { get; }
-    
+
     public ref bool ClosedLoop { get; }
-    
+
     public ref int NumPointsAlongPath { get; }
 
 

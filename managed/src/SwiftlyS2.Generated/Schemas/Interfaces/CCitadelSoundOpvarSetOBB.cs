@@ -14,21 +14,21 @@ public partial interface CCitadelSoundOpvarSetOBB : CBaseEntity, ISchemaClass<CC
     static int ISchemaClass<CCitadelSoundOpvarSetOBB>.Size => 1344;
     static string? ISchemaClass<CCitadelSoundOpvarSetOBB>.ClassName => "citadel_snd_opvar_set_obb";
 
-    
+
     public string StackName { get; set; }
-    
+
     public string OperatorName { get; set; }
-    
+
     public string OpvarName { get; set; }
-    
+
     public ref Vector DistanceInnerMins { get; }
-    
+
     public ref Vector DistanceInnerMaxs { get; }
-    
+
     public ref Vector DistanceOuterMins { get; }
-    
+
     public ref Vector DistanceOuterMaxs { get; }
-    
+
     public ref int AABBDirection { get; }
 
     public void StackNameUpdated();

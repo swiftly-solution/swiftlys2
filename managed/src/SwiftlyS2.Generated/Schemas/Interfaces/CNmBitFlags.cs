@@ -14,7 +14,7 @@ public partial interface CNmBitFlags : ISchemaClass<CNmBitFlags>
     static int ISchemaClass<CNmBitFlags>.Size => 4;
     static string? ISchemaClass<CNmBitFlags>.ClassName => null;
 
-    
+
     public ref uint Flags { get; }
 
 

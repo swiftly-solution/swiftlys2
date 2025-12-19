@@ -14,7 +14,7 @@ public partial interface CCSPlayer_BulletServices : CPlayerPawnComponent, ISchem
     static int ISchemaClass<CCSPlayer_BulletServices>.Size => 104;
     static string? ISchemaClass<CCSPlayer_BulletServices>.ClassName => null;
 
-    
+
     public ref int TotalHitsOnServer { get; }
 
     public void TotalHitsOnServerUpdated();

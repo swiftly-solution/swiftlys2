@@ -14,23 +14,23 @@ public partial interface CFuncTrackChange : CFuncPlatRot, ISchemaClass<CFuncTrac
     static int ISchemaClass<CFuncTrackChange>.Size => 2272;
     static string? ISchemaClass<CFuncTrackChange>.ClassName => "func_trackchange";
 
-    
+
     public CPathTrack? TrackTop { get; }
-    
+
     public CPathTrack? TrackBottom { get; }
-    
+
     public CFuncTrackTrain? Train { get; }
-    
+
     public string TrackTopName { get; set; }
-    
+
     public string TrackBottomName { get; set; }
-    
+
     public string TrainName { get; set; }
-    
+
     public ref TRAIN_CODE Code { get; }
-    
+
     public ref int TargetState { get; }
-    
+
     public ref int Use { get; }
 
 

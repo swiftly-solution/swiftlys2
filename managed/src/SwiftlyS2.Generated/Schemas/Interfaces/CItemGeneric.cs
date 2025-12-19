@@ -14,69 +14,69 @@ public partial interface CItemGeneric : CItem, ISchemaClass<CItemGeneric>
     static int ISchemaClass<CItemGeneric>.Size => 3312;
     static string? ISchemaClass<CItemGeneric>.ClassName => "item_generic";
 
-    
+
     public ref bool HasTriggerRadius { get; }
-    
+
     public ref bool HasPickupRadius { get; }
-    
+
     public ref float PickupRadiusSqr { get; }
-    
+
     public ref float TriggerRadiusSqr { get; }
-    
+
     public GameTime_t LastPickupCheck { get; }
-    
+
     public ref bool PlayerCounterListenerAdded { get; }
-    
+
     public ref bool PlayerInTriggerRadius { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> SpawnParticleEffect { get; }
-    
+
     public string AmbientSoundEffect { get; set; }
-    
+
     public ref bool AutoStartAmbientSound { get; }
-    
+
     public string SpawnScriptFunction { get; set; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> PickupParticleEffect { get; }
-    
+
     public string PickupSoundEffect { get; set; }
-    
+
     public string PickupScriptFunction { get; set; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> TimeoutParticleEffect { get; }
-    
+
     public string TimeoutSoundEffect { get; set; }
-    
+
     public string TimeoutScriptFunction { get; set; }
-    
+
     public string PickupFilterName { get; set; }
-    
+
     public ref CHandle<CBaseFilter> PickupFilter { get; }
-    
+
     public CEntityIOOutput OnPickup { get; }
-    
+
     public CEntityIOOutput OnTimeout { get; }
-    
+
     public CEntityIOOutput OnTriggerStartTouch { get; }
-    
+
     public CEntityIOOutput OnTriggerTouch { get; }
-    
+
     public CEntityIOOutput OnTriggerEndTouch { get; }
-    
+
     public string AllowPickupScriptFunction { get; set; }
-    
+
     public ref float PickupRadius { get; }
-    
+
     public ref float TriggerRadius { get; }
-    
+
     public string TriggerSoundEffect { get; set; }
-    
+
     public ref bool GlowWhenInTrigger { get; }
-    
+
     public ref Color GlowColor { get; }
-    
+
     public ref bool Useable { get; }
-    
+
     public ref CHandle<CItemGenericTriggerHelper> TriggerHelper { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CScriptTriggerOnce : CTriggerOnce, ISchemaClass<CScript
     static int ISchemaClass<CScriptTriggerOnce>.Size => 2528;
     static string? ISchemaClass<CScriptTriggerOnce>.ClassName => "script_trigger_once";
 
-    
+
     public ref Vector Extent { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface CPhysicsBodyGameMarkup : ISchemaClass<CPhysicsBodyGameM
     static int ISchemaClass<CPhysicsBodyGameMarkup>.Size => 16;
     static string? ISchemaClass<CPhysicsBodyGameMarkup>.ClassName => null;
 
-    
+
     public string TargetBody { get; set; }
-    
+
     public ref CGlobalSymbol Tag { get; }
 
 

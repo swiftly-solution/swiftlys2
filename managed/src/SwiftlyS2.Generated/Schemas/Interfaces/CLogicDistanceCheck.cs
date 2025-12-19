@@ -14,19 +14,19 @@ public partial interface CLogicDistanceCheck : CLogicalEntity, ISchemaClass<CLog
     static int ISchemaClass<CLogicDistanceCheck>.Size => 1408;
     static string? ISchemaClass<CLogicDistanceCheck>.ClassName => "logic_distance_check";
 
-    
+
     public string EntityA { get; set; }
-    
+
     public string EntityB { get; set; }
-    
+
     public ref float Zone1Distance { get; }
-    
+
     public ref float Zone2Distance { get; }
-    
+
     public CEntityIOOutput InZone1 { get; }
-    
+
     public CEntityIOOutput InZone2 { get; }
-    
+
     public CEntityIOOutput InZone3 { get; }
 
 

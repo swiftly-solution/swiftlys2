@@ -14,15 +14,15 @@ public partial interface C_OP_BasicMovement : CParticleFunctionOperator, ISchema
     static int ISchemaClass<C_OP_BasicMovement>.Size => 3672;
     static string? ISchemaClass<C_OP_BasicMovement>.ClassName => null;
 
-    
+
     public CParticleCollectionVecInput Gravity { get; }
-    
+
     public CParticleCollectionFloatInput Drag { get; }
-    
+
     public CParticleMassCalculationParameters MassControls { get; }
-    
+
     public ref int MaxConstraintPasses { get; }
-    
+
     public ref bool UseNewCode { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface ResponseParams : ISchemaClass<ResponseParams>
     static int ISchemaClass<ResponseParams>.Size => 32;
     static string? ISchemaClass<ResponseParams>.ClassName => null;
 
-    
+
     public ref short Odds { get; }
-    
+
     public ref short Flags { get; }
-    
+
     public ResponseFollowup? Followup { get; }
 
 

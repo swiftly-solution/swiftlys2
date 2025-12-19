@@ -14,27 +14,27 @@ public partial interface CBaseMoveBehavior : CPathKeyFrame, ISchemaClass<CBaseMo
     static int ISchemaClass<CBaseMoveBehavior>.Size => 1424;
     static string? ISchemaClass<CBaseMoveBehavior>.ClassName => "move_keyframed";
 
-    
+
     public ref int PositionInterpolator { get; }
-    
+
     public ref int RotationInterpolator { get; }
-    
+
     public ref float AnimStartTime { get; }
-    
+
     public ref float AnimEndTime { get; }
-    
+
     public ref float AverageSpeedAcrossFrame { get; }
-    
+
     public CPathKeyFrame? CurrentKeyFrame { get; }
-    
+
     public CPathKeyFrame? TargetKeyFrame { get; }
-    
+
     public CPathKeyFrame? PreKeyFrame { get; }
-    
+
     public CPathKeyFrame? PostKeyFrame { get; }
-    
+
     public ref float TimeIntoFrame { get; }
-    
+
     public ref int Direction { get; }
 
 

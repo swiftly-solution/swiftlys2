@@ -14,17 +14,17 @@ public partial interface C_INIT_CreateFromParentParticles : CParticleFunctionIni
     static int ISchemaClass<C_INIT_CreateFromParentParticles>.Size => 496;
     static string? ISchemaClass<C_INIT_CreateFromParentParticles>.ClassName => null;
 
-    
+
     public ref float VelocityScale { get; }
-    
+
     public ref float Increment { get; }
-    
+
     public ref bool RandomDistribution { get; }
-    
+
     public ref int RandomSeed { get; }
-    
+
     public ref bool SubFrame { get; }
-    
+
     public ref bool SetRopeSegmentID { get; }
 
 

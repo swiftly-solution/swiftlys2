@@ -14,11 +14,11 @@ public partial interface C_INIT_VelocityFromNormal : CParticleFunctionInitialize
     static int ISchemaClass<C_INIT_VelocityFromNormal>.Size => 488;
     static string? ISchemaClass<C_INIT_VelocityFromNormal>.ClassName => null;
 
-    
+
     public ref float SpeedMin { get; }
-    
+
     public ref float SpeedMax { get; }
-    
+
     public ref bool IgnoreDt { get; }
 
 

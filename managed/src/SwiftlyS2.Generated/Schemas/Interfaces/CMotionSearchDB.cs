@@ -14,11 +14,11 @@ public partial interface CMotionSearchDB : ISchemaClass<CMotionSearchDB>
     static int ISchemaClass<CMotionSearchDB>.Size => 184;
     static string? ISchemaClass<CMotionSearchDB>.ClassName => null;
 
-    
+
     public CMotionSearchNode RootNode { get; }
-    
+
     public CProductQuantizer ResidualQuantizer { get; }
-    
+
     public ref CUtlVector<MotionDBIndex> CodeIndices { get; }
 
 

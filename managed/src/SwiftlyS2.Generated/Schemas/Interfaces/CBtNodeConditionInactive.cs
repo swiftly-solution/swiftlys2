@@ -14,11 +14,11 @@ public partial interface CBtNodeConditionInactive : CBtNodeCondition, ISchemaCla
     static int ISchemaClass<CBtNodeConditionInactive>.Size => 152;
     static string? ISchemaClass<CBtNodeConditionInactive>.ClassName => null;
 
-    
+
     public ref float RoundStartThresholdSeconds { get; }
-    
+
     public ref float SensorInactivityThresholdSeconds { get; }
-    
+
     public CountdownTimer SensorInactivityTimer { get; }
 
 

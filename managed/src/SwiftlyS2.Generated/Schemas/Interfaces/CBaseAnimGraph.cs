@@ -14,29 +14,29 @@ public partial interface CBaseAnimGraph : CBaseModelEntity, ISchemaClass<CBaseAn
     static int ISchemaClass<CBaseAnimGraph>.Size => 2704;
     static string? ISchemaClass<CBaseAnimGraph>.ClassName => "baseanimgraph";
 
-    
+
     public ref bool InitiallyPopulateInterpHistory { get; }
-    
+
     public IChoreoServices? ChoreoServices { get; }
-    
+
     public ref bool AnimGraphUpdateEnabled { get; }
-    
+
     public ref float MaxSlopeDistance { get; }
-    
+
     public ref Vector LastSlopeCheckPos { get; }
-    
+
     public ref bool AnimationUpdateScheduled { get; }
-    
+
     public ref Vector Force { get; }
-    
+
     public ref int ForceBone { get; }
-    
+
     public PhysicsRagdollPose_t RagdollPose { get; }
-    
+
     public ref bool RagdollEnabled { get; }
-    
+
     public ref bool RagdollClientSide { get; }
-    
+
     public ref CTransform XParentedRagdollRootInEntitySpace { get; }
 
     public void InitiallyPopulateInterpHistoryUpdated();

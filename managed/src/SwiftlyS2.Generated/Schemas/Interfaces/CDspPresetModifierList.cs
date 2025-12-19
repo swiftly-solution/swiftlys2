@@ -14,9 +14,9 @@ public partial interface CDspPresetModifierList : ISchemaClass<CDspPresetModifie
     static int ISchemaClass<CDspPresetModifierList>.Size => 32;
     static string? ISchemaClass<CDspPresetModifierList>.ClassName => null;
 
-    
+
     public string DspName { get; set; }
-    
+
     public ref CUtlVector<CDSPMixgroupModifier> Modifiers { get; }
 
 

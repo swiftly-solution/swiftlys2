@@ -14,29 +14,29 @@ public partial interface CFuncLadder : CBaseModelEntity, ISchemaClass<CFuncLadde
     static int ISchemaClass<CFuncLadder>.Size => 2184;
     static string? ISchemaClass<CFuncLadder>.ClassName => "func_useableladder";
 
-    
+
     public ref Vector LadderDir { get; }
-    
+
     public ref CUtlVector<CHandle<CInfoLadderDismount>> Dismounts { get; }
-    
+
     public ref Vector LocalTop { get; }
-    
+
     public ref Vector PlayerMountPositionTop { get; }
-    
+
     public ref Vector PlayerMountPositionBottom { get; }
-    
+
     public ref float AutoRideSpeed { get; }
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref bool FakeLadder { get; }
-    
+
     public ref bool HasSlack { get; }
-    
+
     public string SurfacePropName { get; set; }
-    
+
     public CEntityIOOutput OnPlayerGotOnLadder { get; }
-    
+
     public CEntityIOOutput OnPlayerGotOffLadder { get; }
 
     public void LadderDirUpdated();

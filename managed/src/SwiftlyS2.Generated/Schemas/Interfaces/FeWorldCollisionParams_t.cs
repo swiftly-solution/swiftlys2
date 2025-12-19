@@ -14,13 +14,13 @@ public partial interface FeWorldCollisionParams_t : ISchemaClass<FeWorldCollisio
     static int ISchemaClass<FeWorldCollisionParams_t>.Size => 12;
     static string? ISchemaClass<FeWorldCollisionParams_t>.ClassName => null;
 
-    
+
     public ref float WorldFriction { get; }
-    
+
     public ref float GroundFriction { get; }
-    
+
     public ref ushort ListBegin { get; }
-    
+
     public ref ushort ListEnd { get; }
 
 

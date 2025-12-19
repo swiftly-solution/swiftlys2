@@ -14,13 +14,13 @@ public partial interface C_OP_SetFloatCollection : CParticleFunctionOperator, IS
     static int ISchemaClass<C_OP_SetFloatCollection>.Size => 1248;
     static string? ISchemaClass<C_OP_SetFloatCollection>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput InputValue { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public CParticleCollectionFloatInput Lerp { get; }
 
 

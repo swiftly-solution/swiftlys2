@@ -14,7 +14,7 @@ public partial interface CTriggerDetectExplosion : CBaseTrigger, ISchemaClass<CT
     static int ISchemaClass<CTriggerDetectExplosion>.Size => 2544;
     static string? ISchemaClass<CTriggerDetectExplosion>.ClassName => "trigger_detect_explosion";
 
-    
+
     public CEntityIOOutput OnDetectedExplosion { get; }
 
 

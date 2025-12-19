@@ -14,13 +14,13 @@ public partial interface CFutureVelocityMetricEvaluator : CMotionMetricEvaluator
     static int ISchemaClass<CFutureVelocityMetricEvaluator>.Size => 96;
     static string? ISchemaClass<CFutureVelocityMetricEvaluator>.ClassName => null;
 
-    
+
     public ref float Distance { get; }
-    
+
     public ref float StoppingDistance { get; }
-    
+
     public ref float TargetSpeed { get; }
-    
+
     public ref VelocityMetricMode Mode { get; }
 
 

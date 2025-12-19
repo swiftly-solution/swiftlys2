@@ -14,9 +14,9 @@ public partial interface CInfoDynamicShadowHintBox : CInfoDynamicShadowHint, ISc
     static int ISchemaClass<CInfoDynamicShadowHintBox>.Size => 1312;
     static string? ISchemaClass<CInfoDynamicShadowHintBox>.ClassName => "info_dynamic_shadow_hint_box";
 
-    
+
     public ref Vector BoxMins { get; }
-    
+
     public ref Vector BoxMaxs { get; }
 
 

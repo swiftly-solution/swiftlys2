@@ -14,9 +14,9 @@ public partial interface CNmCachedBoolNode__CDefinition : CNmBoolValueNode__CDef
     static int ISchemaClass<CNmCachedBoolNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmCachedBoolNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref NmCachedValueMode_t Mode { get; }
 
 

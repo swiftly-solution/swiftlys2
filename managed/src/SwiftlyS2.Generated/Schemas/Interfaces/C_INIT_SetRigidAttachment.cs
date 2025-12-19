@@ -14,13 +14,13 @@ public partial interface C_INIT_SetRigidAttachment : CParticleFunctionInitialize
     static int ISchemaClass<C_INIT_SetRigidAttachment>.Size => 488;
     static string? ISchemaClass<C_INIT_SetRigidAttachment>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref bool LocalSpace { get; }
 
 

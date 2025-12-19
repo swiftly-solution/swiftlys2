@@ -14,17 +14,17 @@ public partial interface CNmFloatMathNode__CDefinition : CNmFloatValueNode__CDef
     static int ISchemaClass<CNmFloatMathNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmFloatMathNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdxA { get; }
-    
+
     public ref short InputValueNodeIdxB { get; }
-    
+
     public ref bool ReturnAbsoluteResult { get; }
-    
+
     public ref bool ReturnNegatedResult { get; }
-    
+
     public ref CNmFloatMathNode__Operator_t Operator { get; }
-    
+
     public ref float ValueB { get; }
 
 

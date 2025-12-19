@@ -14,13 +14,13 @@ public partial interface EventPostAdvanceTick_t : EventSimulate_t, ISchemaClass<
     static int ISchemaClass<EventPostAdvanceTick_t>.Size => 64;
     static string? ISchemaClass<EventPostAdvanceTick_t>.ClassName => null;
 
-    
+
     public ref int CurrentTick { get; }
-    
+
     public ref int CurrentTickThisFrame { get; }
-    
+
     public ref int TotalTicksThisFrame { get; }
-    
+
     public ref int TotalTicks { get; }
 
 

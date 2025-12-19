@@ -14,15 +14,15 @@ public partial interface SosEditItemInfo_t : ISchemaClass<SosEditItemInfo_t>
     static int ISchemaClass<SosEditItemInfo_t>.Size => 48;
     static string? ISchemaClass<SosEditItemInfo_t>.ClassName => null;
 
-    
+
     public ref SosEditItemType_t ItemType { get; }
-    
+
     public string ItemName { get; set; }
-    
+
     public string ItemTypeName { get; set; }
-    
+
     public string ItemKVString { get; set; }
-    
+
     public ref Vector2D ItemPos { get; }
 
 

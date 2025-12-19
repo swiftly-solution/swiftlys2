@@ -14,9 +14,9 @@ public partial interface CSkyboxReference : CBaseEntity, ISchemaClass<CSkyboxRef
     static int ISchemaClass<CSkyboxReference>.Size => 1272;
     static string? ISchemaClass<CSkyboxReference>.ClassName => "skybox_reference";
 
-    
+
     public ref uint WorldGroupId { get; }
-    
+
     public ref CHandle<CSkyCamera> SkyCamera { get; }
 
 

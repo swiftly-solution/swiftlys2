@@ -14,17 +14,17 @@ public partial interface CPhysLength : CPhysConstraint, ISchemaClass<CPhysLength
     static int ISchemaClass<CPhysLength>.Size => 1432;
     static string? ISchemaClass<CPhysLength>.ClassName => "phys_lengthconstraint";
 
-    
+
     public ISchemaFixedArray<Vector> Offset { get; }
-    
+
     public ref Vector Attach { get; }
-    
+
     public ref float AddLength { get; }
-    
+
     public ref float MinLength { get; }
-    
+
     public ref float TotalLength { get; }
-    
+
     public ref bool EnableCollision { get; }
 
 

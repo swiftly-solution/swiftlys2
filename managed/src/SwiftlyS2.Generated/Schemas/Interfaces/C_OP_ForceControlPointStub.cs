@@ -14,7 +14,7 @@ public partial interface C_OP_ForceControlPointStub : CParticleFunctionPreEmissi
     static int ISchemaClass<C_OP_ForceControlPointStub>.Size => 480;
     static string? ISchemaClass<C_OP_ForceControlPointStub>.ClassName => null;
 
-    
+
     public ref int ControlPoint { get; }
 
 

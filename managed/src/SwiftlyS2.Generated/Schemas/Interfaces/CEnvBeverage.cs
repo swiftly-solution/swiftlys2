@@ -14,9 +14,9 @@ public partial interface CEnvBeverage : CBaseEntity, ISchemaClass<CEnvBeverage>
     static int ISchemaClass<CEnvBeverage>.Size => 1272;
     static string? ISchemaClass<CEnvBeverage>.ClassName => "env_beverage";
 
-    
+
     public ref bool CanInDispenser { get; }
-    
+
     public ref int BeverageType { get; }
 
 

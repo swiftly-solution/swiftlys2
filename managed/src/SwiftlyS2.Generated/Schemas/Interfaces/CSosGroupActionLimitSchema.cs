@@ -14,15 +14,15 @@ public partial interface CSosGroupActionLimitSchema : CSosGroupActionSchema, ISc
     static int ISchemaClass<CSosGroupActionLimitSchema>.Size => 24;
     static string? ISchemaClass<CSosGroupActionLimitSchema>.ClassName => null;
 
-    
+
     public ref int MaxCount { get; }
-    
+
     public ref SosActionStopType_t StopType { get; }
-    
+
     public ref SosActionLimitSortType_t SortType { get; }
-    
+
     public ref bool StopImmediate { get; }
-    
+
     public ref bool CountStopped { get; }
 
 

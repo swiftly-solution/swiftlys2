@@ -14,11 +14,11 @@ public partial interface FeFitInfluence_t : ISchemaClass<FeFitInfluence_t>
     static int ISchemaClass<FeFitInfluence_t>.Size => 12;
     static string? ISchemaClass<FeFitInfluence_t>.ClassName => null;
 
-    
+
     public ref uint VertexNode { get; }
-    
+
     public ref float Weight { get; }
-    
+
     public ref uint MatrixNode { get; }
 
 

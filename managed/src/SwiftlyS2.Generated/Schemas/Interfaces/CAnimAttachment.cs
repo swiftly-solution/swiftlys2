@@ -14,15 +14,15 @@ public partial interface CAnimAttachment : ISchemaClass<CAnimAttachment>
     static int ISchemaClass<CAnimAttachment>.Size => 128;
     static string? ISchemaClass<CAnimAttachment>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<Quaternion> InfluenceRotations { get; }
-    
+
     public ISchemaFixedArray<Vector> InfluenceOffsets { get; }
-    
+
     public ISchemaFixedArray<int> InfluenceIndices { get; }
-    
+
     public ISchemaFixedArray<float> InfluenceWeights { get; }
-    
+
     public ref byte NumInfluences { get; }
 
 

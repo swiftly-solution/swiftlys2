@@ -14,19 +14,19 @@ public partial interface C_OP_SnapshotSkinToBones : CParticleFunctionOperator, I
     static int ISchemaClass<C_OP_SnapshotSkinToBones>.Size => 488;
     static string? ISchemaClass<C_OP_SnapshotSkinToBones>.ClassName => null;
 
-    
+
     public ref bool TransformNormals { get; }
-    
+
     public ref bool TransformRadii { get; }
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref float LifeTimeFadeStart { get; }
-    
+
     public ref float LifeTimeFadeEnd { get; }
-    
+
     public ref float JumpThreshold { get; }
-    
+
     public ref float PrevPosScale { get; }
 
 

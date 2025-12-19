@@ -14,13 +14,13 @@ public partial interface C_INIT_RemapInitialTransformDirectionToRotation : CPart
     static int ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation>.Size => 592;
     static string? ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation>.ClassName => null;
 
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float OffsetRot { get; }
-    
+
     public ref int Component { get; }
 
 

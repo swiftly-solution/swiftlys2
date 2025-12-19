@@ -14,11 +14,11 @@ public partial interface CFollowTargetUpdateNode : CUnaryUpdateNode, ISchemaClas
     static int ISchemaClass<CFollowTargetUpdateNode>.Size => 144;
     static string? ISchemaClass<CFollowTargetUpdateNode>.ClassName => null;
 
-    
+
     public FollowTargetOpFixedSettings_t OpFixedData { get; }
-    
+
     public CAnimParamHandle ParameterPosition { get; }
-    
+
     public CAnimParamHandle ParameterOrientation { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface MaterialParamTexture_t : MaterialParam_t, ISchemaClass<
     static int ISchemaClass<MaterialParamTexture_t>.Size => 16;
     static string? ISchemaClass<MaterialParamTexture_t>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Value { get; }
 
 

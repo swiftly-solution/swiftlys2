@@ -14,16 +14,16 @@ public partial interface CNmAnimationPoseNode__CDefinition : CNmPoseNode__CDefin
     static int ISchemaClass<CNmAnimationPoseNode__CDefinition>.Size => 40;
     static string? ISchemaClass<CNmAnimationPoseNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short PoseTimeValueNodeIdx { get; }
-    
+
     public ref short DataSlotIdx { get; }
-    
-  // Range_t
+
+    // Range_t
     public SchemaUntypedField InputTimeRemapRange { get; }
-    
+
     public ref float UserSpecifiedTime { get; }
-    
+
     public ref bool UseFramesAsInput { get; }
 
 

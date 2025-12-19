@@ -14,9 +14,9 @@ public partial interface CPulseCell_Test_MultiOutflow_WithParams : CPulseCell_Ba
     static int ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams>.Size => 216;
     static string? ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams>.ClassName => null;
 
-    
+
     public SignatureOutflow_Continue Out1 { get; }
-    
+
     public SignatureOutflow_Continue Out2 { get; }
 
 

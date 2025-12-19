@@ -14,13 +14,13 @@ public partial interface CRagdollMagnet : CPointEntity, ISchemaClass<CRagdollMag
     static int ISchemaClass<CRagdollMagnet>.Size => 1288;
     static string? ISchemaClass<CRagdollMagnet>.ClassName => "phys_ragdollmagnet";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref float Force { get; }
-    
+
     public ref Vector Axis { get; }
 
 

@@ -14,8 +14,8 @@ public partial interface CNmEntityAttributeFloatEvent : CNmEntityAttributeEventB
     static int ISchemaClass<CNmEntityAttributeFloatEvent>.Size => 120;
     static string? ISchemaClass<CNmEntityAttributeFloatEvent>.ClassName => null;
 
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField FloatValue { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface CEnvDetailController : CBaseEntity, ISchemaClass<CEnvDe
     static int ISchemaClass<CEnvDetailController>.Size => 1272;
     static string? ISchemaClass<CEnvDetailController>.ClassName => "env_detail_controller";
 
-    
+
     public ref float FadeStartDist { get; }
-    
+
     public ref float FadeEndDist { get; }
 
     public void FadeStartDistUpdated();

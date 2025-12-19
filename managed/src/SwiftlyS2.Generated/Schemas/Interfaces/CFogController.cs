@@ -14,11 +14,11 @@ public partial interface CFogController : CBaseEntity, ISchemaClass<CFogControll
     static int ISchemaClass<CFogController>.Size => 1376;
     static string? ISchemaClass<CFogController>.ClassName => "env_fog_controller";
 
-    
+
     public fogparams_t Fog { get; }
-    
+
     public ref bool UseAngles { get; }
-    
+
     public ref int ChangedVariables { get; }
 
     public void FogUpdated();

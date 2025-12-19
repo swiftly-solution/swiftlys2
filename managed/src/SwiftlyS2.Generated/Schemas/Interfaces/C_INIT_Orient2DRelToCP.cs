@@ -14,11 +14,11 @@ public partial interface C_INIT_Orient2DRelToCP : CParticleFunctionInitializer, 
     static int ISchemaClass<C_INIT_Orient2DRelToCP>.Size => 488;
     static string? ISchemaClass<C_INIT_Orient2DRelToCP>.ClassName => null;
 
-    
+
     public ref int CP { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float RotOffset { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface EntityRenderAttribute_t : ISchemaClass<EntityRenderAttr
     static int ISchemaClass<EntityRenderAttribute_t>.Size => 72;
     static string? ISchemaClass<EntityRenderAttribute_t>.ClassName => null;
 
-    
+
     public ref CUtlStringToken ID { get; }
-    
+
     public ref Vector4D Values { get; }
 
     public void IDUpdated();

@@ -14,7 +14,7 @@ public partial interface CAnimTagManagerUpdater : ISchemaClass<CAnimTagManagerUp
     static int ISchemaClass<CAnimTagManagerUpdater>.Size => 120;
     static string? ISchemaClass<CAnimTagManagerUpdater>.ClassName => null;
 
-    
+
     public ref CUtlVector<SchemaUntypedField> Tags { get; }
 
 

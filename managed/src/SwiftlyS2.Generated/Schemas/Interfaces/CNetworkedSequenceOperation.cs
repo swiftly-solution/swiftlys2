@@ -14,21 +14,21 @@ public partial interface CNetworkedSequenceOperation : ISchemaClass<CNetworkedSe
     static int ISchemaClass<CNetworkedSequenceOperation>.Size => 40;
     static string? ISchemaClass<CNetworkedSequenceOperation>.ClassName => null;
 
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref float PrevCycle { get; }
-    
+
     public ref float Cycle { get; }
-    
+
     public ref CNetworkedQuantizedFloat Weight { get; }
-    
+
     public ref bool SequenceChangeNetworked { get; }
-    
+
     public ref bool Discontinuity { get; }
-    
+
     public ref float PrevCycleFromDiscontinuity { get; }
-    
+
     public ref float PrevCycleForAnimEventDetection { get; }
 
     public void SequenceUpdated();

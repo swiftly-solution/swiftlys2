@@ -14,17 +14,17 @@ public partial interface C_OP_UpdateLightSource : CParticleFunctionOperator, ISc
     static int ISchemaClass<C_OP_UpdateLightSource>.Size => 488;
     static string? ISchemaClass<C_OP_UpdateLightSource>.ClassName => null;
 
-    
+
     public ref Color ColorTint { get; }
-    
+
     public ref float BrightnessScale { get; }
-    
+
     public ref float RadiusScale { get; }
-    
+
     public ref float MinimumLightingRadius { get; }
-    
+
     public ref float MaximumLightingRadius { get; }
-    
+
     public ref float PositionDampingConstant { get; }
 
 

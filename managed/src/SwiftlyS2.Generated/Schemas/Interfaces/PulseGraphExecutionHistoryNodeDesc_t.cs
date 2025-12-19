@@ -14,10 +14,10 @@ public partial interface PulseGraphExecutionHistoryNodeDesc_t : ISchemaClass<Pul
     static int ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t>.Size => 32;
     static string? ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t>.ClassName => null;
 
-    
+
     public ref CBufferString StrCellDesc { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField StrBindingName { get; }
 
 

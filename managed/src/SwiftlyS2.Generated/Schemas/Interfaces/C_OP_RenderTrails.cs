@@ -14,45 +14,45 @@ public partial interface C_OP_RenderTrails : CBaseTrailRenderer, ISchemaClass<C_
     static int ISchemaClass<C_OP_RenderTrails>.Size => 17480;
     static string? ISchemaClass<C_OP_RenderTrails>.ClassName => null;
 
-    
+
     public ref bool EnableFadingAndClamping { get; }
-    
+
     public ref float StartFadeDot { get; }
-    
+
     public ref float EndFadeDot { get; }
-    
+
     public ParticleAttributeIndex_t PrevPntSource { get; }
-    
+
     public ref float MaxLength { get; }
-    
+
     public ref float MinLength { get; }
-    
+
     public ref bool IgnoreDT { get; }
-    
+
     public ref float ConstrainRadiusToLengthRatio { get; }
-    
+
     public ref float LengthScale { get; }
-    
+
     public ref float LengthFadeInTime { get; }
-    
+
     public CPerParticleFloatInput RadiusHeadTaper { get; }
-    
+
     public CParticleCollectionVecInput HeadColorScale { get; }
-    
+
     public CPerParticleFloatInput HeadAlphaScale { get; }
-    
+
     public CPerParticleFloatInput RadiusTaper { get; }
-    
+
     public CParticleCollectionVecInput TailColorScale { get; }
-    
+
     public CPerParticleFloatInput TailAlphaScale { get; }
-    
+
     public ParticleAttributeIndex_t HorizCropField { get; }
-    
+
     public ParticleAttributeIndex_t VertCropField { get; }
-    
+
     public ref float ForwardShift { get; }
-    
+
     public ref bool FlipUVBasedOnPitchYaw { get; }
 
 

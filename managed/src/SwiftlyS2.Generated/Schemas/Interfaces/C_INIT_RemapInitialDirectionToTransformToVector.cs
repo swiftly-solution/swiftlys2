@@ -14,17 +14,17 @@ public partial interface C_INIT_RemapInitialDirectionToTransformToVector : CPart
     static int ISchemaClass<C_INIT_RemapInitialDirectionToTransformToVector>.Size => 608;
     static string? ISchemaClass<C_INIT_RemapInitialDirectionToTransformToVector>.ClassName => null;
 
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public ref float OffsetRot { get; }
-    
+
     public ref Vector OffsetAxis { get; }
-    
+
     public ref bool Normalize { get; }
 
 

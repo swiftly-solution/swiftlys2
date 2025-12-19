@@ -14,9 +14,9 @@ public partial interface CNmFootstepEventIDNode__CDefinition : CNmIDValueNode__C
     static int ISchemaClass<CNmFootstepEventIDNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmFootstepEventIDNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public CNmBitFlags EventConditionRules { get; }
 
 

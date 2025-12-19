@@ -14,7 +14,7 @@ public partial interface CFuncVPhysicsClip : CBaseModelEntity, ISchemaClass<CFun
     static int ISchemaClass<CFuncVPhysicsClip>.Size => 2016;
     static string? ISchemaClass<CFuncVPhysicsClip>.ClassName => "func_clip_vphysics";
 
-    
+
     public ref bool Disabled { get; }
 
 

@@ -14,21 +14,21 @@ public partial interface VPhysXCollisionAttributes_t : ISchemaClass<VPhysXCollis
     static int ISchemaClass<VPhysXCollisionAttributes_t>.Size => 160;
     static string? ISchemaClass<VPhysXCollisionAttributes_t>.ClassName => null;
 
-    
+
     public ref uint CollisionGroup { get; }
-    
+
     public ref CUtlVector<uint> InteractAs { get; }
-    
+
     public ref CUtlVector<uint> InteractWith { get; }
-    
+
     public ref CUtlVector<uint> InteractExclude { get; }
-    
+
     public string CollisionGroupString { get; set; }
-    
+
     public ref CUtlVector<CUtlString> InteractAsStrings { get; }
-    
+
     public ref CUtlVector<CUtlString> InteractWithStrings { get; }
-    
+
     public ref CUtlVector<CUtlString> InteractExcludeStrings { get; }
 
 

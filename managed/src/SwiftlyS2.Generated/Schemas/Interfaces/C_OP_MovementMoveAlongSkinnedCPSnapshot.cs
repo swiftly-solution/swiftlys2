@@ -14,17 +14,17 @@ public partial interface C_OP_MovementMoveAlongSkinnedCPSnapshot : CParticleFunc
     static int ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot>.Size => 1216;
     static string? ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref int SnapshotControlPointNumber { get; }
-    
+
     public ref bool SetNormal { get; }
-    
+
     public ref bool SetRadius { get; }
-    
+
     public CPerParticleFloatInput Interpolation { get; }
-    
+
     public CPerParticleFloatInput TValue { get; }
 
 

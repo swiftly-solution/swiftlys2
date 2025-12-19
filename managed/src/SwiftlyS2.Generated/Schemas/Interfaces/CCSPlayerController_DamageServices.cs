@@ -14,9 +14,9 @@ public partial interface CCSPlayerController_DamageServices : CPlayerControllerC
     static int ISchemaClass<CCSPlayerController_DamageServices>.Size => 208;
     static string? ISchemaClass<CCSPlayerController_DamageServices>.ClassName => null;
 
-    
+
     public ref int SendUpdate { get; }
-    
+
     public ref CUtlVector<CDamageRecord> DamageList { get; }
 
     public void SendUpdateUpdated();

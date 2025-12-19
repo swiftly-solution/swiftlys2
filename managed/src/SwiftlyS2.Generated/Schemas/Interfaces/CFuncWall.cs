@@ -14,7 +14,7 @@ public partial interface CFuncWall : CBaseModelEntity, ISchemaClass<CFuncWall>
     static int ISchemaClass<CFuncWall>.Size => 2016;
     static string? ISchemaClass<CFuncWall>.ClassName => "func_wall";
 
-    
+
     public ref int State { get; }
 
 

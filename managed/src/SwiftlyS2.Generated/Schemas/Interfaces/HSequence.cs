@@ -14,7 +14,7 @@ public partial interface HSequence : ISchemaClass<HSequence>
     static int ISchemaClass<HSequence>.Size => 4;
     static string? ISchemaClass<HSequence>.ClassName => null;
 
-    
+
     public ref int Value { get; }
 
 

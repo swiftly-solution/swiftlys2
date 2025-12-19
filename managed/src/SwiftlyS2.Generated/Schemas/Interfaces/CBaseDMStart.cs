@@ -14,7 +14,7 @@ public partial interface CBaseDMStart : CPointEntity, ISchemaClass<CBaseDMStart>
     static int ISchemaClass<CBaseDMStart>.Size => 1272;
     static string? ISchemaClass<CBaseDMStart>.ClassName => "info_player_deathmatch";
 
-    
+
     public string Master { get; set; }
 
 

@@ -14,15 +14,15 @@ public partial interface FeTaperedCapsuleRigid_t : ISchemaClass<FeTaperedCapsule
     static int ISchemaClass<FeTaperedCapsuleRigid_t>.Size => 48;
     static string? ISchemaClass<FeTaperedCapsuleRigid_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<fltx4> Sphere { get; }
-    
+
     public ref ushort Node { get; }
-    
+
     public ref ushort CollisionMask { get; }
-    
+
     public ref ushort VertexMapIndex { get; }
-    
+
     public ref ushort Flags { get; }
 
 

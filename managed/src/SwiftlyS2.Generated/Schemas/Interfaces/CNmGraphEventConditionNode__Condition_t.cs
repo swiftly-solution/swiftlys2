@@ -14,9 +14,9 @@ public partial interface CNmGraphEventConditionNode__Condition_t : ISchemaClass<
     static int ISchemaClass<CNmGraphEventConditionNode__Condition_t>.Size => 16;
     static string? ISchemaClass<CNmGraphEventConditionNode__Condition_t>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol EventID { get; }
-    
+
     public ref NmGraphEventTypeCondition_t EventTypeCondition { get; }
 
 

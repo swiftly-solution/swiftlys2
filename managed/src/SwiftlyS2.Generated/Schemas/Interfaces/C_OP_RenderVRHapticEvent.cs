@@ -14,13 +14,13 @@ public partial interface C_OP_RenderVRHapticEvent : CParticleFunctionRenderer, I
     static int ISchemaClass<C_OP_RenderVRHapticEvent>.Size => 928;
     static string? ISchemaClass<C_OP_RenderVRHapticEvent>.ClassName => null;
 
-    
+
     public ref ParticleVRHandChoiceList_t Hand { get; }
-    
+
     public ref int OutputHandCP { get; }
-    
+
     public ref int OutputField { get; }
-    
+
     public CPerParticleFloatInput Amplitude { get; }
 
 

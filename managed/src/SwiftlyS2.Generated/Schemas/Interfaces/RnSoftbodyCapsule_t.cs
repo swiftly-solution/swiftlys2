@@ -14,11 +14,11 @@ public partial interface RnSoftbodyCapsule_t : ISchemaClass<RnSoftbodyCapsule_t>
     static int ISchemaClass<RnSoftbodyCapsule_t>.Size => 32;
     static string? ISchemaClass<RnSoftbodyCapsule_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<Vector> Center { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ISchemaFixedArray<ushort> Particle { get; }
 
 

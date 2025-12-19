@@ -14,11 +14,11 @@ public partial interface CNmClip__ModelSpaceSamplingChainLink_t : ISchemaClass<C
     static int ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t>.Size => 12;
     static string? ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t>.ClassName => null;
 
-    
+
     public ref int BoneIdx { get; }
-    
+
     public ref int ParentBoneIdx { get; }
-    
+
     public ref int ParentChainLinkIdx { get; }
 
 

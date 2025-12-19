@@ -14,9 +14,9 @@ public partial interface CHandleTest : CBaseEntity, ISchemaClass<CHandleTest>
     static int ISchemaClass<CHandleTest>.Size => 1272;
     static string? ISchemaClass<CHandleTest>.ClassName => "handle_test";
 
-    
+
     public ref CHandle<CBaseEntity> Handle { get; }
-    
+
     public ref bool SendHandle { get; }
 
     public void HandleUpdated();

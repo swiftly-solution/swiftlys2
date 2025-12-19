@@ -14,7 +14,7 @@ public partial interface CExampleSchemaVData_PolymorphicDerivedB : CExampleSchem
     static int ISchemaClass<CExampleSchemaVData_PolymorphicDerivedB>.Size => 24;
     static string? ISchemaClass<CExampleSchemaVData_PolymorphicDerivedB>.ClassName => null;
 
-    
+
     public ref int DerivedB { get; }
 
 

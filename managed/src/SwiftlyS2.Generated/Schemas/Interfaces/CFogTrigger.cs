@@ -14,7 +14,7 @@ public partial interface CFogTrigger : CBaseTrigger, ISchemaClass<CFogTrigger>
     static int ISchemaClass<CFogTrigger>.Size => 2576;
     static string? ISchemaClass<CFogTrigger>.ClassName => "trigger_fog";
 
-    
+
     public fogparams_t Fog { get; }
 
 

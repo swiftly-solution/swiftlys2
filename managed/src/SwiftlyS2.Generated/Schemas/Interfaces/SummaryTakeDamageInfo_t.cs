@@ -14,13 +14,13 @@ public partial interface SummaryTakeDamageInfo_t : ISchemaClass<SummaryTakeDamag
     static int ISchemaClass<SummaryTakeDamageInfo_t>.Size => 352;
     static string? ISchemaClass<SummaryTakeDamageInfo_t>.ClassName => null;
 
-    
+
     public ref int SummarisedCount { get; }
-    
+
     public ref CTakeDamageInfo Info { get; }
-    
+
     public ref CTakeDamageResult Result { get; }
-    
+
     public ref CHandle<CBaseEntity> Target { get; }
 
 

@@ -14,23 +14,23 @@ public partial interface CNmTargetWarpNode__CDefinition : CNmPoseNode__CDefiniti
     static int ISchemaClass<CNmTargetWarpNode__CDefinition>.Size => 48;
     static string? ISchemaClass<CNmTargetWarpNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short ClipReferenceNodeIdx { get; }
-    
+
     public ref short TargetValueNodeIdx { get; }
-    
+
     public ref CNmRootMotionData__SamplingMode_t SamplingMode { get; }
-    
+
     public ref bool AllowTargetUpdate { get; }
-    
+
     public ref float SamplingPositionErrorThresholdSq { get; }
-    
+
     public ref float MaxTangentLength { get; }
-    
+
     public ref float LerpFallbackDistanceThreshold { get; }
-    
+
     public ref float TargetUpdateDistanceThreshold { get; }
-    
+
     public ref float TargetUpdateAngleThresholdRadians { get; }
 
 

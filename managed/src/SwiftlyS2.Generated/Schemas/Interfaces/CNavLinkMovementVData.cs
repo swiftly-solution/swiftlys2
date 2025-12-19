@@ -14,14 +14,14 @@ public partial interface CNavLinkMovementVData : ISchemaClass<CNavLinkMovementVD
     static int ISchemaClass<CNavLinkMovementVData>.Size => 256;
     static string? ISchemaClass<CNavLinkMovementVData>.ClassName => null;
 
-    
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
     public SchemaUntypedField ToolsOnlyOwnerModelName { get; }
-    
+
     public ref bool IsInterpolated { get; }
-    
+
     public ref uint RecommendedDistance { get; }
-    
+
     public ref CUtlVector<CNavLinkAnimgraphVar> AnimgraphVars { get; }
 
 

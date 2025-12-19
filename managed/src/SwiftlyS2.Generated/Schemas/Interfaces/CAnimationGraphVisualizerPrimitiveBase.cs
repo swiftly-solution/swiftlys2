@@ -14,11 +14,11 @@ public partial interface CAnimationGraphVisualizerPrimitiveBase : ISchemaClass<C
     static int ISchemaClass<CAnimationGraphVisualizerPrimitiveBase>.Size => 64;
     static string? ISchemaClass<CAnimationGraphVisualizerPrimitiveBase>.ClassName => null;
 
-    
+
     public ref CAnimationGraphVisualizerPrimitiveType Type { get; }
-    
+
     public ISchemaClassFixedArray<AnimNodeID> OwningAnimNodePaths { get; }
-    
+
     public ref int OwningAnimNodePathCount { get; }
 
 

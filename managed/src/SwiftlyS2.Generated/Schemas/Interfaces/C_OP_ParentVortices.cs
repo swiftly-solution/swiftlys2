@@ -14,11 +14,11 @@ public partial interface C_OP_ParentVortices : CParticleFunctionForce, ISchemaCl
     static int ISchemaClass<C_OP_ParentVortices>.Size => 504;
     static string? ISchemaClass<C_OP_ParentVortices>.ClassName => null;
 
-    
+
     public ref float ForceScale { get; }
-    
+
     public ref Vector TwistAxis { get; }
-    
+
     public ref bool FlipBasedOnYaw { get; }
 
 

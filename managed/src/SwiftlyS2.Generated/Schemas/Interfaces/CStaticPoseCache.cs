@@ -14,11 +14,11 @@ public partial interface CStaticPoseCache : ISchemaClass<CStaticPoseCache>
     static int ISchemaClass<CStaticPoseCache>.Size => 48;
     static string? ISchemaClass<CStaticPoseCache>.ClassName => null;
 
-    
+
     public ref CUtlVector<CCachedPose> Poses { get; }
-    
+
     public ref int BoneCount { get; }
-    
+
     public ref int MorphCount { get; }
 
 

@@ -14,35 +14,35 @@ public partial interface CPlayerSprayDecal : CModelPointEntity, ISchemaClass<CPl
     static int ISchemaClass<CPlayerSprayDecal>.Size => 2224;
     static string? ISchemaClass<CPlayerSprayDecal>.ClassName => "player_spray_decal";
 
-    
+
     public ref int UniqueID { get; }
-    
+
     public ref uint AccountID { get; }
-    
+
     public ref uint TraceID { get; }
-    
+
     public ref uint RtGcTime { get; }
-    
+
     public ref Vector EndPos { get; }
-    
+
     public ref Vector Start { get; }
-    
+
     public ref Vector Left { get; }
-    
+
     public ref Vector Normal { get; }
-    
+
     public ref int Player { get; }
-    
+
     public ref int Entity { get; }
-    
+
     public ref int Hitbox { get; }
-    
+
     public ref float CreationTime { get; }
-    
+
     public ref int TintID { get; }
-    
+
     public ref byte Version { get; }
-    
+
     public ISchemaFixedArray<byte> Signature { get; }
 
     public void UniqueIDUpdated();

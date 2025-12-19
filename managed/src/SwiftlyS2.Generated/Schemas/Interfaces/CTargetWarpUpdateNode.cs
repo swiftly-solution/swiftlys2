@@ -14,33 +14,33 @@ public partial interface CTargetWarpUpdateNode : CUnaryUpdateNode, ISchemaClass<
     static int ISchemaClass<CTargetWarpUpdateNode>.Size => 152;
     static string? ISchemaClass<CTargetWarpUpdateNode>.ClassName => null;
 
-    
+
     public ref TargetWarpAngleMode_t AngleMode { get; }
-    
+
     public CAnimParamHandle TargetPositionParameter { get; }
-    
+
     public CAnimParamHandle TargetUpVectorParameter { get; }
-    
+
     public CAnimParamHandle TargetFacePositionParameter { get; }
-    
+
     public CAnimParamHandle MoveHeadingParameter { get; }
-    
+
     public CAnimParamHandle DesiredMoveHeadingParameter { get; }
-    
+
     public ref TargetWarpCorrectionMethod CorrectionMethod { get; }
-    
+
     public ref TargetWarpTimingMethod TargetWarpTimingMethod { get; }
-    
+
     public ref bool TargetFacePositionIsWorldSpace { get; }
-    
+
     public ref bool TargetPositionIsWorldSpace { get; }
-    
+
     public ref bool OnlyWarpWhenTagIsFound { get; }
-    
+
     public ref bool WarpOrientationDuringTranslation { get; }
-    
+
     public ref bool WarpAroundCenter { get; }
-    
+
     public ref float MaxAngle { get; }
 
 

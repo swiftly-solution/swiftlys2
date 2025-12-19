@@ -14,17 +14,17 @@ public partial interface CPulseCell_Inflow_Method : CPulseCell_Inflow_BaseEntryp
     static int ISchemaClass<CPulseCell_Inflow_Method>.Size => 200;
     static string? ISchemaClass<CPulseCell_Inflow_Method>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField MethodName { get; }
-    
+
     public string Description { get; set; }
-    
+
     public ref bool IsPublic { get; }
-    
-  // CPulseValueFullType
+
+    // CPulseValueFullType
     public SchemaUntypedField ReturnType { get; }
-    
+
     public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args { get; }
 
 

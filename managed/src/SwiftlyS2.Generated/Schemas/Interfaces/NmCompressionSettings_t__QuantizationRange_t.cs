@@ -14,9 +14,9 @@ public partial interface NmCompressionSettings_t__QuantizationRange_t : ISchemaC
     static int ISchemaClass<NmCompressionSettings_t__QuantizationRange_t>.Size => 8;
     static string? ISchemaClass<NmCompressionSettings_t__QuantizationRange_t>.ClassName => null;
 
-    
+
     public ref float RangeStart { get; }
-    
+
     public ref float RangeLength { get; }
 
 

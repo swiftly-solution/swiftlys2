@@ -14,15 +14,15 @@ public partial interface CBoneConstraintPoseSpaceMorph : CBoneConstraintBase, IS
     static int ISchemaClass<CBoneConstraintPoseSpaceMorph>.Size => 160;
     static string? ISchemaClass<CBoneConstraintPoseSpaceMorph>.ClassName => null;
 
-    
+
     public string BoneName { get; set; }
-    
+
     public string AttachmentName { get; set; }
-    
+
     public ref CUtlVector<CUtlString> OutputMorph { get; }
-    
+
     public ref CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t> InputList { get; }
-    
+
     public ref bool Clamp { get; }
 
 

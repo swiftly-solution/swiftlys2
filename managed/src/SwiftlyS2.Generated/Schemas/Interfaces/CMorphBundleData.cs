@@ -14,13 +14,13 @@ public partial interface CMorphBundleData : ISchemaClass<CMorphBundleData>
     static int ISchemaClass<CMorphBundleData>.Size => 56;
     static string? ISchemaClass<CMorphBundleData>.ClassName => null;
 
-    
+
     public ref float ULeftSrc { get; }
-    
+
     public ref float VTopSrc { get; }
-    
+
     public ref CUtlVector<float> Offsets { get; }
-    
+
     public ref CUtlVector<float> Ranges { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface C_OP_NormalLock : CParticleFunctionOperator, ISchemaCla
     static int ISchemaClass<C_OP_NormalLock>.Size => 472;
     static string? ISchemaClass<C_OP_NormalLock>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
 
 

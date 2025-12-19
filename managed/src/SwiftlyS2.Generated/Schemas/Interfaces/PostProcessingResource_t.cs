@@ -14,31 +14,31 @@ public partial interface PostProcessingResource_t : ISchemaClass<PostProcessingR
     static int ISchemaClass<PostProcessingResource_t>.Size => 312;
     static string? ISchemaClass<PostProcessingResource_t>.ClassName => null;
 
-    
+
     public ref bool HasTonemapParams { get; }
-    
+
     public PostProcessingTonemapParameters_t ToneMapParams { get; }
-    
+
     public ref bool HasBloomParams { get; }
-    
+
     public PostProcessingBloomParameters_t BloomParams { get; }
-    
+
     public ref bool HasVignetteParams { get; }
-    
+
     public PostProcessingVignetteParameters_t VignetteParams { get; }
-    
+
     public ref bool HasLocalContrastParams { get; }
-    
+
     public PostProcessingLocalContrastParameters_t LocalConstrastParams { get; }
-    
+
     public ref int ColorCorrectionVolumeDim { get; }
-    
+
     public ref CUtlBinaryBlock ColorCorrectionVolumeData { get; }
-    
+
     public ref bool HasColorCorrection { get; }
-    
+
     public ref bool HasFogScatteringParams { get; }
-    
+
     public PostProcessingFogScatteringParameters_t FogScatteringParams { get; }
 
 

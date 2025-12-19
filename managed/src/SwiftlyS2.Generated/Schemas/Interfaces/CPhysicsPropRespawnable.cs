@@ -14,15 +14,15 @@ public partial interface CPhysicsPropRespawnable : CPhysicsProp, ISchemaClass<CP
     static int ISchemaClass<CPhysicsPropRespawnable>.Size => 3648;
     static string? ISchemaClass<CPhysicsPropRespawnable>.ClassName => "prop_physics_respawnable";
 
-    
+
     public ref Vector OriginalSpawnOrigin { get; }
-    
+
     public ref QAngle OriginalSpawnAngles { get; }
-    
+
     public ref Vector OriginalMins { get; }
-    
+
     public ref Vector OriginalMaxs { get; }
-    
+
     public ref float RespawnDuration { get; }
 
 

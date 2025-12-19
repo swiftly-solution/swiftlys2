@@ -14,31 +14,31 @@ public partial interface COrientationWarpUpdateNode : CUnaryUpdateNode, ISchemaC
     static int ISchemaClass<COrientationWarpUpdateNode>.Size => 192;
     static string? ISchemaClass<COrientationWarpUpdateNode>.ClassName => null;
 
-    
+
     public ref OrientationWarpMode_t Mode { get; }
-    
+
     public CAnimParamHandle TargetParam { get; }
-    
+
     public CAnimParamHandle TargetPositionParam { get; }
-    
+
     public CAnimParamHandle FallbackTargetPositionParam { get; }
-    
+
     public ref OrientationWarpTargetOffsetMode_t TargetOffsetMode { get; }
-    
+
     public ref float TargetOffset { get; }
-    
+
     public CAnimParamHandle TargetOffsetParam { get; }
-    
+
     public CAnimInputDamping Damping { get; }
-    
+
     public ref OrientationWarpRootMotionSource_t RootMotionSource { get; }
-    
+
     public ref float MaxRootMotionScale { get; }
-    
+
     public ref bool EnablePreferredRotationDirection { get; }
-    
+
     public ref AnimValueSource PreferredRotationDirection { get; }
-    
+
     public ref float PreferredRotationThreshold { get; }
 
 

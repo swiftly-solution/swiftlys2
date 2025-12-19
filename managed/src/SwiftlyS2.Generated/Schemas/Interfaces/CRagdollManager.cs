@@ -14,13 +14,13 @@ public partial interface CRagdollManager : CBaseEntity, ISchemaClass<CRagdollMan
     static int ISchemaClass<CRagdollManager>.Size => 1280;
     static string? ISchemaClass<CRagdollManager>.ClassName => "game_ragdoll_manager";
 
-    
+
     public ref byte CurrentMaxRagdollCount { get; }
-    
+
     public ref int MaxRagdollCount { get; }
-    
+
     public ref bool SaveImportant { get; }
-    
+
     public ref bool CanTakeDamage { get; }
 
     public void CurrentMaxRagdollCountUpdated();

@@ -14,25 +14,25 @@ public partial interface C_INIT_SetHitboxToModel : CParticleFunctionInitializer,
     static int ISchemaClass<C_INIT_SetHitboxToModel>.Size => 2720;
     static string? ISchemaClass<C_INIT_SetHitboxToModel>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref int ForceInModel { get; }
-    
+
     public ref bool EvenDistribution { get; }
-    
+
     public ref int DesiredHitbox { get; }
-    
+
     public CParticleCollectionVecInput HitBoxScale { get; }
-    
+
     public ref Vector DirectionBias { get; }
-    
+
     public ref bool MaintainHitbox { get; }
-    
+
     public ref bool UseBones { get; }
-    
+
     public string HitboxSetName { get; set; }
-    
+
     public CParticleCollectionFloatInput ShellSize { get; }
 
 

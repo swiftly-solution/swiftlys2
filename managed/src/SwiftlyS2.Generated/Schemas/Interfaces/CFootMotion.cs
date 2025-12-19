@@ -14,11 +14,11 @@ public partial interface CFootMotion : ISchemaClass<CFootMotion>
     static int ISchemaClass<CFootMotion>.Size => 40;
     static string? ISchemaClass<CFootMotion>.ClassName => null;
 
-    
+
     public ref CUtlVector<CFootStride> Strides { get; }
-    
+
     public string Name { get; set; }
-    
+
     public ref bool Additive { get; }
 
 

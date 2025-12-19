@@ -14,12 +14,12 @@ public partial interface CNmBoneWeightList : ISchemaClass<CNmBoneWeightList>
     static int ISchemaClass<CNmBoneWeightList>.Size => 272;
     static string? ISchemaClass<CNmBoneWeightList>.ClassName => null;
 
-    
-  // CResourceName
+
+    // CResourceName
     public SchemaUntypedField SkeletonName { get; }
-    
+
     public ref CUtlVector<CGlobalSymbol> BoneIDs { get; }
-    
+
     public ref CUtlVector<float> Weights { get; }
 
 

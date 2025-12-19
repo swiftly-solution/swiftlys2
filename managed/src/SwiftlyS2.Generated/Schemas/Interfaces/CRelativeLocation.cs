@@ -14,13 +14,13 @@ public partial interface CRelativeLocation : ISchemaClass<CRelativeLocation>
     static int ISchemaClass<CRelativeLocation>.Size => 56;
     static string? ISchemaClass<CRelativeLocation>.ClassName => null;
 
-    
+
     public ref RelativeLocationType_t Type { get; }
-    
+
     public ref Vector RelativeOffset { get; }
-    
+
     public ref Vector WorldSpacePos { get; }
-    
+
     public ref CHandle<CBaseEntity> Entity { get; }
 
 

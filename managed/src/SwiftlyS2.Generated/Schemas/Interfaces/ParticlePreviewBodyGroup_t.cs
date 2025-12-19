@@ -14,9 +14,9 @@ public partial interface ParticlePreviewBodyGroup_t : ISchemaClass<ParticlePrevi
     static int ISchemaClass<ParticlePreviewBodyGroup_t>.Size => 16;
     static string? ISchemaClass<ParticlePreviewBodyGroup_t>.ClassName => null;
 
-    
+
     public string BodyGroupName { get; set; }
-    
+
     public ref int Value { get; }
 
 

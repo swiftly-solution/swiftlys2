@@ -14,13 +14,13 @@ public partial interface CStateNodeStateData : ISchemaClass<CStateNodeStateData>
     static int ISchemaClass<CStateNodeStateData>.Size => 24;
     static string? ISchemaClass<CStateNodeStateData>.ClassName => null;
 
-    
+
     public CAnimUpdateNodeRef Child { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField ExclusiveRootMotion { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField ExclusiveRootMotionFirstFrame { get; }
 
 

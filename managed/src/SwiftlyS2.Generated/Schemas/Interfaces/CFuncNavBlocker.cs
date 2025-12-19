@@ -14,9 +14,9 @@ public partial interface CFuncNavBlocker : CBaseModelEntity, ISchemaClass<CFuncN
     static int ISchemaClass<CFuncNavBlocker>.Size => 2032;
     static string? ISchemaClass<CFuncNavBlocker>.ClassName => "func_nav_blocker";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref int BlockedTeamNumber { get; }
 
 

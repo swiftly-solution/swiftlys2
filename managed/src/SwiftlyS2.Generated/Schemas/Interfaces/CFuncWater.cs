@@ -14,7 +14,7 @@ public partial interface CFuncWater : CBaseModelEntity, ISchemaClass<CFuncWater>
     static int ISchemaClass<CFuncWater>.Size => 2288;
     static string? ISchemaClass<CFuncWater>.ClassName => "func_water";
 
-    
+
     public CBuoyancyHelper BuoyancyHelper { get; }
 
 

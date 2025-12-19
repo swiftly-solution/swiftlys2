@@ -14,10 +14,10 @@ public partial interface CTankTargetChange : CPointEntity, ISchemaClass<CTankTar
     static int ISchemaClass<CTankTargetChange>.Size => 1288;
     static string? ISchemaClass<CTankTargetChange>.ClassName => "tanktrain_aitarget";
 
-    
-  // CVariantBase< CVariantDefaultAllocator >
+
+    // CVariantBase< CVariantDefaultAllocator >
     public SchemaUntypedField NewTarget { get; }
-    
+
     public string NewTargetName { get; set; }
 
 

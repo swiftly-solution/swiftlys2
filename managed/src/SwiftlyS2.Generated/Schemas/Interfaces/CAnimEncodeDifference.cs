@@ -14,19 +14,19 @@ public partial interface CAnimEncodeDifference : ISchemaClass<CAnimEncodeDiffere
     static int ISchemaClass<CAnimEncodeDifference>.Size => 168;
     static string? ISchemaClass<CAnimEncodeDifference>.ClassName => null;
 
-    
+
     public ref CUtlVector<CAnimBoneDifference> BoneArray { get; }
-    
+
     public ref CUtlVector<CAnimMorphDifference> MorphArray { get; }
-    
+
     public ref CUtlVector<CAnimUserDifference> UserArray { get; }
-    
+
     public ref CUtlVector<byte> HasRotationBitArray { get; }
-    
+
     public ref CUtlVector<byte> HasMovementBitArray { get; }
-    
+
     public ref CUtlVector<byte> HasMorphBitArray { get; }
-    
+
     public ref CUtlVector<byte> HasUserBitArray { get; }
 
 

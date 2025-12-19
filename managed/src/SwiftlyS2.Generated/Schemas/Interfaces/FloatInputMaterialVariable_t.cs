@@ -14,9 +14,9 @@ public partial interface FloatInputMaterialVariable_t : ISchemaClass<FloatInputM
     static int ISchemaClass<FloatInputMaterialVariable_t>.Size => 376;
     static string? ISchemaClass<FloatInputMaterialVariable_t>.ClassName => null;
 
-    
+
     public string StrVariable { get; set; }
-    
+
     public CParticleCollectionFloatInput Input { get; }
 
 

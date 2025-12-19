@@ -14,9 +14,9 @@ public partial interface CNmSkeleton__SecondarySkeleton_t : ISchemaClass<CNmSkel
     static int ISchemaClass<CNmSkeleton__SecondarySkeleton_t>.Size => 16;
     static string? ISchemaClass<CNmSkeleton__SecondarySkeleton_t>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol AttachToBoneID { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface DecalGroupOption_t : ISchemaClass<DecalGroupOption_t>
     static int ISchemaClass<DecalGroupOption_t>.Size => 32;
     static string? ISchemaClass<DecalGroupOption_t>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
-    
+
     public ref CGlobalSymbol SequenceName { get; }
-    
+
     public ref float Probability { get; }
-    
+
     public ref bool EnableAngleBetweenNormalAndGravityRange { get; }
-    
+
     public ref float MinAngleBetweenNormalAndGravity { get; }
-    
+
     public ref float MaxAngleBetweenNormalAndGravity { get; }
 
 

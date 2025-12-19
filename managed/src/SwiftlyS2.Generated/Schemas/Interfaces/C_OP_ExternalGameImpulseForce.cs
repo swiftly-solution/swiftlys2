@@ -14,15 +14,15 @@ public partial interface C_OP_ExternalGameImpulseForce : CParticleFunctionForce,
     static int ISchemaClass<C_OP_ExternalGameImpulseForce>.Size => 856;
     static string? ISchemaClass<C_OP_ExternalGameImpulseForce>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput ForceScale { get; }
-    
+
     public ref bool Ropes { get; }
-    
+
     public ref bool RopesZOnly { get; }
-    
+
     public ref bool Explosions { get; }
-    
+
     public ref bool Particles { get; }
 
 

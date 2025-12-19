@@ -14,19 +14,19 @@ public partial interface RenderHairStrandInfo_t : ISchemaClass<RenderHairStrandI
     static int ISchemaClass<RenderHairStrandInfo_t>.Size => 40;
     static string? ISchemaClass<RenderHairStrandInfo_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<uint> GuideHairIndices_nSurfaceTriIndex { get; }
-    
+
     public ISchemaFixedArray<ushort> GuideBary_vBaseBary { get; }
-    
+
     public ISchemaFixedArray<ushort> RootOffset_flLengthScale { get; }
-    
+
     public ISchemaFixedArray<ushort> PackedBaseUv { get; }
-    
+
     public ref uint PackedSurfaceNormalOs { get; }
-    
+
     public ref uint PackedSurfaceTangentOs { get; }
-    
+
     public ref uint DataOffset_Segments { get; }
 
 

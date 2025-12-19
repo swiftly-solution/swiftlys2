@@ -14,7 +14,7 @@ public partial interface vphysics_save_cphysicsbody_t : RnBodyDesc_t, ISchemaCla
     static int ISchemaClass<vphysics_save_cphysicsbody_t>.Size => 232;
     static string? ISchemaClass<vphysics_save_cphysicsbody_t>.ClassName => null;
 
-    
+
     public ref ulong OldPointer { get; }
 
 

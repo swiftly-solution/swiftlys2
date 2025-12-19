@@ -14,11 +14,11 @@ public partial interface CVoiceContainerEnvelopeAnalyzer : CVoiceContainerAnalys
     static int ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.Size => 96;
     static string? ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.ClassName => null;
 
-    
+
     public ref EMode_t Mode { get; }
-    
+
     public ref float AnalysisWindowMs { get; }
-    
+
     public ref float Threshold { get; }
 
 

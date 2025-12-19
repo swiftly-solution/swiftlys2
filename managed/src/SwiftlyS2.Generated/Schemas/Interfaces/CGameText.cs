@@ -14,9 +14,9 @@ public partial interface CGameText : CRulePointEntity, ISchemaClass<CGameText>
     static int ISchemaClass<CGameText>.Size => 2056;
     static string? ISchemaClass<CGameText>.ClassName => "game_text";
 
-    
+
     public string Message { get; set; }
-    
+
     public hudtextparms_t TextParms { get; }
 
 

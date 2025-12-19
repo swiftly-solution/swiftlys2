@@ -14,9 +14,9 @@ public partial interface C_OP_SetControlPointFromObjectScale : CParticleFunction
     static int ISchemaClass<C_OP_SetControlPointFromObjectScale>.Size => 480;
     static string? ISchemaClass<C_OP_SetControlPointFromObjectScale>.ClassName => null;
 
-    
+
     public ref int CPInput { get; }
-    
+
     public ref int CPOutput { get; }
 
 

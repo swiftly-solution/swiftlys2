@@ -14,11 +14,11 @@ public partial interface CNmSnapWeaponNode__CDefinition : CNmPassthroughNode__CD
     static int ISchemaClass<CNmSnapWeaponNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmSnapWeaponNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short EnabledNodeIdx { get; }
-    
+
     public ref short LockLeftHandNodeIdx { get; }
-    
+
     public ref float BlendTimeSeconds { get; }
 
 

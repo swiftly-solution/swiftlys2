@@ -14,15 +14,15 @@ public partial interface FeRodConstraint_t : ISchemaClass<FeRodConstraint_t>
     static int ISchemaClass<FeRodConstraint_t>.Size => 20;
     static string? ISchemaClass<FeRodConstraint_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
-    
+
     public ref float MaxDist { get; }
-    
+
     public ref float MinDist { get; }
-    
+
     public ref float Weight0 { get; }
-    
+
     public ref float RelaxationFactor { get; }
 
 

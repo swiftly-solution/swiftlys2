@@ -14,9 +14,9 @@ public partial interface FeProxyVertexMap_t : ISchemaClass<FeProxyVertexMap_t>
     static int ISchemaClass<FeProxyVertexMap_t>.Size => 16;
     static string? ISchemaClass<FeProxyVertexMap_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref float Weight { get; }
 
 

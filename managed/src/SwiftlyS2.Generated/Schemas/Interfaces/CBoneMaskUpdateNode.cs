@@ -14,19 +14,19 @@ public partial interface CBoneMaskUpdateNode : CBinaryUpdateNode, ISchemaClass<C
     static int ISchemaClass<CBoneMaskUpdateNode>.Size => 176;
     static string? ISchemaClass<CBoneMaskUpdateNode>.ClassName => null;
 
-    
+
     public ref int WeightListIndex { get; }
-    
+
     public ref float RootMotionBlend { get; }
-    
+
     public ref BoneMaskBlendSpace BlendSpace { get; }
-    
+
     public ref BinaryNodeChildOption FootMotionTiming { get; }
-    
+
     public ref bool UseBlendScale { get; }
-    
+
     public ref AnimValueSource BlendValueSource { get; }
-    
+
     public CAnimParamHandle BlendParameter { get; }
 
 

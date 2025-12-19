@@ -14,7 +14,7 @@ public partial interface CPulseCell_ExampleSelector : CPulseCell_BaseFlow, ISche
     static int ISchemaClass<CPulseCell_ExampleSelector>.Size => 96;
     static string? ISchemaClass<CPulseCell_ExampleSelector>.ClassName => null;
 
-    
+
     public PulseSelectorOutflowList_t OutflowList { get; }
 
 

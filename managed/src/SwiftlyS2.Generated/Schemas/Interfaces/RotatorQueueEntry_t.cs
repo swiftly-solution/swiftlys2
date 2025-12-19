@@ -14,9 +14,9 @@ public partial interface RotatorQueueEntry_t : ISchemaClass<RotatorQueueEntry_t>
     static int ISchemaClass<RotatorQueueEntry_t>.Size => 32;
     static string? ISchemaClass<RotatorQueueEntry_t>.ClassName => null;
 
-    
+
     public ref Quaternion Target { get; }
-    
+
     public ref RotatorTargetSpace_t Space { get; }
 
 

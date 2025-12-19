@@ -14,19 +14,19 @@ public partial interface BoneDemoCaptureSettings_t : ISchemaClass<BoneDemoCaptur
     static int ISchemaClass<BoneDemoCaptureSettings_t>.Size => 32;
     static string? ISchemaClass<BoneDemoCaptureSettings_t>.ClassName => null;
 
-    
+
     public string BoneName { get; set; }
-    
+
     public ref float ErrorSplineRotationMax { get; }
-    
+
     public ref float ErrorSplineTranslationMax { get; }
-    
+
     public ref float ErrorSplineScaleMax { get; }
-    
+
     public ref float ErrorQuantizationRotationMax { get; }
-    
+
     public ref float ErrorQuantizationTranslationMax { get; }
-    
+
     public ref float ErrorQuantizationScaleMax { get; }
 
 

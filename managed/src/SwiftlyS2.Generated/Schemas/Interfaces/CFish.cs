@@ -14,53 +14,53 @@ public partial interface CFish : CBaseAnimGraph, ISchemaClass<CFish>
     static int ISchemaClass<CFish>.Size => 2976;
     static string? ISchemaClass<CFish>.ClassName => "fish";
 
-    
+
     public ref CHandle<CFishPool> Pool { get; }
-    
+
     public ref uint Id { get; }
-    
+
     public ref float X { get; }
-    
+
     public ref float Y { get; }
-    
+
     public ref float Z { get; }
-    
+
     public ref float Angle { get; }
-    
+
     public ref float AngleChange { get; }
-    
+
     public ref Vector Forward { get; }
-    
+
     public ref Vector Perp { get; }
-    
+
     public ref Vector PoolOrigin { get; }
-    
+
     public ref float WaterLevel { get; }
-    
+
     public ref float Speed { get; }
-    
+
     public ref float DesiredSpeed { get; }
-    
+
     public ref float CalmSpeed { get; }
-    
+
     public ref float PanicSpeed { get; }
-    
+
     public ref float AvoidRange { get; }
-    
+
     public CountdownTimer TurnTimer { get; }
-    
+
     public ref bool TurnClockwise { get; }
-    
+
     public CountdownTimer GoTimer { get; }
-    
+
     public CountdownTimer MoveTimer { get; }
-    
+
     public CountdownTimer PanicTimer { get; }
-    
+
     public CountdownTimer DisperseTimer { get; }
-    
+
     public CountdownTimer ProximityTimer { get; }
-    
+
     public ref CUtlVector<PointerTo<CFish>> Visible { get; }
 
     public void XUpdated();

@@ -14,15 +14,15 @@ public partial interface CCSPlayerController_ActionTrackingServices : CPlayerCon
     static int ISchemaClass<CCSPlayerController_ActionTrackingServices>.Size => 624;
     static string? ISchemaClass<CCSPlayerController_ActionTrackingServices>.ClassName => null;
 
-    
+
     public ref CUtlVector<CSPerRoundStats_t> PerRoundStats { get; }
-    
+
     public CSMatchStats_t MatchStats { get; }
-    
+
     public ref int NumRoundKills { get; }
-    
+
     public ref int NumRoundKillsHeadshots { get; }
-    
+
     public ref float TotalRoundDamageDealt { get; }
 
     public void PerRoundStatsUpdated();

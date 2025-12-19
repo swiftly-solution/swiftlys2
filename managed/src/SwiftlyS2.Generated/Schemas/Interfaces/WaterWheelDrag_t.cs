@@ -14,9 +14,9 @@ public partial interface WaterWheelDrag_t : ISchemaClass<WaterWheelDrag_t>
     static int ISchemaClass<WaterWheelDrag_t>.Size => 8;
     static string? ISchemaClass<WaterWheelDrag_t>.ClassName => null;
 
-    
+
     public ref float FractionOfWheelSubmerged { get; }
-    
+
     public ref float WheelDrag { get; }
 
 

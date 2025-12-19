@@ -14,19 +14,19 @@ public partial interface CBaseFlex : CBaseAnimGraph, ISchemaClass<CBaseFlex>
     static int ISchemaClass<CBaseFlex>.Size => 2848;
     static string? ISchemaClass<CBaseFlex>.ClassName => "baseflex";
 
-    
+
     public ref CUtlVector<float> FlexWeight { get; }
-    
+
     public ref Vector LookTargetPosition { get; }
-    
+
     public ref bool Blinktoggle { get; }
-    
+
     public GameTime_t AllowResponsesEndTime { get; }
-    
+
     public GameTime_t LastFlexAnimationTime { get; }
-    
+
     public SceneEventId_t NextSceneEventId { get; }
-    
+
     public ref bool UpdateLayerPriorities { get; }
 
     public void FlexWeightUpdated();

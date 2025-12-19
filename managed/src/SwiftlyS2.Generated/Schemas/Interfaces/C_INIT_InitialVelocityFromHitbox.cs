@@ -14,15 +14,15 @@ public partial interface C_INIT_InitialVelocityFromHitbox : CParticleFunctionIni
     static int ISchemaClass<C_INIT_InitialVelocityFromHitbox>.Size => 616;
     static string? ISchemaClass<C_INIT_InitialVelocityFromHitbox>.ClassName => null;
 
-    
+
     public ref float VelocityMin { get; }
-    
+
     public ref float VelocityMax { get; }
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public string HitboxSetName { get; set; }
-    
+
     public ref bool UseBones { get; }
 
 

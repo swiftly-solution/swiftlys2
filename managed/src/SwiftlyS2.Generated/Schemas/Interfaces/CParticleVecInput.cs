@@ -14,53 +14,53 @@ public partial interface CParticleVecInput : CParticleInput, ISchemaClass<CParti
     static int ISchemaClass<CParticleVecInput>.Size => 1720;
     static string? ISchemaClass<CParticleVecInput>.ClassName => null;
 
-    
+
     public ref ParticleVecType_t Type { get; }
-    
+
     public ref Vector LiteralValue { get; }
-    
+
     public ref Color LiteralColor { get; }
-    
-  // CParticleNamedValueRef
+
+    // CParticleNamedValueRef
     public SchemaUntypedField NamedValue { get; }
-    
+
     public ref bool FollowNamedValue { get; }
-    
+
     public ParticleAttributeIndex_t VectorAttribute { get; }
-    
+
     public ref Vector VectorAttributeScale { get; }
-    
+
     public ref int ControlPoint { get; }
-    
+
     public ref int DeltaControlPoint { get; }
-    
+
     public ref Vector CPValueScale { get; }
-    
+
     public ref Vector CPRelativePosition { get; }
-    
+
     public ref Vector CPRelativeDir { get; }
-    
+
     public CParticleFloatInput FloatComponentX { get; }
-    
+
     public CParticleFloatInput FloatComponentY { get; }
-    
+
     public CParticleFloatInput FloatComponentZ { get; }
-    
+
     public CParticleFloatInput FloatInterp { get; }
-    
+
     public ref float InterpInput0 { get; }
-    
+
     public ref float InterpInput1 { get; }
-    
+
     public ref Vector InterpOutput0 { get; }
-    
+
     public ref Vector InterpOutput1 { get; }
-    
-  // CColorGradient
+
+    // CColorGradient
     public SchemaUntypedField Gradient { get; }
-    
+
     public ref Vector RandomMin { get; }
-    
+
     public ref Vector RandomMax { get; }
 
 

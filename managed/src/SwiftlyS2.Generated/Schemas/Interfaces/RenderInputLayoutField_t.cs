@@ -14,17 +14,17 @@ public partial interface RenderInputLayoutField_t : ISchemaClass<RenderInputLayo
     static int ISchemaClass<RenderInputLayoutField_t>.Size => 76;
     static string? ISchemaClass<RenderInputLayoutField_t>.ClassName => null;
 
-    
+
     public string SemanticName { get; set; }
-    
+
     public ref byte SemanticIndex { get; }
-    
+
     public ref short Offset { get; }
-    
+
     public ref byte Slot { get; }
-    
+
     public ref RenderSlotType_t SlotType { get; }
-    
+
     public string ShaderSemantic { get; set; }
 
 

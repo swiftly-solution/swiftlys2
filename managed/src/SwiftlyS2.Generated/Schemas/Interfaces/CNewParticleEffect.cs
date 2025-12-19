@@ -14,88 +14,88 @@ public partial interface CNewParticleEffect : IParticleEffect, ISchemaClass<CNew
     static int ISchemaClass<CNewParticleEffect>.Size => 216;
     static string? ISchemaClass<CNewParticleEffect>.ClassName => null;
 
-    
+
     public CNewParticleEffect? Next { get; }
-    
+
     public CNewParticleEffect? Prev { get; }
-    
+
     public IParticleCollection? Particles { get; }
-    
+
     public string DebugName { get; set; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField DontRemove { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField Remove { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField NeedsBBoxUpdate { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField IsFirstFrame { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField AutoUpdateBBox { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField Allocated { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField Simulate { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField ShouldPerformCullCheck { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField ForceNoDraw { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField SuppressScreenSpaceEffect { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField ShouldSave { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField ShouldSimulateDuringGamePaused { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField ShouldCheckFoW { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField IsAsyncCreate { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField FreezeTransitionActive { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField FreezeTargetState { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField CanFreeze { get; }
-    
+
     public ref Vector SortOrigin { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public PARTICLE_EHANDLE__? Owner { get; }
-    
+
     public CParticleProperty? OwningParticleProperty { get; }
-    
+
     public ref float FreezeTransitionStart { get; }
-    
+
     public ref float FreezeTransitionDuration { get; }
-    
+
     public ref float FreezeTransitionOverride { get; }
-    
+
     public ref Vector LastMin { get; }
-    
+
     public ref Vector LastMax { get; }
-    
+
     public ref uint SplitScreenUser { get; }
-    
+
     public ref Vector AggregationCenter { get; }
-    
+
     public ref int RefCount { get; }
 
 

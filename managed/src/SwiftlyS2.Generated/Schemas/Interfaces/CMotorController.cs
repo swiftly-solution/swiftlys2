@@ -14,13 +14,13 @@ public partial interface CMotorController : ISchemaClass<CMotorController>
     static int ISchemaClass<CMotorController>.Size => 32;
     static string? ISchemaClass<CMotorController>.ClassName => null;
 
-    
+
     public ref float Speed { get; }
-    
+
     public ref float MaxTorque { get; }
-    
+
     public ref Vector Axis { get; }
-    
+
     public ref float InertiaFactor { get; }
 
 

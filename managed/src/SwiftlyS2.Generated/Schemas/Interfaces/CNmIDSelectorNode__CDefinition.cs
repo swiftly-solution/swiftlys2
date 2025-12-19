@@ -14,13 +14,13 @@ public partial interface CNmIDSelectorNode__CDefinition : CNmIDValueNode__CDefin
     static int ISchemaClass<CNmIDSelectorNode__CDefinition>.Size => 128;
     static string? ISchemaClass<CNmIDSelectorNode__CDefinition>.ClassName => null;
 
-    
-  // CUtlVectorFixedGrowable< int16, 5 >
+
+    // CUtlVectorFixedGrowable< int16, 5 >
     public SchemaUntypedField ConditionNodeIndices { get; }
-    
-  // CUtlVectorFixedGrowable< CGlobalSymbol, 5 >
+
+    // CUtlVectorFixedGrowable< CGlobalSymbol, 5 >
     public SchemaUntypedField Values { get; }
-    
+
     public ref CGlobalSymbol DefaultValue { get; }
 
 

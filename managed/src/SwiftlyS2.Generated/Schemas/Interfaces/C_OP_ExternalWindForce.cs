@@ -14,27 +14,27 @@ public partial interface C_OP_ExternalWindForce : CParticleFunctionForce, ISchem
     static int ISchemaClass<C_OP_ExternalWindForce>.Size => 8112;
     static string? ISchemaClass<C_OP_ExternalWindForce>.ClassName => null;
 
-    
+
     public CPerParticleVecInput SamplePosition { get; }
-    
+
     public CPerParticleVecInput Scale { get; }
-    
+
     public ref bool SampleWind { get; }
-    
+
     public ref bool SampleWater { get; }
-    
+
     public ref bool DampenNearWaterPlane { get; }
-    
+
     public ref bool SampleGravity { get; }
-    
+
     public CPerParticleVecInput GravityForce { get; }
-    
+
     public ref bool UseBasicMovementGravity { get; }
-    
+
     public CPerParticleFloatInput LocalGravityScale { get; }
-    
+
     public CPerParticleFloatInput LocalBuoyancyScale { get; }
-    
+
     public CPerParticleVecInput BuoyancyForce { get; }
 
 

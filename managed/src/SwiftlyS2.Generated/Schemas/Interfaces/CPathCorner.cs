@@ -14,11 +14,11 @@ public partial interface CPathCorner : CPointEntity, ISchemaClass<CPathCorner>
     static int ISchemaClass<CPathCorner>.Size => 1312;
     static string? ISchemaClass<CPathCorner>.ClassName => "path_corner";
 
-    
+
     public ref float Wait { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public CEntityIOOutput OnPass { get; }
 
 

@@ -14,23 +14,23 @@ public partial interface CFootCycleDefinition : ISchemaClass<CFootCycleDefinitio
     static int ISchemaClass<CFootCycleDefinition>.Size => 60;
     static string? ISchemaClass<CFootCycleDefinition>.ClassName => null;
 
-    
+
     public ref Vector StancePositionMS { get; }
-    
+
     public ref Vector MidpointPositionMS { get; }
-    
+
     public ref float StanceDirectionMS { get; }
-    
+
     public ref Vector ToStrideStartPos { get; }
-    
+
     public CAnimCycle StanceCycle { get; }
-    
+
     public CFootCycle FootLiftCycle { get; }
-    
+
     public CFootCycle FootOffCycle { get; }
-    
+
     public CFootCycle FootStrikeCycle { get; }
-    
+
     public CFootCycle FootLandCycle { get; }
 
 

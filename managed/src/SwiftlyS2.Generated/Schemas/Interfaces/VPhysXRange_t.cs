@@ -14,9 +14,9 @@ public partial interface VPhysXRange_t : ISchemaClass<VPhysXRange_t>
     static int ISchemaClass<VPhysXRange_t>.Size => 8;
     static string? ISchemaClass<VPhysXRange_t>.ClassName => null;
 
-    
+
     public ref float Min { get; }
-    
+
     public ref float Max { get; }
 
 

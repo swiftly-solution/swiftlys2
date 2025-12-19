@@ -14,9 +14,9 @@ public partial interface FeAntiTunnelGroupBuild_t : ISchemaClass<FeAntiTunnelGro
     static int ISchemaClass<FeAntiTunnelGroupBuild_t>.Size => 8;
     static string? ISchemaClass<FeAntiTunnelGroupBuild_t>.ClassName => null;
 
-    
+
     public ref uint VertexMapHash { get; }
-    
+
     public ref uint CollisionMask { get; }
 
 

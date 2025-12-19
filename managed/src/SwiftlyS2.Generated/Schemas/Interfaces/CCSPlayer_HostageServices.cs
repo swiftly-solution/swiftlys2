@@ -14,9 +14,9 @@ public partial interface CCSPlayer_HostageServices : CPlayerPawnComponent, ISche
     static int ISchemaClass<CCSPlayer_HostageServices>.Size => 72;
     static string? ISchemaClass<CCSPlayer_HostageServices>.ClassName => null;
 
-    
+
     public ref CHandle<CBaseEntity> CarriedHostage { get; }
-    
+
     public ref CHandle<CBaseEntity> CarriedHostageProp { get; }
 
     public void CarriedHostageUpdated();

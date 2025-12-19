@@ -14,23 +14,23 @@ public partial interface SkeletonAnimCapture_t__Frame_t : ISchemaClass<SkeletonA
     static int ISchemaClass<SkeletonAnimCapture_t__Frame_t>.Size => 192;
     static string? ISchemaClass<SkeletonAnimCapture_t__Frame_t>.ClassName => null;
 
-    
+
     public ref float Time { get; }
-    
+
     public SkeletonAnimCapture_t__FrameStamp_t Stamp { get; }
-    
+
     public ref CTransform Transform { get; }
-    
+
     public ref bool Teleport { get; }
-    
+
     public ref CUtlVector<CTransform> CompositeBones { get; }
-    
+
     public ref CUtlVector<CTransform> SimStateBones { get; }
-    
+
     public ref CUtlVector<CTransform> FeModelAnims { get; }
-    
+
     public ref CUtlVector<Vector> FeModelPos { get; }
-    
+
     public ref CUtlVector<float> FlexControllerWeights { get; }
 
 

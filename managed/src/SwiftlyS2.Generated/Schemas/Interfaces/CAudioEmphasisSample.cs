@@ -14,9 +14,9 @@ public partial interface CAudioEmphasisSample : ISchemaClass<CAudioEmphasisSampl
     static int ISchemaClass<CAudioEmphasisSample>.Size => 8;
     static string? ISchemaClass<CAudioEmphasisSample>.ClassName => null;
 
-    
+
     public ref float Time { get; }
-    
+
     public ref float Value { get; }
 
 

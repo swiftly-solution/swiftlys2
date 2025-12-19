@@ -14,9 +14,9 @@ public partial interface C_OP_PlayEndCapWhenFinished : CParticleFunctionPreEmiss
     static int ISchemaClass<C_OP_PlayEndCapWhenFinished>.Size => 480;
     static string? ISchemaClass<C_OP_PlayEndCapWhenFinished>.ClassName => null;
 
-    
+
     public ref bool FireOnEmissionEnd { get; }
-    
+
     public ref bool IncludeChildren { get; }
 
 

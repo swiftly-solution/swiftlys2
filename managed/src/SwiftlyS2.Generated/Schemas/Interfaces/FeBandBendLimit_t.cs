@@ -14,11 +14,11 @@ public partial interface FeBandBendLimit_t : ISchemaClass<FeBandBendLimit_t>
     static int ISchemaClass<FeBandBendLimit_t>.Size => 20;
     static string? ISchemaClass<FeBandBendLimit_t>.ClassName => null;
 
-    
+
     public ref float DistMin { get; }
-    
+
     public ref float DistMax { get; }
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
 
 

@@ -14,8 +14,8 @@ public partial interface CPulseCell_Value_Curve : CPulseCell_BaseValue, ISchemaC
     static int ISchemaClass<CPulseCell_Value_Curve>.Size => 136;
     static string? ISchemaClass<CPulseCell_Value_Curve>.ClassName => null;
 
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve { get; }
 
 

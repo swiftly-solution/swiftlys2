@@ -14,11 +14,11 @@ public partial interface FilterHealth : CBaseFilter, ISchemaClass<FilterHealth>
     static int ISchemaClass<FilterHealth>.Size => 1368;
     static string? ISchemaClass<FilterHealth>.ClassName => "filter_health";
 
-    
+
     public ref bool AdrenalineActive { get; }
-    
+
     public ref int HealthMin { get; }
-    
+
     public ref int HealthMax { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface CPhysSurfacePropertiesPhysics : ISchemaClass<CPhysSurfa
     static int ISchemaClass<CPhysSurfacePropertiesPhysics>.Size => 24;
     static string? ISchemaClass<CPhysSurfacePropertiesPhysics>.ClassName => null;
 
-    
+
     public ref float Friction { get; }
-    
+
     public ref float Elasticity { get; }
-    
+
     public ref float Density { get; }
-    
+
     public ref float Thickness { get; }
-    
+
     public ref float SoftContactFrequency { get; }
-    
+
     public ref float SoftContactDampingRatio { get; }
 
 

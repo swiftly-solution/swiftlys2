@@ -14,15 +14,15 @@ public partial interface C_OP_ControlPointToRadialScreenSpace : CParticleFunctio
     static int ISchemaClass<C_OP_ControlPointToRadialScreenSpace>.Size => 504;
     static string? ISchemaClass<C_OP_ControlPointToRadialScreenSpace>.ClassName => null;
 
-    
+
     public ref int CPIn { get; }
-    
+
     public ref Vector CP1Pos { get; }
-    
+
     public ref int CPOut { get; }
-    
+
     public ref int CPOutField { get; }
-    
+
     public ref int CPSSPosOut { get; }
 
 

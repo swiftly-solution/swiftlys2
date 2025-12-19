@@ -14,9 +14,9 @@ public partial interface CAnimSequenceParams : ISchemaClass<CAnimSequenceParams>
     static int ISchemaClass<CAnimSequenceParams>.Size => 8;
     static string? ISchemaClass<CAnimSequenceParams>.ClassName => null;
 
-    
+
     public ref float FadeInTime { get; }
-    
+
     public ref float FadeOutTime { get; }
 
 

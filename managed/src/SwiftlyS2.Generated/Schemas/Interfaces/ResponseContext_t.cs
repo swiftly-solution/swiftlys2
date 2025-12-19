@@ -14,11 +14,11 @@ public partial interface ResponseContext_t : ISchemaClass<ResponseContext_t>
     static int ISchemaClass<ResponseContext_t>.Size => 24;
     static string? ISchemaClass<ResponseContext_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public string Value { get; set; }
-    
+
     public GameTime_t ExpirationTime { get; }
 
 

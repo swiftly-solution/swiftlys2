@@ -14,11 +14,11 @@ public partial interface CAnimationGraphVisualizerSphere : CAnimationGraphVisual
     static int ISchemaClass<CAnimationGraphVisualizerSphere>.Size => 96;
     static string? ISchemaClass<CAnimationGraphVisualizerSphere>.ClassName => null;
 
-    
+
     public ref Vector WsPosition { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref Color Color { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface CLogicBranch : CLogicalEntity, ISchemaClass<CLogicBranc
     static int ISchemaClass<CLogicBranch>.Size => 1376;
     static string? ISchemaClass<CLogicBranch>.ClassName => "logic_branch";
 
-    
+
     public ref bool InValue { get; }
-    
+
     public ref CUtlVector<CHandle<CBaseEntity>> Listeners { get; }
-    
+
     public CEntityIOOutput OnTrue { get; }
-    
+
     public CEntityIOOutput OnFalse { get; }
 
 

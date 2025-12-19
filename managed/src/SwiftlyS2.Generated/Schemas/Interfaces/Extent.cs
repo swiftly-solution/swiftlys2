@@ -14,9 +14,9 @@ public partial interface Extent : ISchemaClass<Extent>
     static int ISchemaClass<Extent>.Size => 24;
     static string? ISchemaClass<Extent>.ClassName => null;
 
-    
+
     public ref Vector Lo { get; }
-    
+
     public ref Vector Hi { get; }
 
 

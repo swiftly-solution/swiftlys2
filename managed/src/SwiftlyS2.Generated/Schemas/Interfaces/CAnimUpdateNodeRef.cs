@@ -14,7 +14,7 @@ public partial interface CAnimUpdateNodeRef : ISchemaClass<CAnimUpdateNodeRef>
     static int ISchemaClass<CAnimUpdateNodeRef>.Size => 16;
     static string? ISchemaClass<CAnimUpdateNodeRef>.ClassName => null;
 
-    
+
     public ref int NodeIndex { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface CAddUpdateNode : CBinaryUpdateNode, ISchemaClass<CAddUp
     static int ISchemaClass<CAddUpdateNode>.Size => 160;
     static string? ISchemaClass<CAddUpdateNode>.ClassName => null;
 
-    
+
     public ref BinaryNodeChildOption FootMotionTiming { get; }
-    
+
     public ref bool ApplyToFootMotion { get; }
-    
+
     public ref bool ApplyChannelsSeparately { get; }
-    
+
     public ref bool UseModelSpace { get; }
-    
+
     public ref bool ApplyScale { get; }
 
 

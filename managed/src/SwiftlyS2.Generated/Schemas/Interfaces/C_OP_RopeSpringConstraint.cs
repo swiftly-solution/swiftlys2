@@ -14,15 +14,15 @@ public partial interface C_OP_RopeSpringConstraint : CParticleFunctionConstraint
     static int ISchemaClass<C_OP_RopeSpringConstraint>.Size => 1944;
     static string? ISchemaClass<C_OP_RopeSpringConstraint>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput RestLength { get; }
-    
+
     public CParticleCollectionFloatInput MinDistance { get; }
-    
+
     public CParticleCollectionFloatInput MaxDistance { get; }
-    
+
     public ref float AdjustmentScale { get; }
-    
+
     public CParticleCollectionFloatInput InitialRestingLength { get; }
 
 

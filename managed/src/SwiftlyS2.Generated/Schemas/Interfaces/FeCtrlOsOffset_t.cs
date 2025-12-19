@@ -14,9 +14,9 @@ public partial interface FeCtrlOsOffset_t : ISchemaClass<FeCtrlOsOffset_t>
     static int ISchemaClass<FeCtrlOsOffset_t>.Size => 4;
     static string? ISchemaClass<FeCtrlOsOffset_t>.ClassName => null;
 
-    
+
     public ref ushort CtrlParent { get; }
-    
+
     public ref ushort CtrlChild { get; }
 
 

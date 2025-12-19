@@ -14,19 +14,19 @@ public partial interface CAnimParameterBase : ISchemaClass<CAnimParameterBase>
     static int ISchemaClass<CAnimParameterBase>.Size => 112;
     static string? ISchemaClass<CAnimParameterBase>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol Name { get; }
-    
+
     public string Comment { get; set; }
-    
+
     public string Group { get; set; }
-    
+
     public AnimParamID Id { get; }
-    
+
     public string ComponentName { get; set; }
-    
+
     public ref bool NetworkingRequested { get; }
-    
+
     public ref bool IsReferenced { get; }
 
 

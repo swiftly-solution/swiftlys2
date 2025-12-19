@@ -14,11 +14,11 @@ public partial interface CNetworkOriginQuantizedVector : ISchemaClass<CNetworkOr
     static int ISchemaClass<CNetworkOriginQuantizedVector>.Size => 40;
     static string? ISchemaClass<CNetworkOriginQuantizedVector>.ClassName => null;
 
-    
+
     public ref CNetworkedQuantizedFloat X { get; }
-    
+
     public ref CNetworkedQuantizedFloat Y { get; }
-    
+
     public ref CNetworkedQuantizedFloat Z { get; }
 
     public void XUpdated();

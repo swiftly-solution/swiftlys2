@@ -14,11 +14,11 @@ public partial interface CCredits : CPointEntity, ISchemaClass<CCredits>
     static int ISchemaClass<CCredits>.Size => 1312;
     static string? ISchemaClass<CCredits>.ClassName => "env_credits";
 
-    
+
     public CEntityIOOutput OnCreditsDone { get; }
-    
+
     public ref bool RolledOutroCredits { get; }
-    
+
     public ref float LogoLength { get; }
 
 

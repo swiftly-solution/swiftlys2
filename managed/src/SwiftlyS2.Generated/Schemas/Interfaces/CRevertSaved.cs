@@ -14,11 +14,11 @@ public partial interface CRevertSaved : CModelPointEntity, ISchemaClass<CRevertS
     static int ISchemaClass<CRevertSaved>.Size => 2024;
     static string? ISchemaClass<CRevertSaved>.ClassName => "player_loadsaved";
 
-    
+
     public ref float LoadTime { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public ref float HoldTime { get; }
 
 

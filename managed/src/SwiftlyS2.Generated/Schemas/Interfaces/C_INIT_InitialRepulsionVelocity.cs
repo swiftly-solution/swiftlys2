@@ -14,31 +14,31 @@ public partial interface C_INIT_InitialRepulsionVelocity : CParticleFunctionInit
     static int ISchemaClass<C_INIT_InitialRepulsionVelocity>.Size => 656;
     static string? ISchemaClass<C_INIT_InitialRepulsionVelocity>.ClassName => null;
 
-    
+
     public string CollisionGroupName { get; set; }
-    
+
     public ref ParticleTraceSet_t TraceSet { get; }
-    
+
     public ref Vector OutputMin { get; }
-    
+
     public ref Vector OutputMax { get; }
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref bool PerParticle { get; }
-    
+
     public ref bool Translate { get; }
-    
+
     public ref bool Proportional { get; }
-    
+
     public ref float TraceLength { get; }
-    
+
     public ref bool PerParticleTR { get; }
-    
+
     public ref bool Inherit { get; }
-    
+
     public ref int ChildCP { get; }
-    
+
     public ref int ChildGroupID { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CPulseCell_SoundEventStart : CPulseCell_BaseFlow, ISche
     static int ISchemaClass<CPulseCell_SoundEventStart>.Size => 80;
     static string? ISchemaClass<CPulseCell_SoundEventStart>.ClassName => null;
 
-    
+
     public ref SoundEventStartType_t Type { get; }
 
 

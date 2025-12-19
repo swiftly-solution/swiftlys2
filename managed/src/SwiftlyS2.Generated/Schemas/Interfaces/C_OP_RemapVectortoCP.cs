@@ -14,11 +14,11 @@ public partial interface C_OP_RemapVectortoCP : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_RemapVectortoCP>.Size => 480;
     static string? ISchemaClass<C_OP_RemapVectortoCP>.ClassName => null;
 
-    
+
     public ref int OutControlPointNumber { get; }
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ref int ParticleNumber { get; }
 
 

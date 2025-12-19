@@ -14,12 +14,12 @@ public partial interface CVoiceContainerStaticAdditiveSynth__CTone : ISchemaClas
     static int ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone>.Size => 96;
     static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone>.ClassName => null;
 
-    
+
     public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic> Harmonics { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve { get; }
-    
+
     public ref bool SyncInstances { get; }
 
 

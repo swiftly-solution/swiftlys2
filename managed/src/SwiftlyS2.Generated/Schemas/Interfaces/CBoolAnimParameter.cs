@@ -14,7 +14,7 @@ public partial interface CBoolAnimParameter : CConcreteAnimParameter, ISchemaCla
     static int ISchemaClass<CBoolAnimParameter>.Size => 136;
     static string? ISchemaClass<CBoolAnimParameter>.ClassName => null;
 
-    
+
     public ref bool DefaultValue { get; }
 
 

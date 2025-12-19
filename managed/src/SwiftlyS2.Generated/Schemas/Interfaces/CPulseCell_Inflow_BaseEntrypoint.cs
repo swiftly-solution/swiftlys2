@@ -14,9 +14,9 @@ public partial interface CPulseCell_Inflow_BaseEntrypoint : CPulseCell_BaseFlow,
     static int ISchemaClass<CPulseCell_Inflow_BaseEntrypoint>.Size => 128;
     static string? ISchemaClass<CPulseCell_Inflow_BaseEntrypoint>.ClassName => null;
 
-    
+
     public PulseRuntimeChunkIndex_t EntryChunk { get; }
-    
+
     public PulseRegisterMap_t RegisterMap { get; }
 
 

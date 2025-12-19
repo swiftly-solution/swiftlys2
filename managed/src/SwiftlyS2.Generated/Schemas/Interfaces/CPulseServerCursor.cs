@@ -14,9 +14,9 @@ public partial interface CPulseServerCursor : CPulseExecCursor, ISchemaClass<CPu
     static int ISchemaClass<CPulseServerCursor>.Size => 224;
     static string? ISchemaClass<CPulseServerCursor>.ClassName => null;
 
-    
+
     public ref CHandle<CBaseEntity> Activator { get; }
-    
+
     public ref CHandle<CBaseEntity> Caller { get; }
 
 

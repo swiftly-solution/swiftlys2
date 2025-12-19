@@ -14,13 +14,13 @@ public partial interface CEnvTilt : CPointEntity, ISchemaClass<CEnvTilt>
     static int ISchemaClass<CEnvTilt>.Size => 1280;
     static string? ISchemaClass<CEnvTilt>.ClassName => "env_tilt";
 
-    
+
     public ref float Duration { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref float TiltTime { get; }
-    
+
     public GameTime_t StopTime { get; }
 
 

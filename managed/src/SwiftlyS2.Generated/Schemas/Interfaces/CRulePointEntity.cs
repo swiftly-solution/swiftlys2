@@ -14,7 +14,7 @@ public partial interface CRulePointEntity : CRuleEntity, ISchemaClass<CRulePoint
     static int ISchemaClass<CRulePointEntity>.Size => 2024;
     static string? ISchemaClass<CRulePointEntity>.ClassName => null;
 
-    
+
     public ref int Score { get; }
 
 

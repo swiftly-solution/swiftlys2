@@ -14,13 +14,13 @@ public partial interface FeNodeIntegrator_t : ISchemaClass<FeNodeIntegrator_t>
     static int ISchemaClass<FeNodeIntegrator_t>.Size => 16;
     static string? ISchemaClass<FeNodeIntegrator_t>.ClassName => null;
 
-    
+
     public ref float PointDamping { get; }
-    
+
     public ref float AnimationForceAttraction { get; }
-    
+
     public ref float AnimationVertexAttraction { get; }
-    
+
     public ref float Gravity { get; }
 
 

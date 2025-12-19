@@ -14,17 +14,17 @@ public partial interface CNmTwoBoneIKNode__CDefinition : CNmPassthroughNode__CDe
     static int ISchemaClass<CNmTwoBoneIKNode__CDefinition>.Size => 48;
     static string? ISchemaClass<CNmTwoBoneIKNode__CDefinition>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol EffectorBoneID { get; }
-    
+
     public ref short EffectorTargetNodeIdx { get; }
-    
+
     public ref short EnabledNodeIdx { get; }
-    
+
     public ref float BlendTimeSeconds { get; }
-    
+
     public ref NmIKBlendMode_t BlendMode { get; }
-    
+
     public ref bool IsTargetInWorldSpace { get; }
 
 

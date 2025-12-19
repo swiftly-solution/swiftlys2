@@ -14,17 +14,17 @@ public partial interface C_INIT_CreateSequentialPathV2 : CParticleFunctionInitia
     static int ISchemaClass<C_INIT_CreateSequentialPathV2>.Size => 1296;
     static string? ISchemaClass<C_INIT_CreateSequentialPathV2>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput MaxDistance { get; }
-    
+
     public CParticleCollectionFloatInput NumToAssign { get; }
-    
+
     public ref bool Loop { get; }
-    
+
     public ref bool CPPairs { get; }
-    
+
     public ref bool SaveOffset { get; }
-    
+
     public CPathParameters PathParams { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface CSoundEventParameter : CBaseEntity, ISchemaClass<CSound
     static int ISchemaClass<CSoundEventParameter>.Size => 1304;
     static string? ISchemaClass<CSoundEventParameter>.ClassName => "snd_event_param";
 
-    
+
     public string ParamName { get; set; }
-    
+
     public ref float FloatValue { get; }
 
 

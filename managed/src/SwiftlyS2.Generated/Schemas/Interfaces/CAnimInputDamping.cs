@@ -14,11 +14,11 @@ public partial interface CAnimInputDamping : ISchemaClass<CAnimInputDamping>
     static int ISchemaClass<CAnimInputDamping>.Size => 24;
     static string? ISchemaClass<CAnimInputDamping>.ClassName => null;
 
-    
+
     public ref DampingSpeedFunction SpeedFunction { get; }
-    
+
     public ref float SpeedScale { get; }
-    
+
     public ref float FallingSpeedScale { get; }
 
 

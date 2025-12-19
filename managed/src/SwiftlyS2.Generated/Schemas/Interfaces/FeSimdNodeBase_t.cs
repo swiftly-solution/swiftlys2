@@ -14,19 +14,19 @@ public partial interface FeSimdNodeBase_t : ISchemaClass<FeSimdNodeBase_t>
     static int ISchemaClass<FeSimdNodeBase_t>.Size => 112;
     static string? ISchemaClass<FeSimdNodeBase_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
-    
+
     public ISchemaFixedArray<ushort> NodeX0 { get; }
-    
+
     public ISchemaFixedArray<ushort> NodeX1 { get; }
-    
+
     public ISchemaFixedArray<ushort> NodeY0 { get; }
-    
+
     public ISchemaFixedArray<ushort> NodeY1 { get; }
-    
+
     public ISchemaFixedArray<ushort> Dummy { get; }
-    
+
     public FourQuaternions Adjust { get; }
 
 

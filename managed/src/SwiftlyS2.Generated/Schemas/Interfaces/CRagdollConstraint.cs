@@ -14,23 +14,23 @@ public partial interface CRagdollConstraint : CPhysConstraint, ISchemaClass<CRag
     static int ISchemaClass<CRagdollConstraint>.Size => 1416;
     static string? ISchemaClass<CRagdollConstraint>.ClassName => "phys_ragdollconstraint";
 
-    
+
     public ref float Xmin { get; }
-    
+
     public ref float Xmax { get; }
-    
+
     public ref float Ymin { get; }
-    
+
     public ref float Ymax { get; }
-    
+
     public ref float Zmin { get; }
-    
+
     public ref float Zmax { get; }
-    
+
     public ref float Xfriction { get; }
-    
+
     public ref float Yfriction { get; }
-    
+
     public ref float Zfriction { get; }
 
 

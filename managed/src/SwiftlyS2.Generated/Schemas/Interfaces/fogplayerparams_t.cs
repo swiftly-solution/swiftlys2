@@ -14,33 +14,33 @@ public partial interface fogplayerparams_t : ISchemaClass<fogplayerparams_t>
     static int ISchemaClass<fogplayerparams_t>.Size => 64;
     static string? ISchemaClass<fogplayerparams_t>.ClassName => null;
 
-    
+
     public ref CHandle<CFogController> Ctrl { get; }
-    
+
     public ref float TransitionTime { get; }
-    
+
     public ref Color OldColor { get; }
-    
+
     public ref float OldStart { get; }
-    
+
     public ref float OldEnd { get; }
-    
+
     public ref float OldMaxDensity { get; }
-    
+
     public ref float OldHDRColorScale { get; }
-    
+
     public ref float OldFarZ { get; }
-    
+
     public ref Color NewColor { get; }
-    
+
     public ref float NewStart { get; }
-    
+
     public ref float NewEnd { get; }
-    
+
     public ref float NewMaxDensity { get; }
-    
+
     public ref float NewHDRColorScale { get; }
-    
+
     public ref float NewFarZ { get; }
 
     public void CtrlUpdated();

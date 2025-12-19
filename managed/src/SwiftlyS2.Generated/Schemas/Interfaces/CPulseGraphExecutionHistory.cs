@@ -14,17 +14,17 @@ public partial interface CPulseGraphExecutionHistory : ISchemaClass<CPulseGraphE
     static int ISchemaClass<CPulseGraphExecutionHistory>.Size => 120;
     static string? ISchemaClass<CPulseGraphExecutionHistory>.ClassName => null;
 
-    
+
     public PulseGraphInstanceID_t InstanceID { get; }
-    
+
     public string StrFileName { get; set; }
-    
+
     public ref CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>> History { get; }
-    
-  // CUtlOrderedMap< PulseDocNodeID_t, PulseGraphExecutionHistoryNodeDesc_t* >
+
+    // CUtlOrderedMap< PulseDocNodeID_t, PulseGraphExecutionHistoryNodeDesc_t* >
     public SchemaUntypedField MapCellDesc { get; }
-    
-  // CUtlOrderedMap< PulseCursorID_t, PulseGraphExecutionHistoryCursorDesc_t* >
+
+    // CUtlOrderedMap< PulseCursorID_t, PulseGraphExecutionHistoryCursorDesc_t* >
     public SchemaUntypedField MapCursorDesc { get; }
 
 

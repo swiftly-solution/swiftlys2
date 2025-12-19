@@ -14,7 +14,7 @@ public partial interface CNmBoneMaskNode__CDefinition : CNmBoneMaskValueNode__CD
     static int ISchemaClass<CNmBoneMaskNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmBoneMaskNode__CDefinition>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol BoneMaskID { get; }
 
 

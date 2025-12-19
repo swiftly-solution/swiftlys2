@@ -14,15 +14,15 @@ public partial interface CRenderComponent : CEntityComponent, ISchemaClass<CRend
     static int ISchemaClass<CRenderComponent>.Size => 176;
     static string? ISchemaClass<CRenderComponent>.ClassName => null;
 
-    
+
     public ref CNetworkVarChainer __m_pChainEntity { get; }
-    
+
     public ref bool IsRenderingWithViewModels { get; }
-    
+
     public ref uint SplitscreenFlags { get; }
-    
+
     public ref bool EnableRendering { get; }
-    
+
     public ref bool InterpolationReadyToDraw { get; }
 
 

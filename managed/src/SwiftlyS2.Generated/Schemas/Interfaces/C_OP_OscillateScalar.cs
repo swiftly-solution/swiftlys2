@@ -14,31 +14,31 @@ public partial interface C_OP_OscillateScalar : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_OscillateScalar>.Size => 512;
     static string? ISchemaClass<C_OP_OscillateScalar>.ClassName => null;
 
-    
+
     public ref float RateMin { get; }
-    
+
     public ref float RateMax { get; }
-    
+
     public ref float FrequencyMin { get; }
-    
+
     public ref float FrequencyMax { get; }
-    
+
     public ParticleAttributeIndex_t Field { get; }
-    
+
     public ref bool Proportional { get; }
-    
+
     public ref bool ProportionalOp { get; }
-    
+
     public ref float StartTime_min { get; }
-    
+
     public ref float StartTime_max { get; }
-    
+
     public ref float EndTime_min { get; }
-    
+
     public ref float EndTime_max { get; }
-    
+
     public ref float OscMult { get; }
-    
+
     public ref float OscAdd { get; }
 
 

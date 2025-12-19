@@ -14,7 +14,7 @@ public partial interface RnHullDesc_t : RnShapeDesc_t, ISchemaClass<RnHullDesc_t
     static int ISchemaClass<RnHullDesc_t>.Size => 272;
     static string? ISchemaClass<RnHullDesc_t>.ClassName => null;
 
-    
+
     public RnHull_t Hull { get; }
 
 

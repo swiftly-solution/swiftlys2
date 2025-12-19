@@ -14,35 +14,35 @@ public partial interface CCSPlayerPawnBase : CBasePlayerPawn, ISchemaClass<CCSPl
     static int ISchemaClass<CCSPlayerPawnBase>.Size => 3808;
     static string? ISchemaClass<CCSPlayerPawnBase>.ClassName => null;
 
-    
+
     public CTouchExpansionComponent CTouchExpansionComponent { get; }
-    
+
     public CCSPlayer_PingServices? PingServices { get; }
-    
+
     public GameTime_t BlindUntilTime { get; }
-    
+
     public GameTime_t BlindStartTime { get; }
-    
+
     public ref CSPlayerState PlayerState { get; }
-    
+
     public ref bool Respawning { get; }
-    
+
     public ref bool HasMovedSinceSpawn { get; }
-    
+
     public ref int NumSpawns { get; }
-    
+
     public ref float IdleTimeSinceLastAction { get; }
-    
+
     public ref float NextRadarUpdateTime { get; }
-    
+
     public ref float FlashDuration { get; }
-    
+
     public ref float FlashMaxAlpha { get; }
-    
+
     public ref float ProgressBarStartTime { get; }
-    
+
     public ref int ProgressBarDuration { get; }
-    
+
     public ref CHandle<CCSPlayerController> OriginalController { get; }
 
     public void CTouchExpansionComponentUpdated();

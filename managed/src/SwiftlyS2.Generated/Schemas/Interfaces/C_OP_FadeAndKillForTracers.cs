@@ -14,17 +14,17 @@ public partial interface C_OP_FadeAndKillForTracers : CParticleFunctionOperator,
     static int ISchemaClass<C_OP_FadeAndKillForTracers>.Size => 488;
     static string? ISchemaClass<C_OP_FadeAndKillForTracers>.ClassName => null;
 
-    
+
     public ref float StartFadeInTime { get; }
-    
+
     public ref float EndFadeInTime { get; }
-    
+
     public ref float StartFadeOutTime { get; }
-    
+
     public ref float EndFadeOutTime { get; }
-    
+
     public ref float StartAlpha { get; }
-    
+
     public ref float EndAlpha { get; }
 
 

@@ -14,33 +14,33 @@ public partial interface CTriggerSndSosOpvar : CBaseTrigger, ISchemaClass<CTrigg
     static int ISchemaClass<CTriggerSndSosOpvar>.Size => 3336;
     static string? ISchemaClass<CTriggerSndSosOpvar>.ClassName => "trigger_snd_sos_opvar";
 
-    
+
     public ref CUtlVector<CHandle<CBaseEntity>> TouchingPlayers { get; }
-    
+
     public ref Vector Position { get; }
-    
+
     public ref float CenterSize { get; }
-    
+
     public ref float MinVal { get; }
-    
+
     public ref float MaxVal { get; }
-    
+
     public string OpvarName { get; set; }
-    
+
     public string StackName { get; set; }
-    
+
     public string OperatorName { get; set; }
-    
+
     public ref bool VolIs2D { get; }
-    
+
     public string OpvarNameChar { get; set; }
-    
+
     public string StackNameChar { get; set; }
-    
+
     public string OperatorNameChar { get; set; }
-    
+
     public ref Vector VecNormPos { get; }
-    
+
     public ref float NormCenterSize { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface PulseRuntimeEntrypointIndex_t : ISchemaClass<PulseRunti
     static int ISchemaClass<PulseRuntimeEntrypointIndex_t>.Size => 4;
     static string? ISchemaClass<PulseRuntimeEntrypointIndex_t>.ClassName => null;
 
-    
+
     public ref int Value { get; }
 
 

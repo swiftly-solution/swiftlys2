@@ -14,19 +14,19 @@ public partial interface CBaseTrailRenderer : CBaseRendererSource2, ISchemaClass
     static int ISchemaClass<CBaseTrailRenderer>.Size => 12512;
     static string? ISchemaClass<CBaseTrailRenderer>.ClassName => null;
 
-    
+
     public ref ParticleOrientationChoiceList_t OrientationType { get; }
-    
+
     public ref int OrientationControlPoint { get; }
-    
+
     public ref float MinSize { get; }
-    
+
     public ref float MaxSize { get; }
-    
+
     public CParticleCollectionRendererFloatInput StartFadeSize { get; }
-    
+
     public CParticleCollectionRendererFloatInput EndFadeSize { get; }
-    
+
     public ref bool ClampV { get; }
 
 

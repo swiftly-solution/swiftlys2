@@ -14,17 +14,17 @@ public partial interface CSeqSynthAnimDesc : ISchemaClass<CSeqSynthAnimDesc>
     static int ISchemaClass<CSeqSynthAnimDesc>.Size => 64;
     static string? ISchemaClass<CSeqSynthAnimDesc>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public CSeqSeqDescFlag Flags { get; }
-    
+
     public CSeqTransition Transition { get; }
-    
+
     public ref short LocalBaseReference { get; }
-    
+
     public ref short LocalBoneMask { get; }
-    
+
     public ref CUtlVector<CAnimActivity> ActivityArray { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface C_INIT_PointList : CParticleFunctionInitializer, ISchem
     static int ISchemaClass<C_INIT_PointList>.Size => 512;
     static string? ISchemaClass<C_INIT_PointList>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref CUtlVector<PointDefinition_t> PointList { get; }
-    
+
     public ref bool PlaceAlongPath { get; }
-    
+
     public ref bool ClosedLoop { get; }
-    
+
     public ref int NumPointsAlongPath { get; }
 
 

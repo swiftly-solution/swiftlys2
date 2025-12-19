@@ -14,7 +14,7 @@ public partial interface CRuleEntity : CBaseModelEntity, ISchemaClass<CRuleEntit
     static int ISchemaClass<CRuleEntity>.Size => 2016;
     static string? ISchemaClass<CRuleEntity>.ClassName => null;
 
-    
+
     public string Master { get; set; }
 
 

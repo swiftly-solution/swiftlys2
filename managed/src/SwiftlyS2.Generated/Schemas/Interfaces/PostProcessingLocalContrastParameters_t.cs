@@ -14,15 +14,15 @@ public partial interface PostProcessingLocalContrastParameters_t : ISchemaClass<
     static int ISchemaClass<PostProcessingLocalContrastParameters_t>.Size => 20;
     static string? ISchemaClass<PostProcessingLocalContrastParameters_t>.ClassName => null;
 
-    
+
     public ref float LocalContrastStrength { get; }
-    
+
     public ref float LocalContrastEdgeStrength { get; }
-    
+
     public ref float LocalContrastVignetteStart { get; }
-    
+
     public ref float LocalContrastVignetteEnd { get; }
-    
+
     public ref float LocalContrastVignetteBlur { get; }
 
 

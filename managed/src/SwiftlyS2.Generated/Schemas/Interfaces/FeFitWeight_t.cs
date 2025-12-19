@@ -14,11 +14,11 @@ public partial interface FeFitWeight_t : ISchemaClass<FeFitWeight_t>
     static int ISchemaClass<FeFitWeight_t>.Size => 8;
     static string? ISchemaClass<FeFitWeight_t>.ClassName => null;
 
-    
+
     public ref float Weight { get; }
-    
+
     public ref ushort Node { get; }
-    
+
     public ref ushort Dummy { get; }
 
 

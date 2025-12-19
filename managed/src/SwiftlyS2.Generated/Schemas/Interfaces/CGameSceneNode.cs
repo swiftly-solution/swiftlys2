@@ -14,80 +14,80 @@ public partial interface CGameSceneNode : ISchemaClass<CGameSceneNode>
     static int ISchemaClass<CGameSceneNode>.Size => 352;
     static string? ISchemaClass<CGameSceneNode>.ClassName => null;
 
-    
+
     public ref CTransform NodeToWorld { get; }
-    
+
     public CEntityInstance? Owner { get; }
-    
+
     public CGameSceneNode? Parent { get; }
-    
+
     public CGameSceneNode? Child { get; }
-    
+
     public CGameSceneNode? NextSibling { get; }
-    
+
     public CGameSceneNodeHandle Parent1 { get; }
-    
+
     public CNetworkOriginCellCoordQuantizedVector Origin { get; }
-    
+
     public ref QAngle Rotation { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public ref Vector AbsOrigin { get; }
-    
+
     public ref QAngle AbsRotation { get; }
-    
+
     public ref float AbsScale { get; }
-    
+
     public ref short ParentAttachmentOrBone { get; }
-    
+
     public ref bool DebugAbsOriginChanges { get; }
-    
+
     public ref bool Dormant { get; }
-    
+
     public ref bool ForceParentToBeNetworked { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField DirtyHierarchy { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField DirtyBoneMergeInfo { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField NetworkedPositionChanged { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField NetworkedAnglesChanged { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField NetworkedScaleChanged { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField WillBeCallingPostDataUpdate { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField BoneMergeFlex { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField LatchAbsOrigin { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField DirtyBoneMergeBoneToRoot { get; }
-    
+
     public ref byte HierarchicalDepth { get; }
-    
+
     public ref byte HierarchyType { get; }
-    
+
     public ref byte DoNotSetAnimTimeInInvalidatePhysicsCount { get; }
-    
+
     public ref CUtlStringToken Name { get; }
-    
+
     public ref CUtlStringToken HierarchyAttachName { get; }
-    
+
     public ref float ZOffset { get; }
-    
+
     public ref float ClientLocalScale { get; }
-    
+
     public ref Vector RenderOrigin { get; }
 
     public void Parent1Updated();

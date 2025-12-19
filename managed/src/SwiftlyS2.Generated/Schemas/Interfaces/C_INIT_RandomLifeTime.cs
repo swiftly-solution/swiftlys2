@@ -14,11 +14,11 @@ public partial interface C_INIT_RandomLifeTime : CParticleFunctionInitializer, I
     static int ISchemaClass<C_INIT_RandomLifeTime>.Size => 488;
     static string? ISchemaClass<C_INIT_RandomLifeTime>.ClassName => null;
 
-    
+
     public ref float LifetimeMin { get; }
-    
+
     public ref float LifetimeMax { get; }
-    
+
     public ref float LifetimeRandExponent { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CConstraintAnchor : CBaseAnimGraph, ISchemaClass<CConst
     static int ISchemaClass<CConstraintAnchor>.Size => 2720;
     static string? ISchemaClass<CConstraintAnchor>.ClassName => "info_constraint_anchor";
 
-    
+
     public ref float MassScale { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface C_OP_Diffusion : CParticleFunctionOperator, ISchemaClas
     static int ISchemaClass<C_OP_Diffusion>.Size => 480;
     static string? ISchemaClass<C_OP_Diffusion>.ClassName => null;
 
-    
+
     public ref float RadiusScale { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref int VoxelGridResolution { get; }
 
 

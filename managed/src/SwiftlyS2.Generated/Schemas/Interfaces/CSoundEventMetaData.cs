@@ -14,7 +14,7 @@ public partial interface CSoundEventMetaData : ISchemaClass<CSoundEventMetaData>
     static int ISchemaClass<CSoundEventMetaData>.Size => 8;
     static string? ISchemaClass<CSoundEventMetaData>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCVMixListResource> SoundEventVMix { get; }
 
 

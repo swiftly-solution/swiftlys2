@@ -14,7 +14,7 @@ public partial interface SampleCode : ISchemaClass<SampleCode>
     static int ISchemaClass<SampleCode>.Size => 8;
     static string? ISchemaClass<SampleCode>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<byte> SubCode { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface ParamSpan_t : ISchemaClass<ParamSpan_t>
     static int ISchemaClass<ParamSpan_t>.Size => 40;
     static string? ISchemaClass<ParamSpan_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<ParamSpanSample_t> Samples { get; }
-    
+
     public CAnimParamHandle Param { get; }
-    
+
     public ref AnimParamType_t ParamType { get; }
-    
+
     public ref float StartCycle { get; }
-    
+
     public ref float EndCycle { get; }
 
 

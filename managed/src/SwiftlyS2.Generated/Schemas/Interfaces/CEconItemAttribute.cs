@@ -14,15 +14,15 @@ public partial interface CEconItemAttribute : ISchemaClass<CEconItemAttribute>
     static int ISchemaClass<CEconItemAttribute>.Size => 72;
     static string? ISchemaClass<CEconItemAttribute>.ClassName => null;
 
-    
+
     public ref ushort AttributeDefinitionIndex { get; }
-    
+
     public ref float Value { get; }
-    
+
     public ref float InitialValue { get; }
-    
+
     public ref int RefundableCurrency { get; }
-    
+
     public ref bool SetBonus { get; }
 
     public void AttributeDefinitionIndexUpdated();

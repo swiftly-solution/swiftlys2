@@ -14,17 +14,17 @@ public partial interface CCSPlayer_WaterServices : CPlayer_WaterServices, ISchem
     static int ISchemaClass<CCSPlayer_WaterServices>.Size => 120;
     static string? ISchemaClass<CCSPlayer_WaterServices>.ClassName => null;
 
-    
+
     public GameTime_t NextDrownDamageTime { get; }
-    
+
     public ref int DrownDmgRate { get; }
-    
+
     public GameTime_t AirFinishedTime { get; }
-    
+
     public ref float WaterJumpTime { get; }
-    
+
     public ref Vector WaterJumpVel { get; }
-    
+
     public ref float SwimSoundTime { get; }
 
 

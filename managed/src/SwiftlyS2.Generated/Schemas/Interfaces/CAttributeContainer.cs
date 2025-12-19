@@ -14,7 +14,7 @@ public partial interface CAttributeContainer : CAttributeManager, ISchemaClass<C
     static int ISchemaClass<CAttributeContainer>.Size => 760;
     static string? ISchemaClass<CAttributeContainer>.ClassName => null;
 
-    
+
     public CEconItemView Item { get; }
 
     public void ItemUpdated();

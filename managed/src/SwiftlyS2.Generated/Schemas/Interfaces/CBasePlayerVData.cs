@@ -14,34 +14,34 @@ public partial interface CBasePlayerVData : CEntitySubclassVDataBase, ISchemaCla
     static int ISchemaClass<CBasePlayerVData>.Size => 376;
     static string? ISchemaClass<CBasePlayerVData>.ClassName => null;
 
-    
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
     public SchemaUntypedField ModelName { get; }
-    
+
     public CSkillFloat HeadDamageMultiplier { get; }
-    
+
     public CSkillFloat ChestDamageMultiplier { get; }
-    
+
     public CSkillFloat StomachDamageMultiplier { get; }
-    
+
     public CSkillFloat ArmDamageMultiplier { get; }
-    
+
     public CSkillFloat LegDamageMultiplier { get; }
-    
+
     public ref float HoldBreathTime { get; }
-    
+
     public ref float DrowningDamageInterval { get; }
-    
+
     public ref int DrowningDamageInitial { get; }
-    
+
     public ref int DrowningDamageMax { get; }
-    
+
     public ref int WaterSpeed { get; }
-    
+
     public ref float UseRange { get; }
-    
+
     public ref float UseAngleTolerance { get; }
-    
+
     public ref float CrouchTime { get; }
 
 

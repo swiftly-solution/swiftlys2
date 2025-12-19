@@ -14,15 +14,15 @@ public partial interface SellbackPurchaseEntry_t : ISchemaClass<SellbackPurchase
     static int ISchemaClass<SellbackPurchaseEntry_t>.Size => 72;
     static string? ISchemaClass<SellbackPurchaseEntry_t>.ClassName => null;
 
-    
+
     public ref ushort DefIdx { get; }
-    
+
     public ref int Cost { get; }
-    
+
     public ref int PrevArmor { get; }
-    
+
     public ref bool PrevHelmet { get; }
-    
+
     public ref CHandle<CEntityInstance> Item { get; }
 
     public void DefIdxUpdated();

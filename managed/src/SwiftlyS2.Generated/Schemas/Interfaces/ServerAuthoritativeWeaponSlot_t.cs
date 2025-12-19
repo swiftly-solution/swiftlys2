@@ -14,11 +14,11 @@ public partial interface ServerAuthoritativeWeaponSlot_t : ISchemaClass<ServerAu
     static int ISchemaClass<ServerAuthoritativeWeaponSlot_t>.Size => 56;
     static string? ISchemaClass<ServerAuthoritativeWeaponSlot_t>.ClassName => null;
 
-    
+
     public ref ushort Class { get; }
-    
+
     public ref ushort Slot { get; }
-    
+
     public ref ushort ItemDefIdx { get; }
 
     public void ClassUpdated();

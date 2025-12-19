@@ -14,9 +14,9 @@ public partial interface TraceSettings_t : ISchemaClass<TraceSettings_t>
     static int ISchemaClass<TraceSettings_t>.Size => 8;
     static string? ISchemaClass<TraceSettings_t>.ClassName => null;
 
-    
+
     public ref float TraceHeight { get; }
-    
+
     public ref float TraceRadius { get; }
 
 

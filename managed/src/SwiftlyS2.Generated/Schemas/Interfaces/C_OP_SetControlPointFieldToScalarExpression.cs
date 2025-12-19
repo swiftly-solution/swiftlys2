@@ -14,17 +14,17 @@ public partial interface C_OP_SetControlPointFieldToScalarExpression : CParticle
     static int ISchemaClass<C_OP_SetControlPointFieldToScalarExpression>.Size => 1592;
     static string? ISchemaClass<C_OP_SetControlPointFieldToScalarExpression>.ClassName => null;
 
-    
+
     public ref ScalarExpressionType_t Expression { get; }
-    
+
     public CParticleCollectionFloatInput Input1 { get; }
-    
+
     public CParticleCollectionFloatInput Input2 { get; }
-    
+
     public CParticleRemapFloatInput OutputRemap { get; }
-    
+
     public ref int OutputCP { get; }
-    
+
     public ref int OutVectorField { get; }
 
 

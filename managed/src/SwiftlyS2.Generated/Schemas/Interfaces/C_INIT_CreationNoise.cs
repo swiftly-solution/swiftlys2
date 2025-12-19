@@ -14,25 +14,25 @@ public partial interface C_INIT_CreationNoise : CParticleFunctionInitializer, IS
     static int ISchemaClass<C_INIT_CreationNoise>.Size => 520;
     static string? ISchemaClass<C_INIT_CreationNoise>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref bool AbsVal { get; }
-    
+
     public ref bool AbsValInv { get; }
-    
+
     public ref float Offset { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref float NoiseScale { get; }
-    
+
     public ref float NoiseScaleLoc { get; }
-    
+
     public ref Vector OffsetLoc { get; }
-    
+
     public ref float WorldTimeScale { get; }
 
 

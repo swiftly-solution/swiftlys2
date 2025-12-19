@@ -14,13 +14,13 @@ public partial interface CMaterialDrawDescriptor__RigidMeshPart_t : ISchemaClass
     static int ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t>.Size => 12;
     static string? ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t>.ClassName => null;
 
-    
+
     public ref ushort RigidBLASIndex { get; }
-    
+
     public ref short BoneIndex { get; }
-    
+
     public ref uint StartIndexOffset { get; }
-    
+
     public ref uint PrimitiveCount { get; }
 
 

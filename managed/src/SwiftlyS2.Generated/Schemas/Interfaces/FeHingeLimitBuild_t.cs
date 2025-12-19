@@ -14,13 +14,13 @@ public partial interface FeHingeLimitBuild_t : ISchemaClass<FeHingeLimitBuild_t>
     static int ISchemaClass<FeHingeLimitBuild_t>.Size => 24;
     static string? ISchemaClass<FeHingeLimitBuild_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
-    
+
     public ref uint Flags { get; }
-    
+
     public ref float LimitCW { get; }
-    
+
     public ref float LimitCCW { get; }
 
 

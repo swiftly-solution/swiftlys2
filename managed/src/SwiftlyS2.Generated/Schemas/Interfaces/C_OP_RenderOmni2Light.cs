@@ -14,37 +14,37 @@ public partial interface C_OP_RenderOmni2Light : CParticleFunctionRenderer, ISch
     static int ISchemaClass<C_OP_RenderOmni2Light>.Size => 5256;
     static string? ISchemaClass<C_OP_RenderOmni2Light>.ClassName => null;
 
-    
+
     public ref ParticleOmni2LightTypeChoiceList_t LightType { get; }
-    
+
     public CParticleCollectionVecInput ColorBlend { get; }
-    
+
     public ref ParticleColorBlendType_t ColorBlendType { get; }
-    
+
     public ref ParticleLightUnitChoiceList_t BrightnessUnit { get; }
-    
+
     public CPerParticleFloatInput BrightnessLumens { get; }
-    
+
     public CPerParticleFloatInput BrightnessCandelas { get; }
-    
+
     public ref bool CastShadows { get; }
-    
+
     public ref bool Fog { get; }
-    
+
     public CPerParticleFloatInput FogScale { get; }
-    
+
     public CPerParticleFloatInput LuminaireRadius { get; }
-    
+
     public CPerParticleFloatInput Skirt { get; }
-    
+
     public CPerParticleFloatInput Range { get; }
-    
+
     public CPerParticleFloatInput InnerConeAngle { get; }
-    
+
     public CPerParticleFloatInput OuterConeAngle { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie { get; }
-    
+
     public ref bool SphericalCookie { get; }
 
 

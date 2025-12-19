@@ -14,19 +14,19 @@ public partial interface CPointPush : CPointEntity, ISchemaClass<CPointPush>
     static int ISchemaClass<CPointPush>.Size => 1304;
     static string? ISchemaClass<CPointPush>.ClassName => "point_push";
 
-    
+
     public ref bool Enabled { get; }
-    
+
     public ref float Magnitude { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref float InnerRadius { get; }
-    
+
     public ref float ConeOfInfluence { get; }
-    
+
     public string FilterName { get; set; }
-    
+
     public ref CHandle<CBaseFilter> Filter { get; }
 
 

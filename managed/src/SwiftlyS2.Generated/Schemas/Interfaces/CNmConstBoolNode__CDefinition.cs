@@ -14,7 +14,7 @@ public partial interface CNmConstBoolNode__CDefinition : CNmBoolValueNode__CDefi
     static int ISchemaClass<CNmConstBoolNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmConstBoolNode__CDefinition>.ClassName => null;
 
-    
+
     public ref bool Value { get; }
 
 

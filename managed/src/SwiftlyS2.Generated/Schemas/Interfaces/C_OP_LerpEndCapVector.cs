@@ -14,11 +14,11 @@ public partial interface C_OP_LerpEndCapVector : CParticleFunctionOperator, ISch
     static int ISchemaClass<C_OP_LerpEndCapVector>.Size => 488;
     static string? ISchemaClass<C_OP_LerpEndCapVector>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref Vector Output { get; }
-    
+
     public ref float LerpTime { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface RnSoftbodySpring_t : ISchemaClass<RnSoftbodySpring_t>
     static int ISchemaClass<RnSoftbodySpring_t>.Size => 8;
     static string? ISchemaClass<RnSoftbodySpring_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ushort> Particle { get; }
-    
+
     public ref float Length { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface CStateMachineUpdateNode : CAnimUpdateNodeBase, ISchemaC
     static int ISchemaClass<CStateMachineUpdateNode>.Size => 256;
     static string? ISchemaClass<CStateMachineUpdateNode>.ClassName => null;
 
-    
+
     public CAnimStateMachineUpdater StateMachine { get; }
-    
+
     public ref CUtlVector<CStateNodeStateData> StateData { get; }
-    
+
     public ref CUtlVector<CStateNodeTransitionData> TransitionData { get; }
-    
+
     public ref bool BlockWaningTags { get; }
-    
+
     public ref bool LockStateWhenWaning { get; }
-    
+
     public ref bool ResetWhenActivated { get; }
 
 

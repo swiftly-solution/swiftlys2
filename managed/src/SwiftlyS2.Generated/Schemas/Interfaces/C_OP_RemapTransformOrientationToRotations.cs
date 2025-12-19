@@ -14,13 +14,13 @@ public partial interface C_OP_RemapTransformOrientationToRotations : CParticleFu
     static int ISchemaClass<C_OP_RemapTransformOrientationToRotations>.Size => 584;
     static string? ISchemaClass<C_OP_RemapTransformOrientationToRotations>.ClassName => null;
 
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref Vector Rotation { get; }
-    
+
     public ref bool UseQuat { get; }
-    
+
     public ref bool WriteNormal { get; }
 
 

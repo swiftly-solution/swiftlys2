@@ -14,9 +14,9 @@ public partial interface CNmCurrentSyncEventNode__CDefinition : CNmFloatValueNod
     static int ISchemaClass<CNmCurrentSyncEventNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmCurrentSyncEventNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public ref CNmCurrentSyncEventNode__InfoType_t InfoType { get; }
 
 

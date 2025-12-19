@@ -14,15 +14,15 @@ public partial interface CMotionGraphConfig : ISchemaClass<CMotionGraphConfig>
     static int ISchemaClass<CMotionGraphConfig>.Size => 32;
     static string? ISchemaClass<CMotionGraphConfig>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<float> ParamValues { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public MotionIndex MotionIndex { get; }
-    
+
     public ref int SampleStart { get; }
-    
+
     public ref int SampleCount { get; }
 
 

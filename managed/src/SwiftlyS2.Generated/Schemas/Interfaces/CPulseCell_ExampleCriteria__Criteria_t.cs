@@ -14,11 +14,11 @@ public partial interface CPulseCell_ExampleCriteria__Criteria_t : ISchemaClass<C
     static int ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t>.Size => 12;
     static string? ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t>.ClassName => null;
 
-    
+
     public ref float FloatValue1 { get; }
-    
+
     public ref float FloatValue2 { get; }
-    
+
     public ref bool MyBool { get; }
 
 

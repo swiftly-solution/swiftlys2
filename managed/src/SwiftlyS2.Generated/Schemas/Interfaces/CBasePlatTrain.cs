@@ -14,15 +14,15 @@ public partial interface CBasePlatTrain : CBaseToggle, ISchemaClass<CBasePlatTra
     static int ISchemaClass<CBasePlatTrain>.Size => 2176;
     static string? ISchemaClass<CBasePlatTrain>.ClassName => null;
 
-    
+
     public string NoiseMoving { get; set; }
-    
+
     public string NoiseArrived { get; set; }
-    
+
     public ref float Volume { get; }
-    
+
     public ref float TWidth { get; }
-    
+
     public ref float TLength { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface CBoneConstraintPoseSpaceMorph__Input_t : ISchemaClass<C
     static int ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t>.Size => 40;
     static string? ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t>.ClassName => null;
 
-    
+
     public ref Vector InputValue { get; }
-    
+
     public ref CUtlVector<float> OutputWeightList { get; }
 
 

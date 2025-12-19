@@ -14,7 +14,7 @@ public partial interface PARTICLE_EHANDLE__ : ISchemaClass<PARTICLE_EHANDLE__>
     static int ISchemaClass<PARTICLE_EHANDLE__>.Size => 4;
     static string? ISchemaClass<PARTICLE_EHANDLE__>.ClassName => null;
 
-    
+
     public ref int Unused { get; }
 
 

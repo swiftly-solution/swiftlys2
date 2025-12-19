@@ -14,9 +14,9 @@ public partial interface CTriggerActiveWeaponDetect : CBaseTrigger, ISchemaClass
     static int ISchemaClass<CTriggerActiveWeaponDetect>.Size => 2520;
     static string? ISchemaClass<CTriggerActiveWeaponDetect>.ClassName => "trigger_active_weapon_detect";
 
-    
+
     public CEntityIOOutput OnTouchedActiveWeapon { get; }
-    
+
     public string WeaponClassName { get; set; }
 
 

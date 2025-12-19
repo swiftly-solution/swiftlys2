@@ -14,29 +14,29 @@ public partial interface VPhysXBodyPart_t : ISchemaClass<VPhysXBodyPart_t>
     static int ISchemaClass<VPhysXBodyPart_t>.Size => 168;
     static string? ISchemaClass<VPhysXBodyPart_t>.ClassName => null;
 
-    
+
     public ref uint Flags { get; }
-    
+
     public ref float Mass { get; }
-    
+
     public VPhysics2ShapeDef_t RnShape { get; }
-    
+
     public ref ushort CollisionAttributeIndex { get; }
-    
+
     public ref ushort Reserved { get; }
-    
+
     public ref float InertiaScale { get; }
-    
+
     public ref float LinearDamping { get; }
-    
+
     public ref float AngularDamping { get; }
-    
+
     public ref float LinearDrag { get; }
-    
+
     public ref float AngularDrag { get; }
-    
+
     public ref bool OverrideMassCenter { get; }
-    
+
     public ref Vector MassCenterOverride { get; }
 
 

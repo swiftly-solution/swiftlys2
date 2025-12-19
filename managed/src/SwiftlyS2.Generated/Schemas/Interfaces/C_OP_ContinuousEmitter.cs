@@ -14,29 +14,29 @@ public partial interface C_OP_ContinuousEmitter : CParticleFunctionEmitter, ISch
     static int ISchemaClass<C_OP_ContinuousEmitter>.Size => 1624;
     static string? ISchemaClass<C_OP_ContinuousEmitter>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput EmissionDuration { get; }
-    
+
     public CParticleCollectionFloatInput StartTime { get; }
-    
+
     public CParticleCollectionFloatInput EmitRate { get; }
-    
+
     public ref float EmissionScale { get; }
-    
+
     public ref float ScalePerParentParticle { get; }
-    
+
     public ref bool InitFromKilledParentParticles { get; }
-    
+
     public ref EventTypeSelection_t EventType { get; }
-    
+
     public ref int SnapshotControlPoint { get; }
-    
+
     public string StrSnapshotSubset { get; set; }
-    
+
     public ref int LimitPerUpdate { get; }
-    
+
     public ref bool ForceEmitOnFirstUpdate { get; }
-    
+
     public ref bool ForceEmitOnLastUpdate { get; }
 
 

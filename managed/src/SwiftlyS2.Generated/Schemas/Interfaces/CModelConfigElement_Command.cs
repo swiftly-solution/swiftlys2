@@ -14,10 +14,10 @@ public partial interface CModelConfigElement_Command : CModelConfigElement, ISch
     static int ISchemaClass<CModelConfigElement_Command>.Size => 96;
     static string? ISchemaClass<CModelConfigElement_Command>.ClassName => null;
 
-    
+
     public string Command { get; set; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField Args { get; }
 
 

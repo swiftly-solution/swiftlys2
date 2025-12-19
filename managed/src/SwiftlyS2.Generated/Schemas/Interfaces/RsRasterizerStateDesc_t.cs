@@ -14,19 +14,19 @@ public partial interface RsRasterizerStateDesc_t : ISchemaClass<RsRasterizerStat
     static int ISchemaClass<RsRasterizerStateDesc_t>.Size => 16;
     static string? ISchemaClass<RsRasterizerStateDesc_t>.ClassName => null;
 
-    
+
     public ref RsFillMode_t FillMode { get; }
-    
+
     public ref RsCullMode_t CullMode { get; }
-    
+
     public ref bool DepthClipEnable { get; }
-    
+
     public ref bool MultisampleEnable { get; }
-    
+
     public ref int DepthBias { get; }
-    
+
     public ref float DepthBiasClamp { get; }
-    
+
     public ref float SlopeScaledDepthBias { get; }
 
 

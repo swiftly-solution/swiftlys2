@@ -14,13 +14,13 @@ public partial interface CPulseCell_PlaySequence : CPulseCell_BaseYieldingInflow
     static int ISchemaClass<CPulseCell_PlaySequence>.Size => 248;
     static string? ISchemaClass<CPulseCell_PlaySequence>.ClassName => null;
 
-    
+
     public string SequenceName { get; set; }
-    
+
     public PulseNodeDynamicOutflows_t PulseAnimEvents { get; }
-    
+
     public CPulse_ResumePoint OnFinished { get; }
-    
+
     public CPulse_ResumePoint OnCanceled { get; }
 
 

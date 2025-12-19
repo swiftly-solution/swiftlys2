@@ -14,15 +14,15 @@ public partial interface CStopAtGoalUpdateNode : CUnaryUpdateNode, ISchemaClass<
     static int ISchemaClass<CStopAtGoalUpdateNode>.Size => 160;
     static string? ISchemaClass<CStopAtGoalUpdateNode>.ClassName => null;
 
-    
+
     public ref float OuterRadius { get; }
-    
+
     public ref float InnerRadius { get; }
-    
+
     public ref float MaxScale { get; }
-    
+
     public ref float MinScale { get; }
-    
+
     public CAnimInputDamping Damping { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface CMarkupVolumeWithRef : CMarkupVolumeTagged, ISchemaClas
     static int ISchemaClass<CMarkupVolumeWithRef>.Size => 2112;
     static string? ISchemaClass<CMarkupVolumeWithRef>.ClassName => "markup_volume_with_ref";
 
-    
+
     public ref bool UseRef { get; }
-    
+
     public ref Vector RefPosEntitySpace { get; }
-    
+
     public ref Vector RefPosWorldSpace { get; }
-    
+
     public ref float RefDot { get; }
 
 

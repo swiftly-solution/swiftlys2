@@ -14,15 +14,15 @@ public partial interface FeSphereRigid_t : ISchemaClass<FeSphereRigid_t>
     static int ISchemaClass<FeSphereRigid_t>.Size => 32;
     static string? ISchemaClass<FeSphereRigid_t>.ClassName => null;
 
-    
+
     public ref fltx4 Sphere { get; }
-    
+
     public ref ushort Node { get; }
-    
+
     public ref ushort CollisionMask { get; }
-    
+
     public ref ushort VertexMapIndex { get; }
-    
+
     public ref ushort Flags { get; }
 
 

@@ -14,8 +14,8 @@ public partial interface CEntityIOOutput : ISchemaClass<CEntityIOOutput>
     static int ISchemaClass<CEntityIOOutput>.Size => 40;
     static string? ISchemaClass<CEntityIOOutput>.ClassName => null;
 
-    
-  // CVariantBase< CVariantDefaultAllocator >
+
+    // CVariantBase< CVariantDefaultAllocator >
     public SchemaUntypedField Value { get; }
 
 

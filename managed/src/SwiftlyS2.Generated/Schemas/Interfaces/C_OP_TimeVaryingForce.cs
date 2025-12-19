@@ -14,13 +14,13 @@ public partial interface C_OP_TimeVaryingForce : CParticleFunctionForce, ISchema
     static int ISchemaClass<C_OP_TimeVaryingForce>.Size => 512;
     static string? ISchemaClass<C_OP_TimeVaryingForce>.ClassName => null;
 
-    
+
     public ref float StartLerpTime { get; }
-    
+
     public ref Vector StartingForce { get; }
-    
+
     public ref float EndLerpTime { get; }
-    
+
     public ref Vector EndingForce { get; }
 
 

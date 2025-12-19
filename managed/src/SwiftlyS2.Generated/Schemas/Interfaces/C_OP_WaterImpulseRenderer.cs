@@ -14,21 +14,21 @@ public partial interface C_OP_WaterImpulseRenderer : CParticleFunctionRenderer, 
     static int ISchemaClass<C_OP_WaterImpulseRenderer>.Size => 4112;
     static string? ISchemaClass<C_OP_WaterImpulseRenderer>.ClassName => null;
 
-    
+
     public CPerParticleVecInput Pos { get; }
-    
+
     public CPerParticleFloatInput Radius { get; }
-    
+
     public CPerParticleFloatInput Magnitude { get; }
-    
+
     public CPerParticleFloatInput Shape { get; }
-    
+
     public CPerParticleFloatInput WindSpeed { get; }
-    
+
     public CPerParticleFloatInput Wobble { get; }
-    
+
     public ref bool IsRadialWind { get; }
-    
+
     public ref EventTypeSelection_t EventType { get; }
 
 

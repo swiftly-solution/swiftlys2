@@ -14,9 +14,9 @@ public partial interface CAnimUser : ISchemaClass<CAnimUser>
     static int ISchemaClass<CAnimUser>.Size => 24;
     static string? ISchemaClass<CAnimUser>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref int Type { get; }
 
 

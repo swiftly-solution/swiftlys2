@@ -14,38 +14,38 @@ public partial interface CBaseCSGrenadeProjectile : CBaseGrenade, ISchemaClass<C
     static int ISchemaClass<CBaseCSGrenadeProjectile>.Size => 3136;
     static string? ISchemaClass<CBaseCSGrenadeProjectile>.ClassName => null;
 
-    
+
     public ref Vector InitialPosition { get; }
-    
+
     public ref Vector InitialVelocity { get; }
-    
+
     public ref int Bounces { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ExplodeEffectIndex { get; }
-    
+
     public ref int ExplodeEffectTickBegin { get; }
-    
+
     public ref Vector ExplodeEffectOrigin { get; }
-    
+
     public GameTime_t SpawnTime { get; }
-    
+
     public ref byte OGSExtraFlags { get; }
-    
+
     public ref bool DetonationRecorded { get; }
-    
+
     public ref ushort ItemIndex { get; }
-    
+
     public ref Vector OriginalSpawnLocation { get; }
-    
+
     public GameTime_t LastBounceSoundTime { get; }
-    
-  // RotationVector
+
+    // RotationVector
     public SchemaUntypedField GrenadeSpin { get; }
-    
+
     public ref Vector LastHitSurfaceNormal { get; }
-    
+
     public ref int TicksAtZeroVelocity { get; }
-    
+
     public ref bool HasEverHitEnemy { get; }
 
     public void InitialPositionUpdated();

@@ -14,11 +14,11 @@ public partial interface C_OP_LocalAccelerationForce : CParticleFunctionForce, I
     static int ISchemaClass<C_OP_LocalAccelerationForce>.Size => 2208;
     static string? ISchemaClass<C_OP_LocalAccelerationForce>.ClassName => null;
 
-    
+
     public ref int CP { get; }
-    
+
     public ref int ScaleCP { get; }
-    
+
     public CParticleCollectionVecInput Accel { get; }
 
 

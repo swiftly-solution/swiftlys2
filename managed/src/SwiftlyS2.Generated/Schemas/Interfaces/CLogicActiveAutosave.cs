@@ -14,13 +14,13 @@ public partial interface CLogicActiveAutosave : CLogicAutosave, ISchemaClass<CLo
     static int ISchemaClass<CLogicActiveAutosave>.Size => 1296;
     static string? ISchemaClass<CLogicActiveAutosave>.ClassName => "logic_active_autosave";
 
-    
+
     public ref int TriggerHitPoints { get; }
-    
+
     public ref float TimeToTrigger { get; }
-    
+
     public GameTime_t StartTime { get; }
-    
+
     public ref float DangerousTime { get; }
 
 

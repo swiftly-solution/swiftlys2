@@ -14,9 +14,9 @@ public partial interface CWorldCompositionChunkReferenceElement_t : ISchemaClass
     static int ISchemaClass<CWorldCompositionChunkReferenceElement_t>.Size => 16;
     static string? ISchemaClass<CWorldCompositionChunkReferenceElement_t>.ClassName => null;
 
-    
+
     public string StrMapToLoad { get; set; }
-    
+
     public string StrLandmarkName { get; set; }
 
 

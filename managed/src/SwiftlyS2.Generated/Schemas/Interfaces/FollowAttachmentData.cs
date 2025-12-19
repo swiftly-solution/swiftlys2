@@ -14,9 +14,9 @@ public partial interface FollowAttachmentData : ISchemaClass<FollowAttachmentDat
     static int ISchemaClass<FollowAttachmentData>.Size => 8;
     static string? ISchemaClass<FollowAttachmentData>.ClassName => null;
 
-    
+
     public ref int BoneIndex { get; }
-    
+
     public AttachmentHandle_t AttachmentHandle { get; }
 
 

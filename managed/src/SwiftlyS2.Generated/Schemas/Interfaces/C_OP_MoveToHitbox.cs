@@ -14,23 +14,23 @@ public partial interface C_OP_MoveToHitbox : CParticleFunctionOperator, ISchemaC
     static int ISchemaClass<C_OP_MoveToHitbox>.Size => 1184;
     static string? ISchemaClass<C_OP_MoveToHitbox>.ClassName => null;
 
-    
+
     public CParticleModelInput ModelInput { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref float LifeTimeLerpStart { get; }
-    
+
     public ref float LifeTimeLerpEnd { get; }
-    
+
     public ref float PrevPosScale { get; }
-    
+
     public string HitboxSetName { get; set; }
-    
+
     public ref bool UseBones { get; }
-    
+
     public ref HitboxLerpType_t LerpType { get; }
-    
+
     public CPerParticleFloatInput Interpolation { get; }
 
 

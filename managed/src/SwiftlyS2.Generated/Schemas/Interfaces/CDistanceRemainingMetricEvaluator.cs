@@ -14,19 +14,19 @@ public partial interface CDistanceRemainingMetricEvaluator : CMotionMetricEvalua
     static int ISchemaClass<CDistanceRemainingMetricEvaluator>.Size => 104;
     static string? ISchemaClass<CDistanceRemainingMetricEvaluator>.ClassName => null;
 
-    
+
     public ref float MaxDistance { get; }
-    
+
     public ref float MinDistance { get; }
-    
+
     public ref float StartGoalFilterDistance { get; }
-    
+
     public ref float MaxGoalOvershootScale { get; }
-    
+
     public ref bool FilterFixedMinDistance { get; }
-    
+
     public ref bool FilterGoalDistance { get; }
-    
+
     public ref bool FilterGoalOvershoot { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface CAnimEncodedFrames : ISchemaClass<CAnimEncodedFrames>
     static int ISchemaClass<CAnimEncodedFrames>.Size => 216;
     static string? ISchemaClass<CAnimEncodedFrames>.ClassName => null;
 
-    
+
     public ref CBufferString FileName { get; }
-    
+
     public ref int Frames { get; }
-    
+
     public ref int FramesPerBlock { get; }
-    
+
     public ref CUtlVector<CAnimFrameBlockAnim> FrameblockArray { get; }
-    
+
     public CAnimEncodeDifference UsageDifferences { get; }
 
 

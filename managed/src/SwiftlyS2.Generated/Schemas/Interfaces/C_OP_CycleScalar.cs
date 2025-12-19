@@ -14,25 +14,25 @@ public partial interface C_OP_CycleScalar : CParticleFunctionOperator, ISchemaCl
     static int ISchemaClass<C_OP_CycleScalar>.Size => 504;
     static string? ISchemaClass<C_OP_CycleScalar>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t DestField { get; }
-    
+
     public ref float StartValue { get; }
-    
+
     public ref float EndValue { get; }
-    
+
     public ref float CycleTime { get; }
-    
+
     public ref bool DoNotRepeatCycle { get; }
-    
+
     public ref bool SynchronizeParticles { get; }
-    
+
     public ref int CPScale { get; }
-    
+
     public ref int CPFieldMin { get; }
-    
+
     public ref int CPFieldMax { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
 
 

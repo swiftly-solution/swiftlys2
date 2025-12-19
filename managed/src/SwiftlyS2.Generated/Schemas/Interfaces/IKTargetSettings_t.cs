@@ -14,15 +14,15 @@ public partial interface IKTargetSettings_t : ISchemaClass<IKTargetSettings_t>
     static int ISchemaClass<IKTargetSettings_t>.Size => 40;
     static string? ISchemaClass<IKTargetSettings_t>.ClassName => null;
 
-    
+
     public ref IKTargetSource TargetSource { get; }
-    
+
     public IKBoneNameAndIndex_t Bone { get; }
-    
+
     public AnimParamID AnimgraphParameterNamePosition { get; }
-    
+
     public AnimParamID AnimgraphParameterNameOrientation { get; }
-    
+
     public ref IKTargetCoordinateSystem TargetCoordSystem { get; }
 
 

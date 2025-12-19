@@ -14,15 +14,15 @@ public partial interface C_INIT_InheritFromParentParticles : CParticleFunctionIn
     static int ISchemaClass<C_INIT_InheritFromParentParticles>.Size => 496;
     static string? ISchemaClass<C_INIT_InheritFromParentParticles>.ClassName => null;
 
-    
+
     public ref float Scale { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref int Increment { get; }
-    
+
     public ref bool RandomDistribution { get; }
-    
+
     public ref int RandomSeed { get; }
 
 

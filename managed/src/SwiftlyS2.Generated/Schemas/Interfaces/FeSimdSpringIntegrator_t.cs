@@ -14,16 +14,16 @@ public partial interface FeSimdSpringIntegrator_t : ISchemaClass<FeSimdSpringInt
     static int ISchemaClass<FeSimdSpringIntegrator_t>.Size => 80;
     static string? ISchemaClass<FeSimdSpringIntegrator_t>.ClassName => null;
 
-    
-  // uint16[4]
+
+    // uint16[4]
     public SchemaUntypedField Node { get; }
-    
+
     public ref fltx4 SpringRestLength { get; }
-    
+
     public ref fltx4 SpringConstant { get; }
-    
+
     public ref fltx4 SpringDamping { get; }
-    
+
     public ref fltx4 NodeWeight0 { get; }
 
 

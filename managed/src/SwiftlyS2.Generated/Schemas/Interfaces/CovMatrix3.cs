@@ -14,13 +14,13 @@ public partial interface CovMatrix3 : ISchemaClass<CovMatrix3>
     static int ISchemaClass<CovMatrix3>.Size => 24;
     static string? ISchemaClass<CovMatrix3>.ClassName => null;
 
-    
+
     public ref Vector Diag { get; }
-    
+
     public ref float XY { get; }
-    
+
     public ref float XZ { get; }
-    
+
     public ref float YZ { get; }
 
 

@@ -14,19 +14,19 @@ public partial interface CSoundEventPathCornerEntity : CSoundEventEntity, ISchem
     static int ISchemaClass<CSoundEventPathCornerEntity>.Size => 1624;
     static string? ISchemaClass<CSoundEventPathCornerEntity>.ClassName => "snd_event_path_corner";
 
-    
+
     public string PathCorner { get; set; }
-    
+
     public ref int CountMax { get; }
-    
+
     public ref float DistanceMax { get; }
-    
+
     public ref float DistMaxSqr { get; }
-    
+
     public ref float DotProductMax { get; }
-    
+
     public ref bool Playing { get; }
-    
+
     public ref CUtlVector<SoundeventPathCornerPairNetworked_t> CornerPairsNetworked { get; }
 
     public void CornerPairsNetworkedUpdated();

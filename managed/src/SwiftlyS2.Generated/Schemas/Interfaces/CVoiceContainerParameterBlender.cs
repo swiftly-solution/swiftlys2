@@ -14,25 +14,25 @@ public partial interface CVoiceContainerParameterBlender : CVoiceContainerBase, 
     static int ISchemaClass<CVoiceContainerParameterBlender>.Size => 504;
     static string? ISchemaClass<CVoiceContainerParameterBlender>.ClassName => null;
 
-    
+
     public CSoundContainerReference FirstSound { get; }
-    
+
     public CSoundContainerReference SecondSound { get; }
-    
+
     public ref bool EnableOcclusionBlend { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve1 { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve2 { get; }
-    
+
     public ref bool EnableDistanceBlend { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve3 { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve4 { get; }
 
 

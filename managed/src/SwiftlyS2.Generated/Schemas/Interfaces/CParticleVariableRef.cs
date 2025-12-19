@@ -14,11 +14,11 @@ public partial interface CParticleVariableRef : ISchemaClass<CParticleVariableRe
     static int ISchemaClass<CParticleVariableRef>.Size => 80;
     static string? ISchemaClass<CParticleVariableRef>.ClassName => null;
 
-    
-  // CKV3MemberNameWithStorage
+
+    // CKV3MemberNameWithStorage
     public SchemaUntypedField VariableName { get; }
-    
-  // CPulseValueFullType
+
+    // CPulseValueFullType
     public SchemaUntypedField VariableType { get; }
 
 

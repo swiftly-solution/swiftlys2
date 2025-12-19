@@ -14,13 +14,13 @@ public partial interface EngineLoopState_t : ISchemaClass<EngineLoopState_t>
     static int ISchemaClass<EngineLoopState_t>.Size => 40;
     static string? ISchemaClass<EngineLoopState_t>.ClassName => null;
 
-    
+
     public ref int PlatWindowWidth { get; }
-    
+
     public ref int PlatWindowHeight { get; }
-    
+
     public ref int RenderWidth { get; }
-    
+
     public ref int RenderHeight { get; }
 
 

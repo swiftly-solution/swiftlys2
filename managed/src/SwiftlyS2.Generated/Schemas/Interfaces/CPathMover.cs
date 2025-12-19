@@ -14,11 +14,11 @@ public partial interface CPathMover : CPathSimple, ISchemaClass<CPathMover>
     static int ISchemaClass<CPathMover>.Size => 1616;
     static string? ISchemaClass<CPathMover>.ClassName => "path_mover";
 
-    
+
     public ref CUtlVector<CHandle<CMoverPathNode>> PathNodes { get; }
-    
+
     public ref CUtlVector<CHandle<CFuncMover>> Movers { get; }
-    
+
     public ref CTransform XInitialPathWorldToLocal { get; }
 
 

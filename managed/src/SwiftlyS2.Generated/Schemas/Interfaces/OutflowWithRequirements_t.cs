@@ -14,13 +14,13 @@ public partial interface OutflowWithRequirements_t : ISchemaClass<OutflowWithReq
     static int ISchemaClass<OutflowWithRequirements_t>.Size => 128;
     static string? ISchemaClass<OutflowWithRequirements_t>.ClassName => null;
 
-    
+
     public CPulse_OutflowConnection Connection { get; }
-    
+
     public PulseDocNodeID_t DestinationFlowNodeID { get; }
-    
+
     public ref CUtlVector<PulseDocNodeID_t> RequirementNodeIDs { get; }
-    
+
     public ref CUtlVector<int> CursorStateBlockIndex { get; }
 
 

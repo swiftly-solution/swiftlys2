@@ -14,11 +14,11 @@ public partial interface C_OP_SetControlPointFieldToWater : CParticleFunctionPre
     static int ISchemaClass<C_OP_SetControlPointFieldToWater>.Size => 488;
     static string? ISchemaClass<C_OP_SetControlPointFieldToWater>.ClassName => null;
 
-    
+
     public ref int SourceCP { get; }
-    
+
     public ref int DestCP { get; }
-    
+
     public ref int CPField { get; }
 
 

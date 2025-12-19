@@ -14,19 +14,19 @@ public partial interface C_OP_ModelDampenMovement : CParticleFunctionOperator, I
     static int ISchemaClass<C_OP_ModelDampenMovement>.Size => 2328;
     static string? ISchemaClass<C_OP_ModelDampenMovement>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref bool BoundBox { get; }
-    
+
     public ref bool Outside { get; }
-    
+
     public ref bool UseBones { get; }
-    
+
     public string HitboxSetName { get; set; }
-    
+
     public CPerParticleVecInput PosOffset { get; }
-    
+
     public ref float Drag { get; }
 
 

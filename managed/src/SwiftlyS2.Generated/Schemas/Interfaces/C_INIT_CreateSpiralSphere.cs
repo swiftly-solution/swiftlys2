@@ -14,19 +14,19 @@ public partial interface C_INIT_CreateSpiralSphere : CParticleFunctionInitialize
     static int ISchemaClass<C_INIT_CreateSpiralSphere>.Size => 504;
     static string? ISchemaClass<C_INIT_CreateSpiralSphere>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref int OverrideCP { get; }
-    
+
     public ref int Density { get; }
-    
+
     public ref float InitialRadius { get; }
-    
+
     public ref float InitialSpeedMin { get; }
-    
+
     public ref float InitialSpeedMax { get; }
-    
+
     public ref bool UseParticleCount { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_OP_FadeIn : CParticleFunctionOperator, ISchemaClass<C
     static int ISchemaClass<C_OP_FadeIn>.Size => 480;
     static string? ISchemaClass<C_OP_FadeIn>.ClassName => null;
 
-    
+
     public ref float FadeInTimeMin { get; }
-    
+
     public ref float FadeInTimeMax { get; }
-    
+
     public ref float FadeInTimeExp { get; }
-    
+
     public ref bool Proportional { get; }
 
 

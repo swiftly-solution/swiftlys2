@@ -14,28 +14,28 @@ public partial interface CSeqS1SeqDesc : ISchemaClass<CSeqS1SeqDesc>
     static int ISchemaClass<CSeqS1SeqDesc>.Size => 288;
     static string? ISchemaClass<CSeqS1SeqDesc>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public CSeqSeqDescFlag Flags { get; }
-    
+
     public CSeqMultiFetch Fetch { get; }
-    
+
     public ref int LocalWeightlist { get; }
-    
+
     public ref CUtlVector<CSeqAutoLayer> AutoLayerArray { get; }
-    
+
     public ref CUtlVector<CSeqIKLock> IKLockArray { get; }
-    
+
     public CSeqTransition Transition { get; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField SequenceKeys { get; }
-    
+
     public ref CBufferString LegacyKeyValueText { get; }
-    
+
     public ref CUtlVector<CAnimActivity> ActivityArray { get; }
-    
+
     public ref CUtlVector<CFootMotion> FootMotion { get; }
 
 

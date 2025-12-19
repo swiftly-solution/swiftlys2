@@ -14,9 +14,9 @@ public partial interface C_OP_ChooseRandomChildrenInGroup : CParticleFunctionPre
     static int ISchemaClass<C_OP_ChooseRandomChildrenInGroup>.Size => 848;
     static string? ISchemaClass<C_OP_ChooseRandomChildrenInGroup>.ClassName => null;
 
-    
+
     public ref int ChildGroupID { get; }
-    
+
     public CParticleCollectionFloatInput NumberOfChildren { get; }
 
 

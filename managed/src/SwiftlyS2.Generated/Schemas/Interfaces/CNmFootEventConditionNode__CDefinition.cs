@@ -14,11 +14,11 @@ public partial interface CNmFootEventConditionNode__CDefinition : CNmBoolValueNo
     static int ISchemaClass<CNmFootEventConditionNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmFootEventConditionNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public ref NmFootPhaseCondition_t PhaseCondition { get; }
-    
+
     public CNmBitFlags EventConditionRules { get; }
 
 

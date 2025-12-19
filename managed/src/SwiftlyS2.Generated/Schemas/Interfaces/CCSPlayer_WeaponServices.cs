@@ -14,35 +14,35 @@ public partial interface CCSPlayer_WeaponServices : CPlayer_WeaponServices, ISch
     static int ISchemaClass<CCSPlayer_WeaponServices>.Size => 6392;
     static string? ISchemaClass<CCSPlayer_WeaponServices>.ClassName => null;
 
-    
+
     public GameTime_t NextAttack { get; }
-    
+
     public ref bool IsLookingAtWeapon { get; }
-    
+
     public ref bool IsHoldingLookAtWeapon { get; }
-    
+
     public ref CHandle<CBasePlayerWeapon> SavedWeapon { get; }
-    
+
     public ref int TimeToMelee { get; }
-    
+
     public ref int TimeToSecondary { get; }
-    
+
     public ref int TimeToPrimary { get; }
-    
+
     public ref int TimeToSniperRifle { get; }
-    
+
     public ref bool IsBeingGivenItem { get; }
-    
+
     public ref bool IsPickingUpItemWithUse { get; }
-    
+
     public ref bool PickedUpWeapon { get; }
-    
+
     public ref bool DisableAutoDeploy { get; }
-    
+
     public ref bool IsPickingUpGroundWeapon { get; }
-    
+
     public ref CUtlVector<byte> NetworkAnimTiming { get; }
-    
+
     public ref bool BlockInspectUntilNextGraphUpdate { get; }
 
     public void NextAttackUpdated();

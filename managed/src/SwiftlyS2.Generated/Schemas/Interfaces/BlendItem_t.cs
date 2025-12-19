@@ -14,17 +14,17 @@ public partial interface BlendItem_t : ISchemaClass<BlendItem_t>
     static int ISchemaClass<BlendItem_t>.Size => 64;
     static string? ISchemaClass<BlendItem_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<TagSpan_t> Tags { get; }
-    
+
     public CAnimUpdateNodeRef Child { get; }
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref Vector2D Pos { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public ref bool UseCustomDuration { get; }
 
 

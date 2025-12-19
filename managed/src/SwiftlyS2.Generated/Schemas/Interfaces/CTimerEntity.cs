@@ -14,31 +14,31 @@ public partial interface CTimerEntity : CLogicalEntity, ISchemaClass<CTimerEntit
     static int ISchemaClass<CTimerEntity>.Size => 1424;
     static string? ISchemaClass<CTimerEntity>.ClassName => "logic_timer";
 
-    
+
     public CEntityIOOutput OnTimer { get; }
-    
+
     public CEntityIOOutput OnTimerHigh { get; }
-    
+
     public CEntityIOOutput OnTimerLow { get; }
-    
+
     public ref int Disabled { get; }
-    
+
     public ref float InitialDelay { get; }
-    
+
     public ref float RefireTime { get; }
-    
+
     public ref bool UpDownState { get; }
-    
+
     public ref int UseRandomTime { get; }
-    
+
     public ref bool PauseAfterFiring { get; }
-    
+
     public ref float LowerRandomBound { get; }
-    
+
     public ref float UpperRandomBound { get; }
-    
+
     public ref float RemainingTime { get; }
-    
+
     public ref bool Paused { get; }
 
 

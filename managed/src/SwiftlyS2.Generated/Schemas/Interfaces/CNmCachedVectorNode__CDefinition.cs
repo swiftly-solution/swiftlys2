@@ -14,9 +14,9 @@ public partial interface CNmCachedVectorNode__CDefinition : CNmVectorValueNode__
     static int ISchemaClass<CNmCachedVectorNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmCachedVectorNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref NmCachedValueMode_t Mode { get; }
 
 

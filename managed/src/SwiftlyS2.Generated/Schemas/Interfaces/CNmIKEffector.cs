@@ -14,15 +14,15 @@ public partial interface CNmIKEffector : ISchemaClass<CNmIKEffector>
     static int ISchemaClass<CNmIKEffector>.Size => 64;
     static string? ISchemaClass<CNmIKEffector>.ClassName => null;
 
-    
+
     public ref int BodyIndex { get; }
-    
+
     public ref bool Enabled { get; }
-    
+
     public ref Vector TargetPosition { get; }
-    
+
     public ref Quaternion TargetOrientation { get; }
-    
+
     public ref float Weight { get; }
 
 

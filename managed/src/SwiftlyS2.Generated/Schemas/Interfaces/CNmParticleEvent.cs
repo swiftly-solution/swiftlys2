@@ -14,31 +14,31 @@ public partial interface CNmParticleEvent : CNmEvent, ISchemaClass<CNmParticleEv
     static int ISchemaClass<CNmParticleEvent>.Size => 112;
     static string? ISchemaClass<CNmParticleEvent>.ClassName => null;
 
-    
+
     public ref CNmEventRelevance_t Relevance { get; }
-    
+
     public ref CNmParticleEvent__Type_t Type { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ParticleSystem { get; }
-    
+
     public string Tags { get; set; }
-    
+
     public ref bool StopImmediately { get; }
-    
+
     public ref bool DetachFromOwner { get; }
-    
+
     public ref bool PlayEndCap { get; }
-    
+
     public string AttachmentPoint0 { get; set; }
-    
+
     public ref ParticleAttachment_t AttachmentType0 { get; }
-    
+
     public string AttachmentPoint1 { get; set; }
-    
+
     public ref ParticleAttachment_t AttachmentType1 { get; }
-    
+
     public string Config { get; set; }
-    
+
     public string EffectForConfig { get; set; }
 
 

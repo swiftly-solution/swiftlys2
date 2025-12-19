@@ -14,7 +14,7 @@ public partial interface CExampleSchemaVData_PolymorphicBase : ISchemaClass<CExa
     static int ISchemaClass<CExampleSchemaVData_PolymorphicBase>.Size => 16;
     static string? ISchemaClass<CExampleSchemaVData_PolymorphicBase>.ClassName => null;
 
-    
+
     public ref int Base { get; }
 
 

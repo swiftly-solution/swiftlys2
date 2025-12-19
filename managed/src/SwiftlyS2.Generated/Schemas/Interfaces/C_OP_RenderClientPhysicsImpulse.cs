@@ -14,11 +14,11 @@ public partial interface C_OP_RenderClientPhysicsImpulse : CParticleFunctionRend
     static int ISchemaClass<C_OP_RenderClientPhysicsImpulse>.Size => 1288;
     static string? ISchemaClass<C_OP_RenderClientPhysicsImpulse>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput Radius { get; }
-    
+
     public CPerParticleFloatInput Magnitude { get; }
-    
+
     public ref int SimIdFilter { get; }
 
 

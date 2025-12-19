@@ -14,15 +14,15 @@ public partial interface C_INIT_OffsetVectorToVector : CParticleFunctionInitiali
     static int ISchemaClass<C_INIT_OffsetVectorToVector>.Size => 512;
     static string? ISchemaClass<C_INIT_OffsetVectorToVector>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref Vector OutputMin { get; }
-    
+
     public ref Vector OutputMax { get; }
-    
+
     public CRandomNumberGeneratorParameters RandomnessParameters { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface CInfoDynamicShadowHint : CPointEntity, ISchemaClass<CIn
     static int ISchemaClass<CInfoDynamicShadowHint>.Size => 1288;
     static string? ISchemaClass<CInfoDynamicShadowHint>.ClassName => "info_dynamic_shadow_hint";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref float Range { get; }
-    
+
     public ref int Importance { get; }
-    
+
     public ref int LightChoice { get; }
-    
+
     public ref CHandle<CBaseEntity> Light { get; }
 
 

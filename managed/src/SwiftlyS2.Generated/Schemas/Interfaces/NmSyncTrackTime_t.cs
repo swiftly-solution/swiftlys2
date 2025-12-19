@@ -14,9 +14,9 @@ public partial interface NmSyncTrackTime_t : ISchemaClass<NmSyncTrackTime_t>
     static int ISchemaClass<NmSyncTrackTime_t>.Size => 8;
     static string? ISchemaClass<NmSyncTrackTime_t>.ClassName => null;
 
-    
+
     public ref int EventIdx { get; }
-    
+
     public NmPercent_t PercentageThrough { get; }
 
 

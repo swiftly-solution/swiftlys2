@@ -14,17 +14,17 @@ public partial interface CVoiceContainerRandomSampler : CVoiceContainerBase, ISc
     static int ISchemaClass<CVoiceContainerRandomSampler>.Size => 480;
     static string? ISchemaClass<CVoiceContainerRandomSampler>.ClassName => null;
 
-    
+
     public ref float Amplitude { get; }
-    
+
     public ref float AmplitudeJitter { get; }
-    
+
     public ref float TimeJitter { get; }
-    
+
     public ref float MaxLength { get; }
-    
+
     public ref int NumDelayVariations { get; }
-    
+
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>> GrainResources { get; }
 
 

@@ -14,27 +14,27 @@ public partial interface C_OP_RemapDotProductToScalar : CParticleFunctionOperato
     static int ISchemaClass<C_OP_RemapDotProductToScalar>.Size => 504;
     static string? ISchemaClass<C_OP_RemapDotProductToScalar>.ClassName => null;
 
-    
+
     public ref int InputCP1 { get; }
-    
+
     public ref int InputCP2 { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref bool UseParticleVelocity { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool ActiveRange { get; }
-    
+
     public ref bool UseParticleNormal { get; }
 
 

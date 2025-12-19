@@ -14,15 +14,15 @@ public partial interface VPhysics2ShapeDef_t : ISchemaClass<VPhysics2ShapeDef_t>
     static int ISchemaClass<VPhysics2ShapeDef_t>.Size => 120;
     static string? ISchemaClass<VPhysics2ShapeDef_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<RnSphereDesc_t> Spheres { get; }
-    
+
     public ref CUtlVector<RnCapsuleDesc_t> Capsules { get; }
-    
+
     public ref CUtlVector<RnHullDesc_t> Hulls { get; }
-    
+
     public ref CUtlVector<RnMeshDesc_t> Meshes { get; }
-    
+
     public ref CUtlVector<ushort> CollisionAttributeIndices { get; }
 
 

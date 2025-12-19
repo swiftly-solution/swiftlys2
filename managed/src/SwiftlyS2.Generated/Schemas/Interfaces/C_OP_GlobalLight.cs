@@ -14,11 +14,11 @@ public partial interface C_OP_GlobalLight : CParticleFunctionOperator, ISchemaCl
     static int ISchemaClass<C_OP_GlobalLight>.Size => 472;
     static string? ISchemaClass<C_OP_GlobalLight>.ClassName => null;
 
-    
+
     public ref float Scale { get; }
-    
+
     public ref bool ClampLowerRange { get; }
-    
+
     public ref bool ClampUpperRange { get; }
 
 

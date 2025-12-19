@@ -14,9 +14,9 @@ public partial interface CMovementStatsProperty : ISchemaClass<CMovementStatsPro
     static int ISchemaClass<CMovementStatsProperty>.Size => 64;
     static string? ISchemaClass<CMovementStatsProperty>.ClassName => null;
 
-    
+
     public ref int UseCounter { get; }
-    
+
     public CVectorExponentialMovingAverage EmaMovementDirection { get; }
 
 

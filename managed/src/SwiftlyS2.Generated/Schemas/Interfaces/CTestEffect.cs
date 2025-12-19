@@ -14,15 +14,15 @@ public partial interface CTestEffect : CBaseEntity, ISchemaClass<CTestEffect>
     static int ISchemaClass<CTestEffect>.Size => 1568;
     static string? ISchemaClass<CTestEffect>.ClassName => "test_effect";
 
-    
+
     public ref int Loop { get; }
-    
+
     public ref int Beam { get; }
-    
+
     public ISchemaClassFixedArray<CBeam> Beam1 { get; }
-    
+
     public ISchemaClassFixedArray<GameTime_t> BeamTime { get; }
-    
+
     public GameTime_t StartTime { get; }
 
 

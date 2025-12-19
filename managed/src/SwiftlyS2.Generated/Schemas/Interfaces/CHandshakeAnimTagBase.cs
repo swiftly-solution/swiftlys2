@@ -14,7 +14,7 @@ public partial interface CHandshakeAnimTagBase : CAnimTagBase, ISchemaClass<CHan
     static int ISchemaClass<CHandshakeAnimTagBase>.Size => 88;
     static string? ISchemaClass<CHandshakeAnimTagBase>.ClassName => null;
 
-    
+
     public ref bool IsDisableTag { get; }
 
 

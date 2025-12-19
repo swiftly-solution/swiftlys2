@@ -14,9 +14,9 @@ public partial interface CFootStride : ISchemaClass<CFootStride>
     static int ISchemaClass<CFootStride>.Size => 88;
     static string? ISchemaClass<CFootStride>.ClassName => null;
 
-    
+
     public CFootCycleDefinition Definition { get; }
-    
+
     public CFootTrajectories Trajectories { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_OP_SetControlPointPositionToRandomActiveCP : CParticl
     static int ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP>.Size => 856;
     static string? ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP>.ClassName => null;
 
-    
+
     public ref int CP1 { get; }
-    
+
     public ref int HeadLocationMin { get; }
-    
+
     public ref int HeadLocationMax { get; }
-    
+
     public CParticleCollectionFloatInput ResetRate { get; }
 
 

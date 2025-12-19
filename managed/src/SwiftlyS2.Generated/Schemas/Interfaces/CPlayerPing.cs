@@ -14,15 +14,15 @@ public partial interface CPlayerPing : CBaseEntity, ISchemaClass<CPlayerPing>
     static int ISchemaClass<CPlayerPing>.Size => 1304;
     static string? ISchemaClass<CPlayerPing>.ClassName => "info_player_ping";
 
-    
+
     public ref CHandle<CCSPlayerPawn> Player { get; }
-    
+
     public ref CHandle<CBaseEntity> PingedEntity { get; }
-    
+
     public ref int Type { get; }
-    
+
     public ref bool Urgent { get; }
-    
+
     public string PlaceName { get; set; }
 
     public void PlayerUpdated();

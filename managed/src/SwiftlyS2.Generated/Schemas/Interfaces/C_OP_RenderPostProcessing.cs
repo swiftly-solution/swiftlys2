@@ -14,11 +14,11 @@ public partial interface C_OP_RenderPostProcessing : CParticleFunctionRenderer, 
     static int ISchemaClass<C_OP_RenderPostProcessing>.Size => 928;
     static string? ISchemaClass<C_OP_RenderPostProcessing>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput PostProcessStrength { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostTexture { get; }
-    
+
     public ref ParticlePostProcessPriorityGroup_t Priority { get; }
 
 

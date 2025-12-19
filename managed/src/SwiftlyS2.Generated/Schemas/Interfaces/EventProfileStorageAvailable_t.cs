@@ -14,7 +14,7 @@ public partial interface EventProfileStorageAvailable_t : ISchemaClass<EventProf
     static int ISchemaClass<EventProfileStorageAvailable_t>.Size => 4;
     static string? ISchemaClass<EventProfileStorageAvailable_t>.ClassName => null;
 
-    
+
     public ref uint SplitScreenSlot { get; }
 
 

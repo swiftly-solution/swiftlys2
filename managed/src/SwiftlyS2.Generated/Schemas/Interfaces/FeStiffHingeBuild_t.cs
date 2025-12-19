@@ -14,13 +14,13 @@ public partial interface FeStiffHingeBuild_t : ISchemaClass<FeStiffHingeBuild_t>
     static int ISchemaClass<FeStiffHingeBuild_t>.Size => 28;
     static string? ISchemaClass<FeStiffHingeBuild_t>.ClassName => null;
 
-    
+
     public ref float MaxAngle { get; }
-    
+
     public ref float Strength { get; }
-    
+
     public ISchemaFixedArray<float> MotionBias { get; }
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
 
 

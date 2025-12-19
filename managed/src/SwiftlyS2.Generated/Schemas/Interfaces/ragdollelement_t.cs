@@ -14,13 +14,13 @@ public partial interface ragdollelement_t : ISchemaClass<ragdollelement_t>
     static int ISchemaClass<ragdollelement_t>.Size => 48;
     static string? ISchemaClass<ragdollelement_t>.ClassName => null;
 
-    
+
     public ref Vector OriginParentSpace { get; }
-    
+
     public ref int ParentIndex { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref int Height { get; }
 
 

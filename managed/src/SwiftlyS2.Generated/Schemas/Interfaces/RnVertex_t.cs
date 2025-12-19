@@ -14,7 +14,7 @@ public partial interface RnVertex_t : ISchemaClass<RnVertex_t>
     static int ISchemaClass<RnVertex_t>.Size => 1;
     static string? ISchemaClass<RnVertex_t>.ClassName => null;
 
-    
+
     public ref byte Edge { get; }
 
 

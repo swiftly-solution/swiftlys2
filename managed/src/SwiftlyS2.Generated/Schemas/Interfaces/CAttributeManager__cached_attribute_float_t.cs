@@ -14,11 +14,11 @@ public partial interface CAttributeManager__cached_attribute_float_t : ISchemaCl
     static int ISchemaClass<CAttributeManager__cached_attribute_float_t>.Size => 24;
     static string? ISchemaClass<CAttributeManager__cached_attribute_float_t>.ClassName => null;
 
-    
+
     public ref float In { get; }
-    
+
     public string AttribHook { get; set; }
-    
+
     public ref float Out { get; }
 
 

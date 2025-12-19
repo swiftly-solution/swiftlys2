@@ -14,19 +14,19 @@ public partial interface C_OP_RemapParticleCountOnScalarEndCap : CParticleFuncti
     static int ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap>.Size => 496;
     static string? ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref int InputMin { get; }
-    
+
     public ref int InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref bool Backwards { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
 
 

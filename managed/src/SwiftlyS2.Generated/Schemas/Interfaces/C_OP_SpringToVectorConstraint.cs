@@ -14,15 +14,15 @@ public partial interface C_OP_SpringToVectorConstraint : CParticleFunctionConstr
     static int ISchemaClass<C_OP_SpringToVectorConstraint>.Size => 3656;
     static string? ISchemaClass<C_OP_SpringToVectorConstraint>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput RestLength { get; }
-    
+
     public CPerParticleFloatInput MinDistance { get; }
-    
+
     public CPerParticleFloatInput MaxDistance { get; }
-    
+
     public CPerParticleFloatInput RestingLength { get; }
-    
+
     public CPerParticleVecInput AnchorVector { get; }
 
 

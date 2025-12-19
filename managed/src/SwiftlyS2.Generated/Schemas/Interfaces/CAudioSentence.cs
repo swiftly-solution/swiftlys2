@@ -14,13 +14,13 @@ public partial interface CAudioSentence : ISchemaClass<CAudioSentence>
     static int ISchemaClass<CAudioSentence>.Size => 160;
     static string? ISchemaClass<CAudioSentence>.ClassName => null;
 
-    
+
     public ref bool ShouldVoiceDuck { get; }
-    
+
     public ref CUtlVector<CAudioPhonemeTag> RunTimePhonemes { get; }
-    
+
     public ref CUtlVector<CAudioEmphasisSample> EmphasisSamples { get; }
-    
+
     public CAudioMorphData MorphData { get; }
 
 

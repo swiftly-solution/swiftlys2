@@ -14,9 +14,9 @@ public partial interface CTonemapTrigger : CBaseTrigger, ISchemaClass<CTonemapTr
     static int ISchemaClass<CTonemapTrigger>.Size => 2488;
     static string? ISchemaClass<CTonemapTrigger>.ClassName => "trigger_tonemap";
 
-    
+
     public string TonemapControllerName { get; set; }
-    
+
     public ref CHandle<CEntityInstance> TonemapController { get; }
 
 

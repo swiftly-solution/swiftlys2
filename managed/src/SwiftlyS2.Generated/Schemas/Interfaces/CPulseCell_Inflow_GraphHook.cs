@@ -14,8 +14,8 @@ public partial interface CPulseCell_Inflow_GraphHook : CPulseCell_Inflow_BaseEnt
     static int ISchemaClass<CPulseCell_Inflow_GraphHook>.Size => 144;
     static string? ISchemaClass<CPulseCell_Inflow_GraphHook>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField HookName { get; }
 
 

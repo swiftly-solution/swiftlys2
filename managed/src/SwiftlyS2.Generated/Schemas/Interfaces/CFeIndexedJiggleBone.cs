@@ -14,11 +14,11 @@ public partial interface CFeIndexedJiggleBone : ISchemaClass<CFeIndexedJiggleBon
     static int ISchemaClass<CFeIndexedJiggleBone>.Size => 164;
     static string? ISchemaClass<CFeIndexedJiggleBone>.ClassName => null;
 
-    
+
     public ref uint Node { get; }
-    
+
     public ref uint JiggleParent { get; }
-    
+
     public CFeJiggleBone JiggleBone { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface CVoiceContainerBlender : CVoiceContainerBase, ISchemaCl
     static int ISchemaClass<CVoiceContainerBlender>.Size => 240;
     static string? ISchemaClass<CVoiceContainerBlender>.ClassName => null;
 
-    
+
     public CSoundContainerReference FirstSound { get; }
-    
+
     public CSoundContainerReference SecondSound { get; }
-    
+
     public ref float BlendFactor { get; }
 
 

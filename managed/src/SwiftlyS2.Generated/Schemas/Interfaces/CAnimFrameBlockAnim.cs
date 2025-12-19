@@ -14,11 +14,11 @@ public partial interface CAnimFrameBlockAnim : ISchemaClass<CAnimFrameBlockAnim>
     static int ISchemaClass<CAnimFrameBlockAnim>.Size => 32;
     static string? ISchemaClass<CAnimFrameBlockAnim>.ClassName => null;
 
-    
+
     public ref int StartFrame { get; }
-    
+
     public ref int EndFrame { get; }
-    
+
     public ref CUtlVector<int> SegmentIndexArray { get; }
 
 

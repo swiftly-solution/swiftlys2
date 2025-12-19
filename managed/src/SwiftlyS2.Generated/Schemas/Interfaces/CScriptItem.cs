@@ -14,7 +14,7 @@ public partial interface CScriptItem : CItem, ISchemaClass<CScriptItem>
     static int ISchemaClass<CScriptItem>.Size => 2944;
     static string? ISchemaClass<CScriptItem>.ClassName => "scripted_item_drop";
 
-    
+
     public ref MoveType_t MoveTypeOverride { get; }
 
 

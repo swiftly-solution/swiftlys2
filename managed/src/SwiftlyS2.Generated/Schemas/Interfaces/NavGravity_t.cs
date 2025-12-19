@@ -14,9 +14,9 @@ public partial interface NavGravity_t : ISchemaClass<NavGravity_t>
     static int ISchemaClass<NavGravity_t>.Size => 16;
     static string? ISchemaClass<NavGravity_t>.ClassName => null;
 
-    
+
     public ref Vector Gravity { get; }
-    
+
     public ref bool Default { get; }
 
 

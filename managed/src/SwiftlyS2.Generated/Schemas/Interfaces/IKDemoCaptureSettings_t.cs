@@ -14,15 +14,15 @@ public partial interface IKDemoCaptureSettings_t : ISchemaClass<IKDemoCaptureSet
     static int ISchemaClass<IKDemoCaptureSettings_t>.Size => 40;
     static string? ISchemaClass<IKDemoCaptureSettings_t>.ClassName => null;
 
-    
+
     public string ParentBoneName { get; set; }
-    
+
     public ref IKChannelMode Mode { get; }
-    
+
     public string IkChainName { get; set; }
-    
+
     public string OneBoneStart { get; set; }
-    
+
     public string OneBoneEnd { get; set; }
 
 

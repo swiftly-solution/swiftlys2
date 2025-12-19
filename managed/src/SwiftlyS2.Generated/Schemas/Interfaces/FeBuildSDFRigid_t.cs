@@ -14,11 +14,11 @@ public partial interface FeBuildSDFRigid_t : FeSDFRigid_t, ISchemaClass<FeBuildS
     static int ISchemaClass<FeBuildSDFRigid_t>.Size => 96;
     static string? ISchemaClass<FeBuildSDFRigid_t>.ClassName => null;
 
-    
+
     public ref int Priority { get; }
-    
+
     public ref uint VertexMapHash { get; }
-    
+
     public ref uint AntitunnelGroupBits { get; }
 
 

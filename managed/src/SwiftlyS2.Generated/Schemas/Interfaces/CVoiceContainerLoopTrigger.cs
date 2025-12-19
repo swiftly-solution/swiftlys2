@@ -14,15 +14,15 @@ public partial interface CVoiceContainerLoopTrigger : CVoiceContainerBase, ISche
     static int ISchemaClass<CVoiceContainerLoopTrigger>.Size => 224;
     static string? ISchemaClass<CVoiceContainerLoopTrigger>.ClassName => null;
 
-    
+
     public CSoundContainerReference Sound { get; }
-    
+
     public ref float RetriggerTimeMin { get; }
-    
+
     public ref float RetriggerTimeMax { get; }
-    
+
     public ref float FadeTime { get; }
-    
+
     public ref bool CrossFade { get; }
 
 

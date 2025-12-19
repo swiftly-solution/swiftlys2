@@ -14,21 +14,21 @@ public partial interface CSoundOpvarSetEntity : CBaseEntity, ISchemaClass<CSound
     static int ISchemaClass<CSoundOpvarSetEntity>.Size => 1352;
     static string? ISchemaClass<CSoundOpvarSetEntity>.ClassName => "snd_opvar_set";
 
-    
+
     public string StackName { get; set; }
-    
+
     public string OperatorName { get; set; }
-    
+
     public string OpvarName { get; set; }
-    
+
     public ref int OpvarType { get; }
-    
+
     public ref int OpvarIndex { get; }
-    
+
     public ref float OpvarValue { get; }
-    
+
     public string OpvarValueString { get; set; }
-    
+
     public ref bool SetOnSpawn { get; }
 
 

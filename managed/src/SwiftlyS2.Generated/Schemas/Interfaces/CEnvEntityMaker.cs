@@ -14,29 +14,29 @@ public partial interface CEnvEntityMaker : CPointEntity, ISchemaClass<CEnvEntity
     static int ISchemaClass<CEnvEntityMaker>.Size => 1424;
     static string? ISchemaClass<CEnvEntityMaker>.ClassName => "env_entity_maker";
 
-    
+
     public ref Vector EntityMins { get; }
-    
+
     public ref Vector EntityMaxs { get; }
-    
+
     public ref CHandle<CBaseEntity> CurrentInstance { get; }
-    
+
     public ref CHandle<CBaseEntity> CurrentBlocker { get; }
-    
+
     public ref Vector BlockerOrigin { get; }
-    
+
     public ref QAngle PostSpawnDirection { get; }
-    
+
     public ref float PostSpawnDirectionVariance { get; }
-    
+
     public ref float PostSpawnSpeed { get; }
-    
+
     public ref bool PostSpawnUseAngles { get; }
-    
+
     public string Template { get; set; }
-    
+
     public CEntityIOOutput OutputOnSpawned { get; }
-    
+
     public CEntityIOOutput OutputOnFailedSpawn { get; }
 
 

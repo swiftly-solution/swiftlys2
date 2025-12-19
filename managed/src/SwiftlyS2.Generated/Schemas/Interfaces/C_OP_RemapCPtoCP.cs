@@ -14,25 +14,25 @@ public partial interface C_OP_RemapCPtoCP : CParticleFunctionPreEmission, ISchem
     static int ISchemaClass<C_OP_RemapCPtoCP>.Size => 512;
     static string? ISchemaClass<C_OP_RemapCPtoCP>.ClassName => null;
 
-    
+
     public ref int InputControlPoint { get; }
-    
+
     public ref int OutputControlPoint { get; }
-    
+
     public ref int InputField { get; }
-    
+
     public ref int OutputField { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref bool Derivative { get; }
-    
+
     public ref float InterpRate { get; }
 
 

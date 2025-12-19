@@ -14,31 +14,31 @@ public partial interface C_OP_DistanceBetweenTransforms : CParticleFunctionOpera
     static int ISchemaClass<C_OP_DistanceBetweenTransforms>.Size => 2304;
     static string? ISchemaClass<C_OP_DistanceBetweenTransforms>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CParticleTransformInput TransformStart { get; }
-    
+
     public CParticleTransformInput TransformEnd { get; }
-    
+
     public CPerParticleFloatInput InputMin { get; }
-    
+
     public CPerParticleFloatInput InputMax { get; }
-    
+
     public CPerParticleFloatInput OutputMin { get; }
-    
+
     public CPerParticleFloatInput OutputMax { get; }
-    
+
     public ref float MaxTraceLength { get; }
-    
+
     public ref float LOSScale { get; }
-    
+
     public string CollisionGroupName { get; set; }
-    
+
     public ref ParticleTraceSet_t TraceSet { get; }
-    
+
     public ref bool LOS { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
 
 

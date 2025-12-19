@@ -14,21 +14,21 @@ public partial interface CItem : CBaseAnimGraph, ISchemaClass<CItem>
     static int ISchemaClass<CItem>.Size => 2928;
     static string? ISchemaClass<CItem>.ClassName => null;
 
-    
+
     public CEntityIOOutput OnPlayerTouch { get; }
-    
+
     public CEntityIOOutput OnPlayerPickup { get; }
-    
+
     public ref bool ActivateWhenAtRest { get; }
-    
+
     public CEntityIOOutput OnCacheInteraction { get; }
-    
+
     public CEntityIOOutput OnGlovePulled { get; }
-    
+
     public ref Vector OriginalSpawnOrigin { get; }
-    
+
     public ref QAngle OriginalSpawnAngles { get; }
-    
+
     public ref bool PhysStartAsleep { get; }
 
 

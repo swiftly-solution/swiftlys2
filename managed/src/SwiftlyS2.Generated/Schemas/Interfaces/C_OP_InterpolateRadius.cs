@@ -14,17 +14,17 @@ public partial interface C_OP_InterpolateRadius : CParticleFunctionOperator, ISc
     static int ISchemaClass<C_OP_InterpolateRadius>.Size => 544;
     static string? ISchemaClass<C_OP_InterpolateRadius>.ClassName => null;
 
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float EndTime { get; }
-    
+
     public ref float StartScale { get; }
-    
+
     public ref float EndScale { get; }
-    
+
     public ref bool EaseInAndOut { get; }
-    
+
     public ref float Bias { get; }
 
 

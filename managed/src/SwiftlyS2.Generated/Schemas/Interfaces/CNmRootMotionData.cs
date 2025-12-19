@@ -14,15 +14,15 @@ public partial interface CNmRootMotionData : ISchemaClass<CNmRootMotionData>
     static int ISchemaClass<CNmRootMotionData>.Size => 80;
     static string? ISchemaClass<CNmRootMotionData>.ClassName => null;
 
-    
+
     public ref CUtlVector<CTransform> Transforms { get; }
-    
+
     public ref int NumFrames { get; }
-    
+
     public ref float AverageLinearVelocity { get; }
-    
+
     public ref float AverageAngularVelocityRadians { get; }
-    
+
     public ref CTransform TotalDelta { get; }
 
 

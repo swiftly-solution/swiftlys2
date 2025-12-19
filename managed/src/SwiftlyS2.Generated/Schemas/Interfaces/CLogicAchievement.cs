@@ -14,11 +14,11 @@ public partial interface CLogicAchievement : CLogicalEntity, ISchemaClass<CLogic
     static int ISchemaClass<CLogicAchievement>.Size => 1320;
     static string? ISchemaClass<CLogicAchievement>.ClassName => "logic_achievement";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public string AchievementEventID { get; set; }
-    
+
     public CEntityIOOutput OnFired { get; }
 
 

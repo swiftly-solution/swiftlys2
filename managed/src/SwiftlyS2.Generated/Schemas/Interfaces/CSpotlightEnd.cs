@@ -14,13 +14,13 @@ public partial interface CSpotlightEnd : CBaseModelEntity, ISchemaClass<CSpotlig
     static int ISchemaClass<CSpotlightEnd>.Size => 2040;
     static string? ISchemaClass<CSpotlightEnd>.ClassName => "spotlight_end";
 
-    
+
     public ref float LightScale { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref Vector SpotlightDir { get; }
-    
+
     public ref Vector SpotlightOrg { get; }
 
     public void LightScaleUpdated();

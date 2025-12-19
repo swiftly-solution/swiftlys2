@@ -14,9 +14,9 @@ public partial interface CPulseCell_WaitForCursorsWithTag : CPulseCell_WaitForCu
     static int ISchemaClass<CPulseCell_WaitForCursorsWithTag>.Size => 160;
     static string? ISchemaClass<CPulseCell_WaitForCursorsWithTag>.ClassName => null;
 
-    
+
     public ref bool TagSelfWhenComplete { get; }
-    
+
     public ref PulseCursorCancelPriority_t DesiredKillPriority { get; }
 
 

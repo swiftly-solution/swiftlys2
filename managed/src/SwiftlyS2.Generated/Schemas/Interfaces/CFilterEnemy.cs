@@ -14,15 +14,15 @@ public partial interface CFilterEnemy : CBaseFilter, ISchemaClass<CFilterEnemy>
     static int ISchemaClass<CFilterEnemy>.Size => 1384;
     static string? ISchemaClass<CFilterEnemy>.ClassName => "filter_enemy";
 
-    
+
     public string EnemyName { get; set; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref float OuterRadius { get; }
-    
+
     public ref int MaxSquadmatesPerEnemy { get; }
-    
+
     public string PlayerName { get; set; }
 
 

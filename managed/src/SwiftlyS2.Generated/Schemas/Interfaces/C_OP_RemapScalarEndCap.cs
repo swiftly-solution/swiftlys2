@@ -14,17 +14,17 @@ public partial interface C_OP_RemapScalarEndCap : CParticleFunctionOperator, ISc
     static int ISchemaClass<C_OP_RemapScalarEndCap>.Size => 488;
     static string? ISchemaClass<C_OP_RemapScalarEndCap>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
 
 

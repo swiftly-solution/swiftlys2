@@ -14,9 +14,9 @@ public partial interface CNmIDEvent : CNmEvent, ISchemaClass<CNmIDEvent>
     static int ISchemaClass<CNmIDEvent>.Size => 48;
     static string? ISchemaClass<CNmIDEvent>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol ID { get; }
-    
+
     public ref CGlobalSymbol SecondaryID { get; }
 
 

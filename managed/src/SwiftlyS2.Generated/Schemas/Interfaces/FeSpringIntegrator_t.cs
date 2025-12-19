@@ -14,15 +14,15 @@ public partial interface FeSpringIntegrator_t : ISchemaClass<FeSpringIntegrator_
     static int ISchemaClass<FeSpringIntegrator_t>.Size => 20;
     static string? ISchemaClass<FeSpringIntegrator_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
-    
+
     public ref float SpringRestLength { get; }
-    
+
     public ref float SpringConstant { get; }
-    
+
     public ref float SpringDamping { get; }
-    
+
     public ref float NodeWeight0 { get; }
 
 

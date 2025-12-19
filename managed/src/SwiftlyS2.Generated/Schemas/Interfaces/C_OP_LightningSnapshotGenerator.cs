@@ -14,35 +14,35 @@ public partial interface C_OP_LightningSnapshotGenerator : CParticleFunctionPreE
     static int ISchemaClass<C_OP_LightningSnapshotGenerator>.Size => 4544;
     static string? ISchemaClass<C_OP_LightningSnapshotGenerator>.ClassName => null;
 
-    
+
     public ref int CPSnapshot { get; }
-    
+
     public ref int CPStartPnt { get; }
-    
+
     public ref int CPEndPnt { get; }
-    
+
     public CParticleCollectionFloatInput Segments { get; }
-    
+
     public CParticleCollectionFloatInput Offset { get; }
-    
+
     public CParticleCollectionFloatInput OffsetDecay { get; }
-    
+
     public CParticleCollectionFloatInput RecalcRate { get; }
-    
+
     public CParticleCollectionFloatInput UVScale { get; }
-    
+
     public CParticleCollectionFloatInput UVOffset { get; }
-    
+
     public CParticleCollectionFloatInput SplitRate { get; }
-    
+
     public CParticleCollectionFloatInput BranchTwist { get; }
-    
+
     public ref ParticleLightnintBranchBehavior_t BranchBehavior { get; }
-    
+
     public CParticleCollectionFloatInput RadiusStart { get; }
-    
+
     public CParticleCollectionFloatInput RadiusEnd { get; }
-    
+
     public CParticleCollectionFloatInput DedicatedPool { get; }
 
 

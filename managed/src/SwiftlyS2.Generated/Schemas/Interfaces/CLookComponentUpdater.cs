@@ -14,23 +14,23 @@ public partial interface CLookComponentUpdater : CAnimComponentUpdater, ISchemaC
     static int ISchemaClass<CLookComponentUpdater>.Size => 72;
     static string? ISchemaClass<CLookComponentUpdater>.ClassName => null;
 
-    
+
     public CAnimParamHandle LookHeading { get; }
-    
+
     public CAnimParamHandle LookHeadingNormalized { get; }
-    
+
     public CAnimParamHandle LookHeadingVelocity { get; }
-    
+
     public CAnimParamHandle LookPitch { get; }
-    
+
     public CAnimParamHandle LookDistance { get; }
-    
+
     public CAnimParamHandle LookDirection { get; }
-    
+
     public CAnimParamHandle LookTarget { get; }
-    
+
     public CAnimParamHandle LookTargetWorldSpace { get; }
-    
+
     public ref bool NetworkLookTarget { get; }
 
 

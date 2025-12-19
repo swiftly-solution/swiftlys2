@@ -14,17 +14,17 @@ public partial interface CPulse_OutputConnection : ISchemaClass<CPulse_OutputCon
     static int ISchemaClass<CPulse_OutputConnection>.Size => 64;
     static string? ISchemaClass<CPulse_OutputConnection>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField SourceOutput { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField TargetEntity { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField TargetInput { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField Param { get; }
 
 

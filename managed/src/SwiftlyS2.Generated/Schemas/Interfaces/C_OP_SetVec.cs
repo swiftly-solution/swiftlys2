@@ -14,15 +14,15 @@ public partial interface C_OP_SetVec : CParticleFunctionOperator, ISchemaClass<C
     static int ISchemaClass<C_OP_SetVec>.Size => 2568;
     static string? ISchemaClass<C_OP_SetVec>.ClassName => null;
 
-    
+
     public CPerParticleVecInput InputValue { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public CPerParticleFloatInput Lerp { get; }
-    
+
     public ref bool NormalizedOutput { get; }
 
 

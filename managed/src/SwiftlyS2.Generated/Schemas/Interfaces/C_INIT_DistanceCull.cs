@@ -14,11 +14,11 @@ public partial interface C_INIT_DistanceCull : CParticleFunctionInitializer, ISc
     static int ISchemaClass<C_INIT_DistanceCull>.Size => 856;
     static string? ISchemaClass<C_INIT_DistanceCull>.ClassName => null;
 
-    
+
     public ref int ControlPoint { get; }
-    
+
     public CParticleCollectionFloatInput Distance { get; }
-    
+
     public ref bool CullInside { get; }
 
 

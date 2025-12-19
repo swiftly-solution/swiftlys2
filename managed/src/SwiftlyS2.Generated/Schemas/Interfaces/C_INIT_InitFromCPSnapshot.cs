@@ -14,27 +14,27 @@ public partial interface C_INIT_InitFromCPSnapshot : CParticleFunctionInitialize
     static int ISchemaClass<C_INIT_InitFromCPSnapshot>.Size => 1248;
     static string? ISchemaClass<C_INIT_InitFromCPSnapshot>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public string StrSnapshotSubset { get; set; }
-    
+
     public ParticleAttributeIndex_t AttributeToRead { get; }
-    
+
     public ParticleAttributeIndex_t AttributeToWrite { get; }
-    
+
     public ref int LocalSpaceCP { get; }
-    
+
     public ref bool Random { get; }
-    
+
     public ref bool Reverse { get; }
-    
+
     public CParticleCollectionFloatInput SnapShotIncrement { get; }
-    
+
     public CPerParticleFloatInput ManualSnapshotIndex { get; }
-    
+
     public ref int RandomSeed { get; }
-    
+
     public ref bool LocalSpaceAngles { get; }
 
 

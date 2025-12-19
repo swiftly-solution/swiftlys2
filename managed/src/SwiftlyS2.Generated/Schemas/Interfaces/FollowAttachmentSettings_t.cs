@@ -14,15 +14,15 @@ public partial interface FollowAttachmentSettings_t : ISchemaClass<FollowAttachm
     static int ISchemaClass<FollowAttachmentSettings_t>.Size => 144;
     static string? ISchemaClass<FollowAttachmentSettings_t>.ClassName => null;
 
-    
+
     public CAnimAttachment Attachment { get; }
-    
+
     public ref int BoneIndex { get; }
-    
+
     public AttachmentHandle_t AttachmentHandle { get; }
-    
+
     public ref bool MatchTranslation { get; }
-    
+
     public ref bool MatchRotation { get; }
 
 

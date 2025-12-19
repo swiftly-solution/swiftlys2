@@ -14,7 +14,7 @@ public partial interface CNmRootMotionEvent : CNmEvent, ISchemaClass<CNmRootMoti
     static int ISchemaClass<CNmRootMotionEvent>.Size => 40;
     static string? ISchemaClass<CNmRootMotionEvent>.ClassName => null;
 
-    
+
     public ref float BlendTimeSeconds { get; }
 
 

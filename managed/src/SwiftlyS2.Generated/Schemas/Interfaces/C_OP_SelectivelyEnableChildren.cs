@@ -14,15 +14,15 @@ public partial interface C_OP_SelectivelyEnableChildren : CParticleFunctionPreEm
     static int ISchemaClass<C_OP_SelectivelyEnableChildren>.Size => 1584;
     static string? ISchemaClass<C_OP_SelectivelyEnableChildren>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput ChildGroupID { get; }
-    
+
     public CParticleCollectionFloatInput FirstChild { get; }
-    
+
     public CParticleCollectionFloatInput NumChildrenToEnable { get; }
-    
+
     public ref bool PlayEndcapOnStop { get; }
-    
+
     public ref bool DestroyImmediately { get; }
 
 

@@ -14,25 +14,25 @@ public partial interface CTargetSelectorUpdateNode : CAnimUpdateNodeBase, ISchem
     static int ISchemaClass<CTargetSelectorUpdateNode>.Size => 160;
     static string? ISchemaClass<CTargetSelectorUpdateNode>.ClassName => null;
 
-    
+
     public ref TargetSelectorAngleMode_t AngleMode { get; }
-    
+
     public ref CUtlVector<CAnimUpdateNodeRef> Children { get; }
-    
+
     public CAnimParamHandle TargetPosition { get; }
-    
+
     public CAnimParamHandle TargetFacePositionParameter { get; }
-    
+
     public CAnimParamHandle MoveHeadingParameter { get; }
-    
+
     public CAnimParamHandle DesiredMoveHeadingParameter { get; }
-    
+
     public ref bool TargetPositionIsWorldSpace { get; }
-    
+
     public ref bool TargetFacePositionIsWorldSpace { get; }
-    
+
     public ref bool EnablePhaseMatching { get; }
-    
+
     public ref float PhaseMatchingMaxRootMotionSkip { get; }
 
 

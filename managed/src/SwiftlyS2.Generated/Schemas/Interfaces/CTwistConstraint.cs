@@ -14,11 +14,11 @@ public partial interface CTwistConstraint : CBaseConstraint, ISchemaClass<CTwist
     static int ISchemaClass<CTwistConstraint>.Size => 144;
     static string? ISchemaClass<CTwistConstraint>.ClassName => null;
 
-    
+
     public ref bool Inverse { get; }
-    
+
     public ref Quaternion ParentBindRotation { get; }
-    
+
     public ref Quaternion ChildBindRotation { get; }
 
 

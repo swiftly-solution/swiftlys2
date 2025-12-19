@@ -14,17 +14,17 @@ public partial interface C_OP_SetCPOrientationToPointAtCP : CParticleFunctionPre
     static int ISchemaClass<C_OP_SetCPOrientationToPointAtCP>.Size => 856;
     static string? ISchemaClass<C_OP_SetCPOrientationToPointAtCP>.ClassName => null;
 
-    
+
     public ref int InputCP { get; }
-    
+
     public ref int OutputCP { get; }
-    
+
     public CParticleCollectionFloatInput Interpolation { get; }
-    
+
     public ref bool B2DOrientation { get; }
-    
+
     public ref bool AvoidSingularity { get; }
-    
+
     public ref bool PointAway { get; }
 
 

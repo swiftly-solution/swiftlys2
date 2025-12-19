@@ -14,15 +14,15 @@ public partial interface CSoundOpvarSetAutoRoomEntity : CSoundOpvarSetPointEntit
     static int ISchemaClass<CSoundOpvarSetAutoRoomEntity>.Size => 1768;
     static string? ISchemaClass<CSoundOpvarSetAutoRoomEntity>.ClassName => "snd_opvar_set_auto_room";
 
-    
+
     public ref CUtlVector<SoundOpvarTraceResult_t> TraceResults { get; }
-    
+
     public ref CUtlVector<AutoRoomDoorwayPairs_t> DoorwayPairs { get; }
-    
+
     public ref float Size { get; }
-    
+
     public ref float HeightTolerance { get; }
-    
+
     public ref float SizeSqr { get; }
 
 

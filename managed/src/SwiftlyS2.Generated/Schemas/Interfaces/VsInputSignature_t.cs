@@ -14,9 +14,9 @@ public partial interface VsInputSignature_t : ISchemaClass<VsInputSignature_t>
     static int ISchemaClass<VsInputSignature_t>.Size => 48;
     static string? ISchemaClass<VsInputSignature_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<VsInputSignatureElement_t> Elems { get; }
-    
+
     public ref CUtlVector<VsInputSignatureElement_t> Depth_elems { get; }
 
 

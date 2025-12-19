@@ -14,7 +14,7 @@ public partial interface CNmIsTargetSetNode__CDefinition : CNmBoolValueNode__CDe
     static int ISchemaClass<CNmIsTargetSetNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmIsTargetSetNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
 
 

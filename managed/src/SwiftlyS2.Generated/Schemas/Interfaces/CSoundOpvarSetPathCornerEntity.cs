@@ -14,11 +14,11 @@ public partial interface CSoundOpvarSetPathCornerEntity : CSoundOpvarSetPointEnt
     static int ISchemaClass<CSoundOpvarSetPathCornerEntity>.Size => 1744;
     static string? ISchemaClass<CSoundOpvarSetPathCornerEntity>.ClassName => "snd_opvar_set_path_corner";
 
-    
+
     public ref float DistMinSqr { get; }
-    
+
     public ref float DistMaxSqr { get; }
-    
+
     public string PathCornerEntityName { get; set; }
 
 

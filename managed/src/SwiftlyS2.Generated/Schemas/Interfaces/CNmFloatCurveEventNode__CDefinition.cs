@@ -14,13 +14,13 @@ public partial interface CNmFloatCurveEventNode__CDefinition : CNmFloatValueNode
     static int ISchemaClass<CNmFloatCurveEventNode__CDefinition>.Size => 40;
     static string? ISchemaClass<CNmFloatCurveEventNode__CDefinition>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol EventID { get; }
-    
+
     public ref short DefaultNodeIdx { get; }
-    
+
     public ref float DefaultValue { get; }
-    
+
     public CNmBitFlags EventConditionRules { get; }
 
 

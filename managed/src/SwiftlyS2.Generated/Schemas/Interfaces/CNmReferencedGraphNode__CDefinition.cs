@@ -14,9 +14,9 @@ public partial interface CNmReferencedGraphNode__CDefinition : CNmPoseNode__CDef
     static int ISchemaClass<CNmReferencedGraphNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmReferencedGraphNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short ReferencedGraphIdx { get; }
-    
+
     public ref short FallbackNodeIdx { get; }
 
 

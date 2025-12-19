@@ -14,11 +14,11 @@ public partial interface CPulseCell_TestWaitWithCursorState : CPulseCell_BaseYie
     static int ISchemaClass<CPulseCell_TestWaitWithCursorState>.Size => 288;
     static string? ISchemaClass<CPulseCell_TestWaitWithCursorState>.ClassName => null;
 
-    
+
     public CPulse_ResumePoint WakeResume { get; }
-    
+
     public CPulse_ResumePoint WakeCancel { get; }
-    
+
     public CPulse_ResumePoint WakeFail { get; }
 
 

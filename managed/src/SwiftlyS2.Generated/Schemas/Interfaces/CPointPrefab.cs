@@ -14,17 +14,17 @@ public partial interface CPointPrefab : CServerOnlyPointEntity, ISchemaClass<CPo
     static int ISchemaClass<CPointPrefab>.Size => 1368;
     static string? ISchemaClass<CPointPrefab>.ClassName => "point_prefab";
 
-    
+
     public string TargetMapName { get; set; }
-    
+
     public string ForceWorldGroupID { get; set; }
-    
+
     public string AssociatedRelayTargetName { get; set; }
-    
+
     public ref bool FixupNames { get; }
-    
+
     public ref bool LoadDynamic { get; }
-    
+
     public ref CHandle<CPointPrefab> AssociatedRelayEntity { get; }
 
 

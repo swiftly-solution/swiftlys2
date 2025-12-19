@@ -14,13 +14,13 @@ public partial interface C_OP_RemapControlPointOrientationToRotation : CParticle
     static int ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.Size => 480;
     static string? ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.ClassName => null;
 
-    
+
     public ref int CP { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float OffsetRot { get; }
-    
+
     public ref int Component { get; }
 
 

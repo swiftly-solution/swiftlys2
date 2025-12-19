@@ -14,31 +14,31 @@ public partial interface C_OP_RemapCPtoVector : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_RemapCPtoVector>.Size => 544;
     static string? ISchemaClass<C_OP_RemapCPtoVector>.ClassName => null;
 
-    
+
     public ref int CPInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref int LocalSpaceCP { get; }
-    
+
     public ref Vector InputMin { get; }
-    
+
     public ref Vector InputMax { get; }
-    
+
     public ref Vector OutputMin { get; }
-    
+
     public ref Vector OutputMax { get; }
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float EndTime { get; }
-    
+
     public ref float InterpRate { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool Offset { get; }
-    
+
     public ref bool Accelerate { get; }
 
 

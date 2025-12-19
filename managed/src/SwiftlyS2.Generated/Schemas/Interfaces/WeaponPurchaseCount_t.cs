@@ -14,9 +14,9 @@ public partial interface WeaponPurchaseCount_t : ISchemaClass<WeaponPurchaseCoun
     static int ISchemaClass<WeaponPurchaseCount_t>.Size => 56;
     static string? ISchemaClass<WeaponPurchaseCount_t>.ClassName => null;
 
-    
+
     public ref ushort ItemDefIndex { get; }
-    
+
     public ref ushort Count { get; }
 
     public void ItemDefIndexUpdated();

@@ -14,9 +14,9 @@ public partial interface CPulseCell_IntervalTimer : CPulseCell_BaseYieldingInflo
     static int ISchemaClass<CPulseCell_IntervalTimer>.Size => 216;
     static string? ISchemaClass<CPulseCell_IntervalTimer>.ClassName => null;
 
-    
+
     public CPulse_ResumePoint Completed { get; }
-    
+
     public SignatureOutflow_Continue OnInterval { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface SolveIKChainPoseOpFixedSettings_t : ISchemaClass<SolveI
     static int ISchemaClass<SolveIKChainPoseOpFixedSettings_t>.Size => 24;
     static string? ISchemaClass<SolveIKChainPoseOpFixedSettings_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<ChainToSolveData_t> ChainsToSolveData { get; }
 
 

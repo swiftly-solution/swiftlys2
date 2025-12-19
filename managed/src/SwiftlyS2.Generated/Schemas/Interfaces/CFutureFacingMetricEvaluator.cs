@@ -14,9 +14,9 @@ public partial interface CFutureFacingMetricEvaluator : CMotionMetricEvaluator, 
     static int ISchemaClass<CFutureFacingMetricEvaluator>.Size => 88;
     static string? ISchemaClass<CFutureFacingMetricEvaluator>.ClassName => null;
 
-    
+
     public ref float Distance { get; }
-    
+
     public ref float Time { get; }
 
 

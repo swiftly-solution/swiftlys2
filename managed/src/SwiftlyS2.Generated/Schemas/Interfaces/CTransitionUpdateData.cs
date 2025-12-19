@@ -14,15 +14,15 @@ public partial interface CTransitionUpdateData : ISchemaClass<CTransitionUpdateD
     static int ISchemaClass<CTransitionUpdateData>.Size => 3;
     static string? ISchemaClass<CTransitionUpdateData>.ClassName => null;
 
-    
+
     public ref byte SrcStateIndex { get; }
-    
+
     public ref byte DestStateIndex { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField HandshakeMaskToDisableFirst { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField Disabled { get; }
 
 

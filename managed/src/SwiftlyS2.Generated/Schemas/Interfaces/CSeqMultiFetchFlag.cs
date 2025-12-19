@@ -14,17 +14,17 @@ public partial interface CSeqMultiFetchFlag : ISchemaClass<CSeqMultiFetchFlag>
     static int ISchemaClass<CSeqMultiFetchFlag>.Size => 6;
     static string? ISchemaClass<CSeqMultiFetchFlag>.ClassName => null;
 
-    
+
     public ref bool Realtime { get; }
-    
+
     public ref bool Cylepose { get; }
-    
+
     public ref bool B0D { get; }
-    
+
     public ref bool B1D { get; }
-    
+
     public ref bool B2D { get; }
-    
+
     public ref bool B2D_TRI { get; }
 
 

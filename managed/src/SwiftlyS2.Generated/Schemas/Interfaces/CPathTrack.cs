@@ -14,23 +14,23 @@ public partial interface CPathTrack : CPointEntity, ISchemaClass<CPathTrack>
     static int ISchemaClass<CPathTrack>.Size => 1352;
     static string? ISchemaClass<CPathTrack>.ClassName => "path_track";
 
-    
+
     public CPathTrack? Pnext { get; }
-    
+
     public CPathTrack? Pprevious { get; }
-    
+
     public CPathTrack? Paltpath { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref float Length { get; }
-    
+
     public string AltName { get; set; }
-    
+
     public ref int IterVal { get; }
-    
+
     public ref TrackOrientationType_t OrientationType { get; }
-    
+
     public CEntityIOOutput OnPass { get; }
 
 

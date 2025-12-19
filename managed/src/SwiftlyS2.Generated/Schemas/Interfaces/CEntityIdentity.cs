@@ -14,27 +14,27 @@ public partial interface CEntityIdentity : ISchemaClass<CEntityIdentity>
     static int ISchemaClass<CEntityIdentity>.Size => 112;
     static string? ISchemaClass<CEntityIdentity>.ClassName => null;
 
-    
+
     public ref int NameStringableIndex { get; }
-    
+
     public string Name { get; set; }
-    
+
     public string DesignerName { get; set; }
-    
+
     public ref uint Flags { get; }
-    
+
     public ref uint WorldGroupId { get; }
-    
+
     public ref uint DataObjectTypes { get; }
-    
+
     public ref ChangeAccessorFieldPathIndex_t PathIndex { get; }
-    
+
     public CEntityIdentity? Prev { get; }
-    
+
     public CEntityIdentity? Next { get; }
-    
+
     public CEntityIdentity? PrevByClass { get; }
-    
+
     public CEntityIdentity? NextByClass { get; }
 
     public void NameStringableIndexUpdated();

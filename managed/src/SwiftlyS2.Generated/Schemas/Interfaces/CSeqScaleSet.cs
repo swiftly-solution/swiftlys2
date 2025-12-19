@@ -14,15 +14,15 @@ public partial interface CSeqScaleSet : ISchemaClass<CSeqScaleSet>
     static int ISchemaClass<CSeqScaleSet>.Size => 80;
     static string? ISchemaClass<CSeqScaleSet>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref bool RootOffset { get; }
-    
+
     public ref Vector RootOffset1 { get; }
-    
+
     public ref CUtlVector<short> LocalBoneArray { get; }
-    
+
     public ref CUtlVector<float> BoneScaleArray { get; }
 
 

@@ -14,23 +14,23 @@ public partial interface CFootDefinition : ISchemaClass<CFootDefinition>
     static int ISchemaClass<CFootDefinition>.Size => 64;
     static string? ISchemaClass<CFootDefinition>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public string AnkleBoneName { get; set; }
-    
+
     public string ToeBoneName { get; set; }
-    
+
     public ref Vector BallOffset { get; }
-    
+
     public ref Vector HeelOffset { get; }
-    
+
     public ref float FootLength { get; }
-    
+
     public ref float BindPoseDirectionMS { get; }
-    
+
     public ref float TraceHeight { get; }
-    
+
     public ref float TraceRadius { get; }
 
 

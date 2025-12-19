@@ -14,7 +14,7 @@ public partial interface CPulseCell_Inflow_Yield : CPulseCell_BaseYieldingInflow
     static int ISchemaClass<CPulseCell_Inflow_Yield>.Size => 144;
     static string? ISchemaClass<CPulseCell_Inflow_Yield>.ClassName => null;
 
-    
+
     public CPulse_ResumePoint UnyieldResume { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_OP_RemapCrossProductOfTwoVectorsToVector : CParticleF
     static int ISchemaClass<C_OP_RemapCrossProductOfTwoVectorsToVector>.Size => 3912;
     static string? ISchemaClass<C_OP_RemapCrossProductOfTwoVectorsToVector>.ClassName => null;
 
-    
+
     public CPerParticleVecInput InputVec1 { get; }
-    
+
     public CPerParticleVecInput InputVec2 { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref bool Normalize { get; }
 
 

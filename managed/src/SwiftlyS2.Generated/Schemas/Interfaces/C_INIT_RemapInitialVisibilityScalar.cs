@@ -14,15 +14,15 @@ public partial interface C_INIT_RemapInitialVisibilityScalar : CParticleFunction
     static int ISchemaClass<C_INIT_RemapInitialVisibilityScalar>.Size => 496;
     static string? ISchemaClass<C_INIT_RemapInitialVisibilityScalar>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
 
 

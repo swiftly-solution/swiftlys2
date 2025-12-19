@@ -14,23 +14,23 @@ public partial interface CGameScriptedMoveDef_t : ISchemaClass<CGameScriptedMove
     static int ISchemaClass<CGameScriptedMoveDef_t>.Size => 48;
     static string? ISchemaClass<CGameScriptedMoveDef_t>.ClassName => null;
 
-    
+
     public ref Vector DestOffset { get; }
-    
+
     public ref CHandle<CBaseEntity> DestEntity { get; }
-    
+
     public ref QAngle Dest { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public ref float AngRate { get; }
-    
+
     public ref float MoveSpeed { get; }
-    
+
     public ref bool AimDisabled { get; }
-    
+
     public ref bool IgnoreRotation { get; }
-    
+
     public ref ForcedCrouchState_t ForcedCrouchState { get; }
 
 

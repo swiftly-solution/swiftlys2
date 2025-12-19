@@ -14,27 +14,27 @@ public partial interface CC4 : CCSWeaponBase, ISchemaClass<CC4>
     static int ISchemaClass<CC4>.Size => 4688;
     static string? ISchemaClass<CC4>.ClassName => "weapon_c4";
 
-    
+
     public ref Vector LastValidPlayerHeldPosition { get; }
-    
+
     public ref Vector LastValidDroppedPosition { get; }
-    
+
     public ref bool DoValidDroppedPositionCheck { get; }
-    
+
     public ref bool StartedArming { get; }
-    
+
     public GameTime_t ArmedTime { get; }
-    
+
     public ref bool BombPlacedAnimation { get; }
-    
+
     public ref bool IsPlantingViaUse { get; }
-    
+
     public EntitySpottedState_t EntitySpottedState { get; }
-    
+
     public ref int SpotRules { get; }
-    
+
     public ISchemaFixedArray<bool> PlayedArmingBeeps { get; }
-    
+
     public ref bool BombPlanted { get; }
 
     public void StartedArmingUpdated();

@@ -14,19 +14,19 @@ public partial interface CNmSoundEvent : CNmEvent, ISchemaClass<CNmSoundEvent>
     static int ISchemaClass<CNmSoundEvent>.Size => 80;
     static string? ISchemaClass<CNmSoundEvent>.ClassName => null;
 
-    
+
     public ref CNmEventRelevance_t Relevance { get; }
-    
+
     public string Name { get; set; }
-    
+
     public ref CNmSoundEvent__Position_t Position { get; }
-    
+
     public string AttachmentName { get; set; }
-    
+
     public string Tags { get; set; }
-    
+
     public ref bool ContinuePlayingSoundAtDurationEnd { get; }
-    
+
     public ref float DurationInterruptionThreshold { get; }
 
 

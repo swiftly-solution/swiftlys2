@@ -14,7 +14,7 @@ public partial interface CPulseCell_Step_PublicOutput : CPulseCell_BaseFlow, ISc
     static int ISchemaClass<CPulseCell_Step_PublicOutput>.Size => 80;
     static string? ISchemaClass<CPulseCell_Step_PublicOutput>.ClassName => null;
 
-    
+
     public PulseRuntimeOutputIndex_t OutputIndex { get; }
 
 

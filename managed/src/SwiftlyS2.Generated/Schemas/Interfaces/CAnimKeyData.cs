@@ -14,17 +14,17 @@ public partial interface CAnimKeyData : ISchemaClass<CAnimKeyData>
     static int ISchemaClass<CAnimKeyData>.Size => 120;
     static string? ISchemaClass<CAnimKeyData>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref CUtlVector<CAnimBone> BoneArray { get; }
-    
+
     public ref CUtlVector<CAnimUser> UserArray { get; }
-    
+
     public ref CUtlVector<CBufferString> MorphArray { get; }
-    
+
     public ref int ChannelElements { get; }
-    
+
     public ref CUtlVector<CAnimDataChannelDesc> DataChannelArray { get; }
 
 

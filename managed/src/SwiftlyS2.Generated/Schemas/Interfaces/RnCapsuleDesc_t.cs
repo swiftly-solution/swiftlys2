@@ -14,7 +14,7 @@ public partial interface RnCapsuleDesc_t : RnShapeDesc_t, ISchemaClass<RnCapsule
     static int ISchemaClass<RnCapsuleDesc_t>.Size => 56;
     static string? ISchemaClass<RnCapsuleDesc_t>.ClassName => null;
 
-    
+
     public RnCapsule_t Capsule { get; }
 
 

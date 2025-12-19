@@ -14,13 +14,13 @@ public partial interface CPropDoorRotatingBreakable : CPropDoorRotating, ISchema
     static int ISchemaClass<CPropDoorRotatingBreakable>.Size => 4272;
     static string? ISchemaClass<CPropDoorRotatingBreakable>.ClassName => "prop_door_rotating";
 
-    
+
     public ref bool Breakable { get; }
-    
+
     public ref bool IsAbleToCloseAreaPortals { get; }
-    
+
     public ref int CurrentDamageState { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> DamageStates { get; }
 
 

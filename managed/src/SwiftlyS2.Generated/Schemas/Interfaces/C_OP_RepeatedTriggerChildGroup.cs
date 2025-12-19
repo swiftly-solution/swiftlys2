@@ -14,15 +14,15 @@ public partial interface C_OP_RepeatedTriggerChildGroup : CParticleFunctionPreEm
     static int ISchemaClass<C_OP_RepeatedTriggerChildGroup>.Size => 1592;
     static string? ISchemaClass<C_OP_RepeatedTriggerChildGroup>.ClassName => null;
 
-    
+
     public ref int ChildGroupID { get; }
-    
+
     public CParticleCollectionFloatInput ClusterRefireTime { get; }
-    
+
     public CParticleCollectionFloatInput ClusterSize { get; }
-    
+
     public CParticleCollectionFloatInput ClusterCooldown { get; }
-    
+
     public ref bool LimitChildCount { get; }
 
 

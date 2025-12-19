@@ -14,17 +14,17 @@ public partial interface CRemapValueUpdateItem : ISchemaClass<CRemapValueUpdateI
     static int ISchemaClass<CRemapValueUpdateItem>.Size => 20;
     static string? ISchemaClass<CRemapValueUpdateItem>.ClassName => null;
 
-    
+
     public CAnimParamHandle ParamIn { get; }
-    
+
     public CAnimParamHandle ParamOut { get; }
-    
+
     public ref float MinInputValue { get; }
-    
+
     public ref float MaxInputValue { get; }
-    
+
     public ref float MinOutputValue { get; }
-    
+
     public ref float MaxOutputValue { get; }
 
 

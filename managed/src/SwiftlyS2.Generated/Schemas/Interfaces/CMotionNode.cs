@@ -14,9 +14,9 @@ public partial interface CMotionNode : ISchemaClass<CMotionNode>
     static int ISchemaClass<CMotionNode>.Size => 40;
     static string? ISchemaClass<CMotionNode>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public AnimNodeID Id { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_OP_Orient2DRelToCP : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_Orient2DRelToCP>.Size => 480;
     static string? ISchemaClass<C_OP_Orient2DRelToCP>.ClassName => null;
 
-    
+
     public ref float RotOffset { get; }
-    
+
     public ref float SpinStrength { get; }
-    
+
     public ref int CP { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
 
 

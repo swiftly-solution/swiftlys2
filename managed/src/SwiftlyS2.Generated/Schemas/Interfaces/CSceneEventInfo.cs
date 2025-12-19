@@ -14,31 +14,31 @@ public partial interface CSceneEventInfo : ISchemaClass<CSceneEventInfo>
     static int ISchemaClass<CSceneEventInfo>.Size => 80;
     static string? ISchemaClass<CSceneEventInfo>.ClassName => null;
 
-    
+
     public ref int Layer { get; }
-    
+
     public ref int Priority { get; }
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref float Weight { get; }
-    
+
     public ref bool HasArrived { get; }
-    
+
     public ref int Type { get; }
-    
+
     public GameTime_t Next { get; }
-    
+
     public ref bool IsGesture { get; }
-    
+
     public ref bool ShouldRemove { get; }
-    
+
     public ref CHandle<CBaseEntity> Target { get; }
-    
+
     public SceneEventId_t SceneEventId { get; }
-    
+
     public ref bool ClientSide { get; }
-    
+
     public ref bool Started { get; }
 
 

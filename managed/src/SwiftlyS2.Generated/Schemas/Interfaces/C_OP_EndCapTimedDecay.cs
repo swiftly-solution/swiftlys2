@@ -14,7 +14,7 @@ public partial interface C_OP_EndCapTimedDecay : CParticleFunctionOperator, ISch
     static int ISchemaClass<C_OP_EndCapTimedDecay>.Size => 472;
     static string? ISchemaClass<C_OP_EndCapTimedDecay>.ClassName => null;
 
-    
+
     public ref float DecayTime { get; }
 
 

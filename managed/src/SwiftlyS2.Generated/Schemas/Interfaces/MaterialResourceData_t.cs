@@ -14,33 +14,33 @@ public partial interface MaterialResourceData_t : ISchemaClass<MaterialResourceD
     static int ISchemaClass<MaterialResourceData_t>.Size => 304;
     static string? ISchemaClass<MaterialResourceData_t>.ClassName => null;
 
-    
+
     public string MaterialName { get; set; }
-    
+
     public string ShaderName { get; set; }
-    
+
     public ref CUtlVector<MaterialParamInt_t> IntParams { get; }
-    
+
     public ref CUtlVector<MaterialParamFloat_t> FloatParams { get; }
-    
+
     public ref CUtlVector<MaterialParamVector_t> VectorParams { get; }
-    
+
     public ref CUtlVector<MaterialParamTexture_t> TextureParams { get; }
-    
+
     public ref CUtlVector<MaterialParamBuffer_t> DynamicParams { get; }
-    
+
     public ref CUtlVector<MaterialParamBuffer_t> DynamicTextureParams { get; }
-    
+
     public ref CUtlVector<MaterialParamInt_t> IntAttributes { get; }
-    
+
     public ref CUtlVector<MaterialParamFloat_t> FloatAttributes { get; }
-    
+
     public ref CUtlVector<MaterialParamVector_t> VectorAttributes { get; }
-    
+
     public ref CUtlVector<MaterialParamTexture_t> TextureAttributes { get; }
-    
+
     public ref CUtlVector<MaterialParamString_t> StringAttributes { get; }
-    
+
     public ref CUtlVector<CUtlString> RenderAttributesUsed { get; }
 
 

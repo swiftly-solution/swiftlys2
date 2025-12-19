@@ -14,13 +14,13 @@ public partial interface C_INIT_RandomVectorComponent : CParticleFunctionInitial
     static int ISchemaClass<C_INIT_RandomVectorComponent>.Size => 488;
     static string? ISchemaClass<C_INIT_RandomVectorComponent>.ClassName => null;
 
-    
+
     public ref float Min { get; }
-    
+
     public ref float Max { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref int Component { get; }
 
 

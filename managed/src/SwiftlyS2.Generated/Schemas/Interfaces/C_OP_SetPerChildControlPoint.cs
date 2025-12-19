@@ -14,21 +14,21 @@ public partial interface C_OP_SetPerChildControlPoint : CParticleFunctionOperato
     static int ISchemaClass<C_OP_SetPerChildControlPoint>.Size => 1232;
     static string? ISchemaClass<C_OP_SetPerChildControlPoint>.ClassName => null;
 
-    
+
     public ref int ChildGroupID { get; }
-    
+
     public ref int FirstControlPoint { get; }
-    
+
     public ref int NumControlPoints { get; }
-    
+
     public CParticleCollectionFloatInput ParticleIncrement { get; }
-    
+
     public CParticleCollectionFloatInput FirstSourcePoint { get; }
-    
+
     public ref bool SetOrientation { get; }
-    
+
     public ParticleAttributeIndex_t OrientationField { get; }
-    
+
     public ref bool NumBasedOnParticleCount { get; }
 
 

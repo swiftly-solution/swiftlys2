@@ -14,34 +14,34 @@ public partial interface CSoundEventEntity : CBaseEntity, ISchemaClass<CSoundEve
     static int ISchemaClass<CSoundEventEntity>.Size => 1464;
     static string? ISchemaClass<CSoundEventEntity>.ClassName => "snd_event_point";
 
-    
+
     public ref bool StartOnSpawn { get; }
-    
+
     public ref bool ToLocalPlayer { get; }
-    
+
     public ref bool StopOnNew { get; }
-    
+
     public ref bool SaveRestore { get; }
-    
+
     public ref bool SavedIsPlaying { get; }
-    
+
     public ref float SavedElapsedTime { get; }
-    
+
     public string SourceEntityName { get; set; }
-    
+
     public string AttachmentName { get; set; }
-    
-  // CEntityOutputTemplate< uint64 >
+
+    // CEntityOutputTemplate< uint64 >
     public SchemaUntypedField OnGUIDChanged { get; }
-    
+
     public CEntityIOOutput OnSoundFinished { get; }
-    
+
     public ref float ClientCullRadius { get; }
-    
+
     public string SoundName { get; set; }
-    
+
     public ref CHandle<CEntityInstance> Source { get; }
-    
+
     public ref int EntityIndexSelection { get; }
 
 

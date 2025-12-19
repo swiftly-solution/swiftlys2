@@ -14,9 +14,9 @@ public partial interface C_OP_CollideWithSelf : CParticleFunctionConstraint, ISc
     static int ISchemaClass<C_OP_CollideWithSelf>.Size => 1200;
     static string? ISchemaClass<C_OP_CollideWithSelf>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput RadiusScale { get; }
-    
+
     public CPerParticleFloatInput MinimumSpeed { get; }
 
 

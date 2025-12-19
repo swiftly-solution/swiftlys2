@@ -14,9 +14,9 @@ public partial interface CSoundEventOBBEntity : CSoundEventEntity, ISchemaClass<
     static int ISchemaClass<CSoundEventOBBEntity>.Size => 1504;
     static string? ISchemaClass<CSoundEventOBBEntity>.ClassName => "snd_event_orientedbox";
 
-    
+
     public ref Vector Mins { get; }
-    
+
     public ref Vector Maxs { get; }
 
     public void MinsUpdated();

@@ -14,17 +14,17 @@ public partial interface C_OP_LockPoints : CParticleFunctionOperator, ISchemaCla
     static int ISchemaClass<C_OP_LockPoints>.Size => 488;
     static string? ISchemaClass<C_OP_LockPoints>.ClassName => null;
 
-    
+
     public ref int MinCol { get; }
-    
+
     public ref int MaxCol { get; }
-    
+
     public ref int MinRow { get; }
-    
+
     public ref int MaxRow { get; }
-    
+
     public ref int ControlPoint { get; }
-    
+
     public ref float BlendValue { get; }
 
 

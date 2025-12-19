@@ -14,24 +14,24 @@ public partial interface TextureGroup_t : ISchemaClass<TextureGroup_t>
     static int ISchemaClass<TextureGroup_t>.Size => 3032;
     static string? ISchemaClass<TextureGroup_t>.ClassName => null;
 
-    
+
     public ref bool Enabled { get; }
-    
+
     public ref bool ReplaceTextureWithGradient { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture { get; }
-    
-  // CColorGradient
+
+    // CColorGradient
     public SchemaUntypedField Gradient { get; }
-    
+
     public ref SpriteCardTextureType_t TextureType { get; }
-    
+
     public ref SpriteCardTextureChannel_t TextureChannels { get; }
-    
+
     public ref ParticleTextureLayerBlendType_t TextureBlendMode { get; }
-    
+
     public CParticleCollectionRendererFloatInput TextureBlend { get; }
-    
+
     public TextureControls_t TextureControls { get; }
 
 

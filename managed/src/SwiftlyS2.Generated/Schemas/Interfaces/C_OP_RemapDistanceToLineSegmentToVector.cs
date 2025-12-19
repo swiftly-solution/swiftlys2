@@ -14,11 +14,11 @@ public partial interface C_OP_RemapDistanceToLineSegmentToVector : C_OP_RemapDis
     static int ISchemaClass<C_OP_RemapDistanceToLineSegmentToVector>.Size => 520;
     static string? ISchemaClass<C_OP_RemapDistanceToLineSegmentToVector>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref Vector MinOutputValue { get; }
-    
+
     public ref Vector MaxOutputValue { get; }
 
 

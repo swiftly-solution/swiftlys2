@@ -14,105 +14,105 @@ public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeap
     static int ISchemaClass<CCSWeaponBase>.Size => 4560;
     static string? ISchemaClass<CCSWeaponBase>.ClassName => "weapon_cs_base";
 
-    
+
     public ref bool Removeable { get; }
-    
+
     public ref bool PlayerAmmoStockOnPickup { get; }
-    
+
     public ref bool RequireUseToTouch { get; }
-    
+
     public ref WeaponGameplayAnimState WeaponGameplayAnimState { get; }
-    
+
     public GameTime_t WeaponGameplayAnimStateTimestamp { get; }
-    
+
     public GameTime_t InspectCancelCompleteTime { get; }
-    
+
     public ref bool InspectPending { get; }
-    
+
     public ref bool InspectShouldLoop { get; }
-    
+
     public ref int LastEmptySoundCmdNum { get; }
-    
+
     public ref bool FireOnEmpty { get; }
-    
+
     public CEntityIOOutput OnPlayerPickup { get; }
-    
+
     public ref CSWeaponMode WeaponMode { get; }
-    
+
     public ref float TurningInaccuracyDelta { get; }
-    
+
     public ref Vector TurningInaccuracyEyeDirLast { get; }
-    
+
     public ref float TurningInaccuracy { get; }
-    
+
     public ref float AccuracyPenalty { get; }
-    
+
     public GameTime_t LastAccuracyUpdateTime { get; }
-    
+
     public ref float AccuracySmoothedForZoom { get; }
-    
+
     public ref int RecoilIndex { get; }
-    
+
     public ref float RecoilIndex1 { get; }
-    
+
     public ref bool BurstMode { get; }
-    
+
     public GameTick_t PostponeFireReadyTicks { get; }
-    
+
     public ref float PostponeFireReadyFrac { get; }
-    
+
     public ref bool InReload { get; }
-    
+
     public GameTime_t DroppedAtTime { get; }
-    
+
     public ref bool IsHauledBack { get; }
-    
+
     public ref bool SilencerOn { get; }
-    
+
     public GameTime_t TimeSilencerSwitchComplete { get; }
-    
+
     public ref int OriginalTeamNumber { get; }
-    
+
     public ref int MostRecentTeamNumber { get; }
-    
+
     public ref bool DroppedNearBuyZone { get; }
-    
+
     public ref float NextAttackRenderTimeOffset { get; }
-    
+
     public ref bool CanBePickedUp { get; }
-    
+
     public ref bool UseCanOverrideNextOwnerTouchTime { get; }
-    
+
     public GameTime_t NextOwnerTouchTime { get; }
-    
+
     public GameTime_t NextPrevOwnerTouchTime { get; }
-    
+
     public GameTime_t NextPrevOwnerUseTime { get; }
-    
+
     public ref CHandle<CCSPlayerPawn> PrevOwner { get; }
-    
+
     public GameTick_t DropTick { get; }
-    
+
     public ref bool WasActiveWeaponWhenDropped { get; }
-    
+
     public ref bool Donated { get; }
-    
+
     public GameTime_t LastShotTime { get; }
-    
+
     public ref bool WasOwnedByCT { get; }
-    
+
     public ref bool WasOwnedByTerrorist { get; }
-    
+
     public ref int NumRemoveUnownedWeaponThink { get; }
-    
+
     public CIronSightController IronSightController { get; }
-    
+
     public ref int IronSightMode { get; }
-    
+
     public GameTime_t LastLOSTraceFailureTime { get; }
-    
+
     public ref float WatTickOffset { get; }
-    
+
     public GameTime_t LastShakeTime { get; }
 
     public void WeaponGameplayAnimStateUpdated();

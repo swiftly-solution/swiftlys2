@@ -14,34 +14,34 @@ public partial interface CSequenceGroupData : ISchemaClass<CSequenceGroupData>
     static int ISchemaClass<CSequenceGroupData>.Size => 312;
     static string? ISchemaClass<CSequenceGroupData>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref uint Flags { get; }
-    
+
     public ref CUtlVector<CBufferString> LocalSequenceNameArray { get; }
-    
+
     public ref CUtlVector<CSeqS1SeqDesc> LocalS1SeqDescArray { get; }
-    
+
     public ref CUtlVector<CSeqS1SeqDesc> LocalMultiSeqDescArray { get; }
-    
+
     public ref CUtlVector<CSeqSynthAnimDesc> LocalSynthAnimDescArray { get; }
-    
+
     public ref CUtlVector<CSeqCmdSeqDesc> LocalCmdSeqDescArray { get; }
-    
+
     public ref CUtlVector<CSeqBoneMaskList> LocalBoneMaskArray { get; }
-    
+
     public ref CUtlVector<CSeqScaleSet> LocalScaleSetArray { get; }
-    
+
     public ref CUtlVector<CBufferString> LocalBoneNameArray { get; }
-    
+
     public ref CBufferString LocalNodeName { get; }
-    
+
     public ref CUtlVector<CSeqPoseParamDesc> LocalPoseParamArray { get; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField KeyValues { get; }
-    
+
     public ref CUtlVector<CSeqIKLock> LocalIKAutoplayLockArray { get; }
 
 

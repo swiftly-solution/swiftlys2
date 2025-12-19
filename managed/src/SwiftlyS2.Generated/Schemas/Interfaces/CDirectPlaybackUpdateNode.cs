@@ -14,11 +14,11 @@ public partial interface CDirectPlaybackUpdateNode : CUnaryUpdateNode, ISchemaCl
     static int ISchemaClass<CDirectPlaybackUpdateNode>.Size => 144;
     static string? ISchemaClass<CDirectPlaybackUpdateNode>.ClassName => null;
 
-    
+
     public ref bool FinishEarly { get; }
-    
+
     public ref bool ResetOnFinish { get; }
-    
+
     public ref CUtlVector<CDirectPlaybackTagData> AllTags { get; }
 
 

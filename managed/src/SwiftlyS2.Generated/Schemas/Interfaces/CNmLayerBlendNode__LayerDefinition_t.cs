@@ -14,21 +14,21 @@ public partial interface CNmLayerBlendNode__LayerDefinition_t : ISchemaClass<CNm
     static int ISchemaClass<CNmLayerBlendNode__LayerDefinition_t>.Size => 12;
     static string? ISchemaClass<CNmLayerBlendNode__LayerDefinition_t>.ClassName => null;
 
-    
+
     public ref short InputNodeIdx { get; }
-    
+
     public ref short WeightValueNodeIdx { get; }
-    
+
     public ref short BoneMaskValueNodeIdx { get; }
-    
+
     public ref short RootMotionWeightValueNodeIdx { get; }
-    
+
     public ref bool IsSynchronized { get; }
-    
+
     public ref bool IgnoreEvents { get; }
-    
+
     public ref bool IsStateMachineLayer { get; }
-    
+
     public ref NmPoseBlendMode_t BlendMode { get; }
 
 

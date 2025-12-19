@@ -14,9 +14,9 @@ public partial interface CModelConfigElement_SetBodygroupOnAttachedModels : CMod
     static int ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels>.Size => 88;
     static string? ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels>.ClassName => null;
 
-    
+
     public string GroupName { get; set; }
-    
+
     public ref int Choice { get; }
 
 

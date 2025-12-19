@@ -14,7 +14,7 @@ public partial interface CScriptTriggerHurt : CTriggerHurt, ISchemaClass<CScript
     static int ISchemaClass<CScriptTriggerHurt>.Size => 2648;
     static string? ISchemaClass<CScriptTriggerHurt>.ClassName => "script_trigger_hurt";
 
-    
+
     public ref Vector Extent { get; }
 
 

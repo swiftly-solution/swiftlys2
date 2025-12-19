@@ -14,19 +14,19 @@ public partial interface C_INIT_SetVectorAttributeToVectorExpression : CParticle
     static int ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression>.Size => 4400;
     static string? ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression>.ClassName => null;
 
-    
+
     public ref VectorExpressionType_t Expression { get; }
-    
+
     public CPerParticleVecInput Input1 { get; }
-    
+
     public CPerParticleVecInput Input2 { get; }
-    
+
     public CPerParticleFloatInput Lerp { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool NormalizedOutput { get; }
 
 

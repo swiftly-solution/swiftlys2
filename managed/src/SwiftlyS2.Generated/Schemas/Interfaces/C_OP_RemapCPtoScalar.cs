@@ -14,27 +14,27 @@ public partial interface C_OP_RemapCPtoScalar : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_RemapCPtoScalar>.Size => 512;
     static string? ISchemaClass<C_OP_RemapCPtoScalar>.ClassName => null;
 
-    
+
     public ref int CPInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref int Field { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float EndTime { get; }
-    
+
     public ref float InterpRate { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
 
 

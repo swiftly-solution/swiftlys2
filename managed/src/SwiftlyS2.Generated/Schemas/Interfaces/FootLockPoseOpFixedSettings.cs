@@ -14,41 +14,41 @@ public partial interface FootLockPoseOpFixedSettings : ISchemaClass<FootLockPose
     static int ISchemaClass<FootLockPoseOpFixedSettings>.Size => 104;
     static string? ISchemaClass<FootLockPoseOpFixedSettings>.ClassName => null;
 
-    
+
     public ref CUtlVector<FootFixedData_t> FootInfo { get; }
-    
+
     public CAnimInputDamping HipDampingSettings { get; }
-    
+
     public ref int HipBoneIndex { get; }
-    
+
     public ref IKSolverType IkSolverType { get; }
-    
+
     public ref bool ApplyTilt { get; }
-    
+
     public ref bool ApplyHipDrop { get; }
-    
+
     public ref bool AlwaysUseFallbackHinge { get; }
-    
+
     public ref bool ApplyFootRotationLimits { get; }
-    
+
     public ref bool ApplyLegTwistLimits { get; }
-    
+
     public ref float MaxFootHeight { get; }
-    
+
     public ref float ExtensionScale { get; }
-    
+
     public ref float MaxLegTwist { get; }
-    
+
     public ref bool EnableLockBreaking { get; }
-    
+
     public ref float LockBreakTolerance { get; }
-    
+
     public ref float LockBlendTime { get; }
-    
+
     public ref bool EnableStretching { get; }
-    
+
     public ref float MaxStretchAmount { get; }
-    
+
     public ref float StretchExtensionScale { get; }
 
 

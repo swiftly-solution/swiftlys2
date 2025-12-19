@@ -14,23 +14,23 @@ public partial interface C_OP_MaintainEmitter : CParticleFunctionEmitter, ISchem
     static int ISchemaClass<C_OP_MaintainEmitter>.Size => 1608;
     static string? ISchemaClass<C_OP_MaintainEmitter>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput ParticlesToMaintain { get; }
-    
+
     public ref float StartTime { get; }
-    
+
     public CParticleCollectionFloatInput EmissionDuration { get; }
-    
+
     public ref float EmissionRate { get; }
-    
+
     public ref int SnapshotControlPoint { get; }
-    
+
     public string StrSnapshotSubset { get; set; }
-    
+
     public ref bool EmitInstantaneously { get; }
-    
+
     public ref bool FinalEmitOnStop { get; }
-    
+
     public CParticleCollectionFloatInput Scale { get; }
 
 

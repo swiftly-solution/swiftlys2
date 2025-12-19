@@ -14,35 +14,35 @@ public partial interface C_OP_OscillateVector : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_OscillateVector>.Size => 1640;
     static string? ISchemaClass<C_OP_OscillateVector>.ClassName => null;
 
-    
+
     public ref Vector RateMin { get; }
-    
+
     public ref Vector RateMax { get; }
-    
+
     public ref Vector FrequencyMin { get; }
-    
+
     public ref Vector FrequencyMax { get; }
-    
+
     public ParticleAttributeIndex_t Field { get; }
-    
+
     public ref bool Proportional { get; }
-    
+
     public ref bool ProportionalOp { get; }
-    
+
     public ref bool Offset { get; }
-    
+
     public ref float StartTime_min { get; }
-    
+
     public ref float StartTime_max { get; }
-    
+
     public ref float EndTime_min { get; }
-    
+
     public ref float EndTime_max { get; }
-    
+
     public CPerParticleFloatInput OscMult { get; }
-    
+
     public CPerParticleFloatInput OscAdd { get; }
-    
+
     public CPerParticleFloatInput RateScale { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface CastSphereSATParams_t : ISchemaClass<CastSphereSATParam
     static int ISchemaClass<CastSphereSATParams_t>.Size => 48;
     static string? ISchemaClass<CastSphereSATParams_t>.ClassName => null;
 
-    
+
     public ref Vector RayStart { get; }
-    
+
     public ref Vector RayDelta { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref float MaxFraction { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public RnHull_t? Hull { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface VMixPitchShiftDesc_t : ISchemaClass<VMixPitchShiftDesc_
     static int ISchemaClass<VMixPitchShiftDesc_t>.Size => 16;
     static string? ISchemaClass<VMixPitchShiftDesc_t>.ClassName => null;
 
-    
+
     public ref int GrainSampleCount { get; }
-    
+
     public ref float PitchShift { get; }
-    
+
     public ref int Quality { get; }
-    
+
     public ref int ProcType { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface ParticleControlPointConfiguration_t : ISchemaClass<Part
     static int ISchemaClass<ParticleControlPointConfiguration_t>.Size => 136;
     static string? ISchemaClass<ParticleControlPointConfiguration_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CUtlVector<ParticleControlPointDriver_t> Drivers { get; }
-    
+
     public ParticlePreviewState_t PreviewState { get; }
 
 

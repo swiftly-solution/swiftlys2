@@ -14,11 +14,11 @@ public partial interface FeBuildSphereRigid_t : FeSphereRigid_t, ISchemaClass<Fe
     static int ISchemaClass<FeBuildSphereRigid_t>.Size => 48;
     static string? ISchemaClass<FeBuildSphereRigid_t>.ClassName => null;
 
-    
+
     public ref int Priority { get; }
-    
+
     public ref uint VertexMapHash { get; }
-    
+
     public ref uint AntitunnelGroupBits { get; }
 
 

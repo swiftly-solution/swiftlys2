@@ -14,19 +14,19 @@ public partial interface CCSPlayerBase_CameraServices : CPlayer_CameraServices, 
     static int ISchemaClass<CCSPlayerBase_CameraServices>.Size => 424;
     static string? ISchemaClass<CCSPlayerBase_CameraServices>.ClassName => null;
 
-    
+
     public ref uint FOV { get; }
-    
+
     public ref uint FOVStart { get; }
-    
+
     public GameTime_t FOVTime { get; }
-    
+
     public ref float FOVRate { get; }
-    
+
     public ref CHandle<CBaseEntity> ZoomOwner { get; }
-    
+
     public ref CUtlVector<CHandle<CBaseEntity>> TriggerFogList { get; }
-    
+
     public ref CHandle<CBaseEntity> LastFogTrigger { get; }
 
     public void FOVUpdated();

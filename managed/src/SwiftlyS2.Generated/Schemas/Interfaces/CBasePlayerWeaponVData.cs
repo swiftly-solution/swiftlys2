@@ -14,71 +14,71 @@ public partial interface CBasePlayerWeaponVData : CEntitySubclassVDataBase, ISch
     static int ISchemaClass<CBasePlayerWeaponVData>.Size => 1088;
     static string? ISchemaClass<CBasePlayerWeaponVData>.ClassName => null;
 
-    
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
     public SchemaUntypedField WorldModel { get; }
-    
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
     public SchemaUntypedField ToolsOnlyOwnerModelName { get; }
-    
+
     public ref bool BuiltRightHanded { get; }
-    
+
     public ref bool AllowFlipping { get; }
-    
-  // CAttachmentNameSymbolWithStorage
+
+    // CAttachmentNameSymbolWithStorage
     public SchemaUntypedField MuzzleAttachment { get; }
-    
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
     public SchemaUntypedField MuzzleFlashParticle { get; }
-    
+
     public string MuzzleFlashParticleConfig { get; set; }
-    
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
     public SchemaUntypedField BarrelSmokeParticle { get; }
-    
+
     public ref byte MuzzleSmokeShotThreshold { get; }
-    
+
     public ref float MuzzleSmokeTimeout { get; }
-    
+
     public ref float MuzzleSmokeDecrementRate { get; }
-    
+
     public ref bool LinkedCooldowns { get; }
-    
+
     public ref ItemFlagTypes_t Flags { get; }
-    
+
     public AmmoIndex_t PrimaryAmmoType { get; }
-    
+
     public AmmoIndex_t SecondaryAmmoType { get; }
-    
+
     public ref int MaxClip1 { get; }
-    
+
     public ref int MaxClip2 { get; }
-    
+
     public ref int DefaultClip1 { get; }
-    
+
     public ref int DefaultClip2 { get; }
-    
+
     public ref bool ReserveAmmoAsClips { get; }
-    
+
     public ref bool TreatAsSingleClip { get; }
-    
+
     public ref bool KeepLoadedAmmo { get; }
-    
+
     public ref int Weight { get; }
-    
+
     public ref bool AutoSwitchTo { get; }
-    
+
     public ref bool AutoSwitchFrom { get; }
-    
+
     public ref RumbleEffect_t RumbleEffect { get; }
-    
+
     public ref float DropSpeed { get; }
-    
+
     public ref int Slot { get; }
-    
+
     public ref int Position { get; }
-    
-  // CUtlOrderedMap< WeaponSound_t, CSoundEventName >
+
+    // CUtlOrderedMap< WeaponSound_t, CSoundEventName >
     public SchemaUntypedField ShootSounds { get; }
 
 

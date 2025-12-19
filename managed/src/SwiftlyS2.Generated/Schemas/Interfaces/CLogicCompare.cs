@@ -14,21 +14,21 @@ public partial interface CLogicCompare : CLogicalEntity, ISchemaClass<CLogicComp
     static int ISchemaClass<CLogicCompare>.Size => 1432;
     static string? ISchemaClass<CLogicCompare>.ClassName => "logic_compare";
 
-    
+
     public ref float InValue { get; }
-    
+
     public ref float CompareValue { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnLessThan { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnEqualTo { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnNotEqualTo { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnGreaterThan { get; }
 
 

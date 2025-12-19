@@ -14,15 +14,15 @@ public partial interface CLogicGameEventListener : CLogicalEntity, ISchemaClass<
     static int ISchemaClass<CLogicGameEventListener>.Size => 1344;
     static string? ISchemaClass<CLogicGameEventListener>.ClassName => "logic_gameevent_listener";
 
-    
+
     public CEntityIOOutput OnEventFired { get; }
-    
+
     public string GameEventName { get; set; }
-    
+
     public string GameEventItem { get; set; }
-    
+
     public ref bool Enabled { get; }
-    
+
     public ref bool StartDisabled { get; }
 
     public void EnabledUpdated();

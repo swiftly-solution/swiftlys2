@@ -14,15 +14,15 @@ public partial interface FeFitMatrix_t : ISchemaClass<FeFitMatrix_t>
     static int ISchemaClass<FeFitMatrix_t>.Size => 64;
     static string? ISchemaClass<FeFitMatrix_t>.ClassName => null;
 
-    
+
     public ref CTransform Bone { get; }
-    
+
     public ref Vector Center { get; }
-    
+
     public ref ushort End { get; }
-    
+
     public ref ushort Node { get; }
-    
+
     public ref ushort BeginDynamic { get; }
 
 

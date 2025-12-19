@@ -14,13 +14,13 @@ public partial interface CLogicNPCCounterAABB : CLogicNPCCounter, ISchemaClass<C
     static int ISchemaClass<CLogicNPCCounterAABB>.Size => 2144;
     static string? ISchemaClass<CLogicNPCCounterAABB>.ClassName => "logic_npc_counter_aabb";
 
-    
+
     public ref Vector DistanceOuterMins { get; }
-    
+
     public ref Vector DistanceOuterMaxs { get; }
-    
+
     public ref Vector OuterMins { get; }
-    
+
     public ref Vector OuterMaxs { get; }
 
 

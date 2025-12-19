@@ -14,9 +14,9 @@ public partial interface CPointGamestatsCounter : CPointEntity, ISchemaClass<CPo
     static int ISchemaClass<CPointGamestatsCounter>.Size => 1280;
     static string? ISchemaClass<CPointGamestatsCounter>.ClassName => "point_gamestats_counter";
 
-    
+
     public string StrStatisticName { get; set; }
-    
+
     public ref bool Disabled { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface CFlashbangProjectile : CBaseCSGrenadeProjectile, ISchem
     static int ISchemaClass<CFlashbangProjectile>.Size => 3152;
     static string? ISchemaClass<CFlashbangProjectile>.ClassName => "flashbang_projectile";
 
-    
+
     public ref float TimeToDetonate { get; }
-    
+
     public ref byte NumOpponentsHit { get; }
-    
+
     public ref byte NumTeammatesHit { get; }
 
 

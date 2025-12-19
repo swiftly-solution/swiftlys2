@@ -14,11 +14,11 @@ public partial interface CFootTrajectory : ISchemaClass<CFootTrajectory>
     static int ISchemaClass<CFootTrajectory>.Size => 32;
     static string? ISchemaClass<CFootTrajectory>.ClassName => null;
 
-    
+
     public ref Vector Offset { get; }
-    
+
     public ref float RotationOffset { get; }
-    
+
     public ref float Progression { get; }
 
 

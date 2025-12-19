@@ -14,13 +14,13 @@ public partial interface C_OP_ScreenSpaceRotateTowardTarget : CParticleFunctionO
     static int ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget>.Size => 2928;
     static string? ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget>.ClassName => null;
 
-    
+
     public CPerParticleVecInput TargetPosition { get; }
-    
+
     public CParticleRemapFloatInput OutputRemap { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public CPerParticleFloatInput ScreenEdgeAlignmentDistance { get; }
 
 

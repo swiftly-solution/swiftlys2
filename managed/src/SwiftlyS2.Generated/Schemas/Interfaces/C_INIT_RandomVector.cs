@@ -14,13 +14,13 @@ public partial interface C_INIT_RandomVector : CParticleFunctionInitializer, ISc
     static int ISchemaClass<C_INIT_RandomVector>.Size => 512;
     static string? ISchemaClass<C_INIT_RandomVector>.ClassName => null;
 
-    
+
     public ref Vector Min { get; }
-    
+
     public ref Vector Max { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CRandomNumberGeneratorParameters RandomnessParameters { get; }
 
 

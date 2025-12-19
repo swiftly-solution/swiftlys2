@@ -14,10 +14,10 @@ public partial interface MoodAnimation_t : ISchemaClass<MoodAnimation_t>
     static int ISchemaClass<MoodAnimation_t>.Size => 16;
     static string? ISchemaClass<MoodAnimation_t>.ClassName => null;
 
-    
-  // CModelAnimNameWithDeltas
+
+    // CModelAnimNameWithDeltas
     public SchemaUntypedField Name { get; }
-    
+
     public ref float Weight { get; }
 
 

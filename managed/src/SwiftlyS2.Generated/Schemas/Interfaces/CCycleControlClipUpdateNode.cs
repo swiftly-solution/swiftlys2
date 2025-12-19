@@ -14,17 +14,17 @@ public partial interface CCycleControlClipUpdateNode : CLeafUpdateNode, ISchemaC
     static int ISchemaClass<CCycleControlClipUpdateNode>.Size => 144;
     static string? ISchemaClass<CCycleControlClipUpdateNode>.ClassName => null;
 
-    
+
     public ref CUtlVector<TagSpan_t> Tags { get; }
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public ref AnimValueSource ValueSource { get; }
-    
+
     public CAnimParamHandle ParamIndex { get; }
-    
+
     public ref bool LockWhenWaning { get; }
 
 

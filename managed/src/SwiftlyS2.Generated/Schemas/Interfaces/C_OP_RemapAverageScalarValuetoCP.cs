@@ -14,17 +14,17 @@ public partial interface C_OP_RemapAverageScalarValuetoCP : CParticleFunctionPre
     static int ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.Size => 1232;
     static string? ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.ClassName => null;
 
-    
+
     public ref SetStatisticExpressionType_t Expression { get; }
-    
+
     public CParticleCollectionFloatInput DecimalPlaces { get; }
-    
+
     public ref int OutControlPointNumber { get; }
-    
+
     public ref int OutVectorField { get; }
-    
+
     public ParticleAttributeIndex_t Field { get; }
-    
+
     public CParticleRemapFloatInput OutputRemap { get; }
 
 

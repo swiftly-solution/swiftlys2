@@ -14,9 +14,9 @@ public partial interface CScriptUniformRandomStream : ISchemaClass<CScriptUnifor
     static int ISchemaClass<CScriptUniformRandomStream>.Size => 160;
     static string? ISchemaClass<CScriptUniformRandomStream>.ClassName => null;
 
-    
+
     public ref HSCRIPTHandler ScriptScope { get; }
-    
+
     public ref int InitialSeed { get; }
 
 

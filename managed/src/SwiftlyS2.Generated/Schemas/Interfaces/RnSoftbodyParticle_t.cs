@@ -14,7 +14,7 @@ public partial interface RnSoftbodyParticle_t : ISchemaClass<RnSoftbodyParticle_
     static int ISchemaClass<RnSoftbodyParticle_t>.Size => 4;
     static string? ISchemaClass<RnSoftbodyParticle_t>.ClassName => null;
 
-    
+
     public ref float MassInv { get; }
 
 

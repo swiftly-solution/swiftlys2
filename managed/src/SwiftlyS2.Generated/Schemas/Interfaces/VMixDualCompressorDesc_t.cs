@@ -14,15 +14,15 @@ public partial interface VMixDualCompressorDesc_t : ISchemaClass<VMixDualCompres
     static int ISchemaClass<VMixDualCompressorDesc_t>.Size => 52;
     static string? ISchemaClass<VMixDualCompressorDesc_t>.ClassName => null;
 
-    
+
     public ref float RMSTimeMS { get; }
-    
+
     public ref float FldbKneeWidth { get; }
-    
+
     public ref float WetMix { get; }
-    
+
     public ref bool PeakMode { get; }
-    
+
     public VMixDynamicsBand_t BandDesc { get; }
 
 

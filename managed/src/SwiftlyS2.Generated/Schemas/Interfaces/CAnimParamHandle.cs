@@ -14,9 +14,9 @@ public partial interface CAnimParamHandle : ISchemaClass<CAnimParamHandle>
     static int ISchemaClass<CAnimParamHandle>.Size => 2;
     static string? ISchemaClass<CAnimParamHandle>.ClassName => null;
 
-    
+
     public ref AnimParamType_t Type { get; }
-    
+
     public ref byte Index { get; }
 
 

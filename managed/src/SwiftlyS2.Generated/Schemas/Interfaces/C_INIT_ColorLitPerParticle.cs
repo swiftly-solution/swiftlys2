@@ -14,19 +14,19 @@ public partial interface C_INIT_ColorLitPerParticle : CParticleFunctionInitializ
     static int ISchemaClass<C_INIT_ColorLitPerParticle>.Size => 528;
     static string? ISchemaClass<C_INIT_ColorLitPerParticle>.ClassName => null;
 
-    
+
     public ref Color ColorMin { get; }
-    
+
     public ref Color ColorMax { get; }
-    
+
     public ref Color TintMin { get; }
-    
+
     public ref Color TintMax { get; }
-    
+
     public ref float TintPerc { get; }
-    
+
     public ref ParticleColorBlendMode_t TintBlendMode { get; }
-    
+
     public ref float LightAmplification { get; }
 
 

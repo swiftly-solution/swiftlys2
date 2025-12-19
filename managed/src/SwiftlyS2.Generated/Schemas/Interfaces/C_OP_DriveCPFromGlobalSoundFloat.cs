@@ -14,23 +14,23 @@ public partial interface C_OP_DriveCPFromGlobalSoundFloat : CParticleFunctionPre
     static int ISchemaClass<C_OP_DriveCPFromGlobalSoundFloat>.Size => 528;
     static string? ISchemaClass<C_OP_DriveCPFromGlobalSoundFloat>.ClassName => null;
 
-    
+
     public ref int OutputControlPoint { get; }
-    
+
     public ref int OutputField { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public string StackName { get; set; }
-    
+
     public string OperatorName { get; set; }
-    
+
     public string FieldName { get; set; }
 
 

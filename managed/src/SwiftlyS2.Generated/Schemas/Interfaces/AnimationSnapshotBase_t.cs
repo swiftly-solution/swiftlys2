@@ -14,23 +14,23 @@ public partial interface AnimationSnapshotBase_t : ISchemaClass<AnimationSnapsho
     static int ISchemaClass<AnimationSnapshotBase_t>.Size => 272;
     static string? ISchemaClass<AnimationSnapshotBase_t>.ClassName => null;
 
-    
+
     public ref float RealTime { get; }
-    
+
     public ref matrix3x4_t RootToWorld { get; }
-    
+
     public ref bool BonesInWorldSpace { get; }
-    
+
     public ref CUtlVector<uint> BoneSetupMask { get; }
-    
+
     public ref CUtlVector<matrix3x4_t> BoneTransforms { get; }
-    
+
     public ref CUtlVector<float> FlexControllers { get; }
-    
+
     public ref AnimationSnapshotType_t SnapshotType { get; }
-    
+
     public ref bool HasDecodeDump { get; }
-    
+
     public AnimationDecodeDebugDumpElement_t DecodeDump { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface CDSPMixgroupModifier : ISchemaClass<CDSPMixgroupModifie
     static int ISchemaClass<CDSPMixgroupModifier>.Size => 32;
     static string? ISchemaClass<CDSPMixgroupModifier>.ClassName => null;
 
-    
+
     public string Mixgroup { get; set; }
-    
+
     public ref float Modifier { get; }
-    
+
     public ref float ModifierMin { get; }
-    
+
     public ref float SourceModifier { get; }
-    
+
     public ref float SourceModifierMin { get; }
-    
+
     public ref float ListenerReverbModifierWhenSourceReverbIsActive { get; }
 
 

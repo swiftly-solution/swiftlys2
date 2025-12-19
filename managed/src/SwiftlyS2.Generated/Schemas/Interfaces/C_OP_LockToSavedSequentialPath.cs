@@ -14,13 +14,13 @@ public partial interface C_OP_LockToSavedSequentialPath : CParticleFunctionOpera
     static int ISchemaClass<C_OP_LockToSavedSequentialPath>.Size => 544;
     static string? ISchemaClass<C_OP_LockToSavedSequentialPath>.ClassName => null;
 
-    
+
     public ref float FadeStart { get; }
-    
+
     public ref float FadeEnd { get; }
-    
+
     public ref bool CPPairs { get; }
-    
+
     public CPathParameters PathParams { get; }
 
 

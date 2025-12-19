@@ -14,7 +14,7 @@ public partial interface CNavVolumeSphericalShell : CNavVolumeSphere, ISchemaCla
     static int ISchemaClass<CNavVolumeSphericalShell>.Size => 144;
     static string? ISchemaClass<CNavVolumeSphericalShell>.ClassName => null;
 
-    
+
     public ref float RadiusInner { get; }
 
 

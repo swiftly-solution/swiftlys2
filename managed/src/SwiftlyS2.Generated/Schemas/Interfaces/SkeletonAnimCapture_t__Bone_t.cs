@@ -14,11 +14,11 @@ public partial interface SkeletonAnimCapture_t__Bone_t : ISchemaClass<SkeletonAn
     static int ISchemaClass<SkeletonAnimCapture_t__Bone_t>.Size => 64;
     static string? ISchemaClass<SkeletonAnimCapture_t__Bone_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CTransform BindPose { get; }
-    
+
     public ref int Parent { get; }
 
 

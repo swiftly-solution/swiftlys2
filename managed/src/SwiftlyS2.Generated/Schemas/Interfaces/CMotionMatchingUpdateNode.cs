@@ -14,51 +14,51 @@ public partial interface CMotionMatchingUpdateNode : CLeafUpdateNode, ISchemaCla
     static int ISchemaClass<CMotionMatchingUpdateNode>.Size => 328;
     static string? ISchemaClass<CMotionMatchingUpdateNode>.ClassName => null;
 
-    
+
     public CMotionDataSet DataSet { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> Metrics { get; }
-    
+
     public ref CUtlVector<float> Weights { get; }
-    
+
     public ref bool SearchEveryTick { get; }
-    
+
     public ref float SearchInterval { get; }
-    
+
     public ref bool SearchWhenClipEnds { get; }
-    
+
     public ref bool SearchWhenGoalChanges { get; }
-    
+
     public CBlendCurve BlendCurve { get; }
-    
+
     public ref float SampleRate { get; }
-    
+
     public ref float BlendTime { get; }
-    
+
     public ref bool LockClipWhenWaning { get; }
-    
+
     public ref float SelectionThreshold { get; }
-    
+
     public ref float ReselectionTimeWindow { get; }
-    
+
     public ref bool EnableRotationCorrection { get; }
-    
+
     public ref bool GoalAssist { get; }
-    
+
     public ref float GoalAssistDistance { get; }
-    
+
     public ref float GoalAssistTolerance { get; }
-    
+
     public CAnimInputDamping DistanceScale_Damping { get; }
-    
+
     public ref float DistanceScale_OuterRadius { get; }
-    
+
     public ref float DistanceScale_InnerRadius { get; }
-    
+
     public ref float DistanceScale_MaxScale { get; }
-    
+
     public ref float DistanceScale_MinScale { get; }
-    
+
     public ref bool EnableDistanceScaling { get; }
 
 

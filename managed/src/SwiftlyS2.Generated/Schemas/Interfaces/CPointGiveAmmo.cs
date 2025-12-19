@@ -14,7 +14,7 @@ public partial interface CPointGiveAmmo : CPointEntity, ISchemaClass<CPointGiveA
     static int ISchemaClass<CPointGiveAmmo>.Size => 1272;
     static string? ISchemaClass<CPointGiveAmmo>.ClassName => "point_give_ammo";
 
-    
+
     public ref CHandle<CBaseEntity> Activator { get; }
 
 

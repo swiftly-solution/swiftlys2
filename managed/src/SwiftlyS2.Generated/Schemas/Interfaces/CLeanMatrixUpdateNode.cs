@@ -14,26 +14,26 @@ public partial interface CLeanMatrixUpdateNode : CLeafUpdateNode, ISchemaClass<C
     static int ISchemaClass<CLeanMatrixUpdateNode>.Size => 240;
     static string? ISchemaClass<CLeanMatrixUpdateNode>.ClassName => null;
 
-    
-  // int32[3]
+
+    // int32[3]
     public SchemaUntypedField FrameCorners { get; }
-    
+
     public ISchemaClassFixedArray<CPoseHandle> Poses { get; }
-    
+
     public CAnimInputDamping Damping { get; }
-    
+
     public ref AnimVectorSource BlendSource { get; }
-    
+
     public CAnimParamHandle ParamIndex { get; }
-    
+
     public ref Vector VerticalAxis { get; }
-    
+
     public ref Vector HorizontalAxis { get; }
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref float MaxValue { get; }
-    
+
     public ref int SequenceMaxFrame { get; }
 
 

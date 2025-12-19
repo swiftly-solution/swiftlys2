@@ -14,19 +14,19 @@ public partial interface CSosGroupActionSoundeventClusterSchema : CSosGroupActio
     static int ISchemaClass<CSosGroupActionSoundeventClusterSchema>.Size => 80;
     static string? ISchemaClass<CSosGroupActionSoundeventClusterSchema>.ClassName => null;
 
-    
+
     public ref int MinNearby { get; }
-    
+
     public ref float ClusterEpsilon { get; }
-    
+
     public string ShouldPlayOpvar { get; set; }
-    
+
     public string ShouldPlayClusterChild { get; set; }
-    
+
     public string ClusterSizeOpvar { get; set; }
-    
+
     public string GroupBoundingBoxMinsOpvar { get; set; }
-    
+
     public string GroupBoundingBoxMaxsOpvar { get; set; }
 
 

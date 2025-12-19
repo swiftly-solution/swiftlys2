@@ -14,9 +14,9 @@ public partial interface C_INIT_InitVecCollection : CParticleFunctionInitializer
     static int ISchemaClass<C_INIT_InitVecCollection>.Size => 2200;
     static string? ISchemaClass<C_INIT_InitVecCollection>.ClassName => null;
 
-    
+
     public CParticleCollectionVecInput InputValue { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
 
 

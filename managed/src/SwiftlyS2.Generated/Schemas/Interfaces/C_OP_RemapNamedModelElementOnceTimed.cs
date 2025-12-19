@@ -14,23 +14,23 @@ public partial interface C_OP_RemapNamedModelElementOnceTimed : CParticleFunctio
     static int ISchemaClass<C_OP_RemapNamedModelElementOnceTimed>.Size => 560;
     static string? ISchemaClass<C_OP_RemapNamedModelElementOnceTimed>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-    
+
     public ref CUtlVector<CUtlString> InNames { get; }
-    
+
     public ref CUtlVector<CUtlString> OutNames { get; }
-    
+
     public ref CUtlVector<CUtlString> FallbackNames { get; }
-    
+
     public ref bool ModelFromRenderer { get; }
-    
+
     public ref bool Proportional { get; }
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float RemapTime { get; }
 
 

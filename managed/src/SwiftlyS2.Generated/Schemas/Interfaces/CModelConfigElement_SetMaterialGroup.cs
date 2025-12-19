@@ -14,7 +14,7 @@ public partial interface CModelConfigElement_SetMaterialGroup : CModelConfigElem
     static int ISchemaClass<CModelConfigElement_SetMaterialGroup>.Size => 80;
     static string? ISchemaClass<CModelConfigElement_SetMaterialGroup>.ClassName => null;
 
-    
+
     public string MaterialGroupName { get; set; }
 
 

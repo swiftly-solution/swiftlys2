@@ -14,7 +14,7 @@ public partial interface CPulseCell_Step_SetAnimGraphParam : CPulseCell_BaseFlow
     static int ISchemaClass<CPulseCell_Step_SetAnimGraphParam>.Size => 80;
     static string? ISchemaClass<CPulseCell_Step_SetAnimGraphParam>.ClassName => null;
 
-    
+
     public string ParamName { get; set; }
 
 

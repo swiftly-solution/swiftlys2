@@ -14,12 +14,12 @@ public partial interface CNmFloatRangeComparisonNode__CDefinition : CNmBoolValue
     static int ISchemaClass<CNmFloatRangeComparisonNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmFloatRangeComparisonNode__CDefinition>.ClassName => null;
 
-    
-  // Range_t
+
+    // Range_t
     public SchemaUntypedField Range { get; }
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref bool IsInclusiveCheck { get; }
 
 

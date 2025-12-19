@@ -14,13 +14,13 @@ public partial interface CBaseConstraint : CBoneConstraintBase, ISchemaClass<CBa
     static int ISchemaClass<CBaseConstraint>.Size => 96;
     static string? ISchemaClass<CBaseConstraint>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref Vector UpVector { get; }
-    
+
     public ref CUtlLeanVector<CConstraintSlave, int> Slaves { get; }
-    
+
     public ref CUtlVector<CConstraintTarget> Targets { get; }
 
 

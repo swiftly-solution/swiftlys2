@@ -14,10 +14,10 @@ public partial interface CDestructiblePartsSystemData : ISchemaClass<CDestructib
     static int ISchemaClass<CDestructiblePartsSystemData>.Size => 48;
     static string? ISchemaClass<CDestructiblePartsSystemData>.ClassName => null;
 
-    
-  // CUtlOrderedMap< HitGroup_t, CDestructiblePart >
+
+    // CUtlOrderedMap< HitGroup_t, CDestructiblePart >
     public SchemaUntypedField PartsDataByHitGroup { get; }
-    
+
     public CRangeInt MinMaxNumberHitGroupsToDestroyWhenGibbing { get; }
 
 

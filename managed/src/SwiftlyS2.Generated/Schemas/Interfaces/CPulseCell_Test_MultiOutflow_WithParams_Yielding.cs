@@ -14,15 +14,15 @@ public partial interface CPulseCell_Test_MultiOutflow_WithParams_Yielding : CPul
     static int ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding>.Size => 432;
     static string? ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding>.ClassName => null;
 
-    
+
     public SignatureOutflow_Continue Out1 { get; }
-    
+
     public SignatureOutflow_Continue AsyncChild1 { get; }
-    
+
     public SignatureOutflow_Continue AsyncChild2 { get; }
-    
+
     public SignatureOutflow_Resume YieldResume1 { get; }
-    
+
     public SignatureOutflow_Resume YieldResume2 { get; }
 
 

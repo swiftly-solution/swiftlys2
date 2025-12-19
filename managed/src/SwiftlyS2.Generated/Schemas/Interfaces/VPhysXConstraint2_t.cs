@@ -14,13 +14,13 @@ public partial interface VPhysXConstraint2_t : ISchemaClass<VPhysXConstraint2_t>
     static int ISchemaClass<VPhysXConstraint2_t>.Size => 256;
     static string? ISchemaClass<VPhysXConstraint2_t>.ClassName => null;
 
-    
+
     public ref uint Flags { get; }
-    
+
     public ref ushort Parent { get; }
-    
+
     public ref ushort Child { get; }
-    
+
     public VPhysXConstraintParams_t Params { get; }
 
 

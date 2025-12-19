@@ -14,13 +14,13 @@ public partial interface CNmVectorCreateNode__CDefinition : CNmVectorValueNode__
     static int ISchemaClass<CNmVectorCreateNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmVectorCreateNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputVectorValueNodeIdx { get; }
-    
+
     public ref short InputValueXNodeIdx { get; }
-    
+
     public ref short InputValueYNodeIdx { get; }
-    
+
     public ref short InputValueZNodeIdx { get; }
 
 

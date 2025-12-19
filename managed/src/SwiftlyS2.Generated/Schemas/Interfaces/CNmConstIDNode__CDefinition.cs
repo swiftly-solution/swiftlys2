@@ -14,7 +14,7 @@ public partial interface CNmConstIDNode__CDefinition : CNmIDValueNode__CDefiniti
     static int ISchemaClass<CNmConstIDNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmConstIDNode__CDefinition>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol Value { get; }
 
 

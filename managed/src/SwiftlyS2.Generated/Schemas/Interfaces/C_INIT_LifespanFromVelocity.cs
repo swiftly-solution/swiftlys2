@@ -14,21 +14,21 @@ public partial interface C_INIT_LifespanFromVelocity : CParticleFunctionInitiali
     static int ISchemaClass<C_INIT_LifespanFromVelocity>.Size => 656;
     static string? ISchemaClass<C_INIT_LifespanFromVelocity>.ClassName => null;
 
-    
+
     public ref Vector ComponentScale { get; }
-    
+
     public ref float TraceOffset { get; }
-    
+
     public ref float MaxTraceLength { get; }
-    
+
     public ref float TraceTolerance { get; }
-    
+
     public ref int MaxPlanes { get; }
-    
+
     public string CollisionGroupName { get; set; }
-    
+
     public ref ParticleTraceSet_t TraceSet { get; }
-    
+
     public ref bool IncludeWater { get; }
 
 

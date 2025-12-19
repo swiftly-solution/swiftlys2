@@ -14,9 +14,9 @@ public partial interface CDecalGroupVData : ISchemaClass<CDecalGroupVData>
     static int ISchemaClass<CDecalGroupVData>.Size => 32;
     static string? ISchemaClass<CDecalGroupVData>.ClassName => null;
 
-    
+
     public ref CUtlVector<DecalGroupOption_t> Options { get; }
-    
+
     public ref float TotalProbability { get; }
 
 

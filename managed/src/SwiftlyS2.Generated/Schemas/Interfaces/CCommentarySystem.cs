@@ -14,25 +14,25 @@ public partial interface CCommentarySystem : ISchemaClass<CCommentarySystem>
     static int ISchemaClass<CCommentarySystem>.Size => 96;
     static string? ISchemaClass<CCommentarySystem>.ClassName => null;
 
-    
+
     public ref bool CommentaryConvarsChanging { get; }
-    
+
     public ref bool CommentaryEnabledMidGame { get; }
-    
+
     public GameTime_t NextTeleportTime { get; }
-    
+
     public ref int TeleportStage { get; }
-    
+
     public ref bool CheatState { get; }
-    
+
     public ref bool IsFirstSpawnGroupToLoad { get; }
-    
+
     public ref CHandle<CPointCommentaryNode> CurrentNode { get; }
-    
+
     public ref CHandle<CPointCommentaryNode> ActiveCommentaryNode { get; }
-    
+
     public ref CHandle<CPointCommentaryNode> LastCommentaryNode { get; }
-    
+
     public ref CUtlVector<CHandle<CPointCommentaryNode>> Nodes { get; }
 
 

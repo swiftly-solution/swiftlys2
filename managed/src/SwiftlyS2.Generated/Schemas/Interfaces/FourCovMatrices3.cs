@@ -14,13 +14,13 @@ public partial interface FourCovMatrices3 : ISchemaClass<FourCovMatrices3>
     static int ISchemaClass<FourCovMatrices3>.Size => 96;
     static string? ISchemaClass<FourCovMatrices3>.ClassName => null;
 
-    
+
     public ref FourVectors Diag { get; }
-    
+
     public ref fltx4 XY { get; }
-    
+
     public ref fltx4 XZ { get; }
-    
+
     public ref fltx4 YZ { get; }
 
 

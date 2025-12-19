@@ -14,13 +14,13 @@ public partial interface C_INIT_SequenceFromCP : CParticleFunctionInitializer, I
     static int ISchemaClass<C_INIT_SequenceFromCP>.Size => 496;
     static string? ISchemaClass<C_INIT_SequenceFromCP>.ClassName => null;
 
-    
+
     public ref bool KillUnused { get; }
-    
+
     public ref bool RadiusScale { get; }
-    
+
     public ref int CP { get; }
-    
+
     public ref Vector Offset { get; }
 
 

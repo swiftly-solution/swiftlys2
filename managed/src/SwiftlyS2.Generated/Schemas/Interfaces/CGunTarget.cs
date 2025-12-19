@@ -14,11 +14,11 @@ public partial interface CGunTarget : CBaseToggle, ISchemaClass<CGunTarget>
     static int ISchemaClass<CGunTarget>.Size => 2184;
     static string? ISchemaClass<CGunTarget>.ClassName => "func_guntarget";
 
-    
+
     public ref bool On { get; }
-    
+
     public ref CHandle<CBaseEntity> TargetEnt { get; }
-    
+
     public CEntityIOOutput OnDeath { get; }
 
 

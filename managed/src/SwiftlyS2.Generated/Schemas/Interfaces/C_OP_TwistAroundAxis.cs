@@ -14,13 +14,13 @@ public partial interface C_OP_TwistAroundAxis : CParticleFunctionForce, ISchemaC
     static int ISchemaClass<C_OP_TwistAroundAxis>.Size => 504;
     static string? ISchemaClass<C_OP_TwistAroundAxis>.ClassName => null;
 
-    
+
     public ref float ForceAmount { get; }
-    
+
     public ref Vector TwistAxis { get; }
-    
+
     public ref bool LocalSpace { get; }
-    
+
     public ref int ControlPointNumber { get; }
 
 

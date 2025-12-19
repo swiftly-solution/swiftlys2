@@ -14,11 +14,11 @@ public partial interface C_OP_DirectionBetweenVecsToVec : CParticleFunctionOpera
     static int ISchemaClass<C_OP_DirectionBetweenVecsToVec>.Size => 3912;
     static string? ISchemaClass<C_OP_DirectionBetweenVecsToVec>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CPerParticleVecInput Point1 { get; }
-    
+
     public CPerParticleVecInput Point2 { get; }
 
 

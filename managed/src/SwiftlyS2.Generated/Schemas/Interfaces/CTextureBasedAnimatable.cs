@@ -14,21 +14,21 @@ public partial interface CTextureBasedAnimatable : CBaseModelEntity, ISchemaClas
     static int ISchemaClass<CTextureBasedAnimatable>.Size => 2064;
     static string? ISchemaClass<CTextureBasedAnimatable>.ClassName => "hl_vr_texture_based_animatable";
 
-    
+
     public ref bool Loop { get; }
-    
+
     public ref float FPS { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> PositionKeys { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> RotationKeys { get; }
-    
+
     public ref Vector AnimationBoundsMin { get; }
-    
+
     public ref Vector AnimationBoundsMax { get; }
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float StartFrame { get; }
 
     public void LoopUpdated();

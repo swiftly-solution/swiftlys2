@@ -14,17 +14,17 @@ public partial interface CAimMatrixUpdateNode : CUnaryUpdateNode, ISchemaClass<C
     static int ISchemaClass<CAimMatrixUpdateNode>.Size => 384;
     static string? ISchemaClass<CAimMatrixUpdateNode>.ClassName => null;
 
-    
+
     public AimMatrixOpFixedSettings_t OpFixedSettings { get; }
-    
+
     public ref AnimVectorSource Target { get; }
-    
+
     public CAnimParamHandle ParamIndex { get; }
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref bool ResetChild { get; }
-    
+
     public ref bool LockWhenWaning { get; }
 
 

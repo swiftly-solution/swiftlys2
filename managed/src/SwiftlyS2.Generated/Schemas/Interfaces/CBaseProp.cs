@@ -14,13 +14,13 @@ public partial interface CBaseProp : CBaseAnimGraph, ISchemaClass<CBaseProp>
     static int ISchemaClass<CBaseProp>.Size => 2752;
     static string? ISchemaClass<CBaseProp>.ClassName => null;
 
-    
+
     public ref bool ModelOverrodeBlockLOS { get; }
-    
+
     public ref int ShapeType { get; }
-    
+
     public ref bool ConformToCollisionBounds { get; }
-    
+
     public ref CTransform MPreferredCatchTransform { get; }
 
 

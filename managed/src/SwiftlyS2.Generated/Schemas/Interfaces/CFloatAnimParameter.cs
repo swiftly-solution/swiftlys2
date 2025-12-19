@@ -14,13 +14,13 @@ public partial interface CFloatAnimParameter : CConcreteAnimParameter, ISchemaCl
     static int ISchemaClass<CFloatAnimParameter>.Size => 144;
     static string? ISchemaClass<CFloatAnimParameter>.ClassName => null;
 
-    
+
     public ref float DefaultValue { get; }
-    
+
     public ref float MinValue { get; }
-    
+
     public ref float MaxValue { get; }
-    
+
     public ref bool Interpolate { get; }
 
 

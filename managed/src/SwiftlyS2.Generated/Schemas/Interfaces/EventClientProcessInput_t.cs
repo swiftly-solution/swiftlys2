@@ -14,13 +14,13 @@ public partial interface EventClientProcessInput_t : ISchemaClass<EventClientPro
     static int ISchemaClass<EventClientProcessInput_t>.Size => 56;
     static string? ISchemaClass<EventClientProcessInput_t>.ClassName => null;
 
-    
+
     public EngineLoopState_t LoopState { get; }
-    
+
     public ref float RealTime { get; }
-    
+
     public ref float TickInterval { get; }
-    
+
     public ref double TickStartTime { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface C_INIT_PositionWarpScalar : CParticleFunctionInitialize
     static int ISchemaClass<C_INIT_PositionWarpScalar>.Size => 880;
     static string? ISchemaClass<C_INIT_PositionWarpScalar>.ClassName => null;
 
-    
+
     public ref Vector WarpMin { get; }
-    
+
     public ref Vector WarpMax { get; }
-    
+
     public CPerParticleFloatInput InputValue { get; }
-    
+
     public ref float PrevPosScale { get; }
-    
+
     public ref int ScaleControlPointNumber { get; }
-    
+
     public ref int ControlPointNumber { get; }
 
 

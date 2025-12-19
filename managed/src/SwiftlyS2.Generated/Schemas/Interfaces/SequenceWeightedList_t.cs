@@ -14,9 +14,9 @@ public partial interface SequenceWeightedList_t : ISchemaClass<SequenceWeightedL
     static int ISchemaClass<SequenceWeightedList_t>.Size => 8;
     static string? ISchemaClass<SequenceWeightedList_t>.ClassName => null;
 
-    
+
     public ref int Sequence { get; }
-    
+
     public ref float RelativeWeight { get; }
 
 

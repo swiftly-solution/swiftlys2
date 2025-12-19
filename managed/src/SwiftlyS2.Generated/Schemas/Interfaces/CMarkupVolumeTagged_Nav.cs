@@ -14,7 +14,7 @@ public partial interface CMarkupVolumeTagged_Nav : CMarkupVolumeTagged, ISchemaC
     static int ISchemaClass<CMarkupVolumeTagged_Nav>.Size => 2080;
     static string? ISchemaClass<CMarkupVolumeTagged_Nav>.ClassName => "func_nav_markup";
 
-    
+
     public ref NavScopeFlags_t Scopes { get; }
 
 

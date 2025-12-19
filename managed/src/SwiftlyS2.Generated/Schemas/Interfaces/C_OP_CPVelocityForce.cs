@@ -14,9 +14,9 @@ public partial interface C_OP_CPVelocityForce : CParticleFunctionForce, ISchemaC
     static int ISchemaClass<C_OP_CPVelocityForce>.Size => 856;
     static string? ISchemaClass<C_OP_CPVelocityForce>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public CPerParticleFloatInput Scale { get; }
 
 

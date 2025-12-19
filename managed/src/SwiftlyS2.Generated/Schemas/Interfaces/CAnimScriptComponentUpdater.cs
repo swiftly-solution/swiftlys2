@@ -14,7 +14,7 @@ public partial interface CAnimScriptComponentUpdater : CAnimComponentUpdater, IS
     static int ISchemaClass<CAnimScriptComponentUpdater>.Size => 56;
     static string? ISchemaClass<CAnimScriptComponentUpdater>.ClassName => null;
 
-    
+
     public AnimScriptHandle Script { get; }
 
 

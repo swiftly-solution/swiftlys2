@@ -14,13 +14,13 @@ public partial interface CNmTargetOffsetNode__CDefinition : CNmTargetValueNode__
     static int ISchemaClass<CNmTargetOffsetNode__CDefinition>.Size => 64;
     static string? ISchemaClass<CNmTargetOffsetNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref bool IsBoneSpaceOffset { get; }
-    
+
     public ref Quaternion RotationOffset { get; }
-    
+
     public ref Vector TranslationOffset { get; }
 
 

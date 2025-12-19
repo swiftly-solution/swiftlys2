@@ -14,11 +14,11 @@ public partial interface C_INIT_PositionOffsetToCP : CParticleFunctionInitialize
     static int ISchemaClass<C_INIT_PositionOffsetToCP>.Size => 488;
     static string? ISchemaClass<C_INIT_PositionOffsetToCP>.ClassName => null;
 
-    
+
     public ref int ControlPointNumberStart { get; }
-    
+
     public ref int ControlPointNumberEnd { get; }
-    
+
     public ref bool LocalCoords { get; }
 
 

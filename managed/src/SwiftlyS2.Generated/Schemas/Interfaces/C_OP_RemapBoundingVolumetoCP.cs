@@ -14,15 +14,15 @@ public partial interface C_OP_RemapBoundingVolumetoCP : CParticleFunctionPreEmis
     static int ISchemaClass<C_OP_RemapBoundingVolumetoCP>.Size => 496;
     static string? ISchemaClass<C_OP_RemapBoundingVolumetoCP>.ClassName => null;
 
-    
+
     public ref int OutControlPointNumber { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
 
 

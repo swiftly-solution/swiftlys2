@@ -14,21 +14,21 @@ public partial interface C_OP_RemapDensityToVector : CParticleFunctionOperator, 
     static int ISchemaClass<C_OP_RemapDensityToVector>.Size => 512;
     static string? ISchemaClass<C_OP_RemapDensityToVector>.ClassName => null;
 
-    
+
     public ref float RadiusScale { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float DensityMin { get; }
-    
+
     public ref float DensityMax { get; }
-    
+
     public ref Vector OutputMin { get; }
-    
+
     public ref Vector OutputMax { get; }
-    
+
     public ref bool UseParentDensity { get; }
-    
+
     public ref int VoxelGridResolution { get; }
 
 

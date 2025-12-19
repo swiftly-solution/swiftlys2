@@ -14,166 +14,166 @@ public partial interface CBaseEntity : CEntityInstance, ISchemaClass<CBaseEntity
     static int ISchemaClass<CBaseEntity>.Size => 1264;
     static string? ISchemaClass<CBaseEntity>.ClassName => null;
 
-    
+
     public CBodyComponent? CBodyComponent { get; }
-    
+
     public CNetworkTransmitComponent NetworkTransmitComponent { get; }
-    
+
     public ref CUtlVector<thinkfunc_t> ThinkFunctions { get; }
-    
+
     public ref int CurrentThinkContext { get; }
-    
+
     public GameTick_t LastThinkTick { get; }
-    
+
     public ref bool DisabledContextThinks { get; }
-    
-  // CTypedBitVec< 64 >
+
+    // CTypedBitVec< 64 >
     public SchemaUntypedField IsSteadyState { get; }
-    
+
     public ref float LastNetworkChange { get; }
-    
+
     public ref CUtlVector<ResponseContext_t> ResponseContexts { get; }
-    
+
     public string ResponseContext { get; set; }
-    
+
     public ref int Health { get; }
-    
+
     public ref int MaxHealth { get; }
-    
+
     public ref byte LifeState { get; }
-    
+
     public ref float DamageAccumulator { get; }
-    
+
     public ref bool TakesDamage { get; }
-    
+
     public ref TakeDamageFlags_t TakeDamageFlags { get; }
-    
+
     public ref EntityPlatformTypes_t PlatformType { get; }
-    
+
     public ref MoveCollide_t MoveCollide { get; }
-    
+
     public ref MoveType_t MoveType { get; }
-    
+
     public ref MoveType_t ActualMoveType { get; }
-    
+
     public ref byte WaterTouch { get; }
-    
+
     public ref byte SlimeTouch { get; }
-    
+
     public ref bool RestoreInHierarchy { get; }
-    
+
     public string Target { get; set; }
-    
+
     public ref CHandle<CBaseFilter> DamageFilter { get; }
-    
+
     public string DamageFilterName { get; set; }
-    
+
     public ref float MoveDoneTime { get; }
-    
+
     public ref CUtlStringToken SubclassID { get; }
-    
+
     public ref float AnimTime { get; }
-    
+
     public ref float SimulationTime { get; }
-    
+
     public GameTime_t CreateTime { get; }
-    
+
     public ref bool ClientSideRagdoll { get; }
-    
+
     public ref byte InterpolationFrame { get; }
-    
+
     public ref Vector PrevVPhysicsUpdatePos { get; }
-    
+
     public ref byte TeamNum { get; }
-    
+
     public string Globalname { get; set; }
-    
+
     public ref int SentToClients { get; }
-    
+
     public ref float Speed { get; }
-    
+
     public string UniqueHammerID { get; set; }
-    
+
     public ref uint Spawnflags { get; }
-    
+
     public GameTick_t NextThinkTick { get; }
-    
+
     public ref int SimulationTick { get; }
-    
+
     public CEntityIOOutput OnKilled { get; }
-    
+
     public ref uint Flags { get; }
-    
+
     public ref Vector AbsVelocity { get; }
-    
+
     public CNetworkVelocityVector Velocity { get; }
-    
+
     public ref Vector BaseVelocity { get; }
-    
+
     public ref int PushEnumCount { get; }
-    
+
     public CCollisionProperty? Collision { get; }
-    
+
     public ref CHandle<CBaseEntity> EffectEntity { get; }
-    
+
     public ref CHandle<CBaseEntity> OwnerEntity { get; }
-    
+
     public ref uint Effects { get; }
-    
+
     public ref CHandle<CBaseEntity> GroundEntity { get; }
-    
+
     public ref int GroundBodyIndex { get; }
-    
+
     public ref float Friction { get; }
-    
+
     public ref float Elasticity { get; }
-    
+
     public ref float GravityScale { get; }
-    
+
     public ref float TimeScale { get; }
-    
+
     public ref float WaterLevel { get; }
-    
+
     public ref bool GravityDisabled { get; }
-    
+
     public ref bool AnimatedEveryTick { get; }
-    
+
     public ref float ActualGravityScale { get; }
-    
+
     public ref bool GravityActuallyDisabled { get; }
-    
+
     public ref bool DisableLowViolence { get; }
-    
+
     public ref byte WaterType { get; }
-    
+
     public ref int EFlags { get; }
-    
+
     public CEntityIOOutput OnUser1 { get; }
-    
+
     public CEntityIOOutput OnUser2 { get; }
-    
+
     public CEntityIOOutput OnUser3 { get; }
-    
+
     public CEntityIOOutput OnUser4 { get; }
-    
+
     public ref int InitialTeamNum { get; }
-    
+
     public GameTime_t NavIgnoreUntilTime { get; }
-    
+
     public ref QAngle AngVelocity { get; }
-    
+
     public ref bool NetworkQuantizeOriginAndAngles { get; }
-    
+
     public ref bool LagCompensate { get; }
-    
+
     public ref CHandle<CBaseEntity> Blocker { get; }
-    
+
     public ref float LocalTime { get; }
-    
+
     public ref float VPhysicsUpdateLocalTime { get; }
-    
+
     public ref BloodType BloodType { get; }
-    
+
     public CPulseGraphInstance_ServerEntity? PulseGraphInstance { get; }
 
     public void CBodyComponentUpdated();

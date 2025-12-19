@@ -14,13 +14,13 @@ public partial interface constraint_axislimit_t : ISchemaClass<constraint_axisli
     static int ISchemaClass<constraint_axislimit_t>.Size => 16;
     static string? ISchemaClass<constraint_axislimit_t>.ClassName => null;
 
-    
+
     public ref float MinRotation { get; }
-    
+
     public ref float MaxRotation { get; }
-    
+
     public ref float MotorTargetAngSpeed { get; }
-    
+
     public ref float MotorMaxTorque { get; }
 
 

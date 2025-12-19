@@ -14,10 +14,10 @@ public partial interface MotionBlendItem : ISchemaClass<MotionBlendItem>
     static int ISchemaClass<MotionBlendItem>.Size => 16;
     static string? ISchemaClass<MotionBlendItem>.ClassName => null;
 
-    
-  // CSmartPtr< CMotionNode >
+
+    // CSmartPtr< CMotionNode >
     public SchemaUntypedField Child { get; }
-    
+
     public ref float KeyValue { get; }
 
 

@@ -14,23 +14,23 @@ public partial interface C_OP_DifferencePreviousParticle : CParticleFunctionOper
     static int ISchemaClass<C_OP_DifferencePreviousParticle>.Size => 496;
     static string? ISchemaClass<C_OP_DifferencePreviousParticle>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool ActiveRange { get; }
-    
+
     public ref bool SetPreviousParticle { get; }
 
 

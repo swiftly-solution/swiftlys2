@@ -14,41 +14,41 @@ public partial interface CGameScriptedMoveData : ISchemaClass<CGameScriptedMoveD
     static int ISchemaClass<CGameScriptedMoveData>.Size => 116;
     static string? ISchemaClass<CGameScriptedMoveData>.ClassName => null;
 
-    
+
     public ref Vector AccumulatedRootMotion { get; }
-    
+
     public ref QAngle AccumulatedRootMotionRotation { get; }
-    
+
     public ref Vector Src { get; }
-    
+
     public ref QAngle Src1 { get; }
-    
+
     public ref QAngle Current { get; }
-    
+
     public ref float LockedSpeed { get; }
-    
+
     public ref float AngRate { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public GameTime_t StartTime { get; }
-    
+
     public ref bool Active { get; }
-    
+
     public ref bool TeleportOnEnd { get; }
-    
+
     public ref bool IgnoreRotation { get; }
-    
+
     public ref bool Success { get; }
-    
+
     public ref ForcedCrouchState_t ForcedCrouchState { get; }
-    
+
     public ref bool IgnoreCollisions { get; }
-    
+
     public ref Vector Dest { get; }
-    
+
     public ref QAngle Dst { get; }
-    
+
     public ref CHandle<CBaseEntity> DestEntity { get; }
 
 

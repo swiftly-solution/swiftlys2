@@ -14,13 +14,13 @@ public partial interface CPulseCell_Timeline : CPulseCell_BaseYieldingInflow, IS
     static int ISchemaClass<CPulseCell_Timeline>.Size => 248;
     static string? ISchemaClass<CPulseCell_Timeline>.ClassName => null;
 
-    
+
     public ref CUtlVector<CPulseCell_Timeline__TimelineEvent_t> TimelineEvents { get; }
-    
+
     public ref bool WaitForChildOutflows { get; }
-    
+
     public CPulse_ResumePoint OnFinished { get; }
-    
+
     public CPulse_ResumePoint OnCanceled { get; }
 
 

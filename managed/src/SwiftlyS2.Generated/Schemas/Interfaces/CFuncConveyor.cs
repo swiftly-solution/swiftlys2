@@ -14,23 +14,23 @@ public partial interface CFuncConveyor : CBaseModelEntity, ISchemaClass<CFuncCon
     static int ISchemaClass<CFuncConveyor>.Size => 2088;
     static string? ISchemaClass<CFuncConveyor>.ClassName => "func_conveyor";
 
-    
+
     public string ConveyorModels { get; set; }
-    
+
     public ref float TransitionDurationSeconds { get; }
-    
+
     public ref QAngle MoveEntitySpace { get; }
-    
+
     public ref Vector MoveDirEntitySpace { get; }
-    
+
     public ref float TargetSpeed { get; }
-    
+
     public GameTick_t TransitionStartTick { get; }
-    
+
     public ref int TransitionDurationTicks { get; }
-    
+
     public ref float TransitionStartSpeed { get; }
-    
+
     public ref CUtlVector<CHandle<CBaseEntity>> ConveyorModels1 { get; }
 
     public void MoveDirEntitySpaceUpdated();

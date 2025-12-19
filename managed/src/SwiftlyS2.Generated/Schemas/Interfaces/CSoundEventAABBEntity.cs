@@ -14,9 +14,9 @@ public partial interface CSoundEventAABBEntity : CSoundEventEntity, ISchemaClass
     static int ISchemaClass<CSoundEventAABBEntity>.Size => 1488;
     static string? ISchemaClass<CSoundEventAABBEntity>.ClassName => "snd_event_alignedbox";
 
-    
+
     public ref Vector Mins { get; }
-    
+
     public ref Vector Maxs { get; }
 
     public void MinsUpdated();

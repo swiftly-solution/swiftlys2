@@ -14,13 +14,13 @@ public partial interface CPlayer_ObserverServices : CPlayerPawnComponent, ISchem
     static int ISchemaClass<CPlayer_ObserverServices>.Size => 80;
     static string? ISchemaClass<CPlayer_ObserverServices>.ClassName => null;
 
-    
+
     public ref byte ObserverMode { get; }
-    
+
     public ref CHandle<CBaseEntity> ObserverTarget { get; }
-    
+
     public ref ObserverMode_t ObserverLastMode { get; }
-    
+
     public ref bool ForcedObserverMode { get; }
 
     public void ObserverModeUpdated();

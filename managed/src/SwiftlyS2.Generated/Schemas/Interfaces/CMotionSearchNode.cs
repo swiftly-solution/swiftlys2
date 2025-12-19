@@ -14,15 +14,15 @@ public partial interface CMotionSearchNode : ISchemaClass<CMotionSearchNode>
     static int ISchemaClass<CMotionSearchNode>.Size => 128;
     static string? ISchemaClass<CMotionSearchNode>.ClassName => null;
 
-    
+
     public ref CUtlVector<PointerTo<CMotionSearchNode>> Children { get; }
-    
+
     public CVectorQuantizer Quantizer { get; }
-    
+
     public ref CUtlVector<CUtlVector<SampleCode>> SampleCodes { get; }
-    
+
     public ref CUtlVector<CUtlVector<int>> SampleIndices { get; }
-    
+
     public ref CUtlVector<int> SelectableSamples { get; }
 
 

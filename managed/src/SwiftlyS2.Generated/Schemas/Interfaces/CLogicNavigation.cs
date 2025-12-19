@@ -14,9 +14,9 @@ public partial interface CLogicNavigation : CLogicalEntity, ISchemaClass<CLogicN
     static int ISchemaClass<CLogicNavigation>.Size => 1280;
     static string? ISchemaClass<CLogicNavigation>.ClassName => "logic_navigation";
 
-    
+
     public ref bool IsOn { get; }
-    
+
     public ref navproperties_t NavProperty { get; }
 
 

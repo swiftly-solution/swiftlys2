@@ -14,15 +14,15 @@ public partial interface CMessageEntity : CPointEntity, ISchemaClass<CMessageEnt
     static int ISchemaClass<CMessageEntity>.Size => 1288;
     static string? ISchemaClass<CMessageEntity>.ClassName => "point_message";
 
-    
+
     public ref int Radius { get; }
-    
+
     public string MessageText { get; set; }
-    
+
     public ref bool DrawText { get; }
-    
+
     public ref bool DeveloperOnly { get; }
-    
+
     public ref bool Enabled { get; }
 
 

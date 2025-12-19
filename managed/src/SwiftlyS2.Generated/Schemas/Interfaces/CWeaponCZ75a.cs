@@ -14,7 +14,7 @@ public partial interface CWeaponCZ75a : CCSWeaponBaseGun, ISchemaClass<CWeaponCZ
     static int ISchemaClass<CWeaponCZ75a>.Size => 4608;
     static string? ISchemaClass<CWeaponCZ75a>.ClassName => "weapon_cz75a";
 
-    
+
     public ref bool MagazineRemoved { get; }
 
     public void MagazineRemovedUpdated();

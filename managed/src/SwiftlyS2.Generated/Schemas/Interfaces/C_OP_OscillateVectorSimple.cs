@@ -14,17 +14,17 @@ public partial interface C_OP_OscillateVectorSimple : CParticleFunctionOperator,
     static int ISchemaClass<C_OP_OscillateVectorSimple>.Size => 504;
     static string? ISchemaClass<C_OP_OscillateVectorSimple>.ClassName => null;
 
-    
+
     public ref Vector Rate { get; }
-    
+
     public ref Vector Frequency { get; }
-    
+
     public ParticleAttributeIndex_t Field { get; }
-    
+
     public ref float OscMult { get; }
-    
+
     public ref float OscAdd { get; }
-    
+
     public ref bool Offset { get; }
 
 

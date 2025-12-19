@@ -14,13 +14,13 @@ public partial interface CGameMoney : CRulePointEntity, ISchemaClass<CGameMoney>
     static int ISchemaClass<CGameMoney>.Size => 2120;
     static string? ISchemaClass<CGameMoney>.ClassName => "game_money";
 
-    
+
     public CEntityIOOutput OnMoneySpent { get; }
-    
+
     public CEntityIOOutput OnMoneySpentFail { get; }
-    
+
     public ref int Money { get; }
-    
+
     public string StrAwardText { get; set; }
 
 

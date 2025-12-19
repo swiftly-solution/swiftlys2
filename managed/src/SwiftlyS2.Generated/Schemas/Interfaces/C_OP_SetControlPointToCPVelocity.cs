@@ -14,17 +14,17 @@ public partial interface C_OP_SetControlPointToCPVelocity : CParticleFunctionPre
     static int ISchemaClass<C_OP_SetControlPointToCPVelocity>.Size => 2216;
     static string? ISchemaClass<C_OP_SetControlPointToCPVelocity>.ClassName => null;
 
-    
+
     public ref int CPInput { get; }
-    
+
     public ref int CPOutputVel { get; }
-    
+
     public ref bool Normalize { get; }
-    
+
     public ref int CPOutputMag { get; }
-    
+
     public ref int CPField { get; }
-    
+
     public CParticleCollectionVecInput ComparisonVelocity { get; }
 
 

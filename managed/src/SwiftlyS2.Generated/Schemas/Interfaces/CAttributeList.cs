@@ -14,9 +14,9 @@ public partial interface CAttributeList : ISchemaClass<CAttributeList>
     static int ISchemaClass<CAttributeList>.Size => 120;
     static string? ISchemaClass<CAttributeList>.ClassName => null;
 
-    
+
     public ref CUtlVector<CEconItemAttribute> Attributes { get; }
-    
+
     public CAttributeManager? Manager { get; }
 
     public void AttributesUpdated();

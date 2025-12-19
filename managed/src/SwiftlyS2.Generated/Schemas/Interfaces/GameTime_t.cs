@@ -14,7 +14,7 @@ public partial interface GameTime_t : ISchemaClass<GameTime_t>
     static int ISchemaClass<GameTime_t>.Size => 4;
     static string? ISchemaClass<GameTime_t>.ClassName => null;
 
-    
+
     public ref float Value { get; }
 
 

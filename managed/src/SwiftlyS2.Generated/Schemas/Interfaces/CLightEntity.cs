@@ -14,7 +14,7 @@ public partial interface CLightEntity : CBaseModelEntity, ISchemaClass<CLightEnt
     static int ISchemaClass<CLightEntity>.Size => 2016;
     static string? ISchemaClass<CLightEntity>.ClassName => "light_omni";
 
-    
+
     public CLightComponent? CLightComponent { get; }
 
     public void CLightComponentUpdated();

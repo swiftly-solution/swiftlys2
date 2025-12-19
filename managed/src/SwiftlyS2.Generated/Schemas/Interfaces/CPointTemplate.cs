@@ -14,27 +14,27 @@ public partial interface CPointTemplate : CLogicalEntity, ISchemaClass<CPointTem
     static int ISchemaClass<CPointTemplate>.Size => 1368;
     static string? ISchemaClass<CPointTemplate>.ClassName => "point_template";
 
-    
+
     public string WorldName { get; set; }
-    
+
     public string Source2EntityLumpName { get; set; }
-    
+
     public string EntityFilterName { get; set; }
-    
+
     public ref float TimeoutInterval { get; }
-    
+
     public ref bool AsynchronouslySpawnEntities { get; }
-    
+
     public ref PointTemplateClientOnlyEntityBehavior_t ClientOnlyEntityBehavior { get; }
-    
+
     public ref PointTemplateOwnerSpawnGroupType_t OwnerSpawnGroupType { get; }
-    
+
     public ref CUtlVector<uint> CreatedSpawnGroupHandles { get; }
-    
+
     public ref CUtlVector<CHandle<CEntityInstance>> SpawnedEntityHandles { get; }
-    
+
     public ref HSCRIPTHandler ScriptSpawnCallback { get; }
-    
+
     public ref HSCRIPTHandler ScriptCallbackScope { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface C_OP_DragRelativeToPlane : CParticleFunctionOperator, I
     static int ISchemaClass<C_OP_DragRelativeToPlane>.Size => 2936;
     static string? ISchemaClass<C_OP_DragRelativeToPlane>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput DragAtPlane { get; }
-    
+
     public CParticleCollectionFloatInput Falloff { get; }
-    
+
     public ref bool Directional { get; }
-    
+
     public CParticleCollectionVecInput PlaneNormal { get; }
-    
+
     public ref int ControlPointNumber { get; }
 
 

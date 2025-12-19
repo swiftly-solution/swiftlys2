@@ -14,9 +14,9 @@ public partial interface ragdollhierarchyjoint_t : ISchemaClass<ragdollhierarchy
     static int ISchemaClass<ragdollhierarchyjoint_t>.Size => 16;
     static string? ISchemaClass<ragdollhierarchyjoint_t>.ClassName => null;
 
-    
+
     public ref int ParentIndex { get; }
-    
+
     public ref int ChildIndex { get; }
 
 

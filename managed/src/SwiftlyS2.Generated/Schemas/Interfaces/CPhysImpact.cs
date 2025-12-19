@@ -14,11 +14,11 @@ public partial interface CPhysImpact : CPointEntity, ISchemaClass<CPhysImpact>
     static int ISchemaClass<CPhysImpact>.Size => 1280;
     static string? ISchemaClass<CPhysImpact>.ClassName => "env_physimpact";
 
-    
+
     public ref float Damage { get; }
-    
+
     public ref float Distance { get; }
-    
+
     public string DirectionEntityName { get; set; }
 
 

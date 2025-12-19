@@ -14,11 +14,11 @@ public partial interface C_INIT_PlaneCull : CParticleFunctionInitializer, ISchem
     static int ISchemaClass<C_INIT_PlaneCull>.Size => 856;
     static string? ISchemaClass<C_INIT_PlaneCull>.ClassName => null;
 
-    
+
     public ref int ControlPoint { get; }
-    
+
     public CParticleCollectionFloatInput Distance { get; }
-    
+
     public ref bool CullInside { get; }
 
 

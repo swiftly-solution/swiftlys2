@@ -14,53 +14,53 @@ public partial interface CBasePlayerController : CBaseEntity, ISchemaClass<CBase
     static int ISchemaClass<CBasePlayerController>.Size => 2064;
     static string? ISchemaClass<CBasePlayerController>.ClassName => "player_controller";
 
-    
+
     public ref ulong InButtonsWhichAreToggles { get; }
-    
+
     public ref uint TickBase { get; }
-    
+
     public ref CHandle<CBasePlayerPawn> Pawn { get; }
-    
+
     public ref bool KnownTeamMismatch { get; }
-    
+
     public ref uint SplitScreenSlot { get; }
-    
+
     public ref CHandle<CBasePlayerController> SplitOwner { get; }
-    
+
     public ref CUtlVector<CHandle<CBasePlayerController>> SplitScreenPlayers { get; }
-    
+
     public ref bool IsHLTV { get; }
-    
+
     public ref PlayerConnectedState Connected { get; }
-    
+
     public string PlayerName { get; set; }
-    
+
     public string NetworkIDString { get; set; }
-    
+
     public ref float LerpTime { get; }
-    
+
     public ref bool LagCompensation { get; }
-    
+
     public ref bool Predict { get; }
-    
+
     public ref bool IsLowViolence { get; }
-    
+
     public ref bool GamePaused { get; }
-    
+
     public ref ChatIgnoreType_t IgnoreGlobalChat { get; }
-    
+
     public ref float LastPlayerTalkTime { get; }
-    
+
     public ref float LastEntitySteadyState { get; }
-    
+
     public ref int AvailableEntitySteadyState { get; }
-    
+
     public ref bool HasAnySteadyStateEnts { get; }
-    
+
     public ref ulong SteamID { get; }
-    
+
     public ref bool NoClipEnabled { get; }
-    
+
     public ref uint DesiredFOV { get; }
 
     public void TickBaseUpdated();

@@ -14,13 +14,13 @@ public partial interface CountdownTimer : ISchemaClass<CountdownTimer>
     static int ISchemaClass<CountdownTimer>.Size => 24;
     static string? ISchemaClass<CountdownTimer>.ClassName => null;
 
-    
+
     public ref float Duration { get; }
-    
+
     public GameTime_t Timestamp { get; }
-    
+
     public ref float Timescale { get; }
-    
+
     public ref uint WorldGroupId { get; }
 
     public void DurationUpdated();

@@ -14,13 +14,13 @@ public partial interface C_OP_SetSingleControlPointPosition : CParticleFunctionP
     static int ISchemaClass<C_OP_SetSingleControlPointPosition>.Size => 2304;
     static string? ISchemaClass<C_OP_SetSingleControlPointPosition>.ClassName => null;
 
-    
+
     public ref bool SetOnce { get; }
-    
+
     public ref int CP1 { get; }
-    
+
     public CParticleCollectionVecInput CP1Pos { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
 
 

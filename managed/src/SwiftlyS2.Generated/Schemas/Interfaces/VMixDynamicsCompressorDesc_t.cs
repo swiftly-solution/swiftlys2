@@ -14,23 +14,23 @@ public partial interface VMixDynamicsCompressorDesc_t : ISchemaClass<VMixDynamic
     static int ISchemaClass<VMixDynamicsCompressorDesc_t>.Size => 36;
     static string? ISchemaClass<VMixDynamicsCompressorDesc_t>.ClassName => null;
 
-    
+
     public ref float FldbOutputGain { get; }
-    
+
     public ref float FldbCompressionThreshold { get; }
-    
+
     public ref float FldbKneeWidth { get; }
-    
+
     public ref float CompressionRatio { get; }
-    
+
     public ref float AttackTimeMS { get; }
-    
+
     public ref float ReleaseTimeMS { get; }
-    
+
     public ref float RMSTimeMS { get; }
-    
+
     public ref float WetMix { get; }
-    
+
     public ref bool PeakMode { get; }
 
 

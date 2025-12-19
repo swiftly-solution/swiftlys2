@@ -14,7 +14,7 @@ public partial interface CCycleBase : ISchemaClass<CCycleBase>
     static int ISchemaClass<CCycleBase>.Size => 4;
     static string? ISchemaClass<CCycleBase>.ClassName => null;
 
-    
+
     public ref float Cycle { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface C_INIT_NormalAlignToCP : CParticleFunctionInitializer, 
     static int ISchemaClass<C_INIT_NormalAlignToCP>.Size => 584;
     static string? ISchemaClass<C_INIT_NormalAlignToCP>.ClassName => null;
 
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref ParticleControlPointAxis_t ControlPointAxis { get; }
 
 

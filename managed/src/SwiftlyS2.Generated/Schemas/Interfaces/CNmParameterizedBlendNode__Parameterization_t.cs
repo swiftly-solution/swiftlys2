@@ -14,11 +14,11 @@ public partial interface CNmParameterizedBlendNode__Parameterization_t : ISchema
     static int ISchemaClass<CNmParameterizedBlendNode__Parameterization_t>.Size => 80;
     static string? ISchemaClass<CNmParameterizedBlendNode__Parameterization_t>.ClassName => null;
 
-    
-  // CUtlLeanVectorFixedGrowable< CNmParameterizedBlendNode::BlendRange_t, 5 >
+
+    // CUtlLeanVectorFixedGrowable< CNmParameterizedBlendNode::BlendRange_t, 5 >
     public SchemaUntypedField BlendRanges { get; }
-    
-  // Range_t
+
+    // Range_t
     public SchemaUntypedField ParameterRange { get; }
 
 

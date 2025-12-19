@@ -14,9 +14,9 @@ public partial interface CItemDefuser : CItem, ISchemaClass<CItemDefuser>
     static int ISchemaClass<CItemDefuser>.Size => 2960;
     static string? ISchemaClass<CItemDefuser>.ClassName => "item_defuser";
 
-    
+
     public EntitySpottedState_t EntitySpottedState { get; }
-    
+
     public ref int SpotRules { get; }
 
 

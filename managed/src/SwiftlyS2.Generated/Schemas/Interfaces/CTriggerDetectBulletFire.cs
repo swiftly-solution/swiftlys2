@@ -14,9 +14,9 @@ public partial interface CTriggerDetectBulletFire : CBaseTrigger, ISchemaClass<C
     static int ISchemaClass<CTriggerDetectBulletFire>.Size => 2520;
     static string? ISchemaClass<CTriggerDetectBulletFire>.ClassName => "trigger_detect_bullet_fire";
 
-    
+
     public ref bool PlayerFireOnly { get; }
-    
+
     public CEntityIOOutput OnDetectedBulletFire { get; }
 
 

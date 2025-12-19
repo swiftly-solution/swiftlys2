@@ -14,10 +14,10 @@ public partial interface CNmStateMachineNode__CDefinition : CNmPoseNode__CDefini
     static int ISchemaClass<CNmStateMachineNode__CDefinition>.Size => 312;
     static string? ISchemaClass<CNmStateMachineNode__CDefinition>.ClassName => null;
 
-    
-  // CUtlLeanVectorFixedGrowable< CNmStateMachineNode::StateDefinition_t, 5 >
+
+    // CUtlLeanVectorFixedGrowable< CNmStateMachineNode::StateDefinition_t, 5 >
     public SchemaUntypedField StateDefinitions { get; }
-    
+
     public ref short DefaultStateIndex { get; }
 
 

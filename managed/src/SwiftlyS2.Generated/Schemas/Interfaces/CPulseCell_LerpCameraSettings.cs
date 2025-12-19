@@ -14,11 +14,11 @@ public partial interface CPulseCell_LerpCameraSettings : CPulseCell_BaseLerp, IS
     static int ISchemaClass<CPulseCell_LerpCameraSettings>.Size => 184;
     static string? ISchemaClass<CPulseCell_LerpCameraSettings>.ClassName => null;
 
-    
+
     public ref float Seconds { get; }
-    
+
     public PointCameraSettings_t Start { get; }
-    
+
     public PointCameraSettings_t End { get; }
 
 

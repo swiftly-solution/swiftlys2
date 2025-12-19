@@ -14,29 +14,29 @@ public partial interface C_OP_RenderSound : CParticleFunctionRenderer, ISchemaCl
     static int ISchemaClass<C_OP_RenderSound>.Size => 848;
     static string? ISchemaClass<C_OP_RenderSound>.ClassName => null;
 
-    
+
     public ref float DurationScale { get; }
-    
+
     public ref float SndLvlScale { get; }
-    
+
     public ref float PitchScale { get; }
-    
+
     public ref float VolumeScale { get; }
-    
+
     public ParticleAttributeIndex_t SndLvlField { get; }
-    
+
     public ParticleAttributeIndex_t DurationField { get; }
-    
+
     public ParticleAttributeIndex_t PitchField { get; }
-    
+
     public ParticleAttributeIndex_t VolumeField { get; }
-    
+
     public ref int Channel { get; }
-    
+
     public ref int CPReference { get; }
-    
+
     public string SoundName { get; set; }
-    
+
     public ref bool SuppressStopSoundEvent { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_OP_ScreenSpaceDistanceToEdge : CParticleFunctionOpera
     static int ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.Size => 1248;
     static string? ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CPerParticleFloatInput MaxDistFromEdge { get; }
-    
+
     public CParticleRemapFloatInput OutputRemap { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
 
 

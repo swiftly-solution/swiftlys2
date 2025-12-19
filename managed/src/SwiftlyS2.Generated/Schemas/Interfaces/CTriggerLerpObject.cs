@@ -14,35 +14,35 @@ public partial interface CTriggerLerpObject : CBaseTrigger, ISchemaClass<CTrigge
     static int ISchemaClass<CTriggerLerpObject>.Size => 2680;
     static string? ISchemaClass<CTriggerLerpObject>.ClassName => "trigger_lerp_object";
 
-    
+
     public string LerpTarget { get; set; }
-    
+
     public ref CHandle<CBaseEntity> LerpTarget1 { get; }
-    
+
     public string LerpTargetAttachment { get; set; }
-    
+
     public AttachmentHandle_t LerpTargetAttachment2 { get; }
-    
+
     public ref float LerpDuration { get; }
-    
+
     public ref bool LerpRestoreMoveType { get; }
-    
+
     public ref bool SingleLerpObject { get; }
-    
+
     public ref CUtlVector<lerpdata_t> LerpingObjects { get; }
-    
+
     public string LerpEffect { get; set; }
-    
+
     public string LerpSound { get; set; }
-    
+
     public ref bool AttachTouchingObject { get; }
-    
+
     public ref CHandle<CBaseEntity> EntityToWaitForDisconnect { get; }
-    
+
     public CEntityIOOutput OnLerpStarted { get; }
-    
+
     public CEntityIOOutput OnLerpFinished { get; }
-    
+
     public CEntityIOOutput OnDetached { get; }
 
 

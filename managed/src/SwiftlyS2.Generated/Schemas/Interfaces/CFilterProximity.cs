@@ -14,7 +14,7 @@ public partial interface CFilterProximity : CBaseFilter, ISchemaClass<CFilterPro
     static int ISchemaClass<CFilterProximity>.Size => 1360;
     static string? ISchemaClass<CFilterProximity>.ClassName => "filter_proximity";
 
-    
+
     public ref float Radius { get; }
 
 

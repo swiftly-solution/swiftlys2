@@ -14,7 +14,7 @@ public partial interface C_OP_SetSimulationRate : CParticleFunctionPreEmission, 
     static int ISchemaClass<C_OP_SetSimulationRate>.Size => 840;
     static string? ISchemaClass<C_OP_SetSimulationRate>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput SimulationScale { get; }
 
 

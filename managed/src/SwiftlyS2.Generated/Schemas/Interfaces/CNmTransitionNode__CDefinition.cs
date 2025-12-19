@@ -14,27 +14,27 @@ public partial interface CNmTransitionNode__CDefinition : CNmPoseNode__CDefiniti
     static int ISchemaClass<CNmTransitionNode__CDefinition>.Size => 48;
     static string? ISchemaClass<CNmTransitionNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short TargetStateNodeIdx { get; }
-    
+
     public ref short DurationOverrideNodeIdx { get; }
-    
+
     public ref short TimeOffsetOverrideNodeIdx { get; }
-    
+
     public ref short StartBoneMaskNodeIdx { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public NmPercent_t BoneMaskBlendInTimePercentage { get; }
-    
+
     public ref float TimeOffset { get; }
-    
+
     public CNmBitFlags TransitionOptions { get; }
-    
+
     public ref short TargetSyncIDNodeIdx { get; }
-    
+
     public ref NmEasingOperation_t BlendWeightEasing { get; }
-    
+
     public ref NmRootMotionBlendMode_t RootMotionBlend { get; }
 
 

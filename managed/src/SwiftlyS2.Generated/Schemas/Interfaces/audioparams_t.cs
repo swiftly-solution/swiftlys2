@@ -14,15 +14,15 @@ public partial interface audioparams_t : ISchemaClass<audioparams_t>
     static int ISchemaClass<audioparams_t>.Size => 120;
     static string? ISchemaClass<audioparams_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<Vector> LocalSound { get; }
-    
+
     public ref int SoundscapeIndex { get; }
-    
+
     public ref byte LocalBits { get; }
-    
+
     public ref int SoundscapeEntityListIndex { get; }
-    
+
     public ref uint SoundEventHash { get; }
 
     public void LocalSoundUpdated();

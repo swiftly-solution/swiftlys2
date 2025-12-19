@@ -14,11 +14,11 @@ public partial interface C_OP_RampCPLinearRandom : CParticleFunctionPreEmission,
     static int ISchemaClass<C_OP_RampCPLinearRandom>.Size => 504;
     static string? ISchemaClass<C_OP_RampCPLinearRandom>.ClassName => null;
 
-    
+
     public ref int OutControlPointNumber { get; }
-    
+
     public ref Vector RateMin { get; }
-    
+
     public ref Vector RateMax { get; }
 
 

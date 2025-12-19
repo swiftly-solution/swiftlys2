@@ -14,21 +14,21 @@ public partial interface CAnimationGroup : ISchemaClass<CAnimationGroup>
     static int ISchemaClass<CAnimationGroup>.Size => 328;
     static string? ISchemaClass<CAnimationGroup>.ClassName => null;
 
-    
+
     public ref uint Flags { get; }
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimData>> LocalHAnimArray_Handle { get; }
-    
+
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimationGroup>> IncludedGroupArray_Handle { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCSequenceGroupData> DirectHSeqGroup_Handle { get; }
-    
+
     public CAnimKeyData DecodeKey { get; }
-    
+
     public ref CUtlVector<CBufferString> Scripts { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> AdditionalExtRefs { get; }
 
 

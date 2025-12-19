@@ -14,7 +14,7 @@ public partial interface C_OP_RenderPoints : CParticleFunctionRenderer, ISchemaC
     static int ISchemaClass<C_OP_RenderPoints>.Size => 552;
     static string? ISchemaClass<C_OP_RenderPoints>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
 
 

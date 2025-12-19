@@ -14,7 +14,7 @@ public partial interface CPulseCell_Step_TestDomainEntFire : CPulseCell_BaseFlow
     static int ISchemaClass<CPulseCell_Step_TestDomainEntFire>.Size => 80;
     static string? ISchemaClass<CPulseCell_Step_TestDomainEntFire>.ClassName => null;
 
-    
+
     public string Input { get; set; }
 
 

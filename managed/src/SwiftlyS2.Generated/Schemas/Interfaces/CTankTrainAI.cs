@@ -14,19 +14,19 @@ public partial interface CTankTrainAI : CPointEntity, ISchemaClass<CTankTrainAI>
     static int ISchemaClass<CTankTrainAI>.Size => 1328;
     static string? ISchemaClass<CTankTrainAI>.ClassName => "tanktrain_ai";
 
-    
+
     public ref CHandle<CFuncTrackTrain> Train { get; }
-    
+
     public ref CHandle<CBaseEntity> TargetEntity { get; }
-    
+
     public ref int SoundPlaying { get; }
-    
+
     public string StartSoundName { get; set; }
-    
+
     public string EngineSoundName { get; set; }
-    
+
     public string MovementSoundName { get; set; }
-    
+
     public string TargetEntityName { get; set; }
 
 

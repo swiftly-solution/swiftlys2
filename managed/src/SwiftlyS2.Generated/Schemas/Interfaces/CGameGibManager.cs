@@ -14,13 +14,13 @@ public partial interface CGameGibManager : CBaseEntity, ISchemaClass<CGameGibMan
     static int ISchemaClass<CGameGibManager>.Size => 1304;
     static string? ISchemaClass<CGameGibManager>.ClassName => "game_gib_manager";
 
-    
+
     public ref bool AllowNewGibs { get; }
-    
+
     public ref int CurrentMaxPieces { get; }
-    
+
     public ref int MaxPieces { get; }
-    
+
     public ref int LastFrame { get; }
 
 

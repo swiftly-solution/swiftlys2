@@ -14,26 +14,26 @@ public partial interface CVoiceContainerShapedNoise : CVoiceContainerBase, ISche
     static int ISchemaClass<CVoiceContainerShapedNoise>.Size => 400;
     static string? ISchemaClass<CVoiceContainerShapedNoise>.ClassName => null;
 
-    
+
     public ref bool UseCurveForFrequency { get; }
-    
+
     public ref float Frequency { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField FrequencySweep { get; }
-    
+
     public ref bool UseCurveForResonance { get; }
-    
+
     public ref float Resonance { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField ResonanceSweep { get; }
-    
+
     public ref bool UseCurveForAmplitude { get; }
-    
+
     public ref float GainInDecibels { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField GainSweep { get; }
 
 

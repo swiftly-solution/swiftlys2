@@ -14,25 +14,25 @@ public partial interface AggregateSceneObject_t : ISchemaClass<AggregateSceneObj
     static int ISchemaClass<AggregateSceneObject_t>.Size => 120;
     static string? ISchemaClass<AggregateSceneObject_t>.ClassName => null;
 
-    
+
     public ref ObjectTypeFlags_t AllFlags { get; }
-    
+
     public ref ObjectTypeFlags_t AnyFlags { get; }
-    
+
     public ref short Layer { get; }
-    
+
     public ref short InstanceStream { get; }
-    
+
     public ref short VertexAlbedoStream { get; }
-    
+
     public ref CUtlVector<AggregateMeshInfo_t> AggregateMeshes { get; }
-    
+
     public ref CUtlVector<AggregateLODSetup_t> LodSetups { get; }
-    
+
     public ref CUtlVector<ushort> VisClusterMembership { get; }
-    
+
     public ref CUtlVector<matrix3x4_t> FragmentTransforms { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface CSSDSMsg_ViewRender : ISchemaClass<CSSDSMsg_ViewRender>
     static int ISchemaClass<CSSDSMsg_ViewRender>.Size => 24;
     static string? ISchemaClass<CSSDSMsg_ViewRender>.ClassName => null;
 
-    
+
     public SceneViewId_t ViewId { get; }
-    
+
     public string ViewName { get; set; }
 
 

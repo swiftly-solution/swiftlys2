@@ -14,7 +14,7 @@ public partial interface CRectLight : CBarnLight, ISchemaClass<CRectLight>
     static int ISchemaClass<CRectLight>.Size => 2824;
     static string? ISchemaClass<CRectLight>.ClassName => "light_rect";
 
-    
+
     public ref bool ShowLight { get; }
 
     public void ShowLightUpdated();

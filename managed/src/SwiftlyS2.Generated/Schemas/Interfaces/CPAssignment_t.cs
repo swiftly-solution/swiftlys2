@@ -14,11 +14,11 @@ public partial interface CPAssignment_t : ISchemaClass<CPAssignment_t>
     static int ISchemaClass<CPAssignment_t>.Size => 1736;
     static string? ISchemaClass<CPAssignment_t>.ClassName => null;
 
-    
+
     public ref int CPNumber { get; }
-    
+
     public CPerParticleVecInput Pos { get; }
-    
+
     public ref ParticleOrientationSetMode_t OrientationMode { get; }
 
 

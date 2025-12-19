@@ -14,17 +14,17 @@ public partial interface CMessage : CPointEntity, ISchemaClass<CMessage>
     static int ISchemaClass<CMessage>.Size => 1336;
     static string? ISchemaClass<CMessage>.ClassName => "env_message";
 
-    
+
     public string Message { get; set; }
-    
+
     public ref float MessageVolume { get; }
-    
+
     public ref int MessageAttenuation { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public string Noise { get; set; }
-    
+
     public CEntityIOOutput OnShowMessage { get; }
 
 

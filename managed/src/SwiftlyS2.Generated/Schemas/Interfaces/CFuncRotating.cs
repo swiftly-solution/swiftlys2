@@ -14,42 +14,42 @@ public partial interface CFuncRotating : CBaseModelEntity, ISchemaClass<CFuncRot
     static int ISchemaClass<CFuncRotating>.Size => 2256;
     static string? ISchemaClass<CFuncRotating>.ClassName => "func_rotating";
 
-    
+
     public CEntityIOOutput OnStopped { get; }
-    
+
     public CEntityIOOutput OnStarted { get; }
-    
+
     public CEntityIOOutput OnReachedStart { get; }
-    
-  // RotationVector
+
+    // RotationVector
     public SchemaUntypedField LocalRotationVector { get; }
-    
+
     public ref float FanFriction { get; }
-    
+
     public ref float Attenuation { get; }
-    
+
     public ref float Volume { get; }
-    
+
     public ref float TargetSpeed { get; }
-    
+
     public ref float MaxSpeed { get; }
-    
+
     public ref float BlockDamage { get; }
-    
+
     public string NoiseRunning { get; set; }
-    
+
     public ref bool Reversed { get; }
-    
+
     public ref bool AccelDecel { get; }
-    
+
     public ref QAngle PrevLocalAngles { get; }
-    
+
     public ref QAngle Start { get; }
-    
+
     public ref bool StopAtStartPos { get; }
-    
+
     public ref Vector ClientOrigin { get; }
-    
+
     public ref QAngle ClientAngles { get; }
 
 

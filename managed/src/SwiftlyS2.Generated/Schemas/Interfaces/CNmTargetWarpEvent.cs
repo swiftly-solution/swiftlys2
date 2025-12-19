@@ -14,9 +14,9 @@ public partial interface CNmTargetWarpEvent : CNmEvent, ISchemaClass<CNmTargetWa
     static int ISchemaClass<CNmTargetWarpEvent>.Size => 40;
     static string? ISchemaClass<CNmTargetWarpEvent>.ClassName => null;
 
-    
+
     public ref NmTargetWarpRule_t Rule { get; }
-    
+
     public ref NmTargetWarpAlgorithm_t Algorithm { get; }
 
 

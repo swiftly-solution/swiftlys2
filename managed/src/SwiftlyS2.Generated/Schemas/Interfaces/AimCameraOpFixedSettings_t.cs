@@ -14,19 +14,19 @@ public partial interface AimCameraOpFixedSettings_t : ISchemaClass<AimCameraOpFi
     static int ISchemaClass<AimCameraOpFixedSettings_t>.Size => 48;
     static string? ISchemaClass<AimCameraOpFixedSettings_t>.ClassName => null;
 
-    
+
     public ref int ChainIndex { get; }
-    
+
     public ref int CameraJointIndex { get; }
-    
+
     public ref int PelvisJointIndex { get; }
-    
+
     public ref int ClavicleLeftJointIndex { get; }
-    
+
     public ref int ClavicleRightJointIndex { get; }
-    
+
     public ref int DepenetrationJointIndex { get; }
-    
+
     public ref CUtlVector<int> PropJoints { get; }
 
 

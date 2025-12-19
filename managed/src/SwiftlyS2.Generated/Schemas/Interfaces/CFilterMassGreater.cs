@@ -14,7 +14,7 @@ public partial interface CFilterMassGreater : CBaseFilter, ISchemaClass<CFilterM
     static int ISchemaClass<CFilterMassGreater>.Size => 1360;
     static string? ISchemaClass<CFilterMassGreater>.ClassName => "filter_activator_mass_greater";
 
-    
+
     public ref float FilterMass { get; }
 
 

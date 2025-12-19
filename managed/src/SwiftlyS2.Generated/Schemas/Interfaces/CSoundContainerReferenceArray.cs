@@ -14,11 +14,11 @@ public partial interface CSoundContainerReferenceArray : ISchemaClass<CSoundCont
     static int ISchemaClass<CSoundContainerReferenceArray>.Size => 56;
     static string? ISchemaClass<CSoundContainerReferenceArray>.ClassName => null;
 
-    
+
     public ref bool UseReference { get; }
-    
+
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>> Sounds { get; }
-    
+
     public ref CUtlVector<PointerTo<CVoiceContainerBase>> Sounds1 { get; }
 
 

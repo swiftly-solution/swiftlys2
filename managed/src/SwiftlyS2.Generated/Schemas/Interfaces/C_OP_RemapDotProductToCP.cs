@@ -14,21 +14,21 @@ public partial interface C_OP_RemapDotProductToCP : CParticleFunctionPreEmission
     static int ISchemaClass<C_OP_RemapDotProductToCP>.Size => 1960;
     static string? ISchemaClass<C_OP_RemapDotProductToCP>.ClassName => null;
 
-    
+
     public ref int InputCP1 { get; }
-    
+
     public ref int InputCP2 { get; }
-    
+
     public ref int OutputCP { get; }
-    
+
     public ref int OutVectorField { get; }
-    
+
     public CParticleCollectionFloatInput InputMin { get; }
-    
+
     public CParticleCollectionFloatInput InputMax { get; }
-    
+
     public CParticleCollectionFloatInput OutputMin { get; }
-    
+
     public CParticleCollectionFloatInput OutputMax { get; }
 
 

@@ -14,16 +14,16 @@ public partial interface CTriggerProximity : CBaseTrigger, ISchemaClass<CTrigger
     static int ISchemaClass<CTriggerProximity>.Size => 2536;
     static string? ISchemaClass<CTriggerProximity>.ClassName => "trigger_proximity";
 
-    
+
     public ref CHandle<CBaseEntity> MeasureTarget { get; }
-    
+
     public string MeasureTarget1 { get; set; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref int Touchers { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField NearestEntityDistance { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface CAudioPhonemeTag : ISchemaClass<CAudioPhonemeTag>
     static int ISchemaClass<CAudioPhonemeTag>.Size => 12;
     static string? ISchemaClass<CAudioPhonemeTag>.ClassName => null;
 
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float EndTime { get; }
-    
+
     public ref int PhonemeCode { get; }
 
 

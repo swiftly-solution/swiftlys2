@@ -14,7 +14,7 @@ public partial interface C_OP_AlphaDecay : CParticleFunctionOperator, ISchemaCla
     static int ISchemaClass<C_OP_AlphaDecay>.Size => 472;
     static string? ISchemaClass<C_OP_AlphaDecay>.ClassName => null;
 
-    
+
     public ref float MinAlpha { get; }
 
 

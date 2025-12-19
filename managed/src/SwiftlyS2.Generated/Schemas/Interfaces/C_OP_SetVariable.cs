@@ -14,17 +14,17 @@ public partial interface C_OP_SetVariable : CParticleFunctionPreEmission, ISchem
     static int ISchemaClass<C_OP_SetVariable>.Size => 2768;
     static string? ISchemaClass<C_OP_SetVariable>.ClassName => null;
 
-    
+
     public CParticleVariableRef VariableReference { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref Vector PositionOffset { get; }
-    
+
     public ref QAngle RotationOffset { get; }
-    
+
     public CParticleCollectionVecInput Input { get; }
-    
+
     public CParticleCollectionFloatInput FloatInput { get; }
 
 

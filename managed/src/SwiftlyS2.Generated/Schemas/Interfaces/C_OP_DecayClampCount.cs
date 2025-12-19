@@ -14,7 +14,7 @@ public partial interface C_OP_DecayClampCount : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_DecayClampCount>.Size => 832;
     static string? ISchemaClass<C_OP_DecayClampCount>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput Count { get; }
 
 

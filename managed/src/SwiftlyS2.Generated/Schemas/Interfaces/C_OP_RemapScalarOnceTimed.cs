@@ -14,21 +14,21 @@ public partial interface C_OP_RemapScalarOnceTimed : CParticleFunctionOperator, 
     static int ISchemaClass<C_OP_RemapScalarOnceTimed>.Size => 496;
     static string? ISchemaClass<C_OP_RemapScalarOnceTimed>.ClassName => null;
 
-    
+
     public ref bool Proportional { get; }
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref float RemapTime { get; }
 
 

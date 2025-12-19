@@ -14,13 +14,13 @@ public partial interface CNmStateMachineNode__TransitionDefinition_t : ISchemaCl
     static int ISchemaClass<CNmStateMachineNode__TransitionDefinition_t>.Size => 8;
     static string? ISchemaClass<CNmStateMachineNode__TransitionDefinition_t>.ClassName => null;
 
-    
+
     public ref short TargetStateIdx { get; }
-    
+
     public ref short ConditionNodeIdx { get; }
-    
+
     public ref short TransitionNodeIdx { get; }
-    
+
     public ref bool CanBeForced { get; }
 
 

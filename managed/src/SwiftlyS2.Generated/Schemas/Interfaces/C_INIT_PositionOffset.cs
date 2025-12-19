@@ -14,17 +14,17 @@ public partial interface C_INIT_PositionOffset : CParticleFunctionInitializer, I
     static int ISchemaClass<C_INIT_PositionOffset>.Size => 4032;
     static string? ISchemaClass<C_INIT_PositionOffset>.ClassName => null;
 
-    
+
     public CPerParticleVecInput OffsetMin { get; }
-    
+
     public CPerParticleVecInput OffsetMax { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref bool LocalCoords { get; }
-    
+
     public ref bool Proportional { get; }
-    
+
     public CRandomNumberGeneratorParameters RandomnessParameters { get; }
 
 

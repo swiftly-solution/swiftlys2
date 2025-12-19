@@ -14,25 +14,25 @@ public partial interface CAmbientGeneric : CPointEntity, ISchemaClass<CAmbientGe
     static int ISchemaClass<CAmbientGeneric>.Size => 1432;
     static string? ISchemaClass<CAmbientGeneric>.ClassName => "ambient_generic";
 
-    
+
     public ref float Radius { get; }
-    
+
     public ref float MaxRadius { get; }
-    
+
     public ref soundlevel_t SoundLevel { get; }
-    
+
     public dynpitchvol_t Dpv { get; }
-    
+
     public ref bool Active { get; }
-    
+
     public ref bool Looping { get; }
-    
+
     public string Sound { get; set; }
-    
+
     public string SourceEntName { get; set; }
-    
+
     public ref CHandle<CBaseEntity> SoundSource { get; }
-    
+
     public ref uint SoundSourceEntIndex { get; }
 
 

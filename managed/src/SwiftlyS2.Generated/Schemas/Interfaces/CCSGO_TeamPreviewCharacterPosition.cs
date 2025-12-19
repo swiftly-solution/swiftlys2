@@ -14,21 +14,21 @@ public partial interface CCSGO_TeamPreviewCharacterPosition : CBaseEntity, ISche
     static int ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.Size => 3336;
     static string? ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.ClassName => null;
 
-    
+
     public ref int Variant { get; }
-    
+
     public ref int Random { get; }
-    
+
     public ref int Ordinal { get; }
-    
+
     public string WeaponName { get; set; }
-    
+
     public ref ulong Xuid { get; }
-    
+
     public CEconItemView AgentItem { get; }
-    
+
     public CEconItemView GlovesItem { get; }
-    
+
     public CEconItemView WeaponItem { get; }
 
     public void VariantUpdated();

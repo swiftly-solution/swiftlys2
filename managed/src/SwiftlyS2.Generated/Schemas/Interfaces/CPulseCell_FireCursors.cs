@@ -14,13 +14,13 @@ public partial interface CPulseCell_FireCursors : CPulseCell_BaseYieldingInflow,
     static int ISchemaClass<CPulseCell_FireCursors>.Size => 248;
     static string? ISchemaClass<CPulseCell_FireCursors>.ClassName => null;
 
-    
+
     public ref CUtlVector<CPulse_OutflowConnection> Outflows { get; }
-    
+
     public ref bool WaitForChildOutflows { get; }
-    
+
     public CPulse_ResumePoint OnFinished { get; }
-    
+
     public CPulse_ResumePoint OnCanceled { get; }
 
 

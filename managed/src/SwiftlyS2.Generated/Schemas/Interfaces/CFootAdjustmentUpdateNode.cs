@@ -14,23 +14,23 @@ public partial interface CFootAdjustmentUpdateNode : CUnaryUpdateNode, ISchemaCl
     static int ISchemaClass<CFootAdjustmentUpdateNode>.Size => 176;
     static string? ISchemaClass<CFootAdjustmentUpdateNode>.ClassName => null;
 
-    
+
     public ref CUtlVector<HSequence> Clips { get; }
-    
+
     public CPoseHandle BasePoseCacheHandle { get; }
-    
+
     public CAnimParamHandle FacingTarget { get; }
-    
+
     public ref float TurnTimeMin { get; }
-    
+
     public ref float TurnTimeMax { get; }
-    
+
     public ref float StepHeightMax { get; }
-    
+
     public ref float StepHeightMaxAngle { get; }
-    
+
     public ref bool ResetChild { get; }
-    
+
     public ref bool AnimationDriven { get; }
 
 

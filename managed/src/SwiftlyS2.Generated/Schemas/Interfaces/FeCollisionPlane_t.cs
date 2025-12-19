@@ -14,13 +14,13 @@ public partial interface FeCollisionPlane_t : ISchemaClass<FeCollisionPlane_t>
     static int ISchemaClass<FeCollisionPlane_t>.Size => 24;
     static string? ISchemaClass<FeCollisionPlane_t>.ClassName => null;
 
-    
+
     public ref ushort CtrlParent { get; }
-    
+
     public ref ushort ChildNode { get; }
-    
+
     public RnPlane_t Plane { get; }
-    
+
     public ref float Strength { get; }
 
 

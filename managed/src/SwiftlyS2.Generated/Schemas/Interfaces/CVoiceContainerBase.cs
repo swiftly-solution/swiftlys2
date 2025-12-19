@@ -14,9 +14,9 @@ public partial interface CVoiceContainerBase : ISchemaClass<CVoiceContainerBase>
     static int ISchemaClass<CVoiceContainerBase>.Size => 184;
     static string? ISchemaClass<CVoiceContainerBase>.ClassName => null;
 
-    
+
     public CVSound Sound { get; }
-    
+
     public CVoiceContainerAnalysisBase? EnvelopeAnalyzer { get; }
 
 

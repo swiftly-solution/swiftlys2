@@ -14,11 +14,11 @@ public partial interface C_OP_SetControlPointPositionToTimeOfDayValue : CParticl
     static int ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.Size => 624;
     static string? ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public string TimeOfDayParameter { get; set; }
-    
+
     public ref Vector DefaultValue { get; }
 
 

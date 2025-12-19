@@ -14,15 +14,15 @@ public partial interface CGamePlayerZone : CRuleBrushEntity, ISchemaClass<CGameP
     static int ISchemaClass<CGamePlayerZone>.Size => 2176;
     static string? ISchemaClass<CGamePlayerZone>.ClassName => "game_zone_player";
 
-    
+
     public CEntityIOOutput OnPlayerInZone { get; }
-    
+
     public CEntityIOOutput OnPlayerOutZone { get; }
-    
-  // CEntityOutputTemplate< int32 >
+
+    // CEntityOutputTemplate< int32 >
     public SchemaUntypedField PlayersInCount { get; }
-    
-  // CEntityOutputTemplate< int32 >
+
+    // CEntityOutputTemplate< int32 >
     public SchemaUntypedField PlayersOutCount { get; }
 
 

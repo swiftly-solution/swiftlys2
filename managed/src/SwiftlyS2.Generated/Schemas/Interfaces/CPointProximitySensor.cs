@@ -14,12 +14,12 @@ public partial interface CPointProximitySensor : CPointEntity, ISchemaClass<CPoi
     static int ISchemaClass<CPointProximitySensor>.Size => 1312;
     static string? ISchemaClass<CPointProximitySensor>.ClassName => "point_proximity_sensor";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref CHandle<CBaseEntity> TargetEntity { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField Distance { get; }
 
 

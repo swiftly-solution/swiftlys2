@@ -14,11 +14,11 @@ public partial interface C_OP_RemapControlPointDirectionToVector : CParticleFunc
     static int ISchemaClass<C_OP_RemapControlPointDirectionToVector>.Size => 480;
     static string? ISchemaClass<C_OP_RemapControlPointDirectionToVector>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public ref int ControlPointNumber { get; }
 
 

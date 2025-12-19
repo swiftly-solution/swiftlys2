@@ -14,9 +14,9 @@ public partial interface WeightList : ISchemaClass<WeightList>
     static int ISchemaClass<WeightList>.Size => 32;
     static string? ISchemaClass<WeightList>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CUtlVector<float> Weights { get; }
 
 

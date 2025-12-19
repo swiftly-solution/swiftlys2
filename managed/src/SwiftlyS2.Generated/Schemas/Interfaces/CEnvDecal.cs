@@ -14,23 +14,23 @@ public partial interface CEnvDecal : CBaseModelEntity, ISchemaClass<CEnvDecal>
     static int ISchemaClass<CEnvDecal>.Size => 2040;
     static string? ISchemaClass<CEnvDecal>.ClassName => "env_decal";
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> DecalMaterial { get; }
-    
+
     public ref float Width { get; }
-    
+
     public ref float Height { get; }
-    
+
     public ref float Depth { get; }
-    
+
     public ref uint RenderOrder { get; }
-    
+
     public ref bool ProjectOnWorld { get; }
-    
+
     public ref bool ProjectOnCharacters { get; }
-    
+
     public ref bool ProjectOnWater { get; }
-    
+
     public ref float DepthSortBias { get; }
 
     public void DecalMaterialUpdated();

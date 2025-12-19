@@ -14,11 +14,11 @@ public partial interface CNmStateCompletedConditionNode__CDefinition : CNmBoolVa
     static int ISchemaClass<CNmStateCompletedConditionNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmStateCompletedConditionNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public ref short TransitionDurationOverrideNodeIdx { get; }
-    
+
     public ref float TransitionDurationSeconds { get; }
 
 

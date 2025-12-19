@@ -14,11 +14,11 @@ public partial interface C_OP_PerParticleForce : CParticleFunctionForce, ISchema
     static int ISchemaClass<C_OP_PerParticleForce>.Size => 2576;
     static string? ISchemaClass<C_OP_PerParticleForce>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput ForceScale { get; }
-    
+
     public CPerParticleVecInput Force { get; }
-    
+
     public ref int CP { get; }
 
 

@@ -14,19 +14,19 @@ public partial interface C_INIT_VelocityRandom : CParticleFunctionInitializer, I
     static int ISchemaClass<C_INIT_VelocityRandom>.Size => 4672;
     static string? ISchemaClass<C_INIT_VelocityRandom>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public CPerParticleFloatInput SpeedMin { get; }
-    
+
     public CPerParticleFloatInput SpeedMax { get; }
-    
+
     public CPerParticleVecInput LocalCoordinateSystemSpeedMin { get; }
-    
+
     public CPerParticleVecInput LocalCoordinateSystemSpeedMax { get; }
-    
+
     public ref bool IgnoreDT { get; }
-    
+
     public CRandomNumberGeneratorParameters RandomnessParameters { get; }
 
 

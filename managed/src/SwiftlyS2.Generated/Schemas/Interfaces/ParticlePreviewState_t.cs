@@ -14,39 +14,39 @@ public partial interface ParticlePreviewState_t : ISchemaClass<ParticlePreviewSt
     static int ISchemaClass<ParticlePreviewState_t>.Size => 104;
     static string? ISchemaClass<ParticlePreviewState_t>.ClassName => null;
 
-    
+
     public string PreviewModel { get; set; }
-    
+
     public ref uint ModSpecificData { get; }
-    
+
     public ref PetGroundType_t GroundType { get; }
-    
+
     public string SequenceName { get; set; }
-    
+
     public ref int FireParticleOnSequenceFrame { get; }
-    
+
     public string HitboxSetName { get; set; }
-    
+
     public string MaterialGroupName { get; set; }
-    
+
     public ref CUtlVector<ParticlePreviewBodyGroup_t> BodyGroups { get; }
-    
+
     public ref float PlaybackSpeed { get; }
-    
+
     public ref float ParticleSimulationRate { get; }
-    
+
     public ref bool ShouldDrawHitboxes { get; }
-    
+
     public ref bool ShouldDrawAttachments { get; }
-    
+
     public ref bool ShouldDrawAttachmentNames { get; }
-    
+
     public ref bool ShouldDrawControlPointAxes { get; }
-    
+
     public ref bool AnimationNonLooping { get; }
-    
+
     public ref bool SequenceNameIsAnimClipPath { get; }
-    
+
     public ref Vector PreviewGravity { get; }
 
 

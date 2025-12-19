@@ -14,9 +14,9 @@ public partial interface MaterialGroup_t : ISchemaClass<MaterialGroup_t>
     static int ISchemaClass<MaterialGroup_t>.Size => 32;
     static string? ISchemaClass<MaterialGroup_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>> Materials { get; }
 
 

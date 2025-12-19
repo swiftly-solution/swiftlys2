@@ -14,7 +14,7 @@ public partial interface CItemGenericTriggerHelper : CBaseModelEntity, ISchemaCl
     static int ISchemaClass<CItemGenericTriggerHelper>.Size => 2016;
     static string? ISchemaClass<CItemGenericTriggerHelper>.ClassName => "item_generic_trigger_helper";
 
-    
+
     public ref CHandle<CItemGeneric> ParentItem { get; }
 
 

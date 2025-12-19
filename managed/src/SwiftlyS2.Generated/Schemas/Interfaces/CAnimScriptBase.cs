@@ -14,7 +14,7 @@ public partial interface CAnimScriptBase : ISchemaClass<CAnimScriptBase>
     static int ISchemaClass<CAnimScriptBase>.Size => 16;
     static string? ISchemaClass<CAnimScriptBase>.ClassName => null;
 
-    
+
     public ref bool IsValid { get; }
 
 

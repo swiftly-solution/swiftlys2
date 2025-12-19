@@ -14,11 +14,11 @@ public partial interface CGeneralSpin : CParticleFunctionOperator, ISchemaClass<
     static int ISchemaClass<CGeneralSpin>.Size => 488;
     static string? ISchemaClass<CGeneralSpin>.ClassName => null;
 
-    
+
     public ref int SpinRateDegrees { get; }
-    
+
     public ref int SpinRateMinDegrees { get; }
-    
+
     public ref float SpinRateStopTime { get; }
 
 

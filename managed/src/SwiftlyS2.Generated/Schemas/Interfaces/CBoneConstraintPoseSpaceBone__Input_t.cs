@@ -14,9 +14,9 @@ public partial interface CBoneConstraintPoseSpaceBone__Input_t : ISchemaClass<CB
     static int ISchemaClass<CBoneConstraintPoseSpaceBone__Input_t>.Size => 40;
     static string? ISchemaClass<CBoneConstraintPoseSpaceBone__Input_t>.ClassName => null;
 
-    
+
     public ref Vector InputValue { get; }
-    
+
     public ref CUtlVector<CTransform> OutputTransformList { get; }
 
 

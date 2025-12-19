@@ -14,11 +14,11 @@ public partial interface C_INIT_RandomTrailLength : CParticleFunctionInitializer
     static int ISchemaClass<C_INIT_RandomTrailLength>.Size => 488;
     static string? ISchemaClass<C_INIT_RandomTrailLength>.ClassName => null;
 
-    
+
     public ref float MinLength { get; }
-    
+
     public ref float MaxLength { get; }
-    
+
     public ref float LengthRandExponent { get; }
 
 

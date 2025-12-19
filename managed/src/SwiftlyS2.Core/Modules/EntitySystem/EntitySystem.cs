@@ -26,10 +26,9 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
     public T CreateEntity<T>() where T : class, ISchemaClass<T>
     {
-        var designerName = GetEntityDesignerName<T>();
-        return string.IsNullOrWhiteSpace(designerName)
+        return string.IsNullOrWhiteSpace(T.ClassName)
             ? throw new ArgumentException($"Can't create entity with class {typeof(T).Name}, which doesn't have a designer name.")
-            : CreateEntityByDesignerName<T>(designerName);
+            : CreateEntityByDesignerName<T>(T.ClassName);
     }
 
     public T CreateEntityByDesignerName<T>( string designerName ) where T : ISchemaClass<T>
@@ -65,10 +64,9 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
     public IEnumerable<T> GetAllEntitiesByClass<T>() where T : class, ISchemaClass<T>
     {
-        var designerName = GetEntityDesignerName<T>();
-        return string.IsNullOrWhiteSpace(designerName)
+        return string.IsNullOrWhiteSpace(T.ClassName)
             ? throw new ArgumentException($"Can't get entities with class {typeof(T).Name}, which doesn't have a designer name")
-            : GetAllEntities().Where(( entity ) => entity.Entity?.DesignerName == designerName).Select(( entity ) => T.From(entity.Address));
+            : GetAllEntities().Where(( entity ) => entity.Entity?.DesignerName == T.ClassName).Select(( entity ) => T.From(entity.Address));
     }
 
     public IEnumerable<T> GetAllEntitiesByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>
@@ -84,9 +82,9 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
         return handle == nint.Zero ? null : T.From(handle);
     }
 
-    Guid IEntitySystemService.HookEntityOutput<T>( string outputName, IEntitySystemService.EntityOutputHandler callback )
+    public Guid HookEntityOutput<T>( string outputName, IEntitySystemService.EntityOutputHandler callback ) where T : class, ISchemaClass<T>
     {
-        var hook = new EntityOutputHookCallback(GetEntityDesignerName<T>() ?? "", outputName, callback, loggerFactory, profiler);
+        var hook = new EntityOutputHookCallback(T.ClassName ?? throw new ArgumentException($"Can't hook entity output with class {typeof(T).Name}, which doesn't have a designer name"), outputName, callback, loggerFactory, profiler);
         lock (callbacksLock)
         {
             callbacks.Add(hook);
@@ -108,11 +106,6 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
                 return false;
             });
         }
-    }
-
-    private string? GetEntityDesignerName<T>() where T : class, ISchemaClass<T>
-    {
-        return T.ClassName;
     }
 
     public void Dispose()

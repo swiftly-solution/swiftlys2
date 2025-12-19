@@ -14,15 +14,15 @@ public partial interface VMixShaperDesc_t : ISchemaClass<VMixShaperDesc_t>
     static int ISchemaClass<VMixShaperDesc_t>.Size => 20;
     static string? ISchemaClass<VMixShaperDesc_t>.ClassName => null;
 
-    
+
     public ref int Shape { get; }
-    
+
     public ref float FldbDrive { get; }
-    
+
     public ref float FldbOutputGain { get; }
-    
+
     public ref float WetMix { get; }
-    
+
     public ref int OversampleFactor { get; }
 
 

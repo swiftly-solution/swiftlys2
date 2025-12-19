@@ -14,9 +14,9 @@ public partial interface CPulseCell_PickBestOutflowSelector : CPulseCell_BaseFlo
     static int ISchemaClass<CPulseCell_PickBestOutflowSelector>.Size => 104;
     static string? ISchemaClass<CPulseCell_PickBestOutflowSelector>.ClassName => null;
 
-    
+
     public ref PulseBestOutflowRules_t CheckType { get; }
-    
+
     public PulseSelectorOutflowList_t OutflowList { get; }
 
 

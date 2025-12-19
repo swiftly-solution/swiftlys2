@@ -14,15 +14,15 @@ public partial interface CSosGroupActionSetSoundeventParameterSchema : CSosGroup
     static int ISchemaClass<CSosGroupActionSetSoundeventParameterSchema>.Size => 40;
     static string? ISchemaClass<CSosGroupActionSetSoundeventParameterSchema>.ClassName => null;
 
-    
+
     public ref int MaxCount { get; }
-    
+
     public ref float MinValue { get; }
-    
+
     public ref float MaxValue { get; }
-    
+
     public string OpvarName { get; set; }
-    
+
     public ref SosActionSetParamSortType_t SortType { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface CFuncElectrifiedVolume : CFuncBrush, ISchemaClass<CFunc
     static int ISchemaClass<CFuncElectrifiedVolume>.Size => 2096;
     static string? ISchemaClass<CFuncElectrifiedVolume>.ClassName => "func_electrified_volume";
 
-    
+
     public string EffectName { get; set; }
-    
+
     public string EffectInterpenetrateName { get; set; }
-    
+
     public string EffectZapName { get; set; }
-    
+
     public string EffectSource { get; set; }
 
     public void EffectNameUpdated();

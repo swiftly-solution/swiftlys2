@@ -14,21 +14,21 @@ public partial interface C_OP_SetControlPointOrientation : CParticleFunctionPreE
     static int ISchemaClass<C_OP_SetControlPointOrientation>.Size => 880;
     static string? ISchemaClass<C_OP_SetControlPointOrientation>.ClassName => null;
 
-    
+
     public ref bool UseWorldLocation { get; }
-    
+
     public ref bool Randomize { get; }
-    
+
     public ref bool SetOnce { get; }
-    
+
     public ref int CP { get; }
-    
+
     public ref int HeadLocation { get; }
-    
+
     public ref QAngle Rotation { get; }
-    
+
     public ref QAngle RotationB { get; }
-    
+
     public CParticleCollectionFloatInput Interpolation { get; }
 
 

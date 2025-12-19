@@ -14,17 +14,17 @@ public partial interface CPlayerInputAnimMotorUpdater : CAnimMotorUpdaterBase, I
     static int ISchemaClass<CPlayerInputAnimMotorUpdater>.Size => 80;
     static string? ISchemaClass<CPlayerInputAnimMotorUpdater>.ClassName => null;
 
-    
+
     public ref CUtlVector<float> SampleTimes { get; }
-    
+
     public ref float SpringConstant { get; }
-    
+
     public ref float AnticipationDistance { get; }
-    
+
     public CAnimParamHandle AnticipationPosParam { get; }
-    
+
     public CAnimParamHandle AnticipationHeadingParam { get; }
-    
+
     public ref bool UseAcceleration { get; }
 
 

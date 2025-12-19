@@ -14,31 +14,31 @@ public partial interface CSPerRoundStats_t : ISchemaClass<CSPerRoundStats_t>
     static int ISchemaClass<CSPerRoundStats_t>.Size => 104;
     static string? ISchemaClass<CSPerRoundStats_t>.ClassName => null;
 
-    
+
     public ref int Kills { get; }
-    
+
     public ref int Deaths { get; }
-    
+
     public ref int Assists { get; }
-    
+
     public ref int Damage { get; }
-    
+
     public ref int EquipmentValue { get; }
-    
+
     public ref int MoneySaved { get; }
-    
+
     public ref int KillReward { get; }
-    
+
     public ref int LiveTime { get; }
-    
+
     public ref int HeadShotKills { get; }
-    
+
     public ref int Objective { get; }
-    
+
     public ref int CashEarned { get; }
-    
+
     public ref int UtilityDamage { get; }
-    
+
     public ref int EnemiesFlashed { get; }
 
     public void KillsUpdated();

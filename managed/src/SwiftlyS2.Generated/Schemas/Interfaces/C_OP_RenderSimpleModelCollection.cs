@@ -14,23 +14,23 @@ public partial interface C_OP_RenderSimpleModelCollection : CParticleFunctionRen
     static int ISchemaClass<C_OP_RenderSimpleModelCollection>.Size => 1424;
     static string? ISchemaClass<C_OP_RenderSimpleModelCollection>.ClassName => null;
 
-    
+
     public ref bool CenterOffset { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-    
+
     public CParticleModelInput ModelInput { get; }
-    
+
     public CParticleCollectionFloatInput SizeCullScale { get; }
-    
+
     public ref bool DisableShadows { get; }
-    
+
     public ref bool DisableMotionBlur { get; }
-    
+
     public ref bool AcceptsDecals { get; }
-    
+
     public CPerParticleFloatInput DrawFilter { get; }
-    
+
     public ParticleAttributeIndex_t AngularVelocityField { get; }
 
 

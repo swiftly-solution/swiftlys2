@@ -14,9 +14,9 @@ public partial interface CSolveIKTargetHandle_t : ISchemaClass<CSolveIKTargetHan
     static int ISchemaClass<CSolveIKTargetHandle_t>.Size => 4;
     static string? ISchemaClass<CSolveIKTargetHandle_t>.ClassName => null;
 
-    
+
     public CAnimParamHandle PositionHandle { get; }
-    
+
     public CAnimParamHandle OrientationHandle { get; }
 
 

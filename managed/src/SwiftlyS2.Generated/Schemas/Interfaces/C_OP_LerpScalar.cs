@@ -14,13 +14,13 @@ public partial interface C_OP_LerpScalar : CParticleFunctionOperator, ISchemaCla
     static int ISchemaClass<C_OP_LerpScalar>.Size => 848;
     static string? ISchemaClass<C_OP_LerpScalar>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CPerParticleFloatInput Output { get; }
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float EndTime { get; }
 
 

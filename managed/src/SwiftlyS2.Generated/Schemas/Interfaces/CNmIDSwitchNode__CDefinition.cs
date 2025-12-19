@@ -14,15 +14,15 @@ public partial interface CNmIDSwitchNode__CDefinition : CNmIDValueNode__CDefinit
     static int ISchemaClass<CNmIDSwitchNode__CDefinition>.Size => 40;
     static string? ISchemaClass<CNmIDSwitchNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SwitchValueNodeIdx { get; }
-    
+
     public ref short TrueValueNodeIdx { get; }
-    
+
     public ref short FalseValueNodeIdx { get; }
-    
+
     public ref CGlobalSymbol FalseValue { get; }
-    
+
     public ref CGlobalSymbol TrueValue { get; }
 
 

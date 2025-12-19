@@ -14,7 +14,7 @@ public partial interface CPhysThruster : CPhysForce, ISchemaClass<CPhysThruster>
     static int ISchemaClass<CPhysThruster>.Size => 1376;
     static string? ISchemaClass<CPhysThruster>.ClassName => "phys_thruster";
 
-    
+
     public ref Vector LocalOrigin { get; }
 
 

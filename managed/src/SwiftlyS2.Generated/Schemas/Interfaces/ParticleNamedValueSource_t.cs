@@ -14,14 +14,14 @@ public partial interface ParticleNamedValueSource_t : ISchemaClass<ParticleNamed
     static int ISchemaClass<ParticleNamedValueSource_t>.Size => 96;
     static string? ISchemaClass<ParticleNamedValueSource_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref bool IsPublic { get; }
-    
-  // CPulseValueFullType
+
+    // CPulseValueFullType
     public SchemaUntypedField ValueType { get; }
-    
+
     public ParticleNamedValueConfiguration_t DefaultConfig { get; }
 
 

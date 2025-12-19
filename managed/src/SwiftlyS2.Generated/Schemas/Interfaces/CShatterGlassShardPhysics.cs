@@ -14,11 +14,11 @@ public partial interface CShatterGlassShardPhysics : CPhysicsProp, ISchemaClass<
     static int ISchemaClass<CShatterGlassShardPhysics>.Size => 3728;
     static string? ISchemaClass<CShatterGlassShardPhysics>.ClassName => "shatterglass_shard";
 
-    
+
     public ref bool Debris { get; }
-    
+
     public ref uint ParentShard { get; }
-    
+
     public shard_model_desc_t ShardDesc { get; }
 
     public void ShardDescUpdated();

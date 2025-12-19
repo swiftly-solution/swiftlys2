@@ -14,65 +14,65 @@ public partial interface CPointCommentaryNode : CBaseAnimGraph, ISchemaClass<CPo
     static int ISchemaClass<CPointCommentaryNode>.Size => 2960;
     static string? ISchemaClass<CPointCommentaryNode>.ClassName => "point_commentary_node";
 
-    
+
     public string PreCommands { get; set; }
-    
+
     public string PostCommands { get; set; }
-    
+
     public string CommentaryFile { get; set; }
-    
+
     public string ViewTarget { get; set; }
-    
+
     public ref CHandle<CBaseEntity> ViewTarget1 { get; }
-    
+
     public ref CHandle<CBaseEntity> ViewTargetAngles { get; }
-    
+
     public string ViewPosition { get; set; }
-    
+
     public ref CHandle<CBaseEntity> ViewPosition2 { get; }
-    
+
     public ref CHandle<CBaseEntity> ViewPositionMover { get; }
-    
+
     public ref bool PreventMovement { get; }
-    
+
     public ref bool UnderCrosshair { get; }
-    
+
     public ref bool Unstoppable { get; }
-    
+
     public GameTime_t FinishedTime { get; }
-    
+
     public ref Vector FinishOrigin { get; }
-    
+
     public ref QAngle OriginalAngles { get; }
-    
+
     public ref QAngle FinishAngles { get; }
-    
+
     public ref bool PreventChangesWhileMoving { get; }
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref Vector TeleportOrigin { get; }
-    
+
     public GameTime_t AbortedPlaybackAt { get; }
-    
+
     public CEntityIOOutput OnCommentaryStarted { get; }
-    
+
     public CEntityIOOutput OnCommentaryStopped { get; }
-    
+
     public ref bool Active { get; }
-    
+
     public GameTime_t StartTime { get; }
-    
+
     public ref float StartTimeInCommentary { get; }
-    
+
     public string Title { get; set; }
-    
+
     public string Speakers { get; set; }
-    
+
     public ref int NodeNumber { get; }
-    
+
     public ref int NodeNumberMax { get; }
-    
+
     public ref bool ListenedTo { get; }
 
     public void CommentaryFileUpdated();

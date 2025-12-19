@@ -14,11 +14,11 @@ public partial interface FootStepTrigger : ISchemaClass<FootStepTrigger>
     static int ISchemaClass<FootStepTrigger>.Size => 32;
     static string? ISchemaClass<FootStepTrigger>.ClassName => null;
 
-    
+
     public ref CUtlVector<int> Tags { get; }
-    
+
     public ref int FootIndex { get; }
-    
+
     public ref StepPhase TriggerPhase { get; }
 
 

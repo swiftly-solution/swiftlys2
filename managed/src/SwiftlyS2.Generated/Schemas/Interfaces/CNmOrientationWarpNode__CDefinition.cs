@@ -14,15 +14,15 @@ public partial interface CNmOrientationWarpNode__CDefinition : CNmPoseNode__CDef
     static int ISchemaClass<CNmOrientationWarpNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmOrientationWarpNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short ClipReferenceNodeIdx { get; }
-    
+
     public ref short TargetValueNodeIdx { get; }
-    
+
     public ref bool IsOffsetNode { get; }
-    
+
     public ref bool IsOffsetRelativeToCharacter { get; }
-    
+
     public ref CNmRootMotionData__SamplingMode_t SamplingMode { get; }
 
 

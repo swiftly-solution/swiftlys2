@@ -14,7 +14,7 @@ public partial interface RnMeshDesc_t : RnShapeDesc_t, ISchemaClass<RnMeshDesc_t
     static int ISchemaClass<RnMeshDesc_t>.Size => 216;
     static string? ISchemaClass<RnMeshDesc_t>.ClassName => null;
 
-    
+
     public RnMesh_t Mesh { get; }
 
 

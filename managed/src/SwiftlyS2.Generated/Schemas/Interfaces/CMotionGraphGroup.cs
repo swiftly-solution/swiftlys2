@@ -14,15 +14,15 @@ public partial interface CMotionGraphGroup : ISchemaClass<CMotionGraphGroup>
     static int ISchemaClass<CMotionGraphGroup>.Size => 264;
     static string? ISchemaClass<CMotionGraphGroup>.ClassName => null;
 
-    
+
     public CMotionSearchDB SearchDB { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> MotionGraphs { get; }
-    
+
     public ref CUtlVector<CMotionGraphConfig> MotionGraphConfigs { get; }
-    
+
     public ref CUtlVector<int> SampleToConfig { get; }
-    
+
     public AnimScriptHandle IsActiveScript { get; }
 
 

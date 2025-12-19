@@ -14,11 +14,11 @@ public partial interface BakedLightingInfo_t__BakedShadowAssignment_t : ISchemaC
     static int ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t>.Size => 12;
     static string? ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t>.ClassName => null;
 
-    
+
     public ref uint LightHash { get; }
-    
+
     public ref uint MapHash { get; }
-    
+
     public ref byte ShadowChannel { get; }
 
 

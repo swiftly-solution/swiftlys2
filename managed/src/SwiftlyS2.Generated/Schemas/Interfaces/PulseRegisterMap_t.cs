@@ -14,14 +14,14 @@ public partial interface PulseRegisterMap_t : ISchemaClass<PulseRegisterMap_t>
     static int ISchemaClass<PulseRegisterMap_t>.Size => 48;
     static string? ISchemaClass<PulseRegisterMap_t>.ClassName => null;
 
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField Inparams { get; }
-    
-  // CKV3MemberNameSet
+
+    // CKV3MemberNameSet
     public SchemaUntypedField InparamsWhichCanBeMoved { get; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField Outparams { get; }
 
 

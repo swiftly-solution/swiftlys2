@@ -14,15 +14,15 @@ public partial interface CEnvLaser : CBeam, ISchemaClass<CEnvLaser>
     static int ISchemaClass<CEnvLaser>.Size => 2208;
     static string? ISchemaClass<CEnvLaser>.ClassName => "env_laser";
 
-    
+
     public string LaserTarget { get; set; }
-    
+
     public CSprite? Sprite { get; }
-    
+
     public string SpriteName { get; set; }
-    
+
     public ref Vector FirePosition { get; }
-    
+
     public ref float StartFrame { get; }
 
 

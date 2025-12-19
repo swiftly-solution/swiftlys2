@@ -14,11 +14,11 @@ public partial interface CPulse_Constant : ISchemaClass<CPulse_Constant>
     static int ISchemaClass<CPulse_Constant>.Size => 48;
     static string? ISchemaClass<CPulse_Constant>.ClassName => null;
 
-    
-  // CPulseValueFullType
+
+    // CPulseValueFullType
     public SchemaUntypedField Type { get; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField Value { get; }
 
 

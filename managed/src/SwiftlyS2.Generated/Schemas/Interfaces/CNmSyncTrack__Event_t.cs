@@ -14,11 +14,11 @@ public partial interface CNmSyncTrack__Event_t : ISchemaClass<CNmSyncTrack__Even
     static int ISchemaClass<CNmSyncTrack__Event_t>.Size => 16;
     static string? ISchemaClass<CNmSyncTrack__Event_t>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol ID { get; }
-    
+
     public NmPercent_t StartTime { get; }
-    
+
     public NmPercent_t Duration { get; }
 
 

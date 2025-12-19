@@ -14,55 +14,55 @@ public partial interface CBaseButton : CBaseToggle, ISchemaClass<CBaseButton>
     static int ISchemaClass<CBaseButton>.Size => 2472;
     static string? ISchemaClass<CBaseButton>.ClassName => "func_button";
 
-    
+
     public ref QAngle MoveEntitySpace { get; }
-    
+
     public ref bool StayPushed { get; }
-    
+
     public ref bool Rotating { get; }
-    
+
     public locksound_t Ls { get; }
-    
+
     public string UseSound { get; set; }
-    
+
     public string LockedSound { get; set; }
-    
+
     public string UnlockedSound { get; set; }
-    
+
     public string OverrideAnticipationName { get; set; }
-    
+
     public ref bool Locked { get; }
-    
+
     public ref bool Disabled { get; }
-    
+
     public GameTime_t UseLockedTime { get; }
-    
+
     public ref bool SolidBsp { get; }
-    
+
     public CEntityIOOutput OnDamaged { get; }
-    
+
     public CEntityIOOutput OnPressed { get; }
-    
+
     public CEntityIOOutput OnUseLocked { get; }
-    
+
     public CEntityIOOutput OnIn { get; }
-    
+
     public CEntityIOOutput OnOut { get; }
-    
+
     public ref int State { get; }
-    
+
     public ref CHandle<CEntityInstance> Constraint { get; }
-    
+
     public ref CHandle<CEntityInstance> ConstraintParent { get; }
-    
+
     public ref bool ForceNpcExclude { get; }
-    
+
     public string GlowEntity { get; set; }
-    
+
     public ref CHandle<CBaseModelEntity> GlowEntity1 { get; }
-    
+
     public ref bool Usable { get; }
-    
+
     public string DisplayText { get; set; }
 
     public void GlowEntity1Updated();

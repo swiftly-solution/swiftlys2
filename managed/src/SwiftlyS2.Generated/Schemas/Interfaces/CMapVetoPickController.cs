@@ -14,58 +14,58 @@ public partial interface CMapVetoPickController : CBaseEntity, ISchemaClass<CMap
     static int ISchemaClass<CMapVetoPickController>.Size => 3864;
     static string? ISchemaClass<CMapVetoPickController>.ClassName => "mapvetopick_controller";
 
-    
+
     public ref bool PlayedIntroVcd { get; }
-    
+
     public ref bool NeedToPlayFiveSecondsRemaining { get; }
-    
+
     public ref double DblPreMatchDraftSequenceTime { get; }
-    
+
     public ref bool PreMatchDraftStateChanged { get; }
-    
+
     public ref int DraftType { get; }
-    
+
     public ref int TeamWinningCoinToss { get; }
-    
+
     public ISchemaFixedArray<int> TeamWithFirstChoice { get; }
-    
+
     public ISchemaFixedArray<int> VoteMapIdsList { get; }
-    
+
     public ISchemaFixedArray<int> AccountIDs { get; }
-    
+
     public ISchemaFixedArray<int> MapId0 { get; }
-    
+
     public ISchemaFixedArray<int> MapId1 { get; }
-    
+
     public ISchemaFixedArray<int> MapId2 { get; }
-    
+
     public ISchemaFixedArray<int> MapId3 { get; }
-    
+
     public ISchemaFixedArray<int> MapId4 { get; }
-    
+
     public ISchemaFixedArray<int> MapId5 { get; }
-    
+
     public ISchemaFixedArray<int> StartingSide0 { get; }
-    
+
     public ref int CurrentPhase { get; }
-    
+
     public ref int PhaseStartTick { get; }
-    
+
     public ref int PhaseDurationTicks { get; }
-    
-  // CEntityOutputTemplate< CUtlSymbolLarge >
+
+    // CEntityOutputTemplate< CUtlSymbolLarge >
     public SchemaUntypedField OnMapVetoed { get; }
-    
-  // CEntityOutputTemplate< CUtlSymbolLarge >
+
+    // CEntityOutputTemplate< CUtlSymbolLarge >
     public SchemaUntypedField OnMapPicked { get; }
-    
-  // CEntityOutputTemplate< int32 >
+
+    // CEntityOutputTemplate< int32 >
     public SchemaUntypedField OnSidesPicked { get; }
-    
-  // CEntityOutputTemplate< int32 >
+
+    // CEntityOutputTemplate< int32 >
     public SchemaUntypedField OnNewPhaseStarted { get; }
-    
-  // CEntityOutputTemplate< int32 >
+
+    // CEntityOutputTemplate< int32 >
     public SchemaUntypedField OnLevelTransition { get; }
 
     public void DraftTypeUpdated();

@@ -14,19 +14,19 @@ public partial interface C_OP_IntraParticleForce : CParticleFunctionForce, ISche
     static int ISchemaClass<C_OP_IntraParticleForce>.Size => 512;
     static string? ISchemaClass<C_OP_IntraParticleForce>.ClassName => null;
 
-    
+
     public ref float AttractionMinDistance { get; }
-    
+
     public ref float AttractionMaxDistance { get; }
-    
+
     public ref float AttractionMaxStrength { get; }
-    
+
     public ref float RepulsionMinDistance { get; }
-    
+
     public ref float RepulsionMaxDistance { get; }
-    
+
     public ref float RepulsionMaxStrength { get; }
-    
+
     public ref bool UseAABB { get; }
 
 

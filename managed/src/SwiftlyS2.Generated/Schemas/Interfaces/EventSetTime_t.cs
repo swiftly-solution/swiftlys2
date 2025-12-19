@@ -14,21 +14,21 @@ public partial interface EventSetTime_t : ISchemaClass<EventSetTime_t>
     static int ISchemaClass<EventSetTime_t>.Size => 96;
     static string? ISchemaClass<EventSetTime_t>.ClassName => null;
 
-    
+
     public EngineLoopState_t LoopState { get; }
-    
+
     public ref int ClientOutputFrames { get; }
-    
+
     public ref double RealTime { get; }
-    
+
     public ref double RenderTime { get; }
-    
+
     public ref double RenderFrameTime { get; }
-    
+
     public ref double RenderFrameTimeUnbounded { get; }
-    
+
     public ref double RenderFrameTimeUnscaled { get; }
-    
+
     public ref double TickRemainder { get; }
 
 

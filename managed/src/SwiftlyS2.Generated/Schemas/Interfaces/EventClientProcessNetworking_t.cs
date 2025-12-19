@@ -14,7 +14,7 @@ public partial interface EventClientProcessNetworking_t : ISchemaClass<EventClie
     static int ISchemaClass<EventClientProcessNetworking_t>.Size => 4;
     static string? ISchemaClass<EventClientProcessNetworking_t>.ClassName => null;
 
-    
+
     public ref int TickCount { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface CInfoGameEventProxy : CPointEntity, ISchemaClass<CInfoG
     static int ISchemaClass<CInfoGameEventProxy>.Size => 1280;
     static string? ISchemaClass<CInfoGameEventProxy>.ClassName => "info_game_event_proxy";
 
-    
+
     public string EventName { get; set; }
-    
+
     public ref float Range { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CMarkupVolume : CBaseModelEntity, ISchemaClass<CMarkupV
     static int ISchemaClass<CMarkupVolume>.Size => 2016;
     static string? ISchemaClass<CMarkupVolume>.ClassName => "markup_volume";
 
-    
+
     public ref bool Disabled { get; }
 
 

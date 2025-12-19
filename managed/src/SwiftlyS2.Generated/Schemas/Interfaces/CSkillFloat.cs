@@ -14,7 +14,7 @@ public partial interface CSkillFloat : ISchemaClass<CSkillFloat>
     static int ISchemaClass<CSkillFloat>.Size => 16;
     static string? ISchemaClass<CSkillFloat>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<float> Value { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CParticleFunctionPreEmission : CParticleFunctionOperato
     static int ISchemaClass<CParticleFunctionPreEmission>.Size => 472;
     static string? ISchemaClass<CParticleFunctionPreEmission>.ClassName => null;
 
-    
+
     public ref bool RunOnce { get; }
 
 

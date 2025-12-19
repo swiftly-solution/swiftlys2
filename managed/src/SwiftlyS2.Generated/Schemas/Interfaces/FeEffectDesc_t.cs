@@ -14,14 +14,14 @@ public partial interface FeEffectDesc_t : ISchemaClass<FeEffectDesc_t>
     static int ISchemaClass<FeEffectDesc_t>.Size => 32;
     static string? ISchemaClass<FeEffectDesc_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref uint NameHash { get; }
-    
+
     public ref int Type { get; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField Params { get; }
 
 

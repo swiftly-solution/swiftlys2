@@ -14,20 +14,20 @@ public partial interface CPrecipitationVData : CEntitySubclassVDataBase, ISchema
     static int ISchemaClass<CPrecipitationVData>.Size => 296;
     static string? ISchemaClass<CPrecipitationVData>.ClassName => null;
 
-    
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
     public SchemaUntypedField ParticlePrecipitationEffect { get; }
-    
+
     public ref float InnerDistance { get; }
-    
+
     public ref ParticleAttachment_t AttachType { get; }
-    
+
     public ref bool BatchSameVolumeType { get; }
-    
+
     public ref int RTEnvCP { get; }
-    
+
     public ref int RTEnvCPComponent { get; }
-    
+
     public string Modifier { get; set; }
 
 

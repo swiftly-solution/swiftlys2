@@ -14,15 +14,15 @@ public partial interface C_OP_ConstrainDistanceToUserSpecifiedPath : CParticleFu
     static int ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.Size => 504;
     static string? ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.ClassName => null;
 
-    
+
     public ref float MinDistance { get; }
-    
+
     public ref float MaxDistance { get; }
-    
+
     public ref float TimeScale { get; }
-    
+
     public ref bool LoopedPath { get; }
-    
+
     public ref CUtlVector<PointDefinitionWithTimeValues_t> PointList { get; }
 
 

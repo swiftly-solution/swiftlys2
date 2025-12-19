@@ -14,7 +14,7 @@ public partial interface CFollowAttachmentUpdateNode : CUnaryUpdateNode, ISchema
     static int ISchemaClass<CFollowAttachmentUpdateNode>.Size => 272;
     static string? ISchemaClass<CFollowAttachmentUpdateNode>.ClassName => null;
 
-    
+
     public FollowAttachmentSettings_t OpFixedData { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface C_OP_ReinitializeScalarEndCap : CParticleFunctionOperat
     static int ISchemaClass<C_OP_ReinitializeScalarEndCap>.Size => 480;
     static string? ISchemaClass<C_OP_ReinitializeScalarEndCap>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
 
 

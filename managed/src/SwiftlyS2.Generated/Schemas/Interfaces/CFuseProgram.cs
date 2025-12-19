@@ -14,13 +14,13 @@ public partial interface CFuseProgram : ISchemaClass<CFuseProgram>
     static int ISchemaClass<CFuseProgram>.Size => 80;
     static string? ISchemaClass<CFuseProgram>.ClassName => null;
 
-    
+
     public ref CUtlVector<byte> ProgramBuffer { get; }
-    
+
     public ref CUtlVector<FuseVariableIndex_t> VariablesRead { get; }
-    
+
     public ref CUtlVector<FuseVariableIndex_t> VariablesWritten { get; }
-    
+
     public ref int MaxTempVarsUsed { get; }
 
 

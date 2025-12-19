@@ -14,11 +14,11 @@ public partial interface C_OP_DampenToCP : CParticleFunctionOperator, ISchemaCla
     static int ISchemaClass<C_OP_DampenToCP>.Size => 480;
     static string? ISchemaClass<C_OP_DampenToCP>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref float Range { get; }
-    
+
     public ref float Scale { get; }
 
 

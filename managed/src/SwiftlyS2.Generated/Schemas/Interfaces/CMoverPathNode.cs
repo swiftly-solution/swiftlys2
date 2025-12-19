@@ -14,27 +14,27 @@ public partial interface CMoverPathNode : CPointEntity, ISchemaClass<CMoverPathN
     static int ISchemaClass<CMoverPathNode>.Size => 1552;
     static string? ISchemaClass<CMoverPathNode>.ClassName => "path_node_mover";
 
-    
+
     public ref Vector InTangentLocal { get; }
-    
+
     public ref Vector OutTangentLocal { get; }
-    
+
     public string ParentPathUniqueID { get; set; }
-    
+
     public string PathNodeParameter { get; set; }
-    
+
     public CEntityIOOutput OnStartFromOrInSegment { get; }
-    
+
     public CEntityIOOutput OnStoppedAtOrInSegment { get; }
-    
+
     public CEntityIOOutput OnPassThrough { get; }
-    
+
     public CEntityIOOutput OnPassThroughForward { get; }
-    
+
     public CEntityIOOutput OnPassThroughReverse { get; }
-    
+
     public ref CHandle<CPathMover> Mover { get; }
-    
+
     public ref CTransform XWSPrevParent { get; }
 
 

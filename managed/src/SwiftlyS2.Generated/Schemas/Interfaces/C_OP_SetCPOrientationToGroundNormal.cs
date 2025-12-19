@@ -14,23 +14,23 @@ public partial interface C_OP_SetCPOrientationToGroundNormal : CParticleFunction
     static int ISchemaClass<C_OP_SetCPOrientationToGroundNormal>.Size => 640;
     static string? ISchemaClass<C_OP_SetCPOrientationToGroundNormal>.ClassName => null;
 
-    
+
     public ref float InterpRate { get; }
-    
+
     public ref float MaxTraceLength { get; }
-    
+
     public ref float Tolerance { get; }
-    
+
     public ref float TraceOffset { get; }
-    
+
     public string CollisionGroupName { get; set; }
-    
+
     public ref ParticleTraceSet_t TraceSet { get; }
-    
+
     public ref int InputCP { get; }
-    
+
     public ref int OutputCP { get; }
-    
+
     public ref bool IncludeWater { get; }
 
 

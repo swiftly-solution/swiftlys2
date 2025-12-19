@@ -14,25 +14,25 @@ public partial interface CPhysSlideConstraint : CPhysConstraint, ISchemaClass<CP
     static int ISchemaClass<CPhysSlideConstraint>.Size => 1576;
     static string? ISchemaClass<CPhysSlideConstraint>.ClassName => "phys_slideconstraint";
 
-    
+
     public ref Vector AxisEnd { get; }
-    
+
     public ref float SlideFriction { get; }
-    
+
     public ref float SystemLoadScale { get; }
-    
+
     public ref float InitialOffset { get; }
-    
+
     public ref bool EnableLinearConstraint { get; }
-    
+
     public ref bool EnableAngularConstraint { get; }
-    
+
     public ref float MotorFrequency { get; }
-    
+
     public ref float MotorDampingRatio { get; }
-    
+
     public ref bool UseEntityPivot { get; }
-    
+
     public ConstraintSoundInfo SoundInfo { get; }
 
 

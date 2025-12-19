@@ -14,19 +14,19 @@ public partial interface CChangeLevel : CBaseTrigger, ISchemaClass<CChangeLevel>
     static int ISchemaClass<CChangeLevel>.Size => 2536;
     static string? ISchemaClass<CChangeLevel>.ClassName => "trigger_changelevel";
 
-    
+
     public string MapName { get; set; }
-    
+
     public string LandmarkName { get; set; }
-    
+
     public CEntityIOOutput OnChangeLevel { get; }
-    
+
     public ref bool Touched { get; }
-    
+
     public ref bool NoTouch { get; }
-    
+
     public ref bool NewChapter { get; }
-    
+
     public ref bool OnChangeLevelFired { get; }
 
 

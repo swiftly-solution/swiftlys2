@@ -14,25 +14,25 @@ public partial interface CPulseCell_Outflow_ScriptedSequence : CPulseCell_BaseYi
     static int ISchemaClass<CPulseCell_Outflow_ScriptedSequence>.Size => 336;
     static string? ISchemaClass<CPulseCell_Outflow_ScriptedSequence>.ClassName => null;
 
-    
+
     public string SyncGroup { get; set; }
-    
+
     public ref int ExpectedNumSequencesInSyncGroup { get; }
-    
+
     public ref bool EnsureOnNavmeshOnFinish { get; }
-    
+
     public ref bool DontTeleportAtEnd { get; }
-    
+
     public ref bool DisallowInterrupts { get; }
-    
+
     public PulseScriptedSequenceData_t ScriptedSequenceDataMain { get; }
-    
+
     public ref CUtlVector<PulseScriptedSequenceData_t> AdditionalActors { get; }
-    
+
     public CPulse_ResumePoint OnFinished { get; }
-    
+
     public CPulse_ResumePoint OnCanceled { get; }
-    
+
     public ref CUtlVector<CPulse_OutflowConnection> Triggers { get; }
 
 

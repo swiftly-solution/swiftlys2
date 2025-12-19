@@ -14,23 +14,23 @@ public partial interface VMixModDelayDesc_t : ISchemaClass<VMixModDelayDesc_t>
     static int ISchemaClass<VMixModDelayDesc_t>.Size => 48;
     static string? ISchemaClass<VMixModDelayDesc_t>.ClassName => null;
 
-    
+
     public VMixFilterDesc_t FeedbackFilter { get; }
-    
+
     public ref bool PhaseInvert { get; }
-    
+
     public ref float GlideTime { get; }
-    
+
     public ref float Delay { get; }
-    
+
     public ref float OutputGain { get; }
-    
+
     public ref float FeedbackGain { get; }
-    
+
     public ref float ModRate { get; }
-    
+
     public ref float ModDepth { get; }
-    
+
     public ref bool ApplyAntialiasing { get; }
 
 

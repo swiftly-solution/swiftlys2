@@ -14,11 +14,11 @@ public partial interface C_OP_MovementMaintainOffset : CParticleFunctionOperator
     static int ISchemaClass<C_OP_MovementMaintainOffset>.Size => 488;
     static string? ISchemaClass<C_OP_MovementMaintainOffset>.ClassName => null;
 
-    
+
     public ref Vector Offset { get; }
-    
+
     public ref int CP { get; }
-    
+
     public ref bool RadiusScale { get; }
 
 

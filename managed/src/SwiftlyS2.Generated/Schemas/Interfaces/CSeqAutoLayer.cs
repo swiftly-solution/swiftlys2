@@ -14,19 +14,19 @@ public partial interface CSeqAutoLayer : ISchemaClass<CSeqAutoLayer>
     static int ISchemaClass<CSeqAutoLayer>.Size => 28;
     static string? ISchemaClass<CSeqAutoLayer>.ClassName => null;
 
-    
+
     public ref short LocalReference { get; }
-    
+
     public ref short LocalPose { get; }
-    
+
     public CSeqAutoLayerFlag Flags { get; }
-    
+
     public ref float Start { get; }
-    
+
     public ref float Peak { get; }
-    
+
     public ref float Tail { get; }
-    
+
     public ref float End { get; }
 
 

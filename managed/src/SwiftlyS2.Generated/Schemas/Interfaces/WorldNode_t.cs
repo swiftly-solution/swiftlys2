@@ -14,33 +14,33 @@ public partial interface WorldNode_t : ISchemaClass<WorldNode_t>
     static int ISchemaClass<WorldNode_t>.Size => 352;
     static string? ISchemaClass<WorldNode_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<SceneObject_t> SceneObjects { get; }
-    
+
     public ref CUtlVector<ushort> VisClusterMembership { get; }
-    
+
     public ref CUtlVector<AggregateSceneObject_t> AggregateSceneObjects { get; }
-    
+
     public ref CUtlVector<ClutterSceneObject_t> ClutterSceneObjects { get; }
-    
+
     public ref CUtlVector<ExtraVertexStreamOverride_t> ExtraVertexStreamOverrides { get; }
-    
+
     public ref CUtlVector<MaterialOverride_t> MaterialOverrides { get; }
-    
+
     public ref CUtlVector<WorldNodeOnDiskBufferData_t> ExtraVertexStreams { get; }
-    
+
     public ref CUtlVector<AggregateInstanceStreamOnDiskData_t> AggregateInstanceStreams { get; }
-    
+
     public ref CUtlVector<AggregateVertexAlbedoStreamOnDiskData_t> VertexAlbedoStreams { get; }
-    
+
     public ref CUtlVector<CUtlString> LayerNames { get; }
-    
+
     public ref CUtlVector<byte> SceneObjectLayerIndices { get; }
-    
+
     public string GrassFileName { get; set; }
-    
+
     public BakedLightingInfo_t NodeLightingInfo { get; }
-    
+
     public ref bool HasBakedGeometryFlag { get; }
 
 

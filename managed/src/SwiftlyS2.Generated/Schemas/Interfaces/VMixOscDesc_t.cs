@@ -14,11 +14,11 @@ public partial interface VMixOscDesc_t : ISchemaClass<VMixOscDesc_t>
     static int ISchemaClass<VMixOscDesc_t>.Size => 12;
     static string? ISchemaClass<VMixOscDesc_t>.ClassName => null;
 
-    
+
     public ref VMixLFOShape_t OscType { get; }
-    
+
     public ref float Freq { get; }
-    
+
     public ref float Phase { get; }
 
 

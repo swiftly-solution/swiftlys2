@@ -14,7 +14,7 @@ public partial interface PulseCursorID_t : ISchemaClass<PulseCursorID_t>
     static int ISchemaClass<PulseCursorID_t>.Size => 4;
     static string? ISchemaClass<PulseCursorID_t>.ClassName => null;
 
-    
+
     public ref int Value { get; }
 
 

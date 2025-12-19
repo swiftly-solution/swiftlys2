@@ -14,9 +14,9 @@ public partial interface CEnvViewPunch : CPointEntity, ISchemaClass<CEnvViewPunc
     static int ISchemaClass<CEnvViewPunch>.Size => 1280;
     static string? ISchemaClass<CEnvViewPunch>.ClassName => "env_viewpunch";
 
-    
+
     public ref float Radius { get; }
-    
+
     public ref QAngle ViewPunch { get; }
 
 

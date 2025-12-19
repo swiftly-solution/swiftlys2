@@ -14,17 +14,17 @@ public partial interface PostProcessingVignetteParameters_t : ISchemaClass<PostP
     static int ISchemaClass<PostProcessingVignetteParameters_t>.Size => 36;
     static string? ISchemaClass<PostProcessingVignetteParameters_t>.ClassName => null;
 
-    
+
     public ref float VignetteStrength { get; }
-    
+
     public ref Vector2D Center { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref float Roundness { get; }
-    
+
     public ref float Feather { get; }
-    
+
     public ref Vector ColorTint { get; }
 
 

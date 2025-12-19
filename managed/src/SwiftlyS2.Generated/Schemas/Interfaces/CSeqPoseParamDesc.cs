@@ -14,15 +14,15 @@ public partial interface CSeqPoseParamDesc : ISchemaClass<CSeqPoseParamDesc>
     static int ISchemaClass<CSeqPoseParamDesc>.Size => 32;
     static string? ISchemaClass<CSeqPoseParamDesc>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref float Start { get; }
-    
+
     public ref float End { get; }
-    
+
     public ref float Loop { get; }
-    
+
     public ref bool Looping { get; }
 
 

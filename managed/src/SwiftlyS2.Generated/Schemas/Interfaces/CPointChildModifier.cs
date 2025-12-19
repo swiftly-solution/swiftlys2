@@ -14,7 +14,7 @@ public partial interface CPointChildModifier : CPointEntity, ISchemaClass<CPoint
     static int ISchemaClass<CPointChildModifier>.Size => 1272;
     static string? ISchemaClass<CPointChildModifier>.ClassName => "point_childmodifier";
 
-    
+
     public ref bool OrphanInsteadOfDeletingChildrenOnRemove { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface PhysicsParticleId_t : ISchemaClass<PhysicsParticleId_t>
     static int ISchemaClass<PhysicsParticleId_t>.Size => 4;
     static string? ISchemaClass<PhysicsParticleId_t>.ClassName => null;
 
-    
+
     public ref uint Value { get; }
 
 

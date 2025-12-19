@@ -14,10 +14,10 @@ public partial interface CSetParameterActionUpdater : CAnimActionUpdater, ISchem
     static int ISchemaClass<CSetParameterActionUpdater>.Size => 48;
     static string? ISchemaClass<CSetParameterActionUpdater>.ClassName => null;
 
-    
+
     public CAnimParamHandle Param { get; }
-    
-  // CAnimVariant
+
+    // CAnimVariant
     public SchemaUntypedField Value { get; }
 
 

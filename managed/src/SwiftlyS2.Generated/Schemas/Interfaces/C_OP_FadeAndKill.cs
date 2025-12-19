@@ -14,19 +14,19 @@ public partial interface C_OP_FadeAndKill : CParticleFunctionOperator, ISchemaCl
     static int ISchemaClass<C_OP_FadeAndKill>.Size => 496;
     static string? ISchemaClass<C_OP_FadeAndKill>.ClassName => null;
 
-    
+
     public ref float StartFadeInTime { get; }
-    
+
     public ref float EndFadeInTime { get; }
-    
+
     public ref float StartFadeOutTime { get; }
-    
+
     public ref float EndFadeOutTime { get; }
-    
+
     public ref float StartAlpha { get; }
-    
+
     public ref float EndAlpha { get; }
-    
+
     public ref bool ForcePreserveParticleOrder { get; }
 
 

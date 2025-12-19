@@ -14,11 +14,11 @@ public partial interface CNmBoneMaskBlendNode__CDefinition : CNmBoneMaskValueNod
     static int ISchemaClass<CNmBoneMaskBlendNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmBoneMaskBlendNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceMaskNodeIdx { get; }
-    
+
     public ref short TargetMaskNodeIdx { get; }
-    
+
     public ref short BlendWeightValueNodeIdx { get; }
 
 

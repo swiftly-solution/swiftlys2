@@ -14,7 +14,7 @@ public partial interface CNmVectorNegateNode__CDefinition : CNmVectorValueNode__
     static int ISchemaClass<CNmVectorNegateNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmVectorNegateNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
 
 

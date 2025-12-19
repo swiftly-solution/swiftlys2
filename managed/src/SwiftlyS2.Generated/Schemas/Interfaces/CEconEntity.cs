@@ -14,23 +14,23 @@ public partial interface CEconEntity : CBaseFlex, ISchemaClass<CEconEntity>
     static int ISchemaClass<CEconEntity>.Size => 3664;
     static string? ISchemaClass<CEconEntity>.ClassName => null;
 
-    
+
     public CAttributeContainer AttributeManager { get; }
-    
+
     public ref uint OriginalOwnerXuidLow { get; }
-    
+
     public ref uint OriginalOwnerXuidHigh { get; }
-    
+
     public ref int FallbackPaintKit { get; }
-    
+
     public ref int FallbackSeed { get; }
-    
+
     public ref float FallbackWear { get; }
-    
+
     public ref int FallbackStatTrak { get; }
-    
+
     public ref CHandle<CBaseEntity> OldProvidee { get; }
-    
+
     public ref int OldOwnerClass { get; }
 
     public void AttributeManagerUpdated();

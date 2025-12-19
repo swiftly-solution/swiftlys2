@@ -14,23 +14,23 @@ public partial interface CDynamicLight : CBaseModelEntity, ISchemaClass<CDynamic
     static int ISchemaClass<CDynamicLight>.Size => 2032;
     static string? ISchemaClass<CDynamicLight>.ClassName => "light_dynamic";
 
-    
+
     public ref byte ActualFlags { get; }
-    
+
     public ref byte Flags { get; }
-    
+
     public ref byte LightStyle { get; }
-    
+
     public ref bool On { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref int Exponent { get; }
-    
+
     public ref float InnerAngle { get; }
-    
+
     public ref float OuterAngle { get; }
-    
+
     public ref float SpotRadius { get; }
 
     public void FlagsUpdated();

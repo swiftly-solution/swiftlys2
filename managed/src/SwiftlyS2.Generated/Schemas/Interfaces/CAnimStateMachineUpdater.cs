@@ -14,11 +14,11 @@ public partial interface CAnimStateMachineUpdater : ISchemaClass<CAnimStateMachi
     static int ISchemaClass<CAnimStateMachineUpdater>.Size => 88;
     static string? ISchemaClass<CAnimStateMachineUpdater>.ClassName => null;
 
-    
+
     public ref CUtlVector<CStateUpdateData> States { get; }
-    
+
     public ref CUtlVector<CTransitionUpdateData> Transitions { get; }
-    
+
     public ref int StartStateIndex { get; }
 
 

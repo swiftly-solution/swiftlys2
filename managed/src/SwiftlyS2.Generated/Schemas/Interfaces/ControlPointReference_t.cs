@@ -14,11 +14,11 @@ public partial interface ControlPointReference_t : ISchemaClass<ControlPointRefe
     static int ISchemaClass<ControlPointReference_t>.Size => 20;
     static string? ISchemaClass<ControlPointReference_t>.ClassName => null;
 
-    
+
     public ref int ControlPointNameString { get; }
-    
+
     public ref Vector OffsetFromControlPoint { get; }
-    
+
     public ref bool OffsetInLocalSpace { get; }
 
 

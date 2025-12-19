@@ -14,13 +14,13 @@ public partial interface CModelConfig : ISchemaClass<CModelConfig>
     static int ISchemaClass<CModelConfig>.Size => 40;
     static string? ISchemaClass<CModelConfig>.ClassName => null;
 
-    
+
     public string ConfigName { get; set; }
-    
+
     public ref CUtlVector<PointerTo<CModelConfigElement>> Elements { get; }
-    
+
     public ref bool TopLevel { get; }
-    
+
     public ref bool ActiveInEditorByDefault { get; }
 
 

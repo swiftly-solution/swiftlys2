@@ -14,13 +14,13 @@ public partial interface CTeam : CBaseEntity, ISchemaClass<CTeam>
     static int ISchemaClass<CTeam>.Size => 1448;
     static string? ISchemaClass<CTeam>.ClassName => "team_manager";
 
-    
+
     public ref CUtlVector<CHandle<CBasePlayerController>> PlayerControllers { get; }
-    
+
     public ref CUtlVector<CHandle<CBasePlayerPawn>> Players { get; }
-    
+
     public ref int Score { get; }
-    
+
     public string Teamname { get; set; }
 
     public void PlayerControllersUpdated();

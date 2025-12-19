@@ -14,11 +14,11 @@ public partial interface SpawnPoint : CServerOnlyPointEntity, ISchemaClass<Spawn
     static int ISchemaClass<SpawnPoint>.Size => 1280;
     static string? ISchemaClass<SpawnPoint>.ClassName => "spawnpoint";
 
-    
+
     public ref int Priority { get; }
-    
+
     public ref bool Enabled { get; }
-    
+
     public ref int Type { get; }
 
 

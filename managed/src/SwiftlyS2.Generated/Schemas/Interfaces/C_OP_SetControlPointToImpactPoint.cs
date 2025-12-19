@@ -14,29 +14,29 @@ public partial interface C_OP_SetControlPointToImpactPoint : CParticleFunctionPr
     static int ISchemaClass<C_OP_SetControlPointToImpactPoint>.Size => 1016;
     static string? ISchemaClass<C_OP_SetControlPointToImpactPoint>.ClassName => null;
 
-    
+
     public ref int CPOut { get; }
-    
+
     public ref int CPIn { get; }
-    
+
     public ref float UpdateRate { get; }
-    
+
     public CParticleCollectionFloatInput TraceLength { get; }
-    
+
     public ref float StartOffset { get; }
-    
+
     public ref float Offset { get; }
-    
+
     public ref Vector TraceDir { get; }
-    
+
     public string CollisionGroupName { get; set; }
-    
+
     public ref ParticleTraceSet_t TraceSet { get; }
-    
+
     public ref bool SetToEndpoint { get; }
-    
+
     public ref bool TraceToClosestSurface { get; }
-    
+
     public ref bool IncludeWater { get; }
 
 

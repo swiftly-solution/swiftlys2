@@ -14,13 +14,13 @@ public partial interface CMorphConstraint : CBaseConstraint, ISchemaClass<CMorph
     static int ISchemaClass<CMorphConstraint>.Size => 128;
     static string? ISchemaClass<CMorphConstraint>.ClassName => null;
 
-    
+
     public string TargetMorph { get; set; }
-    
+
     public ref int SlaveChannel { get; }
-    
+
     public ref float Min { get; }
-    
+
     public ref float Max { get; }
 
 

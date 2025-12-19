@@ -14,37 +14,37 @@ public partial interface CGradientFog : CBaseEntity, ISchemaClass<CGradientFog>
     static int ISchemaClass<CGradientFog>.Size => 1328;
     static string? ISchemaClass<CGradientFog>.ClassName => "env_gradient_fog";
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> GradientFogTexture { get; }
-    
+
     public ref float FogStartDistance { get; }
-    
+
     public ref float FogEndDistance { get; }
-    
+
     public ref bool HeightFogEnabled { get; }
-    
+
     public ref float FogStartHeight { get; }
-    
+
     public ref float FogEndHeight { get; }
-    
+
     public ref float FarZ { get; }
-    
+
     public ref float FogMaxOpacity { get; }
-    
+
     public ref float FogFalloffExponent { get; }
-    
+
     public ref float FogVerticalExponent { get; }
-    
+
     public ref Color FogColor { get; }
-    
+
     public ref float FogStrength { get; }
-    
+
     public ref float FadeTime { get; }
-    
+
     public ref bool StartDisabled { get; }
-    
+
     public ref bool IsEnabled { get; }
-    
+
     public ref bool GradientFogNeedsTextures { get; }
 
     public void GradientFogTextureUpdated();

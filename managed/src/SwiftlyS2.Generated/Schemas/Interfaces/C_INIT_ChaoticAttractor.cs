@@ -14,23 +14,23 @@ public partial interface C_INIT_ChaoticAttractor : CParticleFunctionInitializer,
     static int ISchemaClass<C_INIT_ChaoticAttractor>.Size => 512;
     static string? ISchemaClass<C_INIT_ChaoticAttractor>.ClassName => null;
 
-    
+
     public ref float AParm { get; }
-    
+
     public ref float BParm { get; }
-    
+
     public ref float CParm { get; }
-    
+
     public ref float DParm { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public ref float SpeedMin { get; }
-    
+
     public ref float SpeedMax { get; }
-    
+
     public ref int BaseCP { get; }
-    
+
     public ref bool UniformSpeed { get; }
 
 

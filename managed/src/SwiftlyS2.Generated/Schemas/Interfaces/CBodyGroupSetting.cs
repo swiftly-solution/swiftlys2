@@ -14,9 +14,9 @@ public partial interface CBodyGroupSetting : ISchemaClass<CBodyGroupSetting>
     static int ISchemaClass<CBodyGroupSetting>.Size => 16;
     static string? ISchemaClass<CBodyGroupSetting>.ClassName => null;
 
-    
+
     public string BodyGroupName { get; set; }
-    
+
     public ref int BodyGroupOption { get; }
 
 

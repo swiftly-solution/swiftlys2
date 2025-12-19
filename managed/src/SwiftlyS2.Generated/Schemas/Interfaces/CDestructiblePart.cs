@@ -14,19 +14,19 @@ public partial interface CDestructiblePart : ISchemaClass<CDestructiblePart>
     static int ISchemaClass<CDestructiblePart>.Size => 80;
     static string? ISchemaClass<CDestructiblePart>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol DebugName { get; }
-    
+
     public ref HitGroup_t HitGroup { get; }
-    
+
     public ref bool DisableHitGroupWhenDestroyed { get; }
-    
+
     public ref CUtlVector<HitGroup_t> OtherHitgroupsToDestroyWhenFullyDestructed { get; }
-    
+
     public ref bool OnlyDestroyWhenGibbing { get; }
-    
+
     public ref CGlobalSymbol BodyGroupName { get; }
-    
+
     public ref CUtlVector<CDestructiblePart_DamageLevel> DamageLevels { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface CTriggerBrush : CBaseModelEntity, ISchemaClass<CTrigger
     static int ISchemaClass<CTriggerBrush>.Size => 2136;
     static string? ISchemaClass<CTriggerBrush>.ClassName => "trigger_brush";
 
-    
+
     public CEntityIOOutput OnStartTouch { get; }
-    
+
     public CEntityIOOutput OnEndTouch { get; }
-    
+
     public CEntityIOOutput OnUse { get; }
-    
+
     public ref int InputFilter { get; }
-    
+
     public ref int DontMessageParent { get; }
 
 

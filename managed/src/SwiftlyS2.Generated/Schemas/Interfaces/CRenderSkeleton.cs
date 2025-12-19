@@ -14,11 +14,11 @@ public partial interface CRenderSkeleton : ISchemaClass<CRenderSkeleton>
     static int ISchemaClass<CRenderSkeleton>.Size => 80;
     static string? ISchemaClass<CRenderSkeleton>.ClassName => null;
 
-    
+
     public ref CUtlVector<RenderSkeletonBone_t> Bones { get; }
-    
+
     public ref CUtlVector<int> BoneParents { get; }
-    
+
     public ref int BoneWeightCount { get; }
 
 

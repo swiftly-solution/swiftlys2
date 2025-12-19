@@ -14,11 +14,11 @@ public partial interface CNmIDEventNode__CDefinition : CNmIDValueNode__CDefiniti
     static int ISchemaClass<CNmIDEventNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmIDEventNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public CNmBitFlags EventConditionRules { get; }
-    
+
     public ref CGlobalSymbol DefaultValue { get; }
 
 

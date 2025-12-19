@@ -14,11 +14,11 @@ public partial interface C_OP_ColorAdjustHSL : CParticleFunctionOperator, ISchem
     static int ISchemaClass<C_OP_ColorAdjustHSL>.Size => 1568;
     static string? ISchemaClass<C_OP_ColorAdjustHSL>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput HueAdjust { get; }
-    
+
     public CPerParticleFloatInput SaturationAdjust { get; }
-    
+
     public CPerParticleFloatInput LightnessAdjust { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface CMotionNodeSequence : CMotionNode, ISchemaClass<CMotion
     static int ISchemaClass<CMotionNodeSequence>.Size => 72;
     static string? ISchemaClass<CMotionNodeSequence>.ClassName => null;
 
-    
+
     public ref CUtlVector<TagSpan_t> Tags { get; }
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref float PlaybackSpeed { get; }
 
 

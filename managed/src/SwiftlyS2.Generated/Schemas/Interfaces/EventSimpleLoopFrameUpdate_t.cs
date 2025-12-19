@@ -14,11 +14,11 @@ public partial interface EventSimpleLoopFrameUpdate_t : ISchemaClass<EventSimple
     static int ISchemaClass<EventSimpleLoopFrameUpdate_t>.Size => 48;
     static string? ISchemaClass<EventSimpleLoopFrameUpdate_t>.ClassName => null;
 
-    
+
     public EngineLoopState_t LoopState { get; }
-    
+
     public ref float RealTime { get; }
-    
+
     public ref float FrameTime { get; }
 
 

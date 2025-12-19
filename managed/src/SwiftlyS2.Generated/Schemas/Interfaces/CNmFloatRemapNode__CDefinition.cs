@@ -14,11 +14,11 @@ public partial interface CNmFloatRemapNode__CDefinition : CNmFloatValueNode__CDe
     static int ISchemaClass<CNmFloatRemapNode__CDefinition>.Size => 40;
     static string? ISchemaClass<CNmFloatRemapNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public CNmFloatRemapNode__RemapRange_t InputRange { get; }
-    
+
     public CNmFloatRemapNode__RemapRange_t OutputRange { get; }
 
 

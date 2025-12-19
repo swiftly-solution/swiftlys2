@@ -14,9 +14,9 @@ public partial interface CEnvMuzzleFlash : CPointEntity, ISchemaClass<CEnvMuzzle
     static int ISchemaClass<CEnvMuzzleFlash>.Size => 1280;
     static string? ISchemaClass<CEnvMuzzleFlash>.ClassName => "env_muzzleflash";
 
-    
+
     public ref float Scale { get; }
-    
+
     public string ParentAttachment { get; set; }
 
 

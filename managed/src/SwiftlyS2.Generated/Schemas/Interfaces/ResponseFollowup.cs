@@ -14,21 +14,21 @@ public partial interface ResponseFollowup : ISchemaClass<ResponseFollowup>
     static int ISchemaClass<ResponseFollowup>.Size => 49;
     static string? ISchemaClass<ResponseFollowup>.ClassName => null;
 
-    
+
     public string Followup_concept { get; set; }
-    
+
     public string Followup_contexts { get; set; }
-    
+
     public ref float Followup_delay { get; }
-    
+
     public string Followup_target { get; set; }
-    
+
     public string Followup_entityiotarget { get; set; }
-    
+
     public string Followup_entityioinput { get; set; }
-    
+
     public ref float Followup_entityiodelay { get; }
-    
+
     public ref bool Fired { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface C_OP_RenderFlattenGrass : CParticleFunctionRenderer, IS
     static int ISchemaClass<C_OP_RenderFlattenGrass>.Size => 560;
     static string? ISchemaClass<C_OP_RenderFlattenGrass>.ClassName => null;
 
-    
+
     public ref float FlattenStrength { get; }
-    
+
     public ParticleAttributeIndex_t StrengthFieldOverride { get; }
-    
+
     public ref float RadiusScale { get; }
 
 

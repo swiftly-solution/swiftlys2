@@ -14,13 +14,13 @@ public partial interface C_OP_MaxVelocity : CParticleFunctionOperator, ISchemaCl
     static int ISchemaClass<C_OP_MaxVelocity>.Size => 480;
     static string? ISchemaClass<C_OP_MaxVelocity>.ClassName => null;
 
-    
+
     public ref float MaxVelocity { get; }
-    
+
     public ref float MinVelocity { get; }
-    
+
     public ref int OverrideCP { get; }
-    
+
     public ref int OverrideCPField { get; }
 
 

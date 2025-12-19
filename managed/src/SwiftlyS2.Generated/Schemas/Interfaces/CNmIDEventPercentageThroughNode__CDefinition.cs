@@ -14,11 +14,11 @@ public partial interface CNmIDEventPercentageThroughNode__CDefinition : CNmBoolV
     static int ISchemaClass<CNmIDEventPercentageThroughNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmIDEventPercentageThroughNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public CNmBitFlags EventConditionRules { get; }
-    
+
     public ref CGlobalSymbol EventID { get; }
 
 

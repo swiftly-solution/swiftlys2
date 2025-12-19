@@ -14,23 +14,23 @@ public partial interface CEnvInstructorVRHint : CPointEntity, ISchemaClass<CEnvI
     static int ISchemaClass<CEnvInstructorVRHint>.Size => 1328;
     static string? ISchemaClass<CEnvInstructorVRHint>.ClassName => "env_instructor_vr_hint";
 
-    
+
     public string Name { get; set; }
-    
+
     public string HintTargetEntity { get; set; }
-    
+
     public ref int Timeout { get; }
-    
+
     public string Caption { get; set; }
-    
+
     public string StartSound { get; set; }
-    
+
     public ref int LayoutFileType { get; }
-    
+
     public string CustomLayoutFile { get; set; }
-    
+
     public ref int AttachType { get; }
-    
+
     public ref float HeightOffset { get; }
 
 

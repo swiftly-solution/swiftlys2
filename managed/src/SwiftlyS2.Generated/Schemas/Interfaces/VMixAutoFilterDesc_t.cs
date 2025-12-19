@@ -14,21 +14,21 @@ public partial interface VMixAutoFilterDesc_t : ISchemaClass<VMixAutoFilterDesc_
     static int ISchemaClass<VMixAutoFilterDesc_t>.Size => 44;
     static string? ISchemaClass<VMixAutoFilterDesc_t>.ClassName => null;
 
-    
+
     public ref float EnvelopeAmount { get; }
-    
+
     public ref float AttackTimeMS { get; }
-    
+
     public ref float ReleaseTimeMS { get; }
-    
+
     public VMixFilterDesc_t Filter { get; }
-    
+
     public ref float LFOAmount { get; }
-    
+
     public ref float LFORate { get; }
-    
+
     public ref float Phase { get; }
-    
+
     public ref VMixLFOShape_t LFOShape { get; }
 
 

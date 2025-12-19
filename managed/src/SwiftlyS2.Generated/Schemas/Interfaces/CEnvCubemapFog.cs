@@ -14,41 +14,41 @@ public partial interface CEnvCubemapFog : CBaseEntity, ISchemaClass<CEnvCubemapF
     static int ISchemaClass<CEnvCubemapFog>.Size => 1344;
     static string? ISchemaClass<CEnvCubemapFog>.ClassName => "env_cubemap_fog";
 
-    
+
     public ref float EndDistance { get; }
-    
+
     public ref float StartDistance { get; }
-    
+
     public ref float FogFalloffExponent { get; }
-    
+
     public ref bool HeightFogEnabled { get; }
-    
+
     public ref float FogHeightWidth { get; }
-    
+
     public ref float FogHeightEnd { get; }
-    
+
     public ref float FogHeightStart { get; }
-    
+
     public ref float FogHeightExponent { get; }
-    
+
     public ref float LODBias { get; }
-    
+
     public ref bool Active { get; }
-    
+
     public ref bool StartDisabled { get; }
-    
+
     public ref float FogMaxOpacity { get; }
-    
+
     public ref int CubemapSourceType { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterial { get; }
-    
+
     public string SkyEntity { get; set; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> FogCubemapTexture { get; }
-    
+
     public ref bool HasHeightFogEnd { get; }
-    
+
     public ref bool FirstTime { get; }
 
     public void EndDistanceUpdated();

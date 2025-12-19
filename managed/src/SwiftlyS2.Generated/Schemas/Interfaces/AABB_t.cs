@@ -14,9 +14,9 @@ public partial interface AABB_t : ISchemaClass<AABB_t>
     static int ISchemaClass<AABB_t>.Size => 24;
     static string? ISchemaClass<AABB_t>.ClassName => null;
 
-    
+
     public ref Vector MinBounds { get; }
-    
+
     public ref Vector MaxBounds { get; }
 
     public void MinBoundsUpdated();

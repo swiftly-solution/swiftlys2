@@ -14,7 +14,7 @@ public partial interface PointDefinitionWithTimeValues_t : PointDefinition_t, IS
     static int ISchemaClass<PointDefinitionWithTimeValues_t>.Size => 24;
     static string? ISchemaClass<PointDefinitionWithTimeValues_t>.ClassName => null;
 
-    
+
     public ref float TimeDuration { get; }
 
 

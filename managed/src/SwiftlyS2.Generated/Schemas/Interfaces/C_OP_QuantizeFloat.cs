@@ -14,9 +14,9 @@ public partial interface C_OP_QuantizeFloat : CParticleFunctionOperator, ISchema
     static int ISchemaClass<C_OP_QuantizeFloat>.Size => 880;
     static string? ISchemaClass<C_OP_QuantizeFloat>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput InputValue { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
 
 

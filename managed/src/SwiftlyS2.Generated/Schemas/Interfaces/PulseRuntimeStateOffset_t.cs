@@ -14,7 +14,7 @@ public partial interface PulseRuntimeStateOffset_t : ISchemaClass<PulseRuntimeSt
     static int ISchemaClass<PulseRuntimeStateOffset_t>.Size => 2;
     static string? ISchemaClass<PulseRuntimeStateOffset_t>.ClassName => null;
 
-    
+
     public ref ushort Value { get; }
 
 

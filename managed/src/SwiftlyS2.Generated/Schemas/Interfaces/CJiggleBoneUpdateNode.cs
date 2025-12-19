@@ -14,7 +14,7 @@ public partial interface CJiggleBoneUpdateNode : CUnaryUpdateNode, ISchemaClass<
     static int ISchemaClass<CJiggleBoneUpdateNode>.Size => 144;
     static string? ISchemaClass<CJiggleBoneUpdateNode>.ClassName => null;
 
-    
+
     public JiggleBoneSettingsList_t OpFixedData { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface C_OP_EnableChildrenFromParentParticleCount : CParticleF
     static int ISchemaClass<C_OP_EnableChildrenFromParentParticleCount>.Size => 856;
     static string? ISchemaClass<C_OP_EnableChildrenFromParentParticleCount>.ClassName => null;
 
-    
+
     public ref int ChildGroupID { get; }
-    
+
     public ref int FirstChild { get; }
-    
+
     public CParticleCollectionFloatInput NumChildrenToEnable { get; }
-    
+
     public ref bool DisableChildren { get; }
-    
+
     public ref bool PlayEndcapOnStop { get; }
-    
+
     public ref bool DestroyImmediately { get; }
 
 

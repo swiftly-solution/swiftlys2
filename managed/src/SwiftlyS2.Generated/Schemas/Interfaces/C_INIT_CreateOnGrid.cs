@@ -14,25 +14,25 @@ public partial interface C_INIT_CreateOnGrid : CParticleFunctionInitializer, ISc
     static int ISchemaClass<C_INIT_CreateOnGrid>.Size => 2688;
     static string? ISchemaClass<C_INIT_CreateOnGrid>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput XCount { get; }
-    
+
     public CParticleCollectionFloatInput YCount { get; }
-    
+
     public CParticleCollectionFloatInput ZCount { get; }
-    
+
     public CParticleCollectionFloatInput XSpacing { get; }
-    
+
     public CParticleCollectionFloatInput YSpacing { get; }
-    
+
     public CParticleCollectionFloatInput ZSpacing { get; }
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref bool LocalSpace { get; }
-    
+
     public ref bool Center { get; }
-    
+
     public ref bool Hollow { get; }
 
 

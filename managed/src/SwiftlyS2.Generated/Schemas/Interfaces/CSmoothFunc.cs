@@ -14,15 +14,15 @@ public partial interface CSmoothFunc : ISchemaClass<CSmoothFunc>
     static int ISchemaClass<CSmoothFunc>.Size => 32;
     static string? ISchemaClass<CSmoothFunc>.ClassName => null;
 
-    
+
     public ref float SmoothAmplitude { get; }
-    
+
     public ref float SmoothBias { get; }
-    
+
     public ref float SmoothDuration { get; }
-    
+
     public ref float SmoothRemainingTime { get; }
-    
+
     public ref int SmoothDir { get; }
 
 

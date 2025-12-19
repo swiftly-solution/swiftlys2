@@ -14,11 +14,11 @@ public partial interface C_OP_RemapDistanceToLineSegmentToScalar : C_OP_RemapDis
     static int ISchemaClass<C_OP_RemapDistanceToLineSegmentToScalar>.Size => 504;
     static string? ISchemaClass<C_OP_RemapDistanceToLineSegmentToScalar>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float MinOutputValue { get; }
-    
+
     public ref float MaxOutputValue { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface AnimNodeID : ISchemaClass<AnimNodeID>
     static int ISchemaClass<AnimNodeID>.Size => 4;
     static string? ISchemaClass<AnimNodeID>.ClassName => null;
 
-    
+
     public ref uint Id { get; }
 
 

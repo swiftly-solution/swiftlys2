@@ -14,11 +14,11 @@ public partial interface C_OP_ClampScalar : CParticleFunctionOperator, ISchemaCl
     static int ISchemaClass<C_OP_ClampScalar>.Size => 1208;
     static string? ISchemaClass<C_OP_ClampScalar>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CPerParticleFloatInput OutputMin { get; }
-    
+
     public CPerParticleFloatInput OutputMax { get; }
 
 

@@ -14,10 +14,10 @@ public partial interface CAnimGraphModelBinding : ISchemaClass<CAnimGraphModelBi
     static int ISchemaClass<CAnimGraphModelBinding>.Size => 40;
     static string? ISchemaClass<CAnimGraphModelBinding>.ClassName => null;
 
-    
+
     public string ModelName { get; set; }
-    
-  // CSmartPtr< CAnimUpdateSharedData >
+
+    // CSmartPtr< CAnimUpdateSharedData >
     public SchemaUntypedField SharedData { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface FourQuaternions : ISchemaClass<FourQuaternions>
     static int ISchemaClass<FourQuaternions>.Size => 64;
     static string? ISchemaClass<FourQuaternions>.ClassName => null;
 
-    
+
     public ref fltx4 X { get; }
-    
+
     public ref fltx4 Y { get; }
-    
+
     public ref fltx4 Z { get; }
-    
+
     public ref fltx4 W { get; }
 
 

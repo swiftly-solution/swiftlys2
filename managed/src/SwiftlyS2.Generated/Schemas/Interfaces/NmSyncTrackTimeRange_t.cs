@@ -14,9 +14,9 @@ public partial interface NmSyncTrackTimeRange_t : ISchemaClass<NmSyncTrackTimeRa
     static int ISchemaClass<NmSyncTrackTimeRange_t>.Size => 16;
     static string? ISchemaClass<NmSyncTrackTimeRange_t>.ClassName => null;
 
-    
+
     public NmSyncTrackTime_t StartTime { get; }
-    
+
     public NmSyncTrackTime_t EndTime { get; }
 
 

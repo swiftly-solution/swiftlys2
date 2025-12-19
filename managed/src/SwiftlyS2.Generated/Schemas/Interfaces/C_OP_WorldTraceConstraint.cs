@@ -14,59 +14,59 @@ public partial interface C_OP_WorldTraceConstraint : CParticleFunctionConstraint
     static int ISchemaClass<C_OP_WorldTraceConstraint>.Size => 2512;
     static string? ISchemaClass<C_OP_WorldTraceConstraint>.ClassName => null;
 
-    
+
     public ref int CP { get; }
-    
+
     public ref Vector CpOffset { get; }
-    
+
     public ref ParticleCollisionMode_t CollisionMode { get; }
-    
+
     public ref ParticleCollisionMode_t CollisionModeMin { get; }
-    
+
     public ref ParticleTraceSet_t TraceSet { get; }
-    
+
     public string CollisionGroupName { get; set; }
-    
+
     public ref bool WorldOnly { get; }
-    
+
     public ref bool BrushOnly { get; }
-    
+
     public ref bool IncludeWater { get; }
-    
+
     public ref int IgnoreCP { get; }
-    
+
     public ref float CpMovementTolerance { get; }
-    
+
     public ref float RetestRate { get; }
-    
+
     public ref float TraceTolerance { get; }
-    
+
     public ref float CollisionConfirmationSpeed { get; }
-    
+
     public ref float MaxTracesPerFrame { get; }
-    
+
     public CPerParticleFloatInput RadiusScale { get; }
-    
+
     public CPerParticleFloatInput BounceAmount { get; }
-    
+
     public CPerParticleFloatInput SlideAmount { get; }
-    
+
     public CPerParticleFloatInput RandomDirScale { get; }
-    
+
     public ref bool DecayBounce { get; }
-    
+
     public ref bool KillonContact { get; }
-    
+
     public ref float MinSpeed { get; }
-    
+
     public ref bool SetNormal { get; }
-    
+
     public ParticleAttributeIndex_t StickOnCollisionField { get; }
-    
+
     public CPerParticleFloatInput StopSpeed { get; }
-    
+
     public ParticleAttributeIndex_t EntityStickDataField { get; }
-    
+
     public ParticleAttributeIndex_t EntityStickNormalField { get; }
 
 

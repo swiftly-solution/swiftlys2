@@ -14,19 +14,19 @@ public partial interface CNmChainLookatNode__CDefinition : CNmPassthroughNode__C
     static int ISchemaClass<CNmChainLookatNode__CDefinition>.Size => 56;
     static string? ISchemaClass<CNmChainLookatNode__CDefinition>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol ChainEndBoneID { get; }
-    
+
     public ref short LookatTargetNodeIdx { get; }
-    
+
     public ref short EnabledNodeIdx { get; }
-    
+
     public ref float BlendTimeSeconds { get; }
-    
+
     public ref byte ChainLength { get; }
-    
+
     public ref bool IsTargetInWorldSpace { get; }
-    
+
     public ref Vector ChainForwardDir { get; }
 
 

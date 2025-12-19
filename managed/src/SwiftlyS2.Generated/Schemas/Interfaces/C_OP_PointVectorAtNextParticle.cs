@@ -14,9 +14,9 @@ public partial interface C_OP_PointVectorAtNextParticle : CParticleFunctionOpera
     static int ISchemaClass<C_OP_PointVectorAtNextParticle>.Size => 840;
     static string? ISchemaClass<C_OP_PointVectorAtNextParticle>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CPerParticleFloatInput Interpolation { get; }
 
 

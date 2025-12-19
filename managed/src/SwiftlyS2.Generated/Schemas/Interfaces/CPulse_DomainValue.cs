@@ -14,12 +14,12 @@ public partial interface CPulse_DomainValue : ISchemaClass<CPulse_DomainValue>
     static int ISchemaClass<CPulse_DomainValue>.Size => 48;
     static string? ISchemaClass<CPulse_DomainValue>.ClassName => null;
 
-    
+
     public ref PulseDomainValueType_t Type { get; }
-    
+
     public ref CGlobalSymbol Value { get; }
-    
-  // CPulseValueFullType
+
+    // CPulseValueFullType
     public SchemaUntypedField RequiredRuntimeType { get; }
 
 

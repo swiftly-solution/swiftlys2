@@ -14,7 +14,7 @@ public partial interface RnFace_t : ISchemaClass<RnFace_t>
     static int ISchemaClass<RnFace_t>.Size => 1;
     static string? ISchemaClass<RnFace_t>.ClassName => null;
 
-    
+
     public ref byte Edge { get; }
 
 

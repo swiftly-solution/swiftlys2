@@ -14,7 +14,7 @@ public partial interface CSingleplayRules : CGameRules, ISchemaClass<CSingleplay
     static int ISchemaClass<CSingleplayRules>.Size => 200;
     static string? ISchemaClass<CSingleplayRules>.ClassName => null;
 
-    
+
     public ref bool SinglePlayerGameEnding { get; }
 
 

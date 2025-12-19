@@ -14,15 +14,15 @@ public partial interface CAnimFoot : ISchemaClass<CAnimFoot>
     static int ISchemaClass<CAnimFoot>.Size => 40;
     static string? ISchemaClass<CAnimFoot>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref Vector BallOffset { get; }
-    
+
     public ref Vector HeelOffset { get; }
-    
+
     public ref int AnkleBoneIndex { get; }
-    
+
     public ref int ToeBoneIndex { get; }
 
 

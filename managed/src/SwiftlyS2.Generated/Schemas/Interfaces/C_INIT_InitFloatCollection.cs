@@ -14,9 +14,9 @@ public partial interface C_INIT_InitFloatCollection : CParticleFunctionInitializ
     static int ISchemaClass<C_INIT_InitFloatCollection>.Size => 848;
     static string? ISchemaClass<C_INIT_InitFloatCollection>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput InputValue { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
 
 

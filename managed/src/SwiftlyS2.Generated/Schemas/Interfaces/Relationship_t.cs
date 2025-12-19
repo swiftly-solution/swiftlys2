@@ -14,9 +14,9 @@ public partial interface Relationship_t : ISchemaClass<Relationship_t>
     static int ISchemaClass<Relationship_t>.Size => 8;
     static string? ISchemaClass<Relationship_t>.ClassName => null;
 
-    
+
     public ref Disposition_t Disposition { get; }
-    
+
     public ref int Priority { get; }
 
 

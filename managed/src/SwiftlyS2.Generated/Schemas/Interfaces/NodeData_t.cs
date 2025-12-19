@@ -14,19 +14,19 @@ public partial interface NodeData_t : ISchemaClass<NodeData_t>
     static int ISchemaClass<NodeData_t>.Size => 80;
     static string? ISchemaClass<NodeData_t>.ClassName => null;
 
-    
+
     public ref int Parent { get; }
-    
+
     public ref Vector Origin { get; }
-    
+
     public ref Vector MinBounds { get; }
-    
+
     public ref Vector MaxBounds { get; }
-    
+
     public ref float MinimumDistance { get; }
-    
+
     public ref CUtlVector<int> ChildNodeIndices { get; }
-    
+
     public string WorldNodePrefix { get; set; }
 
 

@@ -14,9 +14,9 @@ public partial interface RnCapsule_t : ISchemaClass<RnCapsule_t>
     static int ISchemaClass<RnCapsule_t>.Size => 28;
     static string? ISchemaClass<RnCapsule_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<Vector> Center { get; }
-    
+
     public ref float Radius { get; }
 
 

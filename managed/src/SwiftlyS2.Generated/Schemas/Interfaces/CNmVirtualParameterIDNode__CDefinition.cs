@@ -14,7 +14,7 @@ public partial interface CNmVirtualParameterIDNode__CDefinition : CNmIDValueNode
     static int ISchemaClass<CNmVirtualParameterIDNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmVirtualParameterIDNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short ChildNodeIdx { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface AttachmentHandle_t : ISchemaClass<AttachmentHandle_t>
     static int ISchemaClass<AttachmentHandle_t>.Size => 1;
     static string? ISchemaClass<AttachmentHandle_t>.ClassName => null;
 
-    
+
     public ref byte Value { get; }
 
 

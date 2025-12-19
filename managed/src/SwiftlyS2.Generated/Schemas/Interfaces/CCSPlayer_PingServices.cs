@@ -14,9 +14,9 @@ public partial interface CCSPlayer_PingServices : CPlayerPawnComponent, ISchemaC
     static int ISchemaClass<CCSPlayer_PingServices>.Size => 88;
     static string? ISchemaClass<CCSPlayer_PingServices>.ClassName => null;
 
-    
+
     public ISchemaClassFixedArray<GameTime_t> PlayerPingTokens { get; }
-    
+
     public ref CHandle<CPlayerPing> PlayerPing { get; }
 
     public void PlayerPingUpdated();

@@ -14,9 +14,9 @@ public partial interface C_OP_SetCPOrientationToDirection : CParticleFunctionOpe
     static int ISchemaClass<C_OP_SetCPOrientationToDirection>.Size => 472;
     static string? ISchemaClass<C_OP_SetCPOrientationToDirection>.ClassName => null;
 
-    
+
     public ref int InputControlPoint { get; }
-    
+
     public ref int OutputControlPoint { get; }
 
 

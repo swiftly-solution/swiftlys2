@@ -14,15 +14,15 @@ public partial interface PulseGraphExecutionHistoryCursorDesc_t : ISchemaClass<P
     static int ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t>.Size => 40;
     static string? ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<PulseCursorID_t> AncestorCursorIDs { get; }
-    
+
     public PulseDocNodeID_t SpawnNodeID { get; }
-    
+
     public PulseDocNodeID_t RetiredAtNodeID { get; }
-    
+
     public ref float LastReferenced { get; }
-    
+
     public ref int LastValidEntryIdx { get; }
 
 

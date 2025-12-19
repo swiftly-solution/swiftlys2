@@ -14,11 +14,11 @@ public partial interface CLogicAutosave : CLogicalEntity, ISchemaClass<CLogicAut
     static int ISchemaClass<CLogicAutosave>.Size => 1280;
     static string? ISchemaClass<CLogicAutosave>.ClassName => "logic_autosave";
 
-    
+
     public ref bool ForceNewLevelUnit { get; }
-    
+
     public ref int MinHitPoints { get; }
-    
+
     public ref int MinHitPointsToCommit { get; }
 
 

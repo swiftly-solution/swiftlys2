@@ -14,7 +14,7 @@ public partial interface CParticleFunctionEmitter : CParticleFunction, ISchemaCl
     static int ISchemaClass<CParticleFunctionEmitter>.Size => 472;
     static string? ISchemaClass<CParticleFunctionEmitter>.ClassName => null;
 
-    
+
     public ref int EmitterIndex { get; }
 
 

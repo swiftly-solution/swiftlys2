@@ -14,11 +14,11 @@ public partial interface CSceneListManager : CLogicalEntity, ISchemaClass<CScene
     static int ISchemaClass<CSceneListManager>.Size => 1480;
     static string? ISchemaClass<CSceneListManager>.ClassName => "logic_scene_list_manager";
 
-    
+
     public ref CUtlVector<CHandle<CSceneListManager>> ListManagers { get; }
-    
+
     public string Scenes { get; set; }
-    
+
     public ISchemaFixedArray<CHandle<CBaseEntity>> Scenes1 { get; }
 
 

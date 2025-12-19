@@ -14,19 +14,19 @@ public partial interface FeNodeBase_t : ISchemaClass<FeNodeBase_t>
     static int ISchemaClass<FeNodeBase_t>.Size => 32;
     static string? ISchemaClass<FeNodeBase_t>.ClassName => null;
 
-    
+
     public ref ushort Node { get; }
-    
+
     public ISchemaFixedArray<ushort> Dummy { get; }
-    
+
     public ref ushort NodeX0 { get; }
-    
+
     public ref ushort NodeX1 { get; }
-    
+
     public ref ushort NodeY0 { get; }
-    
+
     public ref ushort NodeY1 { get; }
-    
+
     public ref QuaternionStorage Adjust { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface C_INIT_AddVectorToVector : CParticleFunctionInitializer
     static int ISchemaClass<C_INIT_AddVectorToVector>.Size => 528;
     static string? ISchemaClass<C_INIT_AddVectorToVector>.ClassName => null;
 
-    
+
     public ref Vector Scale { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ref Vector OffsetMin { get; }
-    
+
     public ref Vector OffsetMax { get; }
-    
+
     public CRandomNumberGeneratorParameters RandomnessParameters { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CInButtonState : ISchemaClass<CInButtonState>
     static int ISchemaClass<CInButtonState>.Size => 32;
     static string? ISchemaClass<CInButtonState>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ulong> ButtonStates { get; }
 
 

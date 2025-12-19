@@ -14,11 +14,11 @@ public partial interface CPathSimple : CBaseEntity, ISchemaClass<CPathSimple>
     static int ISchemaClass<CPathSimple>.Size => 1536;
     static string? ISchemaClass<CPathSimple>.ClassName => "path_simple";
 
-    
+
     public CPathQueryComponent CPathQueryComponent { get; }
-    
+
     public string PathString { get; set; }
-    
+
     public ref bool ClosedLoop { get; }
 
     public void CPathQueryComponentUpdated();

@@ -14,13 +14,13 @@ public partial interface CSequenceUpdateNode : CSequenceUpdateNodeBase, ISchemaC
     static int ISchemaClass<CSequenceUpdateNode>.Size => 176;
     static string? ISchemaClass<CSequenceUpdateNode>.ClassName => null;
 
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public CParamSpanUpdater ParamSpans { get; }
-    
+
     public ref CUtlVector<TagSpan_t> Tags { get; }
 
 

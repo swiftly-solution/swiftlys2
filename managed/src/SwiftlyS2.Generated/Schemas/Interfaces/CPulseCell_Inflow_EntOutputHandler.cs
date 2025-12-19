@@ -14,14 +14,14 @@ public partial interface CPulseCell_Inflow_EntOutputHandler : CPulseCell_Inflow_
     static int ISchemaClass<CPulseCell_Inflow_EntOutputHandler>.Size => 184;
     static string? ISchemaClass<CPulseCell_Inflow_EntOutputHandler>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField SourceEntity { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField SourceOutput { get; }
-    
-  // CPulseValueFullType
+
+    // CPulseValueFullType
     public SchemaUntypedField ExpectedParamType { get; }
 
 

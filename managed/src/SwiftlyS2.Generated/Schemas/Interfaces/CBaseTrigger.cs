@@ -14,29 +14,29 @@ public partial interface CBaseTrigger : CBaseToggle, ISchemaClass<CBaseTrigger>
     static int ISchemaClass<CBaseTrigger>.Size => 2472;
     static string? ISchemaClass<CBaseTrigger>.ClassName => "trigger";
 
-    
+
     public CEntityIOOutput OnStartTouch { get; }
-    
+
     public CEntityIOOutput OnStartTouchAll { get; }
-    
+
     public CEntityIOOutput OnEndTouch { get; }
-    
+
     public CEntityIOOutput OnEndTouchAll { get; }
-    
+
     public CEntityIOOutput OnTouching { get; }
-    
+
     public CEntityIOOutput OnTouchingEachEntity { get; }
-    
+
     public CEntityIOOutput OnNotTouching { get; }
-    
+
     public ref CUtlVector<CHandle<CBaseEntity>> TouchingEntities { get; }
-    
+
     public string FilterName { get; set; }
-    
+
     public ref CHandle<CBaseFilter> Filter { get; }
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref bool UseAsyncQueries { get; }
 
     public void DisabledUpdated();

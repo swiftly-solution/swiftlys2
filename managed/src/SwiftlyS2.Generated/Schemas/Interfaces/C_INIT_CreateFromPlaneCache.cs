@@ -14,11 +14,11 @@ public partial interface C_INIT_CreateFromPlaneCache : CParticleFunctionInitiali
     static int ISchemaClass<C_INIT_CreateFromPlaneCache>.Size => 504;
     static string? ISchemaClass<C_INIT_CreateFromPlaneCache>.ClassName => null;
 
-    
+
     public ref Vector OffsetMin { get; }
-    
+
     public ref Vector OffsetMax { get; }
-    
+
     public ref bool UseNormal { get; }
 
 

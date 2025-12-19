@@ -14,7 +14,7 @@ public partial interface EventPreDataUpdate_t : ISchemaClass<EventPreDataUpdate_
     static int ISchemaClass<EventPreDataUpdate_t>.Size => 16;
     static string? ISchemaClass<EventPreDataUpdate_t>.ClassName => null;
 
-    
+
     public ref int Count { get; }
 
 

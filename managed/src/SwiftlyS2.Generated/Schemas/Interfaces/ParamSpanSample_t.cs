@@ -14,10 +14,10 @@ public partial interface ParamSpanSample_t : ISchemaClass<ParamSpanSample_t>
     static int ISchemaClass<ParamSpanSample_t>.Size => 24;
     static string? ISchemaClass<ParamSpanSample_t>.ClassName => null;
 
-    
-  // CAnimVariant
+
+    // CAnimVariant
     public SchemaUntypedField Value { get; }
-    
+
     public ref float Cycle { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface C_INIT_RandomRadius : CParticleFunctionInitializer, ISc
     static int ISchemaClass<C_INIT_RandomRadius>.Size => 488;
     static string? ISchemaClass<C_INIT_RandomRadius>.ClassName => null;
 
-    
+
     public ref float RadiusMin { get; }
-    
+
     public ref float RadiusMax { get; }
-    
+
     public ref float RadiusRandExponent { get; }
 
 

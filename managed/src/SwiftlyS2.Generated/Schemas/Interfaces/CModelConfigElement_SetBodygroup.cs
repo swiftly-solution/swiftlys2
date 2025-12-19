@@ -14,9 +14,9 @@ public partial interface CModelConfigElement_SetBodygroup : CModelConfigElement,
     static int ISchemaClass<CModelConfigElement_SetBodygroup>.Size => 88;
     static string? ISchemaClass<CModelConfigElement_SetBodygroup>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol GroupName { get; }
-    
+
     public ref int Choice { get; }
 
 

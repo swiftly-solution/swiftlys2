@@ -14,17 +14,17 @@ public partial interface CPhysForce : CPointEntity, ISchemaClass<CPhysForce>
     static int ISchemaClass<CPhysForce>.Size => 1360;
     static string? ISchemaClass<CPhysForce>.ClassName => null;
 
-    
+
     public string NameAttach { get; set; }
-    
+
     public ref float Force { get; }
-    
+
     public ref float ForceTime { get; }
-    
+
     public ref CHandle<CBaseEntity> AttachedObject { get; }
-    
+
     public ref bool WasRestored { get; }
-    
+
     public CConstantForceController Integrator { get; }
 
 

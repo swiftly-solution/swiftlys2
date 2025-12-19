@@ -14,8 +14,8 @@ public partial interface CMotionGraphUpdateNode : CLeafUpdateNode, ISchemaClass<
     static int ISchemaClass<CMotionGraphUpdateNode>.Size => 104;
     static string? ISchemaClass<CMotionGraphUpdateNode>.ClassName => null;
 
-    
-  // CSmartPtr< CMotionGraph >
+
+    // CSmartPtr< CMotionGraph >
     public SchemaUntypedField MotionGraph { get; }
 
 

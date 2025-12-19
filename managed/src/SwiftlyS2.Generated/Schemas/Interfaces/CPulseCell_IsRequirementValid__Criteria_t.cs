@@ -14,7 +14,7 @@ public partial interface CPulseCell_IsRequirementValid__Criteria_t : ISchemaClas
     static int ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t>.Size => 1;
     static string? ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t>.ClassName => null;
 
-    
+
     public ref bool IsValid { get; }
 
 

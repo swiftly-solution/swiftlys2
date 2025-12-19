@@ -14,11 +14,11 @@ public partial interface C_OP_RemapVectorComponentToScalar : CParticleFunctionOp
     static int ISchemaClass<C_OP_RemapVectorComponentToScalar>.Size => 480;
     static string? ISchemaClass<C_OP_RemapVectorComponentToScalar>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref int Component { get; }
 
 

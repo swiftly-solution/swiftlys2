@@ -14,11 +14,11 @@ public partial interface CNmClipSelectorNode__CDefinition : CNmClipReferenceNode
     static int ISchemaClass<CNmClipSelectorNode__CDefinition>.Size => 64;
     static string? ISchemaClass<CNmClipSelectorNode__CDefinition>.ClassName => null;
 
-    
-  // CUtlLeanVectorFixedGrowable< int16, 5 >
+
+    // CUtlLeanVectorFixedGrowable< int16, 5 >
     public SchemaUntypedField OptionNodeIndices { get; }
-    
-  // CUtlLeanVectorFixedGrowable< int16, 5 >
+
+    // CUtlLeanVectorFixedGrowable< int16, 5 >
     public SchemaUntypedField ConditionNodeIndices { get; }
 
 

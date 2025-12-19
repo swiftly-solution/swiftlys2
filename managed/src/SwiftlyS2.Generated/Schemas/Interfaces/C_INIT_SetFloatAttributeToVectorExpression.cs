@@ -14,17 +14,17 @@ public partial interface C_INIT_SetFloatAttributeToVectorExpression : CParticleF
     static int ISchemaClass<C_INIT_SetFloatAttributeToVectorExpression>.Size => 4296;
     static string? ISchemaClass<C_INIT_SetFloatAttributeToVectorExpression>.ClassName => null;
 
-    
+
     public ref VectorFloatExpressionType_t Expression { get; }
-    
+
     public CPerParticleVecInput Input1 { get; }
-    
+
     public CPerParticleVecInput Input2 { get; }
-    
+
     public CParticleRemapFloatInput OutputRemap { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
 
 

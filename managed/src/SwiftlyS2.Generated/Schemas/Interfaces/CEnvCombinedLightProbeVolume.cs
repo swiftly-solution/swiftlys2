@@ -14,63 +14,63 @@ public partial interface CEnvCombinedLightProbeVolume : CBaseEntity, ISchemaClas
     static int ISchemaClass<CEnvCombinedLightProbeVolume>.Size => 5688;
     static string? ISchemaClass<CEnvCombinedLightProbeVolume>.ClassName => "env_combined_light_probe_volume";
 
-    
+
     public ref Color Entity_Color { get; }
-    
+
     public ref float Entity_flBrightness { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hCubemapTexture { get; }
-    
+
     public ref bool Entity_bCustomCubemapTexture { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_AmbientCube { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SDF { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_DC { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_R { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_G { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_B { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightIndicesTexture { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightScalarsTexture { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightShadowsTexture { get; }
-    
+
     public ref Vector Entity_vBoxMins { get; }
-    
+
     public ref Vector Entity_vBoxMaxs { get; }
-    
+
     public ref bool Entity_bMoveable { get; }
-    
+
     public ref int Entity_nHandshake { get; }
-    
+
     public ref int Entity_nEnvCubeMapArrayIndex { get; }
-    
+
     public ref int Entity_nPriority { get; }
-    
+
     public ref bool Entity_bStartDisabled { get; }
-    
+
     public ref float Entity_flEdgeFadeDist { get; }
-    
+
     public ref Vector Entity_vEdgeFadeDists { get; }
-    
+
     public ref int Entity_nLightProbeSizeX { get; }
-    
+
     public ref int Entity_nLightProbeSizeY { get; }
-    
+
     public ref int Entity_nLightProbeSizeZ { get; }
-    
+
     public ref int Entity_nLightProbeAtlasX { get; }
-    
+
     public ref int Entity_nLightProbeAtlasY { get; }
-    
+
     public ref int Entity_nLightProbeAtlasZ { get; }
-    
+
     public ref bool Entity_bEnabled { get; }
 
     public void Entity_ColorUpdated();

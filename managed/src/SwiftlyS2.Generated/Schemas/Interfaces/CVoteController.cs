@@ -14,33 +14,33 @@ public partial interface CVoteController : CBaseEntity, ISchemaClass<CVoteContro
     static int ISchemaClass<CVoteController>.Size => 1696;
     static string? ISchemaClass<CVoteController>.ClassName => "vote_controller";
 
-    
+
     public ref int ActiveIssueIndex { get; }
-    
+
     public ref int OnlyTeamToVote { get; }
-    
+
     public ISchemaFixedArray<int> VoteOptionCount { get; }
-    
+
     public ref int PotentialVotes { get; }
-    
+
     public ref bool IsYesNoVote { get; }
-    
+
     public CountdownTimer AcceptingVotesTimer { get; }
-    
+
     public CountdownTimer ExecuteCommandTimer { get; }
-    
+
     public CountdownTimer ResetVoteTimer { get; }
-    
+
     public ISchemaFixedArray<int> VotesCast { get; }
-    
+
     public ref uint PlayerHoldingVote { get; }
-    
+
     public ref uint PlayerOverrideForVote { get; }
-    
+
     public ref int HighestCountIndex { get; }
-    
+
     public ref CUtlVector<PointerTo<CBaseIssue>> PotentialIssues { get; }
-    
+
     public ref CUtlVector<CString> VoteOptions { get; }
 
     public void ActiveIssueIndexUpdated();

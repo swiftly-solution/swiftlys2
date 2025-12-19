@@ -14,7 +14,7 @@ public partial interface CPulseGraphInstance_TestDomain_Derived : CPulseGraphIns
     static int ISchemaClass<CPulseGraphInstance_TestDomain_Derived>.Size => 360;
     static string? ISchemaClass<CPulseGraphInstance_TestDomain_Derived>.ClassName => null;
 
-    
+
     public ref int InstanceValueX { get; }
 
 

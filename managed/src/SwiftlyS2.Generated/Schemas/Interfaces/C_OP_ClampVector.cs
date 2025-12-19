@@ -14,11 +14,11 @@ public partial interface C_OP_ClampVector : CParticleFunctionOperator, ISchemaCl
     static int ISchemaClass<C_OP_ClampVector>.Size => 3912;
     static string? ISchemaClass<C_OP_ClampVector>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CPerParticleVecInput OutputMin { get; }
-    
+
     public CPerParticleVecInput OutputMax { get; }
 
 

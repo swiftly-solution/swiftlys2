@@ -14,9 +14,9 @@ public partial interface GameAmmoTypeInfo_t : AmmoTypeInfo_t, ISchemaClass<GameA
     static int ISchemaClass<GameAmmoTypeInfo_t>.Size => 80;
     static string? ISchemaClass<GameAmmoTypeInfo_t>.ClassName => null;
 
-    
+
     public ref int BuySize { get; }
-    
+
     public ref int Cost { get; }
 
 

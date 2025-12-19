@@ -14,15 +14,15 @@ public partial interface CPathQueryUtil : ISchemaClass<CPathQueryUtil>
     static int ISchemaClass<CPathQueryUtil>.Size => 128;
     static string? ISchemaClass<CPathQueryUtil>.ClassName => null;
 
-    
+
     public ref CTransform PathToEntityTransform { get; }
-    
+
     public ref CUtlVector<Vector> PathSamplePositions { get; }
-    
+
     public ref CUtlVector<float> PathSampleParameters { get; }
-    
+
     public ref CUtlVector<float> PathSampleDistances { get; }
-    
+
     public ref bool IsClosedLoop { get; }
 
 

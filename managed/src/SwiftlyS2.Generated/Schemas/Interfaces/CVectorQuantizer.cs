@@ -14,11 +14,11 @@ public partial interface CVectorQuantizer : ISchemaClass<CVectorQuantizer>
     static int ISchemaClass<CVectorQuantizer>.Size => 32;
     static string? ISchemaClass<CVectorQuantizer>.ClassName => null;
 
-    
+
     public ref CUtlVector<float> CentroidVectors { get; }
-    
+
     public ref int Centroids { get; }
-    
+
     public ref int Dimensions { get; }
 
 

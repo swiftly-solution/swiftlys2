@@ -14,7 +14,7 @@ public partial interface CRangeFloat : ISchemaClass<CRangeFloat>
     static int ISchemaClass<CRangeFloat>.Size => 8;
     static string? ISchemaClass<CRangeFloat>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<float> Value { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CFilterTeam : CBaseFilter, ISchemaClass<CFilterTeam>
     static int ISchemaClass<CFilterTeam>.Size => 1360;
     static string? ISchemaClass<CFilterTeam>.ClassName => "filter_activator_team";
 
-    
+
     public ref int FilterTeam { get; }
 
 

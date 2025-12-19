@@ -14,13 +14,13 @@ public partial interface CNmEvent : ISchemaClass<CNmEvent>
     static int ISchemaClass<CNmEvent>.Size => 32;
     static string? ISchemaClass<CNmEvent>.ClassName => null;
 
-    
+
     public ref float StartTimeSeconds { get; }
-    
+
     public ref float DurationSeconds { get; }
-    
+
     public ref CGlobalSymbol SyncID { get; }
-    
+
     public ref bool ClientOnly { get; }
 
 

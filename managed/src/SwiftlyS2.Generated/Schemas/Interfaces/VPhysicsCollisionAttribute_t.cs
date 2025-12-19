@@ -14,21 +14,21 @@ public partial interface VPhysicsCollisionAttribute_t : ISchemaClass<VPhysicsCol
     static int ISchemaClass<VPhysicsCollisionAttribute_t>.Size => 48;
     static string? ISchemaClass<VPhysicsCollisionAttribute_t>.ClassName => null;
 
-    
+
     public ref ulong InteractsAs { get; }
-    
+
     public ref ulong InteractsWith { get; }
-    
+
     public ref ulong InteractsExclude { get; }
-    
+
     public ref uint EntityId { get; }
-    
+
     public ref uint OwnerId { get; }
-    
+
     public ref ushort HierarchyId { get; }
-    
+
     public ref byte CollisionGroup { get; }
-    
+
     public ref byte CollisionFunctionMask { get; }
 
     public void InteractsAsUpdated();

@@ -14,21 +14,21 @@ public partial interface C_OP_RemapTransformVisibilityToScalar : CParticleFuncti
     static int ISchemaClass<C_OP_RemapTransformVisibilityToScalar>.Size => 600;
     static string? ISchemaClass<C_OP_RemapTransformVisibilityToScalar>.ClassName => null;
 
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref float Radius { get; }
 
 

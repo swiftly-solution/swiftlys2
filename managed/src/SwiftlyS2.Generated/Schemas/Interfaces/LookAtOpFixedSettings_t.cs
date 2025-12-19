@@ -14,27 +14,27 @@ public partial interface LookAtOpFixedSettings_t : ISchemaClass<LookAtOpFixedSet
     static int ISchemaClass<LookAtOpFixedSettings_t>.Size => 208;
     static string? ISchemaClass<LookAtOpFixedSettings_t>.ClassName => null;
 
-    
+
     public CAnimAttachment Attachment { get; }
-    
+
     public CAnimInputDamping Damping { get; }
-    
+
     public ref CUtlVector<LookAtBone_t> Bones { get; }
-    
+
     public ref float YawLimit { get; }
-    
+
     public ref float PitchLimit { get; }
-    
+
     public ref float HysteresisInnerAngle { get; }
-    
+
     public ref float HysteresisOuterAngle { get; }
-    
+
     public ref bool RotateYawForward { get; }
-    
+
     public ref bool MaintainUpDirection { get; }
-    
+
     public ref bool TargetIsPosition { get; }
-    
+
     public ref bool UseHysteresis { get; }
 
 

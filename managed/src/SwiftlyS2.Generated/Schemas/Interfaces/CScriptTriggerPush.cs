@@ -14,7 +14,7 @@ public partial interface CScriptTriggerPush : CTriggerPush, ISchemaClass<CScript
     static int ISchemaClass<CScriptTriggerPush>.Size => 2544;
     static string? ISchemaClass<CScriptTriggerPush>.ClassName => "script_trigger_push";
 
-    
+
     public ref Vector Extent { get; }
 
 

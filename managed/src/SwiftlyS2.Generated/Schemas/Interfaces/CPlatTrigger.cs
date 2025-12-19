@@ -14,7 +14,7 @@ public partial interface CPlatTrigger : CBaseModelEntity, ISchemaClass<CPlatTrig
     static int ISchemaClass<CPlatTrigger>.Size => 2016;
     static string? ISchemaClass<CPlatTrigger>.ClassName => "plat_trigger";
 
-    
+
     public ref CHandle<CFuncPlat> Platform { get; }
 
 

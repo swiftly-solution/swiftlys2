@@ -14,17 +14,17 @@ public partial interface CTurnHelperUpdateNode : CUnaryUpdateNode, ISchemaClass<
     static int ISchemaClass<CTurnHelperUpdateNode>.Size => 144;
     static string? ISchemaClass<CTurnHelperUpdateNode>.ClassName => null;
 
-    
+
     public ref AnimValueSource FacingTarget { get; }
-    
+
     public ref float TurnStartTimeOffset { get; }
-    
+
     public ref float TurnDuration { get; }
-    
+
     public ref bool MatchChildDuration { get; }
-    
+
     public ref float ManualTurnOffset { get; }
-    
+
     public ref bool UseManualTurnOffset { get; }
 
 

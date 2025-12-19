@@ -14,19 +14,19 @@ public partial interface CAudioAnimTag : CAnimTagBase, ISchemaClass<CAudioAnimTa
     static int ISchemaClass<CAudioAnimTag>.Size => 112;
     static string? ISchemaClass<CAudioAnimTag>.ClassName => null;
 
-    
+
     public string ClipName { get; set; }
-    
+
     public string AttachmentName { get; set; }
-    
+
     public ref float Volume { get; }
-    
+
     public ref bool StopWhenTagEnds { get; }
-    
+
     public ref bool StopWhenGraphEnds { get; }
-    
+
     public ref bool PlayOnServer { get; }
-    
+
     public ref bool PlayOnClient { get; }
 
 

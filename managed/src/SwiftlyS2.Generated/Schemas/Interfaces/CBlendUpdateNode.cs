@@ -14,31 +14,31 @@ public partial interface CBlendUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CB
     static int ISchemaClass<CBlendUpdateNode>.Size => 224;
     static string? ISchemaClass<CBlendUpdateNode>.ClassName => null;
 
-    
+
     public ref CUtlVector<CAnimUpdateNodeRef> Children { get; }
-    
+
     public ref CUtlVector<byte> SortedOrder { get; }
-    
+
     public ref CUtlVector<float> TargetValues { get; }
-    
+
     public ref AnimValueSource BlendValueSource { get; }
-    
+
     public ref LinearRootMotionBlendMode_t LinearRootMotionBlendMode { get; }
-    
+
     public CAnimParamHandle ParamIndex { get; }
-    
+
     public CAnimInputDamping Damping { get; }
-    
+
     public ref BlendKeyType BlendKeyType { get; }
-    
+
     public ref bool LockBlendOnReset { get; }
-    
+
     public ref bool SyncCycles { get; }
-    
+
     public ref bool Loop { get; }
-    
+
     public ref bool LockWhenWaning { get; }
-    
+
     public ref bool IsAngle { get; }
 
 

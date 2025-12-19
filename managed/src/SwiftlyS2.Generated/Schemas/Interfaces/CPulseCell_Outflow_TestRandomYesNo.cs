@@ -14,9 +14,9 @@ public partial interface CPulseCell_Outflow_TestRandomYesNo : CPulseCell_BaseFlo
     static int ISchemaClass<CPulseCell_Outflow_TestRandomYesNo>.Size => 216;
     static string? ISchemaClass<CPulseCell_Outflow_TestRandomYesNo>.ClassName => null;
 
-    
+
     public CPulse_OutflowConnection Yes { get; }
-    
+
     public CPulse_OutflowConnection No { get; }
 
 

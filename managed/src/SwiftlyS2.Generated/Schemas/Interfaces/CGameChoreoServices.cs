@@ -14,15 +14,15 @@ public partial interface CGameChoreoServices : IChoreoServices, ISchemaClass<CGa
     static int ISchemaClass<CGameChoreoServices>.Size => 32;
     static string? ISchemaClass<CGameChoreoServices>.ClassName => null;
 
-    
+
     public ref CHandle<CBaseAnimGraph> Owner { get; }
-    
+
     public ref CHandle<CScriptedSequence> ScriptedSequence { get; }
-    
+
     public ref IChoreoServices__ScriptState_t ScriptState { get; }
-    
+
     public ref IChoreoServices__ChoreoState_t ChoreoState { get; }
-    
+
     public GameTime_t TimeStartedState { get; }
 
 

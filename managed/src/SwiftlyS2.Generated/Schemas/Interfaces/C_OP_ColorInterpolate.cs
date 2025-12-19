@@ -14,15 +14,15 @@ public partial interface C_OP_ColorInterpolate : CParticleFunctionOperator, ISch
     static int ISchemaClass<C_OP_ColorInterpolate>.Size => 496;
     static string? ISchemaClass<C_OP_ColorInterpolate>.ClassName => null;
 
-    
+
     public ref Color ColorFade { get; }
-    
+
     public ref float FadeStartTime { get; }
-    
+
     public ref float FadeEndTime { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref bool EaseInOut { get; }
 
 

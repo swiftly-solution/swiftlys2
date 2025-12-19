@@ -14,10 +14,10 @@ public partial interface CPulseCell_Outflow_CycleShuffled__InstanceState_t : ISc
     static int ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t>.Size => 40;
     static string? ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t>.ClassName => null;
 
-    
-  // CUtlVectorFixedGrowable< uint8, 8 >
+
+    // CUtlVectorFixedGrowable< uint8, 8 >
     public SchemaUntypedField Shuffle { get; }
-    
+
     public ref int NextShuffle { get; }
 
 

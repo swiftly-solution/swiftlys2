@@ -14,11 +14,11 @@ public partial interface CTriggerSave : CBaseTrigger, ISchemaClass<CTriggerSave>
     static int ISchemaClass<CTriggerSave>.Size => 2488;
     static string? ISchemaClass<CTriggerSave>.ClassName => "trigger_autosave";
 
-    
+
     public ref bool ForceNewLevelUnit { get; }
-    
+
     public ref float DangerousTimer { get; }
-    
+
     public ref int MinHitPoints { get; }
 
 

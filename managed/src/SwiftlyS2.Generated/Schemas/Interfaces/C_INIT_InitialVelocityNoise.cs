@@ -14,25 +14,25 @@ public partial interface C_INIT_InitialVelocityNoise : CParticleFunctionInitiali
     static int ISchemaClass<C_INIT_InitialVelocityNoise>.Size => 6872;
     static string? ISchemaClass<C_INIT_InitialVelocityNoise>.ClassName => null;
 
-    
+
     public ref Vector AbsVal { get; }
-    
+
     public ref Vector AbsValInv { get; }
-    
+
     public CPerParticleVecInput OffsetLoc { get; }
-    
+
     public CPerParticleFloatInput Offset { get; }
-    
+
     public CPerParticleVecInput OutputMin { get; }
-    
+
     public CPerParticleVecInput OutputMax { get; }
-    
+
     public CPerParticleFloatInput NoiseScale { get; }
-    
+
     public CPerParticleFloatInput NoiseScaleLoc { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref bool IgnoreDt { get; }
 
 

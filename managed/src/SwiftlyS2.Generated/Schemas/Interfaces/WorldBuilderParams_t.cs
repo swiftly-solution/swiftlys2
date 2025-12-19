@@ -14,17 +14,17 @@ public partial interface WorldBuilderParams_t : ISchemaClass<WorldBuilderParams_
     static int ISchemaClass<WorldBuilderParams_t>.Size => 96;
     static string? ISchemaClass<WorldBuilderParams_t>.ClassName => null;
 
-    
+
     public ref float MinDrawVolumeSize { get; }
-    
+
     public ref bool BuildBakedLighting { get; }
-    
+
     public ref bool AggregateInstanceStreams { get; }
-    
+
     public BakedLightingInfo_t BakedLightingInfo { get; }
-    
+
     public ref ulong CompileTimestamp { get; }
-    
+
     public ref ulong CompileFingerprint { get; }
 
 

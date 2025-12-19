@@ -14,15 +14,15 @@ public partial interface CAnimData : ISchemaClass<CAnimData>
     static int ISchemaClass<CAnimData>.Size => 112;
     static string? ISchemaClass<CAnimData>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref CUtlVector<CAnimDesc> AnimArray { get; }
-    
+
     public ref CUtlVector<CAnimDecoder> DecoderArray { get; }
-    
+
     public ref int MaxUniqueFrameIndex { get; }
-    
+
     public ref CUtlVector<CAnimFrameSegment> SegmentArray { get; }
 
 

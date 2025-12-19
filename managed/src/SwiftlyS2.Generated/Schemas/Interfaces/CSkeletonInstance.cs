@@ -14,23 +14,23 @@ public partial interface CSkeletonInstance : CGameSceneNode, ISchemaClass<CSkele
     static int ISchemaClass<CSkeletonInstance>.Size => 1168;
     static string? ISchemaClass<CSkeletonInstance>.ClassName => null;
 
-    
+
     public CModelState ModelState { get; }
-    
+
     public ref bool IsAnimationEnabled { get; }
-    
+
     public ref bool UseParentRenderBounds { get; }
-    
+
     public ref bool DisableSolidCollisionsForHierarchy { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField DirtyMotionType { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField IsGeneratingLatchedParentSpaceState { get; }
-    
+
     public ref CUtlStringToken MaterialGroup { get; }
-    
+
     public ref byte HitboxSet { get; }
 
     public void ModelStateUpdated();

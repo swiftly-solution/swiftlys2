@@ -14,13 +14,13 @@ public partial interface CAI_ChangeHintGroup : CBaseEntity, ISchemaClass<CAI_Cha
     static int ISchemaClass<CAI_ChangeHintGroup>.Size => 1296;
     static string? ISchemaClass<CAI_ChangeHintGroup>.ClassName => "ai_changehintgroup";
 
-    
+
     public ref int SearchType { get; }
-    
+
     public string StrSearchName { get; set; }
-    
+
     public string StrNewHintGroup { get; set; }
-    
+
     public ref float Radius { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CRotDoor : CBaseDoor, ISchemaClass<CRotDoor>
     static int ISchemaClass<CRotDoor>.Size => 2672;
     static string? ISchemaClass<CRotDoor>.ClassName => "func_door_rotating";
 
-    
+
     public ref bool SolidBsp { get; }
 
 

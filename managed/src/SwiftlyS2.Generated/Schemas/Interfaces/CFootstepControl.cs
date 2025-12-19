@@ -14,9 +14,9 @@ public partial interface CFootstepControl : CBaseTrigger, ISchemaClass<CFootstep
     static int ISchemaClass<CFootstepControl>.Size => 2488;
     static string? ISchemaClass<CFootstepControl>.ClassName => "func_footstep_control";
 
-    
+
     public string Source { get; set; }
-    
+
     public string Destination { get; set; }
 
     public void SourceUpdated();

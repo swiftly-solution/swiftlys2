@@ -14,9 +14,9 @@ public partial interface CDrawCullingData : ISchemaClass<CDrawCullingData>
     static int ISchemaClass<CDrawCullingData>.Size => 4;
     static string? ISchemaClass<CDrawCullingData>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<byte> ConeAxis { get; }
-    
+
     public ref byte ConeCutoff { get; }
 
 

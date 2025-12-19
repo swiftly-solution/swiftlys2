@@ -14,7 +14,7 @@ public partial interface CBodyComponentPoint : CBodyComponent, ISchemaClass<CBod
     static int ISchemaClass<CBodyComponentPoint>.Size => 480;
     static string? ISchemaClass<CBodyComponentPoint>.ClassName => null;
 
-    
+
     public CGameSceneNode SceneNode { get; }
 
     public void SceneNodeUpdated();

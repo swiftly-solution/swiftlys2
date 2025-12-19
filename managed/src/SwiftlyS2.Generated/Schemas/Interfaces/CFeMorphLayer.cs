@@ -14,19 +14,19 @@ public partial interface CFeMorphLayer : ISchemaClass<CFeMorphLayer>
     static int ISchemaClass<CFeMorphLayer>.Size => 136;
     static string? ISchemaClass<CFeMorphLayer>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref uint NameHash { get; }
-    
+
     public ref CUtlVector<ushort> Nodes { get; }
-    
+
     public ref CUtlVector<Vector> InitPos { get; }
-    
+
     public ref CUtlVector<float> Gravity { get; }
-    
+
     public ref CUtlVector<float> GoalStrength { get; }
-    
+
     public ref CUtlVector<float> GoalDamping { get; }
 
 

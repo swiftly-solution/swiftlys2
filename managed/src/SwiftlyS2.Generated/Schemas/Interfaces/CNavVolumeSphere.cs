@@ -14,9 +14,9 @@ public partial interface CNavVolumeSphere : CNavVolume, ISchemaClass<CNavVolumeS
     static int ISchemaClass<CNavVolumeSphere>.Size => 136;
     static string? ISchemaClass<CNavVolumeSphere>.ClassName => null;
 
-    
+
     public ref Vector Center { get; }
-    
+
     public ref float Radius { get; }
 
 

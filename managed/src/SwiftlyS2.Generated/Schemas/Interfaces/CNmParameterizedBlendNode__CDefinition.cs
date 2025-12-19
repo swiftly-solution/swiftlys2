@@ -14,12 +14,12 @@ public partial interface CNmParameterizedBlendNode__CDefinition : CNmPoseNode__C
     static int ISchemaClass<CNmParameterizedBlendNode__CDefinition>.Size => 64;
     static string? ISchemaClass<CNmParameterizedBlendNode__CDefinition>.ClassName => null;
 
-    
-  // CUtlVectorFixedGrowable< int16, 5 >
+
+    // CUtlVectorFixedGrowable< int16, 5 >
     public SchemaUntypedField SourceNodeIndices { get; }
-    
+
     public ref short InputParameterValueNodeIdx { get; }
-    
+
     public ref bool AllowLooping { get; }
 
 

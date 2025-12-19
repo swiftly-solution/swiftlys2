@@ -14,13 +14,13 @@ public partial interface CPulseRuntimeMethodArg : ISchemaClass<CPulseRuntimeMeth
     static int ISchemaClass<CPulseRuntimeMethodArg>.Size => 128;
     static string? ISchemaClass<CPulseRuntimeMethodArg>.ClassName => null;
 
-    
-  // CKV3MemberNameWithStorage
+
+    // CKV3MemberNameWithStorage
     public SchemaUntypedField Name { get; }
-    
+
     public string Description { get; set; }
-    
-  // CPulseValueFullType
+
+    // CPulseValueFullType
     public SchemaUntypedField Type { get; }
 
 

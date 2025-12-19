@@ -14,9 +14,9 @@ public partial interface SceneViewId_t : ISchemaClass<SceneViewId_t>
     static int ISchemaClass<SceneViewId_t>.Size => 16;
     static string? ISchemaClass<SceneViewId_t>.ClassName => null;
 
-    
+
     public ref ulong ViewId { get; }
-    
+
     public ref ulong FrameCount { get; }
 
 

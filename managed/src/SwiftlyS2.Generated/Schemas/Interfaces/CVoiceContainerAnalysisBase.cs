@@ -14,10 +14,10 @@ public partial interface CVoiceContainerAnalysisBase : ISchemaClass<CVoiceContai
     static int ISchemaClass<CVoiceContainerAnalysisBase>.Size => 80;
     static string? ISchemaClass<CVoiceContainerAnalysisBase>.ClassName => null;
 
-    
+
     public ref bool RegenerateCurveOnCompile { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve { get; }
 
 

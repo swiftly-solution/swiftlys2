@@ -14,37 +14,37 @@ public partial interface C_INIT_CreateOnModel : CParticleFunctionInitializer, IS
     static int ISchemaClass<C_INIT_CreateOnModel>.Size => 5008;
     static string? ISchemaClass<C_INIT_CreateOnModel>.ClassName => null;
 
-    
+
     public CParticleModelInput ModelInput { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref int ForceInModel { get; }
-    
+
     public ref bool ScaleToVolume { get; }
-    
+
     public ref bool EvenDistribution { get; }
-    
+
     public CParticleCollectionFloatInput DesiredHitbox { get; }
-    
+
     public ref int HitboxValueFromControlPointIndex { get; }
-    
+
     public CParticleCollectionVecInput HitBoxScale { get; }
-    
+
     public ref float BoneVelocity { get; }
-    
+
     public ref float MaxBoneVelocity { get; }
-    
+
     public CParticleCollectionVecInput DirectionBias { get; }
-    
+
     public string HitboxSetName { get; set; }
-    
+
     public ref bool LocalCoords { get; }
-    
+
     public ref bool UseBones { get; }
-    
+
     public ref bool UseMesh { get; }
-    
+
     public CParticleCollectionFloatInput ShellSize { get; }
 
 

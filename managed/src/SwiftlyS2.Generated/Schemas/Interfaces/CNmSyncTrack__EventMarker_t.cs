@@ -14,9 +14,9 @@ public partial interface CNmSyncTrack__EventMarker_t : ISchemaClass<CNmSyncTrack
     static int ISchemaClass<CNmSyncTrack__EventMarker_t>.Size => 16;
     static string? ISchemaClass<CNmSyncTrack__EventMarker_t>.ClassName => null;
 
-    
+
     public NmPercent_t StartTime { get; }
-    
+
     public ref CGlobalSymbol ID { get; }
 
 

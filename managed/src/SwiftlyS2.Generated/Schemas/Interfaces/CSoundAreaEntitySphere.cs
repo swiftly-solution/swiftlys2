@@ -14,7 +14,7 @@ public partial interface CSoundAreaEntitySphere : CSoundAreaEntityBase, ISchemaC
     static int ISchemaClass<CSoundAreaEntitySphere>.Size => 1304;
     static string? ISchemaClass<CSoundAreaEntitySphere>.ClassName => "snd_sound_area_sphere";
 
-    
+
     public ref float Radius { get; }
 
     public void RadiusUpdated();

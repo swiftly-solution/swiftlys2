@@ -14,11 +14,11 @@ public partial interface FeFollowNode_t : ISchemaClass<FeFollowNode_t>
     static int ISchemaClass<FeFollowNode_t>.Size => 8;
     static string? ISchemaClass<FeFollowNode_t>.ClassName => null;
 
-    
+
     public ref ushort ParentNode { get; }
-    
+
     public ref ushort ChildNode { get; }
-    
+
     public ref float Weight { get; }
 
 

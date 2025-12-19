@@ -14,25 +14,25 @@ public partial interface PermModelInfo_t : ISchemaClass<PermModelInfo_t>
     static int ISchemaClass<PermModelInfo_t>.Size => 88;
     static string? ISchemaClass<PermModelInfo_t>.ClassName => null;
 
-    
+
     public ref uint Flags { get; }
-    
+
     public ref Vector HullMin { get; }
-    
+
     public ref Vector HullMax { get; }
-    
+
     public ref Vector ViewMin { get; }
-    
+
     public ref Vector ViewMax { get; }
-    
+
     public ref float Mass { get; }
-    
+
     public ref Vector EyePosition { get; }
-    
+
     public ref float MaxEyeDeflection { get; }
-    
+
     public string SurfaceProperty { get; set; }
-    
+
     public string KeyValueText { get; set; }
 
 

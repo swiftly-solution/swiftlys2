@@ -14,11 +14,11 @@ public partial interface C_OP_StopAfterCPDuration : CParticleFunctionPreEmission
     static int ISchemaClass<C_OP_StopAfterCPDuration>.Size => 848;
     static string? ISchemaClass<C_OP_StopAfterCPDuration>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput Duration { get; }
-    
+
     public ref bool DestroyImmediately { get; }
-    
+
     public ref bool PlayEndCap { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_INIT_CheckParticleForWater : CParticleFunctionInitial
     static int ISchemaClass<C_INIT_CheckParticleForWater>.Size => 1224;
     static string? ISchemaClass<C_INIT_CheckParticleForWater>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput Radius { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CParticleRemapFloatInput OutputRemap { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
 
 

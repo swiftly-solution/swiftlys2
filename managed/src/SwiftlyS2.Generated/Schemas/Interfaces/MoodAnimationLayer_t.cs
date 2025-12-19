@@ -14,29 +14,29 @@ public partial interface MoodAnimationLayer_t : ISchemaClass<MoodAnimationLayer_
     static int ISchemaClass<MoodAnimationLayer_t>.Size => 96;
     static string? ISchemaClass<MoodAnimationLayer_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref bool ActiveListening { get; }
-    
+
     public ref bool ActiveTalking { get; }
-    
+
     public ref CUtlVector<MoodAnimation_t> LayerAnimations { get; }
-    
+
     public CRangeFloat Intensity { get; }
-    
+
     public CRangeFloat DurationScale { get; }
-    
+
     public ref bool ScaleWithInts { get; }
-    
+
     public CRangeFloat NextStart { get; }
-    
+
     public CRangeFloat StartOffset { get; }
-    
+
     public CRangeFloat EndOffset { get; }
-    
+
     public ref float FadeIn { get; }
-    
+
     public ref float FadeOut { get; }
 
 

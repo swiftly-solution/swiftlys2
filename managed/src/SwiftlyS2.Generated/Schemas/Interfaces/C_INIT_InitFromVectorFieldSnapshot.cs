@@ -14,15 +14,15 @@ public partial interface C_INIT_InitFromVectorFieldSnapshot : CParticleFunctionI
     static int ISchemaClass<C_INIT_InitFromVectorFieldSnapshot>.Size => 2208;
     static string? ISchemaClass<C_INIT_InitFromVectorFieldSnapshot>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref int LocalSpaceCP { get; }
-    
+
     public ref int WeightUpdateCP { get; }
-    
+
     public ref bool UseVerticalVelocity { get; }
-    
+
     public CPerParticleVecInput Scale { get; }
 
 

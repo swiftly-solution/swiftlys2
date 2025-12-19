@@ -14,17 +14,17 @@ public partial interface C_OP_VelocityMatchingForce : CParticleFunctionOperator,
     static int ISchemaClass<C_OP_VelocityMatchingForce>.Size => 488;
     static string? ISchemaClass<C_OP_VelocityMatchingForce>.ClassName => null;
 
-    
+
     public ref float DirScale { get; }
-    
+
     public ref float SpdScale { get; }
-    
+
     public ref float NeighborDistance { get; }
-    
+
     public ref float FacingStrength { get; }
-    
+
     public ref bool UseAABB { get; }
-    
+
     public ref int CPBroadcast { get; }
 
 

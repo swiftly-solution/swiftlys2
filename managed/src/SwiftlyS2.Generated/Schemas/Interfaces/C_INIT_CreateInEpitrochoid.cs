@@ -14,25 +14,25 @@ public partial interface C_INIT_CreateInEpitrochoid : CParticleFunctionInitializ
     static int ISchemaClass<C_INIT_CreateInEpitrochoid>.Size => 2064;
     static string? ISchemaClass<C_INIT_CreateInEpitrochoid>.ClassName => null;
 
-    
+
     public ref int Component1 { get; }
-    
+
     public ref int Component2 { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public CPerParticleFloatInput ParticleDensity { get; }
-    
+
     public CPerParticleFloatInput Offset { get; }
-    
+
     public CPerParticleFloatInput Radius1 { get; }
-    
+
     public CPerParticleFloatInput Radius2 { get; }
-    
+
     public ref bool UseCount { get; }
-    
+
     public ref bool UseLocalCoords { get; }
-    
+
     public ref bool OffsetExistingPos { get; }
 
 

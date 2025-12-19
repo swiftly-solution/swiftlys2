@@ -14,23 +14,23 @@ public partial interface C_OP_DistanceBetweenVecs : CParticleFunctionOperator, I
     static int ISchemaClass<C_OP_DistanceBetweenVecs>.Size => 5392;
     static string? ISchemaClass<C_OP_DistanceBetweenVecs>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CPerParticleVecInput Point1 { get; }
-    
+
     public CPerParticleVecInput Point2 { get; }
-    
+
     public CPerParticleFloatInput InputMin { get; }
-    
+
     public CPerParticleFloatInput InputMax { get; }
-    
+
     public CPerParticleFloatInput OutputMin { get; }
-    
+
     public CPerParticleFloatInput OutputMax { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool DeltaTime { get; }
 
 

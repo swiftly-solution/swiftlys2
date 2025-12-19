@@ -14,7 +14,7 @@ public partial interface CStopwatchBase : CSimpleSimTimer, ISchemaClass<CStopwat
     static int ISchemaClass<CStopwatchBase>.Size => 12;
     static string? ISchemaClass<CStopwatchBase>.ClassName => null;
 
-    
+
     public ref bool IsRunning { get; }
 
 

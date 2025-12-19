@@ -14,25 +14,25 @@ public partial interface CPhysExplosion : CPointEntity, ISchemaClass<CPhysExplos
     static int ISchemaClass<CPhysExplosion>.Size => 1344;
     static string? ISchemaClass<CPhysExplosion>.ClassName => "env_physexplosion";
 
-    
+
     public ref bool ExplodeOnSpawn { get; }
-    
+
     public ref float Magnitude { get; }
-    
+
     public ref float Damage { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public string TargetEntityName { get; set; }
-    
+
     public ref float InnerRadius { get; }
-    
+
     public ref float PushScale { get; }
-    
+
     public ref bool ConvertToDebrisWhenPossible { get; }
-    
+
     public ref bool AffectInvulnerableEnts { get; }
-    
+
     public CEntityIOOutput OnPushedPlayer { get; }
 
 

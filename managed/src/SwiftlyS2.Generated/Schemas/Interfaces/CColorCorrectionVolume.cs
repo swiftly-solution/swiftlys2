@@ -14,21 +14,21 @@ public partial interface CColorCorrectionVolume : CBaseTrigger, ISchemaClass<CCo
     static int ISchemaClass<CColorCorrectionVolume>.Size => 3016;
     static string? ISchemaClass<CColorCorrectionVolume>.ClassName => "color_correction_volume";
 
-    
+
     public ref float MaxWeight { get; }
-    
+
     public ref float FadeDuration { get; }
-    
+
     public ref float Weight { get; }
-    
+
     public string LookupFilename { get; set; }
-    
+
     public ref float LastEnterWeight { get; }
-    
+
     public GameTime_t LastEnterTime { get; }
-    
+
     public ref float LastExitWeight { get; }
-    
+
     public GameTime_t LastExitTime { get; }
 
     public void MaxWeightUpdated();

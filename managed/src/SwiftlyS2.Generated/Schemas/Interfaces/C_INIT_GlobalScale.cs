@@ -14,17 +14,17 @@ public partial interface C_INIT_GlobalScale : CParticleFunctionInitializer, ISch
     static int ISchemaClass<C_INIT_GlobalScale>.Size => 488;
     static string? ISchemaClass<C_INIT_GlobalScale>.ClassName => null;
 
-    
+
     public ref float Scale { get; }
-    
+
     public ref int ScaleControlPointNumber { get; }
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref bool ScaleRadius { get; }
-    
+
     public ref bool ScalePosition { get; }
-    
+
     public ref bool ScaleVelocity { get; }
 
 

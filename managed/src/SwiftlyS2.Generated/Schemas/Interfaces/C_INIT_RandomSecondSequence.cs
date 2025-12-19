@@ -14,9 +14,9 @@ public partial interface C_INIT_RandomSecondSequence : CParticleFunctionInitiali
     static int ISchemaClass<C_INIT_RandomSecondSequence>.Size => 480;
     static string? ISchemaClass<C_INIT_RandomSecondSequence>.ClassName => null;
 
-    
+
     public ref int SequenceMin { get; }
-    
+
     public ref int SequenceMax { get; }
 
 

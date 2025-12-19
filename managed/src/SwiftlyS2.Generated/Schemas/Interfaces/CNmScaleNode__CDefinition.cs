@@ -14,9 +14,9 @@ public partial interface CNmScaleNode__CDefinition : CNmPassthroughNode__CDefini
     static int ISchemaClass<CNmScaleNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmScaleNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short MaskNodeIdx { get; }
-    
+
     public ref short EnableNodeIdx { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface CConstraintSlave : ISchemaClass<CConstraintSlave>
     static int ISchemaClass<CConstraintSlave>.Size => 80;
     static string? ISchemaClass<CConstraintSlave>.ClassName => null;
 
-    
+
     public ref Quaternion BaseOrientation { get; }
-    
+
     public ref Vector BasePosition { get; }
-    
+
     public ref uint BoneHash { get; }
-    
+
     public ref float Weight { get; }
-    
+
     public string Name { get; set; }
 
 

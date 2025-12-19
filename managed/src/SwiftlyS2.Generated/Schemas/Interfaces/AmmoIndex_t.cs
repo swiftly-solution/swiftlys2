@@ -14,7 +14,7 @@ public partial interface AmmoIndex_t : ISchemaClass<AmmoIndex_t>
     static int ISchemaClass<AmmoIndex_t>.Size => 1;
     static string? ISchemaClass<AmmoIndex_t>.ClassName => null;
 
-    
+
     public ref byte Value { get; }
 
 

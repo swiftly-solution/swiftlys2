@@ -14,15 +14,15 @@ public partial interface C_OP_RemapExternalWindToCP : CParticleFunctionPreEmissi
     static int ISchemaClass<C_OP_RemapExternalWindToCP>.Size => 2208;
     static string? ISchemaClass<C_OP_RemapExternalWindToCP>.ClassName => null;
 
-    
+
     public ref int CP { get; }
-    
+
     public ref int CPOutput { get; }
-    
+
     public CParticleCollectionVecInput Scale { get; }
-    
+
     public ref bool SetMagnitude { get; }
-    
+
     public ref int OutVectorField { get; }
 
 

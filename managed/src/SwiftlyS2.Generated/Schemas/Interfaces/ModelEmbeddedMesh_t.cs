@@ -14,23 +14,23 @@ public partial interface ModelEmbeddedMesh_t : ISchemaClass<ModelEmbeddedMesh_t>
     static int ISchemaClass<ModelEmbeddedMesh_t>.Size => 112;
     static string? ISchemaClass<ModelEmbeddedMesh_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref int MeshIndex { get; }
-    
+
     public ref int DataBlock { get; }
-    
+
     public ref int MorphBlock { get; }
-    
+
     public ref CUtlVector<ModelMeshBufferData_t> VertexBuffers { get; }
-    
+
     public ref CUtlVector<ModelMeshBufferData_t> IndexBuffers { get; }
-    
+
     public ref CUtlVector<ModelMeshBufferData_t> ToolsBuffers { get; }
-    
+
     public ref int VBIBBlock { get; }
-    
+
     public ref int ToolsVBBlock { get; }
 
 

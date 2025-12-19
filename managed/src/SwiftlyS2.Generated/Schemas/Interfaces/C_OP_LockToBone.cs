@@ -14,35 +14,35 @@ public partial interface C_OP_LockToBone : CParticleFunctionOperator, ISchemaCla
     static int ISchemaClass<C_OP_LockToBone>.Size => 2920;
     static string? ISchemaClass<C_OP_LockToBone>.ClassName => null;
 
-    
+
     public CParticleModelInput ModelInput { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref float LifeTimeFadeStart { get; }
-    
+
     public ref float LifeTimeFadeEnd { get; }
-    
+
     public ref float JumpThreshold { get; }
-    
+
     public ref float PrevPosScale { get; }
-    
+
     public string HitboxSetName { get; set; }
-    
+
     public ref bool Rigid { get; }
-    
+
     public ref bool UseBones { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutputPrev { get; }
-    
+
     public ref ParticleRotationLockType_t RotationSetType { get; }
-    
+
     public ref bool RigidRotationLock { get; }
-    
+
     public CPerParticleVecInput Rotation { get; }
-    
+
     public CPerParticleFloatInput RotLerp { get; }
 
 

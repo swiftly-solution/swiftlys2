@@ -14,31 +14,31 @@ public partial interface C_INIT_CreateWithinSphereTransform : CParticleFunctionI
     static int ISchemaClass<C_INIT_CreateWithinSphereTransform>.Size => 7240;
     static string? ISchemaClass<C_INIT_CreateWithinSphereTransform>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput RadiusMin { get; }
-    
+
     public CPerParticleFloatInput RadiusMax { get; }
-    
+
     public CPerParticleVecInput DistanceBias { get; }
-    
+
     public ref Vector DistanceBiasAbs { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public CPerParticleFloatInput SpeedMin { get; }
-    
+
     public CPerParticleFloatInput SpeedMax { get; }
-    
+
     public ref float SpeedRandExp { get; }
-    
+
     public ref bool LocalCoords { get; }
-    
+
     public CPerParticleVecInput LocalCoordinateSystemSpeedMin { get; }
-    
+
     public CPerParticleVecInput LocalCoordinateSystemSpeedMax { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ParticleAttributeIndex_t FieldVelocity { get; }
 
 

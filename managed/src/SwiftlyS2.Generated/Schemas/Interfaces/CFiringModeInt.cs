@@ -14,7 +14,7 @@ public partial interface CFiringModeInt : ISchemaClass<CFiringModeInt>
     static int ISchemaClass<CFiringModeInt>.Size => 8;
     static string? ISchemaClass<CFiringModeInt>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<int> Values { get; }
 
 

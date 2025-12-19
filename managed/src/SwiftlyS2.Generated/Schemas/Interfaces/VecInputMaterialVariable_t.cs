@@ -14,9 +14,9 @@ public partial interface VecInputMaterialVariable_t : ISchemaClass<VecInputMater
     static int ISchemaClass<VecInputMaterialVariable_t>.Size => 1728;
     static string? ISchemaClass<VecInputMaterialVariable_t>.ClassName => null;
 
-    
+
     public string StrVariable { get; set; }
-    
+
     public CParticleCollectionVecInput Input { get; }
 
 

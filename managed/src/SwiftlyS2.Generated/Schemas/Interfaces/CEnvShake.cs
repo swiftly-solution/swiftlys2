@@ -14,25 +14,25 @@ public partial interface CEnvShake : CPointEntity, ISchemaClass<CEnvShake>
     static int ISchemaClass<CEnvShake>.Size => 1344;
     static string? ISchemaClass<CEnvShake>.ClassName => "env_shake";
 
-    
+
     public string LimitToEntity { get; set; }
-    
+
     public ref float Amplitude { get; }
-    
+
     public ref float Frequency { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public GameTime_t StopTime { get; }
-    
+
     public GameTime_t NextShake { get; }
-    
+
     public ref float CurrentAmp { get; }
-    
+
     public ref Vector MaxForce { get; }
-    
+
     public CPhysicsShake ShakeCallback { get; }
 
 

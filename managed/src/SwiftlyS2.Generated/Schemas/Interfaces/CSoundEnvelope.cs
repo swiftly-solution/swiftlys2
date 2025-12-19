@@ -14,13 +14,13 @@ public partial interface CSoundEnvelope : ISchemaClass<CSoundEnvelope>
     static int ISchemaClass<CSoundEnvelope>.Size => 16;
     static string? ISchemaClass<CSoundEnvelope>.ClassName => null;
 
-    
+
     public ref float Current { get; }
-    
+
     public ref float Target { get; }
-    
+
     public ref float Rate { get; }
-    
+
     public ref bool Forceupdate { get; }
 
 

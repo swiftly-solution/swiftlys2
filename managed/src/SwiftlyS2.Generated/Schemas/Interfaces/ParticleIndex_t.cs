@@ -14,7 +14,7 @@ public partial interface ParticleIndex_t : ISchemaClass<ParticleIndex_t>
     static int ISchemaClass<ParticleIndex_t>.Size => 4;
     static string? ISchemaClass<ParticleIndex_t>.ClassName => null;
 
-    
+
     public ref int Value { get; }
 
 

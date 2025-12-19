@@ -14,9 +14,9 @@ public partial interface CFuncPlatRot : CFuncPlat, ISchemaClass<CFuncPlatRot>
     static int ISchemaClass<CFuncPlatRot>.Size => 2208;
     static string? ISchemaClass<CFuncPlatRot>.ClassName => "func_platrot";
 
-    
+
     public ref QAngle End { get; }
-    
+
     public ref QAngle Start { get; }
 
 

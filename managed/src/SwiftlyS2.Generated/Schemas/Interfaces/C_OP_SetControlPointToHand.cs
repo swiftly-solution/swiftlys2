@@ -14,13 +14,13 @@ public partial interface C_OP_SetControlPointToHand : CParticleFunctionPreEmissi
     static int ISchemaClass<C_OP_SetControlPointToHand>.Size => 496;
     static string? ISchemaClass<C_OP_SetControlPointToHand>.ClassName => null;
 
-    
+
     public ref int CP1 { get; }
-    
+
     public ref int Hand { get; }
-    
+
     public ref Vector CP1Pos { get; }
-    
+
     public ref bool OrientToHand { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface CNmTarget : ISchemaClass<CNmTarget>
     static int ISchemaClass<CNmTarget>.Size => 48;
     static string? ISchemaClass<CNmTarget>.ClassName => null;
 
-    
+
     public ref CTransform Transform { get; }
-    
+
     public ref CGlobalSymbol BoneID { get; }
-    
+
     public ref bool IsBoneTarget { get; }
-    
+
     public ref bool IsUsingBoneSpaceOffsets { get; }
-    
+
     public ref bool HasOffsets { get; }
-    
+
     public ref bool IsSet { get; }
 
 

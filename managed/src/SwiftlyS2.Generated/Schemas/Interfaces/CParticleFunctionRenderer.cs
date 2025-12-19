@@ -14,11 +14,11 @@ public partial interface CParticleFunctionRenderer : CParticleFunction, ISchemaC
     static int ISchemaClass<CParticleFunctionRenderer>.Size => 544;
     static string? ISchemaClass<CParticleFunctionRenderer>.ClassName => null;
 
-    
+
     public CParticleVisibilityInputs VisibilityInputs { get; }
-    
+
     public ref bool CannotBeRefracted { get; }
-    
+
     public ref bool SkipRenderingOnMobile { get; }
 
 

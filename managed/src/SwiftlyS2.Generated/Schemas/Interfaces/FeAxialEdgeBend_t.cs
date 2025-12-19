@@ -14,15 +14,15 @@ public partial interface FeAxialEdgeBend_t : ISchemaClass<FeAxialEdgeBend_t>
     static int ISchemaClass<FeAxialEdgeBend_t>.Size => 40;
     static string? ISchemaClass<FeAxialEdgeBend_t>.ClassName => null;
 
-    
+
     public ref float Te { get; }
-    
+
     public ref float Tv { get; }
-    
+
     public ref float Dist { get; }
-    
+
     public ISchemaFixedArray<float> Weight { get; }
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
 
 

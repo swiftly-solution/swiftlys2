@@ -14,50 +14,50 @@ public partial interface CBaseAnimGraphAnimGraphController : CAnimGraphControlle
     static int ISchemaClass<CBaseAnimGraphAnimGraphController>.Size => 616;
     static string? ISchemaClass<CBaseAnimGraphAnimGraphController>.ClassName => null;
 
-    
-  // CAnimGraphParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraphParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField DestructiblePartDestroyedHitGroup { get; }
-    
-  // CAnimGraphParamOptionalRef< int32 >
+
+    // CAnimGraphParamOptionalRef< int32 >
     public SchemaUntypedField DestructiblePartDestroyedPartIndex { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_INVALID_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_GENERIC_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_HEAD_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_CHEST_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_STOMACH_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_LEFTARM_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_RIGHTARM_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_LEFTLEG_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_RIGHTLEG_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_NECK_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_UNUSED_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_GEAR_Destroyed { get; }
-    
-  // CAnimGraphParamOptionalRef< bool >
+
+    // CAnimGraphParamOptionalRef< bool >
     public SchemaUntypedField HITGROUP_SPECIAL_Destroyed { get; }
 
 

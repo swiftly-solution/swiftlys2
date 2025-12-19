@@ -14,19 +14,19 @@ public partial interface CDampedPathAnimMotorUpdater : CPathAnimMotorUpdaterBase
     static int ISchemaClass<CDampedPathAnimMotorUpdater>.Size => 72;
     static string? ISchemaClass<CDampedPathAnimMotorUpdater>.ClassName => null;
 
-    
+
     public ref float AnticipationTime { get; }
-    
+
     public ref float MinSpeedScale { get; }
-    
+
     public CAnimParamHandle AnticipationPosParam { get; }
-    
+
     public CAnimParamHandle AnticipationHeadingParam { get; }
-    
+
     public ref float SpringConstant { get; }
-    
+
     public ref float MinSpringTension { get; }
-    
+
     public ref float MaxSpringTension { get; }
 
 

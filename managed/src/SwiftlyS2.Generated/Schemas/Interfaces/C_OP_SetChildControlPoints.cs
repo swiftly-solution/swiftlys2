@@ -14,19 +14,19 @@ public partial interface C_OP_SetChildControlPoints : CParticleFunctionOperator,
     static int ISchemaClass<C_OP_SetChildControlPoints>.Size => 856;
     static string? ISchemaClass<C_OP_SetChildControlPoints>.ClassName => null;
 
-    
+
     public ref int ChildGroupID { get; }
-    
+
     public ref int FirstControlPoint { get; }
-    
+
     public ref int NumControlPoints { get; }
-    
+
     public CParticleCollectionFloatInput FirstSourcePoint { get; }
-    
+
     public ref bool Reverse { get; }
-    
+
     public ref bool SetOrientation { get; }
-    
+
     public ref ParticleOrientationType_t Orientation { get; }
 
 

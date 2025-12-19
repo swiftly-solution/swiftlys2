@@ -14,13 +14,13 @@ public partial interface CSingleFrameUpdateNode : CLeafUpdateNode, ISchemaClass<
     static int ISchemaClass<CSingleFrameUpdateNode>.Size => 128;
     static string? ISchemaClass<CSingleFrameUpdateNode>.ClassName => null;
 
-    
+
     public ref CUtlVector<SchemaUntypedField> Actions { get; }
-    
+
     public CPoseHandle PoseCacheHandle { get; }
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref float Cycle { get; }
 
 

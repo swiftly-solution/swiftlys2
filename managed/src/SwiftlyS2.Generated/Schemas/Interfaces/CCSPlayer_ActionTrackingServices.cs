@@ -14,13 +14,13 @@ public partial interface CCSPlayer_ActionTrackingServices : CPlayerPawnComponent
     static int ISchemaClass<CCSPlayer_ActionTrackingServices>.Size => 776;
     static string? ISchemaClass<CCSPlayer_ActionTrackingServices>.ClassName => null;
 
-    
+
     public ref CHandle<CBasePlayerWeapon> LastWeaponBeforeC4AutoSwitch { get; }
-    
+
     public ref bool IsRescuing { get; }
-    
+
     public WeaponPurchaseTracker_t WeaponPurchasesThisMatch { get; }
-    
+
     public WeaponPurchaseTracker_t WeaponPurchasesThisRound { get; }
 
     public void IsRescuingUpdated();

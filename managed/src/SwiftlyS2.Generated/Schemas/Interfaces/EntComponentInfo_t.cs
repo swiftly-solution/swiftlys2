@@ -14,19 +14,19 @@ public partial interface EntComponentInfo_t : ISchemaClass<EntComponentInfo_t>
     static int ISchemaClass<EntComponentInfo_t>.Size => 104;
     static string? ISchemaClass<EntComponentInfo_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public string CPPClassname { get; set; }
-    
+
     public string NetworkDataReferencedDescription { get; set; }
-    
+
     public string NetworkDataReferencedPtrPropDescription { get; set; }
-    
+
     public ref int RuntimeIndex { get; }
-    
+
     public ref uint Flags { get; }
-    
+
     public CEntityComponentHelper? BaseClassComponentHelper { get; }
 
 

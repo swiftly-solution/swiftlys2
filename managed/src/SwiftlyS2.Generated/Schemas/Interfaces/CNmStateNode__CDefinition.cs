@@ -14,32 +14,32 @@ public partial interface CNmStateNode__CDefinition : CNmPoseNode__CDefinition, I
     static int ISchemaClass<CNmStateNode__CDefinition>.Size => 176;
     static string? ISchemaClass<CNmStateNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short ChildNodeIdx { get; }
-    
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
     public SchemaUntypedField EntryEvents { get; }
-    
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
     public SchemaUntypedField ExecuteEvents { get; }
-    
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
     public SchemaUntypedField ExitEvents { get; }
-    
-  // CUtlLeanVectorFixedGrowable< CNmStateNode::TimedEvent_t, 1 >
+
+    // CUtlLeanVectorFixedGrowable< CNmStateNode::TimedEvent_t, 1 >
     public SchemaUntypedField TimedRemainingEvents { get; }
-    
-  // CUtlLeanVectorFixedGrowable< CNmStateNode::TimedEvent_t, 1 >
+
+    // CUtlLeanVectorFixedGrowable< CNmStateNode::TimedEvent_t, 1 >
     public SchemaUntypedField TimedElapsedEvents { get; }
-    
+
     public ref short LayerWeightNodeIdx { get; }
-    
+
     public ref short LayerRootMotionWeightNodeIdx { get; }
-    
+
     public ref short LayerBoneMaskNodeIdx { get; }
-    
+
     public ref bool IsOffState { get; }
-    
+
     public ref bool UseActualElapsedTimeInStateForTimedEvents { get; }
 
 

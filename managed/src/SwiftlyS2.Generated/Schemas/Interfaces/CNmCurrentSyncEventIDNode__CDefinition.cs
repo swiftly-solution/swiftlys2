@@ -14,7 +14,7 @@ public partial interface CNmCurrentSyncEventIDNode__CDefinition : CNmIDValueNode
     static int ISchemaClass<CNmCurrentSyncEventIDNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmCurrentSyncEventIDNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
 
 

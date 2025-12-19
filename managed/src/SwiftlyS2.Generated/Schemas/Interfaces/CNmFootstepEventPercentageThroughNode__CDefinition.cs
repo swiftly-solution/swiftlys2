@@ -14,11 +14,11 @@ public partial interface CNmFootstepEventPercentageThroughNode__CDefinition : CN
     static int ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public ref NmFootPhaseCondition_t PhaseCondition { get; }
-    
+
     public CNmBitFlags EventConditionRules { get; }
 
 

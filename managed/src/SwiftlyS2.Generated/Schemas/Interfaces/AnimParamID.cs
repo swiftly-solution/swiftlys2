@@ -14,7 +14,7 @@ public partial interface AnimParamID : ISchemaClass<AnimParamID>
     static int ISchemaClass<AnimParamID>.Size => 4;
     static string? ISchemaClass<AnimParamID>.ClassName => null;
 
-    
+
     public ref uint Id { get; }
 
 

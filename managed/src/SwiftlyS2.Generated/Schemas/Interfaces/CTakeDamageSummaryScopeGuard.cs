@@ -14,7 +14,7 @@ public partial interface CTakeDamageSummaryScopeGuard : ISchemaClass<CTakeDamage
     static int ISchemaClass<CTakeDamageSummaryScopeGuard>.Size => 32;
     static string? ISchemaClass<CTakeDamageSummaryScopeGuard>.ClassName => null;
 
-    
+
     public ref CUtlVector<PointerTo<SummaryTakeDamageInfo_t>> Summaries { get; }
 
 

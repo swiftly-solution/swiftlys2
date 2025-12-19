@@ -14,13 +14,13 @@ public partial interface CAnimComponentUpdater : ISchemaClass<CAnimComponentUpda
     static int ISchemaClass<CAnimComponentUpdater>.Size => 48;
     static string? ISchemaClass<CAnimComponentUpdater>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public AnimComponentID Id { get; }
-    
+
     public ref AnimNodeNetworkMode NetworkMode { get; }
-    
+
     public ref bool StartEnabled { get; }
 
 

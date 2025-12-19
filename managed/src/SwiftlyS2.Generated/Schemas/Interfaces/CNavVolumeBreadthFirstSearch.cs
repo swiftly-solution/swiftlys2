@@ -14,9 +14,9 @@ public partial interface CNavVolumeBreadthFirstSearch : CNavVolumeCalculatedVect
     static int ISchemaClass<CNavVolumeBreadthFirstSearch>.Size => 192;
     static string? ISchemaClass<CNavVolumeBreadthFirstSearch>.ClassName => null;
 
-    
+
     public ref Vector StartPos { get; }
-    
+
     public ref float SearchDist { get; }
 
 

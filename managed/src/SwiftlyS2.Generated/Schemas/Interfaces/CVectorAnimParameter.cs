@@ -14,11 +14,11 @@ public partial interface CVectorAnimParameter : CConcreteAnimParameter, ISchemaC
     static int ISchemaClass<CVectorAnimParameter>.Size => 152;
     static string? ISchemaClass<CVectorAnimParameter>.ClassName => null;
 
-    
+
     public ref Vector DefaultValue { get; }
-    
+
     public ref bool Interpolate { get; }
-    
+
     public ref AnimParamVectorType_t VectorType { get; }
 
 

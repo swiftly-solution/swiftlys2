@@ -14,17 +14,17 @@ public partial interface CConcreteAnimParameter : CAnimParameterBase, ISchemaCla
     static int ISchemaClass<CConcreteAnimParameter>.Size => 128;
     static string? ISchemaClass<CConcreteAnimParameter>.ClassName => null;
 
-    
+
     public ref AnimParamButton_t PreviewButton { get; }
-    
+
     public ref AnimParamNetworkSetting NetworkSetting { get; }
-    
+
     public ref bool UseMostRecentValue { get; }
-    
+
     public ref bool AutoReset { get; }
-    
+
     public ref bool GameWritable { get; }
-    
+
     public ref bool GraphWritable { get; }
 
 

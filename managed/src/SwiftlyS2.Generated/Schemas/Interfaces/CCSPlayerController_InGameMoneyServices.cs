@@ -14,17 +14,17 @@ public partial interface CCSPlayerController_InGameMoneyServices : CPlayerContro
     static int ISchemaClass<CCSPlayerController_InGameMoneyServices>.Size => 88;
     static string? ISchemaClass<CCSPlayerController_InGameMoneyServices>.ClassName => null;
 
-    
+
     public ref bool ReceivesMoneyNextRound { get; }
-    
+
     public ref int MoneyEarnedForNextRound { get; }
-    
+
     public ref int Account { get; }
-    
+
     public ref int StartAccount { get; }
-    
+
     public ref int TotalCashSpent { get; }
-    
+
     public ref int CashSpentThisRound { get; }
 
     public void AccountUpdated();

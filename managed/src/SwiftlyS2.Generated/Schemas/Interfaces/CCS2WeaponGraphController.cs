@@ -14,65 +14,65 @@ public partial interface CCS2WeaponGraphController : CAnimGraphControllerBase, I
     static int ISchemaClass<CCS2WeaponGraphController>.Size => 1536;
     static string? ISchemaClass<CCS2WeaponGraphController>.ClassName => null;
 
-    
-  // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField Action { get; }
-    
-  // CAnimGraph2ParamOptionalRef< bool >
+
+    // CAnimGraph2ParamOptionalRef< bool >
     public SchemaUntypedField ActionReset { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField WeaponActionSpeedScale { get; }
-    
-  // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField WeaponCategory { get; }
-    
-  // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField WeaponType { get; }
-    
-  // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField WeaponExtraInfo { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField WeaponAmmo { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField WeaponAmmoMax { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField WeaponAmmoReserve { get; }
-    
-  // CAnimGraph2ParamOptionalRef< bool >
+
+    // CAnimGraph2ParamOptionalRef< bool >
     public SchemaUntypedField WeaponIsSilenced { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField WeaponIronsightAmount { get; }
-    
-  // CAnimGraph2ParamOptionalRef< bool >
+
+    // CAnimGraph2ParamOptionalRef< bool >
     public SchemaUntypedField IsUsingLegacyModel { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField IdleVariation { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField DeployVariation { get; }
-    
-  // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField AttackType { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField AttackThrowStrength { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField AttackVariation { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField InspectVariation { get; }
-    
-  // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField InspectExtraInfo { get; }
-    
-  // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField ReloadStage { get; }
 
 

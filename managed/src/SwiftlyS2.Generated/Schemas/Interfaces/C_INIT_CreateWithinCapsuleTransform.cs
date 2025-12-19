@@ -14,27 +14,27 @@ public partial interface C_INIT_CreateWithinCapsuleTransform : CParticleFunction
     static int ISchemaClass<C_INIT_CreateWithinCapsuleTransform>.Size => 5872;
     static string? ISchemaClass<C_INIT_CreateWithinCapsuleTransform>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput RadiusMin { get; }
-    
+
     public CPerParticleFloatInput RadiusMax { get; }
-    
+
     public CPerParticleFloatInput Height { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public CPerParticleFloatInput SpeedMin { get; }
-    
+
     public CPerParticleFloatInput SpeedMax { get; }
-    
+
     public ref float SpeedRandExp { get; }
-    
+
     public CPerParticleVecInput LocalCoordinateSystemSpeedMin { get; }
-    
+
     public CPerParticleVecInput LocalCoordinateSystemSpeedMax { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ParticleAttributeIndex_t FieldVelocity { get; }
 
 

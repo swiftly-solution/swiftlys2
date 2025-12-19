@@ -14,9 +14,9 @@ public partial interface CVoiceContainerSetElement : ISchemaClass<CVoiceContaine
     static int ISchemaClass<CVoiceContainerSetElement>.Size => 32;
     static string? ISchemaClass<CVoiceContainerSetElement>.ClassName => null;
 
-    
+
     public CSoundContainerReference Sound { get; }
-    
+
     public ref float VolumeDB { get; }
 
 

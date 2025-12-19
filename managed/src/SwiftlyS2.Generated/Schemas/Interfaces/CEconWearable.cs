@@ -14,9 +14,9 @@ public partial interface CEconWearable : CEconEntity, ISchemaClass<CEconWearable
     static int ISchemaClass<CEconWearable>.Size => 3680;
     static string? ISchemaClass<CEconWearable>.ClassName => "wearable_item";
 
-    
+
     public ref int ForceSkin { get; }
-    
+
     public ref bool AlwaysAllow { get; }
 
 

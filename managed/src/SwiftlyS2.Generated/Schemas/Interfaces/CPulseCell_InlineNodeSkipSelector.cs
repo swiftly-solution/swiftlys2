@@ -14,13 +14,13 @@ public partial interface CPulseCell_InlineNodeSkipSelector : CPulseCell_BaseFlow
     static int ISchemaClass<CPulseCell_InlineNodeSkipSelector>.Size => 176;
     static string? ISchemaClass<CPulseCell_InlineNodeSkipSelector>.ClassName => null;
 
-    
+
     public PulseDocNodeID_t FlowNodeID { get; }
-    
+
     public ref bool And { get; }
-    
+
     public PulseSelectorOutflowList_t PassOutflow { get; }
-    
+
     public CPulse_OutflowConnection FailOutflow { get; }
 
 

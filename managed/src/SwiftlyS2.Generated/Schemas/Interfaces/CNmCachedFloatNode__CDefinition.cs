@@ -14,9 +14,9 @@ public partial interface CNmCachedFloatNode__CDefinition : CNmFloatValueNode__CD
     static int ISchemaClass<CNmCachedFloatNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmCachedFloatNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref NmCachedValueMode_t Mode { get; }
 
 

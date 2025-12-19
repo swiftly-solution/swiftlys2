@@ -14,9 +14,9 @@ public partial interface CTriggerVolume : CBaseModelEntity, ISchemaClass<CTrigge
     static int ISchemaClass<CTriggerVolume>.Size => 2024;
     static string? ISchemaClass<CTriggerVolume>.ClassName => "trigger_transition";
 
-    
+
     public string FilterName { get; set; }
-    
+
     public ref CHandle<CBaseFilter> Filter { get; }
 
 

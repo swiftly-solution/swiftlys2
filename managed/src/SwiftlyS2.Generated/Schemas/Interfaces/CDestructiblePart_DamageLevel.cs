@@ -14,25 +14,25 @@ public partial interface CDestructiblePart_DamageLevel : ISchemaClass<CDestructi
     static int ISchemaClass<CDestructiblePart_DamageLevel>.Size => 72;
     static string? ISchemaClass<CDestructiblePart_DamageLevel>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CGlobalSymbol BreakablePieceName { get; }
-    
+
     public ref int BodyGroupValue { get; }
-    
+
     public CSkillInt Health { get; }
-    
+
     public ref float CriticalDamagePercent { get; }
-    
+
     public ref EDestructiblePartDamagePassThroughType DamagePassthroughType { get; }
-    
+
     public ref DestructiblePartDestructionDeathBehavior_t DestructionDeathBehavior { get; }
-    
+
     public ref CGlobalSymbol CustomDeathHandshake { get; }
-    
+
     public ref bool ShouldDestroyOnDeath { get; }
-    
+
     public CRangeFloat DeathDestroyTime { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface COmniLight : CBarnLight, ISchemaClass<COmniLight>
     static int ISchemaClass<COmniLight>.Size => 2832;
     static string? ISchemaClass<COmniLight>.ClassName => "light_omni2";
 
-    
+
     public ref float InnerAngle { get; }
-    
+
     public ref float OuterAngle { get; }
-    
+
     public ref bool ShowLight { get; }
 
     public void InnerAngleUpdated();

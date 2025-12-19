@@ -14,25 +14,25 @@ public partial interface CCSPlayerController_InventoryServices : CPlayerControll
     static int ISchemaClass<CCSPlayerController_InventoryServices>.Size => 4064;
     static string? ISchemaClass<CCSPlayerController_InventoryServices>.ClassName => null;
 
-    
+
     public ref ushort MusicID { get; }
-    
+
     public ISchemaFixedArray<MedalRank_t> Rank { get; }
-    
+
     public ref int PersonaDataPublicLevel { get; }
-    
+
     public ref int PersonaDataPublicCommendsLeader { get; }
-    
+
     public ref int PersonaDataPublicCommendsTeacher { get; }
-    
+
     public ref int PersonaDataPublicCommendsFriendly { get; }
-    
+
     public ref int PersonaDataXpTrailLevel { get; }
-    
+
     public ISchemaFixedArray<uint> EquippedPlayerSprayIDs { get; }
-    
+
     public ref ulong CurrentLoadoutHash { get; }
-    
+
     public ref CUtlVector<ServerAuthoritativeWeaponSlot_t> ServerAuthoritativeWeaponSlots { get; }
 
     public void MusicIDUpdated();

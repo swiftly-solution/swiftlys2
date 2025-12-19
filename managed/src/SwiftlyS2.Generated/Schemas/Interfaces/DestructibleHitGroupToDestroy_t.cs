@@ -14,9 +14,9 @@ public partial interface DestructibleHitGroupToDestroy_t : ISchemaClass<Destruct
     static int ISchemaClass<DestructibleHitGroupToDestroy_t>.Size => 8;
     static string? ISchemaClass<DestructibleHitGroupToDestroy_t>.ClassName => null;
 
-    
+
     public ref HitGroup_t HitGroup { get; }
-    
+
     public ref int MaxDamageLevel { get; }
 
 

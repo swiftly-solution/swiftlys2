@@ -14,25 +14,25 @@ public partial interface CEntityFlame : CBaseEntity, ISchemaClass<CEntityFlame>
     static int ISchemaClass<CEntityFlame>.Size => 1328;
     static string? ISchemaClass<CEntityFlame>.ClassName => "entityflame";
 
-    
+
     public ref CHandle<CBaseEntity> EntAttached { get; }
-    
+
     public ref bool CheapEffect { get; }
-    
+
     public ref float Size { get; }
-    
+
     public ref bool UseHitboxes { get; }
-    
+
     public ref int NumHitboxFires { get; }
-    
+
     public ref float HitboxFireScale { get; }
-    
+
     public GameTime_t Lifetime { get; }
-    
+
     public ref CHandle<CBaseEntity> Attacker { get; }
-    
+
     public ref float DirectDamagePerSecond { get; }
-    
+
     public ref int CustomDamageType { get; }
 
     public void EntAttachedUpdated();

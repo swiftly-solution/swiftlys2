@@ -14,10 +14,10 @@ public partial interface CNmFloatCurveEvent : CNmEvent, ISchemaClass<CNmFloatCur
     static int ISchemaClass<CNmFloatCurveEvent>.Size => 104;
     static string? ISchemaClass<CNmFloatCurveEvent>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol ID { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve { get; }
 
 

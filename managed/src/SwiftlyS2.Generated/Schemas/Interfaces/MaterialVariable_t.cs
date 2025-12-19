@@ -14,11 +14,11 @@ public partial interface MaterialVariable_t : ISchemaClass<MaterialVariable_t>
     static int ISchemaClass<MaterialVariable_t>.Size => 16;
     static string? ISchemaClass<MaterialVariable_t>.ClassName => null;
 
-    
+
     public string StrVariable { get; set; }
-    
+
     public ParticleAttributeIndex_t VariableField { get; }
-    
+
     public ref float Scale { get; }
 
 

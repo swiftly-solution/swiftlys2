@@ -14,13 +14,13 @@ public partial interface FeTaperedCapsuleStretch_t : ISchemaClass<FeTaperedCapsu
     static int ISchemaClass<FeTaperedCapsuleStretch_t>.Size => 16;
     static string? ISchemaClass<FeTaperedCapsuleStretch_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
-    
+
     public ref ushort CollisionMask { get; }
-    
+
     public ref ushort Dummy { get; }
-    
+
     public ISchemaFixedArray<float> Radius { get; }
 
 

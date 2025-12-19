@@ -14,15 +14,15 @@ public partial interface CNmFloatComparisonNode__CDefinition : CNmBoolValueNode_
     static int ISchemaClass<CNmFloatComparisonNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmFloatComparisonNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref short ComparandValueNodeIdx { get; }
-    
+
     public ref CNmFloatComparisonNode__Comparison_t Comparison { get; }
-    
+
     public ref float Epsilon { get; }
-    
+
     public ref float ComparisonValue { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface VMixFilterDesc_t : ISchemaClass<VMixFilterDesc_t>
     static int ISchemaClass<VMixFilterDesc_t>.Size => 16;
     static string? ISchemaClass<VMixFilterDesc_t>.ClassName => null;
 
-    
+
     public ref VMixFilterType_t FilterType { get; }
-    
+
     public ref VMixFilterSlope_t FilterSlope { get; }
-    
+
     public ref bool Enabled { get; }
-    
+
     public ref float FldbGain { get; }
-    
+
     public ref float CutoffFreq { get; }
-    
+
     public ref float Q { get; }
 
 

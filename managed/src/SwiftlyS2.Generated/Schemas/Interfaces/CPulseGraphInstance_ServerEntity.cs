@@ -14,17 +14,17 @@ public partial interface CPulseGraphInstance_ServerEntity : CBasePulseGraphInsta
     static int ISchemaClass<CPulseGraphInstance_ServerEntity>.Size => 440;
     static string? ISchemaClass<CPulseGraphInstance_ServerEntity>.ClassName => null;
 
-    
+
     public ref CHandle<CBaseEntity> Owner { get; }
-    
+
     public ref bool Activated { get; }
-    
+
     public string NameFixupStaticPrefix { get; set; }
-    
+
     public string NameFixupParent { get; set; }
-    
+
     public string NameFixupLocal { get; set; }
-    
+
     public string ProceduralWorldNameForRelays { get; set; }
 
 

@@ -14,27 +14,27 @@ public partial interface C_INIT_RingWave : CParticleFunctionInitializer, ISchema
     static int ISchemaClass<C_INIT_RingWave>.Size => 3528;
     static string? ISchemaClass<C_INIT_RingWave>.ClassName => null;
 
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public CParticleCollectionFloatInput ParticlesPerOrbit { get; }
-    
+
     public CPerParticleFloatInput InitialRadius { get; }
-    
+
     public CPerParticleFloatInput Thickness { get; }
-    
+
     public CPerParticleFloatInput InitialSpeedMin { get; }
-    
+
     public CPerParticleFloatInput InitialSpeedMax { get; }
-    
+
     public CPerParticleFloatInput Roll { get; }
-    
+
     public CPerParticleFloatInput Pitch { get; }
-    
+
     public CPerParticleFloatInput Yaw { get; }
-    
+
     public ref bool EvenDistribution { get; }
-    
+
     public ref bool XYVelocityOnly { get; }
 
 

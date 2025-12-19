@@ -14,14 +14,14 @@ public partial interface CTriggerImpact : CTriggerMultiple, ISchemaClass<CTrigge
     static int ISchemaClass<CTriggerImpact>.Size => 2568;
     static string? ISchemaClass<CTriggerImpact>.ClassName => "trigger_impact";
 
-    
+
     public ref float Magnitude { get; }
-    
+
     public ref float Noise { get; }
-    
+
     public ref float Viewkick { get; }
-    
-  // CEntityOutputTemplate< Vector >
+
+    // CEntityOutputTemplate< Vector >
     public SchemaUntypedField OutputForce { get; }
 
 

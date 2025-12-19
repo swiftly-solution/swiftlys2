@@ -14,13 +14,13 @@ public partial interface C_OP_PlaneCull : CParticleFunctionOperator, ISchemaClas
     static int ISchemaClass<C_OP_PlaneCull>.Size => 488;
     static string? ISchemaClass<C_OP_PlaneCull>.ClassName => null;
 
-    
+
     public ref int PlaneControlPoint { get; }
-    
+
     public ref Vector PlaneDirection { get; }
-    
+
     public ref bool LocalSpace { get; }
-    
+
     public ref float PlaneOffset { get; }
 
 

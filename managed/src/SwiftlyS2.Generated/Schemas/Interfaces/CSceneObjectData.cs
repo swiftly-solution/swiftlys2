@@ -14,17 +14,17 @@ public partial interface CSceneObjectData : ISchemaClass<CSceneObjectData>
     static int ISchemaClass<CSceneObjectData>.Size => 144;
     static string? ISchemaClass<CSceneObjectData>.ClassName => null;
 
-    
+
     public ref Vector MinBounds { get; }
-    
+
     public ref Vector MaxBounds { get; }
-    
+
     public ref CUtlLeanVector<CMaterialDrawDescriptor, int> DrawCalls { get; }
-    
+
     public ref CUtlLeanVector<AABB_t, int> DrawBounds { get; }
-    
+
     public ref CUtlLeanVector<CMeshletDescriptor, int> Meshlets { get; }
-    
+
     public ref Vector4D TintColor { get; }
 
 

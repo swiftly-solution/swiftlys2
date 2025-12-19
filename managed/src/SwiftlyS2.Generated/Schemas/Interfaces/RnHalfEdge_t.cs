@@ -14,13 +14,13 @@ public partial interface RnHalfEdge_t : ISchemaClass<RnHalfEdge_t>
     static int ISchemaClass<RnHalfEdge_t>.Size => 4;
     static string? ISchemaClass<RnHalfEdge_t>.ClassName => null;
 
-    
+
     public ref byte Next { get; }
-    
+
     public ref byte Twin { get; }
-    
+
     public ref byte Origin { get; }
-    
+
     public ref byte Face { get; }
 
 

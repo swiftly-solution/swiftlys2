@@ -14,15 +14,15 @@ public partial interface CSSDSMsg_LayerBase : ISchemaClass<CSSDSMsg_LayerBase>
     static int ISchemaClass<CSSDSMsg_LayerBase>.Size => 48;
     static string? ISchemaClass<CSSDSMsg_LayerBase>.ClassName => null;
 
-    
+
     public SceneViewId_t ViewId { get; }
-    
+
     public string ViewName { get; set; }
-    
+
     public ref ulong LayerId { get; }
-    
+
     public string LayerName { get; set; }
-    
+
     public string DisplayText { get; set; }
 
 

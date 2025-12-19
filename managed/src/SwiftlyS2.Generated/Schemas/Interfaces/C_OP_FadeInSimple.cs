@@ -14,9 +14,9 @@ public partial interface C_OP_FadeInSimple : CParticleFunctionOperator, ISchemaC
     static int ISchemaClass<C_OP_FadeInSimple>.Size => 472;
     static string? ISchemaClass<C_OP_FadeInSimple>.ClassName => null;
 
-    
+
     public ref float FadeInTime { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
 
 

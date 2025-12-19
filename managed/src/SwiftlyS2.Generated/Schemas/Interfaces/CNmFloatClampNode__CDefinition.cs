@@ -14,10 +14,10 @@ public partial interface CNmFloatClampNode__CDefinition : CNmFloatValueNode__CDe
     static int ISchemaClass<CNmFloatClampNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmFloatClampNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
-  // Range_t
+
+    // Range_t
     public SchemaUntypedField ClampRange { get; }
 
 

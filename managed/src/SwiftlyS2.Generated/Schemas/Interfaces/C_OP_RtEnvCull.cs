@@ -14,19 +14,19 @@ public partial interface C_OP_RtEnvCull : CParticleFunctionOperator, ISchemaClas
     static int ISchemaClass<C_OP_RtEnvCull>.Size => 632;
     static string? ISchemaClass<C_OP_RtEnvCull>.ClassName => null;
 
-    
+
     public ref Vector TestDir { get; }
-    
+
     public ref Vector TestNormal { get; }
-    
+
     public ref bool CullOnMiss { get; }
-    
+
     public ref bool StickInsteadOfCull { get; }
-    
+
     public string RtEnvName { get; set; }
-    
+
     public ref int RTEnvCP { get; }
-    
+
     public ref int Component { get; }
 
 

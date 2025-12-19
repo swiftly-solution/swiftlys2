@@ -14,23 +14,23 @@ public partial interface C_OP_RenderScreenShake : CParticleFunctionRenderer, ISc
     static int ISchemaClass<C_OP_RenderScreenShake>.Size => 584;
     static string? ISchemaClass<C_OP_RenderScreenShake>.ClassName => null;
 
-    
+
     public ref float DurationScale { get; }
-    
+
     public ref float RadiusScale { get; }
-    
+
     public ref float FrequencyScale { get; }
-    
+
     public ref float AmplitudeScale { get; }
-    
+
     public ParticleAttributeIndex_t RadiusField { get; }
-    
+
     public ParticleAttributeIndex_t DurationField { get; }
-    
+
     public ParticleAttributeIndex_t FrequencyField { get; }
-    
+
     public ParticleAttributeIndex_t AmplitudeField { get; }
-    
+
     public ref int FilterCP { get; }
 
 

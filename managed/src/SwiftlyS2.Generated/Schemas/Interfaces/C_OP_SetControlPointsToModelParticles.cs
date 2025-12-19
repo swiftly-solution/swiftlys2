@@ -14,19 +14,19 @@ public partial interface C_OP_SetControlPointsToModelParticles : CParticleFuncti
     static int ISchemaClass<C_OP_SetControlPointsToModelParticles>.Size => 736;
     static string? ISchemaClass<C_OP_SetControlPointsToModelParticles>.ClassName => null;
 
-    
+
     public string HitboxSetName { get; set; }
-    
+
     public string AttachmentName { get; set; }
-    
+
     public ref int FirstControlPoint { get; }
-    
+
     public ref int NumControlPoints { get; }
-    
+
     public ref int FirstSourcePoint { get; }
-    
+
     public ref bool Skin { get; }
-    
+
     public ref bool Attachment { get; }
 
 

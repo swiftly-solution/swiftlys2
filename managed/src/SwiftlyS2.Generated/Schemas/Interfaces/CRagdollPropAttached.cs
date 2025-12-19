@@ -14,17 +14,17 @@ public partial interface CRagdollPropAttached : CRagdollProp, ISchemaClass<CRagd
     static int ISchemaClass<CRagdollPropAttached>.Size => 3104;
     static string? ISchemaClass<CRagdollPropAttached>.ClassName => "prop_ragdoll_attached";
 
-    
+
     public ref uint BoneIndexAttached { get; }
-    
+
     public ref uint RagdollAttachedObjectIndex { get; }
-    
+
     public ref Vector AttachmentPointBoneSpace { get; }
-    
+
     public ref Vector AttachmentPointRagdollSpace { get; }
-    
+
     public ref bool ShouldDetach { get; }
-    
+
     public ref bool ShouldDeleteAttachedActivationRecord { get; }
 
     public void BoneIndexAttachedUpdated();

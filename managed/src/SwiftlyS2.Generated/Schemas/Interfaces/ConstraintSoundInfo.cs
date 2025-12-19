@@ -14,21 +14,21 @@ public partial interface ConstraintSoundInfo : ISchemaClass<ConstraintSoundInfo>
     static int ISchemaClass<ConstraintSoundInfo>.Size => 152;
     static string? ISchemaClass<ConstraintSoundInfo>.ClassName => null;
 
-    
+
     public VelocitySampler Sampler { get; }
-    
+
     public SimpleConstraintSoundProfile SoundProfile { get; }
-    
+
     public ref Vector ForwardAxis { get; }
-    
+
     public string TravelSoundFwd { get; set; }
-    
+
     public string TravelSoundBack { get; set; }
-    
+
     public string ReversalSounds { get; set; }
-    
+
     public ref bool PlayTravelSound { get; }
-    
+
     public ref bool PlayReversalSound { get; }
 
 

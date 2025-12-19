@@ -14,9 +14,9 @@ public partial interface CNmFloatRemapNode__RemapRange_t : ISchemaClass<CNmFloat
     static int ISchemaClass<CNmFloatRemapNode__RemapRange_t>.Size => 8;
     static string? ISchemaClass<CNmFloatRemapNode__RemapRange_t>.ClassName => null;
 
-    
+
     public ref float Begin { get; }
-    
+
     public ref float End { get; }
 
 

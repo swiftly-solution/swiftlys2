@@ -14,11 +14,11 @@ public partial interface FeAnimStrayRadius_t : ISchemaClass<FeAnimStrayRadius_t>
     static int ISchemaClass<FeAnimStrayRadius_t>.Size => 12;
     static string? ISchemaClass<FeAnimStrayRadius_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
-    
+
     public ref float MaxDist { get; }
-    
+
     public ref float RelaxationFactor { get; }
 
 

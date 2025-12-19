@@ -14,7 +14,7 @@ public partial interface C_OP_VelocityDecay : CParticleFunctionOperator, ISchema
     static int ISchemaClass<C_OP_VelocityDecay>.Size => 472;
     static string? ISchemaClass<C_OP_VelocityDecay>.ClassName => null;
 
-    
+
     public ref float MinVelocity { get; }
 
 

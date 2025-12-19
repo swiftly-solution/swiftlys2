@@ -14,17 +14,17 @@ public partial interface RnShapeDesc_t : ISchemaClass<RnShapeDesc_t>
     static int ISchemaClass<RnShapeDesc_t>.Size => 24;
     static string? ISchemaClass<RnShapeDesc_t>.ClassName => null;
 
-    
+
     public ref uint CollisionAttributeIndex { get; }
-    
+
     public ref uint SurfacePropertyIndex { get; }
-    
+
     public string UserFriendlyName { get; set; }
-    
+
     public ref bool UserFriendlyNameSealed { get; }
-    
+
     public ref bool UserFriendlyNameLong { get; }
-    
+
     public ref uint ToolMaterialHash { get; }
 
 

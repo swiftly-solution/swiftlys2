@@ -14,12 +14,12 @@ public partial interface CNmLayerBlendNode__CDefinition : CNmPoseNode__CDefiniti
     static int ISchemaClass<CNmLayerBlendNode__CDefinition>.Size => 72;
     static string? ISchemaClass<CNmLayerBlendNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short BaseNodeIdx { get; }
-    
+
     public ref bool OnlySampleBaseRootMotion { get; }
-    
-  // CUtlLeanVectorFixedGrowable< CNmLayerBlendNode::LayerDefinition_t, 3 >
+
+    // CUtlLeanVectorFixedGrowable< CNmLayerBlendNode::LayerDefinition_t, 3 >
     public SchemaUntypedField LayerDefinition { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface C_OP_CollideWithParentParticles : CParticleFunctionCons
     static int ISchemaClass<C_OP_CollideWithParentParticles>.Size => 1200;
     static string? ISchemaClass<C_OP_CollideWithParentParticles>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput ParentRadiusScale { get; }
-    
+
     public CPerParticleFloatInput RadiusScale { get; }
 
 

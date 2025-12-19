@@ -14,21 +14,21 @@ public partial interface C_OP_ConstrainDistanceToPath : CParticleFunctionConstra
     static int ISchemaClass<C_OP_ConstrainDistanceToPath>.Size => 560;
     static string? ISchemaClass<C_OP_ConstrainDistanceToPath>.ClassName => null;
 
-    
+
     public ref float MinDistance { get; }
-    
+
     public ref float MaxDistance0 { get; }
-    
+
     public ref float MaxDistanceMid { get; }
-    
+
     public ref float MaxDistance1 { get; }
-    
+
     public CPathParameters PathParameters { get; }
-    
+
     public ref float TravelTime { get; }
-    
+
     public ParticleAttributeIndex_t FieldScale { get; }
-    
+
     public ParticleAttributeIndex_t ManualTField { get; }
 
 

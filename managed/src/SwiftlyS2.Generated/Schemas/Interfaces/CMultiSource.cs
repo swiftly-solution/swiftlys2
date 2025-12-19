@@ -14,15 +14,15 @@ public partial interface CMultiSource : CLogicalEntity, ISchemaClass<CMultiSourc
     static int ISchemaClass<CMultiSource>.Size => 1576;
     static string? ISchemaClass<CMultiSource>.ClassName => "multisource";
 
-    
+
     public ISchemaFixedArray<CHandle<CBaseEntity>> RgEntities { get; }
-    
+
     public ISchemaFixedArray<int> RgTriggered { get; }
-    
+
     public CEntityIOOutput OnTrigger { get; }
-    
+
     public ref int Total { get; }
-    
+
     public string Globalstate { get; set; }
 
 

@@ -14,9 +14,9 @@ public partial interface C_OP_RenderText : CParticleFunctionRenderer, ISchemaCla
     static int ISchemaClass<C_OP_RenderText>.Size => 560;
     static string? ISchemaClass<C_OP_RenderText>.ClassName => null;
 
-    
+
     public ref Color OutlineColor { get; }
-    
+
     public string DefaultText { get; set; }
 
 

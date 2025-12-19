@@ -14,19 +14,19 @@ public partial interface CKeepUpright : CPointEntity, ISchemaClass<CKeepUpright>
     static int ISchemaClass<CKeepUpright>.Size => 1328;
     static string? ISchemaClass<CKeepUpright>.ClassName => "phys_keepupright";
 
-    
+
     public ref Vector WorldGoalAxis { get; }
-    
+
     public ref Vector LocalTestAxis { get; }
-    
+
     public string NameAttach { get; set; }
-    
+
     public ref CHandle<CBaseEntity> AttachedObject { get; }
-    
+
     public ref float AngularLimit { get; }
-    
+
     public ref bool Active { get; }
-    
+
     public ref bool DampAllRotation { get; }
 
 

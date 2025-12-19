@@ -14,7 +14,7 @@ public partial interface CNmVirtualParameterBoneMaskNode__CDefinition : CNmBoneM
     static int ISchemaClass<CNmVirtualParameterBoneMaskNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmVirtualParameterBoneMaskNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short ChildNodeIdx { get; }
 
 

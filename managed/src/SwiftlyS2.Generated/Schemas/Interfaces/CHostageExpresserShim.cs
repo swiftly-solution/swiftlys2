@@ -14,7 +14,7 @@ public partial interface CHostageExpresserShim : CBaseCombatCharacter, ISchemaCl
     static int ISchemaClass<CHostageExpresserShim>.Size => 3056;
     static string? ISchemaClass<CHostageExpresserShim>.ClassName => null;
 
-    
+
     public CAI_Expresser? Expresser { get; }
 
 

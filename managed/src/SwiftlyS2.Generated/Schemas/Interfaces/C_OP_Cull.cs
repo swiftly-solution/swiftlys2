@@ -14,13 +14,13 @@ public partial interface C_OP_Cull : CParticleFunctionOperator, ISchemaClass<C_O
     static int ISchemaClass<C_OP_Cull>.Size => 480;
     static string? ISchemaClass<C_OP_Cull>.ClassName => null;
 
-    
+
     public ref float CullPerc { get; }
-    
+
     public ref float CullStart { get; }
-    
+
     public ref float CullEnd { get; }
-    
+
     public ref float CullExp { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface C_OP_RampScalarSplineSimple : CParticleFunctionOperator
     static int ISchemaClass<C_OP_RampScalarSplineSimple>.Size => 528;
     static string? ISchemaClass<C_OP_RampScalarSplineSimple>.ClassName => null;
 
-    
+
     public ref float Rate { get; }
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float EndTime { get; }
-    
+
     public ParticleAttributeIndex_t Field { get; }
-    
+
     public ref bool EaseOut { get; }
 
 

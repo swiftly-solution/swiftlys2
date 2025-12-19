@@ -14,21 +14,21 @@ public partial interface CTestPulseIO : CLogicalEntity, ISchemaClass<CTestPulseI
     static int ISchemaClass<CTestPulseIO>.Size => 1552;
     static string? ISchemaClass<CTestPulseIO>.ClassName => "test_io_combinations";
 
-    
+
     public CEntityIOOutput OnVariantVoid { get; }
-    
+
     public CEntityIOOutput OnVariantBool { get; }
-    
+
     public CEntityIOOutput OnVariantInt { get; }
-    
+
     public CEntityIOOutput OnVariantFloat { get; }
-    
+
     public CEntityIOOutput OnVariantString { get; }
-    
+
     public CEntityIOOutput OnVariantColor { get; }
-    
+
     public CEntityIOOutput OnVariantVector { get; }
-    
+
     public ref bool AllowEmptyInputs { get; }
 
 

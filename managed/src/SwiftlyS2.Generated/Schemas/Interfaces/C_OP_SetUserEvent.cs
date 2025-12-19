@@ -14,15 +14,15 @@ public partial interface C_OP_SetUserEvent : CParticleFunctionOperator, ISchemaC
     static int ISchemaClass<C_OP_SetUserEvent>.Size => 1584;
     static string? ISchemaClass<C_OP_SetUserEvent>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput Input { get; }
-    
+
     public CPerParticleFloatInput RisingEdge { get; }
-    
+
     public ref EventTypeSelection_t RisingEventType { get; }
-    
+
     public CPerParticleFloatInput FallingEdge { get; }
-    
+
     public ref EventTypeSelection_t FallingEventType { get; }
 
 

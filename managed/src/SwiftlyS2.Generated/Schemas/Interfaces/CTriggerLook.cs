@@ -14,35 +14,35 @@ public partial interface CTriggerLook : CTriggerOnce, ISchemaClass<CTriggerLook>
     static int ISchemaClass<CTriggerLook>.Size => 2664;
     static string? ISchemaClass<CTriggerLook>.ClassName => "trigger_look";
 
-    
+
     public ref CHandle<CBaseEntity> LookTarget { get; }
-    
+
     public ref float FieldOfView { get; }
-    
+
     public ref float LookTime { get; }
-    
+
     public ref float LookTimeTotal { get; }
-    
+
     public GameTime_t LookTimeLast { get; }
-    
+
     public ref float TimeoutDuration { get; }
-    
+
     public ref bool TimeoutFired { get; }
-    
+
     public ref bool IsLooking { get; }
-    
+
     public ref bool B2DFOV { get; }
-    
+
     public ref bool UseVelocity { get; }
-    
+
     public ref bool TestOcclusion { get; }
-    
+
     public ref bool TestAllVisibleOcclusion { get; }
-    
+
     public CEntityIOOutput OnTimeout { get; }
-    
+
     public CEntityIOOutput OnStartLook { get; }
-    
+
     public CEntityIOOutput OnEndLook { get; }
 
     public void TestOcclusionUpdated();

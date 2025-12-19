@@ -14,13 +14,13 @@ public partial interface CBlood : CPointEntity, ISchemaClass<CBlood>
     static int ISchemaClass<CBlood>.Size => 1296;
     static string? ISchemaClass<CBlood>.ClassName => "env_blood";
 
-    
+
     public ref QAngle SprayAngles { get; }
-    
+
     public ref Vector SprayDir { get; }
-    
+
     public ref float Amount { get; }
-    
+
     public ref BloodType Color { get; }
 
 

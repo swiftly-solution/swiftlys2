@@ -14,13 +14,13 @@ public partial interface CMolotovProjectile : CBaseCSGrenadeProjectile, ISchemaC
     static int ISchemaClass<CMolotovProjectile>.Size => 3408;
     static string? ISchemaClass<CMolotovProjectile>.ClassName => "molotov_projectile";
 
-    
+
     public ref bool IsIncGrenade { get; }
-    
+
     public ref bool Detonated { get; }
-    
+
     public IntervalTimer StillTimer { get; }
-    
+
     public ref bool HasBouncedOffPlayer { get; }
 
     public void IsIncGrenadeUpdated();

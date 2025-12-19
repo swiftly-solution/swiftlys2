@@ -14,18 +14,18 @@ public partial interface ParticleNamedValueConfiguration_t : ISchemaClass<Partic
     static int ISchemaClass<ParticleNamedValueConfiguration_t>.Size => 56;
     static string? ISchemaClass<ParticleNamedValueConfiguration_t>.ClassName => null;
 
-    
+
     public string ConfigName { get; set; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField ConfigValue { get; }
-    
+
     public string BoundValuePath { get; set; }
-    
+
     public ref ParticleAttachment_t AttachType { get; }
-    
+
     public string StrEntityScope { get; set; }
-    
+
     public string StrAttachmentName { get; set; }
 
 

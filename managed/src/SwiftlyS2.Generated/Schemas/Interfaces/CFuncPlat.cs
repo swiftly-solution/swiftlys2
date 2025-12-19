@@ -14,7 +14,7 @@ public partial interface CFuncPlat : CBasePlatTrain, ISchemaClass<CFuncPlat>
     static int ISchemaClass<CFuncPlat>.Size => 2184;
     static string? ISchemaClass<CFuncPlat>.ClassName => "func_plat";
 
-    
+
     public string Noise { get; set; }
 
 

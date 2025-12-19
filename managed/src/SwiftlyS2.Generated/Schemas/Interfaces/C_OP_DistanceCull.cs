@@ -14,15 +14,15 @@ public partial interface C_OP_DistanceCull : CParticleFunctionOperator, ISchemaC
     static int ISchemaClass<C_OP_DistanceCull>.Size => 856;
     static string? ISchemaClass<C_OP_DistanceCull>.ClassName => null;
 
-    
+
     public ref int ControlPoint { get; }
-    
+
     public ref Vector PointOffset { get; }
-    
+
     public CParticleCollectionFloatInput Distance { get; }
-    
+
     public ref bool CullInside { get; }
-    
+
     public ParticleAttributeIndex_t Attribute { get; }
 
 

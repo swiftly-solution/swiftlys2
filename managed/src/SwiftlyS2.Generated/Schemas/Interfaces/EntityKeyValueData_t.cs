@@ -14,9 +14,9 @@ public partial interface EntityKeyValueData_t : ISchemaClass<EntityKeyValueData_
     static int ISchemaClass<EntityKeyValueData_t>.Size => 56;
     static string? ISchemaClass<EntityKeyValueData_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<EntityIOConnectionData_t> Connections { get; }
-    
+
     public ref CUtlBinaryBlock KeyValuesData { get; }
 
 

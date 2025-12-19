@@ -14,29 +14,29 @@ public partial interface AggregateMeshInfo_t : ISchemaClass<AggregateMeshInfo_t>
     static int ISchemaClass<AggregateMeshInfo_t>.Size => 36;
     static string? ISchemaClass<AggregateMeshInfo_t>.ClassName => null;
 
-    
+
     public ref uint VisClusterMemberOffset { get; }
-    
+
     public ref byte VisClusterMemberCount { get; }
-    
+
     public ref bool HasTransform { get; }
-    
+
     public ref byte LODGroupMask { get; }
-    
+
     public ref short DrawCallIndex { get; }
-    
+
     public ref short LODSetupIndex { get; }
-    
+
     public ref Color TintColor { get; }
-    
+
     public ref ObjectTypeFlags_t ObjectFlags { get; }
-    
+
     public ref int LightProbeVolumePrecomputedHandshake { get; }
-    
+
     public ref uint InstanceStreamOffset { get; }
-    
+
     public ref uint VertexAlbedoStreamOffset { get; }
-    
+
     public ref AggregateInstanceStream_t InstanceStreams { get; }
 
 

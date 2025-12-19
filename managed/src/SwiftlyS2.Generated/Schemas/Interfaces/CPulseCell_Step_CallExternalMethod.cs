@@ -14,17 +14,17 @@ public partial interface CPulseCell_Step_CallExternalMethod : CPulseCell_BaseYie
     static int ISchemaClass<CPulseCell_Step_CallExternalMethod>.Size => 200;
     static string? ISchemaClass<CPulseCell_Step_CallExternalMethod>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField MethodName { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField GameBlackboard { get; }
-    
+
     public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> ExpectedArgs { get; }
-    
+
     public ref PulseMethodCallMode_t AsyncCallMode { get; }
-    
+
     public CPulse_ResumePoint OnFinished { get; }
 
 

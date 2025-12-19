@@ -14,9 +14,9 @@ public partial interface CWarpSectionAnimTag : CWarpSectionAnimTagBase, ISchemaC
     static int ISchemaClass<CWarpSectionAnimTag>.Size => 88;
     static string? ISchemaClass<CWarpSectionAnimTag>.ClassName => null;
 
-    
+
     public ref bool WarpPosition { get; }
-    
+
     public ref bool WarpOrientation { get; }
 
 

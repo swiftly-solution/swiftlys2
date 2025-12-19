@@ -14,95 +14,95 @@ public partial interface CPointValueRemapper : CBaseEntity, ISchemaClass<CPointV
     static int ISchemaClass<CPointValueRemapper>.Size => 1784;
     static string? ISchemaClass<CPointValueRemapper>.ClassName => "point_value_remapper";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref bool UpdateOnClient { get; }
-    
+
     public ref ValueRemapperInputType_t InputType { get; }
-    
+
     public string RemapLineStartName { get; set; }
-    
+
     public string RemapLineEndName { get; set; }
-    
+
     public ref CHandle<CBaseEntity> RemapLineStart { get; }
-    
+
     public ref CHandle<CBaseEntity> RemapLineEnd { get; }
-    
+
     public ref float MaximumChangePerSecond { get; }
-    
+
     public ref float DisengageDistance { get; }
-    
+
     public ref float EngageDistance { get; }
-    
+
     public ref bool RequiresUseKey { get; }
-    
+
     public ref ValueRemapperOutputType_t OutputType { get; }
-    
+
     public string OutputEntityName { get; set; }
-    
+
     public string OutputEntity2Name { get; set; }
-    
+
     public string OutputEntity3Name { get; set; }
-    
+
     public string OutputEntity4Name { get; set; }
-    
+
     public ref CUtlVector<CHandle<CBaseEntity>> OutputEntities { get; }
-    
+
     public ref ValueRemapperHapticsType_t HapticsType { get; }
-    
+
     public ref ValueRemapperMomentumType_t MomentumType { get; }
-    
+
     public ref float MomentumModifier { get; }
-    
+
     public ref float SnapValue { get; }
-    
+
     public ref float CurrentMomentum { get; }
-    
+
     public ref ValueRemapperRatchetType_t RatchetType { get; }
-    
+
     public ref float RatchetOffset { get; }
-    
+
     public ref float InputOffset { get; }
-    
+
     public ref bool Engaged { get; }
-    
+
     public ref bool FirstUpdate { get; }
-    
+
     public ref float PreviousValue { get; }
-    
+
     public GameTime_t PreviousUpdateTickTime { get; }
-    
+
     public ref Vector PreviousTestPoint { get; }
-    
+
     public ref CHandle<CBasePlayerPawn> UsingPlayer { get; }
-    
+
     public ref float CustomOutputValue { get; }
-    
+
     public string SoundEngage { get; set; }
-    
+
     public string SoundDisengage { get; set; }
-    
+
     public string SoundReachedValueZero { get; set; }
-    
+
     public string SoundReachedValueOne { get; set; }
-    
+
     public string SoundMovingLoop { get; set; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField Position { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField PositionDelta { get; }
-    
+
     public CEntityIOOutput OnReachedValueZero { get; }
-    
+
     public CEntityIOOutput OnReachedValueOne { get; }
-    
+
     public CEntityIOOutput OnReachedValueCustom { get; }
-    
+
     public CEntityIOOutput OnEngage { get; }
-    
+
     public CEntityIOOutput OnDisengage { get; }
 
     public void DisabledUpdated();

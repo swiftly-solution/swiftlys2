@@ -14,58 +14,58 @@ public partial interface CSchemaSystemInternalRegistration : ISchemaClass<CSchem
     static int ISchemaClass<CSchemaSystemInternalRegistration>.Size => 384;
     static string? ISchemaClass<CSchemaSystemInternalRegistration>.ClassName => null;
 
-    
+
     public ref Vector2D Vector2D { get; }
-    
+
     public ref Vector Vector { get; }
-    
+
     public ref Vector VectorWS { get; }
-    
+
     public ref Vector VectorAligned { get; }
-    
+
     public ref Quaternion Quaternion { get; }
-    
+
     public ref QAngle QAngle { get; }
-    
-  // RotationVector
+
+    // RotationVector
     public SchemaUntypedField RotationVector { get; }
-    
+
     public ref RadianEuler RadianEuler { get; }
-    
-  // DegreeEuler
+
+    // DegreeEuler
     public SchemaUntypedField DegreeEuler { get; }
-    
+
     public ref QuaternionStorage QuaternionStorage { get; }
-    
+
     public ref matrix3x4_t Matrix3x4_t { get; }
-    
+
     public ref matrix3x4_t Matrix3x4a_t { get; }
-    
+
     public ref Color Color { get; }
-    
+
     public ref Vector4D Vector4D { get; }
-    
+
     public ref CTransform CTransform { get; }
-    
-  // KeyValues
+
+    // KeyValues
     public SchemaUntypedField KeyValues { get; }
-    
+
     public ref CUtlBinaryBlock CUtlBinaryBlock { get; }
-    
+
     public string CUtlString { get; set; }
-    
-  // CUtlSymbol
+
+    // CUtlSymbol
     public SchemaUntypedField CUtlSymbol { get; }
-    
+
     public ref CUtlStringToken StringToken { get; }
-    
-  // CUtlStringTokenWithStorage
+
+    // CUtlStringTokenWithStorage
     public SchemaUntypedField StringTokenWithStorage { get; }
-    
-  // CResourceArray< CResourcePointer< CResourceString > >
+
+    // CResourceArray< CResourcePointer< CResourceString > >
     public SchemaUntypedField ResourceTypes { get; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField KV3 { get; }
 
 

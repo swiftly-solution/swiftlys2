@@ -14,7 +14,7 @@ public partial interface C_OP_EndCapTimedFreeze : CParticleFunctionOperator, ISc
     static int ISchemaClass<C_OP_EndCapTimedFreeze>.Size => 832;
     static string? ISchemaClass<C_OP_EndCapTimedFreeze>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput FreezeTime { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface MaterialParamBuffer_t : MaterialParam_t, ISchemaClass<M
     static int ISchemaClass<MaterialParamBuffer_t>.Size => 24;
     static string? ISchemaClass<MaterialParamBuffer_t>.ClassName => null;
 
-    
+
     public ref CUtlBinaryBlock Value { get; }
 
 

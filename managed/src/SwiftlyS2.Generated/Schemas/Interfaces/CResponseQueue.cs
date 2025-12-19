@@ -14,7 +14,7 @@ public partial interface CResponseQueue : ISchemaClass<CResponseQueue>
     static int ISchemaClass<CResponseQueue>.Size => 80;
     static string? ISchemaClass<CResponseQueue>.ClassName => null;
 
-    
+
     public ref CUtlVector<PointerTo<CAI_Expresser>> ExpresserTargets { get; }
 
 

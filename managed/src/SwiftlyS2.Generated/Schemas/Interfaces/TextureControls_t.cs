@@ -14,37 +14,37 @@ public partial interface TextureControls_t : ISchemaClass<TextureControls_t>
     static int ISchemaClass<TextureControls_t>.Size => 2608;
     static string? ISchemaClass<TextureControls_t>.ClassName => null;
 
-    
+
     public CParticleCollectionRendererFloatInput FinalTextureScaleU { get; }
-    
+
     public CParticleCollectionRendererFloatInput FinalTextureScaleV { get; }
-    
+
     public CParticleCollectionRendererFloatInput FinalTextureOffsetU { get; }
-    
+
     public CParticleCollectionRendererFloatInput FinalTextureOffsetV { get; }
-    
+
     public CParticleCollectionRendererFloatInput FinalTextureUVRotation { get; }
-    
+
     public CParticleCollectionRendererFloatInput ZoomScale { get; }
-    
+
     public CParticleCollectionRendererFloatInput Distortion { get; }
-    
+
     public ref bool RandomizeOffsets { get; }
-    
+
     public ref bool ClampUVs { get; }
-    
+
     public ref SpriteCardPerParticleScale_t PerParticleBlend { get; }
-    
+
     public ref SpriteCardPerParticleScale_t PerParticleScale { get; }
-    
+
     public ref SpriteCardPerParticleScale_t PerParticleOffsetU { get; }
-    
+
     public ref SpriteCardPerParticleScale_t PerParticleOffsetV { get; }
-    
+
     public ref SpriteCardPerParticleScale_t PerParticleRotation { get; }
-    
+
     public ref SpriteCardPerParticleScale_t PerParticleZoom { get; }
-    
+
     public ref SpriteCardPerParticleScale_t PerParticleDistortion { get; }
 
 

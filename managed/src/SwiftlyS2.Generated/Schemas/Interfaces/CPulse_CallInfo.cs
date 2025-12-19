@@ -14,18 +14,18 @@ public partial interface CPulse_CallInfo : ISchemaClass<CPulse_CallInfo>
     static int ISchemaClass<CPulse_CallInfo>.Size => 88;
     static string? ISchemaClass<CPulse_CallInfo>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField PortName { get; }
-    
+
     public PulseDocNodeID_t EditorNodeID { get; }
-    
+
     public PulseRegisterMap_t RegisterMap { get; }
-    
+
     public PulseDocNodeID_t CallMethodID { get; }
-    
+
     public PulseRuntimeChunkIndex_t SrcChunk { get; }
-    
+
     public ref int SrcInstruction { get; }
 
 

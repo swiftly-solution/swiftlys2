@@ -14,23 +14,23 @@ public partial interface CNmSkeleton : ISchemaClass<CNmSkeleton>
     static int ISchemaClass<CNmSkeleton>.Size => 192;
     static string? ISchemaClass<CNmSkeleton>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol ID { get; }
-    
+
     public ref CUtlLeanVector<CGlobalSymbol, int> BoneIDs { get; }
-    
+
     public ref CUtlVector<int> ParentIndices { get; }
-    
+
     public ref CUtlVector<CTransform> ParentSpaceReferencePose { get; }
-    
+
     public ref CUtlVector<CTransform> ModelSpaceReferencePose { get; }
-    
+
     public ref int NumBonesToSampleAtLowLOD { get; }
-    
+
     public ref CUtlLeanVector<NmBoneMaskSetDefinition_t, int> MaskDefinitions { get; }
-    
+
     public ref CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int> SecondarySkeletons { get; }
-    
+
     public ref bool IsPropSkeleton { get; }
 
 

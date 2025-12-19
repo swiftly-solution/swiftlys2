@@ -14,7 +14,7 @@ public partial interface CBodyComponentSkeletonInstance : CBodyComponent, ISchem
     static int ISchemaClass<CBodyComponentSkeletonInstance>.Size => 1296;
     static string? ISchemaClass<CBodyComponentSkeletonInstance>.ClassName => null;
 
-    
+
     public CSkeletonInstance SkeletonInstance { get; }
 
     public void SkeletonInstanceUpdated();

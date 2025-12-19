@@ -14,15 +14,15 @@ public partial interface RenderSkeletonBone_t : ISchemaClass<RenderSkeletonBone_
     static int ISchemaClass<RenderSkeletonBone_t>.Size => 96;
     static string? ISchemaClass<RenderSkeletonBone_t>.ClassName => null;
 
-    
+
     public string BoneName { get; set; }
-    
+
     public string ParentName { get; set; }
-    
+
     public ref matrix3x4_t InvBindPose { get; }
-    
+
     public SkeletonBoneBounds_t Bbox { get; }
-    
+
     public ref float SphereRadius { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface CHintMessage : ISchemaClass<CHintMessage>
     static int ISchemaClass<CHintMessage>.Size => 40;
     static string? ISchemaClass<CHintMessage>.ClassName => null;
 
-    
+
     public string HintString { get; set; }
-    
+
     public ref CUtlVector<CString> Args { get; }
-    
+
     public ref float Duration { get; }
 
 

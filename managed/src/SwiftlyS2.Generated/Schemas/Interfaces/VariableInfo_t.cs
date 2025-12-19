@@ -14,17 +14,17 @@ public partial interface VariableInfo_t : ISchemaClass<VariableInfo_t>
     static int ISchemaClass<VariableInfo_t>.Size => 24;
     static string? ISchemaClass<VariableInfo_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CUtlStringToken NameToken { get; }
-    
+
     public FuseVariableIndex_t Index { get; }
-    
+
     public ref byte NumComponents { get; }
-    
+
     public ref FuseVariableType_t VarType { get; }
-    
+
     public ref FuseVariableAccess_t Access { get; }
 
 

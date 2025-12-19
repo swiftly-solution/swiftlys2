@@ -14,9 +14,9 @@ public partial interface CModelConfigElement_RandomPick : CModelConfigElement, I
     static int ISchemaClass<CModelConfigElement_RandomPick>.Size => 128;
     static string? ISchemaClass<CModelConfigElement_RandomPick>.ClassName => null;
 
-    
+
     public ref CUtlVector<CUtlString> Choices { get; }
-    
+
     public ref CUtlVector<float> ChoiceWeights { get; }
 
 

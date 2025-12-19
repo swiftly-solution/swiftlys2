@@ -14,9 +14,9 @@ public partial interface IntervalTimer : ISchemaClass<IntervalTimer>
     static int ISchemaClass<IntervalTimer>.Size => 16;
     static string? ISchemaClass<IntervalTimer>.ClassName => null;
 
-    
+
     public GameTime_t Timestamp { get; }
-    
+
     public ref uint WorldGroupId { get; }
 
     public void TimestampUpdated();

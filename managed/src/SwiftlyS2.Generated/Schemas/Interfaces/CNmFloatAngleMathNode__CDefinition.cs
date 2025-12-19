@@ -14,9 +14,9 @@ public partial interface CNmFloatAngleMathNode__CDefinition : CNmFloatValueNode_
     static int ISchemaClass<CNmFloatAngleMathNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmFloatAngleMathNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref CNmFloatAngleMathNode__Operation_t Operation { get; }
 
 

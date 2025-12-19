@@ -14,9 +14,9 @@ public partial interface AnimationDecodeDebugDump_t : ISchemaClass<AnimationDeco
     static int ISchemaClass<AnimationDecodeDebugDump_t>.Size => 32;
     static string? ISchemaClass<AnimationDecodeDebugDump_t>.ClassName => null;
 
-    
+
     public ref AnimationProcessingType_t ProcessingType { get; }
-    
+
     public ref CUtlVector<AnimationDecodeDebugDumpElement_t> Elems { get; }
 
 

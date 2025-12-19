@@ -14,9 +14,9 @@ public partial interface CSoundAreaEntityOrientedBox : CSoundAreaEntityBase, ISc
     static int ISchemaClass<CSoundAreaEntityOrientedBox>.Size => 1320;
     static string? ISchemaClass<CSoundAreaEntityOrientedBox>.ClassName => "snd_sound_area_obb";
 
-    
+
     public ref Vector Min { get; }
-    
+
     public ref Vector Max { get; }
 
     public void MinUpdated();

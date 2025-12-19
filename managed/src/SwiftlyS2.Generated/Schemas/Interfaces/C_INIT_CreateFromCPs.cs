@@ -14,13 +14,13 @@ public partial interface C_INIT_CreateFromCPs : CParticleFunctionInitializer, IS
     static int ISchemaClass<C_INIT_CreateFromCPs>.Size => 856;
     static string? ISchemaClass<C_INIT_CreateFromCPs>.ClassName => null;
 
-    
+
     public ref int Increment { get; }
-    
+
     public ref int MinCP { get; }
-    
+
     public ref int MaxCP { get; }
-    
+
     public CParticleCollectionFloatInput DynamicCPCount { get; }
 
 

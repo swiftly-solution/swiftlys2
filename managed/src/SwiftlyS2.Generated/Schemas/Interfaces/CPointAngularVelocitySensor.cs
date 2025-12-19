@@ -14,38 +14,38 @@ public partial interface CPointAngularVelocitySensor : CPointEntity, ISchemaClas
     static int ISchemaClass<CPointAngularVelocitySensor>.Size => 1560;
     static string? ISchemaClass<CPointAngularVelocitySensor>.ClassName => "point_angularvelocitysensor";
 
-    
+
     public ref CHandle<CBaseEntity> TargetEntity { get; }
-    
+
     public ref float Threshold { get; }
-    
+
     public ref int LastCompareResult { get; }
-    
+
     public ref int LastFireResult { get; }
-    
+
     public GameTime_t FireTime { get; }
-    
+
     public ref float FireInterval { get; }
-    
+
     public ref float LastAngVelocity { get; }
-    
+
     public ref QAngle LastOrientation { get; }
-    
+
     public ref Vector Axis { get; }
-    
+
     public ref bool UseHelper { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField AngularVelocity { get; }
-    
+
     public CEntityIOOutput OnLessThan { get; }
-    
+
     public CEntityIOOutput OnLessThanOrEqualTo { get; }
-    
+
     public CEntityIOOutput OnGreaterThan { get; }
-    
+
     public CEntityIOOutput OnGreaterThanOrEqualTo { get; }
-    
+
     public CEntityIOOutput OnEqualTo { get; }
 
 

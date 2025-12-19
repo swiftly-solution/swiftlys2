@@ -14,49 +14,49 @@ public partial interface CBaseAnimGraphController : CSkeletonAnimationController
     static int ISchemaClass<CBaseAnimGraphController>.Size => 1968;
     static string? ISchemaClass<CBaseAnimGraphController>.ClassName => null;
 
-    
+
     public CAnimGraphNetworkedVariables AnimGraphNetworkedVars { get; }
-    
+
     public ref bool SequenceFinished { get; }
-    
+
     public ref float SoundSyncTime { get; }
-    
+
     public ref uint ActiveIKChainMask { get; }
-    
+
     public HSequence Sequence { get; }
-    
+
     public GameTime_t SeqStartTime { get; }
-    
+
     public ref float SeqFixedCycle { get; }
-    
+
     public ref AnimLoopMode_t AnimLoopMode { get; }
-    
+
     public ref CNetworkedQuantizedFloat PlaybackRate { get; }
-    
+
     public ref SequenceFinishNotifyState_t NotifyState { get; }
-    
+
     public ref bool NetworkedAnimationInputsChanged { get; }
-    
+
     public ref bool NetworkedSequenceChanged { get; }
-    
+
     public ref bool LastUpdateSkipped { get; }
-    
+
     public GameTime_t PrevAnimUpdateTime { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCNmGraphDefinition> GraphDefinitionAG2 { get; }
-    
+
     public ref bool IsUsingAG2 { get; }
-    
+
     public ref CUtlVector<byte> SerializedPoseRecipeAG2 { get; }
-    
+
     public ref int SerializePoseRecipeSizeAG2 { get; }
-    
+
     public ref int SerializePoseRecipeVersionAG2 { get; }
-    
+
     public ref byte GraphCreationFlagsAG2 { get; }
-    
+
     public ref int ServerGraphDefReloadCountAG2 { get; }
-    
+
     public ref int ServerSerializationContextIteration { get; }
 
     public void AnimGraphNetworkedVarsUpdated();

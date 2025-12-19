@@ -14,13 +14,13 @@ public partial interface CTriggerTeleport : CBaseTrigger, ISchemaClass<CTriggerT
     static int ISchemaClass<CTriggerTeleport>.Size => 2488;
     static string? ISchemaClass<CTriggerTeleport>.ClassName => "trigger_teleport";
 
-    
+
     public string Landmark { get; set; }
-    
+
     public ref bool UseLandmarkAngles { get; }
-    
+
     public ref bool MirrorPlayer { get; }
-    
+
     public ref bool CheckDestIfClearForPlayer { get; }
 
 

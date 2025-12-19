@@ -14,13 +14,13 @@ public partial interface CPulseTurtleGraphicsCursor : CPulseExecCursor, ISchemaC
     static int ISchemaClass<CPulseTurtleGraphicsCursor>.Size => 232;
     static string? ISchemaClass<CPulseTurtleGraphicsCursor>.ClassName => null;
 
-    
+
     public ref Color Color { get; }
-    
+
     public ref Vector2D Pos { get; }
-    
+
     public ref float HeadingDeg { get; }
-    
+
     public ref bool PenUp { get; }
 
 

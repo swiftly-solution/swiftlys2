@@ -14,19 +14,19 @@ public partial interface CStateNodeTransitionData : ISchemaClass<CStateNodeTrans
     static int ISchemaClass<CStateNodeTransitionData>.Size => 28;
     static string? ISchemaClass<CStateNodeTransitionData>.ClassName => null;
 
-    
+
     public CBlendCurve Curve { get; }
-    
-  // CAnimValue< float32 >
+
+    // CAnimValue< float32 >
     public SchemaUntypedField BlendDuration { get; }
-    
-  // CAnimValue< float32 >
+
+    // CAnimValue< float32 >
     public SchemaUntypedField ResetCycleValue { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField Reset { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField ResetCycleOption { get; }
 
 

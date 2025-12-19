@@ -14,11 +14,11 @@ public partial interface CVoiceContainerSelector : CVoiceContainerBase, ISchemaC
     static int ISchemaClass<CVoiceContainerSelector>.Size => 304;
     static string? ISchemaClass<CVoiceContainerSelector>.ClassName => null;
 
-    
+
     public ref PlayBackMode_t Mode { get; }
-    
+
     public CSoundContainerReferenceArray SoundsToPlay { get; }
-    
+
     public ref CUtlVector<float> ProbabilityWeights { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface PulseRuntimeCallInfoIndex_t : ISchemaClass<PulseRuntime
     static int ISchemaClass<PulseRuntimeCallInfoIndex_t>.Size => 4;
     static string? ISchemaClass<PulseRuntimeCallInfoIndex_t>.ClassName => null;
 
-    
+
     public ref int Value { get; }
 
 

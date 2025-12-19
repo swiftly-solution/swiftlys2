@@ -14,11 +14,11 @@ public partial interface C_OP_DensityForce : CParticleFunctionForce, ISchemaClas
     static int ISchemaClass<C_OP_DensityForce>.Size => 496;
     static string? ISchemaClass<C_OP_DensityForce>.ClassName => null;
 
-    
+
     public ref float RadiusScale { get; }
-    
+
     public ref float ForceScale { get; }
-    
+
     public ref float TargetDensity { get; }
 
 

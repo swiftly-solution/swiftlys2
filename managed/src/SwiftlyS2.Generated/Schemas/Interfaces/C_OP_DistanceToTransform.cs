@@ -14,35 +14,35 @@ public partial interface C_OP_DistanceToTransform : CParticleFunctionOperator, I
     static int ISchemaClass<C_OP_DistanceToTransform>.Size => 3920;
     static string? ISchemaClass<C_OP_DistanceToTransform>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public CPerParticleFloatInput InputMin { get; }
-    
+
     public CPerParticleFloatInput InputMax { get; }
-    
+
     public CPerParticleFloatInput OutputMin { get; }
-    
+
     public CPerParticleFloatInput OutputMax { get; }
-    
+
     public CParticleTransformInput TransformStart { get; }
-    
+
     public ref bool LOS { get; }
-    
+
     public string CollisionGroupName { get; set; }
-    
+
     public ref ParticleTraceSet_t TraceSet { get; }
-    
+
     public ref float MaxTraceLength { get; }
-    
+
     public ref float LOSScale { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool ActiveRange { get; }
-    
+
     public ref bool Additive { get; }
-    
+
     public CPerParticleVecInput ComponentScale { get; }
 
 

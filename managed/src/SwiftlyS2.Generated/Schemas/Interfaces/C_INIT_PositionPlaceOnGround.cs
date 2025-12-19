@@ -14,35 +14,35 @@ public partial interface C_INIT_PositionPlaceOnGround : CParticleFunctionInitial
     static int ISchemaClass<C_INIT_PositionPlaceOnGround>.Size => 1392;
     static string? ISchemaClass<C_INIT_PositionPlaceOnGround>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput Offset { get; }
-    
+
     public CPerParticleFloatInput MaxTraceLength { get; }
-    
+
     public string CollisionGroupName { get; set; }
-    
+
     public ref ParticleTraceSet_t TraceSet { get; }
-    
+
     public ref ParticleTraceMissBehavior_t TraceMissBehavior { get; }
-    
+
     public ref bool IncludeWater { get; }
-    
+
     public ref bool SetNormal { get; }
-    
+
     public ParticleAttributeIndex_t Attribute { get; }
-    
+
     public ref bool SetPXYZOnly { get; }
-    
+
     public ref bool TraceAlongNormal { get; }
-    
+
     public ParticleAttributeIndex_t TraceDirectionAttribute { get; }
-    
+
     public ref bool OffsetonColOnly { get; }
-    
+
     public ref float OffsetByRadiusFactor { get; }
-    
+
     public ref int PreserveOffsetCP { get; }
-    
+
     public ref int IgnoreCP { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_OP_SetControlPointRotation : CParticleFunctionPreEmis
     static int ISchemaClass<C_OP_SetControlPointRotation>.Size => 2568;
     static string? ISchemaClass<C_OP_SetControlPointRotation>.ClassName => null;
 
-    
+
     public CParticleCollectionVecInput RotAxis { get; }
-    
+
     public CParticleCollectionFloatInput RotRate { get; }
-    
+
     public ref int CP { get; }
-    
+
     public ref int LocalCP { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface EventClientPreOutput_t : ISchemaClass<EventClientPreOut
     static int ISchemaClass<EventClientPreOutput_t>.Size => 72;
     static string? ISchemaClass<EventClientPreOutput_t>.ClassName => null;
 
-    
+
     public EngineLoopState_t LoopState { get; }
-    
+
     public ref double RenderTime { get; }
-    
+
     public ref double RenderFrameTime { get; }
-    
+
     public ref double RenderFrameTimeUnbounded { get; }
-    
+
     public ref float RealTime { get; }
-    
+
     public ref bool RenderOnly { get; }
 
 

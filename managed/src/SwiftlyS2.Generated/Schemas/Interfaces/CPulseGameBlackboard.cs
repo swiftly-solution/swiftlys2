@@ -14,9 +14,9 @@ public partial interface CPulseGameBlackboard : CBaseEntity, ISchemaClass<CPulse
     static int ISchemaClass<CPulseGameBlackboard>.Size => 1288;
     static string? ISchemaClass<CPulseGameBlackboard>.ClassName => "pulse_game_blackboard";
 
-    
+
     public string StrGraphName { get; set; }
-    
+
     public string StrStateBlob { get; set; }
 
     public void StrGraphNameUpdated();

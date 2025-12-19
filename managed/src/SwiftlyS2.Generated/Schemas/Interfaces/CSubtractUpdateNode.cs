@@ -14,13 +14,13 @@ public partial interface CSubtractUpdateNode : CBinaryUpdateNode, ISchemaClass<C
     static int ISchemaClass<CSubtractUpdateNode>.Size => 160;
     static string? ISchemaClass<CSubtractUpdateNode>.ClassName => null;
 
-    
+
     public ref BinaryNodeChildOption FootMotionTiming { get; }
-    
+
     public ref bool ApplyToFootMotion { get; }
-    
+
     public ref bool ApplyChannelsSeparately { get; }
-    
+
     public ref bool UseModelSpace { get; }
 
 

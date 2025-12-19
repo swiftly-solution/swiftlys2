@@ -14,15 +14,15 @@ public partial interface CEnvSpark : CPointEntity, ISchemaClass<CEnvSpark>
     static int ISchemaClass<CEnvSpark>.Size => 1320;
     static string? ISchemaClass<CEnvSpark>.ClassName => "env_spark";
 
-    
+
     public ref float Delay { get; }
-    
+
     public ref int Magnitude { get; }
-    
+
     public ref int TrailLength { get; }
-    
+
     public ref int Type { get; }
-    
+
     public CEntityIOOutput OnSpark { get; }
 
 

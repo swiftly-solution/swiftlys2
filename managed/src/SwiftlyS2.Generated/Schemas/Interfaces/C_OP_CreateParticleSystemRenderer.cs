@@ -14,15 +14,15 @@ public partial interface C_OP_CreateParticleSystemRenderer : CParticleFunctionRe
     static int ISchemaClass<C_OP_CreateParticleSystemRenderer>.Size => 2304;
     static string? ISchemaClass<C_OP_CreateParticleSystemRenderer>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> Effect { get; }
-    
+
     public ref EventTypeSelection_t EventType { get; }
-    
+
     public ref CUtlLeanVector<CPAssignment_t, int> CPs { get; }
-    
+
     public string ParticleConfig { get; set; }
-    
+
     public CPerParticleVecInput AggregationPos { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface EventClientFrameSimulate_t : ISchemaClass<EventClientFr
     static int ISchemaClass<EventClientFrameSimulate_t>.Size => 56;
     static string? ISchemaClass<EventClientFrameSimulate_t>.ClassName => null;
 
-    
+
     public EngineLoopState_t LoopState { get; }
-    
+
     public ref float RealTime { get; }
-    
+
     public ref float FrameTime { get; }
-    
+
     public ref bool ScheduleSendTickPacket { get; }
 
 

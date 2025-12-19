@@ -14,20 +14,20 @@ public partial interface CAnimEventDefinition : ISchemaClass<CAnimEventDefinitio
     static int ISchemaClass<CAnimEventDefinition>.Size => 64;
     static string? ISchemaClass<CAnimEventDefinition>.ClassName => null;
 
-    
+
     public ref int Frame { get; }
-    
+
     public ref int EndFrame { get; }
-    
+
     public ref float Cycle { get; }
-    
+
     public ref float Duration { get; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField EventData { get; }
-    
+
     public ref CBufferString LegacyOptions { get; }
-    
+
     public ref CGlobalSymbol EventName { get; }
 
 

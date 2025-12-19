@@ -14,17 +14,17 @@ public partial interface CPlayerVisibility : CBaseEntity, ISchemaClass<CPlayerVi
     static int ISchemaClass<CPlayerVisibility>.Size => 1288;
     static string? ISchemaClass<CPlayerVisibility>.ClassName => "env_player_visibility";
 
-    
+
     public ref float VisibilityStrength { get; }
-    
+
     public ref float FogDistanceMultiplier { get; }
-    
+
     public ref float FogMaxDensityMultiplier { get; }
-    
+
     public ref float FadeTime { get; }
-    
+
     public ref bool StartDisabled { get; }
-    
+
     public ref bool IsEnabled { get; }
 
     public void VisibilityStrengthUpdated();

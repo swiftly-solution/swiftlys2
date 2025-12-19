@@ -14,27 +14,27 @@ public partial interface CNmGraphDefinition : ISchemaClass<CNmGraphDefinition>
     static int ISchemaClass<CNmGraphDefinition>.Size => 384;
     static string? ISchemaClass<CNmGraphDefinition>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol VariationID { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton { get; }
-    
+
     public ref CUtlVector<short> PersistentNodeIndices { get; }
-    
+
     public ref short RootNodeIdx { get; }
-    
+
     public ref CUtlVector<CGlobalSymbol> ControlParameterIDs { get; }
-    
+
     public ref CUtlVector<CGlobalSymbol> VirtualParameterIDs { get; }
-    
+
     public ref CUtlVector<short> VirtualParameterNodeIndices { get; }
-    
+
     public ref CUtlVector<CNmGraphDefinition__ReferencedGraphSlot_t> ReferencedGraphSlots { get; }
-    
+
     public ref CUtlVector<CNmGraphDefinition__ExternalGraphSlot_t> ExternalGraphSlots { get; }
-    
+
     public ref CUtlVector<CUtlString> NodePaths { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> Resources { get; }
 
 

@@ -14,25 +14,25 @@ public partial interface CInfoOffscreenPanoramaTexture : CPointEntity, ISchemaCl
     static int ISchemaClass<CInfoOffscreenPanoramaTexture>.Size => 1384;
     static string? ISchemaClass<CInfoOffscreenPanoramaTexture>.ClassName => "info_offscreen_panorama_texture";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref int ResolutionX { get; }
-    
+
     public ref int ResolutionY { get; }
-    
+
     public string LayoutFileName { get; set; }
-    
+
     public string RenderAttrName { get; set; }
-    
+
     public ref CUtlVector<CHandle<CBaseModelEntity>> TargetEntities { get; }
-    
+
     public ref int TargetChangeCount { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> CSSClasses { get; }
-    
+
     public string TargetsName { get; set; }
-    
+
     public ref CUtlVector<CHandle<CBaseModelEntity>> AdditionalTargetEntities { get; }
 
     public void DisabledUpdated();

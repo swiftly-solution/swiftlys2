@@ -14,21 +14,21 @@ public partial interface CModelState : ISchemaClass<CModelState>
     static int ISchemaClass<CModelState>.Size => 640;
     static string? ISchemaClass<CModelState>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-    
+
     public string ModelName { get; set; }
-    
+
     public ref bool ClientClothCreationSuppressed { get; }
-    
+
     public ref ulong MeshGroupMask { get; }
-    
+
     public ref CUtlVector<int> BodyGroupChoices { get; }
-    
+
     public ref byte IdealMotionType { get; }
-    
+
     public ref byte ForceLOD { get; }
-    
+
     public ref byte ClothUpdateFlags { get; }
 
     public void ModelUpdated();

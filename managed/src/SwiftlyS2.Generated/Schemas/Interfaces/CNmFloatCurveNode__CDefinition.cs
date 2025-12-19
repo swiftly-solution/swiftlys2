@@ -14,10 +14,10 @@ public partial interface CNmFloatCurveNode__CDefinition : CNmFloatValueNode__CDe
     static int ISchemaClass<CNmFloatCurveNode__CDefinition>.Size => 88;
     static string? ISchemaClass<CNmFloatCurveNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve { get; }
 
 

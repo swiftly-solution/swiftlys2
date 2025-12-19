@@ -14,9 +14,9 @@ public partial interface MotionIndex : ISchemaClass<MotionIndex>
     static int ISchemaClass<MotionIndex>.Size => 4;
     static string? ISchemaClass<MotionIndex>.ClassName => null;
 
-    
+
     public ref ushort Group { get; }
-    
+
     public ref ushort Motion { get; }
 
 

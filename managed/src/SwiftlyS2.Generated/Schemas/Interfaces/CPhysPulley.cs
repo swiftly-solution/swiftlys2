@@ -14,13 +14,13 @@ public partial interface CPhysPulley : CPhysConstraint, ISchemaClass<CPhysPulley
     static int ISchemaClass<CPhysPulley>.Size => 1424;
     static string? ISchemaClass<CPhysPulley>.ClassName => "phys_pulleyconstraint";
 
-    
+
     public ref Vector Position2 { get; }
-    
+
     public ISchemaFixedArray<Vector> Offset { get; }
-    
+
     public ref float AddLength { get; }
-    
+
     public ref float GearRatio { get; }
 
 

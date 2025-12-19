@@ -14,7 +14,7 @@ public partial interface CSoundEventSphereEntity : CSoundEventEntity, ISchemaCla
     static int ISchemaClass<CSoundEventSphereEntity>.Size => 1472;
     static string? ISchemaClass<CSoundEventSphereEntity>.ClassName => "snd_event_sphere";
 
-    
+
     public ref float Radius { get; }
 
     public void RadiusUpdated();

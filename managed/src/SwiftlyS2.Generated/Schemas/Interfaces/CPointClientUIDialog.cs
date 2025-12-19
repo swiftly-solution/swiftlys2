@@ -14,9 +14,9 @@ public partial interface CPointClientUIDialog : CBaseClientUIEntity, ISchemaClas
     static int ISchemaClass<CPointClientUIDialog>.Size => 2448;
     static string? ISchemaClass<CPointClientUIDialog>.ClassName => "point_clientui_dialog";
 
-    
+
     public ref CHandle<CBaseEntity> Activator { get; }
-    
+
     public ref bool StartEnabled { get; }
 
     public void ActivatorUpdated();

@@ -14,7 +14,7 @@ public partial interface CFuncTankTrain : CFuncTrackTrain, ISchemaClass<CFuncTan
     static int ISchemaClass<CFuncTankTrain>.Size => 2392;
     static string? ISchemaClass<CFuncTankTrain>.ClassName => "func_tanktrain";
 
-    
+
     public CEntityIOOutput OnDeath { get; }
 
 

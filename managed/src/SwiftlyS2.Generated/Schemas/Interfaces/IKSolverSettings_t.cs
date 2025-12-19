@@ -14,11 +14,11 @@ public partial interface IKSolverSettings_t : ISchemaClass<IKSolverSettings_t>
     static int ISchemaClass<IKSolverSettings_t>.Size => 12;
     static string? ISchemaClass<IKSolverSettings_t>.ClassName => null;
 
-    
+
     public ref IKSolverType SolverType { get; }
-    
+
     public ref int NumIterations { get; }
-    
+
     public ref EIKEndEffectorRotationFixUpMode EndEffectorRotationFixUpMode { get; }
 
 

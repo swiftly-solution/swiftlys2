@@ -14,9 +14,9 @@ public partial interface CBreakableStageHelper : ISchemaClass<CBreakableStageHel
     static int ISchemaClass<CBreakableStageHelper>.Size => 24;
     static string? ISchemaClass<CBreakableStageHelper>.ClassName => null;
 
-    
+
     public ref int CurrentStage { get; }
-    
+
     public ref int StageCount { get; }
 
 

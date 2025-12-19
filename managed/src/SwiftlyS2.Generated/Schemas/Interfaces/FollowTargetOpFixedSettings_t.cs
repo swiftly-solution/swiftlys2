@@ -14,15 +14,15 @@ public partial interface FollowTargetOpFixedSettings_t : ISchemaClass<FollowTarg
     static int ISchemaClass<FollowTargetOpFixedSettings_t>.Size => 16;
     static string? ISchemaClass<FollowTargetOpFixedSettings_t>.ClassName => null;
 
-    
+
     public ref int BoneIndex { get; }
-    
+
     public ref bool BoneTarget { get; }
-    
+
     public ref int BoneTargetIndex { get; }
-    
+
     public ref bool WorldCoodinateTarget { get; }
-    
+
     public ref bool MatchTargetOrientation { get; }
 
 

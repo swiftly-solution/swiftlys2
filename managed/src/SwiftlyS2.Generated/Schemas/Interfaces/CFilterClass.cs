@@ -14,7 +14,7 @@ public partial interface CFilterClass : CBaseFilter, ISchemaClass<CFilterClass>
     static int ISchemaClass<CFilterClass>.Size => 1360;
     static string? ISchemaClass<CFilterClass>.ClassName => "filter_activator_class";
 
-    
+
     public string FilterClass { get; set; }
 
 

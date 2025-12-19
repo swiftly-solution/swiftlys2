@@ -14,7 +14,7 @@ public partial interface CNmPassthroughNode__CDefinition : CNmPoseNode__CDefinit
     static int ISchemaClass<CNmPassthroughNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmPassthroughNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short ChildNodeIdx { get; }
 
 

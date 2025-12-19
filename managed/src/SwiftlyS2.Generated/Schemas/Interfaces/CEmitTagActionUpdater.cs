@@ -14,9 +14,9 @@ public partial interface CEmitTagActionUpdater : CAnimActionUpdater, ISchemaClas
     static int ISchemaClass<CEmitTagActionUpdater>.Size => 32;
     static string? ISchemaClass<CEmitTagActionUpdater>.ClassName => null;
 
-    
+
     public ref int TagIndex { get; }
-    
+
     public ref bool IsZeroDuration { get; }
 
 

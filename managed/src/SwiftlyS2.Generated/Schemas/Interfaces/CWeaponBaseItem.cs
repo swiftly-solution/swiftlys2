@@ -14,9 +14,9 @@ public partial interface CWeaponBaseItem : CCSWeaponBase, ISchemaClass<CWeaponBa
     static int ISchemaClass<CWeaponBaseItem>.Size => 4576;
     static string? ISchemaClass<CWeaponBaseItem>.ClassName => "weapon_csbase";
 
-    
+
     public ref bool SequenceInProgress { get; }
-    
+
     public ref bool Redraw { get; }
 
     public void SequenceInProgressUpdated();

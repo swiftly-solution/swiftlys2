@@ -14,11 +14,11 @@ public partial interface CNetworkViewOffsetVector : ISchemaClass<CNetworkViewOff
     static int ISchemaClass<CNetworkViewOffsetVector>.Size => 40;
     static string? ISchemaClass<CNetworkViewOffsetVector>.ClassName => null;
 
-    
+
     public ref CNetworkedQuantizedFloat X { get; }
-    
+
     public ref CNetworkedQuantizedFloat Y { get; }
-    
+
     public ref CNetworkedQuantizedFloat Z { get; }
 
     public void XUpdated();

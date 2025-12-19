@@ -14,7 +14,7 @@ public partial interface CScriptTriggerMultiple : CTriggerMultiple, ISchemaClass
     static int ISchemaClass<CScriptTriggerMultiple>.Size => 2528;
     static string? ISchemaClass<CScriptTriggerMultiple>.ClassName => "script_trigger_multiple";
 
-    
+
     public ref Vector Extent { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface ConstantInfo_t : ISchemaClass<ConstantInfo_t>
     static int ISchemaClass<ConstantInfo_t>.Size => 16;
     static string? ISchemaClass<ConstantInfo_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CUtlStringToken NameToken { get; }
-    
+
     public ref float Value { get; }
 
 

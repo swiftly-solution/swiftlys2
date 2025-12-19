@@ -14,7 +14,7 @@ public partial interface CNmConstTargetNode__CDefinition : CNmTargetValueNode__C
     static int ISchemaClass<CNmConstTargetNode__CDefinition>.Size => 64;
     static string? ISchemaClass<CNmConstTargetNode__CDefinition>.ClassName => null;
 
-    
+
     public CNmTarget Value { get; }
 
 

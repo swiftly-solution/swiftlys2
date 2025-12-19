@@ -14,13 +14,13 @@ public partial interface C_INIT_InitFloat : CParticleFunctionInitializer, ISchem
     static int ISchemaClass<C_INIT_InitFloat>.Size => 1216;
     static string? ISchemaClass<C_INIT_InitFloat>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput InputValue { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public CPerParticleFloatInput InputStrength { get; }
 
 

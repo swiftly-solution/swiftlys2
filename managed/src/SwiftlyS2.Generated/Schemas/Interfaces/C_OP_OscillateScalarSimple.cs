@@ -14,15 +14,15 @@ public partial interface C_OP_OscillateScalarSimple : CParticleFunctionOperator,
     static int ISchemaClass<C_OP_OscillateScalarSimple>.Size => 528;
     static string? ISchemaClass<C_OP_OscillateScalarSimple>.ClassName => null;
 
-    
+
     public ref float Rate { get; }
-    
+
     public ref float Frequency { get; }
-    
+
     public ParticleAttributeIndex_t Field { get; }
-    
+
     public ref float OscMult { get; }
-    
+
     public ref float OscAdd { get; }
 
 

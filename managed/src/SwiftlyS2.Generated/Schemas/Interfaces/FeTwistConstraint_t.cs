@@ -14,13 +14,13 @@ public partial interface FeTwistConstraint_t : ISchemaClass<FeTwistConstraint_t>
     static int ISchemaClass<FeTwistConstraint_t>.Size => 12;
     static string? ISchemaClass<FeTwistConstraint_t>.ClassName => null;
 
-    
+
     public ref ushort NodeOrient { get; }
-    
+
     public ref ushort NodeEnd { get; }
-    
+
     public ref float TwistRelax { get; }
-    
+
     public ref float SwingRelax { get; }
 
 

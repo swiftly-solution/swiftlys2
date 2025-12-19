@@ -14,11 +14,11 @@ public partial interface CInfoPlayerStart : CPointEntity, ISchemaClass<CInfoPlay
     static int ISchemaClass<CInfoPlayerStart>.Size => 1280;
     static string? ISchemaClass<CInfoPlayerStart>.ClassName => "info_player_start";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref bool IsMaster { get; }
-    
+
     public ref CGlobalSymbol PawnSubclass { get; }
 
 

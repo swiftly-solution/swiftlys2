@@ -14,31 +14,31 @@ public partial interface CAnimUpdateSharedData : ISchemaClass<CAnimUpdateSharedD
     static int ISchemaClass<CAnimUpdateSharedData>.Size => 256;
     static string? ISchemaClass<CAnimUpdateSharedData>.ClassName => null;
 
-    
+
     public ref CUtlVector<SchemaUntypedField> Nodes { get; }
-    
-  // CUtlHashtable< CAnimNodePath, int32 >
+
+    // CUtlHashtable< CAnimNodePath, int32 >
     public SchemaUntypedField NodeIndexMap { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> Components { get; }
-    
-  // CSmartPtr< CAnimParameterManagerUpdater >
+
+    // CSmartPtr< CAnimParameterManagerUpdater >
     public SchemaUntypedField ParamListUpdater { get; }
-    
-  // CSmartPtr< CAnimTagManagerUpdater >
+
+    // CSmartPtr< CAnimTagManagerUpdater >
     public SchemaUntypedField TagManagerUpdater { get; }
-    
-  // CSmartPtr< CAnimScriptManager >
+
+    // CSmartPtr< CAnimScriptManager >
     public SchemaUntypedField ScriptManager { get; }
-    
+
     public CAnimGraphSettingsManager Settings { get; }
-    
-  // CSmartPtr< CStaticPoseCacheBuilder >
+
+    // CSmartPtr< CStaticPoseCacheBuilder >
     public SchemaUntypedField StaticPoseCache { get; }
-    
-  // CSmartPtr< CAnimSkeleton >
+
+    // CSmartPtr< CAnimSkeleton >
     public SchemaUntypedField Skeleton { get; }
-    
+
     public CAnimNodePath RootNodePath { get; }
 
 

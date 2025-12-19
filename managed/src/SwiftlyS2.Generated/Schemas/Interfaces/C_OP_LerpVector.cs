@@ -14,15 +14,15 @@ public partial interface C_OP_LerpVector : CParticleFunctionOperator, ISchemaCla
     static int ISchemaClass<C_OP_LerpVector>.Size => 496;
     static string? ISchemaClass<C_OP_LerpVector>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref Vector Output { get; }
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float EndTime { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
 
 

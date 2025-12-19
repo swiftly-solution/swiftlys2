@@ -14,11 +14,11 @@ public partial interface CAnimUpdateNodeBase : ISchemaClass<CAnimUpdateNodeBase>
     static int ISchemaClass<CAnimUpdateNodeBase>.Size => 88;
     static string? ISchemaClass<CAnimUpdateNodeBase>.ClassName => null;
 
-    
+
     public CAnimNodePath NodePath { get; }
-    
+
     public ref AnimNodeNetworkMode NetworkMode { get; }
-    
+
     public string Name { get; set; }
 
 

@@ -14,9 +14,9 @@ public partial interface CFuncNavObstruction : CBaseModelEntity, ISchemaClass<CF
     static int ISchemaClass<CFuncNavObstruction>.Size => 2040;
     static string? ISchemaClass<CFuncNavObstruction>.ClassName => "func_nav_avoidance_obstacle";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref bool UseAsyncObstacleUpdate { get; }
 
 

@@ -14,19 +14,19 @@ public partial interface C_OP_RenderLightBeam : CParticleFunctionRenderer, ISche
     static int ISchemaClass<C_OP_RenderLightBeam>.Size => 3752;
     static string? ISchemaClass<C_OP_RenderLightBeam>.ClassName => null;
 
-    
+
     public CParticleCollectionVecInput ColorBlend { get; }
-    
+
     public ref ParticleColorBlendType_t ColorBlendType { get; }
-    
+
     public CParticleCollectionFloatInput BrightnessLumensPerMeter { get; }
-    
+
     public ref bool CastShadows { get; }
-    
+
     public CParticleCollectionFloatInput Skirt { get; }
-    
+
     public CParticleCollectionFloatInput Range { get; }
-    
+
     public CParticleCollectionFloatInput Thickness { get; }
 
 

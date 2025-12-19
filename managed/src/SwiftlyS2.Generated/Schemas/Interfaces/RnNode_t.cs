@@ -14,13 +14,13 @@ public partial interface RnNode_t : ISchemaClass<RnNode_t>
     static int ISchemaClass<RnNode_t>.Size => 32;
     static string? ISchemaClass<RnNode_t>.ClassName => null;
 
-    
+
     public ref Vector Min { get; }
-    
+
     public ref uint Children { get; }
-    
+
     public ref Vector Max { get; }
-    
+
     public ref uint TriangleOffset { get; }
 
 

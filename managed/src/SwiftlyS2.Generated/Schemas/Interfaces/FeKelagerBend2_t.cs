@@ -14,13 +14,13 @@ public partial interface FeKelagerBend2_t : ISchemaClass<FeKelagerBend2_t>
     static int ISchemaClass<FeKelagerBend2_t>.Size => 24;
     static string? ISchemaClass<FeKelagerBend2_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<float> Weight { get; }
-    
+
     public ref float Height0 { get; }
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
-    
+
     public ref ushort Reserved { get; }
 
 

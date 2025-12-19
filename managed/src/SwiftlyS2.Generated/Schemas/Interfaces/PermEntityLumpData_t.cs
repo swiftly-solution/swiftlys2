@@ -14,11 +14,11 @@ public partial interface PermEntityLumpData_t : ISchemaClass<PermEntityLumpData_
     static int ISchemaClass<PermEntityLumpData_t>.Size => 56;
     static string? ISchemaClass<PermEntityLumpData_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> ChildLumps { get; }
-    
+
     public ref CUtlLeanVector<EntityKeyValueData_t, int> EntityKeyValues { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface CNmSpeedScaleBaseNode__CDefinition : CNmPassthroughNode
     static int ISchemaClass<CNmSpeedScaleBaseNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmSpeedScaleBaseNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref float DefaultInputValue { get; }
 
 

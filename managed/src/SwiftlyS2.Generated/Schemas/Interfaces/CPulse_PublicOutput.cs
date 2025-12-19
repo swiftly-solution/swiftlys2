@@ -14,12 +14,12 @@ public partial interface CPulse_PublicOutput : ISchemaClass<CPulse_PublicOutput>
     static int ISchemaClass<CPulse_PublicOutput>.Size => 40;
     static string? ISchemaClass<CPulse_PublicOutput>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField Name { get; }
-    
+
     public string Description { get; set; }
-    
+
     public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args { get; }
 
 

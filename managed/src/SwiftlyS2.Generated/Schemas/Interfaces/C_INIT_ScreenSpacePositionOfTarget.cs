@@ -14,13 +14,13 @@ public partial interface C_INIT_ScreenSpacePositionOfTarget : CParticleFunctionI
     static int ISchemaClass<C_INIT_ScreenSpacePositionOfTarget>.Size => 2568;
     static string? ISchemaClass<C_INIT_ScreenSpacePositionOfTarget>.ClassName => null;
 
-    
+
     public CPerParticleVecInput TargetPosition { get; }
-    
+
     public ref bool OututBehindness { get; }
-    
+
     public ParticleAttributeIndex_t BehindFieldOutput { get; }
-    
+
     public CParticleRemapFloatInput BehindOutputRemap { get; }
 
 

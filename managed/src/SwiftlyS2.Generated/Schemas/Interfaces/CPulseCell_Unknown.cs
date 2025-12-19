@@ -14,8 +14,8 @@ public partial interface CPulseCell_Unknown : CPulseCell_Base, ISchemaClass<CPul
     static int ISchemaClass<CPulseCell_Unknown>.Size => 88;
     static string? ISchemaClass<CPulseCell_Unknown>.ClassName => null;
 
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField UnknownKeys { get; }
 
 

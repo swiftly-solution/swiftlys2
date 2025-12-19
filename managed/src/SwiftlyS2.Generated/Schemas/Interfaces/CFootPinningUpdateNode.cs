@@ -14,13 +14,13 @@ public partial interface CFootPinningUpdateNode : CUnaryUpdateNode, ISchemaClass
     static int ISchemaClass<CFootPinningUpdateNode>.Size => 208;
     static string? ISchemaClass<CFootPinningUpdateNode>.ClassName => null;
 
-    
+
     public FootPinningPoseOpFixedData_t PoseOpFixedData { get; }
-    
+
     public ref FootPinningTimingSource TimingSource { get; }
-    
+
     public ref CUtlVector<CAnimParamHandle> Params { get; }
-    
+
     public ref bool ResetChild { get; }
 
 

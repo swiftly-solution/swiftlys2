@@ -14,21 +14,21 @@ public partial interface CMultiLightProxy : CLogicalEntity, ISchemaClass<CMultiL
     static int ISchemaClass<CMultiLightProxy>.Size => 1328;
     static string? ISchemaClass<CMultiLightProxy>.ClassName => "logic_multilight_proxy";
 
-    
+
     public string LightNameFilter { get; set; }
-    
+
     public string LightClassFilter { get; set; }
-    
+
     public ref float LightRadiusFilter { get; }
-    
+
     public ref float BrightnessDelta { get; }
-    
+
     public ref bool PerformScreenFade { get; }
-    
+
     public ref float TargetBrightnessMultiplier { get; }
-    
+
     public ref float CurrentBrightnessMultiplier { get; }
-    
+
     public ref CUtlVector<CHandle<CLightEntity>> Lights { get; }
 
 

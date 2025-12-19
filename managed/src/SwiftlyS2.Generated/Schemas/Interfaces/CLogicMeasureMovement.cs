@@ -14,23 +14,23 @@ public partial interface CLogicMeasureMovement : CLogicalEntity, ISchemaClass<CL
     static int ISchemaClass<CLogicMeasureMovement>.Size => 1312;
     static string? ISchemaClass<CLogicMeasureMovement>.ClassName => "logic_measure_movement";
 
-    
+
     public string StrMeasureTarget { get; set; }
-    
+
     public string StrMeasureReference { get; set; }
-    
+
     public string StrTargetReference { get; set; }
-    
+
     public ref CHandle<CBaseEntity> MeasureTarget { get; }
-    
+
     public ref CHandle<CBaseEntity> MeasureReference { get; }
-    
+
     public ref CHandle<CBaseEntity> Target { get; }
-    
+
     public ref CHandle<CBaseEntity> TargetReference { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public ref int MeasureType { get; }
 
 

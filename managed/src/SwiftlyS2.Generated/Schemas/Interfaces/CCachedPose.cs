@@ -14,13 +14,13 @@ public partial interface CCachedPose : ISchemaClass<CCachedPose>
     static int ISchemaClass<CCachedPose>.Size => 64;
     static string? ISchemaClass<CCachedPose>.ClassName => null;
 
-    
+
     public ref CUtlVector<CTransform> Transforms { get; }
-    
+
     public ref CUtlVector<float> MorphWeights { get; }
-    
+
     public HSequence Sequence { get; }
-    
+
     public ref float Cycle { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface PhysSoftbodyDesc_t : ISchemaClass<PhysSoftbodyDesc_t>
     static int ISchemaClass<PhysSoftbodyDesc_t>.Size => 144;
     static string? ISchemaClass<PhysSoftbodyDesc_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<uint> ParticleBoneHash { get; }
-    
+
     public ref CUtlVector<RnSoftbodyParticle_t> Particles { get; }
-    
+
     public ref CUtlVector<RnSoftbodySpring_t> Springs { get; }
-    
+
     public ref CUtlVector<RnSoftbodyCapsule_t> Capsules { get; }
-    
+
     public ref CUtlVector<CTransform> InitPose { get; }
-    
+
     public ref CUtlVector<CUtlString> ParticleBoneName { get; }
 
 

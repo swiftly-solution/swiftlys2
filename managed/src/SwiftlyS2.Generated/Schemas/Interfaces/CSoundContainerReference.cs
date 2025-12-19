@@ -14,11 +14,11 @@ public partial interface CSoundContainerReference : ISchemaClass<CSoundContainer
     static int ISchemaClass<CSoundContainerReference>.Size => 24;
     static string? ISchemaClass<CSoundContainerReference>.ClassName => null;
 
-    
+
     public ref bool UseReference { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> Sound { get; }
-    
+
     public CVoiceContainerBase? Sound1 { get; }
 
 

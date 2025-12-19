@@ -14,7 +14,7 @@ public partial interface CNmConstFloatNode__CDefinition : CNmFloatValueNode__CDe
     static int ISchemaClass<CNmConstFloatNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmConstFloatNode__CDefinition>.ClassName => null;
 
-    
+
     public ref float Value { get; }
 
 

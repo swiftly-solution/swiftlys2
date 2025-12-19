@@ -14,13 +14,13 @@ public partial interface C_INIT_RemapParticleCountToNamedModelElementScalar : C_
     static int ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar>.Size => 552;
     static string? ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-    
+
     public string OutputMinName { get; set; }
-    
+
     public string OutputMaxName { get; set; }
-    
+
     public ref bool ModelFromRenderer { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface ParticleControlPointDriver_t : ISchemaClass<ParticleCon
     static int ISchemaClass<ParticleControlPointDriver_t>.Size => 48;
     static string? ISchemaClass<ParticleControlPointDriver_t>.ClassName => null;
 
-    
+
     public ref int ControlPoint { get; }
-    
+
     public ref ParticleAttachment_t AttachType { get; }
-    
+
     public string AttachmentName { get; set; }
-    
+
     public ref Vector Offset { get; }
-    
+
     public ref QAngle Offset1 { get; }
-    
+
     public string EntityName { get; set; }
 
 

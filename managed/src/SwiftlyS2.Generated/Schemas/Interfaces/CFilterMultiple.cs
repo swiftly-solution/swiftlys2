@@ -14,11 +14,11 @@ public partial interface CFilterMultiple : CBaseFilter, ISchemaClass<CFilterMult
     static int ISchemaClass<CFilterMultiple>.Size => 1480;
     static string? ISchemaClass<CFilterMultiple>.ClassName => "filter_multi";
 
-    
+
     public ref filter_t FilterType { get; }
-    
+
     public string FilterName { get; set; }
-    
+
     public ISchemaFixedArray<CHandle<CBaseEntity>> Filter { get; }
 
 

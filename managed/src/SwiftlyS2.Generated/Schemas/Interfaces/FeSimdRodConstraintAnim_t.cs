@@ -14,12 +14,12 @@ public partial interface FeSimdRodConstraintAnim_t : ISchemaClass<FeSimdRodConst
     static int ISchemaClass<FeSimdRodConstraintAnim_t>.Size => 48;
     static string? ISchemaClass<FeSimdRodConstraintAnim_t>.ClassName => null;
 
-    
-  // uint16[4]
+
+    // uint16[4]
     public SchemaUntypedField Node { get; }
-    
+
     public ref fltx4 F4Weight0 { get; }
-    
+
     public ref fltx4 F4RelaxationFactor { get; }
 
 

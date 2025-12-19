@@ -14,11 +14,11 @@ public partial interface C_OP_SetControlPointToPlayer : CParticleFunctionPreEmis
     static int ISchemaClass<C_OP_SetControlPointToPlayer>.Size => 496;
     static string? ISchemaClass<C_OP_SetControlPointToPlayer>.ClassName => null;
 
-    
+
     public ref int CP1 { get; }
-    
+
     public ref Vector CP1Pos { get; }
-    
+
     public ref bool OrientToEyes { get; }
 
 

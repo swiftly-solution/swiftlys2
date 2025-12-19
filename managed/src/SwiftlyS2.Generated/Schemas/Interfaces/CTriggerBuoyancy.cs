@@ -14,9 +14,9 @@ public partial interface CTriggerBuoyancy : CBaseTrigger, ISchemaClass<CTriggerB
     static int ISchemaClass<CTriggerBuoyancy>.Size => 2760;
     static string? ISchemaClass<CTriggerBuoyancy>.ClassName => "trigger_buoyancy";
 
-    
+
     public CBuoyancyHelper BuoyancyHelper { get; }
-    
+
     public ref float FluidDensity { get; }
 
     public void FluidDensityUpdated();

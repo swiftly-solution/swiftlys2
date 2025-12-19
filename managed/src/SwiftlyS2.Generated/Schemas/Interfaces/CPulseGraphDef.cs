@@ -14,37 +14,37 @@ public partial interface CPulseGraphDef : ISchemaClass<CPulseGraphDef>
     static int ISchemaClass<CPulseGraphDef>.Size => 408;
     static string? ISchemaClass<CPulseGraphDef>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField DomainIdentifier { get; }
-    
-  // CPulseValueFullType
+
+    // CPulseValueFullType
     public SchemaUntypedField DomainSubType { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField ParentMapName { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField ParentXmlName { get; }
-    
+
     public ref CUtlVector<PointerTo<CPulse_Chunk>> Chunks { get; }
-    
+
     public ref CUtlVector<PointerTo<CPulseCell_Base>> Cells { get; }
-    
+
     public ref CUtlVector<CPulse_Variable> Vars { get; }
-    
+
     public ref CUtlVector<CPulse_PublicOutput> PublicOutputs { get; }
-    
+
     public ref CUtlVector<PointerTo<CPulse_InvokeBinding>> InvokeBindings { get; }
-    
+
     public ref CUtlVector<PointerTo<CPulse_CallInfo>> CallInfos { get; }
-    
+
     public ref CUtlVector<CPulse_Constant> Constants { get; }
-    
+
     public ref CUtlVector<CPulse_DomainValue> DomainValues { get; }
-    
+
     public ref CUtlVector<CPulse_BlackboardReference> BlackboardReferences { get; }
-    
+
     public ref CUtlVector<PointerTo<CPulse_OutputConnection>> OutputConnections { get; }
 
 

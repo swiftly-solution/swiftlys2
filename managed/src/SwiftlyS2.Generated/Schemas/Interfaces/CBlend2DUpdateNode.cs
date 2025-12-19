@@ -14,35 +14,35 @@ public partial interface CBlend2DUpdateNode : CAnimUpdateNodeBase, ISchemaClass<
     static int ISchemaClass<CBlend2DUpdateNode>.Size => 248;
     static string? ISchemaClass<CBlend2DUpdateNode>.ClassName => null;
 
-    
+
     public ref CUtlVector<BlendItem_t> Items { get; }
-    
+
     public ref CUtlVector<TagSpan_t> Tags { get; }
-    
+
     public CParamSpanUpdater ParamSpans { get; }
-    
+
     public ref CUtlVector<int> NodeItemIndices { get; }
-    
+
     public CAnimInputDamping Damping { get; }
-    
+
     public ref AnimValueSource BlendSourceX { get; }
-    
+
     public CAnimParamHandle ParamX { get; }
-    
+
     public ref AnimValueSource BlendSourceY { get; }
-    
+
     public CAnimParamHandle ParamY { get; }
-    
+
     public ref Blend2DMode BlendMode { get; }
-    
+
     public ref float PlaybackSpeed { get; }
-    
+
     public ref bool Loop { get; }
-    
+
     public ref bool LockBlendOnReset { get; }
-    
+
     public ref bool LockWhenWaning { get; }
-    
+
     public ref bool AnimEventsAndTagsOnMostWeightedOnly { get; }
 
 

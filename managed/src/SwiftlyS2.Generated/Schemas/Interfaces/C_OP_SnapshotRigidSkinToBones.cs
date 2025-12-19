@@ -14,11 +14,11 @@ public partial interface C_OP_SnapshotRigidSkinToBones : CParticleFunctionOperat
     static int ISchemaClass<C_OP_SnapshotRigidSkinToBones>.Size => 472;
     static string? ISchemaClass<C_OP_SnapshotRigidSkinToBones>.ClassName => null;
 
-    
+
     public ref bool TransformNormals { get; }
-    
+
     public ref bool TransformRadii { get; }
-    
+
     public ref int ControlPointNumber { get; }
 
 

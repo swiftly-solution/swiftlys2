@@ -14,16 +14,16 @@ public partial interface CLogicPlayerProxy : CLogicalEntity, ISchemaClass<CLogic
     static int ISchemaClass<CLogicPlayerProxy>.Size => 1432;
     static string? ISchemaClass<CLogicPlayerProxy>.ClassName => "logic_playerproxy";
 
-    
+
     public ref CHandle<CBaseEntity> Player { get; }
-    
+
     public CEntityIOOutput PlayerHasAmmo { get; }
-    
+
     public CEntityIOOutput PlayerHasNoAmmo { get; }
-    
+
     public CEntityIOOutput PlayerDied { get; }
-    
-  // CEntityOutputTemplate< int32 >
+
+    // CEntityOutputTemplate< int32 >
     public SchemaUntypedField RequestedPlayerHealth { get; }
 
 

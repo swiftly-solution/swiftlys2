@@ -14,19 +14,19 @@ public partial interface VMixPlateverbDesc_t : ISchemaClass<VMixPlateverbDesc_t>
     static int ISchemaClass<VMixPlateverbDesc_t>.Size => 28;
     static string? ISchemaClass<VMixPlateverbDesc_t>.ClassName => null;
 
-    
+
     public ref float Prefilter { get; }
-    
+
     public ref float InputDiffusion1 { get; }
-    
+
     public ref float InputDiffusion2 { get; }
-    
+
     public ref float Decay { get; }
-    
+
     public ref float Damp { get; }
-    
+
     public ref float FeedbackDiffusion1 { get; }
-    
+
     public ref float FeedbackDiffusion2 { get; }
 
 

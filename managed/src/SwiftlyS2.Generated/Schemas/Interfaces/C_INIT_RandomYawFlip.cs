@@ -14,7 +14,7 @@ public partial interface C_INIT_RandomYawFlip : CParticleFunctionInitializer, IS
     static int ISchemaClass<C_INIT_RandomYawFlip>.Size => 480;
     static string? ISchemaClass<C_INIT_RandomYawFlip>.ClassName => null;
 
-    
+
     public ref float Percent { get; }
 
 

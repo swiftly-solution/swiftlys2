@@ -14,13 +14,13 @@ public partial interface CSeqIKLock : ISchemaClass<CSeqIKLock>
     static int ISchemaClass<CSeqIKLock>.Size => 12;
     static string? ISchemaClass<CSeqIKLock>.ClassName => null;
 
-    
+
     public ref float PosWeight { get; }
-    
+
     public ref float AngleWeight { get; }
-    
+
     public ref short LocalBone { get; }
-    
+
     public ref bool BonesOrientedAlongPositiveX { get; }
 
 

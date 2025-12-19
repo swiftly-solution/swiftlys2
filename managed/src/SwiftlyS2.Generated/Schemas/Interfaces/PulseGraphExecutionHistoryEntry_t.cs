@@ -14,16 +14,16 @@ public partial interface PulseGraphExecutionHistoryEntry_t : ISchemaClass<PulseG
     static int ISchemaClass<PulseGraphExecutionHistoryEntry_t>.Size => 32;
     static string? ISchemaClass<PulseGraphExecutionHistoryEntry_t>.ClassName => null;
 
-    
+
     public PulseCursorID_t CursorID { get; }
-    
+
     public PulseDocNodeID_t EditorID { get; }
-    
+
     public ref float ExecTime { get; }
-    
+
     public ref uint Flags { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField TagName { get; }
 
 

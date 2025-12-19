@@ -14,15 +14,15 @@ public partial interface FunctionInfo_t : ISchemaClass<FunctionInfo_t>
     static int ISchemaClass<FunctionInfo_t>.Size => 32;
     static string? ISchemaClass<FunctionInfo_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CUtlStringToken NameToken { get; }
-    
+
     public ref int ParamCount { get; }
-    
+
     public FuseFunctionIndex_t Index { get; }
-    
+
     public ref bool IsPure { get; }
 
 

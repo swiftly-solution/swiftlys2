@@ -14,9 +14,9 @@ public partial interface CVoiceContainerDecayingSineWave : CVoiceContainerBase, 
     static int ISchemaClass<CVoiceContainerDecayingSineWave>.Size => 192;
     static string? ISchemaClass<CVoiceContainerDecayingSineWave>.ClassName => null;
 
-    
+
     public ref float Frequency { get; }
-    
+
     public ref float DecayTime { get; }
 
 

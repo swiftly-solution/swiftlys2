@@ -14,7 +14,7 @@ public partial interface CTriggerMultiple : CBaseTrigger, ISchemaClass<CTriggerM
     static int ISchemaClass<CTriggerMultiple>.Size => 2512;
     static string? ISchemaClass<CTriggerMultiple>.ClassName => "trigger_multiple";
 
-    
+
     public CEntityIOOutput OnTrigger { get; }
 
 

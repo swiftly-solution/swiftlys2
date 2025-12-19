@@ -14,29 +14,29 @@ public partial interface CPlayer_CameraServices : CPlayerPawnComponent, ISchemaC
     static int ISchemaClass<CPlayer_CameraServices>.Size => 368;
     static string? ISchemaClass<CPlayer_CameraServices>.ClassName => null;
 
-    
+
     public ref QAngle CsViewPunchAngle { get; }
-    
+
     public GameTick_t CsViewPunchAngleTick { get; }
-    
+
     public ref float CsViewPunchAngleTickRatio { get; }
-    
+
     public fogplayerparams_t PlayerFog { get; }
-    
+
     public ref CHandle<CColorCorrection> ColorCorrectionCtrl { get; }
-    
+
     public ref CHandle<CBaseEntity> ViewEntity { get; }
-    
+
     public ref CHandle<CTonemapController2> TonemapController { get; }
-    
+
     public audioparams_t Audio { get; }
-    
+
     public ref CUtlVector<CHandle<CPostProcessingVolume>> PostProcessingVolumes { get; }
-    
+
     public ref float OldPlayerZ { get; }
-    
+
     public ref float OldPlayerViewOffsetZ { get; }
-    
+
     public ref CUtlVector<CHandle<CEnvSoundscapeTriggerable>> TriggerSoundscapeList { get; }
 
     public void CsViewPunchAngleUpdated();

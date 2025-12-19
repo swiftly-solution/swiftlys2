@@ -14,13 +14,13 @@ public partial interface C_OP_QuantizeCPComponent : CParticleFunctionPreEmission
     static int ISchemaClass<C_OP_QuantizeCPComponent>.Size => 1216;
     static string? ISchemaClass<C_OP_QuantizeCPComponent>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput InputValue { get; }
-    
+
     public ref int CPOutput { get; }
-    
+
     public ref int OutVectorField { get; }
-    
+
     public CParticleCollectionFloatInput QuantizeValue { get; }
 
 

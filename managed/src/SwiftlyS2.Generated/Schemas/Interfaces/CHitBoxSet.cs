@@ -14,13 +14,13 @@ public partial interface CHitBoxSet : ISchemaClass<CHitBoxSet>
     static int ISchemaClass<CHitBoxSet>.Size => 48;
     static string? ISchemaClass<CHitBoxSet>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref uint NameHash { get; }
-    
+
     public ref CUtlVector<CHitBox> HitBoxes { get; }
-    
+
     public string SourceFilename { get; set; }
 
 

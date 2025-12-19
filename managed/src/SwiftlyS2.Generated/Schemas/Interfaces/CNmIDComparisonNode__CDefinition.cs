@@ -14,12 +14,12 @@ public partial interface CNmIDComparisonNode__CDefinition : CNmBoolValueNode__CD
     static int ISchemaClass<CNmIDComparisonNode__CDefinition>.Size => 64;
     static string? ISchemaClass<CNmIDComparisonNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref CNmIDComparisonNode__Comparison_t Comparison { get; }
-    
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 4 >
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 4 >
     public SchemaUntypedField ComparisionIDs { get; }
 
 

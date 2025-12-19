@@ -14,20 +14,20 @@ public partial interface CFuseSymbolTable : ISchemaClass<CFuseSymbolTable>
     static int ISchemaClass<CFuseSymbolTable>.Size => 176;
     static string? ISchemaClass<CFuseSymbolTable>.ClassName => null;
 
-    
+
     public ref CUtlVector<ConstantInfo_t> Constants { get; }
-    
+
     public ref CUtlVector<VariableInfo_t> Variables { get; }
-    
+
     public ref CUtlVector<FunctionInfo_t> Functions { get; }
-    
-  // CUtlHashtable< CUtlStringToken, int32 >
+
+    // CUtlHashtable< CUtlStringToken, int32 >
     public SchemaUntypedField ConstantMap { get; }
-    
-  // CUtlHashtable< CUtlStringToken, int32 >
+
+    // CUtlHashtable< CUtlStringToken, int32 >
     public SchemaUntypedField VariableMap { get; }
-    
-  // CUtlHashtable< CUtlStringToken, int32 >
+
+    // CUtlHashtable< CUtlStringToken, int32 >
     public SchemaUntypedField FunctionMap { get; }
 
 

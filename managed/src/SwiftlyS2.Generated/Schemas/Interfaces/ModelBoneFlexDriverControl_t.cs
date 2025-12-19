@@ -14,15 +14,15 @@ public partial interface ModelBoneFlexDriverControl_t : ISchemaClass<ModelBoneFl
     static int ISchemaClass<ModelBoneFlexDriverControl_t>.Size => 32;
     static string? ISchemaClass<ModelBoneFlexDriverControl_t>.ClassName => null;
 
-    
+
     public ref ModelBoneFlexComponent_t BoneComponent { get; }
-    
+
     public string FlexController { get; set; }
-    
+
     public ref uint FlexControllerToken { get; }
-    
+
     public ref float Min { get; }
-    
+
     public ref float Max { get; }
 
 

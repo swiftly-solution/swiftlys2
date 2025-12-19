@@ -14,7 +14,7 @@ public partial interface MovementGaitId_t : ISchemaClass<MovementGaitId_t>
     static int ISchemaClass<MovementGaitId_t>.Size => 8;
     static string? ISchemaClass<MovementGaitId_t>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol Id { get; }
 
 

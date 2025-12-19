@@ -14,27 +14,27 @@ public partial interface CParticleAnimTag : CAnimTagBase, ISchemaClass<CParticle
     static int ISchemaClass<CParticleAnimTag>.Size => 152;
     static string? ISchemaClass<CParticleAnimTag>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ParticleSystem { get; }
-    
+
     public string ParticleSystemName { get; set; }
-    
+
     public string ConfigName { get; set; }
-    
+
     public ref bool DetachFromOwner { get; }
-    
+
     public ref bool Aggregate { get; }
-    
+
     public ref bool StopWhenTagEnds { get; }
-    
+
     public ref bool TagEndStopIsInstant { get; }
-    
+
     public string AttachmentName { get; set; }
-    
+
     public ref ParticleAttachment_t AttachmentType { get; }
-    
+
     public string AttachmentCP1Name { get; set; }
-    
+
     public ref ParticleAttachment_t AttachmentCP1Type { get; }
 
 

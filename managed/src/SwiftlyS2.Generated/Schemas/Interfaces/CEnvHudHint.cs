@@ -14,7 +14,7 @@ public partial interface CEnvHudHint : CPointEntity, ISchemaClass<CEnvHudHint>
     static int ISchemaClass<CEnvHudHint>.Size => 1272;
     static string? ISchemaClass<CEnvHudHint>.ClassName => "env_hudhint";
 
-    
+
     public string Message { get; set; }
 
 

@@ -14,26 +14,26 @@ public partial interface CSelectorUpdateNode : CAnimUpdateNodeBase, ISchemaClass
     static int ISchemaClass<CSelectorUpdateNode>.Size => 184;
     static string? ISchemaClass<CSelectorUpdateNode>.ClassName => null;
 
-    
+
     public ref CUtlVector<CAnimUpdateNodeRef> Children { get; }
-    
+
     public ref CUtlVector<byte> Tags { get; }
-    
+
     public CBlendCurve BlendCurve { get; }
-    
-  // CAnimValue< float32 >
+
+    // CAnimValue< float32 >
     public SchemaUntypedField BlendTime { get; }
-    
+
     public CAnimParamHandle Parameter { get; }
-    
+
     public ref int TagIndex { get; }
-    
+
     public ref SelectorTagBehavior_t TagBehavior { get; }
-    
+
     public ref bool ResetOnChange { get; }
-    
+
     public ref bool LockWhenWaning { get; }
-    
+
     public ref bool SyncCyclesOnChange { get; }
 
 

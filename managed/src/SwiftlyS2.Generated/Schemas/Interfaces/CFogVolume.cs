@@ -14,15 +14,15 @@ public partial interface CFogVolume : CServerOnlyModelEntity, ISchemaClass<CFogV
     static int ISchemaClass<CFogVolume>.Size => 2048;
     static string? ISchemaClass<CFogVolume>.ClassName => "fog_volume";
 
-    
+
     public string FogName { get; set; }
-    
+
     public string PostProcessName { get; set; }
-    
+
     public string ColorCorrectionName { get; set; }
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref bool InFogVolumesList { get; }
 
 

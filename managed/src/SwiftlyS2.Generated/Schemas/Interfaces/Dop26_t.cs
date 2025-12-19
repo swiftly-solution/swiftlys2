@@ -14,7 +14,7 @@ public partial interface Dop26_t : ISchemaClass<Dop26_t>
     static int ISchemaClass<Dop26_t>.Size => 104;
     static string? ISchemaClass<Dop26_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<float> Support { get; }
 
 

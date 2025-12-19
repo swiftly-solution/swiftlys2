@@ -14,12 +14,12 @@ public partial interface CParticleModelInput : CParticleInput, ISchemaClass<CPar
     static int ISchemaClass<CParticleModelInput>.Size => 96;
     static string? ISchemaClass<CParticleModelInput>.ClassName => null;
 
-    
+
     public ref ParticleModelType_t Type { get; }
-    
-  // CParticleNamedValueRef
+
+    // CParticleNamedValueRef
     public SchemaUntypedField NamedValue { get; }
-    
+
     public ref int ControlPoint { get; }
 
 

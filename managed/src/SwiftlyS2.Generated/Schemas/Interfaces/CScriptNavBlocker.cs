@@ -14,7 +14,7 @@ public partial interface CScriptNavBlocker : CFuncNavBlocker, ISchemaClass<CScri
     static int ISchemaClass<CScriptNavBlocker>.Size => 2048;
     static string? ISchemaClass<CScriptNavBlocker>.ClassName => "script_nav_blocker";
 
-    
+
     public ref Vector Extent { get; }
 
 

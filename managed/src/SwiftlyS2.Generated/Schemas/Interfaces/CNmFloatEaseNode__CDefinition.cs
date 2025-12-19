@@ -14,15 +14,15 @@ public partial interface CNmFloatEaseNode__CDefinition : CNmFloatValueNode__CDef
     static int ISchemaClass<CNmFloatEaseNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmFloatEaseNode__CDefinition>.ClassName => null;
 
-    
+
     public ref float EaseTime { get; }
-    
+
     public ref float StartValue { get; }
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref NmEasingOperation_t EasingOp { get; }
-    
+
     public ref bool UseStartValue { get; }
 
 

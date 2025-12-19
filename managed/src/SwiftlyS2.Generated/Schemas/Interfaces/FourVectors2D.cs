@@ -14,9 +14,9 @@ public partial interface FourVectors2D : ISchemaClass<FourVectors2D>
     static int ISchemaClass<FourVectors2D>.Size => 32;
     static string? ISchemaClass<FourVectors2D>.ClassName => null;
 
-    
+
     public ref fltx4 X { get; }
-    
+
     public ref fltx4 Y { get; }
 
 

@@ -14,35 +14,35 @@ public partial interface CAnimDesc : ISchemaClass<CAnimDesc>
     static int ISchemaClass<CAnimDesc>.Size => 464;
     static string? ISchemaClass<CAnimDesc>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public CAnimDesc_Flag Flags { get; }
-    
+
     public ref float Fps { get; }
-    
+
     public CAnimEncodedFrames Data { get; }
-    
+
     public ref CUtlVector<CAnimMovement> MovementArray { get; }
-    
+
     public ref CTransform XInitialOffset { get; }
-    
+
     public ref CUtlVector<CAnimEventDefinition> EventArray { get; }
-    
+
     public ref CUtlVector<CAnimActivity> ActivityArray { get; }
-    
+
     public ref CUtlVector<CAnimLocalHierarchy> HierarchyArray { get; }
-    
+
     public ref float Framestalltime { get; }
-    
+
     public ref Vector RootMin { get; }
-    
+
     public ref Vector RootMax { get; }
-    
+
     public ref CUtlVector<Vector> BoneWorldMin { get; }
-    
+
     public ref CUtlVector<Vector> BoneWorldMax { get; }
-    
+
     public CAnimSequenceParams SequenceParams { get; }
 
 

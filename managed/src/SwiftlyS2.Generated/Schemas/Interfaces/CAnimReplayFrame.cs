@@ -14,15 +14,15 @@ public partial interface CAnimReplayFrame : ISchemaClass<CAnimReplayFrame>
     static int ISchemaClass<CAnimReplayFrame>.Size => 144;
     static string? ISchemaClass<CAnimReplayFrame>.ClassName => null;
 
-    
+
     public ref CUtlVector<CUtlBinaryBlock> InputDataBlocks { get; }
-    
+
     public ref CUtlBinaryBlock InstanceData { get; }
-    
+
     public ref CTransform StartingLocalToWorldTransform { get; }
-    
+
     public ref CTransform LocalToWorldTransform { get; }
-    
+
     public ref float TimeStamp { get; }
 
 

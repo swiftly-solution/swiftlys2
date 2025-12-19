@@ -14,9 +14,9 @@ public partial interface CSequenceTagSpans : ISchemaClass<CSequenceTagSpans>
     static int ISchemaClass<CSequenceTagSpans>.Size => 32;
     static string? ISchemaClass<CSequenceTagSpans>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol SequenceName { get; }
-    
+
     public ref CUtlVector<TagSpan_t> Tags { get; }
 
 

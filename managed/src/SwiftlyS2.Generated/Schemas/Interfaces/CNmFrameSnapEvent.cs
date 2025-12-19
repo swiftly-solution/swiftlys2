@@ -14,7 +14,7 @@ public partial interface CNmFrameSnapEvent : CNmEvent, ISchemaClass<CNmFrameSnap
     static int ISchemaClass<CNmFrameSnapEvent>.Size => 40;
     static string? ISchemaClass<CNmFrameSnapEvent>.ClassName => null;
 
-    
+
     public ref NmFrameSnapEventMode_t FrameSnapMode { get; }
 
 

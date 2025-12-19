@@ -14,17 +14,17 @@ public partial interface C_OP_MovementRigidAttachToCP : CParticleFunctionOperato
     static int ISchemaClass<C_OP_MovementRigidAttachToCP>.Size => 488;
     static string? ISchemaClass<C_OP_MovementRigidAttachToCP>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref int ScaleControlPoint { get; }
-    
+
     public ref int ScaleCPField { get; }
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref bool OffsetLocal { get; }
 
 

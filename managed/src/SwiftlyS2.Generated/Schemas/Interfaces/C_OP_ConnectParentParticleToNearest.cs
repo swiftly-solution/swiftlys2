@@ -14,15 +14,15 @@ public partial interface C_OP_ConnectParentParticleToNearest : CParticleFunction
     static int ISchemaClass<C_OP_ConnectParentParticleToNearest>.Size => 1216;
     static string? ISchemaClass<C_OP_ConnectParentParticleToNearest>.ClassName => null;
 
-    
+
     public ref int FirstControlPoint { get; }
-    
+
     public ref int SecondControlPoint { get; }
-    
+
     public ref bool UseRadius { get; }
-    
+
     public CParticleCollectionFloatInput RadiusScale { get; }
-    
+
     public CParticleCollectionFloatInput ParentRadiusScale { get; }
 
 

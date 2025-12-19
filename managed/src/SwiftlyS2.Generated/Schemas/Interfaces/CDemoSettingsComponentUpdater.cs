@@ -14,7 +14,7 @@ public partial interface CDemoSettingsComponentUpdater : CAnimComponentUpdater, 
     static int ISchemaClass<CDemoSettingsComponentUpdater>.Size => 176;
     static string? ISchemaClass<CDemoSettingsComponentUpdater>.ClassName => null;
 
-    
+
     public CAnimDemoCaptureSettings Settings { get; }
 
 

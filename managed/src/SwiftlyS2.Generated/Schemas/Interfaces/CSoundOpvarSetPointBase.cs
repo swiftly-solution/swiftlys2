@@ -14,23 +14,23 @@ public partial interface CSoundOpvarSetPointBase : CBaseEntity, ISchemaClass<CSo
     static int ISchemaClass<CSoundOpvarSetPointBase>.Size => 1432;
     static string? ISchemaClass<CSoundOpvarSetPointBase>.ClassName => "snd_opvar_set_point_base";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref CHandle<CEntityInstance> Source { get; }
-    
+
     public string SourceEntityName { get; set; }
-    
+
     public ref Vector LastPosition { get; }
-    
+
     public string StackName { get; set; }
-    
+
     public string OperatorName { get; set; }
-    
+
     public string OpvarName { get; set; }
-    
+
     public ref int OpvarIndex { get; }
-    
+
     public ref bool UseAutoCompare { get; }
 
     public void StackNameUpdated();

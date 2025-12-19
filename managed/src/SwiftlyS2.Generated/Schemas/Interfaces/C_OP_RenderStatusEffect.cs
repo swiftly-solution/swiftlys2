@@ -14,19 +14,19 @@ public partial interface C_OP_RenderStatusEffect : CParticleFunctionRenderer, IS
     static int ISchemaClass<C_OP_RenderStatusEffect>.Size => 600;
     static string? ISchemaClass<C_OP_RenderStatusEffect>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureColorWarp { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDetail2 { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDiffuseWarp { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelColorWarp { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelWarp { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureSpecularWarp { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureEnvMap { get; }
 
 

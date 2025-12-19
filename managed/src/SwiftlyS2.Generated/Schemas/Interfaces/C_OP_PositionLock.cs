@@ -14,35 +14,35 @@ public partial interface C_OP_PositionLock : CParticleFunctionOperator, ISchemaC
     static int ISchemaClass<C_OP_PositionLock>.Size => 2712;
     static string? ISchemaClass<C_OP_PositionLock>.ClassName => null;
 
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref float StartTime_min { get; }
-    
+
     public ref float StartTime_max { get; }
-    
+
     public ref float StartTime_exp { get; }
-    
+
     public ref float EndTime_min { get; }
-    
+
     public ref float EndTime_max { get; }
-    
+
     public ref float EndTime_exp { get; }
-    
+
     public ref float Range { get; }
-    
+
     public CParticleCollectionFloatInput RangeBias { get; }
-    
+
     public ref float JumpThreshold { get; }
-    
+
     public ref float PrevPosScale { get; }
-    
+
     public ref bool LockRot { get; }
-    
+
     public CParticleCollectionVecInput Scale { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutputPrev { get; }
 
 

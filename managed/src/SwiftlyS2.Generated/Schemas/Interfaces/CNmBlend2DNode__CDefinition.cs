@@ -14,23 +14,23 @@ public partial interface CNmBlend2DNode__CDefinition : CNmPoseNode__CDefinition,
     static int ISchemaClass<CNmBlend2DNode__CDefinition>.Size => 272;
     static string? ISchemaClass<CNmBlend2DNode__CDefinition>.ClassName => null;
 
-    
-  // CUtlVectorFixedGrowable< int16, 5 >
+
+    // CUtlVectorFixedGrowable< int16, 5 >
     public SchemaUntypedField SourceNodeIndices { get; }
-    
+
     public ref short InputParameterNodeIdx0 { get; }
-    
+
     public ref short InputParameterNodeIdx1 { get; }
-    
-  // CUtlVectorFixedGrowable< Vector2D, 10 >
+
+    // CUtlVectorFixedGrowable< Vector2D, 10 >
     public SchemaUntypedField Values { get; }
-    
-  // CUtlVectorFixedGrowable< uint8, 30 >
+
+    // CUtlVectorFixedGrowable< uint8, 30 >
     public SchemaUntypedField Indices { get; }
-    
-  // CUtlVectorFixedGrowable< uint8, 10 >
+
+    // CUtlVectorFixedGrowable< uint8, 10 >
     public SchemaUntypedField HullIndices { get; }
-    
+
     public ref bool AllowLooping { get; }
 
 

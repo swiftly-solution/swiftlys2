@@ -14,29 +14,29 @@ public partial interface C_OP_PercentageBetweenTransformLerpCPs : CParticleFunct
     static int ISchemaClass<C_OP_PercentageBetweenTransformLerpCPs>.Size => 712;
     static string? ISchemaClass<C_OP_PercentageBetweenTransformLerpCPs>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public CParticleTransformInput TransformStart { get; }
-    
+
     public CParticleTransformInput TransformEnd { get; }
-    
+
     public ref int OutputStartCP { get; }
-    
+
     public ref int OutputStartField { get; }
-    
+
     public ref int OutputEndCP { get; }
-    
+
     public ref int OutputEndField { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool ActiveRange { get; }
-    
+
     public ref bool RadialCheck { get; }
 
 

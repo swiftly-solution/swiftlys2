@@ -14,21 +14,21 @@ public partial interface CSosGroupActionMemberCountEnvelopeSchema : CSosGroupAct
     static int ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema>.Size => 48;
     static string? ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema>.ClassName => null;
 
-    
+
     public ref int BaseCount { get; }
-    
+
     public ref int TargetCount { get; }
-    
+
     public ref float BaseValue { get; }
-    
+
     public ref float TargetValue { get; }
-    
+
     public ref float Attack { get; }
-    
+
     public ref float Decay { get; }
-    
+
     public string ResultVarName { get; set; }
-    
+
     public ref bool SaveToGroup { get; }
 
 

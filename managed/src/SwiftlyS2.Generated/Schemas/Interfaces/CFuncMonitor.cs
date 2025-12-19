@@ -14,23 +14,23 @@ public partial interface CFuncMonitor : CFuncBrush, ISchemaClass<CFuncMonitor>
     static int ISchemaClass<CFuncMonitor>.Size => 2072;
     static string? ISchemaClass<CFuncMonitor>.ClassName => "func_monitor";
 
-    
+
     public string TargetCamera { get; set; }
-    
+
     public ref int ResolutionEnum { get; }
-    
+
     public ref bool RenderShadows { get; }
-    
+
     public ref bool UseUniqueColorTarget { get; }
-    
+
     public string BrushModelName { get; set; }
-    
+
     public ref CHandle<CBaseEntity> TargetCamera1 { get; }
-    
+
     public ref bool Enabled { get; }
-    
+
     public ref bool Draw3DSkybox { get; }
-    
+
     public ref bool StartEnabled { get; }
 
     public void TargetCameraUpdated();

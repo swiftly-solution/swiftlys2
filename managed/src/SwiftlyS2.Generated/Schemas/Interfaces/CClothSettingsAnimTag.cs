@@ -14,13 +14,13 @@ public partial interface CClothSettingsAnimTag : CAnimTagBase, ISchemaClass<CClo
     static int ISchemaClass<CClothSettingsAnimTag>.Size => 112;
     static string? ISchemaClass<CClothSettingsAnimTag>.ClassName => null;
 
-    
+
     public ref float Stiffness { get; }
-    
+
     public ref float EaseIn { get; }
-    
+
     public ref float EaseOut { get; }
-    
+
     public string VertexSet { get; set; }
 
 

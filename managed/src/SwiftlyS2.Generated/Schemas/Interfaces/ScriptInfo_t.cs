@@ -14,15 +14,15 @@ public partial interface ScriptInfo_t : ISchemaClass<ScriptInfo_t>
     static int ISchemaClass<ScriptInfo_t>.Size => 88;
     static string? ISchemaClass<ScriptInfo_t>.ClassName => null;
 
-    
+
     public string Code { get; set; }
-    
+
     public ref CUtlVector<CAnimParamHandle> ParamsModified { get; }
-    
+
     public ref CUtlVector<int> ProxyReadParams { get; }
-    
+
     public ref CUtlVector<int> ProxyWriteParams { get; }
-    
+
     public ref AnimScriptType ScriptType { get; }
 
 

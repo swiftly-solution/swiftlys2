@@ -14,11 +14,11 @@ public partial interface C_OP_GameLiquidSpill : CParticleFunctionRenderer, ISche
     static int ISchemaClass<C_OP_GameLiquidSpill>.Size => 1288;
     static string? ISchemaClass<C_OP_GameLiquidSpill>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput LiquidContentsField { get; }
-    
+
     public CParticleCollectionFloatInput ExpirationTime { get; }
-    
+
     public ParticleAttributeIndex_t AmountAttribute { get; }
 
 

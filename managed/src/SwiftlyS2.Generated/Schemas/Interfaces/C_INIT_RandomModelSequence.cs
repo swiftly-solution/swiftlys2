@@ -14,11 +14,11 @@ public partial interface C_INIT_RandomModelSequence : CParticleFunctionInitializ
     static int ISchemaClass<C_INIT_RandomModelSequence>.Size => 992;
     static string? ISchemaClass<C_INIT_RandomModelSequence>.ClassName => null;
 
-    
+
     public string ActivityName { get; set; }
-    
+
     public string SequenceName { get; set; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
 
 

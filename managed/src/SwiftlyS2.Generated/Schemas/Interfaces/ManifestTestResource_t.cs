@@ -14,9 +14,9 @@ public partial interface ManifestTestResource_t : ISchemaClass<ManifestTestResou
     static int ISchemaClass<ManifestTestResource_t>.Size => 16;
     static string? ISchemaClass<ManifestTestResource_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeManifestTestResource_t> Child { get; }
 
 

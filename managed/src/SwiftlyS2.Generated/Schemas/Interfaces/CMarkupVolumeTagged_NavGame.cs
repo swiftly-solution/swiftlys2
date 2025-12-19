@@ -14,11 +14,11 @@ public partial interface CMarkupVolumeTagged_NavGame : CMarkupVolumeWithRef, ISc
     static int ISchemaClass<CMarkupVolumeTagged_NavGame>.Size => 2120;
     static string? ISchemaClass<CMarkupVolumeTagged_NavGame>.ClassName => "func_nav_markup_game";
 
-    
+
     public ref NavScopeFlags_t Scopes { get; }
-    
+
     public ref bool FloodFillAttribute { get; }
-    
+
     public ref bool SplitNavSpace { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_OP_LagCompensation : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_LagCompensation>.Size => 480;
     static string? ISchemaClass<C_OP_LagCompensation>.ClassName => null;
 
-    
+
     public ref int DesiredVelocityCP { get; }
-    
+
     public ref int LatencyCP { get; }
-    
+
     public ref int LatencyCPField { get; }
-    
+
     public ref int DesiredVelocityCPField { get; }
 
 

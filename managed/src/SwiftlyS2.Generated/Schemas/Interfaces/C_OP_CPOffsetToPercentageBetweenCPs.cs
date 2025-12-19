@@ -14,27 +14,27 @@ public partial interface C_OP_CPOffsetToPercentageBetweenCPs : CParticleFunction
     static int ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs>.Size => 512;
     static string? ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs>.ClassName => null;
 
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float InputBias { get; }
-    
+
     public ref int StartCP { get; }
-    
+
     public ref int EndCP { get; }
-    
+
     public ref int OffsetCP { get; }
-    
+
     public ref int OuputCP { get; }
-    
+
     public ref int InputCP { get; }
-    
+
     public ref bool RadialCheck { get; }
-    
+
     public ref bool ScaleOffset { get; }
-    
+
     public ref Vector Offset { get; }
 
 

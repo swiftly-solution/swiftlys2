@@ -14,29 +14,29 @@ public partial interface PulseScriptedSequenceData_t : ISchemaClass<PulseScripte
     static int ISchemaClass<PulseScriptedSequenceData_t>.Size => 56;
     static string? ISchemaClass<PulseScriptedSequenceData_t>.ClassName => null;
 
-    
+
     public ref int ActorID { get; }
-    
+
     public string PreIdleSequence { get; set; }
-    
+
     public string EntrySequence { get; set; }
-    
+
     public string Sequence { get; set; }
-    
+
     public string ExitSequence { get; set; }
-    
+
     public ref ScriptedMoveTo_t MoveTo { get; }
-    
+
     public ref SharedMovementGait_t MoveToGait { get; }
-    
+
     public ref ScriptedHeldWeaponBehavior_t HeldWeaponBehavior { get; }
-    
+
     public ref bool LoopPreIdleSequence { get; }
-    
+
     public ref bool LoopActionSequence { get; }
-    
+
     public ref bool LoopPostIdleSequence { get; }
-    
+
     public ref bool IgnoreLookAt { get; }
 
 

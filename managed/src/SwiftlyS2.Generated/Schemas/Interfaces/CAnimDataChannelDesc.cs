@@ -14,23 +14,23 @@ public partial interface CAnimDataChannelDesc : ISchemaClass<CAnimDataChannelDes
     static int ISchemaClass<CAnimDataChannelDesc>.Size => 144;
     static string? ISchemaClass<CAnimDataChannelDesc>.ClassName => null;
 
-    
+
     public ref CBufferString ChannelClass { get; }
-    
+
     public ref CBufferString VariableName { get; }
-    
+
     public ref int Flags { get; }
-    
+
     public ref int Type { get; }
-    
+
     public ref CBufferString Grouping { get; }
-    
+
     public ref CBufferString Description { get; }
-    
+
     public ref CUtlVector<CBufferString> ElementNameArray { get; }
-    
+
     public ref CUtlVector<int> ElementIndexArray { get; }
-    
+
     public ref CUtlVector<uint> ElementMaskArray { get; }
 
 

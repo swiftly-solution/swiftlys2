@@ -14,13 +14,13 @@ public partial interface CDecoyProjectile : CBaseCSGrenadeProjectile, ISchemaCla
     static int ISchemaClass<CDecoyProjectile>.Size => 3200;
     static string? ISchemaClass<CDecoyProjectile>.ClassName => "decoy_projectile";
 
-    
+
     public ref int DecoyShotTick { get; }
-    
+
     public ref int ShotsRemaining { get; }
-    
+
     public GameTime_t ExpireTime { get; }
-    
+
     public ref ushort DecoyWeaponDefIndex { get; }
 
     public void DecoyShotTickUpdated();

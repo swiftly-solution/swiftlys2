@@ -14,11 +14,11 @@ public partial interface PhysicsRagdollPose_t : ISchemaClass<PhysicsRagdollPose_
     static int ISchemaClass<PhysicsRagdollPose_t>.Size => 40;
     static string? ISchemaClass<PhysicsRagdollPose_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<CTransform> Transforms { get; }
-    
+
     public ref CHandle<CBaseEntity> Owner { get; }
-    
+
     public ref bool SetFromDebugHistory { get; }
 
     public void TransformsUpdated();

@@ -14,7 +14,7 @@ public partial interface EventAppShutdown_t : ISchemaClass<EventAppShutdown_t>
     static int ISchemaClass<EventAppShutdown_t>.Size => 4;
     static string? ISchemaClass<EventAppShutdown_t>.ClassName => null;
 
-    
+
     public ref int Dummy0 { get; }
 
 

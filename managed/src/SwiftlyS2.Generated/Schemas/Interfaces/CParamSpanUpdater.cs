@@ -14,7 +14,7 @@ public partial interface CParamSpanUpdater : ISchemaClass<CParamSpanUpdater>
     static int ISchemaClass<CParamSpanUpdater>.Size => 24;
     static string? ISchemaClass<CParamSpanUpdater>.ClassName => null;
 
-    
+
     public ref CUtlVector<ParamSpan_t> Spans { get; }
 
 

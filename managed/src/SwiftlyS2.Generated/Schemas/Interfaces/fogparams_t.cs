@@ -14,55 +14,55 @@ public partial interface fogparams_t : ISchemaClass<fogparams_t>
     static int ISchemaClass<fogparams_t>.Size => 104;
     static string? ISchemaClass<fogparams_t>.ClassName => null;
 
-    
+
     public ref Vector DirPrimary { get; }
-    
+
     public ref Color ColorPrimary { get; }
-    
+
     public ref Color ColorSecondary { get; }
-    
+
     public ref Color ColorPrimaryLerpTo { get; }
-    
+
     public ref Color ColorSecondaryLerpTo { get; }
-    
+
     public ref float Start { get; }
-    
+
     public ref float End { get; }
-    
+
     public ref float Farz { get; }
-    
+
     public ref float Maxdensity { get; }
-    
+
     public ref float Exponent { get; }
-    
+
     public ref float HDRColorScale { get; }
-    
+
     public ref float SkyboxFogFactor { get; }
-    
+
     public ref float SkyboxFogFactorLerpTo { get; }
-    
+
     public ref float StartLerpTo { get; }
-    
+
     public ref float EndLerpTo { get; }
-    
+
     public ref float MaxdensityLerpTo { get; }
-    
+
     public GameTime_t Lerptime { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public ref float Blendtobackground { get; }
-    
+
     public ref float Scattering { get; }
-    
+
     public ref float Locallightscale { get; }
-    
+
     public ref bool Enable { get; }
-    
+
     public ref bool Blend { get; }
-    
+
     public ref bool Padding2 { get; }
-    
+
     public ref bool Padding { get; }
 
     public void DirPrimaryUpdated();

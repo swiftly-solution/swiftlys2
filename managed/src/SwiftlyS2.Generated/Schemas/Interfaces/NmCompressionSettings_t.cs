@@ -14,21 +14,21 @@ public partial interface NmCompressionSettings_t : ISchemaClass<NmCompressionSet
     static int ISchemaClass<NmCompressionSettings_t>.Size => 64;
     static string? ISchemaClass<NmCompressionSettings_t>.ClassName => null;
 
-    
+
     public NmCompressionSettings_t__QuantizationRange_t TranslationRangeX { get; }
-    
+
     public NmCompressionSettings_t__QuantizationRange_t TranslationRangeY { get; }
-    
+
     public NmCompressionSettings_t__QuantizationRange_t TranslationRangeZ { get; }
-    
+
     public NmCompressionSettings_t__QuantizationRange_t ScaleRange { get; }
-    
+
     public ref Quaternion ConstantRotation { get; }
-    
+
     public ref bool IsRotationStatic { get; }
-    
+
     public ref bool IsTranslationStatic { get; }
-    
+
     public ref bool IsScaleStatic { get; }
 
 

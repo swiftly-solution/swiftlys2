@@ -14,39 +14,39 @@ public partial interface C_OP_MovementPlaceOnGround : CParticleFunctionOperator,
     static int ISchemaClass<C_OP_MovementPlaceOnGround>.Size => 1024;
     static string? ISchemaClass<C_OP_MovementPlaceOnGround>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput Offset { get; }
-    
+
     public ref float MaxTraceLength { get; }
-    
+
     public ref float Tolerance { get; }
-    
+
     public ref float TraceOffset { get; }
-    
+
     public ref float LerpRate { get; }
-    
+
     public string CollisionGroupName { get; set; }
-    
+
     public ref ParticleTraceSet_t TraceSet { get; }
-    
+
     public ref int RefCP1 { get; }
-    
+
     public ref int RefCP2 { get; }
-    
+
     public ref int LerpCP { get; }
-    
+
     public ref ParticleTraceMissBehavior_t TraceMissBehavior { get; }
-    
+
     public ref bool IncludeShotHull { get; }
-    
+
     public ref bool IncludeWater { get; }
-    
+
     public ref bool SetNormal { get; }
-    
+
     public ref bool ScaleOffset { get; }
-    
+
     public ref int PreserveOffsetCP { get; }
-    
+
     public ref int IgnoreCP { get; }
 
 

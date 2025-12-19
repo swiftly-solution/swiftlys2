@@ -14,7 +14,7 @@ public partial interface FeSourceEdge_t : ISchemaClass<FeSourceEdge_t>
     static int ISchemaClass<FeSourceEdge_t>.Size => 4;
     static string? ISchemaClass<FeSourceEdge_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ushort> Node { get; }
 
 

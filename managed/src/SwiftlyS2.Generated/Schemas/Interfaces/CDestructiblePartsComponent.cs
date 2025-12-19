@@ -14,13 +14,13 @@ public partial interface CDestructiblePartsComponent : ISchemaClass<CDestructibl
     static int ISchemaClass<CDestructiblePartsComponent>.Size => 104;
     static string? ISchemaClass<CDestructiblePartsComponent>.ClassName => null;
 
-    
+
     public ref CNetworkVarChainer __m_pChainEntity { get; }
-    
+
     public ref CUtlVector<ushort> DamageTakenByHitGroup { get; }
-    
+
     public ref CHandle<CBaseModelEntity> Owner { get; }
-    
+
     public ref int LastHitDamageLevel { get; }
 
     public void OwnerUpdated();

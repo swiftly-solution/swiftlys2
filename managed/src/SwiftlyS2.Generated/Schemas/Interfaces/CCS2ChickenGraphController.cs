@@ -14,33 +14,33 @@ public partial interface CCS2ChickenGraphController : CAnimGraphControllerBase, 
     static int ISchemaClass<CCS2ChickenGraphController>.Size => 344;
     static string? ISchemaClass<CCS2ChickenGraphController>.ClassName => null;
 
-    
-  // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField Action { get; }
-    
-  // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
+
+    // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField ActionSubtype { get; }
-    
-  // CAnimGraph2ParamOptionalRef< bool >
+
+    // CAnimGraph2ParamOptionalRef< bool >
     public SchemaUntypedField ActionReset { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField IdleVariation { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField RunVariation { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField PanicVariation { get; }
-    
-  // CAnimGraph2ParamOptionalRef< float32 >
+
+    // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField SquatVariation { get; }
-    
-  // CAnimGraph2ParamOptionalRef< bool >
+
+    // CAnimGraph2ParamOptionalRef< bool >
     public SchemaUntypedField InWater { get; }
-    
+
     public ref bool HasActionCompletedEvent { get; }
-    
+
     public ref bool WaitingForCompletedEvent { get; }
 
 

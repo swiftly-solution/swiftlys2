@@ -14,27 +14,27 @@ public partial interface ClutterSceneObject_t : ISchemaClass<ClutterSceneObject_
     static int ISchemaClass<ClutterSceneObject_t>.Size => 176;
     static string? ISchemaClass<ClutterSceneObject_t>.ClassName => null;
 
-    
+
     public AABB_t Bounds { get; }
-    
+
     public ref ObjectTypeFlags_t Flags { get; }
-    
+
     public ref short Layer { get; }
-    
+
     public ref CUtlVector<Vector> InstancePositions { get; }
-    
+
     public ref CUtlVector<float> InstanceScales { get; }
-    
+
     public ref CUtlVector<Color> InstanceTintSrgb { get; }
-    
+
     public ref CUtlVector<ClutterTile_t> Tiles { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel { get; }
-    
+
     public ref CUtlStringToken MaterialGroup { get; }
-    
+
     public ref float BeginCullSize { get; }
-    
+
     public ref float EndCullSize { get; }
 
 

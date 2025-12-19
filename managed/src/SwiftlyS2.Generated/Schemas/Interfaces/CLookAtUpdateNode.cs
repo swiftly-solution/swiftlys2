@@ -14,17 +14,17 @@ public partial interface CLookAtUpdateNode : CUnaryUpdateNode, ISchemaClass<CLoo
     static int ISchemaClass<CLookAtUpdateNode>.Size => 352;
     static string? ISchemaClass<CLookAtUpdateNode>.ClassName => null;
 
-    
+
     public LookAtOpFixedSettings_t OpFixedSettings { get; }
-    
+
     public ref AnimVectorSource Target { get; }
-    
+
     public CAnimParamHandle ParamIndex { get; }
-    
+
     public CAnimParamHandle WeightParamIndex { get; }
-    
+
     public ref bool ResetChild { get; }
-    
+
     public ref bool LockWhenWaning { get; }
 
 

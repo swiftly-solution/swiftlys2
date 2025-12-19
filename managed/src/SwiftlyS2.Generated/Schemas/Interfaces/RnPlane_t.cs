@@ -14,9 +14,9 @@ public partial interface RnPlane_t : ISchemaClass<RnPlane_t>
     static int ISchemaClass<RnPlane_t>.Size => 16;
     static string? ISchemaClass<RnPlane_t>.ClassName => null;
 
-    
+
     public ref Vector Normal { get; }
-    
+
     public ref float Offset { get; }
 
 

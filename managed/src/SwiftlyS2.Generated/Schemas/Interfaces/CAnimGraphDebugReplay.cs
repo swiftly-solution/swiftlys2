@@ -14,15 +14,15 @@ public partial interface CAnimGraphDebugReplay : ISchemaClass<CAnimGraphDebugRep
     static int ISchemaClass<CAnimGraphDebugReplay>.Size => 112;
     static string? ISchemaClass<CAnimGraphDebugReplay>.ClassName => null;
 
-    
+
     public string AnimGraphFileName { get; set; }
-    
+
     public ref CUtlVector<SchemaUntypedField> FrameList { get; }
-    
+
     public ref int StartIndex { get; }
-    
+
     public ref int WriteIndex { get; }
-    
+
     public ref int FrameCount { get; }
 
 

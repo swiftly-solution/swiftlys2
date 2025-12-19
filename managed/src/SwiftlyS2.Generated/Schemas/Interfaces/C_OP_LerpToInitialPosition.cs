@@ -14,15 +14,15 @@ public partial interface C_OP_LerpToInitialPosition : CParticleFunctionOperator,
     static int ISchemaClass<C_OP_LerpToInitialPosition>.Size => 2936;
     static string? ISchemaClass<C_OP_LerpToInitialPosition>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public CPerParticleFloatInput Interpolation { get; }
-    
+
     public ParticleAttributeIndex_t CacheField { get; }
-    
+
     public CParticleCollectionFloatInput Scale { get; }
-    
+
     public CParticleCollectionVecInput Scale1 { get; }
 
 

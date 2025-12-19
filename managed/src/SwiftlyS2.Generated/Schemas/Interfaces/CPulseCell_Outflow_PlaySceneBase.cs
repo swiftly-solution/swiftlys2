@@ -14,11 +14,11 @@ public partial interface CPulseCell_Outflow_PlaySceneBase : CPulseCell_BaseYield
     static int ISchemaClass<CPulseCell_Outflow_PlaySceneBase>.Size => 240;
     static string? ISchemaClass<CPulseCell_Outflow_PlaySceneBase>.ClassName => null;
 
-    
+
     public CPulse_ResumePoint OnFinished { get; }
-    
+
     public CPulse_ResumePoint OnCanceled { get; }
-    
+
     public ref CUtlVector<CPulse_OutflowConnection> Triggers { get; }
 
 

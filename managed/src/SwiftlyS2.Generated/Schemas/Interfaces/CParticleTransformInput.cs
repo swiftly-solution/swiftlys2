@@ -14,22 +14,22 @@ public partial interface CParticleTransformInput : CParticleInput, ISchemaClass<
     static int ISchemaClass<CParticleTransformInput>.Size => 104;
     static string? ISchemaClass<CParticleTransformInput>.ClassName => null;
 
-    
+
     public ref ParticleTransformType_t Type { get; }
-    
-  // CParticleNamedValueRef
+
+    // CParticleNamedValueRef
     public SchemaUntypedField NamedValue { get; }
-    
+
     public ref bool FollowNamedValue { get; }
-    
+
     public ref bool SupportsDisabled { get; }
-    
+
     public ref bool UseOrientation { get; }
-    
+
     public ref int ControlPoint { get; }
-    
+
     public ref int ControlPointRangeMax { get; }
-    
+
     public ref float EndCPGrowthTime { get; }
 
 

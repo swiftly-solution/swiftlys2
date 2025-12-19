@@ -14,83 +14,83 @@ public partial interface CHostage : CHostageExpresserShim, ISchemaClass<CHostage
     static int ISchemaClass<CHostage>.Size => 11952;
     static string? ISchemaClass<CHostage>.ClassName => "hostage_entity";
 
-    
+
     public CEntityIOOutput OnHostageBeginGrab { get; }
-    
+
     public CEntityIOOutput OnFirstPickedUp { get; }
-    
+
     public CEntityIOOutput OnDroppedNotRescued { get; }
-    
+
     public CEntityIOOutput OnRescued { get; }
-    
+
     public EntitySpottedState_t EntitySpottedState { get; }
-    
+
     public ref int SpotRules { get; }
-    
+
     public ref uint UiHostageSpawnExclusionGroupMask { get; }
-    
+
     public ref uint HostageSpawnRandomFactor { get; }
-    
+
     public ref bool Remove { get; }
-    
+
     public ref Vector Vel { get; }
-    
+
     public ref bool IsRescued { get; }
-    
+
     public ref bool JumpedThisFrame { get; }
-    
+
     public ref int HostageState { get; }
-    
+
     public ref CHandle<CBaseEntity> Leader { get; }
-    
+
     public ref CHandle<CCSPlayerPawnBase> LastLeader { get; }
-    
+
     public CountdownTimer ReuseTimer { get; }
-    
+
     public ref bool HasBeenUsed { get; }
-    
+
     public ref Vector Accel { get; }
-    
+
     public ref bool IsRunning { get; }
-    
+
     public ref bool IsCrouching { get; }
-    
+
     public CountdownTimer JumpTimer { get; }
-    
+
     public ref bool IsWaitingForLeader { get; }
-    
+
     public CountdownTimer RepathTimer { get; }
-    
+
     public CountdownTimer InhibitDoorTimer { get; }
-    
+
     public CountdownTimer InhibitObstacleAvoidanceTimer { get; }
-    
+
     public CountdownTimer WiggleTimer { get; }
-    
+
     public ref bool IsAdjusted { get; }
-    
+
     public ref bool HandsHaveBeenCut { get; }
-    
+
     public ref CHandle<CCSPlayerPawn> HostageGrabber { get; }
-    
+
     public GameTime_t LastGrabTime { get; }
-    
+
     public ref Vector PositionWhenStartedDroppingToGround { get; }
-    
+
     public ref Vector GrabbedPos { get; }
-    
+
     public GameTime_t RescueStartTime { get; }
-    
+
     public GameTime_t GrabSuccessTime { get; }
-    
+
     public GameTime_t DropStartTime { get; }
-    
+
     public ref int ApproachRewardPayouts { get; }
-    
+
     public ref int PickupEventCount { get; }
-    
+
     public ref Vector SpawnGroundPos { get; }
-    
+
     public ref Vector HostageResetPosition { get; }
 
     public void EntitySpottedStateUpdated();

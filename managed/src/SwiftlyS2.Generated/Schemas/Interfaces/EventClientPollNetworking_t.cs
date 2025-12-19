@@ -14,7 +14,7 @@ public partial interface EventClientPollNetworking_t : ISchemaClass<EventClientP
     static int ISchemaClass<EventClientPollNetworking_t>.Size => 4;
     static string? ISchemaClass<EventClientPollNetworking_t>.ClassName => null;
 
-    
+
     public ref int TickCount { get; }
 
 

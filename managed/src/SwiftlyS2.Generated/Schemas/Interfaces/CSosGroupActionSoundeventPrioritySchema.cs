@@ -14,13 +14,13 @@ public partial interface CSosGroupActionSoundeventPrioritySchema : CSosGroupActi
     static int ISchemaClass<CSosGroupActionSoundeventPrioritySchema>.Size => 56;
     static string? ISchemaClass<CSosGroupActionSoundeventPrioritySchema>.ClassName => null;
 
-    
+
     public string PriorityValue { get; set; }
-    
+
     public string PriorityVolumeScalar { get; set; }
-    
+
     public string PriorityContributeButDontRead { get; set; }
-    
+
     public string PriorityReadButDontContribute { get; set; }
 
 

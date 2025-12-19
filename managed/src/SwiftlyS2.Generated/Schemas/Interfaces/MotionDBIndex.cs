@@ -14,7 +14,7 @@ public partial interface MotionDBIndex : ISchemaClass<MotionDBIndex>
     static int ISchemaClass<MotionDBIndex>.Size => 4;
     static string? ISchemaClass<MotionDBIndex>.ClassName => null;
 
-    
+
     public ref uint Index { get; }
 
 

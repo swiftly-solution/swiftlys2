@@ -14,15 +14,15 @@ public partial interface CMorphRectData : ISchemaClass<CMorphRectData>
     static int ISchemaClass<CMorphRectData>.Size => 40;
     static string? ISchemaClass<CMorphRectData>.ClassName => null;
 
-    
+
     public ref short XLeftDst { get; }
-    
+
     public ref short YTopDst { get; }
-    
+
     public ref float UWidthSrc { get; }
-    
+
     public ref float VHeightSrc { get; }
-    
+
     public ref CUtlVector<CMorphBundleData> BundleDatas { get; }
 
 

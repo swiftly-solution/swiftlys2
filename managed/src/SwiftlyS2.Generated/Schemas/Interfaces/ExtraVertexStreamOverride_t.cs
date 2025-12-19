@@ -14,13 +14,13 @@ public partial interface ExtraVertexStreamOverride_t : BaseSceneObjectOverride_t
     static int ISchemaClass<ExtraVertexStreamOverride_t>.Size => 48;
     static string? ISchemaClass<ExtraVertexStreamOverride_t>.ClassName => null;
 
-    
+
     public ref uint SubSceneObject { get; }
-    
+
     public ref uint DrawCallIndex { get; }
-    
+
     public ref MeshDrawPrimitiveFlags_t AdditionalMeshDrawPrimitiveFlags { get; }
-    
+
     public CRenderBufferBinding ExtraBufferBinding { get; }
 
 

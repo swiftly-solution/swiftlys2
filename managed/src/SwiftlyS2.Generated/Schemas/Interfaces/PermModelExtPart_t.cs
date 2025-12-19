@@ -14,13 +14,13 @@ public partial interface PermModelExtPart_t : ISchemaClass<PermModelExtPart_t>
     static int ISchemaClass<PermModelExtPart_t>.Size => 64;
     static string? ISchemaClass<PermModelExtPart_t>.ClassName => null;
 
-    
+
     public ref CTransform Transform { get; }
-    
+
     public string Name { get; set; }
-    
+
     public ref int Parent { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> RefModel { get; }
 
 

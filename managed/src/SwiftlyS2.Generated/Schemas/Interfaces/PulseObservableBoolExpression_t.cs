@@ -14,11 +14,11 @@ public partial interface PulseObservableBoolExpression_t : ISchemaClass<PulseObs
     static int ISchemaClass<PulseObservableBoolExpression_t>.Size => 120;
     static string? ISchemaClass<PulseObservableBoolExpression_t>.ClassName => null;
 
-    
+
     public CPulse_OutflowConnection EvaluateConnection { get; }
-    
+
     public ref CUtlVector<PulseRuntimeVarIndex_t> DependentObservableVars { get; }
-    
+
     public ref CUtlVector<PulseRuntimeBlackboardReferenceIndex_t> DependentObservableBlackboardReferences { get; }
 
 

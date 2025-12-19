@@ -14,11 +14,11 @@ public partial interface PointDefinition_t : ISchemaClass<PointDefinition_t>
     static int ISchemaClass<PointDefinition_t>.Size => 20;
     static string? ISchemaClass<PointDefinition_t>.ClassName => null;
 
-    
+
     public ref int ControlPoint { get; }
-    
+
     public ref bool LocalCoords { get; }
-    
+
     public ref Vector Offset { get; }
 
 

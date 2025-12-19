@@ -14,20 +14,20 @@ public partial interface CAnimParameterManagerUpdater : ISchemaClass<CAnimParame
     static int ISchemaClass<CAnimParameterManagerUpdater>.Size => 256;
     static string? ISchemaClass<CAnimParameterManagerUpdater>.ClassName => null;
 
-    
+
     public ref CUtlVector<SchemaUntypedField> Parameters { get; }
-    
-  // CUtlHashtable< AnimParamID, int32 >
+
+    // CUtlHashtable< AnimParamID, int32 >
     public SchemaUntypedField IdToIndexMap { get; }
-    
-  // CUtlHashtable< CUtlString, int32 >
+
+    // CUtlHashtable< CUtlString, int32 >
     public SchemaUntypedField NameToIndexMap { get; }
-    
+
     public ref CUtlVector<CAnimParamHandle> IndexToHandle { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> AutoResetParams { get; }
-    
-  // CUtlHashtable< CAnimParamHandle, int16 >
+
+    // CUtlHashtable< CAnimParamHandle, int16 >
     public SchemaUntypedField AutoResetMap { get; }
 
 

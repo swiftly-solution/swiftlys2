@@ -14,7 +14,7 @@ public partial interface CNmEntityAttributeIntEvent : CNmEntityAttributeEventBas
     static int ISchemaClass<CNmEntityAttributeIntEvent>.Size => 64;
     static string? ISchemaClass<CNmEntityAttributeIntEvent>.ClassName => null;
 
-    
+
     public ref int IntValue { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface C_INIT_ModelCull : CParticleFunctionInitializer, ISchem
     static int ISchemaClass<C_INIT_ModelCull>.Size => 608;
     static string? ISchemaClass<C_INIT_ModelCull>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref bool BoundBox { get; }
-    
+
     public ref bool CullOutside { get; }
-    
+
     public ref bool UseBones { get; }
-    
+
     public string HitboxSetName { get; set; }
 
 

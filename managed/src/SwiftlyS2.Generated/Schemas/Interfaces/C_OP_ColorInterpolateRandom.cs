@@ -14,17 +14,17 @@ public partial interface C_OP_ColorInterpolateRandom : CParticleFunctionOperator
     static int ISchemaClass<C_OP_ColorInterpolateRandom>.Size => 528;
     static string? ISchemaClass<C_OP_ColorInterpolateRandom>.ClassName => null;
 
-    
+
     public ref Color ColorFadeMin { get; }
-    
+
     public ref Color ColorFadeMax { get; }
-    
+
     public ref float FadeStartTime { get; }
-    
+
     public ref float FadeEndTime { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref bool EaseInOut { get; }
 
 

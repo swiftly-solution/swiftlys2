@@ -14,7 +14,7 @@ public partial interface CSoundStackSave : CLogicalEntity, ISchemaClass<CSoundSt
     static int ISchemaClass<CSoundStackSave>.Size => 1272;
     static string? ISchemaClass<CSoundStackSave>.ClassName => "snd_stack_save";
 
-    
+
     public string StackName { get; set; }
 
 

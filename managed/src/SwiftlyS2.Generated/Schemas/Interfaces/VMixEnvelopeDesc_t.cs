@@ -14,11 +14,11 @@ public partial interface VMixEnvelopeDesc_t : ISchemaClass<VMixEnvelopeDesc_t>
     static int ISchemaClass<VMixEnvelopeDesc_t>.Size => 12;
     static string? ISchemaClass<VMixEnvelopeDesc_t>.ClassName => null;
 
-    
+
     public ref float AttackTimeMS { get; }
-    
+
     public ref float HoldTimeMS { get; }
-    
+
     public ref float ReleaseTimeMS { get; }
 
 

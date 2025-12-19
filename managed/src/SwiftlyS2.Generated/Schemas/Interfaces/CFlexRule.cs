@@ -14,9 +14,9 @@ public partial interface CFlexRule : ISchemaClass<CFlexRule>
     static int ISchemaClass<CFlexRule>.Size => 32;
     static string? ISchemaClass<CFlexRule>.ClassName => null;
 
-    
+
     public ref int Flex { get; }
-    
+
     public ref CUtlVector<CFlexOp> FlexOps { get; }
 
 

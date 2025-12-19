@@ -14,9 +14,9 @@ public partial interface CBodyGroupAnimTag : CAnimTagBase, ISchemaClass<CBodyGro
     static int ISchemaClass<CBodyGroupAnimTag>.Size => 120;
     static string? ISchemaClass<CBodyGroupAnimTag>.ClassName => null;
 
-    
+
     public ref int Priority { get; }
-    
+
     public ref CUtlVector<CBodyGroupSetting> BodyGroupSettings { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface PermModelDataAnimatedMaterialAttribute_t : ISchemaClass
     static int ISchemaClass<PermModelDataAnimatedMaterialAttribute_t>.Size => 16;
     static string? ISchemaClass<PermModelDataAnimatedMaterialAttribute_t>.ClassName => null;
 
-    
+
     public string AttributeName { get; set; }
-    
+
     public ref int NumChannels { get; }
 
 

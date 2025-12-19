@@ -14,19 +14,19 @@ public partial interface FootPinningPoseOpFixedData_t : ISchemaClass<FootPinning
     static int ISchemaClass<FootPinningPoseOpFixedData_t>.Size => 48;
     static string? ISchemaClass<FootPinningPoseOpFixedData_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<FootFixedData_t> FootInfo { get; }
-    
+
     public ref float BlendTime { get; }
-    
+
     public ref float LockBreakDistance { get; }
-    
+
     public ref float MaxLegTwist { get; }
-    
+
     public ref int HipBoneIndex { get; }
-    
+
     public ref bool ApplyLegTwistLimits { get; }
-    
+
     public ref bool ApplyFootRotationLimits { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CActionComponentUpdater : CAnimComponentUpdater, ISchem
     static int ISchemaClass<CActionComponentUpdater>.Size => 72;
     static string? ISchemaClass<CActionComponentUpdater>.ClassName => null;
 
-    
+
     public ref CUtlVector<SchemaUntypedField> Actions { get; }
 
 

@@ -14,41 +14,41 @@ public partial interface C_INIT_StatusEffect : CParticleFunctionInitializer, ISc
     static int ISchemaClass<C_INIT_StatusEffect>.Size => 568;
     static string? ISchemaClass<C_INIT_StatusEffect>.ClassName => null;
 
-    
+
     public ref Detail2Combo_t Detail2Combo { get; }
-    
+
     public ref float Detail2Rotation { get; }
-    
+
     public ref float Detail2Scale { get; }
-    
+
     public ref float Detail2BlendFactor { get; }
-    
+
     public ref float ColorWarpIntensity { get; }
-    
+
     public ref float DiffuseWarpBlendToFull { get; }
-    
+
     public ref float EnvMapIntensity { get; }
-    
+
     public ref float AmbientScale { get; }
-    
+
     public ref Color SpecularColor { get; }
-    
+
     public ref float SpecularScale { get; }
-    
+
     public ref float SpecularExponent { get; }
-    
+
     public ref float SpecularExponentBlendToFull { get; }
-    
+
     public ref float SpecularBlendToFull { get; }
-    
+
     public ref Color RimLightColor { get; }
-    
+
     public ref float RimLightScale { get; }
-    
+
     public ref float ReflectionsTintByBaseBlendToNone { get; }
-    
+
     public ref float MetalnessBlendToFull { get; }
-    
+
     public ref float SelfIllumBlendToFull { get; }
 
 

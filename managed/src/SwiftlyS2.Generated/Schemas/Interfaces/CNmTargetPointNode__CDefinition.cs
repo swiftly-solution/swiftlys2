@@ -14,9 +14,9 @@ public partial interface CNmTargetPointNode__CDefinition : CNmVectorValueNode__C
     static int ISchemaClass<CNmTargetPointNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmTargetPointNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref bool IsWorldSpaceTarget { get; }
 
 

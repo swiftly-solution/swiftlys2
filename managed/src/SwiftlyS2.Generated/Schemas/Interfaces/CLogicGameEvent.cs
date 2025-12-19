@@ -14,7 +14,7 @@ public partial interface CLogicGameEvent : CLogicalEntity, ISchemaClass<CLogicGa
     static int ISchemaClass<CLogicGameEvent>.Size => 1272;
     static string? ISchemaClass<CLogicGameEvent>.ClassName => "logic_game_event";
 
-    
+
     public string EventName { get; set; }
 
 

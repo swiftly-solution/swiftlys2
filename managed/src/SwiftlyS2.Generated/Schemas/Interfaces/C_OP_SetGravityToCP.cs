@@ -14,15 +14,15 @@ public partial interface C_OP_SetGravityToCP : CParticleFunctionPreEmission, ISc
     static int ISchemaClass<C_OP_SetGravityToCP>.Size => 856;
     static string? ISchemaClass<C_OP_SetGravityToCP>.ClassName => null;
 
-    
+
     public ref int CPInput { get; }
-    
+
     public ref int CPOutput { get; }
-    
+
     public CParticleCollectionFloatInput Scale { get; }
-    
+
     public ref bool SetOrientation { get; }
-    
+
     public ref bool SetZDown { get; }
 
 

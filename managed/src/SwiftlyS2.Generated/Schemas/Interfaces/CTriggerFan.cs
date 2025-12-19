@@ -14,55 +14,55 @@ public partial interface CTriggerFan : CBaseTrigger, ISchemaClass<CTriggerFan>
     static int ISchemaClass<CTriggerFan>.Size => 2672;
     static string? ISchemaClass<CTriggerFan>.ClassName => "trigger_fan";
 
-    
+
     public ref Vector FanOriginOffset { get; }
-    
+
     public ref Vector Direction { get; }
-    
+
     public ref bool PushTowardsInfoTarget { get; }
-    
+
     public ref bool PushAwayFromInfoTarget { get; }
-    
+
     public ref Quaternion NoiseDelta { get; }
-    
+
     public ref CHandle<CInfoFan> InfoFan { get; }
-    
+
     public ref float Force { get; }
-    
+
     public ref bool Falloff { get; }
-    
+
     public CountdownTimer RampTimer { get; }
-    
+
     public ref Vector FanOriginWS { get; }
-    
+
     public ref Vector FanOriginLS { get; }
-    
+
     public ref Vector FanEndLS { get; }
-    
+
     public ref Vector NoiseDirectionTarget { get; }
-    
+
     public string InfoFan1 { get; set; }
-    
+
     public ref float RopeForceScale { get; }
-    
+
     public ref float ParticleForceScale { get; }
-    
+
     public ref float PlayerForce { get; }
-    
+
     public ref bool PlayerWindblock { get; }
-    
+
     public ref float NPCForce { get; }
-    
+
     public ref float RampTime { get; }
-    
+
     public ref float NoiseDegrees { get; }
-    
+
     public ref float NoiseSpeed { get; }
-    
+
     public ref bool PushPlayer { get; }
-    
+
     public ref bool RampDown { get; }
-    
+
     public ref int ManagerFanIdx { get; }
 
     public void FanOriginOffsetUpdated();

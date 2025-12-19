@@ -14,13 +14,13 @@ public partial interface CBtActionCombatPositioning : CBtNode, ISchemaClass<CBtA
     static int ISchemaClass<CBtActionCombatPositioning>.Size => 176;
     static string? ISchemaClass<CBtActionCombatPositioning>.ClassName => null;
 
-    
+
     public string SensorInputKey { get; set; }
-    
+
     public string IsAttackingKey { get; set; }
-    
+
     public CountdownTimer ActionTimer { get; }
-    
+
     public ref bool Crouching { get; }
 
 

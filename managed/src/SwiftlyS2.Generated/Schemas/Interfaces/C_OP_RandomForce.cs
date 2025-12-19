@@ -14,9 +14,9 @@ public partial interface C_OP_RandomForce : CParticleFunctionForce, ISchemaClass
     static int ISchemaClass<C_OP_RandomForce>.Size => 504;
     static string? ISchemaClass<C_OP_RandomForce>.ClassName => null;
 
-    
+
     public ref Vector MinForce { get; }
-    
+
     public ref Vector MaxForce { get; }
 
 

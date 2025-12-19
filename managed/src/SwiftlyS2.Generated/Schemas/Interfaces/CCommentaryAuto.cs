@@ -14,11 +14,11 @@ public partial interface CCommentaryAuto : CBaseEntity, ISchemaClass<CCommentary
     static int ISchemaClass<CCommentaryAuto>.Size => 1384;
     static string? ISchemaClass<CCommentaryAuto>.ClassName => "commentary_auto";
 
-    
+
     public CEntityIOOutput OnCommentaryNewGame { get; }
-    
+
     public CEntityIOOutput OnCommentaryMidGame { get; }
-    
+
     public CEntityIOOutput OnCommentaryMultiplayerSpawn { get; }
 
 

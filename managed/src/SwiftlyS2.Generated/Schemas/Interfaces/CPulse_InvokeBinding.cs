@@ -14,16 +14,16 @@ public partial interface CPulse_InvokeBinding : ISchemaClass<CPulse_InvokeBindin
     static int ISchemaClass<CPulse_InvokeBinding>.Size => 176;
     static string? ISchemaClass<CPulse_InvokeBinding>.ClassName => null;
 
-    
+
     public PulseRegisterMap_t RegisterMap { get; }
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField FuncName { get; }
-    
+
     public PulseRuntimeCellIndex_t CellIndex { get; }
-    
+
     public PulseRuntimeChunkIndex_t SrcChunk { get; }
-    
+
     public ref int SrcInstruction { get; }
 
 

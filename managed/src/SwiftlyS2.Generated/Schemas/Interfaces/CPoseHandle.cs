@@ -14,9 +14,9 @@ public partial interface CPoseHandle : ISchemaClass<CPoseHandle>
     static int ISchemaClass<CPoseHandle>.Size => 4;
     static string? ISchemaClass<CPoseHandle>.ClassName => null;
 
-    
+
     public ref ushort Index { get; }
-    
+
     public ref PoseType_t Type { get; }
 
 

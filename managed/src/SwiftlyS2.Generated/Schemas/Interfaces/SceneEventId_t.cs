@@ -14,7 +14,7 @@ public partial interface SceneEventId_t : ISchemaClass<SceneEventId_t>
     static int ISchemaClass<SceneEventId_t>.Size => 4;
     static string? ISchemaClass<SceneEventId_t>.ClassName => null;
 
-    
+
     public ref uint Value { get; }
 
 

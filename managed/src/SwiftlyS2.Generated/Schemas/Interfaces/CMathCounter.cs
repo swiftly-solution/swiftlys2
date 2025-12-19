@@ -14,29 +14,29 @@ public partial interface CMathCounter : CLogicalEntity, ISchemaClass<CMathCounte
     static int ISchemaClass<CMathCounter>.Size => 1520;
     static string? ISchemaClass<CMathCounter>.ClassName => "math_counter";
 
-    
+
     public ref float Min { get; }
-    
+
     public ref float Max { get; }
-    
+
     public ref bool HitMin { get; }
-    
+
     public ref bool HitMax { get; }
-    
+
     public ref bool Disabled { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OutValue { get; }
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnGetValue { get; }
-    
+
     public CEntityIOOutput OnHitMin { get; }
-    
+
     public CEntityIOOutput OnHitMax { get; }
-    
+
     public CEntityIOOutput OnChangedFromMin { get; }
-    
+
     public CEntityIOOutput OnChangedFromMax { get; }
 
 

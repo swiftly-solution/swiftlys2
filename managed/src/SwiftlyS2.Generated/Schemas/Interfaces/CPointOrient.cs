@@ -14,19 +14,19 @@ public partial interface CPointOrient : CBaseEntity, ISchemaClass<CPointOrient>
     static int ISchemaClass<CPointOrient>.Size => 1296;
     static string? ISchemaClass<CPointOrient>.ClassName => "point_orient";
 
-    
+
     public string SpawnTargetName { get; set; }
-    
+
     public ref CHandle<CBaseEntity> Target { get; }
-    
+
     public ref bool Active { get; }
-    
+
     public ref PointOrientGoalDirectionType_t GoalDirection { get; }
-    
+
     public ref PointOrientConstraint_t Constraint { get; }
-    
+
     public ref float MaxTurnRate { get; }
-    
+
     public GameTime_t LastGameTime { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface CMotionMetricEvaluator : ISchemaClass<CMotionMetricEval
     static int ISchemaClass<CMotionMetricEvaluator>.Size => 80;
     static string? ISchemaClass<CMotionMetricEvaluator>.ClassName => null;
 
-    
+
     public ref CUtlVector<float> Means { get; }
-    
+
     public ref CUtlVector<float> StandardDeviations { get; }
-    
+
     public ref float Weight { get; }
-    
+
     public ref int DimensionStartIndex { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface C_INIT_CreateAlongPath : CParticleFunctionInitializer, 
     static int ISchemaClass<C_INIT_CreateAlongPath>.Size => 576;
     static string? ISchemaClass<C_INIT_CreateAlongPath>.ClassName => null;
 
-    
+
     public ref float MaxDistance { get; }
-    
+
     public CPathParameters PathParams { get; }
-    
+
     public ref bool UseRandomCPs { get; }
-    
+
     public ref Vector EndOffset { get; }
-    
+
     public ref bool SaveOffset { get; }
 
 

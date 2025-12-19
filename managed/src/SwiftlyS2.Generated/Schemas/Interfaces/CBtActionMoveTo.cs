@@ -14,33 +14,33 @@ public partial interface CBtActionMoveTo : CBtNode, ISchemaClass<CBtActionMoveTo
     static int ISchemaClass<CBtActionMoveTo>.Size => 232;
     static string? ISchemaClass<CBtActionMoveTo>.ClassName => null;
 
-    
+
     public string DestinationInputKey { get; set; }
-    
+
     public string HidingSpotInputKey { get; set; }
-    
+
     public string ThreatInputKey { get; set; }
-    
+
     public ref Vector Destination { get; }
-    
+
     public ref bool AutoLookAdjust { get; }
-    
+
     public ref bool ComputePath { get; }
-    
+
     public ref float DamagingAreasPenaltyCost { get; }
-    
+
     public CountdownTimer CheckApproximateCornersTimer { get; }
-    
+
     public CountdownTimer CheckHighPriorityItem { get; }
-    
+
     public CountdownTimer RepathTimer { get; }
-    
+
     public ref float ArrivalEpsilon { get; }
-    
+
     public ref float AdditionalArrivalEpsilon2D { get; }
-    
+
     public ref float HidingSpotCheckDistanceThreshold { get; }
-    
+
     public ref float NearestAreaDistanceThreshold { get; }
 
 

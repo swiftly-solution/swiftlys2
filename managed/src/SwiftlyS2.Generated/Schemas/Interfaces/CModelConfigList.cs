@@ -14,11 +14,11 @@ public partial interface CModelConfigList : ISchemaClass<CModelConfigList>
     static int ISchemaClass<CModelConfigList>.Size => 32;
     static string? ISchemaClass<CModelConfigList>.ClassName => null;
 
-    
+
     public ref bool HideMaterialGroupInTools { get; }
-    
+
     public ref bool HideRenderColorInTools { get; }
-    
+
     public ref CUtlVector<PointerTo<CModelConfig>> Configs { get; }
 
 

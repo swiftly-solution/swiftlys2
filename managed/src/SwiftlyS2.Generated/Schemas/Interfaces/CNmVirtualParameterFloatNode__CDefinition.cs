@@ -14,7 +14,7 @@ public partial interface CNmVirtualParameterFloatNode__CDefinition : CNmFloatVal
     static int ISchemaClass<CNmVirtualParameterFloatNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmVirtualParameterFloatNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short ChildNodeIdx { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface FeRigidColliderIndices_t : ISchemaClass<FeRigidCollider
     static int ISchemaClass<FeRigidColliderIndices_t>.Size => 10;
     static string? ISchemaClass<FeRigidColliderIndices_t>.ClassName => null;
 
-    
+
     public ref ushort TaperedCapsuleRigidIndex { get; }
-    
+
     public ref ushort SphereRigidIndex { get; }
-    
+
     public ref ushort BoxRigidIndex { get; }
-    
+
     public ref ushort SDFRigidIndex { get; }
-    
+
     public ref ushort CollisionPlaneIndex { get; }
 
 

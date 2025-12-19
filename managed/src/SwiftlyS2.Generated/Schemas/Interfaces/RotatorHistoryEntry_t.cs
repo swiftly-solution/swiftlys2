@@ -14,9 +14,9 @@ public partial interface RotatorHistoryEntry_t : ISchemaClass<RotatorHistoryEntr
     static int ISchemaClass<RotatorHistoryEntry_t>.Size => 32;
     static string? ISchemaClass<RotatorHistoryEntry_t>.ClassName => null;
 
-    
+
     public ref Quaternion InvChange { get; }
-    
+
     public GameTime_t TimeRotationStart { get; }
 
 

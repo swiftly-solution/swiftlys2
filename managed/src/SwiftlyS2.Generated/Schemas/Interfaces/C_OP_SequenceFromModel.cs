@@ -14,21 +14,21 @@ public partial interface C_OP_SequenceFromModel : CParticleFunctionOperator, ISc
     static int ISchemaClass<C_OP_SequenceFromModel>.Size => 496;
     static string? ISchemaClass<C_OP_SequenceFromModel>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutputAnim { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
 
 

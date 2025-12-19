@@ -14,9 +14,9 @@ public partial interface CMotionNodeBlend1D : CMotionNode, ISchemaClass<CMotionN
     static int ISchemaClass<CMotionNodeBlend1D>.Size => 72;
     static string? ISchemaClass<CMotionNodeBlend1D>.ClassName => null;
 
-    
+
     public ref CUtlVector<MotionBlendItem> BlendItems { get; }
-    
+
     public ref int ParamIndex { get; }
 
 

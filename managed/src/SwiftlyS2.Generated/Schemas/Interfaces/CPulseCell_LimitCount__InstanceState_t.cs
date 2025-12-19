@@ -14,7 +14,7 @@ public partial interface CPulseCell_LimitCount__InstanceState_t : ISchemaClass<C
     static int ISchemaClass<CPulseCell_LimitCount__InstanceState_t>.Size => 4;
     static string? ISchemaClass<CPulseCell_LimitCount__InstanceState_t>.ClassName => null;
 
-    
+
     public ref int CurrentCount { get; }
 
 

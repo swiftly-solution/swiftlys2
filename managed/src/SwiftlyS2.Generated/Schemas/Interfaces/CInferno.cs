@@ -14,53 +14,53 @@ public partial interface CInferno : CBaseModelEntity, ISchemaClass<CInferno>
     static int ISchemaClass<CInferno>.Size => 5216;
     static string? ISchemaClass<CInferno>.ClassName => "inferno";
 
-    
+
     public ISchemaFixedArray<Vector> FirePositions { get; }
-    
+
     public ISchemaFixedArray<Vector> FireParentPositions { get; }
-    
+
     public ISchemaFixedArray<bool> FireIsBurning { get; }
-    
+
     public ISchemaFixedArray<Vector> BurnNormal { get; }
-    
+
     public ref int FireCount { get; }
-    
+
     public ref int InfernoType { get; }
-    
+
     public ref int FireEffectTickBegin { get; }
-    
+
     public ref float FireLifetime { get; }
-    
+
     public ref bool InPostEffectTime { get; }
-    
+
     public ref bool WasCreatedInSmoke { get; }
-    
+
     public Extent Extent { get; }
-    
+
     public CountdownTimer DamageTimer { get; }
-    
+
     public CountdownTimer DamageRampTimer { get; }
-    
+
     public ref Vector SplashVelocity { get; }
-    
+
     public ref Vector InitialSplashVelocity { get; }
-    
+
     public ref Vector StartPos { get; }
-    
+
     public ref Vector OriginalSpawnLocation { get; }
-    
+
     public IntervalTimer ActiveTimer { get; }
-    
+
     public ref int FireSpawnOffset { get; }
-    
+
     public ref int MaxFlames { get; }
-    
+
     public ref int SpreadCount { get; }
-    
+
     public CountdownTimer BookkeepingTimer { get; }
-    
+
     public CountdownTimer NextSpreadTimer { get; }
-    
+
     public ref ushort SourceItemDefIndex { get; }
 
     public void FirePositionsUpdated();

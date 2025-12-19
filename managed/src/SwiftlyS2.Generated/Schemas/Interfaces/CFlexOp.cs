@@ -14,9 +14,9 @@ public partial interface CFlexOp : ISchemaClass<CFlexOp>
     static int ISchemaClass<CFlexOp>.Size => 8;
     static string? ISchemaClass<CFlexOp>.ClassName => null;
 
-    
+
     public ref FlexOpCode_t OpCode { get; }
-    
+
     public ref int Data { get; }
 
 

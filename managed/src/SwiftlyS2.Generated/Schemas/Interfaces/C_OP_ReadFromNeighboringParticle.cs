@@ -14,15 +14,15 @@ public partial interface C_OP_ReadFromNeighboringParticle : CParticleFunctionOpe
     static int ISchemaClass<C_OP_ReadFromNeighboringParticle>.Size => 1216;
     static string? ISchemaClass<C_OP_ReadFromNeighboringParticle>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref int Increment { get; }
-    
+
     public CPerParticleFloatInput DistanceCheck { get; }
-    
+
     public CPerParticleFloatInput Interpolation { get; }
 
 

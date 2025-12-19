@@ -14,25 +14,25 @@ public partial interface CAimCameraUpdateNode : CUnaryUpdateNode, ISchemaClass<C
     static int ISchemaClass<CAimCameraUpdateNode>.Size => 192;
     static string? ISchemaClass<CAimCameraUpdateNode>.ClassName => null;
 
-    
+
     public CAnimParamHandle ParameterPosition { get; }
-    
+
     public CAnimParamHandle ParameterOrientation { get; }
-    
+
     public CAnimParamHandle ParameterSpineRotationWeight { get; }
-    
+
     public CAnimParamHandle ParameterPelvisOffset { get; }
-    
+
     public CAnimParamHandle ParameterUseIK { get; }
-    
+
     public CAnimParamHandle ParameterCameraOnly { get; }
-    
+
     public CAnimParamHandle ParameterWeaponDepenetrationDistance { get; }
-    
+
     public CAnimParamHandle ParameterWeaponDepenetrationDelta { get; }
-    
+
     public CAnimParamHandle ParameterCameraClearanceDistance { get; }
-    
+
     public AimCameraOpFixedSettings_t OpFixedSettings { get; }
 
 

@@ -14,87 +14,87 @@ public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModel
     static int ISchemaClass<CBaseModelEntity>.Size => 2008;
     static string? ISchemaClass<CBaseModelEntity>.ClassName => "basemodelentity";
 
-    
+
     public CRenderComponent? CRenderComponent { get; }
-    
+
     public CHitboxComponent CHitboxComponent { get; }
-    
+
     public ref HitGroup_t DestructiblePartInitialStateDestructed0 { get; }
-    
+
     public ref HitGroup_t DestructiblePartInitialStateDestructed1 { get; }
-    
+
     public ref HitGroup_t DestructiblePartInitialStateDestructed2 { get; }
-    
+
     public ref HitGroup_t DestructiblePartInitialStateDestructed3 { get; }
-    
+
     public ref HitGroup_t DestructiblePartInitialStateDestructed4 { get; }
-    
+
     public ref int DestructiblePartInitialStateDestructed0_PartIndex { get; }
-    
+
     public ref int DestructiblePartInitialStateDestructed1_PartIndex { get; }
-    
+
     public ref int DestructiblePartInitialStateDestructed2_PartIndex { get; }
-    
+
     public ref int DestructiblePartInitialStateDestructed3_PartIndex { get; }
-    
+
     public ref int DestructiblePartInitialStateDestructed4_PartIndex { get; }
-    
+
     public CDestructiblePartsComponent? DestructiblePartsSystemComponent { get; }
-    
+
     public ref HitGroup_t LastHitGroup { get; }
-    
+
     public ref CGlobalSymbol LastDamageSourceName { get; }
-    
+
     public ref Vector LastDamagePosition { get; }
-    
+
     public GameTime_t DissolveStartTime { get; }
-    
+
     public CEntityIOOutput OnIgnite { get; }
-    
+
     public ref RenderMode_t RenderMode { get; }
-    
+
     public ref RenderFx_t RenderFX { get; }
-    
+
     public ref bool AllowFadeInView { get; }
-    
+
     public ref Color Render { get; }
-    
+
     public ref CUtlVector<EntityRenderAttribute_t> RenderAttributes { get; }
-    
+
     public ref bool RenderToCubemaps { get; }
-    
+
     public ref bool NoInterpolate { get; }
-    
+
     public CCollisionProperty Collision { get; }
-    
+
     public CGlowProperty Glow { get; }
-    
+
     public ref float GlowBackfaceMult { get; }
-    
+
     public ref float FadeMinDist { get; }
-    
+
     public ref float FadeMaxDist { get; }
-    
+
     public ref float FadeScale { get; }
-    
+
     public ref float ShadowStrength { get; }
-    
+
     public ref byte ObjectCulling { get; }
-    
+
     public ref int AddDecal { get; }
-    
+
     public ref Vector DecalPosition { get; }
-    
+
     public ref Vector DecalForwardAxis { get; }
-    
+
     public ref DecalMode_t DecalMode { get; }
-    
+
     public ref DecalMode_t RequiredDecalMode { get; }
-    
+
     public ref CUtlVector<CHandle<CBaseModelEntity>> ConfigEntitiesToPropagateMaterialDecalsTo { get; }
-    
+
     public CNetworkViewOffsetVector ViewOffset { get; }
-    
+
     public ISchemaFixedArray<uint> DisabledHitGroups { get; }
 
     public void CRenderComponentUpdated();

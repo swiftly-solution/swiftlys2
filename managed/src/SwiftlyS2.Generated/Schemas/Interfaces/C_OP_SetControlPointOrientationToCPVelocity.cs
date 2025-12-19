@@ -14,9 +14,9 @@ public partial interface C_OP_SetControlPointOrientationToCPVelocity : CParticle
     static int ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity>.Size => 480;
     static string? ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity>.ClassName => null;
 
-    
+
     public ref int CPInput { get; }
-    
+
     public ref int CPOutput { get; }
 
 

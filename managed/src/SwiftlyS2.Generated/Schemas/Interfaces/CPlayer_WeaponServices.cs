@@ -14,15 +14,15 @@ public partial interface CPlayer_WeaponServices : CPlayerPawnComponent, ISchemaC
     static int ISchemaClass<CPlayer_WeaponServices>.Size => 168;
     static string? ISchemaClass<CPlayer_WeaponServices>.ClassName => null;
 
-    
+
     public ref CUtlVector<CHandle<CBasePlayerWeapon>> MyWeapons { get; }
-    
+
     public ref CHandle<CBasePlayerWeapon> ActiveWeapon { get; }
-    
+
     public ref CHandle<CBasePlayerWeapon> LastWeapon { get; }
-    
+
     public ISchemaFixedArray<ushort> Ammo { get; }
-    
+
     public ref bool PreventWeaponPickup { get; }
 
     public void MyWeaponsUpdated();

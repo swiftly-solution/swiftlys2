@@ -14,10 +14,10 @@ public partial interface CNmLegacyEvent : CNmEvent, ISchemaClass<CNmLegacyEvent>
     static int ISchemaClass<CNmLegacyEvent>.Size => 64;
     static string? ISchemaClass<CNmLegacyEvent>.ClassName => null;
 
-    
+
     public string AnimEventClassName { get; set; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField KV { get; }
 
 

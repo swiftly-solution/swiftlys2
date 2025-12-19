@@ -14,19 +14,19 @@ public partial interface C_OP_MaintainSequentialPath : CParticleFunctionOperator
     static int ISchemaClass<C_OP_MaintainSequentialPath>.Size => 560;
     static string? ISchemaClass<C_OP_MaintainSequentialPath>.ClassName => null;
 
-    
+
     public ref float MaxDistance { get; }
-    
+
     public ref float NumToAssign { get; }
-    
+
     public ref float CohesionStrength { get; }
-    
+
     public ref float Tolerance { get; }
-    
+
     public ref bool Loop { get; }
-    
+
     public ref bool UseParticleCount { get; }
-    
+
     public CPathParameters PathParams { get; }
 
 

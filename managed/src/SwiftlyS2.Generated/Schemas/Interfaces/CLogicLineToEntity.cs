@@ -14,14 +14,14 @@ public partial interface CLogicLineToEntity : CLogicalEntity, ISchemaClass<CLogi
     static int ISchemaClass<CLogicLineToEntity>.Size => 1320;
     static string? ISchemaClass<CLogicLineToEntity>.ClassName => "logic_lineto";
 
-    
-  // CEntityOutputTemplate< Vector >
+
+    // CEntityOutputTemplate< Vector >
     public SchemaUntypedField Line { get; }
-    
+
     public string SourceName { get; set; }
-    
+
     public ref CHandle<CBaseEntity> StartEntity { get; }
-    
+
     public ref CHandle<CBaseEntity> EndEntity { get; }
 
 

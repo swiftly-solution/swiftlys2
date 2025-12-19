@@ -14,17 +14,17 @@ public partial interface CLogicBranchList : CLogicalEntity, ISchemaClass<CLogicB
     static int ISchemaClass<CLogicBranchList>.Size => 1544;
     static string? ISchemaClass<CLogicBranchList>.ClassName => "logic_branch_listener";
 
-    
+
     public string LogicBranchNames { get; set; }
-    
+
     public ref CUtlVector<CHandle<CBaseEntity>> LogicBranchList { get; }
-    
+
     public ref CLogicBranchList__LogicBranchListenerLastState_t LastState { get; }
-    
+
     public CEntityIOOutput OnAllTrue { get; }
-    
+
     public CEntityIOOutput OnAllFalse { get; }
-    
+
     public CEntityIOOutput OnMixed { get; }
 
 

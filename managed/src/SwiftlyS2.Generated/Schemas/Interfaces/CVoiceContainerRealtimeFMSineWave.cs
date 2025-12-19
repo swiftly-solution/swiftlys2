@@ -14,11 +14,11 @@ public partial interface CVoiceContainerRealtimeFMSineWave : CVoiceContainerBase
     static int ISchemaClass<CVoiceContainerRealtimeFMSineWave>.Size => 200;
     static string? ISchemaClass<CVoiceContainerRealtimeFMSineWave>.ClassName => null;
 
-    
+
     public ref float CarrierFrequency { get; }
-    
+
     public ref float ModulatorFrequency { get; }
-    
+
     public ref float ModulatorAmount { get; }
 
 

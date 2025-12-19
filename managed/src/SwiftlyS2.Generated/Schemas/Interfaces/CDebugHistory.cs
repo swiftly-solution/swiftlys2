@@ -14,7 +14,7 @@ public partial interface CDebugHistory : CBaseEntity, ISchemaClass<CDebugHistory
     static int ISchemaClass<CDebugHistory>.Size => 4101336;
     static string? ISchemaClass<CDebugHistory>.ClassName => "env_debughistory";
 
-    
+
     public ref int NpcEvents { get; }
 
 

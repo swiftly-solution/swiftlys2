@@ -14,15 +14,15 @@ public partial interface CLogicRelay : CLogicalEntity, ISchemaClass<CLogicRelay>
     static int ISchemaClass<CLogicRelay>.Size => 1272;
     static string? ISchemaClass<CLogicRelay>.ClassName => "logic_relay";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref bool WaitForRefire { get; }
-    
+
     public ref bool TriggerOnce { get; }
-    
+
     public ref bool FastRetrigger { get; }
-    
+
     public ref bool PassthoughCaller { get; }
 
 

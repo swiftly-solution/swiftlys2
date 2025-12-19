@@ -14,15 +14,15 @@ public partial interface CConstantForceController : ISchemaClass<CConstantForceC
     static int ISchemaClass<CConstantForceController>.Size => 64;
     static string? ISchemaClass<CConstantForceController>.ClassName => null;
 
-    
+
     public ref Vector Linear { get; }
-    
-  // RotationVector
+
+    // RotationVector
     public SchemaUntypedField Angular { get; }
-    
+
     public ref Vector LinearSave { get; }
-    
-  // RotationVector
+
+    // RotationVector
     public SchemaUntypedField AngularSave { get; }
 
 

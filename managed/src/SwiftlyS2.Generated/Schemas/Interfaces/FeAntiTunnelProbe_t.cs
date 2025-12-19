@@ -14,21 +14,21 @@ public partial interface FeAntiTunnelProbe_t : ISchemaClass<FeAntiTunnelProbe_t>
     static int ISchemaClass<FeAntiTunnelProbe_t>.Size => 28;
     static string? ISchemaClass<FeAntiTunnelProbe_t>.ClassName => null;
 
-    
+
     public ref float Weight { get; }
-    
+
     public ref uint Flags { get; }
-    
+
     public ref ushort ProbeNode { get; }
-    
+
     public ref ushort Count { get; }
-    
+
     public ref uint Begin { get; }
-    
+
     public ref float ActivationDistance { get; }
-    
+
     public ref float CurvatureRadius { get; }
-    
+
     public ref float Bias { get; }
 
 

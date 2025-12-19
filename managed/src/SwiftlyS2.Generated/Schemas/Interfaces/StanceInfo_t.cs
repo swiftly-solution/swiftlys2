@@ -14,9 +14,9 @@ public partial interface StanceInfo_t : ISchemaClass<StanceInfo_t>
     static int ISchemaClass<StanceInfo_t>.Size => 16;
     static string? ISchemaClass<StanceInfo_t>.ClassName => null;
 
-    
+
     public ref Vector Position { get; }
-    
+
     public ref float Direction { get; }
 
 

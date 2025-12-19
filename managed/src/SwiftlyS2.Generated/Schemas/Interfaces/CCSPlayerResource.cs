@@ -14,25 +14,25 @@ public partial interface CCSPlayerResource : CBaseEntity, ISchemaClass<CCSPlayer
     static int ISchemaClass<CCSPlayerResource>.Size => 1416;
     static string? ISchemaClass<CCSPlayerResource>.ClassName => "cs_player_manager";
 
-    
+
     public ISchemaFixedArray<bool> HostageAlive { get; }
-    
+
     public ISchemaFixedArray<bool> IsHostageFollowingSomeone { get; }
-    
+
     public ISchemaFixedArray<uint> HostageEntityIDs { get; }
-    
+
     public ref Vector BombsiteCenterA { get; }
-    
+
     public ref Vector BombsiteCenterB { get; }
-    
+
     public ISchemaFixedArray<int> HostageRescueX { get; }
-    
+
     public ISchemaFixedArray<int> HostageRescueY { get; }
-    
+
     public ISchemaFixedArray<int> HostageRescueZ { get; }
-    
+
     public ref bool EndMatchNextMapAllVoted { get; }
-    
+
     public ref bool FoundGoalPositions { get; }
 
     public void HostageAliveUpdated();

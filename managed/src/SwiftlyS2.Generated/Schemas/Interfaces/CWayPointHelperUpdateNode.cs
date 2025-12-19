@@ -14,15 +14,15 @@ public partial interface CWayPointHelperUpdateNode : CUnaryUpdateNode, ISchemaCl
     static int ISchemaClass<CWayPointHelperUpdateNode>.Size => 128;
     static string? ISchemaClass<CWayPointHelperUpdateNode>.ClassName => null;
 
-    
+
     public ref float StartCycle { get; }
-    
+
     public ref float EndCycle { get; }
-    
+
     public ref bool OnlyGoals { get; }
-    
+
     public ref bool PreventOvershoot { get; }
-    
+
     public ref bool PreventUndershoot { get; }
 
 

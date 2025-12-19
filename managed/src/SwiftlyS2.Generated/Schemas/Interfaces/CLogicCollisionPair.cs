@@ -14,17 +14,17 @@ public partial interface CLogicCollisionPair : CLogicalEntity, ISchemaClass<CLog
     static int ISchemaClass<CLogicCollisionPair>.Size => 1288;
     static string? ISchemaClass<CLogicCollisionPair>.ClassName => "logic_collision_pair";
 
-    
+
     public string NameAttach1 { get; set; }
-    
+
     public string NameAttach2 { get; set; }
-    
+
     public ref bool IncludeHierarchy { get; }
-    
+
     public ref bool SupportMultipleEntitiesWithSameName { get; }
-    
+
     public ref bool Disabled { get; }
-    
+
     public ref bool Succeeded { get; }
 
 

@@ -14,31 +14,31 @@ public partial interface C_OP_SetFromCPSnapshot : CParticleFunctionOperator, ISc
     static int ISchemaClass<C_OP_SetFromCPSnapshot>.Size => 1616;
     static string? ISchemaClass<C_OP_SetFromCPSnapshot>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public string StrSnapshotSubset { get; set; }
-    
+
     public ParticleAttributeIndex_t AttributeToRead { get; }
-    
+
     public ParticleAttributeIndex_t AttributeToWrite { get; }
-    
+
     public ref int LocalSpaceCP { get; }
-    
+
     public ref bool Random { get; }
-    
+
     public ref bool Reverse { get; }
-    
+
     public ref int RandomSeed { get; }
-    
+
     public CParticleCollectionFloatInput SnapShotStartPoint { get; }
-    
+
     public CParticleCollectionFloatInput SnapShotIncrement { get; }
-    
+
     public CPerParticleFloatInput Interpolation { get; }
-    
+
     public ref bool SubSample { get; }
-    
+
     public ref bool Prev { get; }
 
 

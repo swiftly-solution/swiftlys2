@@ -14,17 +14,17 @@ public partial interface CLogicDistanceAutosave : CLogicalEntity, ISchemaClass<C
     static int ISchemaClass<CLogicDistanceAutosave>.Size => 1288;
     static string? ISchemaClass<CLogicDistanceAutosave>.ClassName => "logic_distance_autosave";
 
-    
+
     public string TargetEntity { get; set; }
-    
+
     public ref float DistanceToPlayer { get; }
-    
+
     public ref bool ForceNewLevelUnit { get; }
-    
+
     public ref bool CheckCough { get; }
-    
+
     public ref bool ThinkDangerous { get; }
-    
+
     public ref float DangerousTime { get; }
 
 

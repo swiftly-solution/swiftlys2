@@ -14,21 +14,21 @@ public partial interface CPathKeyFrame : CLogicalEntity, ISchemaClass<CPathKeyFr
     static int ISchemaClass<CPathKeyFrame>.Size => 1360;
     static string? ISchemaClass<CPathKeyFrame>.ClassName => "keyframe_track";
 
-    
+
     public ref Vector Origin { get; }
-    
+
     public ref QAngle Angles { get; }
-    
+
     public ref Quaternion Angle { get; }
-    
+
     public string NextKey { get; set; }
-    
+
     public ref float NextTime { get; }
-    
+
     public CPathKeyFrame? NextKey1 { get; }
-    
+
     public CPathKeyFrame? PrevKey { get; }
-    
+
     public ref float MoveSpeed { get; }
 
 

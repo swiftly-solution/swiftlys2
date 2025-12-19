@@ -14,7 +14,7 @@ public partial interface CSymbolAnimParameter : CConcreteAnimParameter, ISchemaC
     static int ISchemaClass<CSymbolAnimParameter>.Size => 136;
     static string? ISchemaClass<CSymbolAnimParameter>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol DefaultValue { get; }
 
 

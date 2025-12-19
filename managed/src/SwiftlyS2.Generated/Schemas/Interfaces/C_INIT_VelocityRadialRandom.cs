@@ -14,21 +14,21 @@ public partial interface C_INIT_VelocityRadialRandom : CParticleFunctionInitiali
     static int ISchemaClass<C_INIT_VelocityRadialRandom>.Size => 4672;
     static string? ISchemaClass<C_INIT_VelocityRadialRandom>.ClassName => null;
 
-    
+
     public ref bool PerParticleCenter { get; }
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public CPerParticleVecInput Position { get; }
-    
+
     public CPerParticleVecInput Fwd { get; }
-    
+
     public CPerParticleFloatInput SpeedMin { get; }
-    
+
     public CPerParticleFloatInput SpeedMax { get; }
-    
+
     public ref Vector LocalCoordinateSystemSpeedScale { get; }
-    
+
     public ref bool IgnoreDelta { get; }
 
 

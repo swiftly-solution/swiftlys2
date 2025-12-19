@@ -14,15 +14,15 @@ public partial interface CNmAimCSNode__CDefinition : CNmPassthroughNode__CDefini
     static int ISchemaClass<CNmAimCSNode__CDefinition>.Size => 40;
     static string? ISchemaClass<CNmAimCSNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short VerticalAngleNodeIdx { get; }
-    
+
     public ref short HorizontalAngleNodeIdx { get; }
-    
+
     public ref short WeaponCategoryNodeIdx { get; }
-    
+
     public ref short EnabledNodeIdx { get; }
-    
+
     public ref float BlendTimeSeconds { get; }
 
 

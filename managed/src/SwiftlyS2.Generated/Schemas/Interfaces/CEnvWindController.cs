@@ -14,27 +14,27 @@ public partial interface CEnvWindController : CBaseEntity, ISchemaClass<CEnvWind
     static int ISchemaClass<CEnvWindController>.Size => 1640;
     static string? ISchemaClass<CEnvWindController>.ClassName => "env_wind_controller";
 
-    
+
     public CEnvWindShared EnvWindShared { get; }
-    
+
     public ref float DirectionVariation { get; }
-    
+
     public ref float SpeedVariation { get; }
-    
+
     public ref float Turbulence { get; }
-    
+
     public ref float VolumeHalfExtentXY { get; }
-    
+
     public ref float VolumeHalfExtentZ { get; }
-    
+
     public ref int VolumeResolutionXY { get; }
-    
+
     public ref int VolumeResolutionZ { get; }
-    
+
     public ref int ClipmapLevels { get; }
-    
+
     public ref bool IsMaster { get; }
-    
+
     public ref bool FirstTime { get; }
 
     public void EnvWindSharedUpdated();

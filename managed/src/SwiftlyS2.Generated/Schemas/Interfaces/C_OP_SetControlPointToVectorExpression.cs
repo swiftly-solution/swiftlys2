@@ -14,17 +14,17 @@ public partial interface C_OP_SetControlPointToVectorExpression : CParticleFunct
     static int ISchemaClass<C_OP_SetControlPointToVectorExpression>.Size => 4296;
     static string? ISchemaClass<C_OP_SetControlPointToVectorExpression>.ClassName => null;
 
-    
+
     public ref VectorExpressionType_t Expression { get; }
-    
+
     public ref int OutputCP { get; }
-    
+
     public CParticleCollectionVecInput Input1 { get; }
-    
+
     public CParticleCollectionVecInput Input2 { get; }
-    
+
     public CPerParticleFloatInput Lerp { get; }
-    
+
     public ref bool NormalizedOutput { get; }
 
 

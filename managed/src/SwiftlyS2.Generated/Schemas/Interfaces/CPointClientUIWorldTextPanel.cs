@@ -14,7 +14,7 @@ public partial interface CPointClientUIWorldTextPanel : CPointClientUIWorldPanel
     static int ISchemaClass<CPointClientUIWorldTextPanel>.Size => 3040;
     static string? ISchemaClass<CPointClientUIWorldTextPanel>.ClassName => "point_clientui_world_text_panel";
 
-    
+
     public string MessageText { get; set; }
 
     public void MessageTextUpdated();

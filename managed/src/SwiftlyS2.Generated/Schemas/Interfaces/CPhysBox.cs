@@ -14,35 +14,35 @@ public partial interface CPhysBox : CBreakable, ISchemaClass<CPhysBox>
     static int ISchemaClass<CPhysBox>.Size => 2504;
     static string? ISchemaClass<CPhysBox>.ClassName => "func_physbox";
 
-    
+
     public ref int DamageType { get; }
-    
+
     public ref int DamageToEnableMotion { get; }
-    
+
     public ref float ForceToEnableMotion { get; }
-    
+
     public ref Vector HoverPosePosition { get; }
-    
+
     public ref QAngle HoverPoseAngles { get; }
-    
+
     public ref bool NotSolidToWorld { get; }
-    
+
     public ref bool EnableUseOutput { get; }
-    
+
     public ref HoverPoseFlags_t HoverPoseFlags { get; }
-    
+
     public ref float TouchOutputPerEntityDelay { get; }
-    
+
     public CEntityIOOutput OnDamaged { get; }
-    
+
     public CEntityIOOutput OnAwakened { get; }
-    
+
     public CEntityIOOutput OnMotionEnabled { get; }
-    
+
     public CEntityIOOutput OnPlayerUse { get; }
-    
+
     public CEntityIOOutput OnStartTouch { get; }
-    
+
     public ref CHandle<CBasePlayerPawn> CarryingPlayer { get; }
 
 

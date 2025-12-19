@@ -14,17 +14,17 @@ public partial interface C_OP_RestartAfterDuration : CParticleFunctionOperator, 
     static int ISchemaClass<C_OP_RestartAfterDuration>.Size => 488;
     static string? ISchemaClass<C_OP_RestartAfterDuration>.ClassName => null;
 
-    
+
     public ref float DurationMin { get; }
-    
+
     public ref float DurationMax { get; }
-    
+
     public ref int CP { get; }
-    
+
     public ref int CPField { get; }
-    
+
     public ref int ChildGroupID { get; }
-    
+
     public ref bool OnlyChildren { get; }
 
 

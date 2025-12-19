@@ -14,13 +14,13 @@ public partial interface C_OP_InheritFromPeerSystem : CParticleFunctionOperator,
     static int ISchemaClass<C_OP_InheritFromPeerSystem>.Size => 480;
     static string? ISchemaClass<C_OP_InheritFromPeerSystem>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ref int Increment { get; }
-    
+
     public ref int GroupID { get; }
 
 

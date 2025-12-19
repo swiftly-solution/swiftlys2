@@ -14,29 +14,29 @@ public partial interface CMoverUpdateNode : CUnaryUpdateNode, ISchemaClass<CMove
     static int ISchemaClass<CMoverUpdateNode>.Size => 176;
     static string? ISchemaClass<CMoverUpdateNode>.ClassName => null;
 
-    
+
     public CAnimInputDamping Damping { get; }
-    
+
     public ref AnimValueSource FacingTarget { get; }
-    
+
     public CAnimParamHandle MoveVecParam { get; }
-    
+
     public CAnimParamHandle MoveHeadingParam { get; }
-    
+
     public CAnimParamHandle TurnToFaceParam { get; }
-    
+
     public ref float TurnToFaceOffset { get; }
-    
+
     public ref float TurnToFaceLimit { get; }
-    
+
     public ref bool Additive { get; }
-    
+
     public ref bool ApplyMovement { get; }
-    
+
     public ref bool OrientMovement { get; }
-    
+
     public ref bool ApplyRotation { get; }
-    
+
     public ref bool LimitOnly { get; }
 
 

@@ -14,21 +14,21 @@ public partial interface CAttachment : ISchemaClass<CAttachment>
     static int ISchemaClass<CAttachment>.Size => 144;
     static string? ISchemaClass<CAttachment>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public string InfluenceNames { get; set; }
-    
+
     public ISchemaFixedArray<Quaternion> InfluenceRotations { get; }
-    
+
     public ISchemaFixedArray<Vector> InfluenceOffsets { get; }
-    
+
     public ISchemaFixedArray<float> InfluenceWeights { get; }
-    
+
     public ISchemaFixedArray<bool> InfluenceRootTransform { get; }
-    
+
     public ref byte Influences { get; }
-    
+
     public ref bool IgnoreRotation { get; }
 
 

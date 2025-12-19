@@ -14,7 +14,7 @@ public partial interface C_INIT_RadiusFromCPObject : CParticleFunctionInitialize
     static int ISchemaClass<C_INIT_RadiusFromCPObject>.Size => 480;
     static string? ISchemaClass<C_INIT_RadiusFromCPObject>.ClassName => null;
 
-    
+
     public ref int ControlPoint { get; }
 
 

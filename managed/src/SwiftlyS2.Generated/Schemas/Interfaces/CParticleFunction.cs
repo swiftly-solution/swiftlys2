@@ -14,37 +14,37 @@ public partial interface CParticleFunction : ISchemaClass<CParticleFunction>
     static int ISchemaClass<CParticleFunction>.Size => 464;
     static string? ISchemaClass<CParticleFunction>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput OpStrength { get; }
-    
+
     public ref ParticleEndcapMode_t OpEndCapState { get; }
-    
+
     public ref float OpStartFadeInTime { get; }
-    
+
     public ref float OpEndFadeInTime { get; }
-    
+
     public ref float OpStartFadeOutTime { get; }
-    
+
     public ref float OpEndFadeOutTime { get; }
-    
+
     public ref float OpFadeOscillatePeriod { get; }
-    
+
     public ref bool NormalizeToStopTime { get; }
-    
+
     public ref float OpTimeOffsetMin { get; }
-    
+
     public ref float OpTimeOffsetMax { get; }
-    
+
     public ref int OpTimeOffsetSeed { get; }
-    
+
     public ref int OpTimeScaleSeed { get; }
-    
+
     public ref float OpTimeScaleMin { get; }
-    
+
     public ref float OpTimeScaleMax { get; }
-    
+
     public ref bool DisableOperator { get; }
-    
+
     public string Notes { get; set; }
 
 

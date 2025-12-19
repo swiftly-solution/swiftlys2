@@ -14,21 +14,21 @@ public partial interface FeMorphLayerDepr_t : ISchemaClass<FeMorphLayerDepr_t>
     static int ISchemaClass<FeMorphLayerDepr_t>.Size => 144;
     static string? ISchemaClass<FeMorphLayerDepr_t>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public ref uint NameHash { get; }
-    
+
     public ref CUtlVector<ushort> Nodes { get; }
-    
+
     public ref CUtlVector<Vector> InitPos { get; }
-    
+
     public ref CUtlVector<float> Gravity { get; }
-    
+
     public ref CUtlVector<float> GoalStrength { get; }
-    
+
     public ref CUtlVector<float> GoalDamping { get; }
-    
+
     public ref uint Flags { get; }
 
 

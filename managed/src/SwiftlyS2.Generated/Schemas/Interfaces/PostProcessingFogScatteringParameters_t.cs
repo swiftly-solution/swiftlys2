@@ -14,15 +14,15 @@ public partial interface PostProcessingFogScatteringParameters_t : ISchemaClass<
     static int ISchemaClass<PostProcessingFogScatteringParameters_t>.Size => 20;
     static string? ISchemaClass<PostProcessingFogScatteringParameters_t>.ClassName => null;
 
-    
+
     public ref float Radius { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public ref float CubemapScale { get; }
-    
+
     public ref float VolumetricScale { get; }
-    
+
     public ref float GradientScale { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface C_OP_PinRopeSegmentParticleToParent : CParticleFunction
     static int ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.Size => 1208;
     static string? ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.ClassName => null;
 
-    
+
     public ref ParticleSelection_t ParticleSelection { get; }
-    
+
     public CParticleCollectionFloatInput ParticleNumber { get; }
-    
+
     public CPerParticleFloatInput Interpolation { get; }
 
 

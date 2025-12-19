@@ -14,11 +14,11 @@ public partial interface C_OP_OrientTo2dDirection : CParticleFunctionOperator, I
     static int ISchemaClass<C_OP_OrientTo2dDirection>.Size => 480;
     static string? ISchemaClass<C_OP_OrientTo2dDirection>.ClassName => null;
 
-    
+
     public ref float RotOffset { get; }
-    
+
     public ref float SpinStrength { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
 
 

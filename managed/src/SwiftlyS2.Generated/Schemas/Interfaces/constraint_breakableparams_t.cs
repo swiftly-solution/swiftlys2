@@ -14,15 +14,15 @@ public partial interface constraint_breakableparams_t : ISchemaClass<constraint_
     static int ISchemaClass<constraint_breakableparams_t>.Size => 24;
     static string? ISchemaClass<constraint_breakableparams_t>.ClassName => null;
 
-    
+
     public ref float Strength { get; }
-    
+
     public ref float ForceLimit { get; }
-    
+
     public ref float TorqueLimit { get; }
-    
+
     public ISchemaFixedArray<float> BodyMassScale { get; }
-    
+
     public ref bool IsActive { get; }
 
 

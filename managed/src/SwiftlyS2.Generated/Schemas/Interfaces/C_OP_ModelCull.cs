@@ -14,15 +14,15 @@ public partial interface C_OP_ModelCull : CParticleFunctionOperator, ISchemaClas
     static int ISchemaClass<C_OP_ModelCull>.Size => 600;
     static string? ISchemaClass<C_OP_ModelCull>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref bool BoundBox { get; }
-    
+
     public ref bool CullOutside { get; }
-    
+
     public ref bool UseBones { get; }
-    
+
     public string HitboxSetName { get; set; }
 
 

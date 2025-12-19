@@ -14,9 +14,9 @@ public partial interface CFootPositionMetricEvaluator : CMotionMetricEvaluator, 
     static int ISchemaClass<CFootPositionMetricEvaluator>.Size => 112;
     static string? ISchemaClass<CFootPositionMetricEvaluator>.ClassName => null;
 
-    
+
     public ref CUtlVector<int> FootIndices { get; }
-    
+
     public ref bool IgnoreSlope { get; }
 
 

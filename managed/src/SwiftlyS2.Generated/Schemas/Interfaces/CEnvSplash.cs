@@ -14,7 +14,7 @@ public partial interface CEnvSplash : CPointEntity, ISchemaClass<CEnvSplash>
     static int ISchemaClass<CEnvSplash>.Size => 1272;
     static string? ISchemaClass<CEnvSplash>.ClassName => "env_splash";
 
-    
+
     public ref float Scale { get; }
 
 

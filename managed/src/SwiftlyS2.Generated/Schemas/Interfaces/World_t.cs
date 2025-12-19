@@ -14,13 +14,13 @@ public partial interface World_t : ISchemaClass<World_t>
     static int ISchemaClass<World_t>.Size => 216;
     static string? ISchemaClass<World_t>.ClassName => null;
 
-    
+
     public WorldBuilderParams_t BuilderParams { get; }
-    
+
     public ref CUtlVector<NodeData_t> WorldNodes { get; }
-    
+
     public BakedLightingInfo_t WorldLightingInfo { get; }
-    
+
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> EntityLumps { get; }
 
 

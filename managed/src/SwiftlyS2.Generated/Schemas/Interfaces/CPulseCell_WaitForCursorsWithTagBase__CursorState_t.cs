@@ -14,8 +14,8 @@ public partial interface CPulseCell_WaitForCursorsWithTagBase__CursorState_t : I
     static int ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t>.Size => 48;
     static string? ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField TagName { get; }
 
 

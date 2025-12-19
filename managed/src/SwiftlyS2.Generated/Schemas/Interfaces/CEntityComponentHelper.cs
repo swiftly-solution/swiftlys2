@@ -14,13 +14,13 @@ public partial interface CEntityComponentHelper : ISchemaClass<CEntityComponentH
     static int ISchemaClass<CEntityComponentHelper>.Size => 40;
     static string? ISchemaClass<CEntityComponentHelper>.ClassName => null;
 
-    
+
     public ref uint Flags { get; }
-    
+
     public EntComponentInfo_t? Info { get; }
-    
+
     public ref int Priority { get; }
-    
+
     public CEntityComponentHelper? Next { get; }
 
 

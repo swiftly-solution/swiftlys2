@@ -14,15 +14,15 @@ public partial interface CNmFloatSwitchNode__CDefinition : CNmFloatValueNode__CD
     static int ISchemaClass<CNmFloatSwitchNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmFloatSwitchNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SwitchValueNodeIdx { get; }
-    
+
     public ref short TrueValueNodeIdx { get; }
-    
+
     public ref short FalseValueNodeIdx { get; }
-    
+
     public ref float FalseValue { get; }
-    
+
     public ref float TrueValue { get; }
 
 

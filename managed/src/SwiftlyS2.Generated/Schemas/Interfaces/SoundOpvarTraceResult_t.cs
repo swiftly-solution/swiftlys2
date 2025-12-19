@@ -14,11 +14,11 @@ public partial interface SoundOpvarTraceResult_t : ISchemaClass<SoundOpvarTraceR
     static int ISchemaClass<SoundOpvarTraceResult_t>.Size => 20;
     static string? ISchemaClass<SoundOpvarTraceResult_t>.ClassName => null;
 
-    
+
     public ref Vector Pos { get; }
-    
+
     public ref bool DidHit { get; }
-    
+
     public ref float DistSqrToCenter { get; }
 
 

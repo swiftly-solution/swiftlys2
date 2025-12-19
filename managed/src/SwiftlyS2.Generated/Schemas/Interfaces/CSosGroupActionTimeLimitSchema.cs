@@ -14,7 +14,7 @@ public partial interface CSosGroupActionTimeLimitSchema : CSosGroupActionSchema,
     static int ISchemaClass<CSosGroupActionTimeLimitSchema>.Size => 16;
     static string? ISchemaClass<CSosGroupActionTimeLimitSchema>.ClassName => null;
 
-    
+
     public ref float MaxDuration { get; }
 
 

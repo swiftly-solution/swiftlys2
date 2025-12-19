@@ -14,19 +14,19 @@ public partial interface CNmRootMotionOverrideNode__CDefinition : CNmPassthrough
     static int ISchemaClass<CNmRootMotionOverrideNode__CDefinition>.Size => 48;
     static string? ISchemaClass<CNmRootMotionOverrideNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short DesiredMovingVelocityNodeIdx { get; }
-    
+
     public ref short DesiredFacingDirectionNodeIdx { get; }
-    
+
     public ref short LinearVelocityLimitNodeIdx { get; }
-    
+
     public ref short AngularVelocityLimitNodeIdx { get; }
-    
+
     public ref float MaxLinearVelocity { get; }
-    
+
     public ref float MaxAngularVelocityRadians { get; }
-    
+
     public CNmBitFlags OverrideFlags { get; }
 
 

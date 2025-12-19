@@ -14,23 +14,23 @@ public partial interface C_INIT_SetHitboxToClosest : CParticleFunctionInitialize
     static int ISchemaClass<C_INIT_SetHitboxToClosest>.Size => 2712;
     static string? ISchemaClass<C_INIT_SetHitboxToClosest>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref int DesiredHitbox { get; }
-    
+
     public CParticleCollectionVecInput HitBoxScale { get; }
-    
+
     public string HitboxSetName { get; set; }
-    
+
     public ref bool UseBones { get; }
-    
+
     public ref bool UseClosestPointOnHitbox { get; }
-    
+
     public ref ClosestPointTestType_t TestType { get; }
-    
+
     public CParticleCollectionFloatInput HybridRatio { get; }
-    
+
     public ref bool UpdatePosition { get; }
 
 

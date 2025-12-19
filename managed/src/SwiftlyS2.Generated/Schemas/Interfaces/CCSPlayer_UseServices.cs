@@ -14,11 +14,11 @@ public partial interface CCSPlayer_UseServices : CPlayer_UseServices, ISchemaCla
     static int ISchemaClass<CCSPlayer_UseServices>.Size => 80;
     static string? ISchemaClass<CCSPlayer_UseServices>.ClassName => null;
 
-    
+
     public ref CHandle<CBaseEntity> LastKnownUseEntity { get; }
-    
+
     public GameTime_t LastUseTimeStamp { get; }
-    
+
     public GameTime_t TimeLastUsedWindow { get; }
 
 

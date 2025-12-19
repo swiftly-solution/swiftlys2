@@ -14,10 +14,10 @@ public partial interface CStateActionUpdater : ISchemaClass<CStateActionUpdater>
     static int ISchemaClass<CStateActionUpdater>.Size => 16;
     static string? ISchemaClass<CStateActionUpdater>.ClassName => null;
 
-    
-  // CSmartPtr< CAnimActionUpdater >
+
+    // CSmartPtr< CAnimActionUpdater >
     public SchemaUntypedField Action { get; }
-    
+
     public ref StateActionBehavior Behavior { get; }
 
 

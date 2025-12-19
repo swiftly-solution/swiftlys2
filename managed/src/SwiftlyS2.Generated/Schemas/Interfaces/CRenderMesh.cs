@@ -14,20 +14,20 @@ public partial interface CRenderMesh : ISchemaClass<CRenderMesh>
     static int ISchemaClass<CRenderMesh>.Size => 496;
     static string? ISchemaClass<CRenderMesh>.ClassName => null;
 
-    
-  // CUtlLeanVectorFixedGrowable< CSceneObjectData, 1 >
+
+    // CUtlLeanVectorFixedGrowable< CSceneObjectData, 1 >
     public SchemaUntypedField SceneObjects { get; }
-    
+
     public ref CUtlLeanVector<PointerTo<CBaseConstraint>, int> Constraints { get; }
-    
+
     public CRenderSkeleton Skeleton { get; }
-    
+
     public ref bool UseUV2ForCharting { get; }
-    
+
     public ref bool EmbeddedMapMesh { get; }
-    
+
     public DynamicMeshDeformParams_t MeshDeformParams { get; }
-    
+
     public CRenderGroom? GroomData { get; }
 
 

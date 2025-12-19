@@ -14,11 +14,11 @@ public partial interface FeNodeReverseOffset_t : ISchemaClass<FeNodeReverseOffse
     static int ISchemaClass<FeNodeReverseOffset_t>.Size => 16;
     static string? ISchemaClass<FeNodeReverseOffset_t>.ClassName => null;
 
-    
+
     public ref Vector Offset { get; }
-    
+
     public ref ushort BoneCtrl { get; }
-    
+
     public ref ushort TargetNode { get; }
 
 

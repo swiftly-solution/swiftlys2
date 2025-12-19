@@ -14,35 +14,35 @@ public partial interface CDamageRecord : ISchemaClass<CDamageRecord>
     static int ISchemaClass<CDamageRecord>.Size => 120;
     static string? ISchemaClass<CDamageRecord>.ClassName => null;
 
-    
+
     public ref CHandle<CCSPlayerPawn> PlayerDamager { get; }
-    
+
     public ref CHandle<CCSPlayerPawn> PlayerRecipient { get; }
-    
+
     public ref CHandle<CCSPlayerController> PlayerControllerDamager { get; }
-    
+
     public ref CHandle<CCSPlayerController> PlayerControllerRecipient { get; }
-    
+
     public string PlayerDamagerName { get; set; }
-    
+
     public string PlayerRecipientName { get; set; }
-    
+
     public ref ulong DamagerXuid { get; }
-    
+
     public ref ulong RecipientXuid { get; }
-    
+
     public ref float BulletsDamage { get; }
-    
+
     public ref float Damage { get; }
-    
+
     public ref float ActualHealthRemoved { get; }
-    
+
     public ref int NumHits { get; }
-    
+
     public ref int LastBulletUpdate { get; }
-    
+
     public ref bool IsOtherEnemy { get; }
-    
+
     public ref EKillTypes_t KillType { get; }
 
     public void PlayerDamagerUpdated();

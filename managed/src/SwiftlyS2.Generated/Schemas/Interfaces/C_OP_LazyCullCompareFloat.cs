@@ -14,11 +14,11 @@ public partial interface C_OP_LazyCullCompareFloat : CParticleFunctionOperator, 
     static int ISchemaClass<C_OP_LazyCullCompareFloat>.Size => 1568;
     static string? ISchemaClass<C_OP_LazyCullCompareFloat>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput Comparsion1 { get; }
-    
+
     public CPerParticleFloatInput Comparsion2 { get; }
-    
+
     public CPerParticleFloatInput CullTime { get; }
 
 

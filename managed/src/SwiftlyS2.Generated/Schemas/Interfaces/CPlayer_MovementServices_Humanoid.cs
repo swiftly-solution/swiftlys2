@@ -14,31 +14,31 @@ public partial interface CPlayer_MovementServices_Humanoid : CPlayer_MovementSer
     static int ISchemaClass<CPlayer_MovementServices_Humanoid>.Size => 640;
     static string? ISchemaClass<CPlayer_MovementServices_Humanoid>.ClassName => null;
 
-    
+
     public ref float StepSoundTime { get; }
-    
+
     public ref float FallVelocity { get; }
-    
+
     public ref bool InCrouch { get; }
-    
+
     public ref uint CrouchState { get; }
-    
+
     public GameTime_t CrouchTransitionStartTime { get; }
-    
+
     public ref bool Ducked { get; }
-    
+
     public ref bool Ducking { get; }
-    
+
     public ref bool InDuckJump { get; }
-    
+
     public ref Vector GroundNormal { get; }
-    
+
     public ref float SurfaceFriction { get; }
-    
+
     public ref CUtlStringToken SurfaceProps { get; }
-    
+
     public ref int Stepside { get; }
-    
+
     public ref Vector SmoothedVelocity { get; }
 
     public void FallVelocityUpdated();

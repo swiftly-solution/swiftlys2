@@ -14,13 +14,13 @@ public partial interface CEnvFade : CLogicalEntity, ISchemaClass<CEnvFade>
     static int ISchemaClass<CEnvFade>.Size => 1320;
     static string? ISchemaClass<CEnvFade>.ClassName => "env_fade";
 
-    
+
     public ref Color FadeColor { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public ref float HoldDuration { get; }
-    
+
     public CEntityIOOutput OnBeginFade { get; }
 
     public void FadeColorUpdated();

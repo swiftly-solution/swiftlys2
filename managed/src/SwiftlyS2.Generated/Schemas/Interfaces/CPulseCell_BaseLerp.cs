@@ -14,7 +14,7 @@ public partial interface CPulseCell_BaseLerp : CPulseCell_BaseYieldingInflow, IS
     static int ISchemaClass<CPulseCell_BaseLerp>.Size => 144;
     static string? ISchemaClass<CPulseCell_BaseLerp>.ClassName => null;
 
-    
+
     public CPulse_ResumePoint WakeResume { get; }
 
 

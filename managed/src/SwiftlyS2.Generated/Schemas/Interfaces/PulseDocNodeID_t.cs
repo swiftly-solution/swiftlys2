@@ -14,7 +14,7 @@ public partial interface PulseDocNodeID_t : ISchemaClass<PulseDocNodeID_t>
     static int ISchemaClass<PulseDocNodeID_t>.Size => 4;
     static string? ISchemaClass<PulseDocNodeID_t>.ClassName => null;
 
-    
+
     public ref int Value { get; }
 
 

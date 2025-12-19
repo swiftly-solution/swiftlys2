@@ -14,17 +14,17 @@ public partial interface CSAdditionalPerRoundStats_t : ISchemaClass<CSAdditional
     static int ISchemaClass<CSAdditionalPerRoundStats_t>.Size => 24;
     static string? ISchemaClass<CSAdditionalPerRoundStats_t>.ClassName => null;
 
-    
+
     public ref int NumChickensKilled { get; }
-    
+
     public ref int KillsWhileBlind { get; }
-    
+
     public ref int BombCarrierkills { get; }
-    
+
     public ref float BurnDamageInflicted { get; }
-    
+
     public ref float BlastDamageInflicted { get; }
-    
+
     public ref int Dinks { get; }
 
 

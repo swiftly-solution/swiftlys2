@@ -14,15 +14,15 @@ public partial interface RagdollCreationParams_t : ISchemaClass<RagdollCreationP
     static int ISchemaClass<RagdollCreationParams_t>.Size => 24;
     static string? ISchemaClass<RagdollCreationParams_t>.ClassName => null;
 
-    
+
     public ref Vector Force { get; }
-    
+
     public ref int ForceBone { get; }
-    
+
     public ref bool ForceCurrentWorldTransform { get; }
-    
+
     public ref bool UseLRURetirement { get; }
-    
+
     public ref int HealthToGrant { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface CInfoFan : CPointEntity, ISchemaClass<CInfoFan>
     static int ISchemaClass<CInfoFan>.Size => 1352;
     static string? ISchemaClass<CInfoFan>.ClassName => "info_trigger_fan";
 
-    
+
     public ref float FanForceMaxRadius { get; }
-    
+
     public ref float FanForceMinRadius { get; }
-    
+
     public ref float CurveDistRange { get; }
-    
+
     public string FanForceCurveString { get; set; }
 
     public void FanForceMaxRadiusUpdated();

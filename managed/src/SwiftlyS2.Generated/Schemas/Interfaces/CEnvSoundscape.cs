@@ -14,27 +14,27 @@ public partial interface CEnvSoundscape : CBaseEntity, ISchemaClass<CEnvSoundsca
     static int ISchemaClass<CEnvSoundscape>.Size => 1424;
     static string? ISchemaClass<CEnvSoundscape>.ClassName => "env_soundscape";
 
-    
+
     public CEntityIOOutput OnPlay { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public string SoundEventName { get; set; }
-    
+
     public ref bool OverrideWithEvent { get; }
-    
+
     public ref int SoundscapeIndex { get; }
-    
+
     public ref int SoundscapeEntityListId { get; }
-    
+
     public string PositionNames { get; set; }
-    
+
     public ref CHandle<CEnvSoundscape> ProxySoundscape { get; }
-    
+
     public ref bool Disabled { get; }
-    
+
     public string SoundscapeName { get; set; }
-    
+
     public ref uint SoundEventHash { get; }
 
 

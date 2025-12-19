@@ -14,7 +14,7 @@ public partial interface CCSPlace : CServerOnlyModelEntity, ISchemaClass<CCSPlac
     static int ISchemaClass<CCSPlace>.Size => 2040;
     static string? ISchemaClass<CCSPlace>.ClassName => "env_cs_place";
 
-    
+
     public string Name { get; set; }
 
 

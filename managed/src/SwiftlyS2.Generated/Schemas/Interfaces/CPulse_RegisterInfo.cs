@@ -14,17 +14,17 @@ public partial interface CPulse_RegisterInfo : ISchemaClass<CPulse_RegisterInfo>
     static int ISchemaClass<CPulse_RegisterInfo>.Size => 96;
     static string? ISchemaClass<CPulse_RegisterInfo>.ClassName => null;
 
-    
+
     public PulseRuntimeRegisterIndex_t Reg { get; }
-    
-  // CPulseValueFullType
+
+    // CPulseValueFullType
     public SchemaUntypedField Type { get; }
-    
-  // CKV3MemberNameWithStorage
+
+    // CKV3MemberNameWithStorage
     public SchemaUntypedField OriginName { get; }
-    
+
     public ref int WrittenByInstruction { get; }
-    
+
     public ref int LastReadByInstruction { get; }
 
 

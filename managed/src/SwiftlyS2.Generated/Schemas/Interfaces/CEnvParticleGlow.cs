@@ -14,15 +14,15 @@ public partial interface CEnvParticleGlow : CParticleSystem, ISchemaClass<CEnvPa
     static int ISchemaClass<CEnvParticleGlow>.Size => 3432;
     static string? ISchemaClass<CEnvParticleGlow>.ClassName => "env_particle_glow";
 
-    
+
     public ref float AlphaScale { get; }
-    
+
     public ref float RadiusScale { get; }
-    
+
     public ref float SelfIllumScale { get; }
-    
+
     public ref Color ColorTint { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureOverride { get; }
 
     public void AlphaScaleUpdated();

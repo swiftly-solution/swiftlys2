@@ -14,27 +14,27 @@ public partial interface CGlowProperty : ISchemaClass<CGlowProperty>
     static int ISchemaClass<CGlowProperty>.Size => 88;
     static string? ISchemaClass<CGlowProperty>.ClassName => null;
 
-    
+
     public ref Vector GlowColor { get; }
-    
+
     public ref int GlowType { get; }
-    
+
     public ref int GlowTeam { get; }
-    
+
     public ref int GlowRange { get; }
-    
+
     public ref int GlowRangeMin { get; }
-    
+
     public ref Color GlowColorOverride { get; }
-    
+
     public ref bool Flashing { get; }
-    
+
     public ref float GlowTime { get; }
-    
+
     public ref float GlowStartTime { get; }
-    
+
     public ref bool EligibleForScreenHighlight { get; }
-    
+
     public ref bool Glowing { get; }
 
     public void GlowTypeUpdated();

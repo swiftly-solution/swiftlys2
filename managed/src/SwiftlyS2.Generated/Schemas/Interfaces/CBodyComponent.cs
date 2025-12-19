@@ -14,9 +14,9 @@ public partial interface CBodyComponent : CEntityComponent, ISchemaClass<CBodyCo
     static int ISchemaClass<CBodyComponent>.Size => 120;
     static string? ISchemaClass<CBodyComponent>.ClassName => null;
 
-    
+
     public CGameSceneNode? SceneNode { get; }
-    
+
     public ref CNetworkVarChainer __m_pChainEntity { get; }
 
 

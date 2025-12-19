@@ -14,9 +14,9 @@ public partial interface CPulseCell_WaitForObservable : CPulseCell_BaseYieldingI
     static int ISchemaClass<CPulseCell_WaitForObservable>.Size => 264;
     static string? ISchemaClass<CPulseCell_WaitForObservable>.ClassName => null;
 
-    
+
     public PulseObservableBoolExpression_t Condition { get; }
-    
+
     public CPulse_ResumePoint OnTrue { get; }
 
 

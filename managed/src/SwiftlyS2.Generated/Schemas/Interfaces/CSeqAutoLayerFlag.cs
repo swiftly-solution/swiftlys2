@@ -14,21 +14,21 @@ public partial interface CSeqAutoLayerFlag : ISchemaClass<CSeqAutoLayerFlag>
     static int ISchemaClass<CSeqAutoLayerFlag>.Size => 8;
     static string? ISchemaClass<CSeqAutoLayerFlag>.ClassName => null;
 
-    
+
     public ref bool Post { get; }
-    
+
     public ref bool Spline { get; }
-    
+
     public ref bool XFade { get; }
-    
+
     public ref bool NoBlend { get; }
-    
+
     public ref bool Local { get; }
-    
+
     public ref bool Pose { get; }
-    
+
     public ref bool FetchFrame { get; }
-    
+
     public ref bool Subtract { get; }
 
 

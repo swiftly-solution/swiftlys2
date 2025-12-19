@@ -14,17 +14,17 @@ public partial interface C_INIT_RandomNamedModelElement : CParticleFunctionIniti
     static int ISchemaClass<C_INIT_RandomNamedModelElement>.Size => 512;
     static string? ISchemaClass<C_INIT_RandomNamedModelElement>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-    
+
     public ref CUtlVector<CUtlString> Names { get; }
-    
+
     public ref bool Shuffle { get; }
-    
+
     public ref bool Linear { get; }
-    
+
     public ref bool ModelFromRenderer { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
 
 

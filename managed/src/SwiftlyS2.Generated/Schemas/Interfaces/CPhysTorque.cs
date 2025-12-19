@@ -14,7 +14,7 @@ public partial interface CPhysTorque : CPhysForce, ISchemaClass<CPhysTorque>
     static int ISchemaClass<CPhysTorque>.Size => 1376;
     static string? ISchemaClass<CPhysTorque>.ClassName => "phys_torque";
 
-    
+
     public ref Vector Axis { get; }
 
 

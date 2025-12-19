@@ -14,9 +14,9 @@ public partial interface AnimationSnapshot_t : AnimationSnapshotBase_t, ISchemaC
     static int ISchemaClass<AnimationSnapshot_t>.Size => 288;
     static string? ISchemaClass<AnimationSnapshot_t>.ClassName => null;
 
-    
+
     public ref int EntIndex { get; }
-    
+
     public string ModelName { get; set; }
 
 

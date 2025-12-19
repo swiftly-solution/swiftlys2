@@ -14,20 +14,20 @@ public partial interface CVoiceContainerStaticAdditiveSynth__CHarmonic : ISchema
     static int ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic>.Size => 104;
     static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic>.ClassName => null;
 
-    
+
     public ref EWaveform Waveform { get; }
-    
+
     public ref EMidiNote Fundamental { get; }
-    
+
     public ref int Octave { get; }
-    
+
     public ref float Cents { get; }
-    
+
     public ref float Phase { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Curve { get; }
-    
+
     public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance VolumeScaling { get; }
 
 

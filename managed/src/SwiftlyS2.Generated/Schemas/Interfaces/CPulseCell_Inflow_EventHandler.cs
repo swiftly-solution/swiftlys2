@@ -14,8 +14,8 @@ public partial interface CPulseCell_Inflow_EventHandler : CPulseCell_Inflow_Base
     static int ISchemaClass<CPulseCell_Inflow_EventHandler>.Size => 144;
     static string? ISchemaClass<CPulseCell_Inflow_EventHandler>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField EventName { get; }
 
 

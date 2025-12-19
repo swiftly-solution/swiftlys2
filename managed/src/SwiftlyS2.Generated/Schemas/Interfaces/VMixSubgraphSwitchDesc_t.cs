@@ -14,11 +14,11 @@ public partial interface VMixSubgraphSwitchDesc_t : ISchemaClass<VMixSubgraphSwi
     static int ISchemaClass<VMixSubgraphSwitchDesc_t>.Size => 12;
     static string? ISchemaClass<VMixSubgraphSwitchDesc_t>.ClassName => null;
 
-    
+
     public ref VMixSubgraphSwitchInterpolationType_t InterpolationMode { get; }
-    
+
     public ref bool OnlyTailsOnFadeOut { get; }
-    
+
     public ref float InterpolationTime { get; }
 
 

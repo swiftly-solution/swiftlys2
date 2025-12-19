@@ -14,10 +14,10 @@ public partial interface CNmSyncTrack : ISchemaClass<CNmSyncTrack>
     static int ISchemaClass<CNmSyncTrack>.Size => 176;
     static string? ISchemaClass<CNmSyncTrack>.ClassName => null;
 
-    
-  // CUtlLeanVectorFixedGrowable< CNmSyncTrack::Event_t, 10 >
+
+    // CUtlLeanVectorFixedGrowable< CNmSyncTrack::Event_t, 10 >
     public SchemaUntypedField SyncEvents { get; }
-    
+
     public ref int StartEventOffset { get; }
 
 

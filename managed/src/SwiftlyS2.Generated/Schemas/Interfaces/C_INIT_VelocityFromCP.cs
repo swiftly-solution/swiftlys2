@@ -14,13 +14,13 @@ public partial interface C_INIT_VelocityFromCP : CParticleFunctionInitializer, I
     static int ISchemaClass<C_INIT_VelocityFromCP>.Size => 2304;
     static string? ISchemaClass<C_INIT_VelocityFromCP>.ClassName => null;
 
-    
+
     public CParticleCollectionVecInput VelocityInput { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref float VelocityScale { get; }
-    
+
     public ref bool DirectionOnly { get; }
 
 

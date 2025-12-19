@@ -14,15 +14,15 @@ public partial interface C_INIT_RandomSequence : CParticleFunctionInitializer, I
     static int ISchemaClass<C_INIT_RandomSequence>.Size => 520;
     static string? ISchemaClass<C_INIT_RandomSequence>.ClassName => null;
 
-    
+
     public ref int SequenceMin { get; }
-    
+
     public ref int SequenceMax { get; }
-    
+
     public ref bool Shuffle { get; }
-    
+
     public ref bool Linear { get; }
-    
+
     public ref CUtlVector<SequenceWeightedList_t> WeightedList { get; }
 
 

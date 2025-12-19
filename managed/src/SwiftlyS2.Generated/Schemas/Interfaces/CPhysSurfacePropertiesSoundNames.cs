@@ -14,29 +14,29 @@ public partial interface CPhysSurfacePropertiesSoundNames : ISchemaClass<CPhysSu
     static int ISchemaClass<CPhysSurfacePropertiesSoundNames>.Size => 96;
     static string? ISchemaClass<CPhysSurfacePropertiesSoundNames>.ClassName => null;
 
-    
+
     public string ImpactSoft { get; set; }
-    
+
     public string ImpactHard { get; set; }
-    
+
     public string ScrapeSmooth { get; set; }
-    
+
     public string ScrapeRough { get; set; }
-    
+
     public string BulletImpact { get; set; }
-    
+
     public string Rolling { get; set; }
-    
+
     public string Break { get; set; }
-    
+
     public string Strain { get; set; }
-    
+
     public string MeleeImpact { get; set; }
-    
+
     public string PushOff { get; set; }
-    
+
     public string SkidStop { get; set; }
-    
+
     public string Resonant { get; set; }
 
 

@@ -14,11 +14,11 @@ public partial interface C_OP_SetToCP : CParticleFunctionOperator, ISchemaClass<
     static int ISchemaClass<C_OP_SetToCP>.Size => 488;
     static string? ISchemaClass<C_OP_SetToCP>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref Vector Offset { get; }
-    
+
     public ref bool OffsetLocal { get; }
 
 

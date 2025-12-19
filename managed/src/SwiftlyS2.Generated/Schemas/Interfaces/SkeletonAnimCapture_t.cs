@@ -14,25 +14,25 @@ public partial interface SkeletonAnimCapture_t : ISchemaClass<SkeletonAnimCaptur
     static int ISchemaClass<SkeletonAnimCapture_t>.Size => 192;
     static string? ISchemaClass<SkeletonAnimCapture_t>.ClassName => null;
 
-    
+
     public ref uint EntIndex { get; }
-    
+
     public ref uint EntParent { get; }
-    
+
     public ref CUtlVector<uint> ImportedCollision { get; }
-    
+
     public string ModelName { get; set; }
-    
+
     public string CaptureName { get; set; }
-    
+
     public ref CUtlVector<SkeletonAnimCapture_t__Bone_t> ModelBindPose { get; }
-    
+
     public ref CUtlVector<SkeletonAnimCapture_t__Bone_t> FeModelInitPose { get; }
-    
+
     public ref int FlexControllers { get; }
-    
+
     public ref bool Predicted { get; }
-    
+
     public ref CUtlVector<SkeletonAnimCapture_t__Frame_t> Frames { get; }
 
 

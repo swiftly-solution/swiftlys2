@@ -14,7 +14,7 @@ public partial interface C_OP_RadiusDecay : CParticleFunctionOperator, ISchemaCl
     static int ISchemaClass<C_OP_RadiusDecay>.Size => 472;
     static string? ISchemaClass<C_OP_RadiusDecay>.ClassName => null;
 
-    
+
     public ref float MinRadius { get; }
 
 

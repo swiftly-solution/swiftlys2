@@ -14,25 +14,25 @@ public partial interface VMixDynamicsBand_t : ISchemaClass<VMixDynamicsBand_t>
     static int ISchemaClass<VMixDynamicsBand_t>.Size => 36;
     static string? ISchemaClass<VMixDynamicsBand_t>.ClassName => null;
 
-    
+
     public ref float FldbGainInput { get; }
-    
+
     public ref float FldbGainOutput { get; }
-    
+
     public ref float FldbThresholdBelow { get; }
-    
+
     public ref float FldbThresholdAbove { get; }
-    
+
     public ref float RatioBelow { get; }
-    
+
     public ref float RatioAbove { get; }
-    
+
     public ref float AttackTimeMS { get; }
-    
+
     public ref float ReleaseTimeMS { get; }
-    
+
     public ref bool Enable { get; }
-    
+
     public ref bool Solo { get; }
 
 

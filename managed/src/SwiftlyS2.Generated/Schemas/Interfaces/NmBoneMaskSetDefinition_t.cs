@@ -14,11 +14,11 @@ public partial interface NmBoneMaskSetDefinition_t : ISchemaClass<NmBoneMaskSetD
     static int ISchemaClass<NmBoneMaskSetDefinition_t>.Size => 296;
     static string? ISchemaClass<NmBoneMaskSetDefinition_t>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol ID { get; }
-    
+
     public CNmBoneWeightList PrimaryWeightList { get; }
-    
+
     public ref CUtlLeanVector<CNmBoneWeightList, int> SecondaryWeightLists { get; }
 
 

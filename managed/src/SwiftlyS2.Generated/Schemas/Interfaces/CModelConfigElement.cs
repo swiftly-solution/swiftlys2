@@ -14,9 +14,9 @@ public partial interface CModelConfigElement : ISchemaClass<CModelConfigElement>
     static int ISchemaClass<CModelConfigElement>.Size => 72;
     static string? ISchemaClass<CModelConfigElement>.ClassName => null;
 
-    
+
     public string ElementName { get; set; }
-    
+
     public ref CUtlVector<PointerTo<CModelConfigElement>> NestedElements { get; }
 
 

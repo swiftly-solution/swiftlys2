@@ -14,15 +14,15 @@ public partial interface sndopvarlatchdata_t : ISchemaClass<sndopvarlatchdata_t>
     static int ISchemaClass<sndopvarlatchdata_t>.Size => 48;
     static string? ISchemaClass<sndopvarlatchdata_t>.ClassName => null;
 
-    
+
     public string Stack { get; set; }
-    
+
     public string Operator { get; set; }
-    
+
     public string Opvar { get; set; }
-    
+
     public ref float Val { get; }
-    
+
     public ref Vector Pos { get; }
 
 

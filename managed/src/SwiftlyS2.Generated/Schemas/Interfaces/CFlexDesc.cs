@@ -14,7 +14,7 @@ public partial interface CFlexDesc : ISchemaClass<CFlexDesc>
     static int ISchemaClass<CFlexDesc>.Size => 8;
     static string? ISchemaClass<CFlexDesc>.ClassName => null;
 
-    
+
     public string Facs { get; set; }
 
 

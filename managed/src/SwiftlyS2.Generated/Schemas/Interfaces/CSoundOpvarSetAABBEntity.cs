@@ -14,23 +14,23 @@ public partial interface CSoundOpvarSetAABBEntity : CSoundOpvarSetPointEntity, I
     static int ISchemaClass<CSoundOpvarSetAABBEntity>.Size => 1808;
     static string? ISchemaClass<CSoundOpvarSetAABBEntity>.ClassName => "snd_opvar_set_aabb";
 
-    
+
     public ref Vector DistanceInnerMins { get; }
-    
+
     public ref Vector DistanceInnerMaxs { get; }
-    
+
     public ref Vector DistanceOuterMins { get; }
-    
+
     public ref Vector DistanceOuterMaxs { get; }
-    
+
     public ref int AABBDirection { get; }
-    
+
     public ref Vector InnerMins { get; }
-    
+
     public ref Vector InnerMaxs { get; }
-    
+
     public ref Vector OuterMins { get; }
-    
+
     public ref Vector OuterMaxs { get; }
 
 

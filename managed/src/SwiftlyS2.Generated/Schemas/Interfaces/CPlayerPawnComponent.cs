@@ -14,7 +14,7 @@ public partial interface CPlayerPawnComponent : ISchemaClass<CPlayerPawnComponen
     static int ISchemaClass<CPlayerPawnComponent>.Size => 64;
     static string? ISchemaClass<CPlayerPawnComponent>.ClassName => null;
 
-    
+
     public ref CNetworkVarChainer __m_pChainEntity { get; }
 
 

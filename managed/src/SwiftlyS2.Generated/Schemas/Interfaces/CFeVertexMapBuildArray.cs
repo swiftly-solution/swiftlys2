@@ -14,7 +14,7 @@ public partial interface CFeVertexMapBuildArray : ISchemaClass<CFeVertexMapBuild
     static int ISchemaClass<CFeVertexMapBuildArray>.Size => 24;
     static string? ISchemaClass<CFeVertexMapBuildArray>.ClassName => null;
 
-    
+
     public ref CUtlVector<PointerTo<FeVertexMapBuild_t>> Array { get; }
 
 

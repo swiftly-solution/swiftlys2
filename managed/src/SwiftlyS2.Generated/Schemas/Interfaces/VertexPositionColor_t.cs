@@ -14,7 +14,7 @@ public partial interface VertexPositionColor_t : ISchemaClass<VertexPositionColo
     static int ISchemaClass<VertexPositionColor_t>.Size => 16;
     static string? ISchemaClass<VertexPositionColor_t>.ClassName => null;
 
-    
+
     public ref Vector Position { get; }
 
 

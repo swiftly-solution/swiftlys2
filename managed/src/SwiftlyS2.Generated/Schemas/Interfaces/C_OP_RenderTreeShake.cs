@@ -14,25 +14,25 @@ public partial interface C_OP_RenderTreeShake : CParticleFunctionRenderer, ISche
     static int ISchemaClass<C_OP_RenderTreeShake>.Size => 584;
     static string? ISchemaClass<C_OP_RenderTreeShake>.ClassName => null;
 
-    
+
     public ref float PeakStrength { get; }
-    
+
     public ParticleAttributeIndex_t PeakStrengthFieldOverride { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ParticleAttributeIndex_t RadiusFieldOverride { get; }
-    
+
     public ref float ShakeDuration { get; }
-    
+
     public ref float TransitionTime { get; }
-    
+
     public ref float TwistAmount { get; }
-    
+
     public ref float RadialAmount { get; }
-    
+
     public ref float ControlPointOrientationAmount { get; }
-    
+
     public ref int ControlPointForLinearDirection { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CBtNodeCondition : CBtNodeDecorator, ISchemaClass<CBtNo
     static int ISchemaClass<CBtNodeCondition>.Size => 96;
     static string? ISchemaClass<CBtNodeCondition>.ClassName => null;
 
-    
+
     public ref bool Negated { get; }
 
 

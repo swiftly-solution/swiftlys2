@@ -14,12 +14,12 @@ public partial interface CMoodVData : ISchemaClass<CMoodVData>
     static int ISchemaClass<CMoodVData>.Size => 256;
     static string? ISchemaClass<CMoodVData>.ClassName => null;
 
-    
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
     public SchemaUntypedField ModelName { get; }
-    
+
     public ref MoodType_t MoodType { get; }
-    
+
     public ref CUtlVector<MoodAnimationLayer_t> AnimationLayers { get; }
 
 

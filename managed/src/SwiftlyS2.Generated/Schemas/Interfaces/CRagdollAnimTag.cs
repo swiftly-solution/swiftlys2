@@ -14,7 +14,7 @@ public partial interface CRagdollAnimTag : CAnimTagBase, ISchemaClass<CRagdollAn
     static int ISchemaClass<CRagdollAnimTag>.Size => 96;
     static string? ISchemaClass<CRagdollAnimTag>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol ProfileName { get; }
 
 

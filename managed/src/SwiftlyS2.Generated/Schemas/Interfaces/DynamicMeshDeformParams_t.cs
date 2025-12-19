@@ -14,15 +14,15 @@ public partial interface DynamicMeshDeformParams_t : ISchemaClass<DynamicMeshDef
     static int ISchemaClass<DynamicMeshDeformParams_t>.Size => 12;
     static string? ISchemaClass<DynamicMeshDeformParams_t>.ClassName => null;
 
-    
+
     public ref float TensionCompressScale { get; }
-    
+
     public ref float TensionStretchScale { get; }
-    
+
     public ref bool RecomputeSmoothNormalsAfterAnimation { get; }
-    
+
     public ref bool ComputeDynamicMeshTensionAfterAnimation { get; }
-    
+
     public ref bool SmoothNormalsAcrossUvSeams { get; }
 
 

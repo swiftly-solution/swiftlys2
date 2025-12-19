@@ -14,9 +14,9 @@ public partial interface EntitySpottedState_t : ISchemaClass<EntitySpottedState_
     static int ISchemaClass<EntitySpottedState_t>.Size => 24;
     static string? ISchemaClass<EntitySpottedState_t>.ClassName => null;
 
-    
+
     public ref bool Spotted { get; }
-    
+
     public ISchemaFixedArray<uint> SpottedByMask { get; }
 
     public void SpottedUpdated();

@@ -14,7 +14,7 @@ public partial interface CSkillInt : ISchemaClass<CSkillInt>
     static int ISchemaClass<CSkillInt>.Size => 16;
     static string? ISchemaClass<CSkillInt>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<int> Value { get; }
 
 

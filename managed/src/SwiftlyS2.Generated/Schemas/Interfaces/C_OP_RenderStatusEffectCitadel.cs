@@ -14,17 +14,17 @@ public partial interface C_OP_RenderStatusEffectCitadel : CParticleFunctionRende
     static int ISchemaClass<C_OP_RenderStatusEffectCitadel>.Size => 592;
     static string? ISchemaClass<C_OP_RenderStatusEffectCitadel>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureColorWarp { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureNormal { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureMetalness { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureRoughness { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureSelfIllum { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDetail { get; }
 
 

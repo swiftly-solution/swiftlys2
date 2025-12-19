@@ -14,13 +14,13 @@ public partial interface WorldNodeOnDiskBufferData_t : ISchemaClass<WorldNodeOnD
     static int ISchemaClass<WorldNodeOnDiskBufferData_t>.Size => 56;
     static string? ISchemaClass<WorldNodeOnDiskBufferData_t>.ClassName => null;
 
-    
+
     public ref int ElementCount { get; }
-    
+
     public ref int ElementSizeInBytes { get; }
-    
+
     public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields { get; }
-    
+
     public ref CUtlVector<byte> Data { get; }
 
 

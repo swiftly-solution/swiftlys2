@@ -14,7 +14,7 @@ public partial interface CPulseCell_Outflow_ScriptedSequence__CursorState_t : IS
     static int ISchemaClass<CPulseCell_Outflow_ScriptedSequence__CursorState_t>.Size => 4;
     static string? ISchemaClass<CPulseCell_Outflow_ScriptedSequence__CursorState_t>.ClassName => null;
 
-    
+
     public ref CHandle<CBaseEntity> ScriptedSequence { get; }
 
 

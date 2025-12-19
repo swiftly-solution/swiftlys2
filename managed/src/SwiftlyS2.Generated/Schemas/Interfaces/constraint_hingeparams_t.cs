@@ -14,13 +14,13 @@ public partial interface constraint_hingeparams_t : ISchemaClass<constraint_hing
     static int ISchemaClass<constraint_hingeparams_t>.Size => 64;
     static string? ISchemaClass<constraint_hingeparams_t>.ClassName => null;
 
-    
+
     public ref Vector WorldPosition { get; }
-    
+
     public ref Vector WorldAxisDirection { get; }
-    
+
     public constraint_axislimit_t HingeAxis { get; }
-    
+
     public constraint_breakableparams_t Constraint { get; }
 
 

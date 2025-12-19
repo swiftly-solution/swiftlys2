@@ -14,7 +14,7 @@ public partial interface CPulseCell_Outflow_PlaySequence : CPulseCell_Outflow_Pl
     static int ISchemaClass<CPulseCell_Outflow_PlaySequence>.Size => 248;
     static string? ISchemaClass<CPulseCell_Outflow_PlaySequence>.ClassName => null;
 
-    
+
     public string ParamSequenceName { get; set; }
 
 

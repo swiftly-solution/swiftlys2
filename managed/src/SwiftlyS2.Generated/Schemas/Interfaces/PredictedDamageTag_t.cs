@@ -14,13 +14,13 @@ public partial interface PredictedDamageTag_t : ISchemaClass<PredictedDamageTag_
     static int ISchemaClass<PredictedDamageTag_t>.Size => 64;
     static string? ISchemaClass<PredictedDamageTag_t>.ClassName => null;
 
-    
+
     public GameTick_t TagTick { get; }
-    
+
     public ref float FlinchModSmall { get; }
-    
+
     public ref float FlinchModLarge { get; }
-    
+
     public ref float FriendlyFireDamageReductionRatio { get; }
 
     public void TagTickUpdated();

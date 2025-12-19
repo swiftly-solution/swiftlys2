@@ -14,25 +14,25 @@ public partial interface CBuoyancyHelper : ISchemaClass<CBuoyancyHelper>
     static int ISchemaClass<CBuoyancyHelper>.Size => 280;
     static string? ISchemaClass<CBuoyancyHelper>.ClassName => null;
 
-    
+
     public ref CUtlStringToken FluidType { get; }
-    
+
     public ref float FluidDensity { get; }
-    
+
     public ref float NeutrallyBuoyantGravity { get; }
-    
+
     public ref float NeutrallyBuoyantLinearDamping { get; }
-    
+
     public ref float NeutrallyBuoyantAngularDamping { get; }
-    
+
     public ref bool NeutrallyBuoyant { get; }
-    
+
     public ref CUtlVector<float> FractionOfWheelSubmergedForWheelFriction { get; }
-    
+
     public ref CUtlVector<float> WheelFrictionScales { get; }
-    
+
     public ref CUtlVector<float> FractionOfWheelSubmergedForWheelDrag { get; }
-    
+
     public ref CUtlVector<float> WheelDrag { get; }
 
 

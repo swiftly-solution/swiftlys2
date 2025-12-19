@@ -14,7 +14,7 @@ public partial interface CPulseCell_LimitCount : CPulseCell_BaseRequirement, ISc
     static int ISchemaClass<CPulseCell_LimitCount>.Size => 80;
     static string? ISchemaClass<CPulseCell_LimitCount>.ClassName => null;
 
-    
+
     public ref int LimitCount { get; }
 
 

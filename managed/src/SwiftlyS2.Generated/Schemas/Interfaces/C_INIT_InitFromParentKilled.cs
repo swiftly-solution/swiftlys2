@@ -14,9 +14,9 @@ public partial interface C_INIT_InitFromParentKilled : CParticleFunctionInitiali
     static int ISchemaClass<C_INIT_InitFromParentKilled>.Size => 608;
     static string? ISchemaClass<C_INIT_InitFromParentKilled>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t AttributeToCopy { get; }
-    
+
     public ref EventTypeSelection_t EventType { get; }
 
 

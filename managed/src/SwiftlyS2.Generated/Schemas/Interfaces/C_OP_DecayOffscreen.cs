@@ -14,7 +14,7 @@ public partial interface C_OP_DecayOffscreen : CParticleFunctionOperator, ISchem
     static int ISchemaClass<C_OP_DecayOffscreen>.Size => 832;
     static string? ISchemaClass<C_OP_DecayOffscreen>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput OffscreenTime { get; }
 
 

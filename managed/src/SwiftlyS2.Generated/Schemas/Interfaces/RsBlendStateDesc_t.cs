@@ -14,30 +14,30 @@ public partial interface RsBlendStateDesc_t : ISchemaClass<RsBlendStateDesc_t>
     static int ISchemaClass<RsBlendStateDesc_t>.Size => 32;
     static string? ISchemaClass<RsBlendStateDesc_t>.ClassName => null;
 
-    
+
     public ref uint SrcBlendBits { get; }
-    
+
     public ref uint DestBlendBits { get; }
-    
+
     public ref uint SrcBlendAlphaBits { get; }
-    
+
     public ref uint DestBlendAlphaBits { get; }
-    
+
     public ref uint RenderTargetWriteMaskBits { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField BlendOpBits { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField AlphaToCoverageEnable { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField IndependentBlendEnable { get; }
-    
+
     public ref uint BlendOpAlphaBits { get; }
-    
+
     public ref byte BlendEnableBits { get; }
-    
+
     public ref byte SrgbWriteEnableBits { get; }
 
 

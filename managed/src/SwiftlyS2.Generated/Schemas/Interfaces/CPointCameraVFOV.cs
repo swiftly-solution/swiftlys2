@@ -14,7 +14,7 @@ public partial interface CPointCameraVFOV : CPointCamera, ISchemaClass<CPointCam
     static int ISchemaClass<CPointCameraVFOV>.Size => 1368;
     static string? ISchemaClass<CPointCameraVFOV>.ClassName => "point_camera_vertical_fov";
 
-    
+
     public ref float VerticalFOV { get; }
 
 

@@ -14,7 +14,7 @@ public partial interface CollisionGroupContext_t : ISchemaClass<CollisionGroupCo
     static int ISchemaClass<CollisionGroupContext_t>.Size => 4;
     static string? ISchemaClass<CollisionGroupContext_t>.ClassName => null;
 
-    
+
     public ref int CollisionGroupNumber { get; }
 
 

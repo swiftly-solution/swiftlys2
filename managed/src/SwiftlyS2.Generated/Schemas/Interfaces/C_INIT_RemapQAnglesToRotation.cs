@@ -14,7 +14,7 @@ public partial interface C_INIT_RemapQAnglesToRotation : CParticleFunctionInitia
     static int ISchemaClass<C_INIT_RemapQAnglesToRotation>.Size => 576;
     static string? ISchemaClass<C_INIT_RemapQAnglesToRotation>.ClassName => null;
 
-    
+
     public CParticleTransformInput TransformInput { get; }
 
 

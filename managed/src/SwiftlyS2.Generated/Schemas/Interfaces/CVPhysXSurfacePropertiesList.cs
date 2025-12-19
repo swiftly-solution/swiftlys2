@@ -14,7 +14,7 @@ public partial interface CVPhysXSurfacePropertiesList : ISchemaClass<CVPhysXSurf
     static int ISchemaClass<CVPhysXSurfacePropertiesList>.Size => 24;
     static string? ISchemaClass<CVPhysXSurfacePropertiesList>.ClassName => null;
 
-    
+
     public ref CUtlVector<PointerTo<CPhysSurfaceProperties>> SurfacePropertiesList { get; }
 
 

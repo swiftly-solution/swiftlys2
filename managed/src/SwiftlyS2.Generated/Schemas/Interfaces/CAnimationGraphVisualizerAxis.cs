@@ -14,9 +14,9 @@ public partial interface CAnimationGraphVisualizerAxis : CAnimationGraphVisualiz
     static int ISchemaClass<CAnimationGraphVisualizerAxis>.Size => 112;
     static string? ISchemaClass<CAnimationGraphVisualizerAxis>.ClassName => null;
 
-    
+
     public ref CTransform XWsTransform { get; }
-    
+
     public ref float AxisSize { get; }
 
 

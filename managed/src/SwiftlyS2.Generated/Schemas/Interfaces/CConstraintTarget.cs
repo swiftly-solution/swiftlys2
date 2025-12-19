@@ -14,17 +14,17 @@ public partial interface CConstraintTarget : ISchemaClass<CConstraintTarget>
     static int ISchemaClass<CConstraintTarget>.Size => 96;
     static string? ISchemaClass<CConstraintTarget>.ClassName => null;
 
-    
+
     public ref Quaternion Offset { get; }
-    
+
     public ref Vector Offset1 { get; }
-    
+
     public ref uint BoneHash { get; }
-    
+
     public string Name { get; set; }
-    
+
     public ref float Weight { get; }
-    
+
     public ref bool IsAttachment { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface CNavLinkAnimgraphVar : ISchemaClass<CNavLinkAnimgraphVa
     static int ISchemaClass<CNavLinkAnimgraphVar>.Size => 16;
     static string? ISchemaClass<CNavLinkAnimgraphVar>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol AnimGraphNavlinkType { get; }
-    
+
     public ref uint AlignmentDegrees { get; }
 
 

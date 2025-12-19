@@ -14,13 +14,13 @@ public partial interface CAnimFrameSegment : ISchemaClass<CAnimFrameSegment>
     static int ISchemaClass<CAnimFrameSegment>.Size => 32;
     static string? ISchemaClass<CAnimFrameSegment>.ClassName => null;
 
-    
+
     public ref int UniqueFrameIndex { get; }
-    
+
     public ref uint LocalElementMasks { get; }
-    
+
     public ref int LocalChannel { get; }
-    
+
     public ref CUtlBinaryBlock Container { get; }
 
 

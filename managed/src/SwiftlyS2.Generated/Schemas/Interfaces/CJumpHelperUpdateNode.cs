@@ -14,21 +14,21 @@ public partial interface CJumpHelperUpdateNode : CSequenceUpdateNode, ISchemaCla
     static int ISchemaClass<CJumpHelperUpdateNode>.Size => 216;
     static string? ISchemaClass<CJumpHelperUpdateNode>.ClassName => null;
 
-    
+
     public CAnimParamHandle TargetParam { get; }
-    
+
     public ref Vector OriginalJumpMovement { get; }
-    
+
     public ref float OriginalJumpDuration { get; }
-    
+
     public ref float JumpStartCycle { get; }
-    
+
     public ref float JumpEndCycle { get; }
-    
+
     public ref JumpCorrectionMethod CorrectionMethod { get; }
-    
+
     public ISchemaFixedArray<bool> TranslationAxis { get; }
-    
+
     public ref bool ScaleSpeed { get; }
 
 

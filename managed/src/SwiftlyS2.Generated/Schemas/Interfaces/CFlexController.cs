@@ -14,13 +14,13 @@ public partial interface CFlexController : ISchemaClass<CFlexController>
     static int ISchemaClass<CFlexController>.Size => 24;
     static string? ISchemaClass<CFlexController>.ClassName => null;
 
-    
+
     public string Name { get; set; }
-    
+
     public string Type { get; set; }
-    
+
     public ref float Min { get; }
-    
+
     public ref float Max { get; }
 
 

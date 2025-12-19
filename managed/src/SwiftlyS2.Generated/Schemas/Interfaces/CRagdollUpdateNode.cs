@@ -14,9 +14,9 @@ public partial interface CRagdollUpdateNode : CUnaryUpdateNode, ISchemaClass<CRa
     static int ISchemaClass<CRagdollUpdateNode>.Size => 120;
     static string? ISchemaClass<CRagdollUpdateNode>.ClassName => null;
 
-    
+
     public ref int WeightListIndex { get; }
-    
+
     public ref RagdollPoseControl PoseControlMethod { get; }
 
 

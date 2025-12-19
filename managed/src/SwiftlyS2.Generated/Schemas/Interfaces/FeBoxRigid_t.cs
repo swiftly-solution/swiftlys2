@@ -14,17 +14,17 @@ public partial interface FeBoxRigid_t : ISchemaClass<FeBoxRigid_t>
     static int ISchemaClass<FeBoxRigid_t>.Size => 64;
     static string? ISchemaClass<FeBoxRigid_t>.ClassName => null;
 
-    
+
     public ref CTransform TmFrame2 { get; }
-    
+
     public ref ushort Node { get; }
-    
+
     public ref ushort CollisionMask { get; }
-    
+
     public ref Vector Size { get; }
-    
+
     public ref ushort VertexMapIndex { get; }
-    
+
     public ref ushort Flags { get; }
 
 

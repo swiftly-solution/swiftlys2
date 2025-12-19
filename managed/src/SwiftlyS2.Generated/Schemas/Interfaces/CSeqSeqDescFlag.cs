@@ -14,27 +14,27 @@ public partial interface CSeqSeqDescFlag : ISchemaClass<CSeqSeqDescFlag>
     static int ISchemaClass<CSeqSeqDescFlag>.Size => 11;
     static string? ISchemaClass<CSeqSeqDescFlag>.ClassName => null;
 
-    
+
     public ref bool Looping { get; }
-    
+
     public ref bool Snap { get; }
-    
+
     public ref bool Autoplay { get; }
-    
+
     public ref bool Post { get; }
-    
+
     public ref bool Hidden { get; }
-    
+
     public ref bool Multi { get; }
-    
+
     public ref bool LegacyDelta { get; }
-    
+
     public ref bool LegacyWorldspace { get; }
-    
+
     public ref bool LegacyCyclepose { get; }
-    
+
     public ref bool LegacyRealtime { get; }
-    
+
     public ref bool ModelDoc { get; }
 
 

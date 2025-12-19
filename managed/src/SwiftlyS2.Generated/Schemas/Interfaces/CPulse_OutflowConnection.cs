@@ -14,14 +14,14 @@ public partial interface CPulse_OutflowConnection : ISchemaClass<CPulse_OutflowC
     static int ISchemaClass<CPulse_OutflowConnection>.Size => 72;
     static string? ISchemaClass<CPulse_OutflowConnection>.ClassName => null;
 
-    
-  // PulseSymbol_t
+
+    // PulseSymbol_t
     public SchemaUntypedField SourceOutflowName { get; }
-    
+
     public PulseRuntimeChunkIndex_t DestChunk { get; }
-    
+
     public ref int Instruction { get; }
-    
+
     public PulseRegisterMap_t OutflowRegisterMap { get; }
 
 

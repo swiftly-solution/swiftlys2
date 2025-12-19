@@ -14,11 +14,11 @@ public partial interface FeBuildTaperedCapsuleRigid_t : FeTaperedCapsuleRigid_t,
     static int ISchemaClass<FeBuildTaperedCapsuleRigid_t>.Size => 64;
     static string? ISchemaClass<FeBuildTaperedCapsuleRigid_t>.ClassName => null;
 
-    
+
     public ref int Priority { get; }
-    
+
     public ref uint VertexMapHash { get; }
-    
+
     public ref uint AntitunnelGroupBits { get; }
 
 

@@ -14,21 +14,21 @@ public partial interface C_INIT_RtEnvCull : CParticleFunctionInitializer, ISchem
     static int ISchemaClass<C_INIT_RtEnvCull>.Size => 640;
     static string? ISchemaClass<C_INIT_RtEnvCull>.ClassName => null;
 
-    
+
     public ref Vector TestDir { get; }
-    
+
     public ref Vector TestNormal { get; }
-    
+
     public ref bool UseVelocity { get; }
-    
+
     public ref bool CullOnMiss { get; }
-    
+
     public ref bool LifeAdjust { get; }
-    
+
     public string RtEnvName { get; set; }
-    
+
     public ref int RTEnvCP { get; }
-    
+
     public ref int Component { get; }
 
 

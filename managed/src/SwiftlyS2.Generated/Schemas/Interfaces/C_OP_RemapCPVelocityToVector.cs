@@ -14,13 +14,13 @@ public partial interface C_OP_RemapCPVelocityToVector : CParticleFunctionOperato
     static int ISchemaClass<C_OP_RemapCPVelocityToVector>.Size => 480;
     static string? ISchemaClass<C_OP_RemapCPVelocityToVector>.ClassName => null;
 
-    
+
     public ref int ControlPoint { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public ref bool Normalize { get; }
 
 

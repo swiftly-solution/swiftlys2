@@ -14,11 +14,11 @@ public partial interface CCSPlayerController_InventoryServices__NetworkedLoadout
     static int ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t>.Size => 16;
     static string? ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t>.ClassName => null;
 
-    
+
     public CEconItemView? Item { get; }
-    
+
     public ref ushort Team { get; }
-    
+
     public ref ushort Slot { get; }
 
 

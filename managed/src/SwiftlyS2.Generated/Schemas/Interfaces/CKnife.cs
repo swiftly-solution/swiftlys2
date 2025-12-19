@@ -14,7 +14,7 @@ public partial interface CKnife : CCSWeaponBase, ISchemaClass<CKnife>
     static int ISchemaClass<CKnife>.Size => 4576;
     static string? ISchemaClass<CKnife>.ClassName => "weapon_knife";
 
-    
+
     public ref bool FirstAttack { get; }
 
     public void FirstAttackUpdated();

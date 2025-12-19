@@ -14,11 +14,11 @@ public partial interface SimpleConstraintSoundProfile : ISchemaClass<SimpleConst
     static int ISchemaClass<SimpleConstraintSoundProfile>.Size => 32;
     static string? ISchemaClass<SimpleConstraintSoundProfile>.ClassName => null;
 
-    
+
     public ref SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t Keypoints { get; }
-    
+
     public ISchemaFixedArray<float> KeyPoints { get; }
-    
+
     public ISchemaFixedArray<float> ReversalSoundThresholds { get; }
 
 

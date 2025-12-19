@@ -14,13 +14,13 @@ public partial interface C_OP_RemapTransformOrientationToYaw : CParticleFunction
     static int ISchemaClass<C_OP_RemapTransformOrientationToYaw>.Size => 584;
     static string? ISchemaClass<C_OP_RemapTransformOrientationToYaw>.ClassName => null;
 
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float RotOffset { get; }
-    
+
     public ref float SpinStrength { get; }
 
 

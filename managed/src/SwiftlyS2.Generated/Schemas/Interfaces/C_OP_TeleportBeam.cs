@@ -14,27 +14,27 @@ public partial interface C_OP_TeleportBeam : CParticleFunctionOperator, ISchemaC
     static int ISchemaClass<C_OP_TeleportBeam>.Size => 520;
     static string? ISchemaClass<C_OP_TeleportBeam>.ClassName => null;
 
-    
+
     public ref int CPPosition { get; }
-    
+
     public ref int CPVelocity { get; }
-    
+
     public ref int CPMisc { get; }
-    
+
     public ref int CPColor { get; }
-    
+
     public ref int CPInvalidColor { get; }
-    
+
     public ref int CPExtraArcData { get; }
-    
+
     public ref Vector Gravity { get; }
-    
+
     public ref float ArcMaxDuration { get; }
-    
+
     public ref float SegmentBreak { get; }
-    
+
     public ref float ArcSpeed { get; }
-    
+
     public ref float Alpha { get; }
 
 

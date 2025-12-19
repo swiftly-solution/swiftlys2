@@ -14,19 +14,19 @@ public partial interface CTriggerPush : CBaseTrigger, ISchemaClass<CTriggerPush>
     static int ISchemaClass<CTriggerPush>.Size => 2528;
     static string? ISchemaClass<CTriggerPush>.ClassName => "trigger_push";
 
-    
+
     public ref QAngle PushEntitySpace { get; }
-    
+
     public ref Vector PushDirEntitySpace { get; }
-    
+
     public ref bool TriggerOnStartTouch { get; }
-    
+
     public ref bool UsePathSimple { get; }
-    
+
     public string PathSimpleName { get; set; }
-    
+
     public CPathSimple? PathSimple { get; }
-    
+
     public ref uint SplinePushType { get; }
 
 

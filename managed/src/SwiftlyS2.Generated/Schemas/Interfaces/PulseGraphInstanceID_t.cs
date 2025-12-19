@@ -14,7 +14,7 @@ public partial interface PulseGraphInstanceID_t : ISchemaClass<PulseGraphInstanc
     static int ISchemaClass<PulseGraphInstanceID_t>.Size => 4;
     static string? ISchemaClass<PulseGraphInstanceID_t>.ClassName => null;
 
-    
+
     public ref uint Value { get; }
 
 

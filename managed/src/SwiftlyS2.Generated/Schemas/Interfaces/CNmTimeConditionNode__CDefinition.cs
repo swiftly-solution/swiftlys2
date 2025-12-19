@@ -14,15 +14,15 @@ public partial interface CNmTimeConditionNode__CDefinition : CNmBoolValueNode__C
     static int ISchemaClass<CNmTimeConditionNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmTimeConditionNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref float Comparand { get; }
-    
+
     public ref CNmTimeConditionNode__ComparisonType_t Type { get; }
-    
+
     public ref CNmTimeConditionNode__Operator_t Operator { get; }
 
 

@@ -14,69 +14,69 @@ public partial interface C_OP_RenderRopes : CBaseRendererSource2, ISchemaClass<C
     static int ISchemaClass<C_OP_RenderRopes>.Size => 12968;
     static string? ISchemaClass<C_OP_RenderRopes>.ClassName => null;
 
-    
+
     public ref bool EnableFadingAndClamping { get; }
-    
+
     public ref float MinSize { get; }
-    
+
     public ref float MaxSize { get; }
-    
+
     public ref float StartFadeSize { get; }
-    
+
     public ref float EndFadeSize { get; }
-    
+
     public ref float StartFadeDot { get; }
-    
+
     public ref float EndFadeDot { get; }
-    
+
     public ref float RadiusTaper { get; }
-    
+
     public ref int MinTesselation { get; }
-    
+
     public ref int MaxTesselation { get; }
-    
+
     public ref float TessScale { get; }
-    
+
     public CParticleCollectionRendererFloatInput TextureVWorldSize { get; }
-    
+
     public CParticleCollectionRendererFloatInput TextureVScrollRate { get; }
-    
+
     public CParticleCollectionRendererFloatInput TextureVOffset { get; }
-    
+
     public ref int TextureVParamsCP { get; }
-    
+
     public ref bool ClampV { get; }
-    
+
     public ref int ScaleCP1 { get; }
-    
+
     public ref int ScaleCP2 { get; }
-    
+
     public ref float ScaleVSizeByControlPointDistance { get; }
-    
+
     public ref float ScaleVScrollByControlPointDistance { get; }
-    
+
     public ref float ScaleVOffsetByControlPointDistance { get; }
-    
+
     public ref bool UseScalarForTextureCoordinate { get; }
-    
+
     public ParticleAttributeIndex_t ScalarFieldForTextureCoordinate { get; }
-    
+
     public ref float ScalarAttributeTextureCoordScale { get; }
-    
+
     public ref bool ReverseOrder { get; }
-    
+
     public ref bool ClosedLoop { get; }
-    
+
     public ParticleAttributeIndex_t SplitField { get; }
-    
+
     public ref bool SortBySegmentID { get; }
-    
+
     public ref ParticleOrientationChoiceList_t OrientationType { get; }
-    
+
     public ParticleAttributeIndex_t VectorFieldForOrientation { get; }
-    
+
     public ref bool DrawAsOpaque { get; }
-    
+
     public ref bool GenerateNormals { get; }
 
 

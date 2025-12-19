@@ -14,17 +14,17 @@ public partial interface CFuncTrain : CBasePlatTrain, ISchemaClass<CFuncTrain>
     static int ISchemaClass<CFuncTrain>.Size => 2208;
     static string? ISchemaClass<CFuncTrain>.ClassName => "func_train";
 
-    
+
     public ref CHandle<CBaseEntity> CurrentTarget { get; }
-    
+
     public ref bool Activated { get; }
-    
+
     public ref CHandle<CBaseEntity> Enemy { get; }
-    
+
     public ref float BlockDamage { get; }
-    
+
     public GameTime_t NextBlockTime { get; }
-    
+
     public string LastTarget { get; set; }
 
 

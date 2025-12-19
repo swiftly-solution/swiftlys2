@@ -14,9 +14,9 @@ public partial interface CGameSceneNodeHandle : ISchemaClass<CGameSceneNodeHandl
     static int ISchemaClass<CGameSceneNodeHandle>.Size => 16;
     static string? ISchemaClass<CGameSceneNodeHandle>.ClassName => null;
 
-    
+
     public ref CHandle<CEntityInstance> Owner { get; }
-    
+
     public ref CUtlStringToken Name { get; }
 
     public void OwnerUpdated();

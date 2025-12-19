@@ -14,21 +14,21 @@ public partial interface CMorphSetData : ISchemaClass<CMorphSetData>
     static int ISchemaClass<CMorphSetData>.Size => 152;
     static string? ISchemaClass<CMorphSetData>.ClassName => null;
 
-    
+
     public ref int Width { get; }
-    
+
     public ref int Height { get; }
-    
+
     public ref CUtlVector<MorphBundleType_t> BundleTypes { get; }
-    
+
     public ref CUtlVector<CMorphData> MorphDatas { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureAtlas { get; }
-    
+
     public ref CUtlVector<CFlexDesc> FlexDesc { get; }
-    
+
     public ref CUtlVector<CFlexController> FlexControllers { get; }
-    
+
     public ref CUtlVector<CFlexRule> FlexRules { get; }
 
 

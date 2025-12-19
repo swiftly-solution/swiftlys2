@@ -14,9 +14,9 @@ public partial interface CDirectPlaybackTagData : ISchemaClass<CDirectPlaybackTa
     static int ISchemaClass<CDirectPlaybackTagData>.Size => 32;
     static string? ISchemaClass<CDirectPlaybackTagData>.ClassName => null;
 
-    
+
     public string SequenceName { get; set; }
-    
+
     public ref CUtlVector<TagSpan_t> Tags { get; }
 
 

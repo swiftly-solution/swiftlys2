@@ -14,7 +14,7 @@ public partial interface C_OP_ShapeMatchingConstraint : CParticleFunctionConstra
     static int ISchemaClass<C_OP_ShapeMatchingConstraint>.Size => 472;
     static string? ISchemaClass<C_OP_ShapeMatchingConstraint>.ClassName => null;
 
-    
+
     public ref float ShapeRestorationTime { get; }
 
 

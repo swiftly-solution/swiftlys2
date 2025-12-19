@@ -14,21 +14,21 @@ public partial interface CNmMaterialAttributeEvent : CNmEvent, ISchemaClass<CNmM
     static int ISchemaClass<CNmMaterialAttributeEvent>.Size => 304;
     static string? ISchemaClass<CNmMaterialAttributeEvent>.ClassName => null;
 
-    
+
     public string AttributeName { get; set; }
-    
+
     public ref CUtlStringToken AttributeNameToken { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField X { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Y { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField Z { get; }
-    
-  // CPiecewiseCurve
+
+    // CPiecewiseCurve
     public SchemaUntypedField W { get; }
 
 

@@ -14,21 +14,21 @@ public partial interface CHitReactUpdateNode : CUnaryUpdateNode, ISchemaClass<CH
     static int ISchemaClass<CHitReactUpdateNode>.Size => 208;
     static string? ISchemaClass<CHitReactUpdateNode>.ClassName => null;
 
-    
+
     public HitReactFixedSettings_t OpFixedSettings { get; }
-    
+
     public CAnimParamHandle TriggerParam { get; }
-    
+
     public CAnimParamHandle HitBoneParam { get; }
-    
+
     public CAnimParamHandle HitOffsetParam { get; }
-    
+
     public CAnimParamHandle HitDirectionParam { get; }
-    
+
     public CAnimParamHandle HitStrengthParam { get; }
-    
+
     public ref float MinDelayBetweenHits { get; }
-    
+
     public ref bool ResetChild { get; }
 
 

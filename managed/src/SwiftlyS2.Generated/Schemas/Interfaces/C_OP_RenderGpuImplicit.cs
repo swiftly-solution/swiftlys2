@@ -14,21 +14,21 @@ public partial interface C_OP_RenderGpuImplicit : CParticleFunctionRenderer, ISc
     static int ISchemaClass<C_OP_RenderGpuImplicit>.Size => 1680;
     static string? ISchemaClass<C_OP_RenderGpuImplicit>.ClassName => null;
 
-    
+
     public ref bool UsePerParticleRadius { get; }
-    
+
     public ref uint VertexCountKb { get; }
-    
+
     public ref uint IndexCountKb { get; }
-    
+
     public CParticleCollectionRendererFloatInput GridSize { get; }
-    
+
     public CParticleCollectionRendererFloatInput RadiusScale { get; }
-    
+
     public CParticleCollectionRendererFloatInput IsosurfaceThreshold { get; }
-    
+
     public ref int ScaleCP { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
 
 

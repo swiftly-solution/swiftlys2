@@ -14,33 +14,33 @@ public partial interface RnHull_t : ISchemaClass<RnHull_t>
     static int ISchemaClass<RnHull_t>.Size => 248;
     static string? ISchemaClass<RnHull_t>.ClassName => null;
 
-    
+
     public ref Vector Centroid { get; }
-    
+
     public ref float MaxAngularRadius { get; }
-    
+
     public AABB_t Bounds { get; }
-    
+
     public ref Vector OrthographicAreas { get; }
-    
+
     public ref matrix3x4_t MassProperties { get; }
-    
+
     public ref float Volume { get; }
-    
+
     public ref float SurfaceArea { get; }
-    
+
     public ref CUtlVector<RnVertex_t> Vertices { get; }
-    
+
     public ref CUtlVector<Vector> VertexPositions { get; }
-    
+
     public ref CUtlVector<RnHalfEdge_t> Edges { get; }
-    
+
     public ref CUtlVector<RnFace_t> Faces { get; }
-    
+
     public ref CUtlVector<RnPlane_t> FacePlanes { get; }
-    
+
     public ref uint Flags { get; }
-    
+
     public CRegionSVM? RegionSVM { get; }
 
 

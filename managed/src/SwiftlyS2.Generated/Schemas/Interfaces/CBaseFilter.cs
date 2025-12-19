@@ -14,11 +14,11 @@ public partial interface CBaseFilter : CLogicalEntity, ISchemaClass<CBaseFilter>
     static int ISchemaClass<CBaseFilter>.Size => 1352;
     static string? ISchemaClass<CBaseFilter>.ClassName => "filter_base";
 
-    
+
     public ref bool Negated { get; }
-    
+
     public CEntityIOOutput OnPass { get; }
-    
+
     public CEntityIOOutput OnFail { get; }
 
 

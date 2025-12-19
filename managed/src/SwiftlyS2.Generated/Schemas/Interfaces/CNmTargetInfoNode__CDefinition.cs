@@ -14,11 +14,11 @@ public partial interface CNmTargetInfoNode__CDefinition : CNmFloatValueNode__CDe
     static int ISchemaClass<CNmTargetInfoNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmTargetInfoNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref CNmTargetInfoNode__Info_t InfoType { get; }
-    
+
     public ref bool IsWorldSpaceTarget { get; }
 
 

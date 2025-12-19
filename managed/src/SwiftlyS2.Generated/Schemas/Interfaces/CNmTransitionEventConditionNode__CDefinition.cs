@@ -14,13 +14,13 @@ public partial interface CNmTransitionEventConditionNode__CDefinition : CNmBoolV
     static int ISchemaClass<CNmTransitionEventConditionNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmTransitionEventConditionNode__CDefinition>.ClassName => null;
 
-    
+
     public ref CGlobalSymbol RequireRuleID { get; }
-    
+
     public CNmBitFlags EventConditionRules { get; }
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public ref NmTransitionRuleCondition_t RuleCondition { get; }
 
 

@@ -14,26 +14,26 @@ public partial interface CRR_Response : ISchemaClass<CRR_Response>
     static int ISchemaClass<CRR_Response>.Size => 464;
     static string? ISchemaClass<CRR_Response>.ClassName => null;
 
-    
+
     public ref byte Type { get; }
-    
+
     public string ResponseName { get; set; }
-    
+
     public string MatchingRule { get; set; }
-    
+
     public ResponseParams Params { get; }
-    
+
     public ref float MatchScore { get; }
-    
+
     public ref bool AnyMatchingRulesInCooldown { get; }
-    
+
     public string SpeakerContext { get; set; }
-    
+
     public string WorldContext { get; set; }
-    
+
     public ResponseFollowup Followup { get; }
-    
-  // CUtlSymbol
+
+    // CUtlSymbol
     public SchemaUntypedField RecipientFilter { get; }
 
 

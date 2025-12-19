@@ -14,9 +14,9 @@ public partial interface CItemDogtags : CItem, ISchemaClass<CItemDogtags>
     static int ISchemaClass<CItemDogtags>.Size => 2944;
     static string? ISchemaClass<CItemDogtags>.ClassName => null;
 
-    
+
     public ref CHandle<CCSPlayerPawn> OwningPlayer { get; }
-    
+
     public ref CHandle<CCSPlayerPawn> KillingPlayer { get; }
 
     public void OwningPlayerUpdated();

@@ -14,13 +14,13 @@ public partial interface CFootstepLandedAnimTag : CAnimTagBase, ISchemaClass<CFo
     static int ISchemaClass<CFootstepLandedAnimTag>.Size => 120;
     static string? ISchemaClass<CFootstepLandedAnimTag>.ClassName => null;
 
-    
+
     public ref FootstepLandedFootSoundType_t FootstepType { get; }
-    
+
     public string OverrideSoundName { get; set; }
-    
+
     public string DebugAnimSourceString { get; set; }
-    
+
     public string BoneName { get; set; }
 
 

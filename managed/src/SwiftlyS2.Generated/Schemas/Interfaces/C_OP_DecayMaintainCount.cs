@@ -14,19 +14,19 @@ public partial interface C_OP_DecayMaintainCount : CParticleFunctionOperator, IS
     static int ISchemaClass<C_OP_DecayMaintainCount>.Size => 872;
     static string? ISchemaClass<C_OP_DecayMaintainCount>.ClassName => null;
 
-    
+
     public ref int ParticlesToMaintain { get; }
-    
+
     public ref float DecayDelay { get; }
-    
+
     public ref int SnapshotControlPoint { get; }
-    
+
     public string StrSnapshotSubset { get; set; }
-    
+
     public ref bool LifespanDecay { get; }
-    
+
     public CParticleCollectionFloatInput Scale { get; }
-    
+
     public ref bool KillNewest { get; }
 
 

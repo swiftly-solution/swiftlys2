@@ -14,7 +14,7 @@ public partial interface COrnamentProp : CDynamicProp, ISchemaClass<COrnamentPro
     static int ISchemaClass<COrnamentProp>.Size => 3424;
     static string? ISchemaClass<COrnamentProp>.ClassName => "prop_dynamic_ornament";
 
-    
+
     public string InitialOwner { get; set; }
 
 

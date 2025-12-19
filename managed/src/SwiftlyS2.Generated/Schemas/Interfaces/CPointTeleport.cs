@@ -14,13 +14,13 @@ public partial interface CPointTeleport : CServerOnlyPointEntity, ISchemaClass<C
     static int ISchemaClass<CPointTeleport>.Size => 1296;
     static string? ISchemaClass<CPointTeleport>.ClassName => "point_teleport";
 
-    
+
     public ref Vector SaveOrigin { get; }
-    
+
     public ref QAngle SaveAngles { get; }
-    
+
     public ref bool TeleportParentedEntities { get; }
-    
+
     public ref bool TeleportUseCurrentAngle { get; }
 
 

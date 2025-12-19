@@ -14,9 +14,9 @@ public partial interface C_INIT_InheritVelocity : CParticleFunctionInitializer, 
     static int ISchemaClass<C_INIT_InheritVelocity>.Size => 480;
     static string? ISchemaClass<C_INIT_InheritVelocity>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref float VelocityScale { get; }
 
 

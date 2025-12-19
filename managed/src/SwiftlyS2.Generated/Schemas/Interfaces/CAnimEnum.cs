@@ -14,7 +14,7 @@ public partial interface CAnimEnum : ISchemaClass<CAnimEnum>
     static int ISchemaClass<CAnimEnum>.Size => 1;
     static string? ISchemaClass<CAnimEnum>.ClassName => null;
 
-    
+
     public ref byte Value { get; }
 
 

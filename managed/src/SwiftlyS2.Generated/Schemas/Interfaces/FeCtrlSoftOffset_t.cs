@@ -14,13 +14,13 @@ public partial interface FeCtrlSoftOffset_t : ISchemaClass<FeCtrlSoftOffset_t>
     static int ISchemaClass<FeCtrlSoftOffset_t>.Size => 20;
     static string? ISchemaClass<FeCtrlSoftOffset_t>.ClassName => null;
 
-    
+
     public ref ushort CtrlParent { get; }
-    
+
     public ref ushort CtrlChild { get; }
-    
+
     public ref Vector Offset { get; }
-    
+
     public ref float Alpha { get; }
 
 

@@ -14,29 +14,29 @@ public partial interface CSAdditionalMatchStats_t : CSAdditionalPerRoundStats_t,
     static int ISchemaClass<CSAdditionalMatchStats_t>.Size => 72;
     static string? ISchemaClass<CSAdditionalMatchStats_t>.ClassName => null;
 
-    
+
     public ref int NumRoundsSurvived { get; }
-    
+
     public ref int MaxNumRoundsSurvived { get; }
-    
+
     public ref int NumRoundsSurvivedTotal { get; }
-    
+
     public ref int RoundsWonWithoutPurchase { get; }
-    
+
     public ref int RoundsWonWithoutPurchaseTotal { get; }
-    
+
     public ref int NumFirstKills { get; }
-    
+
     public ref int NumClutchKills { get; }
-    
+
     public ref int NumPistolKills { get; }
-    
+
     public ref int NumSniperKills { get; }
-    
+
     public ref int NumSuicides { get; }
-    
+
     public ref int NumTeamKills { get; }
-    
+
     public ref float TeamDamage { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface C_INIT_CreateParticleImpulse : CParticleFunctionInitial
     static int ISchemaClass<C_INIT_CreateParticleImpulse>.Size => 1592;
     static string? ISchemaClass<C_INIT_CreateParticleImpulse>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput InputRadius { get; }
-    
+
     public CPerParticleFloatInput InputMagnitude { get; }
-    
+
     public ref ParticleFalloffFunction_t FalloffFunction { get; }
-    
+
     public CPerParticleFloatInput InputFalloffExp { get; }
-    
+
     public ref ParticleImpulseType_t ImpulseType { get; }
 
 

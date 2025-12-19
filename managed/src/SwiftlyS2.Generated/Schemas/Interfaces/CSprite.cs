@@ -14,51 +14,51 @@ public partial interface CSprite : CBaseModelEntity, ISchemaClass<CSprite>
     static int ISchemaClass<CSprite>.Size => 2120;
     static string? ISchemaClass<CSprite>.ClassName => "env_glow";
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeIMaterial2> SpriteMaterial { get; }
-    
+
     public ref CHandle<CBaseEntity> AttachedToEntity { get; }
-    
+
     public AttachmentHandle_t Attachment { get; }
-    
+
     public ref float SpriteFramerate { get; }
-    
+
     public ref float Frame { get; }
-    
+
     public GameTime_t DieTime { get; }
-    
+
     public ref uint Brightness { get; }
-    
+
     public ref float BrightnessDuration { get; }
-    
+
     public ref float SpriteScale { get; }
-    
+
     public ref float ScaleDuration { get; }
-    
+
     public ref bool WorldSpaceScale { get; }
-    
+
     public ref float GlowProxySize { get; }
-    
+
     public ref float HDRColorScale { get; }
-    
+
     public GameTime_t LastTime { get; }
-    
+
     public ref float MaxFrame { get; }
-    
+
     public ref float StartScale { get; }
-    
+
     public ref float DestScale { get; }
-    
+
     public GameTime_t ScaleTimeStart { get; }
-    
+
     public ref int StartBrightness { get; }
-    
+
     public ref int DestBrightness { get; }
-    
+
     public GameTime_t BrightnessTimeStart { get; }
-    
+
     public ref int SpriteWidth { get; }
-    
+
     public ref int SpriteHeight { get; }
 
     public void SpriteMaterialUpdated();

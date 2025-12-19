@@ -14,13 +14,13 @@ public partial interface CAnimationGraphVisualizerPie : CAnimationGraphVisualize
     static int ISchemaClass<CAnimationGraphVisualizerPie>.Size => 128;
     static string? ISchemaClass<CAnimationGraphVisualizerPie>.ClassName => null;
 
-    
+
     public ref Vector WsCenter { get; }
-    
+
     public ref Vector WsStart { get; }
-    
+
     public ref Vector WsEnd { get; }
-    
+
     public ref Color Color { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface FeNodeWindBase_t : ISchemaClass<FeNodeWindBase_t>
     static int ISchemaClass<FeNodeWindBase_t>.Size => 8;
     static string? ISchemaClass<FeNodeWindBase_t>.ClassName => null;
 
-    
+
     public ref ushort NodeX0 { get; }
-    
+
     public ref ushort NodeX1 { get; }
-    
+
     public ref ushort NodeY0 { get; }
-    
+
     public ref ushort NodeY1 { get; }
 
 

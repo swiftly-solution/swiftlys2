@@ -14,61 +14,61 @@ public partial interface CChicken : CDynamicProp, ISchemaClass<CChicken>
     static int ISchemaClass<CChicken>.Size => 12960;
     static string? ISchemaClass<CChicken>.ClassName => "chicken";
 
-    
+
     public CAttributeContainer AttributeManager { get; }
-    
+
     public CountdownTimer UpdateTimer { get; }
-    
+
     public ref Vector StuckAnchor { get; }
-    
+
     public CountdownTimer StuckTimer { get; }
-    
+
     public CountdownTimer CollisionStuckTimer { get; }
-    
+
     public ref bool IsOnGround { get; }
-    
+
     public ref Vector FallVelocity { get; }
-    
+
     public ref ChickenActivity DesiredActivity { get; }
-    
+
     public ref ChickenActivity CurrentActivity { get; }
-    
+
     public CountdownTimer ActivityTimer { get; }
-    
+
     public ref float TurnRate { get; }
-    
+
     public ref CHandle<CBaseEntity> FleeFrom { get; }
-    
+
     public CountdownTimer MoveRateThrottleTimer { get; }
-    
+
     public CountdownTimer StartleTimer { get; }
-    
+
     public CountdownTimer VocalizeTimer { get; }
-    
+
     public GameTime_t WhenZombified { get; }
-    
+
     public ref bool JumpedThisFrame { get; }
-    
+
     public ref CHandle<CCSPlayerPawn> Leader { get; }
-    
+
     public CountdownTimer ReuseTimer { get; }
-    
+
     public ref bool HasBeenUsed { get; }
-    
+
     public CountdownTimer JumpTimer { get; }
-    
+
     public ref float LastJumpTime { get; }
-    
+
     public ref bool InJump { get; }
-    
+
     public CountdownTimer RepathTimer { get; }
-    
+
     public ref Vector PathGoal { get; }
-    
+
     public GameTime_t ActiveFollowStartTime { get; }
-    
+
     public CountdownTimer FollowMinuteTimer { get; }
-    
+
     public CountdownTimer BlockDirectionTimer { get; }
 
     public void AttributeManagerUpdated();

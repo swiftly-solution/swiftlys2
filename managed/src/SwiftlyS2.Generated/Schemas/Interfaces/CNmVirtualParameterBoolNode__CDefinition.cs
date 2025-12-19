@@ -14,7 +14,7 @@ public partial interface CNmVirtualParameterBoolNode__CDefinition : CNmBoolValue
     static int ISchemaClass<CNmVirtualParameterBoolNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmVirtualParameterBoolNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short ChildNodeIdx { get; }
 
 

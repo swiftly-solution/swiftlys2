@@ -14,15 +14,15 @@ public partial interface RsDepthStencilStateDesc_t : ISchemaClass<RsDepthStencil
     static int ISchemaClass<RsDepthStencilStateDesc_t>.Size => 8;
     static string? ISchemaClass<RsDepthStencilStateDesc_t>.ClassName => null;
 
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField DepthTestEnable { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField DepthWriteEnable { get; }
-    
+
     public ref RsComparison_t DepthFunc { get; }
-    
+
     public RsStencilStateDesc_t StencilState { get; }
 
 

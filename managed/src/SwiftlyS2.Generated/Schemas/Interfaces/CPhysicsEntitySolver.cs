@@ -14,13 +14,13 @@ public partial interface CPhysicsEntitySolver : CLogicalEntity, ISchemaClass<CPh
     static int ISchemaClass<CPhysicsEntitySolver>.Size => 1304;
     static string? ISchemaClass<CPhysicsEntitySolver>.ClassName => "physics_entity_solver";
 
-    
+
     public ref CHandle<CBaseEntity> MovingEntity { get; }
-    
+
     public ref CHandle<CBaseEntity> PhysicsBlocker { get; }
-    
+
     public ref float SeparationDuration { get; }
-    
+
     public GameTime_t CancelTime { get; }
 
 

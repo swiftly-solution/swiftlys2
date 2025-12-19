@@ -14,13 +14,13 @@ public partial interface CPulseCell_Outflow_ListenForAnimgraphTag : CPulseCell_B
     static int ISchemaClass<CPulseCell_Outflow_ListenForAnimgraphTag>.Size => 296;
     static string? ISchemaClass<CPulseCell_Outflow_ListenForAnimgraphTag>.ClassName => null;
 
-    
+
     public CPulse_ResumePoint OnStart { get; }
-    
+
     public CPulse_ResumePoint OnEnd { get; }
-    
+
     public CPulse_ResumePoint OnCanceled { get; }
-    
+
     public ref CGlobalSymbol TagName { get; }
 
 

@@ -14,21 +14,21 @@ public partial interface C_OP_SetRandomControlPointPosition : CParticleFunctionP
     static int ISchemaClass<C_OP_SetRandomControlPointPosition>.Size => 1248;
     static string? ISchemaClass<C_OP_SetRandomControlPointPosition>.ClassName => null;
 
-    
+
     public ref bool UseWorldLocation { get; }
-    
+
     public ref bool Orient { get; }
-    
+
     public ref int CP1 { get; }
-    
+
     public ref int HeadLocation { get; }
-    
+
     public CParticleCollectionFloatInput ReRandomRate { get; }
-    
+
     public ref Vector CPMinPos { get; }
-    
+
     public ref Vector CPMaxPos { get; }
-    
+
     public CParticleCollectionFloatInput Interpolation { get; }
 
 

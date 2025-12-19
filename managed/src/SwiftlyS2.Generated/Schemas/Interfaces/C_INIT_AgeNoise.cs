@@ -14,21 +14,21 @@ public partial interface C_INIT_AgeNoise : CParticleFunctionInitializer, ISchema
     static int ISchemaClass<C_INIT_AgeNoise>.Size => 512;
     static string? ISchemaClass<C_INIT_AgeNoise>.ClassName => null;
 
-    
+
     public ref bool AbsVal { get; }
-    
+
     public ref bool AbsValInv { get; }
-    
+
     public ref float Offset { get; }
-    
+
     public ref float AgeMin { get; }
-    
+
     public ref float AgeMax { get; }
-    
+
     public ref float NoiseScale { get; }
-    
+
     public ref float NoiseScaleLoc { get; }
-    
+
     public ref Vector OffsetLoc { get; }
 
 

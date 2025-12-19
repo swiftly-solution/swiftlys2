@@ -14,13 +14,13 @@ public partial interface CTimeRemainingMetricEvaluator : CMotionMetricEvaluator,
     static int ISchemaClass<CTimeRemainingMetricEvaluator>.Size => 96;
     static string? ISchemaClass<CTimeRemainingMetricEvaluator>.ClassName => null;
 
-    
+
     public ref bool MatchByTimeRemaining { get; }
-    
+
     public ref float MaxTimeRemaining { get; }
-    
+
     public ref bool FilterByTimeRemaining { get; }
-    
+
     public ref float MinTimeRemaining { get; }
 
 

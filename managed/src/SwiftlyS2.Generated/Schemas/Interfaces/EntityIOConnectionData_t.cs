@@ -14,22 +14,22 @@ public partial interface EntityIOConnectionData_t : ISchemaClass<EntityIOConnect
     static int ISchemaClass<EntityIOConnectionData_t>.Size => 64;
     static string? ISchemaClass<EntityIOConnectionData_t>.ClassName => null;
 
-    
+
     public string OutputName { get; set; }
-    
+
     public ref uint TargetType { get; }
-    
+
     public string TargetName { get; set; }
-    
+
     public string InputName { get; set; }
-    
+
     public string OverrideParam { get; set; }
-    
+
     public ref float Delay { get; }
-    
+
     public ref int TimesToFire { get; }
-    
-  // KeyValues3
+
+    // KeyValues3
     public SchemaUntypedField ParamMap { get; }
 
 

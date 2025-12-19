@@ -14,11 +14,11 @@ public partial interface CNmSyncEventIndexConditionNode__CDefinition : CNmBoolVa
     static int ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public ref CNmSyncEventIndexConditionNode__TriggerMode_t TriggerMode { get; }
-    
+
     public ref int SyncEventIdx { get; }
 
 

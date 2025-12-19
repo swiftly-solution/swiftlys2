@@ -14,11 +14,11 @@ public partial interface CExpressionActionUpdater : CAnimActionUpdater, ISchemaC
     static int ISchemaClass<CExpressionActionUpdater>.Size => 32;
     static string? ISchemaClass<CExpressionActionUpdater>.ClassName => null;
 
-    
+
     public CAnimParamHandle Param { get; }
-    
+
     public ref AnimParamType_t ParamType { get; }
-    
+
     public AnimScriptHandle Script { get; }
 
 

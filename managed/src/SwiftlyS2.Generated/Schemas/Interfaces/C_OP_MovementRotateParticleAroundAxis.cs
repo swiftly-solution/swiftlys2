@@ -14,13 +14,13 @@ public partial interface C_OP_MovementRotateParticleAroundAxis : CParticleFuncti
     static int ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.Size => 2664;
     static string? ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.ClassName => null;
 
-    
+
     public CParticleCollectionVecInput RotAxis { get; }
-    
+
     public CParticleCollectionFloatInput RotRate { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ref bool LocalSpace { get; }
 
 

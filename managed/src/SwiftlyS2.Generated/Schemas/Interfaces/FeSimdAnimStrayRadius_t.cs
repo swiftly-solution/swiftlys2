@@ -14,12 +14,12 @@ public partial interface FeSimdAnimStrayRadius_t : ISchemaClass<FeSimdAnimStrayR
     static int ISchemaClass<FeSimdAnimStrayRadius_t>.Size => 48;
     static string? ISchemaClass<FeSimdAnimStrayRadius_t>.ClassName => null;
 
-    
-  // uint16[4]
+
+    // uint16[4]
     public SchemaUntypedField Node { get; }
-    
+
     public ref fltx4 MaxDist { get; }
-    
+
     public ref fltx4 RelaxationFactor { get; }
 
 

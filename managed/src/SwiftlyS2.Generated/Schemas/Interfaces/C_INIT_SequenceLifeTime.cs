@@ -14,7 +14,7 @@ public partial interface C_INIT_SequenceLifeTime : CParticleFunctionInitializer,
     static int ISchemaClass<C_INIT_SequenceLifeTime>.Size => 480;
     static string? ISchemaClass<C_INIT_SequenceLifeTime>.ClassName => null;
 
-    
+
     public ref float Framerate { get; }
 
 

@@ -14,15 +14,15 @@ public partial interface ParticleChildrenInfo_t : ISchemaClass<ParticleChildrenI
     static int ISchemaClass<ParticleChildrenInfo_t>.Size => 32;
     static string? ISchemaClass<ParticleChildrenInfo_t>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ChildRef { get; }
-    
+
     public ref float Delay { get; }
-    
+
     public ref bool EndCap { get; }
-    
+
     public ref bool DisableChild { get; }
-    
+
     public ref ParticleDetailLevel_t DetailLevel { get; }
 
 

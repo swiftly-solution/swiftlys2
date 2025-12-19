@@ -14,8 +14,8 @@ public partial interface CAnimParamHandleMap : ISchemaClass<CAnimParamHandleMap>
     static int ISchemaClass<CAnimParamHandleMap>.Size => 32;
     static string? ISchemaClass<CAnimParamHandleMap>.ClassName => null;
 
-    
-  // CUtlHashtable< uint16, int16 >
+
+    // CUtlHashtable< uint16, int16 >
     public SchemaUntypedField List { get; }
 
 

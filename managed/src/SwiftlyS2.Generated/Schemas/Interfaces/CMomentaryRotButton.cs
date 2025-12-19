@@ -14,34 +14,34 @@ public partial interface CMomentaryRotButton : CRotButton, ISchemaClass<CMomenta
     static int ISchemaClass<CMomentaryRotButton>.Size => 2728;
     static string? ISchemaClass<CMomentaryRotButton>.ClassName => "momentary_rot_button";
 
-    
-  // CEntityOutputTemplate< float32 >
+
+    // CEntityOutputTemplate< float32 >
     public SchemaUntypedField Position { get; }
-    
+
     public CEntityIOOutput OnUnpressed { get; }
-    
+
     public CEntityIOOutput OnFullyOpen { get; }
-    
+
     public CEntityIOOutput OnFullyClosed { get; }
-    
+
     public CEntityIOOutput OnReachedPosition { get; }
-    
+
     public ref int LastUsed { get; }
-    
+
     public ref QAngle Start { get; }
-    
+
     public ref QAngle End { get; }
-    
+
     public ref float IdealYaw { get; }
-    
+
     public string Noise { get; set; }
-    
+
     public ref bool UpdateTarget { get; }
-    
+
     public ref int Direction { get; }
-    
+
     public ref float ReturnSpeed { get; }
-    
+
     public ref float StartPosition { get; }
 
 

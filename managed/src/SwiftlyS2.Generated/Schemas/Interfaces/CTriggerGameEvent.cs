@@ -14,11 +14,11 @@ public partial interface CTriggerGameEvent : CBaseTrigger, ISchemaClass<CTrigger
     static int ISchemaClass<CTriggerGameEvent>.Size => 2496;
     static string? ISchemaClass<CTriggerGameEvent>.ClassName => "trigger_game_event";
 
-    
+
     public string StrStartTouchEventName { get; set; }
-    
+
     public string StrEndTouchEventName { get; set; }
-    
+
     public string StrTriggerID { get; set; }
 
     public void StrStartTouchEventNameUpdated();

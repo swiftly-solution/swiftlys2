@@ -14,13 +14,13 @@ public partial interface CBoneConstraintDotToMorph : CBoneConstraintBase, ISchem
     static int ISchemaClass<CBoneConstraintDotToMorph>.Size => 88;
     static string? ISchemaClass<CBoneConstraintDotToMorph>.ClassName => null;
 
-    
+
     public string BoneName { get; set; }
-    
+
     public string TargetBoneName { get; set; }
-    
+
     public string MorphChannelName { get; set; }
-    
+
     public ISchemaFixedArray<float> Remap { get; }
 
 

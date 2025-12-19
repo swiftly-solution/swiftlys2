@@ -14,23 +14,23 @@ public partial interface C_OP_VectorFieldSnapshot : CParticleFunctionOperator, I
     static int ISchemaClass<C_OP_VectorFieldSnapshot>.Size => 2584;
     static string? ISchemaClass<C_OP_VectorFieldSnapshot>.ClassName => null;
 
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ParticleAttributeIndex_t AttributeToWrite { get; }
-    
+
     public ref int LocalSpaceCP { get; }
-    
+
     public CPerParticleFloatInput Interpolation { get; }
-    
+
     public CPerParticleVecInput Scale { get; }
-    
+
     public ref float BoundaryDampening { get; }
-    
+
     public ref bool SetVelocity { get; }
-    
+
     public ref bool LockToSurface { get; }
-    
+
     public ref float GridSpacing { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface C_OP_AttractToControlPoint : CParticleFunctionForce, IS
     static int ISchemaClass<C_OP_AttractToControlPoint>.Size => 1352;
     static string? ISchemaClass<C_OP_AttractToControlPoint>.ClassName => null;
 
-    
+
     public ref Vector ComponentScale { get; }
-    
+
     public CPerParticleFloatInput ForceAmount { get; }
-    
+
     public ref float FalloffPower { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public CPerParticleFloatInput ForceAmountMin { get; }
-    
+
     public ref bool ApplyMinForce { get; }
 
 

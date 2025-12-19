@@ -14,17 +14,17 @@ public partial interface CMeshletDescriptor : ISchemaClass<CMeshletDescriptor>
     static int ISchemaClass<CMeshletDescriptor>.Size => 24;
     static string? ISchemaClass<CMeshletDescriptor>.ClassName => null;
 
-    
+
     public PackedAABB_t PackedAABB { get; }
-    
+
     public CDrawCullingData CullingData { get; }
-    
+
     public ref uint VertexOffset { get; }
-    
+
     public ref uint TriangleOffset { get; }
-    
+
     public ref byte VertexCount { get; }
-    
+
     public ref byte TriangleCount { get; }
 
 

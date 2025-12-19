@@ -14,16 +14,16 @@ public partial interface CMathColorBlend : CLogicalEntity, ISchemaClass<CMathCol
     static int ISchemaClass<CMathColorBlend>.Size => 1320;
     static string? ISchemaClass<CMathColorBlend>.ClassName => "math_colorblend";
 
-    
+
     public ref float InMin { get; }
-    
+
     public ref float InMax { get; }
-    
+
     public ref Color OutColor1 { get; }
-    
+
     public ref Color OutColor2 { get; }
-    
-  // CEntityOutputTemplate< Color >
+
+    // CEntityOutputTemplate< Color >
     public SchemaUntypedField OutValue { get; }
 
 

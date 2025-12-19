@@ -14,36 +14,36 @@ public partial interface RsStencilStateDesc_t : ISchemaClass<RsStencilStateDesc_
     static int ISchemaClass<RsStencilStateDesc_t>.Size => 6;
     static string? ISchemaClass<RsStencilStateDesc_t>.ClassName => null;
 
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField StencilEnable { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField FrontStencilFailOp { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField FrontStencilDepthFailOp { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField FrontStencilPassOp { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField FrontStencilFunc { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField BackStencilFailOp { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField BackStencilDepthFailOp { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField BackStencilPassOp { get; }
-    
-  // bitfield
+
+    // bitfield
     public SchemaUntypedField BackStencilFunc { get; }
-    
+
     public ref byte StencilReadMask { get; }
-    
+
     public ref byte StencilWriteMask { get; }
 
 

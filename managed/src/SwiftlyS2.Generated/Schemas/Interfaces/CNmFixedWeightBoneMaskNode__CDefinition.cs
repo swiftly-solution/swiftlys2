@@ -14,7 +14,7 @@ public partial interface CNmFixedWeightBoneMaskNode__CDefinition : CNmBoneMaskVa
     static int ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition>.ClassName => null;
 
-    
+
     public ref float BoneWeight { get; }
 
 

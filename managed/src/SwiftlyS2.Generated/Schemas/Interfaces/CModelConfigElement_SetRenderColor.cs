@@ -14,7 +14,7 @@ public partial interface CModelConfigElement_SetRenderColor : CModelConfigElemen
     static int ISchemaClass<CModelConfigElement_SetRenderColor>.Size => 80;
     static string? ISchemaClass<CModelConfigElement_SetRenderColor>.ClassName => null;
 
-    
+
     public ref Color Color { get; }
 
 

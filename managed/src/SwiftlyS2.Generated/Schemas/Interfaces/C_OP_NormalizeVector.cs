@@ -14,9 +14,9 @@ public partial interface C_OP_NormalizeVector : CParticleFunctionOperator, ISche
     static int ISchemaClass<C_OP_NormalizeVector>.Size => 472;
     static string? ISchemaClass<C_OP_NormalizeVector>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float Scale { get; }
 
 

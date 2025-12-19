@@ -14,12 +14,12 @@ public partial interface CNmGraphEventConditionNode__CDefinition : CNmBoolValueN
     static int ISchemaClass<CNmGraphEventConditionNode__CDefinition>.Size => 128;
     static string? ISchemaClass<CNmGraphEventConditionNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short SourceStateNodeIdx { get; }
-    
+
     public CNmBitFlags EventConditionRules { get; }
-    
-  // CUtlVectorFixedGrowable< CNmGraphEventConditionNode::Condition_t, 5 >
+
+    // CUtlVectorFixedGrowable< CNmGraphEventConditionNode::Condition_t, 5 >
     public SchemaUntypedField Conditions { get; }
 
 

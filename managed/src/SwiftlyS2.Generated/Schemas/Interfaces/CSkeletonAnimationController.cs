@@ -14,7 +14,7 @@ public partial interface CSkeletonAnimationController : ISkeletonAnimationContro
     static int ISchemaClass<CSkeletonAnimationController>.Size => 16;
     static string? ISchemaClass<CSkeletonAnimationController>.ClassName => null;
 
-    
+
     public CSkeletonInstance? SkeletonInstance { get; }
 
 

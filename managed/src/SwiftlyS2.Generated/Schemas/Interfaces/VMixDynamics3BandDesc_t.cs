@@ -14,25 +14,25 @@ public partial interface VMixDynamics3BandDesc_t : ISchemaClass<VMixDynamics3Ban
     static int ISchemaClass<VMixDynamics3BandDesc_t>.Size => 144;
     static string? ISchemaClass<VMixDynamics3BandDesc_t>.ClassName => null;
 
-    
+
     public ref float FldbGainOutput { get; }
-    
+
     public ref float RMSTimeMS { get; }
-    
+
     public ref float FldbKneeWidth { get; }
-    
+
     public ref float Depth { get; }
-    
+
     public ref float WetMix { get; }
-    
+
     public ref float TimeScale { get; }
-    
+
     public ref float LowCutoffFreq { get; }
-    
+
     public ref float HighCutoffFreq { get; }
-    
+
     public ref bool PeakMode { get; }
-    
+
     public ISchemaClassFixedArray<VMixDynamicsBand_t> BandDesc { get; }
 
 

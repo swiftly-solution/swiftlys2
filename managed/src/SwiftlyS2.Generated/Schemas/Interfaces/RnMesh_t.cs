@@ -14,28 +14,28 @@ public partial interface RnMesh_t : ISchemaClass<RnMesh_t>
     static int ISchemaClass<RnMesh_t>.Size => 192;
     static string? ISchemaClass<RnMesh_t>.ClassName => null;
 
-    
+
     public ref Vector Min { get; }
-    
+
     public ref Vector Max { get; }
-    
+
     public ref CUtlVector<RnNode_t> Nodes { get; }
-    
-  // CUtlVectorSIMDPaddedVector
+
+    // CUtlVectorSIMDPaddedVector
     public SchemaUntypedField Vertices { get; }
-    
+
     public ref CUtlVector<RnTriangle_t> Triangles { get; }
-    
+
     public ref CUtlVector<RnWing_t> Wings { get; }
-    
+
     public ref CUtlVector<byte> TriangleEdgeFlags { get; }
-    
+
     public ref CUtlVector<byte> Materials { get; }
-    
+
     public ref Vector OrthographicAreas { get; }
-    
+
     public ref uint Flags { get; }
-    
+
     public ref uint DebugFlags { get; }
 
 

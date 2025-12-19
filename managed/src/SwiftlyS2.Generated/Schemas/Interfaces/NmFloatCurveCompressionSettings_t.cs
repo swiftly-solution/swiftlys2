@@ -14,9 +14,9 @@ public partial interface NmFloatCurveCompressionSettings_t : ISchemaClass<NmFloa
     static int ISchemaClass<NmFloatCurveCompressionSettings_t>.Size => 12;
     static string? ISchemaClass<NmFloatCurveCompressionSettings_t>.ClassName => null;
 
-    
+
     public NmCompressionSettings_t__QuantizationRange_t Range { get; }
-    
+
     public ref bool IsStatic { get; }
 
 

@@ -14,11 +14,11 @@ public partial interface ClutterTile_t : ISchemaClass<ClutterTile_t>
     static int ISchemaClass<ClutterTile_t>.Size => 32;
     static string? ISchemaClass<ClutterTile_t>.ClassName => null;
 
-    
+
     public ref uint FirstInstance { get; }
-    
+
     public ref uint LastInstance { get; }
-    
+
     public AABB_t BoundsWs { get; }
 
 

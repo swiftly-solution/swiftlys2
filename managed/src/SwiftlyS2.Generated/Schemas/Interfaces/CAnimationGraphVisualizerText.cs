@@ -14,11 +14,11 @@ public partial interface CAnimationGraphVisualizerText : CAnimationGraphVisualiz
     static int ISchemaClass<CAnimationGraphVisualizerText>.Size => 96;
     static string? ISchemaClass<CAnimationGraphVisualizerText>.ClassName => null;
 
-    
+
     public ref Vector WsPosition { get; }
-    
+
     public ref Color Color { get; }
-    
+
     public string Text { get; set; }
 
 

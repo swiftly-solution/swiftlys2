@@ -14,13 +14,13 @@ public partial interface CParticleMassCalculationParameters : ISchemaClass<CPart
     static int ISchemaClass<CParticleMassCalculationParameters>.Size => 1112;
     static string? ISchemaClass<CParticleMassCalculationParameters>.ClassName => null;
 
-    
+
     public ref ParticleMassMode_t MassMode { get; }
-    
+
     public CPerParticleFloatInput Radius { get; }
-    
+
     public CPerParticleFloatInput NominalRadius { get; }
-    
+
     public CPerParticleFloatInput Scale { get; }
 
 

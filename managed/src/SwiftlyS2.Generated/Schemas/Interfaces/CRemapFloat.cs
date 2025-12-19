@@ -14,7 +14,7 @@ public partial interface CRemapFloat : ISchemaClass<CRemapFloat>
     static int ISchemaClass<CRemapFloat>.Size => 16;
     static string? ISchemaClass<CRemapFloat>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<float> Value { get; }
 
 

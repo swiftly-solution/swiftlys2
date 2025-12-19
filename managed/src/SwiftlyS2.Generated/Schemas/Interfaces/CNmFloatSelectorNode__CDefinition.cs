@@ -14,17 +14,17 @@ public partial interface CNmFloatSelectorNode__CDefinition : CNmFloatValueNode__
     static int ISchemaClass<CNmFloatSelectorNode__CDefinition>.Size => 120;
     static string? ISchemaClass<CNmFloatSelectorNode__CDefinition>.ClassName => null;
 
-    
-  // CUtlVectorFixedGrowable< int16, 5 >
+
+    // CUtlVectorFixedGrowable< int16, 5 >
     public SchemaUntypedField ConditionNodeIndices { get; }
-    
-  // CUtlVectorFixedGrowable< float32, 5 >
+
+    // CUtlVectorFixedGrowable< float32, 5 >
     public SchemaUntypedField Values { get; }
-    
+
     public ref float DefaultValue { get; }
-    
+
     public ref float EaseTime { get; }
-    
+
     public ref NmEasingOperation_t EasingOp { get; }
 
 

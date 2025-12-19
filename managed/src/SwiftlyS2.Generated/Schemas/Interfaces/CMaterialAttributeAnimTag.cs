@@ -14,13 +14,13 @@ public partial interface CMaterialAttributeAnimTag : CAnimTagBase, ISchemaClass<
     static int ISchemaClass<CMaterialAttributeAnimTag>.Size => 112;
     static string? ISchemaClass<CMaterialAttributeAnimTag>.ClassName => null;
 
-    
+
     public string AttributeName { get; set; }
-    
+
     public ref MatterialAttributeTagType_t AttributeType { get; }
-    
+
     public ref float Value { get; }
-    
+
     public ref Color Color { get; }
 
 

@@ -14,41 +14,41 @@ public partial interface C_OP_RenderProjected : CParticleFunctionRenderer, ISche
     static int ISchemaClass<C_OP_RenderProjected>.Size => 3848;
     static string? ISchemaClass<C_OP_RenderProjected>.ClassName => null;
 
-    
+
     public ref bool ProjectCharacter { get; }
-    
+
     public ref bool ProjectWorld { get; }
-    
+
     public ref bool ProjectWater { get; }
-    
+
     public ref bool FlipHorizontal { get; }
-    
+
     public ref bool EnableProjectedDepthControls { get; }
-    
+
     public ref float MinProjectionDepth { get; }
-    
+
     public ref float MaxProjectionDepth { get; }
-    
+
     public ref CUtlVector<RenderProjectedMaterial_t> ProjectedMaterials { get; }
-    
+
     public CPerParticleFloatInput MaterialSelection { get; }
-    
+
     public ref float AnimationTimeScale { get; }
-    
+
     public ref bool OrientToNormal { get; }
-    
+
     public ref CUtlVector<MaterialVariable_t> MaterialVars { get; }
-    
+
     public CParticleCollectionFloatInput RadiusScale { get; }
-    
+
     public CParticleCollectionFloatInput AlphaScale { get; }
-    
+
     public CParticleCollectionFloatInput RollScale { get; }
-    
+
     public ParticleAttributeIndex_t Alpha2Field { get; }
-    
+
     public CParticleCollectionVecInput ColorScale { get; }
-    
+
     public ref ParticleColorBlendType_t ColorBlendType { get; }
 
 

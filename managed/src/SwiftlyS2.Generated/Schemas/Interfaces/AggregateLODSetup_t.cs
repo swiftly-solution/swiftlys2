@@ -14,11 +14,11 @@ public partial interface AggregateLODSetup_t : ISchemaClass<AggregateLODSetup_t>
     static int ISchemaClass<AggregateLODSetup_t>.Size => 40;
     static string? ISchemaClass<AggregateLODSetup_t>.ClassName => null;
 
-    
+
     public ref Vector LODOrigin { get; }
-    
+
     public ref float MaxObjectScale { get; }
-    
+
     public ref CUtlVector<float> SwitchDistances { get; }
 
 

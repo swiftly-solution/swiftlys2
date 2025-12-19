@@ -14,8 +14,8 @@ public partial interface CAnimGraphControllerBase : ISchemaClass<CAnimGraphContr
     static int ISchemaClass<CAnimGraphControllerBase>.Size => 128;
     static string? ISchemaClass<CAnimGraphControllerBase>.ClassName => null;
 
-    
-  // CUtlVectorFixedGrowable< CGlobalSymbol, 8 >
+
+    // CUtlVectorFixedGrowable< CGlobalSymbol, 8 >
     public SchemaUntypedField ParamsToResetInPostGraphUpdate { get; }
 
 

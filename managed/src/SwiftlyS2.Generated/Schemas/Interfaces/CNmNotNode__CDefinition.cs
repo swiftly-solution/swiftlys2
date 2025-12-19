@@ -14,7 +14,7 @@ public partial interface CNmNotNode__CDefinition : CNmBoolValueNode__CDefinition
     static int ISchemaClass<CNmNotNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmNotNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
 
 

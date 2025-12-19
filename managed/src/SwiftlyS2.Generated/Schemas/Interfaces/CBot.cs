@@ -14,31 +14,31 @@ public partial interface CBot : ISchemaClass<CBot>
     static int ISchemaClass<CBot>.Size => 256;
     static string? ISchemaClass<CBot>.ClassName => null;
 
-    
+
     public CCSPlayerController? Controller { get; }
-    
+
     public CCSPlayerPawn? Player { get; }
-    
+
     public ref bool HasSpawned { get; }
-    
+
     public ref uint Id { get; }
-    
+
     public ref bool IsRunning { get; }
-    
+
     public ref bool IsCrouching { get; }
-    
+
     public ref float ForwardSpeed { get; }
-    
+
     public ref float LeftSpeed { get; }
-    
+
     public ref float VerticalSpeed { get; }
-    
+
     public ref ulong ButtonFlags { get; }
-    
+
     public ref float JumpTimestamp { get; }
-    
+
     public ref Vector ViewForward { get; }
-    
+
     public ref int PostureStackIndex { get; }
 
 

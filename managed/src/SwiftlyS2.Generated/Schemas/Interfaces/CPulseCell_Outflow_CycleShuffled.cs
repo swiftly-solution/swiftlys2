@@ -14,7 +14,7 @@ public partial interface CPulseCell_Outflow_CycleShuffled : CPulseCell_BaseFlow,
     static int ISchemaClass<CPulseCell_Outflow_CycleShuffled>.Size => 96;
     static string? ISchemaClass<CPulseCell_Outflow_CycleShuffled>.ClassName => null;
 
-    
+
     public ref CUtlVector<CPulse_OutflowConnection> Outputs { get; }
 
 

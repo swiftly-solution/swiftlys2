@@ -14,9 +14,9 @@ public partial interface C_OP_RenderScreenVelocityRotate : CParticleFunctionRend
     static int ISchemaClass<C_OP_RenderScreenVelocityRotate>.Size => 552;
     static string? ISchemaClass<C_OP_RenderScreenVelocityRotate>.ClassName => null;
 
-    
+
     public ref float RotateRateDegrees { get; }
-    
+
     public ref float ForwardDegrees { get; }
 
 

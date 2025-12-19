@@ -14,15 +14,15 @@ public partial interface CCSPlayer_RadioServices : CPlayerPawnComponent, ISchema
     static int ISchemaClass<CCSPlayer_RadioServices>.Size => 96;
     static string? ISchemaClass<CCSPlayer_RadioServices>.ClassName => null;
 
-    
+
     public GameTime_t GotHostageTalkTimer { get; }
-    
+
     public GameTime_t DefusingTalkTimer { get; }
-    
+
     public GameTime_t C4PlantTalkTimer { get; }
-    
+
     public ISchemaClassFixedArray<GameTime_t> RadioTokenSlots { get; }
-    
+
     public ref bool IgnoreRadio { get; }
 
 

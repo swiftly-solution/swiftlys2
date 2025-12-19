@@ -14,7 +14,7 @@ public partial interface VMixEQ8Desc_t : ISchemaClass<VMixEQ8Desc_t>
     static int ISchemaClass<VMixEQ8Desc_t>.Size => 128;
     static string? ISchemaClass<VMixEQ8Desc_t>.ClassName => null;
 
-    
+
     public ISchemaClassFixedArray<VMixFilterDesc_t> Stages { get; }
 
 

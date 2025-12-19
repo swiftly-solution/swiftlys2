@@ -14,7 +14,7 @@ public partial interface CBuyZone : CBaseTrigger, ISchemaClass<CBuyZone>
     static int ISchemaClass<CBuyZone>.Size => 2480;
     static string? ISchemaClass<CBuyZone>.ClassName => "func_buyzone";
 
-    
+
     public ref int LegacyTeamNum { get; }
 
 

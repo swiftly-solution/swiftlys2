@@ -14,17 +14,17 @@ public partial interface CNmParameterizedSelectorNode__CDefinition : CNmPoseNode
     static int ISchemaClass<CNmParameterizedSelectorNode__CDefinition>.Size => 64;
     static string? ISchemaClass<CNmParameterizedSelectorNode__CDefinition>.ClassName => null;
 
-    
-  // CUtlLeanVectorFixedGrowable< int16, 5 >
+
+    // CUtlLeanVectorFixedGrowable< int16, 5 >
     public SchemaUntypedField OptionNodeIndices { get; }
-    
-  // CUtlLeanVectorFixedGrowable< uint8, 5 >
+
+    // CUtlLeanVectorFixedGrowable< uint8, 5 >
     public SchemaUntypedField OptionWeights { get; }
-    
+
     public ref short ParameterNodeIdx { get; }
-    
+
     public ref bool IgnoreInvalidOptions { get; }
-    
+
     public ref bool HasWeightsSet { get; }
 
 

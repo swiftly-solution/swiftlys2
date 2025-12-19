@@ -14,15 +14,15 @@ public partial interface C_INIT_InitVec : CParticleFunctionInitializer, ISchemaC
     static int ISchemaClass<C_INIT_InitVec>.Size => 2208;
     static string? ISchemaClass<C_INIT_InitVec>.ClassName => null;
 
-    
+
     public CPerParticleVecInput InputValue { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool NormalizedOutput { get; }
-    
+
     public ref bool WritePreviousPosition { get; }
 
 

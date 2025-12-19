@@ -14,9 +14,9 @@ public partial interface C_OP_SetCPtoVector : CParticleFunctionOperator, ISchema
     static int ISchemaClass<C_OP_SetCPtoVector>.Size => 472;
     static string? ISchemaClass<C_OP_SetCPtoVector>.ClassName => null;
 
-    
+
     public ref int CPInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
 
 

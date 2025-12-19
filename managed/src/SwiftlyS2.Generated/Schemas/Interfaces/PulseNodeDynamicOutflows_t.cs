@@ -14,7 +14,7 @@ public partial interface PulseNodeDynamicOutflows_t : ISchemaClass<PulseNodeDyna
     static int ISchemaClass<PulseNodeDynamicOutflows_t>.Size => 24;
     static string? ISchemaClass<PulseNodeDynamicOutflows_t>.ClassName => null;
 
-    
+
     public ref CUtlVector<PulseNodeDynamicOutflows_t__DynamicOutflow_t> Outflows { get; }
 
 

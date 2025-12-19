@@ -14,7 +14,7 @@ public partial interface CNmFootEvent : CNmEvent, ISchemaClass<CNmFootEvent>
     static int ISchemaClass<CNmFootEvent>.Size => 40;
     static string? ISchemaClass<CNmFootEvent>.ClassName => null;
 
-    
+
     public ref NmFootPhase_t Phase { get; }
 
 

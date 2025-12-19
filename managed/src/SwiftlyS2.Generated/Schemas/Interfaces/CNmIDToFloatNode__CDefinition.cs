@@ -14,15 +14,15 @@ public partial interface CNmIDToFloatNode__CDefinition : CNmFloatValueNode__CDef
     static int ISchemaClass<CNmIDToFloatNode__CDefinition>.Size => 104;
     static string? ISchemaClass<CNmIDToFloatNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref float DefaultValue { get; }
-    
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 5 >
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 5 >
     public SchemaUntypedField IDs { get; }
-    
-  // CUtlLeanVectorFixedGrowable< float32, 5 >
+
+    // CUtlLeanVectorFixedGrowable< float32, 5 >
     public SchemaUntypedField Values { get; }
 
 

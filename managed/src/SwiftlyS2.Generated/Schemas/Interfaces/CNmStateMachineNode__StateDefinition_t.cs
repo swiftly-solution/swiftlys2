@@ -14,12 +14,12 @@ public partial interface CNmStateMachineNode__StateDefinition_t : ISchemaClass<C
     static int ISchemaClass<CNmStateMachineNode__StateDefinition_t>.Size => 56;
     static string? ISchemaClass<CNmStateMachineNode__StateDefinition_t>.ClassName => null;
 
-    
+
     public ref short StateNodeIdx { get; }
-    
+
     public ref short EntryConditionNodeIdx { get; }
-    
-  // CUtlLeanVectorFixedGrowable< CNmStateMachineNode::TransitionDefinition_t, 5 >
+
+    // CUtlLeanVectorFixedGrowable< CNmStateMachineNode::TransitionDefinition_t, 5 >
     public SchemaUntypedField TransitionDefinitions { get; }
 
 

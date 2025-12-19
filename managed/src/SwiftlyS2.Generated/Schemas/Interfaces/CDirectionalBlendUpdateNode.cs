@@ -14,21 +14,21 @@ public partial interface CDirectionalBlendUpdateNode : CLeafUpdateNode, ISchemaC
     static int ISchemaClass<CDirectionalBlendUpdateNode>.Size => 176;
     static string? ISchemaClass<CDirectionalBlendUpdateNode>.ClassName => null;
 
-    
+
     public ISchemaClassFixedArray<HSequence> Sequences { get; }
-    
+
     public CAnimInputDamping Damping { get; }
-    
+
     public ref AnimValueSource BlendValueSource { get; }
-    
+
     public CAnimParamHandle ParamIndex { get; }
-    
+
     public ref float PlaybackSpeed { get; }
-    
+
     public ref float Duration { get; }
-    
+
     public ref bool Loop { get; }
-    
+
     public ref bool LockBlendOnReset { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_INIT_RandomAlpha : CParticleFunctionInitializer, ISch
     static int ISchemaClass<C_INIT_RandomAlpha>.Size => 496;
     static string? ISchemaClass<C_INIT_RandomAlpha>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref int AlphaMin { get; }
-    
+
     public ref int AlphaMax { get; }
-    
+
     public ref float AlphaRandExponent { get; }
 
 

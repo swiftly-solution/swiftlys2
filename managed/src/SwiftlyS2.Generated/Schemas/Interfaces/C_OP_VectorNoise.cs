@@ -14,19 +14,19 @@ public partial interface C_OP_VectorNoise : CParticleFunctionOperator, ISchemaCl
     static int ISchemaClass<C_OP_VectorNoise>.Size => 504;
     static string? ISchemaClass<C_OP_VectorNoise>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref Vector OutputMin { get; }
-    
+
     public ref Vector OutputMax { get; }
-    
+
     public ref float Fl4NoiseScale { get; }
-    
+
     public ref bool Additive { get; }
-    
+
     public ref bool Offset { get; }
-    
+
     public ref float NoiseAnimationTimeScale { get; }
 
 

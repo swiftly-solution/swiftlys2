@@ -14,17 +14,17 @@ public partial interface CAnimLocalHierarchy : ISchemaClass<CAnimLocalHierarchy>
     static int ISchemaClass<CAnimLocalHierarchy>.Size => 48;
     static string? ISchemaClass<CAnimLocalHierarchy>.ClassName => null;
 
-    
+
     public ref CBufferString Bone { get; }
-    
+
     public ref CBufferString NewParent { get; }
-    
+
     public ref int StartFrame { get; }
-    
+
     public ref int PeakFrame { get; }
-    
+
     public ref int TailFrame { get; }
-    
+
     public ref int EndFrame { get; }
 
 

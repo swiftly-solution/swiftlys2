@@ -14,19 +14,19 @@ public partial interface C_INIT_MoveBetweenPoints : CParticleFunctionInitializer
     static int ISchemaClass<C_INIT_MoveBetweenPoints>.Size => 2320;
     static string? ISchemaClass<C_INIT_MoveBetweenPoints>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput SpeedMin { get; }
-    
+
     public CPerParticleFloatInput SpeedMax { get; }
-    
+
     public CPerParticleFloatInput EndSpread { get; }
-    
+
     public CPerParticleFloatInput StartOffset { get; }
-    
+
     public CPerParticleFloatInput EndOffset { get; }
-    
+
     public ref int EndControlPointNumber { get; }
-    
+
     public ref bool TrailBias { get; }
 
 

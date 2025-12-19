@@ -14,13 +14,13 @@ public partial interface C_OP_SetControlPointToCenter : CParticleFunctionPreEmis
     static int ISchemaClass<C_OP_SetControlPointToCenter>.Size => 496;
     static string? ISchemaClass<C_OP_SetControlPointToCenter>.ClassName => null;
 
-    
+
     public ref int CP1 { get; }
-    
+
     public ref Vector CP1Pos { get; }
-    
+
     public ref bool UseAvgParticlePos { get; }
-    
+
     public ref ParticleParentSetMode_t SetParent { get; }
 
 

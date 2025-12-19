@@ -14,7 +14,7 @@ public partial interface EventFrameBoundary_t : ISchemaClass<EventFrameBoundary_
     static int ISchemaClass<EventFrameBoundary_t>.Size => 4;
     static string? ISchemaClass<EventFrameBoundary_t>.ClassName => null;
 
-    
+
     public ref float FrameTime { get; }
 
 

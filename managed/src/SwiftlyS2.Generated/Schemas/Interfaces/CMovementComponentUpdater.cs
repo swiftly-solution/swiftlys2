@@ -14,21 +14,21 @@ public partial interface CMovementComponentUpdater : CAnimComponentUpdater, ISch
     static int ISchemaClass<CMovementComponentUpdater>.Size => 184;
     static string? ISchemaClass<CMovementComponentUpdater>.ClassName => null;
 
-    
+
     public ref CUtlVector<SchemaUntypedField> Motors { get; }
-    
+
     public CAnimInputDamping FacingDamping { get; }
-    
+
     public ref int DefaultMotorIndex { get; }
-    
+
     public ref float DefaultRunSpeed { get; }
-    
+
     public ref bool MoveVarsDisabled { get; }
-    
+
     public ref bool NetworkPath { get; }
-    
+
     public ref bool NetworkFacing { get; }
-    
+
     public ISchemaClassFixedArray<CAnimParamHandle> ParamHandles { get; }
 
 

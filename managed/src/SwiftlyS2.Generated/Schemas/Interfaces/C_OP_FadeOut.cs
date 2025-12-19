@@ -14,17 +14,17 @@ public partial interface C_OP_FadeOut : CParticleFunctionOperator, ISchemaClass<
     static int ISchemaClass<C_OP_FadeOut>.Size => 544;
     static string? ISchemaClass<C_OP_FadeOut>.ClassName => null;
 
-    
+
     public ref float FadeOutTimeMin { get; }
-    
+
     public ref float FadeOutTimeMax { get; }
-    
+
     public ref float FadeOutTimeExp { get; }
-    
+
     public ref float FadeBias { get; }
-    
+
     public ref bool Proportional { get; }
-    
+
     public ref bool EaseInAndOut { get; }
 
 

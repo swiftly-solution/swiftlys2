@@ -14,21 +14,21 @@ public partial interface C_OP_RemapTransformVisibilityToVector : CParticleFuncti
     static int ISchemaClass<C_OP_RemapTransformVisibilityToVector>.Size => 616;
     static string? ISchemaClass<C_OP_RemapTransformVisibilityToVector>.ClassName => null;
 
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public CParticleTransformInput TransformInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref Vector OutputMin { get; }
-    
+
     public ref Vector OutputMax { get; }
-    
+
     public ref float Radius { get; }
 
 

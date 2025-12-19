@@ -14,15 +14,15 @@ public partial interface CAnimBoneDifference : ISchemaClass<CAnimBoneDifference>
     static int ISchemaClass<CAnimBoneDifference>.Size => 48;
     static string? ISchemaClass<CAnimBoneDifference>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref CBufferString Parent { get; }
-    
+
     public ref Vector PosError { get; }
-    
+
     public ref bool HasRotation { get; }
-    
+
     public ref bool HasMovement { get; }
 
 

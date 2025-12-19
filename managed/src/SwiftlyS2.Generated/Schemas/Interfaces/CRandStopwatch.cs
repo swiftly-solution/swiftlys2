@@ -14,9 +14,9 @@ public partial interface CRandStopwatch : CStopwatchBase, ISchemaClass<CRandStop
     static int ISchemaClass<CRandStopwatch>.Size => 20;
     static string? ISchemaClass<CRandStopwatch>.ClassName => null;
 
-    
+
     public ref float MinInterval { get; }
-    
+
     public ref float MaxInterval { get; }
 
 

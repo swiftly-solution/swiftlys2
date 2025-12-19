@@ -14,7 +14,7 @@ public partial interface CCSGameModeRules : ISchemaClass<CCSGameModeRules>
     static int ISchemaClass<CCSGameModeRules>.Size => 48;
     static string? ISchemaClass<CCSGameModeRules>.ClassName => null;
 
-    
+
     public ref CNetworkVarChainer __m_pChainEntity { get; }
 
 

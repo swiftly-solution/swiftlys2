@@ -14,13 +14,13 @@ public partial interface C_OP_RemapGravityToVector : CParticleFunctionOperator, 
     static int ISchemaClass<C_OP_RemapGravityToVector>.Size => 2304;
     static string? ISchemaClass<C_OP_RemapGravityToVector>.ClassName => null;
 
-    
+
     public CPerParticleVecInput Input1 { get; }
-    
+
     public ParticleAttributeIndex_t OutputField { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool NormalizedOutput { get; }
 
 

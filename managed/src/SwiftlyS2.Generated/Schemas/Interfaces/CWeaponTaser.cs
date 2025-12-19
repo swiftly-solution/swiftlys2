@@ -14,9 +14,9 @@ public partial interface CWeaponTaser : CCSWeaponBaseGun, ISchemaClass<CWeaponTa
     static int ISchemaClass<CWeaponTaser>.Size => 4608;
     static string? ISchemaClass<CWeaponTaser>.ClassName => "weapon_taser";
 
-    
+
     public GameTime_t FireTime { get; }
-    
+
     public ref int LastAttackTick { get; }
 
     public void FireTimeUpdated();

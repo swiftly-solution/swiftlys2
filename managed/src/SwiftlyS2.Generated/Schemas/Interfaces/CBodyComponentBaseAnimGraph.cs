@@ -14,7 +14,7 @@ public partial interface CBodyComponentBaseAnimGraph : CBodyComponentSkeletonIns
     static int ISchemaClass<CBodyComponentBaseAnimGraph>.Size => 3264;
     static string? ISchemaClass<CBodyComponentBaseAnimGraph>.ClassName => null;
 
-    
+
     public CBaseAnimGraphController AnimationController { get; }
 
     public void AnimationControllerUpdated();

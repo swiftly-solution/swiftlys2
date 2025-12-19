@@ -14,7 +14,7 @@ public partial interface C_INIT_ScaleVelocity : CParticleFunctionInitializer, IS
     static int ISchemaClass<C_INIT_ScaleVelocity>.Size => 2192;
     static string? ISchemaClass<C_INIT_ScaleVelocity>.ClassName => null;
 
-    
+
     public CParticleCollectionVecInput Scale { get; }
 
 

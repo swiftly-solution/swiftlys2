@@ -14,31 +14,31 @@ public partial interface CVoxelVisibility : ISchemaClass<CVoxelVisibility>
     static int ISchemaClass<CVoxelVisibility>.Size => 160;
     static string? ISchemaClass<CVoxelVisibility>.ClassName => null;
 
-    
+
     public ref uint BaseClusterCount { get; }
-    
+
     public ref uint PVSBytesPerCluster { get; }
-    
+
     public ref Vector MinBounds { get; }
-    
+
     public ref Vector MaxBounds { get; }
-    
+
     public ref float GridSize { get; }
-    
+
     public ref uint SkyVisibilityCluster { get; }
-    
+
     public ref uint SunVisibilityCluster { get; }
-    
+
     public VoxelVisBlockOffset_t NodeBlock { get; }
-    
+
     public VoxelVisBlockOffset_t RegionBlock { get; }
-    
+
     public VoxelVisBlockOffset_t EnclosedClusterListBlock { get; }
-    
+
     public VoxelVisBlockOffset_t EnclosedClustersBlock { get; }
-    
+
     public VoxelVisBlockOffset_t MasksBlock { get; }
-    
+
     public VoxelVisBlockOffset_t VisBlocks { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_OP_HSVShiftToCP : CParticleFunctionPreEmission, ISche
     static int ISchemaClass<C_OP_HSVShiftToCP>.Size => 504;
     static string? ISchemaClass<C_OP_HSVShiftToCP>.ClassName => null;
 
-    
+
     public ref int ColorCP { get; }
-    
+
     public ref int ColorGemEnableCP { get; }
-    
+
     public ref int OutputCP { get; }
-    
+
     public ref Color DefaultHSVColor { get; }
 
 

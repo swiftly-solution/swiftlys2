@@ -14,7 +14,7 @@ public partial interface CNetworkTransmitComponent : ISchemaClass<CNetworkTransm
     static int ISchemaClass<CNetworkTransmitComponent>.Size => 456;
     static string? ISchemaClass<CNetworkTransmitComponent>.ClassName => null;
 
-    
+
     public ref byte TransmitStateOwnedCounter { get; }
 
 

@@ -14,19 +14,19 @@ public partial interface CMarkupVolumeTagged : CMarkupVolume, ISchemaClass<CMark
     static int ISchemaClass<CMarkupVolumeTagged>.Size => 2072;
     static string? ISchemaClass<CMarkupVolumeTagged>.ClassName => null;
 
-    
+
     public ref CUtlVector<CGlobalSymbol> GroupNames { get; }
-    
+
     public ref CUtlVector<CGlobalSymbol> Tags { get; }
-    
+
     public ref bool IsGroup { get; }
-    
+
     public ref bool GroupByPrefab { get; }
-    
+
     public ref bool GroupByVolume { get; }
-    
+
     public ref bool GroupOtherGroups { get; }
-    
+
     public ref bool IsInGroup { get; }
 
 

@@ -14,21 +14,21 @@ public partial interface CPhysicsSpring : CBaseEntity, ISchemaClass<CPhysicsSpri
     static int ISchemaClass<CPhysicsSpring>.Size => 1336;
     static string? ISchemaClass<CPhysicsSpring>.ClassName => "phys_spring";
 
-    
+
     public ref float Frequency { get; }
-    
+
     public ref float DampingRatio { get; }
-    
+
     public ref float RestLength { get; }
-    
+
     public string NameAttachStart { get; set; }
-    
+
     public string NameAttachEnd { get; set; }
-    
+
     public ref Vector Start { get; }
-    
+
     public ref Vector End { get; }
-    
+
     public ref uint TeleportTick { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface ChainToSolveData_t : ISchemaClass<ChainToSolveData_t>
     static int ISchemaClass<ChainToSolveData_t>.Size => 80;
     static string? ISchemaClass<ChainToSolveData_t>.ClassName => null;
 
-    
+
     public ref int ChainIndex { get; }
-    
+
     public IKSolverSettings_t SolverSettings { get; }
-    
+
     public IKTargetSettings_t TargetSettings { get; }
-    
+
     public ref SolveIKChainAnimNodeDebugSetting DebugSetting { get; }
-    
+
     public ref float DebugNormalizedValue { get; }
-    
+
     public ref Vector DebugOffset { get; }
 
 

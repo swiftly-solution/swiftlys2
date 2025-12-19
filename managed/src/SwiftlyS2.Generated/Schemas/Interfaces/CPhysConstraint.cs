@@ -14,31 +14,31 @@ public partial interface CPhysConstraint : CLogicalEntity, ISchemaClass<CPhysCon
     static int ISchemaClass<CPhysConstraint>.Size => 1376;
     static string? ISchemaClass<CPhysConstraint>.ClassName => null;
 
-    
+
     public string NameAttach1 { get; set; }
-    
+
     public string NameAttach2 { get; set; }
-    
+
     public ref CHandle<CBaseEntity> Attach1 { get; }
-    
+
     public ref CHandle<CBaseEntity> Attach2 { get; }
-    
+
     public string NameAttachment1 { get; set; }
-    
+
     public string NameAttachment2 { get; set; }
-    
+
     public string BreakSound { get; set; }
-    
+
     public ref float ForceLimit { get; }
-    
+
     public ref float TorqueLimit { get; }
-    
+
     public ref float MinTeleportDistance { get; }
-    
+
     public ref bool SnapObjectPositions { get; }
-    
+
     public ref bool TreatEntity1AsInfiniteMass { get; }
-    
+
     public CEntityIOOutput OnBreak { get; }
 
 

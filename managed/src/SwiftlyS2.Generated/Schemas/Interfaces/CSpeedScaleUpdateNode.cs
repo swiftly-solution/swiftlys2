@@ -14,7 +14,7 @@ public partial interface CSpeedScaleUpdateNode : CUnaryUpdateNode, ISchemaClass<
     static int ISchemaClass<CSpeedScaleUpdateNode>.Size => 120;
     static string? ISchemaClass<CSpeedScaleUpdateNode>.ClassName => null;
 
-    
+
     public CAnimParamHandle ParamIndex { get; }
 
 

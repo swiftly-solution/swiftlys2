@@ -14,19 +14,19 @@ public partial interface CNmClipNode__CDefinition : CNmClipReferenceNode__CDefin
     static int ISchemaClass<CNmClipNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmClipNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short PlayInReverseValueNodeIdx { get; }
-    
+
     public ref short ResetTimeValueNodeIdx { get; }
-    
+
     public ref float SpeedMultiplier { get; }
-    
+
     public ref int StartSyncEventOffset { get; }
-    
+
     public ref bool SampleRootMotion { get; }
-    
+
     public ref bool AllowLooping { get; }
-    
+
     public ref short DataSlotIdx { get; }
 
 

@@ -14,13 +14,13 @@ public partial interface C_OP_LerpToOtherAttribute : CParticleFunctionOperator, 
     static int ISchemaClass<C_OP_LerpToOtherAttribute>.Size => 880;
     static string? ISchemaClass<C_OP_LerpToOtherAttribute>.ClassName => null;
 
-    
+
     public CPerParticleFloatInput Interpolation { get; }
-    
+
     public ParticleAttributeIndex_t FieldInputFrom { get; }
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
 
 

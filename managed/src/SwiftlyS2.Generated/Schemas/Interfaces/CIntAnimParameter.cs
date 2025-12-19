@@ -14,11 +14,11 @@ public partial interface CIntAnimParameter : CConcreteAnimParameter, ISchemaClas
     static int ISchemaClass<CIntAnimParameter>.Size => 144;
     static string? ISchemaClass<CIntAnimParameter>.ClassName => null;
 
-    
+
     public ref int DefaultValue { get; }
-    
+
     public ref int MinValue { get; }
-    
+
     public ref int MaxValue { get; }
 
 

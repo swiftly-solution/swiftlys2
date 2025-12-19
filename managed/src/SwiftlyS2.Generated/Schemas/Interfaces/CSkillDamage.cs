@@ -14,11 +14,11 @@ public partial interface CSkillDamage : ISchemaClass<CSkillDamage>
     static int ISchemaClass<CSkillDamage>.Size => 24;
     static string? ISchemaClass<CSkillDamage>.ClassName => null;
 
-    
+
     public CSkillFloat Damage { get; }
-    
+
     public ref float NPCDamageScalarVsNPC { get; }
-    
+
     public ref float PhysicsForceDamage { get; }
 
 

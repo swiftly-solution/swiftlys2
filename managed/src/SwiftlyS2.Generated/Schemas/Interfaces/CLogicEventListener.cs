@@ -14,13 +14,13 @@ public partial interface CLogicEventListener : CLogicalEntity, ISchemaClass<CLog
     static int ISchemaClass<CLogicEventListener>.Size => 1336;
     static string? ISchemaClass<CLogicEventListener>.ClassName => "logic_eventlistener";
 
-    
+
     public string StrEventName { get; set; }
-    
+
     public ref bool IsEnabled { get; }
-    
+
     public ref int Team { get; }
-    
+
     public CEntityIOOutput OnEventFired { get; }
 
 

@@ -14,17 +14,17 @@ public partial interface AnimationDecodeDebugDumpElement_t : ISchemaClass<Animat
     static int ISchemaClass<AnimationDecodeDebugDumpElement_t>.Size => 112;
     static string? ISchemaClass<AnimationDecodeDebugDumpElement_t>.ClassName => null;
 
-    
+
     public ref int EntityIndex { get; }
-    
+
     public string ModelName { get; set; }
-    
+
     public ref CUtlVector<CUtlString> PoseParams { get; }
-    
+
     public ref CUtlVector<CUtlString> DecodeOps { get; }
-    
+
     public ref CUtlVector<CUtlString> InternalOps { get; }
-    
+
     public ref CUtlVector<CUtlString> DecodedAnims { get; }
 
 

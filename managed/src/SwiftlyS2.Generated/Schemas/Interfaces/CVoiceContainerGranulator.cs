@@ -14,17 +14,17 @@ public partial interface CVoiceContainerGranulator : CVoiceContainerBase, ISchem
     static int ISchemaClass<CVoiceContainerGranulator>.Size => 400;
     static string? ISchemaClass<CVoiceContainerGranulator>.ClassName => null;
 
-    
+
     public ref float GrainLength { get; }
-    
+
     public ref float GrainCrossfadeAmount { get; }
-    
+
     public ref float StartJitter { get; }
-    
+
     public ref float PlaybackJitter { get; }
-    
+
     public ref bool ShouldWraparound { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SourceAudio { get; }
 
 

@@ -14,9 +14,9 @@ public partial interface CSimpleSimTimer : ISchemaClass<CSimpleSimTimer>
     static int ISchemaClass<CSimpleSimTimer>.Size => 8;
     static string? ISchemaClass<CSimpleSimTimer>.ClassName => null;
 
-    
+
     public GameTime_t Next { get; }
-    
+
     public ref uint WorldGroupId { get; }
 
 

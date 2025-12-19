@@ -14,21 +14,21 @@ public partial interface CBasePlayerWeapon : CEconEntity, ISchemaClass<CBasePlay
     static int ISchemaClass<CBasePlayerWeapon>.Size => 3744;
     static string? ISchemaClass<CBasePlayerWeapon>.ClassName => null;
 
-    
+
     public GameTick_t NextPrimaryAttackTick { get; }
-    
+
     public ref float NextPrimaryAttackTickRatio { get; }
-    
+
     public GameTick_t NextSecondaryAttackTick { get; }
-    
+
     public ref float NextSecondaryAttackTickRatio { get; }
-    
+
     public ref int Clip1 { get; }
-    
+
     public ref int Clip2 { get; }
-    
+
     public ISchemaFixedArray<int> ReserveAmmo { get; }
-    
+
     public CEntityIOOutput OnPlayerUse { get; }
 
     public void NextPrimaryAttackTickUpdated();

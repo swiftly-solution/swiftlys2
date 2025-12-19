@@ -14,9 +14,9 @@ public partial interface C_OP_RemapDensityGradientToVectorAttribute : CParticleF
     static int ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute>.Size => 472;
     static string? ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute>.ClassName => null;
 
-    
+
     public ref float RadiusScale { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
 
 

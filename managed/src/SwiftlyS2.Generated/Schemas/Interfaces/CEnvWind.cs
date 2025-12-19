@@ -14,7 +14,7 @@ public partial interface CEnvWind : CBaseEntity, ISchemaClass<CEnvWind>
     static int ISchemaClass<CEnvWind>.Size => 1600;
     static string? ISchemaClass<CEnvWind>.ClassName => "env_wind";
 
-    
+
     public CEnvWindShared EnvWindShared { get; }
 
     public void EnvWindSharedUpdated();

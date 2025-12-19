@@ -14,11 +14,11 @@ public partial interface CSSDSMsg_ViewTargetList : ISchemaClass<CSSDSMsg_ViewTar
     static int ISchemaClass<CSSDSMsg_ViewTargetList>.Size => 48;
     static string? ISchemaClass<CSSDSMsg_ViewTargetList>.ClassName => null;
 
-    
+
     public SceneViewId_t ViewId { get; }
-    
+
     public string ViewName { get; set; }
-    
+
     public ref CUtlVector<CSSDSMsg_ViewTarget> Targets { get; }
 
 

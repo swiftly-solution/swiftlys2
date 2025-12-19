@@ -14,19 +14,19 @@ public partial interface C_OP_RenderLights : C_OP_RenderPoints, ISchemaClass<C_O
     static int ISchemaClass<C_OP_RenderLights>.Size => 584;
     static string? ISchemaClass<C_OP_RenderLights>.ClassName => null;
 
-    
+
     public ref float AnimationRate { get; }
-    
+
     public ref AnimationType_t AnimationType { get; }
-    
+
     public ref bool AnimateInFPS { get; }
-    
+
     public ref float MinSize { get; }
-    
+
     public ref float MaxSize { get; }
-    
+
     public ref float StartFadeSize { get; }
-    
+
     public ref float EndFadeSize { get; }
 
 

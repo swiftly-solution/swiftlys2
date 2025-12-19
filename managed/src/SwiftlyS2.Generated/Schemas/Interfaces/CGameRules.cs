@@ -14,17 +14,17 @@ public partial interface CGameRules : ISchemaClass<CGameRules>
     static int ISchemaClass<CGameRules>.Size => 192;
     static string? ISchemaClass<CGameRules>.ClassName => null;
 
-    
+
     public ref CNetworkVarChainer __m_pChainEntity { get; }
-    
+
     public string QuestName { get; set; }
-    
+
     public ref int QuestPhase { get; }
-    
+
     public ref int TotalPausedTicks { get; }
-    
+
     public ref int PauseStartTick { get; }
-    
+
     public ref bool GamePaused { get; }
 
     public void TotalPausedTicksUpdated();

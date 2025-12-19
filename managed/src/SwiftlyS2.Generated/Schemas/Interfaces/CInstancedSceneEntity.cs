@@ -14,19 +14,19 @@ public partial interface CInstancedSceneEntity : CSceneEntity, ISchemaClass<CIns
     static int ISchemaClass<CInstancedSceneEntity>.Size => 2664;
     static string? ISchemaClass<CInstancedSceneEntity>.ClassName => "instanced_scripted_scene";
 
-    
+
     public ref CHandle<CBaseEntity> Owner { get; }
-    
+
     public ref bool HadOwner { get; }
-    
+
     public ref float PostSpeakDelay { get; }
-    
+
     public ref float PreDelay { get; }
-    
+
     public ref bool IsBackground { get; }
-    
+
     public ref bool RemoveOnCompletion { get; }
-    
+
     public ref CHandle<CBaseEntity> Target { get; }
 
 

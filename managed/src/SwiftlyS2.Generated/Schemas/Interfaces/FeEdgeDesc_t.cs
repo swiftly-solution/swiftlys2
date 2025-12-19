@@ -14,12 +14,12 @@ public partial interface FeEdgeDesc_t : ISchemaClass<FeEdgeDesc_t>
     static int ISchemaClass<FeEdgeDesc_t>.Size => 16;
     static string? ISchemaClass<FeEdgeDesc_t>.ClassName => null;
 
-    
+
     public ISchemaFixedArray<ushort> Edge { get; }
-    
-  // uint16[2]
+
+    // uint16[2]
     public SchemaUntypedField Side { get; }
-    
+
     public ISchemaFixedArray<ushort> VirtElem { get; }
 
 

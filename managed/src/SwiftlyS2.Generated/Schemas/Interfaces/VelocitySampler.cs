@@ -14,11 +14,11 @@ public partial interface VelocitySampler : ISchemaClass<VelocitySampler>
     static int ISchemaClass<VelocitySampler>.Size => 20;
     static string? ISchemaClass<VelocitySampler>.ClassName => null;
 
-    
+
     public ref Vector PrevSample { get; }
-    
+
     public GameTime_t PrevSampleTime { get; }
-    
+
     public ref float IdealSampleRate { get; }
 
 

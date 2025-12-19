@@ -14,9 +14,9 @@ public partial interface CAnimUserDifference : ISchemaClass<CAnimUserDifference>
     static int ISchemaClass<CAnimUserDifference>.Size => 24;
     static string? ISchemaClass<CAnimUserDifference>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref int Type { get; }
 
 

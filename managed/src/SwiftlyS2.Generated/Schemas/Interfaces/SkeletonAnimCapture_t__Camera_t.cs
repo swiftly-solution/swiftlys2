@@ -14,9 +14,9 @@ public partial interface SkeletonAnimCapture_t__Camera_t : ISchemaClass<Skeleton
     static int ISchemaClass<SkeletonAnimCapture_t__Camera_t>.Size => 48;
     static string? ISchemaClass<SkeletonAnimCapture_t__Camera_t>.ClassName => null;
 
-    
+
     public ref CTransform TmCamera { get; }
-    
+
     public ref float Time { get; }
 
 

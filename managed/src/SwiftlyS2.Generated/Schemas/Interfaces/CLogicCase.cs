@@ -14,18 +14,18 @@ public partial interface CLogicCase : CLogicalEntity, ISchemaClass<CLogicCase>
     static int ISchemaClass<CLogicCase>.Size => 2880;
     static string? ISchemaClass<CLogicCase>.ClassName => "logic_case";
 
-    
+
     public string Case { get; set; }
-    
+
     public ref int ShuffleCases { get; }
-    
+
     public ref int LastShuffleCase { get; }
-    
+
     public ISchemaFixedArray<byte> UchShuffleCaseMap { get; }
-    
+
     public ISchemaClassFixedArray<CEntityIOOutput> OnCase { get; }
-    
-  // CEntityOutputTemplate< CVariantBase< CVariantDefaultAllocator > >
+
+    // CEntityOutputTemplate< CVariantBase< CVariantDefaultAllocator > >
     public SchemaUntypedField OnDefault { get; }
 
 

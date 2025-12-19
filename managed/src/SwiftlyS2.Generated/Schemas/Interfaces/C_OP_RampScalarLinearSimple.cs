@@ -14,13 +14,13 @@ public partial interface C_OP_RampScalarLinearSimple : CParticleFunctionOperator
     static int ISchemaClass<C_OP_RampScalarLinearSimple>.Size => 528;
     static string? ISchemaClass<C_OP_RampScalarLinearSimple>.ClassName => null;
 
-    
+
     public ref float Rate { get; }
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float EndTime { get; }
-    
+
     public ParticleAttributeIndex_t Field { get; }
 
 

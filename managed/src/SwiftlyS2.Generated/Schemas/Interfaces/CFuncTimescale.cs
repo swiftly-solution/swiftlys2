@@ -14,15 +14,15 @@ public partial interface CFuncTimescale : CBaseEntity, ISchemaClass<CFuncTimesca
     static int ISchemaClass<CFuncTimescale>.Size => 1288;
     static string? ISchemaClass<CFuncTimescale>.ClassName => "func_timescale";
 
-    
+
     public ref float DesiredTimescale { get; }
-    
+
     public ref float Acceleration { get; }
-    
+
     public ref float MinBlendRate { get; }
-    
+
     public ref float BlendDeltaMultiplier { get; }
-    
+
     public ref bool IsStarted { get; }
 
 

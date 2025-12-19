@@ -14,19 +14,19 @@ public partial interface CReplicationParameters : ISchemaClass<CReplicationParam
     static int ISchemaClass<CReplicationParameters>.Size => 4552;
     static string? ISchemaClass<CReplicationParameters>.ClassName => null;
 
-    
+
     public ref ParticleReplicationMode_t ReplicationMode { get; }
-    
+
     public ref bool ScaleChildParticleRadii { get; }
-    
+
     public CParticleCollectionFloatInput MinRandomRadiusScale { get; }
-    
+
     public CParticleCollectionFloatInput MaxRandomRadiusScale { get; }
-    
+
     public CParticleCollectionVecInput MinRandomDisplacement { get; }
-    
+
     public CParticleCollectionVecInput MaxRandomDisplacement { get; }
-    
+
     public CParticleCollectionFloatInput ModellingScale { get; }
 
 

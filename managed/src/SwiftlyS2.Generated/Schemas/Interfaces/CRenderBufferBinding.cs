@@ -14,9 +14,9 @@ public partial interface CRenderBufferBinding : ISchemaClass<CRenderBufferBindin
     static int ISchemaClass<CRenderBufferBinding>.Size => 32;
     static string? ISchemaClass<CRenderBufferBinding>.ClassName => null;
 
-    
+
     public ref ulong Buffer { get; }
-    
+
     public ref uint BindOffsetBytes { get; }
 
 

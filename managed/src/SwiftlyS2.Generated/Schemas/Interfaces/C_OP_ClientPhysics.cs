@@ -14,31 +14,31 @@ public partial interface C_OP_ClientPhysics : CParticleFunctionRenderer, ISchema
     static int ISchemaClass<C_OP_ClientPhysics>.Size => 1328;
     static string? ISchemaClass<C_OP_ClientPhysics>.ClassName => null;
 
-    
+
     public string StrPhysicsType { get; set; }
-    
+
     public ref bool StartAsleep { get; }
-    
+
     public CParticleCollectionFloatInput PlayerWakeRadius { get; }
-    
+
     public CParticleCollectionFloatInput VehicleWakeRadius { get; }
-    
+
     public ref bool UseHighQualitySimulation { get; }
-    
+
     public ref int MaxParticleCount { get; }
-    
+
     public ref bool RespectExclusionVolumes { get; }
-    
+
     public ref bool KillParticles { get; }
-    
+
     public ref bool DeleteSim { get; }
-    
+
     public ref int ControlPoint { get; }
-    
+
     public ref int ForcedSimId { get; }
-    
+
     public ref ParticleColorBlendType_t ColorBlendType { get; }
-    
+
     public ref ParticleAttrBoxFlags_t ForcedStatusEffects { get; }
 
 

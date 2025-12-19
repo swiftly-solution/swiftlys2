@@ -14,19 +14,19 @@ public partial interface C_OP_SetControlPointFieldFromVectorExpression : CPartic
     static int ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression>.Size => 4664;
     static string? ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression>.ClassName => null;
 
-    
+
     public ref VectorFloatExpressionType_t Expression { get; }
-    
+
     public CParticleCollectionVecInput Input1 { get; }
-    
+
     public CParticleCollectionVecInput Input2 { get; }
-    
+
     public CPerParticleFloatInput Lerp { get; }
-    
+
     public CParticleRemapFloatInput OutputRemap { get; }
-    
+
     public ref int OutputCP { get; }
-    
+
     public ref int OutVectorField { get; }
 
 

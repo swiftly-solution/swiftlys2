@@ -14,9 +14,9 @@ public partial interface CCSPlayer_ItemServices : CPlayer_ItemServices, ISchemaC
     static int ISchemaClass<CCSPlayer_ItemServices>.Size => 72;
     static string? ISchemaClass<CCSPlayer_ItemServices>.ClassName => null;
 
-    
+
     public ref bool HasDefuser { get; }
-    
+
     public ref bool HasHelmet { get; }
 
     public void HasDefuserUpdated();

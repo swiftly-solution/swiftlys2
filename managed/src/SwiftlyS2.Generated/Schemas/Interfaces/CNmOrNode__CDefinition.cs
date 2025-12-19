@@ -14,8 +14,8 @@ public partial interface CNmOrNode__CDefinition : CNmBoolValueNode__CDefinition,
     static int ISchemaClass<CNmOrNode__CDefinition>.Size => 32;
     static string? ISchemaClass<CNmOrNode__CDefinition>.ClassName => null;
 
-    
-  // CUtlLeanVectorFixedGrowable< int16, 4 >
+
+    // CUtlLeanVectorFixedGrowable< int16, 4 >
     public SchemaUntypedField ConditionNodeIndices { get; }
 
 

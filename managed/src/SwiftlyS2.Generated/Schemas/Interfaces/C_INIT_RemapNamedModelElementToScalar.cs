@@ -14,19 +14,19 @@ public partial interface C_INIT_RemapNamedModelElementToScalar : CParticleFuncti
     static int ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.Size => 544;
     static string? ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.ClassName => null;
 
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-    
+
     public ref CUtlVector<CUtlString> Names { get; }
-    
+
     public ref CUtlVector<float> Values { get; }
-    
+
     public ParticleAttributeIndex_t FieldInput { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool ModelFromRenderer { get; }
 
 

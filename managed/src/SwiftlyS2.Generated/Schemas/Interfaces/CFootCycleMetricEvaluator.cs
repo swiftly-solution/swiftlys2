@@ -14,7 +14,7 @@ public partial interface CFootCycleMetricEvaluator : CMotionMetricEvaluator, ISc
     static int ISchemaClass<CFootCycleMetricEvaluator>.Size => 104;
     static string? ISchemaClass<CFootCycleMetricEvaluator>.ClassName => null;
 
-    
+
     public ref CUtlVector<int> FootIndices { get; }
 
 

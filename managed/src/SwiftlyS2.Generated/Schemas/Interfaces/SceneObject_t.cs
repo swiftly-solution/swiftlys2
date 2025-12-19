@@ -14,33 +14,33 @@ public partial interface SceneObject_t : ISchemaClass<SceneObject_t>
     static int ISchemaClass<SceneObject_t>.Size => 136;
     static string? ISchemaClass<SceneObject_t>.ClassName => null;
 
-    
+
     public ref uint ObjectID { get; }
-    
+
     public ISchemaFixedArray<Vector4D> Transform { get; }
-    
+
     public ref float FadeStartDistance { get; }
-    
+
     public ref float FadeEndDistance { get; }
-    
+
     public ref Vector4D TintColor { get; }
-    
+
     public string Skin { get; set; }
-    
+
     public ref ObjectTypeFlags_t ObjectTypeFlags { get; }
-    
+
     public ref Vector LightingOrigin { get; }
-    
+
     public ref short OverlayRenderOrder { get; }
-    
+
     public ref short LODOverride { get; }
-    
+
     public ref int CubeMapPrecomputedHandshake { get; }
-    
+
     public ref int LightProbeVolumePrecomputedHandshake { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel { get; }
-    
+
     public ref CStrongHandle<InfoForResourceTypeCRenderMesh> Renderable { get; }
 
 

@@ -14,25 +14,25 @@ public partial interface CBaseCombatCharacter : CBaseFlex, ISchemaClass<CBaseCom
     static int ISchemaClass<CBaseCombatCharacter>.Size => 3040;
     static string? ISchemaClass<CBaseCombatCharacter>.ClassName => null;
 
-    
+
     public ref bool ForceServerRagdoll { get; }
-    
+
     public ref CUtlVector<CHandle<CEconWearable>> MyWearables { get; }
-    
+
     public ref float ImpactEnergyScale { get; }
-    
+
     public ref bool ApplyStressDamage { get; }
-    
+
     public ref bool DeathEventsDispatched { get; }
-    
+
     public ref CUtlVector<RelationshipOverride_t> VecRelationships { get; }
-    
+
     public string StrRelationships { get; set; }
-    
+
     public ref Hull_t Hull { get; }
-    
+
     public ref uint NavHullIdx { get; }
-    
+
     public CMovementStatsProperty MovementStats { get; }
 
     public void MyWearablesUpdated();

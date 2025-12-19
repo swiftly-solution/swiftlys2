@@ -14,11 +14,11 @@ public partial interface CSoundAreaEntityBase : CBaseEntity, ISchemaClass<CSound
     static int ISchemaClass<CSoundAreaEntityBase>.Size => 1296;
     static string? ISchemaClass<CSoundAreaEntityBase>.ClassName => "snd_sound_area_base";
 
-    
+
     public ref bool Disabled { get; }
-    
+
     public string SoundAreaType { get; set; }
-    
+
     public ref Vector Pos { get; }
 
     public void DisabledUpdated();

@@ -14,7 +14,7 @@ public partial interface FilterDamageType : CBaseFilter, ISchemaClass<FilterDama
     static int ISchemaClass<FilterDamageType>.Size => 1360;
     static string? ISchemaClass<FilterDamageType>.ClassName => "filter_damage_type";
 
-    
+
     public ref int DamageType { get; }
 
 

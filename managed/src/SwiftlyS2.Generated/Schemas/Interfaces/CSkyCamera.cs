@@ -14,13 +14,13 @@ public partial interface CSkyCamera : CBaseEntity, ISchemaClass<CSkyCamera>
     static int ISchemaClass<CSkyCamera>.Size => 1424;
     static string? ISchemaClass<CSkyCamera>.ClassName => "sky_camera";
 
-    
+
     public sky3dparams_t SkyboxData { get; }
-    
+
     public ref CUtlStringToken SkyboxSlotToken { get; }
-    
+
     public ref bool UseAngles { get; }
-    
+
     public CSkyCamera? Next { get; }
 
     public void SkyboxDataUpdated();

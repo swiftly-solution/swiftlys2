@@ -14,15 +14,15 @@ public partial interface C_OP_BoxConstraint : CParticleFunctionConstraint, ISche
     static int ISchemaClass<C_OP_BoxConstraint>.Size => 3912;
     static string? ISchemaClass<C_OP_BoxConstraint>.ClassName => null;
 
-    
+
     public CParticleCollectionVecInput Min { get; }
-    
+
     public CParticleCollectionVecInput Max { get; }
-    
+
     public ref int CP { get; }
-    
+
     public ref bool LocalSpace { get; }
-    
+
     public ref bool AccountForRadius { get; }
 
 

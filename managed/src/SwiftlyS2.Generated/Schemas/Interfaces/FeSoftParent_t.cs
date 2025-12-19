@@ -14,9 +14,9 @@ public partial interface FeSoftParent_t : ISchemaClass<FeSoftParent_t>
     static int ISchemaClass<FeSoftParent_t>.Size => 8;
     static string? ISchemaClass<FeSoftParent_t>.ClassName => null;
 
-    
+
     public ref int Parent { get; }
-    
+
     public ref float Alpha { get; }
 
 

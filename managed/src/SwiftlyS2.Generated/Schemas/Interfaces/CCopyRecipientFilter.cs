@@ -14,11 +14,11 @@ public partial interface CCopyRecipientFilter : ISchemaClass<CCopyRecipientFilte
     static int ISchemaClass<CCopyRecipientFilter>.Size => 56;
     static string? ISchemaClass<CCopyRecipientFilter>.ClassName => null;
 
-    
+
     public ref int Flags { get; }
-    
+
     public ref CUtlVector<uint> Recipients { get; }
-    
+
     public ref uint SlotPlayerExcludedDueToPrediction { get; }
 
 

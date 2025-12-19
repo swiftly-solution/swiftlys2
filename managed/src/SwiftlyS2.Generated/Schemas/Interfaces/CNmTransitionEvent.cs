@@ -14,9 +14,9 @@ public partial interface CNmTransitionEvent : CNmEvent, ISchemaClass<CNmTransiti
     static int ISchemaClass<CNmTransitionEvent>.Size => 48;
     static string? ISchemaClass<CNmTransitionEvent>.ClassName => null;
 
-    
+
     public ref NmTransitionRule_t Rule { get; }
-    
+
     public ref CGlobalSymbol ID { get; }
 
 

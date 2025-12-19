@@ -14,7 +14,7 @@ public partial interface C_OP_WindForce : CParticleFunctionForce, ISchemaClass<C
     static int ISchemaClass<C_OP_WindForce>.Size => 496;
     static string? ISchemaClass<C_OP_WindForce>.ClassName => null;
 
-    
+
     public ref Vector Force { get; }
 
 

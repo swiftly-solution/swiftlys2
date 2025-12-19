@@ -14,13 +14,13 @@ public partial interface ActiveModelConfig_t : ISchemaClass<ActiveModelConfig_t>
     static int ISchemaClass<ActiveModelConfig_t>.Size => 112;
     static string? ISchemaClass<ActiveModelConfig_t>.ClassName => null;
 
-    
+
     public ModelConfigHandle_t Handle { get; }
-    
+
     public string Name { get; set; }
-    
+
     public ref CUtlVector<CHandle<CBaseModelEntity>> AssociatedEntities { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> AssociatedEntityNames { get; }
 
     public void HandleUpdated();

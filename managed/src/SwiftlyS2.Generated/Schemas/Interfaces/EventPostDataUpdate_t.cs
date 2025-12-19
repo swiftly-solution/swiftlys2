@@ -14,7 +14,7 @@ public partial interface EventPostDataUpdate_t : ISchemaClass<EventPostDataUpdat
     static int ISchemaClass<EventPostDataUpdate_t>.Size => 16;
     static string? ISchemaClass<EventPostDataUpdate_t>.ClassName => null;
 
-    
+
     public ref int Count { get; }
 
 

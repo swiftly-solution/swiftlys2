@@ -14,25 +14,25 @@ public partial interface C_OP_PercentageBetweenTransformsVector : CParticleFunct
     static int ISchemaClass<C_OP_PercentageBetweenTransformsVector>.Size => 720;
     static string? ISchemaClass<C_OP_PercentageBetweenTransformsVector>.ClassName => null;
 
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float InputMin { get; }
-    
+
     public ref float InputMax { get; }
-    
+
     public ref Vector OutputMin { get; }
-    
+
     public ref Vector OutputMax { get; }
-    
+
     public CParticleTransformInput TransformStart { get; }
-    
+
     public CParticleTransformInput TransformEnd { get; }
-    
+
     public ref ParticleSetMethod_t SetMethod { get; }
-    
+
     public ref bool ActiveRange { get; }
-    
+
     public ref bool RadialCheck { get; }
 
 

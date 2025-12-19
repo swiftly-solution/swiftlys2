@@ -14,17 +14,17 @@ public partial interface lerpdata_t : ISchemaClass<lerpdata_t>
     static int ISchemaClass<lerpdata_t>.Size => 80;
     static string? ISchemaClass<lerpdata_t>.ClassName => null;
 
-    
+
     public ref CHandle<CBaseEntity> Ent { get; }
-    
+
     public ref MoveType_t MoveType { get; }
-    
+
     public GameTime_t StartTime { get; }
-    
+
     public ref Vector StartOrigin { get; }
-    
+
     public ref Quaternion StartRot { get; }
-    
+
     public ParticleIndex_t FXIndex { get; }
 
 

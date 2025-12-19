@@ -14,7 +14,7 @@ public partial interface CMapSharedEnvironment : CLogicalEntity, ISchemaClass<CM
     static int ISchemaClass<CMapSharedEnvironment>.Size => 1280;
     static string? ISchemaClass<CMapSharedEnvironment>.ClassName => "map_shared_environment";
 
-    
+
     public string TargetMapName { get; set; }
 
 

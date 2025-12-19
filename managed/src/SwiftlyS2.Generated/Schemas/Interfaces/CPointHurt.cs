@@ -14,17 +14,17 @@ public partial interface CPointHurt : CPointEntity, ISchemaClass<CPointHurt>
     static int ISchemaClass<CPointHurt>.Size => 1296;
     static string? ISchemaClass<CPointHurt>.ClassName => "point_hurt";
 
-    
+
     public ref int Damage { get; }
-    
+
     public ref DamageTypes_t BitsDamageType { get; }
-    
+
     public ref float Radius { get; }
-    
+
     public ref float Delay { get; }
-    
+
     public string StrTarget { get; set; }
-    
+
     public ref CHandle<CBaseEntity> Activator { get; }
 
 

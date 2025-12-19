@@ -14,11 +14,11 @@ public partial interface CEnumAnimParameter : CConcreteAnimParameter, ISchemaCla
     static int ISchemaClass<CEnumAnimParameter>.Size => 216;
     static string? ISchemaClass<CEnumAnimParameter>.ClassName => null;
 
-    
+
     public ref byte DefaultValue { get; }
-    
+
     public ref CUtlVector<CUtlString> EnumOptions { get; }
-    
+
     public ref CUtlVector<ulong> EnumReferenced { get; }
 
 

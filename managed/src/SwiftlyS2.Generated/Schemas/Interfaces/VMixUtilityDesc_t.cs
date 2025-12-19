@@ -14,17 +14,17 @@ public partial interface VMixUtilityDesc_t : ISchemaClass<VMixUtilityDesc_t>
     static int ISchemaClass<VMixUtilityDesc_t>.Size => 24;
     static string? ISchemaClass<VMixUtilityDesc_t>.ClassName => null;
 
-    
+
     public ref VMixChannelOperation_t Op { get; }
-    
+
     public ref float InputPan { get; }
-    
+
     public ref float OutputBalance { get; }
-    
+
     public ref float FldbOutputGain { get; }
-    
+
     public ref bool BassMono { get; }
-    
+
     public ref float BassFreq { get; }
 
 

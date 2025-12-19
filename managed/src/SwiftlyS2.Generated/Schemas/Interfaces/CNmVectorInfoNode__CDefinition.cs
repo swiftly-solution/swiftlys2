@@ -14,9 +14,9 @@ public partial interface CNmVectorInfoNode__CDefinition : CNmFloatValueNode__CDe
     static int ISchemaClass<CNmVectorInfoNode__CDefinition>.Size => 24;
     static string? ISchemaClass<CNmVectorInfoNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short InputValueNodeIdx { get; }
-    
+
     public ref CNmVectorInfoNode__Info_t DesiredInfo { get; }
 
 

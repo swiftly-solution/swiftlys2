@@ -14,13 +14,13 @@ public partial interface CPulseCell_BooleanSwitchState : CPulseCell_BaseState, I
     static int ISchemaClass<CPulseCell_BooleanSwitchState>.Size => 408;
     static string? ISchemaClass<CPulseCell_BooleanSwitchState>.ClassName => null;
 
-    
+
     public PulseObservableBoolExpression_t Condition { get; }
-    
+
     public CPulse_OutflowConnection SubGraph { get; }
-    
+
     public CPulse_OutflowConnection WhenTrue { get; }
-    
+
     public CPulse_OutflowConnection WhenFalse { get; }
 
 

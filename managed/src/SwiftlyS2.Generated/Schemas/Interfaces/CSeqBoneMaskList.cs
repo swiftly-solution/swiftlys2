@@ -14,15 +14,15 @@ public partial interface CSeqBoneMaskList : ISchemaClass<CSeqBoneMaskList>
     static int ISchemaClass<CSeqBoneMaskList>.Size => 96;
     static string? ISchemaClass<CSeqBoneMaskList>.ClassName => null;
 
-    
+
     public ref CBufferString Name { get; }
-    
+
     public ref CUtlVector<short> LocalBoneArray { get; }
-    
+
     public ref CUtlVector<float> BoneWeightArray { get; }
-    
+
     public ref float DefaultMorphCtrlWeight { get; }
-    
+
     public ref CUtlVector<SchemaUntypedField> MorphCtrlWeightArray { get; }
 
 

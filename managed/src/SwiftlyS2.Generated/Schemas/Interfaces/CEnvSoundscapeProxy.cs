@@ -14,7 +14,7 @@ public partial interface CEnvSoundscapeProxy : CEnvSoundscape, ISchemaClass<CEnv
     static int ISchemaClass<CEnvSoundscapeProxy>.Size => 1432;
     static string? ISchemaClass<CEnvSoundscapeProxy>.ClassName => "env_soundscape_proxy";
 
-    
+
     public string MainSoundscapeName { get; set; }
 
 

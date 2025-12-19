@@ -14,17 +14,17 @@ public partial interface sky3dparams_t : ISchemaClass<sky3dparams_t>
     static int ISchemaClass<sky3dparams_t>.Size => 144;
     static string? ISchemaClass<sky3dparams_t>.ClassName => null;
 
-    
+
     public ref short Scale { get; }
-    
+
     public ref Vector Origin { get; }
-    
+
     public ref bool Clip3DSkyBoxNearToWorldFar { get; }
-    
+
     public ref float Clip3DSkyBoxNearToWorldFarOffset { get; }
-    
+
     public fogparams_t Fog { get; }
-    
+
     public ref uint WorldGroupID { get; }
 
     public void ScaleUpdated();

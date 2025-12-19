@@ -14,19 +14,19 @@ public partial interface C_OP_RemapDirectionToCPToVector : CParticleFunctionOper
     static int ISchemaClass<C_OP_RemapDirectionToCPToVector>.Size => 504;
     static string? ISchemaClass<C_OP_RemapDirectionToCPToVector>.ClassName => null;
 
-    
+
     public ref int CP { get; }
-    
+
     public ParticleAttributeIndex_t FieldOutput { get; }
-    
+
     public ref float Scale { get; }
-    
+
     public ref float OffsetRot { get; }
-    
+
     public ref Vector OffsetAxis { get; }
-    
+
     public ref bool Normalize { get; }
-    
+
     public ParticleAttributeIndex_t FieldStrength { get; }
 
 

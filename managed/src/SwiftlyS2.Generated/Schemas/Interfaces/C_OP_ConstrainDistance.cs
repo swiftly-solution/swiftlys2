@@ -14,15 +14,15 @@ public partial interface C_OP_ConstrainDistance : CParticleFunctionConstraint, I
     static int ISchemaClass<C_OP_ConstrainDistance>.Size => 1224;
     static string? ISchemaClass<C_OP_ConstrainDistance>.ClassName => null;
 
-    
+
     public CParticleCollectionFloatInput MinDistance { get; }
-    
+
     public CParticleCollectionFloatInput MaxDistance { get; }
-    
+
     public ref int ControlPointNumber { get; }
-    
+
     public ref Vector CenterOffset { get; }
-    
+
     public ref bool GlobalCenter { get; }
 
 

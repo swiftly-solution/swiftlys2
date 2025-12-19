@@ -14,35 +14,35 @@ public partial interface C_OP_NoiseEmitter : CParticleFunctionEmitter, ISchemaCl
     static int ISchemaClass<C_OP_NoiseEmitter>.Size => 536;
     static string? ISchemaClass<C_OP_NoiseEmitter>.ClassName => null;
 
-    
+
     public ref float EmissionDuration { get; }
-    
+
     public ref float StartTime { get; }
-    
+
     public ref float EmissionScale { get; }
-    
+
     public ref int ScaleControlPoint { get; }
-    
+
     public ref int ScaleControlPointField { get; }
-    
+
     public ref int WorldNoisePoint { get; }
-    
+
     public ref bool AbsVal { get; }
-    
+
     public ref bool AbsValInv { get; }
-    
+
     public ref float Offset { get; }
-    
+
     public ref float OutputMin { get; }
-    
+
     public ref float OutputMax { get; }
-    
+
     public ref float NoiseScale { get; }
-    
+
     public ref float WorldNoiseScale { get; }
-    
+
     public ref Vector OffsetLoc { get; }
-    
+
     public ref float WorldTimeScale { get; }
 
 

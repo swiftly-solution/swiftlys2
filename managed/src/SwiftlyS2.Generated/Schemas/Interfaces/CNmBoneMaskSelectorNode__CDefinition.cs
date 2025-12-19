@@ -14,19 +14,19 @@ public partial interface CNmBoneMaskSelectorNode__CDefinition : CNmBoneMaskValue
     static int ISchemaClass<CNmBoneMaskSelectorNode__CDefinition>.Size => 152;
     static string? ISchemaClass<CNmBoneMaskSelectorNode__CDefinition>.ClassName => null;
 
-    
+
     public ref short DefaultMaskNodeIdx { get; }
-    
+
     public ref short ParameterValueNodeIdx { get; }
-    
+
     public ref bool SwitchDynamically { get; }
-    
-  // CUtlVectorFixedGrowable< int16, 7 >
+
+    // CUtlVectorFixedGrowable< int16, 7 >
     public SchemaUntypedField MaskNodeIndices { get; }
-    
-  // CUtlVectorFixedGrowable< CGlobalSymbol, 7 >
+
+    // CUtlVectorFixedGrowable< CGlobalSymbol, 7 >
     public SchemaUntypedField ParameterValues { get; }
-    
+
     public ref float BlendTimeSeconds { get; }
 
 

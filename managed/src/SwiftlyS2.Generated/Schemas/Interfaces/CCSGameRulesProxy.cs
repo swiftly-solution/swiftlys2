@@ -14,7 +14,7 @@ public partial interface CCSGameRulesProxy : CGameRulesProxy, ISchemaClass<CCSGa
     static int ISchemaClass<CCSGameRulesProxy>.Size => 1272;
     static string? ISchemaClass<CCSGameRulesProxy>.ClassName => "cs_gamerules";
 
-    
+
     public CCSGameRules? GameRules { get; }
 
     public void GameRulesUpdated();

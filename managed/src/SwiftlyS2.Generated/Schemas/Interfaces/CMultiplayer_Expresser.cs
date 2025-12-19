@@ -14,7 +14,7 @@ public partial interface CMultiplayer_Expresser : CAI_ExpresserWithFollowup, ISc
     static int ISchemaClass<CMultiplayer_Expresser>.Size => 168;
     static string? ISchemaClass<CMultiplayer_Expresser>.ClassName => null;
 
-    
+
     public ref bool AllowMultipleScenes { get; }
 
 

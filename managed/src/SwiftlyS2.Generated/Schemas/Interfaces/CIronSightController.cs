@@ -14,13 +14,13 @@ public partial interface CIronSightController : ISchemaClass<CIronSightControlle
     static int ISchemaClass<CIronSightController>.Size => 24;
     static string? ISchemaClass<CIronSightController>.ClassName => null;
 
-    
+
     public ref bool IronSightAvailable { get; }
-    
+
     public ref float IronSightAmount { get; }
-    
+
     public ref float IronSightAmountGained { get; }
-    
+
     public ref float IronSightAmountBiased { get; }
 
 

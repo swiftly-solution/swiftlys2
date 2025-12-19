@@ -14,13 +14,13 @@ public partial interface CNmIKBody : ISchemaClass<CNmIKBody>
     static int ISchemaClass<CNmIKBody>.Size => 32;
     static string? ISchemaClass<CNmIKBody>.ClassName => null;
 
-    
+
     public ref float Mass { get; }
-    
+
     public ref Vector LocalMassCenter { get; }
-    
+
     public ref Vector Radius { get; }
-    
+
     public ref float Resistance { get; }
 
 
