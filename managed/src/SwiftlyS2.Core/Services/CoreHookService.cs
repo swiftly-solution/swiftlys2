@@ -508,5 +508,6 @@ internal class CoreHookService : IDisposable
         movementServiceRunCommand?.RemoveHook(movementServiceRunCommandGuid);
         playerPawnPostThink?.RemoveHook(playerPawnPostThinkGuid);
         entityIdentityAcceptInput?.RemoveHook(entityIdentityAcceptInputGuid);
+        entityIOOutputFireOutputInternal?.RemoveHook(entityIOOutputFireOutputInternalGuid);
     }
 }
