@@ -4,13 +4,11 @@ namespace SwiftlyS2.Shared.Plugins;
 
 public abstract class BasePlugin : IPlugin
 {
-
     protected ISwiftlyCore Core { get; private init; }
 
     public BasePlugin( ISwiftlyCore core )
     {
         Core = core;
-
         Console.SetOut(new ConsoleRedirector());
         Console.SetError(new ConsoleRedirector());
     }
@@ -31,5 +29,4 @@ public abstract class BasePlugin : IPlugin
     /// You can choose when the plugin is allowed to reload.
     /// </summary>
     public virtual PluginReloadMethod ReloadMethod { get; set; } = PluginReloadMethod.Auto;
-
 }

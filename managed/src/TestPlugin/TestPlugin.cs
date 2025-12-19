@@ -360,11 +360,11 @@ public class TestPlugin : BasePlugin
                 $"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
         };
 
-        Core.Event.OnEntityIdentityAcceptInputHook += ( @event ) =>
-        {
-            Console.WriteLine(
-                $"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.InputName}");
-        };
+        // Core.Event.OnEntityIdentityAcceptInputHook += ( @event ) =>
+        // {
+        //     Console.WriteLine(
+        //         $"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.InputName}");
+        // };
 
 
         // var provider = services.BuildServiceProvider();
@@ -487,13 +487,17 @@ public class TestPlugin : BasePlugin
         // };
 
         using CEntityKeyValues kv = new();
-
         kv.SetBool("test", true);
-
         Console.WriteLine(kv.Get<bool>("test2"));
 
         CUtlStringToken token = new("hello");
         Console.WriteLine($"2");
+
+        _ = Core.EntitySystem.HookEntityOutput<CPropDoorRotating>("OnFullyOpen", ( entityIO, outputName, activator, caller, delay ) =>
+        {
+            Console.WriteLine($"output: {outputName}, activator: {activator?.As<CBaseEntity>()?.Entity?.Name}, caller: {caller?.As<CBaseEntity>()?.Entity?.Name}");
+            return HookResult.Continue;
+        });
     }
 
     CEntityKeyValues kv { get; set; }
