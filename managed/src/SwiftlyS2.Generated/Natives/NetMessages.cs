@@ -1120,6 +1120,12 @@ internal static class NativeNetMessages {
     }
   }
 
+  private unsafe static delegate* unmanaged<nint, void> _Clear;
+
+  public unsafe static void Clear(nint netmsg) {
+    _Clear(netmsg);
+  }
+
   private unsafe static delegate* unmanaged<nint, int, int, void> _SendMessage;
 
   public unsafe static void SendMessage(nint netmsg, int msgid, int playerid) {
