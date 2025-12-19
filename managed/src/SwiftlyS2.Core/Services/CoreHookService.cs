@@ -175,7 +175,6 @@ internal class CoreHookService : IDisposable
                     Result = HookResult.Continue
                 };
                 EventPublisher.InvokeEntityFireOutputHook(@event);
-                Console.WriteLine($"output : {outputName} activator:{activator?.Index} {activator?.Entity?.Name}  Caller:{caller?.Index} {caller?.Entity?.Name} delay : {flDelay}");
 
                 if (@event.Result == HookResult.Stop)
                 {
