@@ -1,141 +1,129 @@
 using Microsoft.Extensions.Logging;
-using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.NetMessages;
-using SwiftlyS2.Core.SchemaDefinitions;
-using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.Profiler;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Schemas;
-using System.Collections.Frozen;
+using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.Profiler;
+using SwiftlyS2.Core.NetMessages;
+using SwiftlyS2.Shared.EntitySystem;
+using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.EntitySystem;
 
 internal class EntitySystemService : IEntitySystemService, IDisposable
 {
-  private List<EntityOutputHookCallback> _callbacks = new();
-  private Lock _lock = new();
-  private ILoggerFactory _loggerFactory;
-  private IContextedProfilerService _profiler;
+    private readonly List<EntityOutputHookCallback> callbacks = [];
+    private readonly Lock callbacksLock = new();
+    private readonly ILoggerFactory loggerFactory;
+    private readonly IContextedProfilerService profiler;
 
-  public EntitySystemService( ILoggerFactory loggerFactory, IContextedProfilerService profiler )
-  {
-    _loggerFactory = loggerFactory;
-    _profiler = profiler;
-  }
-
-  public T CreateEntity<T>() where T : class, ISchemaClass<T>
-  {
-    var designerName = GetEntityDesignerName<T>();
-    if (designerName == null)
+    public EntitySystemService( ILoggerFactory loggerFactory, IContextedProfilerService profiler )
     {
-      throw new ArgumentException($"Can't create entity with class {typeof(T).Name}, which doesn't have a designer name.");
+        this.loggerFactory = loggerFactory;
+        this.profiler = profiler;
     }
-    return CreateEntityByDesignerName<T>(designerName);
-  }
 
-  public T CreateEntityByDesignerName<T>( string designerName ) where T : ISchemaClass<T>
-  {
-    var handle = NativeEntitySystem.CreateEntityByName(designerName);
-    if (handle == nint.Zero)
+    public T CreateEntity<T>() where T : class, ISchemaClass<T>
     {
-      throw new ArgumentException($"Failed to create entity by designer name: {designerName}, probably invalid designer name.");
+        var designerName = GetEntityDesignerName<T>();
+        return string.IsNullOrWhiteSpace(designerName)
+            ? throw new ArgumentException($"Can't create entity with class {typeof(T).Name}, which doesn't have a designer name.")
+            : CreateEntityByDesignerName<T>(designerName);
     }
-    return T.From(handle);
-  }
 
-  public CHandle<T> GetRefEHandle<T>( T entity ) where T : class, ISchemaClass<T>
-  {
-    var handle = NativeEntitySystem.GetEntityHandleFromEntity(entity.Address);
-    return new CHandle<T> {
-      Raw = handle,
-    };
-  }
-
-  public CCSGameRules? GetGameRules()
-  {
-    var handle = NativeEntitySystem.GetGameRules();
-    return handle.IsValidPtr() ? new CCSGameRulesImpl(handle) : null;
-  }
-
-  public IEnumerable<CEntityInstance> GetAllEntities()
-  {
-    CEntityIdentity? pFirst = new CEntityIdentityImpl(NativeEntitySystem.GetFirstActiveEntity());
-
-    for (; pFirst != null && pFirst.IsValid; pFirst = pFirst.Next)
+    public T CreateEntityByDesignerName<T>( string designerName ) where T : ISchemaClass<T>
     {
-      yield return new CEntityInstanceImpl(pFirst.Address.Read<nint>());
+        var handle = NativeEntitySystem.CreateEntityByName(designerName);
+        return handle == nint.Zero
+            ? throw new ArgumentException($"Failed to create entity by designer name: {designerName}, probably invalid designer name.")
+            : T.From(handle);
     }
-  }
 
-  public IEnumerable<T> GetAllEntitiesByClass<T>() where T : class, ISchemaClass<T>
-  {
-    var designerName = GetEntityDesignerName<T>();
-    if (designerName == null)
+    public CHandle<T> GetRefEHandle<T>( T entity ) where T : class, ISchemaClass<T>
     {
-      throw new ArgumentException($"Can't get entities with class {typeof(T).Name}, which doesn't have a designer name");
+        return new CHandle<T> {
+            Raw = NativeEntitySystem.GetEntityHandleFromEntity(entity.Address),
+        };
     }
-    return GetAllEntities().Where(( entity ) => entity.Entity?.DesignerName == designerName).Select(( entity ) => T.From(entity.Address));
-  }
 
-  public IEnumerable<T> GetAllEntitiesByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>
-  {
-    return GetAllEntities()
-      .Where(entity => entity.Entity?.DesignerName == designerName)
-      .Select(entity => T.From(entity.Address));
-  }
-
-  public T? GetEntityByIndex<T>( uint index ) where T : class, ISchemaClass<T>
-  {
-    var handle = NativeEntitySystem.GetEntityByIndex(index);
-    if (handle == nint.Zero)
+    public CCSGameRules? GetGameRules()
     {
-      return null;
+        var handle = NativeEntitySystem.GetGameRules();
+        return handle.IsValidPtr() ? new CCSGameRulesImpl(handle) : null;
     }
-    return T.From(handle);
-  }
 
-  Guid IEntitySystemService.HookEntityOutput<T>( string outputName, IEntitySystemService.EntityOutputHandler callback )
-  {
-    var hook = new EntityOutputHookCallback(GetEntityDesignerName<T>() ?? "", outputName, callback, _loggerFactory, _profiler);
-    lock (_lock)
+    public IEnumerable<CEntityInstance> GetAllEntities()
     {
-      _callbacks.Add(hook);
-    }
-    return hook.Guid;
-  }
+        CEntityIdentity? pFirst = new CEntityIdentityImpl(NativeEntitySystem.GetFirstActiveEntity());
 
-  public void UnhookEntityOutput( Guid guid )
-  {
-    lock (_lock)
-    {
-      _callbacks.RemoveAll(callback =>
-      {
-        if (callback.Guid == guid)
+        for (; pFirst != null && pFirst.IsValid; pFirst = pFirst.Next)
         {
-          callback.Dispose();
-          return true;
+            yield return new CEntityInstanceImpl(pFirst.Address.Read<nint>());
         }
-        return false;
-      });
     }
-  }
 
-  private string? GetEntityDesignerName<T>() where T : class, ISchemaClass<T>
-  {
-    return T.ClassName;
-  }
-
-  public void Dispose()
-  {
-    lock (_lock)
+    public IEnumerable<T> GetAllEntitiesByClass<T>() where T : class, ISchemaClass<T>
     {
-      foreach (var callback in _callbacks)
-      {
-        callback.Dispose();
-      }
-      _callbacks.Clear();
+        var designerName = GetEntityDesignerName<T>();
+        return string.IsNullOrWhiteSpace(designerName)
+            ? throw new ArgumentException($"Can't get entities with class {typeof(T).Name}, which doesn't have a designer name")
+            : GetAllEntities().Where(( entity ) => entity.Entity?.DesignerName == designerName).Select(( entity ) => T.From(entity.Address));
     }
-  }
+
+    public IEnumerable<T> GetAllEntitiesByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>
+    {
+        return GetAllEntities()
+            .Where(entity => entity.Entity?.DesignerName == designerName)
+            .Select(entity => T.From(entity.Address));
+    }
+
+    public T? GetEntityByIndex<T>( uint index ) where T : class, ISchemaClass<T>
+    {
+        var handle = NativeEntitySystem.GetEntityByIndex(index);
+        return handle == nint.Zero ? null : T.From(handle);
+    }
+
+    Guid IEntitySystemService.HookEntityOutput<T>( string outputName, IEntitySystemService.EntityOutputHandler callback )
+    {
+        var hook = new EntityOutputHookCallback(GetEntityDesignerName<T>() ?? "", outputName, callback, loggerFactory, profiler);
+        lock (callbacksLock)
+        {
+            callbacks.Add(hook);
+        }
+        return hook.Guid;
+    }
+
+    public void UnhookEntityOutput( Guid guid )
+    {
+        lock (callbacksLock)
+        {
+            _ = callbacks.RemoveAll(callback =>
+            {
+                if (callback.Guid == guid)
+                {
+                    callback.Dispose();
+                    return true;
+                }
+                return false;
+            });
+        }
+    }
+
+    private string? GetEntityDesignerName<T>() where T : class, ISchemaClass<T>
+    {
+        return T.ClassName;
+    }
+
+    public void Dispose()
+    {
+        lock (callbacksLock)
+        {
+            foreach (var callback in callbacks)
+            {
+                callback.Dispose();
+            }
+            callbacks.Clear();
+        }
+    }
 }
