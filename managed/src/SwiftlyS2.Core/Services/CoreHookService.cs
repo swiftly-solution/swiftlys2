@@ -155,7 +155,7 @@ internal class CoreHookService : IDisposable
                 var entityIO = new CEntityIOOutputImpl(pEntityIO);
 
                 // m_pDesc
-                var ptr = Marshal.ReadIntPtr(IntPtr.Add(pEntityIO, 2 * IntPtr.Size));
+                var ptr = Marshal.ReadIntPtr(IntPtr.Add(pEntityIO, 0x10));
                 // m_pName
                 ptr = Marshal.ReadIntPtr(ptr);
 
