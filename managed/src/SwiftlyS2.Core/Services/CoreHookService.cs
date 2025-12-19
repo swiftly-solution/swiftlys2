@@ -141,7 +141,7 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookEntityIOOutputFireOutputInternal()
+    private unsafe void HookEntityIOOutputFireOutputInternal()
     {
         var address = core.GameData.GetSignature("CEntityIOOutput::FireOutputInternal");
 
@@ -152,21 +152,16 @@ internal class CoreHookService : IDisposable
         {
             return ( pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2 ) =>
             {
-                var entityIO = new CEntityIOOutputImpl(pEntityIO);
+                var entityIO = pEntityIO.AsRef<NativeCEntityIOOutput>();
 
-                // m_pDesc
-                var ptr = Marshal.ReadIntPtr(IntPtr.Add(pEntityIO, 0x10));
-                // m_pName
-                ptr = Marshal.ReadIntPtr(ptr);
-
-                var outputName = InteropHelp.PtrToStringUTF8(ptr);
+                var outputName = InteropHelp.PtrToStringUTF8(entityIO.m_pDesc->m_pName);
                 var activator = pActivator != nint.Zero ? core.Memory.ToSchemaClass<CEntityInstance>(pActivator) : null;
                 var caller = pCaller != nint.Zero ? core.Memory.ToSchemaClass<CEntityInstance>(pCaller) : null;
 
                 var variant = pVariant.AsRef<CVariant>();
 
                 var @event = new OnEntityFireOutputHookEvent {
-                    EntityIO = entityIO,
+                    EntityIO = new CEntityIOOutputImpl(pEntityIO),
                     OutputName = outputName,
                     Activator = activator,
                     Caller = caller,
