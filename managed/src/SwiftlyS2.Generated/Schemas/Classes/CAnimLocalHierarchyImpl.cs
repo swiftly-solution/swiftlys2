@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimLocalHierarchyImpl : SchemaClass, CAnimLocalHierarchy {
+internal partial class CAnimLocalHierarchyImpl : SchemaClass, CAnimLocalHierarchy
+{
+    public CAnimLocalHierarchyImpl(nint handle) : base(handle) { }
 
-  public CAnimLocalHierarchyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneOffset;
 
-  private static nint? _BoneOffset;
-
-  public ref CBufferString Bone {
-    get {
-      if (_BoneOffset == null) {
-        _BoneOffset = Schema.GetOffset(0x3D14C1ED515646C4);
-      }
-      return ref _Handle.AsRef<CBufferString>(_BoneOffset!.Value);
+    public ref CBufferString Bone {
+        get {
+            _BoneOffset = _BoneOffset ?? Schema.GetOffset(0x3D14C1ED515646C4);
+            return ref _Handle.AsRef<CBufferString>(_BoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _NewParentOffset;
+    private static nint? _NewParentOffset;
 
-  public ref CBufferString NewParent {
-    get {
-      if (_NewParentOffset == null) {
-        _NewParentOffset = Schema.GetOffset(0x3D14C1ED40620004);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NewParentOffset!.Value);
+    public ref CBufferString NewParent {
+        get {
+            _NewParentOffset = _NewParentOffset ?? Schema.GetOffset(0x3D14C1ED40620004);
+            return ref _Handle.AsRef<CBufferString>(_NewParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartFrameOffset;
+    private static nint? _StartFrameOffset;
 
-  public ref int StartFrame {
-    get {
-      if (_StartFrameOffset == null) {
-        _StartFrameOffset = Schema.GetOffset(0x3D14C1ED9134F088);
-      }
-      return ref _Handle.AsRef<int>(_StartFrameOffset!.Value);
+    public ref int StartFrame {
+        get {
+            _StartFrameOffset = _StartFrameOffset ?? Schema.GetOffset(0x3D14C1ED9134F088);
+            return ref _Handle.AsRef<int>(_StartFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _PeakFrameOffset;
+    private static nint? _PeakFrameOffset;
 
-  public ref int PeakFrame {
-    get {
-      if (_PeakFrameOffset == null) {
-        _PeakFrameOffset = Schema.GetOffset(0x3D14C1ED3BAFAFC7);
-      }
-      return ref _Handle.AsRef<int>(_PeakFrameOffset!.Value);
+    public ref int PeakFrame {
+        get {
+            _PeakFrameOffset = _PeakFrameOffset ?? Schema.GetOffset(0x3D14C1ED3BAFAFC7);
+            return ref _Handle.AsRef<int>(_PeakFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _TailFrameOffset;
+    private static nint? _TailFrameOffset;
 
-  public ref int TailFrame {
-    get {
-      if (_TailFrameOffset == null) {
-        _TailFrameOffset = Schema.GetOffset(0x3D14C1ED3F824524);
-      }
-      return ref _Handle.AsRef<int>(_TailFrameOffset!.Value);
+    public ref int TailFrame {
+        get {
+            _TailFrameOffset = _TailFrameOffset ?? Schema.GetOffset(0x3D14C1ED3F824524);
+            return ref _Handle.AsRef<int>(_TailFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndFrameOffset;
+    private static nint? _EndFrameOffset;
 
-  public ref int EndFrame {
-    get {
-      if (_EndFrameOffset == null) {
-        _EndFrameOffset = Schema.GetOffset(0x3D14C1EDEA91BD07);
-      }
-      return ref _Handle.AsRef<int>(_EndFrameOffset!.Value);
+    public ref int EndFrame {
+        get {
+            _EndFrameOffset = _EndFrameOffset ?? Schema.GetOffset(0x3D14C1EDEA91BD07);
+            return ref _Handle.AsRef<int>(_EndFrameOffset!.Value);
+        }
     }
-  }
 
 
 }

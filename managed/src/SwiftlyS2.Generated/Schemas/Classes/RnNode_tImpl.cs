@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnNode_tImpl : SchemaClass, RnNode_t {
+internal partial class RnNode_tImpl : SchemaClass, RnNode_t
+{
+    public RnNode_tImpl(nint handle) : base(handle) { }
 
-  public RnNode_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinOffset;
 
-  private static nint? _MinOffset;
-
-  public ref Vector Min {
-    get {
-      if (_MinOffset == null) {
-        _MinOffset = Schema.GetOffset(0x7C7D54E2F4B0AA63);
-      }
-      return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
+    public ref Vector Min {
+        get {
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x7C7D54E2F4B0AA63);
+            return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChildrenOffset;
+    private static nint? _ChildrenOffset;
 
-  public ref uint Children {
-    get {
-      if (_ChildrenOffset == null) {
-        _ChildrenOffset = Schema.GetOffset(0x7C7D54E2D0F4635E);
-      }
-      return ref _Handle.AsRef<uint>(_ChildrenOffset!.Value);
+    public ref uint Children {
+        get {
+            _ChildrenOffset = _ChildrenOffset ?? Schema.GetOffset(0x7C7D54E2D0F4635E);
+            return ref _Handle.AsRef<uint>(_ChildrenOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOffset;
+    private static nint? _MaxOffset;
 
-  public ref Vector Max {
-    get {
-      if (_MaxOffset == null) {
-        _MaxOffset = Schema.GetOffset(0x7C7D54E2EAC4225D);
-      }
-      return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
+    public ref Vector Max {
+        get {
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x7C7D54E2EAC4225D);
+            return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriangleOffsetOffset;
+    private static nint? _TriangleOffsetOffset;
 
-  public ref uint TriangleOffset {
-    get {
-      if (_TriangleOffsetOffset == null) {
-        _TriangleOffsetOffset = Schema.GetOffset(0x7C7D54E2AFE22CE6);
-      }
-      return ref _Handle.AsRef<uint>(_TriangleOffsetOffset!.Value);
+    public ref uint TriangleOffset {
+        get {
+            _TriangleOffsetOffset = _TriangleOffsetOffset ?? Schema.GetOffset(0x7C7D54E2AFE22CE6);
+            return ref _Handle.AsRef<uint>(_TriangleOffsetOffset!.Value);
+        }
     }
-  }
 
 
 }

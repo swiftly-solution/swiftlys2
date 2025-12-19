@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventClientFrameSimulate_tImpl : SchemaClass, EventClientFrameSimulate_t {
+internal partial class EventClientFrameSimulate_tImpl : SchemaClass, EventClientFrameSimulate_t
+{
+    public EventClientFrameSimulate_tImpl(nint handle) : base(handle) { }
 
-  public EventClientFrameSimulate_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LoopStateOffset;
 
-  private static nint? _LoopStateOffset;
-
-  public EngineLoopState_t LoopState {
-    get {
-      if (_LoopStateOffset == null) {
-        _LoopStateOffset = Schema.GetOffset(0x18229C4F928A2EC);
-      }
-      return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+    public EngineLoopState_t LoopState {
+        get {
+            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0x18229C4F928A2EC);
+            return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _RealTimeOffset;
+    private static nint? _RealTimeOffset;
 
-  public ref float RealTime {
-    get {
-      if (_RealTimeOffset == null) {
-        _RealTimeOffset = Schema.GetOffset(0x18229C41168EC02);
-      }
-      return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+    public ref float RealTime {
+        get {
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x18229C41168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FrameTimeOffset;
+    private static nint? _FrameTimeOffset;
 
-  public ref float FrameTime {
-    get {
-      if (_FrameTimeOffset == null) {
-        _FrameTimeOffset = Schema.GetOffset(0x18229C4659DF875);
-      }
-      return ref _Handle.AsRef<float>(_FrameTimeOffset!.Value);
+    public ref float FrameTime {
+        get {
+            _FrameTimeOffset = _FrameTimeOffset ?? Schema.GetOffset(0x18229C4659DF875);
+            return ref _Handle.AsRef<float>(_FrameTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScheduleSendTickPacketOffset;
+    private static nint? _ScheduleSendTickPacketOffset;
 
-  public ref bool ScheduleSendTickPacket {
-    get {
-      if (_ScheduleSendTickPacketOffset == null) {
-        _ScheduleSendTickPacketOffset = Schema.GetOffset(0x18229C400A650C3);
-      }
-      return ref _Handle.AsRef<bool>(_ScheduleSendTickPacketOffset!.Value);
+    public ref bool ScheduleSendTickPacket {
+        get {
+            _ScheduleSendTickPacketOffset = _ScheduleSendTickPacketOffset ?? Schema.GetOffset(0x18229C400A650C3);
+            return ref _Handle.AsRef<bool>(_ScheduleSendTickPacketOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class constraint_axislimit_tImpl : SchemaClass, constraint_axislimit_t {
+internal partial class constraint_axislimit_tImpl : SchemaClass, constraint_axislimit_t
+{
+    public constraint_axislimit_tImpl(nint handle) : base(handle) { }
 
-  public constraint_axislimit_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinRotationOffset;
 
-  private static nint? _MinRotationOffset;
-
-  public ref float MinRotation {
-    get {
-      if (_MinRotationOffset == null) {
-        _MinRotationOffset = Schema.GetOffset(0x610A06522A8C970B);
-      }
-      return ref _Handle.AsRef<float>(_MinRotationOffset!.Value);
+    public ref float MinRotation {
+        get {
+            _MinRotationOffset = _MinRotationOffset ?? Schema.GetOffset(0x610A06522A8C970B);
+            return ref _Handle.AsRef<float>(_MinRotationOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxRotationOffset;
+    private static nint? _MaxRotationOffset;
 
-  public ref float MaxRotation {
-    get {
-      if (_MaxRotationOffset == null) {
-        _MaxRotationOffset = Schema.GetOffset(0x610A0652FEB73D49);
-      }
-      return ref _Handle.AsRef<float>(_MaxRotationOffset!.Value);
+    public ref float MaxRotation {
+        get {
+            _MaxRotationOffset = _MaxRotationOffset ?? Schema.GetOffset(0x610A0652FEB73D49);
+            return ref _Handle.AsRef<float>(_MaxRotationOffset!.Value);
+        }
     }
-  }
-  private static nint? _MotorTargetAngSpeedOffset;
+    private static nint? _MotorTargetAngSpeedOffset;
 
-  public ref float MotorTargetAngSpeed {
-    get {
-      if (_MotorTargetAngSpeedOffset == null) {
-        _MotorTargetAngSpeedOffset = Schema.GetOffset(0x610A0652C783A98E);
-      }
-      return ref _Handle.AsRef<float>(_MotorTargetAngSpeedOffset!.Value);
+    public ref float MotorTargetAngSpeed {
+        get {
+            _MotorTargetAngSpeedOffset = _MotorTargetAngSpeedOffset ?? Schema.GetOffset(0x610A0652C783A98E);
+            return ref _Handle.AsRef<float>(_MotorTargetAngSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _MotorMaxTorqueOffset;
+    private static nint? _MotorMaxTorqueOffset;
 
-  public ref float MotorMaxTorque {
-    get {
-      if (_MotorMaxTorqueOffset == null) {
-        _MotorMaxTorqueOffset = Schema.GetOffset(0x610A0652808C4A00);
-      }
-      return ref _Handle.AsRef<float>(_MotorMaxTorqueOffset!.Value);
+    public ref float MotorMaxTorque {
+        get {
+            _MotorMaxTorqueOffset = _MotorMaxTorqueOffset ?? Schema.GetOffset(0x610A0652808C4A00);
+            return ref _Handle.AsRef<float>(_MotorMaxTorqueOffset!.Value);
+        }
     }
-  }
 
 
 }

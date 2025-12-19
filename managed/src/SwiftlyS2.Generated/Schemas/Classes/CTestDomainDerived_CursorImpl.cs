@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTestDomainDerived_CursorImpl : CPulseExecCursorImpl, CTestDomainDerived_Cursor {
+internal partial class CTestDomainDerived_CursorImpl : CPulseExecCursorImpl, CTestDomainDerived_Cursor
+{
+    public CTestDomainDerived_CursorImpl(nint handle) : base(handle) { }
 
-  public CTestDomainDerived_CursorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CursorValueAOffset;
 
-  private static nint? _CursorValueAOffset;
-
-  public ref int CursorValueA {
-    get {
-      if (_CursorValueAOffset == null) {
-        _CursorValueAOffset = Schema.GetOffset(0x7D1D938EF43E6EDB);
-      }
-      return ref _Handle.AsRef<int>(_CursorValueAOffset!.Value);
+    public ref int CursorValueA {
+        get {
+            _CursorValueAOffset = _CursorValueAOffset ?? Schema.GetOffset(0x7D1D938EF43E6EDB);
+            return ref _Handle.AsRef<int>(_CursorValueAOffset!.Value);
+        }
     }
-  }
-  private static nint? _CursorValueBOffset;
+    private static nint? _CursorValueBOffset;
 
-  public ref int CursorValueB {
-    get {
-      if (_CursorValueBOffset == null) {
-        _CursorValueBOffset = Schema.GetOffset(0x7D1D938EF53E706E);
-      }
-      return ref _Handle.AsRef<int>(_CursorValueBOffset!.Value);
+    public ref int CursorValueB {
+        get {
+            _CursorValueBOffset = _CursorValueBOffset ?? Schema.GetOffset(0x7D1D938EF53E706E);
+            return ref _Handle.AsRef<int>(_CursorValueBOffset!.Value);
+        }
     }
-  }
 
 
 }

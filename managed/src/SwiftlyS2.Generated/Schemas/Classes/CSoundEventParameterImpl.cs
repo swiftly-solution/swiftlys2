@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundEventParameterImpl : CBaseEntityImpl, CSoundEventParameter {
+internal partial class CSoundEventParameterImpl : CBaseEntityImpl, CSoundEventParameter
+{
+    public CSoundEventParameterImpl(nint handle) : base(handle) { }
 
-  public CSoundEventParameterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParamNameOffset;
 
-  private static nint? _ParamNameOffset;
+    public string ParamName {
+        get {
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xEFEED49AFF6F4311);
+            return Schema.GetString(_Handle.Read<nint>(_ParamNameOffset!.Value));
+        }
+        set {
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0xEFEED49AFF6F4311);
+            Schema.SetString(_Handle, _ParamNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FloatValueOffset;
 
-  public string ParamName {
-    get {
-      if (_ParamNameOffset == null) {
-        _ParamNameOffset = Schema.GetOffset(0xEFEED49AFF6F4311);
-      }
-      var ptr = _Handle.Read<nint>(_ParamNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float FloatValue {
+        get {
+            _FloatValueOffset = _FloatValueOffset ?? Schema.GetOffset(0xEFEED49A80BDA558);
+            return ref _Handle.AsRef<float>(_FloatValueOffset!.Value);
+        }
     }
-    set {
-      if (_ParamNameOffset == null) {
-        _ParamNameOffset = Schema.GetOffset(0xEFEED49AFF6F4311);
-      }
-      Schema.SetString(_Handle, _ParamNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _FloatValueOffset;
-
-  public ref float FloatValue {
-    get {
-      if (_FloatValueOffset == null) {
-        _FloatValueOffset = Schema.GetOffset(0xEFEED49A80BDA558);
-      }
-      return ref _Handle.AsRef<float>(_FloatValueOffset!.Value);
-    }
-  }
 
 
 }

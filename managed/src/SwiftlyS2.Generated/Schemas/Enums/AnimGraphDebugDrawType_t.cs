@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AnimGraphDebugDrawType_t : uint {
-
+public enum AnimGraphDebugDrawType_t : uint
+{
  None = 0,
 
  WsPosition = 1,

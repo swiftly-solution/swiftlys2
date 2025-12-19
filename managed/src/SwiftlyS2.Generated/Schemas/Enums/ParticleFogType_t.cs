@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleFogType_t : uint {
-
+public enum ParticleFogType_t : uint
+{
  PARTICLE_FOG_GAME_DEFAULT = 0,
 
  PARTICLE_FOG_ENABLED = 1,

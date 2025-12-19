@@ -6,107 +6,78 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNetworkOriginCellCoordQuantizedVectorImpl : SchemaClass, CNetworkOriginCellCoordQuantizedVector {
+internal partial class CNetworkOriginCellCoordQuantizedVectorImpl : SchemaClass, CNetworkOriginCellCoordQuantizedVector
+{
+    public CNetworkOriginCellCoordQuantizedVectorImpl(nint handle) : base(handle) { }
 
-  public CNetworkOriginCellCoordQuantizedVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CellXOffset;
 
-  private static nint? _CellXOffset;
-
-  public ref ushort CellX {
-    get {
-      if (_CellXOffset == null) {
-        _CellXOffset = Schema.GetOffset(0x2D24CA0B02D23477);
-      }
-      return ref _Handle.AsRef<ushort>(_CellXOffset!.Value);
+    public ref ushort CellX {
+        get {
+            _CellXOffset = _CellXOffset ?? Schema.GetOffset(0x2D24CA0B02D23477);
+            return ref _Handle.AsRef<ushort>(_CellXOffset!.Value);
+        }
     }
-  }
-  private static nint? _CellYOffset;
+    private static nint? _CellYOffset;
 
-  public ref ushort CellY {
-    get {
-      if (_CellYOffset == null) {
-        _CellYOffset = Schema.GetOffset(0x2D24CA0B01D232E4);
-      }
-      return ref _Handle.AsRef<ushort>(_CellYOffset!.Value);
+    public ref ushort CellY {
+        get {
+            _CellYOffset = _CellYOffset ?? Schema.GetOffset(0x2D24CA0B01D232E4);
+            return ref _Handle.AsRef<ushort>(_CellYOffset!.Value);
+        }
     }
-  }
-  private static nint? _CellZOffset;
+    private static nint? _CellZOffset;
 
-  public ref ushort CellZ {
-    get {
-      if (_CellZOffset == null) {
-        _CellZOffset = Schema.GetOffset(0x2D24CA0B04D2379D);
-      }
-      return ref _Handle.AsRef<ushort>(_CellZOffset!.Value);
+    public ref ushort CellZ {
+        get {
+            _CellZOffset = _CellZOffset ?? Schema.GetOffset(0x2D24CA0B04D2379D);
+            return ref _Handle.AsRef<ushort>(_CellZOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutsideWorldOffset;
+    private static nint? _OutsideWorldOffset;
 
-  public ref ushort OutsideWorld {
-    get {
-      if (_OutsideWorldOffset == null) {
-        _OutsideWorldOffset = Schema.GetOffset(0x2D24CA0B1AFE3ED4);
-      }
-      return ref _Handle.AsRef<ushort>(_OutsideWorldOffset!.Value);
+    public ref ushort OutsideWorld {
+        get {
+            _OutsideWorldOffset = _OutsideWorldOffset ?? Schema.GetOffset(0x2D24CA0B1AFE3ED4);
+            return ref _Handle.AsRef<ushort>(_OutsideWorldOffset!.Value);
+        }
     }
-  }
-  private static nint? _XOffset;
+    private static nint? _XOffset;
 
-  public ref CNetworkedQuantizedFloat X {
-    get {
-      if (_XOffset == null) {
-        _XOffset = Schema.GetOffset(0x2D24CA0B8FEB7867);
-      }
-      return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_XOffset!.Value);
+    public ref CNetworkedQuantizedFloat X {
+        get {
+            _XOffset = _XOffset ?? Schema.GetOffset(0x2D24CA0B8FEB7867);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_XOffset!.Value);
+        }
     }
-  }
-  private static nint? _YOffset;
+    private static nint? _YOffset;
 
-  public ref CNetworkedQuantizedFloat Y {
-    get {
-      if (_YOffset == null) {
-        _YOffset = Schema.GetOffset(0x2D24CA0B8EEB76D4);
-      }
-      return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_YOffset!.Value);
+    public ref CNetworkedQuantizedFloat Y {
+        get {
+            _YOffset = _YOffset ?? Schema.GetOffset(0x2D24CA0B8EEB76D4);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_YOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZOffset;
+    private static nint? _ZOffset;
 
-  public ref CNetworkedQuantizedFloat Z {
-    get {
-      if (_ZOffset == null) {
-        _ZOffset = Schema.GetOffset(0x2D24CA0B91EB7B8D);
-      }
-      return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_ZOffset!.Value);
+    public ref CNetworkedQuantizedFloat Z {
+        get {
+            _ZOffset = _ZOffset ?? Schema.GetOffset(0x2D24CA0B91EB7B8D);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_ZOffset!.Value);
+        }
     }
-  }
 
-  public void CellXUpdated() {
-    Schema.Update(_Handle, 0x2D24CA0B02D23477);
-  }
-  public void CellYUpdated() {
-    Schema.Update(_Handle, 0x2D24CA0B01D232E4);
-  }
-  public void CellZUpdated() {
-    Schema.Update(_Handle, 0x2D24CA0B04D2379D);
-  }
-  public void OutsideWorldUpdated() {
-    Schema.Update(_Handle, 0x2D24CA0B1AFE3ED4);
-  }
-  public void XUpdated() {
-    Schema.Update(_Handle, 0x2D24CA0B8FEB7867);
-  }
-  public void YUpdated() {
-    Schema.Update(_Handle, 0x2D24CA0B8EEB76D4);
-  }
-  public void ZUpdated() {
-    Schema.Update(_Handle, 0x2D24CA0B91EB7B8D);
-  }
+    public void CellXUpdated() => Schema.Update(_Handle, 0x2D24CA0B02D23477);
+    public void CellYUpdated() => Schema.Update(_Handle, 0x2D24CA0B01D232E4);
+    public void CellZUpdated() => Schema.Update(_Handle, 0x2D24CA0B04D2379D);
+    public void OutsideWorldUpdated() => Schema.Update(_Handle, 0x2D24CA0B1AFE3ED4);
+    public void XUpdated() => Schema.Update(_Handle, 0x2D24CA0B8FEB7867);
+    public void YUpdated() => Schema.Update(_Handle, 0x2D24CA0B8EEB76D4);
+    public void ZUpdated() => Schema.Update(_Handle, 0x2D24CA0B91EB7B8D);
 }

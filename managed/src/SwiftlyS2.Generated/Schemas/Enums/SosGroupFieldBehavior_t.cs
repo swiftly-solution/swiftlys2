@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SosGroupFieldBehavior_t : uint {
-
+public enum SosGroupFieldBehavior_t : uint
+{
  kIgnore = 0,
 
  kBranch = 1,

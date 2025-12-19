@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Timeline__TimelineEvent_tImpl : SchemaClass, CPulseCell_Timeline__TimelineEvent_t {
+internal partial class CPulseCell_Timeline__TimelineEvent_tImpl : SchemaClass, CPulseCell_Timeline__TimelineEvent_t
+{
+    public CPulseCell_Timeline__TimelineEvent_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Timeline__TimelineEvent_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TimeFromPreviousOffset;
 
-  private static nint? _TimeFromPreviousOffset;
-
-  public ref float TimeFromPrevious {
-    get {
-      if (_TimeFromPreviousOffset == null) {
-        _TimeFromPreviousOffset = Schema.GetOffset(0x1CEAA89BD23FC4AF);
-      }
-      return ref _Handle.AsRef<float>(_TimeFromPreviousOffset!.Value);
+    public ref float TimeFromPrevious {
+        get {
+            _TimeFromPreviousOffset = _TimeFromPreviousOffset ?? Schema.GetOffset(0x1CEAA89BD23FC4AF);
+            return ref _Handle.AsRef<float>(_TimeFromPreviousOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventOutflowOffset;
+    private static nint? _EventOutflowOffset;
 
-  public CPulse_OutflowConnection EventOutflow {
-    get {
-      if (_EventOutflowOffset == null) {
-        _EventOutflowOffset = Schema.GetOffset(0x1CEAA89BC72D3231);
-      }
-      return new CPulse_OutflowConnectionImpl(_Handle + _EventOutflowOffset!.Value);
+    public CPulse_OutflowConnection EventOutflow {
+        get {
+            _EventOutflowOffset = _EventOutflowOffset ?? Schema.GetOffset(0x1CEAA89BC72D3231);
+            return new CPulse_OutflowConnectionImpl(_Handle + _EventOutflowOffset!.Value);
+        }
     }
-  }
 
 
 }

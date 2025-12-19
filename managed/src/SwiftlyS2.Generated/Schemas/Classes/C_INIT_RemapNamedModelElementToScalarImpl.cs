@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RemapNamedModelElementToScalarImpl : CParticleFunctionInitializerImpl, C_INIT_RemapNamedModelElementToScalar {
+internal partial class C_INIT_RemapNamedModelElementToScalarImpl : CParticleFunctionInitializerImpl, C_INIT_RemapNamedModelElementToScalar
+{
+    public C_INIT_RemapNamedModelElementToScalarImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RemapNamedModelElementToScalarImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModelOffset;
 
-  private static nint? _ModelOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get {
-      if (_ModelOffset == null) {
-        _ModelOffset = Schema.GetOffset(0x4717248AE100C814);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model {
+        get {
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0x4717248AE100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+        }
     }
-  }
-  private static nint? _NamesOffset;
+    private static nint? _NamesOffset;
 
-  public ref CUtlVector<CUtlString> Names {
-    get {
-      if (_NamesOffset == null) {
-        _NamesOffset = Schema.GetOffset(0x4717248A0DA776AF);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NamesOffset!.Value);
+    public ref CUtlVector<CUtlString> Names {
+        get {
+            _NamesOffset = _NamesOffset ?? Schema.GetOffset(0x4717248A0DA776AF);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NamesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValuesOffset;
+    private static nint? _ValuesOffset;
 
-  public ref CUtlVector<float> Values {
-    get {
-      if (_ValuesOffset == null) {
-        _ValuesOffset = Schema.GetOffset(0x4717248AFBEDDADB);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_ValuesOffset!.Value);
+    public ref CUtlVector<float> Values {
+        get {
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x4717248AFBEDDADB);
+            return ref _Handle.AsRef<CUtlVector<float>>(_ValuesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldInputOffset;
+    private static nint? _FieldInputOffset;
 
-  public ParticleAttributeIndex_t FieldInput {
-    get {
-      if (_FieldInputOffset == null) {
-        _FieldInputOffset = Schema.GetOffset(0x4717248AAE775669);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+    public ParticleAttributeIndex_t FieldInput {
+        get {
+            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0x4717248AAE775669);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x4717248AE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4717248AE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetMethodOffset;
+    private static nint? _SetMethodOffset;
 
-  public ref ParticleSetMethod_t SetMethod {
-    get {
-      if (_SetMethodOffset == null) {
-        _SetMethodOffset = Schema.GetOffset(0x4717248AFB53C31E);
-      }
-      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    public ref ParticleSetMethod_t SetMethod {
+        get {
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x4717248AFB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModelFromRendererOffset;
+    private static nint? _ModelFromRendererOffset;
 
-  public ref bool ModelFromRenderer {
-    get {
-      if (_ModelFromRendererOffset == null) {
-        _ModelFromRendererOffset = Schema.GetOffset(0x4717248AAEBA1F25);
-      }
-      return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
+    public ref bool ModelFromRenderer {
+        get {
+            _ModelFromRendererOffset = _ModelFromRendererOffset ?? Schema.GetOffset(0x4717248AAEBA1F25);
+            return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
+        }
     }
-  }
 
 
 }

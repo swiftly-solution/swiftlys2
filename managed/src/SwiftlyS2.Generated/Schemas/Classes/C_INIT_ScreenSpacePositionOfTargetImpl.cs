@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_ScreenSpacePositionOfTargetImpl : CParticleFunctionInitializerImpl, C_INIT_ScreenSpacePositionOfTarget {
+internal partial class C_INIT_ScreenSpacePositionOfTargetImpl : CParticleFunctionInitializerImpl, C_INIT_ScreenSpacePositionOfTarget
+{
+    public C_INIT_ScreenSpacePositionOfTargetImpl(nint handle) : base(handle) { }
 
-  public C_INIT_ScreenSpacePositionOfTargetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetPositionOffset;
 
-  private static nint? _TargetPositionOffset;
-
-  public CPerParticleVecInput TargetPosition {
-    get {
-      if (_TargetPositionOffset == null) {
-        _TargetPositionOffset = Schema.GetOffset(0xBA53E3F7554C563B);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _TargetPositionOffset!.Value);
+    public CPerParticleVecInput TargetPosition {
+        get {
+            _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0xBA53E3F7554C563B);
+            return new CPerParticleVecInputImpl(_Handle + _TargetPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _OututBehindnessOffset;
+    private static nint? _OututBehindnessOffset;
 
-  public ref bool OututBehindness {
-    get {
-      if (_OututBehindnessOffset == null) {
-        _OututBehindnessOffset = Schema.GetOffset(0xBA53E3F7DB123D49);
-      }
-      return ref _Handle.AsRef<bool>(_OututBehindnessOffset!.Value);
+    public ref bool OututBehindness {
+        get {
+            _OututBehindnessOffset = _OututBehindnessOffset ?? Schema.GetOffset(0xBA53E3F7DB123D49);
+            return ref _Handle.AsRef<bool>(_OututBehindnessOffset!.Value);
+        }
     }
-  }
-  private static nint? _BehindFieldOutputOffset;
+    private static nint? _BehindFieldOutputOffset;
 
-  public ParticleAttributeIndex_t BehindFieldOutput {
-    get {
-      if (_BehindFieldOutputOffset == null) {
-        _BehindFieldOutputOffset = Schema.GetOffset(0xBA53E3F769F4F392);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _BehindFieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t BehindFieldOutput {
+        get {
+            _BehindFieldOutputOffset = _BehindFieldOutputOffset ?? Schema.GetOffset(0xBA53E3F769F4F392);
+            return new ParticleAttributeIndex_tImpl(_Handle + _BehindFieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _BehindOutputRemapOffset;
+    private static nint? _BehindOutputRemapOffset;
 
-  public CParticleRemapFloatInput BehindOutputRemap {
-    get {
-      if (_BehindOutputRemapOffset == null) {
-        _BehindOutputRemapOffset = Schema.GetOffset(0xBA53E3F74B35FBF3);
-      }
-      return new CParticleRemapFloatInputImpl(_Handle + _BehindOutputRemapOffset!.Value);
+    public CParticleRemapFloatInput BehindOutputRemap {
+        get {
+            _BehindOutputRemapOffset = _BehindOutputRemapOffset ?? Schema.GetOffset(0xBA53E3F74B35FBF3);
+            return new CParticleRemapFloatInputImpl(_Handle + _BehindOutputRemapOffset!.Value);
+        }
     }
-  }
 
 
 }

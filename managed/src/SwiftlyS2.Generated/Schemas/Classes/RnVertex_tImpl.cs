@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnVertex_tImpl : SchemaClass, RnVertex_t {
+internal partial class RnVertex_tImpl : SchemaClass, RnVertex_t
+{
+    public RnVertex_tImpl(nint handle) : base(handle) { }
 
-  public RnVertex_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EdgeOffset;
 
-  private static nint? _EdgeOffset;
-
-  public ref byte Edge {
-    get {
-      if (_EdgeOffset == null) {
-        _EdgeOffset = Schema.GetOffset(0xA2F56A80E2949FC8);
-      }
-      return ref _Handle.AsRef<byte>(_EdgeOffset!.Value);
+    public ref byte Edge {
+        get {
+            _EdgeOffset = _EdgeOffset ?? Schema.GetOffset(0xA2F56A80E2949FC8);
+            return ref _Handle.AsRef<byte>(_EdgeOffset!.Value);
+        }
     }
-  }
 
 
 }

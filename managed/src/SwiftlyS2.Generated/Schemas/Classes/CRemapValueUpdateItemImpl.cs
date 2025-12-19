@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRemapValueUpdateItemImpl : SchemaClass, CRemapValueUpdateItem {
+internal partial class CRemapValueUpdateItemImpl : SchemaClass, CRemapValueUpdateItem
+{
+    public CRemapValueUpdateItemImpl(nint handle) : base(handle) { }
 
-  public CRemapValueUpdateItemImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParamInOffset;
 
-  private static nint? _ParamInOffset;
-
-  public CAnimParamHandle ParamIn {
-    get {
-      if (_ParamInOffset == null) {
-        _ParamInOffset = Schema.GetOffset(0x93C5E8D6ED40E37B);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamInOffset!.Value);
+    public CAnimParamHandle ParamIn {
+        get {
+            _ParamInOffset = _ParamInOffset ?? Schema.GetOffset(0x93C5E8D6ED40E37B);
+            return new CAnimParamHandleImpl(_Handle + _ParamInOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamOutOffset;
+    private static nint? _ParamOutOffset;
 
-  public CAnimParamHandle ParamOut {
-    get {
-      if (_ParamOutOffset == null) {
-        _ParamOutOffset = Schema.GetOffset(0x93C5E8D6AA5799A8);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamOutOffset!.Value);
+    public CAnimParamHandle ParamOut {
+        get {
+            _ParamOutOffset = _ParamOutOffset ?? Schema.GetOffset(0x93C5E8D6AA5799A8);
+            return new CAnimParamHandleImpl(_Handle + _ParamOutOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinInputValueOffset;
+    private static nint? _MinInputValueOffset;
 
-  public ref float MinInputValue {
-    get {
-      if (_MinInputValueOffset == null) {
-        _MinInputValueOffset = Schema.GetOffset(0x93C5E8D6BDB4BC64);
-      }
-      return ref _Handle.AsRef<float>(_MinInputValueOffset!.Value);
+    public ref float MinInputValue {
+        get {
+            _MinInputValueOffset = _MinInputValueOffset ?? Schema.GetOffset(0x93C5E8D6BDB4BC64);
+            return ref _Handle.AsRef<float>(_MinInputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxInputValueOffset;
+    private static nint? _MaxInputValueOffset;
 
-  public ref float MaxInputValue {
-    get {
-      if (_MaxInputValueOffset == null) {
-        _MaxInputValueOffset = Schema.GetOffset(0x93C5E8D63EF75C2A);
-      }
-      return ref _Handle.AsRef<float>(_MaxInputValueOffset!.Value);
+    public ref float MaxInputValue {
+        get {
+            _MaxInputValueOffset = _MaxInputValueOffset ?? Schema.GetOffset(0x93C5E8D63EF75C2A);
+            return ref _Handle.AsRef<float>(_MaxInputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinOutputValueOffset;
+    private static nint? _MinOutputValueOffset;
 
-  public ref float MinOutputValue {
-    get {
-      if (_MinOutputValueOffset == null) {
-        _MinOutputValueOffset = Schema.GetOffset(0x93C5E8D6F63C7011);
-      }
-      return ref _Handle.AsRef<float>(_MinOutputValueOffset!.Value);
+    public ref float MinOutputValue {
+        get {
+            _MinOutputValueOffset = _MinOutputValueOffset ?? Schema.GetOffset(0x93C5E8D6F63C7011);
+            return ref _Handle.AsRef<float>(_MinOutputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOutputValueOffset;
+    private static nint? _MaxOutputValueOffset;
 
-  public ref float MaxOutputValue {
-    get {
-      if (_MaxOutputValueOffset == null) {
-        _MaxOutputValueOffset = Schema.GetOffset(0x93C5E8D6A91B71B3);
-      }
-      return ref _Handle.AsRef<float>(_MaxOutputValueOffset!.Value);
+    public ref float MaxOutputValue {
+        get {
+            _MaxOutputValueOffset = _MaxOutputValueOffset ?? Schema.GetOffset(0x93C5E8D6A91B71B3);
+            return ref _Handle.AsRef<float>(_MaxOutputValueOffset!.Value);
+        }
     }
-  }
 
 
 }

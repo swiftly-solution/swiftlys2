@@ -6,39 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerBuoyancyImpl : CBaseTriggerImpl, CTriggerBuoyancy {
+internal partial class CTriggerBuoyancyImpl : CBaseTriggerImpl, CTriggerBuoyancy
+{
+    public CTriggerBuoyancyImpl(nint handle) : base(handle) { }
 
-  public CTriggerBuoyancyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BuoyancyHelperOffset;
 
-  private static nint? _BuoyancyHelperOffset;
-
-  public CBuoyancyHelper BuoyancyHelper {
-    get {
-      if (_BuoyancyHelperOffset == null) {
-        _BuoyancyHelperOffset = Schema.GetOffset(0xE9698D106BAFFEA7);
-      }
-      return new CBuoyancyHelperImpl(_Handle + _BuoyancyHelperOffset!.Value);
+    public CBuoyancyHelper BuoyancyHelper {
+        get {
+            _BuoyancyHelperOffset = _BuoyancyHelperOffset ?? Schema.GetOffset(0xE9698D106BAFFEA7);
+            return new CBuoyancyHelperImpl(_Handle + _BuoyancyHelperOffset!.Value);
+        }
     }
-  }
-  private static nint? _FluidDensityOffset;
+    private static nint? _FluidDensityOffset;
 
-  public ref float FluidDensity {
-    get {
-      if (_FluidDensityOffset == null) {
-        _FluidDensityOffset = Schema.GetOffset(0xE9698D10DABBC5A3);
-      }
-      return ref _Handle.AsRef<float>(_FluidDensityOffset!.Value);
+    public ref float FluidDensity {
+        get {
+            _FluidDensityOffset = _FluidDensityOffset ?? Schema.GetOffset(0xE9698D10DABBC5A3);
+            return ref _Handle.AsRef<float>(_FluidDensityOffset!.Value);
+        }
     }
-  }
 
-  public void FluidDensityUpdated() {
-    Schema.Update(_Handle, 0xE9698D10DABBC5A3);
-  }
+    public void FluidDensityUpdated() => Schema.Update(_Handle, 0xE9698D10DABBC5A3);
 }

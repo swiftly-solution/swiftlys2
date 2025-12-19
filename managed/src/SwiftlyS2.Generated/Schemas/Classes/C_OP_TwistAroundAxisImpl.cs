@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_TwistAroundAxisImpl : CParticleFunctionForceImpl, C_OP_TwistAroundAxis {
+internal partial class C_OP_TwistAroundAxisImpl : CParticleFunctionForceImpl, C_OP_TwistAroundAxis
+{
+    public C_OP_TwistAroundAxisImpl(nint handle) : base(handle) { }
 
-  public C_OP_TwistAroundAxisImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceAmountOffset;
 
-  private static nint? _ForceAmountOffset;
-
-  public ref float ForceAmount {
-    get {
-      if (_ForceAmountOffset == null) {
-        _ForceAmountOffset = Schema.GetOffset(0xE1FA036870831A84);
-      }
-      return ref _Handle.AsRef<float>(_ForceAmountOffset!.Value);
+    public ref float ForceAmount {
+        get {
+            _ForceAmountOffset = _ForceAmountOffset ?? Schema.GetOffset(0xE1FA036870831A84);
+            return ref _Handle.AsRef<float>(_ForceAmountOffset!.Value);
+        }
     }
-  }
-  private static nint? _TwistAxisOffset;
+    private static nint? _TwistAxisOffset;
 
-  public ref Vector TwistAxis {
-    get {
-      if (_TwistAxisOffset == null) {
-        _TwistAxisOffset = Schema.GetOffset(0xE1FA0368BEAAB521);
-      }
-      return ref _Handle.AsRef<Vector>(_TwistAxisOffset!.Value);
+    public ref Vector TwistAxis {
+        get {
+            _TwistAxisOffset = _TwistAxisOffset ?? Schema.GetOffset(0xE1FA0368BEAAB521);
+            return ref _Handle.AsRef<Vector>(_TwistAxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalSpaceOffset;
+    private static nint? _LocalSpaceOffset;
 
-  public ref bool LocalSpace {
-    get {
-      if (_LocalSpaceOffset == null) {
-        _LocalSpaceOffset = Schema.GetOffset(0xE1FA036862418E6E);
-      }
-      return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+    public ref bool LocalSpace {
+        get {
+            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0xE1FA036862418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointNumberOffset;
+    private static nint? _ControlPointNumberOffset;
 
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0xE1FA03683F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xE1FA03683F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
 
 
 }

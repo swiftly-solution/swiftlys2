@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomTrailLengthImpl : CParticleFunctionInitializerImpl, C_INIT_RandomTrailLength {
+internal partial class C_INIT_RandomTrailLengthImpl : CParticleFunctionInitializerImpl, C_INIT_RandomTrailLength
+{
+    public C_INIT_RandomTrailLengthImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RandomTrailLengthImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinLengthOffset;
 
-  private static nint? _MinLengthOffset;
-
-  public ref float MinLength {
-    get {
-      if (_MinLengthOffset == null) {
-        _MinLengthOffset = Schema.GetOffset(0x6418031B95FB8E51);
-      }
-      return ref _Handle.AsRef<float>(_MinLengthOffset!.Value);
+    public ref float MinLength {
+        get {
+            _MinLengthOffset = _MinLengthOffset ?? Schema.GetOffset(0x6418031B95FB8E51);
+            return ref _Handle.AsRef<float>(_MinLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxLengthOffset;
+    private static nint? _MaxLengthOffset;
 
-  public ref float MaxLength {
-    get {
-      if (_MaxLengthOffset == null) {
-        _MaxLengthOffset = Schema.GetOffset(0x6418031B87A8B4C7);
-      }
-      return ref _Handle.AsRef<float>(_MaxLengthOffset!.Value);
+    public ref float MaxLength {
+        get {
+            _MaxLengthOffset = _MaxLengthOffset ?? Schema.GetOffset(0x6418031B87A8B4C7);
+            return ref _Handle.AsRef<float>(_MaxLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _LengthRandExponentOffset;
+    private static nint? _LengthRandExponentOffset;
 
-  public ref float LengthRandExponent {
-    get {
-      if (_LengthRandExponentOffset == null) {
-        _LengthRandExponentOffset = Schema.GetOffset(0x6418031B41B064A7);
-      }
-      return ref _Handle.AsRef<float>(_LengthRandExponentOffset!.Value);
+    public ref float LengthRandExponent {
+        get {
+            _LengthRandExponentOffset = _LengthRandExponentOffset ?? Schema.GetOffset(0x6418031B41B064A7);
+            return ref _Handle.AsRef<float>(_LengthRandExponentOffset!.Value);
+        }
     }
-  }
 
 
 }

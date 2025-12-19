@@ -6,147 +6,120 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmChainSolverTaskImpl : CNmPoseTaskImpl, CNmChainSolverTask {
+internal partial class CNmChainSolverTaskImpl : CNmPoseTaskImpl, CNmChainSolverTask
+{
+    public CNmChainSolverTaskImpl(nint handle) : base(handle) { }
 
-  public CNmChainSolverTaskImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EffectorBoneIdxOffset;
 
-  private static nint? _EffectorBoneIdxOffset;
-
-  public ref int EffectorBoneIdx {
-    get {
-      if (_EffectorBoneIdxOffset == null) {
-        _EffectorBoneIdxOffset = Schema.GetOffset(0x5D675A12A9C233BE);
-      }
-      return ref _Handle.AsRef<int>(_EffectorBoneIdxOffset!.Value);
+    public ref int EffectorBoneIdx {
+        get {
+            _EffectorBoneIdxOffset = _EffectorBoneIdxOffset ?? Schema.GetOffset(0x5D675A12A9C233BE);
+            return ref _Handle.AsRef<int>(_EffectorBoneIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectorTargetBoneIdxOffset;
+    private static nint? _EffectorTargetBoneIdxOffset;
 
-  public ref int EffectorTargetBoneIdx {
-    get {
-      if (_EffectorTargetBoneIdxOffset == null) {
-        _EffectorTargetBoneIdxOffset = Schema.GetOffset(0x5D675A123A19E0D9);
-      }
-      return ref _Handle.AsRef<int>(_EffectorTargetBoneIdxOffset!.Value);
+    public ref int EffectorTargetBoneIdx {
+        get {
+            _EffectorTargetBoneIdxOffset = _EffectorTargetBoneIdxOffset ?? Schema.GetOffset(0x5D675A123A19E0D9);
+            return ref _Handle.AsRef<int>(_EffectorTargetBoneIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetTransformOffset;
+    private static nint? _TargetTransformOffset;
 
-  public ref CTransform TargetTransform {
-    get {
-      if (_TargetTransformOffset == null) {
-        _TargetTransformOffset = Schema.GetOffset(0x5D675A12B1497974);
-      }
-      return ref _Handle.AsRef<CTransform>(_TargetTransformOffset!.Value);
+    public ref CTransform TargetTransform {
+        get {
+            _TargetTransformOffset = _TargetTransformOffset ?? Schema.GetOffset(0x5D675A12B1497974);
+            return ref _Handle.AsRef<CTransform>(_TargetTransformOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumBonesInChainOffset;
+    private static nint? _NumBonesInChainOffset;
 
-  public ref int NumBonesInChain {
-    get {
-      if (_NumBonesInChainOffset == null) {
-        _NumBonesInChainOffset = Schema.GetOffset(0x5D675A12CAD2EB3E);
-      }
-      return ref _Handle.AsRef<int>(_NumBonesInChainOffset!.Value);
+    public ref int NumBonesInChain {
+        get {
+            _NumBonesInChainOffset = _NumBonesInChainOffset ?? Schema.GetOffset(0x5D675A12CAD2EB3E);
+            return ref _Handle.AsRef<int>(_NumBonesInChainOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectorTargetOffset;
+    private static nint? _EffectorTargetOffset;
 
-  public CNmTarget EffectorTarget {
-    get {
-      if (_EffectorTargetOffset == null) {
-        _EffectorTargetOffset = Schema.GetOffset(0x5D675A128D86AF5C);
-      }
-      return new CNmTargetImpl(_Handle + _EffectorTargetOffset!.Value);
+    public CNmTarget EffectorTarget {
+        get {
+            _EffectorTargetOffset = _EffectorTargetOffset ?? Schema.GetOffset(0x5D675A128D86AF5C);
+            return new CNmTargetImpl(_Handle + _EffectorTargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendModeOffset;
+    private static nint? _BlendModeOffset;
 
-  public ref NmIKBlendMode_t BlendMode {
-    get {
-      if (_BlendModeOffset == null) {
-        _BlendModeOffset = Schema.GetOffset(0x5D675A128D5006AB);
-      }
-      return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset!.Value);
+    public ref NmIKBlendMode_t BlendMode {
+        get {
+            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0x5D675A128D5006AB);
+            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendWeightOffset;
+    private static nint? _BlendWeightOffset;
 
-  public ref float BlendWeight {
-    get {
-      if (_BlendWeightOffset == null) {
-        _BlendWeightOffset = Schema.GetOffset(0x5D675A12E5D6B9CE);
-      }
-      return ref _Handle.AsRef<float>(_BlendWeightOffset!.Value);
+    public ref float BlendWeight {
+        get {
+            _BlendWeightOffset = _BlendWeightOffset ?? Schema.GetOffset(0x5D675A12E5D6B9CE);
+            return ref _Handle.AsRef<float>(_BlendWeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsTargetInWorldSpaceOffset;
+    private static nint? _IsTargetInWorldSpaceOffset;
 
-  public ref bool IsTargetInWorldSpace {
-    get {
-      if (_IsTargetInWorldSpaceOffset == null) {
-        _IsTargetInWorldSpaceOffset = Schema.GetOffset(0x5D675A125F56E0C5);
-      }
-      return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
+    public ref bool IsTargetInWorldSpace {
+        get {
+            _IsTargetInWorldSpaceOffset = _IsTargetInWorldSpaceOffset ?? Schema.GetOffset(0x5D675A125F56E0C5);
+            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsRunningFromDeserializedDataOffset;
+    private static nint? _IsRunningFromDeserializedDataOffset;
 
-  public ref bool IsRunningFromDeserializedData {
-    get {
-      if (_IsRunningFromDeserializedDataOffset == null) {
-        _IsRunningFromDeserializedDataOffset = Schema.GetOffset(0x5D675A124791111D);
-      }
-      return ref _Handle.AsRef<bool>(_IsRunningFromDeserializedDataOffset!.Value);
+    public ref bool IsRunningFromDeserializedData {
+        get {
+            _IsRunningFromDeserializedDataOffset = _IsRunningFromDeserializedDataOffset ?? Schema.GetOffset(0x5D675A124791111D);
+            return ref _Handle.AsRef<bool>(_IsRunningFromDeserializedDataOffset!.Value);
+        }
     }
-  }
-  private static nint? _DebugEffectorBoneIDOffset;
+    private static nint? _DebugEffectorBoneIDOffset;
 
-  public ref CGlobalSymbol DebugEffectorBoneID {
-    get {
-      if (_DebugEffectorBoneIDOffset == null) {
-        _DebugEffectorBoneIDOffset = Schema.GetOffset(0x5D675A12A9F0F1F3);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_DebugEffectorBoneIDOffset!.Value);
+    public ref CGlobalSymbol DebugEffectorBoneID {
+        get {
+            _DebugEffectorBoneIDOffset = _DebugEffectorBoneIDOffset ?? Schema.GetOffset(0x5D675A12A9F0F1F3);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DebugEffectorBoneIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChainStartTransformMSOffset;
+    private static nint? _ChainStartTransformMSOffset;
 
-  public ref CTransform ChainStartTransformMS {
-    get {
-      if (_ChainStartTransformMSOffset == null) {
-        _ChainStartTransformMSOffset = Schema.GetOffset(0x5D675A12E1B47AFE);
-      }
-      return ref _Handle.AsRef<CTransform>(_ChainStartTransformMSOffset!.Value);
+    public ref CTransform ChainStartTransformMS {
+        get {
+            _ChainStartTransformMSOffset = _ChainStartTransformMSOffset ?? Schema.GetOffset(0x5D675A12E1B47AFE);
+            return ref _Handle.AsRef<CTransform>(_ChainStartTransformMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _DebugRequestedTargetTransformMSOffset;
+    private static nint? _DebugRequestedTargetTransformMSOffset;
 
-  public ref CTransform DebugRequestedTargetTransformMS {
-    get {
-      if (_DebugRequestedTargetTransformMSOffset == null) {
-        _DebugRequestedTargetTransformMSOffset = Schema.GetOffset(0x5D675A12416A1F2F);
-      }
-      return ref _Handle.AsRef<CTransform>(_DebugRequestedTargetTransformMSOffset!.Value);
+    public ref CTransform DebugRequestedTargetTransformMS {
+        get {
+            _DebugRequestedTargetTransformMSOffset = _DebugRequestedTargetTransformMSOffset ?? Schema.GetOffset(0x5D675A12416A1F2F);
+            return ref _Handle.AsRef<CTransform>(_DebugRequestedTargetTransformMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _DebugTotalChainLengthOffset;
+    private static nint? _DebugTotalChainLengthOffset;
 
-  public ref float DebugTotalChainLength {
-    get {
-      if (_DebugTotalChainLengthOffset == null) {
-        _DebugTotalChainLengthOffset = Schema.GetOffset(0x5D675A125ED39D2F);
-      }
-      return ref _Handle.AsRef<float>(_DebugTotalChainLengthOffset!.Value);
+    public ref float DebugTotalChainLength {
+        get {
+            _DebugTotalChainLengthOffset = _DebugTotalChainLengthOffset ?? Schema.GetOffset(0x5D675A125ED39D2F);
+            return ref _Handle.AsRef<float>(_DebugTotalChainLengthOffset!.Value);
+        }
     }
-  }
 
 
 }

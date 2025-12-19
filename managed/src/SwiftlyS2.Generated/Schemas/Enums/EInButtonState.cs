@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EInButtonState : uint {
-
+public enum EInButtonState : uint
+{
  IN_BUTTON_UP = 0,
 
  IN_BUTTON_DOWN = 1,

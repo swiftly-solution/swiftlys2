@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvBeverageImpl : CBaseEntityImpl, CEnvBeverage {
+internal partial class CEnvBeverageImpl : CBaseEntityImpl, CEnvBeverage
+{
+    public CEnvBeverageImpl(nint handle) : base(handle) { }
 
-  public CEnvBeverageImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CanInDispenserOffset;
 
-  private static nint? _CanInDispenserOffset;
-
-  public ref bool CanInDispenser {
-    get {
-      if (_CanInDispenserOffset == null) {
-        _CanInDispenserOffset = Schema.GetOffset(0x205E38FCDFB6F3B5);
-      }
-      return ref _Handle.AsRef<bool>(_CanInDispenserOffset!.Value);
+    public ref bool CanInDispenser {
+        get {
+            _CanInDispenserOffset = _CanInDispenserOffset ?? Schema.GetOffset(0x205E38FCDFB6F3B5);
+            return ref _Handle.AsRef<bool>(_CanInDispenserOffset!.Value);
+        }
     }
-  }
-  private static nint? _BeverageTypeOffset;
+    private static nint? _BeverageTypeOffset;
 
-  public ref int BeverageType {
-    get {
-      if (_BeverageTypeOffset == null) {
-        _BeverageTypeOffset = Schema.GetOffset(0x205E38FC694E74C8);
-      }
-      return ref _Handle.AsRef<int>(_BeverageTypeOffset!.Value);
+    public ref int BeverageType {
+        get {
+            _BeverageTypeOffset = _BeverageTypeOffset ?? Schema.GetOffset(0x205E38FC694E74C8);
+            return ref _Handle.AsRef<int>(_BeverageTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

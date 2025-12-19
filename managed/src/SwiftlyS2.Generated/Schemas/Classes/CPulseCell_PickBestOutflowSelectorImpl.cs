@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_PickBestOutflowSelectorImpl : CPulseCell_BaseFlowImpl, CPulseCell_PickBestOutflowSelector {
+internal partial class CPulseCell_PickBestOutflowSelectorImpl : CPulseCell_BaseFlowImpl, CPulseCell_PickBestOutflowSelector
+{
+    public CPulseCell_PickBestOutflowSelectorImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_PickBestOutflowSelectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CheckTypeOffset;
 
-  private static nint? _CheckTypeOffset;
-
-  public ref PulseBestOutflowRules_t CheckType {
-    get {
-      if (_CheckTypeOffset == null) {
-        _CheckTypeOffset = Schema.GetOffset(0x7239DF04A94C6E6B);
-      }
-      return ref _Handle.AsRef<PulseBestOutflowRules_t>(_CheckTypeOffset!.Value);
+    public ref PulseBestOutflowRules_t CheckType {
+        get {
+            _CheckTypeOffset = _CheckTypeOffset ?? Schema.GetOffset(0x7239DF04A94C6E6B);
+            return ref _Handle.AsRef<PulseBestOutflowRules_t>(_CheckTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutflowListOffset;
+    private static nint? _OutflowListOffset;
 
-  public PulseSelectorOutflowList_t OutflowList {
-    get {
-      if (_OutflowListOffset == null) {
-        _OutflowListOffset = Schema.GetOffset(0x7239DF041461E743);
-      }
-      return new PulseSelectorOutflowList_tImpl(_Handle + _OutflowListOffset!.Value);
+    public PulseSelectorOutflowList_t OutflowList {
+        get {
+            _OutflowListOffset = _OutflowListOffset ?? Schema.GetOffset(0x7239DF041461E743);
+            return new PulseSelectorOutflowList_tImpl(_Handle + _OutflowListOffset!.Value);
+        }
     }
-  }
 
 
 }

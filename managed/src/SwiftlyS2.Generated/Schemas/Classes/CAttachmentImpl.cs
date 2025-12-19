@@ -6,83 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAttachmentImpl : SchemaClass, CAttachment {
+internal partial class CAttachmentImpl : SchemaClass, CAttachment
+{
+    public CAttachmentImpl(nint handle) : base(handle) { }
 
-  public CAttachmentImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5F09808F4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5F09808F4D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _InfluenceNamesOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x5F09808F4D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public string InfluenceNames {
+        get {
+            _InfluenceNamesOffset = _InfluenceNamesOffset ?? Schema.GetOffset(0x5F09808FFD9B3CB8);
+            return Schema.GetString(_Handle.Read<nint>(_InfluenceNamesOffset!.Value));
+        }
+        set {
+            _InfluenceNamesOffset = _InfluenceNamesOffset ?? Schema.GetOffset(0x5F09808FFD9B3CB8);
+            Schema.SetString(_Handle, _InfluenceNamesOffset!.Value, value);
+        }
+    } 
+    public ISchemaFixedArray<Quaternion> InfluenceRotations {
+        get => new SchemaFixedArray<Quaternion>(_Handle, 0x5F09808FD277168B, 3, 16, 16);
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x5F09808F4D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
+    public ISchemaFixedArray<Vector> InfluenceOffsets {
+        get => new SchemaFixedArray<Vector>(_Handle, 0x5F09808F767C44DC, 3, 12, 4);
     }
-  } 
-  private static nint? _InfluenceNamesOffset;
+    public ISchemaFixedArray<float> InfluenceWeights {
+        get => new SchemaFixedArray<float>(_Handle, 0x5F09808F49916951, 3, 4, 4);
+    }
+    public ISchemaFixedArray<bool> InfluenceRootTransform {
+        get => new SchemaFixedArray<bool>(_Handle, 0x5F09808F5763011C, 3, 1, 1);
+    }
+    private static nint? _InfluencesOffset;
 
-  public string InfluenceNames {
-    get {
-      if (_InfluenceNamesOffset == null) {
-        _InfluenceNamesOffset = Schema.GetOffset(0x5F09808FFD9B3CB8);
-      }
-      var ptr = _Handle.Read<nint>(_InfluenceNamesOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref byte Influences {
+        get {
+            _InfluencesOffset = _InfluencesOffset ?? Schema.GetOffset(0x5F09808F8E94AB85);
+            return ref _Handle.AsRef<byte>(_InfluencesOffset!.Value);
+        }
     }
-    set {
-      if (_InfluenceNamesOffset == null) {
-        _InfluenceNamesOffset = Schema.GetOffset(0x5F09808FFD9B3CB8);
-      }
-      Schema.SetString(_Handle, _InfluenceNamesOffset!.Value, value);
-    }
-  } 
-  public ISchemaFixedArray<Quaternion> InfluenceRotations {
-    get => new SchemaFixedArray<Quaternion>(_Handle, 0x5F09808FD277168B, 3, 16, 16);
-  }
-  public ISchemaFixedArray<Vector> InfluenceOffsets {
-    get => new SchemaFixedArray<Vector>(_Handle, 0x5F09808F767C44DC, 3, 12, 4);
-  }
-  public ISchemaFixedArray<float> InfluenceWeights {
-    get => new SchemaFixedArray<float>(_Handle, 0x5F09808F49916951, 3, 4, 4);
-  }
-  public ISchemaFixedArray<bool> InfluenceRootTransform {
-    get => new SchemaFixedArray<bool>(_Handle, 0x5F09808F5763011C, 3, 1, 1);
-  }
-  private static nint? _InfluencesOffset;
+    private static nint? _IgnoreRotationOffset;
 
-  public ref byte Influences {
-    get {
-      if (_InfluencesOffset == null) {
-        _InfluencesOffset = Schema.GetOffset(0x5F09808F8E94AB85);
-      }
-      return ref _Handle.AsRef<byte>(_InfluencesOffset!.Value);
+    public ref bool IgnoreRotation {
+        get {
+            _IgnoreRotationOffset = _IgnoreRotationOffset ?? Schema.GetOffset(0x5F09808FC7A0F33D);
+            return ref _Handle.AsRef<bool>(_IgnoreRotationOffset!.Value);
+        }
     }
-  }
-  private static nint? _IgnoreRotationOffset;
-
-  public ref bool IgnoreRotation {
-    get {
-      if (_IgnoreRotationOffset == null) {
-        _IgnoreRotationOffset = Schema.GetOffset(0x5F09808FC7A0F33D);
-      }
-      return ref _Handle.AsRef<bool>(_IgnoreRotationOffset!.Value);
-    }
-  }
 
 
 }

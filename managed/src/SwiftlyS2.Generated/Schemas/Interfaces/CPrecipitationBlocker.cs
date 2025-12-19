@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPrecipitationBlocker : CBaseModelEntity, ISchemaClass<CPrecipitationBlocker> {
-
-  static CPrecipitationBlocker ISchemaClass<CPrecipitationBlocker>.From(nint handle) => new CPrecipitationBlockerImpl(handle);
-  static int ISchemaClass<CPrecipitationBlocker>.Size => 2008;
-  static string? ISchemaClass<CPrecipitationBlocker>.ClassName => "func_precipitation_blocker";
+public partial interface CPrecipitationBlocker : CBaseModelEntity, ISchemaClass<CPrecipitationBlocker>
+{
+    static CPrecipitationBlocker ISchemaClass<CPrecipitationBlocker>.From(nint handle) => new CPrecipitationBlockerImpl(handle);
+    static int ISchemaClass<CPrecipitationBlocker>.Size => 2008;
+    static string? ISchemaClass<CPrecipitationBlocker>.ClassName => "func_precipitation_blocker";
 
 
 

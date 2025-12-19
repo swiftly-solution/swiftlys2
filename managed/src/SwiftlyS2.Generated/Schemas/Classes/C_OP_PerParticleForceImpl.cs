@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_PerParticleForceImpl : CParticleFunctionForceImpl, C_OP_PerParticleForce {
+internal partial class C_OP_PerParticleForceImpl : CParticleFunctionForceImpl, C_OP_PerParticleForce
+{
+    public C_OP_PerParticleForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_PerParticleForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceScaleOffset;
 
-  private static nint? _ForceScaleOffset;
-
-  public CPerParticleFloatInput ForceScale {
-    get {
-      if (_ForceScaleOffset == null) {
-        _ForceScaleOffset = Schema.GetOffset(0x70EFAEAD4817F390);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset!.Value);
+    public CPerParticleFloatInput ForceScale {
+        get {
+            _ForceScaleOffset = _ForceScaleOffset ?? Schema.GetOffset(0x70EFAEAD4817F390);
+            return new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceOffset;
+    private static nint? _ForceOffset;
 
-  public CPerParticleVecInput Force {
-    get {
-      if (_ForceOffset == null) {
-        _ForceOffset = Schema.GetOffset(0x70EFAEADE530B0A8);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _ForceOffset!.Value);
+    public CPerParticleVecInput Force {
+        get {
+            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0x70EFAEADE530B0A8);
+            return new CPerParticleVecInputImpl(_Handle + _ForceOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPOffset;
+    private static nint? _CPOffset;
 
-  public ref int CP {
-    get {
-      if (_CPOffset == null) {
-        _CPOffset = Schema.GetOffset(0x70EFAEADEB661472);
-      }
-      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    public ref int CP {
+        get {
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x70EFAEADEB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+        }
     }
-  }
 
 
 }

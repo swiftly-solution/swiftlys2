@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_UnknownImpl : CPulseCell_BaseImpl, CPulseCell_Unknown {
+internal partial class CPulseCell_UnknownImpl : CPulseCell_BaseImpl, CPulseCell_Unknown
+{
+    public CPulseCell_UnknownImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_UnknownImpl(nint handle) : base(handle) {
-  }
+    private static nint? _UnknownKeysOffset;
 
-  private static nint? _UnknownKeysOffset;
-
-  public SchemaUntypedField UnknownKeys {
-    get {
-      if (_UnknownKeysOffset == null) {
-        _UnknownKeysOffset = Schema.GetOffset(0xEA868E8A1EC86FF9);
-      }
-      return new SchemaUntypedField(_Handle + _UnknownKeysOffset!.Value);
+    public SchemaUntypedField UnknownKeys {
+        get {
+            _UnknownKeysOffset = _UnknownKeysOffset ?? Schema.GetOffset(0xEA868E8A1EC86FF9);
+            return new SchemaUntypedField(_Handle + _UnknownKeysOffset!.Value);
+        }
     }
-  }
 
 
 }

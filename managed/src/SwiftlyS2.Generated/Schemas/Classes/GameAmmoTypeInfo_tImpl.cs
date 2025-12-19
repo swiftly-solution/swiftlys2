@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class GameAmmoTypeInfo_tImpl : AmmoTypeInfo_tImpl, GameAmmoTypeInfo_t {
+internal partial class GameAmmoTypeInfo_tImpl : AmmoTypeInfo_tImpl, GameAmmoTypeInfo_t
+{
+    public GameAmmoTypeInfo_tImpl(nint handle) : base(handle) { }
 
-  public GameAmmoTypeInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BuySizeOffset;
 
-  private static nint? _BuySizeOffset;
-
-  public ref int BuySize {
-    get {
-      if (_BuySizeOffset == null) {
-        _BuySizeOffset = Schema.GetOffset(0x64034C7E8E17434E);
-      }
-      return ref _Handle.AsRef<int>(_BuySizeOffset!.Value);
+    public ref int BuySize {
+        get {
+            _BuySizeOffset = _BuySizeOffset ?? Schema.GetOffset(0x64034C7E8E17434E);
+            return ref _Handle.AsRef<int>(_BuySizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _CostOffset;
+    private static nint? _CostOffset;
 
-  public ref int Cost {
-    get {
-      if (_CostOffset == null) {
-        _CostOffset = Schema.GetOffset(0x64034C7E919660C4);
-      }
-      return ref _Handle.AsRef<int>(_CostOffset!.Value);
+    public ref int Cost {
+        get {
+            _CostOffset = _CostOffset ?? Schema.GetOffset(0x64034C7E919660C4);
+            return ref _Handle.AsRef<int>(_CostOffset!.Value);
+        }
     }
-  }
 
 
 }

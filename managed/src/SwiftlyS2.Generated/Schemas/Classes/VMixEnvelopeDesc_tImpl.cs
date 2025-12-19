@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixEnvelopeDesc_tImpl : SchemaClass, VMixEnvelopeDesc_t {
+internal partial class VMixEnvelopeDesc_tImpl : SchemaClass, VMixEnvelopeDesc_t
+{
+    public VMixEnvelopeDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixEnvelopeDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttackTimeMSOffset;
 
-  private static nint? _AttackTimeMSOffset;
-
-  public ref float AttackTimeMS {
-    get {
-      if (_AttackTimeMSOffset == null) {
-        _AttackTimeMSOffset = Schema.GetOffset(0xEF93602BD4A28216);
-      }
-      return ref _Handle.AsRef<float>(_AttackTimeMSOffset!.Value);
+    public ref float AttackTimeMS {
+        get {
+            _AttackTimeMSOffset = _AttackTimeMSOffset ?? Schema.GetOffset(0xEF93602BD4A28216);
+            return ref _Handle.AsRef<float>(_AttackTimeMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _HoldTimeMSOffset;
+    private static nint? _HoldTimeMSOffset;
 
-  public ref float HoldTimeMS {
-    get {
-      if (_HoldTimeMSOffset == null) {
-        _HoldTimeMSOffset = Schema.GetOffset(0xEF93602B028BA44F);
-      }
-      return ref _Handle.AsRef<float>(_HoldTimeMSOffset!.Value);
+    public ref float HoldTimeMS {
+        get {
+            _HoldTimeMSOffset = _HoldTimeMSOffset ?? Schema.GetOffset(0xEF93602B028BA44F);
+            return ref _Handle.AsRef<float>(_HoldTimeMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReleaseTimeMSOffset;
+    private static nint? _ReleaseTimeMSOffset;
 
-  public ref float ReleaseTimeMS {
-    get {
-      if (_ReleaseTimeMSOffset == null) {
-        _ReleaseTimeMSOffset = Schema.GetOffset(0xEF93602BEBB62791);
-      }
-      return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset!.Value);
+    public ref float ReleaseTimeMS {
+        get {
+            _ReleaseTimeMSOffset = _ReleaseTimeMSOffset ?? Schema.GetOffset(0xEF93602BEBB62791);
+            return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset!.Value);
+        }
     }
-  }
 
 
 }

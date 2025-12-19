@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum gear_slot_t : uint {
-
+public enum gear_slot_t : uint
+{
  GEAR_SLOT_INVALID = uint.MaxValue,
 
  GEAR_SLOT_RIFLE = 0,

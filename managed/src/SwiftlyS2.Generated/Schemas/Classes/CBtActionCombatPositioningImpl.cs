@@ -6,71 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBtActionCombatPositioningImpl : CBtNodeImpl, CBtActionCombatPositioning {
+internal partial class CBtActionCombatPositioningImpl : CBtNodeImpl, CBtActionCombatPositioning
+{
+    public CBtActionCombatPositioningImpl(nint handle) : base(handle) { }
 
-  public CBtActionCombatPositioningImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SensorInputKeyOffset;
 
-  private static nint? _SensorInputKeyOffset;
+    public string SensorInputKey {
+        get {
+            _SensorInputKeyOffset = _SensorInputKeyOffset ?? Schema.GetOffset(0x3FB29123D2B0D4C1);
+            return Schema.GetString(_Handle.Read<nint>(_SensorInputKeyOffset!.Value));
+        }
+        set {
+            _SensorInputKeyOffset = _SensorInputKeyOffset ?? Schema.GetOffset(0x3FB29123D2B0D4C1);
+            Schema.SetString(_Handle, _SensorInputKeyOffset!.Value, value);
+        }
+    } 
+    private static nint? _IsAttackingKeyOffset;
 
-  public string SensorInputKey {
-    get {
-      if (_SensorInputKeyOffset == null) {
-        _SensorInputKeyOffset = Schema.GetOffset(0x3FB29123D2B0D4C1);
-      }
-      var ptr = _Handle.Read<nint>(_SensorInputKeyOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SensorInputKeyOffset == null) {
-        _SensorInputKeyOffset = Schema.GetOffset(0x3FB29123D2B0D4C1);
-      }
-      Schema.SetString(_Handle, _SensorInputKeyOffset!.Value, value);
-    }
-  } 
-  private static nint? _IsAttackingKeyOffset;
+    public string IsAttackingKey {
+        get {
+            _IsAttackingKeyOffset = _IsAttackingKeyOffset ?? Schema.GetOffset(0x3FB29123BFC6462B);
+            return Schema.GetString(_Handle.Read<nint>(_IsAttackingKeyOffset!.Value));
+        }
+        set {
+            _IsAttackingKeyOffset = _IsAttackingKeyOffset ?? Schema.GetOffset(0x3FB29123BFC6462B);
+            Schema.SetString(_Handle, _IsAttackingKeyOffset!.Value, value);
+        }
+    } 
+    private static nint? _ActionTimerOffset;
 
-  public string IsAttackingKey {
-    get {
-      if (_IsAttackingKeyOffset == null) {
-        _IsAttackingKeyOffset = Schema.GetOffset(0x3FB29123BFC6462B);
-      }
-      var ptr = _Handle.Read<nint>(_IsAttackingKeyOffset!.Value);
-      return Schema.GetString(ptr);
+    public CountdownTimer ActionTimer {
+        get {
+            _ActionTimerOffset = _ActionTimerOffset ?? Schema.GetOffset(0x3FB291238777F414);
+            return new CountdownTimerImpl(_Handle + _ActionTimerOffset!.Value);
+        }
     }
-    set {
-      if (_IsAttackingKeyOffset == null) {
-        _IsAttackingKeyOffset = Schema.GetOffset(0x3FB29123BFC6462B);
-      }
-      Schema.SetString(_Handle, _IsAttackingKeyOffset!.Value, value);
-    }
-  } 
-  private static nint? _ActionTimerOffset;
+    private static nint? _CrouchingOffset;
 
-  public CountdownTimer ActionTimer {
-    get {
-      if (_ActionTimerOffset == null) {
-        _ActionTimerOffset = Schema.GetOffset(0x3FB291238777F414);
-      }
-      return new CountdownTimerImpl(_Handle + _ActionTimerOffset!.Value);
+    public ref bool Crouching {
+        get {
+            _CrouchingOffset = _CrouchingOffset ?? Schema.GetOffset(0x3FB291232DA51BAD);
+            return ref _Handle.AsRef<bool>(_CrouchingOffset!.Value);
+        }
     }
-  }
-  private static nint? _CrouchingOffset;
-
-  public ref bool Crouching {
-    get {
-      if (_CrouchingOffset == null) {
-        _CrouchingOffset = Schema.GetOffset(0x3FB291232DA51BAD);
-      }
-      return ref _Handle.AsRef<bool>(_CrouchingOffset!.Value);
-    }
-  }
 
 
 }

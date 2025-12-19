@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CClothSettingsAnimTagImpl : CAnimTagBaseImpl, CClothSettingsAnimTag {
+internal partial class CClothSettingsAnimTagImpl : CAnimTagBaseImpl, CClothSettingsAnimTag
+{
+    public CClothSettingsAnimTagImpl(nint handle) : base(handle) { }
 
-  public CClothSettingsAnimTagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StiffnessOffset;
 
-  private static nint? _StiffnessOffset;
-
-  public ref float Stiffness {
-    get {
-      if (_StiffnessOffset == null) {
-        _StiffnessOffset = Schema.GetOffset(0xF6B586864344C684);
-      }
-      return ref _Handle.AsRef<float>(_StiffnessOffset!.Value);
+    public ref float Stiffness {
+        get {
+            _StiffnessOffset = _StiffnessOffset ?? Schema.GetOffset(0xF6B586864344C684);
+            return ref _Handle.AsRef<float>(_StiffnessOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseInOffset;
+    private static nint? _EaseInOffset;
 
-  public ref float EaseIn {
-    get {
-      if (_EaseInOffset == null) {
-        _EaseInOffset = Schema.GetOffset(0xF6B586864514C026);
-      }
-      return ref _Handle.AsRef<float>(_EaseInOffset!.Value);
+    public ref float EaseIn {
+        get {
+            _EaseInOffset = _EaseInOffset ?? Schema.GetOffset(0xF6B586864514C026);
+            return ref _Handle.AsRef<float>(_EaseInOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseOutOffset;
+    private static nint? _EaseOutOffset;
 
-  public ref float EaseOut {
-    get {
-      if (_EaseOutOffset == null) {
-        _EaseOutOffset = Schema.GetOffset(0xF6B5868646B49C07);
-      }
-      return ref _Handle.AsRef<float>(_EaseOutOffset!.Value);
+    public ref float EaseOut {
+        get {
+            _EaseOutOffset = _EaseOutOffset ?? Schema.GetOffset(0xF6B5868646B49C07);
+            return ref _Handle.AsRef<float>(_EaseOutOffset!.Value);
+        }
     }
-  }
-  private static nint? _VertexSetOffset;
+    private static nint? _VertexSetOffset;
 
-  public string VertexSet {
-    get {
-      if (_VertexSetOffset == null) {
-        _VertexSetOffset = Schema.GetOffset(0xF6B586863EE1A571);
-      }
-      var ptr = _Handle.Read<nint>(_VertexSetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_VertexSetOffset == null) {
-        _VertexSetOffset = Schema.GetOffset(0xF6B586863EE1A571);
-      }
-      Schema.SetString(_Handle, _VertexSetOffset!.Value, value);
-    }
-  } 
+    public string VertexSet {
+        get {
+            _VertexSetOffset = _VertexSetOffset ?? Schema.GetOffset(0xF6B586863EE1A571);
+            return Schema.GetString(_Handle.Read<nint>(_VertexSetOffset!.Value));
+        }
+        set {
+            _VertexSetOffset = _VertexSetOffset ?? Schema.GetOffset(0xF6B586863EE1A571);
+            Schema.SetString(_Handle, _VertexSetOffset!.Value, value);
+        }
+    } 
 
 
 }

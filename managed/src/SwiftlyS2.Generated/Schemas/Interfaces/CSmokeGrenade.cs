@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSmokeGrenade : CBaseCSGrenade, ISchemaClass<CSmokeGrenade> {
-
-  static CSmokeGrenade ISchemaClass<CSmokeGrenade>.From(nint handle) => new CSmokeGrenadeImpl(handle);
-  static int ISchemaClass<CSmokeGrenade>.Size => 4640;
-  static string? ISchemaClass<CSmokeGrenade>.ClassName => "weapon_smokegrenade";
+public partial interface CSmokeGrenade : CBaseCSGrenade, ISchemaClass<CSmokeGrenade>
+{
+    static CSmokeGrenade ISchemaClass<CSmokeGrenade>.From(nint handle) => new CSmokeGrenadeImpl(handle);
+    static int ISchemaClass<CSmokeGrenade>.Size => 4640;
+    static string? ISchemaClass<CSmokeGrenade>.ClassName => "weapon_smokegrenade";
 
 
 

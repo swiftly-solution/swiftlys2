@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CConstraintSlaveImpl : SchemaClass, CConstraintSlave {
+internal partial class CConstraintSlaveImpl : SchemaClass, CConstraintSlave
+{
+    public CConstraintSlaveImpl(nint handle) : base(handle) { }
 
-  public CConstraintSlaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BaseOrientationOffset;
 
-  private static nint? _BaseOrientationOffset;
-
-  public ref Quaternion BaseOrientation {
-    get {
-      if (_BaseOrientationOffset == null) {
-        _BaseOrientationOffset = Schema.GetOffset(0xE0E093BC46E6EA75);
-      }
-      return ref _Handle.AsRef<Quaternion>(_BaseOrientationOffset!.Value);
+    public ref Quaternion BaseOrientation {
+        get {
+            _BaseOrientationOffset = _BaseOrientationOffset ?? Schema.GetOffset(0xE0E093BC46E6EA75);
+            return ref _Handle.AsRef<Quaternion>(_BaseOrientationOffset!.Value);
+        }
     }
-  }
-  private static nint? _BasePositionOffset;
+    private static nint? _BasePositionOffset;
 
-  public ref Vector BasePosition {
-    get {
-      if (_BasePositionOffset == null) {
-        _BasePositionOffset = Schema.GetOffset(0xE0E093BCC510D587);
-      }
-      return ref _Handle.AsRef<Vector>(_BasePositionOffset!.Value);
+    public ref Vector BasePosition {
+        get {
+            _BasePositionOffset = _BasePositionOffset ?? Schema.GetOffset(0xE0E093BCC510D587);
+            return ref _Handle.AsRef<Vector>(_BasePositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneHashOffset;
+    private static nint? _BoneHashOffset;
 
-  public ref uint BoneHash {
-    get {
-      if (_BoneHashOffset == null) {
-        _BoneHashOffset = Schema.GetOffset(0xE0E093BCD4010F03);
-      }
-      return ref _Handle.AsRef<uint>(_BoneHashOffset!.Value);
+    public ref uint BoneHash {
+        get {
+            _BoneHashOffset = _BoneHashOffset ?? Schema.GetOffset(0xE0E093BCD4010F03);
+            return ref _Handle.AsRef<uint>(_BoneHashOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0xE0E093BC7B81E7AB);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xE0E093BC7B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameOffset;
+    private static nint? _NameOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xE0E093BC63D22D49);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xE0E093BC63D22D49);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE0E093BC63D22D49);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE0E093BC63D22D49);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
 
 
 }

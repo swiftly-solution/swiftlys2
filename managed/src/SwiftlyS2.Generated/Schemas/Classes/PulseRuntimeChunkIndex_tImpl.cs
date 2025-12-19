@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PulseRuntimeChunkIndex_tImpl : SchemaClass, PulseRuntimeChunkIndex_t {
+internal partial class PulseRuntimeChunkIndex_tImpl : SchemaClass, PulseRuntimeChunkIndex_t
+{
+    public PulseRuntimeChunkIndex_tImpl(nint handle) : base(handle) { }
 
-  public PulseRuntimeChunkIndex_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ValueOffset;
 
-  private static nint? _ValueOffset;
-
-  public ref int Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0xBC20E682DCB0894A);
-      }
-      return ref _Handle.AsRef<int>(_ValueOffset!.Value);
+    public ref int Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xBC20E682DCB0894A);
+            return ref _Handle.AsRef<int>(_ValueOffset!.Value);
+        }
     }
-  }
 
 
 }

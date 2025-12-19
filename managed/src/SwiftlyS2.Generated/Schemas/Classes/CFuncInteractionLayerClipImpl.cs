@@ -6,61 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncInteractionLayerClipImpl : CBaseModelEntityImpl, CFuncInteractionLayerClip {
+internal partial class CFuncInteractionLayerClipImpl : CBaseModelEntityImpl, CFuncInteractionLayerClip
+{
+    public CFuncInteractionLayerClipImpl(nint handle) : base(handle) { }
 
-  public CFuncInteractionLayerClipImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DisabledOffset;
 
-  private static nint? _DisabledOffset;
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x5A9288DF3A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
+    }
+    private static nint? _InteractsAsOffset;
 
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0x5A9288DF3A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
-    }
-  }
-  private static nint? _InteractsAsOffset;
+    public string InteractsAs {
+        get {
+            _InteractsAsOffset = _InteractsAsOffset ?? Schema.GetOffset(0x5A9288DF488FC5DC);
+            return Schema.GetString(_Handle.Read<nint>(_InteractsAsOffset!.Value));
+        }
+        set {
+            _InteractsAsOffset = _InteractsAsOffset ?? Schema.GetOffset(0x5A9288DF488FC5DC);
+            Schema.SetString(_Handle, _InteractsAsOffset!.Value, value);
+        }
+    } 
+    private static nint? _InteractsWithOffset;
 
-  public string InteractsAs {
-    get {
-      if (_InteractsAsOffset == null) {
-        _InteractsAsOffset = Schema.GetOffset(0x5A9288DF488FC5DC);
-      }
-      var ptr = _Handle.Read<nint>(_InteractsAsOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_InteractsAsOffset == null) {
-        _InteractsAsOffset = Schema.GetOffset(0x5A9288DF488FC5DC);
-      }
-      Schema.SetString(_Handle, _InteractsAsOffset!.Value, value);
-    }
-  } 
-  private static nint? _InteractsWithOffset;
-
-  public string InteractsWith {
-    get {
-      if (_InteractsWithOffset == null) {
-        _InteractsWithOffset = Schema.GetOffset(0x5A9288DF84AB4214);
-      }
-      var ptr = _Handle.Read<nint>(_InteractsWithOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_InteractsWithOffset == null) {
-        _InteractsWithOffset = Schema.GetOffset(0x5A9288DF84AB4214);
-      }
-      Schema.SetString(_Handle, _InteractsWithOffset!.Value, value);
-    }
-  } 
+    public string InteractsWith {
+        get {
+            _InteractsWithOffset = _InteractsWithOffset ?? Schema.GetOffset(0x5A9288DF84AB4214);
+            return Schema.GetString(_Handle.Read<nint>(_InteractsWithOffset!.Value));
+        }
+        set {
+            _InteractsWithOffset = _InteractsWithOffset ?? Schema.GetOffset(0x5A9288DF84AB4214);
+            Schema.SetString(_Handle, _InteractsWithOffset!.Value, value);
+        }
+    } 
 
 
 }

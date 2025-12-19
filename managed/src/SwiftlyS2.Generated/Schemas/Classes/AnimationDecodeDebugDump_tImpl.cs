@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AnimationDecodeDebugDump_tImpl : SchemaClass, AnimationDecodeDebugDump_t {
+internal partial class AnimationDecodeDebugDump_tImpl : SchemaClass, AnimationDecodeDebugDump_t
+{
+    public AnimationDecodeDebugDump_tImpl(nint handle) : base(handle) { }
 
-  public AnimationDecodeDebugDump_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ProcessingTypeOffset;
 
-  private static nint? _ProcessingTypeOffset;
-
-  public ref AnimationProcessingType_t ProcessingType {
-    get {
-      if (_ProcessingTypeOffset == null) {
-        _ProcessingTypeOffset = Schema.GetOffset(0xA584797F5F059FB6);
-      }
-      return ref _Handle.AsRef<AnimationProcessingType_t>(_ProcessingTypeOffset!.Value);
+    public ref AnimationProcessingType_t ProcessingType {
+        get {
+            _ProcessingTypeOffset = _ProcessingTypeOffset ?? Schema.GetOffset(0xA584797F5F059FB6);
+            return ref _Handle.AsRef<AnimationProcessingType_t>(_ProcessingTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ElemsOffset;
+    private static nint? _ElemsOffset;
 
-  public ref CUtlVector<AnimationDecodeDebugDumpElement_t> Elems {
-    get {
-      if (_ElemsOffset == null) {
-        _ElemsOffset = Schema.GetOffset(0xA584797F3F2FC92B);
-      }
-      return ref _Handle.AsRef<CUtlVector<AnimationDecodeDebugDumpElement_t>>(_ElemsOffset!.Value);
+    public ref CUtlVector<AnimationDecodeDebugDumpElement_t> Elems {
+        get {
+            _ElemsOffset = _ElemsOffset ?? Schema.GetOffset(0xA584797F3F2FC92B);
+            return ref _Handle.AsRef<CUtlVector<AnimationDecodeDebugDumpElement_t>>(_ElemsOffset!.Value);
+        }
     }
-  }
 
 
 }

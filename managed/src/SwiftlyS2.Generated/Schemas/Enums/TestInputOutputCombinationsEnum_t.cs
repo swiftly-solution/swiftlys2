@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum TestInputOutputCombinationsEnum_t : uint {
-
+public enum TestInputOutputCombinationsEnum_t : uint
+{
  ZERO = 0,
 
  ONE = 1,

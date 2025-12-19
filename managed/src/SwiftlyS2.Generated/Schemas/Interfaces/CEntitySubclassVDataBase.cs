@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEntitySubclassVDataBase : ISchemaClass<CEntitySubclassVDataBase> {
-
-  static CEntitySubclassVDataBase ISchemaClass<CEntitySubclassVDataBase>.From(nint handle) => new CEntitySubclassVDataBaseImpl(handle);
-  static int ISchemaClass<CEntitySubclassVDataBase>.Size => 40;
-  static string? ISchemaClass<CEntitySubclassVDataBase>.ClassName => null;
+public partial interface CEntitySubclassVDataBase : ISchemaClass<CEntitySubclassVDataBase>
+{
+    static CEntitySubclassVDataBase ISchemaClass<CEntitySubclassVDataBase>.From(nint handle) => new CEntitySubclassVDataBaseImpl(handle);
+    static int ISchemaClass<CEntitySubclassVDataBase>.Size => 40;
+    static string? ISchemaClass<CEntitySubclassVDataBase>.ClassName => null;
 
 
 

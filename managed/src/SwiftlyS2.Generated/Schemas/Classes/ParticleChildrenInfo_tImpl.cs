@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ParticleChildrenInfo_tImpl : SchemaClass, ParticleChildrenInfo_t {
+internal partial class ParticleChildrenInfo_tImpl : SchemaClass, ParticleChildrenInfo_t
+{
+    public ParticleChildrenInfo_tImpl(nint handle) : base(handle) { }
 
-  public ParticleChildrenInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChildRefOffset;
 
-  private static nint? _ChildRefOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ChildRef {
-    get {
-      if (_ChildRefOffset == null) {
-        _ChildRefOffset = Schema.GetOffset(0x1EF548F3D87838A);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_ChildRefOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ChildRef {
+        get {
+            _ChildRefOffset = _ChildRefOffset ?? Schema.GetOffset(0x1EF548F3D87838A);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_ChildRefOffset!.Value);
+        }
     }
-  }
-  private static nint? _DelayOffset;
+    private static nint? _DelayOffset;
 
-  public ref float Delay {
-    get {
-      if (_DelayOffset == null) {
-        _DelayOffset = Schema.GetOffset(0x1EF548F7D68FD6E);
-      }
-      return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+    public ref float Delay {
+        get {
+            _DelayOffset = _DelayOffset ?? Schema.GetOffset(0x1EF548F7D68FD6E);
+            return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndCapOffset;
+    private static nint? _EndCapOffset;
 
-  public ref bool EndCap {
-    get {
-      if (_EndCapOffset == null) {
-        _EndCapOffset = Schema.GetOffset(0x1EF548FC47CB04A);
-      }
-      return ref _Handle.AsRef<bool>(_EndCapOffset!.Value);
+    public ref bool EndCap {
+        get {
+            _EndCapOffset = _EndCapOffset ?? Schema.GetOffset(0x1EF548FC47CB04A);
+            return ref _Handle.AsRef<bool>(_EndCapOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisableChildOffset;
+    private static nint? _DisableChildOffset;
 
-  public ref bool DisableChild {
-    get {
-      if (_DisableChildOffset == null) {
-        _DisableChildOffset = Schema.GetOffset(0x1EF548F81AECD9B);
-      }
-      return ref _Handle.AsRef<bool>(_DisableChildOffset!.Value);
+    public ref bool DisableChild {
+        get {
+            _DisableChildOffset = _DisableChildOffset ?? Schema.GetOffset(0x1EF548F81AECD9B);
+            return ref _Handle.AsRef<bool>(_DisableChildOffset!.Value);
+        }
     }
-  }
-  private static nint? _DetailLevelOffset;
+    private static nint? _DetailLevelOffset;
 
-  public ref ParticleDetailLevel_t DetailLevel {
-    get {
-      if (_DetailLevelOffset == null) {
-        _DetailLevelOffset = Schema.GetOffset(0x1EF548F11D9E786);
-      }
-      return ref _Handle.AsRef<ParticleDetailLevel_t>(_DetailLevelOffset!.Value);
+    public ref ParticleDetailLevel_t DetailLevel {
+        get {
+            _DetailLevelOffset = _DetailLevelOffset ?? Schema.GetOffset(0x1EF548F11D9E786);
+            return ref _Handle.AsRef<ParticleDetailLevel_t>(_DetailLevelOffset!.Value);
+        }
     }
-  }
 
 
 }

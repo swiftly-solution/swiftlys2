@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetCPtoVectorImpl : CParticleFunctionOperatorImpl, C_OP_SetCPtoVector {
+internal partial class C_OP_SetCPtoVectorImpl : CParticleFunctionOperatorImpl, C_OP_SetCPtoVector
+{
+    public C_OP_SetCPtoVectorImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetCPtoVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPInputOffset;
 
-  private static nint? _CPInputOffset;
-
-  public ref int CPInput {
-    get {
-      if (_CPInputOffset == null) {
-        _CPInputOffset = Schema.GetOffset(0x799E4536FB805736);
-      }
-      return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
+    public ref int CPInput {
+        get {
+            _CPInputOffset = _CPInputOffset ?? Schema.GetOffset(0x799E4536FB805736);
+            return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x799E4536E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x799E4536E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
 
 
 }

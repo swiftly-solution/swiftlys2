@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmTwoBoneIKNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmTwoBoneIKNode__CDefinition {
+internal partial class CNmTwoBoneIKNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmTwoBoneIKNode__CDefinition
+{
+    public CNmTwoBoneIKNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmTwoBoneIKNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EffectorBoneIDOffset;
 
-  private static nint? _EffectorBoneIDOffset;
-
-  public ref CGlobalSymbol EffectorBoneID {
-    get {
-      if (_EffectorBoneIDOffset == null) {
-        _EffectorBoneIDOffset = Schema.GetOffset(0x4D36C61F7F221CB6);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_EffectorBoneIDOffset!.Value);
+    public ref CGlobalSymbol EffectorBoneID {
+        get {
+            _EffectorBoneIDOffset = _EffectorBoneIDOffset ?? Schema.GetOffset(0x4D36C61F7F221CB6);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EffectorBoneIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectorTargetNodeIdxOffset;
+    private static nint? _EffectorTargetNodeIdxOffset;
 
-  public ref short EffectorTargetNodeIdx {
-    get {
-      if (_EffectorTargetNodeIdxOffset == null) {
-        _EffectorTargetNodeIdxOffset = Schema.GetOffset(0x4D36C61FD6B9B943);
-      }
-      return ref _Handle.AsRef<short>(_EffectorTargetNodeIdxOffset!.Value);
+    public ref short EffectorTargetNodeIdx {
+        get {
+            _EffectorTargetNodeIdxOffset = _EffectorTargetNodeIdxOffset ?? Schema.GetOffset(0x4D36C61FD6B9B943);
+            return ref _Handle.AsRef<short>(_EffectorTargetNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnabledNodeIdxOffset;
+    private static nint? _EnabledNodeIdxOffset;
 
-  public ref short EnabledNodeIdx {
-    get {
-      if (_EnabledNodeIdxOffset == null) {
-        _EnabledNodeIdxOffset = Schema.GetOffset(0x4D36C61FF7CDF5E9);
-      }
-      return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+    public ref short EnabledNodeIdx {
+        get {
+            _EnabledNodeIdxOffset = _EnabledNodeIdxOffset ?? Schema.GetOffset(0x4D36C61FF7CDF5E9);
+            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendTimeSecondsOffset;
+    private static nint? _BlendTimeSecondsOffset;
 
-  public ref float BlendTimeSeconds {
-    get {
-      if (_BlendTimeSecondsOffset == null) {
-        _BlendTimeSecondsOffset = Schema.GetOffset(0x4D36C61F6D3A08FC);
-      }
-      return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+    public ref float BlendTimeSeconds {
+        get {
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0x4D36C61F6D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendModeOffset;
+    private static nint? _BlendModeOffset;
 
-  public ref NmIKBlendMode_t BlendMode {
-    get {
-      if (_BlendModeOffset == null) {
-        _BlendModeOffset = Schema.GetOffset(0x4D36C61F8D5006AB);
-      }
-      return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset!.Value);
+    public ref NmIKBlendMode_t BlendMode {
+        get {
+            _BlendModeOffset = _BlendModeOffset ?? Schema.GetOffset(0x4D36C61F8D5006AB);
+            return ref _Handle.AsRef<NmIKBlendMode_t>(_BlendModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsTargetInWorldSpaceOffset;
+    private static nint? _IsTargetInWorldSpaceOffset;
 
-  public ref bool IsTargetInWorldSpace {
-    get {
-      if (_IsTargetInWorldSpaceOffset == null) {
-        _IsTargetInWorldSpaceOffset = Schema.GetOffset(0x4D36C61F5F56E0C5);
-      }
-      return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
+    public ref bool IsTargetInWorldSpace {
+        get {
+            _IsTargetInWorldSpaceOffset = _IsTargetInWorldSpaceOffset ?? Schema.GetOffset(0x4D36C61F5F56E0C5);
+            return ref _Handle.AsRef<bool>(_IsTargetInWorldSpaceOffset!.Value);
+        }
     }
-  }
 
 
 }

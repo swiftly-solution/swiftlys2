@@ -6,233 +6,170 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CColorCorrectionImpl : CBaseEntityImpl, CColorCorrection {
+internal partial class CColorCorrectionImpl : CBaseEntityImpl, CColorCorrection
+{
+    public CColorCorrectionImpl(nint handle) : base(handle) { }
 
-  public CColorCorrectionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FadeInDurationOffset;
 
-  private static nint? _FadeInDurationOffset;
-
-  public ref float FadeInDuration {
-    get {
-      if (_FadeInDurationOffset == null) {
-        _FadeInDurationOffset = Schema.GetOffset(0x86645E1101B5EB8E);
-      }
-      return ref _Handle.AsRef<float>(_FadeInDurationOffset!.Value);
-    }
-  }
-  private static nint? _FadeOutDurationOffset;
-
-  public ref float FadeOutDuration {
-    get {
-      if (_FadeOutDurationOffset == null) {
-        _FadeOutDurationOffset = Schema.GetOffset(0x86645E11543512CF);
-      }
-      return ref _Handle.AsRef<float>(_FadeOutDurationOffset!.Value);
-    }
-  }
-  private static nint? _StartFadeInWeightOffset;
-
-  public ref float StartFadeInWeight {
-    get {
-      if (_StartFadeInWeightOffset == null) {
-        _StartFadeInWeightOffset = Schema.GetOffset(0x86645E11E12AF000);
-      }
-      return ref _Handle.AsRef<float>(_StartFadeInWeightOffset!.Value);
-    }
-  }
-  private static nint? _StartFadeOutWeightOffset;
-
-  public ref float StartFadeOutWeight {
-    get {
-      if (_StartFadeOutWeightOffset == null) {
-        _StartFadeOutWeightOffset = Schema.GetOffset(0x86645E118757D4F9);
-      }
-      return ref _Handle.AsRef<float>(_StartFadeOutWeightOffset!.Value);
-    }
-  }
-  private static nint? _TimeStartFadeInOffset;
-
-  public GameTime_t TimeStartFadeIn {
-    get {
-      if (_TimeStartFadeInOffset == null) {
-        _TimeStartFadeInOffset = Schema.GetOffset(0x86645E1175A6B4B7);
-      }
-      return new GameTime_tImpl(_Handle + _TimeStartFadeInOffset!.Value);
-    }
-  }
-  private static nint? _TimeStartFadeOutOffset;
-
-  public GameTime_t TimeStartFadeOut {
-    get {
-      if (_TimeStartFadeOutOffset == null) {
-        _TimeStartFadeOutOffset = Schema.GetOffset(0x86645E118028C93C);
-      }
-      return new GameTime_tImpl(_Handle + _TimeStartFadeOutOffset!.Value);
-    }
-  }
-  private static nint? _MaxWeightOffset;
-
-  public ref float MaxWeight {
-    get {
-      if (_MaxWeightOffset == null) {
-        _MaxWeightOffset = Schema.GetOffset(0x86645E1155F00F23);
-      }
-      return ref _Handle.AsRef<float>(_MaxWeightOffset!.Value);
-    }
-  }
-  private static nint? _StartDisabledOffset;
-
-  public ref bool StartDisabled {
-    get {
-      if (_StartDisabledOffset == null) {
-        _StartDisabledOffset = Schema.GetOffset(0x86645E1161ED0C4F);
-      }
-      return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
-    }
-  }
-  private static nint? _EnabledOffset;
-
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0x86645E116154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
-    }
-  }
-  private static nint? _MasterOffset;
-
-  public ref bool Master {
-    get {
-      if (_MasterOffset == null) {
-        _MasterOffset = Schema.GetOffset(0x86645E115AFF9193);
-      }
-      return ref _Handle.AsRef<bool>(_MasterOffset!.Value);
-    }
-  }
-  private static nint? _ClientSideOffset;
-
-  public ref bool ClientSide {
-    get {
-      if (_ClientSideOffset == null) {
-        _ClientSideOffset = Schema.GetOffset(0x86645E116B28362D);
-      }
-      return ref _Handle.AsRef<bool>(_ClientSideOffset!.Value);
-    }
-  }
-  private static nint? _ExclusiveOffset;
-
-  public ref bool Exclusive {
-    get {
-      if (_ExclusiveOffset == null) {
-        _ExclusiveOffset = Schema.GetOffset(0x86645E11D84BE6BB);
-      }
-      return ref _Handle.AsRef<bool>(_ExclusiveOffset!.Value);
-    }
-  }
-  private static nint? _MinFalloffOffset;
-
-  public ref float MinFalloff {
-    get {
-      if (_MinFalloffOffset == null) {
-        _MinFalloffOffset = Schema.GetOffset(0x86645E116628F1F3);
-      }
-      return ref _Handle.AsRef<float>(_MinFalloffOffset!.Value);
-    }
-  }
-  private static nint? _MaxFalloffOffset;
-
-  public ref float MaxFalloff {
-    get {
-      if (_MaxFalloffOffset == null) {
-        _MaxFalloffOffset = Schema.GetOffset(0x86645E118837D7E1);
-      }
-      return ref _Handle.AsRef<float>(_MaxFalloffOffset!.Value);
-    }
-  }
-  private static nint? _CurWeightOffset;
-
-  public ref float CurWeight {
-    get {
-      if (_CurWeightOffset == null) {
-        _CurWeightOffset = Schema.GetOffset(0x86645E112EA7ED7F);
-      }
-      return ref _Handle.AsRef<float>(_CurWeightOffset!.Value);
-    }
-  }
-  private static nint? _NetlookupFilenameOffset;
-
-  public string NetlookupFilename {
-    get {
-        if (_NetlookupFilenameOffset == null) {
-            _NetlookupFilenameOffset = Schema.GetOffset(0x86645E11543AB1EB);
+    public ref float FadeInDuration {
+        get {
+            _FadeInDurationOffset = _FadeInDurationOffset ?? Schema.GetOffset(0x86645E1101B5EB8E);
+            return ref _Handle.AsRef<float>(_FadeInDurationOffset!.Value);
         }
-        var ptr = _Handle + _NetlookupFilenameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_NetlookupFilenameOffset == null) {
-            _NetlookupFilenameOffset = Schema.GetOffset(0x86645E11543AB1EB);
+    private static nint? _FadeOutDurationOffset;
+
+    public ref float FadeOutDuration {
+        get {
+            _FadeOutDurationOffset = _FadeOutDurationOffset ?? Schema.GetOffset(0x86645E11543512CF);
+            return ref _Handle.AsRef<float>(_FadeOutDurationOffset!.Value);
         }
-        Schema.SetFixedString(_Handle, _NetlookupFilenameOffset!.Value, value, 512);
     }
-  } 
-  private static nint? _LookupFilenameOffset;
+    private static nint? _StartFadeInWeightOffset;
 
-  public string LookupFilename {
-    get {
-      if (_LookupFilenameOffset == null) {
-        _LookupFilenameOffset = Schema.GetOffset(0x86645E112611A2C6);
-      }
-      var ptr = _Handle.Read<nint>(_LookupFilenameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float StartFadeInWeight {
+        get {
+            _StartFadeInWeightOffset = _StartFadeInWeightOffset ?? Schema.GetOffset(0x86645E11E12AF000);
+            return ref _Handle.AsRef<float>(_StartFadeInWeightOffset!.Value);
+        }
     }
-    set {
-      if (_LookupFilenameOffset == null) {
-        _LookupFilenameOffset = Schema.GetOffset(0x86645E112611A2C6);
-      }
-      Schema.SetString(_Handle, _LookupFilenameOffset!.Value, value);
-    }
-  } 
+    private static nint? _StartFadeOutWeightOffset;
 
-  public void FadeInDurationUpdated() {
-    Schema.Update(_Handle, 0x86645E1101B5EB8E);
-  }
-  public void FadeOutDurationUpdated() {
-    Schema.Update(_Handle, 0x86645E11543512CF);
-  }
-  public void MaxWeightUpdated() {
-    Schema.Update(_Handle, 0x86645E1155F00F23);
-  }
-  public void EnabledUpdated() {
-    Schema.Update(_Handle, 0x86645E116154EB7E);
-  }
-  public void MasterUpdated() {
-    Schema.Update(_Handle, 0x86645E115AFF9193);
-  }
-  public void ClientSideUpdated() {
-    Schema.Update(_Handle, 0x86645E116B28362D);
-  }
-  public void ExclusiveUpdated() {
-    Schema.Update(_Handle, 0x86645E11D84BE6BB);
-  }
-  public void MinFalloffUpdated() {
-    Schema.Update(_Handle, 0x86645E116628F1F3);
-  }
-  public void MaxFalloffUpdated() {
-    Schema.Update(_Handle, 0x86645E118837D7E1);
-  }
-  public void CurWeightUpdated() {
-    Schema.Update(_Handle, 0x86645E112EA7ED7F);
-  }
-  public void NetlookupFilenameUpdated() {
-    Schema.Update(_Handle, 0x86645E11543AB1EB);
-  }
+    public ref float StartFadeOutWeight {
+        get {
+            _StartFadeOutWeightOffset = _StartFadeOutWeightOffset ?? Schema.GetOffset(0x86645E118757D4F9);
+            return ref _Handle.AsRef<float>(_StartFadeOutWeightOffset!.Value);
+        }
+    }
+    private static nint? _TimeStartFadeInOffset;
+
+    public GameTime_t TimeStartFadeIn {
+        get {
+            _TimeStartFadeInOffset = _TimeStartFadeInOffset ?? Schema.GetOffset(0x86645E1175A6B4B7);
+            return new GameTime_tImpl(_Handle + _TimeStartFadeInOffset!.Value);
+        }
+    }
+    private static nint? _TimeStartFadeOutOffset;
+
+    public GameTime_t TimeStartFadeOut {
+        get {
+            _TimeStartFadeOutOffset = _TimeStartFadeOutOffset ?? Schema.GetOffset(0x86645E118028C93C);
+            return new GameTime_tImpl(_Handle + _TimeStartFadeOutOffset!.Value);
+        }
+    }
+    private static nint? _MaxWeightOffset;
+
+    public ref float MaxWeight {
+        get {
+            _MaxWeightOffset = _MaxWeightOffset ?? Schema.GetOffset(0x86645E1155F00F23);
+            return ref _Handle.AsRef<float>(_MaxWeightOffset!.Value);
+        }
+    }
+    private static nint? _StartDisabledOffset;
+
+    public ref bool StartDisabled {
+        get {
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0x86645E1161ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+        }
+    }
+    private static nint? _EnabledOffset;
+
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x86645E116154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
+    }
+    private static nint? _MasterOffset;
+
+    public ref bool Master {
+        get {
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0x86645E115AFF9193);
+            return ref _Handle.AsRef<bool>(_MasterOffset!.Value);
+        }
+    }
+    private static nint? _ClientSideOffset;
+
+    public ref bool ClientSide {
+        get {
+            _ClientSideOffset = _ClientSideOffset ?? Schema.GetOffset(0x86645E116B28362D);
+            return ref _Handle.AsRef<bool>(_ClientSideOffset!.Value);
+        }
+    }
+    private static nint? _ExclusiveOffset;
+
+    public ref bool Exclusive {
+        get {
+            _ExclusiveOffset = _ExclusiveOffset ?? Schema.GetOffset(0x86645E11D84BE6BB);
+            return ref _Handle.AsRef<bool>(_ExclusiveOffset!.Value);
+        }
+    }
+    private static nint? _MinFalloffOffset;
+
+    public ref float MinFalloff {
+        get {
+            _MinFalloffOffset = _MinFalloffOffset ?? Schema.GetOffset(0x86645E116628F1F3);
+            return ref _Handle.AsRef<float>(_MinFalloffOffset!.Value);
+        }
+    }
+    private static nint? _MaxFalloffOffset;
+
+    public ref float MaxFalloff {
+        get {
+            _MaxFalloffOffset = _MaxFalloffOffset ?? Schema.GetOffset(0x86645E118837D7E1);
+            return ref _Handle.AsRef<float>(_MaxFalloffOffset!.Value);
+        }
+    }
+    private static nint? _CurWeightOffset;
+
+    public ref float CurWeight {
+        get {
+            _CurWeightOffset = _CurWeightOffset ?? Schema.GetOffset(0x86645E112EA7ED7F);
+            return ref _Handle.AsRef<float>(_CurWeightOffset!.Value);
+        }
+    }
+    private static nint? _NetlookupFilenameOffset;
+
+    public string NetlookupFilename {
+        get {
+            _NetlookupFilenameOffset = _NetlookupFilenameOffset ?? Schema.GetOffset(0x86645E11543AB1EB);
+            return Schema.GetString(_Handle + _NetlookupFilenameOffset!.Value);
+        }
+        set {
+            _NetlookupFilenameOffset = _NetlookupFilenameOffset ?? Schema.GetOffset(0x86645E11543AB1EB);
+            Schema.SetFixedString(_Handle, _NetlookupFilenameOffset!.Value, value, 512);
+        }
+    } 
+    private static nint? _LookupFilenameOffset;
+
+    public string LookupFilename {
+        get {
+            _LookupFilenameOffset = _LookupFilenameOffset ?? Schema.GetOffset(0x86645E112611A2C6);
+            return Schema.GetString(_Handle.Read<nint>(_LookupFilenameOffset!.Value));
+        }
+        set {
+            _LookupFilenameOffset = _LookupFilenameOffset ?? Schema.GetOffset(0x86645E112611A2C6);
+            Schema.SetString(_Handle, _LookupFilenameOffset!.Value, value);
+        }
+    } 
+
+    public void FadeInDurationUpdated() => Schema.Update(_Handle, 0x86645E1101B5EB8E);
+    public void FadeOutDurationUpdated() => Schema.Update(_Handle, 0x86645E11543512CF);
+    public void MaxWeightUpdated() => Schema.Update(_Handle, 0x86645E1155F00F23);
+    public void EnabledUpdated() => Schema.Update(_Handle, 0x86645E116154EB7E);
+    public void MasterUpdated() => Schema.Update(_Handle, 0x86645E115AFF9193);
+    public void ClientSideUpdated() => Schema.Update(_Handle, 0x86645E116B28362D);
+    public void ExclusiveUpdated() => Schema.Update(_Handle, 0x86645E11D84BE6BB);
+    public void MinFalloffUpdated() => Schema.Update(_Handle, 0x86645E116628F1F3);
+    public void MaxFalloffUpdated() => Schema.Update(_Handle, 0x86645E118837D7E1);
+    public void CurWeightUpdated() => Schema.Update(_Handle, 0x86645E112EA7ED7F);
+    public void NetlookupFilenameUpdated() => Schema.Update(_Handle, 0x86645E11543AB1EB);
 }

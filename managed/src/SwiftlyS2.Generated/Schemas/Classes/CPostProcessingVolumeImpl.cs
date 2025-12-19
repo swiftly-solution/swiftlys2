@@ -6,172 +6,123 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPostProcessingVolumeImpl : CBaseTriggerImpl, CPostProcessingVolume {
+internal partial class CPostProcessingVolumeImpl : CBaseTriggerImpl, CPostProcessingVolume
+{
+    public CPostProcessingVolumeImpl(nint handle) : base(handle) { }
 
-  public CPostProcessingVolumeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PostSettingsOffset;
 
-  private static nint? _PostSettingsOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostSettings {
-    get {
-      if (_PostSettingsOffset == null) {
-        _PostSettingsOffset = Schema.GetOffset(0x5DBC28C1D2EB75A4);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostSettingsOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostSettings {
+        get {
+            _PostSettingsOffset = _PostSettingsOffset ?? Schema.GetOffset(0x5DBC28C1D2EB75A4);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostSettingsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeDurationOffset;
+    private static nint? _FadeDurationOffset;
 
-  public ref float FadeDuration {
-    get {
-      if (_FadeDurationOffset == null) {
-        _FadeDurationOffset = Schema.GetOffset(0x5DBC28C1C4E6DEE1);
-      }
-      return ref _Handle.AsRef<float>(_FadeDurationOffset!.Value);
+    public ref float FadeDuration {
+        get {
+            _FadeDurationOffset = _FadeDurationOffset ?? Schema.GetOffset(0x5DBC28C1C4E6DEE1);
+            return ref _Handle.AsRef<float>(_FadeDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinLogExposureOffset;
+    private static nint? _MinLogExposureOffset;
 
-  public ref float MinLogExposure {
-    get {
-      if (_MinLogExposureOffset == null) {
-        _MinLogExposureOffset = Schema.GetOffset(0x5DBC28C17457F7D0);
-      }
-      return ref _Handle.AsRef<float>(_MinLogExposureOffset!.Value);
+    public ref float MinLogExposure {
+        get {
+            _MinLogExposureOffset = _MinLogExposureOffset ?? Schema.GetOffset(0x5DBC28C17457F7D0);
+            return ref _Handle.AsRef<float>(_MinLogExposureOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxLogExposureOffset;
+    private static nint? _MaxLogExposureOffset;
 
-  public ref float MaxLogExposure {
-    get {
-      if (_MaxLogExposureOffset == null) {
-        _MaxLogExposureOffset = Schema.GetOffset(0x5DBC28C1DC5D3ED6);
-      }
-      return ref _Handle.AsRef<float>(_MaxLogExposureOffset!.Value);
+    public ref float MaxLogExposure {
+        get {
+            _MaxLogExposureOffset = _MaxLogExposureOffset ?? Schema.GetOffset(0x5DBC28C1DC5D3ED6);
+            return ref _Handle.AsRef<float>(_MaxLogExposureOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinExposureOffset;
+    private static nint? _MinExposureOffset;
 
-  public ref float MinExposure {
-    get {
-      if (_MinExposureOffset == null) {
-        _MinExposureOffset = Schema.GetOffset(0x5DBC28C122FAB634);
-      }
-      return ref _Handle.AsRef<float>(_MinExposureOffset!.Value);
+    public ref float MinExposure {
+        get {
+            _MinExposureOffset = _MinExposureOffset ?? Schema.GetOffset(0x5DBC28C122FAB634);
+            return ref _Handle.AsRef<float>(_MinExposureOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxExposureOffset;
+    private static nint? _MaxExposureOffset;
 
-  public ref float MaxExposure {
-    get {
-      if (_MaxExposureOffset == null) {
-        _MaxExposureOffset = Schema.GetOffset(0x5DBC28C15D4951D6);
-      }
-      return ref _Handle.AsRef<float>(_MaxExposureOffset!.Value);
+    public ref float MaxExposure {
+        get {
+            _MaxExposureOffset = _MaxExposureOffset ?? Schema.GetOffset(0x5DBC28C15D4951D6);
+            return ref _Handle.AsRef<float>(_MaxExposureOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExposureCompensationOffset;
+    private static nint? _ExposureCompensationOffset;
 
-  public ref float ExposureCompensation {
-    get {
-      if (_ExposureCompensationOffset == null) {
-        _ExposureCompensationOffset = Schema.GetOffset(0x5DBC28C16EC15498);
-      }
-      return ref _Handle.AsRef<float>(_ExposureCompensationOffset!.Value);
+    public ref float ExposureCompensation {
+        get {
+            _ExposureCompensationOffset = _ExposureCompensationOffset ?? Schema.GetOffset(0x5DBC28C16EC15498);
+            return ref _Handle.AsRef<float>(_ExposureCompensationOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExposureFadeSpeedUpOffset;
+    private static nint? _ExposureFadeSpeedUpOffset;
 
-  public ref float ExposureFadeSpeedUp {
-    get {
-      if (_ExposureFadeSpeedUpOffset == null) {
-        _ExposureFadeSpeedUpOffset = Schema.GetOffset(0x5DBC28C19789BBB6);
-      }
-      return ref _Handle.AsRef<float>(_ExposureFadeSpeedUpOffset!.Value);
+    public ref float ExposureFadeSpeedUp {
+        get {
+            _ExposureFadeSpeedUpOffset = _ExposureFadeSpeedUpOffset ?? Schema.GetOffset(0x5DBC28C19789BBB6);
+            return ref _Handle.AsRef<float>(_ExposureFadeSpeedUpOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExposureFadeSpeedDownOffset;
+    private static nint? _ExposureFadeSpeedDownOffset;
 
-  public ref float ExposureFadeSpeedDown {
-    get {
-      if (_ExposureFadeSpeedDownOffset == null) {
-        _ExposureFadeSpeedDownOffset = Schema.GetOffset(0x5DBC28C154685D1F);
-      }
-      return ref _Handle.AsRef<float>(_ExposureFadeSpeedDownOffset!.Value);
+    public ref float ExposureFadeSpeedDown {
+        get {
+            _ExposureFadeSpeedDownOffset = _ExposureFadeSpeedDownOffset ?? Schema.GetOffset(0x5DBC28C154685D1F);
+            return ref _Handle.AsRef<float>(_ExposureFadeSpeedDownOffset!.Value);
+        }
     }
-  }
-  private static nint? _TonemapEVSmoothingRangeOffset;
+    private static nint? _TonemapEVSmoothingRangeOffset;
 
-  public ref float TonemapEVSmoothingRange {
-    get {
-      if (_TonemapEVSmoothingRangeOffset == null) {
-        _TonemapEVSmoothingRangeOffset = Schema.GetOffset(0x5DBC28C19C2546CB);
-      }
-      return ref _Handle.AsRef<float>(_TonemapEVSmoothingRangeOffset!.Value);
+    public ref float TonemapEVSmoothingRange {
+        get {
+            _TonemapEVSmoothingRangeOffset = _TonemapEVSmoothingRangeOffset ?? Schema.GetOffset(0x5DBC28C19C2546CB);
+            return ref _Handle.AsRef<float>(_TonemapEVSmoothingRangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MasterOffset;
+    private static nint? _MasterOffset;
 
-  public ref bool Master {
-    get {
-      if (_MasterOffset == null) {
-        _MasterOffset = Schema.GetOffset(0x5DBC28C15AFF9193);
-      }
-      return ref _Handle.AsRef<bool>(_MasterOffset!.Value);
+    public ref bool Master {
+        get {
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0x5DBC28C15AFF9193);
+            return ref _Handle.AsRef<bool>(_MasterOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExposureControlOffset;
+    private static nint? _ExposureControlOffset;
 
-  public ref bool ExposureControl {
-    get {
-      if (_ExposureControlOffset == null) {
-        _ExposureControlOffset = Schema.GetOffset(0x5DBC28C12C195925);
-      }
-      return ref _Handle.AsRef<bool>(_ExposureControlOffset!.Value);
+    public ref bool ExposureControl {
+        get {
+            _ExposureControlOffset = _ExposureControlOffset ?? Schema.GetOffset(0x5DBC28C12C195925);
+            return ref _Handle.AsRef<bool>(_ExposureControlOffset!.Value);
+        }
     }
-  }
 
-  public void PostSettingsUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C1D2EB75A4);
-  }
-  public void FadeDurationUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C1C4E6DEE1);
-  }
-  public void MinLogExposureUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C17457F7D0);
-  }
-  public void MaxLogExposureUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C1DC5D3ED6);
-  }
-  public void MinExposureUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C122FAB634);
-  }
-  public void MaxExposureUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C15D4951D6);
-  }
-  public void ExposureCompensationUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C16EC15498);
-  }
-  public void ExposureFadeSpeedUpUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C19789BBB6);
-  }
-  public void ExposureFadeSpeedDownUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C154685D1F);
-  }
-  public void TonemapEVSmoothingRangeUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C19C2546CB);
-  }
-  public void MasterUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C15AFF9193);
-  }
-  public void ExposureControlUpdated() {
-    Schema.Update(_Handle, 0x5DBC28C12C195925);
-  }
+    public void PostSettingsUpdated() => Schema.Update(_Handle, 0x5DBC28C1D2EB75A4);
+    public void FadeDurationUpdated() => Schema.Update(_Handle, 0x5DBC28C1C4E6DEE1);
+    public void MinLogExposureUpdated() => Schema.Update(_Handle, 0x5DBC28C17457F7D0);
+    public void MaxLogExposureUpdated() => Schema.Update(_Handle, 0x5DBC28C1DC5D3ED6);
+    public void MinExposureUpdated() => Schema.Update(_Handle, 0x5DBC28C122FAB634);
+    public void MaxExposureUpdated() => Schema.Update(_Handle, 0x5DBC28C15D4951D6);
+    public void ExposureCompensationUpdated() => Schema.Update(_Handle, 0x5DBC28C16EC15498);
+    public void ExposureFadeSpeedUpUpdated() => Schema.Update(_Handle, 0x5DBC28C19789BBB6);
+    public void ExposureFadeSpeedDownUpdated() => Schema.Update(_Handle, 0x5DBC28C154685D1F);
+    public void TonemapEVSmoothingRangeUpdated() => Schema.Update(_Handle, 0x5DBC28C19C2546CB);
+    public void MasterUpdated() => Schema.Update(_Handle, 0x5DBC28C15AFF9193);
+    public void ExposureControlUpdated() => Schema.Update(_Handle, 0x5DBC28C12C195925);
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CResponseQueueImpl : SchemaClass, CResponseQueue {
+internal partial class CResponseQueueImpl : SchemaClass, CResponseQueue
+{
+    public CResponseQueueImpl(nint handle) : base(handle) { }
 
-  public CResponseQueueImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ExpresserTargetsOffset;
 
-  private static nint? _ExpresserTargetsOffset;
-
-  public ref CUtlVector<PointerTo<CAI_Expresser>> ExpresserTargets {
-    get {
-      if (_ExpresserTargetsOffset == null) {
-        _ExpresserTargetsOffset = Schema.GetOffset(0xBA9C485870CCA05A);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointerTo<CAI_Expresser>>>(_ExpresserTargetsOffset!.Value);
+    public ref CUtlVector<PointerTo<CAI_Expresser>> ExpresserTargets {
+        get {
+            _ExpresserTargetsOffset = _ExpresserTargetsOffset ?? Schema.GetOffset(0xBA9C485870CCA05A);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CAI_Expresser>>>(_ExpresserTargetsOffset!.Value);
+        }
     }
-  }
 
 
 }

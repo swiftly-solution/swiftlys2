@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ragdoll_tImpl : SchemaClass, ragdoll_t {
+internal partial class ragdoll_tImpl : SchemaClass, ragdoll_t
+{
+    public ragdoll_tImpl(nint handle) : base(handle) { }
 
-  public ragdoll_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ListOffset;
 
-  private static nint? _ListOffset;
-
-  public ref CUtlVector<ragdollelement_t> List {
-    get {
-      if (_ListOffset == null) {
-        _ListOffset = Schema.GetOffset(0xC7E89F530CFB5881);
-      }
-      return ref _Handle.AsRef<CUtlVector<ragdollelement_t>>(_ListOffset!.Value);
+    public ref CUtlVector<ragdollelement_t> List {
+        get {
+            _ListOffset = _ListOffset ?? Schema.GetOffset(0xC7E89F530CFB5881);
+            return ref _Handle.AsRef<CUtlVector<ragdollelement_t>>(_ListOffset!.Value);
+        }
     }
-  }
-  private static nint? _HierarchyJointsOffset;
+    private static nint? _HierarchyJointsOffset;
 
-  public ref CUtlVector<ragdollhierarchyjoint_t> HierarchyJoints {
-    get {
-      if (_HierarchyJointsOffset == null) {
-        _HierarchyJointsOffset = Schema.GetOffset(0xC7E89F534421F4B5);
-      }
-      return ref _Handle.AsRef<CUtlVector<ragdollhierarchyjoint_t>>(_HierarchyJointsOffset!.Value);
+    public ref CUtlVector<ragdollhierarchyjoint_t> HierarchyJoints {
+        get {
+            _HierarchyJointsOffset = _HierarchyJointsOffset ?? Schema.GetOffset(0xC7E89F534421F4B5);
+            return ref _Handle.AsRef<CUtlVector<ragdollhierarchyjoint_t>>(_HierarchyJointsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneIndexOffset;
+    private static nint? _BoneIndexOffset;
 
-  public ref CUtlVector<int> BoneIndex {
-    get {
-      if (_BoneIndexOffset == null) {
-        _BoneIndexOffset = Schema.GetOffset(0xC7E89F534FEF9075);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_BoneIndexOffset!.Value);
+    public ref CUtlVector<int> BoneIndex {
+        get {
+            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xC7E89F534FEF9075);
+            return ref _Handle.AsRef<CUtlVector<int>>(_BoneIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _AllowStretchOffset;
+    private static nint? _AllowStretchOffset;
 
-  public ref bool AllowStretch {
-    get {
-      if (_AllowStretchOffset == null) {
-        _AllowStretchOffset = Schema.GetOffset(0xC7E89F5350E37D6F);
-      }
-      return ref _Handle.AsRef<bool>(_AllowStretchOffset!.Value);
+    public ref bool AllowStretch {
+        get {
+            _AllowStretchOffset = _AllowStretchOffset ?? Schema.GetOffset(0xC7E89F5350E37D6F);
+            return ref _Handle.AsRef<bool>(_AllowStretchOffset!.Value);
+        }
     }
-  }
-  private static nint? _UnusedOffset;
+    private static nint? _UnusedOffset;
 
-  public ref bool Unused {
-    get {
-      if (_UnusedOffset == null) {
-        _UnusedOffset = Schema.GetOffset(0xC7E89F5385CF281B);
-      }
-      return ref _Handle.AsRef<bool>(_UnusedOffset!.Value);
+    public ref bool Unused {
+        get {
+            _UnusedOffset = _UnusedOffset ?? Schema.GetOffset(0xC7E89F5385CF281B);
+            return ref _Handle.AsRef<bool>(_UnusedOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EntityDisolveType_t : uint {
-
+public enum EntityDisolveType_t : uint
+{
  ENTITY_DISSOLVE_INVALID = uint.MaxValue,
 
  ENTITY_DISSOLVE_NORMAL = 0,

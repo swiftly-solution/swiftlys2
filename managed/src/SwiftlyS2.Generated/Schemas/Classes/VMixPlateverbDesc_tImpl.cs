@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixPlateverbDesc_tImpl : SchemaClass, VMixPlateverbDesc_t {
+internal partial class VMixPlateverbDesc_tImpl : SchemaClass, VMixPlateverbDesc_t
+{
+    public VMixPlateverbDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixPlateverbDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PrefilterOffset;
 
-  private static nint? _PrefilterOffset;
-
-  public ref float Prefilter {
-    get {
-      if (_PrefilterOffset == null) {
-        _PrefilterOffset = Schema.GetOffset(0xFF651FB0FAF1E06A);
-      }
-      return ref _Handle.AsRef<float>(_PrefilterOffset!.Value);
+    public ref float Prefilter {
+        get {
+            _PrefilterOffset = _PrefilterOffset ?? Schema.GetOffset(0xFF651FB0FAF1E06A);
+            return ref _Handle.AsRef<float>(_PrefilterOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputDiffusion1Offset;
+    private static nint? _InputDiffusion1Offset;
 
-  public ref float InputDiffusion1 {
-    get {
-      if (_InputDiffusion1Offset == null) {
-        _InputDiffusion1Offset = Schema.GetOffset(0xFF651FB039884B67);
-      }
-      return ref _Handle.AsRef<float>(_InputDiffusion1Offset!.Value);
+    public ref float InputDiffusion1 {
+        get {
+            _InputDiffusion1Offset = _InputDiffusion1Offset ?? Schema.GetOffset(0xFF651FB039884B67);
+            return ref _Handle.AsRef<float>(_InputDiffusion1Offset!.Value);
+        }
     }
-  }
-  private static nint? _InputDiffusion2Offset;
+    private static nint? _InputDiffusion2Offset;
 
-  public ref float InputDiffusion2 {
-    get {
-      if (_InputDiffusion2Offset == null) {
-        _InputDiffusion2Offset = Schema.GetOffset(0xFF651FB03A884CFA);
-      }
-      return ref _Handle.AsRef<float>(_InputDiffusion2Offset!.Value);
+    public ref float InputDiffusion2 {
+        get {
+            _InputDiffusion2Offset = _InputDiffusion2Offset ?? Schema.GetOffset(0xFF651FB03A884CFA);
+            return ref _Handle.AsRef<float>(_InputDiffusion2Offset!.Value);
+        }
     }
-  }
-  private static nint? _DecayOffset;
+    private static nint? _DecayOffset;
 
-  public ref float Decay {
-    get {
-      if (_DecayOffset == null) {
-        _DecayOffset = Schema.GetOffset(0xFF651FB0E24ABC67);
-      }
-      return ref _Handle.AsRef<float>(_DecayOffset!.Value);
+    public ref float Decay {
+        get {
+            _DecayOffset = _DecayOffset ?? Schema.GetOffset(0xFF651FB0E24ABC67);
+            return ref _Handle.AsRef<float>(_DecayOffset!.Value);
+        }
     }
-  }
-  private static nint? _DampOffset;
+    private static nint? _DampOffset;
 
-  public ref float Damp {
-    get {
-      if (_DampOffset == null) {
-        _DampOffset = Schema.GetOffset(0xFF651FB051CA5395);
-      }
-      return ref _Handle.AsRef<float>(_DampOffset!.Value);
+    public ref float Damp {
+        get {
+            _DampOffset = _DampOffset ?? Schema.GetOffset(0xFF651FB051CA5395);
+            return ref _Handle.AsRef<float>(_DampOffset!.Value);
+        }
     }
-  }
-  private static nint? _FeedbackDiffusion1Offset;
+    private static nint? _FeedbackDiffusion1Offset;
 
-  public ref float FeedbackDiffusion1 {
-    get {
-      if (_FeedbackDiffusion1Offset == null) {
-        _FeedbackDiffusion1Offset = Schema.GetOffset(0xFF651FB0A53A60E2);
-      }
-      return ref _Handle.AsRef<float>(_FeedbackDiffusion1Offset!.Value);
+    public ref float FeedbackDiffusion1 {
+        get {
+            _FeedbackDiffusion1Offset = _FeedbackDiffusion1Offset ?? Schema.GetOffset(0xFF651FB0A53A60E2);
+            return ref _Handle.AsRef<float>(_FeedbackDiffusion1Offset!.Value);
+        }
     }
-  }
-  private static nint? _FeedbackDiffusion2Offset;
+    private static nint? _FeedbackDiffusion2Offset;
 
-  public ref float FeedbackDiffusion2 {
-    get {
-      if (_FeedbackDiffusion2Offset == null) {
-        _FeedbackDiffusion2Offset = Schema.GetOffset(0xFF651FB0A43A5F4F);
-      }
-      return ref _Handle.AsRef<float>(_FeedbackDiffusion2Offset!.Value);
+    public ref float FeedbackDiffusion2 {
+        get {
+            _FeedbackDiffusion2Offset = _FeedbackDiffusion2Offset ?? Schema.GetOffset(0xFF651FB0A43A5F4F);
+            return ref _Handle.AsRef<float>(_FeedbackDiffusion2Offset!.Value);
+        }
     }
-  }
 
 
 }

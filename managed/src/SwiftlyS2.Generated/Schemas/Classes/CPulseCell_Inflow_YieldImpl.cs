@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Inflow_YieldImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Inflow_Yield {
+internal partial class CPulseCell_Inflow_YieldImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Inflow_Yield
+{
+    public CPulseCell_Inflow_YieldImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Inflow_YieldImpl(nint handle) : base(handle) {
-  }
+    private static nint? _UnyieldResumeOffset;
 
-  private static nint? _UnyieldResumeOffset;
-
-  public CPulse_ResumePoint UnyieldResume {
-    get {
-      if (_UnyieldResumeOffset == null) {
-        _UnyieldResumeOffset = Schema.GetOffset(0x1A4BFE3D504DFCDC);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _UnyieldResumeOffset!.Value);
+    public CPulse_ResumePoint UnyieldResume {
+        get {
+            _UnyieldResumeOffset = _UnyieldResumeOffset ?? Schema.GetOffset(0x1A4BFE3D504DFCDC);
+            return new CPulse_ResumePointImpl(_Handle + _UnyieldResumeOffset!.Value);
+        }
     }
-  }
 
 
 }

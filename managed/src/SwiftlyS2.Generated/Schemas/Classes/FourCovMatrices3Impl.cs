@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FourCovMatrices3Impl : SchemaClass, FourCovMatrices3 {
+internal partial class FourCovMatrices3Impl : SchemaClass, FourCovMatrices3
+{
+    public FourCovMatrices3Impl(nint handle) : base(handle) { }
 
-  public FourCovMatrices3Impl(nint handle) : base(handle) {
-  }
+    private static nint? _DiagOffset;
 
-  private static nint? _DiagOffset;
-
-  public ref FourVectors Diag {
-    get {
-      if (_DiagOffset == null) {
-        _DiagOffset = Schema.GetOffset(0xCEA91E487CC0D332);
-      }
-      return ref _Handle.AsRef<FourVectors>(_DiagOffset!.Value);
+    public ref FourVectors Diag {
+        get {
+            _DiagOffset = _DiagOffset ?? Schema.GetOffset(0xCEA91E487CC0D332);
+            return ref _Handle.AsRef<FourVectors>(_DiagOffset!.Value);
+        }
     }
-  }
-  private static nint? _XYOffset;
+    private static nint? _XYOffset;
 
-  public ref fltx4 XY {
-    get {
-      if (_XYOffset == null) {
-        _XYOffset = Schema.GetOffset(0xCEA91E48A58DC304);
-      }
-      return ref _Handle.AsRef<fltx4>(_XYOffset!.Value);
+    public ref fltx4 XY {
+        get {
+            _XYOffset = _XYOffset ?? Schema.GetOffset(0xCEA91E48A58DC304);
+            return ref _Handle.AsRef<fltx4>(_XYOffset!.Value);
+        }
     }
-  }
-  private static nint? _XZOffset;
+    private static nint? _XZOffset;
 
-  public ref fltx4 XZ {
-    get {
-      if (_XZOffset == null) {
-        _XZOffset = Schema.GetOffset(0xCEA91E48A88DC7BD);
-      }
-      return ref _Handle.AsRef<fltx4>(_XZOffset!.Value);
+    public ref fltx4 XZ {
+        get {
+            _XZOffset = _XZOffset ?? Schema.GetOffset(0xCEA91E48A88DC7BD);
+            return ref _Handle.AsRef<fltx4>(_XZOffset!.Value);
+        }
     }
-  }
-  private static nint? _YZOffset;
+    private static nint? _YZOffset;
 
-  public ref fltx4 YZ {
-    get {
-      if (_YZOffset == null) {
-        _YZOffset = Schema.GetOffset(0xCEA91E489E8B7968);
-      }
-      return ref _Handle.AsRef<fltx4>(_YZOffset!.Value);
+    public ref fltx4 YZ {
+        get {
+            _YZOffset = _YZOffset ?? Schema.GetOffset(0xCEA91E489E8B7968);
+            return ref _Handle.AsRef<fltx4>(_YZOffset!.Value);
+        }
     }
-  }
 
 
 }

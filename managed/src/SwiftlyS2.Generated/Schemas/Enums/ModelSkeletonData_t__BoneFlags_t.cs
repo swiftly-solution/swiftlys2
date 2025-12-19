@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ModelSkeletonData_t__BoneFlags_t : uint {
-
+public enum ModelSkeletonData_t__BoneFlags_t : uint
+{
  FLAG_NO_BONE_FLAGS = 0,
 
  FLAG_BONEFLEXDRIVER = 4,

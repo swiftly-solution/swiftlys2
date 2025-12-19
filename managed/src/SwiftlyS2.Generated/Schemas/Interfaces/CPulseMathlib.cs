@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseMathlib : ISchemaClass<CPulseMathlib> {
-
-  static CPulseMathlib ISchemaClass<CPulseMathlib>.From(nint handle) => new CPulseMathlibImpl(handle);
-  static int ISchemaClass<CPulseMathlib>.Size => 1;
-  static string? ISchemaClass<CPulseMathlib>.ClassName => null;
+public partial interface CPulseMathlib : ISchemaClass<CPulseMathlib>
+{
+    static CPulseMathlib ISchemaClass<CPulseMathlib>.From(nint handle) => new CPulseMathlibImpl(handle);
+    static int ISchemaClass<CPulseMathlib>.Size => 1;
+    static string? ISchemaClass<CPulseMathlib>.ClassName => null;
 
 
 

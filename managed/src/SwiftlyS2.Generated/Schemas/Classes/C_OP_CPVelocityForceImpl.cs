@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_CPVelocityForceImpl : CParticleFunctionForceImpl, C_OP_CPVelocityForce {
+internal partial class C_OP_CPVelocityForceImpl : CParticleFunctionForceImpl, C_OP_CPVelocityForce
+{
+    public C_OP_CPVelocityForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_CPVelocityForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x4C04FC843F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x4C04FC843F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public CPerParticleFloatInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x4C04FC84B731A42F);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+    public CPerParticleFloatInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x4C04FC84B731A42F);
+            return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

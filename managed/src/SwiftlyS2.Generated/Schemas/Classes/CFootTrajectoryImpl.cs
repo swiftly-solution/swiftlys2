@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootTrajectoryImpl : SchemaClass, CFootTrajectory {
+internal partial class CFootTrajectoryImpl : SchemaClass, CFootTrajectory
+{
+    public CFootTrajectoryImpl(nint handle) : base(handle) { }
 
-  public CFootTrajectoryImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OffsetOffset;
 
-  private static nint? _OffsetOffset;
-
-  public ref Vector Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0x193297AFFE159136);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    public ref Vector Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x193297AFFE159136);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotationOffsetOffset;
+    private static nint? _RotationOffsetOffset;
 
-  public ref float RotationOffset {
-    get {
-      if (_RotationOffsetOffset == null) {
-        _RotationOffsetOffset = Schema.GetOffset(0x193297AFF811C66E);
-      }
-      return ref _Handle.AsRef<float>(_RotationOffsetOffset!.Value);
+    public ref float RotationOffset {
+        get {
+            _RotationOffsetOffset = _RotationOffsetOffset ?? Schema.GetOffset(0x193297AFF811C66E);
+            return ref _Handle.AsRef<float>(_RotationOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProgressionOffset;
+    private static nint? _ProgressionOffset;
 
-  public ref float Progression {
-    get {
-      if (_ProgressionOffset == null) {
-        _ProgressionOffset = Schema.GetOffset(0x193297AF4C9E1656);
-      }
-      return ref _Handle.AsRef<float>(_ProgressionOffset!.Value);
+    public ref float Progression {
+        get {
+            _ProgressionOffset = _ProgressionOffset ?? Schema.GetOffset(0x193297AF4C9E1656);
+            return ref _Handle.AsRef<float>(_ProgressionOffset!.Value);
+        }
     }
-  }
 
 
 }

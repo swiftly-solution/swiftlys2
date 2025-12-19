@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimParameterManagerUpdaterImpl : SchemaClass, CAnimParameterManagerUpdater {
+internal partial class CAnimParameterManagerUpdaterImpl : SchemaClass, CAnimParameterManagerUpdater
+{
+    public CAnimParameterManagerUpdaterImpl(nint handle) : base(handle) { }
 
-  public CAnimParameterManagerUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParametersOffset;
 
-  private static nint? _ParametersOffset;
-
-  public ref CUtlVector<SchemaUntypedField> Parameters {
-    get {
-      if (_ParametersOffset == null) {
-        _ParametersOffset = Schema.GetOffset(0x2289044E99935479);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParametersOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> Parameters {
+        get {
+            _ParametersOffset = _ParametersOffset ?? Schema.GetOffset(0x2289044E99935479);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ParametersOffset!.Value);
+        }
     }
-  }
-  private static nint? _IdToIndexMapOffset;
+    private static nint? _IdToIndexMapOffset;
 
-  public SchemaUntypedField IdToIndexMap {
-    get {
-      if (_IdToIndexMapOffset == null) {
-        _IdToIndexMapOffset = Schema.GetOffset(0x2289044E7B873A5F);
-      }
-      return new SchemaUntypedField(_Handle + _IdToIndexMapOffset!.Value);
+    public SchemaUntypedField IdToIndexMap {
+        get {
+            _IdToIndexMapOffset = _IdToIndexMapOffset ?? Schema.GetOffset(0x2289044E7B873A5F);
+            return new SchemaUntypedField(_Handle + _IdToIndexMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameToIndexMapOffset;
+    private static nint? _NameToIndexMapOffset;
 
-  public SchemaUntypedField NameToIndexMap {
-    get {
-      if (_NameToIndexMapOffset == null) {
-        _NameToIndexMapOffset = Schema.GetOffset(0x2289044EDA1FC14D);
-      }
-      return new SchemaUntypedField(_Handle + _NameToIndexMapOffset!.Value);
+    public SchemaUntypedField NameToIndexMap {
+        get {
+            _NameToIndexMapOffset = _NameToIndexMapOffset ?? Schema.GetOffset(0x2289044EDA1FC14D);
+            return new SchemaUntypedField(_Handle + _NameToIndexMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _IndexToHandleOffset;
+    private static nint? _IndexToHandleOffset;
 
-  public ref CUtlVector<CAnimParamHandle> IndexToHandle {
-    get {
-      if (_IndexToHandleOffset == null) {
-        _IndexToHandleOffset = Schema.GetOffset(0x2289044E3F943600);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_IndexToHandleOffset!.Value);
+    public ref CUtlVector<CAnimParamHandle> IndexToHandle {
+        get {
+            _IndexToHandleOffset = _IndexToHandleOffset ?? Schema.GetOffset(0x2289044E3F943600);
+            return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_IndexToHandleOffset!.Value);
+        }
     }
-  }
-  private static nint? _AutoResetParamsOffset;
+    private static nint? _AutoResetParamsOffset;
 
-  public ref CUtlVector<SchemaUntypedField> AutoResetParams {
-    get {
-      if (_AutoResetParamsOffset == null) {
-        _AutoResetParamsOffset = Schema.GetOffset(0x2289044EA74F889F);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AutoResetParamsOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> AutoResetParams {
+        get {
+            _AutoResetParamsOffset = _AutoResetParamsOffset ?? Schema.GetOffset(0x2289044EA74F889F);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AutoResetParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _AutoResetMapOffset;
+    private static nint? _AutoResetMapOffset;
 
-  public SchemaUntypedField AutoResetMap {
-    get {
-      if (_AutoResetMapOffset == null) {
-        _AutoResetMapOffset = Schema.GetOffset(0x2289044E024CB2F5);
-      }
-      return new SchemaUntypedField(_Handle + _AutoResetMapOffset!.Value);
+    public SchemaUntypedField AutoResetMap {
+        get {
+            _AutoResetMapOffset = _AutoResetMapOffset ?? Schema.GetOffset(0x2289044E024CB2F5);
+            return new SchemaUntypedField(_Handle + _AutoResetMapOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapDistanceToLineSegmentBaseImpl : CParticleFunctionOperatorImpl, C_OP_RemapDistanceToLineSegmentBase {
+internal partial class C_OP_RemapDistanceToLineSegmentBaseImpl : CParticleFunctionOperatorImpl, C_OP_RemapDistanceToLineSegmentBase
+{
+    public C_OP_RemapDistanceToLineSegmentBaseImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapDistanceToLineSegmentBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CP0Offset;
 
-  private static nint? _CP0Offset;
-
-  public ref int CP0 {
-    get {
-      if (_CP0Offset == null) {
-        _CP0Offset = Schema.GetOffset(0xD8219F7AD3B1E3E6);
-      }
-      return ref _Handle.AsRef<int>(_CP0Offset!.Value);
+    public ref int CP0 {
+        get {
+            _CP0Offset = _CP0Offset ?? Schema.GetOffset(0xD8219F7AD3B1E3E6);
+            return ref _Handle.AsRef<int>(_CP0Offset!.Value);
+        }
     }
-  }
-  private static nint? _CP1Offset;
+    private static nint? _CP1Offset;
 
-  public ref int CP1 {
-    get {
-      if (_CP1Offset == null) {
-        _CP1Offset = Schema.GetOffset(0xD8219F7AD4B1E579);
-      }
-      return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+    public ref int CP1 {
+        get {
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0xD8219F7AD4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+        }
     }
-  }
-  private static nint? _MinInputValueOffset;
+    private static nint? _MinInputValueOffset;
 
-  public ref float MinInputValue {
-    get {
-      if (_MinInputValueOffset == null) {
-        _MinInputValueOffset = Schema.GetOffset(0xD8219F7ABDB4BC64);
-      }
-      return ref _Handle.AsRef<float>(_MinInputValueOffset!.Value);
+    public ref float MinInputValue {
+        get {
+            _MinInputValueOffset = _MinInputValueOffset ?? Schema.GetOffset(0xD8219F7ABDB4BC64);
+            return ref _Handle.AsRef<float>(_MinInputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxInputValueOffset;
+    private static nint? _MaxInputValueOffset;
 
-  public ref float MaxInputValue {
-    get {
-      if (_MaxInputValueOffset == null) {
-        _MaxInputValueOffset = Schema.GetOffset(0xD8219F7A3EF75C2A);
-      }
-      return ref _Handle.AsRef<float>(_MaxInputValueOffset!.Value);
+    public ref float MaxInputValue {
+        get {
+            _MaxInputValueOffset = _MaxInputValueOffset ?? Schema.GetOffset(0xD8219F7A3EF75C2A);
+            return ref _Handle.AsRef<float>(_MaxInputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _InfiniteLineOffset;
+    private static nint? _InfiniteLineOffset;
 
-  public ref bool InfiniteLine {
-    get {
-      if (_InfiniteLineOffset == null) {
-        _InfiniteLineOffset = Schema.GetOffset(0xD8219F7A9C5BC47F);
-      }
-      return ref _Handle.AsRef<bool>(_InfiniteLineOffset!.Value);
+    public ref bool InfiniteLine {
+        get {
+            _InfiniteLineOffset = _InfiniteLineOffset ?? Schema.GetOffset(0xD8219F7A9C5BC47F);
+            return ref _Handle.AsRef<bool>(_InfiniteLineOffset!.Value);
+        }
     }
-  }
 
 
 }

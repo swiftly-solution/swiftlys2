@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FourQuaternionsImpl : SchemaClass, FourQuaternions {
+internal partial class FourQuaternionsImpl : SchemaClass, FourQuaternions
+{
+    public FourQuaternionsImpl(nint handle) : base(handle) { }
 
-  public FourQuaternionsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _XOffset;
 
-  private static nint? _XOffset;
-
-  public ref fltx4 X {
-    get {
-      if (_XOffset == null) {
-        _XOffset = Schema.GetOffset(0x438DAD7AFD0C5087);
-      }
-      return ref _Handle.AsRef<fltx4>(_XOffset!.Value);
+    public ref fltx4 X {
+        get {
+            _XOffset = _XOffset ?? Schema.GetOffset(0x438DAD7AFD0C5087);
+            return ref _Handle.AsRef<fltx4>(_XOffset!.Value);
+        }
     }
-  }
-  private static nint? _YOffset;
+    private static nint? _YOffset;
 
-  public ref fltx4 Y {
-    get {
-      if (_YOffset == null) {
-        _YOffset = Schema.GetOffset(0x438DAD7AFC0C4EF4);
-      }
-      return ref _Handle.AsRef<fltx4>(_YOffset!.Value);
+    public ref fltx4 Y {
+        get {
+            _YOffset = _YOffset ?? Schema.GetOffset(0x438DAD7AFC0C4EF4);
+            return ref _Handle.AsRef<fltx4>(_YOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZOffset;
+    private static nint? _ZOffset;
 
-  public ref fltx4 Z {
-    get {
-      if (_ZOffset == null) {
-        _ZOffset = Schema.GetOffset(0x438DAD7AFF0C53AD);
-      }
-      return ref _Handle.AsRef<fltx4>(_ZOffset!.Value);
+    public ref fltx4 Z {
+        get {
+            _ZOffset = _ZOffset ?? Schema.GetOffset(0x438DAD7AFF0C53AD);
+            return ref _Handle.AsRef<fltx4>(_ZOffset!.Value);
+        }
     }
-  }
-  private static nint? _WOffset;
+    private static nint? _WOffset;
 
-  public ref fltx4 W {
-    get {
-      if (_WOffset == null) {
-        _WOffset = Schema.GetOffset(0x438DAD7AF20C3F36);
-      }
-      return ref _Handle.AsRef<fltx4>(_WOffset!.Value);
+    public ref fltx4 W {
+        get {
+            _WOffset = _WOffset ?? Schema.GetOffset(0x438DAD7AF20C3F36);
+            return ref _Handle.AsRef<fltx4>(_WOffset!.Value);
+        }
     }
-  }
 
 
 }

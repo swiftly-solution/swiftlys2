@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Inflow_ObservableVariableListenerImpl : CPulseCell_Inflow_BaseEntrypointImpl, CPulseCell_Inflow_ObservableVariableListener {
+internal partial class CPulseCell_Inflow_ObservableVariableListenerImpl : CPulseCell_Inflow_BaseEntrypointImpl, CPulseCell_Inflow_ObservableVariableListener
+{
+    public CPulseCell_Inflow_ObservableVariableListenerImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Inflow_ObservableVariableListenerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BlackboardReferenceOffset;
 
-  private static nint? _BlackboardReferenceOffset;
-
-  public PulseRuntimeBlackboardReferenceIndex_t BlackboardReference {
-    get {
-      if (_BlackboardReferenceOffset == null) {
-        _BlackboardReferenceOffset = Schema.GetOffset(0x6186DA17C5B268D);
-      }
-      return new PulseRuntimeBlackboardReferenceIndex_tImpl(_Handle + _BlackboardReferenceOffset!.Value);
+    public PulseRuntimeBlackboardReferenceIndex_t BlackboardReference {
+        get {
+            _BlackboardReferenceOffset = _BlackboardReferenceOffset ?? Schema.GetOffset(0x6186DA17C5B268D);
+            return new PulseRuntimeBlackboardReferenceIndex_tImpl(_Handle + _BlackboardReferenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _SelfReferenceOffset;
+    private static nint? _SelfReferenceOffset;
 
-  public ref bool SelfReference {
-    get {
-      if (_SelfReferenceOffset == null) {
-        _SelfReferenceOffset = Schema.GetOffset(0x6186DA14772CFC4);
-      }
-      return ref _Handle.AsRef<bool>(_SelfReferenceOffset!.Value);
+    public ref bool SelfReference {
+        get {
+            _SelfReferenceOffset = _SelfReferenceOffset ?? Schema.GetOffset(0x6186DA14772CFC4);
+            return ref _Handle.AsRef<bool>(_SelfReferenceOffset!.Value);
+        }
     }
-  }
 
 
 }

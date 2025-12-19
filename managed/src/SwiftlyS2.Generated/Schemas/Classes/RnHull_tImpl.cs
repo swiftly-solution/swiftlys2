@@ -6,158 +6,129 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnHull_tImpl : SchemaClass, RnHull_t {
+internal partial class RnHull_tImpl : SchemaClass, RnHull_t
+{
+    public RnHull_tImpl(nint handle) : base(handle) { }
 
-  public RnHull_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CentroidOffset;
 
-  private static nint? _CentroidOffset;
-
-  public ref Vector Centroid {
-    get {
-      if (_CentroidOffset == null) {
-        _CentroidOffset = Schema.GetOffset(0x856EB4A1107DFFF1);
-      }
-      return ref _Handle.AsRef<Vector>(_CentroidOffset!.Value);
+    public ref Vector Centroid {
+        get {
+            _CentroidOffset = _CentroidOffset ?? Schema.GetOffset(0x856EB4A1107DFFF1);
+            return ref _Handle.AsRef<Vector>(_CentroidOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxAngularRadiusOffset;
+    private static nint? _MaxAngularRadiusOffset;
 
-  public ref float MaxAngularRadius {
-    get {
-      if (_MaxAngularRadiusOffset == null) {
-        _MaxAngularRadiusOffset = Schema.GetOffset(0x856EB4A1EF22DA79);
-      }
-      return ref _Handle.AsRef<float>(_MaxAngularRadiusOffset!.Value);
+    public ref float MaxAngularRadius {
+        get {
+            _MaxAngularRadiusOffset = _MaxAngularRadiusOffset ?? Schema.GetOffset(0x856EB4A1EF22DA79);
+            return ref _Handle.AsRef<float>(_MaxAngularRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoundsOffset;
+    private static nint? _BoundsOffset;
 
-  public AABB_t Bounds {
-    get {
-      if (_BoundsOffset == null) {
-        _BoundsOffset = Schema.GetOffset(0x856EB4A1ABF76288);
-      }
-      return new AABB_tImpl(_Handle + _BoundsOffset!.Value);
+    public AABB_t Bounds {
+        get {
+            _BoundsOffset = _BoundsOffset ?? Schema.GetOffset(0x856EB4A1ABF76288);
+            return new AABB_tImpl(_Handle + _BoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrthographicAreasOffset;
+    private static nint? _OrthographicAreasOffset;
 
-  public ref Vector OrthographicAreas {
-    get {
-      if (_OrthographicAreasOffset == null) {
-        _OrthographicAreasOffset = Schema.GetOffset(0x856EB4A1B74855D3);
-      }
-      return ref _Handle.AsRef<Vector>(_OrthographicAreasOffset!.Value);
+    public ref Vector OrthographicAreas {
+        get {
+            _OrthographicAreasOffset = _OrthographicAreasOffset ?? Schema.GetOffset(0x856EB4A1B74855D3);
+            return ref _Handle.AsRef<Vector>(_OrthographicAreasOffset!.Value);
+        }
     }
-  }
-  private static nint? _MassPropertiesOffset;
+    private static nint? _MassPropertiesOffset;
 
-  public ref matrix3x4_t MassProperties {
-    get {
-      if (_MassPropertiesOffset == null) {
-        _MassPropertiesOffset = Schema.GetOffset(0x856EB4A1492CEDF8);
-      }
-      return ref _Handle.AsRef<matrix3x4_t>(_MassPropertiesOffset!.Value);
+    public ref matrix3x4_t MassProperties {
+        get {
+            _MassPropertiesOffset = _MassPropertiesOffset ?? Schema.GetOffset(0x856EB4A1492CEDF8);
+            return ref _Handle.AsRef<matrix3x4_t>(_MassPropertiesOffset!.Value);
+        }
     }
-  }
-  private static nint? _VolumeOffset;
+    private static nint? _VolumeOffset;
 
-  public ref float Volume {
-    get {
-      if (_VolumeOffset == null) {
-        _VolumeOffset = Schema.GetOffset(0x856EB4A17647E0C9);
-      }
-      return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+    public ref float Volume {
+        get {
+            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0x856EB4A17647E0C9);
+            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SurfaceAreaOffset;
+    private static nint? _SurfaceAreaOffset;
 
-  public ref float SurfaceArea {
-    get {
-      if (_SurfaceAreaOffset == null) {
-        _SurfaceAreaOffset = Schema.GetOffset(0x856EB4A1E4AE7C2F);
-      }
-      return ref _Handle.AsRef<float>(_SurfaceAreaOffset!.Value);
+    public ref float SurfaceArea {
+        get {
+            _SurfaceAreaOffset = _SurfaceAreaOffset ?? Schema.GetOffset(0x856EB4A1E4AE7C2F);
+            return ref _Handle.AsRef<float>(_SurfaceAreaOffset!.Value);
+        }
     }
-  }
-  private static nint? _VerticesOffset;
+    private static nint? _VerticesOffset;
 
-  public ref CUtlVector<RnVertex_t> Vertices {
-    get {
-      if (_VerticesOffset == null) {
-        _VerticesOffset = Schema.GetOffset(0x856EB4A1E4F9760E);
-      }
-      return ref _Handle.AsRef<CUtlVector<RnVertex_t>>(_VerticesOffset!.Value);
+    public ref CUtlVector<RnVertex_t> Vertices {
+        get {
+            _VerticesOffset = _VerticesOffset ?? Schema.GetOffset(0x856EB4A1E4F9760E);
+            return ref _Handle.AsRef<CUtlVector<RnVertex_t>>(_VerticesOffset!.Value);
+        }
     }
-  }
-  private static nint? _VertexPositionsOffset;
+    private static nint? _VertexPositionsOffset;
 
-  public ref CUtlVector<Vector> VertexPositions {
-    get {
-      if (_VertexPositionsOffset == null) {
-        _VertexPositionsOffset = Schema.GetOffset(0x856EB4A1E553E225);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_VertexPositionsOffset!.Value);
+    public ref CUtlVector<Vector> VertexPositions {
+        get {
+            _VertexPositionsOffset = _VertexPositionsOffset ?? Schema.GetOffset(0x856EB4A1E553E225);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_VertexPositionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _EdgesOffset;
+    private static nint? _EdgesOffset;
 
-  public ref CUtlVector<RnHalfEdge_t> Edges {
-    get {
-      if (_EdgesOffset == null) {
-        _EdgesOffset = Schema.GetOffset(0x856EB4A1CFE839DD);
-      }
-      return ref _Handle.AsRef<CUtlVector<RnHalfEdge_t>>(_EdgesOffset!.Value);
+    public ref CUtlVector<RnHalfEdge_t> Edges {
+        get {
+            _EdgesOffset = _EdgesOffset ?? Schema.GetOffset(0x856EB4A1CFE839DD);
+            return ref _Handle.AsRef<CUtlVector<RnHalfEdge_t>>(_EdgesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FacesOffset;
+    private static nint? _FacesOffset;
 
-  public ref CUtlVector<RnFace_t> Faces {
-    get {
-      if (_FacesOffset == null) {
-        _FacesOffset = Schema.GetOffset(0x856EB4A1B57F1DFD);
-      }
-      return ref _Handle.AsRef<CUtlVector<RnFace_t>>(_FacesOffset!.Value);
+    public ref CUtlVector<RnFace_t> Faces {
+        get {
+            _FacesOffset = _FacesOffset ?? Schema.GetOffset(0x856EB4A1B57F1DFD);
+            return ref _Handle.AsRef<CUtlVector<RnFace_t>>(_FacesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FacePlanesOffset;
+    private static nint? _FacePlanesOffset;
 
-  public ref CUtlVector<RnPlane_t> FacePlanes {
-    get {
-      if (_FacePlanesOffset == null) {
-        _FacePlanesOffset = Schema.GetOffset(0x856EB4A1FE0AFD57);
-      }
-      return ref _Handle.AsRef<CUtlVector<RnPlane_t>>(_FacePlanesOffset!.Value);
+    public ref CUtlVector<RnPlane_t> FacePlanes {
+        get {
+            _FacePlanesOffset = _FacePlanesOffset ?? Schema.GetOffset(0x856EB4A1FE0AFD57);
+            return ref _Handle.AsRef<CUtlVector<RnPlane_t>>(_FacePlanesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x856EB4A1CE6E9C28);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x856EB4A1CE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _RegionSVMOffset;
+    private static nint? _RegionSVMOffset;
 
-  public CRegionSVM? RegionSVM {
-    get {
-      if (_RegionSVMOffset == null) {
-        _RegionSVMOffset = Schema.GetOffset(0x856EB4A18AD82DC9);
-      }
-      var ptr = _Handle.Read<nint>(_RegionSVMOffset!.Value);
-      return ptr.IsValidPtr() ? new CRegionSVMImpl(ptr) : null;
+    public CRegionSVM? RegionSVM {
+        get {
+            _RegionSVMOffset = _RegionSVMOffset ?? Schema.GetOffset(0x856EB4A18AD82DC9);
+            var ptr = _Handle.Read<nint>(_RegionSVMOffset!.Value);
+            return ptr.IsValidPtr() ? new CRegionSVMImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

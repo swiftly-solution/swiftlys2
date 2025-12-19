@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixSubgraphSwitchDesc_tImpl : SchemaClass, VMixSubgraphSwitchDesc_t {
+internal partial class VMixSubgraphSwitchDesc_tImpl : SchemaClass, VMixSubgraphSwitchDesc_t
+{
+    public VMixSubgraphSwitchDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixSubgraphSwitchDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InterpolationModeOffset;
 
-  private static nint? _InterpolationModeOffset;
-
-  public ref VMixSubgraphSwitchInterpolationType_t InterpolationMode {
-    get {
-      if (_InterpolationModeOffset == null) {
-        _InterpolationModeOffset = Schema.GetOffset(0x9671DF890C06348A);
-      }
-      return ref _Handle.AsRef<VMixSubgraphSwitchInterpolationType_t>(_InterpolationModeOffset!.Value);
+    public ref VMixSubgraphSwitchInterpolationType_t InterpolationMode {
+        get {
+            _InterpolationModeOffset = _InterpolationModeOffset ?? Schema.GetOffset(0x9671DF890C06348A);
+            return ref _Handle.AsRef<VMixSubgraphSwitchInterpolationType_t>(_InterpolationModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnlyTailsOnFadeOutOffset;
+    private static nint? _OnlyTailsOnFadeOutOffset;
 
-  public ref bool OnlyTailsOnFadeOut {
-    get {
-      if (_OnlyTailsOnFadeOutOffset == null) {
-        _OnlyTailsOnFadeOutOffset = Schema.GetOffset(0x9671DF89B74519D7);
-      }
-      return ref _Handle.AsRef<bool>(_OnlyTailsOnFadeOutOffset!.Value);
+    public ref bool OnlyTailsOnFadeOut {
+        get {
+            _OnlyTailsOnFadeOutOffset = _OnlyTailsOnFadeOutOffset ?? Schema.GetOffset(0x9671DF89B74519D7);
+            return ref _Handle.AsRef<bool>(_OnlyTailsOnFadeOutOffset!.Value);
+        }
     }
-  }
-  private static nint? _InterpolationTimeOffset;
+    private static nint? _InterpolationTimeOffset;
 
-  public ref float InterpolationTime {
-    get {
-      if (_InterpolationTimeOffset == null) {
-        _InterpolationTimeOffset = Schema.GetOffset(0x9671DF896D3B0FB6);
-      }
-      return ref _Handle.AsRef<float>(_InterpolationTimeOffset!.Value);
+    public ref float InterpolationTime {
+        get {
+            _InterpolationTimeOffset = _InterpolationTimeOffset ?? Schema.GetOffset(0x9671DF896D3B0FB6);
+            return ref _Handle.AsRef<float>(_InterpolationTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

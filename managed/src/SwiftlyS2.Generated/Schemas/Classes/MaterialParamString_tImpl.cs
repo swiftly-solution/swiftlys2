@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MaterialParamString_tImpl : MaterialParam_tImpl, MaterialParamString_t {
+internal partial class MaterialParamString_tImpl : MaterialParam_tImpl, MaterialParamString_t
+{
+    public MaterialParamString_tImpl(nint handle) : base(handle) { }
 
-  public MaterialParamString_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ValueOffset;
 
-  private static nint? _ValueOffset;
-
-  public string Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0xDB5EB0676B99AEEA);
-      }
-      var ptr = _Handle.Read<nint>(_ValueOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0xDB5EB0676B99AEEA);
-      }
-      Schema.SetString(_Handle, _ValueOffset!.Value, value);
-    }
-  } 
+    public string Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xDB5EB0676B99AEEA);
+            return Schema.GetString(_Handle.Read<nint>(_ValueOffset!.Value));
+        }
+        set {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xDB5EB0676B99AEEA);
+            Schema.SetString(_Handle, _ValueOffset!.Value, value);
+        }
+    } 
 
 
 }

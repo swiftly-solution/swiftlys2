@@ -6,94 +6,69 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRetakeGameRulesImpl : SchemaClass, CRetakeGameRules {
+internal partial class CRetakeGameRulesImpl : SchemaClass, CRetakeGameRules
+{
+    public CRetakeGameRulesImpl(nint handle) : base(handle) { }
 
-  public CRetakeGameRulesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MatchSeedOffset;
 
-  private static nint? _MatchSeedOffset;
-
-  public ref int MatchSeed {
-    get {
-      if (_MatchSeedOffset == null) {
-        _MatchSeedOffset = Schema.GetOffset(0x34813D492DE0044B);
-      }
-      return ref _Handle.AsRef<int>(_MatchSeedOffset!.Value);
+    public ref int MatchSeed {
+        get {
+            _MatchSeedOffset = _MatchSeedOffset ?? Schema.GetOffset(0x34813D492DE0044B);
+            return ref _Handle.AsRef<int>(_MatchSeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlockersPresentOffset;
+    private static nint? _BlockersPresentOffset;
 
-  public ref bool BlockersPresent {
-    get {
-      if (_BlockersPresentOffset == null) {
-        _BlockersPresentOffset = Schema.GetOffset(0x34813D49BE2F2F2D);
-      }
-      return ref _Handle.AsRef<bool>(_BlockersPresentOffset!.Value);
+    public ref bool BlockersPresent {
+        get {
+            _BlockersPresentOffset = _BlockersPresentOffset ?? Schema.GetOffset(0x34813D49BE2F2F2D);
+            return ref _Handle.AsRef<bool>(_BlockersPresentOffset!.Value);
+        }
     }
-  }
-  private static nint? _RoundInProgressOffset;
+    private static nint? _RoundInProgressOffset;
 
-  public ref bool RoundInProgress {
-    get {
-      if (_RoundInProgressOffset == null) {
-        _RoundInProgressOffset = Schema.GetOffset(0x34813D49AE69021B);
-      }
-      return ref _Handle.AsRef<bool>(_RoundInProgressOffset!.Value);
+    public ref bool RoundInProgress {
+        get {
+            _RoundInProgressOffset = _RoundInProgressOffset ?? Schema.GetOffset(0x34813D49AE69021B);
+            return ref _Handle.AsRef<bool>(_RoundInProgressOffset!.Value);
+        }
     }
-  }
-  private static nint? _FirstSecondHalfRoundOffset;
+    private static nint? _FirstSecondHalfRoundOffset;
 
-  public ref int FirstSecondHalfRound {
-    get {
-      if (_FirstSecondHalfRoundOffset == null) {
-        _FirstSecondHalfRoundOffset = Schema.GetOffset(0x34813D49E229A099);
-      }
-      return ref _Handle.AsRef<int>(_FirstSecondHalfRoundOffset!.Value);
+    public ref int FirstSecondHalfRound {
+        get {
+            _FirstSecondHalfRoundOffset = _FirstSecondHalfRoundOffset ?? Schema.GetOffset(0x34813D49E229A099);
+            return ref _Handle.AsRef<int>(_FirstSecondHalfRoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _BombSiteOffset;
+    private static nint? _BombSiteOffset;
 
-  public ref int BombSite {
-    get {
-      if (_BombSiteOffset == null) {
-        _BombSiteOffset = Schema.GetOffset(0x34813D49E7E88ECF);
-      }
-      return ref _Handle.AsRef<int>(_BombSiteOffset!.Value);
+    public ref int BombSite {
+        get {
+            _BombSiteOffset = _BombSiteOffset ?? Schema.GetOffset(0x34813D49E7E88ECF);
+            return ref _Handle.AsRef<int>(_BombSiteOffset!.Value);
+        }
     }
-  }
-  private static nint? _BombPlanterOffset;
+    private static nint? _BombPlanterOffset;
 
-  public ref CHandle<CCSPlayerPawn> BombPlanter {
-    get {
-      if (_BombPlanterOffset == null) {
-        _BombPlanterOffset = Schema.GetOffset(0x34813D491A1306A3);
-      }
-      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_BombPlanterOffset!.Value);
+    public ref CHandle<CCSPlayerPawn> BombPlanter {
+        get {
+            _BombPlanterOffset = _BombPlanterOffset ?? Schema.GetOffset(0x34813D491A1306A3);
+            return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_BombPlanterOffset!.Value);
+        }
     }
-  }
 
-  public void MatchSeedUpdated() {
-    Schema.Update(_Handle, 0x34813D492DE0044B);
-  }
-  public void BlockersPresentUpdated() {
-    Schema.Update(_Handle, 0x34813D49BE2F2F2D);
-  }
-  public void RoundInProgressUpdated() {
-    Schema.Update(_Handle, 0x34813D49AE69021B);
-  }
-  public void FirstSecondHalfRoundUpdated() {
-    Schema.Update(_Handle, 0x34813D49E229A099);
-  }
-  public void BombSiteUpdated() {
-    Schema.Update(_Handle, 0x34813D49E7E88ECF);
-  }
-  public void BombPlanterUpdated() {
-    Schema.Update(_Handle, 0x34813D491A1306A3);
-  }
+    public void MatchSeedUpdated() => Schema.Update(_Handle, 0x34813D492DE0044B);
+    public void BlockersPresentUpdated() => Schema.Update(_Handle, 0x34813D49BE2F2F2D);
+    public void RoundInProgressUpdated() => Schema.Update(_Handle, 0x34813D49AE69021B);
+    public void FirstSecondHalfRoundUpdated() => Schema.Update(_Handle, 0x34813D49E229A099);
+    public void BombSiteUpdated() => Schema.Update(_Handle, 0x34813D49E7E88ECF);
+    public void BombPlanterUpdated() => Schema.Update(_Handle, 0x34813D491A1306A3);
 }

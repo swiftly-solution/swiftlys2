@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayer_WaterServicesImpl : CPlayer_WaterServicesImpl, CCSPlayer_WaterServices {
+internal partial class CCSPlayer_WaterServicesImpl : CPlayer_WaterServicesImpl, CCSPlayer_WaterServices
+{
+    public CCSPlayer_WaterServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayer_WaterServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NextDrownDamageTimeOffset;
 
-  private static nint? _NextDrownDamageTimeOffset;
-
-  public GameTime_t NextDrownDamageTime {
-    get {
-      if (_NextDrownDamageTimeOffset == null) {
-        _NextDrownDamageTimeOffset = Schema.GetOffset(0x81EE3221161B7836);
-      }
-      return new GameTime_tImpl(_Handle + _NextDrownDamageTimeOffset!.Value);
+    public GameTime_t NextDrownDamageTime {
+        get {
+            _NextDrownDamageTimeOffset = _NextDrownDamageTimeOffset ?? Schema.GetOffset(0x81EE3221161B7836);
+            return new GameTime_tImpl(_Handle + _NextDrownDamageTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DrownDmgRateOffset;
+    private static nint? _DrownDmgRateOffset;
 
-  public ref int DrownDmgRate {
-    get {
-      if (_DrownDmgRateOffset == null) {
-        _DrownDmgRateOffset = Schema.GetOffset(0x81EE3221DB1DC111);
-      }
-      return ref _Handle.AsRef<int>(_DrownDmgRateOffset!.Value);
+    public ref int DrownDmgRate {
+        get {
+            _DrownDmgRateOffset = _DrownDmgRateOffset ?? Schema.GetOffset(0x81EE3221DB1DC111);
+            return ref _Handle.AsRef<int>(_DrownDmgRateOffset!.Value);
+        }
     }
-  }
-  private static nint? _AirFinishedTimeOffset;
+    private static nint? _AirFinishedTimeOffset;
 
-  public GameTime_t AirFinishedTime {
-    get {
-      if (_AirFinishedTimeOffset == null) {
-        _AirFinishedTimeOffset = Schema.GetOffset(0x81EE3221F32CD208);
-      }
-      return new GameTime_tImpl(_Handle + _AirFinishedTimeOffset!.Value);
+    public GameTime_t AirFinishedTime {
+        get {
+            _AirFinishedTimeOffset = _AirFinishedTimeOffset ?? Schema.GetOffset(0x81EE3221F32CD208);
+            return new GameTime_tImpl(_Handle + _AirFinishedTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WaterJumpTimeOffset;
+    private static nint? _WaterJumpTimeOffset;
 
-  public ref float WaterJumpTime {
-    get {
-      if (_WaterJumpTimeOffset == null) {
-        _WaterJumpTimeOffset = Schema.GetOffset(0x81EE3221E7A7489F);
-      }
-      return ref _Handle.AsRef<float>(_WaterJumpTimeOffset!.Value);
+    public ref float WaterJumpTime {
+        get {
+            _WaterJumpTimeOffset = _WaterJumpTimeOffset ?? Schema.GetOffset(0x81EE3221E7A7489F);
+            return ref _Handle.AsRef<float>(_WaterJumpTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WaterJumpVelOffset;
+    private static nint? _WaterJumpVelOffset;
 
-  public ref Vector WaterJumpVel {
-    get {
-      if (_WaterJumpVelOffset == null) {
-        _WaterJumpVelOffset = Schema.GetOffset(0x81EE3221B3333137);
-      }
-      return ref _Handle.AsRef<Vector>(_WaterJumpVelOffset!.Value);
+    public ref Vector WaterJumpVel {
+        get {
+            _WaterJumpVelOffset = _WaterJumpVelOffset ?? Schema.GetOffset(0x81EE3221B3333137);
+            return ref _Handle.AsRef<Vector>(_WaterJumpVelOffset!.Value);
+        }
     }
-  }
-  private static nint? _SwimSoundTimeOffset;
+    private static nint? _SwimSoundTimeOffset;
 
-  public ref float SwimSoundTime {
-    get {
-      if (_SwimSoundTimeOffset == null) {
-        _SwimSoundTimeOffset = Schema.GetOffset(0x81EE32218B6E62D7);
-      }
-      return ref _Handle.AsRef<float>(_SwimSoundTimeOffset!.Value);
+    public ref float SwimSoundTime {
+        get {
+            _SwimSoundTimeOffset = _SwimSoundTimeOffset ?? Schema.GetOffset(0x81EE32218B6E62D7);
+            return ref _Handle.AsRef<float>(_SwimSoundTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

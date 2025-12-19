@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDecalGroupVDataImpl : SchemaClass, CDecalGroupVData {
+internal partial class CDecalGroupVDataImpl : SchemaClass, CDecalGroupVData
+{
+    public CDecalGroupVDataImpl(nint handle) : base(handle) { }
 
-  public CDecalGroupVDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OptionsOffset;
 
-  private static nint? _OptionsOffset;
-
-  public ref CUtlVector<DecalGroupOption_t> Options {
-    get {
-      if (_OptionsOffset == null) {
-        _OptionsOffset = Schema.GetOffset(0x56FC0D98C5C14E85);
-      }
-      return ref _Handle.AsRef<CUtlVector<DecalGroupOption_t>>(_OptionsOffset!.Value);
+    public ref CUtlVector<DecalGroupOption_t> Options {
+        get {
+            _OptionsOffset = _OptionsOffset ?? Schema.GetOffset(0x56FC0D98C5C14E85);
+            return ref _Handle.AsRef<CUtlVector<DecalGroupOption_t>>(_OptionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TotalProbabilityOffset;
+    private static nint? _TotalProbabilityOffset;
 
-  public ref float TotalProbability {
-    get {
-      if (_TotalProbabilityOffset == null) {
-        _TotalProbabilityOffset = Schema.GetOffset(0x56FC0D98154D3742);
-      }
-      return ref _Handle.AsRef<float>(_TotalProbabilityOffset!.Value);
+    public ref float TotalProbability {
+        get {
+            _TotalProbabilityOffset = _TotalProbabilityOffset ?? Schema.GetOffset(0x56FC0D98154D3742);
+            return ref _Handle.AsRef<float>(_TotalProbabilityOffset!.Value);
+        }
     }
-  }
 
 
 }

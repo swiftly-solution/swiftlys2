@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum HierarchyType_t : uint {
-
+public enum HierarchyType_t : uint
+{
  HIERARCHY_NONE = 0,
 
  HIERARCHY_BONE_MERGE = 1,

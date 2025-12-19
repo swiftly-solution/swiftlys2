@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PointTemplateOwnerSpawnGroupType_t : uint {
-
+public enum PointTemplateOwnerSpawnGroupType_t : uint
+{
  INSERT_INTO_POINT_TEMPLATE_SPAWN_GROUP = 0,
 
  INSERT_INTO_CURRENTLY_ACTIVE_SPAWN_GROUP = 1,

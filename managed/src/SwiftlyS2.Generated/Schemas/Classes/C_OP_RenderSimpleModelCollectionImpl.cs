@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderSimpleModelCollectionImpl : CParticleFunctionRendererImpl, C_OP_RenderSimpleModelCollection {
+internal partial class C_OP_RenderSimpleModelCollectionImpl : CParticleFunctionRendererImpl, C_OP_RenderSimpleModelCollection
+{
+    public C_OP_RenderSimpleModelCollectionImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderSimpleModelCollectionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CenterOffsetOffset;
 
-  private static nint? _CenterOffsetOffset;
-
-  public ref bool CenterOffset {
-    get {
-      if (_CenterOffsetOffset == null) {
-        _CenterOffsetOffset = Schema.GetOffset(0xFCE69AE8E2C912BF);
-      }
-      return ref _Handle.AsRef<bool>(_CenterOffsetOffset!.Value);
+    public ref bool CenterOffset {
+        get {
+            _CenterOffsetOffset = _CenterOffsetOffset ?? Schema.GetOffset(0xFCE69AE8E2C912BF);
+            return ref _Handle.AsRef<bool>(_CenterOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModelOffset;
+    private static nint? _ModelOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get {
-      if (_ModelOffset == null) {
-        _ModelOffset = Schema.GetOffset(0xFCE69AE8E100C814);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model {
+        get {
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0xFCE69AE8E100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModelInputOffset;
+    private static nint? _ModelInputOffset;
 
-  public CParticleModelInput ModelInput {
-    get {
-      if (_ModelInputOffset == null) {
-        _ModelInputOffset = Schema.GetOffset(0xFCE69AE8EB74120E);
-      }
-      return new CParticleModelInputImpl(_Handle + _ModelInputOffset!.Value);
+    public CParticleModelInput ModelInput {
+        get {
+            _ModelInputOffset = _ModelInputOffset ?? Schema.GetOffset(0xFCE69AE8EB74120E);
+            return new CParticleModelInputImpl(_Handle + _ModelInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _SizeCullScaleOffset;
+    private static nint? _SizeCullScaleOffset;
 
-  public CParticleCollectionFloatInput SizeCullScale {
-    get {
-      if (_SizeCullScaleOffset == null) {
-        _SizeCullScaleOffset = Schema.GetOffset(0xFCE69AE89AB1415E);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _SizeCullScaleOffset!.Value);
+    public CParticleCollectionFloatInput SizeCullScale {
+        get {
+            _SizeCullScaleOffset = _SizeCullScaleOffset ?? Schema.GetOffset(0xFCE69AE89AB1415E);
+            return new CParticleCollectionFloatInputImpl(_Handle + _SizeCullScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisableShadowsOffset;
+    private static nint? _DisableShadowsOffset;
 
-  public ref bool DisableShadows {
-    get {
-      if (_DisableShadowsOffset == null) {
-        _DisableShadowsOffset = Schema.GetOffset(0xFCE69AE8161A1880);
-      }
-      return ref _Handle.AsRef<bool>(_DisableShadowsOffset!.Value);
+    public ref bool DisableShadows {
+        get {
+            _DisableShadowsOffset = _DisableShadowsOffset ?? Schema.GetOffset(0xFCE69AE8161A1880);
+            return ref _Handle.AsRef<bool>(_DisableShadowsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisableMotionBlurOffset;
+    private static nint? _DisableMotionBlurOffset;
 
-  public ref bool DisableMotionBlur {
-    get {
-      if (_DisableMotionBlurOffset == null) {
-        _DisableMotionBlurOffset = Schema.GetOffset(0xFCE69AE80A3CF924);
-      }
-      return ref _Handle.AsRef<bool>(_DisableMotionBlurOffset!.Value);
+    public ref bool DisableMotionBlur {
+        get {
+            _DisableMotionBlurOffset = _DisableMotionBlurOffset ?? Schema.GetOffset(0xFCE69AE80A3CF924);
+            return ref _Handle.AsRef<bool>(_DisableMotionBlurOffset!.Value);
+        }
     }
-  }
-  private static nint? _AcceptsDecalsOffset;
+    private static nint? _AcceptsDecalsOffset;
 
-  public ref bool AcceptsDecals {
-    get {
-      if (_AcceptsDecalsOffset == null) {
-        _AcceptsDecalsOffset = Schema.GetOffset(0xFCE69AE83D83AB88);
-      }
-      return ref _Handle.AsRef<bool>(_AcceptsDecalsOffset!.Value);
+    public ref bool AcceptsDecals {
+        get {
+            _AcceptsDecalsOffset = _AcceptsDecalsOffset ?? Schema.GetOffset(0xFCE69AE83D83AB88);
+            return ref _Handle.AsRef<bool>(_AcceptsDecalsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DrawFilterOffset;
+    private static nint? _DrawFilterOffset;
 
-  public CPerParticleFloatInput DrawFilter {
-    get {
-      if (_DrawFilterOffset == null) {
-        _DrawFilterOffset = Schema.GetOffset(0xFCE69AE8FD854541);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _DrawFilterOffset!.Value);
+    public CPerParticleFloatInput DrawFilter {
+        get {
+            _DrawFilterOffset = _DrawFilterOffset ?? Schema.GetOffset(0xFCE69AE8FD854541);
+            return new CPerParticleFloatInputImpl(_Handle + _DrawFilterOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularVelocityFieldOffset;
+    private static nint? _AngularVelocityFieldOffset;
 
-  public ParticleAttributeIndex_t AngularVelocityField {
-    get {
-      if (_AngularVelocityFieldOffset == null) {
-        _AngularVelocityFieldOffset = Schema.GetOffset(0xFCE69AE81A8493FE);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _AngularVelocityFieldOffset!.Value);
+    public ParticleAttributeIndex_t AngularVelocityField {
+        get {
+            _AngularVelocityFieldOffset = _AngularVelocityFieldOffset ?? Schema.GetOffset(0xFCE69AE81A8493FE);
+            return new ParticleAttributeIndex_tImpl(_Handle + _AngularVelocityFieldOffset!.Value);
+        }
     }
-  }
 
 
 }

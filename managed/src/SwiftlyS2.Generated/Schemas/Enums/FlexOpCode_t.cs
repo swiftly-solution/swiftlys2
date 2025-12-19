@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum FlexOpCode_t : uint {
-
+public enum FlexOpCode_t : uint
+{
  FLEX_OP_CONST = 1,
 
  FLEX_OP_FETCH1 = 2,

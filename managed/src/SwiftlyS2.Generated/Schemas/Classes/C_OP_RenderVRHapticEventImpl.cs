@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderVRHapticEventImpl : CParticleFunctionRendererImpl, C_OP_RenderVRHapticEvent {
+internal partial class C_OP_RenderVRHapticEventImpl : CParticleFunctionRendererImpl, C_OP_RenderVRHapticEvent
+{
+    public C_OP_RenderVRHapticEventImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderVRHapticEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HandOffset;
 
-  private static nint? _HandOffset;
-
-  public ref ParticleVRHandChoiceList_t Hand {
-    get {
-      if (_HandOffset == null) {
-        _HandOffset = Schema.GetOffset(0xB83C5242D49ECB4C);
-      }
-      return ref _Handle.AsRef<ParticleVRHandChoiceList_t>(_HandOffset!.Value);
+    public ref ParticleVRHandChoiceList_t Hand {
+        get {
+            _HandOffset = _HandOffset ?? Schema.GetOffset(0xB83C5242D49ECB4C);
+            return ref _Handle.AsRef<ParticleVRHandChoiceList_t>(_HandOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputHandCPOffset;
+    private static nint? _OutputHandCPOffset;
 
-  public ref int OutputHandCP {
-    get {
-      if (_OutputHandCPOffset == null) {
-        _OutputHandCPOffset = Schema.GetOffset(0xB83C52428D35D26A);
-      }
-      return ref _Handle.AsRef<int>(_OutputHandCPOffset!.Value);
+    public ref int OutputHandCP {
+        get {
+            _OutputHandCPOffset = _OutputHandCPOffset ?? Schema.GetOffset(0xB83C52428D35D26A);
+            return ref _Handle.AsRef<int>(_OutputHandCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputFieldOffset;
+    private static nint? _OutputFieldOffset;
 
-  public ref int OutputField {
-    get {
-      if (_OutputFieldOffset == null) {
-        _OutputFieldOffset = Schema.GetOffset(0xB83C5242324F6F74);
-      }
-      return ref _Handle.AsRef<int>(_OutputFieldOffset!.Value);
+    public ref int OutputField {
+        get {
+            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0xB83C5242324F6F74);
+            return ref _Handle.AsRef<int>(_OutputFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _AmplitudeOffset;
+    private static nint? _AmplitudeOffset;
 
-  public CPerParticleFloatInput Amplitude {
-    get {
-      if (_AmplitudeOffset == null) {
-        _AmplitudeOffset = Schema.GetOffset(0xB83C5242B44B0E18);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _AmplitudeOffset!.Value);
+    public CPerParticleFloatInput Amplitude {
+        get {
+            _AmplitudeOffset = _AmplitudeOffset ?? Schema.GetOffset(0xB83C5242B44B0E18);
+            return new CPerParticleFloatInputImpl(_Handle + _AmplitudeOffset!.Value);
+        }
     }
-  }
 
 
 }

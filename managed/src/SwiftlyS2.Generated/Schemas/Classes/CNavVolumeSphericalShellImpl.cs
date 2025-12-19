@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNavVolumeSphericalShellImpl : CNavVolumeSphereImpl, CNavVolumeSphericalShell {
+internal partial class CNavVolumeSphericalShellImpl : CNavVolumeSphereImpl, CNavVolumeSphericalShell
+{
+    public CNavVolumeSphericalShellImpl(nint handle) : base(handle) { }
 
-  public CNavVolumeSphericalShellImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusInnerOffset;
 
-  private static nint? _RadiusInnerOffset;
-
-  public ref float RadiusInner {
-    get {
-      if (_RadiusInnerOffset == null) {
-        _RadiusInnerOffset = Schema.GetOffset(0x8AC7FC7A5D85234F);
-      }
-      return ref _Handle.AsRef<float>(_RadiusInnerOffset!.Value);
+    public ref float RadiusInner {
+        get {
+            _RadiusInnerOffset = _RadiusInnerOffset ?? Schema.GetOffset(0x8AC7FC7A5D85234F);
+            return ref _Handle.AsRef<float>(_RadiusInnerOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum MoveType_t : byte {
-
+public enum MoveType_t : byte
+{
  MOVETYPE_NONE = 0,
 
  MOVETYPE_OBSOLETE = 1,

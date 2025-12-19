@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_LerpVectorImpl : CParticleFunctionOperatorImpl, C_OP_LerpVector {
+internal partial class C_OP_LerpVectorImpl : CParticleFunctionOperatorImpl, C_OP_LerpVector
+{
+    public C_OP_LerpVectorImpl(nint handle) : base(handle) { }
 
-  public C_OP_LerpVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x870E8457E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x870E8457E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputOffset;
+    private static nint? _OutputOffset;
 
-  public ref Vector Output {
-    get {
-      if (_OutputOffset == null) {
-        _OutputOffset = Schema.GetOffset(0x870E845708B7FF64);
-      }
-      return ref _Handle.AsRef<Vector>(_OutputOffset!.Value);
+    public ref Vector Output {
+        get {
+            _OutputOffset = _OutputOffset ?? Schema.GetOffset(0x870E845708B7FF64);
+            return ref _Handle.AsRef<Vector>(_OutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTimeOffset;
+    private static nint? _StartTimeOffset;
 
-  public ref float StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x870E845767FE9DC4);
-      }
-      return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+    public ref float StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x870E845767FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndTimeOffset;
+    private static nint? _EndTimeOffset;
 
-  public ref float EndTime {
-    get {
-      if (_EndTimeOffset == null) {
-        _EndTimeOffset = Schema.GetOffset(0x870E84572041DF9D);
-      }
-      return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+    public ref float EndTime {
+        get {
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0x870E84572041DF9D);
+            return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetMethodOffset;
+    private static nint? _SetMethodOffset;
 
-  public ref ParticleSetMethod_t SetMethod {
-    get {
-      if (_SetMethodOffset == null) {
-        _SetMethodOffset = Schema.GetOffset(0x870E8457FB53C31E);
-      }
-      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    public ref ParticleSetMethod_t SetMethod {
+        get {
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x870E8457FB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,117 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RampScalarSplineImpl : CParticleFunctionOperatorImpl, C_OP_RampScalarSpline {
+internal partial class C_OP_RampScalarSplineImpl : CParticleFunctionOperatorImpl, C_OP_RampScalarSpline
+{
+    public C_OP_RampScalarSplineImpl(nint handle) : base(handle) { }
 
-  public C_OP_RampScalarSplineImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RateMinOffset;
 
-  private static nint? _RateMinOffset;
-
-  public ref float RateMin {
-    get {
-      if (_RateMinOffset == null) {
-        _RateMinOffset = Schema.GetOffset(0x4ADFC178645AF561);
-      }
-      return ref _Handle.AsRef<float>(_RateMinOffset!.Value);
+    public ref float RateMin {
+        get {
+            _RateMinOffset = _RateMinOffset ?? Schema.GetOffset(0x4ADFC178645AF561);
+            return ref _Handle.AsRef<float>(_RateMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _RateMaxOffset;
+    private static nint? _RateMaxOffset;
 
-  public ref float RateMax {
-    get {
-      if (_RateMaxOffset == null) {
-        _RateMaxOffset = Schema.GetOffset(0x4ADFC178566E670F);
-      }
-      return ref _Handle.AsRef<float>(_RateMaxOffset!.Value);
+    public ref float RateMax {
+        get {
+            _RateMaxOffset = _RateMaxOffset ?? Schema.GetOffset(0x4ADFC178566E670F);
+            return ref _Handle.AsRef<float>(_RateMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTime_minOffset;
+    private static nint? _StartTime_minOffset;
 
-  public ref float StartTime_min {
-    get {
-      if (_StartTime_minOffset == null) {
-        _StartTime_minOffset = Schema.GetOffset(0x4ADFC1785AC75BFB);
-      }
-      return ref _Handle.AsRef<float>(_StartTime_minOffset!.Value);
+    public ref float StartTime_min {
+        get {
+            _StartTime_minOffset = _StartTime_minOffset ?? Schema.GetOffset(0x4ADFC1785AC75BFB);
+            return ref _Handle.AsRef<float>(_StartTime_minOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTime_maxOffset;
+    private static nint? _StartTime_maxOffset;
 
-  public ref float StartTime_max {
-    get {
-      if (_StartTime_maxOffset == null) {
-        _StartTime_maxOffset = Schema.GetOffset(0x4ADFC17850B23185);
-      }
-      return ref _Handle.AsRef<float>(_StartTime_maxOffset!.Value);
+    public ref float StartTime_max {
+        get {
+            _StartTime_maxOffset = _StartTime_maxOffset ?? Schema.GetOffset(0x4ADFC17850B23185);
+            return ref _Handle.AsRef<float>(_StartTime_maxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndTime_minOffset;
+    private static nint? _EndTime_minOffset;
 
-  public ref float EndTime_min {
-    get {
-      if (_EndTime_minOffset == null) {
-        _EndTime_minOffset = Schema.GetOffset(0x4ADFC1787B891932);
-      }
-      return ref _Handle.AsRef<float>(_EndTime_minOffset!.Value);
+    public ref float EndTime_min {
+        get {
+            _EndTime_minOffset = _EndTime_minOffset ?? Schema.GetOffset(0x4ADFC1787B891932);
+            return ref _Handle.AsRef<float>(_EndTime_minOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndTime_maxOffset;
+    private static nint? _EndTime_maxOffset;
 
-  public ref float EndTime_max {
-    get {
-      if (_EndTime_maxOffset == null) {
-        _EndTime_maxOffset = Schema.GetOffset(0x4ADFC1788575A138);
-      }
-      return ref _Handle.AsRef<float>(_EndTime_maxOffset!.Value);
+    public ref float EndTime_max {
+        get {
+            _EndTime_maxOffset = _EndTime_maxOffset ?? Schema.GetOffset(0x4ADFC1788575A138);
+            return ref _Handle.AsRef<float>(_EndTime_maxOffset!.Value);
+        }
     }
-  }
-  private static nint? _BiasOffset;
+    private static nint? _BiasOffset;
 
-  public ref float Bias {
-    get {
-      if (_BiasOffset == null) {
-        _BiasOffset = Schema.GetOffset(0x4ADFC178E7EF43B6);
-      }
-      return ref _Handle.AsRef<float>(_BiasOffset!.Value);
+    public ref float Bias {
+        get {
+            _BiasOffset = _BiasOffset ?? Schema.GetOffset(0x4ADFC178E7EF43B6);
+            return ref _Handle.AsRef<float>(_BiasOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOffset;
+    private static nint? _FieldOffset;
 
-  public ParticleAttributeIndex_t Field {
-    get {
-      if (_FieldOffset == null) {
-        _FieldOffset = Schema.GetOffset(0x4ADFC178C257B93B);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+    public ParticleAttributeIndex_t Field {
+        get {
+            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0x4ADFC178C257B93B);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProportionalOpOffset;
+    private static nint? _ProportionalOpOffset;
 
-  public ref bool ProportionalOp {
-    get {
-      if (_ProportionalOpOffset == null) {
-        _ProportionalOpOffset = Schema.GetOffset(0x4ADFC1780F8832BD);
-      }
-      return ref _Handle.AsRef<bool>(_ProportionalOpOffset!.Value);
+    public ref bool ProportionalOp {
+        get {
+            _ProportionalOpOffset = _ProportionalOpOffset ?? Schema.GetOffset(0x4ADFC1780F8832BD);
+            return ref _Handle.AsRef<bool>(_ProportionalOpOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseOutOffset;
+    private static nint? _EaseOutOffset;
 
-  public ref bool EaseOut {
-    get {
-      if (_EaseOutOffset == null) {
-        _EaseOutOffset = Schema.GetOffset(0x4ADFC1788E58B9D1);
-      }
-      return ref _Handle.AsRef<bool>(_EaseOutOffset!.Value);
+    public ref bool EaseOut {
+        get {
+            _EaseOutOffset = _EaseOutOffset ?? Schema.GetOffset(0x4ADFC1788E58B9D1);
+            return ref _Handle.AsRef<bool>(_EaseOutOffset!.Value);
+        }
     }
-  }
 
 
 }

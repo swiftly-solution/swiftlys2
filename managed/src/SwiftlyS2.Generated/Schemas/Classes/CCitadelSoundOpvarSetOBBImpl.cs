@@ -6,141 +6,99 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCitadelSoundOpvarSetOBBImpl : CBaseEntityImpl, CCitadelSoundOpvarSetOBB {
+internal partial class CCitadelSoundOpvarSetOBBImpl : CBaseEntityImpl, CCitadelSoundOpvarSetOBB
+{
+    public CCitadelSoundOpvarSetOBBImpl(nint handle) : base(handle) { }
 
-  public CCitadelSoundOpvarSetOBBImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StackNameOffset;
 
-  private static nint? _StackNameOffset;
+    public string StackName {
+        get {
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0xD3F8645E3B3E9CD4);
+            return Schema.GetString(_Handle.Read<nint>(_StackNameOffset!.Value));
+        }
+        set {
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0xD3F8645E3B3E9CD4);
+            Schema.SetString(_Handle, _StackNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OperatorNameOffset;
 
-  public string StackName {
-    get {
-      if (_StackNameOffset == null) {
-        _StackNameOffset = Schema.GetOffset(0xD3F8645E3B3E9CD4);
-      }
-      var ptr = _Handle.Read<nint>(_StackNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StackNameOffset == null) {
-        _StackNameOffset = Schema.GetOffset(0xD3F8645E3B3E9CD4);
-      }
-      Schema.SetString(_Handle, _StackNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OperatorNameOffset;
+    public string OperatorName {
+        get {
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0xD3F8645EF6140996);
+            return Schema.GetString(_Handle.Read<nint>(_OperatorNameOffset!.Value));
+        }
+        set {
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0xD3F8645EF6140996);
+            Schema.SetString(_Handle, _OperatorNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OpvarNameOffset;
 
-  public string OperatorName {
-    get {
-      if (_OperatorNameOffset == null) {
-        _OperatorNameOffset = Schema.GetOffset(0xD3F8645EF6140996);
-      }
-      var ptr = _Handle.Read<nint>(_OperatorNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_OperatorNameOffset == null) {
-        _OperatorNameOffset = Schema.GetOffset(0xD3F8645EF6140996);
-      }
-      Schema.SetString(_Handle, _OperatorNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OpvarNameOffset;
+    public string OpvarName {
+        get {
+            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0xD3F8645E2CAEFF3C);
+            return Schema.GetString(_Handle.Read<nint>(_OpvarNameOffset!.Value));
+        }
+        set {
+            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0xD3F8645E2CAEFF3C);
+            Schema.SetString(_Handle, _OpvarNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _DistanceInnerMinsOffset;
 
-  public string OpvarName {
-    get {
-      if (_OpvarNameOffset == null) {
-        _OpvarNameOffset = Schema.GetOffset(0xD3F8645E2CAEFF3C);
-      }
-      var ptr = _Handle.Read<nint>(_OpvarNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref Vector DistanceInnerMins {
+        get {
+            _DistanceInnerMinsOffset = _DistanceInnerMinsOffset ?? Schema.GetOffset(0xD3F8645EC7540883);
+            return ref _Handle.AsRef<Vector>(_DistanceInnerMinsOffset!.Value);
+        }
     }
-    set {
-      if (_OpvarNameOffset == null) {
-        _OpvarNameOffset = Schema.GetOffset(0xD3F8645E2CAEFF3C);
-      }
-      Schema.SetString(_Handle, _OpvarNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _DistanceInnerMinsOffset;
+    private static nint? _DistanceInnerMaxsOffset;
 
-  public ref Vector DistanceInnerMins {
-    get {
-      if (_DistanceInnerMinsOffset == null) {
-        _DistanceInnerMinsOffset = Schema.GetOffset(0xD3F8645EC7540883);
-      }
-      return ref _Handle.AsRef<Vector>(_DistanceInnerMinsOffset!.Value);
+    public ref Vector DistanceInnerMaxs {
+        get {
+            _DistanceInnerMaxsOffset = _DistanceInnerMaxsOffset ?? Schema.GetOffset(0xD3F8645E705E7E61);
+            return ref _Handle.AsRef<Vector>(_DistanceInnerMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceInnerMaxsOffset;
+    private static nint? _DistanceOuterMinsOffset;
 
-  public ref Vector DistanceInnerMaxs {
-    get {
-      if (_DistanceInnerMaxsOffset == null) {
-        _DistanceInnerMaxsOffset = Schema.GetOffset(0xD3F8645E705E7E61);
-      }
-      return ref _Handle.AsRef<Vector>(_DistanceInnerMaxsOffset!.Value);
+    public ref Vector DistanceOuterMins {
+        get {
+            _DistanceOuterMinsOffset = _DistanceOuterMinsOffset ?? Schema.GetOffset(0xD3F8645E185EC6F4);
+            return ref _Handle.AsRef<Vector>(_DistanceOuterMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceOuterMinsOffset;
+    private static nint? _DistanceOuterMaxsOffset;
 
-  public ref Vector DistanceOuterMins {
-    get {
-      if (_DistanceOuterMinsOffset == null) {
-        _DistanceOuterMinsOffset = Schema.GetOffset(0xD3F8645E185EC6F4);
-      }
-      return ref _Handle.AsRef<Vector>(_DistanceOuterMinsOffset!.Value);
+    public ref Vector DistanceOuterMaxs {
+        get {
+            _DistanceOuterMaxsOffset = _DistanceOuterMaxsOffset ?? Schema.GetOffset(0xD3F8645E99738B36);
+            return ref _Handle.AsRef<Vector>(_DistanceOuterMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceOuterMaxsOffset;
+    private static nint? _AABBDirectionOffset;
 
-  public ref Vector DistanceOuterMaxs {
-    get {
-      if (_DistanceOuterMaxsOffset == null) {
-        _DistanceOuterMaxsOffset = Schema.GetOffset(0xD3F8645E99738B36);
-      }
-      return ref _Handle.AsRef<Vector>(_DistanceOuterMaxsOffset!.Value);
+    public ref int AABBDirection {
+        get {
+            _AABBDirectionOffset = _AABBDirectionOffset ?? Schema.GetOffset(0xD3F8645EE8CF552C);
+            return ref _Handle.AsRef<int>(_AABBDirectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _AABBDirectionOffset;
 
-  public ref int AABBDirection {
-    get {
-      if (_AABBDirectionOffset == null) {
-        _AABBDirectionOffset = Schema.GetOffset(0xD3F8645EE8CF552C);
-      }
-      return ref _Handle.AsRef<int>(_AABBDirectionOffset!.Value);
-    }
-  }
-
-  public void StackNameUpdated() {
-    Schema.Update(_Handle, 0xD3F8645E3B3E9CD4);
-  }
-  public void OperatorNameUpdated() {
-    Schema.Update(_Handle, 0xD3F8645EF6140996);
-  }
-  public void OpvarNameUpdated() {
-    Schema.Update(_Handle, 0xD3F8645E2CAEFF3C);
-  }
-  public void DistanceInnerMinsUpdated() {
-    Schema.Update(_Handle, 0xD3F8645EC7540883);
-  }
-  public void DistanceInnerMaxsUpdated() {
-    Schema.Update(_Handle, 0xD3F8645E705E7E61);
-  }
-  public void DistanceOuterMinsUpdated() {
-    Schema.Update(_Handle, 0xD3F8645E185EC6F4);
-  }
-  public void DistanceOuterMaxsUpdated() {
-    Schema.Update(_Handle, 0xD3F8645E99738B36);
-  }
-  public void AABBDirectionUpdated() {
-    Schema.Update(_Handle, 0xD3F8645EE8CF552C);
-  }
+    public void StackNameUpdated() => Schema.Update(_Handle, 0xD3F8645E3B3E9CD4);
+    public void OperatorNameUpdated() => Schema.Update(_Handle, 0xD3F8645EF6140996);
+    public void OpvarNameUpdated() => Schema.Update(_Handle, 0xD3F8645E2CAEFF3C);
+    public void DistanceInnerMinsUpdated() => Schema.Update(_Handle, 0xD3F8645EC7540883);
+    public void DistanceInnerMaxsUpdated() => Schema.Update(_Handle, 0xD3F8645E705E7E61);
+    public void DistanceOuterMinsUpdated() => Schema.Update(_Handle, 0xD3F8645E185EC6F4);
+    public void DistanceOuterMaxsUpdated() => Schema.Update(_Handle, 0xD3F8645E99738B36);
+    public void AABBDirectionUpdated() => Schema.Update(_Handle, 0xD3F8645EE8CF552C);
 }

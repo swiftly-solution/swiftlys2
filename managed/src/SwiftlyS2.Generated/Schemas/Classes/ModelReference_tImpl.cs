@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ModelReference_tImpl : SchemaClass, ModelReference_t {
+internal partial class ModelReference_tImpl : SchemaClass, ModelReference_t
+{
+    public ModelReference_tImpl(nint handle) : base(handle) { }
 
-  public ModelReference_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModelOffset;
 
-  private static nint? _ModelOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get {
-      if (_ModelOffset == null) {
-        _ModelOffset = Schema.GetOffset(0x72F202EC1CD79E7A);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model {
+        get {
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0x72F202EC1CD79E7A);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+        }
     }
-  }
-  private static nint? _RelativeProbabilityOfSpawnOffset;
+    private static nint? _RelativeProbabilityOfSpawnOffset;
 
-  public ref float RelativeProbabilityOfSpawn {
-    get {
-      if (_RelativeProbabilityOfSpawnOffset == null) {
-        _RelativeProbabilityOfSpawnOffset = Schema.GetOffset(0x72F202ECDBFCAD1E);
-      }
-      return ref _Handle.AsRef<float>(_RelativeProbabilityOfSpawnOffset!.Value);
+    public ref float RelativeProbabilityOfSpawn {
+        get {
+            _RelativeProbabilityOfSpawnOffset = _RelativeProbabilityOfSpawnOffset ?? Schema.GetOffset(0x72F202ECDBFCAD1E);
+            return ref _Handle.AsRef<float>(_RelativeProbabilityOfSpawnOffset!.Value);
+        }
     }
-  }
 
 
 }

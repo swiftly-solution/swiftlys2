@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CStanceOverrideUpdateNodeImpl : CUnaryUpdateNodeImpl, CStanceOverrideUpdateNode {
+internal partial class CStanceOverrideUpdateNodeImpl : CUnaryUpdateNodeImpl, CStanceOverrideUpdateNode
+{
+    public CStanceOverrideUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CStanceOverrideUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FootStanceInfoOffset;
 
-  private static nint? _FootStanceInfoOffset;
-
-  public ref CUtlVector<StanceInfo_t> FootStanceInfo {
-    get {
-      if (_FootStanceInfoOffset == null) {
-        _FootStanceInfoOffset = Schema.GetOffset(0x322EE1B7D5687289);
-      }
-      return ref _Handle.AsRef<CUtlVector<StanceInfo_t>>(_FootStanceInfoOffset!.Value);
+    public ref CUtlVector<StanceInfo_t> FootStanceInfo {
+        get {
+            _FootStanceInfoOffset = _FootStanceInfoOffset ?? Schema.GetOffset(0x322EE1B7D5687289);
+            return ref _Handle.AsRef<CUtlVector<StanceInfo_t>>(_FootStanceInfoOffset!.Value);
+        }
     }
-  }
-  private static nint? _StanceSourceNodeOffset;
+    private static nint? _StanceSourceNodeOffset;
 
-  public CAnimUpdateNodeRef StanceSourceNode {
-    get {
-      if (_StanceSourceNodeOffset == null) {
-        _StanceSourceNodeOffset = Schema.GetOffset(0x322EE1B7D25DA07A);
-      }
-      return new CAnimUpdateNodeRefImpl(_Handle + _StanceSourceNodeOffset!.Value);
+    public CAnimUpdateNodeRef StanceSourceNode {
+        get {
+            _StanceSourceNodeOffset = _StanceSourceNodeOffset ?? Schema.GetOffset(0x322EE1B7D25DA07A);
+            return new CAnimUpdateNodeRefImpl(_Handle + _StanceSourceNodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterOffset;
+    private static nint? _ParameterOffset;
 
-  public CAnimParamHandle Parameter {
-    get {
-      if (_ParameterOffset == null) {
-        _ParameterOffset = Schema.GetOffset(0x322EE1B70C7008F6);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterOffset!.Value);
+    public CAnimParamHandle Parameter {
+        get {
+            _ParameterOffset = _ParameterOffset ?? Schema.GetOffset(0x322EE1B70C7008F6);
+            return new CAnimParamHandleImpl(_Handle + _ParameterOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModeOffset;
+    private static nint? _ModeOffset;
 
-  public ref StanceOverrideMode Mode {
-    get {
-      if (_ModeOffset == null) {
-        _ModeOffset = Schema.GetOffset(0x322EE1B71050A633);
-      }
-      return ref _Handle.AsRef<StanceOverrideMode>(_ModeOffset!.Value);
+    public ref StanceOverrideMode Mode {
+        get {
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x322EE1B71050A633);
+            return ref _Handle.AsRef<StanceOverrideMode>(_ModeOffset!.Value);
+        }
     }
-  }
 
 
 }

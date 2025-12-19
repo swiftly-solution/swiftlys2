@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SoundOpvarTraceResult_tImpl : SchemaClass, SoundOpvarTraceResult_t {
+internal partial class SoundOpvarTraceResult_tImpl : SchemaClass, SoundOpvarTraceResult_t
+{
+    public SoundOpvarTraceResult_tImpl(nint handle) : base(handle) { }
 
-  public SoundOpvarTraceResult_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PosOffset;
 
-  private static nint? _PosOffset;
-
-  public ref Vector Pos {
-    get {
-      if (_PosOffset == null) {
-        _PosOffset = Schema.GetOffset(0xF93EB0CBE5D6FAFD);
-      }
-      return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+    public ref Vector Pos {
+        get {
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0xF93EB0CBE5D6FAFD);
+            return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _DidHitOffset;
+    private static nint? _DidHitOffset;
 
-  public ref bool DidHit {
-    get {
-      if (_DidHitOffset == null) {
-        _DidHitOffset = Schema.GetOffset(0xF93EB0CBA8217B9F);
-      }
-      return ref _Handle.AsRef<bool>(_DidHitOffset!.Value);
+    public ref bool DidHit {
+        get {
+            _DidHitOffset = _DidHitOffset ?? Schema.GetOffset(0xF93EB0CBA8217B9F);
+            return ref _Handle.AsRef<bool>(_DidHitOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistSqrToCenterOffset;
+    private static nint? _DistSqrToCenterOffset;
 
-  public ref float DistSqrToCenter {
-    get {
-      if (_DistSqrToCenterOffset == null) {
-        _DistSqrToCenterOffset = Schema.GetOffset(0xF93EB0CB96618227);
-      }
-      return ref _Handle.AsRef<float>(_DistSqrToCenterOffset!.Value);
+    public ref float DistSqrToCenter {
+        get {
+            _DistSqrToCenterOffset = _DistSqrToCenterOffset ?? Schema.GetOffset(0xF93EB0CB96618227);
+            return ref _Handle.AsRef<float>(_DistSqrToCenterOffset!.Value);
+        }
     }
-  }
 
 
 }

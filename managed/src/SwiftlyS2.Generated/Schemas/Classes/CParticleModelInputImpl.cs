@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParticleModelInputImpl : CParticleInputImpl, CParticleModelInput {
+internal partial class CParticleModelInputImpl : CParticleInputImpl, CParticleModelInput
+{
+    public CParticleModelInputImpl(nint handle) : base(handle) { }
 
-  public CParticleModelInputImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref ParticleModelType_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0xC8FF4F3F18853D59);
-      }
-      return ref _Handle.AsRef<ParticleModelType_t>(_TypeOffset!.Value);
+    public ref ParticleModelType_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xC8FF4F3F18853D59);
+            return ref _Handle.AsRef<ParticleModelType_t>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NamedValueOffset;
+    private static nint? _NamedValueOffset;
 
-  public SchemaUntypedField NamedValue {
-    get {
-      if (_NamedValueOffset == null) {
-        _NamedValueOffset = Schema.GetOffset(0xC8FF4F3FE0618727);
-      }
-      return new SchemaUntypedField(_Handle + _NamedValueOffset!.Value);
+    public SchemaUntypedField NamedValue {
+        get {
+            _NamedValueOffset = _NamedValueOffset ?? Schema.GetOffset(0xC8FF4F3FE0618727);
+            return new SchemaUntypedField(_Handle + _NamedValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointOffset;
+    private static nint? _ControlPointOffset;
 
-  public ref int ControlPoint {
-    get {
-      if (_ControlPointOffset == null) {
-        _ControlPointOffset = Schema.GetOffset(0xC8FF4F3F0D0DDF8C);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    public ref int ControlPoint {
+        get {
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xC8FF4F3F0D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+        }
     }
-  }
 
 
 }

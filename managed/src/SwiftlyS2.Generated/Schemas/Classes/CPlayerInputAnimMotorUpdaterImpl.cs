@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPlayerInputAnimMotorUpdaterImpl : CAnimMotorUpdaterBaseImpl, CPlayerInputAnimMotorUpdater {
+internal partial class CPlayerInputAnimMotorUpdaterImpl : CAnimMotorUpdaterBaseImpl, CPlayerInputAnimMotorUpdater
+{
+    public CPlayerInputAnimMotorUpdaterImpl(nint handle) : base(handle) { }
 
-  public CPlayerInputAnimMotorUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SampleTimesOffset;
 
-  private static nint? _SampleTimesOffset;
-
-  public ref CUtlVector<float> SampleTimes {
-    get {
-      if (_SampleTimesOffset == null) {
-        _SampleTimesOffset = Schema.GetOffset(0xA117CC02471975DF);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_SampleTimesOffset!.Value);
+    public ref CUtlVector<float> SampleTimes {
+        get {
+            _SampleTimesOffset = _SampleTimesOffset ?? Schema.GetOffset(0xA117CC02471975DF);
+            return ref _Handle.AsRef<CUtlVector<float>>(_SampleTimesOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpringConstantOffset;
+    private static nint? _SpringConstantOffset;
 
-  public ref float SpringConstant {
-    get {
-      if (_SpringConstantOffset == null) {
-        _SpringConstantOffset = Schema.GetOffset(0xA117CC02CE2260BE);
-      }
-      return ref _Handle.AsRef<float>(_SpringConstantOffset!.Value);
+    public ref float SpringConstant {
+        get {
+            _SpringConstantOffset = _SpringConstantOffset ?? Schema.GetOffset(0xA117CC02CE2260BE);
+            return ref _Handle.AsRef<float>(_SpringConstantOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnticipationDistanceOffset;
+    private static nint? _AnticipationDistanceOffset;
 
-  public ref float AnticipationDistance {
-    get {
-      if (_AnticipationDistanceOffset == null) {
-        _AnticipationDistanceOffset = Schema.GetOffset(0xA117CC0264273401);
-      }
-      return ref _Handle.AsRef<float>(_AnticipationDistanceOffset!.Value);
+    public ref float AnticipationDistance {
+        get {
+            _AnticipationDistanceOffset = _AnticipationDistanceOffset ?? Schema.GetOffset(0xA117CC0264273401);
+            return ref _Handle.AsRef<float>(_AnticipationDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnticipationPosParamOffset;
+    private static nint? _AnticipationPosParamOffset;
 
-  public CAnimParamHandle AnticipationPosParam {
-    get {
-      if (_AnticipationPosParamOffset == null) {
-        _AnticipationPosParamOffset = Schema.GetOffset(0xA117CC0286389829);
-      }
-      return new CAnimParamHandleImpl(_Handle + _AnticipationPosParamOffset!.Value);
+    public CAnimParamHandle AnticipationPosParam {
+        get {
+            _AnticipationPosParamOffset = _AnticipationPosParamOffset ?? Schema.GetOffset(0xA117CC0286389829);
+            return new CAnimParamHandleImpl(_Handle + _AnticipationPosParamOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnticipationHeadingParamOffset;
+    private static nint? _AnticipationHeadingParamOffset;
 
-  public CAnimParamHandle AnticipationHeadingParam {
-    get {
-      if (_AnticipationHeadingParamOffset == null) {
-        _AnticipationHeadingParamOffset = Schema.GetOffset(0xA117CC02095DAB6D);
-      }
-      return new CAnimParamHandleImpl(_Handle + _AnticipationHeadingParamOffset!.Value);
+    public CAnimParamHandle AnticipationHeadingParam {
+        get {
+            _AnticipationHeadingParamOffset = _AnticipationHeadingParamOffset ?? Schema.GetOffset(0xA117CC02095DAB6D);
+            return new CAnimParamHandleImpl(_Handle + _AnticipationHeadingParamOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseAccelerationOffset;
+    private static nint? _UseAccelerationOffset;
 
-  public ref bool UseAcceleration {
-    get {
-      if (_UseAccelerationOffset == null) {
-        _UseAccelerationOffset = Schema.GetOffset(0xA117CC02254F8B08);
-      }
-      return ref _Handle.AsRef<bool>(_UseAccelerationOffset!.Value);
+    public ref bool UseAcceleration {
+        get {
+            _UseAccelerationOffset = _UseAccelerationOffset ?? Schema.GetOffset(0xA117CC02254F8B08);
+            return ref _Handle.AsRef<bool>(_UseAccelerationOffset!.Value);
+        }
     }
-  }
 
 
 }

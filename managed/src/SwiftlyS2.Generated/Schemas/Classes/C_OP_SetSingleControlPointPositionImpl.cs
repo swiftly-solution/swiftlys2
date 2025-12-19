@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetSingleControlPointPositionImpl : CParticleFunctionPreEmissionImpl, C_OP_SetSingleControlPointPosition {
+internal partial class C_OP_SetSingleControlPointPositionImpl : CParticleFunctionPreEmissionImpl, C_OP_SetSingleControlPointPosition
+{
+    public C_OP_SetSingleControlPointPositionImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetSingleControlPointPositionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SetOnceOffset;
 
-  private static nint? _SetOnceOffset;
-
-  public ref bool SetOnce {
-    get {
-      if (_SetOnceOffset == null) {
-        _SetOnceOffset = Schema.GetOffset(0xFE0B7A4D6B261086);
-      }
-      return ref _Handle.AsRef<bool>(_SetOnceOffset!.Value);
+    public ref bool SetOnce {
+        get {
+            _SetOnceOffset = _SetOnceOffset ?? Schema.GetOffset(0xFE0B7A4D6B261086);
+            return ref _Handle.AsRef<bool>(_SetOnceOffset!.Value);
+        }
     }
-  }
-  private static nint? _CP1Offset;
+    private static nint? _CP1Offset;
 
-  public ref int CP1 {
-    get {
-      if (_CP1Offset == null) {
-        _CP1Offset = Schema.GetOffset(0xFE0B7A4DD4B1E579);
-      }
-      return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+    public ref int CP1 {
+        get {
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0xFE0B7A4DD4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+        }
     }
-  }
-  private static nint? _CP1PosOffset;
+    private static nint? _CP1PosOffset;
 
-  public CParticleCollectionVecInput CP1Pos {
-    get {
-      if (_CP1PosOffset == null) {
-        _CP1PosOffset = Schema.GetOffset(0xFE0B7A4D408288D9);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _CP1PosOffset!.Value);
+    public CParticleCollectionVecInput CP1Pos {
+        get {
+            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0xFE0B7A4D408288D9);
+            return new CParticleCollectionVecInputImpl(_Handle + _CP1PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransformInputOffset;
+    private static nint? _TransformInputOffset;
 
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0xFE0B7A4D3A9ED669);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xFE0B7A4D3A9ED669);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
 
 
 }

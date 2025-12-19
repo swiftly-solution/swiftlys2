@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimationGraphVisualizerSphereImpl : CAnimationGraphVisualizerPrimitiveBaseImpl, CAnimationGraphVisualizerSphere {
+internal partial class CAnimationGraphVisualizerSphereImpl : CAnimationGraphVisualizerPrimitiveBaseImpl, CAnimationGraphVisualizerSphere
+{
+    public CAnimationGraphVisualizerSphereImpl(nint handle) : base(handle) { }
 
-  public CAnimationGraphVisualizerSphereImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WsPositionOffset;
 
-  private static nint? _WsPositionOffset;
-
-  public ref Vector WsPosition {
-    get {
-      if (_WsPositionOffset == null) {
-        _WsPositionOffset = Schema.GetOffset(0x85D725BDCA77AB88);
-      }
-      return ref _Handle.AsRef<Vector>(_WsPositionOffset!.Value);
+    public ref Vector WsPosition {
+        get {
+            _WsPositionOffset = _WsPositionOffset ?? Schema.GetOffset(0x85D725BDCA77AB88);
+            return ref _Handle.AsRef<Vector>(_WsPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x85D725BD5ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x85D725BD5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorOffset;
+    private static nint? _ColorOffset;
 
-  public ref Color Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x85D725BDD7D017D8);
-      }
-      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+    public ref Color Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x85D725BDD7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+        }
     }
-  }
 
 
 }

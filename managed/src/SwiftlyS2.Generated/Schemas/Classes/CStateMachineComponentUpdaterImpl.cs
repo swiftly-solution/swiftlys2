@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CStateMachineComponentUpdaterImpl : CAnimComponentUpdaterImpl, CStateMachineComponentUpdater {
+internal partial class CStateMachineComponentUpdaterImpl : CAnimComponentUpdaterImpl, CStateMachineComponentUpdater
+{
+    public CStateMachineComponentUpdaterImpl(nint handle) : base(handle) { }
 
-  public CStateMachineComponentUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StateMachineOffset;
 
-  private static nint? _StateMachineOffset;
-
-  public CAnimStateMachineUpdater StateMachine {
-    get {
-      if (_StateMachineOffset == null) {
-        _StateMachineOffset = Schema.GetOffset(0x25255200BB7EEF2F);
-      }
-      return new CAnimStateMachineUpdaterImpl(_Handle + _StateMachineOffset!.Value);
+    public CAnimStateMachineUpdater StateMachine {
+        get {
+            _StateMachineOffset = _StateMachineOffset ?? Schema.GetOffset(0x25255200BB7EEF2F);
+            return new CAnimStateMachineUpdaterImpl(_Handle + _StateMachineOffset!.Value);
+        }
     }
-  }
 
 
 }

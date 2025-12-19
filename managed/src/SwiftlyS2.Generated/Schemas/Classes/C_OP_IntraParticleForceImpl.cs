@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_IntraParticleForceImpl : CParticleFunctionForceImpl, C_OP_IntraParticleForce {
+internal partial class C_OP_IntraParticleForceImpl : CParticleFunctionForceImpl, C_OP_IntraParticleForce
+{
+    public C_OP_IntraParticleForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_IntraParticleForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttractionMinDistanceOffset;
 
-  private static nint? _AttractionMinDistanceOffset;
-
-  public ref float AttractionMinDistance {
-    get {
-      if (_AttractionMinDistanceOffset == null) {
-        _AttractionMinDistanceOffset = Schema.GetOffset(0x784412D0CEAEE62D);
-      }
-      return ref _Handle.AsRef<float>(_AttractionMinDistanceOffset!.Value);
+    public ref float AttractionMinDistance {
+        get {
+            _AttractionMinDistanceOffset = _AttractionMinDistanceOffset ?? Schema.GetOffset(0x784412D0CEAEE62D);
+            return ref _Handle.AsRef<float>(_AttractionMinDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttractionMaxDistanceOffset;
+    private static nint? _AttractionMaxDistanceOffset;
 
-  public ref float AttractionMaxDistance {
-    get {
-      if (_AttractionMaxDistanceOffset == null) {
-        _AttractionMaxDistanceOffset = Schema.GetOffset(0x784412D04052F81F);
-      }
-      return ref _Handle.AsRef<float>(_AttractionMaxDistanceOffset!.Value);
+    public ref float AttractionMaxDistance {
+        get {
+            _AttractionMaxDistanceOffset = _AttractionMaxDistanceOffset ?? Schema.GetOffset(0x784412D04052F81F);
+            return ref _Handle.AsRef<float>(_AttractionMaxDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttractionMaxStrengthOffset;
+    private static nint? _AttractionMaxStrengthOffset;
 
-  public ref float AttractionMaxStrength {
-    get {
-      if (_AttractionMaxStrengthOffset == null) {
-        _AttractionMaxStrengthOffset = Schema.GetOffset(0x784412D09FE72EFD);
-      }
-      return ref _Handle.AsRef<float>(_AttractionMaxStrengthOffset!.Value);
+    public ref float AttractionMaxStrength {
+        get {
+            _AttractionMaxStrengthOffset = _AttractionMaxStrengthOffset ?? Schema.GetOffset(0x784412D09FE72EFD);
+            return ref _Handle.AsRef<float>(_AttractionMaxStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _RepulsionMinDistanceOffset;
+    private static nint? _RepulsionMinDistanceOffset;
 
-  public ref float RepulsionMinDistance {
-    get {
-      if (_RepulsionMinDistanceOffset == null) {
-        _RepulsionMinDistanceOffset = Schema.GetOffset(0x784412D018F9EFB1);
-      }
-      return ref _Handle.AsRef<float>(_RepulsionMinDistanceOffset!.Value);
+    public ref float RepulsionMinDistance {
+        get {
+            _RepulsionMinDistanceOffset = _RepulsionMinDistanceOffset ?? Schema.GetOffset(0x784412D018F9EFB1);
+            return ref _Handle.AsRef<float>(_RepulsionMinDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _RepulsionMaxDistanceOffset;
+    private static nint? _RepulsionMaxDistanceOffset;
 
-  public ref float RepulsionMaxDistance {
-    get {
-      if (_RepulsionMaxDistanceOffset == null) {
-        _RepulsionMaxDistanceOffset = Schema.GetOffset(0x784412D05B7D269B);
-      }
-      return ref _Handle.AsRef<float>(_RepulsionMaxDistanceOffset!.Value);
+    public ref float RepulsionMaxDistance {
+        get {
+            _RepulsionMaxDistanceOffset = _RepulsionMaxDistanceOffset ?? Schema.GetOffset(0x784412D05B7D269B);
+            return ref _Handle.AsRef<float>(_RepulsionMaxDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _RepulsionMaxStrengthOffset;
+    private static nint? _RepulsionMaxStrengthOffset;
 
-  public ref float RepulsionMaxStrength {
-    get {
-      if (_RepulsionMaxStrengthOffset == null) {
-        _RepulsionMaxStrengthOffset = Schema.GetOffset(0x784412D0B9401C21);
-      }
-      return ref _Handle.AsRef<float>(_RepulsionMaxStrengthOffset!.Value);
+    public ref float RepulsionMaxStrength {
+        get {
+            _RepulsionMaxStrengthOffset = _RepulsionMaxStrengthOffset ?? Schema.GetOffset(0x784412D0B9401C21);
+            return ref _Handle.AsRef<float>(_RepulsionMaxStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseAABBOffset;
+    private static nint? _UseAABBOffset;
 
-  public ref bool UseAABB {
-    get {
-      if (_UseAABBOffset == null) {
-        _UseAABBOffset = Schema.GetOffset(0x784412D029AAFF2E);
-      }
-      return ref _Handle.AsRef<bool>(_UseAABBOffset!.Value);
+    public ref bool UseAABB {
+        get {
+            _UseAABBOffset = _UseAABBOffset ?? Schema.GetOffset(0x784412D029AAFF2E);
+            return ref _Handle.AsRef<bool>(_UseAABBOffset!.Value);
+        }
     }
-  }
 
 
 }

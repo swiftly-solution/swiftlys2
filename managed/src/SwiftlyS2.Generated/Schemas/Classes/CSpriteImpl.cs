@@ -6,282 +6,211 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSpriteImpl : CBaseModelEntityImpl, CSprite {
+internal partial class CSpriteImpl : CBaseModelEntityImpl, CSprite
+{
+    public CSpriteImpl(nint handle) : base(handle) { }
 
-  public CSpriteImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SpriteMaterialOffset;
 
-  private static nint? _SpriteMaterialOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> SpriteMaterial {
-    get {
-      if (_SpriteMaterialOffset == null) {
-        _SpriteMaterialOffset = Schema.GetOffset(0xAAF88CE378793443);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SpriteMaterialOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> SpriteMaterial {
+        get {
+            _SpriteMaterialOffset = _SpriteMaterialOffset ?? Schema.GetOffset(0xAAF88CE378793443);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SpriteMaterialOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttachedToEntityOffset;
+    private static nint? _AttachedToEntityOffset;
 
-  public ref CHandle<CBaseEntity> AttachedToEntity {
-    get {
-      if (_AttachedToEntityOffset == null) {
-        _AttachedToEntityOffset = Schema.GetOffset(0xAAF88CE3FDEAA64D);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedToEntityOffset!.Value);
+    public ref CHandle<CBaseEntity> AttachedToEntity {
+        get {
+            _AttachedToEntityOffset = _AttachedToEntityOffset ?? Schema.GetOffset(0xAAF88CE3FDEAA64D);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedToEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttachmentOffset;
+    private static nint? _AttachmentOffset;
 
-  public AttachmentHandle_t Attachment {
-    get {
-      if (_AttachmentOffset == null) {
-        _AttachmentOffset = Schema.GetOffset(0xAAF88CE3E3BF4024);
-      }
-      return new AttachmentHandle_tImpl(_Handle + _AttachmentOffset!.Value);
+    public AttachmentHandle_t Attachment {
+        get {
+            _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0xAAF88CE3E3BF4024);
+            return new AttachmentHandle_tImpl(_Handle + _AttachmentOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpriteFramerateOffset;
+    private static nint? _SpriteFramerateOffset;
 
-  public ref float SpriteFramerate {
-    get {
-      if (_SpriteFramerateOffset == null) {
-        _SpriteFramerateOffset = Schema.GetOffset(0xAAF88CE3E156249D);
-      }
-      return ref _Handle.AsRef<float>(_SpriteFramerateOffset!.Value);
+    public ref float SpriteFramerate {
+        get {
+            _SpriteFramerateOffset = _SpriteFramerateOffset ?? Schema.GetOffset(0xAAF88CE3E156249D);
+            return ref _Handle.AsRef<float>(_SpriteFramerateOffset!.Value);
+        }
     }
-  }
-  private static nint? _FrameOffset;
+    private static nint? _FrameOffset;
 
-  public ref float Frame {
-    get {
-      if (_FrameOffset == null) {
-        _FrameOffset = Schema.GetOffset(0xAAF88CE3F836C9F4);
-      }
-      return ref _Handle.AsRef<float>(_FrameOffset!.Value);
+    public ref float Frame {
+        get {
+            _FrameOffset = _FrameOffset ?? Schema.GetOffset(0xAAF88CE3F836C9F4);
+            return ref _Handle.AsRef<float>(_FrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _DieTimeOffset;
+    private static nint? _DieTimeOffset;
 
-  public GameTime_t DieTime {
-    get {
-      if (_DieTimeOffset == null) {
-        _DieTimeOffset = Schema.GetOffset(0xAAF88CE361B33206);
-      }
-      return new GameTime_tImpl(_Handle + _DieTimeOffset!.Value);
+    public GameTime_t DieTime {
+        get {
+            _DieTimeOffset = _DieTimeOffset ?? Schema.GetOffset(0xAAF88CE361B33206);
+            return new GameTime_tImpl(_Handle + _DieTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessOffset;
+    private static nint? _BrightnessOffset;
 
-  public ref uint Brightness {
-    get {
-      if (_BrightnessOffset == null) {
-        _BrightnessOffset = Schema.GetOffset(0xAAF88CE3A4C26AE6);
-      }
-      return ref _Handle.AsRef<uint>(_BrightnessOffset!.Value);
+    public ref uint Brightness {
+        get {
+            _BrightnessOffset = _BrightnessOffset ?? Schema.GetOffset(0xAAF88CE3A4C26AE6);
+            return ref _Handle.AsRef<uint>(_BrightnessOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessDurationOffset;
+    private static nint? _BrightnessDurationOffset;
 
-  public ref float BrightnessDuration {
-    get {
-      if (_BrightnessDurationOffset == null) {
-        _BrightnessDurationOffset = Schema.GetOffset(0xAAF88CE36700BD7C);
-      }
-      return ref _Handle.AsRef<float>(_BrightnessDurationOffset!.Value);
+    public ref float BrightnessDuration {
+        get {
+            _BrightnessDurationOffset = _BrightnessDurationOffset ?? Schema.GetOffset(0xAAF88CE36700BD7C);
+            return ref _Handle.AsRef<float>(_BrightnessDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpriteScaleOffset;
+    private static nint? _SpriteScaleOffset;
 
-  public ref float SpriteScale {
-    get {
-      if (_SpriteScaleOffset == null) {
-        _SpriteScaleOffset = Schema.GetOffset(0xAAF88CE3E39D2B84);
-      }
-      return ref _Handle.AsRef<float>(_SpriteScaleOffset!.Value);
+    public ref float SpriteScale {
+        get {
+            _SpriteScaleOffset = _SpriteScaleOffset ?? Schema.GetOffset(0xAAF88CE3E39D2B84);
+            return ref _Handle.AsRef<float>(_SpriteScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleDurationOffset;
+    private static nint? _ScaleDurationOffset;
 
-  public ref float ScaleDuration {
-    get {
-      if (_ScaleDurationOffset == null) {
-        _ScaleDurationOffset = Schema.GetOffset(0xAAF88CE35F21994B);
-      }
-      return ref _Handle.AsRef<float>(_ScaleDurationOffset!.Value);
+    public ref float ScaleDuration {
+        get {
+            _ScaleDurationOffset = _ScaleDurationOffset ?? Schema.GetOffset(0xAAF88CE35F21994B);
+            return ref _Handle.AsRef<float>(_ScaleDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldSpaceScaleOffset;
+    private static nint? _WorldSpaceScaleOffset;
 
-  public ref bool WorldSpaceScale {
-    get {
-      if (_WorldSpaceScaleOffset == null) {
-        _WorldSpaceScaleOffset = Schema.GetOffset(0xAAF88CE37E045A3F);
-      }
-      return ref _Handle.AsRef<bool>(_WorldSpaceScaleOffset!.Value);
+    public ref bool WorldSpaceScale {
+        get {
+            _WorldSpaceScaleOffset = _WorldSpaceScaleOffset ?? Schema.GetOffset(0xAAF88CE37E045A3F);
+            return ref _Handle.AsRef<bool>(_WorldSpaceScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlowProxySizeOffset;
+    private static nint? _GlowProxySizeOffset;
 
-  public ref float GlowProxySize {
-    get {
-      if (_GlowProxySizeOffset == null) {
-        _GlowProxySizeOffset = Schema.GetOffset(0xAAF88CE3C4210897);
-      }
-      return ref _Handle.AsRef<float>(_GlowProxySizeOffset!.Value);
+    public ref float GlowProxySize {
+        get {
+            _GlowProxySizeOffset = _GlowProxySizeOffset ?? Schema.GetOffset(0xAAF88CE3C4210897);
+            return ref _Handle.AsRef<float>(_GlowProxySizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _HDRColorScaleOffset;
+    private static nint? _HDRColorScaleOffset;
 
-  public ref float HDRColorScale {
-    get {
-      if (_HDRColorScaleOffset == null) {
-        _HDRColorScaleOffset = Schema.GetOffset(0xAAF88CE3C930B3E8);
-      }
-      return ref _Handle.AsRef<float>(_HDRColorScaleOffset!.Value);
+    public ref float HDRColorScale {
+        get {
+            _HDRColorScaleOffset = _HDRColorScaleOffset ?? Schema.GetOffset(0xAAF88CE3C930B3E8);
+            return ref _Handle.AsRef<float>(_HDRColorScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastTimeOffset;
+    private static nint? _LastTimeOffset;
 
-  public GameTime_t LastTime {
-    get {
-      if (_LastTimeOffset == null) {
-        _LastTimeOffset = Schema.GetOffset(0xAAF88CE32E79549E);
-      }
-      return new GameTime_tImpl(_Handle + _LastTimeOffset!.Value);
+    public GameTime_t LastTime {
+        get {
+            _LastTimeOffset = _LastTimeOffset ?? Schema.GetOffset(0xAAF88CE32E79549E);
+            return new GameTime_tImpl(_Handle + _LastTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxFrameOffset;
+    private static nint? _MaxFrameOffset;
 
-  public ref float MaxFrame {
-    get {
-      if (_MaxFrameOffset == null) {
-        _MaxFrameOffset = Schema.GetOffset(0xAAF88CE397F185CC);
-      }
-      return ref _Handle.AsRef<float>(_MaxFrameOffset!.Value);
+    public ref float MaxFrame {
+        get {
+            _MaxFrameOffset = _MaxFrameOffset ?? Schema.GetOffset(0xAAF88CE397F185CC);
+            return ref _Handle.AsRef<float>(_MaxFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartScaleOffset;
+    private static nint? _StartScaleOffset;
 
-  public ref float StartScale {
-    get {
-      if (_StartScaleOffset == null) {
-        _StartScaleOffset = Schema.GetOffset(0xAAF88CE3634567D1);
-      }
-      return ref _Handle.AsRef<float>(_StartScaleOffset!.Value);
+    public ref float StartScale {
+        get {
+            _StartScaleOffset = _StartScaleOffset ?? Schema.GetOffset(0xAAF88CE3634567D1);
+            return ref _Handle.AsRef<float>(_StartScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestScaleOffset;
+    private static nint? _DestScaleOffset;
 
-  public ref float DestScale {
-    get {
-      if (_DestScaleOffset == null) {
-        _DestScaleOffset = Schema.GetOffset(0xAAF88CE341A20F83);
-      }
-      return ref _Handle.AsRef<float>(_DestScaleOffset!.Value);
+    public ref float DestScale {
+        get {
+            _DestScaleOffset = _DestScaleOffset ?? Schema.GetOffset(0xAAF88CE341A20F83);
+            return ref _Handle.AsRef<float>(_DestScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleTimeStartOffset;
+    private static nint? _ScaleTimeStartOffset;
 
-  public GameTime_t ScaleTimeStart {
-    get {
-      if (_ScaleTimeStartOffset == null) {
-        _ScaleTimeStartOffset = Schema.GetOffset(0xAAF88CE303EA4A2E);
-      }
-      return new GameTime_tImpl(_Handle + _ScaleTimeStartOffset!.Value);
+    public GameTime_t ScaleTimeStart {
+        get {
+            _ScaleTimeStartOffset = _ScaleTimeStartOffset ?? Schema.GetOffset(0xAAF88CE303EA4A2E);
+            return new GameTime_tImpl(_Handle + _ScaleTimeStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartBrightnessOffset;
+    private static nint? _StartBrightnessOffset;
 
-  public ref int StartBrightness {
-    get {
-      if (_StartBrightnessOffset == null) {
-        _StartBrightnessOffset = Schema.GetOffset(0xAAF88CE3A9C01268);
-      }
-      return ref _Handle.AsRef<int>(_StartBrightnessOffset!.Value);
+    public ref int StartBrightness {
+        get {
+            _StartBrightnessOffset = _StartBrightnessOffset ?? Schema.GetOffset(0xAAF88CE3A9C01268);
+            return ref _Handle.AsRef<int>(_StartBrightnessOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestBrightnessOffset;
+    private static nint? _DestBrightnessOffset;
 
-  public ref int DestBrightness {
-    get {
-      if (_DestBrightnessOffset == null) {
-        _DestBrightnessOffset = Schema.GetOffset(0xAAF88CE38627AE5E);
-      }
-      return ref _Handle.AsRef<int>(_DestBrightnessOffset!.Value);
+    public ref int DestBrightness {
+        get {
+            _DestBrightnessOffset = _DestBrightnessOffset ?? Schema.GetOffset(0xAAF88CE38627AE5E);
+            return ref _Handle.AsRef<int>(_DestBrightnessOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessTimeStartOffset;
+    private static nint? _BrightnessTimeStartOffset;
 
-  public GameTime_t BrightnessTimeStart {
-    get {
-      if (_BrightnessTimeStartOffset == null) {
-        _BrightnessTimeStartOffset = Schema.GetOffset(0xAAF88CE3478AFDAF);
-      }
-      return new GameTime_tImpl(_Handle + _BrightnessTimeStartOffset!.Value);
+    public GameTime_t BrightnessTimeStart {
+        get {
+            _BrightnessTimeStartOffset = _BrightnessTimeStartOffset ?? Schema.GetOffset(0xAAF88CE3478AFDAF);
+            return new GameTime_tImpl(_Handle + _BrightnessTimeStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpriteWidthOffset;
+    private static nint? _SpriteWidthOffset;
 
-  public ref int SpriteWidth {
-    get {
-      if (_SpriteWidthOffset == null) {
-        _SpriteWidthOffset = Schema.GetOffset(0xAAF88CE3F10EC104);
-      }
-      return ref _Handle.AsRef<int>(_SpriteWidthOffset!.Value);
+    public ref int SpriteWidth {
+        get {
+            _SpriteWidthOffset = _SpriteWidthOffset ?? Schema.GetOffset(0xAAF88CE3F10EC104);
+            return ref _Handle.AsRef<int>(_SpriteWidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpriteHeightOffset;
+    private static nint? _SpriteHeightOffset;
 
-  public ref int SpriteHeight {
-    get {
-      if (_SpriteHeightOffset == null) {
-        _SpriteHeightOffset = Schema.GetOffset(0xAAF88CE36BAED033);
-      }
-      return ref _Handle.AsRef<int>(_SpriteHeightOffset!.Value);
+    public ref int SpriteHeight {
+        get {
+            _SpriteHeightOffset = _SpriteHeightOffset ?? Schema.GetOffset(0xAAF88CE36BAED033);
+            return ref _Handle.AsRef<int>(_SpriteHeightOffset!.Value);
+        }
     }
-  }
 
-  public void SpriteMaterialUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE378793443);
-  }
-  public void AttachedToEntityUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE3FDEAA64D);
-  }
-  public void AttachmentUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE3E3BF4024);
-  }
-  public void SpriteFramerateUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE3E156249D);
-  }
-  public void FrameUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE3F836C9F4);
-  }
-  public void BrightnessUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE3A4C26AE6);
-  }
-  public void BrightnessDurationUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE36700BD7C);
-  }
-  public void SpriteScaleUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE3E39D2B84);
-  }
-  public void ScaleDurationUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE35F21994B);
-  }
-  public void WorldSpaceScaleUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE37E045A3F);
-  }
-  public void GlowProxySizeUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE3C4210897);
-  }
-  public void HDRColorScaleUpdated() {
-    Schema.Update(_Handle, 0xAAF88CE3C930B3E8);
-  }
+    public void SpriteMaterialUpdated() => Schema.Update(_Handle, 0xAAF88CE378793443);
+    public void AttachedToEntityUpdated() => Schema.Update(_Handle, 0xAAF88CE3FDEAA64D);
+    public void AttachmentUpdated() => Schema.Update(_Handle, 0xAAF88CE3E3BF4024);
+    public void SpriteFramerateUpdated() => Schema.Update(_Handle, 0xAAF88CE3E156249D);
+    public void FrameUpdated() => Schema.Update(_Handle, 0xAAF88CE3F836C9F4);
+    public void BrightnessUpdated() => Schema.Update(_Handle, 0xAAF88CE3A4C26AE6);
+    public void BrightnessDurationUpdated() => Schema.Update(_Handle, 0xAAF88CE36700BD7C);
+    public void SpriteScaleUpdated() => Schema.Update(_Handle, 0xAAF88CE3E39D2B84);
+    public void ScaleDurationUpdated() => Schema.Update(_Handle, 0xAAF88CE35F21994B);
+    public void WorldSpaceScaleUpdated() => Schema.Update(_Handle, 0xAAF88CE37E045A3F);
+    public void GlowProxySizeUpdated() => Schema.Update(_Handle, 0xAAF88CE3C4210897);
+    public void HDRColorScaleUpdated() => Schema.Update(_Handle, 0xAAF88CE3C930B3E8);
 }

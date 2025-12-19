@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleOrientationChoiceList_t : uint {
-
+public enum ParticleOrientationChoiceList_t : uint
+{
  PARTICLE_ORIENTATION_SCREEN_ALIGNED = 0,
 
  PARTICLE_ORIENTATION_SCREEN_Z_ALIGNED = 1,

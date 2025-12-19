@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CExampleSchemaVData_MonomorphicImpl : SchemaClass, CExampleSchemaVData_Monomorphic {
+internal partial class CExampleSchemaVData_MonomorphicImpl : SchemaClass, CExampleSchemaVData_Monomorphic
+{
+    public CExampleSchemaVData_MonomorphicImpl(nint handle) : base(handle) { }
 
-  public CExampleSchemaVData_MonomorphicImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Example1Offset;
 
-  private static nint? _Example1Offset;
-
-  public ref int Example1 {
-    get {
-      if (_Example1Offset == null) {
-        _Example1Offset = Schema.GetOffset(0x43DB481BF8CF69BC);
-      }
-      return ref _Handle.AsRef<int>(_Example1Offset!.Value);
+    public ref int Example1 {
+        get {
+            _Example1Offset = _Example1Offset ?? Schema.GetOffset(0x43DB481BF8CF69BC);
+            return ref _Handle.AsRef<int>(_Example1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Example2Offset;
+    private static nint? _Example2Offset;
 
-  public ref int Example2 {
-    get {
-      if (_Example2Offset == null) {
-        _Example2Offset = Schema.GetOffset(0x43DB481BFBCF6E75);
-      }
-      return ref _Handle.AsRef<int>(_Example2Offset!.Value);
+    public ref int Example2 {
+        get {
+            _Example2Offset = _Example2Offset ?? Schema.GetOffset(0x43DB481BFBCF6E75);
+            return ref _Handle.AsRef<int>(_Example2Offset!.Value);
+        }
     }
-  }
 
 
 }

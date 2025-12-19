@@ -6,35 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EntitySpottedState_tImpl : SchemaClass, EntitySpottedState_t {
+internal partial class EntitySpottedState_tImpl : SchemaClass, EntitySpottedState_t
+{
+    public EntitySpottedState_tImpl(nint handle) : base(handle) { }
 
-  public EntitySpottedState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SpottedOffset;
 
-  private static nint? _SpottedOffset;
-
-  public ref bool Spotted {
-    get {
-      if (_SpottedOffset == null) {
-        _SpottedOffset = Schema.GetOffset(0x6E33B0176DE4F1CA);
-      }
-      return ref _Handle.AsRef<bool>(_SpottedOffset!.Value);
+    public ref bool Spotted {
+        get {
+            _SpottedOffset = _SpottedOffset ?? Schema.GetOffset(0x6E33B0176DE4F1CA);
+            return ref _Handle.AsRef<bool>(_SpottedOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<uint> SpottedByMask {
-    get => new SchemaFixedArray<uint>(_Handle, 0x6E33B0170BD77207, 2, 4, 4);
-  }
+    public ISchemaFixedArray<uint> SpottedByMask {
+        get => new SchemaFixedArray<uint>(_Handle, 0x6E33B0170BD77207, 2, 4, 4);
+    }
 
-  public void SpottedUpdated() {
-    Schema.Update(_Handle, 0x6E33B0176DE4F1CA);
-  }
-  public void SpottedByMaskUpdated() {
-    Schema.Update(_Handle, 0x6E33B0170BD77207);
-  }
+    public void SpottedUpdated() => Schema.Update(_Handle, 0x6E33B0176DE4F1CA);
+    public void SpottedByMaskUpdated() => Schema.Update(_Handle, 0x6E33B0170BD77207);
 }

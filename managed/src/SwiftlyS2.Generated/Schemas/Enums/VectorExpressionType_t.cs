@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VectorExpressionType_t : uint {
-
+public enum VectorExpressionType_t : uint
+{
  VECTOR_EXPRESSION_UNINITIALIZED = uint.MaxValue,
 
  VECTOR_EXPRESSION_ADD = 0,

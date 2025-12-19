@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAudioSentenceImpl : SchemaClass, CAudioSentence {
+internal partial class CAudioSentenceImpl : SchemaClass, CAudioSentence
+{
+    public CAudioSentenceImpl(nint handle) : base(handle) { }
 
-  public CAudioSentenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ShouldVoiceDuckOffset;
 
-  private static nint? _ShouldVoiceDuckOffset;
-
-  public ref bool ShouldVoiceDuck {
-    get {
-      if (_ShouldVoiceDuckOffset == null) {
-        _ShouldVoiceDuckOffset = Schema.GetOffset(0x25F8D719C546CD15);
-      }
-      return ref _Handle.AsRef<bool>(_ShouldVoiceDuckOffset!.Value);
+    public ref bool ShouldVoiceDuck {
+        get {
+            _ShouldVoiceDuckOffset = _ShouldVoiceDuckOffset ?? Schema.GetOffset(0x25F8D719C546CD15);
+            return ref _Handle.AsRef<bool>(_ShouldVoiceDuckOffset!.Value);
+        }
     }
-  }
-  private static nint? _RunTimePhonemesOffset;
+    private static nint? _RunTimePhonemesOffset;
 
-  public ref CUtlVector<CAudioPhonemeTag> RunTimePhonemes {
-    get {
-      if (_RunTimePhonemesOffset == null) {
-        _RunTimePhonemesOffset = Schema.GetOffset(0x25F8D719C0434838);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAudioPhonemeTag>>(_RunTimePhonemesOffset!.Value);
+    public ref CUtlVector<CAudioPhonemeTag> RunTimePhonemes {
+        get {
+            _RunTimePhonemesOffset = _RunTimePhonemesOffset ?? Schema.GetOffset(0x25F8D719C0434838);
+            return ref _Handle.AsRef<CUtlVector<CAudioPhonemeTag>>(_RunTimePhonemesOffset!.Value);
+        }
     }
-  }
-  private static nint? _EmphasisSamplesOffset;
+    private static nint? _EmphasisSamplesOffset;
 
-  public ref CUtlVector<CAudioEmphasisSample> EmphasisSamples {
-    get {
-      if (_EmphasisSamplesOffset == null) {
-        _EmphasisSamplesOffset = Schema.GetOffset(0x25F8D7194EBE8F82);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAudioEmphasisSample>>(_EmphasisSamplesOffset!.Value);
+    public ref CUtlVector<CAudioEmphasisSample> EmphasisSamples {
+        get {
+            _EmphasisSamplesOffset = _EmphasisSamplesOffset ?? Schema.GetOffset(0x25F8D7194EBE8F82);
+            return ref _Handle.AsRef<CUtlVector<CAudioEmphasisSample>>(_EmphasisSamplesOffset!.Value);
+        }
     }
-  }
-  private static nint? _MorphDataOffset;
+    private static nint? _MorphDataOffset;
 
-  public CAudioMorphData MorphData {
-    get {
-      if (_MorphDataOffset == null) {
-        _MorphDataOffset = Schema.GetOffset(0x25F8D719A8207F65);
-      }
-      return new CAudioMorphDataImpl(_Handle + _MorphDataOffset!.Value);
+    public CAudioMorphData MorphData {
+        get {
+            _MorphDataOffset = _MorphDataOffset ?? Schema.GetOffset(0x25F8D719A8207F65);
+            return new CAudioMorphDataImpl(_Handle + _MorphDataOffset!.Value);
+        }
     }
-  }
 
 
 }

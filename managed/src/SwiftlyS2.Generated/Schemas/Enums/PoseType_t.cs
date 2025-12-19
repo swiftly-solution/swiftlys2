@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PoseType_t : byte {
-
+public enum PoseType_t : byte
+{
  POSETYPE_STATIC = 0,
 
  POSETYPE_DYNAMIC = 1,

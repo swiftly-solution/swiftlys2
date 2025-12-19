@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PointCameraSettings_tImpl : SchemaClass, PointCameraSettings_t {
+internal partial class PointCameraSettings_tImpl : SchemaClass, PointCameraSettings_t
+{
+    public PointCameraSettings_tImpl(nint handle) : base(handle) { }
 
-  public PointCameraSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NearBlurryDistanceOffset;
 
-  private static nint? _NearBlurryDistanceOffset;
-
-  public ref float NearBlurryDistance {
-    get {
-      if (_NearBlurryDistanceOffset == null) {
-        _NearBlurryDistanceOffset = Schema.GetOffset(0x4BE8175CEB0CA47E);
-      }
-      return ref _Handle.AsRef<float>(_NearBlurryDistanceOffset!.Value);
+    public ref float NearBlurryDistance {
+        get {
+            _NearBlurryDistanceOffset = _NearBlurryDistanceOffset ?? Schema.GetOffset(0x4BE8175CEB0CA47E);
+            return ref _Handle.AsRef<float>(_NearBlurryDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _NearCrispDistanceOffset;
+    private static nint? _NearCrispDistanceOffset;
 
-  public ref float NearCrispDistance {
-    get {
-      if (_NearCrispDistanceOffset == null) {
-        _NearCrispDistanceOffset = Schema.GetOffset(0x4BE8175CF0C9A8C7);
-      }
-      return ref _Handle.AsRef<float>(_NearCrispDistanceOffset!.Value);
+    public ref float NearCrispDistance {
+        get {
+            _NearCrispDistanceOffset = _NearCrispDistanceOffset ?? Schema.GetOffset(0x4BE8175CF0C9A8C7);
+            return ref _Handle.AsRef<float>(_NearCrispDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _FarCrispDistanceOffset;
+    private static nint? _FarCrispDistanceOffset;
 
-  public ref float FarCrispDistance {
-    get {
-      if (_FarCrispDistanceOffset == null) {
-        _FarCrispDistanceOffset = Schema.GetOffset(0x4BE8175CE95AEE28);
-      }
-      return ref _Handle.AsRef<float>(_FarCrispDistanceOffset!.Value);
+    public ref float FarCrispDistance {
+        get {
+            _FarCrispDistanceOffset = _FarCrispDistanceOffset ?? Schema.GetOffset(0x4BE8175CE95AEE28);
+            return ref _Handle.AsRef<float>(_FarCrispDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _FarBlurryDistanceOffset;
+    private static nint? _FarBlurryDistanceOffset;
 
-  public ref float FarBlurryDistance {
-    get {
-      if (_FarBlurryDistanceOffset == null) {
-        _FarBlurryDistanceOffset = Schema.GetOffset(0x4BE8175CF8892257);
-      }
-      return ref _Handle.AsRef<float>(_FarBlurryDistanceOffset!.Value);
+    public ref float FarBlurryDistance {
+        get {
+            _FarBlurryDistanceOffset = _FarBlurryDistanceOffset ?? Schema.GetOffset(0x4BE8175CF8892257);
+            return ref _Handle.AsRef<float>(_FarBlurryDistanceOffset!.Value);
+        }
     }
-  }
 
 
 }

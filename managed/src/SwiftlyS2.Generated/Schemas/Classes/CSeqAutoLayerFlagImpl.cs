@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSeqAutoLayerFlagImpl : SchemaClass, CSeqAutoLayerFlag {
+internal partial class CSeqAutoLayerFlagImpl : SchemaClass, CSeqAutoLayerFlag
+{
+    public CSeqAutoLayerFlagImpl(nint handle) : base(handle) { }
 
-  public CSeqAutoLayerFlagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PostOffset;
 
-  private static nint? _PostOffset;
-
-  public ref bool Post {
-    get {
-      if (_PostOffset == null) {
-        _PostOffset = Schema.GetOffset(0x9E41A1515698A5A7);
-      }
-      return ref _Handle.AsRef<bool>(_PostOffset!.Value);
+    public ref bool Post {
+        get {
+            _PostOffset = _PostOffset ?? Schema.GetOffset(0x9E41A1515698A5A7);
+            return ref _Handle.AsRef<bool>(_PostOffset!.Value);
+        }
     }
-  }
-  private static nint? _SplineOffset;
+    private static nint? _SplineOffset;
 
-  public ref bool Spline {
-    get {
-      if (_SplineOffset == null) {
-        _SplineOffset = Schema.GetOffset(0x9E41A1512F9204DC);
-      }
-      return ref _Handle.AsRef<bool>(_SplineOffset!.Value);
+    public ref bool Spline {
+        get {
+            _SplineOffset = _SplineOffset ?? Schema.GetOffset(0x9E41A1512F9204DC);
+            return ref _Handle.AsRef<bool>(_SplineOffset!.Value);
+        }
     }
-  }
-  private static nint? _XFadeOffset;
+    private static nint? _XFadeOffset;
 
-  public ref bool XFade {
-    get {
-      if (_XFadeOffset == null) {
-        _XFadeOffset = Schema.GetOffset(0x9E41A1511DEAA5A9);
-      }
-      return ref _Handle.AsRef<bool>(_XFadeOffset!.Value);
+    public ref bool XFade {
+        get {
+            _XFadeOffset = _XFadeOffset ?? Schema.GetOffset(0x9E41A1511DEAA5A9);
+            return ref _Handle.AsRef<bool>(_XFadeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoBlendOffset;
+    private static nint? _NoBlendOffset;
 
-  public ref bool NoBlend {
-    get {
-      if (_NoBlendOffset == null) {
-        _NoBlendOffset = Schema.GetOffset(0x9E41A15180E307E1);
-      }
-      return ref _Handle.AsRef<bool>(_NoBlendOffset!.Value);
+    public ref bool NoBlend {
+        get {
+            _NoBlendOffset = _NoBlendOffset ?? Schema.GetOffset(0x9E41A15180E307E1);
+            return ref _Handle.AsRef<bool>(_NoBlendOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalOffset;
+    private static nint? _LocalOffset;
 
-  public ref bool Local {
-    get {
-      if (_LocalOffset == null) {
-        _LocalOffset = Schema.GetOffset(0x9E41A15130D5CDE8);
-      }
-      return ref _Handle.AsRef<bool>(_LocalOffset!.Value);
+    public ref bool Local {
+        get {
+            _LocalOffset = _LocalOffset ?? Schema.GetOffset(0x9E41A15130D5CDE8);
+            return ref _Handle.AsRef<bool>(_LocalOffset!.Value);
+        }
     }
-  }
-  private static nint? _PoseOffset;
+    private static nint? _PoseOffset;
 
-  public ref bool Pose {
-    get {
-      if (_PoseOffset == null) {
-        _PoseOffset = Schema.GetOffset(0x9E41A15145988AE4);
-      }
-      return ref _Handle.AsRef<bool>(_PoseOffset!.Value);
+    public ref bool Pose {
+        get {
+            _PoseOffset = _PoseOffset ?? Schema.GetOffset(0x9E41A15145988AE4);
+            return ref _Handle.AsRef<bool>(_PoseOffset!.Value);
+        }
     }
-  }
-  private static nint? _FetchFrameOffset;
+    private static nint? _FetchFrameOffset;
 
-  public ref bool FetchFrame {
-    get {
-      if (_FetchFrameOffset == null) {
-        _FetchFrameOffset = Schema.GetOffset(0x9E41A15118941788);
-      }
-      return ref _Handle.AsRef<bool>(_FetchFrameOffset!.Value);
+    public ref bool FetchFrame {
+        get {
+            _FetchFrameOffset = _FetchFrameOffset ?? Schema.GetOffset(0x9E41A15118941788);
+            return ref _Handle.AsRef<bool>(_FetchFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _SubtractOffset;
+    private static nint? _SubtractOffset;
 
-  public ref bool Subtract {
-    get {
-      if (_SubtractOffset == null) {
-        _SubtractOffset = Schema.GetOffset(0x9E41A1514F203AC1);
-      }
-      return ref _Handle.AsRef<bool>(_SubtractOffset!.Value);
+    public ref bool Subtract {
+        get {
+            _SubtractOffset = _SubtractOffset ?? Schema.GetOffset(0x9E41A1514F203AC1);
+            return ref _Handle.AsRef<bool>(_SubtractOffset!.Value);
+        }
     }
-  }
 
 
 }

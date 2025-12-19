@@ -6,81 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTonemapController2Impl : CBaseEntityImpl, CTonemapController2 {
+internal partial class CTonemapController2Impl : CBaseEntityImpl, CTonemapController2
+{
+    public CTonemapController2Impl(nint handle) : base(handle) { }
 
-  public CTonemapController2Impl(nint handle) : base(handle) {
-  }
+    private static nint? _AutoExposureMinOffset;
 
-  private static nint? _AutoExposureMinOffset;
-
-  public ref float AutoExposureMin {
-    get {
-      if (_AutoExposureMinOffset == null) {
-        _AutoExposureMinOffset = Schema.GetOffset(0xD2B5E9D27D8FC60B);
-      }
-      return ref _Handle.AsRef<float>(_AutoExposureMinOffset!.Value);
+    public ref float AutoExposureMin {
+        get {
+            _AutoExposureMinOffset = _AutoExposureMinOffset ?? Schema.GetOffset(0xD2B5E9D27D8FC60B);
+            return ref _Handle.AsRef<float>(_AutoExposureMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _AutoExposureMaxOffset;
+    private static nint? _AutoExposureMaxOffset;
 
-  public ref float AutoExposureMax {
-    get {
-      if (_AutoExposureMaxOffset == null) {
-        _AutoExposureMaxOffset = Schema.GetOffset(0xD2B5E9D2937C60F5);
-      }
-      return ref _Handle.AsRef<float>(_AutoExposureMaxOffset!.Value);
+    public ref float AutoExposureMax {
+        get {
+            _AutoExposureMaxOffset = _AutoExposureMaxOffset ?? Schema.GetOffset(0xD2B5E9D2937C60F5);
+            return ref _Handle.AsRef<float>(_AutoExposureMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExposureAdaptationSpeedUpOffset;
+    private static nint? _ExposureAdaptationSpeedUpOffset;
 
-  public ref float ExposureAdaptationSpeedUp {
-    get {
-      if (_ExposureAdaptationSpeedUpOffset == null) {
-        _ExposureAdaptationSpeedUpOffset = Schema.GetOffset(0xD2B5E9D2D587708B);
-      }
-      return ref _Handle.AsRef<float>(_ExposureAdaptationSpeedUpOffset!.Value);
+    public ref float ExposureAdaptationSpeedUp {
+        get {
+            _ExposureAdaptationSpeedUpOffset = _ExposureAdaptationSpeedUpOffset ?? Schema.GetOffset(0xD2B5E9D2D587708B);
+            return ref _Handle.AsRef<float>(_ExposureAdaptationSpeedUpOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExposureAdaptationSpeedDownOffset;
+    private static nint? _ExposureAdaptationSpeedDownOffset;
 
-  public ref float ExposureAdaptationSpeedDown {
-    get {
-      if (_ExposureAdaptationSpeedDownOffset == null) {
-        _ExposureAdaptationSpeedDownOffset = Schema.GetOffset(0xD2B5E9D232DAF29E);
-      }
-      return ref _Handle.AsRef<float>(_ExposureAdaptationSpeedDownOffset!.Value);
+    public ref float ExposureAdaptationSpeedDown {
+        get {
+            _ExposureAdaptationSpeedDownOffset = _ExposureAdaptationSpeedDownOffset ?? Schema.GetOffset(0xD2B5E9D232DAF29E);
+            return ref _Handle.AsRef<float>(_ExposureAdaptationSpeedDownOffset!.Value);
+        }
     }
-  }
-  private static nint? _TonemapEVSmoothingRangeOffset;
+    private static nint? _TonemapEVSmoothingRangeOffset;
 
-  public ref float TonemapEVSmoothingRange {
-    get {
-      if (_TonemapEVSmoothingRangeOffset == null) {
-        _TonemapEVSmoothingRangeOffset = Schema.GetOffset(0xD2B5E9D29C2546CB);
-      }
-      return ref _Handle.AsRef<float>(_TonemapEVSmoothingRangeOffset!.Value);
+    public ref float TonemapEVSmoothingRange {
+        get {
+            _TonemapEVSmoothingRangeOffset = _TonemapEVSmoothingRangeOffset ?? Schema.GetOffset(0xD2B5E9D29C2546CB);
+            return ref _Handle.AsRef<float>(_TonemapEVSmoothingRangeOffset!.Value);
+        }
     }
-  }
 
-  public void AutoExposureMinUpdated() {
-    Schema.Update(_Handle, 0xD2B5E9D27D8FC60B);
-  }
-  public void AutoExposureMaxUpdated() {
-    Schema.Update(_Handle, 0xD2B5E9D2937C60F5);
-  }
-  public void ExposureAdaptationSpeedUpUpdated() {
-    Schema.Update(_Handle, 0xD2B5E9D2D587708B);
-  }
-  public void ExposureAdaptationSpeedDownUpdated() {
-    Schema.Update(_Handle, 0xD2B5E9D232DAF29E);
-  }
-  public void TonemapEVSmoothingRangeUpdated() {
-    Schema.Update(_Handle, 0xD2B5E9D29C2546CB);
-  }
+    public void AutoExposureMinUpdated() => Schema.Update(_Handle, 0xD2B5E9D27D8FC60B);
+    public void AutoExposureMaxUpdated() => Schema.Update(_Handle, 0xD2B5E9D2937C60F5);
+    public void ExposureAdaptationSpeedUpUpdated() => Schema.Update(_Handle, 0xD2B5E9D2D587708B);
+    public void ExposureAdaptationSpeedDownUpdated() => Schema.Update(_Handle, 0xD2B5E9D232DAF29E);
+    public void TonemapEVSmoothingRangeUpdated() => Schema.Update(_Handle, 0xD2B5E9D29C2546CB);
 }

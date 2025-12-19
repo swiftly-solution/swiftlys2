@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EntityIOTargetType_t : uint {
-
+public enum EntityIOTargetType_t : uint
+{
  ENTITY_IO_TARGET_INVALID = uint.MaxValue,
 
  ENTITY_IO_TARGET_ENTITYNAME = 2,

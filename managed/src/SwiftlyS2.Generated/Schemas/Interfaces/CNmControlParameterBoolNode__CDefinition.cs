@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmControlParameterBoolNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmControlParameterBoolNode__CDefinition> {
-
-  static CNmControlParameterBoolNode__CDefinition ISchemaClass<CNmControlParameterBoolNode__CDefinition>.From(nint handle) => new CNmControlParameterBoolNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmControlParameterBoolNode__CDefinition>.Size => 16;
-  static string? ISchemaClass<CNmControlParameterBoolNode__CDefinition>.ClassName => null;
+public partial interface CNmControlParameterBoolNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmControlParameterBoolNode__CDefinition>
+{
+    static CNmControlParameterBoolNode__CDefinition ISchemaClass<CNmControlParameterBoolNode__CDefinition>.From(nint handle) => new CNmControlParameterBoolNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmControlParameterBoolNode__CDefinition>.Size => 16;
+    static string? ISchemaClass<CNmControlParameterBoolNode__CDefinition>.ClassName => null;
 
 
 

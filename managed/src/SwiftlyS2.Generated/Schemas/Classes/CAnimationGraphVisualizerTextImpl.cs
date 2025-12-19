@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimationGraphVisualizerTextImpl : CAnimationGraphVisualizerPrimitiveBaseImpl, CAnimationGraphVisualizerText {
+internal partial class CAnimationGraphVisualizerTextImpl : CAnimationGraphVisualizerPrimitiveBaseImpl, CAnimationGraphVisualizerText
+{
+    public CAnimationGraphVisualizerTextImpl(nint handle) : base(handle) { }
 
-  public CAnimationGraphVisualizerTextImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WsPositionOffset;
 
-  private static nint? _WsPositionOffset;
-
-  public ref Vector WsPosition {
-    get {
-      if (_WsPositionOffset == null) {
-        _WsPositionOffset = Schema.GetOffset(0x123E08CFCA77AB88);
-      }
-      return ref _Handle.AsRef<Vector>(_WsPositionOffset!.Value);
+    public ref Vector WsPosition {
+        get {
+            _WsPositionOffset = _WsPositionOffset ?? Schema.GetOffset(0x123E08CFCA77AB88);
+            return ref _Handle.AsRef<Vector>(_WsPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorOffset;
+    private static nint? _ColorOffset;
 
-  public ref Color Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x123E08CFD7D017D8);
-      }
-      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+    public ref Color Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x123E08CFD7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _TextOffset;
+    private static nint? _TextOffset;
 
-  public string Text {
-    get {
-      if (_TextOffset == null) {
-        _TextOffset = Schema.GetOffset(0x123E08CFFB9532BE);
-      }
-      var ptr = _Handle.Read<nint>(_TextOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_TextOffset == null) {
-        _TextOffset = Schema.GetOffset(0x123E08CFFB9532BE);
-      }
-      Schema.SetString(_Handle, _TextOffset!.Value, value);
-    }
-  } 
+    public string Text {
+        get {
+            _TextOffset = _TextOffset ?? Schema.GetOffset(0x123E08CFFB9532BE);
+            return Schema.GetString(_Handle.Read<nint>(_TextOffset!.Value));
+        }
+        set {
+            _TextOffset = _TextOffset ?? Schema.GetOffset(0x123E08CFFB9532BE);
+            Schema.SetString(_Handle, _TextOffset!.Value, value);
+        }
+    } 
 
 
 }

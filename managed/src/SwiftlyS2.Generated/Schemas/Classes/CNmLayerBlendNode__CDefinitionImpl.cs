@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmLayerBlendNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmLayerBlendNode__CDefinition {
+internal partial class CNmLayerBlendNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmLayerBlendNode__CDefinition
+{
+    public CNmLayerBlendNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmLayerBlendNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BaseNodeIdxOffset;
 
-  private static nint? _BaseNodeIdxOffset;
-
-  public ref short BaseNodeIdx {
-    get {
-      if (_BaseNodeIdxOffset == null) {
-        _BaseNodeIdxOffset = Schema.GetOffset(0xF9CDDBC5C07C7467);
-      }
-      return ref _Handle.AsRef<short>(_BaseNodeIdxOffset!.Value);
+    public ref short BaseNodeIdx {
+        get {
+            _BaseNodeIdxOffset = _BaseNodeIdxOffset ?? Schema.GetOffset(0xF9CDDBC5C07C7467);
+            return ref _Handle.AsRef<short>(_BaseNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnlySampleBaseRootMotionOffset;
+    private static nint? _OnlySampleBaseRootMotionOffset;
 
-  public ref bool OnlySampleBaseRootMotion {
-    get {
-      if (_OnlySampleBaseRootMotionOffset == null) {
-        _OnlySampleBaseRootMotionOffset = Schema.GetOffset(0xF9CDDBC5ABE796B2);
-      }
-      return ref _Handle.AsRef<bool>(_OnlySampleBaseRootMotionOffset!.Value);
+    public ref bool OnlySampleBaseRootMotion {
+        get {
+            _OnlySampleBaseRootMotionOffset = _OnlySampleBaseRootMotionOffset ?? Schema.GetOffset(0xF9CDDBC5ABE796B2);
+            return ref _Handle.AsRef<bool>(_OnlySampleBaseRootMotionOffset!.Value);
+        }
     }
-  }
-  private static nint? _LayerDefinitionOffset;
+    private static nint? _LayerDefinitionOffset;
 
-  public SchemaUntypedField LayerDefinition {
-    get {
-      if (_LayerDefinitionOffset == null) {
-        _LayerDefinitionOffset = Schema.GetOffset(0xF9CDDBC51AE2DAAF);
-      }
-      return new SchemaUntypedField(_Handle + _LayerDefinitionOffset!.Value);
+    public SchemaUntypedField LayerDefinition {
+        get {
+            _LayerDefinitionOffset = _LayerDefinitionOffset ?? Schema.GetOffset(0xF9CDDBC51AE2DAAF);
+            return new SchemaUntypedField(_Handle + _LayerDefinitionOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventPreDataUpdate_tImpl : SchemaClass, EventPreDataUpdate_t {
+internal partial class EventPreDataUpdate_tImpl : SchemaClass, EventPreDataUpdate_t
+{
+    public EventPreDataUpdate_tImpl(nint handle) : base(handle) { }
 
-  public EventPreDataUpdate_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CountOffset;
 
-  private static nint? _CountOffset;
-
-  public ref int Count {
-    get {
-      if (_CountOffset == null) {
-        _CountOffset = Schema.GetOffset(0xEDF6C5BA7D31AC08);
-      }
-      return ref _Handle.AsRef<int>(_CountOffset!.Value);
+    public ref int Count {
+        get {
+            _CountOffset = _CountOffset ?? Schema.GetOffset(0xEDF6C5BA7D31AC08);
+            return ref _Handle.AsRef<int>(_CountOffset!.Value);
+        }
     }
-  }
 
 
 }

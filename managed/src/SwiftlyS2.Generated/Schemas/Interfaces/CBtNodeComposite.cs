@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBtNodeComposite : CBtNode, ISchemaClass<CBtNodeComposite> {
-
-  static CBtNodeComposite ISchemaClass<CBtNodeComposite>.From(nint handle) => new CBtNodeCompositeImpl(handle);
-  static int ISchemaClass<CBtNodeComposite>.Size => 88;
-  static string? ISchemaClass<CBtNodeComposite>.ClassName => null;
+public partial interface CBtNodeComposite : CBtNode, ISchemaClass<CBtNodeComposite>
+{
+    static CBtNodeComposite ISchemaClass<CBtNodeComposite>.From(nint handle) => new CBtNodeCompositeImpl(handle);
+    static int ISchemaClass<CBtNodeComposite>.Size => 88;
+    static string? ISchemaClass<CBtNodeComposite>.ClassName => null;
 
 
 

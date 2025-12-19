@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ExtentImpl : SchemaClass, Extent {
+internal partial class ExtentImpl : SchemaClass, Extent
+{
+    public ExtentImpl(nint handle) : base(handle) { }
 
-  public ExtentImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LoOffset;
 
-  private static nint? _LoOffset;
-
-  public ref Vector Lo {
-    get {
-      if (_LoOffset == null) {
-        _LoOffset = Schema.GetOffset(0x6E8BE8394231C06C);
-      }
-      return ref _Handle.AsRef<Vector>(_LoOffset!.Value);
+    public ref Vector Lo {
+        get {
+            _LoOffset = _LoOffset ?? Schema.GetOffset(0x6E8BE8394231C06C);
+            return ref _Handle.AsRef<Vector>(_LoOffset!.Value);
+        }
     }
-  }
-  private static nint? _HiOffset;
+    private static nint? _HiOffset;
 
-  public ref Vector Hi {
-    get {
-      if (_HiOffset == null) {
-        _HiOffset = Schema.GetOffset(0x6E8BE839683AF69A);
-      }
-      return ref _Handle.AsRef<Vector>(_HiOffset!.Value);
+    public ref Vector Hi {
+        get {
+            _HiOffset = _HiOffset ?? Schema.GetOffset(0x6E8BE839683AF69A);
+            return ref _Handle.AsRef<Vector>(_HiOffset!.Value);
+        }
     }
-  }
 
 
 }

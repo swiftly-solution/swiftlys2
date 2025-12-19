@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLookAtUpdateNodeImpl : CUnaryUpdateNodeImpl, CLookAtUpdateNode {
+internal partial class CLookAtUpdateNodeImpl : CUnaryUpdateNodeImpl, CLookAtUpdateNode
+{
+    public CLookAtUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CLookAtUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OpFixedSettingsOffset;
 
-  private static nint? _OpFixedSettingsOffset;
-
-  public LookAtOpFixedSettings_t OpFixedSettings {
-    get {
-      if (_OpFixedSettingsOffset == null) {
-        _OpFixedSettingsOffset = Schema.GetOffset(0xC17476D5E533AB09);
-      }
-      return new LookAtOpFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+    public LookAtOpFixedSettings_t OpFixedSettings {
+        get {
+            _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0xC17476D5E533AB09);
+            return new LookAtOpFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetOffset;
+    private static nint? _TargetOffset;
 
-  public ref AnimVectorSource Target {
-    get {
-      if (_TargetOffset == null) {
-        _TargetOffset = Schema.GetOffset(0xC17476D5FA08A9E8);
-      }
-      return ref _Handle.AsRef<AnimVectorSource>(_TargetOffset!.Value);
+    public ref AnimVectorSource Target {
+        get {
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0xC17476D5FA08A9E8);
+            return ref _Handle.AsRef<AnimVectorSource>(_TargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamIndexOffset;
+    private static nint? _ParamIndexOffset;
 
-  public CAnimParamHandle ParamIndex {
-    get {
-      if (_ParamIndexOffset == null) {
-        _ParamIndexOffset = Schema.GetOffset(0xC17476D561990A86);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+    public CAnimParamHandle ParamIndex {
+        get {
+            _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xC17476D561990A86);
+            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightParamIndexOffset;
+    private static nint? _WeightParamIndexOffset;
 
-  public CAnimParamHandle WeightParamIndex {
-    get {
-      if (_WeightParamIndexOffset == null) {
-        _WeightParamIndexOffset = Schema.GetOffset(0xC17476D50F2AED7A);
-      }
-      return new CAnimParamHandleImpl(_Handle + _WeightParamIndexOffset!.Value);
+    public CAnimParamHandle WeightParamIndex {
+        get {
+            _WeightParamIndexOffset = _WeightParamIndexOffset ?? Schema.GetOffset(0xC17476D50F2AED7A);
+            return new CAnimParamHandleImpl(_Handle + _WeightParamIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResetChildOffset;
+    private static nint? _ResetChildOffset;
 
-  public ref bool ResetChild {
-    get {
-      if (_ResetChildOffset == null) {
-        _ResetChildOffset = Schema.GetOffset(0xC17476D565CC88B6);
-      }
-      return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
+    public ref bool ResetChild {
+        get {
+            _ResetChildOffset = _ResetChildOffset ?? Schema.GetOffset(0xC17476D565CC88B6);
+            return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
+        }
     }
-  }
-  private static nint? _LockWhenWaningOffset;
+    private static nint? _LockWhenWaningOffset;
 
-  public ref bool LockWhenWaning {
-    get {
-      if (_LockWhenWaningOffset == null) {
-        _LockWhenWaningOffset = Schema.GetOffset(0xC17476D5EED48004);
-      }
-      return ref _Handle.AsRef<bool>(_LockWhenWaningOffset!.Value);
+    public ref bool LockWhenWaning {
+        get {
+            _LockWhenWaningOffset = _LockWhenWaningOffset ?? Schema.GetOffset(0xC17476D5EED48004);
+            return ref _Handle.AsRef<bool>(_LockWhenWaningOffset!.Value);
+        }
     }
-  }
 
 
 }

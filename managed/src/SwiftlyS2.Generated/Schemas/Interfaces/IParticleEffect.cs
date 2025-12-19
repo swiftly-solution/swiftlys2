@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface IParticleEffect : ISchemaClass<IParticleEffect> {
-
-  static IParticleEffect ISchemaClass<IParticleEffect>.From(nint handle) => new IParticleEffectImpl(handle);
-  static int ISchemaClass<IParticleEffect>.Size => 8;
-  static string? ISchemaClass<IParticleEffect>.ClassName => null;
+public partial interface IParticleEffect : ISchemaClass<IParticleEffect>
+{
+    static IParticleEffect ISchemaClass<IParticleEffect>.From(nint handle) => new IParticleEffectImpl(handle);
+    static int ISchemaClass<IParticleEffect>.Size => 8;
+    static string? ISchemaClass<IParticleEffect>.ClassName => null;
 
 
 

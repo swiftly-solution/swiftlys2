@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DirectionBetweenVecsToVecImpl : CParticleFunctionOperatorImpl, C_OP_DirectionBetweenVecsToVec {
+internal partial class C_OP_DirectionBetweenVecsToVecImpl : CParticleFunctionOperatorImpl, C_OP_DirectionBetweenVecsToVec
+{
+    public C_OP_DirectionBetweenVecsToVecImpl(nint handle) : base(handle) { }
 
-  public C_OP_DirectionBetweenVecsToVecImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x6022BA82E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x6022BA82E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _Point1Offset;
+    private static nint? _Point1Offset;
 
-  public CPerParticleVecInput Point1 {
-    get {
-      if (_Point1Offset == null) {
-        _Point1Offset = Schema.GetOffset(0x6022BA8204AD2BC0);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _Point1Offset!.Value);
+    public CPerParticleVecInput Point1 {
+        get {
+            _Point1Offset = _Point1Offset ?? Schema.GetOffset(0x6022BA8204AD2BC0);
+            return new CPerParticleVecInputImpl(_Handle + _Point1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Point2Offset;
+    private static nint? _Point2Offset;
 
-  public CPerParticleVecInput Point2 {
-    get {
-      if (_Point2Offset == null) {
-        _Point2Offset = Schema.GetOffset(0x6022BA8207AD3079);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _Point2Offset!.Value);
+    public CPerParticleVecInput Point2 {
+        get {
+            _Point2Offset = _Point2Offset ?? Schema.GetOffset(0x6022BA8207AD3079);
+            return new CPerParticleVecInputImpl(_Handle + _Point2Offset!.Value);
+        }
     }
-  }
 
 
 }

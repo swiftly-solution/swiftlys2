@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuseProgramImpl : SchemaClass, CFuseProgram {
+internal partial class CFuseProgramImpl : SchemaClass, CFuseProgram
+{
+    public CFuseProgramImpl(nint handle) : base(handle) { }
 
-  public CFuseProgramImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ProgramBufferOffset;
 
-  private static nint? _ProgramBufferOffset;
-
-  public ref CUtlVector<byte> ProgramBuffer {
-    get {
-      if (_ProgramBufferOffset == null) {
-        _ProgramBufferOffset = Schema.GetOffset(0x81E69119349962E1);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_ProgramBufferOffset!.Value);
+    public ref CUtlVector<byte> ProgramBuffer {
+        get {
+            _ProgramBufferOffset = _ProgramBufferOffset ?? Schema.GetOffset(0x81E69119349962E1);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_ProgramBufferOffset!.Value);
+        }
     }
-  }
-  private static nint? _VariablesReadOffset;
+    private static nint? _VariablesReadOffset;
 
-  public ref CUtlVector<FuseVariableIndex_t> VariablesRead {
-    get {
-      if (_VariablesReadOffset == null) {
-        _VariablesReadOffset = Schema.GetOffset(0x81E691194C160BEA);
-      }
-      return ref _Handle.AsRef<CUtlVector<FuseVariableIndex_t>>(_VariablesReadOffset!.Value);
+    public ref CUtlVector<FuseVariableIndex_t> VariablesRead {
+        get {
+            _VariablesReadOffset = _VariablesReadOffset ?? Schema.GetOffset(0x81E691194C160BEA);
+            return ref _Handle.AsRef<CUtlVector<FuseVariableIndex_t>>(_VariablesReadOffset!.Value);
+        }
     }
-  }
-  private static nint? _VariablesWrittenOffset;
+    private static nint? _VariablesWrittenOffset;
 
-  public ref CUtlVector<FuseVariableIndex_t> VariablesWritten {
-    get {
-      if (_VariablesWrittenOffset == null) {
-        _VariablesWrittenOffset = Schema.GetOffset(0x81E69119E9491C49);
-      }
-      return ref _Handle.AsRef<CUtlVector<FuseVariableIndex_t>>(_VariablesWrittenOffset!.Value);
+    public ref CUtlVector<FuseVariableIndex_t> VariablesWritten {
+        get {
+            _VariablesWrittenOffset = _VariablesWrittenOffset ?? Schema.GetOffset(0x81E69119E9491C49);
+            return ref _Handle.AsRef<CUtlVector<FuseVariableIndex_t>>(_VariablesWrittenOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxTempVarsUsedOffset;
+    private static nint? _MaxTempVarsUsedOffset;
 
-  public ref int MaxTempVarsUsed {
-    get {
-      if (_MaxTempVarsUsedOffset == null) {
-        _MaxTempVarsUsedOffset = Schema.GetOffset(0x81E69119981A1518);
-      }
-      return ref _Handle.AsRef<int>(_MaxTempVarsUsedOffset!.Value);
+    public ref int MaxTempVarsUsed {
+        get {
+            _MaxTempVarsUsedOffset = _MaxTempVarsUsedOffset ?? Schema.GetOffset(0x81E69119981A1518);
+            return ref _Handle.AsRef<int>(_MaxTempVarsUsedOffset!.Value);
+        }
     }
-  }
 
 
 }

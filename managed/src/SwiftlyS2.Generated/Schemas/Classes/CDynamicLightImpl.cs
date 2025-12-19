@@ -6,127 +6,94 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDynamicLightImpl : CBaseModelEntityImpl, CDynamicLight {
+internal partial class CDynamicLightImpl : CBaseModelEntityImpl, CDynamicLight
+{
+    public CDynamicLightImpl(nint handle) : base(handle) { }
 
-  public CDynamicLightImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActualFlagsOffset;
 
-  private static nint? _ActualFlagsOffset;
-
-  public ref byte ActualFlags {
-    get {
-      if (_ActualFlagsOffset == null) {
-        _ActualFlagsOffset = Schema.GetOffset(0x5256F8E9E685EDEE);
-      }
-      return ref _Handle.AsRef<byte>(_ActualFlagsOffset!.Value);
+    public ref byte ActualFlags {
+        get {
+            _ActualFlagsOffset = _ActualFlagsOffset ?? Schema.GetOffset(0x5256F8E9E685EDEE);
+            return ref _Handle.AsRef<byte>(_ActualFlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref byte Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x5256F8E936B92FAC);
-      }
-      return ref _Handle.AsRef<byte>(_FlagsOffset!.Value);
+    public ref byte Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x5256F8E936B92FAC);
+            return ref _Handle.AsRef<byte>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LightStyleOffset;
+    private static nint? _LightStyleOffset;
 
-  public ref byte LightStyle {
-    get {
-      if (_LightStyleOffset == null) {
-        _LightStyleOffset = Schema.GetOffset(0x5256F8E965232F30);
-      }
-      return ref _Handle.AsRef<byte>(_LightStyleOffset!.Value);
+    public ref byte LightStyle {
+        get {
+            _LightStyleOffset = _LightStyleOffset ?? Schema.GetOffset(0x5256F8E965232F30);
+            return ref _Handle.AsRef<byte>(_LightStyleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnOffset;
+    private static nint? _OnOffset;
 
-  public ref bool On {
-    get {
-      if (_OnOffset == null) {
-        _OnOffset = Schema.GetOffset(0x5256F8E9DF026050);
-      }
-      return ref _Handle.AsRef<bool>(_OnOffset!.Value);
+    public ref bool On {
+        get {
+            _OnOffset = _OnOffset ?? Schema.GetOffset(0x5256F8E9DF026050);
+            return ref _Handle.AsRef<bool>(_OnOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x5256F8E97C5B0533);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x5256F8E97C5B0533);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExponentOffset;
+    private static nint? _ExponentOffset;
 
-  public ref int Exponent {
-    get {
-      if (_ExponentOffset == null) {
-        _ExponentOffset = Schema.GetOffset(0x5256F8E99BCA80C6);
-      }
-      return ref _Handle.AsRef<int>(_ExponentOffset!.Value);
+    public ref int Exponent {
+        get {
+            _ExponentOffset = _ExponentOffset ?? Schema.GetOffset(0x5256F8E99BCA80C6);
+            return ref _Handle.AsRef<int>(_ExponentOffset!.Value);
+        }
     }
-  }
-  private static nint? _InnerAngleOffset;
+    private static nint? _InnerAngleOffset;
 
-  public ref float InnerAngle {
-    get {
-      if (_InnerAngleOffset == null) {
-        _InnerAngleOffset = Schema.GetOffset(0x5256F8E91D12DC0E);
-      }
-      return ref _Handle.AsRef<float>(_InnerAngleOffset!.Value);
+    public ref float InnerAngle {
+        get {
+            _InnerAngleOffset = _InnerAngleOffset ?? Schema.GetOffset(0x5256F8E91D12DC0E);
+            return ref _Handle.AsRef<float>(_InnerAngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OuterAngleOffset;
+    private static nint? _OuterAngleOffset;
 
-  public ref float OuterAngle {
-    get {
-      if (_OuterAngleOffset == null) {
-        _OuterAngleOffset = Schema.GetOffset(0x5256F8E9328680EF);
-      }
-      return ref _Handle.AsRef<float>(_OuterAngleOffset!.Value);
+    public ref float OuterAngle {
+        get {
+            _OuterAngleOffset = _OuterAngleOffset ?? Schema.GetOffset(0x5256F8E9328680EF);
+            return ref _Handle.AsRef<float>(_OuterAngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpotRadiusOffset;
+    private static nint? _SpotRadiusOffset;
 
-  public ref float SpotRadius {
-    get {
-      if (_SpotRadiusOffset == null) {
-        _SpotRadiusOffset = Schema.GetOffset(0x5256F8E993FBE5BB);
-      }
-      return ref _Handle.AsRef<float>(_SpotRadiusOffset!.Value);
+    public ref float SpotRadius {
+        get {
+            _SpotRadiusOffset = _SpotRadiusOffset ?? Schema.GetOffset(0x5256F8E993FBE5BB);
+            return ref _Handle.AsRef<float>(_SpotRadiusOffset!.Value);
+        }
     }
-  }
 
-  public void FlagsUpdated() {
-    Schema.Update(_Handle, 0x5256F8E936B92FAC);
-  }
-  public void LightStyleUpdated() {
-    Schema.Update(_Handle, 0x5256F8E965232F30);
-  }
-  public void RadiusUpdated() {
-    Schema.Update(_Handle, 0x5256F8E97C5B0533);
-  }
-  public void ExponentUpdated() {
-    Schema.Update(_Handle, 0x5256F8E99BCA80C6);
-  }
-  public void InnerAngleUpdated() {
-    Schema.Update(_Handle, 0x5256F8E91D12DC0E);
-  }
-  public void OuterAngleUpdated() {
-    Schema.Update(_Handle, 0x5256F8E9328680EF);
-  }
-  public void SpotRadiusUpdated() {
-    Schema.Update(_Handle, 0x5256F8E993FBE5BB);
-  }
+    public void FlagsUpdated() => Schema.Update(_Handle, 0x5256F8E936B92FAC);
+    public void LightStyleUpdated() => Schema.Update(_Handle, 0x5256F8E965232F30);
+    public void RadiusUpdated() => Schema.Update(_Handle, 0x5256F8E97C5B0533);
+    public void ExponentUpdated() => Schema.Update(_Handle, 0x5256F8E99BCA80C6);
+    public void InnerAngleUpdated() => Schema.Update(_Handle, 0x5256F8E91D12DC0E);
+    public void OuterAngleUpdated() => Schema.Update(_Handle, 0x5256F8E9328680EF);
+    public void SpotRadiusUpdated() => Schema.Update(_Handle, 0x5256F8E993FBE5BB);
 }

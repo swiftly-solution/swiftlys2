@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCSmartProp : ISchemaClass<InfoForResourceTypeCSmartProp> {
-
-  static InfoForResourceTypeCSmartProp ISchemaClass<InfoForResourceTypeCSmartProp>.From(nint handle) => new InfoForResourceTypeCSmartPropImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCSmartProp>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCSmartProp>.ClassName => null;
+public partial interface InfoForResourceTypeCSmartProp : ISchemaClass<InfoForResourceTypeCSmartProp>
+{
+    static InfoForResourceTypeCSmartProp ISchemaClass<InfoForResourceTypeCSmartProp>.From(nint handle) => new InfoForResourceTypeCSmartPropImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCSmartProp>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCSmartProp>.ClassName => null;
 
 
 

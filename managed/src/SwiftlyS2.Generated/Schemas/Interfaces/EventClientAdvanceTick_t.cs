@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventClientAdvanceTick_t : EventAdvanceTick_t, ISchemaClass<EventClientAdvanceTick_t> {
-
-  static EventClientAdvanceTick_t ISchemaClass<EventClientAdvanceTick_t>.From(nint handle) => new EventClientAdvanceTick_tImpl(handle);
-  static int ISchemaClass<EventClientAdvanceTick_t>.Size => 64;
-  static string? ISchemaClass<EventClientAdvanceTick_t>.ClassName => null;
+public partial interface EventClientAdvanceTick_t : EventAdvanceTick_t, ISchemaClass<EventClientAdvanceTick_t>
+{
+    static EventClientAdvanceTick_t ISchemaClass<EventClientAdvanceTick_t>.From(nint handle) => new EventClientAdvanceTick_tImpl(handle);
+    static int ISchemaClass<EventClientAdvanceTick_t>.Size => 64;
+    static string? ISchemaClass<EventClientAdvanceTick_t>.ClassName => null;
 
 
 

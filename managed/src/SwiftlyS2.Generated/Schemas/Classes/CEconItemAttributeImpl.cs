@@ -6,81 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEconItemAttributeImpl : SchemaClass, CEconItemAttribute {
+internal partial class CEconItemAttributeImpl : SchemaClass, CEconItemAttribute
+{
+    public CEconItemAttributeImpl(nint handle) : base(handle) { }
 
-  public CEconItemAttributeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttributeDefinitionIndexOffset;
 
-  private static nint? _AttributeDefinitionIndexOffset;
-
-  public ref ushort AttributeDefinitionIndex {
-    get {
-      if (_AttributeDefinitionIndexOffset == null) {
-        _AttributeDefinitionIndexOffset = Schema.GetOffset(0xBB0F80FC8DAFCD73);
-      }
-      return ref _Handle.AsRef<ushort>(_AttributeDefinitionIndexOffset!.Value);
+    public ref ushort AttributeDefinitionIndex {
+        get {
+            _AttributeDefinitionIndexOffset = _AttributeDefinitionIndexOffset ?? Schema.GetOffset(0xBB0F80FC8DAFCD73);
+            return ref _Handle.AsRef<ushort>(_AttributeDefinitionIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValueOffset;
+    private static nint? _ValueOffset;
 
-  public ref float Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0xBB0F80FC8DFCB984);
-      }
-      return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+    public ref float Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xBB0F80FC8DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitialValueOffset;
+    private static nint? _InitialValueOffset;
 
-  public ref float InitialValue {
-    get {
-      if (_InitialValueOffset == null) {
-        _InitialValueOffset = Schema.GetOffset(0xBB0F80FCE2DBFFF2);
-      }
-      return ref _Handle.AsRef<float>(_InitialValueOffset!.Value);
+    public ref float InitialValue {
+        get {
+            _InitialValueOffset = _InitialValueOffset ?? Schema.GetOffset(0xBB0F80FCE2DBFFF2);
+            return ref _Handle.AsRef<float>(_InitialValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _RefundableCurrencyOffset;
+    private static nint? _RefundableCurrencyOffset;
 
-  public ref int RefundableCurrency {
-    get {
-      if (_RefundableCurrencyOffset == null) {
-        _RefundableCurrencyOffset = Schema.GetOffset(0xBB0F80FC1021E694);
-      }
-      return ref _Handle.AsRef<int>(_RefundableCurrencyOffset!.Value);
+    public ref int RefundableCurrency {
+        get {
+            _RefundableCurrencyOffset = _RefundableCurrencyOffset ?? Schema.GetOffset(0xBB0F80FC1021E694);
+            return ref _Handle.AsRef<int>(_RefundableCurrencyOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetBonusOffset;
+    private static nint? _SetBonusOffset;
 
-  public ref bool SetBonus {
-    get {
-      if (_SetBonusOffset == null) {
-        _SetBonusOffset = Schema.GetOffset(0xBB0F80FCA5E9EA96);
-      }
-      return ref _Handle.AsRef<bool>(_SetBonusOffset!.Value);
+    public ref bool SetBonus {
+        get {
+            _SetBonusOffset = _SetBonusOffset ?? Schema.GetOffset(0xBB0F80FCA5E9EA96);
+            return ref _Handle.AsRef<bool>(_SetBonusOffset!.Value);
+        }
     }
-  }
 
-  public void AttributeDefinitionIndexUpdated() {
-    Schema.Update(_Handle, 0xBB0F80FC8DAFCD73);
-  }
-  public void ValueUpdated() {
-    Schema.Update(_Handle, 0xBB0F80FC8DFCB984);
-  }
-  public void InitialValueUpdated() {
-    Schema.Update(_Handle, 0xBB0F80FCE2DBFFF2);
-  }
-  public void RefundableCurrencyUpdated() {
-    Schema.Update(_Handle, 0xBB0F80FC1021E694);
-  }
-  public void SetBonusUpdated() {
-    Schema.Update(_Handle, 0xBB0F80FCA5E9EA96);
-  }
+    public void AttributeDefinitionIndexUpdated() => Schema.Update(_Handle, 0xBB0F80FC8DAFCD73);
+    public void ValueUpdated() => Schema.Update(_Handle, 0xBB0F80FC8DFCB984);
+    public void InitialValueUpdated() => Schema.Update(_Handle, 0xBB0F80FCE2DBFFF2);
+    public void RefundableCurrencyUpdated() => Schema.Update(_Handle, 0xBB0F80FC1021E694);
+    public void SetBonusUpdated() => Schema.Update(_Handle, 0xBB0F80FCA5E9EA96);
 }

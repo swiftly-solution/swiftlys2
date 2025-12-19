@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRopeOverlapHitImpl : SchemaClass, CRopeOverlapHit {
+internal partial class CRopeOverlapHitImpl : SchemaClass, CRopeOverlapHit
+{
+    public CRopeOverlapHitImpl(nint handle) : base(handle) { }
 
-  public CRopeOverlapHitImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EntityOffset;
 
-  private static nint? _EntityOffset;
-
-  public ref CHandle<CBaseEntity> Entity {
-    get {
-      if (_EntityOffset == null) {
-        _EntityOffset = Schema.GetOffset(0x9262EE3E6EBADCB0);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+    public ref CHandle<CBaseEntity> Entity {
+        get {
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x9262EE3E6EBADCB0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverlappingLinksOffset;
+    private static nint? _OverlappingLinksOffset;
 
-  public ref CUtlVector<int> OverlappingLinks {
-    get {
-      if (_OverlappingLinksOffset == null) {
-        _OverlappingLinksOffset = Schema.GetOffset(0x9262EE3E44D0B359);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_OverlappingLinksOffset!.Value);
+    public ref CUtlVector<int> OverlappingLinks {
+        get {
+            _OverlappingLinksOffset = _OverlappingLinksOffset ?? Schema.GetOffset(0x9262EE3E44D0B359);
+            return ref _Handle.AsRef<CUtlVector<int>>(_OverlappingLinksOffset!.Value);
+        }
     }
-  }
 
 
 }

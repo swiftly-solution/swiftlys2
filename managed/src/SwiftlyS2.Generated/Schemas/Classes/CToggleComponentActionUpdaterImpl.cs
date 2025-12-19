@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CToggleComponentActionUpdaterImpl : CAnimActionUpdaterImpl, CToggleComponentActionUpdater {
+internal partial class CToggleComponentActionUpdaterImpl : CAnimActionUpdaterImpl, CToggleComponentActionUpdater
+{
+    public CToggleComponentActionUpdaterImpl(nint handle) : base(handle) { }
 
-  public CToggleComponentActionUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ComponentIDOffset;
 
-  private static nint? _ComponentIDOffset;
-
-  public AnimComponentID ComponentID {
-    get {
-      if (_ComponentIDOffset == null) {
-        _ComponentIDOffset = Schema.GetOffset(0x4641AA28C1B9267D);
-      }
-      return new AnimComponentIDImpl(_Handle + _ComponentIDOffset!.Value);
+    public AnimComponentID ComponentID {
+        get {
+            _ComponentIDOffset = _ComponentIDOffset ?? Schema.GetOffset(0x4641AA28C1B9267D);
+            return new AnimComponentIDImpl(_Handle + _ComponentIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetEnabledOffset;
+    private static nint? _SetEnabledOffset;
 
-  public ref bool SetEnabled {
-    get {
-      if (_SetEnabledOffset == null) {
-        _SetEnabledOffset = Schema.GetOffset(0x4641AA28BC6294B8);
-      }
-      return ref _Handle.AsRef<bool>(_SetEnabledOffset!.Value);
+    public ref bool SetEnabled {
+        get {
+            _SetEnabledOffset = _SetEnabledOffset ?? Schema.GetOffset(0x4641AA28BC6294B8);
+            return ref _Handle.AsRef<bool>(_SetEnabledOffset!.Value);
+        }
     }
-  }
 
 
 }

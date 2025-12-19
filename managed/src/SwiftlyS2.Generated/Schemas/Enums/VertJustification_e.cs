@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VertJustification_e : uint {
-
+public enum VertJustification_e : uint
+{
  VERT_JUSTIFICATION_TOP = 0,
 
  VERT_JUSTIFICATION_CENTER = 1,

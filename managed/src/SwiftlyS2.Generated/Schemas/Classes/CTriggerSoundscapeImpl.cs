@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerSoundscapeImpl : CBaseTriggerImpl, CTriggerSoundscape {
+internal partial class CTriggerSoundscapeImpl : CBaseTriggerImpl, CTriggerSoundscape
+{
+    public CTriggerSoundscapeImpl(nint handle) : base(handle) { }
 
-  public CTriggerSoundscapeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SoundscapeOffset;
 
-  private static nint? _SoundscapeOffset;
-
-  public ref CHandle<CEnvSoundscapeTriggerable> Soundscape {
-    get {
-      if (_SoundscapeOffset == null) {
-        _SoundscapeOffset = Schema.GetOffset(0xA8ED7219EF1F0180);
-      }
-      return ref _Handle.AsRef<CHandle<CEnvSoundscapeTriggerable>>(_SoundscapeOffset!.Value);
+    public ref CHandle<CEnvSoundscapeTriggerable> Soundscape {
+        get {
+            _SoundscapeOffset = _SoundscapeOffset ?? Schema.GetOffset(0xA8ED7219EF1F0180);
+            return ref _Handle.AsRef<CHandle<CEnvSoundscapeTriggerable>>(_SoundscapeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundscapeNameOffset;
+    private static nint? _SoundscapeNameOffset;
 
-  public string SoundscapeName {
-    get {
-      if (_SoundscapeNameOffset == null) {
-        _SoundscapeNameOffset = Schema.GetOffset(0xA8ED7219BDF7AA81);
-      }
-      var ptr = _Handle.Read<nint>(_SoundscapeNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SoundscapeNameOffset == null) {
-        _SoundscapeNameOffset = Schema.GetOffset(0xA8ED7219BDF7AA81);
-      }
-      Schema.SetString(_Handle, _SoundscapeNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _SpectatorsOffset;
+    public string SoundscapeName {
+        get {
+            _SoundscapeNameOffset = _SoundscapeNameOffset ?? Schema.GetOffset(0xA8ED7219BDF7AA81);
+            return Schema.GetString(_Handle.Read<nint>(_SoundscapeNameOffset!.Value));
+        }
+        set {
+            _SoundscapeNameOffset = _SoundscapeNameOffset ?? Schema.GetOffset(0xA8ED7219BDF7AA81);
+            Schema.SetString(_Handle, _SoundscapeNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _SpectatorsOffset;
 
-  public ref CUtlVector<CHandle<CBasePlayerPawn>> Spectators {
-    get {
-      if (_SpectatorsOffset == null) {
-        _SpectatorsOffset = Schema.GetOffset(0xA8ED7219149EB35B);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerPawn>>>(_SpectatorsOffset!.Value);
+    public ref CUtlVector<CHandle<CBasePlayerPawn>> Spectators {
+        get {
+            _SpectatorsOffset = _SpectatorsOffset ?? Schema.GetOffset(0xA8ED7219149EB35B);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerPawn>>>(_SpectatorsOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface QuestProgress : ISchemaClass<QuestProgress> {
-
-  static QuestProgress ISchemaClass<QuestProgress>.From(nint handle) => new QuestProgressImpl(handle);
-  static int ISchemaClass<QuestProgress>.Size => 1;
-  static string? ISchemaClass<QuestProgress>.ClassName => null;
+public partial interface QuestProgress : ISchemaClass<QuestProgress>
+{
+    static QuestProgress ISchemaClass<QuestProgress>.From(nint handle) => new QuestProgressImpl(handle);
+    static int ISchemaClass<QuestProgress>.Size => 1;
+    static string? ISchemaClass<QuestProgress>.ClassName => null;
 
 
 

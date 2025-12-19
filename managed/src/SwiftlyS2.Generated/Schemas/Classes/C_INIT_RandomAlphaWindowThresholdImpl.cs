@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomAlphaWindowThresholdImpl : CParticleFunctionInitializerImpl, C_INIT_RandomAlphaWindowThreshold {
+internal partial class C_INIT_RandomAlphaWindowThresholdImpl : CParticleFunctionInitializerImpl, C_INIT_RandomAlphaWindowThreshold
+{
+    public C_INIT_RandomAlphaWindowThresholdImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RandomAlphaWindowThresholdImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinOffset;
 
-  private static nint? _MinOffset;
-
-  public ref float Min {
-    get {
-      if (_MinOffset == null) {
-        _MinOffset = Schema.GetOffset(0x68DB6A2E3B1A5649);
-      }
-      return ref _Handle.AsRef<float>(_MinOffset!.Value);
+    public ref float Min {
+        get {
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x68DB6A2E3B1A5649);
+            return ref _Handle.AsRef<float>(_MinOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOffset;
+    private static nint? _MaxOffset;
 
-  public ref float Max {
-    get {
-      if (_MaxOffset == null) {
-        _MaxOffset = Schema.GetOffset(0x68DB6A2E2D06B887);
-      }
-      return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+    public ref float Max {
+        get {
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x68DB6A2E2D06B887);
+            return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExponentOffset;
+    private static nint? _ExponentOffset;
 
-  public ref float Exponent {
-    get {
-      if (_ExponentOffset == null) {
-        _ExponentOffset = Schema.GetOffset(0x68DB6A2E20A7BCBC);
-      }
-      return ref _Handle.AsRef<float>(_ExponentOffset!.Value);
+    public ref float Exponent {
+        get {
+            _ExponentOffset = _ExponentOffset ?? Schema.GetOffset(0x68DB6A2E20A7BCBC);
+            return ref _Handle.AsRef<float>(_ExponentOffset!.Value);
+        }
     }
-  }
 
 
 }

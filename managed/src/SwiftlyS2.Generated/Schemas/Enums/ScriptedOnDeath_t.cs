@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ScriptedOnDeath_t : uint {
-
+public enum ScriptedOnDeath_t : uint
+{
  SS_ONDEATH_NOT_APPLICABLE = uint.MaxValue,
 
  SS_ONDEATH_UNDEFINED = 0,

@@ -6,127 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVSoundImpl : SchemaClass, CVSound {
+internal partial class CVSoundImpl : SchemaClass, CVSound
+{
+    public CVSoundImpl(nint handle) : base(handle) { }
 
-  public CVSoundImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RateOffset;
 
-  private static nint? _RateOffset;
-
-  public ref int Rate {
-    get {
-      if (_RateOffset == null) {
-        _RateOffset = Schema.GetOffset(0x478C987331106783);
-      }
-      return ref _Handle.AsRef<int>(_RateOffset!.Value);
+    public ref int Rate {
+        get {
+            _RateOffset = _RateOffset ?? Schema.GetOffset(0x478C987331106783);
+            return ref _Handle.AsRef<int>(_RateOffset!.Value);
+        }
     }
-  }
-  private static nint? _FormatOffset;
+    private static nint? _FormatOffset;
 
-  public ref CVSoundFormat_t Format {
-    get {
-      if (_FormatOffset == null) {
-        _FormatOffset = Schema.GetOffset(0x478C9873A87491AE);
-      }
-      return ref _Handle.AsRef<CVSoundFormat_t>(_FormatOffset!.Value);
+    public ref CVSoundFormat_t Format {
+        get {
+            _FormatOffset = _FormatOffset ?? Schema.GetOffset(0x478C9873A87491AE);
+            return ref _Handle.AsRef<CVSoundFormat_t>(_FormatOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChannelsOffset;
+    private static nint? _ChannelsOffset;
 
-  public ref uint Channels {
-    get {
-      if (_ChannelsOffset == null) {
-        _ChannelsOffset = Schema.GetOffset(0x478C98735A815AD1);
-      }
-      return ref _Handle.AsRef<uint>(_ChannelsOffset!.Value);
+    public ref uint Channels {
+        get {
+            _ChannelsOffset = _ChannelsOffset ?? Schema.GetOffset(0x478C98735A815AD1);
+            return ref _Handle.AsRef<uint>(_ChannelsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopStartOffset;
+    private static nint? _LoopStartOffset;
 
-  public ref int LoopStart {
-    get {
-      if (_LoopStartOffset == null) {
-        _LoopStartOffset = Schema.GetOffset(0x478C9873A12E4295);
-      }
-      return ref _Handle.AsRef<int>(_LoopStartOffset!.Value);
+    public ref int LoopStart {
+        get {
+            _LoopStartOffset = _LoopStartOffset ?? Schema.GetOffset(0x478C9873A12E4295);
+            return ref _Handle.AsRef<int>(_LoopStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _SampleCountOffset;
+    private static nint? _SampleCountOffset;
 
-  public ref uint SampleCount {
-    get {
-      if (_SampleCountOffset == null) {
-        _SampleCountOffset = Schema.GetOffset(0x478C98732DEF676A);
-      }
-      return ref _Handle.AsRef<uint>(_SampleCountOffset!.Value);
+    public ref uint SampleCount {
+        get {
+            _SampleCountOffset = _SampleCountOffset ?? Schema.GetOffset(0x478C98732DEF676A);
+            return ref _Handle.AsRef<uint>(_SampleCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _DurationOffset;
+    private static nint? _DurationOffset;
 
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0x478C9873BC5E3BAB);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x478C9873BC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _SentencesOffset;
+    private static nint? _SentencesOffset;
 
-  public ref CUtlVector<CAudioSentence> Sentences {
-    get {
-      if (_SentencesOffset == null) {
-        _SentencesOffset = Schema.GetOffset(0x478C98730FF1D785);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAudioSentence>>(_SentencesOffset!.Value);
+    public ref CUtlVector<CAudioSentence> Sentences {
+        get {
+            _SentencesOffset = _SentencesOffset ?? Schema.GetOffset(0x478C98730FF1D785);
+            return ref _Handle.AsRef<CUtlVector<CAudioSentence>>(_SentencesOffset!.Value);
+        }
     }
-  }
-  private static nint? _StreamingSizeOffset;
+    private static nint? _StreamingSizeOffset;
 
-  public ref uint StreamingSize {
-    get {
-      if (_StreamingSizeOffset == null) {
-        _StreamingSizeOffset = Schema.GetOffset(0x478C9873CB44A8AE);
-      }
-      return ref _Handle.AsRef<uint>(_StreamingSizeOffset!.Value);
+    public ref uint StreamingSize {
+        get {
+            _StreamingSizeOffset = _StreamingSizeOffset ?? Schema.GetOffset(0x478C9873CB44A8AE);
+            return ref _Handle.AsRef<uint>(_StreamingSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SeekTableOffset;
+    private static nint? _SeekTableOffset;
 
-  public ref CUtlVector<int> SeekTable {
-    get {
-      if (_SeekTableOffset == null) {
-        _SeekTableOffset = Schema.GetOffset(0x478C987388E17207);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_SeekTableOffset!.Value);
+    public ref CUtlVector<int> SeekTable {
+        get {
+            _SeekTableOffset = _SeekTableOffset ?? Schema.GetOffset(0x478C987388E17207);
+            return ref _Handle.AsRef<CUtlVector<int>>(_SeekTableOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopEndOffset;
+    private static nint? _LoopEndOffset;
 
-  public ref int LoopEnd {
-    get {
-      if (_LoopEndOffset == null) {
-        _LoopEndOffset = Schema.GetOffset(0x478C9873900B36CC);
-      }
-      return ref _Handle.AsRef<int>(_LoopEndOffset!.Value);
+    public ref int LoopEnd {
+        get {
+            _LoopEndOffset = _LoopEndOffset ?? Schema.GetOffset(0x478C9873900B36CC);
+            return ref _Handle.AsRef<int>(_LoopEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _EncodedHeaderOffset;
+    private static nint? _EncodedHeaderOffset;
 
-  public ref CUtlBinaryBlock EncodedHeader {
-    get {
-      if (_EncodedHeaderOffset == null) {
-        _EncodedHeaderOffset = Schema.GetOffset(0x478C9873BDA3C36C);
-      }
-      return ref _Handle.AsRef<CUtlBinaryBlock>(_EncodedHeaderOffset!.Value);
+    public ref CUtlBinaryBlock EncodedHeader {
+        get {
+            _EncodedHeaderOffset = _EncodedHeaderOffset ?? Schema.GetOffset(0x478C9873BDA3C36C);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_EncodedHeaderOffset!.Value);
+        }
     }
-  }
 
 
 }

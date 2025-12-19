@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleFloatBiasType_t : uint {
-
+public enum ParticleFloatBiasType_t : uint
+{
  PF_BIAS_TYPE_INVALID = uint.MaxValue,
 
  PF_BIAS_TYPE_STANDARD = 0,

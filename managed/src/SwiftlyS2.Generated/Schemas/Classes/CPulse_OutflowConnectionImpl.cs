@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulse_OutflowConnectionImpl : SchemaClass, CPulse_OutflowConnection {
+internal partial class CPulse_OutflowConnectionImpl : SchemaClass, CPulse_OutflowConnection
+{
+    public CPulse_OutflowConnectionImpl(nint handle) : base(handle) { }
 
-  public CPulse_OutflowConnectionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceOutflowNameOffset;
 
-  private static nint? _SourceOutflowNameOffset;
-
-  public SchemaUntypedField SourceOutflowName {
-    get {
-      if (_SourceOutflowNameOffset == null) {
-        _SourceOutflowNameOffset = Schema.GetOffset(0x58023C685EA2FFCF);
-      }
-      return new SchemaUntypedField(_Handle + _SourceOutflowNameOffset!.Value);
+    public SchemaUntypedField SourceOutflowName {
+        get {
+            _SourceOutflowNameOffset = _SourceOutflowNameOffset ?? Schema.GetOffset(0x58023C685EA2FFCF);
+            return new SchemaUntypedField(_Handle + _SourceOutflowNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestChunkOffset;
+    private static nint? _DestChunkOffset;
 
-  public PulseRuntimeChunkIndex_t DestChunk {
-    get {
-      if (_DestChunkOffset == null) {
-        _DestChunkOffset = Schema.GetOffset(0x58023C68D6AC502E);
-      }
-      return new PulseRuntimeChunkIndex_tImpl(_Handle + _DestChunkOffset!.Value);
+    public PulseRuntimeChunkIndex_t DestChunk {
+        get {
+            _DestChunkOffset = _DestChunkOffset ?? Schema.GetOffset(0x58023C68D6AC502E);
+            return new PulseRuntimeChunkIndex_tImpl(_Handle + _DestChunkOffset!.Value);
+        }
     }
-  }
-  private static nint? _InstructionOffset;
+    private static nint? _InstructionOffset;
 
-  public ref int Instruction {
-    get {
-      if (_InstructionOffset == null) {
-        _InstructionOffset = Schema.GetOffset(0x58023C6890E63133);
-      }
-      return ref _Handle.AsRef<int>(_InstructionOffset!.Value);
+    public ref int Instruction {
+        get {
+            _InstructionOffset = _InstructionOffset ?? Schema.GetOffset(0x58023C6890E63133);
+            return ref _Handle.AsRef<int>(_InstructionOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutflowRegisterMapOffset;
+    private static nint? _OutflowRegisterMapOffset;
 
-  public PulseRegisterMap_t OutflowRegisterMap {
-    get {
-      if (_OutflowRegisterMapOffset == null) {
-        _OutflowRegisterMapOffset = Schema.GetOffset(0x58023C68F89A90F8);
-      }
-      return new PulseRegisterMap_tImpl(_Handle + _OutflowRegisterMapOffset!.Value);
+    public PulseRegisterMap_t OutflowRegisterMap {
+        get {
+            _OutflowRegisterMapOffset = _OutflowRegisterMapOffset ?? Schema.GetOffset(0x58023C68F89A90F8);
+            return new PulseRegisterMap_tImpl(_Handle + _OutflowRegisterMapOffset!.Value);
+        }
     }
-  }
 
 
 }

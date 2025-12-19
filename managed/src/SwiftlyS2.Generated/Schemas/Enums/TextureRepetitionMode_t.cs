@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum TextureRepetitionMode_t : uint {
-
+public enum TextureRepetitionMode_t : uint
+{
  TEXTURE_REPETITION_PARTICLE = 0,
 
  TEXTURE_REPETITION_PATH = 1,

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTransitionUpdateDataImpl : SchemaClass, CTransitionUpdateData {
+internal partial class CTransitionUpdateDataImpl : SchemaClass, CTransitionUpdateData
+{
+    public CTransitionUpdateDataImpl(nint handle) : base(handle) { }
 
-  public CTransitionUpdateDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SrcStateIndexOffset;
 
-  private static nint? _SrcStateIndexOffset;
-
-  public ref byte SrcStateIndex {
-    get {
-      if (_SrcStateIndexOffset == null) {
-        _SrcStateIndexOffset = Schema.GetOffset(0xF3F18D08D2AF559E);
-      }
-      return ref _Handle.AsRef<byte>(_SrcStateIndexOffset!.Value);
+    public ref byte SrcStateIndex {
+        get {
+            _SrcStateIndexOffset = _SrcStateIndexOffset ?? Schema.GetOffset(0xF3F18D08D2AF559E);
+            return ref _Handle.AsRef<byte>(_SrcStateIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestStateIndexOffset;
+    private static nint? _DestStateIndexOffset;
 
-  public ref byte DestStateIndex {
-    get {
-      if (_DestStateIndexOffset == null) {
-        _DestStateIndexOffset = Schema.GetOffset(0xF3F18D0876246C8A);
-      }
-      return ref _Handle.AsRef<byte>(_DestStateIndexOffset!.Value);
+    public ref byte DestStateIndex {
+        get {
+            _DestStateIndexOffset = _DestStateIndexOffset ?? Schema.GetOffset(0xF3F18D0876246C8A);
+            return ref _Handle.AsRef<byte>(_DestStateIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _HandshakeMaskToDisableFirstOffset;
+    private static nint? _HandshakeMaskToDisableFirstOffset;
 
-  public SchemaUntypedField HandshakeMaskToDisableFirst {
-    get {
-      if (_HandshakeMaskToDisableFirstOffset == null) {
-        _HandshakeMaskToDisableFirstOffset = Schema.GetOffset(0xF3F18D08E58422C5);
-      }
-      return new SchemaUntypedField(_Handle + _HandshakeMaskToDisableFirstOffset!.Value);
+    public SchemaUntypedField HandshakeMaskToDisableFirst {
+        get {
+            _HandshakeMaskToDisableFirstOffset = _HandshakeMaskToDisableFirstOffset ?? Schema.GetOffset(0xF3F18D08E58422C5);
+            return new SchemaUntypedField(_Handle + _HandshakeMaskToDisableFirstOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisabledOffset;
+    private static nint? _DisabledOffset;
 
-  public SchemaUntypedField Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0xF3F18D083A7C5965);
-      }
-      return new SchemaUntypedField(_Handle + _DisabledOffset!.Value);
+    public SchemaUntypedField Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xF3F18D083A7C5965);
+            return new SchemaUntypedField(_Handle + _DisabledOffset!.Value);
+        }
     }
-  }
 
 
 }

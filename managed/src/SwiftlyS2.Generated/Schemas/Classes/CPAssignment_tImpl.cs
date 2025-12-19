@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPAssignment_tImpl : SchemaClass, CPAssignment_t {
+internal partial class CPAssignment_tImpl : SchemaClass, CPAssignment_t
+{
+    public CPAssignment_tImpl(nint handle) : base(handle) { }
 
-  public CPAssignment_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPNumberOffset;
 
-  private static nint? _CPNumberOffset;
-
-  public ref int CPNumber {
-    get {
-      if (_CPNumberOffset == null) {
-        _CPNumberOffset = Schema.GetOffset(0xEB6A63F032CCA91F);
-      }
-      return ref _Handle.AsRef<int>(_CPNumberOffset!.Value);
+    public ref int CPNumber {
+        get {
+            _CPNumberOffset = _CPNumberOffset ?? Schema.GetOffset(0xEB6A63F032CCA91F);
+            return ref _Handle.AsRef<int>(_CPNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _PosOffset;
+    private static nint? _PosOffset;
 
-  public CPerParticleVecInput Pos {
-    get {
-      if (_PosOffset == null) {
-        _PosOffset = Schema.GetOffset(0xEB6A63F0DFC9BE09);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _PosOffset!.Value);
+    public CPerParticleVecInput Pos {
+        get {
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0xEB6A63F0DFC9BE09);
+            return new CPerParticleVecInputImpl(_Handle + _PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientationModeOffset;
+    private static nint? _OrientationModeOffset;
 
-  public ref ParticleOrientationSetMode_t OrientationMode {
-    get {
-      if (_OrientationModeOffset == null) {
-        _OrientationModeOffset = Schema.GetOffset(0xEB6A63F0272947BA);
-      }
-      return ref _Handle.AsRef<ParticleOrientationSetMode_t>(_OrientationModeOffset!.Value);
+    public ref ParticleOrientationSetMode_t OrientationMode {
+        get {
+            _OrientationModeOffset = _OrientationModeOffset ?? Schema.GetOffset(0xEB6A63F0272947BA);
+            return ref _Handle.AsRef<ParticleOrientationSetMode_t>(_OrientationModeOffset!.Value);
+        }
     }
-  }
 
 
 }

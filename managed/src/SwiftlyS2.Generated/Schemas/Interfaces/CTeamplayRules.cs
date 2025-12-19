@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTeamplayRules : CMultiplayRules, ISchemaClass<CTeamplayRules> {
-
-  static CTeamplayRules ISchemaClass<CTeamplayRules>.From(nint handle) => new CTeamplayRulesImpl(handle);
-  static int ISchemaClass<CTeamplayRules>.Size => 192;
-  static string? ISchemaClass<CTeamplayRules>.ClassName => null;
+public partial interface CTeamplayRules : CMultiplayRules, ISchemaClass<CTeamplayRules>
+{
+    static CTeamplayRules ISchemaClass<CTeamplayRules>.From(nint handle) => new CTeamplayRulesImpl(handle);
+    static int ISchemaClass<CTeamplayRules>.Size => 192;
+    static string? ISchemaClass<CTeamplayRules>.ClassName => null;
 
 
 

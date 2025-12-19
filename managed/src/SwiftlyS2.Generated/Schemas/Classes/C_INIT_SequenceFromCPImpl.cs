@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_SequenceFromCPImpl : CParticleFunctionInitializerImpl, C_INIT_SequenceFromCP {
+internal partial class C_INIT_SequenceFromCPImpl : CParticleFunctionInitializerImpl, C_INIT_SequenceFromCP
+{
+    public C_INIT_SequenceFromCPImpl(nint handle) : base(handle) { }
 
-  public C_INIT_SequenceFromCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _KillUnusedOffset;
 
-  private static nint? _KillUnusedOffset;
-
-  public ref bool KillUnused {
-    get {
-      if (_KillUnusedOffset == null) {
-        _KillUnusedOffset = Schema.GetOffset(0xC62FB07C81506527);
-      }
-      return ref _Handle.AsRef<bool>(_KillUnusedOffset!.Value);
+    public ref bool KillUnused {
+        get {
+            _KillUnusedOffset = _KillUnusedOffset ?? Schema.GetOffset(0xC62FB07C81506527);
+            return ref _Handle.AsRef<bool>(_KillUnusedOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleOffset;
+    private static nint? _RadiusScaleOffset;
 
-  public ref bool RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0xC62FB07CBBCB728B);
-      }
-      return ref _Handle.AsRef<bool>(_RadiusScaleOffset!.Value);
+    public ref bool RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xC62FB07CBBCB728B);
+            return ref _Handle.AsRef<bool>(_RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPOffset;
+    private static nint? _CPOffset;
 
-  public ref int CP {
-    get {
-      if (_CPOffset == null) {
-        _CPOffset = Schema.GetOffset(0xC62FB07CEB661472);
-      }
-      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    public ref int CP {
+        get {
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0xC62FB07CEB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetOffset;
+    private static nint? _OffsetOffset;
 
-  public ref Vector Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0xC62FB07CBD25CC2A);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    public ref Vector Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xC62FB07CBD25CC2A);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+        }
     }
-  }
 
 
 }

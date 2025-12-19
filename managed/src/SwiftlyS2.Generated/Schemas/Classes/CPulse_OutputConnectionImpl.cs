@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulse_OutputConnectionImpl : SchemaClass, CPulse_OutputConnection {
+internal partial class CPulse_OutputConnectionImpl : SchemaClass, CPulse_OutputConnection
+{
+    public CPulse_OutputConnectionImpl(nint handle) : base(handle) { }
 
-  public CPulse_OutputConnectionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceOutputOffset;
 
-  private static nint? _SourceOutputOffset;
-
-  public SchemaUntypedField SourceOutput {
-    get {
-      if (_SourceOutputOffset == null) {
-        _SourceOutputOffset = Schema.GetOffset(0x6DEBCD452D46D7F5);
-      }
-      return new SchemaUntypedField(_Handle + _SourceOutputOffset!.Value);
+    public SchemaUntypedField SourceOutput {
+        get {
+            _SourceOutputOffset = _SourceOutputOffset ?? Schema.GetOffset(0x6DEBCD452D46D7F5);
+            return new SchemaUntypedField(_Handle + _SourceOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetEntityOffset;
+    private static nint? _TargetEntityOffset;
 
-  public SchemaUntypedField TargetEntity {
-    get {
-      if (_TargetEntityOffset == null) {
-        _TargetEntityOffset = Schema.GetOffset(0x6DEBCD45948B1533);
-      }
-      return new SchemaUntypedField(_Handle + _TargetEntityOffset!.Value);
+    public SchemaUntypedField TargetEntity {
+        get {
+            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x6DEBCD45948B1533);
+            return new SchemaUntypedField(_Handle + _TargetEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetInputOffset;
+    private static nint? _TargetInputOffset;
 
-  public SchemaUntypedField TargetInput {
-    get {
-      if (_TargetInputOffset == null) {
-        _TargetInputOffset = Schema.GetOffset(0x6DEBCD45F1A0003C);
-      }
-      return new SchemaUntypedField(_Handle + _TargetInputOffset!.Value);
+    public SchemaUntypedField TargetInput {
+        get {
+            _TargetInputOffset = _TargetInputOffset ?? Schema.GetOffset(0x6DEBCD45F1A0003C);
+            return new SchemaUntypedField(_Handle + _TargetInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamOffset;
+    private static nint? _ParamOffset;
 
-  public SchemaUntypedField Param {
-    get {
-      if (_ParamOffset == null) {
-        _ParamOffset = Schema.GetOffset(0x6DEBCD45E85FEBB2);
-      }
-      return new SchemaUntypedField(_Handle + _ParamOffset!.Value);
+    public SchemaUntypedField Param {
+        get {
+            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x6DEBCD45E85FEBB2);
+            return new SchemaUntypedField(_Handle + _ParamOffset!.Value);
+        }
     }
-  }
 
 
 }

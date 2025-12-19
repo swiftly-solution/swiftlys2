@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleDetailLevel_t : uint {
-
+public enum ParticleDetailLevel_t : uint
+{
  PARTICLEDETAIL_LOW = 0,
 
  PARTICLEDETAIL_MEDIUM = 1,

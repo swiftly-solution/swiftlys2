@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSeqMultiFetchFlagImpl : SchemaClass, CSeqMultiFetchFlag {
+internal partial class CSeqMultiFetchFlagImpl : SchemaClass, CSeqMultiFetchFlag
+{
+    public CSeqMultiFetchFlagImpl(nint handle) : base(handle) { }
 
-  public CSeqMultiFetchFlagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RealtimeOffset;
 
-  private static nint? _RealtimeOffset;
-
-  public ref bool Realtime {
-    get {
-      if (_RealtimeOffset == null) {
-        _RealtimeOffset = Schema.GetOffset(0xE7EB44FCB658139C);
-      }
-      return ref _Handle.AsRef<bool>(_RealtimeOffset!.Value);
+    public ref bool Realtime {
+        get {
+            _RealtimeOffset = _RealtimeOffset ?? Schema.GetOffset(0xE7EB44FCB658139C);
+            return ref _Handle.AsRef<bool>(_RealtimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _CyleposeOffset;
+    private static nint? _CyleposeOffset;
 
-  public ref bool Cylepose {
-    get {
-      if (_CyleposeOffset == null) {
-        _CyleposeOffset = Schema.GetOffset(0xE7EB44FCCB757B6B);
-      }
-      return ref _Handle.AsRef<bool>(_CyleposeOffset!.Value);
+    public ref bool Cylepose {
+        get {
+            _CyleposeOffset = _CyleposeOffset ?? Schema.GetOffset(0xE7EB44FCCB757B6B);
+            return ref _Handle.AsRef<bool>(_CyleposeOffset!.Value);
+        }
     }
-  }
-  private static nint? _B0DOffset;
+    private static nint? _B0DOffset;
 
-  public ref bool B0D {
-    get {
-      if (_B0DOffset == null) {
-        _B0DOffset = Schema.GetOffset(0xE7EB44FC76DE6DB1);
-      }
-      return ref _Handle.AsRef<bool>(_B0DOffset!.Value);
+    public ref bool B0D {
+        get {
+            _B0DOffset = _B0DOffset ?? Schema.GetOffset(0xE7EB44FC76DE6DB1);
+            return ref _Handle.AsRef<bool>(_B0DOffset!.Value);
+        }
     }
-  }
-  private static nint? _B1DOffset;
+    private static nint? _B1DOffset;
 
-  public ref bool B1D {
-    get {
-      if (_B1DOffset == null) {
-        _B1DOffset = Schema.GetOffset(0xE7EB44FC50DBF348);
-      }
-      return ref _Handle.AsRef<bool>(_B1DOffset!.Value);
+    public ref bool B1D {
+        get {
+            _B1DOffset = _B1DOffset ?? Schema.GetOffset(0xE7EB44FC50DBF348);
+            return ref _Handle.AsRef<bool>(_B1DOffset!.Value);
+        }
     }
-  }
-  private static nint? _B2DOffset;
+    private static nint? _B2DOffset;
 
-  public ref bool B2D {
-    get {
-      if (_B2DOffset == null) {
-        _B2DOffset = Schema.GetOffset(0xE7EB44FC42E42C03);
-      }
-      return ref _Handle.AsRef<bool>(_B2DOffset!.Value);
+    public ref bool B2D {
+        get {
+            _B2DOffset = _B2DOffset ?? Schema.GetOffset(0xE7EB44FC42E42C03);
+            return ref _Handle.AsRef<bool>(_B2DOffset!.Value);
+        }
     }
-  }
-  private static nint? _B2D_TRIOffset;
+    private static nint? _B2D_TRIOffset;
 
-  public ref bool B2D_TRI {
-    get {
-      if (_B2D_TRIOffset == null) {
-        _B2D_TRIOffset = Schema.GetOffset(0xE7EB44FCC9FA6A0D);
-      }
-      return ref _Handle.AsRef<bool>(_B2D_TRIOffset!.Value);
+    public ref bool B2D_TRI {
+        get {
+            _B2D_TRIOffset = _B2D_TRIOffset ?? Schema.GetOffset(0xE7EB44FCC9FA6A0D);
+            return ref _Handle.AsRef<bool>(_B2D_TRIOffset!.Value);
+        }
     }
-  }
 
 
 }

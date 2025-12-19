@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimStateMachineUpdaterImpl : SchemaClass, CAnimStateMachineUpdater {
+internal partial class CAnimStateMachineUpdaterImpl : SchemaClass, CAnimStateMachineUpdater
+{
+    public CAnimStateMachineUpdaterImpl(nint handle) : base(handle) { }
 
-  public CAnimStateMachineUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StatesOffset;
 
-  private static nint? _StatesOffset;
-
-  public ref CUtlVector<CStateUpdateData> States {
-    get {
-      if (_StatesOffset == null) {
-        _StatesOffset = Schema.GetOffset(0xD25DFB766F284CFF);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStateUpdateData>>(_StatesOffset!.Value);
+    public ref CUtlVector<CStateUpdateData> States {
+        get {
+            _StatesOffset = _StatesOffset ?? Schema.GetOffset(0xD25DFB766F284CFF);
+            return ref _Handle.AsRef<CUtlVector<CStateUpdateData>>(_StatesOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransitionsOffset;
+    private static nint? _TransitionsOffset;
 
-  public ref CUtlVector<CTransitionUpdateData> Transitions {
-    get {
-      if (_TransitionsOffset == null) {
-        _TransitionsOffset = Schema.GetOffset(0xD25DFB76AD108163);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransitionUpdateData>>(_TransitionsOffset!.Value);
+    public ref CUtlVector<CTransitionUpdateData> Transitions {
+        get {
+            _TransitionsOffset = _TransitionsOffset ?? Schema.GetOffset(0xD25DFB76AD108163);
+            return ref _Handle.AsRef<CUtlVector<CTransitionUpdateData>>(_TransitionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartStateIndexOffset;
+    private static nint? _StartStateIndexOffset;
 
-  public ref int StartStateIndex {
-    get {
-      if (_StartStateIndexOffset == null) {
-        _StartStateIndexOffset = Schema.GetOffset(0xD25DFB762881C68C);
-      }
-      return ref _Handle.AsRef<int>(_StartStateIndexOffset!.Value);
+    public ref int StartStateIndex {
+        get {
+            _StartStateIndexOffset = _StartStateIndexOffset ?? Schema.GetOffset(0xD25DFB762881C68C);
+            return ref _Handle.AsRef<int>(_StartStateIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

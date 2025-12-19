@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class TagSpan_tImpl : SchemaClass, TagSpan_t {
+internal partial class TagSpan_tImpl : SchemaClass, TagSpan_t
+{
+    public TagSpan_tImpl(nint handle) : base(handle) { }
 
-  public TagSpan_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagIndexOffset;
 
-  private static nint? _TagIndexOffset;
-
-  public ref int TagIndex {
-    get {
-      if (_TagIndexOffset == null) {
-        _TagIndexOffset = Schema.GetOffset(0xA2611404D66997C9);
-      }
-      return ref _Handle.AsRef<int>(_TagIndexOffset!.Value);
+    public ref int TagIndex {
+        get {
+            _TagIndexOffset = _TagIndexOffset ?? Schema.GetOffset(0xA2611404D66997C9);
+            return ref _Handle.AsRef<int>(_TagIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartCycleOffset;
+    private static nint? _StartCycleOffset;
 
-  public ref float StartCycle {
-    get {
-      if (_StartCycleOffset == null) {
-        _StartCycleOffset = Schema.GetOffset(0xA26114043A764D4F);
-      }
-      return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
+    public ref float StartCycle {
+        get {
+            _StartCycleOffset = _StartCycleOffset ?? Schema.GetOffset(0xA26114043A764D4F);
+            return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndCycleOffset;
+    private static nint? _EndCycleOffset;
 
-  public ref float EndCycle {
-    get {
-      if (_EndCycleOffset == null) {
-        _EndCycleOffset = Schema.GetOffset(0xA26114040B523694);
-      }
-      return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
+    public ref float EndCycle {
+        get {
+            _EndCycleOffset = _EndCycleOffset ?? Schema.GetOffset(0xA26114040B523694);
+            return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
+        }
     }
-  }
 
 
 }

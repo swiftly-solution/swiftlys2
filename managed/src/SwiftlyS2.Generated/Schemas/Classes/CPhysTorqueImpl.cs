@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysTorqueImpl : CPhysForceImpl, CPhysTorque {
+internal partial class CPhysTorqueImpl : CPhysForceImpl, CPhysTorque
+{
+    public CPhysTorqueImpl(nint handle) : base(handle) { }
 
-  public CPhysTorqueImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AxisOffset;
 
-  private static nint? _AxisOffset;
-
-  public ref Vector Axis {
-    get {
-      if (_AxisOffset == null) {
-        _AxisOffset = Schema.GetOffset(0x6EADFD042B06DE94);
-      }
-      return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+    public ref Vector Axis {
+        get {
+            _AxisOffset = _AxisOffset ?? Schema.GetOffset(0x6EADFD042B06DE94);
+            return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+        }
     }
-  }
 
 
 }

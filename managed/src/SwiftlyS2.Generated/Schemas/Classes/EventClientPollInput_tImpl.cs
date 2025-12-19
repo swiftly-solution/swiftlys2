@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventClientPollInput_tImpl : SchemaClass, EventClientPollInput_t {
+internal partial class EventClientPollInput_tImpl : SchemaClass, EventClientPollInput_t
+{
+    public EventClientPollInput_tImpl(nint handle) : base(handle) { }
 
-  public EventClientPollInput_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LoopStateOffset;
 
-  private static nint? _LoopStateOffset;
-
-  public EngineLoopState_t LoopState {
-    get {
-      if (_LoopStateOffset == null) {
-        _LoopStateOffset = Schema.GetOffset(0x1E8649A0F928A2EC);
-      }
-      return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+    public EngineLoopState_t LoopState {
+        get {
+            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0x1E8649A0F928A2EC);
+            return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _RealTimeOffset;
+    private static nint? _RealTimeOffset;
 
-  public ref float RealTime {
-    get {
-      if (_RealTimeOffset == null) {
-        _RealTimeOffset = Schema.GetOffset(0x1E8649A01168EC02);
-      }
-      return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+    public ref float RealTime {
+        get {
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x1E8649A01168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMorphSetDataImpl : SchemaClass, CMorphSetData {
+internal partial class CMorphSetDataImpl : SchemaClass, CMorphSetData
+{
+    public CMorphSetDataImpl(nint handle) : base(handle) { }
 
-  public CMorphSetDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WidthOffset;
 
-  private static nint? _WidthOffset;
-
-  public ref int Width {
-    get {
-      if (_WidthOffset == null) {
-        _WidthOffset = Schema.GetOffset(0xE777C2D4119108BB);
-      }
-      return ref _Handle.AsRef<int>(_WidthOffset!.Value);
+    public ref int Width {
+        get {
+            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0xE777C2D4119108BB);
+            return ref _Handle.AsRef<int>(_WidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeightOffset;
+    private static nint? _HeightOffset;
 
-  public ref int Height {
-    get {
-      if (_HeightOffset == null) {
-        _HeightOffset = Schema.GetOffset(0xE777C2D4CAB61C56);
-      }
-      return ref _Handle.AsRef<int>(_HeightOffset!.Value);
+    public ref int Height {
+        get {
+            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0xE777C2D4CAB61C56);
+            return ref _Handle.AsRef<int>(_HeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _BundleTypesOffset;
+    private static nint? _BundleTypesOffset;
 
-  public ref CUtlVector<MorphBundleType_t> BundleTypes {
-    get {
-      if (_BundleTypesOffset == null) {
-        _BundleTypesOffset = Schema.GetOffset(0xE777C2D4B233045A);
-      }
-      return ref _Handle.AsRef<CUtlVector<MorphBundleType_t>>(_BundleTypesOffset!.Value);
+    public ref CUtlVector<MorphBundleType_t> BundleTypes {
+        get {
+            _BundleTypesOffset = _BundleTypesOffset ?? Schema.GetOffset(0xE777C2D4B233045A);
+            return ref _Handle.AsRef<CUtlVector<MorphBundleType_t>>(_BundleTypesOffset!.Value);
+        }
     }
-  }
-  private static nint? _MorphDatasOffset;
+    private static nint? _MorphDatasOffset;
 
-  public ref CUtlVector<CMorphData> MorphDatas {
-    get {
-      if (_MorphDatasOffset == null) {
-        _MorphDatasOffset = Schema.GetOffset(0xE777C2D4C1280FA2);
-      }
-      return ref _Handle.AsRef<CUtlVector<CMorphData>>(_MorphDatasOffset!.Value);
+    public ref CUtlVector<CMorphData> MorphDatas {
+        get {
+            _MorphDatasOffset = _MorphDatasOffset ?? Schema.GetOffset(0xE777C2D4C1280FA2);
+            return ref _Handle.AsRef<CUtlVector<CMorphData>>(_MorphDatasOffset!.Value);
+        }
     }
-  }
-  private static nint? _TextureAtlasOffset;
+    private static nint? _TextureAtlasOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureAtlas {
-    get {
-      if (_TextureAtlasOffset == null) {
-        _TextureAtlasOffset = Schema.GetOffset(0xE777C2D4B63CAC4D);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureAtlasOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureAtlas {
+        get {
+            _TextureAtlasOffset = _TextureAtlasOffset ?? Schema.GetOffset(0xE777C2D4B63CAC4D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureAtlasOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlexDescOffset;
+    private static nint? _FlexDescOffset;
 
-  public ref CUtlVector<CFlexDesc> FlexDesc {
-    get {
-      if (_FlexDescOffset == null) {
-        _FlexDescOffset = Schema.GetOffset(0xE777C2D4D73F3393);
-      }
-      return ref _Handle.AsRef<CUtlVector<CFlexDesc>>(_FlexDescOffset!.Value);
+    public ref CUtlVector<CFlexDesc> FlexDesc {
+        get {
+            _FlexDescOffset = _FlexDescOffset ?? Schema.GetOffset(0xE777C2D4D73F3393);
+            return ref _Handle.AsRef<CUtlVector<CFlexDesc>>(_FlexDescOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlexControllersOffset;
+    private static nint? _FlexControllersOffset;
 
-  public ref CUtlVector<CFlexController> FlexControllers {
-    get {
-      if (_FlexControllersOffset == null) {
-        _FlexControllersOffset = Schema.GetOffset(0xE777C2D4ABE5EBBB);
-      }
-      return ref _Handle.AsRef<CUtlVector<CFlexController>>(_FlexControllersOffset!.Value);
+    public ref CUtlVector<CFlexController> FlexControllers {
+        get {
+            _FlexControllersOffset = _FlexControllersOffset ?? Schema.GetOffset(0xE777C2D4ABE5EBBB);
+            return ref _Handle.AsRef<CUtlVector<CFlexController>>(_FlexControllersOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlexRulesOffset;
+    private static nint? _FlexRulesOffset;
 
-  public ref CUtlVector<CFlexRule> FlexRules {
-    get {
-      if (_FlexRulesOffset == null) {
-        _FlexRulesOffset = Schema.GetOffset(0xE777C2D47FE50585);
-      }
-      return ref _Handle.AsRef<CUtlVector<CFlexRule>>(_FlexRulesOffset!.Value);
+    public ref CUtlVector<CFlexRule> FlexRules {
+        get {
+            _FlexRulesOffset = _FlexRulesOffset ?? Schema.GetOffset(0xE777C2D47FE50585);
+            return ref _Handle.AsRef<CUtlVector<CFlexRule>>(_FlexRulesOffset!.Value);
+        }
     }
-  }
 
 
 }

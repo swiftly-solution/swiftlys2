@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventClientSceneSystemThreadStateChange_tImpl : SchemaClass, EventClientSceneSystemThreadStateChange_t {
+internal partial class EventClientSceneSystemThreadStateChange_tImpl : SchemaClass, EventClientSceneSystemThreadStateChange_t
+{
+    public EventClientSceneSystemThreadStateChange_tImpl(nint handle) : base(handle) { }
 
-  public EventClientSceneSystemThreadStateChange_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ThreadsActiveOffset;
 
-  private static nint? _ThreadsActiveOffset;
-
-  public ref bool ThreadsActive {
-    get {
-      if (_ThreadsActiveOffset == null) {
-        _ThreadsActiveOffset = Schema.GetOffset(0x28053E1174AC2EF0);
-      }
-      return ref _Handle.AsRef<bool>(_ThreadsActiveOffset!.Value);
+    public ref bool ThreadsActive {
+        get {
+            _ThreadsActiveOffset = _ThreadsActiveOffset ?? Schema.GetOffset(0x28053E1174AC2EF0);
+            return ref _Handle.AsRef<bool>(_ThreadsActiveOffset!.Value);
+        }
     }
-  }
 
 
 }

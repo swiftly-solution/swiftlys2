@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimGraphSettingsManagerImpl : SchemaClass, CAnimGraphSettingsManager {
+internal partial class CAnimGraphSettingsManagerImpl : SchemaClass, CAnimGraphSettingsManager
+{
+    public CAnimGraphSettingsManagerImpl(nint handle) : base(handle) { }
 
-  public CAnimGraphSettingsManagerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SettingsGroupsOffset;
 
-  private static nint? _SettingsGroupsOffset;
-
-  public ref CUtlVector<SchemaUntypedField> SettingsGroups {
-    get {
-      if (_SettingsGroupsOffset == null) {
-        _SettingsGroupsOffset = Schema.GetOffset(0x53B994DB178D6408);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_SettingsGroupsOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> SettingsGroups {
+        get {
+            _SettingsGroupsOffset = _SettingsGroupsOffset ?? Schema.GetOffset(0x53B994DB178D6408);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_SettingsGroupsOffset!.Value);
+        }
     }
-  }
 
 
 }

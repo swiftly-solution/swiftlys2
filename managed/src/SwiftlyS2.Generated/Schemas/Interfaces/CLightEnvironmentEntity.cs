@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLightEnvironmentEntity : CLightDirectionalEntity, ISchemaClass<CLightEnvironmentEntity> {
-
-  static CLightEnvironmentEntity ISchemaClass<CLightEnvironmentEntity>.From(nint handle) => new CLightEnvironmentEntityImpl(handle);
-  static int ISchemaClass<CLightEnvironmentEntity>.Size => 2016;
-  static string? ISchemaClass<CLightEnvironmentEntity>.ClassName => "light_environment";
+public partial interface CLightEnvironmentEntity : CLightDirectionalEntity, ISchemaClass<CLightEnvironmentEntity>
+{
+    static CLightEnvironmentEntity ISchemaClass<CLightEnvironmentEntity>.From(nint handle) => new CLightEnvironmentEntityImpl(handle);
+    static int ISchemaClass<CLightEnvironmentEntity>.Size => 2016;
+    static string? ISchemaClass<CLightEnvironmentEntity>.ClassName => "light_environment";
 
 
 

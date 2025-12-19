@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCursorFuncs : ISchemaClass<CPulseCursorFuncs> {
-
-  static CPulseCursorFuncs ISchemaClass<CPulseCursorFuncs>.From(nint handle) => new CPulseCursorFuncsImpl(handle);
-  static int ISchemaClass<CPulseCursorFuncs>.Size => 1;
-  static string? ISchemaClass<CPulseCursorFuncs>.ClassName => null;
+public partial interface CPulseCursorFuncs : ISchemaClass<CPulseCursorFuncs>
+{
+    static CPulseCursorFuncs ISchemaClass<CPulseCursorFuncs>.From(nint handle) => new CPulseCursorFuncsImpl(handle);
+    static int ISchemaClass<CPulseCursorFuncs>.Size => 1;
+    static string? ISchemaClass<CPulseCursorFuncs>.ClassName => null;
 
 
 

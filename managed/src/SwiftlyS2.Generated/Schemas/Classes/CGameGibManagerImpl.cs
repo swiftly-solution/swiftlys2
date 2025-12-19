@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGameGibManagerImpl : CBaseEntityImpl, CGameGibManager {
+internal partial class CGameGibManagerImpl : CBaseEntityImpl, CGameGibManager
+{
+    public CGameGibManagerImpl(nint handle) : base(handle) { }
 
-  public CGameGibManagerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AllowNewGibsOffset;
 
-  private static nint? _AllowNewGibsOffset;
-
-  public ref bool AllowNewGibs {
-    get {
-      if (_AllowNewGibsOffset == null) {
-        _AllowNewGibsOffset = Schema.GetOffset(0x1068CB09FD80F507);
-      }
-      return ref _Handle.AsRef<bool>(_AllowNewGibsOffset!.Value);
+    public ref bool AllowNewGibs {
+        get {
+            _AllowNewGibsOffset = _AllowNewGibsOffset ?? Schema.GetOffset(0x1068CB09FD80F507);
+            return ref _Handle.AsRef<bool>(_AllowNewGibsOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurrentMaxPiecesOffset;
+    private static nint? _CurrentMaxPiecesOffset;
 
-  public ref int CurrentMaxPieces {
-    get {
-      if (_CurrentMaxPiecesOffset == null) {
-        _CurrentMaxPiecesOffset = Schema.GetOffset(0x1068CB0999B0D602);
-      }
-      return ref _Handle.AsRef<int>(_CurrentMaxPiecesOffset!.Value);
+    public ref int CurrentMaxPieces {
+        get {
+            _CurrentMaxPiecesOffset = _CurrentMaxPiecesOffset ?? Schema.GetOffset(0x1068CB0999B0D602);
+            return ref _Handle.AsRef<int>(_CurrentMaxPiecesOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxPiecesOffset;
+    private static nint? _MaxPiecesOffset;
 
-  public ref int MaxPieces {
-    get {
-      if (_MaxPiecesOffset == null) {
-        _MaxPiecesOffset = Schema.GetOffset(0x1068CB092DDFB63D);
-      }
-      return ref _Handle.AsRef<int>(_MaxPiecesOffset!.Value);
+    public ref int MaxPieces {
+        get {
+            _MaxPiecesOffset = _MaxPiecesOffset ?? Schema.GetOffset(0x1068CB092DDFB63D);
+            return ref _Handle.AsRef<int>(_MaxPiecesOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastFrameOffset;
+    private static nint? _LastFrameOffset;
 
-  public ref int LastFrame {
-    get {
-      if (_LastFrameOffset == null) {
-        _LastFrameOffset = Schema.GetOffset(0x1068CB09F0B58C21);
-      }
-      return ref _Handle.AsRef<int>(_LastFrameOffset!.Value);
+    public ref int LastFrame {
+        get {
+            _LastFrameOffset = _LastFrameOffset ?? Schema.GetOffset(0x1068CB09F0B58C21);
+            return ref _Handle.AsRef<int>(_LastFrameOffset!.Value);
+        }
     }
-  }
 
 
 }

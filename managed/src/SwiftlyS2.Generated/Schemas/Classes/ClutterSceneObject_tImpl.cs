@@ -6,127 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ClutterSceneObject_tImpl : SchemaClass, ClutterSceneObject_t {
+internal partial class ClutterSceneObject_tImpl : SchemaClass, ClutterSceneObject_t
+{
+    public ClutterSceneObject_tImpl(nint handle) : base(handle) { }
 
-  public ClutterSceneObject_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoundsOffset;
 
-  private static nint? _BoundsOffset;
-
-  public AABB_t Bounds {
-    get {
-      if (_BoundsOffset == null) {
-        _BoundsOffset = Schema.GetOffset(0xAE8D1536ABF76288);
-      }
-      return new AABB_tImpl(_Handle + _BoundsOffset!.Value);
+    public AABB_t Bounds {
+        get {
+            _BoundsOffset = _BoundsOffset ?? Schema.GetOffset(0xAE8D1536ABF76288);
+            return new AABB_tImpl(_Handle + _BoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref ObjectTypeFlags_t Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0xAE8D1536DC74A14C);
-      }
-      return ref _Handle.AsRef<ObjectTypeFlags_t>(_FlagsOffset!.Value);
+    public ref ObjectTypeFlags_t Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xAE8D1536DC74A14C);
+            return ref _Handle.AsRef<ObjectTypeFlags_t>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LayerOffset;
+    private static nint? _LayerOffset;
 
-  public ref short Layer {
-    get {
-      if (_LayerOffset == null) {
-        _LayerOffset = Schema.GetOffset(0xAE8D1536477C7B2A);
-      }
-      return ref _Handle.AsRef<short>(_LayerOffset!.Value);
+    public ref short Layer {
+        get {
+            _LayerOffset = _LayerOffset ?? Schema.GetOffset(0xAE8D1536477C7B2A);
+            return ref _Handle.AsRef<short>(_LayerOffset!.Value);
+        }
     }
-  }
-  private static nint? _InstancePositionsOffset;
+    private static nint? _InstancePositionsOffset;
 
-  public ref CUtlVector<Vector> InstancePositions {
-    get {
-      if (_InstancePositionsOffset == null) {
-        _InstancePositionsOffset = Schema.GetOffset(0xAE8D15369B4D36BA);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_InstancePositionsOffset!.Value);
+    public ref CUtlVector<Vector> InstancePositions {
+        get {
+            _InstancePositionsOffset = _InstancePositionsOffset ?? Schema.GetOffset(0xAE8D15369B4D36BA);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_InstancePositionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _InstanceScalesOffset;
+    private static nint? _InstanceScalesOffset;
 
-  public ref CUtlVector<float> InstanceScales {
-    get {
-      if (_InstanceScalesOffset == null) {
-        _InstanceScalesOffset = Schema.GetOffset(0xAE8D1536F0D43B61);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_InstanceScalesOffset!.Value);
+    public ref CUtlVector<float> InstanceScales {
+        get {
+            _InstanceScalesOffset = _InstanceScalesOffset ?? Schema.GetOffset(0xAE8D1536F0D43B61);
+            return ref _Handle.AsRef<CUtlVector<float>>(_InstanceScalesOffset!.Value);
+        }
     }
-  }
-  private static nint? _InstanceTintSrgbOffset;
+    private static nint? _InstanceTintSrgbOffset;
 
-  public ref CUtlVector<Color> InstanceTintSrgb {
-    get {
-      if (_InstanceTintSrgbOffset == null) {
-        _InstanceTintSrgbOffset = Schema.GetOffset(0xAE8D15369EE1C08B);
-      }
-      return ref _Handle.AsRef<CUtlVector<Color>>(_InstanceTintSrgbOffset!.Value);
+    public ref CUtlVector<Color> InstanceTintSrgb {
+        get {
+            _InstanceTintSrgbOffset = _InstanceTintSrgbOffset ?? Schema.GetOffset(0xAE8D15369EE1C08B);
+            return ref _Handle.AsRef<CUtlVector<Color>>(_InstanceTintSrgbOffset!.Value);
+        }
     }
-  }
-  private static nint? _TilesOffset;
+    private static nint? _TilesOffset;
 
-  public ref CUtlVector<ClutterTile_t> Tiles {
-    get {
-      if (_TilesOffset == null) {
-        _TilesOffset = Schema.GetOffset(0xAE8D15361FD2CAEE);
-      }
-      return ref _Handle.AsRef<CUtlVector<ClutterTile_t>>(_TilesOffset!.Value);
+    public ref CUtlVector<ClutterTile_t> Tiles {
+        get {
+            _TilesOffset = _TilesOffset ?? Schema.GetOffset(0xAE8D15361FD2CAEE);
+            return ref _Handle.AsRef<CUtlVector<ClutterTile_t>>(_TilesOffset!.Value);
+        }
     }
-  }
-  private static nint? _RenderableModelOffset;
+    private static nint? _RenderableModelOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel {
-    get {
-      if (_RenderableModelOffset == null) {
-        _RenderableModelOffset = Schema.GetOffset(0xAE8D15362AEEFA82);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RenderableModelOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCModel> RenderableModel {
+        get {
+            _RenderableModelOffset = _RenderableModelOffset ?? Schema.GetOffset(0xAE8D15362AEEFA82);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RenderableModelOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialGroupOffset;
+    private static nint? _MaterialGroupOffset;
 
-  public ref CUtlStringToken MaterialGroup {
-    get {
-      if (_MaterialGroupOffset == null) {
-        _MaterialGroupOffset = Schema.GetOffset(0xAE8D15362B778F03);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_MaterialGroupOffset!.Value);
+    public ref CUtlStringToken MaterialGroup {
+        get {
+            _MaterialGroupOffset = _MaterialGroupOffset ?? Schema.GetOffset(0xAE8D15362B778F03);
+            return ref _Handle.AsRef<CUtlStringToken>(_MaterialGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _BeginCullSizeOffset;
+    private static nint? _BeginCullSizeOffset;
 
-  public ref float BeginCullSize {
-    get {
-      if (_BeginCullSizeOffset == null) {
-        _BeginCullSizeOffset = Schema.GetOffset(0xAE8D153680809565);
-      }
-      return ref _Handle.AsRef<float>(_BeginCullSizeOffset!.Value);
+    public ref float BeginCullSize {
+        get {
+            _BeginCullSizeOffset = _BeginCullSizeOffset ?? Schema.GetOffset(0xAE8D153680809565);
+            return ref _Handle.AsRef<float>(_BeginCullSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndCullSizeOffset;
+    private static nint? _EndCullSizeOffset;
 
-  public ref float EndCullSize {
-    get {
-      if (_EndCullSizeOffset == null) {
-        _EndCullSizeOffset = Schema.GetOffset(0xAE8D153664AC3931);
-      }
-      return ref _Handle.AsRef<float>(_EndCullSizeOffset!.Value);
+    public ref float EndCullSize {
+        get {
+            _EndCullSizeOffset = _EndCullSizeOffset ?? Schema.GetOffset(0xAE8D153664AC3931);
+            return ref _Handle.AsRef<float>(_EndCullSizeOffset!.Value);
+        }
     }
-  }
 
 
 }

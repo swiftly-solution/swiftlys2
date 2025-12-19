@@ -6,49 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CShatterGlassShardPhysicsImpl : CPhysicsPropImpl, CShatterGlassShardPhysics {
+internal partial class CShatterGlassShardPhysicsImpl : CPhysicsPropImpl, CShatterGlassShardPhysics
+{
+    public CShatterGlassShardPhysicsImpl(nint handle) : base(handle) { }
 
-  public CShatterGlassShardPhysicsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DebrisOffset;
 
-  private static nint? _DebrisOffset;
-
-  public ref bool Debris {
-    get {
-      if (_DebrisOffset == null) {
-        _DebrisOffset = Schema.GetOffset(0xC24E779865054BBA);
-      }
-      return ref _Handle.AsRef<bool>(_DebrisOffset!.Value);
+    public ref bool Debris {
+        get {
+            _DebrisOffset = _DebrisOffset ?? Schema.GetOffset(0xC24E779865054BBA);
+            return ref _Handle.AsRef<bool>(_DebrisOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentShardOffset;
+    private static nint? _ParentShardOffset;
 
-  public ref uint ParentShard {
-    get {
-      if (_ParentShardOffset == null) {
-        _ParentShardOffset = Schema.GetOffset(0xC24E7798E3717B41);
-      }
-      return ref _Handle.AsRef<uint>(_ParentShardOffset!.Value);
+    public ref uint ParentShard {
+        get {
+            _ParentShardOffset = _ParentShardOffset ?? Schema.GetOffset(0xC24E7798E3717B41);
+            return ref _Handle.AsRef<uint>(_ParentShardOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShardDescOffset;
+    private static nint? _ShardDescOffset;
 
-  public shard_model_desc_t ShardDesc {
-    get {
-      if (_ShardDescOffset == null) {
-        _ShardDescOffset = Schema.GetOffset(0xC24E77982CBF17C6);
-      }
-      return new shard_model_desc_tImpl(_Handle + _ShardDescOffset!.Value);
+    public shard_model_desc_t ShardDesc {
+        get {
+            _ShardDescOffset = _ShardDescOffset ?? Schema.GetOffset(0xC24E77982CBF17C6);
+            return new shard_model_desc_tImpl(_Handle + _ShardDescOffset!.Value);
+        }
     }
-  }
 
-  public void ShardDescUpdated() {
-    Schema.Update(_Handle, 0xC24E77982CBF17C6);
-  }
+    public void ShardDescUpdated() => Schema.Update(_Handle, 0xC24E77982CBF17C6);
 }

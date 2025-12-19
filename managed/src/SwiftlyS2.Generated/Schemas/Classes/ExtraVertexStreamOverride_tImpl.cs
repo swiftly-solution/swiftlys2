@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ExtraVertexStreamOverride_tImpl : BaseSceneObjectOverride_tImpl, ExtraVertexStreamOverride_t {
+internal partial class ExtraVertexStreamOverride_tImpl : BaseSceneObjectOverride_tImpl, ExtraVertexStreamOverride_t
+{
+    public ExtraVertexStreamOverride_tImpl(nint handle) : base(handle) { }
 
-  public ExtraVertexStreamOverride_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SubSceneObjectOffset;
 
-  private static nint? _SubSceneObjectOffset;
-
-  public ref uint SubSceneObject {
-    get {
-      if (_SubSceneObjectOffset == null) {
-        _SubSceneObjectOffset = Schema.GetOffset(0x38857FE855C3CCBC);
-      }
-      return ref _Handle.AsRef<uint>(_SubSceneObjectOffset!.Value);
+    public ref uint SubSceneObject {
+        get {
+            _SubSceneObjectOffset = _SubSceneObjectOffset ?? Schema.GetOffset(0x38857FE855C3CCBC);
+            return ref _Handle.AsRef<uint>(_SubSceneObjectOffset!.Value);
+        }
     }
-  }
-  private static nint? _DrawCallIndexOffset;
+    private static nint? _DrawCallIndexOffset;
 
-  public ref uint DrawCallIndex {
-    get {
-      if (_DrawCallIndexOffset == null) {
-        _DrawCallIndexOffset = Schema.GetOffset(0x38857FE8FA5614D5);
-      }
-      return ref _Handle.AsRef<uint>(_DrawCallIndexOffset!.Value);
+    public ref uint DrawCallIndex {
+        get {
+            _DrawCallIndexOffset = _DrawCallIndexOffset ?? Schema.GetOffset(0x38857FE8FA5614D5);
+            return ref _Handle.AsRef<uint>(_DrawCallIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _AdditionalMeshDrawPrimitiveFlagsOffset;
+    private static nint? _AdditionalMeshDrawPrimitiveFlagsOffset;
 
-  public ref MeshDrawPrimitiveFlags_t AdditionalMeshDrawPrimitiveFlags {
-    get {
-      if (_AdditionalMeshDrawPrimitiveFlagsOffset == null) {
-        _AdditionalMeshDrawPrimitiveFlagsOffset = Schema.GetOffset(0x38857FE8F0E57F2B);
-      }
-      return ref _Handle.AsRef<MeshDrawPrimitiveFlags_t>(_AdditionalMeshDrawPrimitiveFlagsOffset!.Value);
+    public ref MeshDrawPrimitiveFlags_t AdditionalMeshDrawPrimitiveFlags {
+        get {
+            _AdditionalMeshDrawPrimitiveFlagsOffset = _AdditionalMeshDrawPrimitiveFlagsOffset ?? Schema.GetOffset(0x38857FE8F0E57F2B);
+            return ref _Handle.AsRef<MeshDrawPrimitiveFlags_t>(_AdditionalMeshDrawPrimitiveFlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExtraBufferBindingOffset;
+    private static nint? _ExtraBufferBindingOffset;
 
-  public CRenderBufferBinding ExtraBufferBinding {
-    get {
-      if (_ExtraBufferBindingOffset == null) {
-        _ExtraBufferBindingOffset = Schema.GetOffset(0x38857FE800630FD0);
-      }
-      return new CRenderBufferBindingImpl(_Handle + _ExtraBufferBindingOffset!.Value);
+    public CRenderBufferBinding ExtraBufferBinding {
+        get {
+            _ExtraBufferBindingOffset = _ExtraBufferBindingOffset ?? Schema.GetOffset(0x38857FE800630FD0);
+            return new CRenderBufferBindingImpl(_Handle + _ExtraBufferBindingOffset!.Value);
+        }
     }
-  }
 
 
 }

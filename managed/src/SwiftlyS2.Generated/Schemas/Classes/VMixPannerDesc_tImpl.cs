@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixPannerDesc_tImpl : SchemaClass, VMixPannerDesc_t {
+internal partial class VMixPannerDesc_tImpl : SchemaClass, VMixPannerDesc_t
+{
+    public VMixPannerDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixPannerDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref VMixPannerType_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x13827FF70F04B4ED);
-      }
-      return ref _Handle.AsRef<VMixPannerType_t>(_TypeOffset!.Value);
+    public ref VMixPannerType_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x13827FF70F04B4ED);
+            return ref _Handle.AsRef<VMixPannerType_t>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrengthOffset;
+    private static nint? _StrengthOffset;
 
-  public ref float Strength {
-    get {
-      if (_StrengthOffset == null) {
-        _StrengthOffset = Schema.GetOffset(0x13827FF78F67AF1A);
-      }
-      return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+    public ref float Strength {
+        get {
+            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0x13827FF78F67AF1A);
+            return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+        }
     }
-  }
 
 
 }

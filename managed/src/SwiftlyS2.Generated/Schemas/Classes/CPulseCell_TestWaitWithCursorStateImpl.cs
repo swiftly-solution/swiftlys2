@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_TestWaitWithCursorStateImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_TestWaitWithCursorState {
+internal partial class CPulseCell_TestWaitWithCursorStateImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_TestWaitWithCursorState
+{
+    public CPulseCell_TestWaitWithCursorStateImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_TestWaitWithCursorStateImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WakeResumeOffset;
 
-  private static nint? _WakeResumeOffset;
-
-  public CPulse_ResumePoint WakeResume {
-    get {
-      if (_WakeResumeOffset == null) {
-        _WakeResumeOffset = Schema.GetOffset(0xB1305BB431F86DC2);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset!.Value);
+    public CPulse_ResumePoint WakeResume {
+        get {
+            _WakeResumeOffset = _WakeResumeOffset ?? Schema.GetOffset(0xB1305BB431F86DC2);
+            return new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WakeCancelOffset;
+    private static nint? _WakeCancelOffset;
 
-  public CPulse_ResumePoint WakeCancel {
-    get {
-      if (_WakeCancelOffset == null) {
-        _WakeCancelOffset = Schema.GetOffset(0xB1305BB47C373223);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _WakeCancelOffset!.Value);
+    public CPulse_ResumePoint WakeCancel {
+        get {
+            _WakeCancelOffset = _WakeCancelOffset ?? Schema.GetOffset(0xB1305BB47C373223);
+            return new CPulse_ResumePointImpl(_Handle + _WakeCancelOffset!.Value);
+        }
     }
-  }
-  private static nint? _WakeFailOffset;
+    private static nint? _WakeFailOffset;
 
-  public CPulse_ResumePoint WakeFail {
-    get {
-      if (_WakeFailOffset == null) {
-        _WakeFailOffset = Schema.GetOffset(0xB1305BB4BE921FF5);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _WakeFailOffset!.Value);
+    public CPulse_ResumePoint WakeFail {
+        get {
+            _WakeFailOffset = _WakeFailOffset ?? Schema.GetOffset(0xB1305BB4BE921FF5);
+            return new CPulse_ResumePointImpl(_Handle + _WakeFailOffset!.Value);
+        }
     }
-  }
 
 
 }

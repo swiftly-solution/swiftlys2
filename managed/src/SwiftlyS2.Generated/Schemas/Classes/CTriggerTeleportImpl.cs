@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerTeleportImpl : CBaseTriggerImpl, CTriggerTeleport {
+internal partial class CTriggerTeleportImpl : CBaseTriggerImpl, CTriggerTeleport
+{
+    public CTriggerTeleportImpl(nint handle) : base(handle) { }
 
-  public CTriggerTeleportImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LandmarkOffset;
 
-  private static nint? _LandmarkOffset;
+    public string Landmark {
+        get {
+            _LandmarkOffset = _LandmarkOffset ?? Schema.GetOffset(0xA6381755DF022EC4);
+            return Schema.GetString(_Handle.Read<nint>(_LandmarkOffset!.Value));
+        }
+        set {
+            _LandmarkOffset = _LandmarkOffset ?? Schema.GetOffset(0xA6381755DF022EC4);
+            Schema.SetString(_Handle, _LandmarkOffset!.Value, value);
+        }
+    } 
+    private static nint? _UseLandmarkAnglesOffset;
 
-  public string Landmark {
-    get {
-      if (_LandmarkOffset == null) {
-        _LandmarkOffset = Schema.GetOffset(0xA6381755DF022EC4);
-      }
-      var ptr = _Handle.Read<nint>(_LandmarkOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref bool UseLandmarkAngles {
+        get {
+            _UseLandmarkAnglesOffset = _UseLandmarkAnglesOffset ?? Schema.GetOffset(0xA638175528C3B2F4);
+            return ref _Handle.AsRef<bool>(_UseLandmarkAnglesOffset!.Value);
+        }
     }
-    set {
-      if (_LandmarkOffset == null) {
-        _LandmarkOffset = Schema.GetOffset(0xA6381755DF022EC4);
-      }
-      Schema.SetString(_Handle, _LandmarkOffset!.Value, value);
-    }
-  } 
-  private static nint? _UseLandmarkAnglesOffset;
+    private static nint? _MirrorPlayerOffset;
 
-  public ref bool UseLandmarkAngles {
-    get {
-      if (_UseLandmarkAnglesOffset == null) {
-        _UseLandmarkAnglesOffset = Schema.GetOffset(0xA638175528C3B2F4);
-      }
-      return ref _Handle.AsRef<bool>(_UseLandmarkAnglesOffset!.Value);
+    public ref bool MirrorPlayer {
+        get {
+            _MirrorPlayerOffset = _MirrorPlayerOffset ?? Schema.GetOffset(0xA638175563293A1B);
+            return ref _Handle.AsRef<bool>(_MirrorPlayerOffset!.Value);
+        }
     }
-  }
-  private static nint? _MirrorPlayerOffset;
+    private static nint? _CheckDestIfClearForPlayerOffset;
 
-  public ref bool MirrorPlayer {
-    get {
-      if (_MirrorPlayerOffset == null) {
-        _MirrorPlayerOffset = Schema.GetOffset(0xA638175563293A1B);
-      }
-      return ref _Handle.AsRef<bool>(_MirrorPlayerOffset!.Value);
+    public ref bool CheckDestIfClearForPlayer {
+        get {
+            _CheckDestIfClearForPlayerOffset = _CheckDestIfClearForPlayerOffset ?? Schema.GetOffset(0xA638175514792115);
+            return ref _Handle.AsRef<bool>(_CheckDestIfClearForPlayerOffset!.Value);
+        }
     }
-  }
-  private static nint? _CheckDestIfClearForPlayerOffset;
-
-  public ref bool CheckDestIfClearForPlayer {
-    get {
-      if (_CheckDestIfClearForPlayerOffset == null) {
-        _CheckDestIfClearForPlayerOffset = Schema.GetOffset(0xA638175514792115);
-      }
-      return ref _Handle.AsRef<bool>(_CheckDestIfClearForPlayerOffset!.Value);
-    }
-  }
 
 
 }

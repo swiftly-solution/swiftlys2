@@ -6,29 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBodyComponentSkeletonInstanceImpl : CBodyComponentImpl, CBodyComponentSkeletonInstance {
+internal partial class CBodyComponentSkeletonInstanceImpl : CBodyComponentImpl, CBodyComponentSkeletonInstance
+{
+    public CBodyComponentSkeletonInstanceImpl(nint handle) : base(handle) { }
 
-  public CBodyComponentSkeletonInstanceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SkeletonInstanceOffset;
 
-  private static nint? _SkeletonInstanceOffset;
-
-  public CSkeletonInstance SkeletonInstance {
-    get {
-      if (_SkeletonInstanceOffset == null) {
-        _SkeletonInstanceOffset = Schema.GetOffset(0x4581C459228537B9);
-      }
-      return new CSkeletonInstanceImpl(_Handle + _SkeletonInstanceOffset!.Value);
+    public CSkeletonInstance SkeletonInstance {
+        get {
+            _SkeletonInstanceOffset = _SkeletonInstanceOffset ?? Schema.GetOffset(0x4581C459228537B9);
+            return new CSkeletonInstanceImpl(_Handle + _SkeletonInstanceOffset!.Value);
+        }
     }
-  }
 
-  public void SkeletonInstanceUpdated() {
-    Schema.Update(_Handle, 0x4581C459228537B9);
-  }
+    public void SkeletonInstanceUpdated() => Schema.Update(_Handle, 0x4581C459228537B9);
 }

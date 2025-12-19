@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CActionComponentUpdaterImpl : CAnimComponentUpdaterImpl, CActionComponentUpdater {
+internal partial class CActionComponentUpdaterImpl : CAnimComponentUpdaterImpl, CActionComponentUpdater
+{
+    public CActionComponentUpdaterImpl(nint handle) : base(handle) { }
 
-  public CActionComponentUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActionsOffset;
 
-  private static nint? _ActionsOffset;
-
-  public ref CUtlVector<SchemaUntypedField> Actions {
-    get {
-      if (_ActionsOffset == null) {
-        _ActionsOffset = Schema.GetOffset(0xA700EA248D622684);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> Actions {
+        get {
+            _ActionsOffset = _ActionsOffset ?? Schema.GetOffset(0xA700EA248D622684);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset!.Value);
+        }
     }
-  }
 
 
 }

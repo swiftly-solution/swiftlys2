@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CStateActionUpdaterImpl : SchemaClass, CStateActionUpdater {
+internal partial class CStateActionUpdaterImpl : SchemaClass, CStateActionUpdater
+{
+    public CStateActionUpdaterImpl(nint handle) : base(handle) { }
 
-  public CStateActionUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActionOffset;
 
-  private static nint? _ActionOffset;
-
-  public SchemaUntypedField Action {
-    get {
-      if (_ActionOffset == null) {
-        _ActionOffset = Schema.GetOffset(0xCA33DCAAE9CB47D5);
-      }
-      return new SchemaUntypedField(_Handle + _ActionOffset!.Value);
+    public SchemaUntypedField Action {
+        get {
+            _ActionOffset = _ActionOffset ?? Schema.GetOffset(0xCA33DCAAE9CB47D5);
+            return new SchemaUntypedField(_Handle + _ActionOffset!.Value);
+        }
     }
-  }
-  private static nint? _BehaviorOffset;
+    private static nint? _BehaviorOffset;
 
-  public ref StateActionBehavior Behavior {
-    get {
-      if (_BehaviorOffset == null) {
-        _BehaviorOffset = Schema.GetOffset(0xCA33DCAA436DB10A);
-      }
-      return ref _Handle.AsRef<StateActionBehavior>(_BehaviorOffset!.Value);
+    public ref StateActionBehavior Behavior {
+        get {
+            _BehaviorOffset = _BehaviorOffset ?? Schema.GetOffset(0xCA33DCAA436DB10A);
+            return ref _Handle.AsRef<StateActionBehavior>(_BehaviorOffset!.Value);
+        }
     }
-  }
 
 
 }

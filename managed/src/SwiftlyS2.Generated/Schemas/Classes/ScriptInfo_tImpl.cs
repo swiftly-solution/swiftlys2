@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ScriptInfo_tImpl : SchemaClass, ScriptInfo_t {
+internal partial class ScriptInfo_tImpl : SchemaClass, ScriptInfo_t
+{
+    public ScriptInfo_tImpl(nint handle) : base(handle) { }
 
-  public ScriptInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CodeOffset;
 
-  private static nint? _CodeOffset;
+    public string Code {
+        get {
+            _CodeOffset = _CodeOffset ?? Schema.GetOffset(0xDB402399B70C9D94);
+            return Schema.GetString(_Handle.Read<nint>(_CodeOffset!.Value));
+        }
+        set {
+            _CodeOffset = _CodeOffset ?? Schema.GetOffset(0xDB402399B70C9D94);
+            Schema.SetString(_Handle, _CodeOffset!.Value, value);
+        }
+    } 
+    private static nint? _ParamsModifiedOffset;
 
-  public string Code {
-    get {
-      if (_CodeOffset == null) {
-        _CodeOffset = Schema.GetOffset(0xDB402399B70C9D94);
-      }
-      var ptr = _Handle.Read<nint>(_CodeOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CAnimParamHandle> ParamsModified {
+        get {
+            _ParamsModifiedOffset = _ParamsModifiedOffset ?? Schema.GetOffset(0xDB402399E9EAFC30);
+            return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_ParamsModifiedOffset!.Value);
+        }
     }
-    set {
-      if (_CodeOffset == null) {
-        _CodeOffset = Schema.GetOffset(0xDB402399B70C9D94);
-      }
-      Schema.SetString(_Handle, _CodeOffset!.Value, value);
-    }
-  } 
-  private static nint? _ParamsModifiedOffset;
+    private static nint? _ProxyReadParamsOffset;
 
-  public ref CUtlVector<CAnimParamHandle> ParamsModified {
-    get {
-      if (_ParamsModifiedOffset == null) {
-        _ParamsModifiedOffset = Schema.GetOffset(0xDB402399E9EAFC30);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimParamHandle>>(_ParamsModifiedOffset!.Value);
+    public ref CUtlVector<int> ProxyReadParams {
+        get {
+            _ProxyReadParamsOffset = _ProxyReadParamsOffset ?? Schema.GetOffset(0xDB40239944FCCB9D);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ProxyReadParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProxyReadParamsOffset;
+    private static nint? _ProxyWriteParamsOffset;
 
-  public ref CUtlVector<int> ProxyReadParams {
-    get {
-      if (_ProxyReadParamsOffset == null) {
-        _ProxyReadParamsOffset = Schema.GetOffset(0xDB40239944FCCB9D);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_ProxyReadParamsOffset!.Value);
+    public ref CUtlVector<int> ProxyWriteParams {
+        get {
+            _ProxyWriteParamsOffset = _ProxyWriteParamsOffset ?? Schema.GetOffset(0xDB4023993EAFD134);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ProxyWriteParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProxyWriteParamsOffset;
+    private static nint? _ScriptTypeOffset;
 
-  public ref CUtlVector<int> ProxyWriteParams {
-    get {
-      if (_ProxyWriteParamsOffset == null) {
-        _ProxyWriteParamsOffset = Schema.GetOffset(0xDB4023993EAFD134);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_ProxyWriteParamsOffset!.Value);
+    public ref AnimScriptType ScriptType {
+        get {
+            _ScriptTypeOffset = _ScriptTypeOffset ?? Schema.GetOffset(0xDB40239949576EFB);
+            return ref _Handle.AsRef<AnimScriptType>(_ScriptTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScriptTypeOffset;
-
-  public ref AnimScriptType ScriptType {
-    get {
-      if (_ScriptTypeOffset == null) {
-        _ScriptTypeOffset = Schema.GetOffset(0xDB40239949576EFB);
-      }
-      return ref _Handle.AsRef<AnimScriptType>(_ScriptTypeOffset!.Value);
-    }
-  }
 
 
 }

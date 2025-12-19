@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum BinaryNodeTiming : uint {
-
+public enum BinaryNodeTiming : uint
+{
  UseChild1 = 0,
 
  UseChild2 = 1,

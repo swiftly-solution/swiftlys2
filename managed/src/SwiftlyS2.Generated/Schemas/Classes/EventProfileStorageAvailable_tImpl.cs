@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventProfileStorageAvailable_tImpl : SchemaClass, EventProfileStorageAvailable_t {
+internal partial class EventProfileStorageAvailable_tImpl : SchemaClass, EventProfileStorageAvailable_t
+{
+    public EventProfileStorageAvailable_tImpl(nint handle) : base(handle) { }
 
-  public EventProfileStorageAvailable_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SplitScreenSlotOffset;
 
-  private static nint? _SplitScreenSlotOffset;
-
-  public ref uint SplitScreenSlot {
-    get {
-      if (_SplitScreenSlotOffset == null) {
-        _SplitScreenSlotOffset = Schema.GetOffset(0x871602F7DB96ED47);
-      }
-      return ref _Handle.AsRef<uint>(_SplitScreenSlotOffset!.Value);
+    public ref uint SplitScreenSlot {
+        get {
+            _SplitScreenSlotOffset = _SplitScreenSlotOffset ?? Schema.GetOffset(0x871602F7DB96ED47);
+            return ref _Handle.AsRef<uint>(_SplitScreenSlotOffset!.Value);
+        }
     }
-  }
 
 
 }

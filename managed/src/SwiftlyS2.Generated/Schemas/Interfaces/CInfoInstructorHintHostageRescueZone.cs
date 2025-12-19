@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoInstructorHintHostageRescueZone : CPointEntity, ISchemaClass<CInfoInstructorHintHostageRescueZone> {
-
-  static CInfoInstructorHintHostageRescueZone ISchemaClass<CInfoInstructorHintHostageRescueZone>.From(nint handle) => new CInfoInstructorHintHostageRescueZoneImpl(handle);
-  static int ISchemaClass<CInfoInstructorHintHostageRescueZone>.Size => 1264;
-  static string? ISchemaClass<CInfoInstructorHintHostageRescueZone>.ClassName => "info_hostage_rescue_zone_hint";
+public partial interface CInfoInstructorHintHostageRescueZone : CPointEntity, ISchemaClass<CInfoInstructorHintHostageRescueZone>
+{
+    static CInfoInstructorHintHostageRescueZone ISchemaClass<CInfoInstructorHintHostageRescueZone>.From(nint handle) => new CInfoInstructorHintHostageRescueZoneImpl(handle);
+    static int ISchemaClass<CInfoInstructorHintHostageRescueZone>.Size => 1264;
+    static string? ISchemaClass<CInfoInstructorHintHostageRescueZone>.ClassName => "info_hostage_rescue_zone_hint";
 
 
 

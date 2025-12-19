@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_WaterImpulseRendererImpl : CParticleFunctionRendererImpl, C_OP_WaterImpulseRenderer {
+internal partial class C_OP_WaterImpulseRendererImpl : CParticleFunctionRendererImpl, C_OP_WaterImpulseRenderer
+{
+    public C_OP_WaterImpulseRendererImpl(nint handle) : base(handle) { }
 
-  public C_OP_WaterImpulseRendererImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PosOffset;
 
-  private static nint? _PosOffset;
-
-  public CPerParticleVecInput Pos {
-    get {
-      if (_PosOffset == null) {
-        _PosOffset = Schema.GetOffset(0x7CC87C0C3B18EB69);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _PosOffset!.Value);
+    public CPerParticleVecInput Pos {
+        get {
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0x7CC87C0C3B18EB69);
+            return new CPerParticleVecInputImpl(_Handle + _PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public CPerParticleFloatInput Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x7CC87C0C5ACFC08D);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+    public CPerParticleFloatInput Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x7CC87C0C5ACFC08D);
+            return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _MagnitudeOffset;
+    private static nint? _MagnitudeOffset;
 
-  public CPerParticleFloatInput Magnitude {
-    get {
-      if (_MagnitudeOffset == null) {
-        _MagnitudeOffset = Schema.GetOffset(0x7CC87C0CED0A1D8B);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _MagnitudeOffset!.Value);
+    public CPerParticleFloatInput Magnitude {
+        get {
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x7CC87C0CED0A1D8B);
+            return new CPerParticleFloatInputImpl(_Handle + _MagnitudeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShapeOffset;
+    private static nint? _ShapeOffset;
 
-  public CPerParticleFloatInput Shape {
-    get {
-      if (_ShapeOffset == null) {
-        _ShapeOffset = Schema.GetOffset(0x7CC87C0C5DCE07D8);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ShapeOffset!.Value);
+    public CPerParticleFloatInput Shape {
+        get {
+            _ShapeOffset = _ShapeOffset ?? Schema.GetOffset(0x7CC87C0C5DCE07D8);
+            return new CPerParticleFloatInputImpl(_Handle + _ShapeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WindSpeedOffset;
+    private static nint? _WindSpeedOffset;
 
-  public CPerParticleFloatInput WindSpeed {
-    get {
-      if (_WindSpeedOffset == null) {
-        _WindSpeedOffset = Schema.GetOffset(0x7CC87C0CADDA5C24);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _WindSpeedOffset!.Value);
+    public CPerParticleFloatInput WindSpeed {
+        get {
+            _WindSpeedOffset = _WindSpeedOffset ?? Schema.GetOffset(0x7CC87C0CADDA5C24);
+            return new CPerParticleFloatInputImpl(_Handle + _WindSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _WobbleOffset;
+    private static nint? _WobbleOffset;
 
-  public CPerParticleFloatInput Wobble {
-    get {
-      if (_WobbleOffset == null) {
-        _WobbleOffset = Schema.GetOffset(0x7CC87C0CF8575B0A);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _WobbleOffset!.Value);
+    public CPerParticleFloatInput Wobble {
+        get {
+            _WobbleOffset = _WobbleOffset ?? Schema.GetOffset(0x7CC87C0CF8575B0A);
+            return new CPerParticleFloatInputImpl(_Handle + _WobbleOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsRadialWindOffset;
+    private static nint? _IsRadialWindOffset;
 
-  public ref bool IsRadialWind {
-    get {
-      if (_IsRadialWindOffset == null) {
-        _IsRadialWindOffset = Schema.GetOffset(0x7CC87C0C64147034);
-      }
-      return ref _Handle.AsRef<bool>(_IsRadialWindOffset!.Value);
+    public ref bool IsRadialWind {
+        get {
+            _IsRadialWindOffset = _IsRadialWindOffset ?? Schema.GetOffset(0x7CC87C0C64147034);
+            return ref _Handle.AsRef<bool>(_IsRadialWindOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventTypeOffset;
+    private static nint? _EventTypeOffset;
 
-  public ref EventTypeSelection_t EventType {
-    get {
-      if (_EventTypeOffset == null) {
-        _EventTypeOffset = Schema.GetOffset(0x7CC87C0CE1F9AA93);
-      }
-      return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+    public ref EventTypeSelection_t EventType {
+        get {
+            _EventTypeOffset = _EventTypeOffset ?? Schema.GetOffset(0x7CC87C0CE1F9AA93);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PulseValueType_t : uint {
-
+public enum PulseValueType_t : uint
+{
  PVAL_VOID = uint.MaxValue,
 
  PVAL_BOOL = 0,

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncLadderAlias_func_useableladder : CFuncLadder, ISchemaClass<CFuncLadderAlias_func_useableladder> {
-
-  static CFuncLadderAlias_func_useableladder ISchemaClass<CFuncLadderAlias_func_useableladder>.From(nint handle) => new CFuncLadderAlias_func_useableladderImpl(handle);
-  static int ISchemaClass<CFuncLadderAlias_func_useableladder>.Size => 2184;
-  static string? ISchemaClass<CFuncLadderAlias_func_useableladder>.ClassName => null;
+public partial interface CFuncLadderAlias_func_useableladder : CFuncLadder, ISchemaClass<CFuncLadderAlias_func_useableladder>
+{
+    static CFuncLadderAlias_func_useableladder ISchemaClass<CFuncLadderAlias_func_useableladder>.From(nint handle) => new CFuncLadderAlias_func_useableladderImpl(handle);
+    static int ISchemaClass<CFuncLadderAlias_func_useableladder>.Size => 2184;
+    static string? ISchemaClass<CFuncLadderAlias_func_useableladder>.ClassName => null;
 
 
 

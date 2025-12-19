@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoPlayerCounterterrorist : SpawnPoint, ISchemaClass<CInfoPlayerCounterterrorist> {
-
-  static CInfoPlayerCounterterrorist ISchemaClass<CInfoPlayerCounterterrorist>.From(nint handle) => new CInfoPlayerCounterterroristImpl(handle);
-  static int ISchemaClass<CInfoPlayerCounterterrorist>.Size => 1280;
-  static string? ISchemaClass<CInfoPlayerCounterterrorist>.ClassName => "info_player_counterterrorist";
+public partial interface CInfoPlayerCounterterrorist : SpawnPoint, ISchemaClass<CInfoPlayerCounterterrorist>
+{
+    static CInfoPlayerCounterterrorist ISchemaClass<CInfoPlayerCounterterrorist>.From(nint handle) => new CInfoPlayerCounterterroristImpl(handle);
+    static int ISchemaClass<CInfoPlayerCounterterrorist>.Size => 1280;
+    static string? ISchemaClass<CInfoPlayerCounterterrorist>.ClassName => "info_player_counterterrorist";
 
 
 

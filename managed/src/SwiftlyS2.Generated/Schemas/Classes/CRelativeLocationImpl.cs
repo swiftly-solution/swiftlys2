@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRelativeLocationImpl : SchemaClass, CRelativeLocation {
+internal partial class CRelativeLocationImpl : SchemaClass, CRelativeLocation
+{
+    public CRelativeLocationImpl(nint handle) : base(handle) { }
 
-  public CRelativeLocationImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref RelativeLocationType_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0xA25CE2418ED6D5CD);
-      }
-      return ref _Handle.AsRef<RelativeLocationType_t>(_TypeOffset!.Value);
+    public ref RelativeLocationType_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0xA25CE2418ED6D5CD);
+            return ref _Handle.AsRef<RelativeLocationType_t>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _RelativeOffsetOffset;
+    private static nint? _RelativeOffsetOffset;
 
-  public ref Vector RelativeOffset {
-    get {
-      if (_RelativeOffsetOffset == null) {
-        _RelativeOffsetOffset = Schema.GetOffset(0xA25CE241B6F2D296);
-      }
-      return ref _Handle.AsRef<Vector>(_RelativeOffsetOffset!.Value);
+    public ref Vector RelativeOffset {
+        get {
+            _RelativeOffsetOffset = _RelativeOffsetOffset ?? Schema.GetOffset(0xA25CE241B6F2D296);
+            return ref _Handle.AsRef<Vector>(_RelativeOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldSpacePosOffset;
+    private static nint? _WorldSpacePosOffset;
 
-  public ref Vector WorldSpacePos {
-    get {
-      if (_WorldSpacePosOffset == null) {
-        _WorldSpacePosOffset = Schema.GetOffset(0xA25CE2410A43E96B);
-      }
-      return ref _Handle.AsRef<Vector>(_WorldSpacePosOffset!.Value);
+    public ref Vector WorldSpacePos {
+        get {
+            _WorldSpacePosOffset = _WorldSpacePosOffset ?? Schema.GetOffset(0xA25CE2410A43E96B);
+            return ref _Handle.AsRef<Vector>(_WorldSpacePosOffset!.Value);
+        }
     }
-  }
-  private static nint? _EntityOffset;
+    private static nint? _EntityOffset;
 
-  public ref CHandle<CBaseEntity> Entity {
-    get {
-      if (_EntityOffset == null) {
-        _EntityOffset = Schema.GetOffset(0xA25CE2416EBADCB0);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+    public ref CHandle<CBaseEntity> Entity {
+        get {
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xA25CE2416EBADCB0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+        }
     }
-  }
 
 
 }

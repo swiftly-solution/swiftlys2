@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFollowBoneNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmFollowBoneNode__CDefinition {
+internal partial class CNmFollowBoneNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmFollowBoneNode__CDefinition
+{
+    public CNmFollowBoneNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFollowBoneNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneOffset;
 
-  private static nint? _BoneOffset;
-
-  public ref CGlobalSymbol Bone {
-    get {
-      if (_BoneOffset == null) {
-        _BoneOffset = Schema.GetOffset(0x51BD725C8020F02F);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_BoneOffset!.Value);
+    public ref CGlobalSymbol Bone {
+        get {
+            _BoneOffset = _BoneOffset ?? Schema.GetOffset(0x51BD725C8020F02F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _FollowTargetBoneOffset;
+    private static nint? _FollowTargetBoneOffset;
 
-  public ref CGlobalSymbol FollowTargetBone {
-    get {
-      if (_FollowTargetBoneOffset == null) {
-        _FollowTargetBoneOffset = Schema.GetOffset(0x51BD725C38216D8B);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_FollowTargetBoneOffset!.Value);
+    public ref CGlobalSymbol FollowTargetBone {
+        get {
+            _FollowTargetBoneOffset = _FollowTargetBoneOffset ?? Schema.GetOffset(0x51BD725C38216D8B);
+            return ref _Handle.AsRef<CGlobalSymbol>(_FollowTargetBoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnabledNodeIdxOffset;
+    private static nint? _EnabledNodeIdxOffset;
 
-  public ref short EnabledNodeIdx {
-    get {
-      if (_EnabledNodeIdxOffset == null) {
-        _EnabledNodeIdxOffset = Schema.GetOffset(0x51BD725CF7CDF5E9);
-      }
-      return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+    public ref short EnabledNodeIdx {
+        get {
+            _EnabledNodeIdxOffset = _EnabledNodeIdxOffset ?? Schema.GetOffset(0x51BD725CF7CDF5E9);
+            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModeOffset;
+    private static nint? _ModeOffset;
 
-  public ref NmFollowBoneMode_t Mode {
-    get {
-      if (_ModeOffset == null) {
-        _ModeOffset = Schema.GetOffset(0x51BD725C90FD5BB2);
-      }
-      return ref _Handle.AsRef<NmFollowBoneMode_t>(_ModeOffset!.Value);
+    public ref NmFollowBoneMode_t Mode {
+        get {
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x51BD725C90FD5BB2);
+            return ref _Handle.AsRef<NmFollowBoneMode_t>(_ModeOffset!.Value);
+        }
     }
-  }
 
 
 }

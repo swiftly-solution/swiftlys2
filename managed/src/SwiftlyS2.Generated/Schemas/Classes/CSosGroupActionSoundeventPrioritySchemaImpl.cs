@@ -6,85 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSosGroupActionSoundeventPrioritySchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionSoundeventPrioritySchema {
+internal partial class CSosGroupActionSoundeventPrioritySchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionSoundeventPrioritySchema
+{
+    public CSosGroupActionSoundeventPrioritySchemaImpl(nint handle) : base(handle) { }
 
-  public CSosGroupActionSoundeventPrioritySchemaImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PriorityValueOffset;
 
-  private static nint? _PriorityValueOffset;
+    public string PriorityValue {
+        get {
+            _PriorityValueOffset = _PriorityValueOffset ?? Schema.GetOffset(0x1E84D860257F7BF6);
+            return Schema.GetString(_Handle.Read<nint>(_PriorityValueOffset!.Value));
+        }
+        set {
+            _PriorityValueOffset = _PriorityValueOffset ?? Schema.GetOffset(0x1E84D860257F7BF6);
+            Schema.SetString(_Handle, _PriorityValueOffset!.Value, value);
+        }
+    } 
+    private static nint? _PriorityVolumeScalarOffset;
 
-  public string PriorityValue {
-    get {
-      if (_PriorityValueOffset == null) {
-        _PriorityValueOffset = Schema.GetOffset(0x1E84D860257F7BF6);
-      }
-      var ptr = _Handle.Read<nint>(_PriorityValueOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PriorityValueOffset == null) {
-        _PriorityValueOffset = Schema.GetOffset(0x1E84D860257F7BF6);
-      }
-      Schema.SetString(_Handle, _PriorityValueOffset!.Value, value);
-    }
-  } 
-  private static nint? _PriorityVolumeScalarOffset;
+    public string PriorityVolumeScalar {
+        get {
+            _PriorityVolumeScalarOffset = _PriorityVolumeScalarOffset ?? Schema.GetOffset(0x1E84D860F21824AF);
+            return Schema.GetString(_Handle.Read<nint>(_PriorityVolumeScalarOffset!.Value));
+        }
+        set {
+            _PriorityVolumeScalarOffset = _PriorityVolumeScalarOffset ?? Schema.GetOffset(0x1E84D860F21824AF);
+            Schema.SetString(_Handle, _PriorityVolumeScalarOffset!.Value, value);
+        }
+    } 
+    private static nint? _PriorityContributeButDontReadOffset;
 
-  public string PriorityVolumeScalar {
-    get {
-      if (_PriorityVolumeScalarOffset == null) {
-        _PriorityVolumeScalarOffset = Schema.GetOffset(0x1E84D860F21824AF);
-      }
-      var ptr = _Handle.Read<nint>(_PriorityVolumeScalarOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PriorityVolumeScalarOffset == null) {
-        _PriorityVolumeScalarOffset = Schema.GetOffset(0x1E84D860F21824AF);
-      }
-      Schema.SetString(_Handle, _PriorityVolumeScalarOffset!.Value, value);
-    }
-  } 
-  private static nint? _PriorityContributeButDontReadOffset;
+    public string PriorityContributeButDontRead {
+        get {
+            _PriorityContributeButDontReadOffset = _PriorityContributeButDontReadOffset ?? Schema.GetOffset(0x1E84D8608078C7B6);
+            return Schema.GetString(_Handle.Read<nint>(_PriorityContributeButDontReadOffset!.Value));
+        }
+        set {
+            _PriorityContributeButDontReadOffset = _PriorityContributeButDontReadOffset ?? Schema.GetOffset(0x1E84D8608078C7B6);
+            Schema.SetString(_Handle, _PriorityContributeButDontReadOffset!.Value, value);
+        }
+    } 
+    private static nint? _PriorityReadButDontContributeOffset;
 
-  public string PriorityContributeButDontRead {
-    get {
-      if (_PriorityContributeButDontReadOffset == null) {
-        _PriorityContributeButDontReadOffset = Schema.GetOffset(0x1E84D8608078C7B6);
-      }
-      var ptr = _Handle.Read<nint>(_PriorityContributeButDontReadOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PriorityContributeButDontReadOffset == null) {
-        _PriorityContributeButDontReadOffset = Schema.GetOffset(0x1E84D8608078C7B6);
-      }
-      Schema.SetString(_Handle, _PriorityContributeButDontReadOffset!.Value, value);
-    }
-  } 
-  private static nint? _PriorityReadButDontContributeOffset;
-
-  public string PriorityReadButDontContribute {
-    get {
-      if (_PriorityReadButDontContributeOffset == null) {
-        _PriorityReadButDontContributeOffset = Schema.GetOffset(0x1E84D860112DDB84);
-      }
-      var ptr = _Handle.Read<nint>(_PriorityReadButDontContributeOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PriorityReadButDontContributeOffset == null) {
-        _PriorityReadButDontContributeOffset = Schema.GetOffset(0x1E84D860112DDB84);
-      }
-      Schema.SetString(_Handle, _PriorityReadButDontContributeOffset!.Value, value);
-    }
-  } 
+    public string PriorityReadButDontContribute {
+        get {
+            _PriorityReadButDontContributeOffset = _PriorityReadButDontContributeOffset ?? Schema.GetOffset(0x1E84D860112DDB84);
+            return Schema.GetString(_Handle.Read<nint>(_PriorityReadButDontContributeOffset!.Value));
+        }
+        set {
+            _PriorityReadButDontContributeOffset = _PriorityReadButDontContributeOffset ?? Schema.GetOffset(0x1E84D860112DDB84);
+            Schema.SetString(_Handle, _PriorityReadButDontContributeOffset!.Value, value);
+        }
+    } 
 
 
 }

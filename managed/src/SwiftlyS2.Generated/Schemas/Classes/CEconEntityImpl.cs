@@ -6,127 +6,94 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEconEntityImpl : CBaseFlexImpl, CEconEntity {
+internal partial class CEconEntityImpl : CBaseFlexImpl, CEconEntity
+{
+    public CEconEntityImpl(nint handle) : base(handle) { }
 
-  public CEconEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttributeManagerOffset;
 
-  private static nint? _AttributeManagerOffset;
-
-  public CAttributeContainer AttributeManager {
-    get {
-      if (_AttributeManagerOffset == null) {
-        _AttributeManagerOffset = Schema.GetOffset(0xCD91F684537B0586);
-      }
-      return new CAttributeContainerImpl(_Handle + _AttributeManagerOffset!.Value);
+    public CAttributeContainer AttributeManager {
+        get {
+            _AttributeManagerOffset = _AttributeManagerOffset ?? Schema.GetOffset(0xCD91F684537B0586);
+            return new CAttributeContainerImpl(_Handle + _AttributeManagerOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginalOwnerXuidLowOffset;
+    private static nint? _OriginalOwnerXuidLowOffset;
 
-  public ref uint OriginalOwnerXuidLow {
-    get {
-      if (_OriginalOwnerXuidLowOffset == null) {
-        _OriginalOwnerXuidLowOffset = Schema.GetOffset(0xCD91F6843C990CE3);
-      }
-      return ref _Handle.AsRef<uint>(_OriginalOwnerXuidLowOffset!.Value);
+    public ref uint OriginalOwnerXuidLow {
+        get {
+            _OriginalOwnerXuidLowOffset = _OriginalOwnerXuidLowOffset ?? Schema.GetOffset(0xCD91F6843C990CE3);
+            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidLowOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginalOwnerXuidHighOffset;
+    private static nint? _OriginalOwnerXuidHighOffset;
 
-  public ref uint OriginalOwnerXuidHigh {
-    get {
-      if (_OriginalOwnerXuidHighOffset == null) {
-        _OriginalOwnerXuidHighOffset = Schema.GetOffset(0xCD91F6842628947F);
-      }
-      return ref _Handle.AsRef<uint>(_OriginalOwnerXuidHighOffset!.Value);
+    public ref uint OriginalOwnerXuidHigh {
+        get {
+            _OriginalOwnerXuidHighOffset = _OriginalOwnerXuidHighOffset ?? Schema.GetOffset(0xCD91F6842628947F);
+            return ref _Handle.AsRef<uint>(_OriginalOwnerXuidHighOffset!.Value);
+        }
     }
-  }
-  private static nint? _FallbackPaintKitOffset;
+    private static nint? _FallbackPaintKitOffset;
 
-  public ref int FallbackPaintKit {
-    get {
-      if (_FallbackPaintKitOffset == null) {
-        _FallbackPaintKitOffset = Schema.GetOffset(0xCD91F6840A12D48F);
-      }
-      return ref _Handle.AsRef<int>(_FallbackPaintKitOffset!.Value);
+    public ref int FallbackPaintKit {
+        get {
+            _FallbackPaintKitOffset = _FallbackPaintKitOffset ?? Schema.GetOffset(0xCD91F6840A12D48F);
+            return ref _Handle.AsRef<int>(_FallbackPaintKitOffset!.Value);
+        }
     }
-  }
-  private static nint? _FallbackSeedOffset;
+    private static nint? _FallbackSeedOffset;
 
-  public ref int FallbackSeed {
-    get {
-      if (_FallbackSeedOffset == null) {
-        _FallbackSeedOffset = Schema.GetOffset(0xCD91F684A1B165B2);
-      }
-      return ref _Handle.AsRef<int>(_FallbackSeedOffset!.Value);
+    public ref int FallbackSeed {
+        get {
+            _FallbackSeedOffset = _FallbackSeedOffset ?? Schema.GetOffset(0xCD91F684A1B165B2);
+            return ref _Handle.AsRef<int>(_FallbackSeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _FallbackWearOffset;
+    private static nint? _FallbackWearOffset;
 
-  public ref float FallbackWear {
-    get {
-      if (_FallbackWearOffset == null) {
-        _FallbackWearOffset = Schema.GetOffset(0xCD91F68486253266);
-      }
-      return ref _Handle.AsRef<float>(_FallbackWearOffset!.Value);
+    public ref float FallbackWear {
+        get {
+            _FallbackWearOffset = _FallbackWearOffset ?? Schema.GetOffset(0xCD91F68486253266);
+            return ref _Handle.AsRef<float>(_FallbackWearOffset!.Value);
+        }
     }
-  }
-  private static nint? _FallbackStatTrakOffset;
+    private static nint? _FallbackStatTrakOffset;
 
-  public ref int FallbackStatTrak {
-    get {
-      if (_FallbackStatTrakOffset == null) {
-        _FallbackStatTrakOffset = Schema.GetOffset(0xCD91F68467ECC1E7);
-      }
-      return ref _Handle.AsRef<int>(_FallbackStatTrakOffset!.Value);
+    public ref int FallbackStatTrak {
+        get {
+            _FallbackStatTrakOffset = _FallbackStatTrakOffset ?? Schema.GetOffset(0xCD91F68467ECC1E7);
+            return ref _Handle.AsRef<int>(_FallbackStatTrakOffset!.Value);
+        }
     }
-  }
-  private static nint? _OldProvideeOffset;
+    private static nint? _OldProvideeOffset;
 
-  public ref CHandle<CBaseEntity> OldProvidee {
-    get {
-      if (_OldProvideeOffset == null) {
-        _OldProvideeOffset = Schema.GetOffset(0xCD91F684289C89E0);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OldProvideeOffset!.Value);
+    public ref CHandle<CBaseEntity> OldProvidee {
+        get {
+            _OldProvideeOffset = _OldProvideeOffset ?? Schema.GetOffset(0xCD91F684289C89E0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OldProvideeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OldOwnerClassOffset;
+    private static nint? _OldOwnerClassOffset;
 
-  public ref int OldOwnerClass {
-    get {
-      if (_OldOwnerClassOffset == null) {
-        _OldOwnerClassOffset = Schema.GetOffset(0xCD91F684D62FABE8);
-      }
-      return ref _Handle.AsRef<int>(_OldOwnerClassOffset!.Value);
+    public ref int OldOwnerClass {
+        get {
+            _OldOwnerClassOffset = _OldOwnerClassOffset ?? Schema.GetOffset(0xCD91F684D62FABE8);
+            return ref _Handle.AsRef<int>(_OldOwnerClassOffset!.Value);
+        }
     }
-  }
 
-  public void AttributeManagerUpdated() {
-    Schema.Update(_Handle, 0xCD91F684537B0586);
-  }
-  public void OriginalOwnerXuidLowUpdated() {
-    Schema.Update(_Handle, 0xCD91F6843C990CE3);
-  }
-  public void OriginalOwnerXuidHighUpdated() {
-    Schema.Update(_Handle, 0xCD91F6842628947F);
-  }
-  public void FallbackPaintKitUpdated() {
-    Schema.Update(_Handle, 0xCD91F6840A12D48F);
-  }
-  public void FallbackSeedUpdated() {
-    Schema.Update(_Handle, 0xCD91F684A1B165B2);
-  }
-  public void FallbackWearUpdated() {
-    Schema.Update(_Handle, 0xCD91F68486253266);
-  }
-  public void FallbackStatTrakUpdated() {
-    Schema.Update(_Handle, 0xCD91F68467ECC1E7);
-  }
+    public void AttributeManagerUpdated() => Schema.Update(_Handle, 0xCD91F684537B0586);
+    public void OriginalOwnerXuidLowUpdated() => Schema.Update(_Handle, 0xCD91F6843C990CE3);
+    public void OriginalOwnerXuidHighUpdated() => Schema.Update(_Handle, 0xCD91F6842628947F);
+    public void FallbackPaintKitUpdated() => Schema.Update(_Handle, 0xCD91F6840A12D48F);
+    public void FallbackSeedUpdated() => Schema.Update(_Handle, 0xCD91F684A1B165B2);
+    public void FallbackWearUpdated() => Schema.Update(_Handle, 0xCD91F68486253266);
+    public void FallbackStatTrakUpdated() => Schema.Update(_Handle, 0xCD91F68467ECC1E7);
 }

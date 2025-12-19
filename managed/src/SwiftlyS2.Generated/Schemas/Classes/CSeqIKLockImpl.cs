@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSeqIKLockImpl : SchemaClass, CSeqIKLock {
+internal partial class CSeqIKLockImpl : SchemaClass, CSeqIKLock
+{
+    public CSeqIKLockImpl(nint handle) : base(handle) { }
 
-  public CSeqIKLockImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PosWeightOffset;
 
-  private static nint? _PosWeightOffset;
-
-  public ref float PosWeight {
-    get {
-      if (_PosWeightOffset == null) {
-        _PosWeightOffset = Schema.GetOffset(0x9813F59E9CC6C04B);
-      }
-      return ref _Handle.AsRef<float>(_PosWeightOffset!.Value);
+    public ref float PosWeight {
+        get {
+            _PosWeightOffset = _PosWeightOffset ?? Schema.GetOffset(0x9813F59E9CC6C04B);
+            return ref _Handle.AsRef<float>(_PosWeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngleWeightOffset;
+    private static nint? _AngleWeightOffset;
 
-  public ref float AngleWeight {
-    get {
-      if (_AngleWeightOffset == null) {
-        _AngleWeightOffset = Schema.GetOffset(0x9813F59E51DFB6EE);
-      }
-      return ref _Handle.AsRef<float>(_AngleWeightOffset!.Value);
+    public ref float AngleWeight {
+        get {
+            _AngleWeightOffset = _AngleWeightOffset ?? Schema.GetOffset(0x9813F59E51DFB6EE);
+            return ref _Handle.AsRef<float>(_AngleWeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalBoneOffset;
+    private static nint? _LocalBoneOffset;
 
-  public ref short LocalBone {
-    get {
-      if (_LocalBoneOffset == null) {
-        _LocalBoneOffset = Schema.GetOffset(0x9813F59EC2F7B8CA);
-      }
-      return ref _Handle.AsRef<short>(_LocalBoneOffset!.Value);
+    public ref short LocalBone {
+        get {
+            _LocalBoneOffset = _LocalBoneOffset ?? Schema.GetOffset(0x9813F59EC2F7B8CA);
+            return ref _Handle.AsRef<short>(_LocalBoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _BonesOrientedAlongPositiveXOffset;
+    private static nint? _BonesOrientedAlongPositiveXOffset;
 
-  public ref bool BonesOrientedAlongPositiveX {
-    get {
-      if (_BonesOrientedAlongPositiveXOffset == null) {
-        _BonesOrientedAlongPositiveXOffset = Schema.GetOffset(0x9813F59ED3FDAB3A);
-      }
-      return ref _Handle.AsRef<bool>(_BonesOrientedAlongPositiveXOffset!.Value);
+    public ref bool BonesOrientedAlongPositiveX {
+        get {
+            _BonesOrientedAlongPositiveXOffset = _BonesOrientedAlongPositiveXOffset ?? Schema.GetOffset(0x9813F59ED3FDAB3A);
+            return ref _Handle.AsRef<bool>(_BonesOrientedAlongPositiveXOffset!.Value);
+        }
     }
-  }
 
 
 }

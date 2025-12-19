@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmTransitionEventImpl : CNmEventImpl, CNmTransitionEvent {
+internal partial class CNmTransitionEventImpl : CNmEventImpl, CNmTransitionEvent
+{
+    public CNmTransitionEventImpl(nint handle) : base(handle) { }
 
-  public CNmTransitionEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RuleOffset;
 
-  private static nint? _RuleOffset;
-
-  public ref NmTransitionRule_t Rule {
-    get {
-      if (_RuleOffset == null) {
-        _RuleOffset = Schema.GetOffset(0x11493D8CBA097173);
-      }
-      return ref _Handle.AsRef<NmTransitionRule_t>(_RuleOffset!.Value);
+    public ref NmTransitionRule_t Rule {
+        get {
+            _RuleOffset = _RuleOffset ?? Schema.GetOffset(0x11493D8CBA097173);
+            return ref _Handle.AsRef<NmTransitionRule_t>(_RuleOffset!.Value);
+        }
     }
-  }
-  private static nint? _IDOffset;
+    private static nint? _IDOffset;
 
-  public ref CGlobalSymbol ID {
-    get {
-      if (_IDOffset == null) {
-        _IDOffset = Schema.GetOffset(0x11493D8C95066900);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+    public ref CGlobalSymbol ID {
+        get {
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x11493D8C95066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+        }
     }
-  }
 
 
 }

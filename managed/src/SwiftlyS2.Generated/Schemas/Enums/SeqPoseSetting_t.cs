@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SeqPoseSetting_t : uint {
-
+public enum SeqPoseSetting_t : uint
+{
  SEQ_POSE_SETTING_CONSTANT = 0,
 
  SEQ_POSE_SETTING_ROTATION = 1,

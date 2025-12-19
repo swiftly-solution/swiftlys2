@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RenderFx_t : byte {
-
+public enum RenderFx_t : byte
+{
  kRenderFxNone = 0,
 
  kRenderFxPulseSlow = 1,

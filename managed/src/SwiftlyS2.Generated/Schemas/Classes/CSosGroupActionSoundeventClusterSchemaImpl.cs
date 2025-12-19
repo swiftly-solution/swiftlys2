@@ -6,122 +6,92 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSosGroupActionSoundeventClusterSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionSoundeventClusterSchema {
+internal partial class CSosGroupActionSoundeventClusterSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionSoundeventClusterSchema
+{
+    public CSosGroupActionSoundeventClusterSchemaImpl(nint handle) : base(handle) { }
 
-  public CSosGroupActionSoundeventClusterSchemaImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinNearbyOffset;
 
-  private static nint? _MinNearbyOffset;
+    public ref int MinNearby {
+        get {
+            _MinNearbyOffset = _MinNearbyOffset ?? Schema.GetOffset(0x7B0FC368DD207D3C);
+            return ref _Handle.AsRef<int>(_MinNearbyOffset!.Value);
+        }
+    }
+    private static nint? _ClusterEpsilonOffset;
 
-  public ref int MinNearby {
-    get {
-      if (_MinNearbyOffset == null) {
-        _MinNearbyOffset = Schema.GetOffset(0x7B0FC368DD207D3C);
-      }
-      return ref _Handle.AsRef<int>(_MinNearbyOffset!.Value);
+    public ref float ClusterEpsilon {
+        get {
+            _ClusterEpsilonOffset = _ClusterEpsilonOffset ?? Schema.GetOffset(0x7B0FC368D85674F7);
+            return ref _Handle.AsRef<float>(_ClusterEpsilonOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClusterEpsilonOffset;
+    private static nint? _ShouldPlayOpvarOffset;
 
-  public ref float ClusterEpsilon {
-    get {
-      if (_ClusterEpsilonOffset == null) {
-        _ClusterEpsilonOffset = Schema.GetOffset(0x7B0FC368D85674F7);
-      }
-      return ref _Handle.AsRef<float>(_ClusterEpsilonOffset!.Value);
-    }
-  }
-  private static nint? _ShouldPlayOpvarOffset;
+    public string ShouldPlayOpvar {
+        get {
+            _ShouldPlayOpvarOffset = _ShouldPlayOpvarOffset ?? Schema.GetOffset(0x7B0FC368FFE71768);
+            return Schema.GetString(_Handle.Read<nint>(_ShouldPlayOpvarOffset!.Value));
+        }
+        set {
+            _ShouldPlayOpvarOffset = _ShouldPlayOpvarOffset ?? Schema.GetOffset(0x7B0FC368FFE71768);
+            Schema.SetString(_Handle, _ShouldPlayOpvarOffset!.Value, value);
+        }
+    } 
+    private static nint? _ShouldPlayClusterChildOffset;
 
-  public string ShouldPlayOpvar {
-    get {
-      if (_ShouldPlayOpvarOffset == null) {
-        _ShouldPlayOpvarOffset = Schema.GetOffset(0x7B0FC368FFE71768);
-      }
-      var ptr = _Handle.Read<nint>(_ShouldPlayOpvarOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ShouldPlayOpvarOffset == null) {
-        _ShouldPlayOpvarOffset = Schema.GetOffset(0x7B0FC368FFE71768);
-      }
-      Schema.SetString(_Handle, _ShouldPlayOpvarOffset!.Value, value);
-    }
-  } 
-  private static nint? _ShouldPlayClusterChildOffset;
+    public string ShouldPlayClusterChild {
+        get {
+            _ShouldPlayClusterChildOffset = _ShouldPlayClusterChildOffset ?? Schema.GetOffset(0x7B0FC368F2A1690C);
+            return Schema.GetString(_Handle.Read<nint>(_ShouldPlayClusterChildOffset!.Value));
+        }
+        set {
+            _ShouldPlayClusterChildOffset = _ShouldPlayClusterChildOffset ?? Schema.GetOffset(0x7B0FC368F2A1690C);
+            Schema.SetString(_Handle, _ShouldPlayClusterChildOffset!.Value, value);
+        }
+    } 
+    private static nint? _ClusterSizeOpvarOffset;
 
-  public string ShouldPlayClusterChild {
-    get {
-      if (_ShouldPlayClusterChildOffset == null) {
-        _ShouldPlayClusterChildOffset = Schema.GetOffset(0x7B0FC368F2A1690C);
-      }
-      var ptr = _Handle.Read<nint>(_ShouldPlayClusterChildOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ShouldPlayClusterChildOffset == null) {
-        _ShouldPlayClusterChildOffset = Schema.GetOffset(0x7B0FC368F2A1690C);
-      }
-      Schema.SetString(_Handle, _ShouldPlayClusterChildOffset!.Value, value);
-    }
-  } 
-  private static nint? _ClusterSizeOpvarOffset;
+    public string ClusterSizeOpvar {
+        get {
+            _ClusterSizeOpvarOffset = _ClusterSizeOpvarOffset ?? Schema.GetOffset(0x7B0FC368153B8D78);
+            return Schema.GetString(_Handle.Read<nint>(_ClusterSizeOpvarOffset!.Value));
+        }
+        set {
+            _ClusterSizeOpvarOffset = _ClusterSizeOpvarOffset ?? Schema.GetOffset(0x7B0FC368153B8D78);
+            Schema.SetString(_Handle, _ClusterSizeOpvarOffset!.Value, value);
+        }
+    } 
+    private static nint? _GroupBoundingBoxMinsOpvarOffset;
 
-  public string ClusterSizeOpvar {
-    get {
-      if (_ClusterSizeOpvarOffset == null) {
-        _ClusterSizeOpvarOffset = Schema.GetOffset(0x7B0FC368153B8D78);
-      }
-      var ptr = _Handle.Read<nint>(_ClusterSizeOpvarOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ClusterSizeOpvarOffset == null) {
-        _ClusterSizeOpvarOffset = Schema.GetOffset(0x7B0FC368153B8D78);
-      }
-      Schema.SetString(_Handle, _ClusterSizeOpvarOffset!.Value, value);
-    }
-  } 
-  private static nint? _GroupBoundingBoxMinsOpvarOffset;
+    public string GroupBoundingBoxMinsOpvar {
+        get {
+            _GroupBoundingBoxMinsOpvarOffset = _GroupBoundingBoxMinsOpvarOffset ?? Schema.GetOffset(0x7B0FC3686A214FB0);
+            return Schema.GetString(_Handle.Read<nint>(_GroupBoundingBoxMinsOpvarOffset!.Value));
+        }
+        set {
+            _GroupBoundingBoxMinsOpvarOffset = _GroupBoundingBoxMinsOpvarOffset ?? Schema.GetOffset(0x7B0FC3686A214FB0);
+            Schema.SetString(_Handle, _GroupBoundingBoxMinsOpvarOffset!.Value, value);
+        }
+    } 
+    private static nint? _GroupBoundingBoxMaxsOpvarOffset;
 
-  public string GroupBoundingBoxMinsOpvar {
-    get {
-      if (_GroupBoundingBoxMinsOpvarOffset == null) {
-        _GroupBoundingBoxMinsOpvarOffset = Schema.GetOffset(0x7B0FC3686A214FB0);
-      }
-      var ptr = _Handle.Read<nint>(_GroupBoundingBoxMinsOpvarOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_GroupBoundingBoxMinsOpvarOffset == null) {
-        _GroupBoundingBoxMinsOpvarOffset = Schema.GetOffset(0x7B0FC3686A214FB0);
-      }
-      Schema.SetString(_Handle, _GroupBoundingBoxMinsOpvarOffset!.Value, value);
-    }
-  } 
-  private static nint? _GroupBoundingBoxMaxsOpvarOffset;
-
-  public string GroupBoundingBoxMaxsOpvar {
-    get {
-      if (_GroupBoundingBoxMaxsOpvarOffset == null) {
-        _GroupBoundingBoxMaxsOpvarOffset = Schema.GetOffset(0x7B0FC368B8AC7D92);
-      }
-      var ptr = _Handle.Read<nint>(_GroupBoundingBoxMaxsOpvarOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_GroupBoundingBoxMaxsOpvarOffset == null) {
-        _GroupBoundingBoxMaxsOpvarOffset = Schema.GetOffset(0x7B0FC368B8AC7D92);
-      }
-      Schema.SetString(_Handle, _GroupBoundingBoxMaxsOpvarOffset!.Value, value);
-    }
-  } 
+    public string GroupBoundingBoxMaxsOpvar {
+        get {
+            _GroupBoundingBoxMaxsOpvarOffset = _GroupBoundingBoxMaxsOpvarOffset ?? Schema.GetOffset(0x7B0FC368B8AC7D92);
+            return Schema.GetString(_Handle.Read<nint>(_GroupBoundingBoxMaxsOpvarOffset!.Value));
+        }
+        set {
+            _GroupBoundingBoxMaxsOpvarOffset = _GroupBoundingBoxMaxsOpvarOffset ?? Schema.GetOffset(0x7B0FC368B8AC7D92);
+            Schema.SetString(_Handle, _GroupBoundingBoxMaxsOpvarOffset!.Value, value);
+        }
+    } 
 
 
 }

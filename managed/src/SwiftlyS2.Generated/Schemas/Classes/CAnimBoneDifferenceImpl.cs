@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimBoneDifferenceImpl : SchemaClass, CAnimBoneDifference {
+internal partial class CAnimBoneDifferenceImpl : SchemaClass, CAnimBoneDifference
+{
+    public CAnimBoneDifferenceImpl(nint handle) : base(handle) { }
 
-  public CAnimBoneDifferenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public ref CBufferString Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xCC65F41E4D8F5786);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    public ref CBufferString Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCC65F41E4D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentOffset;
+    private static nint? _ParentOffset;
 
-  public ref CBufferString Parent {
-    get {
-      if (_ParentOffset == null) {
-        _ParentOffset = Schema.GetOffset(0xCC65F41E2FF7A69D);
-      }
-      return ref _Handle.AsRef<CBufferString>(_ParentOffset!.Value);
+    public ref CBufferString Parent {
+        get {
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0xCC65F41E2FF7A69D);
+            return ref _Handle.AsRef<CBufferString>(_ParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _PosErrorOffset;
+    private static nint? _PosErrorOffset;
 
-  public ref Vector PosError {
-    get {
-      if (_PosErrorOffset == null) {
-        _PosErrorOffset = Schema.GetOffset(0xCC65F41E48F0F4CD);
-      }
-      return ref _Handle.AsRef<Vector>(_PosErrorOffset!.Value);
+    public ref Vector PosError {
+        get {
+            _PosErrorOffset = _PosErrorOffset ?? Schema.GetOffset(0xCC65F41E48F0F4CD);
+            return ref _Handle.AsRef<Vector>(_PosErrorOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasRotationOffset;
+    private static nint? _HasRotationOffset;
 
-  public ref bool HasRotation {
-    get {
-      if (_HasRotationOffset == null) {
-        _HasRotationOffset = Schema.GetOffset(0xCC65F41E84FE2D9D);
-      }
-      return ref _Handle.AsRef<bool>(_HasRotationOffset!.Value);
+    public ref bool HasRotation {
+        get {
+            _HasRotationOffset = _HasRotationOffset ?? Schema.GetOffset(0xCC65F41E84FE2D9D);
+            return ref _Handle.AsRef<bool>(_HasRotationOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasMovementOffset;
+    private static nint? _HasMovementOffset;
 
-  public ref bool HasMovement {
-    get {
-      if (_HasMovementOffset == null) {
-        _HasMovementOffset = Schema.GetOffset(0xCC65F41E07AC967A);
-      }
-      return ref _Handle.AsRef<bool>(_HasMovementOffset!.Value);
+    public ref bool HasMovement {
+        get {
+            _HasMovementOffset = _HasMovementOffset ?? Schema.GetOffset(0xCC65F41E07AC967A);
+            return ref _Handle.AsRef<bool>(_HasMovementOffset!.Value);
+        }
     }
-  }
 
 
 }

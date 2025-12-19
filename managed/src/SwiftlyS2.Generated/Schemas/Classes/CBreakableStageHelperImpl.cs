@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBreakableStageHelperImpl : SchemaClass, CBreakableStageHelper {
+internal partial class CBreakableStageHelperImpl : SchemaClass, CBreakableStageHelper
+{
+    public CBreakableStageHelperImpl(nint handle) : base(handle) { }
 
-  public CBreakableStageHelperImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CurrentStageOffset;
 
-  private static nint? _CurrentStageOffset;
-
-  public ref int CurrentStage {
-    get {
-      if (_CurrentStageOffset == null) {
-        _CurrentStageOffset = Schema.GetOffset(0xF3B3D901E6644458);
-      }
-      return ref _Handle.AsRef<int>(_CurrentStageOffset!.Value);
+    public ref int CurrentStage {
+        get {
+            _CurrentStageOffset = _CurrentStageOffset ?? Schema.GetOffset(0xF3B3D901E6644458);
+            return ref _Handle.AsRef<int>(_CurrentStageOffset!.Value);
+        }
     }
-  }
-  private static nint? _StageCountOffset;
+    private static nint? _StageCountOffset;
 
-  public ref int StageCount {
-    get {
-      if (_StageCountOffset == null) {
-        _StageCountOffset = Schema.GetOffset(0xF3B3D901117B2130);
-      }
-      return ref _Handle.AsRef<int>(_StageCountOffset!.Value);
+    public ref int StageCount {
+        get {
+            _StageCountOffset = _StageCountOffset ?? Schema.GetOffset(0xF3B3D901117B2130);
+            return ref _Handle.AsRef<int>(_StageCountOffset!.Value);
+        }
     }
-  }
 
 
 }

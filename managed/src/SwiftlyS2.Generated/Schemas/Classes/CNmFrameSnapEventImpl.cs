@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFrameSnapEventImpl : CNmEventImpl, CNmFrameSnapEvent {
+internal partial class CNmFrameSnapEventImpl : CNmEventImpl, CNmFrameSnapEvent
+{
+    public CNmFrameSnapEventImpl(nint handle) : base(handle) { }
 
-  public CNmFrameSnapEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FrameSnapModeOffset;
 
-  private static nint? _FrameSnapModeOffset;
-
-  public ref NmFrameSnapEventMode_t FrameSnapMode {
-    get {
-      if (_FrameSnapModeOffset == null) {
-        _FrameSnapModeOffset = Schema.GetOffset(0x948CA66C6C68AC59);
-      }
-      return ref _Handle.AsRef<NmFrameSnapEventMode_t>(_FrameSnapModeOffset!.Value);
+    public ref NmFrameSnapEventMode_t FrameSnapMode {
+        get {
+            _FrameSnapModeOffset = _FrameSnapModeOffset ?? Schema.GetOffset(0x948CA66C6C68AC59);
+            return ref _Handle.AsRef<NmFrameSnapEventMode_t>(_FrameSnapModeOffset!.Value);
+        }
     }
-  }
 
 
 }

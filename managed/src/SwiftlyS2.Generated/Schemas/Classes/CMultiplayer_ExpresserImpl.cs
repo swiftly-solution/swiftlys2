@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMultiplayer_ExpresserImpl : CAI_ExpresserWithFollowupImpl, CMultiplayer_Expresser {
+internal partial class CMultiplayer_ExpresserImpl : CAI_ExpresserWithFollowupImpl, CMultiplayer_Expresser
+{
+    public CMultiplayer_ExpresserImpl(nint handle) : base(handle) { }
 
-  public CMultiplayer_ExpresserImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AllowMultipleScenesOffset;
 
-  private static nint? _AllowMultipleScenesOffset;
-
-  public ref bool AllowMultipleScenes {
-    get {
-      if (_AllowMultipleScenesOffset == null) {
-        _AllowMultipleScenesOffset = Schema.GetOffset(0x19772F22AE5FCD97);
-      }
-      return ref _Handle.AsRef<bool>(_AllowMultipleScenesOffset!.Value);
+    public ref bool AllowMultipleScenes {
+        get {
+            _AllowMultipleScenesOffset = _AllowMultipleScenesOffset ?? Schema.GetOffset(0x19772F22AE5FCD97);
+            return ref _Handle.AsRef<bool>(_AllowMultipleScenesOffset!.Value);
+        }
     }
-  }
 
 
 }

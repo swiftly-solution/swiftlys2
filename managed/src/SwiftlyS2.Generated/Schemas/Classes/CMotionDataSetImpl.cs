@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotionDataSetImpl : SchemaClass, CMotionDataSet {
+internal partial class CMotionDataSetImpl : SchemaClass, CMotionDataSet
+{
+    public CMotionDataSetImpl(nint handle) : base(handle) { }
 
-  public CMotionDataSetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GroupsOffset;
 
-  private static nint? _GroupsOffset;
-
-  public ref CUtlVector<CMotionGraphGroup> Groups {
-    get {
-      if (_GroupsOffset == null) {
-        _GroupsOffset = Schema.GetOffset(0x8AC1A050641FFE0D);
-      }
-      return ref _Handle.AsRef<CUtlVector<CMotionGraphGroup>>(_GroupsOffset!.Value);
+    public ref CUtlVector<CMotionGraphGroup> Groups {
+        get {
+            _GroupsOffset = _GroupsOffset ?? Schema.GetOffset(0x8AC1A050641FFE0D);
+            return ref _Handle.AsRef<CUtlVector<CMotionGraphGroup>>(_GroupsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DimensionCountOffset;
+    private static nint? _DimensionCountOffset;
 
-  public ref int DimensionCount {
-    get {
-      if (_DimensionCountOffset == null) {
-        _DimensionCountOffset = Schema.GetOffset(0x8AC1A05036656C8E);
-      }
-      return ref _Handle.AsRef<int>(_DimensionCountOffset!.Value);
+    public ref int DimensionCount {
+        get {
+            _DimensionCountOffset = _DimensionCountOffset ?? Schema.GetOffset(0x8AC1A05036656C8E);
+            return ref _Handle.AsRef<int>(_DimensionCountOffset!.Value);
+        }
     }
-  }
 
 
 }

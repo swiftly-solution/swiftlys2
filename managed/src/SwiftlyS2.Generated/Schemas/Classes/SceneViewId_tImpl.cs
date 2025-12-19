@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SceneViewId_tImpl : SchemaClass, SceneViewId_t {
+internal partial class SceneViewId_tImpl : SchemaClass, SceneViewId_t
+{
+    public SceneViewId_tImpl(nint handle) : base(handle) { }
 
-  public SceneViewId_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ViewIdOffset;
 
-  private static nint? _ViewIdOffset;
-
-  public ref ulong ViewId {
-    get {
-      if (_ViewIdOffset == null) {
-        _ViewIdOffset = Schema.GetOffset(0x66190338AE3CB1A1);
-      }
-      return ref _Handle.AsRef<ulong>(_ViewIdOffset!.Value);
+    public ref ulong ViewId {
+        get {
+            _ViewIdOffset = _ViewIdOffset ?? Schema.GetOffset(0x66190338AE3CB1A1);
+            return ref _Handle.AsRef<ulong>(_ViewIdOffset!.Value);
+        }
     }
-  }
-  private static nint? _FrameCountOffset;
+    private static nint? _FrameCountOffset;
 
-  public ref ulong FrameCount {
-    get {
-      if (_FrameCountOffset == null) {
-        _FrameCountOffset = Schema.GetOffset(0x661903381DBCD049);
-      }
-      return ref _Handle.AsRef<ulong>(_FrameCountOffset!.Value);
+    public ref ulong FrameCount {
+        get {
+            _FrameCountOffset = _FrameCountOffset ?? Schema.GetOffset(0x661903381DBCD049);
+            return ref _Handle.AsRef<ulong>(_FrameCountOffset!.Value);
+        }
     }
-  }
 
 
 }

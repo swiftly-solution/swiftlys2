@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_MovementRigidAttachToCPImpl : CParticleFunctionOperatorImpl, C_OP_MovementRigidAttachToCP {
+internal partial class C_OP_MovementRigidAttachToCPImpl : CParticleFunctionOperatorImpl, C_OP_MovementRigidAttachToCP
+{
+    public C_OP_MovementRigidAttachToCPImpl(nint handle) : base(handle) { }
 
-  public C_OP_MovementRigidAttachToCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x3D3A79B83F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x3D3A79B83F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleControlPointOffset;
+    private static nint? _ScaleControlPointOffset;
 
-  public ref int ScaleControlPoint {
-    get {
-      if (_ScaleControlPointOffset == null) {
-        _ScaleControlPointOffset = Schema.GetOffset(0x3D3A79B8B0577A70);
-      }
-      return ref _Handle.AsRef<int>(_ScaleControlPointOffset!.Value);
+    public ref int ScaleControlPoint {
+        get {
+            _ScaleControlPointOffset = _ScaleControlPointOffset ?? Schema.GetOffset(0x3D3A79B8B0577A70);
+            return ref _Handle.AsRef<int>(_ScaleControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleCPFieldOffset;
+    private static nint? _ScaleCPFieldOffset;
 
-  public ref int ScaleCPField {
-    get {
-      if (_ScaleCPFieldOffset == null) {
-        _ScaleCPFieldOffset = Schema.GetOffset(0x3D3A79B8B4A19A82);
-      }
-      return ref _Handle.AsRef<int>(_ScaleCPFieldOffset!.Value);
+    public ref int ScaleCPField {
+        get {
+            _ScaleCPFieldOffset = _ScaleCPFieldOffset ?? Schema.GetOffset(0x3D3A79B8B4A19A82);
+            return ref _Handle.AsRef<int>(_ScaleCPFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldInputOffset;
+    private static nint? _FieldInputOffset;
 
-  public ParticleAttributeIndex_t FieldInput {
-    get {
-      if (_FieldInputOffset == null) {
-        _FieldInputOffset = Schema.GetOffset(0x3D3A79B8AE775669);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+    public ParticleAttributeIndex_t FieldInput {
+        get {
+            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0x3D3A79B8AE775669);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x3D3A79B8E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x3D3A79B8E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetLocalOffset;
+    private static nint? _OffsetLocalOffset;
 
-  public ref bool OffsetLocal {
-    get {
-      if (_OffsetLocalOffset == null) {
-        _OffsetLocalOffset = Schema.GetOffset(0x3D3A79B8F07D31C1);
-      }
-      return ref _Handle.AsRef<bool>(_OffsetLocalOffset!.Value);
+    public ref bool OffsetLocal {
+        get {
+            _OffsetLocalOffset = _OffsetLocalOffset ?? Schema.GetOffset(0x3D3A79B8F07D31C1);
+            return ref _Handle.AsRef<bool>(_OffsetLocalOffset!.Value);
+        }
     }
-  }
 
 
 }

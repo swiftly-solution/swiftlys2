@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeNodeIntegrator_tImpl : SchemaClass, FeNodeIntegrator_t {
+internal partial class FeNodeIntegrator_tImpl : SchemaClass, FeNodeIntegrator_t
+{
+    public FeNodeIntegrator_tImpl(nint handle) : base(handle) { }
 
-  public FeNodeIntegrator_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PointDampingOffset;
 
-  private static nint? _PointDampingOffset;
-
-  public ref float PointDamping {
-    get {
-      if (_PointDampingOffset == null) {
-        _PointDampingOffset = Schema.GetOffset(0x64217E4215738003);
-      }
-      return ref _Handle.AsRef<float>(_PointDampingOffset!.Value);
+    public ref float PointDamping {
+        get {
+            _PointDampingOffset = _PointDampingOffset ?? Schema.GetOffset(0x64217E4215738003);
+            return ref _Handle.AsRef<float>(_PointDampingOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimationForceAttractionOffset;
+    private static nint? _AnimationForceAttractionOffset;
 
-  public ref float AnimationForceAttraction {
-    get {
-      if (_AnimationForceAttractionOffset == null) {
-        _AnimationForceAttractionOffset = Schema.GetOffset(0x64217E423D09A7B3);
-      }
-      return ref _Handle.AsRef<float>(_AnimationForceAttractionOffset!.Value);
+    public ref float AnimationForceAttraction {
+        get {
+            _AnimationForceAttractionOffset = _AnimationForceAttractionOffset ?? Schema.GetOffset(0x64217E423D09A7B3);
+            return ref _Handle.AsRef<float>(_AnimationForceAttractionOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimationVertexAttractionOffset;
+    private static nint? _AnimationVertexAttractionOffset;
 
-  public ref float AnimationVertexAttraction {
-    get {
-      if (_AnimationVertexAttractionOffset == null) {
-        _AnimationVertexAttractionOffset = Schema.GetOffset(0x64217E424E9EA4DC);
-      }
-      return ref _Handle.AsRef<float>(_AnimationVertexAttractionOffset!.Value);
+    public ref float AnimationVertexAttraction {
+        get {
+            _AnimationVertexAttractionOffset = _AnimationVertexAttractionOffset ?? Schema.GetOffset(0x64217E424E9EA4DC);
+            return ref _Handle.AsRef<float>(_AnimationVertexAttractionOffset!.Value);
+        }
     }
-  }
-  private static nint? _GravityOffset;
+    private static nint? _GravityOffset;
 
-  public ref float Gravity {
-    get {
-      if (_GravityOffset == null) {
-        _GravityOffset = Schema.GetOffset(0x64217E4289B3B847);
-      }
-      return ref _Handle.AsRef<float>(_GravityOffset!.Value);
+    public ref float Gravity {
+        get {
+            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0x64217E4289B3B847);
+            return ref _Handle.AsRef<float>(_GravityOffset!.Value);
+        }
     }
-  }
 
 
 }

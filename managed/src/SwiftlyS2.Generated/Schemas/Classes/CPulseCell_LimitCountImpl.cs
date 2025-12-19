@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_LimitCountImpl : CPulseCell_BaseRequirementImpl, CPulseCell_LimitCount {
+internal partial class CPulseCell_LimitCountImpl : CPulseCell_BaseRequirementImpl, CPulseCell_LimitCount
+{
+    public CPulseCell_LimitCountImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_LimitCountImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LimitCountOffset;
 
-  private static nint? _LimitCountOffset;
-
-  public ref int LimitCount {
-    get {
-      if (_LimitCountOffset == null) {
-        _LimitCountOffset = Schema.GetOffset(0x879D9892603807FF);
-      }
-      return ref _Handle.AsRef<int>(_LimitCountOffset!.Value);
+    public ref int LimitCount {
+        get {
+            _LimitCountOffset = _LimitCountOffset ?? Schema.GetOffset(0x879D9892603807FF);
+            return ref _Handle.AsRef<int>(_LimitCountOffset!.Value);
+        }
     }
-  }
 
 
 }

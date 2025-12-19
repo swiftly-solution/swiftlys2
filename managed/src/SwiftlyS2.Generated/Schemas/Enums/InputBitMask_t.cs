@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum InputBitMask_t : ulong {
-
+public enum InputBitMask_t : ulong
+{
  IN_NONE = 0,
 
  IN_ALL = ulong.MaxValue,

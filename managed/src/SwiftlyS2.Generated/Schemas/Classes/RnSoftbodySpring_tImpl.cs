@@ -6,30 +6,27 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnSoftbodySpring_tImpl : SchemaClass, RnSoftbodySpring_t {
+internal partial class RnSoftbodySpring_tImpl : SchemaClass, RnSoftbodySpring_t
+{
+    public RnSoftbodySpring_tImpl(nint handle) : base(handle) { }
 
-  public RnSoftbodySpring_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ushort> Particle {
-    get => new SchemaFixedArray<ushort>(_Handle, 0xAB4E9C9B863A8E83, 2, 2, 2);
-  }
-  private static nint? _LengthOffset;
-
-  public ref float Length {
-    get {
-      if (_LengthOffset == null) {
-        _LengthOffset = Schema.GetOffset(0xAB4E9C9BFF9776DF);
-      }
-      return ref _Handle.AsRef<float>(_LengthOffset!.Value);
+    public ISchemaFixedArray<ushort> Particle {
+        get => new SchemaFixedArray<ushort>(_Handle, 0xAB4E9C9B863A8E83, 2, 2, 2);
     }
-  }
+    private static nint? _LengthOffset;
+
+    public ref float Length {
+        get {
+            _LengthOffset = _LengthOffset ?? Schema.GetOffset(0xAB4E9C9BFF9776DF);
+            return ref _Handle.AsRef<float>(_LengthOffset!.Value);
+        }
+    }
 
 
 }

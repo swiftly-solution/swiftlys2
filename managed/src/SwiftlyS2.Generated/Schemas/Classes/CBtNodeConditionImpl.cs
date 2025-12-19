@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBtNodeConditionImpl : CBtNodeDecoratorImpl, CBtNodeCondition {
+internal partial class CBtNodeConditionImpl : CBtNodeDecoratorImpl, CBtNodeCondition
+{
+    public CBtNodeConditionImpl(nint handle) : base(handle) { }
 
-  public CBtNodeConditionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NegatedOffset;
 
-  private static nint? _NegatedOffset;
-
-  public ref bool Negated {
-    get {
-      if (_NegatedOffset == null) {
-        _NegatedOffset = Schema.GetOffset(0xD9C2E7ED3803BF0D);
-      }
-      return ref _Handle.AsRef<bool>(_NegatedOffset!.Value);
+    public ref bool Negated {
+        get {
+            _NegatedOffset = _NegatedOffset ?? Schema.GetOffset(0xD9C2E7ED3803BF0D);
+            return ref _Handle.AsRef<bool>(_NegatedOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CScriptNavBlockerImpl : CFuncNavBlockerImpl, CScriptNavBlocker {
+internal partial class CScriptNavBlockerImpl : CFuncNavBlockerImpl, CScriptNavBlocker
+{
+    public CScriptNavBlockerImpl(nint handle) : base(handle) { }
 
-  public CScriptNavBlockerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ExtentOffset;
 
-  private static nint? _ExtentOffset;
-
-  public ref Vector Extent {
-    get {
-      if (_ExtentOffset == null) {
-        _ExtentOffset = Schema.GetOffset(0x50903EB87AB1ED15);
-      }
-      return ref _Handle.AsRef<Vector>(_ExtentOffset!.Value);
+    public ref Vector Extent {
+        get {
+            _ExtentOffset = _ExtentOffset ?? Schema.GetOffset(0x50903EB87AB1ED15);
+            return ref _Handle.AsRef<Vector>(_ExtentOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ChoreoLookAtMode_t : uint {
-
+public enum ChoreoLookAtMode_t : uint
+{
  eInvalid = uint.MaxValue,
 
  eChest = 0,

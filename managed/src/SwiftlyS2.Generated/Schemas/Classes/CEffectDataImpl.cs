@@ -6,289 +6,204 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEffectDataImpl : SchemaClass, CEffectData {
+internal partial class CEffectDataImpl : SchemaClass, CEffectData
+{
+    public CEffectDataImpl(nint handle) : base(handle) { }
 
-  public CEffectDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OriginOffset;
 
-  private static nint? _OriginOffset;
-
-  public ref Vector Origin {
-    get {
-      if (_OriginOffset == null) {
-        _OriginOffset = Schema.GetOffset(0x15CC7C67F26E589B);
-      }
-      return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
+    public ref Vector Origin {
+        get {
+            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0x15CC7C67F26E589B);
+            return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartOffset;
+    private static nint? _StartOffset;
 
-  public ref Vector Start {
-    get {
-      if (_StartOffset == null) {
-        _StartOffset = Schema.GetOffset(0x15CC7C67C222DFCB);
-      }
-      return ref _Handle.AsRef<Vector>(_StartOffset!.Value);
+    public ref Vector Start {
+        get {
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0x15CC7C67C222DFCB);
+            return ref _Handle.AsRef<Vector>(_StartOffset!.Value);
+        }
     }
-  }
-  private static nint? _NormalOffset;
+    private static nint? _NormalOffset;
 
-  public ref Vector Normal {
-    get {
-      if (_NormalOffset == null) {
-        _NormalOffset = Schema.GetOffset(0x15CC7C67AFB36E96);
-      }
-      return ref _Handle.AsRef<Vector>(_NormalOffset!.Value);
+    public ref Vector Normal {
+        get {
+            _NormalOffset = _NormalOffset ?? Schema.GetOffset(0x15CC7C67AFB36E96);
+            return ref _Handle.AsRef<Vector>(_NormalOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnglesOffset;
+    private static nint? _AnglesOffset;
 
-  public ref QAngle Angles {
-    get {
-      if (_AnglesOffset == null) {
-        _AnglesOffset = Schema.GetOffset(0x15CC7C675658D555);
-      }
-      return ref _Handle.AsRef<QAngle>(_AnglesOffset!.Value);
+    public ref QAngle Angles {
+        get {
+            _AnglesOffset = _AnglesOffset ?? Schema.GetOffset(0x15CC7C675658D555);
+            return ref _Handle.AsRef<QAngle>(_AnglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _EntityOffset;
+    private static nint? _EntityOffset;
 
-  public ref CHandle<CEntityInstance> Entity {
-    get {
-      if (_EntityOffset == null) {
-        _EntityOffset = Schema.GetOffset(0x15CC7C676EBADCB0);
-      }
-      return ref _Handle.AsRef<CHandle<CEntityInstance>>(_EntityOffset!.Value);
+    public ref CHandle<CEntityInstance> Entity {
+        get {
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x15CC7C676EBADCB0);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_EntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _OtherEntityOffset;
+    private static nint? _OtherEntityOffset;
 
-  public ref CHandle<CEntityInstance> OtherEntity {
-    get {
-      if (_OtherEntityOffset == null) {
-        _OtherEntityOffset = Schema.GetOffset(0x15CC7C671E22FE7C);
-      }
-      return ref _Handle.AsRef<CHandle<CEntityInstance>>(_OtherEntityOffset!.Value);
+    public ref CHandle<CEntityInstance> OtherEntity {
+        get {
+            _OtherEntityOffset = _OtherEntityOffset ?? Schema.GetOffset(0x15CC7C671E22FE7C);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_OtherEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x15CC7C67B731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x15CC7C67B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _MagnitudeOffset;
+    private static nint? _MagnitudeOffset;
 
-  public ref float Magnitude {
-    get {
-      if (_MagnitudeOffset == null) {
-        _MagnitudeOffset = Schema.GetOffset(0x15CC7C67ED0A1D8B);
-      }
-      return ref _Handle.AsRef<float>(_MagnitudeOffset!.Value);
+    public ref float Magnitude {
+        get {
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x15CC7C67ED0A1D8B);
+            return ref _Handle.AsRef<float>(_MagnitudeOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x15CC7C675ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x15CC7C675ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _SurfacePropOffset;
+    private static nint? _SurfacePropOffset;
 
-  public ref CUtlStringToken SurfaceProp {
-    get {
-      if (_SurfacePropOffset == null) {
-        _SurfacePropOffset = Schema.GetOffset(0x15CC7C6765676439);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_SurfacePropOffset!.Value);
+    public ref CUtlStringToken SurfaceProp {
+        get {
+            _SurfacePropOffset = _SurfacePropOffset ?? Schema.GetOffset(0x15CC7C6765676439);
+            return ref _Handle.AsRef<CUtlStringToken>(_SurfacePropOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectIndexOffset;
+    private static nint? _EffectIndexOffset;
 
-  public SchemaUntypedField EffectIndex {
-    get {
-      if (_EffectIndexOffset == null) {
-        _EffectIndexOffset = Schema.GetOffset(0x15CC7C678EBB71E4);
-      }
-      return new SchemaUntypedField(_Handle + _EffectIndexOffset!.Value);
+    public SchemaUntypedField EffectIndex {
+        get {
+            _EffectIndexOffset = _EffectIndexOffset ?? Schema.GetOffset(0x15CC7C678EBB71E4);
+            return new SchemaUntypedField(_Handle + _EffectIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamageTypeOffset;
+    private static nint? _DamageTypeOffset;
 
-  public ref uint DamageType {
-    get {
-      if (_DamageTypeOffset == null) {
-        _DamageTypeOffset = Schema.GetOffset(0x15CC7C67A9599F54);
-      }
-      return ref _Handle.AsRef<uint>(_DamageTypeOffset!.Value);
+    public ref uint DamageType {
+        get {
+            _DamageTypeOffset = _DamageTypeOffset ?? Schema.GetOffset(0x15CC7C67A9599F54);
+            return ref _Handle.AsRef<uint>(_DamageTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _PenetrateOffset;
+    private static nint? _PenetrateOffset;
 
-  public ref byte Penetrate {
-    get {
-      if (_PenetrateOffset == null) {
-        _PenetrateOffset = Schema.GetOffset(0x15CC7C673A561927);
-      }
-      return ref _Handle.AsRef<byte>(_PenetrateOffset!.Value);
+    public ref byte Penetrate {
+        get {
+            _PenetrateOffset = _PenetrateOffset ?? Schema.GetOffset(0x15CC7C673A561927);
+            return ref _Handle.AsRef<byte>(_PenetrateOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialOffset;
+    private static nint? _MaterialOffset;
 
-  public ref ushort Material {
-    get {
-      if (_MaterialOffset == null) {
-        _MaterialOffset = Schema.GetOffset(0x15CC7C67F766BC9C);
-      }
-      return ref _Handle.AsRef<ushort>(_MaterialOffset!.Value);
+    public ref ushort Material {
+        get {
+            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0x15CC7C67F766BC9C);
+            return ref _Handle.AsRef<ushort>(_MaterialOffset!.Value);
+        }
     }
-  }
-  private static nint? _HitBoxOffset;
+    private static nint? _HitBoxOffset;
 
-  public ref short HitBox {
-    get {
-      if (_HitBoxOffset == null) {
-        _HitBoxOffset = Schema.GetOffset(0x15CC7C670B0E1E13);
-      }
-      return ref _Handle.AsRef<short>(_HitBoxOffset!.Value);
+    public ref short HitBox {
+        get {
+            _HitBoxOffset = _HitBoxOffset ?? Schema.GetOffset(0x15CC7C670B0E1E13);
+            return ref _Handle.AsRef<short>(_HitBoxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorOffset;
+    private static nint? _ColorOffset;
 
-  public ref byte Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x15CC7C6756C9DB94);
-      }
-      return ref _Handle.AsRef<byte>(_ColorOffset!.Value);
+    public ref byte Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x15CC7C6756C9DB94);
+            return ref _Handle.AsRef<byte>(_ColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref byte Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x15CC7C67A4A37590);
-      }
-      return ref _Handle.AsRef<byte>(_FlagsOffset!.Value);
+    public ref byte Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x15CC7C67A4A37590);
+            return ref _Handle.AsRef<byte>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttachmentIndexOffset;
+    private static nint? _AttachmentIndexOffset;
 
-  public AttachmentHandle_t AttachmentIndex {
-    get {
-      if (_AttachmentIndexOffset == null) {
-        _AttachmentIndexOffset = Schema.GetOffset(0x15CC7C677A529580);
-      }
-      return new AttachmentHandle_tImpl(_Handle + _AttachmentIndexOffset!.Value);
+    public AttachmentHandle_t AttachmentIndex {
+        get {
+            _AttachmentIndexOffset = _AttachmentIndexOffset ?? Schema.GetOffset(0x15CC7C677A529580);
+            return new AttachmentHandle_tImpl(_Handle + _AttachmentIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttachmentNameOffset;
+    private static nint? _AttachmentNameOffset;
 
-  public ref CUtlStringToken AttachmentName {
-    get {
-      if (_AttachmentNameOffset == null) {
-        _AttachmentNameOffset = Schema.GetOffset(0x15CC7C677C04923F);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_AttachmentNameOffset!.Value);
+    public ref CUtlStringToken AttachmentName {
+        get {
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x15CC7C677C04923F);
+            return ref _Handle.AsRef<CUtlStringToken>(_AttachmentNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectNameOffset;
+    private static nint? _EffectNameOffset;
 
-  public ref ushort EffectName {
-    get {
-      if (_EffectNameOffset == null) {
-        _EffectNameOffset = Schema.GetOffset(0x15CC7C67B614AEAE);
-      }
-      return ref _Handle.AsRef<ushort>(_EffectNameOffset!.Value);
+    public ref ushort EffectName {
+        get {
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x15CC7C67B614AEAE);
+            return ref _Handle.AsRef<ushort>(_EffectNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExplosionTypeOffset;
+    private static nint? _ExplosionTypeOffset;
 
-  public ref byte ExplosionType {
-    get {
-      if (_ExplosionTypeOffset == null) {
-        _ExplosionTypeOffset = Schema.GetOffset(0x15CC7C67D39F3394);
-      }
-      return ref _Handle.AsRef<byte>(_ExplosionTypeOffset!.Value);
+    public ref byte ExplosionType {
+        get {
+            _ExplosionTypeOffset = _ExplosionTypeOffset ?? Schema.GetOffset(0x15CC7C67D39F3394);
+            return ref _Handle.AsRef<byte>(_ExplosionTypeOffset!.Value);
+        }
     }
-  }
 
-  public void OriginUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67F26E589B);
-  }
-  public void StartUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67C222DFCB);
-  }
-  public void NormalUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67AFB36E96);
-  }
-  public void AnglesUpdated() {
-    Schema.Update(_Handle, 0x15CC7C675658D555);
-  }
-  public void EntityUpdated() {
-    Schema.Update(_Handle, 0x15CC7C676EBADCB0);
-  }
-  public void OtherEntityUpdated() {
-    Schema.Update(_Handle, 0x15CC7C671E22FE7C);
-  }
-  public void ScaleUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67B731A42F);
-  }
-  public void MagnitudeUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67ED0A1D8B);
-  }
-  public void RadiusUpdated() {
-    Schema.Update(_Handle, 0x15CC7C675ACFC08D);
-  }
-  public void SurfacePropUpdated() {
-    Schema.Update(_Handle, 0x15CC7C6765676439);
-  }
-  public void EffectIndexUpdated() {
-    Schema.Update(_Handle, 0x15CC7C678EBB71E4);
-  }
-  public void DamageTypeUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67A9599F54);
-  }
-  public void PenetrateUpdated() {
-    Schema.Update(_Handle, 0x15CC7C673A561927);
-  }
-  public void MaterialUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67F766BC9C);
-  }
-  public void HitBoxUpdated() {
-    Schema.Update(_Handle, 0x15CC7C670B0E1E13);
-  }
-  public void ColorUpdated() {
-    Schema.Update(_Handle, 0x15CC7C6756C9DB94);
-  }
-  public void FlagsUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67A4A37590);
-  }
-  public void AttachmentIndexUpdated() {
-    Schema.Update(_Handle, 0x15CC7C677A529580);
-  }
-  public void AttachmentNameUpdated() {
-    Schema.Update(_Handle, 0x15CC7C677C04923F);
-  }
-  public void EffectNameUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67B614AEAE);
-  }
-  public void ExplosionTypeUpdated() {
-    Schema.Update(_Handle, 0x15CC7C67D39F3394);
-  }
+    public void OriginUpdated() => Schema.Update(_Handle, 0x15CC7C67F26E589B);
+    public void StartUpdated() => Schema.Update(_Handle, 0x15CC7C67C222DFCB);
+    public void NormalUpdated() => Schema.Update(_Handle, 0x15CC7C67AFB36E96);
+    public void AnglesUpdated() => Schema.Update(_Handle, 0x15CC7C675658D555);
+    public void EntityUpdated() => Schema.Update(_Handle, 0x15CC7C676EBADCB0);
+    public void OtherEntityUpdated() => Schema.Update(_Handle, 0x15CC7C671E22FE7C);
+    public void ScaleUpdated() => Schema.Update(_Handle, 0x15CC7C67B731A42F);
+    public void MagnitudeUpdated() => Schema.Update(_Handle, 0x15CC7C67ED0A1D8B);
+    public void RadiusUpdated() => Schema.Update(_Handle, 0x15CC7C675ACFC08D);
+    public void SurfacePropUpdated() => Schema.Update(_Handle, 0x15CC7C6765676439);
+    public void EffectIndexUpdated() => Schema.Update(_Handle, 0x15CC7C678EBB71E4);
+    public void DamageTypeUpdated() => Schema.Update(_Handle, 0x15CC7C67A9599F54);
+    public void PenetrateUpdated() => Schema.Update(_Handle, 0x15CC7C673A561927);
+    public void MaterialUpdated() => Schema.Update(_Handle, 0x15CC7C67F766BC9C);
+    public void HitBoxUpdated() => Schema.Update(_Handle, 0x15CC7C670B0E1E13);
+    public void ColorUpdated() => Schema.Update(_Handle, 0x15CC7C6756C9DB94);
+    public void FlagsUpdated() => Schema.Update(_Handle, 0x15CC7C67A4A37590);
+    public void AttachmentIndexUpdated() => Schema.Update(_Handle, 0x15CC7C677A529580);
+    public void AttachmentNameUpdated() => Schema.Update(_Handle, 0x15CC7C677C04923F);
+    public void EffectNameUpdated() => Schema.Update(_Handle, 0x15CC7C67B614AEAE);
+    public void ExplosionTypeUpdated() => Schema.Update(_Handle, 0x15CC7C67D39F3394);
 }

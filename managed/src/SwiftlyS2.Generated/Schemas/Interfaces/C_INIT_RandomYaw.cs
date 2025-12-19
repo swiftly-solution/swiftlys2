@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomYaw : CGeneralRandomRotation, ISchemaClass<C_INIT_RandomYaw> {
-
-  static C_INIT_RandomYaw ISchemaClass<C_INIT_RandomYaw>.From(nint handle) => new C_INIT_RandomYawImpl(handle);
-  static int ISchemaClass<C_INIT_RandomYaw>.Size => 504;
-  static string? ISchemaClass<C_INIT_RandomYaw>.ClassName => null;
+public partial interface C_INIT_RandomYaw : CGeneralRandomRotation, ISchemaClass<C_INIT_RandomYaw>
+{
+    static C_INIT_RandomYaw ISchemaClass<C_INIT_RandomYaw>.From(nint handle) => new C_INIT_RandomYawImpl(handle);
+    static int ISchemaClass<C_INIT_RandomYaw>.Size => 504;
+    static string? ISchemaClass<C_INIT_RandomYaw>.ClassName => null;
 
 
 

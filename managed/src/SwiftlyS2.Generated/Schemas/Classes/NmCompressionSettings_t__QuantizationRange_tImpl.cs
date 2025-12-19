@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class NmCompressionSettings_t__QuantizationRange_tImpl : SchemaClass, NmCompressionSettings_t__QuantizationRange_t {
+internal partial class NmCompressionSettings_t__QuantizationRange_tImpl : SchemaClass, NmCompressionSettings_t__QuantizationRange_t
+{
+    public NmCompressionSettings_t__QuantizationRange_tImpl(nint handle) : base(handle) { }
 
-  public NmCompressionSettings_t__QuantizationRange_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RangeStartOffset;
 
-  private static nint? _RangeStartOffset;
-
-  public ref float RangeStart {
-    get {
-      if (_RangeStartOffset == null) {
-        _RangeStartOffset = Schema.GetOffset(0xA662A641F7D21E68);
-      }
-      return ref _Handle.AsRef<float>(_RangeStartOffset!.Value);
+    public ref float RangeStart {
+        get {
+            _RangeStartOffset = _RangeStartOffset ?? Schema.GetOffset(0xA662A641F7D21E68);
+            return ref _Handle.AsRef<float>(_RangeStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _RangeLengthOffset;
+    private static nint? _RangeLengthOffset;
 
-  public ref float RangeLength {
-    get {
-      if (_RangeLengthOffset == null) {
-        _RangeLengthOffset = Schema.GetOffset(0xA662A6418C3501A8);
-      }
-      return ref _Handle.AsRef<float>(_RangeLengthOffset!.Value);
+    public ref float RangeLength {
+        get {
+            _RangeLengthOffset = _RangeLengthOffset ?? Schema.GetOffset(0xA662A6418C3501A8);
+            return ref _Handle.AsRef<float>(_RangeLengthOffset!.Value);
+        }
     }
-  }
 
 
 }

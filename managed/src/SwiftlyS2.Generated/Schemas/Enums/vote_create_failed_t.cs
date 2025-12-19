@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum vote_create_failed_t : uint {
-
+public enum vote_create_failed_t : uint
+{
  VOTE_FAILED_GENERIC = 0,
 
  VOTE_FAILED_TRANSITIONING_PLAYERS = 1,

@@ -6,56 +6,41 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseGameBlackboardImpl : CBaseEntityImpl, CPulseGameBlackboard {
+internal partial class CPulseGameBlackboardImpl : CBaseEntityImpl, CPulseGameBlackboard
+{
+    public CPulseGameBlackboardImpl(nint handle) : base(handle) { }
 
-  public CPulseGameBlackboardImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StrGraphNameOffset;
 
-  private static nint? _StrGraphNameOffset;
+    public string StrGraphName {
+        get {
+            _StrGraphNameOffset = _StrGraphNameOffset ?? Schema.GetOffset(0xF9A17A20C99E48AF);
+            return Schema.GetString(_Handle.Read<nint>(_StrGraphNameOffset!.Value));
+        }
+        set {
+            _StrGraphNameOffset = _StrGraphNameOffset ?? Schema.GetOffset(0xF9A17A20C99E48AF);
+            Schema.SetString(_Handle, _StrGraphNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _StrStateBlobOffset;
 
-  public string StrGraphName {
-    get {
-      if (_StrGraphNameOffset == null) {
-        _StrGraphNameOffset = Schema.GetOffset(0xF9A17A20C99E48AF);
-      }
-      var ptr = _Handle.Read<nint>(_StrGraphNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrGraphNameOffset == null) {
-        _StrGraphNameOffset = Schema.GetOffset(0xF9A17A20C99E48AF);
-      }
-      Schema.SetString(_Handle, _StrGraphNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _StrStateBlobOffset;
+    public string StrStateBlob {
+        get {
+            _StrStateBlobOffset = _StrStateBlobOffset ?? Schema.GetOffset(0xF9A17A2046708C2A);
+            return Schema.GetString(_Handle.Read<nint>(_StrStateBlobOffset!.Value));
+        }
+        set {
+            _StrStateBlobOffset = _StrStateBlobOffset ?? Schema.GetOffset(0xF9A17A2046708C2A);
+            Schema.SetString(_Handle, _StrStateBlobOffset!.Value, value);
+        }
+    } 
 
-  public string StrStateBlob {
-    get {
-      if (_StrStateBlobOffset == null) {
-        _StrStateBlobOffset = Schema.GetOffset(0xF9A17A2046708C2A);
-      }
-      var ptr = _Handle.Read<nint>(_StrStateBlobOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrStateBlobOffset == null) {
-        _StrStateBlobOffset = Schema.GetOffset(0xF9A17A2046708C2A);
-      }
-      Schema.SetString(_Handle, _StrStateBlobOffset!.Value, value);
-    }
-  } 
-
-  public void StrGraphNameUpdated() {
-    Schema.Update(_Handle, 0xF9A17A20C99E48AF);
-  }
-  public void StrStateBlobUpdated() {
-    Schema.Update(_Handle, 0xF9A17A2046708C2A);
-  }
+    public void StrGraphNameUpdated() => Schema.Update(_Handle, 0xF9A17A20C99E48AF);
+    public void StrStateBlobUpdated() => Schema.Update(_Handle, 0xF9A17A2046708C2A);
 }

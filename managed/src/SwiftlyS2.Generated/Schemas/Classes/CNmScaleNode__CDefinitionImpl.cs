@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmScaleNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmScaleNode__CDefinition {
+internal partial class CNmScaleNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmScaleNode__CDefinition
+{
+    public CNmScaleNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmScaleNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaskNodeIdxOffset;
 
-  private static nint? _MaskNodeIdxOffset;
-
-  public ref short MaskNodeIdx {
-    get {
-      if (_MaskNodeIdxOffset == null) {
-        _MaskNodeIdxOffset = Schema.GetOffset(0x5902F6B1216FA578);
-      }
-      return ref _Handle.AsRef<short>(_MaskNodeIdxOffset!.Value);
+    public ref short MaskNodeIdx {
+        get {
+            _MaskNodeIdxOffset = _MaskNodeIdxOffset ?? Schema.GetOffset(0x5902F6B1216FA578);
+            return ref _Handle.AsRef<short>(_MaskNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnableNodeIdxOffset;
+    private static nint? _EnableNodeIdxOffset;
 
-  public ref short EnableNodeIdx {
-    get {
-      if (_EnableNodeIdxOffset == null) {
-        _EnableNodeIdxOffset = Schema.GetOffset(0x5902F6B10C9DD729);
-      }
-      return ref _Handle.AsRef<short>(_EnableNodeIdxOffset!.Value);
+    public ref short EnableNodeIdx {
+        get {
+            _EnableNodeIdxOffset = _EnableNodeIdxOffset ?? Schema.GetOffset(0x5902F6B10C9DD729);
+            return ref _Handle.AsRef<short>(_EnableNodeIdxOffset!.Value);
+        }
     }
-  }
 
 
 }

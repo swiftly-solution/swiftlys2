@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmEventConsumerLegacy : CNmEventConsumer, ISchemaClass<CNmEventConsumerLegacy> {
-
-  static CNmEventConsumerLegacy ISchemaClass<CNmEventConsumerLegacy>.From(nint handle) => new CNmEventConsumerLegacyImpl(handle);
-  static int ISchemaClass<CNmEventConsumerLegacy>.Size => 32;
-  static string? ISchemaClass<CNmEventConsumerLegacy>.ClassName => null;
+public partial interface CNmEventConsumerLegacy : CNmEventConsumer, ISchemaClass<CNmEventConsumerLegacy>
+{
+    static CNmEventConsumerLegacy ISchemaClass<CNmEventConsumerLegacy>.From(nint handle) => new CNmEventConsumerLegacyImpl(handle);
+    static int ISchemaClass<CNmEventConsumerLegacy>.Size => 32;
+    static string? ISchemaClass<CNmEventConsumerLegacy>.ClassName => null;
 
 
 

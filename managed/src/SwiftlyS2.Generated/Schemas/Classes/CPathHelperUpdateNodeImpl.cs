@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPathHelperUpdateNodeImpl : CUnaryUpdateNodeImpl, CPathHelperUpdateNode {
+internal partial class CPathHelperUpdateNodeImpl : CUnaryUpdateNodeImpl, CPathHelperUpdateNode
+{
+    public CPathHelperUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CPathHelperUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StoppingRadiusOffset;
 
-  private static nint? _StoppingRadiusOffset;
-
-  public ref float StoppingRadius {
-    get {
-      if (_StoppingRadiusOffset == null) {
-        _StoppingRadiusOffset = Schema.GetOffset(0xB24262C3172E3D9);
-      }
-      return ref _Handle.AsRef<float>(_StoppingRadiusOffset!.Value);
+    public ref float StoppingRadius {
+        get {
+            _StoppingRadiusOffset = _StoppingRadiusOffset ?? Schema.GetOffset(0xB24262C3172E3D9);
+            return ref _Handle.AsRef<float>(_StoppingRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _StoppingSpeedScaleOffset;
+    private static nint? _StoppingSpeedScaleOffset;
 
-  public ref float StoppingSpeedScale {
-    get {
-      if (_StoppingSpeedScaleOffset == null) {
-        _StoppingSpeedScaleOffset = Schema.GetOffset(0xB24262CA2389D04);
-      }
-      return ref _Handle.AsRef<float>(_StoppingSpeedScaleOffset!.Value);
+    public ref float StoppingSpeedScale {
+        get {
+            _StoppingSpeedScaleOffset = _StoppingSpeedScaleOffset ?? Schema.GetOffset(0xB24262CA2389D04);
+            return ref _Handle.AsRef<float>(_StoppingSpeedScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

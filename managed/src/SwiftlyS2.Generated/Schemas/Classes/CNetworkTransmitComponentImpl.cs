@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNetworkTransmitComponentImpl : SchemaClass, CNetworkTransmitComponent {
+internal partial class CNetworkTransmitComponentImpl : SchemaClass, CNetworkTransmitComponent
+{
+    public CNetworkTransmitComponentImpl(nint handle) : base(handle) { }
 
-  public CNetworkTransmitComponentImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransmitStateOwnedCounterOffset;
 
-  private static nint? _TransmitStateOwnedCounterOffset;
-
-  public ref byte TransmitStateOwnedCounter {
-    get {
-      if (_TransmitStateOwnedCounterOffset == null) {
-        _TransmitStateOwnedCounterOffset = Schema.GetOffset(0x2D6BD23F6BC30751);
-      }
-      return ref _Handle.AsRef<byte>(_TransmitStateOwnedCounterOffset!.Value);
+    public ref byte TransmitStateOwnedCounter {
+        get {
+            _TransmitStateOwnedCounterOffset = _TransmitStateOwnedCounterOffset ?? Schema.GetOffset(0x2D6BD23F6BC30751);
+            return ref _Handle.AsRef<byte>(_TransmitStateOwnedCounterOffset!.Value);
+        }
     }
-  }
 
 
 }

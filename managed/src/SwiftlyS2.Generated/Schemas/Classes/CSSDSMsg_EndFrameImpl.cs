@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSSDSMsg_EndFrameImpl : SchemaClass, CSSDSMsg_EndFrame {
+internal partial class CSSDSMsg_EndFrameImpl : SchemaClass, CSSDSMsg_EndFrame
+{
+    public CSSDSMsg_EndFrameImpl(nint handle) : base(handle) { }
 
-  public CSSDSMsg_EndFrameImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ViewsOffset;
 
-  private static nint? _ViewsOffset;
-
-  public ref CUtlVector<CSSDSEndFrameViewInfo> Views {
-    get {
-      if (_ViewsOffset == null) {
-        _ViewsOffset = Schema.GetOffset(0x6F265E19E9FEAC51);
-      }
-      return ref _Handle.AsRef<CUtlVector<CSSDSEndFrameViewInfo>>(_ViewsOffset!.Value);
+    public ref CUtlVector<CSSDSEndFrameViewInfo> Views {
+        get {
+            _ViewsOffset = _ViewsOffset ?? Schema.GetOffset(0x6F265E19E9FEAC51);
+            return ref _Handle.AsRef<CUtlVector<CSSDSEndFrameViewInfo>>(_ViewsOffset!.Value);
+        }
     }
-  }
 
 
 }

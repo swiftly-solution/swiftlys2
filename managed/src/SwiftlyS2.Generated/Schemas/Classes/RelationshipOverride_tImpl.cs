@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RelationshipOverride_tImpl : Relationship_tImpl, RelationshipOverride_t {
+internal partial class RelationshipOverride_tImpl : Relationship_tImpl, RelationshipOverride_t
+{
+    public RelationshipOverride_tImpl(nint handle) : base(handle) { }
 
-  public RelationshipOverride_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EntityOffset;
 
-  private static nint? _EntityOffset;
-
-  public ref CHandle<CBaseEntity> Entity {
-    get {
-      if (_EntityOffset == null) {
-        _EntityOffset = Schema.GetOffset(0x2EECEBE0D33FF5DA);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+    public ref CHandle<CBaseEntity> Entity {
+        get {
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x2EECEBE0D33FF5DA);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClassTypeOffset;
+    private static nint? _ClassTypeOffset;
 
-  public ref Class_T ClassType {
-    get {
-      if (_ClassTypeOffset == null) {
-        _ClassTypeOffset = Schema.GetOffset(0x2EECEBE040A47427);
-      }
-      return ref _Handle.AsRef<Class_T>(_ClassTypeOffset!.Value);
+    public ref Class_T ClassType {
+        get {
+            _ClassTypeOffset = _ClassTypeOffset ?? Schema.GetOffset(0x2EECEBE040A47427);
+            return ref _Handle.AsRef<Class_T>(_ClassTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

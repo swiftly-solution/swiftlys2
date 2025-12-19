@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventAppShutdown_tImpl : SchemaClass, EventAppShutdown_t {
+internal partial class EventAppShutdown_tImpl : SchemaClass, EventAppShutdown_t
+{
+    public EventAppShutdown_tImpl(nint handle) : base(handle) { }
 
-  public EventAppShutdown_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Dummy0Offset;
 
-  private static nint? _Dummy0Offset;
-
-  public ref int Dummy0 {
-    get {
-      if (_Dummy0Offset == null) {
-        _Dummy0Offset = Schema.GetOffset(0x815B1527A26B2B9D);
-      }
-      return ref _Handle.AsRef<int>(_Dummy0Offset!.Value);
+    public ref int Dummy0 {
+        get {
+            _Dummy0Offset = _Dummy0Offset ?? Schema.GetOffset(0x815B1527A26B2B9D);
+            return ref _Handle.AsRef<int>(_Dummy0Offset!.Value);
+        }
     }
-  }
 
 
 }

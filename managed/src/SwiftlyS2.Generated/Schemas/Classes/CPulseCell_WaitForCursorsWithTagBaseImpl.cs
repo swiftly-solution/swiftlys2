@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_WaitForCursorsWithTagBaseImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_WaitForCursorsWithTagBase {
+internal partial class CPulseCell_WaitForCursorsWithTagBaseImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_WaitForCursorsWithTagBase
+{
+    public CPulseCell_WaitForCursorsWithTagBaseImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_WaitForCursorsWithTagBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CursorsAllowedToWaitOffset;
 
-  private static nint? _CursorsAllowedToWaitOffset;
-
-  public ref int CursorsAllowedToWait {
-    get {
-      if (_CursorsAllowedToWaitOffset == null) {
-        _CursorsAllowedToWaitOffset = Schema.GetOffset(0xA8108DB0236617EC);
-      }
-      return ref _Handle.AsRef<int>(_CursorsAllowedToWaitOffset!.Value);
+    public ref int CursorsAllowedToWait {
+        get {
+            _CursorsAllowedToWaitOffset = _CursorsAllowedToWaitOffset ?? Schema.GetOffset(0xA8108DB0236617EC);
+            return ref _Handle.AsRef<int>(_CursorsAllowedToWaitOffset!.Value);
+        }
     }
-  }
-  private static nint? _WaitCompleteOffset;
+    private static nint? _WaitCompleteOffset;
 
-  public CPulse_ResumePoint WaitComplete {
-    get {
-      if (_WaitCompleteOffset == null) {
-        _WaitCompleteOffset = Schema.GetOffset(0xA8108DB02C41AD97);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _WaitCompleteOffset!.Value);
+    public CPulse_ResumePoint WaitComplete {
+        get {
+            _WaitCompleteOffset = _WaitCompleteOffset ?? Schema.GetOffset(0xA8108DB02C41AD97);
+            return new CPulse_ResumePointImpl(_Handle + _WaitCompleteOffset!.Value);
+        }
     }
-  }
 
 
 }

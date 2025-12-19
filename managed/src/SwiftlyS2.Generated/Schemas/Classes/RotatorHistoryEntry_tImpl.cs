@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RotatorHistoryEntry_tImpl : SchemaClass, RotatorHistoryEntry_t {
+internal partial class RotatorHistoryEntry_tImpl : SchemaClass, RotatorHistoryEntry_t
+{
+    public RotatorHistoryEntry_tImpl(nint handle) : base(handle) { }
 
-  public RotatorHistoryEntry_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InvChangeOffset;
 
-  private static nint? _InvChangeOffset;
-
-  public ref Quaternion InvChange {
-    get {
-      if (_InvChangeOffset == null) {
-        _InvChangeOffset = Schema.GetOffset(0xB27D5BA9A4E4D41B);
-      }
-      return ref _Handle.AsRef<Quaternion>(_InvChangeOffset!.Value);
+    public ref Quaternion InvChange {
+        get {
+            _InvChangeOffset = _InvChangeOffset ?? Schema.GetOffset(0xB27D5BA9A4E4D41B);
+            return ref _Handle.AsRef<Quaternion>(_InvChangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeRotationStartOffset;
+    private static nint? _TimeRotationStartOffset;
 
-  public GameTime_t TimeRotationStart {
-    get {
-      if (_TimeRotationStartOffset == null) {
-        _TimeRotationStartOffset = Schema.GetOffset(0xB27D5BA9A2B2E208);
-      }
-      return new GameTime_tImpl(_Handle + _TimeRotationStartOffset!.Value);
+    public GameTime_t TimeRotationStart {
+        get {
+            _TimeRotationStartOffset = _TimeRotationStartOffset ?? Schema.GetOffset(0xB27D5BA9A2B2E208);
+            return new GameTime_tImpl(_Handle + _TimeRotationStartOffset!.Value);
+        }
     }
-  }
 
 
 }

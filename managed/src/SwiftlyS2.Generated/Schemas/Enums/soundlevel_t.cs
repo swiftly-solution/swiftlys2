@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum soundlevel_t : uint {
-
+public enum soundlevel_t : uint
+{
  SNDLVL_NONE = 0,
 
  SNDLVL_20dB = 20,

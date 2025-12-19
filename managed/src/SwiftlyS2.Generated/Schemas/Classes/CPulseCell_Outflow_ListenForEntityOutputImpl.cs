@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Outflow_ListenForEntityOutputImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Outflow_ListenForEntityOutput {
+internal partial class CPulseCell_Outflow_ListenForEntityOutputImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Outflow_ListenForEntityOutput
+{
+    public CPulseCell_Outflow_ListenForEntityOutputImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Outflow_ListenForEntityOutputImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnFiredOffset;
 
-  private static nint? _OnFiredOffset;
-
-  public SignatureOutflow_Resume OnFired {
-    get {
-      if (_OnFiredOffset == null) {
-        _OnFiredOffset = Schema.GetOffset(0xCB35163784825730);
-      }
-      return new SignatureOutflow_ResumeImpl(_Handle + _OnFiredOffset!.Value);
+    public SignatureOutflow_Resume OnFired {
+        get {
+            _OnFiredOffset = _OnFiredOffset ?? Schema.GetOffset(0xCB35163784825730);
+            return new SignatureOutflow_ResumeImpl(_Handle + _OnFiredOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnCanceledOffset;
+    private static nint? _OnCanceledOffset;
 
-  public CPulse_ResumePoint OnCanceled {
-    get {
-      if (_OnCanceledOffset == null) {
-        _OnCanceledOffset = Schema.GetOffset(0xCB351637F02162DB);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+    public CPulse_ResumePoint OnCanceled {
+        get {
+            _OnCanceledOffset = _OnCanceledOffset ?? Schema.GetOffset(0xCB351637F02162DB);
+            return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrEntityOutputOffset;
+    private static nint? _StrEntityOutputOffset;
 
-  public ref CGlobalSymbol StrEntityOutput {
-    get {
-      if (_StrEntityOutputOffset == null) {
-        _StrEntityOutputOffset = Schema.GetOffset(0xCB351637C8E70456);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_StrEntityOutputOffset!.Value);
+    public ref CGlobalSymbol StrEntityOutput {
+        get {
+            _StrEntityOutputOffset = _StrEntityOutputOffset ?? Schema.GetOffset(0xCB351637C8E70456);
+            return ref _Handle.AsRef<CGlobalSymbol>(_StrEntityOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrEntityOutputParamOffset;
+    private static nint? _StrEntityOutputParamOffset;
 
-  public string StrEntityOutputParam {
-    get {
-      if (_StrEntityOutputParamOffset == null) {
-        _StrEntityOutputParamOffset = Schema.GetOffset(0xCB351637BB356637);
-      }
-      var ptr = _Handle.Read<nint>(_StrEntityOutputParamOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrEntityOutputParamOffset == null) {
-        _StrEntityOutputParamOffset = Schema.GetOffset(0xCB351637BB356637);
-      }
-      Schema.SetString(_Handle, _StrEntityOutputParamOffset!.Value, value);
-    }
-  } 
-  private static nint? _ListenUntilCanceledOffset;
+    public string StrEntityOutputParam {
+        get {
+            _StrEntityOutputParamOffset = _StrEntityOutputParamOffset ?? Schema.GetOffset(0xCB351637BB356637);
+            return Schema.GetString(_Handle.Read<nint>(_StrEntityOutputParamOffset!.Value));
+        }
+        set {
+            _StrEntityOutputParamOffset = _StrEntityOutputParamOffset ?? Schema.GetOffset(0xCB351637BB356637);
+            Schema.SetString(_Handle, _StrEntityOutputParamOffset!.Value, value);
+        }
+    } 
+    private static nint? _ListenUntilCanceledOffset;
 
-  public ref bool ListenUntilCanceled {
-    get {
-      if (_ListenUntilCanceledOffset == null) {
-        _ListenUntilCanceledOffset = Schema.GetOffset(0xCB351637C798285D);
-      }
-      return ref _Handle.AsRef<bool>(_ListenUntilCanceledOffset!.Value);
+    public ref bool ListenUntilCanceled {
+        get {
+            _ListenUntilCanceledOffset = _ListenUntilCanceledOffset ?? Schema.GetOffset(0xCB351637C798285D);
+            return ref _Handle.AsRef<bool>(_ListenUntilCanceledOffset!.Value);
+        }
     }
-  }
 
 
 }

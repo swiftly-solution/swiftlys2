@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRemapValueComponentUpdaterImpl : CAnimComponentUpdaterImpl, CRemapValueComponentUpdater {
+internal partial class CRemapValueComponentUpdaterImpl : CAnimComponentUpdaterImpl, CRemapValueComponentUpdater
+{
+    public CRemapValueComponentUpdaterImpl(nint handle) : base(handle) { }
 
-  public CRemapValueComponentUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ItemsOffset;
 
-  private static nint? _ItemsOffset;
-
-  public ref CUtlVector<CRemapValueUpdateItem> Items {
-    get {
-      if (_ItemsOffset == null) {
-        _ItemsOffset = Schema.GetOffset(0xA80D46C07A87EDAF);
-      }
-      return ref _Handle.AsRef<CUtlVector<CRemapValueUpdateItem>>(_ItemsOffset!.Value);
+    public ref CUtlVector<CRemapValueUpdateItem> Items {
+        get {
+            _ItemsOffset = _ItemsOffset ?? Schema.GetOffset(0xA80D46C07A87EDAF);
+            return ref _Handle.AsRef<CUtlVector<CRemapValueUpdateItem>>(_ItemsOffset!.Value);
+        }
     }
-  }
 
 
 }

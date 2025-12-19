@@ -6,88 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSSDSMsg_LayerBaseImpl : SchemaClass, CSSDSMsg_LayerBase {
+internal partial class CSSDSMsg_LayerBaseImpl : SchemaClass, CSSDSMsg_LayerBase
+{
+    public CSSDSMsg_LayerBaseImpl(nint handle) : base(handle) { }
 
-  public CSSDSMsg_LayerBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ViewIdOffset;
 
-  private static nint? _ViewIdOffset;
+    public SceneViewId_t ViewId {
+        get {
+            _ViewIdOffset = _ViewIdOffset ?? Schema.GetOffset(0x9F18C5E5E976CB25);
+            return new SceneViewId_tImpl(_Handle + _ViewIdOffset!.Value);
+        }
+    }
+    private static nint? _ViewNameOffset;
 
-  public SceneViewId_t ViewId {
-    get {
-      if (_ViewIdOffset == null) {
-        _ViewIdOffset = Schema.GetOffset(0x9F18C5E5E976CB25);
-      }
-      return new SceneViewId_tImpl(_Handle + _ViewIdOffset!.Value);
-    }
-  }
-  private static nint? _ViewNameOffset;
+    public string ViewName {
+        get {
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0x9F18C5E5BA5BBDBB);
+            return Schema.GetString(_Handle.Read<nint>(_ViewNameOffset!.Value));
+        }
+        set {
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0x9F18C5E5BA5BBDBB);
+            Schema.SetString(_Handle, _ViewNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _LayerIdOffset;
 
-  public string ViewName {
-    get {
-      if (_ViewNameOffset == null) {
-        _ViewNameOffset = Schema.GetOffset(0x9F18C5E5BA5BBDBB);
-      }
-      var ptr = _Handle.Read<nint>(_ViewNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref ulong LayerId {
+        get {
+            _LayerIdOffset = _LayerIdOffset ?? Schema.GetOffset(0x9F18C5E531A19D87);
+            return ref _Handle.AsRef<ulong>(_LayerIdOffset!.Value);
+        }
     }
-    set {
-      if (_ViewNameOffset == null) {
-        _ViewNameOffset = Schema.GetOffset(0x9F18C5E5BA5BBDBB);
-      }
-      Schema.SetString(_Handle, _ViewNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _LayerIdOffset;
+    private static nint? _LayerNameOffset;
 
-  public ref ulong LayerId {
-    get {
-      if (_LayerIdOffset == null) {
-        _LayerIdOffset = Schema.GetOffset(0x9F18C5E531A19D87);
-      }
-      return ref _Handle.AsRef<ulong>(_LayerIdOffset!.Value);
-    }
-  }
-  private static nint? _LayerNameOffset;
+    public string LayerName {
+        get {
+            _LayerNameOffset = _LayerNameOffset ?? Schema.GetOffset(0x9F18C5E55A7163B5);
+            return Schema.GetString(_Handle.Read<nint>(_LayerNameOffset!.Value));
+        }
+        set {
+            _LayerNameOffset = _LayerNameOffset ?? Schema.GetOffset(0x9F18C5E55A7163B5);
+            Schema.SetString(_Handle, _LayerNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _DisplayTextOffset;
 
-  public string LayerName {
-    get {
-      if (_LayerNameOffset == null) {
-        _LayerNameOffset = Schema.GetOffset(0x9F18C5E55A7163B5);
-      }
-      var ptr = _Handle.Read<nint>(_LayerNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_LayerNameOffset == null) {
-        _LayerNameOffset = Schema.GetOffset(0x9F18C5E55A7163B5);
-      }
-      Schema.SetString(_Handle, _LayerNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _DisplayTextOffset;
-
-  public string DisplayText {
-    get {
-      if (_DisplayTextOffset == null) {
-        _DisplayTextOffset = Schema.GetOffset(0x9F18C5E5F59D71EE);
-      }
-      var ptr = _Handle.Read<nint>(_DisplayTextOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DisplayTextOffset == null) {
-        _DisplayTextOffset = Schema.GetOffset(0x9F18C5E5F59D71EE);
-      }
-      Schema.SetString(_Handle, _DisplayTextOffset!.Value, value);
-    }
-  } 
+    public string DisplayText {
+        get {
+            _DisplayTextOffset = _DisplayTextOffset ?? Schema.GetOffset(0x9F18C5E5F59D71EE);
+            return Schema.GetString(_Handle.Read<nint>(_DisplayTextOffset!.Value));
+        }
+        set {
+            _DisplayTextOffset = _DisplayTextOffset ?? Schema.GetOffset(0x9F18C5E5F59D71EE);
+            Schema.SetString(_Handle, _DisplayTextOffset!.Value, value);
+        }
+    } 
 
 
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRandStopwatchImpl : CStopwatchBaseImpl, CRandStopwatch {
+internal partial class CRandStopwatchImpl : CStopwatchBaseImpl, CRandStopwatch
+{
+    public CRandStopwatchImpl(nint handle) : base(handle) { }
 
-  public CRandStopwatchImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinIntervalOffset;
 
-  private static nint? _MinIntervalOffset;
-
-  public ref float MinInterval {
-    get {
-      if (_MinIntervalOffset == null) {
-        _MinIntervalOffset = Schema.GetOffset(0x538C26044BB35EE4);
-      }
-      return ref _Handle.AsRef<float>(_MinIntervalOffset!.Value);
+    public ref float MinInterval {
+        get {
+            _MinIntervalOffset = _MinIntervalOffset ?? Schema.GetOffset(0x538C26044BB35EE4);
+            return ref _Handle.AsRef<float>(_MinIntervalOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxIntervalOffset;
+    private static nint? _MaxIntervalOffset;
 
-  public ref float MaxInterval {
-    get {
-      if (_MaxIntervalOffset == null) {
-        _MaxIntervalOffset = Schema.GetOffset(0x538C2604400B2156);
-      }
-      return ref _Handle.AsRef<float>(_MaxIntervalOffset!.Value);
+    public ref float MaxInterval {
+        get {
+            _MaxIntervalOffset = _MaxIntervalOffset ?? Schema.GetOffset(0x538C2604400B2156);
+            return ref _Handle.AsRef<float>(_MaxIntervalOffset!.Value);
+        }
     }
-  }
 
 
 }

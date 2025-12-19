@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum IKSolverType : uint {
-
+public enum IKSolverType : uint
+{
  IKSOLVER_Perlin = 0,
 
  IKSOLVER_TwoBone = 1,

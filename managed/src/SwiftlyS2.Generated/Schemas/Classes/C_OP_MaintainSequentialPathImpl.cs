@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_MaintainSequentialPathImpl : CParticleFunctionOperatorImpl, C_OP_MaintainSequentialPath {
+internal partial class C_OP_MaintainSequentialPathImpl : CParticleFunctionOperatorImpl, C_OP_MaintainSequentialPath
+{
+    public C_OP_MaintainSequentialPathImpl(nint handle) : base(handle) { }
 
-  public C_OP_MaintainSequentialPathImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaxDistanceOffset;
 
-  private static nint? _MaxDistanceOffset;
-
-  public ref float MaxDistance {
-    get {
-      if (_MaxDistanceOffset == null) {
-        _MaxDistanceOffset = Schema.GetOffset(0x3F7004B8844E396A);
-      }
-      return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+    public ref float MaxDistance {
+        get {
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x3F7004B8844E396A);
+            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumToAssignOffset;
+    private static nint? _NumToAssignOffset;
 
-  public ref float NumToAssign {
-    get {
-      if (_NumToAssignOffset == null) {
-        _NumToAssignOffset = Schema.GetOffset(0x3F7004B8F73366BD);
-      }
-      return ref _Handle.AsRef<float>(_NumToAssignOffset!.Value);
+    public ref float NumToAssign {
+        get {
+            _NumToAssignOffset = _NumToAssignOffset ?? Schema.GetOffset(0x3F7004B8F73366BD);
+            return ref _Handle.AsRef<float>(_NumToAssignOffset!.Value);
+        }
     }
-  }
-  private static nint? _CohesionStrengthOffset;
+    private static nint? _CohesionStrengthOffset;
 
-  public ref float CohesionStrength {
-    get {
-      if (_CohesionStrengthOffset == null) {
-        _CohesionStrengthOffset = Schema.GetOffset(0x3F7004B8A5A506EA);
-      }
-      return ref _Handle.AsRef<float>(_CohesionStrengthOffset!.Value);
+    public ref float CohesionStrength {
+        get {
+            _CohesionStrengthOffset = _CohesionStrengthOffset ?? Schema.GetOffset(0x3F7004B8A5A506EA);
+            return ref _Handle.AsRef<float>(_CohesionStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _ToleranceOffset;
+    private static nint? _ToleranceOffset;
 
-  public ref float Tolerance {
-    get {
-      if (_ToleranceOffset == null) {
-        _ToleranceOffset = Schema.GetOffset(0x3F7004B88C29728E);
-      }
-      return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
+    public ref float Tolerance {
+        get {
+            _ToleranceOffset = _ToleranceOffset ?? Schema.GetOffset(0x3F7004B88C29728E);
+            return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopOffset;
+    private static nint? _LoopOffset;
 
-  public ref bool Loop {
-    get {
-      if (_LoopOffset == null) {
-        _LoopOffset = Schema.GetOffset(0x3F7004B8C668A4CB);
-      }
-      return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+    public ref bool Loop {
+        get {
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0x3F7004B8C668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseParticleCountOffset;
+    private static nint? _UseParticleCountOffset;
 
-  public ref bool UseParticleCount {
-    get {
-      if (_UseParticleCountOffset == null) {
-        _UseParticleCountOffset = Schema.GetOffset(0x3F7004B8D4DA0515);
-      }
-      return ref _Handle.AsRef<bool>(_UseParticleCountOffset!.Value);
+    public ref bool UseParticleCount {
+        get {
+            _UseParticleCountOffset = _UseParticleCountOffset ?? Schema.GetOffset(0x3F7004B8D4DA0515);
+            return ref _Handle.AsRef<bool>(_UseParticleCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathParamsOffset;
+    private static nint? _PathParamsOffset;
 
-  public CPathParameters PathParams {
-    get {
-      if (_PathParamsOffset == null) {
-        _PathParamsOffset = Schema.GetOffset(0x3F7004B83C10092C);
-      }
-      return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+    public CPathParameters PathParams {
+        get {
+            _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0x3F7004B83C10092C);
+            return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerBlenderImpl : CVoiceContainerBaseImpl, CVoiceContainerBlender {
+internal partial class CVoiceContainerBlenderImpl : CVoiceContainerBaseImpl, CVoiceContainerBlender
+{
+    public CVoiceContainerBlenderImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerBlenderImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FirstSoundOffset;
 
-  private static nint? _FirstSoundOffset;
-
-  public CSoundContainerReference FirstSound {
-    get {
-      if (_FirstSoundOffset == null) {
-        _FirstSoundOffset = Schema.GetOffset(0xB05752DD666B0138);
-      }
-      return new CSoundContainerReferenceImpl(_Handle + _FirstSoundOffset!.Value);
+    public CSoundContainerReference FirstSound {
+        get {
+            _FirstSoundOffset = _FirstSoundOffset ?? Schema.GetOffset(0xB05752DD666B0138);
+            return new CSoundContainerReferenceImpl(_Handle + _FirstSoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _SecondSoundOffset;
+    private static nint? _SecondSoundOffset;
 
-  public CSoundContainerReference SecondSound {
-    get {
-      if (_SecondSoundOffset == null) {
-        _SecondSoundOffset = Schema.GetOffset(0xB05752DDA2BC3E5C);
-      }
-      return new CSoundContainerReferenceImpl(_Handle + _SecondSoundOffset!.Value);
+    public CSoundContainerReference SecondSound {
+        get {
+            _SecondSoundOffset = _SecondSoundOffset ?? Schema.GetOffset(0xB05752DDA2BC3E5C);
+            return new CSoundContainerReferenceImpl(_Handle + _SecondSoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendFactorOffset;
+    private static nint? _BlendFactorOffset;
 
-  public ref float BlendFactor {
-    get {
-      if (_BlendFactorOffset == null) {
-        _BlendFactorOffset = Schema.GetOffset(0xB05752DDFF4DA451);
-      }
-      return ref _Handle.AsRef<float>(_BlendFactorOffset!.Value);
+    public ref float BlendFactor {
+        get {
+            _BlendFactorOffset = _BlendFactorOffset ?? Schema.GetOffset(0xB05752DDFF4DA451);
+            return ref _Handle.AsRef<float>(_BlendFactorOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmGraphEventConditionNode__Condition_tImpl : SchemaClass, CNmGraphEventConditionNode__Condition_t {
+internal partial class CNmGraphEventConditionNode__Condition_tImpl : SchemaClass, CNmGraphEventConditionNode__Condition_t
+{
+    public CNmGraphEventConditionNode__Condition_tImpl(nint handle) : base(handle) { }
 
-  public CNmGraphEventConditionNode__Condition_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EventIDOffset;
 
-  private static nint? _EventIDOffset;
-
-  public ref CGlobalSymbol EventID {
-    get {
-      if (_EventIDOffset == null) {
-        _EventIDOffset = Schema.GetOffset(0xA3252A829D798A72);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+    public ref CGlobalSymbol EventID {
+        get {
+            _EventIDOffset = _EventIDOffset ?? Schema.GetOffset(0xA3252A829D798A72);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventTypeConditionOffset;
+    private static nint? _EventTypeConditionOffset;
 
-  public ref NmGraphEventTypeCondition_t EventTypeCondition {
-    get {
-      if (_EventTypeConditionOffset == null) {
-        _EventTypeConditionOffset = Schema.GetOffset(0xA3252A829BED2960);
-      }
-      return ref _Handle.AsRef<NmGraphEventTypeCondition_t>(_EventTypeConditionOffset!.Value);
+    public ref NmGraphEventTypeCondition_t EventTypeCondition {
+        get {
+            _EventTypeConditionOffset = _EventTypeConditionOffset ?? Schema.GetOffset(0xA3252A829BED2960);
+            return ref _Handle.AsRef<NmGraphEventTypeCondition_t>(_EventTypeConditionOffset!.Value);
+        }
     }
-  }
 
 
 }

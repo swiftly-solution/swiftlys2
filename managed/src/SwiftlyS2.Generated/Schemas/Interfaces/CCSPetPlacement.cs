@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPetPlacement : CBaseEntity, ISchemaClass<CCSPetPlacement> {
-
-  static CCSPetPlacement ISchemaClass<CCSPetPlacement>.From(nint handle) => new CCSPetPlacementImpl(handle);
-  static int ISchemaClass<CCSPetPlacement>.Size => 1264;
-  static string? ISchemaClass<CCSPetPlacement>.ClassName => "cs_pet_placement";
+public partial interface CCSPetPlacement : CBaseEntity, ISchemaClass<CCSPetPlacement>
+{
+    static CCSPetPlacement ISchemaClass<CCSPetPlacement>.From(nint handle) => new CCSPetPlacementImpl(handle);
+    static int ISchemaClass<CCSPetPlacement>.Size => 1264;
+    static string? ISchemaClass<CCSPetPlacement>.ClassName => "cs_pet_placement";
 
 
 

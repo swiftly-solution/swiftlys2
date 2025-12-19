@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatSelectorNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatSelectorNode__CDefinition {
+internal partial class CNmFloatSelectorNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatSelectorNode__CDefinition
+{
+    public CNmFloatSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFloatSelectorNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ConditionNodeIndicesOffset;
 
-  private static nint? _ConditionNodeIndicesOffset;
-
-  public SchemaUntypedField ConditionNodeIndices {
-    get {
-      if (_ConditionNodeIndicesOffset == null) {
-        _ConditionNodeIndicesOffset = Schema.GetOffset(0xA387F8324A144D0F);
-      }
-      return new SchemaUntypedField(_Handle + _ConditionNodeIndicesOffset!.Value);
+    public SchemaUntypedField ConditionNodeIndices {
+        get {
+            _ConditionNodeIndicesOffset = _ConditionNodeIndicesOffset ?? Schema.GetOffset(0xA387F8324A144D0F);
+            return new SchemaUntypedField(_Handle + _ConditionNodeIndicesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValuesOffset;
+    private static nint? _ValuesOffset;
 
-  public SchemaUntypedField Values {
-    get {
-      if (_ValuesOffset == null) {
-        _ValuesOffset = Schema.GetOffset(0xA387F832FBEDDADB);
-      }
-      return new SchemaUntypedField(_Handle + _ValuesOffset!.Value);
+    public SchemaUntypedField Values {
+        get {
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0xA387F832FBEDDADB);
+            return new SchemaUntypedField(_Handle + _ValuesOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultValueOffset;
+    private static nint? _DefaultValueOffset;
 
-  public ref float DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0xA387F832700AB429);
-      }
-      return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+    public ref float DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xA387F832700AB429);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseTimeOffset;
+    private static nint? _EaseTimeOffset;
 
-  public ref float EaseTime {
-    get {
-      if (_EaseTimeOffset == null) {
-        _EaseTimeOffset = Schema.GetOffset(0xA387F832D0A54FCC);
-      }
-      return ref _Handle.AsRef<float>(_EaseTimeOffset!.Value);
+    public ref float EaseTime {
+        get {
+            _EaseTimeOffset = _EaseTimeOffset ?? Schema.GetOffset(0xA387F832D0A54FCC);
+            return ref _Handle.AsRef<float>(_EaseTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EasingOpOffset;
+    private static nint? _EasingOpOffset;
 
-  public ref NmEasingOperation_t EasingOp {
-    get {
-      if (_EasingOpOffset == null) {
-        _EasingOpOffset = Schema.GetOffset(0xA387F832CF457EAF);
-      }
-      return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset!.Value);
+    public ref NmEasingOperation_t EasingOp {
+        get {
+            _EasingOpOffset = _EasingOpOffset ?? Schema.GetOffset(0xA387F832CF457EAF);
+            return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset!.Value);
+        }
     }
-  }
 
 
 }

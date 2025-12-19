@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class NmFloatCurveCompressionSettings_tImpl : SchemaClass, NmFloatCurveCompressionSettings_t {
+internal partial class NmFloatCurveCompressionSettings_tImpl : SchemaClass, NmFloatCurveCompressionSettings_t
+{
+    public NmFloatCurveCompressionSettings_tImpl(nint handle) : base(handle) { }
 
-  public NmFloatCurveCompressionSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RangeOffset;
 
-  private static nint? _RangeOffset;
-
-  public NmCompressionSettings_t__QuantizationRange_t Range {
-    get {
-      if (_RangeOffset == null) {
-        _RangeOffset = Schema.GetOffset(0x5BD5686F3D639CF2);
-      }
-      return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _RangeOffset!.Value);
+    public NmCompressionSettings_t__QuantizationRange_t Range {
+        get {
+            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x5BD5686F3D639CF2);
+            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _RangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsStaticOffset;
+    private static nint? _IsStaticOffset;
 
-  public ref bool IsStatic {
-    get {
-      if (_IsStaticOffset == null) {
-        _IsStaticOffset = Schema.GetOffset(0x5BD5686F57ECC7EB);
-      }
-      return ref _Handle.AsRef<bool>(_IsStaticOffset!.Value);
+    public ref bool IsStatic {
+        get {
+            _IsStaticOffset = _IsStaticOffset ?? Schema.GetOffset(0x5BD5686F57ECC7EB);
+            return ref _Handle.AsRef<bool>(_IsStaticOffset!.Value);
+        }
     }
-  }
 
 
 }

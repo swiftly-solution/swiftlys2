@@ -6,82 +6,65 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvLaserImpl : CBeamImpl, CEnvLaser {
+internal partial class CEnvLaserImpl : CBeamImpl, CEnvLaser
+{
+    public CEnvLaserImpl(nint handle) : base(handle) { }
 
-  public CEnvLaserImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LaserTargetOffset;
 
-  private static nint? _LaserTargetOffset;
+    public string LaserTarget {
+        get {
+            _LaserTargetOffset = _LaserTargetOffset ?? Schema.GetOffset(0x83A2D3C8C257F4D);
+            return Schema.GetString(_Handle.Read<nint>(_LaserTargetOffset!.Value));
+        }
+        set {
+            _LaserTargetOffset = _LaserTargetOffset ?? Schema.GetOffset(0x83A2D3C8C257F4D);
+            Schema.SetString(_Handle, _LaserTargetOffset!.Value, value);
+        }
+    } 
+    private static nint? _SpriteOffset;
 
-  public string LaserTarget {
-    get {
-      if (_LaserTargetOffset == null) {
-        _LaserTargetOffset = Schema.GetOffset(0x83A2D3C8C257F4D);
-      }
-      var ptr = _Handle.Read<nint>(_LaserTargetOffset!.Value);
-      return Schema.GetString(ptr);
+    public CSprite? Sprite {
+        get {
+            _SpriteOffset = _SpriteOffset ?? Schema.GetOffset(0x83A2D3CEFBFA166);
+            var ptr = _Handle.Read<nint>(_SpriteOffset!.Value);
+            return ptr.IsValidPtr() ? new CSpriteImpl(ptr) : null;
+        }
     }
-    set {
-      if (_LaserTargetOffset == null) {
-        _LaserTargetOffset = Schema.GetOffset(0x83A2D3C8C257F4D);
-      }
-      Schema.SetString(_Handle, _LaserTargetOffset!.Value, value);
-    }
-  } 
-  private static nint? _SpriteOffset;
+    private static nint? _SpriteNameOffset;
 
-  public CSprite? Sprite {
-    get {
-      if (_SpriteOffset == null) {
-        _SpriteOffset = Schema.GetOffset(0x83A2D3CEFBFA166);
-      }
-      var ptr = _Handle.Read<nint>(_SpriteOffset!.Value);
-      return ptr.IsValidPtr() ? new CSpriteImpl(ptr) : null;
-    }
-  }
-  private static nint? _SpriteNameOffset;
+    public string SpriteName {
+        get {
+            _SpriteNameOffset = _SpriteNameOffset ?? Schema.GetOffset(0x83A2D3C096530FF);
+            return Schema.GetString(_Handle.Read<nint>(_SpriteNameOffset!.Value));
+        }
+        set {
+            _SpriteNameOffset = _SpriteNameOffset ?? Schema.GetOffset(0x83A2D3C096530FF);
+            Schema.SetString(_Handle, _SpriteNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FirePositionOffset;
 
-  public string SpriteName {
-    get {
-      if (_SpriteNameOffset == null) {
-        _SpriteNameOffset = Schema.GetOffset(0x83A2D3C096530FF);
-      }
-      var ptr = _Handle.Read<nint>(_SpriteNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref Vector FirePosition {
+        get {
+            _FirePositionOffset = _FirePositionOffset ?? Schema.GetOffset(0x83A2D3C2A7C404E);
+            return ref _Handle.AsRef<Vector>(_FirePositionOffset!.Value);
+        }
     }
-    set {
-      if (_SpriteNameOffset == null) {
-        _SpriteNameOffset = Schema.GetOffset(0x83A2D3C096530FF);
-      }
-      Schema.SetString(_Handle, _SpriteNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _FirePositionOffset;
+    private static nint? _StartFrameOffset;
 
-  public ref Vector FirePosition {
-    get {
-      if (_FirePositionOffset == null) {
-        _FirePositionOffset = Schema.GetOffset(0x83A2D3C2A7C404E);
-      }
-      return ref _Handle.AsRef<Vector>(_FirePositionOffset!.Value);
+    public ref float StartFrame {
+        get {
+            _StartFrameOffset = _StartFrameOffset ?? Schema.GetOffset(0x83A2D3CB534B906);
+            return ref _Handle.AsRef<float>(_StartFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartFrameOffset;
-
-  public ref float StartFrame {
-    get {
-      if (_StartFrameOffset == null) {
-        _StartFrameOffset = Schema.GetOffset(0x83A2D3CB534B906);
-      }
-      return ref _Handle.AsRef<float>(_StartFrameOffset!.Value);
-    }
-  }
 
 
 }

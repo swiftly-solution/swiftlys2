@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class Relationship_tImpl : SchemaClass, Relationship_t {
+internal partial class Relationship_tImpl : SchemaClass, Relationship_t
+{
+    public Relationship_tImpl(nint handle) : base(handle) { }
 
-  public Relationship_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DispositionOffset;
 
-  private static nint? _DispositionOffset;
-
-  public ref Disposition_t Disposition {
-    get {
-      if (_DispositionOffset == null) {
-        _DispositionOffset = Schema.GetOffset(0xD0FE62280D365234);
-      }
-      return ref _Handle.AsRef<Disposition_t>(_DispositionOffset!.Value);
+    public ref Disposition_t Disposition {
+        get {
+            _DispositionOffset = _DispositionOffset ?? Schema.GetOffset(0xD0FE62280D365234);
+            return ref _Handle.AsRef<Disposition_t>(_DispositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _PriorityOffset;
+    private static nint? _PriorityOffset;
 
-  public ref int Priority {
-    get {
-      if (_PriorityOffset == null) {
-        _PriorityOffset = Schema.GetOffset(0xD0FE622894E4E309);
-      }
-      return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+    public ref int Priority {
+        get {
+            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0xD0FE622894E4E309);
+            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+        }
     }
-  }
 
 
 }

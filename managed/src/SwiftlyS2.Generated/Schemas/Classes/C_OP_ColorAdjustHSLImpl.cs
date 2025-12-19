@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ColorAdjustHSLImpl : CParticleFunctionOperatorImpl, C_OP_ColorAdjustHSL {
+internal partial class C_OP_ColorAdjustHSLImpl : CParticleFunctionOperatorImpl, C_OP_ColorAdjustHSL
+{
+    public C_OP_ColorAdjustHSLImpl(nint handle) : base(handle) { }
 
-  public C_OP_ColorAdjustHSLImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HueAdjustOffset;
 
-  private static nint? _HueAdjustOffset;
-
-  public CPerParticleFloatInput HueAdjust {
-    get {
-      if (_HueAdjustOffset == null) {
-        _HueAdjustOffset = Schema.GetOffset(0x34348E726B20DB80);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _HueAdjustOffset!.Value);
+    public CPerParticleFloatInput HueAdjust {
+        get {
+            _HueAdjustOffset = _HueAdjustOffset ?? Schema.GetOffset(0x34348E726B20DB80);
+            return new CPerParticleFloatInputImpl(_Handle + _HueAdjustOffset!.Value);
+        }
     }
-  }
-  private static nint? _SaturationAdjustOffset;
+    private static nint? _SaturationAdjustOffset;
 
-  public CPerParticleFloatInput SaturationAdjust {
-    get {
-      if (_SaturationAdjustOffset == null) {
-        _SaturationAdjustOffset = Schema.GetOffset(0x34348E72D0C582F4);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _SaturationAdjustOffset!.Value);
+    public CPerParticleFloatInput SaturationAdjust {
+        get {
+            _SaturationAdjustOffset = _SaturationAdjustOffset ?? Schema.GetOffset(0x34348E72D0C582F4);
+            return new CPerParticleFloatInputImpl(_Handle + _SaturationAdjustOffset!.Value);
+        }
     }
-  }
-  private static nint? _LightnessAdjustOffset;
+    private static nint? _LightnessAdjustOffset;
 
-  public CPerParticleFloatInput LightnessAdjust {
-    get {
-      if (_LightnessAdjustOffset == null) {
-        _LightnessAdjustOffset = Schema.GetOffset(0x34348E72DC0100D5);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _LightnessAdjustOffset!.Value);
+    public CPerParticleFloatInput LightnessAdjust {
+        get {
+            _LightnessAdjustOffset = _LightnessAdjustOffset ?? Schema.GetOffset(0x34348E72DC0100D5);
+            return new CPerParticleFloatInputImpl(_Handle + _LightnessAdjustOffset!.Value);
+        }
     }
-  }
 
 
 }

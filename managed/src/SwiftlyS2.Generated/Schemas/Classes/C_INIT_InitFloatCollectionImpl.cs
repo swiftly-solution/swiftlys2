@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_InitFloatCollectionImpl : CParticleFunctionInitializerImpl, C_INIT_InitFloatCollection {
+internal partial class C_INIT_InitFloatCollectionImpl : CParticleFunctionInitializerImpl, C_INIT_InitFloatCollection
+{
+    public C_INIT_InitFloatCollectionImpl(nint handle) : base(handle) { }
 
-  public C_INIT_InitFloatCollectionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueOffset;
 
-  private static nint? _InputValueOffset;
-
-  public CParticleCollectionFloatInput InputValue {
-    get {
-      if (_InputValueOffset == null) {
-        _InputValueOffset = Schema.GetOffset(0x70773EFA34445438);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _InputValueOffset!.Value);
+    public CParticleCollectionFloatInput InputValue {
+        get {
+            _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x70773EFA34445438);
+            return new CParticleCollectionFloatInputImpl(_Handle + _InputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputFieldOffset;
+    private static nint? _OutputFieldOffset;
 
-  public ParticleAttributeIndex_t OutputField {
-    get {
-      if (_OutputFieldOffset == null) {
-        _OutputFieldOffset = Schema.GetOffset(0x70773EFA324F6F74);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+    public ParticleAttributeIndex_t OutputField {
+        get {
+            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x70773EFA324F6F74);
+            return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+        }
     }
-  }
 
 
 }

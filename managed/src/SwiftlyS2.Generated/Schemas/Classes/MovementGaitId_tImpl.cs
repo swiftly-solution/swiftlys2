@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MovementGaitId_tImpl : SchemaClass, MovementGaitId_t {
+internal partial class MovementGaitId_tImpl : SchemaClass, MovementGaitId_t
+{
+    public MovementGaitId_tImpl(nint handle) : base(handle) { }
 
-  public MovementGaitId_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IdOffset;
 
-  private static nint? _IdOffset;
-
-  public ref CGlobalSymbol Id {
-    get {
-      if (_IdOffset == null) {
-        _IdOffset = Schema.GetOffset(0xD64B37F7C4A0BD8F);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_IdOffset!.Value);
+    public ref CGlobalSymbol Id {
+        get {
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0xD64B37F7C4A0BD8F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IdOffset!.Value);
+        }
     }
-  }
 
 
 }

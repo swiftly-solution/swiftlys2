@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_CreateParticleSystemRendererImpl : CParticleFunctionRendererImpl, C_OP_CreateParticleSystemRenderer {
+internal partial class C_OP_CreateParticleSystemRendererImpl : CParticleFunctionRendererImpl, C_OP_CreateParticleSystemRenderer
+{
+    public C_OP_CreateParticleSystemRendererImpl(nint handle) : base(handle) { }
 
-  public C_OP_CreateParticleSystemRendererImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EffectOffset;
 
-  private static nint? _EffectOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> Effect {
-    get {
-      if (_EffectOffset == null) {
-        _EffectOffset = Schema.GetOffset(0xB86C827DC5CEB052);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> Effect {
+        get {
+            _EffectOffset = _EffectOffset ?? Schema.GetOffset(0xB86C827DC5CEB052);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventTypeOffset;
+    private static nint? _EventTypeOffset;
 
-  public ref EventTypeSelection_t EventType {
-    get {
-      if (_EventTypeOffset == null) {
-        _EventTypeOffset = Schema.GetOffset(0xB86C827DE1F9AA93);
-      }
-      return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+    public ref EventTypeSelection_t EventType {
+        get {
+            _EventTypeOffset = _EventTypeOffset ?? Schema.GetOffset(0xB86C827DE1F9AA93);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPsOffset;
+    private static nint? _CPsOffset;
 
-  public ref CUtlLeanVector<CPAssignment_t, int> CPs {
-    get {
-      if (_CPsOffset == null) {
-        _CPsOffset = Schema.GetOffset(0xB86C827DE280356F);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<CPAssignment_t, int>>(_CPsOffset!.Value);
+    public ref CUtlLeanVector<CPAssignment_t, int> CPs {
+        get {
+            _CPsOffset = _CPsOffset ?? Schema.GetOffset(0xB86C827DE280356F);
+            return ref _Handle.AsRef<CUtlLeanVector<CPAssignment_t, int>>(_CPsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParticleConfigOffset;
+    private static nint? _ParticleConfigOffset;
 
-  public string ParticleConfig {
-    get {
-      if (_ParticleConfigOffset == null) {
-        _ParticleConfigOffset = Schema.GetOffset(0xB86C827D467A5C4C);
-      }
-      var ptr = _Handle.Read<nint>(_ParticleConfigOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ParticleConfigOffset == null) {
-        _ParticleConfigOffset = Schema.GetOffset(0xB86C827D467A5C4C);
-      }
-      Schema.SetString(_Handle, _ParticleConfigOffset!.Value, value);
-    }
-  } 
-  private static nint? _AggregationPosOffset;
+    public string ParticleConfig {
+        get {
+            _ParticleConfigOffset = _ParticleConfigOffset ?? Schema.GetOffset(0xB86C827D467A5C4C);
+            return Schema.GetString(_Handle.Read<nint>(_ParticleConfigOffset!.Value));
+        }
+        set {
+            _ParticleConfigOffset = _ParticleConfigOffset ?? Schema.GetOffset(0xB86C827D467A5C4C);
+            Schema.SetString(_Handle, _ParticleConfigOffset!.Value, value);
+        }
+    } 
+    private static nint? _AggregationPosOffset;
 
-  public CPerParticleVecInput AggregationPos {
-    get {
-      if (_AggregationPosOffset == null) {
-        _AggregationPosOffset = Schema.GetOffset(0xB86C827D49456289);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _AggregationPosOffset!.Value);
+    public CPerParticleVecInput AggregationPos {
+        get {
+            _AggregationPosOffset = _AggregationPosOffset ?? Schema.GetOffset(0xB86C827D49456289);
+            return new CPerParticleVecInputImpl(_Handle + _AggregationPosOffset!.Value);
+        }
     }
-  }
 
 
 }

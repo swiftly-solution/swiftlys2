@@ -6,33 +6,30 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SimpleConstraintSoundProfileImpl : SchemaClass, SimpleConstraintSoundProfile {
+internal partial class SimpleConstraintSoundProfileImpl : SchemaClass, SimpleConstraintSoundProfile
+{
+    public SimpleConstraintSoundProfileImpl(nint handle) : base(handle) { }
 
-  public SimpleConstraintSoundProfileImpl(nint handle) : base(handle) {
-  }
+    private static nint? _KeypointsOffset;
 
-  private static nint? _KeypointsOffset;
-
-  public ref SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t Keypoints {
-    get {
-      if (_KeypointsOffset == null) {
-        _KeypointsOffset = Schema.GetOffset(0xB768AA94AE55150C);
-      }
-      return ref _Handle.AsRef<SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t>(_KeypointsOffset!.Value);
+    public ref SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t Keypoints {
+        get {
+            _KeypointsOffset = _KeypointsOffset ?? Schema.GetOffset(0xB768AA94AE55150C);
+            return ref _Handle.AsRef<SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t>(_KeypointsOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<float> KeyPoints {
-    get => new SchemaFixedArray<float>(_Handle, 0xB768AA9449DA0463, 2, 4, 4);
-  }
-  public ISchemaFixedArray<float> ReversalSoundThresholds {
-    get => new SchemaFixedArray<float>(_Handle, 0xB768AA9405E06766, 3, 4, 4);
-  }
+    public ISchemaFixedArray<float> KeyPoints {
+        get => new SchemaFixedArray<float>(_Handle, 0xB768AA9449DA0463, 2, 4, 4);
+    }
+    public ISchemaFixedArray<float> ReversalSoundThresholds {
+        get => new SchemaFixedArray<float>(_Handle, 0xB768AA9405E06766, 3, 4, 4);
+    }
 
 
 }

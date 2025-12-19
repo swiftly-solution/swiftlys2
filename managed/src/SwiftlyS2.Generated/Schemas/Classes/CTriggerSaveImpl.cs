@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerSaveImpl : CBaseTriggerImpl, CTriggerSave {
+internal partial class CTriggerSaveImpl : CBaseTriggerImpl, CTriggerSave
+{
+    public CTriggerSaveImpl(nint handle) : base(handle) { }
 
-  public CTriggerSaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceNewLevelUnitOffset;
 
-  private static nint? _ForceNewLevelUnitOffset;
-
-  public ref bool ForceNewLevelUnit {
-    get {
-      if (_ForceNewLevelUnitOffset == null) {
-        _ForceNewLevelUnitOffset = Schema.GetOffset(0xFA0C03F1473BFDE);
-      }
-      return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset!.Value);
+    public ref bool ForceNewLevelUnit {
+        get {
+            _ForceNewLevelUnitOffset = _ForceNewLevelUnitOffset ?? Schema.GetOffset(0xFA0C03F1473BFDE);
+            return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset!.Value);
+        }
     }
-  }
-  private static nint? _DangerousTimerOffset;
+    private static nint? _DangerousTimerOffset;
 
-  public ref float DangerousTimer {
-    get {
-      if (_DangerousTimerOffset == null) {
-        _DangerousTimerOffset = Schema.GetOffset(0xFA0C03F5CF80EC4);
-      }
-      return ref _Handle.AsRef<float>(_DangerousTimerOffset!.Value);
+    public ref float DangerousTimer {
+        get {
+            _DangerousTimerOffset = _DangerousTimerOffset ?? Schema.GetOffset(0xFA0C03F5CF80EC4);
+            return ref _Handle.AsRef<float>(_DangerousTimerOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinHitPointsOffset;
+    private static nint? _MinHitPointsOffset;
 
-  public ref int MinHitPoints {
-    get {
-      if (_MinHitPointsOffset == null) {
-        _MinHitPointsOffset = Schema.GetOffset(0xFA0C03F2C7E0C57);
-      }
-      return ref _Handle.AsRef<int>(_MinHitPointsOffset!.Value);
+    public ref int MinHitPoints {
+        get {
+            _MinHitPointsOffset = _MinHitPointsOffset ?? Schema.GetOffset(0xFA0C03F2C7E0C57);
+            return ref _Handle.AsRef<int>(_MinHitPointsOffset!.Value);
+        }
     }
-  }
 
 
 }

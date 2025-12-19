@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_WaitForObservableImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_WaitForObservable {
+internal partial class CPulseCell_WaitForObservableImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_WaitForObservable
+{
+    public CPulseCell_WaitForObservableImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_WaitForObservableImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ConditionOffset;
 
-  private static nint? _ConditionOffset;
-
-  public PulseObservableBoolExpression_t Condition {
-    get {
-      if (_ConditionOffset == null) {
-        _ConditionOffset = Schema.GetOffset(0xE6EB02CD5F2A883E);
-      }
-      return new PulseObservableBoolExpression_tImpl(_Handle + _ConditionOffset!.Value);
+    public PulseObservableBoolExpression_t Condition {
+        get {
+            _ConditionOffset = _ConditionOffset ?? Schema.GetOffset(0xE6EB02CD5F2A883E);
+            return new PulseObservableBoolExpression_tImpl(_Handle + _ConditionOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnTrueOffset;
+    private static nint? _OnTrueOffset;
 
-  public CPulse_ResumePoint OnTrue {
-    get {
-      if (_OnTrueOffset == null) {
-        _OnTrueOffset = Schema.GetOffset(0xE6EB02CD6EAE5D88);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnTrueOffset!.Value);
+    public CPulse_ResumePoint OnTrue {
+        get {
+            _OnTrueOffset = _OnTrueOffset ?? Schema.GetOffset(0xE6EB02CD6EAE5D88);
+            return new CPulse_ResumePointImpl(_Handle + _OnTrueOffset!.Value);
+        }
     }
-  }
 
 
 }

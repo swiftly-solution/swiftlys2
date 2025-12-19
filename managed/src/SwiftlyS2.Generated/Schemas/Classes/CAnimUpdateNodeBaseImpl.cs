@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimUpdateNodeBaseImpl : SchemaClass, CAnimUpdateNodeBase {
+internal partial class CAnimUpdateNodeBaseImpl : SchemaClass, CAnimUpdateNodeBase
+{
+    public CAnimUpdateNodeBaseImpl(nint handle) : base(handle) { }
 
-  public CAnimUpdateNodeBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodePathOffset;
 
-  private static nint? _NodePathOffset;
-
-  public CAnimNodePath NodePath {
-    get {
-      if (_NodePathOffset == null) {
-        _NodePathOffset = Schema.GetOffset(0xA16B836B69EE5E4E);
-      }
-      return new CAnimNodePathImpl(_Handle + _NodePathOffset!.Value);
+    public CAnimNodePath NodePath {
+        get {
+            _NodePathOffset = _NodePathOffset ?? Schema.GetOffset(0xA16B836B69EE5E4E);
+            return new CAnimNodePathImpl(_Handle + _NodePathOffset!.Value);
+        }
     }
-  }
-  private static nint? _NetworkModeOffset;
+    private static nint? _NetworkModeOffset;
 
-  public ref AnimNodeNetworkMode NetworkMode {
-    get {
-      if (_NetworkModeOffset == null) {
-        _NetworkModeOffset = Schema.GetOffset(0xA16B836BE3307112);
-      }
-      return ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset!.Value);
+    public ref AnimNodeNetworkMode NetworkMode {
+        get {
+            _NetworkModeOffset = _NetworkModeOffset ?? Schema.GetOffset(0xA16B836BE3307112);
+            return ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameOffset;
+    private static nint? _NameOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xA16B836B4D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xA16B836B4D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA16B836B4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA16B836B4D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
 
 
 }

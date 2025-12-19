@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ConstrainDistanceToUserSpecifiedPathImpl : CParticleFunctionConstraintImpl, C_OP_ConstrainDistanceToUserSpecifiedPath {
+internal partial class C_OP_ConstrainDistanceToUserSpecifiedPathImpl : CParticleFunctionConstraintImpl, C_OP_ConstrainDistanceToUserSpecifiedPath
+{
+    public C_OP_ConstrainDistanceToUserSpecifiedPathImpl(nint handle) : base(handle) { }
 
-  public C_OP_ConstrainDistanceToUserSpecifiedPathImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinDistanceOffset;
 
-  private static nint? _MinDistanceOffset;
-
-  public ref float MinDistance {
-    get {
-      if (_MinDistanceOffset == null) {
-        _MinDistanceOffset = Schema.GetOffset(0x42F2CE28F016B7AC);
-      }
-      return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
+    public ref float MinDistance {
+        get {
+            _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0x42F2CE28F016B7AC);
+            return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxDistanceOffset;
+    private static nint? _MaxDistanceOffset;
 
-  public ref float MaxDistance {
-    get {
-      if (_MaxDistanceOffset == null) {
-        _MaxDistanceOffset = Schema.GetOffset(0x42F2CE2898893360);
-      }
-      return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+    public ref float MaxDistance {
+        get {
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x42F2CE2898893360);
+            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeScaleOffset;
+    private static nint? _TimeScaleOffset;
 
-  public ref float TimeScale {
-    get {
-      if (_TimeScaleOffset == null) {
-        _TimeScaleOffset = Schema.GetOffset(0x42F2CE28B49D735C);
-      }
-      return ref _Handle.AsRef<float>(_TimeScaleOffset!.Value);
+    public ref float TimeScale {
+        get {
+            _TimeScaleOffset = _TimeScaleOffset ?? Schema.GetOffset(0x42F2CE28B49D735C);
+            return ref _Handle.AsRef<float>(_TimeScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopedPathOffset;
+    private static nint? _LoopedPathOffset;
 
-  public ref bool LoopedPath {
-    get {
-      if (_LoopedPathOffset == null) {
-        _LoopedPathOffset = Schema.GetOffset(0x42F2CE284D64C459);
-      }
-      return ref _Handle.AsRef<bool>(_LoopedPathOffset!.Value);
+    public ref bool LoopedPath {
+        get {
+            _LoopedPathOffset = _LoopedPathOffset ?? Schema.GetOffset(0x42F2CE284D64C459);
+            return ref _Handle.AsRef<bool>(_LoopedPathOffset!.Value);
+        }
     }
-  }
-  private static nint? _PointListOffset;
+    private static nint? _PointListOffset;
 
-  public ref CUtlVector<PointDefinitionWithTimeValues_t> PointList {
-    get {
-      if (_PointListOffset == null) {
-        _PointListOffset = Schema.GetOffset(0x42F2CE28976AB4FD);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointDefinitionWithTimeValues_t>>(_PointListOffset!.Value);
+    public ref CUtlVector<PointDefinitionWithTimeValues_t> PointList {
+        get {
+            _PointListOffset = _PointListOffset ?? Schema.GetOffset(0x42F2CE28976AB4FD);
+            return ref _Handle.AsRef<CUtlVector<PointDefinitionWithTimeValues_t>>(_PointListOffset!.Value);
+        }
     }
-  }
 
 
 }

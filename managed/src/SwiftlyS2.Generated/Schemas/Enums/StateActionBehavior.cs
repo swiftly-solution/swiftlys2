@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum StateActionBehavior : uint {
-
+public enum StateActionBehavior : uint
+{
  STATETAGBEHAVIOR_ACTIVE_WHILE_CURRENT = 0,
 
  STATETAGBEHAVIOR_FIRE_ON_ENTER = 1,

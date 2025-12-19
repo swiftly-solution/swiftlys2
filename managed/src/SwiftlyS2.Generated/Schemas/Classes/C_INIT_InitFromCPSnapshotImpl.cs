@@ -6,134 +6,108 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_InitFromCPSnapshotImpl : CParticleFunctionInitializerImpl, C_INIT_InitFromCPSnapshot {
+internal partial class C_INIT_InitFromCPSnapshotImpl : CParticleFunctionInitializerImpl, C_INIT_InitFromCPSnapshot
+{
+    public C_INIT_InitFromCPSnapshotImpl(nint handle) : base(handle) { }
 
-  public C_INIT_InitFromCPSnapshotImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x772EF71B3F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x772EF71B3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrSnapshotSubsetOffset;
+    private static nint? _StrSnapshotSubsetOffset;
 
-  public string StrSnapshotSubset {
-    get {
-      if (_StrSnapshotSubsetOffset == null) {
-        _StrSnapshotSubsetOffset = Schema.GetOffset(0x772EF71BBD8A8E5E);
-      }
-      var ptr = _Handle.Read<nint>(_StrSnapshotSubsetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrSnapshotSubsetOffset == null) {
-        _StrSnapshotSubsetOffset = Schema.GetOffset(0x772EF71BBD8A8E5E);
-      }
-      Schema.SetString(_Handle, _StrSnapshotSubsetOffset!.Value, value);
-    }
-  } 
-  private static nint? _AttributeToReadOffset;
+    public string StrSnapshotSubset {
+        get {
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0x772EF71BBD8A8E5E);
+            return Schema.GetString(_Handle.Read<nint>(_StrSnapshotSubsetOffset!.Value));
+        }
+        set {
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0x772EF71BBD8A8E5E);
+            Schema.SetString(_Handle, _StrSnapshotSubsetOffset!.Value, value);
+        }
+    } 
+    private static nint? _AttributeToReadOffset;
 
-  public ParticleAttributeIndex_t AttributeToRead {
-    get {
-      if (_AttributeToReadOffset == null) {
-        _AttributeToReadOffset = Schema.GetOffset(0x772EF71BE0F61F9E);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToReadOffset!.Value);
+    public ParticleAttributeIndex_t AttributeToRead {
+        get {
+            _AttributeToReadOffset = _AttributeToReadOffset ?? Schema.GetOffset(0x772EF71BE0F61F9E);
+            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToReadOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttributeToWriteOffset;
+    private static nint? _AttributeToWriteOffset;
 
-  public ParticleAttributeIndex_t AttributeToWrite {
-    get {
-      if (_AttributeToWriteOffset == null) {
-        _AttributeToWriteOffset = Schema.GetOffset(0x772EF71B389A3CC1);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToWriteOffset!.Value);
+    public ParticleAttributeIndex_t AttributeToWrite {
+        get {
+            _AttributeToWriteOffset = _AttributeToWriteOffset ?? Schema.GetOffset(0x772EF71B389A3CC1);
+            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToWriteOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalSpaceCPOffset;
+    private static nint? _LocalSpaceCPOffset;
 
-  public ref int LocalSpaceCP {
-    get {
-      if (_LocalSpaceCPOffset == null) {
-        _LocalSpaceCPOffset = Schema.GetOffset(0x772EF71BC8E9CB31);
-      }
-      return ref _Handle.AsRef<int>(_LocalSpaceCPOffset!.Value);
+    public ref int LocalSpaceCP {
+        get {
+            _LocalSpaceCPOffset = _LocalSpaceCPOffset ?? Schema.GetOffset(0x772EF71BC8E9CB31);
+            return ref _Handle.AsRef<int>(_LocalSpaceCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _RandomOffset;
+    private static nint? _RandomOffset;
 
-  public ref bool Random {
-    get {
-      if (_RandomOffset == null) {
-        _RandomOffset = Schema.GetOffset(0x772EF71BD13B9DC2);
-      }
-      return ref _Handle.AsRef<bool>(_RandomOffset!.Value);
+    public ref bool Random {
+        get {
+            _RandomOffset = _RandomOffset ?? Schema.GetOffset(0x772EF71BD13B9DC2);
+            return ref _Handle.AsRef<bool>(_RandomOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReverseOffset;
+    private static nint? _ReverseOffset;
 
-  public ref bool Reverse {
-    get {
-      if (_ReverseOffset == null) {
-        _ReverseOffset = Schema.GetOffset(0x772EF71BEA4E22E5);
-      }
-      return ref _Handle.AsRef<bool>(_ReverseOffset!.Value);
+    public ref bool Reverse {
+        get {
+            _ReverseOffset = _ReverseOffset ?? Schema.GetOffset(0x772EF71BEA4E22E5);
+            return ref _Handle.AsRef<bool>(_ReverseOffset!.Value);
+        }
     }
-  }
-  private static nint? _SnapShotIncrementOffset;
+    private static nint? _SnapShotIncrementOffset;
 
-  public CParticleCollectionFloatInput SnapShotIncrement {
-    get {
-      if (_SnapShotIncrementOffset == null) {
-        _SnapShotIncrementOffset = Schema.GetOffset(0x772EF71BC1AED602);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _SnapShotIncrementOffset!.Value);
+    public CParticleCollectionFloatInput SnapShotIncrement {
+        get {
+            _SnapShotIncrementOffset = _SnapShotIncrementOffset ?? Schema.GetOffset(0x772EF71BC1AED602);
+            return new CParticleCollectionFloatInputImpl(_Handle + _SnapShotIncrementOffset!.Value);
+        }
     }
-  }
-  private static nint? _ManualSnapshotIndexOffset;
+    private static nint? _ManualSnapshotIndexOffset;
 
-  public CPerParticleFloatInput ManualSnapshotIndex {
-    get {
-      if (_ManualSnapshotIndexOffset == null) {
-        _ManualSnapshotIndexOffset = Schema.GetOffset(0x772EF71BA02E904D);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ManualSnapshotIndexOffset!.Value);
+    public CPerParticleFloatInput ManualSnapshotIndex {
+        get {
+            _ManualSnapshotIndexOffset = _ManualSnapshotIndexOffset ?? Schema.GetOffset(0x772EF71BA02E904D);
+            return new CPerParticleFloatInputImpl(_Handle + _ManualSnapshotIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _RandomSeedOffset;
+    private static nint? _RandomSeedOffset;
 
-  public ref int RandomSeed {
-    get {
-      if (_RandomSeedOffset == null) {
-        _RandomSeedOffset = Schema.GetOffset(0x772EF71B6388F067);
-      }
-      return ref _Handle.AsRef<int>(_RandomSeedOffset!.Value);
+    public ref int RandomSeed {
+        get {
+            _RandomSeedOffset = _RandomSeedOffset ?? Schema.GetOffset(0x772EF71B6388F067);
+            return ref _Handle.AsRef<int>(_RandomSeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalSpaceAnglesOffset;
+    private static nint? _LocalSpaceAnglesOffset;
 
-  public ref bool LocalSpaceAngles {
-    get {
-      if (_LocalSpaceAnglesOffset == null) {
-        _LocalSpaceAnglesOffset = Schema.GetOffset(0x772EF71BF571F352);
-      }
-      return ref _Handle.AsRef<bool>(_LocalSpaceAnglesOffset!.Value);
+    public ref bool LocalSpaceAngles {
+        get {
+            _LocalSpaceAnglesOffset = _LocalSpaceAnglesOffset ?? Schema.GetOffset(0x772EF71BF571F352);
+            return ref _Handle.AsRef<bool>(_LocalSpaceAnglesOffset!.Value);
+        }
     }
-  }
 
 
 }

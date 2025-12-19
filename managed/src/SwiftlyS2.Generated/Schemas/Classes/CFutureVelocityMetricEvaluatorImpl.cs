@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFutureVelocityMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CFutureVelocityMetricEvaluator {
+internal partial class CFutureVelocityMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CFutureVelocityMetricEvaluator
+{
+    public CFutureVelocityMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-  public CFutureVelocityMetricEvaluatorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DistanceOffset;
 
-  private static nint? _DistanceOffset;
-
-  public ref float Distance {
-    get {
-      if (_DistanceOffset == null) {
-        _DistanceOffset = Schema.GetOffset(0xF0A3A8300DC4A68);
-      }
-      return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+    public ref float Distance {
+        get {
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0xF0A3A8300DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _StoppingDistanceOffset;
+    private static nint? _StoppingDistanceOffset;
 
-  public ref float StoppingDistance {
-    get {
-      if (_StoppingDistanceOffset == null) {
-        _StoppingDistanceOffset = Schema.GetOffset(0xF0A3A8324979434);
-      }
-      return ref _Handle.AsRef<float>(_StoppingDistanceOffset!.Value);
+    public ref float StoppingDistance {
+        get {
+            _StoppingDistanceOffset = _StoppingDistanceOffset ?? Schema.GetOffset(0xF0A3A8324979434);
+            return ref _Handle.AsRef<float>(_StoppingDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetSpeedOffset;
+    private static nint? _TargetSpeedOffset;
 
-  public ref float TargetSpeed {
-    get {
-      if (_TargetSpeedOffset == null) {
-        _TargetSpeedOffset = Schema.GetOffset(0xF0A3A839C627845);
-      }
-      return ref _Handle.AsRef<float>(_TargetSpeedOffset!.Value);
+    public ref float TargetSpeed {
+        get {
+            _TargetSpeedOffset = _TargetSpeedOffset ?? Schema.GetOffset(0xF0A3A839C627845);
+            return ref _Handle.AsRef<float>(_TargetSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModeOffset;
+    private static nint? _ModeOffset;
 
-  public ref VelocityMetricMode Mode {
-    get {
-      if (_ModeOffset == null) {
-        _ModeOffset = Schema.GetOffset(0xF0A3A831050A633);
-      }
-      return ref _Handle.AsRef<VelocityMetricMode>(_ModeOffset!.Value);
+    public ref VelocityMetricMode Mode {
+        get {
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xF0A3A831050A633);
+            return ref _Handle.AsRef<VelocityMetricMode>(_ModeOffset!.Value);
+        }
     }
-  }
 
 
 }

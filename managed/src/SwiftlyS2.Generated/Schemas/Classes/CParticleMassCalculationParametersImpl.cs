@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParticleMassCalculationParametersImpl : SchemaClass, CParticleMassCalculationParameters {
+internal partial class CParticleMassCalculationParametersImpl : SchemaClass, CParticleMassCalculationParameters
+{
+    public CParticleMassCalculationParametersImpl(nint handle) : base(handle) { }
 
-  public CParticleMassCalculationParametersImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MassModeOffset;
 
-  private static nint? _MassModeOffset;
-
-  public ref ParticleMassMode_t MassMode {
-    get {
-      if (_MassModeOffset == null) {
-        _MassModeOffset = Schema.GetOffset(0xAA3341F9D5B6E412);
-      }
-      return ref _Handle.AsRef<ParticleMassMode_t>(_MassModeOffset!.Value);
+    public ref ParticleMassMode_t MassMode {
+        get {
+            _MassModeOffset = _MassModeOffset ?? Schema.GetOffset(0xAA3341F9D5B6E412);
+            return ref _Handle.AsRef<ParticleMassMode_t>(_MassModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public CPerParticleFloatInput Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xAA3341F95ACFC08D);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+    public CPerParticleFloatInput Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xAA3341F95ACFC08D);
+            return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _NominalRadiusOffset;
+    private static nint? _NominalRadiusOffset;
 
-  public CPerParticleFloatInput NominalRadius {
-    get {
-      if (_NominalRadiusOffset == null) {
-        _NominalRadiusOffset = Schema.GetOffset(0xAA3341F9B6692A73);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _NominalRadiusOffset!.Value);
+    public CPerParticleFloatInput NominalRadius {
+        get {
+            _NominalRadiusOffset = _NominalRadiusOffset ?? Schema.GetOffset(0xAA3341F9B6692A73);
+            return new CPerParticleFloatInputImpl(_Handle + _NominalRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public CPerParticleFloatInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0xAA3341F9B731A42F);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+    public CPerParticleFloatInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xAA3341F9B731A42F);
+            return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSingleFrameUpdateNodeImpl : CLeafUpdateNodeImpl, CSingleFrameUpdateNode {
+internal partial class CSingleFrameUpdateNodeImpl : CLeafUpdateNodeImpl, CSingleFrameUpdateNode
+{
+    public CSingleFrameUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CSingleFrameUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActionsOffset;
 
-  private static nint? _ActionsOffset;
-
-  public ref CUtlVector<SchemaUntypedField> Actions {
-    get {
-      if (_ActionsOffset == null) {
-        _ActionsOffset = Schema.GetOffset(0x5A65D6168D622684);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> Actions {
+        get {
+            _ActionsOffset = _ActionsOffset ?? Schema.GetOffset(0x5A65D6168D622684);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ActionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _PoseCacheHandleOffset;
+    private static nint? _PoseCacheHandleOffset;
 
-  public CPoseHandle PoseCacheHandle {
-    get {
-      if (_PoseCacheHandleOffset == null) {
-        _PoseCacheHandleOffset = Schema.GetOffset(0x5A65D6164719447A);
-      }
-      return new CPoseHandleImpl(_Handle + _PoseCacheHandleOffset!.Value);
+    public CPoseHandle PoseCacheHandle {
+        get {
+            _PoseCacheHandleOffset = _PoseCacheHandleOffset ?? Schema.GetOffset(0x5A65D6164719447A);
+            return new CPoseHandleImpl(_Handle + _PoseCacheHandleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceOffset;
+    private static nint? _SequenceOffset;
 
-  public HSequence Sequence {
-    get {
-      if (_SequenceOffset == null) {
-        _SequenceOffset = Schema.GetOffset(0x5A65D616E0A0598E);
-      }
-      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    public HSequence Sequence {
+        get {
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x5A65D616E0A0598E);
+            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _CycleOffset;
+    private static nint? _CycleOffset;
 
-  public ref float Cycle {
-    get {
-      if (_CycleOffset == null) {
-        _CycleOffset = Schema.GetOffset(0x5A65D6160C77829F);
-      }
-      return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+    public ref float Cycle {
+        get {
+            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x5A65D6160C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+        }
     }
-  }
 
 
 }

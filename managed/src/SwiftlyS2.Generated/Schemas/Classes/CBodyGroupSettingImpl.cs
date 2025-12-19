@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBodyGroupSettingImpl : SchemaClass, CBodyGroupSetting {
+internal partial class CBodyGroupSettingImpl : SchemaClass, CBodyGroupSetting
+{
+    public CBodyGroupSettingImpl(nint handle) : base(handle) { }
 
-  public CBodyGroupSettingImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BodyGroupNameOffset;
 
-  private static nint? _BodyGroupNameOffset;
+    public string BodyGroupName {
+        get {
+            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xC078388F0E290077);
+            return Schema.GetString(_Handle.Read<nint>(_BodyGroupNameOffset!.Value));
+        }
+        set {
+            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xC078388F0E290077);
+            Schema.SetString(_Handle, _BodyGroupNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _BodyGroupOptionOffset;
 
-  public string BodyGroupName {
-    get {
-      if (_BodyGroupNameOffset == null) {
-        _BodyGroupNameOffset = Schema.GetOffset(0xC078388F0E290077);
-      }
-      var ptr = _Handle.Read<nint>(_BodyGroupNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int BodyGroupOption {
+        get {
+            _BodyGroupOptionOffset = _BodyGroupOptionOffset ?? Schema.GetOffset(0xC078388F09FA2D31);
+            return ref _Handle.AsRef<int>(_BodyGroupOptionOffset!.Value);
+        }
     }
-    set {
-      if (_BodyGroupNameOffset == null) {
-        _BodyGroupNameOffset = Schema.GetOffset(0xC078388F0E290077);
-      }
-      Schema.SetString(_Handle, _BodyGroupNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _BodyGroupOptionOffset;
-
-  public ref int BodyGroupOption {
-    get {
-      if (_BodyGroupOptionOffset == null) {
-        _BodyGroupOptionOffset = Schema.GetOffset(0xC078388F09FA2D31);
-      }
-      return ref _Handle.AsRef<int>(_BodyGroupOptionOffset!.Value);
-    }
-  }
 
 
 }

@@ -6,29 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class WeaponPurchaseTracker_tImpl : SchemaClass, WeaponPurchaseTracker_t {
+internal partial class WeaponPurchaseTracker_tImpl : SchemaClass, WeaponPurchaseTracker_t
+{
+    public WeaponPurchaseTracker_tImpl(nint handle) : base(handle) { }
 
-  public WeaponPurchaseTracker_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WeaponPurchasesOffset;
 
-  private static nint? _WeaponPurchasesOffset;
-
-  public ref CUtlVector<WeaponPurchaseCount_t> WeaponPurchases {
-    get {
-      if (_WeaponPurchasesOffset == null) {
-        _WeaponPurchasesOffset = Schema.GetOffset(0xD558F475988247C7);
-      }
-      return ref _Handle.AsRef<CUtlVector<WeaponPurchaseCount_t>>(_WeaponPurchasesOffset!.Value);
+    public ref CUtlVector<WeaponPurchaseCount_t> WeaponPurchases {
+        get {
+            _WeaponPurchasesOffset = _WeaponPurchasesOffset ?? Schema.GetOffset(0xD558F475988247C7);
+            return ref _Handle.AsRef<CUtlVector<WeaponPurchaseCount_t>>(_WeaponPurchasesOffset!.Value);
+        }
     }
-  }
 
-  public void WeaponPurchasesUpdated() {
-    Schema.Update(_Handle, 0xD558F475988247C7);
-  }
+    public void WeaponPurchasesUpdated() => Schema.Update(_Handle, 0xD558F475988247C7);
 }

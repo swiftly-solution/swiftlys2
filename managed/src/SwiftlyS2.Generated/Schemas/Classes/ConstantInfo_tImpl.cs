@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ConstantInfo_tImpl : SchemaClass, ConstantInfo_t {
+internal partial class ConstantInfo_tImpl : SchemaClass, ConstantInfo_t
+{
+    public ConstantInfo_tImpl(nint handle) : base(handle) { }
 
-  public ConstantInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF4BEF78E4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF4BEF78E4D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NameTokenOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xF4BEF78E4D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlStringToken NameToken {
+        get {
+            _NameTokenOffset = _NameTokenOffset ?? Schema.GetOffset(0xF4BEF78E9293FEF3);
+            return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xF4BEF78E4D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NameTokenOffset;
+    private static nint? _ValueOffset;
 
-  public ref CUtlStringToken NameToken {
-    get {
-      if (_NameTokenOffset == null) {
-        _NameTokenOffset = Schema.GetOffset(0xF4BEF78E9293FEF3);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset!.Value);
+    public ref float Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xF4BEF78E8DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValueOffset;
-
-  public ref float Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0xF4BEF78E8DFCB984);
-      }
-      return ref _Handle.AsRef<float>(_ValueOffset!.Value);
-    }
-  }
 
 
 }

@@ -6,94 +6,76 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFeMorphLayerImpl : SchemaClass, CFeMorphLayer {
+internal partial class CFeMorphLayerImpl : SchemaClass, CFeMorphLayer
+{
+    public CFeMorphLayerImpl(nint handle) : base(handle) { }
 
-  public CFeMorphLayerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB30F1160CAE8A266);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB30F1160CAE8A266);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NameHashOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xB30F1160CAE8A266);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref uint NameHash {
+        get {
+            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0xB30F1160DE15EEFE);
+            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xB30F1160CAE8A266);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NameHashOffset;
+    private static nint? _NodesOffset;
 
-  public ref uint NameHash {
-    get {
-      if (_NameHashOffset == null) {
-        _NameHashOffset = Schema.GetOffset(0xB30F1160DE15EEFE);
-      }
-      return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+    public ref CUtlVector<ushort> Nodes {
+        get {
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0xB30F1160EBA045DA);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_NodesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodesOffset;
+    private static nint? _InitPosOffset;
 
-  public ref CUtlVector<ushort> Nodes {
-    get {
-      if (_NodesOffset == null) {
-        _NodesOffset = Schema.GetOffset(0xB30F1160EBA045DA);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_NodesOffset!.Value);
+    public ref CUtlVector<Vector> InitPos {
+        get {
+            _InitPosOffset = _InitPosOffset ?? Schema.GetOffset(0xB30F11608D152323);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_InitPosOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitPosOffset;
+    private static nint? _GravityOffset;
 
-  public ref CUtlVector<Vector> InitPos {
-    get {
-      if (_InitPosOffset == null) {
-        _InitPosOffset = Schema.GetOffset(0xB30F11608D152323);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_InitPosOffset!.Value);
+    public ref CUtlVector<float> Gravity {
+        get {
+            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0xB30F1160790C70C5);
+            return ref _Handle.AsRef<CUtlVector<float>>(_GravityOffset!.Value);
+        }
     }
-  }
-  private static nint? _GravityOffset;
+    private static nint? _GoalStrengthOffset;
 
-  public ref CUtlVector<float> Gravity {
-    get {
-      if (_GravityOffset == null) {
-        _GravityOffset = Schema.GetOffset(0xB30F1160790C70C5);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_GravityOffset!.Value);
+    public ref CUtlVector<float> GoalStrength {
+        get {
+            _GoalStrengthOffset = _GoalStrengthOffset ?? Schema.GetOffset(0xB30F1160686343FF);
+            return ref _Handle.AsRef<CUtlVector<float>>(_GoalStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _GoalStrengthOffset;
+    private static nint? _GoalDampingOffset;
 
-  public ref CUtlVector<float> GoalStrength {
-    get {
-      if (_GoalStrengthOffset == null) {
-        _GoalStrengthOffset = Schema.GetOffset(0xB30F1160686343FF);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_GoalStrengthOffset!.Value);
+    public ref CUtlVector<float> GoalDamping {
+        get {
+            _GoalDampingOffset = _GoalDampingOffset ?? Schema.GetOffset(0xB30F11600F3CA820);
+            return ref _Handle.AsRef<CUtlVector<float>>(_GoalDampingOffset!.Value);
+        }
     }
-  }
-  private static nint? _GoalDampingOffset;
-
-  public ref CUtlVector<float> GoalDamping {
-    get {
-      if (_GoalDampingOffset == null) {
-        _GoalDampingOffset = Schema.GetOffset(0xB30F11600F3CA820);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_GoalDampingOffset!.Value);
-    }
-  }
 
 
 }

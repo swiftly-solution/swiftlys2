@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_HSVShiftToCPImpl : CParticleFunctionPreEmissionImpl, C_OP_HSVShiftToCP {
+internal partial class C_OP_HSVShiftToCPImpl : CParticleFunctionPreEmissionImpl, C_OP_HSVShiftToCP
+{
+    public C_OP_HSVShiftToCPImpl(nint handle) : base(handle) { }
 
-  public C_OP_HSVShiftToCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ColorCPOffset;
 
-  private static nint? _ColorCPOffset;
-
-  public ref int ColorCP {
-    get {
-      if (_ColorCPOffset == null) {
-        _ColorCPOffset = Schema.GetOffset(0xA6FD1F901D3D233F);
-      }
-      return ref _Handle.AsRef<int>(_ColorCPOffset!.Value);
+    public ref int ColorCP {
+        get {
+            _ColorCPOffset = _ColorCPOffset ?? Schema.GetOffset(0xA6FD1F901D3D233F);
+            return ref _Handle.AsRef<int>(_ColorCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorGemEnableCPOffset;
+    private static nint? _ColorGemEnableCPOffset;
 
-  public ref int ColorGemEnableCP {
-    get {
-      if (_ColorGemEnableCPOffset == null) {
-        _ColorGemEnableCPOffset = Schema.GetOffset(0xA6FD1F907B5C2B7F);
-      }
-      return ref _Handle.AsRef<int>(_ColorGemEnableCPOffset!.Value);
+    public ref int ColorGemEnableCP {
+        get {
+            _ColorGemEnableCPOffset = _ColorGemEnableCPOffset ?? Schema.GetOffset(0xA6FD1F907B5C2B7F);
+            return ref _Handle.AsRef<int>(_ColorGemEnableCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputCPOffset;
+    private static nint? _OutputCPOffset;
 
-  public ref int OutputCP {
-    get {
-      if (_OutputCPOffset == null) {
-        _OutputCPOffset = Schema.GetOffset(0xA6FD1F9050DF5703);
-      }
-      return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
+    public ref int OutputCP {
+        get {
+            _OutputCPOffset = _OutputCPOffset ?? Schema.GetOffset(0xA6FD1F9050DF5703);
+            return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultHSVColorOffset;
+    private static nint? _DefaultHSVColorOffset;
 
-  public ref Color DefaultHSVColor {
-    get {
-      if (_DefaultHSVColorOffset == null) {
-        _DefaultHSVColorOffset = Schema.GetOffset(0xA6FD1F90A7EFB0DE);
-      }
-      return ref _Handle.AsRef<Color>(_DefaultHSVColorOffset!.Value);
+    public ref Color DefaultHSVColor {
+        get {
+            _DefaultHSVColorOffset = _DefaultHSVColorOffset ?? Schema.GetOffset(0xA6FD1F90A7EFB0DE);
+            return ref _Handle.AsRef<Color>(_DefaultHSVColorOffset!.Value);
+        }
     }
-  }
 
 
 }

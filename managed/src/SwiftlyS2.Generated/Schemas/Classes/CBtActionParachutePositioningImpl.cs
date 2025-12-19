@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBtActionParachutePositioningImpl : CBtNodeImpl, CBtActionParachutePositioning {
+internal partial class CBtActionParachutePositioningImpl : CBtNodeImpl, CBtActionParachutePositioning
+{
+    public CBtActionParachutePositioningImpl(nint handle) : base(handle) { }
 
-  public CBtActionParachutePositioningImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActionTimerOffset;
 
-  private static nint? _ActionTimerOffset;
-
-  public CountdownTimer ActionTimer {
-    get {
-      if (_ActionTimerOffset == null) {
-        _ActionTimerOffset = Schema.GetOffset(0x132D0F5E8777F414);
-      }
-      return new CountdownTimerImpl(_Handle + _ActionTimerOffset!.Value);
+    public CountdownTimer ActionTimer {
+        get {
+            _ActionTimerOffset = _ActionTimerOffset ?? Schema.GetOffset(0x132D0F5E8777F414);
+            return new CountdownTimerImpl(_Handle + _ActionTimerOffset!.Value);
+        }
     }
-  }
 
 
 }

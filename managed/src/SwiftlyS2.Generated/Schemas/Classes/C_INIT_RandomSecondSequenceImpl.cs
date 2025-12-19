@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomSecondSequenceImpl : CParticleFunctionInitializerImpl, C_INIT_RandomSecondSequence {
+internal partial class C_INIT_RandomSecondSequenceImpl : CParticleFunctionInitializerImpl, C_INIT_RandomSecondSequence
+{
+    public C_INIT_RandomSecondSequenceImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RandomSecondSequenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SequenceMinOffset;
 
-  private static nint? _SequenceMinOffset;
-
-  public ref int SequenceMin {
-    get {
-      if (_SequenceMinOffset == null) {
-        _SequenceMinOffset = Schema.GetOffset(0xC1CE11E0D30682F0);
-      }
-      return ref _Handle.AsRef<int>(_SequenceMinOffset!.Value);
+    public ref int SequenceMin {
+        get {
+            _SequenceMinOffset = _SequenceMinOffset ?? Schema.GetOffset(0xC1CE11E0D30682F0);
+            return ref _Handle.AsRef<int>(_SequenceMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceMaxOffset;
+    private static nint? _SequenceMaxOffset;
 
-  public ref int SequenceMax {
-    get {
-      if (_SequenceMaxOffset == null) {
-        _SequenceMaxOffset = Schema.GetOffset(0xC1CE11E0C8F2EB7A);
-      }
-      return ref _Handle.AsRef<int>(_SequenceMaxOffset!.Value);
+    public ref int SequenceMax {
+        get {
+            _SequenceMaxOffset = _SequenceMaxOffset ?? Schema.GetOffset(0xC1CE11E0C8F2EB7A);
+            return ref _Handle.AsRef<int>(_SequenceMaxOffset!.Value);
+        }
     }
-  }
 
 
 }

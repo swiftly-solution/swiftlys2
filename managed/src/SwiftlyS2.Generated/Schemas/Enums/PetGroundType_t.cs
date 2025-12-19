@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PetGroundType_t : uint {
-
+public enum PetGroundType_t : uint
+{
  PET_GROUND_NONE = 0,
 
  PET_GROUND_GRID = 1,

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCChoreoSceneResource : ISchemaClass<InfoForResourceTypeCChoreoSceneResource> {
-
-  static InfoForResourceTypeCChoreoSceneResource ISchemaClass<InfoForResourceTypeCChoreoSceneResource>.From(nint handle) => new InfoForResourceTypeCChoreoSceneResourceImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCChoreoSceneResource>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCChoreoSceneResource>.ClassName => null;
+public partial interface InfoForResourceTypeCChoreoSceneResource : ISchemaClass<InfoForResourceTypeCChoreoSceneResource>
+{
+    static InfoForResourceTypeCChoreoSceneResource ISchemaClass<InfoForResourceTypeCChoreoSceneResource>.From(nint handle) => new InfoForResourceTypeCChoreoSceneResourceImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCChoreoSceneResource>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCChoreoSceneResource>.ClassName => null;
 
 
 

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleFalloffFunction_t : uint {
-
+public enum ParticleFalloffFunction_t : uint
+{
  PARTICLE_FALLOFF_CONSTANT = 0,
 
  PARTICLE_FALLOFF_LINEAR = 1,

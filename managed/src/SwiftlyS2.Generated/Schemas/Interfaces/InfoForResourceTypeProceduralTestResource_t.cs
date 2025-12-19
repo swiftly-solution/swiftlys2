@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeProceduralTestResource_t : ISchemaClass<InfoForResourceTypeProceduralTestResource_t> {
-
-  static InfoForResourceTypeProceduralTestResource_t ISchemaClass<InfoForResourceTypeProceduralTestResource_t>.From(nint handle) => new InfoForResourceTypeProceduralTestResource_tImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeProceduralTestResource_t>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeProceduralTestResource_t>.ClassName => null;
+public partial interface InfoForResourceTypeProceduralTestResource_t : ISchemaClass<InfoForResourceTypeProceduralTestResource_t>
+{
+    static InfoForResourceTypeProceduralTestResource_t ISchemaClass<InfoForResourceTypeProceduralTestResource_t>.From(nint handle) => new InfoForResourceTypeProceduralTestResource_tImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeProceduralTestResource_t>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeProceduralTestResource_t>.ClassName => null;
 
 
 

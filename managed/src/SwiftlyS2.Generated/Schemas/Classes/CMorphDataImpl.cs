@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMorphDataImpl : SchemaClass, CMorphData {
+internal partial class CMorphDataImpl : SchemaClass, CMorphData
+{
+    public CMorphDataImpl(nint handle) : base(handle) { }
 
-  public CMorphDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x603F8C4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x603F8C4D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _MorphRectDatasOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x603F8C4D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CMorphRectData> MorphRectDatas {
+        get {
+            _MorphRectDatasOffset = _MorphRectDatasOffset ?? Schema.GetOffset(0x603F8CB92C9674);
+            return ref _Handle.AsRef<CUtlVector<CMorphRectData>>(_MorphRectDatasOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x603F8C4D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _MorphRectDatasOffset;
-
-  public ref CUtlVector<CMorphRectData> MorphRectDatas {
-    get {
-      if (_MorphRectDatasOffset == null) {
-        _MorphRectDatasOffset = Schema.GetOffset(0x603F8CB92C9674);
-      }
-      return ref _Handle.AsRef<CUtlVector<CMorphRectData>>(_MorphRectDatasOffset!.Value);
-    }
-  }
 
 
 }

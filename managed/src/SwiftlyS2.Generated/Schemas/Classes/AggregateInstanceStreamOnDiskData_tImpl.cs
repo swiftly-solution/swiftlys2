@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AggregateInstanceStreamOnDiskData_tImpl : SchemaClass, AggregateInstanceStreamOnDiskData_t {
+internal partial class AggregateInstanceStreamOnDiskData_tImpl : SchemaClass, AggregateInstanceStreamOnDiskData_t
+{
+    public AggregateInstanceStreamOnDiskData_tImpl(nint handle) : base(handle) { }
 
-  public AggregateInstanceStreamOnDiskData_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DecodedSizeOffset;
 
-  private static nint? _DecodedSizeOffset;
-
-  public ref uint DecodedSize {
-    get {
-      if (_DecodedSizeOffset == null) {
-        _DecodedSizeOffset = Schema.GetOffset(0x8EDB1298803205A0);
-      }
-      return ref _Handle.AsRef<uint>(_DecodedSizeOffset!.Value);
+    public ref uint DecodedSize {
+        get {
+            _DecodedSizeOffset = _DecodedSizeOffset ?? Schema.GetOffset(0x8EDB1298803205A0);
+            return ref _Handle.AsRef<uint>(_DecodedSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _BufferDataOffset;
+    private static nint? _BufferDataOffset;
 
-  public ref CUtlBinaryBlock BufferData {
-    get {
-      if (_BufferDataOffset == null) {
-        _BufferDataOffset = Schema.GetOffset(0x8EDB1298ED884C43);
-      }
-      return ref _Handle.AsRef<CUtlBinaryBlock>(_BufferDataOffset!.Value);
+    public ref CUtlBinaryBlock BufferData {
+        get {
+            _BufferDataOffset = _BufferDataOffset ?? Schema.GetOffset(0x8EDB1298ED884C43);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_BufferDataOffset!.Value);
+        }
     }
-  }
 
 
 }

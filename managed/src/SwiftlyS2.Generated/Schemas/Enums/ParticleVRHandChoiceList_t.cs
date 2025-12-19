@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleVRHandChoiceList_t : uint {
-
+public enum ParticleVRHandChoiceList_t : uint
+{
  PARTICLE_VRHAND_LEFT = 0,
 
  PARTICLE_VRHAND_RIGHT = 1,

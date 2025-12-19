@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_IntervalTimer__CursorState_tImpl : SchemaClass, CPulseCell_IntervalTimer__CursorState_t {
+internal partial class CPulseCell_IntervalTimer__CursorState_tImpl : SchemaClass, CPulseCell_IntervalTimer__CursorState_t
+{
+    public CPulseCell_IntervalTimer__CursorState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_IntervalTimer__CursorState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartTimeOffset;
 
-  private static nint? _StartTimeOffset;
-
-  public GameTime_t StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x63BF122697B5FA8E);
-      }
-      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    public GameTime_t StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x63BF122697B5FA8E);
+            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndTimeOffset;
+    private static nint? _EndTimeOffset;
 
-  public GameTime_t EndTime {
-    get {
-      if (_EndTimeOffset == null) {
-        _EndTimeOffset = Schema.GetOffset(0x63BF12267AA8F56B);
-      }
-      return new GameTime_tImpl(_Handle + _EndTimeOffset!.Value);
+    public GameTime_t EndTime {
+        get {
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0x63BF12267AA8F56B);
+            return new GameTime_tImpl(_Handle + _EndTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WaitIntervalOffset;
+    private static nint? _WaitIntervalOffset;
 
-  public ref float WaitInterval {
-    get {
-      if (_WaitIntervalOffset == null) {
-        _WaitIntervalOffset = Schema.GetOffset(0x63BF122677B6B563);
-      }
-      return ref _Handle.AsRef<float>(_WaitIntervalOffset!.Value);
+    public ref float WaitInterval {
+        get {
+            _WaitIntervalOffset = _WaitIntervalOffset ?? Schema.GetOffset(0x63BF122677B6B563);
+            return ref _Handle.AsRef<float>(_WaitIntervalOffset!.Value);
+        }
     }
-  }
-  private static nint? _WaitIntervalHighOffset;
+    private static nint? _WaitIntervalHighOffset;
 
-  public ref float WaitIntervalHigh {
-    get {
-      if (_WaitIntervalHighOffset == null) {
-        _WaitIntervalHighOffset = Schema.GetOffset(0x63BF12267540534F);
-      }
-      return ref _Handle.AsRef<float>(_WaitIntervalHighOffset!.Value);
+    public ref float WaitIntervalHigh {
+        get {
+            _WaitIntervalHighOffset = _WaitIntervalHighOffset ?? Schema.GetOffset(0x63BF12267540534F);
+            return ref _Handle.AsRef<float>(_WaitIntervalHighOffset!.Value);
+        }
     }
-  }
-  private static nint? _CompleteOnNextWakeOffset;
+    private static nint? _CompleteOnNextWakeOffset;
 
-  public ref bool CompleteOnNextWake {
-    get {
-      if (_CompleteOnNextWakeOffset == null) {
-        _CompleteOnNextWakeOffset = Schema.GetOffset(0x63BF122684615952);
-      }
-      return ref _Handle.AsRef<bool>(_CompleteOnNextWakeOffset!.Value);
+    public ref bool CompleteOnNextWake {
+        get {
+            _CompleteOnNextWakeOffset = _CompleteOnNextWakeOffset ?? Schema.GetOffset(0x63BF122684615952);
+            return ref _Handle.AsRef<bool>(_CompleteOnNextWakeOffset!.Value);
+        }
     }
-  }
 
 
 }

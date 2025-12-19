@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SurroundingBoundsType_t : byte {
-
+public enum SurroundingBoundsType_t : byte
+{
  USE_OBB_COLLISION_BOUNDS = 0,
 
  USE_BEST_COLLISION_BOUNDS = 1,

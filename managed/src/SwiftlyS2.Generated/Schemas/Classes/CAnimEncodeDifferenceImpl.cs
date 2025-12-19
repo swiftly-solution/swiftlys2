@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimEncodeDifferenceImpl : SchemaClass, CAnimEncodeDifference {
+internal partial class CAnimEncodeDifferenceImpl : SchemaClass, CAnimEncodeDifference
+{
+    public CAnimEncodeDifferenceImpl(nint handle) : base(handle) { }
 
-  public CAnimEncodeDifferenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneArrayOffset;
 
-  private static nint? _BoneArrayOffset;
-
-  public ref CUtlVector<CAnimBoneDifference> BoneArray {
-    get {
-      if (_BoneArrayOffset == null) {
-        _BoneArrayOffset = Schema.GetOffset(0x65474B2E80273F0C);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimBoneDifference>>(_BoneArrayOffset!.Value);
+    public ref CUtlVector<CAnimBoneDifference> BoneArray {
+        get {
+            _BoneArrayOffset = _BoneArrayOffset ?? Schema.GetOffset(0x65474B2E80273F0C);
+            return ref _Handle.AsRef<CUtlVector<CAnimBoneDifference>>(_BoneArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _MorphArrayOffset;
+    private static nint? _MorphArrayOffset;
 
-  public ref CUtlVector<CAnimMorphDifference> MorphArray {
-    get {
-      if (_MorphArrayOffset == null) {
-        _MorphArrayOffset = Schema.GetOffset(0x65474B2E8C6827E6);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimMorphDifference>>(_MorphArrayOffset!.Value);
+    public ref CUtlVector<CAnimMorphDifference> MorphArray {
+        get {
+            _MorphArrayOffset = _MorphArrayOffset ?? Schema.GetOffset(0x65474B2E8C6827E6);
+            return ref _Handle.AsRef<CUtlVector<CAnimMorphDifference>>(_MorphArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _UserArrayOffset;
+    private static nint? _UserArrayOffset;
 
-  public ref CUtlVector<CAnimUserDifference> UserArray {
-    get {
-      if (_UserArrayOffset == null) {
-        _UserArrayOffset = Schema.GetOffset(0x65474B2EFBDB0C13);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimUserDifference>>(_UserArrayOffset!.Value);
+    public ref CUtlVector<CAnimUserDifference> UserArray {
+        get {
+            _UserArrayOffset = _UserArrayOffset ?? Schema.GetOffset(0x65474B2EFBDB0C13);
+            return ref _Handle.AsRef<CUtlVector<CAnimUserDifference>>(_UserArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasRotationBitArrayOffset;
+    private static nint? _HasRotationBitArrayOffset;
 
-  public ref CUtlVector<byte> HasRotationBitArray {
-    get {
-      if (_HasRotationBitArrayOffset == null) {
-        _HasRotationBitArrayOffset = Schema.GetOffset(0x65474B2E6AD7DEA5);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_HasRotationBitArrayOffset!.Value);
+    public ref CUtlVector<byte> HasRotationBitArray {
+        get {
+            _HasRotationBitArrayOffset = _HasRotationBitArrayOffset ?? Schema.GetOffset(0x65474B2E6AD7DEA5);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_HasRotationBitArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasMovementBitArrayOffset;
+    private static nint? _HasMovementBitArrayOffset;
 
-  public ref CUtlVector<byte> HasMovementBitArray {
-    get {
-      if (_HasMovementBitArrayOffset == null) {
-        _HasMovementBitArrayOffset = Schema.GetOffset(0x65474B2EAD247FA6);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_HasMovementBitArrayOffset!.Value);
+    public ref CUtlVector<byte> HasMovementBitArray {
+        get {
+            _HasMovementBitArrayOffset = _HasMovementBitArrayOffset ?? Schema.GetOffset(0x65474B2EAD247FA6);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_HasMovementBitArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasMorphBitArrayOffset;
+    private static nint? _HasMorphBitArrayOffset;
 
-  public ref CUtlVector<byte> HasMorphBitArray {
-    get {
-      if (_HasMorphBitArrayOffset == null) {
-        _HasMorphBitArrayOffset = Schema.GetOffset(0x65474B2E5F84C5D3);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_HasMorphBitArrayOffset!.Value);
+    public ref CUtlVector<byte> HasMorphBitArray {
+        get {
+            _HasMorphBitArrayOffset = _HasMorphBitArrayOffset ?? Schema.GetOffset(0x65474B2E5F84C5D3);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_HasMorphBitArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasUserBitArrayOffset;
+    private static nint? _HasUserBitArrayOffset;
 
-  public ref CUtlVector<byte> HasUserBitArray {
-    get {
-      if (_HasUserBitArrayOffset == null) {
-        _HasUserBitArrayOffset = Schema.GetOffset(0x65474B2EB41ED7E0);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_HasUserBitArrayOffset!.Value);
+    public ref CUtlVector<byte> HasUserBitArray {
+        get {
+            _HasUserBitArrayOffset = _HasUserBitArrayOffset ?? Schema.GetOffset(0x65474B2EB41ED7E0);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_HasUserBitArrayOffset!.Value);
+        }
     }
-  }
 
 
 }

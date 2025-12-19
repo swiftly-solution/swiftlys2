@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CResponseCriteriaSetImpl : SchemaClass, CResponseCriteriaSet {
+internal partial class CResponseCriteriaSetImpl : SchemaClass, CResponseCriteriaSet
+{
+    public CResponseCriteriaSetImpl(nint handle) : base(handle) { }
 
-  public CResponseCriteriaSetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NumPrefixedContextsOffset;
 
-  private static nint? _NumPrefixedContextsOffset;
-
-  public ref int NumPrefixedContexts {
-    get {
-      if (_NumPrefixedContextsOffset == null) {
-        _NumPrefixedContextsOffset = Schema.GetOffset(0x96E39114B653ABCA);
-      }
-      return ref _Handle.AsRef<int>(_NumPrefixedContextsOffset!.Value);
+    public ref int NumPrefixedContexts {
+        get {
+            _NumPrefixedContextsOffset = _NumPrefixedContextsOffset ?? Schema.GetOffset(0x96E39114B653ABCA);
+            return ref _Handle.AsRef<int>(_NumPrefixedContextsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverrideOnAppendOffset;
+    private static nint? _OverrideOnAppendOffset;
 
-  public ref bool OverrideOnAppend {
-    get {
-      if (_OverrideOnAppendOffset == null) {
-        _OverrideOnAppendOffset = Schema.GetOffset(0x96E391140E1014F0);
-      }
-      return ref _Handle.AsRef<bool>(_OverrideOnAppendOffset!.Value);
+    public ref bool OverrideOnAppend {
+        get {
+            _OverrideOnAppendOffset = _OverrideOnAppendOffset ?? Schema.GetOffset(0x96E391140E1014F0);
+            return ref _Handle.AsRef<bool>(_OverrideOnAppendOffset!.Value);
+        }
     }
-  }
 
 
 }

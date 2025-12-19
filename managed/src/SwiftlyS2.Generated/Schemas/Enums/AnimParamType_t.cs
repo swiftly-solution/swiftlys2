@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AnimParamType_t : byte {
-
+public enum AnimParamType_t : byte
+{
  ANIMPARAM_UNKNOWN = 0,
 
  ANIMPARAM_BOOL = 1,

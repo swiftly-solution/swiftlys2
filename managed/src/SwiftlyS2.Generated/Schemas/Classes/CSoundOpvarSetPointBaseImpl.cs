@@ -6,149 +6,108 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundOpvarSetPointBaseImpl : CBaseEntityImpl, CSoundOpvarSetPointBase {
+internal partial class CSoundOpvarSetPointBaseImpl : CBaseEntityImpl, CSoundOpvarSetPointBase
+{
+    public CSoundOpvarSetPointBaseImpl(nint handle) : base(handle) { }
 
-  public CSoundOpvarSetPointBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DisabledOffset;
 
-  private static nint? _DisabledOffset;
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x6C95A3E03A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
+    }
+    private static nint? _SourceOffset;
 
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0x6C95A3E03A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref CHandle<CEntityInstance> Source {
+        get {
+            _SourceOffset = _SourceOffset ?? Schema.GetOffset(0x6C95A3E033D3CD82);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_SourceOffset!.Value);
+        }
     }
-  }
-  private static nint? _SourceOffset;
+    private static nint? _SourceEntityNameOffset;
 
-  public ref CHandle<CEntityInstance> Source {
-    get {
-      if (_SourceOffset == null) {
-        _SourceOffset = Schema.GetOffset(0x6C95A3E033D3CD82);
-      }
-      return ref _Handle.AsRef<CHandle<CEntityInstance>>(_SourceOffset!.Value);
-    }
-  }
-  private static nint? _SourceEntityNameOffset;
+    public string SourceEntityName {
+        get {
+            _SourceEntityNameOffset = _SourceEntityNameOffset ?? Schema.GetOffset(0x6C95A3E06C1387C0);
+            return Schema.GetString(_Handle.Read<nint>(_SourceEntityNameOffset!.Value));
+        }
+        set {
+            _SourceEntityNameOffset = _SourceEntityNameOffset ?? Schema.GetOffset(0x6C95A3E06C1387C0);
+            Schema.SetString(_Handle, _SourceEntityNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _LastPositionOffset;
 
-  public string SourceEntityName {
-    get {
-      if (_SourceEntityNameOffset == null) {
-        _SourceEntityNameOffset = Schema.GetOffset(0x6C95A3E06C1387C0);
-      }
-      var ptr = _Handle.Read<nint>(_SourceEntityNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref Vector LastPosition {
+        get {
+            _LastPositionOffset = _LastPositionOffset ?? Schema.GetOffset(0x6C95A3E0A5B68002);
+            return ref _Handle.AsRef<Vector>(_LastPositionOffset!.Value);
+        }
     }
-    set {
-      if (_SourceEntityNameOffset == null) {
-        _SourceEntityNameOffset = Schema.GetOffset(0x6C95A3E06C1387C0);
-      }
-      Schema.SetString(_Handle, _SourceEntityNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _LastPositionOffset;
+    private static nint? _StackNameOffset;
 
-  public ref Vector LastPosition {
-    get {
-      if (_LastPositionOffset == null) {
-        _LastPositionOffset = Schema.GetOffset(0x6C95A3E0A5B68002);
-      }
-      return ref _Handle.AsRef<Vector>(_LastPositionOffset!.Value);
-    }
-  }
-  private static nint? _StackNameOffset;
+    public string StackName {
+        get {
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0x6C95A3E03B3E9CD4);
+            return Schema.GetString(_Handle.Read<nint>(_StackNameOffset!.Value));
+        }
+        set {
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0x6C95A3E03B3E9CD4);
+            Schema.SetString(_Handle, _StackNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OperatorNameOffset;
 
-  public string StackName {
-    get {
-      if (_StackNameOffset == null) {
-        _StackNameOffset = Schema.GetOffset(0x6C95A3E03B3E9CD4);
-      }
-      var ptr = _Handle.Read<nint>(_StackNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StackNameOffset == null) {
-        _StackNameOffset = Schema.GetOffset(0x6C95A3E03B3E9CD4);
-      }
-      Schema.SetString(_Handle, _StackNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OperatorNameOffset;
+    public string OperatorName {
+        get {
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0x6C95A3E0F6140996);
+            return Schema.GetString(_Handle.Read<nint>(_OperatorNameOffset!.Value));
+        }
+        set {
+            _OperatorNameOffset = _OperatorNameOffset ?? Schema.GetOffset(0x6C95A3E0F6140996);
+            Schema.SetString(_Handle, _OperatorNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OpvarNameOffset;
 
-  public string OperatorName {
-    get {
-      if (_OperatorNameOffset == null) {
-        _OperatorNameOffset = Schema.GetOffset(0x6C95A3E0F6140996);
-      }
-      var ptr = _Handle.Read<nint>(_OperatorNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_OperatorNameOffset == null) {
-        _OperatorNameOffset = Schema.GetOffset(0x6C95A3E0F6140996);
-      }
-      Schema.SetString(_Handle, _OperatorNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OpvarNameOffset;
+    public string OpvarName {
+        get {
+            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0x6C95A3E02CAEFF3C);
+            return Schema.GetString(_Handle.Read<nint>(_OpvarNameOffset!.Value));
+        }
+        set {
+            _OpvarNameOffset = _OpvarNameOffset ?? Schema.GetOffset(0x6C95A3E02CAEFF3C);
+            Schema.SetString(_Handle, _OpvarNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OpvarIndexOffset;
 
-  public string OpvarName {
-    get {
-      if (_OpvarNameOffset == null) {
-        _OpvarNameOffset = Schema.GetOffset(0x6C95A3E02CAEFF3C);
-      }
-      var ptr = _Handle.Read<nint>(_OpvarNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int OpvarIndex {
+        get {
+            _OpvarIndexOffset = _OpvarIndexOffset ?? Schema.GetOffset(0x6C95A3E0BC170C34);
+            return ref _Handle.AsRef<int>(_OpvarIndexOffset!.Value);
+        }
     }
-    set {
-      if (_OpvarNameOffset == null) {
-        _OpvarNameOffset = Schema.GetOffset(0x6C95A3E02CAEFF3C);
-      }
-      Schema.SetString(_Handle, _OpvarNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OpvarIndexOffset;
+    private static nint? _UseAutoCompareOffset;
 
-  public ref int OpvarIndex {
-    get {
-      if (_OpvarIndexOffset == null) {
-        _OpvarIndexOffset = Schema.GetOffset(0x6C95A3E0BC170C34);
-      }
-      return ref _Handle.AsRef<int>(_OpvarIndexOffset!.Value);
+    public ref bool UseAutoCompare {
+        get {
+            _UseAutoCompareOffset = _UseAutoCompareOffset ?? Schema.GetOffset(0x6C95A3E0E8C88ED2);
+            return ref _Handle.AsRef<bool>(_UseAutoCompareOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseAutoCompareOffset;
 
-  public ref bool UseAutoCompare {
-    get {
-      if (_UseAutoCompareOffset == null) {
-        _UseAutoCompareOffset = Schema.GetOffset(0x6C95A3E0E8C88ED2);
-      }
-      return ref _Handle.AsRef<bool>(_UseAutoCompareOffset!.Value);
-    }
-  }
-
-  public void StackNameUpdated() {
-    Schema.Update(_Handle, 0x6C95A3E03B3E9CD4);
-  }
-  public void OperatorNameUpdated() {
-    Schema.Update(_Handle, 0x6C95A3E0F6140996);
-  }
-  public void OpvarNameUpdated() {
-    Schema.Update(_Handle, 0x6C95A3E02CAEFF3C);
-  }
-  public void OpvarIndexUpdated() {
-    Schema.Update(_Handle, 0x6C95A3E0BC170C34);
-  }
-  public void UseAutoCompareUpdated() {
-    Schema.Update(_Handle, 0x6C95A3E0E8C88ED2);
-  }
+    public void StackNameUpdated() => Schema.Update(_Handle, 0x6C95A3E03B3E9CD4);
+    public void OperatorNameUpdated() => Schema.Update(_Handle, 0x6C95A3E0F6140996);
+    public void OpvarNameUpdated() => Schema.Update(_Handle, 0x6C95A3E02CAEFF3C);
+    public void OpvarIndexUpdated() => Schema.Update(_Handle, 0x6C95A3E0BC170C34);
+    public void UseAutoCompareUpdated() => Schema.Update(_Handle, 0x6C95A3E0E8C88ED2);
 }

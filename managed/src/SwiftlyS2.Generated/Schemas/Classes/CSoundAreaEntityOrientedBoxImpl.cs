@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundAreaEntityOrientedBoxImpl : CSoundAreaEntityBaseImpl, CSoundAreaEntityOrientedBox {
+internal partial class CSoundAreaEntityOrientedBoxImpl : CSoundAreaEntityBaseImpl, CSoundAreaEntityOrientedBox
+{
+    public CSoundAreaEntityOrientedBoxImpl(nint handle) : base(handle) { }
 
-  public CSoundAreaEntityOrientedBoxImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinOffset;
 
-  private static nint? _MinOffset;
-
-  public ref Vector Min {
-    get {
-      if (_MinOffset == null) {
-        _MinOffset = Schema.GetOffset(0x5D327060F4B0AA63);
-      }
-      return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
+    public ref Vector Min {
+        get {
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x5D327060F4B0AA63);
+            return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOffset;
+    private static nint? _MaxOffset;
 
-  public ref Vector Max {
-    get {
-      if (_MaxOffset == null) {
-        _MaxOffset = Schema.GetOffset(0x5D327060EAC4225D);
-      }
-      return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
+    public ref Vector Max {
+        get {
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x5D327060EAC4225D);
+            return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
+        }
     }
-  }
 
-  public void MinUpdated() {
-    Schema.Update(_Handle, 0x5D327060F4B0AA63);
-  }
-  public void MaxUpdated() {
-    Schema.Update(_Handle, 0x5D327060EAC4225D);
-  }
+    public void MinUpdated() => Schema.Update(_Handle, 0x5D327060F4B0AA63);
+    public void MaxUpdated() => Schema.Update(_Handle, 0x5D327060EAC4225D);
 }

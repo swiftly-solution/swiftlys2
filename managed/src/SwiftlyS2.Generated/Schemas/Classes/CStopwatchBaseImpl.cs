@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CStopwatchBaseImpl : CSimpleSimTimerImpl, CStopwatchBase {
+internal partial class CStopwatchBaseImpl : CSimpleSimTimerImpl, CStopwatchBase
+{
+    public CStopwatchBaseImpl(nint handle) : base(handle) { }
 
-  public CStopwatchBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IsRunningOffset;
 
-  private static nint? _IsRunningOffset;
-
-  public ref bool IsRunning {
-    get {
-      if (_IsRunningOffset == null) {
-        _IsRunningOffset = Schema.GetOffset(0x80DA66DCF34F2570);
-      }
-      return ref _Handle.AsRef<bool>(_IsRunningOffset!.Value);
+    public ref bool IsRunning {
+        get {
+            _IsRunningOffset = _IsRunningOffset ?? Schema.GetOffset(0x80DA66DCF34F2570);
+            return ref _Handle.AsRef<bool>(_IsRunningOffset!.Value);
+        }
     }
-  }
 
 
 }

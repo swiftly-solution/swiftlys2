@@ -6,40 +6,35 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeAnimStrayRadius_tImpl : SchemaClass, FeAnimStrayRadius_t {
+internal partial class FeAnimStrayRadius_tImpl : SchemaClass, FeAnimStrayRadius_t
+{
+    public FeAnimStrayRadius_tImpl(nint handle) : base(handle) { }
 
-  public FeAnimStrayRadius_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0xF06BE9BCD6694B9, 2, 2, 2);
-  }
-  private static nint? _MaxDistOffset;
-
-  public ref float MaxDist {
-    get {
-      if (_MaxDistOffset == null) {
-        _MaxDistOffset = Schema.GetOffset(0xF06BE9BC9FFDD57);
-      }
-      return ref _Handle.AsRef<float>(_MaxDistOffset!.Value);
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0xF06BE9BCD6694B9, 2, 2, 2);
     }
-  }
-  private static nint? _RelaxationFactorOffset;
+    private static nint? _MaxDistOffset;
 
-  public ref float RelaxationFactor {
-    get {
-      if (_RelaxationFactorOffset == null) {
-        _RelaxationFactorOffset = Schema.GetOffset(0xF06BE9B357F3BFF);
-      }
-      return ref _Handle.AsRef<float>(_RelaxationFactorOffset!.Value);
+    public ref float MaxDist {
+        get {
+            _MaxDistOffset = _MaxDistOffset ?? Schema.GetOffset(0xF06BE9BC9FFDD57);
+            return ref _Handle.AsRef<float>(_MaxDistOffset!.Value);
+        }
     }
-  }
+    private static nint? _RelaxationFactorOffset;
+
+    public ref float RelaxationFactor {
+        get {
+            _RelaxationFactorOffset = _RelaxationFactorOffset ?? Schema.GetOffset(0xF06BE9B357F3BFF);
+            return ref _Handle.AsRef<float>(_RelaxationFactorOffset!.Value);
+        }
+    }
 
 
 }

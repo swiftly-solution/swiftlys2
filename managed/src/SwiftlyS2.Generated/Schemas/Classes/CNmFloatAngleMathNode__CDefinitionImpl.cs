@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatAngleMathNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatAngleMathNode__CDefinition {
+internal partial class CNmFloatAngleMathNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatAngleMathNode__CDefinition
+{
+    public CNmFloatAngleMathNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFloatAngleMathNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueNodeIdxOffset;
 
-  private static nint? _InputValueNodeIdxOffset;
-
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0x464A924095E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x464A924095E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _OperationOffset;
+    private static nint? _OperationOffset;
 
-  public ref CNmFloatAngleMathNode__Operation_t Operation {
-    get {
-      if (_OperationOffset == null) {
-        _OperationOffset = Schema.GetOffset(0x464A9240AEA59026);
-      }
-      return ref _Handle.AsRef<CNmFloatAngleMathNode__Operation_t>(_OperationOffset!.Value);
+    public ref CNmFloatAngleMathNode__Operation_t Operation {
+        get {
+            _OperationOffset = _OperationOffset ?? Schema.GetOffset(0x464A9240AEA59026);
+            return ref _Handle.AsRef<CNmFloatAngleMathNode__Operation_t>(_OperationOffset!.Value);
+        }
     }
-  }
 
 
 }

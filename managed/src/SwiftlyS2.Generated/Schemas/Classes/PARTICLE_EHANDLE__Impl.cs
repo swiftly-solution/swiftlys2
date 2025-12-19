@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PARTICLE_EHANDLE__Impl : SchemaClass, PARTICLE_EHANDLE__ {
+internal partial class PARTICLE_EHANDLE__Impl : SchemaClass, PARTICLE_EHANDLE__
+{
+    public PARTICLE_EHANDLE__Impl(nint handle) : base(handle) { }
 
-  public PARTICLE_EHANDLE__Impl(nint handle) : base(handle) {
-  }
+    private static nint? _UnusedOffset;
 
-  private static nint? _UnusedOffset;
-
-  public ref int Unused {
-    get {
-      if (_UnusedOffset == null) {
-        _UnusedOffset = Schema.GetOffset(0x7E4CC5CF85CF281B);
-      }
-      return ref _Handle.AsRef<int>(_UnusedOffset!.Value);
+    public ref int Unused {
+        get {
+            _UnusedOffset = _UnusedOffset ?? Schema.GetOffset(0x7E4CC5CF85CF281B);
+            return ref _Handle.AsRef<int>(_UnusedOffset!.Value);
+        }
     }
-  }
 
 
 }

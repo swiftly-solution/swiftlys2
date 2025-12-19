@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class OutflowWithRequirements_tImpl : SchemaClass, OutflowWithRequirements_t {
+internal partial class OutflowWithRequirements_tImpl : SchemaClass, OutflowWithRequirements_t
+{
+    public OutflowWithRequirements_tImpl(nint handle) : base(handle) { }
 
-  public OutflowWithRequirements_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ConnectionOffset;
 
-  private static nint? _ConnectionOffset;
-
-  public CPulse_OutflowConnection Connection {
-    get {
-      if (_ConnectionOffset == null) {
-        _ConnectionOffset = Schema.GetOffset(0x5BFC4DD4D4CD5F59);
-      }
-      return new CPulse_OutflowConnectionImpl(_Handle + _ConnectionOffset!.Value);
+    public CPulse_OutflowConnection Connection {
+        get {
+            _ConnectionOffset = _ConnectionOffset ?? Schema.GetOffset(0x5BFC4DD4D4CD5F59);
+            return new CPulse_OutflowConnectionImpl(_Handle + _ConnectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestinationFlowNodeIDOffset;
+    private static nint? _DestinationFlowNodeIDOffset;
 
-  public PulseDocNodeID_t DestinationFlowNodeID {
-    get {
-      if (_DestinationFlowNodeIDOffset == null) {
-        _DestinationFlowNodeIDOffset = Schema.GetOffset(0x5BFC4DD4C986A186);
-      }
-      return new PulseDocNodeID_tImpl(_Handle + _DestinationFlowNodeIDOffset!.Value);
+    public PulseDocNodeID_t DestinationFlowNodeID {
+        get {
+            _DestinationFlowNodeIDOffset = _DestinationFlowNodeIDOffset ?? Schema.GetOffset(0x5BFC4DD4C986A186);
+            return new PulseDocNodeID_tImpl(_Handle + _DestinationFlowNodeIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _RequirementNodeIDsOffset;
+    private static nint? _RequirementNodeIDsOffset;
 
-  public ref CUtlVector<PulseDocNodeID_t> RequirementNodeIDs {
-    get {
-      if (_RequirementNodeIDsOffset == null) {
-        _RequirementNodeIDsOffset = Schema.GetOffset(0x5BFC4DD47DAC9EFE);
-      }
-      return ref _Handle.AsRef<CUtlVector<PulseDocNodeID_t>>(_RequirementNodeIDsOffset!.Value);
+    public ref CUtlVector<PulseDocNodeID_t> RequirementNodeIDs {
+        get {
+            _RequirementNodeIDsOffset = _RequirementNodeIDsOffset ?? Schema.GetOffset(0x5BFC4DD47DAC9EFE);
+            return ref _Handle.AsRef<CUtlVector<PulseDocNodeID_t>>(_RequirementNodeIDsOffset!.Value);
+        }
     }
-  }
-  private static nint? _CursorStateBlockIndexOffset;
+    private static nint? _CursorStateBlockIndexOffset;
 
-  public ref CUtlVector<int> CursorStateBlockIndex {
-    get {
-      if (_CursorStateBlockIndexOffset == null) {
-        _CursorStateBlockIndexOffset = Schema.GetOffset(0x5BFC4DD46CECC07B);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_CursorStateBlockIndexOffset!.Value);
+    public ref CUtlVector<int> CursorStateBlockIndex {
+        get {
+            _CursorStateBlockIndexOffset = _CursorStateBlockIndexOffset ?? Schema.GetOffset(0x5BFC4DD46CECC07B);
+            return ref _Handle.AsRef<CUtlVector<int>>(_CursorStateBlockIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

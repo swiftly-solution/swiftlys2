@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncWaterImpl : CBaseModelEntityImpl, CFuncWater {
+internal partial class CFuncWaterImpl : CBaseModelEntityImpl, CFuncWater
+{
+    public CFuncWaterImpl(nint handle) : base(handle) { }
 
-  public CFuncWaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BuoyancyHelperOffset;
 
-  private static nint? _BuoyancyHelperOffset;
-
-  public CBuoyancyHelper BuoyancyHelper {
-    get {
-      if (_BuoyancyHelperOffset == null) {
-        _BuoyancyHelperOffset = Schema.GetOffset(0x7DCF4A236BAFFEA7);
-      }
-      return new CBuoyancyHelperImpl(_Handle + _BuoyancyHelperOffset!.Value);
+    public CBuoyancyHelper BuoyancyHelper {
+        get {
+            _BuoyancyHelperOffset = _BuoyancyHelperOffset ?? Schema.GetOffset(0x7DCF4A236BAFFEA7);
+            return new CBuoyancyHelperImpl(_Handle + _BuoyancyHelperOffset!.Value);
+        }
     }
-  }
 
 
 }

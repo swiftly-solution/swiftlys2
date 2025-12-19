@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimParamHandleMapImpl : SchemaClass, CAnimParamHandleMap {
+internal partial class CAnimParamHandleMapImpl : SchemaClass, CAnimParamHandleMap
+{
+    public CAnimParamHandleMapImpl(nint handle) : base(handle) { }
 
-  public CAnimParamHandleMapImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ListOffset;
 
-  private static nint? _ListOffset;
-
-  public SchemaUntypedField List {
-    get {
-      if (_ListOffset == null) {
-        _ListOffset = Schema.GetOffset(0x82522A78CAD81C21);
-      }
-      return new SchemaUntypedField(_Handle + _ListOffset!.Value);
+    public SchemaUntypedField List {
+        get {
+            _ListOffset = _ListOffset ?? Schema.GetOffset(0x82522A78CAD81C21);
+            return new SchemaUntypedField(_Handle + _ListOffset!.Value);
+        }
     }
-  }
 
 
 }

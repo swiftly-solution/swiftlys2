@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleReplicationMode_t : uint {
-
+public enum ParticleReplicationMode_t : uint
+{
  PARTICLE_REPLICATIONMODE_NONE = 0,
 
  PARTICLE_REPLICATIONMODE_REPLICATE_FOR_EACH_PARENT_PARTICLE = 1,

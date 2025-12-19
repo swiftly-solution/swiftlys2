@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNavSpaceInfo : CPointEntity, ISchemaClass<CNavSpaceInfo> {
-
-  static CNavSpaceInfo ISchemaClass<CNavSpaceInfo>.From(nint handle) => new CNavSpaceInfoImpl(handle);
-  static int ISchemaClass<CNavSpaceInfo>.Size => 1264;
-  static string? ISchemaClass<CNavSpaceInfo>.ClassName => "info_nav_space";
+public partial interface CNavSpaceInfo : CPointEntity, ISchemaClass<CNavSpaceInfo>
+{
+    static CNavSpaceInfo ISchemaClass<CNavSpaceInfo>.From(nint handle) => new CNavSpaceInfoImpl(handle);
+    static int ISchemaClass<CNavSpaceInfo>.Size => 1264;
+    static string? ISchemaClass<CNavSpaceInfo>.ClassName => "info_nav_space";
 
 
 

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum WorldTextPanelVerticalAlign_t : uint {
-
+public enum WorldTextPanelVerticalAlign_t : uint
+{
  WORLDTEXT_VERTICAL_ALIGN_TOP = 0,
 
  WORLDTEXT_VERTICAL_ALIGN_CENTER = 1,

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Inflow_EntOutputHandlerImpl : CPulseCell_Inflow_BaseEntrypointImpl, CPulseCell_Inflow_EntOutputHandler {
+internal partial class CPulseCell_Inflow_EntOutputHandlerImpl : CPulseCell_Inflow_BaseEntrypointImpl, CPulseCell_Inflow_EntOutputHandler
+{
+    public CPulseCell_Inflow_EntOutputHandlerImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Inflow_EntOutputHandlerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceEntityOffset;
 
-  private static nint? _SourceEntityOffset;
-
-  public SchemaUntypedField SourceEntity {
-    get {
-      if (_SourceEntityOffset == null) {
-        _SourceEntityOffset = Schema.GetOffset(0x8C9310C4AD2DB063);
-      }
-      return new SchemaUntypedField(_Handle + _SourceEntityOffset!.Value);
+    public SchemaUntypedField SourceEntity {
+        get {
+            _SourceEntityOffset = _SourceEntityOffset ?? Schema.GetOffset(0x8C9310C4AD2DB063);
+            return new SchemaUntypedField(_Handle + _SourceEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _SourceOutputOffset;
+    private static nint? _SourceOutputOffset;
 
-  public SchemaUntypedField SourceOutput {
-    get {
-      if (_SourceOutputOffset == null) {
-        _SourceOutputOffset = Schema.GetOffset(0x8C9310C42D46D7F5);
-      }
-      return new SchemaUntypedField(_Handle + _SourceOutputOffset!.Value);
+    public SchemaUntypedField SourceOutput {
+        get {
+            _SourceOutputOffset = _SourceOutputOffset ?? Schema.GetOffset(0x8C9310C42D46D7F5);
+            return new SchemaUntypedField(_Handle + _SourceOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExpectedParamTypeOffset;
+    private static nint? _ExpectedParamTypeOffset;
 
-  public SchemaUntypedField ExpectedParamType {
-    get {
-      if (_ExpectedParamTypeOffset == null) {
-        _ExpectedParamTypeOffset = Schema.GetOffset(0x8C9310C41C1CB8A6);
-      }
-      return new SchemaUntypedField(_Handle + _ExpectedParamTypeOffset!.Value);
+    public SchemaUntypedField ExpectedParamType {
+        get {
+            _ExpectedParamTypeOffset = _ExpectedParamTypeOffset ?? Schema.GetOffset(0x8C9310C41C1CB8A6);
+            return new SchemaUntypedField(_Handle + _ExpectedParamTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

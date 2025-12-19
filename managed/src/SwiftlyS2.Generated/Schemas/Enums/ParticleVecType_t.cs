@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleVecType_t : uint {
-
+public enum ParticleVecType_t : uint
+{
  PVEC_TYPE_INVALID = uint.MaxValue,
 
  PVEC_TYPE_LITERAL = 0,

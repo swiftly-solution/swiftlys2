@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNavLinkAnimgraphVarImpl : SchemaClass, CNavLinkAnimgraphVar {
+internal partial class CNavLinkAnimgraphVarImpl : SchemaClass, CNavLinkAnimgraphVar
+{
+    public CNavLinkAnimgraphVarImpl(nint handle) : base(handle) { }
 
-  public CNavLinkAnimgraphVarImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AnimGraphNavlinkTypeOffset;
 
-  private static nint? _AnimGraphNavlinkTypeOffset;
-
-  public ref CGlobalSymbol AnimGraphNavlinkType {
-    get {
-      if (_AnimGraphNavlinkTypeOffset == null) {
-        _AnimGraphNavlinkTypeOffset = Schema.GetOffset(0xD079ABDB24A7FCF6);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_AnimGraphNavlinkTypeOffset!.Value);
+    public ref CGlobalSymbol AnimGraphNavlinkType {
+        get {
+            _AnimGraphNavlinkTypeOffset = _AnimGraphNavlinkTypeOffset ?? Schema.GetOffset(0xD079ABDB24A7FCF6);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AnimGraphNavlinkTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlignmentDegreesOffset;
+    private static nint? _AlignmentDegreesOffset;
 
-  public ref uint AlignmentDegrees {
-    get {
-      if (_AlignmentDegreesOffset == null) {
-        _AlignmentDegreesOffset = Schema.GetOffset(0xD079ABDB371747C0);
-      }
-      return ref _Handle.AsRef<uint>(_AlignmentDegreesOffset!.Value);
+    public ref uint AlignmentDegrees {
+        get {
+            _AlignmentDegreesOffset = _AlignmentDegreesOffset ?? Schema.GetOffset(0xD079ABDB371747C0);
+            return ref _Handle.AsRef<uint>(_AlignmentDegreesOffset!.Value);
+        }
     }
-  }
 
 
 }

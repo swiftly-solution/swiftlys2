@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_WaitForCursorsWithTagBase__CursorState_tImpl : SchemaClass, CPulseCell_WaitForCursorsWithTagBase__CursorState_t {
+internal partial class CPulseCell_WaitForCursorsWithTagBase__CursorState_tImpl : SchemaClass, CPulseCell_WaitForCursorsWithTagBase__CursorState_t
+{
+    public CPulseCell_WaitForCursorsWithTagBase__CursorState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_WaitForCursorsWithTagBase__CursorState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagNameOffset;
 
-  private static nint? _TagNameOffset;
-
-  public SchemaUntypedField TagName {
-    get {
-      if (_TagNameOffset == null) {
-        _TagNameOffset = Schema.GetOffset(0x71EA6190647DC278);
-      }
-      return new SchemaUntypedField(_Handle + _TagNameOffset!.Value);
+    public SchemaUntypedField TagName {
+        get {
+            _TagNameOffset = _TagNameOffset ?? Schema.GetOffset(0x71EA6190647DC278);
+            return new SchemaUntypedField(_Handle + _TagNameOffset!.Value);
+        }
     }
-  }
 
 
 }

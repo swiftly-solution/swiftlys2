@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RemapInitialTransformDirectionToRotationImpl : CParticleFunctionInitializerImpl, C_INIT_RemapInitialTransformDirectionToRotation {
+internal partial class C_INIT_RemapInitialTransformDirectionToRotationImpl : CParticleFunctionInitializerImpl, C_INIT_RemapInitialTransformDirectionToRotation
+{
+    public C_INIT_RemapInitialTransformDirectionToRotationImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RemapInitialTransformDirectionToRotationImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformInputOffset;
 
-  private static nint? _TransformInputOffset;
-
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0x5301B477B3FDC289);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x5301B477B3FDC289);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x5301B477E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x5301B477E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetRotOffset;
+    private static nint? _OffsetRotOffset;
 
-  public ref float OffsetRot {
-    get {
-      if (_OffsetRotOffset == null) {
-        _OffsetRotOffset = Schema.GetOffset(0x5301B477B414F849);
-      }
-      return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+    public ref float OffsetRot {
+        get {
+            _OffsetRotOffset = _OffsetRotOffset ?? Schema.GetOffset(0x5301B477B414F849);
+            return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComponentOffset;
+    private static nint? _ComponentOffset;
 
-  public ref int Component {
-    get {
-      if (_ComponentOffset == null) {
-        _ComponentOffset = Schema.GetOffset(0x5301B477BFD0952C);
-      }
-      return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+    public ref int Component {
+        get {
+            _ComponentOffset = _ComponentOffset ?? Schema.GetOffset(0x5301B477BFD0952C);
+            return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+        }
     }
-  }
 
 
 }

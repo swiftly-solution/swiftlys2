@@ -6,124 +6,100 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDestructiblePart_DamageLevelImpl : SchemaClass, CDestructiblePart_DamageLevel {
+internal partial class CDestructiblePart_DamageLevelImpl : SchemaClass, CDestructiblePart_DamageLevel
+{
+    public CDestructiblePart_DamageLevelImpl(nint handle) : base(handle) { }
 
-  public CDestructiblePart_DamageLevelImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF69D69CB63D22D49);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xF69D69CB63D22D49);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _BreakablePieceNameOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xF69D69CB63D22D49);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CGlobalSymbol BreakablePieceName {
+        get {
+            _BreakablePieceNameOffset = _BreakablePieceNameOffset ?? Schema.GetOffset(0xF69D69CB88329BEA);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BreakablePieceNameOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xF69D69CB63D22D49);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _BreakablePieceNameOffset;
+    private static nint? _BodyGroupValueOffset;
 
-  public ref CGlobalSymbol BreakablePieceName {
-    get {
-      if (_BreakablePieceNameOffset == null) {
-        _BreakablePieceNameOffset = Schema.GetOffset(0xF69D69CB88329BEA);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_BreakablePieceNameOffset!.Value);
+    public ref int BodyGroupValue {
+        get {
+            _BodyGroupValueOffset = _BodyGroupValueOffset ?? Schema.GetOffset(0xF69D69CB90FF4BE9);
+            return ref _Handle.AsRef<int>(_BodyGroupValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _BodyGroupValueOffset;
+    private static nint? _HealthOffset;
 
-  public ref int BodyGroupValue {
-    get {
-      if (_BodyGroupValueOffset == null) {
-        _BodyGroupValueOffset = Schema.GetOffset(0xF69D69CB90FF4BE9);
-      }
-      return ref _Handle.AsRef<int>(_BodyGroupValueOffset!.Value);
+    public CSkillInt Health {
+        get {
+            _HealthOffset = _HealthOffset ?? Schema.GetOffset(0xF69D69CB6E9C4CC3);
+            return new CSkillIntImpl(_Handle + _HealthOffset!.Value);
+        }
     }
-  }
-  private static nint? _HealthOffset;
+    private static nint? _CriticalDamagePercentOffset;
 
-  public CSkillInt Health {
-    get {
-      if (_HealthOffset == null) {
-        _HealthOffset = Schema.GetOffset(0xF69D69CB6E9C4CC3);
-      }
-      return new CSkillIntImpl(_Handle + _HealthOffset!.Value);
+    public ref float CriticalDamagePercent {
+        get {
+            _CriticalDamagePercentOffset = _CriticalDamagePercentOffset ?? Schema.GetOffset(0xF69D69CB4488F688);
+            return ref _Handle.AsRef<float>(_CriticalDamagePercentOffset!.Value);
+        }
     }
-  }
-  private static nint? _CriticalDamagePercentOffset;
+    private static nint? _DamagePassthroughTypeOffset;
 
-  public ref float CriticalDamagePercent {
-    get {
-      if (_CriticalDamagePercentOffset == null) {
-        _CriticalDamagePercentOffset = Schema.GetOffset(0xF69D69CB4488F688);
-      }
-      return ref _Handle.AsRef<float>(_CriticalDamagePercentOffset!.Value);
+    public ref EDestructiblePartDamagePassThroughType DamagePassthroughType {
+        get {
+            _DamagePassthroughTypeOffset = _DamagePassthroughTypeOffset ?? Schema.GetOffset(0xF69D69CB3D01100A);
+            return ref _Handle.AsRef<EDestructiblePartDamagePassThroughType>(_DamagePassthroughTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamagePassthroughTypeOffset;
+    private static nint? _DestructionDeathBehaviorOffset;
 
-  public ref EDestructiblePartDamagePassThroughType DamagePassthroughType {
-    get {
-      if (_DamagePassthroughTypeOffset == null) {
-        _DamagePassthroughTypeOffset = Schema.GetOffset(0xF69D69CB3D01100A);
-      }
-      return ref _Handle.AsRef<EDestructiblePartDamagePassThroughType>(_DamagePassthroughTypeOffset!.Value);
+    public ref DestructiblePartDestructionDeathBehavior_t DestructionDeathBehavior {
+        get {
+            _DestructionDeathBehaviorOffset = _DestructionDeathBehaviorOffset ?? Schema.GetOffset(0xF69D69CB41778385);
+            return ref _Handle.AsRef<DestructiblePartDestructionDeathBehavior_t>(_DestructionDeathBehaviorOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestructionDeathBehaviorOffset;
+    private static nint? _CustomDeathHandshakeOffset;
 
-  public ref DestructiblePartDestructionDeathBehavior_t DestructionDeathBehavior {
-    get {
-      if (_DestructionDeathBehaviorOffset == null) {
-        _DestructionDeathBehaviorOffset = Schema.GetOffset(0xF69D69CB41778385);
-      }
-      return ref _Handle.AsRef<DestructiblePartDestructionDeathBehavior_t>(_DestructionDeathBehaviorOffset!.Value);
+    public ref CGlobalSymbol CustomDeathHandshake {
+        get {
+            _CustomDeathHandshakeOffset = _CustomDeathHandshakeOffset ?? Schema.GetOffset(0xF69D69CBF17A0D42);
+            return ref _Handle.AsRef<CGlobalSymbol>(_CustomDeathHandshakeOffset!.Value);
+        }
     }
-  }
-  private static nint? _CustomDeathHandshakeOffset;
+    private static nint? _ShouldDestroyOnDeathOffset;
 
-  public ref CGlobalSymbol CustomDeathHandshake {
-    get {
-      if (_CustomDeathHandshakeOffset == null) {
-        _CustomDeathHandshakeOffset = Schema.GetOffset(0xF69D69CBF17A0D42);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_CustomDeathHandshakeOffset!.Value);
+    public ref bool ShouldDestroyOnDeath {
+        get {
+            _ShouldDestroyOnDeathOffset = _ShouldDestroyOnDeathOffset ?? Schema.GetOffset(0xF69D69CBC63DDDD5);
+            return ref _Handle.AsRef<bool>(_ShouldDestroyOnDeathOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShouldDestroyOnDeathOffset;
+    private static nint? _DeathDestroyTimeOffset;
 
-  public ref bool ShouldDestroyOnDeath {
-    get {
-      if (_ShouldDestroyOnDeathOffset == null) {
-        _ShouldDestroyOnDeathOffset = Schema.GetOffset(0xF69D69CBC63DDDD5);
-      }
-      return ref _Handle.AsRef<bool>(_ShouldDestroyOnDeathOffset!.Value);
+    public CRangeFloat DeathDestroyTime {
+        get {
+            _DeathDestroyTimeOffset = _DeathDestroyTimeOffset ?? Schema.GetOffset(0xF69D69CB29D83EA2);
+            return new CRangeFloatImpl(_Handle + _DeathDestroyTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DeathDestroyTimeOffset;
-
-  public CRangeFloat DeathDestroyTime {
-    get {
-      if (_DeathDestroyTimeOffset == null) {
-        _DeathDestroyTimeOffset = Schema.GetOffset(0xF69D69CB29D83EA2);
-      }
-      return new CRangeFloatImpl(_Handle + _DeathDestroyTimeOffset!.Value);
-    }
-  }
 
 
 }

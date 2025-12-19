@@ -22,13 +22,13 @@
 #include <api/memory/hooks/manager.h>
 #include <vector>
 
-#include "vfunction.h"
 #include "function.h"
 #include "mfunction.h"
- 
-#include <string_t.h>
+#include "vfunction.h"
+
 #include <entityhandle.h>
 #include <public/entity2/entitysystem.h>
+#include <string_t.h>
 
 class HooksManager : public IHooksManager
 {

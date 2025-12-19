@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum BoneTransformSpace_t : uint {
-
+public enum BoneTransformSpace_t : uint
+{
  BoneTransformSpace_Invalid = uint.MaxValue,
 
  BoneTransformSpace_Parent = 0,

@@ -6,62 +6,49 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSpotlightEndImpl : CBaseModelEntityImpl, CSpotlightEnd {
+internal partial class CSpotlightEndImpl : CBaseModelEntityImpl, CSpotlightEnd
+{
+    public CSpotlightEndImpl(nint handle) : base(handle) { }
 
-  public CSpotlightEndImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LightScaleOffset;
 
-  private static nint? _LightScaleOffset;
-
-  public ref float LightScale {
-    get {
-      if (_LightScaleOffset == null) {
-        _LightScaleOffset = Schema.GetOffset(0x49085AA3E5A1295D);
-      }
-      return ref _Handle.AsRef<float>(_LightScaleOffset!.Value);
+    public ref float LightScale {
+        get {
+            _LightScaleOffset = _LightScaleOffset ?? Schema.GetOffset(0x49085AA3E5A1295D);
+            return ref _Handle.AsRef<float>(_LightScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x49085AA37C5B0533);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x49085AA37C5B0533);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpotlightDirOffset;
+    private static nint? _SpotlightDirOffset;
 
-  public ref Vector SpotlightDir {
-    get {
-      if (_SpotlightDirOffset == null) {
-        _SpotlightDirOffset = Schema.GetOffset(0x49085AA3EE68984A);
-      }
-      return ref _Handle.AsRef<Vector>(_SpotlightDirOffset!.Value);
+    public ref Vector SpotlightDir {
+        get {
+            _SpotlightDirOffset = _SpotlightDirOffset ?? Schema.GetOffset(0x49085AA3EE68984A);
+            return ref _Handle.AsRef<Vector>(_SpotlightDirOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpotlightOrgOffset;
+    private static nint? _SpotlightOrgOffset;
 
-  public ref Vector SpotlightOrg {
-    get {
-      if (_SpotlightOrgOffset == null) {
-        _SpotlightOrgOffset = Schema.GetOffset(0x49085AA34C84B367);
-      }
-      return ref _Handle.AsRef<Vector>(_SpotlightOrgOffset!.Value);
+    public ref Vector SpotlightOrg {
+        get {
+            _SpotlightOrgOffset = _SpotlightOrgOffset ?? Schema.GetOffset(0x49085AA34C84B367);
+            return ref _Handle.AsRef<Vector>(_SpotlightOrgOffset!.Value);
+        }
     }
-  }
 
-  public void LightScaleUpdated() {
-    Schema.Update(_Handle, 0x49085AA3E5A1295D);
-  }
-  public void RadiusUpdated() {
-    Schema.Update(_Handle, 0x49085AA37C5B0533);
-  }
+    public void LightScaleUpdated() => Schema.Update(_Handle, 0x49085AA3E5A1295D);
+    public void RadiusUpdated() => Schema.Update(_Handle, 0x49085AA37C5B0533);
 }

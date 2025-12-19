@@ -6,71 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFlexControllerImpl : SchemaClass, CFlexController {
+internal partial class CFlexControllerImpl : SchemaClass, CFlexController
+{
+    public CFlexControllerImpl(nint handle) : base(handle) { }
 
-  public CFlexControllerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5265FDF16750BACB);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x5265FDF16750BACB);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _TypeOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x5265FDF16750BACB);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x5265FDF16750BACB);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _TypeOffset;
+    public string Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x5265FDF1B580AB00);
+            return Schema.GetString(_Handle.Read<nint>(_TypeOffset!.Value));
+        }
+        set {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x5265FDF1B580AB00);
+            Schema.SetString(_Handle, _TypeOffset!.Value, value);
+        }
+    } 
+    private static nint? _MinOffset;
 
-  public string Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x5265FDF1B580AB00);
-      }
-      var ptr = _Handle.Read<nint>(_TypeOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Min {
+        get {
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x5265FDF1C98F4557);
+            return ref _Handle.AsRef<float>(_MinOffset!.Value);
+        }
     }
-    set {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x5265FDF1B580AB00);
-      }
-      Schema.SetString(_Handle, _TypeOffset!.Value, value);
-    }
-  } 
-  private static nint? _MinOffset;
+    private static nint? _MaxOffset;
 
-  public ref float Min {
-    get {
-      if (_MinOffset == null) {
-        _MinOffset = Schema.GetOffset(0x5265FDF1C98F4557);
-      }
-      return ref _Handle.AsRef<float>(_MinOffset!.Value);
+    public ref float Max {
+        get {
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x5265FDF1D7A2E319);
+            return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOffset;
-
-  public ref float Max {
-    get {
-      if (_MaxOffset == null) {
-        _MaxOffset = Schema.GetOffset(0x5265FDF1D7A2E319);
-      }
-      return ref _Handle.AsRef<float>(_MaxOffset!.Value);
-    }
-  }
 
 
 }

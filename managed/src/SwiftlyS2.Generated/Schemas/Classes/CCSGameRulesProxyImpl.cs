@@ -6,30 +6,25 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSGameRulesProxyImpl : CGameRulesProxyImpl, CCSGameRulesProxy {
+internal partial class CCSGameRulesProxyImpl : CGameRulesProxyImpl, CCSGameRulesProxy
+{
+    public CCSGameRulesProxyImpl(nint handle) : base(handle) { }
 
-  public CCSGameRulesProxyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GameRulesOffset;
 
-  private static nint? _GameRulesOffset;
-
-  public CCSGameRules? GameRules {
-    get {
-      if (_GameRulesOffset == null) {
-        _GameRulesOffset = Schema.GetOffset(0x242D3ADB925C1F40);
-      }
-      var ptr = _Handle.Read<nint>(_GameRulesOffset!.Value);
-      return ptr.IsValidPtr() ? new CCSGameRulesImpl(ptr) : null;
+    public CCSGameRules? GameRules {
+        get {
+            _GameRulesOffset = _GameRulesOffset ?? Schema.GetOffset(0x242D3ADB925C1F40);
+            var ptr = _Handle.Read<nint>(_GameRulesOffset!.Value);
+            return ptr.IsValidPtr() ? new CCSGameRulesImpl(ptr) : null;
+        }
     }
-  }
 
-  public void GameRulesUpdated() {
-    Schema.Update(_Handle, 0x242D3ADB925C1F40);
-  }
+    public void GameRulesUpdated() => Schema.Update(_Handle, 0x242D3ADB925C1F40);
 }

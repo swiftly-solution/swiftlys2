@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimationGraphVisualizerPieImpl : CAnimationGraphVisualizerPrimitiveBaseImpl, CAnimationGraphVisualizerPie {
+internal partial class CAnimationGraphVisualizerPieImpl : CAnimationGraphVisualizerPrimitiveBaseImpl, CAnimationGraphVisualizerPie
+{
+    public CAnimationGraphVisualizerPieImpl(nint handle) : base(handle) { }
 
-  public CAnimationGraphVisualizerPieImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WsCenterOffset;
 
-  private static nint? _WsCenterOffset;
-
-  public ref Vector WsCenter {
-    get {
-      if (_WsCenterOffset == null) {
-        _WsCenterOffset = Schema.GetOffset(0x152844C290A3905E);
-      }
-      return ref _Handle.AsRef<Vector>(_WsCenterOffset!.Value);
+    public ref Vector WsCenter {
+        get {
+            _WsCenterOffset = _WsCenterOffset ?? Schema.GetOffset(0x152844C290A3905E);
+            return ref _Handle.AsRef<Vector>(_WsCenterOffset!.Value);
+        }
     }
-  }
-  private static nint? _WsStartOffset;
+    private static nint? _WsStartOffset;
 
-  public ref Vector WsStart {
-    get {
-      if (_WsStartOffset == null) {
-        _WsStartOffset = Schema.GetOffset(0x152844C2EFF42149);
-      }
-      return ref _Handle.AsRef<Vector>(_WsStartOffset!.Value);
+    public ref Vector WsStart {
+        get {
+            _WsStartOffset = _WsStartOffset ?? Schema.GetOffset(0x152844C2EFF42149);
+            return ref _Handle.AsRef<Vector>(_WsStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _WsEndOffset;
+    private static nint? _WsEndOffset;
 
-  public ref Vector WsEnd {
-    get {
-      if (_WsEndOffset == null) {
-        _WsEndOffset = Schema.GetOffset(0x152844C280C1EC98);
-      }
-      return ref _Handle.AsRef<Vector>(_WsEndOffset!.Value);
+    public ref Vector WsEnd {
+        get {
+            _WsEndOffset = _WsEndOffset ?? Schema.GetOffset(0x152844C280C1EC98);
+            return ref _Handle.AsRef<Vector>(_WsEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorOffset;
+    private static nint? _ColorOffset;
 
-  public ref Color Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x152844C2D7D017D8);
-      }
-      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+    public ref Color Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x152844C2D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+        }
     }
-  }
 
 
 }

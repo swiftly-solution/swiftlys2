@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CSWeaponCategory : uint {
-
+public enum CSWeaponCategory : uint
+{
  WEAPONCATEGORY_OTHER = 0,
 
  WEAPONCATEGORY_MELEE = 1,

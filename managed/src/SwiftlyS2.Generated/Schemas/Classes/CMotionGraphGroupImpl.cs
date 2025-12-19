@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotionGraphGroupImpl : SchemaClass, CMotionGraphGroup {
+internal partial class CMotionGraphGroupImpl : SchemaClass, CMotionGraphGroup
+{
+    public CMotionGraphGroupImpl(nint handle) : base(handle) { }
 
-  public CMotionGraphGroupImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SearchDBOffset;
 
-  private static nint? _SearchDBOffset;
-
-  public CMotionSearchDB SearchDB {
-    get {
-      if (_SearchDBOffset == null) {
-        _SearchDBOffset = Schema.GetOffset(0x34D64AAF5662226F);
-      }
-      return new CMotionSearchDBImpl(_Handle + _SearchDBOffset!.Value);
+    public CMotionSearchDB SearchDB {
+        get {
+            _SearchDBOffset = _SearchDBOffset ?? Schema.GetOffset(0x34D64AAF5662226F);
+            return new CMotionSearchDBImpl(_Handle + _SearchDBOffset!.Value);
+        }
     }
-  }
-  private static nint? _MotionGraphsOffset;
+    private static nint? _MotionGraphsOffset;
 
-  public ref CUtlVector<SchemaUntypedField> MotionGraphs {
-    get {
-      if (_MotionGraphsOffset == null) {
-        _MotionGraphsOffset = Schema.GetOffset(0x34D64AAFE9CB46D2);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotionGraphsOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> MotionGraphs {
+        get {
+            _MotionGraphsOffset = _MotionGraphsOffset ?? Schema.GetOffset(0x34D64AAFE9CB46D2);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotionGraphsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MotionGraphConfigsOffset;
+    private static nint? _MotionGraphConfigsOffset;
 
-  public ref CUtlVector<CMotionGraphConfig> MotionGraphConfigs {
-    get {
-      if (_MotionGraphConfigsOffset == null) {
-        _MotionGraphConfigsOffset = Schema.GetOffset(0x34D64AAF8D9A544C);
-      }
-      return ref _Handle.AsRef<CUtlVector<CMotionGraphConfig>>(_MotionGraphConfigsOffset!.Value);
+    public ref CUtlVector<CMotionGraphConfig> MotionGraphConfigs {
+        get {
+            _MotionGraphConfigsOffset = _MotionGraphConfigsOffset ?? Schema.GetOffset(0x34D64AAF8D9A544C);
+            return ref _Handle.AsRef<CUtlVector<CMotionGraphConfig>>(_MotionGraphConfigsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SampleToConfigOffset;
+    private static nint? _SampleToConfigOffset;
 
-  public ref CUtlVector<int> SampleToConfig {
-    get {
-      if (_SampleToConfigOffset == null) {
-        _SampleToConfigOffset = Schema.GetOffset(0x34D64AAF85EC9B7C);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_SampleToConfigOffset!.Value);
+    public ref CUtlVector<int> SampleToConfig {
+        get {
+            _SampleToConfigOffset = _SampleToConfigOffset ?? Schema.GetOffset(0x34D64AAF85EC9B7C);
+            return ref _Handle.AsRef<CUtlVector<int>>(_SampleToConfigOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsActiveScriptOffset;
+    private static nint? _IsActiveScriptOffset;
 
-  public AnimScriptHandle IsActiveScript {
-    get {
-      if (_IsActiveScriptOffset == null) {
-        _IsActiveScriptOffset = Schema.GetOffset(0x34D64AAFF2DBEC2A);
-      }
-      return new AnimScriptHandleImpl(_Handle + _IsActiveScriptOffset!.Value);
+    public AnimScriptHandle IsActiveScript {
+        get {
+            _IsActiveScriptOffset = _IsActiveScriptOffset ?? Schema.GetOffset(0x34D64AAFF2DBEC2A);
+            return new AnimScriptHandleImpl(_Handle + _IsActiveScriptOffset!.Value);
+        }
     }
-  }
 
 
 }

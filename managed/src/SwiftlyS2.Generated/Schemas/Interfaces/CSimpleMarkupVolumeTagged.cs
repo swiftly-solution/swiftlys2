@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSimpleMarkupVolumeTagged : CMarkupVolumeTagged, ISchemaClass<CSimpleMarkupVolumeTagged> {
-
-  static CSimpleMarkupVolumeTagged ISchemaClass<CSimpleMarkupVolumeTagged>.From(nint handle) => new CSimpleMarkupVolumeTaggedImpl(handle);
-  static int ISchemaClass<CSimpleMarkupVolumeTagged>.Size => 2072;
-  static string? ISchemaClass<CSimpleMarkupVolumeTagged>.ClassName => "markup_volume_tagged";
+public partial interface CSimpleMarkupVolumeTagged : CMarkupVolumeTagged, ISchemaClass<CSimpleMarkupVolumeTagged>
+{
+    static CSimpleMarkupVolumeTagged ISchemaClass<CSimpleMarkupVolumeTagged>.From(nint handle) => new CSimpleMarkupVolumeTaggedImpl(handle);
+    static int ISchemaClass<CSimpleMarkupVolumeTagged>.Size => 2072;
+    static string? ISchemaClass<CSimpleMarkupVolumeTagged>.ClassName => "markup_volume_tagged";
 
 
 

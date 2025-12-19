@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventFrameBoundary_tImpl : SchemaClass, EventFrameBoundary_t {
+internal partial class EventFrameBoundary_tImpl : SchemaClass, EventFrameBoundary_t
+{
+    public EventFrameBoundary_tImpl(nint handle) : base(handle) { }
 
-  public EventFrameBoundary_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FrameTimeOffset;
 
-  private static nint? _FrameTimeOffset;
-
-  public ref float FrameTime {
-    get {
-      if (_FrameTimeOffset == null) {
-        _FrameTimeOffset = Schema.GetOffset(0xDFF6C21659DF875);
-      }
-      return ref _Handle.AsRef<float>(_FrameTimeOffset!.Value);
+    public ref float FrameTime {
+        get {
+            _FrameTimeOffset = _FrameTimeOffset ?? Schema.GetOffset(0xDFF6C21659DF875);
+            return ref _Handle.AsRef<float>(_FrameTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

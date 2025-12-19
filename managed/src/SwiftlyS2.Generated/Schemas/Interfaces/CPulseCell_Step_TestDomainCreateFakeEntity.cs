@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Step_TestDomainCreateFakeEntity : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Step_TestDomainCreateFakeEntity> {
-
-  static CPulseCell_Step_TestDomainCreateFakeEntity ISchemaClass<CPulseCell_Step_TestDomainCreateFakeEntity>.From(nint handle) => new CPulseCell_Step_TestDomainCreateFakeEntityImpl(handle);
-  static int ISchemaClass<CPulseCell_Step_TestDomainCreateFakeEntity>.Size => 72;
-  static string? ISchemaClass<CPulseCell_Step_TestDomainCreateFakeEntity>.ClassName => null;
+public partial interface CPulseCell_Step_TestDomainCreateFakeEntity : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Step_TestDomainCreateFakeEntity>
+{
+    static CPulseCell_Step_TestDomainCreateFakeEntity ISchemaClass<CPulseCell_Step_TestDomainCreateFakeEntity>.From(nint handle) => new CPulseCell_Step_TestDomainCreateFakeEntityImpl(handle);
+    static int ISchemaClass<CPulseCell_Step_TestDomainCreateFakeEntity>.Size => 72;
+    static string? ISchemaClass<CPulseCell_Step_TestDomainCreateFakeEntity>.ClassName => null;
 
 
 

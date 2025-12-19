@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootTrajectoriesImpl : SchemaClass, CFootTrajectories {
+internal partial class CFootTrajectoriesImpl : SchemaClass, CFootTrajectories
+{
+    public CFootTrajectoriesImpl(nint handle) : base(handle) { }
 
-  public CFootTrajectoriesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TrajectoriesOffset;
 
-  private static nint? _TrajectoriesOffset;
-
-  public ref CUtlVector<CFootTrajectory> Trajectories {
-    get {
-      if (_TrajectoriesOffset == null) {
-        _TrajectoriesOffset = Schema.GetOffset(0x5D019D277964C78C);
-      }
-      return ref _Handle.AsRef<CUtlVector<CFootTrajectory>>(_TrajectoriesOffset!.Value);
+    public ref CUtlVector<CFootTrajectory> Trajectories {
+        get {
+            _TrajectoriesOffset = _TrajectoriesOffset ?? Schema.GetOffset(0x5D019D277964C78C);
+            return ref _Handle.AsRef<CUtlVector<CFootTrajectory>>(_TrajectoriesOffset!.Value);
+        }
     }
-  }
 
 
 }

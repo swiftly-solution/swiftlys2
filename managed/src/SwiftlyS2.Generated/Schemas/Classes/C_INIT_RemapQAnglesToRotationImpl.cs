@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RemapQAnglesToRotationImpl : CParticleFunctionInitializerImpl, C_INIT_RemapQAnglesToRotation {
+internal partial class C_INIT_RemapQAnglesToRotationImpl : CParticleFunctionInitializerImpl, C_INIT_RemapQAnglesToRotation
+{
+    public C_INIT_RemapQAnglesToRotationImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RemapQAnglesToRotationImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformInputOffset;
 
-  private static nint? _TransformInputOffset;
-
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0xD24C8C15B3FDC289);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xD24C8C15B3FDC289);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
 
 
 }

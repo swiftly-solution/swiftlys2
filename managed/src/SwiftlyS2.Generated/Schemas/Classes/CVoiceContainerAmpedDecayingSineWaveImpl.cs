@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerAmpedDecayingSineWaveImpl : CVoiceContainerDecayingSineWaveImpl, CVoiceContainerAmpedDecayingSineWave {
+internal partial class CVoiceContainerAmpedDecayingSineWaveImpl : CVoiceContainerDecayingSineWaveImpl, CVoiceContainerAmpedDecayingSineWave
+{
+    public CVoiceContainerAmpedDecayingSineWaveImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerAmpedDecayingSineWaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GainAmountOffset;
 
-  private static nint? _GainAmountOffset;
-
-  public ref float GainAmount {
-    get {
-      if (_GainAmountOffset == null) {
-        _GainAmountOffset = Schema.GetOffset(0x312CFD9CB3BC88F4);
-      }
-      return ref _Handle.AsRef<float>(_GainAmountOffset!.Value);
+    public ref float GainAmount {
+        get {
+            _GainAmountOffset = _GainAmountOffset ?? Schema.GetOffset(0x312CFD9CB3BC88F4);
+            return ref _Handle.AsRef<float>(_GainAmountOffset!.Value);
+        }
     }
-  }
 
 
 }

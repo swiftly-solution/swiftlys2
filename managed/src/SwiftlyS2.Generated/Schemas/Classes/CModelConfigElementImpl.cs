@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigElementImpl : SchemaClass, CModelConfigElement {
+internal partial class CModelConfigElementImpl : SchemaClass, CModelConfigElement
+{
+    public CModelConfigElementImpl(nint handle) : base(handle) { }
 
-  public CModelConfigElementImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ElementNameOffset;
 
-  private static nint? _ElementNameOffset;
+    public string ElementName {
+        get {
+            _ElementNameOffset = _ElementNameOffset ?? Schema.GetOffset(0x240CE3EFEBDAB614);
+            return Schema.GetString(_Handle.Read<nint>(_ElementNameOffset!.Value));
+        }
+        set {
+            _ElementNameOffset = _ElementNameOffset ?? Schema.GetOffset(0x240CE3EFEBDAB614);
+            Schema.SetString(_Handle, _ElementNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NestedElementsOffset;
 
-  public string ElementName {
-    get {
-      if (_ElementNameOffset == null) {
-        _ElementNameOffset = Schema.GetOffset(0x240CE3EFEBDAB614);
-      }
-      var ptr = _Handle.Read<nint>(_ElementNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<PointerTo<CModelConfigElement>> NestedElements {
+        get {
+            _NestedElementsOffset = _NestedElementsOffset ?? Schema.GetOffset(0x240CE3EFA31BDBC3);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfigElement>>>(_NestedElementsOffset!.Value);
+        }
     }
-    set {
-      if (_ElementNameOffset == null) {
-        _ElementNameOffset = Schema.GetOffset(0x240CE3EFEBDAB614);
-      }
-      Schema.SetString(_Handle, _ElementNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NestedElementsOffset;
-
-  public ref CUtlVector<PointerTo<CModelConfigElement>> NestedElements {
-    get {
-      if (_NestedElementsOffset == null) {
-        _NestedElementsOffset = Schema.GetOffset(0x240CE3EFA31BDBC3);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfigElement>>>(_NestedElementsOffset!.Value);
-    }
-  }
 
 
 }

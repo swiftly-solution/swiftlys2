@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_GlobalLightImpl : CParticleFunctionOperatorImpl, C_OP_GlobalLight {
+internal partial class C_OP_GlobalLightImpl : CParticleFunctionOperatorImpl, C_OP_GlobalLight
+{
+    public C_OP_GlobalLightImpl(nint handle) : base(handle) { }
 
-  public C_OP_GlobalLightImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScaleOffset;
 
-  private static nint? _ScaleOffset;
-
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0xC02700C2B731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xC02700C2B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClampLowerRangeOffset;
+    private static nint? _ClampLowerRangeOffset;
 
-  public ref bool ClampLowerRange {
-    get {
-      if (_ClampLowerRangeOffset == null) {
-        _ClampLowerRangeOffset = Schema.GetOffset(0xC02700C20F690326);
-      }
-      return ref _Handle.AsRef<bool>(_ClampLowerRangeOffset!.Value);
+    public ref bool ClampLowerRange {
+        get {
+            _ClampLowerRangeOffset = _ClampLowerRangeOffset ?? Schema.GetOffset(0xC02700C20F690326);
+            return ref _Handle.AsRef<bool>(_ClampLowerRangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClampUpperRangeOffset;
+    private static nint? _ClampUpperRangeOffset;
 
-  public ref bool ClampUpperRange {
-    get {
-      if (_ClampUpperRangeOffset == null) {
-        _ClampUpperRangeOffset = Schema.GetOffset(0xC02700C2815873B5);
-      }
-      return ref _Handle.AsRef<bool>(_ClampUpperRangeOffset!.Value);
+    public ref bool ClampUpperRange {
+        get {
+            _ClampUpperRangeOffset = _ClampUpperRangeOffset ?? Schema.GetOffset(0xC02700C2815873B5);
+            return ref _Handle.AsRef<bool>(_ClampUpperRangeOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCopyRecipientFilterImpl : SchemaClass, CCopyRecipientFilter {
+internal partial class CCopyRecipientFilterImpl : SchemaClass, CCopyRecipientFilter
+{
+    public CCopyRecipientFilterImpl(nint handle) : base(handle) { }
 
-  public CCopyRecipientFilterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FlagsOffset;
 
-  private static nint? _FlagsOffset;
-
-  public ref int Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0xB27F546C36B92FAC);
-      }
-      return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+    public ref int Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xB27F546C36B92FAC);
+            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _RecipientsOffset;
+    private static nint? _RecipientsOffset;
 
-  public ref CUtlVector<uint> Recipients {
-    get {
-      if (_RecipientsOffset == null) {
-        _RecipientsOffset = Schema.GetOffset(0xB27F546CDF6522D1);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_RecipientsOffset!.Value);
+    public ref CUtlVector<uint> Recipients {
+        get {
+            _RecipientsOffset = _RecipientsOffset ?? Schema.GetOffset(0xB27F546CDF6522D1);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_RecipientsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlotPlayerExcludedDueToPredictionOffset;
+    private static nint? _SlotPlayerExcludedDueToPredictionOffset;
 
-  public ref uint SlotPlayerExcludedDueToPrediction {
-    get {
-      if (_SlotPlayerExcludedDueToPredictionOffset == null) {
-        _SlotPlayerExcludedDueToPredictionOffset = Schema.GetOffset(0xB27F546CA4F2B69C);
-      }
-      return ref _Handle.AsRef<uint>(_SlotPlayerExcludedDueToPredictionOffset!.Value);
+    public ref uint SlotPlayerExcludedDueToPrediction {
+        get {
+            _SlotPlayerExcludedDueToPredictionOffset = _SlotPlayerExcludedDueToPredictionOffset ?? Schema.GetOffset(0xB27F546CA4F2B69C);
+            return ref _Handle.AsRef<uint>(_SlotPlayerExcludedDueToPredictionOffset!.Value);
+        }
     }
-  }
 
 
 }

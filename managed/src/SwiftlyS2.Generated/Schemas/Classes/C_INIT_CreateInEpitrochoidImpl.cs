@@ -6,117 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_CreateInEpitrochoidImpl : CParticleFunctionInitializerImpl, C_INIT_CreateInEpitrochoid {
+internal partial class C_INIT_CreateInEpitrochoidImpl : CParticleFunctionInitializerImpl, C_INIT_CreateInEpitrochoid
+{
+    public C_INIT_CreateInEpitrochoidImpl(nint handle) : base(handle) { }
 
-  public C_INIT_CreateInEpitrochoidImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Component1Offset;
 
-  private static nint? _Component1Offset;
-
-  public ref int Component1 {
-    get {
-      if (_Component1Offset == null) {
-        _Component1Offset = Schema.GetOffset(0x3B16C41F125ABCA7);
-      }
-      return ref _Handle.AsRef<int>(_Component1Offset!.Value);
+    public ref int Component1 {
+        get {
+            _Component1Offset = _Component1Offset ?? Schema.GetOffset(0x3B16C41F125ABCA7);
+            return ref _Handle.AsRef<int>(_Component1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Component2Offset;
+    private static nint? _Component2Offset;
 
-  public ref int Component2 {
-    get {
-      if (_Component2Offset == null) {
-        _Component2Offset = Schema.GetOffset(0x3B16C41F135ABE3A);
-      }
-      return ref _Handle.AsRef<int>(_Component2Offset!.Value);
+    public ref int Component2 {
+        get {
+            _Component2Offset = _Component2Offset ?? Schema.GetOffset(0x3B16C41F135ABE3A);
+            return ref _Handle.AsRef<int>(_Component2Offset!.Value);
+        }
     }
-  }
-  private static nint? _TransformInputOffset;
+    private static nint? _TransformInputOffset;
 
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0x3B16C41FB3FDC289);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x3B16C41FB3FDC289);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParticleDensityOffset;
+    private static nint? _ParticleDensityOffset;
 
-  public CPerParticleFloatInput ParticleDensity {
-    get {
-      if (_ParticleDensityOffset == null) {
-        _ParticleDensityOffset = Schema.GetOffset(0x3B16C41FF720B9EF);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ParticleDensityOffset!.Value);
+    public CPerParticleFloatInput ParticleDensity {
+        get {
+            _ParticleDensityOffset = _ParticleDensityOffset ?? Schema.GetOffset(0x3B16C41FF720B9EF);
+            return new CPerParticleFloatInputImpl(_Handle + _ParticleDensityOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetOffset;
+    private static nint? _OffsetOffset;
 
-  public CPerParticleFloatInput Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0x3B16C41F7F14BA34);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _OffsetOffset!.Value);
+    public CPerParticleFloatInput Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x3B16C41F7F14BA34);
+            return new CPerParticleFloatInputImpl(_Handle + _OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _Radius1Offset;
+    private static nint? _Radius1Offset;
 
-  public CPerParticleFloatInput Radius1 {
-    get {
-      if (_Radius1Offset == null) {
-        _Radius1Offset = Schema.GetOffset(0x3B16C41FB10C67F4);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _Radius1Offset!.Value);
+    public CPerParticleFloatInput Radius1 {
+        get {
+            _Radius1Offset = _Radius1Offset ?? Schema.GetOffset(0x3B16C41FB10C67F4);
+            return new CPerParticleFloatInputImpl(_Handle + _Radius1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Radius2Offset;
+    private static nint? _Radius2Offset;
 
-  public CPerParticleFloatInput Radius2 {
-    get {
-      if (_Radius2Offset == null) {
-        _Radius2Offset = Schema.GetOffset(0x3B16C41FB40C6CAD);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _Radius2Offset!.Value);
+    public CPerParticleFloatInput Radius2 {
+        get {
+            _Radius2Offset = _Radius2Offset ?? Schema.GetOffset(0x3B16C41FB40C6CAD);
+            return new CPerParticleFloatInputImpl(_Handle + _Radius2Offset!.Value);
+        }
     }
-  }
-  private static nint? _UseCountOffset;
+    private static nint? _UseCountOffset;
 
-  public ref bool UseCount {
-    get {
-      if (_UseCountOffset == null) {
-        _UseCountOffset = Schema.GetOffset(0x3B16C41F8836B9AB);
-      }
-      return ref _Handle.AsRef<bool>(_UseCountOffset!.Value);
+    public ref bool UseCount {
+        get {
+            _UseCountOffset = _UseCountOffset ?? Schema.GetOffset(0x3B16C41F8836B9AB);
+            return ref _Handle.AsRef<bool>(_UseCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseLocalCoordsOffset;
+    private static nint? _UseLocalCoordsOffset;
 
-  public ref bool UseLocalCoords {
-    get {
-      if (_UseLocalCoordsOffset == null) {
-        _UseLocalCoordsOffset = Schema.GetOffset(0x3B16C41F8AB11575);
-      }
-      return ref _Handle.AsRef<bool>(_UseLocalCoordsOffset!.Value);
+    public ref bool UseLocalCoords {
+        get {
+            _UseLocalCoordsOffset = _UseLocalCoordsOffset ?? Schema.GetOffset(0x3B16C41F8AB11575);
+            return ref _Handle.AsRef<bool>(_UseLocalCoordsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetExistingPosOffset;
+    private static nint? _OffsetExistingPosOffset;
 
-  public ref bool OffsetExistingPos {
-    get {
-      if (_OffsetExistingPosOffset == null) {
-        _OffsetExistingPosOffset = Schema.GetOffset(0x3B16C41F79DD329B);
-      }
-      return ref _Handle.AsRef<bool>(_OffsetExistingPosOffset!.Value);
+    public ref bool OffsetExistingPos {
+        get {
+            _OffsetExistingPosOffset = _OffsetExistingPosOffset ?? Schema.GetOffset(0x3B16C41F79DD329B);
+            return ref _Handle.AsRef<bool>(_OffsetExistingPosOffset!.Value);
+        }
     }
-  }
 
 
 }

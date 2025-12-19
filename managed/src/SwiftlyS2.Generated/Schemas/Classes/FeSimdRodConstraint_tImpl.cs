@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeSimdRodConstraint_tImpl : SchemaClass, FeSimdRodConstraint_t {
+internal partial class FeSimdRodConstraint_tImpl : SchemaClass, FeSimdRodConstraint_t
+{
+    public FeSimdRodConstraint_tImpl(nint handle) : base(handle) { }
 
-  public FeSimdRodConstraint_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodeOffset;
 
-  private static nint? _NodeOffset;
-
-  public SchemaUntypedField Node {
-    get {
-      if (_NodeOffset == null) {
-        _NodeOffset = Schema.GetOffset(0x596F7846CD6694B9);
-      }
-      return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+    public SchemaUntypedField Node {
+        get {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x596F7846CD6694B9);
+            return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _F4MaxDistOffset;
+    private static nint? _F4MaxDistOffset;
 
-  public ref fltx4 F4MaxDist {
-    get {
-      if (_F4MaxDistOffset == null) {
-        _F4MaxDistOffset = Schema.GetOffset(0x596F7846287D425F);
-      }
-      return ref _Handle.AsRef<fltx4>(_F4MaxDistOffset!.Value);
+    public ref fltx4 F4MaxDist {
+        get {
+            _F4MaxDistOffset = _F4MaxDistOffset ?? Schema.GetOffset(0x596F7846287D425F);
+            return ref _Handle.AsRef<fltx4>(_F4MaxDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _F4MinDistOffset;
+    private static nint? _F4MinDistOffset;
 
-  public ref fltx4 F4MinDist {
-    get {
-      if (_F4MinDistOffset == null) {
-        _F4MinDistOffset = Schema.GetOffset(0x596F7846C67A2525);
-      }
-      return ref _Handle.AsRef<fltx4>(_F4MinDistOffset!.Value);
+    public ref fltx4 F4MinDist {
+        get {
+            _F4MinDistOffset = _F4MinDistOffset ?? Schema.GetOffset(0x596F7846C67A2525);
+            return ref _Handle.AsRef<fltx4>(_F4MinDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _F4Weight0Offset;
+    private static nint? _F4Weight0Offset;
 
-  public ref fltx4 F4Weight0 {
-    get {
-      if (_F4Weight0Offset == null) {
-        _F4Weight0Offset = Schema.GetOffset(0x596F78461FFC3579);
-      }
-      return ref _Handle.AsRef<fltx4>(_F4Weight0Offset!.Value);
+    public ref fltx4 F4Weight0 {
+        get {
+            _F4Weight0Offset = _F4Weight0Offset ?? Schema.GetOffset(0x596F78461FFC3579);
+            return ref _Handle.AsRef<fltx4>(_F4Weight0Offset!.Value);
+        }
     }
-  }
-  private static nint? _F4RelaxationFactorOffset;
+    private static nint? _F4RelaxationFactorOffset;
 
-  public ref fltx4 F4RelaxationFactor {
-    get {
-      if (_F4RelaxationFactorOffset == null) {
-        _F4RelaxationFactorOffset = Schema.GetOffset(0x596F7846DF311F87);
-      }
-      return ref _Handle.AsRef<fltx4>(_F4RelaxationFactorOffset!.Value);
+    public ref fltx4 F4RelaxationFactor {
+        get {
+            _F4RelaxationFactorOffset = _F4RelaxationFactorOffset ?? Schema.GetOffset(0x596F7846DF311F87);
+            return ref _Handle.AsRef<fltx4>(_F4RelaxationFactorOffset!.Value);
+        }
     }
-  }
 
 
 }

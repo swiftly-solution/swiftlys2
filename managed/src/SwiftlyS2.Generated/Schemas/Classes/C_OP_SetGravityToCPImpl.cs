@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetGravityToCPImpl : CParticleFunctionPreEmissionImpl, C_OP_SetGravityToCP {
+internal partial class C_OP_SetGravityToCPImpl : CParticleFunctionPreEmissionImpl, C_OP_SetGravityToCP
+{
+    public C_OP_SetGravityToCPImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetGravityToCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPInputOffset;
 
-  private static nint? _CPInputOffset;
-
-  public ref int CPInput {
-    get {
-      if (_CPInputOffset == null) {
-        _CPInputOffset = Schema.GetOffset(0xBA369CBDFB805736);
-      }
-      return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
+    public ref int CPInput {
+        get {
+            _CPInputOffset = _CPInputOffset ?? Schema.GetOffset(0xBA369CBDFB805736);
+            return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPOutputOffset;
+    private static nint? _CPOutputOffset;
 
-  public ref int CPOutput {
-    get {
-      if (_CPOutputOffset == null) {
-        _CPOutputOffset = Schema.GetOffset(0xBA369CBD2077C953);
-      }
-      return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+    public ref int CPOutput {
+        get {
+            _CPOutputOffset = _CPOutputOffset ?? Schema.GetOffset(0xBA369CBD2077C953);
+            return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public CParticleCollectionFloatInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0xBA369CBDB731A42F);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+    public CParticleCollectionFloatInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xBA369CBDB731A42F);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetOrientationOffset;
+    private static nint? _SetOrientationOffset;
 
-  public ref bool SetOrientation {
-    get {
-      if (_SetOrientationOffset == null) {
-        _SetOrientationOffset = Schema.GetOffset(0xBA369CBDE1390E37);
-      }
-      return ref _Handle.AsRef<bool>(_SetOrientationOffset!.Value);
+    public ref bool SetOrientation {
+        get {
+            _SetOrientationOffset = _SetOrientationOffset ?? Schema.GetOffset(0xBA369CBDE1390E37);
+            return ref _Handle.AsRef<bool>(_SetOrientationOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetZDownOffset;
+    private static nint? _SetZDownOffset;
 
-  public ref bool SetZDown {
-    get {
-      if (_SetZDownOffset == null) {
-        _SetZDownOffset = Schema.GetOffset(0xBA369CBDE2673E97);
-      }
-      return ref _Handle.AsRef<bool>(_SetZDownOffset!.Value);
+    public ref bool SetZDown {
+        get {
+            _SetZDownOffset = _SetZDownOffset ?? Schema.GetOffset(0xBA369CBDE2673E97);
+            return ref _Handle.AsRef<bool>(_SetZDownOffset!.Value);
+        }
     }
-  }
 
 
 }

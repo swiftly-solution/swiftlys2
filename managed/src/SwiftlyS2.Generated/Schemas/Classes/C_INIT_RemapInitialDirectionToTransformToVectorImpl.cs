@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RemapInitialDirectionToTransformToVectorImpl : CParticleFunctionInitializerImpl, C_INIT_RemapInitialDirectionToTransformToVector {
+internal partial class C_INIT_RemapInitialDirectionToTransformToVectorImpl : CParticleFunctionInitializerImpl, C_INIT_RemapInitialDirectionToTransformToVector
+{
+    public C_INIT_RemapInitialDirectionToTransformToVectorImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RemapInitialDirectionToTransformToVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformInputOffset;
 
-  private static nint? _TransformInputOffset;
-
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0xB8FCDAFFB3FDC289);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xB8FCDAFFB3FDC289);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0xB8FCDAFFE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xB8FCDAFFE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0xB8FCDAFFB731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xB8FCDAFFB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetRotOffset;
+    private static nint? _OffsetRotOffset;
 
-  public ref float OffsetRot {
-    get {
-      if (_OffsetRotOffset == null) {
-        _OffsetRotOffset = Schema.GetOffset(0xB8FCDAFFB414F849);
-      }
-      return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+    public ref float OffsetRot {
+        get {
+            _OffsetRotOffset = _OffsetRotOffset ?? Schema.GetOffset(0xB8FCDAFFB414F849);
+            return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetAxisOffset;
+    private static nint? _OffsetAxisOffset;
 
-  public ref Vector OffsetAxis {
-    get {
-      if (_OffsetAxisOffset == null) {
-        _OffsetAxisOffset = Schema.GetOffset(0xB8FCDAFFFAB4918F);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetAxisOffset!.Value);
+    public ref Vector OffsetAxis {
+        get {
+            _OffsetAxisOffset = _OffsetAxisOffset ?? Schema.GetOffset(0xB8FCDAFFFAB4918F);
+            return ref _Handle.AsRef<Vector>(_OffsetAxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _NormalizeOffset;
+    private static nint? _NormalizeOffset;
 
-  public ref bool Normalize {
-    get {
-      if (_NormalizeOffset == null) {
-        _NormalizeOffset = Schema.GetOffset(0xB8FCDAFF48BC424C);
-      }
-      return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+    public ref bool Normalize {
+        get {
+            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0xB8FCDAFF48BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+        }
     }
-  }
 
 
 }

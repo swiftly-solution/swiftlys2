@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_LockToPointListImpl : CParticleFunctionOperatorImpl, C_OP_LockToPointList {
+internal partial class C_OP_LockToPointListImpl : CParticleFunctionOperatorImpl, C_OP_LockToPointList
+{
+    public C_OP_LockToPointListImpl(nint handle) : base(handle) { }
 
-  public C_OP_LockToPointListImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0xC9237E67E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xC9237E67E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _PointListOffset;
+    private static nint? _PointListOffset;
 
-  public ref CUtlVector<PointDefinition_t> PointList {
-    get {
-      if (_PointListOffset == null) {
-        _PointListOffset = Schema.GetOffset(0xC9237E67976AB4FD);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointDefinition_t>>(_PointListOffset!.Value);
+    public ref CUtlVector<PointDefinition_t> PointList {
+        get {
+            _PointListOffset = _PointListOffset ?? Schema.GetOffset(0xC9237E67976AB4FD);
+            return ref _Handle.AsRef<CUtlVector<PointDefinition_t>>(_PointListOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlaceAlongPathOffset;
+    private static nint? _PlaceAlongPathOffset;
 
-  public ref bool PlaceAlongPath {
-    get {
-      if (_PlaceAlongPathOffset == null) {
-        _PlaceAlongPathOffset = Schema.GetOffset(0xC9237E6781CF2E1A);
-      }
-      return ref _Handle.AsRef<bool>(_PlaceAlongPathOffset!.Value);
+    public ref bool PlaceAlongPath {
+        get {
+            _PlaceAlongPathOffset = _PlaceAlongPathOffset ?? Schema.GetOffset(0xC9237E6781CF2E1A);
+            return ref _Handle.AsRef<bool>(_PlaceAlongPathOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClosedLoopOffset;
+    private static nint? _ClosedLoopOffset;
 
-  public ref bool ClosedLoop {
-    get {
-      if (_ClosedLoopOffset == null) {
-        _ClosedLoopOffset = Schema.GetOffset(0xC9237E677C20D1AB);
-      }
-      return ref _Handle.AsRef<bool>(_ClosedLoopOffset!.Value);
+    public ref bool ClosedLoop {
+        get {
+            _ClosedLoopOffset = _ClosedLoopOffset ?? Schema.GetOffset(0xC9237E677C20D1AB);
+            return ref _Handle.AsRef<bool>(_ClosedLoopOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumPointsAlongPathOffset;
+    private static nint? _NumPointsAlongPathOffset;
 
-  public ref int NumPointsAlongPath {
-    get {
-      if (_NumPointsAlongPathOffset == null) {
-        _NumPointsAlongPathOffset = Schema.GetOffset(0xC9237E67ACB5FC8A);
-      }
-      return ref _Handle.AsRef<int>(_NumPointsAlongPathOffset!.Value);
+    public ref int NumPointsAlongPath {
+        get {
+            _NumPointsAlongPathOffset = _NumPointsAlongPathOffset ?? Schema.GetOffset(0xC9237E67ACB5FC8A);
+            return ref _Handle.AsRef<int>(_NumPointsAlongPathOffset!.Value);
+        }
     }
-  }
 
 
 }

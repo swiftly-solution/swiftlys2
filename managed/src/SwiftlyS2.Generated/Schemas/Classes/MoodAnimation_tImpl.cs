@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MoodAnimation_tImpl : SchemaClass, MoodAnimation_t {
+internal partial class MoodAnimation_tImpl : SchemaClass, MoodAnimation_t
+{
+    public MoodAnimation_tImpl(nint handle) : base(handle) { }
 
-  public MoodAnimation_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public SchemaUntypedField Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x8982458763D22D49);
-      }
-      return new SchemaUntypedField(_Handle + _NameOffset!.Value);
+    public SchemaUntypedField Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8982458763D22D49);
+            return new SchemaUntypedField(_Handle + _NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0x898245877B81E7AB);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x898245877B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
 
 
 }

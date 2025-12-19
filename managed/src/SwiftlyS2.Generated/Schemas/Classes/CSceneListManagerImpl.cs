@@ -6,47 +6,39 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSceneListManagerImpl : CLogicalEntityImpl, CSceneListManager {
+internal partial class CSceneListManagerImpl : CLogicalEntityImpl, CSceneListManager
+{
+    public CSceneListManagerImpl(nint handle) : base(handle) { }
 
-  public CSceneListManagerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ListManagersOffset;
 
-  private static nint? _ListManagersOffset;
-
-  public ref CUtlVector<CHandle<CSceneListManager>> ListManagers {
-    get {
-      if (_ListManagersOffset == null) {
-        _ListManagersOffset = Schema.GetOffset(0x6DF51C6DAD7882DF);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CSceneListManager>>>(_ListManagersOffset!.Value);
+    public ref CUtlVector<CHandle<CSceneListManager>> ListManagers {
+        get {
+            _ListManagersOffset = _ListManagersOffset ?? Schema.GetOffset(0x6DF51C6DAD7882DF);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CSceneListManager>>>(_ListManagersOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScenesOffset;
+    private static nint? _ScenesOffset;
 
-  public string Scenes {
-    get {
-      if (_ScenesOffset == null) {
-        _ScenesOffset = Schema.GetOffset(0x6DF51C6D967363E8);
-      }
-      var ptr = _Handle.Read<nint>(_ScenesOffset!.Value);
-      return Schema.GetString(ptr);
+    public string Scenes {
+        get {
+            _ScenesOffset = _ScenesOffset ?? Schema.GetOffset(0x6DF51C6D967363E8);
+            return Schema.GetString(_Handle.Read<nint>(_ScenesOffset!.Value));
+        }
+        set {
+            _ScenesOffset = _ScenesOffset ?? Schema.GetOffset(0x6DF51C6D967363E8);
+            Schema.SetString(_Handle, _ScenesOffset!.Value, value);
+        }
+    } 
+    public ISchemaFixedArray<CHandle<CBaseEntity>> Scenes1 {
+        get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x6DF51C6D2B7EE872, 16, 4, 4);
     }
-    set {
-      if (_ScenesOffset == null) {
-        _ScenesOffset = Schema.GetOffset(0x6DF51C6D967363E8);
-      }
-      Schema.SetString(_Handle, _ScenesOffset!.Value, value);
-    }
-  } 
-  public ISchemaFixedArray<CHandle<CBaseEntity>> Scenes1 {
-    get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x6DF51C6D2B7EE872, 16, 4, 4);
-  }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum NmTargetWarpAlgorithm_t : byte {
-
+public enum NmTargetWarpAlgorithm_t : byte
+{
  Lerp = 0,
 
  Hermite = 1,

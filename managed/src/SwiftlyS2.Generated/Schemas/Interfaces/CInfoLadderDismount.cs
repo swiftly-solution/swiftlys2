@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoLadderDismount : CBaseEntity, ISchemaClass<CInfoLadderDismount> {
-
-  static CInfoLadderDismount ISchemaClass<CInfoLadderDismount>.From(nint handle) => new CInfoLadderDismountImpl(handle);
-  static int ISchemaClass<CInfoLadderDismount>.Size => 1264;
-  static string? ISchemaClass<CInfoLadderDismount>.ClassName => "info_ladder_dismount";
+public partial interface CInfoLadderDismount : CBaseEntity, ISchemaClass<CInfoLadderDismount>
+{
+    static CInfoLadderDismount ISchemaClass<CInfoLadderDismount>.From(nint handle) => new CInfoLadderDismountImpl(handle);
+    static int ISchemaClass<CInfoLadderDismount>.Size => 1264;
+    static string? ISchemaClass<CInfoLadderDismount>.ClassName => "info_ladder_dismount";
 
 
 

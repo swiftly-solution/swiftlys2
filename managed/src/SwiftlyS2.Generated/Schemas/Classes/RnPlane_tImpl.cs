@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnPlane_tImpl : SchemaClass, RnPlane_t {
+internal partial class RnPlane_tImpl : SchemaClass, RnPlane_t
+{
+    public RnPlane_tImpl(nint handle) : base(handle) { }
 
-  public RnPlane_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NormalOffset;
 
-  private static nint? _NormalOffset;
-
-  public ref Vector Normal {
-    get {
-      if (_NormalOffset == null) {
-        _NormalOffset = Schema.GetOffset(0xEAF5B7BAAFB36E96);
-      }
-      return ref _Handle.AsRef<Vector>(_NormalOffset!.Value);
+    public ref Vector Normal {
+        get {
+            _NormalOffset = _NormalOffset ?? Schema.GetOffset(0xEAF5B7BAAFB36E96);
+            return ref _Handle.AsRef<Vector>(_NormalOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetOffset;
+    private static nint? _OffsetOffset;
 
-  public ref float Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0xEAF5B7BA7F14BA34);
-      }
-      return ref _Handle.AsRef<float>(_OffsetOffset!.Value);
+    public ref float Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xEAF5B7BA7F14BA34);
+            return ref _Handle.AsRef<float>(_OffsetOffset!.Value);
+        }
     }
-  }
 
 
 }

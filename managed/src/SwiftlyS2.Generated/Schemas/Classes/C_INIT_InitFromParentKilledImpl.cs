@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_InitFromParentKilledImpl : CParticleFunctionInitializerImpl, C_INIT_InitFromParentKilled {
+internal partial class C_INIT_InitFromParentKilledImpl : CParticleFunctionInitializerImpl, C_INIT_InitFromParentKilled
+{
+    public C_INIT_InitFromParentKilledImpl(nint handle) : base(handle) { }
 
-  public C_INIT_InitFromParentKilledImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttributeToCopyOffset;
 
-  private static nint? _AttributeToCopyOffset;
-
-  public ParticleAttributeIndex_t AttributeToCopy {
-    get {
-      if (_AttributeToCopyOffset == null) {
-        _AttributeToCopyOffset = Schema.GetOffset(0x4CE3F9811953739B);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToCopyOffset!.Value);
+    public ParticleAttributeIndex_t AttributeToCopy {
+        get {
+            _AttributeToCopyOffset = _AttributeToCopyOffset ?? Schema.GetOffset(0x4CE3F9811953739B);
+            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeToCopyOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventTypeOffset;
+    private static nint? _EventTypeOffset;
 
-  public ref EventTypeSelection_t EventType {
-    get {
-      if (_EventTypeOffset == null) {
-        _EventTypeOffset = Schema.GetOffset(0x4CE3F981E1F9AA93);
-      }
-      return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+    public ref EventTypeSelection_t EventType {
+        get {
+            _EventTypeOffset = _EventTypeOffset ?? Schema.GetOffset(0x4CE3F981E1F9AA93);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_EventTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

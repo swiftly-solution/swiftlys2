@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVPhysXSurfacePropertiesListImpl : SchemaClass, CVPhysXSurfacePropertiesList {
+internal partial class CVPhysXSurfacePropertiesListImpl : SchemaClass, CVPhysXSurfacePropertiesList
+{
+    public CVPhysXSurfacePropertiesListImpl(nint handle) : base(handle) { }
 
-  public CVPhysXSurfacePropertiesListImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SurfacePropertiesListOffset;
 
-  private static nint? _SurfacePropertiesListOffset;
-
-  public ref CUtlVector<PointerTo<CPhysSurfaceProperties>> SurfacePropertiesList {
-    get {
-      if (_SurfacePropertiesListOffset == null) {
-        _SurfacePropertiesListOffset = Schema.GetOffset(0x46700CAAC149A2D);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointerTo<CPhysSurfaceProperties>>>(_SurfacePropertiesListOffset!.Value);
+    public ref CUtlVector<PointerTo<CPhysSurfaceProperties>> SurfacePropertiesList {
+        get {
+            _SurfacePropertiesListOffset = _SurfacePropertiesListOffset ?? Schema.GetOffset(0x46700CAAC149A2D);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CPhysSurfaceProperties>>>(_SurfacePropertiesListOffset!.Value);
+        }
     }
-  }
 
 
 }

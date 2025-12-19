@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRenderBufferBindingImpl : SchemaClass, CRenderBufferBinding {
+internal partial class CRenderBufferBindingImpl : SchemaClass, CRenderBufferBinding
+{
+    public CRenderBufferBindingImpl(nint handle) : base(handle) { }
 
-  public CRenderBufferBindingImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BufferOffset;
 
-  private static nint? _BufferOffset;
-
-  public ref ulong Buffer {
-    get {
-      if (_BufferOffset == null) {
-        _BufferOffset = Schema.GetOffset(0xFC8416C144D3898D);
-      }
-      return ref _Handle.AsRef<ulong>(_BufferOffset!.Value);
+    public ref ulong Buffer {
+        get {
+            _BufferOffset = _BufferOffset ?? Schema.GetOffset(0xFC8416C144D3898D);
+            return ref _Handle.AsRef<ulong>(_BufferOffset!.Value);
+        }
     }
-  }
-  private static nint? _BindOffsetBytesOffset;
+    private static nint? _BindOffsetBytesOffset;
 
-  public ref uint BindOffsetBytes {
-    get {
-      if (_BindOffsetBytesOffset == null) {
-        _BindOffsetBytesOffset = Schema.GetOffset(0xFC8416C1AD9A201C);
-      }
-      return ref _Handle.AsRef<uint>(_BindOffsetBytesOffset!.Value);
+    public ref uint BindOffsetBytes {
+        get {
+            _BindOffsetBytesOffset = _BindOffsetBytesOffset ?? Schema.GetOffset(0xFC8416C1AD9A201C);
+            return ref _Handle.AsRef<uint>(_BindOffsetBytesOffset!.Value);
+        }
     }
-  }
 
 
 }

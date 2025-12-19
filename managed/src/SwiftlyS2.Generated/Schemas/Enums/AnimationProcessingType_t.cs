@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AnimationProcessingType_t : uint {
-
+public enum AnimationProcessingType_t : uint
+{
  ANIMATION_PROCESSING_SERVER_SIMULATION = 0,
 
  ANIMATION_PROCESSING_CLIENT_SIMULATION = 1,

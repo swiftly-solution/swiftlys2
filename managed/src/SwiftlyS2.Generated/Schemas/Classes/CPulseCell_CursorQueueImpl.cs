@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_CursorQueueImpl : CPulseCell_WaitForCursorsWithTagBaseImpl, CPulseCell_CursorQueue {
+internal partial class CPulseCell_CursorQueueImpl : CPulseCell_WaitForCursorsWithTagBaseImpl, CPulseCell_CursorQueue
+{
+    public CPulseCell_CursorQueueImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_CursorQueueImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CursorsAllowedToRunParallelOffset;
 
-  private static nint? _CursorsAllowedToRunParallelOffset;
-
-  public ref int CursorsAllowedToRunParallel {
-    get {
-      if (_CursorsAllowedToRunParallelOffset == null) {
-        _CursorsAllowedToRunParallelOffset = Schema.GetOffset(0xDAB7EC55AC04AAF9);
-      }
-      return ref _Handle.AsRef<int>(_CursorsAllowedToRunParallelOffset!.Value);
+    public ref int CursorsAllowedToRunParallel {
+        get {
+            _CursorsAllowedToRunParallelOffset = _CursorsAllowedToRunParallelOffset ?? Schema.GetOffset(0xDAB7EC55AC04AAF9);
+            return ref _Handle.AsRef<int>(_CursorsAllowedToRunParallelOffset!.Value);
+        }
     }
-  }
 
 
 }

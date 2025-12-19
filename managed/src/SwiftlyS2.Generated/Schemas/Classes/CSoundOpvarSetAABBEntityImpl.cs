@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundOpvarSetAABBEntityImpl : CSoundOpvarSetPointEntityImpl, CSoundOpvarSetAABBEntity {
+internal partial class CSoundOpvarSetAABBEntityImpl : CSoundOpvarSetPointEntityImpl, CSoundOpvarSetAABBEntity
+{
+    public CSoundOpvarSetAABBEntityImpl(nint handle) : base(handle) { }
 
-  public CSoundOpvarSetAABBEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DistanceInnerMinsOffset;
 
-  private static nint? _DistanceInnerMinsOffset;
-
-  public ref Vector DistanceInnerMins {
-    get {
-      if (_DistanceInnerMinsOffset == null) {
-        _DistanceInnerMinsOffset = Schema.GetOffset(0x9C9CB73CC7540883);
-      }
-      return ref _Handle.AsRef<Vector>(_DistanceInnerMinsOffset!.Value);
+    public ref Vector DistanceInnerMins {
+        get {
+            _DistanceInnerMinsOffset = _DistanceInnerMinsOffset ?? Schema.GetOffset(0x9C9CB73CC7540883);
+            return ref _Handle.AsRef<Vector>(_DistanceInnerMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceInnerMaxsOffset;
+    private static nint? _DistanceInnerMaxsOffset;
 
-  public ref Vector DistanceInnerMaxs {
-    get {
-      if (_DistanceInnerMaxsOffset == null) {
-        _DistanceInnerMaxsOffset = Schema.GetOffset(0x9C9CB73C705E7E61);
-      }
-      return ref _Handle.AsRef<Vector>(_DistanceInnerMaxsOffset!.Value);
+    public ref Vector DistanceInnerMaxs {
+        get {
+            _DistanceInnerMaxsOffset = _DistanceInnerMaxsOffset ?? Schema.GetOffset(0x9C9CB73C705E7E61);
+            return ref _Handle.AsRef<Vector>(_DistanceInnerMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceOuterMinsOffset;
+    private static nint? _DistanceOuterMinsOffset;
 
-  public ref Vector DistanceOuterMins {
-    get {
-      if (_DistanceOuterMinsOffset == null) {
-        _DistanceOuterMinsOffset = Schema.GetOffset(0x9C9CB73C185EC6F4);
-      }
-      return ref _Handle.AsRef<Vector>(_DistanceOuterMinsOffset!.Value);
+    public ref Vector DistanceOuterMins {
+        get {
+            _DistanceOuterMinsOffset = _DistanceOuterMinsOffset ?? Schema.GetOffset(0x9C9CB73C185EC6F4);
+            return ref _Handle.AsRef<Vector>(_DistanceOuterMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceOuterMaxsOffset;
+    private static nint? _DistanceOuterMaxsOffset;
 
-  public ref Vector DistanceOuterMaxs {
-    get {
-      if (_DistanceOuterMaxsOffset == null) {
-        _DistanceOuterMaxsOffset = Schema.GetOffset(0x9C9CB73C99738B36);
-      }
-      return ref _Handle.AsRef<Vector>(_DistanceOuterMaxsOffset!.Value);
+    public ref Vector DistanceOuterMaxs {
+        get {
+            _DistanceOuterMaxsOffset = _DistanceOuterMaxsOffset ?? Schema.GetOffset(0x9C9CB73C99738B36);
+            return ref _Handle.AsRef<Vector>(_DistanceOuterMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _AABBDirectionOffset;
+    private static nint? _AABBDirectionOffset;
 
-  public ref int AABBDirection {
-    get {
-      if (_AABBDirectionOffset == null) {
-        _AABBDirectionOffset = Schema.GetOffset(0x9C9CB73CE8CF552C);
-      }
-      return ref _Handle.AsRef<int>(_AABBDirectionOffset!.Value);
+    public ref int AABBDirection {
+        get {
+            _AABBDirectionOffset = _AABBDirectionOffset ?? Schema.GetOffset(0x9C9CB73CE8CF552C);
+            return ref _Handle.AsRef<int>(_AABBDirectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _InnerMinsOffset;
+    private static nint? _InnerMinsOffset;
 
-  public ref Vector InnerMins {
-    get {
-      if (_InnerMinsOffset == null) {
-        _InnerMinsOffset = Schema.GetOffset(0x9C9CB73C4C5EAC7A);
-      }
-      return ref _Handle.AsRef<Vector>(_InnerMinsOffset!.Value);
+    public ref Vector InnerMins {
+        get {
+            _InnerMinsOffset = _InnerMinsOffset ?? Schema.GetOffset(0x9C9CB73C4C5EAC7A);
+            return ref _Handle.AsRef<Vector>(_InnerMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _InnerMaxsOffset;
+    private static nint? _InnerMaxsOffset;
 
-  public ref Vector InnerMaxs {
-    get {
-      if (_InnerMaxsOffset == null) {
-        _InnerMaxsOffset = Schema.GetOffset(0x9C9CB73CCD68E360);
-      }
-      return ref _Handle.AsRef<Vector>(_InnerMaxsOffset!.Value);
+    public ref Vector InnerMaxs {
+        get {
+            _InnerMaxsOffset = _InnerMaxsOffset ?? Schema.GetOffset(0x9C9CB73CCD68E360);
+            return ref _Handle.AsRef<Vector>(_InnerMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OuterMinsOffset;
+    private static nint? _OuterMinsOffset;
 
-  public ref Vector OuterMins {
-    get {
-      if (_OuterMinsOffset == null) {
-        _OuterMinsOffset = Schema.GetOffset(0x9C9CB73C30928F3D);
-      }
-      return ref _Handle.AsRef<Vector>(_OuterMinsOffset!.Value);
+    public ref Vector OuterMins {
+        get {
+            _OuterMinsOffset = _OuterMinsOffset ?? Schema.GetOffset(0x9C9CB73C30928F3D);
+            return ref _Handle.AsRef<Vector>(_OuterMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OuterMaxsOffset;
+    private static nint? _OuterMaxsOffset;
 
-  public ref Vector OuterMaxs {
-    get {
-      if (_OuterMaxsOffset == null) {
-        _OuterMaxsOffset = Schema.GetOffset(0x9C9CB73CC9A77947);
-      }
-      return ref _Handle.AsRef<Vector>(_OuterMaxsOffset!.Value);
+    public ref Vector OuterMaxs {
+        get {
+            _OuterMaxsOffset = _OuterMaxsOffset ?? Schema.GetOffset(0x9C9CB73CC9A77947);
+            return ref _Handle.AsRef<Vector>(_OuterMaxsOffset!.Value);
+        }
     }
-  }
 
 
 }

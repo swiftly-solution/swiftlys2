@@ -6,71 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CHitBoxSetImpl : SchemaClass, CHitBoxSet {
+internal partial class CHitBoxSetImpl : SchemaClass, CHitBoxSet
+{
+    public CHitBoxSetImpl(nint handle) : base(handle) { }
 
-  public CHitBoxSetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x742AE9EC4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x742AE9EC4D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NameHashOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x742AE9EC4D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref uint NameHash {
+        get {
+            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0x742AE9ECDE15EEFE);
+            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x742AE9EC4D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NameHashOffset;
+    private static nint? _HitBoxesOffset;
 
-  public ref uint NameHash {
-    get {
-      if (_NameHashOffset == null) {
-        _NameHashOffset = Schema.GetOffset(0x742AE9ECDE15EEFE);
-      }
-      return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+    public ref CUtlVector<CHitBox> HitBoxes {
+        get {
+            _HitBoxesOffset = _HitBoxesOffset ?? Schema.GetOffset(0x742AE9EC07A4113F);
+            return ref _Handle.AsRef<CUtlVector<CHitBox>>(_HitBoxesOffset!.Value);
+        }
     }
-  }
-  private static nint? _HitBoxesOffset;
+    private static nint? _SourceFilenameOffset;
 
-  public ref CUtlVector<CHitBox> HitBoxes {
-    get {
-      if (_HitBoxesOffset == null) {
-        _HitBoxesOffset = Schema.GetOffset(0x742AE9EC07A4113F);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHitBox>>(_HitBoxesOffset!.Value);
-    }
-  }
-  private static nint? _SourceFilenameOffset;
-
-  public string SourceFilename {
-    get {
-      if (_SourceFilenameOffset == null) {
-        _SourceFilenameOffset = Schema.GetOffset(0x742AE9ECD49CE26D);
-      }
-      var ptr = _Handle.Read<nint>(_SourceFilenameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SourceFilenameOffset == null) {
-        _SourceFilenameOffset = Schema.GetOffset(0x742AE9ECD49CE26D);
-      }
-      Schema.SetString(_Handle, _SourceFilenameOffset!.Value, value);
-    }
-  } 
+    public string SourceFilename {
+        get {
+            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x742AE9ECD49CE26D);
+            return Schema.GetString(_Handle.Read<nint>(_SourceFilenameOffset!.Value));
+        }
+        set {
+            _SourceFilenameOffset = _SourceFilenameOffset ?? Schema.GetOffset(0x742AE9ECD49CE26D);
+            Schema.SetString(_Handle, _SourceFilenameOffset!.Value, value);
+        }
+    } 
 
 
 }

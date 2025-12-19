@@ -6,75 +6,55 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTeamImpl : CBaseEntityImpl, CTeam {
+internal partial class CTeamImpl : CBaseEntityImpl, CTeam
+{
+    public CTeamImpl(nint handle) : base(handle) { }
 
-  public CTeamImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PlayerControllersOffset;
 
-  private static nint? _PlayerControllersOffset;
-
-  public ref CUtlVector<CHandle<CBasePlayerController>> PlayerControllers {
-    get {
-      if (_PlayerControllersOffset == null) {
-        _PlayerControllersOffset = Schema.GetOffset(0xAF5A77E38933E302);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerController>>>(_PlayerControllersOffset!.Value);
-    }
-  }
-  private static nint? _PlayersOffset;
-
-  public ref CUtlVector<CHandle<CBasePlayerPawn>> Players {
-    get {
-      if (_PlayersOffset == null) {
-        _PlayersOffset = Schema.GetOffset(0xAF5A77E307285116);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerPawn>>>(_PlayersOffset!.Value);
-    }
-  }
-  private static nint? _ScoreOffset;
-
-  public ref int Score {
-    get {
-      if (_ScoreOffset == null) {
-        _ScoreOffset = Schema.GetOffset(0xAF5A77E339E7DEAE);
-      }
-      return ref _Handle.AsRef<int>(_ScoreOffset!.Value);
-    }
-  }
-  private static nint? _TeamnameOffset;
-
-  public string Teamname {
-    get {
-        if (_TeamnameOffset == null) {
-            _TeamnameOffset = Schema.GetOffset(0xAF5A77E3AA34880A);
+    public ref CUtlVector<CHandle<CBasePlayerController>> PlayerControllers {
+        get {
+            _PlayerControllersOffset = _PlayerControllersOffset ?? Schema.GetOffset(0xAF5A77E38933E302);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerController>>>(_PlayerControllersOffset!.Value);
         }
-        var ptr = _Handle + _TeamnameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_TeamnameOffset == null) {
-            _TeamnameOffset = Schema.GetOffset(0xAF5A77E3AA34880A);
-        }
-        Schema.SetFixedString(_Handle, _TeamnameOffset!.Value, value, 129);
-    }
-  } 
+    private static nint? _PlayersOffset;
 
-  public void PlayerControllersUpdated() {
-    Schema.Update(_Handle, 0xAF5A77E38933E302);
-  }
-  public void PlayersUpdated() {
-    Schema.Update(_Handle, 0xAF5A77E307285116);
-  }
-  public void ScoreUpdated() {
-    Schema.Update(_Handle, 0xAF5A77E339E7DEAE);
-  }
-  public void TeamnameUpdated() {
-    Schema.Update(_Handle, 0xAF5A77E3AA34880A);
-  }
+    public ref CUtlVector<CHandle<CBasePlayerPawn>> Players {
+        get {
+            _PlayersOffset = _PlayersOffset ?? Schema.GetOffset(0xAF5A77E307285116);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerPawn>>>(_PlayersOffset!.Value);
+        }
+    }
+    private static nint? _ScoreOffset;
+
+    public ref int Score {
+        get {
+            _ScoreOffset = _ScoreOffset ?? Schema.GetOffset(0xAF5A77E339E7DEAE);
+            return ref _Handle.AsRef<int>(_ScoreOffset!.Value);
+        }
+    }
+    private static nint? _TeamnameOffset;
+
+    public string Teamname {
+        get {
+            _TeamnameOffset = _TeamnameOffset ?? Schema.GetOffset(0xAF5A77E3AA34880A);
+            return Schema.GetString(_Handle + _TeamnameOffset!.Value);
+        }
+        set {
+            _TeamnameOffset = _TeamnameOffset ?? Schema.GetOffset(0xAF5A77E3AA34880A);
+            Schema.SetFixedString(_Handle, _TeamnameOffset!.Value, value, 129);
+        }
+    } 
+
+    public void PlayerControllersUpdated() => Schema.Update(_Handle, 0xAF5A77E38933E302);
+    public void PlayersUpdated() => Schema.Update(_Handle, 0xAF5A77E307285116);
+    public void ScoreUpdated() => Schema.Update(_Handle, 0xAF5A77E339E7DEAE);
+    public void TeamnameUpdated() => Schema.Update(_Handle, 0xAF5A77E3AA34880A);
 }

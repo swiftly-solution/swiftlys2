@@ -8,72 +8,72 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCS2WeaponGraphController : CAnimGraphControllerBase, ISchemaClass<CCS2WeaponGraphController> {
+public partial interface CCS2WeaponGraphController : CAnimGraphControllerBase, ISchemaClass<CCS2WeaponGraphController>
+{
+    static CCS2WeaponGraphController ISchemaClass<CCS2WeaponGraphController>.From(nint handle) => new CCS2WeaponGraphControllerImpl(handle);
+    static int ISchemaClass<CCS2WeaponGraphController>.Size => 1536;
+    static string? ISchemaClass<CCS2WeaponGraphController>.ClassName => null;
 
-  static CCS2WeaponGraphController ISchemaClass<CCS2WeaponGraphController>.From(nint handle) => new CCS2WeaponGraphControllerImpl(handle);
-  static int ISchemaClass<CCS2WeaponGraphController>.Size => 1536;
-  static string? ISchemaClass<CCS2WeaponGraphController>.ClassName => null;
-
-  
+    
   // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
-  public SchemaUntypedField Action { get; }
-  
+    public SchemaUntypedField Action { get; }
+    
   // CAnimGraph2ParamOptionalRef< bool >
-  public SchemaUntypedField ActionReset { get; }
-  
+    public SchemaUntypedField ActionReset { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField WeaponActionSpeedScale { get; }
-  
+    public SchemaUntypedField WeaponActionSpeedScale { get; }
+    
   // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
-  public SchemaUntypedField WeaponCategory { get; }
-  
+    public SchemaUntypedField WeaponCategory { get; }
+    
   // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
-  public SchemaUntypedField WeaponType { get; }
-  
+    public SchemaUntypedField WeaponType { get; }
+    
   // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
-  public SchemaUntypedField WeaponExtraInfo { get; }
-  
+    public SchemaUntypedField WeaponExtraInfo { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField WeaponAmmo { get; }
-  
+    public SchemaUntypedField WeaponAmmo { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField WeaponAmmoMax { get; }
-  
+    public SchemaUntypedField WeaponAmmoMax { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField WeaponAmmoReserve { get; }
-  
+    public SchemaUntypedField WeaponAmmoReserve { get; }
+    
   // CAnimGraph2ParamOptionalRef< bool >
-  public SchemaUntypedField WeaponIsSilenced { get; }
-  
+    public SchemaUntypedField WeaponIsSilenced { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField WeaponIronsightAmount { get; }
-  
+    public SchemaUntypedField WeaponIronsightAmount { get; }
+    
   // CAnimGraph2ParamOptionalRef< bool >
-  public SchemaUntypedField IsUsingLegacyModel { get; }
-  
+    public SchemaUntypedField IsUsingLegacyModel { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField IdleVariation { get; }
-  
+    public SchemaUntypedField IdleVariation { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField DeployVariation { get; }
-  
+    public SchemaUntypedField DeployVariation { get; }
+    
   // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
-  public SchemaUntypedField AttackType { get; }
-  
+    public SchemaUntypedField AttackType { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField AttackThrowStrength { get; }
-  
+    public SchemaUntypedField AttackThrowStrength { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField AttackVariation { get; }
-  
+    public SchemaUntypedField AttackVariation { get; }
+    
   // CAnimGraph2ParamOptionalRef< float32 >
-  public SchemaUntypedField InspectVariation { get; }
-  
+    public SchemaUntypedField InspectVariation { get; }
+    
   // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
-  public SchemaUntypedField InspectExtraInfo { get; }
-  
+    public SchemaUntypedField InspectExtraInfo { get; }
+    
   // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
-  public SchemaUntypedField ReloadStage { get; }
+    public SchemaUntypedField ReloadStage { get; }
 
 
 }

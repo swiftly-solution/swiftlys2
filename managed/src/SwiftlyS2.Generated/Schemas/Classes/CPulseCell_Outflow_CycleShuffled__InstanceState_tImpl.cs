@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Outflow_CycleShuffled__InstanceState_tImpl : SchemaClass, CPulseCell_Outflow_CycleShuffled__InstanceState_t {
+internal partial class CPulseCell_Outflow_CycleShuffled__InstanceState_tImpl : SchemaClass, CPulseCell_Outflow_CycleShuffled__InstanceState_t
+{
+    public CPulseCell_Outflow_CycleShuffled__InstanceState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Outflow_CycleShuffled__InstanceState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ShuffleOffset;
 
-  private static nint? _ShuffleOffset;
-
-  public SchemaUntypedField Shuffle {
-    get {
-      if (_ShuffleOffset == null) {
-        _ShuffleOffset = Schema.GetOffset(0xD33F67BD200E9ACE);
-      }
-      return new SchemaUntypedField(_Handle + _ShuffleOffset!.Value);
+    public SchemaUntypedField Shuffle {
+        get {
+            _ShuffleOffset = _ShuffleOffset ?? Schema.GetOffset(0xD33F67BD200E9ACE);
+            return new SchemaUntypedField(_Handle + _ShuffleOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextShuffleOffset;
+    private static nint? _NextShuffleOffset;
 
-  public ref int NextShuffle {
-    get {
-      if (_NextShuffleOffset == null) {
-        _NextShuffleOffset = Schema.GetOffset(0xD33F67BD741282A5);
-      }
-      return ref _Handle.AsRef<int>(_NextShuffleOffset!.Value);
+    public ref int NextShuffle {
+        get {
+            _NextShuffleOffset = _NextShuffleOffset ?? Schema.GetOffset(0xD33F67BD741282A5);
+            return ref _Handle.AsRef<int>(_NextShuffleOffset!.Value);
+        }
     }
-  }
 
 
 }

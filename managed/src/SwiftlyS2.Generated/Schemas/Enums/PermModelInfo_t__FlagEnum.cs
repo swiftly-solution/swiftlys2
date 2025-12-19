@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PermModelInfo_t__FlagEnum : uint {
-
+public enum PermModelInfo_t__FlagEnum : uint
+{
  FLAG_TRANSLUCENT = 1,
 
  FLAG_TRANSLUCENT_TWO_PASS = 2,

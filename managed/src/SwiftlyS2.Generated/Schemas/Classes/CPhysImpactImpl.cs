@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysImpactImpl : CPointEntityImpl, CPhysImpact {
+internal partial class CPhysImpactImpl : CPointEntityImpl, CPhysImpact
+{
+    public CPhysImpactImpl(nint handle) : base(handle) { }
 
-  public CPhysImpactImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DamageOffset;
 
-  private static nint? _DamageOffset;
-
-  public ref float Damage {
-    get {
-      if (_DamageOffset == null) {
-        _DamageOffset = Schema.GetOffset(0x2C5E7E549C988CE0);
-      }
-      return ref _Handle.AsRef<float>(_DamageOffset!.Value);
+    public ref float Damage {
+        get {
+            _DamageOffset = _DamageOffset ?? Schema.GetOffset(0x2C5E7E549C988CE0);
+            return ref _Handle.AsRef<float>(_DamageOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceOffset;
+    private static nint? _DistanceOffset;
 
-  public ref float Distance {
-    get {
-      if (_DistanceOffset == null) {
-        _DistanceOffset = Schema.GetOffset(0x2C5E7E543CB20D02);
-      }
-      return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+    public ref float Distance {
+        get {
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x2C5E7E543CB20D02);
+            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _DirectionEntityNameOffset;
+    private static nint? _DirectionEntityNameOffset;
 
-  public string DirectionEntityName {
-    get {
-      if (_DirectionEntityNameOffset == null) {
-        _DirectionEntityNameOffset = Schema.GetOffset(0x2C5E7E54329C8132);
-      }
-      var ptr = _Handle.Read<nint>(_DirectionEntityNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DirectionEntityNameOffset == null) {
-        _DirectionEntityNameOffset = Schema.GetOffset(0x2C5E7E54329C8132);
-      }
-      Schema.SetString(_Handle, _DirectionEntityNameOffset!.Value, value);
-    }
-  } 
+    public string DirectionEntityName {
+        get {
+            _DirectionEntityNameOffset = _DirectionEntityNameOffset ?? Schema.GetOffset(0x2C5E7E54329C8132);
+            return Schema.GetString(_Handle.Read<nint>(_DirectionEntityNameOffset!.Value));
+        }
+        set {
+            _DirectionEntityNameOffset = _DirectionEntityNameOffset ?? Schema.GetOffset(0x2C5E7E54329C8132);
+            Schema.SetString(_Handle, _DirectionEntityNameOffset!.Value, value);
+        }
+    } 
 
 
 }

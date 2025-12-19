@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixFilterDesc_tImpl : SchemaClass, VMixFilterDesc_t {
+internal partial class VMixFilterDesc_tImpl : SchemaClass, VMixFilterDesc_t
+{
+    public VMixFilterDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixFilterDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FilterTypeOffset;
 
-  private static nint? _FilterTypeOffset;
-
-  public ref VMixFilterType_t FilterType {
-    get {
-      if (_FilterTypeOffset == null) {
-        _FilterTypeOffset = Schema.GetOffset(0x39A87B6971861EDB);
-      }
-      return ref _Handle.AsRef<VMixFilterType_t>(_FilterTypeOffset!.Value);
+    public ref VMixFilterType_t FilterType {
+        get {
+            _FilterTypeOffset = _FilterTypeOffset ?? Schema.GetOffset(0x39A87B6971861EDB);
+            return ref _Handle.AsRef<VMixFilterType_t>(_FilterTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FilterSlopeOffset;
+    private static nint? _FilterSlopeOffset;
 
-  public ref VMixFilterSlope_t FilterSlope {
-    get {
-      if (_FilterSlopeOffset == null) {
-        _FilterSlopeOffset = Schema.GetOffset(0x39A87B696387D992);
-      }
-      return ref _Handle.AsRef<VMixFilterSlope_t>(_FilterSlopeOffset!.Value);
+    public ref VMixFilterSlope_t FilterSlope {
+        get {
+            _FilterSlopeOffset = _FilterSlopeOffset ?? Schema.GetOffset(0x39A87B696387D992);
+            return ref _Handle.AsRef<VMixFilterSlope_t>(_FilterSlopeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnabledOffset;
+    private static nint? _EnabledOffset;
 
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0x39A87B696154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x39A87B696154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _FldbGainOffset;
+    private static nint? _FldbGainOffset;
 
-  public ref float FldbGain {
-    get {
-      if (_FldbGainOffset == null) {
-        _FldbGainOffset = Schema.GetOffset(0x39A87B6931BF2DF2);
-      }
-      return ref _Handle.AsRef<float>(_FldbGainOffset!.Value);
+    public ref float FldbGain {
+        get {
+            _FldbGainOffset = _FldbGainOffset ?? Schema.GetOffset(0x39A87B6931BF2DF2);
+            return ref _Handle.AsRef<float>(_FldbGainOffset!.Value);
+        }
     }
-  }
-  private static nint? _CutoffFreqOffset;
+    private static nint? _CutoffFreqOffset;
 
-  public ref float CutoffFreq {
-    get {
-      if (_CutoffFreqOffset == null) {
-        _CutoffFreqOffset = Schema.GetOffset(0x39A87B691E8CBE8C);
-      }
-      return ref _Handle.AsRef<float>(_CutoffFreqOffset!.Value);
+    public ref float CutoffFreq {
+        get {
+            _CutoffFreqOffset = _CutoffFreqOffset ?? Schema.GetOffset(0x39A87B691E8CBE8C);
+            return ref _Handle.AsRef<float>(_CutoffFreqOffset!.Value);
+        }
     }
-  }
-  private static nint? _QOffset;
+    private static nint? _QOffset;
 
-  public ref float Q {
-    get {
-      if (_QOffset == null) {
-        _QOffset = Schema.GetOffset(0x39A87B6996122E3A);
-      }
-      return ref _Handle.AsRef<float>(_QOffset!.Value);
+    public ref float Q {
+        get {
+            _QOffset = _QOffset ?? Schema.GetOffset(0x39A87B6996122E3A);
+            return ref _Handle.AsRef<float>(_QOffset!.Value);
+        }
     }
-  }
 
 
 }

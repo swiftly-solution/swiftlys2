@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatSwitchNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatSwitchNode__CDefinition {
+internal partial class CNmFloatSwitchNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatSwitchNode__CDefinition
+{
+    public CNmFloatSwitchNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFloatSwitchNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SwitchValueNodeIdxOffset;
 
-  private static nint? _SwitchValueNodeIdxOffset;
-
-  public ref short SwitchValueNodeIdx {
-    get {
-      if (_SwitchValueNodeIdxOffset == null) {
-        _SwitchValueNodeIdxOffset = Schema.GetOffset(0x6D97CCCD7FBD7561);
-      }
-      return ref _Handle.AsRef<short>(_SwitchValueNodeIdxOffset!.Value);
+    public ref short SwitchValueNodeIdx {
+        get {
+            _SwitchValueNodeIdxOffset = _SwitchValueNodeIdxOffset ?? Schema.GetOffset(0x6D97CCCD7FBD7561);
+            return ref _Handle.AsRef<short>(_SwitchValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _TrueValueNodeIdxOffset;
+    private static nint? _TrueValueNodeIdxOffset;
 
-  public ref short TrueValueNodeIdx {
-    get {
-      if (_TrueValueNodeIdxOffset == null) {
-        _TrueValueNodeIdxOffset = Schema.GetOffset(0x6D97CCCDFDE74365);
-      }
-      return ref _Handle.AsRef<short>(_TrueValueNodeIdxOffset!.Value);
+    public ref short TrueValueNodeIdx {
+        get {
+            _TrueValueNodeIdxOffset = _TrueValueNodeIdxOffset ?? Schema.GetOffset(0x6D97CCCDFDE74365);
+            return ref _Handle.AsRef<short>(_TrueValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _FalseValueNodeIdxOffset;
+    private static nint? _FalseValueNodeIdxOffset;
 
-  public ref short FalseValueNodeIdx {
-    get {
-      if (_FalseValueNodeIdxOffset == null) {
-        _FalseValueNodeIdxOffset = Schema.GetOffset(0x6D97CCCD8DBA2C78);
-      }
-      return ref _Handle.AsRef<short>(_FalseValueNodeIdxOffset!.Value);
+    public ref short FalseValueNodeIdx {
+        get {
+            _FalseValueNodeIdxOffset = _FalseValueNodeIdxOffset ?? Schema.GetOffset(0x6D97CCCD8DBA2C78);
+            return ref _Handle.AsRef<short>(_FalseValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _FalseValueOffset;
+    private static nint? _FalseValueOffset;
 
-  public ref float FalseValue {
-    get {
-      if (_FalseValueOffset == null) {
-        _FalseValueOffset = Schema.GetOffset(0x6D97CCCD5C87DE2F);
-      }
-      return ref _Handle.AsRef<float>(_FalseValueOffset!.Value);
+    public ref float FalseValue {
+        get {
+            _FalseValueOffset = _FalseValueOffset ?? Schema.GetOffset(0x6D97CCCD5C87DE2F);
+            return ref _Handle.AsRef<float>(_FalseValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _TrueValueOffset;
+    private static nint? _TrueValueOffset;
 
-  public ref float TrueValue {
-    get {
-      if (_TrueValueOffset == null) {
-        _TrueValueOffset = Schema.GetOffset(0x6D97CCCD28CBA8A0);
-      }
-      return ref _Handle.AsRef<float>(_TrueValueOffset!.Value);
+    public ref float TrueValue {
+        get {
+            _TrueValueOffset = _TrueValueOffset ?? Schema.GetOffset(0x6D97CCCD28CBA8A0);
+            return ref _Handle.AsRef<float>(_TrueValueOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,161 +6,115 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInfoOffscreenPanoramaTextureImpl : CPointEntityImpl, CInfoOffscreenPanoramaTexture {
+internal partial class CInfoOffscreenPanoramaTextureImpl : CPointEntityImpl, CInfoOffscreenPanoramaTexture
+{
+    public CInfoOffscreenPanoramaTextureImpl(nint handle) : base(handle) { }
 
-  public CInfoOffscreenPanoramaTextureImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DisabledOffset;
 
-  private static nint? _DisabledOffset;
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x584660AF3A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
+    }
+    private static nint? _ResolutionXOffset;
 
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0x584660AF3A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref int ResolutionX {
+        get {
+            _ResolutionXOffset = _ResolutionXOffset ?? Schema.GetOffset(0x584660AF6C22DC51);
+            return ref _Handle.AsRef<int>(_ResolutionXOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResolutionXOffset;
+    private static nint? _ResolutionYOffset;
 
-  public ref int ResolutionX {
-    get {
-      if (_ResolutionXOffset == null) {
-        _ResolutionXOffset = Schema.GetOffset(0x584660AF6C22DC51);
-      }
-      return ref _Handle.AsRef<int>(_ResolutionXOffset!.Value);
+    public ref int ResolutionY {
+        get {
+            _ResolutionYOffset = _ResolutionYOffset ?? Schema.GetOffset(0x584660AF6B22DABE);
+            return ref _Handle.AsRef<int>(_ResolutionYOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResolutionYOffset;
+    private static nint? _LayoutFileNameOffset;
 
-  public ref int ResolutionY {
-    get {
-      if (_ResolutionYOffset == null) {
-        _ResolutionYOffset = Schema.GetOffset(0x584660AF6B22DABE);
-      }
-      return ref _Handle.AsRef<int>(_ResolutionYOffset!.Value);
-    }
-  }
-  private static nint? _LayoutFileNameOffset;
+    public string LayoutFileName {
+        get {
+            _LayoutFileNameOffset = _LayoutFileNameOffset ?? Schema.GetOffset(0x584660AF5D1172FB);
+            return Schema.GetString(_Handle.Read<nint>(_LayoutFileNameOffset!.Value));
+        }
+        set {
+            _LayoutFileNameOffset = _LayoutFileNameOffset ?? Schema.GetOffset(0x584660AF5D1172FB);
+            Schema.SetString(_Handle, _LayoutFileNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _RenderAttrNameOffset;
 
-  public string LayoutFileName {
-    get {
-      if (_LayoutFileNameOffset == null) {
-        _LayoutFileNameOffset = Schema.GetOffset(0x584660AF5D1172FB);
-      }
-      var ptr = _Handle.Read<nint>(_LayoutFileNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_LayoutFileNameOffset == null) {
-        _LayoutFileNameOffset = Schema.GetOffset(0x584660AF5D1172FB);
-      }
-      Schema.SetString(_Handle, _LayoutFileNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _RenderAttrNameOffset;
+    public string RenderAttrName {
+        get {
+            _RenderAttrNameOffset = _RenderAttrNameOffset ?? Schema.GetOffset(0x584660AFE624CDC1);
+            return Schema.GetString(_Handle.Read<nint>(_RenderAttrNameOffset!.Value));
+        }
+        set {
+            _RenderAttrNameOffset = _RenderAttrNameOffset ?? Schema.GetOffset(0x584660AFE624CDC1);
+            Schema.SetString(_Handle, _RenderAttrNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _TargetEntitiesOffset;
 
-  public string RenderAttrName {
-    get {
-      if (_RenderAttrNameOffset == null) {
-        _RenderAttrNameOffset = Schema.GetOffset(0x584660AFE624CDC1);
-      }
-      var ptr = _Handle.Read<nint>(_RenderAttrNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CHandle<CBaseModelEntity>> TargetEntities {
+        get {
+            _TargetEntitiesOffset = _TargetEntitiesOffset ?? Schema.GetOffset(0x584660AFA0100A93);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_TargetEntitiesOffset!.Value);
+        }
     }
-    set {
-      if (_RenderAttrNameOffset == null) {
-        _RenderAttrNameOffset = Schema.GetOffset(0x584660AFE624CDC1);
-      }
-      Schema.SetString(_Handle, _RenderAttrNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _TargetEntitiesOffset;
+    private static nint? _TargetChangeCountOffset;
 
-  public ref CUtlVector<CHandle<CBaseModelEntity>> TargetEntities {
-    get {
-      if (_TargetEntitiesOffset == null) {
-        _TargetEntitiesOffset = Schema.GetOffset(0x584660AFA0100A93);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_TargetEntitiesOffset!.Value);
+    public ref int TargetChangeCount {
+        get {
+            _TargetChangeCountOffset = _TargetChangeCountOffset ?? Schema.GetOffset(0x584660AF309CAEAB);
+            return ref _Handle.AsRef<int>(_TargetChangeCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetChangeCountOffset;
+    private static nint? _CSSClassesOffset;
 
-  public ref int TargetChangeCount {
-    get {
-      if (_TargetChangeCountOffset == null) {
-        _TargetChangeCountOffset = Schema.GetOffset(0x584660AF309CAEAB);
-      }
-      return ref _Handle.AsRef<int>(_TargetChangeCountOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> CSSClasses {
+        get {
+            _CSSClassesOffset = _CSSClassesOffset ?? Schema.GetOffset(0x584660AFCB74D1DC);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_CSSClassesOffset!.Value);
+        }
     }
-  }
-  private static nint? _CSSClassesOffset;
+    private static nint? _TargetsNameOffset;
 
-  public ref CUtlVector<SchemaUntypedField> CSSClasses {
-    get {
-      if (_CSSClassesOffset == null) {
-        _CSSClassesOffset = Schema.GetOffset(0x584660AFCB74D1DC);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_CSSClassesOffset!.Value);
-    }
-  }
-  private static nint? _TargetsNameOffset;
+    public string TargetsName {
+        get {
+            _TargetsNameOffset = _TargetsNameOffset ?? Schema.GetOffset(0x584660AF82C9ED45);
+            return Schema.GetString(_Handle.Read<nint>(_TargetsNameOffset!.Value));
+        }
+        set {
+            _TargetsNameOffset = _TargetsNameOffset ?? Schema.GetOffset(0x584660AF82C9ED45);
+            Schema.SetString(_Handle, _TargetsNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _AdditionalTargetEntitiesOffset;
 
-  public string TargetsName {
-    get {
-      if (_TargetsNameOffset == null) {
-        _TargetsNameOffset = Schema.GetOffset(0x584660AF82C9ED45);
-      }
-      var ptr = _Handle.Read<nint>(_TargetsNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CHandle<CBaseModelEntity>> AdditionalTargetEntities {
+        get {
+            _AdditionalTargetEntitiesOffset = _AdditionalTargetEntitiesOffset ?? Schema.GetOffset(0x584660AFD38E792A);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AdditionalTargetEntitiesOffset!.Value);
+        }
     }
-    set {
-      if (_TargetsNameOffset == null) {
-        _TargetsNameOffset = Schema.GetOffset(0x584660AF82C9ED45);
-      }
-      Schema.SetString(_Handle, _TargetsNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _AdditionalTargetEntitiesOffset;
 
-  public ref CUtlVector<CHandle<CBaseModelEntity>> AdditionalTargetEntities {
-    get {
-      if (_AdditionalTargetEntitiesOffset == null) {
-        _AdditionalTargetEntitiesOffset = Schema.GetOffset(0x584660AFD38E792A);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AdditionalTargetEntitiesOffset!.Value);
-    }
-  }
-
-  public void DisabledUpdated() {
-    Schema.Update(_Handle, 0x584660AF3A7C5965);
-  }
-  public void ResolutionXUpdated() {
-    Schema.Update(_Handle, 0x584660AF6C22DC51);
-  }
-  public void ResolutionYUpdated() {
-    Schema.Update(_Handle, 0x584660AF6B22DABE);
-  }
-  public void LayoutFileNameUpdated() {
-    Schema.Update(_Handle, 0x584660AF5D1172FB);
-  }
-  public void RenderAttrNameUpdated() {
-    Schema.Update(_Handle, 0x584660AFE624CDC1);
-  }
-  public void TargetEntitiesUpdated() {
-    Schema.Update(_Handle, 0x584660AFA0100A93);
-  }
-  public void TargetChangeCountUpdated() {
-    Schema.Update(_Handle, 0x584660AF309CAEAB);
-  }
-  public void CSSClassesUpdated() {
-    Schema.Update(_Handle, 0x584660AFCB74D1DC);
-  }
+    public void DisabledUpdated() => Schema.Update(_Handle, 0x584660AF3A7C5965);
+    public void ResolutionXUpdated() => Schema.Update(_Handle, 0x584660AF6C22DC51);
+    public void ResolutionYUpdated() => Schema.Update(_Handle, 0x584660AF6B22DABE);
+    public void LayoutFileNameUpdated() => Schema.Update(_Handle, 0x584660AF5D1172FB);
+    public void RenderAttrNameUpdated() => Schema.Update(_Handle, 0x584660AFE624CDC1);
+    public void TargetEntitiesUpdated() => Schema.Update(_Handle, 0x584660AFA0100A93);
+    public void TargetChangeCountUpdated() => Schema.Update(_Handle, 0x584660AF309CAEAB);
+    public void CSSClassesUpdated() => Schema.Update(_Handle, 0x584660AFCB74D1DC);
 }

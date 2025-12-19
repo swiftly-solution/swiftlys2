@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Inflow_GraphHookImpl : CPulseCell_Inflow_BaseEntrypointImpl, CPulseCell_Inflow_GraphHook {
+internal partial class CPulseCell_Inflow_GraphHookImpl : CPulseCell_Inflow_BaseEntrypointImpl, CPulseCell_Inflow_GraphHook
+{
+    public CPulseCell_Inflow_GraphHookImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Inflow_GraphHookImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HookNameOffset;
 
-  private static nint? _HookNameOffset;
-
-  public SchemaUntypedField HookName {
-    get {
-      if (_HookNameOffset == null) {
-        _HookNameOffset = Schema.GetOffset(0xEA4B2E6FA19F4D11);
-      }
-      return new SchemaUntypedField(_Handle + _HookNameOffset!.Value);
+    public SchemaUntypedField HookName {
+        get {
+            _HookNameOffset = _HookNameOffset ?? Schema.GetOffset(0xEA4B2E6FA19F4D11);
+            return new SchemaUntypedField(_Handle + _HookNameOffset!.Value);
+        }
     }
-  }
 
 
 }

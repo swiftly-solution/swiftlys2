@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_LerpEndCapScalarImpl : CParticleFunctionOperatorImpl, C_OP_LerpEndCapScalar {
+internal partial class C_OP_LerpEndCapScalarImpl : CParticleFunctionOperatorImpl, C_OP_LerpEndCapScalar
+{
+    public C_OP_LerpEndCapScalarImpl(nint handle) : base(handle) { }
 
-  public C_OP_LerpEndCapScalarImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x308CB6FE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x308CB6FE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputOffset;
+    private static nint? _OutputOffset;
 
-  public ref float Output {
-    get {
-      if (_OutputOffset == null) {
-        _OutputOffset = Schema.GetOffset(0x308CB6F368F96A2);
-      }
-      return ref _Handle.AsRef<float>(_OutputOffset!.Value);
+    public ref float Output {
+        get {
+            _OutputOffset = _OutputOffset ?? Schema.GetOffset(0x308CB6F368F96A2);
+            return ref _Handle.AsRef<float>(_OutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _LerpTimeOffset;
+    private static nint? _LerpTimeOffset;
 
-  public ref float LerpTime {
-    get {
-      if (_LerpTimeOffset == null) {
-        _LerpTimeOffset = Schema.GetOffset(0x308CB6F54FD987F);
-      }
-      return ref _Handle.AsRef<float>(_LerpTimeOffset!.Value);
+    public ref float LerpTime {
+        get {
+            _LerpTimeOffset = _LerpTimeOffset ?? Schema.GetOffset(0x308CB6F54FD987F);
+            return ref _Handle.AsRef<float>(_LerpTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

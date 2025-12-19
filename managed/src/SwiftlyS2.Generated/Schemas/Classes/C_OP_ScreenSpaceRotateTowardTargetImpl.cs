@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ScreenSpaceRotateTowardTargetImpl : CParticleFunctionOperatorImpl, C_OP_ScreenSpaceRotateTowardTarget {
+internal partial class C_OP_ScreenSpaceRotateTowardTargetImpl : CParticleFunctionOperatorImpl, C_OP_ScreenSpaceRotateTowardTarget
+{
+    public C_OP_ScreenSpaceRotateTowardTargetImpl(nint handle) : base(handle) { }
 
-  public C_OP_ScreenSpaceRotateTowardTargetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetPositionOffset;
 
-  private static nint? _TargetPositionOffset;
-
-  public CPerParticleVecInput TargetPosition {
-    get {
-      if (_TargetPositionOffset == null) {
-        _TargetPositionOffset = Schema.GetOffset(0xD66164FC554C563B);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _TargetPositionOffset!.Value);
+    public CPerParticleVecInput TargetPosition {
+        get {
+            _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0xD66164FC554C563B);
+            return new CPerParticleVecInputImpl(_Handle + _TargetPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputRemapOffset;
+    private static nint? _OutputRemapOffset;
 
-  public CParticleRemapFloatInput OutputRemap {
-    get {
-      if (_OutputRemapOffset == null) {
-        _OutputRemapOffset = Schema.GetOffset(0xD66164FC1239396F);
-      }
-      return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+    public CParticleRemapFloatInput OutputRemap {
+        get {
+            _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0xD66164FC1239396F);
+            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetMethodOffset;
+    private static nint? _SetMethodOffset;
 
-  public ref ParticleSetMethod_t SetMethod {
-    get {
-      if (_SetMethodOffset == null) {
-        _SetMethodOffset = Schema.GetOffset(0xD66164FCFB53C31E);
-      }
-      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    public ref ParticleSetMethod_t SetMethod {
+        get {
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0xD66164FCFB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScreenEdgeAlignmentDistanceOffset;
+    private static nint? _ScreenEdgeAlignmentDistanceOffset;
 
-  public CPerParticleFloatInput ScreenEdgeAlignmentDistance {
-    get {
-      if (_ScreenEdgeAlignmentDistanceOffset == null) {
-        _ScreenEdgeAlignmentDistanceOffset = Schema.GetOffset(0xD66164FCDB3D3EAC);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ScreenEdgeAlignmentDistanceOffset!.Value);
+    public CPerParticleFloatInput ScreenEdgeAlignmentDistance {
+        get {
+            _ScreenEdgeAlignmentDistanceOffset = _ScreenEdgeAlignmentDistanceOffset ?? Schema.GetOffset(0xD66164FCDB3D3EAC);
+            return new CPerParticleFloatInputImpl(_Handle + _ScreenEdgeAlignmentDistanceOffset!.Value);
+        }
     }
-  }
 
 
 }

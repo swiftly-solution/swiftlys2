@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleTopology_t : uint {
-
+public enum ParticleTopology_t : uint
+{
  PARTICLE_TOPOLOGY_POINTS = 0,
 
  PARTICLE_TOPOLOGY_LINES = 1,

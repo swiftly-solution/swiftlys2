@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_InitialVelocityFromHitboxImpl : CParticleFunctionInitializerImpl, C_INIT_InitialVelocityFromHitbox {
+internal partial class C_INIT_InitialVelocityFromHitboxImpl : CParticleFunctionInitializerImpl, C_INIT_InitialVelocityFromHitbox
+{
+    public C_INIT_InitialVelocityFromHitboxImpl(nint handle) : base(handle) { }
 
-  public C_INIT_InitialVelocityFromHitboxImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VelocityMinOffset;
 
-  private static nint? _VelocityMinOffset;
-
-  public ref float VelocityMin {
-    get {
-      if (_VelocityMinOffset == null) {
-        _VelocityMinOffset = Schema.GetOffset(0x48F25F17FDB3D7E4);
-      }
-      return ref _Handle.AsRef<float>(_VelocityMinOffset!.Value);
-    }
-  }
-  private static nint? _VelocityMaxOffset;
-
-  public ref float VelocityMax {
-    get {
-      if (_VelocityMaxOffset == null) {
-        _VelocityMaxOffset = Schema.GetOffset(0x48F25F170BC775A6);
-      }
-      return ref _Handle.AsRef<float>(_VelocityMaxOffset!.Value);
-    }
-  }
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x48F25F173F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
-    }
-  }
-  private static nint? _HitboxSetNameOffset;
-
-  public string HitboxSetName {
-    get {
-        if (_HitboxSetNameOffset == null) {
-            _HitboxSetNameOffset = Schema.GetOffset(0x48F25F176A21BB0E);
+    public ref float VelocityMin {
+        get {
+            _VelocityMinOffset = _VelocityMinOffset ?? Schema.GetOffset(0x48F25F17FDB3D7E4);
+            return ref _Handle.AsRef<float>(_VelocityMinOffset!.Value);
         }
-        var ptr = _Handle + _HitboxSetNameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_HitboxSetNameOffset == null) {
-            _HitboxSetNameOffset = Schema.GetOffset(0x48F25F176A21BB0E);
-        }
-        Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
-    }
-  } 
-  private static nint? _UseBonesOffset;
+    private static nint? _VelocityMaxOffset;
 
-  public ref bool UseBones {
-    get {
-      if (_UseBonesOffset == null) {
-        _UseBonesOffset = Schema.GetOffset(0x48F25F1710D1938B);
-      }
-      return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
+    public ref float VelocityMax {
+        get {
+            _VelocityMaxOffset = _VelocityMaxOffset ?? Schema.GetOffset(0x48F25F170BC775A6);
+            return ref _Handle.AsRef<float>(_VelocityMaxOffset!.Value);
+        }
     }
-  }
+    private static nint? _ControlPointNumberOffset;
+
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x48F25F173F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
+    }
+    private static nint? _HitboxSetNameOffset;
+
+    public string HitboxSetName {
+        get {
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x48F25F176A21BB0E);
+            return Schema.GetString(_Handle + _HitboxSetNameOffset!.Value);
+        }
+        set {
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x48F25F176A21BB0E);
+            Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
+        }
+    } 
+    private static nint? _UseBonesOffset;
+
+    public ref bool UseBones {
+        get {
+            _UseBonesOffset = _UseBonesOffset ?? Schema.GetOffset(0x48F25F1710D1938B);
+            return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
+        }
+    }
 
 
 }

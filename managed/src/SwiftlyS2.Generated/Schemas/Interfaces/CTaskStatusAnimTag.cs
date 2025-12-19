@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTaskStatusAnimTag : CAnimTagBase, ISchemaClass<CTaskStatusAnimTag> {
-
-  static CTaskStatusAnimTag ISchemaClass<CTaskStatusAnimTag>.From(nint handle) => new CTaskStatusAnimTagImpl(handle);
-  static int ISchemaClass<CTaskStatusAnimTag>.Size => 88;
-  static string? ISchemaClass<CTaskStatusAnimTag>.ClassName => null;
+public partial interface CTaskStatusAnimTag : CAnimTagBase, ISchemaClass<CTaskStatusAnimTag>
+{
+    static CTaskStatusAnimTag ISchemaClass<CTaskStatusAnimTag>.From(nint handle) => new CTaskStatusAnimTagImpl(handle);
+    static int ISchemaClass<CTaskStatusAnimTag>.Size => 88;
+    static string? ISchemaClass<CTaskStatusAnimTag>.ClassName => null;
 
 
 

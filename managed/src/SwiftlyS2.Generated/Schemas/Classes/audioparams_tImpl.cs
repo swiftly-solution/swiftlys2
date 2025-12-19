@@ -6,74 +6,55 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class audioparams_tImpl : SchemaClass, audioparams_t {
+internal partial class audioparams_tImpl : SchemaClass, audioparams_t
+{
+    public audioparams_tImpl(nint handle) : base(handle) { }
 
-  public audioparams_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<Vector> LocalSound {
-    get => new SchemaFixedArray<Vector>(_Handle, 0x6D349E3CCE184A47, 8, 12, 4);
-  }
-  private static nint? _SoundscapeIndexOffset;
-
-  public ref int SoundscapeIndex {
-    get {
-      if (_SoundscapeIndexOffset == null) {
-        _SoundscapeIndexOffset = Schema.GetOffset(0x6D349E3C046FCFEE);
-      }
-      return ref _Handle.AsRef<int>(_SoundscapeIndexOffset!.Value);
+    public ISchemaFixedArray<Vector> LocalSound {
+        get => new SchemaFixedArray<Vector>(_Handle, 0x6D349E3CCE184A47, 8, 12, 4);
     }
-  }
-  private static nint? _LocalBitsOffset;
+    private static nint? _SoundscapeIndexOffset;
 
-  public ref byte LocalBits {
-    get {
-      if (_LocalBitsOffset == null) {
-        _LocalBitsOffset = Schema.GetOffset(0x6D349E3C1DE85B60);
-      }
-      return ref _Handle.AsRef<byte>(_LocalBitsOffset!.Value);
+    public ref int SoundscapeIndex {
+        get {
+            _SoundscapeIndexOffset = _SoundscapeIndexOffset ?? Schema.GetOffset(0x6D349E3C046FCFEE);
+            return ref _Handle.AsRef<int>(_SoundscapeIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundscapeEntityListIndexOffset;
+    private static nint? _LocalBitsOffset;
 
-  public ref int SoundscapeEntityListIndex {
-    get {
-      if (_SoundscapeEntityListIndexOffset == null) {
-        _SoundscapeEntityListIndexOffset = Schema.GetOffset(0x6D349E3CA4E4FB9B);
-      }
-      return ref _Handle.AsRef<int>(_SoundscapeEntityListIndexOffset!.Value);
+    public ref byte LocalBits {
+        get {
+            _LocalBitsOffset = _LocalBitsOffset ?? Schema.GetOffset(0x6D349E3C1DE85B60);
+            return ref _Handle.AsRef<byte>(_LocalBitsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundEventHashOffset;
+    private static nint? _SoundscapeEntityListIndexOffset;
 
-  public ref uint SoundEventHash {
-    get {
-      if (_SoundEventHashOffset == null) {
-        _SoundEventHashOffset = Schema.GetOffset(0x6D349E3C335E17CC);
-      }
-      return ref _Handle.AsRef<uint>(_SoundEventHashOffset!.Value);
+    public ref int SoundscapeEntityListIndex {
+        get {
+            _SoundscapeEntityListIndexOffset = _SoundscapeEntityListIndexOffset ?? Schema.GetOffset(0x6D349E3CA4E4FB9B);
+            return ref _Handle.AsRef<int>(_SoundscapeEntityListIndexOffset!.Value);
+        }
     }
-  }
+    private static nint? _SoundEventHashOffset;
 
-  public void LocalSoundUpdated() {
-    Schema.Update(_Handle, 0x6D349E3CCE184A47);
-  }
-  public void SoundscapeIndexUpdated() {
-    Schema.Update(_Handle, 0x6D349E3C046FCFEE);
-  }
-  public void LocalBitsUpdated() {
-    Schema.Update(_Handle, 0x6D349E3C1DE85B60);
-  }
-  public void SoundscapeEntityListIndexUpdated() {
-    Schema.Update(_Handle, 0x6D349E3CA4E4FB9B);
-  }
-  public void SoundEventHashUpdated() {
-    Schema.Update(_Handle, 0x6D349E3C335E17CC);
-  }
+    public ref uint SoundEventHash {
+        get {
+            _SoundEventHashOffset = _SoundEventHashOffset ?? Schema.GetOffset(0x6D349E3C335E17CC);
+            return ref _Handle.AsRef<uint>(_SoundEventHashOffset!.Value);
+        }
+    }
+
+    public void LocalSoundUpdated() => Schema.Update(_Handle, 0x6D349E3CCE184A47);
+    public void SoundscapeIndexUpdated() => Schema.Update(_Handle, 0x6D349E3C046FCFEE);
+    public void LocalBitsUpdated() => Schema.Update(_Handle, 0x6D349E3C1DE85B60);
+    public void SoundscapeEntityListIndexUpdated() => Schema.Update(_Handle, 0x6D349E3CA4E4FB9B);
+    public void SoundEventHashUpdated() => Schema.Update(_Handle, 0x6D349E3C335E17CC);
 }

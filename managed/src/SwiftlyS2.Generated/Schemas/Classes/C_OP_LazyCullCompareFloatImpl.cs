@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_LazyCullCompareFloatImpl : CParticleFunctionOperatorImpl, C_OP_LazyCullCompareFloat {
+internal partial class C_OP_LazyCullCompareFloatImpl : CParticleFunctionOperatorImpl, C_OP_LazyCullCompareFloat
+{
+    public C_OP_LazyCullCompareFloatImpl(nint handle) : base(handle) { }
 
-  public C_OP_LazyCullCompareFloatImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Comparsion1Offset;
 
-  private static nint? _Comparsion1Offset;
-
-  public CPerParticleFloatInput Comparsion1 {
-    get {
-      if (_Comparsion1Offset == null) {
-        _Comparsion1Offset = Schema.GetOffset(0x9D0DCAD079865299);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _Comparsion1Offset!.Value);
+    public CPerParticleFloatInput Comparsion1 {
+        get {
+            _Comparsion1Offset = _Comparsion1Offset ?? Schema.GetOffset(0x9D0DCAD079865299);
+            return new CPerParticleFloatInputImpl(_Handle + _Comparsion1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Comparsion2Offset;
+    private static nint? _Comparsion2Offset;
 
-  public CPerParticleFloatInput Comparsion2 {
-    get {
-      if (_Comparsion2Offset == null) {
-        _Comparsion2Offset = Schema.GetOffset(0x9D0DCAD076864DE0);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _Comparsion2Offset!.Value);
+    public CPerParticleFloatInput Comparsion2 {
+        get {
+            _Comparsion2Offset = _Comparsion2Offset ?? Schema.GetOffset(0x9D0DCAD076864DE0);
+            return new CPerParticleFloatInputImpl(_Handle + _Comparsion2Offset!.Value);
+        }
     }
-  }
-  private static nint? _CullTimeOffset;
+    private static nint? _CullTimeOffset;
 
-  public CPerParticleFloatInput CullTime {
-    get {
-      if (_CullTimeOffset == null) {
-        _CullTimeOffset = Schema.GetOffset(0x9D0DCAD0AE2A76FA);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _CullTimeOffset!.Value);
+    public CPerParticleFloatInput CullTime {
+        get {
+            _CullTimeOffset = _CullTimeOffset ?? Schema.GetOffset(0x9D0DCAD0AE2A76FA);
+            return new CPerParticleFloatInputImpl(_Handle + _CullTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

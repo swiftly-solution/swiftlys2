@@ -6,108 +6,83 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNetworkedSequenceOperationImpl : SchemaClass, CNetworkedSequenceOperation {
+internal partial class CNetworkedSequenceOperationImpl : SchemaClass, CNetworkedSequenceOperation
+{
+    public CNetworkedSequenceOperationImpl(nint handle) : base(handle) { }
 
-  public CNetworkedSequenceOperationImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SequenceOffset;
 
-  private static nint? _SequenceOffset;
-
-  public HSequence Sequence {
-    get {
-      if (_SequenceOffset == null) {
-        _SequenceOffset = Schema.GetOffset(0x3EA8ECC5E0A0598E);
-      }
-      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    public HSequence Sequence {
+        get {
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x3EA8ECC5E0A0598E);
+            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevCycleOffset;
+    private static nint? _PrevCycleOffset;
 
-  public ref float PrevCycle {
-    get {
-      if (_PrevCycleOffset == null) {
-        _PrevCycleOffset = Schema.GetOffset(0x3EA8ECC5AA0F5CF4);
-      }
-      return ref _Handle.AsRef<float>(_PrevCycleOffset!.Value);
+    public ref float PrevCycle {
+        get {
+            _PrevCycleOffset = _PrevCycleOffset ?? Schema.GetOffset(0x3EA8ECC5AA0F5CF4);
+            return ref _Handle.AsRef<float>(_PrevCycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _CycleOffset;
+    private static nint? _CycleOffset;
 
-  public ref float Cycle {
-    get {
-      if (_CycleOffset == null) {
-        _CycleOffset = Schema.GetOffset(0x3EA8ECC50C77829F);
-      }
-      return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+    public ref float Cycle {
+        get {
+            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x3EA8ECC50C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref CNetworkedQuantizedFloat Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0x3EA8ECC57B81E7AB);
-      }
-      return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_WeightOffset!.Value);
+    public ref CNetworkedQuantizedFloat Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x3EA8ECC57B81E7AB);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_WeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceChangeNetworkedOffset;
+    private static nint? _SequenceChangeNetworkedOffset;
 
-  public ref bool SequenceChangeNetworked {
-    get {
-      if (_SequenceChangeNetworkedOffset == null) {
-        _SequenceChangeNetworkedOffset = Schema.GetOffset(0x3EA8ECC510DEC927);
-      }
-      return ref _Handle.AsRef<bool>(_SequenceChangeNetworkedOffset!.Value);
+    public ref bool SequenceChangeNetworked {
+        get {
+            _SequenceChangeNetworkedOffset = _SequenceChangeNetworkedOffset ?? Schema.GetOffset(0x3EA8ECC510DEC927);
+            return ref _Handle.AsRef<bool>(_SequenceChangeNetworkedOffset!.Value);
+        }
     }
-  }
-  private static nint? _DiscontinuityOffset;
+    private static nint? _DiscontinuityOffset;
 
-  public ref bool Discontinuity {
-    get {
-      if (_DiscontinuityOffset == null) {
-        _DiscontinuityOffset = Schema.GetOffset(0x3EA8ECC5C37DF9B1);
-      }
-      return ref _Handle.AsRef<bool>(_DiscontinuityOffset!.Value);
+    public ref bool Discontinuity {
+        get {
+            _DiscontinuityOffset = _DiscontinuityOffset ?? Schema.GetOffset(0x3EA8ECC5C37DF9B1);
+            return ref _Handle.AsRef<bool>(_DiscontinuityOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevCycleFromDiscontinuityOffset;
+    private static nint? _PrevCycleFromDiscontinuityOffset;
 
-  public ref float PrevCycleFromDiscontinuity {
-    get {
-      if (_PrevCycleFromDiscontinuityOffset == null) {
-        _PrevCycleFromDiscontinuityOffset = Schema.GetOffset(0x3EA8ECC581FD154E);
-      }
-      return ref _Handle.AsRef<float>(_PrevCycleFromDiscontinuityOffset!.Value);
+    public ref float PrevCycleFromDiscontinuity {
+        get {
+            _PrevCycleFromDiscontinuityOffset = _PrevCycleFromDiscontinuityOffset ?? Schema.GetOffset(0x3EA8ECC581FD154E);
+            return ref _Handle.AsRef<float>(_PrevCycleFromDiscontinuityOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevCycleForAnimEventDetectionOffset;
+    private static nint? _PrevCycleForAnimEventDetectionOffset;
 
-  public ref float PrevCycleForAnimEventDetection {
-    get {
-      if (_PrevCycleForAnimEventDetectionOffset == null) {
-        _PrevCycleForAnimEventDetectionOffset = Schema.GetOffset(0x3EA8ECC5B36E4559);
-      }
-      return ref _Handle.AsRef<float>(_PrevCycleForAnimEventDetectionOffset!.Value);
+    public ref float PrevCycleForAnimEventDetection {
+        get {
+            _PrevCycleForAnimEventDetectionOffset = _PrevCycleForAnimEventDetectionOffset ?? Schema.GetOffset(0x3EA8ECC5B36E4559);
+            return ref _Handle.AsRef<float>(_PrevCycleForAnimEventDetectionOffset!.Value);
+        }
     }
-  }
 
-  public void SequenceUpdated() {
-    Schema.Update(_Handle, 0x3EA8ECC5E0A0598E);
-  }
-  public void PrevCycleUpdated() {
-    Schema.Update(_Handle, 0x3EA8ECC5AA0F5CF4);
-  }
-  public void CycleUpdated() {
-    Schema.Update(_Handle, 0x3EA8ECC50C77829F);
-  }
-  public void WeightUpdated() {
-    Schema.Update(_Handle, 0x3EA8ECC57B81E7AB);
-  }
+    public void SequenceUpdated() => Schema.Update(_Handle, 0x3EA8ECC5E0A0598E);
+    public void PrevCycleUpdated() => Schema.Update(_Handle, 0x3EA8ECC5AA0F5CF4);
+    public void CycleUpdated() => Schema.Update(_Handle, 0x3EA8ECC50C77829F);
+    public void WeightUpdated() => Schema.Update(_Handle, 0x3EA8ECC57B81E7AB);
 }

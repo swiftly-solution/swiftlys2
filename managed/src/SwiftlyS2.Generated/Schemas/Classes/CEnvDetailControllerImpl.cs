@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvDetailControllerImpl : CBaseEntityImpl, CEnvDetailController {
+internal partial class CEnvDetailControllerImpl : CBaseEntityImpl, CEnvDetailController
+{
+    public CEnvDetailControllerImpl(nint handle) : base(handle) { }
 
-  public CEnvDetailControllerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FadeStartDistOffset;
 
-  private static nint? _FadeStartDistOffset;
-
-  public ref float FadeStartDist {
-    get {
-      if (_FadeStartDistOffset == null) {
-        _FadeStartDistOffset = Schema.GetOffset(0x585A7964FBFACAF3);
-      }
-      return ref _Handle.AsRef<float>(_FadeStartDistOffset!.Value);
+    public ref float FadeStartDist {
+        get {
+            _FadeStartDistOffset = _FadeStartDistOffset ?? Schema.GetOffset(0x585A7964FBFACAF3);
+            return ref _Handle.AsRef<float>(_FadeStartDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeEndDistOffset;
+    private static nint? _FadeEndDistOffset;
 
-  public ref float FadeEndDist {
-    get {
-      if (_FadeEndDistOffset == null) {
-        _FadeEndDistOffset = Schema.GetOffset(0x585A79646DD6252A);
-      }
-      return ref _Handle.AsRef<float>(_FadeEndDistOffset!.Value);
+    public ref float FadeEndDist {
+        get {
+            _FadeEndDistOffset = _FadeEndDistOffset ?? Schema.GetOffset(0x585A79646DD6252A);
+            return ref _Handle.AsRef<float>(_FadeEndDistOffset!.Value);
+        }
     }
-  }
 
-  public void FadeStartDistUpdated() {
-    Schema.Update(_Handle, 0x585A7964FBFACAF3);
-  }
-  public void FadeEndDistUpdated() {
-    Schema.Update(_Handle, 0x585A79646DD6252A);
-  }
+    public void FadeStartDistUpdated() => Schema.Update(_Handle, 0x585A7964FBFACAF3);
+    public void FadeEndDistUpdated() => Schema.Update(_Handle, 0x585A79646DD6252A);
 }

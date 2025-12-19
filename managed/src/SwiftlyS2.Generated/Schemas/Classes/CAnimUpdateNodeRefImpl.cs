@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimUpdateNodeRefImpl : SchemaClass, CAnimUpdateNodeRef {
+internal partial class CAnimUpdateNodeRefImpl : SchemaClass, CAnimUpdateNodeRef
+{
+    public CAnimUpdateNodeRefImpl(nint handle) : base(handle) { }
 
-  public CAnimUpdateNodeRefImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodeIndexOffset;
 
-  private static nint? _NodeIndexOffset;
-
-  public ref int NodeIndex {
-    get {
-      if (_NodeIndexOffset == null) {
-        _NodeIndexOffset = Schema.GetOffset(0x71F7CF87E37313D3);
-      }
-      return ref _Handle.AsRef<int>(_NodeIndexOffset!.Value);
+    public ref int NodeIndex {
+        get {
+            _NodeIndexOffset = _NodeIndexOffset ?? Schema.GetOffset(0x71F7CF87E37313D3);
+            return ref _Handle.AsRef<int>(_NodeIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

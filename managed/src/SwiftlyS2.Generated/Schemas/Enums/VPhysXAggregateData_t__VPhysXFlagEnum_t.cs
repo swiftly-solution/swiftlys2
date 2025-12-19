@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VPhysXAggregateData_t__VPhysXFlagEnum_t : uint {
-
+public enum VPhysXAggregateData_t__VPhysXFlagEnum_t : uint
+{
  FLAG_IS_POLYSOUP_GEOMETRY = 1,
 
  FLAG_LEVEL_COLLISION = 16,

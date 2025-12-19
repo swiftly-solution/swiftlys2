@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_OscillateScalarSimpleImpl : CParticleFunctionOperatorImpl, C_OP_OscillateScalarSimple {
+internal partial class C_OP_OscillateScalarSimpleImpl : CParticleFunctionOperatorImpl, C_OP_OscillateScalarSimple
+{
+    public C_OP_OscillateScalarSimpleImpl(nint handle) : base(handle) { }
 
-  public C_OP_OscillateScalarSimpleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RateOffset;
 
-  private static nint? _RateOffset;
-
-  public ref float Rate {
-    get {
-      if (_RateOffset == null) {
-        _RateOffset = Schema.GetOffset(0xDD611E3FEC3280E7);
-      }
-      return ref _Handle.AsRef<float>(_RateOffset!.Value);
+    public ref float Rate {
+        get {
+            _RateOffset = _RateOffset ?? Schema.GetOffset(0xDD611E3FEC3280E7);
+            return ref _Handle.AsRef<float>(_RateOffset!.Value);
+        }
     }
-  }
-  private static nint? _FrequencyOffset;
+    private static nint? _FrequencyOffset;
 
-  public ref float Frequency {
-    get {
-      if (_FrequencyOffset == null) {
-        _FrequencyOffset = Schema.GetOffset(0xDD611E3FBCCAA981);
-      }
-      return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+    public ref float Frequency {
+        get {
+            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0xDD611E3FBCCAA981);
+            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOffset;
+    private static nint? _FieldOffset;
 
-  public ParticleAttributeIndex_t Field {
-    get {
-      if (_FieldOffset == null) {
-        _FieldOffset = Schema.GetOffset(0xDD611E3FC257B93B);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+    public ParticleAttributeIndex_t Field {
+        get {
+            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0xDD611E3FC257B93B);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _OscMultOffset;
+    private static nint? _OscMultOffset;
 
-  public ref float OscMult {
-    get {
-      if (_OscMultOffset == null) {
-        _OscMultOffset = Schema.GetOffset(0xDD611E3F16278E94);
-      }
-      return ref _Handle.AsRef<float>(_OscMultOffset!.Value);
+    public ref float OscMult {
+        get {
+            _OscMultOffset = _OscMultOffset ?? Schema.GetOffset(0xDD611E3F16278E94);
+            return ref _Handle.AsRef<float>(_OscMultOffset!.Value);
+        }
     }
-  }
-  private static nint? _OscAddOffset;
+    private static nint? _OscAddOffset;
 
-  public ref float OscAdd {
-    get {
-      if (_OscAddOffset == null) {
-        _OscAddOffset = Schema.GetOffset(0xDD611E3F7B38A63D);
-      }
-      return ref _Handle.AsRef<float>(_OscAddOffset!.Value);
+    public ref float OscAdd {
+        get {
+            _OscAddOffset = _OscAddOffset ?? Schema.GetOffset(0xDD611E3F7B38A63D);
+            return ref _Handle.AsRef<float>(_OscAddOffset!.Value);
+        }
     }
-  }
 
 
 }

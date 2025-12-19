@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SnapshotIndexType_t : uint {
-
+public enum SnapshotIndexType_t : uint
+{
  SNAPSHOT_INDEX_INCREMENT = 0,
 
  SNAPSHOT_INDEX_DIRECT = 1,

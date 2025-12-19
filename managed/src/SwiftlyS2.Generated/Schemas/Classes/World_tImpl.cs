@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class World_tImpl : SchemaClass, World_t {
+internal partial class World_tImpl : SchemaClass, World_t
+{
+    public World_tImpl(nint handle) : base(handle) { }
 
-  public World_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BuilderParamsOffset;
 
-  private static nint? _BuilderParamsOffset;
-
-  public WorldBuilderParams_t BuilderParams {
-    get {
-      if (_BuilderParamsOffset == null) {
-        _BuilderParamsOffset = Schema.GetOffset(0x4CBF8350CE4EEF26);
-      }
-      return new WorldBuilderParams_tImpl(_Handle + _BuilderParamsOffset!.Value);
+    public WorldBuilderParams_t BuilderParams {
+        get {
+            _BuilderParamsOffset = _BuilderParamsOffset ?? Schema.GetOffset(0x4CBF8350CE4EEF26);
+            return new WorldBuilderParams_tImpl(_Handle + _BuilderParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldNodesOffset;
+    private static nint? _WorldNodesOffset;
 
-  public ref CUtlVector<NodeData_t> WorldNodes {
-    get {
-      if (_WorldNodesOffset == null) {
-        _WorldNodesOffset = Schema.GetOffset(0x4CBF835064F33530);
-      }
-      return ref _Handle.AsRef<CUtlVector<NodeData_t>>(_WorldNodesOffset!.Value);
+    public ref CUtlVector<NodeData_t> WorldNodes {
+        get {
+            _WorldNodesOffset = _WorldNodesOffset ?? Schema.GetOffset(0x4CBF835064F33530);
+            return ref _Handle.AsRef<CUtlVector<NodeData_t>>(_WorldNodesOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldLightingInfoOffset;
+    private static nint? _WorldLightingInfoOffset;
 
-  public BakedLightingInfo_t WorldLightingInfo {
-    get {
-      if (_WorldLightingInfoOffset == null) {
-        _WorldLightingInfoOffset = Schema.GetOffset(0x4CBF83508B843A17);
-      }
-      return new BakedLightingInfo_tImpl(_Handle + _WorldLightingInfoOffset!.Value);
+    public BakedLightingInfo_t WorldLightingInfo {
+        get {
+            _WorldLightingInfoOffset = _WorldLightingInfoOffset ?? Schema.GetOffset(0x4CBF83508B843A17);
+            return new BakedLightingInfo_tImpl(_Handle + _WorldLightingInfoOffset!.Value);
+        }
     }
-  }
-  private static nint? _EntityLumpsOffset;
+    private static nint? _EntityLumpsOffset;
 
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> EntityLumps {
-    get {
-      if (_EntityLumpsOffset == null) {
-        _EntityLumpsOffset = Schema.GetOffset(0x4CBF8350E4A85021);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>>>(_EntityLumpsOffset!.Value);
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> EntityLumps {
+        get {
+            _EntityLumpsOffset = _EntityLumpsOffset ?? Schema.GetOffset(0x4CBF8350E4A85021);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>>>(_EntityLumpsOffset!.Value);
+        }
     }
-  }
 
 
 }

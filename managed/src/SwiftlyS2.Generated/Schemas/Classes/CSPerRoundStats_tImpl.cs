@@ -6,185 +6,132 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSPerRoundStats_tImpl : SchemaClass, CSPerRoundStats_t {
+internal partial class CSPerRoundStats_tImpl : SchemaClass, CSPerRoundStats_t
+{
+    public CSPerRoundStats_tImpl(nint handle) : base(handle) { }
 
-  public CSPerRoundStats_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _KillsOffset;
 
-  private static nint? _KillsOffset;
-
-  public ref int Kills {
-    get {
-      if (_KillsOffset == null) {
-        _KillsOffset = Schema.GetOffset(0xA16B85EA0E456FE5);
-      }
-      return ref _Handle.AsRef<int>(_KillsOffset!.Value);
+    public ref int Kills {
+        get {
+            _KillsOffset = _KillsOffset ?? Schema.GetOffset(0xA16B85EA0E456FE5);
+            return ref _Handle.AsRef<int>(_KillsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DeathsOffset;
+    private static nint? _DeathsOffset;
 
-  public ref int Deaths {
-    get {
-      if (_DeathsOffset == null) {
-        _DeathsOffset = Schema.GetOffset(0xA16B85EAAF18870F);
-      }
-      return ref _Handle.AsRef<int>(_DeathsOffset!.Value);
+    public ref int Deaths {
+        get {
+            _DeathsOffset = _DeathsOffset ?? Schema.GetOffset(0xA16B85EAAF18870F);
+            return ref _Handle.AsRef<int>(_DeathsOffset!.Value);
+        }
     }
-  }
-  private static nint? _AssistsOffset;
+    private static nint? _AssistsOffset;
 
-  public ref int Assists {
-    get {
-      if (_AssistsOffset == null) {
-        _AssistsOffset = Schema.GetOffset(0xA16B85EAB792DB50);
-      }
-      return ref _Handle.AsRef<int>(_AssistsOffset!.Value);
+    public ref int Assists {
+        get {
+            _AssistsOffset = _AssistsOffset ?? Schema.GetOffset(0xA16B85EAB792DB50);
+            return ref _Handle.AsRef<int>(_AssistsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamageOffset;
+    private static nint? _DamageOffset;
 
-  public ref int Damage {
-    get {
-      if (_DamageOffset == null) {
-        _DamageOffset = Schema.GetOffset(0xA16B85EA0DEE4DB5);
-      }
-      return ref _Handle.AsRef<int>(_DamageOffset!.Value);
+    public ref int Damage {
+        get {
+            _DamageOffset = _DamageOffset ?? Schema.GetOffset(0xA16B85EA0DEE4DB5);
+            return ref _Handle.AsRef<int>(_DamageOffset!.Value);
+        }
     }
-  }
-  private static nint? _EquipmentValueOffset;
+    private static nint? _EquipmentValueOffset;
 
-  public ref int EquipmentValue {
-    get {
-      if (_EquipmentValueOffset == null) {
-        _EquipmentValueOffset = Schema.GetOffset(0xA16B85EA1B2CADDD);
-      }
-      return ref _Handle.AsRef<int>(_EquipmentValueOffset!.Value);
+    public ref int EquipmentValue {
+        get {
+            _EquipmentValueOffset = _EquipmentValueOffset ?? Schema.GetOffset(0xA16B85EA1B2CADDD);
+            return ref _Handle.AsRef<int>(_EquipmentValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MoneySavedOffset;
+    private static nint? _MoneySavedOffset;
 
-  public ref int MoneySaved {
-    get {
-      if (_MoneySavedOffset == null) {
-        _MoneySavedOffset = Schema.GetOffset(0xA16B85EAC85DB77B);
-      }
-      return ref _Handle.AsRef<int>(_MoneySavedOffset!.Value);
+    public ref int MoneySaved {
+        get {
+            _MoneySavedOffset = _MoneySavedOffset ?? Schema.GetOffset(0xA16B85EAC85DB77B);
+            return ref _Handle.AsRef<int>(_MoneySavedOffset!.Value);
+        }
     }
-  }
-  private static nint? _KillRewardOffset;
+    private static nint? _KillRewardOffset;
 
-  public ref int KillReward {
-    get {
-      if (_KillRewardOffset == null) {
-        _KillRewardOffset = Schema.GetOffset(0xA16B85EA9C813A23);
-      }
-      return ref _Handle.AsRef<int>(_KillRewardOffset!.Value);
+    public ref int KillReward {
+        get {
+            _KillRewardOffset = _KillRewardOffset ?? Schema.GetOffset(0xA16B85EA9C813A23);
+            return ref _Handle.AsRef<int>(_KillRewardOffset!.Value);
+        }
     }
-  }
-  private static nint? _LiveTimeOffset;
+    private static nint? _LiveTimeOffset;
 
-  public ref int LiveTime {
-    get {
-      if (_LiveTimeOffset == null) {
-        _LiveTimeOffset = Schema.GetOffset(0xA16B85EAD956D2F7);
-      }
-      return ref _Handle.AsRef<int>(_LiveTimeOffset!.Value);
+    public ref int LiveTime {
+        get {
+            _LiveTimeOffset = _LiveTimeOffset ?? Schema.GetOffset(0xA16B85EAD956D2F7);
+            return ref _Handle.AsRef<int>(_LiveTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeadShotKillsOffset;
+    private static nint? _HeadShotKillsOffset;
 
-  public ref int HeadShotKills {
-    get {
-      if (_HeadShotKillsOffset == null) {
-        _HeadShotKillsOffset = Schema.GetOffset(0xA16B85EA2C61AFF3);
-      }
-      return ref _Handle.AsRef<int>(_HeadShotKillsOffset!.Value);
+    public ref int HeadShotKills {
+        get {
+            _HeadShotKillsOffset = _HeadShotKillsOffset ?? Schema.GetOffset(0xA16B85EA2C61AFF3);
+            return ref _Handle.AsRef<int>(_HeadShotKillsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ObjectiveOffset;
+    private static nint? _ObjectiveOffset;
 
-  public ref int Objective {
-    get {
-      if (_ObjectiveOffset == null) {
-        _ObjectiveOffset = Schema.GetOffset(0xA16B85EA14FC52D7);
-      }
-      return ref _Handle.AsRef<int>(_ObjectiveOffset!.Value);
+    public ref int Objective {
+        get {
+            _ObjectiveOffset = _ObjectiveOffset ?? Schema.GetOffset(0xA16B85EA14FC52D7);
+            return ref _Handle.AsRef<int>(_ObjectiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _CashEarnedOffset;
+    private static nint? _CashEarnedOffset;
 
-  public ref int CashEarned {
-    get {
-      if (_CashEarnedOffset == null) {
-        _CashEarnedOffset = Schema.GetOffset(0xA16B85EA8BEB3100);
-      }
-      return ref _Handle.AsRef<int>(_CashEarnedOffset!.Value);
+    public ref int CashEarned {
+        get {
+            _CashEarnedOffset = _CashEarnedOffset ?? Schema.GetOffset(0xA16B85EA8BEB3100);
+            return ref _Handle.AsRef<int>(_CashEarnedOffset!.Value);
+        }
     }
-  }
-  private static nint? _UtilityDamageOffset;
+    private static nint? _UtilityDamageOffset;
 
-  public ref int UtilityDamage {
-    get {
-      if (_UtilityDamageOffset == null) {
-        _UtilityDamageOffset = Schema.GetOffset(0xA16B85EAC91A82E5);
-      }
-      return ref _Handle.AsRef<int>(_UtilityDamageOffset!.Value);
+    public ref int UtilityDamage {
+        get {
+            _UtilityDamageOffset = _UtilityDamageOffset ?? Schema.GetOffset(0xA16B85EAC91A82E5);
+            return ref _Handle.AsRef<int>(_UtilityDamageOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnemiesFlashedOffset;
+    private static nint? _EnemiesFlashedOffset;
 
-  public ref int EnemiesFlashed {
-    get {
-      if (_EnemiesFlashedOffset == null) {
-        _EnemiesFlashedOffset = Schema.GetOffset(0xA16B85EA460AB70F);
-      }
-      return ref _Handle.AsRef<int>(_EnemiesFlashedOffset!.Value);
+    public ref int EnemiesFlashed {
+        get {
+            _EnemiesFlashedOffset = _EnemiesFlashedOffset ?? Schema.GetOffset(0xA16B85EA460AB70F);
+            return ref _Handle.AsRef<int>(_EnemiesFlashedOffset!.Value);
+        }
     }
-  }
 
-  public void KillsUpdated() {
-    Schema.Update(_Handle, 0xA16B85EA0E456FE5);
-  }
-  public void DeathsUpdated() {
-    Schema.Update(_Handle, 0xA16B85EAAF18870F);
-  }
-  public void AssistsUpdated() {
-    Schema.Update(_Handle, 0xA16B85EAB792DB50);
-  }
-  public void DamageUpdated() {
-    Schema.Update(_Handle, 0xA16B85EA0DEE4DB5);
-  }
-  public void EquipmentValueUpdated() {
-    Schema.Update(_Handle, 0xA16B85EA1B2CADDD);
-  }
-  public void MoneySavedUpdated() {
-    Schema.Update(_Handle, 0xA16B85EAC85DB77B);
-  }
-  public void KillRewardUpdated() {
-    Schema.Update(_Handle, 0xA16B85EA9C813A23);
-  }
-  public void LiveTimeUpdated() {
-    Schema.Update(_Handle, 0xA16B85EAD956D2F7);
-  }
-  public void HeadShotKillsUpdated() {
-    Schema.Update(_Handle, 0xA16B85EA2C61AFF3);
-  }
-  public void ObjectiveUpdated() {
-    Schema.Update(_Handle, 0xA16B85EA14FC52D7);
-  }
-  public void CashEarnedUpdated() {
-    Schema.Update(_Handle, 0xA16B85EA8BEB3100);
-  }
-  public void UtilityDamageUpdated() {
-    Schema.Update(_Handle, 0xA16B85EAC91A82E5);
-  }
-  public void EnemiesFlashedUpdated() {
-    Schema.Update(_Handle, 0xA16B85EA460AB70F);
-  }
+    public void KillsUpdated() => Schema.Update(_Handle, 0xA16B85EA0E456FE5);
+    public void DeathsUpdated() => Schema.Update(_Handle, 0xA16B85EAAF18870F);
+    public void AssistsUpdated() => Schema.Update(_Handle, 0xA16B85EAB792DB50);
+    public void DamageUpdated() => Schema.Update(_Handle, 0xA16B85EA0DEE4DB5);
+    public void EquipmentValueUpdated() => Schema.Update(_Handle, 0xA16B85EA1B2CADDD);
+    public void MoneySavedUpdated() => Schema.Update(_Handle, 0xA16B85EAC85DB77B);
+    public void KillRewardUpdated() => Schema.Update(_Handle, 0xA16B85EA9C813A23);
+    public void LiveTimeUpdated() => Schema.Update(_Handle, 0xA16B85EAD956D2F7);
+    public void HeadShotKillsUpdated() => Schema.Update(_Handle, 0xA16B85EA2C61AFF3);
+    public void ObjectiveUpdated() => Schema.Update(_Handle, 0xA16B85EA14FC52D7);
+    public void CashEarnedUpdated() => Schema.Update(_Handle, 0xA16B85EA8BEB3100);
+    public void UtilityDamageUpdated() => Schema.Update(_Handle, 0xA16B85EAC91A82E5);
+    public void EnemiesFlashedUpdated() => Schema.Update(_Handle, 0xA16B85EA460AB70F);
 }

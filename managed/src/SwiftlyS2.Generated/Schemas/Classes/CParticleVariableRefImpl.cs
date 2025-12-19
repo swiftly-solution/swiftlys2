@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParticleVariableRefImpl : SchemaClass, CParticleVariableRef {
+internal partial class CParticleVariableRefImpl : SchemaClass, CParticleVariableRef
+{
+    public CParticleVariableRefImpl(nint handle) : base(handle) { }
 
-  public CParticleVariableRefImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VariableNameOffset;
 
-  private static nint? _VariableNameOffset;
-
-  public SchemaUntypedField VariableName {
-    get {
-      if (_VariableNameOffset == null) {
-        _VariableNameOffset = Schema.GetOffset(0x4FB747D9D3D609A6);
-      }
-      return new SchemaUntypedField(_Handle + _VariableNameOffset!.Value);
+    public SchemaUntypedField VariableName {
+        get {
+            _VariableNameOffset = _VariableNameOffset ?? Schema.GetOffset(0x4FB747D9D3D609A6);
+            return new SchemaUntypedField(_Handle + _VariableNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _VariableTypeOffset;
+    private static nint? _VariableTypeOffset;
 
-  public SchemaUntypedField VariableType {
-    get {
-      if (_VariableTypeOffset == null) {
-        _VariableTypeOffset = Schema.GetOffset(0x4FB747D9954B670D);
-      }
-      return new SchemaUntypedField(_Handle + _VariableTypeOffset!.Value);
+    public SchemaUntypedField VariableType {
+        get {
+            _VariableTypeOffset = _VariableTypeOffset ?? Schema.GetOffset(0x4FB747D9954B670D);
+            return new SchemaUntypedField(_Handle + _VariableTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

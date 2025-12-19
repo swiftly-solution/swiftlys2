@@ -6,60 +6,51 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class constraint_breakableparams_tImpl : SchemaClass, constraint_breakableparams_t {
+internal partial class constraint_breakableparams_tImpl : SchemaClass, constraint_breakableparams_t
+{
+    public constraint_breakableparams_tImpl(nint handle) : base(handle) { }
 
-  public constraint_breakableparams_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StrengthOffset;
 
-  private static nint? _StrengthOffset;
-
-  public ref float Strength {
-    get {
-      if (_StrengthOffset == null) {
-        _StrengthOffset = Schema.GetOffset(0xEDA0F377E07A18B0);
-      }
-      return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+    public ref float Strength {
+        get {
+            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0xEDA0F377E07A18B0);
+            return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceLimitOffset;
+    private static nint? _ForceLimitOffset;
 
-  public ref float ForceLimit {
-    get {
-      if (_ForceLimitOffset == null) {
-        _ForceLimitOffset = Schema.GetOffset(0xEDA0F3777F2D0897);
-      }
-      return ref _Handle.AsRef<float>(_ForceLimitOffset!.Value);
+    public ref float ForceLimit {
+        get {
+            _ForceLimitOffset = _ForceLimitOffset ?? Schema.GetOffset(0xEDA0F3777F2D0897);
+            return ref _Handle.AsRef<float>(_ForceLimitOffset!.Value);
+        }
     }
-  }
-  private static nint? _TorqueLimitOffset;
+    private static nint? _TorqueLimitOffset;
 
-  public ref float TorqueLimit {
-    get {
-      if (_TorqueLimitOffset == null) {
-        _TorqueLimitOffset = Schema.GetOffset(0xEDA0F37777EB0DDE);
-      }
-      return ref _Handle.AsRef<float>(_TorqueLimitOffset!.Value);
+    public ref float TorqueLimit {
+        get {
+            _TorqueLimitOffset = _TorqueLimitOffset ?? Schema.GetOffset(0xEDA0F37777EB0DDE);
+            return ref _Handle.AsRef<float>(_TorqueLimitOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<float> BodyMassScale {
-    get => new SchemaFixedArray<float>(_Handle, 0xEDA0F3775BED8FB5, 2, 4, 4);
-  }
-  private static nint? _IsActiveOffset;
+    public ISchemaFixedArray<float> BodyMassScale {
+        get => new SchemaFixedArray<float>(_Handle, 0xEDA0F3775BED8FB5, 2, 4, 4);
+    }
+    private static nint? _IsActiveOffset;
 
-  public ref bool IsActive {
-    get {
-      if (_IsActiveOffset == null) {
-        _IsActiveOffset = Schema.GetOffset(0xEDA0F3773D94F45F);
-      }
-      return ref _Handle.AsRef<bool>(_IsActiveOffset!.Value);
+    public ref bool IsActive {
+        get {
+            _IsActiveOffset = _IsActiveOffset ?? Schema.GetOffset(0xEDA0F3773D94F45F);
+            return ref _Handle.AsRef<bool>(_IsActiveOffset!.Value);
+        }
     }
-  }
 
 
 }

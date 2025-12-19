@@ -6,177 +6,144 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderOmni2LightImpl : CParticleFunctionRendererImpl, C_OP_RenderOmni2Light {
+internal partial class C_OP_RenderOmni2LightImpl : CParticleFunctionRendererImpl, C_OP_RenderOmni2Light
+{
+    public C_OP_RenderOmni2LightImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderOmni2LightImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LightTypeOffset;
 
-  private static nint? _LightTypeOffset;
-
-  public ref ParticleOmni2LightTypeChoiceList_t LightType {
-    get {
-      if (_LightTypeOffset == null) {
-        _LightTypeOffset = Schema.GetOffset(0xDE9AF4EE18C7B4A3);
-      }
-      return ref _Handle.AsRef<ParticleOmni2LightTypeChoiceList_t>(_LightTypeOffset!.Value);
+    public ref ParticleOmni2LightTypeChoiceList_t LightType {
+        get {
+            _LightTypeOffset = _LightTypeOffset ?? Schema.GetOffset(0xDE9AF4EE18C7B4A3);
+            return ref _Handle.AsRef<ParticleOmni2LightTypeChoiceList_t>(_LightTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorBlendOffset;
+    private static nint? _ColorBlendOffset;
 
-  public CParticleCollectionVecInput ColorBlend {
-    get {
-      if (_ColorBlendOffset == null) {
-        _ColorBlendOffset = Schema.GetOffset(0xDE9AF4EE740E9A5F);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _ColorBlendOffset!.Value);
+    public CParticleCollectionVecInput ColorBlend {
+        get {
+            _ColorBlendOffset = _ColorBlendOffset ?? Schema.GetOffset(0xDE9AF4EE740E9A5F);
+            return new CParticleCollectionVecInputImpl(_Handle + _ColorBlendOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorBlendTypeOffset;
+    private static nint? _ColorBlendTypeOffset;
 
-  public ref ParticleColorBlendType_t ColorBlendType {
-    get {
-      if (_ColorBlendTypeOffset == null) {
-        _ColorBlendTypeOffset = Schema.GetOffset(0xDE9AF4EEDBC6EFCF);
-      }
-      return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+    public ref ParticleColorBlendType_t ColorBlendType {
+        get {
+            _ColorBlendTypeOffset = _ColorBlendTypeOffset ?? Schema.GetOffset(0xDE9AF4EEDBC6EFCF);
+            return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessUnitOffset;
+    private static nint? _BrightnessUnitOffset;
 
-  public ref ParticleLightUnitChoiceList_t BrightnessUnit {
-    get {
-      if (_BrightnessUnitOffset == null) {
-        _BrightnessUnitOffset = Schema.GetOffset(0xDE9AF4EE2A6E4030);
-      }
-      return ref _Handle.AsRef<ParticleLightUnitChoiceList_t>(_BrightnessUnitOffset!.Value);
+    public ref ParticleLightUnitChoiceList_t BrightnessUnit {
+        get {
+            _BrightnessUnitOffset = _BrightnessUnitOffset ?? Schema.GetOffset(0xDE9AF4EE2A6E4030);
+            return ref _Handle.AsRef<ParticleLightUnitChoiceList_t>(_BrightnessUnitOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessLumensOffset;
+    private static nint? _BrightnessLumensOffset;
 
-  public CPerParticleFloatInput BrightnessLumens {
-    get {
-      if (_BrightnessLumensOffset == null) {
-        _BrightnessLumensOffset = Schema.GetOffset(0xDE9AF4EEC542F6EA);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _BrightnessLumensOffset!.Value);
+    public CPerParticleFloatInput BrightnessLumens {
+        get {
+            _BrightnessLumensOffset = _BrightnessLumensOffset ?? Schema.GetOffset(0xDE9AF4EEC542F6EA);
+            return new CPerParticleFloatInputImpl(_Handle + _BrightnessLumensOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessCandelasOffset;
+    private static nint? _BrightnessCandelasOffset;
 
-  public CPerParticleFloatInput BrightnessCandelas {
-    get {
-      if (_BrightnessCandelasOffset == null) {
-        _BrightnessCandelasOffset = Schema.GetOffset(0xDE9AF4EEE3A4688B);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _BrightnessCandelasOffset!.Value);
+    public CPerParticleFloatInput BrightnessCandelas {
+        get {
+            _BrightnessCandelasOffset = _BrightnessCandelasOffset ?? Schema.GetOffset(0xDE9AF4EEE3A4688B);
+            return new CPerParticleFloatInputImpl(_Handle + _BrightnessCandelasOffset!.Value);
+        }
     }
-  }
-  private static nint? _CastShadowsOffset;
+    private static nint? _CastShadowsOffset;
 
-  public ref bool CastShadows {
-    get {
-      if (_CastShadowsOffset == null) {
-        _CastShadowsOffset = Schema.GetOffset(0xDE9AF4EE36113167);
-      }
-      return ref _Handle.AsRef<bool>(_CastShadowsOffset!.Value);
+    public ref bool CastShadows {
+        get {
+            _CastShadowsOffset = _CastShadowsOffset ?? Schema.GetOffset(0xDE9AF4EE36113167);
+            return ref _Handle.AsRef<bool>(_CastShadowsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogOffset;
+    private static nint? _FogOffset;
 
-  public ref bool Fog {
-    get {
-      if (_FogOffset == null) {
-        _FogOffset = Schema.GetOffset(0xDE9AF4EECA77E01F);
-      }
-      return ref _Handle.AsRef<bool>(_FogOffset!.Value);
+    public ref bool Fog {
+        get {
+            _FogOffset = _FogOffset ?? Schema.GetOffset(0xDE9AF4EECA77E01F);
+            return ref _Handle.AsRef<bool>(_FogOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogScaleOffset;
+    private static nint? _FogScaleOffset;
 
-  public CPerParticleFloatInput FogScale {
-    get {
-      if (_FogScaleOffset == null) {
-        _FogScaleOffset = Schema.GetOffset(0xDE9AF4EECF999E05);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _FogScaleOffset!.Value);
+    public CPerParticleFloatInput FogScale {
+        get {
+            _FogScaleOffset = _FogScaleOffset ?? Schema.GetOffset(0xDE9AF4EECF999E05);
+            return new CPerParticleFloatInputImpl(_Handle + _FogScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _LuminaireRadiusOffset;
+    private static nint? _LuminaireRadiusOffset;
 
-  public CPerParticleFloatInput LuminaireRadius {
-    get {
-      if (_LuminaireRadiusOffset == null) {
-        _LuminaireRadiusOffset = Schema.GetOffset(0xDE9AF4EECB5A5B89);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _LuminaireRadiusOffset!.Value);
+    public CPerParticleFloatInput LuminaireRadius {
+        get {
+            _LuminaireRadiusOffset = _LuminaireRadiusOffset ?? Schema.GetOffset(0xDE9AF4EECB5A5B89);
+            return new CPerParticleFloatInputImpl(_Handle + _LuminaireRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkirtOffset;
+    private static nint? _SkirtOffset;
 
-  public CPerParticleFloatInput Skirt {
-    get {
-      if (_SkirtOffset == null) {
-        _SkirtOffset = Schema.GetOffset(0xDE9AF4EEEAFB6D2A);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _SkirtOffset!.Value);
+    public CPerParticleFloatInput Skirt {
+        get {
+            _SkirtOffset = _SkirtOffset ?? Schema.GetOffset(0xDE9AF4EEEAFB6D2A);
+            return new CPerParticleFloatInputImpl(_Handle + _SkirtOffset!.Value);
+        }
     }
-  }
-  private static nint? _RangeOffset;
+    private static nint? _RangeOffset;
 
-  public CPerParticleFloatInput Range {
-    get {
-      if (_RangeOffset == null) {
-        _RangeOffset = Schema.GetOffset(0xDE9AF4EE3FC92844);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RangeOffset!.Value);
+    public CPerParticleFloatInput Range {
+        get {
+            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0xDE9AF4EE3FC92844);
+            return new CPerParticleFloatInputImpl(_Handle + _RangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _InnerConeAngleOffset;
+    private static nint? _InnerConeAngleOffset;
 
-  public CPerParticleFloatInput InnerConeAngle {
-    get {
-      if (_InnerConeAngleOffset == null) {
-        _InnerConeAngleOffset = Schema.GetOffset(0xDE9AF4EE16875B1D);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InnerConeAngleOffset!.Value);
+    public CPerParticleFloatInput InnerConeAngle {
+        get {
+            _InnerConeAngleOffset = _InnerConeAngleOffset ?? Schema.GetOffset(0xDE9AF4EE16875B1D);
+            return new CPerParticleFloatInputImpl(_Handle + _InnerConeAngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OuterConeAngleOffset;
+    private static nint? _OuterConeAngleOffset;
 
-  public CPerParticleFloatInput OuterConeAngle {
-    get {
-      if (_OuterConeAngleOffset == null) {
-        _OuterConeAngleOffset = Schema.GetOffset(0xDE9AF4EE90EF9464);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _OuterConeAngleOffset!.Value);
+    public CPerParticleFloatInput OuterConeAngle {
+        get {
+            _OuterConeAngleOffset = _OuterConeAngleOffset ?? Schema.GetOffset(0xDE9AF4EE90EF9464);
+            return new CPerParticleFloatInputImpl(_Handle + _OuterConeAngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _LightCookieOffset;
+    private static nint? _LightCookieOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie {
-    get {
-      if (_LightCookieOffset == null) {
-        _LightCookieOffset = Schema.GetOffset(0xDE9AF4EE0609D103);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_LightCookieOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie {
+        get {
+            _LightCookieOffset = _LightCookieOffset ?? Schema.GetOffset(0xDE9AF4EE0609D103);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_LightCookieOffset!.Value);
+        }
     }
-  }
-  private static nint? _SphericalCookieOffset;
+    private static nint? _SphericalCookieOffset;
 
-  public ref bool SphericalCookie {
-    get {
-      if (_SphericalCookieOffset == null) {
-        _SphericalCookieOffset = Schema.GetOffset(0xDE9AF4EE6C822B6E);
-      }
-      return ref _Handle.AsRef<bool>(_SphericalCookieOffset!.Value);
+    public ref bool SphericalCookie {
+        get {
+            _SphericalCookieOffset = _SphericalCookieOffset ?? Schema.GetOffset(0xDE9AF4EE6C822B6E);
+            return ref _Handle.AsRef<bool>(_SphericalCookieOffset!.Value);
+        }
     }
-  }
 
 
 }

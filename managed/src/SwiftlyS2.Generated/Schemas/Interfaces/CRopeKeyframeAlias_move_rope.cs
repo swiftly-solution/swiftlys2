@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRopeKeyframeAlias_move_rope : CRopeKeyframe, ISchemaClass<CRopeKeyframeAlias_move_rope> {
-
-  static CRopeKeyframeAlias_move_rope ISchemaClass<CRopeKeyframeAlias_move_rope>.From(nint handle) => new CRopeKeyframeAlias_move_ropeImpl(handle);
-  static int ISchemaClass<CRopeKeyframeAlias_move_rope>.Size => 2096;
-  static string? ISchemaClass<CRopeKeyframeAlias_move_rope>.ClassName => null;
+public partial interface CRopeKeyframeAlias_move_rope : CRopeKeyframe, ISchemaClass<CRopeKeyframeAlias_move_rope>
+{
+    static CRopeKeyframeAlias_move_rope ISchemaClass<CRopeKeyframeAlias_move_rope>.From(nint handle) => new CRopeKeyframeAlias_move_ropeImpl(handle);
+    static int ISchemaClass<CRopeKeyframeAlias_move_rope>.Size => 2096;
+    static string? ISchemaClass<CRopeKeyframeAlias_move_rope>.ClassName => null;
 
 
 

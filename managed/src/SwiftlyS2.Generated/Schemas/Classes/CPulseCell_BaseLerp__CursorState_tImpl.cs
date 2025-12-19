@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_BaseLerp__CursorState_tImpl : SchemaClass, CPulseCell_BaseLerp__CursorState_t {
+internal partial class CPulseCell_BaseLerp__CursorState_tImpl : SchemaClass, CPulseCell_BaseLerp__CursorState_t
+{
+    public CPulseCell_BaseLerp__CursorState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_BaseLerp__CursorState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartTimeOffset;
 
-  private static nint? _StartTimeOffset;
-
-  public GameTime_t StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x1FAAE76897B5FA8E);
-      }
-      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    public GameTime_t StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x1FAAE76897B5FA8E);
+            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndTimeOffset;
+    private static nint? _EndTimeOffset;
 
-  public GameTime_t EndTime {
-    get {
-      if (_EndTimeOffset == null) {
-        _EndTimeOffset = Schema.GetOffset(0x1FAAE7687AA8F56B);
-      }
-      return new GameTime_tImpl(_Handle + _EndTimeOffset!.Value);
+    public GameTime_t EndTime {
+        get {
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0x1FAAE7687AA8F56B);
+            return new GameTime_tImpl(_Handle + _EndTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

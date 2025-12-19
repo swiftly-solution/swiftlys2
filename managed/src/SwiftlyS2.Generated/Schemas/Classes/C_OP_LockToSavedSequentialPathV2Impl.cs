@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_LockToSavedSequentialPathV2Impl : CParticleFunctionOperatorImpl, C_OP_LockToSavedSequentialPathV2 {
+internal partial class C_OP_LockToSavedSequentialPathV2Impl : CParticleFunctionOperatorImpl, C_OP_LockToSavedSequentialPathV2
+{
+    public C_OP_LockToSavedSequentialPathV2Impl(nint handle) : base(handle) { }
 
-  public C_OP_LockToSavedSequentialPathV2Impl(nint handle) : base(handle) {
-  }
+    private static nint? _FadeStartOffset;
 
-  private static nint? _FadeStartOffset;
-
-  public ref float FadeStart {
-    get {
-      if (_FadeStartOffset == null) {
-        _FadeStartOffset = Schema.GetOffset(0x817A0CEE1A81343);
-      }
-      return ref _Handle.AsRef<float>(_FadeStartOffset!.Value);
+    public ref float FadeStart {
+        get {
+            _FadeStartOffset = _FadeStartOffset ?? Schema.GetOffset(0x817A0CEE1A81343);
+            return ref _Handle.AsRef<float>(_FadeStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeEndOffset;
+    private static nint? _FadeEndOffset;
 
-  public ref float FadeEnd {
-    get {
-      if (_FadeEndOffset == null) {
-        _FadeEndOffset = Schema.GetOffset(0x817A0CEBE7F4636);
-      }
-      return ref _Handle.AsRef<float>(_FadeEndOffset!.Value);
+    public ref float FadeEnd {
+        get {
+            _FadeEndOffset = _FadeEndOffset ?? Schema.GetOffset(0x817A0CEBE7F4636);
+            return ref _Handle.AsRef<float>(_FadeEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPPairsOffset;
+    private static nint? _CPPairsOffset;
 
-  public ref bool CPPairs {
-    get {
-      if (_CPPairsOffset == null) {
-        _CPPairsOffset = Schema.GetOffset(0x817A0CEA5D36D0F);
-      }
-      return ref _Handle.AsRef<bool>(_CPPairsOffset!.Value);
+    public ref bool CPPairs {
+        get {
+            _CPPairsOffset = _CPPairsOffset ?? Schema.GetOffset(0x817A0CEA5D36D0F);
+            return ref _Handle.AsRef<bool>(_CPPairsOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathParamsOffset;
+    private static nint? _PathParamsOffset;
 
-  public CPathParameters PathParams {
-    get {
-      if (_PathParamsOffset == null) {
-        _PathParamsOffset = Schema.GetOffset(0x817A0CE3C10092C);
-      }
-      return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+    public CPathParameters PathParams {
+        get {
+            _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0x817A0CE3C10092C);
+            return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTakeDamageInfoAPI : ISchemaClass<CTakeDamageInfoAPI> {
-
-  static CTakeDamageInfoAPI ISchemaClass<CTakeDamageInfoAPI>.From(nint handle) => new CTakeDamageInfoAPIImpl(handle);
-  static int ISchemaClass<CTakeDamageInfoAPI>.Size => 8;
-  static string? ISchemaClass<CTakeDamageInfoAPI>.ClassName => null;
+public partial interface CTakeDamageInfoAPI : ISchemaClass<CTakeDamageInfoAPI>
+{
+    static CTakeDamageInfoAPI ISchemaClass<CTakeDamageInfoAPI>.From(nint handle) => new CTakeDamageInfoAPIImpl(handle);
+    static int ISchemaClass<CTakeDamageInfoAPI>.Size => 8;
+    static string? ISchemaClass<CTakeDamageInfoAPI>.ClassName => null;
 
 
 

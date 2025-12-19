@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EntityEffects_t : ushort {
-
+public enum EntityEffects_t : ushort
+{
  DEPRICATED_EF_NOINTERP = 8,
 
  EF_NOSHADOW = 16,

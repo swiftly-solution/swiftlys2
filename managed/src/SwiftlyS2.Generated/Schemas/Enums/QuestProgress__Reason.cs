@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum QuestProgress__Reason : uint {
-
+public enum QuestProgress__Reason : uint
+{
  QUEST_NONINITIALIZED = 0,
 
  QUEST_OK = 1,

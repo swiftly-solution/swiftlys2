@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomRadiusImpl : CParticleFunctionInitializerImpl, C_INIT_RandomRadius {
+internal partial class C_INIT_RandomRadiusImpl : CParticleFunctionInitializerImpl, C_INIT_RandomRadius
+{
+    public C_INIT_RandomRadiusImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RandomRadiusImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusMinOffset;
 
-  private static nint? _RadiusMinOffset;
-
-  public ref float RadiusMin {
-    get {
-      if (_RadiusMinOffset == null) {
-        _RadiusMinOffset = Schema.GetOffset(0xE9419C037AEB467F);
-      }
-      return ref _Handle.AsRef<float>(_RadiusMinOffset!.Value);
+    public ref float RadiusMin {
+        get {
+            _RadiusMinOffset = _RadiusMinOffset ?? Schema.GetOffset(0xE9419C037AEB467F);
+            return ref _Handle.AsRef<float>(_RadiusMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusMaxOffset;
+    private static nint? _RadiusMaxOffset;
 
-  public ref float RadiusMax {
-    get {
-      if (_RadiusMaxOffset == null) {
-        _RadiusMaxOffset = Schema.GetOffset(0xE9419C0388D641D1);
-      }
-      return ref _Handle.AsRef<float>(_RadiusMaxOffset!.Value);
+    public ref float RadiusMax {
+        get {
+            _RadiusMaxOffset = _RadiusMaxOffset ?? Schema.GetOffset(0xE9419C0388D641D1);
+            return ref _Handle.AsRef<float>(_RadiusMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusRandExponentOffset;
+    private static nint? _RadiusRandExponentOffset;
 
-  public ref float RadiusRandExponent {
-    get {
-      if (_RadiusRandExponentOffset == null) {
-        _RadiusRandExponentOffset = Schema.GetOffset(0xE9419C03D4637A31);
-      }
-      return ref _Handle.AsRef<float>(_RadiusRandExponentOffset!.Value);
+    public ref float RadiusRandExponent {
+        get {
+            _RadiusRandExponentOffset = _RadiusRandExponentOffset ?? Schema.GetOffset(0xE9419C03D4637A31);
+            return ref _Handle.AsRef<float>(_RadiusRandExponentOffset!.Value);
+        }
     }
-  }
 
 
 }

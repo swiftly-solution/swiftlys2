@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPropDoorRotatingBreakableImpl : CPropDoorRotatingImpl, CPropDoorRotatingBreakable {
+internal partial class CPropDoorRotatingBreakableImpl : CPropDoorRotatingImpl, CPropDoorRotatingBreakable
+{
+    public CPropDoorRotatingBreakableImpl(nint handle) : base(handle) { }
 
-  public CPropDoorRotatingBreakableImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BreakableOffset;
 
-  private static nint? _BreakableOffset;
-
-  public ref bool Breakable {
-    get {
-      if (_BreakableOffset == null) {
-        _BreakableOffset = Schema.GetOffset(0xCB925ACA549B5310);
-      }
-      return ref _Handle.AsRef<bool>(_BreakableOffset!.Value);
+    public ref bool Breakable {
+        get {
+            _BreakableOffset = _BreakableOffset ?? Schema.GetOffset(0xCB925ACA549B5310);
+            return ref _Handle.AsRef<bool>(_BreakableOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsAbleToCloseAreaPortalsOffset;
+    private static nint? _IsAbleToCloseAreaPortalsOffset;
 
-  public ref bool IsAbleToCloseAreaPortals {
-    get {
-      if (_IsAbleToCloseAreaPortalsOffset == null) {
-        _IsAbleToCloseAreaPortalsOffset = Schema.GetOffset(0xCB925ACAAC381C84);
-      }
-      return ref _Handle.AsRef<bool>(_IsAbleToCloseAreaPortalsOffset!.Value);
+    public ref bool IsAbleToCloseAreaPortals {
+        get {
+            _IsAbleToCloseAreaPortalsOffset = _IsAbleToCloseAreaPortalsOffset ?? Schema.GetOffset(0xCB925ACAAC381C84);
+            return ref _Handle.AsRef<bool>(_IsAbleToCloseAreaPortalsOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurrentDamageStateOffset;
+    private static nint? _CurrentDamageStateOffset;
 
-  public ref int CurrentDamageState {
-    get {
-      if (_CurrentDamageStateOffset == null) {
-        _CurrentDamageStateOffset = Schema.GetOffset(0xCB925ACA29591458);
-      }
-      return ref _Handle.AsRef<int>(_CurrentDamageStateOffset!.Value);
+    public ref int CurrentDamageState {
+        get {
+            _CurrentDamageStateOffset = _CurrentDamageStateOffset ?? Schema.GetOffset(0xCB925ACA29591458);
+            return ref _Handle.AsRef<int>(_CurrentDamageStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamageStatesOffset;
+    private static nint? _DamageStatesOffset;
 
-  public ref CUtlVector<SchemaUntypedField> DamageStates {
-    get {
-      if (_DamageStatesOffset == null) {
-        _DamageStatesOffset = Schema.GetOffset(0xCB925ACA4FD16F52);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_DamageStatesOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> DamageStates {
+        get {
+            _DamageStatesOffset = _DamageStatesOffset ?? Schema.GetOffset(0xCB925ACA4FD16F52);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_DamageStatesOffset!.Value);
+        }
     }
-  }
 
 
 }

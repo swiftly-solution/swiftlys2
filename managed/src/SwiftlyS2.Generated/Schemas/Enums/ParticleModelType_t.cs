@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleModelType_t : uint {
-
+public enum ParticleModelType_t : uint
+{
  PM_TYPE_INVALID = 0,
 
  PM_TYPE_NAMED_VALUE_MODEL = 1,

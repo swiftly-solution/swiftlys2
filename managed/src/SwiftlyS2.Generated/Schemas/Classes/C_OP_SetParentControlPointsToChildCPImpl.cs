@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetParentControlPointsToChildCPImpl : CParticleFunctionPreEmissionImpl, C_OP_SetParentControlPointsToChildCP {
+internal partial class C_OP_SetParentControlPointsToChildCPImpl : CParticleFunctionPreEmissionImpl, C_OP_SetParentControlPointsToChildCP
+{
+    public C_OP_SetParentControlPointsToChildCPImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetParentControlPointsToChildCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChildGroupIDOffset;
 
-  private static nint? _ChildGroupIDOffset;
-
-  public ref int ChildGroupID {
-    get {
-      if (_ChildGroupIDOffset == null) {
-        _ChildGroupIDOffset = Schema.GetOffset(0x9A9F20B7E3F3C965);
-      }
-      return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+    public ref int ChildGroupID {
+        get {
+            _ChildGroupIDOffset = _ChildGroupIDOffset ?? Schema.GetOffset(0x9A9F20B7E3F3C965);
+            return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChildControlPointOffset;
+    private static nint? _ChildControlPointOffset;
 
-  public ref int ChildControlPoint {
-    get {
-      if (_ChildControlPointOffset == null) {
-        _ChildControlPointOffset = Schema.GetOffset(0x9A9F20B78DDB3CFC);
-      }
-      return ref _Handle.AsRef<int>(_ChildControlPointOffset!.Value);
+    public ref int ChildControlPoint {
+        get {
+            _ChildControlPointOffset = _ChildControlPointOffset ?? Schema.GetOffset(0x9A9F20B78DDB3CFC);
+            return ref _Handle.AsRef<int>(_ChildControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumControlPointsOffset;
+    private static nint? _NumControlPointsOffset;
 
-  public ref int NumControlPoints {
-    get {
-      if (_NumControlPointsOffset == null) {
-        _NumControlPointsOffset = Schema.GetOffset(0x9A9F20B7551EBC4F);
-      }
-      return ref _Handle.AsRef<int>(_NumControlPointsOffset!.Value);
+    public ref int NumControlPoints {
+        get {
+            _NumControlPointsOffset = _NumControlPointsOffset ?? Schema.GetOffset(0x9A9F20B7551EBC4F);
+            return ref _Handle.AsRef<int>(_NumControlPointsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FirstSourcePointOffset;
+    private static nint? _FirstSourcePointOffset;
 
-  public ref int FirstSourcePoint {
-    get {
-      if (_FirstSourcePointOffset == null) {
-        _FirstSourcePointOffset = Schema.GetOffset(0x9A9F20B79D7DC18E);
-      }
-      return ref _Handle.AsRef<int>(_FirstSourcePointOffset!.Value);
+    public ref int FirstSourcePoint {
+        get {
+            _FirstSourcePointOffset = _FirstSourcePointOffset ?? Schema.GetOffset(0x9A9F20B79D7DC18E);
+            return ref _Handle.AsRef<int>(_FirstSourcePointOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetOrientationOffset;
+    private static nint? _SetOrientationOffset;
 
-  public ref bool SetOrientation {
-    get {
-      if (_SetOrientationOffset == null) {
-        _SetOrientationOffset = Schema.GetOffset(0x9A9F20B7E1390E37);
-      }
-      return ref _Handle.AsRef<bool>(_SetOrientationOffset!.Value);
+    public ref bool SetOrientation {
+        get {
+            _SetOrientationOffset = _SetOrientationOffset ?? Schema.GetOffset(0x9A9F20B7E1390E37);
+            return ref _Handle.AsRef<bool>(_SetOrientationOffset!.Value);
+        }
     }
-  }
 
 
 }

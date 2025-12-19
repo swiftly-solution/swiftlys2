@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VertexPositionColor_tImpl : SchemaClass, VertexPositionColor_t {
+internal partial class VertexPositionColor_tImpl : SchemaClass, VertexPositionColor_t
+{
+    public VertexPositionColor_tImpl(nint handle) : base(handle) { }
 
-  public VertexPositionColor_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PositionOffset;
 
-  private static nint? _PositionOffset;
-
-  public ref Vector Position {
-    get {
-      if (_PositionOffset == null) {
-        _PositionOffset = Schema.GetOffset(0x9E531188BD6A6C9E);
-      }
-      return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
+    public ref Vector Position {
+        get {
+            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0x9E531188BD6A6C9E);
+            return ref _Handle.AsRef<Vector>(_PositionOffset!.Value);
+        }
     }
-  }
 
 
 }

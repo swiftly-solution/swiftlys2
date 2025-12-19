@@ -6,47 +6,39 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFilterMultipleImpl : CBaseFilterImpl, CFilterMultiple {
+internal partial class CFilterMultipleImpl : CBaseFilterImpl, CFilterMultiple
+{
+    public CFilterMultipleImpl(nint handle) : base(handle) { }
 
-  public CFilterMultipleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FilterTypeOffset;
 
-  private static nint? _FilterTypeOffset;
-
-  public ref filter_t FilterType {
-    get {
-      if (_FilterTypeOffset == null) {
-        _FilterTypeOffset = Schema.GetOffset(0x6EA0578071861EDB);
-      }
-      return ref _Handle.AsRef<filter_t>(_FilterTypeOffset!.Value);
+    public ref filter_t FilterType {
+        get {
+            _FilterTypeOffset = _FilterTypeOffset ?? Schema.GetOffset(0x6EA0578071861EDB);
+            return ref _Handle.AsRef<filter_t>(_FilterTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FilterNameOffset;
+    private static nint? _FilterNameOffset;
 
-  public string FilterName {
-    get {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0x6EA0578009C86445);
-      }
-      var ptr = _Handle.Read<nint>(_FilterNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public string FilterName {
+        get {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x6EA0578009C86445);
+            return Schema.GetString(_Handle.Read<nint>(_FilterNameOffset!.Value));
+        }
+        set {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x6EA0578009C86445);
+            Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
+        }
+    } 
+    public ISchemaFixedArray<CHandle<CBaseEntity>> Filter {
+        get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x6EA0578045D9E0B1, 10, 4, 4);
     }
-    set {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0x6EA0578009C86445);
-      }
-      Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
-    }
-  } 
-  public ISchemaFixedArray<CHandle<CBaseEntity>> Filter {
-    get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x6EA0578045D9E0B1, 10, 4, 4);
-  }
 
 
 }

@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSmoothFuncImpl : SchemaClass, CSmoothFunc {
+internal partial class CSmoothFuncImpl : SchemaClass, CSmoothFunc
+{
+    public CSmoothFuncImpl(nint handle) : base(handle) { }
 
-  public CSmoothFuncImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SmoothAmplitudeOffset;
 
-  private static nint? _SmoothAmplitudeOffset;
-
-  public ref float SmoothAmplitude {
-    get {
-      if (_SmoothAmplitudeOffset == null) {
-        _SmoothAmplitudeOffset = Schema.GetOffset(0x4C3907DAAB831D3A);
-      }
-      return ref _Handle.AsRef<float>(_SmoothAmplitudeOffset!.Value);
+    public ref float SmoothAmplitude {
+        get {
+            _SmoothAmplitudeOffset = _SmoothAmplitudeOffset ?? Schema.GetOffset(0x4C3907DAAB831D3A);
+            return ref _Handle.AsRef<float>(_SmoothAmplitudeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SmoothBiasOffset;
+    private static nint? _SmoothBiasOffset;
 
-  public ref float SmoothBias {
-    get {
-      if (_SmoothBiasOffset == null) {
-        _SmoothBiasOffset = Schema.GetOffset(0x4C3907DA8DF7120C);
-      }
-      return ref _Handle.AsRef<float>(_SmoothBiasOffset!.Value);
+    public ref float SmoothBias {
+        get {
+            _SmoothBiasOffset = _SmoothBiasOffset ?? Schema.GetOffset(0x4C3907DA8DF7120C);
+            return ref _Handle.AsRef<float>(_SmoothBiasOffset!.Value);
+        }
     }
-  }
-  private static nint? _SmoothDurationOffset;
+    private static nint? _SmoothDurationOffset;
 
-  public ref float SmoothDuration {
-    get {
-      if (_SmoothDurationOffset == null) {
-        _SmoothDurationOffset = Schema.GetOffset(0x4C3907DA62F4C0D5);
-      }
-      return ref _Handle.AsRef<float>(_SmoothDurationOffset!.Value);
+    public ref float SmoothDuration {
+        get {
+            _SmoothDurationOffset = _SmoothDurationOffset ?? Schema.GetOffset(0x4C3907DA62F4C0D5);
+            return ref _Handle.AsRef<float>(_SmoothDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _SmoothRemainingTimeOffset;
+    private static nint? _SmoothRemainingTimeOffset;
 
-  public ref float SmoothRemainingTime {
-    get {
-      if (_SmoothRemainingTimeOffset == null) {
-        _SmoothRemainingTimeOffset = Schema.GetOffset(0x4C3907DAB4D54372);
-      }
-      return ref _Handle.AsRef<float>(_SmoothRemainingTimeOffset!.Value);
+    public ref float SmoothRemainingTime {
+        get {
+            _SmoothRemainingTimeOffset = _SmoothRemainingTimeOffset ?? Schema.GetOffset(0x4C3907DAB4D54372);
+            return ref _Handle.AsRef<float>(_SmoothRemainingTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SmoothDirOffset;
+    private static nint? _SmoothDirOffset;
 
-  public ref int SmoothDir {
-    get {
-      if (_SmoothDirOffset == null) {
-        _SmoothDirOffset = Schema.GetOffset(0x4C3907DAB90556AA);
-      }
-      return ref _Handle.AsRef<int>(_SmoothDirOffset!.Value);
+    public ref int SmoothDir {
+        get {
+            _SmoothDirOffset = _SmoothDirOffset ?? Schema.GetOffset(0x4C3907DAB90556AA);
+            return ref _Handle.AsRef<int>(_SmoothDirOffset!.Value);
+        }
     }
-  }
 
 
 }

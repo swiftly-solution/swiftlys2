@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimTagManagerUpdaterImpl : SchemaClass, CAnimTagManagerUpdater {
+internal partial class CAnimTagManagerUpdaterImpl : SchemaClass, CAnimTagManagerUpdater
+{
+    public CAnimTagManagerUpdaterImpl(nint handle) : base(handle) { }
 
-  public CAnimTagManagerUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagsOffset;
 
-  private static nint? _TagsOffset;
-
-  public ref CUtlVector<SchemaUntypedField> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0xF09D3FB1B46C8540);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagsOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xF09D3FB1B46C8540);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_TagsOffset!.Value);
+        }
     }
-  }
 
 
 }

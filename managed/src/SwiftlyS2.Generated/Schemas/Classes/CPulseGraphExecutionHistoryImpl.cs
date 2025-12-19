@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseGraphExecutionHistoryImpl : SchemaClass, CPulseGraphExecutionHistory {
+internal partial class CPulseGraphExecutionHistoryImpl : SchemaClass, CPulseGraphExecutionHistory
+{
+    public CPulseGraphExecutionHistoryImpl(nint handle) : base(handle) { }
 
-  public CPulseGraphExecutionHistoryImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InstanceIDOffset;
 
-  private static nint? _InstanceIDOffset;
-
-  public PulseGraphInstanceID_t InstanceID {
-    get {
-      if (_InstanceIDOffset == null) {
-        _InstanceIDOffset = Schema.GetOffset(0x2DC54ABB24192813);
-      }
-      return new PulseGraphInstanceID_tImpl(_Handle + _InstanceIDOffset!.Value);
+    public PulseGraphInstanceID_t InstanceID {
+        get {
+            _InstanceIDOffset = _InstanceIDOffset ?? Schema.GetOffset(0x2DC54ABB24192813);
+            return new PulseGraphInstanceID_tImpl(_Handle + _InstanceIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrFileNameOffset;
+    private static nint? _StrFileNameOffset;
 
-  public string StrFileName {
-    get {
-      if (_StrFileNameOffset == null) {
-        _StrFileNameOffset = Schema.GetOffset(0x2DC54ABB51B717E5);
-      }
-      var ptr = _Handle.Read<nint>(_StrFileNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrFileNameOffset == null) {
-        _StrFileNameOffset = Schema.GetOffset(0x2DC54ABB51B717E5);
-      }
-      Schema.SetString(_Handle, _StrFileNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _HistoryOffset;
+    public string StrFileName {
+        get {
+            _StrFileNameOffset = _StrFileNameOffset ?? Schema.GetOffset(0x2DC54ABB51B717E5);
+            return Schema.GetString(_Handle.Read<nint>(_StrFileNameOffset!.Value));
+        }
+        set {
+            _StrFileNameOffset = _StrFileNameOffset ?? Schema.GetOffset(0x2DC54ABB51B717E5);
+            Schema.SetString(_Handle, _StrFileNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _HistoryOffset;
 
-  public ref CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>> History {
-    get {
-      if (_HistoryOffset == null) {
-        _HistoryOffset = Schema.GetOffset(0x2DC54ABBCFBC2CBF);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>>>(_HistoryOffset!.Value);
+    public ref CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>> History {
+        get {
+            _HistoryOffset = _HistoryOffset ?? Schema.GetOffset(0x2DC54ABBCFBC2CBF);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>>>(_HistoryOffset!.Value);
+        }
     }
-  }
-  private static nint? _MapCellDescOffset;
+    private static nint? _MapCellDescOffset;
 
-  public SchemaUntypedField MapCellDesc {
-    get {
-      if (_MapCellDescOffset == null) {
-        _MapCellDescOffset = Schema.GetOffset(0x2DC54ABB7E9FEC74);
-      }
-      return new SchemaUntypedField(_Handle + _MapCellDescOffset!.Value);
+    public SchemaUntypedField MapCellDesc {
+        get {
+            _MapCellDescOffset = _MapCellDescOffset ?? Schema.GetOffset(0x2DC54ABB7E9FEC74);
+            return new SchemaUntypedField(_Handle + _MapCellDescOffset!.Value);
+        }
     }
-  }
-  private static nint? _MapCursorDescOffset;
+    private static nint? _MapCursorDescOffset;
 
-  public SchemaUntypedField MapCursorDesc {
-    get {
-      if (_MapCursorDescOffset == null) {
-        _MapCursorDescOffset = Schema.GetOffset(0x2DC54ABBED035BB6);
-      }
-      return new SchemaUntypedField(_Handle + _MapCursorDescOffset!.Value);
+    public SchemaUntypedField MapCursorDesc {
+        get {
+            _MapCursorDescOffset = _MapCursorDescOffset ?? Schema.GetOffset(0x2DC54ABBED035BB6);
+            return new SchemaUntypedField(_Handle + _MapCursorDescOffset!.Value);
+        }
     }
-  }
 
 
 }

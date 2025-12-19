@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootPositionMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CFootPositionMetricEvaluator {
+internal partial class CFootPositionMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CFootPositionMetricEvaluator
+{
+    public CFootPositionMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-  public CFootPositionMetricEvaluatorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FootIndicesOffset;
 
-  private static nint? _FootIndicesOffset;
-
-  public ref CUtlVector<int> FootIndices {
-    get {
-      if (_FootIndicesOffset == null) {
-        _FootIndicesOffset = Schema.GetOffset(0x67E807C64C840316);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_FootIndicesOffset!.Value);
+    public ref CUtlVector<int> FootIndices {
+        get {
+            _FootIndicesOffset = _FootIndicesOffset ?? Schema.GetOffset(0x67E807C64C840316);
+            return ref _Handle.AsRef<CUtlVector<int>>(_FootIndicesOffset!.Value);
+        }
     }
-  }
-  private static nint? _IgnoreSlopeOffset;
+    private static nint? _IgnoreSlopeOffset;
 
-  public ref bool IgnoreSlope {
-    get {
-      if (_IgnoreSlopeOffset == null) {
-        _IgnoreSlopeOffset = Schema.GetOffset(0x67E807C6541E43F2);
-      }
-      return ref _Handle.AsRef<bool>(_IgnoreSlopeOffset!.Value);
+    public ref bool IgnoreSlope {
+        get {
+            _IgnoreSlopeOffset = _IgnoreSlopeOffset ?? Schema.GetOffset(0x67E807C6541E43F2);
+            return ref _Handle.AsRef<bool>(_IgnoreSlopeOffset!.Value);
+        }
     }
-  }
 
 
 }

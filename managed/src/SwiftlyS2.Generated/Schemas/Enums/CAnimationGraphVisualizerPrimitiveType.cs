@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CAnimationGraphVisualizerPrimitiveType : uint {
-
+public enum CAnimationGraphVisualizerPrimitiveType : uint
+{
  ANIMATIONGRAPHVISUALIZERPRIMITIVETYPE_Text = 0,
 
  ANIMATIONGRAPHVISUALIZERPRIMITIVETYPE_Sphere = 1,

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseFlexAlias_funCBaseFlex : CBaseFlex, ISchemaClass<CBaseFlexAlias_funCBaseFlex> {
-
-  static CBaseFlexAlias_funCBaseFlex ISchemaClass<CBaseFlexAlias_funCBaseFlex>.From(nint handle) => new CBaseFlexAlias_funCBaseFlexImpl(handle);
-  static int ISchemaClass<CBaseFlexAlias_funCBaseFlex>.Size => 2848;
-  static string? ISchemaClass<CBaseFlexAlias_funCBaseFlex>.ClassName => null;
+public partial interface CBaseFlexAlias_funCBaseFlex : CBaseFlex, ISchemaClass<CBaseFlexAlias_funCBaseFlex>
+{
+    static CBaseFlexAlias_funCBaseFlex ISchemaClass<CBaseFlexAlias_funCBaseFlex>.From(nint handle) => new CBaseFlexAlias_funCBaseFlexImpl(handle);
+    static int ISchemaClass<CBaseFlexAlias_funCBaseFlex>.Size => 2848;
+    static string? ISchemaClass<CBaseFlexAlias_funCBaseFlex>.ClassName => null;
 
 
 

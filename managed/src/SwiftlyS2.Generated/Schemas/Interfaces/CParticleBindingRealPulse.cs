@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleBindingRealPulse : CParticleCollectionBindingInstance, ISchemaClass<CParticleBindingRealPulse> {
-
-  static CParticleBindingRealPulse ISchemaClass<CParticleBindingRealPulse>.From(nint handle) => new CParticleBindingRealPulseImpl(handle);
-  static int ISchemaClass<CParticleBindingRealPulse>.Size => 312;
-  static string? ISchemaClass<CParticleBindingRealPulse>.ClassName => null;
+public partial interface CParticleBindingRealPulse : CParticleCollectionBindingInstance, ISchemaClass<CParticleBindingRealPulse>
+{
+    static CParticleBindingRealPulse ISchemaClass<CParticleBindingRealPulse>.From(nint handle) => new CParticleBindingRealPulseImpl(handle);
+    static int ISchemaClass<CParticleBindingRealPulse>.Size => 312;
+    static string? ISchemaClass<CParticleBindingRealPulse>.ClassName => null;
 
 
 

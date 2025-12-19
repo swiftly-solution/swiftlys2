@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum DisableShadows_t : byte {
-
+public enum DisableShadows_t : byte
+{
  kDisableShadows_None = 0,
 
  kDisableShadows_All = 1,

@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerParameterBlenderImpl : CVoiceContainerBaseImpl, CVoiceContainerParameterBlender {
+internal partial class CVoiceContainerParameterBlenderImpl : CVoiceContainerBaseImpl, CVoiceContainerParameterBlender
+{
+    public CVoiceContainerParameterBlenderImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerParameterBlenderImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FirstSoundOffset;
 
-  private static nint? _FirstSoundOffset;
-
-  public CSoundContainerReference FirstSound {
-    get {
-      if (_FirstSoundOffset == null) {
-        _FirstSoundOffset = Schema.GetOffset(0xEC5F1A42666B0138);
-      }
-      return new CSoundContainerReferenceImpl(_Handle + _FirstSoundOffset!.Value);
+    public CSoundContainerReference FirstSound {
+        get {
+            _FirstSoundOffset = _FirstSoundOffset ?? Schema.GetOffset(0xEC5F1A42666B0138);
+            return new CSoundContainerReferenceImpl(_Handle + _FirstSoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _SecondSoundOffset;
+    private static nint? _SecondSoundOffset;
 
-  public CSoundContainerReference SecondSound {
-    get {
-      if (_SecondSoundOffset == null) {
-        _SecondSoundOffset = Schema.GetOffset(0xEC5F1A42A2BC3E5C);
-      }
-      return new CSoundContainerReferenceImpl(_Handle + _SecondSoundOffset!.Value);
+    public CSoundContainerReference SecondSound {
+        get {
+            _SecondSoundOffset = _SecondSoundOffset ?? Schema.GetOffset(0xEC5F1A42A2BC3E5C);
+            return new CSoundContainerReferenceImpl(_Handle + _SecondSoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnableOcclusionBlendOffset;
+    private static nint? _EnableOcclusionBlendOffset;
 
-  public ref bool EnableOcclusionBlend {
-    get {
-      if (_EnableOcclusionBlendOffset == null) {
-        _EnableOcclusionBlendOffset = Schema.GetOffset(0xEC5F1A42041C67C2);
-      }
-      return ref _Handle.AsRef<bool>(_EnableOcclusionBlendOffset!.Value);
+    public ref bool EnableOcclusionBlend {
+        get {
+            _EnableOcclusionBlendOffset = _EnableOcclusionBlendOffset ?? Schema.GetOffset(0xEC5F1A42041C67C2);
+            return ref _Handle.AsRef<bool>(_EnableOcclusionBlendOffset!.Value);
+        }
     }
-  }
-  private static nint? _Curve1Offset;
+    private static nint? _Curve1Offset;
 
-  public SchemaUntypedField Curve1 {
-    get {
-      if (_Curve1Offset == null) {
-        _Curve1Offset = Schema.GetOffset(0xEC5F1A423B9F58DF);
-      }
-      return new SchemaUntypedField(_Handle + _Curve1Offset!.Value);
+    public SchemaUntypedField Curve1 {
+        get {
+            _Curve1Offset = _Curve1Offset ?? Schema.GetOffset(0xEC5F1A423B9F58DF);
+            return new SchemaUntypedField(_Handle + _Curve1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Curve2Offset;
+    private static nint? _Curve2Offset;
 
-  public SchemaUntypedField Curve2 {
-    get {
-      if (_Curve2Offset == null) {
-        _Curve2Offset = Schema.GetOffset(0xEC5F1A423C9F5A72);
-      }
-      return new SchemaUntypedField(_Handle + _Curve2Offset!.Value);
+    public SchemaUntypedField Curve2 {
+        get {
+            _Curve2Offset = _Curve2Offset ?? Schema.GetOffset(0xEC5F1A423C9F5A72);
+            return new SchemaUntypedField(_Handle + _Curve2Offset!.Value);
+        }
     }
-  }
-  private static nint? _EnableDistanceBlendOffset;
+    private static nint? _EnableDistanceBlendOffset;
 
-  public ref bool EnableDistanceBlend {
-    get {
-      if (_EnableDistanceBlendOffset == null) {
-        _EnableDistanceBlendOffset = Schema.GetOffset(0xEC5F1A428EDC5388);
-      }
-      return ref _Handle.AsRef<bool>(_EnableDistanceBlendOffset!.Value);
+    public ref bool EnableDistanceBlend {
+        get {
+            _EnableDistanceBlendOffset = _EnableDistanceBlendOffset ?? Schema.GetOffset(0xEC5F1A428EDC5388);
+            return ref _Handle.AsRef<bool>(_EnableDistanceBlendOffset!.Value);
+        }
     }
-  }
-  private static nint? _Curve3Offset;
+    private static nint? _Curve3Offset;
 
-  public SchemaUntypedField Curve3 {
-    get {
-      if (_Curve3Offset == null) {
-        _Curve3Offset = Schema.GetOffset(0xEC5F1A423D9F5C05);
-      }
-      return new SchemaUntypedField(_Handle + _Curve3Offset!.Value);
+    public SchemaUntypedField Curve3 {
+        get {
+            _Curve3Offset = _Curve3Offset ?? Schema.GetOffset(0xEC5F1A423D9F5C05);
+            return new SchemaUntypedField(_Handle + _Curve3Offset!.Value);
+        }
     }
-  }
-  private static nint? _Curve4Offset;
+    private static nint? _Curve4Offset;
 
-  public SchemaUntypedField Curve4 {
-    get {
-      if (_Curve4Offset == null) {
-        _Curve4Offset = Schema.GetOffset(0xEC5F1A42369F5100);
-      }
-      return new SchemaUntypedField(_Handle + _Curve4Offset!.Value);
+    public SchemaUntypedField Curve4 {
+        get {
+            _Curve4Offset = _Curve4Offset ?? Schema.GetOffset(0xEC5F1A42369F5100);
+            return new SchemaUntypedField(_Handle + _Curve4Offset!.Value);
+        }
     }
-  }
 
 
 }

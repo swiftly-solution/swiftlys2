@@ -6,121 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysSurfacePropertiesImpl : SchemaClass, CPhysSurfaceProperties {
+internal partial class CPhysSurfacePropertiesImpl : SchemaClass, CPhysSurfaceProperties
+{
+    public CPhysSurfacePropertiesImpl(nint handle) : base(handle) { }
 
-  public CPhysSurfacePropertiesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x682A31344D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x682A31344D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NameHashOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x682A31344D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref uint NameHash {
+        get {
+            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0x682A313474C2670A);
+            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x682A31344D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NameHashOffset;
+    private static nint? _BaseNameHashOffset;
 
-  public ref uint NameHash {
-    get {
-      if (_NameHashOffset == null) {
-        _NameHashOffset = Schema.GetOffset(0x682A313474C2670A);
-      }
-      return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+    public ref uint BaseNameHash {
+        get {
+            _BaseNameHashOffset = _BaseNameHashOffset ?? Schema.GetOffset(0x682A31347BCDC37B);
+            return ref _Handle.AsRef<uint>(_BaseNameHashOffset!.Value);
+        }
     }
-  }
-  private static nint? _BaseNameHashOffset;
+    private static nint? _HiddenOffset;
 
-  public ref uint BaseNameHash {
-    get {
-      if (_BaseNameHashOffset == null) {
-        _BaseNameHashOffset = Schema.GetOffset(0x682A31347BCDC37B);
-      }
-      return ref _Handle.AsRef<uint>(_BaseNameHashOffset!.Value);
+    public ref bool Hidden {
+        get {
+            _HiddenOffset = _HiddenOffset ?? Schema.GetOffset(0x682A313457D2DC99);
+            return ref _Handle.AsRef<bool>(_HiddenOffset!.Value);
+        }
     }
-  }
-  private static nint? _HiddenOffset;
+    private static nint? _DescriptionOffset;
 
-  public ref bool Hidden {
-    get {
-      if (_HiddenOffset == null) {
-        _HiddenOffset = Schema.GetOffset(0x682A313457D2DC99);
-      }
-      return ref _Handle.AsRef<bool>(_HiddenOffset!.Value);
-    }
-  }
-  private static nint? _DescriptionOffset;
+    public string Description {
+        get {
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x682A313499F68389);
+            return Schema.GetString(_Handle.Read<nint>(_DescriptionOffset!.Value));
+        }
+        set {
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x682A313499F68389);
+            Schema.SetString(_Handle, _DescriptionOffset!.Value, value);
+        }
+    } 
+    private static nint? _PhysicsOffset;
 
-  public string Description {
-    get {
-      if (_DescriptionOffset == null) {
-        _DescriptionOffset = Schema.GetOffset(0x682A313499F68389);
-      }
-      var ptr = _Handle.Read<nint>(_DescriptionOffset!.Value);
-      return Schema.GetString(ptr);
+    public CPhysSurfacePropertiesPhysics Physics {
+        get {
+            _PhysicsOffset = _PhysicsOffset ?? Schema.GetOffset(0x682A3134B4C7F5C2);
+            return new CPhysSurfacePropertiesPhysicsImpl(_Handle + _PhysicsOffset!.Value);
+        }
     }
-    set {
-      if (_DescriptionOffset == null) {
-        _DescriptionOffset = Schema.GetOffset(0x682A313499F68389);
-      }
-      Schema.SetString(_Handle, _DescriptionOffset!.Value, value);
-    }
-  } 
-  private static nint? _PhysicsOffset;
+    private static nint? _VehicleParamsOffset;
 
-  public CPhysSurfacePropertiesPhysics Physics {
-    get {
-      if (_PhysicsOffset == null) {
-        _PhysicsOffset = Schema.GetOffset(0x682A3134B4C7F5C2);
-      }
-      return new CPhysSurfacePropertiesPhysicsImpl(_Handle + _PhysicsOffset!.Value);
+    public CPhysSurfacePropertiesVehicle VehicleParams {
+        get {
+            _VehicleParamsOffset = _VehicleParamsOffset ?? Schema.GetOffset(0x682A3134FF85787D);
+            return new CPhysSurfacePropertiesVehicleImpl(_Handle + _VehicleParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _VehicleParamsOffset;
+    private static nint? _AudioSoundsOffset;
 
-  public CPhysSurfacePropertiesVehicle VehicleParams {
-    get {
-      if (_VehicleParamsOffset == null) {
-        _VehicleParamsOffset = Schema.GetOffset(0x682A3134FF85787D);
-      }
-      return new CPhysSurfacePropertiesVehicleImpl(_Handle + _VehicleParamsOffset!.Value);
+    public CPhysSurfacePropertiesSoundNames AudioSounds {
+        get {
+            _AudioSoundsOffset = _AudioSoundsOffset ?? Schema.GetOffset(0x682A3134F7E0C689);
+            return new CPhysSurfacePropertiesSoundNamesImpl(_Handle + _AudioSoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _AudioSoundsOffset;
+    private static nint? _AudioParamsOffset;
 
-  public CPhysSurfacePropertiesSoundNames AudioSounds {
-    get {
-      if (_AudioSoundsOffset == null) {
-        _AudioSoundsOffset = Schema.GetOffset(0x682A3134F7E0C689);
-      }
-      return new CPhysSurfacePropertiesSoundNamesImpl(_Handle + _AudioSoundsOffset!.Value);
+    public CPhysSurfacePropertiesAudio AudioParams {
+        get {
+            _AudioParamsOffset = _AudioParamsOffset ?? Schema.GetOffset(0x682A3134BCDFAD3F);
+            return new CPhysSurfacePropertiesAudioImpl(_Handle + _AudioParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _AudioParamsOffset;
-
-  public CPhysSurfacePropertiesAudio AudioParams {
-    get {
-      if (_AudioParamsOffset == null) {
-        _AudioParamsOffset = Schema.GetOffset(0x682A3134BCDFAD3F);
-      }
-      return new CPhysSurfacePropertiesAudioImpl(_Handle + _AudioParamsOffset!.Value);
-    }
-  }
 
 
 }

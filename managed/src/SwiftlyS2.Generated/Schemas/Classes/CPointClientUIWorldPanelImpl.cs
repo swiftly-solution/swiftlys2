@@ -6,328 +6,231 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointClientUIWorldPanelImpl : CBaseClientUIEntityImpl, CPointClientUIWorldPanel {
+internal partial class CPointClientUIWorldPanelImpl : CBaseClientUIEntityImpl, CPointClientUIWorldPanel
+{
+    public CPointClientUIWorldPanelImpl(nint handle) : base(handle) { }
 
-  public CPointClientUIWorldPanelImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IgnoreInputOffset;
 
-  private static nint? _IgnoreInputOffset;
-
-  public ref bool IgnoreInput {
-    get {
-      if (_IgnoreInputOffset == null) {
-        _IgnoreInputOffset = Schema.GetOffset(0xA4834E6F946EC6E1);
-      }
-      return ref _Handle.AsRef<bool>(_IgnoreInputOffset!.Value);
+    public ref bool IgnoreInput {
+        get {
+            _IgnoreInputOffset = _IgnoreInputOffset ?? Schema.GetOffset(0xA4834E6F946EC6E1);
+            return ref _Handle.AsRef<bool>(_IgnoreInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _LitOffset;
+    private static nint? _LitOffset;
 
-  public ref bool Lit {
-    get {
-      if (_LitOffset == null) {
-        _LitOffset = Schema.GetOffset(0xA4834E6F68D14396);
-      }
-      return ref _Handle.AsRef<bool>(_LitOffset!.Value);
+    public ref bool Lit {
+        get {
+            _LitOffset = _LitOffset ?? Schema.GetOffset(0xA4834E6F68D14396);
+            return ref _Handle.AsRef<bool>(_LitOffset!.Value);
+        }
     }
-  }
-  private static nint? _FollowPlayerAcrossTeleportOffset;
+    private static nint? _FollowPlayerAcrossTeleportOffset;
 
-  public ref bool FollowPlayerAcrossTeleport {
-    get {
-      if (_FollowPlayerAcrossTeleportOffset == null) {
-        _FollowPlayerAcrossTeleportOffset = Schema.GetOffset(0xA4834E6F8C71E81F);
-      }
-      return ref _Handle.AsRef<bool>(_FollowPlayerAcrossTeleportOffset!.Value);
+    public ref bool FollowPlayerAcrossTeleport {
+        get {
+            _FollowPlayerAcrossTeleportOffset = _FollowPlayerAcrossTeleportOffset ?? Schema.GetOffset(0xA4834E6F8C71E81F);
+            return ref _Handle.AsRef<bool>(_FollowPlayerAcrossTeleportOffset!.Value);
+        }
     }
-  }
-  private static nint? _WidthOffset;
+    private static nint? _WidthOffset;
 
-  public ref float Width {
-    get {
-      if (_WidthOffset == null) {
-        _WidthOffset = Schema.GetOffset(0xA4834E6FB91935E1);
-      }
-      return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+    public ref float Width {
+        get {
+            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0xA4834E6FB91935E1);
+            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeightOffset;
+    private static nint? _HeightOffset;
 
-  public ref float Height {
-    get {
-      if (_HeightOffset == null) {
-        _HeightOffset = Schema.GetOffset(0xA4834E6FEADD7FB0);
-      }
-      return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+    public ref float Height {
+        get {
+            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0xA4834E6FEADD7FB0);
+            return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _DPIOffset;
+    private static nint? _DPIOffset;
 
-  public ref float DPI {
-    get {
-      if (_DPIOffset == null) {
-        _DPIOffset = Schema.GetOffset(0xA4834E6FEB0B7A2E);
-      }
-      return ref _Handle.AsRef<float>(_DPIOffset!.Value);
+    public ref float DPI {
+        get {
+            _DPIOffset = _DPIOffset ?? Schema.GetOffset(0xA4834E6FEB0B7A2E);
+            return ref _Handle.AsRef<float>(_DPIOffset!.Value);
+        }
     }
-  }
-  private static nint? _InteractDistanceOffset;
+    private static nint? _InteractDistanceOffset;
 
-  public ref float InteractDistance {
-    get {
-      if (_InteractDistanceOffset == null) {
-        _InteractDistanceOffset = Schema.GetOffset(0xA4834E6F47FBB4C2);
-      }
-      return ref _Handle.AsRef<float>(_InteractDistanceOffset!.Value);
+    public ref float InteractDistance {
+        get {
+            _InteractDistanceOffset = _InteractDistanceOffset ?? Schema.GetOffset(0xA4834E6F47FBB4C2);
+            return ref _Handle.AsRef<float>(_InteractDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthOffsetOffset;
+    private static nint? _DepthOffsetOffset;
 
-  public ref float DepthOffset {
-    get {
-      if (_DepthOffsetOffset == null) {
-        _DepthOffsetOffset = Schema.GetOffset(0xA4834E6F67D1DB9B);
-      }
-      return ref _Handle.AsRef<float>(_DepthOffsetOffset!.Value);
+    public ref float DepthOffset {
+        get {
+            _DepthOffsetOffset = _DepthOffsetOffset ?? Schema.GetOffset(0xA4834E6F67D1DB9B);
+            return ref _Handle.AsRef<float>(_DepthOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerContextOffset;
+    private static nint? _OwnerContextOffset;
 
-  public ref uint OwnerContext {
-    get {
-      if (_OwnerContextOffset == null) {
-        _OwnerContextOffset = Schema.GetOffset(0xA4834E6FB5F5A8BC);
-      }
-      return ref _Handle.AsRef<uint>(_OwnerContextOffset!.Value);
+    public ref uint OwnerContext {
+        get {
+            _OwnerContextOffset = _OwnerContextOffset ?? Schema.GetOffset(0xA4834E6FB5F5A8BC);
+            return ref _Handle.AsRef<uint>(_OwnerContextOffset!.Value);
+        }
     }
-  }
-  private static nint? _HorizontalAlignOffset;
+    private static nint? _HorizontalAlignOffset;
 
-  public ref uint HorizontalAlign {
-    get {
-      if (_HorizontalAlignOffset == null) {
-        _HorizontalAlignOffset = Schema.GetOffset(0xA4834E6FF2F27A57);
-      }
-      return ref _Handle.AsRef<uint>(_HorizontalAlignOffset!.Value);
+    public ref uint HorizontalAlign {
+        get {
+            _HorizontalAlignOffset = _HorizontalAlignOffset ?? Schema.GetOffset(0xA4834E6FF2F27A57);
+            return ref _Handle.AsRef<uint>(_HorizontalAlignOffset!.Value);
+        }
     }
-  }
-  private static nint? _VerticalAlignOffset;
+    private static nint? _VerticalAlignOffset;
 
-  public ref uint VerticalAlign {
-    get {
-      if (_VerticalAlignOffset == null) {
-        _VerticalAlignOffset = Schema.GetOffset(0xA4834E6FC263FE8D);
-      }
-      return ref _Handle.AsRef<uint>(_VerticalAlignOffset!.Value);
+    public ref uint VerticalAlign {
+        get {
+            _VerticalAlignOffset = _VerticalAlignOffset ?? Schema.GetOffset(0xA4834E6FC263FE8D);
+            return ref _Handle.AsRef<uint>(_VerticalAlignOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientationOffset;
+    private static nint? _OrientationOffset;
 
-  public ref uint Orientation {
-    get {
-      if (_OrientationOffset == null) {
-        _OrientationOffset = Schema.GetOffset(0xA4834E6FB9A99B4C);
-      }
-      return ref _Handle.AsRef<uint>(_OrientationOffset!.Value);
+    public ref uint Orientation {
+        get {
+            _OrientationOffset = _OrientationOffset ?? Schema.GetOffset(0xA4834E6FB9A99B4C);
+            return ref _Handle.AsRef<uint>(_OrientationOffset!.Value);
+        }
     }
-  }
-  private static nint? _AllowInteractionFromAllSceneWorldsOffset;
+    private static nint? _AllowInteractionFromAllSceneWorldsOffset;
 
-  public ref bool AllowInteractionFromAllSceneWorlds {
-    get {
-      if (_AllowInteractionFromAllSceneWorldsOffset == null) {
-        _AllowInteractionFromAllSceneWorldsOffset = Schema.GetOffset(0xA4834E6FB50077AE);
-      }
-      return ref _Handle.AsRef<bool>(_AllowInteractionFromAllSceneWorldsOffset!.Value);
+    public ref bool AllowInteractionFromAllSceneWorlds {
+        get {
+            _AllowInteractionFromAllSceneWorldsOffset = _AllowInteractionFromAllSceneWorldsOffset ?? Schema.GetOffset(0xA4834E6FB50077AE);
+            return ref _Handle.AsRef<bool>(_AllowInteractionFromAllSceneWorldsOffset!.Value);
+        }
     }
-  }
-  private static nint? _CSSClassesOffset;
+    private static nint? _CSSClassesOffset;
 
-  public ref CUtlVector<SchemaUntypedField> CSSClasses {
-    get {
-      if (_CSSClassesOffset == null) {
-        _CSSClassesOffset = Schema.GetOffset(0xA4834E6FCB74D1DC);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_CSSClassesOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> CSSClasses {
+        get {
+            _CSSClassesOffset = _CSSClassesOffset ?? Schema.GetOffset(0xA4834E6FCB74D1DC);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_CSSClassesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OpaqueOffset;
+    private static nint? _OpaqueOffset;
 
-  public ref bool Opaque {
-    get {
-      if (_OpaqueOffset == null) {
-        _OpaqueOffset = Schema.GetOffset(0xA4834E6F718DB77E);
-      }
-      return ref _Handle.AsRef<bool>(_OpaqueOffset!.Value);
+    public ref bool Opaque {
+        get {
+            _OpaqueOffset = _OpaqueOffset ?? Schema.GetOffset(0xA4834E6F718DB77E);
+            return ref _Handle.AsRef<bool>(_OpaqueOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoDepthOffset;
+    private static nint? _NoDepthOffset;
 
-  public ref bool NoDepth {
-    get {
-      if (_NoDepthOffset == null) {
-        _NoDepthOffset = Schema.GetOffset(0xA4834E6F930402F3);
-      }
-      return ref _Handle.AsRef<bool>(_NoDepthOffset!.Value);
+    public ref bool NoDepth {
+        get {
+            _NoDepthOffset = _NoDepthOffset ?? Schema.GetOffset(0xA4834E6F930402F3);
+            return ref _Handle.AsRef<bool>(_NoDepthOffset!.Value);
+        }
     }
-  }
-  private static nint? _VisibleWhenParentNoDrawOffset;
+    private static nint? _VisibleWhenParentNoDrawOffset;
 
-  public ref bool VisibleWhenParentNoDraw {
-    get {
-      if (_VisibleWhenParentNoDrawOffset == null) {
-        _VisibleWhenParentNoDrawOffset = Schema.GetOffset(0xA4834E6F894EBD44);
-      }
-      return ref _Handle.AsRef<bool>(_VisibleWhenParentNoDrawOffset!.Value);
+    public ref bool VisibleWhenParentNoDraw {
+        get {
+            _VisibleWhenParentNoDrawOffset = _VisibleWhenParentNoDrawOffset ?? Schema.GetOffset(0xA4834E6F894EBD44);
+            return ref _Handle.AsRef<bool>(_VisibleWhenParentNoDrawOffset!.Value);
+        }
     }
-  }
-  private static nint? _RenderBackfaceOffset;
+    private static nint? _RenderBackfaceOffset;
 
-  public ref bool RenderBackface {
-    get {
-      if (_RenderBackfaceOffset == null) {
-        _RenderBackfaceOffset = Schema.GetOffset(0xA4834E6F9150ED73);
-      }
-      return ref _Handle.AsRef<bool>(_RenderBackfaceOffset!.Value);
+    public ref bool RenderBackface {
+        get {
+            _RenderBackfaceOffset = _RenderBackfaceOffset ?? Schema.GetOffset(0xA4834E6F9150ED73);
+            return ref _Handle.AsRef<bool>(_RenderBackfaceOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseOffScreenIndicatorOffset;
+    private static nint? _UseOffScreenIndicatorOffset;
 
-  public ref bool UseOffScreenIndicator {
-    get {
-      if (_UseOffScreenIndicatorOffset == null) {
-        _UseOffScreenIndicatorOffset = Schema.GetOffset(0xA4834E6F83728A46);
-      }
-      return ref _Handle.AsRef<bool>(_UseOffScreenIndicatorOffset!.Value);
+    public ref bool UseOffScreenIndicator {
+        get {
+            _UseOffScreenIndicatorOffset = _UseOffScreenIndicatorOffset ?? Schema.GetOffset(0xA4834E6F83728A46);
+            return ref _Handle.AsRef<bool>(_UseOffScreenIndicatorOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExcludeFromSaveGamesOffset;
+    private static nint? _ExcludeFromSaveGamesOffset;
 
-  public ref bool ExcludeFromSaveGames {
-    get {
-      if (_ExcludeFromSaveGamesOffset == null) {
-        _ExcludeFromSaveGamesOffset = Schema.GetOffset(0xA4834E6FFC6043F7);
-      }
-      return ref _Handle.AsRef<bool>(_ExcludeFromSaveGamesOffset!.Value);
+    public ref bool ExcludeFromSaveGames {
+        get {
+            _ExcludeFromSaveGamesOffset = _ExcludeFromSaveGamesOffset ?? Schema.GetOffset(0xA4834E6FFC6043F7);
+            return ref _Handle.AsRef<bool>(_ExcludeFromSaveGamesOffset!.Value);
+        }
     }
-  }
-  private static nint? _GrabbableOffset;
+    private static nint? _GrabbableOffset;
 
-  public ref bool Grabbable {
-    get {
-      if (_GrabbableOffset == null) {
-        _GrabbableOffset = Schema.GetOffset(0xA4834E6FFE2A8983);
-      }
-      return ref _Handle.AsRef<bool>(_GrabbableOffset!.Value);
+    public ref bool Grabbable {
+        get {
+            _GrabbableOffset = _GrabbableOffset ?? Schema.GetOffset(0xA4834E6FFE2A8983);
+            return ref _Handle.AsRef<bool>(_GrabbableOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnlyRenderToTextureOffset;
+    private static nint? _OnlyRenderToTextureOffset;
 
-  public ref bool OnlyRenderToTexture {
-    get {
-      if (_OnlyRenderToTextureOffset == null) {
-        _OnlyRenderToTextureOffset = Schema.GetOffset(0xA4834E6F52B95FF9);
-      }
-      return ref _Handle.AsRef<bool>(_OnlyRenderToTextureOffset!.Value);
+    public ref bool OnlyRenderToTexture {
+        get {
+            _OnlyRenderToTextureOffset = _OnlyRenderToTextureOffset ?? Schema.GetOffset(0xA4834E6F52B95FF9);
+            return ref _Handle.AsRef<bool>(_OnlyRenderToTextureOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisableMipGenOffset;
+    private static nint? _DisableMipGenOffset;
 
-  public ref bool DisableMipGen {
-    get {
-      if (_DisableMipGenOffset == null) {
-        _DisableMipGenOffset = Schema.GetOffset(0xA4834E6F0CB84487);
-      }
-      return ref _Handle.AsRef<bool>(_DisableMipGenOffset!.Value);
+    public ref bool DisableMipGen {
+        get {
+            _DisableMipGenOffset = _DisableMipGenOffset ?? Schema.GetOffset(0xA4834E6F0CB84487);
+            return ref _Handle.AsRef<bool>(_DisableMipGenOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExplicitImageLayoutOffset;
+    private static nint? _ExplicitImageLayoutOffset;
 
-  public ref int ExplicitImageLayout {
-    get {
-      if (_ExplicitImageLayoutOffset == null) {
-        _ExplicitImageLayoutOffset = Schema.GetOffset(0xA4834E6FAFAD513C);
-      }
-      return ref _Handle.AsRef<int>(_ExplicitImageLayoutOffset!.Value);
+    public ref int ExplicitImageLayout {
+        get {
+            _ExplicitImageLayoutOffset = _ExplicitImageLayoutOffset ?? Schema.GetOffset(0xA4834E6FAFAD513C);
+            return ref _Handle.AsRef<int>(_ExplicitImageLayoutOffset!.Value);
+        }
     }
-  }
 
-  public void IgnoreInputUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F946EC6E1);
-  }
-  public void LitUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F68D14396);
-  }
-  public void FollowPlayerAcrossTeleportUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F8C71E81F);
-  }
-  public void WidthUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FB91935E1);
-  }
-  public void HeightUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FEADD7FB0);
-  }
-  public void DPIUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FEB0B7A2E);
-  }
-  public void InteractDistanceUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F47FBB4C2);
-  }
-  public void DepthOffsetUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F67D1DB9B);
-  }
-  public void OwnerContextUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FB5F5A8BC);
-  }
-  public void HorizontalAlignUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FF2F27A57);
-  }
-  public void VerticalAlignUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FC263FE8D);
-  }
-  public void OrientationUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FB9A99B4C);
-  }
-  public void AllowInteractionFromAllSceneWorldsUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FB50077AE);
-  }
-  public void CSSClassesUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FCB74D1DC);
-  }
-  public void OpaqueUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F718DB77E);
-  }
-  public void NoDepthUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F930402F3);
-  }
-  public void VisibleWhenParentNoDrawUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F894EBD44);
-  }
-  public void RenderBackfaceUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F9150ED73);
-  }
-  public void UseOffScreenIndicatorUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F83728A46);
-  }
-  public void ExcludeFromSaveGamesUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FFC6043F7);
-  }
-  public void GrabbableUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FFE2A8983);
-  }
-  public void OnlyRenderToTextureUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F52B95FF9);
-  }
-  public void DisableMipGenUpdated() {
-    Schema.Update(_Handle, 0xA4834E6F0CB84487);
-  }
-  public void ExplicitImageLayoutUpdated() {
-    Schema.Update(_Handle, 0xA4834E6FAFAD513C);
-  }
+    public void IgnoreInputUpdated() => Schema.Update(_Handle, 0xA4834E6F946EC6E1);
+    public void LitUpdated() => Schema.Update(_Handle, 0xA4834E6F68D14396);
+    public void FollowPlayerAcrossTeleportUpdated() => Schema.Update(_Handle, 0xA4834E6F8C71E81F);
+    public void WidthUpdated() => Schema.Update(_Handle, 0xA4834E6FB91935E1);
+    public void HeightUpdated() => Schema.Update(_Handle, 0xA4834E6FEADD7FB0);
+    public void DPIUpdated() => Schema.Update(_Handle, 0xA4834E6FEB0B7A2E);
+    public void InteractDistanceUpdated() => Schema.Update(_Handle, 0xA4834E6F47FBB4C2);
+    public void DepthOffsetUpdated() => Schema.Update(_Handle, 0xA4834E6F67D1DB9B);
+    public void OwnerContextUpdated() => Schema.Update(_Handle, 0xA4834E6FB5F5A8BC);
+    public void HorizontalAlignUpdated() => Schema.Update(_Handle, 0xA4834E6FF2F27A57);
+    public void VerticalAlignUpdated() => Schema.Update(_Handle, 0xA4834E6FC263FE8D);
+    public void OrientationUpdated() => Schema.Update(_Handle, 0xA4834E6FB9A99B4C);
+    public void AllowInteractionFromAllSceneWorldsUpdated() => Schema.Update(_Handle, 0xA4834E6FB50077AE);
+    public void CSSClassesUpdated() => Schema.Update(_Handle, 0xA4834E6FCB74D1DC);
+    public void OpaqueUpdated() => Schema.Update(_Handle, 0xA4834E6F718DB77E);
+    public void NoDepthUpdated() => Schema.Update(_Handle, 0xA4834E6F930402F3);
+    public void VisibleWhenParentNoDrawUpdated() => Schema.Update(_Handle, 0xA4834E6F894EBD44);
+    public void RenderBackfaceUpdated() => Schema.Update(_Handle, 0xA4834E6F9150ED73);
+    public void UseOffScreenIndicatorUpdated() => Schema.Update(_Handle, 0xA4834E6F83728A46);
+    public void ExcludeFromSaveGamesUpdated() => Schema.Update(_Handle, 0xA4834E6FFC6043F7);
+    public void GrabbableUpdated() => Schema.Update(_Handle, 0xA4834E6FFE2A8983);
+    public void OnlyRenderToTextureUpdated() => Schema.Update(_Handle, 0xA4834E6F52B95FF9);
+    public void DisableMipGenUpdated() => Schema.Update(_Handle, 0xA4834E6F0CB84487);
+    public void ExplicitImageLayoutUpdated() => Schema.Update(_Handle, 0xA4834E6FAFAD513C);
 }

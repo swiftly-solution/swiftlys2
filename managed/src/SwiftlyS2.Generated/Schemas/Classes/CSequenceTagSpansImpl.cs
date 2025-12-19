@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSequenceTagSpansImpl : SchemaClass, CSequenceTagSpans {
+internal partial class CSequenceTagSpansImpl : SchemaClass, CSequenceTagSpans
+{
+    public CSequenceTagSpansImpl(nint handle) : base(handle) { }
 
-  public CSequenceTagSpansImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SequenceNameOffset;
 
-  private static nint? _SequenceNameOffset;
-
-  public ref CGlobalSymbol SequenceName {
-    get {
-      if (_SequenceNameOffset == null) {
-        _SequenceNameOffset = Schema.GetOffset(0x132BFE6A7462AF30);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_SequenceNameOffset!.Value);
+    public ref CGlobalSymbol SequenceName {
+        get {
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x132BFE6A7462AF30);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SequenceNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _TagsOffset;
+    private static nint? _TagsOffset;
 
-  public ref CUtlVector<TagSpan_t> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0x132BFE6AB46C8540);
-      }
-      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+    public ref CUtlVector<TagSpan_t> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0x132BFE6AB46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+        }
     }
-  }
 
 
 }

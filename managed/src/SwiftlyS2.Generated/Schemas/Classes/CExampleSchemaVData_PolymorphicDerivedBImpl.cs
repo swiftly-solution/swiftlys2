@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CExampleSchemaVData_PolymorphicDerivedBImpl : CExampleSchemaVData_PolymorphicBaseImpl, CExampleSchemaVData_PolymorphicDerivedB {
+internal partial class CExampleSchemaVData_PolymorphicDerivedBImpl : CExampleSchemaVData_PolymorphicBaseImpl, CExampleSchemaVData_PolymorphicDerivedB
+{
+    public CExampleSchemaVData_PolymorphicDerivedBImpl(nint handle) : base(handle) { }
 
-  public CExampleSchemaVData_PolymorphicDerivedBImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DerivedBOffset;
 
-  private static nint? _DerivedBOffset;
-
-  public ref int DerivedB {
-    get {
-      if (_DerivedBOffset == null) {
-        _DerivedBOffset = Schema.GetOffset(0x2A5BE585B46A6150);
-      }
-      return ref _Handle.AsRef<int>(_DerivedBOffset!.Value);
+    public ref int DerivedB {
+        get {
+            _DerivedBOffset = _DerivedBOffset ?? Schema.GetOffset(0x2A5BE585B46A6150);
+            return ref _Handle.AsRef<int>(_DerivedBOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,62 +6,46 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundAreaEntityBaseImpl : CBaseEntityImpl, CSoundAreaEntityBase {
+internal partial class CSoundAreaEntityBaseImpl : CBaseEntityImpl, CSoundAreaEntityBase
+{
+    public CSoundAreaEntityBaseImpl(nint handle) : base(handle) { }
 
-  public CSoundAreaEntityBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DisabledOffset;
 
-  private static nint? _DisabledOffset;
-
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0x15C90E163A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x15C90E163A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundAreaTypeOffset;
+    private static nint? _SoundAreaTypeOffset;
 
-  public string SoundAreaType {
-    get {
-      if (_SoundAreaTypeOffset == null) {
-        _SoundAreaTypeOffset = Schema.GetOffset(0x15C90E16227612E5);
-      }
-      var ptr = _Handle.Read<nint>(_SoundAreaTypeOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SoundAreaTypeOffset == null) {
-        _SoundAreaTypeOffset = Schema.GetOffset(0x15C90E16227612E5);
-      }
-      Schema.SetString(_Handle, _SoundAreaTypeOffset!.Value, value);
-    }
-  } 
-  private static nint? _PosOffset;
+    public string SoundAreaType {
+        get {
+            _SoundAreaTypeOffset = _SoundAreaTypeOffset ?? Schema.GetOffset(0x15C90E16227612E5);
+            return Schema.GetString(_Handle.Read<nint>(_SoundAreaTypeOffset!.Value));
+        }
+        set {
+            _SoundAreaTypeOffset = _SoundAreaTypeOffset ?? Schema.GetOffset(0x15C90E16227612E5);
+            Schema.SetString(_Handle, _SoundAreaTypeOffset!.Value, value);
+        }
+    } 
+    private static nint? _PosOffset;
 
-  public ref Vector Pos {
-    get {
-      if (_PosOffset == null) {
-        _PosOffset = Schema.GetOffset(0x15C90E16DE9CFC5D);
-      }
-      return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+    public ref Vector Pos {
+        get {
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0x15C90E16DE9CFC5D);
+            return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+        }
     }
-  }
 
-  public void DisabledUpdated() {
-    Schema.Update(_Handle, 0x15C90E163A7C5965);
-  }
-  public void SoundAreaTypeUpdated() {
-    Schema.Update(_Handle, 0x15C90E16227612E5);
-  }
-  public void PosUpdated() {
-    Schema.Update(_Handle, 0x15C90E16DE9CFC5D);
-  }
+    public void DisabledUpdated() => Schema.Update(_Handle, 0x15C90E163A7C5965);
+    public void SoundAreaTypeUpdated() => Schema.Update(_Handle, 0x15C90E16227612E5);
+    public void PosUpdated() => Schema.Update(_Handle, 0x15C90E16DE9CFC5D);
 }

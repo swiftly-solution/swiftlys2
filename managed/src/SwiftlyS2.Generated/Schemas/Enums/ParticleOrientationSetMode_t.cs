@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleOrientationSetMode_t : uint {
-
+public enum ParticleOrientationSetMode_t : uint
+{
  PARTICLE_ORIENTATION_SET_NONE = uint.MaxValue,
 
  PARTICLE_ORIENTATION_SET_FROM_VELOCITY = 0,

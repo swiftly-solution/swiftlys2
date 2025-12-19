@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicNavigationImpl : CLogicalEntityImpl, CLogicNavigation {
+internal partial class CLogicNavigationImpl : CLogicalEntityImpl, CLogicNavigation
+{
+    public CLogicNavigationImpl(nint handle) : base(handle) { }
 
-  public CLogicNavigationImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IsOnOffset;
 
-  private static nint? _IsOnOffset;
-
-  public ref bool IsOn {
-    get {
-      if (_IsOnOffset == null) {
-        _IsOnOffset = Schema.GetOffset(0x8E444D6254B260A0);
-      }
-      return ref _Handle.AsRef<bool>(_IsOnOffset!.Value);
+    public ref bool IsOn {
+        get {
+            _IsOnOffset = _IsOnOffset ?? Schema.GetOffset(0x8E444D6254B260A0);
+            return ref _Handle.AsRef<bool>(_IsOnOffset!.Value);
+        }
     }
-  }
-  private static nint? _NavPropertyOffset;
+    private static nint? _NavPropertyOffset;
 
-  public ref navproperties_t NavProperty {
-    get {
-      if (_NavPropertyOffset == null) {
-        _NavPropertyOffset = Schema.GetOffset(0x8E444D62C9E0B3E7);
-      }
-      return ref _Handle.AsRef<navproperties_t>(_NavPropertyOffset!.Value);
+    public ref navproperties_t NavProperty {
+        get {
+            _NavPropertyOffset = _NavPropertyOffset ?? Schema.GetOffset(0x8E444D62C9E0B3E7);
+            return ref _Handle.AsRef<navproperties_t>(_NavPropertyOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimDataChannelDescImpl : SchemaClass, CAnimDataChannelDesc {
+internal partial class CAnimDataChannelDescImpl : SchemaClass, CAnimDataChannelDesc
+{
+    public CAnimDataChannelDescImpl(nint handle) : base(handle) { }
 
-  public CAnimDataChannelDescImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChannelClassOffset;
 
-  private static nint? _ChannelClassOffset;
-
-  public ref CBufferString ChannelClass {
-    get {
-      if (_ChannelClassOffset == null) {
-        _ChannelClassOffset = Schema.GetOffset(0x2D253CFB8F5E9AD5);
-      }
-      return ref _Handle.AsRef<CBufferString>(_ChannelClassOffset!.Value);
+    public ref CBufferString ChannelClass {
+        get {
+            _ChannelClassOffset = _ChannelClassOffset ?? Schema.GetOffset(0x2D253CFB8F5E9AD5);
+            return ref _Handle.AsRef<CBufferString>(_ChannelClassOffset!.Value);
+        }
     }
-  }
-  private static nint? _VariableNameOffset;
+    private static nint? _VariableNameOffset;
 
-  public ref CBufferString VariableName {
-    get {
-      if (_VariableNameOffset == null) {
-        _VariableNameOffset = Schema.GetOffset(0x2D253CFB369599AB);
-      }
-      return ref _Handle.AsRef<CBufferString>(_VariableNameOffset!.Value);
+    public ref CBufferString VariableName {
+        get {
+            _VariableNameOffset = _VariableNameOffset ?? Schema.GetOffset(0x2D253CFB369599AB);
+            return ref _Handle.AsRef<CBufferString>(_VariableNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref int Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x2D253CFBCE6E9C28);
-      }
-      return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+    public ref int Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x2D253CFBCE6E9C28);
+            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TypeOffset;
+    private static nint? _TypeOffset;
 
-  public ref int Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x2D253CFB18853D59);
-      }
-      return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+    public ref int Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x2D253CFB18853D59);
+            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _GroupingOffset;
+    private static nint? _GroupingOffset;
 
-  public ref CBufferString Grouping {
-    get {
-      if (_GroupingOffset == null) {
-        _GroupingOffset = Schema.GetOffset(0x2D253CFB4308F10D);
-      }
-      return ref _Handle.AsRef<CBufferString>(_GroupingOffset!.Value);
+    public ref CBufferString Grouping {
+        get {
+            _GroupingOffset = _GroupingOffset ?? Schema.GetOffset(0x2D253CFB4308F10D);
+            return ref _Handle.AsRef<CBufferString>(_GroupingOffset!.Value);
+        }
     }
-  }
-  private static nint? _DescriptionOffset;
+    private static nint? _DescriptionOffset;
 
-  public ref CBufferString Description {
-    get {
-      if (_DescriptionOffset == null) {
-        _DescriptionOffset = Schema.GetOffset(0x2D253CFB5BF47182);
-      }
-      return ref _Handle.AsRef<CBufferString>(_DescriptionOffset!.Value);
+    public ref CBufferString Description {
+        get {
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x2D253CFB5BF47182);
+            return ref _Handle.AsRef<CBufferString>(_DescriptionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ElementNameArrayOffset;
+    private static nint? _ElementNameArrayOffset;
 
-  public ref CUtlVector<CBufferString> ElementNameArray {
-    get {
-      if (_ElementNameArrayOffset == null) {
-        _ElementNameArrayOffset = Schema.GetOffset(0x2D253CFBE31652C8);
-      }
-      return ref _Handle.AsRef<CUtlVector<CBufferString>>(_ElementNameArrayOffset!.Value);
+    public ref CUtlVector<CBufferString> ElementNameArray {
+        get {
+            _ElementNameArrayOffset = _ElementNameArrayOffset ?? Schema.GetOffset(0x2D253CFBE31652C8);
+            return ref _Handle.AsRef<CUtlVector<CBufferString>>(_ElementNameArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _ElementIndexArrayOffset;
+    private static nint? _ElementIndexArrayOffset;
 
-  public ref CUtlVector<int> ElementIndexArray {
-    get {
-      if (_ElementIndexArrayOffset == null) {
-        _ElementIndexArrayOffset = Schema.GetOffset(0x2D253CFB3FABC2B2);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_ElementIndexArrayOffset!.Value);
+    public ref CUtlVector<int> ElementIndexArray {
+        get {
+            _ElementIndexArrayOffset = _ElementIndexArrayOffset ?? Schema.GetOffset(0x2D253CFB3FABC2B2);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ElementIndexArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _ElementMaskArrayOffset;
+    private static nint? _ElementMaskArrayOffset;
 
-  public ref CUtlVector<uint> ElementMaskArray {
-    get {
-      if (_ElementMaskArrayOffset == null) {
-        _ElementMaskArrayOffset = Schema.GetOffset(0x2D253CFB5927F764);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_ElementMaskArrayOffset!.Value);
+    public ref CUtlVector<uint> ElementMaskArray {
+        get {
+            _ElementMaskArrayOffset = _ElementMaskArrayOffset ?? Schema.GetOffset(0x2D253CFB5927F764);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_ElementMaskArrayOffset!.Value);
+        }
     }
-  }
 
 
 }

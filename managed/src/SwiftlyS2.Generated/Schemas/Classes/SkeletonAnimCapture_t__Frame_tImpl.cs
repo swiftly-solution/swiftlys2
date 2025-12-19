@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SkeletonAnimCapture_t__Frame_tImpl : SchemaClass, SkeletonAnimCapture_t__Frame_t {
+internal partial class SkeletonAnimCapture_t__Frame_tImpl : SchemaClass, SkeletonAnimCapture_t__Frame_t
+{
+    public SkeletonAnimCapture_t__Frame_tImpl(nint handle) : base(handle) { }
 
-  public SkeletonAnimCapture_t__Frame_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TimeOffset;
 
-  private static nint? _TimeOffset;
-
-  public ref float Time {
-    get {
-      if (_TimeOffset == null) {
-        _TimeOffset = Schema.GetOffset(0x413CC2EEC957229E);
-      }
-      return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+    public ref float Time {
+        get {
+            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0x413CC2EEC957229E);
+            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StampOffset;
+    private static nint? _StampOffset;
 
-  public SkeletonAnimCapture_t__FrameStamp_t Stamp {
-    get {
-      if (_StampOffset == null) {
-        _StampOffset = Schema.GetOffset(0x413CC2EE11943004);
-      }
-      return new SkeletonAnimCapture_t__FrameStamp_tImpl(_Handle + _StampOffset!.Value);
+    public SkeletonAnimCapture_t__FrameStamp_t Stamp {
+        get {
+            _StampOffset = _StampOffset ?? Schema.GetOffset(0x413CC2EE11943004);
+            return new SkeletonAnimCapture_t__FrameStamp_tImpl(_Handle + _StampOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransformOffset;
+    private static nint? _TransformOffset;
 
-  public ref CTransform Transform {
-    get {
-      if (_TransformOffset == null) {
-        _TransformOffset = Schema.GetOffset(0x413CC2EE6EC5209B);
-      }
-      return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+    public ref CTransform Transform {
+        get {
+            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0x413CC2EE6EC5209B);
+            return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+        }
     }
-  }
-  private static nint? _TeleportOffset;
+    private static nint? _TeleportOffset;
 
-  public ref bool Teleport {
-    get {
-      if (_TeleportOffset == null) {
-        _TeleportOffset = Schema.GetOffset(0x413CC2EEE663C11E);
-      }
-      return ref _Handle.AsRef<bool>(_TeleportOffset!.Value);
+    public ref bool Teleport {
+        get {
+            _TeleportOffset = _TeleportOffset ?? Schema.GetOffset(0x413CC2EEE663C11E);
+            return ref _Handle.AsRef<bool>(_TeleportOffset!.Value);
+        }
     }
-  }
-  private static nint? _CompositeBonesOffset;
+    private static nint? _CompositeBonesOffset;
 
-  public ref CUtlVector<CTransform> CompositeBones {
-    get {
-      if (_CompositeBonesOffset == null) {
-        _CompositeBonesOffset = Schema.GetOffset(0x413CC2EE5F49062B);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_CompositeBonesOffset!.Value);
+    public ref CUtlVector<CTransform> CompositeBones {
+        get {
+            _CompositeBonesOffset = _CompositeBonesOffset ?? Schema.GetOffset(0x413CC2EE5F49062B);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_CompositeBonesOffset!.Value);
+        }
     }
-  }
-  private static nint? _SimStateBonesOffset;
+    private static nint? _SimStateBonesOffset;
 
-  public ref CUtlVector<CTransform> SimStateBones {
-    get {
-      if (_SimStateBonesOffset == null) {
-        _SimStateBonesOffset = Schema.GetOffset(0x413CC2EE5DAE9398);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_SimStateBonesOffset!.Value);
+    public ref CUtlVector<CTransform> SimStateBones {
+        get {
+            _SimStateBonesOffset = _SimStateBonesOffset ?? Schema.GetOffset(0x413CC2EE5DAE9398);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_SimStateBonesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FeModelAnimsOffset;
+    private static nint? _FeModelAnimsOffset;
 
-  public ref CUtlVector<CTransform> FeModelAnims {
-    get {
-      if (_FeModelAnimsOffset == null) {
-        _FeModelAnimsOffset = Schema.GetOffset(0x413CC2EE62EC797D);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_FeModelAnimsOffset!.Value);
+    public ref CUtlVector<CTransform> FeModelAnims {
+        get {
+            _FeModelAnimsOffset = _FeModelAnimsOffset ?? Schema.GetOffset(0x413CC2EE62EC797D);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_FeModelAnimsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FeModelPosOffset;
+    private static nint? _FeModelPosOffset;
 
-  public ref CUtlVector<Vector> FeModelPos {
-    get {
-      if (_FeModelPosOffset == null) {
-        _FeModelPosOffset = Schema.GetOffset(0x413CC2EECA74E7F5);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_FeModelPosOffset!.Value);
+    public ref CUtlVector<Vector> FeModelPos {
+        get {
+            _FeModelPosOffset = _FeModelPosOffset ?? Schema.GetOffset(0x413CC2EECA74E7F5);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_FeModelPosOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlexControllerWeightsOffset;
+    private static nint? _FlexControllerWeightsOffset;
 
-  public ref CUtlVector<float> FlexControllerWeights {
-    get {
-      if (_FlexControllerWeightsOffset == null) {
-        _FlexControllerWeightsOffset = Schema.GetOffset(0x413CC2EECA3D8033);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_FlexControllerWeightsOffset!.Value);
+    public ref CUtlVector<float> FlexControllerWeights {
+        get {
+            _FlexControllerWeightsOffset = _FlexControllerWeightsOffset ?? Schema.GetOffset(0x413CC2EECA3D8033);
+            return ref _Handle.AsRef<CUtlVector<float>>(_FlexControllerWeightsOffset!.Value);
+        }
     }
-  }
 
 
 }

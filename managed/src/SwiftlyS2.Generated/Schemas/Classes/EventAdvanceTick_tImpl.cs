@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventAdvanceTick_tImpl : EventSimulate_tImpl, EventAdvanceTick_t {
+internal partial class EventAdvanceTick_tImpl : EventSimulate_tImpl, EventAdvanceTick_t
+{
+    public EventAdvanceTick_tImpl(nint handle) : base(handle) { }
 
-  public EventAdvanceTick_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CurrentTickOffset;
 
-  private static nint? _CurrentTickOffset;
-
-  public ref int CurrentTick {
-    get {
-      if (_CurrentTickOffset == null) {
-        _CurrentTickOffset = Schema.GetOffset(0xB79597D53C23687B);
-      }
-      return ref _Handle.AsRef<int>(_CurrentTickOffset!.Value);
+    public ref int CurrentTick {
+        get {
+            _CurrentTickOffset = _CurrentTickOffset ?? Schema.GetOffset(0xB79597D53C23687B);
+            return ref _Handle.AsRef<int>(_CurrentTickOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurrentTickThisFrameOffset;
+    private static nint? _CurrentTickThisFrameOffset;
 
-  public ref int CurrentTickThisFrame {
-    get {
-      if (_CurrentTickThisFrameOffset == null) {
-        _CurrentTickThisFrameOffset = Schema.GetOffset(0xB79597D509CE99F8);
-      }
-      return ref _Handle.AsRef<int>(_CurrentTickThisFrameOffset!.Value);
+    public ref int CurrentTickThisFrame {
+        get {
+            _CurrentTickThisFrameOffset = _CurrentTickThisFrameOffset ?? Schema.GetOffset(0xB79597D509CE99F8);
+            return ref _Handle.AsRef<int>(_CurrentTickThisFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _TotalTicksThisFrameOffset;
+    private static nint? _TotalTicksThisFrameOffset;
 
-  public ref int TotalTicksThisFrame {
-    get {
-      if (_TotalTicksThisFrameOffset == null) {
-        _TotalTicksThisFrameOffset = Schema.GetOffset(0xB79597D524EA7826);
-      }
-      return ref _Handle.AsRef<int>(_TotalTicksThisFrameOffset!.Value);
+    public ref int TotalTicksThisFrame {
+        get {
+            _TotalTicksThisFrameOffset = _TotalTicksThisFrameOffset ?? Schema.GetOffset(0xB79597D524EA7826);
+            return ref _Handle.AsRef<int>(_TotalTicksThisFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _TotalTicksOffset;
+    private static nint? _TotalTicksOffset;
 
-  public ref int TotalTicks {
-    get {
-      if (_TotalTicksOffset == null) {
-        _TotalTicksOffset = Schema.GetOffset(0xB79597D545397B31);
-      }
-      return ref _Handle.AsRef<int>(_TotalTicksOffset!.Value);
+    public ref int TotalTicks {
+        get {
+            _TotalTicksOffset = _TotalTicksOffset ?? Schema.GetOffset(0xB79597D545397B31);
+            return ref _Handle.AsRef<int>(_TotalTicksOffset!.Value);
+        }
     }
-  }
 
 
 }

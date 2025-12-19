@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatComparisonNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmFloatComparisonNode__CDefinition {
+internal partial class CNmFloatComparisonNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmFloatComparisonNode__CDefinition
+{
+    public CNmFloatComparisonNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFloatComparisonNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueNodeIdxOffset;
 
-  private static nint? _InputValueNodeIdxOffset;
-
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0x48A96E9A95E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x48A96E9A95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComparandValueNodeIdxOffset;
+    private static nint? _ComparandValueNodeIdxOffset;
 
-  public ref short ComparandValueNodeIdx {
-    get {
-      if (_ComparandValueNodeIdxOffset == null) {
-        _ComparandValueNodeIdxOffset = Schema.GetOffset(0x48A96E9AF7CFFAF6);
-      }
-      return ref _Handle.AsRef<short>(_ComparandValueNodeIdxOffset!.Value);
+    public ref short ComparandValueNodeIdx {
+        get {
+            _ComparandValueNodeIdxOffset = _ComparandValueNodeIdxOffset ?? Schema.GetOffset(0x48A96E9AF7CFFAF6);
+            return ref _Handle.AsRef<short>(_ComparandValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComparisonOffset;
+    private static nint? _ComparisonOffset;
 
-  public ref CNmFloatComparisonNode__Comparison_t Comparison {
-    get {
-      if (_ComparisonOffset == null) {
-        _ComparisonOffset = Schema.GetOffset(0x48A96E9A897F8DE4);
-      }
-      return ref _Handle.AsRef<CNmFloatComparisonNode__Comparison_t>(_ComparisonOffset!.Value);
+    public ref CNmFloatComparisonNode__Comparison_t Comparison {
+        get {
+            _ComparisonOffset = _ComparisonOffset ?? Schema.GetOffset(0x48A96E9A897F8DE4);
+            return ref _Handle.AsRef<CNmFloatComparisonNode__Comparison_t>(_ComparisonOffset!.Value);
+        }
     }
-  }
-  private static nint? _EpsilonOffset;
+    private static nint? _EpsilonOffset;
 
-  public ref float Epsilon {
-    get {
-      if (_EpsilonOffset == null) {
-        _EpsilonOffset = Schema.GetOffset(0x48A96E9A34090A67);
-      }
-      return ref _Handle.AsRef<float>(_EpsilonOffset!.Value);
+    public ref float Epsilon {
+        get {
+            _EpsilonOffset = _EpsilonOffset ?? Schema.GetOffset(0x48A96E9A34090A67);
+            return ref _Handle.AsRef<float>(_EpsilonOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComparisonValueOffset;
+    private static nint? _ComparisonValueOffset;
 
-  public ref float ComparisonValue {
-    get {
-      if (_ComparisonValueOffset == null) {
-        _ComparisonValueOffset = Schema.GetOffset(0x48A96E9A4C176B7F);
-      }
-      return ref _Handle.AsRef<float>(_ComparisonValueOffset!.Value);
+    public ref float ComparisonValue {
+        get {
+            _ComparisonValueOffset = _ComparisonValueOffset ?? Schema.GetOffset(0x48A96E9A4C176B7F);
+            return ref _Handle.AsRef<float>(_ComparisonValueOffset!.Value);
+        }
     }
-  }
 
 
 }

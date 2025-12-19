@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PulseNPCCondition_t : uint {
-
+public enum PulseNPCCondition_t : uint
+{
  COND_SEE_PLAYER = 1,
 
  COND_LOST_PLAYER = 2,

@@ -6,81 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayerController_ActionTrackingServicesImpl : CPlayerControllerComponentImpl, CCSPlayerController_ActionTrackingServices {
+internal partial class CCSPlayerController_ActionTrackingServicesImpl : CPlayerControllerComponentImpl, CCSPlayerController_ActionTrackingServices
+{
+    public CCSPlayerController_ActionTrackingServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayerController_ActionTrackingServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PerRoundStatsOffset;
 
-  private static nint? _PerRoundStatsOffset;
-
-  public ref CUtlVector<CSPerRoundStats_t> PerRoundStats {
-    get {
-      if (_PerRoundStatsOffset == null) {
-        _PerRoundStatsOffset = Schema.GetOffset(0x96DF63C17C8AAE9F);
-      }
-      return ref _Handle.AsRef<CUtlVector<CSPerRoundStats_t>>(_PerRoundStatsOffset!.Value);
+    public ref CUtlVector<CSPerRoundStats_t> PerRoundStats {
+        get {
+            _PerRoundStatsOffset = _PerRoundStatsOffset ?? Schema.GetOffset(0x96DF63C17C8AAE9F);
+            return ref _Handle.AsRef<CUtlVector<CSPerRoundStats_t>>(_PerRoundStatsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MatchStatsOffset;
+    private static nint? _MatchStatsOffset;
 
-  public CSMatchStats_t MatchStats {
-    get {
-      if (_MatchStatsOffset == null) {
-        _MatchStatsOffset = Schema.GetOffset(0x96DF63C11729A24D);
-      }
-      return new CSMatchStats_tImpl(_Handle + _MatchStatsOffset!.Value);
+    public CSMatchStats_t MatchStats {
+        get {
+            _MatchStatsOffset = _MatchStatsOffset ?? Schema.GetOffset(0x96DF63C11729A24D);
+            return new CSMatchStats_tImpl(_Handle + _MatchStatsOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumRoundKillsOffset;
+    private static nint? _NumRoundKillsOffset;
 
-  public ref int NumRoundKills {
-    get {
-      if (_NumRoundKillsOffset == null) {
-        _NumRoundKillsOffset = Schema.GetOffset(0x96DF63C1C6B90825);
-      }
-      return ref _Handle.AsRef<int>(_NumRoundKillsOffset!.Value);
+    public ref int NumRoundKills {
+        get {
+            _NumRoundKillsOffset = _NumRoundKillsOffset ?? Schema.GetOffset(0x96DF63C1C6B90825);
+            return ref _Handle.AsRef<int>(_NumRoundKillsOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumRoundKillsHeadshotsOffset;
+    private static nint? _NumRoundKillsHeadshotsOffset;
 
-  public ref int NumRoundKillsHeadshots {
-    get {
-      if (_NumRoundKillsHeadshotsOffset == null) {
-        _NumRoundKillsHeadshotsOffset = Schema.GetOffset(0x96DF63C196C53F70);
-      }
-      return ref _Handle.AsRef<int>(_NumRoundKillsHeadshotsOffset!.Value);
+    public ref int NumRoundKillsHeadshots {
+        get {
+            _NumRoundKillsHeadshotsOffset = _NumRoundKillsHeadshotsOffset ?? Schema.GetOffset(0x96DF63C196C53F70);
+            return ref _Handle.AsRef<int>(_NumRoundKillsHeadshotsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TotalRoundDamageDealtOffset;
+    private static nint? _TotalRoundDamageDealtOffset;
 
-  public ref float TotalRoundDamageDealt {
-    get {
-      if (_TotalRoundDamageDealtOffset == null) {
-        _TotalRoundDamageDealtOffset = Schema.GetOffset(0x96DF63C19CF13FA6);
-      }
-      return ref _Handle.AsRef<float>(_TotalRoundDamageDealtOffset!.Value);
+    public ref float TotalRoundDamageDealt {
+        get {
+            _TotalRoundDamageDealtOffset = _TotalRoundDamageDealtOffset ?? Schema.GetOffset(0x96DF63C19CF13FA6);
+            return ref _Handle.AsRef<float>(_TotalRoundDamageDealtOffset!.Value);
+        }
     }
-  }
 
-  public void PerRoundStatsUpdated() {
-    Schema.Update(_Handle, 0x96DF63C17C8AAE9F);
-  }
-  public void MatchStatsUpdated() {
-    Schema.Update(_Handle, 0x96DF63C11729A24D);
-  }
-  public void NumRoundKillsUpdated() {
-    Schema.Update(_Handle, 0x96DF63C1C6B90825);
-  }
-  public void NumRoundKillsHeadshotsUpdated() {
-    Schema.Update(_Handle, 0x96DF63C196C53F70);
-  }
-  public void TotalRoundDamageDealtUpdated() {
-    Schema.Update(_Handle, 0x96DF63C19CF13FA6);
-  }
+    public void PerRoundStatsUpdated() => Schema.Update(_Handle, 0x96DF63C17C8AAE9F);
+    public void MatchStatsUpdated() => Schema.Update(_Handle, 0x96DF63C11729A24D);
+    public void NumRoundKillsUpdated() => Schema.Update(_Handle, 0x96DF63C1C6B90825);
+    public void NumRoundKillsHeadshotsUpdated() => Schema.Update(_Handle, 0x96DF63C196C53F70);
+    public void TotalRoundDamageDealtUpdated() => Schema.Update(_Handle, 0x96DF63C19CF13FA6);
 }

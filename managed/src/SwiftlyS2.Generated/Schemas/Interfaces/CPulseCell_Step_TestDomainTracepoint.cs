@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Step_TestDomainTracepoint : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Step_TestDomainTracepoint> {
-
-  static CPulseCell_Step_TestDomainTracepoint ISchemaClass<CPulseCell_Step_TestDomainTracepoint>.From(nint handle) => new CPulseCell_Step_TestDomainTracepointImpl(handle);
-  static int ISchemaClass<CPulseCell_Step_TestDomainTracepoint>.Size => 72;
-  static string? ISchemaClass<CPulseCell_Step_TestDomainTracepoint>.ClassName => null;
+public partial interface CPulseCell_Step_TestDomainTracepoint : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Step_TestDomainTracepoint>
+{
+    static CPulseCell_Step_TestDomainTracepoint ISchemaClass<CPulseCell_Step_TestDomainTracepoint>.From(nint handle) => new CPulseCell_Step_TestDomainTracepointImpl(handle);
+    static int ISchemaClass<CPulseCell_Step_TestDomainTracepoint>.Size => 72;
+    static string? ISchemaClass<CPulseCell_Step_TestDomainTracepoint>.ClassName => null;
 
 
 

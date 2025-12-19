@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_MovementRotateParticleAroundAxisImpl : CParticleFunctionOperatorImpl, C_OP_MovementRotateParticleAroundAxis {
+internal partial class C_OP_MovementRotateParticleAroundAxisImpl : CParticleFunctionOperatorImpl, C_OP_MovementRotateParticleAroundAxis
+{
+    public C_OP_MovementRotateParticleAroundAxisImpl(nint handle) : base(handle) { }
 
-  public C_OP_MovementRotateParticleAroundAxisImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RotAxisOffset;
 
-  private static nint? _RotAxisOffset;
-
-  public CParticleCollectionVecInput RotAxis {
-    get {
-      if (_RotAxisOffset == null) {
-        _RotAxisOffset = Schema.GetOffset(0x44C1E1F191872163);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _RotAxisOffset!.Value);
+    public CParticleCollectionVecInput RotAxis {
+        get {
+            _RotAxisOffset = _RotAxisOffset ?? Schema.GetOffset(0x44C1E1F191872163);
+            return new CParticleCollectionVecInputImpl(_Handle + _RotAxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotRateOffset;
+    private static nint? _RotRateOffset;
 
-  public CParticleCollectionFloatInput RotRate {
-    get {
-      if (_RotRateOffset == null) {
-        _RotRateOffset = Schema.GetOffset(0x44C1E1F16747B556);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _RotRateOffset!.Value);
+    public CParticleCollectionFloatInput RotRate {
+        get {
+            _RotRateOffset = _RotRateOffset ?? Schema.GetOffset(0x44C1E1F16747B556);
+            return new CParticleCollectionFloatInputImpl(_Handle + _RotRateOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransformInputOffset;
+    private static nint? _TransformInputOffset;
 
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0x44C1E1F1B3FDC289);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x44C1E1F1B3FDC289);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalSpaceOffset;
+    private static nint? _LocalSpaceOffset;
 
-  public ref bool LocalSpace {
-    get {
-      if (_LocalSpaceOffset == null) {
-        _LocalSpaceOffset = Schema.GetOffset(0x44C1E1F162418E6E);
-      }
-      return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+    public ref bool LocalSpace {
+        get {
+            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0x44C1E1F162418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+        }
     }
-  }
 
 
 }

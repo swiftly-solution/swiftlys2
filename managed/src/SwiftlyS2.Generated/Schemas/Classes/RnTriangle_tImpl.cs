@@ -6,20 +6,19 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnTriangle_tImpl : SchemaClass, RnTriangle_t {
+internal partial class RnTriangle_tImpl : SchemaClass, RnTriangle_t
+{
+    public RnTriangle_tImpl(nint handle) : base(handle) { }
 
-  public RnTriangle_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<int> Index {
-    get => new SchemaFixedArray<int>(_Handle, 0x2136F8E2B73DBE67, 3, 4, 4);
-  }
+    public ISchemaFixedArray<int> Index {
+        get => new SchemaFixedArray<int>(_Handle, 0x2136F8E2B73DBE67, 3, 4, 4);
+    }
 
 
 }

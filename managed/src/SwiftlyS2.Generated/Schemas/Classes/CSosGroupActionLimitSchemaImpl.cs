@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSosGroupActionLimitSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionLimitSchema {
+internal partial class CSosGroupActionLimitSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionLimitSchema
+{
+    public CSosGroupActionLimitSchemaImpl(nint handle) : base(handle) { }
 
-  public CSosGroupActionLimitSchemaImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaxCountOffset;
 
-  private static nint? _MaxCountOffset;
-
-  public ref int MaxCount {
-    get {
-      if (_MaxCountOffset == null) {
-        _MaxCountOffset = Schema.GetOffset(0xE06D795E64BED864);
-      }
-      return ref _Handle.AsRef<int>(_MaxCountOffset!.Value);
+    public ref int MaxCount {
+        get {
+            _MaxCountOffset = _MaxCountOffset ?? Schema.GetOffset(0xE06D795E64BED864);
+            return ref _Handle.AsRef<int>(_MaxCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _StopTypeOffset;
+    private static nint? _StopTypeOffset;
 
-  public ref SosActionStopType_t StopType {
-    get {
-      if (_StopTypeOffset == null) {
-        _StopTypeOffset = Schema.GetOffset(0xE06D795E13397259);
-      }
-      return ref _Handle.AsRef<SosActionStopType_t>(_StopTypeOffset!.Value);
+    public ref SosActionStopType_t StopType {
+        get {
+            _StopTypeOffset = _StopTypeOffset ?? Schema.GetOffset(0xE06D795E13397259);
+            return ref _Handle.AsRef<SosActionStopType_t>(_StopTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SortTypeOffset;
+    private static nint? _SortTypeOffset;
 
-  public ref SosActionLimitSortType_t SortType {
-    get {
-      if (_SortTypeOffset == null) {
-        _SortTypeOffset = Schema.GetOffset(0xE06D795E2E0E44B5);
-      }
-      return ref _Handle.AsRef<SosActionLimitSortType_t>(_SortTypeOffset!.Value);
+    public ref SosActionLimitSortType_t SortType {
+        get {
+            _SortTypeOffset = _SortTypeOffset ?? Schema.GetOffset(0xE06D795E2E0E44B5);
+            return ref _Handle.AsRef<SosActionLimitSortType_t>(_SortTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StopImmediateOffset;
+    private static nint? _StopImmediateOffset;
 
-  public ref bool StopImmediate {
-    get {
-      if (_StopImmediateOffset == null) {
-        _StopImmediateOffset = Schema.GetOffset(0xE06D795E358D6B9A);
-      }
-      return ref _Handle.AsRef<bool>(_StopImmediateOffset!.Value);
+    public ref bool StopImmediate {
+        get {
+            _StopImmediateOffset = _StopImmediateOffset ?? Schema.GetOffset(0xE06D795E358D6B9A);
+            return ref _Handle.AsRef<bool>(_StopImmediateOffset!.Value);
+        }
     }
-  }
-  private static nint? _CountStoppedOffset;
+    private static nint? _CountStoppedOffset;
 
-  public ref bool CountStopped {
-    get {
-      if (_CountStoppedOffset == null) {
-        _CountStoppedOffset = Schema.GetOffset(0xE06D795EF40B23D5);
-      }
-      return ref _Handle.AsRef<bool>(_CountStoppedOffset!.Value);
+    public ref bool CountStopped {
+        get {
+            _CountStoppedOffset = _CountStoppedOffset ?? Schema.GetOffset(0xE06D795EF40B23D5);
+            return ref _Handle.AsRef<bool>(_CountStoppedOffset!.Value);
+        }
     }
-  }
 
 
 }

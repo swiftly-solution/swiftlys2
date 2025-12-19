@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class WaterWheelFrictionScale_tImpl : SchemaClass, WaterWheelFrictionScale_t {
+internal partial class WaterWheelFrictionScale_tImpl : SchemaClass, WaterWheelFrictionScale_t
+{
+    public WaterWheelFrictionScale_tImpl(nint handle) : base(handle) { }
 
-  public WaterWheelFrictionScale_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FractionOfWheelSubmergedOffset;
 
-  private static nint? _FractionOfWheelSubmergedOffset;
-
-  public ref float FractionOfWheelSubmerged {
-    get {
-      if (_FractionOfWheelSubmergedOffset == null) {
-        _FractionOfWheelSubmergedOffset = Schema.GetOffset(0x79315E8EF2D4C09B);
-      }
-      return ref _Handle.AsRef<float>(_FractionOfWheelSubmergedOffset!.Value);
+    public ref float FractionOfWheelSubmerged {
+        get {
+            _FractionOfWheelSubmergedOffset = _FractionOfWheelSubmergedOffset ?? Schema.GetOffset(0x79315E8EF2D4C09B);
+            return ref _Handle.AsRef<float>(_FractionOfWheelSubmergedOffset!.Value);
+        }
     }
-  }
-  private static nint? _FrictionScaleOffset;
+    private static nint? _FrictionScaleOffset;
 
-  public ref float FrictionScale {
-    get {
-      if (_FrictionScaleOffset == null) {
-        _FrictionScaleOffset = Schema.GetOffset(0x79315E8ECB7D1875);
-      }
-      return ref _Handle.AsRef<float>(_FrictionScaleOffset!.Value);
+    public ref float FrictionScale {
+        get {
+            _FrictionScaleOffset = _FrictionScaleOffset ?? Schema.GetOffset(0x79315E8ECB7D1875);
+            return ref _Handle.AsRef<float>(_FrictionScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

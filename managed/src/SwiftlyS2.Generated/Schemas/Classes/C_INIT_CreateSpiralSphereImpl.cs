@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_CreateSpiralSphereImpl : CParticleFunctionInitializerImpl, C_INIT_CreateSpiralSphere {
+internal partial class C_INIT_CreateSpiralSphereImpl : CParticleFunctionInitializerImpl, C_INIT_CreateSpiralSphere
+{
+    public C_INIT_CreateSpiralSphereImpl(nint handle) : base(handle) { }
 
-  public C_INIT_CreateSpiralSphereImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x97C2018A3F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x97C2018A3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverrideCPOffset;
+    private static nint? _OverrideCPOffset;
 
-  public ref int OverrideCP {
-    get {
-      if (_OverrideCPOffset == null) {
-        _OverrideCPOffset = Schema.GetOffset(0x97C2018ADD495162);
-      }
-      return ref _Handle.AsRef<int>(_OverrideCPOffset!.Value);
+    public ref int OverrideCP {
+        get {
+            _OverrideCPOffset = _OverrideCPOffset ?? Schema.GetOffset(0x97C2018ADD495162);
+            return ref _Handle.AsRef<int>(_OverrideCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _DensityOffset;
+    private static nint? _DensityOffset;
 
-  public ref int Density {
-    get {
-      if (_DensityOffset == null) {
-        _DensityOffset = Schema.GetOffset(0x97C2018AA65E630F);
-      }
-      return ref _Handle.AsRef<int>(_DensityOffset!.Value);
+    public ref int Density {
+        get {
+            _DensityOffset = _DensityOffset ?? Schema.GetOffset(0x97C2018AA65E630F);
+            return ref _Handle.AsRef<int>(_DensityOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitialRadiusOffset;
+    private static nint? _InitialRadiusOffset;
 
-  public ref float InitialRadius {
-    get {
-      if (_InitialRadiusOffset == null) {
-        _InitialRadiusOffset = Schema.GetOffset(0x97C2018A8B8AAB8B);
-      }
-      return ref _Handle.AsRef<float>(_InitialRadiusOffset!.Value);
+    public ref float InitialRadius {
+        get {
+            _InitialRadiusOffset = _InitialRadiusOffset ?? Schema.GetOffset(0x97C2018A8B8AAB8B);
+            return ref _Handle.AsRef<float>(_InitialRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitialSpeedMinOffset;
+    private static nint? _InitialSpeedMinOffset;
 
-  public ref float InitialSpeedMin {
-    get {
-      if (_InitialSpeedMinOffset == null) {
-        _InitialSpeedMinOffset = Schema.GetOffset(0x97C2018AE36FD694);
-      }
-      return ref _Handle.AsRef<float>(_InitialSpeedMinOffset!.Value);
+    public ref float InitialSpeedMin {
+        get {
+            _InitialSpeedMinOffset = _InitialSpeedMinOffset ?? Schema.GetOffset(0x97C2018AE36FD694);
+            return ref _Handle.AsRef<float>(_InitialSpeedMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitialSpeedMaxOffset;
+    private static nint? _InitialSpeedMaxOffset;
 
-  public ref float InitialSpeedMax {
-    get {
-      if (_InitialSpeedMaxOffset == null) {
-        _InitialSpeedMaxOffset = Schema.GetOffset(0x97C2018AD184D4F6);
-      }
-      return ref _Handle.AsRef<float>(_InitialSpeedMaxOffset!.Value);
+    public ref float InitialSpeedMax {
+        get {
+            _InitialSpeedMaxOffset = _InitialSpeedMaxOffset ?? Schema.GetOffset(0x97C2018AD184D4F6);
+            return ref _Handle.AsRef<float>(_InitialSpeedMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseParticleCountOffset;
+    private static nint? _UseParticleCountOffset;
 
-  public ref bool UseParticleCount {
-    get {
-      if (_UseParticleCountOffset == null) {
-        _UseParticleCountOffset = Schema.GetOffset(0x97C2018AD4DA0515);
-      }
-      return ref _Handle.AsRef<bool>(_UseParticleCountOffset!.Value);
+    public ref bool UseParticleCount {
+        get {
+            _UseParticleCountOffset = _UseParticleCountOffset ?? Schema.GetOffset(0x97C2018AD4DA0515);
+            return ref _Handle.AsRef<bool>(_UseParticleCountOffset!.Value);
+        }
     }
-  }
 
 
 }

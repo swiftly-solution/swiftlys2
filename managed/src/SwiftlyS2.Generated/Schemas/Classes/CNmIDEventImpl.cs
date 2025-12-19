@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmIDEventImpl : CNmEventImpl, CNmIDEvent {
+internal partial class CNmIDEventImpl : CNmEventImpl, CNmIDEvent
+{
+    public CNmIDEventImpl(nint handle) : base(handle) { }
 
-  public CNmIDEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IDOffset;
 
-  private static nint? _IDOffset;
-
-  public ref CGlobalSymbol ID {
-    get {
-      if (_IDOffset == null) {
-        _IDOffset = Schema.GetOffset(0x31E463E295066900);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+    public ref CGlobalSymbol ID {
+        get {
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x31E463E295066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+        }
     }
-  }
-  private static nint? _SecondaryIDOffset;
+    private static nint? _SecondaryIDOffset;
 
-  public ref CGlobalSymbol SecondaryID {
-    get {
-      if (_SecondaryIDOffset == null) {
-        _SecondaryIDOffset = Schema.GetOffset(0x31E463E29B39DB84);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_SecondaryIDOffset!.Value);
+    public ref CGlobalSymbol SecondaryID {
+        get {
+            _SecondaryIDOffset = _SecondaryIDOffset ?? Schema.GetOffset(0x31E463E29B39DB84);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SecondaryIDOffset!.Value);
+        }
     }
-  }
 
 
 }

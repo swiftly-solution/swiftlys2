@@ -6,1097 +6,880 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PhysFeModelDesc_tImpl : SchemaClass, PhysFeModelDesc_t {
-
-  public PhysFeModelDesc_tImpl(nint handle) : base(handle) {
-  }
-
-  private static nint? _CtrlHashOffset;
-
-  public ref CUtlVector<uint> CtrlHash {
-    get {
-      if (_CtrlHashOffset == null) {
-        _CtrlHashOffset = Schema.GetOffset(0x1BA439272E1897A4);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_CtrlHashOffset!.Value);
-    }
-  }
-  private static nint? _CtrlNameOffset;
-
-  public ref CUtlVector<CUtlString> CtrlName {
-    get {
-      if (_CtrlNameOffset == null) {
-        _CtrlNameOffset = Schema.GetOffset(0x1BA4392720EBC8FF);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_CtrlNameOffset!.Value);
-    }
-  }
-  private static nint? _StaticNodeFlagsOffset;
-
-  public ref uint StaticNodeFlags {
-    get {
-      if (_StaticNodeFlagsOffset == null) {
-        _StaticNodeFlagsOffset = Schema.GetOffset(0x1BA43927491F024E);
-      }
-      return ref _Handle.AsRef<uint>(_StaticNodeFlagsOffset!.Value);
-    }
-  }
-  private static nint? _DynamicNodeFlagsOffset;
-
-  public ref uint DynamicNodeFlags {
-    get {
-      if (_DynamicNodeFlagsOffset == null) {
-        _DynamicNodeFlagsOffset = Schema.GetOffset(0x1BA439274F6F7661);
-      }
-      return ref _Handle.AsRef<uint>(_DynamicNodeFlagsOffset!.Value);
-    }
-  }
-  private static nint? _LocalForceOffset;
-
-  public ref float LocalForce {
-    get {
-      if (_LocalForceOffset == null) {
-        _LocalForceOffset = Schema.GetOffset(0x1BA439275E779595);
-      }
-      return ref _Handle.AsRef<float>(_LocalForceOffset!.Value);
-    }
-  }
-  private static nint? _LocalRotationOffset;
-
-  public ref float LocalRotation {
-    get {
-      if (_LocalRotationOffset == null) {
-        _LocalRotationOffset = Schema.GetOffset(0x1BA4392731E3CCB4);
-      }
-      return ref _Handle.AsRef<float>(_LocalRotationOffset!.Value);
-    }
-  }
-  private static nint? _NodeCountOffset;
-
-  public ref ushort NodeCount {
-    get {
-      if (_NodeCountOffset == null) {
-        _NodeCountOffset = Schema.GetOffset(0x1BA4392709F73A00);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeCountOffset!.Value);
-    }
-  }
-  private static nint? _StaticNodesOffset;
-
-  public ref ushort StaticNodes {
-    get {
-      if (_StaticNodesOffset == null) {
-        _StaticNodesOffset = Schema.GetOffset(0x1BA43927A58AC0EC);
-      }
-      return ref _Handle.AsRef<ushort>(_StaticNodesOffset!.Value);
-    }
-  }
-  private static nint? _RotLockStaticNodesOffset;
-
-  public ref ushort RotLockStaticNodes {
-    get {
-      if (_RotLockStaticNodesOffset == null) {
-        _RotLockStaticNodesOffset = Schema.GetOffset(0x1BA43927B63C3930);
-      }
-      return ref _Handle.AsRef<ushort>(_RotLockStaticNodesOffset!.Value);
-    }
-  }
-  private static nint? _FirstPositionDrivenNodeOffset;
-
-  public ref ushort FirstPositionDrivenNode {
-    get {
-      if (_FirstPositionDrivenNodeOffset == null) {
-        _FirstPositionDrivenNodeOffset = Schema.GetOffset(0x1BA439272E0F5D4C);
-      }
-      return ref _Handle.AsRef<ushort>(_FirstPositionDrivenNodeOffset!.Value);
-    }
-  }
-  private static nint? _SimdTriCount1Offset;
-
-  public ref ushort SimdTriCount1 {
-    get {
-      if (_SimdTriCount1Offset == null) {
-        _SimdTriCount1Offset = Schema.GetOffset(0x1BA439274F73E5EF);
-      }
-      return ref _Handle.AsRef<ushort>(_SimdTriCount1Offset!.Value);
-    }
-  }
-  private static nint? _SimdTriCount2Offset;
-
-  public ref ushort SimdTriCount2 {
-    get {
-      if (_SimdTriCount2Offset == null) {
-        _SimdTriCount2Offset = Schema.GetOffset(0x1BA439275073E782);
-      }
-      return ref _Handle.AsRef<ushort>(_SimdTriCount2Offset!.Value);
-    }
-  }
-  private static nint? _SimdQuadCount1Offset;
-
-  public ref ushort SimdQuadCount1 {
-    get {
-      if (_SimdQuadCount1Offset == null) {
-        _SimdQuadCount1Offset = Schema.GetOffset(0x1BA439275BC6C099);
-      }
-      return ref _Handle.AsRef<ushort>(_SimdQuadCount1Offset!.Value);
-    }
-  }
-  private static nint? _SimdQuadCount2Offset;
-
-  public ref ushort SimdQuadCount2 {
-    get {
-      if (_SimdQuadCount2Offset == null) {
-        _SimdQuadCount2Offset = Schema.GetOffset(0x1BA4392758C6BBE0);
-      }
-      return ref _Handle.AsRef<ushort>(_SimdQuadCount2Offset!.Value);
-    }
-  }
-  private static nint? _QuadCount1Offset;
-
-  public ref ushort QuadCount1 {
-    get {
-      if (_QuadCount1Offset == null) {
-        _QuadCount1Offset = Schema.GetOffset(0x1BA439273BC36C10);
-      }
-      return ref _Handle.AsRef<ushort>(_QuadCount1Offset!.Value);
-    }
-  }
-  private static nint? _QuadCount2Offset;
-
-  public ref ushort QuadCount2 {
-    get {
-      if (_QuadCount2Offset == null) {
-        _QuadCount2Offset = Schema.GetOffset(0x1BA439273EC370C9);
-      }
-      return ref _Handle.AsRef<ushort>(_QuadCount2Offset!.Value);
-    }
-  }
-  private static nint? _TreeDepthOffset;
-
-  public ref ushort TreeDepth {
-    get {
-      if (_TreeDepthOffset == null) {
-        _TreeDepthOffset = Schema.GetOffset(0x1BA439271295DF6E);
-      }
-      return ref _Handle.AsRef<ushort>(_TreeDepthOffset!.Value);
-    }
-  }
-  private static nint? _NodeBaseJiggleboneDependsCountOffset;
-
-  public ref ushort NodeBaseJiggleboneDependsCount {
-    get {
-      if (_NodeBaseJiggleboneDependsCountOffset == null) {
-        _NodeBaseJiggleboneDependsCountOffset = Schema.GetOffset(0x1BA439277F14AD2C);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeBaseJiggleboneDependsCountOffset!.Value);
-    }
-  }
-  private static nint? _RopeCountOffset;
-
-  public ref ushort RopeCount {
-    get {
-      if (_RopeCountOffset == null) {
-        _RopeCountOffset = Schema.GetOffset(0x1BA43927DC972C90);
-      }
-      return ref _Handle.AsRef<ushort>(_RopeCountOffset!.Value);
-    }
-  }
-  private static nint? _RopesOffset;
-
-  public ref CUtlVector<ushort> Ropes {
-    get {
-      if (_RopesOffset == null) {
-        _RopesOffset = Schema.GetOffset(0x1BA43927245D4F7A);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_RopesOffset!.Value);
-    }
-  }
-  private static nint? _NodeBasesOffset;
-
-  public ref CUtlVector<FeNodeBase_t> NodeBases {
-    get {
-      if (_NodeBasesOffset == null) {
-        _NodeBasesOffset = Schema.GetOffset(0x1BA43927D78A7829);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeNodeBase_t>>(_NodeBasesOffset!.Value);
-    }
-  }
-  private static nint? _SimdNodeBasesOffset;
-
-  public ref CUtlVector<FeSimdNodeBase_t> SimdNodeBases {
-    get {
-      if (_SimdNodeBasesOffset == null) {
-        _SimdNodeBasesOffset = Schema.GetOffset(0x1BA439276CEB34CE);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeSimdNodeBase_t>>(_SimdNodeBasesOffset!.Value);
-    }
-  }
-  private static nint? _QuadsOffset;
-
-  public ref CUtlVector<FeQuad_t> Quads {
-    get {
-      if (_QuadsOffset == null) {
-        _QuadsOffset = Schema.GetOffset(0x1BA43927F0B96887);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeQuad_t>>(_QuadsOffset!.Value);
-    }
-  }
-  private static nint? _SimdQuadsOffset;
-
-  public ref CUtlVector<FeSimdQuad_t> SimdQuads {
-    get {
-      if (_SimdQuadsOffset == null) {
-        _SimdQuadsOffset = Schema.GetOffset(0x1BA439272A528AEC);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeSimdQuad_t>>(_SimdQuadsOffset!.Value);
-    }
-  }
-  private static nint? _SimdTrisOffset;
-
-  public ref CUtlVector<SchemaUntypedField> SimdTris {
-    get {
-      if (_SimdTrisOffset == null) {
-        _SimdTrisOffset = Schema.GetOffset(0x1BA4392708B7DB8E);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_SimdTrisOffset!.Value);
-    }
-  }
-  private static nint? _SimdRodsOffset;
-
-  public ref CUtlVector<FeSimdRodConstraint_t> SimdRods {
-    get {
-      if (_SimdRodsOffset == null) {
-        _SimdRodsOffset = Schema.GetOffset(0x1BA4392772C6F02A);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeSimdRodConstraint_t>>(_SimdRodsOffset!.Value);
-    }
-  }
-  private static nint? _SimdRodsAnimOffset;
-
-  public ref CUtlVector<FeSimdRodConstraintAnim_t> SimdRodsAnim {
-    get {
-      if (_SimdRodsAnimOffset == null) {
-        _SimdRodsAnimOffset = Schema.GetOffset(0x1BA439272F796453);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeSimdRodConstraintAnim_t>>(_SimdRodsAnimOffset!.Value);
-    }
-  }
-  private static nint? _InitPoseOffset;
-
-  public ref CUtlVector<CTransform> InitPose {
-    get {
-      if (_InitPoseOffset == null) {
-        _InitPoseOffset = Schema.GetOffset(0x1BA439275E468732);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_InitPoseOffset!.Value);
-    }
-  }
-  private static nint? _RodsOffset;
-
-  public ref CUtlVector<FeRodConstraint_t> Rods {
-    get {
-      if (_RodsOffset == null) {
-        _RodsOffset = Schema.GetOffset(0x1BA439276FC1D3D7);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeRodConstraint_t>>(_RodsOffset!.Value);
-    }
-  }
-  private static nint? _TwistsOffset;
-
-  public ref CUtlVector<FeTwistConstraint_t> Twists {
-    get {
-      if (_TwistsOffset == null) {
-        _TwistsOffset = Schema.GetOffset(0x1BA439272079B489);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeTwistConstraint_t>>(_TwistsOffset!.Value);
-    }
-  }
-  private static nint? _HingeLimitsOffset;
-
-  public ref CUtlVector<FeHingeLimit_t> HingeLimits {
-    get {
-      if (_HingeLimitsOffset == null) {
-        _HingeLimitsOffset = Schema.GetOffset(0x1BA43927EDFF16F4);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeHingeLimit_t>>(_HingeLimitsOffset!.Value);
-    }
-  }
-  private static nint? _AntiTunnelBytecodeOffset;
-
-  public ref CUtlVector<uint> AntiTunnelBytecode {
-    get {
-      if (_AntiTunnelBytecodeOffset == null) {
-        _AntiTunnelBytecodeOffset = Schema.GetOffset(0x1BA43927FD33DEEC);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_AntiTunnelBytecodeOffset!.Value);
-    }
-  }
-  private static nint? _DynKinLinksOffset;
-
-  public ref CUtlVector<FeDynKinLink_t> DynKinLinks {
-    get {
-      if (_DynKinLinksOffset == null) {
-        _DynKinLinksOffset = Schema.GetOffset(0x1BA439271F3CC98B);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeDynKinLink_t>>(_DynKinLinksOffset!.Value);
-    }
-  }
-  private static nint? _AntiTunnelProbesOffset;
-
-  public ref CUtlVector<FeAntiTunnelProbe_t> AntiTunnelProbes {
-    get {
-      if (_AntiTunnelProbesOffset == null) {
-        _AntiTunnelProbesOffset = Schema.GetOffset(0x1BA43927E34A5328);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeAntiTunnelProbe_t>>(_AntiTunnelProbesOffset!.Value);
-    }
-  }
-  private static nint? _AntiTunnelTargetNodesOffset;
-
-  public ref CUtlVector<ushort> AntiTunnelTargetNodes {
-    get {
-      if (_AntiTunnelTargetNodesOffset == null) {
-        _AntiTunnelTargetNodesOffset = Schema.GetOffset(0x1BA439275AB2DCE7);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_AntiTunnelTargetNodesOffset!.Value);
-    }
-  }
-  private static nint? _AxialEdgesOffset;
-
-  public ref CUtlVector<FeAxialEdgeBend_t> AxialEdges {
-    get {
-      if (_AxialEdgesOffset == null) {
-        _AxialEdgesOffset = Schema.GetOffset(0x1BA43927DE90F268);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeAxialEdgeBend_t>>(_AxialEdgesOffset!.Value);
-    }
-  }
-  private static nint? _NodeInvMassesOffset;
-
-  public ref CUtlVector<float> NodeInvMasses {
-    get {
-      if (_NodeInvMassesOffset == null) {
-        _NodeInvMassesOffset = Schema.GetOffset(0x1BA439274BC4CE04);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_NodeInvMassesOffset!.Value);
-    }
-  }
-  private static nint? _CtrlOffsetsOffset;
-
-  public ref CUtlVector<FeCtrlOffset_t> CtrlOffsets {
-    get {
-      if (_CtrlOffsetsOffset == null) {
-        _CtrlOffsetsOffset = Schema.GetOffset(0x1BA43927C1ACD824);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeCtrlOffset_t>>(_CtrlOffsetsOffset!.Value);
-    }
-  }
-  private static nint? _CtrlOsOffsetsOffset;
-
-  public ref CUtlVector<FeCtrlOsOffset_t> CtrlOsOffsets {
-    get {
-      if (_CtrlOsOffsetsOffset == null) {
-        _CtrlOsOffsetsOffset = Schema.GetOffset(0x1BA43927C7290656);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeCtrlOsOffset_t>>(_CtrlOsOffsetsOffset!.Value);
-    }
-  }
-  private static nint? _FollowNodesOffset;
-
-  public ref CUtlVector<FeFollowNode_t> FollowNodes {
-    get {
-      if (_FollowNodesOffset == null) {
-        _FollowNodesOffset = Schema.GetOffset(0x1BA43927ECF0783D);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeFollowNode_t>>(_FollowNodesOffset!.Value);
-    }
-  }
-  private static nint? _CollisionPlanesOffset;
-
-  public ref CUtlVector<FeCollisionPlane_t> CollisionPlanes {
-    get {
-      if (_CollisionPlanesOffset == null) {
-        _CollisionPlanesOffset = Schema.GetOffset(0x1BA43927B367BFCC);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeCollisionPlane_t>>(_CollisionPlanesOffset!.Value);
-    }
-  }
-  private static nint? _NodeIntegratorOffset;
-
-  public ref CUtlVector<FeNodeIntegrator_t> NodeIntegrator {
-    get {
-      if (_NodeIntegratorOffset == null) {
-        _NodeIntegratorOffset = Schema.GetOffset(0x1BA43927940C5E1C);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeNodeIntegrator_t>>(_NodeIntegratorOffset!.Value);
-    }
-  }
-  private static nint? _SpringIntegratorOffset;
-
-  public ref CUtlVector<FeSpringIntegrator_t> SpringIntegrator {
-    get {
-      if (_SpringIntegratorOffset == null) {
-        _SpringIntegratorOffset = Schema.GetOffset(0x1BA4392725EF8295);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeSpringIntegrator_t>>(_SpringIntegratorOffset!.Value);
-    }
-  }
-  private static nint? _SimdSpringIntegratorOffset;
-
-  public ref CUtlVector<FeSimdSpringIntegrator_t> SimdSpringIntegrator {
-    get {
-      if (_SimdSpringIntegratorOffset == null) {
-        _SimdSpringIntegratorOffset = Schema.GetOffset(0x1BA439273755280C);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeSimdSpringIntegrator_t>>(_SimdSpringIntegratorOffset!.Value);
-    }
-  }
-  private static nint? _WorldCollisionParamsOffset;
-
-  public ref CUtlVector<FeWorldCollisionParams_t> WorldCollisionParams {
-    get {
-      if (_WorldCollisionParamsOffset == null) {
-        _WorldCollisionParamsOffset = Schema.GetOffset(0x1BA43927BF45BE03);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeWorldCollisionParams_t>>(_WorldCollisionParamsOffset!.Value);
-    }
-  }
-  private static nint? _LegacyStretchForceOffset;
-
-  public ref CUtlVector<float> LegacyStretchForce {
-    get {
-      if (_LegacyStretchForceOffset == null) {
-        _LegacyStretchForceOffset = Schema.GetOffset(0x1BA43927C7AB43F6);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_LegacyStretchForceOffset!.Value);
-    }
-  }
-  private static nint? _NodeCollisionRadiiOffset;
-
-  public ref CUtlVector<float> NodeCollisionRadii {
-    get {
-      if (_NodeCollisionRadiiOffset == null) {
-        _NodeCollisionRadiiOffset = Schema.GetOffset(0x1BA43927CD59A3E0);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_NodeCollisionRadiiOffset!.Value);
-    }
-  }
-  private static nint? _DynNodeFrictionOffset;
-
-  public ref CUtlVector<float> DynNodeFriction {
-    get {
-      if (_DynNodeFrictionOffset == null) {
-        _DynNodeFrictionOffset = Schema.GetOffset(0x1BA43927B935608E);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_DynNodeFrictionOffset!.Value);
-    }
-  }
-  private static nint? _LocalRotation1Offset;
-
-  public ref CUtlVector<float> LocalRotation1 {
-    get {
-      if (_LocalRotation1Offset == null) {
-        _LocalRotation1Offset = Schema.GetOffset(0x1BA439275A8DBCEE);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_LocalRotation1Offset!.Value);
-    }
-  }
-  private static nint? _LocalForce2Offset;
-
-  public ref CUtlVector<float> LocalForce2 {
-    get {
-      if (_LocalForce2Offset == null) {
-        _LocalForce2Offset = Schema.GetOffset(0x1BA439275274CF1B);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_LocalForce2Offset!.Value);
-    }
-  }
-  private static nint? _TaperedCapsuleStretchesOffset;
-
-  public ref CUtlVector<FeTaperedCapsuleStretch_t> TaperedCapsuleStretches {
-    get {
-      if (_TaperedCapsuleStretchesOffset == null) {
-        _TaperedCapsuleStretchesOffset = Schema.GetOffset(0x1BA439271F019DBC);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeTaperedCapsuleStretch_t>>(_TaperedCapsuleStretchesOffset!.Value);
-    }
-  }
-  private static nint? _TaperedCapsuleRigidsOffset;
-
-  public ref CUtlVector<FeTaperedCapsuleRigid_t> TaperedCapsuleRigids {
-    get {
-      if (_TaperedCapsuleRigidsOffset == null) {
-        _TaperedCapsuleRigidsOffset = Schema.GetOffset(0x1BA43927F74D1937);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeTaperedCapsuleRigid_t>>(_TaperedCapsuleRigidsOffset!.Value);
-    }
-  }
-  private static nint? _SphereRigidsOffset;
-
-  public ref CUtlVector<FeSphereRigid_t> SphereRigids {
-    get {
-      if (_SphereRigidsOffset == null) {
-        _SphereRigidsOffset = Schema.GetOffset(0x1BA43927BAF34488);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeSphereRigid_t>>(_SphereRigidsOffset!.Value);
-    }
-  }
-  private static nint? _WorldCollisionNodesOffset;
-
-  public ref CUtlVector<ushort> WorldCollisionNodes {
-    get {
-      if (_WorldCollisionNodesOffset == null) {
-        _WorldCollisionNodesOffset = Schema.GetOffset(0x1BA43927FF7871EA);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_WorldCollisionNodesOffset!.Value);
-    }
-  }
-  private static nint? _TreeParentsOffset;
-
-  public ref CUtlVector<ushort> TreeParents {
-    get {
-      if (_TreeParentsOffset == null) {
-        _TreeParentsOffset = Schema.GetOffset(0x1BA43927BCB1115A);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_TreeParentsOffset!.Value);
-    }
-  }
-  private static nint? _TreeCollisionMasksOffset;
-
-  public ref CUtlVector<ushort> TreeCollisionMasks {
-    get {
-      if (_TreeCollisionMasksOffset == null) {
-        _TreeCollisionMasksOffset = Schema.GetOffset(0x1BA43927E89C96B8);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_TreeCollisionMasksOffset!.Value);
-    }
-  }
-  private static nint? _TreeChildrenOffset;
-
-  public ref CUtlVector<FeTreeChildren_t> TreeChildren {
-    get {
-      if (_TreeChildrenOffset == null) {
-        _TreeChildrenOffset = Schema.GetOffset(0x1BA43927FE09F5A2);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeTreeChildren_t>>(_TreeChildrenOffset!.Value);
-    }
-  }
-  private static nint? _FreeNodesOffset;
-
-  public ref CUtlVector<ushort> FreeNodes {
-    get {
-      if (_FreeNodesOffset == null) {
-        _FreeNodesOffset = Schema.GetOffset(0x1BA43927DBDC2128);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_FreeNodesOffset!.Value);
-    }
-  }
-  private static nint? _FitMatricesOffset;
-
-  public ref CUtlVector<FeFitMatrix_t> FitMatrices {
-    get {
-      if (_FitMatricesOffset == null) {
-        _FitMatricesOffset = Schema.GetOffset(0x1BA439273EA416A0);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeFitMatrix_t>>(_FitMatricesOffset!.Value);
-    }
-  }
-  private static nint? _FitWeightsOffset;
-
-  public ref CUtlVector<FeFitWeight_t> FitWeights {
-    get {
-      if (_FitWeightsOffset == null) {
-        _FitWeightsOffset = Schema.GetOffset(0x1BA43927C7FF749D);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeFitWeight_t>>(_FitWeightsOffset!.Value);
-    }
-  }
-  private static nint? _ReverseOffsetsOffset;
-
-  public ref CUtlVector<FeNodeReverseOffset_t> ReverseOffsets {
-    get {
-      if (_ReverseOffsetsOffset == null) {
-        _ReverseOffsetsOffset = Schema.GetOffset(0x1BA439274F76269B);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeNodeReverseOffset_t>>(_ReverseOffsetsOffset!.Value);
-    }
-  }
-  private static nint? _AnimStrayRadiiOffset;
-
-  public ref CUtlVector<FeAnimStrayRadius_t> AnimStrayRadii {
-    get {
-      if (_AnimStrayRadiiOffset == null) {
-        _AnimStrayRadiiOffset = Schema.GetOffset(0x1BA4392702505672);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeAnimStrayRadius_t>>(_AnimStrayRadiiOffset!.Value);
-    }
-  }
-  private static nint? _SimdAnimStrayRadiiOffset;
-
-  public ref CUtlVector<FeSimdAnimStrayRadius_t> SimdAnimStrayRadii {
-    get {
-      if (_SimdAnimStrayRadiiOffset == null) {
-        _SimdAnimStrayRadiiOffset = Schema.GetOffset(0x1BA43927BD404343);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeSimdAnimStrayRadius_t>>(_SimdAnimStrayRadiiOffset!.Value);
-    }
-  }
-  private static nint? _KelagerBendsOffset;
-
-  public ref CUtlVector<FeKelagerBend2_t> KelagerBends {
-    get {
-      if (_KelagerBendsOffset == null) {
-        _KelagerBendsOffset = Schema.GetOffset(0x1BA439279DE7A8A0);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeKelagerBend2_t>>(_KelagerBendsOffset!.Value);
-    }
-  }
-  private static nint? _CtrlSoftOffsetsOffset;
-
-  public ref CUtlVector<FeCtrlSoftOffset_t> CtrlSoftOffsets {
-    get {
-      if (_CtrlSoftOffsetsOffset == null) {
-        _CtrlSoftOffsetsOffset = Schema.GetOffset(0x1BA439278C66B564);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeCtrlSoftOffset_t>>(_CtrlSoftOffsetsOffset!.Value);
-    }
-  }
-  private static nint? _JiggleBonesOffset;
-
-  public ref CUtlVector<CFeIndexedJiggleBone> JiggleBones {
-    get {
-      if (_JiggleBonesOffset == null) {
-        _JiggleBonesOffset = Schema.GetOffset(0x1BA439274F458BCC);
-      }
-      return ref _Handle.AsRef<CUtlVector<CFeIndexedJiggleBone>>(_JiggleBonesOffset!.Value);
-    }
-  }
-  private static nint? _SourceElemsOffset;
-
-  public ref CUtlVector<ushort> SourceElems {
-    get {
-      if (_SourceElemsOffset == null) {
-        _SourceElemsOffset = Schema.GetOffset(0x1BA43927CF1C9DB0);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_SourceElemsOffset!.Value);
-    }
-  }
-  private static nint? _GoalDampedSpringIntegratorsOffset;
-
-  public ref CUtlVector<uint> GoalDampedSpringIntegrators {
-    get {
-      if (_GoalDampedSpringIntegratorsOffset == null) {
-        _GoalDampedSpringIntegratorsOffset = Schema.GetOffset(0x1BA4392770492CEE);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_GoalDampedSpringIntegratorsOffset!.Value);
-    }
-  }
-  private static nint? _TrisOffset;
-
-  public ref CUtlVector<FeTri_t> Tris {
-    get {
-      if (_TrisOffset == null) {
-        _TrisOffset = Schema.GetOffset(0x1BA43927AD4316D7);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeTri_t>>(_TrisOffset!.Value);
-    }
-  }
-  private static nint? _TriCount1Offset;
-
-  public ref ushort TriCount1 {
-    get {
-      if (_TriCount1Offset == null) {
-        _TriCount1Offset = Schema.GetOffset(0x1BA43927DA287160);
-      }
-      return ref _Handle.AsRef<ushort>(_TriCount1Offset!.Value);
-    }
-  }
-  private static nint? _TriCount2Offset;
-
-  public ref ushort TriCount2 {
-    get {
-      if (_TriCount2Offset == null) {
-        _TriCount2Offset = Schema.GetOffset(0x1BA43927DD287619);
-      }
-      return ref _Handle.AsRef<ushort>(_TriCount2Offset!.Value);
-    }
-  }
-  private static nint? _ReservedUint8Offset;
-
-  public ref byte ReservedUint8 {
-    get {
-      if (_ReservedUint8Offset == null) {
-        _ReservedUint8Offset = Schema.GetOffset(0x1BA439279DB35207);
-      }
-      return ref _Handle.AsRef<byte>(_ReservedUint8Offset!.Value);
-    }
-  }
-  private static nint? _ExtraPressureIterationsOffset;
-
-  public ref byte ExtraPressureIterations {
-    get {
-      if (_ExtraPressureIterationsOffset == null) {
-        _ExtraPressureIterationsOffset = Schema.GetOffset(0x1BA439270749204E);
-      }
-      return ref _Handle.AsRef<byte>(_ExtraPressureIterationsOffset!.Value);
-    }
-  }
-  private static nint? _ExtraGoalIterationsOffset;
-
-  public ref byte ExtraGoalIterations {
-    get {
-      if (_ExtraGoalIterationsOffset == null) {
-        _ExtraGoalIterationsOffset = Schema.GetOffset(0x1BA43927628FA5BA);
-      }
-      return ref _Handle.AsRef<byte>(_ExtraGoalIterationsOffset!.Value);
-    }
-  }
-  private static nint? _ExtraIterationsOffset;
-
-  public ref byte ExtraIterations {
-    get {
-      if (_ExtraIterationsOffset == null) {
-        _ExtraIterationsOffset = Schema.GetOffset(0x1BA4392737B28905);
-      }
-      return ref _Handle.AsRef<byte>(_ExtraIterationsOffset!.Value);
-    }
-  }
-  private static nint? _SDFRigidsOffset;
-
-  public ref CUtlVector<FeSDFRigid_t> SDFRigids {
-    get {
-      if (_SDFRigidsOffset == null) {
-        _SDFRigidsOffset = Schema.GetOffset(0x1BA43927E4F15C2C);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeSDFRigid_t>>(_SDFRigidsOffset!.Value);
-    }
-  }
-  private static nint? _BoxRigidsOffset;
-
-  public ref CUtlVector<FeBoxRigid_t> BoxRigids {
-    get {
-      if (_BoxRigidsOffset == null) {
-        _BoxRigidsOffset = Schema.GetOffset(0x1BA439273FF6F3EE);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeBoxRigid_t>>(_BoxRigidsOffset!.Value);
-    }
-  }
-  private static nint? _DynNodeVertexSetOffset;
-
-  public ref CUtlVector<byte> DynNodeVertexSet {
-    get {
-      if (_DynNodeVertexSetOffset == null) {
-        _DynNodeVertexSetOffset = Schema.GetOffset(0x1BA4392710AF881A);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_DynNodeVertexSetOffset!.Value);
-    }
-  }
-  private static nint? _VertexSetNamesOffset;
-
-  public ref CUtlVector<uint> VertexSetNames {
-    get {
-      if (_VertexSetNamesOffset == null) {
-        _VertexSetNamesOffset = Schema.GetOffset(0x1BA439270B557437);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_VertexSetNamesOffset!.Value);
-    }
-  }
-  private static nint? _RigidColliderPrioritiesOffset;
-
-  public ref CUtlVector<FeRigidColliderIndices_t> RigidColliderPriorities {
-    get {
-      if (_RigidColliderPrioritiesOffset == null) {
-        _RigidColliderPrioritiesOffset = Schema.GetOffset(0x1BA43927A6818704);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeRigidColliderIndices_t>>(_RigidColliderPrioritiesOffset!.Value);
-    }
-  }
-  private static nint? _MorphLayersOffset;
-
-  public ref CUtlVector<FeMorphLayerDepr_t> MorphLayers {
-    get {
-      if (_MorphLayersOffset == null) {
-        _MorphLayersOffset = Schema.GetOffset(0x1BA439279DF389BF);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeMorphLayerDepr_t>>(_MorphLayersOffset!.Value);
-    }
-  }
-  private static nint? _MorphSetDataOffset;
-
-  public ref CUtlVector<byte> MorphSetData {
-    get {
-      if (_MorphSetDataOffset == null) {
-        _MorphSetDataOffset = Schema.GetOffset(0x1BA43927DA9B396B);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_MorphSetDataOffset!.Value);
-    }
-  }
-  private static nint? _VertexMapsOffset;
-
-  public ref CUtlVector<FeVertexMapDesc_t> VertexMaps {
-    get {
-      if (_VertexMapsOffset == null) {
-        _VertexMapsOffset = Schema.GetOffset(0x1BA4392727EEF7FC);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeVertexMapDesc_t>>(_VertexMapsOffset!.Value);
-    }
-  }
-  private static nint? _VertexMapValuesOffset;
-
-  public ref CUtlVector<byte> VertexMapValues {
-    get {
-      if (_VertexMapValuesOffset == null) {
-        _VertexMapValuesOffset = Schema.GetOffset(0x1BA43927EAF6DABD);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_VertexMapValuesOffset!.Value);
-    }
-  }
-  private static nint? _EffectsOffset;
-
-  public ref CUtlVector<FeEffectDesc_t> Effects {
-    get {
-      if (_EffectsOffset == null) {
-        _EffectsOffset = Schema.GetOffset(0x1BA43927A60AA5E5);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeEffectDesc_t>>(_EffectsOffset!.Value);
-    }
-  }
-  private static nint? _LockToParentOffset;
-
-  public ref CUtlVector<FeCtrlOffset_t> LockToParent {
-    get {
-      if (_LockToParentOffset == null) {
-        _LockToParentOffset = Schema.GetOffset(0x1BA43927CFC56E77);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeCtrlOffset_t>>(_LockToParentOffset!.Value);
-    }
-  }
-  private static nint? _LockToGoalOffset;
-
-  public ref CUtlVector<ushort> LockToGoal {
-    get {
-      if (_LockToGoalOffset == null) {
-        _LockToGoalOffset = Schema.GetOffset(0x1BA43927EF4703D8);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_LockToGoalOffset!.Value);
-    }
-  }
-  private static nint? _SkelParentsOffset;
-
-  public ref CUtlVector<short> SkelParents {
-    get {
-      if (_SkelParentsOffset == null) {
-        _SkelParentsOffset = Schema.GetOffset(0x1BA43927D2AAA7FB);
-      }
-      return ref _Handle.AsRef<CUtlVector<short>>(_SkelParentsOffset!.Value);
-    }
-  }
-  private static nint? _DynNodeWindBasesOffset;
-
-  public ref CUtlVector<FeNodeWindBase_t> DynNodeWindBases {
-    get {
-      if (_DynNodeWindBasesOffset == null) {
-        _DynNodeWindBasesOffset = Schema.GetOffset(0x1BA439271ABAB644);
-      }
-      return ref _Handle.AsRef<CUtlVector<FeNodeWindBase_t>>(_DynNodeWindBasesOffset!.Value);
-    }
-  }
-  private static nint? _InternalPressureOffset;
-
-  public ref float InternalPressure {
-    get {
-      if (_InternalPressureOffset == null) {
-        _InternalPressureOffset = Schema.GetOffset(0x1BA43927B3CC4239);
-      }
-      return ref _Handle.AsRef<float>(_InternalPressureOffset!.Value);
-    }
-  }
-  private static nint? _DefaultTimeDilationOffset;
-
-  public ref float DefaultTimeDilation {
-    get {
-      if (_DefaultTimeDilationOffset == null) {
-        _DefaultTimeDilationOffset = Schema.GetOffset(0x1BA439271F1E706B);
-      }
-      return ref _Handle.AsRef<float>(_DefaultTimeDilationOffset!.Value);
-    }
-  }
-  private static nint? _WindageOffset;
-
-  public ref float Windage {
-    get {
-      if (_WindageOffset == null) {
-        _WindageOffset = Schema.GetOffset(0x1BA43927606E3F48);
-      }
-      return ref _Handle.AsRef<float>(_WindageOffset!.Value);
-    }
-  }
-  private static nint? _WindDragOffset;
-
-  public ref float WindDrag {
-    get {
-      if (_WindDragOffset == null) {
-        _WindDragOffset = Schema.GetOffset(0x1BA4392753E238D7);
-      }
-      return ref _Handle.AsRef<float>(_WindDragOffset!.Value);
-    }
-  }
-  private static nint? _DefaultSurfaceStretchOffset;
-
-  public ref float DefaultSurfaceStretch {
-    get {
-      if (_DefaultSurfaceStretchOffset == null) {
-        _DefaultSurfaceStretchOffset = Schema.GetOffset(0x1BA43927B772D9D0);
-      }
-      return ref _Handle.AsRef<float>(_DefaultSurfaceStretchOffset!.Value);
-    }
-  }
-  private static nint? _DefaultThreadStretchOffset;
-
-  public ref float DefaultThreadStretch {
-    get {
-      if (_DefaultThreadStretchOffset == null) {
-        _DefaultThreadStretchOffset = Schema.GetOffset(0x1BA439271386FDD5);
-      }
-      return ref _Handle.AsRef<float>(_DefaultThreadStretchOffset!.Value);
-    }
-  }
-  private static nint? _DefaultGravityScaleOffset;
-
-  public ref float DefaultGravityScale {
-    get {
-      if (_DefaultGravityScaleOffset == null) {
-        _DefaultGravityScaleOffset = Schema.GetOffset(0x1BA4392789AD0384);
-      }
-      return ref _Handle.AsRef<float>(_DefaultGravityScaleOffset!.Value);
-    }
-  }
-  private static nint? _DefaultVelAirDragOffset;
-
-  public ref float DefaultVelAirDrag {
-    get {
-      if (_DefaultVelAirDragOffset == null) {
-        _DefaultVelAirDragOffset = Schema.GetOffset(0x1BA439271833A0FB);
-      }
-      return ref _Handle.AsRef<float>(_DefaultVelAirDragOffset!.Value);
-    }
-  }
-  private static nint? _DefaultExpAirDragOffset;
-
-  public ref float DefaultExpAirDrag {
-    get {
-      if (_DefaultExpAirDragOffset == null) {
-        _DefaultExpAirDragOffset = Schema.GetOffset(0x1BA43927681CCE27);
-      }
-      return ref _Handle.AsRef<float>(_DefaultExpAirDragOffset!.Value);
-    }
-  }
-  private static nint? _DefaultVelQuadAirDragOffset;
-
-  public ref float DefaultVelQuadAirDrag {
-    get {
-      if (_DefaultVelQuadAirDragOffset == null) {
-        _DefaultVelQuadAirDragOffset = Schema.GetOffset(0x1BA43927BF28F362);
-      }
-      return ref _Handle.AsRef<float>(_DefaultVelQuadAirDragOffset!.Value);
-    }
-  }
-  private static nint? _DefaultExpQuadAirDragOffset;
-
-  public ref float DefaultExpQuadAirDrag {
-    get {
-      if (_DefaultExpQuadAirDragOffset == null) {
-        _DefaultExpQuadAirDragOffset = Schema.GetOffset(0x1BA43927F16B8A2E);
-      }
-      return ref _Handle.AsRef<float>(_DefaultExpQuadAirDragOffset!.Value);
-    }
-  }
-  private static nint? _RodVelocitySmoothRateOffset;
-
-  public ref float RodVelocitySmoothRate {
-    get {
-      if (_RodVelocitySmoothRateOffset == null) {
-        _RodVelocitySmoothRateOffset = Schema.GetOffset(0x1BA439274EDA647F);
-      }
-      return ref _Handle.AsRef<float>(_RodVelocitySmoothRateOffset!.Value);
-    }
-  }
-  private static nint? _QuadVelocitySmoothRateOffset;
-
-  public ref float QuadVelocitySmoothRate {
-    get {
-      if (_QuadVelocitySmoothRateOffset == null) {
-        _QuadVelocitySmoothRateOffset = Schema.GetOffset(0x1BA43927A5E06553);
-      }
-      return ref _Handle.AsRef<float>(_QuadVelocitySmoothRateOffset!.Value);
-    }
-  }
-  private static nint? _AddWorldCollisionRadiusOffset;
-
-  public ref float AddWorldCollisionRadius {
-    get {
-      if (_AddWorldCollisionRadiusOffset == null) {
-        _AddWorldCollisionRadiusOffset = Schema.GetOffset(0x1BA43927EBFB7154);
-      }
-      return ref _Handle.AsRef<float>(_AddWorldCollisionRadiusOffset!.Value);
-    }
-  }
-  private static nint? _DefaultVolumetricSolveAmountOffset;
-
-  public ref float DefaultVolumetricSolveAmount {
-    get {
-      if (_DefaultVolumetricSolveAmountOffset == null) {
-        _DefaultVolumetricSolveAmountOffset = Schema.GetOffset(0x1BA43927D69EF547);
-      }
-      return ref _Handle.AsRef<float>(_DefaultVolumetricSolveAmountOffset!.Value);
-    }
-  }
-  private static nint? _MotionSmoothCDTOffset;
-
-  public ref float MotionSmoothCDT {
-    get {
-      if (_MotionSmoothCDTOffset == null) {
-        _MotionSmoothCDTOffset = Schema.GetOffset(0x1BA439279C2571CC);
-      }
-      return ref _Handle.AsRef<float>(_MotionSmoothCDTOffset!.Value);
-    }
-  }
-  private static nint? _LocalDrag1Offset;
-
-  public ref float LocalDrag1 {
-    get {
-      if (_LocalDrag1Offset == null) {
-        _LocalDrag1Offset = Schema.GetOffset(0x1BA43927BE849FFB);
-      }
-      return ref _Handle.AsRef<float>(_LocalDrag1Offset!.Value);
-    }
-  }
-  private static nint? _RodVelocitySmoothIterationsOffset;
-
-  public ref ushort RodVelocitySmoothIterations {
-    get {
-      if (_RodVelocitySmoothIterationsOffset == null) {
-        _RodVelocitySmoothIterationsOffset = Schema.GetOffset(0x1BA439277B5933A3);
-      }
-      return ref _Handle.AsRef<ushort>(_RodVelocitySmoothIterationsOffset!.Value);
-    }
-  }
-  private static nint? _QuadVelocitySmoothIterationsOffset;
-
-  public ref ushort QuadVelocitySmoothIterations {
-    get {
-      if (_QuadVelocitySmoothIterationsOffset == null) {
-        _QuadVelocitySmoothIterationsOffset = Schema.GetOffset(0x1BA4392761612B9B);
-      }
-      return ref _Handle.AsRef<ushort>(_QuadVelocitySmoothIterationsOffset!.Value);
-    }
-  }
+internal partial class PhysFeModelDesc_tImpl : SchemaClass, PhysFeModelDesc_t
+{
+    public PhysFeModelDesc_tImpl(nint handle) : base(handle) { }
+
+    private static nint? _CtrlHashOffset;
+
+    public ref CUtlVector<uint> CtrlHash {
+        get {
+            _CtrlHashOffset = _CtrlHashOffset ?? Schema.GetOffset(0x1BA439272E1897A4);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_CtrlHashOffset!.Value);
+        }
+    }
+    private static nint? _CtrlNameOffset;
+
+    public ref CUtlVector<CUtlString> CtrlName {
+        get {
+            _CtrlNameOffset = _CtrlNameOffset ?? Schema.GetOffset(0x1BA4392720EBC8FF);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_CtrlNameOffset!.Value);
+        }
+    }
+    private static nint? _StaticNodeFlagsOffset;
+
+    public ref uint StaticNodeFlags {
+        get {
+            _StaticNodeFlagsOffset = _StaticNodeFlagsOffset ?? Schema.GetOffset(0x1BA43927491F024E);
+            return ref _Handle.AsRef<uint>(_StaticNodeFlagsOffset!.Value);
+        }
+    }
+    private static nint? _DynamicNodeFlagsOffset;
+
+    public ref uint DynamicNodeFlags {
+        get {
+            _DynamicNodeFlagsOffset = _DynamicNodeFlagsOffset ?? Schema.GetOffset(0x1BA439274F6F7661);
+            return ref _Handle.AsRef<uint>(_DynamicNodeFlagsOffset!.Value);
+        }
+    }
+    private static nint? _LocalForceOffset;
+
+    public ref float LocalForce {
+        get {
+            _LocalForceOffset = _LocalForceOffset ?? Schema.GetOffset(0x1BA439275E779595);
+            return ref _Handle.AsRef<float>(_LocalForceOffset!.Value);
+        }
+    }
+    private static nint? _LocalRotationOffset;
+
+    public ref float LocalRotation {
+        get {
+            _LocalRotationOffset = _LocalRotationOffset ?? Schema.GetOffset(0x1BA4392731E3CCB4);
+            return ref _Handle.AsRef<float>(_LocalRotationOffset!.Value);
+        }
+    }
+    private static nint? _NodeCountOffset;
+
+    public ref ushort NodeCount {
+        get {
+            _NodeCountOffset = _NodeCountOffset ?? Schema.GetOffset(0x1BA4392709F73A00);
+            return ref _Handle.AsRef<ushort>(_NodeCountOffset!.Value);
+        }
+    }
+    private static nint? _StaticNodesOffset;
+
+    public ref ushort StaticNodes {
+        get {
+            _StaticNodesOffset = _StaticNodesOffset ?? Schema.GetOffset(0x1BA43927A58AC0EC);
+            return ref _Handle.AsRef<ushort>(_StaticNodesOffset!.Value);
+        }
+    }
+    private static nint? _RotLockStaticNodesOffset;
+
+    public ref ushort RotLockStaticNodes {
+        get {
+            _RotLockStaticNodesOffset = _RotLockStaticNodesOffset ?? Schema.GetOffset(0x1BA43927B63C3930);
+            return ref _Handle.AsRef<ushort>(_RotLockStaticNodesOffset!.Value);
+        }
+    }
+    private static nint? _FirstPositionDrivenNodeOffset;
+
+    public ref ushort FirstPositionDrivenNode {
+        get {
+            _FirstPositionDrivenNodeOffset = _FirstPositionDrivenNodeOffset ?? Schema.GetOffset(0x1BA439272E0F5D4C);
+            return ref _Handle.AsRef<ushort>(_FirstPositionDrivenNodeOffset!.Value);
+        }
+    }
+    private static nint? _SimdTriCount1Offset;
+
+    public ref ushort SimdTriCount1 {
+        get {
+            _SimdTriCount1Offset = _SimdTriCount1Offset ?? Schema.GetOffset(0x1BA439274F73E5EF);
+            return ref _Handle.AsRef<ushort>(_SimdTriCount1Offset!.Value);
+        }
+    }
+    private static nint? _SimdTriCount2Offset;
+
+    public ref ushort SimdTriCount2 {
+        get {
+            _SimdTriCount2Offset = _SimdTriCount2Offset ?? Schema.GetOffset(0x1BA439275073E782);
+            return ref _Handle.AsRef<ushort>(_SimdTriCount2Offset!.Value);
+        }
+    }
+    private static nint? _SimdQuadCount1Offset;
+
+    public ref ushort SimdQuadCount1 {
+        get {
+            _SimdQuadCount1Offset = _SimdQuadCount1Offset ?? Schema.GetOffset(0x1BA439275BC6C099);
+            return ref _Handle.AsRef<ushort>(_SimdQuadCount1Offset!.Value);
+        }
+    }
+    private static nint? _SimdQuadCount2Offset;
+
+    public ref ushort SimdQuadCount2 {
+        get {
+            _SimdQuadCount2Offset = _SimdQuadCount2Offset ?? Schema.GetOffset(0x1BA4392758C6BBE0);
+            return ref _Handle.AsRef<ushort>(_SimdQuadCount2Offset!.Value);
+        }
+    }
+    private static nint? _QuadCount1Offset;
+
+    public ref ushort QuadCount1 {
+        get {
+            _QuadCount1Offset = _QuadCount1Offset ?? Schema.GetOffset(0x1BA439273BC36C10);
+            return ref _Handle.AsRef<ushort>(_QuadCount1Offset!.Value);
+        }
+    }
+    private static nint? _QuadCount2Offset;
+
+    public ref ushort QuadCount2 {
+        get {
+            _QuadCount2Offset = _QuadCount2Offset ?? Schema.GetOffset(0x1BA439273EC370C9);
+            return ref _Handle.AsRef<ushort>(_QuadCount2Offset!.Value);
+        }
+    }
+    private static nint? _TreeDepthOffset;
+
+    public ref ushort TreeDepth {
+        get {
+            _TreeDepthOffset = _TreeDepthOffset ?? Schema.GetOffset(0x1BA439271295DF6E);
+            return ref _Handle.AsRef<ushort>(_TreeDepthOffset!.Value);
+        }
+    }
+    private static nint? _NodeBaseJiggleboneDependsCountOffset;
+
+    public ref ushort NodeBaseJiggleboneDependsCount {
+        get {
+            _NodeBaseJiggleboneDependsCountOffset = _NodeBaseJiggleboneDependsCountOffset ?? Schema.GetOffset(0x1BA439277F14AD2C);
+            return ref _Handle.AsRef<ushort>(_NodeBaseJiggleboneDependsCountOffset!.Value);
+        }
+    }
+    private static nint? _RopeCountOffset;
+
+    public ref ushort RopeCount {
+        get {
+            _RopeCountOffset = _RopeCountOffset ?? Schema.GetOffset(0x1BA43927DC972C90);
+            return ref _Handle.AsRef<ushort>(_RopeCountOffset!.Value);
+        }
+    }
+    private static nint? _RopesOffset;
+
+    public ref CUtlVector<ushort> Ropes {
+        get {
+            _RopesOffset = _RopesOffset ?? Schema.GetOffset(0x1BA43927245D4F7A);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_RopesOffset!.Value);
+        }
+    }
+    private static nint? _NodeBasesOffset;
+
+    public ref CUtlVector<FeNodeBase_t> NodeBases {
+        get {
+            _NodeBasesOffset = _NodeBasesOffset ?? Schema.GetOffset(0x1BA43927D78A7829);
+            return ref _Handle.AsRef<CUtlVector<FeNodeBase_t>>(_NodeBasesOffset!.Value);
+        }
+    }
+    private static nint? _SimdNodeBasesOffset;
+
+    public ref CUtlVector<FeSimdNodeBase_t> SimdNodeBases {
+        get {
+            _SimdNodeBasesOffset = _SimdNodeBasesOffset ?? Schema.GetOffset(0x1BA439276CEB34CE);
+            return ref _Handle.AsRef<CUtlVector<FeSimdNodeBase_t>>(_SimdNodeBasesOffset!.Value);
+        }
+    }
+    private static nint? _QuadsOffset;
+
+    public ref CUtlVector<FeQuad_t> Quads {
+        get {
+            _QuadsOffset = _QuadsOffset ?? Schema.GetOffset(0x1BA43927F0B96887);
+            return ref _Handle.AsRef<CUtlVector<FeQuad_t>>(_QuadsOffset!.Value);
+        }
+    }
+    private static nint? _SimdQuadsOffset;
+
+    public ref CUtlVector<FeSimdQuad_t> SimdQuads {
+        get {
+            _SimdQuadsOffset = _SimdQuadsOffset ?? Schema.GetOffset(0x1BA439272A528AEC);
+            return ref _Handle.AsRef<CUtlVector<FeSimdQuad_t>>(_SimdQuadsOffset!.Value);
+        }
+    }
+    private static nint? _SimdTrisOffset;
+
+    public ref CUtlVector<SchemaUntypedField> SimdTris {
+        get {
+            _SimdTrisOffset = _SimdTrisOffset ?? Schema.GetOffset(0x1BA4392708B7DB8E);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_SimdTrisOffset!.Value);
+        }
+    }
+    private static nint? _SimdRodsOffset;
+
+    public ref CUtlVector<FeSimdRodConstraint_t> SimdRods {
+        get {
+            _SimdRodsOffset = _SimdRodsOffset ?? Schema.GetOffset(0x1BA4392772C6F02A);
+            return ref _Handle.AsRef<CUtlVector<FeSimdRodConstraint_t>>(_SimdRodsOffset!.Value);
+        }
+    }
+    private static nint? _SimdRodsAnimOffset;
+
+    public ref CUtlVector<FeSimdRodConstraintAnim_t> SimdRodsAnim {
+        get {
+            _SimdRodsAnimOffset = _SimdRodsAnimOffset ?? Schema.GetOffset(0x1BA439272F796453);
+            return ref _Handle.AsRef<CUtlVector<FeSimdRodConstraintAnim_t>>(_SimdRodsAnimOffset!.Value);
+        }
+    }
+    private static nint? _InitPoseOffset;
+
+    public ref CUtlVector<CTransform> InitPose {
+        get {
+            _InitPoseOffset = _InitPoseOffset ?? Schema.GetOffset(0x1BA439275E468732);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_InitPoseOffset!.Value);
+        }
+    }
+    private static nint? _RodsOffset;
+
+    public ref CUtlVector<FeRodConstraint_t> Rods {
+        get {
+            _RodsOffset = _RodsOffset ?? Schema.GetOffset(0x1BA439276FC1D3D7);
+            return ref _Handle.AsRef<CUtlVector<FeRodConstraint_t>>(_RodsOffset!.Value);
+        }
+    }
+    private static nint? _TwistsOffset;
+
+    public ref CUtlVector<FeTwistConstraint_t> Twists {
+        get {
+            _TwistsOffset = _TwistsOffset ?? Schema.GetOffset(0x1BA439272079B489);
+            return ref _Handle.AsRef<CUtlVector<FeTwistConstraint_t>>(_TwistsOffset!.Value);
+        }
+    }
+    private static nint? _HingeLimitsOffset;
+
+    public ref CUtlVector<FeHingeLimit_t> HingeLimits {
+        get {
+            _HingeLimitsOffset = _HingeLimitsOffset ?? Schema.GetOffset(0x1BA43927EDFF16F4);
+            return ref _Handle.AsRef<CUtlVector<FeHingeLimit_t>>(_HingeLimitsOffset!.Value);
+        }
+    }
+    private static nint? _AntiTunnelBytecodeOffset;
+
+    public ref CUtlVector<uint> AntiTunnelBytecode {
+        get {
+            _AntiTunnelBytecodeOffset = _AntiTunnelBytecodeOffset ?? Schema.GetOffset(0x1BA43927FD33DEEC);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_AntiTunnelBytecodeOffset!.Value);
+        }
+    }
+    private static nint? _DynKinLinksOffset;
+
+    public ref CUtlVector<FeDynKinLink_t> DynKinLinks {
+        get {
+            _DynKinLinksOffset = _DynKinLinksOffset ?? Schema.GetOffset(0x1BA439271F3CC98B);
+            return ref _Handle.AsRef<CUtlVector<FeDynKinLink_t>>(_DynKinLinksOffset!.Value);
+        }
+    }
+    private static nint? _AntiTunnelProbesOffset;
+
+    public ref CUtlVector<FeAntiTunnelProbe_t> AntiTunnelProbes {
+        get {
+            _AntiTunnelProbesOffset = _AntiTunnelProbesOffset ?? Schema.GetOffset(0x1BA43927E34A5328);
+            return ref _Handle.AsRef<CUtlVector<FeAntiTunnelProbe_t>>(_AntiTunnelProbesOffset!.Value);
+        }
+    }
+    private static nint? _AntiTunnelTargetNodesOffset;
+
+    public ref CUtlVector<ushort> AntiTunnelTargetNodes {
+        get {
+            _AntiTunnelTargetNodesOffset = _AntiTunnelTargetNodesOffset ?? Schema.GetOffset(0x1BA439275AB2DCE7);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_AntiTunnelTargetNodesOffset!.Value);
+        }
+    }
+    private static nint? _AxialEdgesOffset;
+
+    public ref CUtlVector<FeAxialEdgeBend_t> AxialEdges {
+        get {
+            _AxialEdgesOffset = _AxialEdgesOffset ?? Schema.GetOffset(0x1BA43927DE90F268);
+            return ref _Handle.AsRef<CUtlVector<FeAxialEdgeBend_t>>(_AxialEdgesOffset!.Value);
+        }
+    }
+    private static nint? _NodeInvMassesOffset;
+
+    public ref CUtlVector<float> NodeInvMasses {
+        get {
+            _NodeInvMassesOffset = _NodeInvMassesOffset ?? Schema.GetOffset(0x1BA439274BC4CE04);
+            return ref _Handle.AsRef<CUtlVector<float>>(_NodeInvMassesOffset!.Value);
+        }
+    }
+    private static nint? _CtrlOffsetsOffset;
+
+    public ref CUtlVector<FeCtrlOffset_t> CtrlOffsets {
+        get {
+            _CtrlOffsetsOffset = _CtrlOffsetsOffset ?? Schema.GetOffset(0x1BA43927C1ACD824);
+            return ref _Handle.AsRef<CUtlVector<FeCtrlOffset_t>>(_CtrlOffsetsOffset!.Value);
+        }
+    }
+    private static nint? _CtrlOsOffsetsOffset;
+
+    public ref CUtlVector<FeCtrlOsOffset_t> CtrlOsOffsets {
+        get {
+            _CtrlOsOffsetsOffset = _CtrlOsOffsetsOffset ?? Schema.GetOffset(0x1BA43927C7290656);
+            return ref _Handle.AsRef<CUtlVector<FeCtrlOsOffset_t>>(_CtrlOsOffsetsOffset!.Value);
+        }
+    }
+    private static nint? _FollowNodesOffset;
+
+    public ref CUtlVector<FeFollowNode_t> FollowNodes {
+        get {
+            _FollowNodesOffset = _FollowNodesOffset ?? Schema.GetOffset(0x1BA43927ECF0783D);
+            return ref _Handle.AsRef<CUtlVector<FeFollowNode_t>>(_FollowNodesOffset!.Value);
+        }
+    }
+    private static nint? _CollisionPlanesOffset;
+
+    public ref CUtlVector<FeCollisionPlane_t> CollisionPlanes {
+        get {
+            _CollisionPlanesOffset = _CollisionPlanesOffset ?? Schema.GetOffset(0x1BA43927B367BFCC);
+            return ref _Handle.AsRef<CUtlVector<FeCollisionPlane_t>>(_CollisionPlanesOffset!.Value);
+        }
+    }
+    private static nint? _NodeIntegratorOffset;
+
+    public ref CUtlVector<FeNodeIntegrator_t> NodeIntegrator {
+        get {
+            _NodeIntegratorOffset = _NodeIntegratorOffset ?? Schema.GetOffset(0x1BA43927940C5E1C);
+            return ref _Handle.AsRef<CUtlVector<FeNodeIntegrator_t>>(_NodeIntegratorOffset!.Value);
+        }
+    }
+    private static nint? _SpringIntegratorOffset;
+
+    public ref CUtlVector<FeSpringIntegrator_t> SpringIntegrator {
+        get {
+            _SpringIntegratorOffset = _SpringIntegratorOffset ?? Schema.GetOffset(0x1BA4392725EF8295);
+            return ref _Handle.AsRef<CUtlVector<FeSpringIntegrator_t>>(_SpringIntegratorOffset!.Value);
+        }
+    }
+    private static nint? _SimdSpringIntegratorOffset;
+
+    public ref CUtlVector<FeSimdSpringIntegrator_t> SimdSpringIntegrator {
+        get {
+            _SimdSpringIntegratorOffset = _SimdSpringIntegratorOffset ?? Schema.GetOffset(0x1BA439273755280C);
+            return ref _Handle.AsRef<CUtlVector<FeSimdSpringIntegrator_t>>(_SimdSpringIntegratorOffset!.Value);
+        }
+    }
+    private static nint? _WorldCollisionParamsOffset;
+
+    public ref CUtlVector<FeWorldCollisionParams_t> WorldCollisionParams {
+        get {
+            _WorldCollisionParamsOffset = _WorldCollisionParamsOffset ?? Schema.GetOffset(0x1BA43927BF45BE03);
+            return ref _Handle.AsRef<CUtlVector<FeWorldCollisionParams_t>>(_WorldCollisionParamsOffset!.Value);
+        }
+    }
+    private static nint? _LegacyStretchForceOffset;
+
+    public ref CUtlVector<float> LegacyStretchForce {
+        get {
+            _LegacyStretchForceOffset = _LegacyStretchForceOffset ?? Schema.GetOffset(0x1BA43927C7AB43F6);
+            return ref _Handle.AsRef<CUtlVector<float>>(_LegacyStretchForceOffset!.Value);
+        }
+    }
+    private static nint? _NodeCollisionRadiiOffset;
+
+    public ref CUtlVector<float> NodeCollisionRadii {
+        get {
+            _NodeCollisionRadiiOffset = _NodeCollisionRadiiOffset ?? Schema.GetOffset(0x1BA43927CD59A3E0);
+            return ref _Handle.AsRef<CUtlVector<float>>(_NodeCollisionRadiiOffset!.Value);
+        }
+    }
+    private static nint? _DynNodeFrictionOffset;
+
+    public ref CUtlVector<float> DynNodeFriction {
+        get {
+            _DynNodeFrictionOffset = _DynNodeFrictionOffset ?? Schema.GetOffset(0x1BA43927B935608E);
+            return ref _Handle.AsRef<CUtlVector<float>>(_DynNodeFrictionOffset!.Value);
+        }
+    }
+    private static nint? _LocalRotation1Offset;
+
+    public ref CUtlVector<float> LocalRotation1 {
+        get {
+            _LocalRotation1Offset = _LocalRotation1Offset ?? Schema.GetOffset(0x1BA439275A8DBCEE);
+            return ref _Handle.AsRef<CUtlVector<float>>(_LocalRotation1Offset!.Value);
+        }
+    }
+    private static nint? _LocalForce2Offset;
+
+    public ref CUtlVector<float> LocalForce2 {
+        get {
+            _LocalForce2Offset = _LocalForce2Offset ?? Schema.GetOffset(0x1BA439275274CF1B);
+            return ref _Handle.AsRef<CUtlVector<float>>(_LocalForce2Offset!.Value);
+        }
+    }
+    private static nint? _TaperedCapsuleStretchesOffset;
+
+    public ref CUtlVector<FeTaperedCapsuleStretch_t> TaperedCapsuleStretches {
+        get {
+            _TaperedCapsuleStretchesOffset = _TaperedCapsuleStretchesOffset ?? Schema.GetOffset(0x1BA439271F019DBC);
+            return ref _Handle.AsRef<CUtlVector<FeTaperedCapsuleStretch_t>>(_TaperedCapsuleStretchesOffset!.Value);
+        }
+    }
+    private static nint? _TaperedCapsuleRigidsOffset;
+
+    public ref CUtlVector<FeTaperedCapsuleRigid_t> TaperedCapsuleRigids {
+        get {
+            _TaperedCapsuleRigidsOffset = _TaperedCapsuleRigidsOffset ?? Schema.GetOffset(0x1BA43927F74D1937);
+            return ref _Handle.AsRef<CUtlVector<FeTaperedCapsuleRigid_t>>(_TaperedCapsuleRigidsOffset!.Value);
+        }
+    }
+    private static nint? _SphereRigidsOffset;
+
+    public ref CUtlVector<FeSphereRigid_t> SphereRigids {
+        get {
+            _SphereRigidsOffset = _SphereRigidsOffset ?? Schema.GetOffset(0x1BA43927BAF34488);
+            return ref _Handle.AsRef<CUtlVector<FeSphereRigid_t>>(_SphereRigidsOffset!.Value);
+        }
+    }
+    private static nint? _WorldCollisionNodesOffset;
+
+    public ref CUtlVector<ushort> WorldCollisionNodes {
+        get {
+            _WorldCollisionNodesOffset = _WorldCollisionNodesOffset ?? Schema.GetOffset(0x1BA43927FF7871EA);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_WorldCollisionNodesOffset!.Value);
+        }
+    }
+    private static nint? _TreeParentsOffset;
+
+    public ref CUtlVector<ushort> TreeParents {
+        get {
+            _TreeParentsOffset = _TreeParentsOffset ?? Schema.GetOffset(0x1BA43927BCB1115A);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_TreeParentsOffset!.Value);
+        }
+    }
+    private static nint? _TreeCollisionMasksOffset;
+
+    public ref CUtlVector<ushort> TreeCollisionMasks {
+        get {
+            _TreeCollisionMasksOffset = _TreeCollisionMasksOffset ?? Schema.GetOffset(0x1BA43927E89C96B8);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_TreeCollisionMasksOffset!.Value);
+        }
+    }
+    private static nint? _TreeChildrenOffset;
+
+    public ref CUtlVector<FeTreeChildren_t> TreeChildren {
+        get {
+            _TreeChildrenOffset = _TreeChildrenOffset ?? Schema.GetOffset(0x1BA43927FE09F5A2);
+            return ref _Handle.AsRef<CUtlVector<FeTreeChildren_t>>(_TreeChildrenOffset!.Value);
+        }
+    }
+    private static nint? _FreeNodesOffset;
+
+    public ref CUtlVector<ushort> FreeNodes {
+        get {
+            _FreeNodesOffset = _FreeNodesOffset ?? Schema.GetOffset(0x1BA43927DBDC2128);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_FreeNodesOffset!.Value);
+        }
+    }
+    private static nint? _FitMatricesOffset;
+
+    public ref CUtlVector<FeFitMatrix_t> FitMatrices {
+        get {
+            _FitMatricesOffset = _FitMatricesOffset ?? Schema.GetOffset(0x1BA439273EA416A0);
+            return ref _Handle.AsRef<CUtlVector<FeFitMatrix_t>>(_FitMatricesOffset!.Value);
+        }
+    }
+    private static nint? _FitWeightsOffset;
+
+    public ref CUtlVector<FeFitWeight_t> FitWeights {
+        get {
+            _FitWeightsOffset = _FitWeightsOffset ?? Schema.GetOffset(0x1BA43927C7FF749D);
+            return ref _Handle.AsRef<CUtlVector<FeFitWeight_t>>(_FitWeightsOffset!.Value);
+        }
+    }
+    private static nint? _ReverseOffsetsOffset;
+
+    public ref CUtlVector<FeNodeReverseOffset_t> ReverseOffsets {
+        get {
+            _ReverseOffsetsOffset = _ReverseOffsetsOffset ?? Schema.GetOffset(0x1BA439274F76269B);
+            return ref _Handle.AsRef<CUtlVector<FeNodeReverseOffset_t>>(_ReverseOffsetsOffset!.Value);
+        }
+    }
+    private static nint? _AnimStrayRadiiOffset;
+
+    public ref CUtlVector<FeAnimStrayRadius_t> AnimStrayRadii {
+        get {
+            _AnimStrayRadiiOffset = _AnimStrayRadiiOffset ?? Schema.GetOffset(0x1BA4392702505672);
+            return ref _Handle.AsRef<CUtlVector<FeAnimStrayRadius_t>>(_AnimStrayRadiiOffset!.Value);
+        }
+    }
+    private static nint? _SimdAnimStrayRadiiOffset;
+
+    public ref CUtlVector<FeSimdAnimStrayRadius_t> SimdAnimStrayRadii {
+        get {
+            _SimdAnimStrayRadiiOffset = _SimdAnimStrayRadiiOffset ?? Schema.GetOffset(0x1BA43927BD404343);
+            return ref _Handle.AsRef<CUtlVector<FeSimdAnimStrayRadius_t>>(_SimdAnimStrayRadiiOffset!.Value);
+        }
+    }
+    private static nint? _KelagerBendsOffset;
+
+    public ref CUtlVector<FeKelagerBend2_t> KelagerBends {
+        get {
+            _KelagerBendsOffset = _KelagerBendsOffset ?? Schema.GetOffset(0x1BA439279DE7A8A0);
+            return ref _Handle.AsRef<CUtlVector<FeKelagerBend2_t>>(_KelagerBendsOffset!.Value);
+        }
+    }
+    private static nint? _CtrlSoftOffsetsOffset;
+
+    public ref CUtlVector<FeCtrlSoftOffset_t> CtrlSoftOffsets {
+        get {
+            _CtrlSoftOffsetsOffset = _CtrlSoftOffsetsOffset ?? Schema.GetOffset(0x1BA439278C66B564);
+            return ref _Handle.AsRef<CUtlVector<FeCtrlSoftOffset_t>>(_CtrlSoftOffsetsOffset!.Value);
+        }
+    }
+    private static nint? _JiggleBonesOffset;
+
+    public ref CUtlVector<CFeIndexedJiggleBone> JiggleBones {
+        get {
+            _JiggleBonesOffset = _JiggleBonesOffset ?? Schema.GetOffset(0x1BA439274F458BCC);
+            return ref _Handle.AsRef<CUtlVector<CFeIndexedJiggleBone>>(_JiggleBonesOffset!.Value);
+        }
+    }
+    private static nint? _SourceElemsOffset;
+
+    public ref CUtlVector<ushort> SourceElems {
+        get {
+            _SourceElemsOffset = _SourceElemsOffset ?? Schema.GetOffset(0x1BA43927CF1C9DB0);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_SourceElemsOffset!.Value);
+        }
+    }
+    private static nint? _GoalDampedSpringIntegratorsOffset;
+
+    public ref CUtlVector<uint> GoalDampedSpringIntegrators {
+        get {
+            _GoalDampedSpringIntegratorsOffset = _GoalDampedSpringIntegratorsOffset ?? Schema.GetOffset(0x1BA4392770492CEE);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_GoalDampedSpringIntegratorsOffset!.Value);
+        }
+    }
+    private static nint? _TrisOffset;
+
+    public ref CUtlVector<FeTri_t> Tris {
+        get {
+            _TrisOffset = _TrisOffset ?? Schema.GetOffset(0x1BA43927AD4316D7);
+            return ref _Handle.AsRef<CUtlVector<FeTri_t>>(_TrisOffset!.Value);
+        }
+    }
+    private static nint? _TriCount1Offset;
+
+    public ref ushort TriCount1 {
+        get {
+            _TriCount1Offset = _TriCount1Offset ?? Schema.GetOffset(0x1BA43927DA287160);
+            return ref _Handle.AsRef<ushort>(_TriCount1Offset!.Value);
+        }
+    }
+    private static nint? _TriCount2Offset;
+
+    public ref ushort TriCount2 {
+        get {
+            _TriCount2Offset = _TriCount2Offset ?? Schema.GetOffset(0x1BA43927DD287619);
+            return ref _Handle.AsRef<ushort>(_TriCount2Offset!.Value);
+        }
+    }
+    private static nint? _ReservedUint8Offset;
+
+    public ref byte ReservedUint8 {
+        get {
+            _ReservedUint8Offset = _ReservedUint8Offset ?? Schema.GetOffset(0x1BA439279DB35207);
+            return ref _Handle.AsRef<byte>(_ReservedUint8Offset!.Value);
+        }
+    }
+    private static nint? _ExtraPressureIterationsOffset;
+
+    public ref byte ExtraPressureIterations {
+        get {
+            _ExtraPressureIterationsOffset = _ExtraPressureIterationsOffset ?? Schema.GetOffset(0x1BA439270749204E);
+            return ref _Handle.AsRef<byte>(_ExtraPressureIterationsOffset!.Value);
+        }
+    }
+    private static nint? _ExtraGoalIterationsOffset;
+
+    public ref byte ExtraGoalIterations {
+        get {
+            _ExtraGoalIterationsOffset = _ExtraGoalIterationsOffset ?? Schema.GetOffset(0x1BA43927628FA5BA);
+            return ref _Handle.AsRef<byte>(_ExtraGoalIterationsOffset!.Value);
+        }
+    }
+    private static nint? _ExtraIterationsOffset;
+
+    public ref byte ExtraIterations {
+        get {
+            _ExtraIterationsOffset = _ExtraIterationsOffset ?? Schema.GetOffset(0x1BA4392737B28905);
+            return ref _Handle.AsRef<byte>(_ExtraIterationsOffset!.Value);
+        }
+    }
+    private static nint? _SDFRigidsOffset;
+
+    public ref CUtlVector<FeSDFRigid_t> SDFRigids {
+        get {
+            _SDFRigidsOffset = _SDFRigidsOffset ?? Schema.GetOffset(0x1BA43927E4F15C2C);
+            return ref _Handle.AsRef<CUtlVector<FeSDFRigid_t>>(_SDFRigidsOffset!.Value);
+        }
+    }
+    private static nint? _BoxRigidsOffset;
+
+    public ref CUtlVector<FeBoxRigid_t> BoxRigids {
+        get {
+            _BoxRigidsOffset = _BoxRigidsOffset ?? Schema.GetOffset(0x1BA439273FF6F3EE);
+            return ref _Handle.AsRef<CUtlVector<FeBoxRigid_t>>(_BoxRigidsOffset!.Value);
+        }
+    }
+    private static nint? _DynNodeVertexSetOffset;
+
+    public ref CUtlVector<byte> DynNodeVertexSet {
+        get {
+            _DynNodeVertexSetOffset = _DynNodeVertexSetOffset ?? Schema.GetOffset(0x1BA4392710AF881A);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_DynNodeVertexSetOffset!.Value);
+        }
+    }
+    private static nint? _VertexSetNamesOffset;
+
+    public ref CUtlVector<uint> VertexSetNames {
+        get {
+            _VertexSetNamesOffset = _VertexSetNamesOffset ?? Schema.GetOffset(0x1BA439270B557437);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_VertexSetNamesOffset!.Value);
+        }
+    }
+    private static nint? _RigidColliderPrioritiesOffset;
+
+    public ref CUtlVector<FeRigidColliderIndices_t> RigidColliderPriorities {
+        get {
+            _RigidColliderPrioritiesOffset = _RigidColliderPrioritiesOffset ?? Schema.GetOffset(0x1BA43927A6818704);
+            return ref _Handle.AsRef<CUtlVector<FeRigidColliderIndices_t>>(_RigidColliderPrioritiesOffset!.Value);
+        }
+    }
+    private static nint? _MorphLayersOffset;
+
+    public ref CUtlVector<FeMorphLayerDepr_t> MorphLayers {
+        get {
+            _MorphLayersOffset = _MorphLayersOffset ?? Schema.GetOffset(0x1BA439279DF389BF);
+            return ref _Handle.AsRef<CUtlVector<FeMorphLayerDepr_t>>(_MorphLayersOffset!.Value);
+        }
+    }
+    private static nint? _MorphSetDataOffset;
+
+    public ref CUtlVector<byte> MorphSetData {
+        get {
+            _MorphSetDataOffset = _MorphSetDataOffset ?? Schema.GetOffset(0x1BA43927DA9B396B);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_MorphSetDataOffset!.Value);
+        }
+    }
+    private static nint? _VertexMapsOffset;
+
+    public ref CUtlVector<FeVertexMapDesc_t> VertexMaps {
+        get {
+            _VertexMapsOffset = _VertexMapsOffset ?? Schema.GetOffset(0x1BA4392727EEF7FC);
+            return ref _Handle.AsRef<CUtlVector<FeVertexMapDesc_t>>(_VertexMapsOffset!.Value);
+        }
+    }
+    private static nint? _VertexMapValuesOffset;
+
+    public ref CUtlVector<byte> VertexMapValues {
+        get {
+            _VertexMapValuesOffset = _VertexMapValuesOffset ?? Schema.GetOffset(0x1BA43927EAF6DABD);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_VertexMapValuesOffset!.Value);
+        }
+    }
+    private static nint? _EffectsOffset;
+
+    public ref CUtlVector<FeEffectDesc_t> Effects {
+        get {
+            _EffectsOffset = _EffectsOffset ?? Schema.GetOffset(0x1BA43927A60AA5E5);
+            return ref _Handle.AsRef<CUtlVector<FeEffectDesc_t>>(_EffectsOffset!.Value);
+        }
+    }
+    private static nint? _LockToParentOffset;
+
+    public ref CUtlVector<FeCtrlOffset_t> LockToParent {
+        get {
+            _LockToParentOffset = _LockToParentOffset ?? Schema.GetOffset(0x1BA43927CFC56E77);
+            return ref _Handle.AsRef<CUtlVector<FeCtrlOffset_t>>(_LockToParentOffset!.Value);
+        }
+    }
+    private static nint? _LockToGoalOffset;
+
+    public ref CUtlVector<ushort> LockToGoal {
+        get {
+            _LockToGoalOffset = _LockToGoalOffset ?? Schema.GetOffset(0x1BA43927EF4703D8);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_LockToGoalOffset!.Value);
+        }
+    }
+    private static nint? _SkelParentsOffset;
+
+    public ref CUtlVector<short> SkelParents {
+        get {
+            _SkelParentsOffset = _SkelParentsOffset ?? Schema.GetOffset(0x1BA43927D2AAA7FB);
+            return ref _Handle.AsRef<CUtlVector<short>>(_SkelParentsOffset!.Value);
+        }
+    }
+    private static nint? _DynNodeWindBasesOffset;
+
+    public ref CUtlVector<FeNodeWindBase_t> DynNodeWindBases {
+        get {
+            _DynNodeWindBasesOffset = _DynNodeWindBasesOffset ?? Schema.GetOffset(0x1BA439271ABAB644);
+            return ref _Handle.AsRef<CUtlVector<FeNodeWindBase_t>>(_DynNodeWindBasesOffset!.Value);
+        }
+    }
+    private static nint? _InternalPressureOffset;
+
+    public ref float InternalPressure {
+        get {
+            _InternalPressureOffset = _InternalPressureOffset ?? Schema.GetOffset(0x1BA43927B3CC4239);
+            return ref _Handle.AsRef<float>(_InternalPressureOffset!.Value);
+        }
+    }
+    private static nint? _DefaultTimeDilationOffset;
+
+    public ref float DefaultTimeDilation {
+        get {
+            _DefaultTimeDilationOffset = _DefaultTimeDilationOffset ?? Schema.GetOffset(0x1BA439271F1E706B);
+            return ref _Handle.AsRef<float>(_DefaultTimeDilationOffset!.Value);
+        }
+    }
+    private static nint? _WindageOffset;
+
+    public ref float Windage {
+        get {
+            _WindageOffset = _WindageOffset ?? Schema.GetOffset(0x1BA43927606E3F48);
+            return ref _Handle.AsRef<float>(_WindageOffset!.Value);
+        }
+    }
+    private static nint? _WindDragOffset;
+
+    public ref float WindDrag {
+        get {
+            _WindDragOffset = _WindDragOffset ?? Schema.GetOffset(0x1BA4392753E238D7);
+            return ref _Handle.AsRef<float>(_WindDragOffset!.Value);
+        }
+    }
+    private static nint? _DefaultSurfaceStretchOffset;
+
+    public ref float DefaultSurfaceStretch {
+        get {
+            _DefaultSurfaceStretchOffset = _DefaultSurfaceStretchOffset ?? Schema.GetOffset(0x1BA43927B772D9D0);
+            return ref _Handle.AsRef<float>(_DefaultSurfaceStretchOffset!.Value);
+        }
+    }
+    private static nint? _DefaultThreadStretchOffset;
+
+    public ref float DefaultThreadStretch {
+        get {
+            _DefaultThreadStretchOffset = _DefaultThreadStretchOffset ?? Schema.GetOffset(0x1BA439271386FDD5);
+            return ref _Handle.AsRef<float>(_DefaultThreadStretchOffset!.Value);
+        }
+    }
+    private static nint? _DefaultGravityScaleOffset;
+
+    public ref float DefaultGravityScale {
+        get {
+            _DefaultGravityScaleOffset = _DefaultGravityScaleOffset ?? Schema.GetOffset(0x1BA4392789AD0384);
+            return ref _Handle.AsRef<float>(_DefaultGravityScaleOffset!.Value);
+        }
+    }
+    private static nint? _DefaultVelAirDragOffset;
+
+    public ref float DefaultVelAirDrag {
+        get {
+            _DefaultVelAirDragOffset = _DefaultVelAirDragOffset ?? Schema.GetOffset(0x1BA439271833A0FB);
+            return ref _Handle.AsRef<float>(_DefaultVelAirDragOffset!.Value);
+        }
+    }
+    private static nint? _DefaultExpAirDragOffset;
+
+    public ref float DefaultExpAirDrag {
+        get {
+            _DefaultExpAirDragOffset = _DefaultExpAirDragOffset ?? Schema.GetOffset(0x1BA43927681CCE27);
+            return ref _Handle.AsRef<float>(_DefaultExpAirDragOffset!.Value);
+        }
+    }
+    private static nint? _DefaultVelQuadAirDragOffset;
+
+    public ref float DefaultVelQuadAirDrag {
+        get {
+            _DefaultVelQuadAirDragOffset = _DefaultVelQuadAirDragOffset ?? Schema.GetOffset(0x1BA43927BF28F362);
+            return ref _Handle.AsRef<float>(_DefaultVelQuadAirDragOffset!.Value);
+        }
+    }
+    private static nint? _DefaultExpQuadAirDragOffset;
+
+    public ref float DefaultExpQuadAirDrag {
+        get {
+            _DefaultExpQuadAirDragOffset = _DefaultExpQuadAirDragOffset ?? Schema.GetOffset(0x1BA43927F16B8A2E);
+            return ref _Handle.AsRef<float>(_DefaultExpQuadAirDragOffset!.Value);
+        }
+    }
+    private static nint? _RodVelocitySmoothRateOffset;
+
+    public ref float RodVelocitySmoothRate {
+        get {
+            _RodVelocitySmoothRateOffset = _RodVelocitySmoothRateOffset ?? Schema.GetOffset(0x1BA439274EDA647F);
+            return ref _Handle.AsRef<float>(_RodVelocitySmoothRateOffset!.Value);
+        }
+    }
+    private static nint? _QuadVelocitySmoothRateOffset;
+
+    public ref float QuadVelocitySmoothRate {
+        get {
+            _QuadVelocitySmoothRateOffset = _QuadVelocitySmoothRateOffset ?? Schema.GetOffset(0x1BA43927A5E06553);
+            return ref _Handle.AsRef<float>(_QuadVelocitySmoothRateOffset!.Value);
+        }
+    }
+    private static nint? _AddWorldCollisionRadiusOffset;
+
+    public ref float AddWorldCollisionRadius {
+        get {
+            _AddWorldCollisionRadiusOffset = _AddWorldCollisionRadiusOffset ?? Schema.GetOffset(0x1BA43927EBFB7154);
+            return ref _Handle.AsRef<float>(_AddWorldCollisionRadiusOffset!.Value);
+        }
+    }
+    private static nint? _DefaultVolumetricSolveAmountOffset;
+
+    public ref float DefaultVolumetricSolveAmount {
+        get {
+            _DefaultVolumetricSolveAmountOffset = _DefaultVolumetricSolveAmountOffset ?? Schema.GetOffset(0x1BA43927D69EF547);
+            return ref _Handle.AsRef<float>(_DefaultVolumetricSolveAmountOffset!.Value);
+        }
+    }
+    private static nint? _MotionSmoothCDTOffset;
+
+    public ref float MotionSmoothCDT {
+        get {
+            _MotionSmoothCDTOffset = _MotionSmoothCDTOffset ?? Schema.GetOffset(0x1BA439279C2571CC);
+            return ref _Handle.AsRef<float>(_MotionSmoothCDTOffset!.Value);
+        }
+    }
+    private static nint? _LocalDrag1Offset;
+
+    public ref float LocalDrag1 {
+        get {
+            _LocalDrag1Offset = _LocalDrag1Offset ?? Schema.GetOffset(0x1BA43927BE849FFB);
+            return ref _Handle.AsRef<float>(_LocalDrag1Offset!.Value);
+        }
+    }
+    private static nint? _RodVelocitySmoothIterationsOffset;
+
+    public ref ushort RodVelocitySmoothIterations {
+        get {
+            _RodVelocitySmoothIterationsOffset = _RodVelocitySmoothIterationsOffset ?? Schema.GetOffset(0x1BA439277B5933A3);
+            return ref _Handle.AsRef<ushort>(_RodVelocitySmoothIterationsOffset!.Value);
+        }
+    }
+    private static nint? _QuadVelocitySmoothIterationsOffset;
+
+    public ref ushort QuadVelocitySmoothIterations {
+        get {
+            _QuadVelocitySmoothIterationsOffset = _QuadVelocitySmoothIterationsOffset ?? Schema.GetOffset(0x1BA4392761612B9B);
+            return ref _Handle.AsRef<ushort>(_QuadVelocitySmoothIterationsOffset!.Value);
+        }
+    }
 
 
 }

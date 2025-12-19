@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSimTimerImpl : CSimpleSimTimerImpl, CSimTimer {
+internal partial class CSimTimerImpl : CSimpleSimTimerImpl, CSimTimer
+{
+    public CSimTimerImpl(nint handle) : base(handle) { }
 
-  public CSimTimerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IntervalOffset;
 
-  private static nint? _IntervalOffset;
-
-  public ref float Interval {
-    get {
-      if (_IntervalOffset == null) {
-        _IntervalOffset = Schema.GetOffset(0xB9B19F86320F7B8E);
-      }
-      return ref _Handle.AsRef<float>(_IntervalOffset!.Value);
+    public ref float Interval {
+        get {
+            _IntervalOffset = _IntervalOffset ?? Schema.GetOffset(0xB9B19F86320F7B8E);
+            return ref _Handle.AsRef<float>(_IntervalOffset!.Value);
+        }
     }
-  }
 
 
 }

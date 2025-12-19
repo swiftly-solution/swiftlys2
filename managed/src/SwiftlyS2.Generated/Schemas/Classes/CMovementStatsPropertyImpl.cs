@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMovementStatsPropertyImpl : SchemaClass, CMovementStatsProperty {
+internal partial class CMovementStatsPropertyImpl : SchemaClass, CMovementStatsProperty
+{
+    public CMovementStatsPropertyImpl(nint handle) : base(handle) { }
 
-  public CMovementStatsPropertyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _UseCounterOffset;
 
-  private static nint? _UseCounterOffset;
-
-  public ref int UseCounter {
-    get {
-      if (_UseCounterOffset == null) {
-        _UseCounterOffset = Schema.GetOffset(0xDE38DFFB6294198C);
-      }
-      return ref _Handle.AsRef<int>(_UseCounterOffset!.Value);
+    public ref int UseCounter {
+        get {
+            _UseCounterOffset = _UseCounterOffset ?? Schema.GetOffset(0xDE38DFFB6294198C);
+            return ref _Handle.AsRef<int>(_UseCounterOffset!.Value);
+        }
     }
-  }
-  private static nint? _EmaMovementDirectionOffset;
+    private static nint? _EmaMovementDirectionOffset;
 
-  public CVectorExponentialMovingAverage EmaMovementDirection {
-    get {
-      if (_EmaMovementDirectionOffset == null) {
-        _EmaMovementDirectionOffset = Schema.GetOffset(0xDE38DFFB3878FC8C);
-      }
-      return new CVectorExponentialMovingAverageImpl(_Handle + _EmaMovementDirectionOffset!.Value);
+    public CVectorExponentialMovingAverage EmaMovementDirection {
+        get {
+            _EmaMovementDirectionOffset = _EmaMovementDirectionOffset ?? Schema.GetOffset(0xDE38DFFB3878FC8C);
+            return new CVectorExponentialMovingAverageImpl(_Handle + _EmaMovementDirectionOffset!.Value);
+        }
     }
-  }
 
 
 }

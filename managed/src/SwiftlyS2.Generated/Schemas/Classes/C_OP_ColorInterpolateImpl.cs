@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ColorInterpolateImpl : CParticleFunctionOperatorImpl, C_OP_ColorInterpolate {
+internal partial class C_OP_ColorInterpolateImpl : CParticleFunctionOperatorImpl, C_OP_ColorInterpolate
+{
+    public C_OP_ColorInterpolateImpl(nint handle) : base(handle) { }
 
-  public C_OP_ColorInterpolateImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ColorFadeOffset;
 
-  private static nint? _ColorFadeOffset;
-
-  public ref Color ColorFade {
-    get {
-      if (_ColorFadeOffset == null) {
-        _ColorFadeOffset = Schema.GetOffset(0x2F5E97470841572E);
-      }
-      return ref _Handle.AsRef<Color>(_ColorFadeOffset!.Value);
+    public ref Color ColorFade {
+        get {
+            _ColorFadeOffset = _ColorFadeOffset ?? Schema.GetOffset(0x2F5E97470841572E);
+            return ref _Handle.AsRef<Color>(_ColorFadeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeStartTimeOffset;
+    private static nint? _FadeStartTimeOffset;
 
-  public ref float FadeStartTime {
-    get {
-      if (_FadeStartTimeOffset == null) {
-        _FadeStartTimeOffset = Schema.GetOffset(0x2F5E974786B28BFA);
-      }
-      return ref _Handle.AsRef<float>(_FadeStartTimeOffset!.Value);
+    public ref float FadeStartTime {
+        get {
+            _FadeStartTimeOffset = _FadeStartTimeOffset ?? Schema.GetOffset(0x2F5E974786B28BFA);
+            return ref _Handle.AsRef<float>(_FadeStartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeEndTimeOffset;
+    private static nint? _FadeEndTimeOffset;
 
-  public ref float FadeEndTime {
-    get {
-      if (_FadeEndTimeOffset == null) {
-        _FadeEndTimeOffset = Schema.GetOffset(0x2F5E974700D5CA4F);
-      }
-      return ref _Handle.AsRef<float>(_FadeEndTimeOffset!.Value);
+    public ref float FadeEndTime {
+        get {
+            _FadeEndTimeOffset = _FadeEndTimeOffset ?? Schema.GetOffset(0x2F5E974700D5CA4F);
+            return ref _Handle.AsRef<float>(_FadeEndTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x2F5E9747E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x2F5E9747E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseInOutOffset;
+    private static nint? _EaseInOutOffset;
 
-  public ref bool EaseInOut {
-    get {
-      if (_EaseInOutOffset == null) {
-        _EaseInOutOffset = Schema.GetOffset(0x2F5E97475172CF48);
-      }
-      return ref _Handle.AsRef<bool>(_EaseInOutOffset!.Value);
+    public ref bool EaseInOut {
+        get {
+            _EaseInOutOffset = _EaseInOutOffset ?? Schema.GetOffset(0x2F5E97475172CF48);
+            return ref _Handle.AsRef<bool>(_EaseInOutOffset!.Value);
+        }
     }
-  }
 
 
 }

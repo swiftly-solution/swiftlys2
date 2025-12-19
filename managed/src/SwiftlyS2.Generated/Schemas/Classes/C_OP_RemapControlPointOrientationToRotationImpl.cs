@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapControlPointOrientationToRotationImpl : CParticleFunctionOperatorImpl, C_OP_RemapControlPointOrientationToRotation {
+internal partial class C_OP_RemapControlPointOrientationToRotationImpl : CParticleFunctionOperatorImpl, C_OP_RemapControlPointOrientationToRotation
+{
+    public C_OP_RemapControlPointOrientationToRotationImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapControlPointOrientationToRotationImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPOffset;
 
-  private static nint? _CPOffset;
-
-  public ref int CP {
-    get {
-      if (_CPOffset == null) {
-        _CPOffset = Schema.GetOffset(0x2CE44E90EB661472);
-      }
-      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    public ref int CP {
+        get {
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x2CE44E90EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x2CE44E90E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x2CE44E90E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetRotOffset;
+    private static nint? _OffsetRotOffset;
 
-  public ref float OffsetRot {
-    get {
-      if (_OffsetRotOffset == null) {
-        _OffsetRotOffset = Schema.GetOffset(0x2CE44E90B414F849);
-      }
-      return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+    public ref float OffsetRot {
+        get {
+            _OffsetRotOffset = _OffsetRotOffset ?? Schema.GetOffset(0x2CE44E90B414F849);
+            return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComponentOffset;
+    private static nint? _ComponentOffset;
 
-  public ref int Component {
-    get {
-      if (_ComponentOffset == null) {
-        _ComponentOffset = Schema.GetOffset(0x2CE44E90BFD0952C);
-      }
-      return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+    public ref int Component {
+        get {
+            _ComponentOffset = _ComponentOffset ?? Schema.GetOffset(0x2CE44E90BFD0952C);
+            return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+        }
     }
-  }
 
 
 }

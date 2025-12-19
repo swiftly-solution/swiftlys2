@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncPropRespawnZone : CBaseEntity, ISchemaClass<CFuncPropRespawnZone> {
-
-  static CFuncPropRespawnZone ISchemaClass<CFuncPropRespawnZone>.From(nint handle) => new CFuncPropRespawnZoneImpl(handle);
-  static int ISchemaClass<CFuncPropRespawnZone>.Size => 1264;
-  static string? ISchemaClass<CFuncPropRespawnZone>.ClassName => "func_proprrespawnzone";
+public partial interface CFuncPropRespawnZone : CBaseEntity, ISchemaClass<CFuncPropRespawnZone>
+{
+    static CFuncPropRespawnZone ISchemaClass<CFuncPropRespawnZone>.From(nint handle) => new CFuncPropRespawnZoneImpl(handle);
+    static int ISchemaClass<CFuncPropRespawnZone>.Size => 1264;
+    static string? ISchemaClass<CFuncPropRespawnZone>.ClassName => "func_proprrespawnzone";
 
 
 

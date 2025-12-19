@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInfoDynamicShadowHintBoxImpl : CInfoDynamicShadowHintImpl, CInfoDynamicShadowHintBox {
+internal partial class CInfoDynamicShadowHintBoxImpl : CInfoDynamicShadowHintImpl, CInfoDynamicShadowHintBox
+{
+    public CInfoDynamicShadowHintBoxImpl(nint handle) : base(handle) { }
 
-  public CInfoDynamicShadowHintBoxImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoxMinsOffset;
 
-  private static nint? _BoxMinsOffset;
-
-  public ref Vector BoxMins {
-    get {
-      if (_BoxMinsOffset == null) {
-        _BoxMinsOffset = Schema.GetOffset(0xFD9FEBD8201373);
-      }
-      return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+    public ref Vector BoxMins {
+        get {
+            _BoxMinsOffset = _BoxMinsOffset ?? Schema.GetOffset(0xFD9FEBD8201373);
+            return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoxMaxsOffset;
+    private static nint? _BoxMaxsOffset;
 
-  public ref Vector BoxMaxs {
-    get {
-      if (_BoxMaxsOffset == null) {
-        _BoxMaxsOffset = Schema.GetOffset(0xFD9FEB817A3B31);
-      }
-      return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+    public ref Vector BoxMaxs {
+        get {
+            _BoxMaxsOffset = _BoxMaxsOffset ?? Schema.GetOffset(0xFD9FEB817A3B31);
+            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+        }
     }
-  }
 
 
 }

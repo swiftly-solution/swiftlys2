@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootFallAnimTagImpl : CAnimTagBaseImpl, CFootFallAnimTag {
+internal partial class CFootFallAnimTagImpl : CAnimTagBaseImpl, CFootFallAnimTag
+{
+    public CFootFallAnimTagImpl(nint handle) : base(handle) { }
 
-  public CFootFallAnimTagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FootOffset;
 
-  private static nint? _FootOffset;
-
-  public ref FootFallTagFoot_t Foot {
-    get {
-      if (_FootOffset == null) {
-        _FootOffset = Schema.GetOffset(0xC142B61EEB2B8B39);
-      }
-      return ref _Handle.AsRef<FootFallTagFoot_t>(_FootOffset!.Value);
+    public ref FootFallTagFoot_t Foot {
+        get {
+            _FootOffset = _FootOffset ?? Schema.GetOffset(0xC142B61EEB2B8B39);
+            return ref _Handle.AsRef<FootFallTagFoot_t>(_FootOffset!.Value);
+        }
     }
-  }
 
 
 }

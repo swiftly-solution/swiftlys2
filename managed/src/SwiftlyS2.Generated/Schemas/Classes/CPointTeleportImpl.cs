@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointTeleportImpl : CServerOnlyPointEntityImpl, CPointTeleport {
+internal partial class CPointTeleportImpl : CServerOnlyPointEntityImpl, CPointTeleport
+{
+    public CPointTeleportImpl(nint handle) : base(handle) { }
 
-  public CPointTeleportImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SaveOriginOffset;
 
-  private static nint? _SaveOriginOffset;
-
-  public ref Vector SaveOrigin {
-    get {
-      if (_SaveOriginOffset == null) {
-        _SaveOriginOffset = Schema.GetOffset(0x9AE1393FD9277FA6);
-      }
-      return ref _Handle.AsRef<Vector>(_SaveOriginOffset!.Value);
+    public ref Vector SaveOrigin {
+        get {
+            _SaveOriginOffset = _SaveOriginOffset ?? Schema.GetOffset(0x9AE1393FD9277FA6);
+            return ref _Handle.AsRef<Vector>(_SaveOriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _SaveAnglesOffset;
+    private static nint? _SaveAnglesOffset;
 
-  public ref QAngle SaveAngles {
-    get {
-      if (_SaveAnglesOffset == null) {
-        _SaveAnglesOffset = Schema.GetOffset(0x9AE1393FD68F48DC);
-      }
-      return ref _Handle.AsRef<QAngle>(_SaveAnglesOffset!.Value);
+    public ref QAngle SaveAngles {
+        get {
+            _SaveAnglesOffset = _SaveAnglesOffset ?? Schema.GetOffset(0x9AE1393FD68F48DC);
+            return ref _Handle.AsRef<QAngle>(_SaveAnglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _TeleportParentedEntitiesOffset;
+    private static nint? _TeleportParentedEntitiesOffset;
 
-  public ref bool TeleportParentedEntities {
-    get {
-      if (_TeleportParentedEntitiesOffset == null) {
-        _TeleportParentedEntitiesOffset = Schema.GetOffset(0x9AE1393F20FFB18C);
-      }
-      return ref _Handle.AsRef<bool>(_TeleportParentedEntitiesOffset!.Value);
+    public ref bool TeleportParentedEntities {
+        get {
+            _TeleportParentedEntitiesOffset = _TeleportParentedEntitiesOffset ?? Schema.GetOffset(0x9AE1393F20FFB18C);
+            return ref _Handle.AsRef<bool>(_TeleportParentedEntitiesOffset!.Value);
+        }
     }
-  }
-  private static nint? _TeleportUseCurrentAngleOffset;
+    private static nint? _TeleportUseCurrentAngleOffset;
 
-  public ref bool TeleportUseCurrentAngle {
-    get {
-      if (_TeleportUseCurrentAngleOffset == null) {
-        _TeleportUseCurrentAngleOffset = Schema.GetOffset(0x9AE1393F528952CD);
-      }
-      return ref _Handle.AsRef<bool>(_TeleportUseCurrentAngleOffset!.Value);
+    public ref bool TeleportUseCurrentAngle {
+        get {
+            _TeleportUseCurrentAngleOffset = _TeleportUseCurrentAngleOffset ?? Schema.GetOffset(0x9AE1393F528952CD);
+            return ref _Handle.AsRef<bool>(_TeleportUseCurrentAngleOffset!.Value);
+        }
     }
-  }
 
 
 }

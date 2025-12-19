@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class NmBoneMaskSetDefinition_tImpl : SchemaClass, NmBoneMaskSetDefinition_t {
+internal partial class NmBoneMaskSetDefinition_tImpl : SchemaClass, NmBoneMaskSetDefinition_t
+{
+    public NmBoneMaskSetDefinition_tImpl(nint handle) : base(handle) { }
 
-  public NmBoneMaskSetDefinition_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IDOffset;
 
-  private static nint? _IDOffset;
-
-  public ref CGlobalSymbol ID {
-    get {
-      if (_IDOffset == null) {
-        _IDOffset = Schema.GetOffset(0xEA12116095066900);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+    public ref CGlobalSymbol ID {
+        get {
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0xEA12116095066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrimaryWeightListOffset;
+    private static nint? _PrimaryWeightListOffset;
 
-  public CNmBoneWeightList PrimaryWeightList {
-    get {
-      if (_PrimaryWeightListOffset == null) {
-        _PrimaryWeightListOffset = Schema.GetOffset(0xEA1211603AF7FF49);
-      }
-      return new CNmBoneWeightListImpl(_Handle + _PrimaryWeightListOffset!.Value);
+    public CNmBoneWeightList PrimaryWeightList {
+        get {
+            _PrimaryWeightListOffset = _PrimaryWeightListOffset ?? Schema.GetOffset(0xEA1211603AF7FF49);
+            return new CNmBoneWeightListImpl(_Handle + _PrimaryWeightListOffset!.Value);
+        }
     }
-  }
-  private static nint? _SecondaryWeightListsOffset;
+    private static nint? _SecondaryWeightListsOffset;
 
-  public ref CUtlLeanVector<CNmBoneWeightList, int> SecondaryWeightLists {
-    get {
-      if (_SecondaryWeightListsOffset == null) {
-        _SecondaryWeightListsOffset = Schema.GetOffset(0xEA12116021DB2776);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<CNmBoneWeightList, int>>(_SecondaryWeightListsOffset!.Value);
+    public ref CUtlLeanVector<CNmBoneWeightList, int> SecondaryWeightLists {
+        get {
+            _SecondaryWeightListsOffset = _SecondaryWeightListsOffset ?? Schema.GetOffset(0xEA12116021DB2776);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmBoneWeightList, int>>(_SecondaryWeightListsOffset!.Value);
+        }
     }
-  }
 
 
 }

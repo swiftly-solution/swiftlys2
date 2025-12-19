@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFilterProximityImpl : CBaseFilterImpl, CFilterProximity {
+internal partial class CFilterProximityImpl : CBaseFilterImpl, CFilterProximity
+{
+    public CFilterProximityImpl(nint handle) : base(handle) { }
 
-  public CFilterProximityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusOffset;
 
-  private static nint? _RadiusOffset;
-
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xE1C36A555ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xE1C36A555ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
 
 
 }

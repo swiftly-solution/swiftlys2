@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum NmEventConditionRules_t : byte {
-
+public enum NmEventConditionRules_t : byte
+{
  LimitSearchToSourceState = 0,
 
  IgnoreInactiveEvents = 1,

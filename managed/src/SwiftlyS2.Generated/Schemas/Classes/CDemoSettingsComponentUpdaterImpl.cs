@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDemoSettingsComponentUpdaterImpl : CAnimComponentUpdaterImpl, CDemoSettingsComponentUpdater {
+internal partial class CDemoSettingsComponentUpdaterImpl : CAnimComponentUpdaterImpl, CDemoSettingsComponentUpdater
+{
+    public CDemoSettingsComponentUpdaterImpl(nint handle) : base(handle) { }
 
-  public CDemoSettingsComponentUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SettingsOffset;
 
-  private static nint? _SettingsOffset;
-
-  public CAnimDemoCaptureSettings Settings {
-    get {
-      if (_SettingsOffset == null) {
-        _SettingsOffset = Schema.GetOffset(0xD4FC646CB3DE33A8);
-      }
-      return new CAnimDemoCaptureSettingsImpl(_Handle + _SettingsOffset!.Value);
+    public CAnimDemoCaptureSettings Settings {
+        get {
+            _SettingsOffset = _SettingsOffset ?? Schema.GetOffset(0xD4FC646CB3DE33A8);
+            return new CAnimDemoCaptureSettingsImpl(_Handle + _SettingsOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_EndCapDecay : CParticleFunctionOperator, ISchemaClass<C_OP_EndCapDecay> {
-
-  static C_OP_EndCapDecay ISchemaClass<C_OP_EndCapDecay>.From(nint handle) => new C_OP_EndCapDecayImpl(handle);
-  static int ISchemaClass<C_OP_EndCapDecay>.Size => 464;
-  static string? ISchemaClass<C_OP_EndCapDecay>.ClassName => null;
+public partial interface C_OP_EndCapDecay : CParticleFunctionOperator, ISchemaClass<C_OP_EndCapDecay>
+{
+    static C_OP_EndCapDecay ISchemaClass<C_OP_EndCapDecay>.From(nint handle) => new C_OP_EndCapDecayImpl(handle);
+    static int ISchemaClass<C_OP_EndCapDecay>.Size => 464;
+    static string? ISchemaClass<C_OP_EndCapDecay>.ClassName => null;
 
 
 

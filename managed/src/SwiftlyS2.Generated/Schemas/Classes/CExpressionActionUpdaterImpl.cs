@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CExpressionActionUpdaterImpl : CAnimActionUpdaterImpl, CExpressionActionUpdater {
+internal partial class CExpressionActionUpdaterImpl : CAnimActionUpdaterImpl, CExpressionActionUpdater
+{
+    public CExpressionActionUpdaterImpl(nint handle) : base(handle) { }
 
-  public CExpressionActionUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParamOffset;
 
-  private static nint? _ParamOffset;
-
-  public CAnimParamHandle Param {
-    get {
-      if (_ParamOffset == null) {
-        _ParamOffset = Schema.GetOffset(0x3B8502F3679286A4);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamOffset!.Value);
+    public CAnimParamHandle Param {
+        get {
+            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x3B8502F3679286A4);
+            return new CAnimParamHandleImpl(_Handle + _ParamOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamTypeOffset;
+    private static nint? _ParamTypeOffset;
 
-  public ref AnimParamType_t ParamType {
-    get {
-      if (_ParamTypeOffset == null) {
-        _ParamTypeOffset = Schema.GetOffset(0x3B8502F3F05DFDD9);
-      }
-      return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
+    public ref AnimParamType_t ParamType {
+        get {
+            _ParamTypeOffset = _ParamTypeOffset ?? Schema.GetOffset(0x3B8502F3F05DFDD9);
+            return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScriptOffset;
+    private static nint? _ScriptOffset;
 
-  public AnimScriptHandle Script {
-    get {
-      if (_ScriptOffset == null) {
-        _ScriptOffset = Schema.GetOffset(0x3B8502F329D70FB0);
-      }
-      return new AnimScriptHandleImpl(_Handle + _ScriptOffset!.Value);
+    public AnimScriptHandle Script {
+        get {
+            _ScriptOffset = _ScriptOffset ?? Schema.GetOffset(0x3B8502F329D70FB0);
+            return new AnimScriptHandleImpl(_Handle + _ScriptOffset!.Value);
+        }
     }
-  }
 
 
 }

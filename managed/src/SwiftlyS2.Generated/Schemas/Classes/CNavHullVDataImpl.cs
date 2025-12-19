@@ -6,167 +6,136 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNavHullVDataImpl : SchemaClass, CNavHullVData {
+internal partial class CNavHullVDataImpl : SchemaClass, CNavHullVData
+{
+    public CNavHullVDataImpl(nint handle) : base(handle) { }
 
-  public CNavHullVDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AgentEnabledOffset;
 
-  private static nint? _AgentEnabledOffset;
-
-  public ref bool AgentEnabled {
-    get {
-      if (_AgentEnabledOffset == null) {
-        _AgentEnabledOffset = Schema.GetOffset(0x74449E2E9D43CFF3);
-      }
-      return ref _Handle.AsRef<bool>(_AgentEnabledOffset!.Value);
+    public ref bool AgentEnabled {
+        get {
+            _AgentEnabledOffset = _AgentEnabledOffset ?? Schema.GetOffset(0x74449E2E9D43CFF3);
+            return ref _Handle.AsRef<bool>(_AgentEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentRadiusOffset;
+    private static nint? _AgentRadiusOffset;
 
-  public ref float AgentRadius {
-    get {
-      if (_AgentRadiusOffset == null) {
-        _AgentRadiusOffset = Schema.GetOffset(0x74449E2ED9F4ED84);
-      }
-      return ref _Handle.AsRef<float>(_AgentRadiusOffset!.Value);
+    public ref float AgentRadius {
+        get {
+            _AgentRadiusOffset = _AgentRadiusOffset ?? Schema.GetOffset(0x74449E2ED9F4ED84);
+            return ref _Handle.AsRef<float>(_AgentRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentHeightOffset;
+    private static nint? _AgentHeightOffset;
 
-  public ref float AgentHeight {
-    get {
-      if (_AgentHeightOffset == null) {
-        _AgentHeightOffset = Schema.GetOffset(0x74449E2E5A46CC6D);
-      }
-      return ref _Handle.AsRef<float>(_AgentHeightOffset!.Value);
+    public ref float AgentHeight {
+        get {
+            _AgentHeightOffset = _AgentHeightOffset ?? Schema.GetOffset(0x74449E2E5A46CC6D);
+            return ref _Handle.AsRef<float>(_AgentHeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentShortHeightEnabledOffset;
+    private static nint? _AgentShortHeightEnabledOffset;
 
-  public ref bool AgentShortHeightEnabled {
-    get {
-      if (_AgentShortHeightEnabledOffset == null) {
-        _AgentShortHeightEnabledOffset = Schema.GetOffset(0x74449E2EB869D4B0);
-      }
-      return ref _Handle.AsRef<bool>(_AgentShortHeightEnabledOffset!.Value);
+    public ref bool AgentShortHeightEnabled {
+        get {
+            _AgentShortHeightEnabledOffset = _AgentShortHeightEnabledOffset ?? Schema.GetOffset(0x74449E2EB869D4B0);
+            return ref _Handle.AsRef<bool>(_AgentShortHeightEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentShortHeightOffset;
+    private static nint? _AgentShortHeightOffset;
 
-  public ref float AgentShortHeight {
-    get {
-      if (_AgentShortHeightOffset == null) {
-        _AgentShortHeightOffset = Schema.GetOffset(0x74449E2E82909A4B);
-      }
-      return ref _Handle.AsRef<float>(_AgentShortHeightOffset!.Value);
+    public ref float AgentShortHeight {
+        get {
+            _AgentShortHeightOffset = _AgentShortHeightOffset ?? Schema.GetOffset(0x74449E2E82909A4B);
+            return ref _Handle.AsRef<float>(_AgentShortHeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentCrawlEnabledOffset;
+    private static nint? _AgentCrawlEnabledOffset;
 
-  public ref bool AgentCrawlEnabled {
-    get {
-      if (_AgentCrawlEnabledOffset == null) {
-        _AgentCrawlEnabledOffset = Schema.GetOffset(0x74449E2E042611D2);
-      }
-      return ref _Handle.AsRef<bool>(_AgentCrawlEnabledOffset!.Value);
+    public ref bool AgentCrawlEnabled {
+        get {
+            _AgentCrawlEnabledOffset = _AgentCrawlEnabledOffset ?? Schema.GetOffset(0x74449E2E042611D2);
+            return ref _Handle.AsRef<bool>(_AgentCrawlEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentCrawlHeightOffset;
+    private static nint? _AgentCrawlHeightOffset;
 
-  public ref float AgentCrawlHeight {
-    get {
-      if (_AgentCrawlHeightOffset == null) {
-        _AgentCrawlHeightOffset = Schema.GetOffset(0x74449E2E8068594E);
-      }
-      return ref _Handle.AsRef<float>(_AgentCrawlHeightOffset!.Value);
+    public ref float AgentCrawlHeight {
+        get {
+            _AgentCrawlHeightOffset = _AgentCrawlHeightOffset ?? Schema.GetOffset(0x74449E2E8068594E);
+            return ref _Handle.AsRef<float>(_AgentCrawlHeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentMaxClimbOffset;
+    private static nint? _AgentMaxClimbOffset;
 
-  public ref float AgentMaxClimb {
-    get {
-      if (_AgentMaxClimbOffset == null) {
-        _AgentMaxClimbOffset = Schema.GetOffset(0x74449E2EDF3EC175);
-      }
-      return ref _Handle.AsRef<float>(_AgentMaxClimbOffset!.Value);
+    public ref float AgentMaxClimb {
+        get {
+            _AgentMaxClimbOffset = _AgentMaxClimbOffset ?? Schema.GetOffset(0x74449E2EDF3EC175);
+            return ref _Handle.AsRef<float>(_AgentMaxClimbOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentMaxSlopeOffset;
+    private static nint? _AgentMaxSlopeOffset;
 
-  public ref int AgentMaxSlope {
-    get {
-      if (_AgentMaxSlopeOffset == null) {
-        _AgentMaxSlopeOffset = Schema.GetOffset(0x74449E2EFAC02727);
-      }
-      return ref _Handle.AsRef<int>(_AgentMaxSlopeOffset!.Value);
+    public ref int AgentMaxSlope {
+        get {
+            _AgentMaxSlopeOffset = _AgentMaxSlopeOffset ?? Schema.GetOffset(0x74449E2EFAC02727);
+            return ref _Handle.AsRef<int>(_AgentMaxSlopeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentMaxJumpDownDistOffset;
+    private static nint? _AgentMaxJumpDownDistOffset;
 
-  public ref float AgentMaxJumpDownDist {
-    get {
-      if (_AgentMaxJumpDownDistOffset == null) {
-        _AgentMaxJumpDownDistOffset = Schema.GetOffset(0x74449E2E1B440540);
-      }
-      return ref _Handle.AsRef<float>(_AgentMaxJumpDownDistOffset!.Value);
+    public ref float AgentMaxJumpDownDist {
+        get {
+            _AgentMaxJumpDownDistOffset = _AgentMaxJumpDownDistOffset ?? Schema.GetOffset(0x74449E2E1B440540);
+            return ref _Handle.AsRef<float>(_AgentMaxJumpDownDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentMaxJumpHorizDistBaseOffset;
+    private static nint? _AgentMaxJumpHorizDistBaseOffset;
 
-  public ref float AgentMaxJumpHorizDistBase {
-    get {
-      if (_AgentMaxJumpHorizDistBaseOffset == null) {
-        _AgentMaxJumpHorizDistBaseOffset = Schema.GetOffset(0x74449E2ED8C1AC5F);
-      }
-      return ref _Handle.AsRef<float>(_AgentMaxJumpHorizDistBaseOffset!.Value);
+    public ref float AgentMaxJumpHorizDistBase {
+        get {
+            _AgentMaxJumpHorizDistBaseOffset = _AgentMaxJumpHorizDistBaseOffset ?? Schema.GetOffset(0x74449E2ED8C1AC5F);
+            return ref _Handle.AsRef<float>(_AgentMaxJumpHorizDistBaseOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentMaxJumpUpDistOffset;
+    private static nint? _AgentMaxJumpUpDistOffset;
 
-  public ref float AgentMaxJumpUpDist {
-    get {
-      if (_AgentMaxJumpUpDistOffset == null) {
-        _AgentMaxJumpUpDistOffset = Schema.GetOffset(0x74449E2E0CA237AD);
-      }
-      return ref _Handle.AsRef<float>(_AgentMaxJumpUpDistOffset!.Value);
+    public ref float AgentMaxJumpUpDist {
+        get {
+            _AgentMaxJumpUpDistOffset = _AgentMaxJumpUpDistOffset ?? Schema.GetOffset(0x74449E2E0CA237AD);
+            return ref _Handle.AsRef<float>(_AgentMaxJumpUpDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _AgentBorderErosionOffset;
+    private static nint? _AgentBorderErosionOffset;
 
-  public ref int AgentBorderErosion {
-    get {
-      if (_AgentBorderErosionOffset == null) {
-        _AgentBorderErosionOffset = Schema.GetOffset(0x74449E2EC445012D);
-      }
-      return ref _Handle.AsRef<int>(_AgentBorderErosionOffset!.Value);
+    public ref int AgentBorderErosion {
+        get {
+            _AgentBorderErosionOffset = _AgentBorderErosionOffset ?? Schema.GetOffset(0x74449E2EC445012D);
+            return ref _Handle.AsRef<int>(_AgentBorderErosionOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlowMapGenerationEnabledOffset;
+    private static nint? _FlowMapGenerationEnabledOffset;
 
-  public ref bool FlowMapGenerationEnabled {
-    get {
-      if (_FlowMapGenerationEnabledOffset == null) {
-        _FlowMapGenerationEnabledOffset = Schema.GetOffset(0x74449E2E8E7494D0);
-      }
-      return ref _Handle.AsRef<bool>(_FlowMapGenerationEnabledOffset!.Value);
+    public ref bool FlowMapGenerationEnabled {
+        get {
+            _FlowMapGenerationEnabledOffset = _FlowMapGenerationEnabledOffset ?? Schema.GetOffset(0x74449E2E8E7494D0);
+            return ref _Handle.AsRef<bool>(_FlowMapGenerationEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlowMapNodeMaxRadiusOffset;
+    private static nint? _FlowMapNodeMaxRadiusOffset;
 
-  public ref float FlowMapNodeMaxRadius {
-    get {
-      if (_FlowMapNodeMaxRadiusOffset == null) {
-        _FlowMapNodeMaxRadiusOffset = Schema.GetOffset(0x74449E2E19B2323B);
-      }
-      return ref _Handle.AsRef<float>(_FlowMapNodeMaxRadiusOffset!.Value);
+    public ref float FlowMapNodeMaxRadius {
+        get {
+            _FlowMapNodeMaxRadiusOffset = _FlowMapNodeMaxRadiusOffset ?? Schema.GetOffset(0x74449E2E19B2323B);
+            return ref _Handle.AsRef<float>(_FlowMapNodeMaxRadiusOffset!.Value);
+        }
     }
-  }
 
 
 }

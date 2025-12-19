@@ -6,147 +6,120 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoxelVisibilityImpl : SchemaClass, CVoxelVisibility {
+internal partial class CVoxelVisibilityImpl : SchemaClass, CVoxelVisibility
+{
+    public CVoxelVisibilityImpl(nint handle) : base(handle) { }
 
-  public CVoxelVisibilityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BaseClusterCountOffset;
 
-  private static nint? _BaseClusterCountOffset;
-
-  public ref uint BaseClusterCount {
-    get {
-      if (_BaseClusterCountOffset == null) {
-        _BaseClusterCountOffset = Schema.GetOffset(0xDA27CA12A16788C5);
-      }
-      return ref _Handle.AsRef<uint>(_BaseClusterCountOffset!.Value);
+    public ref uint BaseClusterCount {
+        get {
+            _BaseClusterCountOffset = _BaseClusterCountOffset ?? Schema.GetOffset(0xDA27CA12A16788C5);
+            return ref _Handle.AsRef<uint>(_BaseClusterCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _PVSBytesPerClusterOffset;
+    private static nint? _PVSBytesPerClusterOffset;
 
-  public ref uint PVSBytesPerCluster {
-    get {
-      if (_PVSBytesPerClusterOffset == null) {
-        _PVSBytesPerClusterOffset = Schema.GetOffset(0xDA27CA122C2340E0);
-      }
-      return ref _Handle.AsRef<uint>(_PVSBytesPerClusterOffset!.Value);
+    public ref uint PVSBytesPerCluster {
+        get {
+            _PVSBytesPerClusterOffset = _PVSBytesPerClusterOffset ?? Schema.GetOffset(0xDA27CA122C2340E0);
+            return ref _Handle.AsRef<uint>(_PVSBytesPerClusterOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinBoundsOffset;
+    private static nint? _MinBoundsOffset;
 
-  public ref Vector MinBounds {
-    get {
-      if (_MinBoundsOffset == null) {
-        _MinBoundsOffset = Schema.GetOffset(0xDA27CA12114799FE);
-      }
-      return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
+    public ref Vector MinBounds {
+        get {
+            _MinBoundsOffset = _MinBoundsOffset ?? Schema.GetOffset(0xDA27CA12114799FE);
+            return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxBoundsOffset;
+    private static nint? _MaxBoundsOffset;
 
-  public ref Vector MaxBounds {
-    get {
-      if (_MaxBoundsOffset == null) {
-        _MaxBoundsOffset = Schema.GetOffset(0xDA27CA12C0B4CE60);
-      }
-      return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
+    public ref Vector MaxBounds {
+        get {
+            _MaxBoundsOffset = _MaxBoundsOffset ?? Schema.GetOffset(0xDA27CA12C0B4CE60);
+            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _GridSizeOffset;
+    private static nint? _GridSizeOffset;
 
-  public ref float GridSize {
-    get {
-      if (_GridSizeOffset == null) {
-        _GridSizeOffset = Schema.GetOffset(0xDA27CA12975208C2);
-      }
-      return ref _Handle.AsRef<float>(_GridSizeOffset!.Value);
+    public ref float GridSize {
+        get {
+            _GridSizeOffset = _GridSizeOffset ?? Schema.GetOffset(0xDA27CA12975208C2);
+            return ref _Handle.AsRef<float>(_GridSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkyVisibilityClusterOffset;
+    private static nint? _SkyVisibilityClusterOffset;
 
-  public ref uint SkyVisibilityCluster {
-    get {
-      if (_SkyVisibilityClusterOffset == null) {
-        _SkyVisibilityClusterOffset = Schema.GetOffset(0xDA27CA12B43BF514);
-      }
-      return ref _Handle.AsRef<uint>(_SkyVisibilityClusterOffset!.Value);
+    public ref uint SkyVisibilityCluster {
+        get {
+            _SkyVisibilityClusterOffset = _SkyVisibilityClusterOffset ?? Schema.GetOffset(0xDA27CA12B43BF514);
+            return ref _Handle.AsRef<uint>(_SkyVisibilityClusterOffset!.Value);
+        }
     }
-  }
-  private static nint? _SunVisibilityClusterOffset;
+    private static nint? _SunVisibilityClusterOffset;
 
-  public ref uint SunVisibilityCluster {
-    get {
-      if (_SunVisibilityClusterOffset == null) {
-        _SunVisibilityClusterOffset = Schema.GetOffset(0xDA27CA12848C92AD);
-      }
-      return ref _Handle.AsRef<uint>(_SunVisibilityClusterOffset!.Value);
+    public ref uint SunVisibilityCluster {
+        get {
+            _SunVisibilityClusterOffset = _SunVisibilityClusterOffset ?? Schema.GetOffset(0xDA27CA12848C92AD);
+            return ref _Handle.AsRef<uint>(_SunVisibilityClusterOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodeBlockOffset;
+    private static nint? _NodeBlockOffset;
 
-  public VoxelVisBlockOffset_t NodeBlock {
-    get {
-      if (_NodeBlockOffset == null) {
-        _NodeBlockOffset = Schema.GetOffset(0xDA27CA12A64594EA);
-      }
-      return new VoxelVisBlockOffset_tImpl(_Handle + _NodeBlockOffset!.Value);
+    public VoxelVisBlockOffset_t NodeBlock {
+        get {
+            _NodeBlockOffset = _NodeBlockOffset ?? Schema.GetOffset(0xDA27CA12A64594EA);
+            return new VoxelVisBlockOffset_tImpl(_Handle + _NodeBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _RegionBlockOffset;
+    private static nint? _RegionBlockOffset;
 
-  public VoxelVisBlockOffset_t RegionBlock {
-    get {
-      if (_RegionBlockOffset == null) {
-        _RegionBlockOffset = Schema.GetOffset(0xDA27CA121918C67A);
-      }
-      return new VoxelVisBlockOffset_tImpl(_Handle + _RegionBlockOffset!.Value);
+    public VoxelVisBlockOffset_t RegionBlock {
+        get {
+            _RegionBlockOffset = _RegionBlockOffset ?? Schema.GetOffset(0xDA27CA121918C67A);
+            return new VoxelVisBlockOffset_tImpl(_Handle + _RegionBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnclosedClusterListBlockOffset;
+    private static nint? _EnclosedClusterListBlockOffset;
 
-  public VoxelVisBlockOffset_t EnclosedClusterListBlock {
-    get {
-      if (_EnclosedClusterListBlockOffset == null) {
-        _EnclosedClusterListBlockOffset = Schema.GetOffset(0xDA27CA121F5DD1A9);
-      }
-      return new VoxelVisBlockOffset_tImpl(_Handle + _EnclosedClusterListBlockOffset!.Value);
+    public VoxelVisBlockOffset_t EnclosedClusterListBlock {
+        get {
+            _EnclosedClusterListBlockOffset = _EnclosedClusterListBlockOffset ?? Schema.GetOffset(0xDA27CA121F5DD1A9);
+            return new VoxelVisBlockOffset_tImpl(_Handle + _EnclosedClusterListBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnclosedClustersBlockOffset;
+    private static nint? _EnclosedClustersBlockOffset;
 
-  public VoxelVisBlockOffset_t EnclosedClustersBlock {
-    get {
-      if (_EnclosedClustersBlockOffset == null) {
-        _EnclosedClustersBlockOffset = Schema.GetOffset(0xDA27CA12F75E07CE);
-      }
-      return new VoxelVisBlockOffset_tImpl(_Handle + _EnclosedClustersBlockOffset!.Value);
+    public VoxelVisBlockOffset_t EnclosedClustersBlock {
+        get {
+            _EnclosedClustersBlockOffset = _EnclosedClustersBlockOffset ?? Schema.GetOffset(0xDA27CA12F75E07CE);
+            return new VoxelVisBlockOffset_tImpl(_Handle + _EnclosedClustersBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _MasksBlockOffset;
+    private static nint? _MasksBlockOffset;
 
-  public VoxelVisBlockOffset_t MasksBlock {
-    get {
-      if (_MasksBlockOffset == null) {
-        _MasksBlockOffset = Schema.GetOffset(0xDA27CA121853F2AB);
-      }
-      return new VoxelVisBlockOffset_tImpl(_Handle + _MasksBlockOffset!.Value);
+    public VoxelVisBlockOffset_t MasksBlock {
+        get {
+            _MasksBlockOffset = _MasksBlockOffset ?? Schema.GetOffset(0xDA27CA121853F2AB);
+            return new VoxelVisBlockOffset_tImpl(_Handle + _MasksBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _VisBlocksOffset;
+    private static nint? _VisBlocksOffset;
 
-  public VoxelVisBlockOffset_t VisBlocks {
-    get {
-      if (_VisBlocksOffset == null) {
-        _VisBlocksOffset = Schema.GetOffset(0xDA27CA128C69D893);
-      }
-      return new VoxelVisBlockOffset_tImpl(_Handle + _VisBlocksOffset!.Value);
+    public VoxelVisBlockOffset_t VisBlocks {
+        get {
+            _VisBlocksOffset = _VisBlocksOffset ?? Schema.GetOffset(0xDA27CA128C69D893);
+            return new VoxelVisBlockOffset_tImpl(_Handle + _VisBlocksOffset!.Value);
+        }
     }
-  }
 
 
 }

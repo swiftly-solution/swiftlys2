@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmAndNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmAndNode__CDefinition {
+internal partial class CNmAndNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmAndNode__CDefinition
+{
+    public CNmAndNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmAndNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ConditionNodeIndicesOffset;
 
-  private static nint? _ConditionNodeIndicesOffset;
-
-  public SchemaUntypedField ConditionNodeIndices {
-    get {
-      if (_ConditionNodeIndicesOffset == null) {
-        _ConditionNodeIndicesOffset = Schema.GetOffset(0xC46B12E04A144D0F);
-      }
-      return new SchemaUntypedField(_Handle + _ConditionNodeIndicesOffset!.Value);
+    public SchemaUntypedField ConditionNodeIndices {
+        get {
+            _ConditionNodeIndicesOffset = _ConditionNodeIndicesOffset ?? Schema.GetOffset(0xC46B12E04A144D0F);
+            return new SchemaUntypedField(_Handle + _ConditionNodeIndicesOffset!.Value);
+        }
     }
-  }
 
 
 }

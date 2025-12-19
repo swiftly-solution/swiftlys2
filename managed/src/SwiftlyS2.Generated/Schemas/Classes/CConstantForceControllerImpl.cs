@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CConstantForceControllerImpl : SchemaClass, CConstantForceController {
+internal partial class CConstantForceControllerImpl : SchemaClass, CConstantForceController
+{
+    public CConstantForceControllerImpl(nint handle) : base(handle) { }
 
-  public CConstantForceControllerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LinearOffset;
 
-  private static nint? _LinearOffset;
-
-  public ref Vector Linear {
-    get {
-      if (_LinearOffset == null) {
-        _LinearOffset = Schema.GetOffset(0x37030A8D6B6D1260);
-      }
-      return ref _Handle.AsRef<Vector>(_LinearOffset!.Value);
+    public ref Vector Linear {
+        get {
+            _LinearOffset = _LinearOffset ?? Schema.GetOffset(0x37030A8D6B6D1260);
+            return ref _Handle.AsRef<Vector>(_LinearOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularOffset;
+    private static nint? _AngularOffset;
 
-  public SchemaUntypedField Angular {
-    get {
-      if (_AngularOffset == null) {
-        _AngularOffset = Schema.GetOffset(0x37030A8D74E0EB09);
-      }
-      return new SchemaUntypedField(_Handle + _AngularOffset!.Value);
+    public SchemaUntypedField Angular {
+        get {
+            _AngularOffset = _AngularOffset ?? Schema.GetOffset(0x37030A8D74E0EB09);
+            return new SchemaUntypedField(_Handle + _AngularOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearSaveOffset;
+    private static nint? _LinearSaveOffset;
 
-  public ref Vector LinearSave {
-    get {
-      if (_LinearSaveOffset == null) {
-        _LinearSaveOffset = Schema.GetOffset(0x37030A8D96B9953D);
-      }
-      return ref _Handle.AsRef<Vector>(_LinearSaveOffset!.Value);
+    public ref Vector LinearSave {
+        get {
+            _LinearSaveOffset = _LinearSaveOffset ?? Schema.GetOffset(0x37030A8D96B9953D);
+            return ref _Handle.AsRef<Vector>(_LinearSaveOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularSaveOffset;
+    private static nint? _AngularSaveOffset;
 
-  public SchemaUntypedField AngularSave {
-    get {
-      if (_AngularSaveOffset == null) {
-        _AngularSaveOffset = Schema.GetOffset(0x37030A8D8294323C);
-      }
-      return new SchemaUntypedField(_Handle + _AngularSaveOffset!.Value);
+    public SchemaUntypedField AngularSave {
+        get {
+            _AngularSaveOffset = _AngularSaveOffset ?? Schema.GetOffset(0x37030A8D8294323C);
+            return new SchemaUntypedField(_Handle + _AngularSaveOffset!.Value);
+        }
     }
-  }
 
 
 }

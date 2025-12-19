@@ -6,28 +6,25 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSkeletonAnimationControllerImpl : ISkeletonAnimationControllerImpl, CSkeletonAnimationController {
+internal partial class CSkeletonAnimationControllerImpl : ISkeletonAnimationControllerImpl, CSkeletonAnimationController
+{
+    public CSkeletonAnimationControllerImpl(nint handle) : base(handle) { }
 
-  public CSkeletonAnimationControllerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SkeletonInstanceOffset;
 
-  private static nint? _SkeletonInstanceOffset;
-
-  public CSkeletonInstance? SkeletonInstance {
-    get {
-      if (_SkeletonInstanceOffset == null) {
-        _SkeletonInstanceOffset = Schema.GetOffset(0x47164D01F28853);
-      }
-      var ptr = _Handle.Read<nint>(_SkeletonInstanceOffset!.Value);
-      return ptr.IsValidPtr() ? new CSkeletonInstanceImpl(ptr) : null;
+    public CSkeletonInstance? SkeletonInstance {
+        get {
+            _SkeletonInstanceOffset = _SkeletonInstanceOffset ?? Schema.GetOffset(0x47164D01F28853);
+            var ptr = _Handle.Read<nint>(_SkeletonInstanceOffset!.Value);
+            return ptr.IsValidPtr() ? new CSkeletonInstanceImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

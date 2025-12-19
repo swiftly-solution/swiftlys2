@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_WorldCollideConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_WorldCollideConstraint> {
-
-  static C_OP_WorldCollideConstraint ISchemaClass<C_OP_WorldCollideConstraint>.From(nint handle) => new C_OP_WorldCollideConstraintImpl(handle);
-  static int ISchemaClass<C_OP_WorldCollideConstraint>.Size => 464;
-  static string? ISchemaClass<C_OP_WorldCollideConstraint>.ClassName => null;
+public partial interface C_OP_WorldCollideConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_WorldCollideConstraint>
+{
+    static C_OP_WorldCollideConstraint ISchemaClass<C_OP_WorldCollideConstraint>.From(nint handle) => new C_OP_WorldCollideConstraintImpl(handle);
+    static int ISchemaClass<C_OP_WorldCollideConstraint>.Size => 464;
+    static string? ISchemaClass<C_OP_WorldCollideConstraint>.ClassName => null;
 
 
 

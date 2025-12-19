@@ -6,20 +6,19 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSkillIntImpl : SchemaClass, CSkillInt {
+internal partial class CSkillIntImpl : SchemaClass, CSkillInt
+{
+    public CSkillIntImpl(nint handle) : base(handle) { }
 
-  public CSkillIntImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<int> Value {
-    get => new SchemaFixedArray<int>(_Handle, 0xE86F537C7F437844, 4, 4, 4);
-  }
+    public ISchemaFixedArray<int> Value {
+        get => new SchemaFixedArray<int>(_Handle, 0xE86F537C7F437844, 4, 4, 4);
+    }
 
 
 }

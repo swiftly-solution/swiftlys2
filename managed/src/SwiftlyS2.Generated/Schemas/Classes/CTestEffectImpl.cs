@@ -6,53 +6,46 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTestEffectImpl : CBaseEntityImpl, CTestEffect {
+internal partial class CTestEffectImpl : CBaseEntityImpl, CTestEffect
+{
+    public CTestEffectImpl(nint handle) : base(handle) { }
 
-  public CTestEffectImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LoopOffset;
 
-  private static nint? _LoopOffset;
-
-  public ref int Loop {
-    get {
-      if (_LoopOffset == null) {
-        _LoopOffset = Schema.GetOffset(0xF4103FBFFFB6D07A);
-      }
-      return ref _Handle.AsRef<int>(_LoopOffset!.Value);
+    public ref int Loop {
+        get {
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0xF4103FBFFFB6D07A);
+            return ref _Handle.AsRef<int>(_LoopOffset!.Value);
+        }
     }
-  }
-  private static nint? _BeamOffset;
+    private static nint? _BeamOffset;
 
-  public ref int Beam {
-    get {
-      if (_BeamOffset == null) {
-        _BeamOffset = Schema.GetOffset(0xF4103FBF54034EE3);
-      }
-      return ref _Handle.AsRef<int>(_BeamOffset!.Value);
+    public ref int Beam {
+        get {
+            _BeamOffset = _BeamOffset ?? Schema.GetOffset(0xF4103FBF54034EE3);
+            return ref _Handle.AsRef<int>(_BeamOffset!.Value);
+        }
     }
-  }
-  public ISchemaClassFixedArray<CBeam> Beam1 {
-    get => new SchemaClassFixedArray<CBeam>(_Handle, 0xF4103FBFC4017428, 24, 8, 8);
-  }
-  public ISchemaClassFixedArray<GameTime_t> BeamTime {
-    get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0xF4103FBF60293F01, 24, 4, 4);
-  }
-  private static nint? _StartTimeOffset;
+    public ISchemaClassFixedArray<CBeam> Beam1 {
+        get => new SchemaClassFixedArray<CBeam>(_Handle, 0xF4103FBFC4017428, 24, 8, 8);
+    }
+    public ISchemaClassFixedArray<GameTime_t> BeamTime {
+        get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0xF4103FBF60293F01, 24, 4, 4);
+    }
+    private static nint? _StartTimeOffset;
 
-  public GameTime_t StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0xF4103FBF67FE9DC4);
-      }
-      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    public GameTime_t StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xF4103FBF67FE9DC4);
+            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

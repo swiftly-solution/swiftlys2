@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBonePositionMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CBonePositionMetricEvaluator {
+internal partial class CBonePositionMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CBonePositionMetricEvaluator
+{
+    public CBonePositionMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-  public CBonePositionMetricEvaluatorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneIndexOffset;
 
-  private static nint? _BoneIndexOffset;
-
-  public ref int BoneIndex {
-    get {
-      if (_BoneIndexOffset == null) {
-        _BoneIndexOffset = Schema.GetOffset(0xB36923389F407B79);
-      }
-      return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+    public ref int BoneIndex {
+        get {
+            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xB36923389F407B79);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

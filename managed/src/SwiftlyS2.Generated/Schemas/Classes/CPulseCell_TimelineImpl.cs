@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_TimelineImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Timeline {
+internal partial class CPulseCell_TimelineImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Timeline
+{
+    public CPulseCell_TimelineImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_TimelineImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TimelineEventsOffset;
 
-  private static nint? _TimelineEventsOffset;
-
-  public ref CUtlVector<CPulseCell_Timeline__TimelineEvent_t> TimelineEvents {
-    get {
-      if (_TimelineEventsOffset == null) {
-        _TimelineEventsOffset = Schema.GetOffset(0xF1185F93C91CDDC3);
-      }
-      return ref _Handle.AsRef<CUtlVector<CPulseCell_Timeline__TimelineEvent_t>>(_TimelineEventsOffset!.Value);
+    public ref CUtlVector<CPulseCell_Timeline__TimelineEvent_t> TimelineEvents {
+        get {
+            _TimelineEventsOffset = _TimelineEventsOffset ?? Schema.GetOffset(0xF1185F93C91CDDC3);
+            return ref _Handle.AsRef<CUtlVector<CPulseCell_Timeline__TimelineEvent_t>>(_TimelineEventsOffset!.Value);
+        }
     }
-  }
-  private static nint? _WaitForChildOutflowsOffset;
+    private static nint? _WaitForChildOutflowsOffset;
 
-  public ref bool WaitForChildOutflows {
-    get {
-      if (_WaitForChildOutflowsOffset == null) {
-        _WaitForChildOutflowsOffset = Schema.GetOffset(0xF1185F933F8E29C6);
-      }
-      return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset!.Value);
+    public ref bool WaitForChildOutflows {
+        get {
+            _WaitForChildOutflowsOffset = _WaitForChildOutflowsOffset ?? Schema.GetOffset(0xF1185F933F8E29C6);
+            return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnFinishedOffset;
+    private static nint? _OnFinishedOffset;
 
-  public CPulse_ResumePoint OnFinished {
-    get {
-      if (_OnFinishedOffset == null) {
-        _OnFinishedOffset = Schema.GetOffset(0xF1185F938D903E5E);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+    public CPulse_ResumePoint OnFinished {
+        get {
+            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0xF1185F938D903E5E);
+            return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnCanceledOffset;
+    private static nint? _OnCanceledOffset;
 
-  public CPulse_ResumePoint OnCanceled {
-    get {
-      if (_OnCanceledOffset == null) {
-        _OnCanceledOffset = Schema.GetOffset(0xF1185F93F02162DB);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+    public CPulse_ResumePoint OnCanceled {
+        get {
+            _OnCanceledOffset = _OnCanceledOffset ?? Schema.GetOffset(0xF1185F93F02162DB);
+            return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+        }
     }
-  }
 
 
 }

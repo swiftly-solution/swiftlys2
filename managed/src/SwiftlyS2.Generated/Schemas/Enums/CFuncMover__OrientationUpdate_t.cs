@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CFuncMover__OrientationUpdate_t : uint {
-
+public enum CFuncMover__OrientationUpdate_t : uint
+{
  ORIENTATION_FORWARD_PATH = 0,
 
  ORIENTATION_FORWARD_PATH_AND_FIXED_PITCH = 1,

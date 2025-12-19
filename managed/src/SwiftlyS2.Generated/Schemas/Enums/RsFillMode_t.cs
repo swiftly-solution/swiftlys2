@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RsFillMode_t : byte {
-
+public enum RsFillMode_t : byte
+{
  RS_FILL_SOLID = 0,
 
  RS_FILL_WIREFRAME = 1,

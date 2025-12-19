@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_LockPointsImpl : CParticleFunctionOperatorImpl, C_OP_LockPoints {
+internal partial class C_OP_LockPointsImpl : CParticleFunctionOperatorImpl, C_OP_LockPoints
+{
+    public C_OP_LockPointsImpl(nint handle) : base(handle) { }
 
-  public C_OP_LockPointsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinColOffset;
 
-  private static nint? _MinColOffset;
-
-  public ref int MinCol {
-    get {
-      if (_MinColOffset == null) {
-        _MinColOffset = Schema.GetOffset(0x68C45815E41E1FFB);
-      }
-      return ref _Handle.AsRef<int>(_MinColOffset!.Value);
+    public ref int MinCol {
+        get {
+            _MinColOffset = _MinColOffset ?? Schema.GetOffset(0x68C45815E41E1FFB);
+            return ref _Handle.AsRef<int>(_MinColOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxColOffset;
+    private static nint? _MaxColOffset;
 
-  public ref int MaxCol {
-    get {
-      if (_MaxColOffset == null) {
-        _MaxColOffset = Schema.GetOffset(0x68C45815EC9939A1);
-      }
-      return ref _Handle.AsRef<int>(_MaxColOffset!.Value);
+    public ref int MaxCol {
+        get {
+            _MaxColOffset = _MaxColOffset ?? Schema.GetOffset(0x68C45815EC9939A1);
+            return ref _Handle.AsRef<int>(_MaxColOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinRowOffset;
+    private static nint? _MinRowOffset;
 
-  public ref int MinRow {
-    get {
-      if (_MinRowOffset == null) {
-        _MinRowOffset = Schema.GetOffset(0x68C45815199E3CF1);
-      }
-      return ref _Handle.AsRef<int>(_MinRowOffset!.Value);
+    public ref int MinRow {
+        get {
+            _MinRowOffset = _MinRowOffset ?? Schema.GetOffset(0x68C45815199E3CF1);
+            return ref _Handle.AsRef<int>(_MinRowOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxRowOffset;
+    private static nint? _MaxRowOffset;
 
-  public ref int MaxRow {
-    get {
-      if (_MaxRowOffset == null) {
-        _MaxRowOffset = Schema.GetOffset(0x68C458157E297EEB);
-      }
-      return ref _Handle.AsRef<int>(_MaxRowOffset!.Value);
+    public ref int MaxRow {
+        get {
+            _MaxRowOffset = _MaxRowOffset ?? Schema.GetOffset(0x68C458157E297EEB);
+            return ref _Handle.AsRef<int>(_MaxRowOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointOffset;
+    private static nint? _ControlPointOffset;
 
-  public ref int ControlPoint {
-    get {
-      if (_ControlPointOffset == null) {
-        _ControlPointOffset = Schema.GetOffset(0x68C458150D0DDF8C);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    public ref int ControlPoint {
+        get {
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0x68C458150D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendValueOffset;
+    private static nint? _BlendValueOffset;
 
-  public ref float BlendValue {
-    get {
-      if (_BlendValueOffset == null) {
-        _BlendValueOffset = Schema.GetOffset(0x68C45815E14CD067);
-      }
-      return ref _Handle.AsRef<float>(_BlendValueOffset!.Value);
+    public ref float BlendValue {
+        get {
+            _BlendValueOffset = _BlendValueOffset ?? Schema.GetOffset(0x68C45815E14CD067);
+            return ref _Handle.AsRef<float>(_BlendValueOffset!.Value);
+        }
     }
-  }
 
 
 }

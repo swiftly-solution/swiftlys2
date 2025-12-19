@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum TargetWarpAngleMode_t : uint {
-
+public enum TargetWarpAngleMode_t : uint
+{
  eFacingHeading = 0,
 
  eMoveHeading = 1,

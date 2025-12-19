@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EWaveform : byte {
-
+public enum EWaveform : byte
+{
  Sine = 0,
 
  Square = 1,

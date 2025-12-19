@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RagdollCreationParams_tImpl : SchemaClass, RagdollCreationParams_t {
+internal partial class RagdollCreationParams_tImpl : SchemaClass, RagdollCreationParams_t
+{
+    public RagdollCreationParams_tImpl(nint handle) : base(handle) { }
 
-  public RagdollCreationParams_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceOffset;
 
-  private static nint? _ForceOffset;
-
-  public ref Vector Force {
-    get {
-      if (_ForceOffset == null) {
-        _ForceOffset = Schema.GetOffset(0xAF0FCC44E530B0A8);
-      }
-      return ref _Handle.AsRef<Vector>(_ForceOffset!.Value);
+    public ref Vector Force {
+        get {
+            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0xAF0FCC44E530B0A8);
+            return ref _Handle.AsRef<Vector>(_ForceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceBoneOffset;
+    private static nint? _ForceBoneOffset;
 
-  public ref int ForceBone {
-    get {
-      if (_ForceBoneOffset == null) {
-        _ForceBoneOffset = Schema.GetOffset(0xAF0FCC44DDAC019E);
-      }
-      return ref _Handle.AsRef<int>(_ForceBoneOffset!.Value);
+    public ref int ForceBone {
+        get {
+            _ForceBoneOffset = _ForceBoneOffset ?? Schema.GetOffset(0xAF0FCC44DDAC019E);
+            return ref _Handle.AsRef<int>(_ForceBoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceCurrentWorldTransformOffset;
+    private static nint? _ForceCurrentWorldTransformOffset;
 
-  public ref bool ForceCurrentWorldTransform {
-    get {
-      if (_ForceCurrentWorldTransformOffset == null) {
-        _ForceCurrentWorldTransformOffset = Schema.GetOffset(0xAF0FCC443FC20379);
-      }
-      return ref _Handle.AsRef<bool>(_ForceCurrentWorldTransformOffset!.Value);
+    public ref bool ForceCurrentWorldTransform {
+        get {
+            _ForceCurrentWorldTransformOffset = _ForceCurrentWorldTransformOffset ?? Schema.GetOffset(0xAF0FCC443FC20379);
+            return ref _Handle.AsRef<bool>(_ForceCurrentWorldTransformOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseLRURetirementOffset;
+    private static nint? _UseLRURetirementOffset;
 
-  public ref bool UseLRURetirement {
-    get {
-      if (_UseLRURetirementOffset == null) {
-        _UseLRURetirementOffset = Schema.GetOffset(0xAF0FCC444DCF62FA);
-      }
-      return ref _Handle.AsRef<bool>(_UseLRURetirementOffset!.Value);
+    public ref bool UseLRURetirement {
+        get {
+            _UseLRURetirementOffset = _UseLRURetirementOffset ?? Schema.GetOffset(0xAF0FCC444DCF62FA);
+            return ref _Handle.AsRef<bool>(_UseLRURetirementOffset!.Value);
+        }
     }
-  }
-  private static nint? _HealthToGrantOffset;
+    private static nint? _HealthToGrantOffset;
 
-  public ref int HealthToGrant {
-    get {
-      if (_HealthToGrantOffset == null) {
-        _HealthToGrantOffset = Schema.GetOffset(0xAF0FCC4414E28C5C);
-      }
-      return ref _Handle.AsRef<int>(_HealthToGrantOffset!.Value);
+    public ref int HealthToGrant {
+        get {
+            _HealthToGrantOffset = _HealthToGrantOffset ?? Schema.GetOffset(0xAF0FCC4414E28C5C);
+            return ref _Handle.AsRef<int>(_HealthToGrantOffset!.Value);
+        }
     }
-  }
 
 
 }

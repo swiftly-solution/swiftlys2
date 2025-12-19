@@ -509,6 +509,9 @@ classname_dict = {
   "CAmbientGeneric": "ambient_generic",
   "CAK47": "weapon_ak47",
   "CAI_ChangeHintGroup": "ai_changehintgroup",
+  "CPropDoorRotating": "prop_door_rotating",
+  "CPropDoorRotatingBreakable": "prop_door_rotating",
+  "CEnvTracer": "env_tracer",
 }
 
 found_dangerous_fields = []

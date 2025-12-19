@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum BinaryNodeChildOption : uint {
-
+public enum BinaryNodeChildOption : uint
+{
  Child1 = 0,
 
  Child2 = 1,

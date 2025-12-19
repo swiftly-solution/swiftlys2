@@ -6,117 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixVocoderDesc_tImpl : SchemaClass, VMixVocoderDesc_t {
+internal partial class VMixVocoderDesc_tImpl : SchemaClass, VMixVocoderDesc_t
+{
+    public VMixVocoderDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixVocoderDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BandCountOffset;
 
-  private static nint? _BandCountOffset;
-
-  public ref int BandCount {
-    get {
-      if (_BandCountOffset == null) {
-        _BandCountOffset = Schema.GetOffset(0xFBAB3A2972E16EF9);
-      }
-      return ref _Handle.AsRef<int>(_BandCountOffset!.Value);
+    public ref int BandCount {
+        get {
+            _BandCountOffset = _BandCountOffset ?? Schema.GetOffset(0xFBAB3A2972E16EF9);
+            return ref _Handle.AsRef<int>(_BandCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _BandwidthOffset;
+    private static nint? _BandwidthOffset;
 
-  public ref float Bandwidth {
-    get {
-      if (_BandwidthOffset == null) {
-        _BandwidthOffset = Schema.GetOffset(0xFBAB3A29BB43932C);
-      }
-      return ref _Handle.AsRef<float>(_BandwidthOffset!.Value);
+    public ref float Bandwidth {
+        get {
+            _BandwidthOffset = _BandwidthOffset ?? Schema.GetOffset(0xFBAB3A29BB43932C);
+            return ref _Handle.AsRef<float>(_BandwidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _FldBModGainOffset;
+    private static nint? _FldBModGainOffset;
 
-  public ref float FldBModGain {
-    get {
-      if (_FldBModGainOffset == null) {
-        _FldBModGainOffset = Schema.GetOffset(0xFBAB3A291EEAC180);
-      }
-      return ref _Handle.AsRef<float>(_FldBModGainOffset!.Value);
+    public ref float FldBModGain {
+        get {
+            _FldBModGainOffset = _FldBModGainOffset ?? Schema.GetOffset(0xFBAB3A291EEAC180);
+            return ref _Handle.AsRef<float>(_FldBModGainOffset!.Value);
+        }
     }
-  }
-  private static nint? _FreqRangeStartOffset;
+    private static nint? _FreqRangeStartOffset;
 
-  public ref float FreqRangeStart {
-    get {
-      if (_FreqRangeStartOffset == null) {
-        _FreqRangeStartOffset = Schema.GetOffset(0xFBAB3A29B4752A4E);
-      }
-      return ref _Handle.AsRef<float>(_FreqRangeStartOffset!.Value);
+    public ref float FreqRangeStart {
+        get {
+            _FreqRangeStartOffset = _FreqRangeStartOffset ?? Schema.GetOffset(0xFBAB3A29B4752A4E);
+            return ref _Handle.AsRef<float>(_FreqRangeStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _FreqRangeEndOffset;
+    private static nint? _FreqRangeEndOffset;
 
-  public ref float FreqRangeEnd {
-    get {
-      if (_FreqRangeEndOffset == null) {
-        _FreqRangeEndOffset = Schema.GetOffset(0xFBAB3A29884ECF5B);
-      }
-      return ref _Handle.AsRef<float>(_FreqRangeEndOffset!.Value);
+    public ref float FreqRangeEnd {
+        get {
+            _FreqRangeEndOffset = _FreqRangeEndOffset ?? Schema.GetOffset(0xFBAB3A29884ECF5B);
+            return ref _Handle.AsRef<float>(_FreqRangeEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _FldBUnvoicedGainOffset;
+    private static nint? _FldBUnvoicedGainOffset;
 
-  public ref float FldBUnvoicedGain {
-    get {
-      if (_FldBUnvoicedGainOffset == null) {
-        _FldBUnvoicedGainOffset = Schema.GetOffset(0xFBAB3A29B45A3DEF);
-      }
-      return ref _Handle.AsRef<float>(_FldBUnvoicedGainOffset!.Value);
+    public ref float FldBUnvoicedGain {
+        get {
+            _FldBUnvoicedGainOffset = _FldBUnvoicedGainOffset ?? Schema.GetOffset(0xFBAB3A29B45A3DEF);
+            return ref _Handle.AsRef<float>(_FldBUnvoicedGainOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttackTimeMSOffset;
+    private static nint? _AttackTimeMSOffset;
 
-  public ref float AttackTimeMS {
-    get {
-      if (_AttackTimeMSOffset == null) {
-        _AttackTimeMSOffset = Schema.GetOffset(0xFBAB3A29D4A28216);
-      }
-      return ref _Handle.AsRef<float>(_AttackTimeMSOffset!.Value);
+    public ref float AttackTimeMS {
+        get {
+            _AttackTimeMSOffset = _AttackTimeMSOffset ?? Schema.GetOffset(0xFBAB3A29D4A28216);
+            return ref _Handle.AsRef<float>(_AttackTimeMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReleaseTimeMSOffset;
+    private static nint? _ReleaseTimeMSOffset;
 
-  public ref float ReleaseTimeMS {
-    get {
-      if (_ReleaseTimeMSOffset == null) {
-        _ReleaseTimeMSOffset = Schema.GetOffset(0xFBAB3A29EBB62791);
-      }
-      return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset!.Value);
+    public ref float ReleaseTimeMS {
+        get {
+            _ReleaseTimeMSOffset = _ReleaseTimeMSOffset ?? Schema.GetOffset(0xFBAB3A29EBB62791);
+            return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _DebugBandOffset;
+    private static nint? _DebugBandOffset;
 
-  public ref int DebugBand {
-    get {
-      if (_DebugBandOffset == null) {
-        _DebugBandOffset = Schema.GetOffset(0xFBAB3A296E77C31B);
-      }
-      return ref _Handle.AsRef<int>(_DebugBandOffset!.Value);
+    public ref int DebugBand {
+        get {
+            _DebugBandOffset = _DebugBandOffset ?? Schema.GetOffset(0xFBAB3A296E77C31B);
+            return ref _Handle.AsRef<int>(_DebugBandOffset!.Value);
+        }
     }
-  }
-  private static nint? _PeakModeOffset;
+    private static nint? _PeakModeOffset;
 
-  public ref bool PeakMode {
-    get {
-      if (_PeakModeOffset == null) {
-        _PeakModeOffset = Schema.GetOffset(0xFBAB3A2987DF35F9);
-      }
-      return ref _Handle.AsRef<bool>(_PeakModeOffset!.Value);
+    public ref bool PeakMode {
+        get {
+            _PeakModeOffset = _PeakModeOffset ?? Schema.GetOffset(0xFBAB3A2987DF35F9);
+            return ref _Handle.AsRef<bool>(_PeakModeOffset!.Value);
+        }
     }
-  }
 
 
 }

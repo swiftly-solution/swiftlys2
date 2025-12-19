@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFixedWeightBoneMaskNode__CDefinitionImpl : CNmBoneMaskValueNode__CDefinitionImpl, CNmFixedWeightBoneMaskNode__CDefinition {
+internal partial class CNmFixedWeightBoneMaskNode__CDefinitionImpl : CNmBoneMaskValueNode__CDefinitionImpl, CNmFixedWeightBoneMaskNode__CDefinition
+{
+    public CNmFixedWeightBoneMaskNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFixedWeightBoneMaskNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneWeightOffset;
 
-  private static nint? _BoneWeightOffset;
-
-  public ref float BoneWeight {
-    get {
-      if (_BoneWeightOffset == null) {
-        _BoneWeightOffset = Schema.GetOffset(0x26E0BD7363DE76E9);
-      }
-      return ref _Handle.AsRef<float>(_BoneWeightOffset!.Value);
+    public ref float BoneWeight {
+        get {
+            _BoneWeightOffset = _BoneWeightOffset ?? Schema.GetOffset(0x26E0BD7363DE76E9);
+            return ref _Handle.AsRef<float>(_BoneWeightOffset!.Value);
+        }
     }
-  }
 
 
 }

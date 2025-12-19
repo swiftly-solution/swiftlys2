@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicActiveAutosaveImpl : CLogicAutosaveImpl, CLogicActiveAutosave {
+internal partial class CLogicActiveAutosaveImpl : CLogicAutosaveImpl, CLogicActiveAutosave
+{
+    public CLogicActiveAutosaveImpl(nint handle) : base(handle) { }
 
-  public CLogicActiveAutosaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TriggerHitPointsOffset;
 
-  private static nint? _TriggerHitPointsOffset;
-
-  public ref int TriggerHitPoints {
-    get {
-      if (_TriggerHitPointsOffset == null) {
-        _TriggerHitPointsOffset = Schema.GetOffset(0x9BBDEF887D8FAE5B);
-      }
-      return ref _Handle.AsRef<int>(_TriggerHitPointsOffset!.Value);
+    public ref int TriggerHitPoints {
+        get {
+            _TriggerHitPointsOffset = _TriggerHitPointsOffset ?? Schema.GetOffset(0x9BBDEF887D8FAE5B);
+            return ref _Handle.AsRef<int>(_TriggerHitPointsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeToTriggerOffset;
+    private static nint? _TimeToTriggerOffset;
 
-  public ref float TimeToTrigger {
-    get {
-      if (_TimeToTriggerOffset == null) {
-        _TimeToTriggerOffset = Schema.GetOffset(0x9BBDEF880C3F780D);
-      }
-      return ref _Handle.AsRef<float>(_TimeToTriggerOffset!.Value);
+    public ref float TimeToTrigger {
+        get {
+            _TimeToTriggerOffset = _TimeToTriggerOffset ?? Schema.GetOffset(0x9BBDEF880C3F780D);
+            return ref _Handle.AsRef<float>(_TimeToTriggerOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTimeOffset;
+    private static nint? _StartTimeOffset;
 
-  public GameTime_t StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x9BBDEF8867FE9DC4);
-      }
-      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    public GameTime_t StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x9BBDEF8867FE9DC4);
+            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DangerousTimeOffset;
+    private static nint? _DangerousTimeOffset;
 
-  public ref float DangerousTime {
-    get {
-      if (_DangerousTimeOffset == null) {
-        _DangerousTimeOffset = Schema.GetOffset(0x9BBDEF8819BC5644);
-      }
-      return ref _Handle.AsRef<float>(_DangerousTimeOffset!.Value);
+    public ref float DangerousTime {
+        get {
+            _DangerousTimeOffset = _DangerousTimeOffset ?? Schema.GetOffset(0x9BBDEF8819BC5644);
+            return ref _Handle.AsRef<float>(_DangerousTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

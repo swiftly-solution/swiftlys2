@@ -6,174 +6,140 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DistanceToTransformImpl : CParticleFunctionOperatorImpl, C_OP_DistanceToTransform {
+internal partial class C_OP_DistanceToTransformImpl : CParticleFunctionOperatorImpl, C_OP_DistanceToTransform
+{
+    public C_OP_DistanceToTransformImpl(nint handle) : base(handle) { }
 
-  public C_OP_DistanceToTransformImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x4E442549E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
-    }
-  }
-  private static nint? _InputMinOffset;
-
-  public CPerParticleFloatInput InputMin {
-    get {
-      if (_InputMinOffset == null) {
-        _InputMinOffset = Schema.GetOffset(0x4E442549E88A0D0F);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InputMinOffset!.Value);
-    }
-  }
-  private static nint? _InputMaxOffset;
-
-  public CPerParticleFloatInput InputMax {
-    get {
-      if (_InputMaxOffset == null) {
-        _InputMaxOffset = Schema.GetOffset(0x4E442549D6766901);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InputMaxOffset!.Value);
-    }
-  }
-  private static nint? _OutputMinOffset;
-
-  public CPerParticleFloatInput OutputMin {
-    get {
-      if (_OutputMinOffset == null) {
-        _OutputMinOffset = Schema.GetOffset(0x4E4425495F8D7716);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _OutputMinOffset!.Value);
-    }
-  }
-  private static nint? _OutputMaxOffset;
-
-  public CPerParticleFloatInput OutputMax {
-    get {
-      if (_OutputMaxOffset == null) {
-        _OutputMaxOffset = Schema.GetOffset(0x4E44254951A0E8C4);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _OutputMaxOffset!.Value);
-    }
-  }
-  private static nint? _TransformStartOffset;
-
-  public CParticleTransformInput TransformStart {
-    get {
-      if (_TransformStartOffset == null) {
-        _TransformStartOffset = Schema.GetOffset(0x4E442549D94FA7F9);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformStartOffset!.Value);
-    }
-  }
-  private static nint? _LOSOffset;
-
-  public ref bool LOS {
-    get {
-      if (_LOSOffset == null) {
-        _LOSOffset = Schema.GetOffset(0x4E4425499C25C2ED);
-      }
-      return ref _Handle.AsRef<bool>(_LOSOffset!.Value);
-    }
-  }
-  private static nint? _CollisionGroupNameOffset;
-
-  public string CollisionGroupName {
-    get {
-        if (_CollisionGroupNameOffset == null) {
-            _CollisionGroupNameOffset = Schema.GetOffset(0x4E442549D58A3195);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4E442549E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
         }
-        var ptr = _Handle + _CollisionGroupNameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_CollisionGroupNameOffset == null) {
-            _CollisionGroupNameOffset = Schema.GetOffset(0x4E442549D58A3195);
+    private static nint? _InputMinOffset;
+
+    public CPerParticleFloatInput InputMin {
+        get {
+            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0x4E442549E88A0D0F);
+            return new CPerParticleFloatInputImpl(_Handle + _InputMinOffset!.Value);
         }
-        Schema.SetFixedString(_Handle, _CollisionGroupNameOffset!.Value, value, 128);
     }
-  } 
-  private static nint? _TraceSetOffset;
+    private static nint? _InputMaxOffset;
 
-  public ref ParticleTraceSet_t TraceSet {
-    get {
-      if (_TraceSetOffset == null) {
-        _TraceSetOffset = Schema.GetOffset(0x4E442549BD26C5B2);
-      }
-      return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset!.Value);
+    public CPerParticleFloatInput InputMax {
+        get {
+            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0x4E442549D6766901);
+            return new CPerParticleFloatInputImpl(_Handle + _InputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxTraceLengthOffset;
+    private static nint? _OutputMinOffset;
 
-  public ref float MaxTraceLength {
-    get {
-      if (_MaxTraceLengthOffset == null) {
-        _MaxTraceLengthOffset = Schema.GetOffset(0x4E442549543C3798);
-      }
-      return ref _Handle.AsRef<float>(_MaxTraceLengthOffset!.Value);
+    public CPerParticleFloatInput OutputMin {
+        get {
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x4E4425495F8D7716);
+            return new CPerParticleFloatInputImpl(_Handle + _OutputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _LOSScaleOffset;
+    private static nint? _OutputMaxOffset;
 
-  public ref float LOSScale {
-    get {
-      if (_LOSScaleOffset == null) {
-        _LOSScaleOffset = Schema.GetOffset(0x4E442549259F6F3B);
-      }
-      return ref _Handle.AsRef<float>(_LOSScaleOffset!.Value);
+    public CPerParticleFloatInput OutputMax {
+        get {
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x4E44254951A0E8C4);
+            return new CPerParticleFloatInputImpl(_Handle + _OutputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetMethodOffset;
+    private static nint? _TransformStartOffset;
 
-  public ref ParticleSetMethod_t SetMethod {
-    get {
-      if (_SetMethodOffset == null) {
-        _SetMethodOffset = Schema.GetOffset(0x4E442549FB53C31E);
-      }
-      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    public CParticleTransformInput TransformStart {
+        get {
+            _TransformStartOffset = _TransformStartOffset ?? Schema.GetOffset(0x4E442549D94FA7F9);
+            return new CParticleTransformInputImpl(_Handle + _TransformStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveRangeOffset;
+    private static nint? _LOSOffset;
 
-  public ref bool ActiveRange {
-    get {
-      if (_ActiveRangeOffset == null) {
-        _ActiveRangeOffset = Schema.GetOffset(0x4E4425493FA53B84);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveRangeOffset!.Value);
+    public ref bool LOS {
+        get {
+            _LOSOffset = _LOSOffset ?? Schema.GetOffset(0x4E4425499C25C2ED);
+            return ref _Handle.AsRef<bool>(_LOSOffset!.Value);
+        }
     }
-  }
-  private static nint? _AdditiveOffset;
+    private static nint? _CollisionGroupNameOffset;
 
-  public ref bool Additive {
-    get {
-      if (_AdditiveOffset == null) {
-        _AdditiveOffset = Schema.GetOffset(0x4E4425490FA86105);
-      }
-      return ref _Handle.AsRef<bool>(_AdditiveOffset!.Value);
-    }
-  }
-  private static nint? _ComponentScaleOffset;
+    public string CollisionGroupName {
+        get {
+            _CollisionGroupNameOffset = _CollisionGroupNameOffset ?? Schema.GetOffset(0x4E442549D58A3195);
+            return Schema.GetString(_Handle + _CollisionGroupNameOffset!.Value);
+        }
+        set {
+            _CollisionGroupNameOffset = _CollisionGroupNameOffset ?? Schema.GetOffset(0x4E442549D58A3195);
+            Schema.SetFixedString(_Handle, _CollisionGroupNameOffset!.Value, value, 128);
+        }
+    } 
+    private static nint? _TraceSetOffset;
 
-  public CPerParticleVecInput ComponentScale {
-    get {
-      if (_ComponentScaleOffset == null) {
-        _ComponentScaleOffset = Schema.GetOffset(0x4E442549B17954E2);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _ComponentScaleOffset!.Value);
+    public ref ParticleTraceSet_t TraceSet {
+        get {
+            _TraceSetOffset = _TraceSetOffset ?? Schema.GetOffset(0x4E442549BD26C5B2);
+            return ref _Handle.AsRef<ParticleTraceSet_t>(_TraceSetOffset!.Value);
+        }
     }
-  }
+    private static nint? _MaxTraceLengthOffset;
+
+    public ref float MaxTraceLength {
+        get {
+            _MaxTraceLengthOffset = _MaxTraceLengthOffset ?? Schema.GetOffset(0x4E442549543C3798);
+            return ref _Handle.AsRef<float>(_MaxTraceLengthOffset!.Value);
+        }
+    }
+    private static nint? _LOSScaleOffset;
+
+    public ref float LOSScale {
+        get {
+            _LOSScaleOffset = _LOSScaleOffset ?? Schema.GetOffset(0x4E442549259F6F3B);
+            return ref _Handle.AsRef<float>(_LOSScaleOffset!.Value);
+        }
+    }
+    private static nint? _SetMethodOffset;
+
+    public ref ParticleSetMethod_t SetMethod {
+        get {
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x4E442549FB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+        }
+    }
+    private static nint? _ActiveRangeOffset;
+
+    public ref bool ActiveRange {
+        get {
+            _ActiveRangeOffset = _ActiveRangeOffset ?? Schema.GetOffset(0x4E4425493FA53B84);
+            return ref _Handle.AsRef<bool>(_ActiveRangeOffset!.Value);
+        }
+    }
+    private static nint? _AdditiveOffset;
+
+    public ref bool Additive {
+        get {
+            _AdditiveOffset = _AdditiveOffset ?? Schema.GetOffset(0x4E4425490FA86105);
+            return ref _Handle.AsRef<bool>(_AdditiveOffset!.Value);
+        }
+    }
+    private static nint? _ComponentScaleOffset;
+
+    public CPerParticleVecInput ComponentScale {
+        get {
+            _ComponentScaleOffset = _ComponentScaleOffset ?? Schema.GetOffset(0x4E442549B17954E2);
+            return new CPerParticleVecInputImpl(_Handle + _ComponentScaleOffset!.Value);
+        }
+    }
 
 
 }

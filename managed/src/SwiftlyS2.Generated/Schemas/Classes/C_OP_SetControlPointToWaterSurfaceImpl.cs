@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetControlPointToWaterSurfaceImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointToWaterSurface {
+internal partial class C_OP_SetControlPointToWaterSurfaceImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointToWaterSurface
+{
+    public C_OP_SetControlPointToWaterSurfaceImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetControlPointToWaterSurfaceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceCPOffset;
 
-  private static nint? _SourceCPOffset;
-
-  public ref int SourceCP {
-    get {
-      if (_SourceCPOffset == null) {
-        _SourceCPOffset = Schema.GetOffset(0x5BA6BFAD4C01E3B7);
-      }
-      return ref _Handle.AsRef<int>(_SourceCPOffset!.Value);
+    public ref int SourceCP {
+        get {
+            _SourceCPOffset = _SourceCPOffset ?? Schema.GetOffset(0x5BA6BFAD4C01E3B7);
+            return ref _Handle.AsRef<int>(_SourceCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestCPOffset;
+    private static nint? _DestCPOffset;
 
-  public ref int DestCP {
-    get {
-      if (_DestCPOffset == null) {
-        _DestCPOffset = Schema.GetOffset(0x5BA6BFADE27355DA);
-      }
-      return ref _Handle.AsRef<int>(_DestCPOffset!.Value);
+    public ref int DestCP {
+        get {
+            _DestCPOffset = _DestCPOffset ?? Schema.GetOffset(0x5BA6BFADE27355DA);
+            return ref _Handle.AsRef<int>(_DestCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlowCPOffset;
+    private static nint? _FlowCPOffset;
 
-  public ref int FlowCP {
-    get {
-      if (_FlowCPOffset == null) {
-        _FlowCPOffset = Schema.GetOffset(0x5BA6BFADF3D93292);
-      }
-      return ref _Handle.AsRef<int>(_FlowCPOffset!.Value);
+    public ref int FlowCP {
+        get {
+            _FlowCPOffset = _FlowCPOffset ?? Schema.GetOffset(0x5BA6BFADF3D93292);
+            return ref _Handle.AsRef<int>(_FlowCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveCPOffset;
+    private static nint? _ActiveCPOffset;
 
-  public ref int ActiveCP {
-    get {
-      if (_ActiveCPOffset == null) {
-        _ActiveCPOffset = Schema.GetOffset(0x5BA6BFADA12F97B0);
-      }
-      return ref _Handle.AsRef<int>(_ActiveCPOffset!.Value);
+    public ref int ActiveCP {
+        get {
+            _ActiveCPOffset = _ActiveCPOffset ?? Schema.GetOffset(0x5BA6BFADA12F97B0);
+            return ref _Handle.AsRef<int>(_ActiveCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveCPFieldOffset;
+    private static nint? _ActiveCPFieldOffset;
 
-  public ref int ActiveCPField {
-    get {
-      if (_ActiveCPFieldOffset == null) {
-        _ActiveCPFieldOffset = Schema.GetOffset(0x5BA6BFAD61A1D27C);
-      }
-      return ref _Handle.AsRef<int>(_ActiveCPFieldOffset!.Value);
+    public ref int ActiveCPField {
+        get {
+            _ActiveCPFieldOffset = _ActiveCPFieldOffset ?? Schema.GetOffset(0x5BA6BFAD61A1D27C);
+            return ref _Handle.AsRef<int>(_ActiveCPFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _RetestRateOffset;
+    private static nint? _RetestRateOffset;
 
-  public CParticleCollectionFloatInput RetestRate {
-    get {
-      if (_RetestRateOffset == null) {
-        _RetestRateOffset = Schema.GetOffset(0x5BA6BFAD38DA66AC);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _RetestRateOffset!.Value);
+    public CParticleCollectionFloatInput RetestRate {
+        get {
+            _RetestRateOffset = _RetestRateOffset ?? Schema.GetOffset(0x5BA6BFAD38DA66AC);
+            return new CParticleCollectionFloatInputImpl(_Handle + _RetestRateOffset!.Value);
+        }
     }
-  }
-  private static nint? _AdaptiveThresholdOffset;
+    private static nint? _AdaptiveThresholdOffset;
 
-  public ref bool AdaptiveThreshold {
-    get {
-      if (_AdaptiveThresholdOffset == null) {
-        _AdaptiveThresholdOffset = Schema.GetOffset(0x5BA6BFADE64212D6);
-      }
-      return ref _Handle.AsRef<bool>(_AdaptiveThresholdOffset!.Value);
+    public ref bool AdaptiveThreshold {
+        get {
+            _AdaptiveThresholdOffset = _AdaptiveThresholdOffset ?? Schema.GetOffset(0x5BA6BFADE64212D6);
+            return ref _Handle.AsRef<bool>(_AdaptiveThresholdOffset!.Value);
+        }
     }
-  }
 
 
 }

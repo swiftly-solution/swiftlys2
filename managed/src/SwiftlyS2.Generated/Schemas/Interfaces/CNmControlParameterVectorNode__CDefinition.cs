@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmControlParameterVectorNode__CDefinition : CNmVectorValueNode__CDefinition, ISchemaClass<CNmControlParameterVectorNode__CDefinition> {
-
-  static CNmControlParameterVectorNode__CDefinition ISchemaClass<CNmControlParameterVectorNode__CDefinition>.From(nint handle) => new CNmControlParameterVectorNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmControlParameterVectorNode__CDefinition>.Size => 16;
-  static string? ISchemaClass<CNmControlParameterVectorNode__CDefinition>.ClassName => null;
+public partial interface CNmControlParameterVectorNode__CDefinition : CNmVectorValueNode__CDefinition, ISchemaClass<CNmControlParameterVectorNode__CDefinition>
+{
+    static CNmControlParameterVectorNode__CDefinition ISchemaClass<CNmControlParameterVectorNode__CDefinition>.From(nint handle) => new CNmControlParameterVectorNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmControlParameterVectorNode__CDefinition>.Size => 16;
+    static string? ISchemaClass<CNmControlParameterVectorNode__CDefinition>.ClassName => null;
 
 
 

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmReferencePoseTask : CNmPoseTask, ISchemaClass<CNmReferencePoseTask> {
-
-  static CNmReferencePoseTask ISchemaClass<CNmReferencePoseTask>.From(nint handle) => new CNmReferencePoseTaskImpl(handle);
-  static int ISchemaClass<CNmReferencePoseTask>.Size => 88;
-  static string? ISchemaClass<CNmReferencePoseTask>.ClassName => null;
+public partial interface CNmReferencePoseTask : CNmPoseTask, ISchemaClass<CNmReferencePoseTask>
+{
+    static CNmReferencePoseTask ISchemaClass<CNmReferencePoseTask>.From(nint handle) => new CNmReferencePoseTaskImpl(handle);
+    static int ISchemaClass<CNmReferencePoseTask>.Size => 88;
+    static string? ISchemaClass<CNmReferencePoseTask>.ClassName => null;
 
 
 

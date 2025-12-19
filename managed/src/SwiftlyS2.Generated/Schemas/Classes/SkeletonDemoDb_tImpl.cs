@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SkeletonDemoDb_tImpl : SchemaClass, SkeletonDemoDb_t {
+internal partial class SkeletonDemoDb_tImpl : SchemaClass, SkeletonDemoDb_t
+{
+    public SkeletonDemoDb_tImpl(nint handle) : base(handle) { }
 
-  public SkeletonDemoDb_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AnimCapturesOffset;
 
-  private static nint? _AnimCapturesOffset;
-
-  public ref CUtlVector<PointerTo<SkeletonAnimCapture_t>> AnimCaptures {
-    get {
-      if (_AnimCapturesOffset == null) {
-        _AnimCapturesOffset = Schema.GetOffset(0xF4F5DA643E069D13);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointerTo<SkeletonAnimCapture_t>>>(_AnimCapturesOffset!.Value);
+    public ref CUtlVector<PointerTo<SkeletonAnimCapture_t>> AnimCaptures {
+        get {
+            _AnimCapturesOffset = _AnimCapturesOffset ?? Schema.GetOffset(0xF4F5DA643E069D13);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<SkeletonAnimCapture_t>>>(_AnimCapturesOffset!.Value);
+        }
     }
-  }
-  private static nint? _CameraTrackOffset;
+    private static nint? _CameraTrackOffset;
 
-  public ref CUtlVector<SkeletonAnimCapture_t__Camera_t> CameraTrack {
-    get {
-      if (_CameraTrackOffset == null) {
-        _CameraTrackOffset = Schema.GetOffset(0xF4F5DA64EFF0F8DD);
-      }
-      return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Camera_t>>(_CameraTrackOffset!.Value);
+    public ref CUtlVector<SkeletonAnimCapture_t__Camera_t> CameraTrack {
+        get {
+            _CameraTrackOffset = _CameraTrackOffset ?? Schema.GetOffset(0xF4F5DA64EFF0F8DD);
+            return ref _Handle.AsRef<CUtlVector<SkeletonAnimCapture_t__Camera_t>>(_CameraTrackOffset!.Value);
+        }
     }
-  }
-  private static nint? _RecordingTimeOffset;
+    private static nint? _RecordingTimeOffset;
 
-  public ref float RecordingTime {
-    get {
-      if (_RecordingTimeOffset == null) {
-        _RecordingTimeOffset = Schema.GetOffset(0xF4F5DA64D29049CB);
-      }
-      return ref _Handle.AsRef<float>(_RecordingTimeOffset!.Value);
+    public ref float RecordingTime {
+        get {
+            _RecordingTimeOffset = _RecordingTimeOffset ?? Schema.GetOffset(0xF4F5DA64D29049CB);
+            return ref _Handle.AsRef<float>(_RecordingTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

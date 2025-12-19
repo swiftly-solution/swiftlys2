@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PermEntityLumpData_tImpl : SchemaClass, PermEntityLumpData_t {
+internal partial class PermEntityLumpData_tImpl : SchemaClass, PermEntityLumpData_t
+{
+    public PermEntityLumpData_tImpl(nint handle) : base(handle) { }
 
-  public PermEntityLumpData_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x47DA25F14D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x47DA25F14D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ChildLumpsOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x47DA25F14D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> ChildLumps {
+        get {
+            _ChildLumpsOffset = _ChildLumpsOffset ?? Schema.GetOffset(0x47DA25F1AFDAF56C);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>>>(_ChildLumpsOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x47DA25F14D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ChildLumpsOffset;
+    private static nint? _EntityKeyValuesOffset;
 
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> ChildLumps {
-    get {
-      if (_ChildLumpsOffset == null) {
-        _ChildLumpsOffset = Schema.GetOffset(0x47DA25F1AFDAF56C);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>>>(_ChildLumpsOffset!.Value);
+    public ref CUtlLeanVector<EntityKeyValueData_t, int> EntityKeyValues {
+        get {
+            _EntityKeyValuesOffset = _EntityKeyValuesOffset ?? Schema.GetOffset(0x47DA25F1DBD62937);
+            return ref _Handle.AsRef<CUtlLeanVector<EntityKeyValueData_t, int>>(_EntityKeyValuesOffset!.Value);
+        }
     }
-  }
-  private static nint? _EntityKeyValuesOffset;
-
-  public ref CUtlLeanVector<EntityKeyValueData_t, int> EntityKeyValues {
-    get {
-      if (_EntityKeyValuesOffset == null) {
-        _EntityKeyValuesOffset = Schema.GetOffset(0x47DA25F1DBD62937);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<EntityKeyValueData_t, int>>(_EntityKeyValuesOffset!.Value);
-    }
-  }
 
 
 }

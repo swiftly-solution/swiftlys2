@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimGraphSettingsGroup : ISchemaClass<CAnimGraphSettingsGroup> {
-
-  static CAnimGraphSettingsGroup ISchemaClass<CAnimGraphSettingsGroup>.From(nint handle) => new CAnimGraphSettingsGroupImpl(handle);
-  static int ISchemaClass<CAnimGraphSettingsGroup>.Size => 32;
-  static string? ISchemaClass<CAnimGraphSettingsGroup>.ClassName => null;
+public partial interface CAnimGraphSettingsGroup : ISchemaClass<CAnimGraphSettingsGroup>
+{
+    static CAnimGraphSettingsGroup ISchemaClass<CAnimGraphSettingsGroup>.From(nint handle) => new CAnimGraphSettingsGroupImpl(handle);
+    static int ISchemaClass<CAnimGraphSettingsGroup>.Size => 32;
+    static string? ISchemaClass<CAnimGraphSettingsGroup>.ClassName => null;
 
 
 

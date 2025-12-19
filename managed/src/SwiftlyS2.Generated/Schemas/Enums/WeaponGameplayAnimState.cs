@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum WeaponGameplayAnimState : ushort {
-
+public enum WeaponGameplayAnimState : ushort
+{
  WPN_ANIMSTATE_UNINITIALIZED = 0,
 
  WPN_ANIMSTATE_DROPPED = 1,

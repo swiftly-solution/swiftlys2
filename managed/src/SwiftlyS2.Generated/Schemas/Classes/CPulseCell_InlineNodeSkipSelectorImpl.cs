@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_InlineNodeSkipSelectorImpl : CPulseCell_BaseFlowImpl, CPulseCell_InlineNodeSkipSelector {
+internal partial class CPulseCell_InlineNodeSkipSelectorImpl : CPulseCell_BaseFlowImpl, CPulseCell_InlineNodeSkipSelector
+{
+    public CPulseCell_InlineNodeSkipSelectorImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_InlineNodeSkipSelectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FlowNodeIDOffset;
 
-  private static nint? _FlowNodeIDOffset;
-
-  public PulseDocNodeID_t FlowNodeID {
-    get {
-      if (_FlowNodeIDOffset == null) {
-        _FlowNodeIDOffset = Schema.GetOffset(0x43AF14578ED47FBC);
-      }
-      return new PulseDocNodeID_tImpl(_Handle + _FlowNodeIDOffset!.Value);
+    public PulseDocNodeID_t FlowNodeID {
+        get {
+            _FlowNodeIDOffset = _FlowNodeIDOffset ?? Schema.GetOffset(0x43AF14578ED47FBC);
+            return new PulseDocNodeID_tImpl(_Handle + _FlowNodeIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _AndOffset;
+    private static nint? _AndOffset;
 
-  public ref bool And {
-    get {
-      if (_AndOffset == null) {
-        _AndOffset = Schema.GetOffset(0x43AF14573A289986);
-      }
-      return ref _Handle.AsRef<bool>(_AndOffset!.Value);
+    public ref bool And {
+        get {
+            _AndOffset = _AndOffset ?? Schema.GetOffset(0x43AF14573A289986);
+            return ref _Handle.AsRef<bool>(_AndOffset!.Value);
+        }
     }
-  }
-  private static nint? _PassOutflowOffset;
+    private static nint? _PassOutflowOffset;
 
-  public PulseSelectorOutflowList_t PassOutflow {
-    get {
-      if (_PassOutflowOffset == null) {
-        _PassOutflowOffset = Schema.GetOffset(0x43AF145724AA6434);
-      }
-      return new PulseSelectorOutflowList_tImpl(_Handle + _PassOutflowOffset!.Value);
+    public PulseSelectorOutflowList_t PassOutflow {
+        get {
+            _PassOutflowOffset = _PassOutflowOffset ?? Schema.GetOffset(0x43AF145724AA6434);
+            return new PulseSelectorOutflowList_tImpl(_Handle + _PassOutflowOffset!.Value);
+        }
     }
-  }
-  private static nint? _FailOutflowOffset;
+    private static nint? _FailOutflowOffset;
 
-  public CPulse_OutflowConnection FailOutflow {
-    get {
-      if (_FailOutflowOffset == null) {
-        _FailOutflowOffset = Schema.GetOffset(0x43AF1457AC90C0E3);
-      }
-      return new CPulse_OutflowConnectionImpl(_Handle + _FailOutflowOffset!.Value);
+    public CPulse_OutflowConnection FailOutflow {
+        get {
+            _FailOutflowOffset = _FailOutflowOffset ?? Schema.GetOffset(0x43AF1457AC90C0E3);
+            return new CPulse_OutflowConnectionImpl(_Handle + _FailOutflowOffset!.Value);
+        }
     }
-  }
 
 
 }

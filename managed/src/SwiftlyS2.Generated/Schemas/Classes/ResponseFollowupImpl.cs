@@ -6,132 +6,100 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ResponseFollowupImpl : SchemaClass, ResponseFollowup {
+internal partial class ResponseFollowupImpl : SchemaClass, ResponseFollowup
+{
+    public ResponseFollowupImpl(nint handle) : base(handle) { }
 
-  public ResponseFollowupImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Followup_conceptOffset;
 
-  private static nint? _Followup_conceptOffset;
+    public string Followup_concept {
+        get {
+            _Followup_conceptOffset = _Followup_conceptOffset ?? Schema.GetOffset(0x6C93EDBE24539C9E);
+            return Schema.GetString(_Handle.Read<nint>(_Followup_conceptOffset!.Value));
+        }
+        set {
+            _Followup_conceptOffset = _Followup_conceptOffset ?? Schema.GetOffset(0x6C93EDBE24539C9E);
+            Schema.SetString(_Handle, _Followup_conceptOffset!.Value, value);
+        }
+    } 
+    private static nint? _Followup_contextsOffset;
 
-  public string Followup_concept {
-    get {
-      if (_Followup_conceptOffset == null) {
-        _Followup_conceptOffset = Schema.GetOffset(0x6C93EDBE24539C9E);
-      }
-      var ptr = _Handle.Read<nint>(_Followup_conceptOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_Followup_conceptOffset == null) {
-        _Followup_conceptOffset = Schema.GetOffset(0x6C93EDBE24539C9E);
-      }
-      Schema.SetString(_Handle, _Followup_conceptOffset!.Value, value);
-    }
-  } 
-  private static nint? _Followup_contextsOffset;
+    public string Followup_contexts {
+        get {
+            _Followup_contextsOffset = _Followup_contextsOffset ?? Schema.GetOffset(0x6C93EDBE5C4196A6);
+            return Schema.GetString(_Handle.Read<nint>(_Followup_contextsOffset!.Value));
+        }
+        set {
+            _Followup_contextsOffset = _Followup_contextsOffset ?? Schema.GetOffset(0x6C93EDBE5C4196A6);
+            Schema.SetString(_Handle, _Followup_contextsOffset!.Value, value);
+        }
+    } 
+    private static nint? _Followup_delayOffset;
 
-  public string Followup_contexts {
-    get {
-      if (_Followup_contextsOffset == null) {
-        _Followup_contextsOffset = Schema.GetOffset(0x6C93EDBE5C4196A6);
-      }
-      var ptr = _Handle.Read<nint>(_Followup_contextsOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Followup_delay {
+        get {
+            _Followup_delayOffset = _Followup_delayOffset ?? Schema.GetOffset(0x6C93EDBEC5E3BE49);
+            return ref _Handle.AsRef<float>(_Followup_delayOffset!.Value);
+        }
     }
-    set {
-      if (_Followup_contextsOffset == null) {
-        _Followup_contextsOffset = Schema.GetOffset(0x6C93EDBE5C4196A6);
-      }
-      Schema.SetString(_Handle, _Followup_contextsOffset!.Value, value);
-    }
-  } 
-  private static nint? _Followup_delayOffset;
+    private static nint? _Followup_targetOffset;
 
-  public ref float Followup_delay {
-    get {
-      if (_Followup_delayOffset == null) {
-        _Followup_delayOffset = Schema.GetOffset(0x6C93EDBEC5E3BE49);
-      }
-      return ref _Handle.AsRef<float>(_Followup_delayOffset!.Value);
-    }
-  }
-  private static nint? _Followup_targetOffset;
+    public string Followup_target {
+        get {
+            _Followup_targetOffset = _Followup_targetOffset ?? Schema.GetOffset(0x6C93EDBEAD89F8D7);
+            return Schema.GetString(_Handle.Read<nint>(_Followup_targetOffset!.Value));
+        }
+        set {
+            _Followup_targetOffset = _Followup_targetOffset ?? Schema.GetOffset(0x6C93EDBEAD89F8D7);
+            Schema.SetString(_Handle, _Followup_targetOffset!.Value, value);
+        }
+    } 
+    private static nint? _Followup_entityiotargetOffset;
 
-  public string Followup_target {
-    get {
-      if (_Followup_targetOffset == null) {
-        _Followup_targetOffset = Schema.GetOffset(0x6C93EDBEAD89F8D7);
-      }
-      var ptr = _Handle.Read<nint>(_Followup_targetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_Followup_targetOffset == null) {
-        _Followup_targetOffset = Schema.GetOffset(0x6C93EDBEAD89F8D7);
-      }
-      Schema.SetString(_Handle, _Followup_targetOffset!.Value, value);
-    }
-  } 
-  private static nint? _Followup_entityiotargetOffset;
+    public string Followup_entityiotarget {
+        get {
+            _Followup_entityiotargetOffset = _Followup_entityiotargetOffset ?? Schema.GetOffset(0x6C93EDBEFF990A74);
+            return Schema.GetString(_Handle.Read<nint>(_Followup_entityiotargetOffset!.Value));
+        }
+        set {
+            _Followup_entityiotargetOffset = _Followup_entityiotargetOffset ?? Schema.GetOffset(0x6C93EDBEFF990A74);
+            Schema.SetString(_Handle, _Followup_entityiotargetOffset!.Value, value);
+        }
+    } 
+    private static nint? _Followup_entityioinputOffset;
 
-  public string Followup_entityiotarget {
-    get {
-      if (_Followup_entityiotargetOffset == null) {
-        _Followup_entityiotargetOffset = Schema.GetOffset(0x6C93EDBEFF990A74);
-      }
-      var ptr = _Handle.Read<nint>(_Followup_entityiotargetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_Followup_entityiotargetOffset == null) {
-        _Followup_entityiotargetOffset = Schema.GetOffset(0x6C93EDBEFF990A74);
-      }
-      Schema.SetString(_Handle, _Followup_entityiotargetOffset!.Value, value);
-    }
-  } 
-  private static nint? _Followup_entityioinputOffset;
+    public string Followup_entityioinput {
+        get {
+            _Followup_entityioinputOffset = _Followup_entityioinputOffset ?? Schema.GetOffset(0x6C93EDBEAB6AD4B7);
+            return Schema.GetString(_Handle.Read<nint>(_Followup_entityioinputOffset!.Value));
+        }
+        set {
+            _Followup_entityioinputOffset = _Followup_entityioinputOffset ?? Schema.GetOffset(0x6C93EDBEAB6AD4B7);
+            Schema.SetString(_Handle, _Followup_entityioinputOffset!.Value, value);
+        }
+    } 
+    private static nint? _Followup_entityiodelayOffset;
 
-  public string Followup_entityioinput {
-    get {
-      if (_Followup_entityioinputOffset == null) {
-        _Followup_entityioinputOffset = Schema.GetOffset(0x6C93EDBEAB6AD4B7);
-      }
-      var ptr = _Handle.Read<nint>(_Followup_entityioinputOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Followup_entityiodelay {
+        get {
+            _Followup_entityiodelayOffset = _Followup_entityiodelayOffset ?? Schema.GetOffset(0x6C93EDBE37A3C494);
+            return ref _Handle.AsRef<float>(_Followup_entityiodelayOffset!.Value);
+        }
     }
-    set {
-      if (_Followup_entityioinputOffset == null) {
-        _Followup_entityioinputOffset = Schema.GetOffset(0x6C93EDBEAB6AD4B7);
-      }
-      Schema.SetString(_Handle, _Followup_entityioinputOffset!.Value, value);
-    }
-  } 
-  private static nint? _Followup_entityiodelayOffset;
+    private static nint? _FiredOffset;
 
-  public ref float Followup_entityiodelay {
-    get {
-      if (_Followup_entityiodelayOffset == null) {
-        _Followup_entityiodelayOffset = Schema.GetOffset(0x6C93EDBE37A3C494);
-      }
-      return ref _Handle.AsRef<float>(_Followup_entityiodelayOffset!.Value);
+    public ref bool Fired {
+        get {
+            _FiredOffset = _FiredOffset ?? Schema.GetOffset(0x6C93EDBE5ABF7B87);
+            return ref _Handle.AsRef<bool>(_FiredOffset!.Value);
+        }
     }
-  }
-  private static nint? _FiredOffset;
-
-  public ref bool Fired {
-    get {
-      if (_FiredOffset == null) {
-        _FiredOffset = Schema.GetOffset(0x6C93EDBE5ABF7B87);
-      }
-      return ref _Handle.AsRef<bool>(_FiredOffset!.Value);
-    }
-  }
 
 
 }

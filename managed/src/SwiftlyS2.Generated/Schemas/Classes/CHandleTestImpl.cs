@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CHandleTestImpl : CBaseEntityImpl, CHandleTest {
+internal partial class CHandleTestImpl : CBaseEntityImpl, CHandleTest
+{
+    public CHandleTestImpl(nint handle) : base(handle) { }
 
-  public CHandleTestImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HandleOffset;
 
-  private static nint? _HandleOffset;
-
-  public ref CHandle<CBaseEntity> Handle {
-    get {
-      if (_HandleOffset == null) {
-        _HandleOffset = Schema.GetOffset(0xCC5023E89D208453);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_HandleOffset!.Value);
+    public ref CHandle<CBaseEntity> Handle {
+        get {
+            _HandleOffset = _HandleOffset ?? Schema.GetOffset(0xCC5023E89D208453);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_HandleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SendHandleOffset;
+    private static nint? _SendHandleOffset;
 
-  public ref bool SendHandle {
-    get {
-      if (_SendHandleOffset == null) {
-        _SendHandleOffset = Schema.GetOffset(0xCC5023E8EACC8501);
-      }
-      return ref _Handle.AsRef<bool>(_SendHandleOffset!.Value);
+    public ref bool SendHandle {
+        get {
+            _SendHandleOffset = _SendHandleOffset ?? Schema.GetOffset(0xCC5023E8EACC8501);
+            return ref _Handle.AsRef<bool>(_SendHandleOffset!.Value);
+        }
     }
-  }
 
-  public void HandleUpdated() {
-    Schema.Update(_Handle, 0xCC5023E89D208453);
-  }
-  public void SendHandleUpdated() {
-    Schema.Update(_Handle, 0xCC5023E8EACC8501);
-  }
+    public void HandleUpdated() => Schema.Update(_Handle, 0xCC5023E89D208453);
+    public void SendHandleUpdated() => Schema.Update(_Handle, 0xCC5023E8EACC8501);
 }

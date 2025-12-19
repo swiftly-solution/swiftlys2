@@ -6,55 +6,42 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EngineCountdownTimerImpl : SchemaClass, EngineCountdownTimer {
+internal partial class EngineCountdownTimerImpl : SchemaClass, EngineCountdownTimer
+{
+    public EngineCountdownTimerImpl(nint handle) : base(handle) { }
 
-  public EngineCountdownTimerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DurationOffset;
 
-  private static nint? _DurationOffset;
-
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0x3F0C5A433D9FF5AD);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x3F0C5A433D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimestampOffset;
+    private static nint? _TimestampOffset;
 
-  public ref float Timestamp {
-    get {
-      if (_TimestampOffset == null) {
-        _TimestampOffset = Schema.GetOffset(0x3F0C5A43B6C56F43);
-      }
-      return ref _Handle.AsRef<float>(_TimestampOffset!.Value);
+    public ref float Timestamp {
+        get {
+            _TimestampOffset = _TimestampOffset ?? Schema.GetOffset(0x3F0C5A43B6C56F43);
+            return ref _Handle.AsRef<float>(_TimestampOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimescaleOffset;
+    private static nint? _TimescaleOffset;
 
-  public ref float Timescale {
-    get {
-      if (_TimescaleOffset == null) {
-        _TimescaleOffset = Schema.GetOffset(0x3F0C5A438A240BBE);
-      }
-      return ref _Handle.AsRef<float>(_TimescaleOffset!.Value);
+    public ref float Timescale {
+        get {
+            _TimescaleOffset = _TimescaleOffset ?? Schema.GetOffset(0x3F0C5A438A240BBE);
+            return ref _Handle.AsRef<float>(_TimescaleOffset!.Value);
+        }
     }
-  }
 
-  public void DurationUpdated() {
-    Schema.Update(_Handle, 0x3F0C5A433D9FF5AD);
-  }
-  public void TimestampUpdated() {
-    Schema.Update(_Handle, 0x3F0C5A43B6C56F43);
-  }
-  public void TimescaleUpdated() {
-    Schema.Update(_Handle, 0x3F0C5A438A240BBE);
-  }
+    public void DurationUpdated() => Schema.Update(_Handle, 0x3F0C5A433D9FF5AD);
+    public void TimestampUpdated() => Schema.Update(_Handle, 0x3F0C5A43B6C56F43);
+    public void TimescaleUpdated() => Schema.Update(_Handle, 0x3F0C5A438A240BBE);
 }

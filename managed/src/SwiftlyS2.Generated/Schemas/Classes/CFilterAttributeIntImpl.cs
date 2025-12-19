@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFilterAttributeIntImpl : CBaseFilterImpl, CFilterAttributeInt {
+internal partial class CFilterAttributeIntImpl : CBaseFilterImpl, CFilterAttributeInt
+{
+    public CFilterAttributeIntImpl(nint handle) : base(handle) { }
 
-  public CFilterAttributeIntImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttributeNameOffset;
 
-  private static nint? _AttributeNameOffset;
-
-  public string AttributeName {
-    get {
-      if (_AttributeNameOffset == null) {
-        _AttributeNameOffset = Schema.GetOffset(0x7CC26955E63BC84D);
-      }
-      var ptr = _Handle.Read<nint>(_AttributeNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_AttributeNameOffset == null) {
-        _AttributeNameOffset = Schema.GetOffset(0x7CC26955E63BC84D);
-      }
-      Schema.SetString(_Handle, _AttributeNameOffset!.Value, value);
-    }
-  } 
+    public string AttributeName {
+        get {
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x7CC26955E63BC84D);
+            return Schema.GetString(_Handle.Read<nint>(_AttributeNameOffset!.Value));
+        }
+        set {
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x7CC26955E63BC84D);
+            Schema.SetString(_Handle, _AttributeNameOffset!.Value, value);
+        }
+    } 
 
 
 }

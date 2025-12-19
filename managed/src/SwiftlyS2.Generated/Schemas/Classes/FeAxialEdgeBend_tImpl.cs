@@ -6,53 +6,46 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeAxialEdgeBend_tImpl : SchemaClass, FeAxialEdgeBend_t {
+internal partial class FeAxialEdgeBend_tImpl : SchemaClass, FeAxialEdgeBend_t
+{
+    public FeAxialEdgeBend_tImpl(nint handle) : base(handle) { }
 
-  public FeAxialEdgeBend_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TeOffset;
 
-  private static nint? _TeOffset;
-
-  public ref float Te {
-    get {
-      if (_TeOffset == null) {
-        _TeOffset = Schema.GetOffset(0x6CF84D703C453EB2);
-      }
-      return ref _Handle.AsRef<float>(_TeOffset!.Value);
+    public ref float Te {
+        get {
+            _TeOffset = _TeOffset ?? Schema.GetOffset(0x6CF84D703C453EB2);
+            return ref _Handle.AsRef<float>(_TeOffset!.Value);
+        }
     }
-  }
-  private static nint? _TvOffset;
+    private static nint? _TvOffset;
 
-  public ref float Tv {
-    get {
-      if (_TvOffset == null) {
-        _TvOffset = Schema.GetOffset(0x6CF84D704B45564F);
-      }
-      return ref _Handle.AsRef<float>(_TvOffset!.Value);
+    public ref float Tv {
+        get {
+            _TvOffset = _TvOffset ?? Schema.GetOffset(0x6CF84D704B45564F);
+            return ref _Handle.AsRef<float>(_TvOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistOffset;
+    private static nint? _DistOffset;
 
-  public ref float Dist {
-    get {
-      if (_DistOffset == null) {
-        _DistOffset = Schema.GetOffset(0x6CF84D701234268F);
-      }
-      return ref _Handle.AsRef<float>(_DistOffset!.Value);
+    public ref float Dist {
+        get {
+            _DistOffset = _DistOffset ?? Schema.GetOffset(0x6CF84D701234268F);
+            return ref _Handle.AsRef<float>(_DistOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<float> Weight {
-    get => new SchemaFixedArray<float>(_Handle, 0x6CF84D70CFFC66CB, 4, 4, 4);
-  }
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x6CF84D70CD6694B9, 6, 2, 2);
-  }
+    public ISchemaFixedArray<float> Weight {
+        get => new SchemaFixedArray<float>(_Handle, 0x6CF84D70CFFC66CB, 4, 4, 4);
+    }
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x6CF84D70CD6694B9, 6, 2, 2);
+    }
 
 
 }

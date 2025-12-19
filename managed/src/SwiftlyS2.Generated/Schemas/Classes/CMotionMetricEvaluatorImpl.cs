@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotionMetricEvaluatorImpl : SchemaClass, CMotionMetricEvaluator {
+internal partial class CMotionMetricEvaluatorImpl : SchemaClass, CMotionMetricEvaluator
+{
+    public CMotionMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-  public CMotionMetricEvaluatorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MeansOffset;
 
-  private static nint? _MeansOffset;
-
-  public ref CUtlVector<float> Means {
-    get {
-      if (_MeansOffset == null) {
-        _MeansOffset = Schema.GetOffset(0x1C07D08DAB070085);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_MeansOffset!.Value);
+    public ref CUtlVector<float> Means {
+        get {
+            _MeansOffset = _MeansOffset ?? Schema.GetOffset(0x1C07D08DAB070085);
+            return ref _Handle.AsRef<CUtlVector<float>>(_MeansOffset!.Value);
+        }
     }
-  }
-  private static nint? _StandardDeviationsOffset;
+    private static nint? _StandardDeviationsOffset;
 
-  public ref CUtlVector<float> StandardDeviations {
-    get {
-      if (_StandardDeviationsOffset == null) {
-        _StandardDeviationsOffset = Schema.GetOffset(0x1C07D08D9114EB60);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_StandardDeviationsOffset!.Value);
+    public ref CUtlVector<float> StandardDeviations {
+        get {
+            _StandardDeviationsOffset = _StandardDeviationsOffset ?? Schema.GetOffset(0x1C07D08D9114EB60);
+            return ref _Handle.AsRef<CUtlVector<float>>(_StandardDeviationsOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0x1C07D08D7B81E7AB);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x1C07D08D7B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _DimensionStartIndexOffset;
+    private static nint? _DimensionStartIndexOffset;
 
-  public ref int DimensionStartIndex {
-    get {
-      if (_DimensionStartIndexOffset == null) {
-        _DimensionStartIndexOffset = Schema.GetOffset(0x1C07D08D3448F2E3);
-      }
-      return ref _Handle.AsRef<int>(_DimensionStartIndexOffset!.Value);
+    public ref int DimensionStartIndex {
+        get {
+            _DimensionStartIndexOffset = _DimensionStartIndexOffset ?? Schema.GetOffset(0x1C07D08D3448F2E3);
+            return ref _Handle.AsRef<int>(_DimensionStartIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

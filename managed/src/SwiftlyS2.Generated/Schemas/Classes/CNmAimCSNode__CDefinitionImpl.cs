@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmAimCSNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmAimCSNode__CDefinition {
+internal partial class CNmAimCSNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmAimCSNode__CDefinition
+{
+    public CNmAimCSNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmAimCSNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VerticalAngleNodeIdxOffset;
 
-  private static nint? _VerticalAngleNodeIdxOffset;
-
-  public ref short VerticalAngleNodeIdx {
-    get {
-      if (_VerticalAngleNodeIdxOffset == null) {
-        _VerticalAngleNodeIdxOffset = Schema.GetOffset(0xE1CD14C20A1F17AD);
-      }
-      return ref _Handle.AsRef<short>(_VerticalAngleNodeIdxOffset!.Value);
+    public ref short VerticalAngleNodeIdx {
+        get {
+            _VerticalAngleNodeIdxOffset = _VerticalAngleNodeIdxOffset ?? Schema.GetOffset(0xE1CD14C20A1F17AD);
+            return ref _Handle.AsRef<short>(_VerticalAngleNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _HorizontalAngleNodeIdxOffset;
+    private static nint? _HorizontalAngleNodeIdxOffset;
 
-  public ref short HorizontalAngleNodeIdx {
-    get {
-      if (_HorizontalAngleNodeIdxOffset == null) {
-        _HorizontalAngleNodeIdxOffset = Schema.GetOffset(0xE1CD14C28E2FD3DB);
-      }
-      return ref _Handle.AsRef<short>(_HorizontalAngleNodeIdxOffset!.Value);
+    public ref short HorizontalAngleNodeIdx {
+        get {
+            _HorizontalAngleNodeIdxOffset = _HorizontalAngleNodeIdxOffset ?? Schema.GetOffset(0xE1CD14C28E2FD3DB);
+            return ref _Handle.AsRef<short>(_HorizontalAngleNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeaponCategoryNodeIdxOffset;
+    private static nint? _WeaponCategoryNodeIdxOffset;
 
-  public ref short WeaponCategoryNodeIdx {
-    get {
-      if (_WeaponCategoryNodeIdxOffset == null) {
-        _WeaponCategoryNodeIdxOffset = Schema.GetOffset(0xE1CD14C216D198E4);
-      }
-      return ref _Handle.AsRef<short>(_WeaponCategoryNodeIdxOffset!.Value);
+    public ref short WeaponCategoryNodeIdx {
+        get {
+            _WeaponCategoryNodeIdxOffset = _WeaponCategoryNodeIdxOffset ?? Schema.GetOffset(0xE1CD14C216D198E4);
+            return ref _Handle.AsRef<short>(_WeaponCategoryNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnabledNodeIdxOffset;
+    private static nint? _EnabledNodeIdxOffset;
 
-  public ref short EnabledNodeIdx {
-    get {
-      if (_EnabledNodeIdxOffset == null) {
-        _EnabledNodeIdxOffset = Schema.GetOffset(0xE1CD14C2F7CDF5E9);
-      }
-      return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+    public ref short EnabledNodeIdx {
+        get {
+            _EnabledNodeIdxOffset = _EnabledNodeIdxOffset ?? Schema.GetOffset(0xE1CD14C2F7CDF5E9);
+            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendTimeSecondsOffset;
+    private static nint? _BlendTimeSecondsOffset;
 
-  public ref float BlendTimeSeconds {
-    get {
-      if (_BlendTimeSecondsOffset == null) {
-        _BlendTimeSecondsOffset = Schema.GetOffset(0xE1CD14C26D3A08FC);
-      }
-      return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+    public ref float BlendTimeSeconds {
+        get {
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0xE1CD14C26D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+        }
     }
-  }
 
 
 }

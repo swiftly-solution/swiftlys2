@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLeafUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CLeafUpdateNode> {
-
-  static CLeafUpdateNode ISchemaClass<CLeafUpdateNode>.From(nint handle) => new CLeafUpdateNodeImpl(handle);
-  static int ISchemaClass<CLeafUpdateNode>.Size => 88;
-  static string? ISchemaClass<CLeafUpdateNode>.ClassName => null;
+public partial interface CLeafUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CLeafUpdateNode>
+{
+    static CLeafUpdateNode ISchemaClass<CLeafUpdateNode>.From(nint handle) => new CLeafUpdateNodeImpl(handle);
+    static int ISchemaClass<CLeafUpdateNode>.Size => 88;
+    static string? ISchemaClass<CLeafUpdateNode>.ClassName => null;
 
 
 

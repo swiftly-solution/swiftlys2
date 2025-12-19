@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum FuseVariableType_t : byte {
-
+public enum FuseVariableType_t : byte
+{
  INVALID = 0,
 
  BOOL = 1,

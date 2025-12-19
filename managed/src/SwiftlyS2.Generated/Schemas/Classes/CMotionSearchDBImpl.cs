@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotionSearchDBImpl : SchemaClass, CMotionSearchDB {
+internal partial class CMotionSearchDBImpl : SchemaClass, CMotionSearchDB
+{
+    public CMotionSearchDBImpl(nint handle) : base(handle) { }
 
-  public CMotionSearchDBImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RootNodeOffset;
 
-  private static nint? _RootNodeOffset;
-
-  public CMotionSearchNode RootNode {
-    get {
-      if (_RootNodeOffset == null) {
-        _RootNodeOffset = Schema.GetOffset(0x5F49286C3D5FF0D);
-      }
-      return new CMotionSearchNodeImpl(_Handle + _RootNodeOffset!.Value);
+    public CMotionSearchNode RootNode {
+        get {
+            _RootNodeOffset = _RootNodeOffset ?? Schema.GetOffset(0x5F49286C3D5FF0D);
+            return new CMotionSearchNodeImpl(_Handle + _RootNodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResidualQuantizerOffset;
+    private static nint? _ResidualQuantizerOffset;
 
-  public CProductQuantizer ResidualQuantizer {
-    get {
-      if (_ResidualQuantizerOffset == null) {
-        _ResidualQuantizerOffset = Schema.GetOffset(0x5F49286A3EDA009);
-      }
-      return new CProductQuantizerImpl(_Handle + _ResidualQuantizerOffset!.Value);
+    public CProductQuantizer ResidualQuantizer {
+        get {
+            _ResidualQuantizerOffset = _ResidualQuantizerOffset ?? Schema.GetOffset(0x5F49286A3EDA009);
+            return new CProductQuantizerImpl(_Handle + _ResidualQuantizerOffset!.Value);
+        }
     }
-  }
-  private static nint? _CodeIndicesOffset;
+    private static nint? _CodeIndicesOffset;
 
-  public ref CUtlVector<MotionDBIndex> CodeIndices {
-    get {
-      if (_CodeIndicesOffset == null) {
-        _CodeIndicesOffset = Schema.GetOffset(0x5F49286767A76B1);
-      }
-      return ref _Handle.AsRef<CUtlVector<MotionDBIndex>>(_CodeIndicesOffset!.Value);
+    public ref CUtlVector<MotionDBIndex> CodeIndices {
+        get {
+            _CodeIndicesOffset = _CodeIndicesOffset ?? Schema.GetOffset(0x5F49286767A76B1);
+            return ref _Handle.AsRef<CUtlVector<MotionDBIndex>>(_CodeIndicesOffset!.Value);
+        }
     }
-  }
 
 
 }

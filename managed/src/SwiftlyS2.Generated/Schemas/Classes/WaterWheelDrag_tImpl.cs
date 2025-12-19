@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class WaterWheelDrag_tImpl : SchemaClass, WaterWheelDrag_t {
+internal partial class WaterWheelDrag_tImpl : SchemaClass, WaterWheelDrag_t
+{
+    public WaterWheelDrag_tImpl(nint handle) : base(handle) { }
 
-  public WaterWheelDrag_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FractionOfWheelSubmergedOffset;
 
-  private static nint? _FractionOfWheelSubmergedOffset;
-
-  public ref float FractionOfWheelSubmerged {
-    get {
-      if (_FractionOfWheelSubmergedOffset == null) {
-        _FractionOfWheelSubmergedOffset = Schema.GetOffset(0x51DDFA66F2D4C09B);
-      }
-      return ref _Handle.AsRef<float>(_FractionOfWheelSubmergedOffset!.Value);
+    public ref float FractionOfWheelSubmerged {
+        get {
+            _FractionOfWheelSubmergedOffset = _FractionOfWheelSubmergedOffset ?? Schema.GetOffset(0x51DDFA66F2D4C09B);
+            return ref _Handle.AsRef<float>(_FractionOfWheelSubmergedOffset!.Value);
+        }
     }
-  }
-  private static nint? _WheelDragOffset;
+    private static nint? _WheelDragOffset;
 
-  public ref float WheelDrag {
-    get {
-      if (_WheelDragOffset == null) {
-        _WheelDragOffset = Schema.GetOffset(0x51DDFA66B996F340);
-      }
-      return ref _Handle.AsRef<float>(_WheelDragOffset!.Value);
+    public ref float WheelDrag {
+        get {
+            _WheelDragOffset = _WheelDragOffset ?? Schema.GetOffset(0x51DDFA66B996F340);
+            return ref _Handle.AsRef<float>(_WheelDragOffset!.Value);
+        }
     }
-  }
 
 
 }

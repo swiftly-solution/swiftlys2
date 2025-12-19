@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCurrentVelocityMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CCurrentVelocityMetricEvaluator> {
-
-  static CCurrentVelocityMetricEvaluator ISchemaClass<CCurrentVelocityMetricEvaluator>.From(nint handle) => new CCurrentVelocityMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CCurrentVelocityMetricEvaluator>.Size => 80;
-  static string? ISchemaClass<CCurrentVelocityMetricEvaluator>.ClassName => null;
+public partial interface CCurrentVelocityMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CCurrentVelocityMetricEvaluator>
+{
+    static CCurrentVelocityMetricEvaluator ISchemaClass<CCurrentVelocityMetricEvaluator>.From(nint handle) => new CCurrentVelocityMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CCurrentVelocityMetricEvaluator>.Size => 80;
+    static string? ISchemaClass<CCurrentVelocityMetricEvaluator>.ClassName => null;
 
 
 

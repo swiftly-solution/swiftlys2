@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulse_PublicOutputImpl : SchemaClass, CPulse_PublicOutput {
+internal partial class CPulse_PublicOutputImpl : SchemaClass, CPulse_PublicOutput
+{
+    public CPulse_PublicOutputImpl(nint handle) : base(handle) { }
 
-  public CPulse_PublicOutputImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public SchemaUntypedField Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x74B3BCA4CAE8A266);
-      }
-      return new SchemaUntypedField(_Handle + _NameOffset!.Value);
+    public SchemaUntypedField Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x74B3BCA4CAE8A266);
+            return new SchemaUntypedField(_Handle + _NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _DescriptionOffset;
+    private static nint? _DescriptionOffset;
 
-  public string Description {
-    get {
-      if (_DescriptionOffset == null) {
-        _DescriptionOffset = Schema.GetOffset(0x74B3BCA4678744E9);
-      }
-      var ptr = _Handle.Read<nint>(_DescriptionOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DescriptionOffset == null) {
-        _DescriptionOffset = Schema.GetOffset(0x74B3BCA4678744E9);
-      }
-      Schema.SetString(_Handle, _DescriptionOffset!.Value, value);
-    }
-  } 
-  private static nint? _ArgsOffset;
+    public string Description {
+        get {
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x74B3BCA4678744E9);
+            return Schema.GetString(_Handle.Read<nint>(_DescriptionOffset!.Value));
+        }
+        set {
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0x74B3BCA4678744E9);
+            Schema.SetString(_Handle, _DescriptionOffset!.Value, value);
+        }
+    } 
+    private static nint? _ArgsOffset;
 
-  public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args {
-    get {
-      if (_ArgsOffset == null) {
-        _ArgsOffset = Schema.GetOffset(0x74B3BCA4DAB98BBC);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset!.Value);
+    public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args {
+        get {
+            _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0x74B3BCA4DAB98BBC);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset!.Value);
+        }
     }
-  }
 
 
 }

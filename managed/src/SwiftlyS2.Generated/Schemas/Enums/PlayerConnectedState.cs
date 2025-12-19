@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PlayerConnectedState : uint {
-
+public enum PlayerConnectedState : uint
+{
  PlayerNeverConnected = uint.MaxValue,
 
  PlayerConnected = 0,

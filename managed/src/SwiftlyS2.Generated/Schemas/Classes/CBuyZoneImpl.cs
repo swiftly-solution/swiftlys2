@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBuyZoneImpl : CBaseTriggerImpl, CBuyZone {
+internal partial class CBuyZoneImpl : CBaseTriggerImpl, CBuyZone
+{
+    public CBuyZoneImpl(nint handle) : base(handle) { }
 
-  public CBuyZoneImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LegacyTeamNumOffset;
 
-  private static nint? _LegacyTeamNumOffset;
-
-  public ref int LegacyTeamNum {
-    get {
-      if (_LegacyTeamNumOffset == null) {
-        _LegacyTeamNumOffset = Schema.GetOffset(0xB8D4DAC44C92565);
-      }
-      return ref _Handle.AsRef<int>(_LegacyTeamNumOffset!.Value);
+    public ref int LegacyTeamNum {
+        get {
+            _LegacyTeamNumOffset = _LegacyTeamNumOffset ?? Schema.GetOffset(0xB8D4DAC44C92565);
+            return ref _Handle.AsRef<int>(_LegacyTeamNumOffset!.Value);
+        }
     }
-  }
 
 
 }

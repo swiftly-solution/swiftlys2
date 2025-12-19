@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VPhysXBodyPart_t__VPhysXFlagEnum_t : uint {
-
+public enum VPhysXBodyPart_t__VPhysXFlagEnum_t : uint
+{
  FLAG_STATIC = 1,
 
  FLAG_KINEMATIC = 2,

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysicsShakeImpl : SchemaClass, CPhysicsShake {
+internal partial class CPhysicsShakeImpl : SchemaClass, CPhysicsShake
+{
+    public CPhysicsShakeImpl(nint handle) : base(handle) { }
 
-  public CPhysicsShakeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceOffset;
 
-  private static nint? _ForceOffset;
-
-  public ref Vector Force {
-    get {
-      if (_ForceOffset == null) {
-        _ForceOffset = Schema.GetOffset(0x904CE6CFB9B6AFA4);
-      }
-      return ref _Handle.AsRef<Vector>(_ForceOffset!.Value);
+    public ref Vector Force {
+        get {
+            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0x904CE6CFB9B6AFA4);
+            return ref _Handle.AsRef<Vector>(_ForceOffset!.Value);
+        }
     }
-  }
 
 
 }

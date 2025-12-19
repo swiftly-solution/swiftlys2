@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AnimParamIDImpl : SchemaClass, AnimParamID {
+internal partial class AnimParamIDImpl : SchemaClass, AnimParamID
+{
+    public AnimParamIDImpl(nint handle) : base(handle) { }
 
-  public AnimParamIDImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IdOffset;
 
-  private static nint? _IdOffset;
-
-  public ref uint Id {
-    get {
-      if (_IdOffset == null) {
-        _IdOffset = Schema.GetOffset(0xFD66F334B4B6E980);
-      }
-      return ref _Handle.AsRef<uint>(_IdOffset!.Value);
+    public ref uint Id {
+        get {
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0xFD66F334B4B6E980);
+            return ref _Handle.AsRef<uint>(_IdOffset!.Value);
+        }
     }
-  }
 
 
 }

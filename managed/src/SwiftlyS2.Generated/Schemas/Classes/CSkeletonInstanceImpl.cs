@@ -6,111 +6,84 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSkeletonInstanceImpl : CGameSceneNodeImpl, CSkeletonInstance {
+internal partial class CSkeletonInstanceImpl : CGameSceneNodeImpl, CSkeletonInstance
+{
+    public CSkeletonInstanceImpl(nint handle) : base(handle) { }
 
-  public CSkeletonInstanceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModelStateOffset;
 
-  private static nint? _ModelStateOffset;
-
-  public CModelState ModelState {
-    get {
-      if (_ModelStateOffset == null) {
-        _ModelStateOffset = Schema.GetOffset(0xD6C6252E52AC8C4F);
-      }
-      return new CModelStateImpl(_Handle + _ModelStateOffset!.Value);
+    public CModelState ModelState {
+        get {
+            _ModelStateOffset = _ModelStateOffset ?? Schema.GetOffset(0xD6C6252E52AC8C4F);
+            return new CModelStateImpl(_Handle + _ModelStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsAnimationEnabledOffset;
+    private static nint? _IsAnimationEnabledOffset;
 
-  public ref bool IsAnimationEnabled {
-    get {
-      if (_IsAnimationEnabledOffset == null) {
-        _IsAnimationEnabledOffset = Schema.GetOffset(0xD6C6252E44F0C816);
-      }
-      return ref _Handle.AsRef<bool>(_IsAnimationEnabledOffset!.Value);
+    public ref bool IsAnimationEnabled {
+        get {
+            _IsAnimationEnabledOffset = _IsAnimationEnabledOffset ?? Schema.GetOffset(0xD6C6252E44F0C816);
+            return ref _Handle.AsRef<bool>(_IsAnimationEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseParentRenderBoundsOffset;
+    private static nint? _UseParentRenderBoundsOffset;
 
-  public ref bool UseParentRenderBounds {
-    get {
-      if (_UseParentRenderBoundsOffset == null) {
-        _UseParentRenderBoundsOffset = Schema.GetOffset(0xD6C6252E15B8267D);
-      }
-      return ref _Handle.AsRef<bool>(_UseParentRenderBoundsOffset!.Value);
+    public ref bool UseParentRenderBounds {
+        get {
+            _UseParentRenderBoundsOffset = _UseParentRenderBoundsOffset ?? Schema.GetOffset(0xD6C6252E15B8267D);
+            return ref _Handle.AsRef<bool>(_UseParentRenderBoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisableSolidCollisionsForHierarchyOffset;
+    private static nint? _DisableSolidCollisionsForHierarchyOffset;
 
-  public ref bool DisableSolidCollisionsForHierarchy {
-    get {
-      if (_DisableSolidCollisionsForHierarchyOffset == null) {
-        _DisableSolidCollisionsForHierarchyOffset = Schema.GetOffset(0xD6C6252E50FCF465);
-      }
-      return ref _Handle.AsRef<bool>(_DisableSolidCollisionsForHierarchyOffset!.Value);
+    public ref bool DisableSolidCollisionsForHierarchy {
+        get {
+            _DisableSolidCollisionsForHierarchyOffset = _DisableSolidCollisionsForHierarchyOffset ?? Schema.GetOffset(0xD6C6252E50FCF465);
+            return ref _Handle.AsRef<bool>(_DisableSolidCollisionsForHierarchyOffset!.Value);
+        }
     }
-  }
-  private static nint? _DirtyMotionTypeOffset;
+    private static nint? _DirtyMotionTypeOffset;
 
-  public SchemaUntypedField DirtyMotionType {
-    get {
-      if (_DirtyMotionTypeOffset == null) {
-        _DirtyMotionTypeOffset = Schema.GetOffset(0xD6C6252E6EB99391);
-      }
-      return new SchemaUntypedField(_Handle + _DirtyMotionTypeOffset!.Value);
+    public SchemaUntypedField DirtyMotionType {
+        get {
+            _DirtyMotionTypeOffset = _DirtyMotionTypeOffset ?? Schema.GetOffset(0xD6C6252E6EB99391);
+            return new SchemaUntypedField(_Handle + _DirtyMotionTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsGeneratingLatchedParentSpaceStateOffset;
+    private static nint? _IsGeneratingLatchedParentSpaceStateOffset;
 
-  public SchemaUntypedField IsGeneratingLatchedParentSpaceState {
-    get {
-      if (_IsGeneratingLatchedParentSpaceStateOffset == null) {
-        _IsGeneratingLatchedParentSpaceStateOffset = Schema.GetOffset(0xD6C6252ED0EFEAB7);
-      }
-      return new SchemaUntypedField(_Handle + _IsGeneratingLatchedParentSpaceStateOffset!.Value);
+    public SchemaUntypedField IsGeneratingLatchedParentSpaceState {
+        get {
+            _IsGeneratingLatchedParentSpaceStateOffset = _IsGeneratingLatchedParentSpaceStateOffset ?? Schema.GetOffset(0xD6C6252ED0EFEAB7);
+            return new SchemaUntypedField(_Handle + _IsGeneratingLatchedParentSpaceStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialGroupOffset;
+    private static nint? _MaterialGroupOffset;
 
-  public ref CUtlStringToken MaterialGroup {
-    get {
-      if (_MaterialGroupOffset == null) {
-        _MaterialGroupOffset = Schema.GetOffset(0xD6C6252E2B778F03);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_MaterialGroupOffset!.Value);
+    public ref CUtlStringToken MaterialGroup {
+        get {
+            _MaterialGroupOffset = _MaterialGroupOffset ?? Schema.GetOffset(0xD6C6252E2B778F03);
+            return ref _Handle.AsRef<CUtlStringToken>(_MaterialGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _HitboxSetOffset;
+    private static nint? _HitboxSetOffset;
 
-  public ref byte HitboxSet {
-    get {
-      if (_HitboxSetOffset == null) {
-        _HitboxSetOffset = Schema.GetOffset(0xD6C6252E80C42271);
-      }
-      return ref _Handle.AsRef<byte>(_HitboxSetOffset!.Value);
+    public ref byte HitboxSet {
+        get {
+            _HitboxSetOffset = _HitboxSetOffset ?? Schema.GetOffset(0xD6C6252E80C42271);
+            return ref _Handle.AsRef<byte>(_HitboxSetOffset!.Value);
+        }
     }
-  }
 
-  public void ModelStateUpdated() {
-    Schema.Update(_Handle, 0xD6C6252E52AC8C4F);
-  }
-  public void IsAnimationEnabledUpdated() {
-    Schema.Update(_Handle, 0xD6C6252E44F0C816);
-  }
-  public void UseParentRenderBoundsUpdated() {
-    Schema.Update(_Handle, 0xD6C6252E15B8267D);
-  }
-  public void MaterialGroupUpdated() {
-    Schema.Update(_Handle, 0xD6C6252E2B778F03);
-  }
-  public void HitboxSetUpdated() {
-    Schema.Update(_Handle, 0xD6C6252E80C42271);
-  }
+    public void ModelStateUpdated() => Schema.Update(_Handle, 0xD6C6252E52AC8C4F);
+    public void IsAnimationEnabledUpdated() => Schema.Update(_Handle, 0xD6C6252E44F0C816);
+    public void UseParentRenderBoundsUpdated() => Schema.Update(_Handle, 0xD6C6252E15B8267D);
+    public void MaterialGroupUpdated() => Schema.Update(_Handle, 0xD6C6252E2B778F03);
+    public void HitboxSetUpdated() => Schema.Update(_Handle, 0xD6C6252E80C42271);
 }

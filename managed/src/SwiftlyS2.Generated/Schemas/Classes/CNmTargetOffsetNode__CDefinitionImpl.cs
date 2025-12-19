@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmTargetOffsetNode__CDefinitionImpl : CNmTargetValueNode__CDefinitionImpl, CNmTargetOffsetNode__CDefinition {
+internal partial class CNmTargetOffsetNode__CDefinitionImpl : CNmTargetValueNode__CDefinitionImpl, CNmTargetOffsetNode__CDefinition
+{
+    public CNmTargetOffsetNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmTargetOffsetNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueNodeIdxOffset;
 
-  private static nint? _InputValueNodeIdxOffset;
-
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0x33F484EF95E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x33F484EF95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsBoneSpaceOffsetOffset;
+    private static nint? _IsBoneSpaceOffsetOffset;
 
-  public ref bool IsBoneSpaceOffset {
-    get {
-      if (_IsBoneSpaceOffsetOffset == null) {
-        _IsBoneSpaceOffsetOffset = Schema.GetOffset(0x33F484EF7B33F588);
-      }
-      return ref _Handle.AsRef<bool>(_IsBoneSpaceOffsetOffset!.Value);
+    public ref bool IsBoneSpaceOffset {
+        get {
+            _IsBoneSpaceOffsetOffset = _IsBoneSpaceOffsetOffset ?? Schema.GetOffset(0x33F484EF7B33F588);
+            return ref _Handle.AsRef<bool>(_IsBoneSpaceOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotationOffsetOffset;
+    private static nint? _RotationOffsetOffset;
 
-  public ref Quaternion RotationOffset {
-    get {
-      if (_RotationOffsetOffset == null) {
-        _RotationOffsetOffset = Schema.GetOffset(0x33F484EFD70314A4);
-      }
-      return ref _Handle.AsRef<Quaternion>(_RotationOffsetOffset!.Value);
+    public ref Quaternion RotationOffset {
+        get {
+            _RotationOffsetOffset = _RotationOffsetOffset ?? Schema.GetOffset(0x33F484EFD70314A4);
+            return ref _Handle.AsRef<Quaternion>(_RotationOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _TranslationOffsetOffset;
+    private static nint? _TranslationOffsetOffset;
 
-  public ref Vector TranslationOffset {
-    get {
-      if (_TranslationOffsetOffset == null) {
-        _TranslationOffsetOffset = Schema.GetOffset(0x33F484EF1ABA9777);
-      }
-      return ref _Handle.AsRef<Vector>(_TranslationOffsetOffset!.Value);
+    public ref Vector TranslationOffset {
+        get {
+            _TranslationOffsetOffset = _TranslationOffsetOffset ?? Schema.GetOffset(0x33F484EF1ABA9777);
+            return ref _Handle.AsRef<Vector>(_TranslationOffsetOffset!.Value);
+        }
     }
-  }
 
 
 }

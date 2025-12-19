@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum GrenadeType_t : uint {
-
+public enum GrenadeType_t : uint
+{
  GRENADE_TYPE_EXPLOSIVE = 0,
 
  GRENADE_TYPE_FLASH = 1,

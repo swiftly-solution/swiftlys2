@@ -6,144 +6,116 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MoodAnimationLayer_tImpl : SchemaClass, MoodAnimationLayer_t {
+internal partial class MoodAnimationLayer_tImpl : SchemaClass, MoodAnimationLayer_t
+{
+    public MoodAnimationLayer_tImpl(nint handle) : base(handle) { }
 
-  public MoodAnimationLayer_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3663914263D22D49);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3663914263D22D49);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ActiveListeningOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x3663914263D22D49);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref bool ActiveListening {
+        get {
+            _ActiveListeningOffset = _ActiveListeningOffset ?? Schema.GetOffset(0x36639142122973A0);
+            return ref _Handle.AsRef<bool>(_ActiveListeningOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x3663914263D22D49);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ActiveListeningOffset;
+    private static nint? _ActiveTalkingOffset;
 
-  public ref bool ActiveListening {
-    get {
-      if (_ActiveListeningOffset == null) {
-        _ActiveListeningOffset = Schema.GetOffset(0x36639142122973A0);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveListeningOffset!.Value);
+    public ref bool ActiveTalking {
+        get {
+            _ActiveTalkingOffset = _ActiveTalkingOffset ?? Schema.GetOffset(0x366391423033E5C3);
+            return ref _Handle.AsRef<bool>(_ActiveTalkingOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveTalkingOffset;
+    private static nint? _LayerAnimationsOffset;
 
-  public ref bool ActiveTalking {
-    get {
-      if (_ActiveTalkingOffset == null) {
-        _ActiveTalkingOffset = Schema.GetOffset(0x366391423033E5C3);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveTalkingOffset!.Value);
+    public ref CUtlVector<MoodAnimation_t> LayerAnimations {
+        get {
+            _LayerAnimationsOffset = _LayerAnimationsOffset ?? Schema.GetOffset(0x3663914250279465);
+            return ref _Handle.AsRef<CUtlVector<MoodAnimation_t>>(_LayerAnimationsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LayerAnimationsOffset;
+    private static nint? _IntensityOffset;
 
-  public ref CUtlVector<MoodAnimation_t> LayerAnimations {
-    get {
-      if (_LayerAnimationsOffset == null) {
-        _LayerAnimationsOffset = Schema.GetOffset(0x3663914250279465);
-      }
-      return ref _Handle.AsRef<CUtlVector<MoodAnimation_t>>(_LayerAnimationsOffset!.Value);
+    public CRangeFloat Intensity {
+        get {
+            _IntensityOffset = _IntensityOffset ?? Schema.GetOffset(0x3663914267B5578C);
+            return new CRangeFloatImpl(_Handle + _IntensityOffset!.Value);
+        }
     }
-  }
-  private static nint? _IntensityOffset;
+    private static nint? _DurationScaleOffset;
 
-  public CRangeFloat Intensity {
-    get {
-      if (_IntensityOffset == null) {
-        _IntensityOffset = Schema.GetOffset(0x3663914267B5578C);
-      }
-      return new CRangeFloatImpl(_Handle + _IntensityOffset!.Value);
+    public CRangeFloat DurationScale {
+        get {
+            _DurationScaleOffset = _DurationScaleOffset ?? Schema.GetOffset(0x36639142776D4203);
+            return new CRangeFloatImpl(_Handle + _DurationScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _DurationScaleOffset;
+    private static nint? _ScaleWithIntsOffset;
 
-  public CRangeFloat DurationScale {
-    get {
-      if (_DurationScaleOffset == null) {
-        _DurationScaleOffset = Schema.GetOffset(0x36639142776D4203);
-      }
-      return new CRangeFloatImpl(_Handle + _DurationScaleOffset!.Value);
+    public ref bool ScaleWithInts {
+        get {
+            _ScaleWithIntsOffset = _ScaleWithIntsOffset ?? Schema.GetOffset(0x366391427C46A077);
+            return ref _Handle.AsRef<bool>(_ScaleWithIntsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleWithIntsOffset;
+    private static nint? _NextStartOffset;
 
-  public ref bool ScaleWithInts {
-    get {
-      if (_ScaleWithIntsOffset == null) {
-        _ScaleWithIntsOffset = Schema.GetOffset(0x366391427C46A077);
-      }
-      return ref _Handle.AsRef<bool>(_ScaleWithIntsOffset!.Value);
+    public CRangeFloat NextStart {
+        get {
+            _NextStartOffset = _NextStartOffset ?? Schema.GetOffset(0x3663914202956BDE);
+            return new CRangeFloatImpl(_Handle + _NextStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextStartOffset;
+    private static nint? _StartOffsetOffset;
 
-  public CRangeFloat NextStart {
-    get {
-      if (_NextStartOffset == null) {
-        _NextStartOffset = Schema.GetOffset(0x3663914202956BDE);
-      }
-      return new CRangeFloatImpl(_Handle + _NextStartOffset!.Value);
+    public CRangeFloat StartOffset {
+        get {
+            _StartOffsetOffset = _StartOffsetOffset ?? Schema.GetOffset(0x3663914269A449AA);
+            return new CRangeFloatImpl(_Handle + _StartOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartOffsetOffset;
+    private static nint? _EndOffsetOffset;
 
-  public CRangeFloat StartOffset {
-    get {
-      if (_StartOffsetOffset == null) {
-        _StartOffsetOffset = Schema.GetOffset(0x3663914269A449AA);
-      }
-      return new CRangeFloatImpl(_Handle + _StartOffsetOffset!.Value);
+    public CRangeFloat EndOffset {
+        get {
+            _EndOffsetOffset = _EndOffsetOffset ?? Schema.GetOffset(0x36639142C863E027);
+            return new CRangeFloatImpl(_Handle + _EndOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndOffsetOffset;
+    private static nint? _FadeInOffset;
 
-  public CRangeFloat EndOffset {
-    get {
-      if (_EndOffsetOffset == null) {
-        _EndOffsetOffset = Schema.GetOffset(0x36639142C863E027);
-      }
-      return new CRangeFloatImpl(_Handle + _EndOffsetOffset!.Value);
+    public ref float FadeIn {
+        get {
+            _FadeInOffset = _FadeInOffset ?? Schema.GetOffset(0x36639142FCA835D2);
+            return ref _Handle.AsRef<float>(_FadeInOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeInOffset;
+    private static nint? _FadeOutOffset;
 
-  public ref float FadeIn {
-    get {
-      if (_FadeInOffset == null) {
-        _FadeInOffset = Schema.GetOffset(0x36639142FCA835D2);
-      }
-      return ref _Handle.AsRef<float>(_FadeInOffset!.Value);
+    public ref float FadeOut {
+        get {
+            _FadeOutOffset = _FadeOutOffset ?? Schema.GetOffset(0x36639142FEBCE80B);
+            return ref _Handle.AsRef<float>(_FadeOutOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeOutOffset;
-
-  public ref float FadeOut {
-    get {
-      if (_FadeOutOffset == null) {
-        _FadeOutOffset = Schema.GetOffset(0x36639142FEBCE80B);
-      }
-      return ref _Handle.AsRef<float>(_FadeOutOffset!.Value);
-    }
-  }
 
 
 }

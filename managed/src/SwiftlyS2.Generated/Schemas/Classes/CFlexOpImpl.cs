@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFlexOpImpl : SchemaClass, CFlexOp {
+internal partial class CFlexOpImpl : SchemaClass, CFlexOp
+{
+    public CFlexOpImpl(nint handle) : base(handle) { }
 
-  public CFlexOpImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OpCodeOffset;
 
-  private static nint? _OpCodeOffset;
-
-  public ref FlexOpCode_t OpCode {
-    get {
-      if (_OpCodeOffset == null) {
-        _OpCodeOffset = Schema.GetOffset(0xC684CC9A9850F387);
-      }
-      return ref _Handle.AsRef<FlexOpCode_t>(_OpCodeOffset!.Value);
+    public ref FlexOpCode_t OpCode {
+        get {
+            _OpCodeOffset = _OpCodeOffset ?? Schema.GetOffset(0xC684CC9A9850F387);
+            return ref _Handle.AsRef<FlexOpCode_t>(_OpCodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DataOffset;
+    private static nint? _DataOffset;
 
-  public ref int Data {
-    get {
-      if (_DataOffset == null) {
-        _DataOffset = Schema.GetOffset(0xC684CC9A1621C725);
-      }
-      return ref _Handle.AsRef<int>(_DataOffset!.Value);
+    public ref int Data {
+        get {
+            _DataOffset = _DataOffset ?? Schema.GetOffset(0xC684CC9A1621C725);
+            return ref _Handle.AsRef<int>(_DataOffset!.Value);
+        }
     }
-  }
 
 
 }

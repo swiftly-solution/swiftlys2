@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_VelocityMatchingForceImpl : CParticleFunctionOperatorImpl, C_OP_VelocityMatchingForce {
+internal partial class C_OP_VelocityMatchingForceImpl : CParticleFunctionOperatorImpl, C_OP_VelocityMatchingForce
+{
+    public C_OP_VelocityMatchingForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_VelocityMatchingForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DirScaleOffset;
 
-  private static nint? _DirScaleOffset;
-
-  public ref float DirScale {
-    get {
-      if (_DirScaleOffset == null) {
-        _DirScaleOffset = Schema.GetOffset(0x8B7E85343A95212C);
-      }
-      return ref _Handle.AsRef<float>(_DirScaleOffset!.Value);
+    public ref float DirScale {
+        get {
+            _DirScaleOffset = _DirScaleOffset ?? Schema.GetOffset(0x8B7E85343A95212C);
+            return ref _Handle.AsRef<float>(_DirScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpdScaleOffset;
+    private static nint? _SpdScaleOffset;
 
-  public ref float SpdScale {
-    get {
-      if (_SpdScaleOffset == null) {
-        _SpdScaleOffset = Schema.GetOffset(0x8B7E8534B3DC18DA);
-      }
-      return ref _Handle.AsRef<float>(_SpdScaleOffset!.Value);
+    public ref float SpdScale {
+        get {
+            _SpdScaleOffset = _SpdScaleOffset ?? Schema.GetOffset(0x8B7E8534B3DC18DA);
+            return ref _Handle.AsRef<float>(_SpdScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _NeighborDistanceOffset;
+    private static nint? _NeighborDistanceOffset;
 
-  public ref float NeighborDistance {
-    get {
-      if (_NeighborDistanceOffset == null) {
-        _NeighborDistanceOffset = Schema.GetOffset(0x8B7E8534F03C7C66);
-      }
-      return ref _Handle.AsRef<float>(_NeighborDistanceOffset!.Value);
+    public ref float NeighborDistance {
+        get {
+            _NeighborDistanceOffset = _NeighborDistanceOffset ?? Schema.GetOffset(0x8B7E8534F03C7C66);
+            return ref _Handle.AsRef<float>(_NeighborDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _FacingStrengthOffset;
+    private static nint? _FacingStrengthOffset;
 
-  public ref float FacingStrength {
-    get {
-      if (_FacingStrengthOffset == null) {
-        _FacingStrengthOffset = Schema.GetOffset(0x8B7E85340D514274);
-      }
-      return ref _Handle.AsRef<float>(_FacingStrengthOffset!.Value);
+    public ref float FacingStrength {
+        get {
+            _FacingStrengthOffset = _FacingStrengthOffset ?? Schema.GetOffset(0x8B7E85340D514274);
+            return ref _Handle.AsRef<float>(_FacingStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseAABBOffset;
+    private static nint? _UseAABBOffset;
 
-  public ref bool UseAABB {
-    get {
-      if (_UseAABBOffset == null) {
-        _UseAABBOffset = Schema.GetOffset(0x8B7E853429AAFF2E);
-      }
-      return ref _Handle.AsRef<bool>(_UseAABBOffset!.Value);
+    public ref bool UseAABB {
+        get {
+            _UseAABBOffset = _UseAABBOffset ?? Schema.GetOffset(0x8B7E853429AAFF2E);
+            return ref _Handle.AsRef<bool>(_UseAABBOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPBroadcastOffset;
+    private static nint? _CPBroadcastOffset;
 
-  public ref int CPBroadcast {
-    get {
-      if (_CPBroadcastOffset == null) {
-        _CPBroadcastOffset = Schema.GetOffset(0x8B7E85344C1065B5);
-      }
-      return ref _Handle.AsRef<int>(_CPBroadcastOffset!.Value);
+    public ref int CPBroadcast {
+        get {
+            _CPBroadcastOffset = _CPBroadcastOffset ?? Schema.GetOffset(0x8B7E85344C1065B5);
+            return ref _Handle.AsRef<int>(_CPBroadcastOffset!.Value);
+        }
     }
-  }
 
 
 }

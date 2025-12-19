@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMaterialAttributeAnimTagImpl : CAnimTagBaseImpl, CMaterialAttributeAnimTag {
+internal partial class CMaterialAttributeAnimTagImpl : CAnimTagBaseImpl, CMaterialAttributeAnimTag
+{
+    public CMaterialAttributeAnimTagImpl(nint handle) : base(handle) { }
 
-  public CMaterialAttributeAnimTagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttributeNameOffset;
 
-  private static nint? _AttributeNameOffset;
+    public string AttributeName {
+        get {
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x509D90A81408864C);
+            return Schema.GetString(_Handle.Read<nint>(_AttributeNameOffset!.Value));
+        }
+        set {
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x509D90A81408864C);
+            Schema.SetString(_Handle, _AttributeNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _AttributeTypeOffset;
 
-  public string AttributeName {
-    get {
-      if (_AttributeNameOffset == null) {
-        _AttributeNameOffset = Schema.GetOffset(0x509D90A81408864C);
-      }
-      var ptr = _Handle.Read<nint>(_AttributeNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref MatterialAttributeTagType_t AttributeType {
+        get {
+            _AttributeTypeOffset = _AttributeTypeOffset ?? Schema.GetOffset(0x509D90A84243CC37);
+            return ref _Handle.AsRef<MatterialAttributeTagType_t>(_AttributeTypeOffset!.Value);
+        }
     }
-    set {
-      if (_AttributeNameOffset == null) {
-        _AttributeNameOffset = Schema.GetOffset(0x509D90A81408864C);
-      }
-      Schema.SetString(_Handle, _AttributeNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _AttributeTypeOffset;
+    private static nint? _ValueOffset;
 
-  public ref MatterialAttributeTagType_t AttributeType {
-    get {
-      if (_AttributeTypeOffset == null) {
-        _AttributeTypeOffset = Schema.GetOffset(0x509D90A84243CC37);
-      }
-      return ref _Handle.AsRef<MatterialAttributeTagType_t>(_AttributeTypeOffset!.Value);
+    public ref float Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x509D90A88DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValueOffset;
+    private static nint? _ColorOffset;
 
-  public ref float Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0x509D90A88DFCB984);
-      }
-      return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+    public ref Color Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x509D90A8D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorOffset;
-
-  public ref Color Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x509D90A8D7D017D8);
-      }
-      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
-    }
-  }
 
 
 }

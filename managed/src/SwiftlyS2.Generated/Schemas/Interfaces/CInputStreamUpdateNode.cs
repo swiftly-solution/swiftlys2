@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInputStreamUpdateNode : CLeafUpdateNode, ISchemaClass<CInputStreamUpdateNode> {
-
-  static CInputStreamUpdateNode ISchemaClass<CInputStreamUpdateNode>.From(nint handle) => new CInputStreamUpdateNodeImpl(handle);
-  static int ISchemaClass<CInputStreamUpdateNode>.Size => 96;
-  static string? ISchemaClass<CInputStreamUpdateNode>.ClassName => null;
+public partial interface CInputStreamUpdateNode : CLeafUpdateNode, ISchemaClass<CInputStreamUpdateNode>
+{
+    static CInputStreamUpdateNode ISchemaClass<CInputStreamUpdateNode>.From(nint handle) => new CInputStreamUpdateNodeImpl(handle);
+    static int ISchemaClass<CInputStreamUpdateNode>.Size => 96;
+    static string? ISchemaClass<CInputStreamUpdateNode>.ClassName => null;
 
 
 

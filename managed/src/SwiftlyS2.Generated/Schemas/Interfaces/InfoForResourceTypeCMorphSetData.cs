@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCMorphSetData : ISchemaClass<InfoForResourceTypeCMorphSetData> {
-
-  static InfoForResourceTypeCMorphSetData ISchemaClass<InfoForResourceTypeCMorphSetData>.From(nint handle) => new InfoForResourceTypeCMorphSetDataImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCMorphSetData>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCMorphSetData>.ClassName => null;
+public partial interface InfoForResourceTypeCMorphSetData : ISchemaClass<InfoForResourceTypeCMorphSetData>
+{
+    static InfoForResourceTypeCMorphSetData ISchemaClass<InfoForResourceTypeCMorphSetData>.From(nint handle) => new InfoForResourceTypeCMorphSetDataImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCMorphSetData>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCMorphSetData>.ClassName => null;
 
 
 

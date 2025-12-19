@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum GameAnimEventIndex_t : uint {
-
+public enum GameAnimEventIndex_t : uint
+{
  AE_EMPTY = 0,
 
  AE_CL_PLAYSOUND = 1,

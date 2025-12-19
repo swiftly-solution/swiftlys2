@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeIAnimGraphModelBinding : ISchemaClass<InfoForResourceTypeIAnimGraphModelBinding> {
-
-  static InfoForResourceTypeIAnimGraphModelBinding ISchemaClass<InfoForResourceTypeIAnimGraphModelBinding>.From(nint handle) => new InfoForResourceTypeIAnimGraphModelBindingImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeIAnimGraphModelBinding>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeIAnimGraphModelBinding>.ClassName => null;
+public partial interface InfoForResourceTypeIAnimGraphModelBinding : ISchemaClass<InfoForResourceTypeIAnimGraphModelBinding>
+{
+    static InfoForResourceTypeIAnimGraphModelBinding ISchemaClass<InfoForResourceTypeIAnimGraphModelBinding>.From(nint handle) => new InfoForResourceTypeIAnimGraphModelBindingImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeIAnimGraphModelBinding>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeIAnimGraphModelBinding>.ClassName => null;
 
 
 

@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTonemapTriggerImpl : CBaseTriggerImpl, CTonemapTrigger {
+internal partial class CTonemapTriggerImpl : CBaseTriggerImpl, CTonemapTrigger
+{
+    public CTonemapTriggerImpl(nint handle) : base(handle) { }
 
-  public CTonemapTriggerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TonemapControllerNameOffset;
 
-  private static nint? _TonemapControllerNameOffset;
+    public string TonemapControllerName {
+        get {
+            _TonemapControllerNameOffset = _TonemapControllerNameOffset ?? Schema.GetOffset(0x82562698C641A282);
+            return Schema.GetString(_Handle.Read<nint>(_TonemapControllerNameOffset!.Value));
+        }
+        set {
+            _TonemapControllerNameOffset = _TonemapControllerNameOffset ?? Schema.GetOffset(0x82562698C641A282);
+            Schema.SetString(_Handle, _TonemapControllerNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _TonemapControllerOffset;
 
-  public string TonemapControllerName {
-    get {
-      if (_TonemapControllerNameOffset == null) {
-        _TonemapControllerNameOffset = Schema.GetOffset(0x82562698C641A282);
-      }
-      var ptr = _Handle.Read<nint>(_TonemapControllerNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CHandle<CEntityInstance> TonemapController {
+        get {
+            _TonemapControllerOffset = _TonemapControllerOffset ?? Schema.GetOffset(0x82562698F5E1A34F);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_TonemapControllerOffset!.Value);
+        }
     }
-    set {
-      if (_TonemapControllerNameOffset == null) {
-        _TonemapControllerNameOffset = Schema.GetOffset(0x82562698C641A282);
-      }
-      Schema.SetString(_Handle, _TonemapControllerNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _TonemapControllerOffset;
-
-  public ref CHandle<CEntityInstance> TonemapController {
-    get {
-      if (_TonemapControllerOffset == null) {
-        _TonemapControllerOffset = Schema.GetOffset(0x82562698F5E1A34F);
-      }
-      return ref _Handle.AsRef<CHandle<CEntityInstance>>(_TonemapControllerOffset!.Value);
-    }
-  }
 
 
 }

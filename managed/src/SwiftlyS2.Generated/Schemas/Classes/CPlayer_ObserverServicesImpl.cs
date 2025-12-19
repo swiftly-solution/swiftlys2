@@ -6,62 +6,49 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPlayer_ObserverServicesImpl : CPlayerPawnComponentImpl, CPlayer_ObserverServices {
+internal partial class CPlayer_ObserverServicesImpl : CPlayerPawnComponentImpl, CPlayer_ObserverServices
+{
+    public CPlayer_ObserverServicesImpl(nint handle) : base(handle) { }
 
-  public CPlayer_ObserverServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ObserverModeOffset;
 
-  private static nint? _ObserverModeOffset;
-
-  public ref byte ObserverMode {
-    get {
-      if (_ObserverModeOffset == null) {
-        _ObserverModeOffset = Schema.GetOffset(0x1611315ADAB57B35);
-      }
-      return ref _Handle.AsRef<byte>(_ObserverModeOffset!.Value);
+    public ref byte ObserverMode {
+        get {
+            _ObserverModeOffset = _ObserverModeOffset ?? Schema.GetOffset(0x1611315ADAB57B35);
+            return ref _Handle.AsRef<byte>(_ObserverModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ObserverTargetOffset;
+    private static nint? _ObserverTargetOffset;
 
-  public ref CHandle<CBaseEntity> ObserverTarget {
-    get {
-      if (_ObserverTargetOffset == null) {
-        _ObserverTargetOffset = Schema.GetOffset(0x1611315A24779C4C);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ObserverTargetOffset!.Value);
+    public ref CHandle<CBaseEntity> ObserverTarget {
+        get {
+            _ObserverTargetOffset = _ObserverTargetOffset ?? Schema.GetOffset(0x1611315A24779C4C);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ObserverTargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _ObserverLastModeOffset;
+    private static nint? _ObserverLastModeOffset;
 
-  public ref ObserverMode_t ObserverLastMode {
-    get {
-      if (_ObserverLastModeOffset == null) {
-        _ObserverLastModeOffset = Schema.GetOffset(0x1611315A555EDA49);
-      }
-      return ref _Handle.AsRef<ObserverMode_t>(_ObserverLastModeOffset!.Value);
+    public ref ObserverMode_t ObserverLastMode {
+        get {
+            _ObserverLastModeOffset = _ObserverLastModeOffset ?? Schema.GetOffset(0x1611315A555EDA49);
+            return ref _Handle.AsRef<ObserverMode_t>(_ObserverLastModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForcedObserverModeOffset;
+    private static nint? _ForcedObserverModeOffset;
 
-  public ref bool ForcedObserverMode {
-    get {
-      if (_ForcedObserverModeOffset == null) {
-        _ForcedObserverModeOffset = Schema.GetOffset(0x1611315A276632E1);
-      }
-      return ref _Handle.AsRef<bool>(_ForcedObserverModeOffset!.Value);
+    public ref bool ForcedObserverMode {
+        get {
+            _ForcedObserverModeOffset = _ForcedObserverModeOffset ?? Schema.GetOffset(0x1611315A276632E1);
+            return ref _Handle.AsRef<bool>(_ForcedObserverModeOffset!.Value);
+        }
     }
-  }
 
-  public void ObserverModeUpdated() {
-    Schema.Update(_Handle, 0x1611315ADAB57B35);
-  }
-  public void ObserverTargetUpdated() {
-    Schema.Update(_Handle, 0x1611315A24779C4C);
-  }
+    public void ObserverModeUpdated() => Schema.Update(_Handle, 0x1611315ADAB57B35);
+    public void ObserverTargetUpdated() => Schema.Update(_Handle, 0x1611315A24779C4C);
 }

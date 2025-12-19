@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum Detail2Combo_t : uint {
-
+public enum Detail2Combo_t : uint
+{
  DETAIL_2_COMBO_UNINITIALIZED = uint.MaxValue,
 
  DETAIL_2_COMBO_OFF = 0,

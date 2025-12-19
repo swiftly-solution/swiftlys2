@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleTraceMissBehavior_t : uint {
-
+public enum ParticleTraceMissBehavior_t : uint
+{
  PARTICLE_TRACE_MISS_BEHAVIOR_NONE = 0,
 
  PARTICLE_TRACE_MISS_BEHAVIOR_KILL = 1,

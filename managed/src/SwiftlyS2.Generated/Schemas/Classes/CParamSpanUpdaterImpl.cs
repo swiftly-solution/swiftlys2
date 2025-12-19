@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParamSpanUpdaterImpl : SchemaClass, CParamSpanUpdater {
+internal partial class CParamSpanUpdaterImpl : SchemaClass, CParamSpanUpdater
+{
+    public CParamSpanUpdaterImpl(nint handle) : base(handle) { }
 
-  public CParamSpanUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SpansOffset;
 
-  private static nint? _SpansOffset;
-
-  public ref CUtlVector<ParamSpan_t> Spans {
-    get {
-      if (_SpansOffset == null) {
-        _SpansOffset = Schema.GetOffset(0xA35886AC66213056);
-      }
-      return ref _Handle.AsRef<CUtlVector<ParamSpan_t>>(_SpansOffset!.Value);
+    public ref CUtlVector<ParamSpan_t> Spans {
+        get {
+            _SpansOffset = _SpansOffset ?? Schema.GetOffset(0xA35886AC66213056);
+            return ref _Handle.AsRef<CUtlVector<ParamSpan_t>>(_SpansOffset!.Value);
+        }
     }
-  }
 
 
 }

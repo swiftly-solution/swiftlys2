@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_GameLiquidSpillImpl : CParticleFunctionRendererImpl, C_OP_GameLiquidSpill {
+internal partial class C_OP_GameLiquidSpillImpl : CParticleFunctionRendererImpl, C_OP_GameLiquidSpill
+{
+    public C_OP_GameLiquidSpillImpl(nint handle) : base(handle) { }
 
-  public C_OP_GameLiquidSpillImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LiquidContentsFieldOffset;
 
-  private static nint? _LiquidContentsFieldOffset;
-
-  public CParticleCollectionFloatInput LiquidContentsField {
-    get {
-      if (_LiquidContentsFieldOffset == null) {
-        _LiquidContentsFieldOffset = Schema.GetOffset(0xB07185274F9A10CB);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _LiquidContentsFieldOffset!.Value);
+    public CParticleCollectionFloatInput LiquidContentsField {
+        get {
+            _LiquidContentsFieldOffset = _LiquidContentsFieldOffset ?? Schema.GetOffset(0xB07185274F9A10CB);
+            return new CParticleCollectionFloatInputImpl(_Handle + _LiquidContentsFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExpirationTimeOffset;
+    private static nint? _ExpirationTimeOffset;
 
-  public CParticleCollectionFloatInput ExpirationTime {
-    get {
-      if (_ExpirationTimeOffset == null) {
-        _ExpirationTimeOffset = Schema.GetOffset(0xB07185272A34213F);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ExpirationTimeOffset!.Value);
+    public CParticleCollectionFloatInput ExpirationTime {
+        get {
+            _ExpirationTimeOffset = _ExpirationTimeOffset ?? Schema.GetOffset(0xB07185272A34213F);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ExpirationTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AmountAttributeOffset;
+    private static nint? _AmountAttributeOffset;
 
-  public ParticleAttributeIndex_t AmountAttribute {
-    get {
-      if (_AmountAttributeOffset == null) {
-        _AmountAttributeOffset = Schema.GetOffset(0xB071852755424147);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _AmountAttributeOffset!.Value);
+    public ParticleAttributeIndex_t AmountAttribute {
+        get {
+            _AmountAttributeOffset = _AmountAttributeOffset ?? Schema.GetOffset(0xB071852755424147);
+            return new ParticleAttributeIndex_tImpl(_Handle + _AmountAttributeOffset!.Value);
+        }
     }
-  }
 
 
 }

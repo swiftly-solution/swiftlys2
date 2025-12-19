@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPlatTriggerImpl : CBaseModelEntityImpl, CPlatTrigger {
+internal partial class CPlatTriggerImpl : CBaseModelEntityImpl, CPlatTrigger
+{
+    public CPlatTriggerImpl(nint handle) : base(handle) { }
 
-  public CPlatTriggerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PlatformOffset;
 
-  private static nint? _PlatformOffset;
-
-  public ref CHandle<CFuncPlat> Platform {
-    get {
-      if (_PlatformOffset == null) {
-        _PlatformOffset = Schema.GetOffset(0xE5D76A656D16AFF0);
-      }
-      return ref _Handle.AsRef<CHandle<CFuncPlat>>(_PlatformOffset!.Value);
+    public ref CHandle<CFuncPlat> Platform {
+        get {
+            _PlatformOffset = _PlatformOffset ?? Schema.GetOffset(0xE5D76A656D16AFF0);
+            return ref _Handle.AsRef<CHandle<CFuncPlat>>(_PlatformOffset!.Value);
+        }
     }
-  }
 
 
 }

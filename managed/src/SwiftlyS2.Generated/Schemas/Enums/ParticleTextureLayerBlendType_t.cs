@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleTextureLayerBlendType_t : uint {
-
+public enum ParticleTextureLayerBlendType_t : uint
+{
  SPRITECARD_TEXTURE_BLEND_MULTIPLY = 0,
 
  SPRITECARD_TEXTURE_BLEND_MOD2X = 1,

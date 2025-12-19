@@ -6,87 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncElectrifiedVolumeImpl : CFuncBrushImpl, CFuncElectrifiedVolume {
+internal partial class CFuncElectrifiedVolumeImpl : CFuncBrushImpl, CFuncElectrifiedVolume
+{
+    public CFuncElectrifiedVolumeImpl(nint handle) : base(handle) { }
 
-  public CFuncElectrifiedVolumeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EffectNameOffset;
 
-  private static nint? _EffectNameOffset;
+    public string EffectName {
+        get {
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x51A0E59866CD81EF);
+            return Schema.GetString(_Handle.Read<nint>(_EffectNameOffset!.Value));
+        }
+        set {
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x51A0E59866CD81EF);
+            Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _EffectInterpenetrateNameOffset;
 
-  public string EffectName {
-    get {
-      if (_EffectNameOffset == null) {
-        _EffectNameOffset = Schema.GetOffset(0x51A0E59866CD81EF);
-      }
-      var ptr = _Handle.Read<nint>(_EffectNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_EffectNameOffset == null) {
-        _EffectNameOffset = Schema.GetOffset(0x51A0E59866CD81EF);
-      }
-      Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _EffectInterpenetrateNameOffset;
+    public string EffectInterpenetrateName {
+        get {
+            _EffectInterpenetrateNameOffset = _EffectInterpenetrateNameOffset ?? Schema.GetOffset(0x51A0E5987691FB19);
+            return Schema.GetString(_Handle.Read<nint>(_EffectInterpenetrateNameOffset!.Value));
+        }
+        set {
+            _EffectInterpenetrateNameOffset = _EffectInterpenetrateNameOffset ?? Schema.GetOffset(0x51A0E5987691FB19);
+            Schema.SetString(_Handle, _EffectInterpenetrateNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _EffectZapNameOffset;
 
-  public string EffectInterpenetrateName {
-    get {
-      if (_EffectInterpenetrateNameOffset == null) {
-        _EffectInterpenetrateNameOffset = Schema.GetOffset(0x51A0E5987691FB19);
-      }
-      var ptr = _Handle.Read<nint>(_EffectInterpenetrateNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_EffectInterpenetrateNameOffset == null) {
-        _EffectInterpenetrateNameOffset = Schema.GetOffset(0x51A0E5987691FB19);
-      }
-      Schema.SetString(_Handle, _EffectInterpenetrateNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _EffectZapNameOffset;
+    public string EffectZapName {
+        get {
+            _EffectZapNameOffset = _EffectZapNameOffset ?? Schema.GetOffset(0x51A0E598BE142B78);
+            return Schema.GetString(_Handle.Read<nint>(_EffectZapNameOffset!.Value));
+        }
+        set {
+            _EffectZapNameOffset = _EffectZapNameOffset ?? Schema.GetOffset(0x51A0E598BE142B78);
+            Schema.SetString(_Handle, _EffectZapNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _EffectSourceOffset;
 
-  public string EffectZapName {
-    get {
-      if (_EffectZapNameOffset == null) {
-        _EffectZapNameOffset = Schema.GetOffset(0x51A0E598BE142B78);
-      }
-      var ptr = _Handle.Read<nint>(_EffectZapNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_EffectZapNameOffset == null) {
-        _EffectZapNameOffset = Schema.GetOffset(0x51A0E598BE142B78);
-      }
-      Schema.SetString(_Handle, _EffectZapNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _EffectSourceOffset;
+    public string EffectSource {
+        get {
+            _EffectSourceOffset = _EffectSourceOffset ?? Schema.GetOffset(0x51A0E598300F4ED9);
+            return Schema.GetString(_Handle.Read<nint>(_EffectSourceOffset!.Value));
+        }
+        set {
+            _EffectSourceOffset = _EffectSourceOffset ?? Schema.GetOffset(0x51A0E598300F4ED9);
+            Schema.SetString(_Handle, _EffectSourceOffset!.Value, value);
+        }
+    } 
 
-  public string EffectSource {
-    get {
-      if (_EffectSourceOffset == null) {
-        _EffectSourceOffset = Schema.GetOffset(0x51A0E598300F4ED9);
-      }
-      var ptr = _Handle.Read<nint>(_EffectSourceOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_EffectSourceOffset == null) {
-        _EffectSourceOffset = Schema.GetOffset(0x51A0E598300F4ED9);
-      }
-      Schema.SetString(_Handle, _EffectSourceOffset!.Value, value);
-    }
-  } 
-
-  public void EffectNameUpdated() {
-    Schema.Update(_Handle, 0x51A0E59866CD81EF);
-  }
+    public void EffectNameUpdated() => Schema.Update(_Handle, 0x51A0E59866CD81EF);
 }

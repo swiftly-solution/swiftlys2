@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRagdollAnimTagImpl : CAnimTagBaseImpl, CRagdollAnimTag {
+internal partial class CRagdollAnimTagImpl : CAnimTagBaseImpl, CRagdollAnimTag
+{
+    public CRagdollAnimTagImpl(nint handle) : base(handle) { }
 
-  public CRagdollAnimTagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ProfileNameOffset;
 
-  private static nint? _ProfileNameOffset;
-
-  public ref CGlobalSymbol ProfileName {
-    get {
-      if (_ProfileNameOffset == null) {
-        _ProfileNameOffset = Schema.GetOffset(0xC5917190285D878D);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_ProfileNameOffset!.Value);
+    public ref CGlobalSymbol ProfileName {
+        get {
+            _ProfileNameOffset = _ProfileNameOffset ?? Schema.GetOffset(0xC5917190285D878D);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ProfileNameOffset!.Value);
+        }
     }
-  }
 
 
 }

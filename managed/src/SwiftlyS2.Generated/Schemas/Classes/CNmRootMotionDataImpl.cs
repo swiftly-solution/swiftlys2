@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmRootMotionDataImpl : SchemaClass, CNmRootMotionData {
+internal partial class CNmRootMotionDataImpl : SchemaClass, CNmRootMotionData
+{
+    public CNmRootMotionDataImpl(nint handle) : base(handle) { }
 
-  public CNmRootMotionDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformsOffset;
 
-  private static nint? _TransformsOffset;
-
-  public ref CUtlVector<CTransform> Transforms {
-    get {
-      if (_TransformsOffset == null) {
-        _TransformsOffset = Schema.GetOffset(0x2E2BC46D88C82C58);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_TransformsOffset!.Value);
+    public ref CUtlVector<CTransform> Transforms {
+        get {
+            _TransformsOffset = _TransformsOffset ?? Schema.GetOffset(0x2E2BC46D88C82C58);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_TransformsOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumFramesOffset;
+    private static nint? _NumFramesOffset;
 
-  public ref int NumFrames {
-    get {
-      if (_NumFramesOffset == null) {
-        _NumFramesOffset = Schema.GetOffset(0x2E2BC46DF764C355);
-      }
-      return ref _Handle.AsRef<int>(_NumFramesOffset!.Value);
+    public ref int NumFrames {
+        get {
+            _NumFramesOffset = _NumFramesOffset ?? Schema.GetOffset(0x2E2BC46DF764C355);
+            return ref _Handle.AsRef<int>(_NumFramesOffset!.Value);
+        }
     }
-  }
-  private static nint? _AverageLinearVelocityOffset;
+    private static nint? _AverageLinearVelocityOffset;
 
-  public ref float AverageLinearVelocity {
-    get {
-      if (_AverageLinearVelocityOffset == null) {
-        _AverageLinearVelocityOffset = Schema.GetOffset(0x2E2BC46D497EE0D4);
-      }
-      return ref _Handle.AsRef<float>(_AverageLinearVelocityOffset!.Value);
+    public ref float AverageLinearVelocity {
+        get {
+            _AverageLinearVelocityOffset = _AverageLinearVelocityOffset ?? Schema.GetOffset(0x2E2BC46D497EE0D4);
+            return ref _Handle.AsRef<float>(_AverageLinearVelocityOffset!.Value);
+        }
     }
-  }
-  private static nint? _AverageAngularVelocityRadiansOffset;
+    private static nint? _AverageAngularVelocityRadiansOffset;
 
-  public ref float AverageAngularVelocityRadians {
-    get {
-      if (_AverageAngularVelocityRadiansOffset == null) {
-        _AverageAngularVelocityRadiansOffset = Schema.GetOffset(0x2E2BC46D11C83D0F);
-      }
-      return ref _Handle.AsRef<float>(_AverageAngularVelocityRadiansOffset!.Value);
+    public ref float AverageAngularVelocityRadians {
+        get {
+            _AverageAngularVelocityRadiansOffset = _AverageAngularVelocityRadiansOffset ?? Schema.GetOffset(0x2E2BC46D11C83D0F);
+            return ref _Handle.AsRef<float>(_AverageAngularVelocityRadiansOffset!.Value);
+        }
     }
-  }
-  private static nint? _TotalDeltaOffset;
+    private static nint? _TotalDeltaOffset;
 
-  public ref CTransform TotalDelta {
-    get {
-      if (_TotalDeltaOffset == null) {
-        _TotalDeltaOffset = Schema.GetOffset(0x2E2BC46D71CA0F99);
-      }
-      return ref _Handle.AsRef<CTransform>(_TotalDeltaOffset!.Value);
+    public ref CTransform TotalDelta {
+        get {
+            _TotalDeltaOffset = _TotalDeltaOffset ?? Schema.GetOffset(0x2E2BC46D71CA0F99);
+            return ref _Handle.AsRef<CTransform>(_TotalDeltaOffset!.Value);
+        }
     }
-  }
 
 
 }

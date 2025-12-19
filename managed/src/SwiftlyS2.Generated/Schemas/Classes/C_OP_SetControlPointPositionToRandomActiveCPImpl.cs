@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetControlPointPositionToRandomActiveCPImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointPositionToRandomActiveCP {
+internal partial class C_OP_SetControlPointPositionToRandomActiveCPImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointPositionToRandomActiveCP
+{
+    public C_OP_SetControlPointPositionToRandomActiveCPImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetControlPointPositionToRandomActiveCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CP1Offset;
 
-  private static nint? _CP1Offset;
-
-  public ref int CP1 {
-    get {
-      if (_CP1Offset == null) {
-        _CP1Offset = Schema.GetOffset(0x7B108D36D4B1E579);
-      }
-      return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+    public ref int CP1 {
+        get {
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0x7B108D36D4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+        }
     }
-  }
-  private static nint? _HeadLocationMinOffset;
+    private static nint? _HeadLocationMinOffset;
 
-  public ref int HeadLocationMin {
-    get {
-      if (_HeadLocationMinOffset == null) {
-        _HeadLocationMinOffset = Schema.GetOffset(0x7B108D360E904014);
-      }
-      return ref _Handle.AsRef<int>(_HeadLocationMinOffset!.Value);
+    public ref int HeadLocationMin {
+        get {
+            _HeadLocationMinOffset = _HeadLocationMinOffset ?? Schema.GetOffset(0x7B108D360E904014);
+            return ref _Handle.AsRef<int>(_HeadLocationMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeadLocationMaxOffset;
+    private static nint? _HeadLocationMaxOffset;
 
-  public ref int HeadLocationMax {
-    get {
-      if (_HeadLocationMaxOffset == null) {
-        _HeadLocationMaxOffset = Schema.GetOffset(0x7B108D36FCA53E76);
-      }
-      return ref _Handle.AsRef<int>(_HeadLocationMaxOffset!.Value);
+    public ref int HeadLocationMax {
+        get {
+            _HeadLocationMaxOffset = _HeadLocationMaxOffset ?? Schema.GetOffset(0x7B108D36FCA53E76);
+            return ref _Handle.AsRef<int>(_HeadLocationMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResetRateOffset;
+    private static nint? _ResetRateOffset;
 
-  public CParticleCollectionFloatInput ResetRate {
-    get {
-      if (_ResetRateOffset == null) {
-        _ResetRateOffset = Schema.GetOffset(0x7B108D369E741FFC);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ResetRateOffset!.Value);
+    public CParticleCollectionFloatInput ResetRate {
+        get {
+            _ResetRateOffset = _ResetRateOffset ?? Schema.GetOffset(0x7B108D369E741FFC);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ResetRateOffset!.Value);
+        }
     }
-  }
 
 
 }

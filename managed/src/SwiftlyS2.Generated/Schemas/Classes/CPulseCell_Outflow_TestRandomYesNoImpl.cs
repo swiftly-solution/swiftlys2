@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Outflow_TestRandomYesNoImpl : CPulseCell_BaseFlowImpl, CPulseCell_Outflow_TestRandomYesNo {
+internal partial class CPulseCell_Outflow_TestRandomYesNoImpl : CPulseCell_BaseFlowImpl, CPulseCell_Outflow_TestRandomYesNo
+{
+    public CPulseCell_Outflow_TestRandomYesNoImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Outflow_TestRandomYesNoImpl(nint handle) : base(handle) {
-  }
+    private static nint? _YesOffset;
 
-  private static nint? _YesOffset;
-
-  public CPulse_OutflowConnection Yes {
-    get {
-      if (_YesOffset == null) {
-        _YesOffset = Schema.GetOffset(0x9EA5F31EDA358F10);
-      }
-      return new CPulse_OutflowConnectionImpl(_Handle + _YesOffset!.Value);
+    public CPulse_OutflowConnection Yes {
+        get {
+            _YesOffset = _YesOffset ?? Schema.GetOffset(0x9EA5F31EDA358F10);
+            return new CPulse_OutflowConnectionImpl(_Handle + _YesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoOffset;
+    private static nint? _NoOffset;
 
-  public CPulse_OutflowConnection No {
-    get {
-      if (_NoOffset == null) {
-        _NoOffset = Schema.GetOffset(0x9EA5F31EE004A07A);
-      }
-      return new CPulse_OutflowConnectionImpl(_Handle + _NoOffset!.Value);
+    public CPulse_OutflowConnection No {
+        get {
+            _NoOffset = _NoOffset ?? Schema.GetOffset(0x9EA5F31EE004A07A);
+            return new CPulse_OutflowConnectionImpl(_Handle + _NoOffset!.Value);
+        }
     }
-  }
 
 
 }

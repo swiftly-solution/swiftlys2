@@ -6,124 +6,100 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_SetHitboxToModelImpl : CParticleFunctionInitializerImpl, C_INIT_SetHitboxToModel {
+internal partial class C_INIT_SetHitboxToModelImpl : CParticleFunctionInitializerImpl, C_INIT_SetHitboxToModel
+{
+    public C_INIT_SetHitboxToModelImpl(nint handle) : base(handle) { }
 
-  public C_INIT_SetHitboxToModelImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x7129E7BA3F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
-    }
-  }
-  private static nint? _ForceInModelOffset;
-
-  public ref int ForceInModel {
-    get {
-      if (_ForceInModelOffset == null) {
-        _ForceInModelOffset = Schema.GetOffset(0x7129E7BAA3C747AC);
-      }
-      return ref _Handle.AsRef<int>(_ForceInModelOffset!.Value);
-    }
-  }
-  private static nint? _EvenDistributionOffset;
-
-  public ref bool EvenDistribution {
-    get {
-      if (_EvenDistributionOffset == null) {
-        _EvenDistributionOffset = Schema.GetOffset(0x7129E7BA84932067);
-      }
-      return ref _Handle.AsRef<bool>(_EvenDistributionOffset!.Value);
-    }
-  }
-  private static nint? _DesiredHitboxOffset;
-
-  public ref int DesiredHitbox {
-    get {
-      if (_DesiredHitboxOffset == null) {
-        _DesiredHitboxOffset = Schema.GetOffset(0x7129E7BAFD09531B);
-      }
-      return ref _Handle.AsRef<int>(_DesiredHitboxOffset!.Value);
-    }
-  }
-  private static nint? _HitBoxScaleOffset;
-
-  public CParticleCollectionVecInput HitBoxScale {
-    get {
-      if (_HitBoxScaleOffset == null) {
-        _HitBoxScaleOffset = Schema.GetOffset(0x7129E7BA58EE3FB7);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _HitBoxScaleOffset!.Value);
-    }
-  }
-  private static nint? _DirectionBiasOffset;
-
-  public ref Vector DirectionBias {
-    get {
-      if (_DirectionBiasOffset == null) {
-        _DirectionBiasOffset = Schema.GetOffset(0x7129E7BA5A1697CF);
-      }
-      return ref _Handle.AsRef<Vector>(_DirectionBiasOffset!.Value);
-    }
-  }
-  private static nint? _MaintainHitboxOffset;
-
-  public ref bool MaintainHitbox {
-    get {
-      if (_MaintainHitboxOffset == null) {
-        _MaintainHitboxOffset = Schema.GetOffset(0x7129E7BAF2061926);
-      }
-      return ref _Handle.AsRef<bool>(_MaintainHitboxOffset!.Value);
-    }
-  }
-  private static nint? _UseBonesOffset;
-
-  public ref bool UseBones {
-    get {
-      if (_UseBonesOffset == null) {
-        _UseBonesOffset = Schema.GetOffset(0x7129E7BA10D1938B);
-      }
-      return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
-    }
-  }
-  private static nint? _HitboxSetNameOffset;
-
-  public string HitboxSetName {
-    get {
-        if (_HitboxSetNameOffset == null) {
-            _HitboxSetNameOffset = Schema.GetOffset(0x7129E7BA6A21BB0E);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x7129E7BA3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
-        var ptr = _Handle + _HitboxSetNameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_HitboxSetNameOffset == null) {
-            _HitboxSetNameOffset = Schema.GetOffset(0x7129E7BA6A21BB0E);
-        }
-        Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
-    }
-  } 
-  private static nint? _ShellSizeOffset;
+    private static nint? _ForceInModelOffset;
 
-  public CParticleCollectionFloatInput ShellSize {
-    get {
-      if (_ShellSizeOffset == null) {
-        _ShellSizeOffset = Schema.GetOffset(0x7129E7BA04D01B22);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ShellSizeOffset!.Value);
+    public ref int ForceInModel {
+        get {
+            _ForceInModelOffset = _ForceInModelOffset ?? Schema.GetOffset(0x7129E7BAA3C747AC);
+            return ref _Handle.AsRef<int>(_ForceInModelOffset!.Value);
+        }
     }
-  }
+    private static nint? _EvenDistributionOffset;
+
+    public ref bool EvenDistribution {
+        get {
+            _EvenDistributionOffset = _EvenDistributionOffset ?? Schema.GetOffset(0x7129E7BA84932067);
+            return ref _Handle.AsRef<bool>(_EvenDistributionOffset!.Value);
+        }
+    }
+    private static nint? _DesiredHitboxOffset;
+
+    public ref int DesiredHitbox {
+        get {
+            _DesiredHitboxOffset = _DesiredHitboxOffset ?? Schema.GetOffset(0x7129E7BAFD09531B);
+            return ref _Handle.AsRef<int>(_DesiredHitboxOffset!.Value);
+        }
+    }
+    private static nint? _HitBoxScaleOffset;
+
+    public CParticleCollectionVecInput HitBoxScale {
+        get {
+            _HitBoxScaleOffset = _HitBoxScaleOffset ?? Schema.GetOffset(0x7129E7BA58EE3FB7);
+            return new CParticleCollectionVecInputImpl(_Handle + _HitBoxScaleOffset!.Value);
+        }
+    }
+    private static nint? _DirectionBiasOffset;
+
+    public ref Vector DirectionBias {
+        get {
+            _DirectionBiasOffset = _DirectionBiasOffset ?? Schema.GetOffset(0x7129E7BA5A1697CF);
+            return ref _Handle.AsRef<Vector>(_DirectionBiasOffset!.Value);
+        }
+    }
+    private static nint? _MaintainHitboxOffset;
+
+    public ref bool MaintainHitbox {
+        get {
+            _MaintainHitboxOffset = _MaintainHitboxOffset ?? Schema.GetOffset(0x7129E7BAF2061926);
+            return ref _Handle.AsRef<bool>(_MaintainHitboxOffset!.Value);
+        }
+    }
+    private static nint? _UseBonesOffset;
+
+    public ref bool UseBones {
+        get {
+            _UseBonesOffset = _UseBonesOffset ?? Schema.GetOffset(0x7129E7BA10D1938B);
+            return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
+        }
+    }
+    private static nint? _HitboxSetNameOffset;
+
+    public string HitboxSetName {
+        get {
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x7129E7BA6A21BB0E);
+            return Schema.GetString(_Handle + _HitboxSetNameOffset!.Value);
+        }
+        set {
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x7129E7BA6A21BB0E);
+            Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
+        }
+    } 
+    private static nint? _ShellSizeOffset;
+
+    public CParticleCollectionFloatInput ShellSize {
+        get {
+            _ShellSizeOffset = _ShellSizeOffset ?? Schema.GetOffset(0x7129E7BA04D01B22);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ShellSizeOffset!.Value);
+        }
+    }
 
 
 }

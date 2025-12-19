@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerHostageReset : CBaseTrigger, ISchemaClass<CTriggerHostageReset> {
-
-  static CTriggerHostageReset ISchemaClass<CTriggerHostageReset>.From(nint handle) => new CTriggerHostageResetImpl(handle);
-  static int ISchemaClass<CTriggerHostageReset>.Size => 2472;
-  static string? ISchemaClass<CTriggerHostageReset>.ClassName => "trigger_hostage_reset";
+public partial interface CTriggerHostageReset : CBaseTrigger, ISchemaClass<CTriggerHostageReset>
+{
+    static CTriggerHostageReset ISchemaClass<CTriggerHostageReset>.From(nint handle) => new CTriggerHostageResetImpl(handle);
+    static int ISchemaClass<CTriggerHostageReset>.Size => 2472;
+    static string? ISchemaClass<CTriggerHostageReset>.ClassName => "trigger_hostage_reset";
 
 
 

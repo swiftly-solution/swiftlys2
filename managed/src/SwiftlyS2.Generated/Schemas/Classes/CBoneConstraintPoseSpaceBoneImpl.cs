@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBoneConstraintPoseSpaceBoneImpl : CBaseConstraintImpl, CBoneConstraintPoseSpaceBone {
+internal partial class CBoneConstraintPoseSpaceBoneImpl : CBaseConstraintImpl, CBoneConstraintPoseSpaceBone
+{
+    public CBoneConstraintPoseSpaceBoneImpl(nint handle) : base(handle) { }
 
-  public CBoneConstraintPoseSpaceBoneImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputListOffset;
 
-  private static nint? _InputListOffset;
-
-  public ref CUtlVector<CBoneConstraintPoseSpaceBone__Input_t> InputList {
-    get {
-      if (_InputListOffset == null) {
-        _InputListOffset = Schema.GetOffset(0x496EBC215EB8D83);
-      }
-      return ref _Handle.AsRef<CUtlVector<CBoneConstraintPoseSpaceBone__Input_t>>(_InputListOffset!.Value);
+    public ref CUtlVector<CBoneConstraintPoseSpaceBone__Input_t> InputList {
+        get {
+            _InputListOffset = _InputListOffset ?? Schema.GetOffset(0x496EBC215EB8D83);
+            return ref _Handle.AsRef<CUtlVector<CBoneConstraintPoseSpaceBone__Input_t>>(_InputListOffset!.Value);
+        }
     }
-  }
 
 
 }

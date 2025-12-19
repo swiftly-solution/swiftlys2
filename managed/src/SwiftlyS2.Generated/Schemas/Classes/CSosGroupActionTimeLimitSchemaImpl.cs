@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSosGroupActionTimeLimitSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionTimeLimitSchema {
+internal partial class CSosGroupActionTimeLimitSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionTimeLimitSchema
+{
+    public CSosGroupActionTimeLimitSchemaImpl(nint handle) : base(handle) { }
 
-  public CSosGroupActionTimeLimitSchemaImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaxDurationOffset;
 
-  private static nint? _MaxDurationOffset;
-
-  public ref float MaxDuration {
-    get {
-      if (_MaxDurationOffset == null) {
-        _MaxDurationOffset = Schema.GetOffset(0xB90F1DFD39BAF9F3);
-      }
-      return ref _Handle.AsRef<float>(_MaxDurationOffset!.Value);
+    public ref float MaxDuration {
+        get {
+            _MaxDurationOffset = _MaxDurationOffset ?? Schema.GetOffset(0xB90F1DFD39BAF9F3);
+            return ref _Handle.AsRef<float>(_MaxDurationOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvEntityIgniterImpl : CBaseEntityImpl, CEnvEntityIgniter {
+internal partial class CEnvEntityIgniterImpl : CBaseEntityImpl, CEnvEntityIgniter
+{
+    public CEnvEntityIgniterImpl(nint handle) : base(handle) { }
 
-  public CEnvEntityIgniterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LifetimeOffset;
 
-  private static nint? _LifetimeOffset;
-
-  public ref float Lifetime {
-    get {
-      if (_LifetimeOffset == null) {
-        _LifetimeOffset = Schema.GetOffset(0xF8FFE95A39B35564);
-      }
-      return ref _Handle.AsRef<float>(_LifetimeOffset!.Value);
+    public ref float Lifetime {
+        get {
+            _LifetimeOffset = _LifetimeOffset ?? Schema.GetOffset(0xF8FFE95A39B35564);
+            return ref _Handle.AsRef<float>(_LifetimeOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParticleFunctionInitializerImpl : CParticleFunctionImpl, CParticleFunctionInitializer {
+internal partial class CParticleFunctionInitializerImpl : CParticleFunctionImpl, CParticleFunctionInitializer
+{
+    public CParticleFunctionInitializerImpl(nint handle) : base(handle) { }
 
-  public CParticleFunctionInitializerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AssociatedEmitterIndexOffset;
 
-  private static nint? _AssociatedEmitterIndexOffset;
-
-  public ref int AssociatedEmitterIndex {
-    get {
-      if (_AssociatedEmitterIndexOffset == null) {
-        _AssociatedEmitterIndexOffset = Schema.GetOffset(0xA224E6D8D47B3DA5);
-      }
-      return ref _Handle.AsRef<int>(_AssociatedEmitterIndexOffset!.Value);
+    public ref int AssociatedEmitterIndex {
+        get {
+            _AssociatedEmitterIndexOffset = _AssociatedEmitterIndexOffset ?? Schema.GetOffset(0xA224E6D8D47B3DA5);
+            return ref _Handle.AsRef<int>(_AssociatedEmitterIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

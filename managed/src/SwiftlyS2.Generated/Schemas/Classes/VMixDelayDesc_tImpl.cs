@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixDelayDesc_tImpl : SchemaClass, VMixDelayDesc_t {
+internal partial class VMixDelayDesc_tImpl : SchemaClass, VMixDelayDesc_t
+{
+    public VMixDelayDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixDelayDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FeedbackFilterOffset;
 
-  private static nint? _FeedbackFilterOffset;
-
-  public VMixFilterDesc_t FeedbackFilter {
-    get {
-      if (_FeedbackFilterOffset == null) {
-        _FeedbackFilterOffset = Schema.GetOffset(0x4C891F427C227CDC);
-      }
-      return new VMixFilterDesc_tImpl(_Handle + _FeedbackFilterOffset!.Value);
+    public VMixFilterDesc_t FeedbackFilter {
+        get {
+            _FeedbackFilterOffset = _FeedbackFilterOffset ?? Schema.GetOffset(0x4C891F427C227CDC);
+            return new VMixFilterDesc_tImpl(_Handle + _FeedbackFilterOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnableFilterOffset;
+    private static nint? _EnableFilterOffset;
 
-  public ref bool EnableFilter {
-    get {
-      if (_EnableFilterOffset == null) {
-        _EnableFilterOffset = Schema.GetOffset(0x4C891F42A12F9BE8);
-      }
-      return ref _Handle.AsRef<bool>(_EnableFilterOffset!.Value);
+    public ref bool EnableFilter {
+        get {
+            _EnableFilterOffset = _EnableFilterOffset ?? Schema.GetOffset(0x4C891F42A12F9BE8);
+            return ref _Handle.AsRef<bool>(_EnableFilterOffset!.Value);
+        }
     }
-  }
-  private static nint? _DelayOffset;
+    private static nint? _DelayOffset;
 
-  public ref float Delay {
-    get {
-      if (_DelayOffset == null) {
-        _DelayOffset = Schema.GetOffset(0x4C891F427D68FD6E);
-      }
-      return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+    public ref float Delay {
+        get {
+            _DelayOffset = _DelayOffset ?? Schema.GetOffset(0x4C891F427D68FD6E);
+            return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+        }
     }
-  }
-  private static nint? _DirectGainOffset;
+    private static nint? _DirectGainOffset;
 
-  public ref float DirectGain {
-    get {
-      if (_DirectGainOffset == null) {
-        _DirectGainOffset = Schema.GetOffset(0x4C891F42C6ABC039);
-      }
-      return ref _Handle.AsRef<float>(_DirectGainOffset!.Value);
+    public ref float DirectGain {
+        get {
+            _DirectGainOffset = _DirectGainOffset ?? Schema.GetOffset(0x4C891F42C6ABC039);
+            return ref _Handle.AsRef<float>(_DirectGainOffset!.Value);
+        }
     }
-  }
-  private static nint? _DelayGainOffset;
+    private static nint? _DelayGainOffset;
 
-  public ref float DelayGain {
-    get {
-      if (_DelayGainOffset == null) {
-        _DelayGainOffset = Schema.GetOffset(0x4C891F42708E6A21);
-      }
-      return ref _Handle.AsRef<float>(_DelayGainOffset!.Value);
+    public ref float DelayGain {
+        get {
+            _DelayGainOffset = _DelayGainOffset ?? Schema.GetOffset(0x4C891F42708E6A21);
+            return ref _Handle.AsRef<float>(_DelayGainOffset!.Value);
+        }
     }
-  }
-  private static nint? _FeedbackGainOffset;
+    private static nint? _FeedbackGainOffset;
 
-  public ref float FeedbackGain {
-    get {
-      if (_FeedbackGainOffset == null) {
-        _FeedbackGainOffset = Schema.GetOffset(0x4C891F427CACF477);
-      }
-      return ref _Handle.AsRef<float>(_FeedbackGainOffset!.Value);
+    public ref float FeedbackGain {
+        get {
+            _FeedbackGainOffset = _FeedbackGainOffset ?? Schema.GetOffset(0x4C891F427CACF477);
+            return ref _Handle.AsRef<float>(_FeedbackGainOffset!.Value);
+        }
     }
-  }
-  private static nint? _WidthOffset;
+    private static nint? _WidthOffset;
 
-  public ref float Width {
-    get {
-      if (_WidthOffset == null) {
-        _WidthOffset = Schema.GetOffset(0x4C891F42B91935E1);
-      }
-      return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+    public ref float Width {
+        get {
+            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0x4C891F42B91935E1);
+            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CItemAssaultSuit : CItem, ISchemaClass<CItemAssaultSuit> {
-
-  static CItemAssaultSuit ISchemaClass<CItemAssaultSuit>.From(nint handle) => new CItemAssaultSuitImpl(handle);
-  static int ISchemaClass<CItemAssaultSuit>.Size => 2928;
-  static string? ISchemaClass<CItemAssaultSuit>.ClassName => "item_assaultsuit";
+public partial interface CItemAssaultSuit : CItem, ISchemaClass<CItemAssaultSuit>
+{
+    static CItemAssaultSuit ISchemaClass<CItemAssaultSuit>.From(nint handle) => new CItemAssaultSuitImpl(handle);
+    static int ISchemaClass<CItemAssaultSuit>.Size => 2928;
+    static string? ISchemaClass<CItemAssaultSuit>.ClassName => "item_assaultsuit";
 
 
 

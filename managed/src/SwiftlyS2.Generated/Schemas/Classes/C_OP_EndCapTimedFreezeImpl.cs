@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_EndCapTimedFreezeImpl : CParticleFunctionOperatorImpl, C_OP_EndCapTimedFreeze {
+internal partial class C_OP_EndCapTimedFreezeImpl : CParticleFunctionOperatorImpl, C_OP_EndCapTimedFreeze
+{
+    public C_OP_EndCapTimedFreezeImpl(nint handle) : base(handle) { }
 
-  public C_OP_EndCapTimedFreezeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FreezeTimeOffset;
 
-  private static nint? _FreezeTimeOffset;
-
-  public CParticleCollectionFloatInput FreezeTime {
-    get {
-      if (_FreezeTimeOffset == null) {
-        _FreezeTimeOffset = Schema.GetOffset(0xE8E243ACEAB1B29);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _FreezeTimeOffset!.Value);
+    public CParticleCollectionFloatInput FreezeTime {
+        get {
+            _FreezeTimeOffset = _FreezeTimeOffset ?? Schema.GetOffset(0xE8E243ACEAB1B29);
+            return new CParticleCollectionFloatInputImpl(_Handle + _FreezeTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

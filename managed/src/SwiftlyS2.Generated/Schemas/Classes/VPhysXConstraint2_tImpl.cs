@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VPhysXConstraint2_tImpl : SchemaClass, VPhysXConstraint2_t {
+internal partial class VPhysXConstraint2_tImpl : SchemaClass, VPhysXConstraint2_t
+{
+    public VPhysXConstraint2_tImpl(nint handle) : base(handle) { }
 
-  public VPhysXConstraint2_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FlagsOffset;
 
-  private static nint? _FlagsOffset;
-
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x6FB758FDCE6E9C28);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x6FB758FDCE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentOffset;
+    private static nint? _ParentOffset;
 
-  public ref ushort Parent {
-    get {
-      if (_ParentOffset == null) {
-        _ParentOffset = Schema.GetOffset(0x6FB758FD0AABB9D1);
-      }
-      return ref _Handle.AsRef<ushort>(_ParentOffset!.Value);
+    public ref ushort Parent {
+        get {
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0x6FB758FD0AABB9D1);
+            return ref _Handle.AsRef<ushort>(_ParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChildOffset;
+    private static nint? _ChildOffset;
 
-  public ref ushort Child {
-    get {
-      if (_ChildOffset == null) {
-        _ChildOffset = Schema.GetOffset(0x6FB758FDFE653481);
-      }
-      return ref _Handle.AsRef<ushort>(_ChildOffset!.Value);
+    public ref ushort Child {
+        get {
+            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x6FB758FDFE653481);
+            return ref _Handle.AsRef<ushort>(_ChildOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamsOffset;
+    private static nint? _ParamsOffset;
 
-  public VPhysXConstraintParams_t Params {
-    get {
-      if (_ParamsOffset == null) {
-        _ParamsOffset = Schema.GetOffset(0x6FB758FD640EA8F3);
-      }
-      return new VPhysXConstraintParams_tImpl(_Handle + _ParamsOffset!.Value);
+    public VPhysXConstraintParams_t Params {
+        get {
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x6FB758FD640EA8F3);
+            return new VPhysXConstraintParams_tImpl(_Handle + _ParamsOffset!.Value);
+        }
     }
-  }
 
 
 }

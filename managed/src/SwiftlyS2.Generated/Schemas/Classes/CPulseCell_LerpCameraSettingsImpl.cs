@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_LerpCameraSettingsImpl : CPulseCell_BaseLerpImpl, CPulseCell_LerpCameraSettings {
+internal partial class CPulseCell_LerpCameraSettingsImpl : CPulseCell_BaseLerpImpl, CPulseCell_LerpCameraSettings
+{
+    public CPulseCell_LerpCameraSettingsImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_LerpCameraSettingsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SecondsOffset;
 
-  private static nint? _SecondsOffset;
-
-  public ref float Seconds {
-    get {
-      if (_SecondsOffset == null) {
-        _SecondsOffset = Schema.GetOffset(0xA4A5850773C6938C);
-      }
-      return ref _Handle.AsRef<float>(_SecondsOffset!.Value);
+    public ref float Seconds {
+        get {
+            _SecondsOffset = _SecondsOffset ?? Schema.GetOffset(0xA4A5850773C6938C);
+            return ref _Handle.AsRef<float>(_SecondsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartOffset;
+    private static nint? _StartOffset;
 
-  public PointCameraSettings_t Start {
-    get {
-      if (_StartOffset == null) {
-        _StartOffset = Schema.GetOffset(0xA4A58507FF7CBA5F);
-      }
-      return new PointCameraSettings_tImpl(_Handle + _StartOffset!.Value);
+    public PointCameraSettings_t Start {
+        get {
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0xA4A58507FF7CBA5F);
+            return new PointCameraSettings_tImpl(_Handle + _StartOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndOffset;
+    private static nint? _EndOffset;
 
-  public PointCameraSettings_t End {
-    get {
-      if (_EndOffset == null) {
-        _EndOffset = Schema.GetOffset(0xA4A58507F624CF2A);
-      }
-      return new PointCameraSettings_tImpl(_Handle + _EndOffset!.Value);
+    public PointCameraSettings_t End {
+        get {
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0xA4A58507F624CF2A);
+            return new PointCameraSettings_tImpl(_Handle + _EndOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,185 +6,132 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerPhysicsImpl : CBaseTriggerImpl, CTriggerPhysics {
+internal partial class CTriggerPhysicsImpl : CBaseTriggerImpl, CTriggerPhysics
+{
+    public CTriggerPhysicsImpl(nint handle) : base(handle) { }
 
-  public CTriggerPhysicsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GravityScaleOffset;
 
-  private static nint? _GravityScaleOffset;
-
-  public ref float GravityScale {
-    get {
-      if (_GravityScaleOffset == null) {
-        _GravityScaleOffset = Schema.GetOffset(0xD6C7C8D3F22682F1);
-      }
-      return ref _Handle.AsRef<float>(_GravityScaleOffset!.Value);
+    public ref float GravityScale {
+        get {
+            _GravityScaleOffset = _GravityScaleOffset ?? Schema.GetOffset(0xD6C7C8D3F22682F1);
+            return ref _Handle.AsRef<float>(_GravityScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearLimitOffset;
+    private static nint? _LinearLimitOffset;
 
-  public ref float LinearLimit {
-    get {
-      if (_LinearLimitOffset == null) {
-        _LinearLimitOffset = Schema.GetOffset(0xD6C7C8D38455E743);
-      }
-      return ref _Handle.AsRef<float>(_LinearLimitOffset!.Value);
+    public ref float LinearLimit {
+        get {
+            _LinearLimitOffset = _LinearLimitOffset ?? Schema.GetOffset(0xD6C7C8D38455E743);
+            return ref _Handle.AsRef<float>(_LinearLimitOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearDampingOffset;
+    private static nint? _LinearDampingOffset;
 
-  public ref float LinearDamping {
-    get {
-      if (_LinearDampingOffset == null) {
-        _LinearDampingOffset = Schema.GetOffset(0xD6C7C8D395E4E646);
-      }
-      return ref _Handle.AsRef<float>(_LinearDampingOffset!.Value);
+    public ref float LinearDamping {
+        get {
+            _LinearDampingOffset = _LinearDampingOffset ?? Schema.GetOffset(0xD6C7C8D395E4E646);
+            return ref _Handle.AsRef<float>(_LinearDampingOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularLimitOffset;
+    private static nint? _AngularLimitOffset;
 
-  public ref float AngularLimit {
-    get {
-      if (_AngularLimitOffset == null) {
-        _AngularLimitOffset = Schema.GetOffset(0xD6C7C8D3497B8D18);
-      }
-      return ref _Handle.AsRef<float>(_AngularLimitOffset!.Value);
+    public ref float AngularLimit {
+        get {
+            _AngularLimitOffset = _AngularLimitOffset ?? Schema.GetOffset(0xD6C7C8D3497B8D18);
+            return ref _Handle.AsRef<float>(_AngularLimitOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularDampingOffset;
+    private static nint? _AngularDampingOffset;
 
-  public ref float AngularDamping {
-    get {
-      if (_AngularDampingOffset == null) {
-        _AngularDampingOffset = Schema.GetOffset(0xD6C7C8D36F1B9C61);
-      }
-      return ref _Handle.AsRef<float>(_AngularDampingOffset!.Value);
+    public ref float AngularDamping {
+        get {
+            _AngularDampingOffset = _AngularDampingOffset ?? Schema.GetOffset(0xD6C7C8D36F1B9C61);
+            return ref _Handle.AsRef<float>(_AngularDampingOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearForceOffset;
+    private static nint? _LinearForceOffset;
 
-  public ref float LinearForce {
-    get {
-      if (_LinearForceOffset == null) {
-        _LinearForceOffset = Schema.GetOffset(0xD6C7C8D32DAF4653);
-      }
-      return ref _Handle.AsRef<float>(_LinearForceOffset!.Value);
+    public ref float LinearForce {
+        get {
+            _LinearForceOffset = _LinearForceOffset ?? Schema.GetOffset(0xD6C7C8D32DAF4653);
+            return ref _Handle.AsRef<float>(_LinearForceOffset!.Value);
+        }
     }
-  }
-  private static nint? _FrequencyOffset;
+    private static nint? _FrequencyOffset;
 
-  public ref float Frequency {
-    get {
-      if (_FrequencyOffset == null) {
-        _FrequencyOffset = Schema.GetOffset(0xD6C7C8D3D2C16DD7);
-      }
-      return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+    public ref float Frequency {
+        get {
+            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0xD6C7C8D3D2C16DD7);
+            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+        }
     }
-  }
-  private static nint? _DampingRatioOffset;
+    private static nint? _DampingRatioOffset;
 
-  public ref float DampingRatio {
-    get {
-      if (_DampingRatioOffset == null) {
-        _DampingRatioOffset = Schema.GetOffset(0xD6C7C8D3B40C859E);
-      }
-      return ref _Handle.AsRef<float>(_DampingRatioOffset!.Value);
+    public ref float DampingRatio {
+        get {
+            _DampingRatioOffset = _DampingRatioOffset ?? Schema.GetOffset(0xD6C7C8D3B40C859E);
+            return ref _Handle.AsRef<float>(_DampingRatioOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearForcePointAtOffset;
+    private static nint? _LinearForcePointAtOffset;
 
-  public ref Vector LinearForcePointAt {
-    get {
-      if (_LinearForcePointAtOffset == null) {
-        _LinearForcePointAtOffset = Schema.GetOffset(0xD6C7C8D3C27DF46E);
-      }
-      return ref _Handle.AsRef<Vector>(_LinearForcePointAtOffset!.Value);
+    public ref Vector LinearForcePointAt {
+        get {
+            _LinearForcePointAtOffset = _LinearForcePointAtOffset ?? Schema.GetOffset(0xD6C7C8D3C27DF46E);
+            return ref _Handle.AsRef<Vector>(_LinearForcePointAtOffset!.Value);
+        }
     }
-  }
-  private static nint? _CollapseToForcePointOffset;
+    private static nint? _CollapseToForcePointOffset;
 
-  public ref bool CollapseToForcePoint {
-    get {
-      if (_CollapseToForcePointOffset == null) {
-        _CollapseToForcePointOffset = Schema.GetOffset(0xD6C7C8D3EB895D00);
-      }
-      return ref _Handle.AsRef<bool>(_CollapseToForcePointOffset!.Value);
+    public ref bool CollapseToForcePoint {
+        get {
+            _CollapseToForcePointOffset = _CollapseToForcePointOffset ?? Schema.GetOffset(0xD6C7C8D3EB895D00);
+            return ref _Handle.AsRef<bool>(_CollapseToForcePointOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearForcePointAtWorldOffset;
+    private static nint? _LinearForcePointAtWorldOffset;
 
-  public ref Vector LinearForcePointAtWorld {
-    get {
-      if (_LinearForcePointAtWorldOffset == null) {
-        _LinearForcePointAtWorldOffset = Schema.GetOffset(0xD6C7C8D3C80D3782);
-      }
-      return ref _Handle.AsRef<Vector>(_LinearForcePointAtWorldOffset!.Value);
+    public ref Vector LinearForcePointAtWorld {
+        get {
+            _LinearForcePointAtWorldOffset = _LinearForcePointAtWorldOffset ?? Schema.GetOffset(0xD6C7C8D3C80D3782);
+            return ref _Handle.AsRef<Vector>(_LinearForcePointAtWorldOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearForceDirectionOffset;
+    private static nint? _LinearForceDirectionOffset;
 
-  public ref Vector LinearForceDirection {
-    get {
-      if (_LinearForceDirectionOffset == null) {
-        _LinearForceDirectionOffset = Schema.GetOffset(0xD6C7C8D36076B2FC);
-      }
-      return ref _Handle.AsRef<Vector>(_LinearForceDirectionOffset!.Value);
+    public ref Vector LinearForceDirection {
+        get {
+            _LinearForceDirectionOffset = _LinearForceDirectionOffset ?? Schema.GetOffset(0xD6C7C8D36076B2FC);
+            return ref _Handle.AsRef<Vector>(_LinearForceDirectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConvertToDebrisWhenPossibleOffset;
+    private static nint? _ConvertToDebrisWhenPossibleOffset;
 
-  public ref bool ConvertToDebrisWhenPossible {
-    get {
-      if (_ConvertToDebrisWhenPossibleOffset == null) {
-        _ConvertToDebrisWhenPossibleOffset = Schema.GetOffset(0xD6C7C8D36AD4D155);
-      }
-      return ref _Handle.AsRef<bool>(_ConvertToDebrisWhenPossibleOffset!.Value);
+    public ref bool ConvertToDebrisWhenPossible {
+        get {
+            _ConvertToDebrisWhenPossibleOffset = _ConvertToDebrisWhenPossibleOffset ?? Schema.GetOffset(0xD6C7C8D36AD4D155);
+            return ref _Handle.AsRef<bool>(_ConvertToDebrisWhenPossibleOffset!.Value);
+        }
     }
-  }
 
-  public void GravityScaleUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D3F22682F1);
-  }
-  public void LinearLimitUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D38455E743);
-  }
-  public void LinearDampingUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D395E4E646);
-  }
-  public void AngularLimitUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D3497B8D18);
-  }
-  public void AngularDampingUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D36F1B9C61);
-  }
-  public void LinearForceUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D32DAF4653);
-  }
-  public void FrequencyUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D3D2C16DD7);
-  }
-  public void DampingRatioUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D3B40C859E);
-  }
-  public void LinearForcePointAtUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D3C27DF46E);
-  }
-  public void CollapseToForcePointUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D3EB895D00);
-  }
-  public void LinearForcePointAtWorldUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D3C80D3782);
-  }
-  public void LinearForceDirectionUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D36076B2FC);
-  }
-  public void ConvertToDebrisWhenPossibleUpdated() {
-    Schema.Update(_Handle, 0xD6C7C8D36AD4D155);
-  }
+    public void GravityScaleUpdated() => Schema.Update(_Handle, 0xD6C7C8D3F22682F1);
+    public void LinearLimitUpdated() => Schema.Update(_Handle, 0xD6C7C8D38455E743);
+    public void LinearDampingUpdated() => Schema.Update(_Handle, 0xD6C7C8D395E4E646);
+    public void AngularLimitUpdated() => Schema.Update(_Handle, 0xD6C7C8D3497B8D18);
+    public void AngularDampingUpdated() => Schema.Update(_Handle, 0xD6C7C8D36F1B9C61);
+    public void LinearForceUpdated() => Schema.Update(_Handle, 0xD6C7C8D32DAF4653);
+    public void FrequencyUpdated() => Schema.Update(_Handle, 0xD6C7C8D3D2C16DD7);
+    public void DampingRatioUpdated() => Schema.Update(_Handle, 0xD6C7C8D3B40C859E);
+    public void LinearForcePointAtUpdated() => Schema.Update(_Handle, 0xD6C7C8D3C27DF46E);
+    public void CollapseToForcePointUpdated() => Schema.Update(_Handle, 0xD6C7C8D3EB895D00);
+    public void LinearForcePointAtWorldUpdated() => Schema.Update(_Handle, 0xD6C7C8D3C80D3782);
+    public void LinearForceDirectionUpdated() => Schema.Update(_Handle, 0xD6C7C8D36076B2FC);
+    public void ConvertToDebrisWhenPossibleUpdated() => Schema.Update(_Handle, 0xD6C7C8D36AD4D155);
 }

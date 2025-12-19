@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDampedValueUpdateItemImpl : SchemaClass, CDampedValueUpdateItem {
+internal partial class CDampedValueUpdateItemImpl : SchemaClass, CDampedValueUpdateItem
+{
+    public CDampedValueUpdateItemImpl(nint handle) : base(handle) { }
 
-  public CDampedValueUpdateItemImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DampingOffset;
 
-  private static nint? _DampingOffset;
-
-  public CAnimInputDamping Damping {
-    get {
-      if (_DampingOffset == null) {
-        _DampingOffset = Schema.GetOffset(0x4B11725415440FB5);
-      }
-      return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+    public CAnimInputDamping Damping {
+        get {
+            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0x4B11725415440FB5);
+            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamInOffset;
+    private static nint? _ParamInOffset;
 
-  public CAnimParamHandle ParamIn {
-    get {
-      if (_ParamInOffset == null) {
-        _ParamInOffset = Schema.GetOffset(0x4B117254ED40E37B);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamInOffset!.Value);
+    public CAnimParamHandle ParamIn {
+        get {
+            _ParamInOffset = _ParamInOffset ?? Schema.GetOffset(0x4B117254ED40E37B);
+            return new CAnimParamHandleImpl(_Handle + _ParamInOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamOutOffset;
+    private static nint? _ParamOutOffset;
 
-  public CAnimParamHandle ParamOut {
-    get {
-      if (_ParamOutOffset == null) {
-        _ParamOutOffset = Schema.GetOffset(0x4B117254AA5799A8);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamOutOffset!.Value);
+    public CAnimParamHandle ParamOut {
+        get {
+            _ParamOutOffset = _ParamOutOffset ?? Schema.GetOffset(0x4B117254AA5799A8);
+            return new CAnimParamHandleImpl(_Handle + _ParamOutOffset!.Value);
+        }
     }
-  }
 
 
 }

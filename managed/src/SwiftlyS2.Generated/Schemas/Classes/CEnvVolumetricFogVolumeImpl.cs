@@ -6,250 +6,177 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvVolumetricFogVolumeImpl : CBaseEntityImpl, CEnvVolumetricFogVolume {
+internal partial class CEnvVolumetricFogVolumeImpl : CBaseEntityImpl, CEnvVolumetricFogVolume
+{
+    public CEnvVolumetricFogVolumeImpl(nint handle) : base(handle) { }
 
-  public CEnvVolumetricFogVolumeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActiveOffset;
 
-  private static nint? _ActiveOffset;
-
-  public ref bool Active {
-    get {
-      if (_ActiveOffset == null) {
-        _ActiveOffset = Schema.GetOffset(0x5EDE5CBD8334208F);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    public ref bool Active {
+        get {
+            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0x5EDE5CBD8334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoxMinsOffset;
+    private static nint? _BoxMinsOffset;
 
-  public ref Vector BoxMins {
-    get {
-      if (_BoxMinsOffset == null) {
-        _BoxMinsOffset = Schema.GetOffset(0x5EDE5CBDD8201373);
-      }
-      return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+    public ref Vector BoxMins {
+        get {
+            _BoxMinsOffset = _BoxMinsOffset ?? Schema.GetOffset(0x5EDE5CBDD8201373);
+            return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoxMaxsOffset;
+    private static nint? _BoxMaxsOffset;
 
-  public ref Vector BoxMaxs {
-    get {
-      if (_BoxMaxsOffset == null) {
-        _BoxMaxsOffset = Schema.GetOffset(0x5EDE5CBD817A3B31);
-      }
-      return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+    public ref Vector BoxMaxs {
+        get {
+            _BoxMaxsOffset = _BoxMaxsOffset ?? Schema.GetOffset(0x5EDE5CBD817A3B31);
+            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartDisabledOffset;
+    private static nint? _StartDisabledOffset;
 
-  public ref bool StartDisabled {
-    get {
-      if (_StartDisabledOffset == null) {
-        _StartDisabledOffset = Schema.GetOffset(0x5EDE5CBD61ED0C4F);
-      }
-      return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+    public ref bool StartDisabled {
+        get {
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0x5EDE5CBD61ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _IndirectUseLPVsOffset;
+    private static nint? _IndirectUseLPVsOffset;
 
-  public ref bool IndirectUseLPVs {
-    get {
-      if (_IndirectUseLPVsOffset == null) {
-        _IndirectUseLPVsOffset = Schema.GetOffset(0x5EDE5CBDF6508E3D);
-      }
-      return ref _Handle.AsRef<bool>(_IndirectUseLPVsOffset!.Value);
+    public ref bool IndirectUseLPVs {
+        get {
+            _IndirectUseLPVsOffset = _IndirectUseLPVsOffset ?? Schema.GetOffset(0x5EDE5CBDF6508E3D);
+            return ref _Handle.AsRef<bool>(_IndirectUseLPVsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrengthOffset;
+    private static nint? _StrengthOffset;
 
-  public ref float Strength {
-    get {
-      if (_StrengthOffset == null) {
-        _StrengthOffset = Schema.GetOffset(0x5EDE5CBD8F67AF1A);
-      }
-      return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+    public ref float Strength {
+        get {
+            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0x5EDE5CBD8F67AF1A);
+            return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _FalloffShapeOffset;
+    private static nint? _FalloffShapeOffset;
 
-  public ref int FalloffShape {
-    get {
-      if (_FalloffShapeOffset == null) {
-        _FalloffShapeOffset = Schema.GetOffset(0x5EDE5CBD413F21CA);
-      }
-      return ref _Handle.AsRef<int>(_FalloffShapeOffset!.Value);
+    public ref int FalloffShape {
+        get {
+            _FalloffShapeOffset = _FalloffShapeOffset ?? Schema.GetOffset(0x5EDE5CBD413F21CA);
+            return ref _Handle.AsRef<int>(_FalloffShapeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FalloffExponentOffset;
+    private static nint? _FalloffExponentOffset;
 
-  public ref float FalloffExponent {
-    get {
-      if (_FalloffExponentOffset == null) {
-        _FalloffExponentOffset = Schema.GetOffset(0x5EDE5CBDE4B7D948);
-      }
-      return ref _Handle.AsRef<float>(_FalloffExponentOffset!.Value);
+    public ref float FalloffExponent {
+        get {
+            _FalloffExponentOffset = _FalloffExponentOffset ?? Schema.GetOffset(0x5EDE5CBDE4B7D948);
+            return ref _Handle.AsRef<float>(_FalloffExponentOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeightFogDepthOffset;
+    private static nint? _HeightFogDepthOffset;
 
-  public ref float HeightFogDepth {
-    get {
-      if (_HeightFogDepthOffset == null) {
-        _HeightFogDepthOffset = Schema.GetOffset(0x5EDE5CBDE7A4BA15);
-      }
-      return ref _Handle.AsRef<float>(_HeightFogDepthOffset!.Value);
+    public ref float HeightFogDepth {
+        get {
+            _HeightFogDepthOffset = _HeightFogDepthOffset ?? Schema.GetOffset(0x5EDE5CBDE7A4BA15);
+            return ref _Handle.AsRef<float>(_HeightFogDepthOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeightFogEdgeWidthOffset;
+    private static nint? _HeightFogEdgeWidthOffset;
 
-  public ref float HeightFogEdgeWidth {
-    get {
-      if (_HeightFogEdgeWidthOffset == null) {
-        _HeightFogEdgeWidthOffset = Schema.GetOffset(0x5EDE5CBD4605AE81);
-      }
-      return ref _Handle.AsRef<float>(_HeightFogEdgeWidthOffset!.Value);
+    public ref float HeightFogEdgeWidth {
+        get {
+            _HeightFogEdgeWidthOffset = _HeightFogEdgeWidthOffset ?? Schema.GetOffset(0x5EDE5CBD4605AE81);
+            return ref _Handle.AsRef<float>(_HeightFogEdgeWidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _IndirectLightStrengthOffset;
+    private static nint? _IndirectLightStrengthOffset;
 
-  public ref float IndirectLightStrength {
-    get {
-      if (_IndirectLightStrengthOffset == null) {
-        _IndirectLightStrengthOffset = Schema.GetOffset(0x5EDE5CBD1CE20160);
-      }
-      return ref _Handle.AsRef<float>(_IndirectLightStrengthOffset!.Value);
+    public ref float IndirectLightStrength {
+        get {
+            _IndirectLightStrengthOffset = _IndirectLightStrengthOffset ?? Schema.GetOffset(0x5EDE5CBD1CE20160);
+            return ref _Handle.AsRef<float>(_IndirectLightStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _SunLightStrengthOffset;
+    private static nint? _SunLightStrengthOffset;
 
-  public ref float SunLightStrength {
-    get {
-      if (_SunLightStrengthOffset == null) {
-        _SunLightStrengthOffset = Schema.GetOffset(0x5EDE5CBDDE47D3A2);
-      }
-      return ref _Handle.AsRef<float>(_SunLightStrengthOffset!.Value);
+    public ref float SunLightStrength {
+        get {
+            _SunLightStrengthOffset = _SunLightStrengthOffset ?? Schema.GetOffset(0x5EDE5CBDDE47D3A2);
+            return ref _Handle.AsRef<float>(_SunLightStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoiseStrengthOffset;
+    private static nint? _NoiseStrengthOffset;
 
-  public ref float NoiseStrength {
-    get {
-      if (_NoiseStrengthOffset == null) {
-        _NoiseStrengthOffset = Schema.GetOffset(0x5EDE5CBD556ED5D0);
-      }
-      return ref _Handle.AsRef<float>(_NoiseStrengthOffset!.Value);
+    public ref float NoiseStrength {
+        get {
+            _NoiseStrengthOffset = _NoiseStrengthOffset ?? Schema.GetOffset(0x5EDE5CBD556ED5D0);
+            return ref _Handle.AsRef<float>(_NoiseStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _TintColorOffset;
+    private static nint? _TintColorOffset;
 
-  public ref Color TintColor {
-    get {
-      if (_TintColorOffset == null) {
-        _TintColorOffset = Schema.GetOffset(0x5EDE5CBDAF2613F3);
-      }
-      return ref _Handle.AsRef<Color>(_TintColorOffset!.Value);
+    public ref Color TintColor {
+        get {
+            _TintColorOffset = _TintColorOffset ?? Schema.GetOffset(0x5EDE5CBDAF2613F3);
+            return ref _Handle.AsRef<Color>(_TintColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverrideTintColorOffset;
+    private static nint? _OverrideTintColorOffset;
 
-  public ref bool OverrideTintColor {
-    get {
-      if (_OverrideTintColorOffset == null) {
-        _OverrideTintColorOffset = Schema.GetOffset(0x5EDE5CBDF384934B);
-      }
-      return ref _Handle.AsRef<bool>(_OverrideTintColorOffset!.Value);
+    public ref bool OverrideTintColor {
+        get {
+            _OverrideTintColorOffset = _OverrideTintColorOffset ?? Schema.GetOffset(0x5EDE5CBDF384934B);
+            return ref _Handle.AsRef<bool>(_OverrideTintColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverrideIndirectLightStrengthOffset;
+    private static nint? _OverrideIndirectLightStrengthOffset;
 
-  public ref bool OverrideIndirectLightStrength {
-    get {
-      if (_OverrideIndirectLightStrengthOffset == null) {
-        _OverrideIndirectLightStrengthOffset = Schema.GetOffset(0x5EDE5CBD9AA2A58C);
-      }
-      return ref _Handle.AsRef<bool>(_OverrideIndirectLightStrengthOffset!.Value);
+    public ref bool OverrideIndirectLightStrength {
+        get {
+            _OverrideIndirectLightStrengthOffset = _OverrideIndirectLightStrengthOffset ?? Schema.GetOffset(0x5EDE5CBD9AA2A58C);
+            return ref _Handle.AsRef<bool>(_OverrideIndirectLightStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverrideSunLightStrengthOffset;
+    private static nint? _OverrideSunLightStrengthOffset;
 
-  public ref bool OverrideSunLightStrength {
-    get {
-      if (_OverrideSunLightStrengthOffset == null) {
-        _OverrideSunLightStrengthOffset = Schema.GetOffset(0x5EDE5CBD892B7A46);
-      }
-      return ref _Handle.AsRef<bool>(_OverrideSunLightStrengthOffset!.Value);
+    public ref bool OverrideSunLightStrength {
+        get {
+            _OverrideSunLightStrengthOffset = _OverrideSunLightStrengthOffset ?? Schema.GetOffset(0x5EDE5CBD892B7A46);
+            return ref _Handle.AsRef<bool>(_OverrideSunLightStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverrideNoiseStrengthOffset;
+    private static nint? _OverrideNoiseStrengthOffset;
 
-  public ref bool OverrideNoiseStrength {
-    get {
-      if (_OverrideNoiseStrengthOffset == null) {
-        _OverrideNoiseStrengthOffset = Schema.GetOffset(0x5EDE5CBD47655E8C);
-      }
-      return ref _Handle.AsRef<bool>(_OverrideNoiseStrengthOffset!.Value);
+    public ref bool OverrideNoiseStrength {
+        get {
+            _OverrideNoiseStrengthOffset = _OverrideNoiseStrengthOffset ?? Schema.GetOffset(0x5EDE5CBD47655E8C);
+            return ref _Handle.AsRef<bool>(_OverrideNoiseStrengthOffset!.Value);
+        }
     }
-  }
 
-  public void ActiveUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD8334208F);
-  }
-  public void BoxMinsUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBDD8201373);
-  }
-  public void BoxMaxsUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD817A3B31);
-  }
-  public void StartDisabledUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD61ED0C4F);
-  }
-  public void IndirectUseLPVsUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBDF6508E3D);
-  }
-  public void StrengthUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD8F67AF1A);
-  }
-  public void FalloffShapeUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD413F21CA);
-  }
-  public void FalloffExponentUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBDE4B7D948);
-  }
-  public void HeightFogDepthUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBDE7A4BA15);
-  }
-  public void HeightFogEdgeWidthUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD4605AE81);
-  }
-  public void IndirectLightStrengthUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD1CE20160);
-  }
-  public void SunLightStrengthUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBDDE47D3A2);
-  }
-  public void NoiseStrengthUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD556ED5D0);
-  }
-  public void TintColorUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBDAF2613F3);
-  }
-  public void OverrideTintColorUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBDF384934B);
-  }
-  public void OverrideIndirectLightStrengthUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD9AA2A58C);
-  }
-  public void OverrideSunLightStrengthUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD892B7A46);
-  }
-  public void OverrideNoiseStrengthUpdated() {
-    Schema.Update(_Handle, 0x5EDE5CBD47655E8C);
-  }
+    public void ActiveUpdated() => Schema.Update(_Handle, 0x5EDE5CBD8334208F);
+    public void BoxMinsUpdated() => Schema.Update(_Handle, 0x5EDE5CBDD8201373);
+    public void BoxMaxsUpdated() => Schema.Update(_Handle, 0x5EDE5CBD817A3B31);
+    public void StartDisabledUpdated() => Schema.Update(_Handle, 0x5EDE5CBD61ED0C4F);
+    public void IndirectUseLPVsUpdated() => Schema.Update(_Handle, 0x5EDE5CBDF6508E3D);
+    public void StrengthUpdated() => Schema.Update(_Handle, 0x5EDE5CBD8F67AF1A);
+    public void FalloffShapeUpdated() => Schema.Update(_Handle, 0x5EDE5CBD413F21CA);
+    public void FalloffExponentUpdated() => Schema.Update(_Handle, 0x5EDE5CBDE4B7D948);
+    public void HeightFogDepthUpdated() => Schema.Update(_Handle, 0x5EDE5CBDE7A4BA15);
+    public void HeightFogEdgeWidthUpdated() => Schema.Update(_Handle, 0x5EDE5CBD4605AE81);
+    public void IndirectLightStrengthUpdated() => Schema.Update(_Handle, 0x5EDE5CBD1CE20160);
+    public void SunLightStrengthUpdated() => Schema.Update(_Handle, 0x5EDE5CBDDE47D3A2);
+    public void NoiseStrengthUpdated() => Schema.Update(_Handle, 0x5EDE5CBD556ED5D0);
+    public void TintColorUpdated() => Schema.Update(_Handle, 0x5EDE5CBDAF2613F3);
+    public void OverrideTintColorUpdated() => Schema.Update(_Handle, 0x5EDE5CBDF384934B);
+    public void OverrideIndirectLightStrengthUpdated() => Schema.Update(_Handle, 0x5EDE5CBD9AA2A58C);
+    public void OverrideSunLightStrengthUpdated() => Schema.Update(_Handle, 0x5EDE5CBD892B7A46);
+    public void OverrideNoiseStrengthUpdated() => Schema.Update(_Handle, 0x5EDE5CBD47655E8C);
 }

@@ -6,120 +6,87 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTextureBasedAnimatableImpl : CBaseModelEntityImpl, CTextureBasedAnimatable {
+internal partial class CTextureBasedAnimatableImpl : CBaseModelEntityImpl, CTextureBasedAnimatable
+{
+    public CTextureBasedAnimatableImpl(nint handle) : base(handle) { }
 
-  public CTextureBasedAnimatableImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LoopOffset;
 
-  private static nint? _LoopOffset;
-
-  public ref bool Loop {
-    get {
-      if (_LoopOffset == null) {
-        _LoopOffset = Schema.GetOffset(0xDB45ABACC668A4CB);
-      }
-      return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+    public ref bool Loop {
+        get {
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0xDB45ABACC668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+        }
     }
-  }
-  private static nint? _FPSOffset;
+    private static nint? _FPSOffset;
 
-  public ref float FPS {
-    get {
-      if (_FPSOffset == null) {
-        _FPSOffset = Schema.GetOffset(0xDB45ABAC38CAA4F6);
-      }
-      return ref _Handle.AsRef<float>(_FPSOffset!.Value);
+    public ref float FPS {
+        get {
+            _FPSOffset = _FPSOffset ?? Schema.GetOffset(0xDB45ABAC38CAA4F6);
+            return ref _Handle.AsRef<float>(_FPSOffset!.Value);
+        }
     }
-  }
-  private static nint? _PositionKeysOffset;
+    private static nint? _PositionKeysOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> PositionKeys {
-    get {
-      if (_PositionKeysOffset == null) {
-        _PositionKeysOffset = Schema.GetOffset(0xDB45ABACE6515850);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_PositionKeysOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> PositionKeys {
+        get {
+            _PositionKeysOffset = _PositionKeysOffset ?? Schema.GetOffset(0xDB45ABACE6515850);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_PositionKeysOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotationKeysOffset;
+    private static nint? _RotationKeysOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> RotationKeys {
-    get {
-      if (_RotationKeysOffset == null) {
-        _RotationKeysOffset = Schema.GetOffset(0xDB45ABACDAC30C39);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_RotationKeysOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> RotationKeys {
+        get {
+            _RotationKeysOffset = _RotationKeysOffset ?? Schema.GetOffset(0xDB45ABACDAC30C39);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_RotationKeysOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimationBoundsMinOffset;
+    private static nint? _AnimationBoundsMinOffset;
 
-  public ref Vector AnimationBoundsMin {
-    get {
-      if (_AnimationBoundsMinOffset == null) {
-        _AnimationBoundsMinOffset = Schema.GetOffset(0xDB45ABAC8BDB4B58);
-      }
-      return ref _Handle.AsRef<Vector>(_AnimationBoundsMinOffset!.Value);
+    public ref Vector AnimationBoundsMin {
+        get {
+            _AnimationBoundsMinOffset = _AnimationBoundsMinOffset ?? Schema.GetOffset(0xDB45ABAC8BDB4B58);
+            return ref _Handle.AsRef<Vector>(_AnimationBoundsMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimationBoundsMaxOffset;
+    private static nint? _AnimationBoundsMaxOffset;
 
-  public ref Vector AnimationBoundsMax {
-    get {
-      if (_AnimationBoundsMaxOffset == null) {
-        _AnimationBoundsMaxOffset = Schema.GetOffset(0xDB45ABACA1EEF5B2);
-      }
-      return ref _Handle.AsRef<Vector>(_AnimationBoundsMaxOffset!.Value);
+    public ref Vector AnimationBoundsMax {
+        get {
+            _AnimationBoundsMaxOffset = _AnimationBoundsMaxOffset ?? Schema.GetOffset(0xDB45ABACA1EEF5B2);
+            return ref _Handle.AsRef<Vector>(_AnimationBoundsMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTimeOffset;
+    private static nint? _StartTimeOffset;
 
-  public ref float StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0xDB45ABAC67FE9DC4);
-      }
-      return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+    public ref float StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xDB45ABAC67FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartFrameOffset;
+    private static nint? _StartFrameOffset;
 
-  public ref float StartFrame {
-    get {
-      if (_StartFrameOffset == null) {
-        _StartFrameOffset = Schema.GetOffset(0xDB45ABACB534B906);
-      }
-      return ref _Handle.AsRef<float>(_StartFrameOffset!.Value);
+    public ref float StartFrame {
+        get {
+            _StartFrameOffset = _StartFrameOffset ?? Schema.GetOffset(0xDB45ABACB534B906);
+            return ref _Handle.AsRef<float>(_StartFrameOffset!.Value);
+        }
     }
-  }
 
-  public void LoopUpdated() {
-    Schema.Update(_Handle, 0xDB45ABACC668A4CB);
-  }
-  public void FPSUpdated() {
-    Schema.Update(_Handle, 0xDB45ABAC38CAA4F6);
-  }
-  public void PositionKeysUpdated() {
-    Schema.Update(_Handle, 0xDB45ABACE6515850);
-  }
-  public void RotationKeysUpdated() {
-    Schema.Update(_Handle, 0xDB45ABACDAC30C39);
-  }
-  public void AnimationBoundsMinUpdated() {
-    Schema.Update(_Handle, 0xDB45ABAC8BDB4B58);
-  }
-  public void AnimationBoundsMaxUpdated() {
-    Schema.Update(_Handle, 0xDB45ABACA1EEF5B2);
-  }
-  public void StartTimeUpdated() {
-    Schema.Update(_Handle, 0xDB45ABAC67FE9DC4);
-  }
-  public void StartFrameUpdated() {
-    Schema.Update(_Handle, 0xDB45ABACB534B906);
-  }
+    public void LoopUpdated() => Schema.Update(_Handle, 0xDB45ABACC668A4CB);
+    public void FPSUpdated() => Schema.Update(_Handle, 0xDB45ABAC38CAA4F6);
+    public void PositionKeysUpdated() => Schema.Update(_Handle, 0xDB45ABACE6515850);
+    public void RotationKeysUpdated() => Schema.Update(_Handle, 0xDB45ABACDAC30C39);
+    public void AnimationBoundsMinUpdated() => Schema.Update(_Handle, 0xDB45ABAC8BDB4B58);
+    public void AnimationBoundsMaxUpdated() => Schema.Update(_Handle, 0xDB45ABACA1EEF5B2);
+    public void StartTimeUpdated() => Schema.Update(_Handle, 0xDB45ABAC67FE9DC4);
+    public void StartFrameUpdated() => Schema.Update(_Handle, 0xDB45ABACB534B906);
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MaterialOverride_tImpl : BaseSceneObjectOverride_tImpl, MaterialOverride_t {
+internal partial class MaterialOverride_tImpl : BaseSceneObjectOverride_tImpl, MaterialOverride_t
+{
+    public MaterialOverride_tImpl(nint handle) : base(handle) { }
 
-  public MaterialOverride_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SubSceneObjectOffset;
 
-  private static nint? _SubSceneObjectOffset;
-
-  public ref uint SubSceneObject {
-    get {
-      if (_SubSceneObjectOffset == null) {
-        _SubSceneObjectOffset = Schema.GetOffset(0xFB7BFECB55C3CCBC);
-      }
-      return ref _Handle.AsRef<uint>(_SubSceneObjectOffset!.Value);
+    public ref uint SubSceneObject {
+        get {
+            _SubSceneObjectOffset = _SubSceneObjectOffset ?? Schema.GetOffset(0xFB7BFECB55C3CCBC);
+            return ref _Handle.AsRef<uint>(_SubSceneObjectOffset!.Value);
+        }
     }
-  }
-  private static nint? _DrawCallIndexOffset;
+    private static nint? _DrawCallIndexOffset;
 
-  public ref uint DrawCallIndex {
-    get {
-      if (_DrawCallIndexOffset == null) {
-        _DrawCallIndexOffset = Schema.GetOffset(0xFB7BFECBFA5614D5);
-      }
-      return ref _Handle.AsRef<uint>(_DrawCallIndexOffset!.Value);
+    public ref uint DrawCallIndex {
+        get {
+            _DrawCallIndexOffset = _DrawCallIndexOffset ?? Schema.GetOffset(0xFB7BFECBFA5614D5);
+            return ref _Handle.AsRef<uint>(_DrawCallIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialOffset;
+    private static nint? _MaterialOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material {
-    get {
-      if (_MaterialOffset == null) {
-        _MaterialOffset = Schema.GetOffset(0xFB7BFECB972B1076);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material {
+        get {
+            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0xFB7BFECB972B1076);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearTintColorOffset;
+    private static nint? _LinearTintColorOffset;
 
-  public ref Vector LinearTintColor {
-    get {
-      if (_LinearTintColorOffset == null) {
-        _LinearTintColorOffset = Schema.GetOffset(0xFB7BFECB6901D28C);
-      }
-      return ref _Handle.AsRef<Vector>(_LinearTintColorOffset!.Value);
+    public ref Vector LinearTintColor {
+        get {
+            _LinearTintColorOffset = _LinearTintColorOffset ?? Schema.GetOffset(0xFB7BFECB6901D28C);
+            return ref _Handle.AsRef<Vector>(_LinearTintColorOffset!.Value);
+        }
     }
-  }
 
 
 }

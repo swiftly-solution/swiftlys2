@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_ScaleVelocityImpl : CParticleFunctionInitializerImpl, C_INIT_ScaleVelocity {
+internal partial class C_INIT_ScaleVelocityImpl : CParticleFunctionInitializerImpl, C_INIT_ScaleVelocity
+{
+    public C_INIT_ScaleVelocityImpl(nint handle) : base(handle) { }
 
-  public C_INIT_ScaleVelocityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScaleOffset;
 
-  private static nint? _ScaleOffset;
-
-  public CParticleCollectionVecInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0xF226CCC35F596B51);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset!.Value);
+    public CParticleCollectionVecInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xF226CCC35F596B51);
+            return new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

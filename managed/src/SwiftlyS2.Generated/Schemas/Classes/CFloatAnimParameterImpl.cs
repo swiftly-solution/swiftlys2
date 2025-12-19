@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFloatAnimParameterImpl : CConcreteAnimParameterImpl, CFloatAnimParameter {
+internal partial class CFloatAnimParameterImpl : CConcreteAnimParameterImpl, CFloatAnimParameter
+{
+    public CFloatAnimParameterImpl(nint handle) : base(handle) { }
 
-  public CFloatAnimParameterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DefaultValueOffset;
 
-  private static nint? _DefaultValueOffset;
-
-  public ref float DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0x6CE7934089D370B3);
-      }
-      return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+    public ref float DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x6CE7934089D370B3);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinValueOffset;
+    private static nint? _MinValueOffset;
 
-  public ref float MinValue {
-    get {
-      if (_MinValueOffset == null) {
-        _MinValueOffset = Schema.GetOffset(0x6CE79340AD86BD50);
-      }
-      return ref _Handle.AsRef<float>(_MinValueOffset!.Value);
+    public ref float MinValue {
+        get {
+            _MinValueOffset = _MinValueOffset ?? Schema.GetOffset(0x6CE79340AD86BD50);
+            return ref _Handle.AsRef<float>(_MinValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxValueOffset;
+    private static nint? _MaxValueOffset;
 
-  public ref float MaxValue {
-    get {
-      if (_MaxValueOffset == null) {
-        _MaxValueOffset = Schema.GetOffset(0x6CE79340DB7358B2);
-      }
-      return ref _Handle.AsRef<float>(_MaxValueOffset!.Value);
+    public ref float MaxValue {
+        get {
+            _MaxValueOffset = _MaxValueOffset ?? Schema.GetOffset(0x6CE79340DB7358B2);
+            return ref _Handle.AsRef<float>(_MaxValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _InterpolateOffset;
+    private static nint? _InterpolateOffset;
 
-  public ref bool Interpolate {
-    get {
-      if (_InterpolateOffset == null) {
-        _InterpolateOffset = Schema.GetOffset(0x6CE79340F6607650);
-      }
-      return ref _Handle.AsRef<bool>(_InterpolateOffset!.Value);
+    public ref bool Interpolate {
+        get {
+            _InterpolateOffset = _InterpolateOffset ?? Schema.GetOffset(0x6CE79340F6607650);
+            return ref _Handle.AsRef<bool>(_InterpolateOffset!.Value);
+        }
     }
-  }
 
 
 }

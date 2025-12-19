@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CWeaponSawedoff : CCSWeaponBaseShotgun, ISchemaClass<CWeaponSawedoff> {
-
-  static CWeaponSawedoff ISchemaClass<CWeaponSawedoff>.From(nint handle) => new CWeaponSawedoffImpl(handle);
-  static int ISchemaClass<CWeaponSawedoff>.Size => 4560;
-  static string? ISchemaClass<CWeaponSawedoff>.ClassName => "weapon_sawedoff";
+public partial interface CWeaponSawedoff : CCSWeaponBaseShotgun, ISchemaClass<CWeaponSawedoff>
+{
+    static CWeaponSawedoff ISchemaClass<CWeaponSawedoff>.From(nint handle) => new CWeaponSawedoffImpl(handle);
+    static int ISchemaClass<CWeaponSawedoff>.Size => 4560;
+    static string? ISchemaClass<CWeaponSawedoff>.ClassName => "weapon_sawedoff";
 
 
 

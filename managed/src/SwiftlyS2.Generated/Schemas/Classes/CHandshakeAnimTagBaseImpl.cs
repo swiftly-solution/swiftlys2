@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CHandshakeAnimTagBaseImpl : CAnimTagBaseImpl, CHandshakeAnimTagBase {
+internal partial class CHandshakeAnimTagBaseImpl : CAnimTagBaseImpl, CHandshakeAnimTagBase
+{
+    public CHandshakeAnimTagBaseImpl(nint handle) : base(handle) { }
 
-  public CHandshakeAnimTagBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IsDisableTagOffset;
 
-  private static nint? _IsDisableTagOffset;
-
-  public ref bool IsDisableTag {
-    get {
-      if (_IsDisableTagOffset == null) {
-        _IsDisableTagOffset = Schema.GetOffset(0x73566C0F04E21131);
-      }
-      return ref _Handle.AsRef<bool>(_IsDisableTagOffset!.Value);
+    public ref bool IsDisableTag {
+        get {
+            _IsDisableTagOffset = _IsDisableTagOffset ?? Schema.GetOffset(0x73566C0F04E21131);
+            return ref _Handle.AsRef<bool>(_IsDisableTagOffset!.Value);
+        }
     }
-  }
 
 
 }

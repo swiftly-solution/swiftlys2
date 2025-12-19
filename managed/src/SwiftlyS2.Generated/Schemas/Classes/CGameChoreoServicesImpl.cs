@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGameChoreoServicesImpl : IChoreoServicesImpl, CGameChoreoServices {
+internal partial class CGameChoreoServicesImpl : IChoreoServicesImpl, CGameChoreoServices
+{
+    public CGameChoreoServicesImpl(nint handle) : base(handle) { }
 
-  public CGameChoreoServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OwnerOffset;
 
-  private static nint? _OwnerOffset;
-
-  public ref CHandle<CBaseAnimGraph> Owner {
-    get {
-      if (_OwnerOffset == null) {
-        _OwnerOffset = Schema.GetOffset(0xF5FFE2B2F6D89572);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_OwnerOffset!.Value);
+    public ref CHandle<CBaseAnimGraph> Owner {
+        get {
+            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0xF5FFE2B2F6D89572);
+            return ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_OwnerOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScriptedSequenceOffset;
+    private static nint? _ScriptedSequenceOffset;
 
-  public ref CHandle<CScriptedSequence> ScriptedSequence {
-    get {
-      if (_ScriptedSequenceOffset == null) {
-        _ScriptedSequenceOffset = Schema.GetOffset(0xF5FFE2B2E43BF85C);
-      }
-      return ref _Handle.AsRef<CHandle<CScriptedSequence>>(_ScriptedSequenceOffset!.Value);
+    public ref CHandle<CScriptedSequence> ScriptedSequence {
+        get {
+            _ScriptedSequenceOffset = _ScriptedSequenceOffset ?? Schema.GetOffset(0xF5FFE2B2E43BF85C);
+            return ref _Handle.AsRef<CHandle<CScriptedSequence>>(_ScriptedSequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScriptStateOffset;
+    private static nint? _ScriptStateOffset;
 
-  public ref IChoreoServices__ScriptState_t ScriptState {
-    get {
-      if (_ScriptStateOffset == null) {
-        _ScriptStateOffset = Schema.GetOffset(0xF5FFE2B2E4CD331F);
-      }
-      return ref _Handle.AsRef<IChoreoServices__ScriptState_t>(_ScriptStateOffset!.Value);
+    public ref IChoreoServices__ScriptState_t ScriptState {
+        get {
+            _ScriptStateOffset = _ScriptStateOffset ?? Schema.GetOffset(0xF5FFE2B2E4CD331F);
+            return ref _Handle.AsRef<IChoreoServices__ScriptState_t>(_ScriptStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChoreoStateOffset;
+    private static nint? _ChoreoStateOffset;
 
-  public ref IChoreoServices__ChoreoState_t ChoreoState {
-    get {
-      if (_ChoreoStateOffset == null) {
-        _ChoreoStateOffset = Schema.GetOffset(0xF5FFE2B251730DD8);
-      }
-      return ref _Handle.AsRef<IChoreoServices__ChoreoState_t>(_ChoreoStateOffset!.Value);
+    public ref IChoreoServices__ChoreoState_t ChoreoState {
+        get {
+            _ChoreoStateOffset = _ChoreoStateOffset ?? Schema.GetOffset(0xF5FFE2B251730DD8);
+            return ref _Handle.AsRef<IChoreoServices__ChoreoState_t>(_ChoreoStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeStartedStateOffset;
+    private static nint? _TimeStartedStateOffset;
 
-  public GameTime_t TimeStartedState {
-    get {
-      if (_TimeStartedStateOffset == null) {
-        _TimeStartedStateOffset = Schema.GetOffset(0xF5FFE2B20BD38900);
-      }
-      return new GameTime_tImpl(_Handle + _TimeStartedStateOffset!.Value);
+    public GameTime_t TimeStartedState {
+        get {
+            _TimeStartedStateOffset = _TimeStartedStateOffset ?? Schema.GetOffset(0xF5FFE2B20BD38900);
+            return new GameTime_tImpl(_Handle + _TimeStartedStateOffset!.Value);
+        }
     }
-  }
 
 
 }

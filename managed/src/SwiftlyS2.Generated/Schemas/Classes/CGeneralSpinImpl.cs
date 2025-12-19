@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGeneralSpinImpl : CParticleFunctionOperatorImpl, CGeneralSpin {
+internal partial class CGeneralSpinImpl : CParticleFunctionOperatorImpl, CGeneralSpin
+{
+    public CGeneralSpinImpl(nint handle) : base(handle) { }
 
-  public CGeneralSpinImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SpinRateDegreesOffset;
 
-  private static nint? _SpinRateDegreesOffset;
-
-  public ref int SpinRateDegrees {
-    get {
-      if (_SpinRateDegreesOffset == null) {
-        _SpinRateDegreesOffset = Schema.GetOffset(0xFC0422E2BF9AC820);
-      }
-      return ref _Handle.AsRef<int>(_SpinRateDegreesOffset!.Value);
+    public ref int SpinRateDegrees {
+        get {
+            _SpinRateDegreesOffset = _SpinRateDegreesOffset ?? Schema.GetOffset(0xFC0422E2BF9AC820);
+            return ref _Handle.AsRef<int>(_SpinRateDegreesOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpinRateMinDegreesOffset;
+    private static nint? _SpinRateMinDegreesOffset;
 
-  public ref int SpinRateMinDegrees {
-    get {
-      if (_SpinRateMinDegreesOffset == null) {
-        _SpinRateMinDegreesOffset = Schema.GetOffset(0xFC0422E2F3639852);
-      }
-      return ref _Handle.AsRef<int>(_SpinRateMinDegreesOffset!.Value);
+    public ref int SpinRateMinDegrees {
+        get {
+            _SpinRateMinDegreesOffset = _SpinRateMinDegreesOffset ?? Schema.GetOffset(0xFC0422E2F3639852);
+            return ref _Handle.AsRef<int>(_SpinRateMinDegreesOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpinRateStopTimeOffset;
+    private static nint? _SpinRateStopTimeOffset;
 
-  public ref float SpinRateStopTime {
-    get {
-      if (_SpinRateStopTimeOffset == null) {
-        _SpinRateStopTimeOffset = Schema.GetOffset(0xFC0422E28365AFDE);
-      }
-      return ref _Handle.AsRef<float>(_SpinRateStopTimeOffset!.Value);
+    public ref float SpinRateStopTime {
+        get {
+            _SpinRateStopTimeOffset = _SpinRateStopTimeOffset ?? Schema.GetOffset(0xFC0422E28365AFDE);
+            return ref _Handle.AsRef<float>(_SpinRateStopTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

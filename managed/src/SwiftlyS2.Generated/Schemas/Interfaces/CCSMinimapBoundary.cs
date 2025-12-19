@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSMinimapBoundary : CBaseEntity, ISchemaClass<CCSMinimapBoundary> {
-
-  static CCSMinimapBoundary ISchemaClass<CCSMinimapBoundary>.From(nint handle) => new CCSMinimapBoundaryImpl(handle);
-  static int ISchemaClass<CCSMinimapBoundary>.Size => 1264;
-  static string? ISchemaClass<CCSMinimapBoundary>.ClassName => "cs_minimap_boundary";
+public partial interface CCSMinimapBoundary : CBaseEntity, ISchemaClass<CCSMinimapBoundary>
+{
+    static CCSMinimapBoundary ISchemaClass<CCSMinimapBoundary>.From(nint handle) => new CCSMinimapBoundaryImpl(handle);
+    static int ISchemaClass<CCSMinimapBoundary>.Size => 1264;
+    static string? ISchemaClass<CCSMinimapBoundary>.ClassName => "cs_minimap_boundary";
 
 
 

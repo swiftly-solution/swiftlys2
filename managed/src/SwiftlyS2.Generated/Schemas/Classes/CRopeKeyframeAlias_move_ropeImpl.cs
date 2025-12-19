@@ -6,16 +6,15 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRopeKeyframeAlias_move_ropeImpl : CRopeKeyframeImpl, CRopeKeyframeAlias_move_rope {
-
-  public CRopeKeyframeAlias_move_ropeImpl(nint handle) : base(handle) {
-  }
+internal partial class CRopeKeyframeAlias_move_ropeImpl : CRopeKeyframeImpl, CRopeKeyframeAlias_move_rope
+{
+    public CRopeKeyframeAlias_move_ropeImpl(nint handle) : base(handle) { }
 
 
 

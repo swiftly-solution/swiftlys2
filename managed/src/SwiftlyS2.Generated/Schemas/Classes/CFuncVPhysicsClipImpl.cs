@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncVPhysicsClipImpl : CBaseModelEntityImpl, CFuncVPhysicsClip {
+internal partial class CFuncVPhysicsClipImpl : CBaseModelEntityImpl, CFuncVPhysicsClip
+{
+    public CFuncVPhysicsClipImpl(nint handle) : base(handle) { }
 
-  public CFuncVPhysicsClipImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DisabledOffset;
 
-  private static nint? _DisabledOffset;
-
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0xE695DCD93A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xE695DCD93A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFollowTargetUpdateNodeImpl : CUnaryUpdateNodeImpl, CFollowTargetUpdateNode {
+internal partial class CFollowTargetUpdateNodeImpl : CUnaryUpdateNodeImpl, CFollowTargetUpdateNode
+{
+    public CFollowTargetUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CFollowTargetUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OpFixedDataOffset;
 
-  private static nint? _OpFixedDataOffset;
-
-  public FollowTargetOpFixedSettings_t OpFixedData {
-    get {
-      if (_OpFixedDataOffset == null) {
-        _OpFixedDataOffset = Schema.GetOffset(0x2A45E9CB6960AF8C);
-      }
-      return new FollowTargetOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+    public FollowTargetOpFixedSettings_t OpFixedData {
+        get {
+            _OpFixedDataOffset = _OpFixedDataOffset ?? Schema.GetOffset(0x2A45E9CB6960AF8C);
+            return new FollowTargetOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterPositionOffset;
+    private static nint? _ParameterPositionOffset;
 
-  public CAnimParamHandle ParameterPosition {
-    get {
-      if (_ParameterPositionOffset == null) {
-        _ParameterPositionOffset = Schema.GetOffset(0x2A45E9CBDA71CD41);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterPositionOffset!.Value);
+    public CAnimParamHandle ParameterPosition {
+        get {
+            _ParameterPositionOffset = _ParameterPositionOffset ?? Schema.GetOffset(0x2A45E9CBDA71CD41);
+            return new CAnimParamHandleImpl(_Handle + _ParameterPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterOrientationOffset;
+    private static nint? _ParameterOrientationOffset;
 
-  public CAnimParamHandle ParameterOrientation {
-    get {
-      if (_ParameterOrientationOffset == null) {
-        _ParameterOrientationOffset = Schema.GetOffset(0x2A45E9CB1320E9C8);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterOrientationOffset!.Value);
+    public CAnimParamHandle ParameterOrientation {
+        get {
+            _ParameterOrientationOffset = _ParameterOrientationOffset ?? Schema.GetOffset(0x2A45E9CB1320E9C8);
+            return new CAnimParamHandleImpl(_Handle + _ParameterOrientationOffset!.Value);
+        }
     }
-  }
 
 
 }

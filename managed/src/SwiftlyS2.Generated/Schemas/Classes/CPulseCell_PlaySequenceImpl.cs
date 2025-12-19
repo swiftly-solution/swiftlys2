@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_PlaySequenceImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_PlaySequence {
+internal partial class CPulseCell_PlaySequenceImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_PlaySequence
+{
+    public CPulseCell_PlaySequenceImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_PlaySequenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SequenceNameOffset;
 
-  private static nint? _SequenceNameOffset;
+    public string SequenceName {
+        get {
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xE313765BA270F66B);
+            return Schema.GetString(_Handle.Read<nint>(_SequenceNameOffset!.Value));
+        }
+        set {
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xE313765BA270F66B);
+            Schema.SetString(_Handle, _SequenceNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _PulseAnimEventsOffset;
 
-  public string SequenceName {
-    get {
-      if (_SequenceNameOffset == null) {
-        _SequenceNameOffset = Schema.GetOffset(0xE313765BA270F66B);
-      }
-      var ptr = _Handle.Read<nint>(_SequenceNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public PulseNodeDynamicOutflows_t PulseAnimEvents {
+        get {
+            _PulseAnimEventsOffset = _PulseAnimEventsOffset ?? Schema.GetOffset(0xE313765B10F0A082);
+            return new PulseNodeDynamicOutflows_tImpl(_Handle + _PulseAnimEventsOffset!.Value);
+        }
     }
-    set {
-      if (_SequenceNameOffset == null) {
-        _SequenceNameOffset = Schema.GetOffset(0xE313765BA270F66B);
-      }
-      Schema.SetString(_Handle, _SequenceNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _PulseAnimEventsOffset;
+    private static nint? _OnFinishedOffset;
 
-  public PulseNodeDynamicOutflows_t PulseAnimEvents {
-    get {
-      if (_PulseAnimEventsOffset == null) {
-        _PulseAnimEventsOffset = Schema.GetOffset(0xE313765B10F0A082);
-      }
-      return new PulseNodeDynamicOutflows_tImpl(_Handle + _PulseAnimEventsOffset!.Value);
+    public CPulse_ResumePoint OnFinished {
+        get {
+            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0xE313765B8D903E5E);
+            return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnFinishedOffset;
+    private static nint? _OnCanceledOffset;
 
-  public CPulse_ResumePoint OnFinished {
-    get {
-      if (_OnFinishedOffset == null) {
-        _OnFinishedOffset = Schema.GetOffset(0xE313765B8D903E5E);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+    public CPulse_ResumePoint OnCanceled {
+        get {
+            _OnCanceledOffset = _OnCanceledOffset ?? Schema.GetOffset(0xE313765BF02162DB);
+            return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnCanceledOffset;
-
-  public CPulse_ResumePoint OnCanceled {
-    get {
-      if (_OnCanceledOffset == null) {
-        _OnCanceledOffset = Schema.GetOffset(0xE313765BF02162DB);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
-    }
-  }
 
 
 }

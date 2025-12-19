@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RsDepthStencilStateDesc_tImpl : SchemaClass, RsDepthStencilStateDesc_t {
+internal partial class RsDepthStencilStateDesc_tImpl : SchemaClass, RsDepthStencilStateDesc_t
+{
+    public RsDepthStencilStateDesc_tImpl(nint handle) : base(handle) { }
 
-  public RsDepthStencilStateDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DepthTestEnableOffset;
 
-  private static nint? _DepthTestEnableOffset;
-
-  public SchemaUntypedField DepthTestEnable {
-    get {
-      if (_DepthTestEnableOffset == null) {
-        _DepthTestEnableOffset = Schema.GetOffset(0x9026AFA806421799);
-      }
-      return new SchemaUntypedField(_Handle + _DepthTestEnableOffset!.Value);
+    public SchemaUntypedField DepthTestEnable {
+        get {
+            _DepthTestEnableOffset = _DepthTestEnableOffset ?? Schema.GetOffset(0x9026AFA806421799);
+            return new SchemaUntypedField(_Handle + _DepthTestEnableOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthWriteEnableOffset;
+    private static nint? _DepthWriteEnableOffset;
 
-  public SchemaUntypedField DepthWriteEnable {
-    get {
-      if (_DepthWriteEnableOffset == null) {
-        _DepthWriteEnableOffset = Schema.GetOffset(0x9026AFA88D8085FE);
-      }
-      return new SchemaUntypedField(_Handle + _DepthWriteEnableOffset!.Value);
+    public SchemaUntypedField DepthWriteEnable {
+        get {
+            _DepthWriteEnableOffset = _DepthWriteEnableOffset ?? Schema.GetOffset(0x9026AFA88D8085FE);
+            return new SchemaUntypedField(_Handle + _DepthWriteEnableOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthFuncOffset;
+    private static nint? _DepthFuncOffset;
 
-  public ref RsComparison_t DepthFunc {
-    get {
-      if (_DepthFuncOffset == null) {
-        _DepthFuncOffset = Schema.GetOffset(0x9026AFA8B47FC61C);
-      }
-      return ref _Handle.AsRef<RsComparison_t>(_DepthFuncOffset!.Value);
+    public ref RsComparison_t DepthFunc {
+        get {
+            _DepthFuncOffset = _DepthFuncOffset ?? Schema.GetOffset(0x9026AFA8B47FC61C);
+            return ref _Handle.AsRef<RsComparison_t>(_DepthFuncOffset!.Value);
+        }
     }
-  }
-  private static nint? _StencilStateOffset;
+    private static nint? _StencilStateOffset;
 
-  public RsStencilStateDesc_t StencilState {
-    get {
-      if (_StencilStateOffset == null) {
-        _StencilStateOffset = Schema.GetOffset(0x9026AFA828EA33C4);
-      }
-      return new RsStencilStateDesc_tImpl(_Handle + _StencilStateOffset!.Value);
+    public RsStencilStateDesc_t StencilState {
+        get {
+            _StencilStateOffset = _StencilStateOffset ?? Schema.GetOffset(0x9026AFA828EA33C4);
+            return new RsStencilStateDesc_tImpl(_Handle + _StencilStateOffset!.Value);
+        }
     }
-  }
 
 
 }

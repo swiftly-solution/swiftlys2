@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum Class_T : uint {
-
+public enum Class_T : uint
+{
  CLASS_NONE = 0,
 
  CLASS_PLAYER = 1,

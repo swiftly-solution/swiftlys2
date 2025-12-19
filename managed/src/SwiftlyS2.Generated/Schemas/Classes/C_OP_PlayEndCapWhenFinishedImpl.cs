@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_PlayEndCapWhenFinishedImpl : CParticleFunctionPreEmissionImpl, C_OP_PlayEndCapWhenFinished {
+internal partial class C_OP_PlayEndCapWhenFinishedImpl : CParticleFunctionPreEmissionImpl, C_OP_PlayEndCapWhenFinished
+{
+    public C_OP_PlayEndCapWhenFinishedImpl(nint handle) : base(handle) { }
 
-  public C_OP_PlayEndCapWhenFinishedImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FireOnEmissionEndOffset;
 
-  private static nint? _FireOnEmissionEndOffset;
-
-  public ref bool FireOnEmissionEnd {
-    get {
-      if (_FireOnEmissionEndOffset == null) {
-        _FireOnEmissionEndOffset = Schema.GetOffset(0xFC89982E01C357B0);
-      }
-      return ref _Handle.AsRef<bool>(_FireOnEmissionEndOffset!.Value);
+    public ref bool FireOnEmissionEnd {
+        get {
+            _FireOnEmissionEndOffset = _FireOnEmissionEndOffset ?? Schema.GetOffset(0xFC89982E01C357B0);
+            return ref _Handle.AsRef<bool>(_FireOnEmissionEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _IncludeChildrenOffset;
+    private static nint? _IncludeChildrenOffset;
 
-  public ref bool IncludeChildren {
-    get {
-      if (_IncludeChildrenOffset == null) {
-        _IncludeChildrenOffset = Schema.GetOffset(0xFC89982EA7706C80);
-      }
-      return ref _Handle.AsRef<bool>(_IncludeChildrenOffset!.Value);
+    public ref bool IncludeChildren {
+        get {
+            _IncludeChildrenOffset = _IncludeChildrenOffset ?? Schema.GetOffset(0xFC89982EA7706C80);
+            return ref _Handle.AsRef<bool>(_IncludeChildrenOffset!.Value);
+        }
     }
-  }
 
 
 }

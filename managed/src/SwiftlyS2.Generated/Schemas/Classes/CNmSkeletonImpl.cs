@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmSkeletonImpl : SchemaClass, CNmSkeleton {
+internal partial class CNmSkeletonImpl : SchemaClass, CNmSkeleton
+{
+    public CNmSkeletonImpl(nint handle) : base(handle) { }
 
-  public CNmSkeletonImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IDOffset;
 
-  private static nint? _IDOffset;
-
-  public ref CGlobalSymbol ID {
-    get {
-      if (_IDOffset == null) {
-        _IDOffset = Schema.GetOffset(0xC923251495066900);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+    public ref CGlobalSymbol ID {
+        get {
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0xC923251495066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneIDsOffset;
+    private static nint? _BoneIDsOffset;
 
-  public ref CUtlLeanVector<CGlobalSymbol, int> BoneIDs {
-    get {
-      if (_BoneIDsOffset == null) {
-        _BoneIDsOffset = Schema.GetOffset(0xC92325140909C443);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<CGlobalSymbol, int>>(_BoneIDsOffset!.Value);
+    public ref CUtlLeanVector<CGlobalSymbol, int> BoneIDs {
+        get {
+            _BoneIDsOffset = _BoneIDsOffset ?? Schema.GetOffset(0xC92325140909C443);
+            return ref _Handle.AsRef<CUtlLeanVector<CGlobalSymbol, int>>(_BoneIDsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentIndicesOffset;
+    private static nint? _ParentIndicesOffset;
 
-  public ref CUtlVector<int> ParentIndices {
-    get {
-      if (_ParentIndicesOffset == null) {
-        _ParentIndicesOffset = Schema.GetOffset(0xC923251480CFB2AA);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_ParentIndicesOffset!.Value);
+    public ref CUtlVector<int> ParentIndices {
+        get {
+            _ParentIndicesOffset = _ParentIndicesOffset ?? Schema.GetOffset(0xC923251480CFB2AA);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ParentIndicesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentSpaceReferencePoseOffset;
+    private static nint? _ParentSpaceReferencePoseOffset;
 
-  public ref CUtlVector<CTransform> ParentSpaceReferencePose {
-    get {
-      if (_ParentSpaceReferencePoseOffset == null) {
-        _ParentSpaceReferencePoseOffset = Schema.GetOffset(0xC92325145BF1EDE7);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_ParentSpaceReferencePoseOffset!.Value);
+    public ref CUtlVector<CTransform> ParentSpaceReferencePose {
+        get {
+            _ParentSpaceReferencePoseOffset = _ParentSpaceReferencePoseOffset ?? Schema.GetOffset(0xC92325145BF1EDE7);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_ParentSpaceReferencePoseOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModelSpaceReferencePoseOffset;
+    private static nint? _ModelSpaceReferencePoseOffset;
 
-  public ref CUtlVector<CTransform> ModelSpaceReferencePose {
-    get {
-      if (_ModelSpaceReferencePoseOffset == null) {
-        _ModelSpaceReferencePoseOffset = Schema.GetOffset(0xC92325147B025328);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_ModelSpaceReferencePoseOffset!.Value);
+    public ref CUtlVector<CTransform> ModelSpaceReferencePose {
+        get {
+            _ModelSpaceReferencePoseOffset = _ModelSpaceReferencePoseOffset ?? Schema.GetOffset(0xC92325147B025328);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_ModelSpaceReferencePoseOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumBonesToSampleAtLowLODOffset;
+    private static nint? _NumBonesToSampleAtLowLODOffset;
 
-  public ref int NumBonesToSampleAtLowLOD {
-    get {
-      if (_NumBonesToSampleAtLowLODOffset == null) {
-        _NumBonesToSampleAtLowLODOffset = Schema.GetOffset(0xC9232514813C419D);
-      }
-      return ref _Handle.AsRef<int>(_NumBonesToSampleAtLowLODOffset!.Value);
+    public ref int NumBonesToSampleAtLowLOD {
+        get {
+            _NumBonesToSampleAtLowLODOffset = _NumBonesToSampleAtLowLODOffset ?? Schema.GetOffset(0xC9232514813C419D);
+            return ref _Handle.AsRef<int>(_NumBonesToSampleAtLowLODOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaskDefinitionsOffset;
+    private static nint? _MaskDefinitionsOffset;
 
-  public ref CUtlLeanVector<NmBoneMaskSetDefinition_t, int> MaskDefinitions {
-    get {
-      if (_MaskDefinitionsOffset == null) {
-        _MaskDefinitionsOffset = Schema.GetOffset(0xC92325147196574D);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<NmBoneMaskSetDefinition_t, int>>(_MaskDefinitionsOffset!.Value);
+    public ref CUtlLeanVector<NmBoneMaskSetDefinition_t, int> MaskDefinitions {
+        get {
+            _MaskDefinitionsOffset = _MaskDefinitionsOffset ?? Schema.GetOffset(0xC92325147196574D);
+            return ref _Handle.AsRef<CUtlLeanVector<NmBoneMaskSetDefinition_t, int>>(_MaskDefinitionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SecondarySkeletonsOffset;
+    private static nint? _SecondarySkeletonsOffset;
 
-  public ref CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int> SecondarySkeletons {
-    get {
-      if (_SecondarySkeletonsOffset == null) {
-        _SecondarySkeletonsOffset = Schema.GetOffset(0xC9232514782F396B);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int>>(_SecondarySkeletonsOffset!.Value);
+    public ref CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int> SecondarySkeletons {
+        get {
+            _SecondarySkeletonsOffset = _SecondarySkeletonsOffset ?? Schema.GetOffset(0xC9232514782F396B);
+            return ref _Handle.AsRef<CUtlLeanVector<CNmSkeleton__SecondarySkeleton_t, int>>(_SecondarySkeletonsOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsPropSkeletonOffset;
+    private static nint? _IsPropSkeletonOffset;
 
-  public ref bool IsPropSkeleton {
-    get {
-      if (_IsPropSkeletonOffset == null) {
-        _IsPropSkeletonOffset = Schema.GetOffset(0xC9232514FD7D351F);
-      }
-      return ref _Handle.AsRef<bool>(_IsPropSkeletonOffset!.Value);
+    public ref bool IsPropSkeleton {
+        get {
+            _IsPropSkeletonOffset = _IsPropSkeletonOffset ?? Schema.GetOffset(0xC9232514FD7D351F);
+            return ref _Handle.AsRef<bool>(_IsPropSkeletonOffset!.Value);
+        }
     }
-  }
 
 
 }

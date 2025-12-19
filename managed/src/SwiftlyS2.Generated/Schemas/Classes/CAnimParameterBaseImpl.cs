@@ -6,108 +6,84 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimParameterBaseImpl : SchemaClass, CAnimParameterBase {
+internal partial class CAnimParameterBaseImpl : SchemaClass, CAnimParameterBase
+{
+    public CAnimParameterBaseImpl(nint handle) : base(handle) { }
 
-  public CAnimParameterBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public ref CGlobalSymbol Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9E097C8F4D8F5786);
+            return ref _Handle.AsRef<CGlobalSymbol>(_NameOffset!.Value);
+        }
+    }
+    private static nint? _CommentOffset;
 
-  public ref CGlobalSymbol Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x9E097C8F4D8F5786);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_NameOffset!.Value);
-    }
-  }
-  private static nint? _CommentOffset;
+    public string Comment {
+        get {
+            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x9E097C8F88A0B4DF);
+            return Schema.GetString(_Handle.Read<nint>(_CommentOffset!.Value));
+        }
+        set {
+            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x9E097C8F88A0B4DF);
+            Schema.SetString(_Handle, _CommentOffset!.Value, value);
+        }
+    } 
+    private static nint? _GroupOffset;
 
-  public string Comment {
-    get {
-      if (_CommentOffset == null) {
-        _CommentOffset = Schema.GetOffset(0x9E097C8F88A0B4DF);
-      }
-      var ptr = _Handle.Read<nint>(_CommentOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_CommentOffset == null) {
-        _CommentOffset = Schema.GetOffset(0x9E097C8F88A0B4DF);
-      }
-      Schema.SetString(_Handle, _CommentOffset!.Value, value);
-    }
-  } 
-  private static nint? _GroupOffset;
+    public string Group {
+        get {
+            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0x9E097C8F9FC645AC);
+            return Schema.GetString(_Handle.Read<nint>(_GroupOffset!.Value));
+        }
+        set {
+            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0x9E097C8F9FC645AC);
+            Schema.SetString(_Handle, _GroupOffset!.Value, value);
+        }
+    } 
+    private static nint? _IdOffset;
 
-  public string Group {
-    get {
-      if (_GroupOffset == null) {
-        _GroupOffset = Schema.GetOffset(0x9E097C8F9FC645AC);
-      }
-      var ptr = _Handle.Read<nint>(_GroupOffset!.Value);
-      return Schema.GetString(ptr);
+    public AnimParamID Id {
+        get {
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0x9E097C8FB4B6E980);
+            return new AnimParamIDImpl(_Handle + _IdOffset!.Value);
+        }
     }
-    set {
-      if (_GroupOffset == null) {
-        _GroupOffset = Schema.GetOffset(0x9E097C8F9FC645AC);
-      }
-      Schema.SetString(_Handle, _GroupOffset!.Value, value);
-    }
-  } 
-  private static nint? _IdOffset;
+    private static nint? _ComponentNameOffset;
 
-  public AnimParamID Id {
-    get {
-      if (_IdOffset == null) {
-        _IdOffset = Schema.GetOffset(0x9E097C8FB4B6E980);
-      }
-      return new AnimParamIDImpl(_Handle + _IdOffset!.Value);
-    }
-  }
-  private static nint? _ComponentNameOffset;
+    public string ComponentName {
+        get {
+            _ComponentNameOffset = _ComponentNameOffset ?? Schema.GetOffset(0x9E097C8F7CAC3EA3);
+            return Schema.GetString(_Handle.Read<nint>(_ComponentNameOffset!.Value));
+        }
+        set {
+            _ComponentNameOffset = _ComponentNameOffset ?? Schema.GetOffset(0x9E097C8F7CAC3EA3);
+            Schema.SetString(_Handle, _ComponentNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NetworkingRequestedOffset;
 
-  public string ComponentName {
-    get {
-      if (_ComponentNameOffset == null) {
-        _ComponentNameOffset = Schema.GetOffset(0x9E097C8F7CAC3EA3);
-      }
-      var ptr = _Handle.Read<nint>(_ComponentNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref bool NetworkingRequested {
+        get {
+            _NetworkingRequestedOffset = _NetworkingRequestedOffset ?? Schema.GetOffset(0x9E097C8FE57548D5);
+            return ref _Handle.AsRef<bool>(_NetworkingRequestedOffset!.Value);
+        }
     }
-    set {
-      if (_ComponentNameOffset == null) {
-        _ComponentNameOffset = Schema.GetOffset(0x9E097C8F7CAC3EA3);
-      }
-      Schema.SetString(_Handle, _ComponentNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NetworkingRequestedOffset;
+    private static nint? _IsReferencedOffset;
 
-  public ref bool NetworkingRequested {
-    get {
-      if (_NetworkingRequestedOffset == null) {
-        _NetworkingRequestedOffset = Schema.GetOffset(0x9E097C8FE57548D5);
-      }
-      return ref _Handle.AsRef<bool>(_NetworkingRequestedOffset!.Value);
+    public ref bool IsReferenced {
+        get {
+            _IsReferencedOffset = _IsReferencedOffset ?? Schema.GetOffset(0x9E097C8FCEABFB2A);
+            return ref _Handle.AsRef<bool>(_IsReferencedOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsReferencedOffset;
-
-  public ref bool IsReferenced {
-    get {
-      if (_IsReferencedOffset == null) {
-        _IsReferencedOffset = Schema.GetOffset(0x9E097C8FCEABFB2A);
-      }
-      return ref _Handle.AsRef<bool>(_IsReferencedOffset!.Value);
-    }
-  }
 
 
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CIronSightControllerImpl : SchemaClass, CIronSightController {
+internal partial class CIronSightControllerImpl : SchemaClass, CIronSightController
+{
+    public CIronSightControllerImpl(nint handle) : base(handle) { }
 
-  public CIronSightControllerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IronSightAvailableOffset;
 
-  private static nint? _IronSightAvailableOffset;
-
-  public ref bool IronSightAvailable {
-    get {
-      if (_IronSightAvailableOffset == null) {
-        _IronSightAvailableOffset = Schema.GetOffset(0x9E147D3131BCE9D3);
-      }
-      return ref _Handle.AsRef<bool>(_IronSightAvailableOffset!.Value);
+    public ref bool IronSightAvailable {
+        get {
+            _IronSightAvailableOffset = _IronSightAvailableOffset ?? Schema.GetOffset(0x9E147D3131BCE9D3);
+            return ref _Handle.AsRef<bool>(_IronSightAvailableOffset!.Value);
+        }
     }
-  }
-  private static nint? _IronSightAmountOffset;
+    private static nint? _IronSightAmountOffset;
 
-  public ref float IronSightAmount {
-    get {
-      if (_IronSightAmountOffset == null) {
-        _IronSightAmountOffset = Schema.GetOffset(0x9E147D31D64422F6);
-      }
-      return ref _Handle.AsRef<float>(_IronSightAmountOffset!.Value);
+    public ref float IronSightAmount {
+        get {
+            _IronSightAmountOffset = _IronSightAmountOffset ?? Schema.GetOffset(0x9E147D31D64422F6);
+            return ref _Handle.AsRef<float>(_IronSightAmountOffset!.Value);
+        }
     }
-  }
-  private static nint? _IronSightAmountGainedOffset;
+    private static nint? _IronSightAmountGainedOffset;
 
-  public ref float IronSightAmountGained {
-    get {
-      if (_IronSightAmountGainedOffset == null) {
-        _IronSightAmountGainedOffset = Schema.GetOffset(0x9E147D316631E9A0);
-      }
-      return ref _Handle.AsRef<float>(_IronSightAmountGainedOffset!.Value);
+    public ref float IronSightAmountGained {
+        get {
+            _IronSightAmountGainedOffset = _IronSightAmountGainedOffset ?? Schema.GetOffset(0x9E147D316631E9A0);
+            return ref _Handle.AsRef<float>(_IronSightAmountGainedOffset!.Value);
+        }
     }
-  }
-  private static nint? _IronSightAmountBiasedOffset;
+    private static nint? _IronSightAmountBiasedOffset;
 
-  public ref float IronSightAmountBiased {
-    get {
-      if (_IronSightAmountBiasedOffset == null) {
-        _IronSightAmountBiasedOffset = Schema.GetOffset(0x9E147D31526716FA);
-      }
-      return ref _Handle.AsRef<float>(_IronSightAmountBiasedOffset!.Value);
+    public ref float IronSightAmountBiased {
+        get {
+            _IronSightAmountBiasedOffset = _IronSightAmountBiasedOffset ?? Schema.GetOffset(0x9E147D31526716FA);
+            return ref _Handle.AsRef<float>(_IronSightAmountBiasedOffset!.Value);
+        }
     }
-  }
 
 
 }

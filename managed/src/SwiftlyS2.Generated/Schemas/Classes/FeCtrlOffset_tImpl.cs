@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeCtrlOffset_tImpl : SchemaClass, FeCtrlOffset_t {
+internal partial class FeCtrlOffset_tImpl : SchemaClass, FeCtrlOffset_t
+{
+    public FeCtrlOffset_tImpl(nint handle) : base(handle) { }
 
-  public FeCtrlOffset_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OffsetOffset;
 
-  private static nint? _OffsetOffset;
-
-  public ref Vector Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0x83912B89B2913856);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    public ref Vector Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x83912B89B2913856);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _CtrlParentOffset;
+    private static nint? _CtrlParentOffset;
 
-  public ref ushort CtrlParent {
-    get {
-      if (_CtrlParentOffset == null) {
-        _CtrlParentOffset = Schema.GetOffset(0x83912B8955049230);
-      }
-      return ref _Handle.AsRef<ushort>(_CtrlParentOffset!.Value);
+    public ref ushort CtrlParent {
+        get {
+            _CtrlParentOffset = _CtrlParentOffset ?? Schema.GetOffset(0x83912B8955049230);
+            return ref _Handle.AsRef<ushort>(_CtrlParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _CtrlChildOffset;
+    private static nint? _CtrlChildOffset;
 
-  public ref ushort CtrlChild {
-    get {
-      if (_CtrlChildOffset == null) {
-        _CtrlChildOffset = Schema.GetOffset(0x83912B895BE48066);
-      }
-      return ref _Handle.AsRef<ushort>(_CtrlChildOffset!.Value);
+    public ref ushort CtrlChild {
+        get {
+            _CtrlChildOffset = _CtrlChildOffset ?? Schema.GetOffset(0x83912B895BE48066);
+            return ref _Handle.AsRef<ushort>(_CtrlChildOffset!.Value);
+        }
     }
-  }
 
 
 }

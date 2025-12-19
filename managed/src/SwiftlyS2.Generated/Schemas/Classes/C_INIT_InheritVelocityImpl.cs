@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_InheritVelocityImpl : CParticleFunctionInitializerImpl, C_INIT_InheritVelocity {
+internal partial class C_INIT_InheritVelocityImpl : CParticleFunctionInitializerImpl, C_INIT_InheritVelocity
+{
+    public C_INIT_InheritVelocityImpl(nint handle) : base(handle) { }
 
-  public C_INIT_InheritVelocityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x227ECF463F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x227ECF463F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _VelocityScaleOffset;
+    private static nint? _VelocityScaleOffset;
 
-  public ref float VelocityScale {
-    get {
-      if (_VelocityScaleOffset == null) {
-        _VelocityScaleOffset = Schema.GetOffset(0x227ECF46E161DDAA);
-      }
-      return ref _Handle.AsRef<float>(_VelocityScaleOffset!.Value);
+    public ref float VelocityScale {
+        get {
+            _VelocityScaleOffset = _VelocityScaleOffset ?? Schema.GetOffset(0x227ECF46E161DDAA);
+            return ref _Handle.AsRef<float>(_VelocityScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

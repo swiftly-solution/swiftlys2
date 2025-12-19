@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFlashbangProjectileImpl : CBaseCSGrenadeProjectileImpl, CFlashbangProjectile {
+internal partial class CFlashbangProjectileImpl : CBaseCSGrenadeProjectileImpl, CFlashbangProjectile
+{
+    public CFlashbangProjectileImpl(nint handle) : base(handle) { }
 
-  public CFlashbangProjectileImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TimeToDetonateOffset;
 
-  private static nint? _TimeToDetonateOffset;
-
-  public ref float TimeToDetonate {
-    get {
-      if (_TimeToDetonateOffset == null) {
-        _TimeToDetonateOffset = Schema.GetOffset(0x9F4F2EA190E2E597);
-      }
-      return ref _Handle.AsRef<float>(_TimeToDetonateOffset!.Value);
+    public ref float TimeToDetonate {
+        get {
+            _TimeToDetonateOffset = _TimeToDetonateOffset ?? Schema.GetOffset(0x9F4F2EA190E2E597);
+            return ref _Handle.AsRef<float>(_TimeToDetonateOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumOpponentsHitOffset;
+    private static nint? _NumOpponentsHitOffset;
 
-  public ref byte NumOpponentsHit {
-    get {
-      if (_NumOpponentsHitOffset == null) {
-        _NumOpponentsHitOffset = Schema.GetOffset(0x9F4F2EA1CA7913A4);
-      }
-      return ref _Handle.AsRef<byte>(_NumOpponentsHitOffset!.Value);
+    public ref byte NumOpponentsHit {
+        get {
+            _NumOpponentsHitOffset = _NumOpponentsHitOffset ?? Schema.GetOffset(0x9F4F2EA1CA7913A4);
+            return ref _Handle.AsRef<byte>(_NumOpponentsHitOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumTeammatesHitOffset;
+    private static nint? _NumTeammatesHitOffset;
 
-  public ref byte NumTeammatesHit {
-    get {
-      if (_NumTeammatesHitOffset == null) {
-        _NumTeammatesHitOffset = Schema.GetOffset(0x9F4F2EA1BC5B8F41);
-      }
-      return ref _Handle.AsRef<byte>(_NumTeammatesHitOffset!.Value);
+    public ref byte NumTeammatesHit {
+        get {
+            _NumTeammatesHitOffset = _NumTeammatesHitOffset ?? Schema.GetOffset(0x9F4F2EA1BC5B8F41);
+            return ref _Handle.AsRef<byte>(_NumTeammatesHitOffset!.Value);
+        }
     }
-  }
 
 
 }

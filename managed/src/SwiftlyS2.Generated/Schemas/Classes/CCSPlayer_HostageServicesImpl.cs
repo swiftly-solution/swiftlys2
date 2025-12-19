@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayer_HostageServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_HostageServices {
+internal partial class CCSPlayer_HostageServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_HostageServices
+{
+    public CCSPlayer_HostageServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayer_HostageServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CarriedHostageOffset;
 
-  private static nint? _CarriedHostageOffset;
-
-  public ref CHandle<CBaseEntity> CarriedHostage {
-    get {
-      if (_CarriedHostageOffset == null) {
-        _CarriedHostageOffset = Schema.GetOffset(0x1742920F695FDF3C);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CarriedHostageOffset!.Value);
+    public ref CHandle<CBaseEntity> CarriedHostage {
+        get {
+            _CarriedHostageOffset = _CarriedHostageOffset ?? Schema.GetOffset(0x1742920F695FDF3C);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CarriedHostageOffset!.Value);
+        }
     }
-  }
-  private static nint? _CarriedHostagePropOffset;
+    private static nint? _CarriedHostagePropOffset;
 
-  public ref CHandle<CBaseEntity> CarriedHostageProp {
-    get {
-      if (_CarriedHostagePropOffset == null) {
-        _CarriedHostagePropOffset = Schema.GetOffset(0x1742920F7270EB65);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CarriedHostagePropOffset!.Value);
+    public ref CHandle<CBaseEntity> CarriedHostageProp {
+        get {
+            _CarriedHostagePropOffset = _CarriedHostagePropOffset ?? Schema.GetOffset(0x1742920F7270EB65);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CarriedHostagePropOffset!.Value);
+        }
     }
-  }
 
-  public void CarriedHostageUpdated() {
-    Schema.Update(_Handle, 0x1742920F695FDF3C);
-  }
-  public void CarriedHostagePropUpdated() {
-    Schema.Update(_Handle, 0x1742920F7270EB65);
-  }
+    public void CarriedHostageUpdated() => Schema.Update(_Handle, 0x1742920F695FDF3C);
+    public void CarriedHostagePropUpdated() => Schema.Update(_Handle, 0x1742920F7270EB65);
 }

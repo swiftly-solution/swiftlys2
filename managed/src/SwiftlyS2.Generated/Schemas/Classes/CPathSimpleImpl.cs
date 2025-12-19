@@ -6,59 +6,45 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPathSimpleImpl : CBaseEntityImpl, CPathSimple {
+internal partial class CPathSimpleImpl : CBaseEntityImpl, CPathSimple
+{
+    public CPathSimpleImpl(nint handle) : base(handle) { }
 
-  public CPathSimpleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPathQueryComponentOffset;
 
-  private static nint? _CPathQueryComponentOffset;
-
-  public CPathQueryComponent CPathQueryComponent {
-    get {
-      if (_CPathQueryComponentOffset == null) {
-        _CPathQueryComponentOffset = Schema.GetOffset(0x10936CB34513F542);
-      }
-      return new CPathQueryComponentImpl(_Handle + _CPathQueryComponentOffset!.Value);
+    public CPathQueryComponent CPathQueryComponent {
+        get {
+            _CPathQueryComponentOffset = _CPathQueryComponentOffset ?? Schema.GetOffset(0x10936CB34513F542);
+            return new CPathQueryComponentImpl(_Handle + _CPathQueryComponentOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathStringOffset;
+    private static nint? _PathStringOffset;
 
-  public string PathString {
-    get {
-      if (_PathStringOffset == null) {
-        _PathStringOffset = Schema.GetOffset(0x10936CB36EC51AA7);
-      }
-      var ptr = _Handle.Read<nint>(_PathStringOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PathStringOffset == null) {
-        _PathStringOffset = Schema.GetOffset(0x10936CB36EC51AA7);
-      }
-      Schema.SetString(_Handle, _PathStringOffset!.Value, value);
-    }
-  } 
-  private static nint? _ClosedLoopOffset;
+    public string PathString {
+        get {
+            _PathStringOffset = _PathStringOffset ?? Schema.GetOffset(0x10936CB36EC51AA7);
+            return Schema.GetString(_Handle.Read<nint>(_PathStringOffset!.Value));
+        }
+        set {
+            _PathStringOffset = _PathStringOffset ?? Schema.GetOffset(0x10936CB36EC51AA7);
+            Schema.SetString(_Handle, _PathStringOffset!.Value, value);
+        }
+    } 
+    private static nint? _ClosedLoopOffset;
 
-  public ref bool ClosedLoop {
-    get {
-      if (_ClosedLoopOffset == null) {
-        _ClosedLoopOffset = Schema.GetOffset(0x10936CB37C20D1AB);
-      }
-      return ref _Handle.AsRef<bool>(_ClosedLoopOffset!.Value);
+    public ref bool ClosedLoop {
+        get {
+            _ClosedLoopOffset = _ClosedLoopOffset ?? Schema.GetOffset(0x10936CB37C20D1AB);
+            return ref _Handle.AsRef<bool>(_ClosedLoopOffset!.Value);
+        }
     }
-  }
 
-  public void CPathQueryComponentUpdated() {
-    Schema.Update(_Handle, 0x10936CB34513F542);
-  }
-  public void PathStringUpdated() {
-    Schema.Update(_Handle, 0x10936CB36EC51AA7);
-  }
+    public void CPathQueryComponentUpdated() => Schema.Update(_Handle, 0x10936CB34513F542);
+    public void PathStringUpdated() => Schema.Update(_Handle, 0x10936CB36EC51AA7);
 }

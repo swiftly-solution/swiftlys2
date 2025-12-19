@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEmitTagActionUpdaterImpl : CAnimActionUpdaterImpl, CEmitTagActionUpdater {
+internal partial class CEmitTagActionUpdaterImpl : CAnimActionUpdaterImpl, CEmitTagActionUpdater
+{
+    public CEmitTagActionUpdaterImpl(nint handle) : base(handle) { }
 
-  public CEmitTagActionUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagIndexOffset;
 
-  private static nint? _TagIndexOffset;
-
-  public ref int TagIndex {
-    get {
-      if (_TagIndexOffset == null) {
-        _TagIndexOffset = Schema.GetOffset(0x13C6F616C2026AAD);
-      }
-      return ref _Handle.AsRef<int>(_TagIndexOffset!.Value);
+    public ref int TagIndex {
+        get {
+            _TagIndexOffset = _TagIndexOffset ?? Schema.GetOffset(0x13C6F616C2026AAD);
+            return ref _Handle.AsRef<int>(_TagIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsZeroDurationOffset;
+    private static nint? _IsZeroDurationOffset;
 
-  public ref bool IsZeroDuration {
-    get {
-      if (_IsZeroDurationOffset == null) {
-        _IsZeroDurationOffset = Schema.GetOffset(0x13C6F61604008747);
-      }
-      return ref _Handle.AsRef<bool>(_IsZeroDurationOffset!.Value);
+    public ref bool IsZeroDuration {
+        get {
+            _IsZeroDurationOffset = _IsZeroDurationOffset ?? Schema.GetOffset(0x13C6F61604008747);
+            return ref _Handle.AsRef<bool>(_IsZeroDurationOffset!.Value);
+        }
     }
-  }
 
 
 }

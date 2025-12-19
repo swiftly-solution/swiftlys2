@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMapResourceData_t : ISchemaClass<VMapResourceData_t> {
-
-  static VMapResourceData_t ISchemaClass<VMapResourceData_t>.From(nint handle) => new VMapResourceData_tImpl(handle);
-  static int ISchemaClass<VMapResourceData_t>.Size => 1;
-  static string? ISchemaClass<VMapResourceData_t>.ClassName => null;
+public partial interface VMapResourceData_t : ISchemaClass<VMapResourceData_t>
+{
+    static VMapResourceData_t ISchemaClass<VMapResourceData_t>.From(nint handle) => new VMapResourceData_tImpl(handle);
+    static int ISchemaClass<VMapResourceData_t>.Size => 1;
+    static string? ISchemaClass<VMapResourceData_t>.ClassName => null;
 
 
 

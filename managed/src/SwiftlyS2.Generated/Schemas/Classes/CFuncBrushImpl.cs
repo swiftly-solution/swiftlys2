@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncBrushImpl : CBaseModelEntityImpl, CFuncBrush {
+internal partial class CFuncBrushImpl : CBaseModelEntityImpl, CFuncBrush
+{
+    public CFuncBrushImpl(nint handle) : base(handle) { }
 
-  public CFuncBrushImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SolidityOffset;
 
-  private static nint? _SolidityOffset;
-
-  public ref BrushSolidities_e Solidity {
-    get {
-      if (_SolidityOffset == null) {
-        _SolidityOffset = Schema.GetOffset(0x26435484B869EE4D);
-      }
-      return ref _Handle.AsRef<BrushSolidities_e>(_SolidityOffset!.Value);
+    public ref BrushSolidities_e Solidity {
+        get {
+            _SolidityOffset = _SolidityOffset ?? Schema.GetOffset(0x26435484B869EE4D);
+            return ref _Handle.AsRef<BrushSolidities_e>(_SolidityOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisabledOffset;
+    private static nint? _DisabledOffset;
 
-  public ref int Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0x2643548451B3CEAC);
-      }
-      return ref _Handle.AsRef<int>(_DisabledOffset!.Value);
+    public ref int Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x2643548451B3CEAC);
+            return ref _Handle.AsRef<int>(_DisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _SolidBspOffset;
+    private static nint? _SolidBspOffset;
 
-  public ref bool SolidBsp {
-    get {
-      if (_SolidBspOffset == null) {
-        _SolidBspOffset = Schema.GetOffset(0x26435484A50CEC89);
-      }
-      return ref _Handle.AsRef<bool>(_SolidBspOffset!.Value);
+    public ref bool SolidBsp {
+        get {
+            _SolidBspOffset = _SolidBspOffset ?? Schema.GetOffset(0x26435484A50CEC89);
+            return ref _Handle.AsRef<bool>(_SolidBspOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExcludedClassOffset;
+    private static nint? _ExcludedClassOffset;
 
-  public string ExcludedClass {
-    get {
-      if (_ExcludedClassOffset == null) {
-        _ExcludedClassOffset = Schema.GetOffset(0x2643548495B3D111);
-      }
-      var ptr = _Handle.Read<nint>(_ExcludedClassOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ExcludedClassOffset == null) {
-        _ExcludedClassOffset = Schema.GetOffset(0x2643548495B3D111);
-      }
-      Schema.SetString(_Handle, _ExcludedClassOffset!.Value, value);
-    }
-  } 
-  private static nint? _InvertExclusionOffset;
+    public string ExcludedClass {
+        get {
+            _ExcludedClassOffset = _ExcludedClassOffset ?? Schema.GetOffset(0x2643548495B3D111);
+            return Schema.GetString(_Handle.Read<nint>(_ExcludedClassOffset!.Value));
+        }
+        set {
+            _ExcludedClassOffset = _ExcludedClassOffset ?? Schema.GetOffset(0x2643548495B3D111);
+            Schema.SetString(_Handle, _ExcludedClassOffset!.Value, value);
+        }
+    } 
+    private static nint? _InvertExclusionOffset;
 
-  public ref bool InvertExclusion {
-    get {
-      if (_InvertExclusionOffset == null) {
-        _InvertExclusionOffset = Schema.GetOffset(0x264354845DE14F07);
-      }
-      return ref _Handle.AsRef<bool>(_InvertExclusionOffset!.Value);
+    public ref bool InvertExclusion {
+        get {
+            _InvertExclusionOffset = _InvertExclusionOffset ?? Schema.GetOffset(0x264354845DE14F07);
+            return ref _Handle.AsRef<bool>(_InvertExclusionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScriptedMovementOffset;
+    private static nint? _ScriptedMovementOffset;
 
-  public ref bool ScriptedMovement {
-    get {
-      if (_ScriptedMovementOffset == null) {
-        _ScriptedMovementOffset = Schema.GetOffset(0x26435484C2863DD2);
-      }
-      return ref _Handle.AsRef<bool>(_ScriptedMovementOffset!.Value);
+    public ref bool ScriptedMovement {
+        get {
+            _ScriptedMovementOffset = _ScriptedMovementOffset ?? Schema.GetOffset(0x26435484C2863DD2);
+            return ref _Handle.AsRef<bool>(_ScriptedMovementOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,117 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_PositionWarpImpl : CParticleFunctionInitializerImpl, C_INIT_PositionWarp {
+internal partial class C_INIT_PositionWarpImpl : CParticleFunctionInitializerImpl, C_INIT_PositionWarp
+{
+    public C_INIT_PositionWarpImpl(nint handle) : base(handle) { }
 
-  public C_INIT_PositionWarpImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WarpMinOffset;
 
-  private static nint? _WarpMinOffset;
-
-  public CParticleCollectionVecInput WarpMin {
-    get {
-      if (_WarpMinOffset == null) {
-        _WarpMinOffset = Schema.GetOffset(0x15BDD34F1B8A7F09);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _WarpMinOffset!.Value);
+    public CParticleCollectionVecInput WarpMin {
+        get {
+            _WarpMinOffset = _WarpMinOffset ?? Schema.GetOffset(0x15BDD34F1B8A7F09);
+            return new CParticleCollectionVecInputImpl(_Handle + _WarpMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _WarpMaxOffset;
+    private static nint? _WarpMaxOffset;
 
-  public CParticleCollectionVecInput WarpMax {
-    get {
-      if (_WarpMaxOffset == null) {
-        _WarpMaxOffset = Schema.GetOffset(0x15BDD34F0D76E147);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _WarpMaxOffset!.Value);
+    public CParticleCollectionVecInput WarpMax {
+        get {
+            _WarpMaxOffset = _WarpMaxOffset ?? Schema.GetOffset(0x15BDD34F0D76E147);
+            return new CParticleCollectionVecInputImpl(_Handle + _WarpMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleControlPointNumberOffset;
+    private static nint? _ScaleControlPointNumberOffset;
 
-  public ref int ScaleControlPointNumber {
-    get {
-      if (_ScaleControlPointNumberOffset == null) {
-        _ScaleControlPointNumberOffset = Schema.GetOffset(0x15BDD34F9A649261);
-      }
-      return ref _Handle.AsRef<int>(_ScaleControlPointNumberOffset!.Value);
+    public ref int ScaleControlPointNumber {
+        get {
+            _ScaleControlPointNumberOffset = _ScaleControlPointNumberOffset ?? Schema.GetOffset(0x15BDD34F9A649261);
+            return ref _Handle.AsRef<int>(_ScaleControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointNumberOffset;
+    private static nint? _ControlPointNumberOffset;
 
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x15BDD34F3F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x15BDD34F3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusComponentOffset;
+    private static nint? _RadiusComponentOffset;
 
-  public ref int RadiusComponent {
-    get {
-      if (_RadiusComponentOffset == null) {
-        _RadiusComponentOffset = Schema.GetOffset(0x15BDD34FFBFE904A);
-      }
-      return ref _Handle.AsRef<int>(_RadiusComponentOffset!.Value);
+    public ref int RadiusComponent {
+        get {
+            _RadiusComponentOffset = _RadiusComponentOffset ?? Schema.GetOffset(0x15BDD34FFBFE904A);
+            return ref _Handle.AsRef<int>(_RadiusComponentOffset!.Value);
+        }
     }
-  }
-  private static nint? _WarpTimeOffset;
+    private static nint? _WarpTimeOffset;
 
-  public ref float WarpTime {
-    get {
-      if (_WarpTimeOffset == null) {
-        _WarpTimeOffset = Schema.GetOffset(0x15BDD34F34CDAE88);
-      }
-      return ref _Handle.AsRef<float>(_WarpTimeOffset!.Value);
+    public ref float WarpTime {
+        get {
+            _WarpTimeOffset = _WarpTimeOffset ?? Schema.GetOffset(0x15BDD34F34CDAE88);
+            return ref _Handle.AsRef<float>(_WarpTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WarpStartTimeOffset;
+    private static nint? _WarpStartTimeOffset;
 
-  public ref float WarpStartTime {
-    get {
-      if (_WarpStartTimeOffset == null) {
-        _WarpStartTimeOffset = Schema.GetOffset(0x15BDD34F4326267A);
-      }
-      return ref _Handle.AsRef<float>(_WarpStartTimeOffset!.Value);
+    public ref float WarpStartTime {
+        get {
+            _WarpStartTimeOffset = _WarpStartTimeOffset ?? Schema.GetOffset(0x15BDD34F4326267A);
+            return ref _Handle.AsRef<float>(_WarpStartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevPosScaleOffset;
+    private static nint? _PrevPosScaleOffset;
 
-  public ref float PrevPosScale {
-    get {
-      if (_PrevPosScaleOffset == null) {
-        _PrevPosScaleOffset = Schema.GetOffset(0x15BDD34F46CED122);
-      }
-      return ref _Handle.AsRef<float>(_PrevPosScaleOffset!.Value);
+    public ref float PrevPosScale {
+        get {
+            _PrevPosScaleOffset = _PrevPosScaleOffset ?? Schema.GetOffset(0x15BDD34F46CED122);
+            return ref _Handle.AsRef<float>(_PrevPosScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _InvertWarpOffset;
+    private static nint? _InvertWarpOffset;
 
-  public ref bool InvertWarp {
-    get {
-      if (_InvertWarpOffset == null) {
-        _InvertWarpOffset = Schema.GetOffset(0x15BDD34F67E23133);
-      }
-      return ref _Handle.AsRef<bool>(_InvertWarpOffset!.Value);
+    public ref bool InvertWarp {
+        get {
+            _InvertWarpOffset = _InvertWarpOffset ?? Schema.GetOffset(0x15BDD34F67E23133);
+            return ref _Handle.AsRef<bool>(_InvertWarpOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseCountOffset;
+    private static nint? _UseCountOffset;
 
-  public ref bool UseCount {
-    get {
-      if (_UseCountOffset == null) {
-        _UseCountOffset = Schema.GetOffset(0x15BDD34F8836B9AB);
-      }
-      return ref _Handle.AsRef<bool>(_UseCountOffset!.Value);
+    public ref bool UseCount {
+        get {
+            _UseCountOffset = _UseCountOffset ?? Schema.GetOffset(0x15BDD34F8836B9AB);
+            return ref _Handle.AsRef<bool>(_UseCountOffset!.Value);
+        }
     }
-  }
 
 
 }

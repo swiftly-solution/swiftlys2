@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_InheritFromParentParticlesImpl : CParticleFunctionOperatorImpl, C_OP_InheritFromParentParticles {
+internal partial class C_OP_InheritFromParentParticlesImpl : CParticleFunctionOperatorImpl, C_OP_InheritFromParentParticles
+{
+    public C_OP_InheritFromParentParticlesImpl(nint handle) : base(handle) { }
 
-  public C_OP_InheritFromParentParticlesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScaleOffset;
 
-  private static nint? _ScaleOffset;
-
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x4310722BB731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x4310722BB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x4310722BE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4310722BE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _IncrementOffset;
+    private static nint? _IncrementOffset;
 
-  public ref int Increment {
-    get {
-      if (_IncrementOffset == null) {
-        _IncrementOffset = Schema.GetOffset(0x4310722B2359F182);
-      }
-      return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+    public ref int Increment {
+        get {
+            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0x4310722B2359F182);
+            return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+        }
     }
-  }
-  private static nint? _RandomDistributionOffset;
+    private static nint? _RandomDistributionOffset;
 
-  public ref bool RandomDistribution {
-    get {
-      if (_RandomDistributionOffset == null) {
-        _RandomDistributionOffset = Schema.GetOffset(0x4310722B830F6B38);
-      }
-      return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
+    public ref bool RandomDistribution {
+        get {
+            _RandomDistributionOffset = _RandomDistributionOffset ?? Schema.GetOffset(0x4310722B830F6B38);
+            return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
+        }
     }
-  }
 
 
 }
