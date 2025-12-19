@@ -168,6 +168,11 @@ public class EventDelegates
     public delegate void OnEntityIdentityAcceptInputHook( IOnEntityIdentityAcceptInputHookEvent @event );
 
     /// <summary>
+    /// Called when an entity fires output.
+    /// </summary>
+    public delegate void OnEntityFireOutputHookEvent( IOnEntityFireOutputHookEvent @event );
+
+    /// <summary>
     /// Called when the server is started.
     /// </summary>
     public delegate void OnStartupServer();

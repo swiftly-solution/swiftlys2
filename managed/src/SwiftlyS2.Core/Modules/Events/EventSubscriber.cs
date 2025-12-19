@@ -59,6 +59,7 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
     public event EventDelegates.OnMovementServicesRunCommandHook? OnMovementServicesRunCommandHook;
     public event EventDelegates.OnPlayerPawnPostThink? OnPlayerPawnPostThink;
     public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook;
+    public event EventDelegates.OnEntityFireOutputHookEvent? OnEntityFireOutputHook;
     public event EventDelegates.OnStartupServer? OnStartupServer;
 
     public void Dispose()
@@ -637,6 +638,24 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
         finally
         {
             _Profiler.StopRecording("Event::OnEntityIdentityAcceptInput");
+        }
+    }
+
+    public void InvokeOnEntityFireOutputHook( OnEntityFireOutputHookEvent @event )
+    {
+        try
+        {
+            if (OnEntityFireOutputHook == null) return;
+            _Profiler.StartRecording("Event::OnEntityFireOutputHook");
+            OnEntityFireOutputHook?.Invoke(@event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(e)) _Logger.LogError(e, "Error invoking OnEntityFireOutputHook.");
+        }
+        finally
+        {
+            _Profiler.StopRecording("Event::OnEntityFireOutputHook");
         }
     }
 

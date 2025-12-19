@@ -789,4 +789,21 @@ internal static class EventPublisher
             AnsiConsole.WriteException(e);
         }
     }
+
+    public static void InvokeEntityFireOutputHook( OnEntityFireOutputHookEvent @event )
+    {
+        if (_subscribers.Count == 0) return;
+        try
+        {
+            foreach (var subscriber in _subscribers)
+            {
+                subscriber.InvokeOnEntityFireOutputHook(@event);
+            }
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return;
+            AnsiConsole.WriteException(e);
+        }
+    }
 }

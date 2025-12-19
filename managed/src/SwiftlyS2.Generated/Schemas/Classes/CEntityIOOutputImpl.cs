@@ -12,21 +12,24 @@ using SwiftlyS2.Core.Extensions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEntityIOOutputImpl : SchemaClass, CEntityIOOutput {
+internal partial class CEntityIOOutputImpl : SchemaClass, CEntityIOOutput
+{
 
-  public CEntityIOOutputImpl(nint handle) : base(handle) {
-  }
-
-  private static nint? _ValueOffset;
-
-  public SchemaUntypedField Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0xCD5B084DCB0894A);
-      }
-      return new SchemaUntypedField(_Handle + _ValueOffset!.Value);
+    public CEntityIOOutputImpl( nint handle ) : base(handle)
+    {
     }
-  }
+
+    private static nint? _ValueOffset;
+
+    public SchemaUntypedField Value {
+        get {
+            if (_ValueOffset == null)
+            {
+                _ValueOffset = Schema.GetOffset(0xCD5B084DCB0894A);
+            }
+            return new SchemaUntypedField(_Handle + _ValueOffset!.Value);
+        }
+    }
 
 
 }
