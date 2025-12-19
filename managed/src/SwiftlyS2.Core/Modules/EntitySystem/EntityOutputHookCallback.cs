@@ -12,7 +12,7 @@ internal delegate int EntityOutputHookCallbackDelegate( nint entityio, nint outp
 
 internal class EntityOutputHookCallback : IDisposable
 {
-    private readonly Guid guid;
+    public Guid Guid { get; init; }
     private readonly ILogger<EntityOutputHookCallback> logger;
     private readonly EntityOutputHookCallbackDelegate unmanagedCallback;
     private readonly nint unmanagedCallbackPtr;
@@ -20,7 +20,7 @@ internal class EntityOutputHookCallback : IDisposable
 
     public EntityOutputHookCallback( string className, string outputName, IEntitySystemService.EntityOutputHandler callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler )
     {
-        this.guid = Guid.NewGuid();
+        this.Guid = Guid.NewGuid();
         this.logger = loggerFactory.CreateLogger<EntityOutputHookCallback>();
         unmanagedCallback = ( entityio, outputName, activator, caller, delay ) =>
         {
@@ -45,7 +45,7 @@ internal class EntityOutputHookCallback : IDisposable
                 {
                     return 0;
                 }
-                logger.LogError(e, "Failed to execute entity output callback {0}.", guid);
+                logger.LogError(e, "Failed to execute entity output callback {0}.", Guid);
             }
             return 0;
         };
