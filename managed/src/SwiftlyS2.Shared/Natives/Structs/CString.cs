@@ -24,4 +24,5 @@ public struct CString
 
     public static implicit operator string( CString str ) => str.Value;
     public static implicit operator CString( string str ) => new() { pString = StringPool.Allocate(str) };
+    public override readonly string ToString() => Value;
 }
