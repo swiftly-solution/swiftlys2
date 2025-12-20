@@ -118,6 +118,35 @@ public unsafe struct CVariantData
     }
 }
 
+public interface IVariantAllocator
+{
+    public static abstract void Free( nint memory );
+    public static abstract nint Allocate( int size );
+}
+
+public unsafe struct CVariantDefaultAllocator : IVariantAllocator
+{
+    public static void Free( nint memory )
+    {
+        NativeMemory.Free((void*)memory);
+    }
+
+    public static nint Allocate( int size )
+    {
+        return (nint)NativeMemory.Alloc((nuint)size);
+    }
+}
+
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
+public struct CVariantBase<TAllocator> where TAllocator : struct, IVariantAllocator
+{
+    [FieldOffset(0x0)] public CVariantData Data;            // 8 bytes (union)
+    [FieldOffset(0x8)] public VariantFieldType DataType;    // 1 byte (uint8 enum)
+    // 1 byte padding
+    [FieldOffset(0xA)] public ushort Flags;                 // 2 bytes
+    // 4 bytes padding for alignment
+}
+
 [StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct CVariant
 {

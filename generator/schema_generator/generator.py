@@ -8,11 +8,10 @@ from field_parser import parse_field
 
 OUT_DIR = Path("../../managed/src/SwiftlyS2.Generated/Schemas/")
 
-if not os.path.exists(OUT_DIR):
-  os.makedirs(OUT_DIR)
-  os.makedirs(OUT_DIR / "Classes")
-  os.makedirs(OUT_DIR / "Interfaces")
-  os.makedirs(OUT_DIR / "Enums")
+os.makedirs(OUT_DIR, exist_ok=True)
+os.makedirs(OUT_DIR / "Classes", exist_ok=True)
+os.makedirs(OUT_DIR / "Interfaces", exist_ok=True)
+os.makedirs(OUT_DIR / "Enums", exist_ok=True)
 
 # no one need them
 blacklisted_classes = [
@@ -20,9 +19,10 @@ blacklisted_classes = [
   "CTakeDamageInfo",
   "CTakeDamageResult",
   "CNetworkVarChainer",
+  "CVariantDefaultAllocator",
+  # "CEntityIOOutput",
   "ChangeAccessorFieldPathIndex_t"
 ]
-
 
 managed_types = [
   "SchemaClass",
