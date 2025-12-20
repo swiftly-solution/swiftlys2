@@ -50,7 +50,6 @@
 #include <public/steam/steam_gameserver.h>
 
 #include <public/tier1/convar.h>
-#include <variant.h>
 
 SwiftlyCore g_SwiftlyCore;
 InterfacesManager g_ifaceService;

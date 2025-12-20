@@ -38,11 +38,9 @@ public unsafe struct EntityIOConnection_t
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct EntityIOOutputDesc_t
 {
-    private readonly nint name;
+    public CString Name;
     public uint Flags;
     public uint OutputOffset;
-
-    public readonly string? Name => Marshal.PtrToStringUTF8(name);
 }
 
 [StructLayout(LayoutKind.Sequential)]
