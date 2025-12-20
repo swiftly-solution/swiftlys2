@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
@@ -28,7 +27,7 @@ public enum VariantFieldType : byte
     FIELD_FUNCTION,         // A class function pointer (Think, Use, etc)
     FIELD_VMATRIX,          // a vmatrix (output coords are NOT worldspace)
     // NOTE: Use float arrays for local transformations that don't need to be fixed up.
-    FIELD_VMATRIX_WORLDSPACE,// A VMatrix that maps some local space to world space (translation is fixed up on level transitions)
+    FIELD_VMATRIX_WORLDSPACE,   // A VMatrix that maps some local space to world space (translation is fixed up on level transitions)
     FIELD_MATRIX3X4_WORLDSPACE, // matrix3x4_t that maps some local space to world space (translation is fixed up on level transitions)
     FIELD_INTERVAL,         // a start and range floating point interval ( e.g., 3.2->3.6 == 3.2 and 0.4 )
     FIELD_UNUSED,
@@ -91,27 +90,27 @@ public enum VariantFieldType : byte
     FIELD_TYPECOUNT
 }
 
-[StructLayout(LayoutKind.Explicit, Size = 8)]
+[StructLayout(LayoutKind.Explicit, Size = 0x8)]
 public unsafe struct CVariantData
 {
-    [FieldOffset(0)] public int IntValue;
-    [FieldOffset(0)] public uint UIntValue;
-    [FieldOffset(0)] public long Int64Value;
-    [FieldOffset(0)] public ulong UInt64Value;
-    [FieldOffset(0)] public float FloatValue;
-    [FieldOffset(0)] public double DoubleValue;
-    [FieldOffset(0)] public nint RawData;
-    [FieldOffset(0)] public byte CharValue;
-    [FieldOffset(0)] public CHandle<CEntityInstance> HandleValue;
-    [FieldOffset(0)] public CString StringValue;
-    [FieldOffset(0)] public CUtlStringToken StringTokenValue;
-    [FieldOffset(0)] public ResourceHandle* ResourceValue;
-    [FieldOffset(0)] public Vector* VectorValue;
-    [FieldOffset(0)] public Vector2D* Vector2DValue;
-    [FieldOffset(0)] public Vector4D* Vector4DValue;
-    [FieldOffset(0)] public QAngle* QAngleValue;
-    [FieldOffset(0)] public Quaternion* QuaternionValue;
-    [FieldOffset(0)] public Color* ColorValue;
+    [FieldOffset(0x0)] public int IntValue;
+    [FieldOffset(0x0)] public uint UIntValue;
+    [FieldOffset(0x0)] public long Int64Value;
+    [FieldOffset(0x0)] public ulong UInt64Value;
+    [FieldOffset(0x0)] public float FloatValue;
+    [FieldOffset(0x0)] public double DoubleValue;
+    [FieldOffset(0x0)] public nint RawData;
+    [FieldOffset(0x0)] public byte CharValue;
+    [FieldOffset(0x0)] public CHandle<CEntityInstance> HandleValue;
+    [FieldOffset(0x0)] public CString StringValue;
+    [FieldOffset(0x0)] public CUtlStringToken StringTokenValue;
+    [FieldOffset(0x0)] public ResourceHandle* ResourceValue;
+    [FieldOffset(0x0)] public Vector* VectorValue;
+    [FieldOffset(0x0)] public Vector2D* Vector2DValue;
+    [FieldOffset(0x0)] public Vector4D* Vector4DValue;
+    [FieldOffset(0x0)] public QAngle* QAngleValue;
+    [FieldOffset(0x0)] public Quaternion* QuaternionValue;
+    [FieldOffset(0x0)] public Color* ColorValue;
 
     public bool BoolValue {
         readonly get => CharValue != 0;
@@ -119,10 +118,12 @@ public unsafe struct CVariantData
     }
 }
 
-[StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit, Size = 0x10)]
 public struct CVariant
 {
-    [FieldOffset(0)] public CVariantData Data;
-    [FieldOffset(8)] public VariantFieldType DataType;
-    [FieldOffset(9)] public ushort Flags;
+    [FieldOffset(0x0)] public CVariantData Data;            // 8 bytes (union)
+    [FieldOffset(0x8)] public VariantFieldType DataType;    // 1 byte (uint8 enum)
+    // 1 byte padding
+    [FieldOffset(0xA)] public ushort Flags;                 // 2 bytes
+    // 4 bytes padding for alignment
 }

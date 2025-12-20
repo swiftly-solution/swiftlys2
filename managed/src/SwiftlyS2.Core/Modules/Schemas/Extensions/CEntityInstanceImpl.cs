@@ -1,9 +1,7 @@
-using System.Buffers;
-using System.Text;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
-using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Natives;
+using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
@@ -13,8 +11,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance
     public uint Index => Entity?.EntityHandle.EntityIndex ?? uint.MaxValue;
     public string DesignerName => Entity?.DesignerName ?? string.Empty;
 
-    public unsafe void AcceptInput<T>( string input, T? value, CEntityInstance? activator = null,
-        CEntityInstance? caller = null, int outputID = 0 )
+    public unsafe void AcceptInput<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0 )
     {
         NativeBinding.ThrowIfNonMainThread();
         var variant = new CVariant();
@@ -49,8 +46,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance
                 variant.DataType = VariantFieldType.FIELD_FLOAT64;
                 break;
             case string stringValue:
-                variant.Data.StringValue = new CString();
-                variant.Data.StringValue.Value = stringValue;
+                variant.Data.StringValue = new CString { Value = stringValue };
                 variant.DataType = VariantFieldType.FIELD_CSTRING;
                 break;
             case Vector vectorValue:
@@ -78,25 +74,20 @@ internal partial class CEntityInstanceImpl : CEntityInstance
                 variant.DataType = VariantFieldType.FIELD_COLOR32;
                 break;
             default:
-                variant.Data.StringValue = new CString();
-                variant.Data.StringValue.Value = string.Empty;
+                variant.Data.StringValue = new CString { Value = string.Empty };
                 variant.DataType = VariantFieldType.FIELD_CSTRING;
                 break;
         }
 
-        NativeEntitySystem.AcceptInput(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero,
-            (nint)(&variant), outputID);
+        NativeEntitySystem.AcceptInput(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, new nint(&variant), outputID);
     }
 
-    public Task AcceptInputAsync<T>( string input, T? value, CEntityInstance? activator = null,
-        CEntityInstance? caller = null, int outputID = 0 )
+    public Task AcceptInputAsync<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0 )
     {
         return SchedulerManager.QueueOrNow(() => AcceptInput(input, value, activator, caller, outputID));
     }
 
-
-    public unsafe void AddEntityIOEvent<T>( string input, T? value, CEntityInstance? activator = null,
-        CEntityInstance? caller = null, float delay = 0f )
+    public unsafe void AddEntityIOEvent<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, float delay = 0f )
     {
         NativeBinding.ThrowIfNonMainThread();
         var variant = new CVariant();
@@ -131,8 +122,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance
                 variant.DataType = VariantFieldType.FIELD_FLOAT64;
                 break;
             case string stringValue:
-                variant.Data.StringValue = new CString();
-                variant.Data.StringValue.Value = stringValue;
+                variant.Data.StringValue = new CString { Value = stringValue };
                 variant.DataType = VariantFieldType.FIELD_CSTRING;
                 break;
             case Vector vectorValue:
@@ -160,18 +150,15 @@ internal partial class CEntityInstanceImpl : CEntityInstance
                 variant.DataType = VariantFieldType.FIELD_COLOR32;
                 break;
             default:
-                variant.Data.StringValue = new CString();
-                variant.Data.StringValue.Value = string.Empty;
+                variant.Data.StringValue = new CString { Value = string.Empty };
                 variant.DataType = VariantFieldType.FIELD_CSTRING;
                 break;
         }
 
-        NativeEntitySystem.AddEntityIOEvent(Address, input, activator?.Address ?? nint.Zero,
-            caller?.Address ?? nint.Zero, (nint)(&variant), delay);
+        NativeEntitySystem.AddEntityIOEvent(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, (nint)(&variant), delay);
     }
 
-    public Task AddEntityIOEventAsync<T>( string input, T? value, CEntityInstance? activator = null,
-        CEntityInstance? caller = null, float delay = 0f )
+    public Task AddEntityIOEventAsync<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, float delay = 0f )
     {
         return SchedulerManager.QueueOrNow(() => AddEntityIOEvent(input, value, activator, caller, delay));
     }
