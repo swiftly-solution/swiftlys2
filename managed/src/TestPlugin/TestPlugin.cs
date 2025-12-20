@@ -352,18 +352,16 @@ public class TestPlugin : BasePlugin
         services
             .AddSwiftly(Core);
 
-        Core.Event.OnPrecacheResource += ( @event ) => { @event.AddItem("soundevents/mvp_anthem.vsndevts"); };
+        // Core.Event.OnPrecacheResource += ( @event ) => { @event.AddItem("soundevents/mvp_anthem.vsndevts"); };
 
-        Core.Event.OnConVarValueChanged += ( @event ) =>
-        {
-            Console.WriteLine(
-                $"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
-        };
+        // Core.Event.OnConVarValueChanged += ( @event ) =>
+        // {
+        //     Console.WriteLine($"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
+        // };
 
         // Core.Event.OnEntityIdentityAcceptInputHook += ( @event ) =>
         // {
-        //     Console.WriteLine(
-        //         $"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.InputName}");
+        //     Console.WriteLine($"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.VariantValue.Data.Int32}");
         // };
 
 
@@ -554,7 +552,7 @@ public class TestPlugin : BasePlugin
         var weapons = pawn.WeaponServices!.MyValidWeapons;
         foreach (var weapon in weapons)
         {
-            weapon.AcceptInput("SetAmmoAmount", "9999");
+            weapon.AcceptInput("SetAmmoAmount", "0");
         }
     }
 
@@ -677,10 +675,7 @@ public class TestPlugin : BasePlugin
         kv.Set<uint>("m_spawnflags", 256);
         ent.DispatchSpawn(kv);
         ent.SetModel("weapons/models/grenade/incendiary/weapon_incendiarygrenade.vmdl");
-        ent.Teleport(
-            new Vector(context.Sender!.PlayerPawn!.AbsOrigin!.Value.X + 50,
-                context.Sender!.PlayerPawn!.AbsOrigin!.Value.Y + 50,
-                context.Sender!.PlayerPawn!.AbsOrigin!.Value.Z + 30), QAngle.Zero, Vector.Zero);
+        ent.Teleport(new Vector(context.Sender!.PlayerPawn!.AbsOrigin!.Value.X + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Y + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Z + 30), QAngle.Zero, Vector.Zero);
     }
 
     [Command("tt4")]
@@ -719,7 +714,7 @@ public class TestPlugin : BasePlugin
     {
         Core.EntitySystem.GetAllEntitiesByDesignerName<CBuyZone>("func_buyzone").ToList().ForEach(zone =>
         {
-            if ((zone?.IsValid ?? false))
+            if (zone?.IsValid ?? false)
             {
                 zone.Despawn();
             }
@@ -769,14 +764,10 @@ public class TestPlugin : BasePlugin
         Core.Trace.TraceShape(origin, targetOrigin, ray, filter, ref trace);
 
         Console.WriteLine(trace.pEntity != null ? $"! Hit Entity: {trace.Entity.DesignerName}" : "! No entity hit");
-        Console.WriteLine(
-            $"! SurfaceProperties: {(nint)trace.SurfaceProperties}, pEntity: {(nint)trace.pEntity}, HitBox: {(nint)trace.HitBox}({trace.HitBox->m_name.Value}), Body: {(nint)trace.Body}, Shape: {(nint)trace.Shape}, Contents: {trace.Contents}");
-        Console.WriteLine(
-            $"! StartPos: {trace.StartPos}, EndPos: {trace.EndPos}, HitNormal: {trace.HitNormal}, HitPoint: {trace.HitPoint}");
-        Console.WriteLine(
-            $"! HitOffset: {trace.HitOffset}, Fraction: {trace.Fraction}, Triangle: {trace.Triangle}, HitboxBoneIndex: {trace.HitboxBoneIndex}");
-        Console.WriteLine(
-            $"! RayType: {trace.RayType}, StartInSolid: {trace.StartInSolid}, ExactHitPoint: {trace.ExactHitPoint}");
+        Console.WriteLine($"! SurfaceProperties: {(nint)trace.SurfaceProperties}, pEntity: {(nint)trace.pEntity}, HitBox: {(nint)trace.HitBox}({trace.HitBox->m_name.Value}), Body: {(nint)trace.Body}, Shape: {(nint)trace.Shape}, Contents: {trace.Contents}");
+        Console.WriteLine($"! StartPos: {trace.StartPos}, EndPos: {trace.EndPos}, HitNormal: {trace.HitNormal}, HitPoint: {trace.HitPoint}");
+        Console.WriteLine($"! HitOffset: {trace.HitOffset}, Fraction: {trace.Fraction}, Triangle: {trace.Triangle}, HitboxBoneIndex: {trace.HitboxBoneIndex}");
+        Console.WriteLine($"! RayType: {trace.RayType}, StartInSolid: {trace.StartInSolid}, ExactHitPoint: {trace.ExactHitPoint}");
         Console.WriteLine("\n");
     }
 
@@ -903,9 +894,7 @@ public class TestPlugin : BasePlugin
         Core.PlayerManager.GetAlive()
             .Where(player => player.PlayerID != context.Sender!.PlayerID && player.IsValid && player.IsFakeClient)
             .ToList()
-            .ForEach(player =>
-                player.PlayerPawn!.WeaponServices!.ActiveWeapon.Value!.SetTransmitState(false,
-                    context.Sender!.PlayerID));
+            .ForEach(player => player.PlayerPawn!.WeaponServices!.ActiveWeapon.Value!.SetTransmitState(false, context.Sender!.PlayerID));
     }
 
     [Command("sihb")]
@@ -914,9 +903,7 @@ public class TestPlugin : BasePlugin
         Core.PlayerManager.GetAlive()
             .Where(player => player.PlayerID != context.Sender!.PlayerID && player.IsValid && player.IsFakeClient)
             .ToList()
-            .ForEach(player =>
-                Console.WriteLine(
-                    $"{player.Controller!.PlayerName} -> {(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID) ? "Hide" : "V")}"));
+            .ForEach(player => Console.WriteLine($"{player.Controller!.PlayerName} -> {(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID) ? "Hide" : "V")}"));
     }
 
     [Command("hb")]
@@ -928,8 +915,7 @@ public class TestPlugin : BasePlugin
             .ForEach(player =>
             {
                 // Console.WriteLine($"{player.Controller!.PlayerName}(B) -> {player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID)}({player.PlayerPawn!.IsTransmitting(player.PlayerID)})");
-                player.PlayerPawn!.SetTransmitState(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID),
-                    context.Sender!.PlayerID);
+                player.PlayerPawn!.SetTransmitState(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID), context.Sender!.PlayerID);
                 // Console.WriteLine($"{player.Controller!.PlayerName} -> {player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID)}({player.PlayerPawn!.IsTransmitting(player.PlayerID)})");
             });
     }
