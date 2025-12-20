@@ -15,8 +15,7 @@ public partial interface CTankTargetChange : CPointEntity, ISchemaClass<CTankTar
     static string? ISchemaClass<CTankTargetChange>.ClassName => "tanktrain_aitarget";
 
 
-    // CVariantBase< CVariantDefaultAllocator >
-    public SchemaUntypedField NewTarget { get; }
+    public ref CVariantBase<CVariantDefaultAllocator> NewTarget { get; }
 
     public string NewTargetName { get; set; }
 

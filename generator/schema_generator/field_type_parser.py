@@ -53,6 +53,7 @@ unmanaged_type_maps = {
   "HSCRIPT": "HSCRIPTHandler",
   "QuaternionStorage": "QuaternionStorage",
   "CEntityIOOutput": "CEntityIOOutput",
+  "CVariantBase<CVariantDefaultAllocator>": "CVariantBase<CVariantDefaultAllocator>",
 }
 
 blacklisted_types = [
@@ -94,7 +95,6 @@ blacklisted_types = [
   "CModelAnimNameWithDeltas",
   "CAnimValue",
   "CEntityOutputTemplate",
-  "CVariantBase",
   "SphereBase_t",
   "CAttachmentNameSymbolWithStorage",
   "std::pair",
