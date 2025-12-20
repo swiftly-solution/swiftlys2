@@ -106,7 +106,7 @@ public unsafe struct CVariantData
     [FieldOffset(0x0)] public CHandle<CEntityInstance> EntityInstanceHandleValue;
     [FieldOffset(0x0)] public CString StringValue;
     [FieldOffset(0x0)] public CUtlStringToken StringTokenValue;
-    [FieldOffset(0x0)] public ResourceHandle* ResourceValue;
+    [FieldOffset(0x0)] public ResourceHandle* ResourceHandleValue;
     [FieldOffset(0x0)] public Vector* VectorValue;
     [FieldOffset(0x0)] public Vector2D* Vector2DValue;
     [FieldOffset(0x0)] public Vector4D* Vector4DValue;
@@ -170,6 +170,16 @@ public unsafe struct CVariantData
         {
             StringValue = new CString { Value = stringValue };
             return VariantFieldType.FIELD_CSTRING;
+        }
+        else if (value is ResourceHandle resourceHandleValue)
+        {
+            ResourceHandleValue = &resourceHandleValue;
+            return VariantFieldType.FIELD_RESOURCE;
+        }
+        else if (value != null && value.GetType() == typeof(ResourceHandle*))
+        {
+            ResourceHandleValue = (ResourceHandle*)Pointer.Unbox(value);
+            return VariantFieldType.FIELD_RESOURCE;
         }
         else if (value is Vector vectorValue)
         {
