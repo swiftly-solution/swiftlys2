@@ -495,7 +495,7 @@ public class TestPlugin : BasePlugin
 
         _ = Core.EntitySystem.HookEntityOutput<CPropDoorRotating>("OnFullyOpen", ( entityIO, outputName, activator, caller, delay ) =>
         {
-            Console.WriteLine($"HookEntityOutput -> output: {outputName}, activator: {activator?.As<CBaseEntity>()?.DesignerName}, caller: {caller?.As<CBaseEntity>()?.DesignerName}");
+            Console.WriteLine($"HookEntityOutput -> entityIO: {entityIO.Desc.Name} output: {outputName}, activator: {activator?.As<CBaseEntity>()?.DesignerName}, caller: {caller?.As<CBaseEntity>()?.DesignerName}");
             return HookResult.Continue;
         });
     }

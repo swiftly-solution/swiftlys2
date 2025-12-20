@@ -53,7 +53,7 @@ unmanaged_type_maps = {
   "HSCRIPT": "HSCRIPTHandler",
   "QuaternionStorage": "QuaternionStorage",
   "CEntityIOOutput": "CEntityIOOutput",
-  "CVariantBase<CVariantDefaultAllocator>": "CVariantBase<CVariantDefaultAllocator>",
+  "CVariantBase<CVariantDefaultAllocator>": "CVariant",
 }
 
 blacklisted_types = [

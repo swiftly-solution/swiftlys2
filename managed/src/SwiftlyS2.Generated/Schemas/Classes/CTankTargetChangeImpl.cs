@@ -18,10 +18,10 @@ internal partial class CTankTargetChangeImpl : CPointEntityImpl, CTankTargetChan
 
     private static nint? _NewTargetOffset;
 
-    public ref CVariantBase<CVariantDefaultAllocator> NewTarget {
+    public ref CVariant NewTarget {
         get {
             _NewTargetOffset = _NewTargetOffset ?? Schema.GetOffset(0xC9633A4FC35D87C4);
-            return ref _Handle.AsRef<CVariantBase<CVariantDefaultAllocator>>(_NewTargetOffset!.Value);
+            return ref _Handle.AsRef<CVariant>(_NewTargetOffset!.Value);
         }
     }
     private static nint? _NewTargetNameOffset;
