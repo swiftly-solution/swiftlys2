@@ -8,70 +8,70 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderStandardLight : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderStandardLight> {
+public partial interface C_OP_RenderStandardLight : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderStandardLight>
+{
+    static C_OP_RenderStandardLight ISchemaClass<C_OP_RenderStandardLight>.From(nint handle) => new C_OP_RenderStandardLightImpl(handle);
+    static int ISchemaClass<C_OP_RenderStandardLight>.Size => 5312;
+    static string? ISchemaClass<C_OP_RenderStandardLight>.ClassName => null;
 
-  static C_OP_RenderStandardLight ISchemaClass<C_OP_RenderStandardLight>.From(nint handle) => new C_OP_RenderStandardLightImpl(handle);
-  static int ISchemaClass<C_OP_RenderStandardLight>.Size => 5312;
-  static string? ISchemaClass<C_OP_RenderStandardLight>.ClassName => null;
 
-  
-  public ref ParticleLightTypeChoiceList_t LightType { get; }
-  
-  public CParticleCollectionVecInput ColorScale { get; }
-  
-  public ref ParticleColorBlendType_t ColorBlendType { get; }
-  
-  public CParticleCollectionFloatInput Intensity { get; }
-  
-  public ref bool CastShadows { get; }
-  
-  public CParticleCollectionFloatInput Theta { get; }
-  
-  public CParticleCollectionFloatInput Phi { get; }
-  
-  public CParticleCollectionFloatInput RadiusMultiplier { get; }
-  
-  public ref StandardLightingAttenuationStyle_t AttenuationStyle { get; }
-  
-  public CParticleCollectionFloatInput FalloffLinearity { get; }
-  
-  public CParticleCollectionFloatInput FiftyPercentFalloff { get; }
-  
-  public CParticleCollectionFloatInput ZeroPercentFalloff { get; }
-  
-  public ref bool RenderDiffuse { get; }
-  
-  public ref bool RenderSpecular { get; }
-  
-  public string LightCookie { get; set; }
-  
-  public ref int Priority { get; }
-  
-  public ref ParticleLightFogLightingMode_t FogLightingMode { get; }
-  
-  public CParticleCollectionRendererFloatInput FogContribution { get; }
-  
-  public ref ParticleLightBehaviorChoiceList_t CapsuleLightBehavior { get; }
-  
-  public ref float CapsuleLength { get; }
-  
-  public ref bool ReverseOrder { get; }
-  
-  public ref bool ClosedLoop { get; }
-  
-  public ParticleAttributeIndex_t PrevPntSource { get; }
-  
-  public ref float MaxLength { get; }
-  
-  public ref float MinLength { get; }
-  
-  public ref bool IgnoreDT { get; }
-  
-  public ref float ConstrainRadiusToLengthRatio { get; }
-  
-  public ref float LengthScale { get; }
-  
-  public ref float LengthFadeInTime { get; }
+    public ref ParticleLightTypeChoiceList_t LightType { get; }
+
+    public CParticleCollectionVecInput ColorScale { get; }
+
+    public ref ParticleColorBlendType_t ColorBlendType { get; }
+
+    public CParticleCollectionFloatInput Intensity { get; }
+
+    public ref bool CastShadows { get; }
+
+    public CParticleCollectionFloatInput Theta { get; }
+
+    public CParticleCollectionFloatInput Phi { get; }
+
+    public CParticleCollectionFloatInput RadiusMultiplier { get; }
+
+    public ref StandardLightingAttenuationStyle_t AttenuationStyle { get; }
+
+    public CParticleCollectionFloatInput FalloffLinearity { get; }
+
+    public CParticleCollectionFloatInput FiftyPercentFalloff { get; }
+
+    public CParticleCollectionFloatInput ZeroPercentFalloff { get; }
+
+    public ref bool RenderDiffuse { get; }
+
+    public ref bool RenderSpecular { get; }
+
+    public string LightCookie { get; set; }
+
+    public ref int Priority { get; }
+
+    public ref ParticleLightFogLightingMode_t FogLightingMode { get; }
+
+    public CParticleCollectionRendererFloatInput FogContribution { get; }
+
+    public ref ParticleLightBehaviorChoiceList_t CapsuleLightBehavior { get; }
+
+    public ref float CapsuleLength { get; }
+
+    public ref bool ReverseOrder { get; }
+
+    public ref bool ClosedLoop { get; }
+
+    public ParticleAttributeIndex_t PrevPntSource { get; }
+
+    public ref float MaxLength { get; }
+
+    public ref float MinLength { get; }
+
+    public ref bool IgnoreDT { get; }
+
+    public ref float ConstrainRadiusToLengthRatio { get; }
+
+    public ref float LengthScale { get; }
+
+    public ref float LengthFadeInTime { get; }
 
 
 }

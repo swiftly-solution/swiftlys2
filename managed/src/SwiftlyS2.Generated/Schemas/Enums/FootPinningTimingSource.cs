@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum FootPinningTimingSource : uint {
-
+public enum FootPinningTimingSource : uint
+{
  FootMotion = 0,
 
  Tag = 1,

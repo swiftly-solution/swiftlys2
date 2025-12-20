@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface IKTargetSettings_t : ISchemaClass<IKTargetSettings_t> {
+public partial interface IKTargetSettings_t : ISchemaClass<IKTargetSettings_t>
+{
+    static IKTargetSettings_t ISchemaClass<IKTargetSettings_t>.From(nint handle) => new IKTargetSettings_tImpl(handle);
+    static int ISchemaClass<IKTargetSettings_t>.Size => 40;
+    static string? ISchemaClass<IKTargetSettings_t>.ClassName => null;
 
-  static IKTargetSettings_t ISchemaClass<IKTargetSettings_t>.From(nint handle) => new IKTargetSettings_tImpl(handle);
-  static int ISchemaClass<IKTargetSettings_t>.Size => 40;
-  static string? ISchemaClass<IKTargetSettings_t>.ClassName => null;
 
-  
-  public ref IKTargetSource TargetSource { get; }
-  
-  public IKBoneNameAndIndex_t Bone { get; }
-  
-  public AnimParamID AnimgraphParameterNamePosition { get; }
-  
-  public AnimParamID AnimgraphParameterNameOrientation { get; }
-  
-  public ref IKTargetCoordinateSystem TargetCoordSystem { get; }
+    public ref IKTargetSource TargetSource { get; }
+
+    public IKBoneNameAndIndex_t Bone { get; }
+
+    public AnimParamID AnimgraphParameterNamePosition { get; }
+
+    public AnimParamID AnimgraphParameterNameOrientation { get; }
+
+    public ref IKTargetCoordinateSystem TargetCoordSystem { get; }
 
 
 }

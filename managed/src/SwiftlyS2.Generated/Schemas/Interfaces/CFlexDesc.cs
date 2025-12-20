@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFlexDesc : ISchemaClass<CFlexDesc> {
+public partial interface CFlexDesc : ISchemaClass<CFlexDesc>
+{
+    static CFlexDesc ISchemaClass<CFlexDesc>.From(nint handle) => new CFlexDescImpl(handle);
+    static int ISchemaClass<CFlexDesc>.Size => 8;
+    static string? ISchemaClass<CFlexDesc>.ClassName => null;
 
-  static CFlexDesc ISchemaClass<CFlexDesc>.From(nint handle) => new CFlexDescImpl(handle);
-  static int ISchemaClass<CFlexDesc>.Size => 8;
-  static string? ISchemaClass<CFlexDesc>.ClassName => null;
 
-  
-  public string Facs { get; set; }
+    public string Facs { get; set; }
 
 
 }

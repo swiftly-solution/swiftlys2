@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmSyncTrack__Event_t : ISchemaClass<CNmSyncTrack__Event_t> {
+public partial interface CNmSyncTrack__Event_t : ISchemaClass<CNmSyncTrack__Event_t>
+{
+    static CNmSyncTrack__Event_t ISchemaClass<CNmSyncTrack__Event_t>.From(nint handle) => new CNmSyncTrack__Event_tImpl(handle);
+    static int ISchemaClass<CNmSyncTrack__Event_t>.Size => 16;
+    static string? ISchemaClass<CNmSyncTrack__Event_t>.ClassName => null;
 
-  static CNmSyncTrack__Event_t ISchemaClass<CNmSyncTrack__Event_t>.From(nint handle) => new CNmSyncTrack__Event_tImpl(handle);
-  static int ISchemaClass<CNmSyncTrack__Event_t>.Size => 16;
-  static string? ISchemaClass<CNmSyncTrack__Event_t>.ClassName => null;
 
-  
-  public ref CGlobalSymbol ID { get; }
-  
-  public NmPercent_t StartTime { get; }
-  
-  public NmPercent_t Duration { get; }
+    public ref CGlobalSymbol ID { get; }
+
+    public NmPercent_t StartTime { get; }
+
+    public NmPercent_t Duration { get; }
 
 
 }

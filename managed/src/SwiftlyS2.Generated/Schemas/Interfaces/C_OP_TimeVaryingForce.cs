@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_TimeVaryingForce : CParticleFunctionForce, ISchemaClass<C_OP_TimeVaryingForce> {
+public partial interface C_OP_TimeVaryingForce : CParticleFunctionForce, ISchemaClass<C_OP_TimeVaryingForce>
+{
+    static C_OP_TimeVaryingForce ISchemaClass<C_OP_TimeVaryingForce>.From(nint handle) => new C_OP_TimeVaryingForceImpl(handle);
+    static int ISchemaClass<C_OP_TimeVaryingForce>.Size => 512;
+    static string? ISchemaClass<C_OP_TimeVaryingForce>.ClassName => null;
 
-  static C_OP_TimeVaryingForce ISchemaClass<C_OP_TimeVaryingForce>.From(nint handle) => new C_OP_TimeVaryingForceImpl(handle);
-  static int ISchemaClass<C_OP_TimeVaryingForce>.Size => 512;
-  static string? ISchemaClass<C_OP_TimeVaryingForce>.ClassName => null;
 
-  
-  public ref float StartLerpTime { get; }
-  
-  public ref Vector StartingForce { get; }
-  
-  public ref float EndLerpTime { get; }
-  
-  public ref Vector EndingForce { get; }
+    public ref float StartLerpTime { get; }
+
+    public ref Vector StartingForce { get; }
+
+    public ref float EndLerpTime { get; }
+
+    public ref Vector EndingForce { get; }
 
 
 }

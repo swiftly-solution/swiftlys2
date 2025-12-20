@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRuleBrushEntity : CRuleEntity, ISchemaClass<CRuleBrushEntity> {
-
-  static CRuleBrushEntity ISchemaClass<CRuleBrushEntity>.From(nint handle) => new CRuleBrushEntityImpl(handle);
-  static int ISchemaClass<CRuleBrushEntity>.Size => 2016;
-  static string? ISchemaClass<CRuleBrushEntity>.ClassName => null;
+public partial interface CRuleBrushEntity : CRuleEntity, ISchemaClass<CRuleBrushEntity>
+{
+    static CRuleBrushEntity ISchemaClass<CRuleBrushEntity>.From(nint handle) => new CRuleBrushEntityImpl(handle);
+    static int ISchemaClass<CRuleBrushEntity>.Size => 2016;
+    static string? ISchemaClass<CRuleBrushEntity>.ClassName => null;
 
 
 

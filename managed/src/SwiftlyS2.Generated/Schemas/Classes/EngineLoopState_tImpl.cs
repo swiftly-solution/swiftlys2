@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EngineLoopState_tImpl : SchemaClass, EngineLoopState_t {
+internal partial class EngineLoopState_tImpl : SchemaClass, EngineLoopState_t
+{
+    public EngineLoopState_tImpl(nint handle) : base(handle) { }
 
-  public EngineLoopState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PlatWindowWidthOffset;
 
-  private static nint? _PlatWindowWidthOffset;
-
-  public ref int PlatWindowWidth {
-    get {
-      if (_PlatWindowWidthOffset == null) {
-        _PlatWindowWidthOffset = Schema.GetOffset(0x8A7EC4513AF18278);
-      }
-      return ref _Handle.AsRef<int>(_PlatWindowWidthOffset!.Value);
+    public ref int PlatWindowWidth {
+        get {
+            _PlatWindowWidthOffset = _PlatWindowWidthOffset ?? Schema.GetOffset(0x8A7EC4513AF18278);
+            return ref _Handle.AsRef<int>(_PlatWindowWidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlatWindowHeightOffset;
+    private static nint? _PlatWindowHeightOffset;
 
-  public ref int PlatWindowHeight {
-    get {
-      if (_PlatWindowHeightOffset == null) {
-        _PlatWindowHeightOffset = Schema.GetOffset(0x8A7EC45157A7B88F);
-      }
-      return ref _Handle.AsRef<int>(_PlatWindowHeightOffset!.Value);
+    public ref int PlatWindowHeight {
+        get {
+            _PlatWindowHeightOffset = _PlatWindowHeightOffset ?? Schema.GetOffset(0x8A7EC45157A7B88F);
+            return ref _Handle.AsRef<int>(_PlatWindowHeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _RenderWidthOffset;
+    private static nint? _RenderWidthOffset;
 
-  public ref int RenderWidth {
-    get {
-      if (_RenderWidthOffset == null) {
-        _RenderWidthOffset = Schema.GetOffset(0x8A7EC45179B0DC63);
-      }
-      return ref _Handle.AsRef<int>(_RenderWidthOffset!.Value);
+    public ref int RenderWidth {
+        get {
+            _RenderWidthOffset = _RenderWidthOffset ?? Schema.GetOffset(0x8A7EC45179B0DC63);
+            return ref _Handle.AsRef<int>(_RenderWidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _RenderHeightOffset;
+    private static nint? _RenderHeightOffset;
 
-  public ref int RenderHeight {
-    get {
-      if (_RenderHeightOffset == null) {
-        _RenderHeightOffset = Schema.GetOffset(0x8A7EC451A184E51E);
-      }
-      return ref _Handle.AsRef<int>(_RenderHeightOffset!.Value);
+    public ref int RenderHeight {
+        get {
+            _RenderHeightOffset = _RenderHeightOffset ?? Schema.GetOffset(0x8A7EC451A184E51E);
+            return ref _Handle.AsRef<int>(_RenderHeightOffset!.Value);
+        }
     }
-  }
 
 
 }

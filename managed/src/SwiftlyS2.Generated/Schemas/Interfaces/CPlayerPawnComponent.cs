@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayerPawnComponent : ISchemaClass<CPlayerPawnComponent> {
+public partial interface CPlayerPawnComponent : ISchemaClass<CPlayerPawnComponent>
+{
+    static CPlayerPawnComponent ISchemaClass<CPlayerPawnComponent>.From(nint handle) => new CPlayerPawnComponentImpl(handle);
+    static int ISchemaClass<CPlayerPawnComponent>.Size => 64;
+    static string? ISchemaClass<CPlayerPawnComponent>.ClassName => null;
 
-  static CPlayerPawnComponent ISchemaClass<CPlayerPawnComponent>.From(nint handle) => new CPlayerPawnComponentImpl(handle);
-  static int ISchemaClass<CPlayerPawnComponent>.Size => 64;
-  static string? ISchemaClass<CPlayerPawnComponent>.ClassName => null;
 
-  
-  public ref CNetworkVarChainer __m_pChainEntity { get; }
+    public ref CNetworkVarChainer __m_pChainEntity { get; }
 
 
 }

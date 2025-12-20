@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixDualCompressorDesc_t : ISchemaClass<VMixDualCompressorDesc_t> {
+public partial interface VMixDualCompressorDesc_t : ISchemaClass<VMixDualCompressorDesc_t>
+{
+    static VMixDualCompressorDesc_t ISchemaClass<VMixDualCompressorDesc_t>.From(nint handle) => new VMixDualCompressorDesc_tImpl(handle);
+    static int ISchemaClass<VMixDualCompressorDesc_t>.Size => 52;
+    static string? ISchemaClass<VMixDualCompressorDesc_t>.ClassName => null;
 
-  static VMixDualCompressorDesc_t ISchemaClass<VMixDualCompressorDesc_t>.From(nint handle) => new VMixDualCompressorDesc_tImpl(handle);
-  static int ISchemaClass<VMixDualCompressorDesc_t>.Size => 52;
-  static string? ISchemaClass<VMixDualCompressorDesc_t>.ClassName => null;
 
-  
-  public ref float RMSTimeMS { get; }
-  
-  public ref float FldbKneeWidth { get; }
-  
-  public ref float WetMix { get; }
-  
-  public ref bool PeakMode { get; }
-  
-  public VMixDynamicsBand_t BandDesc { get; }
+    public ref float RMSTimeMS { get; }
+
+    public ref float FldbKneeWidth { get; }
+
+    public ref float WetMix { get; }
+
+    public ref bool PeakMode { get; }
+
+    public VMixDynamicsBand_t BandDesc { get; }
 
 
 }

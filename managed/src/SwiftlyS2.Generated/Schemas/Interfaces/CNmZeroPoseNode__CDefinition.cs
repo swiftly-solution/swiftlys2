@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmZeroPoseNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmZeroPoseNode__CDefinition> {
-
-  static CNmZeroPoseNode__CDefinition ISchemaClass<CNmZeroPoseNode__CDefinition>.From(nint handle) => new CNmZeroPoseNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmZeroPoseNode__CDefinition>.Size => 16;
-  static string? ISchemaClass<CNmZeroPoseNode__CDefinition>.ClassName => null;
+public partial interface CNmZeroPoseNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmZeroPoseNode__CDefinition>
+{
+    static CNmZeroPoseNode__CDefinition ISchemaClass<CNmZeroPoseNode__CDefinition>.From(nint handle) => new CNmZeroPoseNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmZeroPoseNode__CDefinition>.Size => 16;
+    static string? ISchemaClass<CNmZeroPoseNode__CDefinition>.ClassName => null;
 
 
 

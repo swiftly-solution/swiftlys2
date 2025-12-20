@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RopeSpringConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_RopeSpringConstraint> {
+public partial interface C_OP_RopeSpringConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_RopeSpringConstraint>
+{
+    static C_OP_RopeSpringConstraint ISchemaClass<C_OP_RopeSpringConstraint>.From(nint handle) => new C_OP_RopeSpringConstraintImpl(handle);
+    static int ISchemaClass<C_OP_RopeSpringConstraint>.Size => 1944;
+    static string? ISchemaClass<C_OP_RopeSpringConstraint>.ClassName => null;
 
-  static C_OP_RopeSpringConstraint ISchemaClass<C_OP_RopeSpringConstraint>.From(nint handle) => new C_OP_RopeSpringConstraintImpl(handle);
-  static int ISchemaClass<C_OP_RopeSpringConstraint>.Size => 1944;
-  static string? ISchemaClass<C_OP_RopeSpringConstraint>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput RestLength { get; }
-  
-  public CParticleCollectionFloatInput MinDistance { get; }
-  
-  public CParticleCollectionFloatInput MaxDistance { get; }
-  
-  public ref float AdjustmentScale { get; }
-  
-  public CParticleCollectionFloatInput InitialRestingLength { get; }
+    public CParticleCollectionFloatInput RestLength { get; }
+
+    public CParticleCollectionFloatInput MinDistance { get; }
+
+    public CParticleCollectionFloatInput MaxDistance { get; }
+
+    public ref float AdjustmentScale { get; }
+
+    public CParticleCollectionFloatInput InitialRestingLength { get; }
 
 
 }

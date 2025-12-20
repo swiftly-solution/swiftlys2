@@ -8,35 +8,35 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VPhysicsCollisionAttribute_t : ISchemaClass<VPhysicsCollisionAttribute_t> {
+public partial interface VPhysicsCollisionAttribute_t : ISchemaClass<VPhysicsCollisionAttribute_t>
+{
+    static VPhysicsCollisionAttribute_t ISchemaClass<VPhysicsCollisionAttribute_t>.From(nint handle) => new VPhysicsCollisionAttribute_tImpl(handle);
+    static int ISchemaClass<VPhysicsCollisionAttribute_t>.Size => 48;
+    static string? ISchemaClass<VPhysicsCollisionAttribute_t>.ClassName => null;
 
-  static VPhysicsCollisionAttribute_t ISchemaClass<VPhysicsCollisionAttribute_t>.From(nint handle) => new VPhysicsCollisionAttribute_tImpl(handle);
-  static int ISchemaClass<VPhysicsCollisionAttribute_t>.Size => 48;
-  static string? ISchemaClass<VPhysicsCollisionAttribute_t>.ClassName => null;
 
-  
-  public ref ulong InteractsAs { get; }
-  
-  public ref ulong InteractsWith { get; }
-  
-  public ref ulong InteractsExclude { get; }
-  
-  public ref uint EntityId { get; }
-  
-  public ref uint OwnerId { get; }
-  
-  public ref ushort HierarchyId { get; }
-  
-  public ref byte CollisionGroup { get; }
-  
-  public ref byte CollisionFunctionMask { get; }
+    public ref ulong InteractsAs { get; }
 
-  public void InteractsAsUpdated();
-  public void InteractsWithUpdated();
-  public void InteractsExcludeUpdated();
-  public void EntityIdUpdated();
-  public void OwnerIdUpdated();
-  public void HierarchyIdUpdated();
-  public void CollisionGroupUpdated();
-  public void CollisionFunctionMaskUpdated();
+    public ref ulong InteractsWith { get; }
+
+    public ref ulong InteractsExclude { get; }
+
+    public ref uint EntityId { get; }
+
+    public ref uint OwnerId { get; }
+
+    public ref ushort HierarchyId { get; }
+
+    public ref byte CollisionGroup { get; }
+
+    public ref byte CollisionFunctionMask { get; }
+
+    public void InteractsAsUpdated();
+    public void InteractsWithUpdated();
+    public void InteractsExcludeUpdated();
+    public void EntityIdUpdated();
+    public void OwnerIdUpdated();
+    public void HierarchyIdUpdated();
+    public void CollisionGroupUpdated();
+    public void CollisionFunctionMaskUpdated();
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_Decay : CParticleFunctionOperator, ISchemaClass<C_OP_Decay> {
+public partial interface C_OP_Decay : CParticleFunctionOperator, ISchemaClass<C_OP_Decay>
+{
+    static C_OP_Decay ISchemaClass<C_OP_Decay>.From(nint handle) => new C_OP_DecayImpl(handle);
+    static int ISchemaClass<C_OP_Decay>.Size => 472;
+    static string? ISchemaClass<C_OP_Decay>.ClassName => null;
 
-  static C_OP_Decay ISchemaClass<C_OP_Decay>.From(nint handle) => new C_OP_DecayImpl(handle);
-  static int ISchemaClass<C_OP_Decay>.Size => 472;
-  static string? ISchemaClass<C_OP_Decay>.ClassName => null;
 
-  
-  public ref bool RopeDecay { get; }
-  
-  public ref bool ForcePreserveParticleOrder { get; }
+    public ref bool RopeDecay { get; }
+
+    public ref bool ForcePreserveParticleOrder { get; }
 
 
 }

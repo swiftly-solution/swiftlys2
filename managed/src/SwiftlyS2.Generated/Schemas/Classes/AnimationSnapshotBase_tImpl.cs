@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AnimationSnapshotBase_tImpl : SchemaClass, AnimationSnapshotBase_t {
+internal partial class AnimationSnapshotBase_tImpl : SchemaClass, AnimationSnapshotBase_t
+{
+    public AnimationSnapshotBase_tImpl(nint handle) : base(handle) { }
 
-  public AnimationSnapshotBase_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RealTimeOffset;
 
-  private static nint? _RealTimeOffset;
-
-  public ref float RealTime {
-    get {
-      if (_RealTimeOffset == null) {
-        _RealTimeOffset = Schema.GetOffset(0x608F9331168EC02);
-      }
-      return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+    public ref float RealTime {
+        get {
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x608F9331168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _RootToWorldOffset;
+    private static nint? _RootToWorldOffset;
 
-  public ref matrix3x4_t RootToWorld {
-    get {
-      if (_RootToWorldOffset == null) {
-        _RootToWorldOffset = Schema.GetOffset(0x608F9331F80AFC0);
-      }
-      return ref _Handle.AsRef<matrix3x4_t>(_RootToWorldOffset!.Value);
+    public ref matrix3x4_t RootToWorld {
+        get {
+            _RootToWorldOffset = _RootToWorldOffset ?? Schema.GetOffset(0x608F9331F80AFC0);
+            return ref _Handle.AsRef<matrix3x4_t>(_RootToWorldOffset!.Value);
+        }
     }
-  }
-  private static nint? _BonesInWorldSpaceOffset;
+    private static nint? _BonesInWorldSpaceOffset;
 
-  public ref bool BonesInWorldSpace {
-    get {
-      if (_BonesInWorldSpaceOffset == null) {
-        _BonesInWorldSpaceOffset = Schema.GetOffset(0x608F933BDD22AA1);
-      }
-      return ref _Handle.AsRef<bool>(_BonesInWorldSpaceOffset!.Value);
+    public ref bool BonesInWorldSpace {
+        get {
+            _BonesInWorldSpaceOffset = _BonesInWorldSpaceOffset ?? Schema.GetOffset(0x608F933BDD22AA1);
+            return ref _Handle.AsRef<bool>(_BonesInWorldSpaceOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneSetupMaskOffset;
+    private static nint? _BoneSetupMaskOffset;
 
-  public ref CUtlVector<uint> BoneSetupMask {
-    get {
-      if (_BoneSetupMaskOffset == null) {
-        _BoneSetupMaskOffset = Schema.GetOffset(0x608F9334B3C48C8);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_BoneSetupMaskOffset!.Value);
+    public ref CUtlVector<uint> BoneSetupMask {
+        get {
+            _BoneSetupMaskOffset = _BoneSetupMaskOffset ?? Schema.GetOffset(0x608F9334B3C48C8);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_BoneSetupMaskOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneTransformsOffset;
+    private static nint? _BoneTransformsOffset;
 
-  public ref CUtlVector<matrix3x4_t> BoneTransforms {
-    get {
-      if (_BoneTransformsOffset == null) {
-        _BoneTransformsOffset = Schema.GetOffset(0x608F933ED000DE6);
-      }
-      return ref _Handle.AsRef<CUtlVector<matrix3x4_t>>(_BoneTransformsOffset!.Value);
+    public ref CUtlVector<matrix3x4_t> BoneTransforms {
+        get {
+            _BoneTransformsOffset = _BoneTransformsOffset ?? Schema.GetOffset(0x608F933ED000DE6);
+            return ref _Handle.AsRef<CUtlVector<matrix3x4_t>>(_BoneTransformsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlexControllersOffset;
+    private static nint? _FlexControllersOffset;
 
-  public ref CUtlVector<float> FlexControllers {
-    get {
-      if (_FlexControllersOffset == null) {
-        _FlexControllersOffset = Schema.GetOffset(0x608F9337742939B);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_FlexControllersOffset!.Value);
+    public ref CUtlVector<float> FlexControllers {
+        get {
+            _FlexControllersOffset = _FlexControllersOffset ?? Schema.GetOffset(0x608F9337742939B);
+            return ref _Handle.AsRef<CUtlVector<float>>(_FlexControllersOffset!.Value);
+        }
     }
-  }
-  private static nint? _SnapshotTypeOffset;
+    private static nint? _SnapshotTypeOffset;
 
-  public ref AnimationSnapshotType_t SnapshotType {
-    get {
-      if (_SnapshotTypeOffset == null) {
-        _SnapshotTypeOffset = Schema.GetOffset(0x608F933533E5725);
-      }
-      return ref _Handle.AsRef<AnimationSnapshotType_t>(_SnapshotTypeOffset!.Value);
+    public ref AnimationSnapshotType_t SnapshotType {
+        get {
+            _SnapshotTypeOffset = _SnapshotTypeOffset ?? Schema.GetOffset(0x608F933533E5725);
+            return ref _Handle.AsRef<AnimationSnapshotType_t>(_SnapshotTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasDecodeDumpOffset;
+    private static nint? _HasDecodeDumpOffset;
 
-  public ref bool HasDecodeDump {
-    get {
-      if (_HasDecodeDumpOffset == null) {
-        _HasDecodeDumpOffset = Schema.GetOffset(0x608F933BECD8B97);
-      }
-      return ref _Handle.AsRef<bool>(_HasDecodeDumpOffset!.Value);
+    public ref bool HasDecodeDump {
+        get {
+            _HasDecodeDumpOffset = _HasDecodeDumpOffset ?? Schema.GetOffset(0x608F933BECD8B97);
+            return ref _Handle.AsRef<bool>(_HasDecodeDumpOffset!.Value);
+        }
     }
-  }
-  private static nint? _DecodeDumpOffset;
+    private static nint? _DecodeDumpOffset;
 
-  public AnimationDecodeDebugDumpElement_t DecodeDump {
-    get {
-      if (_DecodeDumpOffset == null) {
-        _DecodeDumpOffset = Schema.GetOffset(0x608F9332577A819);
-      }
-      return new AnimationDecodeDebugDumpElement_tImpl(_Handle + _DecodeDumpOffset!.Value);
+    public AnimationDecodeDebugDumpElement_t DecodeDump {
+        get {
+            _DecodeDumpOffset = _DecodeDumpOffset ?? Schema.GetOffset(0x608F9332577A819);
+            return new AnimationDecodeDebugDumpElement_tImpl(_Handle + _DecodeDumpOffset!.Value);
+        }
     }
-  }
 
 
 }

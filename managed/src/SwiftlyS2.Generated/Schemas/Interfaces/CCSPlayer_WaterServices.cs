@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayer_WaterServices : CPlayer_WaterServices, ISchemaClass<CCSPlayer_WaterServices> {
+public partial interface CCSPlayer_WaterServices : CPlayer_WaterServices, ISchemaClass<CCSPlayer_WaterServices>
+{
+    static CCSPlayer_WaterServices ISchemaClass<CCSPlayer_WaterServices>.From(nint handle) => new CCSPlayer_WaterServicesImpl(handle);
+    static int ISchemaClass<CCSPlayer_WaterServices>.Size => 120;
+    static string? ISchemaClass<CCSPlayer_WaterServices>.ClassName => null;
 
-  static CCSPlayer_WaterServices ISchemaClass<CCSPlayer_WaterServices>.From(nint handle) => new CCSPlayer_WaterServicesImpl(handle);
-  static int ISchemaClass<CCSPlayer_WaterServices>.Size => 120;
-  static string? ISchemaClass<CCSPlayer_WaterServices>.ClassName => null;
 
-  
-  public GameTime_t NextDrownDamageTime { get; }
-  
-  public ref int DrownDmgRate { get; }
-  
-  public GameTime_t AirFinishedTime { get; }
-  
-  public ref float WaterJumpTime { get; }
-  
-  public ref Vector WaterJumpVel { get; }
-  
-  public ref float SwimSoundTime { get; }
+    public GameTime_t NextDrownDamageTime { get; }
+
+    public ref int DrownDmgRate { get; }
+
+    public GameTime_t AirFinishedTime { get; }
+
+    public ref float WaterJumpTime { get; }
+
+    public ref Vector WaterJumpVel { get; }
+
+    public ref float SwimSoundTime { get; }
 
 
 }

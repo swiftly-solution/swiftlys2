@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapCPtoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapCPtoCP> {
+public partial interface C_OP_RemapCPtoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapCPtoCP>
+{
+    static C_OP_RemapCPtoCP ISchemaClass<C_OP_RemapCPtoCP>.From(nint handle) => new C_OP_RemapCPtoCPImpl(handle);
+    static int ISchemaClass<C_OP_RemapCPtoCP>.Size => 512;
+    static string? ISchemaClass<C_OP_RemapCPtoCP>.ClassName => null;
 
-  static C_OP_RemapCPtoCP ISchemaClass<C_OP_RemapCPtoCP>.From(nint handle) => new C_OP_RemapCPtoCPImpl(handle);
-  static int ISchemaClass<C_OP_RemapCPtoCP>.Size => 512;
-  static string? ISchemaClass<C_OP_RemapCPtoCP>.ClassName => null;
 
-  
-  public ref int InputControlPoint { get; }
-  
-  public ref int OutputControlPoint { get; }
-  
-  public ref int InputField { get; }
-  
-  public ref int OutputField { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref bool Derivative { get; }
-  
-  public ref float InterpRate { get; }
+    public ref int InputControlPoint { get; }
+
+    public ref int OutputControlPoint { get; }
+
+    public ref int InputField { get; }
+
+    public ref int OutputField { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref bool Derivative { get; }
+
+    public ref float InterpRate { get; }
 
 
 }

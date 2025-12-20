@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderMaterialProxyImpl : CParticleFunctionRendererImpl, C_OP_RenderMaterialProxy {
+internal partial class C_OP_RenderMaterialProxyImpl : CParticleFunctionRendererImpl, C_OP_RenderMaterialProxy
+{
+    public C_OP_RenderMaterialProxyImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderMaterialProxyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaterialControlPointOffset;
 
-  private static nint? _MaterialControlPointOffset;
-
-  public ref int MaterialControlPoint {
-    get {
-      if (_MaterialControlPointOffset == null) {
-        _MaterialControlPointOffset = Schema.GetOffset(0xA7258058EACD475D);
-      }
-      return ref _Handle.AsRef<int>(_MaterialControlPointOffset!.Value);
+    public ref int MaterialControlPoint {
+        get {
+            _MaterialControlPointOffset = _MaterialControlPointOffset ?? Schema.GetOffset(0xA7258058EACD475D);
+            return ref _Handle.AsRef<int>(_MaterialControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProxyTypeOffset;
+    private static nint? _ProxyTypeOffset;
 
-  public ref MaterialProxyType_t ProxyType {
-    get {
-      if (_ProxyTypeOffset == null) {
-        _ProxyTypeOffset = Schema.GetOffset(0xA7258058066A337F);
-      }
-      return ref _Handle.AsRef<MaterialProxyType_t>(_ProxyTypeOffset!.Value);
+    public ref MaterialProxyType_t ProxyType {
+        get {
+            _ProxyTypeOffset = _ProxyTypeOffset ?? Schema.GetOffset(0xA7258058066A337F);
+            return ref _Handle.AsRef<MaterialProxyType_t>(_ProxyTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialVarsOffset;
+    private static nint? _MaterialVarsOffset;
 
-  public ref CUtlVector<MaterialVariable_t> MaterialVars {
-    get {
-      if (_MaterialVarsOffset == null) {
-        _MaterialVarsOffset = Schema.GetOffset(0xA7258058FA861D66);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialVariable_t>>(_MaterialVarsOffset!.Value);
+    public ref CUtlVector<MaterialVariable_t> MaterialVars {
+        get {
+            _MaterialVarsOffset = _MaterialVarsOffset ?? Schema.GetOffset(0xA7258058FA861D66);
+            return ref _Handle.AsRef<CUtlVector<MaterialVariable_t>>(_MaterialVarsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverrideMaterialOffset;
+    private static nint? _OverrideMaterialOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> OverrideMaterial {
-    get {
-      if (_OverrideMaterialOffset == null) {
-        _OverrideMaterialOffset = Schema.GetOffset(0xA72580582C055CBE);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_OverrideMaterialOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> OverrideMaterial {
+        get {
+            _OverrideMaterialOffset = _OverrideMaterialOffset ?? Schema.GetOffset(0xA72580582C055CBE);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_OverrideMaterialOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialOverrideEnabledOffset;
+    private static nint? _MaterialOverrideEnabledOffset;
 
-  public CParticleCollectionFloatInput MaterialOverrideEnabled {
-    get {
-      if (_MaterialOverrideEnabledOffset == null) {
-        _MaterialOverrideEnabledOffset = Schema.GetOffset(0xA725805832275723);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _MaterialOverrideEnabledOffset!.Value);
+    public CParticleCollectionFloatInput MaterialOverrideEnabled {
+        get {
+            _MaterialOverrideEnabledOffset = _MaterialOverrideEnabledOffset ?? Schema.GetOffset(0xA725805832275723);
+            return new CParticleCollectionFloatInputImpl(_Handle + _MaterialOverrideEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorScaleOffset;
+    private static nint? _ColorScaleOffset;
 
-  public CParticleCollectionVecInput ColorScale {
-    get {
-      if (_ColorScaleOffset == null) {
-        _ColorScaleOffset = Schema.GetOffset(0xA72580589F9BB8BA);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+    public CParticleCollectionVecInput ColorScale {
+        get {
+            _ColorScaleOffset = _ColorScaleOffset ?? Schema.GetOffset(0xA72580589F9BB8BA);
+            return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaOffset;
+    private static nint? _AlphaOffset;
 
-  public CPerParticleFloatInput Alpha {
-    get {
-      if (_AlphaOffset == null) {
-        _AlphaOffset = Schema.GetOffset(0xA7258058A0DB7DD1);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _AlphaOffset!.Value);
+    public CPerParticleFloatInput Alpha {
+        get {
+            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0xA7258058A0DB7DD1);
+            return new CPerParticleFloatInputImpl(_Handle + _AlphaOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorBlendTypeOffset;
+    private static nint? _ColorBlendTypeOffset;
 
-  public ref ParticleColorBlendType_t ColorBlendType {
-    get {
-      if (_ColorBlendTypeOffset == null) {
-        _ColorBlendTypeOffset = Schema.GetOffset(0xA7258058DBC6EFCF);
-      }
-      return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+    public ref ParticleColorBlendType_t ColorBlendType {
+        get {
+            _ColorBlendTypeOffset = _ColorBlendTypeOffset ?? Schema.GetOffset(0xA7258058DBC6EFCF);
+            return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

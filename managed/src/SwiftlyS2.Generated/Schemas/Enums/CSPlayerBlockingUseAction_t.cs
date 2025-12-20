@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CSPlayerBlockingUseAction_t : uint {
-
+public enum CSPlayerBlockingUseAction_t : uint
+{
  k_CSPlayerBlockingUseAction_None = 0,
 
  k_CSPlayerBlockingUseAction_DefusingDefault = 1,

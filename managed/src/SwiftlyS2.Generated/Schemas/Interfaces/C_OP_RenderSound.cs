@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderSound : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderSound> {
+public partial interface C_OP_RenderSound : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderSound>
+{
+    static C_OP_RenderSound ISchemaClass<C_OP_RenderSound>.From(nint handle) => new C_OP_RenderSoundImpl(handle);
+    static int ISchemaClass<C_OP_RenderSound>.Size => 848;
+    static string? ISchemaClass<C_OP_RenderSound>.ClassName => null;
 
-  static C_OP_RenderSound ISchemaClass<C_OP_RenderSound>.From(nint handle) => new C_OP_RenderSoundImpl(handle);
-  static int ISchemaClass<C_OP_RenderSound>.Size => 848;
-  static string? ISchemaClass<C_OP_RenderSound>.ClassName => null;
 
-  
-  public ref float DurationScale { get; }
-  
-  public ref float SndLvlScale { get; }
-  
-  public ref float PitchScale { get; }
-  
-  public ref float VolumeScale { get; }
-  
-  public ParticleAttributeIndex_t SndLvlField { get; }
-  
-  public ParticleAttributeIndex_t DurationField { get; }
-  
-  public ParticleAttributeIndex_t PitchField { get; }
-  
-  public ParticleAttributeIndex_t VolumeField { get; }
-  
-  public ref int Channel { get; }
-  
-  public ref int CPReference { get; }
-  
-  public string SoundName { get; set; }
-  
-  public ref bool SuppressStopSoundEvent { get; }
+    public ref float DurationScale { get; }
+
+    public ref float SndLvlScale { get; }
+
+    public ref float PitchScale { get; }
+
+    public ref float VolumeScale { get; }
+
+    public ParticleAttributeIndex_t SndLvlField { get; }
+
+    public ParticleAttributeIndex_t DurationField { get; }
+
+    public ParticleAttributeIndex_t PitchField { get; }
+
+    public ParticleAttributeIndex_t VolumeField { get; }
+
+    public ref int Channel { get; }
+
+    public ref int CPReference { get; }
+
+    public string SoundName { get; set; }
+
+    public ref bool SuppressStopSoundEvent { get; }
 
 
 }

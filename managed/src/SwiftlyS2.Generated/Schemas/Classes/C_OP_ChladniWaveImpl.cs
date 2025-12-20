@@ -6,117 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ChladniWaveImpl : CParticleFunctionOperatorImpl, C_OP_ChladniWave {
+internal partial class C_OP_ChladniWaveImpl : CParticleFunctionOperatorImpl, C_OP_ChladniWave
+{
+    public C_OP_ChladniWaveImpl(nint handle) : base(handle) { }
 
-  public C_OP_ChladniWaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x5C575E1BE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x5C575E1BE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputMinOffset;
+    private static nint? _InputMinOffset;
 
-  public CPerParticleFloatInput InputMin {
-    get {
-      if (_InputMinOffset == null) {
-        _InputMinOffset = Schema.GetOffset(0x5C575E1BE88A0D0F);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InputMinOffset!.Value);
+    public CPerParticleFloatInput InputMin {
+        get {
+            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0x5C575E1BE88A0D0F);
+            return new CPerParticleFloatInputImpl(_Handle + _InputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputMaxOffset;
+    private static nint? _InputMaxOffset;
 
-  public CPerParticleFloatInput InputMax {
-    get {
-      if (_InputMaxOffset == null) {
-        _InputMaxOffset = Schema.GetOffset(0x5C575E1BD6766901);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InputMaxOffset!.Value);
+    public CPerParticleFloatInput InputMax {
+        get {
+            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0x5C575E1BD6766901);
+            return new CPerParticleFloatInputImpl(_Handle + _InputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMinOffset;
+    private static nint? _OutputMinOffset;
 
-  public CPerParticleFloatInput OutputMin {
-    get {
-      if (_OutputMinOffset == null) {
-        _OutputMinOffset = Schema.GetOffset(0x5C575E1B5F8D7716);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _OutputMinOffset!.Value);
+    public CPerParticleFloatInput OutputMin {
+        get {
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x5C575E1B5F8D7716);
+            return new CPerParticleFloatInputImpl(_Handle + _OutputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMaxOffset;
+    private static nint? _OutputMaxOffset;
 
-  public CPerParticleFloatInput OutputMax {
-    get {
-      if (_OutputMaxOffset == null) {
-        _OutputMaxOffset = Schema.GetOffset(0x5C575E1B51A0E8C4);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _OutputMaxOffset!.Value);
+    public CPerParticleFloatInput OutputMax {
+        get {
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x5C575E1B51A0E8C4);
+            return new CPerParticleFloatInputImpl(_Handle + _OutputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _WaveLengthOffset;
+    private static nint? _WaveLengthOffset;
 
-  public CPerParticleVecInput WaveLength {
-    get {
-      if (_WaveLengthOffset == null) {
-        _WaveLengthOffset = Schema.GetOffset(0x5C575E1B33948038);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _WaveLengthOffset!.Value);
+    public CPerParticleVecInput WaveLength {
+        get {
+            _WaveLengthOffset = _WaveLengthOffset ?? Schema.GetOffset(0x5C575E1B33948038);
+            return new CPerParticleVecInputImpl(_Handle + _WaveLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _HarmonicsOffset;
+    private static nint? _HarmonicsOffset;
 
-  public CPerParticleVecInput Harmonics {
-    get {
-      if (_HarmonicsOffset == null) {
-        _HarmonicsOffset = Schema.GetOffset(0x5C575E1B91D6B17F);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _HarmonicsOffset!.Value);
+    public CPerParticleVecInput Harmonics {
+        get {
+            _HarmonicsOffset = _HarmonicsOffset ?? Schema.GetOffset(0x5C575E1B91D6B17F);
+            return new CPerParticleVecInputImpl(_Handle + _HarmonicsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetMethodOffset;
+    private static nint? _SetMethodOffset;
 
-  public ref ParticleSetMethod_t SetMethod {
-    get {
-      if (_SetMethodOffset == null) {
-        _SetMethodOffset = Schema.GetOffset(0x5C575E1BFB53C31E);
-      }
-      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    public ref ParticleSetMethod_t SetMethod {
+        get {
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x5C575E1BFB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalSpaceControlPointOffset;
+    private static nint? _LocalSpaceControlPointOffset;
 
-  public ref int LocalSpaceControlPoint {
-    get {
-      if (_LocalSpaceControlPointOffset == null) {
-        _LocalSpaceControlPointOffset = Schema.GetOffset(0x5C575E1B1656DBF7);
-      }
-      return ref _Handle.AsRef<int>(_LocalSpaceControlPointOffset!.Value);
+    public ref int LocalSpaceControlPoint {
+        get {
+            _LocalSpaceControlPointOffset = _LocalSpaceControlPointOffset ?? Schema.GetOffset(0x5C575E1B1656DBF7);
+            return ref _Handle.AsRef<int>(_LocalSpaceControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _B3DOffset;
+    private static nint? _B3DOffset;
 
-  public ref bool B3D {
-    get {
-      if (_B3DOffset == null) {
-        _B3DOffset = Schema.GetOffset(0x5C575E1B24E1BE32);
-      }
-      return ref _Handle.AsRef<bool>(_B3DOffset!.Value);
+    public ref bool B3D {
+        get {
+            _B3DOffset = _B3DOffset ?? Schema.GetOffset(0x5C575E1B24E1BE32);
+            return ref _Handle.AsRef<bool>(_B3DOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,181 +8,181 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSWeaponBaseVData : CBasePlayerWeaponVData, ISchemaClass<CCSWeaponBaseVData> {
+public partial interface CCSWeaponBaseVData : CBasePlayerWeaponVData, ISchemaClass<CCSWeaponBaseVData>
+{
+    static CCSWeaponBaseVData ISchemaClass<CCSWeaponBaseVData>.From(nint handle) => new CCSWeaponBaseVDataImpl(handle);
+    static int ISchemaClass<CCSWeaponBaseVData>.Size => 2208;
+    static string? ISchemaClass<CCSWeaponBaseVData>.ClassName => null;
 
-  static CCSWeaponBaseVData ISchemaClass<CCSWeaponBaseVData>.From(nint handle) => new CCSWeaponBaseVDataImpl(handle);
-  static int ISchemaClass<CCSWeaponBaseVData>.Size => 2208;
-  static string? ISchemaClass<CCSWeaponBaseVData>.ClassName => null;
 
-  
-  public ref CSWeaponType WeaponType { get; }
-  
-  public ref CSWeaponCategory WeaponCategory { get; }
-  
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
-  public SchemaUntypedField Model_AG2 { get; }
-  
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCNmSkeleton > >
-  public SchemaUntypedField AnimSkeleton { get; }
-  
-  public ref Vector MuzzlePos0 { get; }
-  
-  public ref Vector MuzzlePos1 { get; }
-  
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
-  public SchemaUntypedField TracerParticle { get; }
-  
-  public ref gear_slot_t GearSlot { get; }
-  
-  public ref int GearSlotPosition { get; }
-  
-  public ref loadout_slot_t DefaultLoadoutSlot { get; }
-  
-  public ref int Price { get; }
-  
-  public ref int KillAward { get; }
-  
-  public ref int PrimaryReserveAmmoMax { get; }
-  
-  public ref int SecondaryReserveAmmoMax { get; }
-  
-  public ref bool MeleeWeapon { get; }
-  
-  public ref bool HasBurstMode { get; }
-  
-  public ref bool IsRevolver { get; }
-  
-  public ref bool CannotShootUnderwater { get; }
-  
-  public ref CGlobalSymbol Name { get; }
-  
-  public ref CSWeaponSilencerType SilencerType { get; }
-  
-  public ref int CrosshairMinDistance { get; }
-  
-  public ref int CrosshairDeltaDistance { get; }
-  
-  public ref bool IsFullAuto { get; }
-  
-  public ref int NumBullets { get; }
-  
-  public ref bool ReloadsSingleShells { get; }
-  
-  public CFiringModeFloat CycleTime { get; }
-  
-  public CFiringModeFloat MaxSpeed { get; }
-  
-  public CFiringModeFloat Spread { get; }
-  
-  public CFiringModeFloat InaccuracyCrouch { get; }
-  
-  public CFiringModeFloat InaccuracyStand { get; }
-  
-  public CFiringModeFloat InaccuracyJump { get; }
-  
-  public CFiringModeFloat InaccuracyLand { get; }
-  
-  public CFiringModeFloat InaccuracyLadder { get; }
-  
-  public CFiringModeFloat InaccuracyFire { get; }
-  
-  public CFiringModeFloat InaccuracyMove { get; }
-  
-  public CFiringModeFloat RecoilAngle { get; }
-  
-  public CFiringModeFloat RecoilAngleVariance { get; }
-  
-  public CFiringModeFloat RecoilMagnitude { get; }
-  
-  public CFiringModeFloat RecoilMagnitudeVariance { get; }
-  
-  public CFiringModeInt TracerFrequency { get; }
-  
-  public ref float InaccuracyJumpInitial { get; }
-  
-  public ref float InaccuracyJumpApex { get; }
-  
-  public ref float InaccuracyReload { get; }
-  
-  public ref float DeployDuration { get; }
-  
-  public ref float DisallowAttackAfterReloadStartDuration { get; }
-  
-  public ref int BurstShotCount { get; }
-  
-  public ref bool AllowBurstHolster { get; }
-  
-  public ref int RecoilSeed { get; }
-  
-  public ref int SpreadSeed { get; }
-  
-  public ref float AttackMovespeedFactor { get; }
-  
-  public ref float InaccuracyPitchShift { get; }
-  
-  public ref float InaccuracyAltSoundThreshold { get; }
-  
-  public string UseRadioSubtitle { get; set; }
-  
-  public ref bool UnzoomsAfterShot { get; }
-  
-  public ref bool HideViewModelWhenZoomed { get; }
-  
-  public ref int ZoomLevels { get; }
-  
-  public ref int ZoomFOV1 { get; }
-  
-  public ref int ZoomFOV2 { get; }
-  
-  public ref float ZoomTime0 { get; }
-  
-  public ref float ZoomTime1 { get; }
-  
-  public ref float ZoomTime2 { get; }
-  
-  public ref float IronSightPullUpSpeed { get; }
-  
-  public ref float IronSightPutDownSpeed { get; }
-  
-  public ref float IronSightFOV { get; }
-  
-  public ref float IronSightPivotForward { get; }
-  
-  public ref float IronSightLooseness { get; }
-  
-  public ref int Damage { get; }
-  
-  public ref float HeadshotMultiplier { get; }
-  
-  public ref float ArmorRatio { get; }
-  
-  public ref float Penetration { get; }
-  
-  public ref float Range { get; }
-  
-  public ref float RangeModifier { get; }
-  
-  public ref float FlinchVelocityModifierLarge { get; }
-  
-  public ref float FlinchVelocityModifierSmall { get; }
-  
-  public ref float RecoveryTimeCrouch { get; }
-  
-  public ref float RecoveryTimeStand { get; }
-  
-  public ref float RecoveryTimeCrouchFinal { get; }
-  
-  public ref float RecoveryTimeStandFinal { get; }
-  
-  public ref int RecoveryTransitionStartBullet { get; }
-  
-  public ref int RecoveryTransitionEndBullet { get; }
-  
-  public ref float ThrowVelocity { get; }
-  
-  public ref Vector SmokeColor { get; }
-  
-  public ref CGlobalSymbol AnimClass { get; }
+    public ref CSWeaponType WeaponType { get; }
+
+    public ref CSWeaponCategory WeaponCategory { get; }
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
+    public SchemaUntypedField Model_AG2 { get; }
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCNmSkeleton > >
+    public SchemaUntypedField AnimSkeleton { get; }
+
+    public ref Vector MuzzlePos0 { get; }
+
+    public ref Vector MuzzlePos1 { get; }
+
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeIParticleSystemDefinition > >
+    public SchemaUntypedField TracerParticle { get; }
+
+    public ref gear_slot_t GearSlot { get; }
+
+    public ref int GearSlotPosition { get; }
+
+    public ref loadout_slot_t DefaultLoadoutSlot { get; }
+
+    public ref int Price { get; }
+
+    public ref int KillAward { get; }
+
+    public ref int PrimaryReserveAmmoMax { get; }
+
+    public ref int SecondaryReserveAmmoMax { get; }
+
+    public ref bool MeleeWeapon { get; }
+
+    public ref bool HasBurstMode { get; }
+
+    public ref bool IsRevolver { get; }
+
+    public ref bool CannotShootUnderwater { get; }
+
+    public ref CGlobalSymbol Name { get; }
+
+    public ref CSWeaponSilencerType SilencerType { get; }
+
+    public ref int CrosshairMinDistance { get; }
+
+    public ref int CrosshairDeltaDistance { get; }
+
+    public ref bool IsFullAuto { get; }
+
+    public ref int NumBullets { get; }
+
+    public ref bool ReloadsSingleShells { get; }
+
+    public CFiringModeFloat CycleTime { get; }
+
+    public CFiringModeFloat MaxSpeed { get; }
+
+    public CFiringModeFloat Spread { get; }
+
+    public CFiringModeFloat InaccuracyCrouch { get; }
+
+    public CFiringModeFloat InaccuracyStand { get; }
+
+    public CFiringModeFloat InaccuracyJump { get; }
+
+    public CFiringModeFloat InaccuracyLand { get; }
+
+    public CFiringModeFloat InaccuracyLadder { get; }
+
+    public CFiringModeFloat InaccuracyFire { get; }
+
+    public CFiringModeFloat InaccuracyMove { get; }
+
+    public CFiringModeFloat RecoilAngle { get; }
+
+    public CFiringModeFloat RecoilAngleVariance { get; }
+
+    public CFiringModeFloat RecoilMagnitude { get; }
+
+    public CFiringModeFloat RecoilMagnitudeVariance { get; }
+
+    public CFiringModeInt TracerFrequency { get; }
+
+    public ref float InaccuracyJumpInitial { get; }
+
+    public ref float InaccuracyJumpApex { get; }
+
+    public ref float InaccuracyReload { get; }
+
+    public ref float DeployDuration { get; }
+
+    public ref float DisallowAttackAfterReloadStartDuration { get; }
+
+    public ref int BurstShotCount { get; }
+
+    public ref bool AllowBurstHolster { get; }
+
+    public ref int RecoilSeed { get; }
+
+    public ref int SpreadSeed { get; }
+
+    public ref float AttackMovespeedFactor { get; }
+
+    public ref float InaccuracyPitchShift { get; }
+
+    public ref float InaccuracyAltSoundThreshold { get; }
+
+    public string UseRadioSubtitle { get; set; }
+
+    public ref bool UnzoomsAfterShot { get; }
+
+    public ref bool HideViewModelWhenZoomed { get; }
+
+    public ref int ZoomLevels { get; }
+
+    public ref int ZoomFOV1 { get; }
+
+    public ref int ZoomFOV2 { get; }
+
+    public ref float ZoomTime0 { get; }
+
+    public ref float ZoomTime1 { get; }
+
+    public ref float ZoomTime2 { get; }
+
+    public ref float IronSightPullUpSpeed { get; }
+
+    public ref float IronSightPutDownSpeed { get; }
+
+    public ref float IronSightFOV { get; }
+
+    public ref float IronSightPivotForward { get; }
+
+    public ref float IronSightLooseness { get; }
+
+    public ref int Damage { get; }
+
+    public ref float HeadshotMultiplier { get; }
+
+    public ref float ArmorRatio { get; }
+
+    public ref float Penetration { get; }
+
+    public ref float Range { get; }
+
+    public ref float RangeModifier { get; }
+
+    public ref float FlinchVelocityModifierLarge { get; }
+
+    public ref float FlinchVelocityModifierSmall { get; }
+
+    public ref float RecoveryTimeCrouch { get; }
+
+    public ref float RecoveryTimeStand { get; }
+
+    public ref float RecoveryTimeCrouchFinal { get; }
+
+    public ref float RecoveryTimeStandFinal { get; }
+
+    public ref int RecoveryTransitionStartBullet { get; }
+
+    public ref int RecoveryTransitionEndBullet { get; }
+
+    public ref float ThrowVelocity { get; }
+
+    public ref Vector SmokeColor { get; }
+
+    public ref CGlobalSymbol AnimClass { get; }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetGravityToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetGravityToCP> {
+public partial interface C_OP_SetGravityToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetGravityToCP>
+{
+    static C_OP_SetGravityToCP ISchemaClass<C_OP_SetGravityToCP>.From(nint handle) => new C_OP_SetGravityToCPImpl(handle);
+    static int ISchemaClass<C_OP_SetGravityToCP>.Size => 856;
+    static string? ISchemaClass<C_OP_SetGravityToCP>.ClassName => null;
 
-  static C_OP_SetGravityToCP ISchemaClass<C_OP_SetGravityToCP>.From(nint handle) => new C_OP_SetGravityToCPImpl(handle);
-  static int ISchemaClass<C_OP_SetGravityToCP>.Size => 856;
-  static string? ISchemaClass<C_OP_SetGravityToCP>.ClassName => null;
 
-  
-  public ref int CPInput { get; }
-  
-  public ref int CPOutput { get; }
-  
-  public CParticleCollectionFloatInput Scale { get; }
-  
-  public ref bool SetOrientation { get; }
-  
-  public ref bool SetZDown { get; }
+    public ref int CPInput { get; }
+
+    public ref int CPOutput { get; }
+
+    public CParticleCollectionFloatInput Scale { get; }
+
+    public ref bool SetOrientation { get; }
+
+    public ref bool SetZDown { get; }
 
 
 }

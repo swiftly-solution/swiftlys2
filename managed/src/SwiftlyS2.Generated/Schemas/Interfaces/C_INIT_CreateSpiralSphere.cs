@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateSpiralSphere : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateSpiralSphere> {
+public partial interface C_INIT_CreateSpiralSphere : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateSpiralSphere>
+{
+    static C_INIT_CreateSpiralSphere ISchemaClass<C_INIT_CreateSpiralSphere>.From(nint handle) => new C_INIT_CreateSpiralSphereImpl(handle);
+    static int ISchemaClass<C_INIT_CreateSpiralSphere>.Size => 504;
+    static string? ISchemaClass<C_INIT_CreateSpiralSphere>.ClassName => null;
 
-  static C_INIT_CreateSpiralSphere ISchemaClass<C_INIT_CreateSpiralSphere>.From(nint handle) => new C_INIT_CreateSpiralSphereImpl(handle);
-  static int ISchemaClass<C_INIT_CreateSpiralSphere>.Size => 504;
-  static string? ISchemaClass<C_INIT_CreateSpiralSphere>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref int OverrideCP { get; }
-  
-  public ref int Density { get; }
-  
-  public ref float InitialRadius { get; }
-  
-  public ref float InitialSpeedMin { get; }
-  
-  public ref float InitialSpeedMax { get; }
-  
-  public ref bool UseParticleCount { get; }
+    public ref int ControlPointNumber { get; }
+
+    public ref int OverrideCP { get; }
+
+    public ref int Density { get; }
+
+    public ref float InitialRadius { get; }
+
+    public ref float InitialSpeedMin { get; }
+
+    public ref float InitialSpeedMax { get; }
+
+    public ref bool UseParticleCount { get; }
 
 
 }

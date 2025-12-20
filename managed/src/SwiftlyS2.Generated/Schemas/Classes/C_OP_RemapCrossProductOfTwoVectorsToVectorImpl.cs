@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapCrossProductOfTwoVectorsToVectorImpl : CParticleFunctionOperatorImpl, C_OP_RemapCrossProductOfTwoVectorsToVector {
+internal partial class C_OP_RemapCrossProductOfTwoVectorsToVectorImpl : CParticleFunctionOperatorImpl, C_OP_RemapCrossProductOfTwoVectorsToVector
+{
+    public C_OP_RemapCrossProductOfTwoVectorsToVectorImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapCrossProductOfTwoVectorsToVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputVec1Offset;
 
-  private static nint? _InputVec1Offset;
-
-  public CPerParticleVecInput InputVec1 {
-    get {
-      if (_InputVec1Offset == null) {
-        _InputVec1Offset = Schema.GetOffset(0x4B4531D84584355A);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _InputVec1Offset!.Value);
+    public CPerParticleVecInput InputVec1 {
+        get {
+            _InputVec1Offset = _InputVec1Offset ?? Schema.GetOffset(0x4B4531D84584355A);
+            return new CPerParticleVecInputImpl(_Handle + _InputVec1Offset!.Value);
+        }
     }
-  }
-  private static nint? _InputVec2Offset;
+    private static nint? _InputVec2Offset;
 
-  public CPerParticleVecInput InputVec2 {
-    get {
-      if (_InputVec2Offset == null) {
-        _InputVec2Offset = Schema.GetOffset(0x4B4531D8448433C7);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _InputVec2Offset!.Value);
+    public CPerParticleVecInput InputVec2 {
+        get {
+            _InputVec2Offset = _InputVec2Offset ?? Schema.GetOffset(0x4B4531D8448433C7);
+            return new CPerParticleVecInputImpl(_Handle + _InputVec2Offset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x4B4531D8E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4B4531D8E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _NormalizeOffset;
+    private static nint? _NormalizeOffset;
 
-  public ref bool Normalize {
-    get {
-      if (_NormalizeOffset == null) {
-        _NormalizeOffset = Schema.GetOffset(0x4B4531D848BC424C);
-      }
-      return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+    public ref bool Normalize {
+        get {
+            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0x4B4531D848BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+        }
     }
-  }
 
 
 }

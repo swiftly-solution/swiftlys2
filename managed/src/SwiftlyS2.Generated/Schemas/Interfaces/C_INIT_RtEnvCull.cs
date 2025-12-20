@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RtEnvCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_RtEnvCull> {
+public partial interface C_INIT_RtEnvCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_RtEnvCull>
+{
+    static C_INIT_RtEnvCull ISchemaClass<C_INIT_RtEnvCull>.From(nint handle) => new C_INIT_RtEnvCullImpl(handle);
+    static int ISchemaClass<C_INIT_RtEnvCull>.Size => 640;
+    static string? ISchemaClass<C_INIT_RtEnvCull>.ClassName => null;
 
-  static C_INIT_RtEnvCull ISchemaClass<C_INIT_RtEnvCull>.From(nint handle) => new C_INIT_RtEnvCullImpl(handle);
-  static int ISchemaClass<C_INIT_RtEnvCull>.Size => 640;
-  static string? ISchemaClass<C_INIT_RtEnvCull>.ClassName => null;
 
-  
-  public ref Vector TestDir { get; }
-  
-  public ref Vector TestNormal { get; }
-  
-  public ref bool UseVelocity { get; }
-  
-  public ref bool CullOnMiss { get; }
-  
-  public ref bool LifeAdjust { get; }
-  
-  public string RtEnvName { get; set; }
-  
-  public ref int RTEnvCP { get; }
-  
-  public ref int Component { get; }
+    public ref Vector TestDir { get; }
+
+    public ref Vector TestNormal { get; }
+
+    public ref bool UseVelocity { get; }
+
+    public ref bool CullOnMiss { get; }
+
+    public ref bool LifeAdjust { get; }
+
+    public string RtEnvName { get; set; }
+
+    public ref int RTEnvCP { get; }
+
+    public ref int Component { get; }
 
 
 }

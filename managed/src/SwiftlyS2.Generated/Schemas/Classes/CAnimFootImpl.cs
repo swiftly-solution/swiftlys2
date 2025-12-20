@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimFootImpl : SchemaClass, CAnimFoot {
+internal partial class CAnimFootImpl : SchemaClass, CAnimFoot
+{
+    public CAnimFootImpl(nint handle) : base(handle) { }
 
-  public CAnimFootImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x583A05E34D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x583A05E34D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _BallOffsetOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x583A05E34D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref Vector BallOffset {
+        get {
+            _BallOffsetOffset = _BallOffsetOffset ?? Schema.GetOffset(0x583A05E3E3376F1B);
+            return ref _Handle.AsRef<Vector>(_BallOffsetOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x583A05E34D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _BallOffsetOffset;
+    private static nint? _HeelOffsetOffset;
 
-  public ref Vector BallOffset {
-    get {
-      if (_BallOffsetOffset == null) {
-        _BallOffsetOffset = Schema.GetOffset(0x583A05E3E3376F1B);
-      }
-      return ref _Handle.AsRef<Vector>(_BallOffsetOffset!.Value);
+    public ref Vector HeelOffset {
+        get {
+            _HeelOffsetOffset = _HeelOffsetOffset ?? Schema.GetOffset(0x583A05E3306AE608);
+            return ref _Handle.AsRef<Vector>(_HeelOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeelOffsetOffset;
+    private static nint? _AnkleBoneIndexOffset;
 
-  public ref Vector HeelOffset {
-    get {
-      if (_HeelOffsetOffset == null) {
-        _HeelOffsetOffset = Schema.GetOffset(0x583A05E3306AE608);
-      }
-      return ref _Handle.AsRef<Vector>(_HeelOffsetOffset!.Value);
+    public ref int AnkleBoneIndex {
+        get {
+            _AnkleBoneIndexOffset = _AnkleBoneIndexOffset ?? Schema.GetOffset(0x583A05E31E89F146);
+            return ref _Handle.AsRef<int>(_AnkleBoneIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnkleBoneIndexOffset;
+    private static nint? _ToeBoneIndexOffset;
 
-  public ref int AnkleBoneIndex {
-    get {
-      if (_AnkleBoneIndexOffset == null) {
-        _AnkleBoneIndexOffset = Schema.GetOffset(0x583A05E31E89F146);
-      }
-      return ref _Handle.AsRef<int>(_AnkleBoneIndexOffset!.Value);
+    public ref int ToeBoneIndex {
+        get {
+            _ToeBoneIndexOffset = _ToeBoneIndexOffset ?? Schema.GetOffset(0x583A05E3EEF7CC57);
+            return ref _Handle.AsRef<int>(_ToeBoneIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ToeBoneIndexOffset;
-
-  public ref int ToeBoneIndex {
-    get {
-      if (_ToeBoneIndexOffset == null) {
-        _ToeBoneIndexOffset = Schema.GetOffset(0x583A05E3EEF7CC57);
-      }
-      return ref _Handle.AsRef<int>(_ToeBoneIndexOffset!.Value);
-    }
-  }
 
 
 }

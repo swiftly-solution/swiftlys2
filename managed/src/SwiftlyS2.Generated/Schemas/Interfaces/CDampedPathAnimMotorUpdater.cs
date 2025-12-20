@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDampedPathAnimMotorUpdater : CPathAnimMotorUpdaterBase, ISchemaClass<CDampedPathAnimMotorUpdater> {
+public partial interface CDampedPathAnimMotorUpdater : CPathAnimMotorUpdaterBase, ISchemaClass<CDampedPathAnimMotorUpdater>
+{
+    static CDampedPathAnimMotorUpdater ISchemaClass<CDampedPathAnimMotorUpdater>.From(nint handle) => new CDampedPathAnimMotorUpdaterImpl(handle);
+    static int ISchemaClass<CDampedPathAnimMotorUpdater>.Size => 72;
+    static string? ISchemaClass<CDampedPathAnimMotorUpdater>.ClassName => null;
 
-  static CDampedPathAnimMotorUpdater ISchemaClass<CDampedPathAnimMotorUpdater>.From(nint handle) => new CDampedPathAnimMotorUpdaterImpl(handle);
-  static int ISchemaClass<CDampedPathAnimMotorUpdater>.Size => 72;
-  static string? ISchemaClass<CDampedPathAnimMotorUpdater>.ClassName => null;
 
-  
-  public ref float AnticipationTime { get; }
-  
-  public ref float MinSpeedScale { get; }
-  
-  public CAnimParamHandle AnticipationPosParam { get; }
-  
-  public CAnimParamHandle AnticipationHeadingParam { get; }
-  
-  public ref float SpringConstant { get; }
-  
-  public ref float MinSpringTension { get; }
-  
-  public ref float MaxSpringTension { get; }
+    public ref float AnticipationTime { get; }
+
+    public ref float MinSpeedScale { get; }
+
+    public CAnimParamHandle AnticipationPosParam { get; }
+
+    public CAnimParamHandle AnticipationHeadingParam { get; }
+
+    public ref float SpringConstant { get; }
+
+    public ref float MinSpringTension { get; }
+
+    public ref float MaxSpringTension { get; }
 
 
 }

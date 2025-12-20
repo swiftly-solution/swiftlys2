@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootMotion : ISchemaClass<CFootMotion> {
+public partial interface CFootMotion : ISchemaClass<CFootMotion>
+{
+    static CFootMotion ISchemaClass<CFootMotion>.From(nint handle) => new CFootMotionImpl(handle);
+    static int ISchemaClass<CFootMotion>.Size => 40;
+    static string? ISchemaClass<CFootMotion>.ClassName => null;
 
-  static CFootMotion ISchemaClass<CFootMotion>.From(nint handle) => new CFootMotionImpl(handle);
-  static int ISchemaClass<CFootMotion>.Size => 40;
-  static string? ISchemaClass<CFootMotion>.ClassName => null;
 
-  
-  public ref CUtlVector<CFootStride> Strides { get; }
-  
-  public string Name { get; set; }
-  
-  public ref bool Additive { get; }
+    public ref CUtlVector<CFootStride> Strides { get; }
+
+    public string Name { get; set; }
+
+    public ref bool Additive { get; }
 
 
 }

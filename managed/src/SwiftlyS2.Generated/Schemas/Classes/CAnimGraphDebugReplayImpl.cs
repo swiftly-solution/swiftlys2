@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimGraphDebugReplayImpl : SchemaClass, CAnimGraphDebugReplay {
+internal partial class CAnimGraphDebugReplayImpl : SchemaClass, CAnimGraphDebugReplay
+{
+    public CAnimGraphDebugReplayImpl(nint handle) : base(handle) { }
 
-  public CAnimGraphDebugReplayImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AnimGraphFileNameOffset;
 
-  private static nint? _AnimGraphFileNameOffset;
+    public string AnimGraphFileName {
+        get {
+            _AnimGraphFileNameOffset = _AnimGraphFileNameOffset ?? Schema.GetOffset(0x31D5349314D2CC69);
+            return Schema.GetString(_Handle.Read<nint>(_AnimGraphFileNameOffset!.Value));
+        }
+        set {
+            _AnimGraphFileNameOffset = _AnimGraphFileNameOffset ?? Schema.GetOffset(0x31D5349314D2CC69);
+            Schema.SetString(_Handle, _AnimGraphFileNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FrameListOffset;
 
-  public string AnimGraphFileName {
-    get {
-      if (_AnimGraphFileNameOffset == null) {
-        _AnimGraphFileNameOffset = Schema.GetOffset(0x31D5349314D2CC69);
-      }
-      var ptr = _Handle.Read<nint>(_AnimGraphFileNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<SchemaUntypedField> FrameList {
+        get {
+            _FrameListOffset = _FrameListOffset ?? Schema.GetOffset(0x31D5349393EB99F2);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_FrameListOffset!.Value);
+        }
     }
-    set {
-      if (_AnimGraphFileNameOffset == null) {
-        _AnimGraphFileNameOffset = Schema.GetOffset(0x31D5349314D2CC69);
-      }
-      Schema.SetString(_Handle, _AnimGraphFileNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _FrameListOffset;
+    private static nint? _StartIndexOffset;
 
-  public ref CUtlVector<SchemaUntypedField> FrameList {
-    get {
-      if (_FrameListOffset == null) {
-        _FrameListOffset = Schema.GetOffset(0x31D5349393EB99F2);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_FrameListOffset!.Value);
+    public ref int StartIndex {
+        get {
+            _StartIndexOffset = _StartIndexOffset ?? Schema.GetOffset(0x31D534939F316D25);
+            return ref _Handle.AsRef<int>(_StartIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartIndexOffset;
+    private static nint? _WriteIndexOffset;
 
-  public ref int StartIndex {
-    get {
-      if (_StartIndexOffset == null) {
-        _StartIndexOffset = Schema.GetOffset(0x31D534939F316D25);
-      }
-      return ref _Handle.AsRef<int>(_StartIndexOffset!.Value);
+    public ref int WriteIndex {
+        get {
+            _WriteIndexOffset = _WriteIndexOffset ?? Schema.GetOffset(0x31D53493161871B8);
+            return ref _Handle.AsRef<int>(_WriteIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _WriteIndexOffset;
+    private static nint? _FrameCountOffset;
 
-  public ref int WriteIndex {
-    get {
-      if (_WriteIndexOffset == null) {
-        _WriteIndexOffset = Schema.GetOffset(0x31D53493161871B8);
-      }
-      return ref _Handle.AsRef<int>(_WriteIndexOffset!.Value);
+    public ref int FrameCount {
+        get {
+            _FrameCountOffset = _FrameCountOffset ?? Schema.GetOffset(0x31D53493B0C97215);
+            return ref _Handle.AsRef<int>(_FrameCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _FrameCountOffset;
-
-  public ref int FrameCount {
-    get {
-      if (_FrameCountOffset == null) {
-        _FrameCountOffset = Schema.GetOffset(0x31D53493B0C97215);
-      }
-      return ref _Handle.AsRef<int>(_FrameCountOffset!.Value);
-    }
-  }
 
 
 }

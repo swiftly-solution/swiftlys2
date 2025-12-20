@@ -8,29 +8,29 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EntityIOConnectionData_t : ISchemaClass<EntityIOConnectionData_t> {
+public partial interface EntityIOConnectionData_t : ISchemaClass<EntityIOConnectionData_t>
+{
+    static EntityIOConnectionData_t ISchemaClass<EntityIOConnectionData_t>.From(nint handle) => new EntityIOConnectionData_tImpl(handle);
+    static int ISchemaClass<EntityIOConnectionData_t>.Size => 64;
+    static string? ISchemaClass<EntityIOConnectionData_t>.ClassName => null;
 
-  static EntityIOConnectionData_t ISchemaClass<EntityIOConnectionData_t>.From(nint handle) => new EntityIOConnectionData_tImpl(handle);
-  static int ISchemaClass<EntityIOConnectionData_t>.Size => 64;
-  static string? ISchemaClass<EntityIOConnectionData_t>.ClassName => null;
 
-  
-  public string OutputName { get; set; }
-  
-  public ref uint TargetType { get; }
-  
-  public string TargetName { get; set; }
-  
-  public string InputName { get; set; }
-  
-  public string OverrideParam { get; set; }
-  
-  public ref float Delay { get; }
-  
-  public ref int TimesToFire { get; }
-  
-  // KeyValues3
-  public SchemaUntypedField ParamMap { get; }
+    public string OutputName { get; set; }
+
+    public ref uint TargetType { get; }
+
+    public string TargetName { get; set; }
+
+    public string InputName { get; set; }
+
+    public string OverrideParam { get; set; }
+
+    public ref float Delay { get; }
+
+    public ref int TimesToFire { get; }
+
+    // KeyValues3
+    public SchemaUntypedField ParamMap { get; }
 
 
 }

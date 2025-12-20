@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTakeDamageSummaryScopeGuard : ISchemaClass<CTakeDamageSummaryScopeGuard> {
+public partial interface CTakeDamageSummaryScopeGuard : ISchemaClass<CTakeDamageSummaryScopeGuard>
+{
+    static CTakeDamageSummaryScopeGuard ISchemaClass<CTakeDamageSummaryScopeGuard>.From(nint handle) => new CTakeDamageSummaryScopeGuardImpl(handle);
+    static int ISchemaClass<CTakeDamageSummaryScopeGuard>.Size => 32;
+    static string? ISchemaClass<CTakeDamageSummaryScopeGuard>.ClassName => null;
 
-  static CTakeDamageSummaryScopeGuard ISchemaClass<CTakeDamageSummaryScopeGuard>.From(nint handle) => new CTakeDamageSummaryScopeGuardImpl(handle);
-  static int ISchemaClass<CTakeDamageSummaryScopeGuard>.Size => 32;
-  static string? ISchemaClass<CTakeDamageSummaryScopeGuard>.ClassName => null;
 
-  
-  public ref CUtlVector<PointerTo<SummaryTakeDamageInfo_t>> Summaries { get; }
+    public ref CUtlVector<PointerTo<SummaryTakeDamageInfo_t>> Summaries { get; }
 
 
 }

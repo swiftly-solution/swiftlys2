@@ -6,127 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSeqSeqDescFlagImpl : SchemaClass, CSeqSeqDescFlag {
+internal partial class CSeqSeqDescFlagImpl : SchemaClass, CSeqSeqDescFlag
+{
+    public CSeqSeqDescFlagImpl(nint handle) : base(handle) { }
 
-  public CSeqSeqDescFlagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LoopingOffset;
 
-  private static nint? _LoopingOffset;
-
-  public ref bool Looping {
-    get {
-      if (_LoopingOffset == null) {
-        _LoopingOffset = Schema.GetOffset(0xAEF7A80B25449B0D);
-      }
-      return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
+    public ref bool Looping {
+        get {
+            _LoopingOffset = _LoopingOffset ?? Schema.GetOffset(0xAEF7A80B25449B0D);
+            return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
+        }
     }
-  }
-  private static nint? _SnapOffset;
+    private static nint? _SnapOffset;
 
-  public ref bool Snap {
-    get {
-      if (_SnapOffset == null) {
-        _SnapOffset = Schema.GetOffset(0xAEF7A80B817324FD);
-      }
-      return ref _Handle.AsRef<bool>(_SnapOffset!.Value);
+    public ref bool Snap {
+        get {
+            _SnapOffset = _SnapOffset ?? Schema.GetOffset(0xAEF7A80B817324FD);
+            return ref _Handle.AsRef<bool>(_SnapOffset!.Value);
+        }
     }
-  }
-  private static nint? _AutoplayOffset;
+    private static nint? _AutoplayOffset;
 
-  public ref bool Autoplay {
-    get {
-      if (_AutoplayOffset == null) {
-        _AutoplayOffset = Schema.GetOffset(0xAEF7A80BB136D8A8);
-      }
-      return ref _Handle.AsRef<bool>(_AutoplayOffset!.Value);
+    public ref bool Autoplay {
+        get {
+            _AutoplayOffset = _AutoplayOffset ?? Schema.GetOffset(0xAEF7A80BB136D8A8);
+            return ref _Handle.AsRef<bool>(_AutoplayOffset!.Value);
+        }
     }
-  }
-  private static nint? _PostOffset;
+    private static nint? _PostOffset;
 
-  public ref bool Post {
-    get {
-      if (_PostOffset == null) {
-        _PostOffset = Schema.GetOffset(0xAEF7A80B5698A5A7);
-      }
-      return ref _Handle.AsRef<bool>(_PostOffset!.Value);
+    public ref bool Post {
+        get {
+            _PostOffset = _PostOffset ?? Schema.GetOffset(0xAEF7A80B5698A5A7);
+            return ref _Handle.AsRef<bool>(_PostOffset!.Value);
+        }
     }
-  }
-  private static nint? _HiddenOffset;
+    private static nint? _HiddenOffset;
 
-  public ref bool Hidden {
-    get {
-      if (_HiddenOffset == null) {
-        _HiddenOffset = Schema.GetOffset(0xAEF7A80B57D2DC99);
-      }
-      return ref _Handle.AsRef<bool>(_HiddenOffset!.Value);
+    public ref bool Hidden {
+        get {
+            _HiddenOffset = _HiddenOffset ?? Schema.GetOffset(0xAEF7A80B57D2DC99);
+            return ref _Handle.AsRef<bool>(_HiddenOffset!.Value);
+        }
     }
-  }
-  private static nint? _MultiOffset;
+    private static nint? _MultiOffset;
 
-  public ref bool Multi {
-    get {
-      if (_MultiOffset == null) {
-        _MultiOffset = Schema.GetOffset(0xAEF7A80B04A7F792);
-      }
-      return ref _Handle.AsRef<bool>(_MultiOffset!.Value);
+    public ref bool Multi {
+        get {
+            _MultiOffset = _MultiOffset ?? Schema.GetOffset(0xAEF7A80B04A7F792);
+            return ref _Handle.AsRef<bool>(_MultiOffset!.Value);
+        }
     }
-  }
-  private static nint? _LegacyDeltaOffset;
+    private static nint? _LegacyDeltaOffset;
 
-  public ref bool LegacyDelta {
-    get {
-      if (_LegacyDeltaOffset == null) {
-        _LegacyDeltaOffset = Schema.GetOffset(0xAEF7A80BADC37FD8);
-      }
-      return ref _Handle.AsRef<bool>(_LegacyDeltaOffset!.Value);
+    public ref bool LegacyDelta {
+        get {
+            _LegacyDeltaOffset = _LegacyDeltaOffset ?? Schema.GetOffset(0xAEF7A80BADC37FD8);
+            return ref _Handle.AsRef<bool>(_LegacyDeltaOffset!.Value);
+        }
     }
-  }
-  private static nint? _LegacyWorldspaceOffset;
+    private static nint? _LegacyWorldspaceOffset;
 
-  public ref bool LegacyWorldspace {
-    get {
-      if (_LegacyWorldspaceOffset == null) {
-        _LegacyWorldspaceOffset = Schema.GetOffset(0xAEF7A80BE598BF5C);
-      }
-      return ref _Handle.AsRef<bool>(_LegacyWorldspaceOffset!.Value);
+    public ref bool LegacyWorldspace {
+        get {
+            _LegacyWorldspaceOffset = _LegacyWorldspaceOffset ?? Schema.GetOffset(0xAEF7A80BE598BF5C);
+            return ref _Handle.AsRef<bool>(_LegacyWorldspaceOffset!.Value);
+        }
     }
-  }
-  private static nint? _LegacyCycleposeOffset;
+    private static nint? _LegacyCycleposeOffset;
 
-  public ref bool LegacyCyclepose {
-    get {
-      if (_LegacyCycleposeOffset == null) {
-        _LegacyCycleposeOffset = Schema.GetOffset(0xAEF7A80B792D85FD);
-      }
-      return ref _Handle.AsRef<bool>(_LegacyCycleposeOffset!.Value);
+    public ref bool LegacyCyclepose {
+        get {
+            _LegacyCycleposeOffset = _LegacyCycleposeOffset ?? Schema.GetOffset(0xAEF7A80B792D85FD);
+            return ref _Handle.AsRef<bool>(_LegacyCycleposeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LegacyRealtimeOffset;
+    private static nint? _LegacyRealtimeOffset;
 
-  public ref bool LegacyRealtime {
-    get {
-      if (_LegacyRealtimeOffset == null) {
-        _LegacyRealtimeOffset = Schema.GetOffset(0xAEF7A80B8D773F07);
-      }
-      return ref _Handle.AsRef<bool>(_LegacyRealtimeOffset!.Value);
+    public ref bool LegacyRealtime {
+        get {
+            _LegacyRealtimeOffset = _LegacyRealtimeOffset ?? Schema.GetOffset(0xAEF7A80B8D773F07);
+            return ref _Handle.AsRef<bool>(_LegacyRealtimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModelDocOffset;
+    private static nint? _ModelDocOffset;
 
-  public ref bool ModelDoc {
-    get {
-      if (_ModelDocOffset == null) {
-        _ModelDocOffset = Schema.GetOffset(0xAEF7A80B815FEAE4);
-      }
-      return ref _Handle.AsRef<bool>(_ModelDocOffset!.Value);
+    public ref bool ModelDoc {
+        get {
+            _ModelDocOffset = _ModelDocOffset ?? Schema.GetOffset(0xAEF7A80B815FEAE4);
+            return ref _Handle.AsRef<bool>(_ModelDocOffset!.Value);
+        }
     }
-  }
 
 
 }

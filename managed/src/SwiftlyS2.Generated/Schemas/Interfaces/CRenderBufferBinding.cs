@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRenderBufferBinding : ISchemaClass<CRenderBufferBinding> {
+public partial interface CRenderBufferBinding : ISchemaClass<CRenderBufferBinding>
+{
+    static CRenderBufferBinding ISchemaClass<CRenderBufferBinding>.From(nint handle) => new CRenderBufferBindingImpl(handle);
+    static int ISchemaClass<CRenderBufferBinding>.Size => 32;
+    static string? ISchemaClass<CRenderBufferBinding>.ClassName => null;
 
-  static CRenderBufferBinding ISchemaClass<CRenderBufferBinding>.From(nint handle) => new CRenderBufferBindingImpl(handle);
-  static int ISchemaClass<CRenderBufferBinding>.Size => 32;
-  static string? ISchemaClass<CRenderBufferBinding>.ClassName => null;
 
-  
-  public ref ulong Buffer { get; }
-  
-  public ref uint BindOffsetBytes { get; }
+    public ref ulong Buffer { get; }
+
+    public ref uint BindOffsetBytes { get; }
 
 
 }

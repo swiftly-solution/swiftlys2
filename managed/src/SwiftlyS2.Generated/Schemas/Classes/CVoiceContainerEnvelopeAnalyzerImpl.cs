@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerEnvelopeAnalyzerImpl : CVoiceContainerAnalysisBaseImpl, CVoiceContainerEnvelopeAnalyzer {
+internal partial class CVoiceContainerEnvelopeAnalyzerImpl : CVoiceContainerAnalysisBaseImpl, CVoiceContainerEnvelopeAnalyzer
+{
+    public CVoiceContainerEnvelopeAnalyzerImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerEnvelopeAnalyzerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModeOffset;
 
-  private static nint? _ModeOffset;
-
-  public ref EMode_t Mode {
-    get {
-      if (_ModeOffset == null) {
-        _ModeOffset = Schema.GetOffset(0xC5D0FF1990FD5BB2);
-      }
-      return ref _Handle.AsRef<EMode_t>(_ModeOffset!.Value);
+    public ref EMode_t Mode {
+        get {
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xC5D0FF1990FD5BB2);
+            return ref _Handle.AsRef<EMode_t>(_ModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnalysisWindowMsOffset;
+    private static nint? _AnalysisWindowMsOffset;
 
-  public ref float AnalysisWindowMs {
-    get {
-      if (_AnalysisWindowMsOffset == null) {
-        _AnalysisWindowMsOffset = Schema.GetOffset(0xC5D0FF198349BF07);
-      }
-      return ref _Handle.AsRef<float>(_AnalysisWindowMsOffset!.Value);
+    public ref float AnalysisWindowMs {
+        get {
+            _AnalysisWindowMsOffset = _AnalysisWindowMsOffset ?? Schema.GetOffset(0xC5D0FF198349BF07);
+            return ref _Handle.AsRef<float>(_AnalysisWindowMsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ThresholdOffset;
+    private static nint? _ThresholdOffset;
 
-  public ref float Threshold {
-    get {
-      if (_ThresholdOffset == null) {
-        _ThresholdOffset = Schema.GetOffset(0xC5D0FF197872FFEA);
-      }
-      return ref _Handle.AsRef<float>(_ThresholdOffset!.Value);
+    public ref float Threshold {
+        get {
+            _ThresholdOffset = _ThresholdOffset ?? Schema.GetOffset(0xC5D0FF197872FFEA);
+            return ref _Handle.AsRef<float>(_ThresholdOffset!.Value);
+        }
     }
-  }
 
 
 }

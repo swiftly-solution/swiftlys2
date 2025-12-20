@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixPannerDesc_t : ISchemaClass<VMixPannerDesc_t> {
+public partial interface VMixPannerDesc_t : ISchemaClass<VMixPannerDesc_t>
+{
+    static VMixPannerDesc_t ISchemaClass<VMixPannerDesc_t>.From(nint handle) => new VMixPannerDesc_tImpl(handle);
+    static int ISchemaClass<VMixPannerDesc_t>.Size => 8;
+    static string? ISchemaClass<VMixPannerDesc_t>.ClassName => null;
 
-  static VMixPannerDesc_t ISchemaClass<VMixPannerDesc_t>.From(nint handle) => new VMixPannerDesc_tImpl(handle);
-  static int ISchemaClass<VMixPannerDesc_t>.Size => 8;
-  static string? ISchemaClass<VMixPannerDesc_t>.ClassName => null;
 
-  
-  public ref VMixPannerType_t Type { get; }
-  
-  public ref float Strength { get; }
+    public ref VMixPannerType_t Type { get; }
+
+    public ref float Strength { get; }
 
 
 }

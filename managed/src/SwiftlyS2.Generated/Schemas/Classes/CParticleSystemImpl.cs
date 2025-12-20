@@ -6,281 +6,203 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParticleSystemImpl : CBaseModelEntityImpl, CParticleSystem {
+internal partial class CParticleSystemImpl : CBaseModelEntityImpl, CParticleSystem
+{
+    public CParticleSystemImpl(nint handle) : base(handle) { }
 
-  public CParticleSystemImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SnapshotFileNameOffset;
 
-  private static nint? _SnapshotFileNameOffset;
-
-  public string SnapshotFileName {
-    get {
-        if (_SnapshotFileNameOffset == null) {
-            _SnapshotFileNameOffset = Schema.GetOffset(0x8F6D2B258D2636C1);
+    public string SnapshotFileName {
+        get {
+            _SnapshotFileNameOffset = _SnapshotFileNameOffset ?? Schema.GetOffset(0x8F6D2B258D2636C1);
+            return Schema.GetString(_Handle + _SnapshotFileNameOffset!.Value);
         }
-        var ptr = _Handle + _SnapshotFileNameOffset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_SnapshotFileNameOffset == null) {
-            _SnapshotFileNameOffset = Schema.GetOffset(0x8F6D2B258D2636C1);
+        set {
+            _SnapshotFileNameOffset = _SnapshotFileNameOffset ?? Schema.GetOffset(0x8F6D2B258D2636C1);
+            Schema.SetFixedString(_Handle, _SnapshotFileNameOffset!.Value, value, 512);
         }
-        Schema.SetFixedString(_Handle, _SnapshotFileNameOffset!.Value, value, 512);
-    }
-  } 
-  private static nint? _ActiveOffset;
+    } 
+    private static nint? _ActiveOffset;
 
-  public ref bool Active {
-    get {
-      if (_ActiveOffset == null) {
-        _ActiveOffset = Schema.GetOffset(0x8F6D2B258334208F);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    public ref bool Active {
+        get {
+            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0x8F6D2B258334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _FrozenOffset;
+    private static nint? _FrozenOffset;
 
-  public ref bool Frozen {
-    get {
-      if (_FrozenOffset == null) {
-        _FrozenOffset = Schema.GetOffset(0x8F6D2B25119A2BE3);
-      }
-      return ref _Handle.AsRef<bool>(_FrozenOffset!.Value);
+    public ref bool Frozen {
+        get {
+            _FrozenOffset = _FrozenOffset ?? Schema.GetOffset(0x8F6D2B25119A2BE3);
+            return ref _Handle.AsRef<bool>(_FrozenOffset!.Value);
+        }
     }
-  }
-  private static nint? _FreezeTransitionDurationOffset;
+    private static nint? _FreezeTransitionDurationOffset;
 
-  public ref float FreezeTransitionDuration {
-    get {
-      if (_FreezeTransitionDurationOffset == null) {
-        _FreezeTransitionDurationOffset = Schema.GetOffset(0x8F6D2B259CE29C67);
-      }
-      return ref _Handle.AsRef<float>(_FreezeTransitionDurationOffset!.Value);
+    public ref float FreezeTransitionDuration {
+        get {
+            _FreezeTransitionDurationOffset = _FreezeTransitionDurationOffset ?? Schema.GetOffset(0x8F6D2B259CE29C67);
+            return ref _Handle.AsRef<float>(_FreezeTransitionDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _StopTypeOffset;
+    private static nint? _StopTypeOffset;
 
-  public ref int StopType {
-    get {
-      if (_StopTypeOffset == null) {
-        _StopTypeOffset = Schema.GetOffset(0x8F6D2B2513397259);
-      }
-      return ref _Handle.AsRef<int>(_StopTypeOffset!.Value);
+    public ref int StopType {
+        get {
+            _StopTypeOffset = _StopTypeOffset ?? Schema.GetOffset(0x8F6D2B2513397259);
+            return ref _Handle.AsRef<int>(_StopTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimateDuringGameplayPauseOffset;
+    private static nint? _AnimateDuringGameplayPauseOffset;
 
-  public ref bool AnimateDuringGameplayPause {
-    get {
-      if (_AnimateDuringGameplayPauseOffset == null) {
-        _AnimateDuringGameplayPauseOffset = Schema.GetOffset(0x8F6D2B25A4EB73F5);
-      }
-      return ref _Handle.AsRef<bool>(_AnimateDuringGameplayPauseOffset!.Value);
+    public ref bool AnimateDuringGameplayPause {
+        get {
+            _AnimateDuringGameplayPauseOffset = _AnimateDuringGameplayPauseOffset ?? Schema.GetOffset(0x8F6D2B25A4EB73F5);
+            return ref _Handle.AsRef<bool>(_AnimateDuringGameplayPauseOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectIndexOffset;
+    private static nint? _EffectIndexOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> EffectIndex {
-    get {
-      if (_EffectIndexOffset == null) {
-        _EffectIndexOffset = Schema.GetOffset(0x8F6D2B253C93DC73);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectIndexOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> EffectIndex {
+        get {
+            _EffectIndexOffset = _EffectIndexOffset ?? Schema.GetOffset(0x8F6D2B253C93DC73);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTimeOffset;
+    private static nint? _StartTimeOffset;
 
-  public GameTime_t StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x8F6D2B2567FE9DC4);
-      }
-      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    public GameTime_t StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x8F6D2B2567FE9DC4);
+            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _PreSimTimeOffset;
+    private static nint? _PreSimTimeOffset;
 
-  public ref float PreSimTime {
-    get {
-      if (_PreSimTimeOffset == null) {
-        _PreSimTimeOffset = Schema.GetOffset(0x8F6D2B25CD67F64E);
-      }
-      return ref _Handle.AsRef<float>(_PreSimTimeOffset!.Value);
+    public ref float PreSimTime {
+        get {
+            _PreSimTimeOffset = _PreSimTimeOffset ?? Schema.GetOffset(0x8F6D2B25CD67F64E);
+            return ref _Handle.AsRef<float>(_PreSimTimeOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<Vector> ServerControlPoints {
-    get => new SchemaFixedArray<Vector>(_Handle, 0x8F6D2B2561386048, 4, 12, 4);
-  }
-  public ISchemaFixedArray<byte> ServerControlPointAssignments {
-    get => new SchemaFixedArray<byte>(_Handle, 0x8F6D2B25E9DEDAC8, 4, 1, 1);
-  }
-  public ISchemaFixedArray<CHandle<CBaseEntity>> ControlPointEnts {
-    get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x8F6D2B25ECA36598, 64, 4, 4);
-  }
-  private static nint? _NoSaveOffset;
+    public ISchemaFixedArray<Vector> ServerControlPoints {
+        get => new SchemaFixedArray<Vector>(_Handle, 0x8F6D2B2561386048, 4, 12, 4);
+    }
+    public ISchemaFixedArray<byte> ServerControlPointAssignments {
+        get => new SchemaFixedArray<byte>(_Handle, 0x8F6D2B25E9DEDAC8, 4, 1, 1);
+    }
+    public ISchemaFixedArray<CHandle<CBaseEntity>> ControlPointEnts {
+        get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x8F6D2B25ECA36598, 64, 4, 4);
+    }
+    private static nint? _NoSaveOffset;
 
-  public ref bool NoSave {
-    get {
-      if (_NoSaveOffset == null) {
-        _NoSaveOffset = Schema.GetOffset(0x8F6D2B257507B947);
-      }
-      return ref _Handle.AsRef<bool>(_NoSaveOffset!.Value);
+    public ref bool NoSave {
+        get {
+            _NoSaveOffset = _NoSaveOffset ?? Schema.GetOffset(0x8F6D2B257507B947);
+            return ref _Handle.AsRef<bool>(_NoSaveOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoFreezeOffset;
+    private static nint? _NoFreezeOffset;
 
-  public ref bool NoFreeze {
-    get {
-      if (_NoFreezeOffset == null) {
-        _NoFreezeOffset = Schema.GetOffset(0x8F6D2B256015A661);
-      }
-      return ref _Handle.AsRef<bool>(_NoFreezeOffset!.Value);
+    public ref bool NoFreeze {
+        get {
+            _NoFreezeOffset = _NoFreezeOffset ?? Schema.GetOffset(0x8F6D2B256015A661);
+            return ref _Handle.AsRef<bool>(_NoFreezeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoRampOffset;
+    private static nint? _NoRampOffset;
 
-  public ref bool NoRamp {
-    get {
-      if (_NoRampOffset == null) {
-        _NoRampOffset = Schema.GetOffset(0x8F6D2B25AD7F8116);
-      }
-      return ref _Handle.AsRef<bool>(_NoRampOffset!.Value);
+    public ref bool NoRamp {
+        get {
+            _NoRampOffset = _NoRampOffset ?? Schema.GetOffset(0x8F6D2B25AD7F8116);
+            return ref _Handle.AsRef<bool>(_NoRampOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartActiveOffset;
+    private static nint? _StartActiveOffset;
 
-  public ref bool StartActive {
-    get {
-      if (_StartActiveOffset == null) {
-        _StartActiveOffset = Schema.GetOffset(0x8F6D2B25953CBC21);
-      }
-      return ref _Handle.AsRef<bool>(_StartActiveOffset!.Value);
+    public ref bool StartActive {
+        get {
+            _StartActiveOffset = _StartActiveOffset ?? Schema.GetOffset(0x8F6D2B25953CBC21);
+            return ref _Handle.AsRef<bool>(_StartActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectNameOffset;
+    private static nint? _EffectNameOffset;
 
-  public string EffectName {
-    get {
-      if (_EffectNameOffset == null) {
-        _EffectNameOffset = Schema.GetOffset(0x8F6D2B2582D2BFC7);
-      }
-      var ptr = _Handle.Read<nint>(_EffectNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_EffectNameOffset == null) {
-        _EffectNameOffset = Schema.GetOffset(0x8F6D2B2582D2BFC7);
-      }
-      Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ControlPointNamesOffset;
+    public string EffectName {
+        get {
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x8F6D2B2582D2BFC7);
+            return Schema.GetString(_Handle.Read<nint>(_EffectNameOffset!.Value));
+        }
+        set {
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x8F6D2B2582D2BFC7);
+            Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ControlPointNamesOffset;
 
-  public string ControlPointNames {
-    get {
-      if (_ControlPointNamesOffset == null) {
-        _ControlPointNamesOffset = Schema.GetOffset(0x8F6D2B258DBFEC78);
-      }
-      var ptr = _Handle.Read<nint>(_ControlPointNamesOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ControlPointNamesOffset == null) {
-        _ControlPointNamesOffset = Schema.GetOffset(0x8F6D2B258DBFEC78);
-      }
-      Schema.SetString(_Handle, _ControlPointNamesOffset!.Value, value);
-    }
-  } 
-  private static nint? _DataCPOffset;
+    public string ControlPointNames {
+        get {
+            _ControlPointNamesOffset = _ControlPointNamesOffset ?? Schema.GetOffset(0x8F6D2B258DBFEC78);
+            return Schema.GetString(_Handle.Read<nint>(_ControlPointNamesOffset!.Value));
+        }
+        set {
+            _ControlPointNamesOffset = _ControlPointNamesOffset ?? Schema.GetOffset(0x8F6D2B258DBFEC78);
+            Schema.SetString(_Handle, _ControlPointNamesOffset!.Value, value);
+        }
+    } 
+    private static nint? _DataCPOffset;
 
-  public ref int DataCP {
-    get {
-      if (_DataCPOffset == null) {
-        _DataCPOffset = Schema.GetOffset(0x8F6D2B258DC46F82);
-      }
-      return ref _Handle.AsRef<int>(_DataCPOffset!.Value);
+    public ref int DataCP {
+        get {
+            _DataCPOffset = _DataCPOffset ?? Schema.GetOffset(0x8F6D2B258DC46F82);
+            return ref _Handle.AsRef<int>(_DataCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _DataCPValueOffset;
+    private static nint? _DataCPValueOffset;
 
-  public ref Vector DataCPValue {
-    get {
-      if (_DataCPValueOffset == null) {
-        _DataCPValueOffset = Schema.GetOffset(0x8F6D2B250AC27507);
-      }
-      return ref _Handle.AsRef<Vector>(_DataCPValueOffset!.Value);
+    public ref Vector DataCPValue {
+        get {
+            _DataCPValueOffset = _DataCPValueOffset ?? Schema.GetOffset(0x8F6D2B250AC27507);
+            return ref _Handle.AsRef<Vector>(_DataCPValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _TintCPOffset;
+    private static nint? _TintCPOffset;
 
-  public ref int TintCP {
-    get {
-      if (_TintCPOffset == null) {
-        _TintCPOffset = Schema.GetOffset(0x8F6D2B2554940ABB);
-      }
-      return ref _Handle.AsRef<int>(_TintCPOffset!.Value);
+    public ref int TintCP {
+        get {
+            _TintCPOffset = _TintCPOffset ?? Schema.GetOffset(0x8F6D2B2554940ABB);
+            return ref _Handle.AsRef<int>(_TintCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _TintOffset;
+    private static nint? _TintOffset;
 
-  public ref Color Tint {
-    get {
-      if (_TintOffset == null) {
-        _TintOffset = Schema.GetOffset(0x8F6D2B25CEA8BB7D);
-      }
-      return ref _Handle.AsRef<Color>(_TintOffset!.Value);
+    public ref Color Tint {
+        get {
+            _TintOffset = _TintOffset ?? Schema.GetOffset(0x8F6D2B25CEA8BB7D);
+            return ref _Handle.AsRef<Color>(_TintOffset!.Value);
+        }
     }
-  }
 
-  public void SnapshotFileNameUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B258D2636C1);
-  }
-  public void ActiveUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B258334208F);
-  }
-  public void FrozenUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B25119A2BE3);
-  }
-  public void FreezeTransitionDurationUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B259CE29C67);
-  }
-  public void StopTypeUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B2513397259);
-  }
-  public void AnimateDuringGameplayPauseUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B25A4EB73F5);
-  }
-  public void EffectIndexUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B253C93DC73);
-  }
-  public void StartTimeUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B2567FE9DC4);
-  }
-  public void PreSimTimeUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B25CD67F64E);
-  }
-  public void ServerControlPointsUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B2561386048);
-  }
-  public void ServerControlPointAssignmentsUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B25E9DEDAC8);
-  }
-  public void ControlPointEntsUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B25ECA36598);
-  }
-  public void NoSaveUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B257507B947);
-  }
-  public void NoFreezeUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B256015A661);
-  }
-  public void NoRampUpdated() {
-    Schema.Update(_Handle, 0x8F6D2B25AD7F8116);
-  }
+    public void SnapshotFileNameUpdated() => Schema.Update(_Handle, 0x8F6D2B258D2636C1);
+    public void ActiveUpdated() => Schema.Update(_Handle, 0x8F6D2B258334208F);
+    public void FrozenUpdated() => Schema.Update(_Handle, 0x8F6D2B25119A2BE3);
+    public void FreezeTransitionDurationUpdated() => Schema.Update(_Handle, 0x8F6D2B259CE29C67);
+    public void StopTypeUpdated() => Schema.Update(_Handle, 0x8F6D2B2513397259);
+    public void AnimateDuringGameplayPauseUpdated() => Schema.Update(_Handle, 0x8F6D2B25A4EB73F5);
+    public void EffectIndexUpdated() => Schema.Update(_Handle, 0x8F6D2B253C93DC73);
+    public void StartTimeUpdated() => Schema.Update(_Handle, 0x8F6D2B2567FE9DC4);
+    public void PreSimTimeUpdated() => Schema.Update(_Handle, 0x8F6D2B25CD67F64E);
+    public void ServerControlPointsUpdated() => Schema.Update(_Handle, 0x8F6D2B2561386048);
+    public void ServerControlPointAssignmentsUpdated() => Schema.Update(_Handle, 0x8F6D2B25E9DEDAC8);
+    public void ControlPointEntsUpdated() => Schema.Update(_Handle, 0x8F6D2B25ECA36598);
+    public void NoSaveUpdated() => Schema.Update(_Handle, 0x8F6D2B257507B947);
+    public void NoFreezeUpdated() => Schema.Update(_Handle, 0x8F6D2B256015A661);
+    public void NoRampUpdated() => Schema.Update(_Handle, 0x8F6D2B25AD7F8116);
 }

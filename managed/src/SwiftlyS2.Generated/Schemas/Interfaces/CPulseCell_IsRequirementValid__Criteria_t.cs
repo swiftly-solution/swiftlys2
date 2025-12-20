@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_IsRequirementValid__Criteria_t : ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t> {
+public partial interface CPulseCell_IsRequirementValid__Criteria_t : ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t>
+{
+    static CPulseCell_IsRequirementValid__Criteria_t ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t>.From(nint handle) => new CPulseCell_IsRequirementValid__Criteria_tImpl(handle);
+    static int ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t>.Size => 1;
+    static string? ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t>.ClassName => null;
 
-  static CPulseCell_IsRequirementValid__Criteria_t ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t>.From(nint handle) => new CPulseCell_IsRequirementValid__Criteria_tImpl(handle);
-  static int ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t>.Size => 1;
-  static string? ISchemaClass<CPulseCell_IsRequirementValid__Criteria_t>.ClassName => null;
 
-  
-  public ref bool IsValid { get; }
+    public ref bool IsValid { get; }
 
 
 }

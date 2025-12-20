@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSequenceFinishedAnimTag : CAnimTagBase, ISchemaClass<CSequenceFinishedAnimTag> {
+public partial interface CSequenceFinishedAnimTag : CAnimTagBase, ISchemaClass<CSequenceFinishedAnimTag>
+{
+    static CSequenceFinishedAnimTag ISchemaClass<CSequenceFinishedAnimTag>.From(nint handle) => new CSequenceFinishedAnimTagImpl(handle);
+    static int ISchemaClass<CSequenceFinishedAnimTag>.Size => 96;
+    static string? ISchemaClass<CSequenceFinishedAnimTag>.ClassName => null;
 
-  static CSequenceFinishedAnimTag ISchemaClass<CSequenceFinishedAnimTag>.From(nint handle) => new CSequenceFinishedAnimTagImpl(handle);
-  static int ISchemaClass<CSequenceFinishedAnimTag>.Size => 96;
-  static string? ISchemaClass<CSequenceFinishedAnimTag>.ClassName => null;
 
-  
-  public string SequenceName { get; set; }
+    public string SequenceName { get; set; }
 
 
 }

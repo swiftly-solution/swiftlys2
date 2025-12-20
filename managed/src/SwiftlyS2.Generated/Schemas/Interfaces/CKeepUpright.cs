@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CKeepUpright : CPointEntity, ISchemaClass<CKeepUpright> {
+public partial interface CKeepUpright : CPointEntity, ISchemaClass<CKeepUpright>
+{
+    static CKeepUpright ISchemaClass<CKeepUpright>.From(nint handle) => new CKeepUprightImpl(handle);
+    static int ISchemaClass<CKeepUpright>.Size => 1328;
+    static string? ISchemaClass<CKeepUpright>.ClassName => "phys_keepupright";
 
-  static CKeepUpright ISchemaClass<CKeepUpright>.From(nint handle) => new CKeepUprightImpl(handle);
-  static int ISchemaClass<CKeepUpright>.Size => 1328;
-  static string? ISchemaClass<CKeepUpright>.ClassName => "phys_keepupright";
 
-  
-  public ref Vector WorldGoalAxis { get; }
-  
-  public ref Vector LocalTestAxis { get; }
-  
-  public string NameAttach { get; set; }
-  
-  public ref CHandle<CBaseEntity> AttachedObject { get; }
-  
-  public ref float AngularLimit { get; }
-  
-  public ref bool Active { get; }
-  
-  public ref bool DampAllRotation { get; }
+    public ref Vector WorldGoalAxis { get; }
+
+    public ref Vector LocalTestAxis { get; }
+
+    public string NameAttach { get; set; }
+
+    public ref CHandle<CBaseEntity> AttachedObject { get; }
+
+    public ref float AngularLimit { get; }
+
+    public ref bool Active { get; }
+
+    public ref bool DampAllRotation { get; }
 
 
 }

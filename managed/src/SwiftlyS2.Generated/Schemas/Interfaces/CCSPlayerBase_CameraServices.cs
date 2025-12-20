@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerBase_CameraServices : CPlayer_CameraServices, ISchemaClass<CCSPlayerBase_CameraServices> {
+public partial interface CCSPlayerBase_CameraServices : CPlayer_CameraServices, ISchemaClass<CCSPlayerBase_CameraServices>
+{
+    static CCSPlayerBase_CameraServices ISchemaClass<CCSPlayerBase_CameraServices>.From(nint handle) => new CCSPlayerBase_CameraServicesImpl(handle);
+    static int ISchemaClass<CCSPlayerBase_CameraServices>.Size => 424;
+    static string? ISchemaClass<CCSPlayerBase_CameraServices>.ClassName => null;
 
-  static CCSPlayerBase_CameraServices ISchemaClass<CCSPlayerBase_CameraServices>.From(nint handle) => new CCSPlayerBase_CameraServicesImpl(handle);
-  static int ISchemaClass<CCSPlayerBase_CameraServices>.Size => 424;
-  static string? ISchemaClass<CCSPlayerBase_CameraServices>.ClassName => null;
 
-  
-  public ref uint FOV { get; }
-  
-  public ref uint FOVStart { get; }
-  
-  public GameTime_t FOVTime { get; }
-  
-  public ref float FOVRate { get; }
-  
-  public ref CHandle<CBaseEntity> ZoomOwner { get; }
-  
-  public ref CUtlVector<CHandle<CBaseEntity>> TriggerFogList { get; }
-  
-  public ref CHandle<CBaseEntity> LastFogTrigger { get; }
+    public ref uint FOV { get; }
 
-  public void FOVUpdated();
-  public void FOVStartUpdated();
-  public void FOVTimeUpdated();
-  public void FOVRateUpdated();
-  public void ZoomOwnerUpdated();
+    public ref uint FOVStart { get; }
+
+    public GameTime_t FOVTime { get; }
+
+    public ref float FOVRate { get; }
+
+    public ref CHandle<CBaseEntity> ZoomOwner { get; }
+
+    public ref CUtlVector<CHandle<CBaseEntity>> TriggerFogList { get; }
+
+    public ref CHandle<CBaseEntity> LastFogTrigger { get; }
+
+    public void FOVUpdated();
+    public void FOVStartUpdated();
+    public void FOVTimeUpdated();
+    public void FOVRateUpdated();
+    public void ZoomOwnerUpdated();
 }

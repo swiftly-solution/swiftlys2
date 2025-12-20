@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFogController : CBaseEntity, ISchemaClass<CFogController> {
+public partial interface CFogController : CBaseEntity, ISchemaClass<CFogController>
+{
+    static CFogController ISchemaClass<CFogController>.From(nint handle) => new CFogControllerImpl(handle);
+    static int ISchemaClass<CFogController>.Size => 1376;
+    static string? ISchemaClass<CFogController>.ClassName => "env_fog_controller";
 
-  static CFogController ISchemaClass<CFogController>.From(nint handle) => new CFogControllerImpl(handle);
-  static int ISchemaClass<CFogController>.Size => 1376;
-  static string? ISchemaClass<CFogController>.ClassName => "env_fog_controller";
 
-  
-  public fogparams_t Fog { get; }
-  
-  public ref bool UseAngles { get; }
-  
-  public ref int ChangedVariables { get; }
+    public fogparams_t Fog { get; }
 
-  public void FogUpdated();
+    public ref bool UseAngles { get; }
+
+    public ref int ChangedVariables { get; }
+
+    public void FogUpdated();
 }

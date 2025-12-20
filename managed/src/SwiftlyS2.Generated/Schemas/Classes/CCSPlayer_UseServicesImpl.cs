@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayer_UseServicesImpl : CPlayer_UseServicesImpl, CCSPlayer_UseServices {
+internal partial class CCSPlayer_UseServicesImpl : CPlayer_UseServicesImpl, CCSPlayer_UseServices
+{
+    public CCSPlayer_UseServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayer_UseServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LastKnownUseEntityOffset;
 
-  private static nint? _LastKnownUseEntityOffset;
-
-  public ref CHandle<CBaseEntity> LastKnownUseEntity {
-    get {
-      if (_LastKnownUseEntityOffset == null) {
-        _LastKnownUseEntityOffset = Schema.GetOffset(0xE5F718912806F946);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LastKnownUseEntityOffset!.Value);
+    public ref CHandle<CBaseEntity> LastKnownUseEntity {
+        get {
+            _LastKnownUseEntityOffset = _LastKnownUseEntityOffset ?? Schema.GetOffset(0xE5F718912806F946);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LastKnownUseEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastUseTimeStampOffset;
+    private static nint? _LastUseTimeStampOffset;
 
-  public GameTime_t LastUseTimeStamp {
-    get {
-      if (_LastUseTimeStampOffset == null) {
-        _LastUseTimeStampOffset = Schema.GetOffset(0xE5F7189104BF376E);
-      }
-      return new GameTime_tImpl(_Handle + _LastUseTimeStampOffset!.Value);
+    public GameTime_t LastUseTimeStamp {
+        get {
+            _LastUseTimeStampOffset = _LastUseTimeStampOffset ?? Schema.GetOffset(0xE5F7189104BF376E);
+            return new GameTime_tImpl(_Handle + _LastUseTimeStampOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeLastUsedWindowOffset;
+    private static nint? _TimeLastUsedWindowOffset;
 
-  public GameTime_t TimeLastUsedWindow {
-    get {
-      if (_TimeLastUsedWindowOffset == null) {
-        _TimeLastUsedWindowOffset = Schema.GetOffset(0xE5F7189165762AEB);
-      }
-      return new GameTime_tImpl(_Handle + _TimeLastUsedWindowOffset!.Value);
+    public GameTime_t TimeLastUsedWindow {
+        get {
+            _TimeLastUsedWindowOffset = _TimeLastUsedWindowOffset ?? Schema.GetOffset(0xE5F7189165762AEB);
+            return new GameTime_tImpl(_Handle + _TimeLastUsedWindowOffset!.Value);
+        }
     }
-  }
 
 
 }

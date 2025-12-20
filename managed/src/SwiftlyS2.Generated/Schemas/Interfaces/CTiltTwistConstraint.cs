@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTiltTwistConstraint : CBaseConstraint, ISchemaClass<CTiltTwistConstraint> {
+public partial interface CTiltTwistConstraint : CBaseConstraint, ISchemaClass<CTiltTwistConstraint>
+{
+    static CTiltTwistConstraint ISchemaClass<CTiltTwistConstraint>.From(nint handle) => new CTiltTwistConstraintImpl(handle);
+    static int ISchemaClass<CTiltTwistConstraint>.Size => 144;
+    static string? ISchemaClass<CTiltTwistConstraint>.ClassName => null;
 
-  static CTiltTwistConstraint ISchemaClass<CTiltTwistConstraint>.From(nint handle) => new CTiltTwistConstraintImpl(handle);
-  static int ISchemaClass<CTiltTwistConstraint>.Size => 144;
-  static string? ISchemaClass<CTiltTwistConstraint>.ClassName => null;
 
-  
-  public ref int TargetAxis { get; }
-  
-  public ref int SlaveAxis { get; }
+    public ref int TargetAxis { get; }
+
+    public ref int SlaveAxis { get; }
 
 
 }

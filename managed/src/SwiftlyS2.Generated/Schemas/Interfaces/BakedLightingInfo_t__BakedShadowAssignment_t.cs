@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface BakedLightingInfo_t__BakedShadowAssignment_t : ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t> {
+public partial interface BakedLightingInfo_t__BakedShadowAssignment_t : ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t>
+{
+    static BakedLightingInfo_t__BakedShadowAssignment_t ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t>.From(nint handle) => new BakedLightingInfo_t__BakedShadowAssignment_tImpl(handle);
+    static int ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t>.Size => 12;
+    static string? ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t>.ClassName => null;
 
-  static BakedLightingInfo_t__BakedShadowAssignment_t ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t>.From(nint handle) => new BakedLightingInfo_t__BakedShadowAssignment_tImpl(handle);
-  static int ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t>.Size => 12;
-  static string? ISchemaClass<BakedLightingInfo_t__BakedShadowAssignment_t>.ClassName => null;
 
-  
-  public ref uint LightHash { get; }
-  
-  public ref uint MapHash { get; }
-  
-  public ref byte ShadowChannel { get; }
+    public ref uint LightHash { get; }
+
+    public ref uint MapHash { get; }
+
+    public ref byte ShadowChannel { get; }
 
 
 }

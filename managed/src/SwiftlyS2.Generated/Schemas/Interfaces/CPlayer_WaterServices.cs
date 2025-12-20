@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayer_WaterServices : CPlayerPawnComponent, ISchemaClass<CPlayer_WaterServices> {
-
-  static CPlayer_WaterServices ISchemaClass<CPlayer_WaterServices>.From(nint handle) => new CPlayer_WaterServicesImpl(handle);
-  static int ISchemaClass<CPlayer_WaterServices>.Size => 64;
-  static string? ISchemaClass<CPlayer_WaterServices>.ClassName => null;
+public partial interface CPlayer_WaterServices : CPlayerPawnComponent, ISchemaClass<CPlayer_WaterServices>
+{
+    static CPlayer_WaterServices ISchemaClass<CPlayer_WaterServices>.From(nint handle) => new CPlayer_WaterServicesImpl(handle);
+    static int ISchemaClass<CPlayer_WaterServices>.Size => 64;
+    static string? ISchemaClass<CPlayer_WaterServices>.ClassName => null;
 
 
 

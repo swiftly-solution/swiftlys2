@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapDensityToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDensityToVector> {
+public partial interface C_OP_RemapDensityToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDensityToVector>
+{
+    static C_OP_RemapDensityToVector ISchemaClass<C_OP_RemapDensityToVector>.From(nint handle) => new C_OP_RemapDensityToVectorImpl(handle);
+    static int ISchemaClass<C_OP_RemapDensityToVector>.Size => 512;
+    static string? ISchemaClass<C_OP_RemapDensityToVector>.ClassName => null;
 
-  static C_OP_RemapDensityToVector ISchemaClass<C_OP_RemapDensityToVector>.From(nint handle) => new C_OP_RemapDensityToVectorImpl(handle);
-  static int ISchemaClass<C_OP_RemapDensityToVector>.Size => 512;
-  static string? ISchemaClass<C_OP_RemapDensityToVector>.ClassName => null;
 
-  
-  public ref float RadiusScale { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float DensityMin { get; }
-  
-  public ref float DensityMax { get; }
-  
-  public ref Vector OutputMin { get; }
-  
-  public ref Vector OutputMax { get; }
-  
-  public ref bool UseParentDensity { get; }
-  
-  public ref int VoxelGridResolution { get; }
+    public ref float RadiusScale { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float DensityMin { get; }
+
+    public ref float DensityMax { get; }
+
+    public ref Vector OutputMin { get; }
+
+    public ref Vector OutputMax { get; }
+
+    public ref bool UseParentDensity { get; }
+
+    public ref int VoxelGridResolution { get; }
 
 
 }

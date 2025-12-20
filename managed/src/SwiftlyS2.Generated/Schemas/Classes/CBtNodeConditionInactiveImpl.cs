@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBtNodeConditionInactiveImpl : CBtNodeConditionImpl, CBtNodeConditionInactive {
+internal partial class CBtNodeConditionInactiveImpl : CBtNodeConditionImpl, CBtNodeConditionInactive
+{
+    public CBtNodeConditionInactiveImpl(nint handle) : base(handle) { }
 
-  public CBtNodeConditionInactiveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RoundStartThresholdSecondsOffset;
 
-  private static nint? _RoundStartThresholdSecondsOffset;
-
-  public ref float RoundStartThresholdSeconds {
-    get {
-      if (_RoundStartThresholdSecondsOffset == null) {
-        _RoundStartThresholdSecondsOffset = Schema.GetOffset(0x1AB44FB08A52CC47);
-      }
-      return ref _Handle.AsRef<float>(_RoundStartThresholdSecondsOffset!.Value);
+    public ref float RoundStartThresholdSeconds {
+        get {
+            _RoundStartThresholdSecondsOffset = _RoundStartThresholdSecondsOffset ?? Schema.GetOffset(0x1AB44FB08A52CC47);
+            return ref _Handle.AsRef<float>(_RoundStartThresholdSecondsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SensorInactivityThresholdSecondsOffset;
+    private static nint? _SensorInactivityThresholdSecondsOffset;
 
-  public ref float SensorInactivityThresholdSeconds {
-    get {
-      if (_SensorInactivityThresholdSecondsOffset == null) {
-        _SensorInactivityThresholdSecondsOffset = Schema.GetOffset(0x1AB44FB07E66A29F);
-      }
-      return ref _Handle.AsRef<float>(_SensorInactivityThresholdSecondsOffset!.Value);
+    public ref float SensorInactivityThresholdSeconds {
+        get {
+            _SensorInactivityThresholdSecondsOffset = _SensorInactivityThresholdSecondsOffset ?? Schema.GetOffset(0x1AB44FB07E66A29F);
+            return ref _Handle.AsRef<float>(_SensorInactivityThresholdSecondsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SensorInactivityTimerOffset;
+    private static nint? _SensorInactivityTimerOffset;
 
-  public CountdownTimer SensorInactivityTimer {
-    get {
-      if (_SensorInactivityTimerOffset == null) {
-        _SensorInactivityTimerOffset = Schema.GetOffset(0x1AB44FB0D921DF72);
-      }
-      return new CountdownTimerImpl(_Handle + _SensorInactivityTimerOffset!.Value);
+    public CountdownTimer SensorInactivityTimer {
+        get {
+            _SensorInactivityTimerOffset = _SensorInactivityTimerOffset ?? Schema.GetOffset(0x1AB44FB0D921DF72);
+            return new CountdownTimerImpl(_Handle + _SensorInactivityTimerOffset!.Value);
+        }
     }
-  }
 
 
 }

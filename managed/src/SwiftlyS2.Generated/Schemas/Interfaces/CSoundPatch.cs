@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundPatch : ISchemaClass<CSoundPatch> {
+public partial interface CSoundPatch : ISchemaClass<CSoundPatch>
+{
+    static CSoundPatch ISchemaClass<CSoundPatch>.From(nint handle) => new CSoundPatchImpl(handle);
+    static int ISchemaClass<CSoundPatch>.Size => 176;
+    static string? ISchemaClass<CSoundPatch>.ClassName => null;
 
-  static CSoundPatch ISchemaClass<CSoundPatch>.From(nint handle) => new CSoundPatchImpl(handle);
-  static int ISchemaClass<CSoundPatch>.Size => 176;
-  static string? ISchemaClass<CSoundPatch>.ClassName => null;
 
-  
-  public CSoundEnvelope Pitch { get; }
-  
-  public CSoundEnvelope Volume { get; }
-  
-  public ref float ShutdownTime { get; }
-  
-  public ref float LastTime { get; }
-  
-  public string SoundScriptName { get; set; }
-  
-  public ref CHandle<CBaseEntity> Ent { get; }
-  
-  public ref uint SoundEntityIndex { get; }
-  
-  public ref Vector SoundOrigin { get; }
-  
-  public ref int IsPlaying { get; }
-  
-  public CCopyRecipientFilter Filter { get; }
-  
-  public ref float CloseCaptionDuration { get; }
-  
-  public ref bool UpdatedSoundOrigin { get; }
-  
-  public string ClassName { get; set; }
+    public CSoundEnvelope Pitch { get; }
+
+    public CSoundEnvelope Volume { get; }
+
+    public ref float ShutdownTime { get; }
+
+    public ref float LastTime { get; }
+
+    public string SoundScriptName { get; set; }
+
+    public ref CHandle<CBaseEntity> Ent { get; }
+
+    public ref uint SoundEntityIndex { get; }
+
+    public ref Vector SoundOrigin { get; }
+
+    public ref int IsPlaying { get; }
+
+    public CCopyRecipientFilter Filter { get; }
+
+    public ref float CloseCaptionDuration { get; }
+
+    public ref bool UpdatedSoundOrigin { get; }
+
+    public string ClassName { get; set; }
 
 
 }

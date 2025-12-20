@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeEffectDesc_tImpl : SchemaClass, FeEffectDesc_t {
+internal partial class FeEffectDesc_tImpl : SchemaClass, FeEffectDesc_t
+{
+    public FeEffectDesc_tImpl(nint handle) : base(handle) { }
 
-  public FeEffectDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3462F54326980769);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3462F54326980769);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NameHashOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x3462F54326980769);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref uint NameHash {
+        get {
+            _NameHashOffset = _NameHashOffset ?? Schema.GetOffset(0x3462F543BA4B2BDE);
+            return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x3462F54326980769);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NameHashOffset;
+    private static nint? _TypeOffset;
 
-  public ref uint NameHash {
-    get {
-      if (_NameHashOffset == null) {
-        _NameHashOffset = Schema.GetOffset(0x3462F543BA4B2BDE);
-      }
-      return ref _Handle.AsRef<uint>(_NameHashOffset!.Value);
+    public ref int Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x3462F543EEF036F9);
+            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _TypeOffset;
+    private static nint? _ParamsOffset;
 
-  public ref int Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x3462F543EEF036F9);
-      }
-      return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+    public SchemaUntypedField Params {
+        get {
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x3462F543900020D3);
+            return new SchemaUntypedField(_Handle + _ParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamsOffset;
-
-  public SchemaUntypedField Params {
-    get {
-      if (_ParamsOffset == null) {
-        _ParamsOffset = Schema.GetOffset(0x3462F543900020D3);
-      }
-      return new SchemaUntypedField(_Handle + _ParamsOffset!.Value);
-    }
-  }
 
 
 }

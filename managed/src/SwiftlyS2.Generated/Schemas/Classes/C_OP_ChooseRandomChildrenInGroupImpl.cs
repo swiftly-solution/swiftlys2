@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ChooseRandomChildrenInGroupImpl : CParticleFunctionPreEmissionImpl, C_OP_ChooseRandomChildrenInGroup {
+internal partial class C_OP_ChooseRandomChildrenInGroupImpl : CParticleFunctionPreEmissionImpl, C_OP_ChooseRandomChildrenInGroup
+{
+    public C_OP_ChooseRandomChildrenInGroupImpl(nint handle) : base(handle) { }
 
-  public C_OP_ChooseRandomChildrenInGroupImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChildGroupIDOffset;
 
-  private static nint? _ChildGroupIDOffset;
-
-  public ref int ChildGroupID {
-    get {
-      if (_ChildGroupIDOffset == null) {
-        _ChildGroupIDOffset = Schema.GetOffset(0xF79CD816E3F3C965);
-      }
-      return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+    public ref int ChildGroupID {
+        get {
+            _ChildGroupIDOffset = _ChildGroupIDOffset ?? Schema.GetOffset(0xF79CD816E3F3C965);
+            return ref _Handle.AsRef<int>(_ChildGroupIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumberOfChildrenOffset;
+    private static nint? _NumberOfChildrenOffset;
 
-  public CParticleCollectionFloatInput NumberOfChildren {
-    get {
-      if (_NumberOfChildrenOffset == null) {
-        _NumberOfChildrenOffset = Schema.GetOffset(0xF79CD8160275D868);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _NumberOfChildrenOffset!.Value);
+    public CParticleCollectionFloatInput NumberOfChildren {
+        get {
+            _NumberOfChildrenOffset = _NumberOfChildrenOffset ?? Schema.GetOffset(0xF79CD8160275D868);
+            return new CParticleCollectionFloatInputImpl(_Handle + _NumberOfChildrenOffset!.Value);
+        }
     }
-  }
 
 
 }

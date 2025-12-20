@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmBoneWeightListImpl : SchemaClass, CNmBoneWeightList {
+internal partial class CNmBoneWeightListImpl : SchemaClass, CNmBoneWeightList
+{
+    public CNmBoneWeightListImpl(nint handle) : base(handle) { }
 
-  public CNmBoneWeightListImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SkeletonNameOffset;
 
-  private static nint? _SkeletonNameOffset;
-
-  public SchemaUntypedField SkeletonName {
-    get {
-      if (_SkeletonNameOffset == null) {
-        _SkeletonNameOffset = Schema.GetOffset(0xA16307391879D68D);
-      }
-      return new SchemaUntypedField(_Handle + _SkeletonNameOffset!.Value);
+    public SchemaUntypedField SkeletonName {
+        get {
+            _SkeletonNameOffset = _SkeletonNameOffset ?? Schema.GetOffset(0xA16307391879D68D);
+            return new SchemaUntypedField(_Handle + _SkeletonNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneIDsOffset;
+    private static nint? _BoneIDsOffset;
 
-  public ref CUtlVector<CGlobalSymbol> BoneIDs {
-    get {
-      if (_BoneIDsOffset == null) {
-        _BoneIDsOffset = Schema.GetOffset(0xA16307390909C443);
-      }
-      return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_BoneIDsOffset!.Value);
+    public ref CUtlVector<CGlobalSymbol> BoneIDs {
+        get {
+            _BoneIDsOffset = _BoneIDsOffset ?? Schema.GetOffset(0xA16307390909C443);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_BoneIDsOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightsOffset;
+    private static nint? _WeightsOffset;
 
-  public ref CUtlVector<float> Weights {
-    get {
-      if (_WeightsOffset == null) {
-        _WeightsOffset = Schema.GetOffset(0xA163073977B2F91E);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_WeightsOffset!.Value);
+    public ref CUtlVector<float> Weights {
+        get {
+            _WeightsOffset = _WeightsOffset ?? Schema.GetOffset(0xA163073977B2F91E);
+            return ref _Handle.AsRef<CUtlVector<float>>(_WeightsOffset!.Value);
+        }
     }
-  }
 
 
 }

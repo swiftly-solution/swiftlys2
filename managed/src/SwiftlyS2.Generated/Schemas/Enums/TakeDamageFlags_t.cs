@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum TakeDamageFlags_t : ulong {
-
+public enum TakeDamageFlags_t : ulong
+{
  DFLAG_NONE = 0,
 
  DFLAG_SUPPRESS_HEALTH_CHANGES = 1,

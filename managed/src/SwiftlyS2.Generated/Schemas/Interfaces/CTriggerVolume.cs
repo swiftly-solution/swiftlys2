@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerVolume : CBaseModelEntity, ISchemaClass<CTriggerVolume> {
+public partial interface CTriggerVolume : CBaseModelEntity, ISchemaClass<CTriggerVolume>
+{
+    static CTriggerVolume ISchemaClass<CTriggerVolume>.From(nint handle) => new CTriggerVolumeImpl(handle);
+    static int ISchemaClass<CTriggerVolume>.Size => 2024;
+    static string? ISchemaClass<CTriggerVolume>.ClassName => "trigger_transition";
 
-  static CTriggerVolume ISchemaClass<CTriggerVolume>.From(nint handle) => new CTriggerVolumeImpl(handle);
-  static int ISchemaClass<CTriggerVolume>.Size => 2024;
-  static string? ISchemaClass<CTriggerVolume>.ClassName => "trigger_transition";
 
-  
-  public string FilterName { get; set; }
-  
-  public ref CHandle<CBaseFilter> Filter { get; }
+    public string FilterName { get; set; }
+
+    public ref CHandle<CBaseFilter> Filter { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicNPCCounterAABB : CLogicNPCCounter, ISchemaClass<CLogicNPCCounterAABB> {
+public partial interface CLogicNPCCounterAABB : CLogicNPCCounter, ISchemaClass<CLogicNPCCounterAABB>
+{
+    static CLogicNPCCounterAABB ISchemaClass<CLogicNPCCounterAABB>.From(nint handle) => new CLogicNPCCounterAABBImpl(handle);
+    static int ISchemaClass<CLogicNPCCounterAABB>.Size => 2144;
+    static string? ISchemaClass<CLogicNPCCounterAABB>.ClassName => "logic_npc_counter_aabb";
 
-  static CLogicNPCCounterAABB ISchemaClass<CLogicNPCCounterAABB>.From(nint handle) => new CLogicNPCCounterAABBImpl(handle);
-  static int ISchemaClass<CLogicNPCCounterAABB>.Size => 2144;
-  static string? ISchemaClass<CLogicNPCCounterAABB>.ClassName => "logic_npc_counter_aabb";
 
-  
-  public ref Vector DistanceOuterMins { get; }
-  
-  public ref Vector DistanceOuterMaxs { get; }
-  
-  public ref Vector OuterMins { get; }
-  
-  public ref Vector OuterMaxs { get; }
+    public ref Vector DistanceOuterMins { get; }
+
+    public ref Vector DistanceOuterMaxs { get; }
+
+    public ref Vector OuterMins { get; }
+
+    public ref Vector OuterMaxs { get; }
 
 
 }

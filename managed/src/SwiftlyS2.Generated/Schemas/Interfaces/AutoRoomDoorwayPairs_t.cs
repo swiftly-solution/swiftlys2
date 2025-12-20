@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AutoRoomDoorwayPairs_t : ISchemaClass<AutoRoomDoorwayPairs_t> {
+public partial interface AutoRoomDoorwayPairs_t : ISchemaClass<AutoRoomDoorwayPairs_t>
+{
+    static AutoRoomDoorwayPairs_t ISchemaClass<AutoRoomDoorwayPairs_t>.From(nint handle) => new AutoRoomDoorwayPairs_tImpl(handle);
+    static int ISchemaClass<AutoRoomDoorwayPairs_t>.Size => 24;
+    static string? ISchemaClass<AutoRoomDoorwayPairs_t>.ClassName => null;
 
-  static AutoRoomDoorwayPairs_t ISchemaClass<AutoRoomDoorwayPairs_t>.From(nint handle) => new AutoRoomDoorwayPairs_tImpl(handle);
-  static int ISchemaClass<AutoRoomDoorwayPairs_t>.Size => 24;
-  static string? ISchemaClass<AutoRoomDoorwayPairs_t>.ClassName => null;
 
-  
-  public ref Vector P1 { get; }
-  
-  public ref Vector P2 { get; }
+    public ref Vector P1 { get; }
+
+    public ref Vector P2 { get; }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum Explosions : uint {
-
+public enum Explosions : uint
+{
  expRandom = 0,
 
  expDirected = 1,

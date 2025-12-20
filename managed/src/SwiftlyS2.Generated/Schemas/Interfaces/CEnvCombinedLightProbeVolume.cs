@@ -8,98 +8,98 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvCombinedLightProbeVolume : CBaseEntity, ISchemaClass<CEnvCombinedLightProbeVolume> {
+public partial interface CEnvCombinedLightProbeVolume : CBaseEntity, ISchemaClass<CEnvCombinedLightProbeVolume>
+{
+    static CEnvCombinedLightProbeVolume ISchemaClass<CEnvCombinedLightProbeVolume>.From(nint handle) => new CEnvCombinedLightProbeVolumeImpl(handle);
+    static int ISchemaClass<CEnvCombinedLightProbeVolume>.Size => 5688;
+    static string? ISchemaClass<CEnvCombinedLightProbeVolume>.ClassName => "env_combined_light_probe_volume";
 
-  static CEnvCombinedLightProbeVolume ISchemaClass<CEnvCombinedLightProbeVolume>.From(nint handle) => new CEnvCombinedLightProbeVolumeImpl(handle);
-  static int ISchemaClass<CEnvCombinedLightProbeVolume>.Size => 5688;
-  static string? ISchemaClass<CEnvCombinedLightProbeVolume>.ClassName => "env_combined_light_probe_volume";
 
-  
-  public ref Color Entity_Color { get; }
-  
-  public ref float Entity_flBrightness { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hCubemapTexture { get; }
-  
-  public ref bool Entity_bCustomCubemapTexture { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_AmbientCube { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SDF { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_DC { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_R { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_G { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_B { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightIndicesTexture { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightScalarsTexture { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightShadowsTexture { get; }
-  
-  public ref Vector Entity_vBoxMins { get; }
-  
-  public ref Vector Entity_vBoxMaxs { get; }
-  
-  public ref bool Entity_bMoveable { get; }
-  
-  public ref int Entity_nHandshake { get; }
-  
-  public ref int Entity_nEnvCubeMapArrayIndex { get; }
-  
-  public ref int Entity_nPriority { get; }
-  
-  public ref bool Entity_bStartDisabled { get; }
-  
-  public ref float Entity_flEdgeFadeDist { get; }
-  
-  public ref Vector Entity_vEdgeFadeDists { get; }
-  
-  public ref int Entity_nLightProbeSizeX { get; }
-  
-  public ref int Entity_nLightProbeSizeY { get; }
-  
-  public ref int Entity_nLightProbeSizeZ { get; }
-  
-  public ref int Entity_nLightProbeAtlasX { get; }
-  
-  public ref int Entity_nLightProbeAtlasY { get; }
-  
-  public ref int Entity_nLightProbeAtlasZ { get; }
-  
-  public ref bool Entity_bEnabled { get; }
+    public ref Color Entity_Color { get; }
 
-  public void Entity_ColorUpdated();
-  public void Entity_flBrightnessUpdated();
-  public void Entity_hCubemapTextureUpdated();
-  public void Entity_bCustomCubemapTextureUpdated();
-  public void Entity_hLightProbeTexture_AmbientCubeUpdated();
-  public void Entity_hLightProbeTexture_SDFUpdated();
-  public void Entity_hLightProbeTexture_SH2_DCUpdated();
-  public void Entity_hLightProbeTexture_SH2_RUpdated();
-  public void Entity_hLightProbeTexture_SH2_GUpdated();
-  public void Entity_hLightProbeTexture_SH2_BUpdated();
-  public void Entity_hLightProbeDirectLightIndicesTextureUpdated();
-  public void Entity_hLightProbeDirectLightScalarsTextureUpdated();
-  public void Entity_hLightProbeDirectLightShadowsTextureUpdated();
-  public void Entity_vBoxMinsUpdated();
-  public void Entity_vBoxMaxsUpdated();
-  public void Entity_bMoveableUpdated();
-  public void Entity_nHandshakeUpdated();
-  public void Entity_nEnvCubeMapArrayIndexUpdated();
-  public void Entity_nPriorityUpdated();
-  public void Entity_bStartDisabledUpdated();
-  public void Entity_flEdgeFadeDistUpdated();
-  public void Entity_vEdgeFadeDistsUpdated();
-  public void Entity_nLightProbeSizeXUpdated();
-  public void Entity_nLightProbeSizeYUpdated();
-  public void Entity_nLightProbeSizeZUpdated();
-  public void Entity_nLightProbeAtlasXUpdated();
-  public void Entity_nLightProbeAtlasYUpdated();
-  public void Entity_nLightProbeAtlasZUpdated();
-  public void Entity_bEnabledUpdated();
+    public ref float Entity_flBrightness { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hCubemapTexture { get; }
+
+    public ref bool Entity_bCustomCubemapTexture { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_AmbientCube { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SDF { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_DC { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_R { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_G { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_B { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightIndicesTexture { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightScalarsTexture { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightShadowsTexture { get; }
+
+    public ref Vector Entity_vBoxMins { get; }
+
+    public ref Vector Entity_vBoxMaxs { get; }
+
+    public ref bool Entity_bMoveable { get; }
+
+    public ref int Entity_nHandshake { get; }
+
+    public ref int Entity_nEnvCubeMapArrayIndex { get; }
+
+    public ref int Entity_nPriority { get; }
+
+    public ref bool Entity_bStartDisabled { get; }
+
+    public ref float Entity_flEdgeFadeDist { get; }
+
+    public ref Vector Entity_vEdgeFadeDists { get; }
+
+    public ref int Entity_nLightProbeSizeX { get; }
+
+    public ref int Entity_nLightProbeSizeY { get; }
+
+    public ref int Entity_nLightProbeSizeZ { get; }
+
+    public ref int Entity_nLightProbeAtlasX { get; }
+
+    public ref int Entity_nLightProbeAtlasY { get; }
+
+    public ref int Entity_nLightProbeAtlasZ { get; }
+
+    public ref bool Entity_bEnabled { get; }
+
+    public void Entity_ColorUpdated();
+    public void Entity_flBrightnessUpdated();
+    public void Entity_hCubemapTextureUpdated();
+    public void Entity_bCustomCubemapTextureUpdated();
+    public void Entity_hLightProbeTexture_AmbientCubeUpdated();
+    public void Entity_hLightProbeTexture_SDFUpdated();
+    public void Entity_hLightProbeTexture_SH2_DCUpdated();
+    public void Entity_hLightProbeTexture_SH2_RUpdated();
+    public void Entity_hLightProbeTexture_SH2_GUpdated();
+    public void Entity_hLightProbeTexture_SH2_BUpdated();
+    public void Entity_hLightProbeDirectLightIndicesTextureUpdated();
+    public void Entity_hLightProbeDirectLightScalarsTextureUpdated();
+    public void Entity_hLightProbeDirectLightShadowsTextureUpdated();
+    public void Entity_vBoxMinsUpdated();
+    public void Entity_vBoxMaxsUpdated();
+    public void Entity_bMoveableUpdated();
+    public void Entity_nHandshakeUpdated();
+    public void Entity_nEnvCubeMapArrayIndexUpdated();
+    public void Entity_nPriorityUpdated();
+    public void Entity_bStartDisabledUpdated();
+    public void Entity_flEdgeFadeDistUpdated();
+    public void Entity_vEdgeFadeDistsUpdated();
+    public void Entity_nLightProbeSizeXUpdated();
+    public void Entity_nLightProbeSizeYUpdated();
+    public void Entity_nLightProbeSizeZUpdated();
+    public void Entity_nLightProbeAtlasXUpdated();
+    public void Entity_nLightProbeAtlasYUpdated();
+    public void Entity_nLightProbeAtlasZUpdated();
+    public void Entity_bEnabledUpdated();
 }

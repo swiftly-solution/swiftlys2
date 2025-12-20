@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRagdollMagnet : CPointEntity, ISchemaClass<CRagdollMagnet> {
+public partial interface CRagdollMagnet : CPointEntity, ISchemaClass<CRagdollMagnet>
+{
+    static CRagdollMagnet ISchemaClass<CRagdollMagnet>.From(nint handle) => new CRagdollMagnetImpl(handle);
+    static int ISchemaClass<CRagdollMagnet>.Size => 1288;
+    static string? ISchemaClass<CRagdollMagnet>.ClassName => "phys_ragdollmagnet";
 
-  static CRagdollMagnet ISchemaClass<CRagdollMagnet>.From(nint handle) => new CRagdollMagnetImpl(handle);
-  static int ISchemaClass<CRagdollMagnet>.Size => 1288;
-  static string? ISchemaClass<CRagdollMagnet>.ClassName => "phys_ragdollmagnet";
 
-  
-  public ref bool Disabled { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref float Force { get; }
-  
-  public ref Vector Axis { get; }
+    public ref bool Disabled { get; }
+
+    public ref float Radius { get; }
+
+    public ref float Force { get; }
+
+    public ref Vector Axis { get; }
 
 
 }

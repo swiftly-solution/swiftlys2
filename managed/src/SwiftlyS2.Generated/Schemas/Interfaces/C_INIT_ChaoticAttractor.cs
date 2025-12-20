@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_ChaoticAttractor : CParticleFunctionInitializer, ISchemaClass<C_INIT_ChaoticAttractor> {
+public partial interface C_INIT_ChaoticAttractor : CParticleFunctionInitializer, ISchemaClass<C_INIT_ChaoticAttractor>
+{
+    static C_INIT_ChaoticAttractor ISchemaClass<C_INIT_ChaoticAttractor>.From(nint handle) => new C_INIT_ChaoticAttractorImpl(handle);
+    static int ISchemaClass<C_INIT_ChaoticAttractor>.Size => 512;
+    static string? ISchemaClass<C_INIT_ChaoticAttractor>.ClassName => null;
 
-  static C_INIT_ChaoticAttractor ISchemaClass<C_INIT_ChaoticAttractor>.From(nint handle) => new C_INIT_ChaoticAttractorImpl(handle);
-  static int ISchemaClass<C_INIT_ChaoticAttractor>.Size => 512;
-  static string? ISchemaClass<C_INIT_ChaoticAttractor>.ClassName => null;
 
-  
-  public ref float AParm { get; }
-  
-  public ref float BParm { get; }
-  
-  public ref float CParm { get; }
-  
-  public ref float DParm { get; }
-  
-  public ref float Scale { get; }
-  
-  public ref float SpeedMin { get; }
-  
-  public ref float SpeedMax { get; }
-  
-  public ref int BaseCP { get; }
-  
-  public ref bool UniformSpeed { get; }
+    public ref float AParm { get; }
+
+    public ref float BParm { get; }
+
+    public ref float CParm { get; }
+
+    public ref float DParm { get; }
+
+    public ref float Scale { get; }
+
+    public ref float SpeedMin { get; }
+
+    public ref float SpeedMax { get; }
+
+    public ref int BaseCP { get; }
+
+    public ref bool UniformSpeed { get; }
 
 
 }

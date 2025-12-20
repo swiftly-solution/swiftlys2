@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmSyncEventIndexConditionNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmSyncEventIndexConditionNode__CDefinition {
+internal partial class CNmSyncEventIndexConditionNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmSyncEventIndexConditionNode__CDefinition
+{
+    public CNmSyncEventIndexConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmSyncEventIndexConditionNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceStateNodeIdxOffset;
 
-  private static nint? _SourceStateNodeIdxOffset;
-
-  public ref short SourceStateNodeIdx {
-    get {
-      if (_SourceStateNodeIdxOffset == null) {
-        _SourceStateNodeIdxOffset = Schema.GetOffset(0x343CD5DB63F0228C);
-      }
-      return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+    public ref short SourceStateNodeIdx {
+        get {
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x343CD5DB63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriggerModeOffset;
+    private static nint? _TriggerModeOffset;
 
-  public ref CNmSyncEventIndexConditionNode__TriggerMode_t TriggerMode {
-    get {
-      if (_TriggerModeOffset == null) {
-        _TriggerModeOffset = Schema.GetOffset(0x343CD5DB0431A60C);
-      }
-      return ref _Handle.AsRef<CNmSyncEventIndexConditionNode__TriggerMode_t>(_TriggerModeOffset!.Value);
+    public ref CNmSyncEventIndexConditionNode__TriggerMode_t TriggerMode {
+        get {
+            _TriggerModeOffset = _TriggerModeOffset ?? Schema.GetOffset(0x343CD5DB0431A60C);
+            return ref _Handle.AsRef<CNmSyncEventIndexConditionNode__TriggerMode_t>(_TriggerModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SyncEventIdxOffset;
+    private static nint? _SyncEventIdxOffset;
 
-  public ref int SyncEventIdx {
-    get {
-      if (_SyncEventIdxOffset == null) {
-        _SyncEventIdxOffset = Schema.GetOffset(0x343CD5DBC84F66C9);
-      }
-      return ref _Handle.AsRef<int>(_SyncEventIdxOffset!.Value);
+    public ref int SyncEventIdx {
+        get {
+            _SyncEventIdxOffset = _SyncEventIdxOffset ?? Schema.GetOffset(0x343CD5DBC84F66C9);
+            return ref _Handle.AsRef<int>(_SyncEventIdxOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomAlphaImpl : CParticleFunctionInitializerImpl, C_INIT_RandomAlpha {
+internal partial class C_INIT_RandomAlphaImpl : CParticleFunctionInitializerImpl, C_INIT_RandomAlpha
+{
+    public C_INIT_RandomAlphaImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RandomAlphaImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x3D7FD5BE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x3D7FD5BE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaMinOffset;
+    private static nint? _AlphaMinOffset;
 
-  public ref int AlphaMin {
-    get {
-      if (_AlphaMinOffset == null) {
-        _AlphaMinOffset = Schema.GetOffset(0x3D7FD5BD7670531);
-      }
-      return ref _Handle.AsRef<int>(_AlphaMinOffset!.Value);
+    public ref int AlphaMin {
+        get {
+            _AlphaMinOffset = _AlphaMinOffset ?? Schema.GetOffset(0x3D7FD5BD7670531);
+            return ref _Handle.AsRef<int>(_AlphaMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaMaxOffset;
+    private static nint? _AlphaMaxOffset;
 
-  public ref int AlphaMax {
-    get {
-      if (_AlphaMaxOffset == null) {
-        _AlphaMaxOffset = Schema.GetOffset(0x3D7FD5BE97AA93F);
-      }
-      return ref _Handle.AsRef<int>(_AlphaMaxOffset!.Value);
+    public ref int AlphaMax {
+        get {
+            _AlphaMaxOffset = _AlphaMaxOffset ?? Schema.GetOffset(0x3D7FD5BE97AA93F);
+            return ref _Handle.AsRef<int>(_AlphaMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaRandExponentOffset;
+    private static nint? _AlphaRandExponentOffset;
 
-  public ref float AlphaRandExponent {
-    get {
-      if (_AlphaRandExponentOffset == null) {
-        _AlphaRandExponentOffset = Schema.GetOffset(0x3D7FD5BA2C243B5);
-      }
-      return ref _Handle.AsRef<float>(_AlphaRandExponentOffset!.Value);
+    public ref float AlphaRandExponent {
+        get {
+            _AlphaRandExponentOffset = _AlphaRandExponentOffset ?? Schema.GetOffset(0x3D7FD5BA2C243B5);
+            return ref _Handle.AsRef<float>(_AlphaRandExponentOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface NmCompressionSettings_t : ISchemaClass<NmCompressionSettings_t> {
+public partial interface NmCompressionSettings_t : ISchemaClass<NmCompressionSettings_t>
+{
+    static NmCompressionSettings_t ISchemaClass<NmCompressionSettings_t>.From(nint handle) => new NmCompressionSettings_tImpl(handle);
+    static int ISchemaClass<NmCompressionSettings_t>.Size => 64;
+    static string? ISchemaClass<NmCompressionSettings_t>.ClassName => null;
 
-  static NmCompressionSettings_t ISchemaClass<NmCompressionSettings_t>.From(nint handle) => new NmCompressionSettings_tImpl(handle);
-  static int ISchemaClass<NmCompressionSettings_t>.Size => 64;
-  static string? ISchemaClass<NmCompressionSettings_t>.ClassName => null;
 
-  
-  public NmCompressionSettings_t__QuantizationRange_t TranslationRangeX { get; }
-  
-  public NmCompressionSettings_t__QuantizationRange_t TranslationRangeY { get; }
-  
-  public NmCompressionSettings_t__QuantizationRange_t TranslationRangeZ { get; }
-  
-  public NmCompressionSettings_t__QuantizationRange_t ScaleRange { get; }
-  
-  public ref Quaternion ConstantRotation { get; }
-  
-  public ref bool IsRotationStatic { get; }
-  
-  public ref bool IsTranslationStatic { get; }
-  
-  public ref bool IsScaleStatic { get; }
+    public NmCompressionSettings_t__QuantizationRange_t TranslationRangeX { get; }
+
+    public NmCompressionSettings_t__QuantizationRange_t TranslationRangeY { get; }
+
+    public NmCompressionSettings_t__QuantizationRange_t TranslationRangeZ { get; }
+
+    public NmCompressionSettings_t__QuantizationRange_t ScaleRange { get; }
+
+    public ref Quaternion ConstantRotation { get; }
+
+    public ref bool IsRotationStatic { get; }
+
+    public ref bool IsTranslationStatic { get; }
+
+    public ref bool IsScaleStatic { get; }
 
 
 }

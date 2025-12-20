@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBinaryUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CBinaryUpdateNode> {
+public partial interface CBinaryUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CBinaryUpdateNode>
+{
+    static CBinaryUpdateNode ISchemaClass<CBinaryUpdateNode>.From(nint handle) => new CBinaryUpdateNodeImpl(handle);
+    static int ISchemaClass<CBinaryUpdateNode>.Size => 144;
+    static string? ISchemaClass<CBinaryUpdateNode>.ClassName => null;
 
-  static CBinaryUpdateNode ISchemaClass<CBinaryUpdateNode>.From(nint handle) => new CBinaryUpdateNodeImpl(handle);
-  static int ISchemaClass<CBinaryUpdateNode>.Size => 144;
-  static string? ISchemaClass<CBinaryUpdateNode>.ClassName => null;
 
-  
-  public CAnimUpdateNodeRef Child1 { get; }
-  
-  public CAnimUpdateNodeRef Child2 { get; }
-  
-  public ref BinaryNodeTiming TimingBehavior { get; }
-  
-  public ref float TimingBlend { get; }
-  
-  public ref bool ResetChild1 { get; }
-  
-  public ref bool ResetChild2 { get; }
+    public CAnimUpdateNodeRef Child1 { get; }
+
+    public CAnimUpdateNodeRef Child2 { get; }
+
+    public ref BinaryNodeTiming TimingBehavior { get; }
+
+    public ref float TimingBlend { get; }
+
+    public ref bool ResetChild1 { get; }
+
+    public ref bool ResetChild2 { get; }
 
 
 }

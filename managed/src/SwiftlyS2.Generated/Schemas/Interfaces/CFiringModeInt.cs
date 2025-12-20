@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFiringModeInt : ISchemaClass<CFiringModeInt> {
+public partial interface CFiringModeInt : ISchemaClass<CFiringModeInt>
+{
+    static CFiringModeInt ISchemaClass<CFiringModeInt>.From(nint handle) => new CFiringModeIntImpl(handle);
+    static int ISchemaClass<CFiringModeInt>.Size => 8;
+    static string? ISchemaClass<CFiringModeInt>.ClassName => null;
 
-  static CFiringModeInt ISchemaClass<CFiringModeInt>.From(nint handle) => new CFiringModeIntImpl(handle);
-  static int ISchemaClass<CFiringModeInt>.Size => 8;
-  static string? ISchemaClass<CFiringModeInt>.ClassName => null;
 
-  
-  public ISchemaFixedArray<int> Values { get; }
+    public ISchemaFixedArray<int> Values { get; }
 
 
 }

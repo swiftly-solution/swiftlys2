@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderStatusEffect : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderStatusEffect> {
+public partial interface C_OP_RenderStatusEffect : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderStatusEffect>
+{
+    static C_OP_RenderStatusEffect ISchemaClass<C_OP_RenderStatusEffect>.From(nint handle) => new C_OP_RenderStatusEffectImpl(handle);
+    static int ISchemaClass<C_OP_RenderStatusEffect>.Size => 600;
+    static string? ISchemaClass<C_OP_RenderStatusEffect>.ClassName => null;
 
-  static C_OP_RenderStatusEffect ISchemaClass<C_OP_RenderStatusEffect>.From(nint handle) => new C_OP_RenderStatusEffectImpl(handle);
-  static int ISchemaClass<C_OP_RenderStatusEffect>.Size => 600;
-  static string? ISchemaClass<C_OP_RenderStatusEffect>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureColorWarp { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDetail2 { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDiffuseWarp { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelColorWarp { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelWarp { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureSpecularWarp { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureEnvMap { get; }
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureColorWarp { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDetail2 { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDiffuseWarp { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelColorWarp { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureFresnelWarp { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureSpecularWarp { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureEnvMap { get; }
 
 
 }

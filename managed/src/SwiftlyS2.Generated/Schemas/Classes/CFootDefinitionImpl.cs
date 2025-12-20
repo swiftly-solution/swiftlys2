@@ -6,128 +6,100 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootDefinitionImpl : SchemaClass, CFootDefinition {
+internal partial class CFootDefinitionImpl : SchemaClass, CFootDefinition
+{
+    public CFootDefinitionImpl(nint handle) : base(handle) { }
 
-  public CFootDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAA3BA2A34D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAA3BA2A34D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _AnkleBoneNameOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xAA3BA2A34D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xAA3BA2A34D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _AnkleBoneNameOffset;
+    public string AnkleBoneName {
+        get {
+            _AnkleBoneNameOffset = _AnkleBoneNameOffset ?? Schema.GetOffset(0xAA3BA2A3A8A2DEF9);
+            return Schema.GetString(_Handle.Read<nint>(_AnkleBoneNameOffset!.Value));
+        }
+        set {
+            _AnkleBoneNameOffset = _AnkleBoneNameOffset ?? Schema.GetOffset(0xAA3BA2A3A8A2DEF9);
+            Schema.SetString(_Handle, _AnkleBoneNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ToeBoneNameOffset;
 
-  public string AnkleBoneName {
-    get {
-      if (_AnkleBoneNameOffset == null) {
-        _AnkleBoneNameOffset = Schema.GetOffset(0xAA3BA2A3A8A2DEF9);
-      }
-      var ptr = _Handle.Read<nint>(_AnkleBoneNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_AnkleBoneNameOffset == null) {
-        _AnkleBoneNameOffset = Schema.GetOffset(0xAA3BA2A3A8A2DEF9);
-      }
-      Schema.SetString(_Handle, _AnkleBoneNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ToeBoneNameOffset;
+    public string ToeBoneName {
+        get {
+            _ToeBoneNameOffset = _ToeBoneNameOffset ?? Schema.GetOffset(0xAA3BA2A39C96209A);
+            return Schema.GetString(_Handle.Read<nint>(_ToeBoneNameOffset!.Value));
+        }
+        set {
+            _ToeBoneNameOffset = _ToeBoneNameOffset ?? Schema.GetOffset(0xAA3BA2A39C96209A);
+            Schema.SetString(_Handle, _ToeBoneNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _BallOffsetOffset;
 
-  public string ToeBoneName {
-    get {
-      if (_ToeBoneNameOffset == null) {
-        _ToeBoneNameOffset = Schema.GetOffset(0xAA3BA2A39C96209A);
-      }
-      var ptr = _Handle.Read<nint>(_ToeBoneNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref Vector BallOffset {
+        get {
+            _BallOffsetOffset = _BallOffsetOffset ?? Schema.GetOffset(0xAA3BA2A3E3376F1B);
+            return ref _Handle.AsRef<Vector>(_BallOffsetOffset!.Value);
+        }
     }
-    set {
-      if (_ToeBoneNameOffset == null) {
-        _ToeBoneNameOffset = Schema.GetOffset(0xAA3BA2A39C96209A);
-      }
-      Schema.SetString(_Handle, _ToeBoneNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _BallOffsetOffset;
+    private static nint? _HeelOffsetOffset;
 
-  public ref Vector BallOffset {
-    get {
-      if (_BallOffsetOffset == null) {
-        _BallOffsetOffset = Schema.GetOffset(0xAA3BA2A3E3376F1B);
-      }
-      return ref _Handle.AsRef<Vector>(_BallOffsetOffset!.Value);
+    public ref Vector HeelOffset {
+        get {
+            _HeelOffsetOffset = _HeelOffsetOffset ?? Schema.GetOffset(0xAA3BA2A3306AE608);
+            return ref _Handle.AsRef<Vector>(_HeelOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeelOffsetOffset;
+    private static nint? _FootLengthOffset;
 
-  public ref Vector HeelOffset {
-    get {
-      if (_HeelOffsetOffset == null) {
-        _HeelOffsetOffset = Schema.GetOffset(0xAA3BA2A3306AE608);
-      }
-      return ref _Handle.AsRef<Vector>(_HeelOffsetOffset!.Value);
+    public ref float FootLength {
+        get {
+            _FootLengthOffset = _FootLengthOffset ?? Schema.GetOffset(0xAA3BA2A308C0C9F7);
+            return ref _Handle.AsRef<float>(_FootLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _FootLengthOffset;
+    private static nint? _BindPoseDirectionMSOffset;
 
-  public ref float FootLength {
-    get {
-      if (_FootLengthOffset == null) {
-        _FootLengthOffset = Schema.GetOffset(0xAA3BA2A308C0C9F7);
-      }
-      return ref _Handle.AsRef<float>(_FootLengthOffset!.Value);
+    public ref float BindPoseDirectionMS {
+        get {
+            _BindPoseDirectionMSOffset = _BindPoseDirectionMSOffset ?? Schema.GetOffset(0xAA3BA2A34413B862);
+            return ref _Handle.AsRef<float>(_BindPoseDirectionMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _BindPoseDirectionMSOffset;
+    private static nint? _TraceHeightOffset;
 
-  public ref float BindPoseDirectionMS {
-    get {
-      if (_BindPoseDirectionMSOffset == null) {
-        _BindPoseDirectionMSOffset = Schema.GetOffset(0xAA3BA2A34413B862);
-      }
-      return ref _Handle.AsRef<float>(_BindPoseDirectionMSOffset!.Value);
+    public ref float TraceHeight {
+        get {
+            _TraceHeightOffset = _TraceHeightOffset ?? Schema.GetOffset(0xAA3BA2A3EFB858CF);
+            return ref _Handle.AsRef<float>(_TraceHeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _TraceHeightOffset;
+    private static nint? _TraceRadiusOffset;
 
-  public ref float TraceHeight {
-    get {
-      if (_TraceHeightOffset == null) {
-        _TraceHeightOffset = Schema.GetOffset(0xAA3BA2A3EFB858CF);
-      }
-      return ref _Handle.AsRef<float>(_TraceHeightOffset!.Value);
+    public ref float TraceRadius {
+        get {
+            _TraceRadiusOffset = _TraceRadiusOffset ?? Schema.GetOffset(0xAA3BA2A39A33E452);
+            return ref _Handle.AsRef<float>(_TraceRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _TraceRadiusOffset;
-
-  public ref float TraceRadius {
-    get {
-      if (_TraceRadiusOffset == null) {
-        _TraceRadiusOffset = Schema.GetOffset(0xAA3BA2A39A33E452);
-      }
-      return ref _Handle.AsRef<float>(_TraceRadiusOffset!.Value);
-    }
-  }
 
 
 }

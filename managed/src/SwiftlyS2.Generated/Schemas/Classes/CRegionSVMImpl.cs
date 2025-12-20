@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRegionSVMImpl : SchemaClass, CRegionSVM {
+internal partial class CRegionSVMImpl : SchemaClass, CRegionSVM
+{
+    public CRegionSVMImpl(nint handle) : base(handle) { }
 
-  public CRegionSVMImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PlanesOffset;
 
-  private static nint? _PlanesOffset;
-
-  public ref CUtlVector<RnPlane_t> Planes {
-    get {
-      if (_PlanesOffset == null) {
-        _PlanesOffset = Schema.GetOffset(0xFC5717CAF831F452);
-      }
-      return ref _Handle.AsRef<CUtlVector<RnPlane_t>>(_PlanesOffset!.Value);
+    public ref CUtlVector<RnPlane_t> Planes {
+        get {
+            _PlanesOffset = _PlanesOffset ?? Schema.GetOffset(0xFC5717CAF831F452);
+            return ref _Handle.AsRef<CUtlVector<RnPlane_t>>(_PlanesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodesOffset;
+    private static nint? _NodesOffset;
 
-  public ref CUtlVector<uint> Nodes {
-    get {
-      if (_NodesOffset == null) {
-        _NodesOffset = Schema.GetOffset(0xFC5717CAEBA045DA);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_NodesOffset!.Value);
+    public ref CUtlVector<uint> Nodes {
+        get {
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0xFC5717CAEBA045DA);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_NodesOffset!.Value);
+        }
     }
-  }
 
 
 }

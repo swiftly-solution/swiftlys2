@@ -8,46 +8,46 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface HitReactFixedSettings_t : ISchemaClass<HitReactFixedSettings_t> {
+public partial interface HitReactFixedSettings_t : ISchemaClass<HitReactFixedSettings_t>
+{
+    static HitReactFixedSettings_t ISchemaClass<HitReactFixedSettings_t>.From(nint handle) => new HitReactFixedSettings_tImpl(handle);
+    static int ISchemaClass<HitReactFixedSettings_t>.Size => 68;
+    static string? ISchemaClass<HitReactFixedSettings_t>.ClassName => null;
 
-  static HitReactFixedSettings_t ISchemaClass<HitReactFixedSettings_t>.From(nint handle) => new HitReactFixedSettings_tImpl(handle);
-  static int ISchemaClass<HitReactFixedSettings_t>.Size => 68;
-  static string? ISchemaClass<HitReactFixedSettings_t>.ClassName => null;
 
-  
-  public ref int WeightListIndex { get; }
-  
-  public ref int EffectedBoneCount { get; }
-  
-  public ref float MaxImpactForce { get; }
-  
-  public ref float MinImpactForce { get; }
-  
-  public ref float WhipImpactScale { get; }
-  
-  public ref float CounterRotationScale { get; }
-  
-  public ref float DistanceFadeScale { get; }
-  
-  public ref float PropagationScale { get; }
-  
-  public ref float WhipDelay { get; }
-  
-  public ref float SpringStrength { get; }
-  
-  public ref float WhipSpringStrength { get; }
-  
-  public ref float MaxAngleRadians { get; }
-  
-  public ref int HipBoneIndex { get; }
-  
-  public ref float HipBoneTranslationScale { get; }
-  
-  public ref float HipDipSpringStrength { get; }
-  
-  public ref float HipDipImpactScale { get; }
-  
-  public ref float HipDipDelay { get; }
+    public ref int WeightListIndex { get; }
+
+    public ref int EffectedBoneCount { get; }
+
+    public ref float MaxImpactForce { get; }
+
+    public ref float MinImpactForce { get; }
+
+    public ref float WhipImpactScale { get; }
+
+    public ref float CounterRotationScale { get; }
+
+    public ref float DistanceFadeScale { get; }
+
+    public ref float PropagationScale { get; }
+
+    public ref float WhipDelay { get; }
+
+    public ref float SpringStrength { get; }
+
+    public ref float WhipSpringStrength { get; }
+
+    public ref float MaxAngleRadians { get; }
+
+    public ref int HipBoneIndex { get; }
+
+    public ref float HipBoneTranslationScale { get; }
+
+    public ref float HipDipSpringStrength { get; }
+
+    public ref float HipDipImpactScale { get; }
+
+    public ref float HipDipDelay { get; }
 
 
 }

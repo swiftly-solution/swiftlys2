@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSpeedScaleUpdateNodeImpl : CUnaryUpdateNodeImpl, CSpeedScaleUpdateNode {
+internal partial class CSpeedScaleUpdateNodeImpl : CUnaryUpdateNodeImpl, CSpeedScaleUpdateNode
+{
+    public CSpeedScaleUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CSpeedScaleUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParamIndexOffset;
 
-  private static nint? _ParamIndexOffset;
-
-  public CAnimParamHandle ParamIndex {
-    get {
-      if (_ParamIndexOffset == null) {
-        _ParamIndexOffset = Schema.GetOffset(0xD43012BC61990A86);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+    public CAnimParamHandle ParamIndex {
+        get {
+            _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xD43012BC61990A86);
+            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

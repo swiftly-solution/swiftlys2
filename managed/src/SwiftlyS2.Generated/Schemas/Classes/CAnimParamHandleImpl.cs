@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimParamHandleImpl : SchemaClass, CAnimParamHandle {
+internal partial class CAnimParamHandleImpl : SchemaClass, CAnimParamHandle
+{
+    public CAnimParamHandleImpl(nint handle) : base(handle) { }
 
-  public CAnimParamHandleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref AnimParamType_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x7B9461E0F04B4ED);
-      }
-      return ref _Handle.AsRef<AnimParamType_t>(_TypeOffset!.Value);
+    public ref AnimParamType_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x7B9461E0F04B4ED);
+            return ref _Handle.AsRef<AnimParamType_t>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _IndexOffset;
+    private static nint? _IndexOffset;
 
-  public ref byte Index {
-    get {
-      if (_IndexOffset == null) {
-        _IndexOffset = Schema.GetOffset(0x7B9461E491963CB);
-      }
-      return ref _Handle.AsRef<byte>(_IndexOffset!.Value);
+    public ref byte Index {
+        get {
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x7B9461E491963CB);
+            return ref _Handle.AsRef<byte>(_IndexOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeTaperedCapsuleStretch_t : ISchemaClass<FeTaperedCapsuleStretch_t> {
+public partial interface FeTaperedCapsuleStretch_t : ISchemaClass<FeTaperedCapsuleStretch_t>
+{
+    static FeTaperedCapsuleStretch_t ISchemaClass<FeTaperedCapsuleStretch_t>.From(nint handle) => new FeTaperedCapsuleStretch_tImpl(handle);
+    static int ISchemaClass<FeTaperedCapsuleStretch_t>.Size => 16;
+    static string? ISchemaClass<FeTaperedCapsuleStretch_t>.ClassName => null;
 
-  static FeTaperedCapsuleStretch_t ISchemaClass<FeTaperedCapsuleStretch_t>.From(nint handle) => new FeTaperedCapsuleStretch_tImpl(handle);
-  static int ISchemaClass<FeTaperedCapsuleStretch_t>.Size => 16;
-  static string? ISchemaClass<FeTaperedCapsuleStretch_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Node { get; }
-  
-  public ref ushort CollisionMask { get; }
-  
-  public ref ushort Dummy { get; }
-  
-  public ISchemaFixedArray<float> Radius { get; }
+    public ISchemaFixedArray<ushort> Node { get; }
+
+    public ref ushort CollisionMask { get; }
+
+    public ref ushort Dummy { get; }
+
+    public ISchemaFixedArray<float> Radius { get; }
 
 
 }

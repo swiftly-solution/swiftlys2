@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixUtilityDesc_t : ISchemaClass<VMixUtilityDesc_t> {
+public partial interface VMixUtilityDesc_t : ISchemaClass<VMixUtilityDesc_t>
+{
+    static VMixUtilityDesc_t ISchemaClass<VMixUtilityDesc_t>.From(nint handle) => new VMixUtilityDesc_tImpl(handle);
+    static int ISchemaClass<VMixUtilityDesc_t>.Size => 24;
+    static string? ISchemaClass<VMixUtilityDesc_t>.ClassName => null;
 
-  static VMixUtilityDesc_t ISchemaClass<VMixUtilityDesc_t>.From(nint handle) => new VMixUtilityDesc_tImpl(handle);
-  static int ISchemaClass<VMixUtilityDesc_t>.Size => 24;
-  static string? ISchemaClass<VMixUtilityDesc_t>.ClassName => null;
 
-  
-  public ref VMixChannelOperation_t Op { get; }
-  
-  public ref float InputPan { get; }
-  
-  public ref float OutputBalance { get; }
-  
-  public ref float FldbOutputGain { get; }
-  
-  public ref bool BassMono { get; }
-  
-  public ref float BassFreq { get; }
+    public ref VMixChannelOperation_t Op { get; }
+
+    public ref float InputPan { get; }
+
+    public ref float OutputBalance { get; }
+
+    public ref float FldbOutputGain { get; }
+
+    public ref bool BassMono { get; }
+
+    public ref float BassFreq { get; }
 
 
 }

@@ -6,94 +6,76 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ModelDampenMovementImpl : CParticleFunctionOperatorImpl, C_OP_ModelDampenMovement {
+internal partial class C_OP_ModelDampenMovementImpl : CParticleFunctionOperatorImpl, C_OP_ModelDampenMovement
+{
+    public C_OP_ModelDampenMovementImpl(nint handle) : base(handle) { }
 
-  public C_OP_ModelDampenMovementImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x74BD8BB63F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
-    }
-  }
-  private static nint? _BoundBoxOffset;
-
-  public ref bool BoundBox {
-    get {
-      if (_BoundBoxOffset == null) {
-        _BoundBoxOffset = Schema.GetOffset(0x74BD8BB6AB65CDDC);
-      }
-      return ref _Handle.AsRef<bool>(_BoundBoxOffset!.Value);
-    }
-  }
-  private static nint? _OutsideOffset;
-
-  public ref bool Outside {
-    get {
-      if (_OutsideOffset == null) {
-        _OutsideOffset = Schema.GetOffset(0x74BD8BB6733FEEA4);
-      }
-      return ref _Handle.AsRef<bool>(_OutsideOffset!.Value);
-    }
-  }
-  private static nint? _UseBonesOffset;
-
-  public ref bool UseBones {
-    get {
-      if (_UseBonesOffset == null) {
-        _UseBonesOffset = Schema.GetOffset(0x74BD8BB610D1938B);
-      }
-      return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
-    }
-  }
-  private static nint? _HitboxSetNameOffset;
-
-  public string HitboxSetName {
-    get {
-        if (_HitboxSetNameOffset == null) {
-            _HitboxSetNameOffset = Schema.GetOffset(0x74BD8BB66A21BB0E);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x74BD8BB63F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
-        var ptr = _Handle + _HitboxSetNameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_HitboxSetNameOffset == null) {
-            _HitboxSetNameOffset = Schema.GetOffset(0x74BD8BB66A21BB0E);
+    private static nint? _BoundBoxOffset;
+
+    public ref bool BoundBox {
+        get {
+            _BoundBoxOffset = _BoundBoxOffset ?? Schema.GetOffset(0x74BD8BB6AB65CDDC);
+            return ref _Handle.AsRef<bool>(_BoundBoxOffset!.Value);
         }
-        Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
     }
-  } 
-  private static nint? _PosOffsetOffset;
+    private static nint? _OutsideOffset;
 
-  public CPerParticleVecInput PosOffset {
-    get {
-      if (_PosOffsetOffset == null) {
-        _PosOffsetOffset = Schema.GetOffset(0x74BD8BB655D114B6);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _PosOffsetOffset!.Value);
+    public ref bool Outside {
+        get {
+            _OutsideOffset = _OutsideOffset ?? Schema.GetOffset(0x74BD8BB6733FEEA4);
+            return ref _Handle.AsRef<bool>(_OutsideOffset!.Value);
+        }
     }
-  }
-  private static nint? _DragOffset;
+    private static nint? _UseBonesOffset;
 
-  public ref float Drag {
-    get {
-      if (_DragOffset == null) {
-        _DragOffset = Schema.GetOffset(0x74BD8BB650DA6497);
-      }
-      return ref _Handle.AsRef<float>(_DragOffset!.Value);
+    public ref bool UseBones {
+        get {
+            _UseBonesOffset = _UseBonesOffset ?? Schema.GetOffset(0x74BD8BB610D1938B);
+            return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
+        }
     }
-  }
+    private static nint? _HitboxSetNameOffset;
+
+    public string HitboxSetName {
+        get {
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x74BD8BB66A21BB0E);
+            return Schema.GetString(_Handle + _HitboxSetNameOffset!.Value);
+        }
+        set {
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0x74BD8BB66A21BB0E);
+            Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
+        }
+    } 
+    private static nint? _PosOffsetOffset;
+
+    public CPerParticleVecInput PosOffset {
+        get {
+            _PosOffsetOffset = _PosOffsetOffset ?? Schema.GetOffset(0x74BD8BB655D114B6);
+            return new CPerParticleVecInputImpl(_Handle + _PosOffsetOffset!.Value);
+        }
+    }
+    private static nint? _DragOffset;
+
+    public ref float Drag {
+        get {
+            _DragOffset = _DragOffset ?? Schema.GetOffset(0x74BD8BB650DA6497);
+            return ref _Handle.AsRef<float>(_DragOffset!.Value);
+        }
+    }
 
 
 }

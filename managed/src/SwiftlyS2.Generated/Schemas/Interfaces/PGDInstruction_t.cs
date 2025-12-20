@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PGDInstruction_t : ISchemaClass<PGDInstruction_t> {
+public partial interface PGDInstruction_t : ISchemaClass<PGDInstruction_t>
+{
+    static PGDInstruction_t ISchemaClass<PGDInstruction_t>.From(nint handle) => new PGDInstruction_tImpl(handle);
+    static int ISchemaClass<PGDInstruction_t>.Size => 56;
+    static string? ISchemaClass<PGDInstruction_t>.ClassName => null;
 
-  static PGDInstruction_t ISchemaClass<PGDInstruction_t>.From(nint handle) => new PGDInstruction_tImpl(handle);
-  static int ISchemaClass<PGDInstruction_t>.Size => 56;
-  static string? ISchemaClass<PGDInstruction_t>.ClassName => null;
 
-  
-  public ref PulseInstructionCode_t Code { get; }
-  
-  public PulseRuntimeVarIndex_t Var { get; }
-  
-  public PulseRuntimeRegisterIndex_t Reg0 { get; }
-  
-  public PulseRuntimeRegisterIndex_t Reg1 { get; }
-  
-  public PulseRuntimeRegisterIndex_t Reg2 { get; }
-  
-  public PulseRuntimeInvokeIndex_t InvokeBindingIndex { get; }
-  
-  public PulseRuntimeChunkIndex_t Chunk { get; }
-  
-  public ref int DestInstruction { get; }
-  
-  public PulseRuntimeCallInfoIndex_t CallInfoIndex { get; }
-  
-  public PulseRuntimeConstantIndex_t ConstIdx { get; }
-  
-  public PulseRuntimeDomainValueIndex_t DomainValueIdx { get; }
-  
-  public PulseRuntimeBlackboardReferenceIndex_t BlackboardReferenceIdx { get; }
+    public ref PulseInstructionCode_t Code { get; }
+
+    public PulseRuntimeVarIndex_t Var { get; }
+
+    public PulseRuntimeRegisterIndex_t Reg0 { get; }
+
+    public PulseRuntimeRegisterIndex_t Reg1 { get; }
+
+    public PulseRuntimeRegisterIndex_t Reg2 { get; }
+
+    public PulseRuntimeInvokeIndex_t InvokeBindingIndex { get; }
+
+    public PulseRuntimeChunkIndex_t Chunk { get; }
+
+    public ref int DestInstruction { get; }
+
+    public PulseRuntimeCallInfoIndex_t CallInfoIndex { get; }
+
+    public PulseRuntimeConstantIndex_t ConstIdx { get; }
+
+    public PulseRuntimeDomainValueIndex_t DomainValueIdx { get; }
+
+    public PulseRuntimeBlackboardReferenceIndex_t BlackboardReferenceIdx { get; }
 
 
 }

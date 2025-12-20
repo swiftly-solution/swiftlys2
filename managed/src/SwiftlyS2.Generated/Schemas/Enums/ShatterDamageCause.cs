@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ShatterDamageCause : byte {
-
+public enum ShatterDamageCause : byte
+{
  SHATTERDAMAGE_BULLET = 0,
 
  SHATTERDAMAGE_MELEE = 1,

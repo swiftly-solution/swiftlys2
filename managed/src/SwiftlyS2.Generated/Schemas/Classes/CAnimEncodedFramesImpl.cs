@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimEncodedFramesImpl : SchemaClass, CAnimEncodedFrames {
+internal partial class CAnimEncodedFramesImpl : SchemaClass, CAnimEncodedFrames
+{
+    public CAnimEncodedFramesImpl(nint handle) : base(handle) { }
 
-  public CAnimEncodedFramesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FileNameOffset;
 
-  private static nint? _FileNameOffset;
-
-  public ref CBufferString FileName {
-    get {
-      if (_FileNameOffset == null) {
-        _FileNameOffset = Schema.GetOffset(0x63992F5DC8D68508);
-      }
-      return ref _Handle.AsRef<CBufferString>(_FileNameOffset!.Value);
+    public ref CBufferString FileName {
+        get {
+            _FileNameOffset = _FileNameOffset ?? Schema.GetOffset(0x63992F5DC8D68508);
+            return ref _Handle.AsRef<CBufferString>(_FileNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _FramesOffset;
+    private static nint? _FramesOffset;
 
-  public ref int Frames {
-    get {
-      if (_FramesOffset == null) {
-        _FramesOffset = Schema.GetOffset(0x63992F5DD2101EE3);
-      }
-      return ref _Handle.AsRef<int>(_FramesOffset!.Value);
+    public ref int Frames {
+        get {
+            _FramesOffset = _FramesOffset ?? Schema.GetOffset(0x63992F5DD2101EE3);
+            return ref _Handle.AsRef<int>(_FramesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FramesPerBlockOffset;
+    private static nint? _FramesPerBlockOffset;
 
-  public ref int FramesPerBlock {
-    get {
-      if (_FramesPerBlockOffset == null) {
-        _FramesPerBlockOffset = Schema.GetOffset(0x63992F5DFFC5A547);
-      }
-      return ref _Handle.AsRef<int>(_FramesPerBlockOffset!.Value);
+    public ref int FramesPerBlock {
+        get {
+            _FramesPerBlockOffset = _FramesPerBlockOffset ?? Schema.GetOffset(0x63992F5DFFC5A547);
+            return ref _Handle.AsRef<int>(_FramesPerBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _FrameblockArrayOffset;
+    private static nint? _FrameblockArrayOffset;
 
-  public ref CUtlVector<CAnimFrameBlockAnim> FrameblockArray {
-    get {
-      if (_FrameblockArrayOffset == null) {
-        _FrameblockArrayOffset = Schema.GetOffset(0x63992F5D2805E598);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimFrameBlockAnim>>(_FrameblockArrayOffset!.Value);
+    public ref CUtlVector<CAnimFrameBlockAnim> FrameblockArray {
+        get {
+            _FrameblockArrayOffset = _FrameblockArrayOffset ?? Schema.GetOffset(0x63992F5D2805E598);
+            return ref _Handle.AsRef<CUtlVector<CAnimFrameBlockAnim>>(_FrameblockArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _UsageDifferencesOffset;
+    private static nint? _UsageDifferencesOffset;
 
-  public CAnimEncodeDifference UsageDifferences {
-    get {
-      if (_UsageDifferencesOffset == null) {
-        _UsageDifferencesOffset = Schema.GetOffset(0x63992F5D27B13638);
-      }
-      return new CAnimEncodeDifferenceImpl(_Handle + _UsageDifferencesOffset!.Value);
+    public CAnimEncodeDifference UsageDifferences {
+        get {
+            _UsageDifferencesOffset = _UsageDifferencesOffset ?? Schema.GetOffset(0x63992F5D27B13638);
+            return new CAnimEncodeDifferenceImpl(_Handle + _UsageDifferencesOffset!.Value);
+        }
     }
-  }
 
 
 }

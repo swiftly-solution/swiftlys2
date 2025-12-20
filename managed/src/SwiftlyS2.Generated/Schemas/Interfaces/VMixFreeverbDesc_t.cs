@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixFreeverbDesc_t : ISchemaClass<VMixFreeverbDesc_t> {
+public partial interface VMixFreeverbDesc_t : ISchemaClass<VMixFreeverbDesc_t>
+{
+    static VMixFreeverbDesc_t ISchemaClass<VMixFreeverbDesc_t>.From(nint handle) => new VMixFreeverbDesc_tImpl(handle);
+    static int ISchemaClass<VMixFreeverbDesc_t>.Size => 16;
+    static string? ISchemaClass<VMixFreeverbDesc_t>.ClassName => null;
 
-  static VMixFreeverbDesc_t ISchemaClass<VMixFreeverbDesc_t>.From(nint handle) => new VMixFreeverbDesc_tImpl(handle);
-  static int ISchemaClass<VMixFreeverbDesc_t>.Size => 16;
-  static string? ISchemaClass<VMixFreeverbDesc_t>.ClassName => null;
 
-  
-  public ref float RoomSize { get; }
-  
-  public ref float Damp { get; }
-  
-  public ref float Width { get; }
-  
-  public ref float LateReflections { get; }
+    public ref float RoomSize { get; }
+
+    public ref float Damp { get; }
+
+    public ref float Width { get; }
+
+    public ref float LateReflections { get; }
 
 
 }

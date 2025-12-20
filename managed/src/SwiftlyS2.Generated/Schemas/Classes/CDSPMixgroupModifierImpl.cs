@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDSPMixgroupModifierImpl : SchemaClass, CDSPMixgroupModifier {
+internal partial class CDSPMixgroupModifierImpl : SchemaClass, CDSPMixgroupModifier
+{
+    public CDSPMixgroupModifierImpl(nint handle) : base(handle) { }
 
-  public CDSPMixgroupModifierImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MixgroupOffset;
 
-  private static nint? _MixgroupOffset;
+    public string Mixgroup {
+        get {
+            _MixgroupOffset = _MixgroupOffset ?? Schema.GetOffset(0xDF83C91D89577218);
+            return Schema.GetString(_Handle.Read<nint>(_MixgroupOffset!.Value));
+        }
+        set {
+            _MixgroupOffset = _MixgroupOffset ?? Schema.GetOffset(0xDF83C91D89577218);
+            Schema.SetString(_Handle, _MixgroupOffset!.Value, value);
+        }
+    } 
+    private static nint? _ModifierOffset;
 
-  public string Mixgroup {
-    get {
-      if (_MixgroupOffset == null) {
-        _MixgroupOffset = Schema.GetOffset(0xDF83C91D89577218);
-      }
-      var ptr = _Handle.Read<nint>(_MixgroupOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Modifier {
+        get {
+            _ModifierOffset = _ModifierOffset ?? Schema.GetOffset(0xDF83C91D55620FB6);
+            return ref _Handle.AsRef<float>(_ModifierOffset!.Value);
+        }
     }
-    set {
-      if (_MixgroupOffset == null) {
-        _MixgroupOffset = Schema.GetOffset(0xDF83C91D89577218);
-      }
-      Schema.SetString(_Handle, _MixgroupOffset!.Value, value);
-    }
-  } 
-  private static nint? _ModifierOffset;
+    private static nint? _ModifierMinOffset;
 
-  public ref float Modifier {
-    get {
-      if (_ModifierOffset == null) {
-        _ModifierOffset = Schema.GetOffset(0xDF83C91D55620FB6);
-      }
-      return ref _Handle.AsRef<float>(_ModifierOffset!.Value);
+    public ref float ModifierMin {
+        get {
+            _ModifierMinOffset = _ModifierMinOffset ?? Schema.GetOffset(0xDF83C91D62C9A002);
+            return ref _Handle.AsRef<float>(_ModifierMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModifierMinOffset;
+    private static nint? _SourceModifierOffset;
 
-  public ref float ModifierMin {
-    get {
-      if (_ModifierMinOffset == null) {
-        _ModifierMinOffset = Schema.GetOffset(0xDF83C91D62C9A002);
-      }
-      return ref _Handle.AsRef<float>(_ModifierMinOffset!.Value);
+    public ref float SourceModifier {
+        get {
+            _SourceModifierOffset = _SourceModifierOffset ?? Schema.GetOffset(0xDF83C91D64BF2A67);
+            return ref _Handle.AsRef<float>(_SourceModifierOffset!.Value);
+        }
     }
-  }
-  private static nint? _SourceModifierOffset;
+    private static nint? _SourceModifierMinOffset;
 
-  public ref float SourceModifier {
-    get {
-      if (_SourceModifierOffset == null) {
-        _SourceModifierOffset = Schema.GetOffset(0xDF83C91D64BF2A67);
-      }
-      return ref _Handle.AsRef<float>(_SourceModifierOffset!.Value);
+    public ref float SourceModifierMin {
+        get {
+            _SourceModifierMinOffset = _SourceModifierMinOffset ?? Schema.GetOffset(0xDF83C91D59151DE1);
+            return ref _Handle.AsRef<float>(_SourceModifierMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _SourceModifierMinOffset;
+    private static nint? _ListenerReverbModifierWhenSourceReverbIsActiveOffset;
 
-  public ref float SourceModifierMin {
-    get {
-      if (_SourceModifierMinOffset == null) {
-        _SourceModifierMinOffset = Schema.GetOffset(0xDF83C91D59151DE1);
-      }
-      return ref _Handle.AsRef<float>(_SourceModifierMinOffset!.Value);
+    public ref float ListenerReverbModifierWhenSourceReverbIsActive {
+        get {
+            _ListenerReverbModifierWhenSourceReverbIsActiveOffset = _ListenerReverbModifierWhenSourceReverbIsActiveOffset ?? Schema.GetOffset(0xDF83C91DC98A5029);
+            return ref _Handle.AsRef<float>(_ListenerReverbModifierWhenSourceReverbIsActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _ListenerReverbModifierWhenSourceReverbIsActiveOffset;
-
-  public ref float ListenerReverbModifierWhenSourceReverbIsActive {
-    get {
-      if (_ListenerReverbModifierWhenSourceReverbIsActiveOffset == null) {
-        _ListenerReverbModifierWhenSourceReverbIsActiveOffset = Schema.GetOffset(0xDF83C91DC98A5029);
-      }
-      return ref _Handle.AsRef<float>(_ListenerReverbModifierWhenSourceReverbIsActiveOffset!.Value);
-    }
-  }
 
 
 }

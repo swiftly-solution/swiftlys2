@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRandStopwatch : CStopwatchBase, ISchemaClass<CRandStopwatch> {
+public partial interface CRandStopwatch : CStopwatchBase, ISchemaClass<CRandStopwatch>
+{
+    static CRandStopwatch ISchemaClass<CRandStopwatch>.From(nint handle) => new CRandStopwatchImpl(handle);
+    static int ISchemaClass<CRandStopwatch>.Size => 20;
+    static string? ISchemaClass<CRandStopwatch>.ClassName => null;
 
-  static CRandStopwatch ISchemaClass<CRandStopwatch>.From(nint handle) => new CRandStopwatchImpl(handle);
-  static int ISchemaClass<CRandStopwatch>.Size => 20;
-  static string? ISchemaClass<CRandStopwatch>.ClassName => null;
 
-  
-  public ref float MinInterval { get; }
-  
-  public ref float MaxInterval { get; }
+    public ref float MinInterval { get; }
+
+    public ref float MaxInterval { get; }
 
 
 }

@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderLightsImpl : C_OP_RenderPointsImpl, C_OP_RenderLights {
+internal partial class C_OP_RenderLightsImpl : C_OP_RenderPointsImpl, C_OP_RenderLights
+{
+    public C_OP_RenderLightsImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderLightsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AnimationRateOffset;
 
-  private static nint? _AnimationRateOffset;
-
-  public ref float AnimationRate {
-    get {
-      if (_AnimationRateOffset == null) {
-        _AnimationRateOffset = Schema.GetOffset(0x534FF0BC607083AD);
-      }
-      return ref _Handle.AsRef<float>(_AnimationRateOffset!.Value);
+    public ref float AnimationRate {
+        get {
+            _AnimationRateOffset = _AnimationRateOffset ?? Schema.GetOffset(0x534FF0BC607083AD);
+            return ref _Handle.AsRef<float>(_AnimationRateOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimationTypeOffset;
+    private static nint? _AnimationTypeOffset;
 
-  public ref AnimationType_t AnimationType {
-    get {
-      if (_AnimationTypeOffset == null) {
-        _AnimationTypeOffset = Schema.GetOffset(0x534FF0BCB93FDFD1);
-      }
-      return ref _Handle.AsRef<AnimationType_t>(_AnimationTypeOffset!.Value);
+    public ref AnimationType_t AnimationType {
+        get {
+            _AnimationTypeOffset = _AnimationTypeOffset ?? Schema.GetOffset(0x534FF0BCB93FDFD1);
+            return ref _Handle.AsRef<AnimationType_t>(_AnimationTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimateInFPSOffset;
+    private static nint? _AnimateInFPSOffset;
 
-  public ref bool AnimateInFPS {
-    get {
-      if (_AnimateInFPSOffset == null) {
-        _AnimateInFPSOffset = Schema.GetOffset(0x534FF0BC7C271B16);
-      }
-      return ref _Handle.AsRef<bool>(_AnimateInFPSOffset!.Value);
+    public ref bool AnimateInFPS {
+        get {
+            _AnimateInFPSOffset = _AnimateInFPSOffset ?? Schema.GetOffset(0x534FF0BC7C271B16);
+            return ref _Handle.AsRef<bool>(_AnimateInFPSOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinSizeOffset;
+    private static nint? _MinSizeOffset;
 
-  public ref float MinSize {
-    get {
-      if (_MinSizeOffset == null) {
-        _MinSizeOffset = Schema.GetOffset(0x534FF0BCBDC3B198);
-      }
-      return ref _Handle.AsRef<float>(_MinSizeOffset!.Value);
+    public ref float MinSize {
+        get {
+            _MinSizeOffset = _MinSizeOffset ?? Schema.GetOffset(0x534FF0BCBDC3B198);
+            return ref _Handle.AsRef<float>(_MinSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxSizeOffset;
+    private static nint? _MaxSizeOffset;
 
-  public ref float MaxSize {
-    get {
-      if (_MaxSizeOffset == null) {
-        _MaxSizeOffset = Schema.GetOffset(0x534FF0BC8CA4E6BE);
-      }
-      return ref _Handle.AsRef<float>(_MaxSizeOffset!.Value);
+    public ref float MaxSize {
+        get {
+            _MaxSizeOffset = _MaxSizeOffset ?? Schema.GetOffset(0x534FF0BC8CA4E6BE);
+            return ref _Handle.AsRef<float>(_MaxSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartFadeSizeOffset;
+    private static nint? _StartFadeSizeOffset;
 
-  public ref float StartFadeSize {
-    get {
-      if (_StartFadeSizeOffset == null) {
-        _StartFadeSizeOffset = Schema.GetOffset(0x534FF0BCBA251D92);
-      }
-      return ref _Handle.AsRef<float>(_StartFadeSizeOffset!.Value);
+    public ref float StartFadeSize {
+        get {
+            _StartFadeSizeOffset = _StartFadeSizeOffset ?? Schema.GetOffset(0x534FF0BCBA251D92);
+            return ref _Handle.AsRef<float>(_StartFadeSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndFadeSizeOffset;
+    private static nint? _EndFadeSizeOffset;
 
-  public ref float EndFadeSize {
-    get {
-      if (_EndFadeSizeOffset == null) {
-        _EndFadeSizeOffset = Schema.GetOffset(0x534FF0BC2D3FD423);
-      }
-      return ref _Handle.AsRef<float>(_EndFadeSizeOffset!.Value);
+    public ref float EndFadeSize {
+        get {
+            _EndFadeSizeOffset = _EndFadeSizeOffset ?? Schema.GetOffset(0x534FF0BC2D3FD423);
+            return ref _Handle.AsRef<float>(_EndFadeSizeOffset!.Value);
+        }
     }
-  }
 
 
 }

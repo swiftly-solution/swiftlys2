@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_UpdateLightSourceImpl : CParticleFunctionOperatorImpl, C_OP_UpdateLightSource {
+internal partial class C_OP_UpdateLightSourceImpl : CParticleFunctionOperatorImpl, C_OP_UpdateLightSource
+{
+    public C_OP_UpdateLightSourceImpl(nint handle) : base(handle) { }
 
-  public C_OP_UpdateLightSourceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ColorTintOffset;
 
-  private static nint? _ColorTintOffset;
-
-  public ref Color ColorTint {
-    get {
-      if (_ColorTintOffset == null) {
-        _ColorTintOffset = Schema.GetOffset(0x6611EEDD569A6EA9);
-      }
-      return ref _Handle.AsRef<Color>(_ColorTintOffset!.Value);
+    public ref Color ColorTint {
+        get {
+            _ColorTintOffset = _ColorTintOffset ?? Schema.GetOffset(0x6611EEDD569A6EA9);
+            return ref _Handle.AsRef<Color>(_ColorTintOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessScaleOffset;
+    private static nint? _BrightnessScaleOffset;
 
-  public ref float BrightnessScale {
-    get {
-      if (_BrightnessScaleOffset == null) {
-        _BrightnessScaleOffset = Schema.GetOffset(0x6611EEDD5EFC3AAE);
-      }
-      return ref _Handle.AsRef<float>(_BrightnessScaleOffset!.Value);
+    public ref float BrightnessScale {
+        get {
+            _BrightnessScaleOffset = _BrightnessScaleOffset ?? Schema.GetOffset(0x6611EEDD5EFC3AAE);
+            return ref _Handle.AsRef<float>(_BrightnessScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleOffset;
+    private static nint? _RadiusScaleOffset;
 
-  public ref float RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0x6611EEDDA7A20159);
-      }
-      return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+    public ref float RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x6611EEDDA7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinimumLightingRadiusOffset;
+    private static nint? _MinimumLightingRadiusOffset;
 
-  public ref float MinimumLightingRadius {
-    get {
-      if (_MinimumLightingRadiusOffset == null) {
-        _MinimumLightingRadiusOffset = Schema.GetOffset(0x6611EEDD946ABF7B);
-      }
-      return ref _Handle.AsRef<float>(_MinimumLightingRadiusOffset!.Value);
+    public ref float MinimumLightingRadius {
+        get {
+            _MinimumLightingRadiusOffset = _MinimumLightingRadiusOffset ?? Schema.GetOffset(0x6611EEDD946ABF7B);
+            return ref _Handle.AsRef<float>(_MinimumLightingRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaximumLightingRadiusOffset;
+    private static nint? _MaximumLightingRadiusOffset;
 
-  public ref float MaximumLightingRadius {
-    get {
-      if (_MaximumLightingRadiusOffset == null) {
-        _MaximumLightingRadiusOffset = Schema.GetOffset(0x6611EEDD8804B57D);
-      }
-      return ref _Handle.AsRef<float>(_MaximumLightingRadiusOffset!.Value);
+    public ref float MaximumLightingRadius {
+        get {
+            _MaximumLightingRadiusOffset = _MaximumLightingRadiusOffset ?? Schema.GetOffset(0x6611EEDD8804B57D);
+            return ref _Handle.AsRef<float>(_MaximumLightingRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _PositionDampingConstantOffset;
+    private static nint? _PositionDampingConstantOffset;
 
-  public ref float PositionDampingConstant {
-    get {
-      if (_PositionDampingConstantOffset == null) {
-        _PositionDampingConstantOffset = Schema.GetOffset(0x6611EEDD074C2A6A);
-      }
-      return ref _Handle.AsRef<float>(_PositionDampingConstantOffset!.Value);
+    public ref float PositionDampingConstant {
+        get {
+            _PositionDampingConstantOffset = _PositionDampingConstantOffset ?? Schema.GetOffset(0x6611EEDD074C2A6A);
+            return ref _Handle.AsRef<float>(_PositionDampingConstantOffset!.Value);
+        }
     }
-  }
 
 
 }

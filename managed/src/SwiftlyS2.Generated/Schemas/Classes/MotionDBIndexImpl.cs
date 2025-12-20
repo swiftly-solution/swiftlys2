@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MotionDBIndexImpl : SchemaClass, MotionDBIndex {
+internal partial class MotionDBIndexImpl : SchemaClass, MotionDBIndex
+{
+    public MotionDBIndexImpl(nint handle) : base(handle) { }
 
-  public MotionDBIndexImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IndexOffset;
 
-  private static nint? _IndexOffset;
-
-  public ref uint Index {
-    get {
-      if (_IndexOffset == null) {
-        _IndexOffset = Schema.GetOffset(0x35C035B7B73DBE67);
-      }
-      return ref _Handle.AsRef<uint>(_IndexOffset!.Value);
+    public ref uint Index {
+        get {
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x35C035B7B73DBE67);
+            return ref _Handle.AsRef<uint>(_IndexOffset!.Value);
+        }
     }
-  }
 
 
 }

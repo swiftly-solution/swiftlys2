@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFogTrigger : CBaseTrigger, ISchemaClass<CFogTrigger> {
+public partial interface CFogTrigger : CBaseTrigger, ISchemaClass<CFogTrigger>
+{
+    static CFogTrigger ISchemaClass<CFogTrigger>.From(nint handle) => new CFogTriggerImpl(handle);
+    static int ISchemaClass<CFogTrigger>.Size => 2576;
+    static string? ISchemaClass<CFogTrigger>.ClassName => "trigger_fog";
 
-  static CFogTrigger ISchemaClass<CFogTrigger>.From(nint handle) => new CFogTriggerImpl(handle);
-  static int ISchemaClass<CFogTrigger>.Size => 2576;
-  static string? ISchemaClass<CFogTrigger>.ClassName => "trigger_fog";
 
-  
-  public fogparams_t Fog { get; }
+    public fogparams_t Fog { get; }
 
 
 }

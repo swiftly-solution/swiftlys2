@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_LocalAccelerationForceImpl : CParticleFunctionForceImpl, C_OP_LocalAccelerationForce {
+internal partial class C_OP_LocalAccelerationForceImpl : CParticleFunctionForceImpl, C_OP_LocalAccelerationForce
+{
+    public C_OP_LocalAccelerationForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_LocalAccelerationForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPOffset;
 
-  private static nint? _CPOffset;
-
-  public ref int CP {
-    get {
-      if (_CPOffset == null) {
-        _CPOffset = Schema.GetOffset(0x3A562A9FEB661472);
-      }
-      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    public ref int CP {
+        get {
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x3A562A9FEB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleCPOffset;
+    private static nint? _ScaleCPOffset;
 
-  public ref int ScaleCP {
-    get {
-      if (_ScaleCPOffset == null) {
-        _ScaleCPOffset = Schema.GetOffset(0x3A562A9FDE3CC5E6);
-      }
-      return ref _Handle.AsRef<int>(_ScaleCPOffset!.Value);
+    public ref int ScaleCP {
+        get {
+            _ScaleCPOffset = _ScaleCPOffset ?? Schema.GetOffset(0x3A562A9FDE3CC5E6);
+            return ref _Handle.AsRef<int>(_ScaleCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _AccelOffset;
+    private static nint? _AccelOffset;
 
-  public CParticleCollectionVecInput Accel {
-    get {
-      if (_AccelOffset == null) {
-        _AccelOffset = Schema.GetOffset(0x3A562A9FEA9A0D73);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _AccelOffset!.Value);
+    public CParticleCollectionVecInput Accel {
+        get {
+            _AccelOffset = _AccelOffset ?? Schema.GetOffset(0x3A562A9FEA9A0D73);
+            return new CParticleCollectionVecInputImpl(_Handle + _AccelOffset!.Value);
+        }
     }
-  }
 
 
 }

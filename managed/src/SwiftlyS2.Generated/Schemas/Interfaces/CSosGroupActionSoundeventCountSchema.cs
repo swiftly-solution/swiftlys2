@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSosGroupActionSoundeventCountSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionSoundeventCountSchema> {
+public partial interface CSosGroupActionSoundeventCountSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionSoundeventCountSchema>
+{
+    static CSosGroupActionSoundeventCountSchema ISchemaClass<CSosGroupActionSoundeventCountSchema>.From(nint handle) => new CSosGroupActionSoundeventCountSchemaImpl(handle);
+    static int ISchemaClass<CSosGroupActionSoundeventCountSchema>.Size => 24;
+    static string? ISchemaClass<CSosGroupActionSoundeventCountSchema>.ClassName => null;
 
-  static CSosGroupActionSoundeventCountSchema ISchemaClass<CSosGroupActionSoundeventCountSchema>.From(nint handle) => new CSosGroupActionSoundeventCountSchemaImpl(handle);
-  static int ISchemaClass<CSosGroupActionSoundeventCountSchema>.Size => 24;
-  static string? ISchemaClass<CSosGroupActionSoundeventCountSchema>.ClassName => null;
 
-  
-  public ref bool ExcludeStoppedSounds { get; }
-  
-  public string StrCountKeyName { get; set; }
+    public ref bool ExcludeStoppedSounds { get; }
+
+    public string StrCountKeyName { get; set; }
 
 
 }

@@ -6,133 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvWindVolumeImpl : CBaseEntityImpl, CEnvWindVolume {
+internal partial class CEnvWindVolumeImpl : CBaseEntityImpl, CEnvWindVolume
+{
+    public CEnvWindVolumeImpl(nint handle) : base(handle) { }
 
-  public CEnvWindVolumeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActiveOffset;
 
-  private static nint? _ActiveOffset;
-
-  public ref bool Active {
-    get {
-      if (_ActiveOffset == null) {
-        _ActiveOffset = Schema.GetOffset(0xCD7AC5418334208F);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    public ref bool Active {
+        get {
+            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0xCD7AC5418334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoxMinsOffset;
+    private static nint? _BoxMinsOffset;
 
-  public ref Vector BoxMins {
-    get {
-      if (_BoxMinsOffset == null) {
-        _BoxMinsOffset = Schema.GetOffset(0xCD7AC541D8201373);
-      }
-      return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+    public ref Vector BoxMins {
+        get {
+            _BoxMinsOffset = _BoxMinsOffset ?? Schema.GetOffset(0xCD7AC541D8201373);
+            return ref _Handle.AsRef<Vector>(_BoxMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoxMaxsOffset;
+    private static nint? _BoxMaxsOffset;
 
-  public ref Vector BoxMaxs {
-    get {
-      if (_BoxMaxsOffset == null) {
-        _BoxMaxsOffset = Schema.GetOffset(0xCD7AC541817A3B31);
-      }
-      return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+    public ref Vector BoxMaxs {
+        get {
+            _BoxMaxsOffset = _BoxMaxsOffset ?? Schema.GetOffset(0xCD7AC541817A3B31);
+            return ref _Handle.AsRef<Vector>(_BoxMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartDisabledOffset;
+    private static nint? _StartDisabledOffset;
 
-  public ref bool StartDisabled {
-    get {
-      if (_StartDisabledOffset == null) {
-        _StartDisabledOffset = Schema.GetOffset(0xCD7AC54161ED0C4F);
-      }
-      return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+    public ref bool StartDisabled {
+        get {
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0xCD7AC54161ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShapeOffset;
+    private static nint? _ShapeOffset;
 
-  public ref int Shape {
-    get {
-      if (_ShapeOffset == null) {
-        _ShapeOffset = Schema.GetOffset(0xCD7AC54121208A02);
-      }
-      return ref _Handle.AsRef<int>(_ShapeOffset!.Value);
+    public ref int Shape {
+        get {
+            _ShapeOffset = _ShapeOffset ?? Schema.GetOffset(0xCD7AC54121208A02);
+            return ref _Handle.AsRef<int>(_ShapeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WindSpeedMultiplierOffset;
+    private static nint? _WindSpeedMultiplierOffset;
 
-  public ref float WindSpeedMultiplier {
-    get {
-      if (_WindSpeedMultiplierOffset == null) {
-        _WindSpeedMultiplierOffset = Schema.GetOffset(0xCD7AC541A22A3F81);
-      }
-      return ref _Handle.AsRef<float>(_WindSpeedMultiplierOffset!.Value);
+    public ref float WindSpeedMultiplier {
+        get {
+            _WindSpeedMultiplierOffset = _WindSpeedMultiplierOffset ?? Schema.GetOffset(0xCD7AC541A22A3F81);
+            return ref _Handle.AsRef<float>(_WindSpeedMultiplierOffset!.Value);
+        }
     }
-  }
-  private static nint? _WindTurbulenceMultiplierOffset;
+    private static nint? _WindTurbulenceMultiplierOffset;
 
-  public ref float WindTurbulenceMultiplier {
-    get {
-      if (_WindTurbulenceMultiplierOffset == null) {
-        _WindTurbulenceMultiplierOffset = Schema.GetOffset(0xCD7AC54120DA30CD);
-      }
-      return ref _Handle.AsRef<float>(_WindTurbulenceMultiplierOffset!.Value);
+    public ref float WindTurbulenceMultiplier {
+        get {
+            _WindTurbulenceMultiplierOffset = _WindTurbulenceMultiplierOffset ?? Schema.GetOffset(0xCD7AC54120DA30CD);
+            return ref _Handle.AsRef<float>(_WindTurbulenceMultiplierOffset!.Value);
+        }
     }
-  }
-  private static nint? _WindSpeedVariationMultiplierOffset;
+    private static nint? _WindSpeedVariationMultiplierOffset;
 
-  public ref float WindSpeedVariationMultiplier {
-    get {
-      if (_WindSpeedVariationMultiplierOffset == null) {
-        _WindSpeedVariationMultiplierOffset = Schema.GetOffset(0xCD7AC5416B9AC20C);
-      }
-      return ref _Handle.AsRef<float>(_WindSpeedVariationMultiplierOffset!.Value);
+    public ref float WindSpeedVariationMultiplier {
+        get {
+            _WindSpeedVariationMultiplierOffset = _WindSpeedVariationMultiplierOffset ?? Schema.GetOffset(0xCD7AC5416B9AC20C);
+            return ref _Handle.AsRef<float>(_WindSpeedVariationMultiplierOffset!.Value);
+        }
     }
-  }
-  private static nint? _WindDirectionVariationMultiplierOffset;
+    private static nint? _WindDirectionVariationMultiplierOffset;
 
-  public ref float WindDirectionVariationMultiplier {
-    get {
-      if (_WindDirectionVariationMultiplierOffset == null) {
-        _WindDirectionVariationMultiplierOffset = Schema.GetOffset(0xCD7AC5417F3AB3AA);
-      }
-      return ref _Handle.AsRef<float>(_WindDirectionVariationMultiplierOffset!.Value);
+    public ref float WindDirectionVariationMultiplier {
+        get {
+            _WindDirectionVariationMultiplierOffset = _WindDirectionVariationMultiplierOffset ?? Schema.GetOffset(0xCD7AC5417F3AB3AA);
+            return ref _Handle.AsRef<float>(_WindDirectionVariationMultiplierOffset!.Value);
+        }
     }
-  }
 
-  public void ActiveUpdated() {
-    Schema.Update(_Handle, 0xCD7AC5418334208F);
-  }
-  public void BoxMinsUpdated() {
-    Schema.Update(_Handle, 0xCD7AC541D8201373);
-  }
-  public void BoxMaxsUpdated() {
-    Schema.Update(_Handle, 0xCD7AC541817A3B31);
-  }
-  public void StartDisabledUpdated() {
-    Schema.Update(_Handle, 0xCD7AC54161ED0C4F);
-  }
-  public void ShapeUpdated() {
-    Schema.Update(_Handle, 0xCD7AC54121208A02);
-  }
-  public void WindSpeedMultiplierUpdated() {
-    Schema.Update(_Handle, 0xCD7AC541A22A3F81);
-  }
-  public void WindTurbulenceMultiplierUpdated() {
-    Schema.Update(_Handle, 0xCD7AC54120DA30CD);
-  }
-  public void WindSpeedVariationMultiplierUpdated() {
-    Schema.Update(_Handle, 0xCD7AC5416B9AC20C);
-  }
-  public void WindDirectionVariationMultiplierUpdated() {
-    Schema.Update(_Handle, 0xCD7AC5417F3AB3AA);
-  }
+    public void ActiveUpdated() => Schema.Update(_Handle, 0xCD7AC5418334208F);
+    public void BoxMinsUpdated() => Schema.Update(_Handle, 0xCD7AC541D8201373);
+    public void BoxMaxsUpdated() => Schema.Update(_Handle, 0xCD7AC541817A3B31);
+    public void StartDisabledUpdated() => Schema.Update(_Handle, 0xCD7AC54161ED0C4F);
+    public void ShapeUpdated() => Schema.Update(_Handle, 0xCD7AC54121208A02);
+    public void WindSpeedMultiplierUpdated() => Schema.Update(_Handle, 0xCD7AC541A22A3F81);
+    public void WindTurbulenceMultiplierUpdated() => Schema.Update(_Handle, 0xCD7AC54120DA30CD);
+    public void WindSpeedVariationMultiplierUpdated() => Schema.Update(_Handle, 0xCD7AC5416B9AC20C);
+    public void WindDirectionVariationMultiplierUpdated() => Schema.Update(_Handle, 0xCD7AC5417F3AB3AA);
 }

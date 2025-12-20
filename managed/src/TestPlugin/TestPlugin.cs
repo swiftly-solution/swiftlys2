@@ -164,10 +164,10 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("be")]
-    [CommandAlias("beh", false)]
     public void Test2Command( ICommandContext context )
     {
-        Console.WriteLine("hello world\n");
+        var entity = context.Sender!.RequiredPawn;
+        entity.TakeDamage(100, DamageTypes_t.DMG_GENERIC);
     }
 
     [Command("CommandAliasTest")]
@@ -360,11 +360,11 @@ public class TestPlugin : BasePlugin
                 $"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
         };
 
-        Core.Event.OnEntityIdentityAcceptInputHook += ( @event ) =>
-        {
-            Console.WriteLine(
-                $"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.InputName}");
-        };
+        // Core.Event.OnEntityIdentityAcceptInputHook += ( @event ) =>
+        // {
+        //     Console.WriteLine(
+        //         $"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.InputName}");
+        // };
 
 
         // var provider = services.BuildServiceProvider();
@@ -487,13 +487,17 @@ public class TestPlugin : BasePlugin
         // };
 
         using CEntityKeyValues kv = new();
-
         kv.SetBool("test", true);
-
         Console.WriteLine(kv.Get<bool>("test2"));
 
         CUtlStringToken token = new("hello");
         Console.WriteLine($"2");
+
+        _ = Core.EntitySystem.HookEntityOutput<CPropDoorRotating>("OnFullyOpen", ( entityIO, outputName, activator, caller, delay ) =>
+        {
+            Console.WriteLine($"HookEntityOutput -> output: {outputName}, activator: {activator?.As<CBaseEntity>()?.DesignerName}, caller: {caller?.As<CBaseEntity>()?.DesignerName}");
+            return HookResult.Continue;
+        });
     }
 
     CEntityKeyValues kv { get; set; }

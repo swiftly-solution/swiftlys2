@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimationGroupImpl : SchemaClass, CAnimationGroup {
+internal partial class CAnimationGroupImpl : SchemaClass, CAnimationGroup
+{
+    public CAnimationGroupImpl(nint handle) : base(handle) { }
 
-  public CAnimationGroupImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FlagsOffset;
 
-  private static nint? _FlagsOffset;
-
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x338D4483CE6E9C28);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x338D4483CE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameOffset;
+    private static nint? _NameOffset;
 
-  public ref CBufferString Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x338D44834D8F5786);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    public ref CBufferString Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x338D44834D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalHAnimArray_HandleOffset;
+    private static nint? _LocalHAnimArray_HandleOffset;
 
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimData>> LocalHAnimArray_Handle {
-    get {
-      if (_LocalHAnimArray_HandleOffset == null) {
-        _LocalHAnimArray_HandleOffset = Schema.GetOffset(0x338D44834059130D);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCAnimData>>>(_LocalHAnimArray_HandleOffset!.Value);
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimData>> LocalHAnimArray_Handle {
+        get {
+            _LocalHAnimArray_HandleOffset = _LocalHAnimArray_HandleOffset ?? Schema.GetOffset(0x338D44834059130D);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCAnimData>>>(_LocalHAnimArray_HandleOffset!.Value);
+        }
     }
-  }
-  private static nint? _IncludedGroupArray_HandleOffset;
+    private static nint? _IncludedGroupArray_HandleOffset;
 
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimationGroup>> IncludedGroupArray_Handle {
-    get {
-      if (_IncludedGroupArray_HandleOffset == null) {
-        _IncludedGroupArray_HandleOffset = Schema.GetOffset(0x338D4483029BD190);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCAnimationGroup>>>(_IncludedGroupArray_HandleOffset!.Value);
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimationGroup>> IncludedGroupArray_Handle {
+        get {
+            _IncludedGroupArray_HandleOffset = _IncludedGroupArray_HandleOffset ?? Schema.GetOffset(0x338D4483029BD190);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCAnimationGroup>>>(_IncludedGroupArray_HandleOffset!.Value);
+        }
     }
-  }
-  private static nint? _DirectHSeqGroup_HandleOffset;
+    private static nint? _DirectHSeqGroup_HandleOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCSequenceGroupData> DirectHSeqGroup_Handle {
-    get {
-      if (_DirectHSeqGroup_HandleOffset == null) {
-        _DirectHSeqGroup_HandleOffset = Schema.GetOffset(0x338D44836F0E7A99);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCSequenceGroupData>>(_DirectHSeqGroup_HandleOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCSequenceGroupData> DirectHSeqGroup_Handle {
+        get {
+            _DirectHSeqGroup_HandleOffset = _DirectHSeqGroup_HandleOffset ?? Schema.GetOffset(0x338D44836F0E7A99);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCSequenceGroupData>>(_DirectHSeqGroup_HandleOffset!.Value);
+        }
     }
-  }
-  private static nint? _DecodeKeyOffset;
+    private static nint? _DecodeKeyOffset;
 
-  public CAnimKeyData DecodeKey {
-    get {
-      if (_DecodeKeyOffset == null) {
-        _DecodeKeyOffset = Schema.GetOffset(0x338D4483923D44D6);
-      }
-      return new CAnimKeyDataImpl(_Handle + _DecodeKeyOffset!.Value);
+    public CAnimKeyData DecodeKey {
+        get {
+            _DecodeKeyOffset = _DecodeKeyOffset ?? Schema.GetOffset(0x338D4483923D44D6);
+            return new CAnimKeyDataImpl(_Handle + _DecodeKeyOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScriptsOffset;
+    private static nint? _ScriptsOffset;
 
-  public ref CUtlVector<CBufferString> Scripts {
-    get {
-      if (_ScriptsOffset == null) {
-        _ScriptsOffset = Schema.GetOffset(0x338D4483F1FF2218);
-      }
-      return ref _Handle.AsRef<CUtlVector<CBufferString>>(_ScriptsOffset!.Value);
+    public ref CUtlVector<CBufferString> Scripts {
+        get {
+            _ScriptsOffset = _ScriptsOffset ?? Schema.GetOffset(0x338D4483F1FF2218);
+            return ref _Handle.AsRef<CUtlVector<CBufferString>>(_ScriptsOffset!.Value);
+        }
     }
-  }
-  private static nint? _AdditionalExtRefsOffset;
+    private static nint? _AdditionalExtRefsOffset;
 
-  public ref CUtlVector<SchemaUntypedField> AdditionalExtRefs {
-    get {
-      if (_AdditionalExtRefsOffset == null) {
-        _AdditionalExtRefsOffset = Schema.GetOffset(0x338D448349CEFD51);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AdditionalExtRefsOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> AdditionalExtRefs {
+        get {
+            _AdditionalExtRefsOffset = _AdditionalExtRefsOffset ?? Schema.GetOffset(0x338D448349CEFD51);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AdditionalExtRefsOffset!.Value);
+        }
     }
-  }
 
 
 }

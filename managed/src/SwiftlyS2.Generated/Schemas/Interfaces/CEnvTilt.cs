@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvTilt : CPointEntity, ISchemaClass<CEnvTilt> {
+public partial interface CEnvTilt : CPointEntity, ISchemaClass<CEnvTilt>
+{
+    static CEnvTilt ISchemaClass<CEnvTilt>.From(nint handle) => new CEnvTiltImpl(handle);
+    static int ISchemaClass<CEnvTilt>.Size => 1280;
+    static string? ISchemaClass<CEnvTilt>.ClassName => "env_tilt";
 
-  static CEnvTilt ISchemaClass<CEnvTilt>.From(nint handle) => new CEnvTiltImpl(handle);
-  static int ISchemaClass<CEnvTilt>.Size => 1280;
-  static string? ISchemaClass<CEnvTilt>.ClassName => "env_tilt";
 
-  
-  public ref float Duration { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref float TiltTime { get; }
-  
-  public GameTime_t StopTime { get; }
+    public ref float Duration { get; }
+
+    public ref float Radius { get; }
+
+    public ref float TiltTime { get; }
+
+    public GameTime_t StopTime { get; }
 
 
 }

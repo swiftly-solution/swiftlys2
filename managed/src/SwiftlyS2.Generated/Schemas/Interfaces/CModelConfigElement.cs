@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigElement : ISchemaClass<CModelConfigElement> {
+public partial interface CModelConfigElement : ISchemaClass<CModelConfigElement>
+{
+    static CModelConfigElement ISchemaClass<CModelConfigElement>.From(nint handle) => new CModelConfigElementImpl(handle);
+    static int ISchemaClass<CModelConfigElement>.Size => 72;
+    static string? ISchemaClass<CModelConfigElement>.ClassName => null;
 
-  static CModelConfigElement ISchemaClass<CModelConfigElement>.From(nint handle) => new CModelConfigElementImpl(handle);
-  static int ISchemaClass<CModelConfigElement>.Size => 72;
-  static string? ISchemaClass<CModelConfigElement>.ClassName => null;
 
-  
-  public string ElementName { get; set; }
-  
-  public ref CUtlVector<PointerTo<CModelConfigElement>> NestedElements { get; }
+    public string ElementName { get; set; }
+
+    public ref CUtlVector<PointerTo<CModelConfigElement>> NestedElements { get; }
 
 
 }

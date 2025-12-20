@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DensityForceImpl : CParticleFunctionForceImpl, C_OP_DensityForce {
+internal partial class C_OP_DensityForceImpl : CParticleFunctionForceImpl, C_OP_DensityForce
+{
+    public C_OP_DensityForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_DensityForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusScaleOffset;
 
-  private static nint? _RadiusScaleOffset;
-
-  public ref float RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0x7846D656A7A20159);
-      }
-      return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+    public ref float RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x7846D656A7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceScaleOffset;
+    private static nint? _ForceScaleOffset;
 
-  public ref float ForceScale {
-    get {
-      if (_ForceScaleOffset == null) {
-        _ForceScaleOffset = Schema.GetOffset(0x7846D6564817F390);
-      }
-      return ref _Handle.AsRef<float>(_ForceScaleOffset!.Value);
+    public ref float ForceScale {
+        get {
+            _ForceScaleOffset = _ForceScaleOffset ?? Schema.GetOffset(0x7846D6564817F390);
+            return ref _Handle.AsRef<float>(_ForceScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetDensityOffset;
+    private static nint? _TargetDensityOffset;
 
-  public ref float TargetDensity {
-    get {
-      if (_TargetDensityOffset == null) {
-        _TargetDensityOffset = Schema.GetOffset(0x7846D656157E0796);
-      }
-      return ref _Handle.AsRef<float>(_TargetDensityOffset!.Value);
+    public ref float TargetDensity {
+        get {
+            _TargetDensityOffset = _TargetDensityOffset ?? Schema.GetOffset(0x7846D656157E0796);
+            return ref _Handle.AsRef<float>(_TargetDensityOffset!.Value);
+        }
     }
-  }
 
 
 }

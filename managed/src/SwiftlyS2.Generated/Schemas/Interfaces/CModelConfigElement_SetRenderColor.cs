@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigElement_SetRenderColor : CModelConfigElement, ISchemaClass<CModelConfigElement_SetRenderColor> {
+public partial interface CModelConfigElement_SetRenderColor : CModelConfigElement, ISchemaClass<CModelConfigElement_SetRenderColor>
+{
+    static CModelConfigElement_SetRenderColor ISchemaClass<CModelConfigElement_SetRenderColor>.From(nint handle) => new CModelConfigElement_SetRenderColorImpl(handle);
+    static int ISchemaClass<CModelConfigElement_SetRenderColor>.Size => 80;
+    static string? ISchemaClass<CModelConfigElement_SetRenderColor>.ClassName => null;
 
-  static CModelConfigElement_SetRenderColor ISchemaClass<CModelConfigElement_SetRenderColor>.From(nint handle) => new CModelConfigElement_SetRenderColorImpl(handle);
-  static int ISchemaClass<CModelConfigElement_SetRenderColor>.Size => 80;
-  static string? ISchemaClass<CModelConfigElement_SetRenderColor>.ClassName => null;
 
-  
-  public ref Color Color { get; }
+    public ref Color Color { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_DampenToCP : CParticleFunctionOperator, ISchemaClass<C_OP_DampenToCP> {
+public partial interface C_OP_DampenToCP : CParticleFunctionOperator, ISchemaClass<C_OP_DampenToCP>
+{
+    static C_OP_DampenToCP ISchemaClass<C_OP_DampenToCP>.From(nint handle) => new C_OP_DampenToCPImpl(handle);
+    static int ISchemaClass<C_OP_DampenToCP>.Size => 480;
+    static string? ISchemaClass<C_OP_DampenToCP>.ClassName => null;
 
-  static C_OP_DampenToCP ISchemaClass<C_OP_DampenToCP>.From(nint handle) => new C_OP_DampenToCPImpl(handle);
-  static int ISchemaClass<C_OP_DampenToCP>.Size => 480;
-  static string? ISchemaClass<C_OP_DampenToCP>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref float Range { get; }
-  
-  public ref float Scale { get; }
+    public ref int ControlPointNumber { get; }
+
+    public ref float Range { get; }
+
+    public ref float Scale { get; }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFollowAttachmentUpdateNodeImpl : CUnaryUpdateNodeImpl, CFollowAttachmentUpdateNode {
+internal partial class CFollowAttachmentUpdateNodeImpl : CUnaryUpdateNodeImpl, CFollowAttachmentUpdateNode
+{
+    public CFollowAttachmentUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CFollowAttachmentUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OpFixedDataOffset;
 
-  private static nint? _OpFixedDataOffset;
-
-  public FollowAttachmentSettings_t OpFixedData {
-    get {
-      if (_OpFixedDataOffset == null) {
-        _OpFixedDataOffset = Schema.GetOffset(0x8E705AE36960AF8C);
-      }
-      return new FollowAttachmentSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+    public FollowAttachmentSettings_t OpFixedData {
+        get {
+            _OpFixedDataOffset = _OpFixedDataOffset ?? Schema.GetOffset(0x8E705AE36960AF8C);
+            return new FollowAttachmentSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+        }
     }
-  }
 
 
 }

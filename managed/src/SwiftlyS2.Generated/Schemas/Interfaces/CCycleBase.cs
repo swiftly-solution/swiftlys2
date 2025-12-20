@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCycleBase : ISchemaClass<CCycleBase> {
+public partial interface CCycleBase : ISchemaClass<CCycleBase>
+{
+    static CCycleBase ISchemaClass<CCycleBase>.From(nint handle) => new CCycleBaseImpl(handle);
+    static int ISchemaClass<CCycleBase>.Size => 4;
+    static string? ISchemaClass<CCycleBase>.ClassName => null;
 
-  static CCycleBase ISchemaClass<CCycleBase>.From(nint handle) => new CCycleBaseImpl(handle);
-  static int ISchemaClass<CCycleBase>.Size => 4;
-  static string? ISchemaClass<CCycleBase>.ClassName => null;
 
-  
-  public ref float Cycle { get; }
+    public ref float Cycle { get; }
 
 
 }

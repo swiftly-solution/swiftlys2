@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CChoiceUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CChoiceUpdateNode> {
+public partial interface CChoiceUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CChoiceUpdateNode>
+{
+    static CChoiceUpdateNode ISchemaClass<CChoiceUpdateNode>.From(nint handle) => new CChoiceUpdateNodeImpl(handle);
+    static int ISchemaClass<CChoiceUpdateNode>.Size => 192;
+    static string? ISchemaClass<CChoiceUpdateNode>.ClassName => null;
 
-  static CChoiceUpdateNode ISchemaClass<CChoiceUpdateNode>.From(nint handle) => new CChoiceUpdateNodeImpl(handle);
-  static int ISchemaClass<CChoiceUpdateNode>.Size => 192;
-  static string? ISchemaClass<CChoiceUpdateNode>.ClassName => null;
 
-  
-  public ref CUtlVector<CAnimUpdateNodeRef> Children { get; }
-  
-  public ref CUtlVector<float> Weights { get; }
-  
-  public ref CUtlVector<float> BlendTimes { get; }
-  
-  public ref ChoiceMethod ChoiceMethod { get; }
-  
-  public ref ChoiceChangeMethod ChoiceChangeMethod { get; }
-  
-  public ref ChoiceBlendMethod BlendMethod { get; }
-  
-  public ref float BlendTime { get; }
-  
-  public ref bool CrossFade { get; }
-  
-  public ref bool ResetChosen { get; }
-  
-  public ref bool DontResetSameSelection { get; }
+    public ref CUtlVector<CAnimUpdateNodeRef> Children { get; }
+
+    public ref CUtlVector<float> Weights { get; }
+
+    public ref CUtlVector<float> BlendTimes { get; }
+
+    public ref ChoiceMethod ChoiceMethod { get; }
+
+    public ref ChoiceChangeMethod ChoiceChangeMethod { get; }
+
+    public ref ChoiceBlendMethod BlendMethod { get; }
+
+    public ref float BlendTime { get; }
+
+    public ref bool CrossFade { get; }
+
+    public ref bool ResetChosen { get; }
+
+    public ref bool DontResetSameSelection { get; }
 
 
 }

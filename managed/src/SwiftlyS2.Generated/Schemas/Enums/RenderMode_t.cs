@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RenderMode_t : byte {
-
+public enum RenderMode_t : byte
+{
  kRenderNormal = 0,
 
  kRenderTransColor = 1,

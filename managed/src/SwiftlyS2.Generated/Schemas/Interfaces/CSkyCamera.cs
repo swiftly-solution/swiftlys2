@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSkyCamera : CBaseEntity, ISchemaClass<CSkyCamera> {
+public partial interface CSkyCamera : CBaseEntity, ISchemaClass<CSkyCamera>
+{
+    static CSkyCamera ISchemaClass<CSkyCamera>.From(nint handle) => new CSkyCameraImpl(handle);
+    static int ISchemaClass<CSkyCamera>.Size => 1424;
+    static string? ISchemaClass<CSkyCamera>.ClassName => "sky_camera";
 
-  static CSkyCamera ISchemaClass<CSkyCamera>.From(nint handle) => new CSkyCameraImpl(handle);
-  static int ISchemaClass<CSkyCamera>.Size => 1424;
-  static string? ISchemaClass<CSkyCamera>.ClassName => "sky_camera";
 
-  
-  public sky3dparams_t SkyboxData { get; }
-  
-  public ref CUtlStringToken SkyboxSlotToken { get; }
-  
-  public ref bool UseAngles { get; }
-  
-  public CSkyCamera? Next { get; }
+    public sky3dparams_t SkyboxData { get; }
 
-  public void SkyboxDataUpdated();
-  public void SkyboxSlotTokenUpdated();
+    public ref CUtlStringToken SkyboxSlotToken { get; }
+
+    public ref bool UseAngles { get; }
+
+    public CSkyCamera? Next { get; }
+
+    public void SkyboxDataUpdated();
+    public void SkyboxSlotTokenUpdated();
 }

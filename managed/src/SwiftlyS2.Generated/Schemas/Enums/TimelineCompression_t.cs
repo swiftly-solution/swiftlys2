@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum TimelineCompression_t : uint {
-
+public enum TimelineCompression_t : uint
+{
  TIMELINE_COMPRESSION_SUM = 0,
 
  TIMELINE_COMPRESSION_COUNT_PER_INTERVAL = 1,

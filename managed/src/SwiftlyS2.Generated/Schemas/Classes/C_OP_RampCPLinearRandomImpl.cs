@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RampCPLinearRandomImpl : CParticleFunctionPreEmissionImpl, C_OP_RampCPLinearRandom {
+internal partial class C_OP_RampCPLinearRandomImpl : CParticleFunctionPreEmissionImpl, C_OP_RampCPLinearRandom
+{
+    public C_OP_RampCPLinearRandomImpl(nint handle) : base(handle) { }
 
-  public C_OP_RampCPLinearRandomImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OutControlPointNumberOffset;
 
-  private static nint? _OutControlPointNumberOffset;
-
-  public ref int OutControlPointNumber {
-    get {
-      if (_OutControlPointNumberOffset == null) {
-        _OutControlPointNumberOffset = Schema.GetOffset(0xF3F4631CD021D73F);
-      }
-      return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+    public ref int OutControlPointNumber {
+        get {
+            _OutControlPointNumberOffset = _OutControlPointNumberOffset ?? Schema.GetOffset(0xF3F4631CD021D73F);
+            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _RateMinOffset;
+    private static nint? _RateMinOffset;
 
-  public ref Vector RateMin {
-    get {
-      if (_RateMinOffset == null) {
-        _RateMinOffset = Schema.GetOffset(0xF3F4631CB1C06501);
-      }
-      return ref _Handle.AsRef<Vector>(_RateMinOffset!.Value);
+    public ref Vector RateMin {
+        get {
+            _RateMinOffset = _RateMinOffset ?? Schema.GetOffset(0xF3F4631CB1C06501);
+            return ref _Handle.AsRef<Vector>(_RateMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _RateMaxOffset;
+    private static nint? _RateMaxOffset;
 
-  public ref Vector RateMax {
-    get {
-      if (_RateMaxOffset == null) {
-        _RateMaxOffset = Schema.GetOffset(0xF3F4631CA3D569AF);
-      }
-      return ref _Handle.AsRef<Vector>(_RateMaxOffset!.Value);
+    public ref Vector RateMax {
+        get {
+            _RateMaxOffset = _RateMaxOffset ?? Schema.GetOffset(0xF3F4631CA3D569AF);
+            return ref _Handle.AsRef<Vector>(_RateMaxOffset!.Value);
+        }
     }
-  }
 
 
 }

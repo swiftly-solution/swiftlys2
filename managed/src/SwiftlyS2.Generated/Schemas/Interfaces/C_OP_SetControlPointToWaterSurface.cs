@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointToWaterSurface : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToWaterSurface> {
+public partial interface C_OP_SetControlPointToWaterSurface : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToWaterSurface>
+{
+    static C_OP_SetControlPointToWaterSurface ISchemaClass<C_OP_SetControlPointToWaterSurface>.From(nint handle) => new C_OP_SetControlPointToWaterSurfaceImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointToWaterSurface>.Size => 872;
+    static string? ISchemaClass<C_OP_SetControlPointToWaterSurface>.ClassName => null;
 
-  static C_OP_SetControlPointToWaterSurface ISchemaClass<C_OP_SetControlPointToWaterSurface>.From(nint handle) => new C_OP_SetControlPointToWaterSurfaceImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointToWaterSurface>.Size => 872;
-  static string? ISchemaClass<C_OP_SetControlPointToWaterSurface>.ClassName => null;
 
-  
-  public ref int SourceCP { get; }
-  
-  public ref int DestCP { get; }
-  
-  public ref int FlowCP { get; }
-  
-  public ref int ActiveCP { get; }
-  
-  public ref int ActiveCPField { get; }
-  
-  public CParticleCollectionFloatInput RetestRate { get; }
-  
-  public ref bool AdaptiveThreshold { get; }
+    public ref int SourceCP { get; }
+
+    public ref int DestCP { get; }
+
+    public ref int FlowCP { get; }
+
+    public ref int ActiveCP { get; }
+
+    public ref int ActiveCPField { get; }
+
+    public CParticleCollectionFloatInput RetestRate { get; }
+
+    public ref bool AdaptiveThreshold { get; }
 
 
 }

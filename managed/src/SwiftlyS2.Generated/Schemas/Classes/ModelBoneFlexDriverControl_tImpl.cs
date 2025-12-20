@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ModelBoneFlexDriverControl_tImpl : SchemaClass, ModelBoneFlexDriverControl_t {
+internal partial class ModelBoneFlexDriverControl_tImpl : SchemaClass, ModelBoneFlexDriverControl_t
+{
+    public ModelBoneFlexDriverControl_tImpl(nint handle) : base(handle) { }
 
-  public ModelBoneFlexDriverControl_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneComponentOffset;
 
-  private static nint? _BoneComponentOffset;
-
-  public ref ModelBoneFlexComponent_t BoneComponent {
-    get {
-      if (_BoneComponentOffset == null) {
-        _BoneComponentOffset = Schema.GetOffset(0x7DDCB3413C2E9E9E);
-      }
-      return ref _Handle.AsRef<ModelBoneFlexComponent_t>(_BoneComponentOffset!.Value);
+    public ref ModelBoneFlexComponent_t BoneComponent {
+        get {
+            _BoneComponentOffset = _BoneComponentOffset ?? Schema.GetOffset(0x7DDCB3413C2E9E9E);
+            return ref _Handle.AsRef<ModelBoneFlexComponent_t>(_BoneComponentOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlexControllerOffset;
+    private static nint? _FlexControllerOffset;
 
-  public string FlexController {
-    get {
-      if (_FlexControllerOffset == null) {
-        _FlexControllerOffset = Schema.GetOffset(0x7DDCB341EDF88AAA);
-      }
-      var ptr = _Handle.Read<nint>(_FlexControllerOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_FlexControllerOffset == null) {
-        _FlexControllerOffset = Schema.GetOffset(0x7DDCB341EDF88AAA);
-      }
-      Schema.SetString(_Handle, _FlexControllerOffset!.Value, value);
-    }
-  } 
-  private static nint? _FlexControllerTokenOffset;
+    public string FlexController {
+        get {
+            _FlexControllerOffset = _FlexControllerOffset ?? Schema.GetOffset(0x7DDCB341EDF88AAA);
+            return Schema.GetString(_Handle.Read<nint>(_FlexControllerOffset!.Value));
+        }
+        set {
+            _FlexControllerOffset = _FlexControllerOffset ?? Schema.GetOffset(0x7DDCB341EDF88AAA);
+            Schema.SetString(_Handle, _FlexControllerOffset!.Value, value);
+        }
+    } 
+    private static nint? _FlexControllerTokenOffset;
 
-  public ref uint FlexControllerToken {
-    get {
-      if (_FlexControllerTokenOffset == null) {
-        _FlexControllerTokenOffset = Schema.GetOffset(0x7DDCB341996814FF);
-      }
-      return ref _Handle.AsRef<uint>(_FlexControllerTokenOffset!.Value);
+    public ref uint FlexControllerToken {
+        get {
+            _FlexControllerTokenOffset = _FlexControllerTokenOffset ?? Schema.GetOffset(0x7DDCB341996814FF);
+            return ref _Handle.AsRef<uint>(_FlexControllerTokenOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinOffset;
+    private static nint? _MinOffset;
 
-  public ref float Min {
-    get {
-      if (_MinOffset == null) {
-        _MinOffset = Schema.GetOffset(0x7DDCB3413B1A5649);
-      }
-      return ref _Handle.AsRef<float>(_MinOffset!.Value);
+    public ref float Min {
+        get {
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x7DDCB3413B1A5649);
+            return ref _Handle.AsRef<float>(_MinOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOffset;
+    private static nint? _MaxOffset;
 
-  public ref float Max {
-    get {
-      if (_MaxOffset == null) {
-        _MaxOffset = Schema.GetOffset(0x7DDCB3412D06B887);
-      }
-      return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+    public ref float Max {
+        get {
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x7DDCB3412D06B887);
+            return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+        }
     }
-  }
 
 
 }

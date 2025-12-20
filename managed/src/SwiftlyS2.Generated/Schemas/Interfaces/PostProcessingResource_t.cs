@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PostProcessingResource_t : ISchemaClass<PostProcessingResource_t> {
+public partial interface PostProcessingResource_t : ISchemaClass<PostProcessingResource_t>
+{
+    static PostProcessingResource_t ISchemaClass<PostProcessingResource_t>.From(nint handle) => new PostProcessingResource_tImpl(handle);
+    static int ISchemaClass<PostProcessingResource_t>.Size => 312;
+    static string? ISchemaClass<PostProcessingResource_t>.ClassName => null;
 
-  static PostProcessingResource_t ISchemaClass<PostProcessingResource_t>.From(nint handle) => new PostProcessingResource_tImpl(handle);
-  static int ISchemaClass<PostProcessingResource_t>.Size => 312;
-  static string? ISchemaClass<PostProcessingResource_t>.ClassName => null;
 
-  
-  public ref bool HasTonemapParams { get; }
-  
-  public PostProcessingTonemapParameters_t ToneMapParams { get; }
-  
-  public ref bool HasBloomParams { get; }
-  
-  public PostProcessingBloomParameters_t BloomParams { get; }
-  
-  public ref bool HasVignetteParams { get; }
-  
-  public PostProcessingVignetteParameters_t VignetteParams { get; }
-  
-  public ref bool HasLocalContrastParams { get; }
-  
-  public PostProcessingLocalContrastParameters_t LocalConstrastParams { get; }
-  
-  public ref int ColorCorrectionVolumeDim { get; }
-  
-  public ref CUtlBinaryBlock ColorCorrectionVolumeData { get; }
-  
-  public ref bool HasColorCorrection { get; }
-  
-  public ref bool HasFogScatteringParams { get; }
-  
-  public PostProcessingFogScatteringParameters_t FogScatteringParams { get; }
+    public ref bool HasTonemapParams { get; }
+
+    public PostProcessingTonemapParameters_t ToneMapParams { get; }
+
+    public ref bool HasBloomParams { get; }
+
+    public PostProcessingBloomParameters_t BloomParams { get; }
+
+    public ref bool HasVignetteParams { get; }
+
+    public PostProcessingVignetteParameters_t VignetteParams { get; }
+
+    public ref bool HasLocalContrastParams { get; }
+
+    public PostProcessingLocalContrastParameters_t LocalConstrastParams { get; }
+
+    public ref int ColorCorrectionVolumeDim { get; }
+
+    public ref CUtlBinaryBlock ColorCorrectionVolumeData { get; }
+
+    public ref bool HasColorCorrection { get; }
+
+    public ref bool HasFogScatteringParams { get; }
+
+    public PostProcessingFogScatteringParameters_t FogScatteringParams { get; }
 
 
 }

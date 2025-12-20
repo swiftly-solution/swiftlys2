@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetUserEvent : CParticleFunctionOperator, ISchemaClass<C_OP_SetUserEvent> {
+public partial interface C_OP_SetUserEvent : CParticleFunctionOperator, ISchemaClass<C_OP_SetUserEvent>
+{
+    static C_OP_SetUserEvent ISchemaClass<C_OP_SetUserEvent>.From(nint handle) => new C_OP_SetUserEventImpl(handle);
+    static int ISchemaClass<C_OP_SetUserEvent>.Size => 1584;
+    static string? ISchemaClass<C_OP_SetUserEvent>.ClassName => null;
 
-  static C_OP_SetUserEvent ISchemaClass<C_OP_SetUserEvent>.From(nint handle) => new C_OP_SetUserEventImpl(handle);
-  static int ISchemaClass<C_OP_SetUserEvent>.Size => 1584;
-  static string? ISchemaClass<C_OP_SetUserEvent>.ClassName => null;
 
-  
-  public CPerParticleFloatInput Input { get; }
-  
-  public CPerParticleFloatInput RisingEdge { get; }
-  
-  public ref EventTypeSelection_t RisingEventType { get; }
-  
-  public CPerParticleFloatInput FallingEdge { get; }
-  
-  public ref EventTypeSelection_t FallingEventType { get; }
+    public CPerParticleFloatInput Input { get; }
+
+    public CPerParticleFloatInput RisingEdge { get; }
+
+    public ref EventTypeSelection_t RisingEventType { get; }
+
+    public CPerParticleFloatInput FallingEdge { get; }
+
+    public ref EventTypeSelection_t FallingEventType { get; }
 
 
 }

@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmGraphDefinition : ISchemaClass<CNmGraphDefinition> {
+public partial interface CNmGraphDefinition : ISchemaClass<CNmGraphDefinition>
+{
+    static CNmGraphDefinition ISchemaClass<CNmGraphDefinition>.From(nint handle) => new CNmGraphDefinitionImpl(handle);
+    static int ISchemaClass<CNmGraphDefinition>.Size => 384;
+    static string? ISchemaClass<CNmGraphDefinition>.ClassName => null;
 
-  static CNmGraphDefinition ISchemaClass<CNmGraphDefinition>.From(nint handle) => new CNmGraphDefinitionImpl(handle);
-  static int ISchemaClass<CNmGraphDefinition>.Size => 384;
-  static string? ISchemaClass<CNmGraphDefinition>.ClassName => null;
 
-  
-  public ref CGlobalSymbol VariationID { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton { get; }
-  
-  public ref CUtlVector<short> PersistentNodeIndices { get; }
-  
-  public ref short RootNodeIdx { get; }
-  
-  public ref CUtlVector<CGlobalSymbol> ControlParameterIDs { get; }
-  
-  public ref CUtlVector<CGlobalSymbol> VirtualParameterIDs { get; }
-  
-  public ref CUtlVector<short> VirtualParameterNodeIndices { get; }
-  
-  public ref CUtlVector<CNmGraphDefinition__ReferencedGraphSlot_t> ReferencedGraphSlots { get; }
-  
-  public ref CUtlVector<CNmGraphDefinition__ExternalGraphSlot_t> ExternalGraphSlots { get; }
-  
-  public ref CUtlVector<CUtlString> NodePaths { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> Resources { get; }
+    public ref CGlobalSymbol VariationID { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton { get; }
+
+    public ref CUtlVector<short> PersistentNodeIndices { get; }
+
+    public ref short RootNodeIdx { get; }
+
+    public ref CUtlVector<CGlobalSymbol> ControlParameterIDs { get; }
+
+    public ref CUtlVector<CGlobalSymbol> VirtualParameterIDs { get; }
+
+    public ref CUtlVector<short> VirtualParameterNodeIndices { get; }
+
+    public ref CUtlVector<CNmGraphDefinition__ReferencedGraphSlot_t> ReferencedGraphSlots { get; }
+
+    public ref CUtlVector<CNmGraphDefinition__ExternalGraphSlot_t> ExternalGraphSlots { get; }
+
+    public ref CUtlVector<CUtlString> NodePaths { get; }
+
+    public ref CUtlVector<SchemaUntypedField> Resources { get; }
 
 
 }

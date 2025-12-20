@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AABB_tImpl : SchemaClass, AABB_t {
+internal partial class AABB_tImpl : SchemaClass, AABB_t
+{
+    public AABB_tImpl(nint handle) : base(handle) { }
 
-  public AABB_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinBoundsOffset;
 
-  private static nint? _MinBoundsOffset;
-
-  public ref Vector MinBounds {
-    get {
-      if (_MinBoundsOffset == null) {
-        _MinBoundsOffset = Schema.GetOffset(0xC0D32A84114799FE);
-      }
-      return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
+    public ref Vector MinBounds {
+        get {
+            _MinBoundsOffset = _MinBoundsOffset ?? Schema.GetOffset(0xC0D32A84114799FE);
+            return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxBoundsOffset;
+    private static nint? _MaxBoundsOffset;
 
-  public ref Vector MaxBounds {
-    get {
-      if (_MaxBoundsOffset == null) {
-        _MaxBoundsOffset = Schema.GetOffset(0xC0D32A84C0B4CE60);
-      }
-      return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
+    public ref Vector MaxBounds {
+        get {
+            _MaxBoundsOffset = _MaxBoundsOffset ?? Schema.GetOffset(0xC0D32A84C0B4CE60);
+            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
+        }
     }
-  }
 
-  public void MinBoundsUpdated() {
-    Schema.Update(_Handle, 0xC0D32A84114799FE);
-  }
-  public void MaxBoundsUpdated() {
-    Schema.Update(_Handle, 0xC0D32A84C0B4CE60);
-  }
+    public void MinBoundsUpdated() => Schema.Update(_Handle, 0xC0D32A84114799FE);
+    public void MaxBoundsUpdated() => Schema.Update(_Handle, 0xC0D32A84C0B4CE60);
 }

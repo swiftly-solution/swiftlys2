@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmIDToFloatNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmIDToFloatNode__CDefinition> {
+public partial interface CNmIDToFloatNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmIDToFloatNode__CDefinition>
+{
+    static CNmIDToFloatNode__CDefinition ISchemaClass<CNmIDToFloatNode__CDefinition>.From(nint handle) => new CNmIDToFloatNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmIDToFloatNode__CDefinition>.Size => 104;
+    static string? ISchemaClass<CNmIDToFloatNode__CDefinition>.ClassName => null;
 
-  static CNmIDToFloatNode__CDefinition ISchemaClass<CNmIDToFloatNode__CDefinition>.From(nint handle) => new CNmIDToFloatNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmIDToFloatNode__CDefinition>.Size => 104;
-  static string? ISchemaClass<CNmIDToFloatNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref float DefaultValue { get; }
-  
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 5 >
-  public SchemaUntypedField IDs { get; }
-  
-  // CUtlLeanVectorFixedGrowable< float32, 5 >
-  public SchemaUntypedField Values { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    public ref float DefaultValue { get; }
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 5 >
+    public SchemaUntypedField IDs { get; }
+
+    // CUtlLeanVectorFixedGrowable< float32, 5 >
+    public SchemaUntypedField Values { get; }
 
 
 }

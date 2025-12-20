@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface IEconItemInterface : ISchemaClass<IEconItemInterface> {
-
-  static IEconItemInterface ISchemaClass<IEconItemInterface>.From(nint handle) => new IEconItemInterfaceImpl(handle);
-  static int ISchemaClass<IEconItemInterface>.Size => 8;
-  static string? ISchemaClass<IEconItemInterface>.ClassName => null;
+public partial interface IEconItemInterface : ISchemaClass<IEconItemInterface>
+{
+    static IEconItemInterface ISchemaClass<IEconItemInterface>.From(nint handle) => new IEconItemInterfaceImpl(handle);
+    static int ISchemaClass<IEconItemInterface>.Size => 8;
+    static string? ISchemaClass<IEconItemInterface>.ClassName => null;
 
 
 

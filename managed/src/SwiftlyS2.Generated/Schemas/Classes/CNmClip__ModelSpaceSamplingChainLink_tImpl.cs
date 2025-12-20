@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmClip__ModelSpaceSamplingChainLink_tImpl : SchemaClass, CNmClip__ModelSpaceSamplingChainLink_t {
+internal partial class CNmClip__ModelSpaceSamplingChainLink_tImpl : SchemaClass, CNmClip__ModelSpaceSamplingChainLink_t
+{
+    public CNmClip__ModelSpaceSamplingChainLink_tImpl(nint handle) : base(handle) { }
 
-  public CNmClip__ModelSpaceSamplingChainLink_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneIdxOffset;
 
-  private static nint? _BoneIdxOffset;
-
-  public ref int BoneIdx {
-    get {
-      if (_BoneIdxOffset == null) {
-        _BoneIdxOffset = Schema.GetOffset(0xAFAB55410E26A9C2);
-      }
-      return ref _Handle.AsRef<int>(_BoneIdxOffset!.Value);
+    public ref int BoneIdx {
+        get {
+            _BoneIdxOffset = _BoneIdxOffset ?? Schema.GetOffset(0xAFAB55410E26A9C2);
+            return ref _Handle.AsRef<int>(_BoneIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentBoneIdxOffset;
+    private static nint? _ParentBoneIdxOffset;
 
-  public ref int ParentBoneIdx {
-    get {
-      if (_ParentBoneIdxOffset == null) {
-        _ParentBoneIdxOffset = Schema.GetOffset(0xAFAB554185076542);
-      }
-      return ref _Handle.AsRef<int>(_ParentBoneIdxOffset!.Value);
+    public ref int ParentBoneIdx {
+        get {
+            _ParentBoneIdxOffset = _ParentBoneIdxOffset ?? Schema.GetOffset(0xAFAB554185076542);
+            return ref _Handle.AsRef<int>(_ParentBoneIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentChainLinkIdxOffset;
+    private static nint? _ParentChainLinkIdxOffset;
 
-  public ref int ParentChainLinkIdx {
-    get {
-      if (_ParentChainLinkIdxOffset == null) {
-        _ParentChainLinkIdxOffset = Schema.GetOffset(0xAFAB5541DB4E7C5D);
-      }
-      return ref _Handle.AsRef<int>(_ParentChainLinkIdxOffset!.Value);
+    public ref int ParentChainLinkIdx {
+        get {
+            _ParentChainLinkIdxOffset = _ParentChainLinkIdxOffset ?? Schema.GetOffset(0xAFAB5541DB4E7C5D);
+            return ref _Handle.AsRef<int>(_ParentChainLinkIdxOffset!.Value);
+        }
     }
-  }
 
 
 }

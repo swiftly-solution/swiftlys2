@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RemapNamedModelMeshGroupToScalar : C_INIT_RemapNamedModelElementToScalar, ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar> {
-
-  static C_INIT_RemapNamedModelMeshGroupToScalar ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.From(nint handle) => new C_INIT_RemapNamedModelMeshGroupToScalarImpl(handle);
-  static int ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.Size => 544;
-  static string? ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.ClassName => null;
+public partial interface C_INIT_RemapNamedModelMeshGroupToScalar : C_INIT_RemapNamedModelElementToScalar, ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>
+{
+    static C_INIT_RemapNamedModelMeshGroupToScalar ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.From(nint handle) => new C_INIT_RemapNamedModelMeshGroupToScalarImpl(handle);
+    static int ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.Size => 544;
+    static string? ISchemaClass<C_INIT_RemapNamedModelMeshGroupToScalar>.ClassName => null;
 
 
 

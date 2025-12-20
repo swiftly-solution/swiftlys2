@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRagdollAnimTag : CAnimTagBase, ISchemaClass<CRagdollAnimTag> {
+public partial interface CRagdollAnimTag : CAnimTagBase, ISchemaClass<CRagdollAnimTag>
+{
+    static CRagdollAnimTag ISchemaClass<CRagdollAnimTag>.From(nint handle) => new CRagdollAnimTagImpl(handle);
+    static int ISchemaClass<CRagdollAnimTag>.Size => 96;
+    static string? ISchemaClass<CRagdollAnimTag>.ClassName => null;
 
-  static CRagdollAnimTag ISchemaClass<CRagdollAnimTag>.From(nint handle) => new CRagdollAnimTagImpl(handle);
-  static int ISchemaClass<CRagdollAnimTag>.Size => 96;
-  static string? ISchemaClass<CRagdollAnimTag>.ClassName => null;
 
-  
-  public ref CGlobalSymbol ProfileName { get; }
+    public ref CGlobalSymbol ProfileName { get; }
 
 
 }

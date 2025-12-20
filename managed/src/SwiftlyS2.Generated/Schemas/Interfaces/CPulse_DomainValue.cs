@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulse_DomainValue : ISchemaClass<CPulse_DomainValue> {
+public partial interface CPulse_DomainValue : ISchemaClass<CPulse_DomainValue>
+{
+    static CPulse_DomainValue ISchemaClass<CPulse_DomainValue>.From(nint handle) => new CPulse_DomainValueImpl(handle);
+    static int ISchemaClass<CPulse_DomainValue>.Size => 48;
+    static string? ISchemaClass<CPulse_DomainValue>.ClassName => null;
 
-  static CPulse_DomainValue ISchemaClass<CPulse_DomainValue>.From(nint handle) => new CPulse_DomainValueImpl(handle);
-  static int ISchemaClass<CPulse_DomainValue>.Size => 48;
-  static string? ISchemaClass<CPulse_DomainValue>.ClassName => null;
 
-  
-  public ref PulseDomainValueType_t Type { get; }
-  
-  public ref CGlobalSymbol Value { get; }
-  
-  // CPulseValueFullType
-  public SchemaUntypedField RequiredRuntimeType { get; }
+    public ref PulseDomainValueType_t Type { get; }
+
+    public ref CGlobalSymbol Value { get; }
+
+    // CPulseValueFullType
+    public SchemaUntypedField RequiredRuntimeType { get; }
 
 
 }

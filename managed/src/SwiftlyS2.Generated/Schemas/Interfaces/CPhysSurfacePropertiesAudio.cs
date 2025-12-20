@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysSurfacePropertiesAudio : ISchemaClass<CPhysSurfacePropertiesAudio> {
+public partial interface CPhysSurfacePropertiesAudio : ISchemaClass<CPhysSurfacePropertiesAudio>
+{
+    static CPhysSurfacePropertiesAudio ISchemaClass<CPhysSurfacePropertiesAudio>.From(nint handle) => new CPhysSurfacePropertiesAudioImpl(handle);
+    static int ISchemaClass<CPhysSurfacePropertiesAudio>.Size => 32;
+    static string? ISchemaClass<CPhysSurfacePropertiesAudio>.ClassName => null;
 
-  static CPhysSurfacePropertiesAudio ISchemaClass<CPhysSurfacePropertiesAudio>.From(nint handle) => new CPhysSurfacePropertiesAudioImpl(handle);
-  static int ISchemaClass<CPhysSurfacePropertiesAudio>.Size => 32;
-  static string? ISchemaClass<CPhysSurfacePropertiesAudio>.ClassName => null;
 
-  
-  public ref float Reflectivity { get; }
-  
-  public ref float HardnessFactor { get; }
-  
-  public ref float RoughnessFactor { get; }
-  
-  public ref float RoughThreshold { get; }
-  
-  public ref float HardThreshold { get; }
-  
-  public ref float HardVelocityThreshold { get; }
-  
-  public ref float StaticImpactVolume { get; }
-  
-  public ref float OcclusionFactor { get; }
+    public ref float Reflectivity { get; }
+
+    public ref float HardnessFactor { get; }
+
+    public ref float RoughnessFactor { get; }
+
+    public ref float RoughThreshold { get; }
+
+    public ref float HardThreshold { get; }
+
+    public ref float HardVelocityThreshold { get; }
+
+    public ref float StaticImpactVolume { get; }
+
+    public ref float OcclusionFactor { get; }
 
 
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class NavGravity_tImpl : SchemaClass, NavGravity_t {
+internal partial class NavGravity_tImpl : SchemaClass, NavGravity_t
+{
+    public NavGravity_tImpl(nint handle) : base(handle) { }
 
-  public NavGravity_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GravityOffset;
 
-  private static nint? _GravityOffset;
-
-  public ref Vector Gravity {
-    get {
-      if (_GravityOffset == null) {
-        _GravityOffset = Schema.GetOffset(0xAF45EC63A5AE4779);
-      }
-      return ref _Handle.AsRef<Vector>(_GravityOffset!.Value);
+    public ref Vector Gravity {
+        get {
+            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0xAF45EC63A5AE4779);
+            return ref _Handle.AsRef<Vector>(_GravityOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultOffset;
+    private static nint? _DefaultOffset;
 
-  public ref bool Default {
-    get {
-      if (_DefaultOffset == null) {
-        _DefaultOffset = Schema.GetOffset(0xAF45EC6385F067BE);
-      }
-      return ref _Handle.AsRef<bool>(_DefaultOffset!.Value);
+    public ref bool Default {
+        get {
+            _DefaultOffset = _DefaultOffset ?? Schema.GetOffset(0xAF45EC6385F067BE);
+            return ref _Handle.AsRef<bool>(_DefaultOffset!.Value);
+        }
     }
-  }
 
 
 }

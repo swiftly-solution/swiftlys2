@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRegionSVM : ISchemaClass<CRegionSVM> {
+public partial interface CRegionSVM : ISchemaClass<CRegionSVM>
+{
+    static CRegionSVM ISchemaClass<CRegionSVM>.From(nint handle) => new CRegionSVMImpl(handle);
+    static int ISchemaClass<CRegionSVM>.Size => 48;
+    static string? ISchemaClass<CRegionSVM>.ClassName => null;
 
-  static CRegionSVM ISchemaClass<CRegionSVM>.From(nint handle) => new CRegionSVMImpl(handle);
-  static int ISchemaClass<CRegionSVM>.Size => 48;
-  static string? ISchemaClass<CRegionSVM>.ClassName => null;
 
-  
-  public ref CUtlVector<RnPlane_t> Planes { get; }
-  
-  public ref CUtlVector<uint> Nodes { get; }
+    public ref CUtlVector<RnPlane_t> Planes { get; }
+
+    public ref CUtlVector<uint> Nodes { get; }
 
 
 }

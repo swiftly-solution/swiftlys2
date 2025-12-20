@@ -8,23 +8,23 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmAnimationPoseNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmAnimationPoseNode__CDefinition> {
+public partial interface CNmAnimationPoseNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmAnimationPoseNode__CDefinition>
+{
+    static CNmAnimationPoseNode__CDefinition ISchemaClass<CNmAnimationPoseNode__CDefinition>.From(nint handle) => new CNmAnimationPoseNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmAnimationPoseNode__CDefinition>.Size => 40;
+    static string? ISchemaClass<CNmAnimationPoseNode__CDefinition>.ClassName => null;
 
-  static CNmAnimationPoseNode__CDefinition ISchemaClass<CNmAnimationPoseNode__CDefinition>.From(nint handle) => new CNmAnimationPoseNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmAnimationPoseNode__CDefinition>.Size => 40;
-  static string? ISchemaClass<CNmAnimationPoseNode__CDefinition>.ClassName => null;
 
-  
-  public ref short PoseTimeValueNodeIdx { get; }
-  
-  public ref short DataSlotIdx { get; }
-  
-  // Range_t
-  public SchemaUntypedField InputTimeRemapRange { get; }
-  
-  public ref float UserSpecifiedTime { get; }
-  
-  public ref bool UseFramesAsInput { get; }
+    public ref short PoseTimeValueNodeIdx { get; }
+
+    public ref short DataSlotIdx { get; }
+
+    // Range_t
+    public SchemaUntypedField InputTimeRemapRange { get; }
+
+    public ref float UserSpecifiedTime { get; }
+
+    public ref bool UseFramesAsInput { get; }
 
 
 }

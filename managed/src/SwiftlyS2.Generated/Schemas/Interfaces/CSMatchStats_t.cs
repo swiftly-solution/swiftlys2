@@ -8,58 +8,58 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSMatchStats_t : CSPerRoundStats_t, ISchemaClass<CSMatchStats_t> {
+public partial interface CSMatchStats_t : CSPerRoundStats_t, ISchemaClass<CSMatchStats_t>
+{
+    static CSMatchStats_t ISchemaClass<CSMatchStats_t>.From(nint handle) => new CSMatchStats_tImpl(handle);
+    static int ISchemaClass<CSMatchStats_t>.Size => 192;
+    static string? ISchemaClass<CSMatchStats_t>.ClassName => null;
 
-  static CSMatchStats_t ISchemaClass<CSMatchStats_t>.From(nint handle) => new CSMatchStats_tImpl(handle);
-  static int ISchemaClass<CSMatchStats_t>.Size => 192;
-  static string? ISchemaClass<CSMatchStats_t>.ClassName => null;
 
-  
-  public ref int Enemy5Ks { get; }
-  
-  public ref int Enemy4Ks { get; }
-  
-  public ref int Enemy3Ks { get; }
-  
-  public ref int EnemyKnifeKills { get; }
-  
-  public ref int EnemyTaserKills { get; }
-  
-  public ref int Enemy2Ks { get; }
-  
-  public ref int Utility_Count { get; }
-  
-  public ref int Utility_Successes { get; }
-  
-  public ref int Utility_Enemies { get; }
-  
-  public ref int Flash_Count { get; }
-  
-  public ref int Flash_Successes { get; }
-  
-  public ref float HealthPointsRemovedTotal { get; }
-  
-  public ref float HealthPointsDealtTotal { get; }
-  
-  public ref int ShotsFiredTotal { get; }
-  
-  public ref int ShotsOnTargetTotal { get; }
-  
-  public ref int I1v1Count { get; }
-  
-  public ref int I1v1Wins { get; }
-  
-  public ref int I1v2Count { get; }
-  
-  public ref int I1v2Wins { get; }
-  
-  public ref int EntryCount { get; }
-  
-  public ref int EntryWins { get; }
+    public ref int Enemy5Ks { get; }
 
-  public void Enemy5KsUpdated();
-  public void Enemy4KsUpdated();
-  public void Enemy3KsUpdated();
-  public void EnemyKnifeKillsUpdated();
-  public void EnemyTaserKillsUpdated();
+    public ref int Enemy4Ks { get; }
+
+    public ref int Enemy3Ks { get; }
+
+    public ref int EnemyKnifeKills { get; }
+
+    public ref int EnemyTaserKills { get; }
+
+    public ref int Enemy2Ks { get; }
+
+    public ref int Utility_Count { get; }
+
+    public ref int Utility_Successes { get; }
+
+    public ref int Utility_Enemies { get; }
+
+    public ref int Flash_Count { get; }
+
+    public ref int Flash_Successes { get; }
+
+    public ref float HealthPointsRemovedTotal { get; }
+
+    public ref float HealthPointsDealtTotal { get; }
+
+    public ref int ShotsFiredTotal { get; }
+
+    public ref int ShotsOnTargetTotal { get; }
+
+    public ref int I1v1Count { get; }
+
+    public ref int I1v1Wins { get; }
+
+    public ref int I1v2Count { get; }
+
+    public ref int I1v2Wins { get; }
+
+    public ref int EntryCount { get; }
+
+    public ref int EntryWins { get; }
+
+    public void Enemy5KsUpdated();
+    public void Enemy4KsUpdated();
+    public void Enemy3KsUpdated();
+    public void EnemyKnifeKillsUpdated();
+    public void EnemyTaserKillsUpdated();
 }

@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundOpvarSetPointBase : CBaseEntity, ISchemaClass<CSoundOpvarSetPointBase> {
+public partial interface CSoundOpvarSetPointBase : CBaseEntity, ISchemaClass<CSoundOpvarSetPointBase>
+{
+    static CSoundOpvarSetPointBase ISchemaClass<CSoundOpvarSetPointBase>.From(nint handle) => new CSoundOpvarSetPointBaseImpl(handle);
+    static int ISchemaClass<CSoundOpvarSetPointBase>.Size => 1432;
+    static string? ISchemaClass<CSoundOpvarSetPointBase>.ClassName => "snd_opvar_set_point_base";
 
-  static CSoundOpvarSetPointBase ISchemaClass<CSoundOpvarSetPointBase>.From(nint handle) => new CSoundOpvarSetPointBaseImpl(handle);
-  static int ISchemaClass<CSoundOpvarSetPointBase>.Size => 1432;
-  static string? ISchemaClass<CSoundOpvarSetPointBase>.ClassName => "snd_opvar_set_point_base";
 
-  
-  public ref bool Disabled { get; }
-  
-  public ref CHandle<CEntityInstance> Source { get; }
-  
-  public string SourceEntityName { get; set; }
-  
-  public ref Vector LastPosition { get; }
-  
-  public string StackName { get; set; }
-  
-  public string OperatorName { get; set; }
-  
-  public string OpvarName { get; set; }
-  
-  public ref int OpvarIndex { get; }
-  
-  public ref bool UseAutoCompare { get; }
+    public ref bool Disabled { get; }
 
-  public void StackNameUpdated();
-  public void OperatorNameUpdated();
-  public void OpvarNameUpdated();
-  public void OpvarIndexUpdated();
-  public void UseAutoCompareUpdated();
+    public ref CHandle<CEntityInstance> Source { get; }
+
+    public string SourceEntityName { get; set; }
+
+    public ref Vector LastPosition { get; }
+
+    public string StackName { get; set; }
+
+    public string OperatorName { get; set; }
+
+    public string OpvarName { get; set; }
+
+    public ref int OpvarIndex { get; }
+
+    public ref bool UseAutoCompare { get; }
+
+    public void StackNameUpdated();
+    public void OperatorNameUpdated();
+    public void OpvarNameUpdated();
+    public void OpvarIndexUpdated();
+    public void UseAutoCompareUpdated();
 }

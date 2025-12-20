@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class NmCompressionSettings_tImpl : SchemaClass, NmCompressionSettings_t {
+internal partial class NmCompressionSettings_tImpl : SchemaClass, NmCompressionSettings_t
+{
+    public NmCompressionSettings_tImpl(nint handle) : base(handle) { }
 
-  public NmCompressionSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TranslationRangeXOffset;
 
-  private static nint? _TranslationRangeXOffset;
-
-  public NmCompressionSettings_t__QuantizationRange_t TranslationRangeX {
-    get {
-      if (_TranslationRangeXOffset == null) {
-        _TranslationRangeXOffset = Schema.GetOffset(0xA8EC8858BF2C2B);
-      }
-      return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _TranslationRangeXOffset!.Value);
+    public NmCompressionSettings_t__QuantizationRange_t TranslationRangeX {
+        get {
+            _TranslationRangeXOffset = _TranslationRangeXOffset ?? Schema.GetOffset(0xA8EC8858BF2C2B);
+            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _TranslationRangeXOffset!.Value);
+        }
     }
-  }
-  private static nint? _TranslationRangeYOffset;
+    private static nint? _TranslationRangeYOffset;
 
-  public NmCompressionSettings_t__QuantizationRange_t TranslationRangeY {
-    get {
-      if (_TranslationRangeYOffset == null) {
-        _TranslationRangeYOffset = Schema.GetOffset(0xA8EC8857BF2A98);
-      }
-      return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _TranslationRangeYOffset!.Value);
+    public NmCompressionSettings_t__QuantizationRange_t TranslationRangeY {
+        get {
+            _TranslationRangeYOffset = _TranslationRangeYOffset ?? Schema.GetOffset(0xA8EC8857BF2A98);
+            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _TranslationRangeYOffset!.Value);
+        }
     }
-  }
-  private static nint? _TranslationRangeZOffset;
+    private static nint? _TranslationRangeZOffset;
 
-  public NmCompressionSettings_t__QuantizationRange_t TranslationRangeZ {
-    get {
-      if (_TranslationRangeZOffset == null) {
-        _TranslationRangeZOffset = Schema.GetOffset(0xA8EC885ABF2F51);
-      }
-      return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _TranslationRangeZOffset!.Value);
+    public NmCompressionSettings_t__QuantizationRange_t TranslationRangeZ {
+        get {
+            _TranslationRangeZOffset = _TranslationRangeZOffset ?? Schema.GetOffset(0xA8EC885ABF2F51);
+            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _TranslationRangeZOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleRangeOffset;
+    private static nint? _ScaleRangeOffset;
 
-  public NmCompressionSettings_t__QuantizationRange_t ScaleRange {
-    get {
-      if (_ScaleRangeOffset == null) {
-        _ScaleRangeOffset = Schema.GetOffset(0xA8EC88E96F803E);
-      }
-      return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _ScaleRangeOffset!.Value);
+    public NmCompressionSettings_t__QuantizationRange_t ScaleRange {
+        get {
+            _ScaleRangeOffset = _ScaleRangeOffset ?? Schema.GetOffset(0xA8EC88E96F803E);
+            return new NmCompressionSettings_t__QuantizationRange_tImpl(_Handle + _ScaleRangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConstantRotationOffset;
+    private static nint? _ConstantRotationOffset;
 
-  public ref Quaternion ConstantRotation {
-    get {
-      if (_ConstantRotationOffset == null) {
-        _ConstantRotationOffset = Schema.GetOffset(0xA8EC88C609717F);
-      }
-      return ref _Handle.AsRef<Quaternion>(_ConstantRotationOffset!.Value);
+    public ref Quaternion ConstantRotation {
+        get {
+            _ConstantRotationOffset = _ConstantRotationOffset ?? Schema.GetOffset(0xA8EC88C609717F);
+            return ref _Handle.AsRef<Quaternion>(_ConstantRotationOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsRotationStaticOffset;
+    private static nint? _IsRotationStaticOffset;
 
-  public ref bool IsRotationStatic {
-    get {
-      if (_IsRotationStaticOffset == null) {
-        _IsRotationStaticOffset = Schema.GetOffset(0xA8EC88D75373C5);
-      }
-      return ref _Handle.AsRef<bool>(_IsRotationStaticOffset!.Value);
+    public ref bool IsRotationStatic {
+        get {
+            _IsRotationStaticOffset = _IsRotationStaticOffset ?? Schema.GetOffset(0xA8EC88D75373C5);
+            return ref _Handle.AsRef<bool>(_IsRotationStaticOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsTranslationStaticOffset;
+    private static nint? _IsTranslationStaticOffset;
 
-  public ref bool IsTranslationStatic {
-    get {
-      if (_IsTranslationStaticOffset == null) {
-        _IsTranslationStaticOffset = Schema.GetOffset(0xA8EC888ABDF382);
-      }
-      return ref _Handle.AsRef<bool>(_IsTranslationStaticOffset!.Value);
+    public ref bool IsTranslationStatic {
+        get {
+            _IsTranslationStaticOffset = _IsTranslationStaticOffset ?? Schema.GetOffset(0xA8EC888ABDF382);
+            return ref _Handle.AsRef<bool>(_IsTranslationStaticOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsScaleStaticOffset;
+    private static nint? _IsScaleStaticOffset;
 
-  public ref bool IsScaleStatic {
-    get {
-      if (_IsScaleStaticOffset == null) {
-        _IsScaleStaticOffset = Schema.GetOffset(0xA8EC88FDB26607);
-      }
-      return ref _Handle.AsRef<bool>(_IsScaleStaticOffset!.Value);
+    public ref bool IsScaleStatic {
+        get {
+            _IsScaleStaticOffset = _IsScaleStaticOffset ?? Schema.GetOffset(0xA8EC88FDB26607);
+            return ref _Handle.AsRef<bool>(_IsScaleStaticOffset!.Value);
+        }
     }
-  }
 
 
 }

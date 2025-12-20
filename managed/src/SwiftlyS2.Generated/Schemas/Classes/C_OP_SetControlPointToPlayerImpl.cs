@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetControlPointToPlayerImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointToPlayer {
+internal partial class C_OP_SetControlPointToPlayerImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointToPlayer
+{
+    public C_OP_SetControlPointToPlayerImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetControlPointToPlayerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CP1Offset;
 
-  private static nint? _CP1Offset;
-
-  public ref int CP1 {
-    get {
-      if (_CP1Offset == null) {
-        _CP1Offset = Schema.GetOffset(0xD877DC8ED4B1E579);
-      }
-      return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+    public ref int CP1 {
+        get {
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0xD877DC8ED4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+        }
     }
-  }
-  private static nint? _CP1PosOffset;
+    private static nint? _CP1PosOffset;
 
-  public ref Vector CP1Pos {
-    get {
-      if (_CP1PosOffset == null) {
-        _CP1PosOffset = Schema.GetOffset(0xD877DC8E408288D9);
-      }
-      return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+    public ref Vector CP1Pos {
+        get {
+            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0xD877DC8E408288D9);
+            return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientToEyesOffset;
+    private static nint? _OrientToEyesOffset;
 
-  public ref bool OrientToEyes {
-    get {
-      if (_OrientToEyesOffset == null) {
-        _OrientToEyesOffset = Schema.GetOffset(0xD877DC8E3270E4F3);
-      }
-      return ref _Handle.AsRef<bool>(_OrientToEyesOffset!.Value);
+    public ref bool OrientToEyes {
+        get {
+            _OrientToEyesOffset = _OrientToEyesOffset ?? Schema.GetOffset(0xD877DC8E3270E4F3);
+            return ref _Handle.AsRef<bool>(_OrientToEyesOffset!.Value);
+        }
     }
-  }
 
 
 }

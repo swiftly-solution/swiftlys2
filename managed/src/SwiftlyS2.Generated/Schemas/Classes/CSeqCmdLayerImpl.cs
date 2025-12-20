@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSeqCmdLayerImpl : SchemaClass, CSeqCmdLayer {
+internal partial class CSeqCmdLayerImpl : SchemaClass, CSeqCmdLayer
+{
+    public CSeqCmdLayerImpl(nint handle) : base(handle) { }
 
-  public CSeqCmdLayerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CmdOffset;
 
-  private static nint? _CmdOffset;
-
-  public ref short Cmd {
-    get {
-      if (_CmdOffset == null) {
-        _CmdOffset = Schema.GetOffset(0xFD1F978E4B3490B);
-      }
-      return ref _Handle.AsRef<short>(_CmdOffset!.Value);
+    public ref short Cmd {
+        get {
+            _CmdOffset = _CmdOffset ?? Schema.GetOffset(0xFD1F978E4B3490B);
+            return ref _Handle.AsRef<short>(_CmdOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalReferenceOffset;
+    private static nint? _LocalReferenceOffset;
 
-  public ref short LocalReference {
-    get {
-      if (_LocalReferenceOffset == null) {
-        _LocalReferenceOffset = Schema.GetOffset(0xFD1F978C8D571D9);
-      }
-      return ref _Handle.AsRef<short>(_LocalReferenceOffset!.Value);
+    public ref short LocalReference {
+        get {
+            _LocalReferenceOffset = _LocalReferenceOffset ?? Schema.GetOffset(0xFD1F978C8D571D9);
+            return ref _Handle.AsRef<short>(_LocalReferenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalBonemaskOffset;
+    private static nint? _LocalBonemaskOffset;
 
-  public ref short LocalBonemask {
-    get {
-      if (_LocalBonemaskOffset == null) {
-        _LocalBonemaskOffset = Schema.GetOffset(0xFD1F9782B0E5CB2);
-      }
-      return ref _Handle.AsRef<short>(_LocalBonemaskOffset!.Value);
+    public ref short LocalBonemask {
+        get {
+            _LocalBonemaskOffset = _LocalBonemaskOffset ?? Schema.GetOffset(0xFD1F9782B0E5CB2);
+            return ref _Handle.AsRef<short>(_LocalBonemaskOffset!.Value);
+        }
     }
-  }
-  private static nint? _DstResultOffset;
+    private static nint? _DstResultOffset;
 
-  public ref short DstResult {
-    get {
-      if (_DstResultOffset == null) {
-        _DstResultOffset = Schema.GetOffset(0xFD1F978EC2D9DB9);
-      }
-      return ref _Handle.AsRef<short>(_DstResultOffset!.Value);
+    public ref short DstResult {
+        get {
+            _DstResultOffset = _DstResultOffset ?? Schema.GetOffset(0xFD1F978EC2D9DB9);
+            return ref _Handle.AsRef<short>(_DstResultOffset!.Value);
+        }
     }
-  }
-  private static nint? _SrcResultOffset;
+    private static nint? _SrcResultOffset;
 
-  public ref short SrcResult {
-    get {
-      if (_SrcResultOffset == null) {
-        _SrcResultOffset = Schema.GetOffset(0xFD1F9782B5F4F1C);
-      }
-      return ref _Handle.AsRef<short>(_SrcResultOffset!.Value);
+    public ref short SrcResult {
+        get {
+            _SrcResultOffset = _SrcResultOffset ?? Schema.GetOffset(0xFD1F9782B5F4F1C);
+            return ref _Handle.AsRef<short>(_SrcResultOffset!.Value);
+        }
     }
-  }
-  private static nint? _SplineOffset;
+    private static nint? _SplineOffset;
 
-  public ref bool Spline {
-    get {
-      if (_SplineOffset == null) {
-        _SplineOffset = Schema.GetOffset(0xFD1F9782F9204DC);
-      }
-      return ref _Handle.AsRef<bool>(_SplineOffset!.Value);
+    public ref bool Spline {
+        get {
+            _SplineOffset = _SplineOffset ?? Schema.GetOffset(0xFD1F9782F9204DC);
+            return ref _Handle.AsRef<bool>(_SplineOffset!.Value);
+        }
     }
-  }
-  private static nint? _Var1Offset;
+    private static nint? _Var1Offset;
 
-  public ref float Var1 {
-    get {
-      if (_Var1Offset == null) {
-        _Var1Offset = Schema.GetOffset(0xFD1F978B9FADB9F);
-      }
-      return ref _Handle.AsRef<float>(_Var1Offset!.Value);
+    public ref float Var1 {
+        get {
+            _Var1Offset = _Var1Offset ?? Schema.GetOffset(0xFD1F978B9FADB9F);
+            return ref _Handle.AsRef<float>(_Var1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Var2Offset;
+    private static nint? _Var2Offset;
 
-  public ref float Var2 {
-    get {
-      if (_Var2Offset == null) {
-        _Var2Offset = Schema.GetOffset(0xFD1F978BAFADD32);
-      }
-      return ref _Handle.AsRef<float>(_Var2Offset!.Value);
+    public ref float Var2 {
+        get {
+            _Var2Offset = _Var2Offset ?? Schema.GetOffset(0xFD1F978BAFADD32);
+            return ref _Handle.AsRef<float>(_Var2Offset!.Value);
+        }
     }
-  }
-  private static nint? _LineNumberOffset;
+    private static nint? _LineNumberOffset;
 
-  public ref short LineNumber {
-    get {
-      if (_LineNumberOffset == null) {
-        _LineNumberOffset = Schema.GetOffset(0xFD1F978AD012A6A);
-      }
-      return ref _Handle.AsRef<short>(_LineNumberOffset!.Value);
+    public ref short LineNumber {
+        get {
+            _LineNumberOffset = _LineNumberOffset ?? Schema.GetOffset(0xFD1F978AD012A6A);
+            return ref _Handle.AsRef<short>(_LineNumberOffset!.Value);
+        }
     }
-  }
 
 
 }

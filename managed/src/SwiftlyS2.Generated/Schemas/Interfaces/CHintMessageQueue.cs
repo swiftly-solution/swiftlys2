@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHintMessageQueue : ISchemaClass<CHintMessageQueue> {
+public partial interface CHintMessageQueue : ISchemaClass<CHintMessageQueue>
+{
+    static CHintMessageQueue ISchemaClass<CHintMessageQueue>.From(nint handle) => new CHintMessageQueueImpl(handle);
+    static int ISchemaClass<CHintMessageQueue>.Size => 40;
+    static string? ISchemaClass<CHintMessageQueue>.ClassName => null;
 
-  static CHintMessageQueue ISchemaClass<CHintMessageQueue>.From(nint handle) => new CHintMessageQueueImpl(handle);
-  static int ISchemaClass<CHintMessageQueue>.Size => 40;
-  static string? ISchemaClass<CHintMessageQueue>.ClassName => null;
 
-  
-  public ref float TmMessageEnd { get; }
-  
-  public ref CUtlVector<PointerTo<CHintMessage>> Messages { get; }
-  
-  public CBasePlayerController? PlayerController { get; }
+    public ref float TmMessageEnd { get; }
+
+    public ref CUtlVector<PointerTo<CHintMessage>> Messages { get; }
+
+    public CBasePlayerController? PlayerController { get; }
 
 
 }

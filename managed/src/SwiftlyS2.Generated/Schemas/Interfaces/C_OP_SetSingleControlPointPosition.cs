@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetSingleControlPointPosition : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetSingleControlPointPosition> {
+public partial interface C_OP_SetSingleControlPointPosition : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetSingleControlPointPosition>
+{
+    static C_OP_SetSingleControlPointPosition ISchemaClass<C_OP_SetSingleControlPointPosition>.From(nint handle) => new C_OP_SetSingleControlPointPositionImpl(handle);
+    static int ISchemaClass<C_OP_SetSingleControlPointPosition>.Size => 2304;
+    static string? ISchemaClass<C_OP_SetSingleControlPointPosition>.ClassName => null;
 
-  static C_OP_SetSingleControlPointPosition ISchemaClass<C_OP_SetSingleControlPointPosition>.From(nint handle) => new C_OP_SetSingleControlPointPositionImpl(handle);
-  static int ISchemaClass<C_OP_SetSingleControlPointPosition>.Size => 2304;
-  static string? ISchemaClass<C_OP_SetSingleControlPointPosition>.ClassName => null;
 
-  
-  public ref bool SetOnce { get; }
-  
-  public ref int CP1 { get; }
-  
-  public CParticleCollectionVecInput CP1Pos { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
+    public ref bool SetOnce { get; }
+
+    public ref int CP1 { get; }
+
+    public CParticleCollectionVecInput CP1Pos { get; }
+
+    public CParticleTransformInput TransformInput { get; }
 
 
 }

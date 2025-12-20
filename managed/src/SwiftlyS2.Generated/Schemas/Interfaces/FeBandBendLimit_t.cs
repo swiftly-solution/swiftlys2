@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeBandBendLimit_t : ISchemaClass<FeBandBendLimit_t> {
+public partial interface FeBandBendLimit_t : ISchemaClass<FeBandBendLimit_t>
+{
+    static FeBandBendLimit_t ISchemaClass<FeBandBendLimit_t>.From(nint handle) => new FeBandBendLimit_tImpl(handle);
+    static int ISchemaClass<FeBandBendLimit_t>.Size => 20;
+    static string? ISchemaClass<FeBandBendLimit_t>.ClassName => null;
 
-  static FeBandBendLimit_t ISchemaClass<FeBandBendLimit_t>.From(nint handle) => new FeBandBendLimit_tImpl(handle);
-  static int ISchemaClass<FeBandBendLimit_t>.Size => 20;
-  static string? ISchemaClass<FeBandBendLimit_t>.ClassName => null;
 
-  
-  public ref float DistMin { get; }
-  
-  public ref float DistMax { get; }
-  
-  public ISchemaFixedArray<ushort> Node { get; }
+    public ref float DistMin { get; }
+
+    public ref float DistMax { get; }
+
+    public ISchemaFixedArray<ushort> Node { get; }
 
 
 }

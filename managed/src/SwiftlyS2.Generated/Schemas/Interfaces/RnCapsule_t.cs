@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnCapsule_t : ISchemaClass<RnCapsule_t> {
+public partial interface RnCapsule_t : ISchemaClass<RnCapsule_t>
+{
+    static RnCapsule_t ISchemaClass<RnCapsule_t>.From(nint handle) => new RnCapsule_tImpl(handle);
+    static int ISchemaClass<RnCapsule_t>.Size => 28;
+    static string? ISchemaClass<RnCapsule_t>.ClassName => null;
 
-  static RnCapsule_t ISchemaClass<RnCapsule_t>.From(nint handle) => new RnCapsule_tImpl(handle);
-  static int ISchemaClass<RnCapsule_t>.Size => 28;
-  static string? ISchemaClass<RnCapsule_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<Vector> Center { get; }
-  
-  public ref float Radius { get; }
+    public ISchemaFixedArray<Vector> Center { get; }
+
+    public ref float Radius { get; }
 
 
 }

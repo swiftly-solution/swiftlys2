@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomModelSequence : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomModelSequence> {
+public partial interface C_INIT_RandomModelSequence : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomModelSequence>
+{
+    static C_INIT_RandomModelSequence ISchemaClass<C_INIT_RandomModelSequence>.From(nint handle) => new C_INIT_RandomModelSequenceImpl(handle);
+    static int ISchemaClass<C_INIT_RandomModelSequence>.Size => 992;
+    static string? ISchemaClass<C_INIT_RandomModelSequence>.ClassName => null;
 
-  static C_INIT_RandomModelSequence ISchemaClass<C_INIT_RandomModelSequence>.From(nint handle) => new C_INIT_RandomModelSequenceImpl(handle);
-  static int ISchemaClass<C_INIT_RandomModelSequence>.Size => 992;
-  static string? ISchemaClass<C_INIT_RandomModelSequence>.ClassName => null;
 
-  
-  public string ActivityName { get; set; }
-  
-  public string SequenceName { get; set; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
+    public string ActivityName { get; set; }
+
+    public string SequenceName { get; set; }
+
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
 
 
 }

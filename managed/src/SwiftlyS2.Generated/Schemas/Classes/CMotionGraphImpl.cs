@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotionGraphImpl : SchemaClass, CMotionGraph {
+internal partial class CMotionGraphImpl : SchemaClass, CMotionGraph
+{
+    public CMotionGraphImpl(nint handle) : base(handle) { }
 
-  public CMotionGraphImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParamSpansOffset;
 
-  private static nint? _ParamSpansOffset;
-
-  public CParamSpanUpdater ParamSpans {
-    get {
-      if (_ParamSpansOffset == null) {
-        _ParamSpansOffset = Schema.GetOffset(0xA24822FCDAC91553);
-      }
-      return new CParamSpanUpdaterImpl(_Handle + _ParamSpansOffset!.Value);
+    public CParamSpanUpdater ParamSpans {
+        get {
+            _ParamSpansOffset = _ParamSpansOffset ?? Schema.GetOffset(0xA24822FCDAC91553);
+            return new CParamSpanUpdaterImpl(_Handle + _ParamSpansOffset!.Value);
+        }
     }
-  }
-  private static nint? _TagsOffset;
+    private static nint? _TagsOffset;
 
-  public ref CUtlVector<TagSpan_t> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0xA24822FCB46C8540);
-      }
-      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+    public ref CUtlVector<TagSpan_t> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xA24822FCB46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _RootNodeOffset;
+    private static nint? _RootNodeOffset;
 
-  public SchemaUntypedField RootNode {
-    get {
-      if (_RootNodeOffset == null) {
-        _RootNodeOffset = Schema.GetOffset(0xA24822FC8BB07023);
-      }
-      return new SchemaUntypedField(_Handle + _RootNodeOffset!.Value);
+    public SchemaUntypedField RootNode {
+        get {
+            _RootNodeOffset = _RootNodeOffset ?? Schema.GetOffset(0xA24822FC8BB07023);
+            return new SchemaUntypedField(_Handle + _RootNodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterCountOffset;
+    private static nint? _ParameterCountOffset;
 
-  public ref int ParameterCount {
-    get {
-      if (_ParameterCountOffset == null) {
-        _ParameterCountOffset = Schema.GetOffset(0xA24822FC3B0EE24B);
-      }
-      return ref _Handle.AsRef<int>(_ParameterCountOffset!.Value);
+    public ref int ParameterCount {
+        get {
+            _ParameterCountOffset = _ParameterCountOffset ?? Schema.GetOffset(0xA24822FC3B0EE24B);
+            return ref _Handle.AsRef<int>(_ParameterCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConfigStartIndexOffset;
+    private static nint? _ConfigStartIndexOffset;
 
-  public ref int ConfigStartIndex {
-    get {
-      if (_ConfigStartIndexOffset == null) {
-        _ConfigStartIndexOffset = Schema.GetOffset(0xA24822FCEB4B0D77);
-      }
-      return ref _Handle.AsRef<int>(_ConfigStartIndexOffset!.Value);
+    public ref int ConfigStartIndex {
+        get {
+            _ConfigStartIndexOffset = _ConfigStartIndexOffset ?? Schema.GetOffset(0xA24822FCEB4B0D77);
+            return ref _Handle.AsRef<int>(_ConfigStartIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConfigCountOffset;
+    private static nint? _ConfigCountOffset;
 
-  public ref int ConfigCount {
-    get {
-      if (_ConfigCountOffset == null) {
-        _ConfigCountOffset = Schema.GetOffset(0xA24822FC16549AD2);
-      }
-      return ref _Handle.AsRef<int>(_ConfigCountOffset!.Value);
+    public ref int ConfigCount {
+        get {
+            _ConfigCountOffset = _ConfigCountOffset ?? Schema.GetOffset(0xA24822FC16549AD2);
+            return ref _Handle.AsRef<int>(_ConfigCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopOffset;
+    private static nint? _LoopOffset;
 
-  public ref bool Loop {
-    get {
-      if (_LoopOffset == null) {
-        _LoopOffset = Schema.GetOffset(0xA24822FCC668A4CB);
-      }
-      return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+    public ref bool Loop {
+        get {
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0xA24822FCC668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+        }
     }
-  }
 
 
 }

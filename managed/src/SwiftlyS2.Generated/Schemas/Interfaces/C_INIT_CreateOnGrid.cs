@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateOnGrid : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateOnGrid> {
+public partial interface C_INIT_CreateOnGrid : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateOnGrid>
+{
+    static C_INIT_CreateOnGrid ISchemaClass<C_INIT_CreateOnGrid>.From(nint handle) => new C_INIT_CreateOnGridImpl(handle);
+    static int ISchemaClass<C_INIT_CreateOnGrid>.Size => 2688;
+    static string? ISchemaClass<C_INIT_CreateOnGrid>.ClassName => null;
 
-  static C_INIT_CreateOnGrid ISchemaClass<C_INIT_CreateOnGrid>.From(nint handle) => new C_INIT_CreateOnGridImpl(handle);
-  static int ISchemaClass<C_INIT_CreateOnGrid>.Size => 2688;
-  static string? ISchemaClass<C_INIT_CreateOnGrid>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput XCount { get; }
-  
-  public CParticleCollectionFloatInput YCount { get; }
-  
-  public CParticleCollectionFloatInput ZCount { get; }
-  
-  public CParticleCollectionFloatInput XSpacing { get; }
-  
-  public CParticleCollectionFloatInput YSpacing { get; }
-  
-  public CParticleCollectionFloatInput ZSpacing { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref bool LocalSpace { get; }
-  
-  public ref bool Center { get; }
-  
-  public ref bool Hollow { get; }
+    public CParticleCollectionFloatInput XCount { get; }
+
+    public CParticleCollectionFloatInput YCount { get; }
+
+    public CParticleCollectionFloatInput ZCount { get; }
+
+    public CParticleCollectionFloatInput XSpacing { get; }
+
+    public CParticleCollectionFloatInput YSpacing { get; }
+
+    public CParticleCollectionFloatInput ZSpacing { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref bool LocalSpace { get; }
+
+    public ref bool Center { get; }
+
+    public ref bool Hollow { get; }
 
 
 }

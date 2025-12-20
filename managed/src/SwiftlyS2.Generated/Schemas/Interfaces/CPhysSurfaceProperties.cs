@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysSurfaceProperties : ISchemaClass<CPhysSurfaceProperties> {
+public partial interface CPhysSurfaceProperties : ISchemaClass<CPhysSurfaceProperties>
+{
+    static CPhysSurfaceProperties ISchemaClass<CPhysSurfaceProperties>.From(nint handle) => new CPhysSurfacePropertiesImpl(handle);
+    static int ISchemaClass<CPhysSurfaceProperties>.Size => 200;
+    static string? ISchemaClass<CPhysSurfaceProperties>.ClassName => null;
 
-  static CPhysSurfaceProperties ISchemaClass<CPhysSurfaceProperties>.From(nint handle) => new CPhysSurfacePropertiesImpl(handle);
-  static int ISchemaClass<CPhysSurfaceProperties>.Size => 200;
-  static string? ISchemaClass<CPhysSurfaceProperties>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref uint NameHash { get; }
-  
-  public ref uint BaseNameHash { get; }
-  
-  public ref bool Hidden { get; }
-  
-  public string Description { get; set; }
-  
-  public CPhysSurfacePropertiesPhysics Physics { get; }
-  
-  public CPhysSurfacePropertiesVehicle VehicleParams { get; }
-  
-  public CPhysSurfacePropertiesSoundNames AudioSounds { get; }
-  
-  public CPhysSurfacePropertiesAudio AudioParams { get; }
+    public string Name { get; set; }
+
+    public ref uint NameHash { get; }
+
+    public ref uint BaseNameHash { get; }
+
+    public ref bool Hidden { get; }
+
+    public string Description { get; set; }
+
+    public CPhysSurfacePropertiesPhysics Physics { get; }
+
+    public CPhysSurfacePropertiesVehicle VehicleParams { get; }
+
+    public CPhysSurfacePropertiesSoundNames AudioSounds { get; }
+
+    public CPhysSurfacePropertiesAudio AudioParams { get; }
 
 
 }

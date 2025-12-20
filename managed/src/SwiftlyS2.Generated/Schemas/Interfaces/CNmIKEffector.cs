@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmIKEffector : ISchemaClass<CNmIKEffector> {
+public partial interface CNmIKEffector : ISchemaClass<CNmIKEffector>
+{
+    static CNmIKEffector ISchemaClass<CNmIKEffector>.From(nint handle) => new CNmIKEffectorImpl(handle);
+    static int ISchemaClass<CNmIKEffector>.Size => 64;
+    static string? ISchemaClass<CNmIKEffector>.ClassName => null;
 
-  static CNmIKEffector ISchemaClass<CNmIKEffector>.From(nint handle) => new CNmIKEffectorImpl(handle);
-  static int ISchemaClass<CNmIKEffector>.Size => 64;
-  static string? ISchemaClass<CNmIKEffector>.ClassName => null;
 
-  
-  public ref int BodyIndex { get; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref Vector TargetPosition { get; }
-  
-  public ref Quaternion TargetOrientation { get; }
-  
-  public ref float Weight { get; }
+    public ref int BodyIndex { get; }
+
+    public ref bool Enabled { get; }
+
+    public ref Vector TargetPosition { get; }
+
+    public ref Quaternion TargetOrientation { get; }
+
+    public ref float Weight { get; }
 
 
 }

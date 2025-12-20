@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface WaterWheelFrictionScale_t : ISchemaClass<WaterWheelFrictionScale_t> {
+public partial interface WaterWheelFrictionScale_t : ISchemaClass<WaterWheelFrictionScale_t>
+{
+    static WaterWheelFrictionScale_t ISchemaClass<WaterWheelFrictionScale_t>.From(nint handle) => new WaterWheelFrictionScale_tImpl(handle);
+    static int ISchemaClass<WaterWheelFrictionScale_t>.Size => 8;
+    static string? ISchemaClass<WaterWheelFrictionScale_t>.ClassName => null;
 
-  static WaterWheelFrictionScale_t ISchemaClass<WaterWheelFrictionScale_t>.From(nint handle) => new WaterWheelFrictionScale_tImpl(handle);
-  static int ISchemaClass<WaterWheelFrictionScale_t>.Size => 8;
-  static string? ISchemaClass<WaterWheelFrictionScale_t>.ClassName => null;
 
-  
-  public ref float FractionOfWheelSubmerged { get; }
-  
-  public ref float FrictionScale { get; }
+    public ref float FractionOfWheelSubmerged { get; }
+
+    public ref float FrictionScale { get; }
 
 
 }

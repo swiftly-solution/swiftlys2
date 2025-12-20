@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPlayerPawnComponentImpl : SchemaClass, CPlayerPawnComponent {
+internal partial class CPlayerPawnComponentImpl : SchemaClass, CPlayerPawnComponent
+{
+    public CPlayerPawnComponentImpl(nint handle) : base(handle) { }
 
-  public CPlayerPawnComponentImpl(nint handle) : base(handle) {
-  }
+    private static nint? ___m_pChainEntityOffset;
 
-  private static nint? ___m_pChainEntityOffset;
-
-  public ref CNetworkVarChainer __m_pChainEntity {
-    get {
-      if (___m_pChainEntityOffset == null) {
-        ___m_pChainEntityOffset = Schema.GetOffset(0x8B6AC9BCF63F0E7D);
-      }
-      return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+    public ref CNetworkVarChainer __m_pChainEntity {
+        get {
+            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x8B6AC9BCF63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+        }
     }
-  }
 
 
 }

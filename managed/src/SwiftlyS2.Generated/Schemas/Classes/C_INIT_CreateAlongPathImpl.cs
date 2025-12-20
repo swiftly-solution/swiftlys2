@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_CreateAlongPathImpl : CParticleFunctionInitializerImpl, C_INIT_CreateAlongPath {
+internal partial class C_INIT_CreateAlongPathImpl : CParticleFunctionInitializerImpl, C_INIT_CreateAlongPath
+{
+    public C_INIT_CreateAlongPathImpl(nint handle) : base(handle) { }
 
-  public C_INIT_CreateAlongPathImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaxDistanceOffset;
 
-  private static nint? _MaxDistanceOffset;
-
-  public ref float MaxDistance {
-    get {
-      if (_MaxDistanceOffset == null) {
-        _MaxDistanceOffset = Schema.GetOffset(0x655F7B0C844E396A);
-      }
-      return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+    public ref float MaxDistance {
+        get {
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x655F7B0C844E396A);
+            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathParamsOffset;
+    private static nint? _PathParamsOffset;
 
-  public CPathParameters PathParams {
-    get {
-      if (_PathParamsOffset == null) {
-        _PathParamsOffset = Schema.GetOffset(0x655F7B0C3C10092C);
-      }
-      return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+    public CPathParameters PathParams {
+        get {
+            _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0x655F7B0C3C10092C);
+            return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseRandomCPsOffset;
+    private static nint? _UseRandomCPsOffset;
 
-  public ref bool UseRandomCPs {
-    get {
-      if (_UseRandomCPsOffset == null) {
-        _UseRandomCPsOffset = Schema.GetOffset(0x655F7B0CA15D9A41);
-      }
-      return ref _Handle.AsRef<bool>(_UseRandomCPsOffset!.Value);
+    public ref bool UseRandomCPs {
+        get {
+            _UseRandomCPsOffset = _UseRandomCPsOffset ?? Schema.GetOffset(0x655F7B0CA15D9A41);
+            return ref _Handle.AsRef<bool>(_UseRandomCPsOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndOffsetOffset;
+    private static nint? _EndOffsetOffset;
 
-  public ref Vector EndOffset {
-    get {
-      if (_EndOffsetOffset == null) {
-        _EndOffsetOffset = Schema.GetOffset(0x655F7B0C5BBD1959);
-      }
-      return ref _Handle.AsRef<Vector>(_EndOffsetOffset!.Value);
+    public ref Vector EndOffset {
+        get {
+            _EndOffsetOffset = _EndOffsetOffset ?? Schema.GetOffset(0x655F7B0C5BBD1959);
+            return ref _Handle.AsRef<Vector>(_EndOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _SaveOffsetOffset;
+    private static nint? _SaveOffsetOffset;
 
-  public ref bool SaveOffset {
-    get {
-      if (_SaveOffsetOffset == null) {
-        _SaveOffsetOffset = Schema.GetOffset(0x655F7B0C43F64E5B);
-      }
-      return ref _Handle.AsRef<bool>(_SaveOffsetOffset!.Value);
+    public ref bool SaveOffset {
+        get {
+            _SaveOffsetOffset = _SaveOffsetOffset ?? Schema.GetOffset(0x655F7B0C43F64E5B);
+            return ref _Handle.AsRef<bool>(_SaveOffsetOffset!.Value);
+        }
     }
-  }
 
 
 }

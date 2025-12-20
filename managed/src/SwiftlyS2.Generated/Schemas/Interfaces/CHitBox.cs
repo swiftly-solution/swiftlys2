@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHitBox : ISchemaClass<CHitBox> {
+public partial interface CHitBox : ISchemaClass<CHitBox>
+{
+    static CHitBox ISchemaClass<CHitBox>.From(nint handle) => new CHitBoxImpl(handle);
+    static int ISchemaClass<CHitBox>.Size => 112;
+    static string? ISchemaClass<CHitBox>.ClassName => null;
 
-  static CHitBox ISchemaClass<CHitBox>.From(nint handle) => new CHitBoxImpl(handle);
-  static int ISchemaClass<CHitBox>.Size => 112;
-  static string? ISchemaClass<CHitBox>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public string SurfaceProperty { get; set; }
-  
-  public string BoneName { get; set; }
-  
-  public ref Vector MinBounds { get; }
-  
-  public ref Vector MaxBounds { get; }
-  
-  public ref float ShapeRadius { get; }
-  
-  public ref uint BoneNameHash { get; }
-  
-  public ref int GroupId { get; }
-  
-  public ref byte ShapeType { get; }
-  
-  public ref bool TranslationOnly { get; }
-  
-  public ref uint CRC { get; }
-  
-  public ref Color CRenderColor { get; }
-  
-  public ref ushort HitBoxIndex { get; }
+    public string Name { get; set; }
+
+    public string SurfaceProperty { get; set; }
+
+    public string BoneName { get; set; }
+
+    public ref Vector MinBounds { get; }
+
+    public ref Vector MaxBounds { get; }
+
+    public ref float ShapeRadius { get; }
+
+    public ref uint BoneNameHash { get; }
+
+    public ref int GroupId { get; }
+
+    public ref byte ShapeType { get; }
+
+    public ref bool TranslationOnly { get; }
+
+    public ref uint CRC { get; }
+
+    public ref Color CRenderColor { get; }
+
+    public ref ushort HitBoxIndex { get; }
 
 
 }

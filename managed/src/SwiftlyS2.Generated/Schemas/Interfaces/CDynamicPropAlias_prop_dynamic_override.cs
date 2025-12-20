@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDynamicPropAlias_prop_dynamic_override : CDynamicProp, ISchemaClass<CDynamicPropAlias_prop_dynamic_override> {
-
-  static CDynamicPropAlias_prop_dynamic_override ISchemaClass<CDynamicPropAlias_prop_dynamic_override>.From(nint handle) => new CDynamicPropAlias_prop_dynamic_overrideImpl(handle);
-  static int ISchemaClass<CDynamicPropAlias_prop_dynamic_override>.Size => 3408;
-  static string? ISchemaClass<CDynamicPropAlias_prop_dynamic_override>.ClassName => null;
+public partial interface CDynamicPropAlias_prop_dynamic_override : CDynamicProp, ISchemaClass<CDynamicPropAlias_prop_dynamic_override>
+{
+    static CDynamicPropAlias_prop_dynamic_override ISchemaClass<CDynamicPropAlias_prop_dynamic_override>.From(nint handle) => new CDynamicPropAlias_prop_dynamic_overrideImpl(handle);
+    static int ISchemaClass<CDynamicPropAlias_prop_dynamic_override>.Size => 3408;
+    static string? ISchemaClass<CDynamicPropAlias_prop_dynamic_override>.ClassName => null;
 
 
 

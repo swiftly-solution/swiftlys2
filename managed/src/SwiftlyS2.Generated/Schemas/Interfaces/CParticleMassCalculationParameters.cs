@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleMassCalculationParameters : ISchemaClass<CParticleMassCalculationParameters> {
+public partial interface CParticleMassCalculationParameters : ISchemaClass<CParticleMassCalculationParameters>
+{
+    static CParticleMassCalculationParameters ISchemaClass<CParticleMassCalculationParameters>.From(nint handle) => new CParticleMassCalculationParametersImpl(handle);
+    static int ISchemaClass<CParticleMassCalculationParameters>.Size => 1112;
+    static string? ISchemaClass<CParticleMassCalculationParameters>.ClassName => null;
 
-  static CParticleMassCalculationParameters ISchemaClass<CParticleMassCalculationParameters>.From(nint handle) => new CParticleMassCalculationParametersImpl(handle);
-  static int ISchemaClass<CParticleMassCalculationParameters>.Size => 1112;
-  static string? ISchemaClass<CParticleMassCalculationParameters>.ClassName => null;
 
-  
-  public ref ParticleMassMode_t MassMode { get; }
-  
-  public CPerParticleFloatInput Radius { get; }
-  
-  public CPerParticleFloatInput NominalRadius { get; }
-  
-  public CPerParticleFloatInput Scale { get; }
+    public ref ParticleMassMode_t MassMode { get; }
+
+    public CPerParticleFloatInput Radius { get; }
+
+    public CPerParticleFloatInput NominalRadius { get; }
+
+    public CPerParticleFloatInput Scale { get; }
 
 
 }

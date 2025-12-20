@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CConstantForceController : ISchemaClass<CConstantForceController> {
+public partial interface CConstantForceController : ISchemaClass<CConstantForceController>
+{
+    static CConstantForceController ISchemaClass<CConstantForceController>.From(nint handle) => new CConstantForceControllerImpl(handle);
+    static int ISchemaClass<CConstantForceController>.Size => 64;
+    static string? ISchemaClass<CConstantForceController>.ClassName => null;
 
-  static CConstantForceController ISchemaClass<CConstantForceController>.From(nint handle) => new CConstantForceControllerImpl(handle);
-  static int ISchemaClass<CConstantForceController>.Size => 64;
-  static string? ISchemaClass<CConstantForceController>.ClassName => null;
 
-  
-  public ref Vector Linear { get; }
-  
-  // RotationVector
-  public SchemaUntypedField Angular { get; }
-  
-  public ref Vector LinearSave { get; }
-  
-  // RotationVector
-  public SchemaUntypedField AngularSave { get; }
+    public ref Vector Linear { get; }
+
+    // RotationVector
+    public SchemaUntypedField Angular { get; }
+
+    public ref Vector LinearSave { get; }
+
+    // RotationVector
+    public SchemaUntypedField AngularSave { get; }
 
 
 }

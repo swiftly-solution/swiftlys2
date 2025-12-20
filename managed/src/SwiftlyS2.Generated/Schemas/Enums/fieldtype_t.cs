@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum fieldtype_t : byte {
-
+public enum fieldtype_t : byte
+{
  FIELD_VOID = 0,
 
  FIELD_FLOAT32 = 1,

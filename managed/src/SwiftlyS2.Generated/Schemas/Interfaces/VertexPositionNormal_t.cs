@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VertexPositionNormal_t : ISchemaClass<VertexPositionNormal_t> {
+public partial interface VertexPositionNormal_t : ISchemaClass<VertexPositionNormal_t>
+{
+    static VertexPositionNormal_t ISchemaClass<VertexPositionNormal_t>.From(nint handle) => new VertexPositionNormal_tImpl(handle);
+    static int ISchemaClass<VertexPositionNormal_t>.Size => 24;
+    static string? ISchemaClass<VertexPositionNormal_t>.ClassName => null;
 
-  static VertexPositionNormal_t ISchemaClass<VertexPositionNormal_t>.From(nint handle) => new VertexPositionNormal_tImpl(handle);
-  static int ISchemaClass<VertexPositionNormal_t>.Size => 24;
-  static string? ISchemaClass<VertexPositionNormal_t>.ClassName => null;
 
-  
-  public ref Vector Position { get; }
-  
-  public ref Vector Normal { get; }
+    public ref Vector Position { get; }
+
+    public ref Vector Normal { get; }
 
 
 }

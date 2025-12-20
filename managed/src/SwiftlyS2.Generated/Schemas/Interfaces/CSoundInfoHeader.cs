@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundInfoHeader : ISchemaClass<CSoundInfoHeader> {
-
-  static CSoundInfoHeader ISchemaClass<CSoundInfoHeader>.From(nint handle) => new CSoundInfoHeaderImpl(handle);
-  static int ISchemaClass<CSoundInfoHeader>.Size => 1;
-  static string? ISchemaClass<CSoundInfoHeader>.ClassName => null;
+public partial interface CSoundInfoHeader : ISchemaClass<CSoundInfoHeader>
+{
+    static CSoundInfoHeader ISchemaClass<CSoundInfoHeader>.From(nint handle) => new CSoundInfoHeaderImpl(handle);
+    static int ISchemaClass<CSoundInfoHeader>.Size => 1;
+    static string? ISchemaClass<CSoundInfoHeader>.ClassName => null;
 
 
 

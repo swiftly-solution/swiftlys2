@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysicsEntitySolverImpl : CLogicalEntityImpl, CPhysicsEntitySolver {
+internal partial class CPhysicsEntitySolverImpl : CLogicalEntityImpl, CPhysicsEntitySolver
+{
+    public CPhysicsEntitySolverImpl(nint handle) : base(handle) { }
 
-  public CPhysicsEntitySolverImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MovingEntityOffset;
 
-  private static nint? _MovingEntityOffset;
-
-  public ref CHandle<CBaseEntity> MovingEntity {
-    get {
-      if (_MovingEntityOffset == null) {
-        _MovingEntityOffset = Schema.GetOffset(0x2948C36FC1DA080E);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MovingEntityOffset!.Value);
+    public ref CHandle<CBaseEntity> MovingEntity {
+        get {
+            _MovingEntityOffset = _MovingEntityOffset ?? Schema.GetOffset(0x2948C36FC1DA080E);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MovingEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _PhysicsBlockerOffset;
+    private static nint? _PhysicsBlockerOffset;
 
-  public ref CHandle<CBaseEntity> PhysicsBlocker {
-    get {
-      if (_PhysicsBlockerOffset == null) {
-        _PhysicsBlockerOffset = Schema.GetOffset(0x2948C36F3DD8AB5E);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PhysicsBlockerOffset!.Value);
+    public ref CHandle<CBaseEntity> PhysicsBlocker {
+        get {
+            _PhysicsBlockerOffset = _PhysicsBlockerOffset ?? Schema.GetOffset(0x2948C36F3DD8AB5E);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PhysicsBlockerOffset!.Value);
+        }
     }
-  }
-  private static nint? _SeparationDurationOffset;
+    private static nint? _SeparationDurationOffset;
 
-  public ref float SeparationDuration {
-    get {
-      if (_SeparationDurationOffset == null) {
-        _SeparationDurationOffset = Schema.GetOffset(0x2948C36F202FE0BD);
-      }
-      return ref _Handle.AsRef<float>(_SeparationDurationOffset!.Value);
+    public ref float SeparationDuration {
+        get {
+            _SeparationDurationOffset = _SeparationDurationOffset ?? Schema.GetOffset(0x2948C36F202FE0BD);
+            return ref _Handle.AsRef<float>(_SeparationDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _CancelTimeOffset;
+    private static nint? _CancelTimeOffset;
 
-  public GameTime_t CancelTime {
-    get {
-      if (_CancelTimeOffset == null) {
-        _CancelTimeOffset = Schema.GetOffset(0x2948C36F12944512);
-      }
-      return new GameTime_tImpl(_Handle + _CancelTimeOffset!.Value);
+    public GameTime_t CancelTime {
+        get {
+            _CancelTimeOffset = _CancelTimeOffset ?? Schema.GetOffset(0x2948C36F12944512);
+            return new GameTime_tImpl(_Handle + _CancelTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

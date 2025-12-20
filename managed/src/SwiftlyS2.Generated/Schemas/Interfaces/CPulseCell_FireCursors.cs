@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_FireCursors : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_FireCursors> {
+public partial interface CPulseCell_FireCursors : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_FireCursors>
+{
+    static CPulseCell_FireCursors ISchemaClass<CPulseCell_FireCursors>.From(nint handle) => new CPulseCell_FireCursorsImpl(handle);
+    static int ISchemaClass<CPulseCell_FireCursors>.Size => 248;
+    static string? ISchemaClass<CPulseCell_FireCursors>.ClassName => null;
 
-  static CPulseCell_FireCursors ISchemaClass<CPulseCell_FireCursors>.From(nint handle) => new CPulseCell_FireCursorsImpl(handle);
-  static int ISchemaClass<CPulseCell_FireCursors>.Size => 248;
-  static string? ISchemaClass<CPulseCell_FireCursors>.ClassName => null;
 
-  
-  public ref CUtlVector<CPulse_OutflowConnection> Outflows { get; }
-  
-  public ref bool WaitForChildOutflows { get; }
-  
-  public CPulse_ResumePoint OnFinished { get; }
-  
-  public CPulse_ResumePoint OnCanceled { get; }
+    public ref CUtlVector<CPulse_OutflowConnection> Outflows { get; }
+
+    public ref bool WaitForChildOutflows { get; }
+
+    public CPulse_ResumePoint OnFinished { get; }
+
+    public CPulse_ResumePoint OnCanceled { get; }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDebugHistory : CBaseEntity, ISchemaClass<CDebugHistory> {
+public partial interface CDebugHistory : CBaseEntity, ISchemaClass<CDebugHistory>
+{
+    static CDebugHistory ISchemaClass<CDebugHistory>.From(nint handle) => new CDebugHistoryImpl(handle);
+    static int ISchemaClass<CDebugHistory>.Size => 4101336;
+    static string? ISchemaClass<CDebugHistory>.ClassName => "env_debughistory";
 
-  static CDebugHistory ISchemaClass<CDebugHistory>.From(nint handle) => new CDebugHistoryImpl(handle);
-  static int ISchemaClass<CDebugHistory>.Size => 4101336;
-  static string? ISchemaClass<CDebugHistory>.ClassName => "env_debughistory";
 
-  
-  public ref int NpcEvents { get; }
+    public ref int NpcEvents { get; }
 
 
 }

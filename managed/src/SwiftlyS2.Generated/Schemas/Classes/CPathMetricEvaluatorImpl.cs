@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPathMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CPathMetricEvaluator {
+internal partial class CPathMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CPathMetricEvaluator
+{
+    public CPathMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-  public CPathMetricEvaluatorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PathTimeSamplesOffset;
 
-  private static nint? _PathTimeSamplesOffset;
-
-  public ref CUtlVector<float> PathTimeSamples {
-    get {
-      if (_PathTimeSamplesOffset == null) {
-        _PathTimeSamplesOffset = Schema.GetOffset(0x6BF20F3A94DC552A);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_PathTimeSamplesOffset!.Value);
+    public ref CUtlVector<float> PathTimeSamples {
+        get {
+            _PathTimeSamplesOffset = _PathTimeSamplesOffset ?? Schema.GetOffset(0x6BF20F3A94DC552A);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathTimeSamplesOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceOffset;
+    private static nint? _DistanceOffset;
 
-  public ref float Distance {
-    get {
-      if (_DistanceOffset == null) {
-        _DistanceOffset = Schema.GetOffset(0x6BF20F3A00DC4A68);
-      }
-      return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+    public ref float Distance {
+        get {
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x6BF20F3A00DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExtrapolateMovementOffset;
+    private static nint? _ExtrapolateMovementOffset;
 
-  public ref bool ExtrapolateMovement {
-    get {
-      if (_ExtrapolateMovementOffset == null) {
-        _ExtrapolateMovementOffset = Schema.GetOffset(0x6BF20F3ACBEE3025);
-      }
-      return ref _Handle.AsRef<bool>(_ExtrapolateMovementOffset!.Value);
+    public ref bool ExtrapolateMovement {
+        get {
+            _ExtrapolateMovementOffset = _ExtrapolateMovementOffset ?? Schema.GetOffset(0x6BF20F3ACBEE3025);
+            return ref _Handle.AsRef<bool>(_ExtrapolateMovementOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinExtrapolationSpeedOffset;
+    private static nint? _MinExtrapolationSpeedOffset;
 
-  public ref float MinExtrapolationSpeed {
-    get {
-      if (_MinExtrapolationSpeedOffset == null) {
-        _MinExtrapolationSpeedOffset = Schema.GetOffset(0x6BF20F3A9F6FB95C);
-      }
-      return ref _Handle.AsRef<float>(_MinExtrapolationSpeedOffset!.Value);
+    public ref float MinExtrapolationSpeed {
+        get {
+            _MinExtrapolationSpeedOffset = _MinExtrapolationSpeedOffset ?? Schema.GetOffset(0x6BF20F3A9F6FB95C);
+            return ref _Handle.AsRef<float>(_MinExtrapolationSpeedOffset!.Value);
+        }
     }
-  }
 
 
 }

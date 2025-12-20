@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetRandomControlPointPositionImpl : CParticleFunctionPreEmissionImpl, C_OP_SetRandomControlPointPosition {
+internal partial class C_OP_SetRandomControlPointPositionImpl : CParticleFunctionPreEmissionImpl, C_OP_SetRandomControlPointPosition
+{
+    public C_OP_SetRandomControlPointPositionImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetRandomControlPointPositionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _UseWorldLocationOffset;
 
-  private static nint? _UseWorldLocationOffset;
-
-  public ref bool UseWorldLocation {
-    get {
-      if (_UseWorldLocationOffset == null) {
-        _UseWorldLocationOffset = Schema.GetOffset(0x4E797BEAF371AED7);
-      }
-      return ref _Handle.AsRef<bool>(_UseWorldLocationOffset!.Value);
+    public ref bool UseWorldLocation {
+        get {
+            _UseWorldLocationOffset = _UseWorldLocationOffset ?? Schema.GetOffset(0x4E797BEAF371AED7);
+            return ref _Handle.AsRef<bool>(_UseWorldLocationOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientOffset;
+    private static nint? _OrientOffset;
 
-  public ref bool Orient {
-    get {
-      if (_OrientOffset == null) {
-        _OrientOffset = Schema.GetOffset(0x4E797BEA7CD61854);
-      }
-      return ref _Handle.AsRef<bool>(_OrientOffset!.Value);
+    public ref bool Orient {
+        get {
+            _OrientOffset = _OrientOffset ?? Schema.GetOffset(0x4E797BEA7CD61854);
+            return ref _Handle.AsRef<bool>(_OrientOffset!.Value);
+        }
     }
-  }
-  private static nint? _CP1Offset;
+    private static nint? _CP1Offset;
 
-  public ref int CP1 {
-    get {
-      if (_CP1Offset == null) {
-        _CP1Offset = Schema.GetOffset(0x4E797BEAD4B1E579);
-      }
-      return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+    public ref int CP1 {
+        get {
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0x4E797BEAD4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+        }
     }
-  }
-  private static nint? _HeadLocationOffset;
+    private static nint? _HeadLocationOffset;
 
-  public ref int HeadLocation {
-    get {
-      if (_HeadLocationOffset == null) {
-        _HeadLocationOffset = Schema.GetOffset(0x4E797BEAA8ECDA78);
-      }
-      return ref _Handle.AsRef<int>(_HeadLocationOffset!.Value);
+    public ref int HeadLocation {
+        get {
+            _HeadLocationOffset = _HeadLocationOffset ?? Schema.GetOffset(0x4E797BEAA8ECDA78);
+            return ref _Handle.AsRef<int>(_HeadLocationOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReRandomRateOffset;
+    private static nint? _ReRandomRateOffset;
 
-  public CParticleCollectionFloatInput ReRandomRate {
-    get {
-      if (_ReRandomRateOffset == null) {
-        _ReRandomRateOffset = Schema.GetOffset(0x4E797BEA98F44A13);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ReRandomRateOffset!.Value);
+    public CParticleCollectionFloatInput ReRandomRate {
+        get {
+            _ReRandomRateOffset = _ReRandomRateOffset ?? Schema.GetOffset(0x4E797BEA98F44A13);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ReRandomRateOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPMinPosOffset;
+    private static nint? _CPMinPosOffset;
 
-  public ref Vector CPMinPos {
-    get {
-      if (_CPMinPosOffset == null) {
-        _CPMinPosOffset = Schema.GetOffset(0x4E797BEA4E9C9B68);
-      }
-      return ref _Handle.AsRef<Vector>(_CPMinPosOffset!.Value);
+    public ref Vector CPMinPos {
+        get {
+            _CPMinPosOffset = _CPMinPosOffset ?? Schema.GetOffset(0x4E797BEA4E9C9B68);
+            return ref _Handle.AsRef<Vector>(_CPMinPosOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPMaxPosOffset;
+    private static nint? _CPMaxPosOffset;
 
-  public ref Vector CPMaxPos {
-    get {
-      if (_CPMaxPosOffset == null) {
-        _CPMaxPosOffset = Schema.GetOffset(0x4E797BEA4FFBFD72);
-      }
-      return ref _Handle.AsRef<Vector>(_CPMaxPosOffset!.Value);
+    public ref Vector CPMaxPos {
+        get {
+            _CPMaxPosOffset = _CPMaxPosOffset ?? Schema.GetOffset(0x4E797BEA4FFBFD72);
+            return ref _Handle.AsRef<Vector>(_CPMaxPosOffset!.Value);
+        }
     }
-  }
-  private static nint? _InterpolationOffset;
+    private static nint? _InterpolationOffset;
 
-  public CParticleCollectionFloatInput Interpolation {
-    get {
-      if (_InterpolationOffset == null) {
-        _InterpolationOffset = Schema.GetOffset(0x4E797BEACF55B987);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    public CParticleCollectionFloatInput Interpolation {
+        get {
+            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x4E797BEACF55B987);
+            return new CParticleCollectionFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+        }
     }
-  }
 
 
 }

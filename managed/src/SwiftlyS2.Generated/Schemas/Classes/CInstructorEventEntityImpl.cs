@@ -6,61 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInstructorEventEntityImpl : CPointEntityImpl, CInstructorEventEntity {
+internal partial class CInstructorEventEntityImpl : CPointEntityImpl, CInstructorEventEntity
+{
+    public CInstructorEventEntityImpl(nint handle) : base(handle) { }
 
-  public CInstructorEventEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x6DE6628874FF65FE);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x6DE6628874FF65FE);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _HintTargetEntityOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x6DE6628874FF65FE);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x6DE6628874FF65FE);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _HintTargetEntityOffset;
+    public string HintTargetEntity {
+        get {
+            _HintTargetEntityOffset = _HintTargetEntityOffset ?? Schema.GetOffset(0x6DE662880024C1BE);
+            return Schema.GetString(_Handle.Read<nint>(_HintTargetEntityOffset!.Value));
+        }
+        set {
+            _HintTargetEntityOffset = _HintTargetEntityOffset ?? Schema.GetOffset(0x6DE662880024C1BE);
+            Schema.SetString(_Handle, _HintTargetEntityOffset!.Value, value);
+        }
+    } 
+    private static nint? _TargetPlayerOffset;
 
-  public string HintTargetEntity {
-    get {
-      if (_HintTargetEntityOffset == null) {
-        _HintTargetEntityOffset = Schema.GetOffset(0x6DE662880024C1BE);
-      }
-      var ptr = _Handle.Read<nint>(_HintTargetEntityOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CHandle<CBasePlayerPawn> TargetPlayer {
+        get {
+            _TargetPlayerOffset = _TargetPlayerOffset ?? Schema.GetOffset(0x6DE66288BA425153);
+            return ref _Handle.AsRef<CHandle<CBasePlayerPawn>>(_TargetPlayerOffset!.Value);
+        }
     }
-    set {
-      if (_HintTargetEntityOffset == null) {
-        _HintTargetEntityOffset = Schema.GetOffset(0x6DE662880024C1BE);
-      }
-      Schema.SetString(_Handle, _HintTargetEntityOffset!.Value, value);
-    }
-  } 
-  private static nint? _TargetPlayerOffset;
-
-  public ref CHandle<CBasePlayerPawn> TargetPlayer {
-    get {
-      if (_TargetPlayerOffset == null) {
-        _TargetPlayerOffset = Schema.GetOffset(0x6DE66288BA425153);
-      }
-      return ref _Handle.AsRef<CHandle<CBasePlayerPawn>>(_TargetPlayerOffset!.Value);
-    }
-  }
 
 
 }

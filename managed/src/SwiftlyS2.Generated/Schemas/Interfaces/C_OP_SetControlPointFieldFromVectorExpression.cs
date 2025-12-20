@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointFieldFromVectorExpression : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression> {
+public partial interface C_OP_SetControlPointFieldFromVectorExpression : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression>
+{
+    static C_OP_SetControlPointFieldFromVectorExpression ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression>.From(nint handle) => new C_OP_SetControlPointFieldFromVectorExpressionImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression>.Size => 4664;
+    static string? ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression>.ClassName => null;
 
-  static C_OP_SetControlPointFieldFromVectorExpression ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression>.From(nint handle) => new C_OP_SetControlPointFieldFromVectorExpressionImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression>.Size => 4664;
-  static string? ISchemaClass<C_OP_SetControlPointFieldFromVectorExpression>.ClassName => null;
 
-  
-  public ref VectorFloatExpressionType_t Expression { get; }
-  
-  public CParticleCollectionVecInput Input1 { get; }
-  
-  public CParticleCollectionVecInput Input2 { get; }
-  
-  public CPerParticleFloatInput Lerp { get; }
-  
-  public CParticleRemapFloatInput OutputRemap { get; }
-  
-  public ref int OutputCP { get; }
-  
-  public ref int OutVectorField { get; }
+    public ref VectorFloatExpressionType_t Expression { get; }
+
+    public CParticleCollectionVecInput Input1 { get; }
+
+    public CParticleCollectionVecInput Input2 { get; }
+
+    public CPerParticleFloatInput Lerp { get; }
+
+    public CParticleRemapFloatInput OutputRemap { get; }
+
+    public ref int OutputCP { get; }
+
+    public ref int OutVectorField { get; }
 
 
 }

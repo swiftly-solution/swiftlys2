@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class hudtextparms_tImpl : SchemaClass, hudtextparms_t {
+internal partial class hudtextparms_tImpl : SchemaClass, hudtextparms_t
+{
+    public hudtextparms_tImpl(nint handle) : base(handle) { }
 
-  public hudtextparms_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Color1Offset;
 
-  private static nint? _Color1Offset;
-
-  public ref Color Color1 {
-    get {
-      if (_Color1Offset == null) {
-        _Color1Offset = Schema.GetOffset(0x827B8DBF36F4EB4B);
-      }
-      return ref _Handle.AsRef<Color>(_Color1Offset!.Value);
+    public ref Color Color1 {
+        get {
+            _Color1Offset = _Color1Offset ?? Schema.GetOffset(0x827B8DBF36F4EB4B);
+            return ref _Handle.AsRef<Color>(_Color1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Color2Offset;
+    private static nint? _Color2Offset;
 
-  public ref Color Color2 {
-    get {
-      if (_Color2Offset == null) {
-        _Color2Offset = Schema.GetOffset(0x827B8DBF37F4ECDE);
-      }
-      return ref _Handle.AsRef<Color>(_Color2Offset!.Value);
+    public ref Color Color2 {
+        get {
+            _Color2Offset = _Color2Offset ?? Schema.GetOffset(0x827B8DBF37F4ECDE);
+            return ref _Handle.AsRef<Color>(_Color2Offset!.Value);
+        }
     }
-  }
-  private static nint? _EffectOffset;
+    private static nint? _EffectOffset;
 
-  public ref byte Effect {
-    get {
-      if (_EffectOffset == null) {
-        _EffectOffset = Schema.GetOffset(0x827B8DBF6E6E8D54);
-      }
-      return ref _Handle.AsRef<byte>(_EffectOffset!.Value);
+    public ref byte Effect {
+        get {
+            _EffectOffset = _EffectOffset ?? Schema.GetOffset(0x827B8DBF6E6E8D54);
+            return ref _Handle.AsRef<byte>(_EffectOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChannelOffset;
+    private static nint? _ChannelOffset;
 
-  public ref byte Channel {
-    get {
-      if (_ChannelOffset == null) {
-        _ChannelOffset = Schema.GetOffset(0x827B8DBF21C252A4);
-      }
-      return ref _Handle.AsRef<byte>(_ChannelOffset!.Value);
+    public ref byte Channel {
+        get {
+            _ChannelOffset = _ChannelOffset ?? Schema.GetOffset(0x827B8DBF21C252A4);
+            return ref _Handle.AsRef<byte>(_ChannelOffset!.Value);
+        }
     }
-  }
-  private static nint? _XOffset;
+    private static nint? _XOffset;
 
-  public ref float X {
-    get {
-      if (_XOffset == null) {
-        _XOffset = Schema.GetOffset(0x827B8DBFFD0C5087);
-      }
-      return ref _Handle.AsRef<float>(_XOffset!.Value);
+    public ref float X {
+        get {
+            _XOffset = _XOffset ?? Schema.GetOffset(0x827B8DBFFD0C5087);
+            return ref _Handle.AsRef<float>(_XOffset!.Value);
+        }
     }
-  }
-  private static nint? _YOffset;
+    private static nint? _YOffset;
 
-  public ref float Y {
-    get {
-      if (_YOffset == null) {
-        _YOffset = Schema.GetOffset(0x827B8DBFFC0C4EF4);
-      }
-      return ref _Handle.AsRef<float>(_YOffset!.Value);
+    public ref float Y {
+        get {
+            _YOffset = _YOffset ?? Schema.GetOffset(0x827B8DBFFC0C4EF4);
+            return ref _Handle.AsRef<float>(_YOffset!.Value);
+        }
     }
-  }
 
 
 }

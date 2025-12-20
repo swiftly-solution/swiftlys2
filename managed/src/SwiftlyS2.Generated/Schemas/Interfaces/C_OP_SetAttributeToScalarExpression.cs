@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetAttributeToScalarExpression : CParticleFunctionOperator, ISchemaClass<C_OP_SetAttributeToScalarExpression> {
+public partial interface C_OP_SetAttributeToScalarExpression : CParticleFunctionOperator, ISchemaClass<C_OP_SetAttributeToScalarExpression>
+{
+    static C_OP_SetAttributeToScalarExpression ISchemaClass<C_OP_SetAttributeToScalarExpression>.From(nint handle) => new C_OP_SetAttributeToScalarExpressionImpl(handle);
+    static int ISchemaClass<C_OP_SetAttributeToScalarExpression>.Size => 1616;
+    static string? ISchemaClass<C_OP_SetAttributeToScalarExpression>.ClassName => null;
 
-  static C_OP_SetAttributeToScalarExpression ISchemaClass<C_OP_SetAttributeToScalarExpression>.From(nint handle) => new C_OP_SetAttributeToScalarExpressionImpl(handle);
-  static int ISchemaClass<C_OP_SetAttributeToScalarExpression>.Size => 1616;
-  static string? ISchemaClass<C_OP_SetAttributeToScalarExpression>.ClassName => null;
 
-  
-  public ref ScalarExpressionType_t Expression { get; }
-  
-  public CPerParticleFloatInput Input1 { get; }
-  
-  public CPerParticleFloatInput Input2 { get; }
-  
-  public CParticleRemapFloatInput OutputRemap { get; }
-  
-  public ParticleAttributeIndex_t OutputField { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
+    public ref ScalarExpressionType_t Expression { get; }
+
+    public CPerParticleFloatInput Input1 { get; }
+
+    public CPerParticleFloatInput Input2 { get; }
+
+    public CParticleRemapFloatInput OutputRemap { get; }
+
+    public ParticleAttributeIndex_t OutputField { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
 
 
 }

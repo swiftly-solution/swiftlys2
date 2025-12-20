@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleFunctionRenderer : CParticleFunction, ISchemaClass<CParticleFunctionRenderer> {
+public partial interface CParticleFunctionRenderer : CParticleFunction, ISchemaClass<CParticleFunctionRenderer>
+{
+    static CParticleFunctionRenderer ISchemaClass<CParticleFunctionRenderer>.From(nint handle) => new CParticleFunctionRendererImpl(handle);
+    static int ISchemaClass<CParticleFunctionRenderer>.Size => 544;
+    static string? ISchemaClass<CParticleFunctionRenderer>.ClassName => null;
 
-  static CParticleFunctionRenderer ISchemaClass<CParticleFunctionRenderer>.From(nint handle) => new CParticleFunctionRendererImpl(handle);
-  static int ISchemaClass<CParticleFunctionRenderer>.Size => 544;
-  static string? ISchemaClass<CParticleFunctionRenderer>.ClassName => null;
 
-  
-  public CParticleVisibilityInputs VisibilityInputs { get; }
-  
-  public ref bool CannotBeRefracted { get; }
-  
-  public ref bool SkipRenderingOnMobile { get; }
+    public CParticleVisibilityInputs VisibilityInputs { get; }
+
+    public ref bool CannotBeRefracted { get; }
+
+    public ref bool SkipRenderingOnMobile { get; }
 
 
 }

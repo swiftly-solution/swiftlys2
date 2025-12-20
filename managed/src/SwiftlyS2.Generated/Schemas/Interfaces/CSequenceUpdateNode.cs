@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSequenceUpdateNode : CSequenceUpdateNodeBase, ISchemaClass<CSequenceUpdateNode> {
+public partial interface CSequenceUpdateNode : CSequenceUpdateNodeBase, ISchemaClass<CSequenceUpdateNode>
+{
+    static CSequenceUpdateNode ISchemaClass<CSequenceUpdateNode>.From(nint handle) => new CSequenceUpdateNodeImpl(handle);
+    static int ISchemaClass<CSequenceUpdateNode>.Size => 176;
+    static string? ISchemaClass<CSequenceUpdateNode>.ClassName => null;
 
-  static CSequenceUpdateNode ISchemaClass<CSequenceUpdateNode>.From(nint handle) => new CSequenceUpdateNodeImpl(handle);
-  static int ISchemaClass<CSequenceUpdateNode>.Size => 176;
-  static string? ISchemaClass<CSequenceUpdateNode>.ClassName => null;
 
-  
-  public HSequence Sequence { get; }
-  
-  public ref float Duration { get; }
-  
-  public CParamSpanUpdater ParamSpans { get; }
-  
-  public ref CUtlVector<TagSpan_t> Tags { get; }
+    public HSequence Sequence { get; }
+
+    public ref float Duration { get; }
+
+    public CParamSpanUpdater ParamSpans { get; }
+
+    public ref CUtlVector<TagSpan_t> Tags { get; }
 
 
 }

@@ -8,85 +8,85 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointCamera : CBaseEntity, ISchemaClass<CPointCamera> {
+public partial interface CPointCamera : CBaseEntity, ISchemaClass<CPointCamera>
+{
+    static CPointCamera ISchemaClass<CPointCamera>.From(nint handle) => new CPointCameraImpl(handle);
+    static int ISchemaClass<CPointCamera>.Size => 1360;
+    static string? ISchemaClass<CPointCamera>.ClassName => "point_camera";
 
-  static CPointCamera ISchemaClass<CPointCamera>.From(nint handle) => new CPointCameraImpl(handle);
-  static int ISchemaClass<CPointCamera>.Size => 1360;
-  static string? ISchemaClass<CPointCamera>.ClassName => "point_camera";
 
-  
-  public ref float FOV { get; }
-  
-  public ref float Resolution { get; }
-  
-  public ref bool FogEnable { get; }
-  
-  public ref Color FogColor { get; }
-  
-  public ref float FogStart { get; }
-  
-  public ref float FogEnd { get; }
-  
-  public ref float FogMaxDensity { get; }
-  
-  public ref bool Active { get; }
-  
-  public ref bool UseScreenAspectRatio { get; }
-  
-  public ref float AspectRatio { get; }
-  
-  public ref bool NoSky { get; }
-  
-  public ref float Brightness { get; }
-  
-  public ref float ZFar { get; }
-  
-  public ref float ZNear { get; }
-  
-  public ref bool CanHLTVUse { get; }
-  
-  public ref bool AlignWithParent { get; }
-  
-  public ref bool DofEnabled { get; }
-  
-  public ref float DofNearBlurry { get; }
-  
-  public ref float DofNearCrisp { get; }
-  
-  public ref float DofFarCrisp { get; }
-  
-  public ref float DofFarBlurry { get; }
-  
-  public ref float DofTiltToGround { get; }
-  
-  public ref float TargetFOV { get; }
-  
-  public ref float DegreesPerSecond { get; }
-  
-  public ref bool IsOn { get; }
-  
-  public CPointCamera? Next { get; }
+    public ref float FOV { get; }
 
-  public void FOVUpdated();
-  public void ResolutionUpdated();
-  public void FogEnableUpdated();
-  public void FogColorUpdated();
-  public void FogStartUpdated();
-  public void FogEndUpdated();
-  public void FogMaxDensityUpdated();
-  public void ActiveUpdated();
-  public void UseScreenAspectRatioUpdated();
-  public void AspectRatioUpdated();
-  public void NoSkyUpdated();
-  public void BrightnessUpdated();
-  public void ZFarUpdated();
-  public void ZNearUpdated();
-  public void CanHLTVUseUpdated();
-  public void AlignWithParentUpdated();
-  public void DofEnabledUpdated();
-  public void DofNearBlurryUpdated();
-  public void DofNearCrispUpdated();
-  public void DofFarCrispUpdated();
-  public void DofFarBlurryUpdated();
-  public void DofTiltToGroundUpdated();
+    public ref float Resolution { get; }
+
+    public ref bool FogEnable { get; }
+
+    public ref Color FogColor { get; }
+
+    public ref float FogStart { get; }
+
+    public ref float FogEnd { get; }
+
+    public ref float FogMaxDensity { get; }
+
+    public ref bool Active { get; }
+
+    public ref bool UseScreenAspectRatio { get; }
+
+    public ref float AspectRatio { get; }
+
+    public ref bool NoSky { get; }
+
+    public ref float Brightness { get; }
+
+    public ref float ZFar { get; }
+
+    public ref float ZNear { get; }
+
+    public ref bool CanHLTVUse { get; }
+
+    public ref bool AlignWithParent { get; }
+
+    public ref bool DofEnabled { get; }
+
+    public ref float DofNearBlurry { get; }
+
+    public ref float DofNearCrisp { get; }
+
+    public ref float DofFarCrisp { get; }
+
+    public ref float DofFarBlurry { get; }
+
+    public ref float DofTiltToGround { get; }
+
+    public ref float TargetFOV { get; }
+
+    public ref float DegreesPerSecond { get; }
+
+    public ref bool IsOn { get; }
+
+    public CPointCamera? Next { get; }
+
+    public void FOVUpdated();
+    public void ResolutionUpdated();
+    public void FogEnableUpdated();
+    public void FogColorUpdated();
+    public void FogStartUpdated();
+    public void FogEndUpdated();
+    public void FogMaxDensityUpdated();
+    public void ActiveUpdated();
+    public void UseScreenAspectRatioUpdated();
+    public void AspectRatioUpdated();
+    public void NoSkyUpdated();
+    public void BrightnessUpdated();
+    public void ZFarUpdated();
+    public void ZNearUpdated();
+    public void CanHLTVUseUpdated();
+    public void AlignWithParentUpdated();
+    public void DofEnabledUpdated();
+    public void DofNearBlurryUpdated();
+    public void DofNearCrispUpdated();
+    public void DofFarCrispUpdated();
+    public void DofFarBlurryUpdated();
+    public void DofTiltToGroundUpdated();
 }

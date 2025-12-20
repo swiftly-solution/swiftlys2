@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMapSharedEnvironmentImpl : CLogicalEntityImpl, CMapSharedEnvironment {
+internal partial class CMapSharedEnvironmentImpl : CLogicalEntityImpl, CMapSharedEnvironment
+{
+    public CMapSharedEnvironmentImpl(nint handle) : base(handle) { }
 
-  public CMapSharedEnvironmentImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetMapNameOffset;
 
-  private static nint? _TargetMapNameOffset;
-
-  public string TargetMapName {
-    get {
-      if (_TargetMapNameOffset == null) {
-        _TargetMapNameOffset = Schema.GetOffset(0xDA50C2DE129742FD);
-      }
-      var ptr = _Handle.Read<nint>(_TargetMapNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_TargetMapNameOffset == null) {
-        _TargetMapNameOffset = Schema.GetOffset(0xDA50C2DE129742FD);
-      }
-      Schema.SetString(_Handle, _TargetMapNameOffset!.Value, value);
-    }
-  } 
+    public string TargetMapName {
+        get {
+            _TargetMapNameOffset = _TargetMapNameOffset ?? Schema.GetOffset(0xDA50C2DE129742FD);
+            return Schema.GetString(_Handle.Read<nint>(_TargetMapNameOffset!.Value));
+        }
+        set {
+            _TargetMapNameOffset = _TargetMapNameOffset ?? Schema.GetOffset(0xDA50C2DE129742FD);
+            Schema.SetString(_Handle, _TargetMapNameOffset!.Value, value);
+        }
+    } 
 
 
 }

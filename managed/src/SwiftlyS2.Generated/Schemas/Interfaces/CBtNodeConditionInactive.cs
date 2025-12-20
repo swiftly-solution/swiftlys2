@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBtNodeConditionInactive : CBtNodeCondition, ISchemaClass<CBtNodeConditionInactive> {
+public partial interface CBtNodeConditionInactive : CBtNodeCondition, ISchemaClass<CBtNodeConditionInactive>
+{
+    static CBtNodeConditionInactive ISchemaClass<CBtNodeConditionInactive>.From(nint handle) => new CBtNodeConditionInactiveImpl(handle);
+    static int ISchemaClass<CBtNodeConditionInactive>.Size => 152;
+    static string? ISchemaClass<CBtNodeConditionInactive>.ClassName => null;
 
-  static CBtNodeConditionInactive ISchemaClass<CBtNodeConditionInactive>.From(nint handle) => new CBtNodeConditionInactiveImpl(handle);
-  static int ISchemaClass<CBtNodeConditionInactive>.Size => 152;
-  static string? ISchemaClass<CBtNodeConditionInactive>.ClassName => null;
 
-  
-  public ref float RoundStartThresholdSeconds { get; }
-  
-  public ref float SensorInactivityThresholdSeconds { get; }
-  
-  public CountdownTimer SensorInactivityTimer { get; }
+    public ref float RoundStartThresholdSeconds { get; }
+
+    public ref float SensorInactivityThresholdSeconds { get; }
+
+    public CountdownTimer SensorInactivityTimer { get; }
 
 
 }

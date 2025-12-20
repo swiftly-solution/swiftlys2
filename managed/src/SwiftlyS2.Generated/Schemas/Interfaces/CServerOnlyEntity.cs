@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CServerOnlyEntity : CBaseEntity, ISchemaClass<CServerOnlyEntity> {
-
-  static CServerOnlyEntity ISchemaClass<CServerOnlyEntity>.From(nint handle) => new CServerOnlyEntityImpl(handle);
-  static int ISchemaClass<CServerOnlyEntity>.Size => 1264;
-  static string? ISchemaClass<CServerOnlyEntity>.ClassName => null;
+public partial interface CServerOnlyEntity : CBaseEntity, ISchemaClass<CServerOnlyEntity>
+{
+    static CServerOnlyEntity ISchemaClass<CServerOnlyEntity>.From(nint handle) => new CServerOnlyEntityImpl(handle);
+    static int ISchemaClass<CServerOnlyEntity>.Size => 1264;
+    static string? ISchemaClass<CServerOnlyEntity>.ClassName => null;
 
 
 

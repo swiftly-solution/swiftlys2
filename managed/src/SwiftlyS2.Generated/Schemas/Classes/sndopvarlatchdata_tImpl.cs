@@ -6,88 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class sndopvarlatchdata_tImpl : SchemaClass, sndopvarlatchdata_t {
+internal partial class sndopvarlatchdata_tImpl : SchemaClass, sndopvarlatchdata_t
+{
+    public sndopvarlatchdata_tImpl(nint handle) : base(handle) { }
 
-  public sndopvarlatchdata_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StackOffset;
 
-  private static nint? _StackOffset;
+    public string Stack {
+        get {
+            _StackOffset = _StackOffset ?? Schema.GetOffset(0x8347C0D511ACB037);
+            return Schema.GetString(_Handle.Read<nint>(_StackOffset!.Value));
+        }
+        set {
+            _StackOffset = _StackOffset ?? Schema.GetOffset(0x8347C0D511ACB037);
+            Schema.SetString(_Handle, _StackOffset!.Value, value);
+        }
+    } 
+    private static nint? _OperatorOffset;
 
-  public string Stack {
-    get {
-      if (_StackOffset == null) {
-        _StackOffset = Schema.GetOffset(0x8347C0D511ACB037);
-      }
-      var ptr = _Handle.Read<nint>(_StackOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StackOffset == null) {
-        _StackOffset = Schema.GetOffset(0x8347C0D511ACB037);
-      }
-      Schema.SetString(_Handle, _StackOffset!.Value, value);
-    }
-  } 
-  private static nint? _OperatorOffset;
+    public string Operator {
+        get {
+            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x8347C0D55D107B55);
+            return Schema.GetString(_Handle.Read<nint>(_OperatorOffset!.Value));
+        }
+        set {
+            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x8347C0D55D107B55);
+            Schema.SetString(_Handle, _OperatorOffset!.Value, value);
+        }
+    } 
+    private static nint? _OpvarOffset;
 
-  public string Operator {
-    get {
-      if (_OperatorOffset == null) {
-        _OperatorOffset = Schema.GetOffset(0x8347C0D55D107B55);
-      }
-      var ptr = _Handle.Read<nint>(_OperatorOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_OperatorOffset == null) {
-        _OperatorOffset = Schema.GetOffset(0x8347C0D55D107B55);
-      }
-      Schema.SetString(_Handle, _OperatorOffset!.Value, value);
-    }
-  } 
-  private static nint? _OpvarOffset;
+    public string Opvar {
+        get {
+            _OpvarOffset = _OpvarOffset ?? Schema.GetOffset(0x8347C0D508A9F41F);
+            return Schema.GetString(_Handle.Read<nint>(_OpvarOffset!.Value));
+        }
+        set {
+            _OpvarOffset = _OpvarOffset ?? Schema.GetOffset(0x8347C0D508A9F41F);
+            Schema.SetString(_Handle, _OpvarOffset!.Value, value);
+        }
+    } 
+    private static nint? _ValOffset;
 
-  public string Opvar {
-    get {
-      if (_OpvarOffset == null) {
-        _OpvarOffset = Schema.GetOffset(0x8347C0D508A9F41F);
-      }
-      var ptr = _Handle.Read<nint>(_OpvarOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Val {
+        get {
+            _ValOffset = _ValOffset ?? Schema.GetOffset(0x8347C0D5E31D0C86);
+            return ref _Handle.AsRef<float>(_ValOffset!.Value);
+        }
     }
-    set {
-      if (_OpvarOffset == null) {
-        _OpvarOffset = Schema.GetOffset(0x8347C0D508A9F41F);
-      }
-      Schema.SetString(_Handle, _OpvarOffset!.Value, value);
-    }
-  } 
-  private static nint? _ValOffset;
+    private static nint? _PosOffset;
 
-  public ref float Val {
-    get {
-      if (_ValOffset == null) {
-        _ValOffset = Schema.GetOffset(0x8347C0D5E31D0C86);
-      }
-      return ref _Handle.AsRef<float>(_ValOffset!.Value);
+    public ref Vector Pos {
+        get {
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0x8347C0D5DE9CFC5D);
+            return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _PosOffset;
-
-  public ref Vector Pos {
-    get {
-      if (_PosOffset == null) {
-        _PosOffset = Schema.GetOffset(0x8347C0D5DE9CFC5D);
-      }
-      return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
-    }
-  }
 
 
 }

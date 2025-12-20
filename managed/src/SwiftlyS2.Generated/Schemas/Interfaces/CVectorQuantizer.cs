@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVectorQuantizer : ISchemaClass<CVectorQuantizer> {
+public partial interface CVectorQuantizer : ISchemaClass<CVectorQuantizer>
+{
+    static CVectorQuantizer ISchemaClass<CVectorQuantizer>.From(nint handle) => new CVectorQuantizerImpl(handle);
+    static int ISchemaClass<CVectorQuantizer>.Size => 32;
+    static string? ISchemaClass<CVectorQuantizer>.ClassName => null;
 
-  static CVectorQuantizer ISchemaClass<CVectorQuantizer>.From(nint handle) => new CVectorQuantizerImpl(handle);
-  static int ISchemaClass<CVectorQuantizer>.Size => 32;
-  static string? ISchemaClass<CVectorQuantizer>.ClassName => null;
 
-  
-  public ref CUtlVector<float> CentroidVectors { get; }
-  
-  public ref int Centroids { get; }
-  
-  public ref int Dimensions { get; }
+    public ref CUtlVector<float> CentroidVectors { get; }
+
+    public ref int Centroids { get; }
+
+    public ref int Dimensions { get; }
 
 
 }

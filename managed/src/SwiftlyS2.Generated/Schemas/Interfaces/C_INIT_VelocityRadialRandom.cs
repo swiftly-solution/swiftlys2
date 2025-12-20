@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_VelocityRadialRandom : CParticleFunctionInitializer, ISchemaClass<C_INIT_VelocityRadialRandom> {
+public partial interface C_INIT_VelocityRadialRandom : CParticleFunctionInitializer, ISchemaClass<C_INIT_VelocityRadialRandom>
+{
+    static C_INIT_VelocityRadialRandom ISchemaClass<C_INIT_VelocityRadialRandom>.From(nint handle) => new C_INIT_VelocityRadialRandomImpl(handle);
+    static int ISchemaClass<C_INIT_VelocityRadialRandom>.Size => 4672;
+    static string? ISchemaClass<C_INIT_VelocityRadialRandom>.ClassName => null;
 
-  static C_INIT_VelocityRadialRandom ISchemaClass<C_INIT_VelocityRadialRandom>.From(nint handle) => new C_INIT_VelocityRadialRandomImpl(handle);
-  static int ISchemaClass<C_INIT_VelocityRadialRandom>.Size => 4672;
-  static string? ISchemaClass<C_INIT_VelocityRadialRandom>.ClassName => null;
 
-  
-  public ref bool PerParticleCenter { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public CPerParticleVecInput Position { get; }
-  
-  public CPerParticleVecInput Fwd { get; }
-  
-  public CPerParticleFloatInput SpeedMin { get; }
-  
-  public CPerParticleFloatInput SpeedMax { get; }
-  
-  public ref Vector LocalCoordinateSystemSpeedScale { get; }
-  
-  public ref bool IgnoreDelta { get; }
+    public ref bool PerParticleCenter { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public CPerParticleVecInput Position { get; }
+
+    public CPerParticleVecInput Fwd { get; }
+
+    public CPerParticleFloatInput SpeedMin { get; }
+
+    public CPerParticleFloatInput SpeedMax { get; }
+
+    public ref Vector LocalCoordinateSystemSpeedScale { get; }
+
+    public ref bool IgnoreDelta { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathMover : CPathSimple, ISchemaClass<CPathMover> {
+public partial interface CPathMover : CPathSimple, ISchemaClass<CPathMover>
+{
+    static CPathMover ISchemaClass<CPathMover>.From(nint handle) => new CPathMoverImpl(handle);
+    static int ISchemaClass<CPathMover>.Size => 1616;
+    static string? ISchemaClass<CPathMover>.ClassName => "path_mover";
 
-  static CPathMover ISchemaClass<CPathMover>.From(nint handle) => new CPathMoverImpl(handle);
-  static int ISchemaClass<CPathMover>.Size => 1616;
-  static string? ISchemaClass<CPathMover>.ClassName => "path_mover";
 
-  
-  public ref CUtlVector<CHandle<CMoverPathNode>> PathNodes { get; }
-  
-  public ref CUtlVector<CHandle<CFuncMover>> Movers { get; }
-  
-  public ref CTransform XInitialPathWorldToLocal { get; }
+    public ref CUtlVector<CHandle<CMoverPathNode>> PathNodes { get; }
+
+    public ref CUtlVector<CHandle<CFuncMover>> Movers { get; }
+
+    public ref CTransform XInitialPathWorldToLocal { get; }
 
 
 }

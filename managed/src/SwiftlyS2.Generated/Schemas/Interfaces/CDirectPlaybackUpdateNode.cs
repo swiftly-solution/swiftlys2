@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDirectPlaybackUpdateNode : CUnaryUpdateNode, ISchemaClass<CDirectPlaybackUpdateNode> {
+public partial interface CDirectPlaybackUpdateNode : CUnaryUpdateNode, ISchemaClass<CDirectPlaybackUpdateNode>
+{
+    static CDirectPlaybackUpdateNode ISchemaClass<CDirectPlaybackUpdateNode>.From(nint handle) => new CDirectPlaybackUpdateNodeImpl(handle);
+    static int ISchemaClass<CDirectPlaybackUpdateNode>.Size => 144;
+    static string? ISchemaClass<CDirectPlaybackUpdateNode>.ClassName => null;
 
-  static CDirectPlaybackUpdateNode ISchemaClass<CDirectPlaybackUpdateNode>.From(nint handle) => new CDirectPlaybackUpdateNodeImpl(handle);
-  static int ISchemaClass<CDirectPlaybackUpdateNode>.Size => 144;
-  static string? ISchemaClass<CDirectPlaybackUpdateNode>.ClassName => null;
 
-  
-  public ref bool FinishEarly { get; }
-  
-  public ref bool ResetOnFinish { get; }
-  
-  public ref CUtlVector<CDirectPlaybackTagData> AllTags { get; }
+    public ref bool FinishEarly { get; }
+
+    public ref bool ResetOnFinish { get; }
+
+    public ref CUtlVector<CDirectPlaybackTagData> AllTags { get; }
 
 
 }

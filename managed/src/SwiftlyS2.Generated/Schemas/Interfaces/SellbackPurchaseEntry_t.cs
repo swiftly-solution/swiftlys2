@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SellbackPurchaseEntry_t : ISchemaClass<SellbackPurchaseEntry_t> {
+public partial interface SellbackPurchaseEntry_t : ISchemaClass<SellbackPurchaseEntry_t>
+{
+    static SellbackPurchaseEntry_t ISchemaClass<SellbackPurchaseEntry_t>.From(nint handle) => new SellbackPurchaseEntry_tImpl(handle);
+    static int ISchemaClass<SellbackPurchaseEntry_t>.Size => 72;
+    static string? ISchemaClass<SellbackPurchaseEntry_t>.ClassName => null;
 
-  static SellbackPurchaseEntry_t ISchemaClass<SellbackPurchaseEntry_t>.From(nint handle) => new SellbackPurchaseEntry_tImpl(handle);
-  static int ISchemaClass<SellbackPurchaseEntry_t>.Size => 72;
-  static string? ISchemaClass<SellbackPurchaseEntry_t>.ClassName => null;
 
-  
-  public ref ushort DefIdx { get; }
-  
-  public ref int Cost { get; }
-  
-  public ref int PrevArmor { get; }
-  
-  public ref bool PrevHelmet { get; }
-  
-  public ref CHandle<CEntityInstance> Item { get; }
+    public ref ushort DefIdx { get; }
 
-  public void DefIdxUpdated();
-  public void CostUpdated();
-  public void PrevArmorUpdated();
-  public void PrevHelmetUpdated();
-  public void ItemUpdated();
+    public ref int Cost { get; }
+
+    public ref int PrevArmor { get; }
+
+    public ref bool PrevHelmet { get; }
+
+    public ref CHandle<CEntityInstance> Item { get; }
+
+    public void DefIdxUpdated();
+    public void CostUpdated();
+    public void PrevArmorUpdated();
+    public void PrevHelmetUpdated();
+    public void ItemUpdated();
 }

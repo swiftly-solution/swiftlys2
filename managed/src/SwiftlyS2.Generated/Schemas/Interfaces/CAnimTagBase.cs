@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimTagBase : ISchemaClass<CAnimTagBase> {
+public partial interface CAnimTagBase : ISchemaClass<CAnimTagBase>
+{
+    static CAnimTagBase ISchemaClass<CAnimTagBase>.From(nint handle) => new CAnimTagBaseImpl(handle);
+    static int ISchemaClass<CAnimTagBase>.Size => 80;
+    static string? ISchemaClass<CAnimTagBase>.ClassName => null;
 
-  static CAnimTagBase ISchemaClass<CAnimTagBase>.From(nint handle) => new CAnimTagBaseImpl(handle);
-  static int ISchemaClass<CAnimTagBase>.Size => 80;
-  static string? ISchemaClass<CAnimTagBase>.ClassName => null;
 
-  
-  public ref CGlobalSymbol Name { get; }
-  
-  public string Comment { get; set; }
-  
-  public ref CGlobalSymbol Group { get; }
-  
-  public AnimTagID TagID { get; }
-  
-  public ref bool IsReferenced { get; }
+    public ref CGlobalSymbol Name { get; }
+
+    public string Comment { get; set; }
+
+    public ref CGlobalSymbol Group { get; }
+
+    public AnimTagID TagID { get; }
+
+    public ref bool IsReferenced { get; }
 
 
 }

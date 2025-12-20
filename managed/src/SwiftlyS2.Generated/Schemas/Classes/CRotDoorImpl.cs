@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRotDoorImpl : CBaseDoorImpl, CRotDoor {
+internal partial class CRotDoorImpl : CBaseDoorImpl, CRotDoor
+{
+    public CRotDoorImpl(nint handle) : base(handle) { }
 
-  public CRotDoorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SolidBspOffset;
 
-  private static nint? _SolidBspOffset;
-
-  public ref bool SolidBsp {
-    get {
-      if (_SolidBspOffset == null) {
-        _SolidBspOffset = Schema.GetOffset(0x175D110BA50CEC89);
-      }
-      return ref _Handle.AsRef<bool>(_SolidBspOffset!.Value);
+    public ref bool SolidBsp {
+        get {
+            _SolidBspOffset = _SolidBspOffset ?? Schema.GetOffset(0x175D110BA50CEC89);
+            return ref _Handle.AsRef<bool>(_SolidBspOffset!.Value);
+        }
     }
-  }
 
 
 }

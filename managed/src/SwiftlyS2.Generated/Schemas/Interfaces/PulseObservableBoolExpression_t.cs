@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseObservableBoolExpression_t : ISchemaClass<PulseObservableBoolExpression_t> {
+public partial interface PulseObservableBoolExpression_t : ISchemaClass<PulseObservableBoolExpression_t>
+{
+    static PulseObservableBoolExpression_t ISchemaClass<PulseObservableBoolExpression_t>.From(nint handle) => new PulseObservableBoolExpression_tImpl(handle);
+    static int ISchemaClass<PulseObservableBoolExpression_t>.Size => 120;
+    static string? ISchemaClass<PulseObservableBoolExpression_t>.ClassName => null;
 
-  static PulseObservableBoolExpression_t ISchemaClass<PulseObservableBoolExpression_t>.From(nint handle) => new PulseObservableBoolExpression_tImpl(handle);
-  static int ISchemaClass<PulseObservableBoolExpression_t>.Size => 120;
-  static string? ISchemaClass<PulseObservableBoolExpression_t>.ClassName => null;
 
-  
-  public CPulse_OutflowConnection EvaluateConnection { get; }
-  
-  public ref CUtlVector<PulseRuntimeVarIndex_t> DependentObservableVars { get; }
-  
-  public ref CUtlVector<PulseRuntimeBlackboardReferenceIndex_t> DependentObservableBlackboardReferences { get; }
+    public CPulse_OutflowConnection EvaluateConnection { get; }
+
+    public ref CUtlVector<PulseRuntimeVarIndex_t> DependentObservableVars { get; }
+
+    public ref CUtlVector<PulseRuntimeBlackboardReferenceIndex_t> DependentObservableBlackboardReferences { get; }
 
 
 }

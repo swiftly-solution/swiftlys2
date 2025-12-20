@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTonemapTrigger : CBaseTrigger, ISchemaClass<CTonemapTrigger> {
+public partial interface CTonemapTrigger : CBaseTrigger, ISchemaClass<CTonemapTrigger>
+{
+    static CTonemapTrigger ISchemaClass<CTonemapTrigger>.From(nint handle) => new CTonemapTriggerImpl(handle);
+    static int ISchemaClass<CTonemapTrigger>.Size => 2488;
+    static string? ISchemaClass<CTonemapTrigger>.ClassName => "trigger_tonemap";
 
-  static CTonemapTrigger ISchemaClass<CTonemapTrigger>.From(nint handle) => new CTonemapTriggerImpl(handle);
-  static int ISchemaClass<CTonemapTrigger>.Size => 2488;
-  static string? ISchemaClass<CTonemapTrigger>.ClassName => "trigger_tonemap";
 
-  
-  public string TonemapControllerName { get; set; }
-  
-  public ref CHandle<CEntityInstance> TonemapController { get; }
+    public string TonemapControllerName { get; set; }
+
+    public ref CHandle<CEntityInstance> TonemapController { get; }
 
 
 }

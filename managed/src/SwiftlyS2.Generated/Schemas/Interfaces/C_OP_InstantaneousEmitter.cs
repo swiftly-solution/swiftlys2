@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_InstantaneousEmitter : CParticleFunctionEmitter, ISchemaClass<C_OP_InstantaneousEmitter> {
+public partial interface C_OP_InstantaneousEmitter : CParticleFunctionEmitter, ISchemaClass<C_OP_InstantaneousEmitter>
+{
+    static C_OP_InstantaneousEmitter ISchemaClass<C_OP_InstantaneousEmitter>.From(nint handle) => new C_OP_InstantaneousEmitterImpl(handle);
+    static int ISchemaClass<C_OP_InstantaneousEmitter>.Size => 1600;
+    static string? ISchemaClass<C_OP_InstantaneousEmitter>.ClassName => null;
 
-  static C_OP_InstantaneousEmitter ISchemaClass<C_OP_InstantaneousEmitter>.From(nint handle) => new C_OP_InstantaneousEmitterImpl(handle);
-  static int ISchemaClass<C_OP_InstantaneousEmitter>.Size => 1600;
-  static string? ISchemaClass<C_OP_InstantaneousEmitter>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput ParticlesToEmit { get; }
-  
-  public CParticleCollectionFloatInput StartTime { get; }
-  
-  public ref float InitFromKilledParentParticles { get; }
-  
-  public ref EventTypeSelection_t EventType { get; }
-  
-  public CParticleCollectionFloatInput ParentParticleScale { get; }
-  
-  public ref int MaxEmittedPerFrame { get; }
-  
-  public ref int SnapshotControlPoint { get; }
-  
-  public string StrSnapshotSubset { get; set; }
+    public CParticleCollectionFloatInput ParticlesToEmit { get; }
+
+    public CParticleCollectionFloatInput StartTime { get; }
+
+    public ref float InitFromKilledParentParticles { get; }
+
+    public ref EventTypeSelection_t EventType { get; }
+
+    public CParticleCollectionFloatInput ParentParticleScale { get; }
+
+    public ref int MaxEmittedPerFrame { get; }
+
+    public ref int SnapshotControlPoint { get; }
+
+    public string StrSnapshotSubset { get; set; }
 
 
 }

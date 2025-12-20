@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFilterMultipleAPI : ISchemaClass<CFilterMultipleAPI> {
-
-  static CFilterMultipleAPI ISchemaClass<CFilterMultipleAPI>.From(nint handle) => new CFilterMultipleAPIImpl(handle);
-  static int ISchemaClass<CFilterMultipleAPI>.Size => 8;
-  static string? ISchemaClass<CFilterMultipleAPI>.ClassName => null;
+public partial interface CFilterMultipleAPI : ISchemaClass<CFilterMultipleAPI>
+{
+    static CFilterMultipleAPI ISchemaClass<CFilterMultipleAPI>.From(nint handle) => new CFilterMultipleAPIImpl(handle);
+    static int ISchemaClass<CFilterMultipleAPI>.Size => 8;
+    static string? ISchemaClass<CFilterMultipleAPI>.ClassName => null;
 
 
 

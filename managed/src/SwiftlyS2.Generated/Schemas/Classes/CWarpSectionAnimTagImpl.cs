@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CWarpSectionAnimTagImpl : CWarpSectionAnimTagBaseImpl, CWarpSectionAnimTag {
+internal partial class CWarpSectionAnimTagImpl : CWarpSectionAnimTagBaseImpl, CWarpSectionAnimTag
+{
+    public CWarpSectionAnimTagImpl(nint handle) : base(handle) { }
 
-  public CWarpSectionAnimTagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WarpPositionOffset;
 
-  private static nint? _WarpPositionOffset;
-
-  public ref bool WarpPosition {
-    get {
-      if (_WarpPositionOffset == null) {
-        _WarpPositionOffset = Schema.GetOffset(0x4C7992E6A30D730C);
-      }
-      return ref _Handle.AsRef<bool>(_WarpPositionOffset!.Value);
+    public ref bool WarpPosition {
+        get {
+            _WarpPositionOffset = _WarpPositionOffset ?? Schema.GetOffset(0x4C7992E6A30D730C);
+            return ref _Handle.AsRef<bool>(_WarpPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _WarpOrientationOffset;
+    private static nint? _WarpOrientationOffset;
 
-  public ref bool WarpOrientation {
-    get {
-      if (_WarpOrientationOffset == null) {
-        _WarpOrientationOffset = Schema.GetOffset(0x4C7992E6613873F3);
-      }
-      return ref _Handle.AsRef<bool>(_WarpOrientationOffset!.Value);
+    public ref bool WarpOrientation {
+        get {
+            _WarpOrientationOffset = _WarpOrientationOffset ?? Schema.GetOffset(0x4C7992E6613873F3);
+            return ref _Handle.AsRef<bool>(_WarpOrientationOffset!.Value);
+        }
     }
-  }
 
 
 }

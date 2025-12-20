@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CReplicationParametersImpl : SchemaClass, CReplicationParameters {
+internal partial class CReplicationParametersImpl : SchemaClass, CReplicationParameters
+{
+    public CReplicationParametersImpl(nint handle) : base(handle) { }
 
-  public CReplicationParametersImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ReplicationModeOffset;
 
-  private static nint? _ReplicationModeOffset;
-
-  public ref ParticleReplicationMode_t ReplicationMode {
-    get {
-      if (_ReplicationModeOffset == null) {
-        _ReplicationModeOffset = Schema.GetOffset(0xFA909F20C8967832);
-      }
-      return ref _Handle.AsRef<ParticleReplicationMode_t>(_ReplicationModeOffset!.Value);
+    public ref ParticleReplicationMode_t ReplicationMode {
+        get {
+            _ReplicationModeOffset = _ReplicationModeOffset ?? Schema.GetOffset(0xFA909F20C8967832);
+            return ref _Handle.AsRef<ParticleReplicationMode_t>(_ReplicationModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleChildParticleRadiiOffset;
+    private static nint? _ScaleChildParticleRadiiOffset;
 
-  public ref bool ScaleChildParticleRadii {
-    get {
-      if (_ScaleChildParticleRadiiOffset == null) {
-        _ScaleChildParticleRadiiOffset = Schema.GetOffset(0xFA909F207842F3CC);
-      }
-      return ref _Handle.AsRef<bool>(_ScaleChildParticleRadiiOffset!.Value);
+    public ref bool ScaleChildParticleRadii {
+        get {
+            _ScaleChildParticleRadiiOffset = _ScaleChildParticleRadiiOffset ?? Schema.GetOffset(0xFA909F207842F3CC);
+            return ref _Handle.AsRef<bool>(_ScaleChildParticleRadiiOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinRandomRadiusScaleOffset;
+    private static nint? _MinRandomRadiusScaleOffset;
 
-  public CParticleCollectionFloatInput MinRandomRadiusScale {
-    get {
-      if (_MinRandomRadiusScaleOffset == null) {
-        _MinRandomRadiusScaleOffset = Schema.GetOffset(0xFA909F208CBF88EE);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _MinRandomRadiusScaleOffset!.Value);
+    public CParticleCollectionFloatInput MinRandomRadiusScale {
+        get {
+            _MinRandomRadiusScaleOffset = _MinRandomRadiusScaleOffset ?? Schema.GetOffset(0xFA909F208CBF88EE);
+            return new CParticleCollectionFloatInputImpl(_Handle + _MinRandomRadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxRandomRadiusScaleOffset;
+    private static nint? _MaxRandomRadiusScaleOffset;
 
-  public CParticleCollectionFloatInput MaxRandomRadiusScale {
-    get {
-      if (_MaxRandomRadiusScaleOffset == null) {
-        _MaxRandomRadiusScaleOffset = Schema.GetOffset(0xFA909F2022697B5C);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _MaxRandomRadiusScaleOffset!.Value);
+    public CParticleCollectionFloatInput MaxRandomRadiusScale {
+        get {
+            _MaxRandomRadiusScaleOffset = _MaxRandomRadiusScaleOffset ?? Schema.GetOffset(0xFA909F2022697B5C);
+            return new CParticleCollectionFloatInputImpl(_Handle + _MaxRandomRadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinRandomDisplacementOffset;
+    private static nint? _MinRandomDisplacementOffset;
 
-  public CParticleCollectionVecInput MinRandomDisplacement {
-    get {
-      if (_MinRandomDisplacementOffset == null) {
-        _MinRandomDisplacementOffset = Schema.GetOffset(0xFA909F20808FB77F);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _MinRandomDisplacementOffset!.Value);
+    public CParticleCollectionVecInput MinRandomDisplacement {
+        get {
+            _MinRandomDisplacementOffset = _MinRandomDisplacementOffset ?? Schema.GetOffset(0xFA909F20808FB77F);
+            return new CParticleCollectionVecInputImpl(_Handle + _MinRandomDisplacementOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxRandomDisplacementOffset;
+    private static nint? _MaxRandomDisplacementOffset;
 
-  public CParticleCollectionVecInput MaxRandomDisplacement {
-    get {
-      if (_MaxRandomDisplacementOffset == null) {
-        _MaxRandomDisplacementOffset = Schema.GetOffset(0xFA909F20FF279F49);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _MaxRandomDisplacementOffset!.Value);
+    public CParticleCollectionVecInput MaxRandomDisplacement {
+        get {
+            _MaxRandomDisplacementOffset = _MaxRandomDisplacementOffset ?? Schema.GetOffset(0xFA909F20FF279F49);
+            return new CParticleCollectionVecInputImpl(_Handle + _MaxRandomDisplacementOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModellingScaleOffset;
+    private static nint? _ModellingScaleOffset;
 
-  public CParticleCollectionFloatInput ModellingScale {
-    get {
-      if (_ModellingScaleOffset == null) {
-        _ModellingScaleOffset = Schema.GetOffset(0xFA909F20BE93B72A);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ModellingScaleOffset!.Value);
+    public CParticleCollectionFloatInput ModellingScale {
+        get {
+            _ModellingScaleOffset = _ModellingScaleOffset ?? Schema.GetOffset(0xFA909F20BE93B72A);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ModellingScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

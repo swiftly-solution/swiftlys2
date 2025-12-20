@@ -6,81 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvParticleGlowImpl : CParticleSystemImpl, CEnvParticleGlow {
+internal partial class CEnvParticleGlowImpl : CParticleSystemImpl, CEnvParticleGlow
+{
+    public CEnvParticleGlowImpl(nint handle) : base(handle) { }
 
-  public CEnvParticleGlowImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AlphaScaleOffset;
 
-  private static nint? _AlphaScaleOffset;
-
-  public ref float AlphaScale {
-    get {
-      if (_AlphaScaleOffset == null) {
-        _AlphaScaleOffset = Schema.GetOffset(0x38100F3AEC6D3C25);
-      }
-      return ref _Handle.AsRef<float>(_AlphaScaleOffset!.Value);
+    public ref float AlphaScale {
+        get {
+            _AlphaScaleOffset = _AlphaScaleOffset ?? Schema.GetOffset(0x38100F3AEC6D3C25);
+            return ref _Handle.AsRef<float>(_AlphaScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleOffset;
+    private static nint? _RadiusScaleOffset;
 
-  public ref float RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0x38100F3AA7A20159);
-      }
-      return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+    public ref float RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x38100F3AA7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SelfIllumScaleOffset;
+    private static nint? _SelfIllumScaleOffset;
 
-  public ref float SelfIllumScale {
-    get {
-      if (_SelfIllumScaleOffset == null) {
-        _SelfIllumScaleOffset = Schema.GetOffset(0x38100F3A0478CE14);
-      }
-      return ref _Handle.AsRef<float>(_SelfIllumScaleOffset!.Value);
+    public ref float SelfIllumScale {
+        get {
+            _SelfIllumScaleOffset = _SelfIllumScaleOffset ?? Schema.GetOffset(0x38100F3A0478CE14);
+            return ref _Handle.AsRef<float>(_SelfIllumScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorTintOffset;
+    private static nint? _ColorTintOffset;
 
-  public ref Color ColorTint {
-    get {
-      if (_ColorTintOffset == null) {
-        _ColorTintOffset = Schema.GetOffset(0x38100F3AD55CDDFD);
-      }
-      return ref _Handle.AsRef<Color>(_ColorTintOffset!.Value);
+    public ref Color ColorTint {
+        get {
+            _ColorTintOffset = _ColorTintOffset ?? Schema.GetOffset(0x38100F3AD55CDDFD);
+            return ref _Handle.AsRef<Color>(_ColorTintOffset!.Value);
+        }
     }
-  }
-  private static nint? _TextureOverrideOffset;
+    private static nint? _TextureOverrideOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureOverride {
-    get {
-      if (_TextureOverrideOffset == null) {
-        _TextureOverrideOffset = Schema.GetOffset(0x38100F3AEC1F5A56);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOverrideOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureOverride {
+        get {
+            _TextureOverrideOffset = _TextureOverrideOffset ?? Schema.GetOffset(0x38100F3AEC1F5A56);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOverrideOffset!.Value);
+        }
     }
-  }
 
-  public void AlphaScaleUpdated() {
-    Schema.Update(_Handle, 0x38100F3AEC6D3C25);
-  }
-  public void RadiusScaleUpdated() {
-    Schema.Update(_Handle, 0x38100F3AA7A20159);
-  }
-  public void SelfIllumScaleUpdated() {
-    Schema.Update(_Handle, 0x38100F3A0478CE14);
-  }
-  public void ColorTintUpdated() {
-    Schema.Update(_Handle, 0x38100F3AD55CDDFD);
-  }
-  public void TextureOverrideUpdated() {
-    Schema.Update(_Handle, 0x38100F3AEC1F5A56);
-  }
+    public void AlphaScaleUpdated() => Schema.Update(_Handle, 0x38100F3AEC6D3C25);
+    public void RadiusScaleUpdated() => Schema.Update(_Handle, 0x38100F3AA7A20159);
+    public void SelfIllumScaleUpdated() => Schema.Update(_Handle, 0x38100F3A0478CE14);
+    public void ColorTintUpdated() => Schema.Update(_Handle, 0x38100F3AD55CDDFD);
+    public void TextureOverrideUpdated() => Schema.Update(_Handle, 0x38100F3AEC1F5A56);
 }

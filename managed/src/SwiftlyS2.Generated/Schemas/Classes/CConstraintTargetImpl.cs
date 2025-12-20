@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CConstraintTargetImpl : SchemaClass, CConstraintTarget {
+internal partial class CConstraintTargetImpl : SchemaClass, CConstraintTarget
+{
+    public CConstraintTargetImpl(nint handle) : base(handle) { }
 
-  public CConstraintTargetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OffsetOffset;
 
-  private static nint? _OffsetOffset;
-
-  public ref Quaternion Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0x8A562794DB445327);
-      }
-      return ref _Handle.AsRef<Quaternion>(_OffsetOffset!.Value);
+    public ref Quaternion Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x8A562794DB445327);
+            return ref _Handle.AsRef<Quaternion>(_OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _Offset1Offset;
+    private static nint? _Offset1Offset;
 
-  public ref Vector Offset1 {
-    get {
-      if (_Offset1Offset == null) {
-        _Offset1Offset = Schema.GetOffset(0x8A562794FE159136);
-      }
-      return ref _Handle.AsRef<Vector>(_Offset1Offset!.Value);
+    public ref Vector Offset1 {
+        get {
+            _Offset1Offset = _Offset1Offset ?? Schema.GetOffset(0x8A562794FE159136);
+            return ref _Handle.AsRef<Vector>(_Offset1Offset!.Value);
+        }
     }
-  }
-  private static nint? _BoneHashOffset;
+    private static nint? _BoneHashOffset;
 
-  public ref uint BoneHash {
-    get {
-      if (_BoneHashOffset == null) {
-        _BoneHashOffset = Schema.GetOffset(0x8A562794D4010F03);
-      }
-      return ref _Handle.AsRef<uint>(_BoneHashOffset!.Value);
+    public ref uint BoneHash {
+        get {
+            _BoneHashOffset = _BoneHashOffset ?? Schema.GetOffset(0x8A562794D4010F03);
+            return ref _Handle.AsRef<uint>(_BoneHashOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameOffset;
+    private static nint? _NameOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x8A56279463D22D49);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x8A56279463D22D49);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _WeightOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8A56279463D22D49);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8A56279463D22D49);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _WeightOffset;
 
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0x8A5627947B81E7AB);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x8A5627947B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsAttachmentOffset;
+    private static nint? _IsAttachmentOffset;
 
-  public ref bool IsAttachment {
-    get {
-      if (_IsAttachmentOffset == null) {
-        _IsAttachmentOffset = Schema.GetOffset(0x8A562794794BF658);
-      }
-      return ref _Handle.AsRef<bool>(_IsAttachmentOffset!.Value);
+    public ref bool IsAttachment {
+        get {
+            _IsAttachmentOffset = _IsAttachmentOffset ?? Schema.GetOffset(0x8A562794794BF658);
+            return ref _Handle.AsRef<bool>(_IsAttachmentOffset!.Value);
+        }
     }
-  }
 
 
 }

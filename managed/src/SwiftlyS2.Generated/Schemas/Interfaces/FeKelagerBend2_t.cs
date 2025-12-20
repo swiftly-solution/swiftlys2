@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeKelagerBend2_t : ISchemaClass<FeKelagerBend2_t> {
+public partial interface FeKelagerBend2_t : ISchemaClass<FeKelagerBend2_t>
+{
+    static FeKelagerBend2_t ISchemaClass<FeKelagerBend2_t>.From(nint handle) => new FeKelagerBend2_tImpl(handle);
+    static int ISchemaClass<FeKelagerBend2_t>.Size => 24;
+    static string? ISchemaClass<FeKelagerBend2_t>.ClassName => null;
 
-  static FeKelagerBend2_t ISchemaClass<FeKelagerBend2_t>.From(nint handle) => new FeKelagerBend2_tImpl(handle);
-  static int ISchemaClass<FeKelagerBend2_t>.Size => 24;
-  static string? ISchemaClass<FeKelagerBend2_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<float> Weight { get; }
-  
-  public ref float Height0 { get; }
-  
-  public ISchemaFixedArray<ushort> Node { get; }
-  
-  public ref ushort Reserved { get; }
+    public ISchemaFixedArray<float> Weight { get; }
+
+    public ref float Height0 { get; }
+
+    public ISchemaFixedArray<ushort> Node { get; }
+
+    public ref ushort Reserved { get; }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FunctionInfo_t : ISchemaClass<FunctionInfo_t> {
+public partial interface FunctionInfo_t : ISchemaClass<FunctionInfo_t>
+{
+    static FunctionInfo_t ISchemaClass<FunctionInfo_t>.From(nint handle) => new FunctionInfo_tImpl(handle);
+    static int ISchemaClass<FunctionInfo_t>.Size => 32;
+    static string? ISchemaClass<FunctionInfo_t>.ClassName => null;
 
-  static FunctionInfo_t ISchemaClass<FunctionInfo_t>.From(nint handle) => new FunctionInfo_tImpl(handle);
-  static int ISchemaClass<FunctionInfo_t>.Size => 32;
-  static string? ISchemaClass<FunctionInfo_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CUtlStringToken NameToken { get; }
-  
-  public ref int ParamCount { get; }
-  
-  public FuseFunctionIndex_t Index { get; }
-  
-  public ref bool IsPure { get; }
+    public string Name { get; set; }
+
+    public ref CUtlStringToken NameToken { get; }
+
+    public ref int ParamCount { get; }
+
+    public FuseFunctionIndex_t Index { get; }
+
+    public ref bool IsPure { get; }
 
 
 }

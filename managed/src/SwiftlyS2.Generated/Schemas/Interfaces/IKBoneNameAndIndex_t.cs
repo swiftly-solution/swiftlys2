@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface IKBoneNameAndIndex_t : ISchemaClass<IKBoneNameAndIndex_t> {
+public partial interface IKBoneNameAndIndex_t : ISchemaClass<IKBoneNameAndIndex_t>
+{
+    static IKBoneNameAndIndex_t ISchemaClass<IKBoneNameAndIndex_t>.From(nint handle) => new IKBoneNameAndIndex_tImpl(handle);
+    static int ISchemaClass<IKBoneNameAndIndex_t>.Size => 16;
+    static string? ISchemaClass<IKBoneNameAndIndex_t>.ClassName => null;
 
-  static IKBoneNameAndIndex_t ISchemaClass<IKBoneNameAndIndex_t>.From(nint handle) => new IKBoneNameAndIndex_tImpl(handle);
-  static int ISchemaClass<IKBoneNameAndIndex_t>.Size => 16;
-  static string? ISchemaClass<IKBoneNameAndIndex_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
+    public string Name { get; set; }
 
 
 }

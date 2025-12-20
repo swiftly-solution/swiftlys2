@@ -6,60 +6,51 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeTri_tImpl : SchemaClass, FeTri_t {
+internal partial class FeTri_tImpl : SchemaClass, FeTri_t
+{
+    public FeTri_tImpl(nint handle) : base(handle) { }
 
-  public FeTri_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x75C07D86CD6694B9, 3, 2, 2);
-  }
-  private static nint? _W1Offset;
-
-  public ref float W1 {
-    get {
-      if (_W1Offset == null) {
-        _W1Offset = Schema.GetOffset(0x75C07D8610473805);
-      }
-      return ref _Handle.AsRef<float>(_W1Offset!.Value);
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x75C07D86CD6694B9, 3, 2, 2);
     }
-  }
-  private static nint? _W2Offset;
+    private static nint? _W1Offset;
 
-  public ref float W2 {
-    get {
-      if (_W2Offset == null) {
-        _W2Offset = Schema.GetOffset(0x75C07D860D47334C);
-      }
-      return ref _Handle.AsRef<float>(_W2Offset!.Value);
+    public ref float W1 {
+        get {
+            _W1Offset = _W1Offset ?? Schema.GetOffset(0x75C07D8610473805);
+            return ref _Handle.AsRef<float>(_W1Offset!.Value);
+        }
     }
-  }
-  private static nint? _V1xOffset;
+    private static nint? _W2Offset;
 
-  public ref float V1x {
-    get {
-      if (_V1xOffset == null) {
-        _V1xOffset = Schema.GetOffset(0x75C07D8680EC4B30);
-      }
-      return ref _Handle.AsRef<float>(_V1xOffset!.Value);
+    public ref float W2 {
+        get {
+            _W2Offset = _W2Offset ?? Schema.GetOffset(0x75C07D860D47334C);
+            return ref _Handle.AsRef<float>(_W2Offset!.Value);
+        }
     }
-  }
-  private static nint? _V2Offset;
+    private static nint? _V1xOffset;
 
-  public ref Vector2D V2 {
-    get {
-      if (_V2Offset == null) {
-        _V2Offset = Schema.GetOffset(0x75C07D86974A4B21);
-      }
-      return ref _Handle.AsRef<Vector2D>(_V2Offset!.Value);
+    public ref float V1x {
+        get {
+            _V1xOffset = _V1xOffset ?? Schema.GetOffset(0x75C07D8680EC4B30);
+            return ref _Handle.AsRef<float>(_V1xOffset!.Value);
+        }
     }
-  }
+    private static nint? _V2Offset;
+
+    public ref Vector2D V2 {
+        get {
+            _V2Offset = _V2Offset ?? Schema.GetOffset(0x75C07D86974A4B21);
+            return ref _Handle.AsRef<Vector2D>(_V2Offset!.Value);
+        }
+    }
 
 
 }

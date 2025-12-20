@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerSave : CBaseTrigger, ISchemaClass<CTriggerSave> {
+public partial interface CTriggerSave : CBaseTrigger, ISchemaClass<CTriggerSave>
+{
+    static CTriggerSave ISchemaClass<CTriggerSave>.From(nint handle) => new CTriggerSaveImpl(handle);
+    static int ISchemaClass<CTriggerSave>.Size => 2488;
+    static string? ISchemaClass<CTriggerSave>.ClassName => "trigger_autosave";
 
-  static CTriggerSave ISchemaClass<CTriggerSave>.From(nint handle) => new CTriggerSaveImpl(handle);
-  static int ISchemaClass<CTriggerSave>.Size => 2488;
-  static string? ISchemaClass<CTriggerSave>.ClassName => "trigger_autosave";
 
-  
-  public ref bool ForceNewLevelUnit { get; }
-  
-  public ref float DangerousTimer { get; }
-  
-  public ref int MinHitPoints { get; }
+    public ref bool ForceNewLevelUnit { get; }
+
+    public ref float DangerousTimer { get; }
+
+    public ref int MinHitPoints { get; }
 
 
 }

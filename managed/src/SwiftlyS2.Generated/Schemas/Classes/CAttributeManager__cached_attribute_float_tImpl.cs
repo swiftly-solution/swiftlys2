@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAttributeManager__cached_attribute_float_tImpl : SchemaClass, CAttributeManager__cached_attribute_float_t {
+internal partial class CAttributeManager__cached_attribute_float_tImpl : SchemaClass, CAttributeManager__cached_attribute_float_t
+{
+    public CAttributeManager__cached_attribute_float_tImpl(nint handle) : base(handle) { }
 
-  public CAttributeManager__cached_attribute_float_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InOffset;
 
-  private static nint? _InOffset;
-
-  public ref float In {
-    get {
-      if (_InOffset == null) {
-        _InOffset = Schema.GetOffset(0xE3C5A1BAD526F734);
-      }
-      return ref _Handle.AsRef<float>(_InOffset!.Value);
+    public ref float In {
+        get {
+            _InOffset = _InOffset ?? Schema.GetOffset(0xE3C5A1BAD526F734);
+            return ref _Handle.AsRef<float>(_InOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttribHookOffset;
+    private static nint? _AttribHookOffset;
 
-  public string AttribHook {
-    get {
-      if (_AttribHookOffset == null) {
-        _AttribHookOffset = Schema.GetOffset(0xE3C5A1BACD388D67);
-      }
-      var ptr = _Handle.Read<nint>(_AttribHookOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_AttribHookOffset == null) {
-        _AttribHookOffset = Schema.GetOffset(0xE3C5A1BACD388D67);
-      }
-      Schema.SetString(_Handle, _AttribHookOffset!.Value, value);
-    }
-  } 
-  private static nint? _OutOffset;
+    public string AttribHook {
+        get {
+            _AttribHookOffset = _AttribHookOffset ?? Schema.GetOffset(0xE3C5A1BACD388D67);
+            return Schema.GetString(_Handle.Read<nint>(_AttribHookOffset!.Value));
+        }
+        set {
+            _AttribHookOffset = _AttribHookOffset ?? Schema.GetOffset(0xE3C5A1BACD388D67);
+            Schema.SetString(_Handle, _AttribHookOffset!.Value, value);
+        }
+    } 
+    private static nint? _OutOffset;
 
-  public ref float Out {
-    get {
-      if (_OutOffset == null) {
-        _OutOffset = Schema.GetOffset(0xE3C5A1BA546B7BE1);
-      }
-      return ref _Handle.AsRef<float>(_OutOffset!.Value);
+    public ref float Out {
+        get {
+            _OutOffset = _OutOffset ?? Schema.GetOffset(0xE3C5A1BA546B7BE1);
+            return ref _Handle.AsRef<float>(_OutOffset!.Value);
+        }
     }
-  }
 
 
 }

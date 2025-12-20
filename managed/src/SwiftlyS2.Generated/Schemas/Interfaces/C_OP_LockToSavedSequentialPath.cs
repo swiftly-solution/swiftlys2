@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LockToSavedSequentialPath : CParticleFunctionOperator, ISchemaClass<C_OP_LockToSavedSequentialPath> {
+public partial interface C_OP_LockToSavedSequentialPath : CParticleFunctionOperator, ISchemaClass<C_OP_LockToSavedSequentialPath>
+{
+    static C_OP_LockToSavedSequentialPath ISchemaClass<C_OP_LockToSavedSequentialPath>.From(nint handle) => new C_OP_LockToSavedSequentialPathImpl(handle);
+    static int ISchemaClass<C_OP_LockToSavedSequentialPath>.Size => 544;
+    static string? ISchemaClass<C_OP_LockToSavedSequentialPath>.ClassName => null;
 
-  static C_OP_LockToSavedSequentialPath ISchemaClass<C_OP_LockToSavedSequentialPath>.From(nint handle) => new C_OP_LockToSavedSequentialPathImpl(handle);
-  static int ISchemaClass<C_OP_LockToSavedSequentialPath>.Size => 544;
-  static string? ISchemaClass<C_OP_LockToSavedSequentialPath>.ClassName => null;
 
-  
-  public ref float FadeStart { get; }
-  
-  public ref float FadeEnd { get; }
-  
-  public ref bool CPPairs { get; }
-  
-  public CPathParameters PathParams { get; }
+    public ref float FadeStart { get; }
+
+    public ref float FadeEnd { get; }
+
+    public ref bool CPPairs { get; }
+
+    public CPathParameters PathParams { get; }
 
 
 }

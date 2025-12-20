@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_BasicMovementImpl : CParticleFunctionOperatorImpl, C_OP_BasicMovement {
+internal partial class C_OP_BasicMovementImpl : CParticleFunctionOperatorImpl, C_OP_BasicMovement
+{
+    public C_OP_BasicMovementImpl(nint handle) : base(handle) { }
 
-  public C_OP_BasicMovementImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GravityOffset;
 
-  private static nint? _GravityOffset;
-
-  public CParticleCollectionVecInput Gravity {
-    get {
-      if (_GravityOffset == null) {
-        _GravityOffset = Schema.GetOffset(0xC8273B20790C70C5);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _GravityOffset!.Value);
+    public CParticleCollectionVecInput Gravity {
+        get {
+            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0xC8273B20790C70C5);
+            return new CParticleCollectionVecInputImpl(_Handle + _GravityOffset!.Value);
+        }
     }
-  }
-  private static nint? _DragOffset;
+    private static nint? _DragOffset;
 
-  public CParticleCollectionFloatInput Drag {
-    get {
-      if (_DragOffset == null) {
-        _DragOffset = Schema.GetOffset(0xC8273B2050DA6497);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _DragOffset!.Value);
+    public CParticleCollectionFloatInput Drag {
+        get {
+            _DragOffset = _DragOffset ?? Schema.GetOffset(0xC8273B2050DA6497);
+            return new CParticleCollectionFloatInputImpl(_Handle + _DragOffset!.Value);
+        }
     }
-  }
-  private static nint? _MassControlsOffset;
+    private static nint? _MassControlsOffset;
 
-  public CParticleMassCalculationParameters MassControls {
-    get {
-      if (_MassControlsOffset == null) {
-        _MassControlsOffset = Schema.GetOffset(0xC8273B2039CBEACB);
-      }
-      return new CParticleMassCalculationParametersImpl(_Handle + _MassControlsOffset!.Value);
+    public CParticleMassCalculationParameters MassControls {
+        get {
+            _MassControlsOffset = _MassControlsOffset ?? Schema.GetOffset(0xC8273B2039CBEACB);
+            return new CParticleMassCalculationParametersImpl(_Handle + _MassControlsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxConstraintPassesOffset;
+    private static nint? _MaxConstraintPassesOffset;
 
-  public ref int MaxConstraintPasses {
-    get {
-      if (_MaxConstraintPassesOffset == null) {
-        _MaxConstraintPassesOffset = Schema.GetOffset(0xC8273B20D83D0CAB);
-      }
-      return ref _Handle.AsRef<int>(_MaxConstraintPassesOffset!.Value);
+    public ref int MaxConstraintPasses {
+        get {
+            _MaxConstraintPassesOffset = _MaxConstraintPassesOffset ?? Schema.GetOffset(0xC8273B20D83D0CAB);
+            return ref _Handle.AsRef<int>(_MaxConstraintPassesOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseNewCodeOffset;
+    private static nint? _UseNewCodeOffset;
 
-  public ref bool UseNewCode {
-    get {
-      if (_UseNewCodeOffset == null) {
-        _UseNewCodeOffset = Schema.GetOffset(0xC8273B207C6D1CDF);
-      }
-      return ref _Handle.AsRef<bool>(_UseNewCodeOffset!.Value);
+    public ref bool UseNewCode {
+        get {
+            _UseNewCodeOffset = _UseNewCodeOffset ?? Schema.GetOffset(0xC8273B207C6D1CDF);
+            return ref _Handle.AsRef<bool>(_UseNewCodeOffset!.Value);
+        }
     }
-  }
 
 
 }

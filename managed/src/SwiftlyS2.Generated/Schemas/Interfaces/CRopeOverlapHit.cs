@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRopeOverlapHit : ISchemaClass<CRopeOverlapHit> {
+public partial interface CRopeOverlapHit : ISchemaClass<CRopeOverlapHit>
+{
+    static CRopeOverlapHit ISchemaClass<CRopeOverlapHit>.From(nint handle) => new CRopeOverlapHitImpl(handle);
+    static int ISchemaClass<CRopeOverlapHit>.Size => 32;
+    static string? ISchemaClass<CRopeOverlapHit>.ClassName => null;
 
-  static CRopeOverlapHit ISchemaClass<CRopeOverlapHit>.From(nint handle) => new CRopeOverlapHitImpl(handle);
-  static int ISchemaClass<CRopeOverlapHit>.Size => 32;
-  static string? ISchemaClass<CRopeOverlapHit>.ClassName => null;
 
-  
-  public ref CHandle<CBaseEntity> Entity { get; }
-  
-  public ref CUtlVector<int> OverlappingLinks { get; }
+    public ref CHandle<CBaseEntity> Entity { get; }
+
+    public ref CUtlVector<int> OverlappingLinks { get; }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvMuzzleFlash : CPointEntity, ISchemaClass<CEnvMuzzleFlash> {
+public partial interface CEnvMuzzleFlash : CPointEntity, ISchemaClass<CEnvMuzzleFlash>
+{
+    static CEnvMuzzleFlash ISchemaClass<CEnvMuzzleFlash>.From(nint handle) => new CEnvMuzzleFlashImpl(handle);
+    static int ISchemaClass<CEnvMuzzleFlash>.Size => 1280;
+    static string? ISchemaClass<CEnvMuzzleFlash>.ClassName => "env_muzzleflash";
 
-  static CEnvMuzzleFlash ISchemaClass<CEnvMuzzleFlash>.From(nint handle) => new CEnvMuzzleFlashImpl(handle);
-  static int ISchemaClass<CEnvMuzzleFlash>.Size => 1280;
-  static string? ISchemaClass<CEnvMuzzleFlash>.ClassName => "env_muzzleflash";
 
-  
-  public ref float Scale { get; }
-  
-  public string ParentAttachment { get; set; }
+    public ref float Scale { get; }
+
+    public string ParentAttachment { get; set; }
 
 
 }

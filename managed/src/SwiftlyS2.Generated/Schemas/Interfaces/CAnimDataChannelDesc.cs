@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimDataChannelDesc : ISchemaClass<CAnimDataChannelDesc> {
+public partial interface CAnimDataChannelDesc : ISchemaClass<CAnimDataChannelDesc>
+{
+    static CAnimDataChannelDesc ISchemaClass<CAnimDataChannelDesc>.From(nint handle) => new CAnimDataChannelDescImpl(handle);
+    static int ISchemaClass<CAnimDataChannelDesc>.Size => 144;
+    static string? ISchemaClass<CAnimDataChannelDesc>.ClassName => null;
 
-  static CAnimDataChannelDesc ISchemaClass<CAnimDataChannelDesc>.From(nint handle) => new CAnimDataChannelDescImpl(handle);
-  static int ISchemaClass<CAnimDataChannelDesc>.Size => 144;
-  static string? ISchemaClass<CAnimDataChannelDesc>.ClassName => null;
 
-  
-  public ref CBufferString ChannelClass { get; }
-  
-  public ref CBufferString VariableName { get; }
-  
-  public ref int Flags { get; }
-  
-  public ref int Type { get; }
-  
-  public ref CBufferString Grouping { get; }
-  
-  public ref CBufferString Description { get; }
-  
-  public ref CUtlVector<CBufferString> ElementNameArray { get; }
-  
-  public ref CUtlVector<int> ElementIndexArray { get; }
-  
-  public ref CUtlVector<uint> ElementMaskArray { get; }
+    public ref CBufferString ChannelClass { get; }
+
+    public ref CBufferString VariableName { get; }
+
+    public ref int Flags { get; }
+
+    public ref int Type { get; }
+
+    public ref CBufferString Grouping { get; }
+
+    public ref CBufferString Description { get; }
+
+    public ref CUtlVector<CBufferString> ElementNameArray { get; }
+
+    public ref CUtlVector<int> ElementIndexArray { get; }
+
+    public ref CUtlVector<uint> ElementMaskArray { get; }
 
 
 }

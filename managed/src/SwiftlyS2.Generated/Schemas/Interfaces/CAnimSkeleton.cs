@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimSkeleton : ISchemaClass<CAnimSkeleton> {
+public partial interface CAnimSkeleton : ISchemaClass<CAnimSkeleton>
+{
+    static CAnimSkeleton ISchemaClass<CAnimSkeleton>.From(nint handle) => new CAnimSkeletonImpl(handle);
+    static int ISchemaClass<CAnimSkeleton>.Size => 208;
+    static string? ISchemaClass<CAnimSkeleton>.ClassName => null;
 
-  static CAnimSkeleton ISchemaClass<CAnimSkeleton>.From(nint handle) => new CAnimSkeletonImpl(handle);
-  static int ISchemaClass<CAnimSkeleton>.Size => 208;
-  static string? ISchemaClass<CAnimSkeleton>.ClassName => null;
 
-  
-  public ref CUtlVector<CTransform> LocalSpaceTransforms { get; }
-  
-  public ref CUtlVector<CTransform> ModelSpaceTransforms { get; }
-  
-  public ref CUtlVector<CUtlString> BoneNames { get; }
-  
-  public ref CUtlVector<CUtlVector<int>> Children { get; }
-  
-  public ref CUtlVector<int> Parents { get; }
-  
-  public ref CUtlVector<CAnimFoot> Feet { get; }
-  
-  public ref CUtlVector<CUtlString> MorphNames { get; }
-  
-  public ref CUtlVector<int> LodBoneCounts { get; }
+    public ref CUtlVector<CTransform> LocalSpaceTransforms { get; }
+
+    public ref CUtlVector<CTransform> ModelSpaceTransforms { get; }
+
+    public ref CUtlVector<CUtlString> BoneNames { get; }
+
+    public ref CUtlVector<CUtlVector<int>> Children { get; }
+
+    public ref CUtlVector<int> Parents { get; }
+
+    public ref CUtlVector<CAnimFoot> Feet { get; }
+
+    public ref CUtlVector<CUtlString> MorphNames { get; }
+
+    public ref CUtlVector<int> LodBoneCounts { get; }
 
 
 }

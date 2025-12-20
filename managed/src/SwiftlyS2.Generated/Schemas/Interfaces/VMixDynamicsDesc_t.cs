@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixDynamicsDesc_t : ISchemaClass<VMixDynamicsDesc_t> {
+public partial interface VMixDynamicsDesc_t : ISchemaClass<VMixDynamicsDesc_t>
+{
+    static VMixDynamicsDesc_t ISchemaClass<VMixDynamicsDesc_t>.From(nint handle) => new VMixDynamicsDesc_tImpl(handle);
+    static int ISchemaClass<VMixDynamicsDesc_t>.Size => 48;
+    static string? ISchemaClass<VMixDynamicsDesc_t>.ClassName => null;
 
-  static VMixDynamicsDesc_t ISchemaClass<VMixDynamicsDesc_t>.From(nint handle) => new VMixDynamicsDesc_tImpl(handle);
-  static int ISchemaClass<VMixDynamicsDesc_t>.Size => 48;
-  static string? ISchemaClass<VMixDynamicsDesc_t>.ClassName => null;
 
-  
-  public ref float FldbGain { get; }
-  
-  public ref float FldbNoiseGateThreshold { get; }
-  
-  public ref float FldbCompressionThreshold { get; }
-  
-  public ref float FldbLimiterThreshold { get; }
-  
-  public ref float FldbKneeWidth { get; }
-  
-  public ref float Ratio { get; }
-  
-  public ref float LimiterRatio { get; }
-  
-  public ref float AttackTimeMS { get; }
-  
-  public ref float ReleaseTimeMS { get; }
-  
-  public ref float RMSTimeMS { get; }
-  
-  public ref float WetMix { get; }
-  
-  public ref bool PeakMode { get; }
+    public ref float FldbGain { get; }
+
+    public ref float FldbNoiseGateThreshold { get; }
+
+    public ref float FldbCompressionThreshold { get; }
+
+    public ref float FldbLimiterThreshold { get; }
+
+    public ref float FldbKneeWidth { get; }
+
+    public ref float Ratio { get; }
+
+    public ref float LimiterRatio { get; }
+
+    public ref float AttackTimeMS { get; }
+
+    public ref float ReleaseTimeMS { get; }
+
+    public ref float RMSTimeMS { get; }
+
+    public ref float WetMix { get; }
+
+    public ref bool PeakMode { get; }
 
 
 }

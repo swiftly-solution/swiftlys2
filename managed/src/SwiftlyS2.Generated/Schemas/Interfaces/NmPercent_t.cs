@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface NmPercent_t : ISchemaClass<NmPercent_t> {
+public partial interface NmPercent_t : ISchemaClass<NmPercent_t>
+{
+    static NmPercent_t ISchemaClass<NmPercent_t>.From(nint handle) => new NmPercent_tImpl(handle);
+    static int ISchemaClass<NmPercent_t>.Size => 4;
+    static string? ISchemaClass<NmPercent_t>.ClassName => null;
 
-  static NmPercent_t ISchemaClass<NmPercent_t>.From(nint handle) => new NmPercent_tImpl(handle);
-  static int ISchemaClass<NmPercent_t>.Size => 4;
-  static string? ISchemaClass<NmPercent_t>.ClassName => null;
 
-  
-  public ref float Value { get; }
+    public ref float Value { get; }
 
 
 }

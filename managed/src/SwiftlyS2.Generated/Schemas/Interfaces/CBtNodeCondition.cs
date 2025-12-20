@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBtNodeCondition : CBtNodeDecorator, ISchemaClass<CBtNodeCondition> {
+public partial interface CBtNodeCondition : CBtNodeDecorator, ISchemaClass<CBtNodeCondition>
+{
+    static CBtNodeCondition ISchemaClass<CBtNodeCondition>.From(nint handle) => new CBtNodeConditionImpl(handle);
+    static int ISchemaClass<CBtNodeCondition>.Size => 96;
+    static string? ISchemaClass<CBtNodeCondition>.ClassName => null;
 
-  static CBtNodeCondition ISchemaClass<CBtNodeCondition>.From(nint handle) => new CBtNodeConditionImpl(handle);
-  static int ISchemaClass<CBtNodeCondition>.Size => 96;
-  static string? ISchemaClass<CBtNodeCondition>.ClassName => null;
 
-  
-  public ref bool Negated { get; }
+    public ref bool Negated { get; }
 
 
 }

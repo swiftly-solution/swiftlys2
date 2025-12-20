@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class IntervalTimerImpl : SchemaClass, IntervalTimer {
+internal partial class IntervalTimerImpl : SchemaClass, IntervalTimer
+{
+    public IntervalTimerImpl(nint handle) : base(handle) { }
 
-  public IntervalTimerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TimestampOffset;
 
-  private static nint? _TimestampOffset;
-
-  public GameTime_t Timestamp {
-    get {
-      if (_TimestampOffset == null) {
-        _TimestampOffset = Schema.GetOffset(0x8FD39659B6C56F43);
-      }
-      return new GameTime_tImpl(_Handle + _TimestampOffset!.Value);
+    public GameTime_t Timestamp {
+        get {
+            _TimestampOffset = _TimestampOffset ?? Schema.GetOffset(0x8FD39659B6C56F43);
+            return new GameTime_tImpl(_Handle + _TimestampOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldGroupIdOffset;
+    private static nint? _WorldGroupIdOffset;
 
-  public ref uint WorldGroupId {
-    get {
-      if (_WorldGroupIdOffset == null) {
-        _WorldGroupIdOffset = Schema.GetOffset(0x8FD396597414B193);
-      }
-      return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+    public ref uint WorldGroupId {
+        get {
+            _WorldGroupIdOffset = _WorldGroupIdOffset ?? Schema.GetOffset(0x8FD396597414B193);
+            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+        }
     }
-  }
 
-  public void TimestampUpdated() {
-    Schema.Update(_Handle, 0x8FD39659B6C56F43);
-  }
-  public void WorldGroupIdUpdated() {
-    Schema.Update(_Handle, 0x8FD396597414B193);
-  }
+    public void TimestampUpdated() => Schema.Update(_Handle, 0x8FD39659B6C56F43);
+    public void WorldGroupIdUpdated() => Schema.Update(_Handle, 0x8FD396597414B193);
 }

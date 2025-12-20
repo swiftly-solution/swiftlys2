@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTestPulseIOAPI : ISchemaClass<CTestPulseIOAPI> {
-
-  static CTestPulseIOAPI ISchemaClass<CTestPulseIOAPI>.From(nint handle) => new CTestPulseIOAPIImpl(handle);
-  static int ISchemaClass<CTestPulseIOAPI>.Size => 8;
-  static string? ISchemaClass<CTestPulseIOAPI>.ClassName => null;
+public partial interface CTestPulseIOAPI : ISchemaClass<CTestPulseIOAPI>
+{
+    static CTestPulseIOAPI ISchemaClass<CTestPulseIOAPI>.From(nint handle) => new CTestPulseIOAPIImpl(handle);
+    static int ISchemaClass<CTestPulseIOAPI>.Size => 8;
+    static string? ISchemaClass<CTestPulseIOAPI>.ClassName => null;
 
 
 

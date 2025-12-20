@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderPostProcessingImpl : CParticleFunctionRendererImpl, C_OP_RenderPostProcessing {
+internal partial class C_OP_RenderPostProcessingImpl : CParticleFunctionRendererImpl, C_OP_RenderPostProcessing
+{
+    public C_OP_RenderPostProcessingImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderPostProcessingImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PostProcessStrengthOffset;
 
-  private static nint? _PostProcessStrengthOffset;
-
-  public CPerParticleFloatInput PostProcessStrength {
-    get {
-      if (_PostProcessStrengthOffset == null) {
-        _PostProcessStrengthOffset = Schema.GetOffset(0xD64D179C653C1A17);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _PostProcessStrengthOffset!.Value);
+    public CPerParticleFloatInput PostProcessStrength {
+        get {
+            _PostProcessStrengthOffset = _PostProcessStrengthOffset ?? Schema.GetOffset(0xD64D179C653C1A17);
+            return new CPerParticleFloatInputImpl(_Handle + _PostProcessStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _PostTextureOffset;
+    private static nint? _PostTextureOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostTexture {
-    get {
-      if (_PostTextureOffset == null) {
-        _PostTextureOffset = Schema.GetOffset(0xD64D179C943F8D28);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostTextureOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostTexture {
+        get {
+            _PostTextureOffset = _PostTextureOffset ?? Schema.GetOffset(0xD64D179C943F8D28);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCPostProcessingResource>>(_PostTextureOffset!.Value);
+        }
     }
-  }
-  private static nint? _PriorityOffset;
+    private static nint? _PriorityOffset;
 
-  public ref ParticlePostProcessPriorityGroup_t Priority {
-    get {
-      if (_PriorityOffset == null) {
-        _PriorityOffset = Schema.GetOffset(0xD64D179CE7EFB335);
-      }
-      return ref _Handle.AsRef<ParticlePostProcessPriorityGroup_t>(_PriorityOffset!.Value);
+    public ref ParticlePostProcessPriorityGroup_t Priority {
+        get {
+            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0xD64D179CE7EFB335);
+            return ref _Handle.AsRef<ParticlePostProcessPriorityGroup_t>(_PriorityOffset!.Value);
+        }
     }
-  }
 
 
 }

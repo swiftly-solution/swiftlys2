@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigListImpl : SchemaClass, CModelConfigList {
+internal partial class CModelConfigListImpl : SchemaClass, CModelConfigList
+{
+    public CModelConfigListImpl(nint handle) : base(handle) { }
 
-  public CModelConfigListImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HideMaterialGroupInToolsOffset;
 
-  private static nint? _HideMaterialGroupInToolsOffset;
-
-  public ref bool HideMaterialGroupInTools {
-    get {
-      if (_HideMaterialGroupInToolsOffset == null) {
-        _HideMaterialGroupInToolsOffset = Schema.GetOffset(0x5291D8D9214E9E53);
-      }
-      return ref _Handle.AsRef<bool>(_HideMaterialGroupInToolsOffset!.Value);
+    public ref bool HideMaterialGroupInTools {
+        get {
+            _HideMaterialGroupInToolsOffset = _HideMaterialGroupInToolsOffset ?? Schema.GetOffset(0x5291D8D9214E9E53);
+            return ref _Handle.AsRef<bool>(_HideMaterialGroupInToolsOffset!.Value);
+        }
     }
-  }
-  private static nint? _HideRenderColorInToolsOffset;
+    private static nint? _HideRenderColorInToolsOffset;
 
-  public ref bool HideRenderColorInTools {
-    get {
-      if (_HideRenderColorInToolsOffset == null) {
-        _HideRenderColorInToolsOffset = Schema.GetOffset(0x5291D8D9C25B2716);
-      }
-      return ref _Handle.AsRef<bool>(_HideRenderColorInToolsOffset!.Value);
+    public ref bool HideRenderColorInTools {
+        get {
+            _HideRenderColorInToolsOffset = _HideRenderColorInToolsOffset ?? Schema.GetOffset(0x5291D8D9C25B2716);
+            return ref _Handle.AsRef<bool>(_HideRenderColorInToolsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConfigsOffset;
+    private static nint? _ConfigsOffset;
 
-  public ref CUtlVector<PointerTo<CModelConfig>> Configs {
-    get {
-      if (_ConfigsOffset == null) {
-        _ConfigsOffset = Schema.GetOffset(0x5291D8D906111EDC);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfig>>>(_ConfigsOffset!.Value);
+    public ref CUtlVector<PointerTo<CModelConfig>> Configs {
+        get {
+            _ConfigsOffset = _ConfigsOffset ?? Schema.GetOffset(0x5291D8D906111EDC);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfig>>>(_ConfigsOffset!.Value);
+        }
     }
-  }
 
 
 }

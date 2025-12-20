@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDirectPlaybackTagDataImpl : SchemaClass, CDirectPlaybackTagData {
+internal partial class CDirectPlaybackTagDataImpl : SchemaClass, CDirectPlaybackTagData
+{
+    public CDirectPlaybackTagDataImpl(nint handle) : base(handle) { }
 
-  public CDirectPlaybackTagDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SequenceNameOffset;
 
-  private static nint? _SequenceNameOffset;
+    public string SequenceName {
+        get {
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xAADCE162B4A24CB);
+            return Schema.GetString(_Handle.Read<nint>(_SequenceNameOffset!.Value));
+        }
+        set {
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0xAADCE162B4A24CB);
+            Schema.SetString(_Handle, _SequenceNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _TagsOffset;
 
-  public string SequenceName {
-    get {
-      if (_SequenceNameOffset == null) {
-        _SequenceNameOffset = Schema.GetOffset(0xAADCE162B4A24CB);
-      }
-      var ptr = _Handle.Read<nint>(_SequenceNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<TagSpan_t> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xAADCE16B46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+        }
     }
-    set {
-      if (_SequenceNameOffset == null) {
-        _SequenceNameOffset = Schema.GetOffset(0xAADCE162B4A24CB);
-      }
-      Schema.SetString(_Handle, _SequenceNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _TagsOffset;
-
-  public ref CUtlVector<TagSpan_t> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0xAADCE16B46C8540);
-      }
-      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
-    }
-  }
 
 
 }

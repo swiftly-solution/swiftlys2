@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum OnFrame : byte {
-
+public enum OnFrame : byte
+{
  ONFRAME_UNKNOWN = 0,
 
  ONFRAME_TRUE = 1,

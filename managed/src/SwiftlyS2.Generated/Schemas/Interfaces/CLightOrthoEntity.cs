@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLightOrthoEntity : CLightEntity, ISchemaClass<CLightOrthoEntity> {
-
-  static CLightOrthoEntity ISchemaClass<CLightOrthoEntity>.From(nint handle) => new CLightOrthoEntityImpl(handle);
-  static int ISchemaClass<CLightOrthoEntity>.Size => 2016;
-  static string? ISchemaClass<CLightOrthoEntity>.ClassName => "light_ortho";
+public partial interface CLightOrthoEntity : CLightEntity, ISchemaClass<CLightOrthoEntity>
+{
+    static CLightOrthoEntity ISchemaClass<CLightOrthoEntity>.From(nint handle) => new CLightOrthoEntityImpl(handle);
+    static int ISchemaClass<CLightOrthoEntity>.Size => 2016;
+    static string? ISchemaClass<CLightOrthoEntity>.ClassName => "light_ortho";
 
 
 

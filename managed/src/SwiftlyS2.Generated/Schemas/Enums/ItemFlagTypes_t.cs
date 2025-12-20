@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ItemFlagTypes_t : byte {
-
+public enum ItemFlagTypes_t : byte
+{
  ITEM_FLAG_NONE = 0,
 
  ITEM_FLAG_CAN_SELECT_WITHOUT_AMMO = 1,

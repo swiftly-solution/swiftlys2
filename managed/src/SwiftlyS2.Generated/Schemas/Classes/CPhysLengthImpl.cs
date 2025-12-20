@@ -6,70 +6,59 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysLengthImpl : CPhysConstraintImpl, CPhysLength {
+internal partial class CPhysLengthImpl : CPhysConstraintImpl, CPhysLength
+{
+    public CPhysLengthImpl(nint handle) : base(handle) { }
 
-  public CPhysLengthImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<Vector> Offset {
-    get => new SchemaFixedArray<Vector>(_Handle, 0x9203A50AF836806A, 2, 12, 4);
-  }
-  private static nint? _AttachOffset;
-
-  public ref Vector Attach {
-    get {
-      if (_AttachOffset == null) {
-        _AttachOffset = Schema.GetOffset(0x9203A50A4CAEA9A4);
-      }
-      return ref _Handle.AsRef<Vector>(_AttachOffset!.Value);
+    public ISchemaFixedArray<Vector> Offset {
+        get => new SchemaFixedArray<Vector>(_Handle, 0x9203A50AF836806A, 2, 12, 4);
     }
-  }
-  private static nint? _AddLengthOffset;
+    private static nint? _AttachOffset;
 
-  public ref float AddLength {
-    get {
-      if (_AddLengthOffset == null) {
-        _AddLengthOffset = Schema.GetOffset(0x9203A50AA30AA6D8);
-      }
-      return ref _Handle.AsRef<float>(_AddLengthOffset!.Value);
+    public ref Vector Attach {
+        get {
+            _AttachOffset = _AttachOffset ?? Schema.GetOffset(0x9203A50A4CAEA9A4);
+            return ref _Handle.AsRef<Vector>(_AttachOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinLengthOffset;
+    private static nint? _AddLengthOffset;
 
-  public ref float MinLength {
-    get {
-      if (_MinLengthOffset == null) {
-        _MinLengthOffset = Schema.GetOffset(0x9203A50A8FD988D7);
-      }
-      return ref _Handle.AsRef<float>(_MinLengthOffset!.Value);
+    public ref float AddLength {
+        get {
+            _AddLengthOffset = _AddLengthOffset ?? Schema.GetOffset(0x9203A50AA30AA6D8);
+            return ref _Handle.AsRef<float>(_AddLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _TotalLengthOffset;
+    private static nint? _MinLengthOffset;
 
-  public ref float TotalLength {
-    get {
-      if (_TotalLengthOffset == null) {
-        _TotalLengthOffset = Schema.GetOffset(0x9203A50A6825671D);
-      }
-      return ref _Handle.AsRef<float>(_TotalLengthOffset!.Value);
+    public ref float MinLength {
+        get {
+            _MinLengthOffset = _MinLengthOffset ?? Schema.GetOffset(0x9203A50A8FD988D7);
+            return ref _Handle.AsRef<float>(_MinLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnableCollisionOffset;
+    private static nint? _TotalLengthOffset;
 
-  public ref bool EnableCollision {
-    get {
-      if (_EnableCollisionOffset == null) {
-        _EnableCollisionOffset = Schema.GetOffset(0x9203A50A1E5412CE);
-      }
-      return ref _Handle.AsRef<bool>(_EnableCollisionOffset!.Value);
+    public ref float TotalLength {
+        get {
+            _TotalLengthOffset = _TotalLengthOffset ?? Schema.GetOffset(0x9203A50A6825671D);
+            return ref _Handle.AsRef<float>(_TotalLengthOffset!.Value);
+        }
     }
-  }
+    private static nint? _EnableCollisionOffset;
+
+    public ref bool EnableCollision {
+        get {
+            _EnableCollisionOffset = _EnableCollisionOffset ?? Schema.GetOffset(0x9203A50A1E5412CE);
+            return ref _Handle.AsRef<bool>(_EnableCollisionOffset!.Value);
+        }
+    }
 
 
 }

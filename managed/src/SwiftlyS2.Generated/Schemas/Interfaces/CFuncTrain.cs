@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncTrain : CBasePlatTrain, ISchemaClass<CFuncTrain> {
+public partial interface CFuncTrain : CBasePlatTrain, ISchemaClass<CFuncTrain>
+{
+    static CFuncTrain ISchemaClass<CFuncTrain>.From(nint handle) => new CFuncTrainImpl(handle);
+    static int ISchemaClass<CFuncTrain>.Size => 2208;
+    static string? ISchemaClass<CFuncTrain>.ClassName => "func_train";
 
-  static CFuncTrain ISchemaClass<CFuncTrain>.From(nint handle) => new CFuncTrainImpl(handle);
-  static int ISchemaClass<CFuncTrain>.Size => 2208;
-  static string? ISchemaClass<CFuncTrain>.ClassName => "func_train";
 
-  
-  public ref CHandle<CBaseEntity> CurrentTarget { get; }
-  
-  public ref bool Activated { get; }
-  
-  public ref CHandle<CBaseEntity> Enemy { get; }
-  
-  public ref float BlockDamage { get; }
-  
-  public GameTime_t NextBlockTime { get; }
-  
-  public string LastTarget { get; set; }
+    public ref CHandle<CBaseEntity> CurrentTarget { get; }
+
+    public ref bool Activated { get; }
+
+    public ref CHandle<CBaseEntity> Enemy { get; }
+
+    public ref float BlockDamage { get; }
+
+    public GameTime_t NextBlockTime { get; }
+
+    public string LastTarget { get; set; }
 
 
 }

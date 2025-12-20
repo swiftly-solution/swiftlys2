@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseNodeDynamicOutflows_t : ISchemaClass<PulseNodeDynamicOutflows_t> {
+public partial interface PulseNodeDynamicOutflows_t : ISchemaClass<PulseNodeDynamicOutflows_t>
+{
+    static PulseNodeDynamicOutflows_t ISchemaClass<PulseNodeDynamicOutflows_t>.From(nint handle) => new PulseNodeDynamicOutflows_tImpl(handle);
+    static int ISchemaClass<PulseNodeDynamicOutflows_t>.Size => 24;
+    static string? ISchemaClass<PulseNodeDynamicOutflows_t>.ClassName => null;
 
-  static PulseNodeDynamicOutflows_t ISchemaClass<PulseNodeDynamicOutflows_t>.From(nint handle) => new PulseNodeDynamicOutflows_tImpl(handle);
-  static int ISchemaClass<PulseNodeDynamicOutflows_t>.Size => 24;
-  static string? ISchemaClass<PulseNodeDynamicOutflows_t>.ClassName => null;
 
-  
-  public ref CUtlVector<PulseNodeDynamicOutflows_t__DynamicOutflow_t> Outflows { get; }
+    public ref CUtlVector<PulseNodeDynamicOutflows_t__DynamicOutflow_t> Outflows { get; }
 
 
 }

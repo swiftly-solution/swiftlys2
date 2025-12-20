@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ClutterTile_tImpl : SchemaClass, ClutterTile_t {
+internal partial class ClutterTile_tImpl : SchemaClass, ClutterTile_t
+{
+    public ClutterTile_tImpl(nint handle) : base(handle) { }
 
-  public ClutterTile_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FirstInstanceOffset;
 
-  private static nint? _FirstInstanceOffset;
-
-  public ref uint FirstInstance {
-    get {
-      if (_FirstInstanceOffset == null) {
-        _FirstInstanceOffset = Schema.GetOffset(0xAC4066F19AF07072);
-      }
-      return ref _Handle.AsRef<uint>(_FirstInstanceOffset!.Value);
+    public ref uint FirstInstance {
+        get {
+            _FirstInstanceOffset = _FirstInstanceOffset ?? Schema.GetOffset(0xAC4066F19AF07072);
+            return ref _Handle.AsRef<uint>(_FirstInstanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastInstanceOffset;
+    private static nint? _LastInstanceOffset;
 
-  public ref uint LastInstance {
-    get {
-      if (_LastInstanceOffset == null) {
-        _LastInstanceOffset = Schema.GetOffset(0xAC4066F10D99AC92);
-      }
-      return ref _Handle.AsRef<uint>(_LastInstanceOffset!.Value);
+    public ref uint LastInstance {
+        get {
+            _LastInstanceOffset = _LastInstanceOffset ?? Schema.GetOffset(0xAC4066F10D99AC92);
+            return ref _Handle.AsRef<uint>(_LastInstanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoundsWsOffset;
+    private static nint? _BoundsWsOffset;
 
-  public AABB_t BoundsWs {
-    get {
-      if (_BoundsWsOffset == null) {
-        _BoundsWsOffset = Schema.GetOffset(0xAC4066F1BE54855A);
-      }
-      return new AABB_tImpl(_Handle + _BoundsWsOffset!.Value);
+    public AABB_t BoundsWs {
+        get {
+            _BoundsWsOffset = _BoundsWsOffset ?? Schema.GetOffset(0xAC4066F1BE54855A);
+            return new AABB_tImpl(_Handle + _BoundsWsOffset!.Value);
+        }
     }
-  }
 
 
 }

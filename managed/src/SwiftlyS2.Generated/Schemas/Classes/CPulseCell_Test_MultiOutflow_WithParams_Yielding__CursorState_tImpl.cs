@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Test_MultiOutflow_WithParams_Yielding__CursorState_tImpl : SchemaClass, CPulseCell_Test_MultiOutflow_WithParams_Yielding__CursorState_t {
+internal partial class CPulseCell_Test_MultiOutflow_WithParams_Yielding__CursorState_tImpl : SchemaClass, CPulseCell_Test_MultiOutflow_WithParams_Yielding__CursorState_t
+{
+    public CPulseCell_Test_MultiOutflow_WithParams_Yielding__CursorState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Test_MultiOutflow_WithParams_Yielding__CursorState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TestStepOffset;
 
-  private static nint? _TestStepOffset;
-
-  public ref int TestStep {
-    get {
-      if (_TestStepOffset == null) {
-        _TestStepOffset = Schema.GetOffset(0xE579E02F4D61CC93);
-      }
-      return ref _Handle.AsRef<int>(_TestStepOffset!.Value);
+    public ref int TestStep {
+        get {
+            _TestStepOffset = _TestStepOffset ?? Schema.GetOffset(0xE579E02F4D61CC93);
+            return ref _Handle.AsRef<int>(_TestStepOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqPoseSetting : ISchemaClass<CSeqPoseSetting> {
+public partial interface CSeqPoseSetting : ISchemaClass<CSeqPoseSetting>
+{
+    static CSeqPoseSetting ISchemaClass<CSeqPoseSetting>.From(nint handle) => new CSeqPoseSettingImpl(handle);
+    static int ISchemaClass<CSeqPoseSetting>.Size => 64;
+    static string? ISchemaClass<CSeqPoseSetting>.ClassName => null;
 
-  static CSeqPoseSetting ISchemaClass<CSeqPoseSetting>.From(nint handle) => new CSeqPoseSettingImpl(handle);
-  static int ISchemaClass<CSeqPoseSetting>.Size => 64;
-  static string? ISchemaClass<CSeqPoseSetting>.ClassName => null;
 
-  
-  public ref CBufferString PoseParameter { get; }
-  
-  public ref CBufferString Attachment { get; }
-  
-  public ref CBufferString ReferenceSequence { get; }
-  
-  public ref float Value { get; }
-  
-  public ref bool X { get; }
-  
-  public ref bool Y { get; }
-  
-  public ref bool Z { get; }
-  
-  public ref int Type { get; }
+    public ref CBufferString PoseParameter { get; }
+
+    public ref CBufferString Attachment { get; }
+
+    public ref CBufferString ReferenceSequence { get; }
+
+    public ref float Value { get; }
+
+    public ref bool X { get; }
+
+    public ref bool Y { get; }
+
+    public ref bool Z { get; }
+
+    public ref int Type { get; }
 
 
 }

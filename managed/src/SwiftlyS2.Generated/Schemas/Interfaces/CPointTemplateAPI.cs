@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointTemplateAPI : ISchemaClass<CPointTemplateAPI> {
-
-  static CPointTemplateAPI ISchemaClass<CPointTemplateAPI>.From(nint handle) => new CPointTemplateAPIImpl(handle);
-  static int ISchemaClass<CPointTemplateAPI>.Size => 8;
-  static string? ISchemaClass<CPointTemplateAPI>.ClassName => null;
+public partial interface CPointTemplateAPI : ISchemaClass<CPointTemplateAPI>
+{
+    static CPointTemplateAPI ISchemaClass<CPointTemplateAPI>.From(nint handle) => new CPointTemplateAPIImpl(handle);
+    static int ISchemaClass<CPointTemplateAPI>.Size => 8;
+    static string? ISchemaClass<CPointTemplateAPI>.ClassName => null;
 
 
 

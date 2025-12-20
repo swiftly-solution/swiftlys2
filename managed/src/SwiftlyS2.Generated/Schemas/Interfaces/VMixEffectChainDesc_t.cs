@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixEffectChainDesc_t : ISchemaClass<VMixEffectChainDesc_t> {
+public partial interface VMixEffectChainDesc_t : ISchemaClass<VMixEffectChainDesc_t>
+{
+    static VMixEffectChainDesc_t ISchemaClass<VMixEffectChainDesc_t>.From(nint handle) => new VMixEffectChainDesc_tImpl(handle);
+    static int ISchemaClass<VMixEffectChainDesc_t>.Size => 4;
+    static string? ISchemaClass<VMixEffectChainDesc_t>.ClassName => null;
 
-  static VMixEffectChainDesc_t ISchemaClass<VMixEffectChainDesc_t>.From(nint handle) => new VMixEffectChainDesc_tImpl(handle);
-  static int ISchemaClass<VMixEffectChainDesc_t>.Size => 4;
-  static string? ISchemaClass<VMixEffectChainDesc_t>.ClassName => null;
 
-  
-  public ref float CrossfadeTime { get; }
+    public ref float CrossfadeTime { get; }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface JiggleBoneSettingsList_t : ISchemaClass<JiggleBoneSettingsList_t> {
+public partial interface JiggleBoneSettingsList_t : ISchemaClass<JiggleBoneSettingsList_t>
+{
+    static JiggleBoneSettingsList_t ISchemaClass<JiggleBoneSettingsList_t>.From(nint handle) => new JiggleBoneSettingsList_tImpl(handle);
+    static int ISchemaClass<JiggleBoneSettingsList_t>.Size => 24;
+    static string? ISchemaClass<JiggleBoneSettingsList_t>.ClassName => null;
 
-  static JiggleBoneSettingsList_t ISchemaClass<JiggleBoneSettingsList_t>.From(nint handle) => new JiggleBoneSettingsList_tImpl(handle);
-  static int ISchemaClass<JiggleBoneSettingsList_t>.Size => 24;
-  static string? ISchemaClass<JiggleBoneSettingsList_t>.ClassName => null;
 
-  
-  public ref CUtlVector<JiggleBoneSettings_t> BoneSettings { get; }
+    public ref CUtlVector<JiggleBoneSettings_t> BoneSettings { get; }
 
 
 }

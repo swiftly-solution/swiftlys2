@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseTrailRendererImpl : CBaseRendererSource2Impl, CBaseTrailRenderer {
+internal partial class CBaseTrailRendererImpl : CBaseRendererSource2Impl, CBaseTrailRenderer
+{
+    public CBaseTrailRendererImpl(nint handle) : base(handle) { }
 
-  public CBaseTrailRendererImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OrientationTypeOffset;
 
-  private static nint? _OrientationTypeOffset;
-
-  public ref ParticleOrientationChoiceList_t OrientationType {
-    get {
-      if (_OrientationTypeOffset == null) {
-        _OrientationTypeOffset = Schema.GetOffset(0x2FCF7FA6931FA045);
-      }
-      return ref _Handle.AsRef<ParticleOrientationChoiceList_t>(_OrientationTypeOffset!.Value);
+    public ref ParticleOrientationChoiceList_t OrientationType {
+        get {
+            _OrientationTypeOffset = _OrientationTypeOffset ?? Schema.GetOffset(0x2FCF7FA6931FA045);
+            return ref _Handle.AsRef<ParticleOrientationChoiceList_t>(_OrientationTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientationControlPointOffset;
+    private static nint? _OrientationControlPointOffset;
 
-  public ref int OrientationControlPoint {
-    get {
-      if (_OrientationControlPointOffset == null) {
-        _OrientationControlPointOffset = Schema.GetOffset(0x2FCF7FA655B5B328);
-      }
-      return ref _Handle.AsRef<int>(_OrientationControlPointOffset!.Value);
+    public ref int OrientationControlPoint {
+        get {
+            _OrientationControlPointOffset = _OrientationControlPointOffset ?? Schema.GetOffset(0x2FCF7FA655B5B328);
+            return ref _Handle.AsRef<int>(_OrientationControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinSizeOffset;
+    private static nint? _MinSizeOffset;
 
-  public ref float MinSize {
-    get {
-      if (_MinSizeOffset == null) {
-        _MinSizeOffset = Schema.GetOffset(0x2FCF7FA6BDC3B198);
-      }
-      return ref _Handle.AsRef<float>(_MinSizeOffset!.Value);
+    public ref float MinSize {
+        get {
+            _MinSizeOffset = _MinSizeOffset ?? Schema.GetOffset(0x2FCF7FA6BDC3B198);
+            return ref _Handle.AsRef<float>(_MinSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxSizeOffset;
+    private static nint? _MaxSizeOffset;
 
-  public ref float MaxSize {
-    get {
-      if (_MaxSizeOffset == null) {
-        _MaxSizeOffset = Schema.GetOffset(0x2FCF7FA68CA4E6BE);
-      }
-      return ref _Handle.AsRef<float>(_MaxSizeOffset!.Value);
+    public ref float MaxSize {
+        get {
+            _MaxSizeOffset = _MaxSizeOffset ?? Schema.GetOffset(0x2FCF7FA68CA4E6BE);
+            return ref _Handle.AsRef<float>(_MaxSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartFadeSizeOffset;
+    private static nint? _StartFadeSizeOffset;
 
-  public CParticleCollectionRendererFloatInput StartFadeSize {
-    get {
-      if (_StartFadeSizeOffset == null) {
-        _StartFadeSizeOffset = Schema.GetOffset(0x2FCF7FA6BA251D92);
-      }
-      return new CParticleCollectionRendererFloatInputImpl(_Handle + _StartFadeSizeOffset!.Value);
+    public CParticleCollectionRendererFloatInput StartFadeSize {
+        get {
+            _StartFadeSizeOffset = _StartFadeSizeOffset ?? Schema.GetOffset(0x2FCF7FA6BA251D92);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _StartFadeSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndFadeSizeOffset;
+    private static nint? _EndFadeSizeOffset;
 
-  public CParticleCollectionRendererFloatInput EndFadeSize {
-    get {
-      if (_EndFadeSizeOffset == null) {
-        _EndFadeSizeOffset = Schema.GetOffset(0x2FCF7FA62D3FD423);
-      }
-      return new CParticleCollectionRendererFloatInputImpl(_Handle + _EndFadeSizeOffset!.Value);
+    public CParticleCollectionRendererFloatInput EndFadeSize {
+        get {
+            _EndFadeSizeOffset = _EndFadeSizeOffset ?? Schema.GetOffset(0x2FCF7FA62D3FD423);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _EndFadeSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClampVOffset;
+    private static nint? _ClampVOffset;
 
-  public ref bool ClampV {
-    get {
-      if (_ClampVOffset == null) {
-        _ClampVOffset = Schema.GetOffset(0x2FCF7FA6D02C13FE);
-      }
-      return ref _Handle.AsRef<bool>(_ClampVOffset!.Value);
+    public ref bool ClampV {
+        get {
+            _ClampVOffset = _ClampVOffset ?? Schema.GetOffset(0x2FCF7FA6D02C13FE);
+            return ref _Handle.AsRef<bool>(_ClampVOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatMathNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatMathNode__CDefinition {
+internal partial class CNmFloatMathNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatMathNode__CDefinition
+{
+    public CNmFloatMathNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFloatMathNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueNodeIdxAOffset;
 
-  private static nint? _InputValueNodeIdxAOffset;
-
-  public ref short InputValueNodeIdxA {
-    get {
-      if (_InputValueNodeIdxAOffset == null) {
-        _InputValueNodeIdxAOffset = Schema.GetOffset(0x8A1F4F076332ED92);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxAOffset!.Value);
+    public ref short InputValueNodeIdxA {
+        get {
+            _InputValueNodeIdxAOffset = _InputValueNodeIdxAOffset ?? Schema.GetOffset(0x8A1F4F076332ED92);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxAOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputValueNodeIdxBOffset;
+    private static nint? _InputValueNodeIdxBOffset;
 
-  public ref short InputValueNodeIdxB {
-    get {
-      if (_InputValueNodeIdxBOffset == null) {
-        _InputValueNodeIdxBOffset = Schema.GetOffset(0x8A1F4F076232EBFF);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxBOffset!.Value);
+    public ref short InputValueNodeIdxB {
+        get {
+            _InputValueNodeIdxBOffset = _InputValueNodeIdxBOffset ?? Schema.GetOffset(0x8A1F4F076232EBFF);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxBOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReturnAbsoluteResultOffset;
+    private static nint? _ReturnAbsoluteResultOffset;
 
-  public ref bool ReturnAbsoluteResult {
-    get {
-      if (_ReturnAbsoluteResultOffset == null) {
-        _ReturnAbsoluteResultOffset = Schema.GetOffset(0x8A1F4F07065EA6EB);
-      }
-      return ref _Handle.AsRef<bool>(_ReturnAbsoluteResultOffset!.Value);
+    public ref bool ReturnAbsoluteResult {
+        get {
+            _ReturnAbsoluteResultOffset = _ReturnAbsoluteResultOffset ?? Schema.GetOffset(0x8A1F4F07065EA6EB);
+            return ref _Handle.AsRef<bool>(_ReturnAbsoluteResultOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReturnNegatedResultOffset;
+    private static nint? _ReturnNegatedResultOffset;
 
-  public ref bool ReturnNegatedResult {
-    get {
-      if (_ReturnNegatedResultOffset == null) {
-        _ReturnNegatedResultOffset = Schema.GetOffset(0x8A1F4F07535A6CA2);
-      }
-      return ref _Handle.AsRef<bool>(_ReturnNegatedResultOffset!.Value);
+    public ref bool ReturnNegatedResult {
+        get {
+            _ReturnNegatedResultOffset = _ReturnNegatedResultOffset ?? Schema.GetOffset(0x8A1F4F07535A6CA2);
+            return ref _Handle.AsRef<bool>(_ReturnNegatedResultOffset!.Value);
+        }
     }
-  }
-  private static nint? _OperatorOffset;
+    private static nint? _OperatorOffset;
 
-  public ref CNmFloatMathNode__Operator_t Operator {
-    get {
-      if (_OperatorOffset == null) {
-        _OperatorOffset = Schema.GetOffset(0x8A1F4F078ABE049D);
-      }
-      return ref _Handle.AsRef<CNmFloatMathNode__Operator_t>(_OperatorOffset!.Value);
+    public ref CNmFloatMathNode__Operator_t Operator {
+        get {
+            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x8A1F4F078ABE049D);
+            return ref _Handle.AsRef<CNmFloatMathNode__Operator_t>(_OperatorOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValueBOffset;
+    private static nint? _ValueBOffset;
 
-  public ref float ValueB {
-    get {
-      if (_ValueBOffset == null) {
-        _ValueBOffset = Schema.GetOffset(0x8A1F4F074AD872B2);
-      }
-      return ref _Handle.AsRef<float>(_ValueBOffset!.Value);
+    public ref float ValueB {
+        get {
+            _ValueBOffset = _ValueBOffset ?? Schema.GetOffset(0x8A1F4F074AD872B2);
+            return ref _Handle.AsRef<float>(_ValueBOffset!.Value);
+        }
     }
-  }
 
 
 }

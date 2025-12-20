@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatSelectorNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatSelectorNode__CDefinition> {
+public partial interface CNmFloatSelectorNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatSelectorNode__CDefinition>
+{
+    static CNmFloatSelectorNode__CDefinition ISchemaClass<CNmFloatSelectorNode__CDefinition>.From(nint handle) => new CNmFloatSelectorNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFloatSelectorNode__CDefinition>.Size => 120;
+    static string? ISchemaClass<CNmFloatSelectorNode__CDefinition>.ClassName => null;
 
-  static CNmFloatSelectorNode__CDefinition ISchemaClass<CNmFloatSelectorNode__CDefinition>.From(nint handle) => new CNmFloatSelectorNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFloatSelectorNode__CDefinition>.Size => 120;
-  static string? ISchemaClass<CNmFloatSelectorNode__CDefinition>.ClassName => null;
 
-  
-  // CUtlVectorFixedGrowable< int16, 5 >
-  public SchemaUntypedField ConditionNodeIndices { get; }
-  
-  // CUtlVectorFixedGrowable< float32, 5 >
-  public SchemaUntypedField Values { get; }
-  
-  public ref float DefaultValue { get; }
-  
-  public ref float EaseTime { get; }
-  
-  public ref NmEasingOperation_t EasingOp { get; }
+    // CUtlVectorFixedGrowable< int16, 5 >
+    public SchemaUntypedField ConditionNodeIndices { get; }
+
+    // CUtlVectorFixedGrowable< float32, 5 >
+    public SchemaUntypedField Values { get; }
+
+    public ref float DefaultValue { get; }
+
+    public ref float EaseTime { get; }
+
+    public ref NmEasingOperation_t EasingOp { get; }
 
 
 }

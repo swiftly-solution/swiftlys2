@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqCmdLayer : ISchemaClass<CSeqCmdLayer> {
+public partial interface CSeqCmdLayer : ISchemaClass<CSeqCmdLayer>
+{
+    static CSeqCmdLayer ISchemaClass<CSeqCmdLayer>.From(nint handle) => new CSeqCmdLayerImpl(handle);
+    static int ISchemaClass<CSeqCmdLayer>.Size => 24;
+    static string? ISchemaClass<CSeqCmdLayer>.ClassName => null;
 
-  static CSeqCmdLayer ISchemaClass<CSeqCmdLayer>.From(nint handle) => new CSeqCmdLayerImpl(handle);
-  static int ISchemaClass<CSeqCmdLayer>.Size => 24;
-  static string? ISchemaClass<CSeqCmdLayer>.ClassName => null;
 
-  
-  public ref short Cmd { get; }
-  
-  public ref short LocalReference { get; }
-  
-  public ref short LocalBonemask { get; }
-  
-  public ref short DstResult { get; }
-  
-  public ref short SrcResult { get; }
-  
-  public ref bool Spline { get; }
-  
-  public ref float Var1 { get; }
-  
-  public ref float Var2 { get; }
-  
-  public ref short LineNumber { get; }
+    public ref short Cmd { get; }
+
+    public ref short LocalReference { get; }
+
+    public ref short LocalBonemask { get; }
+
+    public ref short DstResult { get; }
+
+    public ref short SrcResult { get; }
+
+    public ref bool Spline { get; }
+
+    public ref float Var1 { get; }
+
+    public ref float Var2 { get; }
+
+    public ref short LineNumber { get; }
 
 
 }

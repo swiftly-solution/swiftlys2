@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSolveIKTargetHandle_t : ISchemaClass<CSolveIKTargetHandle_t> {
+public partial interface CSolveIKTargetHandle_t : ISchemaClass<CSolveIKTargetHandle_t>
+{
+    static CSolveIKTargetHandle_t ISchemaClass<CSolveIKTargetHandle_t>.From(nint handle) => new CSolveIKTargetHandle_tImpl(handle);
+    static int ISchemaClass<CSolveIKTargetHandle_t>.Size => 4;
+    static string? ISchemaClass<CSolveIKTargetHandle_t>.ClassName => null;
 
-  static CSolveIKTargetHandle_t ISchemaClass<CSolveIKTargetHandle_t>.From(nint handle) => new CSolveIKTargetHandle_tImpl(handle);
-  static int ISchemaClass<CSolveIKTargetHandle_t>.Size => 4;
-  static string? ISchemaClass<CSolveIKTargetHandle_t>.ClassName => null;
 
-  
-  public CAnimParamHandle PositionHandle { get; }
-  
-  public CAnimParamHandle OrientationHandle { get; }
+    public CAnimParamHandle PositionHandle { get; }
+
+    public CAnimParamHandle OrientationHandle { get; }
 
 
 }

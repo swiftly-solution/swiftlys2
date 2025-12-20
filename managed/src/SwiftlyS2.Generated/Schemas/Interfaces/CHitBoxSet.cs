@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHitBoxSet : ISchemaClass<CHitBoxSet> {
+public partial interface CHitBoxSet : ISchemaClass<CHitBoxSet>
+{
+    static CHitBoxSet ISchemaClass<CHitBoxSet>.From(nint handle) => new CHitBoxSetImpl(handle);
+    static int ISchemaClass<CHitBoxSet>.Size => 48;
+    static string? ISchemaClass<CHitBoxSet>.ClassName => null;
 
-  static CHitBoxSet ISchemaClass<CHitBoxSet>.From(nint handle) => new CHitBoxSetImpl(handle);
-  static int ISchemaClass<CHitBoxSet>.Size => 48;
-  static string? ISchemaClass<CHitBoxSet>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref uint NameHash { get; }
-  
-  public ref CUtlVector<CHitBox> HitBoxes { get; }
-  
-  public string SourceFilename { get; set; }
+    public string Name { get; set; }
+
+    public ref uint NameHash { get; }
+
+    public ref CUtlVector<CHitBox> HitBoxes { get; }
+
+    public string SourceFilename { get; set; }
 
 
 }

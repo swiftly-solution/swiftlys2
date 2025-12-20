@@ -6,131 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPropDataComponentImpl : CEntityComponentImpl, CPropDataComponent {
+internal partial class CPropDataComponentImpl : CEntityComponentImpl, CPropDataComponent
+{
+    public CPropDataComponentImpl(nint handle) : base(handle) { }
 
-  public CPropDataComponentImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DmgModBulletOffset;
 
-  private static nint? _DmgModBulletOffset;
+    public ref float DmgModBullet {
+        get {
+            _DmgModBulletOffset = _DmgModBulletOffset ?? Schema.GetOffset(0x1CFE413EBB77495F);
+            return ref _Handle.AsRef<float>(_DmgModBulletOffset!.Value);
+        }
+    }
+    private static nint? _DmgModClubOffset;
 
-  public ref float DmgModBullet {
-    get {
-      if (_DmgModBulletOffset == null) {
-        _DmgModBulletOffset = Schema.GetOffset(0x1CFE413EBB77495F);
-      }
-      return ref _Handle.AsRef<float>(_DmgModBulletOffset!.Value);
+    public ref float DmgModClub {
+        get {
+            _DmgModClubOffset = _DmgModClubOffset ?? Schema.GetOffset(0x1CFE413E1C404FB7);
+            return ref _Handle.AsRef<float>(_DmgModClubOffset!.Value);
+        }
     }
-  }
-  private static nint? _DmgModClubOffset;
+    private static nint? _DmgModExplosiveOffset;
 
-  public ref float DmgModClub {
-    get {
-      if (_DmgModClubOffset == null) {
-        _DmgModClubOffset = Schema.GetOffset(0x1CFE413E1C404FB7);
-      }
-      return ref _Handle.AsRef<float>(_DmgModClubOffset!.Value);
+    public ref float DmgModExplosive {
+        get {
+            _DmgModExplosiveOffset = _DmgModExplosiveOffset ?? Schema.GetOffset(0x1CFE413E0E90F97E);
+            return ref _Handle.AsRef<float>(_DmgModExplosiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _DmgModExplosiveOffset;
+    private static nint? _DmgModFireOffset;
 
-  public ref float DmgModExplosive {
-    get {
-      if (_DmgModExplosiveOffset == null) {
-        _DmgModExplosiveOffset = Schema.GetOffset(0x1CFE413E0E90F97E);
-      }
-      return ref _Handle.AsRef<float>(_DmgModExplosiveOffset!.Value);
+    public ref float DmgModFire {
+        get {
+            _DmgModFireOffset = _DmgModFireOffset ?? Schema.GetOffset(0x1CFE413E7E842D23);
+            return ref _Handle.AsRef<float>(_DmgModFireOffset!.Value);
+        }
     }
-  }
-  private static nint? _DmgModFireOffset;
+    private static nint? _PhysicsDamageTableNameOffset;
 
-  public ref float DmgModFire {
-    get {
-      if (_DmgModFireOffset == null) {
-        _DmgModFireOffset = Schema.GetOffset(0x1CFE413E7E842D23);
-      }
-      return ref _Handle.AsRef<float>(_DmgModFireOffset!.Value);
-    }
-  }
-  private static nint? _PhysicsDamageTableNameOffset;
+    public string PhysicsDamageTableName {
+        get {
+            _PhysicsDamageTableNameOffset = _PhysicsDamageTableNameOffset ?? Schema.GetOffset(0x1CFE413E7A45F0E2);
+            return Schema.GetString(_Handle.Read<nint>(_PhysicsDamageTableNameOffset!.Value));
+        }
+        set {
+            _PhysicsDamageTableNameOffset = _PhysicsDamageTableNameOffset ?? Schema.GetOffset(0x1CFE413E7A45F0E2);
+            Schema.SetString(_Handle, _PhysicsDamageTableNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _BasePropDataOffset;
 
-  public string PhysicsDamageTableName {
-    get {
-      if (_PhysicsDamageTableNameOffset == null) {
-        _PhysicsDamageTableNameOffset = Schema.GetOffset(0x1CFE413E7A45F0E2);
-      }
-      var ptr = _Handle.Read<nint>(_PhysicsDamageTableNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PhysicsDamageTableNameOffset == null) {
-        _PhysicsDamageTableNameOffset = Schema.GetOffset(0x1CFE413E7A45F0E2);
-      }
-      Schema.SetString(_Handle, _PhysicsDamageTableNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _BasePropDataOffset;
+    public string BasePropData {
+        get {
+            _BasePropDataOffset = _BasePropDataOffset ?? Schema.GetOffset(0x1CFE413EBF60E2A1);
+            return Schema.GetString(_Handle.Read<nint>(_BasePropDataOffset!.Value));
+        }
+        set {
+            _BasePropDataOffset = _BasePropDataOffset ?? Schema.GetOffset(0x1CFE413EBF60E2A1);
+            Schema.SetString(_Handle, _BasePropDataOffset!.Value, value);
+        }
+    } 
+    private static nint? _InteractionsOffset;
 
-  public string BasePropData {
-    get {
-      if (_BasePropDataOffset == null) {
-        _BasePropDataOffset = Schema.GetOffset(0x1CFE413EBF60E2A1);
-      }
-      var ptr = _Handle.Read<nint>(_BasePropDataOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int Interactions {
+        get {
+            _InteractionsOffset = _InteractionsOffset ?? Schema.GetOffset(0x1CFE413EE8050E44);
+            return ref _Handle.AsRef<int>(_InteractionsOffset!.Value);
+        }
     }
-    set {
-      if (_BasePropDataOffset == null) {
-        _BasePropDataOffset = Schema.GetOffset(0x1CFE413EBF60E2A1);
-      }
-      Schema.SetString(_Handle, _BasePropDataOffset!.Value, value);
-    }
-  } 
-  private static nint? _InteractionsOffset;
+    private static nint? _SpawnMotionDisabledOffset;
 
-  public ref int Interactions {
-    get {
-      if (_InteractionsOffset == null) {
-        _InteractionsOffset = Schema.GetOffset(0x1CFE413EE8050E44);
-      }
-      return ref _Handle.AsRef<int>(_InteractionsOffset!.Value);
+    public ref bool SpawnMotionDisabled {
+        get {
+            _SpawnMotionDisabledOffset = _SpawnMotionDisabledOffset ?? Schema.GetOffset(0x1CFE413E87EB2E82);
+            return ref _Handle.AsRef<bool>(_SpawnMotionDisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpawnMotionDisabledOffset;
+    private static nint? _DisableTakePhysicsDamageSpawnFlagOffset;
 
-  public ref bool SpawnMotionDisabled {
-    get {
-      if (_SpawnMotionDisabledOffset == null) {
-        _SpawnMotionDisabledOffset = Schema.GetOffset(0x1CFE413E87EB2E82);
-      }
-      return ref _Handle.AsRef<bool>(_SpawnMotionDisabledOffset!.Value);
+    public ref int DisableTakePhysicsDamageSpawnFlag {
+        get {
+            _DisableTakePhysicsDamageSpawnFlagOffset = _DisableTakePhysicsDamageSpawnFlagOffset ?? Schema.GetOffset(0x1CFE413E5D3DCAE1);
+            return ref _Handle.AsRef<int>(_DisableTakePhysicsDamageSpawnFlagOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisableTakePhysicsDamageSpawnFlagOffset;
+    private static nint? _MotionDisabledSpawnFlagOffset;
 
-  public ref int DisableTakePhysicsDamageSpawnFlag {
-    get {
-      if (_DisableTakePhysicsDamageSpawnFlagOffset == null) {
-        _DisableTakePhysicsDamageSpawnFlagOffset = Schema.GetOffset(0x1CFE413E5D3DCAE1);
-      }
-      return ref _Handle.AsRef<int>(_DisableTakePhysicsDamageSpawnFlagOffset!.Value);
+    public ref int MotionDisabledSpawnFlag {
+        get {
+            _MotionDisabledSpawnFlagOffset = _MotionDisabledSpawnFlagOffset ?? Schema.GetOffset(0x1CFE413ECBDEA450);
+            return ref _Handle.AsRef<int>(_MotionDisabledSpawnFlagOffset!.Value);
+        }
     }
-  }
-  private static nint? _MotionDisabledSpawnFlagOffset;
-
-  public ref int MotionDisabledSpawnFlag {
-    get {
-      if (_MotionDisabledSpawnFlagOffset == null) {
-        _MotionDisabledSpawnFlagOffset = Schema.GetOffset(0x1CFE413ECBDEA450);
-      }
-      return ref _Handle.AsRef<int>(_MotionDisabledSpawnFlagOffset!.Value);
-    }
-  }
 
 
 }

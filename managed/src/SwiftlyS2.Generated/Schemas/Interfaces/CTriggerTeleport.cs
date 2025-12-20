@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerTeleport : CBaseTrigger, ISchemaClass<CTriggerTeleport> {
+public partial interface CTriggerTeleport : CBaseTrigger, ISchemaClass<CTriggerTeleport>
+{
+    static CTriggerTeleport ISchemaClass<CTriggerTeleport>.From(nint handle) => new CTriggerTeleportImpl(handle);
+    static int ISchemaClass<CTriggerTeleport>.Size => 2488;
+    static string? ISchemaClass<CTriggerTeleport>.ClassName => "trigger_teleport";
 
-  static CTriggerTeleport ISchemaClass<CTriggerTeleport>.From(nint handle) => new CTriggerTeleportImpl(handle);
-  static int ISchemaClass<CTriggerTeleport>.Size => 2488;
-  static string? ISchemaClass<CTriggerTeleport>.ClassName => "trigger_teleport";
 
-  
-  public string Landmark { get; set; }
-  
-  public ref bool UseLandmarkAngles { get; }
-  
-  public ref bool MirrorPlayer { get; }
-  
-  public ref bool CheckDestIfClearForPlayer { get; }
+    public string Landmark { get; set; }
+
+    public ref bool UseLandmarkAngles { get; }
+
+    public ref bool MirrorPlayer { get; }
+
+    public ref bool CheckDestIfClearForPlayer { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMolotovProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CMolotovProjectile> {
+public partial interface CMolotovProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CMolotovProjectile>
+{
+    static CMolotovProjectile ISchemaClass<CMolotovProjectile>.From(nint handle) => new CMolotovProjectileImpl(handle);
+    static int ISchemaClass<CMolotovProjectile>.Size => 3408;
+    static string? ISchemaClass<CMolotovProjectile>.ClassName => "molotov_projectile";
 
-  static CMolotovProjectile ISchemaClass<CMolotovProjectile>.From(nint handle) => new CMolotovProjectileImpl(handle);
-  static int ISchemaClass<CMolotovProjectile>.Size => 3408;
-  static string? ISchemaClass<CMolotovProjectile>.ClassName => "molotov_projectile";
 
-  
-  public ref bool IsIncGrenade { get; }
-  
-  public ref bool Detonated { get; }
-  
-  public IntervalTimer StillTimer { get; }
-  
-  public ref bool HasBouncedOffPlayer { get; }
+    public ref bool IsIncGrenade { get; }
 
-  public void IsIncGrenadeUpdated();
+    public ref bool Detonated { get; }
+
+    public IntervalTimer StillTimer { get; }
+
+    public ref bool HasBouncedOffPlayer { get; }
+
+    public void IsIncGrenadeUpdated();
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface Relationship_t : ISchemaClass<Relationship_t> {
+public partial interface Relationship_t : ISchemaClass<Relationship_t>
+{
+    static Relationship_t ISchemaClass<Relationship_t>.From(nint handle) => new Relationship_tImpl(handle);
+    static int ISchemaClass<Relationship_t>.Size => 8;
+    static string? ISchemaClass<Relationship_t>.ClassName => null;
 
-  static Relationship_t ISchemaClass<Relationship_t>.From(nint handle) => new Relationship_tImpl(handle);
-  static int ISchemaClass<Relationship_t>.Size => 8;
-  static string? ISchemaClass<Relationship_t>.ClassName => null;
 
-  
-  public ref Disposition_t Disposition { get; }
-  
-  public ref int Priority { get; }
+    public ref Disposition_t Disposition { get; }
+
+    public ref int Priority { get; }
 
 
 }

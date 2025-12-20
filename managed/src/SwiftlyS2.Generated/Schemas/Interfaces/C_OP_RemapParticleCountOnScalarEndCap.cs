@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapParticleCountOnScalarEndCap : CParticleFunctionOperator, ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap> {
+public partial interface C_OP_RemapParticleCountOnScalarEndCap : CParticleFunctionOperator, ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap>
+{
+    static C_OP_RemapParticleCountOnScalarEndCap ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap>.From(nint handle) => new C_OP_RemapParticleCountOnScalarEndCapImpl(handle);
+    static int ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap>.Size => 496;
+    static string? ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap>.ClassName => null;
 
-  static C_OP_RemapParticleCountOnScalarEndCap ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap>.From(nint handle) => new C_OP_RemapParticleCountOnScalarEndCapImpl(handle);
-  static int ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap>.Size => 496;
-  static string? ISchemaClass<C_OP_RemapParticleCountOnScalarEndCap>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref int InputMin { get; }
-  
-  public ref int InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref bool Backwards { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref int InputMin { get; }
+
+    public ref int InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref bool Backwards { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
 
 
 }

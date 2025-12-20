@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RadiusFromCPObjectImpl : CParticleFunctionInitializerImpl, C_INIT_RadiusFromCPObject {
+internal partial class C_INIT_RadiusFromCPObjectImpl : CParticleFunctionInitializerImpl, C_INIT_RadiusFromCPObject
+{
+    public C_INIT_RadiusFromCPObjectImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RadiusFromCPObjectImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointOffset;
 
-  private static nint? _ControlPointOffset;
-
-  public ref int ControlPoint {
-    get {
-      if (_ControlPointOffset == null) {
-        _ControlPointOffset = Schema.GetOffset(0xC79B0CC80D0DDF8C);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    public ref int ControlPoint {
+        get {
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xC79B0CC80D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+        }
     }
-  }
 
 
 }

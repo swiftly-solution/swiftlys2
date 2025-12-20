@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FollowTargetOpFixedSettings_t : ISchemaClass<FollowTargetOpFixedSettings_t> {
+public partial interface FollowTargetOpFixedSettings_t : ISchemaClass<FollowTargetOpFixedSettings_t>
+{
+    static FollowTargetOpFixedSettings_t ISchemaClass<FollowTargetOpFixedSettings_t>.From(nint handle) => new FollowTargetOpFixedSettings_tImpl(handle);
+    static int ISchemaClass<FollowTargetOpFixedSettings_t>.Size => 16;
+    static string? ISchemaClass<FollowTargetOpFixedSettings_t>.ClassName => null;
 
-  static FollowTargetOpFixedSettings_t ISchemaClass<FollowTargetOpFixedSettings_t>.From(nint handle) => new FollowTargetOpFixedSettings_tImpl(handle);
-  static int ISchemaClass<FollowTargetOpFixedSettings_t>.Size => 16;
-  static string? ISchemaClass<FollowTargetOpFixedSettings_t>.ClassName => null;
 
-  
-  public ref int BoneIndex { get; }
-  
-  public ref bool BoneTarget { get; }
-  
-  public ref int BoneTargetIndex { get; }
-  
-  public ref bool WorldCoodinateTarget { get; }
-  
-  public ref bool MatchTargetOrientation { get; }
+    public ref int BoneIndex { get; }
+
+    public ref bool BoneTarget { get; }
+
+    public ref int BoneTargetIndex { get; }
+
+    public ref bool WorldCoodinateTarget { get; }
+
+    public ref bool MatchTargetOrientation { get; }
 
 
 }

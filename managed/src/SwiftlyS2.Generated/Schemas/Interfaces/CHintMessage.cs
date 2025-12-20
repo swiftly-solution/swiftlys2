@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHintMessage : ISchemaClass<CHintMessage> {
+public partial interface CHintMessage : ISchemaClass<CHintMessage>
+{
+    static CHintMessage ISchemaClass<CHintMessage>.From(nint handle) => new CHintMessageImpl(handle);
+    static int ISchemaClass<CHintMessage>.Size => 40;
+    static string? ISchemaClass<CHintMessage>.ClassName => null;
 
-  static CHintMessage ISchemaClass<CHintMessage>.From(nint handle) => new CHintMessageImpl(handle);
-  static int ISchemaClass<CHintMessage>.Size => 40;
-  static string? ISchemaClass<CHintMessage>.ClassName => null;
 
-  
-  public string HintString { get; set; }
-  
-  public ref CUtlVector<CString> Args { get; }
-  
-  public ref float Duration { get; }
+    public string HintString { get; set; }
+
+    public ref CUtlVector<CString> Args { get; }
+
+    public ref float Duration { get; }
 
 
 }

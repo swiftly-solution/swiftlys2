@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMorphConstraintImpl : CBaseConstraintImpl, CMorphConstraint {
+internal partial class CMorphConstraintImpl : CBaseConstraintImpl, CMorphConstraint
+{
+    public CMorphConstraintImpl(nint handle) : base(handle) { }
 
-  public CMorphConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetMorphOffset;
 
-  private static nint? _TargetMorphOffset;
+    public string TargetMorph {
+        get {
+            _TargetMorphOffset = _TargetMorphOffset ?? Schema.GetOffset(0xC24859C39FF7D337);
+            return Schema.GetString(_Handle.Read<nint>(_TargetMorphOffset!.Value));
+        }
+        set {
+            _TargetMorphOffset = _TargetMorphOffset ?? Schema.GetOffset(0xC24859C39FF7D337);
+            Schema.SetString(_Handle, _TargetMorphOffset!.Value, value);
+        }
+    } 
+    private static nint? _SlaveChannelOffset;
 
-  public string TargetMorph {
-    get {
-      if (_TargetMorphOffset == null) {
-        _TargetMorphOffset = Schema.GetOffset(0xC24859C39FF7D337);
-      }
-      var ptr = _Handle.Read<nint>(_TargetMorphOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int SlaveChannel {
+        get {
+            _SlaveChannelOffset = _SlaveChannelOffset ?? Schema.GetOffset(0xC24859C3A439DE4F);
+            return ref _Handle.AsRef<int>(_SlaveChannelOffset!.Value);
+        }
     }
-    set {
-      if (_TargetMorphOffset == null) {
-        _TargetMorphOffset = Schema.GetOffset(0xC24859C39FF7D337);
-      }
-      Schema.SetString(_Handle, _TargetMorphOffset!.Value, value);
-    }
-  } 
-  private static nint? _SlaveChannelOffset;
+    private static nint? _MinOffset;
 
-  public ref int SlaveChannel {
-    get {
-      if (_SlaveChannelOffset == null) {
-        _SlaveChannelOffset = Schema.GetOffset(0xC24859C3A439DE4F);
-      }
-      return ref _Handle.AsRef<int>(_SlaveChannelOffset!.Value);
+    public ref float Min {
+        get {
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0xC24859C33B1A5649);
+            return ref _Handle.AsRef<float>(_MinOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinOffset;
+    private static nint? _MaxOffset;
 
-  public ref float Min {
-    get {
-      if (_MinOffset == null) {
-        _MinOffset = Schema.GetOffset(0xC24859C33B1A5649);
-      }
-      return ref _Handle.AsRef<float>(_MinOffset!.Value);
+    public ref float Max {
+        get {
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0xC24859C32D06B887);
+            return ref _Handle.AsRef<float>(_MaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOffset;
-
-  public ref float Max {
-    get {
-      if (_MaxOffset == null) {
-        _MaxOffset = Schema.GetOffset(0xC24859C32D06B887);
-      }
-      return ref _Handle.AsRef<float>(_MaxOffset!.Value);
-    }
-  }
 
 
 }

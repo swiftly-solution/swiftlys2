@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimKeyDataImpl : SchemaClass, CAnimKeyData {
+internal partial class CAnimKeyDataImpl : SchemaClass, CAnimKeyData
+{
+    public CAnimKeyDataImpl(nint handle) : base(handle) { }
 
-  public CAnimKeyDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public ref CBufferString Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x790610E24D8F5786);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    public ref CBufferString Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x790610E24D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneArrayOffset;
+    private static nint? _BoneArrayOffset;
 
-  public ref CUtlVector<CAnimBone> BoneArray {
-    get {
-      if (_BoneArrayOffset == null) {
-        _BoneArrayOffset = Schema.GetOffset(0x790610E280273F0C);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimBone>>(_BoneArrayOffset!.Value);
+    public ref CUtlVector<CAnimBone> BoneArray {
+        get {
+            _BoneArrayOffset = _BoneArrayOffset ?? Schema.GetOffset(0x790610E280273F0C);
+            return ref _Handle.AsRef<CUtlVector<CAnimBone>>(_BoneArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _UserArrayOffset;
+    private static nint? _UserArrayOffset;
 
-  public ref CUtlVector<CAnimUser> UserArray {
-    get {
-      if (_UserArrayOffset == null) {
-        _UserArrayOffset = Schema.GetOffset(0x790610E2FBDB0C13);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimUser>>(_UserArrayOffset!.Value);
+    public ref CUtlVector<CAnimUser> UserArray {
+        get {
+            _UserArrayOffset = _UserArrayOffset ?? Schema.GetOffset(0x790610E2FBDB0C13);
+            return ref _Handle.AsRef<CUtlVector<CAnimUser>>(_UserArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _MorphArrayOffset;
+    private static nint? _MorphArrayOffset;
 
-  public ref CUtlVector<CBufferString> MorphArray {
-    get {
-      if (_MorphArrayOffset == null) {
-        _MorphArrayOffset = Schema.GetOffset(0x790610E28C6827E6);
-      }
-      return ref _Handle.AsRef<CUtlVector<CBufferString>>(_MorphArrayOffset!.Value);
+    public ref CUtlVector<CBufferString> MorphArray {
+        get {
+            _MorphArrayOffset = _MorphArrayOffset ?? Schema.GetOffset(0x790610E28C6827E6);
+            return ref _Handle.AsRef<CUtlVector<CBufferString>>(_MorphArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChannelElementsOffset;
+    private static nint? _ChannelElementsOffset;
 
-  public ref int ChannelElements {
-    get {
-      if (_ChannelElementsOffset == null) {
-        _ChannelElementsOffset = Schema.GetOffset(0x790610E20D1DA989);
-      }
-      return ref _Handle.AsRef<int>(_ChannelElementsOffset!.Value);
+    public ref int ChannelElements {
+        get {
+            _ChannelElementsOffset = _ChannelElementsOffset ?? Schema.GetOffset(0x790610E20D1DA989);
+            return ref _Handle.AsRef<int>(_ChannelElementsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DataChannelArrayOffset;
+    private static nint? _DataChannelArrayOffset;
 
-  public ref CUtlVector<CAnimDataChannelDesc> DataChannelArray {
-    get {
-      if (_DataChannelArrayOffset == null) {
-        _DataChannelArrayOffset = Schema.GetOffset(0x790610E2D1641EB9);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimDataChannelDesc>>(_DataChannelArrayOffset!.Value);
+    public ref CUtlVector<CAnimDataChannelDesc> DataChannelArray {
+        get {
+            _DataChannelArrayOffset = _DataChannelArrayOffset ?? Schema.GetOffset(0x790610E2D1641EB9);
+            return ref _Handle.AsRef<CUtlVector<CAnimDataChannelDesc>>(_DataChannelArrayOffset!.Value);
+        }
     }
-  }
 
 
 }

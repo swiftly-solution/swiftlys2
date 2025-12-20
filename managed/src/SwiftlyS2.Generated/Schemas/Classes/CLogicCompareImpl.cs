@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicCompareImpl : CLogicalEntityImpl, CLogicCompare {
+internal partial class CLogicCompareImpl : CLogicalEntityImpl, CLogicCompare
+{
+    public CLogicCompareImpl(nint handle) : base(handle) { }
 
-  public CLogicCompareImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InValueOffset;
 
-  private static nint? _InValueOffset;
-
-  public ref float InValue {
-    get {
-      if (_InValueOffset == null) {
-        _InValueOffset = Schema.GetOffset(0xCEFDBF2F414AD5ED);
-      }
-      return ref _Handle.AsRef<float>(_InValueOffset!.Value);
+    public ref float InValue {
+        get {
+            _InValueOffset = _InValueOffset ?? Schema.GetOffset(0xCEFDBF2F414AD5ED);
+            return ref _Handle.AsRef<float>(_InValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _CompareValueOffset;
+    private static nint? _CompareValueOffset;
 
-  public ref float CompareValue {
-    get {
-      if (_CompareValueOffset == null) {
-        _CompareValueOffset = Schema.GetOffset(0xCEFDBF2F42C0882F);
-      }
-      return ref _Handle.AsRef<float>(_CompareValueOffset!.Value);
+    public ref float CompareValue {
+        get {
+            _CompareValueOffset = _CompareValueOffset ?? Schema.GetOffset(0xCEFDBF2F42C0882F);
+            return ref _Handle.AsRef<float>(_CompareValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnLessThanOffset;
+    private static nint? _OnLessThanOffset;
 
-  public SchemaUntypedField OnLessThan {
-    get {
-      if (_OnLessThanOffset == null) {
-        _OnLessThanOffset = Schema.GetOffset(0xCEFDBF2FB6AC02FE);
-      }
-      return new SchemaUntypedField(_Handle + _OnLessThanOffset!.Value);
+    public SchemaUntypedField OnLessThan {
+        get {
+            _OnLessThanOffset = _OnLessThanOffset ?? Schema.GetOffset(0xCEFDBF2FB6AC02FE);
+            return new SchemaUntypedField(_Handle + _OnLessThanOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnEqualToOffset;
+    private static nint? _OnEqualToOffset;
 
-  public SchemaUntypedField OnEqualTo {
-    get {
-      if (_OnEqualToOffset == null) {
-        _OnEqualToOffset = Schema.GetOffset(0xCEFDBF2F87EEC581);
-      }
-      return new SchemaUntypedField(_Handle + _OnEqualToOffset!.Value);
+    public SchemaUntypedField OnEqualTo {
+        get {
+            _OnEqualToOffset = _OnEqualToOffset ?? Schema.GetOffset(0xCEFDBF2F87EEC581);
+            return new SchemaUntypedField(_Handle + _OnEqualToOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnNotEqualToOffset;
+    private static nint? _OnNotEqualToOffset;
 
-  public SchemaUntypedField OnNotEqualTo {
-    get {
-      if (_OnNotEqualToOffset == null) {
-        _OnNotEqualToOffset = Schema.GetOffset(0xCEFDBF2FDA1680D6);
-      }
-      return new SchemaUntypedField(_Handle + _OnNotEqualToOffset!.Value);
+    public SchemaUntypedField OnNotEqualTo {
+        get {
+            _OnNotEqualToOffset = _OnNotEqualToOffset ?? Schema.GetOffset(0xCEFDBF2FDA1680D6);
+            return new SchemaUntypedField(_Handle + _OnNotEqualToOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnGreaterThanOffset;
+    private static nint? _OnGreaterThanOffset;
 
-  public SchemaUntypedField OnGreaterThan {
-    get {
-      if (_OnGreaterThanOffset == null) {
-        _OnGreaterThanOffset = Schema.GetOffset(0xCEFDBF2F50BD472D);
-      }
-      return new SchemaUntypedField(_Handle + _OnGreaterThanOffset!.Value);
+    public SchemaUntypedField OnGreaterThan {
+        get {
+            _OnGreaterThanOffset = _OnGreaterThanOffset ?? Schema.GetOffset(0xCEFDBF2F50BD472D);
+            return new SchemaUntypedField(_Handle + _OnGreaterThanOffset!.Value);
+        }
     }
-  }
 
 
 }

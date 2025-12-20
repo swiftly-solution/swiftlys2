@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnBlendVertex_t : ISchemaClass<RnBlendVertex_t> {
+public partial interface RnBlendVertex_t : ISchemaClass<RnBlendVertex_t>
+{
+    static RnBlendVertex_t ISchemaClass<RnBlendVertex_t>.From(nint handle) => new RnBlendVertex_tImpl(handle);
+    static int ISchemaClass<RnBlendVertex_t>.Size => 16;
+    static string? ISchemaClass<RnBlendVertex_t>.ClassName => null;
 
-  static RnBlendVertex_t ISchemaClass<RnBlendVertex_t>.From(nint handle) => new RnBlendVertex_tImpl(handle);
-  static int ISchemaClass<RnBlendVertex_t>.Size => 16;
-  static string? ISchemaClass<RnBlendVertex_t>.ClassName => null;
 
-  
-  public ref ushort Weight0 { get; }
-  
-  public ref ushort Index0 { get; }
-  
-  public ref ushort Weight1 { get; }
-  
-  public ref ushort Index1 { get; }
-  
-  public ref ushort Weight2 { get; }
-  
-  public ref ushort Index2 { get; }
-  
-  public ref ushort Flags { get; }
-  
-  public ref ushort TargetIndex { get; }
+    public ref ushort Weight0 { get; }
+
+    public ref ushort Index0 { get; }
+
+    public ref ushort Weight1 { get; }
+
+    public ref ushort Index1 { get; }
+
+    public ref ushort Weight2 { get; }
+
+    public ref ushort Index2 { get; }
+
+    public ref ushort Flags { get; }
+
+    public ref ushort TargetIndex { get; }
 
 
 }

@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_InitFromCPSnapshot : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitFromCPSnapshot> {
+public partial interface C_INIT_InitFromCPSnapshot : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitFromCPSnapshot>
+{
+    static C_INIT_InitFromCPSnapshot ISchemaClass<C_INIT_InitFromCPSnapshot>.From(nint handle) => new C_INIT_InitFromCPSnapshotImpl(handle);
+    static int ISchemaClass<C_INIT_InitFromCPSnapshot>.Size => 1248;
+    static string? ISchemaClass<C_INIT_InitFromCPSnapshot>.ClassName => null;
 
-  static C_INIT_InitFromCPSnapshot ISchemaClass<C_INIT_InitFromCPSnapshot>.From(nint handle) => new C_INIT_InitFromCPSnapshotImpl(handle);
-  static int ISchemaClass<C_INIT_InitFromCPSnapshot>.Size => 1248;
-  static string? ISchemaClass<C_INIT_InitFromCPSnapshot>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public string StrSnapshotSubset { get; set; }
-  
-  public ParticleAttributeIndex_t AttributeToRead { get; }
-  
-  public ParticleAttributeIndex_t AttributeToWrite { get; }
-  
-  public ref int LocalSpaceCP { get; }
-  
-  public ref bool Random { get; }
-  
-  public ref bool Reverse { get; }
-  
-  public CParticleCollectionFloatInput SnapShotIncrement { get; }
-  
-  public CPerParticleFloatInput ManualSnapshotIndex { get; }
-  
-  public ref int RandomSeed { get; }
-  
-  public ref bool LocalSpaceAngles { get; }
+    public ref int ControlPointNumber { get; }
+
+    public string StrSnapshotSubset { get; set; }
+
+    public ParticleAttributeIndex_t AttributeToRead { get; }
+
+    public ParticleAttributeIndex_t AttributeToWrite { get; }
+
+    public ref int LocalSpaceCP { get; }
+
+    public ref bool Random { get; }
+
+    public ref bool Reverse { get; }
+
+    public CParticleCollectionFloatInput SnapShotIncrement { get; }
+
+    public CPerParticleFloatInput ManualSnapshotIndex { get; }
+
+    public ref int RandomSeed { get; }
+
+    public ref bool LocalSpaceAngles { get; }
 
 
 }

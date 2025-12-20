@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimDataImpl : SchemaClass, CAnimData {
+internal partial class CAnimDataImpl : SchemaClass, CAnimData
+{
+    public CAnimDataImpl(nint handle) : base(handle) { }
 
-  public CAnimDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public ref CBufferString Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xA4868F934D8F5786);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    public ref CBufferString Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA4868F934D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimArrayOffset;
+    private static nint? _AnimArrayOffset;
 
-  public ref CUtlVector<CAnimDesc> AnimArray {
-    get {
-      if (_AnimArrayOffset == null) {
-        _AnimArrayOffset = Schema.GetOffset(0xA4868F939FE8AF0D);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimDesc>>(_AnimArrayOffset!.Value);
+    public ref CUtlVector<CAnimDesc> AnimArray {
+        get {
+            _AnimArrayOffset = _AnimArrayOffset ?? Schema.GetOffset(0xA4868F939FE8AF0D);
+            return ref _Handle.AsRef<CUtlVector<CAnimDesc>>(_AnimArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _DecoderArrayOffset;
+    private static nint? _DecoderArrayOffset;
 
-  public ref CUtlVector<CAnimDecoder> DecoderArray {
-    get {
-      if (_DecoderArrayOffset == null) {
-        _DecoderArrayOffset = Schema.GetOffset(0xA4868F93AB12D6C4);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimDecoder>>(_DecoderArrayOffset!.Value);
+    public ref CUtlVector<CAnimDecoder> DecoderArray {
+        get {
+            _DecoderArrayOffset = _DecoderArrayOffset ?? Schema.GetOffset(0xA4868F93AB12D6C4);
+            return ref _Handle.AsRef<CUtlVector<CAnimDecoder>>(_DecoderArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxUniqueFrameIndexOffset;
+    private static nint? _MaxUniqueFrameIndexOffset;
 
-  public ref int MaxUniqueFrameIndex {
-    get {
-      if (_MaxUniqueFrameIndexOffset == null) {
-        _MaxUniqueFrameIndexOffset = Schema.GetOffset(0xA4868F938FB0EA0D);
-      }
-      return ref _Handle.AsRef<int>(_MaxUniqueFrameIndexOffset!.Value);
+    public ref int MaxUniqueFrameIndex {
+        get {
+            _MaxUniqueFrameIndexOffset = _MaxUniqueFrameIndexOffset ?? Schema.GetOffset(0xA4868F938FB0EA0D);
+            return ref _Handle.AsRef<int>(_MaxUniqueFrameIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _SegmentArrayOffset;
+    private static nint? _SegmentArrayOffset;
 
-  public ref CUtlVector<CAnimFrameSegment> SegmentArray {
-    get {
-      if (_SegmentArrayOffset == null) {
-        _SegmentArrayOffset = Schema.GetOffset(0xA4868F933714FD2F);
-      }
-      return ref _Handle.AsRef<CUtlVector<CAnimFrameSegment>>(_SegmentArrayOffset!.Value);
+    public ref CUtlVector<CAnimFrameSegment> SegmentArray {
+        get {
+            _SegmentArrayOffset = _SegmentArrayOffset ?? Schema.GetOffset(0xA4868F933714FD2F);
+            return ref _Handle.AsRef<CUtlVector<CAnimFrameSegment>>(_SegmentArrayOffset!.Value);
+        }
     }
-  }
 
 
 }

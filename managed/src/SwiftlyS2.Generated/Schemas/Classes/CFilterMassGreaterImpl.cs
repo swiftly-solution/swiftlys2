@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFilterMassGreaterImpl : CBaseFilterImpl, CFilterMassGreater {
+internal partial class CFilterMassGreaterImpl : CBaseFilterImpl, CFilterMassGreater
+{
+    public CFilterMassGreaterImpl(nint handle) : base(handle) { }
 
-  public CFilterMassGreaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FilterMassOffset;
 
-  private static nint? _FilterMassOffset;
-
-  public ref float FilterMass {
-    get {
-      if (_FilterMassOffset == null) {
-        _FilterMassOffset = Schema.GetOffset(0xBF74FA22FF3F08E7);
-      }
-      return ref _Handle.AsRef<float>(_FilterMassOffset!.Value);
+    public ref float FilterMass {
+        get {
+            _FilterMassOffset = _FilterMassOffset ?? Schema.GetOffset(0xBF74FA22FF3F08E7);
+            return ref _Handle.AsRef<float>(_FilterMassOffset!.Value);
+        }
     }
-  }
 
 
 }

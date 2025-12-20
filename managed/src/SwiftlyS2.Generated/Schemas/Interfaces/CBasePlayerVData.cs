@@ -8,41 +8,41 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBasePlayerVData : CEntitySubclassVDataBase, ISchemaClass<CBasePlayerVData> {
+public partial interface CBasePlayerVData : CEntitySubclassVDataBase, ISchemaClass<CBasePlayerVData>
+{
+    static CBasePlayerVData ISchemaClass<CBasePlayerVData>.From(nint handle) => new CBasePlayerVDataImpl(handle);
+    static int ISchemaClass<CBasePlayerVData>.Size => 376;
+    static string? ISchemaClass<CBasePlayerVData>.ClassName => null;
 
-  static CBasePlayerVData ISchemaClass<CBasePlayerVData>.From(nint handle) => new CBasePlayerVDataImpl(handle);
-  static int ISchemaClass<CBasePlayerVData>.Size => 376;
-  static string? ISchemaClass<CBasePlayerVData>.ClassName => null;
 
-  
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
-  public SchemaUntypedField ModelName { get; }
-  
-  public CSkillFloat HeadDamageMultiplier { get; }
-  
-  public CSkillFloat ChestDamageMultiplier { get; }
-  
-  public CSkillFloat StomachDamageMultiplier { get; }
-  
-  public CSkillFloat ArmDamageMultiplier { get; }
-  
-  public CSkillFloat LegDamageMultiplier { get; }
-  
-  public ref float HoldBreathTime { get; }
-  
-  public ref float DrowningDamageInterval { get; }
-  
-  public ref int DrowningDamageInitial { get; }
-  
-  public ref int DrowningDamageMax { get; }
-  
-  public ref int WaterSpeed { get; }
-  
-  public ref float UseRange { get; }
-  
-  public ref float UseAngleTolerance { get; }
-  
-  public ref float CrouchTime { get; }
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
+    public SchemaUntypedField ModelName { get; }
+
+    public CSkillFloat HeadDamageMultiplier { get; }
+
+    public CSkillFloat ChestDamageMultiplier { get; }
+
+    public CSkillFloat StomachDamageMultiplier { get; }
+
+    public CSkillFloat ArmDamageMultiplier { get; }
+
+    public CSkillFloat LegDamageMultiplier { get; }
+
+    public ref float HoldBreathTime { get; }
+
+    public ref float DrowningDamageInterval { get; }
+
+    public ref int DrowningDamageInitial { get; }
+
+    public ref int DrowningDamageMax { get; }
+
+    public ref int WaterSpeed { get; }
+
+    public ref float UseRange { get; }
+
+    public ref float UseAngleTolerance { get; }
+
+    public ref float CrouchTime { get; }
 
 
 }

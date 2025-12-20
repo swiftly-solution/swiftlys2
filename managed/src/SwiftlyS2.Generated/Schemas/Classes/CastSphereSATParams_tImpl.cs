@@ -6,78 +6,65 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CastSphereSATParams_tImpl : SchemaClass, CastSphereSATParams_t {
+internal partial class CastSphereSATParams_tImpl : SchemaClass, CastSphereSATParams_t
+{
+    public CastSphereSATParams_tImpl(nint handle) : base(handle) { }
 
-  public CastSphereSATParams_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RayStartOffset;
 
-  private static nint? _RayStartOffset;
-
-  public ref Vector RayStart {
-    get {
-      if (_RayStartOffset == null) {
-        _RayStartOffset = Schema.GetOffset(0x6282EF48CB929F19);
-      }
-      return ref _Handle.AsRef<Vector>(_RayStartOffset!.Value);
+    public ref Vector RayStart {
+        get {
+            _RayStartOffset = _RayStartOffset ?? Schema.GetOffset(0x6282EF48CB929F19);
+            return ref _Handle.AsRef<Vector>(_RayStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _RayDeltaOffset;
+    private static nint? _RayDeltaOffset;
 
-  public ref Vector RayDelta {
-    get {
-      if (_RayDeltaOffset == null) {
-        _RayDeltaOffset = Schema.GetOffset(0x6282EF4874156D5B);
-      }
-      return ref _Handle.AsRef<Vector>(_RayDeltaOffset!.Value);
+    public ref Vector RayDelta {
+        get {
+            _RayDeltaOffset = _RayDeltaOffset ?? Schema.GetOffset(0x6282EF4874156D5B);
+            return ref _Handle.AsRef<Vector>(_RayDeltaOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x6282EF485ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x6282EF485ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxFractionOffset;
+    private static nint? _MaxFractionOffset;
 
-  public ref float MaxFraction {
-    get {
-      if (_MaxFractionOffset == null) {
-        _MaxFractionOffset = Schema.GetOffset(0x6282EF48BA58C801);
-      }
-      return ref _Handle.AsRef<float>(_MaxFractionOffset!.Value);
+    public ref float MaxFraction {
+        get {
+            _MaxFractionOffset = _MaxFractionOffset ?? Schema.GetOffset(0x6282EF48BA58C801);
+            return ref _Handle.AsRef<float>(_MaxFractionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x6282EF48B731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x6282EF48B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _HullOffset;
+    private static nint? _HullOffset;
 
-  public RnHull_t? Hull {
-    get {
-      if (_HullOffset == null) {
-        _HullOffset = Schema.GetOffset(0x6282EF48FAD20488);
-      }
-      var ptr = _Handle.Read<nint>(_HullOffset!.Value);
-      return ptr.IsValidPtr() ? new RnHull_tImpl(ptr) : null;
+    public RnHull_t? Hull {
+        get {
+            _HullOffset = _HullOffset ?? Schema.GetOffset(0x6282EF48FAD20488);
+            var ptr = _Handle.Read<nint>(_HullOffset!.Value);
+            return ptr.IsValidPtr() ? new RnHull_tImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

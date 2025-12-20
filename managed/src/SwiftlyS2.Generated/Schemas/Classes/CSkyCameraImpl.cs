@@ -6,63 +6,50 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSkyCameraImpl : CBaseEntityImpl, CSkyCamera {
+internal partial class CSkyCameraImpl : CBaseEntityImpl, CSkyCamera
+{
+    public CSkyCameraImpl(nint handle) : base(handle) { }
 
-  public CSkyCameraImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SkyboxDataOffset;
 
-  private static nint? _SkyboxDataOffset;
-
-  public sky3dparams_t SkyboxData {
-    get {
-      if (_SkyboxDataOffset == null) {
-        _SkyboxDataOffset = Schema.GetOffset(0xCD44EF44CDA0772B);
-      }
-      return new sky3dparams_tImpl(_Handle + _SkyboxDataOffset!.Value);
+    public sky3dparams_t SkyboxData {
+        get {
+            _SkyboxDataOffset = _SkyboxDataOffset ?? Schema.GetOffset(0xCD44EF44CDA0772B);
+            return new sky3dparams_tImpl(_Handle + _SkyboxDataOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkyboxSlotTokenOffset;
+    private static nint? _SkyboxSlotTokenOffset;
 
-  public ref CUtlStringToken SkyboxSlotToken {
-    get {
-      if (_SkyboxSlotTokenOffset == null) {
-        _SkyboxSlotTokenOffset = Schema.GetOffset(0xCD44EF44413FD3A4);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_SkyboxSlotTokenOffset!.Value);
+    public ref CUtlStringToken SkyboxSlotToken {
+        get {
+            _SkyboxSlotTokenOffset = _SkyboxSlotTokenOffset ?? Schema.GetOffset(0xCD44EF44413FD3A4);
+            return ref _Handle.AsRef<CUtlStringToken>(_SkyboxSlotTokenOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseAnglesOffset;
+    private static nint? _UseAnglesOffset;
 
-  public ref bool UseAngles {
-    get {
-      if (_UseAnglesOffset == null) {
-        _UseAnglesOffset = Schema.GetOffset(0xCD44EF44434C3DB4);
-      }
-      return ref _Handle.AsRef<bool>(_UseAnglesOffset!.Value);
+    public ref bool UseAngles {
+        get {
+            _UseAnglesOffset = _UseAnglesOffset ?? Schema.GetOffset(0xCD44EF44434C3DB4);
+            return ref _Handle.AsRef<bool>(_UseAnglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextOffset;
+    private static nint? _NextOffset;
 
-  public CSkyCamera? Next {
-    get {
-      if (_NextOffset == null) {
-        _NextOffset = Schema.GetOffset(0xCD44EF4432B11E0E);
-      }
-      var ptr = _Handle.Read<nint>(_NextOffset!.Value);
-      return ptr.IsValidPtr() ? new CSkyCameraImpl(ptr) : null;
+    public CSkyCamera? Next {
+        get {
+            _NextOffset = _NextOffset ?? Schema.GetOffset(0xCD44EF4432B11E0E);
+            var ptr = _Handle.Read<nint>(_NextOffset!.Value);
+            return ptr.IsValidPtr() ? new CSkyCameraImpl(ptr) : null;
+        }
     }
-  }
 
-  public void SkyboxDataUpdated() {
-    Schema.Update(_Handle, 0xCD44EF44CDA0772B);
-  }
-  public void SkyboxSlotTokenUpdated() {
-    Schema.Update(_Handle, 0xCD44EF44413FD3A4);
-  }
+    public void SkyboxDataUpdated() => Schema.Update(_Handle, 0xCD44EF44CDA0772B);
+    public void SkyboxSlotTokenUpdated() => Schema.Update(_Handle, 0xCD44EF44413FD3A4);
 }

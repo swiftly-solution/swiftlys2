@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNavVolumeBreadthFirstSearchImpl : CNavVolumeCalculatedVectorImpl, CNavVolumeBreadthFirstSearch {
+internal partial class CNavVolumeBreadthFirstSearchImpl : CNavVolumeCalculatedVectorImpl, CNavVolumeBreadthFirstSearch
+{
+    public CNavVolumeBreadthFirstSearchImpl(nint handle) : base(handle) { }
 
-  public CNavVolumeBreadthFirstSearchImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartPosOffset;
 
-  private static nint? _StartPosOffset;
-
-  public ref Vector StartPos {
-    get {
-      if (_StartPosOffset == null) {
-        _StartPosOffset = Schema.GetOffset(0x7C16FC090FE14C1B);
-      }
-      return ref _Handle.AsRef<Vector>(_StartPosOffset!.Value);
+    public ref Vector StartPos {
+        get {
+            _StartPosOffset = _StartPosOffset ?? Schema.GetOffset(0x7C16FC090FE14C1B);
+            return ref _Handle.AsRef<Vector>(_StartPosOffset!.Value);
+        }
     }
-  }
-  private static nint? _SearchDistOffset;
+    private static nint? _SearchDistOffset;
 
-  public ref float SearchDist {
-    get {
-      if (_SearchDistOffset == null) {
-        _SearchDistOffset = Schema.GetOffset(0x7C16FC098227285F);
-      }
-      return ref _Handle.AsRef<float>(_SearchDistOffset!.Value);
+    public ref float SearchDist {
+        get {
+            _SearchDistOffset = _SearchDistOffset ?? Schema.GetOffset(0x7C16FC098227285F);
+            return ref _Handle.AsRef<float>(_SearchDistOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FootPinningPoseOpFixedData_t : ISchemaClass<FootPinningPoseOpFixedData_t> {
+public partial interface FootPinningPoseOpFixedData_t : ISchemaClass<FootPinningPoseOpFixedData_t>
+{
+    static FootPinningPoseOpFixedData_t ISchemaClass<FootPinningPoseOpFixedData_t>.From(nint handle) => new FootPinningPoseOpFixedData_tImpl(handle);
+    static int ISchemaClass<FootPinningPoseOpFixedData_t>.Size => 48;
+    static string? ISchemaClass<FootPinningPoseOpFixedData_t>.ClassName => null;
 
-  static FootPinningPoseOpFixedData_t ISchemaClass<FootPinningPoseOpFixedData_t>.From(nint handle) => new FootPinningPoseOpFixedData_tImpl(handle);
-  static int ISchemaClass<FootPinningPoseOpFixedData_t>.Size => 48;
-  static string? ISchemaClass<FootPinningPoseOpFixedData_t>.ClassName => null;
 
-  
-  public ref CUtlVector<FootFixedData_t> FootInfo { get; }
-  
-  public ref float BlendTime { get; }
-  
-  public ref float LockBreakDistance { get; }
-  
-  public ref float MaxLegTwist { get; }
-  
-  public ref int HipBoneIndex { get; }
-  
-  public ref bool ApplyLegTwistLimits { get; }
-  
-  public ref bool ApplyFootRotationLimits { get; }
+    public ref CUtlVector<FootFixedData_t> FootInfo { get; }
+
+    public ref float BlendTime { get; }
+
+    public ref float LockBreakDistance { get; }
+
+    public ref float MaxLegTwist { get; }
+
+    public ref int HipBoneIndex { get; }
+
+    public ref bool ApplyLegTwistLimits { get; }
+
+    public ref bool ApplyFootRotationLimits { get; }
 
 
 }

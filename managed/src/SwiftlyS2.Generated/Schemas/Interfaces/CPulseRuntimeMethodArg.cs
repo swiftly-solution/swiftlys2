@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseRuntimeMethodArg : ISchemaClass<CPulseRuntimeMethodArg> {
+public partial interface CPulseRuntimeMethodArg : ISchemaClass<CPulseRuntimeMethodArg>
+{
+    static CPulseRuntimeMethodArg ISchemaClass<CPulseRuntimeMethodArg>.From(nint handle) => new CPulseRuntimeMethodArgImpl(handle);
+    static int ISchemaClass<CPulseRuntimeMethodArg>.Size => 128;
+    static string? ISchemaClass<CPulseRuntimeMethodArg>.ClassName => null;
 
-  static CPulseRuntimeMethodArg ISchemaClass<CPulseRuntimeMethodArg>.From(nint handle) => new CPulseRuntimeMethodArgImpl(handle);
-  static int ISchemaClass<CPulseRuntimeMethodArg>.Size => 128;
-  static string? ISchemaClass<CPulseRuntimeMethodArg>.ClassName => null;
 
-  
-  // CKV3MemberNameWithStorage
-  public SchemaUntypedField Name { get; }
-  
-  public string Description { get; set; }
-  
-  // CPulseValueFullType
-  public SchemaUntypedField Type { get; }
+    // CKV3MemberNameWithStorage
+    public SchemaUntypedField Name { get; }
+
+    public string Description { get; set; }
+
+    // CPulseValueFullType
+    public SchemaUntypedField Type { get; }
 
 
 }

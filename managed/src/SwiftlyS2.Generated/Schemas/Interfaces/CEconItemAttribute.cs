@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEconItemAttribute : ISchemaClass<CEconItemAttribute> {
+public partial interface CEconItemAttribute : ISchemaClass<CEconItemAttribute>
+{
+    static CEconItemAttribute ISchemaClass<CEconItemAttribute>.From(nint handle) => new CEconItemAttributeImpl(handle);
+    static int ISchemaClass<CEconItemAttribute>.Size => 72;
+    static string? ISchemaClass<CEconItemAttribute>.ClassName => null;
 
-  static CEconItemAttribute ISchemaClass<CEconItemAttribute>.From(nint handle) => new CEconItemAttributeImpl(handle);
-  static int ISchemaClass<CEconItemAttribute>.Size => 72;
-  static string? ISchemaClass<CEconItemAttribute>.ClassName => null;
 
-  
-  public ref ushort AttributeDefinitionIndex { get; }
-  
-  public ref float Value { get; }
-  
-  public ref float InitialValue { get; }
-  
-  public ref int RefundableCurrency { get; }
-  
-  public ref bool SetBonus { get; }
+    public ref ushort AttributeDefinitionIndex { get; }
 
-  public void AttributeDefinitionIndexUpdated();
-  public void ValueUpdated();
-  public void InitialValueUpdated();
-  public void RefundableCurrencyUpdated();
-  public void SetBonusUpdated();
+    public ref float Value { get; }
+
+    public ref float InitialValue { get; }
+
+    public ref int RefundableCurrency { get; }
+
+    public ref bool SetBonus { get; }
+
+    public void AttributeDefinitionIndexUpdated();
+    public void ValueUpdated();
+    public void InitialValueUpdated();
+    public void RefundableCurrencyUpdated();
+    public void SetBonusUpdated();
 }

@@ -6,207 +6,168 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParticleVisibilityInputsImpl : SchemaClass, CParticleVisibilityInputs {
+internal partial class CParticleVisibilityInputsImpl : SchemaClass, CParticleVisibilityInputs
+{
+    public CParticleVisibilityInputsImpl(nint handle) : base(handle) { }
 
-  public CParticleVisibilityInputsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CameraBiasOffset;
 
-  private static nint? _CameraBiasOffset;
-
-  public ref float CameraBias {
-    get {
-      if (_CameraBiasOffset == null) {
-        _CameraBiasOffset = Schema.GetOffset(0xF3FC60F57CAF2EE5);
-      }
-      return ref _Handle.AsRef<float>(_CameraBiasOffset!.Value);
+    public ref float CameraBias {
+        get {
+            _CameraBiasOffset = _CameraBiasOffset ?? Schema.GetOffset(0xF3FC60F57CAF2EE5);
+            return ref _Handle.AsRef<float>(_CameraBiasOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPinOffset;
+    private static nint? _CPinOffset;
 
-  public ref int CPin {
-    get {
-      if (_CPinOffset == null) {
-        _CPinOffset = Schema.GetOffset(0xF3FC60F5CAA9CA3D);
-      }
-      return ref _Handle.AsRef<int>(_CPinOffset!.Value);
+    public ref int CPin {
+        get {
+            _CPinOffset = _CPinOffset ?? Schema.GetOffset(0xF3FC60F5CAA9CA3D);
+            return ref _Handle.AsRef<int>(_CPinOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProxyRadiusOffset;
+    private static nint? _ProxyRadiusOffset;
 
-  public ref float ProxyRadius {
-    get {
-      if (_ProxyRadiusOffset == null) {
-        _ProxyRadiusOffset = Schema.GetOffset(0xF3FC60F55BDAD4C7);
-      }
-      return ref _Handle.AsRef<float>(_ProxyRadiusOffset!.Value);
+    public ref float ProxyRadius {
+        get {
+            _ProxyRadiusOffset = _ProxyRadiusOffset ?? Schema.GetOffset(0xF3FC60F55BDAD4C7);
+            return ref _Handle.AsRef<float>(_ProxyRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputMinOffset;
+    private static nint? _InputMinOffset;
 
-  public ref float InputMin {
-    get {
-      if (_InputMinOffset == null) {
-        _InputMinOffset = Schema.GetOffset(0xF3FC60F5E88A0D0F);
-      }
-      return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+    public ref float InputMin {
+        get {
+            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0xF3FC60F5E88A0D0F);
+            return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputMaxOffset;
+    private static nint? _InputMaxOffset;
 
-  public ref float InputMax {
-    get {
-      if (_InputMaxOffset == null) {
-        _InputMaxOffset = Schema.GetOffset(0xF3FC60F5D6766901);
-      }
-      return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+    public ref float InputMax {
+        get {
+            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0xF3FC60F5D6766901);
+            return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputPixelVisFadeOffset;
+    private static nint? _InputPixelVisFadeOffset;
 
-  public ref float InputPixelVisFade {
-    get {
-      if (_InputPixelVisFadeOffset == null) {
-        _InputPixelVisFadeOffset = Schema.GetOffset(0xF3FC60F521E711C1);
-      }
-      return ref _Handle.AsRef<float>(_InputPixelVisFadeOffset!.Value);
+    public ref float InputPixelVisFade {
+        get {
+            _InputPixelVisFadeOffset = _InputPixelVisFadeOffset ?? Schema.GetOffset(0xF3FC60F521E711C1);
+            return ref _Handle.AsRef<float>(_InputPixelVisFadeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoPixelVisibilityFallbackOffset;
+    private static nint? _NoPixelVisibilityFallbackOffset;
 
-  public ref float NoPixelVisibilityFallback {
-    get {
-      if (_NoPixelVisibilityFallbackOffset == null) {
-        _NoPixelVisibilityFallbackOffset = Schema.GetOffset(0xF3FC60F586460B8E);
-      }
-      return ref _Handle.AsRef<float>(_NoPixelVisibilityFallbackOffset!.Value);
+    public ref float NoPixelVisibilityFallback {
+        get {
+            _NoPixelVisibilityFallbackOffset = _NoPixelVisibilityFallbackOffset ?? Schema.GetOffset(0xF3FC60F586460B8E);
+            return ref _Handle.AsRef<float>(_NoPixelVisibilityFallbackOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceInputMinOffset;
+    private static nint? _DistanceInputMinOffset;
 
-  public ref float DistanceInputMin {
-    get {
-      if (_DistanceInputMinOffset == null) {
-        _DistanceInputMinOffset = Schema.GetOffset(0xF3FC60F5D734ED90);
-      }
-      return ref _Handle.AsRef<float>(_DistanceInputMinOffset!.Value);
+    public ref float DistanceInputMin {
+        get {
+            _DistanceInputMinOffset = _DistanceInputMinOffset ?? Schema.GetOffset(0xF3FC60F5D734ED90);
+            return ref _Handle.AsRef<float>(_DistanceInputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceInputMaxOffset;
+    private static nint? _DistanceInputMaxOffset;
 
-  public ref float DistanceInputMax {
-    get {
-      if (_DistanceInputMaxOffset == null) {
-        _DistanceInputMaxOffset = Schema.GetOffset(0xF3FC60F5CD21561A);
-      }
-      return ref _Handle.AsRef<float>(_DistanceInputMaxOffset!.Value);
+    public ref float DistanceInputMax {
+        get {
+            _DistanceInputMaxOffset = _DistanceInputMaxOffset ?? Schema.GetOffset(0xF3FC60F5CD21561A);
+            return ref _Handle.AsRef<float>(_DistanceInputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _DotInputMinOffset;
+    private static nint? _DotInputMinOffset;
 
-  public ref float DotInputMin {
-    get {
-      if (_DotInputMinOffset == null) {
-        _DotInputMinOffset = Schema.GetOffset(0xF3FC60F5AD21DD8A);
-      }
-      return ref _Handle.AsRef<float>(_DotInputMinOffset!.Value);
+    public ref float DotInputMin {
+        get {
+            _DotInputMinOffset = _DotInputMinOffset ?? Schema.GetOffset(0xF3FC60F5AD21DD8A);
+            return ref _Handle.AsRef<float>(_DotInputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _DotInputMaxOffset;
+    private static nint? _DotInputMaxOffset;
 
-  public ref float DotInputMax {
-    get {
-      if (_DotInputMaxOffset == null) {
-        _DotInputMaxOffset = Schema.GetOffset(0xF3FC60F5B7357500);
-      }
-      return ref _Handle.AsRef<float>(_DotInputMaxOffset!.Value);
+    public ref float DotInputMax {
+        get {
+            _DotInputMaxOffset = _DotInputMaxOffset ?? Schema.GetOffset(0xF3FC60F5B7357500);
+            return ref _Handle.AsRef<float>(_DotInputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _DotCPAnglesOffset;
+    private static nint? _DotCPAnglesOffset;
 
-  public ref bool DotCPAngles {
-    get {
-      if (_DotCPAnglesOffset == null) {
-        _DotCPAnglesOffset = Schema.GetOffset(0xF3FC60F50D0315CB);
-      }
-      return ref _Handle.AsRef<bool>(_DotCPAnglesOffset!.Value);
+    public ref bool DotCPAngles {
+        get {
+            _DotCPAnglesOffset = _DotCPAnglesOffset ?? Schema.GetOffset(0xF3FC60F50D0315CB);
+            return ref _Handle.AsRef<bool>(_DotCPAnglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _DotCameraAnglesOffset;
+    private static nint? _DotCameraAnglesOffset;
 
-  public ref bool DotCameraAngles {
-    get {
-      if (_DotCameraAnglesOffset == null) {
-        _DotCameraAnglesOffset = Schema.GetOffset(0xF3FC60F5A84A80CF);
-      }
-      return ref _Handle.AsRef<bool>(_DotCameraAnglesOffset!.Value);
+    public ref bool DotCameraAngles {
+        get {
+            _DotCameraAnglesOffset = _DotCameraAnglesOffset ?? Schema.GetOffset(0xF3FC60F5A84A80CF);
+            return ref _Handle.AsRef<bool>(_DotCameraAnglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaScaleMinOffset;
+    private static nint? _AlphaScaleMinOffset;
 
-  public ref float AlphaScaleMin {
-    get {
-      if (_AlphaScaleMinOffset == null) {
-        _AlphaScaleMinOffset = Schema.GetOffset(0xF3FC60F53AEC0597);
-      }
-      return ref _Handle.AsRef<float>(_AlphaScaleMinOffset!.Value);
+    public ref float AlphaScaleMin {
+        get {
+            _AlphaScaleMinOffset = _AlphaScaleMinOffset ?? Schema.GetOffset(0xF3FC60F53AEC0597);
+            return ref _Handle.AsRef<float>(_AlphaScaleMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaScaleMaxOffset;
+    private static nint? _AlphaScaleMaxOffset;
 
-  public ref float AlphaScaleMax {
-    get {
-      if (_AlphaScaleMaxOffset == null) {
-        _AlphaScaleMaxOffset = Schema.GetOffset(0xF3FC60F548FFA359);
-      }
-      return ref _Handle.AsRef<float>(_AlphaScaleMaxOffset!.Value);
+    public ref float AlphaScaleMax {
+        get {
+            _AlphaScaleMaxOffset = _AlphaScaleMaxOffset ?? Schema.GetOffset(0xF3FC60F548FFA359);
+            return ref _Handle.AsRef<float>(_AlphaScaleMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleMinOffset;
+    private static nint? _RadiusScaleMinOffset;
 
-  public ref float RadiusScaleMin {
-    get {
-      if (_RadiusScaleMinOffset == null) {
-        _RadiusScaleMinOffset = Schema.GetOffset(0xF3FC60F53A308DB3);
-      }
-      return ref _Handle.AsRef<float>(_RadiusScaleMinOffset!.Value);
+    public ref float RadiusScaleMin {
+        get {
+            _RadiusScaleMinOffset = _RadiusScaleMinOffset ?? Schema.GetOffset(0xF3FC60F53A308DB3);
+            return ref _Handle.AsRef<float>(_RadiusScaleMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleMaxOffset;
+    private static nint? _RadiusScaleMaxOffset;
 
-  public ref float RadiusScaleMax {
-    get {
-      if (_RadiusScaleMaxOffset == null) {
-        _RadiusScaleMaxOffset = Schema.GetOffset(0xF3FC60F55044380D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusScaleMaxOffset!.Value);
+    public ref float RadiusScaleMax {
+        get {
+            _RadiusScaleMaxOffset = _RadiusScaleMaxOffset ?? Schema.GetOffset(0xF3FC60F55044380D);
+            return ref _Handle.AsRef<float>(_RadiusScaleMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleFOVBaseOffset;
+    private static nint? _RadiusScaleFOVBaseOffset;
 
-  public ref float RadiusScaleFOVBase {
-    get {
-      if (_RadiusScaleFOVBaseOffset == null) {
-        _RadiusScaleFOVBaseOffset = Schema.GetOffset(0xF3FC60F521D6B3D5);
-      }
-      return ref _Handle.AsRef<float>(_RadiusScaleFOVBaseOffset!.Value);
+    public ref float RadiusScaleFOVBase {
+        get {
+            _RadiusScaleFOVBaseOffset = _RadiusScaleFOVBaseOffset ?? Schema.GetOffset(0xF3FC60F521D6B3D5);
+            return ref _Handle.AsRef<float>(_RadiusScaleFOVBaseOffset!.Value);
+        }
     }
-  }
-  private static nint? _RightEyeOffset;
+    private static nint? _RightEyeOffset;
 
-  public ref bool RightEye {
-    get {
-      if (_RightEyeOffset == null) {
-        _RightEyeOffset = Schema.GetOffset(0xF3FC60F5D4BB0DBA);
-      }
-      return ref _Handle.AsRef<bool>(_RightEyeOffset!.Value);
+    public ref bool RightEye {
+        get {
+            _RightEyeOffset = _RightEyeOffset ?? Schema.GetOffset(0xF3FC60F5D4BB0DBA);
+            return ref _Handle.AsRef<bool>(_RightEyeOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VoxelVisBlockOffset_tImpl : SchemaClass, VoxelVisBlockOffset_t {
+internal partial class VoxelVisBlockOffset_tImpl : SchemaClass, VoxelVisBlockOffset_t
+{
+    public VoxelVisBlockOffset_tImpl(nint handle) : base(handle) { }
 
-  public VoxelVisBlockOffset_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OffsetOffset;
 
-  private static nint? _OffsetOffset;
-
-  public ref uint Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0x17D2B49827734C8E);
-      }
-      return ref _Handle.AsRef<uint>(_OffsetOffset!.Value);
+    public ref uint Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x17D2B49827734C8E);
+            return ref _Handle.AsRef<uint>(_OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _ElementCountOffset;
+    private static nint? _ElementCountOffset;
 
-  public ref uint ElementCount {
-    get {
-      if (_ElementCountOffset == null) {
-        _ElementCountOffset = Schema.GetOffset(0x17D2B49851A2EF12);
-      }
-      return ref _Handle.AsRef<uint>(_ElementCountOffset!.Value);
+    public ref uint ElementCount {
+        get {
+            _ElementCountOffset = _ElementCountOffset ?? Schema.GetOffset(0x17D2B49851A2EF12);
+            return ref _Handle.AsRef<uint>(_ElementCountOffset!.Value);
+        }
     }
-  }
 
 
 }

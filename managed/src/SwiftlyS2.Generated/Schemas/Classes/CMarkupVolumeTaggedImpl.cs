@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMarkupVolumeTaggedImpl : CMarkupVolumeImpl, CMarkupVolumeTagged {
+internal partial class CMarkupVolumeTaggedImpl : CMarkupVolumeImpl, CMarkupVolumeTagged
+{
+    public CMarkupVolumeTaggedImpl(nint handle) : base(handle) { }
 
-  public CMarkupVolumeTaggedImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GroupNamesOffset;
 
-  private static nint? _GroupNamesOffset;
-
-  public ref CUtlVector<CGlobalSymbol> GroupNames {
-    get {
-      if (_GroupNamesOffset == null) {
-        _GroupNamesOffset = Schema.GetOffset(0x4113340CB853197C);
-      }
-      return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GroupNamesOffset!.Value);
+    public ref CUtlVector<CGlobalSymbol> GroupNames {
+        get {
+            _GroupNamesOffset = _GroupNamesOffset ?? Schema.GetOffset(0x4113340CB853197C);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_GroupNamesOffset!.Value);
+        }
     }
-  }
-  private static nint? _TagsOffset;
+    private static nint? _TagsOffset;
 
-  public ref CUtlVector<CGlobalSymbol> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0x4113340C31C5D020);
-      }
-      return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_TagsOffset!.Value);
+    public ref CUtlVector<CGlobalSymbol> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0x4113340C31C5D020);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_TagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsGroupOffset;
+    private static nint? _IsGroupOffset;
 
-  public ref bool IsGroup {
-    get {
-      if (_IsGroupOffset == null) {
-        _IsGroupOffset = Schema.GetOffset(0x4113340CB68D3FDC);
-      }
-      return ref _Handle.AsRef<bool>(_IsGroupOffset!.Value);
+    public ref bool IsGroup {
+        get {
+            _IsGroupOffset = _IsGroupOffset ?? Schema.GetOffset(0x4113340CB68D3FDC);
+            return ref _Handle.AsRef<bool>(_IsGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _GroupByPrefabOffset;
+    private static nint? _GroupByPrefabOffset;
 
-  public ref bool GroupByPrefab {
-    get {
-      if (_GroupByPrefabOffset == null) {
-        _GroupByPrefabOffset = Schema.GetOffset(0x4113340CBCD6E7A7);
-      }
-      return ref _Handle.AsRef<bool>(_GroupByPrefabOffset!.Value);
+    public ref bool GroupByPrefab {
+        get {
+            _GroupByPrefabOffset = _GroupByPrefabOffset ?? Schema.GetOffset(0x4113340CBCD6E7A7);
+            return ref _Handle.AsRef<bool>(_GroupByPrefabOffset!.Value);
+        }
     }
-  }
-  private static nint? _GroupByVolumeOffset;
+    private static nint? _GroupByVolumeOffset;
 
-  public ref bool GroupByVolume {
-    get {
-      if (_GroupByVolumeOffset == null) {
-        _GroupByVolumeOffset = Schema.GetOffset(0x4113340CFE19F503);
-      }
-      return ref _Handle.AsRef<bool>(_GroupByVolumeOffset!.Value);
+    public ref bool GroupByVolume {
+        get {
+            _GroupByVolumeOffset = _GroupByVolumeOffset ?? Schema.GetOffset(0x4113340CFE19F503);
+            return ref _Handle.AsRef<bool>(_GroupByVolumeOffset!.Value);
+        }
     }
-  }
-  private static nint? _GroupOtherGroupsOffset;
+    private static nint? _GroupOtherGroupsOffset;
 
-  public ref bool GroupOtherGroups {
-    get {
-      if (_GroupOtherGroupsOffset == null) {
-        _GroupOtherGroupsOffset = Schema.GetOffset(0x4113340CE6C708E6);
-      }
-      return ref _Handle.AsRef<bool>(_GroupOtherGroupsOffset!.Value);
+    public ref bool GroupOtherGroups {
+        get {
+            _GroupOtherGroupsOffset = _GroupOtherGroupsOffset ?? Schema.GetOffset(0x4113340CE6C708E6);
+            return ref _Handle.AsRef<bool>(_GroupOtherGroupsOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsInGroupOffset;
+    private static nint? _IsInGroupOffset;
 
-  public ref bool IsInGroup {
-    get {
-      if (_IsInGroupOffset == null) {
-        _IsInGroupOffset = Schema.GetOffset(0x4113340C19D5C241);
-      }
-      return ref _Handle.AsRef<bool>(_IsInGroupOffset!.Value);
+    public ref bool IsInGroup {
+        get {
+            _IsInGroupOffset = _IsInGroupOffset ?? Schema.GetOffset(0x4113340C19D5C241);
+            return ref _Handle.AsRef<bool>(_IsInGroupOffset!.Value);
+        }
     }
-  }
 
 
 }

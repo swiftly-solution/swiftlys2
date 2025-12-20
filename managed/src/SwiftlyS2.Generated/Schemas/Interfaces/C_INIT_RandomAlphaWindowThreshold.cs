@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomAlphaWindowThreshold : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomAlphaWindowThreshold> {
+public partial interface C_INIT_RandomAlphaWindowThreshold : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomAlphaWindowThreshold>
+{
+    static C_INIT_RandomAlphaWindowThreshold ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.From(nint handle) => new C_INIT_RandomAlphaWindowThresholdImpl(handle);
+    static int ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.Size => 488;
+    static string? ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.ClassName => null;
 
-  static C_INIT_RandomAlphaWindowThreshold ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.From(nint handle) => new C_INIT_RandomAlphaWindowThresholdImpl(handle);
-  static int ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.Size => 488;
-  static string? ISchemaClass<C_INIT_RandomAlphaWindowThreshold>.ClassName => null;
 
-  
-  public ref float Min { get; }
-  
-  public ref float Max { get; }
-  
-  public ref float Exponent { get; }
+    public ref float Min { get; }
+
+    public ref float Max { get; }
+
+    public ref float Exponent { get; }
 
 
 }

@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapBoundingVolumetoCPImpl : CParticleFunctionPreEmissionImpl, C_OP_RemapBoundingVolumetoCP {
+internal partial class C_OP_RemapBoundingVolumetoCPImpl : CParticleFunctionPreEmissionImpl, C_OP_RemapBoundingVolumetoCP
+{
+    public C_OP_RemapBoundingVolumetoCPImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapBoundingVolumetoCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OutControlPointNumberOffset;
 
-  private static nint? _OutControlPointNumberOffset;
-
-  public ref int OutControlPointNumber {
-    get {
-      if (_OutControlPointNumberOffset == null) {
-        _OutControlPointNumberOffset = Schema.GetOffset(0xBFFF451ED021D73F);
-      }
-      return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+    public ref int OutControlPointNumber {
+        get {
+            _OutControlPointNumberOffset = _OutControlPointNumberOffset ?? Schema.GetOffset(0xBFFF451ED021D73F);
+            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputMinOffset;
+    private static nint? _InputMinOffset;
 
-  public ref float InputMin {
-    get {
-      if (_InputMinOffset == null) {
-        _InputMinOffset = Schema.GetOffset(0xBFFF451EE88A0D0F);
-      }
-      return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+    public ref float InputMin {
+        get {
+            _InputMinOffset = _InputMinOffset ?? Schema.GetOffset(0xBFFF451EE88A0D0F);
+            return ref _Handle.AsRef<float>(_InputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputMaxOffset;
+    private static nint? _InputMaxOffset;
 
-  public ref float InputMax {
-    get {
-      if (_InputMaxOffset == null) {
-        _InputMaxOffset = Schema.GetOffset(0xBFFF451ED6766901);
-      }
-      return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+    public ref float InputMax {
+        get {
+            _InputMaxOffset = _InputMaxOffset ?? Schema.GetOffset(0xBFFF451ED6766901);
+            return ref _Handle.AsRef<float>(_InputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMinOffset;
+    private static nint? _OutputMinOffset;
 
-  public ref float OutputMin {
-    get {
-      if (_OutputMinOffset == null) {
-        _OutputMinOffset = Schema.GetOffset(0xBFFF451E5F8D7716);
-      }
-      return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+    public ref float OutputMin {
+        get {
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0xBFFF451E5F8D7716);
+            return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMaxOffset;
+    private static nint? _OutputMaxOffset;
 
-  public ref float OutputMax {
-    get {
-      if (_OutputMaxOffset == null) {
-        _OutputMaxOffset = Schema.GetOffset(0xBFFF451E51A0E8C4);
-      }
-      return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+    public ref float OutputMax {
+        get {
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0xBFFF451E51A0E8C4);
+            return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+        }
     }
-  }
 
 
 }

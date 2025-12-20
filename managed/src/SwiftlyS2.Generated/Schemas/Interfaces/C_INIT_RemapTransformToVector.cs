@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RemapTransformToVector : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapTransformToVector> {
+public partial interface C_INIT_RemapTransformToVector : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapTransformToVector>
+{
+    static C_INIT_RemapTransformToVector ISchemaClass<C_INIT_RemapTransformToVector>.From(nint handle) => new C_INIT_RemapTransformToVectorImpl(handle);
+    static int ISchemaClass<C_INIT_RemapTransformToVector>.Size => 760;
+    static string? ISchemaClass<C_INIT_RemapTransformToVector>.ClassName => null;
 
-  static C_INIT_RemapTransformToVector ISchemaClass<C_INIT_RemapTransformToVector>.From(nint handle) => new C_INIT_RemapTransformToVectorImpl(handle);
-  static int ISchemaClass<C_INIT_RemapTransformToVector>.Size => 760;
-  static string? ISchemaClass<C_INIT_RemapTransformToVector>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref Vector InputMin { get; }
-  
-  public ref Vector InputMax { get; }
-  
-  public ref Vector OutputMin { get; }
-  
-  public ref Vector OutputMax { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public CParticleTransformInput LocalSpaceTransform { get; }
-  
-  public ref float StartTime { get; }
-  
-  public ref float EndTime { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool Offset { get; }
-  
-  public ref bool Accelerate { get; }
-  
-  public ref float RemapBias { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref Vector InputMin { get; }
+
+    public ref Vector InputMax { get; }
+
+    public ref Vector OutputMin { get; }
+
+    public ref Vector OutputMax { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public CParticleTransformInput LocalSpaceTransform { get; }
+
+    public ref float StartTime { get; }
+
+    public ref float EndTime { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool Offset { get; }
+
+    public ref bool Accelerate { get; }
+
+    public ref float RemapBias { get; }
 
 
 }

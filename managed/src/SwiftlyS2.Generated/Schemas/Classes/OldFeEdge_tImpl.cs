@@ -6,116 +6,97 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class OldFeEdge_tImpl : SchemaClass, OldFeEdge_t {
+internal partial class OldFeEdge_tImpl : SchemaClass, OldFeEdge_t
+{
+    public OldFeEdge_tImpl(nint handle) : base(handle) { }
 
-  public OldFeEdge_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<float> K {
-    get => new SchemaFixedArray<float>(_Handle, 0xBAF074C17C12054C, 3, 4, 4);
-  }
-  private static nint? _InvAOffset;
-
-  public ref float InvA {
-    get {
-      if (_InvAOffset == null) {
-        _InvAOffset = Schema.GetOffset(0xBAF074C1518D5F7B);
-      }
-      return ref _Handle.AsRef<float>(_InvAOffset!.Value);
+    public ISchemaFixedArray<float> K {
+        get => new SchemaFixedArray<float>(_Handle, 0xBAF074C17C12054C, 3, 4, 4);
     }
-  }
-  private static nint? _TOffset;
+    private static nint? _InvAOffset;
 
-  public ref float T {
-    get {
-      if (_TOffset == null) {
-        _TOffset = Schema.GetOffset(0xBAF074C1F10C3DA3);
-      }
-      return ref _Handle.AsRef<float>(_TOffset!.Value);
+    public ref float InvA {
+        get {
+            _InvAOffset = _InvAOffset ?? Schema.GetOffset(0xBAF074C1518D5F7B);
+            return ref _Handle.AsRef<float>(_InvAOffset!.Value);
+        }
     }
-  }
-  private static nint? _ThetaRelaxedOffset;
+    private static nint? _TOffset;
 
-  public ref float ThetaRelaxed {
-    get {
-      if (_ThetaRelaxedOffset == null) {
-        _ThetaRelaxedOffset = Schema.GetOffset(0xBAF074C14C35B770);
-      }
-      return ref _Handle.AsRef<float>(_ThetaRelaxedOffset!.Value);
+    public ref float T {
+        get {
+            _TOffset = _TOffset ?? Schema.GetOffset(0xBAF074C1F10C3DA3);
+            return ref _Handle.AsRef<float>(_TOffset!.Value);
+        }
     }
-  }
-  private static nint? _ThetaFactorOffset;
+    private static nint? _ThetaRelaxedOffset;
 
-  public ref float ThetaFactor {
-    get {
-      if (_ThetaFactorOffset == null) {
-        _ThetaFactorOffset = Schema.GetOffset(0xBAF074C165B8FFDA);
-      }
-      return ref _Handle.AsRef<float>(_ThetaFactorOffset!.Value);
+    public ref float ThetaRelaxed {
+        get {
+            _ThetaRelaxedOffset = _ThetaRelaxedOffset ?? Schema.GetOffset(0xBAF074C14C35B770);
+            return ref _Handle.AsRef<float>(_ThetaRelaxedOffset!.Value);
+        }
     }
-  }
-  private static nint? _C01Offset;
+    private static nint? _ThetaFactorOffset;
 
-  public ref float C01 {
-    get {
-      if (_C01Offset == null) {
-        _C01Offset = Schema.GetOffset(0xBAF074C13DE93555);
-      }
-      return ref _Handle.AsRef<float>(_C01Offset!.Value);
+    public ref float ThetaFactor {
+        get {
+            _ThetaFactorOffset = _ThetaFactorOffset ?? Schema.GetOffset(0xBAF074C165B8FFDA);
+            return ref _Handle.AsRef<float>(_ThetaFactorOffset!.Value);
+        }
     }
-  }
-  private static nint? _C02Offset;
+    private static nint? _C01Offset;
 
-  public ref float C02 {
-    get {
-      if (_C02Offset == null) {
-        _C02Offset = Schema.GetOffset(0xBAF074C13AE9309C);
-      }
-      return ref _Handle.AsRef<float>(_C02Offset!.Value);
+    public ref float C01 {
+        get {
+            _C01Offset = _C01Offset ?? Schema.GetOffset(0xBAF074C13DE93555);
+            return ref _Handle.AsRef<float>(_C01Offset!.Value);
+        }
     }
-  }
-  private static nint? _C03Offset;
+    private static nint? _C02Offset;
 
-  public ref float C03 {
-    get {
-      if (_C03Offset == null) {
-        _C03Offset = Schema.GetOffset(0xBAF074C13BE9322F);
-      }
-      return ref _Handle.AsRef<float>(_C03Offset!.Value);
+    public ref float C02 {
+        get {
+            _C02Offset = _C02Offset ?? Schema.GetOffset(0xBAF074C13AE9309C);
+            return ref _Handle.AsRef<float>(_C02Offset!.Value);
+        }
     }
-  }
-  private static nint? _C04Offset;
+    private static nint? _C03Offset;
 
-  public ref float C04 {
-    get {
-      if (_C04Offset == null) {
-        _C04Offset = Schema.GetOffset(0xBAF074C138E92D76);
-      }
-      return ref _Handle.AsRef<float>(_C04Offset!.Value);
+    public ref float C03 {
+        get {
+            _C03Offset = _C03Offset ?? Schema.GetOffset(0xBAF074C13BE9322F);
+            return ref _Handle.AsRef<float>(_C03Offset!.Value);
+        }
     }
-  }
-  private static nint? _AxialModelDistOffset;
+    private static nint? _C04Offset;
 
-  public ref float AxialModelDist {
-    get {
-      if (_AxialModelDistOffset == null) {
-        _AxialModelDistOffset = Schema.GetOffset(0xBAF074C1E53980E9);
-      }
-      return ref _Handle.AsRef<float>(_AxialModelDistOffset!.Value);
+    public ref float C04 {
+        get {
+            _C04Offset = _C04Offset ?? Schema.GetOffset(0xBAF074C138E92D76);
+            return ref _Handle.AsRef<float>(_C04Offset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<float> AxialModelWeights {
-    get => new SchemaFixedArray<float>(_Handle, 0xBAF074C1D9CDB73E, 4, 4, 4);
-  }
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0xBAF074C1F6FB9B19, 4, 2, 2);
-  }
+    private static nint? _AxialModelDistOffset;
+
+    public ref float AxialModelDist {
+        get {
+            _AxialModelDistOffset = _AxialModelDistOffset ?? Schema.GetOffset(0xBAF074C1E53980E9);
+            return ref _Handle.AsRef<float>(_AxialModelDistOffset!.Value);
+        }
+    }
+    public ISchemaFixedArray<float> AxialModelWeights {
+        get => new SchemaFixedArray<float>(_Handle, 0xBAF074C1D9CDB73E, 4, 4, 4);
+    }
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0xBAF074C1F6FB9B19, 4, 2, 2);
+    }
 
 
 }

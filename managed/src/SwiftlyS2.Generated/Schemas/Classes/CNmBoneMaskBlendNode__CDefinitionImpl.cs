@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmBoneMaskBlendNode__CDefinitionImpl : CNmBoneMaskValueNode__CDefinitionImpl, CNmBoneMaskBlendNode__CDefinition {
+internal partial class CNmBoneMaskBlendNode__CDefinitionImpl : CNmBoneMaskValueNode__CDefinitionImpl, CNmBoneMaskBlendNode__CDefinition
+{
+    public CNmBoneMaskBlendNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmBoneMaskBlendNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceMaskNodeIdxOffset;
 
-  private static nint? _SourceMaskNodeIdxOffset;
-
-  public ref short SourceMaskNodeIdx {
-    get {
-      if (_SourceMaskNodeIdxOffset == null) {
-        _SourceMaskNodeIdxOffset = Schema.GetOffset(0x551EA0BCFF243A47);
-      }
-      return ref _Handle.AsRef<short>(_SourceMaskNodeIdxOffset!.Value);
+    public ref short SourceMaskNodeIdx {
+        get {
+            _SourceMaskNodeIdxOffset = _SourceMaskNodeIdxOffset ?? Schema.GetOffset(0x551EA0BCFF243A47);
+            return ref _Handle.AsRef<short>(_SourceMaskNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetMaskNodeIdxOffset;
+    private static nint? _TargetMaskNodeIdxOffset;
 
-  public ref short TargetMaskNodeIdx {
-    get {
-      if (_TargetMaskNodeIdxOffset == null) {
-        _TargetMaskNodeIdxOffset = Schema.GetOffset(0x551EA0BC74E90A6F);
-      }
-      return ref _Handle.AsRef<short>(_TargetMaskNodeIdxOffset!.Value);
+    public ref short TargetMaskNodeIdx {
+        get {
+            _TargetMaskNodeIdxOffset = _TargetMaskNodeIdxOffset ?? Schema.GetOffset(0x551EA0BC74E90A6F);
+            return ref _Handle.AsRef<short>(_TargetMaskNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendWeightValueNodeIdxOffset;
+    private static nint? _BlendWeightValueNodeIdxOffset;
 
-  public ref short BlendWeightValueNodeIdx {
-    get {
-      if (_BlendWeightValueNodeIdxOffset == null) {
-        _BlendWeightValueNodeIdxOffset = Schema.GetOffset(0x551EA0BC2735A990);
-      }
-      return ref _Handle.AsRef<short>(_BlendWeightValueNodeIdxOffset!.Value);
+    public ref short BlendWeightValueNodeIdx {
+        get {
+            _BlendWeightValueNodeIdxOffset = _BlendWeightValueNodeIdxOffset ?? Schema.GetOffset(0x551EA0BC2735A990);
+            return ref _Handle.AsRef<short>(_BlendWeightValueNodeIdxOffset!.Value);
+        }
     }
-  }
 
 
 }

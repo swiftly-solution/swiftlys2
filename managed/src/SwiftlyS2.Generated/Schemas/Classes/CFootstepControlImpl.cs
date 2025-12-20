@@ -6,56 +6,41 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootstepControlImpl : CBaseTriggerImpl, CFootstepControl {
+internal partial class CFootstepControlImpl : CBaseTriggerImpl, CFootstepControl
+{
+    public CFootstepControlImpl(nint handle) : base(handle) { }
 
-  public CFootstepControlImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceOffset;
 
-  private static nint? _SourceOffset;
+    public string Source {
+        get {
+            _SourceOffset = _SourceOffset ?? Schema.GetOffset(0x85B34315D0835C78);
+            return Schema.GetString(_Handle.Read<nint>(_SourceOffset!.Value));
+        }
+        set {
+            _SourceOffset = _SourceOffset ?? Schema.GetOffset(0x85B34315D0835C78);
+            Schema.SetString(_Handle, _SourceOffset!.Value, value);
+        }
+    } 
+    private static nint? _DestinationOffset;
 
-  public string Source {
-    get {
-      if (_SourceOffset == null) {
-        _SourceOffset = Schema.GetOffset(0x85B34315D0835C78);
-      }
-      var ptr = _Handle.Read<nint>(_SourceOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SourceOffset == null) {
-        _SourceOffset = Schema.GetOffset(0x85B34315D0835C78);
-      }
-      Schema.SetString(_Handle, _SourceOffset!.Value, value);
-    }
-  } 
-  private static nint? _DestinationOffset;
+    public string Destination {
+        get {
+            _DestinationOffset = _DestinationOffset ?? Schema.GetOffset(0x85B343156E5C12DF);
+            return Schema.GetString(_Handle.Read<nint>(_DestinationOffset!.Value));
+        }
+        set {
+            _DestinationOffset = _DestinationOffset ?? Schema.GetOffset(0x85B343156E5C12DF);
+            Schema.SetString(_Handle, _DestinationOffset!.Value, value);
+        }
+    } 
 
-  public string Destination {
-    get {
-      if (_DestinationOffset == null) {
-        _DestinationOffset = Schema.GetOffset(0x85B343156E5C12DF);
-      }
-      var ptr = _Handle.Read<nint>(_DestinationOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DestinationOffset == null) {
-        _DestinationOffset = Schema.GetOffset(0x85B343156E5C12DF);
-      }
-      Schema.SetString(_Handle, _DestinationOffset!.Value, value);
-    }
-  } 
-
-  public void SourceUpdated() {
-    Schema.Update(_Handle, 0x85B34315D0835C78);
-  }
-  public void DestinationUpdated() {
-    Schema.Update(_Handle, 0x85B343156E5C12DF);
-  }
+    public void SourceUpdated() => Schema.Update(_Handle, 0x85B34315D0835C78);
+    public void DestinationUpdated() => Schema.Update(_Handle, 0x85B343156E5C12DF);
 }

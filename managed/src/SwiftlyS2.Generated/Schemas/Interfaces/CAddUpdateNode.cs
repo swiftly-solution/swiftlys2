@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAddUpdateNode : CBinaryUpdateNode, ISchemaClass<CAddUpdateNode> {
+public partial interface CAddUpdateNode : CBinaryUpdateNode, ISchemaClass<CAddUpdateNode>
+{
+    static CAddUpdateNode ISchemaClass<CAddUpdateNode>.From(nint handle) => new CAddUpdateNodeImpl(handle);
+    static int ISchemaClass<CAddUpdateNode>.Size => 160;
+    static string? ISchemaClass<CAddUpdateNode>.ClassName => null;
 
-  static CAddUpdateNode ISchemaClass<CAddUpdateNode>.From(nint handle) => new CAddUpdateNodeImpl(handle);
-  static int ISchemaClass<CAddUpdateNode>.Size => 160;
-  static string? ISchemaClass<CAddUpdateNode>.ClassName => null;
 
-  
-  public ref BinaryNodeChildOption FootMotionTiming { get; }
-  
-  public ref bool ApplyToFootMotion { get; }
-  
-  public ref bool ApplyChannelsSeparately { get; }
-  
-  public ref bool UseModelSpace { get; }
-  
-  public ref bool ApplyScale { get; }
+    public ref BinaryNodeChildOption FootMotionTiming { get; }
+
+    public ref bool ApplyToFootMotion { get; }
+
+    public ref bool ApplyChannelsSeparately { get; }
+
+    public ref bool UseModelSpace { get; }
+
+    public ref bool ApplyScale { get; }
 
 
 }

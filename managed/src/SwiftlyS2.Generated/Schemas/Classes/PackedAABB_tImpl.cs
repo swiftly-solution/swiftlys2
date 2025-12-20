@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PackedAABB_tImpl : SchemaClass, PackedAABB_t {
+internal partial class PackedAABB_tImpl : SchemaClass, PackedAABB_t
+{
+    public PackedAABB_tImpl(nint handle) : base(handle) { }
 
-  public PackedAABB_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PackedMinOffset;
 
-  private static nint? _PackedMinOffset;
-
-  public ref uint PackedMin {
-    get {
-      if (_PackedMinOffset == null) {
-        _PackedMinOffset = Schema.GetOffset(0x868E43307AC1AEAF);
-      }
-      return ref _Handle.AsRef<uint>(_PackedMinOffset!.Value);
+    public ref uint PackedMin {
+        get {
+            _PackedMinOffset = _PackedMinOffset ?? Schema.GetOffset(0x868E43307AC1AEAF);
+            return ref _Handle.AsRef<uint>(_PackedMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _PackedMaxOffset;
+    private static nint? _PackedMaxOffset;
 
-  public ref uint PackedMax {
-    get {
-      if (_PackedMaxOffset == null) {
-        _PackedMaxOffset = Schema.GetOffset(0x868E433068AE0AA1);
-      }
-      return ref _Handle.AsRef<uint>(_PackedMaxOffset!.Value);
+    public ref uint PackedMax {
+        get {
+            _PackedMaxOffset = _PackedMaxOffset ?? Schema.GetOffset(0x868E433068AE0AA1);
+            return ref _Handle.AsRef<uint>(_PackedMaxOffset!.Value);
+        }
     }
-  }
 
 
 }

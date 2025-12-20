@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSkillDamageImpl : SchemaClass, CSkillDamage {
+internal partial class CSkillDamageImpl : SchemaClass, CSkillDamage
+{
+    public CSkillDamageImpl(nint handle) : base(handle) { }
 
-  public CSkillDamageImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DamageOffset;
 
-  private static nint? _DamageOffset;
-
-  public CSkillFloat Damage {
-    get {
-      if (_DamageOffset == null) {
-        _DamageOffset = Schema.GetOffset(0x6A323D82DC60E53E);
-      }
-      return new CSkillFloatImpl(_Handle + _DamageOffset!.Value);
+    public CSkillFloat Damage {
+        get {
+            _DamageOffset = _DamageOffset ?? Schema.GetOffset(0x6A323D82DC60E53E);
+            return new CSkillFloatImpl(_Handle + _DamageOffset!.Value);
+        }
     }
-  }
-  private static nint? _NPCDamageScalarVsNPCOffset;
+    private static nint? _NPCDamageScalarVsNPCOffset;
 
-  public ref float NPCDamageScalarVsNPC {
-    get {
-      if (_NPCDamageScalarVsNPCOffset == null) {
-        _NPCDamageScalarVsNPCOffset = Schema.GetOffset(0x6A323D82FD135437);
-      }
-      return ref _Handle.AsRef<float>(_NPCDamageScalarVsNPCOffset!.Value);
+    public ref float NPCDamageScalarVsNPC {
+        get {
+            _NPCDamageScalarVsNPCOffset = _NPCDamageScalarVsNPCOffset ?? Schema.GetOffset(0x6A323D82FD135437);
+            return ref _Handle.AsRef<float>(_NPCDamageScalarVsNPCOffset!.Value);
+        }
     }
-  }
-  private static nint? _PhysicsForceDamageOffset;
+    private static nint? _PhysicsForceDamageOffset;
 
-  public ref float PhysicsForceDamage {
-    get {
-      if (_PhysicsForceDamageOffset == null) {
-        _PhysicsForceDamageOffset = Schema.GetOffset(0x6A323D8219E7630E);
-      }
-      return ref _Handle.AsRef<float>(_PhysicsForceDamageOffset!.Value);
+    public ref float PhysicsForceDamage {
+        get {
+            _PhysicsForceDamageOffset = _PhysicsForceDamageOffset ?? Schema.GetOffset(0x6A323D8219E7630E);
+            return ref _Handle.AsRef<float>(_PhysicsForceDamageOffset!.Value);
+        }
     }
-  }
 
 
 }

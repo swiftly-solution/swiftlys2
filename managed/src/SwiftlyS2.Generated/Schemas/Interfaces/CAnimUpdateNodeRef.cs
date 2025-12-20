@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimUpdateNodeRef : ISchemaClass<CAnimUpdateNodeRef> {
+public partial interface CAnimUpdateNodeRef : ISchemaClass<CAnimUpdateNodeRef>
+{
+    static CAnimUpdateNodeRef ISchemaClass<CAnimUpdateNodeRef>.From(nint handle) => new CAnimUpdateNodeRefImpl(handle);
+    static int ISchemaClass<CAnimUpdateNodeRef>.Size => 16;
+    static string? ISchemaClass<CAnimUpdateNodeRef>.ClassName => null;
 
-  static CAnimUpdateNodeRef ISchemaClass<CAnimUpdateNodeRef>.From(nint handle) => new CAnimUpdateNodeRefImpl(handle);
-  static int ISchemaClass<CAnimUpdateNodeRef>.Size => 16;
-  static string? ISchemaClass<CAnimUpdateNodeRef>.ClassName => null;
 
-  
-  public ref int NodeIndex { get; }
+    public ref int NodeIndex { get; }
 
 
 }

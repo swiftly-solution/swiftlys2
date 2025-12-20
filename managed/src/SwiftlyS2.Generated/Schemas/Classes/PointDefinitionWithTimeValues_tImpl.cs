@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PointDefinitionWithTimeValues_tImpl : PointDefinition_tImpl, PointDefinitionWithTimeValues_t {
+internal partial class PointDefinitionWithTimeValues_tImpl : PointDefinition_tImpl, PointDefinitionWithTimeValues_t
+{
+    public PointDefinitionWithTimeValues_tImpl(nint handle) : base(handle) { }
 
-  public PointDefinitionWithTimeValues_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TimeDurationOffset;
 
-  private static nint? _TimeDurationOffset;
-
-  public ref float TimeDuration {
-    get {
-      if (_TimeDurationOffset == null) {
-        _TimeDurationOffset = Schema.GetOffset(0xF2BE4F108B84C052);
-      }
-      return ref _Handle.AsRef<float>(_TimeDurationOffset!.Value);
+    public ref float TimeDuration {
+        get {
+            _TimeDurationOffset = _TimeDurationOffset ?? Schema.GetOffset(0xF2BE4F108B84C052);
+            return ref _Handle.AsRef<float>(_TimeDurationOffset!.Value);
+        }
     }
-  }
 
 
 }

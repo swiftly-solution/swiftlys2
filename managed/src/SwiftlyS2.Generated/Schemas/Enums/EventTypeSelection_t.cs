@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EventTypeSelection_t : uint {
-
+public enum EventTypeSelection_t : uint
+{
  PARTICLE_EVENT_TYPE_MASK_NONE = 0,
 
  PARTICLE_EVENT_TYPE_MASK_SPAWNED = 1,

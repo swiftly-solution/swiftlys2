@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFilterTeamImpl : CBaseFilterImpl, CFilterTeam {
+internal partial class CFilterTeamImpl : CBaseFilterImpl, CFilterTeam
+{
+    public CFilterTeamImpl(nint handle) : base(handle) { }
 
-  public CFilterTeamImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FilterTeamOffset;
 
-  private static nint? _FilterTeamOffset;
-
-  public ref int FilterTeam {
-    get {
-      if (_FilterTeamOffset == null) {
-        _FilterTeamOffset = Schema.GetOffset(0x46DA651D4D36160F);
-      }
-      return ref _Handle.AsRef<int>(_FilterTeamOffset!.Value);
+    public ref int FilterTeam {
+        get {
+            _FilterTeamOffset = _FilterTeamOffset ?? Schema.GetOffset(0x46DA651D4D36160F);
+            return ref _Handle.AsRef<int>(_FilterTeamOffset!.Value);
+        }
     }
-  }
 
 
 }

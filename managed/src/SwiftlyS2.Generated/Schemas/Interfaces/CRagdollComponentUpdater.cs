@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRagdollComponentUpdater : CAnimComponentUpdater, ISchemaClass<CRagdollComponentUpdater> {
+public partial interface CRagdollComponentUpdater : CAnimComponentUpdater, ISchemaClass<CRagdollComponentUpdater>
+{
+    static CRagdollComponentUpdater ISchemaClass<CRagdollComponentUpdater>.From(nint handle) => new CRagdollComponentUpdaterImpl(handle);
+    static int ISchemaClass<CRagdollComponentUpdater>.Size => 216;
+    static string? ISchemaClass<CRagdollComponentUpdater>.ClassName => null;
 
-  static CRagdollComponentUpdater ISchemaClass<CRagdollComponentUpdater>.From(nint handle) => new CRagdollComponentUpdaterImpl(handle);
-  static int ISchemaClass<CRagdollComponentUpdater>.Size => 216;
-  static string? ISchemaClass<CRagdollComponentUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<CAnimNodePath> RagdollNodePaths { get; }
-  
-  public ref CUtlVector<CAnimNodePath> FollowAttachmentNodePaths { get; }
-  
-  public ref CUtlVector<int> BoneIndices { get; }
-  
-  public ref CUtlVector<CUtlString> BoneNames { get; }
-  
-  public ref CUtlVector<WeightList> WeightLists { get; }
-  
-  public ref CUtlVector<int> BoneToWeightIndices { get; }
-  
-  public ref float SpringFrequencyMin { get; }
-  
-  public ref float SpringFrequencyMax { get; }
-  
-  public ref float MaxStretch { get; }
-  
-  public ref bool SolidCollisionAtZeroWeight { get; }
+    public ref CUtlVector<CAnimNodePath> RagdollNodePaths { get; }
+
+    public ref CUtlVector<CAnimNodePath> FollowAttachmentNodePaths { get; }
+
+    public ref CUtlVector<int> BoneIndices { get; }
+
+    public ref CUtlVector<CUtlString> BoneNames { get; }
+
+    public ref CUtlVector<WeightList> WeightLists { get; }
+
+    public ref CUtlVector<int> BoneToWeightIndices { get; }
+
+    public ref float SpringFrequencyMin { get; }
+
+    public ref float SpringFrequencyMax { get; }
+
+    public ref float MaxStretch { get; }
+
+    public ref bool SolidCollisionAtZeroWeight { get; }
 
 
 }

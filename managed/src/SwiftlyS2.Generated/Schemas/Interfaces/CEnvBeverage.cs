@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvBeverage : CBaseEntity, ISchemaClass<CEnvBeverage> {
+public partial interface CEnvBeverage : CBaseEntity, ISchemaClass<CEnvBeverage>
+{
+    static CEnvBeverage ISchemaClass<CEnvBeverage>.From(nint handle) => new CEnvBeverageImpl(handle);
+    static int ISchemaClass<CEnvBeverage>.Size => 1272;
+    static string? ISchemaClass<CEnvBeverage>.ClassName => "env_beverage";
 
-  static CEnvBeverage ISchemaClass<CEnvBeverage>.From(nint handle) => new CEnvBeverageImpl(handle);
-  static int ISchemaClass<CEnvBeverage>.Size => 1272;
-  static string? ISchemaClass<CEnvBeverage>.ClassName => "env_beverage";
 
-  
-  public ref bool CanInDispenser { get; }
-  
-  public ref int BeverageType { get; }
+    public ref bool CanInDispenser { get; }
+
+    public ref int BeverageType { get; }
 
 
 }

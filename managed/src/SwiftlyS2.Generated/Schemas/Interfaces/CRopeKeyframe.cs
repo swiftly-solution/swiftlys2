@@ -8,69 +8,69 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRopeKeyframe : CBaseModelEntity, ISchemaClass<CRopeKeyframe> {
+public partial interface CRopeKeyframe : CBaseModelEntity, ISchemaClass<CRopeKeyframe>
+{
+    static CRopeKeyframe ISchemaClass<CRopeKeyframe>.From(nint handle) => new CRopeKeyframeImpl(handle);
+    static int ISchemaClass<CRopeKeyframe>.Size => 2096;
+    static string? ISchemaClass<CRopeKeyframe>.ClassName => "keyframe_rope";
 
-  static CRopeKeyframe ISchemaClass<CRopeKeyframe>.From(nint handle) => new CRopeKeyframeImpl(handle);
-  static int ISchemaClass<CRopeKeyframe>.Size => 2096;
-  static string? ISchemaClass<CRopeKeyframe>.ClassName => "keyframe_rope";
 
-  
-  public ref ushort RopeFlags { get; }
-  
-  public string NextLinkName { get; set; }
-  
-  public ref short Slack { get; }
-  
-  public ref float Width { get; }
-  
-  public ref float TextureScale { get; }
-  
-  public ref byte Segments { get; }
-  
-  public ref bool ConstrainBetweenEndpoints { get; }
-  
-  public string StrRopeMaterialModel { get; set; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> RopeMaterialModelIndex { get; }
-  
-  public ref byte Subdiv { get; }
-  
-  public ref byte ChangeCount { get; }
-  
-  public ref short RopeLength { get; }
-  
-  public ref byte LockedPoints { get; }
-  
-  public ref bool CreatedFromMapFile { get; }
-  
-  public ref float ScrollSpeed { get; }
-  
-  public ref bool StartPointValid { get; }
-  
-  public ref bool EndPointValid { get; }
-  
-  public ref CHandle<CBaseEntity> StartPoint { get; }
-  
-  public ref CHandle<CBaseEntity> EndPoint { get; }
-  
-  public AttachmentHandle_t StartAttachment { get; }
-  
-  public AttachmentHandle_t EndAttachment { get; }
+    public ref ushort RopeFlags { get; }
 
-  public void RopeFlagsUpdated();
-  public void SlackUpdated();
-  public void WidthUpdated();
-  public void TextureScaleUpdated();
-  public void SegmentsUpdated();
-  public void ConstrainBetweenEndpointsUpdated();
-  public void RopeMaterialModelIndexUpdated();
-  public void SubdivUpdated();
-  public void ChangeCountUpdated();
-  public void RopeLengthUpdated();
-  public void LockedPointsUpdated();
-  public void ScrollSpeedUpdated();
-  public void StartPointUpdated();
-  public void EndPointUpdated();
-  public void StartAttachmentUpdated();
-  public void EndAttachmentUpdated();
+    public string NextLinkName { get; set; }
+
+    public ref short Slack { get; }
+
+    public ref float Width { get; }
+
+    public ref float TextureScale { get; }
+
+    public ref byte Segments { get; }
+
+    public ref bool ConstrainBetweenEndpoints { get; }
+
+    public string StrRopeMaterialModel { get; set; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> RopeMaterialModelIndex { get; }
+
+    public ref byte Subdiv { get; }
+
+    public ref byte ChangeCount { get; }
+
+    public ref short RopeLength { get; }
+
+    public ref byte LockedPoints { get; }
+
+    public ref bool CreatedFromMapFile { get; }
+
+    public ref float ScrollSpeed { get; }
+
+    public ref bool StartPointValid { get; }
+
+    public ref bool EndPointValid { get; }
+
+    public ref CHandle<CBaseEntity> StartPoint { get; }
+
+    public ref CHandle<CBaseEntity> EndPoint { get; }
+
+    public AttachmentHandle_t StartAttachment { get; }
+
+    public AttachmentHandle_t EndAttachment { get; }
+
+    public void RopeFlagsUpdated();
+    public void SlackUpdated();
+    public void WidthUpdated();
+    public void TextureScaleUpdated();
+    public void SegmentsUpdated();
+    public void ConstrainBetweenEndpointsUpdated();
+    public void RopeMaterialModelIndexUpdated();
+    public void SubdivUpdated();
+    public void ChangeCountUpdated();
+    public void RopeLengthUpdated();
+    public void LockedPointsUpdated();
+    public void ScrollSpeedUpdated();
+    public void StartPointUpdated();
+    public void EndPointUpdated();
+    public void StartAttachmentUpdated();
+    public void EndAttachmentUpdated();
 }

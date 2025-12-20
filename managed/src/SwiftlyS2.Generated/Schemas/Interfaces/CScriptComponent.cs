@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CScriptComponent : CEntityComponent, ISchemaClass<CScriptComponent> {
+public partial interface CScriptComponent : CEntityComponent, ISchemaClass<CScriptComponent>
+{
+    static CScriptComponent ISchemaClass<CScriptComponent>.From(nint handle) => new CScriptComponentImpl(handle);
+    static int ISchemaClass<CScriptComponent>.Size => 56;
+    static string? ISchemaClass<CScriptComponent>.ClassName => null;
 
-  static CScriptComponent ISchemaClass<CScriptComponent>.From(nint handle) => new CScriptComponentImpl(handle);
-  static int ISchemaClass<CScriptComponent>.Size => 56;
-  static string? ISchemaClass<CScriptComponent>.ClassName => null;
 
-  
-  public string ScriptClassName { get; set; }
+    public string ScriptClassName { get; set; }
 
 
 }

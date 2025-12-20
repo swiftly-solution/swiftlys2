@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBoneVelocityMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CBoneVelocityMetricEvaluator> {
+public partial interface CBoneVelocityMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CBoneVelocityMetricEvaluator>
+{
+    static CBoneVelocityMetricEvaluator ISchemaClass<CBoneVelocityMetricEvaluator>.From(nint handle) => new CBoneVelocityMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CBoneVelocityMetricEvaluator>.Size => 88;
+    static string? ISchemaClass<CBoneVelocityMetricEvaluator>.ClassName => null;
 
-  static CBoneVelocityMetricEvaluator ISchemaClass<CBoneVelocityMetricEvaluator>.From(nint handle) => new CBoneVelocityMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CBoneVelocityMetricEvaluator>.Size => 88;
-  static string? ISchemaClass<CBoneVelocityMetricEvaluator>.ClassName => null;
 
-  
-  public ref int BoneIndex { get; }
+    public ref int BoneIndex { get; }
 
 
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTankTrainAI : CPointEntity, ISchemaClass<CTankTrainAI> {
+public partial interface CTankTrainAI : CPointEntity, ISchemaClass<CTankTrainAI>
+{
+    static CTankTrainAI ISchemaClass<CTankTrainAI>.From(nint handle) => new CTankTrainAIImpl(handle);
+    static int ISchemaClass<CTankTrainAI>.Size => 1328;
+    static string? ISchemaClass<CTankTrainAI>.ClassName => "tanktrain_ai";
 
-  static CTankTrainAI ISchemaClass<CTankTrainAI>.From(nint handle) => new CTankTrainAIImpl(handle);
-  static int ISchemaClass<CTankTrainAI>.Size => 1328;
-  static string? ISchemaClass<CTankTrainAI>.ClassName => "tanktrain_ai";
 
-  
-  public ref CHandle<CFuncTrackTrain> Train { get; }
-  
-  public ref CHandle<CBaseEntity> TargetEntity { get; }
-  
-  public ref int SoundPlaying { get; }
-  
-  public string StartSoundName { get; set; }
-  
-  public string EngineSoundName { get; set; }
-  
-  public string MovementSoundName { get; set; }
-  
-  public string TargetEntityName { get; set; }
+    public ref CHandle<CFuncTrackTrain> Train { get; }
+
+    public ref CHandle<CBaseEntity> TargetEntity { get; }
+
+    public ref int SoundPlaying { get; }
+
+    public string StartSoundName { get; set; }
+
+    public string EngineSoundName { get; set; }
+
+    public string MovementSoundName { get; set; }
+
+    public string TargetEntityName { get; set; }
 
 
 }

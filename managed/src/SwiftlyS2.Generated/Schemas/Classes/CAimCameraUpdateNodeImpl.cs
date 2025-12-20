@@ -6,117 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAimCameraUpdateNodeImpl : CUnaryUpdateNodeImpl, CAimCameraUpdateNode {
+internal partial class CAimCameraUpdateNodeImpl : CUnaryUpdateNodeImpl, CAimCameraUpdateNode
+{
+    public CAimCameraUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CAimCameraUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParameterPositionOffset;
 
-  private static nint? _ParameterPositionOffset;
-
-  public CAnimParamHandle ParameterPosition {
-    get {
-      if (_ParameterPositionOffset == null) {
-        _ParameterPositionOffset = Schema.GetOffset(0xE8DD6D01DA71CD41);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterPositionOffset!.Value);
+    public CAnimParamHandle ParameterPosition {
+        get {
+            _ParameterPositionOffset = _ParameterPositionOffset ?? Schema.GetOffset(0xE8DD6D01DA71CD41);
+            return new CAnimParamHandleImpl(_Handle + _ParameterPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterOrientationOffset;
+    private static nint? _ParameterOrientationOffset;
 
-  public CAnimParamHandle ParameterOrientation {
-    get {
-      if (_ParameterOrientationOffset == null) {
-        _ParameterOrientationOffset = Schema.GetOffset(0xE8DD6D011320E9C8);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterOrientationOffset!.Value);
+    public CAnimParamHandle ParameterOrientation {
+        get {
+            _ParameterOrientationOffset = _ParameterOrientationOffset ?? Schema.GetOffset(0xE8DD6D011320E9C8);
+            return new CAnimParamHandleImpl(_Handle + _ParameterOrientationOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterSpineRotationWeightOffset;
+    private static nint? _ParameterSpineRotationWeightOffset;
 
-  public CAnimParamHandle ParameterSpineRotationWeight {
-    get {
-      if (_ParameterSpineRotationWeightOffset == null) {
-        _ParameterSpineRotationWeightOffset = Schema.GetOffset(0xE8DD6D013A4DC0C7);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterSpineRotationWeightOffset!.Value);
+    public CAnimParamHandle ParameterSpineRotationWeight {
+        get {
+            _ParameterSpineRotationWeightOffset = _ParameterSpineRotationWeightOffset ?? Schema.GetOffset(0xE8DD6D013A4DC0C7);
+            return new CAnimParamHandleImpl(_Handle + _ParameterSpineRotationWeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterPelvisOffsetOffset;
+    private static nint? _ParameterPelvisOffsetOffset;
 
-  public CAnimParamHandle ParameterPelvisOffset {
-    get {
-      if (_ParameterPelvisOffsetOffset == null) {
-        _ParameterPelvisOffsetOffset = Schema.GetOffset(0xE8DD6D01C4C67FA8);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterPelvisOffsetOffset!.Value);
+    public CAnimParamHandle ParameterPelvisOffset {
+        get {
+            _ParameterPelvisOffsetOffset = _ParameterPelvisOffsetOffset ?? Schema.GetOffset(0xE8DD6D01C4C67FA8);
+            return new CAnimParamHandleImpl(_Handle + _ParameterPelvisOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterUseIKOffset;
+    private static nint? _ParameterUseIKOffset;
 
-  public CAnimParamHandle ParameterUseIK {
-    get {
-      if (_ParameterUseIKOffset == null) {
-        _ParameterUseIKOffset = Schema.GetOffset(0xE8DD6D01C8F88C49);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterUseIKOffset!.Value);
+    public CAnimParamHandle ParameterUseIK {
+        get {
+            _ParameterUseIKOffset = _ParameterUseIKOffset ?? Schema.GetOffset(0xE8DD6D01C8F88C49);
+            return new CAnimParamHandleImpl(_Handle + _ParameterUseIKOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterCameraOnlyOffset;
+    private static nint? _ParameterCameraOnlyOffset;
 
-  public CAnimParamHandle ParameterCameraOnly {
-    get {
-      if (_ParameterCameraOnlyOffset == null) {
-        _ParameterCameraOnlyOffset = Schema.GetOffset(0xE8DD6D013A129627);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterCameraOnlyOffset!.Value);
+    public CAnimParamHandle ParameterCameraOnly {
+        get {
+            _ParameterCameraOnlyOffset = _ParameterCameraOnlyOffset ?? Schema.GetOffset(0xE8DD6D013A129627);
+            return new CAnimParamHandleImpl(_Handle + _ParameterCameraOnlyOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterWeaponDepenetrationDistanceOffset;
+    private static nint? _ParameterWeaponDepenetrationDistanceOffset;
 
-  public CAnimParamHandle ParameterWeaponDepenetrationDistance {
-    get {
-      if (_ParameterWeaponDepenetrationDistanceOffset == null) {
-        _ParameterWeaponDepenetrationDistanceOffset = Schema.GetOffset(0xE8DD6D01316BB0BD);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterWeaponDepenetrationDistanceOffset!.Value);
+    public CAnimParamHandle ParameterWeaponDepenetrationDistance {
+        get {
+            _ParameterWeaponDepenetrationDistanceOffset = _ParameterWeaponDepenetrationDistanceOffset ?? Schema.GetOffset(0xE8DD6D01316BB0BD);
+            return new CAnimParamHandleImpl(_Handle + _ParameterWeaponDepenetrationDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterWeaponDepenetrationDeltaOffset;
+    private static nint? _ParameterWeaponDepenetrationDeltaOffset;
 
-  public CAnimParamHandle ParameterWeaponDepenetrationDelta {
-    get {
-      if (_ParameterWeaponDepenetrationDeltaOffset == null) {
-        _ParameterWeaponDepenetrationDeltaOffset = Schema.GetOffset(0xE8DD6D01D6C8CDF0);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterWeaponDepenetrationDeltaOffset!.Value);
+    public CAnimParamHandle ParameterWeaponDepenetrationDelta {
+        get {
+            _ParameterWeaponDepenetrationDeltaOffset = _ParameterWeaponDepenetrationDeltaOffset ?? Schema.GetOffset(0xE8DD6D01D6C8CDF0);
+            return new CAnimParamHandleImpl(_Handle + _ParameterWeaponDepenetrationDeltaOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterCameraClearanceDistanceOffset;
+    private static nint? _ParameterCameraClearanceDistanceOffset;
 
-  public CAnimParamHandle ParameterCameraClearanceDistance {
-    get {
-      if (_ParameterCameraClearanceDistanceOffset == null) {
-        _ParameterCameraClearanceDistanceOffset = Schema.GetOffset(0xE8DD6D01F4F2C992);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParameterCameraClearanceDistanceOffset!.Value);
+    public CAnimParamHandle ParameterCameraClearanceDistance {
+        get {
+            _ParameterCameraClearanceDistanceOffset = _ParameterCameraClearanceDistanceOffset ?? Schema.GetOffset(0xE8DD6D01F4F2C992);
+            return new CAnimParamHandleImpl(_Handle + _ParameterCameraClearanceDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _OpFixedSettingsOffset;
+    private static nint? _OpFixedSettingsOffset;
 
-  public AimCameraOpFixedSettings_t OpFixedSettings {
-    get {
-      if (_OpFixedSettingsOffset == null) {
-        _OpFixedSettingsOffset = Schema.GetOffset(0xE8DD6D01E533AB09);
-      }
-      return new AimCameraOpFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+    public AimCameraOpFixedSettings_t OpFixedSettings {
+        get {
+            _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0xE8DD6D01E533AB09);
+            return new AimCameraOpFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+        }
     }
-  }
 
 
 }

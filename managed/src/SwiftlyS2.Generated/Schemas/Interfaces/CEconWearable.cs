@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEconWearable : CEconEntity, ISchemaClass<CEconWearable> {
+public partial interface CEconWearable : CEconEntity, ISchemaClass<CEconWearable>
+{
+    static CEconWearable ISchemaClass<CEconWearable>.From(nint handle) => new CEconWearableImpl(handle);
+    static int ISchemaClass<CEconWearable>.Size => 3680;
+    static string? ISchemaClass<CEconWearable>.ClassName => "wearable_item";
 
-  static CEconWearable ISchemaClass<CEconWearable>.From(nint handle) => new CEconWearableImpl(handle);
-  static int ISchemaClass<CEconWearable>.Size => 3680;
-  static string? ISchemaClass<CEconWearable>.ClassName => "wearable_item";
 
-  
-  public ref int ForceSkin { get; }
-  
-  public ref bool AlwaysAllow { get; }
+    public ref int ForceSkin { get; }
+
+    public ref bool AlwaysAllow { get; }
 
 
 }

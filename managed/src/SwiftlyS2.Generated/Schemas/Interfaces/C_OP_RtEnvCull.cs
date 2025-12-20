@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RtEnvCull : CParticleFunctionOperator, ISchemaClass<C_OP_RtEnvCull> {
+public partial interface C_OP_RtEnvCull : CParticleFunctionOperator, ISchemaClass<C_OP_RtEnvCull>
+{
+    static C_OP_RtEnvCull ISchemaClass<C_OP_RtEnvCull>.From(nint handle) => new C_OP_RtEnvCullImpl(handle);
+    static int ISchemaClass<C_OP_RtEnvCull>.Size => 632;
+    static string? ISchemaClass<C_OP_RtEnvCull>.ClassName => null;
 
-  static C_OP_RtEnvCull ISchemaClass<C_OP_RtEnvCull>.From(nint handle) => new C_OP_RtEnvCullImpl(handle);
-  static int ISchemaClass<C_OP_RtEnvCull>.Size => 632;
-  static string? ISchemaClass<C_OP_RtEnvCull>.ClassName => null;
 
-  
-  public ref Vector TestDir { get; }
-  
-  public ref Vector TestNormal { get; }
-  
-  public ref bool CullOnMiss { get; }
-  
-  public ref bool StickInsteadOfCull { get; }
-  
-  public string RtEnvName { get; set; }
-  
-  public ref int RTEnvCP { get; }
-  
-  public ref int Component { get; }
+    public ref Vector TestDir { get; }
+
+    public ref Vector TestNormal { get; }
+
+    public ref bool CullOnMiss { get; }
+
+    public ref bool StickInsteadOfCull { get; }
+
+    public string RtEnvName { get; set; }
+
+    public ref int RTEnvCP { get; }
+
+    public ref int Component { get; }
 
 
 }

@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRuleEntityImpl : CBaseModelEntityImpl, CRuleEntity {
+internal partial class CRuleEntityImpl : CBaseModelEntityImpl, CRuleEntity
+{
+    public CRuleEntityImpl(nint handle) : base(handle) { }
 
-  public CRuleEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MasterOffset;
 
-  private static nint? _MasterOffset;
-
-  public string Master {
-    get {
-      if (_MasterOffset == null) {
-        _MasterOffset = Schema.GetOffset(0x5C9BFE2FAC57FE5B);
-      }
-      var ptr = _Handle.Read<nint>(_MasterOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_MasterOffset == null) {
-        _MasterOffset = Schema.GetOffset(0x5C9BFE2FAC57FE5B);
-      }
-      Schema.SetString(_Handle, _MasterOffset!.Value, value);
-    }
-  } 
+    public string Master {
+        get {
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0x5C9BFE2FAC57FE5B);
+            return Schema.GetString(_Handle.Read<nint>(_MasterOffset!.Value));
+        }
+        set {
+            _MasterOffset = _MasterOffset ?? Schema.GetOffset(0x5C9BFE2FAC57FE5B);
+            Schema.SetString(_Handle, _MasterOffset!.Value, value);
+        }
+    } 
 
 
 }

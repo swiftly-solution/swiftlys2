@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSlowDownOnSlopesUpdateNodeImpl : CUnaryUpdateNodeImpl, CSlowDownOnSlopesUpdateNode {
+internal partial class CSlowDownOnSlopesUpdateNodeImpl : CUnaryUpdateNodeImpl, CSlowDownOnSlopesUpdateNode
+{
+    public CSlowDownOnSlopesUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CSlowDownOnSlopesUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SlowDownStrengthOffset;
 
-  private static nint? _SlowDownStrengthOffset;
-
-  public ref float SlowDownStrength {
-    get {
-      if (_SlowDownStrengthOffset == null) {
-        _SlowDownStrengthOffset = Schema.GetOffset(0x196FB4938D85E247);
-      }
-      return ref _Handle.AsRef<float>(_SlowDownStrengthOffset!.Value);
+    public ref float SlowDownStrength {
+        get {
+            _SlowDownStrengthOffset = _SlowDownStrengthOffset ?? Schema.GetOffset(0x196FB4938D85E247);
+            return ref _Handle.AsRef<float>(_SlowDownStrengthOffset!.Value);
+        }
     }
-  }
 
 
 }

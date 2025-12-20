@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStateActionUpdater : ISchemaClass<CStateActionUpdater> {
+public partial interface CStateActionUpdater : ISchemaClass<CStateActionUpdater>
+{
+    static CStateActionUpdater ISchemaClass<CStateActionUpdater>.From(nint handle) => new CStateActionUpdaterImpl(handle);
+    static int ISchemaClass<CStateActionUpdater>.Size => 16;
+    static string? ISchemaClass<CStateActionUpdater>.ClassName => null;
 
-  static CStateActionUpdater ISchemaClass<CStateActionUpdater>.From(nint handle) => new CStateActionUpdaterImpl(handle);
-  static int ISchemaClass<CStateActionUpdater>.Size => 16;
-  static string? ISchemaClass<CStateActionUpdater>.ClassName => null;
 
-  
-  // CSmartPtr< CAnimActionUpdater >
-  public SchemaUntypedField Action { get; }
-  
-  public ref StateActionBehavior Behavior { get; }
+    // CSmartPtr< CAnimActionUpdater >
+    public SchemaUntypedField Action { get; }
+
+    public ref StateActionBehavior Behavior { get; }
 
 
 }

@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootstepControl : CBaseTrigger, ISchemaClass<CFootstepControl> {
+public partial interface CFootstepControl : CBaseTrigger, ISchemaClass<CFootstepControl>
+{
+    static CFootstepControl ISchemaClass<CFootstepControl>.From(nint handle) => new CFootstepControlImpl(handle);
+    static int ISchemaClass<CFootstepControl>.Size => 2488;
+    static string? ISchemaClass<CFootstepControl>.ClassName => "func_footstep_control";
 
-  static CFootstepControl ISchemaClass<CFootstepControl>.From(nint handle) => new CFootstepControlImpl(handle);
-  static int ISchemaClass<CFootstepControl>.Size => 2488;
-  static string? ISchemaClass<CFootstepControl>.ClassName => "func_footstep_control";
 
-  
-  public string Source { get; set; }
-  
-  public string Destination { get; set; }
+    public string Source { get; set; }
 
-  public void SourceUpdated();
-  public void DestinationUpdated();
+    public string Destination { get; set; }
+
+    public void SourceUpdated();
+    public void DestinationUpdated();
 }

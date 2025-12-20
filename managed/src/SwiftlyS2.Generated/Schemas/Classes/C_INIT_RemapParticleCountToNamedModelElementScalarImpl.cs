@@ -6,71 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RemapParticleCountToNamedModelElementScalarImpl : C_INIT_RemapParticleCountToScalarImpl, C_INIT_RemapParticleCountToNamedModelElementScalar {
+internal partial class C_INIT_RemapParticleCountToNamedModelElementScalarImpl : C_INIT_RemapParticleCountToScalarImpl, C_INIT_RemapParticleCountToNamedModelElementScalar
+{
+    public C_INIT_RemapParticleCountToNamedModelElementScalarImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RemapParticleCountToNamedModelElementScalarImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModelOffset;
 
-  private static nint? _ModelOffset;
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model {
+        get {
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0xB011C761E100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+        }
+    }
+    private static nint? _OutputMinNameOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get {
-      if (_ModelOffset == null) {
-        _ModelOffset = Schema.GetOffset(0xB011C761E100C814);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
-    }
-  }
-  private static nint? _OutputMinNameOffset;
+    public string OutputMinName {
+        get {
+            _OutputMinNameOffset = _OutputMinNameOffset ?? Schema.GetOffset(0xB011C761CF5C20FB);
+            return Schema.GetString(_Handle.Read<nint>(_OutputMinNameOffset!.Value));
+        }
+        set {
+            _OutputMinNameOffset = _OutputMinNameOffset ?? Schema.GetOffset(0xB011C761CF5C20FB);
+            Schema.SetString(_Handle, _OutputMinNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OutputMaxNameOffset;
 
-  public string OutputMinName {
-    get {
-      if (_OutputMinNameOffset == null) {
-        _OutputMinNameOffset = Schema.GetOffset(0xB011C761CF5C20FB);
-      }
-      var ptr = _Handle.Read<nint>(_OutputMinNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_OutputMinNameOffset == null) {
-        _OutputMinNameOffset = Schema.GetOffset(0xB011C761CF5C20FB);
-      }
-      Schema.SetString(_Handle, _OutputMinNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OutputMaxNameOffset;
+    public string OutputMaxName {
+        get {
+            _OutputMaxNameOffset = _OutputMaxNameOffset ?? Schema.GetOffset(0xB011C761553184F9);
+            return Schema.GetString(_Handle.Read<nint>(_OutputMaxNameOffset!.Value));
+        }
+        set {
+            _OutputMaxNameOffset = _OutputMaxNameOffset ?? Schema.GetOffset(0xB011C761553184F9);
+            Schema.SetString(_Handle, _OutputMaxNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ModelFromRendererOffset;
 
-  public string OutputMaxName {
-    get {
-      if (_OutputMaxNameOffset == null) {
-        _OutputMaxNameOffset = Schema.GetOffset(0xB011C761553184F9);
-      }
-      var ptr = _Handle.Read<nint>(_OutputMaxNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref bool ModelFromRenderer {
+        get {
+            _ModelFromRendererOffset = _ModelFromRendererOffset ?? Schema.GetOffset(0xB011C761AEBA1F25);
+            return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
+        }
     }
-    set {
-      if (_OutputMaxNameOffset == null) {
-        _OutputMaxNameOffset = Schema.GetOffset(0xB011C761553184F9);
-      }
-      Schema.SetString(_Handle, _OutputMaxNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ModelFromRendererOffset;
-
-  public ref bool ModelFromRenderer {
-    get {
-      if (_ModelFromRendererOffset == null) {
-        _ModelFromRendererOffset = Schema.GetOffset(0xB011C761AEBA1F25);
-      }
-      return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
-    }
-  }
 
 
 }

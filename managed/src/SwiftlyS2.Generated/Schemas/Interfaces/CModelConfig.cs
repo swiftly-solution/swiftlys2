@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfig : ISchemaClass<CModelConfig> {
+public partial interface CModelConfig : ISchemaClass<CModelConfig>
+{
+    static CModelConfig ISchemaClass<CModelConfig>.From(nint handle) => new CModelConfigImpl(handle);
+    static int ISchemaClass<CModelConfig>.Size => 40;
+    static string? ISchemaClass<CModelConfig>.ClassName => null;
 
-  static CModelConfig ISchemaClass<CModelConfig>.From(nint handle) => new CModelConfigImpl(handle);
-  static int ISchemaClass<CModelConfig>.Size => 40;
-  static string? ISchemaClass<CModelConfig>.ClassName => null;
 
-  
-  public string ConfigName { get; set; }
-  
-  public ref CUtlVector<PointerTo<CModelConfigElement>> Elements { get; }
-  
-  public ref bool TopLevel { get; }
-  
-  public ref bool ActiveInEditorByDefault { get; }
+    public string ConfigName { get; set; }
+
+    public ref CUtlVector<PointerTo<CModelConfigElement>> Elements { get; }
+
+    public ref bool TopLevel { get; }
+
+    public ref bool ActiveInEditorByDefault { get; }
 
 
 }

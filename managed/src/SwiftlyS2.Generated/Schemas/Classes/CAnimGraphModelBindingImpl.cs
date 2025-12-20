@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimGraphModelBindingImpl : SchemaClass, CAnimGraphModelBinding {
+internal partial class CAnimGraphModelBindingImpl : SchemaClass, CAnimGraphModelBinding
+{
+    public CAnimGraphModelBindingImpl(nint handle) : base(handle) { }
 
-  public CAnimGraphModelBindingImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModelNameOffset;
 
-  private static nint? _ModelNameOffset;
+    public string ModelName {
+        get {
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xC0F296335D35B6E1);
+            return Schema.GetString(_Handle.Read<nint>(_ModelNameOffset!.Value));
+        }
+        set {
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xC0F296335D35B6E1);
+            Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _SharedDataOffset;
 
-  public string ModelName {
-    get {
-      if (_ModelNameOffset == null) {
-        _ModelNameOffset = Schema.GetOffset(0xC0F296335D35B6E1);
-      }
-      var ptr = _Handle.Read<nint>(_ModelNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public SchemaUntypedField SharedData {
+        get {
+            _SharedDataOffset = _SharedDataOffset ?? Schema.GetOffset(0xC0F29633D0085FE6);
+            return new SchemaUntypedField(_Handle + _SharedDataOffset!.Value);
+        }
     }
-    set {
-      if (_ModelNameOffset == null) {
-        _ModelNameOffset = Schema.GetOffset(0xC0F296335D35B6E1);
-      }
-      Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _SharedDataOffset;
-
-  public SchemaUntypedField SharedData {
-    get {
-      if (_SharedDataOffset == null) {
-        _SharedDataOffset = Schema.GetOffset(0xC0F29633D0085FE6);
-      }
-      return new SchemaUntypedField(_Handle + _SharedDataOffset!.Value);
-    }
-  }
 
 
 }

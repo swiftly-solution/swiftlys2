@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ConnectParentParticleToNearestImpl : CParticleFunctionOperatorImpl, C_OP_ConnectParentParticleToNearest {
+internal partial class C_OP_ConnectParentParticleToNearestImpl : CParticleFunctionOperatorImpl, C_OP_ConnectParentParticleToNearest
+{
+    public C_OP_ConnectParentParticleToNearestImpl(nint handle) : base(handle) { }
 
-  public C_OP_ConnectParentParticleToNearestImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FirstControlPointOffset;
 
-  private static nint? _FirstControlPointOffset;
-
-  public ref int FirstControlPoint {
-    get {
-      if (_FirstControlPointOffset == null) {
-        _FirstControlPointOffset = Schema.GetOffset(0x9C608BD072117650);
-      }
-      return ref _Handle.AsRef<int>(_FirstControlPointOffset!.Value);
+    public ref int FirstControlPoint {
+        get {
+            _FirstControlPointOffset = _FirstControlPointOffset ?? Schema.GetOffset(0x9C608BD072117650);
+            return ref _Handle.AsRef<int>(_FirstControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _SecondControlPointOffset;
+    private static nint? _SecondControlPointOffset;
 
-  public ref int SecondControlPoint {
-    get {
-      if (_SecondControlPointOffset == null) {
-        _SecondControlPointOffset = Schema.GetOffset(0x9C608BD04D8D2B44);
-      }
-      return ref _Handle.AsRef<int>(_SecondControlPointOffset!.Value);
+    public ref int SecondControlPoint {
+        get {
+            _SecondControlPointOffset = _SecondControlPointOffset ?? Schema.GetOffset(0x9C608BD04D8D2B44);
+            return ref _Handle.AsRef<int>(_SecondControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseRadiusOffset;
+    private static nint? _UseRadiusOffset;
 
-  public ref bool UseRadius {
-    get {
-      if (_UseRadiusOffset == null) {
-        _UseRadiusOffset = Schema.GetOffset(0x9C608BD0B7D98E6A);
-      }
-      return ref _Handle.AsRef<bool>(_UseRadiusOffset!.Value);
+    public ref bool UseRadius {
+        get {
+            _UseRadiusOffset = _UseRadiusOffset ?? Schema.GetOffset(0x9C608BD0B7D98E6A);
+            return ref _Handle.AsRef<bool>(_UseRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleOffset;
+    private static nint? _RadiusScaleOffset;
 
-  public CParticleCollectionFloatInput RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0x9C608BD0A7A20159);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+    public CParticleCollectionFloatInput RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x9C608BD0A7A20159);
+            return new CParticleCollectionFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentRadiusScaleOffset;
+    private static nint? _ParentRadiusScaleOffset;
 
-  public CParticleCollectionFloatInput ParentRadiusScale {
-    get {
-      if (_ParentRadiusScaleOffset == null) {
-        _ParentRadiusScaleOffset = Schema.GetOffset(0x9C608BD0CD77EF69);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ParentRadiusScaleOffset!.Value);
+    public CParticleCollectionFloatInput ParentRadiusScale {
+        get {
+            _ParentRadiusScaleOffset = _ParentRadiusScaleOffset ?? Schema.GetOffset(0x9C608BD0CD77EF69);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ParentRadiusScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

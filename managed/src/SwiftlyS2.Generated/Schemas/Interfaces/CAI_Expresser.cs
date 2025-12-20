@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAI_Expresser : ISchemaClass<CAI_Expresser> {
+public partial interface CAI_Expresser : ISchemaClass<CAI_Expresser>
+{
+    static CAI_Expresser ISchemaClass<CAI_Expresser>.From(nint handle) => new CAI_ExpresserImpl(handle);
+    static int ISchemaClass<CAI_Expresser>.Size => 160;
+    static string? ISchemaClass<CAI_Expresser>.ClassName => null;
 
-  static CAI_Expresser ISchemaClass<CAI_Expresser>.From(nint handle) => new CAI_ExpresserImpl(handle);
-  static int ISchemaClass<CAI_Expresser>.Size => 160;
-  static string? ISchemaClass<CAI_Expresser>.ClassName => null;
 
-  
-  public GameTime_t StopTalkTime { get; }
-  
-  public GameTime_t StopTalkTimeWithoutDelay { get; }
-  
-  public GameTime_t QueuedSpeechTime { get; }
-  
-  public GameTime_t BlockedTalkTime { get; }
-  
-  public ref int VoicePitch { get; }
-  
-  public GameTime_t LastTimeAcceptedSpeak { get; }
-  
-  public ref bool AllowSpeakingInterrupts { get; }
-  
-  public ref bool ConsiderSceneInvolvementAsSpeech { get; }
-  
-  public ref bool SceneEntityDisabled { get; }
-  
-  public ref int LastSpokenPriority { get; }
-  
-  public CBaseFlex? Outer { get; }
+    public GameTime_t StopTalkTime { get; }
+
+    public GameTime_t StopTalkTimeWithoutDelay { get; }
+
+    public GameTime_t QueuedSpeechTime { get; }
+
+    public GameTime_t BlockedTalkTime { get; }
+
+    public ref int VoicePitch { get; }
+
+    public GameTime_t LastTimeAcceptedSpeak { get; }
+
+    public ref bool AllowSpeakingInterrupts { get; }
+
+    public ref bool ConsiderSceneInvolvementAsSpeech { get; }
+
+    public ref bool SceneEntityDisabled { get; }
+
+    public ref int LastSpokenPriority { get; }
+
+    public CBaseFlex? Outer { get; }
 
 
 }

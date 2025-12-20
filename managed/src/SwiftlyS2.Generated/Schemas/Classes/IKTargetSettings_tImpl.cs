@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class IKTargetSettings_tImpl : SchemaClass, IKTargetSettings_t {
+internal partial class IKTargetSettings_tImpl : SchemaClass, IKTargetSettings_t
+{
+    public IKTargetSettings_tImpl(nint handle) : base(handle) { }
 
-  public IKTargetSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetSourceOffset;
 
-  private static nint? _TargetSourceOffset;
-
-  public ref IKTargetSource TargetSource {
-    get {
-      if (_TargetSourceOffset == null) {
-        _TargetSourceOffset = Schema.GetOffset(0xE4055546D23809BD);
-      }
-      return ref _Handle.AsRef<IKTargetSource>(_TargetSourceOffset!.Value);
+    public ref IKTargetSource TargetSource {
+        get {
+            _TargetSourceOffset = _TargetSourceOffset ?? Schema.GetOffset(0xE4055546D23809BD);
+            return ref _Handle.AsRef<IKTargetSource>(_TargetSourceOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneOffset;
+    private static nint? _BoneOffset;
 
-  public IKBoneNameAndIndex_t Bone {
-    get {
-      if (_BoneOffset == null) {
-        _BoneOffset = Schema.GetOffset(0xE4055546193FC60F);
-      }
-      return new IKBoneNameAndIndex_tImpl(_Handle + _BoneOffset!.Value);
+    public IKBoneNameAndIndex_t Bone {
+        get {
+            _BoneOffset = _BoneOffset ?? Schema.GetOffset(0xE4055546193FC60F);
+            return new IKBoneNameAndIndex_tImpl(_Handle + _BoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimgraphParameterNamePositionOffset;
+    private static nint? _AnimgraphParameterNamePositionOffset;
 
-  public AnimParamID AnimgraphParameterNamePosition {
-    get {
-      if (_AnimgraphParameterNamePositionOffset == null) {
-        _AnimgraphParameterNamePositionOffset = Schema.GetOffset(0xE4055546D9047CE3);
-      }
-      return new AnimParamIDImpl(_Handle + _AnimgraphParameterNamePositionOffset!.Value);
+    public AnimParamID AnimgraphParameterNamePosition {
+        get {
+            _AnimgraphParameterNamePositionOffset = _AnimgraphParameterNamePositionOffset ?? Schema.GetOffset(0xE4055546D9047CE3);
+            return new AnimParamIDImpl(_Handle + _AnimgraphParameterNamePositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimgraphParameterNameOrientationOffset;
+    private static nint? _AnimgraphParameterNameOrientationOffset;
 
-  public AnimParamID AnimgraphParameterNameOrientation {
-    get {
-      if (_AnimgraphParameterNameOrientationOffset == null) {
-        _AnimgraphParameterNameOrientationOffset = Schema.GetOffset(0xE4055546C162E1CA);
-      }
-      return new AnimParamIDImpl(_Handle + _AnimgraphParameterNameOrientationOffset!.Value);
+    public AnimParamID AnimgraphParameterNameOrientation {
+        get {
+            _AnimgraphParameterNameOrientationOffset = _AnimgraphParameterNameOrientationOffset ?? Schema.GetOffset(0xE4055546C162E1CA);
+            return new AnimParamIDImpl(_Handle + _AnimgraphParameterNameOrientationOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetCoordSystemOffset;
+    private static nint? _TargetCoordSystemOffset;
 
-  public ref IKTargetCoordinateSystem TargetCoordSystem {
-    get {
-      if (_TargetCoordSystemOffset == null) {
-        _TargetCoordSystemOffset = Schema.GetOffset(0xE40555469BF14938);
-      }
-      return ref _Handle.AsRef<IKTargetCoordinateSystem>(_TargetCoordSystemOffset!.Value);
+    public ref IKTargetCoordinateSystem TargetCoordSystem {
+        get {
+            _TargetCoordSystemOffset = _TargetCoordSystemOffset ?? Schema.GetOffset(0xE40555469BF14938);
+            return ref _Handle.AsRef<IKTargetCoordinateSystem>(_TargetCoordSystemOffset!.Value);
+        }
     }
-  }
 
 
 }

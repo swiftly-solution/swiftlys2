@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ParticleNode_t : ISchemaClass<ParticleNode_t> {
+public partial interface ParticleNode_t : ISchemaClass<ParticleNode_t>
+{
+    static ParticleNode_t ISchemaClass<ParticleNode_t>.From(nint handle) => new ParticleNode_tImpl(handle);
+    static int ISchemaClass<ParticleNode_t>.Size => 36;
+    static string? ISchemaClass<ParticleNode_t>.ClassName => null;
 
-  static ParticleNode_t ISchemaClass<ParticleNode_t>.From(nint handle) => new ParticleNode_tImpl(handle);
-  static int ISchemaClass<ParticleNode_t>.Size => 36;
-  static string? ISchemaClass<ParticleNode_t>.ClassName => null;
 
-  
-  public ref CHandle<CBaseEntity> Entity { get; }
-  
-  public ParticleIndex_t Index { get; }
-  
-  public GameTime_t StartTime { get; }
-  
-  public ref float GrowthDuration { get; }
-  
-  public ref Vector GrowthOrigin { get; }
-  
-  public ref float EndcapTime { get; }
-  
-  public ref bool MarkedForDelete { get; }
+    public ref CHandle<CBaseEntity> Entity { get; }
+
+    public ParticleIndex_t Index { get; }
+
+    public GameTime_t StartTime { get; }
+
+    public ref float GrowthDuration { get; }
+
+    public ref Vector GrowthOrigin { get; }
+
+    public ref float EndcapTime { get; }
+
+    public ref bool MarkedForDelete { get; }
 
 
 }

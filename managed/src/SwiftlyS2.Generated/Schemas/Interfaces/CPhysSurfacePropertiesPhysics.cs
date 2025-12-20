@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysSurfacePropertiesPhysics : ISchemaClass<CPhysSurfacePropertiesPhysics> {
+public partial interface CPhysSurfacePropertiesPhysics : ISchemaClass<CPhysSurfacePropertiesPhysics>
+{
+    static CPhysSurfacePropertiesPhysics ISchemaClass<CPhysSurfacePropertiesPhysics>.From(nint handle) => new CPhysSurfacePropertiesPhysicsImpl(handle);
+    static int ISchemaClass<CPhysSurfacePropertiesPhysics>.Size => 24;
+    static string? ISchemaClass<CPhysSurfacePropertiesPhysics>.ClassName => null;
 
-  static CPhysSurfacePropertiesPhysics ISchemaClass<CPhysSurfacePropertiesPhysics>.From(nint handle) => new CPhysSurfacePropertiesPhysicsImpl(handle);
-  static int ISchemaClass<CPhysSurfacePropertiesPhysics>.Size => 24;
-  static string? ISchemaClass<CPhysSurfacePropertiesPhysics>.ClassName => null;
 
-  
-  public ref float Friction { get; }
-  
-  public ref float Elasticity { get; }
-  
-  public ref float Density { get; }
-  
-  public ref float Thickness { get; }
-  
-  public ref float SoftContactFrequency { get; }
-  
-  public ref float SoftContactDampingRatio { get; }
+    public ref float Friction { get; }
+
+    public ref float Elasticity { get; }
+
+    public ref float Density { get; }
+
+    public ref float Thickness { get; }
+
+    public ref float SoftContactFrequency { get; }
+
+    public ref float SoftContactDampingRatio { get; }
 
 
 }

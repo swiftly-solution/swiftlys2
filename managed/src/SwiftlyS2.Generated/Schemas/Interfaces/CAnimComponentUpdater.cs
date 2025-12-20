@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimComponentUpdater : ISchemaClass<CAnimComponentUpdater> {
+public partial interface CAnimComponentUpdater : ISchemaClass<CAnimComponentUpdater>
+{
+    static CAnimComponentUpdater ISchemaClass<CAnimComponentUpdater>.From(nint handle) => new CAnimComponentUpdaterImpl(handle);
+    static int ISchemaClass<CAnimComponentUpdater>.Size => 48;
+    static string? ISchemaClass<CAnimComponentUpdater>.ClassName => null;
 
-  static CAnimComponentUpdater ISchemaClass<CAnimComponentUpdater>.From(nint handle) => new CAnimComponentUpdaterImpl(handle);
-  static int ISchemaClass<CAnimComponentUpdater>.Size => 48;
-  static string? ISchemaClass<CAnimComponentUpdater>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public AnimComponentID Id { get; }
-  
-  public ref AnimNodeNetworkMode NetworkMode { get; }
-  
-  public ref bool StartEnabled { get; }
+    public string Name { get; set; }
+
+    public AnimComponentID Id { get; }
+
+    public ref AnimNodeNetworkMode NetworkMode { get; }
+
+    public ref bool StartEnabled { get; }
 
 
 }

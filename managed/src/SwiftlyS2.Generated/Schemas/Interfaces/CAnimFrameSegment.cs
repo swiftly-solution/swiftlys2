@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimFrameSegment : ISchemaClass<CAnimFrameSegment> {
+public partial interface CAnimFrameSegment : ISchemaClass<CAnimFrameSegment>
+{
+    static CAnimFrameSegment ISchemaClass<CAnimFrameSegment>.From(nint handle) => new CAnimFrameSegmentImpl(handle);
+    static int ISchemaClass<CAnimFrameSegment>.Size => 32;
+    static string? ISchemaClass<CAnimFrameSegment>.ClassName => null;
 
-  static CAnimFrameSegment ISchemaClass<CAnimFrameSegment>.From(nint handle) => new CAnimFrameSegmentImpl(handle);
-  static int ISchemaClass<CAnimFrameSegment>.Size => 32;
-  static string? ISchemaClass<CAnimFrameSegment>.ClassName => null;
 
-  
-  public ref int UniqueFrameIndex { get; }
-  
-  public ref uint LocalElementMasks { get; }
-  
-  public ref int LocalChannel { get; }
-  
-  public ref CUtlBinaryBlock Container { get; }
+    public ref int UniqueFrameIndex { get; }
+
+    public ref uint LocalElementMasks { get; }
+
+    public ref int LocalChannel { get; }
+
+    public ref CUtlBinaryBlock Container { get; }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseTriggerAPI : ISchemaClass<CBaseTriggerAPI> {
-
-  static CBaseTriggerAPI ISchemaClass<CBaseTriggerAPI>.From(nint handle) => new CBaseTriggerAPIImpl(handle);
-  static int ISchemaClass<CBaseTriggerAPI>.Size => 8;
-  static string? ISchemaClass<CBaseTriggerAPI>.ClassName => null;
+public partial interface CBaseTriggerAPI : ISchemaClass<CBaseTriggerAPI>
+{
+    static CBaseTriggerAPI ISchemaClass<CBaseTriggerAPI>.From(nint handle) => new CBaseTriggerAPIImpl(handle);
+    static int ISchemaClass<CBaseTriggerAPI>.Size => 8;
+    static string? ISchemaClass<CBaseTriggerAPI>.ClassName => null;
 
 
 

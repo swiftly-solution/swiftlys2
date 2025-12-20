@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomNamedModelElementImpl : CParticleFunctionInitializerImpl, C_INIT_RandomNamedModelElement {
+internal partial class C_INIT_RandomNamedModelElementImpl : CParticleFunctionInitializerImpl, C_INIT_RandomNamedModelElement
+{
+    public C_INIT_RandomNamedModelElementImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RandomNamedModelElementImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModelOffset;
 
-  private static nint? _ModelOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get {
-      if (_ModelOffset == null) {
-        _ModelOffset = Schema.GetOffset(0xA3E776D5E100C814);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model {
+        get {
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0xA3E776D5E100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+        }
     }
-  }
-  private static nint? _NamesOffset;
+    private static nint? _NamesOffset;
 
-  public ref CUtlVector<CUtlString> Names {
-    get {
-      if (_NamesOffset == null) {
-        _NamesOffset = Schema.GetOffset(0xA3E776D50DA776AF);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NamesOffset!.Value);
+    public ref CUtlVector<CUtlString> Names {
+        get {
+            _NamesOffset = _NamesOffset ?? Schema.GetOffset(0xA3E776D50DA776AF);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NamesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShuffleOffset;
+    private static nint? _ShuffleOffset;
 
-  public ref bool Shuffle {
-    get {
-      if (_ShuffleOffset == null) {
-        _ShuffleOffset = Schema.GetOffset(0xA3E776D528BD2B2E);
-      }
-      return ref _Handle.AsRef<bool>(_ShuffleOffset!.Value);
+    public ref bool Shuffle {
+        get {
+            _ShuffleOffset = _ShuffleOffset ?? Schema.GetOffset(0xA3E776D528BD2B2E);
+            return ref _Handle.AsRef<bool>(_ShuffleOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearOffset;
+    private static nint? _LinearOffset;
 
-  public ref bool Linear {
-    get {
-      if (_LinearOffset == null) {
-        _LinearOffset = Schema.GetOffset(0xA3E776D5B9313720);
-      }
-      return ref _Handle.AsRef<bool>(_LinearOffset!.Value);
+    public ref bool Linear {
+        get {
+            _LinearOffset = _LinearOffset ?? Schema.GetOffset(0xA3E776D5B9313720);
+            return ref _Handle.AsRef<bool>(_LinearOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModelFromRendererOffset;
+    private static nint? _ModelFromRendererOffset;
 
-  public ref bool ModelFromRenderer {
-    get {
-      if (_ModelFromRendererOffset == null) {
-        _ModelFromRendererOffset = Schema.GetOffset(0xA3E776D5AEBA1F25);
-      }
-      return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
+    public ref bool ModelFromRenderer {
+        get {
+            _ModelFromRendererOffset = _ModelFromRendererOffset ?? Schema.GetOffset(0xA3E776D5AEBA1F25);
+            return ref _Handle.AsRef<bool>(_ModelFromRendererOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0xA3E776D5E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xA3E776D5E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_InitialVelocityFromHitbox : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitialVelocityFromHitbox> {
+public partial interface C_INIT_InitialVelocityFromHitbox : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitialVelocityFromHitbox>
+{
+    static C_INIT_InitialVelocityFromHitbox ISchemaClass<C_INIT_InitialVelocityFromHitbox>.From(nint handle) => new C_INIT_InitialVelocityFromHitboxImpl(handle);
+    static int ISchemaClass<C_INIT_InitialVelocityFromHitbox>.Size => 616;
+    static string? ISchemaClass<C_INIT_InitialVelocityFromHitbox>.ClassName => null;
 
-  static C_INIT_InitialVelocityFromHitbox ISchemaClass<C_INIT_InitialVelocityFromHitbox>.From(nint handle) => new C_INIT_InitialVelocityFromHitboxImpl(handle);
-  static int ISchemaClass<C_INIT_InitialVelocityFromHitbox>.Size => 616;
-  static string? ISchemaClass<C_INIT_InitialVelocityFromHitbox>.ClassName => null;
 
-  
-  public ref float VelocityMin { get; }
-  
-  public ref float VelocityMax { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public string HitboxSetName { get; set; }
-  
-  public ref bool UseBones { get; }
+    public ref float VelocityMin { get; }
+
+    public ref float VelocityMax { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public string HitboxSetName { get; set; }
+
+    public ref bool UseBones { get; }
 
 
 }

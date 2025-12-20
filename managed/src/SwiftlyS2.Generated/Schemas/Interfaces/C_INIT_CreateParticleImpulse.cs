@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateParticleImpulse : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateParticleImpulse> {
+public partial interface C_INIT_CreateParticleImpulse : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateParticleImpulse>
+{
+    static C_INIT_CreateParticleImpulse ISchemaClass<C_INIT_CreateParticleImpulse>.From(nint handle) => new C_INIT_CreateParticleImpulseImpl(handle);
+    static int ISchemaClass<C_INIT_CreateParticleImpulse>.Size => 1592;
+    static string? ISchemaClass<C_INIT_CreateParticleImpulse>.ClassName => null;
 
-  static C_INIT_CreateParticleImpulse ISchemaClass<C_INIT_CreateParticleImpulse>.From(nint handle) => new C_INIT_CreateParticleImpulseImpl(handle);
-  static int ISchemaClass<C_INIT_CreateParticleImpulse>.Size => 1592;
-  static string? ISchemaClass<C_INIT_CreateParticleImpulse>.ClassName => null;
 
-  
-  public CPerParticleFloatInput InputRadius { get; }
-  
-  public CPerParticleFloatInput InputMagnitude { get; }
-  
-  public ref ParticleFalloffFunction_t FalloffFunction { get; }
-  
-  public CPerParticleFloatInput InputFalloffExp { get; }
-  
-  public ref ParticleImpulseType_t ImpulseType { get; }
+    public CPerParticleFloatInput InputRadius { get; }
+
+    public CPerParticleFloatInput InputMagnitude { get; }
+
+    public ref ParticleFalloffFunction_t FalloffFunction { get; }
+
+    public CPerParticleFloatInput InputFalloffExp { get; }
+
+    public ref ParticleImpulseType_t ImpulseType { get; }
 
 
 }

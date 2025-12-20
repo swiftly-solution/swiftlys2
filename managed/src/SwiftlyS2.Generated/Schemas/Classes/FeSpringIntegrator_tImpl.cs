@@ -6,60 +6,51 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeSpringIntegrator_tImpl : SchemaClass, FeSpringIntegrator_t {
+internal partial class FeSpringIntegrator_tImpl : SchemaClass, FeSpringIntegrator_t
+{
+    public FeSpringIntegrator_tImpl(nint handle) : base(handle) { }
 
-  public FeSpringIntegrator_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0xFC6DF38BCD6694B9, 2, 2, 2);
-  }
-  private static nint? _SpringRestLengthOffset;
-
-  public ref float SpringRestLength {
-    get {
-      if (_SpringRestLengthOffset == null) {
-        _SpringRestLengthOffset = Schema.GetOffset(0xFC6DF38B28C609E8);
-      }
-      return ref _Handle.AsRef<float>(_SpringRestLengthOffset!.Value);
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0xFC6DF38BCD6694B9, 2, 2, 2);
     }
-  }
-  private static nint? _SpringConstantOffset;
+    private static nint? _SpringRestLengthOffset;
 
-  public ref float SpringConstant {
-    get {
-      if (_SpringConstantOffset == null) {
-        _SpringConstantOffset = Schema.GetOffset(0xFC6DF38B9346E79E);
-      }
-      return ref _Handle.AsRef<float>(_SpringConstantOffset!.Value);
+    public ref float SpringRestLength {
+        get {
+            _SpringRestLengthOffset = _SpringRestLengthOffset ?? Schema.GetOffset(0xFC6DF38B28C609E8);
+            return ref _Handle.AsRef<float>(_SpringRestLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpringDampingOffset;
+    private static nint? _SpringConstantOffset;
 
-  public ref float SpringDamping {
-    get {
-      if (_SpringDampingOffset == null) {
-        _SpringDampingOffset = Schema.GetOffset(0xFC6DF38B20E775D0);
-      }
-      return ref _Handle.AsRef<float>(_SpringDampingOffset!.Value);
+    public ref float SpringConstant {
+        get {
+            _SpringConstantOffset = _SpringConstantOffset ?? Schema.GetOffset(0xFC6DF38B9346E79E);
+            return ref _Handle.AsRef<float>(_SpringConstantOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodeWeight0Offset;
+    private static nint? _SpringDampingOffset;
 
-  public ref float NodeWeight0 {
-    get {
-      if (_NodeWeight0Offset == null) {
-        _NodeWeight0Offset = Schema.GetOffset(0xFC6DF38B6E62FEA1);
-      }
-      return ref _Handle.AsRef<float>(_NodeWeight0Offset!.Value);
+    public ref float SpringDamping {
+        get {
+            _SpringDampingOffset = _SpringDampingOffset ?? Schema.GetOffset(0xFC6DF38B20E775D0);
+            return ref _Handle.AsRef<float>(_SpringDampingOffset!.Value);
+        }
     }
-  }
+    private static nint? _NodeWeight0Offset;
+
+    public ref float NodeWeight0 {
+        get {
+            _NodeWeight0Offset = _NodeWeight0Offset ?? Schema.GetOffset(0xFC6DF38B6E62FEA1);
+            return ref _Handle.AsRef<float>(_NodeWeight0Offset!.Value);
+        }
+    }
 
 
 }

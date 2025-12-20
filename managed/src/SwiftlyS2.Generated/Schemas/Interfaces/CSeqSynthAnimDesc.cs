@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqSynthAnimDesc : ISchemaClass<CSeqSynthAnimDesc> {
+public partial interface CSeqSynthAnimDesc : ISchemaClass<CSeqSynthAnimDesc>
+{
+    static CSeqSynthAnimDesc ISchemaClass<CSeqSynthAnimDesc>.From(nint handle) => new CSeqSynthAnimDescImpl(handle);
+    static int ISchemaClass<CSeqSynthAnimDesc>.Size => 64;
+    static string? ISchemaClass<CSeqSynthAnimDesc>.ClassName => null;
 
-  static CSeqSynthAnimDesc ISchemaClass<CSeqSynthAnimDesc>.From(nint handle) => new CSeqSynthAnimDescImpl(handle);
-  static int ISchemaClass<CSeqSynthAnimDesc>.Size => 64;
-  static string? ISchemaClass<CSeqSynthAnimDesc>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public CSeqSeqDescFlag Flags { get; }
-  
-  public CSeqTransition Transition { get; }
-  
-  public ref short LocalBaseReference { get; }
-  
-  public ref short LocalBoneMask { get; }
-  
-  public ref CUtlVector<CAnimActivity> ActivityArray { get; }
+    public ref CBufferString Name { get; }
+
+    public CSeqSeqDescFlag Flags { get; }
+
+    public CSeqTransition Transition { get; }
+
+    public ref short LocalBaseReference { get; }
+
+    public ref short LocalBoneMask { get; }
+
+    public ref CUtlVector<CAnimActivity> ActivityArray { get; }
 
 
 }

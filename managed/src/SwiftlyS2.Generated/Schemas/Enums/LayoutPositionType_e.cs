@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum LayoutPositionType_e : uint {
-
+public enum LayoutPositionType_e : uint
+{
  LAYOUTPOSITIONTYPE_VIEWPORT_RELATIVE = 0,
 
  LAYOUTPOSITIONTYPE_FRACTIONAL = 1,

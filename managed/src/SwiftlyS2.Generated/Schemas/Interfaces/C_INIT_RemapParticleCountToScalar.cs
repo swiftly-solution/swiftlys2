@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RemapParticleCountToScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapParticleCountToScalar> {
+public partial interface C_INIT_RemapParticleCountToScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapParticleCountToScalar>
+{
+    static C_INIT_RemapParticleCountToScalar ISchemaClass<C_INIT_RemapParticleCountToScalar>.From(nint handle) => new C_INIT_RemapParticleCountToScalarImpl(handle);
+    static int ISchemaClass<C_INIT_RemapParticleCountToScalar>.Size => 520;
+    static string? ISchemaClass<C_INIT_RemapParticleCountToScalar>.ClassName => null;
 
-  static C_INIT_RemapParticleCountToScalar ISchemaClass<C_INIT_RemapParticleCountToScalar>.From(nint handle) => new C_INIT_RemapParticleCountToScalarImpl(handle);
-  static int ISchemaClass<C_INIT_RemapParticleCountToScalar>.Size => 520;
-  static string? ISchemaClass<C_INIT_RemapParticleCountToScalar>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref int InputMin { get; }
-  
-  public ref int InputMax { get; }
-  
-  public ref int ScaleControlPoint { get; }
-  
-  public ref int ScaleControlPointField { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool ActiveRange { get; }
-  
-  public ref bool Invert { get; }
-  
-  public ref bool Wrap { get; }
-  
-  public ref float RemapBias { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref int InputMin { get; }
+
+    public ref int InputMax { get; }
+
+    public ref int ScaleControlPoint { get; }
+
+    public ref int ScaleControlPointField { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool ActiveRange { get; }
+
+    public ref bool Invert { get; }
+
+    public ref bool Wrap { get; }
+
+    public ref float RemapBias { get; }
 
 
 }

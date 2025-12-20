@@ -8,40 +8,40 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateOnModelAtHeight : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateOnModelAtHeight> {
+public partial interface C_INIT_CreateOnModelAtHeight : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateOnModelAtHeight>
+{
+    static C_INIT_CreateOnModelAtHeight ISchemaClass<C_INIT_CreateOnModelAtHeight>.From(nint handle) => new C_INIT_CreateOnModelAtHeightImpl(handle);
+    static int ISchemaClass<C_INIT_CreateOnModelAtHeight>.Size => 5168;
+    static string? ISchemaClass<C_INIT_CreateOnModelAtHeight>.ClassName => null;
 
-  static C_INIT_CreateOnModelAtHeight ISchemaClass<C_INIT_CreateOnModelAtHeight>.From(nint handle) => new C_INIT_CreateOnModelAtHeightImpl(handle);
-  static int ISchemaClass<C_INIT_CreateOnModelAtHeight>.Size => 5168;
-  static string? ISchemaClass<C_INIT_CreateOnModelAtHeight>.ClassName => null;
 
-  
-  public ref bool UseBones { get; }
-  
-  public ref bool ForceZ { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref int HeightCP { get; }
-  
-  public ref bool UseWaterHeight { get; }
-  
-  public CParticleCollectionFloatInput DesiredHeight { get; }
-  
-  public CParticleCollectionVecInput HitBoxScale { get; }
-  
-  public CParticleCollectionVecInput DirectionBias { get; }
-  
-  public ref ParticleHitboxBiasType_t BiasType { get; }
-  
-  public ref bool LocalCoords { get; }
-  
-  public ref bool PreferMovingBoxes { get; }
-  
-  public string HitboxSetName { get; set; }
-  
-  public CParticleCollectionFloatInput HitboxVelocityScale { get; }
-  
-  public CParticleCollectionFloatInput MaxBoneVelocity { get; }
+    public ref bool UseBones { get; }
+
+    public ref bool ForceZ { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref int HeightCP { get; }
+
+    public ref bool UseWaterHeight { get; }
+
+    public CParticleCollectionFloatInput DesiredHeight { get; }
+
+    public CParticleCollectionVecInput HitBoxScale { get; }
+
+    public CParticleCollectionVecInput DirectionBias { get; }
+
+    public ref ParticleHitboxBiasType_t BiasType { get; }
+
+    public ref bool LocalCoords { get; }
+
+    public ref bool PreferMovingBoxes { get; }
+
+    public string HitboxSetName { get; set; }
+
+    public CParticleCollectionFloatInput HitboxVelocityScale { get; }
+
+    public CParticleCollectionFloatInput MaxBoneVelocity { get; }
 
 
 }

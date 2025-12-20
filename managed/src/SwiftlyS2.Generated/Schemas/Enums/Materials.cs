@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum Materials : uint {
-
+public enum Materials : uint
+{
  matGlass = 0,
 
  matWood = 1,

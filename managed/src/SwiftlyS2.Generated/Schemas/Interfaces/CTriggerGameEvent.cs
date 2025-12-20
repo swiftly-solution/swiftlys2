@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerGameEvent : CBaseTrigger, ISchemaClass<CTriggerGameEvent> {
+public partial interface CTriggerGameEvent : CBaseTrigger, ISchemaClass<CTriggerGameEvent>
+{
+    static CTriggerGameEvent ISchemaClass<CTriggerGameEvent>.From(nint handle) => new CTriggerGameEventImpl(handle);
+    static int ISchemaClass<CTriggerGameEvent>.Size => 2496;
+    static string? ISchemaClass<CTriggerGameEvent>.ClassName => "trigger_game_event";
 
-  static CTriggerGameEvent ISchemaClass<CTriggerGameEvent>.From(nint handle) => new CTriggerGameEventImpl(handle);
-  static int ISchemaClass<CTriggerGameEvent>.Size => 2496;
-  static string? ISchemaClass<CTriggerGameEvent>.ClassName => "trigger_game_event";
 
-  
-  public string StrStartTouchEventName { get; set; }
-  
-  public string StrEndTouchEventName { get; set; }
-  
-  public string StrTriggerID { get; set; }
+    public string StrStartTouchEventName { get; set; }
 
-  public void StrStartTouchEventNameUpdated();
-  public void StrEndTouchEventNameUpdated();
-  public void StrTriggerIDUpdated();
+    public string StrEndTouchEventName { get; set; }
+
+    public string StrTriggerID { get; set; }
+
+    public void StrStartTouchEventNameUpdated();
+    public void StrEndTouchEventNameUpdated();
+    public void StrTriggerIDUpdated();
 }

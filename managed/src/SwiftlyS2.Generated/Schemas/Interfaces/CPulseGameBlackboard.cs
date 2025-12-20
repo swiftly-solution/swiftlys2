@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseGameBlackboard : CBaseEntity, ISchemaClass<CPulseGameBlackboard> {
+public partial interface CPulseGameBlackboard : CBaseEntity, ISchemaClass<CPulseGameBlackboard>
+{
+    static CPulseGameBlackboard ISchemaClass<CPulseGameBlackboard>.From(nint handle) => new CPulseGameBlackboardImpl(handle);
+    static int ISchemaClass<CPulseGameBlackboard>.Size => 1288;
+    static string? ISchemaClass<CPulseGameBlackboard>.ClassName => "pulse_game_blackboard";
 
-  static CPulseGameBlackboard ISchemaClass<CPulseGameBlackboard>.From(nint handle) => new CPulseGameBlackboardImpl(handle);
-  static int ISchemaClass<CPulseGameBlackboard>.Size => 1288;
-  static string? ISchemaClass<CPulseGameBlackboard>.ClassName => "pulse_game_blackboard";
 
-  
-  public string StrGraphName { get; set; }
-  
-  public string StrStateBlob { get; set; }
+    public string StrGraphName { get; set; }
 
-  public void StrGraphNameUpdated();
-  public void StrStateBlobUpdated();
+    public string StrStateBlob { get; set; }
+
+    public void StrGraphNameUpdated();
+    public void StrStateBlobUpdated();
 }

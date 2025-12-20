@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VoxelVisBlockOffset_t : ISchemaClass<VoxelVisBlockOffset_t> {
+public partial interface VoxelVisBlockOffset_t : ISchemaClass<VoxelVisBlockOffset_t>
+{
+    static VoxelVisBlockOffset_t ISchemaClass<VoxelVisBlockOffset_t>.From(nint handle) => new VoxelVisBlockOffset_tImpl(handle);
+    static int ISchemaClass<VoxelVisBlockOffset_t>.Size => 8;
+    static string? ISchemaClass<VoxelVisBlockOffset_t>.ClassName => null;
 
-  static VoxelVisBlockOffset_t ISchemaClass<VoxelVisBlockOffset_t>.From(nint handle) => new VoxelVisBlockOffset_tImpl(handle);
-  static int ISchemaClass<VoxelVisBlockOffset_t>.Size => 8;
-  static string? ISchemaClass<VoxelVisBlockOffset_t>.ClassName => null;
 
-  
-  public ref uint Offset { get; }
-  
-  public ref uint ElementCount { get; }
+    public ref uint Offset { get; }
+
+    public ref uint ElementCount { get; }
 
 
 }

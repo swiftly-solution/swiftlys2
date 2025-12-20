@@ -6,91 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ParticleControlPointDriver_tImpl : SchemaClass, ParticleControlPointDriver_t {
+internal partial class ParticleControlPointDriver_tImpl : SchemaClass, ParticleControlPointDriver_t
+{
+    public ParticleControlPointDriver_tImpl(nint handle) : base(handle) { }
 
-  public ParticleControlPointDriver_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointOffset;
 
-  private static nint? _ControlPointOffset;
+    public ref int ControlPoint {
+        get {
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xB7C66843E9EC8FF5);
+            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+        }
+    }
+    private static nint? _AttachTypeOffset;
 
-  public ref int ControlPoint {
-    get {
-      if (_ControlPointOffset == null) {
-        _ControlPointOffset = Schema.GetOffset(0xB7C66843E9EC8FF5);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    public ref ParticleAttachment_t AttachType {
+        get {
+            _AttachTypeOffset = _AttachTypeOffset ?? Schema.GetOffset(0xB7C66843432E8381);
+            return ref _Handle.AsRef<ParticleAttachment_t>(_AttachTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttachTypeOffset;
+    private static nint? _AttachmentNameOffset;
 
-  public ref ParticleAttachment_t AttachType {
-    get {
-      if (_AttachTypeOffset == null) {
-        _AttachTypeOffset = Schema.GetOffset(0xB7C66843432E8381);
-      }
-      return ref _Handle.AsRef<ParticleAttachment_t>(_AttachTypeOffset!.Value);
-    }
-  }
-  private static nint? _AttachmentNameOffset;
+    public string AttachmentName {
+        get {
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0xB7C66843295DA9CB);
+            return Schema.GetString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
+        }
+        set {
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0xB7C66843295DA9CB);
+            Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OffsetOffset;
 
-  public string AttachmentName {
-    get {
-      if (_AttachmentNameOffset == null) {
-        _AttachmentNameOffset = Schema.GetOffset(0xB7C66843295DA9CB);
-      }
-      var ptr = _Handle.Read<nint>(_AttachmentNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref Vector Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xB7C66843BD25CC2A);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+        }
     }
-    set {
-      if (_AttachmentNameOffset == null) {
-        _AttachmentNameOffset = Schema.GetOffset(0xB7C66843295DA9CB);
-      }
-      Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OffsetOffset;
+    private static nint? _Offset1Offset;
 
-  public ref Vector Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0xB7C66843BD25CC2A);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    public ref QAngle Offset1 {
+        get {
+            _Offset1Offset = _Offset1Offset ?? Schema.GetOffset(0xB7C6684346F6B3C0);
+            return ref _Handle.AsRef<QAngle>(_Offset1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Offset1Offset;
+    private static nint? _EntityNameOffset;
 
-  public ref QAngle Offset1 {
-    get {
-      if (_Offset1Offset == null) {
-        _Offset1Offset = Schema.GetOffset(0xB7C6684346F6B3C0);
-      }
-      return ref _Handle.AsRef<QAngle>(_Offset1Offset!.Value);
-    }
-  }
-  private static nint? _EntityNameOffset;
-
-  public string EntityName {
-    get {
-      if (_EntityNameOffset == null) {
-        _EntityNameOffset = Schema.GetOffset(0xB7C6684380D1D3E1);
-      }
-      var ptr = _Handle.Read<nint>(_EntityNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_EntityNameOffset == null) {
-        _EntityNameOffset = Schema.GetOffset(0xB7C6684380D1D3E1);
-      }
-      Schema.SetString(_Handle, _EntityNameOffset!.Value, value);
-    }
-  } 
+    public string EntityName {
+        get {
+            _EntityNameOffset = _EntityNameOffset ?? Schema.GetOffset(0xB7C6684380D1D3E1);
+            return Schema.GetString(_Handle.Read<nint>(_EntityNameOffset!.Value));
+        }
+        set {
+            _EntityNameOffset = _EntityNameOffset ?? Schema.GetOffset(0xB7C6684380D1D3E1);
+            Schema.SetString(_Handle, _EntityNameOffset!.Value, value);
+        }
+    } 
 
 
 }

@@ -6,20 +6,19 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRemapFloatImpl : SchemaClass, CRemapFloat {
+internal partial class CRemapFloatImpl : SchemaClass, CRemapFloat
+{
+    public CRemapFloatImpl(nint handle) : base(handle) { }
 
-  public CRemapFloatImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<float> Value {
-    get => new SchemaFixedArray<float>(_Handle, 0x49763A6B7F437844, 4, 4, 4);
-  }
+    public ISchemaFixedArray<float> Value {
+        get => new SchemaFixedArray<float>(_Handle, 0x49763A6B7F437844, 4, 4, 4);
+    }
 
 
 }

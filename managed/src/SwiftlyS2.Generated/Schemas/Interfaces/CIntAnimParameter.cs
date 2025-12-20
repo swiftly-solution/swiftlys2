@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CIntAnimParameter : CConcreteAnimParameter, ISchemaClass<CIntAnimParameter> {
+public partial interface CIntAnimParameter : CConcreteAnimParameter, ISchemaClass<CIntAnimParameter>
+{
+    static CIntAnimParameter ISchemaClass<CIntAnimParameter>.From(nint handle) => new CIntAnimParameterImpl(handle);
+    static int ISchemaClass<CIntAnimParameter>.Size => 144;
+    static string? ISchemaClass<CIntAnimParameter>.ClassName => null;
 
-  static CIntAnimParameter ISchemaClass<CIntAnimParameter>.From(nint handle) => new CIntAnimParameterImpl(handle);
-  static int ISchemaClass<CIntAnimParameter>.Size => 144;
-  static string? ISchemaClass<CIntAnimParameter>.ClassName => null;
 
-  
-  public ref int DefaultValue { get; }
-  
-  public ref int MinValue { get; }
-  
-  public ref int MaxValue { get; }
+    public ref int DefaultValue { get; }
+
+    public ref int MinValue { get; }
+
+    public ref int MaxValue { get; }
 
 
 }

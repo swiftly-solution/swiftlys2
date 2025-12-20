@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerPush : CBaseTrigger, ISchemaClass<CTriggerPush> {
+public partial interface CTriggerPush : CBaseTrigger, ISchemaClass<CTriggerPush>
+{
+    static CTriggerPush ISchemaClass<CTriggerPush>.From(nint handle) => new CTriggerPushImpl(handle);
+    static int ISchemaClass<CTriggerPush>.Size => 2528;
+    static string? ISchemaClass<CTriggerPush>.ClassName => "trigger_push";
 
-  static CTriggerPush ISchemaClass<CTriggerPush>.From(nint handle) => new CTriggerPushImpl(handle);
-  static int ISchemaClass<CTriggerPush>.Size => 2528;
-  static string? ISchemaClass<CTriggerPush>.ClassName => "trigger_push";
 
-  
-  public ref QAngle PushEntitySpace { get; }
-  
-  public ref Vector PushDirEntitySpace { get; }
-  
-  public ref bool TriggerOnStartTouch { get; }
-  
-  public ref bool UsePathSimple { get; }
-  
-  public string PathSimpleName { get; set; }
-  
-  public CPathSimple? PathSimple { get; }
-  
-  public ref uint SplinePushType { get; }
+    public ref QAngle PushEntitySpace { get; }
+
+    public ref Vector PushDirEntitySpace { get; }
+
+    public ref bool TriggerOnStartTouch { get; }
+
+    public ref bool UsePathSimple { get; }
+
+    public string PathSimpleName { get; set; }
+
+    public CPathSimple? PathSimple { get; }
+
+    public ref uint SplinePushType { get; }
 
 
 }

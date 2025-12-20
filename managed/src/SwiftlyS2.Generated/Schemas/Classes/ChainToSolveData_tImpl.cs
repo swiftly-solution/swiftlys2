@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ChainToSolveData_tImpl : SchemaClass, ChainToSolveData_t {
+internal partial class ChainToSolveData_tImpl : SchemaClass, ChainToSolveData_t
+{
+    public ChainToSolveData_tImpl(nint handle) : base(handle) { }
 
-  public ChainToSolveData_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChainIndexOffset;
 
-  private static nint? _ChainIndexOffset;
-
-  public ref int ChainIndex {
-    get {
-      if (_ChainIndexOffset == null) {
-        _ChainIndexOffset = Schema.GetOffset(0x87A241BDA34589B6);
-      }
-      return ref _Handle.AsRef<int>(_ChainIndexOffset!.Value);
+    public ref int ChainIndex {
+        get {
+            _ChainIndexOffset = _ChainIndexOffset ?? Schema.GetOffset(0x87A241BDA34589B6);
+            return ref _Handle.AsRef<int>(_ChainIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _SolverSettingsOffset;
+    private static nint? _SolverSettingsOffset;
 
-  public IKSolverSettings_t SolverSettings {
-    get {
-      if (_SolverSettingsOffset == null) {
-        _SolverSettingsOffset = Schema.GetOffset(0x87A241BDE19D8233);
-      }
-      return new IKSolverSettings_tImpl(_Handle + _SolverSettingsOffset!.Value);
+    public IKSolverSettings_t SolverSettings {
+        get {
+            _SolverSettingsOffset = _SolverSettingsOffset ?? Schema.GetOffset(0x87A241BDE19D8233);
+            return new IKSolverSettings_tImpl(_Handle + _SolverSettingsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetSettingsOffset;
+    private static nint? _TargetSettingsOffset;
 
-  public IKTargetSettings_t TargetSettings {
-    get {
-      if (_TargetSettingsOffset == null) {
-        _TargetSettingsOffset = Schema.GetOffset(0x87A241BDD6828E35);
-      }
-      return new IKTargetSettings_tImpl(_Handle + _TargetSettingsOffset!.Value);
+    public IKTargetSettings_t TargetSettings {
+        get {
+            _TargetSettingsOffset = _TargetSettingsOffset ?? Schema.GetOffset(0x87A241BDD6828E35);
+            return new IKTargetSettings_tImpl(_Handle + _TargetSettingsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DebugSettingOffset;
+    private static nint? _DebugSettingOffset;
 
-  public ref SolveIKChainAnimNodeDebugSetting DebugSetting {
-    get {
-      if (_DebugSettingOffset == null) {
-        _DebugSettingOffset = Schema.GetOffset(0x87A241BD624CC0B4);
-      }
-      return ref _Handle.AsRef<SolveIKChainAnimNodeDebugSetting>(_DebugSettingOffset!.Value);
+    public ref SolveIKChainAnimNodeDebugSetting DebugSetting {
+        get {
+            _DebugSettingOffset = _DebugSettingOffset ?? Schema.GetOffset(0x87A241BD624CC0B4);
+            return ref _Handle.AsRef<SolveIKChainAnimNodeDebugSetting>(_DebugSettingOffset!.Value);
+        }
     }
-  }
-  private static nint? _DebugNormalizedValueOffset;
+    private static nint? _DebugNormalizedValueOffset;
 
-  public ref float DebugNormalizedValue {
-    get {
-      if (_DebugNormalizedValueOffset == null) {
-        _DebugNormalizedValueOffset = Schema.GetOffset(0x87A241BD0F331460);
-      }
-      return ref _Handle.AsRef<float>(_DebugNormalizedValueOffset!.Value);
+    public ref float DebugNormalizedValue {
+        get {
+            _DebugNormalizedValueOffset = _DebugNormalizedValueOffset ?? Schema.GetOffset(0x87A241BD0F331460);
+            return ref _Handle.AsRef<float>(_DebugNormalizedValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _DebugOffsetOffset;
+    private static nint? _DebugOffsetOffset;
 
-  public ref Vector DebugOffset {
-    get {
-      if (_DebugOffsetOffset == null) {
-        _DebugOffsetOffset = Schema.GetOffset(0x87A241BD2FF28BBF);
-      }
-      return ref _Handle.AsRef<Vector>(_DebugOffsetOffset!.Value);
+    public ref Vector DebugOffset {
+        get {
+            _DebugOffsetOffset = _DebugOffsetOffset ?? Schema.GetOffset(0x87A241BD2FF28BBF);
+            return ref _Handle.AsRef<Vector>(_DebugOffsetOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,31 +8,31 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulse_Variable : ISchemaClass<CPulse_Variable> {
+public partial interface CPulse_Variable : ISchemaClass<CPulse_Variable>
+{
+    static CPulse_Variable ISchemaClass<CPulse_Variable>.From(nint handle) => new CPulse_VariableImpl(handle);
+    static int ISchemaClass<CPulse_Variable>.Size => 80;
+    static string? ISchemaClass<CPulse_Variable>.ClassName => null;
 
-  static CPulse_Variable ISchemaClass<CPulse_Variable>.From(nint handle) => new CPulse_VariableImpl(handle);
-  static int ISchemaClass<CPulse_Variable>.Size => 80;
-  static string? ISchemaClass<CPulse_Variable>.ClassName => null;
 
-  
-  // PulseSymbol_t
-  public SchemaUntypedField Name { get; }
-  
-  public string Description { get; set; }
-  
-  // CPulseValueFullType
-  public SchemaUntypedField Type { get; }
-  
-  // KeyValues3
-  public SchemaUntypedField DefaultValue { get; }
-  
-  public ref PulseVariableKeysSource_t KeysSource { get; }
-  
-  public ref bool IsPublicBlackboardVariable { get; }
-  
-  public ref bool IsObservable { get; }
-  
-  public PulseDocNodeID_t EditorNodeID { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField Name { get; }
+
+    public string Description { get; set; }
+
+    // CPulseValueFullType
+    public SchemaUntypedField Type { get; }
+
+    // KeyValues3
+    public SchemaUntypedField DefaultValue { get; }
+
+    public ref PulseVariableKeysSource_t KeysSource { get; }
+
+    public ref bool IsPublicBlackboardVariable { get; }
+
+    public ref bool IsObservable { get; }
+
+    public PulseDocNodeID_t EditorNodeID { get; }
 
 
 }

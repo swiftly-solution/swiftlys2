@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetControlPointToHandImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointToHand {
+internal partial class C_OP_SetControlPointToHandImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointToHand
+{
+    public C_OP_SetControlPointToHandImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetControlPointToHandImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CP1Offset;
 
-  private static nint? _CP1Offset;
-
-  public ref int CP1 {
-    get {
-      if (_CP1Offset == null) {
-        _CP1Offset = Schema.GetOffset(0x5D527B26D4B1E579);
-      }
-      return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+    public ref int CP1 {
+        get {
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0x5D527B26D4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+        }
     }
-  }
-  private static nint? _HandOffset;
+    private static nint? _HandOffset;
 
-  public ref int Hand {
-    get {
-      if (_HandOffset == null) {
-        _HandOffset = Schema.GetOffset(0x5D527B26D49ECB4C);
-      }
-      return ref _Handle.AsRef<int>(_HandOffset!.Value);
+    public ref int Hand {
+        get {
+            _HandOffset = _HandOffset ?? Schema.GetOffset(0x5D527B26D49ECB4C);
+            return ref _Handle.AsRef<int>(_HandOffset!.Value);
+        }
     }
-  }
-  private static nint? _CP1PosOffset;
+    private static nint? _CP1PosOffset;
 
-  public ref Vector CP1Pos {
-    get {
-      if (_CP1PosOffset == null) {
-        _CP1PosOffset = Schema.GetOffset(0x5D527B26408288D9);
-      }
-      return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+    public ref Vector CP1Pos {
+        get {
+            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0x5D527B26408288D9);
+            return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientToHandOffset;
+    private static nint? _OrientToHandOffset;
 
-  public ref bool OrientToHand {
-    get {
-      if (_OrientToHandOffset == null) {
-        _OrientToHandOffset = Schema.GetOffset(0x5D527B26372CF7D8);
-      }
-      return ref _Handle.AsRef<bool>(_OrientToHandOffset!.Value);
+    public ref bool OrientToHand {
+        get {
+            _OrientToHandOffset = _OrientToHandOffset ?? Schema.GetOffset(0x5D527B26372CF7D8);
+            return ref _Handle.AsRef<bool>(_OrientToHandOffset!.Value);
+        }
     }
-  }
 
 
 }

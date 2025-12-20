@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMultiLightProxy : CLogicalEntity, ISchemaClass<CMultiLightProxy> {
+public partial interface CMultiLightProxy : CLogicalEntity, ISchemaClass<CMultiLightProxy>
+{
+    static CMultiLightProxy ISchemaClass<CMultiLightProxy>.From(nint handle) => new CMultiLightProxyImpl(handle);
+    static int ISchemaClass<CMultiLightProxy>.Size => 1328;
+    static string? ISchemaClass<CMultiLightProxy>.ClassName => "logic_multilight_proxy";
 
-  static CMultiLightProxy ISchemaClass<CMultiLightProxy>.From(nint handle) => new CMultiLightProxyImpl(handle);
-  static int ISchemaClass<CMultiLightProxy>.Size => 1328;
-  static string? ISchemaClass<CMultiLightProxy>.ClassName => "logic_multilight_proxy";
 
-  
-  public string LightNameFilter { get; set; }
-  
-  public string LightClassFilter { get; set; }
-  
-  public ref float LightRadiusFilter { get; }
-  
-  public ref float BrightnessDelta { get; }
-  
-  public ref bool PerformScreenFade { get; }
-  
-  public ref float TargetBrightnessMultiplier { get; }
-  
-  public ref float CurrentBrightnessMultiplier { get; }
-  
-  public ref CUtlVector<CHandle<CLightEntity>> Lights { get; }
+    public string LightNameFilter { get; set; }
+
+    public string LightClassFilter { get; set; }
+
+    public ref float LightRadiusFilter { get; }
+
+    public ref float BrightnessDelta { get; }
+
+    public ref bool PerformScreenFade { get; }
+
+    public ref float TargetBrightnessMultiplier { get; }
+
+    public ref float CurrentBrightnessMultiplier { get; }
+
+    public ref CUtlVector<CHandle<CLightEntity>> Lights { get; }
 
 
 }

@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPropDataComponent : CEntityComponent, ISchemaClass<CPropDataComponent> {
+public partial interface CPropDataComponent : CEntityComponent, ISchemaClass<CPropDataComponent>
+{
+    static CPropDataComponent ISchemaClass<CPropDataComponent>.From(nint handle) => new CPropDataComponentImpl(handle);
+    static int ISchemaClass<CPropDataComponent>.Size => 64;
+    static string? ISchemaClass<CPropDataComponent>.ClassName => null;
 
-  static CPropDataComponent ISchemaClass<CPropDataComponent>.From(nint handle) => new CPropDataComponentImpl(handle);
-  static int ISchemaClass<CPropDataComponent>.Size => 64;
-  static string? ISchemaClass<CPropDataComponent>.ClassName => null;
 
-  
-  public ref float DmgModBullet { get; }
-  
-  public ref float DmgModClub { get; }
-  
-  public ref float DmgModExplosive { get; }
-  
-  public ref float DmgModFire { get; }
-  
-  public string PhysicsDamageTableName { get; set; }
-  
-  public string BasePropData { get; set; }
-  
-  public ref int Interactions { get; }
-  
-  public ref bool SpawnMotionDisabled { get; }
-  
-  public ref int DisableTakePhysicsDamageSpawnFlag { get; }
-  
-  public ref int MotionDisabledSpawnFlag { get; }
+    public ref float DmgModBullet { get; }
+
+    public ref float DmgModClub { get; }
+
+    public ref float DmgModExplosive { get; }
+
+    public ref float DmgModFire { get; }
+
+    public string PhysicsDamageTableName { get; set; }
+
+    public string BasePropData { get; set; }
+
+    public ref int Interactions { get; }
+
+    public ref bool SpawnMotionDisabled { get; }
+
+    public ref int DisableTakePhysicsDamageSpawnFlag { get; }
+
+    public ref int MotionDisabledSpawnFlag { get; }
 
 
 }

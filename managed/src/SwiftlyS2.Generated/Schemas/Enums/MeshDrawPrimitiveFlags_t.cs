@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum MeshDrawPrimitiveFlags_t : uint {
-
+public enum MeshDrawPrimitiveFlags_t : uint
+{
  MESH_DRAW_FLAGS_NONE = 0,
 
  MESH_DRAW_FLAGS_USE_SHADOW_FAST_PATH = 1,

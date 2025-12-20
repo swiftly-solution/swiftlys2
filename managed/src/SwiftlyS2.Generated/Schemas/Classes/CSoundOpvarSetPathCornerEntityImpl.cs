@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundOpvarSetPathCornerEntityImpl : CSoundOpvarSetPointEntityImpl, CSoundOpvarSetPathCornerEntity {
+internal partial class CSoundOpvarSetPathCornerEntityImpl : CSoundOpvarSetPointEntityImpl, CSoundOpvarSetPathCornerEntity
+{
+    public CSoundOpvarSetPathCornerEntityImpl(nint handle) : base(handle) { }
 
-  public CSoundOpvarSetPathCornerEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DistMinSqrOffset;
 
-  private static nint? _DistMinSqrOffset;
-
-  public ref float DistMinSqr {
-    get {
-      if (_DistMinSqrOffset == null) {
-        _DistMinSqrOffset = Schema.GetOffset(0x368409543D1989CD);
-      }
-      return ref _Handle.AsRef<float>(_DistMinSqrOffset!.Value);
+    public ref float DistMinSqr {
+        get {
+            _DistMinSqrOffset = _DistMinSqrOffset ?? Schema.GetOffset(0x368409543D1989CD);
+            return ref _Handle.AsRef<float>(_DistMinSqrOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistMaxSqrOffset;
+    private static nint? _DistMaxSqrOffset;
 
-  public ref float DistMaxSqr {
-    get {
-      if (_DistMaxSqrOffset == null) {
-        _DistMaxSqrOffset = Schema.GetOffset(0x36840954993EE3BF);
-      }
-      return ref _Handle.AsRef<float>(_DistMaxSqrOffset!.Value);
+    public ref float DistMaxSqr {
+        get {
+            _DistMaxSqrOffset = _DistMaxSqrOffset ?? Schema.GetOffset(0x36840954993EE3BF);
+            return ref _Handle.AsRef<float>(_DistMaxSqrOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathCornerEntityNameOffset;
+    private static nint? _PathCornerEntityNameOffset;
 
-  public string PathCornerEntityName {
-    get {
-      if (_PathCornerEntityNameOffset == null) {
-        _PathCornerEntityNameOffset = Schema.GetOffset(0x36840954EF6D6403);
-      }
-      var ptr = _Handle.Read<nint>(_PathCornerEntityNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PathCornerEntityNameOffset == null) {
-        _PathCornerEntityNameOffset = Schema.GetOffset(0x36840954EF6D6403);
-      }
-      Schema.SetString(_Handle, _PathCornerEntityNameOffset!.Value, value);
-    }
-  } 
+    public string PathCornerEntityName {
+        get {
+            _PathCornerEntityNameOffset = _PathCornerEntityNameOffset ?? Schema.GetOffset(0x36840954EF6D6403);
+            return Schema.GetString(_Handle.Read<nint>(_PathCornerEntityNameOffset!.Value));
+        }
+        set {
+            _PathCornerEntityNameOffset = _PathCornerEntityNameOffset ?? Schema.GetOffset(0x36840954EF6D6403);
+            Schema.SetString(_Handle, _PathCornerEntityNameOffset!.Value, value);
+        }
+    } 
 
 
 }

@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface BakedLightingInfo_t : ISchemaClass<BakedLightingInfo_t> {
+public partial interface BakedLightingInfo_t : ISchemaClass<BakedLightingInfo_t>
+{
+    static BakedLightingInfo_t ISchemaClass<BakedLightingInfo_t>.From(nint handle) => new BakedLightingInfo_tImpl(handle);
+    static int ISchemaClass<BakedLightingInfo_t>.Size => 72;
+    static string? ISchemaClass<BakedLightingInfo_t>.ClassName => null;
 
-  static BakedLightingInfo_t ISchemaClass<BakedLightingInfo_t>.From(nint handle) => new BakedLightingInfo_tImpl(handle);
-  static int ISchemaClass<BakedLightingInfo_t>.Size => 72;
-  static string? ISchemaClass<BakedLightingInfo_t>.ClassName => null;
 
-  
-  public ref uint LightmapVersionNumber { get; }
-  
-  public ref uint LightmapGameVersionNumber { get; }
-  
-  public ref Vector2D LightmapUvScale { get; }
-  
-  public ref bool HasLightmaps { get; }
-  
-  public ref bool BakedShadowsGamma20 { get; }
-  
-  public ref bool CompressionEnabled { get; }
-  
-  public ref bool SHLightmaps { get; }
-  
-  public ref byte ChartPackIterations { get; }
-  
-  public ref byte VradQuality { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCTextureBase>> LightMaps { get; }
-  
-  public ref CUtlVector<BakedLightingInfo_t__BakedShadowAssignment_t> BakedShadows { get; }
+    public ref uint LightmapVersionNumber { get; }
+
+    public ref uint LightmapGameVersionNumber { get; }
+
+    public ref Vector2D LightmapUvScale { get; }
+
+    public ref bool HasLightmaps { get; }
+
+    public ref bool BakedShadowsGamma20 { get; }
+
+    public ref bool CompressionEnabled { get; }
+
+    public ref bool SHLightmaps { get; }
+
+    public ref byte ChartPackIterations { get; }
+
+    public ref byte VradQuality { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCTextureBase>> LightMaps { get; }
+
+    public ref CUtlVector<BakedLightingInfo_t__BakedShadowAssignment_t> BakedShadows { get; }
 
 
 }

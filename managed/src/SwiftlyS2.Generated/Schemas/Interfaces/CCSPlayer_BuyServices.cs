@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayer_BuyServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_BuyServices> {
+public partial interface CCSPlayer_BuyServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_BuyServices>
+{
+    static CCSPlayer_BuyServices ISchemaClass<CCSPlayer_BuyServices>.From(nint handle) => new CCSPlayer_BuyServicesImpl(handle);
+    static int ISchemaClass<CCSPlayer_BuyServices>.Size => 336;
+    static string? ISchemaClass<CCSPlayer_BuyServices>.ClassName => null;
 
-  static CCSPlayer_BuyServices ISchemaClass<CCSPlayer_BuyServices>.From(nint handle) => new CCSPlayer_BuyServicesImpl(handle);
-  static int ISchemaClass<CCSPlayer_BuyServices>.Size => 336;
-  static string? ISchemaClass<CCSPlayer_BuyServices>.ClassName => null;
 
-  
-  public ref CUtlVector<SellbackPurchaseEntry_t> SellbackPurchaseEntries { get; }
+    public ref CUtlVector<SellbackPurchaseEntry_t> SellbackPurchaseEntries { get; }
 
-  public void SellbackPurchaseEntriesUpdated();
+    public void SellbackPurchaseEntriesUpdated();
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RsRasterizerStateDesc_t : ISchemaClass<RsRasterizerStateDesc_t> {
+public partial interface RsRasterizerStateDesc_t : ISchemaClass<RsRasterizerStateDesc_t>
+{
+    static RsRasterizerStateDesc_t ISchemaClass<RsRasterizerStateDesc_t>.From(nint handle) => new RsRasterizerStateDesc_tImpl(handle);
+    static int ISchemaClass<RsRasterizerStateDesc_t>.Size => 16;
+    static string? ISchemaClass<RsRasterizerStateDesc_t>.ClassName => null;
 
-  static RsRasterizerStateDesc_t ISchemaClass<RsRasterizerStateDesc_t>.From(nint handle) => new RsRasterizerStateDesc_tImpl(handle);
-  static int ISchemaClass<RsRasterizerStateDesc_t>.Size => 16;
-  static string? ISchemaClass<RsRasterizerStateDesc_t>.ClassName => null;
 
-  
-  public ref RsFillMode_t FillMode { get; }
-  
-  public ref RsCullMode_t CullMode { get; }
-  
-  public ref bool DepthClipEnable { get; }
-  
-  public ref bool MultisampleEnable { get; }
-  
-  public ref int DepthBias { get; }
-  
-  public ref float DepthBiasClamp { get; }
-  
-  public ref float SlopeScaledDepthBias { get; }
+    public ref RsFillMode_t FillMode { get; }
+
+    public ref RsCullMode_t CullMode { get; }
+
+    public ref bool DepthClipEnable { get; }
+
+    public ref bool MultisampleEnable { get; }
+
+    public ref int DepthBias { get; }
+
+    public ref float DepthBiasClamp { get; }
+
+    public ref float SlopeScaledDepthBias { get; }
 
 
 }

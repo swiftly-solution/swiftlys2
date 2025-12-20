@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmParameterizedBlendNode__Parameterization_tImpl : SchemaClass, CNmParameterizedBlendNode__Parameterization_t {
+internal partial class CNmParameterizedBlendNode__Parameterization_tImpl : SchemaClass, CNmParameterizedBlendNode__Parameterization_t
+{
+    public CNmParameterizedBlendNode__Parameterization_tImpl(nint handle) : base(handle) { }
 
-  public CNmParameterizedBlendNode__Parameterization_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BlendRangesOffset;
 
-  private static nint? _BlendRangesOffset;
-
-  public SchemaUntypedField BlendRanges {
-    get {
-      if (_BlendRangesOffset == null) {
-        _BlendRangesOffset = Schema.GetOffset(0xD342D3196DA1C61A);
-      }
-      return new SchemaUntypedField(_Handle + _BlendRangesOffset!.Value);
+    public SchemaUntypedField BlendRanges {
+        get {
+            _BlendRangesOffset = _BlendRangesOffset ?? Schema.GetOffset(0xD342D3196DA1C61A);
+            return new SchemaUntypedField(_Handle + _BlendRangesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterRangeOffset;
+    private static nint? _ParameterRangeOffset;
 
-  public SchemaUntypedField ParameterRange {
-    get {
-      if (_ParameterRangeOffset == null) {
-        _ParameterRangeOffset = Schema.GetOffset(0xD342D319E7E71E25);
-      }
-      return new SchemaUntypedField(_Handle + _ParameterRangeOffset!.Value);
+    public SchemaUntypedField ParameterRange {
+        get {
+            _ParameterRangeOffset = _ParameterRangeOffset ?? Schema.GetOffset(0xD342D319E7E71E25);
+            return new SchemaUntypedField(_Handle + _ParameterRangeOffset!.Value);
+        }
     }
-  }
 
 
 }

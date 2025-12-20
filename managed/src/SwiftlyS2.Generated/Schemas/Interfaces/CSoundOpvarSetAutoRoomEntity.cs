@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundOpvarSetAutoRoomEntity : CSoundOpvarSetPointEntity, ISchemaClass<CSoundOpvarSetAutoRoomEntity> {
+public partial interface CSoundOpvarSetAutoRoomEntity : CSoundOpvarSetPointEntity, ISchemaClass<CSoundOpvarSetAutoRoomEntity>
+{
+    static CSoundOpvarSetAutoRoomEntity ISchemaClass<CSoundOpvarSetAutoRoomEntity>.From(nint handle) => new CSoundOpvarSetAutoRoomEntityImpl(handle);
+    static int ISchemaClass<CSoundOpvarSetAutoRoomEntity>.Size => 1768;
+    static string? ISchemaClass<CSoundOpvarSetAutoRoomEntity>.ClassName => "snd_opvar_set_auto_room";
 
-  static CSoundOpvarSetAutoRoomEntity ISchemaClass<CSoundOpvarSetAutoRoomEntity>.From(nint handle) => new CSoundOpvarSetAutoRoomEntityImpl(handle);
-  static int ISchemaClass<CSoundOpvarSetAutoRoomEntity>.Size => 1768;
-  static string? ISchemaClass<CSoundOpvarSetAutoRoomEntity>.ClassName => "snd_opvar_set_auto_room";
 
-  
-  public ref CUtlVector<SoundOpvarTraceResult_t> TraceResults { get; }
-  
-  public ref CUtlVector<AutoRoomDoorwayPairs_t> DoorwayPairs { get; }
-  
-  public ref float Size { get; }
-  
-  public ref float HeightTolerance { get; }
-  
-  public ref float SizeSqr { get; }
+    public ref CUtlVector<SoundOpvarTraceResult_t> TraceResults { get; }
+
+    public ref CUtlVector<AutoRoomDoorwayPairs_t> DoorwayPairs { get; }
+
+    public ref float Size { get; }
+
+    public ref float HeightTolerance { get; }
+
+    public ref float SizeSqr { get; }
 
 
 }

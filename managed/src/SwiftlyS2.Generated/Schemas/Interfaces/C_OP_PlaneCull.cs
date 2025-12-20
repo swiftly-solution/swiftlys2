@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_PlaneCull : CParticleFunctionOperator, ISchemaClass<C_OP_PlaneCull> {
+public partial interface C_OP_PlaneCull : CParticleFunctionOperator, ISchemaClass<C_OP_PlaneCull>
+{
+    static C_OP_PlaneCull ISchemaClass<C_OP_PlaneCull>.From(nint handle) => new C_OP_PlaneCullImpl(handle);
+    static int ISchemaClass<C_OP_PlaneCull>.Size => 488;
+    static string? ISchemaClass<C_OP_PlaneCull>.ClassName => null;
 
-  static C_OP_PlaneCull ISchemaClass<C_OP_PlaneCull>.From(nint handle) => new C_OP_PlaneCullImpl(handle);
-  static int ISchemaClass<C_OP_PlaneCull>.Size => 488;
-  static string? ISchemaClass<C_OP_PlaneCull>.ClassName => null;
 
-  
-  public ref int PlaneControlPoint { get; }
-  
-  public ref Vector PlaneDirection { get; }
-  
-  public ref bool LocalSpace { get; }
-  
-  public ref float PlaneOffset { get; }
+    public ref int PlaneControlPoint { get; }
+
+    public ref Vector PlaneDirection { get; }
+
+    public ref bool LocalSpace { get; }
+
+    public ref float PlaneOffset { get; }
 
 
 }

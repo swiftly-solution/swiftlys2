@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_DecayOffscreen : CParticleFunctionOperator, ISchemaClass<C_OP_DecayOffscreen> {
+public partial interface C_OP_DecayOffscreen : CParticleFunctionOperator, ISchemaClass<C_OP_DecayOffscreen>
+{
+    static C_OP_DecayOffscreen ISchemaClass<C_OP_DecayOffscreen>.From(nint handle) => new C_OP_DecayOffscreenImpl(handle);
+    static int ISchemaClass<C_OP_DecayOffscreen>.Size => 832;
+    static string? ISchemaClass<C_OP_DecayOffscreen>.ClassName => null;
 
-  static C_OP_DecayOffscreen ISchemaClass<C_OP_DecayOffscreen>.From(nint handle) => new C_OP_DecayOffscreenImpl(handle);
-  static int ISchemaClass<C_OP_DecayOffscreen>.Size => 832;
-  static string? ISchemaClass<C_OP_DecayOffscreen>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput OffscreenTime { get; }
+    public CParticleCollectionFloatInput OffscreenTime { get; }
 
 
 }

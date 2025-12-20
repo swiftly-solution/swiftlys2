@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MaterialVariable_tImpl : SchemaClass, MaterialVariable_t {
+internal partial class MaterialVariable_tImpl : SchemaClass, MaterialVariable_t
+{
+    public MaterialVariable_tImpl(nint handle) : base(handle) { }
 
-  public MaterialVariable_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StrVariableOffset;
 
-  private static nint? _StrVariableOffset;
+    public string StrVariable {
+        get {
+            _StrVariableOffset = _StrVariableOffset ?? Schema.GetOffset(0xCACB71DBA52C3390);
+            return Schema.GetString(_Handle.Read<nint>(_StrVariableOffset!.Value));
+        }
+        set {
+            _StrVariableOffset = _StrVariableOffset ?? Schema.GetOffset(0xCACB71DBA52C3390);
+            Schema.SetString(_Handle, _StrVariableOffset!.Value, value);
+        }
+    } 
+    private static nint? _VariableFieldOffset;
 
-  public string StrVariable {
-    get {
-      if (_StrVariableOffset == null) {
-        _StrVariableOffset = Schema.GetOffset(0xCACB71DBA52C3390);
-      }
-      var ptr = _Handle.Read<nint>(_StrVariableOffset!.Value);
-      return Schema.GetString(ptr);
+    public ParticleAttributeIndex_t VariableField {
+        get {
+            _VariableFieldOffset = _VariableFieldOffset ?? Schema.GetOffset(0xCACB71DBF868E9B3);
+            return new ParticleAttributeIndex_tImpl(_Handle + _VariableFieldOffset!.Value);
+        }
     }
-    set {
-      if (_StrVariableOffset == null) {
-        _StrVariableOffset = Schema.GetOffset(0xCACB71DBA52C3390);
-      }
-      Schema.SetString(_Handle, _StrVariableOffset!.Value, value);
-    }
-  } 
-  private static nint? _VariableFieldOffset;
+    private static nint? _ScaleOffset;
 
-  public ParticleAttributeIndex_t VariableField {
-    get {
-      if (_VariableFieldOffset == null) {
-        _VariableFieldOffset = Schema.GetOffset(0xCACB71DBF868E9B3);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _VariableFieldOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xCACB71DBB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
-
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0xCACB71DBB731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
-    }
-  }
 
 
 }

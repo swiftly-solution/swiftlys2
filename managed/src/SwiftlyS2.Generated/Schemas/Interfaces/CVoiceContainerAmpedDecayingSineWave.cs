@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerAmpedDecayingSineWave : CVoiceContainerDecayingSineWave, ISchemaClass<CVoiceContainerAmpedDecayingSineWave> {
+public partial interface CVoiceContainerAmpedDecayingSineWave : CVoiceContainerDecayingSineWave, ISchemaClass<CVoiceContainerAmpedDecayingSineWave>
+{
+    static CVoiceContainerAmpedDecayingSineWave ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.From(nint handle) => new CVoiceContainerAmpedDecayingSineWaveImpl(handle);
+    static int ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.Size => 200;
+    static string? ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.ClassName => null;
 
-  static CVoiceContainerAmpedDecayingSineWave ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.From(nint handle) => new CVoiceContainerAmpedDecayingSineWaveImpl(handle);
-  static int ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.Size => 200;
-  static string? ISchemaClass<CVoiceContainerAmpedDecayingSineWave>.ClassName => null;
 
-  
-  public ref float GainAmount { get; }
+    public ref float GainAmount { get; }
 
 
 }

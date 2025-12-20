@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeWorldCollisionParams_tImpl : SchemaClass, FeWorldCollisionParams_t {
+internal partial class FeWorldCollisionParams_tImpl : SchemaClass, FeWorldCollisionParams_t
+{
+    public FeWorldCollisionParams_tImpl(nint handle) : base(handle) { }
 
-  public FeWorldCollisionParams_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WorldFrictionOffset;
 
-  private static nint? _WorldFrictionOffset;
-
-  public ref float WorldFriction {
-    get {
-      if (_WorldFrictionOffset == null) {
-        _WorldFrictionOffset = Schema.GetOffset(0x85D16E65E1266C23);
-      }
-      return ref _Handle.AsRef<float>(_WorldFrictionOffset!.Value);
+    public ref float WorldFriction {
+        get {
+            _WorldFrictionOffset = _WorldFrictionOffset ?? Schema.GetOffset(0x85D16E65E1266C23);
+            return ref _Handle.AsRef<float>(_WorldFrictionOffset!.Value);
+        }
     }
-  }
-  private static nint? _GroundFrictionOffset;
+    private static nint? _GroundFrictionOffset;
 
-  public ref float GroundFriction {
-    get {
-      if (_GroundFrictionOffset == null) {
-        _GroundFrictionOffset = Schema.GetOffset(0x85D16E652D394B72);
-      }
-      return ref _Handle.AsRef<float>(_GroundFrictionOffset!.Value);
+    public ref float GroundFriction {
+        get {
+            _GroundFrictionOffset = _GroundFrictionOffset ?? Schema.GetOffset(0x85D16E652D394B72);
+            return ref _Handle.AsRef<float>(_GroundFrictionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ListBeginOffset;
+    private static nint? _ListBeginOffset;
 
-  public ref ushort ListBegin {
-    get {
-      if (_ListBeginOffset == null) {
-        _ListBeginOffset = Schema.GetOffset(0x85D16E650BA98846);
-      }
-      return ref _Handle.AsRef<ushort>(_ListBeginOffset!.Value);
+    public ref ushort ListBegin {
+        get {
+            _ListBeginOffset = _ListBeginOffset ?? Schema.GetOffset(0x85D16E650BA98846);
+            return ref _Handle.AsRef<ushort>(_ListBeginOffset!.Value);
+        }
     }
-  }
-  private static nint? _ListEndOffset;
+    private static nint? _ListEndOffset;
 
-  public ref ushort ListEnd {
-    get {
-      if (_ListEndOffset == null) {
-        _ListEndOffset = Schema.GetOffset(0x85D16E658683DD62);
-      }
-      return ref _Handle.AsRef<ushort>(_ListEndOffset!.Value);
+    public ref ushort ListEnd {
+        get {
+            _ListEndOffset = _ListEndOffset ?? Schema.GetOffset(0x85D16E658683DD62);
+            return ref _Handle.AsRef<ushort>(_ListEndOffset!.Value);
+        }
     }
-  }
 
 
 }

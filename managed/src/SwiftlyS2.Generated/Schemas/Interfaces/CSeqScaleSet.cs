@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqScaleSet : ISchemaClass<CSeqScaleSet> {
+public partial interface CSeqScaleSet : ISchemaClass<CSeqScaleSet>
+{
+    static CSeqScaleSet ISchemaClass<CSeqScaleSet>.From(nint handle) => new CSeqScaleSetImpl(handle);
+    static int ISchemaClass<CSeqScaleSet>.Size => 80;
+    static string? ISchemaClass<CSeqScaleSet>.ClassName => null;
 
-  static CSeqScaleSet ISchemaClass<CSeqScaleSet>.From(nint handle) => new CSeqScaleSetImpl(handle);
-  static int ISchemaClass<CSeqScaleSet>.Size => 80;
-  static string? ISchemaClass<CSeqScaleSet>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public ref bool RootOffset { get; }
-  
-  public ref Vector RootOffset1 { get; }
-  
-  public ref CUtlVector<short> LocalBoneArray { get; }
-  
-  public ref CUtlVector<float> BoneScaleArray { get; }
+    public ref CBufferString Name { get; }
+
+    public ref bool RootOffset { get; }
+
+    public ref Vector RootOffset1 { get; }
+
+    public ref CUtlVector<short> LocalBoneArray { get; }
+
+    public ref CUtlVector<float> BoneScaleArray { get; }
 
 
 }

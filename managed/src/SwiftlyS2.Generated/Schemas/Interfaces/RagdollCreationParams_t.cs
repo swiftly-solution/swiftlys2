@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RagdollCreationParams_t : ISchemaClass<RagdollCreationParams_t> {
+public partial interface RagdollCreationParams_t : ISchemaClass<RagdollCreationParams_t>
+{
+    static RagdollCreationParams_t ISchemaClass<RagdollCreationParams_t>.From(nint handle) => new RagdollCreationParams_tImpl(handle);
+    static int ISchemaClass<RagdollCreationParams_t>.Size => 24;
+    static string? ISchemaClass<RagdollCreationParams_t>.ClassName => null;
 
-  static RagdollCreationParams_t ISchemaClass<RagdollCreationParams_t>.From(nint handle) => new RagdollCreationParams_tImpl(handle);
-  static int ISchemaClass<RagdollCreationParams_t>.Size => 24;
-  static string? ISchemaClass<RagdollCreationParams_t>.ClassName => null;
 
-  
-  public ref Vector Force { get; }
-  
-  public ref int ForceBone { get; }
-  
-  public ref bool ForceCurrentWorldTransform { get; }
-  
-  public ref bool UseLRURetirement { get; }
-  
-  public ref int HealthToGrant { get; }
+    public ref Vector Force { get; }
+
+    public ref int ForceBone { get; }
+
+    public ref bool ForceCurrentWorldTransform { get; }
+
+    public ref bool UseLRURetirement { get; }
+
+    public ref int HealthToGrant { get; }
 
 
 }

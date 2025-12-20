@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SpriteCardTextureType_t : uint {
-
+public enum SpriteCardTextureType_t : uint
+{
  SPRITECARD_TEXTURE_DIFFUSE = 0,
 
  SPRITECARD_TEXTURE_ZOOM = 1,

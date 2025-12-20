@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class TraceSettings_tImpl : SchemaClass, TraceSettings_t {
+internal partial class TraceSettings_tImpl : SchemaClass, TraceSettings_t
+{
+    public TraceSettings_tImpl(nint handle) : base(handle) { }
 
-  public TraceSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TraceHeightOffset;
 
-  private static nint? _TraceHeightOffset;
-
-  public ref float TraceHeight {
-    get {
-      if (_TraceHeightOffset == null) {
-        _TraceHeightOffset = Schema.GetOffset(0x6983A048EFB858CF);
-      }
-      return ref _Handle.AsRef<float>(_TraceHeightOffset!.Value);
+    public ref float TraceHeight {
+        get {
+            _TraceHeightOffset = _TraceHeightOffset ?? Schema.GetOffset(0x6983A048EFB858CF);
+            return ref _Handle.AsRef<float>(_TraceHeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _TraceRadiusOffset;
+    private static nint? _TraceRadiusOffset;
 
-  public ref float TraceRadius {
-    get {
-      if (_TraceRadiusOffset == null) {
-        _TraceRadiusOffset = Schema.GetOffset(0x6983A0489A33E452);
-      }
-      return ref _Handle.AsRef<float>(_TraceRadiusOffset!.Value);
+    public ref float TraceRadius {
+        get {
+            _TraceRadiusOffset = _TraceRadiusOffset ?? Schema.GetOffset(0x6983A0489A33E452);
+            return ref _Handle.AsRef<float>(_TraceRadiusOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,142 +8,142 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseRendererSource2 : CParticleFunctionRenderer, ISchemaClass<CBaseRendererSource2> {
+public partial interface CBaseRendererSource2 : CParticleFunctionRenderer, ISchemaClass<CBaseRendererSource2>
+{
+    static CBaseRendererSource2 ISchemaClass<CBaseRendererSource2>.From(nint handle) => new CBaseRendererSource2Impl(handle);
+    static int ISchemaClass<CBaseRendererSource2>.Size => 11752;
+    static string? ISchemaClass<CBaseRendererSource2>.ClassName => null;
 
-  static CBaseRendererSource2 ISchemaClass<CBaseRendererSource2>.From(nint handle) => new CBaseRendererSource2Impl(handle);
-  static int ISchemaClass<CBaseRendererSource2>.Size => 11752;
-  static string? ISchemaClass<CBaseRendererSource2>.ClassName => null;
 
-  
-  public CParticleCollectionRendererFloatInput RadiusScale { get; }
-  
-  public CParticleCollectionRendererFloatInput AlphaScale { get; }
-  
-  public CParticleCollectionRendererFloatInput RollScale { get; }
-  
-  public ParticleAttributeIndex_t Alpha2Field { get; }
-  
-  public CParticleCollectionRendererVecInput ColorScale { get; }
-  
-  public ref ParticleColorBlendType_t ColorBlendType { get; }
-  
-  public ref SpriteCardShaderType_t ShaderType { get; }
-  
-  public string StrShaderOverride { get; set; }
-  
-  public CParticleCollectionRendererFloatInput CenterXOffset { get; }
-  
-  public CParticleCollectionRendererFloatInput CenterYOffset { get; }
-  
-  public ref float BumpStrength { get; }
-  
-  public ref ParticleSequenceCropOverride_t CropTextureOverride { get; }
-  
-  public ref CUtlLeanVector<TextureGroup_t, int> TexturesInput { get; }
-  
-  public ref float AnimationRate { get; }
-  
-  public ref AnimationType_t AnimationType { get; }
-  
-  public ref bool AnimateInFPS { get; }
-  
-  public CParticleCollectionRendererFloatInput MotionVectorScaleU { get; }
-  
-  public CParticleCollectionRendererFloatInput MotionVectorScaleV { get; }
-  
-  public CParticleCollectionRendererFloatInput SelfIllumAmount { get; }
-  
-  public CParticleCollectionRendererFloatInput DiffuseAmount { get; }
-  
-  public CParticleCollectionRendererFloatInput DiffuseClamp { get; }
-  
-  public ref int LightingControlPoint { get; }
-  
-  public ParticleAttributeIndex_t SelfIllumPerParticle { get; }
-  
-  public ref ParticleOutputBlendMode_t OutputBlendMode { get; }
-  
-  public ref bool GammaCorrectVertexColors { get; }
-  
-  public ref bool SaturateColorPreAlphaBlend { get; }
-  
-  public CParticleCollectionRendererFloatInput AddSelfAmount { get; }
-  
-  public CParticleCollectionRendererFloatInput Desaturation { get; }
-  
-  public CParticleCollectionRendererFloatInput OverbrightFactor { get; }
-  
-  public ref int HSVShiftControlPoint { get; }
-  
-  public ref ParticleFogType_t FogType { get; }
-  
-  public CParticleCollectionRendererFloatInput FogAmount { get; }
-  
-  public ref bool TintByFOW { get; }
-  
-  public ref bool TintByGlobalLight { get; }
-  
-  public ref SpriteCardPerParticleScale_t PerParticleAlphaReference { get; }
-  
-  public ref SpriteCardPerParticleScale_t PerParticleAlphaRefWindow { get; }
-  
-  public ref ParticleAlphaReferenceType_t AlphaReferenceType { get; }
-  
-  public CParticleCollectionRendererFloatInput AlphaReferenceSoftness { get; }
-  
-  public CParticleCollectionRendererFloatInput SourceAlphaValueToMapToZero { get; }
-  
-  public CParticleCollectionRendererFloatInput SourceAlphaValueToMapToOne { get; }
-  
-  public ref bool Refract { get; }
-  
-  public ref bool RefractSolid { get; }
-  
-  public CParticleCollectionRendererFloatInput RefractAmount { get; }
-  
-  public ref int RefractBlurRadius { get; }
-  
-  public ref BlurFilterType_t RefractBlurType { get; }
-  
-  public ref bool OnlyRenderInEffectsBloomPass { get; }
-  
-  public ref bool OnlyRenderInEffectsWaterPass { get; }
-  
-  public ref bool UseMixedResolutionRendering { get; }
-  
-  public ref bool OnlyRenderInEffecsGameOverlay { get; }
-  
-  public string StencilTestID { get; set; }
-  
-  public ref bool StencilTestExclude { get; }
-  
-  public string StencilWriteID { get; set; }
-  
-  public ref bool WriteStencilOnDepthPass { get; }
-  
-  public ref bool WriteStencilOnDepthFail { get; }
-  
-  public ref bool ReverseZBuffering { get; }
-  
-  public ref bool DisableZBuffering { get; }
-  
-  public ref ParticleDepthFeatheringMode_t FeatheringMode { get; }
-  
-  public CParticleCollectionRendererFloatInput FeatheringMinDist { get; }
-  
-  public CParticleCollectionRendererFloatInput FeatheringMaxDist { get; }
-  
-  public CParticleCollectionRendererFloatInput FeatheringFilter { get; }
-  
-  public CParticleCollectionRendererFloatInput FeatheringDepthMapFilter { get; }
-  
-  public CParticleCollectionRendererFloatInput DepthBias { get; }
-  
-  public ref ParticleSortingChoiceList_t SortMethod { get; }
-  
-  public ref bool BlendFramesSeq0 { get; }
-  
-  public ref bool MaxLuminanceBlendingSequence0 { get; }
+    public CParticleCollectionRendererFloatInput RadiusScale { get; }
+
+    public CParticleCollectionRendererFloatInput AlphaScale { get; }
+
+    public CParticleCollectionRendererFloatInput RollScale { get; }
+
+    public ParticleAttributeIndex_t Alpha2Field { get; }
+
+    public CParticleCollectionRendererVecInput ColorScale { get; }
+
+    public ref ParticleColorBlendType_t ColorBlendType { get; }
+
+    public ref SpriteCardShaderType_t ShaderType { get; }
+
+    public string StrShaderOverride { get; set; }
+
+    public CParticleCollectionRendererFloatInput CenterXOffset { get; }
+
+    public CParticleCollectionRendererFloatInput CenterYOffset { get; }
+
+    public ref float BumpStrength { get; }
+
+    public ref ParticleSequenceCropOverride_t CropTextureOverride { get; }
+
+    public ref CUtlLeanVector<TextureGroup_t, int> TexturesInput { get; }
+
+    public ref float AnimationRate { get; }
+
+    public ref AnimationType_t AnimationType { get; }
+
+    public ref bool AnimateInFPS { get; }
+
+    public CParticleCollectionRendererFloatInput MotionVectorScaleU { get; }
+
+    public CParticleCollectionRendererFloatInput MotionVectorScaleV { get; }
+
+    public CParticleCollectionRendererFloatInput SelfIllumAmount { get; }
+
+    public CParticleCollectionRendererFloatInput DiffuseAmount { get; }
+
+    public CParticleCollectionRendererFloatInput DiffuseClamp { get; }
+
+    public ref int LightingControlPoint { get; }
+
+    public ParticleAttributeIndex_t SelfIllumPerParticle { get; }
+
+    public ref ParticleOutputBlendMode_t OutputBlendMode { get; }
+
+    public ref bool GammaCorrectVertexColors { get; }
+
+    public ref bool SaturateColorPreAlphaBlend { get; }
+
+    public CParticleCollectionRendererFloatInput AddSelfAmount { get; }
+
+    public CParticleCollectionRendererFloatInput Desaturation { get; }
+
+    public CParticleCollectionRendererFloatInput OverbrightFactor { get; }
+
+    public ref int HSVShiftControlPoint { get; }
+
+    public ref ParticleFogType_t FogType { get; }
+
+    public CParticleCollectionRendererFloatInput FogAmount { get; }
+
+    public ref bool TintByFOW { get; }
+
+    public ref bool TintByGlobalLight { get; }
+
+    public ref SpriteCardPerParticleScale_t PerParticleAlphaReference { get; }
+
+    public ref SpriteCardPerParticleScale_t PerParticleAlphaRefWindow { get; }
+
+    public ref ParticleAlphaReferenceType_t AlphaReferenceType { get; }
+
+    public CParticleCollectionRendererFloatInput AlphaReferenceSoftness { get; }
+
+    public CParticleCollectionRendererFloatInput SourceAlphaValueToMapToZero { get; }
+
+    public CParticleCollectionRendererFloatInput SourceAlphaValueToMapToOne { get; }
+
+    public ref bool Refract { get; }
+
+    public ref bool RefractSolid { get; }
+
+    public CParticleCollectionRendererFloatInput RefractAmount { get; }
+
+    public ref int RefractBlurRadius { get; }
+
+    public ref BlurFilterType_t RefractBlurType { get; }
+
+    public ref bool OnlyRenderInEffectsBloomPass { get; }
+
+    public ref bool OnlyRenderInEffectsWaterPass { get; }
+
+    public ref bool UseMixedResolutionRendering { get; }
+
+    public ref bool OnlyRenderInEffecsGameOverlay { get; }
+
+    public string StencilTestID { get; set; }
+
+    public ref bool StencilTestExclude { get; }
+
+    public string StencilWriteID { get; set; }
+
+    public ref bool WriteStencilOnDepthPass { get; }
+
+    public ref bool WriteStencilOnDepthFail { get; }
+
+    public ref bool ReverseZBuffering { get; }
+
+    public ref bool DisableZBuffering { get; }
+
+    public ref ParticleDepthFeatheringMode_t FeatheringMode { get; }
+
+    public CParticleCollectionRendererFloatInput FeatheringMinDist { get; }
+
+    public CParticleCollectionRendererFloatInput FeatheringMaxDist { get; }
+
+    public CParticleCollectionRendererFloatInput FeatheringFilter { get; }
+
+    public CParticleCollectionRendererFloatInput FeatheringDepthMapFilter { get; }
+
+    public CParticleCollectionRendererFloatInput DepthBias { get; }
+
+    public ref ParticleSortingChoiceList_t SortMethod { get; }
+
+    public ref bool BlendFramesSeq0 { get; }
+
+    public ref bool MaxLuminanceBlendingSequence0 { get; }
 
 
 }

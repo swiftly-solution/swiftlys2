@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleFunctionPreEmission : CParticleFunctionOperator, ISchemaClass<CParticleFunctionPreEmission> {
+public partial interface CParticleFunctionPreEmission : CParticleFunctionOperator, ISchemaClass<CParticleFunctionPreEmission>
+{
+    static CParticleFunctionPreEmission ISchemaClass<CParticleFunctionPreEmission>.From(nint handle) => new CParticleFunctionPreEmissionImpl(handle);
+    static int ISchemaClass<CParticleFunctionPreEmission>.Size => 472;
+    static string? ISchemaClass<CParticleFunctionPreEmission>.ClassName => null;
 
-  static CParticleFunctionPreEmission ISchemaClass<CParticleFunctionPreEmission>.From(nint handle) => new CParticleFunctionPreEmissionImpl(handle);
-  static int ISchemaClass<CParticleFunctionPreEmission>.Size => 472;
-  static string? ISchemaClass<CParticleFunctionPreEmission>.ClassName => null;
 
-  
-  public ref bool RunOnce { get; }
+    public ref bool RunOnce { get; }
 
 
 }

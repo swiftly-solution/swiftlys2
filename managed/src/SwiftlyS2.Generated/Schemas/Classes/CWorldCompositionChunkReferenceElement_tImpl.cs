@@ -6,51 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CWorldCompositionChunkReferenceElement_tImpl : SchemaClass, CWorldCompositionChunkReferenceElement_t {
+internal partial class CWorldCompositionChunkReferenceElement_tImpl : SchemaClass, CWorldCompositionChunkReferenceElement_t
+{
+    public CWorldCompositionChunkReferenceElement_tImpl(nint handle) : base(handle) { }
 
-  public CWorldCompositionChunkReferenceElement_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StrMapToLoadOffset;
 
-  private static nint? _StrMapToLoadOffset;
+    public string StrMapToLoad {
+        get {
+            _StrMapToLoadOffset = _StrMapToLoadOffset ?? Schema.GetOffset(0x9B80004DE87F0C1B);
+            return Schema.GetString(_Handle.Read<nint>(_StrMapToLoadOffset!.Value));
+        }
+        set {
+            _StrMapToLoadOffset = _StrMapToLoadOffset ?? Schema.GetOffset(0x9B80004DE87F0C1B);
+            Schema.SetString(_Handle, _StrMapToLoadOffset!.Value, value);
+        }
+    } 
+    private static nint? _StrLandmarkNameOffset;
 
-  public string StrMapToLoad {
-    get {
-      if (_StrMapToLoadOffset == null) {
-        _StrMapToLoadOffset = Schema.GetOffset(0x9B80004DE87F0C1B);
-      }
-      var ptr = _Handle.Read<nint>(_StrMapToLoadOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrMapToLoadOffset == null) {
-        _StrMapToLoadOffset = Schema.GetOffset(0x9B80004DE87F0C1B);
-      }
-      Schema.SetString(_Handle, _StrMapToLoadOffset!.Value, value);
-    }
-  } 
-  private static nint? _StrLandmarkNameOffset;
-
-  public string StrLandmarkName {
-    get {
-      if (_StrLandmarkNameOffset == null) {
-        _StrLandmarkNameOffset = Schema.GetOffset(0x9B80004DE0BB30D3);
-      }
-      var ptr = _Handle.Read<nint>(_StrLandmarkNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrLandmarkNameOffset == null) {
-        _StrLandmarkNameOffset = Schema.GetOffset(0x9B80004DE0BB30D3);
-      }
-      Schema.SetString(_Handle, _StrLandmarkNameOffset!.Value, value);
-    }
-  } 
+    public string StrLandmarkName {
+        get {
+            _StrLandmarkNameOffset = _StrLandmarkNameOffset ?? Schema.GetOffset(0x9B80004DE0BB30D3);
+            return Schema.GetString(_Handle.Read<nint>(_StrLandmarkNameOffset!.Value));
+        }
+        set {
+            _StrLandmarkNameOffset = _StrLandmarkNameOffset ?? Schema.GetOffset(0x9B80004DE0BB30D3);
+            Schema.SetString(_Handle, _StrLandmarkNameOffset!.Value, value);
+        }
+    } 
 
 
 }

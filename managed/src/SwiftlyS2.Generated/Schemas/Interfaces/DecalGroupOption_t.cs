@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface DecalGroupOption_t : ISchemaClass<DecalGroupOption_t> {
+public partial interface DecalGroupOption_t : ISchemaClass<DecalGroupOption_t>
+{
+    static DecalGroupOption_t ISchemaClass<DecalGroupOption_t>.From(nint handle) => new DecalGroupOption_tImpl(handle);
+    static int ISchemaClass<DecalGroupOption_t>.Size => 32;
+    static string? ISchemaClass<DecalGroupOption_t>.ClassName => null;
 
-  static DecalGroupOption_t ISchemaClass<DecalGroupOption_t>.From(nint handle) => new DecalGroupOption_tImpl(handle);
-  static int ISchemaClass<DecalGroupOption_t>.Size => 32;
-  static string? ISchemaClass<DecalGroupOption_t>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
-  
-  public ref CGlobalSymbol SequenceName { get; }
-  
-  public ref float Probability { get; }
-  
-  public ref bool EnableAngleBetweenNormalAndGravityRange { get; }
-  
-  public ref float MinAngleBetweenNormalAndGravity { get; }
-  
-  public ref float MaxAngleBetweenNormalAndGravity { get; }
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
+
+    public ref CGlobalSymbol SequenceName { get; }
+
+    public ref float Probability { get; }
+
+    public ref bool EnableAngleBetweenNormalAndGravityRange { get; }
+
+    public ref float MinAngleBetweenNormalAndGravity { get; }
+
+    public ref float MaxAngleBetweenNormalAndGravity { get; }
 
 
 }

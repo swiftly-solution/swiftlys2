@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotionNodeImpl : SchemaClass, CMotionNode {
+internal partial class CMotionNodeImpl : SchemaClass, CMotionNode
+{
+    public CMotionNodeImpl(nint handle) : base(handle) { }
 
-  public CMotionNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB29D04644D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB29D04644D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _IdOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xB29D04644D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public AnimNodeID Id {
+        get {
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0xB29D0464B4B6E980);
+            return new AnimNodeIDImpl(_Handle + _IdOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xB29D04644D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _IdOffset;
-
-  public AnimNodeID Id {
-    get {
-      if (_IdOffset == null) {
-        _IdOffset = Schema.GetOffset(0xB29D0464B4B6E980);
-      }
-      return new AnimNodeIDImpl(_Handle + _IdOffset!.Value);
-    }
-  }
 
 
 }

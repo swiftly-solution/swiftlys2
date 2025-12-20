@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEntityIOOutput : ISchemaClass<CEntityIOOutput> {
+public partial interface CEntityIOOutput : ISchemaClass<CEntityIOOutput>
+{
+    static CEntityIOOutput ISchemaClass<CEntityIOOutput>.From(nint handle) => new CEntityIOOutputImpl(handle);
+    static int ISchemaClass<CEntityIOOutput>.Size => 40;
+    static string? ISchemaClass<CEntityIOOutput>.ClassName => null;
 
-  static CEntityIOOutput ISchemaClass<CEntityIOOutput>.From(nint handle) => new CEntityIOOutputImpl(handle);
-  static int ISchemaClass<CEntityIOOutput>.Size => 40;
-  static string? ISchemaClass<CEntityIOOutput>.ClassName => null;
 
-  
-  // CVariantBase< CVariantDefaultAllocator >
-  public SchemaUntypedField Value { get; }
+    // CVariantBase< CVariantDefaultAllocator >
+    public SchemaUntypedField Value { get; }
 
 
 }

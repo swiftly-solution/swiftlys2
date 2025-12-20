@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundAreaEntityOrientedBox : CSoundAreaEntityBase, ISchemaClass<CSoundAreaEntityOrientedBox> {
+public partial interface CSoundAreaEntityOrientedBox : CSoundAreaEntityBase, ISchemaClass<CSoundAreaEntityOrientedBox>
+{
+    static CSoundAreaEntityOrientedBox ISchemaClass<CSoundAreaEntityOrientedBox>.From(nint handle) => new CSoundAreaEntityOrientedBoxImpl(handle);
+    static int ISchemaClass<CSoundAreaEntityOrientedBox>.Size => 1320;
+    static string? ISchemaClass<CSoundAreaEntityOrientedBox>.ClassName => "snd_sound_area_obb";
 
-  static CSoundAreaEntityOrientedBox ISchemaClass<CSoundAreaEntityOrientedBox>.From(nint handle) => new CSoundAreaEntityOrientedBoxImpl(handle);
-  static int ISchemaClass<CSoundAreaEntityOrientedBox>.Size => 1320;
-  static string? ISchemaClass<CSoundAreaEntityOrientedBox>.ClassName => "snd_sound_area_obb";
 
-  
-  public ref Vector Min { get; }
-  
-  public ref Vector Max { get; }
+    public ref Vector Min { get; }
 
-  public void MinUpdated();
-  public void MaxUpdated();
+    public ref Vector Max { get; }
+
+    public void MinUpdated();
+    public void MaxUpdated();
 }

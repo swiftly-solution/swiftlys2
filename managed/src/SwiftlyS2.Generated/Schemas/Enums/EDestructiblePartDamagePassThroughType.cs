@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EDestructiblePartDamagePassThroughType : uint {
-
+public enum EDestructiblePartDamagePassThroughType : uint
+{
  Normal = 0,
 
  Absorb = 1,

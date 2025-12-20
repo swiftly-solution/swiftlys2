@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SolidType_t : byte {
-
+public enum SolidType_t : byte
+{
  SOLID_NONE = 0,
 
  SOLID_BSP = 1,

@@ -8,219 +8,219 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLightComponent : CEntityComponent, ISchemaClass<CLightComponent> {
+public partial interface CLightComponent : CEntityComponent, ISchemaClass<CLightComponent>
+{
+    static CLightComponent ISchemaClass<CLightComponent>.From(nint handle) => new CLightComponentImpl(handle);
+    static int ISchemaClass<CLightComponent>.Size => 440;
+    static string? ISchemaClass<CLightComponent>.ClassName => null;
 
-  static CLightComponent ISchemaClass<CLightComponent>.From(nint handle) => new CLightComponentImpl(handle);
-  static int ISchemaClass<CLightComponent>.Size => 440;
-  static string? ISchemaClass<CLightComponent>.ClassName => null;
 
-  
-  public ref CNetworkVarChainer __m_pChainEntity { get; }
-  
-  public ref Color Color { get; }
-  
-  public ref Color SecondaryColor { get; }
-  
-  public ref float Brightness { get; }
-  
-  public ref float BrightnessScale { get; }
-  
-  public ref float BrightnessMult { get; }
-  
-  public ref float Range { get; }
-  
-  public ref float Falloff { get; }
-  
-  public ref float Attenuation0 { get; }
-  
-  public ref float Attenuation1 { get; }
-  
-  public ref float Attenuation2 { get; }
-  
-  public ref float Theta { get; }
-  
-  public ref float Phi { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie { get; }
-  
-  public ref int Cascades { get; }
-  
-  public ref int CastShadows { get; }
-  
-  public ref int ShadowWidth { get; }
-  
-  public ref int ShadowHeight { get; }
-  
-  public ref bool RenderDiffuse { get; }
-  
-  public ref int RenderSpecular { get; }
-  
-  public ref bool RenderTransmissive { get; }
-  
-  public ref float OrthoLightWidth { get; }
-  
-  public ref float OrthoLightHeight { get; }
-  
-  public ref int Style { get; }
-  
-  public string Pattern { get; set; }
-  
-  public ref int CascadeRenderStaticObjects { get; }
-  
-  public ref float ShadowCascadeCrossFade { get; }
-  
-  public ref float ShadowCascadeDistanceFade { get; }
-  
-  public ref float ShadowCascadeDistance0 { get; }
-  
-  public ref float ShadowCascadeDistance1 { get; }
-  
-  public ref float ShadowCascadeDistance2 { get; }
-  
-  public ref float ShadowCascadeDistance3 { get; }
-  
-  public ref int ShadowCascadeResolution0 { get; }
-  
-  public ref int ShadowCascadeResolution1 { get; }
-  
-  public ref int ShadowCascadeResolution2 { get; }
-  
-  public ref int ShadowCascadeResolution3 { get; }
-  
-  public ref bool UsesBakedShadowing { get; }
-  
-  public ref int ShadowPriority { get; }
-  
-  public ref int BakedShadowIndex { get; }
-  
-  public ref int LightPathUniqueId { get; }
-  
-  public ref int LightMapUniqueId { get; }
-  
-  public ref bool RenderToCubemaps { get; }
-  
-  public ref bool AllowSSTGeneration { get; }
-  
-  public ref int DirectLight { get; }
-  
-  public ref int IndirectLight { get; }
-  
-  public ref float FadeMinDist { get; }
-  
-  public ref float FadeMaxDist { get; }
-  
-  public ref float ShadowFadeMinDist { get; }
-  
-  public ref float ShadowFadeMaxDist { get; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref bool Flicker { get; }
-  
-  public ref bool PrecomputedFieldsValid { get; }
-  
-  public ref Vector PrecomputedBoundsMins { get; }
-  
-  public ref Vector PrecomputedBoundsMaxs { get; }
-  
-  public ref Vector PrecomputedOBBOrigin { get; }
-  
-  public ref QAngle PrecomputedOBBAngles { get; }
-  
-  public ref Vector PrecomputedOBBExtent { get; }
-  
-  public ref float PrecomputedMaxRange { get; }
-  
-  public ref int FogLightingMode { get; }
-  
-  public ref float FogContributionStength { get; }
-  
-  public ref float NearClipPlane { get; }
-  
-  public ref Color SkyColor { get; }
-  
-  public ref float SkyIntensity { get; }
-  
-  public ref Color SkyAmbientBounce { get; }
-  
-  public ref bool UseSecondaryColor { get; }
-  
-  public ref bool MixedShadows { get; }
-  
-  public GameTime_t LightStyleStartTime { get; }
-  
-  public ref float CapsuleLength { get; }
-  
-  public ref float MinRoughness { get; }
-  
-  public ref bool PvsModifyEntity { get; }
+    public ref CNetworkVarChainer __m_pChainEntity { get; }
 
-  public void ColorUpdated();
-  public void SecondaryColorUpdated();
-  public void BrightnessUpdated();
-  public void BrightnessScaleUpdated();
-  public void BrightnessMultUpdated();
-  public void RangeUpdated();
-  public void FalloffUpdated();
-  public void Attenuation0Updated();
-  public void Attenuation1Updated();
-  public void Attenuation2Updated();
-  public void ThetaUpdated();
-  public void PhiUpdated();
-  public void LightCookieUpdated();
-  public void CascadesUpdated();
-  public void CastShadowsUpdated();
-  public void ShadowWidthUpdated();
-  public void ShadowHeightUpdated();
-  public void RenderDiffuseUpdated();
-  public void RenderSpecularUpdated();
-  public void RenderTransmissiveUpdated();
-  public void OrthoLightWidthUpdated();
-  public void OrthoLightHeightUpdated();
-  public void StyleUpdated();
-  public void PatternUpdated();
-  public void CascadeRenderStaticObjectsUpdated();
-  public void ShadowCascadeCrossFadeUpdated();
-  public void ShadowCascadeDistanceFadeUpdated();
-  public void ShadowCascadeDistance0Updated();
-  public void ShadowCascadeDistance1Updated();
-  public void ShadowCascadeDistance2Updated();
-  public void ShadowCascadeDistance3Updated();
-  public void ShadowCascadeResolution0Updated();
-  public void ShadowCascadeResolution1Updated();
-  public void ShadowCascadeResolution2Updated();
-  public void ShadowCascadeResolution3Updated();
-  public void UsesBakedShadowingUpdated();
-  public void ShadowPriorityUpdated();
-  public void BakedShadowIndexUpdated();
-  public void LightPathUniqueIdUpdated();
-  public void LightMapUniqueIdUpdated();
-  public void RenderToCubemapsUpdated();
-  public void AllowSSTGenerationUpdated();
-  public void DirectLightUpdated();
-  public void IndirectLightUpdated();
-  public void FadeMinDistUpdated();
-  public void FadeMaxDistUpdated();
-  public void ShadowFadeMinDistUpdated();
-  public void ShadowFadeMaxDistUpdated();
-  public void EnabledUpdated();
-  public void FlickerUpdated();
-  public void PrecomputedFieldsValidUpdated();
-  public void PrecomputedBoundsMinsUpdated();
-  public void PrecomputedBoundsMaxsUpdated();
-  public void PrecomputedOBBOriginUpdated();
-  public void PrecomputedOBBAnglesUpdated();
-  public void PrecomputedOBBExtentUpdated();
-  public void PrecomputedMaxRangeUpdated();
-  public void FogLightingModeUpdated();
-  public void FogContributionStengthUpdated();
-  public void NearClipPlaneUpdated();
-  public void SkyColorUpdated();
-  public void SkyIntensityUpdated();
-  public void SkyAmbientBounceUpdated();
-  public void UseSecondaryColorUpdated();
-  public void MixedShadowsUpdated();
-  public void LightStyleStartTimeUpdated();
-  public void CapsuleLengthUpdated();
-  public void MinRoughnessUpdated();
+    public ref Color Color { get; }
+
+    public ref Color SecondaryColor { get; }
+
+    public ref float Brightness { get; }
+
+    public ref float BrightnessScale { get; }
+
+    public ref float BrightnessMult { get; }
+
+    public ref float Range { get; }
+
+    public ref float Falloff { get; }
+
+    public ref float Attenuation0 { get; }
+
+    public ref float Attenuation1 { get; }
+
+    public ref float Attenuation2 { get; }
+
+    public ref float Theta { get; }
+
+    public ref float Phi { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie { get; }
+
+    public ref int Cascades { get; }
+
+    public ref int CastShadows { get; }
+
+    public ref int ShadowWidth { get; }
+
+    public ref int ShadowHeight { get; }
+
+    public ref bool RenderDiffuse { get; }
+
+    public ref int RenderSpecular { get; }
+
+    public ref bool RenderTransmissive { get; }
+
+    public ref float OrthoLightWidth { get; }
+
+    public ref float OrthoLightHeight { get; }
+
+    public ref int Style { get; }
+
+    public string Pattern { get; set; }
+
+    public ref int CascadeRenderStaticObjects { get; }
+
+    public ref float ShadowCascadeCrossFade { get; }
+
+    public ref float ShadowCascadeDistanceFade { get; }
+
+    public ref float ShadowCascadeDistance0 { get; }
+
+    public ref float ShadowCascadeDistance1 { get; }
+
+    public ref float ShadowCascadeDistance2 { get; }
+
+    public ref float ShadowCascadeDistance3 { get; }
+
+    public ref int ShadowCascadeResolution0 { get; }
+
+    public ref int ShadowCascadeResolution1 { get; }
+
+    public ref int ShadowCascadeResolution2 { get; }
+
+    public ref int ShadowCascadeResolution3 { get; }
+
+    public ref bool UsesBakedShadowing { get; }
+
+    public ref int ShadowPriority { get; }
+
+    public ref int BakedShadowIndex { get; }
+
+    public ref int LightPathUniqueId { get; }
+
+    public ref int LightMapUniqueId { get; }
+
+    public ref bool RenderToCubemaps { get; }
+
+    public ref bool AllowSSTGeneration { get; }
+
+    public ref int DirectLight { get; }
+
+    public ref int IndirectLight { get; }
+
+    public ref float FadeMinDist { get; }
+
+    public ref float FadeMaxDist { get; }
+
+    public ref float ShadowFadeMinDist { get; }
+
+    public ref float ShadowFadeMaxDist { get; }
+
+    public ref bool Enabled { get; }
+
+    public ref bool Flicker { get; }
+
+    public ref bool PrecomputedFieldsValid { get; }
+
+    public ref Vector PrecomputedBoundsMins { get; }
+
+    public ref Vector PrecomputedBoundsMaxs { get; }
+
+    public ref Vector PrecomputedOBBOrigin { get; }
+
+    public ref QAngle PrecomputedOBBAngles { get; }
+
+    public ref Vector PrecomputedOBBExtent { get; }
+
+    public ref float PrecomputedMaxRange { get; }
+
+    public ref int FogLightingMode { get; }
+
+    public ref float FogContributionStength { get; }
+
+    public ref float NearClipPlane { get; }
+
+    public ref Color SkyColor { get; }
+
+    public ref float SkyIntensity { get; }
+
+    public ref Color SkyAmbientBounce { get; }
+
+    public ref bool UseSecondaryColor { get; }
+
+    public ref bool MixedShadows { get; }
+
+    public GameTime_t LightStyleStartTime { get; }
+
+    public ref float CapsuleLength { get; }
+
+    public ref float MinRoughness { get; }
+
+    public ref bool PvsModifyEntity { get; }
+
+    public void ColorUpdated();
+    public void SecondaryColorUpdated();
+    public void BrightnessUpdated();
+    public void BrightnessScaleUpdated();
+    public void BrightnessMultUpdated();
+    public void RangeUpdated();
+    public void FalloffUpdated();
+    public void Attenuation0Updated();
+    public void Attenuation1Updated();
+    public void Attenuation2Updated();
+    public void ThetaUpdated();
+    public void PhiUpdated();
+    public void LightCookieUpdated();
+    public void CascadesUpdated();
+    public void CastShadowsUpdated();
+    public void ShadowWidthUpdated();
+    public void ShadowHeightUpdated();
+    public void RenderDiffuseUpdated();
+    public void RenderSpecularUpdated();
+    public void RenderTransmissiveUpdated();
+    public void OrthoLightWidthUpdated();
+    public void OrthoLightHeightUpdated();
+    public void StyleUpdated();
+    public void PatternUpdated();
+    public void CascadeRenderStaticObjectsUpdated();
+    public void ShadowCascadeCrossFadeUpdated();
+    public void ShadowCascadeDistanceFadeUpdated();
+    public void ShadowCascadeDistance0Updated();
+    public void ShadowCascadeDistance1Updated();
+    public void ShadowCascadeDistance2Updated();
+    public void ShadowCascadeDistance3Updated();
+    public void ShadowCascadeResolution0Updated();
+    public void ShadowCascadeResolution1Updated();
+    public void ShadowCascadeResolution2Updated();
+    public void ShadowCascadeResolution3Updated();
+    public void UsesBakedShadowingUpdated();
+    public void ShadowPriorityUpdated();
+    public void BakedShadowIndexUpdated();
+    public void LightPathUniqueIdUpdated();
+    public void LightMapUniqueIdUpdated();
+    public void RenderToCubemapsUpdated();
+    public void AllowSSTGenerationUpdated();
+    public void DirectLightUpdated();
+    public void IndirectLightUpdated();
+    public void FadeMinDistUpdated();
+    public void FadeMaxDistUpdated();
+    public void ShadowFadeMinDistUpdated();
+    public void ShadowFadeMaxDistUpdated();
+    public void EnabledUpdated();
+    public void FlickerUpdated();
+    public void PrecomputedFieldsValidUpdated();
+    public void PrecomputedBoundsMinsUpdated();
+    public void PrecomputedBoundsMaxsUpdated();
+    public void PrecomputedOBBOriginUpdated();
+    public void PrecomputedOBBAnglesUpdated();
+    public void PrecomputedOBBExtentUpdated();
+    public void PrecomputedMaxRangeUpdated();
+    public void FogLightingModeUpdated();
+    public void FogContributionStengthUpdated();
+    public void NearClipPlaneUpdated();
+    public void SkyColorUpdated();
+    public void SkyIntensityUpdated();
+    public void SkyAmbientBounceUpdated();
+    public void UseSecondaryColorUpdated();
+    public void MixedShadowsUpdated();
+    public void LightStyleStartTimeUpdated();
+    public void CapsuleLengthUpdated();
+    public void MinRoughnessUpdated();
 }

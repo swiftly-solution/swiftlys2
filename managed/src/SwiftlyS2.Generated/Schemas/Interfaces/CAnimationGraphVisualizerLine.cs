@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimationGraphVisualizerLine : CAnimationGraphVisualizerPrimitiveBase, ISchemaClass<CAnimationGraphVisualizerLine> {
+public partial interface CAnimationGraphVisualizerLine : CAnimationGraphVisualizerPrimitiveBase, ISchemaClass<CAnimationGraphVisualizerLine>
+{
+    static CAnimationGraphVisualizerLine ISchemaClass<CAnimationGraphVisualizerLine>.From(nint handle) => new CAnimationGraphVisualizerLineImpl(handle);
+    static int ISchemaClass<CAnimationGraphVisualizerLine>.Size => 112;
+    static string? ISchemaClass<CAnimationGraphVisualizerLine>.ClassName => null;
 
-  static CAnimationGraphVisualizerLine ISchemaClass<CAnimationGraphVisualizerLine>.From(nint handle) => new CAnimationGraphVisualizerLineImpl(handle);
-  static int ISchemaClass<CAnimationGraphVisualizerLine>.Size => 112;
-  static string? ISchemaClass<CAnimationGraphVisualizerLine>.ClassName => null;
 
-  
-  public ref Vector WsPositionStart { get; }
-  
-  public ref Vector WsPositionEnd { get; }
-  
-  public ref Color Color { get; }
+    public ref Vector WsPositionStart { get; }
+
+    public ref Vector WsPositionEnd { get; }
+
+    public ref Color Color { get; }
 
 
 }

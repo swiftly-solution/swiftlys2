@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFeVertexMapBuildArray : ISchemaClass<CFeVertexMapBuildArray> {
+public partial interface CFeVertexMapBuildArray : ISchemaClass<CFeVertexMapBuildArray>
+{
+    static CFeVertexMapBuildArray ISchemaClass<CFeVertexMapBuildArray>.From(nint handle) => new CFeVertexMapBuildArrayImpl(handle);
+    static int ISchemaClass<CFeVertexMapBuildArray>.Size => 24;
+    static string? ISchemaClass<CFeVertexMapBuildArray>.ClassName => null;
 
-  static CFeVertexMapBuildArray ISchemaClass<CFeVertexMapBuildArray>.From(nint handle) => new CFeVertexMapBuildArrayImpl(handle);
-  static int ISchemaClass<CFeVertexMapBuildArray>.Size => 24;
-  static string? ISchemaClass<CFeVertexMapBuildArray>.ClassName => null;
 
-  
-  public ref CUtlVector<PointerTo<FeVertexMapBuild_t>> Array { get; }
+    public ref CUtlVector<PointerTo<FeVertexMapBuild_t>> Array { get; }
 
 
 }

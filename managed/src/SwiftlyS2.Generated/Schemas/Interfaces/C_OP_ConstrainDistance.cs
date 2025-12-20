@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ConstrainDistance : CParticleFunctionConstraint, ISchemaClass<C_OP_ConstrainDistance> {
+public partial interface C_OP_ConstrainDistance : CParticleFunctionConstraint, ISchemaClass<C_OP_ConstrainDistance>
+{
+    static C_OP_ConstrainDistance ISchemaClass<C_OP_ConstrainDistance>.From(nint handle) => new C_OP_ConstrainDistanceImpl(handle);
+    static int ISchemaClass<C_OP_ConstrainDistance>.Size => 1224;
+    static string? ISchemaClass<C_OP_ConstrainDistance>.ClassName => null;
 
-  static C_OP_ConstrainDistance ISchemaClass<C_OP_ConstrainDistance>.From(nint handle) => new C_OP_ConstrainDistanceImpl(handle);
-  static int ISchemaClass<C_OP_ConstrainDistance>.Size => 1224;
-  static string? ISchemaClass<C_OP_ConstrainDistance>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput MinDistance { get; }
-  
-  public CParticleCollectionFloatInput MaxDistance { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref Vector CenterOffset { get; }
-  
-  public ref bool GlobalCenter { get; }
+    public CParticleCollectionFloatInput MinDistance { get; }
+
+    public CParticleCollectionFloatInput MaxDistance { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref Vector CenterOffset { get; }
+
+    public ref bool GlobalCenter { get; }
 
 
 }

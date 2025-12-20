@@ -6,48 +6,41 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_tImpl : SchemaClass, CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t {
+internal partial class CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_tImpl : SchemaClass, CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t
+{
+    public CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_tImpl(nint handle) : base(handle) { }
 
-  public CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ItemOffset;
 
-  private static nint? _ItemOffset;
-
-  public CEconItemView? Item {
-    get {
-      if (_ItemOffset == null) {
-        _ItemOffset = Schema.GetOffset(0x16C4EAAC5C1539E8);
-      }
-      var ptr = _Handle.Read<nint>(_ItemOffset!.Value);
-      return ptr.IsValidPtr() ? new CEconItemViewImpl(ptr) : null;
+    public CEconItemView? Item {
+        get {
+            _ItemOffset = _ItemOffset ?? Schema.GetOffset(0x16C4EAAC5C1539E8);
+            var ptr = _Handle.Read<nint>(_ItemOffset!.Value);
+            return ptr.IsValidPtr() ? new CEconItemViewImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _TeamOffset;
+    private static nint? _TeamOffset;
 
-  public ref ushort Team {
-    get {
-      if (_TeamOffset == null) {
-        _TeamOffset = Schema.GetOffset(0x16C4EAACA2FD7D0C);
-      }
-      return ref _Handle.AsRef<ushort>(_TeamOffset!.Value);
+    public ref ushort Team {
+        get {
+            _TeamOffset = _TeamOffset ?? Schema.GetOffset(0x16C4EAACA2FD7D0C);
+            return ref _Handle.AsRef<ushort>(_TeamOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlotOffset;
+    private static nint? _SlotOffset;
 
-  public ref ushort Slot {
-    get {
-      if (_SlotOffset == null) {
-        _SlotOffset = Schema.GetOffset(0x16C4EAAC70954771);
-      }
-      return ref _Handle.AsRef<ushort>(_SlotOffset!.Value);
+    public ref ushort Slot {
+        get {
+            _SlotOffset = _SlotOffset ?? Schema.GetOffset(0x16C4EAAC70954771);
+            return ref _Handle.AsRef<ushort>(_SlotOffset!.Value);
+        }
     }
-  }
 
 
 }

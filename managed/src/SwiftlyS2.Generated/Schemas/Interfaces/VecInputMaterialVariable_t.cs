@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VecInputMaterialVariable_t : ISchemaClass<VecInputMaterialVariable_t> {
+public partial interface VecInputMaterialVariable_t : ISchemaClass<VecInputMaterialVariable_t>
+{
+    static VecInputMaterialVariable_t ISchemaClass<VecInputMaterialVariable_t>.From(nint handle) => new VecInputMaterialVariable_tImpl(handle);
+    static int ISchemaClass<VecInputMaterialVariable_t>.Size => 1728;
+    static string? ISchemaClass<VecInputMaterialVariable_t>.ClassName => null;
 
-  static VecInputMaterialVariable_t ISchemaClass<VecInputMaterialVariable_t>.From(nint handle) => new VecInputMaterialVariable_tImpl(handle);
-  static int ISchemaClass<VecInputMaterialVariable_t>.Size => 1728;
-  static string? ISchemaClass<VecInputMaterialVariable_t>.ClassName => null;
 
-  
-  public string StrVariable { get; set; }
-  
-  public CParticleCollectionVecInput Input { get; }
+    public string StrVariable { get; set; }
+
+    public CParticleCollectionVecInput Input { get; }
 
 
 }

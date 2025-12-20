@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTestBlendContainerImpl : CVoiceContainerBaseImpl, CTestBlendContainer {
+internal partial class CTestBlendContainerImpl : CVoiceContainerBaseImpl, CTestBlendContainer
+{
+    public CTestBlendContainerImpl(nint handle) : base(handle) { }
 
-  public CTestBlendContainerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FirstSoundOffset;
 
-  private static nint? _FirstSoundOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> FirstSound {
-    get {
-      if (_FirstSoundOffset == null) {
-        _FirstSoundOffset = Schema.GetOffset(0x3E7BF53C666B0138);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_FirstSoundOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> FirstSound {
+        get {
+            _FirstSoundOffset = _FirstSoundOffset ?? Schema.GetOffset(0x3E7BF53C666B0138);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_FirstSoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _SecondSoundOffset;
+    private static nint? _SecondSoundOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SecondSound {
-    get {
-      if (_SecondSoundOffset == null) {
-        _SecondSoundOffset = Schema.GetOffset(0x3E7BF53CA2BC3E5C);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SecondSoundOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SecondSound {
+        get {
+            _SecondSoundOffset = _SecondSoundOffset ?? Schema.GetOffset(0x3E7BF53CA2BC3E5C);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SecondSoundOffset!.Value);
+        }
     }
-  }
 
 
 }

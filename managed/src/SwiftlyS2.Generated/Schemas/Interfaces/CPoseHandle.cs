@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPoseHandle : ISchemaClass<CPoseHandle> {
+public partial interface CPoseHandle : ISchemaClass<CPoseHandle>
+{
+    static CPoseHandle ISchemaClass<CPoseHandle>.From(nint handle) => new CPoseHandleImpl(handle);
+    static int ISchemaClass<CPoseHandle>.Size => 4;
+    static string? ISchemaClass<CPoseHandle>.ClassName => null;
 
-  static CPoseHandle ISchemaClass<CPoseHandle>.From(nint handle) => new CPoseHandleImpl(handle);
-  static int ISchemaClass<CPoseHandle>.Size => 4;
-  static string? ISchemaClass<CPoseHandle>.ClassName => null;
 
-  
-  public ref ushort Index { get; }
-  
-  public ref PoseType_t Type { get; }
+    public ref ushort Index { get; }
+
+    public ref PoseType_t Type { get; }
 
 
 }

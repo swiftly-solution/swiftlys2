@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VMixLFOShape_t : uint {
-
+public enum VMixLFOShape_t : uint
+{
  LFO_SHAPE_SINE = 0,
 
  LFO_SHAPE_SQUARE = 1,

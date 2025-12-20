@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeHingeLimitBuild_t : ISchemaClass<FeHingeLimitBuild_t> {
+public partial interface FeHingeLimitBuild_t : ISchemaClass<FeHingeLimitBuild_t>
+{
+    static FeHingeLimitBuild_t ISchemaClass<FeHingeLimitBuild_t>.From(nint handle) => new FeHingeLimitBuild_tImpl(handle);
+    static int ISchemaClass<FeHingeLimitBuild_t>.Size => 24;
+    static string? ISchemaClass<FeHingeLimitBuild_t>.ClassName => null;
 
-  static FeHingeLimitBuild_t ISchemaClass<FeHingeLimitBuild_t>.From(nint handle) => new FeHingeLimitBuild_tImpl(handle);
-  static int ISchemaClass<FeHingeLimitBuild_t>.Size => 24;
-  static string? ISchemaClass<FeHingeLimitBuild_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Node { get; }
-  
-  public ref uint Flags { get; }
-  
-  public ref float LimitCW { get; }
-  
-  public ref float LimitCCW { get; }
+    public ISchemaFixedArray<ushort> Node { get; }
+
+    public ref uint Flags { get; }
+
+    public ref float LimitCW { get; }
+
+    public ref float LimitCCW { get; }
 
 
 }

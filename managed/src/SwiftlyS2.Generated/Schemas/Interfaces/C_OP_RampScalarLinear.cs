@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RampScalarLinear : CParticleFunctionOperator, ISchemaClass<C_OP_RampScalarLinear> {
+public partial interface C_OP_RampScalarLinear : CParticleFunctionOperator, ISchemaClass<C_OP_RampScalarLinear>
+{
+    static C_OP_RampScalarLinear ISchemaClass<C_OP_RampScalarLinear>.From(nint handle) => new C_OP_RampScalarLinearImpl(handle);
+    static int ISchemaClass<C_OP_RampScalarLinear>.Size => 544;
+    static string? ISchemaClass<C_OP_RampScalarLinear>.ClassName => null;
 
-  static C_OP_RampScalarLinear ISchemaClass<C_OP_RampScalarLinear>.From(nint handle) => new C_OP_RampScalarLinearImpl(handle);
-  static int ISchemaClass<C_OP_RampScalarLinear>.Size => 544;
-  static string? ISchemaClass<C_OP_RampScalarLinear>.ClassName => null;
 
-  
-  public ref float RateMin { get; }
-  
-  public ref float RateMax { get; }
-  
-  public ref float StartTime_min { get; }
-  
-  public ref float StartTime_max { get; }
-  
-  public ref float EndTime_min { get; }
-  
-  public ref float EndTime_max { get; }
-  
-  public ParticleAttributeIndex_t Field { get; }
-  
-  public ref bool ProportionalOp { get; }
+    public ref float RateMin { get; }
+
+    public ref float RateMax { get; }
+
+    public ref float StartTime_min { get; }
+
+    public ref float StartTime_max { get; }
+
+    public ref float EndTime_min { get; }
+
+    public ref float EndTime_max { get; }
+
+    public ParticleAttributeIndex_t Field { get; }
+
+    public ref bool ProportionalOp { get; }
 
 
 }

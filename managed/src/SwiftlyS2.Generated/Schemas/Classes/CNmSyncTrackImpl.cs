@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmSyncTrackImpl : SchemaClass, CNmSyncTrack {
+internal partial class CNmSyncTrackImpl : SchemaClass, CNmSyncTrack
+{
+    public CNmSyncTrackImpl(nint handle) : base(handle) { }
 
-  public CNmSyncTrackImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SyncEventsOffset;
 
-  private static nint? _SyncEventsOffset;
-
-  public SchemaUntypedField SyncEvents {
-    get {
-      if (_SyncEventsOffset == null) {
-        _SyncEventsOffset = Schema.GetOffset(0x29C7FA0336BAB4FF);
-      }
-      return new SchemaUntypedField(_Handle + _SyncEventsOffset!.Value);
+    public SchemaUntypedField SyncEvents {
+        get {
+            _SyncEventsOffset = _SyncEventsOffset ?? Schema.GetOffset(0x29C7FA0336BAB4FF);
+            return new SchemaUntypedField(_Handle + _SyncEventsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartEventOffsetOffset;
+    private static nint? _StartEventOffsetOffset;
 
-  public ref int StartEventOffset {
-    get {
-      if (_StartEventOffsetOffset == null) {
-        _StartEventOffsetOffset = Schema.GetOffset(0x29C7FA03DDBC640E);
-      }
-      return ref _Handle.AsRef<int>(_StartEventOffsetOffset!.Value);
+    public ref int StartEventOffset {
+        get {
+            _StartEventOffsetOffset = _StartEventOffsetOffset ?? Schema.GetOffset(0x29C7FA03DDBC640E);
+            return ref _Handle.AsRef<int>(_StartEventOffsetOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_AlphaDecay : CParticleFunctionOperator, ISchemaClass<C_OP_AlphaDecay> {
+public partial interface C_OP_AlphaDecay : CParticleFunctionOperator, ISchemaClass<C_OP_AlphaDecay>
+{
+    static C_OP_AlphaDecay ISchemaClass<C_OP_AlphaDecay>.From(nint handle) => new C_OP_AlphaDecayImpl(handle);
+    static int ISchemaClass<C_OP_AlphaDecay>.Size => 472;
+    static string? ISchemaClass<C_OP_AlphaDecay>.ClassName => null;
 
-  static C_OP_AlphaDecay ISchemaClass<C_OP_AlphaDecay>.From(nint handle) => new C_OP_AlphaDecayImpl(handle);
-  static int ISchemaClass<C_OP_AlphaDecay>.Size => 472;
-  static string? ISchemaClass<C_OP_AlphaDecay>.ClassName => null;
 
-  
-  public ref float MinAlpha { get; }
+    public ref float MinAlpha { get; }
 
 
 }

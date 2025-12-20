@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSDFRigid_t : ISchemaClass<FeSDFRigid_t> {
+public partial interface FeSDFRigid_t : ISchemaClass<FeSDFRigid_t>
+{
+    static FeSDFRigid_t ISchemaClass<FeSDFRigid_t>.From(nint handle) => new FeSDFRigid_tImpl(handle);
+    static int ISchemaClass<FeSDFRigid_t>.Size => 80;
+    static string? ISchemaClass<FeSDFRigid_t>.ClassName => null;
 
-  static FeSDFRigid_t ISchemaClass<FeSDFRigid_t>.From(nint handle) => new FeSDFRigid_tImpl(handle);
-  static int ISchemaClass<FeSDFRigid_t>.Size => 80;
-  static string? ISchemaClass<FeSDFRigid_t>.ClassName => null;
 
-  
-  public ref Vector LocalMin { get; }
-  
-  public ref Vector LocalMax { get; }
-  
-  public ref float Bounciness { get; }
-  
-  public ref ushort Node { get; }
-  
-  public ref ushort CollisionMask { get; }
-  
-  public ref ushort VertexMapIndex { get; }
-  
-  public ref ushort Flags { get; }
-  
-  public ref CUtlVector<float> Distances { get; }
-  
-  public ref int Width { get; }
-  
-  public ref int Height { get; }
-  
-  public ref int Depth { get; }
+    public ref Vector LocalMin { get; }
+
+    public ref Vector LocalMax { get; }
+
+    public ref float Bounciness { get; }
+
+    public ref ushort Node { get; }
+
+    public ref ushort CollisionMask { get; }
+
+    public ref ushort VertexMapIndex { get; }
+
+    public ref ushort Flags { get; }
+
+    public ref CUtlVector<float> Distances { get; }
+
+    public ref int Width { get; }
+
+    public ref int Height { get; }
+
+    public ref int Depth { get; }
 
 
 }

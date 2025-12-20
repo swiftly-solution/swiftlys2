@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFootEventImpl : CNmEventImpl, CNmFootEvent {
+internal partial class CNmFootEventImpl : CNmEventImpl, CNmFootEvent
+{
+    public CNmFootEventImpl(nint handle) : base(handle) { }
 
-  public CNmFootEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PhaseOffset;
 
-  private static nint? _PhaseOffset;
-
-  public ref NmFootPhase_t Phase {
-    get {
-      if (_PhaseOffset == null) {
-        _PhaseOffset = Schema.GetOffset(0x1F9E5CE14846D318);
-      }
-      return ref _Handle.AsRef<NmFootPhase_t>(_PhaseOffset!.Value);
+    public ref NmFootPhase_t Phase {
+        get {
+            _PhaseOffset = _PhaseOffset ?? Schema.GetOffset(0x1F9E5CE14846D318);
+            return ref _Handle.AsRef<NmFootPhase_t>(_PhaseOffset!.Value);
+        }
     }
-  }
 
 
 }

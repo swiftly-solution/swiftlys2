@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayerController_DamageServicesImpl : CPlayerControllerComponentImpl, CCSPlayerController_DamageServices {
+internal partial class CCSPlayerController_DamageServicesImpl : CPlayerControllerComponentImpl, CCSPlayerController_DamageServices
+{
+    public CCSPlayerController_DamageServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayerController_DamageServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SendUpdateOffset;
 
-  private static nint? _SendUpdateOffset;
-
-  public ref int SendUpdate {
-    get {
-      if (_SendUpdateOffset == null) {
-        _SendUpdateOffset = Schema.GetOffset(0xC354634BBB7D4BC2);
-      }
-      return ref _Handle.AsRef<int>(_SendUpdateOffset!.Value);
+    public ref int SendUpdate {
+        get {
+            _SendUpdateOffset = _SendUpdateOffset ?? Schema.GetOffset(0xC354634BBB7D4BC2);
+            return ref _Handle.AsRef<int>(_SendUpdateOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamageListOffset;
+    private static nint? _DamageListOffset;
 
-  public ref CUtlVector<CDamageRecord> DamageList {
-    get {
-      if (_DamageListOffset == null) {
-        _DamageListOffset = Schema.GetOffset(0xC354634B48D4B628);
-      }
-      return ref _Handle.AsRef<CUtlVector<CDamageRecord>>(_DamageListOffset!.Value);
+    public ref CUtlVector<CDamageRecord> DamageList {
+        get {
+            _DamageListOffset = _DamageListOffset ?? Schema.GetOffset(0xC354634B48D4B628);
+            return ref _Handle.AsRef<CUtlVector<CDamageRecord>>(_DamageListOffset!.Value);
+        }
     }
-  }
 
-  public void SendUpdateUpdated() {
-    Schema.Update(_Handle, 0xC354634BBB7D4BC2);
-  }
-  public void DamageListUpdated() {
-    Schema.Update(_Handle, 0xC354634B48D4B628);
-  }
+    public void SendUpdateUpdated() => Schema.Update(_Handle, 0xC354634BBB7D4BC2);
+    public void DamageListUpdated() => Schema.Update(_Handle, 0xC354634B48D4B628);
 }

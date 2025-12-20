@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundOpvarSetAutoRoomEntityImpl : CSoundOpvarSetPointEntityImpl, CSoundOpvarSetAutoRoomEntity {
+internal partial class CSoundOpvarSetAutoRoomEntityImpl : CSoundOpvarSetPointEntityImpl, CSoundOpvarSetAutoRoomEntity
+{
+    public CSoundOpvarSetAutoRoomEntityImpl(nint handle) : base(handle) { }
 
-  public CSoundOpvarSetAutoRoomEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TraceResultsOffset;
 
-  private static nint? _TraceResultsOffset;
-
-  public ref CUtlVector<SoundOpvarTraceResult_t> TraceResults {
-    get {
-      if (_TraceResultsOffset == null) {
-        _TraceResultsOffset = Schema.GetOffset(0x13ABD76E24ADC8DC);
-      }
-      return ref _Handle.AsRef<CUtlVector<SoundOpvarTraceResult_t>>(_TraceResultsOffset!.Value);
+    public ref CUtlVector<SoundOpvarTraceResult_t> TraceResults {
+        get {
+            _TraceResultsOffset = _TraceResultsOffset ?? Schema.GetOffset(0x13ABD76E24ADC8DC);
+            return ref _Handle.AsRef<CUtlVector<SoundOpvarTraceResult_t>>(_TraceResultsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DoorwayPairsOffset;
+    private static nint? _DoorwayPairsOffset;
 
-  public ref CUtlVector<AutoRoomDoorwayPairs_t> DoorwayPairs {
-    get {
-      if (_DoorwayPairsOffset == null) {
-        _DoorwayPairsOffset = Schema.GetOffset(0x13ABD76EFAD6453D);
-      }
-      return ref _Handle.AsRef<CUtlVector<AutoRoomDoorwayPairs_t>>(_DoorwayPairsOffset!.Value);
+    public ref CUtlVector<AutoRoomDoorwayPairs_t> DoorwayPairs {
+        get {
+            _DoorwayPairsOffset = _DoorwayPairsOffset ?? Schema.GetOffset(0x13ABD76EFAD6453D);
+            return ref _Handle.AsRef<CUtlVector<AutoRoomDoorwayPairs_t>>(_DoorwayPairsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SizeOffset;
+    private static nint? _SizeOffset;
 
-  public ref float Size {
-    get {
-      if (_SizeOffset == null) {
-        _SizeOffset = Schema.GetOffset(0x13ABD76E4CF0EBC6);
-      }
-      return ref _Handle.AsRef<float>(_SizeOffset!.Value);
+    public ref float Size {
+        get {
+            _SizeOffset = _SizeOffset ?? Schema.GetOffset(0x13ABD76E4CF0EBC6);
+            return ref _Handle.AsRef<float>(_SizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeightToleranceOffset;
+    private static nint? _HeightToleranceOffset;
 
-  public ref float HeightTolerance {
-    get {
-      if (_HeightToleranceOffset == null) {
-        _HeightToleranceOffset = Schema.GetOffset(0x13ABD76EB388225F);
-      }
-      return ref _Handle.AsRef<float>(_HeightToleranceOffset!.Value);
+    public ref float HeightTolerance {
+        get {
+            _HeightToleranceOffset = _HeightToleranceOffset ?? Schema.GetOffset(0x13ABD76EB388225F);
+            return ref _Handle.AsRef<float>(_HeightToleranceOffset!.Value);
+        }
     }
-  }
-  private static nint? _SizeSqrOffset;
+    private static nint? _SizeSqrOffset;
 
-  public ref float SizeSqr {
-    get {
-      if (_SizeSqrOffset == null) {
-        _SizeSqrOffset = Schema.GetOffset(0x13ABD76E063EF878);
-      }
-      return ref _Handle.AsRef<float>(_SizeSqrOffset!.Value);
+    public ref float SizeSqr {
+        get {
+            _SizeSqrOffset = _SizeSqrOffset ?? Schema.GetOffset(0x13ABD76E063EF878);
+            return ref _Handle.AsRef<float>(_SizeSqrOffset!.Value);
+        }
     }
-  }
 
 
 }

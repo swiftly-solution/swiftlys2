@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerSelectorImpl : CVoiceContainerBaseImpl, CVoiceContainerSelector {
+internal partial class CVoiceContainerSelectorImpl : CVoiceContainerBaseImpl, CVoiceContainerSelector
+{
+    public CVoiceContainerSelectorImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerSelectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModeOffset;
 
-  private static nint? _ModeOffset;
-
-  public ref PlayBackMode_t Mode {
-    get {
-      if (_ModeOffset == null) {
-        _ModeOffset = Schema.GetOffset(0xF16C473A90FD5BB2);
-      }
-      return ref _Handle.AsRef<PlayBackMode_t>(_ModeOffset!.Value);
+    public ref PlayBackMode_t Mode {
+        get {
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xF16C473A90FD5BB2);
+            return ref _Handle.AsRef<PlayBackMode_t>(_ModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundsToPlayOffset;
+    private static nint? _SoundsToPlayOffset;
 
-  public CSoundContainerReferenceArray SoundsToPlay {
-    get {
-      if (_SoundsToPlayOffset == null) {
-        _SoundsToPlayOffset = Schema.GetOffset(0xF16C473ADCB5F70E);
-      }
-      return new CSoundContainerReferenceArrayImpl(_Handle + _SoundsToPlayOffset!.Value);
+    public CSoundContainerReferenceArray SoundsToPlay {
+        get {
+            _SoundsToPlayOffset = _SoundsToPlayOffset ?? Schema.GetOffset(0xF16C473ADCB5F70E);
+            return new CSoundContainerReferenceArrayImpl(_Handle + _SoundsToPlayOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProbabilityWeightsOffset;
+    private static nint? _ProbabilityWeightsOffset;
 
-  public ref CUtlVector<float> ProbabilityWeights {
-    get {
-      if (_ProbabilityWeightsOffset == null) {
-        _ProbabilityWeightsOffset = Schema.GetOffset(0xF16C473A6DABFC99);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_ProbabilityWeightsOffset!.Value);
+    public ref CUtlVector<float> ProbabilityWeights {
+        get {
+            _ProbabilityWeightsOffset = _ProbabilityWeightsOffset ?? Schema.GetOffset(0xF16C473A6DABFC99);
+            return ref _Handle.AsRef<CUtlVector<float>>(_ProbabilityWeightsOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_InterpolateRadiusImpl : CParticleFunctionOperatorImpl, C_OP_InterpolateRadius {
+internal partial class C_OP_InterpolateRadiusImpl : CParticleFunctionOperatorImpl, C_OP_InterpolateRadius
+{
+    public C_OP_InterpolateRadiusImpl(nint handle) : base(handle) { }
 
-  public C_OP_InterpolateRadiusImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartTimeOffset;
 
-  private static nint? _StartTimeOffset;
-
-  public ref float StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x1912EFA667FE9DC4);
-      }
-      return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+    public ref float StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x1912EFA667FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndTimeOffset;
+    private static nint? _EndTimeOffset;
 
-  public ref float EndTime {
-    get {
-      if (_EndTimeOffset == null) {
-        _EndTimeOffset = Schema.GetOffset(0x1912EFA62041DF9D);
-      }
-      return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+    public ref float EndTime {
+        get {
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0x1912EFA62041DF9D);
+            return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartScaleOffset;
+    private static nint? _StartScaleOffset;
 
-  public ref float StartScale {
-    get {
-      if (_StartScaleOffset == null) {
-        _StartScaleOffset = Schema.GetOffset(0x1912EFA6634567D1);
-      }
-      return ref _Handle.AsRef<float>(_StartScaleOffset!.Value);
+    public ref float StartScale {
+        get {
+            _StartScaleOffset = _StartScaleOffset ?? Schema.GetOffset(0x1912EFA6634567D1);
+            return ref _Handle.AsRef<float>(_StartScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndScaleOffset;
+    private static nint? _EndScaleOffset;
 
-  public ref float EndScale {
-    get {
-      if (_EndScaleOffset == null) {
-        _EndScaleOffset = Schema.GetOffset(0x1912EFA67F017DB6);
-      }
-      return ref _Handle.AsRef<float>(_EndScaleOffset!.Value);
+    public ref float EndScale {
+        get {
+            _EndScaleOffset = _EndScaleOffset ?? Schema.GetOffset(0x1912EFA67F017DB6);
+            return ref _Handle.AsRef<float>(_EndScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseInAndOutOffset;
+    private static nint? _EaseInAndOutOffset;
 
-  public ref bool EaseInAndOut {
-    get {
-      if (_EaseInAndOutOffset == null) {
-        _EaseInAndOutOffset = Schema.GetOffset(0x1912EFA6D14612BF);
-      }
-      return ref _Handle.AsRef<bool>(_EaseInAndOutOffset!.Value);
+    public ref bool EaseInAndOut {
+        get {
+            _EaseInAndOutOffset = _EaseInAndOutOffset ?? Schema.GetOffset(0x1912EFA6D14612BF);
+            return ref _Handle.AsRef<bool>(_EaseInAndOutOffset!.Value);
+        }
     }
-  }
-  private static nint? _BiasOffset;
+    private static nint? _BiasOffset;
 
-  public ref float Bias {
-    get {
-      if (_BiasOffset == null) {
-        _BiasOffset = Schema.GetOffset(0x1912EFA6E7EF43B6);
-      }
-      return ref _Handle.AsRef<float>(_BiasOffset!.Value);
+    public ref float Bias {
+        get {
+            _BiasOffset = _BiasOffset ?? Schema.GetOffset(0x1912EFA6E7EF43B6);
+            return ref _Handle.AsRef<float>(_BiasOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EntityDormancyType_t : uint {
-
+public enum EntityDormancyType_t : uint
+{
  ENTITY_NOT_DORMANT = 0,
 
  ENTITY_DORMANT = 1,

@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSosSoundEventGroupSchema : ISchemaClass<CSosSoundEventGroupSchema> {
+public partial interface CSosSoundEventGroupSchema : ISchemaClass<CSosSoundEventGroupSchema>
+{
+    static CSosSoundEventGroupSchema ISchemaClass<CSosSoundEventGroupSchema>.From(nint handle) => new CSosSoundEventGroupSchemaImpl(handle);
+    static int ISchemaClass<CSosSoundEventGroupSchema>.Size => 112;
+    static string? ISchemaClass<CSosSoundEventGroupSchema>.ClassName => null;
 
-  static CSosSoundEventGroupSchema ISchemaClass<CSosSoundEventGroupSchema>.From(nint handle) => new CSosSoundEventGroupSchemaImpl(handle);
-  static int ISchemaClass<CSosSoundEventGroupSchema>.Size => 112;
-  static string? ISchemaClass<CSosSoundEventGroupSchema>.ClassName => null;
 
-  
-  public ref SosGroupType_t GroupType { get; }
-  
-  public ref bool BlocksEvents { get; }
-  
-  public ref int BlockMaxCount { get; }
-  
-  public ref float MemberLifespanTime { get; }
-  
-  public ref bool InvertMatch { get; }
-  
-  public ref SosGroupFieldBehavior_t Behavior_EventName { get; }
-  
-  public string MatchSoundEventName { get; set; }
-  
-  public ref bool MatchEventSubString { get; }
-  
-  public string MatchSoundEventSubString { get; set; }
-  
-  public ref SosGroupFieldBehavior_t Behavior_EntIndex { get; }
-  
-  public ref float EntIndex { get; }
-  
-  public ref SosGroupFieldBehavior_t Behavior_Opvar { get; }
-  
-  public ref float Opvar { get; }
-  
-  public ref SosGroupFieldBehavior_t Behavior_String { get; }
-  
-  public string OpvarString { get; set; }
-  
-  public ref CUtlVector<PointerTo<CSosGroupActionSchema>> Actions { get; }
+    public ref SosGroupType_t GroupType { get; }
+
+    public ref bool BlocksEvents { get; }
+
+    public ref int BlockMaxCount { get; }
+
+    public ref float MemberLifespanTime { get; }
+
+    public ref bool InvertMatch { get; }
+
+    public ref SosGroupFieldBehavior_t Behavior_EventName { get; }
+
+    public string MatchSoundEventName { get; set; }
+
+    public ref bool MatchEventSubString { get; }
+
+    public string MatchSoundEventSubString { get; set; }
+
+    public ref SosGroupFieldBehavior_t Behavior_EntIndex { get; }
+
+    public ref float EntIndex { get; }
+
+    public ref SosGroupFieldBehavior_t Behavior_Opvar { get; }
+
+    public ref float Opvar { get; }
+
+    public ref SosGroupFieldBehavior_t Behavior_String { get; }
+
+    public string OpvarString { get; set; }
+
+    public ref CUtlVector<PointerTo<CSosGroupActionSchema>> Actions { get; }
 
 
 }

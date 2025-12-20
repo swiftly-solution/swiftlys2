@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RenderHairStrandInfo_t : ISchemaClass<RenderHairStrandInfo_t> {
+public partial interface RenderHairStrandInfo_t : ISchemaClass<RenderHairStrandInfo_t>
+{
+    static RenderHairStrandInfo_t ISchemaClass<RenderHairStrandInfo_t>.From(nint handle) => new RenderHairStrandInfo_tImpl(handle);
+    static int ISchemaClass<RenderHairStrandInfo_t>.Size => 40;
+    static string? ISchemaClass<RenderHairStrandInfo_t>.ClassName => null;
 
-  static RenderHairStrandInfo_t ISchemaClass<RenderHairStrandInfo_t>.From(nint handle) => new RenderHairStrandInfo_tImpl(handle);
-  static int ISchemaClass<RenderHairStrandInfo_t>.Size => 40;
-  static string? ISchemaClass<RenderHairStrandInfo_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<uint> GuideHairIndices_nSurfaceTriIndex { get; }
-  
-  public ISchemaFixedArray<ushort> GuideBary_vBaseBary { get; }
-  
-  public ISchemaFixedArray<ushort> RootOffset_flLengthScale { get; }
-  
-  public ISchemaFixedArray<ushort> PackedBaseUv { get; }
-  
-  public ref uint PackedSurfaceNormalOs { get; }
-  
-  public ref uint PackedSurfaceTangentOs { get; }
-  
-  public ref uint DataOffset_Segments { get; }
+    public ISchemaFixedArray<uint> GuideHairIndices_nSurfaceTriIndex { get; }
+
+    public ISchemaFixedArray<ushort> GuideBary_vBaseBary { get; }
+
+    public ISchemaFixedArray<ushort> RootOffset_flLengthScale { get; }
+
+    public ISchemaFixedArray<ushort> PackedBaseUv { get; }
+
+    public ref uint PackedSurfaceNormalOs { get; }
+
+    public ref uint PackedSurfaceTangentOs { get; }
+
+    public ref uint DataOffset_Segments { get; }
 
 
 }

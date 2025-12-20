@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmTargetWarpNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmTargetWarpNode__CDefinition> {
+public partial interface CNmTargetWarpNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmTargetWarpNode__CDefinition>
+{
+    static CNmTargetWarpNode__CDefinition ISchemaClass<CNmTargetWarpNode__CDefinition>.From(nint handle) => new CNmTargetWarpNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmTargetWarpNode__CDefinition>.Size => 48;
+    static string? ISchemaClass<CNmTargetWarpNode__CDefinition>.ClassName => null;
 
-  static CNmTargetWarpNode__CDefinition ISchemaClass<CNmTargetWarpNode__CDefinition>.From(nint handle) => new CNmTargetWarpNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmTargetWarpNode__CDefinition>.Size => 48;
-  static string? ISchemaClass<CNmTargetWarpNode__CDefinition>.ClassName => null;
 
-  
-  public ref short ClipReferenceNodeIdx { get; }
-  
-  public ref short TargetValueNodeIdx { get; }
-  
-  public ref CNmRootMotionData__SamplingMode_t SamplingMode { get; }
-  
-  public ref bool AllowTargetUpdate { get; }
-  
-  public ref float SamplingPositionErrorThresholdSq { get; }
-  
-  public ref float MaxTangentLength { get; }
-  
-  public ref float LerpFallbackDistanceThreshold { get; }
-  
-  public ref float TargetUpdateDistanceThreshold { get; }
-  
-  public ref float TargetUpdateAngleThresholdRadians { get; }
+    public ref short ClipReferenceNodeIdx { get; }
+
+    public ref short TargetValueNodeIdx { get; }
+
+    public ref CNmRootMotionData__SamplingMode_t SamplingMode { get; }
+
+    public ref bool AllowTargetUpdate { get; }
+
+    public ref float SamplingPositionErrorThresholdSq { get; }
+
+    public ref float MaxTangentLength { get; }
+
+    public ref float LerpFallbackDistanceThreshold { get; }
+
+    public ref float TargetUpdateDistanceThreshold { get; }
+
+    public ref float TargetUpdateAngleThresholdRadians { get; }
 
 
 }

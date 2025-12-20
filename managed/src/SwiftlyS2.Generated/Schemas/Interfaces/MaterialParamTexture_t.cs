@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface MaterialParamTexture_t : MaterialParam_t, ISchemaClass<MaterialParamTexture_t> {
+public partial interface MaterialParamTexture_t : MaterialParam_t, ISchemaClass<MaterialParamTexture_t>
+{
+    static MaterialParamTexture_t ISchemaClass<MaterialParamTexture_t>.From(nint handle) => new MaterialParamTexture_tImpl(handle);
+    static int ISchemaClass<MaterialParamTexture_t>.Size => 16;
+    static string? ISchemaClass<MaterialParamTexture_t>.ClassName => null;
 
-  static MaterialParamTexture_t ISchemaClass<MaterialParamTexture_t>.From(nint handle) => new MaterialParamTexture_tImpl(handle);
-  static int ISchemaClass<MaterialParamTexture_t>.Size => 16;
-  static string? ISchemaClass<MaterialParamTexture_t>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Value { get; }
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Value { get; }
 
 
 }

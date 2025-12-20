@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimFrameBlockAnimImpl : SchemaClass, CAnimFrameBlockAnim {
+internal partial class CAnimFrameBlockAnimImpl : SchemaClass, CAnimFrameBlockAnim
+{
+    public CAnimFrameBlockAnimImpl(nint handle) : base(handle) { }
 
-  public CAnimFrameBlockAnimImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartFrameOffset;
 
-  private static nint? _StartFrameOffset;
-
-  public ref int StartFrame {
-    get {
-      if (_StartFrameOffset == null) {
-        _StartFrameOffset = Schema.GetOffset(0x6318445C9134F088);
-      }
-      return ref _Handle.AsRef<int>(_StartFrameOffset!.Value);
+    public ref int StartFrame {
+        get {
+            _StartFrameOffset = _StartFrameOffset ?? Schema.GetOffset(0x6318445C9134F088);
+            return ref _Handle.AsRef<int>(_StartFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndFrameOffset;
+    private static nint? _EndFrameOffset;
 
-  public ref int EndFrame {
-    get {
-      if (_EndFrameOffset == null) {
-        _EndFrameOffset = Schema.GetOffset(0x6318445CEA91BD07);
-      }
-      return ref _Handle.AsRef<int>(_EndFrameOffset!.Value);
+    public ref int EndFrame {
+        get {
+            _EndFrameOffset = _EndFrameOffset ?? Schema.GetOffset(0x6318445CEA91BD07);
+            return ref _Handle.AsRef<int>(_EndFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _SegmentIndexArrayOffset;
+    private static nint? _SegmentIndexArrayOffset;
 
-  public ref CUtlVector<int> SegmentIndexArray {
-    get {
-      if (_SegmentIndexArrayOffset == null) {
-        _SegmentIndexArrayOffset = Schema.GetOffset(0x6318445C1A46EA6B);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_SegmentIndexArrayOffset!.Value);
+    public ref CUtlVector<int> SegmentIndexArray {
+        get {
+            _SegmentIndexArrayOffset = _SegmentIndexArrayOffset ?? Schema.GetOffset(0x6318445C1A46EA6B);
+            return ref _Handle.AsRef<CUtlVector<int>>(_SegmentIndexArrayOffset!.Value);
+        }
     }
-  }
 
 
 }

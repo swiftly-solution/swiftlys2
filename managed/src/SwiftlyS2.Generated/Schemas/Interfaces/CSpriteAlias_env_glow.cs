@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSpriteAlias_env_glow : CSprite, ISchemaClass<CSpriteAlias_env_glow> {
-
-  static CSpriteAlias_env_glow ISchemaClass<CSpriteAlias_env_glow>.From(nint handle) => new CSpriteAlias_env_glowImpl(handle);
-  static int ISchemaClass<CSpriteAlias_env_glow>.Size => 2120;
-  static string? ISchemaClass<CSpriteAlias_env_glow>.ClassName => null;
+public partial interface CSpriteAlias_env_glow : CSprite, ISchemaClass<CSpriteAlias_env_glow>
+{
+    static CSpriteAlias_env_glow ISchemaClass<CSpriteAlias_env_glow>.From(nint handle) => new CSpriteAlias_env_glowImpl(handle);
+    static int ISchemaClass<CSpriteAlias_env_glow>.Size => 2120;
+    static string? ISchemaClass<CSpriteAlias_env_glow>.ClassName => null;
 
 
 

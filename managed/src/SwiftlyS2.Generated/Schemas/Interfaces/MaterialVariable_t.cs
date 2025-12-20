@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface MaterialVariable_t : ISchemaClass<MaterialVariable_t> {
+public partial interface MaterialVariable_t : ISchemaClass<MaterialVariable_t>
+{
+    static MaterialVariable_t ISchemaClass<MaterialVariable_t>.From(nint handle) => new MaterialVariable_tImpl(handle);
+    static int ISchemaClass<MaterialVariable_t>.Size => 16;
+    static string? ISchemaClass<MaterialVariable_t>.ClassName => null;
 
-  static MaterialVariable_t ISchemaClass<MaterialVariable_t>.From(nint handle) => new MaterialVariable_tImpl(handle);
-  static int ISchemaClass<MaterialVariable_t>.Size => 16;
-  static string? ISchemaClass<MaterialVariable_t>.ClassName => null;
 
-  
-  public string StrVariable { get; set; }
-  
-  public ParticleAttributeIndex_t VariableField { get; }
-  
-  public ref float Scale { get; }
+    public string StrVariable { get; set; }
+
+    public ParticleAttributeIndex_t VariableField { get; }
+
+    public ref float Scale { get; }
 
 
 }

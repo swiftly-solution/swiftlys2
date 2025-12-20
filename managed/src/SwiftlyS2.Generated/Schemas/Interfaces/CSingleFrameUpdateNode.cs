@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSingleFrameUpdateNode : CLeafUpdateNode, ISchemaClass<CSingleFrameUpdateNode> {
+public partial interface CSingleFrameUpdateNode : CLeafUpdateNode, ISchemaClass<CSingleFrameUpdateNode>
+{
+    static CSingleFrameUpdateNode ISchemaClass<CSingleFrameUpdateNode>.From(nint handle) => new CSingleFrameUpdateNodeImpl(handle);
+    static int ISchemaClass<CSingleFrameUpdateNode>.Size => 128;
+    static string? ISchemaClass<CSingleFrameUpdateNode>.ClassName => null;
 
-  static CSingleFrameUpdateNode ISchemaClass<CSingleFrameUpdateNode>.From(nint handle) => new CSingleFrameUpdateNodeImpl(handle);
-  static int ISchemaClass<CSingleFrameUpdateNode>.Size => 128;
-  static string? ISchemaClass<CSingleFrameUpdateNode>.ClassName => null;
 
-  
-  public ref CUtlVector<SchemaUntypedField> Actions { get; }
-  
-  public CPoseHandle PoseCacheHandle { get; }
-  
-  public HSequence Sequence { get; }
-  
-  public ref float Cycle { get; }
+    public ref CUtlVector<SchemaUntypedField> Actions { get; }
+
+    public CPoseHandle PoseCacheHandle { get; }
+
+    public HSequence Sequence { get; }
+
+    public ref float Cycle { get; }
 
 
 }

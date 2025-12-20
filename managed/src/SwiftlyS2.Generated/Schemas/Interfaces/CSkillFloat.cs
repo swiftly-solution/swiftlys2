@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSkillFloat : ISchemaClass<CSkillFloat> {
+public partial interface CSkillFloat : ISchemaClass<CSkillFloat>
+{
+    static CSkillFloat ISchemaClass<CSkillFloat>.From(nint handle) => new CSkillFloatImpl(handle);
+    static int ISchemaClass<CSkillFloat>.Size => 16;
+    static string? ISchemaClass<CSkillFloat>.ClassName => null;
 
-  static CSkillFloat ISchemaClass<CSkillFloat>.From(nint handle) => new CSkillFloatImpl(handle);
-  static int ISchemaClass<CSkillFloat>.Size => 16;
-  static string? ISchemaClass<CSkillFloat>.ClassName => null;
 
-  
-  public ISchemaFixedArray<float> Value { get; }
+    public ISchemaFixedArray<float> Value { get; }
 
 
 }

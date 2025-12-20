@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FilterHealthImpl : CBaseFilterImpl, FilterHealth {
+internal partial class FilterHealthImpl : CBaseFilterImpl, FilterHealth
+{
+    public FilterHealthImpl(nint handle) : base(handle) { }
 
-  public FilterHealthImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AdrenalineActiveOffset;
 
-  private static nint? _AdrenalineActiveOffset;
-
-  public ref bool AdrenalineActive {
-    get {
-      if (_AdrenalineActiveOffset == null) {
-        _AdrenalineActiveOffset = Schema.GetOffset(0x4DD06C81671CFB30);
-      }
-      return ref _Handle.AsRef<bool>(_AdrenalineActiveOffset!.Value);
+    public ref bool AdrenalineActive {
+        get {
+            _AdrenalineActiveOffset = _AdrenalineActiveOffset ?? Schema.GetOffset(0x4DD06C81671CFB30);
+            return ref _Handle.AsRef<bool>(_AdrenalineActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _HealthMinOffset;
+    private static nint? _HealthMinOffset;
 
-  public ref int HealthMin {
-    get {
-      if (_HealthMinOffset == null) {
-        _HealthMinOffset = Schema.GetOffset(0x4DD06C8117D5C166);
-      }
-      return ref _Handle.AsRef<int>(_HealthMinOffset!.Value);
+    public ref int HealthMin {
+        get {
+            _HealthMinOffset = _HealthMinOffset ?? Schema.GetOffset(0x4DD06C8117D5C166);
+            return ref _Handle.AsRef<int>(_HealthMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _HealthMaxOffset;
+    private static nint? _HealthMaxOffset;
 
-  public ref int HealthMax {
-    get {
-      if (_HealthMaxOffset == null) {
-        _HealthMaxOffset = Schema.GetOffset(0x4DD06C8129E96574);
-      }
-      return ref _Handle.AsRef<int>(_HealthMaxOffset!.Value);
+    public ref int HealthMax {
+        get {
+            _HealthMaxOffset = _HealthMaxOffset ?? Schema.GetOffset(0x4DD06C8129E96574);
+            return ref _Handle.AsRef<int>(_HealthMaxOffset!.Value);
+        }
     }
-  }
 
 
 }

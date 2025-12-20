@@ -6,20 +6,19 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeSourceEdge_tImpl : SchemaClass, FeSourceEdge_t {
+internal partial class FeSourceEdge_tImpl : SchemaClass, FeSourceEdge_t
+{
+    public FeSourceEdge_tImpl(nint handle) : base(handle) { }
 
-  public FeSourceEdge_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x88268BD3CD6694B9, 2, 2, 2);
-  }
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x88268BD3CD6694B9, 2, 2, 2);
+    }
 
 
 }

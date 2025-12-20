@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CNmTimeConditionNode__ComparisonType_t : byte {
-
+public enum CNmTimeConditionNode__ComparisonType_t : byte
+{
  PercentageThroughState = 0,
 
  PercentageThroughSyncEvent = 1,

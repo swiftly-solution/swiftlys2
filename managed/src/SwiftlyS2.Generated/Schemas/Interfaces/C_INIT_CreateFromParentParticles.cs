@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateFromParentParticles : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateFromParentParticles> {
+public partial interface C_INIT_CreateFromParentParticles : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateFromParentParticles>
+{
+    static C_INIT_CreateFromParentParticles ISchemaClass<C_INIT_CreateFromParentParticles>.From(nint handle) => new C_INIT_CreateFromParentParticlesImpl(handle);
+    static int ISchemaClass<C_INIT_CreateFromParentParticles>.Size => 496;
+    static string? ISchemaClass<C_INIT_CreateFromParentParticles>.ClassName => null;
 
-  static C_INIT_CreateFromParentParticles ISchemaClass<C_INIT_CreateFromParentParticles>.From(nint handle) => new C_INIT_CreateFromParentParticlesImpl(handle);
-  static int ISchemaClass<C_INIT_CreateFromParentParticles>.Size => 496;
-  static string? ISchemaClass<C_INIT_CreateFromParentParticles>.ClassName => null;
 
-  
-  public ref float VelocityScale { get; }
-  
-  public ref float Increment { get; }
-  
-  public ref bool RandomDistribution { get; }
-  
-  public ref int RandomSeed { get; }
-  
-  public ref bool SubFrame { get; }
-  
-  public ref bool SetRopeSegmentID { get; }
+    public ref float VelocityScale { get; }
+
+    public ref float Increment { get; }
+
+    public ref bool RandomDistribution { get; }
+
+    public ref int RandomSeed { get; }
+
+    public ref bool SubFrame { get; }
+
+    public ref bool SetRopeSegmentID { get; }
 
 
 }

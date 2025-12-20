@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundOpvarSetEntity : CBaseEntity, ISchemaClass<CSoundOpvarSetEntity> {
+public partial interface CSoundOpvarSetEntity : CBaseEntity, ISchemaClass<CSoundOpvarSetEntity>
+{
+    static CSoundOpvarSetEntity ISchemaClass<CSoundOpvarSetEntity>.From(nint handle) => new CSoundOpvarSetEntityImpl(handle);
+    static int ISchemaClass<CSoundOpvarSetEntity>.Size => 1352;
+    static string? ISchemaClass<CSoundOpvarSetEntity>.ClassName => "snd_opvar_set";
 
-  static CSoundOpvarSetEntity ISchemaClass<CSoundOpvarSetEntity>.From(nint handle) => new CSoundOpvarSetEntityImpl(handle);
-  static int ISchemaClass<CSoundOpvarSetEntity>.Size => 1352;
-  static string? ISchemaClass<CSoundOpvarSetEntity>.ClassName => "snd_opvar_set";
 
-  
-  public string StackName { get; set; }
-  
-  public string OperatorName { get; set; }
-  
-  public string OpvarName { get; set; }
-  
-  public ref int OpvarType { get; }
-  
-  public ref int OpvarIndex { get; }
-  
-  public ref float OpvarValue { get; }
-  
-  public string OpvarValueString { get; set; }
-  
-  public ref bool SetOnSpawn { get; }
+    public string StackName { get; set; }
+
+    public string OperatorName { get; set; }
+
+    public string OpvarName { get; set; }
+
+    public ref int OpvarType { get; }
+
+    public ref int OpvarIndex { get; }
+
+    public ref float OpvarValue { get; }
+
+    public string OpvarValueString { get; set; }
+
+    public ref bool SetOnSpawn { get; }
 
 
 }

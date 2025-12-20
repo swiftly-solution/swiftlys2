@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EDestructibleParts_DestroyParameterFlags : uint {
-
+public enum EDestructibleParts_DestroyParameterFlags : uint
+{
  None = 0,
 
  GenerateBreakpieces = 1,

@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHitReactUpdateNode : CUnaryUpdateNode, ISchemaClass<CHitReactUpdateNode> {
+public partial interface CHitReactUpdateNode : CUnaryUpdateNode, ISchemaClass<CHitReactUpdateNode>
+{
+    static CHitReactUpdateNode ISchemaClass<CHitReactUpdateNode>.From(nint handle) => new CHitReactUpdateNodeImpl(handle);
+    static int ISchemaClass<CHitReactUpdateNode>.Size => 208;
+    static string? ISchemaClass<CHitReactUpdateNode>.ClassName => null;
 
-  static CHitReactUpdateNode ISchemaClass<CHitReactUpdateNode>.From(nint handle) => new CHitReactUpdateNodeImpl(handle);
-  static int ISchemaClass<CHitReactUpdateNode>.Size => 208;
-  static string? ISchemaClass<CHitReactUpdateNode>.ClassName => null;
 
-  
-  public HitReactFixedSettings_t OpFixedSettings { get; }
-  
-  public CAnimParamHandle TriggerParam { get; }
-  
-  public CAnimParamHandle HitBoneParam { get; }
-  
-  public CAnimParamHandle HitOffsetParam { get; }
-  
-  public CAnimParamHandle HitDirectionParam { get; }
-  
-  public CAnimParamHandle HitStrengthParam { get; }
-  
-  public ref float MinDelayBetweenHits { get; }
-  
-  public ref bool ResetChild { get; }
+    public HitReactFixedSettings_t OpFixedSettings { get; }
+
+    public CAnimParamHandle TriggerParam { get; }
+
+    public CAnimParamHandle HitBoneParam { get; }
+
+    public CAnimParamHandle HitOffsetParam { get; }
+
+    public CAnimParamHandle HitDirectionParam { get; }
+
+    public CAnimParamHandle HitStrengthParam { get; }
+
+    public ref float MinDelayBetweenHits { get; }
+
+    public ref bool ResetChild { get; }
 
 
 }

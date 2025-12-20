@@ -6,59 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RenderHairStrandInfo_tImpl : SchemaClass, RenderHairStrandInfo_t {
+internal partial class RenderHairStrandInfo_tImpl : SchemaClass, RenderHairStrandInfo_t
+{
+    public RenderHairStrandInfo_tImpl(nint handle) : base(handle) { }
 
-  public RenderHairStrandInfo_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<uint> GuideHairIndices_nSurfaceTriIndex {
-    get => new SchemaFixedArray<uint>(_Handle, 0x9037AEC699AC7193, 2, 4, 4);
-  }
-  public ISchemaFixedArray<ushort> GuideBary_vBaseBary {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x9037AEC6B3848BF7, 4, 2, 2);
-  }
-  public ISchemaFixedArray<ushort> RootOffset_flLengthScale {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x9037AEC67324D845, 4, 2, 2);
-  }
-  public ISchemaFixedArray<ushort> PackedBaseUv {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x9037AEC6D5457D8B, 2, 2, 2);
-  }
-  private static nint? _PackedSurfaceNormalOsOffset;
-
-  public ref uint PackedSurfaceNormalOs {
-    get {
-      if (_PackedSurfaceNormalOsOffset == null) {
-        _PackedSurfaceNormalOsOffset = Schema.GetOffset(0x9037AEC605444631);
-      }
-      return ref _Handle.AsRef<uint>(_PackedSurfaceNormalOsOffset!.Value);
+    public ISchemaFixedArray<uint> GuideHairIndices_nSurfaceTriIndex {
+        get => new SchemaFixedArray<uint>(_Handle, 0x9037AEC699AC7193, 2, 4, 4);
     }
-  }
-  private static nint? _PackedSurfaceTangentOsOffset;
-
-  public ref uint PackedSurfaceTangentOs {
-    get {
-      if (_PackedSurfaceTangentOsOffset == null) {
-        _PackedSurfaceTangentOsOffset = Schema.GetOffset(0x9037AEC6FD9896F7);
-      }
-      return ref _Handle.AsRef<uint>(_PackedSurfaceTangentOsOffset!.Value);
+    public ISchemaFixedArray<ushort> GuideBary_vBaseBary {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x9037AEC6B3848BF7, 4, 2, 2);
     }
-  }
-  private static nint? _DataOffset_SegmentsOffset;
-
-  public ref uint DataOffset_Segments {
-    get {
-      if (_DataOffset_SegmentsOffset == null) {
-        _DataOffset_SegmentsOffset = Schema.GetOffset(0x9037AEC6BB31BC1D);
-      }
-      return ref _Handle.AsRef<uint>(_DataOffset_SegmentsOffset!.Value);
+    public ISchemaFixedArray<ushort> RootOffset_flLengthScale {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x9037AEC67324D845, 4, 2, 2);
     }
-  }
+    public ISchemaFixedArray<ushort> PackedBaseUv {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x9037AEC6D5457D8B, 2, 2, 2);
+    }
+    private static nint? _PackedSurfaceNormalOsOffset;
+
+    public ref uint PackedSurfaceNormalOs {
+        get {
+            _PackedSurfaceNormalOsOffset = _PackedSurfaceNormalOsOffset ?? Schema.GetOffset(0x9037AEC605444631);
+            return ref _Handle.AsRef<uint>(_PackedSurfaceNormalOsOffset!.Value);
+        }
+    }
+    private static nint? _PackedSurfaceTangentOsOffset;
+
+    public ref uint PackedSurfaceTangentOs {
+        get {
+            _PackedSurfaceTangentOsOffset = _PackedSurfaceTangentOsOffset ?? Schema.GetOffset(0x9037AEC6FD9896F7);
+            return ref _Handle.AsRef<uint>(_PackedSurfaceTangentOsOffset!.Value);
+        }
+    }
+    private static nint? _DataOffset_SegmentsOffset;
+
+    public ref uint DataOffset_Segments {
+        get {
+            _DataOffset_SegmentsOffset = _DataOffset_SegmentsOffset ?? Schema.GetOffset(0x9037AEC6BB31BC1D);
+            return ref _Handle.AsRef<uint>(_DataOffset_SegmentsOffset!.Value);
+        }
+    }
 
 
 }

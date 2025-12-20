@@ -6,94 +6,76 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class BoneDemoCaptureSettings_tImpl : SchemaClass, BoneDemoCaptureSettings_t {
+internal partial class BoneDemoCaptureSettings_tImpl : SchemaClass, BoneDemoCaptureSettings_t
+{
+    public BoneDemoCaptureSettings_tImpl(nint handle) : base(handle) { }
 
-  public BoneDemoCaptureSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneNameOffset;
 
-  private static nint? _BoneNameOffset;
+    public string BoneName {
+        get {
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x17A5730FDEE0E0C);
+            return Schema.GetString(_Handle.Read<nint>(_BoneNameOffset!.Value));
+        }
+        set {
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x17A5730FDEE0E0C);
+            Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ErrorSplineRotationMaxOffset;
 
-  public string BoneName {
-    get {
-      if (_BoneNameOffset == null) {
-        _BoneNameOffset = Schema.GetOffset(0x17A5730FDEE0E0C);
-      }
-      var ptr = _Handle.Read<nint>(_BoneNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float ErrorSplineRotationMax {
+        get {
+            _ErrorSplineRotationMaxOffset = _ErrorSplineRotationMaxOffset ?? Schema.GetOffset(0x17A5730AB5B6CD2);
+            return ref _Handle.AsRef<float>(_ErrorSplineRotationMaxOffset!.Value);
+        }
     }
-    set {
-      if (_BoneNameOffset == null) {
-        _BoneNameOffset = Schema.GetOffset(0x17A5730FDEE0E0C);
-      }
-      Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ErrorSplineRotationMaxOffset;
+    private static nint? _ErrorSplineTranslationMaxOffset;
 
-  public ref float ErrorSplineRotationMax {
-    get {
-      if (_ErrorSplineRotationMaxOffset == null) {
-        _ErrorSplineRotationMaxOffset = Schema.GetOffset(0x17A5730AB5B6CD2);
-      }
-      return ref _Handle.AsRef<float>(_ErrorSplineRotationMaxOffset!.Value);
+    public ref float ErrorSplineTranslationMax {
+        get {
+            _ErrorSplineTranslationMaxOffset = _ErrorSplineTranslationMaxOffset ?? Schema.GetOffset(0x17A57306248F645);
+            return ref _Handle.AsRef<float>(_ErrorSplineTranslationMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ErrorSplineTranslationMaxOffset;
+    private static nint? _ErrorSplineScaleMaxOffset;
 
-  public ref float ErrorSplineTranslationMax {
-    get {
-      if (_ErrorSplineTranslationMaxOffset == null) {
-        _ErrorSplineTranslationMaxOffset = Schema.GetOffset(0x17A57306248F645);
-      }
-      return ref _Handle.AsRef<float>(_ErrorSplineTranslationMaxOffset!.Value);
+    public ref float ErrorSplineScaleMax {
+        get {
+            _ErrorSplineScaleMaxOffset = _ErrorSplineScaleMaxOffset ?? Schema.GetOffset(0x17A5730A30B95BA);
+            return ref _Handle.AsRef<float>(_ErrorSplineScaleMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ErrorSplineScaleMaxOffset;
+    private static nint? _ErrorQuantizationRotationMaxOffset;
 
-  public ref float ErrorSplineScaleMax {
-    get {
-      if (_ErrorSplineScaleMaxOffset == null) {
-        _ErrorSplineScaleMaxOffset = Schema.GetOffset(0x17A5730A30B95BA);
-      }
-      return ref _Handle.AsRef<float>(_ErrorSplineScaleMaxOffset!.Value);
+    public ref float ErrorQuantizationRotationMax {
+        get {
+            _ErrorQuantizationRotationMaxOffset = _ErrorQuantizationRotationMaxOffset ?? Schema.GetOffset(0x17A57303509C8AA);
+            return ref _Handle.AsRef<float>(_ErrorQuantizationRotationMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ErrorQuantizationRotationMaxOffset;
+    private static nint? _ErrorQuantizationTranslationMaxOffset;
 
-  public ref float ErrorQuantizationRotationMax {
-    get {
-      if (_ErrorQuantizationRotationMaxOffset == null) {
-        _ErrorQuantizationRotationMaxOffset = Schema.GetOffset(0x17A57303509C8AA);
-      }
-      return ref _Handle.AsRef<float>(_ErrorQuantizationRotationMaxOffset!.Value);
+    public ref float ErrorQuantizationTranslationMax {
+        get {
+            _ErrorQuantizationTranslationMaxOffset = _ErrorQuantizationTranslationMaxOffset ?? Schema.GetOffset(0x17A5730F1E2893D);
+            return ref _Handle.AsRef<float>(_ErrorQuantizationTranslationMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ErrorQuantizationTranslationMaxOffset;
+    private static nint? _ErrorQuantizationScaleMaxOffset;
 
-  public ref float ErrorQuantizationTranslationMax {
-    get {
-      if (_ErrorQuantizationTranslationMaxOffset == null) {
-        _ErrorQuantizationTranslationMaxOffset = Schema.GetOffset(0x17A5730F1E2893D);
-      }
-      return ref _Handle.AsRef<float>(_ErrorQuantizationTranslationMaxOffset!.Value);
+    public ref float ErrorQuantizationScaleMax {
+        get {
+            _ErrorQuantizationScaleMaxOffset = _ErrorQuantizationScaleMaxOffset ?? Schema.GetOffset(0x17A57302ACF0072);
+            return ref _Handle.AsRef<float>(_ErrorQuantizationScaleMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ErrorQuantizationScaleMaxOffset;
-
-  public ref float ErrorQuantizationScaleMax {
-    get {
-      if (_ErrorQuantizationScaleMaxOffset == null) {
-        _ErrorQuantizationScaleMaxOffset = Schema.GetOffset(0x17A57302ACF0072);
-      }
-      return ref _Handle.AsRef<float>(_ErrorQuantizationScaleMaxOffset!.Value);
-    }
-  }
 
 
 }

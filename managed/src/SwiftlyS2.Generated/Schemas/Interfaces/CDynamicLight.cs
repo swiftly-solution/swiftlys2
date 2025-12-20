@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDynamicLight : CBaseModelEntity, ISchemaClass<CDynamicLight> {
+public partial interface CDynamicLight : CBaseModelEntity, ISchemaClass<CDynamicLight>
+{
+    static CDynamicLight ISchemaClass<CDynamicLight>.From(nint handle) => new CDynamicLightImpl(handle);
+    static int ISchemaClass<CDynamicLight>.Size => 2032;
+    static string? ISchemaClass<CDynamicLight>.ClassName => "light_dynamic";
 
-  static CDynamicLight ISchemaClass<CDynamicLight>.From(nint handle) => new CDynamicLightImpl(handle);
-  static int ISchemaClass<CDynamicLight>.Size => 2032;
-  static string? ISchemaClass<CDynamicLight>.ClassName => "light_dynamic";
 
-  
-  public ref byte ActualFlags { get; }
-  
-  public ref byte Flags { get; }
-  
-  public ref byte LightStyle { get; }
-  
-  public ref bool On { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref int Exponent { get; }
-  
-  public ref float InnerAngle { get; }
-  
-  public ref float OuterAngle { get; }
-  
-  public ref float SpotRadius { get; }
+    public ref byte ActualFlags { get; }
 
-  public void FlagsUpdated();
-  public void LightStyleUpdated();
-  public void RadiusUpdated();
-  public void ExponentUpdated();
-  public void InnerAngleUpdated();
-  public void OuterAngleUpdated();
-  public void SpotRadiusUpdated();
+    public ref byte Flags { get; }
+
+    public ref byte LightStyle { get; }
+
+    public ref bool On { get; }
+
+    public ref float Radius { get; }
+
+    public ref int Exponent { get; }
+
+    public ref float InnerAngle { get; }
+
+    public ref float OuterAngle { get; }
+
+    public ref float SpotRadius { get; }
+
+    public void FlagsUpdated();
+    public void LightStyleUpdated();
+    public void RadiusUpdated();
+    public void ExponentUpdated();
+    public void InnerAngleUpdated();
+    public void OuterAngleUpdated();
+    public void SpotRadiusUpdated();
 }

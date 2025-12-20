@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFrameSnapEvent : CNmEvent, ISchemaClass<CNmFrameSnapEvent> {
+public partial interface CNmFrameSnapEvent : CNmEvent, ISchemaClass<CNmFrameSnapEvent>
+{
+    static CNmFrameSnapEvent ISchemaClass<CNmFrameSnapEvent>.From(nint handle) => new CNmFrameSnapEventImpl(handle);
+    static int ISchemaClass<CNmFrameSnapEvent>.Size => 40;
+    static string? ISchemaClass<CNmFrameSnapEvent>.ClassName => null;
 
-  static CNmFrameSnapEvent ISchemaClass<CNmFrameSnapEvent>.From(nint handle) => new CNmFrameSnapEventImpl(handle);
-  static int ISchemaClass<CNmFrameSnapEvent>.Size => 40;
-  static string? ISchemaClass<CNmFrameSnapEvent>.ClassName => null;
 
-  
-  public ref NmFrameSnapEventMode_t FrameSnapMode { get; }
+    public ref NmFrameSnapEventMode_t FrameSnapMode { get; }
 
 
 }

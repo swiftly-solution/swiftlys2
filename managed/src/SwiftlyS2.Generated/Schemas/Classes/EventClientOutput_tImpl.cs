@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventClientOutput_tImpl : SchemaClass, EventClientOutput_t {
+internal partial class EventClientOutput_tImpl : SchemaClass, EventClientOutput_t
+{
+    public EventClientOutput_tImpl(nint handle) : base(handle) { }
 
-  public EventClientOutput_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LoopStateOffset;
 
-  private static nint? _LoopStateOffset;
-
-  public EngineLoopState_t LoopState {
-    get {
-      if (_LoopStateOffset == null) {
-        _LoopStateOffset = Schema.GetOffset(0xDC610E16F928A2EC);
-      }
-      return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+    public EngineLoopState_t LoopState {
+        get {
+            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0xDC610E16F928A2EC);
+            return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _RenderTimeOffset;
+    private static nint? _RenderTimeOffset;
 
-  public ref float RenderTime {
-    get {
-      if (_RenderTimeOffset == null) {
-        _RenderTimeOffset = Schema.GetOffset(0xDC610E163C2AE65A);
-      }
-      return ref _Handle.AsRef<float>(_RenderTimeOffset!.Value);
+    public ref float RenderTime {
+        get {
+            _RenderTimeOffset = _RenderTimeOffset ?? Schema.GetOffset(0xDC610E163C2AE65A);
+            return ref _Handle.AsRef<float>(_RenderTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _RealTimeOffset;
+    private static nint? _RealTimeOffset;
 
-  public ref float RealTime {
-    get {
-      if (_RealTimeOffset == null) {
-        _RealTimeOffset = Schema.GetOffset(0xDC610E161168EC02);
-      }
-      return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+    public ref float RealTime {
+        get {
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0xDC610E161168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _RenderFrameTimeUnboundedOffset;
+    private static nint? _RenderFrameTimeUnboundedOffset;
 
-  public ref float RenderFrameTimeUnbounded {
-    get {
-      if (_RenderFrameTimeUnboundedOffset == null) {
-        _RenderFrameTimeUnboundedOffset = Schema.GetOffset(0xDC610E16735692FF);
-      }
-      return ref _Handle.AsRef<float>(_RenderFrameTimeUnboundedOffset!.Value);
+    public ref float RenderFrameTimeUnbounded {
+        get {
+            _RenderFrameTimeUnboundedOffset = _RenderFrameTimeUnboundedOffset ?? Schema.GetOffset(0xDC610E16735692FF);
+            return ref _Handle.AsRef<float>(_RenderFrameTimeUnboundedOffset!.Value);
+        }
     }
-  }
-  private static nint? _RenderOnlyOffset;
+    private static nint? _RenderOnlyOffset;
 
-  public ref bool RenderOnly {
-    get {
-      if (_RenderOnlyOffset == null) {
-        _RenderOnlyOffset = Schema.GetOffset(0xDC610E16E274559F);
-      }
-      return ref _Handle.AsRef<bool>(_RenderOnlyOffset!.Value);
+    public ref bool RenderOnly {
+        get {
+            _RenderOnlyOffset = _RenderOnlyOffset ?? Schema.GetOffset(0xDC610E16E274559F);
+            return ref _Handle.AsRef<bool>(_RenderOnlyOffset!.Value);
+        }
     }
-  }
 
 
 }

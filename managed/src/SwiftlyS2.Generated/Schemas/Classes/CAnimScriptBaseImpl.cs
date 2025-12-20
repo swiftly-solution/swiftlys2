@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimScriptBaseImpl : SchemaClass, CAnimScriptBase {
+internal partial class CAnimScriptBaseImpl : SchemaClass, CAnimScriptBase
+{
+    public CAnimScriptBaseImpl(nint handle) : base(handle) { }
 
-  public CAnimScriptBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IsValidOffset;
 
-  private static nint? _IsValidOffset;
-
-  public ref bool IsValid {
-    get {
-      if (_IsValidOffset == null) {
-        _IsValidOffset = Schema.GetOffset(0x621CEA890E4A2BC1);
-      }
-      return ref _Handle.AsRef<bool>(_IsValidOffset!.Value);
+    public ref bool IsValid {
+        get {
+            _IsValidOffset = _IsValidOffset ?? Schema.GetOffset(0x621CEA890E4A2BC1);
+            return ref _Handle.AsRef<bool>(_IsValidOffset!.Value);
+        }
     }
-  }
 
 
 }

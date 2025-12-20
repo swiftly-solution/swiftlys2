@@ -8,228 +8,228 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PhysFeModelDesc_t : ISchemaClass<PhysFeModelDesc_t> {
+public partial interface PhysFeModelDesc_t : ISchemaClass<PhysFeModelDesc_t>
+{
+    static PhysFeModelDesc_t ISchemaClass<PhysFeModelDesc_t>.From(nint handle) => new PhysFeModelDesc_tImpl(handle);
+    static int ISchemaClass<PhysFeModelDesc_t>.Size => 1712;
+    static string? ISchemaClass<PhysFeModelDesc_t>.ClassName => null;
 
-  static PhysFeModelDesc_t ISchemaClass<PhysFeModelDesc_t>.From(nint handle) => new PhysFeModelDesc_tImpl(handle);
-  static int ISchemaClass<PhysFeModelDesc_t>.Size => 1712;
-  static string? ISchemaClass<PhysFeModelDesc_t>.ClassName => null;
 
-  
-  public ref CUtlVector<uint> CtrlHash { get; }
-  
-  public ref CUtlVector<CUtlString> CtrlName { get; }
-  
-  public ref uint StaticNodeFlags { get; }
-  
-  public ref uint DynamicNodeFlags { get; }
-  
-  public ref float LocalForce { get; }
-  
-  public ref float LocalRotation { get; }
-  
-  public ref ushort NodeCount { get; }
-  
-  public ref ushort StaticNodes { get; }
-  
-  public ref ushort RotLockStaticNodes { get; }
-  
-  public ref ushort FirstPositionDrivenNode { get; }
-  
-  public ref ushort SimdTriCount1 { get; }
-  
-  public ref ushort SimdTriCount2 { get; }
-  
-  public ref ushort SimdQuadCount1 { get; }
-  
-  public ref ushort SimdQuadCount2 { get; }
-  
-  public ref ushort QuadCount1 { get; }
-  
-  public ref ushort QuadCount2 { get; }
-  
-  public ref ushort TreeDepth { get; }
-  
-  public ref ushort NodeBaseJiggleboneDependsCount { get; }
-  
-  public ref ushort RopeCount { get; }
-  
-  public ref CUtlVector<ushort> Ropes { get; }
-  
-  public ref CUtlVector<FeNodeBase_t> NodeBases { get; }
-  
-  public ref CUtlVector<FeSimdNodeBase_t> SimdNodeBases { get; }
-  
-  public ref CUtlVector<FeQuad_t> Quads { get; }
-  
-  public ref CUtlVector<FeSimdQuad_t> SimdQuads { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> SimdTris { get; }
-  
-  public ref CUtlVector<FeSimdRodConstraint_t> SimdRods { get; }
-  
-  public ref CUtlVector<FeSimdRodConstraintAnim_t> SimdRodsAnim { get; }
-  
-  public ref CUtlVector<CTransform> InitPose { get; }
-  
-  public ref CUtlVector<FeRodConstraint_t> Rods { get; }
-  
-  public ref CUtlVector<FeTwistConstraint_t> Twists { get; }
-  
-  public ref CUtlVector<FeHingeLimit_t> HingeLimits { get; }
-  
-  public ref CUtlVector<uint> AntiTunnelBytecode { get; }
-  
-  public ref CUtlVector<FeDynKinLink_t> DynKinLinks { get; }
-  
-  public ref CUtlVector<FeAntiTunnelProbe_t> AntiTunnelProbes { get; }
-  
-  public ref CUtlVector<ushort> AntiTunnelTargetNodes { get; }
-  
-  public ref CUtlVector<FeAxialEdgeBend_t> AxialEdges { get; }
-  
-  public ref CUtlVector<float> NodeInvMasses { get; }
-  
-  public ref CUtlVector<FeCtrlOffset_t> CtrlOffsets { get; }
-  
-  public ref CUtlVector<FeCtrlOsOffset_t> CtrlOsOffsets { get; }
-  
-  public ref CUtlVector<FeFollowNode_t> FollowNodes { get; }
-  
-  public ref CUtlVector<FeCollisionPlane_t> CollisionPlanes { get; }
-  
-  public ref CUtlVector<FeNodeIntegrator_t> NodeIntegrator { get; }
-  
-  public ref CUtlVector<FeSpringIntegrator_t> SpringIntegrator { get; }
-  
-  public ref CUtlVector<FeSimdSpringIntegrator_t> SimdSpringIntegrator { get; }
-  
-  public ref CUtlVector<FeWorldCollisionParams_t> WorldCollisionParams { get; }
-  
-  public ref CUtlVector<float> LegacyStretchForce { get; }
-  
-  public ref CUtlVector<float> NodeCollisionRadii { get; }
-  
-  public ref CUtlVector<float> DynNodeFriction { get; }
-  
-  public ref CUtlVector<float> LocalRotation1 { get; }
-  
-  public ref CUtlVector<float> LocalForce2 { get; }
-  
-  public ref CUtlVector<FeTaperedCapsuleStretch_t> TaperedCapsuleStretches { get; }
-  
-  public ref CUtlVector<FeTaperedCapsuleRigid_t> TaperedCapsuleRigids { get; }
-  
-  public ref CUtlVector<FeSphereRigid_t> SphereRigids { get; }
-  
-  public ref CUtlVector<ushort> WorldCollisionNodes { get; }
-  
-  public ref CUtlVector<ushort> TreeParents { get; }
-  
-  public ref CUtlVector<ushort> TreeCollisionMasks { get; }
-  
-  public ref CUtlVector<FeTreeChildren_t> TreeChildren { get; }
-  
-  public ref CUtlVector<ushort> FreeNodes { get; }
-  
-  public ref CUtlVector<FeFitMatrix_t> FitMatrices { get; }
-  
-  public ref CUtlVector<FeFitWeight_t> FitWeights { get; }
-  
-  public ref CUtlVector<FeNodeReverseOffset_t> ReverseOffsets { get; }
-  
-  public ref CUtlVector<FeAnimStrayRadius_t> AnimStrayRadii { get; }
-  
-  public ref CUtlVector<FeSimdAnimStrayRadius_t> SimdAnimStrayRadii { get; }
-  
-  public ref CUtlVector<FeKelagerBend2_t> KelagerBends { get; }
-  
-  public ref CUtlVector<FeCtrlSoftOffset_t> CtrlSoftOffsets { get; }
-  
-  public ref CUtlVector<CFeIndexedJiggleBone> JiggleBones { get; }
-  
-  public ref CUtlVector<ushort> SourceElems { get; }
-  
-  public ref CUtlVector<uint> GoalDampedSpringIntegrators { get; }
-  
-  public ref CUtlVector<FeTri_t> Tris { get; }
-  
-  public ref ushort TriCount1 { get; }
-  
-  public ref ushort TriCount2 { get; }
-  
-  public ref byte ReservedUint8 { get; }
-  
-  public ref byte ExtraPressureIterations { get; }
-  
-  public ref byte ExtraGoalIterations { get; }
-  
-  public ref byte ExtraIterations { get; }
-  
-  public ref CUtlVector<FeSDFRigid_t> SDFRigids { get; }
-  
-  public ref CUtlVector<FeBoxRigid_t> BoxRigids { get; }
-  
-  public ref CUtlVector<byte> DynNodeVertexSet { get; }
-  
-  public ref CUtlVector<uint> VertexSetNames { get; }
-  
-  public ref CUtlVector<FeRigidColliderIndices_t> RigidColliderPriorities { get; }
-  
-  public ref CUtlVector<FeMorphLayerDepr_t> MorphLayers { get; }
-  
-  public ref CUtlVector<byte> MorphSetData { get; }
-  
-  public ref CUtlVector<FeVertexMapDesc_t> VertexMaps { get; }
-  
-  public ref CUtlVector<byte> VertexMapValues { get; }
-  
-  public ref CUtlVector<FeEffectDesc_t> Effects { get; }
-  
-  public ref CUtlVector<FeCtrlOffset_t> LockToParent { get; }
-  
-  public ref CUtlVector<ushort> LockToGoal { get; }
-  
-  public ref CUtlVector<short> SkelParents { get; }
-  
-  public ref CUtlVector<FeNodeWindBase_t> DynNodeWindBases { get; }
-  
-  public ref float InternalPressure { get; }
-  
-  public ref float DefaultTimeDilation { get; }
-  
-  public ref float Windage { get; }
-  
-  public ref float WindDrag { get; }
-  
-  public ref float DefaultSurfaceStretch { get; }
-  
-  public ref float DefaultThreadStretch { get; }
-  
-  public ref float DefaultGravityScale { get; }
-  
-  public ref float DefaultVelAirDrag { get; }
-  
-  public ref float DefaultExpAirDrag { get; }
-  
-  public ref float DefaultVelQuadAirDrag { get; }
-  
-  public ref float DefaultExpQuadAirDrag { get; }
-  
-  public ref float RodVelocitySmoothRate { get; }
-  
-  public ref float QuadVelocitySmoothRate { get; }
-  
-  public ref float AddWorldCollisionRadius { get; }
-  
-  public ref float DefaultVolumetricSolveAmount { get; }
-  
-  public ref float MotionSmoothCDT { get; }
-  
-  public ref float LocalDrag1 { get; }
-  
-  public ref ushort RodVelocitySmoothIterations { get; }
-  
-  public ref ushort QuadVelocitySmoothIterations { get; }
+    public ref CUtlVector<uint> CtrlHash { get; }
+
+    public ref CUtlVector<CUtlString> CtrlName { get; }
+
+    public ref uint StaticNodeFlags { get; }
+
+    public ref uint DynamicNodeFlags { get; }
+
+    public ref float LocalForce { get; }
+
+    public ref float LocalRotation { get; }
+
+    public ref ushort NodeCount { get; }
+
+    public ref ushort StaticNodes { get; }
+
+    public ref ushort RotLockStaticNodes { get; }
+
+    public ref ushort FirstPositionDrivenNode { get; }
+
+    public ref ushort SimdTriCount1 { get; }
+
+    public ref ushort SimdTriCount2 { get; }
+
+    public ref ushort SimdQuadCount1 { get; }
+
+    public ref ushort SimdQuadCount2 { get; }
+
+    public ref ushort QuadCount1 { get; }
+
+    public ref ushort QuadCount2 { get; }
+
+    public ref ushort TreeDepth { get; }
+
+    public ref ushort NodeBaseJiggleboneDependsCount { get; }
+
+    public ref ushort RopeCount { get; }
+
+    public ref CUtlVector<ushort> Ropes { get; }
+
+    public ref CUtlVector<FeNodeBase_t> NodeBases { get; }
+
+    public ref CUtlVector<FeSimdNodeBase_t> SimdNodeBases { get; }
+
+    public ref CUtlVector<FeQuad_t> Quads { get; }
+
+    public ref CUtlVector<FeSimdQuad_t> SimdQuads { get; }
+
+    public ref CUtlVector<SchemaUntypedField> SimdTris { get; }
+
+    public ref CUtlVector<FeSimdRodConstraint_t> SimdRods { get; }
+
+    public ref CUtlVector<FeSimdRodConstraintAnim_t> SimdRodsAnim { get; }
+
+    public ref CUtlVector<CTransform> InitPose { get; }
+
+    public ref CUtlVector<FeRodConstraint_t> Rods { get; }
+
+    public ref CUtlVector<FeTwistConstraint_t> Twists { get; }
+
+    public ref CUtlVector<FeHingeLimit_t> HingeLimits { get; }
+
+    public ref CUtlVector<uint> AntiTunnelBytecode { get; }
+
+    public ref CUtlVector<FeDynKinLink_t> DynKinLinks { get; }
+
+    public ref CUtlVector<FeAntiTunnelProbe_t> AntiTunnelProbes { get; }
+
+    public ref CUtlVector<ushort> AntiTunnelTargetNodes { get; }
+
+    public ref CUtlVector<FeAxialEdgeBend_t> AxialEdges { get; }
+
+    public ref CUtlVector<float> NodeInvMasses { get; }
+
+    public ref CUtlVector<FeCtrlOffset_t> CtrlOffsets { get; }
+
+    public ref CUtlVector<FeCtrlOsOffset_t> CtrlOsOffsets { get; }
+
+    public ref CUtlVector<FeFollowNode_t> FollowNodes { get; }
+
+    public ref CUtlVector<FeCollisionPlane_t> CollisionPlanes { get; }
+
+    public ref CUtlVector<FeNodeIntegrator_t> NodeIntegrator { get; }
+
+    public ref CUtlVector<FeSpringIntegrator_t> SpringIntegrator { get; }
+
+    public ref CUtlVector<FeSimdSpringIntegrator_t> SimdSpringIntegrator { get; }
+
+    public ref CUtlVector<FeWorldCollisionParams_t> WorldCollisionParams { get; }
+
+    public ref CUtlVector<float> LegacyStretchForce { get; }
+
+    public ref CUtlVector<float> NodeCollisionRadii { get; }
+
+    public ref CUtlVector<float> DynNodeFriction { get; }
+
+    public ref CUtlVector<float> LocalRotation1 { get; }
+
+    public ref CUtlVector<float> LocalForce2 { get; }
+
+    public ref CUtlVector<FeTaperedCapsuleStretch_t> TaperedCapsuleStretches { get; }
+
+    public ref CUtlVector<FeTaperedCapsuleRigid_t> TaperedCapsuleRigids { get; }
+
+    public ref CUtlVector<FeSphereRigid_t> SphereRigids { get; }
+
+    public ref CUtlVector<ushort> WorldCollisionNodes { get; }
+
+    public ref CUtlVector<ushort> TreeParents { get; }
+
+    public ref CUtlVector<ushort> TreeCollisionMasks { get; }
+
+    public ref CUtlVector<FeTreeChildren_t> TreeChildren { get; }
+
+    public ref CUtlVector<ushort> FreeNodes { get; }
+
+    public ref CUtlVector<FeFitMatrix_t> FitMatrices { get; }
+
+    public ref CUtlVector<FeFitWeight_t> FitWeights { get; }
+
+    public ref CUtlVector<FeNodeReverseOffset_t> ReverseOffsets { get; }
+
+    public ref CUtlVector<FeAnimStrayRadius_t> AnimStrayRadii { get; }
+
+    public ref CUtlVector<FeSimdAnimStrayRadius_t> SimdAnimStrayRadii { get; }
+
+    public ref CUtlVector<FeKelagerBend2_t> KelagerBends { get; }
+
+    public ref CUtlVector<FeCtrlSoftOffset_t> CtrlSoftOffsets { get; }
+
+    public ref CUtlVector<CFeIndexedJiggleBone> JiggleBones { get; }
+
+    public ref CUtlVector<ushort> SourceElems { get; }
+
+    public ref CUtlVector<uint> GoalDampedSpringIntegrators { get; }
+
+    public ref CUtlVector<FeTri_t> Tris { get; }
+
+    public ref ushort TriCount1 { get; }
+
+    public ref ushort TriCount2 { get; }
+
+    public ref byte ReservedUint8 { get; }
+
+    public ref byte ExtraPressureIterations { get; }
+
+    public ref byte ExtraGoalIterations { get; }
+
+    public ref byte ExtraIterations { get; }
+
+    public ref CUtlVector<FeSDFRigid_t> SDFRigids { get; }
+
+    public ref CUtlVector<FeBoxRigid_t> BoxRigids { get; }
+
+    public ref CUtlVector<byte> DynNodeVertexSet { get; }
+
+    public ref CUtlVector<uint> VertexSetNames { get; }
+
+    public ref CUtlVector<FeRigidColliderIndices_t> RigidColliderPriorities { get; }
+
+    public ref CUtlVector<FeMorphLayerDepr_t> MorphLayers { get; }
+
+    public ref CUtlVector<byte> MorphSetData { get; }
+
+    public ref CUtlVector<FeVertexMapDesc_t> VertexMaps { get; }
+
+    public ref CUtlVector<byte> VertexMapValues { get; }
+
+    public ref CUtlVector<FeEffectDesc_t> Effects { get; }
+
+    public ref CUtlVector<FeCtrlOffset_t> LockToParent { get; }
+
+    public ref CUtlVector<ushort> LockToGoal { get; }
+
+    public ref CUtlVector<short> SkelParents { get; }
+
+    public ref CUtlVector<FeNodeWindBase_t> DynNodeWindBases { get; }
+
+    public ref float InternalPressure { get; }
+
+    public ref float DefaultTimeDilation { get; }
+
+    public ref float Windage { get; }
+
+    public ref float WindDrag { get; }
+
+    public ref float DefaultSurfaceStretch { get; }
+
+    public ref float DefaultThreadStretch { get; }
+
+    public ref float DefaultGravityScale { get; }
+
+    public ref float DefaultVelAirDrag { get; }
+
+    public ref float DefaultExpAirDrag { get; }
+
+    public ref float DefaultVelQuadAirDrag { get; }
+
+    public ref float DefaultExpQuadAirDrag { get; }
+
+    public ref float RodVelocitySmoothRate { get; }
+
+    public ref float QuadVelocitySmoothRate { get; }
+
+    public ref float AddWorldCollisionRadius { get; }
+
+    public ref float DefaultVolumetricSolveAmount { get; }
+
+    public ref float MotionSmoothCDT { get; }
+
+    public ref float LocalDrag1 { get; }
+
+    public ref ushort RodVelocitySmoothIterations { get; }
+
+    public ref ushort QuadVelocitySmoothIterations { get; }
 
 
 }

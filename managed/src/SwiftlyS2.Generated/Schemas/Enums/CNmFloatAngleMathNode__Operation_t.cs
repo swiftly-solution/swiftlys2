@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CNmFloatAngleMathNode__Operation_t : byte {
-
+public enum CNmFloatAngleMathNode__Operation_t : byte
+{
  ClampTo180 = 0,
 
  ClampTo360 = 1,

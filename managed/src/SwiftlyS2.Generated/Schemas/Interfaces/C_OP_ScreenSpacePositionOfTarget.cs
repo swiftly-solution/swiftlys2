@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ScreenSpacePositionOfTarget : CParticleFunctionOperator, ISchemaClass<C_OP_ScreenSpacePositionOfTarget> {
+public partial interface C_OP_ScreenSpacePositionOfTarget : CParticleFunctionOperator, ISchemaClass<C_OP_ScreenSpacePositionOfTarget>
+{
+    static C_OP_ScreenSpacePositionOfTarget ISchemaClass<C_OP_ScreenSpacePositionOfTarget>.From(nint handle) => new C_OP_ScreenSpacePositionOfTargetImpl(handle);
+    static int ISchemaClass<C_OP_ScreenSpacePositionOfTarget>.Size => 2568;
+    static string? ISchemaClass<C_OP_ScreenSpacePositionOfTarget>.ClassName => null;
 
-  static C_OP_ScreenSpacePositionOfTarget ISchemaClass<C_OP_ScreenSpacePositionOfTarget>.From(nint handle) => new C_OP_ScreenSpacePositionOfTargetImpl(handle);
-  static int ISchemaClass<C_OP_ScreenSpacePositionOfTarget>.Size => 2568;
-  static string? ISchemaClass<C_OP_ScreenSpacePositionOfTarget>.ClassName => null;
 
-  
-  public CPerParticleVecInput TargetPosition { get; }
-  
-  public ref bool OututBehindness { get; }
-  
-  public ParticleAttributeIndex_t BehindFieldOutput { get; }
-  
-  public CParticleRemapFloatInput BehindOutputRemap { get; }
-  
-  public ref ParticleSetMethod_t BehindSetMethod { get; }
+    public CPerParticleVecInput TargetPosition { get; }
+
+    public ref bool OututBehindness { get; }
+
+    public ParticleAttributeIndex_t BehindFieldOutput { get; }
+
+    public CParticleRemapFloatInput BehindOutputRemap { get; }
+
+    public ref ParticleSetMethod_t BehindSetMethod { get; }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlatTrigger : CBaseModelEntity, ISchemaClass<CPlatTrigger> {
+public partial interface CPlatTrigger : CBaseModelEntity, ISchemaClass<CPlatTrigger>
+{
+    static CPlatTrigger ISchemaClass<CPlatTrigger>.From(nint handle) => new CPlatTriggerImpl(handle);
+    static int ISchemaClass<CPlatTrigger>.Size => 2016;
+    static string? ISchemaClass<CPlatTrigger>.ClassName => "plat_trigger";
 
-  static CPlatTrigger ISchemaClass<CPlatTrigger>.From(nint handle) => new CPlatTriggerImpl(handle);
-  static int ISchemaClass<CPlatTrigger>.Size => 2016;
-  static string? ISchemaClass<CPlatTrigger>.ClassName => "plat_trigger";
 
-  
-  public ref CHandle<CFuncPlat> Platform { get; }
+    public ref CHandle<CFuncPlat> Platform { get; }
 
 
 }

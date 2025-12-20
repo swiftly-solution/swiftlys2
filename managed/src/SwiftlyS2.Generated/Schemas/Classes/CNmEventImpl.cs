@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmEventImpl : SchemaClass, CNmEvent {
+internal partial class CNmEventImpl : SchemaClass, CNmEvent
+{
+    public CNmEventImpl(nint handle) : base(handle) { }
 
-  public CNmEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartTimeSecondsOffset;
 
-  private static nint? _StartTimeSecondsOffset;
-
-  public ref float StartTimeSeconds {
-    get {
-      if (_StartTimeSecondsOffset == null) {
-        _StartTimeSecondsOffset = Schema.GetOffset(0xF9871009C1FCF499);
-      }
-      return ref _Handle.AsRef<float>(_StartTimeSecondsOffset!.Value);
+    public ref float StartTimeSeconds {
+        get {
+            _StartTimeSecondsOffset = _StartTimeSecondsOffset ?? Schema.GetOffset(0xF9871009C1FCF499);
+            return ref _Handle.AsRef<float>(_StartTimeSecondsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DurationSecondsOffset;
+    private static nint? _DurationSecondsOffset;
 
-  public ref float DurationSeconds {
-    get {
-      if (_DurationSecondsOffset == null) {
-        _DurationSecondsOffset = Schema.GetOffset(0xF9871009917797C0);
-      }
-      return ref _Handle.AsRef<float>(_DurationSecondsOffset!.Value);
+    public ref float DurationSeconds {
+        get {
+            _DurationSecondsOffset = _DurationSecondsOffset ?? Schema.GetOffset(0xF9871009917797C0);
+            return ref _Handle.AsRef<float>(_DurationSecondsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SyncIDOffset;
+    private static nint? _SyncIDOffset;
 
-  public ref CGlobalSymbol SyncID {
-    get {
-      if (_SyncIDOffset == null) {
-        _SyncIDOffset = Schema.GetOffset(0xF987100915636837);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_SyncIDOffset!.Value);
+    public ref CGlobalSymbol SyncID {
+        get {
+            _SyncIDOffset = _SyncIDOffset ?? Schema.GetOffset(0xF987100915636837);
+            return ref _Handle.AsRef<CGlobalSymbol>(_SyncIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClientOnlyOffset;
+    private static nint? _ClientOnlyOffset;
 
-  public ref bool ClientOnly {
-    get {
-      if (_ClientOnlyOffset == null) {
-        _ClientOnlyOffset = Schema.GetOffset(0xF9871009B39BA128);
-      }
-      return ref _Handle.AsRef<bool>(_ClientOnlyOffset!.Value);
+    public ref bool ClientOnly {
+        get {
+            _ClientOnlyOffset = _ClientOnlyOffset ?? Schema.GetOffset(0xF9871009B39BA128);
+            return ref _Handle.AsRef<bool>(_ClientOnlyOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,115 +8,115 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_Humanoid, ISchemaClass<CCSPlayer_MovementServices> {
+public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_Humanoid, ISchemaClass<CCSPlayer_MovementServices>
+{
+    static CCSPlayer_MovementServices ISchemaClass<CCSPlayer_MovementServices>.From(nint handle) => new CCSPlayer_MovementServicesImpl(handle);
+    static int ISchemaClass<CCSPlayer_MovementServices>.Size => 3600;
+    static string? ISchemaClass<CCSPlayer_MovementServices>.ClassName => null;
 
-  static CCSPlayer_MovementServices ISchemaClass<CCSPlayer_MovementServices>.From(nint handle) => new CCSPlayer_MovementServicesImpl(handle);
-  static int ISchemaClass<CCSPlayer_MovementServices>.Size => 3600;
-  static string? ISchemaClass<CCSPlayer_MovementServices>.ClassName => null;
 
-  
-  public ref Vector LadderNormal { get; }
-  
-  public ref int LadderSurfacePropIndex { get; }
-  
-  public ref float DuckAmount { get; }
-  
-  public ref float DuckSpeed { get; }
-  
-  public ref bool DuckOverride { get; }
-  
-  public ref bool DesiresDuck { get; }
-  
-  public ref float DuckOffset { get; }
-  
-  public ref uint DuckTimeMsecs { get; }
-  
-  public ref uint DuckJumpTimeMsecs { get; }
-  
-  public ref uint JumpTimeMsecs { get; }
-  
-  public ref float LastDuckTime { get; }
-  
-  public ref Vector2D LastPositionAtFullCrouchSpeed { get; }
-  
-  public ref bool DuckUntilOnGround { get; }
-  
-  public ref bool HasWalkMovedSinceLastJump { get; }
-  
-  public ref bool InStuckTest { get; }
-  
-  public ref int TraceCount { get; }
-  
-  public ref int StuckLast { get; }
-  
-  public ref bool SpeedCropped { get; }
-  
-  public ref int OldWaterLevel { get; }
-  
-  public ref float WaterEntryTime { get; }
-  
-  public ref Vector Forward { get; }
-  
-  public ref Vector Left { get; }
-  
-  public ref Vector Up { get; }
-  
-  public ref int GameCodeHasMovedPlayerAfterCommand { get; }
-  
-  public ref bool MadeFootstepNoise { get; }
-  
-  public ref int Footsteps { get; }
-  
-  public ref bool OldJumpPressed { get; }
-  
-  public ref float JumpPressedTime { get; }
-  
-  public GameTime_t StashGrenadeParameterWhen { get; }
-  
-  public ref ulong ButtonDownMaskPrev { get; }
-  
-  public ref float OffsetTickCompleteTime { get; }
-  
-  public ref float OffsetTickStashedSpeed { get; }
-  
-  public ref float Stamina { get; }
-  
-  public ref float HeightAtJumpStart { get; }
-  
-  public ref float MaxJumpHeightThisJump { get; }
-  
-  public ref float MaxJumpHeightLastJump { get; }
-  
-  public ref float StaminaAtJumpStart { get; }
-  
-  public ref float AccumulatedJumpError { get; }
-  
-  public ref float TicksSinceLastSurfingDetected { get; }
-  
-  public ref bool WasSurfing { get; }
-  
-  public ref Vector InputRotated { get; }
-  
-  public ref bool JumpApexPending { get; }
+    public ref Vector LadderNormal { get; }
 
-  public void LadderNormalUpdated();
-  public void LadderSurfacePropIndexUpdated();
-  public void DuckAmountUpdated();
-  public void DuckSpeedUpdated();
-  public void DuckOverrideUpdated();
-  public void DesiresDuckUpdated();
-  public void DuckOffsetUpdated();
-  public void DuckTimeMsecsUpdated();
-  public void DuckJumpTimeMsecsUpdated();
-  public void JumpTimeMsecsUpdated();
-  public void LastDuckTimeUpdated();
-  public void GameCodeHasMovedPlayerAfterCommandUpdated();
-  public void OldJumpPressedUpdated();
-  public void StashGrenadeParameterWhenUpdated();
-  public void ButtonDownMaskPrevUpdated();
-  public void OffsetTickCompleteTimeUpdated();
-  public void OffsetTickStashedSpeedUpdated();
-  public void StaminaUpdated();
-  public void WasSurfingUpdated();
-  public void JumpApexPendingUpdated();
+    public ref int LadderSurfacePropIndex { get; }
+
+    public ref float DuckAmount { get; }
+
+    public ref float DuckSpeed { get; }
+
+    public ref bool DuckOverride { get; }
+
+    public ref bool DesiresDuck { get; }
+
+    public ref float DuckOffset { get; }
+
+    public ref uint DuckTimeMsecs { get; }
+
+    public ref uint DuckJumpTimeMsecs { get; }
+
+    public ref uint JumpTimeMsecs { get; }
+
+    public ref float LastDuckTime { get; }
+
+    public ref Vector2D LastPositionAtFullCrouchSpeed { get; }
+
+    public ref bool DuckUntilOnGround { get; }
+
+    public ref bool HasWalkMovedSinceLastJump { get; }
+
+    public ref bool InStuckTest { get; }
+
+    public ref int TraceCount { get; }
+
+    public ref int StuckLast { get; }
+
+    public ref bool SpeedCropped { get; }
+
+    public ref int OldWaterLevel { get; }
+
+    public ref float WaterEntryTime { get; }
+
+    public ref Vector Forward { get; }
+
+    public ref Vector Left { get; }
+
+    public ref Vector Up { get; }
+
+    public ref int GameCodeHasMovedPlayerAfterCommand { get; }
+
+    public ref bool MadeFootstepNoise { get; }
+
+    public ref int Footsteps { get; }
+
+    public ref bool OldJumpPressed { get; }
+
+    public ref float JumpPressedTime { get; }
+
+    public GameTime_t StashGrenadeParameterWhen { get; }
+
+    public ref ulong ButtonDownMaskPrev { get; }
+
+    public ref float OffsetTickCompleteTime { get; }
+
+    public ref float OffsetTickStashedSpeed { get; }
+
+    public ref float Stamina { get; }
+
+    public ref float HeightAtJumpStart { get; }
+
+    public ref float MaxJumpHeightThisJump { get; }
+
+    public ref float MaxJumpHeightLastJump { get; }
+
+    public ref float StaminaAtJumpStart { get; }
+
+    public ref float AccumulatedJumpError { get; }
+
+    public ref float TicksSinceLastSurfingDetected { get; }
+
+    public ref bool WasSurfing { get; }
+
+    public ref Vector InputRotated { get; }
+
+    public ref bool JumpApexPending { get; }
+
+    public void LadderNormalUpdated();
+    public void LadderSurfacePropIndexUpdated();
+    public void DuckAmountUpdated();
+    public void DuckSpeedUpdated();
+    public void DuckOverrideUpdated();
+    public void DesiresDuckUpdated();
+    public void DuckOffsetUpdated();
+    public void DuckTimeMsecsUpdated();
+    public void DuckJumpTimeMsecsUpdated();
+    public void JumpTimeMsecsUpdated();
+    public void LastDuckTimeUpdated();
+    public void GameCodeHasMovedPlayerAfterCommandUpdated();
+    public void OldJumpPressedUpdated();
+    public void StashGrenadeParameterWhenUpdated();
+    public void ButtonDownMaskPrevUpdated();
+    public void OffsetTickCompleteTimeUpdated();
+    public void OffsetTickStashedSpeedUpdated();
+    public void StaminaUpdated();
+    public void WasSurfingUpdated();
+    public void JumpApexPendingUpdated();
 }

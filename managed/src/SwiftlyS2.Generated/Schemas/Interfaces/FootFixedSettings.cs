@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FootFixedSettings : ISchemaClass<FootFixedSettings> {
+public partial interface FootFixedSettings : ISchemaClass<FootFixedSettings>
+{
+    static FootFixedSettings ISchemaClass<FootFixedSettings>.From(nint handle) => new FootFixedSettingsImpl(handle);
+    static int ISchemaClass<FootFixedSettings>.Size => 64;
+    static string? ISchemaClass<FootFixedSettings>.ClassName => null;
 
-  static FootFixedSettings ISchemaClass<FootFixedSettings>.From(nint handle) => new FootFixedSettingsImpl(handle);
-  static int ISchemaClass<FootFixedSettings>.Size => 64;
-  static string? ISchemaClass<FootFixedSettings>.ClassName => null;
 
-  
-  public TraceSettings_t TraceSettings { get; }
-  
-  public ref Vector FootBaseBindPosePositionMS { get; }
-  
-  public ref float FootBaseLength { get; }
-  
-  public ref float MaxRotationLeft { get; }
-  
-  public ref float MaxRotationRight { get; }
-  
-  public ref int FootstepLandedTagIndex { get; }
-  
-  public ref bool EnableTracing { get; }
-  
-  public ref float TraceAngleBlend { get; }
-  
-  public ref int DisableTagIndex { get; }
-  
-  public ref int FootIndex { get; }
+    public TraceSettings_t TraceSettings { get; }
+
+    public ref Vector FootBaseBindPosePositionMS { get; }
+
+    public ref float FootBaseLength { get; }
+
+    public ref float MaxRotationLeft { get; }
+
+    public ref float MaxRotationRight { get; }
+
+    public ref int FootstepLandedTagIndex { get; }
+
+    public ref bool EnableTracing { get; }
+
+    public ref float TraceAngleBlend { get; }
+
+    public ref int DisableTagIndex { get; }
+
+    public ref int FootIndex { get; }
 
 
 }

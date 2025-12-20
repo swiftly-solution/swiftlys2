@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFeIndexedJiggleBoneImpl : SchemaClass, CFeIndexedJiggleBone {
+internal partial class CFeIndexedJiggleBoneImpl : SchemaClass, CFeIndexedJiggleBone
+{
+    public CFeIndexedJiggleBoneImpl(nint handle) : base(handle) { }
 
-  public CFeIndexedJiggleBoneImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodeOffset;
 
-  private static nint? _NodeOffset;
-
-  public ref uint Node {
-    get {
-      if (_NodeOffset == null) {
-        _NodeOffset = Schema.GetOffset(0x1DD153AEF6FB9B19);
-      }
-      return ref _Handle.AsRef<uint>(_NodeOffset!.Value);
+    public ref uint Node {
+        get {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x1DD153AEF6FB9B19);
+            return ref _Handle.AsRef<uint>(_NodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _JiggleParentOffset;
+    private static nint? _JiggleParentOffset;
 
-  public ref uint JiggleParent {
-    get {
-      if (_JiggleParentOffset == null) {
-        _JiggleParentOffset = Schema.GetOffset(0x1DD153AE8AABF3B9);
-      }
-      return ref _Handle.AsRef<uint>(_JiggleParentOffset!.Value);
+    public ref uint JiggleParent {
+        get {
+            _JiggleParentOffset = _JiggleParentOffset ?? Schema.GetOffset(0x1DD153AE8AABF3B9);
+            return ref _Handle.AsRef<uint>(_JiggleParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _JiggleBoneOffset;
+    private static nint? _JiggleBoneOffset;
 
-  public CFeJiggleBone JiggleBone {
-    get {
-      if (_JiggleBoneOffset == null) {
-        _JiggleBoneOffset = Schema.GetOffset(0x1DD153AE6038C557);
-      }
-      return new CFeJiggleBoneImpl(_Handle + _JiggleBoneOffset!.Value);
+    public CFeJiggleBone JiggleBone {
+        get {
+            _JiggleBoneOffset = _JiggleBoneOffset ?? Schema.GetOffset(0x1DD153AE6038C557);
+            return new CFeJiggleBoneImpl(_Handle + _JiggleBoneOffset!.Value);
+        }
     }
-  }
 
 
 }

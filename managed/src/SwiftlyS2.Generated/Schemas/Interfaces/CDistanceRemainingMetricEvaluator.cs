@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDistanceRemainingMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CDistanceRemainingMetricEvaluator> {
+public partial interface CDistanceRemainingMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CDistanceRemainingMetricEvaluator>
+{
+    static CDistanceRemainingMetricEvaluator ISchemaClass<CDistanceRemainingMetricEvaluator>.From(nint handle) => new CDistanceRemainingMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CDistanceRemainingMetricEvaluator>.Size => 104;
+    static string? ISchemaClass<CDistanceRemainingMetricEvaluator>.ClassName => null;
 
-  static CDistanceRemainingMetricEvaluator ISchemaClass<CDistanceRemainingMetricEvaluator>.From(nint handle) => new CDistanceRemainingMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CDistanceRemainingMetricEvaluator>.Size => 104;
-  static string? ISchemaClass<CDistanceRemainingMetricEvaluator>.ClassName => null;
 
-  
-  public ref float MaxDistance { get; }
-  
-  public ref float MinDistance { get; }
-  
-  public ref float StartGoalFilterDistance { get; }
-  
-  public ref float MaxGoalOvershootScale { get; }
-  
-  public ref bool FilterFixedMinDistance { get; }
-  
-  public ref bool FilterGoalDistance { get; }
-  
-  public ref bool FilterGoalOvershoot { get; }
+    public ref float MaxDistance { get; }
+
+    public ref float MinDistance { get; }
+
+    public ref float StartGoalFilterDistance { get; }
+
+    public ref float MaxGoalOvershootScale { get; }
+
+    public ref bool FilterFixedMinDistance { get; }
+
+    public ref bool FilterGoalDistance { get; }
+
+    public ref bool FilterGoalOvershoot { get; }
 
 
 }

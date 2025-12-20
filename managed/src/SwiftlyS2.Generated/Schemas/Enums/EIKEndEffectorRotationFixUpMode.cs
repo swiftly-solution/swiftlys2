@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EIKEndEffectorRotationFixUpMode : uint {
-
+public enum EIKEndEffectorRotationFixUpMode : uint
+{
  None = 0,
 
  MatchTargetOrientation = 1,

@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqCmdSeqDesc : ISchemaClass<CSeqCmdSeqDesc> {
+public partial interface CSeqCmdSeqDesc : ISchemaClass<CSeqCmdSeqDesc>
+{
+    static CSeqCmdSeqDesc ISchemaClass<CSeqCmdSeqDesc>.From(nint handle) => new CSeqCmdSeqDescImpl(handle);
+    static int ISchemaClass<CSeqCmdSeqDesc>.Size => 144;
+    static string? ISchemaClass<CSeqCmdSeqDesc>.ClassName => null;
 
-  static CSeqCmdSeqDesc ISchemaClass<CSeqCmdSeqDesc>.From(nint handle) => new CSeqCmdSeqDescImpl(handle);
-  static int ISchemaClass<CSeqCmdSeqDesc>.Size => 144;
-  static string? ISchemaClass<CSeqCmdSeqDesc>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public CSeqSeqDescFlag Flags { get; }
-  
-  public CSeqTransition Transition { get; }
-  
-  public ref short FrameRangeSequence { get; }
-  
-  public ref short FrameCount { get; }
-  
-  public ref float FPS { get; }
-  
-  public ref short SubCycles { get; }
-  
-  public ref short NumLocalResults { get; }
-  
-  public ref CUtlVector<CSeqCmdLayer> CmdLayerArray { get; }
-  
-  public ref CUtlVector<CAnimEventDefinition> EventArray { get; }
-  
-  public ref CUtlVector<CAnimActivity> ActivityArray { get; }
-  
-  public ref CUtlVector<CSeqPoseSetting> PoseSettingArray { get; }
+    public ref CBufferString Name { get; }
+
+    public CSeqSeqDescFlag Flags { get; }
+
+    public CSeqTransition Transition { get; }
+
+    public ref short FrameRangeSequence { get; }
+
+    public ref short FrameCount { get; }
+
+    public ref float FPS { get; }
+
+    public ref short SubCycles { get; }
+
+    public ref short NumLocalResults { get; }
+
+    public ref CUtlVector<CSeqCmdLayer> CmdLayerArray { get; }
+
+    public ref CUtlVector<CAnimEventDefinition> EventArray { get; }
+
+    public ref CUtlVector<CAnimActivity> ActivityArray { get; }
+
+    public ref CUtlVector<CSeqPoseSetting> PoseSettingArray { get; }
 
 
 }

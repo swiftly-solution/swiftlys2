@@ -6,221 +6,158 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGradientFogImpl : CBaseEntityImpl, CGradientFog {
+internal partial class CGradientFogImpl : CBaseEntityImpl, CGradientFog
+{
+    public CGradientFogImpl(nint handle) : base(handle) { }
 
-  public CGradientFogImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GradientFogTextureOffset;
 
-  private static nint? _GradientFogTextureOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> GradientFogTexture {
-    get {
-      if (_GradientFogTextureOffset == null) {
-        _GradientFogTextureOffset = Schema.GetOffset(0x978D360E547F825C);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_GradientFogTextureOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> GradientFogTexture {
+        get {
+            _GradientFogTextureOffset = _GradientFogTextureOffset ?? Schema.GetOffset(0x978D360E547F825C);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_GradientFogTextureOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogStartDistanceOffset;
+    private static nint? _FogStartDistanceOffset;
 
-  public ref float FogStartDistance {
-    get {
-      if (_FogStartDistanceOffset == null) {
-        _FogStartDistanceOffset = Schema.GetOffset(0x978D360E4B5A1DBC);
-      }
-      return ref _Handle.AsRef<float>(_FogStartDistanceOffset!.Value);
+    public ref float FogStartDistance {
+        get {
+            _FogStartDistanceOffset = _FogStartDistanceOffset ?? Schema.GetOffset(0x978D360E4B5A1DBC);
+            return ref _Handle.AsRef<float>(_FogStartDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogEndDistanceOffset;
+    private static nint? _FogEndDistanceOffset;
 
-  public ref float FogEndDistance {
-    get {
-      if (_FogEndDistanceOffset == null) {
-        _FogEndDistanceOffset = Schema.GetOffset(0x978D360E27F71D5D);
-      }
-      return ref _Handle.AsRef<float>(_FogEndDistanceOffset!.Value);
+    public ref float FogEndDistance {
+        get {
+            _FogEndDistanceOffset = _FogEndDistanceOffset ?? Schema.GetOffset(0x978D360E27F71D5D);
+            return ref _Handle.AsRef<float>(_FogEndDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeightFogEnabledOffset;
+    private static nint? _HeightFogEnabledOffset;
 
-  public ref bool HeightFogEnabled {
-    get {
-      if (_HeightFogEnabledOffset == null) {
-        _HeightFogEnabledOffset = Schema.GetOffset(0x978D360EFB7ED9F7);
-      }
-      return ref _Handle.AsRef<bool>(_HeightFogEnabledOffset!.Value);
+    public ref bool HeightFogEnabled {
+        get {
+            _HeightFogEnabledOffset = _HeightFogEnabledOffset ?? Schema.GetOffset(0x978D360EFB7ED9F7);
+            return ref _Handle.AsRef<bool>(_HeightFogEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogStartHeightOffset;
+    private static nint? _FogStartHeightOffset;
 
-  public ref float FogStartHeight {
-    get {
-      if (_FogStartHeightOffset == null) {
-        _FogStartHeightOffset = Schema.GetOffset(0x978D360E34EA384C);
-      }
-      return ref _Handle.AsRef<float>(_FogStartHeightOffset!.Value);
+    public ref float FogStartHeight {
+        get {
+            _FogStartHeightOffset = _FogStartHeightOffset ?? Schema.GetOffset(0x978D360E34EA384C);
+            return ref _Handle.AsRef<float>(_FogStartHeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogEndHeightOffset;
+    private static nint? _FogEndHeightOffset;
 
-  public ref float FogEndHeight {
-    get {
-      if (_FogEndHeightOffset == null) {
-        _FogEndHeightOffset = Schema.GetOffset(0x978D360E6644141D);
-      }
-      return ref _Handle.AsRef<float>(_FogEndHeightOffset!.Value);
+    public ref float FogEndHeight {
+        get {
+            _FogEndHeightOffset = _FogEndHeightOffset ?? Schema.GetOffset(0x978D360E6644141D);
+            return ref _Handle.AsRef<float>(_FogEndHeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _FarZOffset;
+    private static nint? _FarZOffset;
 
-  public ref float FarZ {
-    get {
-      if (_FarZOffset == null) {
-        _FarZOffset = Schema.GetOffset(0x978D360E38F5E41A);
-      }
-      return ref _Handle.AsRef<float>(_FarZOffset!.Value);
+    public ref float FarZ {
+        get {
+            _FarZOffset = _FarZOffset ?? Schema.GetOffset(0x978D360E38F5E41A);
+            return ref _Handle.AsRef<float>(_FarZOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogMaxOpacityOffset;
+    private static nint? _FogMaxOpacityOffset;
 
-  public ref float FogMaxOpacity {
-    get {
-      if (_FogMaxOpacityOffset == null) {
-        _FogMaxOpacityOffset = Schema.GetOffset(0x978D360E7BF7FD56);
-      }
-      return ref _Handle.AsRef<float>(_FogMaxOpacityOffset!.Value);
+    public ref float FogMaxOpacity {
+        get {
+            _FogMaxOpacityOffset = _FogMaxOpacityOffset ?? Schema.GetOffset(0x978D360E7BF7FD56);
+            return ref _Handle.AsRef<float>(_FogMaxOpacityOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogFalloffExponentOffset;
+    private static nint? _FogFalloffExponentOffset;
 
-  public ref float FogFalloffExponent {
-    get {
-      if (_FogFalloffExponentOffset == null) {
-        _FogFalloffExponentOffset = Schema.GetOffset(0x978D360E2068A39A);
-      }
-      return ref _Handle.AsRef<float>(_FogFalloffExponentOffset!.Value);
+    public ref float FogFalloffExponent {
+        get {
+            _FogFalloffExponentOffset = _FogFalloffExponentOffset ?? Schema.GetOffset(0x978D360E2068A39A);
+            return ref _Handle.AsRef<float>(_FogFalloffExponentOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogVerticalExponentOffset;
+    private static nint? _FogVerticalExponentOffset;
 
-  public ref float FogVerticalExponent {
-    get {
-      if (_FogVerticalExponentOffset == null) {
-        _FogVerticalExponentOffset = Schema.GetOffset(0x978D360EBBE3E0C4);
-      }
-      return ref _Handle.AsRef<float>(_FogVerticalExponentOffset!.Value);
+    public ref float FogVerticalExponent {
+        get {
+            _FogVerticalExponentOffset = _FogVerticalExponentOffset ?? Schema.GetOffset(0x978D360EBBE3E0C4);
+            return ref _Handle.AsRef<float>(_FogVerticalExponentOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogColorOffset;
+    private static nint? _FogColorOffset;
 
-  public ref Color FogColor {
-    get {
-      if (_FogColorOffset == null) {
-        _FogColorOffset = Schema.GetOffset(0x978D360E200EEE0E);
-      }
-      return ref _Handle.AsRef<Color>(_FogColorOffset!.Value);
+    public ref Color FogColor {
+        get {
+            _FogColorOffset = _FogColorOffset ?? Schema.GetOffset(0x978D360E200EEE0E);
+            return ref _Handle.AsRef<Color>(_FogColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogStrengthOffset;
+    private static nint? _FogStrengthOffset;
 
-  public ref float FogStrength {
-    get {
-      if (_FogStrengthOffset == null) {
-        _FogStrengthOffset = Schema.GetOffset(0x978D360E2DCA8F14);
-      }
-      return ref _Handle.AsRef<float>(_FogStrengthOffset!.Value);
+    public ref float FogStrength {
+        get {
+            _FogStrengthOffset = _FogStrengthOffset ?? Schema.GetOffset(0x978D360E2DCA8F14);
+            return ref _Handle.AsRef<float>(_FogStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeTimeOffset;
+    private static nint? _FadeTimeOffset;
 
-  public ref float FadeTime {
-    get {
-      if (_FadeTimeOffset == null) {
-        _FadeTimeOffset = Schema.GetOffset(0x978D360E00BEDB08);
-      }
-      return ref _Handle.AsRef<float>(_FadeTimeOffset!.Value);
+    public ref float FadeTime {
+        get {
+            _FadeTimeOffset = _FadeTimeOffset ?? Schema.GetOffset(0x978D360E00BEDB08);
+            return ref _Handle.AsRef<float>(_FadeTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartDisabledOffset;
+    private static nint? _StartDisabledOffset;
 
-  public ref bool StartDisabled {
-    get {
-      if (_StartDisabledOffset == null) {
-        _StartDisabledOffset = Schema.GetOffset(0x978D360E61ED0C4F);
-      }
-      return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+    public ref bool StartDisabled {
+        get {
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0x978D360E61ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsEnabledOffset;
+    private static nint? _IsEnabledOffset;
 
-  public ref bool IsEnabled {
-    get {
-      if (_IsEnabledOffset == null) {
-        _IsEnabledOffset = Schema.GetOffset(0x978D360E5360D70E);
-      }
-      return ref _Handle.AsRef<bool>(_IsEnabledOffset!.Value);
+    public ref bool IsEnabled {
+        get {
+            _IsEnabledOffset = _IsEnabledOffset ?? Schema.GetOffset(0x978D360E5360D70E);
+            return ref _Handle.AsRef<bool>(_IsEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _GradientFogNeedsTexturesOffset;
+    private static nint? _GradientFogNeedsTexturesOffset;
 
-  public ref bool GradientFogNeedsTextures {
-    get {
-      if (_GradientFogNeedsTexturesOffset == null) {
-        _GradientFogNeedsTexturesOffset = Schema.GetOffset(0x978D360E55F47008);
-      }
-      return ref _Handle.AsRef<bool>(_GradientFogNeedsTexturesOffset!.Value);
+    public ref bool GradientFogNeedsTextures {
+        get {
+            _GradientFogNeedsTexturesOffset = _GradientFogNeedsTexturesOffset ?? Schema.GetOffset(0x978D360E55F47008);
+            return ref _Handle.AsRef<bool>(_GradientFogNeedsTexturesOffset!.Value);
+        }
     }
-  }
 
-  public void GradientFogTextureUpdated() {
-    Schema.Update(_Handle, 0x978D360E547F825C);
-  }
-  public void FogStartDistanceUpdated() {
-    Schema.Update(_Handle, 0x978D360E4B5A1DBC);
-  }
-  public void FogEndDistanceUpdated() {
-    Schema.Update(_Handle, 0x978D360E27F71D5D);
-  }
-  public void HeightFogEnabledUpdated() {
-    Schema.Update(_Handle, 0x978D360EFB7ED9F7);
-  }
-  public void FogStartHeightUpdated() {
-    Schema.Update(_Handle, 0x978D360E34EA384C);
-  }
-  public void FogEndHeightUpdated() {
-    Schema.Update(_Handle, 0x978D360E6644141D);
-  }
-  public void FarZUpdated() {
-    Schema.Update(_Handle, 0x978D360E38F5E41A);
-  }
-  public void FogMaxOpacityUpdated() {
-    Schema.Update(_Handle, 0x978D360E7BF7FD56);
-  }
-  public void FogFalloffExponentUpdated() {
-    Schema.Update(_Handle, 0x978D360E2068A39A);
-  }
-  public void FogVerticalExponentUpdated() {
-    Schema.Update(_Handle, 0x978D360EBBE3E0C4);
-  }
-  public void FogColorUpdated() {
-    Schema.Update(_Handle, 0x978D360E200EEE0E);
-  }
-  public void FogStrengthUpdated() {
-    Schema.Update(_Handle, 0x978D360E2DCA8F14);
-  }
-  public void FadeTimeUpdated() {
-    Schema.Update(_Handle, 0x978D360E00BEDB08);
-  }
-  public void StartDisabledUpdated() {
-    Schema.Update(_Handle, 0x978D360E61ED0C4F);
-  }
-  public void IsEnabledUpdated() {
-    Schema.Update(_Handle, 0x978D360E5360D70E);
-  }
+    public void GradientFogTextureUpdated() => Schema.Update(_Handle, 0x978D360E547F825C);
+    public void FogStartDistanceUpdated() => Schema.Update(_Handle, 0x978D360E4B5A1DBC);
+    public void FogEndDistanceUpdated() => Schema.Update(_Handle, 0x978D360E27F71D5D);
+    public void HeightFogEnabledUpdated() => Schema.Update(_Handle, 0x978D360EFB7ED9F7);
+    public void FogStartHeightUpdated() => Schema.Update(_Handle, 0x978D360E34EA384C);
+    public void FogEndHeightUpdated() => Schema.Update(_Handle, 0x978D360E6644141D);
+    public void FarZUpdated() => Schema.Update(_Handle, 0x978D360E38F5E41A);
+    public void FogMaxOpacityUpdated() => Schema.Update(_Handle, 0x978D360E7BF7FD56);
+    public void FogFalloffExponentUpdated() => Schema.Update(_Handle, 0x978D360E2068A39A);
+    public void FogVerticalExponentUpdated() => Schema.Update(_Handle, 0x978D360EBBE3E0C4);
+    public void FogColorUpdated() => Schema.Update(_Handle, 0x978D360E200EEE0E);
+    public void FogStrengthUpdated() => Schema.Update(_Handle, 0x978D360E2DCA8F14);
+    public void FadeTimeUpdated() => Schema.Update(_Handle, 0x978D360E00BEDB08);
+    public void StartDisabledUpdated() => Schema.Update(_Handle, 0x978D360E61ED0C4F);
+    public void IsEnabledUpdated() => Schema.Update(_Handle, 0x978D360E5360D70E);
 }

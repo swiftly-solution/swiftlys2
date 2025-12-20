@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LerpScalar : CParticleFunctionOperator, ISchemaClass<C_OP_LerpScalar> {
+public partial interface C_OP_LerpScalar : CParticleFunctionOperator, ISchemaClass<C_OP_LerpScalar>
+{
+    static C_OP_LerpScalar ISchemaClass<C_OP_LerpScalar>.From(nint handle) => new C_OP_LerpScalarImpl(handle);
+    static int ISchemaClass<C_OP_LerpScalar>.Size => 848;
+    static string? ISchemaClass<C_OP_LerpScalar>.ClassName => null;
 
-  static C_OP_LerpScalar ISchemaClass<C_OP_LerpScalar>.From(nint handle) => new C_OP_LerpScalarImpl(handle);
-  static int ISchemaClass<C_OP_LerpScalar>.Size => 848;
-  static string? ISchemaClass<C_OP_LerpScalar>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleFloatInput Output { get; }
-  
-  public ref float StartTime { get; }
-  
-  public ref float EndTime { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleFloatInput Output { get; }
+
+    public ref float StartTime { get; }
+
+    public ref float EndTime { get; }
 
 
 }

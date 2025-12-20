@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSkeletonAnimationController : ISkeletonAnimationController, ISchemaClass<CSkeletonAnimationController> {
+public partial interface CSkeletonAnimationController : ISkeletonAnimationController, ISchemaClass<CSkeletonAnimationController>
+{
+    static CSkeletonAnimationController ISchemaClass<CSkeletonAnimationController>.From(nint handle) => new CSkeletonAnimationControllerImpl(handle);
+    static int ISchemaClass<CSkeletonAnimationController>.Size => 16;
+    static string? ISchemaClass<CSkeletonAnimationController>.ClassName => null;
 
-  static CSkeletonAnimationController ISchemaClass<CSkeletonAnimationController>.From(nint handle) => new CSkeletonAnimationControllerImpl(handle);
-  static int ISchemaClass<CSkeletonAnimationController>.Size => 16;
-  static string? ISchemaClass<CSkeletonAnimationController>.ClassName => null;
 
-  
-  public CSkeletonInstance? SkeletonInstance { get; }
+    public CSkeletonInstance? SkeletonInstance { get; }
 
 
 }

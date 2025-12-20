@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCycleControlClipUpdateNodeImpl : CLeafUpdateNodeImpl, CCycleControlClipUpdateNode {
+internal partial class CCycleControlClipUpdateNodeImpl : CLeafUpdateNodeImpl, CCycleControlClipUpdateNode
+{
+    public CCycleControlClipUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CCycleControlClipUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagsOffset;
 
-  private static nint? _TagsOffset;
-
-  public ref CUtlVector<TagSpan_t> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0x57FEB5AAB46C8540);
-      }
-      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+    public ref CUtlVector<TagSpan_t> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0x57FEB5AAB46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceOffset;
+    private static nint? _SequenceOffset;
 
-  public HSequence Sequence {
-    get {
-      if (_SequenceOffset == null) {
-        _SequenceOffset = Schema.GetOffset(0x57FEB5AAE0A0598E);
-      }
-      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    public HSequence Sequence {
+        get {
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x57FEB5AAE0A0598E);
+            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _DurationOffset;
+    private static nint? _DurationOffset;
 
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0x57FEB5AA3D9FF5AD);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x57FEB5AA3D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValueSourceOffset;
+    private static nint? _ValueSourceOffset;
 
-  public ref AnimValueSource ValueSource {
-    get {
-      if (_ValueSourceOffset == null) {
-        _ValueSourceOffset = Schema.GetOffset(0x57FEB5AAD4D5B6B7);
-      }
-      return ref _Handle.AsRef<AnimValueSource>(_ValueSourceOffset!.Value);
+    public ref AnimValueSource ValueSource {
+        get {
+            _ValueSourceOffset = _ValueSourceOffset ?? Schema.GetOffset(0x57FEB5AAD4D5B6B7);
+            return ref _Handle.AsRef<AnimValueSource>(_ValueSourceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamIndexOffset;
+    private static nint? _ParamIndexOffset;
 
-  public CAnimParamHandle ParamIndex {
-    get {
-      if (_ParamIndexOffset == null) {
-        _ParamIndexOffset = Schema.GetOffset(0x57FEB5AA61990A86);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+    public CAnimParamHandle ParamIndex {
+        get {
+            _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0x57FEB5AA61990A86);
+            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _LockWhenWaningOffset;
+    private static nint? _LockWhenWaningOffset;
 
-  public ref bool LockWhenWaning {
-    get {
-      if (_LockWhenWaningOffset == null) {
-        _LockWhenWaningOffset = Schema.GetOffset(0x57FEB5AAEED48004);
-      }
-      return ref _Handle.AsRef<bool>(_LockWhenWaningOffset!.Value);
+    public ref bool LockWhenWaning {
+        get {
+            _LockWhenWaningOffset = _LockWhenWaningOffset ?? Schema.GetOffset(0x57FEB5AAEED48004);
+            return ref _Handle.AsRef<bool>(_LockWhenWaningOffset!.Value);
+        }
     }
-  }
 
 
 }

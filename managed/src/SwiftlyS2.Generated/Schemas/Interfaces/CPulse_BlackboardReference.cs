@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulse_BlackboardReference : ISchemaClass<CPulse_BlackboardReference> {
+public partial interface CPulse_BlackboardReference : ISchemaClass<CPulse_BlackboardReference>
+{
+    static CPulse_BlackboardReference ISchemaClass<CPulse_BlackboardReference>.From(nint handle) => new CPulse_BlackboardReferenceImpl(handle);
+    static int ISchemaClass<CPulse_BlackboardReference>.Size => 40;
+    static string? ISchemaClass<CPulse_BlackboardReference>.ClassName => null;
 
-  static CPulse_BlackboardReference ISchemaClass<CPulse_BlackboardReference>.From(nint handle) => new CPulse_BlackboardReferenceImpl(handle);
-  static int ISchemaClass<CPulse_BlackboardReference>.Size => 40;
-  static string? ISchemaClass<CPulse_BlackboardReference>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeIPulseGraphDef> BlackboardResource { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField BlackboardResource1 { get; }
-  
-  public PulseDocNodeID_t NodeID { get; }
-  
-  public ref CGlobalSymbol NodeName { get; }
+    public ref CStrongHandle<InfoForResourceTypeIPulseGraphDef> BlackboardResource { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField BlackboardResource1 { get; }
+
+    public PulseDocNodeID_t NodeID { get; }
+
+    public ref CGlobalSymbol NodeName { get; }
 
 
 }

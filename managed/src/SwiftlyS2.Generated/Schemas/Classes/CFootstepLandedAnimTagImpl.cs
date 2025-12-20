@@ -6,78 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootstepLandedAnimTagImpl : CAnimTagBaseImpl, CFootstepLandedAnimTag {
+internal partial class CFootstepLandedAnimTagImpl : CAnimTagBaseImpl, CFootstepLandedAnimTag
+{
+    public CFootstepLandedAnimTagImpl(nint handle) : base(handle) { }
 
-  public CFootstepLandedAnimTagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FootstepTypeOffset;
 
-  private static nint? _FootstepTypeOffset;
+    public ref FootstepLandedFootSoundType_t FootstepType {
+        get {
+            _FootstepTypeOffset = _FootstepTypeOffset ?? Schema.GetOffset(0xD5058C6793F974DB);
+            return ref _Handle.AsRef<FootstepLandedFootSoundType_t>(_FootstepTypeOffset!.Value);
+        }
+    }
+    private static nint? _OverrideSoundNameOffset;
 
-  public ref FootstepLandedFootSoundType_t FootstepType {
-    get {
-      if (_FootstepTypeOffset == null) {
-        _FootstepTypeOffset = Schema.GetOffset(0xD5058C6793F974DB);
-      }
-      return ref _Handle.AsRef<FootstepLandedFootSoundType_t>(_FootstepTypeOffset!.Value);
-    }
-  }
-  private static nint? _OverrideSoundNameOffset;
+    public string OverrideSoundName {
+        get {
+            _OverrideSoundNameOffset = _OverrideSoundNameOffset ?? Schema.GetOffset(0xD5058C67FEE552B7);
+            return Schema.GetString(_Handle.Read<nint>(_OverrideSoundNameOffset!.Value));
+        }
+        set {
+            _OverrideSoundNameOffset = _OverrideSoundNameOffset ?? Schema.GetOffset(0xD5058C67FEE552B7);
+            Schema.SetString(_Handle, _OverrideSoundNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _DebugAnimSourceStringOffset;
 
-  public string OverrideSoundName {
-    get {
-      if (_OverrideSoundNameOffset == null) {
-        _OverrideSoundNameOffset = Schema.GetOffset(0xD5058C67FEE552B7);
-      }
-      var ptr = _Handle.Read<nint>(_OverrideSoundNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_OverrideSoundNameOffset == null) {
-        _OverrideSoundNameOffset = Schema.GetOffset(0xD5058C67FEE552B7);
-      }
-      Schema.SetString(_Handle, _OverrideSoundNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _DebugAnimSourceStringOffset;
+    public string DebugAnimSourceString {
+        get {
+            _DebugAnimSourceStringOffset = _DebugAnimSourceStringOffset ?? Schema.GetOffset(0xD5058C676912A1B9);
+            return Schema.GetString(_Handle.Read<nint>(_DebugAnimSourceStringOffset!.Value));
+        }
+        set {
+            _DebugAnimSourceStringOffset = _DebugAnimSourceStringOffset ?? Schema.GetOffset(0xD5058C676912A1B9);
+            Schema.SetString(_Handle, _DebugAnimSourceStringOffset!.Value, value);
+        }
+    } 
+    private static nint? _BoneNameOffset;
 
-  public string DebugAnimSourceString {
-    get {
-      if (_DebugAnimSourceStringOffset == null) {
-        _DebugAnimSourceStringOffset = Schema.GetOffset(0xD5058C676912A1B9);
-      }
-      var ptr = _Handle.Read<nint>(_DebugAnimSourceStringOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DebugAnimSourceStringOffset == null) {
-        _DebugAnimSourceStringOffset = Schema.GetOffset(0xD5058C676912A1B9);
-      }
-      Schema.SetString(_Handle, _DebugAnimSourceStringOffset!.Value, value);
-    }
-  } 
-  private static nint? _BoneNameOffset;
-
-  public string BoneName {
-    get {
-      if (_BoneNameOffset == null) {
-        _BoneNameOffset = Schema.GetOffset(0xD5058C6707D0902C);
-      }
-      var ptr = _Handle.Read<nint>(_BoneNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_BoneNameOffset == null) {
-        _BoneNameOffset = Schema.GetOffset(0xD5058C6707D0902C);
-      }
-      Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
-    }
-  } 
+    public string BoneName {
+        get {
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0xD5058C6707D0902C);
+            return Schema.GetString(_Handle.Read<nint>(_BoneNameOffset!.Value));
+        }
+        set {
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0xD5058C6707D0902C);
+            Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
+        }
+    } 
 
 
 }

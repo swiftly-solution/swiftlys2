@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundEventSphereEntity : CSoundEventEntity, ISchemaClass<CSoundEventSphereEntity> {
+public partial interface CSoundEventSphereEntity : CSoundEventEntity, ISchemaClass<CSoundEventSphereEntity>
+{
+    static CSoundEventSphereEntity ISchemaClass<CSoundEventSphereEntity>.From(nint handle) => new CSoundEventSphereEntityImpl(handle);
+    static int ISchemaClass<CSoundEventSphereEntity>.Size => 1472;
+    static string? ISchemaClass<CSoundEventSphereEntity>.ClassName => "snd_event_sphere";
 
-  static CSoundEventSphereEntity ISchemaClass<CSoundEventSphereEntity>.From(nint handle) => new CSoundEventSphereEntityImpl(handle);
-  static int ISchemaClass<CSoundEventSphereEntity>.Size => 1472;
-  static string? ISchemaClass<CSoundEventSphereEntity>.ClassName => "snd_event_sphere";
 
-  
-  public ref float Radius { get; }
+    public ref float Radius { get; }
 
-  public void RadiusUpdated();
+    public void RadiusUpdated();
 }

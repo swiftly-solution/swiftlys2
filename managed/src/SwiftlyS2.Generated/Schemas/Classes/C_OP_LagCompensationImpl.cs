@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_LagCompensationImpl : CParticleFunctionOperatorImpl, C_OP_LagCompensation {
+internal partial class C_OP_LagCompensationImpl : CParticleFunctionOperatorImpl, C_OP_LagCompensation
+{
+    public C_OP_LagCompensationImpl(nint handle) : base(handle) { }
 
-  public C_OP_LagCompensationImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DesiredVelocityCPOffset;
 
-  private static nint? _DesiredVelocityCPOffset;
-
-  public ref int DesiredVelocityCP {
-    get {
-      if (_DesiredVelocityCPOffset == null) {
-        _DesiredVelocityCPOffset = Schema.GetOffset(0x21277E4532AACEC5);
-      }
-      return ref _Handle.AsRef<int>(_DesiredVelocityCPOffset!.Value);
+    public ref int DesiredVelocityCP {
+        get {
+            _DesiredVelocityCPOffset = _DesiredVelocityCPOffset ?? Schema.GetOffset(0x21277E4532AACEC5);
+            return ref _Handle.AsRef<int>(_DesiredVelocityCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _LatencyCPOffset;
+    private static nint? _LatencyCPOffset;
 
-  public ref int LatencyCP {
-    get {
-      if (_LatencyCPOffset == null) {
-        _LatencyCPOffset = Schema.GetOffset(0x21277E45B100FE8E);
-      }
-      return ref _Handle.AsRef<int>(_LatencyCPOffset!.Value);
+    public ref int LatencyCP {
+        get {
+            _LatencyCPOffset = _LatencyCPOffset ?? Schema.GetOffset(0x21277E45B100FE8E);
+            return ref _Handle.AsRef<int>(_LatencyCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _LatencyCPFieldOffset;
+    private static nint? _LatencyCPFieldOffset;
 
-  public ref int LatencyCPField {
-    get {
-      if (_LatencyCPFieldOffset == null) {
-        _LatencyCPFieldOffset = Schema.GetOffset(0x21277E458E1CEB3A);
-      }
-      return ref _Handle.AsRef<int>(_LatencyCPFieldOffset!.Value);
+    public ref int LatencyCPField {
+        get {
+            _LatencyCPFieldOffset = _LatencyCPFieldOffset ?? Schema.GetOffset(0x21277E458E1CEB3A);
+            return ref _Handle.AsRef<int>(_LatencyCPFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _DesiredVelocityCPFieldOffset;
+    private static nint? _DesiredVelocityCPFieldOffset;
 
-  public ref int DesiredVelocityCPField {
-    get {
-      if (_DesiredVelocityCPFieldOffset == null) {
-        _DesiredVelocityCPFieldOffset = Schema.GetOffset(0x21277E45B59E9007);
-      }
-      return ref _Handle.AsRef<int>(_DesiredVelocityCPFieldOffset!.Value);
+    public ref int DesiredVelocityCPField {
+        get {
+            _DesiredVelocityCPFieldOffset = _DesiredVelocityCPFieldOffset ?? Schema.GetOffset(0x21277E45B59E9007);
+            return ref _Handle.AsRef<int>(_DesiredVelocityCPFieldOffset!.Value);
+        }
     }
-  }
 
 
 }

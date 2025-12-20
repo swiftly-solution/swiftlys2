@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundOpvarSetAABBEntity : CSoundOpvarSetPointEntity, ISchemaClass<CSoundOpvarSetAABBEntity> {
+public partial interface CSoundOpvarSetAABBEntity : CSoundOpvarSetPointEntity, ISchemaClass<CSoundOpvarSetAABBEntity>
+{
+    static CSoundOpvarSetAABBEntity ISchemaClass<CSoundOpvarSetAABBEntity>.From(nint handle) => new CSoundOpvarSetAABBEntityImpl(handle);
+    static int ISchemaClass<CSoundOpvarSetAABBEntity>.Size => 1808;
+    static string? ISchemaClass<CSoundOpvarSetAABBEntity>.ClassName => "snd_opvar_set_aabb";
 
-  static CSoundOpvarSetAABBEntity ISchemaClass<CSoundOpvarSetAABBEntity>.From(nint handle) => new CSoundOpvarSetAABBEntityImpl(handle);
-  static int ISchemaClass<CSoundOpvarSetAABBEntity>.Size => 1808;
-  static string? ISchemaClass<CSoundOpvarSetAABBEntity>.ClassName => "snd_opvar_set_aabb";
 
-  
-  public ref Vector DistanceInnerMins { get; }
-  
-  public ref Vector DistanceInnerMaxs { get; }
-  
-  public ref Vector DistanceOuterMins { get; }
-  
-  public ref Vector DistanceOuterMaxs { get; }
-  
-  public ref int AABBDirection { get; }
-  
-  public ref Vector InnerMins { get; }
-  
-  public ref Vector InnerMaxs { get; }
-  
-  public ref Vector OuterMins { get; }
-  
-  public ref Vector OuterMaxs { get; }
+    public ref Vector DistanceInnerMins { get; }
+
+    public ref Vector DistanceInnerMaxs { get; }
+
+    public ref Vector DistanceOuterMins { get; }
+
+    public ref Vector DistanceOuterMaxs { get; }
+
+    public ref int AABBDirection { get; }
+
+    public ref Vector InnerMins { get; }
+
+    public ref Vector InnerMaxs { get; }
+
+    public ref Vector OuterMins { get; }
+
+    public ref Vector OuterMaxs { get; }
 
 
 }

@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInfoGameEventProxyImpl : CPointEntityImpl, CInfoGameEventProxy {
+internal partial class CInfoGameEventProxyImpl : CPointEntityImpl, CInfoGameEventProxy
+{
+    public CInfoGameEventProxyImpl(nint handle) : base(handle) { }
 
-  public CInfoGameEventProxyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EventNameOffset;
 
-  private static nint? _EventNameOffset;
+    public string EventName {
+        get {
+            _EventNameOffset = _EventNameOffset ?? Schema.GetOffset(0x483B3FC078114A54);
+            return Schema.GetString(_Handle.Read<nint>(_EventNameOffset!.Value));
+        }
+        set {
+            _EventNameOffset = _EventNameOffset ?? Schema.GetOffset(0x483B3FC078114A54);
+            Schema.SetString(_Handle, _EventNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _RangeOffset;
 
-  public string EventName {
-    get {
-      if (_EventNameOffset == null) {
-        _EventNameOffset = Schema.GetOffset(0x483B3FC078114A54);
-      }
-      var ptr = _Handle.Read<nint>(_EventNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Range {
+        get {
+            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x483B3FC03FC92844);
+            return ref _Handle.AsRef<float>(_RangeOffset!.Value);
+        }
     }
-    set {
-      if (_EventNameOffset == null) {
-        _EventNameOffset = Schema.GetOffset(0x483B3FC078114A54);
-      }
-      Schema.SetString(_Handle, _EventNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _RangeOffset;
-
-  public ref float Range {
-    get {
-      if (_RangeOffset == null) {
-        _RangeOffset = Schema.GetOffset(0x483B3FC03FC92844);
-      }
-      return ref _Handle.AsRef<float>(_RangeOffset!.Value);
-    }
-  }
 
 
 }

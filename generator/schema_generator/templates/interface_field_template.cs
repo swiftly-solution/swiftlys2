@@ -1,2 +1,2 @@
-  $COMMENT$
-  public $REF$$INTERFACE_TYPE$$NULLABLE$ $NAME$ { get;$SETTER$ }
+$COMMENT$
+    public $REF$$INTERFACE_TYPE$$NULLABLE$ $NAME$ { get;$SETTER$ }

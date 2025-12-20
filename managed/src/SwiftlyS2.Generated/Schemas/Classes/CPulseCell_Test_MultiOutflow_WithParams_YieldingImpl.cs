@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Test_MultiOutflow_WithParams_YieldingImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Test_MultiOutflow_WithParams_Yielding {
+internal partial class CPulseCell_Test_MultiOutflow_WithParams_YieldingImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Test_MultiOutflow_WithParams_Yielding
+{
+    public CPulseCell_Test_MultiOutflow_WithParams_YieldingImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Test_MultiOutflow_WithParams_YieldingImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Out1Offset;
 
-  private static nint? _Out1Offset;
-
-  public SignatureOutflow_Continue Out1 {
-    get {
-      if (_Out1Offset == null) {
-        _Out1Offset = Schema.GetOffset(0xB412A25905F293AA);
-      }
-      return new SignatureOutflow_ContinueImpl(_Handle + _Out1Offset!.Value);
+    public SignatureOutflow_Continue Out1 {
+        get {
+            _Out1Offset = _Out1Offset ?? Schema.GetOffset(0xB412A25905F293AA);
+            return new SignatureOutflow_ContinueImpl(_Handle + _Out1Offset!.Value);
+        }
     }
-  }
-  private static nint? _AsyncChild1Offset;
+    private static nint? _AsyncChild1Offset;
 
-  public SignatureOutflow_Continue AsyncChild1 {
-    get {
-      if (_AsyncChild1Offset == null) {
-        _AsyncChild1Offset = Schema.GetOffset(0xB412A2592CEBF78A);
-      }
-      return new SignatureOutflow_ContinueImpl(_Handle + _AsyncChild1Offset!.Value);
+    public SignatureOutflow_Continue AsyncChild1 {
+        get {
+            _AsyncChild1Offset = _AsyncChild1Offset ?? Schema.GetOffset(0xB412A2592CEBF78A);
+            return new SignatureOutflow_ContinueImpl(_Handle + _AsyncChild1Offset!.Value);
+        }
     }
-  }
-  private static nint? _AsyncChild2Offset;
+    private static nint? _AsyncChild2Offset;
 
-  public SignatureOutflow_Continue AsyncChild2 {
-    get {
-      if (_AsyncChild2Offset == null) {
-        _AsyncChild2Offset = Schema.GetOffset(0xB412A2592BEBF5F7);
-      }
-      return new SignatureOutflow_ContinueImpl(_Handle + _AsyncChild2Offset!.Value);
+    public SignatureOutflow_Continue AsyncChild2 {
+        get {
+            _AsyncChild2Offset = _AsyncChild2Offset ?? Schema.GetOffset(0xB412A2592BEBF5F7);
+            return new SignatureOutflow_ContinueImpl(_Handle + _AsyncChild2Offset!.Value);
+        }
     }
-  }
-  private static nint? _YieldResume1Offset;
+    private static nint? _YieldResume1Offset;
 
-  public SignatureOutflow_Resume YieldResume1 {
-    get {
-      if (_YieldResume1Offset == null) {
-        _YieldResume1Offset = Schema.GetOffset(0xB412A2596063DFA8);
-      }
-      return new SignatureOutflow_ResumeImpl(_Handle + _YieldResume1Offset!.Value);
+    public SignatureOutflow_Resume YieldResume1 {
+        get {
+            _YieldResume1Offset = _YieldResume1Offset ?? Schema.GetOffset(0xB412A2596063DFA8);
+            return new SignatureOutflow_ResumeImpl(_Handle + _YieldResume1Offset!.Value);
+        }
     }
-  }
-  private static nint? _YieldResume2Offset;
+    private static nint? _YieldResume2Offset;
 
-  public SignatureOutflow_Resume YieldResume2 {
-    get {
-      if (_YieldResume2Offset == null) {
-        _YieldResume2Offset = Schema.GetOffset(0xB412A2596363E461);
-      }
-      return new SignatureOutflow_ResumeImpl(_Handle + _YieldResume2Offset!.Value);
+    public SignatureOutflow_Resume YieldResume2 {
+        get {
+            _YieldResume2Offset = _YieldResume2Offset ?? Schema.GetOffset(0xB412A2596363E461);
+            return new SignatureOutflow_ResumeImpl(_Handle + _YieldResume2Offset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CItemDogtags : CItem, ISchemaClass<CItemDogtags> {
+public partial interface CItemDogtags : CItem, ISchemaClass<CItemDogtags>
+{
+    static CItemDogtags ISchemaClass<CItemDogtags>.From(nint handle) => new CItemDogtagsImpl(handle);
+    static int ISchemaClass<CItemDogtags>.Size => 2944;
+    static string? ISchemaClass<CItemDogtags>.ClassName => null;
 
-  static CItemDogtags ISchemaClass<CItemDogtags>.From(nint handle) => new CItemDogtagsImpl(handle);
-  static int ISchemaClass<CItemDogtags>.Size => 2944;
-  static string? ISchemaClass<CItemDogtags>.ClassName => null;
 
-  
-  public ref CHandle<CCSPlayerPawn> OwningPlayer { get; }
-  
-  public ref CHandle<CCSPlayerPawn> KillingPlayer { get; }
+    public ref CHandle<CCSPlayerPawn> OwningPlayer { get; }
 
-  public void OwningPlayerUpdated();
-  public void KillingPlayerUpdated();
+    public ref CHandle<CCSPlayerPawn> KillingPlayer { get; }
+
+    public void OwningPlayerUpdated();
+    public void KillingPlayerUpdated();
 }

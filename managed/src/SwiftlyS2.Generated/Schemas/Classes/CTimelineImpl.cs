@@ -6,93 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTimelineImpl : IntervalTimerImpl, CTimeline {
+internal partial class CTimelineImpl : IntervalTimerImpl, CTimeline
+{
+    public CTimelineImpl(nint handle) : base(handle) { }
 
-  public CTimelineImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<float> Values {
-    get => new SchemaFixedArray<float>(_Handle, 0x36D1E6597BD8BFD5, 64, 4, 4);
-  }
-  public ISchemaFixedArray<int> ValueCounts {
-    get => new SchemaFixedArray<int>(_Handle, 0x36D1E65961EF23CA, 64, 4, 4);
-  }
-  private static nint? _BucketCountOffset;
-
-  public ref int BucketCount {
-    get {
-      if (_BucketCountOffset == null) {
-        _BucketCountOffset = Schema.GetOffset(0x36D1E6596ACA5C8A);
-      }
-      return ref _Handle.AsRef<int>(_BucketCountOffset!.Value);
+    public ISchemaFixedArray<float> Values {
+        get => new SchemaFixedArray<float>(_Handle, 0x36D1E6597BD8BFD5, 64, 4, 4);
     }
-  }
-  private static nint? _IntervalOffset;
-
-  public ref float Interval {
-    get {
-      if (_IntervalOffset == null) {
-        _IntervalOffset = Schema.GetOffset(0x36D1E659320F7B8E);
-      }
-      return ref _Handle.AsRef<float>(_IntervalOffset!.Value);
+    public ISchemaFixedArray<int> ValueCounts {
+        get => new SchemaFixedArray<int>(_Handle, 0x36D1E65961EF23CA, 64, 4, 4);
     }
-  }
-  private static nint? _FinalValueOffset;
+    private static nint? _BucketCountOffset;
 
-  public ref float FinalValue {
-    get {
-      if (_FinalValueOffset == null) {
-        _FinalValueOffset = Schema.GetOffset(0x36D1E659534A71BA);
-      }
-      return ref _Handle.AsRef<float>(_FinalValueOffset!.Value);
+    public ref int BucketCount {
+        get {
+            _BucketCountOffset = _BucketCountOffset ?? Schema.GetOffset(0x36D1E6596ACA5C8A);
+            return ref _Handle.AsRef<int>(_BucketCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _CompressionTypeOffset;
+    private static nint? _IntervalOffset;
 
-  public ref TimelineCompression_t CompressionType {
-    get {
-      if (_CompressionTypeOffset == null) {
-        _CompressionTypeOffset = Schema.GetOffset(0x36D1E6593FD9B909);
-      }
-      return ref _Handle.AsRef<TimelineCompression_t>(_CompressionTypeOffset!.Value);
+    public ref float Interval {
+        get {
+            _IntervalOffset = _IntervalOffset ?? Schema.GetOffset(0x36D1E659320F7B8E);
+            return ref _Handle.AsRef<float>(_IntervalOffset!.Value);
+        }
     }
-  }
-  private static nint? _StoppedOffset;
+    private static nint? _FinalValueOffset;
 
-  public ref bool Stopped {
-    get {
-      if (_StoppedOffset == null) {
-        _StoppedOffset = Schema.GetOffset(0x36D1E6591C198C2E);
-      }
-      return ref _Handle.AsRef<bool>(_StoppedOffset!.Value);
+    public ref float FinalValue {
+        get {
+            _FinalValueOffset = _FinalValueOffset ?? Schema.GetOffset(0x36D1E659534A71BA);
+            return ref _Handle.AsRef<float>(_FinalValueOffset!.Value);
+        }
     }
-  }
+    private static nint? _CompressionTypeOffset;
 
-  public void ValuesUpdated() {
-    Schema.Update(_Handle, 0x36D1E6597BD8BFD5);
-  }
-  public void ValueCountsUpdated() {
-    Schema.Update(_Handle, 0x36D1E65961EF23CA);
-  }
-  public void BucketCountUpdated() {
-    Schema.Update(_Handle, 0x36D1E6596ACA5C8A);
-  }
-  public void IntervalUpdated() {
-    Schema.Update(_Handle, 0x36D1E659320F7B8E);
-  }
-  public void FinalValueUpdated() {
-    Schema.Update(_Handle, 0x36D1E659534A71BA);
-  }
-  public void CompressionTypeUpdated() {
-    Schema.Update(_Handle, 0x36D1E6593FD9B909);
-  }
-  public void StoppedUpdated() {
-    Schema.Update(_Handle, 0x36D1E6591C198C2E);
-  }
+    public ref TimelineCompression_t CompressionType {
+        get {
+            _CompressionTypeOffset = _CompressionTypeOffset ?? Schema.GetOffset(0x36D1E6593FD9B909);
+            return ref _Handle.AsRef<TimelineCompression_t>(_CompressionTypeOffset!.Value);
+        }
+    }
+    private static nint? _StoppedOffset;
+
+    public ref bool Stopped {
+        get {
+            _StoppedOffset = _StoppedOffset ?? Schema.GetOffset(0x36D1E6591C198C2E);
+            return ref _Handle.AsRef<bool>(_StoppedOffset!.Value);
+        }
+    }
+
+    public void ValuesUpdated() => Schema.Update(_Handle, 0x36D1E6597BD8BFD5);
+    public void ValueCountsUpdated() => Schema.Update(_Handle, 0x36D1E65961EF23CA);
+    public void BucketCountUpdated() => Schema.Update(_Handle, 0x36D1E6596ACA5C8A);
+    public void IntervalUpdated() => Schema.Update(_Handle, 0x36D1E659320F7B8E);
+    public void FinalValueUpdated() => Schema.Update(_Handle, 0x36D1E659534A71BA);
+    public void CompressionTypeUpdated() => Schema.Update(_Handle, 0x36D1E6593FD9B909);
+    public void StoppedUpdated() => Schema.Update(_Handle, 0x36D1E6591C198C2E);
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimActivityImpl : SchemaClass, CAnimActivity {
+internal partial class CAnimActivityImpl : SchemaClass, CAnimActivity
+{
+    public CAnimActivityImpl(nint handle) : base(handle) { }
 
-  public CAnimActivityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public ref CBufferString Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xB773FBB24D8F5786);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    public ref CBufferString Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xB773FBB24D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActivityOffset;
+    private static nint? _ActivityOffset;
 
-  public ref int Activity {
-    get {
-      if (_ActivityOffset == null) {
-        _ActivityOffset = Schema.GetOffset(0xB773FBB2E3986930);
-      }
-      return ref _Handle.AsRef<int>(_ActivityOffset!.Value);
+    public ref int Activity {
+        get {
+            _ActivityOffset = _ActivityOffset ?? Schema.GetOffset(0xB773FBB2E3986930);
+            return ref _Handle.AsRef<int>(_ActivityOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref int Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0xB773FBB2CE6E9C28);
-      }
-      return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+    public ref int Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xB773FBB2CE6E9C28);
+            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref int Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0xB773FBB2C5CC6905);
-      }
-      return ref _Handle.AsRef<int>(_WeightOffset!.Value);
+    public ref int Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xB773FBB2C5CC6905);
+            return ref _Handle.AsRef<int>(_WeightOffset!.Value);
+        }
     }
-  }
 
 
 }

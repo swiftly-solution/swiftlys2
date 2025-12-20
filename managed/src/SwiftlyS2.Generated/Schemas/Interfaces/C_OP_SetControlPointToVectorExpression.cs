@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointToVectorExpression : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToVectorExpression> {
+public partial interface C_OP_SetControlPointToVectorExpression : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToVectorExpression>
+{
+    static C_OP_SetControlPointToVectorExpression ISchemaClass<C_OP_SetControlPointToVectorExpression>.From(nint handle) => new C_OP_SetControlPointToVectorExpressionImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointToVectorExpression>.Size => 4296;
+    static string? ISchemaClass<C_OP_SetControlPointToVectorExpression>.ClassName => null;
 
-  static C_OP_SetControlPointToVectorExpression ISchemaClass<C_OP_SetControlPointToVectorExpression>.From(nint handle) => new C_OP_SetControlPointToVectorExpressionImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointToVectorExpression>.Size => 4296;
-  static string? ISchemaClass<C_OP_SetControlPointToVectorExpression>.ClassName => null;
 
-  
-  public ref VectorExpressionType_t Expression { get; }
-  
-  public ref int OutputCP { get; }
-  
-  public CParticleCollectionVecInput Input1 { get; }
-  
-  public CParticleCollectionVecInput Input2 { get; }
-  
-  public CPerParticleFloatInput Lerp { get; }
-  
-  public ref bool NormalizedOutput { get; }
+    public ref VectorExpressionType_t Expression { get; }
+
+    public ref int OutputCP { get; }
+
+    public CParticleCollectionVecInput Input1 { get; }
+
+    public CParticleCollectionVecInput Input2 { get; }
+
+    public CPerParticleFloatInput Lerp { get; }
+
+    public ref bool NormalizedOutput { get; }
 
 
 }

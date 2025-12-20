@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SummaryTakeDamageInfo_tImpl : SchemaClass, SummaryTakeDamageInfo_t {
+internal partial class SummaryTakeDamageInfo_tImpl : SchemaClass, SummaryTakeDamageInfo_t
+{
+    public SummaryTakeDamageInfo_tImpl(nint handle) : base(handle) { }
 
-  public SummaryTakeDamageInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SummarisedCountOffset;
 
-  private static nint? _SummarisedCountOffset;
-
-  public ref int SummarisedCount {
-    get {
-      if (_SummarisedCountOffset == null) {
-        _SummarisedCountOffset = Schema.GetOffset(0x8A8061E2B62D7D04);
-      }
-      return ref _Handle.AsRef<int>(_SummarisedCountOffset!.Value);
+    public ref int SummarisedCount {
+        get {
+            _SummarisedCountOffset = _SummarisedCountOffset ?? Schema.GetOffset(0x8A8061E2B62D7D04);
+            return ref _Handle.AsRef<int>(_SummarisedCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _InfoOffset;
+    private static nint? _InfoOffset;
 
-  public ref CTakeDamageInfo Info {
-    get {
-      if (_InfoOffset == null) {
-        _InfoOffset = Schema.GetOffset(0x8A8061E20FB40705);
-      }
-      return ref _Handle.AsRef<CTakeDamageInfo>(_InfoOffset!.Value);
+    public ref CTakeDamageInfo Info {
+        get {
+            _InfoOffset = _InfoOffset ?? Schema.GetOffset(0x8A8061E20FB40705);
+            return ref _Handle.AsRef<CTakeDamageInfo>(_InfoOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResultOffset;
+    private static nint? _ResultOffset;
 
-  public ref CTakeDamageResult Result {
-    get {
-      if (_ResultOffset == null) {
-        _ResultOffset = Schema.GetOffset(0x8A8061E20A377624);
-      }
-      return ref _Handle.AsRef<CTakeDamageResult>(_ResultOffset!.Value);
+    public ref CTakeDamageResult Result {
+        get {
+            _ResultOffset = _ResultOffset ?? Schema.GetOffset(0x8A8061E20A377624);
+            return ref _Handle.AsRef<CTakeDamageResult>(_ResultOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetOffset;
+    private static nint? _TargetOffset;
 
-  public ref CHandle<CBaseEntity> Target {
-    get {
-      if (_TargetOffset == null) {
-        _TargetOffset = Schema.GetOffset(0x8A8061E295A3933A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+    public ref CHandle<CBaseEntity> Target {
+        get {
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x8A8061E295A3933A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+        }
     }
-  }
 
 
 }

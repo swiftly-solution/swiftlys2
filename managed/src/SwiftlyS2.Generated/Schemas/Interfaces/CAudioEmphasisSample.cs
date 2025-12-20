@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAudioEmphasisSample : ISchemaClass<CAudioEmphasisSample> {
+public partial interface CAudioEmphasisSample : ISchemaClass<CAudioEmphasisSample>
+{
+    static CAudioEmphasisSample ISchemaClass<CAudioEmphasisSample>.From(nint handle) => new CAudioEmphasisSampleImpl(handle);
+    static int ISchemaClass<CAudioEmphasisSample>.Size => 8;
+    static string? ISchemaClass<CAudioEmphasisSample>.ClassName => null;
 
-  static CAudioEmphasisSample ISchemaClass<CAudioEmphasisSample>.From(nint handle) => new CAudioEmphasisSampleImpl(handle);
-  static int ISchemaClass<CAudioEmphasisSample>.Size => 8;
-  static string? ISchemaClass<CAudioEmphasisSample>.ClassName => null;
 
-  
-  public ref float Time { get; }
-  
-  public ref float Value { get; }
+    public ref float Time { get; }
+
+    public ref float Value { get; }
 
 
 }

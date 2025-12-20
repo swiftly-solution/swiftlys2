@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CExpressionActionUpdater : CAnimActionUpdater, ISchemaClass<CExpressionActionUpdater> {
+public partial interface CExpressionActionUpdater : CAnimActionUpdater, ISchemaClass<CExpressionActionUpdater>
+{
+    static CExpressionActionUpdater ISchemaClass<CExpressionActionUpdater>.From(nint handle) => new CExpressionActionUpdaterImpl(handle);
+    static int ISchemaClass<CExpressionActionUpdater>.Size => 32;
+    static string? ISchemaClass<CExpressionActionUpdater>.ClassName => null;
 
-  static CExpressionActionUpdater ISchemaClass<CExpressionActionUpdater>.From(nint handle) => new CExpressionActionUpdaterImpl(handle);
-  static int ISchemaClass<CExpressionActionUpdater>.Size => 32;
-  static string? ISchemaClass<CExpressionActionUpdater>.ClassName => null;
 
-  
-  public CAnimParamHandle Param { get; }
-  
-  public ref AnimParamType_t ParamType { get; }
-  
-  public AnimScriptHandle Script { get; }
+    public CAnimParamHandle Param { get; }
+
+    public ref AnimParamType_t ParamType { get; }
+
+    public AnimScriptHandle Script { get; }
 
 
 }

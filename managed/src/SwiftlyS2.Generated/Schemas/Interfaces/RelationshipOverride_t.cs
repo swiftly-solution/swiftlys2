@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RelationshipOverride_t : Relationship_t, ISchemaClass<RelationshipOverride_t> {
+public partial interface RelationshipOverride_t : Relationship_t, ISchemaClass<RelationshipOverride_t>
+{
+    static RelationshipOverride_t ISchemaClass<RelationshipOverride_t>.From(nint handle) => new RelationshipOverride_tImpl(handle);
+    static int ISchemaClass<RelationshipOverride_t>.Size => 16;
+    static string? ISchemaClass<RelationshipOverride_t>.ClassName => null;
 
-  static RelationshipOverride_t ISchemaClass<RelationshipOverride_t>.From(nint handle) => new RelationshipOverride_tImpl(handle);
-  static int ISchemaClass<RelationshipOverride_t>.Size => 16;
-  static string? ISchemaClass<RelationshipOverride_t>.ClassName => null;
 
-  
-  public ref CHandle<CBaseEntity> Entity { get; }
-  
-  public ref Class_T ClassType { get; }
+    public ref CHandle<CBaseEntity> Entity { get; }
+
+    public ref Class_T ClassType { get; }
 
 
 }

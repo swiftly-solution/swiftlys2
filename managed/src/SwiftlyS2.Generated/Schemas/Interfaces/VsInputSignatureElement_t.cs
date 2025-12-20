@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VsInputSignatureElement_t : ISchemaClass<VsInputSignatureElement_t> {
+public partial interface VsInputSignatureElement_t : ISchemaClass<VsInputSignatureElement_t>
+{
+    static VsInputSignatureElement_t ISchemaClass<VsInputSignatureElement_t>.From(nint handle) => new VsInputSignatureElement_tImpl(handle);
+    static int ISchemaClass<VsInputSignatureElement_t>.Size => 196;
+    static string? ISchemaClass<VsInputSignatureElement_t>.ClassName => null;
 
-  static VsInputSignatureElement_t ISchemaClass<VsInputSignatureElement_t>.From(nint handle) => new VsInputSignatureElement_tImpl(handle);
-  static int ISchemaClass<VsInputSignatureElement_t>.Size => 196;
-  static string? ISchemaClass<VsInputSignatureElement_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public string Semantic { get; set; }
-  
-  public string D3DSemanticName { get; set; }
-  
-  public ref int D3DSemanticIndex { get; }
+    public string Name { get; set; }
+
+    public string Semantic { get; set; }
+
+    public string D3DSemanticName { get; set; }
+
+    public ref int D3DSemanticIndex { get; }
 
 
 }

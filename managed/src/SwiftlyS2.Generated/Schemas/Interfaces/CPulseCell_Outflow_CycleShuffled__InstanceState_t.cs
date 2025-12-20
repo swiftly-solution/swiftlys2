@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Outflow_CycleShuffled__InstanceState_t : ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t> {
+public partial interface CPulseCell_Outflow_CycleShuffled__InstanceState_t : ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t>
+{
+    static CPulseCell_Outflow_CycleShuffled__InstanceState_t ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t>.From(nint handle) => new CPulseCell_Outflow_CycleShuffled__InstanceState_tImpl(handle);
+    static int ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t>.Size => 40;
+    static string? ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t>.ClassName => null;
 
-  static CPulseCell_Outflow_CycleShuffled__InstanceState_t ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t>.From(nint handle) => new CPulseCell_Outflow_CycleShuffled__InstanceState_tImpl(handle);
-  static int ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t>.Size => 40;
-  static string? ISchemaClass<CPulseCell_Outflow_CycleShuffled__InstanceState_t>.ClassName => null;
 
-  
-  // CUtlVectorFixedGrowable< uint8, 8 >
-  public SchemaUntypedField Shuffle { get; }
-  
-  public ref int NextShuffle { get; }
+    // CUtlVectorFixedGrowable< uint8, 8 >
+    public SchemaUntypedField Shuffle { get; }
+
+    public ref int NextShuffle { get; }
 
 
 }

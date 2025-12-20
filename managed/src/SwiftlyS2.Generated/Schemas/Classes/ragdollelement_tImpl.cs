@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ragdollelement_tImpl : SchemaClass, ragdollelement_t {
+internal partial class ragdollelement_tImpl : SchemaClass, ragdollelement_t
+{
+    public ragdollelement_tImpl(nint handle) : base(handle) { }
 
-  public ragdollelement_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OriginParentSpaceOffset;
 
-  private static nint? _OriginParentSpaceOffset;
-
-  public ref Vector OriginParentSpace {
-    get {
-      if (_OriginParentSpaceOffset == null) {
-        _OriginParentSpaceOffset = Schema.GetOffset(0x6DFDA0AB476AA8AB);
-      }
-      return ref _Handle.AsRef<Vector>(_OriginParentSpaceOffset!.Value);
+    public ref Vector OriginParentSpace {
+        get {
+            _OriginParentSpaceOffset = _OriginParentSpaceOffset ?? Schema.GetOffset(0x6DFDA0AB476AA8AB);
+            return ref _Handle.AsRef<Vector>(_OriginParentSpaceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentIndexOffset;
+    private static nint? _ParentIndexOffset;
 
-  public ref int ParentIndex {
-    get {
-      if (_ParentIndexOffset == null) {
-        _ParentIndexOffset = Schema.GetOffset(0x6DFDA0ABFE49C863);
-      }
-      return ref _Handle.AsRef<int>(_ParentIndexOffset!.Value);
+    public ref int ParentIndex {
+        get {
+            _ParentIndexOffset = _ParentIndexOffset ?? Schema.GetOffset(0x6DFDA0ABFE49C863);
+            return ref _Handle.AsRef<int>(_ParentIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x6DFDA0AB5ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x6DFDA0AB5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeightOffset;
+    private static nint? _HeightOffset;
 
-  public ref int Height {
-    get {
-      if (_HeightOffset == null) {
-        _HeightOffset = Schema.GetOffset(0x6DFDA0ABCAB61C56);
-      }
-      return ref _Handle.AsRef<int>(_HeightOffset!.Value);
+    public ref int Height {
+        get {
+            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0x6DFDA0ABCAB61C56);
+            return ref _Handle.AsRef<int>(_HeightOffset!.Value);
+        }
     }
-  }
 
 
 }

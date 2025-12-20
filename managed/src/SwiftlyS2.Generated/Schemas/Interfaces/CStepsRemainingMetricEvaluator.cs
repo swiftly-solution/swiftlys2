@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStepsRemainingMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CStepsRemainingMetricEvaluator> {
+public partial interface CStepsRemainingMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CStepsRemainingMetricEvaluator>
+{
+    static CStepsRemainingMetricEvaluator ISchemaClass<CStepsRemainingMetricEvaluator>.From(nint handle) => new CStepsRemainingMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CStepsRemainingMetricEvaluator>.Size => 112;
+    static string? ISchemaClass<CStepsRemainingMetricEvaluator>.ClassName => null;
 
-  static CStepsRemainingMetricEvaluator ISchemaClass<CStepsRemainingMetricEvaluator>.From(nint handle) => new CStepsRemainingMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CStepsRemainingMetricEvaluator>.Size => 112;
-  static string? ISchemaClass<CStepsRemainingMetricEvaluator>.ClassName => null;
 
-  
-  public ref CUtlVector<int> FootIndices { get; }
-  
-  public ref float MinStepsRemaining { get; }
+    public ref CUtlVector<int> FootIndices { get; }
+
+    public ref float MinStepsRemaining { get; }
 
 
 }

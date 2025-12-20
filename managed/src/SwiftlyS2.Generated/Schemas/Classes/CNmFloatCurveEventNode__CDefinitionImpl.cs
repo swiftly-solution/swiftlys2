@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatCurveEventNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatCurveEventNode__CDefinition {
+internal partial class CNmFloatCurveEventNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatCurveEventNode__CDefinition
+{
+    public CNmFloatCurveEventNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFloatCurveEventNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EventIDOffset;
 
-  private static nint? _EventIDOffset;
-
-  public ref CGlobalSymbol EventID {
-    get {
-      if (_EventIDOffset == null) {
-        _EventIDOffset = Schema.GetOffset(0x4512F5A69D798A72);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+    public ref CGlobalSymbol EventID {
+        get {
+            _EventIDOffset = _EventIDOffset ?? Schema.GetOffset(0x4512F5A69D798A72);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultNodeIdxOffset;
+    private static nint? _DefaultNodeIdxOffset;
 
-  public ref short DefaultNodeIdx {
-    get {
-      if (_DefaultNodeIdxOffset == null) {
-        _DefaultNodeIdxOffset = Schema.GetOffset(0x4512F5A6C14C9521);
-      }
-      return ref _Handle.AsRef<short>(_DefaultNodeIdxOffset!.Value);
+    public ref short DefaultNodeIdx {
+        get {
+            _DefaultNodeIdxOffset = _DefaultNodeIdxOffset ?? Schema.GetOffset(0x4512F5A6C14C9521);
+            return ref _Handle.AsRef<short>(_DefaultNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultValueOffset;
+    private static nint? _DefaultValueOffset;
 
-  public ref float DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0x4512F5A6700AB429);
-      }
-      return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+    public ref float DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x4512F5A6700AB429);
+            return ref _Handle.AsRef<float>(_DefaultValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventConditionRulesOffset;
+    private static nint? _EventConditionRulesOffset;
 
-  public CNmBitFlags EventConditionRules {
-    get {
-      if (_EventConditionRulesOffset == null) {
-        _EventConditionRulesOffset = Schema.GetOffset(0x4512F5A6A904315F);
-      }
-      return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+    public CNmBitFlags EventConditionRules {
+        get {
+            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x4512F5A6A904315F);
+            return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+        }
     }
-  }
 
 
 }

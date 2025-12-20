@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicProximity : CPointEntity, ISchemaClass<CLogicProximity> {
-
-  static CLogicProximity ISchemaClass<CLogicProximity>.From(nint handle) => new CLogicProximityImpl(handle);
-  static int ISchemaClass<CLogicProximity>.Size => 1264;
-  static string? ISchemaClass<CLogicProximity>.ClassName => "logic_proximity";
+public partial interface CLogicProximity : CPointEntity, ISchemaClass<CLogicProximity>
+{
+    static CLogicProximity ISchemaClass<CLogicProximity>.From(nint handle) => new CLogicProximityImpl(handle);
+    static int ISchemaClass<CLogicProximity>.Size => 1264;
+    static string? ISchemaClass<CLogicProximity>.ClassName => "logic_proximity";
 
 
 

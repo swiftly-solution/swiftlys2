@@ -6,68 +6,51 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CountdownTimerImpl : SchemaClass, CountdownTimer {
+internal partial class CountdownTimerImpl : SchemaClass, CountdownTimer
+{
+    public CountdownTimerImpl(nint handle) : base(handle) { }
 
-  public CountdownTimerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DurationOffset;
 
-  private static nint? _DurationOffset;
-
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0x8A632F13D9FF5AD);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x8A632F13D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimestampOffset;
+    private static nint? _TimestampOffset;
 
-  public GameTime_t Timestamp {
-    get {
-      if (_TimestampOffset == null) {
-        _TimestampOffset = Schema.GetOffset(0x8A632F1B6C56F43);
-      }
-      return new GameTime_tImpl(_Handle + _TimestampOffset!.Value);
+    public GameTime_t Timestamp {
+        get {
+            _TimestampOffset = _TimestampOffset ?? Schema.GetOffset(0x8A632F1B6C56F43);
+            return new GameTime_tImpl(_Handle + _TimestampOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimescaleOffset;
+    private static nint? _TimescaleOffset;
 
-  public ref float Timescale {
-    get {
-      if (_TimescaleOffset == null) {
-        _TimescaleOffset = Schema.GetOffset(0x8A632F18A240BBE);
-      }
-      return ref _Handle.AsRef<float>(_TimescaleOffset!.Value);
+    public ref float Timescale {
+        get {
+            _TimescaleOffset = _TimescaleOffset ?? Schema.GetOffset(0x8A632F18A240BBE);
+            return ref _Handle.AsRef<float>(_TimescaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldGroupIdOffset;
+    private static nint? _WorldGroupIdOffset;
 
-  public ref uint WorldGroupId {
-    get {
-      if (_WorldGroupIdOffset == null) {
-        _WorldGroupIdOffset = Schema.GetOffset(0x8A632F17414B193);
-      }
-      return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+    public ref uint WorldGroupId {
+        get {
+            _WorldGroupIdOffset = _WorldGroupIdOffset ?? Schema.GetOffset(0x8A632F17414B193);
+            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+        }
     }
-  }
 
-  public void DurationUpdated() {
-    Schema.Update(_Handle, 0x8A632F13D9FF5AD);
-  }
-  public void TimestampUpdated() {
-    Schema.Update(_Handle, 0x8A632F1B6C56F43);
-  }
-  public void TimescaleUpdated() {
-    Schema.Update(_Handle, 0x8A632F18A240BBE);
-  }
-  public void WorldGroupIdUpdated() {
-    Schema.Update(_Handle, 0x8A632F17414B193);
-  }
+    public void DurationUpdated() => Schema.Update(_Handle, 0x8A632F13D9FF5AD);
+    public void TimestampUpdated() => Schema.Update(_Handle, 0x8A632F1B6C56F43);
+    public void TimescaleUpdated() => Schema.Update(_Handle, 0x8A632F18A240BBE);
+    public void WorldGroupIdUpdated() => Schema.Update(_Handle, 0x8A632F17414B193);
 }

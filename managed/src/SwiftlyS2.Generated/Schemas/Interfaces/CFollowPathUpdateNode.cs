@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFollowPathUpdateNode : CUnaryUpdateNode, ISchemaClass<CFollowPathUpdateNode> {
+public partial interface CFollowPathUpdateNode : CUnaryUpdateNode, ISchemaClass<CFollowPathUpdateNode>
+{
+    static CFollowPathUpdateNode ISchemaClass<CFollowPathUpdateNode>.From(nint handle) => new CFollowPathUpdateNodeImpl(handle);
+    static int ISchemaClass<CFollowPathUpdateNode>.Size => 184;
+    static string? ISchemaClass<CFollowPathUpdateNode>.ClassName => null;
 
-  static CFollowPathUpdateNode ISchemaClass<CFollowPathUpdateNode>.From(nint handle) => new CFollowPathUpdateNodeImpl(handle);
-  static int ISchemaClass<CFollowPathUpdateNode>.Size => 184;
-  static string? ISchemaClass<CFollowPathUpdateNode>.ClassName => null;
 
-  
-  public ref float BlendOutTime { get; }
-  
-  public ref bool BlockNonPathMovement { get; }
-  
-  public ref bool StopFeetAtGoal { get; }
-  
-  public ref bool ScaleSpeed { get; }
-  
-  public ref float Scale { get; }
-  
-  public ref float MinAngle { get; }
-  
-  public ref float MaxAngle { get; }
-  
-  public ref float SpeedScaleBlending { get; }
-  
-  public CAnimInputDamping TurnDamping { get; }
-  
-  public ref AnimValueSource FacingTarget { get; }
-  
-  public CAnimParamHandle Param { get; }
-  
-  public ref float TurnToFaceOffset { get; }
-  
-  public ref bool TurnToFace { get; }
+    public ref float BlendOutTime { get; }
+
+    public ref bool BlockNonPathMovement { get; }
+
+    public ref bool StopFeetAtGoal { get; }
+
+    public ref bool ScaleSpeed { get; }
+
+    public ref float Scale { get; }
+
+    public ref float MinAngle { get; }
+
+    public ref float MaxAngle { get; }
+
+    public ref float SpeedScaleBlending { get; }
+
+    public CAnimInputDamping TurnDamping { get; }
+
+    public ref AnimValueSource FacingTarget { get; }
+
+    public CAnimParamHandle Param { get; }
+
+    public ref float TurnToFaceOffset { get; }
+
+    public ref bool TurnToFace { get; }
 
 
 }

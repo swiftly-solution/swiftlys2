@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmConstIDNode__CDefinitionImpl : CNmIDValueNode__CDefinitionImpl, CNmConstIDNode__CDefinition {
+internal partial class CNmConstIDNode__CDefinitionImpl : CNmIDValueNode__CDefinitionImpl, CNmConstIDNode__CDefinition
+{
+    public CNmConstIDNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmConstIDNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ValueOffset;
 
-  private static nint? _ValueOffset;
-
-  public ref CGlobalSymbol Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0xF68AB5F96B99AEEA);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_ValueOffset!.Value);
+    public ref CGlobalSymbol Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xF68AB5F96B99AEEA);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ValueOffset!.Value);
+        }
     }
-  }
 
 
 }

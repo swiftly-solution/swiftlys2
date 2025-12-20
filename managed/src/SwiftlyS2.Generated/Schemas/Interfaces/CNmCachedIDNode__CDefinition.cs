@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmCachedIDNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmCachedIDNode__CDefinition> {
+public partial interface CNmCachedIDNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmCachedIDNode__CDefinition>
+{
+    static CNmCachedIDNode__CDefinition ISchemaClass<CNmCachedIDNode__CDefinition>.From(nint handle) => new CNmCachedIDNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmCachedIDNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmCachedIDNode__CDefinition>.ClassName => null;
 
-  static CNmCachedIDNode__CDefinition ISchemaClass<CNmCachedIDNode__CDefinition>.From(nint handle) => new CNmCachedIDNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmCachedIDNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmCachedIDNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref NmCachedValueMode_t Mode { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    public ref NmCachedValueMode_t Mode { get; }
 
 
 }

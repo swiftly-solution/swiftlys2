@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSequenceUpdateNodeBase : CLeafUpdateNode, ISchemaClass<CSequenceUpdateNodeBase> {
+public partial interface CSequenceUpdateNodeBase : CLeafUpdateNode, ISchemaClass<CSequenceUpdateNodeBase>
+{
+    static CSequenceUpdateNodeBase ISchemaClass<CSequenceUpdateNodeBase>.From(nint handle) => new CSequenceUpdateNodeBaseImpl(handle);
+    static int ISchemaClass<CSequenceUpdateNodeBase>.Size => 120;
+    static string? ISchemaClass<CSequenceUpdateNodeBase>.ClassName => null;
 
-  static CSequenceUpdateNodeBase ISchemaClass<CSequenceUpdateNodeBase>.From(nint handle) => new CSequenceUpdateNodeBaseImpl(handle);
-  static int ISchemaClass<CSequenceUpdateNodeBase>.Size => 120;
-  static string? ISchemaClass<CSequenceUpdateNodeBase>.ClassName => null;
 
-  
-  public ref float PlaybackSpeed { get; }
-  
-  public ref bool Loop { get; }
+    public ref float PlaybackSpeed { get; }
+
+    public ref bool Loop { get; }
 
 
 }

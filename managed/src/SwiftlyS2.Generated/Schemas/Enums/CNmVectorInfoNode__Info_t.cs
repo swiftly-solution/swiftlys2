@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CNmVectorInfoNode__Info_t : byte {
-
+public enum CNmVectorInfoNode__Info_t : byte
+{
  X = 0,
 
  Y = 1,

@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerVolumeImpl : CBaseModelEntityImpl, CTriggerVolume {
+internal partial class CTriggerVolumeImpl : CBaseModelEntityImpl, CTriggerVolume
+{
+    public CTriggerVolumeImpl(nint handle) : base(handle) { }
 
-  public CTriggerVolumeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FilterNameOffset;
 
-  private static nint? _FilterNameOffset;
+    public string FilterName {
+        get {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x8A35845409C86445);
+            return Schema.GetString(_Handle.Read<nint>(_FilterNameOffset!.Value));
+        }
+        set {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x8A35845409C86445);
+            Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FilterOffset;
 
-  public string FilterName {
-    get {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0x8A35845409C86445);
-      }
-      var ptr = _Handle.Read<nint>(_FilterNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CHandle<CBaseFilter> Filter {
+        get {
+            _FilterOffset = _FilterOffset ?? Schema.GetOffset(0x8A35845445D9E0B1);
+            return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset!.Value);
+        }
     }
-    set {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0x8A35845409C86445);
-      }
-      Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _FilterOffset;
-
-  public ref CHandle<CBaseFilter> Filter {
-    get {
-      if (_FilterOffset == null) {
-        _FilterOffset = Schema.GetOffset(0x8A35845445D9E0B1);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset!.Value);
-    }
-  }
 
 
 }

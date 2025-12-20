@@ -6,29 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSGameModeRules_ArmsRaceImpl : CCSGameModeRulesImpl, CCSGameModeRules_ArmsRace {
+internal partial class CCSGameModeRules_ArmsRaceImpl : CCSGameModeRulesImpl, CCSGameModeRules_ArmsRace
+{
+    public CCSGameModeRules_ArmsRaceImpl(nint handle) : base(handle) { }
 
-  public CCSGameModeRules_ArmsRaceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WeaponSequenceOffset;
 
-  private static nint? _WeaponSequenceOffset;
-
-  public ref CUtlVector<CUtlString> WeaponSequence {
-    get {
-      if (_WeaponSequenceOffset == null) {
-        _WeaponSequenceOffset = Schema.GetOffset(0xDFFFC2FB1426444C);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_WeaponSequenceOffset!.Value);
+    public ref CUtlVector<CUtlString> WeaponSequence {
+        get {
+            _WeaponSequenceOffset = _WeaponSequenceOffset ?? Schema.GetOffset(0xDFFFC2FB1426444C);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_WeaponSequenceOffset!.Value);
+        }
     }
-  }
 
-  public void WeaponSequenceUpdated() {
-    Schema.Update(_Handle, 0xDFFFC2FB1426444C);
-  }
+    public void WeaponSequenceUpdated() => Schema.Update(_Handle, 0xDFFFC2FB1426444C);
 }

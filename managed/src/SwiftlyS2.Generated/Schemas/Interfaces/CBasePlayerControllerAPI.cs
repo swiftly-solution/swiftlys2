@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBasePlayerControllerAPI : ISchemaClass<CBasePlayerControllerAPI> {
-
-  static CBasePlayerControllerAPI ISchemaClass<CBasePlayerControllerAPI>.From(nint handle) => new CBasePlayerControllerAPIImpl(handle);
-  static int ISchemaClass<CBasePlayerControllerAPI>.Size => 8;
-  static string? ISchemaClass<CBasePlayerControllerAPI>.ClassName => null;
+public partial interface CBasePlayerControllerAPI : ISchemaClass<CBasePlayerControllerAPI>
+{
+    static CBasePlayerControllerAPI ISchemaClass<CBasePlayerControllerAPI>.From(nint handle) => new CBasePlayerControllerAPIImpl(handle);
+    static int ISchemaClass<CBasePlayerControllerAPI>.Size => 8;
+    static string? ISchemaClass<CBasePlayerControllerAPI>.ClassName => null;
 
 
 

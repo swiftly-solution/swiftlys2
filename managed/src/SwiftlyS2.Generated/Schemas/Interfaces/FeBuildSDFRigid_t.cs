@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeBuildSDFRigid_t : FeSDFRigid_t, ISchemaClass<FeBuildSDFRigid_t> {
+public partial interface FeBuildSDFRigid_t : FeSDFRigid_t, ISchemaClass<FeBuildSDFRigid_t>
+{
+    static FeBuildSDFRigid_t ISchemaClass<FeBuildSDFRigid_t>.From(nint handle) => new FeBuildSDFRigid_tImpl(handle);
+    static int ISchemaClass<FeBuildSDFRigid_t>.Size => 96;
+    static string? ISchemaClass<FeBuildSDFRigid_t>.ClassName => null;
 
-  static FeBuildSDFRigid_t ISchemaClass<FeBuildSDFRigid_t>.From(nint handle) => new FeBuildSDFRigid_tImpl(handle);
-  static int ISchemaClass<FeBuildSDFRigid_t>.Size => 96;
-  static string? ISchemaClass<FeBuildSDFRigid_t>.ClassName => null;
 
-  
-  public ref int Priority { get; }
-  
-  public ref uint VertexMapHash { get; }
-  
-  public ref uint AntitunnelGroupBits { get; }
+    public ref int Priority { get; }
+
+    public ref uint VertexMapHash { get; }
+
+    public ref uint AntitunnelGroupBits { get; }
 
 
 }

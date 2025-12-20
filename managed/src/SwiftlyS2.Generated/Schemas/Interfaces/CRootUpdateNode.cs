@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRootUpdateNode : CUnaryUpdateNode, ISchemaClass<CRootUpdateNode> {
-
-  static CRootUpdateNode ISchemaClass<CRootUpdateNode>.From(nint handle) => new CRootUpdateNodeImpl(handle);
-  static int ISchemaClass<CRootUpdateNode>.Size => 112;
-  static string? ISchemaClass<CRootUpdateNode>.ClassName => null;
+public partial interface CRootUpdateNode : CUnaryUpdateNode, ISchemaClass<CRootUpdateNode>
+{
+    static CRootUpdateNode ISchemaClass<CRootUpdateNode>.From(nint handle) => new CRootUpdateNodeImpl(handle);
+    static int ISchemaClass<CRootUpdateNode>.Size => 112;
+    static string? ISchemaClass<CRootUpdateNode>.ClassName => null;
 
 
 

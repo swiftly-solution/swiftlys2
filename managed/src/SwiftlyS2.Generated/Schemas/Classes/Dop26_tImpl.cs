@@ -6,20 +6,19 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class Dop26_tImpl : SchemaClass, Dop26_t {
+internal partial class Dop26_tImpl : SchemaClass, Dop26_t
+{
+    public Dop26_tImpl(nint handle) : base(handle) { }
 
-  public Dop26_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<float> Support {
-    get => new SchemaFixedArray<float>(_Handle, 0xBBAD032FAD766CEA, 26, 4, 4);
-  }
+    public ISchemaFixedArray<float> Support {
+        get => new SchemaFixedArray<float>(_Handle, 0xBBAD032FAD766CEA, 26, 4, 4);
+    }
 
 
 }

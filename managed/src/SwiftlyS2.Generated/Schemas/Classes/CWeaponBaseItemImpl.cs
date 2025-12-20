@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CWeaponBaseItemImpl : CCSWeaponBaseImpl, CWeaponBaseItem {
+internal partial class CWeaponBaseItemImpl : CCSWeaponBaseImpl, CWeaponBaseItem
+{
+    public CWeaponBaseItemImpl(nint handle) : base(handle) { }
 
-  public CWeaponBaseItemImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SequenceInProgressOffset;
 
-  private static nint? _SequenceInProgressOffset;
-
-  public ref bool SequenceInProgress {
-    get {
-      if (_SequenceInProgressOffset == null) {
-        _SequenceInProgressOffset = Schema.GetOffset(0xE4ECC3486DDA8858);
-      }
-      return ref _Handle.AsRef<bool>(_SequenceInProgressOffset!.Value);
+    public ref bool SequenceInProgress {
+        get {
+            _SequenceInProgressOffset = _SequenceInProgressOffset ?? Schema.GetOffset(0xE4ECC3486DDA8858);
+            return ref _Handle.AsRef<bool>(_SequenceInProgressOffset!.Value);
+        }
     }
-  }
-  private static nint? _RedrawOffset;
+    private static nint? _RedrawOffset;
 
-  public ref bool Redraw {
-    get {
-      if (_RedrawOffset == null) {
-        _RedrawOffset = Schema.GetOffset(0xE4ECC348612F4EB2);
-      }
-      return ref _Handle.AsRef<bool>(_RedrawOffset!.Value);
+    public ref bool Redraw {
+        get {
+            _RedrawOffset = _RedrawOffset ?? Schema.GetOffset(0xE4ECC348612F4EB2);
+            return ref _Handle.AsRef<bool>(_RedrawOffset!.Value);
+        }
     }
-  }
 
-  public void SequenceInProgressUpdated() {
-    Schema.Update(_Handle, 0xE4ECC3486DDA8858);
-  }
-  public void RedrawUpdated() {
-    Schema.Update(_Handle, 0xE4ECC348612F4EB2);
-  }
+    public void SequenceInProgressUpdated() => Schema.Update(_Handle, 0xE4ECC3486DDA8858);
+    public void RedrawUpdated() => Schema.Update(_Handle, 0xE4ECC348612F4EB2);
 }

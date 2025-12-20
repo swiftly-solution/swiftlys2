@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ParamSpanSample_t : ISchemaClass<ParamSpanSample_t> {
+public partial interface ParamSpanSample_t : ISchemaClass<ParamSpanSample_t>
+{
+    static ParamSpanSample_t ISchemaClass<ParamSpanSample_t>.From(nint handle) => new ParamSpanSample_tImpl(handle);
+    static int ISchemaClass<ParamSpanSample_t>.Size => 24;
+    static string? ISchemaClass<ParamSpanSample_t>.ClassName => null;
 
-  static ParamSpanSample_t ISchemaClass<ParamSpanSample_t>.From(nint handle) => new ParamSpanSample_tImpl(handle);
-  static int ISchemaClass<ParamSpanSample_t>.Size => 24;
-  static string? ISchemaClass<ParamSpanSample_t>.ClassName => null;
 
-  
-  // CAnimVariant
-  public SchemaUntypedField Value { get; }
-  
-  public ref float Cycle { get; }
+    // CAnimVariant
+    public SchemaUntypedField Value { get; }
+
+    public ref float Cycle { get; }
 
 
 }

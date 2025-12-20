@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_InlineNodeSkipSelector : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_InlineNodeSkipSelector> {
+public partial interface CPulseCell_InlineNodeSkipSelector : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_InlineNodeSkipSelector>
+{
+    static CPulseCell_InlineNodeSkipSelector ISchemaClass<CPulseCell_InlineNodeSkipSelector>.From(nint handle) => new CPulseCell_InlineNodeSkipSelectorImpl(handle);
+    static int ISchemaClass<CPulseCell_InlineNodeSkipSelector>.Size => 176;
+    static string? ISchemaClass<CPulseCell_InlineNodeSkipSelector>.ClassName => null;
 
-  static CPulseCell_InlineNodeSkipSelector ISchemaClass<CPulseCell_InlineNodeSkipSelector>.From(nint handle) => new CPulseCell_InlineNodeSkipSelectorImpl(handle);
-  static int ISchemaClass<CPulseCell_InlineNodeSkipSelector>.Size => 176;
-  static string? ISchemaClass<CPulseCell_InlineNodeSkipSelector>.ClassName => null;
 
-  
-  public PulseDocNodeID_t FlowNodeID { get; }
-  
-  public ref bool And { get; }
-  
-  public PulseSelectorOutflowList_t PassOutflow { get; }
-  
-  public CPulse_OutflowConnection FailOutflow { get; }
+    public PulseDocNodeID_t FlowNodeID { get; }
+
+    public ref bool And { get; }
+
+    public PulseSelectorOutflowList_t PassOutflow { get; }
+
+    public CPulse_OutflowConnection FailOutflow { get; }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleAttrBoxFlags_t : uint {
-
+public enum ParticleAttrBoxFlags_t : uint
+{
  PARTICLE_ATTR_BOX_FLAGS_NONE = 0,
 
  PARTICLE_ATTR_BOX_FLAGS_WATER = 1,

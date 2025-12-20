@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseGraphExecutionHistoryNodeDesc_t : ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t> {
+public partial interface PulseGraphExecutionHistoryNodeDesc_t : ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t>
+{
+    static PulseGraphExecutionHistoryNodeDesc_t ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t>.From(nint handle) => new PulseGraphExecutionHistoryNodeDesc_tImpl(handle);
+    static int ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t>.Size => 32;
+    static string? ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t>.ClassName => null;
 
-  static PulseGraphExecutionHistoryNodeDesc_t ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t>.From(nint handle) => new PulseGraphExecutionHistoryNodeDesc_tImpl(handle);
-  static int ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t>.Size => 32;
-  static string? ISchemaClass<PulseGraphExecutionHistoryNodeDesc_t>.ClassName => null;
 
-  
-  public ref CBufferString StrCellDesc { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField StrBindingName { get; }
+    public ref CBufferString StrCellDesc { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField StrBindingName { get; }
 
 
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SoundeventPathCornerPairNetworked_t : ISchemaClass<SoundeventPathCornerPairNetworked_t> {
+public partial interface SoundeventPathCornerPairNetworked_t : ISchemaClass<SoundeventPathCornerPairNetworked_t>
+{
+    static SoundeventPathCornerPairNetworked_t ISchemaClass<SoundeventPathCornerPairNetworked_t>.From(nint handle) => new SoundeventPathCornerPairNetworked_tImpl(handle);
+    static int ISchemaClass<SoundeventPathCornerPairNetworked_t>.Size => 36;
+    static string? ISchemaClass<SoundeventPathCornerPairNetworked_t>.ClassName => null;
 
-  static SoundeventPathCornerPairNetworked_t ISchemaClass<SoundeventPathCornerPairNetworked_t>.From(nint handle) => new SoundeventPathCornerPairNetworked_tImpl(handle);
-  static int ISchemaClass<SoundeventPathCornerPairNetworked_t>.Size => 36;
-  static string? ISchemaClass<SoundeventPathCornerPairNetworked_t>.ClassName => null;
 
-  
-  public ref Vector P1 { get; }
-  
-  public ref Vector P2 { get; }
-  
-  public ref float PathLengthSqr { get; }
-  
-  public ref float P1Pct { get; }
-  
-  public ref float P2Pct { get; }
+    public ref Vector P1 { get; }
 
-  public void P1Updated();
-  public void P2Updated();
-  public void PathLengthSqrUpdated();
-  public void P1PctUpdated();
-  public void P2PctUpdated();
+    public ref Vector P2 { get; }
+
+    public ref float PathLengthSqr { get; }
+
+    public ref float P1Pct { get; }
+
+    public ref float P2Pct { get; }
+
+    public void P1Updated();
+    public void P2Updated();
+    public void PathLengthSqrUpdated();
+    public void P1PctUpdated();
+    public void P2PctUpdated();
 }

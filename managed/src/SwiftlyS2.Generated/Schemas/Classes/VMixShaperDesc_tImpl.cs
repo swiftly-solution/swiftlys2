@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixShaperDesc_tImpl : SchemaClass, VMixShaperDesc_t {
+internal partial class VMixShaperDesc_tImpl : SchemaClass, VMixShaperDesc_t
+{
+    public VMixShaperDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixShaperDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ShapeOffset;
 
-  private static nint? _ShapeOffset;
-
-  public ref int Shape {
-    get {
-      if (_ShapeOffset == null) {
-        _ShapeOffset = Schema.GetOffset(0x80E2A73621208A02);
-      }
-      return ref _Handle.AsRef<int>(_ShapeOffset!.Value);
+    public ref int Shape {
+        get {
+            _ShapeOffset = _ShapeOffset ?? Schema.GetOffset(0x80E2A73621208A02);
+            return ref _Handle.AsRef<int>(_ShapeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FldbDriveOffset;
+    private static nint? _FldbDriveOffset;
 
-  public ref float FldbDrive {
-    get {
-      if (_FldbDriveOffset == null) {
-        _FldbDriveOffset = Schema.GetOffset(0x80E2A7360E12679B);
-      }
-      return ref _Handle.AsRef<float>(_FldbDriveOffset!.Value);
+    public ref float FldbDrive {
+        get {
+            _FldbDriveOffset = _FldbDriveOffset ?? Schema.GetOffset(0x80E2A7360E12679B);
+            return ref _Handle.AsRef<float>(_FldbDriveOffset!.Value);
+        }
     }
-  }
-  private static nint? _FldbOutputGainOffset;
+    private static nint? _FldbOutputGainOffset;
 
-  public ref float FldbOutputGain {
-    get {
-      if (_FldbOutputGainOffset == null) {
-        _FldbOutputGainOffset = Schema.GetOffset(0x80E2A73667F97C23);
-      }
-      return ref _Handle.AsRef<float>(_FldbOutputGainOffset!.Value);
+    public ref float FldbOutputGain {
+        get {
+            _FldbOutputGainOffset = _FldbOutputGainOffset ?? Schema.GetOffset(0x80E2A73667F97C23);
+            return ref _Handle.AsRef<float>(_FldbOutputGainOffset!.Value);
+        }
     }
-  }
-  private static nint? _WetMixOffset;
+    private static nint? _WetMixOffset;
 
-  public ref float WetMix {
-    get {
-      if (_WetMixOffset == null) {
-        _WetMixOffset = Schema.GetOffset(0x80E2A736D5453C15);
-      }
-      return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+    public ref float WetMix {
+        get {
+            _WetMixOffset = _WetMixOffset ?? Schema.GetOffset(0x80E2A736D5453C15);
+            return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+        }
     }
-  }
-  private static nint? _OversampleFactorOffset;
+    private static nint? _OversampleFactorOffset;
 
-  public ref int OversampleFactor {
-    get {
-      if (_OversampleFactorOffset == null) {
-        _OversampleFactorOffset = Schema.GetOffset(0x80E2A736142D0AF2);
-      }
-      return ref _Handle.AsRef<int>(_OversampleFactorOffset!.Value);
+    public ref int OversampleFactor {
+        get {
+            _OversampleFactorOffset = _OversampleFactorOffset ?? Schema.GetOffset(0x80E2A736142D0AF2);
+            return ref _Handle.AsRef<int>(_OversampleFactorOffset!.Value);
+        }
     }
-  }
 
 
 }

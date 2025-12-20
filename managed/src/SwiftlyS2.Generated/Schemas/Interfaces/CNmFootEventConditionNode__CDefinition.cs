@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFootEventConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmFootEventConditionNode__CDefinition> {
+public partial interface CNmFootEventConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmFootEventConditionNode__CDefinition>
+{
+    static CNmFootEventConditionNode__CDefinition ISchemaClass<CNmFootEventConditionNode__CDefinition>.From(nint handle) => new CNmFootEventConditionNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFootEventConditionNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmFootEventConditionNode__CDefinition>.ClassName => null;
 
-  static CNmFootEventConditionNode__CDefinition ISchemaClass<CNmFootEventConditionNode__CDefinition>.From(nint handle) => new CNmFootEventConditionNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFootEventConditionNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmFootEventConditionNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SourceStateNodeIdx { get; }
-  
-  public ref NmFootPhaseCondition_t PhaseCondition { get; }
-  
-  public CNmBitFlags EventConditionRules { get; }
+    public ref short SourceStateNodeIdx { get; }
+
+    public ref NmFootPhaseCondition_t PhaseCondition { get; }
+
+    public CNmBitFlags EventConditionRules { get; }
 
 
 }

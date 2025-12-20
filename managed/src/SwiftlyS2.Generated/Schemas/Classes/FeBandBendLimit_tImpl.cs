@@ -6,40 +6,35 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeBandBendLimit_tImpl : SchemaClass, FeBandBendLimit_t {
+internal partial class FeBandBendLimit_tImpl : SchemaClass, FeBandBendLimit_t
+{
+    public FeBandBendLimit_tImpl(nint handle) : base(handle) { }
 
-  public FeBandBendLimit_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DistMinOffset;
 
-  private static nint? _DistMinOffset;
-
-  public ref float DistMin {
-    get {
-      if (_DistMinOffset == null) {
-        _DistMinOffset = Schema.GetOffset(0xB667406005D5EE89);
-      }
-      return ref _Handle.AsRef<float>(_DistMinOffset!.Value);
+    public ref float DistMin {
+        get {
+            _DistMinOffset = _DistMinOffset ?? Schema.GetOffset(0xB667406005D5EE89);
+            return ref _Handle.AsRef<float>(_DistMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistMaxOffset;
+    private static nint? _DistMaxOffset;
 
-  public ref float DistMax {
-    get {
-      if (_DistMaxOffset == null) {
-        _DistMaxOffset = Schema.GetOffset(0xB6674060F7C250C7);
-      }
-      return ref _Handle.AsRef<float>(_DistMaxOffset!.Value);
+    public ref float DistMax {
+        get {
+            _DistMaxOffset = _DistMaxOffset ?? Schema.GetOffset(0xB6674060F7C250C7);
+            return ref _Handle.AsRef<float>(_DistMaxOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0xB6674060CD6694B9, 6, 2, 2);
-  }
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0xB6674060CD6694B9, 6, 2, 2);
+    }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_SetRigidAttachment : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetRigidAttachment> {
+public partial interface C_INIT_SetRigidAttachment : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetRigidAttachment>
+{
+    static C_INIT_SetRigidAttachment ISchemaClass<C_INIT_SetRigidAttachment>.From(nint handle) => new C_INIT_SetRigidAttachmentImpl(handle);
+    static int ISchemaClass<C_INIT_SetRigidAttachment>.Size => 488;
+    static string? ISchemaClass<C_INIT_SetRigidAttachment>.ClassName => null;
 
-  static C_INIT_SetRigidAttachment ISchemaClass<C_INIT_SetRigidAttachment>.From(nint handle) => new C_INIT_SetRigidAttachmentImpl(handle);
-  static int ISchemaClass<C_INIT_SetRigidAttachment>.Size => 488;
-  static string? ISchemaClass<C_INIT_SetRigidAttachment>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref bool LocalSpace { get; }
+    public ref int ControlPointNumber { get; }
+
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref bool LocalSpace { get; }
 
 
 }

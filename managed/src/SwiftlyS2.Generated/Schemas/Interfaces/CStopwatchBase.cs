@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStopwatchBase : CSimpleSimTimer, ISchemaClass<CStopwatchBase> {
+public partial interface CStopwatchBase : CSimpleSimTimer, ISchemaClass<CStopwatchBase>
+{
+    static CStopwatchBase ISchemaClass<CStopwatchBase>.From(nint handle) => new CStopwatchBaseImpl(handle);
+    static int ISchemaClass<CStopwatchBase>.Size => 12;
+    static string? ISchemaClass<CStopwatchBase>.ClassName => null;
 
-  static CStopwatchBase ISchemaClass<CStopwatchBase>.From(nint handle) => new CStopwatchBaseImpl(handle);
-  static int ISchemaClass<CStopwatchBase>.Size => 12;
-  static string? ISchemaClass<CStopwatchBase>.ClassName => null;
 
-  
-  public ref bool IsRunning { get; }
+    public ref bool IsRunning { get; }
 
 
 }

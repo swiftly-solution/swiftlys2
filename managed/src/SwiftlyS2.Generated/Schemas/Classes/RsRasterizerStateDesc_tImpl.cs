@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RsRasterizerStateDesc_tImpl : SchemaClass, RsRasterizerStateDesc_t {
+internal partial class RsRasterizerStateDesc_tImpl : SchemaClass, RsRasterizerStateDesc_t
+{
+    public RsRasterizerStateDesc_tImpl(nint handle) : base(handle) { }
 
-  public RsRasterizerStateDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FillModeOffset;
 
-  private static nint? _FillModeOffset;
-
-  public ref RsFillMode_t FillMode {
-    get {
-      if (_FillModeOffset == null) {
-        _FillModeOffset = Schema.GetOffset(0x9C50E9DEFBCF0B4F);
-      }
-      return ref _Handle.AsRef<RsFillMode_t>(_FillModeOffset!.Value);
+    public ref RsFillMode_t FillMode {
+        get {
+            _FillModeOffset = _FillModeOffset ?? Schema.GetOffset(0x9C50E9DEFBCF0B4F);
+            return ref _Handle.AsRef<RsFillMode_t>(_FillModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _CullModeOffset;
+    private static nint? _CullModeOffset;
 
-  public ref RsCullMode_t CullMode {
-    get {
-      if (_CullModeOffset == null) {
-        _CullModeOffset = Schema.GetOffset(0x9C50E9DE9B5ACDB6);
-      }
-      return ref _Handle.AsRef<RsCullMode_t>(_CullModeOffset!.Value);
+    public ref RsCullMode_t CullMode {
+        get {
+            _CullModeOffset = _CullModeOffset ?? Schema.GetOffset(0x9C50E9DE9B5ACDB6);
+            return ref _Handle.AsRef<RsCullMode_t>(_CullModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthClipEnableOffset;
+    private static nint? _DepthClipEnableOffset;
 
-  public ref bool DepthClipEnable {
-    get {
-      if (_DepthClipEnableOffset == null) {
-        _DepthClipEnableOffset = Schema.GetOffset(0x9C50E9DED003B21B);
-      }
-      return ref _Handle.AsRef<bool>(_DepthClipEnableOffset!.Value);
+    public ref bool DepthClipEnable {
+        get {
+            _DepthClipEnableOffset = _DepthClipEnableOffset ?? Schema.GetOffset(0x9C50E9DED003B21B);
+            return ref _Handle.AsRef<bool>(_DepthClipEnableOffset!.Value);
+        }
     }
-  }
-  private static nint? _MultisampleEnableOffset;
+    private static nint? _MultisampleEnableOffset;
 
-  public ref bool MultisampleEnable {
-    get {
-      if (_MultisampleEnableOffset == null) {
-        _MultisampleEnableOffset = Schema.GetOffset(0x9C50E9DEA3D615E7);
-      }
-      return ref _Handle.AsRef<bool>(_MultisampleEnableOffset!.Value);
+    public ref bool MultisampleEnable {
+        get {
+            _MultisampleEnableOffset = _MultisampleEnableOffset ?? Schema.GetOffset(0x9C50E9DEA3D615E7);
+            return ref _Handle.AsRef<bool>(_MultisampleEnableOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthBiasOffset;
+    private static nint? _DepthBiasOffset;
 
-  public ref int DepthBias {
-    get {
-      if (_DepthBiasOffset == null) {
-        _DepthBiasOffset = Schema.GetOffset(0x9C50E9DE7042005B);
-      }
-      return ref _Handle.AsRef<int>(_DepthBiasOffset!.Value);
+    public ref int DepthBias {
+        get {
+            _DepthBiasOffset = _DepthBiasOffset ?? Schema.GetOffset(0x9C50E9DE7042005B);
+            return ref _Handle.AsRef<int>(_DepthBiasOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthBiasClampOffset;
+    private static nint? _DepthBiasClampOffset;
 
-  public ref float DepthBiasClamp {
-    get {
-      if (_DepthBiasClampOffset == null) {
-        _DepthBiasClampOffset = Schema.GetOffset(0x9C50E9DEA541A904);
-      }
-      return ref _Handle.AsRef<float>(_DepthBiasClampOffset!.Value);
+    public ref float DepthBiasClamp {
+        get {
+            _DepthBiasClampOffset = _DepthBiasClampOffset ?? Schema.GetOffset(0x9C50E9DEA541A904);
+            return ref _Handle.AsRef<float>(_DepthBiasClampOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlopeScaledDepthBiasOffset;
+    private static nint? _SlopeScaledDepthBiasOffset;
 
-  public ref float SlopeScaledDepthBias {
-    get {
-      if (_SlopeScaledDepthBiasOffset == null) {
-        _SlopeScaledDepthBiasOffset = Schema.GetOffset(0x9C50E9DE4E34B6FC);
-      }
-      return ref _Handle.AsRef<float>(_SlopeScaledDepthBiasOffset!.Value);
+    public ref float SlopeScaledDepthBias {
+        get {
+            _SlopeScaledDepthBiasOffset = _SlopeScaledDepthBiasOffset ?? Schema.GetOffset(0x9C50E9DE4E34B6FC);
+            return ref _Handle.AsRef<float>(_SlopeScaledDepthBiasOffset!.Value);
+        }
     }
-  }
 
 
 }

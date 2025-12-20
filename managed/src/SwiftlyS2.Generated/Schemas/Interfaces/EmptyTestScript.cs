@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EmptyTestScript : CAnimScriptBase, ISchemaClass<EmptyTestScript> {
+public partial interface EmptyTestScript : CAnimScriptBase, ISchemaClass<EmptyTestScript>
+{
+    static EmptyTestScript ISchemaClass<EmptyTestScript>.From(nint handle) => new EmptyTestScriptImpl(handle);
+    static int ISchemaClass<EmptyTestScript>.Size => 32;
+    static string? ISchemaClass<EmptyTestScript>.ClassName => null;
 
-  static EmptyTestScript ISchemaClass<EmptyTestScript>.From(nint handle) => new EmptyTestScriptImpl(handle);
-  static int ISchemaClass<EmptyTestScript>.Size => 32;
-  static string? ISchemaClass<EmptyTestScript>.ClassName => null;
 
-  
-  // CAnimScriptParam< float32 >
-  public SchemaUntypedField Test { get; }
+    // CAnimScriptParam< float32 >
+    public SchemaUntypedField Test { get; }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimGraphControllerBaseImpl : SchemaClass, CAnimGraphControllerBase {
+internal partial class CAnimGraphControllerBaseImpl : SchemaClass, CAnimGraphControllerBase
+{
+    public CAnimGraphControllerBaseImpl(nint handle) : base(handle) { }
 
-  public CAnimGraphControllerBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParamsToResetInPostGraphUpdateOffset;
 
-  private static nint? _ParamsToResetInPostGraphUpdateOffset;
-
-  public SchemaUntypedField ParamsToResetInPostGraphUpdate {
-    get {
-      if (_ParamsToResetInPostGraphUpdateOffset == null) {
-        _ParamsToResetInPostGraphUpdateOffset = Schema.GetOffset(0x1AA25B60A3E3A289);
-      }
-      return new SchemaUntypedField(_Handle + _ParamsToResetInPostGraphUpdateOffset!.Value);
+    public SchemaUntypedField ParamsToResetInPostGraphUpdate {
+        get {
+            _ParamsToResetInPostGraphUpdateOffset = _ParamsToResetInPostGraphUpdateOffset ?? Schema.GetOffset(0x1AA25B60A3E3A289);
+            return new SchemaUntypedField(_Handle + _ParamsToResetInPostGraphUpdateOffset!.Value);
+        }
     }
-  }
 
 
 }

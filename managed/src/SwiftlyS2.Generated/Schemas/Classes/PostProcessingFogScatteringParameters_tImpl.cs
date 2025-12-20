@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PostProcessingFogScatteringParameters_tImpl : SchemaClass, PostProcessingFogScatteringParameters_t {
+internal partial class PostProcessingFogScatteringParameters_tImpl : SchemaClass, PostProcessingFogScatteringParameters_t
+{
+    public PostProcessingFogScatteringParameters_tImpl(nint handle) : base(handle) { }
 
-  public PostProcessingFogScatteringParameters_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusOffset;
 
-  private static nint? _RadiusOffset;
-
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xAE3B2EF52E1F6E07);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xAE3B2EF52E1F6E07);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0xAE3B2EF555E6EFAD);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xAE3B2EF555E6EFAD);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _CubemapScaleOffset;
+    private static nint? _CubemapScaleOffset;
 
-  public ref float CubemapScale {
-    get {
-      if (_CubemapScaleOffset == null) {
-        _CubemapScaleOffset = Schema.GetOffset(0xAE3B2EF593A389D0);
-      }
-      return ref _Handle.AsRef<float>(_CubemapScaleOffset!.Value);
+    public ref float CubemapScale {
+        get {
+            _CubemapScaleOffset = _CubemapScaleOffset ?? Schema.GetOffset(0xAE3B2EF593A389D0);
+            return ref _Handle.AsRef<float>(_CubemapScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _VolumetricScaleOffset;
+    private static nint? _VolumetricScaleOffset;
 
-  public ref float VolumetricScale {
-    get {
-      if (_VolumetricScaleOffset == null) {
-        _VolumetricScaleOffset = Schema.GetOffset(0xAE3B2EF515A15A21);
-      }
-      return ref _Handle.AsRef<float>(_VolumetricScaleOffset!.Value);
+    public ref float VolumetricScale {
+        get {
+            _VolumetricScaleOffset = _VolumetricScaleOffset ?? Schema.GetOffset(0xAE3B2EF515A15A21);
+            return ref _Handle.AsRef<float>(_VolumetricScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _GradientScaleOffset;
+    private static nint? _GradientScaleOffset;
 
-  public ref float GradientScale {
-    get {
-      if (_GradientScaleOffset == null) {
-        _GradientScaleOffset = Schema.GetOffset(0xAE3B2EF58473F465);
-      }
-      return ref _Handle.AsRef<float>(_GradientScaleOffset!.Value);
+    public ref float GradientScale {
+        get {
+            _GradientScaleOffset = _GradientScaleOffset ?? Schema.GetOffset(0xAE3B2EF58473F465);
+            return ref _Handle.AsRef<float>(_GradientScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

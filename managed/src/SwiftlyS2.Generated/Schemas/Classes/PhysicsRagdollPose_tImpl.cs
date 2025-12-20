@@ -6,52 +6,41 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PhysicsRagdollPose_tImpl : SchemaClass, PhysicsRagdollPose_t {
+internal partial class PhysicsRagdollPose_tImpl : SchemaClass, PhysicsRagdollPose_t
+{
+    public PhysicsRagdollPose_tImpl(nint handle) : base(handle) { }
 
-  public PhysicsRagdollPose_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformsOffset;
 
-  private static nint? _TransformsOffset;
-
-  public ref CUtlVector<CTransform> Transforms {
-    get {
-      if (_TransformsOffset == null) {
-        _TransformsOffset = Schema.GetOffset(0x54A98BF4852CD38);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_TransformsOffset!.Value);
+    public ref CUtlVector<CTransform> Transforms {
+        get {
+            _TransformsOffset = _TransformsOffset ?? Schema.GetOffset(0x54A98BF4852CD38);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_TransformsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOffset;
+    private static nint? _OwnerOffset;
 
-  public ref CHandle<CBaseEntity> Owner {
-    get {
-      if (_OwnerOffset == null) {
-        _OwnerOffset = Schema.GetOffset(0x54A98BFF6D89572);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OwnerOffset!.Value);
+    public ref CHandle<CBaseEntity> Owner {
+        get {
+            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0x54A98BFF6D89572);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OwnerOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetFromDebugHistoryOffset;
+    private static nint? _SetFromDebugHistoryOffset;
 
-  public ref bool SetFromDebugHistory {
-    get {
-      if (_SetFromDebugHistoryOffset == null) {
-        _SetFromDebugHistoryOffset = Schema.GetOffset(0x54A98BF136013F6);
-      }
-      return ref _Handle.AsRef<bool>(_SetFromDebugHistoryOffset!.Value);
+    public ref bool SetFromDebugHistory {
+        get {
+            _SetFromDebugHistoryOffset = _SetFromDebugHistoryOffset ?? Schema.GetOffset(0x54A98BF136013F6);
+            return ref _Handle.AsRef<bool>(_SetFromDebugHistoryOffset!.Value);
+        }
     }
-  }
 
-  public void TransformsUpdated() {
-    Schema.Update(_Handle, 0x54A98BF4852CD38);
-  }
-  public void OwnerUpdated() {
-    Schema.Update(_Handle, 0x54A98BFF6D89572);
-  }
+    public void TransformsUpdated() => Schema.Update(_Handle, 0x54A98BF4852CD38);
+    public void OwnerUpdated() => Schema.Update(_Handle, 0x54A98BFF6D89572);
 }

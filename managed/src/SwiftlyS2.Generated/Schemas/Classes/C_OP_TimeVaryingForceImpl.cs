@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_TimeVaryingForceImpl : CParticleFunctionForceImpl, C_OP_TimeVaryingForce {
+internal partial class C_OP_TimeVaryingForceImpl : CParticleFunctionForceImpl, C_OP_TimeVaryingForce
+{
+    public C_OP_TimeVaryingForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_TimeVaryingForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartLerpTimeOffset;
 
-  private static nint? _StartLerpTimeOffset;
-
-  public ref float StartLerpTime {
-    get {
-      if (_StartLerpTimeOffset == null) {
-        _StartLerpTimeOffset = Schema.GetOffset(0xAC89FC47C1D0DC21);
-      }
-      return ref _Handle.AsRef<float>(_StartLerpTimeOffset!.Value);
+    public ref float StartLerpTime {
+        get {
+            _StartLerpTimeOffset = _StartLerpTimeOffset ?? Schema.GetOffset(0xAC89FC47C1D0DC21);
+            return ref _Handle.AsRef<float>(_StartLerpTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartingForceOffset;
+    private static nint? _StartingForceOffset;
 
-  public ref Vector StartingForce {
-    get {
-      if (_StartingForceOffset == null) {
-        _StartingForceOffset = Schema.GetOffset(0xAC89FC478FA47818);
-      }
-      return ref _Handle.AsRef<Vector>(_StartingForceOffset!.Value);
+    public ref Vector StartingForce {
+        get {
+            _StartingForceOffset = _StartingForceOffset ?? Schema.GetOffset(0xAC89FC478FA47818);
+            return ref _Handle.AsRef<Vector>(_StartingForceOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndLerpTimeOffset;
+    private static nint? _EndLerpTimeOffset;
 
-  public ref float EndLerpTime {
-    get {
-      if (_EndLerpTimeOffset == null) {
-        _EndLerpTimeOffset = Schema.GetOffset(0xAC89FC47AA182894);
-      }
-      return ref _Handle.AsRef<float>(_EndLerpTimeOffset!.Value);
+    public ref float EndLerpTime {
+        get {
+            _EndLerpTimeOffset = _EndLerpTimeOffset ?? Schema.GetOffset(0xAC89FC47AA182894);
+            return ref _Handle.AsRef<float>(_EndLerpTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndingForceOffset;
+    private static nint? _EndingForceOffset;
 
-  public ref Vector EndingForce {
-    get {
-      if (_EndingForceOffset == null) {
-        _EndingForceOffset = Schema.GetOffset(0xAC89FC47CEB5307D);
-      }
-      return ref _Handle.AsRef<Vector>(_EndingForceOffset!.Value);
+    public ref Vector EndingForce {
+        get {
+            _EndingForceOffset = _EndingForceOffset ?? Schema.GetOffset(0xAC89FC47CEB5307D);
+            return ref _Handle.AsRef<Vector>(_EndingForceOffset!.Value);
+        }
     }
-  }
 
 
 }

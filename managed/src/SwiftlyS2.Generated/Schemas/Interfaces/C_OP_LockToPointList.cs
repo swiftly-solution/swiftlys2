@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LockToPointList : CParticleFunctionOperator, ISchemaClass<C_OP_LockToPointList> {
+public partial interface C_OP_LockToPointList : CParticleFunctionOperator, ISchemaClass<C_OP_LockToPointList>
+{
+    static C_OP_LockToPointList ISchemaClass<C_OP_LockToPointList>.From(nint handle) => new C_OP_LockToPointListImpl(handle);
+    static int ISchemaClass<C_OP_LockToPointList>.Size => 504;
+    static string? ISchemaClass<C_OP_LockToPointList>.ClassName => null;
 
-  static C_OP_LockToPointList ISchemaClass<C_OP_LockToPointList>.From(nint handle) => new C_OP_LockToPointListImpl(handle);
-  static int ISchemaClass<C_OP_LockToPointList>.Size => 504;
-  static string? ISchemaClass<C_OP_LockToPointList>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref CUtlVector<PointDefinition_t> PointList { get; }
-  
-  public ref bool PlaceAlongPath { get; }
-  
-  public ref bool ClosedLoop { get; }
-  
-  public ref int NumPointsAlongPath { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref CUtlVector<PointDefinition_t> PointList { get; }
+
+    public ref bool PlaceAlongPath { get; }
+
+    public ref bool ClosedLoop { get; }
+
+    public ref int NumPointsAlongPath { get; }
 
 
 }

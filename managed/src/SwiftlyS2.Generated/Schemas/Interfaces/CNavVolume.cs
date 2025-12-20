@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNavVolume : ISchemaClass<CNavVolume> {
-
-  static CNavVolume ISchemaClass<CNavVolume>.From(nint handle) => new CNavVolumeImpl(handle);
-  static int ISchemaClass<CNavVolume>.Size => 120;
-  static string? ISchemaClass<CNavVolume>.ClassName => null;
+public partial interface CNavVolume : ISchemaClass<CNavVolume>
+{
+    static CNavVolume ISchemaClass<CNavVolume>.From(nint handle) => new CNavVolumeImpl(handle);
+    static int ISchemaClass<CNavVolume>.Size => 120;
+    static string? ISchemaClass<CNavVolume>.ClassName => null;
 
 
 

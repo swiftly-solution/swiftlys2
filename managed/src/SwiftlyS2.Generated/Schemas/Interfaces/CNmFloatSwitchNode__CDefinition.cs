@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatSwitchNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatSwitchNode__CDefinition> {
+public partial interface CNmFloatSwitchNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatSwitchNode__CDefinition>
+{
+    static CNmFloatSwitchNode__CDefinition ISchemaClass<CNmFloatSwitchNode__CDefinition>.From(nint handle) => new CNmFloatSwitchNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFloatSwitchNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmFloatSwitchNode__CDefinition>.ClassName => null;
 
-  static CNmFloatSwitchNode__CDefinition ISchemaClass<CNmFloatSwitchNode__CDefinition>.From(nint handle) => new CNmFloatSwitchNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFloatSwitchNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmFloatSwitchNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SwitchValueNodeIdx { get; }
-  
-  public ref short TrueValueNodeIdx { get; }
-  
-  public ref short FalseValueNodeIdx { get; }
-  
-  public ref float FalseValue { get; }
-  
-  public ref float TrueValue { get; }
+    public ref short SwitchValueNodeIdx { get; }
+
+    public ref short TrueValueNodeIdx { get; }
+
+    public ref short FalseValueNodeIdx { get; }
+
+    public ref float FalseValue { get; }
+
+    public ref float TrueValue { get; }
 
 
 }

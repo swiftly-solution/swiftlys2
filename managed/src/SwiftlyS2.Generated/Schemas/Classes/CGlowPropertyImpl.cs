@@ -6,153 +6,112 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGlowPropertyImpl : SchemaClass, CGlowProperty {
+internal partial class CGlowPropertyImpl : SchemaClass, CGlowProperty
+{
+    public CGlowPropertyImpl(nint handle) : base(handle) { }
 
-  public CGlowPropertyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GlowColorOffset;
 
-  private static nint? _GlowColorOffset;
-
-  public ref Vector GlowColor {
-    get {
-      if (_GlowColorOffset == null) {
-        _GlowColorOffset = Schema.GetOffset(0x3ABE6F3E15CEA997);
-      }
-      return ref _Handle.AsRef<Vector>(_GlowColorOffset!.Value);
+    public ref Vector GlowColor {
+        get {
+            _GlowColorOffset = _GlowColorOffset ?? Schema.GetOffset(0x3ABE6F3E15CEA997);
+            return ref _Handle.AsRef<Vector>(_GlowColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlowTypeOffset;
+    private static nint? _GlowTypeOffset;
 
-  public ref int GlowType {
-    get {
-      if (_GlowTypeOffset == null) {
-        _GlowTypeOffset = Schema.GetOffset(0x3ABE6F3E0600E8DD);
-      }
-      return ref _Handle.AsRef<int>(_GlowTypeOffset!.Value);
+    public ref int GlowType {
+        get {
+            _GlowTypeOffset = _GlowTypeOffset ?? Schema.GetOffset(0x3ABE6F3E0600E8DD);
+            return ref _Handle.AsRef<int>(_GlowTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlowTeamOffset;
+    private static nint? _GlowTeamOffset;
 
-  public ref int GlowTeam {
-    get {
-      if (_GlowTeamOffset == null) {
-        _GlowTeamOffset = Schema.GetOffset(0x3ABE6F3E34FAFCDC);
-      }
-      return ref _Handle.AsRef<int>(_GlowTeamOffset!.Value);
+    public ref int GlowTeam {
+        get {
+            _GlowTeamOffset = _GlowTeamOffset ?? Schema.GetOffset(0x3ABE6F3E34FAFCDC);
+            return ref _Handle.AsRef<int>(_GlowTeamOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlowRangeOffset;
+    private static nint? _GlowRangeOffset;
 
-  public ref int GlowRange {
-    get {
-      if (_GlowRangeOffset == null) {
-        _GlowRangeOffset = Schema.GetOffset(0x3ABE6F3ED03F97ED);
-      }
-      return ref _Handle.AsRef<int>(_GlowRangeOffset!.Value);
+    public ref int GlowRange {
+        get {
+            _GlowRangeOffset = _GlowRangeOffset ?? Schema.GetOffset(0x3ABE6F3ED03F97ED);
+            return ref _Handle.AsRef<int>(_GlowRangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlowRangeMinOffset;
+    private static nint? _GlowRangeMinOffset;
 
-  public ref int GlowRangeMin {
-    get {
-      if (_GlowRangeMinOffset == null) {
-        _GlowRangeMinOffset = Schema.GetOffset(0x3ABE6F3EA28EDB1F);
-      }
-      return ref _Handle.AsRef<int>(_GlowRangeMinOffset!.Value);
+    public ref int GlowRangeMin {
+        get {
+            _GlowRangeMinOffset = _GlowRangeMinOffset ?? Schema.GetOffset(0x3ABE6F3EA28EDB1F);
+            return ref _Handle.AsRef<int>(_GlowRangeMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlowColorOverrideOffset;
+    private static nint? _GlowColorOverrideOffset;
 
-  public ref Color GlowColorOverride {
-    get {
-      if (_GlowColorOverrideOffset == null) {
-        _GlowColorOverrideOffset = Schema.GetOffset(0x3ABE6F3E50C6E26B);
-      }
-      return ref _Handle.AsRef<Color>(_GlowColorOverrideOffset!.Value);
+    public ref Color GlowColorOverride {
+        get {
+            _GlowColorOverrideOffset = _GlowColorOverrideOffset ?? Schema.GetOffset(0x3ABE6F3E50C6E26B);
+            return ref _Handle.AsRef<Color>(_GlowColorOverrideOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlashingOffset;
+    private static nint? _FlashingOffset;
 
-  public ref bool Flashing {
-    get {
-      if (_FlashingOffset == null) {
-        _FlashingOffset = Schema.GetOffset(0x3ABE6F3EB646AC57);
-      }
-      return ref _Handle.AsRef<bool>(_FlashingOffset!.Value);
+    public ref bool Flashing {
+        get {
+            _FlashingOffset = _FlashingOffset ?? Schema.GetOffset(0x3ABE6F3EB646AC57);
+            return ref _Handle.AsRef<bool>(_FlashingOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlowTimeOffset;
+    private static nint? _GlowTimeOffset;
 
-  public ref float GlowTime {
-    get {
-      if (_GlowTimeOffset == null) {
-        _GlowTimeOffset = Schema.GetOffset(0x3ABE6F3E11622DBB);
-      }
-      return ref _Handle.AsRef<float>(_GlowTimeOffset!.Value);
+    public ref float GlowTime {
+        get {
+            _GlowTimeOffset = _GlowTimeOffset ?? Schema.GetOffset(0x3ABE6F3E11622DBB);
+            return ref _Handle.AsRef<float>(_GlowTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlowStartTimeOffset;
+    private static nint? _GlowStartTimeOffset;
 
-  public ref float GlowStartTime {
-    get {
-      if (_GlowStartTimeOffset == null) {
-        _GlowStartTimeOffset = Schema.GetOffset(0x3ABE6F3E411532C3);
-      }
-      return ref _Handle.AsRef<float>(_GlowStartTimeOffset!.Value);
+    public ref float GlowStartTime {
+        get {
+            _GlowStartTimeOffset = _GlowStartTimeOffset ?? Schema.GetOffset(0x3ABE6F3E411532C3);
+            return ref _Handle.AsRef<float>(_GlowStartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EligibleForScreenHighlightOffset;
+    private static nint? _EligibleForScreenHighlightOffset;
 
-  public ref bool EligibleForScreenHighlight {
-    get {
-      if (_EligibleForScreenHighlightOffset == null) {
-        _EligibleForScreenHighlightOffset = Schema.GetOffset(0x3ABE6F3E23B89FB9);
-      }
-      return ref _Handle.AsRef<bool>(_EligibleForScreenHighlightOffset!.Value);
+    public ref bool EligibleForScreenHighlight {
+        get {
+            _EligibleForScreenHighlightOffset = _EligibleForScreenHighlightOffset ?? Schema.GetOffset(0x3ABE6F3E23B89FB9);
+            return ref _Handle.AsRef<bool>(_EligibleForScreenHighlightOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlowingOffset;
+    private static nint? _GlowingOffset;
 
-  public ref bool Glowing {
-    get {
-      if (_GlowingOffset == null) {
-        _GlowingOffset = Schema.GetOffset(0x3ABE6F3E3DEA07DC);
-      }
-      return ref _Handle.AsRef<bool>(_GlowingOffset!.Value);
+    public ref bool Glowing {
+        get {
+            _GlowingOffset = _GlowingOffset ?? Schema.GetOffset(0x3ABE6F3E3DEA07DC);
+            return ref _Handle.AsRef<bool>(_GlowingOffset!.Value);
+        }
     }
-  }
 
-  public void GlowTypeUpdated() {
-    Schema.Update(_Handle, 0x3ABE6F3E0600E8DD);
-  }
-  public void GlowTeamUpdated() {
-    Schema.Update(_Handle, 0x3ABE6F3E34FAFCDC);
-  }
-  public void GlowRangeUpdated() {
-    Schema.Update(_Handle, 0x3ABE6F3ED03F97ED);
-  }
-  public void GlowRangeMinUpdated() {
-    Schema.Update(_Handle, 0x3ABE6F3EA28EDB1F);
-  }
-  public void GlowColorOverrideUpdated() {
-    Schema.Update(_Handle, 0x3ABE6F3E50C6E26B);
-  }
-  public void FlashingUpdated() {
-    Schema.Update(_Handle, 0x3ABE6F3EB646AC57);
-  }
-  public void GlowTimeUpdated() {
-    Schema.Update(_Handle, 0x3ABE6F3E11622DBB);
-  }
-  public void GlowStartTimeUpdated() {
-    Schema.Update(_Handle, 0x3ABE6F3E411532C3);
-  }
-  public void EligibleForScreenHighlightUpdated() {
-    Schema.Update(_Handle, 0x3ABE6F3E23B89FB9);
-  }
+    public void GlowTypeUpdated() => Schema.Update(_Handle, 0x3ABE6F3E0600E8DD);
+    public void GlowTeamUpdated() => Schema.Update(_Handle, 0x3ABE6F3E34FAFCDC);
+    public void GlowRangeUpdated() => Schema.Update(_Handle, 0x3ABE6F3ED03F97ED);
+    public void GlowRangeMinUpdated() => Schema.Update(_Handle, 0x3ABE6F3EA28EDB1F);
+    public void GlowColorOverrideUpdated() => Schema.Update(_Handle, 0x3ABE6F3E50C6E26B);
+    public void FlashingUpdated() => Schema.Update(_Handle, 0x3ABE6F3EB646AC57);
+    public void GlowTimeUpdated() => Schema.Update(_Handle, 0x3ABE6F3E11622DBB);
+    public void GlowStartTimeUpdated() => Schema.Update(_Handle, 0x3ABE6F3E411532C3);
+    public void EligibleForScreenHighlightUpdated() => Schema.Update(_Handle, 0x3ABE6F3E23B89FB9);
 }

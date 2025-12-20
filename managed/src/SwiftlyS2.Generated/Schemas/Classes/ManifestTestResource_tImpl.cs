@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ManifestTestResource_tImpl : SchemaClass, ManifestTestResource_t {
+internal partial class ManifestTestResource_tImpl : SchemaClass, ManifestTestResource_t
+{
+    public ManifestTestResource_tImpl(nint handle) : base(handle) { }
 
-  public ManifestTestResource_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFF18C79F4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFF18C79F4D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ChildOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xFF18C79F4D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CStrongHandle<InfoForResourceTypeManifestTestResource_t> Child {
+        get {
+            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0xFF18C79F2827B07D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeManifestTestResource_t>>(_ChildOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xFF18C79F4D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ChildOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeManifestTestResource_t> Child {
-    get {
-      if (_ChildOffset == null) {
-        _ChildOffset = Schema.GetOffset(0xFF18C79F2827B07D);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeManifestTestResource_t>>(_ChildOffset!.Value);
-    }
-  }
 
 
 }

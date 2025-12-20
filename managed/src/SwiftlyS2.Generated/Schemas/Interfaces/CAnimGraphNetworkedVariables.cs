@@ -8,83 +8,83 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimGraphNetworkedVariables : ISchemaClass<CAnimGraphNetworkedVariables> {
+public partial interface CAnimGraphNetworkedVariables : ISchemaClass<CAnimGraphNetworkedVariables>
+{
+    static CAnimGraphNetworkedVariables ISchemaClass<CAnimGraphNetworkedVariables>.From(nint handle) => new CAnimGraphNetworkedVariablesImpl(handle);
+    static int ISchemaClass<CAnimGraphNetworkedVariables>.Size => 520;
+    static string? ISchemaClass<CAnimGraphNetworkedVariables>.ClassName => null;
 
-  static CAnimGraphNetworkedVariables ISchemaClass<CAnimGraphNetworkedVariables>.From(nint handle) => new CAnimGraphNetworkedVariablesImpl(handle);
-  static int ISchemaClass<CAnimGraphNetworkedVariables>.Size => 520;
-  static string? ISchemaClass<CAnimGraphNetworkedVariables>.ClassName => null;
 
-  
-  public ref CUtlVector<uint> PredNetBoolVariables { get; }
-  
-  public ref CUtlVector<byte> PredNetByteVariables { get; }
-  
-  public ref CUtlVector<ushort> PredNetUInt16Variables { get; }
-  
-  public ref CUtlVector<int> PredNetIntVariables { get; }
-  
-  public ref CUtlVector<uint> PredNetUInt32Variables { get; }
-  
-  public ref CUtlVector<ulong> PredNetUInt64Variables { get; }
-  
-  public ref CUtlVector<float> PredNetFloatVariables { get; }
-  
-  public ref CUtlVector<Vector> PredNetVectorVariables { get; }
-  
-  public ref CUtlVector<Quaternion> PredNetQuaternionVariables { get; }
-  
-  public ref CUtlVector<CGlobalSymbol> PredNetGlobalSymbolVariables { get; }
-  
-  public ref CUtlVector<uint> OwnerOnlyPredNetBoolVariables { get; }
-  
-  public ref CUtlVector<byte> OwnerOnlyPredNetByteVariables { get; }
-  
-  public ref CUtlVector<ushort> OwnerOnlyPredNetUInt16Variables { get; }
-  
-  public ref CUtlVector<int> OwnerOnlyPredNetIntVariables { get; }
-  
-  public ref CUtlVector<uint> OwnerOnlyPredNetUInt32Variables { get; }
-  
-  public ref CUtlVector<ulong> OwnerOnlyPredNetUInt64Variables { get; }
-  
-  public ref CUtlVector<float> OwnerOnlyPredNetFloatVariables { get; }
-  
-  public ref CUtlVector<Vector> OwnerOnlyPredNetVectorVariables { get; }
-  
-  public ref CUtlVector<Quaternion> OwnerOnlyPredNetQuaternionVariables { get; }
-  
-  public ref CUtlVector<CGlobalSymbol> OwnerOnlyPredNetGlobalSymbolVariables { get; }
-  
-  public ref int BoolVariablesCount { get; }
-  
-  public ref int OwnerOnlyBoolVariablesCount { get; }
-  
-  public ref int RandomSeedOffset { get; }
-  
-  public ref float LastTeleportTime { get; }
+    public ref CUtlVector<uint> PredNetBoolVariables { get; }
 
-  public void PredNetBoolVariablesUpdated();
-  public void PredNetByteVariablesUpdated();
-  public void PredNetUInt16VariablesUpdated();
-  public void PredNetIntVariablesUpdated();
-  public void PredNetUInt32VariablesUpdated();
-  public void PredNetUInt64VariablesUpdated();
-  public void PredNetFloatVariablesUpdated();
-  public void PredNetVectorVariablesUpdated();
-  public void PredNetQuaternionVariablesUpdated();
-  public void PredNetGlobalSymbolVariablesUpdated();
-  public void OwnerOnlyPredNetBoolVariablesUpdated();
-  public void OwnerOnlyPredNetByteVariablesUpdated();
-  public void OwnerOnlyPredNetUInt16VariablesUpdated();
-  public void OwnerOnlyPredNetIntVariablesUpdated();
-  public void OwnerOnlyPredNetUInt32VariablesUpdated();
-  public void OwnerOnlyPredNetUInt64VariablesUpdated();
-  public void OwnerOnlyPredNetFloatVariablesUpdated();
-  public void OwnerOnlyPredNetVectorVariablesUpdated();
-  public void OwnerOnlyPredNetQuaternionVariablesUpdated();
-  public void OwnerOnlyPredNetGlobalSymbolVariablesUpdated();
-  public void BoolVariablesCountUpdated();
-  public void OwnerOnlyBoolVariablesCountUpdated();
-  public void RandomSeedOffsetUpdated();
-  public void LastTeleportTimeUpdated();
+    public ref CUtlVector<byte> PredNetByteVariables { get; }
+
+    public ref CUtlVector<ushort> PredNetUInt16Variables { get; }
+
+    public ref CUtlVector<int> PredNetIntVariables { get; }
+
+    public ref CUtlVector<uint> PredNetUInt32Variables { get; }
+
+    public ref CUtlVector<ulong> PredNetUInt64Variables { get; }
+
+    public ref CUtlVector<float> PredNetFloatVariables { get; }
+
+    public ref CUtlVector<Vector> PredNetVectorVariables { get; }
+
+    public ref CUtlVector<Quaternion> PredNetQuaternionVariables { get; }
+
+    public ref CUtlVector<CGlobalSymbol> PredNetGlobalSymbolVariables { get; }
+
+    public ref CUtlVector<uint> OwnerOnlyPredNetBoolVariables { get; }
+
+    public ref CUtlVector<byte> OwnerOnlyPredNetByteVariables { get; }
+
+    public ref CUtlVector<ushort> OwnerOnlyPredNetUInt16Variables { get; }
+
+    public ref CUtlVector<int> OwnerOnlyPredNetIntVariables { get; }
+
+    public ref CUtlVector<uint> OwnerOnlyPredNetUInt32Variables { get; }
+
+    public ref CUtlVector<ulong> OwnerOnlyPredNetUInt64Variables { get; }
+
+    public ref CUtlVector<float> OwnerOnlyPredNetFloatVariables { get; }
+
+    public ref CUtlVector<Vector> OwnerOnlyPredNetVectorVariables { get; }
+
+    public ref CUtlVector<Quaternion> OwnerOnlyPredNetQuaternionVariables { get; }
+
+    public ref CUtlVector<CGlobalSymbol> OwnerOnlyPredNetGlobalSymbolVariables { get; }
+
+    public ref int BoolVariablesCount { get; }
+
+    public ref int OwnerOnlyBoolVariablesCount { get; }
+
+    public ref int RandomSeedOffset { get; }
+
+    public ref float LastTeleportTime { get; }
+
+    public void PredNetBoolVariablesUpdated();
+    public void PredNetByteVariablesUpdated();
+    public void PredNetUInt16VariablesUpdated();
+    public void PredNetIntVariablesUpdated();
+    public void PredNetUInt32VariablesUpdated();
+    public void PredNetUInt64VariablesUpdated();
+    public void PredNetFloatVariablesUpdated();
+    public void PredNetVectorVariablesUpdated();
+    public void PredNetQuaternionVariablesUpdated();
+    public void PredNetGlobalSymbolVariablesUpdated();
+    public void OwnerOnlyPredNetBoolVariablesUpdated();
+    public void OwnerOnlyPredNetByteVariablesUpdated();
+    public void OwnerOnlyPredNetUInt16VariablesUpdated();
+    public void OwnerOnlyPredNetIntVariablesUpdated();
+    public void OwnerOnlyPredNetUInt32VariablesUpdated();
+    public void OwnerOnlyPredNetUInt64VariablesUpdated();
+    public void OwnerOnlyPredNetFloatVariablesUpdated();
+    public void OwnerOnlyPredNetVectorVariablesUpdated();
+    public void OwnerOnlyPredNetQuaternionVariablesUpdated();
+    public void OwnerOnlyPredNetGlobalSymbolVariablesUpdated();
+    public void BoolVariablesCountUpdated();
+    public void OwnerOnlyBoolVariablesCountUpdated();
+    public void RandomSeedOffsetUpdated();
+    public void LastTeleportTimeUpdated();
 }

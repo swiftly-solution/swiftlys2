@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface IKDemoCaptureSettings_t : ISchemaClass<IKDemoCaptureSettings_t> {
+public partial interface IKDemoCaptureSettings_t : ISchemaClass<IKDemoCaptureSettings_t>
+{
+    static IKDemoCaptureSettings_t ISchemaClass<IKDemoCaptureSettings_t>.From(nint handle) => new IKDemoCaptureSettings_tImpl(handle);
+    static int ISchemaClass<IKDemoCaptureSettings_t>.Size => 40;
+    static string? ISchemaClass<IKDemoCaptureSettings_t>.ClassName => null;
 
-  static IKDemoCaptureSettings_t ISchemaClass<IKDemoCaptureSettings_t>.From(nint handle) => new IKDemoCaptureSettings_tImpl(handle);
-  static int ISchemaClass<IKDemoCaptureSettings_t>.Size => 40;
-  static string? ISchemaClass<IKDemoCaptureSettings_t>.ClassName => null;
 
-  
-  public string ParentBoneName { get; set; }
-  
-  public ref IKChannelMode Mode { get; }
-  
-  public string IkChainName { get; set; }
-  
-  public string OneBoneStart { get; set; }
-  
-  public string OneBoneEnd { get; set; }
+    public string ParentBoneName { get; set; }
+
+    public ref IKChannelMode Mode { get; }
+
+    public string IkChainName { get; set; }
+
+    public string OneBoneStart { get; set; }
+
+    public string OneBoneEnd { get; set; }
 
 
 }

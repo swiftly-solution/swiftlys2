@@ -8,60 +8,60 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvInstructorHint : CPointEntity, ISchemaClass<CEnvInstructorHint> {
+public partial interface CEnvInstructorHint : CPointEntity, ISchemaClass<CEnvInstructorHint>
+{
+    static CEnvInstructorHint ISchemaClass<CEnvInstructorHint>.From(nint handle) => new CEnvInstructorHintImpl(handle);
+    static int ISchemaClass<CEnvInstructorHint>.Size => 1376;
+    static string? ISchemaClass<CEnvInstructorHint>.ClassName => "env_instructor_hint";
 
-  static CEnvInstructorHint ISchemaClass<CEnvInstructorHint>.From(nint handle) => new CEnvInstructorHintImpl(handle);
-  static int ISchemaClass<CEnvInstructorHint>.Size => 1376;
-  static string? ISchemaClass<CEnvInstructorHint>.ClassName => "env_instructor_hint";
 
-  
-  public string Name { get; set; }
-  
-  public string Replace_Key { get; set; }
-  
-  public string HintTargetEntity { get; set; }
-  
-  public ref int Timeout { get; }
-  
-  public ref int DisplayLimit { get; }
-  
-  public string Icon_Onscreen { get; set; }
-  
-  public string Icon_Offscreen { get; set; }
-  
-  public string Caption { get; set; }
-  
-  public string ActivatorCaption { get; set; }
-  
-  public ref Color Color { get; }
-  
-  public ref float IconOffset { get; }
-  
-  public ref float Range { get; }
-  
-  public ref byte PulseOption { get; }
-  
-  public ref byte AlphaOption { get; }
-  
-  public ref byte ShakeOption { get; }
-  
-  public ref bool Static { get; }
-  
-  public ref bool NoOffscreen { get; }
-  
-  public ref bool ForceCaption { get; }
-  
-  public ref int InstanceType { get; }
-  
-  public ref bool SuppressRest { get; }
-  
-  public string Binding { get; set; }
-  
-  public ref bool AllowNoDrawTarget { get; }
-  
-  public ref bool AutoStart { get; }
-  
-  public ref bool LocalPlayerOnly { get; }
+    public string Name { get; set; }
+
+    public string Replace_Key { get; set; }
+
+    public string HintTargetEntity { get; set; }
+
+    public ref int Timeout { get; }
+
+    public ref int DisplayLimit { get; }
+
+    public string Icon_Onscreen { get; set; }
+
+    public string Icon_Offscreen { get; set; }
+
+    public string Caption { get; set; }
+
+    public string ActivatorCaption { get; set; }
+
+    public ref Color Color { get; }
+
+    public ref float IconOffset { get; }
+
+    public ref float Range { get; }
+
+    public ref byte PulseOption { get; }
+
+    public ref byte AlphaOption { get; }
+
+    public ref byte ShakeOption { get; }
+
+    public ref bool Static { get; }
+
+    public ref bool NoOffscreen { get; }
+
+    public ref bool ForceCaption { get; }
+
+    public ref int InstanceType { get; }
+
+    public ref bool SuppressRest { get; }
+
+    public string Binding { get; set; }
+
+    public ref bool AllowNoDrawTarget { get; }
+
+    public ref bool AutoStart { get; }
+
+    public ref bool LocalPlayerOnly { get; }
 
 
 }

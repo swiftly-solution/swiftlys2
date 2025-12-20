@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapControlPointDirectionToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapControlPointDirectionToVector> {
+public partial interface C_OP_RemapControlPointDirectionToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapControlPointDirectionToVector>
+{
+    static C_OP_RemapControlPointDirectionToVector ISchemaClass<C_OP_RemapControlPointDirectionToVector>.From(nint handle) => new C_OP_RemapControlPointDirectionToVectorImpl(handle);
+    static int ISchemaClass<C_OP_RemapControlPointDirectionToVector>.Size => 480;
+    static string? ISchemaClass<C_OP_RemapControlPointDirectionToVector>.ClassName => null;
 
-  static C_OP_RemapControlPointDirectionToVector ISchemaClass<C_OP_RemapControlPointDirectionToVector>.From(nint handle) => new C_OP_RemapControlPointDirectionToVectorImpl(handle);
-  static int ISchemaClass<C_OP_RemapControlPointDirectionToVector>.Size => 480;
-  static string? ISchemaClass<C_OP_RemapControlPointDirectionToVector>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float Scale { get; }
-  
-  public ref int ControlPointNumber { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float Scale { get; }
+
+    public ref int ControlPointNumber { get; }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSimpleSimTimer : ISchemaClass<CSimpleSimTimer> {
+public partial interface CSimpleSimTimer : ISchemaClass<CSimpleSimTimer>
+{
+    static CSimpleSimTimer ISchemaClass<CSimpleSimTimer>.From(nint handle) => new CSimpleSimTimerImpl(handle);
+    static int ISchemaClass<CSimpleSimTimer>.Size => 8;
+    static string? ISchemaClass<CSimpleSimTimer>.ClassName => null;
 
-  static CSimpleSimTimer ISchemaClass<CSimpleSimTimer>.From(nint handle) => new CSimpleSimTimerImpl(handle);
-  static int ISchemaClass<CSimpleSimTimer>.Size => 8;
-  static string? ISchemaClass<CSimpleSimTimer>.ClassName => null;
 
-  
-  public GameTime_t Next { get; }
-  
-  public ref uint WorldGroupId { get; }
+    public GameTime_t Next { get; }
+
+    public ref uint WorldGroupId { get; }
 
 
 }

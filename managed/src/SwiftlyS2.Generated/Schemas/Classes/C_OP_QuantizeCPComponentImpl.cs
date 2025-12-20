@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_QuantizeCPComponentImpl : CParticleFunctionPreEmissionImpl, C_OP_QuantizeCPComponent {
+internal partial class C_OP_QuantizeCPComponentImpl : CParticleFunctionPreEmissionImpl, C_OP_QuantizeCPComponent
+{
+    public C_OP_QuantizeCPComponentImpl(nint handle) : base(handle) { }
 
-  public C_OP_QuantizeCPComponentImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueOffset;
 
-  private static nint? _InputValueOffset;
-
-  public CParticleCollectionFloatInput InputValue {
-    get {
-      if (_InputValueOffset == null) {
-        _InputValueOffset = Schema.GetOffset(0xDE980890EEDF8362);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _InputValueOffset!.Value);
+    public CParticleCollectionFloatInput InputValue {
+        get {
+            _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0xDE980890EEDF8362);
+            return new CParticleCollectionFloatInputImpl(_Handle + _InputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPOutputOffset;
+    private static nint? _CPOutputOffset;
 
-  public ref int CPOutput {
-    get {
-      if (_CPOutputOffset == null) {
-        _CPOutputOffset = Schema.GetOffset(0xDE9808902077C953);
-      }
-      return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+    public ref int CPOutput {
+        get {
+            _CPOutputOffset = _CPOutputOffset ?? Schema.GetOffset(0xDE9808902077C953);
+            return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutVectorFieldOffset;
+    private static nint? _OutVectorFieldOffset;
 
-  public ref int OutVectorField {
-    get {
-      if (_OutVectorFieldOffset == null) {
-        _OutVectorFieldOffset = Schema.GetOffset(0xDE980890F9041E74);
-      }
-      return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
+    public ref int OutVectorField {
+        get {
+            _OutVectorFieldOffset = _OutVectorFieldOffset ?? Schema.GetOffset(0xDE980890F9041E74);
+            return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _QuantizeValueOffset;
+    private static nint? _QuantizeValueOffset;
 
-  public CParticleCollectionFloatInput QuantizeValue {
-    get {
-      if (_QuantizeValueOffset == null) {
-        _QuantizeValueOffset = Schema.GetOffset(0xDE98089065E1A349);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _QuantizeValueOffset!.Value);
+    public CParticleCollectionFloatInput QuantizeValue {
+        get {
+            _QuantizeValueOffset = _QuantizeValueOffset ?? Schema.GetOffset(0xDE98089065E1A349);
+            return new CParticleCollectionFloatInputImpl(_Handle + _QuantizeValueOffset!.Value);
+        }
     }
-  }
 
 
 }

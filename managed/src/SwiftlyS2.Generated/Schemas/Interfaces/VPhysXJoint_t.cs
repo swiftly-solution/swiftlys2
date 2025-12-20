@@ -8,72 +8,72 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VPhysXJoint_t : ISchemaClass<VPhysXJoint_t> {
+public partial interface VPhysXJoint_t : ISchemaClass<VPhysXJoint_t>
+{
+    static VPhysXJoint_t ISchemaClass<VPhysXJoint_t>.From(nint handle) => new VPhysXJoint_tImpl(handle);
+    static int ISchemaClass<VPhysXJoint_t>.Size => 208;
+    static string? ISchemaClass<VPhysXJoint_t>.ClassName => null;
 
-  static VPhysXJoint_t ISchemaClass<VPhysXJoint_t>.From(nint handle) => new VPhysXJoint_tImpl(handle);
-  static int ISchemaClass<VPhysXJoint_t>.Size => 208;
-  static string? ISchemaClass<VPhysXJoint_t>.ClassName => null;
 
-  
-  public ref ushort Type { get; }
-  
-  public ref ushort Body1 { get; }
-  
-  public ref ushort Body2 { get; }
-  
-  public ref ushort Flags { get; }
-  
-  public ref CTransform Frame1 { get; }
-  
-  public ref CTransform Frame2 { get; }
-  
-  public ref bool EnableCollision { get; }
-  
-  public ref bool IsLinearConstraintDisabled { get; }
-  
-  public ref bool IsAngularConstraintDisabled { get; }
-  
-  public ref bool EnableLinearLimit { get; }
-  
-  public VPhysXRange_t LinearLimit { get; }
-  
-  public ref bool EnableLinearMotor { get; }
-  
-  public ref Vector LinearTargetVelocity { get; }
-  
-  public ref float MaxForce { get; }
-  
-  public ref bool EnableSwingLimit { get; }
-  
-  public VPhysXRange_t SwingLimit { get; }
-  
-  public ref bool EnableTwistLimit { get; }
-  
-  public VPhysXRange_t TwistLimit { get; }
-  
-  public ref bool EnableAngularMotor { get; }
-  
-  public ref Vector AngularTargetVelocity { get; }
-  
-  public ref float MaxTorque { get; }
-  
-  public ref float LinearFrequency { get; }
-  
-  public ref float LinearDampingRatio { get; }
-  
-  public ref float AngularFrequency { get; }
-  
-  public ref float AngularDampingRatio { get; }
-  
-  public ref float Friction { get; }
-  
-  public ref float Elasticity { get; }
-  
-  public ref float ElasticDamping { get; }
-  
-  public ref float Plasticity { get; }
-  
-  public string Tag { get; set; }
+    public ref ushort Type { get; }
+
+    public ref ushort Body1 { get; }
+
+    public ref ushort Body2 { get; }
+
+    public ref ushort Flags { get; }
+
+    public ref CTransform Frame1 { get; }
+
+    public ref CTransform Frame2 { get; }
+
+    public ref bool EnableCollision { get; }
+
+    public ref bool IsLinearConstraintDisabled { get; }
+
+    public ref bool IsAngularConstraintDisabled { get; }
+
+    public ref bool EnableLinearLimit { get; }
+
+    public VPhysXRange_t LinearLimit { get; }
+
+    public ref bool EnableLinearMotor { get; }
+
+    public ref Vector LinearTargetVelocity { get; }
+
+    public ref float MaxForce { get; }
+
+    public ref bool EnableSwingLimit { get; }
+
+    public VPhysXRange_t SwingLimit { get; }
+
+    public ref bool EnableTwistLimit { get; }
+
+    public VPhysXRange_t TwistLimit { get; }
+
+    public ref bool EnableAngularMotor { get; }
+
+    public ref Vector AngularTargetVelocity { get; }
+
+    public ref float MaxTorque { get; }
+
+    public ref float LinearFrequency { get; }
+
+    public ref float LinearDampingRatio { get; }
+
+    public ref float AngularFrequency { get; }
+
+    public ref float AngularDampingRatio { get; }
+
+    public ref float Friction { get; }
+
+    public ref float Elasticity { get; }
+
+    public ref float ElasticDamping { get; }
+
+    public ref float Plasticity { get; }
+
+    public string Tag { get; set; }
 
 
 }

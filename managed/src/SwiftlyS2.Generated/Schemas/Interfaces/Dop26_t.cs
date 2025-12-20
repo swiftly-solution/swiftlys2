@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface Dop26_t : ISchemaClass<Dop26_t> {
+public partial interface Dop26_t : ISchemaClass<Dop26_t>
+{
+    static Dop26_t ISchemaClass<Dop26_t>.From(nint handle) => new Dop26_tImpl(handle);
+    static int ISchemaClass<Dop26_t>.Size => 104;
+    static string? ISchemaClass<Dop26_t>.ClassName => null;
 
-  static Dop26_t ISchemaClass<Dop26_t>.From(nint handle) => new Dop26_tImpl(handle);
-  static int ISchemaClass<Dop26_t>.Size => 104;
-  static string? ISchemaClass<Dop26_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<float> Support { get; }
+    public ISchemaFixedArray<float> Support { get; }
 
 
 }

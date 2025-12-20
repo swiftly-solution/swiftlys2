@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum JointAxis_t : uint {
-
+public enum JointAxis_t : uint
+{
  JOINT_AXIS_X = 0,
 
  JOINT_AXIS_Y = 1,

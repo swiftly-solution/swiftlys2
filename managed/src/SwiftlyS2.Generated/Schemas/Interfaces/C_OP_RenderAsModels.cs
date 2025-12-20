@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderAsModels : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderAsModels> {
+public partial interface C_OP_RenderAsModels : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderAsModels>
+{
+    static C_OP_RenderAsModels ISchemaClass<C_OP_RenderAsModels>.From(nint handle) => new C_OP_RenderAsModelsImpl(handle);
+    static int ISchemaClass<C_OP_RenderAsModels>.Size => 600;
+    static string? ISchemaClass<C_OP_RenderAsModels>.ClassName => null;
 
-  static C_OP_RenderAsModels ISchemaClass<C_OP_RenderAsModels>.From(nint handle) => new C_OP_RenderAsModelsImpl(handle);
-  static int ISchemaClass<C_OP_RenderAsModels>.Size => 600;
-  static string? ISchemaClass<C_OP_RenderAsModels>.ClassName => null;
 
-  
-  public ref CUtlVector<ModelReference_t> ModelList { get; }
-  
-  public ref float ModelScale { get; }
-  
-  public ref bool FitToModelSize { get; }
-  
-  public ref bool NonUniformScaling { get; }
-  
-  public ParticleAttributeIndex_t XAxisScalingAttribute { get; }
-  
-  public ParticleAttributeIndex_t YAxisScalingAttribute { get; }
-  
-  public ParticleAttributeIndex_t ZAxisScalingAttribute { get; }
-  
-  public ref int SizeCullBloat { get; }
+    public ref CUtlVector<ModelReference_t> ModelList { get; }
+
+    public ref float ModelScale { get; }
+
+    public ref bool FitToModelSize { get; }
+
+    public ref bool NonUniformScaling { get; }
+
+    public ParticleAttributeIndex_t XAxisScalingAttribute { get; }
+
+    public ParticleAttributeIndex_t YAxisScalingAttribute { get; }
+
+    public ParticleAttributeIndex_t ZAxisScalingAttribute { get; }
+
+    public ref int SizeCullBloat { get; }
 
 
 }

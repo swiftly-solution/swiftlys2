@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AnimTagID : ISchemaClass<AnimTagID> {
+public partial interface AnimTagID : ISchemaClass<AnimTagID>
+{
+    static AnimTagID ISchemaClass<AnimTagID>.From(nint handle) => new AnimTagIDImpl(handle);
+    static int ISchemaClass<AnimTagID>.Size => 4;
+    static string? ISchemaClass<AnimTagID>.ClassName => null;
 
-  static AnimTagID ISchemaClass<AnimTagID>.From(nint handle) => new AnimTagIDImpl(handle);
-  static int ISchemaClass<AnimTagID>.Size => 4;
-  static string? ISchemaClass<AnimTagID>.ClassName => null;
 
-  
-  public ref uint Id { get; }
+    public ref uint Id { get; }
 
 
 }

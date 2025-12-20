@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderClothForce : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderClothForce> {
-
-  static C_OP_RenderClothForce ISchemaClass<C_OP_RenderClothForce>.From(nint handle) => new C_OP_RenderClothForceImpl(handle);
-  static int ISchemaClass<C_OP_RenderClothForce>.Size => 544;
-  static string? ISchemaClass<C_OP_RenderClothForce>.ClassName => null;
+public partial interface C_OP_RenderClothForce : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderClothForce>
+{
+    static C_OP_RenderClothForce ISchemaClass<C_OP_RenderClothForce>.From(nint handle) => new C_OP_RenderClothForceImpl(handle);
+    static int ISchemaClass<C_OP_RenderClothForce>.Size => 544;
+    static string? ISchemaClass<C_OP_RenderClothForce>.ClassName => null;
 
 
 

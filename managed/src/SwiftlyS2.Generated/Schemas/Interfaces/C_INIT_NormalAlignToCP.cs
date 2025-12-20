@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_NormalAlignToCP : CParticleFunctionInitializer, ISchemaClass<C_INIT_NormalAlignToCP> {
+public partial interface C_INIT_NormalAlignToCP : CParticleFunctionInitializer, ISchemaClass<C_INIT_NormalAlignToCP>
+{
+    static C_INIT_NormalAlignToCP ISchemaClass<C_INIT_NormalAlignToCP>.From(nint handle) => new C_INIT_NormalAlignToCPImpl(handle);
+    static int ISchemaClass<C_INIT_NormalAlignToCP>.Size => 584;
+    static string? ISchemaClass<C_INIT_NormalAlignToCP>.ClassName => null;
 
-  static C_INIT_NormalAlignToCP ISchemaClass<C_INIT_NormalAlignToCP>.From(nint handle) => new C_INIT_NormalAlignToCPImpl(handle);
-  static int ISchemaClass<C_INIT_NormalAlignToCP>.Size => 584;
-  static string? ISchemaClass<C_INIT_NormalAlignToCP>.ClassName => null;
 
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref ParticleControlPointAxis_t ControlPointAxis { get; }
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref ParticleControlPointAxis_t ControlPointAxis { get; }
 
 
 }

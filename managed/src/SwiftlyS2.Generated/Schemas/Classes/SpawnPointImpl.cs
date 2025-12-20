@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SpawnPointImpl : CServerOnlyPointEntityImpl, SpawnPoint {
+internal partial class SpawnPointImpl : CServerOnlyPointEntityImpl, SpawnPoint
+{
+    public SpawnPointImpl(nint handle) : base(handle) { }
 
-  public SpawnPointImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PriorityOffset;
 
-  private static nint? _PriorityOffset;
-
-  public ref int Priority {
-    get {
-      if (_PriorityOffset == null) {
-        _PriorityOffset = Schema.GetOffset(0x72527C0E6224A30C);
-      }
-      return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+    public ref int Priority {
+        get {
+            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0x72527C0E6224A30C);
+            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnabledOffset;
+    private static nint? _EnabledOffset;
 
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0x72527C0E6154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x72527C0E6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _TypeOffset;
+    private static nint? _TypeOffset;
 
-  public ref int Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x72527C0E18853D59);
-      }
-      return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+    public ref int Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x72527C0E18853D59);
+            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+        }
     }
-  }
 
 
 }

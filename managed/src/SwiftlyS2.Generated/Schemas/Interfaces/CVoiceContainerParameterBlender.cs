@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerParameterBlender : CVoiceContainerBase, ISchemaClass<CVoiceContainerParameterBlender> {
+public partial interface CVoiceContainerParameterBlender : CVoiceContainerBase, ISchemaClass<CVoiceContainerParameterBlender>
+{
+    static CVoiceContainerParameterBlender ISchemaClass<CVoiceContainerParameterBlender>.From(nint handle) => new CVoiceContainerParameterBlenderImpl(handle);
+    static int ISchemaClass<CVoiceContainerParameterBlender>.Size => 504;
+    static string? ISchemaClass<CVoiceContainerParameterBlender>.ClassName => null;
 
-  static CVoiceContainerParameterBlender ISchemaClass<CVoiceContainerParameterBlender>.From(nint handle) => new CVoiceContainerParameterBlenderImpl(handle);
-  static int ISchemaClass<CVoiceContainerParameterBlender>.Size => 504;
-  static string? ISchemaClass<CVoiceContainerParameterBlender>.ClassName => null;
 
-  
-  public CSoundContainerReference FirstSound { get; }
-  
-  public CSoundContainerReference SecondSound { get; }
-  
-  public ref bool EnableOcclusionBlend { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Curve1 { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Curve2 { get; }
-  
-  public ref bool EnableDistanceBlend { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Curve3 { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Curve4 { get; }
+    public CSoundContainerReference FirstSound { get; }
+
+    public CSoundContainerReference SecondSound { get; }
+
+    public ref bool EnableOcclusionBlend { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Curve1 { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Curve2 { get; }
+
+    public ref bool EnableDistanceBlend { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Curve3 { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Curve4 { get; }
 
 
 }

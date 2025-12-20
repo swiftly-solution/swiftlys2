@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleCollisionMask_t : ulong {
-
+public enum ParticleCollisionMask_t : ulong
+{
  PARTICLE_MASK_ALL = ulong.MaxValue,
 
  PARTICLE_MASK_SOLID = 798721,

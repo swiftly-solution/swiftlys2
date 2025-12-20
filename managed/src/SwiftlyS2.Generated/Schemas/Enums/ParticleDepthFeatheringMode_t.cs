@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleDepthFeatheringMode_t : uint {
-
+public enum ParticleDepthFeatheringMode_t : uint
+{
  PARTICLE_DEPTH_FEATHERING_OFF = 0,
 
  PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL = 1,

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CSPlayerState : uint {
-
+public enum CSPlayerState : uint
+{
  STATE_ACTIVE = 0,
 
  STATE_WELCOME = 1,

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSimpleSimTimerImpl : SchemaClass, CSimpleSimTimer {
+internal partial class CSimpleSimTimerImpl : SchemaClass, CSimpleSimTimer
+{
+    public CSimpleSimTimerImpl(nint handle) : base(handle) { }
 
-  public CSimpleSimTimerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NextOffset;
 
-  private static nint? _NextOffset;
-
-  public GameTime_t Next {
-    get {
-      if (_NextOffset == null) {
-        _NextOffset = Schema.GetOffset(0x4169D31C3BE2574E);
-      }
-      return new GameTime_tImpl(_Handle + _NextOffset!.Value);
+    public GameTime_t Next {
+        get {
+            _NextOffset = _NextOffset ?? Schema.GetOffset(0x4169D31C3BE2574E);
+            return new GameTime_tImpl(_Handle + _NextOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldGroupIdOffset;
+    private static nint? _WorldGroupIdOffset;
 
-  public ref uint WorldGroupId {
-    get {
-      if (_WorldGroupIdOffset == null) {
-        _WorldGroupIdOffset = Schema.GetOffset(0x4169D31C7414B193);
-      }
-      return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+    public ref uint WorldGroupId {
+        get {
+            _WorldGroupIdOffset = _WorldGroupIdOffset ?? Schema.GetOffset(0x4169D31C7414B193);
+            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+        }
     }
-  }
 
 
 }

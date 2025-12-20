@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PermModelDataAnimatedMaterialAttribute_t : ISchemaClass<PermModelDataAnimatedMaterialAttribute_t> {
+public partial interface PermModelDataAnimatedMaterialAttribute_t : ISchemaClass<PermModelDataAnimatedMaterialAttribute_t>
+{
+    static PermModelDataAnimatedMaterialAttribute_t ISchemaClass<PermModelDataAnimatedMaterialAttribute_t>.From(nint handle) => new PermModelDataAnimatedMaterialAttribute_tImpl(handle);
+    static int ISchemaClass<PermModelDataAnimatedMaterialAttribute_t>.Size => 16;
+    static string? ISchemaClass<PermModelDataAnimatedMaterialAttribute_t>.ClassName => null;
 
-  static PermModelDataAnimatedMaterialAttribute_t ISchemaClass<PermModelDataAnimatedMaterialAttribute_t>.From(nint handle) => new PermModelDataAnimatedMaterialAttribute_tImpl(handle);
-  static int ISchemaClass<PermModelDataAnimatedMaterialAttribute_t>.Size => 16;
-  static string? ISchemaClass<PermModelDataAnimatedMaterialAttribute_t>.ClassName => null;
 
-  
-  public string AttributeName { get; set; }
-  
-  public ref int NumChannels { get; }
+    public string AttributeName { get; set; }
+
+    public ref int NumChannels { get; }
 
 
 }

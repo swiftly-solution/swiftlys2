@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateFromCPs : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateFromCPs> {
+public partial interface C_INIT_CreateFromCPs : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateFromCPs>
+{
+    static C_INIT_CreateFromCPs ISchemaClass<C_INIT_CreateFromCPs>.From(nint handle) => new C_INIT_CreateFromCPsImpl(handle);
+    static int ISchemaClass<C_INIT_CreateFromCPs>.Size => 856;
+    static string? ISchemaClass<C_INIT_CreateFromCPs>.ClassName => null;
 
-  static C_INIT_CreateFromCPs ISchemaClass<C_INIT_CreateFromCPs>.From(nint handle) => new C_INIT_CreateFromCPsImpl(handle);
-  static int ISchemaClass<C_INIT_CreateFromCPs>.Size => 856;
-  static string? ISchemaClass<C_INIT_CreateFromCPs>.ClassName => null;
 
-  
-  public ref int Increment { get; }
-  
-  public ref int MinCP { get; }
-  
-  public ref int MaxCP { get; }
-  
-  public CParticleCollectionFloatInput DynamicCPCount { get; }
+    public ref int Increment { get; }
+
+    public ref int MinCP { get; }
+
+    public ref int MaxCP { get; }
+
+    public CParticleCollectionFloatInput DynamicCPCount { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMotionSearchDB : ISchemaClass<CMotionSearchDB> {
+public partial interface CMotionSearchDB : ISchemaClass<CMotionSearchDB>
+{
+    static CMotionSearchDB ISchemaClass<CMotionSearchDB>.From(nint handle) => new CMotionSearchDBImpl(handle);
+    static int ISchemaClass<CMotionSearchDB>.Size => 184;
+    static string? ISchemaClass<CMotionSearchDB>.ClassName => null;
 
-  static CMotionSearchDB ISchemaClass<CMotionSearchDB>.From(nint handle) => new CMotionSearchDBImpl(handle);
-  static int ISchemaClass<CMotionSearchDB>.Size => 184;
-  static string? ISchemaClass<CMotionSearchDB>.ClassName => null;
 
-  
-  public CMotionSearchNode RootNode { get; }
-  
-  public CProductQuantizer ResidualQuantizer { get; }
-  
-  public ref CUtlVector<MotionDBIndex> CodeIndices { get; }
+    public CMotionSearchNode RootNode { get; }
+
+    public CProductQuantizer ResidualQuantizer { get; }
+
+    public ref CUtlVector<MotionDBIndex> CodeIndices { get; }
 
 
 }

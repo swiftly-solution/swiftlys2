@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ManifestTestResource_t : ISchemaClass<ManifestTestResource_t> {
+public partial interface ManifestTestResource_t : ISchemaClass<ManifestTestResource_t>
+{
+    static ManifestTestResource_t ISchemaClass<ManifestTestResource_t>.From(nint handle) => new ManifestTestResource_tImpl(handle);
+    static int ISchemaClass<ManifestTestResource_t>.Size => 16;
+    static string? ISchemaClass<ManifestTestResource_t>.ClassName => null;
 
-  static ManifestTestResource_t ISchemaClass<ManifestTestResource_t>.From(nint handle) => new ManifestTestResource_tImpl(handle);
-  static int ISchemaClass<ManifestTestResource_t>.Size => 16;
-  static string? ISchemaClass<ManifestTestResource_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CStrongHandle<InfoForResourceTypeManifestTestResource_t> Child { get; }
+    public string Name { get; set; }
+
+    public ref CStrongHandle<InfoForResourceTypeManifestTestResource_t> Child { get; }
 
 
 }

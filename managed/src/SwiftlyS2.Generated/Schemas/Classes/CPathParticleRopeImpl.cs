@@ -6,219 +6,159 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPathParticleRopeImpl : CBaseEntityImpl, CPathParticleRope {
+internal partial class CPathParticleRopeImpl : CBaseEntityImpl, CPathParticleRope
+{
+    public CPathParticleRopeImpl(nint handle) : base(handle) { }
 
-  public CPathParticleRopeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartActiveOffset;
 
-  private static nint? _StartActiveOffset;
-
-  public ref bool StartActive {
-    get {
-      if (_StartActiveOffset == null) {
-        _StartActiveOffset = Schema.GetOffset(0xBC0C741B953CBC21);
-      }
-      return ref _Handle.AsRef<bool>(_StartActiveOffset!.Value);
+    public ref bool StartActive {
+        get {
+            _StartActiveOffset = _StartActiveOffset ?? Schema.GetOffset(0xBC0C741B953CBC21);
+            return ref _Handle.AsRef<bool>(_StartActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxSimulationTimeOffset;
+    private static nint? _MaxSimulationTimeOffset;
 
-  public ref float MaxSimulationTime {
-    get {
-      if (_MaxSimulationTimeOffset == null) {
-        _MaxSimulationTimeOffset = Schema.GetOffset(0xBC0C741B80F036E5);
-      }
-      return ref _Handle.AsRef<float>(_MaxSimulationTimeOffset!.Value);
+    public ref float MaxSimulationTime {
+        get {
+            _MaxSimulationTimeOffset = _MaxSimulationTimeOffset ?? Schema.GetOffset(0xBC0C741B80F036E5);
+            return ref _Handle.AsRef<float>(_MaxSimulationTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectNameOffset;
+    private static nint? _EffectNameOffset;
 
-  public string EffectName {
-    get {
-      if (_EffectNameOffset == null) {
-        _EffectNameOffset = Schema.GetOffset(0xBC0C741B82D2BFC7);
-      }
-      var ptr = _Handle.Read<nint>(_EffectNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_EffectNameOffset == null) {
-        _EffectNameOffset = Schema.GetOffset(0xBC0C741B82D2BFC7);
-      }
-      Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _PathNodes_NameOffset;
+    public string EffectName {
+        get {
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0xBC0C741B82D2BFC7);
+            return Schema.GetString(_Handle.Read<nint>(_EffectNameOffset!.Value));
+        }
+        set {
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0xBC0C741B82D2BFC7);
+            Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _PathNodes_NameOffset;
 
-  public ref CUtlVector<SchemaUntypedField> PathNodes_Name {
-    get {
-      if (_PathNodes_NameOffset == null) {
-        _PathNodes_NameOffset = Schema.GetOffset(0xBC0C741BFFAFA92F);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_PathNodes_NameOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> PathNodes_Name {
+        get {
+            _PathNodes_NameOffset = _PathNodes_NameOffset ?? Schema.GetOffset(0xBC0C741BFFAFA92F);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_PathNodes_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParticleSpacingOffset;
+    private static nint? _ParticleSpacingOffset;
 
-  public ref float ParticleSpacing {
-    get {
-      if (_ParticleSpacingOffset == null) {
-        _ParticleSpacingOffset = Schema.GetOffset(0xBC0C741B66CCF542);
-      }
-      return ref _Handle.AsRef<float>(_ParticleSpacingOffset!.Value);
+    public ref float ParticleSpacing {
+        get {
+            _ParticleSpacingOffset = _ParticleSpacingOffset ?? Schema.GetOffset(0xBC0C741B66CCF542);
+            return ref _Handle.AsRef<float>(_ParticleSpacingOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlackOffset;
+    private static nint? _SlackOffset;
 
-  public ref float Slack {
-    get {
-      if (_SlackOffset == null) {
-        _SlackOffset = Schema.GetOffset(0xBC0C741B183285C9);
-      }
-      return ref _Handle.AsRef<float>(_SlackOffset!.Value);
+    public ref float Slack {
+        get {
+            _SlackOffset = _SlackOffset ?? Schema.GetOffset(0xBC0C741B183285C9);
+            return ref _Handle.AsRef<float>(_SlackOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xBC0C741B5ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xBC0C741B5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorTintOffset;
+    private static nint? _ColorTintOffset;
 
-  public ref Color ColorTint {
-    get {
-      if (_ColorTintOffset == null) {
-        _ColorTintOffset = Schema.GetOffset(0xBC0C741BD55CDDFD);
-      }
-      return ref _Handle.AsRef<Color>(_ColorTintOffset!.Value);
+    public ref Color ColorTint {
+        get {
+            _ColorTintOffset = _ColorTintOffset ?? Schema.GetOffset(0xBC0C741BD55CDDFD);
+            return ref _Handle.AsRef<Color>(_ColorTintOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectStateOffset;
+    private static nint? _EffectStateOffset;
 
-  public ref int EffectState {
-    get {
-      if (_EffectStateOffset == null) {
-        _EffectStateOffset = Schema.GetOffset(0xBC0C741B4188A2AD);
-      }
-      return ref _Handle.AsRef<int>(_EffectStateOffset!.Value);
+    public ref int EffectState {
+        get {
+            _EffectStateOffset = _EffectStateOffset ?? Schema.GetOffset(0xBC0C741B4188A2AD);
+            return ref _Handle.AsRef<int>(_EffectStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _EffectIndexOffset;
+    private static nint? _EffectIndexOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> EffectIndex {
-    get {
-      if (_EffectIndexOffset == null) {
-        _EffectIndexOffset = Schema.GetOffset(0xBC0C741B3C93DC73);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectIndexOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> EffectIndex {
+        get {
+            _EffectIndexOffset = _EffectIndexOffset ?? Schema.GetOffset(0xBC0C741B3C93DC73);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIParticleSystemDefinition>>(_EffectIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathNodes_PositionOffset;
+    private static nint? _PathNodes_PositionOffset;
 
-  public ref CUtlVector<Vector> PathNodes_Position {
-    get {
-      if (_PathNodes_PositionOffset == null) {
-        _PathNodes_PositionOffset = Schema.GetOffset(0xBC0C741BC84253C7);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_PositionOffset!.Value);
+    public ref CUtlVector<Vector> PathNodes_Position {
+        get {
+            _PathNodes_PositionOffset = _PathNodes_PositionOffset ?? Schema.GetOffset(0xBC0C741BC84253C7);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_PositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathNodes_TangentInOffset;
+    private static nint? _PathNodes_TangentInOffset;
 
-  public ref CUtlVector<Vector> PathNodes_TangentIn {
-    get {
-      if (_PathNodes_TangentInOffset == null) {
-        _PathNodes_TangentInOffset = Schema.GetOffset(0xBC0C741B4CEA7F8E);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_TangentInOffset!.Value);
+    public ref CUtlVector<Vector> PathNodes_TangentIn {
+        get {
+            _PathNodes_TangentInOffset = _PathNodes_TangentInOffset ?? Schema.GetOffset(0xBC0C741B4CEA7F8E);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_TangentInOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathNodes_TangentOutOffset;
+    private static nint? _PathNodes_TangentOutOffset;
 
-  public ref CUtlVector<Vector> PathNodes_TangentOut {
-    get {
-      if (_PathNodes_TangentOutOffset == null) {
-        _PathNodes_TangentOutOffset = Schema.GetOffset(0xBC0C741B218FA6AF);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_TangentOutOffset!.Value);
+    public ref CUtlVector<Vector> PathNodes_TangentOut {
+        get {
+            _PathNodes_TangentOutOffset = _PathNodes_TangentOutOffset ?? Schema.GetOffset(0xBC0C741B218FA6AF);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_TangentOutOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathNodes_ColorOffset;
+    private static nint? _PathNodes_ColorOffset;
 
-  public ref CUtlVector<Vector> PathNodes_Color {
-    get {
-      if (_PathNodes_ColorOffset == null) {
-        _PathNodes_ColorOffset = Schema.GetOffset(0xBC0C741B6DB8C1DB);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_ColorOffset!.Value);
+    public ref CUtlVector<Vector> PathNodes_Color {
+        get {
+            _PathNodes_ColorOffset = _PathNodes_ColorOffset ?? Schema.GetOffset(0xBC0C741B6DB8C1DB);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_PathNodes_ColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathNodes_PinEnabledOffset;
+    private static nint? _PathNodes_PinEnabledOffset;
 
-  public ref CUtlVector<bool> PathNodes_PinEnabled {
-    get {
-      if (_PathNodes_PinEnabledOffset == null) {
-        _PathNodes_PinEnabledOffset = Schema.GetOffset(0xBC0C741B830E8AD8);
-      }
-      return ref _Handle.AsRef<CUtlVector<bool>>(_PathNodes_PinEnabledOffset!.Value);
+    public ref CUtlVector<bool> PathNodes_PinEnabled {
+        get {
+            _PathNodes_PinEnabledOffset = _PathNodes_PinEnabledOffset ?? Schema.GetOffset(0xBC0C741B830E8AD8);
+            return ref _Handle.AsRef<CUtlVector<bool>>(_PathNodes_PinEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathNodes_RadiusScaleOffset;
+    private static nint? _PathNodes_RadiusScaleOffset;
 
-  public ref CUtlVector<float> PathNodes_RadiusScale {
-    get {
-      if (_PathNodes_RadiusScaleOffset == null) {
-        _PathNodes_RadiusScaleOffset = Schema.GetOffset(0xBC0C741B593CB340);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_PathNodes_RadiusScaleOffset!.Value);
+    public ref CUtlVector<float> PathNodes_RadiusScale {
+        get {
+            _PathNodes_RadiusScaleOffset = _PathNodes_RadiusScaleOffset ?? Schema.GetOffset(0xBC0C741B593CB340);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathNodes_RadiusScaleOffset!.Value);
+        }
     }
-  }
 
-  public void ParticleSpacingUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B66CCF542);
-  }
-  public void SlackUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B183285C9);
-  }
-  public void RadiusUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B5ACFC08D);
-  }
-  public void ColorTintUpdated() {
-    Schema.Update(_Handle, 0xBC0C741BD55CDDFD);
-  }
-  public void EffectStateUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B4188A2AD);
-  }
-  public void EffectIndexUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B3C93DC73);
-  }
-  public void PathNodes_PositionUpdated() {
-    Schema.Update(_Handle, 0xBC0C741BC84253C7);
-  }
-  public void PathNodes_TangentInUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B4CEA7F8E);
-  }
-  public void PathNodes_TangentOutUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B218FA6AF);
-  }
-  public void PathNodes_ColorUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B6DB8C1DB);
-  }
-  public void PathNodes_PinEnabledUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B830E8AD8);
-  }
-  public void PathNodes_RadiusScaleUpdated() {
-    Schema.Update(_Handle, 0xBC0C741B593CB340);
-  }
+    public void ParticleSpacingUpdated() => Schema.Update(_Handle, 0xBC0C741B66CCF542);
+    public void SlackUpdated() => Schema.Update(_Handle, 0xBC0C741B183285C9);
+    public void RadiusUpdated() => Schema.Update(_Handle, 0xBC0C741B5ACFC08D);
+    public void ColorTintUpdated() => Schema.Update(_Handle, 0xBC0C741BD55CDDFD);
+    public void EffectStateUpdated() => Schema.Update(_Handle, 0xBC0C741B4188A2AD);
+    public void EffectIndexUpdated() => Schema.Update(_Handle, 0xBC0C741B3C93DC73);
+    public void PathNodes_PositionUpdated() => Schema.Update(_Handle, 0xBC0C741BC84253C7);
+    public void PathNodes_TangentInUpdated() => Schema.Update(_Handle, 0xBC0C741B4CEA7F8E);
+    public void PathNodes_TangentOutUpdated() => Schema.Update(_Handle, 0xBC0C741B218FA6AF);
+    public void PathNodes_ColorUpdated() => Schema.Update(_Handle, 0xBC0C741B6DB8C1DB);
+    public void PathNodes_PinEnabledUpdated() => Schema.Update(_Handle, 0xBC0C741B830E8AD8);
+    public void PathNodes_RadiusScaleUpdated() => Schema.Update(_Handle, 0xBC0C741B593CB340);
 }

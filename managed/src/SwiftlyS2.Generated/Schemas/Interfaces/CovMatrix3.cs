@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CovMatrix3 : ISchemaClass<CovMatrix3> {
+public partial interface CovMatrix3 : ISchemaClass<CovMatrix3>
+{
+    static CovMatrix3 ISchemaClass<CovMatrix3>.From(nint handle) => new CovMatrix3Impl(handle);
+    static int ISchemaClass<CovMatrix3>.Size => 24;
+    static string? ISchemaClass<CovMatrix3>.ClassName => null;
 
-  static CovMatrix3 ISchemaClass<CovMatrix3>.From(nint handle) => new CovMatrix3Impl(handle);
-  static int ISchemaClass<CovMatrix3>.Size => 24;
-  static string? ISchemaClass<CovMatrix3>.ClassName => null;
 
-  
-  public ref Vector Diag { get; }
-  
-  public ref float XY { get; }
-  
-  public ref float XZ { get; }
-  
-  public ref float YZ { get; }
+    public ref Vector Diag { get; }
+
+    public ref float XY { get; }
+
+    public ref float XZ { get; }
+
+    public ref float YZ { get; }
 
 
 }

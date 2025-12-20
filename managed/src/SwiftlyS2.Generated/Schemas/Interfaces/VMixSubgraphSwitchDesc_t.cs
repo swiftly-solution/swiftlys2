@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixSubgraphSwitchDesc_t : ISchemaClass<VMixSubgraphSwitchDesc_t> {
+public partial interface VMixSubgraphSwitchDesc_t : ISchemaClass<VMixSubgraphSwitchDesc_t>
+{
+    static VMixSubgraphSwitchDesc_t ISchemaClass<VMixSubgraphSwitchDesc_t>.From(nint handle) => new VMixSubgraphSwitchDesc_tImpl(handle);
+    static int ISchemaClass<VMixSubgraphSwitchDesc_t>.Size => 12;
+    static string? ISchemaClass<VMixSubgraphSwitchDesc_t>.ClassName => null;
 
-  static VMixSubgraphSwitchDesc_t ISchemaClass<VMixSubgraphSwitchDesc_t>.From(nint handle) => new VMixSubgraphSwitchDesc_tImpl(handle);
-  static int ISchemaClass<VMixSubgraphSwitchDesc_t>.Size => 12;
-  static string? ISchemaClass<VMixSubgraphSwitchDesc_t>.ClassName => null;
 
-  
-  public ref VMixSubgraphSwitchInterpolationType_t InterpolationMode { get; }
-  
-  public ref bool OnlyTailsOnFadeOut { get; }
-  
-  public ref float InterpolationTime { get; }
+    public ref VMixSubgraphSwitchInterpolationType_t InterpolationMode { get; }
+
+    public ref bool OnlyTailsOnFadeOut { get; }
+
+    public ref float InterpolationTime { get; }
 
 
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VsInputSignature_tImpl : SchemaClass, VsInputSignature_t {
+internal partial class VsInputSignature_tImpl : SchemaClass, VsInputSignature_t
+{
+    public VsInputSignature_tImpl(nint handle) : base(handle) { }
 
-  public VsInputSignature_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ElemsOffset;
 
-  private static nint? _ElemsOffset;
-
-  public ref CUtlVector<VsInputSignatureElement_t> Elems {
-    get {
-      if (_ElemsOffset == null) {
-        _ElemsOffset = Schema.GetOffset(0xA7BF24E33F2FC92B);
-      }
-      return ref _Handle.AsRef<CUtlVector<VsInputSignatureElement_t>>(_ElemsOffset!.Value);
+    public ref CUtlVector<VsInputSignatureElement_t> Elems {
+        get {
+            _ElemsOffset = _ElemsOffset ?? Schema.GetOffset(0xA7BF24E33F2FC92B);
+            return ref _Handle.AsRef<CUtlVector<VsInputSignatureElement_t>>(_ElemsOffset!.Value);
+        }
     }
-  }
-  private static nint? _Depth_elemsOffset;
+    private static nint? _Depth_elemsOffset;
 
-  public ref CUtlVector<VsInputSignatureElement_t> Depth_elems {
-    get {
-      if (_Depth_elemsOffset == null) {
-        _Depth_elemsOffset = Schema.GetOffset(0xA7BF24E3C1AC112D);
-      }
-      return ref _Handle.AsRef<CUtlVector<VsInputSignatureElement_t>>(_Depth_elemsOffset!.Value);
+    public ref CUtlVector<VsInputSignatureElement_t> Depth_elems {
+        get {
+            _Depth_elemsOffset = _Depth_elemsOffset ?? Schema.GetOffset(0xA7BF24E3C1AC112D);
+            return ref _Handle.AsRef<CUtlVector<VsInputSignatureElement_t>>(_Depth_elemsOffset!.Value);
+        }
     }
-  }
 
 
 }

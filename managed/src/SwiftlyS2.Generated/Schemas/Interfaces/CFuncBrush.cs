@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncBrush : CBaseModelEntity, ISchemaClass<CFuncBrush> {
+public partial interface CFuncBrush : CBaseModelEntity, ISchemaClass<CFuncBrush>
+{
+    static CFuncBrush ISchemaClass<CFuncBrush>.From(nint handle) => new CFuncBrushImpl(handle);
+    static int ISchemaClass<CFuncBrush>.Size => 2040;
+    static string? ISchemaClass<CFuncBrush>.ClassName => "func_brush";
 
-  static CFuncBrush ISchemaClass<CFuncBrush>.From(nint handle) => new CFuncBrushImpl(handle);
-  static int ISchemaClass<CFuncBrush>.Size => 2040;
-  static string? ISchemaClass<CFuncBrush>.ClassName => "func_brush";
 
-  
-  public ref BrushSolidities_e Solidity { get; }
-  
-  public ref int Disabled { get; }
-  
-  public ref bool SolidBsp { get; }
-  
-  public string ExcludedClass { get; set; }
-  
-  public ref bool InvertExclusion { get; }
-  
-  public ref bool ScriptedMovement { get; }
+    public ref BrushSolidities_e Solidity { get; }
+
+    public ref int Disabled { get; }
+
+    public ref bool SolidBsp { get; }
+
+    public string ExcludedClass { get; set; }
+
+    public ref bool InvertExclusion { get; }
+
+    public ref bool ScriptedMovement { get; }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CStateNodeStateDataImpl : SchemaClass, CStateNodeStateData {
+internal partial class CStateNodeStateDataImpl : SchemaClass, CStateNodeStateData
+{
+    public CStateNodeStateDataImpl(nint handle) : base(handle) { }
 
-  public CStateNodeStateDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChildOffset;
 
-  private static nint? _ChildOffset;
-
-  public CAnimUpdateNodeRef Child {
-    get {
-      if (_ChildOffset == null) {
-        _ChildOffset = Schema.GetOffset(0x6AB991A04A0B773F);
-      }
-      return new CAnimUpdateNodeRefImpl(_Handle + _ChildOffset!.Value);
+    public CAnimUpdateNodeRef Child {
+        get {
+            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x6AB991A04A0B773F);
+            return new CAnimUpdateNodeRefImpl(_Handle + _ChildOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExclusiveRootMotionOffset;
+    private static nint? _ExclusiveRootMotionOffset;
 
-  public SchemaUntypedField ExclusiveRootMotion {
-    get {
-      if (_ExclusiveRootMotionOffset == null) {
-        _ExclusiveRootMotionOffset = Schema.GetOffset(0x6AB991A019C8014D);
-      }
-      return new SchemaUntypedField(_Handle + _ExclusiveRootMotionOffset!.Value);
+    public SchemaUntypedField ExclusiveRootMotion {
+        get {
+            _ExclusiveRootMotionOffset = _ExclusiveRootMotionOffset ?? Schema.GetOffset(0x6AB991A019C8014D);
+            return new SchemaUntypedField(_Handle + _ExclusiveRootMotionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExclusiveRootMotionFirstFrameOffset;
+    private static nint? _ExclusiveRootMotionFirstFrameOffset;
 
-  public SchemaUntypedField ExclusiveRootMotionFirstFrame {
-    get {
-      if (_ExclusiveRootMotionFirstFrameOffset == null) {
-        _ExclusiveRootMotionFirstFrameOffset = Schema.GetOffset(0x6AB991A0220BA45A);
-      }
-      return new SchemaUntypedField(_Handle + _ExclusiveRootMotionFirstFrameOffset!.Value);
+    public SchemaUntypedField ExclusiveRootMotionFirstFrame {
+        get {
+            _ExclusiveRootMotionFirstFrameOffset = _ExclusiveRootMotionFirstFrameOffset ?? Schema.GetOffset(0x6AB991A0220BA45A);
+            return new SchemaUntypedField(_Handle + _ExclusiveRootMotionFirstFrameOffset!.Value);
+        }
     }
-  }
 
 
 }

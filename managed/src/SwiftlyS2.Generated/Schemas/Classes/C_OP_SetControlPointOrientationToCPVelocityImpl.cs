@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetControlPointOrientationToCPVelocityImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointOrientationToCPVelocity {
+internal partial class C_OP_SetControlPointOrientationToCPVelocityImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointOrientationToCPVelocity
+{
+    public C_OP_SetControlPointOrientationToCPVelocityImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetControlPointOrientationToCPVelocityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPInputOffset;
 
-  private static nint? _CPInputOffset;
-
-  public ref int CPInput {
-    get {
-      if (_CPInputOffset == null) {
-        _CPInputOffset = Schema.GetOffset(0x8FFC9885FB805736);
-      }
-      return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
+    public ref int CPInput {
+        get {
+            _CPInputOffset = _CPInputOffset ?? Schema.GetOffset(0x8FFC9885FB805736);
+            return ref _Handle.AsRef<int>(_CPInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPOutputOffset;
+    private static nint? _CPOutputOffset;
 
-  public ref int CPOutput {
-    get {
-      if (_CPOutputOffset == null) {
-        _CPOutputOffset = Schema.GetOffset(0x8FFC98852077C953);
-      }
-      return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+    public ref int CPOutput {
+        get {
+            _CPOutputOffset = _CPOutputOffset ?? Schema.GetOffset(0x8FFC98852077C953);
+            return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+        }
     }
-  }
 
 
 }

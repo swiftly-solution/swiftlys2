@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseRuntimeStateOffset_t : ISchemaClass<PulseRuntimeStateOffset_t> {
+public partial interface PulseRuntimeStateOffset_t : ISchemaClass<PulseRuntimeStateOffset_t>
+{
+    static PulseRuntimeStateOffset_t ISchemaClass<PulseRuntimeStateOffset_t>.From(nint handle) => new PulseRuntimeStateOffset_tImpl(handle);
+    static int ISchemaClass<PulseRuntimeStateOffset_t>.Size => 2;
+    static string? ISchemaClass<PulseRuntimeStateOffset_t>.ClassName => null;
 
-  static PulseRuntimeStateOffset_t ISchemaClass<PulseRuntimeStateOffset_t>.From(nint handle) => new PulseRuntimeStateOffset_tImpl(handle);
-  static int ISchemaClass<PulseRuntimeStateOffset_t>.Size => 2;
-  static string? ISchemaClass<PulseRuntimeStateOffset_t>.ClassName => null;
 
-  
-  public ref ushort Value { get; }
+    public ref ushort Value { get; }
 
 
 }

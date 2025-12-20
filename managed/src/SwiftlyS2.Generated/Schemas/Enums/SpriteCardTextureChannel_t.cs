@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SpriteCardTextureChannel_t : uint {
-
+public enum SpriteCardTextureChannel_t : uint
+{
  SPRITECARD_TEXTURE_CHANNEL_MIX_RGB = 0,
 
  SPRITECARD_TEXTURE_CHANNEL_MIX_RGBA = 1,

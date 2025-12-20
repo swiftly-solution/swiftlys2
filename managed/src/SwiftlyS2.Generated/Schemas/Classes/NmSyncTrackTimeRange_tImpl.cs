@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class NmSyncTrackTimeRange_tImpl : SchemaClass, NmSyncTrackTimeRange_t {
+internal partial class NmSyncTrackTimeRange_tImpl : SchemaClass, NmSyncTrackTimeRange_t
+{
+    public NmSyncTrackTimeRange_tImpl(nint handle) : base(handle) { }
 
-  public NmSyncTrackTimeRange_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartTimeOffset;
 
-  private static nint? _StartTimeOffset;
-
-  public NmSyncTrackTime_t StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0xAECBDADF6330E7EE);
-      }
-      return new NmSyncTrackTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    public NmSyncTrackTime_t StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xAECBDADF6330E7EE);
+            return new NmSyncTrackTime_tImpl(_Handle + _StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndTimeOffset;
+    private static nint? _EndTimeOffset;
 
-  public NmSyncTrackTime_t EndTime {
-    get {
-      if (_EndTimeOffset == null) {
-        _EndTimeOffset = Schema.GetOffset(0xAECBDADFEAD1A94B);
-      }
-      return new NmSyncTrackTime_tImpl(_Handle + _EndTimeOffset!.Value);
+    public NmSyncTrackTime_t EndTime {
+        get {
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0xAECBDADFEAD1A94B);
+            return new NmSyncTrackTime_tImpl(_Handle + _EndTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

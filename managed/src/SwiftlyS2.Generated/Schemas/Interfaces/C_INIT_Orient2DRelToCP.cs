@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_Orient2DRelToCP : CParticleFunctionInitializer, ISchemaClass<C_INIT_Orient2DRelToCP> {
+public partial interface C_INIT_Orient2DRelToCP : CParticleFunctionInitializer, ISchemaClass<C_INIT_Orient2DRelToCP>
+{
+    static C_INIT_Orient2DRelToCP ISchemaClass<C_INIT_Orient2DRelToCP>.From(nint handle) => new C_INIT_Orient2DRelToCPImpl(handle);
+    static int ISchemaClass<C_INIT_Orient2DRelToCP>.Size => 488;
+    static string? ISchemaClass<C_INIT_Orient2DRelToCP>.ClassName => null;
 
-  static C_INIT_Orient2DRelToCP ISchemaClass<C_INIT_Orient2DRelToCP>.From(nint handle) => new C_INIT_Orient2DRelToCPImpl(handle);
-  static int ISchemaClass<C_INIT_Orient2DRelToCP>.Size => 488;
-  static string? ISchemaClass<C_INIT_Orient2DRelToCP>.ClassName => null;
 
-  
-  public ref int CP { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float RotOffset { get; }
+    public ref int CP { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float RotOffset { get; }
 
 
 }

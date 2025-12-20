@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMessageEntity : CPointEntity, ISchemaClass<CMessageEntity> {
+public partial interface CMessageEntity : CPointEntity, ISchemaClass<CMessageEntity>
+{
+    static CMessageEntity ISchemaClass<CMessageEntity>.From(nint handle) => new CMessageEntityImpl(handle);
+    static int ISchemaClass<CMessageEntity>.Size => 1288;
+    static string? ISchemaClass<CMessageEntity>.ClassName => "point_message";
 
-  static CMessageEntity ISchemaClass<CMessageEntity>.From(nint handle) => new CMessageEntityImpl(handle);
-  static int ISchemaClass<CMessageEntity>.Size => 1288;
-  static string? ISchemaClass<CMessageEntity>.ClassName => "point_message";
 
-  
-  public ref int Radius { get; }
-  
-  public string MessageText { get; set; }
-  
-  public ref bool DrawText { get; }
-  
-  public ref bool DeveloperOnly { get; }
-  
-  public ref bool Enabled { get; }
+    public ref int Radius { get; }
+
+    public string MessageText { get; set; }
+
+    public ref bool DrawText { get; }
+
+    public ref bool DeveloperOnly { get; }
+
+    public ref bool Enabled { get; }
 
 
 }

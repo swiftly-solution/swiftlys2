@@ -6,94 +6,76 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class NodeData_tImpl : SchemaClass, NodeData_t {
+internal partial class NodeData_tImpl : SchemaClass, NodeData_t
+{
+    public NodeData_tImpl(nint handle) : base(handle) { }
 
-  public NodeData_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParentOffset;
 
-  private static nint? _ParentOffset;
-
-  public ref int Parent {
-    get {
-      if (_ParentOffset == null) {
-        _ParentOffset = Schema.GetOffset(0xB09FAAA60AABB9D1);
-      }
-      return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+    public ref int Parent {
+        get {
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0xB09FAAA60AABB9D1);
+            return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginOffset;
+    private static nint? _OriginOffset;
 
-  public ref Vector Origin {
-    get {
-      if (_OriginOffset == null) {
-        _OriginOffset = Schema.GetOffset(0xB09FAAA6F26E589B);
-      }
-      return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
+    public ref Vector Origin {
+        get {
+            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0xB09FAAA6F26E589B);
+            return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinBoundsOffset;
+    private static nint? _MinBoundsOffset;
 
-  public ref Vector MinBounds {
-    get {
-      if (_MinBoundsOffset == null) {
-        _MinBoundsOffset = Schema.GetOffset(0xB09FAAA6114799FE);
-      }
-      return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
+    public ref Vector MinBounds {
+        get {
+            _MinBoundsOffset = _MinBoundsOffset ?? Schema.GetOffset(0xB09FAAA6114799FE);
+            return ref _Handle.AsRef<Vector>(_MinBoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxBoundsOffset;
+    private static nint? _MaxBoundsOffset;
 
-  public ref Vector MaxBounds {
-    get {
-      if (_MaxBoundsOffset == null) {
-        _MaxBoundsOffset = Schema.GetOffset(0xB09FAAA6C0B4CE60);
-      }
-      return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
+    public ref Vector MaxBounds {
+        get {
+            _MaxBoundsOffset = _MaxBoundsOffset ?? Schema.GetOffset(0xB09FAAA6C0B4CE60);
+            return ref _Handle.AsRef<Vector>(_MaxBoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinimumDistanceOffset;
+    private static nint? _MinimumDistanceOffset;
 
-  public ref float MinimumDistance {
-    get {
-      if (_MinimumDistanceOffset == null) {
-        _MinimumDistanceOffset = Schema.GetOffset(0xB09FAAA6D8B1200E);
-      }
-      return ref _Handle.AsRef<float>(_MinimumDistanceOffset!.Value);
+    public ref float MinimumDistance {
+        get {
+            _MinimumDistanceOffset = _MinimumDistanceOffset ?? Schema.GetOffset(0xB09FAAA6D8B1200E);
+            return ref _Handle.AsRef<float>(_MinimumDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChildNodeIndicesOffset;
+    private static nint? _ChildNodeIndicesOffset;
 
-  public ref CUtlVector<int> ChildNodeIndices {
-    get {
-      if (_ChildNodeIndicesOffset == null) {
-        _ChildNodeIndicesOffset = Schema.GetOffset(0xB09FAAA63648C692);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_ChildNodeIndicesOffset!.Value);
+    public ref CUtlVector<int> ChildNodeIndices {
+        get {
+            _ChildNodeIndicesOffset = _ChildNodeIndicesOffset ?? Schema.GetOffset(0xB09FAAA63648C692);
+            return ref _Handle.AsRef<CUtlVector<int>>(_ChildNodeIndicesOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldNodePrefixOffset;
+    private static nint? _WorldNodePrefixOffset;
 
-  public string WorldNodePrefix {
-    get {
-      if (_WorldNodePrefixOffset == null) {
-        _WorldNodePrefixOffset = Schema.GetOffset(0xB09FAAA662126457);
-      }
-      var ptr = _Handle.Read<nint>(_WorldNodePrefixOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_WorldNodePrefixOffset == null) {
-        _WorldNodePrefixOffset = Schema.GetOffset(0xB09FAAA662126457);
-      }
-      Schema.SetString(_Handle, _WorldNodePrefixOffset!.Value, value);
-    }
-  } 
+    public string WorldNodePrefix {
+        get {
+            _WorldNodePrefixOffset = _WorldNodePrefixOffset ?? Schema.GetOffset(0xB09FAAA662126457);
+            return Schema.GetString(_Handle.Read<nint>(_WorldNodePrefixOffset!.Value));
+        }
+        set {
+            _WorldNodePrefixOffset = _WorldNodePrefixOffset ?? Schema.GetOffset(0xB09FAAA662126457);
+            Schema.SetString(_Handle, _WorldNodePrefixOffset!.Value, value);
+        }
+    } 
 
 
 }

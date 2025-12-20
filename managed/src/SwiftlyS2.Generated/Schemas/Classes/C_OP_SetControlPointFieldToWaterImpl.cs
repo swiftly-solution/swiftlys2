@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetControlPointFieldToWaterImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointFieldToWater {
+internal partial class C_OP_SetControlPointFieldToWaterImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointFieldToWater
+{
+    public C_OP_SetControlPointFieldToWaterImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetControlPointFieldToWaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceCPOffset;
 
-  private static nint? _SourceCPOffset;
-
-  public ref int SourceCP {
-    get {
-      if (_SourceCPOffset == null) {
-        _SourceCPOffset = Schema.GetOffset(0x77BA8CA24C01E3B7);
-      }
-      return ref _Handle.AsRef<int>(_SourceCPOffset!.Value);
+    public ref int SourceCP {
+        get {
+            _SourceCPOffset = _SourceCPOffset ?? Schema.GetOffset(0x77BA8CA24C01E3B7);
+            return ref _Handle.AsRef<int>(_SourceCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestCPOffset;
+    private static nint? _DestCPOffset;
 
-  public ref int DestCP {
-    get {
-      if (_DestCPOffset == null) {
-        _DestCPOffset = Schema.GetOffset(0x77BA8CA2E27355DA);
-      }
-      return ref _Handle.AsRef<int>(_DestCPOffset!.Value);
+    public ref int DestCP {
+        get {
+            _DestCPOffset = _DestCPOffset ?? Schema.GetOffset(0x77BA8CA2E27355DA);
+            return ref _Handle.AsRef<int>(_DestCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPFieldOffset;
+    private static nint? _CPFieldOffset;
 
-  public ref int CPField {
-    get {
-      if (_CPFieldOffset == null) {
-        _CPFieldOffset = Schema.GetOffset(0x77BA8CA250B79876);
-      }
-      return ref _Handle.AsRef<int>(_CPFieldOffset!.Value);
+    public ref int CPField {
+        get {
+            _CPFieldOffset = _CPFieldOffset ?? Schema.GetOffset(0x77BA8CA250B79876);
+            return ref _Handle.AsRef<int>(_CPFieldOffset!.Value);
+        }
     }
-  }
 
 
 }

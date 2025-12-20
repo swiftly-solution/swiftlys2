@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapTransformToVelocity : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformToVelocity> {
+public partial interface C_OP_RemapTransformToVelocity : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformToVelocity>
+{
+    static C_OP_RemapTransformToVelocity ISchemaClass<C_OP_RemapTransformToVelocity>.From(nint handle) => new C_OP_RemapTransformToVelocityImpl(handle);
+    static int ISchemaClass<C_OP_RemapTransformToVelocity>.Size => 568;
+    static string? ISchemaClass<C_OP_RemapTransformToVelocity>.ClassName => null;
 
-  static C_OP_RemapTransformToVelocity ISchemaClass<C_OP_RemapTransformToVelocity>.From(nint handle) => new C_OP_RemapTransformToVelocityImpl(handle);
-  static int ISchemaClass<C_OP_RemapTransformToVelocity>.Size => 568;
-  static string? ISchemaClass<C_OP_RemapTransformToVelocity>.ClassName => null;
 
-  
-  public CParticleTransformInput TransformInput { get; }
+    public CParticleTransformInput TransformInput { get; }
 
 
 }

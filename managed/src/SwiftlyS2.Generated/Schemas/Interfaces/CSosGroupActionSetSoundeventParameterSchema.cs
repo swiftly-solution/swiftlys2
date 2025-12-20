@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSosGroupActionSetSoundeventParameterSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionSetSoundeventParameterSchema> {
+public partial interface CSosGroupActionSetSoundeventParameterSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionSetSoundeventParameterSchema>
+{
+    static CSosGroupActionSetSoundeventParameterSchema ISchemaClass<CSosGroupActionSetSoundeventParameterSchema>.From(nint handle) => new CSosGroupActionSetSoundeventParameterSchemaImpl(handle);
+    static int ISchemaClass<CSosGroupActionSetSoundeventParameterSchema>.Size => 40;
+    static string? ISchemaClass<CSosGroupActionSetSoundeventParameterSchema>.ClassName => null;
 
-  static CSosGroupActionSetSoundeventParameterSchema ISchemaClass<CSosGroupActionSetSoundeventParameterSchema>.From(nint handle) => new CSosGroupActionSetSoundeventParameterSchemaImpl(handle);
-  static int ISchemaClass<CSosGroupActionSetSoundeventParameterSchema>.Size => 40;
-  static string? ISchemaClass<CSosGroupActionSetSoundeventParameterSchema>.ClassName => null;
 
-  
-  public ref int MaxCount { get; }
-  
-  public ref float MinValue { get; }
-  
-  public ref float MaxValue { get; }
-  
-  public string OpvarName { get; set; }
-  
-  public ref SosActionSetParamSortType_t SortType { get; }
+    public ref int MaxCount { get; }
+
+    public ref float MinValue { get; }
+
+    public ref float MaxValue { get; }
+
+    public string OpvarName { get; set; }
+
+    public ref SosActionSetParamSortType_t SortType { get; }
 
 
 }

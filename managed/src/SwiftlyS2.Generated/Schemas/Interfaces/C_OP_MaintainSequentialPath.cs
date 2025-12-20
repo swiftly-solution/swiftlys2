@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_MaintainSequentialPath : CParticleFunctionOperator, ISchemaClass<C_OP_MaintainSequentialPath> {
+public partial interface C_OP_MaintainSequentialPath : CParticleFunctionOperator, ISchemaClass<C_OP_MaintainSequentialPath>
+{
+    static C_OP_MaintainSequentialPath ISchemaClass<C_OP_MaintainSequentialPath>.From(nint handle) => new C_OP_MaintainSequentialPathImpl(handle);
+    static int ISchemaClass<C_OP_MaintainSequentialPath>.Size => 560;
+    static string? ISchemaClass<C_OP_MaintainSequentialPath>.ClassName => null;
 
-  static C_OP_MaintainSequentialPath ISchemaClass<C_OP_MaintainSequentialPath>.From(nint handle) => new C_OP_MaintainSequentialPathImpl(handle);
-  static int ISchemaClass<C_OP_MaintainSequentialPath>.Size => 560;
-  static string? ISchemaClass<C_OP_MaintainSequentialPath>.ClassName => null;
 
-  
-  public ref float MaxDistance { get; }
-  
-  public ref float NumToAssign { get; }
-  
-  public ref float CohesionStrength { get; }
-  
-  public ref float Tolerance { get; }
-  
-  public ref bool Loop { get; }
-  
-  public ref bool UseParticleCount { get; }
-  
-  public CPathParameters PathParams { get; }
+    public ref float MaxDistance { get; }
+
+    public ref float NumToAssign { get; }
+
+    public ref float CohesionStrength { get; }
+
+    public ref float Tolerance { get; }
+
+    public ref bool Loop { get; }
+
+    public ref bool UseParticleCount { get; }
+
+    public CPathParameters PathParams { get; }
 
 
 }

@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysicsBodyGameMarkupImpl : SchemaClass, CPhysicsBodyGameMarkup {
+internal partial class CPhysicsBodyGameMarkupImpl : SchemaClass, CPhysicsBodyGameMarkup
+{
+    public CPhysicsBodyGameMarkupImpl(nint handle) : base(handle) { }
 
-  public CPhysicsBodyGameMarkupImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetBodyOffset;
 
-  private static nint? _TargetBodyOffset;
+    public string TargetBody {
+        get {
+            _TargetBodyOffset = _TargetBodyOffset ?? Schema.GetOffset(0xA5257571F2C6B554);
+            return Schema.GetString(_Handle.Read<nint>(_TargetBodyOffset!.Value));
+        }
+        set {
+            _TargetBodyOffset = _TargetBodyOffset ?? Schema.GetOffset(0xA5257571F2C6B554);
+            Schema.SetString(_Handle, _TargetBodyOffset!.Value, value);
+        }
+    } 
+    private static nint? _TagOffset;
 
-  public string TargetBody {
-    get {
-      if (_TargetBodyOffset == null) {
-        _TargetBodyOffset = Schema.GetOffset(0xA5257571F2C6B554);
-      }
-      var ptr = _Handle.Read<nint>(_TargetBodyOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CGlobalSymbol Tag {
+        get {
+            _TagOffset = _TagOffset ?? Schema.GetOffset(0xA5257571218D8313);
+            return ref _Handle.AsRef<CGlobalSymbol>(_TagOffset!.Value);
+        }
     }
-    set {
-      if (_TargetBodyOffset == null) {
-        _TargetBodyOffset = Schema.GetOffset(0xA5257571F2C6B554);
-      }
-      Schema.SetString(_Handle, _TargetBodyOffset!.Value, value);
-    }
-  } 
-  private static nint? _TagOffset;
-
-  public ref CGlobalSymbol Tag {
-    get {
-      if (_TagOffset == null) {
-        _TagOffset = Schema.GetOffset(0xA5257571218D8313);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_TagOffset!.Value);
-    }
-  }
 
 
 }

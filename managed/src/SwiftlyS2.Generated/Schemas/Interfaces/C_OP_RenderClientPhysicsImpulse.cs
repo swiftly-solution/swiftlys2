@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderClientPhysicsImpulse : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderClientPhysicsImpulse> {
+public partial interface C_OP_RenderClientPhysicsImpulse : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderClientPhysicsImpulse>
+{
+    static C_OP_RenderClientPhysicsImpulse ISchemaClass<C_OP_RenderClientPhysicsImpulse>.From(nint handle) => new C_OP_RenderClientPhysicsImpulseImpl(handle);
+    static int ISchemaClass<C_OP_RenderClientPhysicsImpulse>.Size => 1288;
+    static string? ISchemaClass<C_OP_RenderClientPhysicsImpulse>.ClassName => null;
 
-  static C_OP_RenderClientPhysicsImpulse ISchemaClass<C_OP_RenderClientPhysicsImpulse>.From(nint handle) => new C_OP_RenderClientPhysicsImpulseImpl(handle);
-  static int ISchemaClass<C_OP_RenderClientPhysicsImpulse>.Size => 1288;
-  static string? ISchemaClass<C_OP_RenderClientPhysicsImpulse>.ClassName => null;
 
-  
-  public CPerParticleFloatInput Radius { get; }
-  
-  public CPerParticleFloatInput Magnitude { get; }
-  
-  public ref int SimIdFilter { get; }
+    public CPerParticleFloatInput Radius { get; }
+
+    public CPerParticleFloatInput Magnitude { get; }
+
+    public ref int SimIdFilter { get; }
 
 
 }

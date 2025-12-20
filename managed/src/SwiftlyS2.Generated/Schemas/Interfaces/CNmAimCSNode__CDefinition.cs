@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmAimCSNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmAimCSNode__CDefinition> {
+public partial interface CNmAimCSNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmAimCSNode__CDefinition>
+{
+    static CNmAimCSNode__CDefinition ISchemaClass<CNmAimCSNode__CDefinition>.From(nint handle) => new CNmAimCSNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmAimCSNode__CDefinition>.Size => 40;
+    static string? ISchemaClass<CNmAimCSNode__CDefinition>.ClassName => null;
 
-  static CNmAimCSNode__CDefinition ISchemaClass<CNmAimCSNode__CDefinition>.From(nint handle) => new CNmAimCSNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmAimCSNode__CDefinition>.Size => 40;
-  static string? ISchemaClass<CNmAimCSNode__CDefinition>.ClassName => null;
 
-  
-  public ref short VerticalAngleNodeIdx { get; }
-  
-  public ref short HorizontalAngleNodeIdx { get; }
-  
-  public ref short WeaponCategoryNodeIdx { get; }
-  
-  public ref short EnabledNodeIdx { get; }
-  
-  public ref float BlendTimeSeconds { get; }
+    public ref short VerticalAngleNodeIdx { get; }
+
+    public ref short HorizontalAngleNodeIdx { get; }
+
+    public ref short WeaponCategoryNodeIdx { get; }
+
+    public ref short EnabledNodeIdx { get; }
+
+    public ref float BlendTimeSeconds { get; }
 
 
 }

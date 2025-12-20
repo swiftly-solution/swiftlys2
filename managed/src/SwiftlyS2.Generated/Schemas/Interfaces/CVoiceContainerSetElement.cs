@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerSetElement : ISchemaClass<CVoiceContainerSetElement> {
+public partial interface CVoiceContainerSetElement : ISchemaClass<CVoiceContainerSetElement>
+{
+    static CVoiceContainerSetElement ISchemaClass<CVoiceContainerSetElement>.From(nint handle) => new CVoiceContainerSetElementImpl(handle);
+    static int ISchemaClass<CVoiceContainerSetElement>.Size => 32;
+    static string? ISchemaClass<CVoiceContainerSetElement>.ClassName => null;
 
-  static CVoiceContainerSetElement ISchemaClass<CVoiceContainerSetElement>.From(nint handle) => new CVoiceContainerSetElementImpl(handle);
-  static int ISchemaClass<CVoiceContainerSetElement>.Size => 32;
-  static string? ISchemaClass<CVoiceContainerSetElement>.ClassName => null;
 
-  
-  public CSoundContainerReference Sound { get; }
-  
-  public ref float VolumeDB { get; }
+    public CSoundContainerReference Sound { get; }
+
+    public ref float VolumeDB { get; }
 
 
 }

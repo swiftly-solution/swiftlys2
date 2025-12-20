@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleColorBlendMode_t : uint {
-
+public enum ParticleColorBlendMode_t : uint
+{
  PARTICLEBLEND_DEFAULT = 0,
 
  PARTICLEBLEND_OVERLAY = 1,

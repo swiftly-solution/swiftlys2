@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBlockSelectionMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CBlockSelectionMetricEvaluator> {
-
-  static CBlockSelectionMetricEvaluator ISchemaClass<CBlockSelectionMetricEvaluator>.From(nint handle) => new CBlockSelectionMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CBlockSelectionMetricEvaluator>.Size => 80;
-  static string? ISchemaClass<CBlockSelectionMetricEvaluator>.ClassName => null;
+public partial interface CBlockSelectionMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CBlockSelectionMetricEvaluator>
+{
+    static CBlockSelectionMetricEvaluator ISchemaClass<CBlockSelectionMetricEvaluator>.From(nint handle) => new CBlockSelectionMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CBlockSelectionMetricEvaluator>.Size => 80;
+    static string? ISchemaClass<CBlockSelectionMetricEvaluator>.ClassName => null;
 
 
 

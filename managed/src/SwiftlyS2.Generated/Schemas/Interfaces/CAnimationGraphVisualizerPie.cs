@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimationGraphVisualizerPie : CAnimationGraphVisualizerPrimitiveBase, ISchemaClass<CAnimationGraphVisualizerPie> {
+public partial interface CAnimationGraphVisualizerPie : CAnimationGraphVisualizerPrimitiveBase, ISchemaClass<CAnimationGraphVisualizerPie>
+{
+    static CAnimationGraphVisualizerPie ISchemaClass<CAnimationGraphVisualizerPie>.From(nint handle) => new CAnimationGraphVisualizerPieImpl(handle);
+    static int ISchemaClass<CAnimationGraphVisualizerPie>.Size => 128;
+    static string? ISchemaClass<CAnimationGraphVisualizerPie>.ClassName => null;
 
-  static CAnimationGraphVisualizerPie ISchemaClass<CAnimationGraphVisualizerPie>.From(nint handle) => new CAnimationGraphVisualizerPieImpl(handle);
-  static int ISchemaClass<CAnimationGraphVisualizerPie>.Size => 128;
-  static string? ISchemaClass<CAnimationGraphVisualizerPie>.ClassName => null;
 
-  
-  public ref Vector WsCenter { get; }
-  
-  public ref Vector WsStart { get; }
-  
-  public ref Vector WsEnd { get; }
-  
-  public ref Color Color { get; }
+    public ref Vector WsCenter { get; }
+
+    public ref Vector WsStart { get; }
+
+    public ref Vector WsEnd { get; }
+
+    public ref Color Color { get; }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface WeaponPurchaseTracker_t : ISchemaClass<WeaponPurchaseTracker_t> {
+public partial interface WeaponPurchaseTracker_t : ISchemaClass<WeaponPurchaseTracker_t>
+{
+    static WeaponPurchaseTracker_t ISchemaClass<WeaponPurchaseTracker_t>.From(nint handle) => new WeaponPurchaseTracker_tImpl(handle);
+    static int ISchemaClass<WeaponPurchaseTracker_t>.Size => 112;
+    static string? ISchemaClass<WeaponPurchaseTracker_t>.ClassName => null;
 
-  static WeaponPurchaseTracker_t ISchemaClass<WeaponPurchaseTracker_t>.From(nint handle) => new WeaponPurchaseTracker_tImpl(handle);
-  static int ISchemaClass<WeaponPurchaseTracker_t>.Size => 112;
-  static string? ISchemaClass<WeaponPurchaseTracker_t>.ClassName => null;
 
-  
-  public ref CUtlVector<WeaponPurchaseCount_t> WeaponPurchases { get; }
+    public ref CUtlVector<WeaponPurchaseCount_t> WeaponPurchases { get; }
 
-  public void WeaponPurchasesUpdated();
+    public void WeaponPurchasesUpdated();
 }

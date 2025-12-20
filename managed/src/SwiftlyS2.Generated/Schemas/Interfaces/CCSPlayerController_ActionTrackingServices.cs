@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerController_ActionTrackingServices : CPlayerControllerComponent, ISchemaClass<CCSPlayerController_ActionTrackingServices> {
+public partial interface CCSPlayerController_ActionTrackingServices : CPlayerControllerComponent, ISchemaClass<CCSPlayerController_ActionTrackingServices>
+{
+    static CCSPlayerController_ActionTrackingServices ISchemaClass<CCSPlayerController_ActionTrackingServices>.From(nint handle) => new CCSPlayerController_ActionTrackingServicesImpl(handle);
+    static int ISchemaClass<CCSPlayerController_ActionTrackingServices>.Size => 624;
+    static string? ISchemaClass<CCSPlayerController_ActionTrackingServices>.ClassName => null;
 
-  static CCSPlayerController_ActionTrackingServices ISchemaClass<CCSPlayerController_ActionTrackingServices>.From(nint handle) => new CCSPlayerController_ActionTrackingServicesImpl(handle);
-  static int ISchemaClass<CCSPlayerController_ActionTrackingServices>.Size => 624;
-  static string? ISchemaClass<CCSPlayerController_ActionTrackingServices>.ClassName => null;
 
-  
-  public ref CUtlVector<CSPerRoundStats_t> PerRoundStats { get; }
-  
-  public CSMatchStats_t MatchStats { get; }
-  
-  public ref int NumRoundKills { get; }
-  
-  public ref int NumRoundKillsHeadshots { get; }
-  
-  public ref float TotalRoundDamageDealt { get; }
+    public ref CUtlVector<CSPerRoundStats_t> PerRoundStats { get; }
 
-  public void PerRoundStatsUpdated();
-  public void MatchStatsUpdated();
-  public void NumRoundKillsUpdated();
-  public void NumRoundKillsHeadshotsUpdated();
-  public void TotalRoundDamageDealtUpdated();
+    public CSMatchStats_t MatchStats { get; }
+
+    public ref int NumRoundKills { get; }
+
+    public ref int NumRoundKillsHeadshots { get; }
+
+    public ref float TotalRoundDamageDealt { get; }
+
+    public void PerRoundStatsUpdated();
+    public void MatchStatsUpdated();
+    public void NumRoundKillsUpdated();
+    public void NumRoundKillsHeadshotsUpdated();
+    public void TotalRoundDamageDealtUpdated();
 }

@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_InitialRepulsionVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitialRepulsionVelocity> {
+public partial interface C_INIT_InitialRepulsionVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitialRepulsionVelocity>
+{
+    static C_INIT_InitialRepulsionVelocity ISchemaClass<C_INIT_InitialRepulsionVelocity>.From(nint handle) => new C_INIT_InitialRepulsionVelocityImpl(handle);
+    static int ISchemaClass<C_INIT_InitialRepulsionVelocity>.Size => 656;
+    static string? ISchemaClass<C_INIT_InitialRepulsionVelocity>.ClassName => null;
 
-  static C_INIT_InitialRepulsionVelocity ISchemaClass<C_INIT_InitialRepulsionVelocity>.From(nint handle) => new C_INIT_InitialRepulsionVelocityImpl(handle);
-  static int ISchemaClass<C_INIT_InitialRepulsionVelocity>.Size => 656;
-  static string? ISchemaClass<C_INIT_InitialRepulsionVelocity>.ClassName => null;
 
-  
-  public string CollisionGroupName { get; set; }
-  
-  public ref ParticleTraceSet_t TraceSet { get; }
-  
-  public ref Vector OutputMin { get; }
-  
-  public ref Vector OutputMax { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref bool PerParticle { get; }
-  
-  public ref bool Translate { get; }
-  
-  public ref bool Proportional { get; }
-  
-  public ref float TraceLength { get; }
-  
-  public ref bool PerParticleTR { get; }
-  
-  public ref bool Inherit { get; }
-  
-  public ref int ChildCP { get; }
-  
-  public ref int ChildGroupID { get; }
+    public string CollisionGroupName { get; set; }
+
+    public ref ParticleTraceSet_t TraceSet { get; }
+
+    public ref Vector OutputMin { get; }
+
+    public ref Vector OutputMax { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref bool PerParticle { get; }
+
+    public ref bool Translate { get; }
+
+    public ref bool Proportional { get; }
+
+    public ref float TraceLength { get; }
+
+    public ref bool PerParticleTR { get; }
+
+    public ref bool Inherit { get; }
+
+    public ref int ChildCP { get; }
+
+    public ref int ChildGroupID { get; }
 
 
 }

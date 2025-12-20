@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysPulley : CPhysConstraint, ISchemaClass<CPhysPulley> {
+public partial interface CPhysPulley : CPhysConstraint, ISchemaClass<CPhysPulley>
+{
+    static CPhysPulley ISchemaClass<CPhysPulley>.From(nint handle) => new CPhysPulleyImpl(handle);
+    static int ISchemaClass<CPhysPulley>.Size => 1424;
+    static string? ISchemaClass<CPhysPulley>.ClassName => "phys_pulleyconstraint";
 
-  static CPhysPulley ISchemaClass<CPhysPulley>.From(nint handle) => new CPhysPulleyImpl(handle);
-  static int ISchemaClass<CPhysPulley>.Size => 1424;
-  static string? ISchemaClass<CPhysPulley>.ClassName => "phys_pulleyconstraint";
 
-  
-  public ref Vector Position2 { get; }
-  
-  public ISchemaFixedArray<Vector> Offset { get; }
-  
-  public ref float AddLength { get; }
-  
-  public ref float GearRatio { get; }
+    public ref Vector Position2 { get; }
+
+    public ISchemaFixedArray<Vector> Offset { get; }
+
+    public ref float AddLength { get; }
+
+    public ref float GearRatio { get; }
 
 
 }

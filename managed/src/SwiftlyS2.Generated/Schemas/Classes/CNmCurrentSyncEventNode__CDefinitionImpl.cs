@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmCurrentSyncEventNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmCurrentSyncEventNode__CDefinition {
+internal partial class CNmCurrentSyncEventNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmCurrentSyncEventNode__CDefinition
+{
+    public CNmCurrentSyncEventNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmCurrentSyncEventNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceStateNodeIdxOffset;
 
-  private static nint? _SourceStateNodeIdxOffset;
-
-  public ref short SourceStateNodeIdx {
-    get {
-      if (_SourceStateNodeIdxOffset == null) {
-        _SourceStateNodeIdxOffset = Schema.GetOffset(0x1F6A7BCB63F0228C);
-      }
-      return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+    public ref short SourceStateNodeIdx {
+        get {
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x1F6A7BCB63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _InfoTypeOffset;
+    private static nint? _InfoTypeOffset;
 
-  public ref CNmCurrentSyncEventNode__InfoType_t InfoType {
-    get {
-      if (_InfoTypeOffset == null) {
-        _InfoTypeOffset = Schema.GetOffset(0x1F6A7BCBCE6BA20D);
-      }
-      return ref _Handle.AsRef<CNmCurrentSyncEventNode__InfoType_t>(_InfoTypeOffset!.Value);
+    public ref CNmCurrentSyncEventNode__InfoType_t InfoType {
+        get {
+            _InfoTypeOffset = _InfoTypeOffset ?? Schema.GetOffset(0x1F6A7BCBCE6BA20D);
+            return ref _Handle.AsRef<CNmCurrentSyncEventNode__InfoType_t>(_InfoTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

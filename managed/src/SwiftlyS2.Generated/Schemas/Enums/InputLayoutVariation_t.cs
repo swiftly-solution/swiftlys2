@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum InputLayoutVariation_t : byte {
-
+public enum InputLayoutVariation_t : byte
+{
  INPUT_LAYOUT_VARIATION_DEFAULT = 0,
 
  INPUT_LAYOUT_VARIATION_STREAM1_INSTANCEID = 1,

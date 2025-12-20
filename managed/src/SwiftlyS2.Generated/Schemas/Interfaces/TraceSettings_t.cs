@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface TraceSettings_t : ISchemaClass<TraceSettings_t> {
+public partial interface TraceSettings_t : ISchemaClass<TraceSettings_t>
+{
+    static TraceSettings_t ISchemaClass<TraceSettings_t>.From(nint handle) => new TraceSettings_tImpl(handle);
+    static int ISchemaClass<TraceSettings_t>.Size => 8;
+    static string? ISchemaClass<TraceSettings_t>.ClassName => null;
 
-  static TraceSettings_t ISchemaClass<TraceSettings_t>.From(nint handle) => new TraceSettings_tImpl(handle);
-  static int ISchemaClass<TraceSettings_t>.Size => 8;
-  static string? ISchemaClass<TraceSettings_t>.ClassName => null;
 
-  
-  public ref float TraceHeight { get; }
-  
-  public ref float TraceRadius { get; }
+    public ref float TraceHeight { get; }
+
+    public ref float TraceRadius { get; }
 
 
 }

@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Value_Gradient : CPulseCell_BaseValue, ISchemaClass<CPulseCell_Value_Gradient> {
+public partial interface CPulseCell_Value_Gradient : CPulseCell_BaseValue, ISchemaClass<CPulseCell_Value_Gradient>
+{
+    static CPulseCell_Value_Gradient ISchemaClass<CPulseCell_Value_Gradient>.From(nint handle) => new CPulseCell_Value_GradientImpl(handle);
+    static int ISchemaClass<CPulseCell_Value_Gradient>.Size => 96;
+    static string? ISchemaClass<CPulseCell_Value_Gradient>.ClassName => null;
 
-  static CPulseCell_Value_Gradient ISchemaClass<CPulseCell_Value_Gradient>.From(nint handle) => new CPulseCell_Value_GradientImpl(handle);
-  static int ISchemaClass<CPulseCell_Value_Gradient>.Size => 96;
-  static string? ISchemaClass<CPulseCell_Value_Gradient>.ClassName => null;
 
-  
-  // CColorGradient
-  public SchemaUntypedField Gradient { get; }
+    // CColorGradient
+    public SchemaUntypedField Gradient { get; }
 
 
 }

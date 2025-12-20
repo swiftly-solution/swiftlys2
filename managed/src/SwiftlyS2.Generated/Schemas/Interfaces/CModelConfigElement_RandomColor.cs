@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigElement_RandomColor : CModelConfigElement, ISchemaClass<CModelConfigElement_RandomColor> {
+public partial interface CModelConfigElement_RandomColor : CModelConfigElement, ISchemaClass<CModelConfigElement_RandomColor>
+{
+    static CModelConfigElement_RandomColor ISchemaClass<CModelConfigElement_RandomColor>.From(nint handle) => new CModelConfigElement_RandomColorImpl(handle);
+    static int ISchemaClass<CModelConfigElement_RandomColor>.Size => 96;
+    static string? ISchemaClass<CModelConfigElement_RandomColor>.ClassName => null;
 
-  static CModelConfigElement_RandomColor ISchemaClass<CModelConfigElement_RandomColor>.From(nint handle) => new CModelConfigElement_RandomColorImpl(handle);
-  static int ISchemaClass<CModelConfigElement_RandomColor>.Size => 96;
-  static string? ISchemaClass<CModelConfigElement_RandomColor>.ClassName => null;
 
-  
-  // CColorGradient
-  public SchemaUntypedField Gradient { get; }
+    // CColorGradient
+    public SchemaUntypedField Gradient { get; }
 
 
 }

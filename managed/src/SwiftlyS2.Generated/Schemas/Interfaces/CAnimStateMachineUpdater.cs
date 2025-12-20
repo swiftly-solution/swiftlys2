@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimStateMachineUpdater : ISchemaClass<CAnimStateMachineUpdater> {
+public partial interface CAnimStateMachineUpdater : ISchemaClass<CAnimStateMachineUpdater>
+{
+    static CAnimStateMachineUpdater ISchemaClass<CAnimStateMachineUpdater>.From(nint handle) => new CAnimStateMachineUpdaterImpl(handle);
+    static int ISchemaClass<CAnimStateMachineUpdater>.Size => 88;
+    static string? ISchemaClass<CAnimStateMachineUpdater>.ClassName => null;
 
-  static CAnimStateMachineUpdater ISchemaClass<CAnimStateMachineUpdater>.From(nint handle) => new CAnimStateMachineUpdaterImpl(handle);
-  static int ISchemaClass<CAnimStateMachineUpdater>.Size => 88;
-  static string? ISchemaClass<CAnimStateMachineUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<CStateUpdateData> States { get; }
-  
-  public ref CUtlVector<CTransitionUpdateData> Transitions { get; }
-  
-  public ref int StartStateIndex { get; }
+    public ref CUtlVector<CStateUpdateData> States { get; }
+
+    public ref CUtlVector<CTransitionUpdateData> Transitions { get; }
+
+    public ref int StartStateIndex { get; }
 
 
 }

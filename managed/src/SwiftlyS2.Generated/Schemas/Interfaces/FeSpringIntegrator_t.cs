@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSpringIntegrator_t : ISchemaClass<FeSpringIntegrator_t> {
+public partial interface FeSpringIntegrator_t : ISchemaClass<FeSpringIntegrator_t>
+{
+    static FeSpringIntegrator_t ISchemaClass<FeSpringIntegrator_t>.From(nint handle) => new FeSpringIntegrator_tImpl(handle);
+    static int ISchemaClass<FeSpringIntegrator_t>.Size => 20;
+    static string? ISchemaClass<FeSpringIntegrator_t>.ClassName => null;
 
-  static FeSpringIntegrator_t ISchemaClass<FeSpringIntegrator_t>.From(nint handle) => new FeSpringIntegrator_tImpl(handle);
-  static int ISchemaClass<FeSpringIntegrator_t>.Size => 20;
-  static string? ISchemaClass<FeSpringIntegrator_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Node { get; }
-  
-  public ref float SpringRestLength { get; }
-  
-  public ref float SpringConstant { get; }
-  
-  public ref float SpringDamping { get; }
-  
-  public ref float NodeWeight0 { get; }
+    public ISchemaFixedArray<ushort> Node { get; }
+
+    public ref float SpringRestLength { get; }
+
+    public ref float SpringConstant { get; }
+
+    public ref float SpringDamping { get; }
+
+    public ref float NodeWeight0 { get; }
 
 
 }

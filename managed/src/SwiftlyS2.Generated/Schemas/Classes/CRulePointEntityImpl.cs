@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRulePointEntityImpl : CRuleEntityImpl, CRulePointEntity {
+internal partial class CRulePointEntityImpl : CRuleEntityImpl, CRulePointEntity
+{
+    public CRulePointEntityImpl(nint handle) : base(handle) { }
 
-  public CRulePointEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScoreOffset;
 
-  private static nint? _ScoreOffset;
-
-  public ref int Score {
-    get {
-      if (_ScoreOffset == null) {
-        _ScoreOffset = Schema.GetOffset(0x9E2258396C814615);
-      }
-      return ref _Handle.AsRef<int>(_ScoreOffset!.Value);
+    public ref int Score {
+        get {
+            _ScoreOffset = _ScoreOffset ?? Schema.GetOffset(0x9E2258396C814615);
+            return ref _Handle.AsRef<int>(_ScoreOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMarkupVolumeTagged_Nav : CMarkupVolumeTagged, ISchemaClass<CMarkupVolumeTagged_Nav> {
+public partial interface CMarkupVolumeTagged_Nav : CMarkupVolumeTagged, ISchemaClass<CMarkupVolumeTagged_Nav>
+{
+    static CMarkupVolumeTagged_Nav ISchemaClass<CMarkupVolumeTagged_Nav>.From(nint handle) => new CMarkupVolumeTagged_NavImpl(handle);
+    static int ISchemaClass<CMarkupVolumeTagged_Nav>.Size => 2080;
+    static string? ISchemaClass<CMarkupVolumeTagged_Nav>.ClassName => "func_nav_markup";
 
-  static CMarkupVolumeTagged_Nav ISchemaClass<CMarkupVolumeTagged_Nav>.From(nint handle) => new CMarkupVolumeTagged_NavImpl(handle);
-  static int ISchemaClass<CMarkupVolumeTagged_Nav>.Size => 2080;
-  static string? ISchemaClass<CMarkupVolumeTagged_Nav>.ClassName => "func_nav_markup";
 
-  
-  public ref NavScopeFlags_t Scopes { get; }
+    public ref NavScopeFlags_t Scopes { get; }
 
 
 }

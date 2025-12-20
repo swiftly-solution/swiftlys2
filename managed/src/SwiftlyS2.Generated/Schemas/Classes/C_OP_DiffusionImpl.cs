@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DiffusionImpl : CParticleFunctionOperatorImpl, C_OP_Diffusion {
+internal partial class C_OP_DiffusionImpl : CParticleFunctionOperatorImpl, C_OP_Diffusion
+{
+    public C_OP_DiffusionImpl(nint handle) : base(handle) { }
 
-  public C_OP_DiffusionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusScaleOffset;
 
-  private static nint? _RadiusScaleOffset;
-
-  public ref float RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0x2D5ABEF4A7A20159);
-      }
-      return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+    public ref float RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x2D5ABEF4A7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x2D5ABEF4E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x2D5ABEF4E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _VoxelGridResolutionOffset;
+    private static nint? _VoxelGridResolutionOffset;
 
-  public ref int VoxelGridResolution {
-    get {
-      if (_VoxelGridResolutionOffset == null) {
-        _VoxelGridResolutionOffset = Schema.GetOffset(0x2D5ABEF45AA7D7ED);
-      }
-      return ref _Handle.AsRef<int>(_VoxelGridResolutionOffset!.Value);
+    public ref int VoxelGridResolution {
+        get {
+            _VoxelGridResolutionOffset = _VoxelGridResolutionOffset ?? Schema.GetOffset(0x2D5ABEF45AA7D7ED);
+            return ref _Handle.AsRef<int>(_VoxelGridResolutionOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicRelay : CLogicalEntity, ISchemaClass<CLogicRelay> {
+public partial interface CLogicRelay : CLogicalEntity, ISchemaClass<CLogicRelay>
+{
+    static CLogicRelay ISchemaClass<CLogicRelay>.From(nint handle) => new CLogicRelayImpl(handle);
+    static int ISchemaClass<CLogicRelay>.Size => 1272;
+    static string? ISchemaClass<CLogicRelay>.ClassName => "logic_relay";
 
-  static CLogicRelay ISchemaClass<CLogicRelay>.From(nint handle) => new CLogicRelayImpl(handle);
-  static int ISchemaClass<CLogicRelay>.Size => 1272;
-  static string? ISchemaClass<CLogicRelay>.ClassName => "logic_relay";
 
-  
-  public ref bool Disabled { get; }
-  
-  public ref bool WaitForRefire { get; }
-  
-  public ref bool TriggerOnce { get; }
-  
-  public ref bool FastRetrigger { get; }
-  
-  public ref bool PassthoughCaller { get; }
+    public ref bool Disabled { get; }
+
+    public ref bool WaitForRefire { get; }
+
+    public ref bool TriggerOnce { get; }
+
+    public ref bool FastRetrigger { get; }
+
+    public ref bool PassthoughCaller { get; }
 
 
 }

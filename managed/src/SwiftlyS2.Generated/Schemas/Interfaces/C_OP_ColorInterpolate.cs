@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ColorInterpolate : CParticleFunctionOperator, ISchemaClass<C_OP_ColorInterpolate> {
+public partial interface C_OP_ColorInterpolate : CParticleFunctionOperator, ISchemaClass<C_OP_ColorInterpolate>
+{
+    static C_OP_ColorInterpolate ISchemaClass<C_OP_ColorInterpolate>.From(nint handle) => new C_OP_ColorInterpolateImpl(handle);
+    static int ISchemaClass<C_OP_ColorInterpolate>.Size => 496;
+    static string? ISchemaClass<C_OP_ColorInterpolate>.ClassName => null;
 
-  static C_OP_ColorInterpolate ISchemaClass<C_OP_ColorInterpolate>.From(nint handle) => new C_OP_ColorInterpolateImpl(handle);
-  static int ISchemaClass<C_OP_ColorInterpolate>.Size => 496;
-  static string? ISchemaClass<C_OP_ColorInterpolate>.ClassName => null;
 
-  
-  public ref Color ColorFade { get; }
-  
-  public ref float FadeStartTime { get; }
-  
-  public ref float FadeEndTime { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref bool EaseInOut { get; }
+    public ref Color ColorFade { get; }
+
+    public ref float FadeStartTime { get; }
+
+    public ref float FadeEndTime { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref bool EaseInOut { get; }
 
 
 }

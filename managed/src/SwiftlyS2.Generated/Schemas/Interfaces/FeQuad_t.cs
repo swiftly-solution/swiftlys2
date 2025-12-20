@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeQuad_t : ISchemaClass<FeQuad_t> {
+public partial interface FeQuad_t : ISchemaClass<FeQuad_t>
+{
+    static FeQuad_t ISchemaClass<FeQuad_t>.From(nint handle) => new FeQuad_tImpl(handle);
+    static int ISchemaClass<FeQuad_t>.Size => 76;
+    static string? ISchemaClass<FeQuad_t>.ClassName => null;
 
-  static FeQuad_t ISchemaClass<FeQuad_t>.From(nint handle) => new FeQuad_tImpl(handle);
-  static int ISchemaClass<FeQuad_t>.Size => 76;
-  static string? ISchemaClass<FeQuad_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Node { get; }
-  
-  public ref float Slack { get; }
-  
-  public ISchemaFixedArray<Vector4D> Shape { get; }
+    public ISchemaFixedArray<ushort> Node { get; }
+
+    public ref float Slack { get; }
+
+    public ISchemaFixedArray<Vector4D> Shape { get; }
 
 
 }

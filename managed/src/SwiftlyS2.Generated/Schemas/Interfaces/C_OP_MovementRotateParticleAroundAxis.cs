@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_MovementRotateParticleAroundAxis : CParticleFunctionOperator, ISchemaClass<C_OP_MovementRotateParticleAroundAxis> {
+public partial interface C_OP_MovementRotateParticleAroundAxis : CParticleFunctionOperator, ISchemaClass<C_OP_MovementRotateParticleAroundAxis>
+{
+    static C_OP_MovementRotateParticleAroundAxis ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.From(nint handle) => new C_OP_MovementRotateParticleAroundAxisImpl(handle);
+    static int ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.Size => 2664;
+    static string? ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.ClassName => null;
 
-  static C_OP_MovementRotateParticleAroundAxis ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.From(nint handle) => new C_OP_MovementRotateParticleAroundAxisImpl(handle);
-  static int ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.Size => 2664;
-  static string? ISchemaClass<C_OP_MovementRotateParticleAroundAxis>.ClassName => null;
 
-  
-  public CParticleCollectionVecInput RotAxis { get; }
-  
-  public CParticleCollectionFloatInput RotRate { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref bool LocalSpace { get; }
+    public CParticleCollectionVecInput RotAxis { get; }
+
+    public CParticleCollectionFloatInput RotRate { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref bool LocalSpace { get; }
 
 
 }

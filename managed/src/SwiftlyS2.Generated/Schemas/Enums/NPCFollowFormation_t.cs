@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum NPCFollowFormation_t : uint {
-
+public enum NPCFollowFormation_t : uint
+{
  Default = uint.MaxValue,
 
  CloseCircle = 0,

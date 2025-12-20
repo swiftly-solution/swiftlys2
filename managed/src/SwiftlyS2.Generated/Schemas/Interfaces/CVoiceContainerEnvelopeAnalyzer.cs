@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerEnvelopeAnalyzer : CVoiceContainerAnalysisBase, ISchemaClass<CVoiceContainerEnvelopeAnalyzer> {
+public partial interface CVoiceContainerEnvelopeAnalyzer : CVoiceContainerAnalysisBase, ISchemaClass<CVoiceContainerEnvelopeAnalyzer>
+{
+    static CVoiceContainerEnvelopeAnalyzer ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.From(nint handle) => new CVoiceContainerEnvelopeAnalyzerImpl(handle);
+    static int ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.Size => 96;
+    static string? ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.ClassName => null;
 
-  static CVoiceContainerEnvelopeAnalyzer ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.From(nint handle) => new CVoiceContainerEnvelopeAnalyzerImpl(handle);
-  static int ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.Size => 96;
-  static string? ISchemaClass<CVoiceContainerEnvelopeAnalyzer>.ClassName => null;
 
-  
-  public ref EMode_t Mode { get; }
-  
-  public ref float AnalysisWindowMs { get; }
-  
-  public ref float Threshold { get; }
+    public ref EMode_t Mode { get; }
+
+    public ref float AnalysisWindowMs { get; }
+
+    public ref float Threshold { get; }
 
 
 }

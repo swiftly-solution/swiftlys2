@@ -8,27 +8,27 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMotionGraph : ISchemaClass<CMotionGraph> {
+public partial interface CMotionGraph : ISchemaClass<CMotionGraph>
+{
+    static CMotionGraph ISchemaClass<CMotionGraph>.From(nint handle) => new CMotionGraphImpl(handle);
+    static int ISchemaClass<CMotionGraph>.Size => 88;
+    static string? ISchemaClass<CMotionGraph>.ClassName => null;
 
-  static CMotionGraph ISchemaClass<CMotionGraph>.From(nint handle) => new CMotionGraphImpl(handle);
-  static int ISchemaClass<CMotionGraph>.Size => 88;
-  static string? ISchemaClass<CMotionGraph>.ClassName => null;
 
-  
-  public CParamSpanUpdater ParamSpans { get; }
-  
-  public ref CUtlVector<TagSpan_t> Tags { get; }
-  
-  // CSmartPtr< CMotionNode >
-  public SchemaUntypedField RootNode { get; }
-  
-  public ref int ParameterCount { get; }
-  
-  public ref int ConfigStartIndex { get; }
-  
-  public ref int ConfigCount { get; }
-  
-  public ref bool Loop { get; }
+    public CParamSpanUpdater ParamSpans { get; }
+
+    public ref CUtlVector<TagSpan_t> Tags { get; }
+
+    // CSmartPtr< CMotionNode >
+    public SchemaUntypedField RootNode { get; }
+
+    public ref int ParameterCount { get; }
+
+    public ref int ConfigStartIndex { get; }
+
+    public ref int ConfigCount { get; }
+
+    public ref bool Loop { get; }
 
 
 }

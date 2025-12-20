@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatRemapNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatRemapNode__CDefinition {
+internal partial class CNmFloatRemapNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatRemapNode__CDefinition
+{
+    public CNmFloatRemapNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFloatRemapNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueNodeIdxOffset;
 
-  private static nint? _InputValueNodeIdxOffset;
-
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0x5169293495E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x5169293495E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputRangeOffset;
+    private static nint? _InputRangeOffset;
 
-  public CNmFloatRemapNode__RemapRange_t InputRange {
-    get {
-      if (_InputRangeOffset == null) {
-        _InputRangeOffset = Schema.GetOffset(0x51692934096AEBF0);
-      }
-      return new CNmFloatRemapNode__RemapRange_tImpl(_Handle + _InputRangeOffset!.Value);
+    public CNmFloatRemapNode__RemapRange_t InputRange {
+        get {
+            _InputRangeOffset = _InputRangeOffset ?? Schema.GetOffset(0x51692934096AEBF0);
+            return new CNmFloatRemapNode__RemapRange_tImpl(_Handle + _InputRangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputRangeOffset;
+    private static nint? _OutputRangeOffset;
 
-  public CNmFloatRemapNode__RemapRange_t OutputRange {
-    get {
-      if (_OutputRangeOffset == null) {
-        _OutputRangeOffset = Schema.GetOffset(0x5169293437E0CA29);
-      }
-      return new CNmFloatRemapNode__RemapRange_tImpl(_Handle + _OutputRangeOffset!.Value);
+    public CNmFloatRemapNode__RemapRange_t OutputRange {
+        get {
+            _OutputRangeOffset = _OutputRangeOffset ?? Schema.GetOffset(0x5169293437E0CA29);
+            return new CNmFloatRemapNode__RemapRange_tImpl(_Handle + _OutputRangeOffset!.Value);
+        }
     }
-  }
 
 
 }

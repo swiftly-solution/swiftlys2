@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRagdollUpdateNode : CUnaryUpdateNode, ISchemaClass<CRagdollUpdateNode> {
+public partial interface CRagdollUpdateNode : CUnaryUpdateNode, ISchemaClass<CRagdollUpdateNode>
+{
+    static CRagdollUpdateNode ISchemaClass<CRagdollUpdateNode>.From(nint handle) => new CRagdollUpdateNodeImpl(handle);
+    static int ISchemaClass<CRagdollUpdateNode>.Size => 120;
+    static string? ISchemaClass<CRagdollUpdateNode>.ClassName => null;
 
-  static CRagdollUpdateNode ISchemaClass<CRagdollUpdateNode>.From(nint handle) => new CRagdollUpdateNodeImpl(handle);
-  static int ISchemaClass<CRagdollUpdateNode>.Size => 120;
-  static string? ISchemaClass<CRagdollUpdateNode>.ClassName => null;
 
-  
-  public ref int WeightListIndex { get; }
-  
-  public ref RagdollPoseControl PoseControlMethod { get; }
+    public ref int WeightListIndex { get; }
+
+    public ref RagdollPoseControl PoseControlMethod { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFootstepEventPercentageThroughNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition> {
+public partial interface CNmFootstepEventPercentageThroughNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition>
+{
+    static CNmFootstepEventPercentageThroughNode__CDefinition ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition>.From(nint handle) => new CNmFootstepEventPercentageThroughNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition>.ClassName => null;
 
-  static CNmFootstepEventPercentageThroughNode__CDefinition ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition>.From(nint handle) => new CNmFootstepEventPercentageThroughNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmFootstepEventPercentageThroughNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SourceStateNodeIdx { get; }
-  
-  public ref NmFootPhaseCondition_t PhaseCondition { get; }
-  
-  public CNmBitFlags EventConditionRules { get; }
+    public ref short SourceStateNodeIdx { get; }
+
+    public ref NmFootPhaseCondition_t PhaseCondition { get; }
+
+    public CNmBitFlags EventConditionRules { get; }
 
 
 }

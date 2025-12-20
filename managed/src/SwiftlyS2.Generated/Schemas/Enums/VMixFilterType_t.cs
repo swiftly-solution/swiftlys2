@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VMixFilterType_t : ushort {
-
+public enum VMixFilterType_t : ushort
+{
  FILTER_UNKNOWN = ushort.MaxValue,
 
  FILTER_LOWPASS = 0,

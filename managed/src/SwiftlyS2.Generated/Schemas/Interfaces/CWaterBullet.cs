@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CWaterBullet : CBaseAnimGraph, ISchemaClass<CWaterBullet> {
-
-  static CWaterBullet ISchemaClass<CWaterBullet>.From(nint handle) => new CWaterBulletImpl(handle);
-  static int ISchemaClass<CWaterBullet>.Size => 2704;
-  static string? ISchemaClass<CWaterBullet>.ClassName => "waterbullet";
+public partial interface CWaterBullet : CBaseAnimGraph, ISchemaClass<CWaterBullet>
+{
+    static CWaterBullet ISchemaClass<CWaterBullet>.From(nint handle) => new CWaterBulletImpl(handle);
+    static int ISchemaClass<CWaterBullet>.Size => 2704;
+    static string? ISchemaClass<CWaterBullet>.ClassName => "waterbullet";
 
 
 

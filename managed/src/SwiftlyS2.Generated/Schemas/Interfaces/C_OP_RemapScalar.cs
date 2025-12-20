@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapScalar> {
+public partial interface C_OP_RemapScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapScalar>
+{
+    static C_OP_RemapScalar ISchemaClass<C_OP_RemapScalar>.From(nint handle) => new C_OP_RemapScalarImpl(handle);
+    static int ISchemaClass<C_OP_RemapScalar>.Size => 496;
+    static string? ISchemaClass<C_OP_RemapScalar>.ClassName => null;
 
-  static C_OP_RemapScalar ISchemaClass<C_OP_RemapScalar>.From(nint handle) => new C_OP_RemapScalarImpl(handle);
-  static int ISchemaClass<C_OP_RemapScalar>.Size => 496;
-  static string? ISchemaClass<C_OP_RemapScalar>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref bool OldCode { get; }
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref bool OldCode { get; }
 
 
 }

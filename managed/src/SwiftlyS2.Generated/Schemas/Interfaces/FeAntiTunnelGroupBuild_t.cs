@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeAntiTunnelGroupBuild_t : ISchemaClass<FeAntiTunnelGroupBuild_t> {
+public partial interface FeAntiTunnelGroupBuild_t : ISchemaClass<FeAntiTunnelGroupBuild_t>
+{
+    static FeAntiTunnelGroupBuild_t ISchemaClass<FeAntiTunnelGroupBuild_t>.From(nint handle) => new FeAntiTunnelGroupBuild_tImpl(handle);
+    static int ISchemaClass<FeAntiTunnelGroupBuild_t>.Size => 8;
+    static string? ISchemaClass<FeAntiTunnelGroupBuild_t>.ClassName => null;
 
-  static FeAntiTunnelGroupBuild_t ISchemaClass<FeAntiTunnelGroupBuild_t>.From(nint handle) => new FeAntiTunnelGroupBuild_tImpl(handle);
-  static int ISchemaClass<FeAntiTunnelGroupBuild_t>.Size => 8;
-  static string? ISchemaClass<FeAntiTunnelGroupBuild_t>.ClassName => null;
 
-  
-  public ref uint VertexMapHash { get; }
-  
-  public ref uint CollisionMask { get; }
+    public ref uint VertexMapHash { get; }
+
+    public ref uint CollisionMask { get; }
 
 
 }

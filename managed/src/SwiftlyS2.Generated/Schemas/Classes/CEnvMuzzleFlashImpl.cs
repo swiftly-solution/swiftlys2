@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvMuzzleFlashImpl : CPointEntityImpl, CEnvMuzzleFlash {
+internal partial class CEnvMuzzleFlashImpl : CPointEntityImpl, CEnvMuzzleFlash
+{
+    public CEnvMuzzleFlashImpl(nint handle) : base(handle) { }
 
-  public CEnvMuzzleFlashImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScaleOffset;
 
-  private static nint? _ScaleOffset;
-
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x2EBDF9DEB731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x2EBDF9DEB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentAttachmentOffset;
+    private static nint? _ParentAttachmentOffset;
 
-  public string ParentAttachment {
-    get {
-      if (_ParentAttachmentOffset == null) {
-        _ParentAttachmentOffset = Schema.GetOffset(0x2EBDF9DE0061F288);
-      }
-      var ptr = _Handle.Read<nint>(_ParentAttachmentOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ParentAttachmentOffset == null) {
-        _ParentAttachmentOffset = Schema.GetOffset(0x2EBDF9DE0061F288);
-      }
-      Schema.SetString(_Handle, _ParentAttachmentOffset!.Value, value);
-    }
-  } 
+    public string ParentAttachment {
+        get {
+            _ParentAttachmentOffset = _ParentAttachmentOffset ?? Schema.GetOffset(0x2EBDF9DE0061F288);
+            return Schema.GetString(_Handle.Read<nint>(_ParentAttachmentOffset!.Value));
+        }
+        set {
+            _ParentAttachmentOffset = _ParentAttachmentOffset ?? Schema.GetOffset(0x2EBDF9DE0061F288);
+            Schema.SetString(_Handle, _ParentAttachmentOffset!.Value, value);
+        }
+    } 
 
 
 }

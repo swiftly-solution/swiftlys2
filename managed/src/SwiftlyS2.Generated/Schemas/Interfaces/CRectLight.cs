@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRectLight : CBarnLight, ISchemaClass<CRectLight> {
+public partial interface CRectLight : CBarnLight, ISchemaClass<CRectLight>
+{
+    static CRectLight ISchemaClass<CRectLight>.From(nint handle) => new CRectLightImpl(handle);
+    static int ISchemaClass<CRectLight>.Size => 2824;
+    static string? ISchemaClass<CRectLight>.ClassName => "light_rect";
 
-  static CRectLight ISchemaClass<CRectLight>.From(nint handle) => new CRectLightImpl(handle);
-  static int ISchemaClass<CRectLight>.Size => 2824;
-  static string? ISchemaClass<CRectLight>.ClassName => "light_rect";
 
-  
-  public ref bool ShowLight { get; }
+    public ref bool ShowLight { get; }
 
-  public void ShowLightUpdated();
+    public void ShowLightUpdated();
 }

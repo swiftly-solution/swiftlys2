@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysMotor : CLogicalEntity, ISchemaClass<CPhysMotor> {
+public partial interface CPhysMotor : CLogicalEntity, ISchemaClass<CPhysMotor>
+{
+    static CPhysMotor ISchemaClass<CPhysMotor>.From(nint handle) => new CPhysMotorImpl(handle);
+    static int ISchemaClass<CPhysMotor>.Size => 1368;
+    static string? ISchemaClass<CPhysMotor>.ClassName => "phys_motor";
 
-  static CPhysMotor ISchemaClass<CPhysMotor>.From(nint handle) => new CPhysMotorImpl(handle);
-  static int ISchemaClass<CPhysMotor>.Size => 1368;
-  static string? ISchemaClass<CPhysMotor>.ClassName => "phys_motor";
 
-  
-  public string NameAttach { get; set; }
-  
-  public string NameAnchor { get; set; }
-  
-  public ref CHandle<CBaseEntity> AttachedObject { get; }
-  
-  public ref CHandle<CBaseEntity> AnchorObject { get; }
-  
-  public ref float SpinUp { get; }
-  
-  public ref float SpinDown { get; }
-  
-  public ref float MotorFriction { get; }
-  
-  public ref float AdditionalAcceleration { get; }
-  
-  public ref float AngularAcceleration { get; }
-  
-  public ref float TorqueScale { get; }
-  
-  public ref float TargetSpeed { get; }
-  
-  public ref float SpeedWhenSpinUpOrSpinDownStarted { get; }
-  
-  public CMotorController Motor { get; }
+    public string NameAttach { get; set; }
+
+    public string NameAnchor { get; set; }
+
+    public ref CHandle<CBaseEntity> AttachedObject { get; }
+
+    public ref CHandle<CBaseEntity> AnchorObject { get; }
+
+    public ref float SpinUp { get; }
+
+    public ref float SpinDown { get; }
+
+    public ref float MotorFriction { get; }
+
+    public ref float AdditionalAcceleration { get; }
+
+    public ref float AngularAcceleration { get; }
+
+    public ref float TorqueScale { get; }
+
+    public ref float TargetSpeed { get; }
+
+    public ref float SpeedWhenSpinUpOrSpinDownStarted { get; }
+
+    public CMotorController Motor { get; }
 
 
 }

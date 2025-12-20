@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEditableMotionGraph : CMotionGraph, ISchemaClass<CEditableMotionGraph> {
-
-  static CEditableMotionGraph ISchemaClass<CEditableMotionGraph>.From(nint handle) => new CEditableMotionGraphImpl(handle);
-  static int ISchemaClass<CEditableMotionGraph>.Size => 88;
-  static string? ISchemaClass<CEditableMotionGraph>.ClassName => null;
+public partial interface CEditableMotionGraph : CMotionGraph, ISchemaClass<CEditableMotionGraph>
+{
+    static CEditableMotionGraph ISchemaClass<CEditableMotionGraph>.From(nint handle) => new CEditableMotionGraphImpl(handle);
+    static int ISchemaClass<CEditableMotionGraph>.Size => 88;
+    static string? ISchemaClass<CEditableMotionGraph>.ClassName => null;
 
 
 

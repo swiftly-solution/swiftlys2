@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixEnvelopeDesc_t : ISchemaClass<VMixEnvelopeDesc_t> {
+public partial interface VMixEnvelopeDesc_t : ISchemaClass<VMixEnvelopeDesc_t>
+{
+    static VMixEnvelopeDesc_t ISchemaClass<VMixEnvelopeDesc_t>.From(nint handle) => new VMixEnvelopeDesc_tImpl(handle);
+    static int ISchemaClass<VMixEnvelopeDesc_t>.Size => 12;
+    static string? ISchemaClass<VMixEnvelopeDesc_t>.ClassName => null;
 
-  static VMixEnvelopeDesc_t ISchemaClass<VMixEnvelopeDesc_t>.From(nint handle) => new VMixEnvelopeDesc_tImpl(handle);
-  static int ISchemaClass<VMixEnvelopeDesc_t>.Size => 12;
-  static string? ISchemaClass<VMixEnvelopeDesc_t>.ClassName => null;
 
-  
-  public ref float AttackTimeMS { get; }
-  
-  public ref float HoldTimeMS { get; }
-  
-  public ref float ReleaseTimeMS { get; }
+    public ref float AttackTimeMS { get; }
+
+    public ref float HoldTimeMS { get; }
+
+    public ref float ReleaseTimeMS { get; }
 
 
 }

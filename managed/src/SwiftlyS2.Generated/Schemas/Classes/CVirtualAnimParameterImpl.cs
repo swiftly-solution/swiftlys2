@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVirtualAnimParameterImpl : CAnimParameterBaseImpl, CVirtualAnimParameter {
+internal partial class CVirtualAnimParameterImpl : CAnimParameterBaseImpl, CVirtualAnimParameter
+{
+    public CVirtualAnimParameterImpl(nint handle) : base(handle) { }
 
-  public CVirtualAnimParameterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ExpressionStringOffset;
 
-  private static nint? _ExpressionStringOffset;
+    public string ExpressionString {
+        get {
+            _ExpressionStringOffset = _ExpressionStringOffset ?? Schema.GetOffset(0x3D45915B3039426E);
+            return Schema.GetString(_Handle.Read<nint>(_ExpressionStringOffset!.Value));
+        }
+        set {
+            _ExpressionStringOffset = _ExpressionStringOffset ?? Schema.GetOffset(0x3D45915B3039426E);
+            Schema.SetString(_Handle, _ExpressionStringOffset!.Value, value);
+        }
+    } 
+    private static nint? _ParamTypeOffset;
 
-  public string ExpressionString {
-    get {
-      if (_ExpressionStringOffset == null) {
-        _ExpressionStringOffset = Schema.GetOffset(0x3D45915B3039426E);
-      }
-      var ptr = _Handle.Read<nint>(_ExpressionStringOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref AnimParamType_t ParamType {
+        get {
+            _ParamTypeOffset = _ParamTypeOffset ?? Schema.GetOffset(0x3D45915BF05DFDD9);
+            return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
+        }
     }
-    set {
-      if (_ExpressionStringOffset == null) {
-        _ExpressionStringOffset = Schema.GetOffset(0x3D45915B3039426E);
-      }
-      Schema.SetString(_Handle, _ExpressionStringOffset!.Value, value);
-    }
-  } 
-  private static nint? _ParamTypeOffset;
-
-  public ref AnimParamType_t ParamType {
-    get {
-      if (_ParamTypeOffset == null) {
-        _ParamTypeOffset = Schema.GetOffset(0x3D45915BF05DFDD9);
-      }
-      return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
-    }
-  }
 
 
 }

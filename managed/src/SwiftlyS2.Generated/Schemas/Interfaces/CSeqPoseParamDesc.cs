@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqPoseParamDesc : ISchemaClass<CSeqPoseParamDesc> {
+public partial interface CSeqPoseParamDesc : ISchemaClass<CSeqPoseParamDesc>
+{
+    static CSeqPoseParamDesc ISchemaClass<CSeqPoseParamDesc>.From(nint handle) => new CSeqPoseParamDescImpl(handle);
+    static int ISchemaClass<CSeqPoseParamDesc>.Size => 32;
+    static string? ISchemaClass<CSeqPoseParamDesc>.ClassName => null;
 
-  static CSeqPoseParamDesc ISchemaClass<CSeqPoseParamDesc>.From(nint handle) => new CSeqPoseParamDescImpl(handle);
-  static int ISchemaClass<CSeqPoseParamDesc>.Size => 32;
-  static string? ISchemaClass<CSeqPoseParamDesc>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public ref float Start { get; }
-  
-  public ref float End { get; }
-  
-  public ref float Loop { get; }
-  
-  public ref bool Looping { get; }
+    public ref CBufferString Name { get; }
+
+    public ref float Start { get; }
+
+    public ref float End { get; }
+
+    public ref float Loop { get; }
+
+    public ref bool Looping { get; }
 
 
 }

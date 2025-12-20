@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_CycleScalar : CParticleFunctionOperator, ISchemaClass<C_OP_CycleScalar> {
+public partial interface C_OP_CycleScalar : CParticleFunctionOperator, ISchemaClass<C_OP_CycleScalar>
+{
+    static C_OP_CycleScalar ISchemaClass<C_OP_CycleScalar>.From(nint handle) => new C_OP_CycleScalarImpl(handle);
+    static int ISchemaClass<C_OP_CycleScalar>.Size => 504;
+    static string? ISchemaClass<C_OP_CycleScalar>.ClassName => null;
 
-  static C_OP_CycleScalar ISchemaClass<C_OP_CycleScalar>.From(nint handle) => new C_OP_CycleScalarImpl(handle);
-  static int ISchemaClass<C_OP_CycleScalar>.Size => 504;
-  static string? ISchemaClass<C_OP_CycleScalar>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t DestField { get; }
-  
-  public ref float StartValue { get; }
-  
-  public ref float EndValue { get; }
-  
-  public ref float CycleTime { get; }
-  
-  public ref bool DoNotRepeatCycle { get; }
-  
-  public ref bool SynchronizeParticles { get; }
-  
-  public ref int CPScale { get; }
-  
-  public ref int CPFieldMin { get; }
-  
-  public ref int CPFieldMax { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
+    public ParticleAttributeIndex_t DestField { get; }
+
+    public ref float StartValue { get; }
+
+    public ref float EndValue { get; }
+
+    public ref float CycleTime { get; }
+
+    public ref bool DoNotRepeatCycle { get; }
+
+    public ref bool SynchronizeParticles { get; }
+
+    public ref int CPScale { get; }
+
+    public ref int CPFieldMin { get; }
+
+    public ref int CPFieldMax { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
 
 
 }

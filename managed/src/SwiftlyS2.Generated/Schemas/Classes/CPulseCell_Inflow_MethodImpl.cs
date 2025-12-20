@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Inflow_MethodImpl : CPulseCell_Inflow_BaseEntrypointImpl, CPulseCell_Inflow_Method {
+internal partial class CPulseCell_Inflow_MethodImpl : CPulseCell_Inflow_BaseEntrypointImpl, CPulseCell_Inflow_Method
+{
+    public CPulseCell_Inflow_MethodImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Inflow_MethodImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MethodNameOffset;
 
-  private static nint? _MethodNameOffset;
-
-  public SchemaUntypedField MethodName {
-    get {
-      if (_MethodNameOffset == null) {
-        _MethodNameOffset = Schema.GetOffset(0xFB5926557D863B13);
-      }
-      return new SchemaUntypedField(_Handle + _MethodNameOffset!.Value);
+    public SchemaUntypedField MethodName {
+        get {
+            _MethodNameOffset = _MethodNameOffset ?? Schema.GetOffset(0xFB5926557D863B13);
+            return new SchemaUntypedField(_Handle + _MethodNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _DescriptionOffset;
+    private static nint? _DescriptionOffset;
 
-  public string Description {
-    get {
-      if (_DescriptionOffset == null) {
-        _DescriptionOffset = Schema.GetOffset(0xFB592655678744E9);
-      }
-      var ptr = _Handle.Read<nint>(_DescriptionOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DescriptionOffset == null) {
-        _DescriptionOffset = Schema.GetOffset(0xFB592655678744E9);
-      }
-      Schema.SetString(_Handle, _DescriptionOffset!.Value, value);
-    }
-  } 
-  private static nint? _IsPublicOffset;
+    public string Description {
+        get {
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xFB592655678744E9);
+            return Schema.GetString(_Handle.Read<nint>(_DescriptionOffset!.Value));
+        }
+        set {
+            _DescriptionOffset = _DescriptionOffset ?? Schema.GetOffset(0xFB592655678744E9);
+            Schema.SetString(_Handle, _DescriptionOffset!.Value, value);
+        }
+    } 
+    private static nint? _IsPublicOffset;
 
-  public ref bool IsPublic {
-    get {
-      if (_IsPublicOffset == null) {
-        _IsPublicOffset = Schema.GetOffset(0xFB592655BAE30B50);
-      }
-      return ref _Handle.AsRef<bool>(_IsPublicOffset!.Value);
+    public ref bool IsPublic {
+        get {
+            _IsPublicOffset = _IsPublicOffset ?? Schema.GetOffset(0xFB592655BAE30B50);
+            return ref _Handle.AsRef<bool>(_IsPublicOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReturnTypeOffset;
+    private static nint? _ReturnTypeOffset;
 
-  public SchemaUntypedField ReturnType {
-    get {
-      if (_ReturnTypeOffset == null) {
-        _ReturnTypeOffset = Schema.GetOffset(0xFB59265566333D67);
-      }
-      return new SchemaUntypedField(_Handle + _ReturnTypeOffset!.Value);
+    public SchemaUntypedField ReturnType {
+        get {
+            _ReturnTypeOffset = _ReturnTypeOffset ?? Schema.GetOffset(0xFB59265566333D67);
+            return new SchemaUntypedField(_Handle + _ReturnTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ArgsOffset;
+    private static nint? _ArgsOffset;
 
-  public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args {
-    get {
-      if (_ArgsOffset == null) {
-        _ArgsOffset = Schema.GetOffset(0xFB592655DAB98BBC);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset!.Value);
+    public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args {
+        get {
+            _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0xFB592655DAB98BBC);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ArgsOffset!.Value);
+        }
     }
-  }
 
 
 }

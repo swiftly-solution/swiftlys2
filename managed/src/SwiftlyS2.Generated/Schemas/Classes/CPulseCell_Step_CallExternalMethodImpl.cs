@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Step_CallExternalMethodImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Step_CallExternalMethod {
+internal partial class CPulseCell_Step_CallExternalMethodImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Step_CallExternalMethod
+{
+    public CPulseCell_Step_CallExternalMethodImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Step_CallExternalMethodImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MethodNameOffset;
 
-  private static nint? _MethodNameOffset;
-
-  public SchemaUntypedField MethodName {
-    get {
-      if (_MethodNameOffset == null) {
-        _MethodNameOffset = Schema.GetOffset(0x6A5B3EF57D863B13);
-      }
-      return new SchemaUntypedField(_Handle + _MethodNameOffset!.Value);
+    public SchemaUntypedField MethodName {
+        get {
+            _MethodNameOffset = _MethodNameOffset ?? Schema.GetOffset(0x6A5B3EF57D863B13);
+            return new SchemaUntypedField(_Handle + _MethodNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _GameBlackboardOffset;
+    private static nint? _GameBlackboardOffset;
 
-  public SchemaUntypedField GameBlackboard {
-    get {
-      if (_GameBlackboardOffset == null) {
-        _GameBlackboardOffset = Schema.GetOffset(0x6A5B3EF536FB1236);
-      }
-      return new SchemaUntypedField(_Handle + _GameBlackboardOffset!.Value);
+    public SchemaUntypedField GameBlackboard {
+        get {
+            _GameBlackboardOffset = _GameBlackboardOffset ?? Schema.GetOffset(0x6A5B3EF536FB1236);
+            return new SchemaUntypedField(_Handle + _GameBlackboardOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExpectedArgsOffset;
+    private static nint? _ExpectedArgsOffset;
 
-  public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> ExpectedArgs {
-    get {
-      if (_ExpectedArgsOffset == null) {
-        _ExpectedArgsOffset = Schema.GetOffset(0x6A5B3EF594EB10E8);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ExpectedArgsOffset!.Value);
+    public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> ExpectedArgs {
+        get {
+            _ExpectedArgsOffset = _ExpectedArgsOffset ?? Schema.GetOffset(0x6A5B3EF594EB10E8);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulseRuntimeMethodArg, int>>(_ExpectedArgsOffset!.Value);
+        }
     }
-  }
-  private static nint? _AsyncCallModeOffset;
+    private static nint? _AsyncCallModeOffset;
 
-  public ref PulseMethodCallMode_t AsyncCallMode {
-    get {
-      if (_AsyncCallModeOffset == null) {
-        _AsyncCallModeOffset = Schema.GetOffset(0x6A5B3EF535F27204);
-      }
-      return ref _Handle.AsRef<PulseMethodCallMode_t>(_AsyncCallModeOffset!.Value);
+    public ref PulseMethodCallMode_t AsyncCallMode {
+        get {
+            _AsyncCallModeOffset = _AsyncCallModeOffset ?? Schema.GetOffset(0x6A5B3EF535F27204);
+            return ref _Handle.AsRef<PulseMethodCallMode_t>(_AsyncCallModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnFinishedOffset;
+    private static nint? _OnFinishedOffset;
 
-  public CPulse_ResumePoint OnFinished {
-    get {
-      if (_OnFinishedOffset == null) {
-        _OnFinishedOffset = Schema.GetOffset(0x6A5B3EF58D903E5E);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+    public CPulse_ResumePoint OnFinished {
+        get {
+            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x6A5B3EF58D903E5E);
+            return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+        }
     }
-  }
 
 
 }

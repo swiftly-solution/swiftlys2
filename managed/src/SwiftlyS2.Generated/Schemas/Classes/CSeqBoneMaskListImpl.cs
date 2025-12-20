@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSeqBoneMaskListImpl : SchemaClass, CSeqBoneMaskList {
+internal partial class CSeqBoneMaskListImpl : SchemaClass, CSeqBoneMaskList
+{
+    public CSeqBoneMaskListImpl(nint handle) : base(handle) { }
 
-  public CSeqBoneMaskListImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public ref CBufferString Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xCD7B4EF763D22D49);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    public ref CBufferString Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCD7B4EF763D22D49);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalBoneArrayOffset;
+    private static nint? _LocalBoneArrayOffset;
 
-  public ref CUtlVector<short> LocalBoneArray {
-    get {
-      if (_LocalBoneArrayOffset == null) {
-        _LocalBoneArrayOffset = Schema.GetOffset(0xCD7B4EF70B8EFD6B);
-      }
-      return ref _Handle.AsRef<CUtlVector<short>>(_LocalBoneArrayOffset!.Value);
+    public ref CUtlVector<short> LocalBoneArray {
+        get {
+            _LocalBoneArrayOffset = _LocalBoneArrayOffset ?? Schema.GetOffset(0xCD7B4EF70B8EFD6B);
+            return ref _Handle.AsRef<CUtlVector<short>>(_LocalBoneArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneWeightArrayOffset;
+    private static nint? _BoneWeightArrayOffset;
 
-  public ref CUtlVector<float> BoneWeightArray {
-    get {
-      if (_BoneWeightArrayOffset == null) {
-        _BoneWeightArrayOffset = Schema.GetOffset(0xCD7B4EF747E1E612);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_BoneWeightArrayOffset!.Value);
+    public ref CUtlVector<float> BoneWeightArray {
+        get {
+            _BoneWeightArrayOffset = _BoneWeightArrayOffset ?? Schema.GetOffset(0xCD7B4EF747E1E612);
+            return ref _Handle.AsRef<CUtlVector<float>>(_BoneWeightArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultMorphCtrlWeightOffset;
+    private static nint? _DefaultMorphCtrlWeightOffset;
 
-  public ref float DefaultMorphCtrlWeight {
-    get {
-      if (_DefaultMorphCtrlWeightOffset == null) {
-        _DefaultMorphCtrlWeightOffset = Schema.GetOffset(0xCD7B4EF7AA0F3843);
-      }
-      return ref _Handle.AsRef<float>(_DefaultMorphCtrlWeightOffset!.Value);
+    public ref float DefaultMorphCtrlWeight {
+        get {
+            _DefaultMorphCtrlWeightOffset = _DefaultMorphCtrlWeightOffset ?? Schema.GetOffset(0xCD7B4EF7AA0F3843);
+            return ref _Handle.AsRef<float>(_DefaultMorphCtrlWeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _MorphCtrlWeightArrayOffset;
+    private static nint? _MorphCtrlWeightArrayOffset;
 
-  public ref CUtlVector<SchemaUntypedField> MorphCtrlWeightArray {
-    get {
-      if (_MorphCtrlWeightArrayOffset == null) {
-        _MorphCtrlWeightArrayOffset = Schema.GetOffset(0xCD7B4EF72C45A089);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MorphCtrlWeightArrayOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> MorphCtrlWeightArray {
+        get {
+            _MorphCtrlWeightArrayOffset = _MorphCtrlWeightArrayOffset ?? Schema.GetOffset(0xCD7B4EF72C45A089);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MorphCtrlWeightArrayOffset!.Value);
+        }
     }
-  }
 
 
 }

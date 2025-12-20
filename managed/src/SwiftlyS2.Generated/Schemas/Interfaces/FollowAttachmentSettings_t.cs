@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FollowAttachmentSettings_t : ISchemaClass<FollowAttachmentSettings_t> {
+public partial interface FollowAttachmentSettings_t : ISchemaClass<FollowAttachmentSettings_t>
+{
+    static FollowAttachmentSettings_t ISchemaClass<FollowAttachmentSettings_t>.From(nint handle) => new FollowAttachmentSettings_tImpl(handle);
+    static int ISchemaClass<FollowAttachmentSettings_t>.Size => 144;
+    static string? ISchemaClass<FollowAttachmentSettings_t>.ClassName => null;
 
-  static FollowAttachmentSettings_t ISchemaClass<FollowAttachmentSettings_t>.From(nint handle) => new FollowAttachmentSettings_tImpl(handle);
-  static int ISchemaClass<FollowAttachmentSettings_t>.Size => 144;
-  static string? ISchemaClass<FollowAttachmentSettings_t>.ClassName => null;
 
-  
-  public CAnimAttachment Attachment { get; }
-  
-  public ref int BoneIndex { get; }
-  
-  public AttachmentHandle_t AttachmentHandle { get; }
-  
-  public ref bool MatchTranslation { get; }
-  
-  public ref bool MatchRotation { get; }
+    public CAnimAttachment Attachment { get; }
+
+    public ref int BoneIndex { get; }
+
+    public AttachmentHandle_t AttachmentHandle { get; }
+
+    public ref bool MatchTranslation { get; }
+
+    public ref bool MatchRotation { get; }
 
 
 }

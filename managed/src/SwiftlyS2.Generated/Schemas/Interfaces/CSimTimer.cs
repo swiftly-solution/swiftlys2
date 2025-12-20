@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSimTimer : CSimpleSimTimer, ISchemaClass<CSimTimer> {
+public partial interface CSimTimer : CSimpleSimTimer, ISchemaClass<CSimTimer>
+{
+    static CSimTimer ISchemaClass<CSimTimer>.From(nint handle) => new CSimTimerImpl(handle);
+    static int ISchemaClass<CSimTimer>.Size => 12;
+    static string? ISchemaClass<CSimTimer>.ClassName => null;
 
-  static CSimTimer ISchemaClass<CSimTimer>.From(nint handle) => new CSimTimerImpl(handle);
-  static int ISchemaClass<CSimTimer>.Size => 12;
-  static string? ISchemaClass<CSimTimer>.ClassName => null;
 
-  
-  public ref float Interval { get; }
+    public ref float Interval { get; }
 
 
 }

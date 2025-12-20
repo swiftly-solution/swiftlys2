@@ -6,20 +6,19 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SampleCodeImpl : SchemaClass, SampleCode {
+internal partial class SampleCodeImpl : SchemaClass, SampleCode
+{
+    public SampleCodeImpl(nint handle) : base(handle) { }
 
-  public SampleCodeImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<byte> SubCode {
-    get => new SchemaFixedArray<byte>(_Handle, 0x6387E3865AD6C244, 8, 1, 1);
-  }
+    public ISchemaFixedArray<byte> SubCode {
+        get => new SchemaFixedArray<byte>(_Handle, 0x6387E3865AD6C244, 8, 1, 1);
+    }
 
 
 }

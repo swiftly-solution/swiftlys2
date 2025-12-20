@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EntityRenderAttribute_t : ISchemaClass<EntityRenderAttribute_t> {
+public partial interface EntityRenderAttribute_t : ISchemaClass<EntityRenderAttribute_t>
+{
+    static EntityRenderAttribute_t ISchemaClass<EntityRenderAttribute_t>.From(nint handle) => new EntityRenderAttribute_tImpl(handle);
+    static int ISchemaClass<EntityRenderAttribute_t>.Size => 72;
+    static string? ISchemaClass<EntityRenderAttribute_t>.ClassName => null;
 
-  static EntityRenderAttribute_t ISchemaClass<EntityRenderAttribute_t>.From(nint handle) => new EntityRenderAttribute_tImpl(handle);
-  static int ISchemaClass<EntityRenderAttribute_t>.Size => 72;
-  static string? ISchemaClass<EntityRenderAttribute_t>.ClassName => null;
 
-  
-  public ref CUtlStringToken ID { get; }
-  
-  public ref Vector4D Values { get; }
+    public ref CUtlStringToken ID { get; }
 
-  public void IDUpdated();
-  public void ValuesUpdated();
+    public ref Vector4D Values { get; }
+
+    public void IDUpdated();
+    public void ValuesUpdated();
 }

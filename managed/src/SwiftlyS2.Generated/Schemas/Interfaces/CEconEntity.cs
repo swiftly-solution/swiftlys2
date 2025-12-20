@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEconEntity : CBaseFlex, ISchemaClass<CEconEntity> {
+public partial interface CEconEntity : CBaseFlex, ISchemaClass<CEconEntity>
+{
+    static CEconEntity ISchemaClass<CEconEntity>.From(nint handle) => new CEconEntityImpl(handle);
+    static int ISchemaClass<CEconEntity>.Size => 3664;
+    static string? ISchemaClass<CEconEntity>.ClassName => null;
 
-  static CEconEntity ISchemaClass<CEconEntity>.From(nint handle) => new CEconEntityImpl(handle);
-  static int ISchemaClass<CEconEntity>.Size => 3664;
-  static string? ISchemaClass<CEconEntity>.ClassName => null;
 
-  
-  public CAttributeContainer AttributeManager { get; }
-  
-  public ref uint OriginalOwnerXuidLow { get; }
-  
-  public ref uint OriginalOwnerXuidHigh { get; }
-  
-  public ref int FallbackPaintKit { get; }
-  
-  public ref int FallbackSeed { get; }
-  
-  public ref float FallbackWear { get; }
-  
-  public ref int FallbackStatTrak { get; }
-  
-  public ref CHandle<CBaseEntity> OldProvidee { get; }
-  
-  public ref int OldOwnerClass { get; }
+    public CAttributeContainer AttributeManager { get; }
 
-  public void AttributeManagerUpdated();
-  public void OriginalOwnerXuidLowUpdated();
-  public void OriginalOwnerXuidHighUpdated();
-  public void FallbackPaintKitUpdated();
-  public void FallbackSeedUpdated();
-  public void FallbackWearUpdated();
-  public void FallbackStatTrakUpdated();
+    public ref uint OriginalOwnerXuidLow { get; }
+
+    public ref uint OriginalOwnerXuidHigh { get; }
+
+    public ref int FallbackPaintKit { get; }
+
+    public ref int FallbackSeed { get; }
+
+    public ref float FallbackWear { get; }
+
+    public ref int FallbackStatTrak { get; }
+
+    public ref CHandle<CBaseEntity> OldProvidee { get; }
+
+    public ref int OldOwnerClass { get; }
+
+    public void AttributeManagerUpdated();
+    public void OriginalOwnerXuidLowUpdated();
+    public void OriginalOwnerXuidHighUpdated();
+    public void FallbackPaintKitUpdated();
+    public void FallbackSeedUpdated();
+    public void FallbackWearUpdated();
+    public void FallbackStatTrakUpdated();
 }

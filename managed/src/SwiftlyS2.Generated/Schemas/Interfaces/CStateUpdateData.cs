@@ -8,37 +8,37 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStateUpdateData : ISchemaClass<CStateUpdateData> {
+public partial interface CStateUpdateData : ISchemaClass<CStateUpdateData>
+{
+    static CStateUpdateData ISchemaClass<CStateUpdateData>.From(nint handle) => new CStateUpdateDataImpl(handle);
+    static int ISchemaClass<CStateUpdateData>.Size => 72;
+    static string? ISchemaClass<CStateUpdateData>.ClassName => null;
 
-  static CStateUpdateData ISchemaClass<CStateUpdateData>.From(nint handle) => new CStateUpdateDataImpl(handle);
-  static int ISchemaClass<CStateUpdateData>.Size => 72;
-  static string? ISchemaClass<CStateUpdateData>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public AnimScriptHandle Script { get; }
-  
-  public ref CUtlVector<int> TransitionIndices { get; }
-  
-  public ref CUtlVector<CStateActionUpdater> Actions { get; }
-  
-  public AnimStateID StateID { get; }
-  
-  // bitfield
-  public SchemaUntypedField IsStartState { get; }
-  
-  // bitfield
-  public SchemaUntypedField IsEndState { get; }
-  
-  // bitfield
-  public SchemaUntypedField IsPassthrough { get; }
-  
-  // bitfield
-  public SchemaUntypedField IsPassthroughRootMotion { get; }
-  
-  // bitfield
-  public SchemaUntypedField PreEvaluatePassthroughTransitionPath { get; }
+    public string Name { get; set; }
+
+    public AnimScriptHandle Script { get; }
+
+    public ref CUtlVector<int> TransitionIndices { get; }
+
+    public ref CUtlVector<CStateActionUpdater> Actions { get; }
+
+    public AnimStateID StateID { get; }
+
+    // bitfield
+    public SchemaUntypedField IsStartState { get; }
+
+    // bitfield
+    public SchemaUntypedField IsEndState { get; }
+
+    // bitfield
+    public SchemaUntypedField IsPassthrough { get; }
+
+    // bitfield
+    public SchemaUntypedField IsPassthroughRootMotion { get; }
+
+    // bitfield
+    public SchemaUntypedField PreEvaluatePassthroughTransitionPath { get; }
 
 
 }

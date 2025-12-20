@@ -6,245 +6,171 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointWorldTextImpl : CModelPointEntityImpl, CPointWorldText {
+internal partial class CPointWorldTextImpl : CModelPointEntityImpl, CPointWorldText
+{
+    public CPointWorldTextImpl(nint handle) : base(handle) { }
 
-  public CPointWorldTextImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MessageTextOffset;
 
-  private static nint? _MessageTextOffset;
-
-  public string MessageText {
-    get {
-        if (_MessageTextOffset == null) {
-            _MessageTextOffset = Schema.GetOffset(0x5BF88697BA6E5D73);
+    public string MessageText {
+        get {
+            _MessageTextOffset = _MessageTextOffset ?? Schema.GetOffset(0x5BF88697BA6E5D73);
+            return Schema.GetString(_Handle + _MessageTextOffset!.Value);
         }
-        var ptr = _Handle + _MessageTextOffset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_MessageTextOffset == null) {
-            _MessageTextOffset = Schema.GetOffset(0x5BF88697BA6E5D73);
+        set {
+            _MessageTextOffset = _MessageTextOffset ?? Schema.GetOffset(0x5BF88697BA6E5D73);
+            Schema.SetFixedString(_Handle, _MessageTextOffset!.Value, value, 512);
         }
-        Schema.SetFixedString(_Handle, _MessageTextOffset!.Value, value, 512);
-    }
-  } 
-  private static nint? _FontNameOffset;
+    } 
+    private static nint? _FontNameOffset;
 
-  public string FontName {
-    get {
-        if (_FontNameOffset == null) {
-            _FontNameOffset = Schema.GetOffset(0x5BF88697C241C2B3);
+    public string FontName {
+        get {
+            _FontNameOffset = _FontNameOffset ?? Schema.GetOffset(0x5BF88697C241C2B3);
+            return Schema.GetString(_Handle + _FontNameOffset!.Value);
         }
-        var ptr = _Handle + _FontNameOffset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_FontNameOffset == null) {
-            _FontNameOffset = Schema.GetOffset(0x5BF88697C241C2B3);
+        set {
+            _FontNameOffset = _FontNameOffset ?? Schema.GetOffset(0x5BF88697C241C2B3);
+            Schema.SetFixedString(_Handle, _FontNameOffset!.Value, value, 64);
         }
-        Schema.SetFixedString(_Handle, _FontNameOffset!.Value, value, 64);
-    }
-  } 
-  private static nint? _BackgroundMaterialNameOffset;
+    } 
+    private static nint? _BackgroundMaterialNameOffset;
 
-  public string BackgroundMaterialName {
-    get {
-        if (_BackgroundMaterialNameOffset == null) {
-            _BackgroundMaterialNameOffset = Schema.GetOffset(0x5BF88697ECF8A7AB);
+    public string BackgroundMaterialName {
+        get {
+            _BackgroundMaterialNameOffset = _BackgroundMaterialNameOffset ?? Schema.GetOffset(0x5BF88697ECF8A7AB);
+            return Schema.GetString(_Handle + _BackgroundMaterialNameOffset!.Value);
         }
-        var ptr = _Handle + _BackgroundMaterialNameOffset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_BackgroundMaterialNameOffset == null) {
-            _BackgroundMaterialNameOffset = Schema.GetOffset(0x5BF88697ECF8A7AB);
+        set {
+            _BackgroundMaterialNameOffset = _BackgroundMaterialNameOffset ?? Schema.GetOffset(0x5BF88697ECF8A7AB);
+            Schema.SetFixedString(_Handle, _BackgroundMaterialNameOffset!.Value, value, 64);
         }
-        Schema.SetFixedString(_Handle, _BackgroundMaterialNameOffset!.Value, value, 64);
-    }
-  } 
-  private static nint? _EnabledOffset;
+    } 
+    private static nint? _EnabledOffset;
 
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0x5BF886976154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x5BF886976154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _FullbrightOffset;
+    private static nint? _FullbrightOffset;
 
-  public ref bool Fullbright {
-    get {
-      if (_FullbrightOffset == null) {
-        _FullbrightOffset = Schema.GetOffset(0x5BF8869765A288E8);
-      }
-      return ref _Handle.AsRef<bool>(_FullbrightOffset!.Value);
+    public ref bool Fullbright {
+        get {
+            _FullbrightOffset = _FullbrightOffset ?? Schema.GetOffset(0x5BF8869765A288E8);
+            return ref _Handle.AsRef<bool>(_FullbrightOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldUnitsPerPxOffset;
+    private static nint? _WorldUnitsPerPxOffset;
 
-  public ref float WorldUnitsPerPx {
-    get {
-      if (_WorldUnitsPerPxOffset == null) {
-        _WorldUnitsPerPxOffset = Schema.GetOffset(0x5BF886971DA8EAAB);
-      }
-      return ref _Handle.AsRef<float>(_WorldUnitsPerPxOffset!.Value);
+    public ref float WorldUnitsPerPx {
+        get {
+            _WorldUnitsPerPxOffset = _WorldUnitsPerPxOffset ?? Schema.GetOffset(0x5BF886971DA8EAAB);
+            return ref _Handle.AsRef<float>(_WorldUnitsPerPxOffset!.Value);
+        }
     }
-  }
-  private static nint? _FontSizeOffset;
+    private static nint? _FontSizeOffset;
 
-  public ref float FontSize {
-    get {
-      if (_FontSizeOffset == null) {
-        _FontSizeOffset = Schema.GetOffset(0x5BF88697D5E19F97);
-      }
-      return ref _Handle.AsRef<float>(_FontSizeOffset!.Value);
+    public ref float FontSize {
+        get {
+            _FontSizeOffset = _FontSizeOffset ?? Schema.GetOffset(0x5BF88697D5E19F97);
+            return ref _Handle.AsRef<float>(_FontSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthOffsetOffset;
+    private static nint? _DepthOffsetOffset;
 
-  public ref float DepthOffset {
-    get {
-      if (_DepthOffsetOffset == null) {
-        _DepthOffsetOffset = Schema.GetOffset(0x5BF8869767D1DB9B);
-      }
-      return ref _Handle.AsRef<float>(_DepthOffsetOffset!.Value);
+    public ref float DepthOffset {
+        get {
+            _DepthOffsetOffset = _DepthOffsetOffset ?? Schema.GetOffset(0x5BF8869767D1DB9B);
+            return ref _Handle.AsRef<float>(_DepthOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _DrawBackgroundOffset;
+    private static nint? _DrawBackgroundOffset;
 
-  public ref bool DrawBackground {
-    get {
-      if (_DrawBackgroundOffset == null) {
-        _DrawBackgroundOffset = Schema.GetOffset(0x5BF886978259FA8F);
-      }
-      return ref _Handle.AsRef<bool>(_DrawBackgroundOffset!.Value);
+    public ref bool DrawBackground {
+        get {
+            _DrawBackgroundOffset = _DrawBackgroundOffset ?? Schema.GetOffset(0x5BF886978259FA8F);
+            return ref _Handle.AsRef<bool>(_DrawBackgroundOffset!.Value);
+        }
     }
-  }
-  private static nint? _BackgroundBorderWidthOffset;
+    private static nint? _BackgroundBorderWidthOffset;
 
-  public ref float BackgroundBorderWidth {
-    get {
-      if (_BackgroundBorderWidthOffset == null) {
-        _BackgroundBorderWidthOffset = Schema.GetOffset(0x5BF886972A7C9A4F);
-      }
-      return ref _Handle.AsRef<float>(_BackgroundBorderWidthOffset!.Value);
+    public ref float BackgroundBorderWidth {
+        get {
+            _BackgroundBorderWidthOffset = _BackgroundBorderWidthOffset ?? Schema.GetOffset(0x5BF886972A7C9A4F);
+            return ref _Handle.AsRef<float>(_BackgroundBorderWidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _BackgroundBorderHeightOffset;
+    private static nint? _BackgroundBorderHeightOffset;
 
-  public ref float BackgroundBorderHeight {
-    get {
-      if (_BackgroundBorderHeightOffset == null) {
-        _BackgroundBorderHeightOffset = Schema.GetOffset(0x5BF8869794198B72);
-      }
-      return ref _Handle.AsRef<float>(_BackgroundBorderHeightOffset!.Value);
+    public ref float BackgroundBorderHeight {
+        get {
+            _BackgroundBorderHeightOffset = _BackgroundBorderHeightOffset ?? Schema.GetOffset(0x5BF8869794198B72);
+            return ref _Handle.AsRef<float>(_BackgroundBorderHeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _BackgroundWorldToUVOffset;
+    private static nint? _BackgroundWorldToUVOffset;
 
-  public ref float BackgroundWorldToUV {
-    get {
-      if (_BackgroundWorldToUVOffset == null) {
-        _BackgroundWorldToUVOffset = Schema.GetOffset(0x5BF88697ECA00D93);
-      }
-      return ref _Handle.AsRef<float>(_BackgroundWorldToUVOffset!.Value);
+    public ref float BackgroundWorldToUV {
+        get {
+            _BackgroundWorldToUVOffset = _BackgroundWorldToUVOffset ?? Schema.GetOffset(0x5BF88697ECA00D93);
+            return ref _Handle.AsRef<float>(_BackgroundWorldToUVOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorOffset;
+    private static nint? _ColorOffset;
 
-  public ref Color Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x5BF88697D7D017D8);
-      }
-      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+    public ref Color Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x5BF88697D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _JustifyHorizontalOffset;
+    private static nint? _JustifyHorizontalOffset;
 
-  public ref PointWorldTextJustifyHorizontal_t JustifyHorizontal {
-    get {
-      if (_JustifyHorizontalOffset == null) {
-        _JustifyHorizontalOffset = Schema.GetOffset(0x5BF8869730435253);
-      }
-      return ref _Handle.AsRef<PointWorldTextJustifyHorizontal_t>(_JustifyHorizontalOffset!.Value);
+    public ref PointWorldTextJustifyHorizontal_t JustifyHorizontal {
+        get {
+            _JustifyHorizontalOffset = _JustifyHorizontalOffset ?? Schema.GetOffset(0x5BF8869730435253);
+            return ref _Handle.AsRef<PointWorldTextJustifyHorizontal_t>(_JustifyHorizontalOffset!.Value);
+        }
     }
-  }
-  private static nint? _JustifyVerticalOffset;
+    private static nint? _JustifyVerticalOffset;
 
-  public ref PointWorldTextJustifyVertical_t JustifyVertical {
-    get {
-      if (_JustifyVerticalOffset == null) {
-        _JustifyVerticalOffset = Schema.GetOffset(0x5BF88697CA04D41D);
-      }
-      return ref _Handle.AsRef<PointWorldTextJustifyVertical_t>(_JustifyVerticalOffset!.Value);
+    public ref PointWorldTextJustifyVertical_t JustifyVertical {
+        get {
+            _JustifyVerticalOffset = _JustifyVerticalOffset ?? Schema.GetOffset(0x5BF88697CA04D41D);
+            return ref _Handle.AsRef<PointWorldTextJustifyVertical_t>(_JustifyVerticalOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReorientModeOffset;
+    private static nint? _ReorientModeOffset;
 
-  public ref PointWorldTextReorientMode_t ReorientMode {
-    get {
-      if (_ReorientModeOffset == null) {
-        _ReorientModeOffset = Schema.GetOffset(0x5BF88697222D2502);
-      }
-      return ref _Handle.AsRef<PointWorldTextReorientMode_t>(_ReorientModeOffset!.Value);
+    public ref PointWorldTextReorientMode_t ReorientMode {
+        get {
+            _ReorientModeOffset = _ReorientModeOffset ?? Schema.GetOffset(0x5BF88697222D2502);
+            return ref _Handle.AsRef<PointWorldTextReorientMode_t>(_ReorientModeOffset!.Value);
+        }
     }
-  }
 
-  public void MessageTextUpdated() {
-    Schema.Update(_Handle, 0x5BF88697BA6E5D73);
-  }
-  public void FontNameUpdated() {
-    Schema.Update(_Handle, 0x5BF88697C241C2B3);
-  }
-  public void BackgroundMaterialNameUpdated() {
-    Schema.Update(_Handle, 0x5BF88697ECF8A7AB);
-  }
-  public void EnabledUpdated() {
-    Schema.Update(_Handle, 0x5BF886976154EB7E);
-  }
-  public void FullbrightUpdated() {
-    Schema.Update(_Handle, 0x5BF8869765A288E8);
-  }
-  public void WorldUnitsPerPxUpdated() {
-    Schema.Update(_Handle, 0x5BF886971DA8EAAB);
-  }
-  public void FontSizeUpdated() {
-    Schema.Update(_Handle, 0x5BF88697D5E19F97);
-  }
-  public void DepthOffsetUpdated() {
-    Schema.Update(_Handle, 0x5BF8869767D1DB9B);
-  }
-  public void DrawBackgroundUpdated() {
-    Schema.Update(_Handle, 0x5BF886978259FA8F);
-  }
-  public void BackgroundBorderWidthUpdated() {
-    Schema.Update(_Handle, 0x5BF886972A7C9A4F);
-  }
-  public void BackgroundBorderHeightUpdated() {
-    Schema.Update(_Handle, 0x5BF8869794198B72);
-  }
-  public void BackgroundWorldToUVUpdated() {
-    Schema.Update(_Handle, 0x5BF88697ECA00D93);
-  }
-  public void ColorUpdated() {
-    Schema.Update(_Handle, 0x5BF88697D7D017D8);
-  }
-  public void JustifyHorizontalUpdated() {
-    Schema.Update(_Handle, 0x5BF8869730435253);
-  }
-  public void JustifyVerticalUpdated() {
-    Schema.Update(_Handle, 0x5BF88697CA04D41D);
-  }
-  public void ReorientModeUpdated() {
-    Schema.Update(_Handle, 0x5BF88697222D2502);
-  }
+    public void MessageTextUpdated() => Schema.Update(_Handle, 0x5BF88697BA6E5D73);
+    public void FontNameUpdated() => Schema.Update(_Handle, 0x5BF88697C241C2B3);
+    public void BackgroundMaterialNameUpdated() => Schema.Update(_Handle, 0x5BF88697ECF8A7AB);
+    public void EnabledUpdated() => Schema.Update(_Handle, 0x5BF886976154EB7E);
+    public void FullbrightUpdated() => Schema.Update(_Handle, 0x5BF8869765A288E8);
+    public void WorldUnitsPerPxUpdated() => Schema.Update(_Handle, 0x5BF886971DA8EAAB);
+    public void FontSizeUpdated() => Schema.Update(_Handle, 0x5BF88697D5E19F97);
+    public void DepthOffsetUpdated() => Schema.Update(_Handle, 0x5BF8869767D1DB9B);
+    public void DrawBackgroundUpdated() => Schema.Update(_Handle, 0x5BF886978259FA8F);
+    public void BackgroundBorderWidthUpdated() => Schema.Update(_Handle, 0x5BF886972A7C9A4F);
+    public void BackgroundBorderHeightUpdated() => Schema.Update(_Handle, 0x5BF8869794198B72);
+    public void BackgroundWorldToUVUpdated() => Schema.Update(_Handle, 0x5BF88697ECA00D93);
+    public void ColorUpdated() => Schema.Update(_Handle, 0x5BF88697D7D017D8);
+    public void JustifyHorizontalUpdated() => Schema.Update(_Handle, 0x5BF8869730435253);
+    public void JustifyVerticalUpdated() => Schema.Update(_Handle, 0x5BF88697CA04D41D);
+    public void ReorientModeUpdated() => Schema.Update(_Handle, 0x5BF88697222D2502);
 }

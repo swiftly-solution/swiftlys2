@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSSDSEndFrameViewInfo : ISchemaClass<CSSDSEndFrameViewInfo> {
+public partial interface CSSDSEndFrameViewInfo : ISchemaClass<CSSDSEndFrameViewInfo>
+{
+    static CSSDSEndFrameViewInfo ISchemaClass<CSSDSEndFrameViewInfo>.From(nint handle) => new CSSDSEndFrameViewInfoImpl(handle);
+    static int ISchemaClass<CSSDSEndFrameViewInfo>.Size => 16;
+    static string? ISchemaClass<CSSDSEndFrameViewInfo>.ClassName => null;
 
-  static CSSDSEndFrameViewInfo ISchemaClass<CSSDSEndFrameViewInfo>.From(nint handle) => new CSSDSEndFrameViewInfoImpl(handle);
-  static int ISchemaClass<CSSDSEndFrameViewInfo>.Size => 16;
-  static string? ISchemaClass<CSSDSEndFrameViewInfo>.ClassName => null;
 
-  
-  public ref ulong ViewId { get; }
-  
-  public string ViewName { get; set; }
+    public ref ulong ViewId { get; }
+
+    public string ViewName { get; set; }
 
 
 }

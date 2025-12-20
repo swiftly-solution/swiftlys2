@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmClipSelectorNode__CDefinition : CNmClipReferenceNode__CDefinition, ISchemaClass<CNmClipSelectorNode__CDefinition> {
+public partial interface CNmClipSelectorNode__CDefinition : CNmClipReferenceNode__CDefinition, ISchemaClass<CNmClipSelectorNode__CDefinition>
+{
+    static CNmClipSelectorNode__CDefinition ISchemaClass<CNmClipSelectorNode__CDefinition>.From(nint handle) => new CNmClipSelectorNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmClipSelectorNode__CDefinition>.Size => 64;
+    static string? ISchemaClass<CNmClipSelectorNode__CDefinition>.ClassName => null;
 
-  static CNmClipSelectorNode__CDefinition ISchemaClass<CNmClipSelectorNode__CDefinition>.From(nint handle) => new CNmClipSelectorNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmClipSelectorNode__CDefinition>.Size => 64;
-  static string? ISchemaClass<CNmClipSelectorNode__CDefinition>.ClassName => null;
 
-  
-  // CUtlLeanVectorFixedGrowable< int16, 5 >
-  public SchemaUntypedField OptionNodeIndices { get; }
-  
-  // CUtlLeanVectorFixedGrowable< int16, 5 >
-  public SchemaUntypedField ConditionNodeIndices { get; }
+    // CUtlLeanVectorFixedGrowable< int16, 5 >
+    public SchemaUntypedField OptionNodeIndices { get; }
+
+    // CUtlLeanVectorFixedGrowable< int16, 5 >
+    public SchemaUntypedField ConditionNodeIndices { get; }
 
 
 }

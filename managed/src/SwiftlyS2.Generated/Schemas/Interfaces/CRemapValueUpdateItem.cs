@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRemapValueUpdateItem : ISchemaClass<CRemapValueUpdateItem> {
+public partial interface CRemapValueUpdateItem : ISchemaClass<CRemapValueUpdateItem>
+{
+    static CRemapValueUpdateItem ISchemaClass<CRemapValueUpdateItem>.From(nint handle) => new CRemapValueUpdateItemImpl(handle);
+    static int ISchemaClass<CRemapValueUpdateItem>.Size => 20;
+    static string? ISchemaClass<CRemapValueUpdateItem>.ClassName => null;
 
-  static CRemapValueUpdateItem ISchemaClass<CRemapValueUpdateItem>.From(nint handle) => new CRemapValueUpdateItemImpl(handle);
-  static int ISchemaClass<CRemapValueUpdateItem>.Size => 20;
-  static string? ISchemaClass<CRemapValueUpdateItem>.ClassName => null;
 
-  
-  public CAnimParamHandle ParamIn { get; }
-  
-  public CAnimParamHandle ParamOut { get; }
-  
-  public ref float MinInputValue { get; }
-  
-  public ref float MaxInputValue { get; }
-  
-  public ref float MinOutputValue { get; }
-  
-  public ref float MaxOutputValue { get; }
+    public CAnimParamHandle ParamIn { get; }
+
+    public CAnimParamHandle ParamOut { get; }
+
+    public ref float MinInputValue { get; }
+
+    public ref float MaxInputValue { get; }
+
+    public ref float MinOutputValue { get; }
+
+    public ref float MaxOutputValue { get; }
 
 
 }

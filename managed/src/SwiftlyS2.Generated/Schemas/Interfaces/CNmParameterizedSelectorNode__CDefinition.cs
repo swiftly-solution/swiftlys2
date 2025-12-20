@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmParameterizedSelectorNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmParameterizedSelectorNode__CDefinition> {
+public partial interface CNmParameterizedSelectorNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmParameterizedSelectorNode__CDefinition>
+{
+    static CNmParameterizedSelectorNode__CDefinition ISchemaClass<CNmParameterizedSelectorNode__CDefinition>.From(nint handle) => new CNmParameterizedSelectorNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmParameterizedSelectorNode__CDefinition>.Size => 64;
+    static string? ISchemaClass<CNmParameterizedSelectorNode__CDefinition>.ClassName => null;
 
-  static CNmParameterizedSelectorNode__CDefinition ISchemaClass<CNmParameterizedSelectorNode__CDefinition>.From(nint handle) => new CNmParameterizedSelectorNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmParameterizedSelectorNode__CDefinition>.Size => 64;
-  static string? ISchemaClass<CNmParameterizedSelectorNode__CDefinition>.ClassName => null;
 
-  
-  // CUtlLeanVectorFixedGrowable< int16, 5 >
-  public SchemaUntypedField OptionNodeIndices { get; }
-  
-  // CUtlLeanVectorFixedGrowable< uint8, 5 >
-  public SchemaUntypedField OptionWeights { get; }
-  
-  public ref short ParameterNodeIdx { get; }
-  
-  public ref bool IgnoreInvalidOptions { get; }
-  
-  public ref bool HasWeightsSet { get; }
+    // CUtlLeanVectorFixedGrowable< int16, 5 >
+    public SchemaUntypedField OptionNodeIndices { get; }
+
+    // CUtlLeanVectorFixedGrowable< uint8, 5 >
+    public SchemaUntypedField OptionWeights { get; }
+
+    public ref short ParameterNodeIdx { get; }
+
+    public ref bool IgnoreInvalidOptions { get; }
+
+    public ref bool HasWeightsSet { get; }
 
 
 }

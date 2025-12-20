@@ -82,6 +82,16 @@ public unsafe struct CTakeDamageInfo
         }
     }
 
+    public CTakeDamageInfo( float flDamage, DamageTypes_t bitsDamageType, CBaseEntity? inflictor = null, CBaseEntity? attacker = null, CBaseEntity? ability = null )
+    {
+        Vector vec3_origin = Vector.Zero;
+
+        fixed (CTakeDamageInfo* info = &this)
+        {
+            GameFunctions.CTakeDamageInfoConstructor(info, inflictor?.Address ?? IntPtr.Zero, attacker?.Address ?? IntPtr.Zero, ability?.Address ?? IntPtr.Zero, &vec3_origin, &vec3_origin, flDamage, (int)bitsDamageType, 0, null);
+        }
+    }
+
     public HitGroup_t ActualHitGroup => Trace->HitBox->m_nGroupId;
 }
 

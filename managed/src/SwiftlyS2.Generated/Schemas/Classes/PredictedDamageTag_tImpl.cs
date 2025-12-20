@@ -6,68 +6,51 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PredictedDamageTag_tImpl : SchemaClass, PredictedDamageTag_t {
+internal partial class PredictedDamageTag_tImpl : SchemaClass, PredictedDamageTag_t
+{
+    public PredictedDamageTag_tImpl(nint handle) : base(handle) { }
 
-  public PredictedDamageTag_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagTickOffset;
 
-  private static nint? _TagTickOffset;
-
-  public GameTick_t TagTick {
-    get {
-      if (_TagTickOffset == null) {
-        _TagTickOffset = Schema.GetOffset(0x43420069BBCAAE16);
-      }
-      return new GameTick_tImpl(_Handle + _TagTickOffset!.Value);
+    public GameTick_t TagTick {
+        get {
+            _TagTickOffset = _TagTickOffset ?? Schema.GetOffset(0x43420069BBCAAE16);
+            return new GameTick_tImpl(_Handle + _TagTickOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlinchModSmallOffset;
+    private static nint? _FlinchModSmallOffset;
 
-  public ref float FlinchModSmall {
-    get {
-      if (_FlinchModSmallOffset == null) {
-        _FlinchModSmallOffset = Schema.GetOffset(0x4342006970E7E18A);
-      }
-      return ref _Handle.AsRef<float>(_FlinchModSmallOffset!.Value);
+    public ref float FlinchModSmall {
+        get {
+            _FlinchModSmallOffset = _FlinchModSmallOffset ?? Schema.GetOffset(0x4342006970E7E18A);
+            return ref _Handle.AsRef<float>(_FlinchModSmallOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlinchModLargeOffset;
+    private static nint? _FlinchModLargeOffset;
 
-  public ref float FlinchModLarge {
-    get {
-      if (_FlinchModLargeOffset == null) {
-        _FlinchModLargeOffset = Schema.GetOffset(0x43420069E052DA66);
-      }
-      return ref _Handle.AsRef<float>(_FlinchModLargeOffset!.Value);
+    public ref float FlinchModLarge {
+        get {
+            _FlinchModLargeOffset = _FlinchModLargeOffset ?? Schema.GetOffset(0x43420069E052DA66);
+            return ref _Handle.AsRef<float>(_FlinchModLargeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FriendlyFireDamageReductionRatioOffset;
+    private static nint? _FriendlyFireDamageReductionRatioOffset;
 
-  public ref float FriendlyFireDamageReductionRatio {
-    get {
-      if (_FriendlyFireDamageReductionRatioOffset == null) {
-        _FriendlyFireDamageReductionRatioOffset = Schema.GetOffset(0x43420069BA6A7F4D);
-      }
-      return ref _Handle.AsRef<float>(_FriendlyFireDamageReductionRatioOffset!.Value);
+    public ref float FriendlyFireDamageReductionRatio {
+        get {
+            _FriendlyFireDamageReductionRatioOffset = _FriendlyFireDamageReductionRatioOffset ?? Schema.GetOffset(0x43420069BA6A7F4D);
+            return ref _Handle.AsRef<float>(_FriendlyFireDamageReductionRatioOffset!.Value);
+        }
     }
-  }
 
-  public void TagTickUpdated() {
-    Schema.Update(_Handle, 0x43420069BBCAAE16);
-  }
-  public void FlinchModSmallUpdated() {
-    Schema.Update(_Handle, 0x4342006970E7E18A);
-  }
-  public void FlinchModLargeUpdated() {
-    Schema.Update(_Handle, 0x43420069E052DA66);
-  }
-  public void FriendlyFireDamageReductionRatioUpdated() {
-    Schema.Update(_Handle, 0x43420069BA6A7F4D);
-  }
+    public void TagTickUpdated() => Schema.Update(_Handle, 0x43420069BBCAAE16);
+    public void FlinchModSmallUpdated() => Schema.Update(_Handle, 0x4342006970E7E18A);
+    public void FlinchModLargeUpdated() => Schema.Update(_Handle, 0x43420069E052DA66);
+    public void FriendlyFireDamageReductionRatioUpdated() => Schema.Update(_Handle, 0x43420069BA6A7F4D);
 }

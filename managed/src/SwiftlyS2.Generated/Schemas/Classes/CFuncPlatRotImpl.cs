@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncPlatRotImpl : CFuncPlatImpl, CFuncPlatRot {
+internal partial class CFuncPlatRotImpl : CFuncPlatImpl, CFuncPlatRot
+{
+    public CFuncPlatRotImpl(nint handle) : base(handle) { }
 
-  public CFuncPlatRotImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EndOffset;
 
-  private static nint? _EndOffset;
-
-  public ref QAngle End {
-    get {
-      if (_EndOffset == null) {
-        _EndOffset = Schema.GetOffset(0xF566498E5B29CFCA);
-      }
-      return ref _Handle.AsRef<QAngle>(_EndOffset!.Value);
+    public ref QAngle End {
+        get {
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0xF566498E5B29CFCA);
+            return ref _Handle.AsRef<QAngle>(_EndOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartOffset;
+    private static nint? _StartOffset;
 
-  public ref QAngle Start {
-    get {
-      if (_StartOffset == null) {
-        _StartOffset = Schema.GetOffset(0xF566498EA539BEFF);
-      }
-      return ref _Handle.AsRef<QAngle>(_StartOffset!.Value);
+    public ref QAngle Start {
+        get {
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0xF566498EA539BEFF);
+            return ref _Handle.AsRef<QAngle>(_StartOffset!.Value);
+        }
     }
-  }
 
 
 }

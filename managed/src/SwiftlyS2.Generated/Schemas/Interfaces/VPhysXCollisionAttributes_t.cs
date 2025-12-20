@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VPhysXCollisionAttributes_t : ISchemaClass<VPhysXCollisionAttributes_t> {
+public partial interface VPhysXCollisionAttributes_t : ISchemaClass<VPhysXCollisionAttributes_t>
+{
+    static VPhysXCollisionAttributes_t ISchemaClass<VPhysXCollisionAttributes_t>.From(nint handle) => new VPhysXCollisionAttributes_tImpl(handle);
+    static int ISchemaClass<VPhysXCollisionAttributes_t>.Size => 160;
+    static string? ISchemaClass<VPhysXCollisionAttributes_t>.ClassName => null;
 
-  static VPhysXCollisionAttributes_t ISchemaClass<VPhysXCollisionAttributes_t>.From(nint handle) => new VPhysXCollisionAttributes_tImpl(handle);
-  static int ISchemaClass<VPhysXCollisionAttributes_t>.Size => 160;
-  static string? ISchemaClass<VPhysXCollisionAttributes_t>.ClassName => null;
 
-  
-  public ref uint CollisionGroup { get; }
-  
-  public ref CUtlVector<uint> InteractAs { get; }
-  
-  public ref CUtlVector<uint> InteractWith { get; }
-  
-  public ref CUtlVector<uint> InteractExclude { get; }
-  
-  public string CollisionGroupString { get; set; }
-  
-  public ref CUtlVector<CUtlString> InteractAsStrings { get; }
-  
-  public ref CUtlVector<CUtlString> InteractWithStrings { get; }
-  
-  public ref CUtlVector<CUtlString> InteractExcludeStrings { get; }
+    public ref uint CollisionGroup { get; }
+
+    public ref CUtlVector<uint> InteractAs { get; }
+
+    public ref CUtlVector<uint> InteractWith { get; }
+
+    public ref CUtlVector<uint> InteractExclude { get; }
+
+    public string CollisionGroupString { get; set; }
+
+    public ref CUtlVector<CUtlString> InteractAsStrings { get; }
+
+    public ref CUtlVector<CUtlString> InteractWithStrings { get; }
+
+    public ref CUtlVector<CUtlString> InteractExcludeStrings { get; }
 
 
 }

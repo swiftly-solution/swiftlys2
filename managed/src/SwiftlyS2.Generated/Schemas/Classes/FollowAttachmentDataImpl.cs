@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FollowAttachmentDataImpl : SchemaClass, FollowAttachmentData {
+internal partial class FollowAttachmentDataImpl : SchemaClass, FollowAttachmentData
+{
+    public FollowAttachmentDataImpl(nint handle) : base(handle) { }
 
-  public FollowAttachmentDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneIndexOffset;
 
-  private static nint? _BoneIndexOffset;
-
-  public ref int BoneIndex {
-    get {
-      if (_BoneIndexOffset == null) {
-        _BoneIndexOffset = Schema.GetOffset(0x7E37AD4D6AFA4155);
-      }
-      return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+    public ref int BoneIndex {
+        get {
+            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0x7E37AD4D6AFA4155);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttachmentHandleOffset;
+    private static nint? _AttachmentHandleOffset;
 
-  public AttachmentHandle_t AttachmentHandle {
-    get {
-      if (_AttachmentHandleOffset == null) {
-        _AttachmentHandleOffset = Schema.GetOffset(0x7E37AD4DA203035E);
-      }
-      return new AttachmentHandle_tImpl(_Handle + _AttachmentHandleOffset!.Value);
+    public AttachmentHandle_t AttachmentHandle {
+        get {
+            _AttachmentHandleOffset = _AttachmentHandleOffset ?? Schema.GetOffset(0x7E37AD4DA203035E);
+            return new AttachmentHandle_tImpl(_Handle + _AttachmentHandleOffset!.Value);
+        }
     }
-  }
 
 
 }

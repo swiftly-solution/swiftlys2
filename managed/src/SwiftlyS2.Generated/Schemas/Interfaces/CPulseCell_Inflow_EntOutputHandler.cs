@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Inflow_EntOutputHandler : CPulseCell_Inflow_BaseEntrypoint, ISchemaClass<CPulseCell_Inflow_EntOutputHandler> {
+public partial interface CPulseCell_Inflow_EntOutputHandler : CPulseCell_Inflow_BaseEntrypoint, ISchemaClass<CPulseCell_Inflow_EntOutputHandler>
+{
+    static CPulseCell_Inflow_EntOutputHandler ISchemaClass<CPulseCell_Inflow_EntOutputHandler>.From(nint handle) => new CPulseCell_Inflow_EntOutputHandlerImpl(handle);
+    static int ISchemaClass<CPulseCell_Inflow_EntOutputHandler>.Size => 184;
+    static string? ISchemaClass<CPulseCell_Inflow_EntOutputHandler>.ClassName => null;
 
-  static CPulseCell_Inflow_EntOutputHandler ISchemaClass<CPulseCell_Inflow_EntOutputHandler>.From(nint handle) => new CPulseCell_Inflow_EntOutputHandlerImpl(handle);
-  static int ISchemaClass<CPulseCell_Inflow_EntOutputHandler>.Size => 184;
-  static string? ISchemaClass<CPulseCell_Inflow_EntOutputHandler>.ClassName => null;
 
-  
-  // PulseSymbol_t
-  public SchemaUntypedField SourceEntity { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField SourceOutput { get; }
-  
-  // CPulseValueFullType
-  public SchemaUntypedField ExpectedParamType { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField SourceEntity { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField SourceOutput { get; }
+
+    // CPulseValueFullType
+    public SchemaUntypedField ExpectedParamType { get; }
 
 
 }

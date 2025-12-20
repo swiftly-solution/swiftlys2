@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MotionIndexImpl : SchemaClass, MotionIndex {
+internal partial class MotionIndexImpl : SchemaClass, MotionIndex
+{
+    public MotionIndexImpl(nint handle) : base(handle) { }
 
-  public MotionIndexImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GroupOffset;
 
-  private static nint? _GroupOffset;
-
-  public ref ushort Group {
-    get {
-      if (_GroupOffset == null) {
-        _GroupOffset = Schema.GetOffset(0x5914302D0CD16308);
-      }
-      return ref _Handle.AsRef<ushort>(_GroupOffset!.Value);
+    public ref ushort Group {
+        get {
+            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0x5914302D0CD16308);
+            return ref _Handle.AsRef<ushort>(_GroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _MotionOffset;
+    private static nint? _MotionOffset;
 
-  public ref ushort Motion {
-    get {
-      if (_MotionOffset == null) {
-        _MotionOffset = Schema.GetOffset(0x5914302DBB2E0DCB);
-      }
-      return ref _Handle.AsRef<ushort>(_MotionOffset!.Value);
+    public ref ushort Motion {
+        get {
+            _MotionOffset = _MotionOffset ?? Schema.GetOffset(0x5914302DBB2E0DCB);
+            return ref _Handle.AsRef<ushort>(_MotionOffset!.Value);
+        }
     }
-  }
 
 
 }

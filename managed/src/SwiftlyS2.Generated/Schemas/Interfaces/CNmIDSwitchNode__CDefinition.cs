@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmIDSwitchNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmIDSwitchNode__CDefinition> {
+public partial interface CNmIDSwitchNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmIDSwitchNode__CDefinition>
+{
+    static CNmIDSwitchNode__CDefinition ISchemaClass<CNmIDSwitchNode__CDefinition>.From(nint handle) => new CNmIDSwitchNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmIDSwitchNode__CDefinition>.Size => 40;
+    static string? ISchemaClass<CNmIDSwitchNode__CDefinition>.ClassName => null;
 
-  static CNmIDSwitchNode__CDefinition ISchemaClass<CNmIDSwitchNode__CDefinition>.From(nint handle) => new CNmIDSwitchNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmIDSwitchNode__CDefinition>.Size => 40;
-  static string? ISchemaClass<CNmIDSwitchNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SwitchValueNodeIdx { get; }
-  
-  public ref short TrueValueNodeIdx { get; }
-  
-  public ref short FalseValueNodeIdx { get; }
-  
-  public ref CGlobalSymbol FalseValue { get; }
-  
-  public ref CGlobalSymbol TrueValue { get; }
+    public ref short SwitchValueNodeIdx { get; }
+
+    public ref short TrueValueNodeIdx { get; }
+
+    public ref short FalseValueNodeIdx { get; }
+
+    public ref CGlobalSymbol FalseValue { get; }
+
+    public ref CGlobalSymbol TrueValue { get; }
 
 
 }

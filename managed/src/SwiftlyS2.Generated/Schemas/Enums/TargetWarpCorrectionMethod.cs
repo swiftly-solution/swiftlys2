@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum TargetWarpCorrectionMethod : uint {
-
+public enum TargetWarpCorrectionMethod : uint
+{
  ScaleMotion = 0,
 
  AddCorrectionDelta = 1,

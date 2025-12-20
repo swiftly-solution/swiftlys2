@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSeqPoseParamDescImpl : SchemaClass, CSeqPoseParamDesc {
+internal partial class CSeqPoseParamDescImpl : SchemaClass, CSeqPoseParamDesc
+{
+    public CSeqPoseParamDescImpl(nint handle) : base(handle) { }
 
-  public CSeqPoseParamDescImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public ref CBufferString Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x9276634463D22D49);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    public ref CBufferString Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9276634463D22D49);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartOffset;
+    private static nint? _StartOffset;
 
-  public ref float Start {
-    get {
-      if (_StartOffset == null) {
-        _StartOffset = Schema.GetOffset(0x9276634405A20B85);
-      }
-      return ref _Handle.AsRef<float>(_StartOffset!.Value);
+    public ref float Start {
+        get {
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0x9276634405A20B85);
+            return ref _Handle.AsRef<float>(_StartOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndOffset;
+    private static nint? _EndOffset;
 
-  public ref float End {
-    get {
-      if (_EndOffset == null) {
-        _EndOffset = Schema.GetOffset(0x927663449616A27C);
-      }
-      return ref _Handle.AsRef<float>(_EndOffset!.Value);
+    public ref float End {
+        get {
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0x927663449616A27C);
+            return ref _Handle.AsRef<float>(_EndOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopOffset;
+    private static nint? _LoopOffset;
 
-  public ref float Loop {
-    get {
-      if (_LoopOffset == null) {
-        _LoopOffset = Schema.GetOffset(0x92766344DE666C85);
-      }
-      return ref _Handle.AsRef<float>(_LoopOffset!.Value);
+    public ref float Loop {
+        get {
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0x92766344DE666C85);
+            return ref _Handle.AsRef<float>(_LoopOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopingOffset;
+    private static nint? _LoopingOffset;
 
-  public ref bool Looping {
-    get {
-      if (_LoopingOffset == null) {
-        _LoopingOffset = Schema.GetOffset(0x9276634425449B0D);
-      }
-      return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
+    public ref bool Looping {
+        get {
+            _LoopingOffset = _LoopingOffset ?? Schema.GetOffset(0x9276634425449B0D);
+            return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
+        }
     }
-  }
 
 
 }

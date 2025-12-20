@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayerPing : CBaseEntity, ISchemaClass<CPlayerPing> {
+public partial interface CPlayerPing : CBaseEntity, ISchemaClass<CPlayerPing>
+{
+    static CPlayerPing ISchemaClass<CPlayerPing>.From(nint handle) => new CPlayerPingImpl(handle);
+    static int ISchemaClass<CPlayerPing>.Size => 1304;
+    static string? ISchemaClass<CPlayerPing>.ClassName => "info_player_ping";
 
-  static CPlayerPing ISchemaClass<CPlayerPing>.From(nint handle) => new CPlayerPingImpl(handle);
-  static int ISchemaClass<CPlayerPing>.Size => 1304;
-  static string? ISchemaClass<CPlayerPing>.ClassName => "info_player_ping";
 
-  
-  public ref CHandle<CCSPlayerPawn> Player { get; }
-  
-  public ref CHandle<CBaseEntity> PingedEntity { get; }
-  
-  public ref int Type { get; }
-  
-  public ref bool Urgent { get; }
-  
-  public string PlaceName { get; set; }
+    public ref CHandle<CCSPlayerPawn> Player { get; }
 
-  public void PlayerUpdated();
-  public void PingedEntityUpdated();
-  public void TypeUpdated();
-  public void UrgentUpdated();
-  public void PlaceNameUpdated();
+    public ref CHandle<CBaseEntity> PingedEntity { get; }
+
+    public ref int Type { get; }
+
+    public ref bool Urgent { get; }
+
+    public string PlaceName { get; set; }
+
+    public void PlayerUpdated();
+    public void PingedEntityUpdated();
+    public void TypeUpdated();
+    public void UrgentUpdated();
+    public void PlaceNameUpdated();
 }

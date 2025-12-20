@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_CollideWithParentParticlesImpl : CParticleFunctionConstraintImpl, C_OP_CollideWithParentParticles {
+internal partial class C_OP_CollideWithParentParticlesImpl : CParticleFunctionConstraintImpl, C_OP_CollideWithParentParticles
+{
+    public C_OP_CollideWithParentParticlesImpl(nint handle) : base(handle) { }
 
-  public C_OP_CollideWithParentParticlesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParentRadiusScaleOffset;
 
-  private static nint? _ParentRadiusScaleOffset;
-
-  public CPerParticleFloatInput ParentRadiusScale {
-    get {
-      if (_ParentRadiusScaleOffset == null) {
-        _ParentRadiusScaleOffset = Schema.GetOffset(0x73030DD0CD77EF69);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ParentRadiusScaleOffset!.Value);
+    public CPerParticleFloatInput ParentRadiusScale {
+        get {
+            _ParentRadiusScaleOffset = _ParentRadiusScaleOffset ?? Schema.GetOffset(0x73030DD0CD77EF69);
+            return new CPerParticleFloatInputImpl(_Handle + _ParentRadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleOffset;
+    private static nint? _RadiusScaleOffset;
 
-  public CPerParticleFloatInput RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0x73030DD0A7A20159);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+    public CPerParticleFloatInput RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x73030DD0A7A20159);
+            return new CPerParticleFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

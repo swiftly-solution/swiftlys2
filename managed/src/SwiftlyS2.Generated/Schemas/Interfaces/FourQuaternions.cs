@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FourQuaternions : ISchemaClass<FourQuaternions> {
+public partial interface FourQuaternions : ISchemaClass<FourQuaternions>
+{
+    static FourQuaternions ISchemaClass<FourQuaternions>.From(nint handle) => new FourQuaternionsImpl(handle);
+    static int ISchemaClass<FourQuaternions>.Size => 64;
+    static string? ISchemaClass<FourQuaternions>.ClassName => null;
 
-  static FourQuaternions ISchemaClass<FourQuaternions>.From(nint handle) => new FourQuaternionsImpl(handle);
-  static int ISchemaClass<FourQuaternions>.Size => 64;
-  static string? ISchemaClass<FourQuaternions>.ClassName => null;
 
-  
-  public ref fltx4 X { get; }
-  
-  public ref fltx4 Y { get; }
-  
-  public ref fltx4 Z { get; }
-  
-  public ref fltx4 W { get; }
+    public ref fltx4 X { get; }
+
+    public ref fltx4 Y { get; }
+
+    public ref fltx4 Z { get; }
+
+    public ref fltx4 W { get; }
 
 
 }

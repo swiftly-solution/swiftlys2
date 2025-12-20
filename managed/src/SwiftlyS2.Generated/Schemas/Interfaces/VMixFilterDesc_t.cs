@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixFilterDesc_t : ISchemaClass<VMixFilterDesc_t> {
+public partial interface VMixFilterDesc_t : ISchemaClass<VMixFilterDesc_t>
+{
+    static VMixFilterDesc_t ISchemaClass<VMixFilterDesc_t>.From(nint handle) => new VMixFilterDesc_tImpl(handle);
+    static int ISchemaClass<VMixFilterDesc_t>.Size => 16;
+    static string? ISchemaClass<VMixFilterDesc_t>.ClassName => null;
 
-  static VMixFilterDesc_t ISchemaClass<VMixFilterDesc_t>.From(nint handle) => new VMixFilterDesc_tImpl(handle);
-  static int ISchemaClass<VMixFilterDesc_t>.Size => 16;
-  static string? ISchemaClass<VMixFilterDesc_t>.ClassName => null;
 
-  
-  public ref VMixFilterType_t FilterType { get; }
-  
-  public ref VMixFilterSlope_t FilterSlope { get; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref float FldbGain { get; }
-  
-  public ref float CutoffFreq { get; }
-  
-  public ref float Q { get; }
+    public ref VMixFilterType_t FilterType { get; }
+
+    public ref VMixFilterSlope_t FilterSlope { get; }
+
+    public ref bool Enabled { get; }
+
+    public ref float FldbGain { get; }
+
+    public ref float CutoffFreq { get; }
+
+    public ref float Q { get; }
 
 
 }

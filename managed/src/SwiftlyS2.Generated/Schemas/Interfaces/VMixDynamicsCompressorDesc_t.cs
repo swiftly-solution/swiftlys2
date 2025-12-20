@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixDynamicsCompressorDesc_t : ISchemaClass<VMixDynamicsCompressorDesc_t> {
+public partial interface VMixDynamicsCompressorDesc_t : ISchemaClass<VMixDynamicsCompressorDesc_t>
+{
+    static VMixDynamicsCompressorDesc_t ISchemaClass<VMixDynamicsCompressorDesc_t>.From(nint handle) => new VMixDynamicsCompressorDesc_tImpl(handle);
+    static int ISchemaClass<VMixDynamicsCompressorDesc_t>.Size => 36;
+    static string? ISchemaClass<VMixDynamicsCompressorDesc_t>.ClassName => null;
 
-  static VMixDynamicsCompressorDesc_t ISchemaClass<VMixDynamicsCompressorDesc_t>.From(nint handle) => new VMixDynamicsCompressorDesc_tImpl(handle);
-  static int ISchemaClass<VMixDynamicsCompressorDesc_t>.Size => 36;
-  static string? ISchemaClass<VMixDynamicsCompressorDesc_t>.ClassName => null;
 
-  
-  public ref float FldbOutputGain { get; }
-  
-  public ref float FldbCompressionThreshold { get; }
-  
-  public ref float FldbKneeWidth { get; }
-  
-  public ref float CompressionRatio { get; }
-  
-  public ref float AttackTimeMS { get; }
-  
-  public ref float ReleaseTimeMS { get; }
-  
-  public ref float RMSTimeMS { get; }
-  
-  public ref float WetMix { get; }
-  
-  public ref bool PeakMode { get; }
+    public ref float FldbOutputGain { get; }
+
+    public ref float FldbCompressionThreshold { get; }
+
+    public ref float FldbKneeWidth { get; }
+
+    public ref float CompressionRatio { get; }
+
+    public ref float AttackTimeMS { get; }
+
+    public ref float ReleaseTimeMS { get; }
+
+    public ref float RMSTimeMS { get; }
+
+    public ref float WetMix { get; }
+
+    public ref bool PeakMode { get; }
 
 
 }

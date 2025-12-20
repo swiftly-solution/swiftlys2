@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixModDelayDesc_t : ISchemaClass<VMixModDelayDesc_t> {
+public partial interface VMixModDelayDesc_t : ISchemaClass<VMixModDelayDesc_t>
+{
+    static VMixModDelayDesc_t ISchemaClass<VMixModDelayDesc_t>.From(nint handle) => new VMixModDelayDesc_tImpl(handle);
+    static int ISchemaClass<VMixModDelayDesc_t>.Size => 48;
+    static string? ISchemaClass<VMixModDelayDesc_t>.ClassName => null;
 
-  static VMixModDelayDesc_t ISchemaClass<VMixModDelayDesc_t>.From(nint handle) => new VMixModDelayDesc_tImpl(handle);
-  static int ISchemaClass<VMixModDelayDesc_t>.Size => 48;
-  static string? ISchemaClass<VMixModDelayDesc_t>.ClassName => null;
 
-  
-  public VMixFilterDesc_t FeedbackFilter { get; }
-  
-  public ref bool PhaseInvert { get; }
-  
-  public ref float GlideTime { get; }
-  
-  public ref float Delay { get; }
-  
-  public ref float OutputGain { get; }
-  
-  public ref float FeedbackGain { get; }
-  
-  public ref float ModRate { get; }
-  
-  public ref float ModDepth { get; }
-  
-  public ref bool ApplyAntialiasing { get; }
+    public VMixFilterDesc_t FeedbackFilter { get; }
+
+    public ref bool PhaseInvert { get; }
+
+    public ref float GlideTime { get; }
+
+    public ref float Delay { get; }
+
+    public ref float OutputGain { get; }
+
+    public ref float FeedbackGain { get; }
+
+    public ref float ModRate { get; }
+
+    public ref float ModDepth { get; }
+
+    public ref bool ApplyAntialiasing { get; }
 
 
 }

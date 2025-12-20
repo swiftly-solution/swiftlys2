@@ -6,29 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvWindImpl : CBaseEntityImpl, CEnvWind {
+internal partial class CEnvWindImpl : CBaseEntityImpl, CEnvWind
+{
+    public CEnvWindImpl(nint handle) : base(handle) { }
 
-  public CEnvWindImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EnvWindSharedOffset;
 
-  private static nint? _EnvWindSharedOffset;
-
-  public CEnvWindShared EnvWindShared {
-    get {
-      if (_EnvWindSharedOffset == null) {
-        _EnvWindSharedOffset = Schema.GetOffset(0x39465FB775DDCB0F);
-      }
-      return new CEnvWindSharedImpl(_Handle + _EnvWindSharedOffset!.Value);
+    public CEnvWindShared EnvWindShared {
+        get {
+            _EnvWindSharedOffset = _EnvWindSharedOffset ?? Schema.GetOffset(0x39465FB775DDCB0F);
+            return new CEnvWindSharedImpl(_Handle + _EnvWindSharedOffset!.Value);
+        }
     }
-  }
 
-  public void EnvWindSharedUpdated() {
-    Schema.Update(_Handle, 0x39465FB775DDCB0F);
-  }
+    public void EnvWindSharedUpdated() => Schema.Update(_Handle, 0x39465FB775DDCB0F);
 }

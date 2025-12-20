@@ -6,194 +6,145 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayerPawnBaseImpl : CBasePlayerPawnImpl, CCSPlayerPawnBase {
+internal partial class CCSPlayerPawnBaseImpl : CBasePlayerPawnImpl, CCSPlayerPawnBase
+{
+    public CCSPlayerPawnBaseImpl(nint handle) : base(handle) { }
 
-  public CCSPlayerPawnBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CTouchExpansionComponentOffset;
 
-  private static nint? _CTouchExpansionComponentOffset;
-
-  public CTouchExpansionComponent CTouchExpansionComponent {
-    get {
-      if (_CTouchExpansionComponentOffset == null) {
-        _CTouchExpansionComponentOffset = Schema.GetOffset(0xD8F889768A159531);
-      }
-      return new CTouchExpansionComponentImpl(_Handle + _CTouchExpansionComponentOffset!.Value);
+    public CTouchExpansionComponent CTouchExpansionComponent {
+        get {
+            _CTouchExpansionComponentOffset = _CTouchExpansionComponentOffset ?? Schema.GetOffset(0xD8F889768A159531);
+            return new CTouchExpansionComponentImpl(_Handle + _CTouchExpansionComponentOffset!.Value);
+        }
     }
-  }
-  private static nint? _PingServicesOffset;
+    private static nint? _PingServicesOffset;
 
-  public CCSPlayer_PingServices? PingServices {
-    get {
-      if (_PingServicesOffset == null) {
-        _PingServicesOffset = Schema.GetOffset(0xD8F889767A1487DF);
-      }
-      var ptr = _Handle.Read<nint>(_PingServicesOffset!.Value);
-      return ptr.IsValidPtr() ? new CCSPlayer_PingServicesImpl(ptr) : null;
+    public CCSPlayer_PingServices? PingServices {
+        get {
+            _PingServicesOffset = _PingServicesOffset ?? Schema.GetOffset(0xD8F889767A1487DF);
+            var ptr = _Handle.Read<nint>(_PingServicesOffset!.Value);
+            return ptr.IsValidPtr() ? new CCSPlayer_PingServicesImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _BlindUntilTimeOffset;
+    private static nint? _BlindUntilTimeOffset;
 
-  public GameTime_t BlindUntilTime {
-    get {
-      if (_BlindUntilTimeOffset == null) {
-        _BlindUntilTimeOffset = Schema.GetOffset(0xD8F889765869ECC5);
-      }
-      return new GameTime_tImpl(_Handle + _BlindUntilTimeOffset!.Value);
+    public GameTime_t BlindUntilTime {
+        get {
+            _BlindUntilTimeOffset = _BlindUntilTimeOffset ?? Schema.GetOffset(0xD8F889765869ECC5);
+            return new GameTime_tImpl(_Handle + _BlindUntilTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlindStartTimeOffset;
+    private static nint? _BlindStartTimeOffset;
 
-  public GameTime_t BlindStartTime {
-    get {
-      if (_BlindStartTimeOffset == null) {
-        _BlindStartTimeOffset = Schema.GetOffset(0xD8F88976540D0351);
-      }
-      return new GameTime_tImpl(_Handle + _BlindStartTimeOffset!.Value);
+    public GameTime_t BlindStartTime {
+        get {
+            _BlindStartTimeOffset = _BlindStartTimeOffset ?? Schema.GetOffset(0xD8F88976540D0351);
+            return new GameTime_tImpl(_Handle + _BlindStartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayerStateOffset;
+    private static nint? _PlayerStateOffset;
 
-  public ref CSPlayerState PlayerState {
-    get {
-      if (_PlayerStateOffset == null) {
-        _PlayerStateOffset = Schema.GetOffset(0xD8F889769F641BBA);
-      }
-      return ref _Handle.AsRef<CSPlayerState>(_PlayerStateOffset!.Value);
+    public ref CSPlayerState PlayerState {
+        get {
+            _PlayerStateOffset = _PlayerStateOffset ?? Schema.GetOffset(0xD8F889769F641BBA);
+            return ref _Handle.AsRef<CSPlayerState>(_PlayerStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _RespawningOffset;
+    private static nint? _RespawningOffset;
 
-  public ref bool Respawning {
-    get {
-      if (_RespawningOffset == null) {
-        _RespawningOffset = Schema.GetOffset(0xD8F889769E9D7B99);
-      }
-      return ref _Handle.AsRef<bool>(_RespawningOffset!.Value);
+    public ref bool Respawning {
+        get {
+            _RespawningOffset = _RespawningOffset ?? Schema.GetOffset(0xD8F889769E9D7B99);
+            return ref _Handle.AsRef<bool>(_RespawningOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasMovedSinceSpawnOffset;
+    private static nint? _HasMovedSinceSpawnOffset;
 
-  public ref bool HasMovedSinceSpawn {
-    get {
-      if (_HasMovedSinceSpawnOffset == null) {
-        _HasMovedSinceSpawnOffset = Schema.GetOffset(0xD8F889763D3B1C13);
-      }
-      return ref _Handle.AsRef<bool>(_HasMovedSinceSpawnOffset!.Value);
+    public ref bool HasMovedSinceSpawn {
+        get {
+            _HasMovedSinceSpawnOffset = _HasMovedSinceSpawnOffset ?? Schema.GetOffset(0xD8F889763D3B1C13);
+            return ref _Handle.AsRef<bool>(_HasMovedSinceSpawnOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumSpawnsOffset;
+    private static nint? _NumSpawnsOffset;
 
-  public ref int NumSpawns {
-    get {
-      if (_NumSpawnsOffset == null) {
-        _NumSpawnsOffset = Schema.GetOffset(0xD8F8897605DCE1E8);
-      }
-      return ref _Handle.AsRef<int>(_NumSpawnsOffset!.Value);
+    public ref int NumSpawns {
+        get {
+            _NumSpawnsOffset = _NumSpawnsOffset ?? Schema.GetOffset(0xD8F8897605DCE1E8);
+            return ref _Handle.AsRef<int>(_NumSpawnsOffset!.Value);
+        }
     }
-  }
-  private static nint? _IdleTimeSinceLastActionOffset;
+    private static nint? _IdleTimeSinceLastActionOffset;
 
-  public ref float IdleTimeSinceLastAction {
-    get {
-      if (_IdleTimeSinceLastActionOffset == null) {
-        _IdleTimeSinceLastActionOffset = Schema.GetOffset(0xD8F8897672DE4B20);
-      }
-      return ref _Handle.AsRef<float>(_IdleTimeSinceLastActionOffset!.Value);
+    public ref float IdleTimeSinceLastAction {
+        get {
+            _IdleTimeSinceLastActionOffset = _IdleTimeSinceLastActionOffset ?? Schema.GetOffset(0xD8F8897672DE4B20);
+            return ref _Handle.AsRef<float>(_IdleTimeSinceLastActionOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextRadarUpdateTimeOffset;
+    private static nint? _NextRadarUpdateTimeOffset;
 
-  public ref float NextRadarUpdateTime {
-    get {
-      if (_NextRadarUpdateTimeOffset == null) {
-        _NextRadarUpdateTimeOffset = Schema.GetOffset(0xD8F889760D6C11B8);
-      }
-      return ref _Handle.AsRef<float>(_NextRadarUpdateTimeOffset!.Value);
+    public ref float NextRadarUpdateTime {
+        get {
+            _NextRadarUpdateTimeOffset = _NextRadarUpdateTimeOffset ?? Schema.GetOffset(0xD8F889760D6C11B8);
+            return ref _Handle.AsRef<float>(_NextRadarUpdateTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlashDurationOffset;
+    private static nint? _FlashDurationOffset;
 
-  public ref float FlashDuration {
-    get {
-      if (_FlashDurationOffset == null) {
-        _FlashDurationOffset = Schema.GetOffset(0xD8F88976E5A995FB);
-      }
-      return ref _Handle.AsRef<float>(_FlashDurationOffset!.Value);
+    public ref float FlashDuration {
+        get {
+            _FlashDurationOffset = _FlashDurationOffset ?? Schema.GetOffset(0xD8F88976E5A995FB);
+            return ref _Handle.AsRef<float>(_FlashDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlashMaxAlphaOffset;
+    private static nint? _FlashMaxAlphaOffset;
 
-  public ref float FlashMaxAlpha {
-    get {
-      if (_FlashMaxAlphaOffset == null) {
-        _FlashMaxAlphaOffset = Schema.GetOffset(0xD8F889763DCF0D29);
-      }
-      return ref _Handle.AsRef<float>(_FlashMaxAlphaOffset!.Value);
+    public ref float FlashMaxAlpha {
+        get {
+            _FlashMaxAlphaOffset = _FlashMaxAlphaOffset ?? Schema.GetOffset(0xD8F889763DCF0D29);
+            return ref _Handle.AsRef<float>(_FlashMaxAlphaOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProgressBarStartTimeOffset;
+    private static nint? _ProgressBarStartTimeOffset;
 
-  public ref float ProgressBarStartTime {
-    get {
-      if (_ProgressBarStartTimeOffset == null) {
-        _ProgressBarStartTimeOffset = Schema.GetOffset(0xD8F889768148DE8E);
-      }
-      return ref _Handle.AsRef<float>(_ProgressBarStartTimeOffset!.Value);
+    public ref float ProgressBarStartTime {
+        get {
+            _ProgressBarStartTimeOffset = _ProgressBarStartTimeOffset ?? Schema.GetOffset(0xD8F889768148DE8E);
+            return ref _Handle.AsRef<float>(_ProgressBarStartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProgressBarDurationOffset;
+    private static nint? _ProgressBarDurationOffset;
 
-  public ref int ProgressBarDuration {
-    get {
-      if (_ProgressBarDurationOffset == null) {
-        _ProgressBarDurationOffset = Schema.GetOffset(0xD8F88976BCF340B0);
-      }
-      return ref _Handle.AsRef<int>(_ProgressBarDurationOffset!.Value);
+    public ref int ProgressBarDuration {
+        get {
+            _ProgressBarDurationOffset = _ProgressBarDurationOffset ?? Schema.GetOffset(0xD8F88976BCF340B0);
+            return ref _Handle.AsRef<int>(_ProgressBarDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginalControllerOffset;
+    private static nint? _OriginalControllerOffset;
 
-  public ref CHandle<CCSPlayerController> OriginalController {
-    get {
-      if (_OriginalControllerOffset == null) {
-        _OriginalControllerOffset = Schema.GetOffset(0xD8F88976511FAE4C);
-      }
-      return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_OriginalControllerOffset!.Value);
+    public ref CHandle<CCSPlayerController> OriginalController {
+        get {
+            _OriginalControllerOffset = _OriginalControllerOffset ?? Schema.GetOffset(0xD8F88976511FAE4C);
+            return ref _Handle.AsRef<CHandle<CCSPlayerController>>(_OriginalControllerOffset!.Value);
+        }
     }
-  }
 
-  public void CTouchExpansionComponentUpdated() {
-    Schema.Update(_Handle, 0xD8F889768A159531);
-  }
-  public void PingServicesUpdated() {
-    Schema.Update(_Handle, 0xD8F889767A1487DF);
-  }
-  public void PlayerStateUpdated() {
-    Schema.Update(_Handle, 0xD8F889769F641BBA);
-  }
-  public void HasMovedSinceSpawnUpdated() {
-    Schema.Update(_Handle, 0xD8F889763D3B1C13);
-  }
-  public void FlashDurationUpdated() {
-    Schema.Update(_Handle, 0xD8F88976E5A995FB);
-  }
-  public void FlashMaxAlphaUpdated() {
-    Schema.Update(_Handle, 0xD8F889763DCF0D29);
-  }
-  public void ProgressBarStartTimeUpdated() {
-    Schema.Update(_Handle, 0xD8F889768148DE8E);
-  }
-  public void ProgressBarDurationUpdated() {
-    Schema.Update(_Handle, 0xD8F88976BCF340B0);
-  }
-  public void OriginalControllerUpdated() {
-    Schema.Update(_Handle, 0xD8F88976511FAE4C);
-  }
+    public void CTouchExpansionComponentUpdated() => Schema.Update(_Handle, 0xD8F889768A159531);
+    public void PingServicesUpdated() => Schema.Update(_Handle, 0xD8F889767A1487DF);
+    public void PlayerStateUpdated() => Schema.Update(_Handle, 0xD8F889769F641BBA);
+    public void HasMovedSinceSpawnUpdated() => Schema.Update(_Handle, 0xD8F889763D3B1C13);
+    public void FlashDurationUpdated() => Schema.Update(_Handle, 0xD8F88976E5A995FB);
+    public void FlashMaxAlphaUpdated() => Schema.Update(_Handle, 0xD8F889763DCF0D29);
+    public void ProgressBarStartTimeUpdated() => Schema.Update(_Handle, 0xD8F889768148DE8E);
+    public void ProgressBarDurationUpdated() => Schema.Update(_Handle, 0xD8F88976BCF340B0);
+    public void OriginalControllerUpdated() => Schema.Update(_Handle, 0xD8F88976511FAE4C);
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimFoot : ISchemaClass<CAnimFoot> {
+public partial interface CAnimFoot : ISchemaClass<CAnimFoot>
+{
+    static CAnimFoot ISchemaClass<CAnimFoot>.From(nint handle) => new CAnimFootImpl(handle);
+    static int ISchemaClass<CAnimFoot>.Size => 40;
+    static string? ISchemaClass<CAnimFoot>.ClassName => null;
 
-  static CAnimFoot ISchemaClass<CAnimFoot>.From(nint handle) => new CAnimFootImpl(handle);
-  static int ISchemaClass<CAnimFoot>.Size => 40;
-  static string? ISchemaClass<CAnimFoot>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref Vector BallOffset { get; }
-  
-  public ref Vector HeelOffset { get; }
-  
-  public ref int AnkleBoneIndex { get; }
-  
-  public ref int ToeBoneIndex { get; }
+    public string Name { get; set; }
+
+    public ref Vector BallOffset { get; }
+
+    public ref Vector HeelOffset { get; }
+
+    public ref int AnkleBoneIndex { get; }
+
+    public ref int ToeBoneIndex { get; }
 
 
 }

@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeAntiTunnelProbe_tImpl : SchemaClass, FeAntiTunnelProbe_t {
+internal partial class FeAntiTunnelProbe_tImpl : SchemaClass, FeAntiTunnelProbe_t
+{
+    public FeAntiTunnelProbe_tImpl(nint handle) : base(handle) { }
 
-  public FeAntiTunnelProbe_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WeightOffset;
 
-  private static nint? _WeightOffset;
-
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0xBC54CE0BCFFC66CB);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xBC54CE0BCFFC66CB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0xBC54CE0BB8D52E48);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xBC54CE0BB8D52E48);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProbeNodeOffset;
+    private static nint? _ProbeNodeOffset;
 
-  public ref ushort ProbeNode {
-    get {
-      if (_ProbeNodeOffset == null) {
-        _ProbeNodeOffset = Schema.GetOffset(0xBC54CE0B5F3CB12D);
-      }
-      return ref _Handle.AsRef<ushort>(_ProbeNodeOffset!.Value);
+    public ref ushort ProbeNode {
+        get {
+            _ProbeNodeOffset = _ProbeNodeOffset ?? Schema.GetOffset(0xBC54CE0B5F3CB12D);
+            return ref _Handle.AsRef<ushort>(_ProbeNodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _CountOffset;
+    private static nint? _CountOffset;
 
-  public ref ushort Count {
-    get {
-      if (_CountOffset == null) {
-        _CountOffset = Schema.GetOffset(0xBC54CE0B67983E28);
-      }
-      return ref _Handle.AsRef<ushort>(_CountOffset!.Value);
+    public ref ushort Count {
+        get {
+            _CountOffset = _CountOffset ?? Schema.GetOffset(0xBC54CE0B67983E28);
+            return ref _Handle.AsRef<ushort>(_CountOffset!.Value);
+        }
     }
-  }
-  private static nint? _BeginOffset;
+    private static nint? _BeginOffset;
 
-  public ref uint Begin {
-    get {
-      if (_BeginOffset == null) {
-        _BeginOffset = Schema.GetOffset(0xBC54CE0BC630D75A);
-      }
-      return ref _Handle.AsRef<uint>(_BeginOffset!.Value);
+    public ref uint Begin {
+        get {
+            _BeginOffset = _BeginOffset ?? Schema.GetOffset(0xBC54CE0BC630D75A);
+            return ref _Handle.AsRef<uint>(_BeginOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActivationDistanceOffset;
+    private static nint? _ActivationDistanceOffset;
 
-  public ref float ActivationDistance {
-    get {
-      if (_ActivationDistanceOffset == null) {
-        _ActivationDistanceOffset = Schema.GetOffset(0xBC54CE0BEAB1A998);
-      }
-      return ref _Handle.AsRef<float>(_ActivationDistanceOffset!.Value);
+    public ref float ActivationDistance {
+        get {
+            _ActivationDistanceOffset = _ActivationDistanceOffset ?? Schema.GetOffset(0xBC54CE0BEAB1A998);
+            return ref _Handle.AsRef<float>(_ActivationDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurvatureRadiusOffset;
+    private static nint? _CurvatureRadiusOffset;
 
-  public ref float CurvatureRadius {
-    get {
-      if (_CurvatureRadiusOffset == null) {
-        _CurvatureRadiusOffset = Schema.GetOffset(0xBC54CE0BADAE92BE);
-      }
-      return ref _Handle.AsRef<float>(_CurvatureRadiusOffset!.Value);
+    public ref float CurvatureRadius {
+        get {
+            _CurvatureRadiusOffset = _CurvatureRadiusOffset ?? Schema.GetOffset(0xBC54CE0BADAE92BE);
+            return ref _Handle.AsRef<float>(_CurvatureRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _BiasOffset;
+    private static nint? _BiasOffset;
 
-  public ref float Bias {
-    get {
-      if (_BiasOffset == null) {
-        _BiasOffset = Schema.GetOffset(0xBC54CE0B30667CD6);
-      }
-      return ref _Handle.AsRef<float>(_BiasOffset!.Value);
+    public ref float Bias {
+        get {
+            _BiasOffset = _BiasOffset ?? Schema.GetOffset(0xBC54CE0B30667CD6);
+            return ref _Handle.AsRef<float>(_BiasOffset!.Value);
+        }
     }
-  }
 
 
 }

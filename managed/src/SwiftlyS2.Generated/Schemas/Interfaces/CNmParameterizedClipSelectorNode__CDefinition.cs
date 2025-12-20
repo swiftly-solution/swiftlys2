@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmParameterizedClipSelectorNode__CDefinition : CNmClipReferenceNode__CDefinition, ISchemaClass<CNmParameterizedClipSelectorNode__CDefinition> {
+public partial interface CNmParameterizedClipSelectorNode__CDefinition : CNmClipReferenceNode__CDefinition, ISchemaClass<CNmParameterizedClipSelectorNode__CDefinition>
+{
+    static CNmParameterizedClipSelectorNode__CDefinition ISchemaClass<CNmParameterizedClipSelectorNode__CDefinition>.From(nint handle) => new CNmParameterizedClipSelectorNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmParameterizedClipSelectorNode__CDefinition>.Size => 64;
+    static string? ISchemaClass<CNmParameterizedClipSelectorNode__CDefinition>.ClassName => null;
 
-  static CNmParameterizedClipSelectorNode__CDefinition ISchemaClass<CNmParameterizedClipSelectorNode__CDefinition>.From(nint handle) => new CNmParameterizedClipSelectorNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmParameterizedClipSelectorNode__CDefinition>.Size => 64;
-  static string? ISchemaClass<CNmParameterizedClipSelectorNode__CDefinition>.ClassName => null;
 
-  
-  // CUtlLeanVectorFixedGrowable< int16, 5 >
-  public SchemaUntypedField OptionNodeIndices { get; }
-  
-  // CUtlLeanVectorFixedGrowable< uint8, 5 >
-  public SchemaUntypedField OptionWeights { get; }
-  
-  public ref short ParameterNodeIdx { get; }
-  
-  public ref bool IgnoreInvalidOptions { get; }
-  
-  public ref bool HasWeightsSet { get; }
+    // CUtlLeanVectorFixedGrowable< int16, 5 >
+    public SchemaUntypedField OptionNodeIndices { get; }
+
+    // CUtlLeanVectorFixedGrowable< uint8, 5 >
+    public SchemaUntypedField OptionWeights { get; }
+
+    public ref short ParameterNodeIdx { get; }
+
+    public ref bool IgnoreInvalidOptions { get; }
+
+    public ref bool HasWeightsSet { get; }
 
 
 }

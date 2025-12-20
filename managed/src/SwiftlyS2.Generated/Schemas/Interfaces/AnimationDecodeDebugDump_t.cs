@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AnimationDecodeDebugDump_t : ISchemaClass<AnimationDecodeDebugDump_t> {
+public partial interface AnimationDecodeDebugDump_t : ISchemaClass<AnimationDecodeDebugDump_t>
+{
+    static AnimationDecodeDebugDump_t ISchemaClass<AnimationDecodeDebugDump_t>.From(nint handle) => new AnimationDecodeDebugDump_tImpl(handle);
+    static int ISchemaClass<AnimationDecodeDebugDump_t>.Size => 32;
+    static string? ISchemaClass<AnimationDecodeDebugDump_t>.ClassName => null;
 
-  static AnimationDecodeDebugDump_t ISchemaClass<AnimationDecodeDebugDump_t>.From(nint handle) => new AnimationDecodeDebugDump_tImpl(handle);
-  static int ISchemaClass<AnimationDecodeDebugDump_t>.Size => 32;
-  static string? ISchemaClass<AnimationDecodeDebugDump_t>.ClassName => null;
 
-  
-  public ref AnimationProcessingType_t ProcessingType { get; }
-  
-  public ref CUtlVector<AnimationDecodeDebugDumpElement_t> Elems { get; }
+    public ref AnimationProcessingType_t ProcessingType { get; }
+
+    public ref CUtlVector<AnimationDecodeDebugDumpElement_t> Elems { get; }
 
 
 }

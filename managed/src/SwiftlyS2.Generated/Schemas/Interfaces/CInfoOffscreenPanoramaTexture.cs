@@ -8,39 +8,39 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoOffscreenPanoramaTexture : CPointEntity, ISchemaClass<CInfoOffscreenPanoramaTexture> {
+public partial interface CInfoOffscreenPanoramaTexture : CPointEntity, ISchemaClass<CInfoOffscreenPanoramaTexture>
+{
+    static CInfoOffscreenPanoramaTexture ISchemaClass<CInfoOffscreenPanoramaTexture>.From(nint handle) => new CInfoOffscreenPanoramaTextureImpl(handle);
+    static int ISchemaClass<CInfoOffscreenPanoramaTexture>.Size => 1384;
+    static string? ISchemaClass<CInfoOffscreenPanoramaTexture>.ClassName => "info_offscreen_panorama_texture";
 
-  static CInfoOffscreenPanoramaTexture ISchemaClass<CInfoOffscreenPanoramaTexture>.From(nint handle) => new CInfoOffscreenPanoramaTextureImpl(handle);
-  static int ISchemaClass<CInfoOffscreenPanoramaTexture>.Size => 1384;
-  static string? ISchemaClass<CInfoOffscreenPanoramaTexture>.ClassName => "info_offscreen_panorama_texture";
 
-  
-  public ref bool Disabled { get; }
-  
-  public ref int ResolutionX { get; }
-  
-  public ref int ResolutionY { get; }
-  
-  public string LayoutFileName { get; set; }
-  
-  public string RenderAttrName { get; set; }
-  
-  public ref CUtlVector<CHandle<CBaseModelEntity>> TargetEntities { get; }
-  
-  public ref int TargetChangeCount { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> CSSClasses { get; }
-  
-  public string TargetsName { get; set; }
-  
-  public ref CUtlVector<CHandle<CBaseModelEntity>> AdditionalTargetEntities { get; }
+    public ref bool Disabled { get; }
 
-  public void DisabledUpdated();
-  public void ResolutionXUpdated();
-  public void ResolutionYUpdated();
-  public void LayoutFileNameUpdated();
-  public void RenderAttrNameUpdated();
-  public void TargetEntitiesUpdated();
-  public void TargetChangeCountUpdated();
-  public void CSSClassesUpdated();
+    public ref int ResolutionX { get; }
+
+    public ref int ResolutionY { get; }
+
+    public string LayoutFileName { get; set; }
+
+    public string RenderAttrName { get; set; }
+
+    public ref CUtlVector<CHandle<CBaseModelEntity>> TargetEntities { get; }
+
+    public ref int TargetChangeCount { get; }
+
+    public ref CUtlVector<SchemaUntypedField> CSSClasses { get; }
+
+    public string TargetsName { get; set; }
+
+    public ref CUtlVector<CHandle<CBaseModelEntity>> AdditionalTargetEntities { get; }
+
+    public void DisabledUpdated();
+    public void ResolutionXUpdated();
+    public void ResolutionYUpdated();
+    public void LayoutFileNameUpdated();
+    public void RenderAttrNameUpdated();
+    public void TargetEntitiesUpdated();
+    public void TargetChangeCountUpdated();
+    public void CSSClassesUpdated();
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvParticleGlow : CParticleSystem, ISchemaClass<CEnvParticleGlow> {
+public partial interface CEnvParticleGlow : CParticleSystem, ISchemaClass<CEnvParticleGlow>
+{
+    static CEnvParticleGlow ISchemaClass<CEnvParticleGlow>.From(nint handle) => new CEnvParticleGlowImpl(handle);
+    static int ISchemaClass<CEnvParticleGlow>.Size => 3432;
+    static string? ISchemaClass<CEnvParticleGlow>.ClassName => "env_particle_glow";
 
-  static CEnvParticleGlow ISchemaClass<CEnvParticleGlow>.From(nint handle) => new CEnvParticleGlowImpl(handle);
-  static int ISchemaClass<CEnvParticleGlow>.Size => 3432;
-  static string? ISchemaClass<CEnvParticleGlow>.ClassName => "env_particle_glow";
 
-  
-  public ref float AlphaScale { get; }
-  
-  public ref float RadiusScale { get; }
-  
-  public ref float SelfIllumScale { get; }
-  
-  public ref Color ColorTint { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureOverride { get; }
+    public ref float AlphaScale { get; }
 
-  public void AlphaScaleUpdated();
-  public void RadiusScaleUpdated();
-  public void SelfIllumScaleUpdated();
-  public void ColorTintUpdated();
-  public void TextureOverrideUpdated();
+    public ref float RadiusScale { get; }
+
+    public ref float SelfIllumScale { get; }
+
+    public ref Color ColorTint { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureOverride { get; }
+
+    public void AlphaScaleUpdated();
+    public void RadiusScaleUpdated();
+    public void SelfIllumScaleUpdated();
+    public void ColorTintUpdated();
+    public void TextureOverrideUpdated();
 }

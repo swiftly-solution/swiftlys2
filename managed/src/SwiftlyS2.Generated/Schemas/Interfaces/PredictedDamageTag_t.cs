@@ -8,23 +8,23 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PredictedDamageTag_t : ISchemaClass<PredictedDamageTag_t> {
+public partial interface PredictedDamageTag_t : ISchemaClass<PredictedDamageTag_t>
+{
+    static PredictedDamageTag_t ISchemaClass<PredictedDamageTag_t>.From(nint handle) => new PredictedDamageTag_tImpl(handle);
+    static int ISchemaClass<PredictedDamageTag_t>.Size => 64;
+    static string? ISchemaClass<PredictedDamageTag_t>.ClassName => null;
 
-  static PredictedDamageTag_t ISchemaClass<PredictedDamageTag_t>.From(nint handle) => new PredictedDamageTag_tImpl(handle);
-  static int ISchemaClass<PredictedDamageTag_t>.Size => 64;
-  static string? ISchemaClass<PredictedDamageTag_t>.ClassName => null;
 
-  
-  public GameTick_t TagTick { get; }
-  
-  public ref float FlinchModSmall { get; }
-  
-  public ref float FlinchModLarge { get; }
-  
-  public ref float FriendlyFireDamageReductionRatio { get; }
+    public GameTick_t TagTick { get; }
 
-  public void TagTickUpdated();
-  public void FlinchModSmallUpdated();
-  public void FlinchModLargeUpdated();
-  public void FriendlyFireDamageReductionRatioUpdated();
+    public ref float FlinchModSmall { get; }
+
+    public ref float FlinchModLarge { get; }
+
+    public ref float FriendlyFireDamageReductionRatio { get; }
+
+    public void TagTickUpdated();
+    public void FlinchModSmallUpdated();
+    public void FlinchModLargeUpdated();
+    public void FriendlyFireDamageReductionRatioUpdated();
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_WaitForCursorsWithTagImpl : CPulseCell_WaitForCursorsWithTagBaseImpl, CPulseCell_WaitForCursorsWithTag {
+internal partial class CPulseCell_WaitForCursorsWithTagImpl : CPulseCell_WaitForCursorsWithTagBaseImpl, CPulseCell_WaitForCursorsWithTag
+{
+    public CPulseCell_WaitForCursorsWithTagImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_WaitForCursorsWithTagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagSelfWhenCompleteOffset;
 
-  private static nint? _TagSelfWhenCompleteOffset;
-
-  public ref bool TagSelfWhenComplete {
-    get {
-      if (_TagSelfWhenCompleteOffset == null) {
-        _TagSelfWhenCompleteOffset = Schema.GetOffset(0x550BA6FDA17E8F0E);
-      }
-      return ref _Handle.AsRef<bool>(_TagSelfWhenCompleteOffset!.Value);
+    public ref bool TagSelfWhenComplete {
+        get {
+            _TagSelfWhenCompleteOffset = _TagSelfWhenCompleteOffset ?? Schema.GetOffset(0x550BA6FDA17E8F0E);
+            return ref _Handle.AsRef<bool>(_TagSelfWhenCompleteOffset!.Value);
+        }
     }
-  }
-  private static nint? _DesiredKillPriorityOffset;
+    private static nint? _DesiredKillPriorityOffset;
 
-  public ref PulseCursorCancelPriority_t DesiredKillPriority {
-    get {
-      if (_DesiredKillPriorityOffset == null) {
-        _DesiredKillPriorityOffset = Schema.GetOffset(0x550BA6FD341BA991);
-      }
-      return ref _Handle.AsRef<PulseCursorCancelPriority_t>(_DesiredKillPriorityOffset!.Value);
+    public ref PulseCursorCancelPriority_t DesiredKillPriority {
+        get {
+            _DesiredKillPriorityOffset = _DesiredKillPriorityOffset ?? Schema.GetOffset(0x550BA6FD341BA991);
+            return ref _Handle.AsRef<PulseCursorCancelPriority_t>(_DesiredKillPriorityOffset!.Value);
+        }
     }
-  }
 
 
 }

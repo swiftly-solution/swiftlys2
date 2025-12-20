@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmIDEventPercentageThroughNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmIDEventPercentageThroughNode__CDefinition {
+internal partial class CNmIDEventPercentageThroughNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmIDEventPercentageThroughNode__CDefinition
+{
+    public CNmIDEventPercentageThroughNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmIDEventPercentageThroughNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceStateNodeIdxOffset;
 
-  private static nint? _SourceStateNodeIdxOffset;
-
-  public ref short SourceStateNodeIdx {
-    get {
-      if (_SourceStateNodeIdxOffset == null) {
-        _SourceStateNodeIdxOffset = Schema.GetOffset(0x3912E5963F0228C);
-      }
-      return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+    public ref short SourceStateNodeIdx {
+        get {
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x3912E5963F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventConditionRulesOffset;
+    private static nint? _EventConditionRulesOffset;
 
-  public CNmBitFlags EventConditionRules {
-    get {
-      if (_EventConditionRulesOffset == null) {
-        _EventConditionRulesOffset = Schema.GetOffset(0x3912E59A904315F);
-      }
-      return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+    public CNmBitFlags EventConditionRules {
+        get {
+            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x3912E59A904315F);
+            return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventIDOffset;
+    private static nint? _EventIDOffset;
 
-  public ref CGlobalSymbol EventID {
-    get {
-      if (_EventIDOffset == null) {
-        _EventIDOffset = Schema.GetOffset(0x3912E599D798A72);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+    public ref CGlobalSymbol EventID {
+        get {
+            _EventIDOffset = _EventIDOffset ?? Schema.GetOffset(0x3912E599D798A72);
+            return ref _Handle.AsRef<CGlobalSymbol>(_EventIDOffset!.Value);
+        }
     }
-  }
 
 
 }

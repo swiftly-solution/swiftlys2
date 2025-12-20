@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAimConstraint : CBaseConstraint, ISchemaClass<CAimConstraint> {
+public partial interface CAimConstraint : CBaseConstraint, ISchemaClass<CAimConstraint>
+{
+    static CAimConstraint ISchemaClass<CAimConstraint>.From(nint handle) => new CAimConstraintImpl(handle);
+    static int ISchemaClass<CAimConstraint>.Size => 128;
+    static string? ISchemaClass<CAimConstraint>.ClassName => null;
 
-  static CAimConstraint ISchemaClass<CAimConstraint>.From(nint handle) => new CAimConstraintImpl(handle);
-  static int ISchemaClass<CAimConstraint>.Size => 128;
-  static string? ISchemaClass<CAimConstraint>.ClassName => null;
 
-  
-  public ref Quaternion AimOffset { get; }
-  
-  public ref uint UpType { get; }
+    public ref Quaternion AimOffset { get; }
+
+    public ref uint UpType { get; }
 
 
 }

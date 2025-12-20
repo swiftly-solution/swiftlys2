@@ -8,29 +8,29 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleTransformInput : CParticleInput, ISchemaClass<CParticleTransformInput> {
+public partial interface CParticleTransformInput : CParticleInput, ISchemaClass<CParticleTransformInput>
+{
+    static CParticleTransformInput ISchemaClass<CParticleTransformInput>.From(nint handle) => new CParticleTransformInputImpl(handle);
+    static int ISchemaClass<CParticleTransformInput>.Size => 104;
+    static string? ISchemaClass<CParticleTransformInput>.ClassName => null;
 
-  static CParticleTransformInput ISchemaClass<CParticleTransformInput>.From(nint handle) => new CParticleTransformInputImpl(handle);
-  static int ISchemaClass<CParticleTransformInput>.Size => 104;
-  static string? ISchemaClass<CParticleTransformInput>.ClassName => null;
 
-  
-  public ref ParticleTransformType_t Type { get; }
-  
-  // CParticleNamedValueRef
-  public SchemaUntypedField NamedValue { get; }
-  
-  public ref bool FollowNamedValue { get; }
-  
-  public ref bool SupportsDisabled { get; }
-  
-  public ref bool UseOrientation { get; }
-  
-  public ref int ControlPoint { get; }
-  
-  public ref int ControlPointRangeMax { get; }
-  
-  public ref float EndCPGrowthTime { get; }
+    public ref ParticleTransformType_t Type { get; }
+
+    // CParticleNamedValueRef
+    public SchemaUntypedField NamedValue { get; }
+
+    public ref bool FollowNamedValue { get; }
+
+    public ref bool SupportsDisabled { get; }
+
+    public ref bool UseOrientation { get; }
+
+    public ref int ControlPoint { get; }
+
+    public ref int ControlPointRangeMax { get; }
+
+    public ref float EndCPGrowthTime { get; }
 
 
 }

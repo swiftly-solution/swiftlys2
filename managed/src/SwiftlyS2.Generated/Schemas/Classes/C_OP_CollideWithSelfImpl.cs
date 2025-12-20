@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_CollideWithSelfImpl : CParticleFunctionConstraintImpl, C_OP_CollideWithSelf {
+internal partial class C_OP_CollideWithSelfImpl : CParticleFunctionConstraintImpl, C_OP_CollideWithSelf
+{
+    public C_OP_CollideWithSelfImpl(nint handle) : base(handle) { }
 
-  public C_OP_CollideWithSelfImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusScaleOffset;
 
-  private static nint? _RadiusScaleOffset;
-
-  public CPerParticleFloatInput RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0xEF46C0CBA7A20159);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+    public CPerParticleFloatInput RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xEF46C0CBA7A20159);
+            return new CPerParticleFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinimumSpeedOffset;
+    private static nint? _MinimumSpeedOffset;
 
-  public CPerParticleFloatInput MinimumSpeed {
-    get {
-      if (_MinimumSpeedOffset == null) {
-        _MinimumSpeedOffset = Schema.GetOffset(0xEF46C0CB2F9BEFCC);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _MinimumSpeedOffset!.Value);
+    public CPerParticleFloatInput MinimumSpeed {
+        get {
+            _MinimumSpeedOffset = _MinimumSpeedOffset ?? Schema.GetOffset(0xEF46C0CB2F9BEFCC);
+            return new CPerParticleFloatInputImpl(_Handle + _MinimumSpeedOffset!.Value);
+        }
     }
-  }
 
 
 }

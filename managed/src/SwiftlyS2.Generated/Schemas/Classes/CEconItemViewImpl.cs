@@ -6,193 +6,138 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEconItemViewImpl : IEconItemInterfaceImpl, CEconItemView {
+internal partial class CEconItemViewImpl : IEconItemInterfaceImpl, CEconItemView
+{
+    public CEconItemViewImpl(nint handle) : base(handle) { }
 
-  public CEconItemViewImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ItemDefinitionIndexOffset;
 
-  private static nint? _ItemDefinitionIndexOffset;
-
-  public ref ushort ItemDefinitionIndex {
-    get {
-      if (_ItemDefinitionIndexOffset == null) {
-        _ItemDefinitionIndexOffset = Schema.GetOffset(0xE1A93F25A2CCB41A);
-      }
-      return ref _Handle.AsRef<ushort>(_ItemDefinitionIndexOffset!.Value);
-    }
-  }
-  private static nint? _EntityQualityOffset;
-
-  public ref int EntityQuality {
-    get {
-      if (_EntityQualityOffset == null) {
-        _EntityQualityOffset = Schema.GetOffset(0xE1A93F256A67D4C4);
-      }
-      return ref _Handle.AsRef<int>(_EntityQualityOffset!.Value);
-    }
-  }
-  private static nint? _EntityLevelOffset;
-
-  public ref uint EntityLevel {
-    get {
-      if (_EntityLevelOffset == null) {
-        _EntityLevelOffset = Schema.GetOffset(0xE1A93F2555EF3B5F);
-      }
-      return ref _Handle.AsRef<uint>(_EntityLevelOffset!.Value);
-    }
-  }
-  private static nint? _ItemIDOffset;
-
-  public ref ulong ItemID {
-    get {
-      if (_ItemIDOffset == null) {
-        _ItemIDOffset = Schema.GetOffset(0xE1A93F2534B55816);
-      }
-      return ref _Handle.AsRef<ulong>(_ItemIDOffset!.Value);
-    }
-  }
-  private static nint? _ItemIDHighOffset;
-
-  public ref uint ItemIDHigh {
-    get {
-      if (_ItemIDHighOffset == null) {
-        _ItemIDHighOffset = Schema.GetOffset(0xE1A93F25373EE446);
-      }
-      return ref _Handle.AsRef<uint>(_ItemIDHighOffset!.Value);
-    }
-  }
-  private static nint? _ItemIDLowOffset;
-
-  public ref uint ItemIDLow {
-    get {
-      if (_ItemIDLowOffset == null) {
-        _ItemIDLowOffset = Schema.GetOffset(0xE1A93F250DF29C2C);
-      }
-      return ref _Handle.AsRef<uint>(_ItemIDLowOffset!.Value);
-    }
-  }
-  private static nint? _AccountIDOffset;
-
-  public ref uint AccountID {
-    get {
-      if (_AccountIDOffset == null) {
-        _AccountIDOffset = Schema.GetOffset(0xE1A93F25C65DE986);
-      }
-      return ref _Handle.AsRef<uint>(_AccountIDOffset!.Value);
-    }
-  }
-  private static nint? _InventoryPositionOffset;
-
-  public ref uint InventoryPosition {
-    get {
-      if (_InventoryPositionOffset == null) {
-        _InventoryPositionOffset = Schema.GetOffset(0xE1A93F2592F42873);
-      }
-      return ref _Handle.AsRef<uint>(_InventoryPositionOffset!.Value);
-    }
-  }
-  private static nint? _InitializedOffset;
-
-  public ref bool Initialized {
-    get {
-      if (_InitializedOffset == null) {
-        _InitializedOffset = Schema.GetOffset(0xE1A93F250710ABDD);
-      }
-      return ref _Handle.AsRef<bool>(_InitializedOffset!.Value);
-    }
-  }
-  private static nint? _AttributeListOffset;
-
-  public CAttributeList AttributeList {
-    get {
-      if (_AttributeListOffset == null) {
-        _AttributeListOffset = Schema.GetOffset(0xE1A93F25EF065D97);
-      }
-      return new CAttributeListImpl(_Handle + _AttributeListOffset!.Value);
-    }
-  }
-  private static nint? _NetworkedDynamicAttributesOffset;
-
-  public CAttributeList NetworkedDynamicAttributes {
-    get {
-      if (_NetworkedDynamicAttributesOffset == null) {
-        _NetworkedDynamicAttributesOffset = Schema.GetOffset(0xE1A93F25B576449C);
-      }
-      return new CAttributeListImpl(_Handle + _NetworkedDynamicAttributesOffset!.Value);
-    }
-  }
-  private static nint? _CustomNameOffset;
-
-  public string CustomName {
-    get {
-        if (_CustomNameOffset == null) {
-            _CustomNameOffset = Schema.GetOffset(0xE1A93F25AFD12EE8);
+    public ref ushort ItemDefinitionIndex {
+        get {
+            _ItemDefinitionIndexOffset = _ItemDefinitionIndexOffset ?? Schema.GetOffset(0xE1A93F25A2CCB41A);
+            return ref _Handle.AsRef<ushort>(_ItemDefinitionIndexOffset!.Value);
         }
-        var ptr = _Handle + _CustomNameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_CustomNameOffset == null) {
-            _CustomNameOffset = Schema.GetOffset(0xE1A93F25AFD12EE8);
-        }
-        Schema.SetFixedString(_Handle, _CustomNameOffset!.Value, value, 161);
-    }
-  } 
-  private static nint? _CustomNameOverrideOffset;
+    private static nint? _EntityQualityOffset;
 
-  public string CustomNameOverride {
-    get {
-        if (_CustomNameOverrideOffset == null) {
-            _CustomNameOverrideOffset = Schema.GetOffset(0xE1A93F25A74A6ED8);
+    public ref int EntityQuality {
+        get {
+            _EntityQualityOffset = _EntityQualityOffset ?? Schema.GetOffset(0xE1A93F256A67D4C4);
+            return ref _Handle.AsRef<int>(_EntityQualityOffset!.Value);
         }
-        var ptr = _Handle + _CustomNameOverrideOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_CustomNameOverrideOffset == null) {
-            _CustomNameOverrideOffset = Schema.GetOffset(0xE1A93F25A74A6ED8);
-        }
-        Schema.SetFixedString(_Handle, _CustomNameOverrideOffset!.Value, value, 161);
-    }
-  } 
+    private static nint? _EntityLevelOffset;
 
-  public void ItemDefinitionIndexUpdated() {
-    Schema.Update(_Handle, 0xE1A93F25A2CCB41A);
-  }
-  public void EntityQualityUpdated() {
-    Schema.Update(_Handle, 0xE1A93F256A67D4C4);
-  }
-  public void EntityLevelUpdated() {
-    Schema.Update(_Handle, 0xE1A93F2555EF3B5F);
-  }
-  public void ItemIDHighUpdated() {
-    Schema.Update(_Handle, 0xE1A93F25373EE446);
-  }
-  public void ItemIDLowUpdated() {
-    Schema.Update(_Handle, 0xE1A93F250DF29C2C);
-  }
-  public void AccountIDUpdated() {
-    Schema.Update(_Handle, 0xE1A93F25C65DE986);
-  }
-  public void InventoryPositionUpdated() {
-    Schema.Update(_Handle, 0xE1A93F2592F42873);
-  }
-  public void InitializedUpdated() {
-    Schema.Update(_Handle, 0xE1A93F250710ABDD);
-  }
-  public void AttributeListUpdated() {
-    Schema.Update(_Handle, 0xE1A93F25EF065D97);
-  }
-  public void NetworkedDynamicAttributesUpdated() {
-    Schema.Update(_Handle, 0xE1A93F25B576449C);
-  }
-  public void CustomNameUpdated() {
-    Schema.Update(_Handle, 0xE1A93F25AFD12EE8);
-  }
+    public ref uint EntityLevel {
+        get {
+            _EntityLevelOffset = _EntityLevelOffset ?? Schema.GetOffset(0xE1A93F2555EF3B5F);
+            return ref _Handle.AsRef<uint>(_EntityLevelOffset!.Value);
+        }
+    }
+    private static nint? _ItemIDOffset;
+
+    public ref ulong ItemID {
+        get {
+            _ItemIDOffset = _ItemIDOffset ?? Schema.GetOffset(0xE1A93F2534B55816);
+            return ref _Handle.AsRef<ulong>(_ItemIDOffset!.Value);
+        }
+    }
+    private static nint? _ItemIDHighOffset;
+
+    public ref uint ItemIDHigh {
+        get {
+            _ItemIDHighOffset = _ItemIDHighOffset ?? Schema.GetOffset(0xE1A93F25373EE446);
+            return ref _Handle.AsRef<uint>(_ItemIDHighOffset!.Value);
+        }
+    }
+    private static nint? _ItemIDLowOffset;
+
+    public ref uint ItemIDLow {
+        get {
+            _ItemIDLowOffset = _ItemIDLowOffset ?? Schema.GetOffset(0xE1A93F250DF29C2C);
+            return ref _Handle.AsRef<uint>(_ItemIDLowOffset!.Value);
+        }
+    }
+    private static nint? _AccountIDOffset;
+
+    public ref uint AccountID {
+        get {
+            _AccountIDOffset = _AccountIDOffset ?? Schema.GetOffset(0xE1A93F25C65DE986);
+            return ref _Handle.AsRef<uint>(_AccountIDOffset!.Value);
+        }
+    }
+    private static nint? _InventoryPositionOffset;
+
+    public ref uint InventoryPosition {
+        get {
+            _InventoryPositionOffset = _InventoryPositionOffset ?? Schema.GetOffset(0xE1A93F2592F42873);
+            return ref _Handle.AsRef<uint>(_InventoryPositionOffset!.Value);
+        }
+    }
+    private static nint? _InitializedOffset;
+
+    public ref bool Initialized {
+        get {
+            _InitializedOffset = _InitializedOffset ?? Schema.GetOffset(0xE1A93F250710ABDD);
+            return ref _Handle.AsRef<bool>(_InitializedOffset!.Value);
+        }
+    }
+    private static nint? _AttributeListOffset;
+
+    public CAttributeList AttributeList {
+        get {
+            _AttributeListOffset = _AttributeListOffset ?? Schema.GetOffset(0xE1A93F25EF065D97);
+            return new CAttributeListImpl(_Handle + _AttributeListOffset!.Value);
+        }
+    }
+    private static nint? _NetworkedDynamicAttributesOffset;
+
+    public CAttributeList NetworkedDynamicAttributes {
+        get {
+            _NetworkedDynamicAttributesOffset = _NetworkedDynamicAttributesOffset ?? Schema.GetOffset(0xE1A93F25B576449C);
+            return new CAttributeListImpl(_Handle + _NetworkedDynamicAttributesOffset!.Value);
+        }
+    }
+    private static nint? _CustomNameOffset;
+
+    public string CustomName {
+        get {
+            _CustomNameOffset = _CustomNameOffset ?? Schema.GetOffset(0xE1A93F25AFD12EE8);
+            return Schema.GetString(_Handle + _CustomNameOffset!.Value);
+        }
+        set {
+            _CustomNameOffset = _CustomNameOffset ?? Schema.GetOffset(0xE1A93F25AFD12EE8);
+            Schema.SetFixedString(_Handle, _CustomNameOffset!.Value, value, 161);
+        }
+    } 
+    private static nint? _CustomNameOverrideOffset;
+
+    public string CustomNameOverride {
+        get {
+            _CustomNameOverrideOffset = _CustomNameOverrideOffset ?? Schema.GetOffset(0xE1A93F25A74A6ED8);
+            return Schema.GetString(_Handle + _CustomNameOverrideOffset!.Value);
+        }
+        set {
+            _CustomNameOverrideOffset = _CustomNameOverrideOffset ?? Schema.GetOffset(0xE1A93F25A74A6ED8);
+            Schema.SetFixedString(_Handle, _CustomNameOverrideOffset!.Value, value, 161);
+        }
+    } 
+
+    public void ItemDefinitionIndexUpdated() => Schema.Update(_Handle, 0xE1A93F25A2CCB41A);
+    public void EntityQualityUpdated() => Schema.Update(_Handle, 0xE1A93F256A67D4C4);
+    public void EntityLevelUpdated() => Schema.Update(_Handle, 0xE1A93F2555EF3B5F);
+    public void ItemIDHighUpdated() => Schema.Update(_Handle, 0xE1A93F25373EE446);
+    public void ItemIDLowUpdated() => Schema.Update(_Handle, 0xE1A93F250DF29C2C);
+    public void AccountIDUpdated() => Schema.Update(_Handle, 0xE1A93F25C65DE986);
+    public void InventoryPositionUpdated() => Schema.Update(_Handle, 0xE1A93F2592F42873);
+    public void InitializedUpdated() => Schema.Update(_Handle, 0xE1A93F250710ABDD);
+    public void AttributeListUpdated() => Schema.Update(_Handle, 0xE1A93F25EF065D97);
+    public void NetworkedDynamicAttributesUpdated() => Schema.Update(_Handle, 0xE1A93F25B576449C);
+    public void CustomNameUpdated() => Schema.Update(_Handle, 0xE1A93F25AFD12EE8);
 }

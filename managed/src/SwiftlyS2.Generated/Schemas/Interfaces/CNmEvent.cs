@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmEvent : ISchemaClass<CNmEvent> {
+public partial interface CNmEvent : ISchemaClass<CNmEvent>
+{
+    static CNmEvent ISchemaClass<CNmEvent>.From(nint handle) => new CNmEventImpl(handle);
+    static int ISchemaClass<CNmEvent>.Size => 32;
+    static string? ISchemaClass<CNmEvent>.ClassName => null;
 
-  static CNmEvent ISchemaClass<CNmEvent>.From(nint handle) => new CNmEventImpl(handle);
-  static int ISchemaClass<CNmEvent>.Size => 32;
-  static string? ISchemaClass<CNmEvent>.ClassName => null;
 
-  
-  public ref float StartTimeSeconds { get; }
-  
-  public ref float DurationSeconds { get; }
-  
-  public ref CGlobalSymbol SyncID { get; }
-  
-  public ref bool ClientOnly { get; }
+    public ref float StartTimeSeconds { get; }
+
+    public ref float DurationSeconds { get; }
+
+    public ref CGlobalSymbol SyncID { get; }
+
+    public ref bool ClientOnly { get; }
 
 
 }

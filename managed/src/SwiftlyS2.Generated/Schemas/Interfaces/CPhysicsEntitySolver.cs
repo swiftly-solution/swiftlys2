@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysicsEntitySolver : CLogicalEntity, ISchemaClass<CPhysicsEntitySolver> {
+public partial interface CPhysicsEntitySolver : CLogicalEntity, ISchemaClass<CPhysicsEntitySolver>
+{
+    static CPhysicsEntitySolver ISchemaClass<CPhysicsEntitySolver>.From(nint handle) => new CPhysicsEntitySolverImpl(handle);
+    static int ISchemaClass<CPhysicsEntitySolver>.Size => 1304;
+    static string? ISchemaClass<CPhysicsEntitySolver>.ClassName => "physics_entity_solver";
 
-  static CPhysicsEntitySolver ISchemaClass<CPhysicsEntitySolver>.From(nint handle) => new CPhysicsEntitySolverImpl(handle);
-  static int ISchemaClass<CPhysicsEntitySolver>.Size => 1304;
-  static string? ISchemaClass<CPhysicsEntitySolver>.ClassName => "physics_entity_solver";
 
-  
-  public ref CHandle<CBaseEntity> MovingEntity { get; }
-  
-  public ref CHandle<CBaseEntity> PhysicsBlocker { get; }
-  
-  public ref float SeparationDuration { get; }
-  
-  public GameTime_t CancelTime { get; }
+    public ref CHandle<CBaseEntity> MovingEntity { get; }
+
+    public ref CHandle<CBaseEntity> PhysicsBlocker { get; }
+
+    public ref float SeparationDuration { get; }
+
+    public GameTime_t CancelTime { get; }
 
 
 }

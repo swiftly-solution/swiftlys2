@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomLifeTimeImpl : CParticleFunctionInitializerImpl, C_INIT_RandomLifeTime {
+internal partial class C_INIT_RandomLifeTimeImpl : CParticleFunctionInitializerImpl, C_INIT_RandomLifeTime
+{
+    public C_INIT_RandomLifeTimeImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RandomLifeTimeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LifetimeMinOffset;
 
-  private static nint? _LifetimeMinOffset;
-
-  public ref float LifetimeMin {
-    get {
-      if (_LifetimeMinOffset == null) {
-        _LifetimeMinOffset = Schema.GetOffset(0xC413CA5E5D0684A6);
-      }
-      return ref _Handle.AsRef<float>(_LifetimeMinOffset!.Value);
+    public ref float LifetimeMin {
+        get {
+            _LifetimeMinOffset = _LifetimeMinOffset ?? Schema.GetOffset(0xC413CA5E5D0684A6);
+            return ref _Handle.AsRef<float>(_LifetimeMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _LifetimeMaxOffset;
+    private static nint? _LifetimeMaxOffset;
 
-  public ref float LifetimeMax {
-    get {
-      if (_LifetimeMaxOffset == null) {
-        _LifetimeMaxOffset = Schema.GetOffset(0xC413CA5E6F1BBBB4);
-      }
-      return ref _Handle.AsRef<float>(_LifetimeMaxOffset!.Value);
+    public ref float LifetimeMax {
+        get {
+            _LifetimeMaxOffset = _LifetimeMaxOffset ?? Schema.GetOffset(0xC413CA5E6F1BBBB4);
+            return ref _Handle.AsRef<float>(_LifetimeMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _LifetimeRandExponentOffset;
+    private static nint? _LifetimeRandExponentOffset;
 
-  public ref float LifetimeRandExponent {
-    get {
-      if (_LifetimeRandExponentOffset == null) {
-        _LifetimeRandExponentOffset = Schema.GetOffset(0xC413CA5E9B83919A);
-      }
-      return ref _Handle.AsRef<float>(_LifetimeRandExponentOffset!.Value);
+    public ref float LifetimeRandExponent {
+        get {
+            _LifetimeRandExponentOffset = _LifetimeRandExponentOffset ?? Schema.GetOffset(0xC413CA5E9B83919A);
+            return ref _Handle.AsRef<float>(_LifetimeRandExponentOffset!.Value);
+        }
     }
-  }
 
 
 }

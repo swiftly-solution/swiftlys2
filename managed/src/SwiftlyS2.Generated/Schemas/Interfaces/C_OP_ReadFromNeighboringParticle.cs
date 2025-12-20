@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ReadFromNeighboringParticle : CParticleFunctionOperator, ISchemaClass<C_OP_ReadFromNeighboringParticle> {
+public partial interface C_OP_ReadFromNeighboringParticle : CParticleFunctionOperator, ISchemaClass<C_OP_ReadFromNeighboringParticle>
+{
+    static C_OP_ReadFromNeighboringParticle ISchemaClass<C_OP_ReadFromNeighboringParticle>.From(nint handle) => new C_OP_ReadFromNeighboringParticleImpl(handle);
+    static int ISchemaClass<C_OP_ReadFromNeighboringParticle>.Size => 1216;
+    static string? ISchemaClass<C_OP_ReadFromNeighboringParticle>.ClassName => null;
 
-  static C_OP_ReadFromNeighboringParticle ISchemaClass<C_OP_ReadFromNeighboringParticle>.From(nint handle) => new C_OP_ReadFromNeighboringParticleImpl(handle);
-  static int ISchemaClass<C_OP_ReadFromNeighboringParticle>.Size => 1216;
-  static string? ISchemaClass<C_OP_ReadFromNeighboringParticle>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref int Increment { get; }
-  
-  public CPerParticleFloatInput DistanceCheck { get; }
-  
-  public CPerParticleFloatInput Interpolation { get; }
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref int Increment { get; }
+
+    public CPerParticleFloatInput DistanceCheck { get; }
+
+    public CPerParticleFloatInput Interpolation { get; }
 
 
 }

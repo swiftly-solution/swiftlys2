@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmClipNode__CDefinition : CNmClipReferenceNode__CDefinition, ISchemaClass<CNmClipNode__CDefinition> {
+public partial interface CNmClipNode__CDefinition : CNmClipReferenceNode__CDefinition, ISchemaClass<CNmClipNode__CDefinition>
+{
+    static CNmClipNode__CDefinition ISchemaClass<CNmClipNode__CDefinition>.From(nint handle) => new CNmClipNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmClipNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmClipNode__CDefinition>.ClassName => null;
 
-  static CNmClipNode__CDefinition ISchemaClass<CNmClipNode__CDefinition>.From(nint handle) => new CNmClipNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmClipNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmClipNode__CDefinition>.ClassName => null;
 
-  
-  public ref short PlayInReverseValueNodeIdx { get; }
-  
-  public ref short ResetTimeValueNodeIdx { get; }
-  
-  public ref float SpeedMultiplier { get; }
-  
-  public ref int StartSyncEventOffset { get; }
-  
-  public ref bool SampleRootMotion { get; }
-  
-  public ref bool AllowLooping { get; }
-  
-  public ref short DataSlotIdx { get; }
+    public ref short PlayInReverseValueNodeIdx { get; }
+
+    public ref short ResetTimeValueNodeIdx { get; }
+
+    public ref float SpeedMultiplier { get; }
+
+    public ref int StartSyncEventOffset { get; }
+
+    public ref bool SampleRootMotion { get; }
+
+    public ref bool AllowLooping { get; }
+
+    public ref short DataSlotIdx { get; }
 
 
 }

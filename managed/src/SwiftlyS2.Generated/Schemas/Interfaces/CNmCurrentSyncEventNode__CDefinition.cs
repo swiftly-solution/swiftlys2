@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmCurrentSyncEventNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmCurrentSyncEventNode__CDefinition> {
+public partial interface CNmCurrentSyncEventNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmCurrentSyncEventNode__CDefinition>
+{
+    static CNmCurrentSyncEventNode__CDefinition ISchemaClass<CNmCurrentSyncEventNode__CDefinition>.From(nint handle) => new CNmCurrentSyncEventNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmCurrentSyncEventNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmCurrentSyncEventNode__CDefinition>.ClassName => null;
 
-  static CNmCurrentSyncEventNode__CDefinition ISchemaClass<CNmCurrentSyncEventNode__CDefinition>.From(nint handle) => new CNmCurrentSyncEventNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmCurrentSyncEventNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmCurrentSyncEventNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SourceStateNodeIdx { get; }
-  
-  public ref CNmCurrentSyncEventNode__InfoType_t InfoType { get; }
+    public ref short SourceStateNodeIdx { get; }
+
+    public ref CNmCurrentSyncEventNode__InfoType_t InfoType { get; }
 
 
 }

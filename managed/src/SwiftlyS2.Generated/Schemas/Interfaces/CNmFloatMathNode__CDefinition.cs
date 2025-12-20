@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatMathNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatMathNode__CDefinition> {
+public partial interface CNmFloatMathNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatMathNode__CDefinition>
+{
+    static CNmFloatMathNode__CDefinition ISchemaClass<CNmFloatMathNode__CDefinition>.From(nint handle) => new CNmFloatMathNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFloatMathNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmFloatMathNode__CDefinition>.ClassName => null;
 
-  static CNmFloatMathNode__CDefinition ISchemaClass<CNmFloatMathNode__CDefinition>.From(nint handle) => new CNmFloatMathNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFloatMathNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmFloatMathNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdxA { get; }
-  
-  public ref short InputValueNodeIdxB { get; }
-  
-  public ref bool ReturnAbsoluteResult { get; }
-  
-  public ref bool ReturnNegatedResult { get; }
-  
-  public ref CNmFloatMathNode__Operator_t Operator { get; }
-  
-  public ref float ValueB { get; }
+    public ref short InputValueNodeIdxA { get; }
+
+    public ref short InputValueNodeIdxB { get; }
+
+    public ref bool ReturnAbsoluteResult { get; }
+
+    public ref bool ReturnNegatedResult { get; }
+
+    public ref CNmFloatMathNode__Operator_t Operator { get; }
+
+    public ref float ValueB { get; }
 
 
 }

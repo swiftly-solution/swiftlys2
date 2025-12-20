@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ValueRemapperMomentumType_t : uint {
-
+public enum ValueRemapperMomentumType_t : uint
+{
  MomentumType_None = 0,
 
  MomentumType_Friction = 1,

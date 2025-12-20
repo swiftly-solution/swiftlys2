@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBoneConstraintBase : ISchemaClass<CBoneConstraintBase> {
-
-  static CBoneConstraintBase ISchemaClass<CBoneConstraintBase>.From(nint handle) => new CBoneConstraintBaseImpl(handle);
-  static int ISchemaClass<CBoneConstraintBase>.Size => 32;
-  static string? ISchemaClass<CBoneConstraintBase>.ClassName => null;
+public partial interface CBoneConstraintBase : ISchemaClass<CBoneConstraintBase>
+{
+    static CBoneConstraintBase ISchemaClass<CBoneConstraintBase>.From(nint handle) => new CBoneConstraintBaseImpl(handle);
+    static int ISchemaClass<CBoneConstraintBase>.Size => 32;
+    static string? ISchemaClass<CBoneConstraintBase>.ClassName => null;
 
 
 

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PointDefinition_t : ISchemaClass<PointDefinition_t> {
+public partial interface PointDefinition_t : ISchemaClass<PointDefinition_t>
+{
+    static PointDefinition_t ISchemaClass<PointDefinition_t>.From(nint handle) => new PointDefinition_tImpl(handle);
+    static int ISchemaClass<PointDefinition_t>.Size => 20;
+    static string? ISchemaClass<PointDefinition_t>.ClassName => null;
 
-  static PointDefinition_t ISchemaClass<PointDefinition_t>.From(nint handle) => new PointDefinition_tImpl(handle);
-  static int ISchemaClass<PointDefinition_t>.Size => 20;
-  static string? ISchemaClass<PointDefinition_t>.ClassName => null;
 
-  
-  public ref int ControlPoint { get; }
-  
-  public ref bool LocalCoords { get; }
-  
-  public ref Vector Offset { get; }
+    public ref int ControlPoint { get; }
+
+    public ref bool LocalCoords { get; }
+
+    public ref Vector Offset { get; }
 
 
 }

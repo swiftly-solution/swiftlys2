@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PulseApiFeature_t : uint {
-
+public enum PulseApiFeature_t : uint
+{
  AF_NONE = 0,
 
  AF_ENTITIES = 1,

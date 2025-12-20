@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncTimescale : CBaseEntity, ISchemaClass<CFuncTimescale> {
+public partial interface CFuncTimescale : CBaseEntity, ISchemaClass<CFuncTimescale>
+{
+    static CFuncTimescale ISchemaClass<CFuncTimescale>.From(nint handle) => new CFuncTimescaleImpl(handle);
+    static int ISchemaClass<CFuncTimescale>.Size => 1288;
+    static string? ISchemaClass<CFuncTimescale>.ClassName => "func_timescale";
 
-  static CFuncTimescale ISchemaClass<CFuncTimescale>.From(nint handle) => new CFuncTimescaleImpl(handle);
-  static int ISchemaClass<CFuncTimescale>.Size => 1288;
-  static string? ISchemaClass<CFuncTimescale>.ClassName => "func_timescale";
 
-  
-  public ref float DesiredTimescale { get; }
-  
-  public ref float Acceleration { get; }
-  
-  public ref float MinBlendRate { get; }
-  
-  public ref float BlendDeltaMultiplier { get; }
-  
-  public ref bool IsStarted { get; }
+    public ref float DesiredTimescale { get; }
+
+    public ref float Acceleration { get; }
+
+    public ref float MinBlendRate { get; }
+
+    public ref float BlendDeltaMultiplier { get; }
+
+    public ref bool IsStarted { get; }
 
 
 }

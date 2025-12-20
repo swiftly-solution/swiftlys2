@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmSyncTrack : ISchemaClass<CNmSyncTrack> {
+public partial interface CNmSyncTrack : ISchemaClass<CNmSyncTrack>
+{
+    static CNmSyncTrack ISchemaClass<CNmSyncTrack>.From(nint handle) => new CNmSyncTrackImpl(handle);
+    static int ISchemaClass<CNmSyncTrack>.Size => 176;
+    static string? ISchemaClass<CNmSyncTrack>.ClassName => null;
 
-  static CNmSyncTrack ISchemaClass<CNmSyncTrack>.From(nint handle) => new CNmSyncTrackImpl(handle);
-  static int ISchemaClass<CNmSyncTrack>.Size => 176;
-  static string? ISchemaClass<CNmSyncTrack>.ClassName => null;
 
-  
-  // CUtlLeanVectorFixedGrowable< CNmSyncTrack::Event_t, 10 >
-  public SchemaUntypedField SyncEvents { get; }
-  
-  public ref int StartEventOffset { get; }
+    // CUtlLeanVectorFixedGrowable< CNmSyncTrack::Event_t, 10 >
+    public SchemaUntypedField SyncEvents { get; }
+
+    public ref int StartEventOffset { get; }
 
 
 }

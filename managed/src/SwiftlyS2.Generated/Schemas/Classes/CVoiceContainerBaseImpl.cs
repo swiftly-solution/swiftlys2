@@ -6,38 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerBaseImpl : SchemaClass, CVoiceContainerBase {
+internal partial class CVoiceContainerBaseImpl : SchemaClass, CVoiceContainerBase
+{
+    public CVoiceContainerBaseImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SoundOffset;
 
-  private static nint? _SoundOffset;
-
-  public CVSound Sound {
-    get {
-      if (_SoundOffset == null) {
-        _SoundOffset = Schema.GetOffset(0x9D65DC3663C1A950);
-      }
-      return new CVSoundImpl(_Handle + _SoundOffset!.Value);
+    public CVSound Sound {
+        get {
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x9D65DC3663C1A950);
+            return new CVSoundImpl(_Handle + _SoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnvelopeAnalyzerOffset;
+    private static nint? _EnvelopeAnalyzerOffset;
 
-  public CVoiceContainerAnalysisBase? EnvelopeAnalyzer {
-    get {
-      if (_EnvelopeAnalyzerOffset == null) {
-        _EnvelopeAnalyzerOffset = Schema.GetOffset(0x9D65DC362102947D);
-      }
-      var ptr = _Handle.Read<nint>(_EnvelopeAnalyzerOffset!.Value);
-      return ptr.IsValidPtr() ? new CVoiceContainerAnalysisBaseImpl(ptr) : null;
+    public CVoiceContainerAnalysisBase? EnvelopeAnalyzer {
+        get {
+            _EnvelopeAnalyzerOffset = _EnvelopeAnalyzerOffset ?? Schema.GetOffset(0x9D65DC362102947D);
+            var ptr = _Handle.Read<nint>(_EnvelopeAnalyzerOffset!.Value);
+            return ptr.IsValidPtr() ? new CVoiceContainerAnalysisBaseImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

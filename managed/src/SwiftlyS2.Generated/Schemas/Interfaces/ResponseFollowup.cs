@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ResponseFollowup : ISchemaClass<ResponseFollowup> {
+public partial interface ResponseFollowup : ISchemaClass<ResponseFollowup>
+{
+    static ResponseFollowup ISchemaClass<ResponseFollowup>.From(nint handle) => new ResponseFollowupImpl(handle);
+    static int ISchemaClass<ResponseFollowup>.Size => 49;
+    static string? ISchemaClass<ResponseFollowup>.ClassName => null;
 
-  static ResponseFollowup ISchemaClass<ResponseFollowup>.From(nint handle) => new ResponseFollowupImpl(handle);
-  static int ISchemaClass<ResponseFollowup>.Size => 49;
-  static string? ISchemaClass<ResponseFollowup>.ClassName => null;
 
-  
-  public string Followup_concept { get; set; }
-  
-  public string Followup_contexts { get; set; }
-  
-  public ref float Followup_delay { get; }
-  
-  public string Followup_target { get; set; }
-  
-  public string Followup_entityiotarget { get; set; }
-  
-  public string Followup_entityioinput { get; set; }
-  
-  public ref float Followup_entityiodelay { get; }
-  
-  public ref bool Fired { get; }
+    public string Followup_concept { get; set; }
+
+    public string Followup_contexts { get; set; }
+
+    public ref float Followup_delay { get; }
+
+    public string Followup_target { get; set; }
+
+    public string Followup_entityiotarget { get; set; }
+
+    public string Followup_entityioinput { get; set; }
+
+    public ref float Followup_entityiodelay { get; }
+
+    public ref bool Fired { get; }
 
 
 }

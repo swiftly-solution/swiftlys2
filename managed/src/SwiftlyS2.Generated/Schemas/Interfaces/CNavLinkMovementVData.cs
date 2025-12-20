@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNavLinkMovementVData : ISchemaClass<CNavLinkMovementVData> {
+public partial interface CNavLinkMovementVData : ISchemaClass<CNavLinkMovementVData>
+{
+    static CNavLinkMovementVData ISchemaClass<CNavLinkMovementVData>.From(nint handle) => new CNavLinkMovementVDataImpl(handle);
+    static int ISchemaClass<CNavLinkMovementVData>.Size => 256;
+    static string? ISchemaClass<CNavLinkMovementVData>.ClassName => null;
 
-  static CNavLinkMovementVData ISchemaClass<CNavLinkMovementVData>.From(nint handle) => new CNavLinkMovementVDataImpl(handle);
-  static int ISchemaClass<CNavLinkMovementVData>.Size => 256;
-  static string? ISchemaClass<CNavLinkMovementVData>.ClassName => null;
 
-  
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
-  public SchemaUntypedField ToolsOnlyOwnerModelName { get; }
-  
-  public ref bool IsInterpolated { get; }
-  
-  public ref uint RecommendedDistance { get; }
-  
-  public ref CUtlVector<CNavLinkAnimgraphVar> AnimgraphVars { get; }
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
+    public SchemaUntypedField ToolsOnlyOwnerModelName { get; }
+
+    public ref bool IsInterpolated { get; }
+
+    public ref uint RecommendedDistance { get; }
+
+    public ref CUtlVector<CNavLinkAnimgraphVar> AnimgraphVars { get; }
 
 
 }

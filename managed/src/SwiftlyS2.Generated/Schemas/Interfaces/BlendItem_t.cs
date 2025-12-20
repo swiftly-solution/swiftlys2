@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface BlendItem_t : ISchemaClass<BlendItem_t> {
+public partial interface BlendItem_t : ISchemaClass<BlendItem_t>
+{
+    static BlendItem_t ISchemaClass<BlendItem_t>.From(nint handle) => new BlendItem_tImpl(handle);
+    static int ISchemaClass<BlendItem_t>.Size => 64;
+    static string? ISchemaClass<BlendItem_t>.ClassName => null;
 
-  static BlendItem_t ISchemaClass<BlendItem_t>.From(nint handle) => new BlendItem_tImpl(handle);
-  static int ISchemaClass<BlendItem_t>.Size => 64;
-  static string? ISchemaClass<BlendItem_t>.ClassName => null;
 
-  
-  public ref CUtlVector<TagSpan_t> Tags { get; }
-  
-  public CAnimUpdateNodeRef Child { get; }
-  
-  public HSequence Sequence { get; }
-  
-  public ref Vector2D Pos { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref bool UseCustomDuration { get; }
+    public ref CUtlVector<TagSpan_t> Tags { get; }
+
+    public CAnimUpdateNodeRef Child { get; }
+
+    public HSequence Sequence { get; }
+
+    public ref Vector2D Pos { get; }
+
+    public ref float Duration { get; }
+
+    public ref bool UseCustomDuration { get; }
 
 
 }

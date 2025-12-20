@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_PinRopeSegmentParticleToParentImpl : CParticleFunctionOperatorImpl, C_OP_PinRopeSegmentParticleToParent {
+internal partial class C_OP_PinRopeSegmentParticleToParentImpl : CParticleFunctionOperatorImpl, C_OP_PinRopeSegmentParticleToParent
+{
+    public C_OP_PinRopeSegmentParticleToParentImpl(nint handle) : base(handle) { }
 
-  public C_OP_PinRopeSegmentParticleToParentImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParticleSelectionOffset;
 
-  private static nint? _ParticleSelectionOffset;
-
-  public ref ParticleSelection_t ParticleSelection {
-    get {
-      if (_ParticleSelectionOffset == null) {
-        _ParticleSelectionOffset = Schema.GetOffset(0x5F59F78EA2307EA7);
-      }
-      return ref _Handle.AsRef<ParticleSelection_t>(_ParticleSelectionOffset!.Value);
+    public ref ParticleSelection_t ParticleSelection {
+        get {
+            _ParticleSelectionOffset = _ParticleSelectionOffset ?? Schema.GetOffset(0x5F59F78EA2307EA7);
+            return ref _Handle.AsRef<ParticleSelection_t>(_ParticleSelectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParticleNumberOffset;
+    private static nint? _ParticleNumberOffset;
 
-  public CParticleCollectionFloatInput ParticleNumber {
-    get {
-      if (_ParticleNumberOffset == null) {
-        _ParticleNumberOffset = Schema.GetOffset(0x5F59F78E12F26402);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ParticleNumberOffset!.Value);
+    public CParticleCollectionFloatInput ParticleNumber {
+        get {
+            _ParticleNumberOffset = _ParticleNumberOffset ?? Schema.GetOffset(0x5F59F78E12F26402);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ParticleNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _InterpolationOffset;
+    private static nint? _InterpolationOffset;
 
-  public CPerParticleFloatInput Interpolation {
-    get {
-      if (_InterpolationOffset == null) {
-        _InterpolationOffset = Schema.GetOffset(0x5F59F78ECF55B987);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    public CPerParticleFloatInput Interpolation {
+        get {
+            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x5F59F78ECF55B987);
+            return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+        }
     }
-  }
 
 
 }

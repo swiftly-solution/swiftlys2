@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatRangeComparisonNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmFloatRangeComparisonNode__CDefinition> {
+public partial interface CNmFloatRangeComparisonNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmFloatRangeComparisonNode__CDefinition>
+{
+    static CNmFloatRangeComparisonNode__CDefinition ISchemaClass<CNmFloatRangeComparisonNode__CDefinition>.From(nint handle) => new CNmFloatRangeComparisonNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFloatRangeComparisonNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmFloatRangeComparisonNode__CDefinition>.ClassName => null;
 
-  static CNmFloatRangeComparisonNode__CDefinition ISchemaClass<CNmFloatRangeComparisonNode__CDefinition>.From(nint handle) => new CNmFloatRangeComparisonNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFloatRangeComparisonNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmFloatRangeComparisonNode__CDefinition>.ClassName => null;
 
-  
-  // Range_t
-  public SchemaUntypedField Range { get; }
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref bool IsInclusiveCheck { get; }
+    // Range_t
+    public SchemaUntypedField Range { get; }
+
+    public ref short InputValueNodeIdx { get; }
+
+    public ref bool IsInclusiveCheck { get; }
 
 
 }

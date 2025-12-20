@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DecayImpl : CParticleFunctionOperatorImpl, C_OP_Decay {
+internal partial class C_OP_DecayImpl : CParticleFunctionOperatorImpl, C_OP_Decay
+{
+    public C_OP_DecayImpl(nint handle) : base(handle) { }
 
-  public C_OP_DecayImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RopeDecayOffset;
 
-  private static nint? _RopeDecayOffset;
-
-  public ref bool RopeDecay {
-    get {
-      if (_RopeDecayOffset == null) {
-        _RopeDecayOffset = Schema.GetOffset(0x9342606D2A5D2225);
-      }
-      return ref _Handle.AsRef<bool>(_RopeDecayOffset!.Value);
+    public ref bool RopeDecay {
+        get {
+            _RopeDecayOffset = _RopeDecayOffset ?? Schema.GetOffset(0x9342606D2A5D2225);
+            return ref _Handle.AsRef<bool>(_RopeDecayOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForcePreserveParticleOrderOffset;
+    private static nint? _ForcePreserveParticleOrderOffset;
 
-  public ref bool ForcePreserveParticleOrder {
-    get {
-      if (_ForcePreserveParticleOrderOffset == null) {
-        _ForcePreserveParticleOrderOffset = Schema.GetOffset(0x9342606DFEB98B86);
-      }
-      return ref _Handle.AsRef<bool>(_ForcePreserveParticleOrderOffset!.Value);
+    public ref bool ForcePreserveParticleOrder {
+        get {
+            _ForcePreserveParticleOrderOffset = _ForcePreserveParticleOrderOffset ?? Schema.GetOffset(0x9342606DFEB98B86);
+            return ref _Handle.AsRef<bool>(_ForcePreserveParticleOrderOffset!.Value);
+        }
     }
-  }
 
 
 }

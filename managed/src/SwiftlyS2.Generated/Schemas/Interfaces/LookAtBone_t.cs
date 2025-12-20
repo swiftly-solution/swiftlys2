@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface LookAtBone_t : ISchemaClass<LookAtBone_t> {
+public partial interface LookAtBone_t : ISchemaClass<LookAtBone_t>
+{
+    static LookAtBone_t ISchemaClass<LookAtBone_t>.From(nint handle) => new LookAtBone_tImpl(handle);
+    static int ISchemaClass<LookAtBone_t>.Size => 8;
+    static string? ISchemaClass<LookAtBone_t>.ClassName => null;
 
-  static LookAtBone_t ISchemaClass<LookAtBone_t>.From(nint handle) => new LookAtBone_tImpl(handle);
-  static int ISchemaClass<LookAtBone_t>.Size => 8;
-  static string? ISchemaClass<LookAtBone_t>.ClassName => null;
 
-  
-  public ref int Index { get; }
-  
-  public ref float Weight { get; }
+    public ref int Index { get; }
+
+    public ref float Weight { get; }
 
 
 }

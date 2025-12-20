@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PostProcessingVignetteParameters_t : ISchemaClass<PostProcessingVignetteParameters_t> {
+public partial interface PostProcessingVignetteParameters_t : ISchemaClass<PostProcessingVignetteParameters_t>
+{
+    static PostProcessingVignetteParameters_t ISchemaClass<PostProcessingVignetteParameters_t>.From(nint handle) => new PostProcessingVignetteParameters_tImpl(handle);
+    static int ISchemaClass<PostProcessingVignetteParameters_t>.Size => 36;
+    static string? ISchemaClass<PostProcessingVignetteParameters_t>.ClassName => null;
 
-  static PostProcessingVignetteParameters_t ISchemaClass<PostProcessingVignetteParameters_t>.From(nint handle) => new PostProcessingVignetteParameters_tImpl(handle);
-  static int ISchemaClass<PostProcessingVignetteParameters_t>.Size => 36;
-  static string? ISchemaClass<PostProcessingVignetteParameters_t>.ClassName => null;
 
-  
-  public ref float VignetteStrength { get; }
-  
-  public ref Vector2D Center { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref float Roundness { get; }
-  
-  public ref float Feather { get; }
-  
-  public ref Vector ColorTint { get; }
+    public ref float VignetteStrength { get; }
+
+    public ref Vector2D Center { get; }
+
+    public ref float Radius { get; }
+
+    public ref float Roundness { get; }
+
+    public ref float Feather { get; }
+
+    public ref Vector ColorTint { get; }
 
 
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_IntraParticleForce : CParticleFunctionForce, ISchemaClass<C_OP_IntraParticleForce> {
+public partial interface C_OP_IntraParticleForce : CParticleFunctionForce, ISchemaClass<C_OP_IntraParticleForce>
+{
+    static C_OP_IntraParticleForce ISchemaClass<C_OP_IntraParticleForce>.From(nint handle) => new C_OP_IntraParticleForceImpl(handle);
+    static int ISchemaClass<C_OP_IntraParticleForce>.Size => 512;
+    static string? ISchemaClass<C_OP_IntraParticleForce>.ClassName => null;
 
-  static C_OP_IntraParticleForce ISchemaClass<C_OP_IntraParticleForce>.From(nint handle) => new C_OP_IntraParticleForceImpl(handle);
-  static int ISchemaClass<C_OP_IntraParticleForce>.Size => 512;
-  static string? ISchemaClass<C_OP_IntraParticleForce>.ClassName => null;
 
-  
-  public ref float AttractionMinDistance { get; }
-  
-  public ref float AttractionMaxDistance { get; }
-  
-  public ref float AttractionMaxStrength { get; }
-  
-  public ref float RepulsionMinDistance { get; }
-  
-  public ref float RepulsionMaxDistance { get; }
-  
-  public ref float RepulsionMaxStrength { get; }
-  
-  public ref bool UseAABB { get; }
+    public ref float AttractionMinDistance { get; }
+
+    public ref float AttractionMaxDistance { get; }
+
+    public ref float AttractionMaxStrength { get; }
+
+    public ref float RepulsionMinDistance { get; }
+
+    public ref float RepulsionMaxDistance { get; }
+
+    public ref float RepulsionMaxStrength { get; }
+
+    public ref bool UseAABB { get; }
 
 
 }

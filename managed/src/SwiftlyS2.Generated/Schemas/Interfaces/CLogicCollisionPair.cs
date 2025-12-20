@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicCollisionPair : CLogicalEntity, ISchemaClass<CLogicCollisionPair> {
+public partial interface CLogicCollisionPair : CLogicalEntity, ISchemaClass<CLogicCollisionPair>
+{
+    static CLogicCollisionPair ISchemaClass<CLogicCollisionPair>.From(nint handle) => new CLogicCollisionPairImpl(handle);
+    static int ISchemaClass<CLogicCollisionPair>.Size => 1288;
+    static string? ISchemaClass<CLogicCollisionPair>.ClassName => "logic_collision_pair";
 
-  static CLogicCollisionPair ISchemaClass<CLogicCollisionPair>.From(nint handle) => new CLogicCollisionPairImpl(handle);
-  static int ISchemaClass<CLogicCollisionPair>.Size => 1288;
-  static string? ISchemaClass<CLogicCollisionPair>.ClassName => "logic_collision_pair";
 
-  
-  public string NameAttach1 { get; set; }
-  
-  public string NameAttach2 { get; set; }
-  
-  public ref bool IncludeHierarchy { get; }
-  
-  public ref bool SupportMultipleEntitiesWithSameName { get; }
-  
-  public ref bool Disabled { get; }
-  
-  public ref bool Succeeded { get; }
+    public string NameAttach1 { get; set; }
+
+    public string NameAttach2 { get; set; }
+
+    public ref bool IncludeHierarchy { get; }
+
+    public ref bool SupportMultipleEntitiesWithSameName { get; }
+
+    public ref bool Disabled { get; }
+
+    public ref bool Succeeded { get; }
 
 
 }

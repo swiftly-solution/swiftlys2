@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimGraphNetworkSettings : CAnimGraphSettingsGroup, ISchemaClass<CAnimGraphNetworkSettings> {
+public partial interface CAnimGraphNetworkSettings : CAnimGraphSettingsGroup, ISchemaClass<CAnimGraphNetworkSettings>
+{
+    static CAnimGraphNetworkSettings ISchemaClass<CAnimGraphNetworkSettings>.From(nint handle) => new CAnimGraphNetworkSettingsImpl(handle);
+    static int ISchemaClass<CAnimGraphNetworkSettings>.Size => 40;
+    static string? ISchemaClass<CAnimGraphNetworkSettings>.ClassName => null;
 
-  static CAnimGraphNetworkSettings ISchemaClass<CAnimGraphNetworkSettings>.From(nint handle) => new CAnimGraphNetworkSettingsImpl(handle);
-  static int ISchemaClass<CAnimGraphNetworkSettings>.Size => 40;
-  static string? ISchemaClass<CAnimGraphNetworkSettings>.ClassName => null;
 
-  
-  public ref bool NetworkingEnabled { get; }
+    public ref bool NetworkingEnabled { get; }
 
 
 }

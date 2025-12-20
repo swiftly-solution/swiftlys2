@@ -8,75 +8,75 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEffectData : ISchemaClass<CEffectData> {
+public partial interface CEffectData : ISchemaClass<CEffectData>
+{
+    static CEffectData ISchemaClass<CEffectData>.From(nint handle) => new CEffectDataImpl(handle);
+    static int ISchemaClass<CEffectData>.Size => 112;
+    static string? ISchemaClass<CEffectData>.ClassName => null;
 
-  static CEffectData ISchemaClass<CEffectData>.From(nint handle) => new CEffectDataImpl(handle);
-  static int ISchemaClass<CEffectData>.Size => 112;
-  static string? ISchemaClass<CEffectData>.ClassName => null;
 
-  
-  public ref Vector Origin { get; }
-  
-  public ref Vector Start { get; }
-  
-  public ref Vector Normal { get; }
-  
-  public ref QAngle Angles { get; }
-  
-  public ref CHandle<CEntityInstance> Entity { get; }
-  
-  public ref CHandle<CEntityInstance> OtherEntity { get; }
-  
-  public ref float Scale { get; }
-  
-  public ref float Magnitude { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref CUtlStringToken SurfaceProp { get; }
-  
-  // CWeakHandle< InfoForResourceTypeIParticleSystemDefinition >
-  public SchemaUntypedField EffectIndex { get; }
-  
-  public ref uint DamageType { get; }
-  
-  public ref byte Penetrate { get; }
-  
-  public ref ushort Material { get; }
-  
-  public ref short HitBox { get; }
-  
-  public ref byte Color { get; }
-  
-  public ref byte Flags { get; }
-  
-  public AttachmentHandle_t AttachmentIndex { get; }
-  
-  public ref CUtlStringToken AttachmentName { get; }
-  
-  public ref ushort EffectName { get; }
-  
-  public ref byte ExplosionType { get; }
+    public ref Vector Origin { get; }
 
-  public void OriginUpdated();
-  public void StartUpdated();
-  public void NormalUpdated();
-  public void AnglesUpdated();
-  public void EntityUpdated();
-  public void OtherEntityUpdated();
-  public void ScaleUpdated();
-  public void MagnitudeUpdated();
-  public void RadiusUpdated();
-  public void SurfacePropUpdated();
-  public void EffectIndexUpdated();
-  public void DamageTypeUpdated();
-  public void PenetrateUpdated();
-  public void MaterialUpdated();
-  public void HitBoxUpdated();
-  public void ColorUpdated();
-  public void FlagsUpdated();
-  public void AttachmentIndexUpdated();
-  public void AttachmentNameUpdated();
-  public void EffectNameUpdated();
-  public void ExplosionTypeUpdated();
+    public ref Vector Start { get; }
+
+    public ref Vector Normal { get; }
+
+    public ref QAngle Angles { get; }
+
+    public ref CHandle<CEntityInstance> Entity { get; }
+
+    public ref CHandle<CEntityInstance> OtherEntity { get; }
+
+    public ref float Scale { get; }
+
+    public ref float Magnitude { get; }
+
+    public ref float Radius { get; }
+
+    public ref CUtlStringToken SurfaceProp { get; }
+
+    // CWeakHandle< InfoForResourceTypeIParticleSystemDefinition >
+    public SchemaUntypedField EffectIndex { get; }
+
+    public ref uint DamageType { get; }
+
+    public ref byte Penetrate { get; }
+
+    public ref ushort Material { get; }
+
+    public ref short HitBox { get; }
+
+    public ref byte Color { get; }
+
+    public ref byte Flags { get; }
+
+    public AttachmentHandle_t AttachmentIndex { get; }
+
+    public ref CUtlStringToken AttachmentName { get; }
+
+    public ref ushort EffectName { get; }
+
+    public ref byte ExplosionType { get; }
+
+    public void OriginUpdated();
+    public void StartUpdated();
+    public void NormalUpdated();
+    public void AnglesUpdated();
+    public void EntityUpdated();
+    public void OtherEntityUpdated();
+    public void ScaleUpdated();
+    public void MagnitudeUpdated();
+    public void RadiusUpdated();
+    public void SurfacePropUpdated();
+    public void EffectIndexUpdated();
+    public void DamageTypeUpdated();
+    public void PenetrateUpdated();
+    public void MaterialUpdated();
+    public void HitBoxUpdated();
+    public void ColorUpdated();
+    public void FlagsUpdated();
+    public void AttachmentIndexUpdated();
+    public void AttachmentNameUpdated();
+    public void EffectNameUpdated();
+    public void ExplosionTypeUpdated();
 }

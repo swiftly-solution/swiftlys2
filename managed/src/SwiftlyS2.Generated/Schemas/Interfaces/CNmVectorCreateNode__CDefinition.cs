@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmVectorCreateNode__CDefinition : CNmVectorValueNode__CDefinition, ISchemaClass<CNmVectorCreateNode__CDefinition> {
+public partial interface CNmVectorCreateNode__CDefinition : CNmVectorValueNode__CDefinition, ISchemaClass<CNmVectorCreateNode__CDefinition>
+{
+    static CNmVectorCreateNode__CDefinition ISchemaClass<CNmVectorCreateNode__CDefinition>.From(nint handle) => new CNmVectorCreateNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmVectorCreateNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmVectorCreateNode__CDefinition>.ClassName => null;
 
-  static CNmVectorCreateNode__CDefinition ISchemaClass<CNmVectorCreateNode__CDefinition>.From(nint handle) => new CNmVectorCreateNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmVectorCreateNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmVectorCreateNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputVectorValueNodeIdx { get; }
-  
-  public ref short InputValueXNodeIdx { get; }
-  
-  public ref short InputValueYNodeIdx { get; }
-  
-  public ref short InputValueZNodeIdx { get; }
+    public ref short InputVectorValueNodeIdx { get; }
+
+    public ref short InputValueXNodeIdx { get; }
+
+    public ref short InputValueYNodeIdx { get; }
+
+    public ref short InputValueZNodeIdx { get; }
 
 
 }

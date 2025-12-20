@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LockToBone : CParticleFunctionOperator, ISchemaClass<C_OP_LockToBone> {
+public partial interface C_OP_LockToBone : CParticleFunctionOperator, ISchemaClass<C_OP_LockToBone>
+{
+    static C_OP_LockToBone ISchemaClass<C_OP_LockToBone>.From(nint handle) => new C_OP_LockToBoneImpl(handle);
+    static int ISchemaClass<C_OP_LockToBone>.Size => 2920;
+    static string? ISchemaClass<C_OP_LockToBone>.ClassName => null;
 
-  static C_OP_LockToBone ISchemaClass<C_OP_LockToBone>.From(nint handle) => new C_OP_LockToBoneImpl(handle);
-  static int ISchemaClass<C_OP_LockToBone>.Size => 2920;
-  static string? ISchemaClass<C_OP_LockToBone>.ClassName => null;
 
-  
-  public CParticleModelInput ModelInput { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref float LifeTimeFadeStart { get; }
-  
-  public ref float LifeTimeFadeEnd { get; }
-  
-  public ref float JumpThreshold { get; }
-  
-  public ref float PrevPosScale { get; }
-  
-  public string HitboxSetName { get; set; }
-  
-  public ref bool Rigid { get; }
-  
-  public ref bool UseBones { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutputPrev { get; }
-  
-  public ref ParticleRotationLockType_t RotationSetType { get; }
-  
-  public ref bool RigidRotationLock { get; }
-  
-  public CPerParticleVecInput Rotation { get; }
-  
-  public CPerParticleFloatInput RotLerp { get; }
+    public CParticleModelInput ModelInput { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref float LifeTimeFadeStart { get; }
+
+    public ref float LifeTimeFadeEnd { get; }
+
+    public ref float JumpThreshold { get; }
+
+    public ref float PrevPosScale { get; }
+
+    public string HitboxSetName { get; set; }
+
+    public ref bool Rigid { get; }
+
+    public ref bool UseBones { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ParticleAttributeIndex_t FieldOutputPrev { get; }
+
+    public ref ParticleRotationLockType_t RotationSetType { get; }
+
+    public ref bool RigidRotationLock { get; }
+
+    public CPerParticleVecInput Rotation { get; }
+
+    public CPerParticleFloatInput RotLerp { get; }
 
 
 }

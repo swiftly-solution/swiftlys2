@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface hudtextparms_t : ISchemaClass<hudtextparms_t> {
+public partial interface hudtextparms_t : ISchemaClass<hudtextparms_t>
+{
+    static hudtextparms_t ISchemaClass<hudtextparms_t>.From(nint handle) => new hudtextparms_tImpl(handle);
+    static int ISchemaClass<hudtextparms_t>.Size => 20;
+    static string? ISchemaClass<hudtextparms_t>.ClassName => null;
 
-  static hudtextparms_t ISchemaClass<hudtextparms_t>.From(nint handle) => new hudtextparms_tImpl(handle);
-  static int ISchemaClass<hudtextparms_t>.Size => 20;
-  static string? ISchemaClass<hudtextparms_t>.ClassName => null;
 
-  
-  public ref Color Color1 { get; }
-  
-  public ref Color Color2 { get; }
-  
-  public ref byte Effect { get; }
-  
-  public ref byte Channel { get; }
-  
-  public ref float X { get; }
-  
-  public ref float Y { get; }
+    public ref Color Color1 { get; }
+
+    public ref Color Color2 { get; }
+
+    public ref byte Effect { get; }
+
+    public ref byte Channel { get; }
+
+    public ref float X { get; }
+
+    public ref float Y { get; }
 
 
 }

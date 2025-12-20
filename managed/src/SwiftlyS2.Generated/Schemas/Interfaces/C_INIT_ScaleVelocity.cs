@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_ScaleVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_ScaleVelocity> {
+public partial interface C_INIT_ScaleVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_ScaleVelocity>
+{
+    static C_INIT_ScaleVelocity ISchemaClass<C_INIT_ScaleVelocity>.From(nint handle) => new C_INIT_ScaleVelocityImpl(handle);
+    static int ISchemaClass<C_INIT_ScaleVelocity>.Size => 2192;
+    static string? ISchemaClass<C_INIT_ScaleVelocity>.ClassName => null;
 
-  static C_INIT_ScaleVelocity ISchemaClass<C_INIT_ScaleVelocity>.From(nint handle) => new C_INIT_ScaleVelocityImpl(handle);
-  static int ISchemaClass<C_INIT_ScaleVelocity>.Size => 2192;
-  static string? ISchemaClass<C_INIT_ScaleVelocity>.ClassName => null;
 
-  
-  public CParticleCollectionVecInput Scale { get; }
+    public CParticleCollectionVecInput Scale { get; }
 
 
 }

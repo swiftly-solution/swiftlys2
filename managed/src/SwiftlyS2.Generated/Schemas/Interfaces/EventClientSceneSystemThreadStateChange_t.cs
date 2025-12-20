@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventClientSceneSystemThreadStateChange_t : ISchemaClass<EventClientSceneSystemThreadStateChange_t> {
+public partial interface EventClientSceneSystemThreadStateChange_t : ISchemaClass<EventClientSceneSystemThreadStateChange_t>
+{
+    static EventClientSceneSystemThreadStateChange_t ISchemaClass<EventClientSceneSystemThreadStateChange_t>.From(nint handle) => new EventClientSceneSystemThreadStateChange_tImpl(handle);
+    static int ISchemaClass<EventClientSceneSystemThreadStateChange_t>.Size => 1;
+    static string? ISchemaClass<EventClientSceneSystemThreadStateChange_t>.ClassName => null;
 
-  static EventClientSceneSystemThreadStateChange_t ISchemaClass<EventClientSceneSystemThreadStateChange_t>.From(nint handle) => new EventClientSceneSystemThreadStateChange_tImpl(handle);
-  static int ISchemaClass<EventClientSceneSystemThreadStateChange_t>.Size => 1;
-  static string? ISchemaClass<EventClientSceneSystemThreadStateChange_t>.ClassName => null;
 
-  
-  public ref bool ThreadsActive { get; }
+    public ref bool ThreadsActive { get; }
 
 
 }

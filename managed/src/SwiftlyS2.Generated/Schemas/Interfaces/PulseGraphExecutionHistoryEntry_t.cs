@@ -8,23 +8,23 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseGraphExecutionHistoryEntry_t : ISchemaClass<PulseGraphExecutionHistoryEntry_t> {
+public partial interface PulseGraphExecutionHistoryEntry_t : ISchemaClass<PulseGraphExecutionHistoryEntry_t>
+{
+    static PulseGraphExecutionHistoryEntry_t ISchemaClass<PulseGraphExecutionHistoryEntry_t>.From(nint handle) => new PulseGraphExecutionHistoryEntry_tImpl(handle);
+    static int ISchemaClass<PulseGraphExecutionHistoryEntry_t>.Size => 32;
+    static string? ISchemaClass<PulseGraphExecutionHistoryEntry_t>.ClassName => null;
 
-  static PulseGraphExecutionHistoryEntry_t ISchemaClass<PulseGraphExecutionHistoryEntry_t>.From(nint handle) => new PulseGraphExecutionHistoryEntry_tImpl(handle);
-  static int ISchemaClass<PulseGraphExecutionHistoryEntry_t>.Size => 32;
-  static string? ISchemaClass<PulseGraphExecutionHistoryEntry_t>.ClassName => null;
 
-  
-  public PulseCursorID_t CursorID { get; }
-  
-  public PulseDocNodeID_t EditorID { get; }
-  
-  public ref float ExecTime { get; }
-  
-  public ref uint Flags { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField TagName { get; }
+    public PulseCursorID_t CursorID { get; }
+
+    public PulseDocNodeID_t EditorID { get; }
+
+    public ref float ExecTime { get; }
+
+    public ref uint Flags { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField TagName { get; }
 
 
 }

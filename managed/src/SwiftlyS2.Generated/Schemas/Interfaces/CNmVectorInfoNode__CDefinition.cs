@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmVectorInfoNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmVectorInfoNode__CDefinition> {
+public partial interface CNmVectorInfoNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmVectorInfoNode__CDefinition>
+{
+    static CNmVectorInfoNode__CDefinition ISchemaClass<CNmVectorInfoNode__CDefinition>.From(nint handle) => new CNmVectorInfoNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmVectorInfoNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmVectorInfoNode__CDefinition>.ClassName => null;
 
-  static CNmVectorInfoNode__CDefinition ISchemaClass<CNmVectorInfoNode__CDefinition>.From(nint handle) => new CNmVectorInfoNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmVectorInfoNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmVectorInfoNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref CNmVectorInfoNode__Info_t DesiredInfo { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    public ref CNmVectorInfoNode__Info_t DesiredInfo { get; }
 
 
 }

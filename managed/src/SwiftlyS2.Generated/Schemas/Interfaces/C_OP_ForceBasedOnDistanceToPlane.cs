@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ForceBasedOnDistanceToPlane : CParticleFunctionForce, ISchemaClass<C_OP_ForceBasedOnDistanceToPlane> {
+public partial interface C_OP_ForceBasedOnDistanceToPlane : CParticleFunctionForce, ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>
+{
+    static C_OP_ForceBasedOnDistanceToPlane ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.From(nint handle) => new C_OP_ForceBasedOnDistanceToPlaneImpl(handle);
+    static int ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.Size => 536;
+    static string? ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.ClassName => null;
 
-  static C_OP_ForceBasedOnDistanceToPlane ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.From(nint handle) => new C_OP_ForceBasedOnDistanceToPlaneImpl(handle);
-  static int ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.Size => 536;
-  static string? ISchemaClass<C_OP_ForceBasedOnDistanceToPlane>.ClassName => null;
 
-  
-  public ref float MinDist { get; }
-  
-  public ref Vector ForceAtMinDist { get; }
-  
-  public ref float MaxDist { get; }
-  
-  public ref Vector ForceAtMaxDist { get; }
-  
-  public ref Vector PlaneNormal { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref float Exponent { get; }
+    public ref float MinDist { get; }
+
+    public ref Vector ForceAtMinDist { get; }
+
+    public ref float MaxDist { get; }
+
+    public ref Vector ForceAtMaxDist { get; }
+
+    public ref Vector PlaneNormal { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref float Exponent { get; }
 
 
 }

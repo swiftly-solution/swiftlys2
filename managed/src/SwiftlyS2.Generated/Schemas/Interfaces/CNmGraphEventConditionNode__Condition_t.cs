@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmGraphEventConditionNode__Condition_t : ISchemaClass<CNmGraphEventConditionNode__Condition_t> {
+public partial interface CNmGraphEventConditionNode__Condition_t : ISchemaClass<CNmGraphEventConditionNode__Condition_t>
+{
+    static CNmGraphEventConditionNode__Condition_t ISchemaClass<CNmGraphEventConditionNode__Condition_t>.From(nint handle) => new CNmGraphEventConditionNode__Condition_tImpl(handle);
+    static int ISchemaClass<CNmGraphEventConditionNode__Condition_t>.Size => 16;
+    static string? ISchemaClass<CNmGraphEventConditionNode__Condition_t>.ClassName => null;
 
-  static CNmGraphEventConditionNode__Condition_t ISchemaClass<CNmGraphEventConditionNode__Condition_t>.From(nint handle) => new CNmGraphEventConditionNode__Condition_tImpl(handle);
-  static int ISchemaClass<CNmGraphEventConditionNode__Condition_t>.Size => 16;
-  static string? ISchemaClass<CNmGraphEventConditionNode__Condition_t>.ClassName => null;
 
-  
-  public ref CGlobalSymbol EventID { get; }
-  
-  public ref NmGraphEventTypeCondition_t EventTypeCondition { get; }
+    public ref CGlobalSymbol EventID { get; }
+
+    public ref NmGraphEventTypeCondition_t EventTypeCondition { get; }
 
 
 }

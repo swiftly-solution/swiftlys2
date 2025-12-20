@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRenderComponent : CEntityComponent, ISchemaClass<CRenderComponent> {
+public partial interface CRenderComponent : CEntityComponent, ISchemaClass<CRenderComponent>
+{
+    static CRenderComponent ISchemaClass<CRenderComponent>.From(nint handle) => new CRenderComponentImpl(handle);
+    static int ISchemaClass<CRenderComponent>.Size => 176;
+    static string? ISchemaClass<CRenderComponent>.ClassName => null;
 
-  static CRenderComponent ISchemaClass<CRenderComponent>.From(nint handle) => new CRenderComponentImpl(handle);
-  static int ISchemaClass<CRenderComponent>.Size => 176;
-  static string? ISchemaClass<CRenderComponent>.ClassName => null;
 
-  
-  public ref CNetworkVarChainer __m_pChainEntity { get; }
-  
-  public ref bool IsRenderingWithViewModels { get; }
-  
-  public ref uint SplitscreenFlags { get; }
-  
-  public ref bool EnableRendering { get; }
-  
-  public ref bool InterpolationReadyToDraw { get; }
+    public ref CNetworkVarChainer __m_pChainEntity { get; }
+
+    public ref bool IsRenderingWithViewModels { get; }
+
+    public ref uint SplitscreenFlags { get; }
+
+    public ref bool EnableRendering { get; }
+
+    public ref bool InterpolationReadyToDraw { get; }
 
 
 }

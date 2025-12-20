@@ -8,59 +8,59 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointWorldText : CModelPointEntity, ISchemaClass<CPointWorldText> {
+public partial interface CPointWorldText : CModelPointEntity, ISchemaClass<CPointWorldText>
+{
+    static CPointWorldText ISchemaClass<CPointWorldText>.From(nint handle) => new CPointWorldTextImpl(handle);
+    static int ISchemaClass<CPointWorldText>.Size => 2696;
+    static string? ISchemaClass<CPointWorldText>.ClassName => "point_worldtext";
 
-  static CPointWorldText ISchemaClass<CPointWorldText>.From(nint handle) => new CPointWorldTextImpl(handle);
-  static int ISchemaClass<CPointWorldText>.Size => 2696;
-  static string? ISchemaClass<CPointWorldText>.ClassName => "point_worldtext";
 
-  
-  public string MessageText { get; set; }
-  
-  public string FontName { get; set; }
-  
-  public string BackgroundMaterialName { get; set; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref bool Fullbright { get; }
-  
-  public ref float WorldUnitsPerPx { get; }
-  
-  public ref float FontSize { get; }
-  
-  public ref float DepthOffset { get; }
-  
-  public ref bool DrawBackground { get; }
-  
-  public ref float BackgroundBorderWidth { get; }
-  
-  public ref float BackgroundBorderHeight { get; }
-  
-  public ref float BackgroundWorldToUV { get; }
-  
-  public ref Color Color { get; }
-  
-  public ref PointWorldTextJustifyHorizontal_t JustifyHorizontal { get; }
-  
-  public ref PointWorldTextJustifyVertical_t JustifyVertical { get; }
-  
-  public ref PointWorldTextReorientMode_t ReorientMode { get; }
+    public string MessageText { get; set; }
 
-  public void MessageTextUpdated();
-  public void FontNameUpdated();
-  public void BackgroundMaterialNameUpdated();
-  public void EnabledUpdated();
-  public void FullbrightUpdated();
-  public void WorldUnitsPerPxUpdated();
-  public void FontSizeUpdated();
-  public void DepthOffsetUpdated();
-  public void DrawBackgroundUpdated();
-  public void BackgroundBorderWidthUpdated();
-  public void BackgroundBorderHeightUpdated();
-  public void BackgroundWorldToUVUpdated();
-  public void ColorUpdated();
-  public void JustifyHorizontalUpdated();
-  public void JustifyVerticalUpdated();
-  public void ReorientModeUpdated();
+    public string FontName { get; set; }
+
+    public string BackgroundMaterialName { get; set; }
+
+    public ref bool Enabled { get; }
+
+    public ref bool Fullbright { get; }
+
+    public ref float WorldUnitsPerPx { get; }
+
+    public ref float FontSize { get; }
+
+    public ref float DepthOffset { get; }
+
+    public ref bool DrawBackground { get; }
+
+    public ref float BackgroundBorderWidth { get; }
+
+    public ref float BackgroundBorderHeight { get; }
+
+    public ref float BackgroundWorldToUV { get; }
+
+    public ref Color Color { get; }
+
+    public ref PointWorldTextJustifyHorizontal_t JustifyHorizontal { get; }
+
+    public ref PointWorldTextJustifyVertical_t JustifyVertical { get; }
+
+    public ref PointWorldTextReorientMode_t ReorientMode { get; }
+
+    public void MessageTextUpdated();
+    public void FontNameUpdated();
+    public void BackgroundMaterialNameUpdated();
+    public void EnabledUpdated();
+    public void FullbrightUpdated();
+    public void WorldUnitsPerPxUpdated();
+    public void FontSizeUpdated();
+    public void DepthOffsetUpdated();
+    public void DrawBackgroundUpdated();
+    public void BackgroundBorderWidthUpdated();
+    public void BackgroundBorderHeightUpdated();
+    public void BackgroundWorldToUVUpdated();
+    public void ColorUpdated();
+    public void JustifyHorizontalUpdated();
+    public void JustifyVerticalUpdated();
+    public void ReorientModeUpdated();
 }

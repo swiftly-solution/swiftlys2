@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CStateMachineUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CStateMachineUpdateNode {
+internal partial class CStateMachineUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CStateMachineUpdateNode
+{
+    public CStateMachineUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CStateMachineUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StateMachineOffset;
 
-  private static nint? _StateMachineOffset;
-
-  public CAnimStateMachineUpdater StateMachine {
-    get {
-      if (_StateMachineOffset == null) {
-        _StateMachineOffset = Schema.GetOffset(0xE2E7B91DBB7EEF2F);
-      }
-      return new CAnimStateMachineUpdaterImpl(_Handle + _StateMachineOffset!.Value);
+    public CAnimStateMachineUpdater StateMachine {
+        get {
+            _StateMachineOffset = _StateMachineOffset ?? Schema.GetOffset(0xE2E7B91DBB7EEF2F);
+            return new CAnimStateMachineUpdaterImpl(_Handle + _StateMachineOffset!.Value);
+        }
     }
-  }
-  private static nint? _StateDataOffset;
+    private static nint? _StateDataOffset;
 
-  public ref CUtlVector<CStateNodeStateData> StateData {
-    get {
-      if (_StateDataOffset == null) {
-        _StateDataOffset = Schema.GetOffset(0xE2E7B91D765EA6D6);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStateNodeStateData>>(_StateDataOffset!.Value);
+    public ref CUtlVector<CStateNodeStateData> StateData {
+        get {
+            _StateDataOffset = _StateDataOffset ?? Schema.GetOffset(0xE2E7B91D765EA6D6);
+            return ref _Handle.AsRef<CUtlVector<CStateNodeStateData>>(_StateDataOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransitionDataOffset;
+    private static nint? _TransitionDataOffset;
 
-  public ref CUtlVector<CStateNodeTransitionData> TransitionData {
-    get {
-      if (_TransitionDataOffset == null) {
-        _TransitionDataOffset = Schema.GetOffset(0xE2E7B91D730EEA72);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStateNodeTransitionData>>(_TransitionDataOffset!.Value);
+    public ref CUtlVector<CStateNodeTransitionData> TransitionData {
+        get {
+            _TransitionDataOffset = _TransitionDataOffset ?? Schema.GetOffset(0xE2E7B91D730EEA72);
+            return ref _Handle.AsRef<CUtlVector<CStateNodeTransitionData>>(_TransitionDataOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlockWaningTagsOffset;
+    private static nint? _BlockWaningTagsOffset;
 
-  public ref bool BlockWaningTags {
-    get {
-      if (_BlockWaningTagsOffset == null) {
-        _BlockWaningTagsOffset = Schema.GetOffset(0xE2E7B91DB6999F75);
-      }
-      return ref _Handle.AsRef<bool>(_BlockWaningTagsOffset!.Value);
+    public ref bool BlockWaningTags {
+        get {
+            _BlockWaningTagsOffset = _BlockWaningTagsOffset ?? Schema.GetOffset(0xE2E7B91DB6999F75);
+            return ref _Handle.AsRef<bool>(_BlockWaningTagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LockStateWhenWaningOffset;
+    private static nint? _LockStateWhenWaningOffset;
 
-  public ref bool LockStateWhenWaning {
-    get {
-      if (_LockStateWhenWaningOffset == null) {
-        _LockStateWhenWaningOffset = Schema.GetOffset(0xE2E7B91D105A8C95);
-      }
-      return ref _Handle.AsRef<bool>(_LockStateWhenWaningOffset!.Value);
+    public ref bool LockStateWhenWaning {
+        get {
+            _LockStateWhenWaningOffset = _LockStateWhenWaningOffset ?? Schema.GetOffset(0xE2E7B91D105A8C95);
+            return ref _Handle.AsRef<bool>(_LockStateWhenWaningOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResetWhenActivatedOffset;
+    private static nint? _ResetWhenActivatedOffset;
 
-  public ref bool ResetWhenActivated {
-    get {
-      if (_ResetWhenActivatedOffset == null) {
-        _ResetWhenActivatedOffset = Schema.GetOffset(0xE2E7B91DE7055CF7);
-      }
-      return ref _Handle.AsRef<bool>(_ResetWhenActivatedOffset!.Value);
+    public ref bool ResetWhenActivated {
+        get {
+            _ResetWhenActivatedOffset = _ResetWhenActivatedOffset ?? Schema.GetOffset(0xE2E7B91DE7055CF7);
+            return ref _Handle.AsRef<bool>(_ResetWhenActivatedOffset!.Value);
+        }
     }
-  }
 
 
 }

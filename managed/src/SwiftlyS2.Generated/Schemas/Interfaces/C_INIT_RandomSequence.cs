@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomSequence : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomSequence> {
+public partial interface C_INIT_RandomSequence : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomSequence>
+{
+    static C_INIT_RandomSequence ISchemaClass<C_INIT_RandomSequence>.From(nint handle) => new C_INIT_RandomSequenceImpl(handle);
+    static int ISchemaClass<C_INIT_RandomSequence>.Size => 520;
+    static string? ISchemaClass<C_INIT_RandomSequence>.ClassName => null;
 
-  static C_INIT_RandomSequence ISchemaClass<C_INIT_RandomSequence>.From(nint handle) => new C_INIT_RandomSequenceImpl(handle);
-  static int ISchemaClass<C_INIT_RandomSequence>.Size => 520;
-  static string? ISchemaClass<C_INIT_RandomSequence>.ClassName => null;
 
-  
-  public ref int SequenceMin { get; }
-  
-  public ref int SequenceMax { get; }
-  
-  public ref bool Shuffle { get; }
-  
-  public ref bool Linear { get; }
-  
-  public ref CUtlVector<SequenceWeightedList_t> WeightedList { get; }
+    public ref int SequenceMin { get; }
+
+    public ref int SequenceMax { get; }
+
+    public ref bool Shuffle { get; }
+
+    public ref bool Linear { get; }
+
+    public ref CUtlVector<SequenceWeightedList_t> WeightedList { get; }
 
 
 }

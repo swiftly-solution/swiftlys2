@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLookAtUpdateNode : CUnaryUpdateNode, ISchemaClass<CLookAtUpdateNode> {
+public partial interface CLookAtUpdateNode : CUnaryUpdateNode, ISchemaClass<CLookAtUpdateNode>
+{
+    static CLookAtUpdateNode ISchemaClass<CLookAtUpdateNode>.From(nint handle) => new CLookAtUpdateNodeImpl(handle);
+    static int ISchemaClass<CLookAtUpdateNode>.Size => 352;
+    static string? ISchemaClass<CLookAtUpdateNode>.ClassName => null;
 
-  static CLookAtUpdateNode ISchemaClass<CLookAtUpdateNode>.From(nint handle) => new CLookAtUpdateNodeImpl(handle);
-  static int ISchemaClass<CLookAtUpdateNode>.Size => 352;
-  static string? ISchemaClass<CLookAtUpdateNode>.ClassName => null;
 
-  
-  public LookAtOpFixedSettings_t OpFixedSettings { get; }
-  
-  public ref AnimVectorSource Target { get; }
-  
-  public CAnimParamHandle ParamIndex { get; }
-  
-  public CAnimParamHandle WeightParamIndex { get; }
-  
-  public ref bool ResetChild { get; }
-  
-  public ref bool LockWhenWaning { get; }
+    public LookAtOpFixedSettings_t OpFixedSettings { get; }
+
+    public ref AnimVectorSource Target { get; }
+
+    public CAnimParamHandle ParamIndex { get; }
+
+    public CAnimParamHandle WeightParamIndex { get; }
+
+    public ref bool ResetChild { get; }
+
+    public ref bool LockWhenWaning { get; }
 
 
 }

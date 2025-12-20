@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderVRHapticEvent : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderVRHapticEvent> {
+public partial interface C_OP_RenderVRHapticEvent : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderVRHapticEvent>
+{
+    static C_OP_RenderVRHapticEvent ISchemaClass<C_OP_RenderVRHapticEvent>.From(nint handle) => new C_OP_RenderVRHapticEventImpl(handle);
+    static int ISchemaClass<C_OP_RenderVRHapticEvent>.Size => 928;
+    static string? ISchemaClass<C_OP_RenderVRHapticEvent>.ClassName => null;
 
-  static C_OP_RenderVRHapticEvent ISchemaClass<C_OP_RenderVRHapticEvent>.From(nint handle) => new C_OP_RenderVRHapticEventImpl(handle);
-  static int ISchemaClass<C_OP_RenderVRHapticEvent>.Size => 928;
-  static string? ISchemaClass<C_OP_RenderVRHapticEvent>.ClassName => null;
 
-  
-  public ref ParticleVRHandChoiceList_t Hand { get; }
-  
-  public ref int OutputHandCP { get; }
-  
-  public ref int OutputField { get; }
-  
-  public CPerParticleFloatInput Amplitude { get; }
+    public ref ParticleVRHandChoiceList_t Hand { get; }
+
+    public ref int OutputHandCP { get; }
+
+    public ref int OutputField { get; }
+
+    public CPerParticleFloatInput Amplitude { get; }
 
 
 }

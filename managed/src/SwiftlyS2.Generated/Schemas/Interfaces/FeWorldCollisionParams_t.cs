@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeWorldCollisionParams_t : ISchemaClass<FeWorldCollisionParams_t> {
+public partial interface FeWorldCollisionParams_t : ISchemaClass<FeWorldCollisionParams_t>
+{
+    static FeWorldCollisionParams_t ISchemaClass<FeWorldCollisionParams_t>.From(nint handle) => new FeWorldCollisionParams_tImpl(handle);
+    static int ISchemaClass<FeWorldCollisionParams_t>.Size => 12;
+    static string? ISchemaClass<FeWorldCollisionParams_t>.ClassName => null;
 
-  static FeWorldCollisionParams_t ISchemaClass<FeWorldCollisionParams_t>.From(nint handle) => new FeWorldCollisionParams_tImpl(handle);
-  static int ISchemaClass<FeWorldCollisionParams_t>.Size => 12;
-  static string? ISchemaClass<FeWorldCollisionParams_t>.ClassName => null;
 
-  
-  public ref float WorldFriction { get; }
-  
-  public ref float GroundFriction { get; }
-  
-  public ref ushort ListBegin { get; }
-  
-  public ref ushort ListEnd { get; }
+    public ref float WorldFriction { get; }
+
+    public ref float GroundFriction { get; }
+
+    public ref ushort ListBegin { get; }
+
+    public ref ushort ListEnd { get; }
 
 
 }

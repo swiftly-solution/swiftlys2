@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeNodeWindBase_tImpl : SchemaClass, FeNodeWindBase_t {
+internal partial class FeNodeWindBase_tImpl : SchemaClass, FeNodeWindBase_t
+{
+    public FeNodeWindBase_tImpl(nint handle) : base(handle) { }
 
-  public FeNodeWindBase_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodeX0Offset;
 
-  private static nint? _NodeX0Offset;
-
-  public ref ushort NodeX0 {
-    get {
-      if (_NodeX0Offset == null) {
-        _NodeX0Offset = Schema.GetOffset(0x3892EC5081C7FEB9);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeX0Offset!.Value);
+    public ref ushort NodeX0 {
+        get {
+            _NodeX0Offset = _NodeX0Offset ?? Schema.GetOffset(0x3892EC5081C7FEB9);
+            return ref _Handle.AsRef<ushort>(_NodeX0Offset!.Value);
+        }
     }
-  }
-  private static nint? _NodeX1Offset;
+    private static nint? _NodeX1Offset;
 
-  public ref ushort NodeX1 {
-    get {
-      if (_NodeX1Offset == null) {
-        _NodeX1Offset = Schema.GetOffset(0x3892EC5080C7FD26);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeX1Offset!.Value);
+    public ref ushort NodeX1 {
+        get {
+            _NodeX1Offset = _NodeX1Offset ?? Schema.GetOffset(0x3892EC5080C7FD26);
+            return ref _Handle.AsRef<ushort>(_NodeX1Offset!.Value);
+        }
     }
-  }
-  private static nint? _NodeY0Offset;
+    private static nint? _NodeY0Offset;
 
-  public ref ushort NodeY0 {
-    get {
-      if (_NodeY0Offset == null) {
-        _NodeY0Offset = Schema.GetOffset(0x3892EC507BC5B6B0);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeY0Offset!.Value);
+    public ref ushort NodeY0 {
+        get {
+            _NodeY0Offset = _NodeY0Offset ?? Schema.GetOffset(0x3892EC507BC5B6B0);
+            return ref _Handle.AsRef<ushort>(_NodeY0Offset!.Value);
+        }
     }
-  }
-  private static nint? _NodeY1Offset;
+    private static nint? _NodeY1Offset;
 
-  public ref ushort NodeY1 {
-    get {
-      if (_NodeY1Offset == null) {
-        _NodeY1Offset = Schema.GetOffset(0x3892EC507CC5B843);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeY1Offset!.Value);
+    public ref ushort NodeY1 {
+        get {
+            _NodeY1Offset = _NodeY1Offset ?? Schema.GetOffset(0x3892EC507CC5B843);
+            return ref _Handle.AsRef<ushort>(_NodeY1Offset!.Value);
+        }
     }
-  }
 
 
 }

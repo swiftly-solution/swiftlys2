@@ -6,145 +6,112 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRR_ResponseImpl : SchemaClass, CRR_Response {
+internal partial class CRR_ResponseImpl : SchemaClass, CRR_Response
+{
+    public CRR_ResponseImpl(nint handle) : base(handle) { }
 
-  public CRR_ResponseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref byte Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x7B8008788ED6D5CD);
-      }
-      return ref _Handle.AsRef<byte>(_TypeOffset!.Value);
-    }
-  }
-  private static nint? _ResponseNameOffset;
-
-  public string ResponseName {
-    get {
-        if (_ResponseNameOffset == null) {
-            _ResponseNameOffset = Schema.GetOffset(0x7B800878C2716964);
+    public ref byte Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x7B8008788ED6D5CD);
+            return ref _Handle.AsRef<byte>(_TypeOffset!.Value);
         }
-        var ptr = _Handle + _ResponseNameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_ResponseNameOffset == null) {
-            _ResponseNameOffset = Schema.GetOffset(0x7B800878C2716964);
+    private static nint? _ResponseNameOffset;
+
+    public string ResponseName {
+        get {
+            _ResponseNameOffset = _ResponseNameOffset ?? Schema.GetOffset(0x7B800878C2716964);
+            return Schema.GetString(_Handle + _ResponseNameOffset!.Value);
         }
-        Schema.SetFixedString(_Handle, _ResponseNameOffset!.Value, value, 192);
-    }
-  } 
-  private static nint? _MatchingRuleOffset;
-
-  public string MatchingRule {
-    get {
-        if (_MatchingRuleOffset == null) {
-            _MatchingRuleOffset = Schema.GetOffset(0x7B80087820850239);
+        set {
+            _ResponseNameOffset = _ResponseNameOffset ?? Schema.GetOffset(0x7B800878C2716964);
+            Schema.SetFixedString(_Handle, _ResponseNameOffset!.Value, value, 192);
         }
-        var ptr = _Handle + _MatchingRuleOffset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_MatchingRuleOffset == null) {
-            _MatchingRuleOffset = Schema.GetOffset(0x7B80087820850239);
+    } 
+    private static nint? _MatchingRuleOffset;
+
+    public string MatchingRule {
+        get {
+            _MatchingRuleOffset = _MatchingRuleOffset ?? Schema.GetOffset(0x7B80087820850239);
+            return Schema.GetString(_Handle + _MatchingRuleOffset!.Value);
         }
-        Schema.SetFixedString(_Handle, _MatchingRuleOffset!.Value, value, 128);
-    }
-  } 
-  private static nint? _ParamsOffset;
+        set {
+            _MatchingRuleOffset = _MatchingRuleOffset ?? Schema.GetOffset(0x7B80087820850239);
+            Schema.SetFixedString(_Handle, _MatchingRuleOffset!.Value, value, 128);
+        }
+    } 
+    private static nint? _ParamsOffset;
 
-  public ResponseParams Params {
-    get {
-      if (_ParamsOffset == null) {
-        _ParamsOffset = Schema.GetOffset(0x7B800878900020D3);
-      }
-      return new ResponseParamsImpl(_Handle + _ParamsOffset!.Value);
+    public ResponseParams Params {
+        get {
+            _ParamsOffset = _ParamsOffset ?? Schema.GetOffset(0x7B800878900020D3);
+            return new ResponseParamsImpl(_Handle + _ParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MatchScoreOffset;
+    private static nint? _MatchScoreOffset;
 
-  public ref float MatchScore {
-    get {
-      if (_MatchScoreOffset == null) {
-        _MatchScoreOffset = Schema.GetOffset(0x7B80087861BE6F08);
-      }
-      return ref _Handle.AsRef<float>(_MatchScoreOffset!.Value);
+    public ref float MatchScore {
+        get {
+            _MatchScoreOffset = _MatchScoreOffset ?? Schema.GetOffset(0x7B80087861BE6F08);
+            return ref _Handle.AsRef<float>(_MatchScoreOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnyMatchingRulesInCooldownOffset;
+    private static nint? _AnyMatchingRulesInCooldownOffset;
 
-  public ref bool AnyMatchingRulesInCooldown {
-    get {
-      if (_AnyMatchingRulesInCooldownOffset == null) {
-        _AnyMatchingRulesInCooldownOffset = Schema.GetOffset(0x7B800878579F1BE7);
-      }
-      return ref _Handle.AsRef<bool>(_AnyMatchingRulesInCooldownOffset!.Value);
+    public ref bool AnyMatchingRulesInCooldown {
+        get {
+            _AnyMatchingRulesInCooldownOffset = _AnyMatchingRulesInCooldownOffset ?? Schema.GetOffset(0x7B800878579F1BE7);
+            return ref _Handle.AsRef<bool>(_AnyMatchingRulesInCooldownOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpeakerContextOffset;
+    private static nint? _SpeakerContextOffset;
 
-  public string SpeakerContext {
-    get {
-      if (_SpeakerContextOffset == null) {
-        _SpeakerContextOffset = Schema.GetOffset(0x7B80087877C70A38);
-      }
-      var ptr = _Handle.Read<nint>(_SpeakerContextOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SpeakerContextOffset == null) {
-        _SpeakerContextOffset = Schema.GetOffset(0x7B80087877C70A38);
-      }
-      Schema.SetString(_Handle, _SpeakerContextOffset!.Value, value);
-    }
-  } 
-  private static nint? _WorldContextOffset;
+    public string SpeakerContext {
+        get {
+            _SpeakerContextOffset = _SpeakerContextOffset ?? Schema.GetOffset(0x7B80087877C70A38);
+            return Schema.GetString(_Handle.Read<nint>(_SpeakerContextOffset!.Value));
+        }
+        set {
+            _SpeakerContextOffset = _SpeakerContextOffset ?? Schema.GetOffset(0x7B80087877C70A38);
+            Schema.SetString(_Handle, _SpeakerContextOffset!.Value, value);
+        }
+    } 
+    private static nint? _WorldContextOffset;
 
-  public string WorldContext {
-    get {
-      if (_WorldContextOffset == null) {
-        _WorldContextOffset = Schema.GetOffset(0x7B8008781DC998DF);
-      }
-      var ptr = _Handle.Read<nint>(_WorldContextOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_WorldContextOffset == null) {
-        _WorldContextOffset = Schema.GetOffset(0x7B8008781DC998DF);
-      }
-      Schema.SetString(_Handle, _WorldContextOffset!.Value, value);
-    }
-  } 
-  private static nint? _FollowupOffset;
+    public string WorldContext {
+        get {
+            _WorldContextOffset = _WorldContextOffset ?? Schema.GetOffset(0x7B8008781DC998DF);
+            return Schema.GetString(_Handle.Read<nint>(_WorldContextOffset!.Value));
+        }
+        set {
+            _WorldContextOffset = _WorldContextOffset ?? Schema.GetOffset(0x7B8008781DC998DF);
+            Schema.SetString(_Handle, _WorldContextOffset!.Value, value);
+        }
+    } 
+    private static nint? _FollowupOffset;
 
-  public ResponseFollowup Followup {
-    get {
-      if (_FollowupOffset == null) {
-        _FollowupOffset = Schema.GetOffset(0x7B800878B1F72BFD);
-      }
-      return new ResponseFollowupImpl(_Handle + _FollowupOffset!.Value);
+    public ResponseFollowup Followup {
+        get {
+            _FollowupOffset = _FollowupOffset ?? Schema.GetOffset(0x7B800878B1F72BFD);
+            return new ResponseFollowupImpl(_Handle + _FollowupOffset!.Value);
+        }
     }
-  }
-  private static nint? _RecipientFilterOffset;
+    private static nint? _RecipientFilterOffset;
 
-  public SchemaUntypedField RecipientFilter {
-    get {
-      if (_RecipientFilterOffset == null) {
-        _RecipientFilterOffset = Schema.GetOffset(0x7B800878CC301E4A);
-      }
-      return new SchemaUntypedField(_Handle + _RecipientFilterOffset!.Value);
+    public SchemaUntypedField RecipientFilter {
+        get {
+            _RecipientFilterOffset = _RecipientFilterOffset ?? Schema.GetOffset(0x7B800878CC301E4A);
+            return new SchemaUntypedField(_Handle + _RecipientFilterOffset!.Value);
+        }
     }
-  }
 
 
 }

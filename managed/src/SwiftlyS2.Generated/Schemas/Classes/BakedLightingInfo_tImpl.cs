@@ -6,127 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class BakedLightingInfo_tImpl : SchemaClass, BakedLightingInfo_t {
+internal partial class BakedLightingInfo_tImpl : SchemaClass, BakedLightingInfo_t
+{
+    public BakedLightingInfo_tImpl(nint handle) : base(handle) { }
 
-  public BakedLightingInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LightmapVersionNumberOffset;
 
-  private static nint? _LightmapVersionNumberOffset;
-
-  public ref uint LightmapVersionNumber {
-    get {
-      if (_LightmapVersionNumberOffset == null) {
-        _LightmapVersionNumberOffset = Schema.GetOffset(0x6909F4EF909450E0);
-      }
-      return ref _Handle.AsRef<uint>(_LightmapVersionNumberOffset!.Value);
+    public ref uint LightmapVersionNumber {
+        get {
+            _LightmapVersionNumberOffset = _LightmapVersionNumberOffset ?? Schema.GetOffset(0x6909F4EF909450E0);
+            return ref _Handle.AsRef<uint>(_LightmapVersionNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _LightmapGameVersionNumberOffset;
+    private static nint? _LightmapGameVersionNumberOffset;
 
-  public ref uint LightmapGameVersionNumber {
-    get {
-      if (_LightmapGameVersionNumberOffset == null) {
-        _LightmapGameVersionNumberOffset = Schema.GetOffset(0x6909F4EFC1181112);
-      }
-      return ref _Handle.AsRef<uint>(_LightmapGameVersionNumberOffset!.Value);
+    public ref uint LightmapGameVersionNumber {
+        get {
+            _LightmapGameVersionNumberOffset = _LightmapGameVersionNumberOffset ?? Schema.GetOffset(0x6909F4EFC1181112);
+            return ref _Handle.AsRef<uint>(_LightmapGameVersionNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _LightmapUvScaleOffset;
+    private static nint? _LightmapUvScaleOffset;
 
-  public ref Vector2D LightmapUvScale {
-    get {
-      if (_LightmapUvScaleOffset == null) {
-        _LightmapUvScaleOffset = Schema.GetOffset(0x6909F4EF36320516);
-      }
-      return ref _Handle.AsRef<Vector2D>(_LightmapUvScaleOffset!.Value);
+    public ref Vector2D LightmapUvScale {
+        get {
+            _LightmapUvScaleOffset = _LightmapUvScaleOffset ?? Schema.GetOffset(0x6909F4EF36320516);
+            return ref _Handle.AsRef<Vector2D>(_LightmapUvScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasLightmapsOffset;
+    private static nint? _HasLightmapsOffset;
 
-  public ref bool HasLightmaps {
-    get {
-      if (_HasLightmapsOffset == null) {
-        _HasLightmapsOffset = Schema.GetOffset(0x6909F4EF86932F1E);
-      }
-      return ref _Handle.AsRef<bool>(_HasLightmapsOffset!.Value);
+    public ref bool HasLightmaps {
+        get {
+            _HasLightmapsOffset = _HasLightmapsOffset ?? Schema.GetOffset(0x6909F4EF86932F1E);
+            return ref _Handle.AsRef<bool>(_HasLightmapsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BakedShadowsGamma20Offset;
+    private static nint? _BakedShadowsGamma20Offset;
 
-  public ref bool BakedShadowsGamma20 {
-    get {
-      if (_BakedShadowsGamma20Offset == null) {
-        _BakedShadowsGamma20Offset = Schema.GetOffset(0x6909F4EF2FA903D4);
-      }
-      return ref _Handle.AsRef<bool>(_BakedShadowsGamma20Offset!.Value);
+    public ref bool BakedShadowsGamma20 {
+        get {
+            _BakedShadowsGamma20Offset = _BakedShadowsGamma20Offset ?? Schema.GetOffset(0x6909F4EF2FA903D4);
+            return ref _Handle.AsRef<bool>(_BakedShadowsGamma20Offset!.Value);
+        }
     }
-  }
-  private static nint? _CompressionEnabledOffset;
+    private static nint? _CompressionEnabledOffset;
 
-  public ref bool CompressionEnabled {
-    get {
-      if (_CompressionEnabledOffset == null) {
-        _CompressionEnabledOffset = Schema.GetOffset(0x6909F4EF0082912E);
-      }
-      return ref _Handle.AsRef<bool>(_CompressionEnabledOffset!.Value);
+    public ref bool CompressionEnabled {
+        get {
+            _CompressionEnabledOffset = _CompressionEnabledOffset ?? Schema.GetOffset(0x6909F4EF0082912E);
+            return ref _Handle.AsRef<bool>(_CompressionEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _SHLightmapsOffset;
+    private static nint? _SHLightmapsOffset;
 
-  public ref bool SHLightmaps {
-    get {
-      if (_SHLightmapsOffset == null) {
-        _SHLightmapsOffset = Schema.GetOffset(0x6909F4EF04697DAD);
-      }
-      return ref _Handle.AsRef<bool>(_SHLightmapsOffset!.Value);
+    public ref bool SHLightmaps {
+        get {
+            _SHLightmapsOffset = _SHLightmapsOffset ?? Schema.GetOffset(0x6909F4EF04697DAD);
+            return ref _Handle.AsRef<bool>(_SHLightmapsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChartPackIterationsOffset;
+    private static nint? _ChartPackIterationsOffset;
 
-  public ref byte ChartPackIterations {
-    get {
-      if (_ChartPackIterationsOffset == null) {
-        _ChartPackIterationsOffset = Schema.GetOffset(0x6909F4EF7CF370A6);
-      }
-      return ref _Handle.AsRef<byte>(_ChartPackIterationsOffset!.Value);
+    public ref byte ChartPackIterations {
+        get {
+            _ChartPackIterationsOffset = _ChartPackIterationsOffset ?? Schema.GetOffset(0x6909F4EF7CF370A6);
+            return ref _Handle.AsRef<byte>(_ChartPackIterationsOffset!.Value);
+        }
     }
-  }
-  private static nint? _VradQualityOffset;
+    private static nint? _VradQualityOffset;
 
-  public ref byte VradQuality {
-    get {
-      if (_VradQualityOffset == null) {
-        _VradQualityOffset = Schema.GetOffset(0x6909F4EFDFCA05D9);
-      }
-      return ref _Handle.AsRef<byte>(_VradQualityOffset!.Value);
+    public ref byte VradQuality {
+        get {
+            _VradQualityOffset = _VradQualityOffset ?? Schema.GetOffset(0x6909F4EFDFCA05D9);
+            return ref _Handle.AsRef<byte>(_VradQualityOffset!.Value);
+        }
     }
-  }
-  private static nint? _LightMapsOffset;
+    private static nint? _LightMapsOffset;
 
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCTextureBase>> LightMaps {
-    get {
-      if (_LightMapsOffset == null) {
-        _LightMapsOffset = Schema.GetOffset(0x6909F4EF6F2EFF94);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCTextureBase>>>(_LightMapsOffset!.Value);
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCTextureBase>> LightMaps {
+        get {
+            _LightMapsOffset = _LightMapsOffset ?? Schema.GetOffset(0x6909F4EF6F2EFF94);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCTextureBase>>>(_LightMapsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BakedShadowsOffset;
+    private static nint? _BakedShadowsOffset;
 
-  public ref CUtlVector<BakedLightingInfo_t__BakedShadowAssignment_t> BakedShadows {
-    get {
-      if (_BakedShadowsOffset == null) {
-        _BakedShadowsOffset = Schema.GetOffset(0x6909F4EFE8C9B481);
-      }
-      return ref _Handle.AsRef<CUtlVector<BakedLightingInfo_t__BakedShadowAssignment_t>>(_BakedShadowsOffset!.Value);
+    public ref CUtlVector<BakedLightingInfo_t__BakedShadowAssignment_t> BakedShadows {
+        get {
+            _BakedShadowsOffset = _BakedShadowsOffset ?? Schema.GetOffset(0x6909F4EFE8C9B481);
+            return ref _Handle.AsRef<CUtlVector<BakedLightingInfo_t__BakedShadowAssignment_t>>(_BakedShadowsOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatComparisonNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmFloatComparisonNode__CDefinition> {
+public partial interface CNmFloatComparisonNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmFloatComparisonNode__CDefinition>
+{
+    static CNmFloatComparisonNode__CDefinition ISchemaClass<CNmFloatComparisonNode__CDefinition>.From(nint handle) => new CNmFloatComparisonNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFloatComparisonNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmFloatComparisonNode__CDefinition>.ClassName => null;
 
-  static CNmFloatComparisonNode__CDefinition ISchemaClass<CNmFloatComparisonNode__CDefinition>.From(nint handle) => new CNmFloatComparisonNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFloatComparisonNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmFloatComparisonNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref short ComparandValueNodeIdx { get; }
-  
-  public ref CNmFloatComparisonNode__Comparison_t Comparison { get; }
-  
-  public ref float Epsilon { get; }
-  
-  public ref float ComparisonValue { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    public ref short ComparandValueNodeIdx { get; }
+
+    public ref CNmFloatComparisonNode__Comparison_t Comparison { get; }
+
+    public ref float Epsilon { get; }
+
+    public ref float ComparisonValue { get; }
 
 
 }

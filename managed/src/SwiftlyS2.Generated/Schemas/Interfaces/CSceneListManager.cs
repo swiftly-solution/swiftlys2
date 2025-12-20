@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSceneListManager : CLogicalEntity, ISchemaClass<CSceneListManager> {
+public partial interface CSceneListManager : CLogicalEntity, ISchemaClass<CSceneListManager>
+{
+    static CSceneListManager ISchemaClass<CSceneListManager>.From(nint handle) => new CSceneListManagerImpl(handle);
+    static int ISchemaClass<CSceneListManager>.Size => 1480;
+    static string? ISchemaClass<CSceneListManager>.ClassName => "logic_scene_list_manager";
 
-  static CSceneListManager ISchemaClass<CSceneListManager>.From(nint handle) => new CSceneListManagerImpl(handle);
-  static int ISchemaClass<CSceneListManager>.Size => 1480;
-  static string? ISchemaClass<CSceneListManager>.ClassName => "logic_scene_list_manager";
 
-  
-  public ref CUtlVector<CHandle<CSceneListManager>> ListManagers { get; }
-  
-  public string Scenes { get; set; }
-  
-  public ISchemaFixedArray<CHandle<CBaseEntity>> Scenes1 { get; }
+    public ref CUtlVector<CHandle<CSceneListManager>> ListManagers { get; }
+
+    public string Scenes { get; set; }
+
+    public ISchemaFixedArray<CHandle<CBaseEntity>> Scenes1 { get; }
 
 
 }

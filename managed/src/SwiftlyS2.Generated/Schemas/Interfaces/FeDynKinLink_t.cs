@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeDynKinLink_t : ISchemaClass<FeDynKinLink_t> {
+public partial interface FeDynKinLink_t : ISchemaClass<FeDynKinLink_t>
+{
+    static FeDynKinLink_t ISchemaClass<FeDynKinLink_t>.From(nint handle) => new FeDynKinLink_tImpl(handle);
+    static int ISchemaClass<FeDynKinLink_t>.Size => 4;
+    static string? ISchemaClass<FeDynKinLink_t>.ClassName => null;
 
-  static FeDynKinLink_t ISchemaClass<FeDynKinLink_t>.From(nint handle) => new FeDynKinLink_tImpl(handle);
-  static int ISchemaClass<FeDynKinLink_t>.Size => 4;
-  static string? ISchemaClass<FeDynKinLink_t>.ClassName => null;
 
-  
-  public ref ushort Parent { get; }
-  
-  public ref ushort Child { get; }
+    public ref ushort Parent { get; }
+
+    public ref ushort Child { get; }
 
 
 }

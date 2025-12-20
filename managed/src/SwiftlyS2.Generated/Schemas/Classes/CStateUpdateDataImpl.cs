@@ -6,124 +6,100 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CStateUpdateDataImpl : SchemaClass, CStateUpdateData {
+internal partial class CStateUpdateDataImpl : SchemaClass, CStateUpdateData
+{
+    public CStateUpdateDataImpl(nint handle) : base(handle) { }
 
-  public CStateUpdateDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xD984C8C64D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xD984C8C64D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ScriptOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xD984C8C64D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public AnimScriptHandle Script {
+        get {
+            _ScriptOffset = _ScriptOffset ?? Schema.GetOffset(0xD984C8C629D70FB0);
+            return new AnimScriptHandleImpl(_Handle + _ScriptOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xD984C8C64D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ScriptOffset;
+    private static nint? _TransitionIndicesOffset;
 
-  public AnimScriptHandle Script {
-    get {
-      if (_ScriptOffset == null) {
-        _ScriptOffset = Schema.GetOffset(0xD984C8C629D70FB0);
-      }
-      return new AnimScriptHandleImpl(_Handle + _ScriptOffset!.Value);
+    public ref CUtlVector<int> TransitionIndices {
+        get {
+            _TransitionIndicesOffset = _TransitionIndicesOffset ?? Schema.GetOffset(0xD984C8C689E40507);
+            return ref _Handle.AsRef<CUtlVector<int>>(_TransitionIndicesOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransitionIndicesOffset;
+    private static nint? _ActionsOffset;
 
-  public ref CUtlVector<int> TransitionIndices {
-    get {
-      if (_TransitionIndicesOffset == null) {
-        _TransitionIndicesOffset = Schema.GetOffset(0xD984C8C689E40507);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_TransitionIndicesOffset!.Value);
+    public ref CUtlVector<CStateActionUpdater> Actions {
+        get {
+            _ActionsOffset = _ActionsOffset ?? Schema.GetOffset(0xD984C8C68D622684);
+            return ref _Handle.AsRef<CUtlVector<CStateActionUpdater>>(_ActionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActionsOffset;
+    private static nint? _StateIDOffset;
 
-  public ref CUtlVector<CStateActionUpdater> Actions {
-    get {
-      if (_ActionsOffset == null) {
-        _ActionsOffset = Schema.GetOffset(0xD984C8C68D622684);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStateActionUpdater>>(_ActionsOffset!.Value);
+    public AnimStateID StateID {
+        get {
+            _StateIDOffset = _StateIDOffset ?? Schema.GetOffset(0xD984C8C65362B56B);
+            return new AnimStateIDImpl(_Handle + _StateIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _StateIDOffset;
+    private static nint? _IsStartStateOffset;
 
-  public AnimStateID StateID {
-    get {
-      if (_StateIDOffset == null) {
-        _StateIDOffset = Schema.GetOffset(0xD984C8C65362B56B);
-      }
-      return new AnimStateIDImpl(_Handle + _StateIDOffset!.Value);
+    public SchemaUntypedField IsStartState {
+        get {
+            _IsStartStateOffset = _IsStartStateOffset ?? Schema.GetOffset(0xD984C8C6B4CEE040);
+            return new SchemaUntypedField(_Handle + _IsStartStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsStartStateOffset;
+    private static nint? _IsEndStateOffset;
 
-  public SchemaUntypedField IsStartState {
-    get {
-      if (_IsStartStateOffset == null) {
-        _IsStartStateOffset = Schema.GetOffset(0xD984C8C6B4CEE040);
-      }
-      return new SchemaUntypedField(_Handle + _IsStartStateOffset!.Value);
+    public SchemaUntypedField IsEndState {
+        get {
+            _IsEndStateOffset = _IsEndStateOffset ?? Schema.GetOffset(0xD984C8C65C2338AF);
+            return new SchemaUntypedField(_Handle + _IsEndStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsEndStateOffset;
+    private static nint? _IsPassthroughOffset;
 
-  public SchemaUntypedField IsEndState {
-    get {
-      if (_IsEndStateOffset == null) {
-        _IsEndStateOffset = Schema.GetOffset(0xD984C8C65C2338AF);
-      }
-      return new SchemaUntypedField(_Handle + _IsEndStateOffset!.Value);
+    public SchemaUntypedField IsPassthrough {
+        get {
+            _IsPassthroughOffset = _IsPassthroughOffset ?? Schema.GetOffset(0xD984C8C6F0AD9431);
+            return new SchemaUntypedField(_Handle + _IsPassthroughOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsPassthroughOffset;
+    private static nint? _IsPassthroughRootMotionOffset;
 
-  public SchemaUntypedField IsPassthrough {
-    get {
-      if (_IsPassthroughOffset == null) {
-        _IsPassthroughOffset = Schema.GetOffset(0xD984C8C6F0AD9431);
-      }
-      return new SchemaUntypedField(_Handle + _IsPassthroughOffset!.Value);
+    public SchemaUntypedField IsPassthroughRootMotion {
+        get {
+            _IsPassthroughRootMotionOffset = _IsPassthroughRootMotionOffset ?? Schema.GetOffset(0xD984C8C64B319C83);
+            return new SchemaUntypedField(_Handle + _IsPassthroughRootMotionOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsPassthroughRootMotionOffset;
+    private static nint? _PreEvaluatePassthroughTransitionPathOffset;
 
-  public SchemaUntypedField IsPassthroughRootMotion {
-    get {
-      if (_IsPassthroughRootMotionOffset == null) {
-        _IsPassthroughRootMotionOffset = Schema.GetOffset(0xD984C8C64B319C83);
-      }
-      return new SchemaUntypedField(_Handle + _IsPassthroughRootMotionOffset!.Value);
+    public SchemaUntypedField PreEvaluatePassthroughTransitionPath {
+        get {
+            _PreEvaluatePassthroughTransitionPathOffset = _PreEvaluatePassthroughTransitionPathOffset ?? Schema.GetOffset(0xD984C8C60DFCB92D);
+            return new SchemaUntypedField(_Handle + _PreEvaluatePassthroughTransitionPathOffset!.Value);
+        }
     }
-  }
-  private static nint? _PreEvaluatePassthroughTransitionPathOffset;
-
-  public SchemaUntypedField PreEvaluatePassthroughTransitionPath {
-    get {
-      if (_PreEvaluatePassthroughTransitionPathOffset == null) {
-        _PreEvaluatePassthroughTransitionPathOffset = Schema.GetOffset(0xD984C8C60DFCB92D);
-      }
-      return new SchemaUntypedField(_Handle + _PreEvaluatePassthroughTransitionPathOffset!.Value);
-    }
-  }
 
 
 }

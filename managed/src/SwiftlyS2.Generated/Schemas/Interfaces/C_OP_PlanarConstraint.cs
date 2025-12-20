@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_PlanarConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_PlanarConstraint> {
+public partial interface C_OP_PlanarConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_PlanarConstraint>
+{
+    static C_OP_PlanarConstraint ISchemaClass<C_OP_PlanarConstraint>.From(nint handle) => new C_OP_PlanarConstraintImpl(handle);
+    static int ISchemaClass<C_OP_PlanarConstraint>.Size => 1240;
+    static string? ISchemaClass<C_OP_PlanarConstraint>.ClassName => null;
 
-  static C_OP_PlanarConstraint ISchemaClass<C_OP_PlanarConstraint>.From(nint handle) => new C_OP_PlanarConstraintImpl(handle);
-  static int ISchemaClass<C_OP_PlanarConstraint>.Size => 1240;
-  static string? ISchemaClass<C_OP_PlanarConstraint>.ClassName => null;
 
-  
-  public ref Vector PointOnPlane { get; }
-  
-  public ref Vector PlaneNormal { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref bool GlobalOrigin { get; }
-  
-  public ref bool GlobalNormal { get; }
-  
-  public CPerParticleFloatInput RadiusScale { get; }
-  
-  public CParticleCollectionFloatInput MaximumDistanceToCP { get; }
-  
-  public ref bool UseOldCode { get; }
+    public ref Vector PointOnPlane { get; }
+
+    public ref Vector PlaneNormal { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref bool GlobalOrigin { get; }
+
+    public ref bool GlobalNormal { get; }
+
+    public CPerParticleFloatInput RadiusScale { get; }
+
+    public CParticleCollectionFloatInput MaximumDistanceToCP { get; }
+
+    public ref bool UseOldCode { get; }
 
 
 }

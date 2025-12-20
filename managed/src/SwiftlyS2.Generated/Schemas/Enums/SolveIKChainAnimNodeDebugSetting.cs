@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SolveIKChainAnimNodeDebugSetting : uint {
-
+public enum SolveIKChainAnimNodeDebugSetting : uint
+{
  SOLVEIKCHAINANIMNODEDEBUGSETTING_None = 0,
 
  SOLVEIKCHAINANIMNODEDEBUGSETTING_X_Axis_Circle = 1,

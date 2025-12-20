@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PulseNodeDynamicOutflows_t__DynamicOutflow_tImpl : SchemaClass, PulseNodeDynamicOutflows_t__DynamicOutflow_t {
+internal partial class PulseNodeDynamicOutflows_t__DynamicOutflow_tImpl : SchemaClass, PulseNodeDynamicOutflows_t__DynamicOutflow_t
+{
+    public PulseNodeDynamicOutflows_t__DynamicOutflow_tImpl(nint handle) : base(handle) { }
 
-  public PulseNodeDynamicOutflows_t__DynamicOutflow_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OutflowIDOffset;
 
-  private static nint? _OutflowIDOffset;
-
-  public ref CGlobalSymbol OutflowID {
-    get {
-      if (_OutflowIDOffset == null) {
-        _OutflowIDOffset = Schema.GetOffset(0x4ACC8D59E16DD56);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_OutflowIDOffset!.Value);
+    public ref CGlobalSymbol OutflowID {
+        get {
+            _OutflowIDOffset = _OutflowIDOffset ?? Schema.GetOffset(0x4ACC8D59E16DD56);
+            return ref _Handle.AsRef<CGlobalSymbol>(_OutflowIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConnectionOffset;
+    private static nint? _ConnectionOffset;
 
-  public CPulse_OutflowConnection Connection {
-    get {
-      if (_ConnectionOffset == null) {
-        _ConnectionOffset = Schema.GetOffset(0x4ACC8D5D4CD5F59);
-      }
-      return new CPulse_OutflowConnectionImpl(_Handle + _ConnectionOffset!.Value);
+    public CPulse_OutflowConnection Connection {
+        get {
+            _ConnectionOffset = _ConnectionOffset ?? Schema.GetOffset(0x4ACC8D5D4CD5F59);
+            return new CPulse_OutflowConnectionImpl(_Handle + _ConnectionOffset!.Value);
+        }
     }
-  }
 
 
 }

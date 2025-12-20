@@ -6,48 +6,41 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CHintMessageQueueImpl : SchemaClass, CHintMessageQueue {
+internal partial class CHintMessageQueueImpl : SchemaClass, CHintMessageQueue
+{
+    public CHintMessageQueueImpl(nint handle) : base(handle) { }
 
-  public CHintMessageQueueImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TmMessageEndOffset;
 
-  private static nint? _TmMessageEndOffset;
-
-  public ref float TmMessageEnd {
-    get {
-      if (_TmMessageEndOffset == null) {
-        _TmMessageEndOffset = Schema.GetOffset(0xBE13489745AC0F6);
-      }
-      return ref _Handle.AsRef<float>(_TmMessageEndOffset!.Value);
+    public ref float TmMessageEnd {
+        get {
+            _TmMessageEndOffset = _TmMessageEndOffset ?? Schema.GetOffset(0xBE13489745AC0F6);
+            return ref _Handle.AsRef<float>(_TmMessageEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _MessagesOffset;
+    private static nint? _MessagesOffset;
 
-  public ref CUtlVector<PointerTo<CHintMessage>> Messages {
-    get {
-      if (_MessagesOffset == null) {
-        _MessagesOffset = Schema.GetOffset(0xBE134896139CC55);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointerTo<CHintMessage>>>(_MessagesOffset!.Value);
+    public ref CUtlVector<PointerTo<CHintMessage>> Messages {
+        get {
+            _MessagesOffset = _MessagesOffset ?? Schema.GetOffset(0xBE134896139CC55);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CHintMessage>>>(_MessagesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayerControllerOffset;
+    private static nint? _PlayerControllerOffset;
 
-  public CBasePlayerController? PlayerController {
-    get {
-      if (_PlayerControllerOffset == null) {
-        _PlayerControllerOffset = Schema.GetOffset(0xBE13489DCE6762E);
-      }
-      var ptr = _Handle.Read<nint>(_PlayerControllerOffset!.Value);
-      return ptr.IsValidPtr() ? new CBasePlayerControllerImpl(ptr) : null;
+    public CBasePlayerController? PlayerController {
+        get {
+            _PlayerControllerOffset = _PlayerControllerOffset ?? Schema.GetOffset(0xBE13489DCE6762E);
+            var ptr = _Handle.Read<nint>(_PlayerControllerOffset!.Value);
+            return ptr.IsValidPtr() ? new CBasePlayerControllerImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

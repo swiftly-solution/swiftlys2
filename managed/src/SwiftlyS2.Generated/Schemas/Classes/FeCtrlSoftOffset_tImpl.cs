@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeCtrlSoftOffset_tImpl : SchemaClass, FeCtrlSoftOffset_t {
+internal partial class FeCtrlSoftOffset_tImpl : SchemaClass, FeCtrlSoftOffset_t
+{
+    public FeCtrlSoftOffset_tImpl(nint handle) : base(handle) { }
 
-  public FeCtrlSoftOffset_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CtrlParentOffset;
 
-  private static nint? _CtrlParentOffset;
-
-  public ref ushort CtrlParent {
-    get {
-      if (_CtrlParentOffset == null) {
-        _CtrlParentOffset = Schema.GetOffset(0xCA94FF2955049230);
-      }
-      return ref _Handle.AsRef<ushort>(_CtrlParentOffset!.Value);
+    public ref ushort CtrlParent {
+        get {
+            _CtrlParentOffset = _CtrlParentOffset ?? Schema.GetOffset(0xCA94FF2955049230);
+            return ref _Handle.AsRef<ushort>(_CtrlParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _CtrlChildOffset;
+    private static nint? _CtrlChildOffset;
 
-  public ref ushort CtrlChild {
-    get {
-      if (_CtrlChildOffset == null) {
-        _CtrlChildOffset = Schema.GetOffset(0xCA94FF295BE48066);
-      }
-      return ref _Handle.AsRef<ushort>(_CtrlChildOffset!.Value);
+    public ref ushort CtrlChild {
+        get {
+            _CtrlChildOffset = _CtrlChildOffset ?? Schema.GetOffset(0xCA94FF295BE48066);
+            return ref _Handle.AsRef<ushort>(_CtrlChildOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetOffset;
+    private static nint? _OffsetOffset;
 
-  public ref Vector Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0xCA94FF29B2913856);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    public ref Vector Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xCA94FF29B2913856);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaOffset;
+    private static nint? _AlphaOffset;
 
-  public ref float Alpha {
-    get {
-      if (_AlphaOffset == null) {
-        _AlphaOffset = Schema.GetOffset(0xCA94FF29684C8871);
-      }
-      return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
+    public ref float Alpha {
+        get {
+            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0xCA94FF29684C8871);
+            return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
+        }
     }
-  }
 
 
 }

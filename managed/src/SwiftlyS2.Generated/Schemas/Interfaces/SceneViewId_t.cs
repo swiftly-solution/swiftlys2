@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SceneViewId_t : ISchemaClass<SceneViewId_t> {
+public partial interface SceneViewId_t : ISchemaClass<SceneViewId_t>
+{
+    static SceneViewId_t ISchemaClass<SceneViewId_t>.From(nint handle) => new SceneViewId_tImpl(handle);
+    static int ISchemaClass<SceneViewId_t>.Size => 16;
+    static string? ISchemaClass<SceneViewId_t>.ClassName => null;
 
-  static SceneViewId_t ISchemaClass<SceneViewId_t>.From(nint handle) => new SceneViewId_tImpl(handle);
-  static int ISchemaClass<SceneViewId_t>.Size => 16;
-  static string? ISchemaClass<SceneViewId_t>.ClassName => null;
 
-  
-  public ref ulong ViewId { get; }
-  
-  public ref ulong FrameCount { get; }
+    public ref ulong ViewId { get; }
+
+    public ref ulong FrameCount { get; }
 
 
 }

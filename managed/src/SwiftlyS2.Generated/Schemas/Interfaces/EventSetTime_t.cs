@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventSetTime_t : ISchemaClass<EventSetTime_t> {
+public partial interface EventSetTime_t : ISchemaClass<EventSetTime_t>
+{
+    static EventSetTime_t ISchemaClass<EventSetTime_t>.From(nint handle) => new EventSetTime_tImpl(handle);
+    static int ISchemaClass<EventSetTime_t>.Size => 96;
+    static string? ISchemaClass<EventSetTime_t>.ClassName => null;
 
-  static EventSetTime_t ISchemaClass<EventSetTime_t>.From(nint handle) => new EventSetTime_tImpl(handle);
-  static int ISchemaClass<EventSetTime_t>.Size => 96;
-  static string? ISchemaClass<EventSetTime_t>.ClassName => null;
 
-  
-  public EngineLoopState_t LoopState { get; }
-  
-  public ref int ClientOutputFrames { get; }
-  
-  public ref double RealTime { get; }
-  
-  public ref double RenderTime { get; }
-  
-  public ref double RenderFrameTime { get; }
-  
-  public ref double RenderFrameTimeUnbounded { get; }
-  
-  public ref double RenderFrameTimeUnscaled { get; }
-  
-  public ref double TickRemainder { get; }
+    public EngineLoopState_t LoopState { get; }
+
+    public ref int ClientOutputFrames { get; }
+
+    public ref double RealTime { get; }
+
+    public ref double RenderTime { get; }
+
+    public ref double RenderFrameTime { get; }
+
+    public ref double RenderFrameTimeUnbounded { get; }
+
+    public ref double RenderFrameTimeUnscaled { get; }
+
+    public ref double TickRemainder { get; }
 
 
 }

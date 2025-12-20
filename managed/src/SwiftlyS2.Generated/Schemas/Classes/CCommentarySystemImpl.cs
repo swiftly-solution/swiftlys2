@@ -6,117 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCommentarySystemImpl : SchemaClass, CCommentarySystem {
+internal partial class CCommentarySystemImpl : SchemaClass, CCommentarySystem
+{
+    public CCommentarySystemImpl(nint handle) : base(handle) { }
 
-  public CCommentarySystemImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CommentaryConvarsChangingOffset;
 
-  private static nint? _CommentaryConvarsChangingOffset;
-
-  public ref bool CommentaryConvarsChanging {
-    get {
-      if (_CommentaryConvarsChangingOffset == null) {
-        _CommentaryConvarsChangingOffset = Schema.GetOffset(0x87CBBE6A7FB57A2D);
-      }
-      return ref _Handle.AsRef<bool>(_CommentaryConvarsChangingOffset!.Value);
+    public ref bool CommentaryConvarsChanging {
+        get {
+            _CommentaryConvarsChangingOffset = _CommentaryConvarsChangingOffset ?? Schema.GetOffset(0x87CBBE6A7FB57A2D);
+            return ref _Handle.AsRef<bool>(_CommentaryConvarsChangingOffset!.Value);
+        }
     }
-  }
-  private static nint? _CommentaryEnabledMidGameOffset;
+    private static nint? _CommentaryEnabledMidGameOffset;
 
-  public ref bool CommentaryEnabledMidGame {
-    get {
-      if (_CommentaryEnabledMidGameOffset == null) {
-        _CommentaryEnabledMidGameOffset = Schema.GetOffset(0x87CBBE6A45558B4F);
-      }
-      return ref _Handle.AsRef<bool>(_CommentaryEnabledMidGameOffset!.Value);
+    public ref bool CommentaryEnabledMidGame {
+        get {
+            _CommentaryEnabledMidGameOffset = _CommentaryEnabledMidGameOffset ?? Schema.GetOffset(0x87CBBE6A45558B4F);
+            return ref _Handle.AsRef<bool>(_CommentaryEnabledMidGameOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextTeleportTimeOffset;
+    private static nint? _NextTeleportTimeOffset;
 
-  public GameTime_t NextTeleportTime {
-    get {
-      if (_NextTeleportTimeOffset == null) {
-        _NextTeleportTimeOffset = Schema.GetOffset(0x87CBBE6A92701808);
-      }
-      return new GameTime_tImpl(_Handle + _NextTeleportTimeOffset!.Value);
+    public GameTime_t NextTeleportTime {
+        get {
+            _NextTeleportTimeOffset = _NextTeleportTimeOffset ?? Schema.GetOffset(0x87CBBE6A92701808);
+            return new GameTime_tImpl(_Handle + _NextTeleportTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _TeleportStageOffset;
+    private static nint? _TeleportStageOffset;
 
-  public ref int TeleportStage {
-    get {
-      if (_TeleportStageOffset == null) {
-        _TeleportStageOffset = Schema.GetOffset(0x87CBBE6A75C25D8B);
-      }
-      return ref _Handle.AsRef<int>(_TeleportStageOffset!.Value);
+    public ref int TeleportStage {
+        get {
+            _TeleportStageOffset = _TeleportStageOffset ?? Schema.GetOffset(0x87CBBE6A75C25D8B);
+            return ref _Handle.AsRef<int>(_TeleportStageOffset!.Value);
+        }
     }
-  }
-  private static nint? _CheatStateOffset;
+    private static nint? _CheatStateOffset;
 
-  public ref bool CheatState {
-    get {
-      if (_CheatStateOffset == null) {
-        _CheatStateOffset = Schema.GetOffset(0x87CBBE6AA9DE3831);
-      }
-      return ref _Handle.AsRef<bool>(_CheatStateOffset!.Value);
+    public ref bool CheatState {
+        get {
+            _CheatStateOffset = _CheatStateOffset ?? Schema.GetOffset(0x87CBBE6AA9DE3831);
+            return ref _Handle.AsRef<bool>(_CheatStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsFirstSpawnGroupToLoadOffset;
+    private static nint? _IsFirstSpawnGroupToLoadOffset;
 
-  public ref bool IsFirstSpawnGroupToLoad {
-    get {
-      if (_IsFirstSpawnGroupToLoadOffset == null) {
-        _IsFirstSpawnGroupToLoadOffset = Schema.GetOffset(0x87CBBE6A1BDE1032);
-      }
-      return ref _Handle.AsRef<bool>(_IsFirstSpawnGroupToLoadOffset!.Value);
+    public ref bool IsFirstSpawnGroupToLoad {
+        get {
+            _IsFirstSpawnGroupToLoadOffset = _IsFirstSpawnGroupToLoadOffset ?? Schema.GetOffset(0x87CBBE6A1BDE1032);
+            return ref _Handle.AsRef<bool>(_IsFirstSpawnGroupToLoadOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurrentNodeOffset;
+    private static nint? _CurrentNodeOffset;
 
-  public ref CHandle<CPointCommentaryNode> CurrentNode {
-    get {
-      if (_CurrentNodeOffset == null) {
-        _CurrentNodeOffset = Schema.GetOffset(0x87CBBE6A5C1029D4);
-      }
-      return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_CurrentNodeOffset!.Value);
+    public ref CHandle<CPointCommentaryNode> CurrentNode {
+        get {
+            _CurrentNodeOffset = _CurrentNodeOffset ?? Schema.GetOffset(0x87CBBE6A5C1029D4);
+            return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_CurrentNodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveCommentaryNodeOffset;
+    private static nint? _ActiveCommentaryNodeOffset;
 
-  public ref CHandle<CPointCommentaryNode> ActiveCommentaryNode {
-    get {
-      if (_ActiveCommentaryNodeOffset == null) {
-        _ActiveCommentaryNodeOffset = Schema.GetOffset(0x87CBBE6AEA08BE3C);
-      }
-      return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_ActiveCommentaryNodeOffset!.Value);
+    public ref CHandle<CPointCommentaryNode> ActiveCommentaryNode {
+        get {
+            _ActiveCommentaryNodeOffset = _ActiveCommentaryNodeOffset ?? Schema.GetOffset(0x87CBBE6AEA08BE3C);
+            return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_ActiveCommentaryNodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastCommentaryNodeOffset;
+    private static nint? _LastCommentaryNodeOffset;
 
-  public ref CHandle<CPointCommentaryNode> LastCommentaryNode {
-    get {
-      if (_LastCommentaryNodeOffset == null) {
-        _LastCommentaryNodeOffset = Schema.GetOffset(0x87CBBE6A33A2318A);
-      }
-      return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_LastCommentaryNodeOffset!.Value);
+    public ref CHandle<CPointCommentaryNode> LastCommentaryNode {
+        get {
+            _LastCommentaryNodeOffset = _LastCommentaryNodeOffset ?? Schema.GetOffset(0x87CBBE6A33A2318A);
+            return ref _Handle.AsRef<CHandle<CPointCommentaryNode>>(_LastCommentaryNodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodesOffset;
+    private static nint? _NodesOffset;
 
-  public ref CUtlVector<CHandle<CPointCommentaryNode>> Nodes {
-    get {
-      if (_NodesOffset == null) {
-        _NodesOffset = Schema.GetOffset(0x87CBBE6A5CCA593A);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CPointCommentaryNode>>>(_NodesOffset!.Value);
+    public ref CUtlVector<CHandle<CPointCommentaryNode>> Nodes {
+        get {
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0x87CBBE6A5CCA593A);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CPointCommentaryNode>>>(_NodesOffset!.Value);
+        }
     }
-  }
 
 
 }

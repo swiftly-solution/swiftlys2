@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface GameTime_t : ISchemaClass<GameTime_t> {
+public partial interface GameTime_t : ISchemaClass<GameTime_t>
+{
+    static GameTime_t ISchemaClass<GameTime_t>.From(nint handle) => new GameTime_tImpl(handle);
+    static int ISchemaClass<GameTime_t>.Size => 4;
+    static string? ISchemaClass<GameTime_t>.ClassName => null;
 
-  static GameTime_t ISchemaClass<GameTime_t>.From(nint handle) => new GameTime_tImpl(handle);
-  static int ISchemaClass<GameTime_t>.Size => 4;
-  static string? ISchemaClass<GameTime_t>.ClassName => null;
 
-  
-  public ref float Value { get; }
+    public ref float Value { get; }
 
 
 }

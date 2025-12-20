@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ModelConfigHandle_t : ISchemaClass<ModelConfigHandle_t> {
+public partial interface ModelConfigHandle_t : ISchemaClass<ModelConfigHandle_t>
+{
+    static ModelConfigHandle_t ISchemaClass<ModelConfigHandle_t>.From(nint handle) => new ModelConfigHandle_tImpl(handle);
+    static int ISchemaClass<ModelConfigHandle_t>.Size => 4;
+    static string? ISchemaClass<ModelConfigHandle_t>.ClassName => null;
 
-  static ModelConfigHandle_t ISchemaClass<ModelConfigHandle_t>.From(nint handle) => new ModelConfigHandle_tImpl(handle);
-  static int ISchemaClass<ModelConfigHandle_t>.Size => 4;
-  static string? ISchemaClass<ModelConfigHandle_t>.ClassName => null;
 
-  
-  public ref uint Value { get; }
+    public ref uint Value { get; }
 
 
 }

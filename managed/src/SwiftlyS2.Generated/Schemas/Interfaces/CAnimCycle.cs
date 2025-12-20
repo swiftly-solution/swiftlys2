@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimCycle : CCycleBase, ISchemaClass<CAnimCycle> {
-
-  static CAnimCycle ISchemaClass<CAnimCycle>.From(nint handle) => new CAnimCycleImpl(handle);
-  static int ISchemaClass<CAnimCycle>.Size => 4;
-  static string? ISchemaClass<CAnimCycle>.ClassName => null;
+public partial interface CAnimCycle : CCycleBase, ISchemaClass<CAnimCycle>
+{
+    static CAnimCycle ISchemaClass<CAnimCycle>.From(nint handle) => new CAnimCycleImpl(handle);
+    static int ISchemaClass<CAnimCycle>.Size => 4;
+    static string? ISchemaClass<CAnimCycle>.ClassName => null;
 
 
 

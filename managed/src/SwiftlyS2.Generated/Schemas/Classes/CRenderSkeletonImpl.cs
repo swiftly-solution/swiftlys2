@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRenderSkeletonImpl : SchemaClass, CRenderSkeleton {
+internal partial class CRenderSkeletonImpl : SchemaClass, CRenderSkeleton
+{
+    public CRenderSkeletonImpl(nint handle) : base(handle) { }
 
-  public CRenderSkeletonImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BonesOffset;
 
-  private static nint? _BonesOffset;
-
-  public ref CUtlVector<RenderSkeletonBone_t> Bones {
-    get {
-      if (_BonesOffset == null) {
-        _BonesOffset = Schema.GetOffset(0xBF0A83950FDA60D4);
-      }
-      return ref _Handle.AsRef<CUtlVector<RenderSkeletonBone_t>>(_BonesOffset!.Value);
+    public ref CUtlVector<RenderSkeletonBone_t> Bones {
+        get {
+            _BonesOffset = _BonesOffset ?? Schema.GetOffset(0xBF0A83950FDA60D4);
+            return ref _Handle.AsRef<CUtlVector<RenderSkeletonBone_t>>(_BonesOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneParentsOffset;
+    private static nint? _BoneParentsOffset;
 
-  public ref CUtlVector<int> BoneParents {
-    get {
-      if (_BoneParentsOffset == null) {
-        _BoneParentsOffset = Schema.GetOffset(0xBF0A839571828F04);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_BoneParentsOffset!.Value);
+    public ref CUtlVector<int> BoneParents {
+        get {
+            _BoneParentsOffset = _BoneParentsOffset ?? Schema.GetOffset(0xBF0A839571828F04);
+            return ref _Handle.AsRef<CUtlVector<int>>(_BoneParentsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneWeightCountOffset;
+    private static nint? _BoneWeightCountOffset;
 
-  public ref int BoneWeightCount {
-    get {
-      if (_BoneWeightCountOffset == null) {
-        _BoneWeightCountOffset = Schema.GetOffset(0xBF0A839508029166);
-      }
-      return ref _Handle.AsRef<int>(_BoneWeightCountOffset!.Value);
+    public ref int BoneWeightCount {
+        get {
+            _BoneWeightCountOffset = _BoneWeightCountOffset ?? Schema.GetOffset(0xBF0A839508029166);
+            return ref _Handle.AsRef<int>(_BoneWeightCountOffset!.Value);
+        }
     }
-  }
 
 
 }

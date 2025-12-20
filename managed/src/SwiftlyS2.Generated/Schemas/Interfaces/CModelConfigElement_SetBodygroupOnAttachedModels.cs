@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigElement_SetBodygroupOnAttachedModels : CModelConfigElement, ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels> {
+public partial interface CModelConfigElement_SetBodygroupOnAttachedModels : CModelConfigElement, ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels>
+{
+    static CModelConfigElement_SetBodygroupOnAttachedModels ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels>.From(nint handle) => new CModelConfigElement_SetBodygroupOnAttachedModelsImpl(handle);
+    static int ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels>.Size => 88;
+    static string? ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels>.ClassName => null;
 
-  static CModelConfigElement_SetBodygroupOnAttachedModels ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels>.From(nint handle) => new CModelConfigElement_SetBodygroupOnAttachedModelsImpl(handle);
-  static int ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels>.Size => 88;
-  static string? ISchemaClass<CModelConfigElement_SetBodygroupOnAttachedModels>.ClassName => null;
 
-  
-  public string GroupName { get; set; }
-  
-  public ref int Choice { get; }
+    public string GroupName { get; set; }
+
+    public ref int Choice { get; }
 
 
 }

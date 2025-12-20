@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatCurveEventNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatCurveEventNode__CDefinition> {
+public partial interface CNmFloatCurveEventNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatCurveEventNode__CDefinition>
+{
+    static CNmFloatCurveEventNode__CDefinition ISchemaClass<CNmFloatCurveEventNode__CDefinition>.From(nint handle) => new CNmFloatCurveEventNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFloatCurveEventNode__CDefinition>.Size => 40;
+    static string? ISchemaClass<CNmFloatCurveEventNode__CDefinition>.ClassName => null;
 
-  static CNmFloatCurveEventNode__CDefinition ISchemaClass<CNmFloatCurveEventNode__CDefinition>.From(nint handle) => new CNmFloatCurveEventNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFloatCurveEventNode__CDefinition>.Size => 40;
-  static string? ISchemaClass<CNmFloatCurveEventNode__CDefinition>.ClassName => null;
 
-  
-  public ref CGlobalSymbol EventID { get; }
-  
-  public ref short DefaultNodeIdx { get; }
-  
-  public ref float DefaultValue { get; }
-  
-  public CNmBitFlags EventConditionRules { get; }
+    public ref CGlobalSymbol EventID { get; }
+
+    public ref short DefaultNodeIdx { get; }
+
+    public ref float DefaultValue { get; }
+
+    public CNmBitFlags EventConditionRules { get; }
 
 
 }

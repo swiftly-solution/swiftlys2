@@ -8,78 +8,78 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ControlpointLight : CParticleFunctionOperator, ISchemaClass<C_OP_ControlpointLight> {
+public partial interface C_OP_ControlpointLight : CParticleFunctionOperator, ISchemaClass<C_OP_ControlpointLight>
+{
+    static C_OP_ControlpointLight ISchemaClass<C_OP_ControlpointLight>.From(nint handle) => new C_OP_ControlpointLightImpl(handle);
+    static int ISchemaClass<C_OP_ControlpointLight>.Size => 1760;
+    static string? ISchemaClass<C_OP_ControlpointLight>.ClassName => null;
 
-  static C_OP_ControlpointLight ISchemaClass<C_OP_ControlpointLight>.From(nint handle) => new C_OP_ControlpointLightImpl(handle);
-  static int ISchemaClass<C_OP_ControlpointLight>.Size => 1760;
-  static string? ISchemaClass<C_OP_ControlpointLight>.ClassName => null;
 
-  
-  public ref float Scale { get; }
-  
-  public ref int ControlPoint1 { get; }
-  
-  public ref int ControlPoint2 { get; }
-  
-  public ref int ControlPoint3 { get; }
-  
-  public ref int ControlPoint4 { get; }
-  
-  public ref Vector CPOffset1 { get; }
-  
-  public ref Vector CPOffset2 { get; }
-  
-  public ref Vector CPOffset3 { get; }
-  
-  public ref Vector CPOffset4 { get; }
-  
-  public ref float LightFiftyDist1 { get; }
-  
-  public ref float LightZeroDist1 { get; }
-  
-  public ref float LightFiftyDist2 { get; }
-  
-  public ref float LightZeroDist2 { get; }
-  
-  public ref float LightFiftyDist3 { get; }
-  
-  public ref float LightZeroDist3 { get; }
-  
-  public ref float LightFiftyDist4 { get; }
-  
-  public ref float LightZeroDist4 { get; }
-  
-  public ref Color LightColor1 { get; }
-  
-  public ref Color LightColor2 { get; }
-  
-  public ref Color LightColor3 { get; }
-  
-  public ref Color LightColor4 { get; }
-  
-  public ref bool LightType1 { get; }
-  
-  public ref bool LightType2 { get; }
-  
-  public ref bool LightType3 { get; }
-  
-  public ref bool LightType4 { get; }
-  
-  public ref bool LightDynamic1 { get; }
-  
-  public ref bool LightDynamic2 { get; }
-  
-  public ref bool LightDynamic3 { get; }
-  
-  public ref bool LightDynamic4 { get; }
-  
-  public ref bool UseNormal { get; }
-  
-  public ref bool UseHLambert { get; }
-  
-  public ref bool ClampLowerRange { get; }
-  
-  public ref bool ClampUpperRange { get; }
+    public ref float Scale { get; }
+
+    public ref int ControlPoint1 { get; }
+
+    public ref int ControlPoint2 { get; }
+
+    public ref int ControlPoint3 { get; }
+
+    public ref int ControlPoint4 { get; }
+
+    public ref Vector CPOffset1 { get; }
+
+    public ref Vector CPOffset2 { get; }
+
+    public ref Vector CPOffset3 { get; }
+
+    public ref Vector CPOffset4 { get; }
+
+    public ref float LightFiftyDist1 { get; }
+
+    public ref float LightZeroDist1 { get; }
+
+    public ref float LightFiftyDist2 { get; }
+
+    public ref float LightZeroDist2 { get; }
+
+    public ref float LightFiftyDist3 { get; }
+
+    public ref float LightZeroDist3 { get; }
+
+    public ref float LightFiftyDist4 { get; }
+
+    public ref float LightZeroDist4 { get; }
+
+    public ref Color LightColor1 { get; }
+
+    public ref Color LightColor2 { get; }
+
+    public ref Color LightColor3 { get; }
+
+    public ref Color LightColor4 { get; }
+
+    public ref bool LightType1 { get; }
+
+    public ref bool LightType2 { get; }
+
+    public ref bool LightType3 { get; }
+
+    public ref bool LightType4 { get; }
+
+    public ref bool LightDynamic1 { get; }
+
+    public ref bool LightDynamic2 { get; }
+
+    public ref bool LightDynamic3 { get; }
+
+    public ref bool LightDynamic4 { get; }
+
+    public ref bool UseNormal { get; }
+
+    public ref bool UseHLambert { get; }
+
+    public ref bool ClampLowerRange { get; }
+
+    public ref bool ClampUpperRange { get; }
 
 
 }

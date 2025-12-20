@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSequenceTagSpans : ISchemaClass<CSequenceTagSpans> {
+public partial interface CSequenceTagSpans : ISchemaClass<CSequenceTagSpans>
+{
+    static CSequenceTagSpans ISchemaClass<CSequenceTagSpans>.From(nint handle) => new CSequenceTagSpansImpl(handle);
+    static int ISchemaClass<CSequenceTagSpans>.Size => 32;
+    static string? ISchemaClass<CSequenceTagSpans>.ClassName => null;
 
-  static CSequenceTagSpans ISchemaClass<CSequenceTagSpans>.From(nint handle) => new CSequenceTagSpansImpl(handle);
-  static int ISchemaClass<CSequenceTagSpans>.Size => 32;
-  static string? ISchemaClass<CSequenceTagSpans>.ClassName => null;
 
-  
-  public ref CGlobalSymbol SequenceName { get; }
-  
-  public ref CUtlVector<TagSpan_t> Tags { get; }
+    public ref CGlobalSymbol SequenceName { get; }
+
+    public ref CUtlVector<TagSpan_t> Tags { get; }
 
 
 }

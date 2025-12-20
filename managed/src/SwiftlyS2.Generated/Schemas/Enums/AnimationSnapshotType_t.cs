@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AnimationSnapshotType_t : uint {
-
+public enum AnimationSnapshotType_t : uint
+{
  ANIMATION_SNAPSHOT_SERVER_SIMULATION = 0,
 
  ANIMATION_SNAPSHOT_CLIENT_SIMULATION = 1,

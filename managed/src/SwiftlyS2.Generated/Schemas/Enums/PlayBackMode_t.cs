@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PlayBackMode_t : uint {
-
+public enum PlayBackMode_t : uint
+{
  Random = 0,
 
  RandomNoRepeats = 1,

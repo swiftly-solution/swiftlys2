@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetFromCPSnapshot : CParticleFunctionOperator, ISchemaClass<C_OP_SetFromCPSnapshot> {
+public partial interface C_OP_SetFromCPSnapshot : CParticleFunctionOperator, ISchemaClass<C_OP_SetFromCPSnapshot>
+{
+    static C_OP_SetFromCPSnapshot ISchemaClass<C_OP_SetFromCPSnapshot>.From(nint handle) => new C_OP_SetFromCPSnapshotImpl(handle);
+    static int ISchemaClass<C_OP_SetFromCPSnapshot>.Size => 1616;
+    static string? ISchemaClass<C_OP_SetFromCPSnapshot>.ClassName => null;
 
-  static C_OP_SetFromCPSnapshot ISchemaClass<C_OP_SetFromCPSnapshot>.From(nint handle) => new C_OP_SetFromCPSnapshotImpl(handle);
-  static int ISchemaClass<C_OP_SetFromCPSnapshot>.Size => 1616;
-  static string? ISchemaClass<C_OP_SetFromCPSnapshot>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public string StrSnapshotSubset { get; set; }
-  
-  public ParticleAttributeIndex_t AttributeToRead { get; }
-  
-  public ParticleAttributeIndex_t AttributeToWrite { get; }
-  
-  public ref int LocalSpaceCP { get; }
-  
-  public ref bool Random { get; }
-  
-  public ref bool Reverse { get; }
-  
-  public ref int RandomSeed { get; }
-  
-  public CParticleCollectionFloatInput SnapShotStartPoint { get; }
-  
-  public CParticleCollectionFloatInput SnapShotIncrement { get; }
-  
-  public CPerParticleFloatInput Interpolation { get; }
-  
-  public ref bool SubSample { get; }
-  
-  public ref bool Prev { get; }
+    public ref int ControlPointNumber { get; }
+
+    public string StrSnapshotSubset { get; set; }
+
+    public ParticleAttributeIndex_t AttributeToRead { get; }
+
+    public ParticleAttributeIndex_t AttributeToWrite { get; }
+
+    public ref int LocalSpaceCP { get; }
+
+    public ref bool Random { get; }
+
+    public ref bool Reverse { get; }
+
+    public ref int RandomSeed { get; }
+
+    public CParticleCollectionFloatInput SnapShotStartPoint { get; }
+
+    public CParticleCollectionFloatInput SnapShotIncrement { get; }
+
+    public CPerParticleFloatInput Interpolation { get; }
+
+    public ref bool SubSample { get; }
+
+    public ref bool Prev { get; }
 
 
 }

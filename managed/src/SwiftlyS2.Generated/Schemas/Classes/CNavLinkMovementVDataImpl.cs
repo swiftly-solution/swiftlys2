@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNavLinkMovementVDataImpl : SchemaClass, CNavLinkMovementVData {
+internal partial class CNavLinkMovementVDataImpl : SchemaClass, CNavLinkMovementVData
+{
+    public CNavLinkMovementVDataImpl(nint handle) : base(handle) { }
 
-  public CNavLinkMovementVDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ToolsOnlyOwnerModelNameOffset;
 
-  private static nint? _ToolsOnlyOwnerModelNameOffset;
-
-  public SchemaUntypedField ToolsOnlyOwnerModelName {
-    get {
-      if (_ToolsOnlyOwnerModelNameOffset == null) {
-        _ToolsOnlyOwnerModelNameOffset = Schema.GetOffset(0xACA2D2486DD9DD04);
-      }
-      return new SchemaUntypedField(_Handle + _ToolsOnlyOwnerModelNameOffset!.Value);
+    public SchemaUntypedField ToolsOnlyOwnerModelName {
+        get {
+            _ToolsOnlyOwnerModelNameOffset = _ToolsOnlyOwnerModelNameOffset ?? Schema.GetOffset(0xACA2D2486DD9DD04);
+            return new SchemaUntypedField(_Handle + _ToolsOnlyOwnerModelNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsInterpolatedOffset;
+    private static nint? _IsInterpolatedOffset;
 
-  public ref bool IsInterpolated {
-    get {
-      if (_IsInterpolatedOffset == null) {
-        _IsInterpolatedOffset = Schema.GetOffset(0xACA2D248EC811A8C);
-      }
-      return ref _Handle.AsRef<bool>(_IsInterpolatedOffset!.Value);
+    public ref bool IsInterpolated {
+        get {
+            _IsInterpolatedOffset = _IsInterpolatedOffset ?? Schema.GetOffset(0xACA2D248EC811A8C);
+            return ref _Handle.AsRef<bool>(_IsInterpolatedOffset!.Value);
+        }
     }
-  }
-  private static nint? _RecommendedDistanceOffset;
+    private static nint? _RecommendedDistanceOffset;
 
-  public ref uint RecommendedDistance {
-    get {
-      if (_RecommendedDistanceOffset == null) {
-        _RecommendedDistanceOffset = Schema.GetOffset(0xACA2D248BA1A388E);
-      }
-      return ref _Handle.AsRef<uint>(_RecommendedDistanceOffset!.Value);
+    public ref uint RecommendedDistance {
+        get {
+            _RecommendedDistanceOffset = _RecommendedDistanceOffset ?? Schema.GetOffset(0xACA2D248BA1A388E);
+            return ref _Handle.AsRef<uint>(_RecommendedDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimgraphVarsOffset;
+    private static nint? _AnimgraphVarsOffset;
 
-  public ref CUtlVector<CNavLinkAnimgraphVar> AnimgraphVars {
-    get {
-      if (_AnimgraphVarsOffset == null) {
-        _AnimgraphVarsOffset = Schema.GetOffset(0xACA2D2480FD1BA32);
-      }
-      return ref _Handle.AsRef<CUtlVector<CNavLinkAnimgraphVar>>(_AnimgraphVarsOffset!.Value);
+    public ref CUtlVector<CNavLinkAnimgraphVar> AnimgraphVars {
+        get {
+            _AnimgraphVarsOffset = _AnimgraphVarsOffset ?? Schema.GetOffset(0xACA2D2480FD1BA32);
+            return ref _Handle.AsRef<CUtlVector<CNavLinkAnimgraphVar>>(_AnimgraphVarsOffset!.Value);
+        }
     }
-  }
 
 
 }

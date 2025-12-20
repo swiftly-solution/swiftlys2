@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFutureFacingMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CFutureFacingMetricEvaluator {
+internal partial class CFutureFacingMetricEvaluatorImpl : CMotionMetricEvaluatorImpl, CFutureFacingMetricEvaluator
+{
+    public CFutureFacingMetricEvaluatorImpl(nint handle) : base(handle) { }
 
-  public CFutureFacingMetricEvaluatorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DistanceOffset;
 
-  private static nint? _DistanceOffset;
-
-  public ref float Distance {
-    get {
-      if (_DistanceOffset == null) {
-        _DistanceOffset = Schema.GetOffset(0x6A3CD0D400DC4A68);
-      }
-      return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+    public ref float Distance {
+        get {
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x6A3CD0D400DC4A68);
+            return ref _Handle.AsRef<float>(_DistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeOffset;
+    private static nint? _TimeOffset;
 
-  public ref float Time {
-    get {
-      if (_TimeOffset == null) {
-        _TimeOffset = Schema.GetOffset(0x6A3CD0D4C957229E);
-      }
-      return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+    public ref float Time {
+        get {
+            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0x6A3CD0D4C957229E);
+            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+        }
     }
-  }
 
 
 }

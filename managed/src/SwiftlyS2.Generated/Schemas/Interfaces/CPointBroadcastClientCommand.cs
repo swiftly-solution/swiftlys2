@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointBroadcastClientCommand : CPointEntity, ISchemaClass<CPointBroadcastClientCommand> {
-
-  static CPointBroadcastClientCommand ISchemaClass<CPointBroadcastClientCommand>.From(nint handle) => new CPointBroadcastClientCommandImpl(handle);
-  static int ISchemaClass<CPointBroadcastClientCommand>.Size => 1264;
-  static string? ISchemaClass<CPointBroadcastClientCommand>.ClassName => "point_broadcastclientcommand";
+public partial interface CPointBroadcastClientCommand : CPointEntity, ISchemaClass<CPointBroadcastClientCommand>
+{
+    static CPointBroadcastClientCommand ISchemaClass<CPointBroadcastClientCommand>.From(nint handle) => new CPointBroadcastClientCommandImpl(handle);
+    static int ISchemaClass<CPointBroadcastClientCommand>.Size => 1264;
+    static string? ISchemaClass<CPointBroadcastClientCommand>.ClassName => "point_broadcastclientcommand";
 
 
 

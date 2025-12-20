@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_WaterImpulseRenderer : CParticleFunctionRenderer, ISchemaClass<C_OP_WaterImpulseRenderer> {
+public partial interface C_OP_WaterImpulseRenderer : CParticleFunctionRenderer, ISchemaClass<C_OP_WaterImpulseRenderer>
+{
+    static C_OP_WaterImpulseRenderer ISchemaClass<C_OP_WaterImpulseRenderer>.From(nint handle) => new C_OP_WaterImpulseRendererImpl(handle);
+    static int ISchemaClass<C_OP_WaterImpulseRenderer>.Size => 4112;
+    static string? ISchemaClass<C_OP_WaterImpulseRenderer>.ClassName => null;
 
-  static C_OP_WaterImpulseRenderer ISchemaClass<C_OP_WaterImpulseRenderer>.From(nint handle) => new C_OP_WaterImpulseRendererImpl(handle);
-  static int ISchemaClass<C_OP_WaterImpulseRenderer>.Size => 4112;
-  static string? ISchemaClass<C_OP_WaterImpulseRenderer>.ClassName => null;
 
-  
-  public CPerParticleVecInput Pos { get; }
-  
-  public CPerParticleFloatInput Radius { get; }
-  
-  public CPerParticleFloatInput Magnitude { get; }
-  
-  public CPerParticleFloatInput Shape { get; }
-  
-  public CPerParticleFloatInput WindSpeed { get; }
-  
-  public CPerParticleFloatInput Wobble { get; }
-  
-  public ref bool IsRadialWind { get; }
-  
-  public ref EventTypeSelection_t EventType { get; }
+    public CPerParticleVecInput Pos { get; }
+
+    public CPerParticleFloatInput Radius { get; }
+
+    public CPerParticleFloatInput Magnitude { get; }
+
+    public CPerParticleFloatInput Shape { get; }
+
+    public CPerParticleFloatInput WindSpeed { get; }
+
+    public CPerParticleFloatInput Wobble { get; }
+
+    public ref bool IsRadialWind { get; }
+
+    public ref EventTypeSelection_t EventType { get; }
 
 
 }

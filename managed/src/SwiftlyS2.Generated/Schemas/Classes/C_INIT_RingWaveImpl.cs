@@ -6,127 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RingWaveImpl : CParticleFunctionInitializerImpl, C_INIT_RingWave {
+internal partial class C_INIT_RingWaveImpl : CParticleFunctionInitializerImpl, C_INIT_RingWave
+{
+    public C_INIT_RingWaveImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RingWaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformInputOffset;
 
-  private static nint? _TransformInputOffset;
-
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0xA5DA0691B3FDC289);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xA5DA0691B3FDC289);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParticlesPerOrbitOffset;
+    private static nint? _ParticlesPerOrbitOffset;
 
-  public CParticleCollectionFloatInput ParticlesPerOrbit {
-    get {
-      if (_ParticlesPerOrbitOffset == null) {
-        _ParticlesPerOrbitOffset = Schema.GetOffset(0xA5DA069184EA503F);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ParticlesPerOrbitOffset!.Value);
+    public CParticleCollectionFloatInput ParticlesPerOrbit {
+        get {
+            _ParticlesPerOrbitOffset = _ParticlesPerOrbitOffset ?? Schema.GetOffset(0xA5DA069184EA503F);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ParticlesPerOrbitOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitialRadiusOffset;
+    private static nint? _InitialRadiusOffset;
 
-  public CPerParticleFloatInput InitialRadius {
-    get {
-      if (_InitialRadiusOffset == null) {
-        _InitialRadiusOffset = Schema.GetOffset(0xA5DA06918B8AAB8B);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InitialRadiusOffset!.Value);
+    public CPerParticleFloatInput InitialRadius {
+        get {
+            _InitialRadiusOffset = _InitialRadiusOffset ?? Schema.GetOffset(0xA5DA06918B8AAB8B);
+            return new CPerParticleFloatInputImpl(_Handle + _InitialRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ThicknessOffset;
+    private static nint? _ThicknessOffset;
 
-  public CPerParticleFloatInput Thickness {
-    get {
-      if (_ThicknessOffset == null) {
-        _ThicknessOffset = Schema.GetOffset(0xA5DA0691DC7C1987);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ThicknessOffset!.Value);
+    public CPerParticleFloatInput Thickness {
+        get {
+            _ThicknessOffset = _ThicknessOffset ?? Schema.GetOffset(0xA5DA0691DC7C1987);
+            return new CPerParticleFloatInputImpl(_Handle + _ThicknessOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitialSpeedMinOffset;
+    private static nint? _InitialSpeedMinOffset;
 
-  public CPerParticleFloatInput InitialSpeedMin {
-    get {
-      if (_InitialSpeedMinOffset == null) {
-        _InitialSpeedMinOffset = Schema.GetOffset(0xA5DA0691E36FD694);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InitialSpeedMinOffset!.Value);
+    public CPerParticleFloatInput InitialSpeedMin {
+        get {
+            _InitialSpeedMinOffset = _InitialSpeedMinOffset ?? Schema.GetOffset(0xA5DA0691E36FD694);
+            return new CPerParticleFloatInputImpl(_Handle + _InitialSpeedMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitialSpeedMaxOffset;
+    private static nint? _InitialSpeedMaxOffset;
 
-  public CPerParticleFloatInput InitialSpeedMax {
-    get {
-      if (_InitialSpeedMaxOffset == null) {
-        _InitialSpeedMaxOffset = Schema.GetOffset(0xA5DA0691D184D4F6);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InitialSpeedMaxOffset!.Value);
+    public CPerParticleFloatInput InitialSpeedMax {
+        get {
+            _InitialSpeedMaxOffset = _InitialSpeedMaxOffset ?? Schema.GetOffset(0xA5DA0691D184D4F6);
+            return new CPerParticleFloatInputImpl(_Handle + _InitialSpeedMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _RollOffset;
+    private static nint? _RollOffset;
 
-  public CPerParticleFloatInput Roll {
-    get {
-      if (_RollOffset == null) {
-        _RollOffset = Schema.GetOffset(0xA5DA069188F97A90);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RollOffset!.Value);
+    public CPerParticleFloatInput Roll {
+        get {
+            _RollOffset = _RollOffset ?? Schema.GetOffset(0xA5DA069188F97A90);
+            return new CPerParticleFloatInputImpl(_Handle + _RollOffset!.Value);
+        }
     }
-  }
-  private static nint? _PitchOffset;
+    private static nint? _PitchOffset;
 
-  public CPerParticleFloatInput Pitch {
-    get {
-      if (_PitchOffset == null) {
-        _PitchOffset = Schema.GetOffset(0xA5DA06911CBA22DB);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _PitchOffset!.Value);
+    public CPerParticleFloatInput Pitch {
+        get {
+            _PitchOffset = _PitchOffset ?? Schema.GetOffset(0xA5DA06911CBA22DB);
+            return new CPerParticleFloatInputImpl(_Handle + _PitchOffset!.Value);
+        }
     }
-  }
-  private static nint? _YawOffset;
+    private static nint? _YawOffset;
 
-  public CPerParticleFloatInput Yaw {
-    get {
-      if (_YawOffset == null) {
-        _YawOffset = Schema.GetOffset(0xA5DA0691B40C1E8A);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _YawOffset!.Value);
+    public CPerParticleFloatInput Yaw {
+        get {
+            _YawOffset = _YawOffset ?? Schema.GetOffset(0xA5DA0691B40C1E8A);
+            return new CPerParticleFloatInputImpl(_Handle + _YawOffset!.Value);
+        }
     }
-  }
-  private static nint? _EvenDistributionOffset;
+    private static nint? _EvenDistributionOffset;
 
-  public ref bool EvenDistribution {
-    get {
-      if (_EvenDistributionOffset == null) {
-        _EvenDistributionOffset = Schema.GetOffset(0xA5DA069184932067);
-      }
-      return ref _Handle.AsRef<bool>(_EvenDistributionOffset!.Value);
+    public ref bool EvenDistribution {
+        get {
+            _EvenDistributionOffset = _EvenDistributionOffset ?? Schema.GetOffset(0xA5DA069184932067);
+            return ref _Handle.AsRef<bool>(_EvenDistributionOffset!.Value);
+        }
     }
-  }
-  private static nint? _XYVelocityOnlyOffset;
+    private static nint? _XYVelocityOnlyOffset;
 
-  public ref bool XYVelocityOnly {
-    get {
-      if (_XYVelocityOnlyOffset == null) {
-        _XYVelocityOnlyOffset = Schema.GetOffset(0xA5DA0691A20CED5B);
-      }
-      return ref _Handle.AsRef<bool>(_XYVelocityOnlyOffset!.Value);
+    public ref bool XYVelocityOnly {
+        get {
+            _XYVelocityOnlyOffset = _XYVelocityOnlyOffset ?? Schema.GetOffset(0xA5DA0691A20CED5B);
+            return ref _Handle.AsRef<bool>(_XYVelocityOnlyOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleRotationLockType_t : uint {
-
+public enum ParticleRotationLockType_t : uint
+{
  PARTICLE_ROTATION_LOCK_NONE = 0,
 
  PARTICLE_ROTATION_LOCK_ROTATIONS = 1,

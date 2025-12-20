@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_DistanceToNeighborCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_DistanceToNeighborCull> {
+public partial interface C_INIT_DistanceToNeighborCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_DistanceToNeighborCull>
+{
+    static C_INIT_DistanceToNeighborCull ISchemaClass<C_INIT_DistanceToNeighborCull>.From(nint handle) => new C_INIT_DistanceToNeighborCullImpl(handle);
+    static int ISchemaClass<C_INIT_DistanceToNeighborCull>.Size => 1600;
+    static string? ISchemaClass<C_INIT_DistanceToNeighborCull>.ClassName => null;
 
-  static C_INIT_DistanceToNeighborCull ISchemaClass<C_INIT_DistanceToNeighborCull>.From(nint handle) => new C_INIT_DistanceToNeighborCullImpl(handle);
-  static int ISchemaClass<C_INIT_DistanceToNeighborCull>.Size => 1600;
-  static string? ISchemaClass<C_INIT_DistanceToNeighborCull>.ClassName => null;
 
-  
-  public CPerParticleFloatInput Distance { get; }
-  
-  public ref bool IncludeRadii { get; }
-  
-  public CPerParticleFloatInput LifespanOverlap { get; }
-  
-  public ParticleAttributeIndex_t FieldModify { get; }
-  
-  public CPerParticleFloatInput Modify { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool UseNeighbor { get; }
+    public CPerParticleFloatInput Distance { get; }
+
+    public ref bool IncludeRadii { get; }
+
+    public CPerParticleFloatInput LifespanOverlap { get; }
+
+    public ParticleAttributeIndex_t FieldModify { get; }
+
+    public CPerParticleFloatInput Modify { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool UseNeighbor { get; }
 
 
 }

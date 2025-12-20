@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeStiffHingeBuild_t : ISchemaClass<FeStiffHingeBuild_t> {
+public partial interface FeStiffHingeBuild_t : ISchemaClass<FeStiffHingeBuild_t>
+{
+    static FeStiffHingeBuild_t ISchemaClass<FeStiffHingeBuild_t>.From(nint handle) => new FeStiffHingeBuild_tImpl(handle);
+    static int ISchemaClass<FeStiffHingeBuild_t>.Size => 28;
+    static string? ISchemaClass<FeStiffHingeBuild_t>.ClassName => null;
 
-  static FeStiffHingeBuild_t ISchemaClass<FeStiffHingeBuild_t>.From(nint handle) => new FeStiffHingeBuild_tImpl(handle);
-  static int ISchemaClass<FeStiffHingeBuild_t>.Size => 28;
-  static string? ISchemaClass<FeStiffHingeBuild_t>.ClassName => null;
 
-  
-  public ref float MaxAngle { get; }
-  
-  public ref float Strength { get; }
-  
-  public ISchemaFixedArray<float> MotionBias { get; }
-  
-  public ISchemaFixedArray<ushort> Node { get; }
+    public ref float MaxAngle { get; }
+
+    public ref float Strength { get; }
+
+    public ISchemaFixedArray<float> MotionBias { get; }
+
+    public ISchemaFixedArray<ushort> Node { get; }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysicsWire : CBaseEntity, ISchemaClass<CPhysicsWire> {
+public partial interface CPhysicsWire : CBaseEntity, ISchemaClass<CPhysicsWire>
+{
+    static CPhysicsWire ISchemaClass<CPhysicsWire>.From(nint handle) => new CPhysicsWireImpl(handle);
+    static int ISchemaClass<CPhysicsWire>.Size => 1272;
+    static string? ISchemaClass<CPhysicsWire>.ClassName => "env_physwire";
 
-  static CPhysicsWire ISchemaClass<CPhysicsWire>.From(nint handle) => new CPhysicsWireImpl(handle);
-  static int ISchemaClass<CPhysicsWire>.Size => 1272;
-  static string? ISchemaClass<CPhysicsWire>.ClassName => "env_physwire";
 
-  
-  public ref int Density { get; }
+    public ref int Density { get; }
 
 
 }

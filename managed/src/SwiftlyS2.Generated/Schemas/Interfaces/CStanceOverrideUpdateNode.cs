@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStanceOverrideUpdateNode : CUnaryUpdateNode, ISchemaClass<CStanceOverrideUpdateNode> {
+public partial interface CStanceOverrideUpdateNode : CUnaryUpdateNode, ISchemaClass<CStanceOverrideUpdateNode>
+{
+    static CStanceOverrideUpdateNode ISchemaClass<CStanceOverrideUpdateNode>.From(nint handle) => new CStanceOverrideUpdateNodeImpl(handle);
+    static int ISchemaClass<CStanceOverrideUpdateNode>.Size => 160;
+    static string? ISchemaClass<CStanceOverrideUpdateNode>.ClassName => null;
 
-  static CStanceOverrideUpdateNode ISchemaClass<CStanceOverrideUpdateNode>.From(nint handle) => new CStanceOverrideUpdateNodeImpl(handle);
-  static int ISchemaClass<CStanceOverrideUpdateNode>.Size => 160;
-  static string? ISchemaClass<CStanceOverrideUpdateNode>.ClassName => null;
 
-  
-  public ref CUtlVector<StanceInfo_t> FootStanceInfo { get; }
-  
-  public CAnimUpdateNodeRef StanceSourceNode { get; }
-  
-  public CAnimParamHandle Parameter { get; }
-  
-  public ref StanceOverrideMode Mode { get; }
+    public ref CUtlVector<StanceInfo_t> FootStanceInfo { get; }
+
+    public CAnimUpdateNodeRef StanceSourceNode { get; }
+
+    public CAnimParamHandle Parameter { get; }
+
+    public ref StanceOverrideMode Mode { get; }
 
 
 }

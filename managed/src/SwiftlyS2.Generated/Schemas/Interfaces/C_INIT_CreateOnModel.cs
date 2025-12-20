@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateOnModel : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateOnModel> {
+public partial interface C_INIT_CreateOnModel : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateOnModel>
+{
+    static C_INIT_CreateOnModel ISchemaClass<C_INIT_CreateOnModel>.From(nint handle) => new C_INIT_CreateOnModelImpl(handle);
+    static int ISchemaClass<C_INIT_CreateOnModel>.Size => 5008;
+    static string? ISchemaClass<C_INIT_CreateOnModel>.ClassName => null;
 
-  static C_INIT_CreateOnModel ISchemaClass<C_INIT_CreateOnModel>.From(nint handle) => new C_INIT_CreateOnModelImpl(handle);
-  static int ISchemaClass<C_INIT_CreateOnModel>.Size => 5008;
-  static string? ISchemaClass<C_INIT_CreateOnModel>.ClassName => null;
 
-  
-  public CParticleModelInput ModelInput { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref int ForceInModel { get; }
-  
-  public ref bool ScaleToVolume { get; }
-  
-  public ref bool EvenDistribution { get; }
-  
-  public CParticleCollectionFloatInput DesiredHitbox { get; }
-  
-  public ref int HitboxValueFromControlPointIndex { get; }
-  
-  public CParticleCollectionVecInput HitBoxScale { get; }
-  
-  public ref float BoneVelocity { get; }
-  
-  public ref float MaxBoneVelocity { get; }
-  
-  public CParticleCollectionVecInput DirectionBias { get; }
-  
-  public string HitboxSetName { get; set; }
-  
-  public ref bool LocalCoords { get; }
-  
-  public ref bool UseBones { get; }
-  
-  public ref bool UseMesh { get; }
-  
-  public CParticleCollectionFloatInput ShellSize { get; }
+    public CParticleModelInput ModelInput { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref int ForceInModel { get; }
+
+    public ref bool ScaleToVolume { get; }
+
+    public ref bool EvenDistribution { get; }
+
+    public CParticleCollectionFloatInput DesiredHitbox { get; }
+
+    public ref int HitboxValueFromControlPointIndex { get; }
+
+    public CParticleCollectionVecInput HitBoxScale { get; }
+
+    public ref float BoneVelocity { get; }
+
+    public ref float MaxBoneVelocity { get; }
+
+    public CParticleCollectionVecInput DirectionBias { get; }
+
+    public string HitboxSetName { get; set; }
+
+    public ref bool LocalCoords { get; }
+
+    public ref bool UseBones { get; }
+
+    public ref bool UseMesh { get; }
+
+    public CParticleCollectionFloatInput ShellSize { get; }
 
 
 }

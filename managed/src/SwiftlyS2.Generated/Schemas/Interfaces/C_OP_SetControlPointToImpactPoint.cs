@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointToImpactPoint : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToImpactPoint> {
+public partial interface C_OP_SetControlPointToImpactPoint : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToImpactPoint>
+{
+    static C_OP_SetControlPointToImpactPoint ISchemaClass<C_OP_SetControlPointToImpactPoint>.From(nint handle) => new C_OP_SetControlPointToImpactPointImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointToImpactPoint>.Size => 1016;
+    static string? ISchemaClass<C_OP_SetControlPointToImpactPoint>.ClassName => null;
 
-  static C_OP_SetControlPointToImpactPoint ISchemaClass<C_OP_SetControlPointToImpactPoint>.From(nint handle) => new C_OP_SetControlPointToImpactPointImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointToImpactPoint>.Size => 1016;
-  static string? ISchemaClass<C_OP_SetControlPointToImpactPoint>.ClassName => null;
 
-  
-  public ref int CPOut { get; }
-  
-  public ref int CPIn { get; }
-  
-  public ref float UpdateRate { get; }
-  
-  public CParticleCollectionFloatInput TraceLength { get; }
-  
-  public ref float StartOffset { get; }
-  
-  public ref float Offset { get; }
-  
-  public ref Vector TraceDir { get; }
-  
-  public string CollisionGroupName { get; set; }
-  
-  public ref ParticleTraceSet_t TraceSet { get; }
-  
-  public ref bool SetToEndpoint { get; }
-  
-  public ref bool TraceToClosestSurface { get; }
-  
-  public ref bool IncludeWater { get; }
+    public ref int CPOut { get; }
+
+    public ref int CPIn { get; }
+
+    public ref float UpdateRate { get; }
+
+    public CParticleCollectionFloatInput TraceLength { get; }
+
+    public ref float StartOffset { get; }
+
+    public ref float Offset { get; }
+
+    public ref Vector TraceDir { get; }
+
+    public string CollisionGroupName { get; set; }
+
+    public ref ParticleTraceSet_t TraceSet { get; }
+
+    public ref bool SetToEndpoint { get; }
+
+    public ref bool TraceToClosestSurface { get; }
+
+    public ref bool IncludeWater { get; }
 
 
 }

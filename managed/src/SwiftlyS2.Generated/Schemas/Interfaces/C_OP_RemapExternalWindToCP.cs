@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapExternalWindToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapExternalWindToCP> {
+public partial interface C_OP_RemapExternalWindToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapExternalWindToCP>
+{
+    static C_OP_RemapExternalWindToCP ISchemaClass<C_OP_RemapExternalWindToCP>.From(nint handle) => new C_OP_RemapExternalWindToCPImpl(handle);
+    static int ISchemaClass<C_OP_RemapExternalWindToCP>.Size => 2208;
+    static string? ISchemaClass<C_OP_RemapExternalWindToCP>.ClassName => null;
 
-  static C_OP_RemapExternalWindToCP ISchemaClass<C_OP_RemapExternalWindToCP>.From(nint handle) => new C_OP_RemapExternalWindToCPImpl(handle);
-  static int ISchemaClass<C_OP_RemapExternalWindToCP>.Size => 2208;
-  static string? ISchemaClass<C_OP_RemapExternalWindToCP>.ClassName => null;
 
-  
-  public ref int CP { get; }
-  
-  public ref int CPOutput { get; }
-  
-  public CParticleCollectionVecInput Scale { get; }
-  
-  public ref bool SetMagnitude { get; }
-  
-  public ref int OutVectorField { get; }
+    public ref int CP { get; }
+
+    public ref int CPOutput { get; }
+
+    public CParticleCollectionVecInput Scale { get; }
+
+    public ref bool SetMagnitude { get; }
+
+    public ref int OutVectorField { get; }
 
 
 }

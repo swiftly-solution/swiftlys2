@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CHitBoxSetListImpl : SchemaClass, CHitBoxSetList {
+internal partial class CHitBoxSetListImpl : SchemaClass, CHitBoxSetList
+{
+    public CHitBoxSetListImpl(nint handle) : base(handle) { }
 
-  public CHitBoxSetListImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HitBoxSetsOffset;
 
-  private static nint? _HitBoxSetsOffset;
-
-  public ref CUtlVector<CHitBoxSet> HitBoxSets {
-    get {
-      if (_HitBoxSetsOffset == null) {
-        _HitBoxSetsOffset = Schema.GetOffset(0x2FE1303444ABBA1A);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHitBoxSet>>(_HitBoxSetsOffset!.Value);
+    public ref CUtlVector<CHitBoxSet> HitBoxSets {
+        get {
+            _HitBoxSetsOffset = _HitBoxSetsOffset ?? Schema.GetOffset(0x2FE1303444ABBA1A);
+            return ref _Handle.AsRef<CUtlVector<CHitBoxSet>>(_HitBoxSetsOffset!.Value);
+        }
     }
-  }
 
 
 }

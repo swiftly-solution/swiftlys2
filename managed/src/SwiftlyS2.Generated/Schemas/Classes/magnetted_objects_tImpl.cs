@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class magnetted_objects_tImpl : SchemaClass, magnetted_objects_t {
+internal partial class magnetted_objects_tImpl : SchemaClass, magnetted_objects_t
+{
+    public magnetted_objects_tImpl(nint handle) : base(handle) { }
 
-  public magnetted_objects_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EntityOffset;
 
-  private static nint? _EntityOffset;
-
-  public ref CHandle<CBaseEntity> Entity {
-    get {
-      if (_EntityOffset == null) {
-        _EntityOffset = Schema.GetOffset(0x494D696825B27FD0);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+    public ref CHandle<CBaseEntity> Entity {
+        get {
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x494D696825B27FD0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+        }
     }
-  }
 
 
 }

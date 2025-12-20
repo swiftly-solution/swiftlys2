@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBodyComponentBaseModelEntity : CBodyComponentSkeletonInstance, ISchemaClass<CBodyComponentBaseModelEntity> {
-
-  static CBodyComponentBaseModelEntity ISchemaClass<CBodyComponentBaseModelEntity>.From(nint handle) => new CBodyComponentBaseModelEntityImpl(handle);
-  static int ISchemaClass<CBodyComponentBaseModelEntity>.Size => 1296;
-  static string? ISchemaClass<CBodyComponentBaseModelEntity>.ClassName => null;
+public partial interface CBodyComponentBaseModelEntity : CBodyComponentSkeletonInstance, ISchemaClass<CBodyComponentBaseModelEntity>
+{
+    static CBodyComponentBaseModelEntity ISchemaClass<CBodyComponentBaseModelEntity>.From(nint handle) => new CBodyComponentBaseModelEntityImpl(handle);
+    static int ISchemaClass<CBodyComponentBaseModelEntity>.Size => 1296;
+    static string? ISchemaClass<CBodyComponentBaseModelEntity>.ClassName => null;
 
 
 

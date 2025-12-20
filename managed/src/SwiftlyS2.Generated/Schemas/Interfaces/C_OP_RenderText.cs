@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderText : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderText> {
+public partial interface C_OP_RenderText : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderText>
+{
+    static C_OP_RenderText ISchemaClass<C_OP_RenderText>.From(nint handle) => new C_OP_RenderTextImpl(handle);
+    static int ISchemaClass<C_OP_RenderText>.Size => 560;
+    static string? ISchemaClass<C_OP_RenderText>.ClassName => null;
 
-  static C_OP_RenderText ISchemaClass<C_OP_RenderText>.From(nint handle) => new C_OP_RenderTextImpl(handle);
-  static int ISchemaClass<C_OP_RenderText>.Size => 560;
-  static string? ISchemaClass<C_OP_RenderText>.ClassName => null;
 
-  
-  public ref Color OutlineColor { get; }
-  
-  public string DefaultText { get; set; }
+    public ref Color OutlineColor { get; }
+
+    public string DefaultText { get; set; }
 
 
 }

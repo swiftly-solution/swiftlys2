@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ConfigIndexImpl : SchemaClass, ConfigIndex {
+internal partial class ConfigIndexImpl : SchemaClass, ConfigIndex
+{
+    public ConfigIndexImpl(nint handle) : base(handle) { }
 
-  public ConfigIndexImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GroupOffset;
 
-  private static nint? _GroupOffset;
-
-  public ref ushort Group {
-    get {
-      if (_GroupOffset == null) {
-        _GroupOffset = Schema.GetOffset(0x193FE40D0CD16308);
-      }
-      return ref _Handle.AsRef<ushort>(_GroupOffset!.Value);
+    public ref ushort Group {
+        get {
+            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0x193FE40D0CD16308);
+            return ref _Handle.AsRef<ushort>(_GroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConfigOffset;
+    private static nint? _ConfigOffset;
 
-  public ref ushort Config {
-    get {
-      if (_ConfigOffset == null) {
-        _ConfigOffset = Schema.GetOffset(0x193FE40D8BD1DF73);
-      }
-      return ref _Handle.AsRef<ushort>(_ConfigOffset!.Value);
+    public ref ushort Config {
+        get {
+            _ConfigOffset = _ConfigOffset ?? Schema.GetOffset(0x193FE40D8BD1DF73);
+            return ref _Handle.AsRef<ushort>(_ConfigOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmDurationScaleNode__CDefinition : CNmSpeedScaleBaseNode__CDefinition, ISchemaClass<CNmDurationScaleNode__CDefinition> {
-
-  static CNmDurationScaleNode__CDefinition ISchemaClass<CNmDurationScaleNode__CDefinition>.From(nint handle) => new CNmDurationScaleNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmDurationScaleNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmDurationScaleNode__CDefinition>.ClassName => null;
+public partial interface CNmDurationScaleNode__CDefinition : CNmSpeedScaleBaseNode__CDefinition, ISchemaClass<CNmDurationScaleNode__CDefinition>
+{
+    static CNmDurationScaleNode__CDefinition ISchemaClass<CNmDurationScaleNode__CDefinition>.From(nint handle) => new CNmDurationScaleNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmDurationScaleNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmDurationScaleNode__CDefinition>.ClassName => null;
 
 
 

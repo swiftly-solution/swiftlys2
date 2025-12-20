@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnSoftbodySpring_t : ISchemaClass<RnSoftbodySpring_t> {
+public partial interface RnSoftbodySpring_t : ISchemaClass<RnSoftbodySpring_t>
+{
+    static RnSoftbodySpring_t ISchemaClass<RnSoftbodySpring_t>.From(nint handle) => new RnSoftbodySpring_tImpl(handle);
+    static int ISchemaClass<RnSoftbodySpring_t>.Size => 8;
+    static string? ISchemaClass<RnSoftbodySpring_t>.ClassName => null;
 
-  static RnSoftbodySpring_t ISchemaClass<RnSoftbodySpring_t>.From(nint handle) => new RnSoftbodySpring_tImpl(handle);
-  static int ISchemaClass<RnSoftbodySpring_t>.Size => 8;
-  static string? ISchemaClass<RnSoftbodySpring_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Particle { get; }
-  
-  public ref float Length { get; }
+    public ISchemaFixedArray<ushort> Particle { get; }
+
+    public ref float Length { get; }
 
 
 }

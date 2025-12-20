@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_AttractToControlPointImpl : CParticleFunctionForceImpl, C_OP_AttractToControlPoint {
+internal partial class C_OP_AttractToControlPointImpl : CParticleFunctionForceImpl, C_OP_AttractToControlPoint
+{
+    public C_OP_AttractToControlPointImpl(nint handle) : base(handle) { }
 
-  public C_OP_AttractToControlPointImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ComponentScaleOffset;
 
-  private static nint? _ComponentScaleOffset;
-
-  public ref Vector ComponentScale {
-    get {
-      if (_ComponentScaleOffset == null) {
-        _ComponentScaleOffset = Schema.GetOffset(0xBD30C24AB17954E2);
-      }
-      return ref _Handle.AsRef<Vector>(_ComponentScaleOffset!.Value);
+    public ref Vector ComponentScale {
+        get {
+            _ComponentScaleOffset = _ComponentScaleOffset ?? Schema.GetOffset(0xBD30C24AB17954E2);
+            return ref _Handle.AsRef<Vector>(_ComponentScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceAmountOffset;
+    private static nint? _ForceAmountOffset;
 
-  public CPerParticleFloatInput ForceAmount {
-    get {
-      if (_ForceAmountOffset == null) {
-        _ForceAmountOffset = Schema.GetOffset(0xBD30C24A70831A84);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ForceAmountOffset!.Value);
+    public CPerParticleFloatInput ForceAmount {
+        get {
+            _ForceAmountOffset = _ForceAmountOffset ?? Schema.GetOffset(0xBD30C24A70831A84);
+            return new CPerParticleFloatInputImpl(_Handle + _ForceAmountOffset!.Value);
+        }
     }
-  }
-  private static nint? _FalloffPowerOffset;
+    private static nint? _FalloffPowerOffset;
 
-  public ref float FalloffPower {
-    get {
-      if (_FalloffPowerOffset == null) {
-        _FalloffPowerOffset = Schema.GetOffset(0xBD30C24AE3163382);
-      }
-      return ref _Handle.AsRef<float>(_FalloffPowerOffset!.Value);
+    public ref float FalloffPower {
+        get {
+            _FalloffPowerOffset = _FalloffPowerOffset ?? Schema.GetOffset(0xBD30C24AE3163382);
+            return ref _Handle.AsRef<float>(_FalloffPowerOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransformInputOffset;
+    private static nint? _TransformInputOffset;
 
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0xBD30C24AB3FDC289);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xBD30C24AB3FDC289);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceAmountMinOffset;
+    private static nint? _ForceAmountMinOffset;
 
-  public CPerParticleFloatInput ForceAmountMin {
-    get {
-      if (_ForceAmountMinOffset == null) {
-        _ForceAmountMinOffset = Schema.GetOffset(0xBD30C24AEBB56458);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ForceAmountMinOffset!.Value);
+    public CPerParticleFloatInput ForceAmountMin {
+        get {
+            _ForceAmountMinOffset = _ForceAmountMinOffset ?? Schema.GetOffset(0xBD30C24AEBB56458);
+            return new CPerParticleFloatInputImpl(_Handle + _ForceAmountMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _ApplyMinForceOffset;
+    private static nint? _ApplyMinForceOffset;
 
-  public ref bool ApplyMinForce {
-    get {
-      if (_ApplyMinForceOffset == null) {
-        _ApplyMinForceOffset = Schema.GetOffset(0xBD30C24AF72AC3CC);
-      }
-      return ref _Handle.AsRef<bool>(_ApplyMinForceOffset!.Value);
+    public ref bool ApplyMinForce {
+        get {
+            _ApplyMinForceOffset = _ApplyMinForceOffset ?? Schema.GetOffset(0xBD30C24AF72AC3CC);
+            return ref _Handle.AsRef<bool>(_ApplyMinForceOffset!.Value);
+        }
     }
-  }
 
 
 }

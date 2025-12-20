@@ -6,28 +6,25 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CHostageExpresserShimImpl : CBaseCombatCharacterImpl, CHostageExpresserShim {
+internal partial class CHostageExpresserShimImpl : CBaseCombatCharacterImpl, CHostageExpresserShim
+{
+    public CHostageExpresserShimImpl(nint handle) : base(handle) { }
 
-  public CHostageExpresserShimImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ExpresserOffset;
 
-  private static nint? _ExpresserOffset;
-
-  public CAI_Expresser? Expresser {
-    get {
-      if (_ExpresserOffset == null) {
-        _ExpresserOffset = Schema.GetOffset(0xD6B3DCE7697CAC2A);
-      }
-      var ptr = _Handle.Read<nint>(_ExpresserOffset!.Value);
-      return ptr.IsValidPtr() ? new CAI_ExpresserImpl(ptr) : null;
+    public CAI_Expresser? Expresser {
+        get {
+            _ExpresserOffset = _ExpresserOffset ?? Schema.GetOffset(0xD6B3DCE7697CAC2A);
+            var ptr = _Handle.Read<nint>(_ExpresserOffset!.Value);
+            return ptr.IsValidPtr() ? new CAI_ExpresserImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

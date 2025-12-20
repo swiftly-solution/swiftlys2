@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DistanceCullImpl : CParticleFunctionOperatorImpl, C_OP_DistanceCull {
+internal partial class C_OP_DistanceCullImpl : CParticleFunctionOperatorImpl, C_OP_DistanceCull
+{
+    public C_OP_DistanceCullImpl(nint handle) : base(handle) { }
 
-  public C_OP_DistanceCullImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointOffset;
 
-  private static nint? _ControlPointOffset;
-
-  public ref int ControlPoint {
-    get {
-      if (_ControlPointOffset == null) {
-        _ControlPointOffset = Schema.GetOffset(0x7252AA520D0DDF8C);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    public ref int ControlPoint {
+        get {
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0x7252AA520D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _PointOffsetOffset;
+    private static nint? _PointOffsetOffset;
 
-  public ref Vector PointOffset {
-    get {
-      if (_PointOffsetOffset == null) {
-        _PointOffsetOffset = Schema.GetOffset(0x7252AA52300E046E);
-      }
-      return ref _Handle.AsRef<Vector>(_PointOffsetOffset!.Value);
+    public ref Vector PointOffset {
+        get {
+            _PointOffsetOffset = _PointOffsetOffset ?? Schema.GetOffset(0x7252AA52300E046E);
+            return ref _Handle.AsRef<Vector>(_PointOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceOffset;
+    private static nint? _DistanceOffset;
 
-  public CParticleCollectionFloatInput Distance {
-    get {
-      if (_DistanceOffset == null) {
-        _DistanceOffset = Schema.GetOffset(0x7252AA5200DC4A68);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset!.Value);
+    public CParticleCollectionFloatInput Distance {
+        get {
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x7252AA5200DC4A68);
+            return new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _CullInsideOffset;
+    private static nint? _CullInsideOffset;
 
-  public ref bool CullInside {
-    get {
-      if (_CullInsideOffset == null) {
-        _CullInsideOffset = Schema.GetOffset(0x7252AA52293E00AD);
-      }
-      return ref _Handle.AsRef<bool>(_CullInsideOffset!.Value);
+    public ref bool CullInside {
+        get {
+            _CullInsideOffset = _CullInsideOffset ?? Schema.GetOffset(0x7252AA52293E00AD);
+            return ref _Handle.AsRef<bool>(_CullInsideOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttributeOffset;
+    private static nint? _AttributeOffset;
 
-  public ParticleAttributeIndex_t Attribute {
-    get {
-      if (_AttributeOffset == null) {
-        _AttributeOffset = Schema.GetOffset(0x7252AA527FE8DE0B);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _AttributeOffset!.Value);
+    public ParticleAttributeIndex_t Attribute {
+        get {
+            _AttributeOffset = _AttributeOffset ?? Schema.GetOffset(0x7252AA527FE8DE0B);
+            return new ParticleAttributeIndex_tImpl(_Handle + _AttributeOffset!.Value);
+        }
     }
-  }
 
 
 }

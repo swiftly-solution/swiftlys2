@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEntityIdentity : ISchemaClass<CEntityIdentity> {
+public partial interface CEntityIdentity : ISchemaClass<CEntityIdentity>
+{
+    static CEntityIdentity ISchemaClass<CEntityIdentity>.From(nint handle) => new CEntityIdentityImpl(handle);
+    static int ISchemaClass<CEntityIdentity>.Size => 112;
+    static string? ISchemaClass<CEntityIdentity>.ClassName => null;
 
-  static CEntityIdentity ISchemaClass<CEntityIdentity>.From(nint handle) => new CEntityIdentityImpl(handle);
-  static int ISchemaClass<CEntityIdentity>.Size => 112;
-  static string? ISchemaClass<CEntityIdentity>.ClassName => null;
 
-  
-  public ref int NameStringableIndex { get; }
-  
-  public string Name { get; set; }
-  
-  public string DesignerName { get; set; }
-  
-  public ref uint Flags { get; }
-  
-  public ref uint WorldGroupId { get; }
-  
-  public ref uint DataObjectTypes { get; }
-  
-  public ref ChangeAccessorFieldPathIndex_t PathIndex { get; }
-  
-  public CEntityIdentity? Prev { get; }
-  
-  public CEntityIdentity? Next { get; }
-  
-  public CEntityIdentity? PrevByClass { get; }
-  
-  public CEntityIdentity? NextByClass { get; }
+    public ref int NameStringableIndex { get; }
 
-  public void NameStringableIndexUpdated();
+    public string Name { get; set; }
+
+    public string DesignerName { get; set; }
+
+    public ref uint Flags { get; }
+
+    public ref uint WorldGroupId { get; }
+
+    public ref uint DataObjectTypes { get; }
+
+    public ref ChangeAccessorFieldPathIndex_t PathIndex { get; }
+
+    public CEntityIdentity? Prev { get; }
+
+    public CEntityIdentity? Next { get; }
+
+    public CEntityIdentity? PrevByClass { get; }
+
+    public CEntityIdentity? NextByClass { get; }
+
+    public void NameStringableIndexUpdated();
 }

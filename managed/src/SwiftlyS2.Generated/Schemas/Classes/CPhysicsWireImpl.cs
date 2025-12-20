@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysicsWireImpl : CBaseEntityImpl, CPhysicsWire {
+internal partial class CPhysicsWireImpl : CBaseEntityImpl, CPhysicsWire
+{
+    public CPhysicsWireImpl(nint handle) : base(handle) { }
 
-  public CPhysicsWireImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DensityOffset;
 
-  private static nint? _DensityOffset;
-
-  public ref int Density {
-    get {
-      if (_DensityOffset == null) {
-        _DensityOffset = Schema.GetOffset(0x455AFD76A65E630F);
-      }
-      return ref _Handle.AsRef<int>(_DensityOffset!.Value);
+    public ref int Density {
+        get {
+            _DensityOffset = _DensityOffset ?? Schema.GetOffset(0x455AFD76A65E630F);
+            return ref _Handle.AsRef<int>(_DensityOffset!.Value);
+        }
     }
-  }
 
 
 }

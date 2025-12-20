@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_FadeOutSimple : CParticleFunctionOperator, ISchemaClass<C_OP_FadeOutSimple> {
+public partial interface C_OP_FadeOutSimple : CParticleFunctionOperator, ISchemaClass<C_OP_FadeOutSimple>
+{
+    static C_OP_FadeOutSimple ISchemaClass<C_OP_FadeOutSimple>.From(nint handle) => new C_OP_FadeOutSimpleImpl(handle);
+    static int ISchemaClass<C_OP_FadeOutSimple>.Size => 472;
+    static string? ISchemaClass<C_OP_FadeOutSimple>.ClassName => null;
 
-  static C_OP_FadeOutSimple ISchemaClass<C_OP_FadeOutSimple>.From(nint handle) => new C_OP_FadeOutSimpleImpl(handle);
-  static int ISchemaClass<C_OP_FadeOutSimple>.Size => 472;
-  static string? ISchemaClass<C_OP_FadeOutSimple>.ClassName => null;
 
-  
-  public ref float FadeOutTime { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
+    public ref float FadeOutTime { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
 
 
 }

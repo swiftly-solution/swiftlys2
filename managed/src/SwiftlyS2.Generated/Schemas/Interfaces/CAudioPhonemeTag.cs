@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAudioPhonemeTag : ISchemaClass<CAudioPhonemeTag> {
+public partial interface CAudioPhonemeTag : ISchemaClass<CAudioPhonemeTag>
+{
+    static CAudioPhonemeTag ISchemaClass<CAudioPhonemeTag>.From(nint handle) => new CAudioPhonemeTagImpl(handle);
+    static int ISchemaClass<CAudioPhonemeTag>.Size => 12;
+    static string? ISchemaClass<CAudioPhonemeTag>.ClassName => null;
 
-  static CAudioPhonemeTag ISchemaClass<CAudioPhonemeTag>.From(nint handle) => new CAudioPhonemeTagImpl(handle);
-  static int ISchemaClass<CAudioPhonemeTag>.Size => 12;
-  static string? ISchemaClass<CAudioPhonemeTag>.ClassName => null;
 
-  
-  public ref float StartTime { get; }
-  
-  public ref float EndTime { get; }
-  
-  public ref int PhonemeCode { get; }
+    public ref float StartTime { get; }
+
+    public ref float EndTime { get; }
+
+    public ref int PhonemeCode { get; }
 
 
 }

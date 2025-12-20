@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventPreDataUpdate_t : ISchemaClass<EventPreDataUpdate_t> {
+public partial interface EventPreDataUpdate_t : ISchemaClass<EventPreDataUpdate_t>
+{
+    static EventPreDataUpdate_t ISchemaClass<EventPreDataUpdate_t>.From(nint handle) => new EventPreDataUpdate_tImpl(handle);
+    static int ISchemaClass<EventPreDataUpdate_t>.Size => 16;
+    static string? ISchemaClass<EventPreDataUpdate_t>.ClassName => null;
 
-  static EventPreDataUpdate_t ISchemaClass<EventPreDataUpdate_t>.From(nint handle) => new EventPreDataUpdate_tImpl(handle);
-  static int ISchemaClass<EventPreDataUpdate_t>.Size => 16;
-  static string? ISchemaClass<EventPreDataUpdate_t>.ClassName => null;
 
-  
-  public ref int Count { get; }
+    public ref int Count { get; }
 
 
 }

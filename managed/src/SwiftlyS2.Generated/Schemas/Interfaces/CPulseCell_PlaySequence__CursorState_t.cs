@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_PlaySequence__CursorState_t : ISchemaClass<CPulseCell_PlaySequence__CursorState_t> {
+public partial interface CPulseCell_PlaySequence__CursorState_t : ISchemaClass<CPulseCell_PlaySequence__CursorState_t>
+{
+    static CPulseCell_PlaySequence__CursorState_t ISchemaClass<CPulseCell_PlaySequence__CursorState_t>.From(nint handle) => new CPulseCell_PlaySequence__CursorState_tImpl(handle);
+    static int ISchemaClass<CPulseCell_PlaySequence__CursorState_t>.Size => 4;
+    static string? ISchemaClass<CPulseCell_PlaySequence__CursorState_t>.ClassName => null;
 
-  static CPulseCell_PlaySequence__CursorState_t ISchemaClass<CPulseCell_PlaySequence__CursorState_t>.From(nint handle) => new CPulseCell_PlaySequence__CursorState_tImpl(handle);
-  static int ISchemaClass<CPulseCell_PlaySequence__CursorState_t>.Size => 4;
-  static string? ISchemaClass<CPulseCell_PlaySequence__CursorState_t>.ClassName => null;
 
-  
-  public ref CHandle<CBaseAnimGraph> Target { get; }
+    public ref CHandle<CBaseAnimGraph> Target { get; }
 
 
 }

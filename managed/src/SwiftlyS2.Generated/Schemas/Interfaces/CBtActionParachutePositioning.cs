@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBtActionParachutePositioning : CBtNode, ISchemaClass<CBtActionParachutePositioning> {
+public partial interface CBtActionParachutePositioning : CBtNode, ISchemaClass<CBtActionParachutePositioning>
+{
+    static CBtActionParachutePositioning ISchemaClass<CBtActionParachutePositioning>.From(nint handle) => new CBtActionParachutePositioningImpl(handle);
+    static int ISchemaClass<CBtActionParachutePositioning>.Size => 120;
+    static string? ISchemaClass<CBtActionParachutePositioning>.ClassName => null;
 
-  static CBtActionParachutePositioning ISchemaClass<CBtActionParachutePositioning>.From(nint handle) => new CBtActionParachutePositioningImpl(handle);
-  static int ISchemaClass<CBtActionParachutePositioning>.Size => 120;
-  static string? ISchemaClass<CBtActionParachutePositioning>.ClassName => null;
 
-  
-  public CountdownTimer ActionTimer { get; }
+    public CountdownTimer ActionTimer { get; }
 
 
 }

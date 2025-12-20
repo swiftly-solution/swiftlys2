@@ -6,40 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAttributeListImpl : SchemaClass, CAttributeList {
+internal partial class CAttributeListImpl : SchemaClass, CAttributeList
+{
+    public CAttributeListImpl(nint handle) : base(handle) { }
 
-  public CAttributeListImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttributesOffset;
 
-  private static nint? _AttributesOffset;
-
-  public ref CUtlVector<CEconItemAttribute> Attributes {
-    get {
-      if (_AttributesOffset == null) {
-        _AttributesOffset = Schema.GetOffset(0x1028A18A7E139C14);
-      }
-      return ref _Handle.AsRef<CUtlVector<CEconItemAttribute>>(_AttributesOffset!.Value);
+    public ref CUtlVector<CEconItemAttribute> Attributes {
+        get {
+            _AttributesOffset = _AttributesOffset ?? Schema.GetOffset(0x1028A18A7E139C14);
+            return ref _Handle.AsRef<CUtlVector<CEconItemAttribute>>(_AttributesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ManagerOffset;
+    private static nint? _ManagerOffset;
 
-  public CAttributeManager? Manager {
-    get {
-      if (_ManagerOffset == null) {
-        _ManagerOffset = Schema.GetOffset(0x1028A18AB9A09BE6);
-      }
-      var ptr = _Handle.Read<nint>(_ManagerOffset!.Value);
-      return ptr.IsValidPtr() ? new CAttributeManagerImpl(ptr) : null;
+    public CAttributeManager? Manager {
+        get {
+            _ManagerOffset = _ManagerOffset ?? Schema.GetOffset(0x1028A18AB9A09BE6);
+            var ptr = _Handle.Read<nint>(_ManagerOffset!.Value);
+            return ptr.IsValidPtr() ? new CAttributeManagerImpl(ptr) : null;
+        }
     }
-  }
 
-  public void AttributesUpdated() {
-    Schema.Update(_Handle, 0x1028A18A7E139C14);
-  }
+    public void AttributesUpdated() => Schema.Update(_Handle, 0x1028A18A7E139C14);
 }

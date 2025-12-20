@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AnimationType_t : uint {
-
+public enum AnimationType_t : uint
+{
  ANIMATION_TYPE_FIXED_RATE = 0,
 
  ANIMATION_TYPE_FIT_LIFETIME = 1,

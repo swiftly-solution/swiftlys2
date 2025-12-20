@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBoneMaskUpdateNode : CBinaryUpdateNode, ISchemaClass<CBoneMaskUpdateNode> {
+public partial interface CBoneMaskUpdateNode : CBinaryUpdateNode, ISchemaClass<CBoneMaskUpdateNode>
+{
+    static CBoneMaskUpdateNode ISchemaClass<CBoneMaskUpdateNode>.From(nint handle) => new CBoneMaskUpdateNodeImpl(handle);
+    static int ISchemaClass<CBoneMaskUpdateNode>.Size => 176;
+    static string? ISchemaClass<CBoneMaskUpdateNode>.ClassName => null;
 
-  static CBoneMaskUpdateNode ISchemaClass<CBoneMaskUpdateNode>.From(nint handle) => new CBoneMaskUpdateNodeImpl(handle);
-  static int ISchemaClass<CBoneMaskUpdateNode>.Size => 176;
-  static string? ISchemaClass<CBoneMaskUpdateNode>.ClassName => null;
 
-  
-  public ref int WeightListIndex { get; }
-  
-  public ref float RootMotionBlend { get; }
-  
-  public ref BoneMaskBlendSpace BlendSpace { get; }
-  
-  public ref BinaryNodeChildOption FootMotionTiming { get; }
-  
-  public ref bool UseBlendScale { get; }
-  
-  public ref AnimValueSource BlendValueSource { get; }
-  
-  public CAnimParamHandle BlendParameter { get; }
+    public ref int WeightListIndex { get; }
+
+    public ref float RootMotionBlend { get; }
+
+    public ref BoneMaskBlendSpace BlendSpace { get; }
+
+    public ref BinaryNodeChildOption FootMotionTiming { get; }
+
+    public ref bool UseBlendScale { get; }
+
+    public ref AnimValueSource BlendValueSource { get; }
+
+    public CAnimParamHandle BlendParameter { get; }
 
 
 }

@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmLegacyEventImpl : CNmEventImpl, CNmLegacyEvent {
+internal partial class CNmLegacyEventImpl : CNmEventImpl, CNmLegacyEvent
+{
+    public CNmLegacyEventImpl(nint handle) : base(handle) { }
 
-  public CNmLegacyEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AnimEventClassNameOffset;
 
-  private static nint? _AnimEventClassNameOffset;
+    public string AnimEventClassName {
+        get {
+            _AnimEventClassNameOffset = _AnimEventClassNameOffset ?? Schema.GetOffset(0x78C36574C276DA33);
+            return Schema.GetString(_Handle.Read<nint>(_AnimEventClassNameOffset!.Value));
+        }
+        set {
+            _AnimEventClassNameOffset = _AnimEventClassNameOffset ?? Schema.GetOffset(0x78C36574C276DA33);
+            Schema.SetString(_Handle, _AnimEventClassNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _KVOffset;
 
-  public string AnimEventClassName {
-    get {
-      if (_AnimEventClassNameOffset == null) {
-        _AnimEventClassNameOffset = Schema.GetOffset(0x78C36574C276DA33);
-      }
-      var ptr = _Handle.Read<nint>(_AnimEventClassNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public SchemaUntypedField KV {
+        get {
+            _KVOffset = _KVOffset ?? Schema.GetOffset(0x78C36574F70B8074);
+            return new SchemaUntypedField(_Handle + _KVOffset!.Value);
+        }
     }
-    set {
-      if (_AnimEventClassNameOffset == null) {
-        _AnimEventClassNameOffset = Schema.GetOffset(0x78C36574C276DA33);
-      }
-      Schema.SetString(_Handle, _AnimEventClassNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _KVOffset;
-
-  public SchemaUntypedField KV {
-    get {
-      if (_KVOffset == null) {
-        _KVOffset = Schema.GetOffset(0x78C36574F70B8074);
-      }
-      return new SchemaUntypedField(_Handle + _KVOffset!.Value);
-    }
-  }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundEventParameter : CBaseEntity, ISchemaClass<CSoundEventParameter> {
+public partial interface CSoundEventParameter : CBaseEntity, ISchemaClass<CSoundEventParameter>
+{
+    static CSoundEventParameter ISchemaClass<CSoundEventParameter>.From(nint handle) => new CSoundEventParameterImpl(handle);
+    static int ISchemaClass<CSoundEventParameter>.Size => 1304;
+    static string? ISchemaClass<CSoundEventParameter>.ClassName => "snd_event_param";
 
-  static CSoundEventParameter ISchemaClass<CSoundEventParameter>.From(nint handle) => new CSoundEventParameterImpl(handle);
-  static int ISchemaClass<CSoundEventParameter>.Size => 1304;
-  static string? ISchemaClass<CSoundEventParameter>.ClassName => "snd_event_param";
 
-  
-  public string ParamName { get; set; }
-  
-  public ref float FloatValue { get; }
+    public string ParamName { get; set; }
+
+    public ref float FloatValue { get; }
 
 
 }

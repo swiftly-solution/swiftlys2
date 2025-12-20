@@ -6,255 +6,196 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInfernoImpl : CBaseModelEntityImpl, CInferno {
+internal partial class CInfernoImpl : CBaseModelEntityImpl, CInferno
+{
+    public CInfernoImpl(nint handle) : base(handle) { }
 
-  public CInfernoImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<Vector> FirePositions {
-    get => new SchemaFixedArray<Vector>(_Handle, 0xABE104C91E992007, 64, 12, 4);
-  }
-  public ISchemaFixedArray<Vector> FireParentPositions {
-    get => new SchemaFixedArray<Vector>(_Handle, 0xABE104C9A58B35D7, 64, 12, 4);
-  }
-  public ISchemaFixedArray<bool> FireIsBurning {
-    get => new SchemaFixedArray<bool>(_Handle, 0xABE104C9E5CD906C, 64, 1, 1);
-  }
-  public ISchemaFixedArray<Vector> BurnNormal {
-    get => new SchemaFixedArray<Vector>(_Handle, 0xABE104C9382663DB, 64, 12, 4);
-  }
-  private static nint? _FireCountOffset;
-
-  public ref int FireCount {
-    get {
-      if (_FireCountOffset == null) {
-        _FireCountOffset = Schema.GetOffset(0xABE104C9820942A0);
-      }
-      return ref _Handle.AsRef<int>(_FireCountOffset!.Value);
+    public ISchemaFixedArray<Vector> FirePositions {
+        get => new SchemaFixedArray<Vector>(_Handle, 0xABE104C91E992007, 64, 12, 4);
     }
-  }
-  private static nint? _InfernoTypeOffset;
-
-  public ref int InfernoType {
-    get {
-      if (_InfernoTypeOffset == null) {
-        _InfernoTypeOffset = Schema.GetOffset(0xABE104C903C628B8);
-      }
-      return ref _Handle.AsRef<int>(_InfernoTypeOffset!.Value);
+    public ISchemaFixedArray<Vector> FireParentPositions {
+        get => new SchemaFixedArray<Vector>(_Handle, 0xABE104C9A58B35D7, 64, 12, 4);
     }
-  }
-  private static nint? _FireEffectTickBeginOffset;
-
-  public ref int FireEffectTickBegin {
-    get {
-      if (_FireEffectTickBeginOffset == null) {
-        _FireEffectTickBeginOffset = Schema.GetOffset(0xABE104C989EB57F2);
-      }
-      return ref _Handle.AsRef<int>(_FireEffectTickBeginOffset!.Value);
+    public ISchemaFixedArray<bool> FireIsBurning {
+        get => new SchemaFixedArray<bool>(_Handle, 0xABE104C9E5CD906C, 64, 1, 1);
     }
-  }
-  private static nint? _FireLifetimeOffset;
-
-  public ref float FireLifetime {
-    get {
-      if (_FireLifetimeOffset == null) {
-        _FireLifetimeOffset = Schema.GetOffset(0xABE104C9B2E34E7E);
-      }
-      return ref _Handle.AsRef<float>(_FireLifetimeOffset!.Value);
+    public ISchemaFixedArray<Vector> BurnNormal {
+        get => new SchemaFixedArray<Vector>(_Handle, 0xABE104C9382663DB, 64, 12, 4);
     }
-  }
-  private static nint? _InPostEffectTimeOffset;
+    private static nint? _FireCountOffset;
 
-  public ref bool InPostEffectTime {
-    get {
-      if (_InPostEffectTimeOffset == null) {
-        _InPostEffectTimeOffset = Schema.GetOffset(0xABE104C963E4F6B8);
-      }
-      return ref _Handle.AsRef<bool>(_InPostEffectTimeOffset!.Value);
+    public ref int FireCount {
+        get {
+            _FireCountOffset = _FireCountOffset ?? Schema.GetOffset(0xABE104C9820942A0);
+            return ref _Handle.AsRef<int>(_FireCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _WasCreatedInSmokeOffset;
+    private static nint? _InfernoTypeOffset;
 
-  public ref bool WasCreatedInSmoke {
-    get {
-      if (_WasCreatedInSmokeOffset == null) {
-        _WasCreatedInSmokeOffset = Schema.GetOffset(0xABE104C95CC1EF2A);
-      }
-      return ref _Handle.AsRef<bool>(_WasCreatedInSmokeOffset!.Value);
+    public ref int InfernoType {
+        get {
+            _InfernoTypeOffset = _InfernoTypeOffset ?? Schema.GetOffset(0xABE104C903C628B8);
+            return ref _Handle.AsRef<int>(_InfernoTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExtentOffset;
+    private static nint? _FireEffectTickBeginOffset;
 
-  public Extent Extent {
-    get {
-      if (_ExtentOffset == null) {
-        _ExtentOffset = Schema.GetOffset(0xABE104C9DD2CA0B9);
-      }
-      return new ExtentImpl(_Handle + _ExtentOffset!.Value);
+    public ref int FireEffectTickBegin {
+        get {
+            _FireEffectTickBeginOffset = _FireEffectTickBeginOffset ?? Schema.GetOffset(0xABE104C989EB57F2);
+            return ref _Handle.AsRef<int>(_FireEffectTickBeginOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamageTimerOffset;
+    private static nint? _FireLifetimeOffset;
 
-  public CountdownTimer DamageTimer {
-    get {
-      if (_DamageTimerOffset == null) {
-        _DamageTimerOffset = Schema.GetOffset(0xABE104C979F45751);
-      }
-      return new CountdownTimerImpl(_Handle + _DamageTimerOffset!.Value);
+    public ref float FireLifetime {
+        get {
+            _FireLifetimeOffset = _FireLifetimeOffset ?? Schema.GetOffset(0xABE104C9B2E34E7E);
+            return ref _Handle.AsRef<float>(_FireLifetimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamageRampTimerOffset;
+    private static nint? _InPostEffectTimeOffset;
 
-  public CountdownTimer DamageRampTimer {
-    get {
-      if (_DamageRampTimerOffset == null) {
-        _DamageRampTimerOffset = Schema.GetOffset(0xABE104C9400054C9);
-      }
-      return new CountdownTimerImpl(_Handle + _DamageRampTimerOffset!.Value);
+    public ref bool InPostEffectTime {
+        get {
+            _InPostEffectTimeOffset = _InPostEffectTimeOffset ?? Schema.GetOffset(0xABE104C963E4F6B8);
+            return ref _Handle.AsRef<bool>(_InPostEffectTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SplashVelocityOffset;
+    private static nint? _WasCreatedInSmokeOffset;
 
-  public ref Vector SplashVelocity {
-    get {
-      if (_SplashVelocityOffset == null) {
-        _SplashVelocityOffset = Schema.GetOffset(0xABE104C963461F75);
-      }
-      return ref _Handle.AsRef<Vector>(_SplashVelocityOffset!.Value);
+    public ref bool WasCreatedInSmoke {
+        get {
+            _WasCreatedInSmokeOffset = _WasCreatedInSmokeOffset ?? Schema.GetOffset(0xABE104C95CC1EF2A);
+            return ref _Handle.AsRef<bool>(_WasCreatedInSmokeOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitialSplashVelocityOffset;
+    private static nint? _ExtentOffset;
 
-  public ref Vector InitialSplashVelocity {
-    get {
-      if (_InitialSplashVelocityOffset == null) {
-        _InitialSplashVelocityOffset = Schema.GetOffset(0xABE104C9757A42BF);
-      }
-      return ref _Handle.AsRef<Vector>(_InitialSplashVelocityOffset!.Value);
+    public Extent Extent {
+        get {
+            _ExtentOffset = _ExtentOffset ?? Schema.GetOffset(0xABE104C9DD2CA0B9);
+            return new ExtentImpl(_Handle + _ExtentOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartPosOffset;
+    private static nint? _DamageTimerOffset;
 
-  public ref Vector StartPos {
-    get {
-      if (_StartPosOffset == null) {
-        _StartPosOffset = Schema.GetOffset(0xABE104C9676FC33F);
-      }
-      return ref _Handle.AsRef<Vector>(_StartPosOffset!.Value);
+    public CountdownTimer DamageTimer {
+        get {
+            _DamageTimerOffset = _DamageTimerOffset ?? Schema.GetOffset(0xABE104C979F45751);
+            return new CountdownTimerImpl(_Handle + _DamageTimerOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginalSpawnLocationOffset;
+    private static nint? _DamageRampTimerOffset;
 
-  public ref Vector OriginalSpawnLocation {
-    get {
-      if (_OriginalSpawnLocationOffset == null) {
-        _OriginalSpawnLocationOffset = Schema.GetOffset(0xABE104C95E59F382);
-      }
-      return ref _Handle.AsRef<Vector>(_OriginalSpawnLocationOffset!.Value);
+    public CountdownTimer DamageRampTimer {
+        get {
+            _DamageRampTimerOffset = _DamageRampTimerOffset ?? Schema.GetOffset(0xABE104C9400054C9);
+            return new CountdownTimerImpl(_Handle + _DamageRampTimerOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveTimerOffset;
+    private static nint? _SplashVelocityOffset;
 
-  public IntervalTimer ActiveTimer {
-    get {
-      if (_ActiveTimerOffset == null) {
-        _ActiveTimerOffset = Schema.GetOffset(0xABE104C946FF8D04);
-      }
-      return new IntervalTimerImpl(_Handle + _ActiveTimerOffset!.Value);
+    public ref Vector SplashVelocity {
+        get {
+            _SplashVelocityOffset = _SplashVelocityOffset ?? Schema.GetOffset(0xABE104C963461F75);
+            return ref _Handle.AsRef<Vector>(_SplashVelocityOffset!.Value);
+        }
     }
-  }
-  private static nint? _FireSpawnOffsetOffset;
+    private static nint? _InitialSplashVelocityOffset;
 
-  public ref int FireSpawnOffset {
-    get {
-      if (_FireSpawnOffsetOffset == null) {
-        _FireSpawnOffsetOffset = Schema.GetOffset(0xABE104C90C7D268F);
-      }
-      return ref _Handle.AsRef<int>(_FireSpawnOffsetOffset!.Value);
+    public ref Vector InitialSplashVelocity {
+        get {
+            _InitialSplashVelocityOffset = _InitialSplashVelocityOffset ?? Schema.GetOffset(0xABE104C9757A42BF);
+            return ref _Handle.AsRef<Vector>(_InitialSplashVelocityOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxFlamesOffset;
+    private static nint? _StartPosOffset;
 
-  public ref int MaxFlames {
-    get {
-      if (_MaxFlamesOffset == null) {
-        _MaxFlamesOffset = Schema.GetOffset(0xABE104C972805F39);
-      }
-      return ref _Handle.AsRef<int>(_MaxFlamesOffset!.Value);
+    public ref Vector StartPos {
+        get {
+            _StartPosOffset = _StartPosOffset ?? Schema.GetOffset(0xABE104C9676FC33F);
+            return ref _Handle.AsRef<Vector>(_StartPosOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpreadCountOffset;
+    private static nint? _OriginalSpawnLocationOffset;
 
-  public ref int SpreadCount {
-    get {
-      if (_SpreadCountOffset == null) {
-        _SpreadCountOffset = Schema.GetOffset(0xABE104C9F27833E1);
-      }
-      return ref _Handle.AsRef<int>(_SpreadCountOffset!.Value);
+    public ref Vector OriginalSpawnLocation {
+        get {
+            _OriginalSpawnLocationOffset = _OriginalSpawnLocationOffset ?? Schema.GetOffset(0xABE104C95E59F382);
+            return ref _Handle.AsRef<Vector>(_OriginalSpawnLocationOffset!.Value);
+        }
     }
-  }
-  private static nint? _BookkeepingTimerOffset;
+    private static nint? _ActiveTimerOffset;
 
-  public CountdownTimer BookkeepingTimer {
-    get {
-      if (_BookkeepingTimerOffset == null) {
-        _BookkeepingTimerOffset = Schema.GetOffset(0xABE104C975065DCC);
-      }
-      return new CountdownTimerImpl(_Handle + _BookkeepingTimerOffset!.Value);
+    public IntervalTimer ActiveTimer {
+        get {
+            _ActiveTimerOffset = _ActiveTimerOffset ?? Schema.GetOffset(0xABE104C946FF8D04);
+            return new IntervalTimerImpl(_Handle + _ActiveTimerOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextSpreadTimerOffset;
+    private static nint? _FireSpawnOffsetOffset;
 
-  public CountdownTimer NextSpreadTimer {
-    get {
-      if (_NextSpreadTimerOffset == null) {
-        _NextSpreadTimerOffset = Schema.GetOffset(0xABE104C93045281C);
-      }
-      return new CountdownTimerImpl(_Handle + _NextSpreadTimerOffset!.Value);
+    public ref int FireSpawnOffset {
+        get {
+            _FireSpawnOffsetOffset = _FireSpawnOffsetOffset ?? Schema.GetOffset(0xABE104C90C7D268F);
+            return ref _Handle.AsRef<int>(_FireSpawnOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _SourceItemDefIndexOffset;
+    private static nint? _MaxFlamesOffset;
 
-  public ref ushort SourceItemDefIndex {
-    get {
-      if (_SourceItemDefIndexOffset == null) {
-        _SourceItemDefIndexOffset = Schema.GetOffset(0xABE104C905A4D2E6);
-      }
-      return ref _Handle.AsRef<ushort>(_SourceItemDefIndexOffset!.Value);
+    public ref int MaxFlames {
+        get {
+            _MaxFlamesOffset = _MaxFlamesOffset ?? Schema.GetOffset(0xABE104C972805F39);
+            return ref _Handle.AsRef<int>(_MaxFlamesOffset!.Value);
+        }
     }
-  }
+    private static nint? _SpreadCountOffset;
 
-  public void FirePositionsUpdated() {
-    Schema.Update(_Handle, 0xABE104C91E992007);
-  }
-  public void FireParentPositionsUpdated() {
-    Schema.Update(_Handle, 0xABE104C9A58B35D7);
-  }
-  public void FireIsBurningUpdated() {
-    Schema.Update(_Handle, 0xABE104C9E5CD906C);
-  }
-  public void BurnNormalUpdated() {
-    Schema.Update(_Handle, 0xABE104C9382663DB);
-  }
-  public void FireCountUpdated() {
-    Schema.Update(_Handle, 0xABE104C9820942A0);
-  }
-  public void InfernoTypeUpdated() {
-    Schema.Update(_Handle, 0xABE104C903C628B8);
-  }
-  public void FireEffectTickBeginUpdated() {
-    Schema.Update(_Handle, 0xABE104C989EB57F2);
-  }
-  public void FireLifetimeUpdated() {
-    Schema.Update(_Handle, 0xABE104C9B2E34E7E);
-  }
-  public void InPostEffectTimeUpdated() {
-    Schema.Update(_Handle, 0xABE104C963E4F6B8);
-  }
+    public ref int SpreadCount {
+        get {
+            _SpreadCountOffset = _SpreadCountOffset ?? Schema.GetOffset(0xABE104C9F27833E1);
+            return ref _Handle.AsRef<int>(_SpreadCountOffset!.Value);
+        }
+    }
+    private static nint? _BookkeepingTimerOffset;
+
+    public CountdownTimer BookkeepingTimer {
+        get {
+            _BookkeepingTimerOffset = _BookkeepingTimerOffset ?? Schema.GetOffset(0xABE104C975065DCC);
+            return new CountdownTimerImpl(_Handle + _BookkeepingTimerOffset!.Value);
+        }
+    }
+    private static nint? _NextSpreadTimerOffset;
+
+    public CountdownTimer NextSpreadTimer {
+        get {
+            _NextSpreadTimerOffset = _NextSpreadTimerOffset ?? Schema.GetOffset(0xABE104C93045281C);
+            return new CountdownTimerImpl(_Handle + _NextSpreadTimerOffset!.Value);
+        }
+    }
+    private static nint? _SourceItemDefIndexOffset;
+
+    public ref ushort SourceItemDefIndex {
+        get {
+            _SourceItemDefIndexOffset = _SourceItemDefIndexOffset ?? Schema.GetOffset(0xABE104C905A4D2E6);
+            return ref _Handle.AsRef<ushort>(_SourceItemDefIndexOffset!.Value);
+        }
+    }
+
+    public void FirePositionsUpdated() => Schema.Update(_Handle, 0xABE104C91E992007);
+    public void FireParentPositionsUpdated() => Schema.Update(_Handle, 0xABE104C9A58B35D7);
+    public void FireIsBurningUpdated() => Schema.Update(_Handle, 0xABE104C9E5CD906C);
+    public void BurnNormalUpdated() => Schema.Update(_Handle, 0xABE104C9382663DB);
+    public void FireCountUpdated() => Schema.Update(_Handle, 0xABE104C9820942A0);
+    public void InfernoTypeUpdated() => Schema.Update(_Handle, 0xABE104C903C628B8);
+    public void FireEffectTickBeginUpdated() => Schema.Update(_Handle, 0xABE104C989EB57F2);
+    public void FireLifetimeUpdated() => Schema.Update(_Handle, 0xABE104C9B2E34E7E);
+    public void InPostEffectTimeUpdated() => Schema.Update(_Handle, 0xABE104C963E4F6B8);
 }

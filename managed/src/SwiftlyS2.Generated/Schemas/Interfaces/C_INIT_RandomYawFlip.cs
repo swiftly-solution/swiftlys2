@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomYawFlip : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomYawFlip> {
+public partial interface C_INIT_RandomYawFlip : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomYawFlip>
+{
+    static C_INIT_RandomYawFlip ISchemaClass<C_INIT_RandomYawFlip>.From(nint handle) => new C_INIT_RandomYawFlipImpl(handle);
+    static int ISchemaClass<C_INIT_RandomYawFlip>.Size => 480;
+    static string? ISchemaClass<C_INIT_RandomYawFlip>.ClassName => null;
 
-  static C_INIT_RandomYawFlip ISchemaClass<C_INIT_RandomYawFlip>.From(nint handle) => new C_INIT_RandomYawFlipImpl(handle);
-  static int ISchemaClass<C_INIT_RandomYawFlip>.Size => 480;
-  static string? ISchemaClass<C_INIT_RandomYawFlip>.ClassName => null;
 
-  
-  public ref float Percent { get; }
+    public ref float Percent { get; }
 
 
 }

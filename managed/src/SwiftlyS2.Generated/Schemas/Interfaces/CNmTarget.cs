@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmTarget : ISchemaClass<CNmTarget> {
+public partial interface CNmTarget : ISchemaClass<CNmTarget>
+{
+    static CNmTarget ISchemaClass<CNmTarget>.From(nint handle) => new CNmTargetImpl(handle);
+    static int ISchemaClass<CNmTarget>.Size => 48;
+    static string? ISchemaClass<CNmTarget>.ClassName => null;
 
-  static CNmTarget ISchemaClass<CNmTarget>.From(nint handle) => new CNmTargetImpl(handle);
-  static int ISchemaClass<CNmTarget>.Size => 48;
-  static string? ISchemaClass<CNmTarget>.ClassName => null;
 
-  
-  public ref CTransform Transform { get; }
-  
-  public ref CGlobalSymbol BoneID { get; }
-  
-  public ref bool IsBoneTarget { get; }
-  
-  public ref bool IsUsingBoneSpaceOffsets { get; }
-  
-  public ref bool HasOffsets { get; }
-  
-  public ref bool IsSet { get; }
+    public ref CTransform Transform { get; }
+
+    public ref CGlobalSymbol BoneID { get; }
+
+    public ref bool IsBoneTarget { get; }
+
+    public ref bool IsUsingBoneSpaceOffsets { get; }
+
+    public ref bool HasOffsets { get; }
+
+    public ref bool IsSet { get; }
 
 
 }

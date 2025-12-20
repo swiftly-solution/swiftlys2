@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvTiltImpl : CPointEntityImpl, CEnvTilt {
+internal partial class CEnvTiltImpl : CPointEntityImpl, CEnvTilt
+{
+    public CEnvTiltImpl(nint handle) : base(handle) { }
 
-  public CEnvTiltImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DurationOffset;
 
-  private static nint? _DurationOffset;
-
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0xF90425169879A98D);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xF90425169879A98D);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xF90425167C5B0533);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xF90425167C5B0533);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _TiltTimeOffset;
+    private static nint? _TiltTimeOffset;
 
-  public ref float TiltTime {
-    get {
-      if (_TiltTimeOffset == null) {
-        _TiltTimeOffset = Schema.GetOffset(0xF9042516B3956BFF);
-      }
-      return ref _Handle.AsRef<float>(_TiltTimeOffset!.Value);
+    public ref float TiltTime {
+        get {
+            _TiltTimeOffset = _TiltTimeOffset ?? Schema.GetOffset(0xF9042516B3956BFF);
+            return ref _Handle.AsRef<float>(_TiltTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StopTimeOffset;
+    private static nint? _StopTimeOffset;
 
-  public GameTime_t StopTime {
-    get {
-      if (_StopTimeOffset == null) {
-        _StopTimeOffset = Schema.GetOffset(0xF90425166BFFEDC4);
-      }
-      return new GameTime_tImpl(_Handle + _StopTimeOffset!.Value);
+    public GameTime_t StopTime {
+        get {
+            _StopTimeOffset = _StopTimeOffset ?? Schema.GetOffset(0xF90425166BFFEDC4);
+            return new GameTime_tImpl(_Handle + _StopTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

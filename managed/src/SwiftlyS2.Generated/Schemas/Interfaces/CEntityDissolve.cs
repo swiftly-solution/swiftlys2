@@ -8,41 +8,41 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEntityDissolve : CBaseModelEntity, ISchemaClass<CEntityDissolve> {
+public partial interface CEntityDissolve : CBaseModelEntity, ISchemaClass<CEntityDissolve>
+{
+    static CEntityDissolve ISchemaClass<CEntityDissolve>.From(nint handle) => new CEntityDissolveImpl(handle);
+    static int ISchemaClass<CEntityDissolve>.Size => 2056;
+    static string? ISchemaClass<CEntityDissolve>.ClassName => "env_entity_dissolver";
 
-  static CEntityDissolve ISchemaClass<CEntityDissolve>.From(nint handle) => new CEntityDissolveImpl(handle);
-  static int ISchemaClass<CEntityDissolve>.Size => 2056;
-  static string? ISchemaClass<CEntityDissolve>.ClassName => "env_entity_dissolver";
 
-  
-  public ref float FadeInStart { get; }
-  
-  public ref float FadeInLength { get; }
-  
-  public ref float FadeOutModelStart { get; }
-  
-  public ref float FadeOutModelLength { get; }
-  
-  public ref float FadeOutStart { get; }
-  
-  public ref float FadeOutLength { get; }
-  
-  public GameTime_t StartTime { get; }
-  
-  public ref EntityDisolveType_t DissolveType { get; }
-  
-  public ref Vector DissolverOrigin { get; }
-  
-  public ref uint Magnitude { get; }
+    public ref float FadeInStart { get; }
 
-  public void FadeInStartUpdated();
-  public void FadeInLengthUpdated();
-  public void FadeOutModelStartUpdated();
-  public void FadeOutModelLengthUpdated();
-  public void FadeOutStartUpdated();
-  public void FadeOutLengthUpdated();
-  public void StartTimeUpdated();
-  public void DissolveTypeUpdated();
-  public void DissolverOriginUpdated();
-  public void MagnitudeUpdated();
+    public ref float FadeInLength { get; }
+
+    public ref float FadeOutModelStart { get; }
+
+    public ref float FadeOutModelLength { get; }
+
+    public ref float FadeOutStart { get; }
+
+    public ref float FadeOutLength { get; }
+
+    public GameTime_t StartTime { get; }
+
+    public ref EntityDisolveType_t DissolveType { get; }
+
+    public ref Vector DissolverOrigin { get; }
+
+    public ref uint Magnitude { get; }
+
+    public void FadeInStartUpdated();
+    public void FadeInLengthUpdated();
+    public void FadeOutModelStartUpdated();
+    public void FadeOutModelLengthUpdated();
+    public void FadeOutStartUpdated();
+    public void FadeOutLengthUpdated();
+    public void StartTimeUpdated();
+    public void DissolveTypeUpdated();
+    public void DissolverOriginUpdated();
+    public void MagnitudeUpdated();
 }

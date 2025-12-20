@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface OldFeEdge_t : ISchemaClass<OldFeEdge_t> {
+public partial interface OldFeEdge_t : ISchemaClass<OldFeEdge_t>
+{
+    static OldFeEdge_t ISchemaClass<OldFeEdge_t>.From(nint handle) => new OldFeEdge_tImpl(handle);
+    static int ISchemaClass<OldFeEdge_t>.Size => 72;
+    static string? ISchemaClass<OldFeEdge_t>.ClassName => null;
 
-  static OldFeEdge_t ISchemaClass<OldFeEdge_t>.From(nint handle) => new OldFeEdge_tImpl(handle);
-  static int ISchemaClass<OldFeEdge_t>.Size => 72;
-  static string? ISchemaClass<OldFeEdge_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<float> K { get; }
-  
-  public ref float InvA { get; }
-  
-  public ref float T { get; }
-  
-  public ref float ThetaRelaxed { get; }
-  
-  public ref float ThetaFactor { get; }
-  
-  public ref float C01 { get; }
-  
-  public ref float C02 { get; }
-  
-  public ref float C03 { get; }
-  
-  public ref float C04 { get; }
-  
-  public ref float AxialModelDist { get; }
-  
-  public ISchemaFixedArray<float> AxialModelWeights { get; }
-  
-  public ISchemaFixedArray<ushort> Node { get; }
+    public ISchemaFixedArray<float> K { get; }
+
+    public ref float InvA { get; }
+
+    public ref float T { get; }
+
+    public ref float ThetaRelaxed { get; }
+
+    public ref float ThetaFactor { get; }
+
+    public ref float C01 { get; }
+
+    public ref float C02 { get; }
+
+    public ref float C03 { get; }
+
+    public ref float C04 { get; }
+
+    public ref float AxialModelDist { get; }
+
+    public ISchemaFixedArray<float> AxialModelWeights { get; }
+
+    public ISchemaFixedArray<ushort> Node { get; }
 
 
 }

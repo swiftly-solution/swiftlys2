@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVirtualAnimParameter : CAnimParameterBase, ISchemaClass<CVirtualAnimParameter> {
+public partial interface CVirtualAnimParameter : CAnimParameterBase, ISchemaClass<CVirtualAnimParameter>
+{
+    static CVirtualAnimParameter ISchemaClass<CVirtualAnimParameter>.From(nint handle) => new CVirtualAnimParameterImpl(handle);
+    static int ISchemaClass<CVirtualAnimParameter>.Size => 128;
+    static string? ISchemaClass<CVirtualAnimParameter>.ClassName => null;
 
-  static CVirtualAnimParameter ISchemaClass<CVirtualAnimParameter>.From(nint handle) => new CVirtualAnimParameterImpl(handle);
-  static int ISchemaClass<CVirtualAnimParameter>.Size => 128;
-  static string? ISchemaClass<CVirtualAnimParameter>.ClassName => null;
 
-  
-  public string ExpressionString { get; set; }
-  
-  public ref AnimParamType_t ParamType { get; }
+    public string ExpressionString { get; set; }
+
+    public ref AnimParamType_t ParamType { get; }
 
 
 }

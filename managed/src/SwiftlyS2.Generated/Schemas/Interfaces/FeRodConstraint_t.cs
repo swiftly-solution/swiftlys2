@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeRodConstraint_t : ISchemaClass<FeRodConstraint_t> {
+public partial interface FeRodConstraint_t : ISchemaClass<FeRodConstraint_t>
+{
+    static FeRodConstraint_t ISchemaClass<FeRodConstraint_t>.From(nint handle) => new FeRodConstraint_tImpl(handle);
+    static int ISchemaClass<FeRodConstraint_t>.Size => 20;
+    static string? ISchemaClass<FeRodConstraint_t>.ClassName => null;
 
-  static FeRodConstraint_t ISchemaClass<FeRodConstraint_t>.From(nint handle) => new FeRodConstraint_tImpl(handle);
-  static int ISchemaClass<FeRodConstraint_t>.Size => 20;
-  static string? ISchemaClass<FeRodConstraint_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Node { get; }
-  
-  public ref float MaxDist { get; }
-  
-  public ref float MinDist { get; }
-  
-  public ref float Weight0 { get; }
-  
-  public ref float RelaxationFactor { get; }
+    public ISchemaFixedArray<ushort> Node { get; }
+
+    public ref float MaxDist { get; }
+
+    public ref float MinDist { get; }
+
+    public ref float Weight0 { get; }
+
+    public ref float RelaxationFactor { get; }
 
 
 }

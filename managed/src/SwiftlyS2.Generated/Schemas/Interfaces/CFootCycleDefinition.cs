@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootCycleDefinition : ISchemaClass<CFootCycleDefinition> {
+public partial interface CFootCycleDefinition : ISchemaClass<CFootCycleDefinition>
+{
+    static CFootCycleDefinition ISchemaClass<CFootCycleDefinition>.From(nint handle) => new CFootCycleDefinitionImpl(handle);
+    static int ISchemaClass<CFootCycleDefinition>.Size => 60;
+    static string? ISchemaClass<CFootCycleDefinition>.ClassName => null;
 
-  static CFootCycleDefinition ISchemaClass<CFootCycleDefinition>.From(nint handle) => new CFootCycleDefinitionImpl(handle);
-  static int ISchemaClass<CFootCycleDefinition>.Size => 60;
-  static string? ISchemaClass<CFootCycleDefinition>.ClassName => null;
 
-  
-  public ref Vector StancePositionMS { get; }
-  
-  public ref Vector MidpointPositionMS { get; }
-  
-  public ref float StanceDirectionMS { get; }
-  
-  public ref Vector ToStrideStartPos { get; }
-  
-  public CAnimCycle StanceCycle { get; }
-  
-  public CFootCycle FootLiftCycle { get; }
-  
-  public CFootCycle FootOffCycle { get; }
-  
-  public CFootCycle FootStrikeCycle { get; }
-  
-  public CFootCycle FootLandCycle { get; }
+    public ref Vector StancePositionMS { get; }
+
+    public ref Vector MidpointPositionMS { get; }
+
+    public ref float StanceDirectionMS { get; }
+
+    public ref Vector ToStrideStartPos { get; }
+
+    public CAnimCycle StanceCycle { get; }
+
+    public CFootCycle FootLiftCycle { get; }
+
+    public CFootCycle FootOffCycle { get; }
+
+    public CFootCycle FootStrikeCycle { get; }
+
+    public CFootCycle FootLandCycle { get; }
 
 
 }

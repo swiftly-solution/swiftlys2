@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGlowProperty : ISchemaClass<CGlowProperty> {
+public partial interface CGlowProperty : ISchemaClass<CGlowProperty>
+{
+    static CGlowProperty ISchemaClass<CGlowProperty>.From(nint handle) => new CGlowPropertyImpl(handle);
+    static int ISchemaClass<CGlowProperty>.Size => 88;
+    static string? ISchemaClass<CGlowProperty>.ClassName => null;
 
-  static CGlowProperty ISchemaClass<CGlowProperty>.From(nint handle) => new CGlowPropertyImpl(handle);
-  static int ISchemaClass<CGlowProperty>.Size => 88;
-  static string? ISchemaClass<CGlowProperty>.ClassName => null;
 
-  
-  public ref Vector GlowColor { get; }
-  
-  public ref int GlowType { get; }
-  
-  public ref int GlowTeam { get; }
-  
-  public ref int GlowRange { get; }
-  
-  public ref int GlowRangeMin { get; }
-  
-  public ref Color GlowColorOverride { get; }
-  
-  public ref bool Flashing { get; }
-  
-  public ref float GlowTime { get; }
-  
-  public ref float GlowStartTime { get; }
-  
-  public ref bool EligibleForScreenHighlight { get; }
-  
-  public ref bool Glowing { get; }
+    public ref Vector GlowColor { get; }
 
-  public void GlowTypeUpdated();
-  public void GlowTeamUpdated();
-  public void GlowRangeUpdated();
-  public void GlowRangeMinUpdated();
-  public void GlowColorOverrideUpdated();
-  public void FlashingUpdated();
-  public void GlowTimeUpdated();
-  public void GlowStartTimeUpdated();
-  public void EligibleForScreenHighlightUpdated();
+    public ref int GlowType { get; }
+
+    public ref int GlowTeam { get; }
+
+    public ref int GlowRange { get; }
+
+    public ref int GlowRangeMin { get; }
+
+    public ref Color GlowColorOverride { get; }
+
+    public ref bool Flashing { get; }
+
+    public ref float GlowTime { get; }
+
+    public ref float GlowStartTime { get; }
+
+    public ref bool EligibleForScreenHighlight { get; }
+
+    public ref bool Glowing { get; }
+
+    public void GlowTypeUpdated();
+    public void GlowTeamUpdated();
+    public void GlowRangeUpdated();
+    public void GlowRangeMinUpdated();
+    public void GlowColorOverrideUpdated();
+    public void FlashingUpdated();
+    public void GlowTimeUpdated();
+    public void GlowStartTimeUpdated();
+    public void EligibleForScreenHighlightUpdated();
 }

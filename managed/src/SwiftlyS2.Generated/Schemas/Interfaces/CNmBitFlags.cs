@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmBitFlags : ISchemaClass<CNmBitFlags> {
+public partial interface CNmBitFlags : ISchemaClass<CNmBitFlags>
+{
+    static CNmBitFlags ISchemaClass<CNmBitFlags>.From(nint handle) => new CNmBitFlagsImpl(handle);
+    static int ISchemaClass<CNmBitFlags>.Size => 4;
+    static string? ISchemaClass<CNmBitFlags>.ClassName => null;
 
-  static CNmBitFlags ISchemaClass<CNmBitFlags>.From(nint handle) => new CNmBitFlagsImpl(handle);
-  static int ISchemaClass<CNmBitFlags>.Size => 4;
-  static string? ISchemaClass<CNmBitFlags>.ClassName => null;
 
-  
-  public ref uint Flags { get; }
+    public ref uint Flags { get; }
 
 
 }

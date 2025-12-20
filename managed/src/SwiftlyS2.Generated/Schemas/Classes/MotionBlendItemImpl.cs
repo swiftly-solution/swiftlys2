@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MotionBlendItemImpl : SchemaClass, MotionBlendItem {
+internal partial class MotionBlendItemImpl : SchemaClass, MotionBlendItem
+{
+    public MotionBlendItemImpl(nint handle) : base(handle) { }
 
-  public MotionBlendItemImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChildOffset;
 
-  private static nint? _ChildOffset;
-
-  public SchemaUntypedField Child {
-    get {
-      if (_ChildOffset == null) {
-        _ChildOffset = Schema.GetOffset(0x6AF18B8D4A0B773F);
-      }
-      return new SchemaUntypedField(_Handle + _ChildOffset!.Value);
+    public SchemaUntypedField Child {
+        get {
+            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x6AF18B8D4A0B773F);
+            return new SchemaUntypedField(_Handle + _ChildOffset!.Value);
+        }
     }
-  }
-  private static nint? _KeyValueOffset;
+    private static nint? _KeyValueOffset;
 
-  public ref float KeyValue {
-    get {
-      if (_KeyValueOffset == null) {
-        _KeyValueOffset = Schema.GetOffset(0x6AF18B8D039CE1D7);
-      }
-      return ref _Handle.AsRef<float>(_KeyValueOffset!.Value);
+    public ref float KeyValue {
+        get {
+            _KeyValueOffset = _KeyValueOffset ?? Schema.GetOffset(0x6AF18B8D039CE1D7);
+            return ref _Handle.AsRef<float>(_KeyValueOffset!.Value);
+        }
     }
-  }
 
 
 }

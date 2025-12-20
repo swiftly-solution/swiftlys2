@@ -6,250 +6,177 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvCubemapImpl : CBaseEntityImpl, CEnvCubemap {
+internal partial class CEnvCubemapImpl : CBaseEntityImpl, CEnvCubemap
+{
+    public CEnvCubemapImpl(nint handle) : base(handle) { }
 
-  public CEnvCubemapImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Entity_hCubemapTextureOffset;
 
-  private static nint? _Entity_hCubemapTextureOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hCubemapTexture {
-    get {
-      if (_Entity_hCubemapTextureOffset == null) {
-        _Entity_hCubemapTextureOffset = Schema.GetOffset(0xD6FB78464906C709);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hCubemapTextureOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hCubemapTexture {
+        get {
+            _Entity_hCubemapTextureOffset = _Entity_hCubemapTextureOffset ?? Schema.GetOffset(0xD6FB78464906C709);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_Entity_hCubemapTextureOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_bCustomCubemapTextureOffset;
+    private static nint? _Entity_bCustomCubemapTextureOffset;
 
-  public ref bool Entity_bCustomCubemapTexture {
-    get {
-      if (_Entity_bCustomCubemapTextureOffset == null) {
-        _Entity_bCustomCubemapTextureOffset = Schema.GetOffset(0xD6FB78461E6DC6A4);
-      }
-      return ref _Handle.AsRef<bool>(_Entity_bCustomCubemapTextureOffset!.Value);
+    public ref bool Entity_bCustomCubemapTexture {
+        get {
+            _Entity_bCustomCubemapTextureOffset = _Entity_bCustomCubemapTextureOffset ?? Schema.GetOffset(0xD6FB78461E6DC6A4);
+            return ref _Handle.AsRef<bool>(_Entity_bCustomCubemapTextureOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_flInfluenceRadiusOffset;
+    private static nint? _Entity_flInfluenceRadiusOffset;
 
-  public ref float Entity_flInfluenceRadius {
-    get {
-      if (_Entity_flInfluenceRadiusOffset == null) {
-        _Entity_flInfluenceRadiusOffset = Schema.GetOffset(0xD6FB7846C7454EDE);
-      }
-      return ref _Handle.AsRef<float>(_Entity_flInfluenceRadiusOffset!.Value);
+    public ref float Entity_flInfluenceRadius {
+        get {
+            _Entity_flInfluenceRadiusOffset = _Entity_flInfluenceRadiusOffset ?? Schema.GetOffset(0xD6FB7846C7454EDE);
+            return ref _Handle.AsRef<float>(_Entity_flInfluenceRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_vBoxProjectMinsOffset;
+    private static nint? _Entity_vBoxProjectMinsOffset;
 
-  public ref Vector Entity_vBoxProjectMins {
-    get {
-      if (_Entity_vBoxProjectMinsOffset == null) {
-        _Entity_vBoxProjectMinsOffset = Schema.GetOffset(0xD6FB7846DFB51948);
-      }
-      return ref _Handle.AsRef<Vector>(_Entity_vBoxProjectMinsOffset!.Value);
+    public ref Vector Entity_vBoxProjectMins {
+        get {
+            _Entity_vBoxProjectMinsOffset = _Entity_vBoxProjectMinsOffset ?? Schema.GetOffset(0xD6FB7846DFB51948);
+            return ref _Handle.AsRef<Vector>(_Entity_vBoxProjectMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_vBoxProjectMaxsOffset;
+    private static nint? _Entity_vBoxProjectMaxsOffset;
 
-  public ref Vector Entity_vBoxProjectMaxs {
-    get {
-      if (_Entity_vBoxProjectMaxsOffset == null) {
-        _Entity_vBoxProjectMaxsOffset = Schema.GetOffset(0xD6FB7846712D3052);
-      }
-      return ref _Handle.AsRef<Vector>(_Entity_vBoxProjectMaxsOffset!.Value);
+    public ref Vector Entity_vBoxProjectMaxs {
+        get {
+            _Entity_vBoxProjectMaxsOffset = _Entity_vBoxProjectMaxsOffset ?? Schema.GetOffset(0xD6FB7846712D3052);
+            return ref _Handle.AsRef<Vector>(_Entity_vBoxProjectMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_bMoveableOffset;
+    private static nint? _Entity_bMoveableOffset;
 
-  public ref bool Entity_bMoveable {
-    get {
-      if (_Entity_bMoveableOffset == null) {
-        _Entity_bMoveableOffset = Schema.GetOffset(0xD6FB784654059592);
-      }
-      return ref _Handle.AsRef<bool>(_Entity_bMoveableOffset!.Value);
+    public ref bool Entity_bMoveable {
+        get {
+            _Entity_bMoveableOffset = _Entity_bMoveableOffset ?? Schema.GetOffset(0xD6FB784654059592);
+            return ref _Handle.AsRef<bool>(_Entity_bMoveableOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_nHandshakeOffset;
+    private static nint? _Entity_nHandshakeOffset;
 
-  public ref int Entity_nHandshake {
-    get {
-      if (_Entity_nHandshakeOffset == null) {
-        _Entity_nHandshakeOffset = Schema.GetOffset(0xD6FB7846069A2774);
-      }
-      return ref _Handle.AsRef<int>(_Entity_nHandshakeOffset!.Value);
+    public ref int Entity_nHandshake {
+        get {
+            _Entity_nHandshakeOffset = _Entity_nHandshakeOffset ?? Schema.GetOffset(0xD6FB7846069A2774);
+            return ref _Handle.AsRef<int>(_Entity_nHandshakeOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_nEnvCubeMapArrayIndexOffset;
+    private static nint? _Entity_nEnvCubeMapArrayIndexOffset;
 
-  public ref int Entity_nEnvCubeMapArrayIndex {
-    get {
-      if (_Entity_nEnvCubeMapArrayIndexOffset == null) {
-        _Entity_nEnvCubeMapArrayIndexOffset = Schema.GetOffset(0xD6FB784621687DA4);
-      }
-      return ref _Handle.AsRef<int>(_Entity_nEnvCubeMapArrayIndexOffset!.Value);
+    public ref int Entity_nEnvCubeMapArrayIndex {
+        get {
+            _Entity_nEnvCubeMapArrayIndexOffset = _Entity_nEnvCubeMapArrayIndexOffset ?? Schema.GetOffset(0xD6FB784621687DA4);
+            return ref _Handle.AsRef<int>(_Entity_nEnvCubeMapArrayIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_nPriorityOffset;
+    private static nint? _Entity_nPriorityOffset;
 
-  public ref int Entity_nPriority {
-    get {
-      if (_Entity_nPriorityOffset == null) {
-        _Entity_nPriorityOffset = Schema.GetOffset(0xD6FB7846BAACBFAB);
-      }
-      return ref _Handle.AsRef<int>(_Entity_nPriorityOffset!.Value);
+    public ref int Entity_nPriority {
+        get {
+            _Entity_nPriorityOffset = _Entity_nPriorityOffset ?? Schema.GetOffset(0xD6FB7846BAACBFAB);
+            return ref _Handle.AsRef<int>(_Entity_nPriorityOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_flEdgeFadeDistOffset;
+    private static nint? _Entity_flEdgeFadeDistOffset;
 
-  public ref float Entity_flEdgeFadeDist {
-    get {
-      if (_Entity_flEdgeFadeDistOffset == null) {
-        _Entity_flEdgeFadeDistOffset = Schema.GetOffset(0xD6FB7846B6CBA4FE);
-      }
-      return ref _Handle.AsRef<float>(_Entity_flEdgeFadeDistOffset!.Value);
+    public ref float Entity_flEdgeFadeDist {
+        get {
+            _Entity_flEdgeFadeDistOffset = _Entity_flEdgeFadeDistOffset ?? Schema.GetOffset(0xD6FB7846B6CBA4FE);
+            return ref _Handle.AsRef<float>(_Entity_flEdgeFadeDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_vEdgeFadeDistsOffset;
+    private static nint? _Entity_vEdgeFadeDistsOffset;
 
-  public ref Vector Entity_vEdgeFadeDists {
-    get {
-      if (_Entity_vEdgeFadeDistsOffset == null) {
-        _Entity_vEdgeFadeDistsOffset = Schema.GetOffset(0xD6FB7846B07D9139);
-      }
-      return ref _Handle.AsRef<Vector>(_Entity_vEdgeFadeDistsOffset!.Value);
+    public ref Vector Entity_vEdgeFadeDists {
+        get {
+            _Entity_vEdgeFadeDistsOffset = _Entity_vEdgeFadeDistsOffset ?? Schema.GetOffset(0xD6FB7846B07D9139);
+            return ref _Handle.AsRef<Vector>(_Entity_vEdgeFadeDistsOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_flDiffuseScaleOffset;
+    private static nint? _Entity_flDiffuseScaleOffset;
 
-  public ref float Entity_flDiffuseScale {
-    get {
-      if (_Entity_flDiffuseScaleOffset == null) {
-        _Entity_flDiffuseScaleOffset = Schema.GetOffset(0xD6FB7846A14F91F9);
-      }
-      return ref _Handle.AsRef<float>(_Entity_flDiffuseScaleOffset!.Value);
+    public ref float Entity_flDiffuseScale {
+        get {
+            _Entity_flDiffuseScaleOffset = _Entity_flDiffuseScaleOffset ?? Schema.GetOffset(0xD6FB7846A14F91F9);
+            return ref _Handle.AsRef<float>(_Entity_flDiffuseScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_bStartDisabledOffset;
+    private static nint? _Entity_bStartDisabledOffset;
 
-  public ref bool Entity_bStartDisabled {
-    get {
-      if (_Entity_bStartDisabledOffset == null) {
-        _Entity_bStartDisabledOffset = Schema.GetOffset(0xD6FB7846D04F520D);
-      }
-      return ref _Handle.AsRef<bool>(_Entity_bStartDisabledOffset!.Value);
+    public ref bool Entity_bStartDisabled {
+        get {
+            _Entity_bStartDisabledOffset = _Entity_bStartDisabledOffset ?? Schema.GetOffset(0xD6FB7846D04F520D);
+            return ref _Handle.AsRef<bool>(_Entity_bStartDisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_bDefaultEnvMapOffset;
+    private static nint? _Entity_bDefaultEnvMapOffset;
 
-  public ref bool Entity_bDefaultEnvMap {
-    get {
-      if (_Entity_bDefaultEnvMapOffset == null) {
-        _Entity_bDefaultEnvMapOffset = Schema.GetOffset(0xD6FB784626B7497F);
-      }
-      return ref _Handle.AsRef<bool>(_Entity_bDefaultEnvMapOffset!.Value);
+    public ref bool Entity_bDefaultEnvMap {
+        get {
+            _Entity_bDefaultEnvMapOffset = _Entity_bDefaultEnvMapOffset ?? Schema.GetOffset(0xD6FB784626B7497F);
+            return ref _Handle.AsRef<bool>(_Entity_bDefaultEnvMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_bDefaultSpecEnvMapOffset;
+    private static nint? _Entity_bDefaultSpecEnvMapOffset;
 
-  public ref bool Entity_bDefaultSpecEnvMap {
-    get {
-      if (_Entity_bDefaultSpecEnvMapOffset == null) {
-        _Entity_bDefaultSpecEnvMapOffset = Schema.GetOffset(0xD6FB7846D2CEAC08);
-      }
-      return ref _Handle.AsRef<bool>(_Entity_bDefaultSpecEnvMapOffset!.Value);
+    public ref bool Entity_bDefaultSpecEnvMap {
+        get {
+            _Entity_bDefaultSpecEnvMapOffset = _Entity_bDefaultSpecEnvMapOffset ?? Schema.GetOffset(0xD6FB7846D2CEAC08);
+            return ref _Handle.AsRef<bool>(_Entity_bDefaultSpecEnvMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_bIndoorCubeMapOffset;
+    private static nint? _Entity_bIndoorCubeMapOffset;
 
-  public ref bool Entity_bIndoorCubeMap {
-    get {
-      if (_Entity_bIndoorCubeMapOffset == null) {
-        _Entity_bIndoorCubeMapOffset = Schema.GetOffset(0xD6FB7846F5F722D5);
-      }
-      return ref _Handle.AsRef<bool>(_Entity_bIndoorCubeMapOffset!.Value);
+    public ref bool Entity_bIndoorCubeMap {
+        get {
+            _Entity_bIndoorCubeMapOffset = _Entity_bIndoorCubeMapOffset ?? Schema.GetOffset(0xD6FB7846F5F722D5);
+            return ref _Handle.AsRef<bool>(_Entity_bIndoorCubeMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_bCopyDiffuseFromDefaultCubemapOffset;
+    private static nint? _Entity_bCopyDiffuseFromDefaultCubemapOffset;
 
-  public ref bool Entity_bCopyDiffuseFromDefaultCubemap {
-    get {
-      if (_Entity_bCopyDiffuseFromDefaultCubemapOffset == null) {
-        _Entity_bCopyDiffuseFromDefaultCubemapOffset = Schema.GetOffset(0xD6FB7846DF047EA2);
-      }
-      return ref _Handle.AsRef<bool>(_Entity_bCopyDiffuseFromDefaultCubemapOffset!.Value);
+    public ref bool Entity_bCopyDiffuseFromDefaultCubemap {
+        get {
+            _Entity_bCopyDiffuseFromDefaultCubemapOffset = _Entity_bCopyDiffuseFromDefaultCubemapOffset ?? Schema.GetOffset(0xD6FB7846DF047EA2);
+            return ref _Handle.AsRef<bool>(_Entity_bCopyDiffuseFromDefaultCubemapOffset!.Value);
+        }
     }
-  }
-  private static nint? _Entity_bEnabledOffset;
+    private static nint? _Entity_bEnabledOffset;
 
-  public ref bool Entity_bEnabled {
-    get {
-      if (_Entity_bEnabledOffset == null) {
-        _Entity_bEnabledOffset = Schema.GetOffset(0xD6FB7846453FD9DC);
-      }
-      return ref _Handle.AsRef<bool>(_Entity_bEnabledOffset!.Value);
+    public ref bool Entity_bEnabled {
+        get {
+            _Entity_bEnabledOffset = _Entity_bEnabledOffset ?? Schema.GetOffset(0xD6FB7846453FD9DC);
+            return ref _Handle.AsRef<bool>(_Entity_bEnabledOffset!.Value);
+        }
     }
-  }
 
-  public void Entity_hCubemapTextureUpdated() {
-    Schema.Update(_Handle, 0xD6FB78464906C709);
-  }
-  public void Entity_bCustomCubemapTextureUpdated() {
-    Schema.Update(_Handle, 0xD6FB78461E6DC6A4);
-  }
-  public void Entity_flInfluenceRadiusUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846C7454EDE);
-  }
-  public void Entity_vBoxProjectMinsUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846DFB51948);
-  }
-  public void Entity_vBoxProjectMaxsUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846712D3052);
-  }
-  public void Entity_bMoveableUpdated() {
-    Schema.Update(_Handle, 0xD6FB784654059592);
-  }
-  public void Entity_nHandshakeUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846069A2774);
-  }
-  public void Entity_nEnvCubeMapArrayIndexUpdated() {
-    Schema.Update(_Handle, 0xD6FB784621687DA4);
-  }
-  public void Entity_nPriorityUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846BAACBFAB);
-  }
-  public void Entity_flEdgeFadeDistUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846B6CBA4FE);
-  }
-  public void Entity_vEdgeFadeDistsUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846B07D9139);
-  }
-  public void Entity_flDiffuseScaleUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846A14F91F9);
-  }
-  public void Entity_bStartDisabledUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846D04F520D);
-  }
-  public void Entity_bDefaultEnvMapUpdated() {
-    Schema.Update(_Handle, 0xD6FB784626B7497F);
-  }
-  public void Entity_bDefaultSpecEnvMapUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846D2CEAC08);
-  }
-  public void Entity_bIndoorCubeMapUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846F5F722D5);
-  }
-  public void Entity_bCopyDiffuseFromDefaultCubemapUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846DF047EA2);
-  }
-  public void Entity_bEnabledUpdated() {
-    Schema.Update(_Handle, 0xD6FB7846453FD9DC);
-  }
+    public void Entity_hCubemapTextureUpdated() => Schema.Update(_Handle, 0xD6FB78464906C709);
+    public void Entity_bCustomCubemapTextureUpdated() => Schema.Update(_Handle, 0xD6FB78461E6DC6A4);
+    public void Entity_flInfluenceRadiusUpdated() => Schema.Update(_Handle, 0xD6FB7846C7454EDE);
+    public void Entity_vBoxProjectMinsUpdated() => Schema.Update(_Handle, 0xD6FB7846DFB51948);
+    public void Entity_vBoxProjectMaxsUpdated() => Schema.Update(_Handle, 0xD6FB7846712D3052);
+    public void Entity_bMoveableUpdated() => Schema.Update(_Handle, 0xD6FB784654059592);
+    public void Entity_nHandshakeUpdated() => Schema.Update(_Handle, 0xD6FB7846069A2774);
+    public void Entity_nEnvCubeMapArrayIndexUpdated() => Schema.Update(_Handle, 0xD6FB784621687DA4);
+    public void Entity_nPriorityUpdated() => Schema.Update(_Handle, 0xD6FB7846BAACBFAB);
+    public void Entity_flEdgeFadeDistUpdated() => Schema.Update(_Handle, 0xD6FB7846B6CBA4FE);
+    public void Entity_vEdgeFadeDistsUpdated() => Schema.Update(_Handle, 0xD6FB7846B07D9139);
+    public void Entity_flDiffuseScaleUpdated() => Schema.Update(_Handle, 0xD6FB7846A14F91F9);
+    public void Entity_bStartDisabledUpdated() => Schema.Update(_Handle, 0xD6FB7846D04F520D);
+    public void Entity_bDefaultEnvMapUpdated() => Schema.Update(_Handle, 0xD6FB784626B7497F);
+    public void Entity_bDefaultSpecEnvMapUpdated() => Schema.Update(_Handle, 0xD6FB7846D2CEAC08);
+    public void Entity_bIndoorCubeMapUpdated() => Schema.Update(_Handle, 0xD6FB7846F5F722D5);
+    public void Entity_bCopyDiffuseFromDefaultCubemapUpdated() => Schema.Update(_Handle, 0xD6FB7846DF047EA2);
+    public void Entity_bEnabledUpdated() => Schema.Update(_Handle, 0xD6FB7846453FD9DC);
 }

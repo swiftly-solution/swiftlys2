@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDestructiblePartImpl : SchemaClass, CDestructiblePart {
+internal partial class CDestructiblePartImpl : SchemaClass, CDestructiblePart
+{
+    public CDestructiblePartImpl(nint handle) : base(handle) { }
 
-  public CDestructiblePartImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DebugNameOffset;
 
-  private static nint? _DebugNameOffset;
-
-  public ref CGlobalSymbol DebugName {
-    get {
-      if (_DebugNameOffset == null) {
-        _DebugNameOffset = Schema.GetOffset(0xD9E4C935CAC1909B);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_DebugNameOffset!.Value);
+    public ref CGlobalSymbol DebugName {
+        get {
+            _DebugNameOffset = _DebugNameOffset ?? Schema.GetOffset(0xD9E4C935CAC1909B);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DebugNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _HitGroupOffset;
+    private static nint? _HitGroupOffset;
 
-  public ref HitGroup_t HitGroup {
-    get {
-      if (_HitGroupOffset == null) {
-        _HitGroupOffset = Schema.GetOffset(0xD9E4C9359C854D19);
-      }
-      return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset!.Value);
+    public ref HitGroup_t HitGroup {
+        get {
+            _HitGroupOffset = _HitGroupOffset ?? Schema.GetOffset(0xD9E4C9359C854D19);
+            return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisableHitGroupWhenDestroyedOffset;
+    private static nint? _DisableHitGroupWhenDestroyedOffset;
 
-  public ref bool DisableHitGroupWhenDestroyed {
-    get {
-      if (_DisableHitGroupWhenDestroyedOffset == null) {
-        _DisableHitGroupWhenDestroyedOffset = Schema.GetOffset(0xD9E4C935AA847E82);
-      }
-      return ref _Handle.AsRef<bool>(_DisableHitGroupWhenDestroyedOffset!.Value);
+    public ref bool DisableHitGroupWhenDestroyed {
+        get {
+            _DisableHitGroupWhenDestroyedOffset = _DisableHitGroupWhenDestroyedOffset ?? Schema.GetOffset(0xD9E4C935AA847E82);
+            return ref _Handle.AsRef<bool>(_DisableHitGroupWhenDestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OtherHitgroupsToDestroyWhenFullyDestructedOffset;
+    private static nint? _OtherHitgroupsToDestroyWhenFullyDestructedOffset;
 
-  public ref CUtlVector<HitGroup_t> OtherHitgroupsToDestroyWhenFullyDestructed {
-    get {
-      if (_OtherHitgroupsToDestroyWhenFullyDestructedOffset == null) {
-        _OtherHitgroupsToDestroyWhenFullyDestructedOffset = Schema.GetOffset(0xD9E4C9352ECFEA5A);
-      }
-      return ref _Handle.AsRef<CUtlVector<HitGroup_t>>(_OtherHitgroupsToDestroyWhenFullyDestructedOffset!.Value);
+    public ref CUtlVector<HitGroup_t> OtherHitgroupsToDestroyWhenFullyDestructed {
+        get {
+            _OtherHitgroupsToDestroyWhenFullyDestructedOffset = _OtherHitgroupsToDestroyWhenFullyDestructedOffset ?? Schema.GetOffset(0xD9E4C9352ECFEA5A);
+            return ref _Handle.AsRef<CUtlVector<HitGroup_t>>(_OtherHitgroupsToDestroyWhenFullyDestructedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnlyDestroyWhenGibbingOffset;
+    private static nint? _OnlyDestroyWhenGibbingOffset;
 
-  public ref bool OnlyDestroyWhenGibbing {
-    get {
-      if (_OnlyDestroyWhenGibbingOffset == null) {
-        _OnlyDestroyWhenGibbingOffset = Schema.GetOffset(0xD9E4C9350F77EEC1);
-      }
-      return ref _Handle.AsRef<bool>(_OnlyDestroyWhenGibbingOffset!.Value);
+    public ref bool OnlyDestroyWhenGibbing {
+        get {
+            _OnlyDestroyWhenGibbingOffset = _OnlyDestroyWhenGibbingOffset ?? Schema.GetOffset(0xD9E4C9350F77EEC1);
+            return ref _Handle.AsRef<bool>(_OnlyDestroyWhenGibbingOffset!.Value);
+        }
     }
-  }
-  private static nint? _BodyGroupNameOffset;
+    private static nint? _BodyGroupNameOffset;
 
-  public ref CGlobalSymbol BodyGroupName {
-    get {
-      if (_BodyGroupNameOffset == null) {
-        _BodyGroupNameOffset = Schema.GetOffset(0xD9E4C935FFA38852);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_BodyGroupNameOffset!.Value);
+    public ref CGlobalSymbol BodyGroupName {
+        get {
+            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xD9E4C935FFA38852);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BodyGroupNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamageLevelsOffset;
+    private static nint? _DamageLevelsOffset;
 
-  public ref CUtlVector<CDestructiblePart_DamageLevel> DamageLevels {
-    get {
-      if (_DamageLevelsOffset == null) {
-        _DamageLevelsOffset = Schema.GetOffset(0xD9E4C9353B88DC4F);
-      }
-      return ref _Handle.AsRef<CUtlVector<CDestructiblePart_DamageLevel>>(_DamageLevelsOffset!.Value);
+    public ref CUtlVector<CDestructiblePart_DamageLevel> DamageLevels {
+        get {
+            _DamageLevelsOffset = _DamageLevelsOffset ?? Schema.GetOffset(0xD9E4C9353B88DC4F);
+            return ref _Handle.AsRef<CUtlVector<CDestructiblePart_DamageLevel>>(_DamageLevelsOffset!.Value);
+        }
     }
-  }
 
 
 }

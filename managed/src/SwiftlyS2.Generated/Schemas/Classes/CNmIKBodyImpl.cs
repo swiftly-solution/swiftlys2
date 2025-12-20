@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmIKBodyImpl : SchemaClass, CNmIKBody {
+internal partial class CNmIKBodyImpl : SchemaClass, CNmIKBody
+{
+    public CNmIKBodyImpl(nint handle) : base(handle) { }
 
-  public CNmIKBodyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MassOffset;
 
-  private static nint? _MassOffset;
-
-  public ref float Mass {
-    get {
-      if (_MassOffset == null) {
-        _MassOffset = Schema.GetOffset(0x2162051FCD83D263);
-      }
-      return ref _Handle.AsRef<float>(_MassOffset!.Value);
+    public ref float Mass {
+        get {
+            _MassOffset = _MassOffset ?? Schema.GetOffset(0x2162051FCD83D263);
+            return ref _Handle.AsRef<float>(_MassOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalMassCenterOffset;
+    private static nint? _LocalMassCenterOffset;
 
-  public ref Vector LocalMassCenter {
-    get {
-      if (_LocalMassCenterOffset == null) {
-        _LocalMassCenterOffset = Schema.GetOffset(0x2162051FAFDB4EDD);
-      }
-      return ref _Handle.AsRef<Vector>(_LocalMassCenterOffset!.Value);
+    public ref Vector LocalMassCenter {
+        get {
+            _LocalMassCenterOffset = _LocalMassCenterOffset ?? Schema.GetOffset(0x2162051FAFDB4EDD);
+            return ref _Handle.AsRef<Vector>(_LocalMassCenterOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref Vector Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x2162051F0A9FA917);
-      }
-      return ref _Handle.AsRef<Vector>(_RadiusOffset!.Value);
+    public ref Vector Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x2162051F0A9FA917);
+            return ref _Handle.AsRef<Vector>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResistanceOffset;
+    private static nint? _ResistanceOffset;
 
-  public ref float Resistance {
-    get {
-      if (_ResistanceOffset == null) {
-        _ResistanceOffset = Schema.GetOffset(0x2162051FE15D484E);
-      }
-      return ref _Handle.AsRef<float>(_ResistanceOffset!.Value);
+    public ref float Resistance {
+        get {
+            _ResistanceOffset = _ResistanceOffset ?? Schema.GetOffset(0x2162051FE15D484E);
+            return ref _Handle.AsRef<float>(_ResistanceOffset!.Value);
+        }
     }
-  }
 
 
 }

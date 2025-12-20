@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayer_DamageReactServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_DamageReactServices> {
-
-  static CCSPlayer_DamageReactServices ISchemaClass<CCSPlayer_DamageReactServices>.From(nint handle) => new CCSPlayer_DamageReactServicesImpl(handle);
-  static int ISchemaClass<CCSPlayer_DamageReactServices>.Size => 72;
-  static string? ISchemaClass<CCSPlayer_DamageReactServices>.ClassName => null;
+public partial interface CCSPlayer_DamageReactServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_DamageReactServices>
+{
+    static CCSPlayer_DamageReactServices ISchemaClass<CCSPlayer_DamageReactServices>.From(nint handle) => new CCSPlayer_DamageReactServicesImpl(handle);
+    static int ISchemaClass<CCSPlayer_DamageReactServices>.Size => 72;
+    static string? ISchemaClass<CCSPlayer_DamageReactServices>.ClassName => null;
 
 
 

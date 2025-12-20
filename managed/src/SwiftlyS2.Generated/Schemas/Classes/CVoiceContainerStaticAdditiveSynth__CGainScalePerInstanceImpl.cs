@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl : SchemaClass, CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance {
+internal partial class CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl : SchemaClass, CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance
+{
+    public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinVolumeOffset;
 
-  private static nint? _MinVolumeOffset;
-
-  public ref float MinVolume {
-    get {
-      if (_MinVolumeOffset == null) {
-        _MinVolumeOffset = Schema.GetOffset(0x9089F81B2CA4E2A3);
-      }
-      return ref _Handle.AsRef<float>(_MinVolumeOffset!.Value);
+    public ref float MinVolume {
+        get {
+            _MinVolumeOffset = _MinVolumeOffset ?? Schema.GetOffset(0x9089F81B2CA4E2A3);
+            return ref _Handle.AsRef<float>(_MinVolumeOffset!.Value);
+        }
     }
-  }
-  private static nint? _InstancesAtMinVolumeOffset;
+    private static nint? _InstancesAtMinVolumeOffset;
 
-  public ref int InstancesAtMinVolume {
-    get {
-      if (_InstancesAtMinVolumeOffset == null) {
-        _InstancesAtMinVolumeOffset = Schema.GetOffset(0x9089F81BBA3DF3B8);
-      }
-      return ref _Handle.AsRef<int>(_InstancesAtMinVolumeOffset!.Value);
+    public ref int InstancesAtMinVolume {
+        get {
+            _InstancesAtMinVolumeOffset = _InstancesAtMinVolumeOffset ?? Schema.GetOffset(0x9089F81BBA3DF3B8);
+            return ref _Handle.AsRef<int>(_InstancesAtMinVolumeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxVolumeOffset;
+    private static nint? _MaxVolumeOffset;
 
-  public ref float MaxVolume {
-    get {
-      if (_MaxVolumeOffset == null) {
-        _MaxVolumeOffset = Schema.GetOffset(0x9089F81B25691B11);
-      }
-      return ref _Handle.AsRef<float>(_MaxVolumeOffset!.Value);
+    public ref float MaxVolume {
+        get {
+            _MaxVolumeOffset = _MaxVolumeOffset ?? Schema.GetOffset(0x9089F81B25691B11);
+            return ref _Handle.AsRef<float>(_MaxVolumeOffset!.Value);
+        }
     }
-  }
-  private static nint? _InstancesAtMaxVolumeOffset;
+    private static nint? _InstancesAtMaxVolumeOffset;
 
-  public ref int InstancesAtMaxVolume {
-    get {
-      if (_InstancesAtMaxVolumeOffset == null) {
-        _InstancesAtMaxVolumeOffset = Schema.GetOffset(0x9089F81B18EB3E46);
-      }
-      return ref _Handle.AsRef<int>(_InstancesAtMaxVolumeOffset!.Value);
+    public ref int InstancesAtMaxVolume {
+        get {
+            _InstancesAtMaxVolumeOffset = _InstancesAtMaxVolumeOffset ?? Schema.GetOffset(0x9089F81B18EB3E46);
+            return ref _Handle.AsRef<int>(_InstancesAtMaxVolumeOffset!.Value);
+        }
     }
-  }
 
 
 }

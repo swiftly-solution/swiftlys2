@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SoundOpvarTraceResult_t : ISchemaClass<SoundOpvarTraceResult_t> {
+public partial interface SoundOpvarTraceResult_t : ISchemaClass<SoundOpvarTraceResult_t>
+{
+    static SoundOpvarTraceResult_t ISchemaClass<SoundOpvarTraceResult_t>.From(nint handle) => new SoundOpvarTraceResult_tImpl(handle);
+    static int ISchemaClass<SoundOpvarTraceResult_t>.Size => 20;
+    static string? ISchemaClass<SoundOpvarTraceResult_t>.ClassName => null;
 
-  static SoundOpvarTraceResult_t ISchemaClass<SoundOpvarTraceResult_t>.From(nint handle) => new SoundOpvarTraceResult_tImpl(handle);
-  static int ISchemaClass<SoundOpvarTraceResult_t>.Size => 20;
-  static string? ISchemaClass<SoundOpvarTraceResult_t>.ClassName => null;
 
-  
-  public ref Vector Pos { get; }
-  
-  public ref bool DidHit { get; }
-  
-  public ref float DistSqrToCenter { get; }
+    public ref Vector Pos { get; }
+
+    public ref bool DidHit { get; }
+
+    public ref float DistSqrToCenter { get; }
 
 
 }

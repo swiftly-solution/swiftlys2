@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_IntervalTimerImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_IntervalTimer {
+internal partial class CPulseCell_IntervalTimerImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_IntervalTimer
+{
+    public CPulseCell_IntervalTimerImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_IntervalTimerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CompletedOffset;
 
-  private static nint? _CompletedOffset;
-
-  public CPulse_ResumePoint Completed {
-    get {
-      if (_CompletedOffset == null) {
-        _CompletedOffset = Schema.GetOffset(0x33EF5E76818C0E92);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _CompletedOffset!.Value);
+    public CPulse_ResumePoint Completed {
+        get {
+            _CompletedOffset = _CompletedOffset ?? Schema.GetOffset(0x33EF5E76818C0E92);
+            return new CPulse_ResumePointImpl(_Handle + _CompletedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnIntervalOffset;
+    private static nint? _OnIntervalOffset;
 
-  public SignatureOutflow_Continue OnInterval {
-    get {
-      if (_OnIntervalOffset == null) {
-        _OnIntervalOffset = Schema.GetOffset(0x33EF5E761A4FEF89);
-      }
-      return new SignatureOutflow_ContinueImpl(_Handle + _OnIntervalOffset!.Value);
+    public SignatureOutflow_Continue OnInterval {
+        get {
+            _OnIntervalOffset = _OnIntervalOffset ?? Schema.GetOffset(0x33EF5E761A4FEF89);
+            return new SignatureOutflow_ContinueImpl(_Handle + _OnIntervalOffset!.Value);
+        }
     }
-  }
 
 
 }

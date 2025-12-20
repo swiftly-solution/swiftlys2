@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmRootMotionEventImpl : CNmEventImpl, CNmRootMotionEvent {
+internal partial class CNmRootMotionEventImpl : CNmEventImpl, CNmRootMotionEvent
+{
+    public CNmRootMotionEventImpl(nint handle) : base(handle) { }
 
-  public CNmRootMotionEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BlendTimeSecondsOffset;
 
-  private static nint? _BlendTimeSecondsOffset;
-
-  public ref float BlendTimeSeconds {
-    get {
-      if (_BlendTimeSecondsOffset == null) {
-        _BlendTimeSecondsOffset = Schema.GetOffset(0x8BA908676D3A08FC);
-      }
-      return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+    public ref float BlendTimeSeconds {
+        get {
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0x8BA908676D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+        }
     }
-  }
 
 
 }

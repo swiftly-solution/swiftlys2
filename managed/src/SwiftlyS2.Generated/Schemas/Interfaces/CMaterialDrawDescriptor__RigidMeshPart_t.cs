@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMaterialDrawDescriptor__RigidMeshPart_t : ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t> {
+public partial interface CMaterialDrawDescriptor__RigidMeshPart_t : ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t>
+{
+    static CMaterialDrawDescriptor__RigidMeshPart_t ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t>.From(nint handle) => new CMaterialDrawDescriptor__RigidMeshPart_tImpl(handle);
+    static int ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t>.Size => 12;
+    static string? ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t>.ClassName => null;
 
-  static CMaterialDrawDescriptor__RigidMeshPart_t ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t>.From(nint handle) => new CMaterialDrawDescriptor__RigidMeshPart_tImpl(handle);
-  static int ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t>.Size => 12;
-  static string? ISchemaClass<CMaterialDrawDescriptor__RigidMeshPart_t>.ClassName => null;
 
-  
-  public ref ushort RigidBLASIndex { get; }
-  
-  public ref short BoneIndex { get; }
-  
-  public ref uint StartIndexOffset { get; }
-  
-  public ref uint PrimitiveCount { get; }
+    public ref ushort RigidBLASIndex { get; }
+
+    public ref short BoneIndex { get; }
+
+    public ref uint StartIndexOffset { get; }
+
+    public ref uint PrimitiveCount { get; }
 
 
 }

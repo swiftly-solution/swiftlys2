@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLODComponentUpdater : CAnimComponentUpdater, ISchemaClass<CLODComponentUpdater> {
+public partial interface CLODComponentUpdater : CAnimComponentUpdater, ISchemaClass<CLODComponentUpdater>
+{
+    static CLODComponentUpdater ISchemaClass<CLODComponentUpdater>.From(nint handle) => new CLODComponentUpdaterImpl(handle);
+    static int ISchemaClass<CLODComponentUpdater>.Size => 56;
+    static string? ISchemaClass<CLODComponentUpdater>.ClassName => null;
 
-  static CLODComponentUpdater ISchemaClass<CLODComponentUpdater>.From(nint handle) => new CLODComponentUpdaterImpl(handle);
-  static int ISchemaClass<CLODComponentUpdater>.Size => 56;
-  static string? ISchemaClass<CLODComponentUpdater>.ClassName => null;
 
-  
-  public ref int ServerLOD { get; }
+    public ref int ServerLOD { get; }
 
 
 }

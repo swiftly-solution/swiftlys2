@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum FootFallTagFoot_t : uint {
-
+public enum FootFallTagFoot_t : uint
+{
  FOOT1 = 0,
 
  FOOT2 = 1,

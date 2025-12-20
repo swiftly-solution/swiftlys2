@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNavVolumeBreadthFirstSearch : CNavVolumeCalculatedVector, ISchemaClass<CNavVolumeBreadthFirstSearch> {
+public partial interface CNavVolumeBreadthFirstSearch : CNavVolumeCalculatedVector, ISchemaClass<CNavVolumeBreadthFirstSearch>
+{
+    static CNavVolumeBreadthFirstSearch ISchemaClass<CNavVolumeBreadthFirstSearch>.From(nint handle) => new CNavVolumeBreadthFirstSearchImpl(handle);
+    static int ISchemaClass<CNavVolumeBreadthFirstSearch>.Size => 192;
+    static string? ISchemaClass<CNavVolumeBreadthFirstSearch>.ClassName => null;
 
-  static CNavVolumeBreadthFirstSearch ISchemaClass<CNavVolumeBreadthFirstSearch>.From(nint handle) => new CNavVolumeBreadthFirstSearchImpl(handle);
-  static int ISchemaClass<CNavVolumeBreadthFirstSearch>.Size => 192;
-  static string? ISchemaClass<CNavVolumeBreadthFirstSearch>.ClassName => null;
 
-  
-  public ref Vector StartPos { get; }
-  
-  public ref float SearchDist { get; }
+    public ref Vector StartPos { get; }
+
+    public ref float SearchDist { get; }
 
 
 }

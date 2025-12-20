@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDSPPresetMixgroupModifierTable : ISchemaClass<CDSPPresetMixgroupModifierTable> {
+public partial interface CDSPPresetMixgroupModifierTable : ISchemaClass<CDSPPresetMixgroupModifierTable>
+{
+    static CDSPPresetMixgroupModifierTable ISchemaClass<CDSPPresetMixgroupModifierTable>.From(nint handle) => new CDSPPresetMixgroupModifierTableImpl(handle);
+    static int ISchemaClass<CDSPPresetMixgroupModifierTable>.Size => 24;
+    static string? ISchemaClass<CDSPPresetMixgroupModifierTable>.ClassName => null;
 
-  static CDSPPresetMixgroupModifierTable ISchemaClass<CDSPPresetMixgroupModifierTable>.From(nint handle) => new CDSPPresetMixgroupModifierTableImpl(handle);
-  static int ISchemaClass<CDSPPresetMixgroupModifierTable>.Size => 24;
-  static string? ISchemaClass<CDSPPresetMixgroupModifierTable>.ClassName => null;
 
-  
-  public ref CUtlVector<CDspPresetModifierList> Table { get; }
+    public ref CUtlVector<CDspPresetModifierList> Table { get; }
 
 
 }

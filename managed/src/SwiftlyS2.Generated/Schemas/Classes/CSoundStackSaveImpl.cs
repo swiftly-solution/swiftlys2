@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundStackSaveImpl : CLogicalEntityImpl, CSoundStackSave {
+internal partial class CSoundStackSaveImpl : CLogicalEntityImpl, CSoundStackSave
+{
+    public CSoundStackSaveImpl(nint handle) : base(handle) { }
 
-  public CSoundStackSaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StackNameOffset;
 
-  private static nint? _StackNameOffset;
-
-  public string StackName {
-    get {
-      if (_StackNameOffset == null) {
-        _StackNameOffset = Schema.GetOffset(0xF9E7A22E3B3E9CD4);
-      }
-      var ptr = _Handle.Read<nint>(_StackNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StackNameOffset == null) {
-        _StackNameOffset = Schema.GetOffset(0xF9E7A22E3B3E9CD4);
-      }
-      Schema.SetString(_Handle, _StackNameOffset!.Value, value);
-    }
-  } 
+    public string StackName {
+        get {
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0xF9E7A22E3B3E9CD4);
+            return Schema.GetString(_Handle.Read<nint>(_StackNameOffset!.Value));
+        }
+        set {
+            _StackNameOffset = _StackNameOffset ?? Schema.GetOffset(0xF9E7A22E3B3E9CD4);
+            Schema.SetString(_Handle, _StackNameOffset!.Value, value);
+        }
+    } 
 
 
 }

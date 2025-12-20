@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_InitFloatCollection : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitFloatCollection> {
+public partial interface C_INIT_InitFloatCollection : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitFloatCollection>
+{
+    static C_INIT_InitFloatCollection ISchemaClass<C_INIT_InitFloatCollection>.From(nint handle) => new C_INIT_InitFloatCollectionImpl(handle);
+    static int ISchemaClass<C_INIT_InitFloatCollection>.Size => 848;
+    static string? ISchemaClass<C_INIT_InitFloatCollection>.ClassName => null;
 
-  static C_INIT_InitFloatCollection ISchemaClass<C_INIT_InitFloatCollection>.From(nint handle) => new C_INIT_InitFloatCollectionImpl(handle);
-  static int ISchemaClass<C_INIT_InitFloatCollection>.Size => 848;
-  static string? ISchemaClass<C_INIT_InitFloatCollection>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput InputValue { get; }
-  
-  public ParticleAttributeIndex_t OutputField { get; }
+    public CParticleCollectionFloatInput InputValue { get; }
+
+    public ParticleAttributeIndex_t OutputField { get; }
 
 
 }

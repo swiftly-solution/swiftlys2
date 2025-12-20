@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoPlayerStart : CPointEntity, ISchemaClass<CInfoPlayerStart> {
+public partial interface CInfoPlayerStart : CPointEntity, ISchemaClass<CInfoPlayerStart>
+{
+    static CInfoPlayerStart ISchemaClass<CInfoPlayerStart>.From(nint handle) => new CInfoPlayerStartImpl(handle);
+    static int ISchemaClass<CInfoPlayerStart>.Size => 1280;
+    static string? ISchemaClass<CInfoPlayerStart>.ClassName => "info_player_start";
 
-  static CInfoPlayerStart ISchemaClass<CInfoPlayerStart>.From(nint handle) => new CInfoPlayerStartImpl(handle);
-  static int ISchemaClass<CInfoPlayerStart>.Size => 1280;
-  static string? ISchemaClass<CInfoPlayerStart>.ClassName => "info_player_start";
 
-  
-  public ref bool Disabled { get; }
-  
-  public ref bool IsMaster { get; }
-  
-  public ref CGlobalSymbol PawnSubclass { get; }
+    public ref bool Disabled { get; }
+
+    public ref bool IsMaster { get; }
+
+    public ref CGlobalSymbol PawnSubclass { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointRotation : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointRotation> {
+public partial interface C_OP_SetControlPointRotation : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointRotation>
+{
+    static C_OP_SetControlPointRotation ISchemaClass<C_OP_SetControlPointRotation>.From(nint handle) => new C_OP_SetControlPointRotationImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointRotation>.Size => 2568;
+    static string? ISchemaClass<C_OP_SetControlPointRotation>.ClassName => null;
 
-  static C_OP_SetControlPointRotation ISchemaClass<C_OP_SetControlPointRotation>.From(nint handle) => new C_OP_SetControlPointRotationImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointRotation>.Size => 2568;
-  static string? ISchemaClass<C_OP_SetControlPointRotation>.ClassName => null;
 
-  
-  public CParticleCollectionVecInput RotAxis { get; }
-  
-  public CParticleCollectionFloatInput RotRate { get; }
-  
-  public ref int CP { get; }
-  
-  public ref int LocalCP { get; }
+    public CParticleCollectionVecInput RotAxis { get; }
+
+    public CParticleCollectionFloatInput RotRate { get; }
+
+    public ref int CP { get; }
+
+    public ref int LocalCP { get; }
 
 
 }

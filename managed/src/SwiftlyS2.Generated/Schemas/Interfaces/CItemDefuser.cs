@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CItemDefuser : CItem, ISchemaClass<CItemDefuser> {
+public partial interface CItemDefuser : CItem, ISchemaClass<CItemDefuser>
+{
+    static CItemDefuser ISchemaClass<CItemDefuser>.From(nint handle) => new CItemDefuserImpl(handle);
+    static int ISchemaClass<CItemDefuser>.Size => 2960;
+    static string? ISchemaClass<CItemDefuser>.ClassName => "item_defuser";
 
-  static CItemDefuser ISchemaClass<CItemDefuser>.From(nint handle) => new CItemDefuserImpl(handle);
-  static int ISchemaClass<CItemDefuser>.Size => 2960;
-  static string? ISchemaClass<CItemDefuser>.ClassName => "item_defuser";
 
-  
-  public EntitySpottedState_t EntitySpottedState { get; }
-  
-  public ref int SpotRules { get; }
+    public EntitySpottedState_t EntitySpottedState { get; }
+
+    public ref int SpotRules { get; }
 
 
 }

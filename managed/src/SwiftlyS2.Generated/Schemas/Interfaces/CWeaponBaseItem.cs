@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CWeaponBaseItem : CCSWeaponBase, ISchemaClass<CWeaponBaseItem> {
+public partial interface CWeaponBaseItem : CCSWeaponBase, ISchemaClass<CWeaponBaseItem>
+{
+    static CWeaponBaseItem ISchemaClass<CWeaponBaseItem>.From(nint handle) => new CWeaponBaseItemImpl(handle);
+    static int ISchemaClass<CWeaponBaseItem>.Size => 4576;
+    static string? ISchemaClass<CWeaponBaseItem>.ClassName => "weapon_csbase";
 
-  static CWeaponBaseItem ISchemaClass<CWeaponBaseItem>.From(nint handle) => new CWeaponBaseItemImpl(handle);
-  static int ISchemaClass<CWeaponBaseItem>.Size => 4576;
-  static string? ISchemaClass<CWeaponBaseItem>.ClassName => "weapon_csbase";
 
-  
-  public ref bool SequenceInProgress { get; }
-  
-  public ref bool Redraw { get; }
+    public ref bool SequenceInProgress { get; }
 
-  public void SequenceInProgressUpdated();
-  public void RedrawUpdated();
+    public ref bool Redraw { get; }
+
+    public void SequenceInProgressUpdated();
+    public void RedrawUpdated();
 }

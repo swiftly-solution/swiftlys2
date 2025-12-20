@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDecalGroupVData : ISchemaClass<CDecalGroupVData> {
+public partial interface CDecalGroupVData : ISchemaClass<CDecalGroupVData>
+{
+    static CDecalGroupVData ISchemaClass<CDecalGroupVData>.From(nint handle) => new CDecalGroupVDataImpl(handle);
+    static int ISchemaClass<CDecalGroupVData>.Size => 32;
+    static string? ISchemaClass<CDecalGroupVData>.ClassName => null;
 
-  static CDecalGroupVData ISchemaClass<CDecalGroupVData>.From(nint handle) => new CDecalGroupVDataImpl(handle);
-  static int ISchemaClass<CDecalGroupVData>.Size => 32;
-  static string? ISchemaClass<CDecalGroupVData>.ClassName => null;
 
-  
-  public ref CUtlVector<DecalGroupOption_t> Options { get; }
-  
-  public ref float TotalProbability { get; }
+    public ref CUtlVector<DecalGroupOption_t> Options { get; }
+
+    public ref float TotalProbability { get; }
 
 
 }

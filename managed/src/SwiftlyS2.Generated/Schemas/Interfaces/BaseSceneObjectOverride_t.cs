@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface BaseSceneObjectOverride_t : ISchemaClass<BaseSceneObjectOverride_t> {
+public partial interface BaseSceneObjectOverride_t : ISchemaClass<BaseSceneObjectOverride_t>
+{
+    static BaseSceneObjectOverride_t ISchemaClass<BaseSceneObjectOverride_t>.From(nint handle) => new BaseSceneObjectOverride_tImpl(handle);
+    static int ISchemaClass<BaseSceneObjectOverride_t>.Size => 4;
+    static string? ISchemaClass<BaseSceneObjectOverride_t>.ClassName => null;
 
-  static BaseSceneObjectOverride_t ISchemaClass<BaseSceneObjectOverride_t>.From(nint handle) => new BaseSceneObjectOverride_tImpl(handle);
-  static int ISchemaClass<BaseSceneObjectOverride_t>.Size => 4;
-  static string? ISchemaClass<BaseSceneObjectOverride_t>.ClassName => null;
 
-  
-  public ref uint SceneObjectIndex { get; }
+    public ref uint SceneObjectIndex { get; }
 
 
 }

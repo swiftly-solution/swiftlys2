@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqAutoLayer : ISchemaClass<CSeqAutoLayer> {
+public partial interface CSeqAutoLayer : ISchemaClass<CSeqAutoLayer>
+{
+    static CSeqAutoLayer ISchemaClass<CSeqAutoLayer>.From(nint handle) => new CSeqAutoLayerImpl(handle);
+    static int ISchemaClass<CSeqAutoLayer>.Size => 28;
+    static string? ISchemaClass<CSeqAutoLayer>.ClassName => null;
 
-  static CSeqAutoLayer ISchemaClass<CSeqAutoLayer>.From(nint handle) => new CSeqAutoLayerImpl(handle);
-  static int ISchemaClass<CSeqAutoLayer>.Size => 28;
-  static string? ISchemaClass<CSeqAutoLayer>.ClassName => null;
 
-  
-  public ref short LocalReference { get; }
-  
-  public ref short LocalPose { get; }
-  
-  public CSeqAutoLayerFlag Flags { get; }
-  
-  public ref float Start { get; }
-  
-  public ref float Peak { get; }
-  
-  public ref float Tail { get; }
-  
-  public ref float End { get; }
+    public ref short LocalReference { get; }
+
+    public ref short LocalPose { get; }
+
+    public CSeqAutoLayerFlag Flags { get; }
+
+    public ref float Start { get; }
+
+    public ref float Peak { get; }
+
+    public ref float Tail { get; }
+
+    public ref float End { get; }
 
 
 }

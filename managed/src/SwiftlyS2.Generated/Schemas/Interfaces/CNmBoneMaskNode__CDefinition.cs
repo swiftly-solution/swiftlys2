@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmBoneMaskNode__CDefinition : CNmBoneMaskValueNode__CDefinition, ISchemaClass<CNmBoneMaskNode__CDefinition> {
+public partial interface CNmBoneMaskNode__CDefinition : CNmBoneMaskValueNode__CDefinition, ISchemaClass<CNmBoneMaskNode__CDefinition>
+{
+    static CNmBoneMaskNode__CDefinition ISchemaClass<CNmBoneMaskNode__CDefinition>.From(nint handle) => new CNmBoneMaskNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmBoneMaskNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmBoneMaskNode__CDefinition>.ClassName => null;
 
-  static CNmBoneMaskNode__CDefinition ISchemaClass<CNmBoneMaskNode__CDefinition>.From(nint handle) => new CNmBoneMaskNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmBoneMaskNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmBoneMaskNode__CDefinition>.ClassName => null;
 
-  
-  public ref CGlobalSymbol BoneMaskID { get; }
+    public ref CGlobalSymbol BoneMaskID { get; }
 
 
 }

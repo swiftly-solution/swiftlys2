@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventClientProcessNetworking_t : ISchemaClass<EventClientProcessNetworking_t> {
+public partial interface EventClientProcessNetworking_t : ISchemaClass<EventClientProcessNetworking_t>
+{
+    static EventClientProcessNetworking_t ISchemaClass<EventClientProcessNetworking_t>.From(nint handle) => new EventClientProcessNetworking_tImpl(handle);
+    static int ISchemaClass<EventClientProcessNetworking_t>.Size => 4;
+    static string? ISchemaClass<EventClientProcessNetworking_t>.ClassName => null;
 
-  static EventClientProcessNetworking_t ISchemaClass<EventClientProcessNetworking_t>.From(nint handle) => new EventClientProcessNetworking_tImpl(handle);
-  static int ISchemaClass<EventClientProcessNetworking_t>.Size => 4;
-  static string? ISchemaClass<EventClientProcessNetworking_t>.ClassName => null;
 
-  
-  public ref int TickCount { get; }
+    public ref int TickCount { get; }
 
 
 }

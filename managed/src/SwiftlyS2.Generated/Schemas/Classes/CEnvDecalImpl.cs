@@ -6,133 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvDecalImpl : CBaseModelEntityImpl, CEnvDecal {
+internal partial class CEnvDecalImpl : CBaseModelEntityImpl, CEnvDecal
+{
+    public CEnvDecalImpl(nint handle) : base(handle) { }
 
-  public CEnvDecalImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DecalMaterialOffset;
 
-  private static nint? _DecalMaterialOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> DecalMaterial {
-    get {
-      if (_DecalMaterialOffset == null) {
-        _DecalMaterialOffset = Schema.GetOffset(0xF52AFA9ED892BA39);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_DecalMaterialOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> DecalMaterial {
+        get {
+            _DecalMaterialOffset = _DecalMaterialOffset ?? Schema.GetOffset(0xF52AFA9ED892BA39);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_DecalMaterialOffset!.Value);
+        }
     }
-  }
-  private static nint? _WidthOffset;
+    private static nint? _WidthOffset;
 
-  public ref float Width {
-    get {
-      if (_WidthOffset == null) {
-        _WidthOffset = Schema.GetOffset(0xF52AFA9EB91935E1);
-      }
-      return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+    public ref float Width {
+        get {
+            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0xF52AFA9EB91935E1);
+            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeightOffset;
+    private static nint? _HeightOffset;
 
-  public ref float Height {
-    get {
-      if (_HeightOffset == null) {
-        _HeightOffset = Schema.GetOffset(0xF52AFA9EEADD7FB0);
-      }
-      return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+    public ref float Height {
+        get {
+            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0xF52AFA9EEADD7FB0);
+            return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthOffset;
+    private static nint? _DepthOffset;
 
-  public ref float Depth {
-    get {
-      if (_DepthOffset == null) {
-        _DepthOffset = Schema.GetOffset(0xF52AFA9ED3AD54E8);
-      }
-      return ref _Handle.AsRef<float>(_DepthOffset!.Value);
+    public ref float Depth {
+        get {
+            _DepthOffset = _DepthOffset ?? Schema.GetOffset(0xF52AFA9ED3AD54E8);
+            return ref _Handle.AsRef<float>(_DepthOffset!.Value);
+        }
     }
-  }
-  private static nint? _RenderOrderOffset;
+    private static nint? _RenderOrderOffset;
 
-  public ref uint RenderOrder {
-    get {
-      if (_RenderOrderOffset == null) {
-        _RenderOrderOffset = Schema.GetOffset(0xF52AFA9E554E763B);
-      }
-      return ref _Handle.AsRef<uint>(_RenderOrderOffset!.Value);
+    public ref uint RenderOrder {
+        get {
+            _RenderOrderOffset = _RenderOrderOffset ?? Schema.GetOffset(0xF52AFA9E554E763B);
+            return ref _Handle.AsRef<uint>(_RenderOrderOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProjectOnWorldOffset;
+    private static nint? _ProjectOnWorldOffset;
 
-  public ref bool ProjectOnWorld {
-    get {
-      if (_ProjectOnWorldOffset == null) {
-        _ProjectOnWorldOffset = Schema.GetOffset(0xF52AFA9E213B0285);
-      }
-      return ref _Handle.AsRef<bool>(_ProjectOnWorldOffset!.Value);
+    public ref bool ProjectOnWorld {
+        get {
+            _ProjectOnWorldOffset = _ProjectOnWorldOffset ?? Schema.GetOffset(0xF52AFA9E213B0285);
+            return ref _Handle.AsRef<bool>(_ProjectOnWorldOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProjectOnCharactersOffset;
+    private static nint? _ProjectOnCharactersOffset;
 
-  public ref bool ProjectOnCharacters {
-    get {
-      if (_ProjectOnCharactersOffset == null) {
-        _ProjectOnCharactersOffset = Schema.GetOffset(0xF52AFA9EE0371FB7);
-      }
-      return ref _Handle.AsRef<bool>(_ProjectOnCharactersOffset!.Value);
+    public ref bool ProjectOnCharacters {
+        get {
+            _ProjectOnCharactersOffset = _ProjectOnCharactersOffset ?? Schema.GetOffset(0xF52AFA9EE0371FB7);
+            return ref _Handle.AsRef<bool>(_ProjectOnCharactersOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProjectOnWaterOffset;
+    private static nint? _ProjectOnWaterOffset;
 
-  public ref bool ProjectOnWater {
-    get {
-      if (_ProjectOnWaterOffset == null) {
-        _ProjectOnWaterOffset = Schema.GetOffset(0xF52AFA9ED4AF2E96);
-      }
-      return ref _Handle.AsRef<bool>(_ProjectOnWaterOffset!.Value);
+    public ref bool ProjectOnWater {
+        get {
+            _ProjectOnWaterOffset = _ProjectOnWaterOffset ?? Schema.GetOffset(0xF52AFA9ED4AF2E96);
+            return ref _Handle.AsRef<bool>(_ProjectOnWaterOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthSortBiasOffset;
+    private static nint? _DepthSortBiasOffset;
 
-  public ref float DepthSortBias {
-    get {
-      if (_DepthSortBiasOffset == null) {
-        _DepthSortBiasOffset = Schema.GetOffset(0xF52AFA9ED8EE79D9);
-      }
-      return ref _Handle.AsRef<float>(_DepthSortBiasOffset!.Value);
+    public ref float DepthSortBias {
+        get {
+            _DepthSortBiasOffset = _DepthSortBiasOffset ?? Schema.GetOffset(0xF52AFA9ED8EE79D9);
+            return ref _Handle.AsRef<float>(_DepthSortBiasOffset!.Value);
+        }
     }
-  }
 
-  public void DecalMaterialUpdated() {
-    Schema.Update(_Handle, 0xF52AFA9ED892BA39);
-  }
-  public void WidthUpdated() {
-    Schema.Update(_Handle, 0xF52AFA9EB91935E1);
-  }
-  public void HeightUpdated() {
-    Schema.Update(_Handle, 0xF52AFA9EEADD7FB0);
-  }
-  public void DepthUpdated() {
-    Schema.Update(_Handle, 0xF52AFA9ED3AD54E8);
-  }
-  public void RenderOrderUpdated() {
-    Schema.Update(_Handle, 0xF52AFA9E554E763B);
-  }
-  public void ProjectOnWorldUpdated() {
-    Schema.Update(_Handle, 0xF52AFA9E213B0285);
-  }
-  public void ProjectOnCharactersUpdated() {
-    Schema.Update(_Handle, 0xF52AFA9EE0371FB7);
-  }
-  public void ProjectOnWaterUpdated() {
-    Schema.Update(_Handle, 0xF52AFA9ED4AF2E96);
-  }
-  public void DepthSortBiasUpdated() {
-    Schema.Update(_Handle, 0xF52AFA9ED8EE79D9);
-  }
+    public void DecalMaterialUpdated() => Schema.Update(_Handle, 0xF52AFA9ED892BA39);
+    public void WidthUpdated() => Schema.Update(_Handle, 0xF52AFA9EB91935E1);
+    public void HeightUpdated() => Schema.Update(_Handle, 0xF52AFA9EEADD7FB0);
+    public void DepthUpdated() => Schema.Update(_Handle, 0xF52AFA9ED3AD54E8);
+    public void RenderOrderUpdated() => Schema.Update(_Handle, 0xF52AFA9E554E763B);
+    public void ProjectOnWorldUpdated() => Schema.Update(_Handle, 0xF52AFA9E213B0285);
+    public void ProjectOnCharactersUpdated() => Schema.Update(_Handle, 0xF52AFA9EE0371FB7);
+    public void ProjectOnWaterUpdated() => Schema.Update(_Handle, 0xF52AFA9ED4AF2E96);
+    public void DepthSortBiasUpdated() => Schema.Update(_Handle, 0xF52AFA9ED8EE79D9);
 }

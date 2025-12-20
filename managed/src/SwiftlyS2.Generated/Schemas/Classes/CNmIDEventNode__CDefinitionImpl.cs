@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmIDEventNode__CDefinitionImpl : CNmIDValueNode__CDefinitionImpl, CNmIDEventNode__CDefinition {
+internal partial class CNmIDEventNode__CDefinitionImpl : CNmIDValueNode__CDefinitionImpl, CNmIDEventNode__CDefinition
+{
+    public CNmIDEventNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmIDEventNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceStateNodeIdxOffset;
 
-  private static nint? _SourceStateNodeIdxOffset;
-
-  public ref short SourceStateNodeIdx {
-    get {
-      if (_SourceStateNodeIdxOffset == null) {
-        _SourceStateNodeIdxOffset = Schema.GetOffset(0x6308800E63F0228C);
-      }
-      return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+    public ref short SourceStateNodeIdx {
+        get {
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x6308800E63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventConditionRulesOffset;
+    private static nint? _EventConditionRulesOffset;
 
-  public CNmBitFlags EventConditionRules {
-    get {
-      if (_EventConditionRulesOffset == null) {
-        _EventConditionRulesOffset = Schema.GetOffset(0x6308800EA904315F);
-      }
-      return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+    public CNmBitFlags EventConditionRules {
+        get {
+            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x6308800EA904315F);
+            return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultValueOffset;
+    private static nint? _DefaultValueOffset;
 
-  public ref CGlobalSymbol DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0x6308800EBBE0341F);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
+    public ref CGlobalSymbol DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x6308800EBBE0341F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
+        }
     }
-  }
 
 
 }

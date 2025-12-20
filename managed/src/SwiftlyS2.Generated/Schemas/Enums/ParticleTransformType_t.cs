@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleTransformType_t : uint {
-
+public enum ParticleTransformType_t : uint
+{
  PT_TYPE_INVALID = 0,
 
  PT_TYPE_NAMED_VALUE = 1,

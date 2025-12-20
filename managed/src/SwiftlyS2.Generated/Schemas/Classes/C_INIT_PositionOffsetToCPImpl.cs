@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_PositionOffsetToCPImpl : CParticleFunctionInitializerImpl, C_INIT_PositionOffsetToCP {
+internal partial class C_INIT_PositionOffsetToCPImpl : CParticleFunctionInitializerImpl, C_INIT_PositionOffsetToCP
+{
+    public C_INIT_PositionOffsetToCPImpl(nint handle) : base(handle) { }
 
-  public C_INIT_PositionOffsetToCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberStartOffset;
 
-  private static nint? _ControlPointNumberStartOffset;
-
-  public ref int ControlPointNumberStart {
-    get {
-      if (_ControlPointNumberStartOffset == null) {
-        _ControlPointNumberStartOffset = Schema.GetOffset(0x5976F1BC33DBA947);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberStartOffset!.Value);
+    public ref int ControlPointNumberStart {
+        get {
+            _ControlPointNumberStartOffset = _ControlPointNumberStartOffset ?? Schema.GetOffset(0x5976F1BC33DBA947);
+            return ref _Handle.AsRef<int>(_ControlPointNumberStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointNumberEndOffset;
+    private static nint? _ControlPointNumberEndOffset;
 
-  public ref int ControlPointNumberEnd {
-    get {
-      if (_ControlPointNumberEndOffset == null) {
-        _ControlPointNumberEndOffset = Schema.GetOffset(0x5976F1BC6527E5A2);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberEndOffset!.Value);
+    public ref int ControlPointNumberEnd {
+        get {
+            _ControlPointNumberEndOffset = _ControlPointNumberEndOffset ?? Schema.GetOffset(0x5976F1BC6527E5A2);
+            return ref _Handle.AsRef<int>(_ControlPointNumberEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalCoordsOffset;
+    private static nint? _LocalCoordsOffset;
 
-  public ref bool LocalCoords {
-    get {
-      if (_LocalCoordsOffset == null) {
-        _LocalCoordsOffset = Schema.GetOffset(0x5976F1BC30E716DE);
-      }
-      return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
+    public ref bool LocalCoords {
+        get {
+            _LocalCoordsOffset = _LocalCoordsOffset ?? Schema.GetOffset(0x5976F1BC30E716DE);
+            return ref _Handle.AsRef<bool>(_LocalCoordsOffset!.Value);
+        }
     }
-  }
 
 
 }

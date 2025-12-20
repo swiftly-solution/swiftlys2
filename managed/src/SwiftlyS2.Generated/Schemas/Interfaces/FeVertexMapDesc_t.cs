@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeVertexMapDesc_t : ISchemaClass<FeVertexMapDesc_t> {
+public partial interface FeVertexMapDesc_t : ISchemaClass<FeVertexMapDesc_t>
+{
+    static FeVertexMapDesc_t ISchemaClass<FeVertexMapDesc_t>.From(nint handle) => new FeVertexMapDesc_tImpl(handle);
+    static int ISchemaClass<FeVertexMapDesc_t>.Size => 56;
+    static string? ISchemaClass<FeVertexMapDesc_t>.ClassName => null;
 
-  static FeVertexMapDesc_t ISchemaClass<FeVertexMapDesc_t>.From(nint handle) => new FeVertexMapDesc_tImpl(handle);
-  static int ISchemaClass<FeVertexMapDesc_t>.Size => 56;
-  static string? ISchemaClass<FeVertexMapDesc_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref uint NameHash { get; }
-  
-  public ref uint Color { get; }
-  
-  public ref uint Flags { get; }
-  
-  public ref ushort VertexBase { get; }
-  
-  public ref ushort VertexCount { get; }
-  
-  public ref uint MapOffset { get; }
-  
-  public ref uint NodeListOffset { get; }
-  
-  public ref Vector CenterOfMass { get; }
-  
-  public ref float VolumetricSolveStrength { get; }
-  
-  public ref short ScaleSourceNode { get; }
-  
-  public ref ushort NodeListCount { get; }
+    public string Name { get; set; }
+
+    public ref uint NameHash { get; }
+
+    public ref uint Color { get; }
+
+    public ref uint Flags { get; }
+
+    public ref ushort VertexBase { get; }
+
+    public ref ushort VertexCount { get; }
+
+    public ref uint MapOffset { get; }
+
+    public ref uint NodeListOffset { get; }
+
+    public ref Vector CenterOfMass { get; }
+
+    public ref float VolumetricSolveStrength { get; }
+
+    public ref short ScaleSourceNode { get; }
+
+    public ref ushort NodeListCount { get; }
 
 
 }

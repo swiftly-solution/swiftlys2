@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum StepPhase : uint {
-
+public enum StepPhase : uint
+{
  StepPhase_OnGround = 0,
 
  StepPhase_InAir = 1,

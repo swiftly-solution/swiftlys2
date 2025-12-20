@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointChildModifierImpl : CPointEntityImpl, CPointChildModifier {
+internal partial class CPointChildModifierImpl : CPointEntityImpl, CPointChildModifier
+{
+    public CPointChildModifierImpl(nint handle) : base(handle) { }
 
-  public CPointChildModifierImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OrphanInsteadOfDeletingChildrenOnRemoveOffset;
 
-  private static nint? _OrphanInsteadOfDeletingChildrenOnRemoveOffset;
-
-  public ref bool OrphanInsteadOfDeletingChildrenOnRemove {
-    get {
-      if (_OrphanInsteadOfDeletingChildrenOnRemoveOffset == null) {
-        _OrphanInsteadOfDeletingChildrenOnRemoveOffset = Schema.GetOffset(0xDA7544AF85891348);
-      }
-      return ref _Handle.AsRef<bool>(_OrphanInsteadOfDeletingChildrenOnRemoveOffset!.Value);
+    public ref bool OrphanInsteadOfDeletingChildrenOnRemove {
+        get {
+            _OrphanInsteadOfDeletingChildrenOnRemoveOffset = _OrphanInsteadOfDeletingChildrenOnRemoveOffset ?? Schema.GetOffset(0xDA7544AF85891348);
+            return ref _Handle.AsRef<bool>(_OrphanInsteadOfDeletingChildrenOnRemoveOffset!.Value);
+        }
     }
-  }
 
 
 }

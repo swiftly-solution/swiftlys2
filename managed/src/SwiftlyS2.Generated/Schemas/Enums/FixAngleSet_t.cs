@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum FixAngleSet_t : byte {
-
+public enum FixAngleSet_t : byte
+{
  None = 0,
 
  Absolute = 1,

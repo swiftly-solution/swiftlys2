@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvSoundscapeProxyImpl : CEnvSoundscapeImpl, CEnvSoundscapeProxy {
+internal partial class CEnvSoundscapeProxyImpl : CEnvSoundscapeImpl, CEnvSoundscapeProxy
+{
+    public CEnvSoundscapeProxyImpl(nint handle) : base(handle) { }
 
-  public CEnvSoundscapeProxyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MainSoundscapeNameOffset;
 
-  private static nint? _MainSoundscapeNameOffset;
-
-  public string MainSoundscapeName {
-    get {
-      if (_MainSoundscapeNameOffset == null) {
-        _MainSoundscapeNameOffset = Schema.GetOffset(0x58127BA672404420);
-      }
-      var ptr = _Handle.Read<nint>(_MainSoundscapeNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_MainSoundscapeNameOffset == null) {
-        _MainSoundscapeNameOffset = Schema.GetOffset(0x58127BA672404420);
-      }
-      Schema.SetString(_Handle, _MainSoundscapeNameOffset!.Value, value);
-    }
-  } 
+    public string MainSoundscapeName {
+        get {
+            _MainSoundscapeNameOffset = _MainSoundscapeNameOffset ?? Schema.GetOffset(0x58127BA672404420);
+            return Schema.GetString(_Handle.Read<nint>(_MainSoundscapeNameOffset!.Value));
+        }
+        set {
+            _MainSoundscapeNameOffset = _MainSoundscapeNameOffset ?? Schema.GetOffset(0x58127BA672404420);
+            Schema.SetString(_Handle, _MainSoundscapeNameOffset!.Value, value);
+        }
+    } 
 
 
 }

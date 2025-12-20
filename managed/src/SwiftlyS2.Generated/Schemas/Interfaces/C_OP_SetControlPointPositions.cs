@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointPositions : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointPositions> {
+public partial interface C_OP_SetControlPointPositions : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointPositions>
+{
+    static C_OP_SetControlPointPositions ISchemaClass<C_OP_SetControlPointPositions>.From(nint handle) => new C_OP_SetControlPointPositionsImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointPositions>.Size => 544;
+    static string? ISchemaClass<C_OP_SetControlPointPositions>.ClassName => null;
 
-  static C_OP_SetControlPointPositions ISchemaClass<C_OP_SetControlPointPositions>.From(nint handle) => new C_OP_SetControlPointPositionsImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointPositions>.Size => 544;
-  static string? ISchemaClass<C_OP_SetControlPointPositions>.ClassName => null;
 
-  
-  public ref bool UseWorldLocation { get; }
-  
-  public ref bool Orient { get; }
-  
-  public ref bool SetOnce { get; }
-  
-  public ref int CP1 { get; }
-  
-  public ref int CP2 { get; }
-  
-  public ref int CP3 { get; }
-  
-  public ref int CP4 { get; }
-  
-  public ref Vector CP1Pos { get; }
-  
-  public ref Vector CP2Pos { get; }
-  
-  public ref Vector CP3Pos { get; }
-  
-  public ref Vector CP4Pos { get; }
-  
-  public ref int HeadLocation { get; }
+    public ref bool UseWorldLocation { get; }
+
+    public ref bool Orient { get; }
+
+    public ref bool SetOnce { get; }
+
+    public ref int CP1 { get; }
+
+    public ref int CP2 { get; }
+
+    public ref int CP3 { get; }
+
+    public ref int CP4 { get; }
+
+    public ref Vector CP1Pos { get; }
+
+    public ref Vector CP2Pos { get; }
+
+    public ref Vector CP3Pos { get; }
+
+    public ref Vector CP4Pos { get; }
+
+    public ref int HeadLocation { get; }
 
 
 }

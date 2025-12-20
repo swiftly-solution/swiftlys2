@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeCtrlOsOffset_t : ISchemaClass<FeCtrlOsOffset_t> {
+public partial interface FeCtrlOsOffset_t : ISchemaClass<FeCtrlOsOffset_t>
+{
+    static FeCtrlOsOffset_t ISchemaClass<FeCtrlOsOffset_t>.From(nint handle) => new FeCtrlOsOffset_tImpl(handle);
+    static int ISchemaClass<FeCtrlOsOffset_t>.Size => 4;
+    static string? ISchemaClass<FeCtrlOsOffset_t>.ClassName => null;
 
-  static FeCtrlOsOffset_t ISchemaClass<FeCtrlOsOffset_t>.From(nint handle) => new FeCtrlOsOffset_tImpl(handle);
-  static int ISchemaClass<FeCtrlOsOffset_t>.Size => 4;
-  static string? ISchemaClass<FeCtrlOsOffset_t>.ClassName => null;
 
-  
-  public ref ushort CtrlParent { get; }
-  
-  public ref ushort CtrlChild { get; }
+    public ref ushort CtrlParent { get; }
+
+    public ref ushort CtrlChild { get; }
 
 
 }

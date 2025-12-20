@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnShapeDesc_tImpl : SchemaClass, RnShapeDesc_t {
+internal partial class RnShapeDesc_tImpl : SchemaClass, RnShapeDesc_t
+{
+    public RnShapeDesc_tImpl(nint handle) : base(handle) { }
 
-  public RnShapeDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CollisionAttributeIndexOffset;
 
-  private static nint? _CollisionAttributeIndexOffset;
-
-  public ref uint CollisionAttributeIndex {
-    get {
-      if (_CollisionAttributeIndexOffset == null) {
-        _CollisionAttributeIndexOffset = Schema.GetOffset(0xA24D7D10C7B64DF7);
-      }
-      return ref _Handle.AsRef<uint>(_CollisionAttributeIndexOffset!.Value);
+    public ref uint CollisionAttributeIndex {
+        get {
+            _CollisionAttributeIndexOffset = _CollisionAttributeIndexOffset ?? Schema.GetOffset(0xA24D7D10C7B64DF7);
+            return ref _Handle.AsRef<uint>(_CollisionAttributeIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _SurfacePropertyIndexOffset;
+    private static nint? _SurfacePropertyIndexOffset;
 
-  public ref uint SurfacePropertyIndex {
-    get {
-      if (_SurfacePropertyIndexOffset == null) {
-        _SurfacePropertyIndexOffset = Schema.GetOffset(0xA24D7D106DED6187);
-      }
-      return ref _Handle.AsRef<uint>(_SurfacePropertyIndexOffset!.Value);
+    public ref uint SurfacePropertyIndex {
+        get {
+            _SurfacePropertyIndexOffset = _SurfacePropertyIndexOffset ?? Schema.GetOffset(0xA24D7D106DED6187);
+            return ref _Handle.AsRef<uint>(_SurfacePropertyIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _UserFriendlyNameOffset;
+    private static nint? _UserFriendlyNameOffset;
 
-  public string UserFriendlyName {
-    get {
-      if (_UserFriendlyNameOffset == null) {
-        _UserFriendlyNameOffset = Schema.GetOffset(0xA24D7D1000D4523E);
-      }
-      var ptr = _Handle.Read<nint>(_UserFriendlyNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_UserFriendlyNameOffset == null) {
-        _UserFriendlyNameOffset = Schema.GetOffset(0xA24D7D1000D4523E);
-      }
-      Schema.SetString(_Handle, _UserFriendlyNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _UserFriendlyNameSealedOffset;
+    public string UserFriendlyName {
+        get {
+            _UserFriendlyNameOffset = _UserFriendlyNameOffset ?? Schema.GetOffset(0xA24D7D1000D4523E);
+            return Schema.GetString(_Handle.Read<nint>(_UserFriendlyNameOffset!.Value));
+        }
+        set {
+            _UserFriendlyNameOffset = _UserFriendlyNameOffset ?? Schema.GetOffset(0xA24D7D1000D4523E);
+            Schema.SetString(_Handle, _UserFriendlyNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _UserFriendlyNameSealedOffset;
 
-  public ref bool UserFriendlyNameSealed {
-    get {
-      if (_UserFriendlyNameSealedOffset == null) {
-        _UserFriendlyNameSealedOffset = Schema.GetOffset(0xA24D7D1076DBAE3A);
-      }
-      return ref _Handle.AsRef<bool>(_UserFriendlyNameSealedOffset!.Value);
+    public ref bool UserFriendlyNameSealed {
+        get {
+            _UserFriendlyNameSealedOffset = _UserFriendlyNameSealedOffset ?? Schema.GetOffset(0xA24D7D1076DBAE3A);
+            return ref _Handle.AsRef<bool>(_UserFriendlyNameSealedOffset!.Value);
+        }
     }
-  }
-  private static nint? _UserFriendlyNameLongOffset;
+    private static nint? _UserFriendlyNameLongOffset;
 
-  public ref bool UserFriendlyNameLong {
-    get {
-      if (_UserFriendlyNameLongOffset == null) {
-        _UserFriendlyNameLongOffset = Schema.GetOffset(0xA24D7D10F02591B8);
-      }
-      return ref _Handle.AsRef<bool>(_UserFriendlyNameLongOffset!.Value);
+    public ref bool UserFriendlyNameLong {
+        get {
+            _UserFriendlyNameLongOffset = _UserFriendlyNameLongOffset ?? Schema.GetOffset(0xA24D7D10F02591B8);
+            return ref _Handle.AsRef<bool>(_UserFriendlyNameLongOffset!.Value);
+        }
     }
-  }
-  private static nint? _ToolMaterialHashOffset;
+    private static nint? _ToolMaterialHashOffset;
 
-  public ref uint ToolMaterialHash {
-    get {
-      if (_ToolMaterialHashOffset == null) {
-        _ToolMaterialHashOffset = Schema.GetOffset(0xA24D7D105C3E2DDE);
-      }
-      return ref _Handle.AsRef<uint>(_ToolMaterialHashOffset!.Value);
+    public ref uint ToolMaterialHash {
+        get {
+            _ToolMaterialHashOffset = _ToolMaterialHashOffset ?? Schema.GetOffset(0xA24D7D105C3E2DDE);
+            return ref _Handle.AsRef<uint>(_ToolMaterialHashOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CastSphereSATParams_t : ISchemaClass<CastSphereSATParams_t> {
+public partial interface CastSphereSATParams_t : ISchemaClass<CastSphereSATParams_t>
+{
+    static CastSphereSATParams_t ISchemaClass<CastSphereSATParams_t>.From(nint handle) => new CastSphereSATParams_tImpl(handle);
+    static int ISchemaClass<CastSphereSATParams_t>.Size => 48;
+    static string? ISchemaClass<CastSphereSATParams_t>.ClassName => null;
 
-  static CastSphereSATParams_t ISchemaClass<CastSphereSATParams_t>.From(nint handle) => new CastSphereSATParams_tImpl(handle);
-  static int ISchemaClass<CastSphereSATParams_t>.Size => 48;
-  static string? ISchemaClass<CastSphereSATParams_t>.ClassName => null;
 
-  
-  public ref Vector RayStart { get; }
-  
-  public ref Vector RayDelta { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref float MaxFraction { get; }
-  
-  public ref float Scale { get; }
-  
-  public RnHull_t? Hull { get; }
+    public ref Vector RayStart { get; }
+
+    public ref Vector RayDelta { get; }
+
+    public ref float Radius { get; }
+
+    public ref float MaxFraction { get; }
+
+    public ref float Scale { get; }
+
+    public RnHull_t? Hull { get; }
 
 
 }

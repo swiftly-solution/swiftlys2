@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SpringToVectorConstraintImpl : CParticleFunctionConstraintImpl, C_OP_SpringToVectorConstraint {
+internal partial class C_OP_SpringToVectorConstraintImpl : CParticleFunctionConstraintImpl, C_OP_SpringToVectorConstraint
+{
+    public C_OP_SpringToVectorConstraintImpl(nint handle) : base(handle) { }
 
-  public C_OP_SpringToVectorConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RestLengthOffset;
 
-  private static nint? _RestLengthOffset;
-
-  public CPerParticleFloatInput RestLength {
-    get {
-      if (_RestLengthOffset == null) {
-        _RestLengthOffset = Schema.GetOffset(0xF442244193AC4079);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RestLengthOffset!.Value);
+    public CPerParticleFloatInput RestLength {
+        get {
+            _RestLengthOffset = _RestLengthOffset ?? Schema.GetOffset(0xF442244193AC4079);
+            return new CPerParticleFloatInputImpl(_Handle + _RestLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinDistanceOffset;
+    private static nint? _MinDistanceOffset;
 
-  public CPerParticleFloatInput MinDistance {
-    get {
-      if (_MinDistanceOffset == null) {
-        _MinDistanceOffset = Schema.GetOffset(0xF442244192BCAD06);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _MinDistanceOffset!.Value);
+    public CPerParticleFloatInput MinDistance {
+        get {
+            _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0xF442244192BCAD06);
+            return new CPerParticleFloatInputImpl(_Handle + _MinDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxDistanceOffset;
+    private static nint? _MaxDistanceOffset;
 
-  public CPerParticleFloatInput MaxDistance {
-    get {
-      if (_MaxDistanceOffset == null) {
-        _MaxDistanceOffset = Schema.GetOffset(0xF442244198893360);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+    public CPerParticleFloatInput MaxDistance {
+        get {
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0xF442244198893360);
+            return new CPerParticleFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _RestingLengthOffset;
+    private static nint? _RestingLengthOffset;
 
-  public CPerParticleFloatInput RestingLength {
-    get {
-      if (_RestingLengthOffset == null) {
-        _RestingLengthOffset = Schema.GetOffset(0xF4422441BB988EAF);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RestingLengthOffset!.Value);
+    public CPerParticleFloatInput RestingLength {
+        get {
+            _RestingLengthOffset = _RestingLengthOffset ?? Schema.GetOffset(0xF4422441BB988EAF);
+            return new CPerParticleFloatInputImpl(_Handle + _RestingLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnchorVectorOffset;
+    private static nint? _AnchorVectorOffset;
 
-  public CPerParticleVecInput AnchorVector {
-    get {
-      if (_AnchorVectorOffset == null) {
-        _AnchorVectorOffset = Schema.GetOffset(0xF442244180D613F3);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _AnchorVectorOffset!.Value);
+    public CPerParticleVecInput AnchorVector {
+        get {
+            _AnchorVectorOffset = _AnchorVectorOffset ?? Schema.GetOffset(0xF442244180D613F3);
+            return new CPerParticleVecInputImpl(_Handle + _AnchorVectorOffset!.Value);
+        }
     }
-  }
 
 
 }

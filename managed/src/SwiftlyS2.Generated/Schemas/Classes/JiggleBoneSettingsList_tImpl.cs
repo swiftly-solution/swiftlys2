@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class JiggleBoneSettingsList_tImpl : SchemaClass, JiggleBoneSettingsList_t {
+internal partial class JiggleBoneSettingsList_tImpl : SchemaClass, JiggleBoneSettingsList_t
+{
+    public JiggleBoneSettingsList_tImpl(nint handle) : base(handle) { }
 
-  public JiggleBoneSettingsList_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneSettingsOffset;
 
-  private static nint? _BoneSettingsOffset;
-
-  public ref CUtlVector<JiggleBoneSettings_t> BoneSettings {
-    get {
-      if (_BoneSettingsOffset == null) {
-        _BoneSettingsOffset = Schema.GetOffset(0xD234E39D689AEBE2);
-      }
-      return ref _Handle.AsRef<CUtlVector<JiggleBoneSettings_t>>(_BoneSettingsOffset!.Value);
+    public ref CUtlVector<JiggleBoneSettings_t> BoneSettings {
+        get {
+            _BoneSettingsOffset = _BoneSettingsOffset ?? Schema.GetOffset(0xD234E39D689AEBE2);
+            return ref _Handle.AsRef<CUtlVector<JiggleBoneSettings_t>>(_BoneSettingsOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAudioSentence : ISchemaClass<CAudioSentence> {
+public partial interface CAudioSentence : ISchemaClass<CAudioSentence>
+{
+    static CAudioSentence ISchemaClass<CAudioSentence>.From(nint handle) => new CAudioSentenceImpl(handle);
+    static int ISchemaClass<CAudioSentence>.Size => 160;
+    static string? ISchemaClass<CAudioSentence>.ClassName => null;
 
-  static CAudioSentence ISchemaClass<CAudioSentence>.From(nint handle) => new CAudioSentenceImpl(handle);
-  static int ISchemaClass<CAudioSentence>.Size => 160;
-  static string? ISchemaClass<CAudioSentence>.ClassName => null;
 
-  
-  public ref bool ShouldVoiceDuck { get; }
-  
-  public ref CUtlVector<CAudioPhonemeTag> RunTimePhonemes { get; }
-  
-  public ref CUtlVector<CAudioEmphasisSample> EmphasisSamples { get; }
-  
-  public CAudioMorphData MorphData { get; }
+    public ref bool ShouldVoiceDuck { get; }
+
+    public ref CUtlVector<CAudioPhonemeTag> RunTimePhonemes { get; }
+
+    public ref CUtlVector<CAudioEmphasisSample> EmphasisSamples { get; }
+
+    public CAudioMorphData MorphData { get; }
 
 
 }

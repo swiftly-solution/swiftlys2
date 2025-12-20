@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGameScriptedMoveDef_t : ISchemaClass<CGameScriptedMoveDef_t> {
+public partial interface CGameScriptedMoveDef_t : ISchemaClass<CGameScriptedMoveDef_t>
+{
+    static CGameScriptedMoveDef_t ISchemaClass<CGameScriptedMoveDef_t>.From(nint handle) => new CGameScriptedMoveDef_tImpl(handle);
+    static int ISchemaClass<CGameScriptedMoveDef_t>.Size => 48;
+    static string? ISchemaClass<CGameScriptedMoveDef_t>.ClassName => null;
 
-  static CGameScriptedMoveDef_t ISchemaClass<CGameScriptedMoveDef_t>.From(nint handle) => new CGameScriptedMoveDef_tImpl(handle);
-  static int ISchemaClass<CGameScriptedMoveDef_t>.Size => 48;
-  static string? ISchemaClass<CGameScriptedMoveDef_t>.ClassName => null;
 
-  
-  public ref Vector DestOffset { get; }
-  
-  public ref CHandle<CBaseEntity> DestEntity { get; }
-  
-  public ref QAngle Dest { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref float AngRate { get; }
-  
-  public ref float MoveSpeed { get; }
-  
-  public ref bool AimDisabled { get; }
-  
-  public ref bool IgnoreRotation { get; }
-  
-  public ref ForcedCrouchState_t ForcedCrouchState { get; }
+    public ref Vector DestOffset { get; }
+
+    public ref CHandle<CBaseEntity> DestEntity { get; }
+
+    public ref QAngle Dest { get; }
+
+    public ref float Duration { get; }
+
+    public ref float AngRate { get; }
+
+    public ref float MoveSpeed { get; }
+
+    public ref bool AimDisabled { get; }
+
+    public ref bool IgnoreRotation { get; }
+
+    public ref ForcedCrouchState_t ForcedCrouchState { get; }
 
 
 }

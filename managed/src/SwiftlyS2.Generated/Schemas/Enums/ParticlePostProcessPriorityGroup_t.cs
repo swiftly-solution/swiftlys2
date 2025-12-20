@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticlePostProcessPriorityGroup_t : uint {
-
+public enum ParticlePostProcessPriorityGroup_t : uint
+{
  PARTICLE_POST_PROCESS_PRIORITY_LEVEL_VOLUME = 0,
 
  PARTICLE_POST_PROCESS_PRIORITY_LEVEL_OVERRIDE = 1,

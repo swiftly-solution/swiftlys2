@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimationGraphVisualizerLineImpl : CAnimationGraphVisualizerPrimitiveBaseImpl, CAnimationGraphVisualizerLine {
+internal partial class CAnimationGraphVisualizerLineImpl : CAnimationGraphVisualizerPrimitiveBaseImpl, CAnimationGraphVisualizerLine
+{
+    public CAnimationGraphVisualizerLineImpl(nint handle) : base(handle) { }
 
-  public CAnimationGraphVisualizerLineImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WsPositionStartOffset;
 
-  private static nint? _WsPositionStartOffset;
-
-  public ref Vector WsPositionStart {
-    get {
-      if (_WsPositionStartOffset == null) {
-        _WsPositionStartOffset = Schema.GetOffset(0x688831B2D941E214);
-      }
-      return ref _Handle.AsRef<Vector>(_WsPositionStartOffset!.Value);
+    public ref Vector WsPositionStart {
+        get {
+            _WsPositionStartOffset = _WsPositionStartOffset ?? Schema.GetOffset(0x688831B2D941E214);
+            return ref _Handle.AsRef<Vector>(_WsPositionStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _WsPositionEndOffset;
+    private static nint? _WsPositionEndOffset;
 
-  public ref Vector WsPositionEnd {
-    get {
-      if (_WsPositionEndOffset == null) {
-        _WsPositionEndOffset = Schema.GetOffset(0x688831B26EB28B6D);
-      }
-      return ref _Handle.AsRef<Vector>(_WsPositionEndOffset!.Value);
+    public ref Vector WsPositionEnd {
+        get {
+            _WsPositionEndOffset = _WsPositionEndOffset ?? Schema.GetOffset(0x688831B26EB28B6D);
+            return ref _Handle.AsRef<Vector>(_WsPositionEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorOffset;
+    private static nint? _ColorOffset;
 
-  public ref Color Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x688831B2D7D017D8);
-      }
-      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+    public ref Color Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x688831B2D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+        }
     }
-  }
 
 
 }

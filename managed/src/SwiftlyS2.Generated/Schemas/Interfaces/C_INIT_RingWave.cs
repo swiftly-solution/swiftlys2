@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RingWave : CParticleFunctionInitializer, ISchemaClass<C_INIT_RingWave> {
+public partial interface C_INIT_RingWave : CParticleFunctionInitializer, ISchemaClass<C_INIT_RingWave>
+{
+    static C_INIT_RingWave ISchemaClass<C_INIT_RingWave>.From(nint handle) => new C_INIT_RingWaveImpl(handle);
+    static int ISchemaClass<C_INIT_RingWave>.Size => 3528;
+    static string? ISchemaClass<C_INIT_RingWave>.ClassName => null;
 
-  static C_INIT_RingWave ISchemaClass<C_INIT_RingWave>.From(nint handle) => new C_INIT_RingWaveImpl(handle);
-  static int ISchemaClass<C_INIT_RingWave>.Size => 3528;
-  static string? ISchemaClass<C_INIT_RingWave>.ClassName => null;
 
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public CParticleCollectionFloatInput ParticlesPerOrbit { get; }
-  
-  public CPerParticleFloatInput InitialRadius { get; }
-  
-  public CPerParticleFloatInput Thickness { get; }
-  
-  public CPerParticleFloatInput InitialSpeedMin { get; }
-  
-  public CPerParticleFloatInput InitialSpeedMax { get; }
-  
-  public CPerParticleFloatInput Roll { get; }
-  
-  public CPerParticleFloatInput Pitch { get; }
-  
-  public CPerParticleFloatInput Yaw { get; }
-  
-  public ref bool EvenDistribution { get; }
-  
-  public ref bool XYVelocityOnly { get; }
+    public CParticleTransformInput TransformInput { get; }
+
+    public CParticleCollectionFloatInput ParticlesPerOrbit { get; }
+
+    public CPerParticleFloatInput InitialRadius { get; }
+
+    public CPerParticleFloatInput Thickness { get; }
+
+    public CPerParticleFloatInput InitialSpeedMin { get; }
+
+    public CPerParticleFloatInput InitialSpeedMax { get; }
+
+    public CPerParticleFloatInput Roll { get; }
+
+    public CPerParticleFloatInput Pitch { get; }
+
+    public CPerParticleFloatInput Yaw { get; }
+
+    public ref bool EvenDistribution { get; }
+
+    public ref bool XYVelocityOnly { get; }
 
 
 }

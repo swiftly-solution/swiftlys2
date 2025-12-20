@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmSoundEvent : CNmEvent, ISchemaClass<CNmSoundEvent> {
+public partial interface CNmSoundEvent : CNmEvent, ISchemaClass<CNmSoundEvent>
+{
+    static CNmSoundEvent ISchemaClass<CNmSoundEvent>.From(nint handle) => new CNmSoundEventImpl(handle);
+    static int ISchemaClass<CNmSoundEvent>.Size => 80;
+    static string? ISchemaClass<CNmSoundEvent>.ClassName => null;
 
-  static CNmSoundEvent ISchemaClass<CNmSoundEvent>.From(nint handle) => new CNmSoundEventImpl(handle);
-  static int ISchemaClass<CNmSoundEvent>.Size => 80;
-  static string? ISchemaClass<CNmSoundEvent>.ClassName => null;
 
-  
-  public ref CNmEventRelevance_t Relevance { get; }
-  
-  public string Name { get; set; }
-  
-  public ref CNmSoundEvent__Position_t Position { get; }
-  
-  public string AttachmentName { get; set; }
-  
-  public string Tags { get; set; }
-  
-  public ref bool ContinuePlayingSoundAtDurationEnd { get; }
-  
-  public ref float DurationInterruptionThreshold { get; }
+    public ref CNmEventRelevance_t Relevance { get; }
+
+    public string Name { get; set; }
+
+    public ref CNmSoundEvent__Position_t Position { get; }
+
+    public string AttachmentName { get; set; }
+
+    public string Tags { get; set; }
+
+    public ref bool ContinuePlayingSoundAtDurationEnd { get; }
+
+    public ref float DurationInterruptionThreshold { get; }
 
 
 }

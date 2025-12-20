@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleVariableRef : ISchemaClass<CParticleVariableRef> {
+public partial interface CParticleVariableRef : ISchemaClass<CParticleVariableRef>
+{
+    static CParticleVariableRef ISchemaClass<CParticleVariableRef>.From(nint handle) => new CParticleVariableRefImpl(handle);
+    static int ISchemaClass<CParticleVariableRef>.Size => 80;
+    static string? ISchemaClass<CParticleVariableRef>.ClassName => null;
 
-  static CParticleVariableRef ISchemaClass<CParticleVariableRef>.From(nint handle) => new CParticleVariableRefImpl(handle);
-  static int ISchemaClass<CParticleVariableRef>.Size => 80;
-  static string? ISchemaClass<CParticleVariableRef>.ClassName => null;
 
-  
-  // CKV3MemberNameWithStorage
-  public SchemaUntypedField VariableName { get; }
-  
-  // CPulseValueFullType
-  public SchemaUntypedField VariableType { get; }
+    // CKV3MemberNameWithStorage
+    public SchemaUntypedField VariableName { get; }
+
+    // CPulseValueFullType
+    public SchemaUntypedField VariableType { get; }
 
 
 }

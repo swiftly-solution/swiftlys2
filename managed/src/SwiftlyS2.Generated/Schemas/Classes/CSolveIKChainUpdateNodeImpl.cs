@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSolveIKChainUpdateNodeImpl : CUnaryUpdateNodeImpl, CSolveIKChainUpdateNode {
+internal partial class CSolveIKChainUpdateNodeImpl : CUnaryUpdateNodeImpl, CSolveIKChainUpdateNode
+{
+    public CSolveIKChainUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CSolveIKChainUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetHandlesOffset;
 
-  private static nint? _TargetHandlesOffset;
-
-  public ref CUtlVector<CSolveIKTargetHandle_t> TargetHandles {
-    get {
-      if (_TargetHandlesOffset == null) {
-        _TargetHandlesOffset = Schema.GetOffset(0xE78F1D1F98E248F7);
-      }
-      return ref _Handle.AsRef<CUtlVector<CSolveIKTargetHandle_t>>(_TargetHandlesOffset!.Value);
+    public ref CUtlVector<CSolveIKTargetHandle_t> TargetHandles {
+        get {
+            _TargetHandlesOffset = _TargetHandlesOffset ?? Schema.GetOffset(0xE78F1D1F98E248F7);
+            return ref _Handle.AsRef<CUtlVector<CSolveIKTargetHandle_t>>(_TargetHandlesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OpFixedDataOffset;
+    private static nint? _OpFixedDataOffset;
 
-  public SolveIKChainPoseOpFixedSettings_t OpFixedData {
-    get {
-      if (_OpFixedDataOffset == null) {
-        _OpFixedDataOffset = Schema.GetOffset(0xE78F1D1F6960AF8C);
-      }
-      return new SolveIKChainPoseOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+    public SolveIKChainPoseOpFixedSettings_t OpFixedData {
+        get {
+            _OpFixedDataOffset = _OpFixedDataOffset ?? Schema.GetOffset(0xE78F1D1F6960AF8C);
+            return new SolveIKChainPoseOpFixedSettings_tImpl(_Handle + _OpFixedDataOffset!.Value);
+        }
     }
-  }
 
 
 }

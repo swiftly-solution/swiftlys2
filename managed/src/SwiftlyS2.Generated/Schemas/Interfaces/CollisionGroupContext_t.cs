@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CollisionGroupContext_t : ISchemaClass<CollisionGroupContext_t> {
+public partial interface CollisionGroupContext_t : ISchemaClass<CollisionGroupContext_t>
+{
+    static CollisionGroupContext_t ISchemaClass<CollisionGroupContext_t>.From(nint handle) => new CollisionGroupContext_tImpl(handle);
+    static int ISchemaClass<CollisionGroupContext_t>.Size => 4;
+    static string? ISchemaClass<CollisionGroupContext_t>.ClassName => null;
 
-  static CollisionGroupContext_t ISchemaClass<CollisionGroupContext_t>.From(nint handle) => new CollisionGroupContext_tImpl(handle);
-  static int ISchemaClass<CollisionGroupContext_t>.Size => 4;
-  static string? ISchemaClass<CollisionGroupContext_t>.ClassName => null;
 
-  
-  public ref int CollisionGroupNumber { get; }
+    public ref int CollisionGroupNumber { get; }
 
 
 }

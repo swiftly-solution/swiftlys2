@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapTransformOrientationToRotations : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformOrientationToRotations> {
+public partial interface C_OP_RemapTransformOrientationToRotations : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformOrientationToRotations>
+{
+    static C_OP_RemapTransformOrientationToRotations ISchemaClass<C_OP_RemapTransformOrientationToRotations>.From(nint handle) => new C_OP_RemapTransformOrientationToRotationsImpl(handle);
+    static int ISchemaClass<C_OP_RemapTransformOrientationToRotations>.Size => 584;
+    static string? ISchemaClass<C_OP_RemapTransformOrientationToRotations>.ClassName => null;
 
-  static C_OP_RemapTransformOrientationToRotations ISchemaClass<C_OP_RemapTransformOrientationToRotations>.From(nint handle) => new C_OP_RemapTransformOrientationToRotationsImpl(handle);
-  static int ISchemaClass<C_OP_RemapTransformOrientationToRotations>.Size => 584;
-  static string? ISchemaClass<C_OP_RemapTransformOrientationToRotations>.ClassName => null;
 
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref Vector Rotation { get; }
-  
-  public ref bool UseQuat { get; }
-  
-  public ref bool WriteNormal { get; }
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref Vector Rotation { get; }
+
+    public ref bool UseQuat { get; }
+
+    public ref bool WriteNormal { get; }
 
 
 }

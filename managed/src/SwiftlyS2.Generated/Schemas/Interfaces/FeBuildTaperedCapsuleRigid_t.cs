@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeBuildTaperedCapsuleRigid_t : FeTaperedCapsuleRigid_t, ISchemaClass<FeBuildTaperedCapsuleRigid_t> {
+public partial interface FeBuildTaperedCapsuleRigid_t : FeTaperedCapsuleRigid_t, ISchemaClass<FeBuildTaperedCapsuleRigid_t>
+{
+    static FeBuildTaperedCapsuleRigid_t ISchemaClass<FeBuildTaperedCapsuleRigid_t>.From(nint handle) => new FeBuildTaperedCapsuleRigid_tImpl(handle);
+    static int ISchemaClass<FeBuildTaperedCapsuleRigid_t>.Size => 64;
+    static string? ISchemaClass<FeBuildTaperedCapsuleRigid_t>.ClassName => null;
 
-  static FeBuildTaperedCapsuleRigid_t ISchemaClass<FeBuildTaperedCapsuleRigid_t>.From(nint handle) => new FeBuildTaperedCapsuleRigid_tImpl(handle);
-  static int ISchemaClass<FeBuildTaperedCapsuleRigid_t>.Size => 64;
-  static string? ISchemaClass<FeBuildTaperedCapsuleRigid_t>.ClassName => null;
 
-  
-  public ref int Priority { get; }
-  
-  public ref uint VertexMapHash { get; }
-  
-  public ref uint AntitunnelGroupBits { get; }
+    public ref int Priority { get; }
+
+    public ref uint VertexMapHash { get; }
+
+    public ref uint AntitunnelGroupBits { get; }
 
 
 }

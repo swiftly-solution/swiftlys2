@@ -6,106 +6,86 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPathKeyFrameImpl : CLogicalEntityImpl, CPathKeyFrame {
+internal partial class CPathKeyFrameImpl : CLogicalEntityImpl, CPathKeyFrame
+{
+    public CPathKeyFrameImpl(nint handle) : base(handle) { }
 
-  public CPathKeyFrameImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OriginOffset;
 
-  private static nint? _OriginOffset;
-
-  public ref Vector Origin {
-    get {
-      if (_OriginOffset == null) {
-        _OriginOffset = Schema.GetOffset(0x34025185482052CF);
-      }
-      return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
+    public ref Vector Origin {
+        get {
+            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0x34025185482052CF);
+            return ref _Handle.AsRef<Vector>(_OriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnglesOffset;
+    private static nint? _AnglesOffset;
 
-  public ref QAngle Angles {
-    get {
-      if (_AnglesOffset == null) {
-        _AnglesOffset = Schema.GetOffset(0x34025185B5486CF1);
-      }
-      return ref _Handle.AsRef<QAngle>(_AnglesOffset!.Value);
+    public ref QAngle Angles {
+        get {
+            _AnglesOffset = _AnglesOffset ?? Schema.GetOffset(0x34025185B5486CF1);
+            return ref _Handle.AsRef<QAngle>(_AnglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngleOffset;
+    private static nint? _AngleOffset;
 
-  public ref Quaternion Angle {
-    get {
-      if (_AngleOffset == null) {
-        _AngleOffset = Schema.GetOffset(0x34025185CE339C27);
-      }
-      return ref _Handle.AsRef<Quaternion>(_AngleOffset!.Value);
+    public ref Quaternion Angle {
+        get {
+            _AngleOffset = _AngleOffset ?? Schema.GetOffset(0x34025185CE339C27);
+            return ref _Handle.AsRef<Quaternion>(_AngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextKeyOffset;
+    private static nint? _NextKeyOffset;
 
-  public string NextKey {
-    get {
-      if (_NextKeyOffset == null) {
-        _NextKeyOffset = Schema.GetOffset(0x340251858326E814);
-      }
-      var ptr = _Handle.Read<nint>(_NextKeyOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NextKeyOffset == null) {
-        _NextKeyOffset = Schema.GetOffset(0x340251858326E814);
-      }
-      Schema.SetString(_Handle, _NextKeyOffset!.Value, value);
-    }
-  } 
-  private static nint? _NextTimeOffset;
+    public string NextKey {
+        get {
+            _NextKeyOffset = _NextKeyOffset ?? Schema.GetOffset(0x340251858326E814);
+            return Schema.GetString(_Handle.Read<nint>(_NextKeyOffset!.Value));
+        }
+        set {
+            _NextKeyOffset = _NextKeyOffset ?? Schema.GetOffset(0x340251858326E814);
+            Schema.SetString(_Handle, _NextKeyOffset!.Value, value);
+        }
+    } 
+    private static nint? _NextTimeOffset;
 
-  public ref float NextTime {
-    get {
-      if (_NextTimeOffset == null) {
-        _NextTimeOffset = Schema.GetOffset(0x340251854F129C67);
-      }
-      return ref _Handle.AsRef<float>(_NextTimeOffset!.Value);
+    public ref float NextTime {
+        get {
+            _NextTimeOffset = _NextTimeOffset ?? Schema.GetOffset(0x340251854F129C67);
+            return ref _Handle.AsRef<float>(_NextTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextKey1Offset;
+    private static nint? _NextKey1Offset;
 
-  public CPathKeyFrame? NextKey1 {
-    get {
-      if (_NextKey1Offset == null) {
-        _NextKey1Offset = Schema.GetOffset(0x3402518585EE45D5);
-      }
-      var ptr = _Handle.Read<nint>(_NextKey1Offset!.Value);
-      return ptr.IsValidPtr() ? new CPathKeyFrameImpl(ptr) : null;
+    public CPathKeyFrame? NextKey1 {
+        get {
+            _NextKey1Offset = _NextKey1Offset ?? Schema.GetOffset(0x3402518585EE45D5);
+            var ptr = _Handle.Read<nint>(_NextKey1Offset!.Value);
+            return ptr.IsValidPtr() ? new CPathKeyFrameImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _PrevKeyOffset;
+    private static nint? _PrevKeyOffset;
 
-  public CPathKeyFrame? PrevKey {
-    get {
-      if (_PrevKeyOffset == null) {
-        _PrevKeyOffset = Schema.GetOffset(0x34025185B9327481);
-      }
-      var ptr = _Handle.Read<nint>(_PrevKeyOffset!.Value);
-      return ptr.IsValidPtr() ? new CPathKeyFrameImpl(ptr) : null;
+    public CPathKeyFrame? PrevKey {
+        get {
+            _PrevKeyOffset = _PrevKeyOffset ?? Schema.GetOffset(0x34025185B9327481);
+            var ptr = _Handle.Read<nint>(_PrevKeyOffset!.Value);
+            return ptr.IsValidPtr() ? new CPathKeyFrameImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _MoveSpeedOffset;
+    private static nint? _MoveSpeedOffset;
 
-  public ref float MoveSpeed {
-    get {
-      if (_MoveSpeedOffset == null) {
-        _MoveSpeedOffset = Schema.GetOffset(0x3402518566D18279);
-      }
-      return ref _Handle.AsRef<float>(_MoveSpeedOffset!.Value);
+    public ref float MoveSpeed {
+        get {
+            _MoveSpeedOffset = _MoveSpeedOffset ?? Schema.GetOffset(0x3402518566D18279);
+            return ref _Handle.AsRef<float>(_MoveSpeedOffset!.Value);
+        }
     }
-  }
 
 
 }

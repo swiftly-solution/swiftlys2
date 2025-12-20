@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CStateNodeTransitionDataImpl : SchemaClass, CStateNodeTransitionData {
+internal partial class CStateNodeTransitionDataImpl : SchemaClass, CStateNodeTransitionData
+{
+    public CStateNodeTransitionDataImpl(nint handle) : base(handle) { }
 
-  public CStateNodeTransitionDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CurveOffset;
 
-  private static nint? _CurveOffset;
-
-  public CBlendCurve Curve {
-    get {
-      if (_CurveOffset == null) {
-        _CurveOffset = Schema.GetOffset(0xFC9FD460BFFA0B34);
-      }
-      return new CBlendCurveImpl(_Handle + _CurveOffset!.Value);
+    public CBlendCurve Curve {
+        get {
+            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xFC9FD460BFFA0B34);
+            return new CBlendCurveImpl(_Handle + _CurveOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendDurationOffset;
+    private static nint? _BlendDurationOffset;
 
-  public SchemaUntypedField BlendDuration {
-    get {
-      if (_BlendDurationOffset == null) {
-        _BlendDurationOffset = Schema.GetOffset(0xFC9FD460BC9B1228);
-      }
-      return new SchemaUntypedField(_Handle + _BlendDurationOffset!.Value);
+    public SchemaUntypedField BlendDuration {
+        get {
+            _BlendDurationOffset = _BlendDurationOffset ?? Schema.GetOffset(0xFC9FD460BC9B1228);
+            return new SchemaUntypedField(_Handle + _BlendDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResetCycleValueOffset;
+    private static nint? _ResetCycleValueOffset;
 
-  public SchemaUntypedField ResetCycleValue {
-    get {
-      if (_ResetCycleValueOffset == null) {
-        _ResetCycleValueOffset = Schema.GetOffset(0xFC9FD4609897AC3F);
-      }
-      return new SchemaUntypedField(_Handle + _ResetCycleValueOffset!.Value);
+    public SchemaUntypedField ResetCycleValue {
+        get {
+            _ResetCycleValueOffset = _ResetCycleValueOffset ?? Schema.GetOffset(0xFC9FD4609897AC3F);
+            return new SchemaUntypedField(_Handle + _ResetCycleValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResetOffset;
+    private static nint? _ResetOffset;
 
-  public SchemaUntypedField Reset {
-    get {
-      if (_ResetOffset == null) {
-        _ResetOffset = Schema.GetOffset(0xFC9FD460F99F9AA0);
-      }
-      return new SchemaUntypedField(_Handle + _ResetOffset!.Value);
+    public SchemaUntypedField Reset {
+        get {
+            _ResetOffset = _ResetOffset ?? Schema.GetOffset(0xFC9FD460F99F9AA0);
+            return new SchemaUntypedField(_Handle + _ResetOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResetCycleOptionOffset;
+    private static nint? _ResetCycleOptionOffset;
 
-  public SchemaUntypedField ResetCycleOption {
-    get {
-      if (_ResetCycleOptionOffset == null) {
-        _ResetCycleOptionOffset = Schema.GetOffset(0xFC9FD460A597A1E3);
-      }
-      return new SchemaUntypedField(_Handle + _ResetCycleOptionOffset!.Value);
+    public SchemaUntypedField ResetCycleOption {
+        get {
+            _ResetCycleOptionOffset = _ResetCycleOptionOffset ?? Schema.GetOffset(0xFC9FD460A597A1E3);
+            return new SchemaUntypedField(_Handle + _ResetCycleOptionOffset!.Value);
+        }
     }
-  }
 
 
 }

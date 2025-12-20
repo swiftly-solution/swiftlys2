@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMotionNodeSequence : CMotionNode, ISchemaClass<CMotionNodeSequence> {
+public partial interface CMotionNodeSequence : CMotionNode, ISchemaClass<CMotionNodeSequence>
+{
+    static CMotionNodeSequence ISchemaClass<CMotionNodeSequence>.From(nint handle) => new CMotionNodeSequenceImpl(handle);
+    static int ISchemaClass<CMotionNodeSequence>.Size => 72;
+    static string? ISchemaClass<CMotionNodeSequence>.ClassName => null;
 
-  static CMotionNodeSequence ISchemaClass<CMotionNodeSequence>.From(nint handle) => new CMotionNodeSequenceImpl(handle);
-  static int ISchemaClass<CMotionNodeSequence>.Size => 72;
-  static string? ISchemaClass<CMotionNodeSequence>.ClassName => null;
 
-  
-  public ref CUtlVector<TagSpan_t> Tags { get; }
-  
-  public HSequence Sequence { get; }
-  
-  public ref float PlaybackSpeed { get; }
+    public ref CUtlVector<TagSpan_t> Tags { get; }
+
+    public HSequence Sequence { get; }
+
+    public ref float PlaybackSpeed { get; }
 
 
 }

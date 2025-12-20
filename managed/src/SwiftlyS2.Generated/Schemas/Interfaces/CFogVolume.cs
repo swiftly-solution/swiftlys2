@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFogVolume : CServerOnlyModelEntity, ISchemaClass<CFogVolume> {
+public partial interface CFogVolume : CServerOnlyModelEntity, ISchemaClass<CFogVolume>
+{
+    static CFogVolume ISchemaClass<CFogVolume>.From(nint handle) => new CFogVolumeImpl(handle);
+    static int ISchemaClass<CFogVolume>.Size => 2048;
+    static string? ISchemaClass<CFogVolume>.ClassName => "fog_volume";
 
-  static CFogVolume ISchemaClass<CFogVolume>.From(nint handle) => new CFogVolumeImpl(handle);
-  static int ISchemaClass<CFogVolume>.Size => 2048;
-  static string? ISchemaClass<CFogVolume>.ClassName => "fog_volume";
 
-  
-  public string FogName { get; set; }
-  
-  public string PostProcessName { get; set; }
-  
-  public string ColorCorrectionName { get; set; }
-  
-  public ref bool Disabled { get; }
-  
-  public ref bool InFogVolumesList { get; }
+    public string FogName { get; set; }
+
+    public string PostProcessName { get; set; }
+
+    public string ColorCorrectionName { get; set; }
+
+    public ref bool Disabled { get; }
+
+    public ref bool InFogVolumesList { get; }
 
 
 }

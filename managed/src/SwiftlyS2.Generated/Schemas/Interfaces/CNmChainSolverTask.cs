@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmChainSolverTask : CNmPoseTask, ISchemaClass<CNmChainSolverTask> {
+public partial interface CNmChainSolverTask : CNmPoseTask, ISchemaClass<CNmChainSolverTask>
+{
+    static CNmChainSolverTask ISchemaClass<CNmChainSolverTask>.From(nint handle) => new CNmChainSolverTaskImpl(handle);
+    static int ISchemaClass<CNmChainSolverTask>.Size => 304;
+    static string? ISchemaClass<CNmChainSolverTask>.ClassName => null;
 
-  static CNmChainSolverTask ISchemaClass<CNmChainSolverTask>.From(nint handle) => new CNmChainSolverTaskImpl(handle);
-  static int ISchemaClass<CNmChainSolverTask>.Size => 304;
-  static string? ISchemaClass<CNmChainSolverTask>.ClassName => null;
 
-  
-  public ref int EffectorBoneIdx { get; }
-  
-  public ref int EffectorTargetBoneIdx { get; }
-  
-  public ref CTransform TargetTransform { get; }
-  
-  public ref int NumBonesInChain { get; }
-  
-  public CNmTarget EffectorTarget { get; }
-  
-  public ref NmIKBlendMode_t BlendMode { get; }
-  
-  public ref float BlendWeight { get; }
-  
-  public ref bool IsTargetInWorldSpace { get; }
-  
-  public ref bool IsRunningFromDeserializedData { get; }
-  
-  public ref CGlobalSymbol DebugEffectorBoneID { get; }
-  
-  public ref CTransform ChainStartTransformMS { get; }
-  
-  public ref CTransform DebugRequestedTargetTransformMS { get; }
-  
-  public ref float DebugTotalChainLength { get; }
+    public ref int EffectorBoneIdx { get; }
+
+    public ref int EffectorTargetBoneIdx { get; }
+
+    public ref CTransform TargetTransform { get; }
+
+    public ref int NumBonesInChain { get; }
+
+    public CNmTarget EffectorTarget { get; }
+
+    public ref NmIKBlendMode_t BlendMode { get; }
+
+    public ref float BlendWeight { get; }
+
+    public ref bool IsTargetInWorldSpace { get; }
+
+    public ref bool IsRunningFromDeserializedData { get; }
+
+    public ref CGlobalSymbol DebugEffectorBoneID { get; }
+
+    public ref CTransform ChainStartTransformMS { get; }
+
+    public ref CTransform DebugRequestedTargetTransformMS { get; }
+
+    public ref float DebugTotalChainLength { get; }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBodyGroupSetting : ISchemaClass<CBodyGroupSetting> {
+public partial interface CBodyGroupSetting : ISchemaClass<CBodyGroupSetting>
+{
+    static CBodyGroupSetting ISchemaClass<CBodyGroupSetting>.From(nint handle) => new CBodyGroupSettingImpl(handle);
+    static int ISchemaClass<CBodyGroupSetting>.Size => 16;
+    static string? ISchemaClass<CBodyGroupSetting>.ClassName => null;
 
-  static CBodyGroupSetting ISchemaClass<CBodyGroupSetting>.From(nint handle) => new CBodyGroupSettingImpl(handle);
-  static int ISchemaClass<CBodyGroupSetting>.Size => 16;
-  static string? ISchemaClass<CBodyGroupSetting>.ClassName => null;
 
-  
-  public string BodyGroupName { get; set; }
-  
-  public ref int BodyGroupOption { get; }
+    public string BodyGroupName { get; set; }
+
+    public ref int BodyGroupOption { get; }
 
 
 }

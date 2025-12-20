@@ -8,52 +8,52 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderTrails : CBaseTrailRenderer, ISchemaClass<C_OP_RenderTrails> {
+public partial interface C_OP_RenderTrails : CBaseTrailRenderer, ISchemaClass<C_OP_RenderTrails>
+{
+    static C_OP_RenderTrails ISchemaClass<C_OP_RenderTrails>.From(nint handle) => new C_OP_RenderTrailsImpl(handle);
+    static int ISchemaClass<C_OP_RenderTrails>.Size => 17480;
+    static string? ISchemaClass<C_OP_RenderTrails>.ClassName => null;
 
-  static C_OP_RenderTrails ISchemaClass<C_OP_RenderTrails>.From(nint handle) => new C_OP_RenderTrailsImpl(handle);
-  static int ISchemaClass<C_OP_RenderTrails>.Size => 17480;
-  static string? ISchemaClass<C_OP_RenderTrails>.ClassName => null;
 
-  
-  public ref bool EnableFadingAndClamping { get; }
-  
-  public ref float StartFadeDot { get; }
-  
-  public ref float EndFadeDot { get; }
-  
-  public ParticleAttributeIndex_t PrevPntSource { get; }
-  
-  public ref float MaxLength { get; }
-  
-  public ref float MinLength { get; }
-  
-  public ref bool IgnoreDT { get; }
-  
-  public ref float ConstrainRadiusToLengthRatio { get; }
-  
-  public ref float LengthScale { get; }
-  
-  public ref float LengthFadeInTime { get; }
-  
-  public CPerParticleFloatInput RadiusHeadTaper { get; }
-  
-  public CParticleCollectionVecInput HeadColorScale { get; }
-  
-  public CPerParticleFloatInput HeadAlphaScale { get; }
-  
-  public CPerParticleFloatInput RadiusTaper { get; }
-  
-  public CParticleCollectionVecInput TailColorScale { get; }
-  
-  public CPerParticleFloatInput TailAlphaScale { get; }
-  
-  public ParticleAttributeIndex_t HorizCropField { get; }
-  
-  public ParticleAttributeIndex_t VertCropField { get; }
-  
-  public ref float ForwardShift { get; }
-  
-  public ref bool FlipUVBasedOnPitchYaw { get; }
+    public ref bool EnableFadingAndClamping { get; }
+
+    public ref float StartFadeDot { get; }
+
+    public ref float EndFadeDot { get; }
+
+    public ParticleAttributeIndex_t PrevPntSource { get; }
+
+    public ref float MaxLength { get; }
+
+    public ref float MinLength { get; }
+
+    public ref bool IgnoreDT { get; }
+
+    public ref float ConstrainRadiusToLengthRatio { get; }
+
+    public ref float LengthScale { get; }
+
+    public ref float LengthFadeInTime { get; }
+
+    public CPerParticleFloatInput RadiusHeadTaper { get; }
+
+    public CParticleCollectionVecInput HeadColorScale { get; }
+
+    public CPerParticleFloatInput HeadAlphaScale { get; }
+
+    public CPerParticleFloatInput RadiusTaper { get; }
+
+    public CParticleCollectionVecInput TailColorScale { get; }
+
+    public CPerParticleFloatInput TailAlphaScale { get; }
+
+    public ParticleAttributeIndex_t HorizCropField { get; }
+
+    public ParticleAttributeIndex_t VertCropField { get; }
+
+    public ref float ForwardShift { get; }
+
+    public ref bool FlipUVBasedOnPitchYaw { get; }
 
 
 }

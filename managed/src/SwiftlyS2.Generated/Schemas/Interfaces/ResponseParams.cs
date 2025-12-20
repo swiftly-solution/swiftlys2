@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ResponseParams : ISchemaClass<ResponseParams> {
+public partial interface ResponseParams : ISchemaClass<ResponseParams>
+{
+    static ResponseParams ISchemaClass<ResponseParams>.From(nint handle) => new ResponseParamsImpl(handle);
+    static int ISchemaClass<ResponseParams>.Size => 32;
+    static string? ISchemaClass<ResponseParams>.ClassName => null;
 
-  static ResponseParams ISchemaClass<ResponseParams>.From(nint handle) => new ResponseParamsImpl(handle);
-  static int ISchemaClass<ResponseParams>.Size => 32;
-  static string? ISchemaClass<ResponseParams>.ClassName => null;
 
-  
-  public ref short Odds { get; }
-  
-  public ref short Flags { get; }
-  
-  public ResponseFollowup? Followup { get; }
+    public ref short Odds { get; }
+
+    public ref short Flags { get; }
+
+    public ResponseFollowup? Followup { get; }
 
 
 }

@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayer_MovementServices : CPlayerPawnComponent, ISchemaClass<CPlayer_MovementServices> {
+public partial interface CPlayer_MovementServices : CPlayerPawnComponent, ISchemaClass<CPlayer_MovementServices>
+{
+    static CPlayer_MovementServices ISchemaClass<CPlayer_MovementServices>.From(nint handle) => new CPlayer_MovementServicesImpl(handle);
+    static int ISchemaClass<CPlayer_MovementServices>.Size => 568;
+    static string? ISchemaClass<CPlayer_MovementServices>.ClassName => null;
 
-  static CPlayer_MovementServices ISchemaClass<CPlayer_MovementServices>.From(nint handle) => new CPlayer_MovementServicesImpl(handle);
-  static int ISchemaClass<CPlayer_MovementServices>.Size => 568;
-  static string? ISchemaClass<CPlayer_MovementServices>.ClassName => null;
 
-  
-  public ref int Impulse { get; }
-  
-  public CInButtonState Buttons { get; }
-  
-  public ref ulong QueuedButtonDownMask { get; }
-  
-  public ref ulong QueuedButtonChangeMask { get; }
-  
-  public ref ulong ButtonDoublePressed { get; }
-  
-  public ISchemaFixedArray<uint> ButtonPressedCmdNumber { get; }
-  
-  public ref uint LastCommandNumberProcessed { get; }
-  
-  public ref ulong ToggleButtonDownMask { get; }
-  
-  public ref float Maxspeed { get; }
-  
-  public ISchemaFixedArray<float> ForceSubtickMoveWhen { get; }
-  
-  public ref float ForwardMove { get; }
-  
-  public ref float LeftMove { get; }
-  
-  public ref float UpMove { get; }
-  
-  public ref Vector LastMovementImpulses { get; }
-  
-  public ref QAngle OldViewAngles { get; }
+    public ref int Impulse { get; }
 
-  public void ToggleButtonDownMaskUpdated();
-  public void MaxspeedUpdated();
-  public void ForceSubtickMoveWhenUpdated();
+    public CInButtonState Buttons { get; }
+
+    public ref ulong QueuedButtonDownMask { get; }
+
+    public ref ulong QueuedButtonChangeMask { get; }
+
+    public ref ulong ButtonDoublePressed { get; }
+
+    public ISchemaFixedArray<uint> ButtonPressedCmdNumber { get; }
+
+    public ref uint LastCommandNumberProcessed { get; }
+
+    public ref ulong ToggleButtonDownMask { get; }
+
+    public ref float Maxspeed { get; }
+
+    public ISchemaFixedArray<float> ForceSubtickMoveWhen { get; }
+
+    public ref float ForwardMove { get; }
+
+    public ref float LeftMove { get; }
+
+    public ref float UpMove { get; }
+
+    public ref Vector LastMovementImpulses { get; }
+
+    public ref QAngle OldViewAngles { get; }
+
+    public void ToggleButtonDownMaskUpdated();
+    public void MaxspeedUpdated();
+    public void ForceSubtickMoveWhenUpdated();
 }

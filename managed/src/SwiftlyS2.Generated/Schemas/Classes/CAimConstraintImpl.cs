@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAimConstraintImpl : CBaseConstraintImpl, CAimConstraint {
+internal partial class CAimConstraintImpl : CBaseConstraintImpl, CAimConstraint
+{
+    public CAimConstraintImpl(nint handle) : base(handle) { }
 
-  public CAimConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AimOffsetOffset;
 
-  private static nint? _AimOffsetOffset;
-
-  public ref Quaternion AimOffset {
-    get {
-      if (_AimOffsetOffset == null) {
-        _AimOffsetOffset = Schema.GetOffset(0x6C67AB6C43737FEA);
-      }
-      return ref _Handle.AsRef<Quaternion>(_AimOffsetOffset!.Value);
+    public ref Quaternion AimOffset {
+        get {
+            _AimOffsetOffset = _AimOffsetOffset ?? Schema.GetOffset(0x6C67AB6C43737FEA);
+            return ref _Handle.AsRef<Quaternion>(_AimOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _UpTypeOffset;
+    private static nint? _UpTypeOffset;
 
-  public ref uint UpType {
-    get {
-      if (_UpTypeOffset == null) {
-        _UpTypeOffset = Schema.GetOffset(0x6C67AB6C038EA2BC);
-      }
-      return ref _Handle.AsRef<uint>(_UpTypeOffset!.Value);
+    public ref uint UpType {
+        get {
+            _UpTypeOffset = _UpTypeOffset ?? Schema.GetOffset(0x6C67AB6C038EA2BC);
+            return ref _Handle.AsRef<uint>(_UpTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

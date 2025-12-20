@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Outflow_TestExplicitYesNo : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Outflow_TestExplicitYesNo> {
+public partial interface CPulseCell_Outflow_TestExplicitYesNo : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Outflow_TestExplicitYesNo>
+{
+    static CPulseCell_Outflow_TestExplicitYesNo ISchemaClass<CPulseCell_Outflow_TestExplicitYesNo>.From(nint handle) => new CPulseCell_Outflow_TestExplicitYesNoImpl(handle);
+    static int ISchemaClass<CPulseCell_Outflow_TestExplicitYesNo>.Size => 216;
+    static string? ISchemaClass<CPulseCell_Outflow_TestExplicitYesNo>.ClassName => null;
 
-  static CPulseCell_Outflow_TestExplicitYesNo ISchemaClass<CPulseCell_Outflow_TestExplicitYesNo>.From(nint handle) => new CPulseCell_Outflow_TestExplicitYesNoImpl(handle);
-  static int ISchemaClass<CPulseCell_Outflow_TestExplicitYesNo>.Size => 216;
-  static string? ISchemaClass<CPulseCell_Outflow_TestExplicitYesNo>.ClassName => null;
 
-  
-  public CPulse_OutflowConnection Yes { get; }
-  
-  public CPulse_OutflowConnection No { get; }
+    public CPulse_OutflowConnection Yes { get; }
+
+    public CPulse_OutflowConnection No { get; }
 
 
 }

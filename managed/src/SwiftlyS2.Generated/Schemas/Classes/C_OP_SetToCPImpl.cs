@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetToCPImpl : CParticleFunctionOperatorImpl, C_OP_SetToCP {
+internal partial class C_OP_SetToCPImpl : CParticleFunctionOperatorImpl, C_OP_SetToCP
+{
+    public C_OP_SetToCPImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetToCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0xF80ACA353F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xF80ACA353F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetOffset;
+    private static nint? _OffsetOffset;
 
-  public ref Vector Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0xF80ACA35BD25CC2A);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    public ref Vector Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xF80ACA35BD25CC2A);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetLocalOffset;
+    private static nint? _OffsetLocalOffset;
 
-  public ref bool OffsetLocal {
-    get {
-      if (_OffsetLocalOffset == null) {
-        _OffsetLocalOffset = Schema.GetOffset(0xF80ACA35F07D31C1);
-      }
-      return ref _Handle.AsRef<bool>(_OffsetLocalOffset!.Value);
+    public ref bool OffsetLocal {
+        get {
+            _OffsetLocalOffset = _OffsetLocalOffset ?? Schema.GetOffset(0xF80ACA35F07D31C1);
+            return ref _Handle.AsRef<bool>(_OffsetLocalOffset!.Value);
+        }
     }
-  }
 
 
 }

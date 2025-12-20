@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGameSceneNodeHandleImpl : SchemaClass, CGameSceneNodeHandle {
+internal partial class CGameSceneNodeHandleImpl : SchemaClass, CGameSceneNodeHandle
+{
+    public CGameSceneNodeHandleImpl(nint handle) : base(handle) { }
 
-  public CGameSceneNodeHandleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OwnerOffset;
 
-  private static nint? _OwnerOffset;
-
-  public ref CHandle<CEntityInstance> Owner {
-    get {
-      if (_OwnerOffset == null) {
-        _OwnerOffset = Schema.GetOffset(0x9A961FAF6D89572);
-      }
-      return ref _Handle.AsRef<CHandle<CEntityInstance>>(_OwnerOffset!.Value);
+    public ref CHandle<CEntityInstance> Owner {
+        get {
+            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0x9A961FAF6D89572);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_OwnerOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameOffset;
+    private static nint? _NameOffset;
 
-  public ref CUtlStringToken Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x9A961FA4D8F5786);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_NameOffset!.Value);
+    public ref CUtlStringToken Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9A961FA4D8F5786);
+            return ref _Handle.AsRef<CUtlStringToken>(_NameOffset!.Value);
+        }
     }
-  }
 
-  public void OwnerUpdated() {
-    Schema.Update(_Handle, 0x9A961FAF6D89572);
-  }
-  public void NameUpdated() {
-    Schema.Update(_Handle, 0x9A961FA4D8F5786);
-  }
+    public void OwnerUpdated() => Schema.Update(_Handle, 0x9A961FAF6D89572);
+    public void NameUpdated() => Schema.Update(_Handle, 0x9A961FA4D8F5786);
 }

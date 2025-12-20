@@ -6,117 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixDynamicsBand_tImpl : SchemaClass, VMixDynamicsBand_t {
+internal partial class VMixDynamicsBand_tImpl : SchemaClass, VMixDynamicsBand_t
+{
+    public VMixDynamicsBand_tImpl(nint handle) : base(handle) { }
 
-  public VMixDynamicsBand_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FldbGainInputOffset;
 
-  private static nint? _FldbGainInputOffset;
-
-  public ref float FldbGainInput {
-    get {
-      if (_FldbGainInputOffset == null) {
-        _FldbGainInputOffset = Schema.GetOffset(0xC3A63113E9F143B6);
-      }
-      return ref _Handle.AsRef<float>(_FldbGainInputOffset!.Value);
+    public ref float FldbGainInput {
+        get {
+            _FldbGainInputOffset = _FldbGainInputOffset ?? Schema.GetOffset(0xC3A63113E9F143B6);
+            return ref _Handle.AsRef<float>(_FldbGainInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FldbGainOutputOffset;
+    private static nint? _FldbGainOutputOffset;
 
-  public ref float FldbGainOutput {
-    get {
-      if (_FldbGainOutputOffset == null) {
-        _FldbGainOutputOffset = Schema.GetOffset(0xC3A63113FC3C16D3);
-      }
-      return ref _Handle.AsRef<float>(_FldbGainOutputOffset!.Value);
+    public ref float FldbGainOutput {
+        get {
+            _FldbGainOutputOffset = _FldbGainOutputOffset ?? Schema.GetOffset(0xC3A63113FC3C16D3);
+            return ref _Handle.AsRef<float>(_FldbGainOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FldbThresholdBelowOffset;
+    private static nint? _FldbThresholdBelowOffset;
 
-  public ref float FldbThresholdBelow {
-    get {
-      if (_FldbThresholdBelowOffset == null) {
-        _FldbThresholdBelowOffset = Schema.GetOffset(0xC3A6311311693729);
-      }
-      return ref _Handle.AsRef<float>(_FldbThresholdBelowOffset!.Value);
+    public ref float FldbThresholdBelow {
+        get {
+            _FldbThresholdBelowOffset = _FldbThresholdBelowOffset ?? Schema.GetOffset(0xC3A6311311693729);
+            return ref _Handle.AsRef<float>(_FldbThresholdBelowOffset!.Value);
+        }
     }
-  }
-  private static nint? _FldbThresholdAboveOffset;
+    private static nint? _FldbThresholdAboveOffset;
 
-  public ref float FldbThresholdAbove {
-    get {
-      if (_FldbThresholdAboveOffset == null) {
-        _FldbThresholdAboveOffset = Schema.GetOffset(0xC3A631134516A525);
-      }
-      return ref _Handle.AsRef<float>(_FldbThresholdAboveOffset!.Value);
+    public ref float FldbThresholdAbove {
+        get {
+            _FldbThresholdAboveOffset = _FldbThresholdAboveOffset ?? Schema.GetOffset(0xC3A631134516A525);
+            return ref _Handle.AsRef<float>(_FldbThresholdAboveOffset!.Value);
+        }
     }
-  }
-  private static nint? _RatioBelowOffset;
+    private static nint? _RatioBelowOffset;
 
-  public ref float RatioBelow {
-    get {
-      if (_RatioBelowOffset == null) {
-        _RatioBelowOffset = Schema.GetOffset(0xC3A63113560F0E57);
-      }
-      return ref _Handle.AsRef<float>(_RatioBelowOffset!.Value);
+    public ref float RatioBelow {
+        get {
+            _RatioBelowOffset = _RatioBelowOffset ?? Schema.GetOffset(0xC3A63113560F0E57);
+            return ref _Handle.AsRef<float>(_RatioBelowOffset!.Value);
+        }
     }
-  }
-  private static nint? _RatioAboveOffset;
+    private static nint? _RatioAboveOffset;
 
-  public ref float RatioAbove {
-    get {
-      if (_RatioAboveOffset == null) {
-        _RatioAboveOffset = Schema.GetOffset(0xC3A631139E701FCB);
-      }
-      return ref _Handle.AsRef<float>(_RatioAboveOffset!.Value);
+    public ref float RatioAbove {
+        get {
+            _RatioAboveOffset = _RatioAboveOffset ?? Schema.GetOffset(0xC3A631139E701FCB);
+            return ref _Handle.AsRef<float>(_RatioAboveOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttackTimeMSOffset;
+    private static nint? _AttackTimeMSOffset;
 
-  public ref float AttackTimeMS {
-    get {
-      if (_AttackTimeMSOffset == null) {
-        _AttackTimeMSOffset = Schema.GetOffset(0xC3A63113D4A28216);
-      }
-      return ref _Handle.AsRef<float>(_AttackTimeMSOffset!.Value);
+    public ref float AttackTimeMS {
+        get {
+            _AttackTimeMSOffset = _AttackTimeMSOffset ?? Schema.GetOffset(0xC3A63113D4A28216);
+            return ref _Handle.AsRef<float>(_AttackTimeMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReleaseTimeMSOffset;
+    private static nint? _ReleaseTimeMSOffset;
 
-  public ref float ReleaseTimeMS {
-    get {
-      if (_ReleaseTimeMSOffset == null) {
-        _ReleaseTimeMSOffset = Schema.GetOffset(0xC3A63113EBB62791);
-      }
-      return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset!.Value);
+    public ref float ReleaseTimeMS {
+        get {
+            _ReleaseTimeMSOffset = _ReleaseTimeMSOffset ?? Schema.GetOffset(0xC3A63113EBB62791);
+            return ref _Handle.AsRef<float>(_ReleaseTimeMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnableOffset;
+    private static nint? _EnableOffset;
 
-  public ref bool Enable {
-    get {
-      if (_EnableOffset == null) {
-        _EnableOffset = Schema.GetOffset(0xC3A6311313C00D2E);
-      }
-      return ref _Handle.AsRef<bool>(_EnableOffset!.Value);
+    public ref bool Enable {
+        get {
+            _EnableOffset = _EnableOffset ?? Schema.GetOffset(0xC3A6311313C00D2E);
+            return ref _Handle.AsRef<bool>(_EnableOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoloOffset;
+    private static nint? _SoloOffset;
 
-  public ref bool Solo {
-    get {
-      if (_SoloOffset == null) {
-        _SoloOffset = Schema.GetOffset(0xC3A63113CF623EAA);
-      }
-      return ref _Handle.AsRef<bool>(_SoloOffset!.Value);
+    public ref bool Solo {
+        get {
+            _SoloOffset = _SoloOffset ?? Schema.GetOffset(0xC3A63113CF623EAA);
+            return ref _Handle.AsRef<bool>(_SoloOffset!.Value);
+        }
     }
-  }
 
 
 }

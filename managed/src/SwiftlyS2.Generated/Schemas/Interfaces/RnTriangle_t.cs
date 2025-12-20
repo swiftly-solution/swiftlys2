@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnTriangle_t : ISchemaClass<RnTriangle_t> {
+public partial interface RnTriangle_t : ISchemaClass<RnTriangle_t>
+{
+    static RnTriangle_t ISchemaClass<RnTriangle_t>.From(nint handle) => new RnTriangle_tImpl(handle);
+    static int ISchemaClass<RnTriangle_t>.Size => 12;
+    static string? ISchemaClass<RnTriangle_t>.ClassName => null;
 
-  static RnTriangle_t ISchemaClass<RnTriangle_t>.From(nint handle) => new RnTriangle_tImpl(handle);
-  static int ISchemaClass<RnTriangle_t>.Size => 12;
-  static string? ISchemaClass<RnTriangle_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<int> Index { get; }
+    public ISchemaFixedArray<int> Index { get; }
 
 
 }

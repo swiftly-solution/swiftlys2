@@ -6,50 +6,43 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeHingeLimitBuild_tImpl : SchemaClass, FeHingeLimitBuild_t {
+internal partial class FeHingeLimitBuild_tImpl : SchemaClass, FeHingeLimitBuild_t
+{
+    public FeHingeLimitBuild_tImpl(nint handle) : base(handle) { }
 
-  public FeHingeLimitBuild_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x50E120ADCD6694B9, 6, 2, 2);
-  }
-  private static nint? _FlagsOffset;
-
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x50E120ADB8D52E48);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x50E120ADCD6694B9, 6, 2, 2);
     }
-  }
-  private static nint? _LimitCWOffset;
+    private static nint? _FlagsOffset;
 
-  public ref float LimitCW {
-    get {
-      if (_LimitCWOffset == null) {
-        _LimitCWOffset = Schema.GetOffset(0x50E120ADC3D20C44);
-      }
-      return ref _Handle.AsRef<float>(_LimitCWOffset!.Value);
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x50E120ADB8D52E48);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LimitCCWOffset;
+    private static nint? _LimitCWOffset;
 
-  public ref float LimitCCW {
-    get {
-      if (_LimitCCWOffset == null) {
-        _LimitCCWOffset = Schema.GetOffset(0x50E120ADA6C794ED);
-      }
-      return ref _Handle.AsRef<float>(_LimitCCWOffset!.Value);
+    public ref float LimitCW {
+        get {
+            _LimitCWOffset = _LimitCWOffset ?? Schema.GetOffset(0x50E120ADC3D20C44);
+            return ref _Handle.AsRef<float>(_LimitCWOffset!.Value);
+        }
     }
-  }
+    private static nint? _LimitCCWOffset;
+
+    public ref float LimitCCW {
+        get {
+            _LimitCCWOffset = _LimitCCWOffset ?? Schema.GetOffset(0x50E120ADA6C794ED);
+            return ref _Handle.AsRef<float>(_LimitCCWOffset!.Value);
+        }
+    }
 
 
 }

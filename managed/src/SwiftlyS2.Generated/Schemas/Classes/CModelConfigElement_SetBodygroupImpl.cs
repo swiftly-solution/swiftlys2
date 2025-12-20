@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigElement_SetBodygroupImpl : CModelConfigElementImpl, CModelConfigElement_SetBodygroup {
+internal partial class CModelConfigElement_SetBodygroupImpl : CModelConfigElementImpl, CModelConfigElement_SetBodygroup
+{
+    public CModelConfigElement_SetBodygroupImpl(nint handle) : base(handle) { }
 
-  public CModelConfigElement_SetBodygroupImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GroupNameOffset;
 
-  private static nint? _GroupNameOffset;
-
-  public ref CGlobalSymbol GroupName {
-    get {
-      if (_GroupNameOffset == null) {
-        _GroupNameOffset = Schema.GetOffset(0x390A561FE0A55E67);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_GroupNameOffset!.Value);
+    public ref CGlobalSymbol GroupName {
+        get {
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0x390A561FE0A55E67);
+            return ref _Handle.AsRef<CGlobalSymbol>(_GroupNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChoiceOffset;
+    private static nint? _ChoiceOffset;
 
-  public ref int Choice {
-    get {
-      if (_ChoiceOffset == null) {
-        _ChoiceOffset = Schema.GetOffset(0x390A561F7CC11192);
-      }
-      return ref _Handle.AsRef<int>(_ChoiceOffset!.Value);
+    public ref int Choice {
+        get {
+            _ChoiceOffset = _ChoiceOffset ?? Schema.GetOffset(0x390A561F7CC11192);
+            return ref _Handle.AsRef<int>(_ChoiceOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VMixProcessorType_t : ushort {
-
+public enum VMixProcessorType_t : ushort
+{
  VPROCESSOR_UNKNOWN = 0,
 
  VPROCESSOR_RT_PITCH = 1,

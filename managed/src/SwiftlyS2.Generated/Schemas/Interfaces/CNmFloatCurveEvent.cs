@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatCurveEvent : CNmEvent, ISchemaClass<CNmFloatCurveEvent> {
+public partial interface CNmFloatCurveEvent : CNmEvent, ISchemaClass<CNmFloatCurveEvent>
+{
+    static CNmFloatCurveEvent ISchemaClass<CNmFloatCurveEvent>.From(nint handle) => new CNmFloatCurveEventImpl(handle);
+    static int ISchemaClass<CNmFloatCurveEvent>.Size => 104;
+    static string? ISchemaClass<CNmFloatCurveEvent>.ClassName => null;
 
-  static CNmFloatCurveEvent ISchemaClass<CNmFloatCurveEvent>.From(nint handle) => new CNmFloatCurveEventImpl(handle);
-  static int ISchemaClass<CNmFloatCurveEvent>.Size => 104;
-  static string? ISchemaClass<CNmFloatCurveEvent>.ClassName => null;
 
-  
-  public ref CGlobalSymbol ID { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Curve { get; }
+    public ref CGlobalSymbol ID { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Curve { get; }
 
 
 }

@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmAnimationPoseNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmAnimationPoseNode__CDefinition {
+internal partial class CNmAnimationPoseNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmAnimationPoseNode__CDefinition
+{
+    public CNmAnimationPoseNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmAnimationPoseNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PoseTimeValueNodeIdxOffset;
 
-  private static nint? _PoseTimeValueNodeIdxOffset;
-
-  public ref short PoseTimeValueNodeIdx {
-    get {
-      if (_PoseTimeValueNodeIdxOffset == null) {
-        _PoseTimeValueNodeIdxOffset = Schema.GetOffset(0xAEB5DD4EE17A4AC5);
-      }
-      return ref _Handle.AsRef<short>(_PoseTimeValueNodeIdxOffset!.Value);
+    public ref short PoseTimeValueNodeIdx {
+        get {
+            _PoseTimeValueNodeIdxOffset = _PoseTimeValueNodeIdxOffset ?? Schema.GetOffset(0xAEB5DD4EE17A4AC5);
+            return ref _Handle.AsRef<short>(_PoseTimeValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _DataSlotIdxOffset;
+    private static nint? _DataSlotIdxOffset;
 
-  public ref short DataSlotIdx {
-    get {
-      if (_DataSlotIdxOffset == null) {
-        _DataSlotIdxOffset = Schema.GetOffset(0xAEB5DD4EB1C15B68);
-      }
-      return ref _Handle.AsRef<short>(_DataSlotIdxOffset!.Value);
+    public ref short DataSlotIdx {
+        get {
+            _DataSlotIdxOffset = _DataSlotIdxOffset ?? Schema.GetOffset(0xAEB5DD4EB1C15B68);
+            return ref _Handle.AsRef<short>(_DataSlotIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputTimeRemapRangeOffset;
+    private static nint? _InputTimeRemapRangeOffset;
 
-  public SchemaUntypedField InputTimeRemapRange {
-    get {
-      if (_InputTimeRemapRangeOffset == null) {
-        _InputTimeRemapRangeOffset = Schema.GetOffset(0xAEB5DD4EE53BDBD4);
-      }
-      return new SchemaUntypedField(_Handle + _InputTimeRemapRangeOffset!.Value);
+    public SchemaUntypedField InputTimeRemapRange {
+        get {
+            _InputTimeRemapRangeOffset = _InputTimeRemapRangeOffset ?? Schema.GetOffset(0xAEB5DD4EE53BDBD4);
+            return new SchemaUntypedField(_Handle + _InputTimeRemapRangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _UserSpecifiedTimeOffset;
+    private static nint? _UserSpecifiedTimeOffset;
 
-  public ref float UserSpecifiedTime {
-    get {
-      if (_UserSpecifiedTimeOffset == null) {
-        _UserSpecifiedTimeOffset = Schema.GetOffset(0xAEB5DD4E0D7319E7);
-      }
-      return ref _Handle.AsRef<float>(_UserSpecifiedTimeOffset!.Value);
+    public ref float UserSpecifiedTime {
+        get {
+            _UserSpecifiedTimeOffset = _UserSpecifiedTimeOffset ?? Schema.GetOffset(0xAEB5DD4E0D7319E7);
+            return ref _Handle.AsRef<float>(_UserSpecifiedTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseFramesAsInputOffset;
+    private static nint? _UseFramesAsInputOffset;
 
-  public ref bool UseFramesAsInput {
-    get {
-      if (_UseFramesAsInputOffset == null) {
-        _UseFramesAsInputOffset = Schema.GetOffset(0xAEB5DD4EF0C41386);
-      }
-      return ref _Handle.AsRef<bool>(_UseFramesAsInputOffset!.Value);
+    public ref bool UseFramesAsInput {
+        get {
+            _UseFramesAsInputOffset = _UseFramesAsInputOffset ?? Schema.GetOffset(0xAEB5DD4EF0C41386);
+            return ref _Handle.AsRef<bool>(_UseFramesAsInputOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CHitReactUpdateNodeImpl : CUnaryUpdateNodeImpl, CHitReactUpdateNode {
+internal partial class CHitReactUpdateNodeImpl : CUnaryUpdateNodeImpl, CHitReactUpdateNode
+{
+    public CHitReactUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CHitReactUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OpFixedSettingsOffset;
 
-  private static nint? _OpFixedSettingsOffset;
-
-  public HitReactFixedSettings_t OpFixedSettings {
-    get {
-      if (_OpFixedSettingsOffset == null) {
-        _OpFixedSettingsOffset = Schema.GetOffset(0x64E4D4A7E533AB09);
-      }
-      return new HitReactFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+    public HitReactFixedSettings_t OpFixedSettings {
+        get {
+            _OpFixedSettingsOffset = _OpFixedSettingsOffset ?? Schema.GetOffset(0x64E4D4A7E533AB09);
+            return new HitReactFixedSettings_tImpl(_Handle + _OpFixedSettingsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriggerParamOffset;
+    private static nint? _TriggerParamOffset;
 
-  public CAnimParamHandle TriggerParam {
-    get {
-      if (_TriggerParamOffset == null) {
-        _TriggerParamOffset = Schema.GetOffset(0x64E4D4A7AA3B4860);
-      }
-      return new CAnimParamHandleImpl(_Handle + _TriggerParamOffset!.Value);
+    public CAnimParamHandle TriggerParam {
+        get {
+            _TriggerParamOffset = _TriggerParamOffset ?? Schema.GetOffset(0x64E4D4A7AA3B4860);
+            return new CAnimParamHandleImpl(_Handle + _TriggerParamOffset!.Value);
+        }
     }
-  }
-  private static nint? _HitBoneParamOffset;
+    private static nint? _HitBoneParamOffset;
 
-  public CAnimParamHandle HitBoneParam {
-    get {
-      if (_HitBoneParamOffset == null) {
-        _HitBoneParamOffset = Schema.GetOffset(0x64E4D4A70CD5764D);
-      }
-      return new CAnimParamHandleImpl(_Handle + _HitBoneParamOffset!.Value);
+    public CAnimParamHandle HitBoneParam {
+        get {
+            _HitBoneParamOffset = _HitBoneParamOffset ?? Schema.GetOffset(0x64E4D4A70CD5764D);
+            return new CAnimParamHandleImpl(_Handle + _HitBoneParamOffset!.Value);
+        }
     }
-  }
-  private static nint? _HitOffsetParamOffset;
+    private static nint? _HitOffsetParamOffset;
 
-  public CAnimParamHandle HitOffsetParam {
-    get {
-      if (_HitOffsetParamOffset == null) {
-        _HitOffsetParamOffset = Schema.GetOffset(0x64E4D4A7F1CA4A4A);
-      }
-      return new CAnimParamHandleImpl(_Handle + _HitOffsetParamOffset!.Value);
+    public CAnimParamHandle HitOffsetParam {
+        get {
+            _HitOffsetParamOffset = _HitOffsetParamOffset ?? Schema.GetOffset(0x64E4D4A7F1CA4A4A);
+            return new CAnimParamHandleImpl(_Handle + _HitOffsetParamOffset!.Value);
+        }
     }
-  }
-  private static nint? _HitDirectionParamOffset;
+    private static nint? _HitDirectionParamOffset;
 
-  public CAnimParamHandle HitDirectionParam {
-    get {
-      if (_HitDirectionParamOffset == null) {
-        _HitDirectionParamOffset = Schema.GetOffset(0x64E4D4A76F980EDC);
-      }
-      return new CAnimParamHandleImpl(_Handle + _HitDirectionParamOffset!.Value);
+    public CAnimParamHandle HitDirectionParam {
+        get {
+            _HitDirectionParamOffset = _HitDirectionParamOffset ?? Schema.GetOffset(0x64E4D4A76F980EDC);
+            return new CAnimParamHandleImpl(_Handle + _HitDirectionParamOffset!.Value);
+        }
     }
-  }
-  private static nint? _HitStrengthParamOffset;
+    private static nint? _HitStrengthParamOffset;
 
-  public CAnimParamHandle HitStrengthParam {
-    get {
-      if (_HitStrengthParamOffset == null) {
-        _HitStrengthParamOffset = Schema.GetOffset(0x64E4D4A7BD447408);
-      }
-      return new CAnimParamHandleImpl(_Handle + _HitStrengthParamOffset!.Value);
+    public CAnimParamHandle HitStrengthParam {
+        get {
+            _HitStrengthParamOffset = _HitStrengthParamOffset ?? Schema.GetOffset(0x64E4D4A7BD447408);
+            return new CAnimParamHandleImpl(_Handle + _HitStrengthParamOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinDelayBetweenHitsOffset;
+    private static nint? _MinDelayBetweenHitsOffset;
 
-  public ref float MinDelayBetweenHits {
-    get {
-      if (_MinDelayBetweenHitsOffset == null) {
-        _MinDelayBetweenHitsOffset = Schema.GetOffset(0x64E4D4A762EED38E);
-      }
-      return ref _Handle.AsRef<float>(_MinDelayBetweenHitsOffset!.Value);
+    public ref float MinDelayBetweenHits {
+        get {
+            _MinDelayBetweenHitsOffset = _MinDelayBetweenHitsOffset ?? Schema.GetOffset(0x64E4D4A762EED38E);
+            return ref _Handle.AsRef<float>(_MinDelayBetweenHitsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResetChildOffset;
+    private static nint? _ResetChildOffset;
 
-  public ref bool ResetChild {
-    get {
-      if (_ResetChildOffset == null) {
-        _ResetChildOffset = Schema.GetOffset(0x64E4D4A765CC88B6);
-      }
-      return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
+    public ref bool ResetChild {
+        get {
+            _ResetChildOffset = _ResetChildOffset ?? Schema.GetOffset(0x64E4D4A765CC88B6);
+            return ref _Handle.AsRef<bool>(_ResetChildOffset!.Value);
+        }
     }
-  }
 
 
 }

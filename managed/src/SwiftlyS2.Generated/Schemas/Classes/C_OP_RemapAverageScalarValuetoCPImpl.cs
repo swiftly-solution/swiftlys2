@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapAverageScalarValuetoCPImpl : CParticleFunctionPreEmissionImpl, C_OP_RemapAverageScalarValuetoCP {
+internal partial class C_OP_RemapAverageScalarValuetoCPImpl : CParticleFunctionPreEmissionImpl, C_OP_RemapAverageScalarValuetoCP
+{
+    public C_OP_RemapAverageScalarValuetoCPImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapAverageScalarValuetoCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ExpressionOffset;
 
-  private static nint? _ExpressionOffset;
-
-  public ref SetStatisticExpressionType_t Expression {
-    get {
-      if (_ExpressionOffset == null) {
-        _ExpressionOffset = Schema.GetOffset(0x98EDCBBC160B2427);
-      }
-      return ref _Handle.AsRef<SetStatisticExpressionType_t>(_ExpressionOffset!.Value);
+    public ref SetStatisticExpressionType_t Expression {
+        get {
+            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x98EDCBBC160B2427);
+            return ref _Handle.AsRef<SetStatisticExpressionType_t>(_ExpressionOffset!.Value);
+        }
     }
-  }
-  private static nint? _DecimalPlacesOffset;
+    private static nint? _DecimalPlacesOffset;
 
-  public CParticleCollectionFloatInput DecimalPlaces {
-    get {
-      if (_DecimalPlacesOffset == null) {
-        _DecimalPlacesOffset = Schema.GetOffset(0x98EDCBBCB314ED06);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _DecimalPlacesOffset!.Value);
+    public CParticleCollectionFloatInput DecimalPlaces {
+        get {
+            _DecimalPlacesOffset = _DecimalPlacesOffset ?? Schema.GetOffset(0x98EDCBBCB314ED06);
+            return new CParticleCollectionFloatInputImpl(_Handle + _DecimalPlacesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutControlPointNumberOffset;
+    private static nint? _OutControlPointNumberOffset;
 
-  public ref int OutControlPointNumber {
-    get {
-      if (_OutControlPointNumberOffset == null) {
-        _OutControlPointNumberOffset = Schema.GetOffset(0x98EDCBBCD021D73F);
-      }
-      return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+    public ref int OutControlPointNumber {
+        get {
+            _OutControlPointNumberOffset = _OutControlPointNumberOffset ?? Schema.GetOffset(0x98EDCBBCD021D73F);
+            return ref _Handle.AsRef<int>(_OutControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutVectorFieldOffset;
+    private static nint? _OutVectorFieldOffset;
 
-  public ref int OutVectorField {
-    get {
-      if (_OutVectorFieldOffset == null) {
-        _OutVectorFieldOffset = Schema.GetOffset(0x98EDCBBCF9041E74);
-      }
-      return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
+    public ref int OutVectorField {
+        get {
+            _OutVectorFieldOffset = _OutVectorFieldOffset ?? Schema.GetOffset(0x98EDCBBCF9041E74);
+            return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOffset;
+    private static nint? _FieldOffset;
 
-  public ParticleAttributeIndex_t Field {
-    get {
-      if (_FieldOffset == null) {
-        _FieldOffset = Schema.GetOffset(0x98EDCBBCC257B93B);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+    public ParticleAttributeIndex_t Field {
+        get {
+            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0x98EDCBBCC257B93B);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputRemapOffset;
+    private static nint? _OutputRemapOffset;
 
-  public CParticleRemapFloatInput OutputRemap {
-    get {
-      if (_OutputRemapOffset == null) {
-        _OutputRemapOffset = Schema.GetOffset(0x98EDCBBC1239396F);
-      }
-      return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+    public CParticleRemapFloatInput OutputRemap {
+        get {
+            _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x98EDCBBC1239396F);
+            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+        }
     }
-  }
 
 
 }

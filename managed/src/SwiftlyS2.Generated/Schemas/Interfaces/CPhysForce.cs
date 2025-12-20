@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysForce : CPointEntity, ISchemaClass<CPhysForce> {
+public partial interface CPhysForce : CPointEntity, ISchemaClass<CPhysForce>
+{
+    static CPhysForce ISchemaClass<CPhysForce>.From(nint handle) => new CPhysForceImpl(handle);
+    static int ISchemaClass<CPhysForce>.Size => 1360;
+    static string? ISchemaClass<CPhysForce>.ClassName => null;
 
-  static CPhysForce ISchemaClass<CPhysForce>.From(nint handle) => new CPhysForceImpl(handle);
-  static int ISchemaClass<CPhysForce>.Size => 1360;
-  static string? ISchemaClass<CPhysForce>.ClassName => null;
 
-  
-  public string NameAttach { get; set; }
-  
-  public ref float Force { get; }
-  
-  public ref float ForceTime { get; }
-  
-  public ref CHandle<CBaseEntity> AttachedObject { get; }
-  
-  public ref bool WasRestored { get; }
-  
-  public CConstantForceController Integrator { get; }
+    public string NameAttach { get; set; }
+
+    public ref float Force { get; }
+
+    public ref float ForceTime { get; }
+
+    public ref CHandle<CBaseEntity> AttachedObject { get; }
+
+    public ref bool WasRestored { get; }
+
+    public CConstantForceController Integrator { get; }
 
 
 }

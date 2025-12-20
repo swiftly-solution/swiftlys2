@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeTwistConstraint_tImpl : SchemaClass, FeTwistConstraint_t {
+internal partial class FeTwistConstraint_tImpl : SchemaClass, FeTwistConstraint_t
+{
+    public FeTwistConstraint_tImpl(nint handle) : base(handle) { }
 
-  public FeTwistConstraint_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodeOrientOffset;
 
-  private static nint? _NodeOrientOffset;
-
-  public ref ushort NodeOrient {
-    get {
-      if (_NodeOrientOffset == null) {
-        _NodeOrientOffset = Schema.GetOffset(0x4BD7707B59026ED8);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeOrientOffset!.Value);
+    public ref ushort NodeOrient {
+        get {
+            _NodeOrientOffset = _NodeOrientOffset ?? Schema.GetOffset(0x4BD7707B59026ED8);
+            return ref _Handle.AsRef<ushort>(_NodeOrientOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodeEndOffset;
+    private static nint? _NodeEndOffset;
 
-  public ref ushort NodeEnd {
-    get {
-      if (_NodeEndOffset == null) {
-        _NodeEndOffset = Schema.GetOffset(0x4BD7707B8A00317E);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeEndOffset!.Value);
+    public ref ushort NodeEnd {
+        get {
+            _NodeEndOffset = _NodeEndOffset ?? Schema.GetOffset(0x4BD7707B8A00317E);
+            return ref _Handle.AsRef<ushort>(_NodeEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _TwistRelaxOffset;
+    private static nint? _TwistRelaxOffset;
 
-  public ref float TwistRelax {
-    get {
-      if (_TwistRelaxOffset == null) {
-        _TwistRelaxOffset = Schema.GetOffset(0x4BD7707B9E4510FC);
-      }
-      return ref _Handle.AsRef<float>(_TwistRelaxOffset!.Value);
+    public ref float TwistRelax {
+        get {
+            _TwistRelaxOffset = _TwistRelaxOffset ?? Schema.GetOffset(0x4BD7707B9E4510FC);
+            return ref _Handle.AsRef<float>(_TwistRelaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _SwingRelaxOffset;
+    private static nint? _SwingRelaxOffset;
 
-  public ref float SwingRelax {
-    get {
-      if (_SwingRelaxOffset == null) {
-        _SwingRelaxOffset = Schema.GetOffset(0x4BD7707BE4722697);
-      }
-      return ref _Handle.AsRef<float>(_SwingRelaxOffset!.Value);
+    public ref float SwingRelax {
+        get {
+            _SwingRelaxOffset = _SwingRelaxOffset ?? Schema.GetOffset(0x4BD7707BE4722697);
+            return ref _Handle.AsRef<float>(_SwingRelaxOffset!.Value);
+        }
     }
-  }
 
 
 }

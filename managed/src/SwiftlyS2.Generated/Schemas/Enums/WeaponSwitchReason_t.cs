@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum WeaponSwitchReason_t : uint {
-
+public enum WeaponSwitchReason_t : uint
+{
  eDrawn = 0,
 
  eEquipped = 1,

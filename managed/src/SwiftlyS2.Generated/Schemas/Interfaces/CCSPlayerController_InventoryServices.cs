@@ -8,39 +8,39 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerController_InventoryServices : CPlayerControllerComponent, ISchemaClass<CCSPlayerController_InventoryServices> {
+public partial interface CCSPlayerController_InventoryServices : CPlayerControllerComponent, ISchemaClass<CCSPlayerController_InventoryServices>
+{
+    static CCSPlayerController_InventoryServices ISchemaClass<CCSPlayerController_InventoryServices>.From(nint handle) => new CCSPlayerController_InventoryServicesImpl(handle);
+    static int ISchemaClass<CCSPlayerController_InventoryServices>.Size => 4064;
+    static string? ISchemaClass<CCSPlayerController_InventoryServices>.ClassName => null;
 
-  static CCSPlayerController_InventoryServices ISchemaClass<CCSPlayerController_InventoryServices>.From(nint handle) => new CCSPlayerController_InventoryServicesImpl(handle);
-  static int ISchemaClass<CCSPlayerController_InventoryServices>.Size => 4064;
-  static string? ISchemaClass<CCSPlayerController_InventoryServices>.ClassName => null;
 
-  
-  public ref ushort MusicID { get; }
-  
-  public ISchemaFixedArray<MedalRank_t> Rank { get; }
-  
-  public ref int PersonaDataPublicLevel { get; }
-  
-  public ref int PersonaDataPublicCommendsLeader { get; }
-  
-  public ref int PersonaDataPublicCommendsTeacher { get; }
-  
-  public ref int PersonaDataPublicCommendsFriendly { get; }
-  
-  public ref int PersonaDataXpTrailLevel { get; }
-  
-  public ISchemaFixedArray<uint> EquippedPlayerSprayIDs { get; }
-  
-  public ref ulong CurrentLoadoutHash { get; }
-  
-  public ref CUtlVector<ServerAuthoritativeWeaponSlot_t> ServerAuthoritativeWeaponSlots { get; }
+    public ref ushort MusicID { get; }
 
-  public void MusicIDUpdated();
-  public void RankUpdated();
-  public void PersonaDataPublicLevelUpdated();
-  public void PersonaDataPublicCommendsLeaderUpdated();
-  public void PersonaDataPublicCommendsTeacherUpdated();
-  public void PersonaDataPublicCommendsFriendlyUpdated();
-  public void PersonaDataXpTrailLevelUpdated();
-  public void ServerAuthoritativeWeaponSlotsUpdated();
+    public ISchemaFixedArray<MedalRank_t> Rank { get; }
+
+    public ref int PersonaDataPublicLevel { get; }
+
+    public ref int PersonaDataPublicCommendsLeader { get; }
+
+    public ref int PersonaDataPublicCommendsTeacher { get; }
+
+    public ref int PersonaDataPublicCommendsFriendly { get; }
+
+    public ref int PersonaDataXpTrailLevel { get; }
+
+    public ISchemaFixedArray<uint> EquippedPlayerSprayIDs { get; }
+
+    public ref ulong CurrentLoadoutHash { get; }
+
+    public ref CUtlVector<ServerAuthoritativeWeaponSlot_t> ServerAuthoritativeWeaponSlots { get; }
+
+    public void MusicIDUpdated();
+    public void RankUpdated();
+    public void PersonaDataPublicLevelUpdated();
+    public void PersonaDataPublicCommendsLeaderUpdated();
+    public void PersonaDataPublicCommendsTeacherUpdated();
+    public void PersonaDataPublicCommendsFriendlyUpdated();
+    public void PersonaDataXpTrailLevelUpdated();
+    public void ServerAuthoritativeWeaponSlotsUpdated();
 }

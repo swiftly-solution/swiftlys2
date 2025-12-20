@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface WorldNodeOnDiskBufferData_t : ISchemaClass<WorldNodeOnDiskBufferData_t> {
+public partial interface WorldNodeOnDiskBufferData_t : ISchemaClass<WorldNodeOnDiskBufferData_t>
+{
+    static WorldNodeOnDiskBufferData_t ISchemaClass<WorldNodeOnDiskBufferData_t>.From(nint handle) => new WorldNodeOnDiskBufferData_tImpl(handle);
+    static int ISchemaClass<WorldNodeOnDiskBufferData_t>.Size => 56;
+    static string? ISchemaClass<WorldNodeOnDiskBufferData_t>.ClassName => null;
 
-  static WorldNodeOnDiskBufferData_t ISchemaClass<WorldNodeOnDiskBufferData_t>.From(nint handle) => new WorldNodeOnDiskBufferData_tImpl(handle);
-  static int ISchemaClass<WorldNodeOnDiskBufferData_t>.Size => 56;
-  static string? ISchemaClass<WorldNodeOnDiskBufferData_t>.ClassName => null;
 
-  
-  public ref int ElementCount { get; }
-  
-  public ref int ElementSizeInBytes { get; }
-  
-  public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields { get; }
-  
-  public ref CUtlVector<byte> Data { get; }
+    public ref int ElementCount { get; }
+
+    public ref int ElementSizeInBytes { get; }
+
+    public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields { get; }
+
+    public ref CUtlVector<byte> Data { get; }
 
 
 }

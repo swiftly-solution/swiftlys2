@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmRootMotionEvent : CNmEvent, ISchemaClass<CNmRootMotionEvent> {
+public partial interface CNmRootMotionEvent : CNmEvent, ISchemaClass<CNmRootMotionEvent>
+{
+    static CNmRootMotionEvent ISchemaClass<CNmRootMotionEvent>.From(nint handle) => new CNmRootMotionEventImpl(handle);
+    static int ISchemaClass<CNmRootMotionEvent>.Size => 40;
+    static string? ISchemaClass<CNmRootMotionEvent>.ClassName => null;
 
-  static CNmRootMotionEvent ISchemaClass<CNmRootMotionEvent>.From(nint handle) => new CNmRootMotionEventImpl(handle);
-  static int ISchemaClass<CNmRootMotionEvent>.Size => 40;
-  static string? ISchemaClass<CNmRootMotionEvent>.ClassName => null;
 
-  
-  public ref float BlendTimeSeconds { get; }
+    public ref float BlendTimeSeconds { get; }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PFNoiseType_t : uint {
-
+public enum PFNoiseType_t : uint
+{
  PF_NOISE_TYPE_PERLIN = 0,
 
  PF_NOISE_TYPE_SIMPLEX = 1,

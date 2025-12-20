@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeSimdSpringIntegrator_tImpl : SchemaClass, FeSimdSpringIntegrator_t {
+internal partial class FeSimdSpringIntegrator_tImpl : SchemaClass, FeSimdSpringIntegrator_t
+{
+    public FeSimdSpringIntegrator_tImpl(nint handle) : base(handle) { }
 
-  public FeSimdSpringIntegrator_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodeOffset;
 
-  private static nint? _NodeOffset;
-
-  public SchemaUntypedField Node {
-    get {
-      if (_NodeOffset == null) {
-        _NodeOffset = Schema.GetOffset(0xF9413B96CD6694B9);
-      }
-      return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+    public SchemaUntypedField Node {
+        get {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xF9413B96CD6694B9);
+            return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpringRestLengthOffset;
+    private static nint? _SpringRestLengthOffset;
 
-  public ref fltx4 SpringRestLength {
-    get {
-      if (_SpringRestLengthOffset == null) {
-        _SpringRestLengthOffset = Schema.GetOffset(0xF9413B9628C609E8);
-      }
-      return ref _Handle.AsRef<fltx4>(_SpringRestLengthOffset!.Value);
+    public ref fltx4 SpringRestLength {
+        get {
+            _SpringRestLengthOffset = _SpringRestLengthOffset ?? Schema.GetOffset(0xF9413B9628C609E8);
+            return ref _Handle.AsRef<fltx4>(_SpringRestLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpringConstantOffset;
+    private static nint? _SpringConstantOffset;
 
-  public ref fltx4 SpringConstant {
-    get {
-      if (_SpringConstantOffset == null) {
-        _SpringConstantOffset = Schema.GetOffset(0xF9413B969346E79E);
-      }
-      return ref _Handle.AsRef<fltx4>(_SpringConstantOffset!.Value);
+    public ref fltx4 SpringConstant {
+        get {
+            _SpringConstantOffset = _SpringConstantOffset ?? Schema.GetOffset(0xF9413B969346E79E);
+            return ref _Handle.AsRef<fltx4>(_SpringConstantOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpringDampingOffset;
+    private static nint? _SpringDampingOffset;
 
-  public ref fltx4 SpringDamping {
-    get {
-      if (_SpringDampingOffset == null) {
-        _SpringDampingOffset = Schema.GetOffset(0xF9413B9620E775D0);
-      }
-      return ref _Handle.AsRef<fltx4>(_SpringDampingOffset!.Value);
+    public ref fltx4 SpringDamping {
+        get {
+            _SpringDampingOffset = _SpringDampingOffset ?? Schema.GetOffset(0xF9413B9620E775D0);
+            return ref _Handle.AsRef<fltx4>(_SpringDampingOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodeWeight0Offset;
+    private static nint? _NodeWeight0Offset;
 
-  public ref fltx4 NodeWeight0 {
-    get {
-      if (_NodeWeight0Offset == null) {
-        _NodeWeight0Offset = Schema.GetOffset(0xF9413B966E62FEA1);
-      }
-      return ref _Handle.AsRef<fltx4>(_NodeWeight0Offset!.Value);
+    public ref fltx4 NodeWeight0 {
+        get {
+            _NodeWeight0Offset = _NodeWeight0Offset ?? Schema.GetOffset(0xF9413B966E62FEA1);
+            return ref _Handle.AsRef<fltx4>(_NodeWeight0Offset!.Value);
+        }
     }
-  }
 
 
 }

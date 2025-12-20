@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderGpuImplicit : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderGpuImplicit> {
+public partial interface C_OP_RenderGpuImplicit : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderGpuImplicit>
+{
+    static C_OP_RenderGpuImplicit ISchemaClass<C_OP_RenderGpuImplicit>.From(nint handle) => new C_OP_RenderGpuImplicitImpl(handle);
+    static int ISchemaClass<C_OP_RenderGpuImplicit>.Size => 1680;
+    static string? ISchemaClass<C_OP_RenderGpuImplicit>.ClassName => null;
 
-  static C_OP_RenderGpuImplicit ISchemaClass<C_OP_RenderGpuImplicit>.From(nint handle) => new C_OP_RenderGpuImplicitImpl(handle);
-  static int ISchemaClass<C_OP_RenderGpuImplicit>.Size => 1680;
-  static string? ISchemaClass<C_OP_RenderGpuImplicit>.ClassName => null;
 
-  
-  public ref bool UsePerParticleRadius { get; }
-  
-  public ref uint VertexCountKb { get; }
-  
-  public ref uint IndexCountKb { get; }
-  
-  public CParticleCollectionRendererFloatInput GridSize { get; }
-  
-  public CParticleCollectionRendererFloatInput RadiusScale { get; }
-  
-  public CParticleCollectionRendererFloatInput IsosurfaceThreshold { get; }
-  
-  public ref int ScaleCP { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
+    public ref bool UsePerParticleRadius { get; }
+
+    public ref uint VertexCountKb { get; }
+
+    public ref uint IndexCountKb { get; }
+
+    public CParticleCollectionRendererFloatInput GridSize { get; }
+
+    public CParticleCollectionRendererFloatInput RadiusScale { get; }
+
+    public CParticleCollectionRendererFloatInput IsosurfaceThreshold { get; }
+
+    public ref int ScaleCP { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
 
 
 }

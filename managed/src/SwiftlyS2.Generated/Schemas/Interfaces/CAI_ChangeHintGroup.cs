@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAI_ChangeHintGroup : CBaseEntity, ISchemaClass<CAI_ChangeHintGroup> {
+public partial interface CAI_ChangeHintGroup : CBaseEntity, ISchemaClass<CAI_ChangeHintGroup>
+{
+    static CAI_ChangeHintGroup ISchemaClass<CAI_ChangeHintGroup>.From(nint handle) => new CAI_ChangeHintGroupImpl(handle);
+    static int ISchemaClass<CAI_ChangeHintGroup>.Size => 1296;
+    static string? ISchemaClass<CAI_ChangeHintGroup>.ClassName => "ai_changehintgroup";
 
-  static CAI_ChangeHintGroup ISchemaClass<CAI_ChangeHintGroup>.From(nint handle) => new CAI_ChangeHintGroupImpl(handle);
-  static int ISchemaClass<CAI_ChangeHintGroup>.Size => 1296;
-  static string? ISchemaClass<CAI_ChangeHintGroup>.ClassName => "ai_changehintgroup";
 
-  
-  public ref int SearchType { get; }
-  
-  public string StrSearchName { get; set; }
-  
-  public string StrNewHintGroup { get; set; }
-  
-  public ref float Radius { get; }
+    public ref int SearchType { get; }
+
+    public string StrSearchName { get; set; }
+
+    public string StrNewHintGroup { get; set; }
+
+    public ref float Radius { get; }
 
 
 }

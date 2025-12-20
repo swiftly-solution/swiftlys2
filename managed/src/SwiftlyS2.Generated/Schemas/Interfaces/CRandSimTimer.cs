@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRandSimTimer : CSimpleSimTimer, ISchemaClass<CRandSimTimer> {
+public partial interface CRandSimTimer : CSimpleSimTimer, ISchemaClass<CRandSimTimer>
+{
+    static CRandSimTimer ISchemaClass<CRandSimTimer>.From(nint handle) => new CRandSimTimerImpl(handle);
+    static int ISchemaClass<CRandSimTimer>.Size => 16;
+    static string? ISchemaClass<CRandSimTimer>.ClassName => null;
 
-  static CRandSimTimer ISchemaClass<CRandSimTimer>.From(nint handle) => new CRandSimTimerImpl(handle);
-  static int ISchemaClass<CRandSimTimer>.Size => 16;
-  static string? ISchemaClass<CRandSimTimer>.ClassName => null;
 
-  
-  public ref float MinInterval { get; }
-  
-  public ref float MaxInterval { get; }
+    public ref float MinInterval { get; }
+
+    public ref float MaxInterval { get; }
 
 
 }

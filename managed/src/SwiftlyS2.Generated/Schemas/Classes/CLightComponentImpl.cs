@@ -6,927 +6,647 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLightComponentImpl : CEntityComponentImpl, CLightComponent {
-
-  public CLightComponentImpl(nint handle) : base(handle) {
-  }
-
-  private static nint? ___m_pChainEntityOffset;
-
-  public ref CNetworkVarChainer __m_pChainEntity {
-    get {
-      if (___m_pChainEntityOffset == null) {
-        ___m_pChainEntityOffset = Schema.GetOffset(0x15B1C6A5F63F0E7D);
-      }
-      return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
-    }
-  }
-  private static nint? _ColorOffset;
-
-  public ref Color Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x15B1C6A5D7D017D8);
-      }
-      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
-    }
-  }
-  private static nint? _SecondaryColorOffset;
-
-  public ref Color SecondaryColor {
-    get {
-      if (_SecondaryColorOffset == null) {
-        _SecondaryColorOffset = Schema.GetOffset(0x15B1C6A549D78994);
-      }
-      return ref _Handle.AsRef<Color>(_SecondaryColorOffset!.Value);
-    }
-  }
-  private static nint? _BrightnessOffset;
-
-  public ref float Brightness {
-    get {
-      if (_BrightnessOffset == null) {
-        _BrightnessOffset = Schema.GetOffset(0x15B1C6A59132D314);
-      }
-      return ref _Handle.AsRef<float>(_BrightnessOffset!.Value);
-    }
-  }
-  private static nint? _BrightnessScaleOffset;
-
-  public ref float BrightnessScale {
-    get {
-      if (_BrightnessScaleOffset == null) {
-        _BrightnessScaleOffset = Schema.GetOffset(0x15B1C6A55EFC3AAE);
-      }
-      return ref _Handle.AsRef<float>(_BrightnessScaleOffset!.Value);
-    }
-  }
-  private static nint? _BrightnessMultOffset;
-
-  public ref float BrightnessMult {
-    get {
-      if (_BrightnessMultOffset == null) {
-        _BrightnessMultOffset = Schema.GetOffset(0x15B1C6A5EAC09432);
-      }
-      return ref _Handle.AsRef<float>(_BrightnessMultOffset!.Value);
-    }
-  }
-  private static nint? _RangeOffset;
-
-  public ref float Range {
-    get {
-      if (_RangeOffset == null) {
-        _RangeOffset = Schema.GetOffset(0x15B1C6A53FC92844);
-      }
-      return ref _Handle.AsRef<float>(_RangeOffset!.Value);
-    }
-  }
-  private static nint? _FalloffOffset;
-
-  public ref float Falloff {
-    get {
-      if (_FalloffOffset == null) {
-        _FalloffOffset = Schema.GetOffset(0x15B1C6A5FA143DCB);
-      }
-      return ref _Handle.AsRef<float>(_FalloffOffset!.Value);
-    }
-  }
-  private static nint? _Attenuation0Offset;
-
-  public ref float Attenuation0 {
-    get {
-      if (_Attenuation0Offset == null) {
-        _Attenuation0Offset = Schema.GetOffset(0x15B1C6A5F1CACD03);
-      }
-      return ref _Handle.AsRef<float>(_Attenuation0Offset!.Value);
-    }
-  }
-  private static nint? _Attenuation1Offset;
-
-  public ref float Attenuation1 {
-    get {
-      if (_Attenuation1Offset == null) {
-        _Attenuation1Offset = Schema.GetOffset(0x15B1C6A5F0CACB70);
-      }
-      return ref _Handle.AsRef<float>(_Attenuation1Offset!.Value);
-    }
-  }
-  private static nint? _Attenuation2Offset;
-
-  public ref float Attenuation2 {
-    get {
-      if (_Attenuation2Offset == null) {
-        _Attenuation2Offset = Schema.GetOffset(0x15B1C6A5F3CAD029);
-      }
-      return ref _Handle.AsRef<float>(_Attenuation2Offset!.Value);
-    }
-  }
-  private static nint? _ThetaOffset;
-
-  public ref float Theta {
-    get {
-      if (_ThetaOffset == null) {
-        _ThetaOffset = Schema.GetOffset(0x15B1C6A5F8B2ACC1);
-      }
-      return ref _Handle.AsRef<float>(_ThetaOffset!.Value);
-    }
-  }
-  private static nint? _PhiOffset;
-
-  public ref float Phi {
-    get {
-      if (_PhiOffset == null) {
-        _PhiOffset = Schema.GetOffset(0x15B1C6A5957450E2);
-      }
-      return ref _Handle.AsRef<float>(_PhiOffset!.Value);
-    }
-  }
-  private static nint? _LightCookieOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie {
-    get {
-      if (_LightCookieOffset == null) {
-        _LightCookieOffset = Schema.GetOffset(0x15B1C6A50609D103);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_LightCookieOffset!.Value);
-    }
-  }
-  private static nint? _CascadesOffset;
-
-  public ref int Cascades {
-    get {
-      if (_CascadesOffset == null) {
-        _CascadesOffset = Schema.GetOffset(0x15B1C6A567FE3EFE);
-      }
-      return ref _Handle.AsRef<int>(_CascadesOffset!.Value);
-    }
-  }
-  private static nint? _CastShadowsOffset;
-
-  public ref int CastShadows {
-    get {
-      if (_CastShadowsOffset == null) {
-        _CastShadowsOffset = Schema.GetOffset(0x15B1C6A551564EBB);
-      }
-      return ref _Handle.AsRef<int>(_CastShadowsOffset!.Value);
-    }
-  }
-  private static nint? _ShadowWidthOffset;
-
-  public ref int ShadowWidth {
-    get {
-      if (_ShadowWidthOffset == null) {
-        _ShadowWidthOffset = Schema.GetOffset(0x15B1C6A5C671948F);
-      }
-      return ref _Handle.AsRef<int>(_ShadowWidthOffset!.Value);
-    }
-  }
-  private static nint? _ShadowHeightOffset;
-
-  public ref int ShadowHeight {
-    get {
-      if (_ShadowHeightOffset == null) {
-        _ShadowHeightOffset = Schema.GetOffset(0x15B1C6A5EC2D0CB2);
-      }
-      return ref _Handle.AsRef<int>(_ShadowHeightOffset!.Value);
-    }
-  }
-  private static nint? _RenderDiffuseOffset;
-
-  public ref bool RenderDiffuse {
-    get {
-      if (_RenderDiffuseOffset == null) {
-        _RenderDiffuseOffset = Schema.GetOffset(0x15B1C6A5DEDF2F65);
-      }
-      return ref _Handle.AsRef<bool>(_RenderDiffuseOffset!.Value);
-    }
-  }
-  private static nint? _RenderSpecularOffset;
-
-  public ref int RenderSpecular {
-    get {
-      if (_RenderSpecularOffset == null) {
-        _RenderSpecularOffset = Schema.GetOffset(0x15B1C6A53728DE0C);
-      }
-      return ref _Handle.AsRef<int>(_RenderSpecularOffset!.Value);
-    }
-  }
-  private static nint? _RenderTransmissiveOffset;
-
-  public ref bool RenderTransmissive {
-    get {
-      if (_RenderTransmissiveOffset == null) {
-        _RenderTransmissiveOffset = Schema.GetOffset(0x15B1C6A5186B09E9);
-      }
-      return ref _Handle.AsRef<bool>(_RenderTransmissiveOffset!.Value);
-    }
-  }
-  private static nint? _OrthoLightWidthOffset;
-
-  public ref float OrthoLightWidth {
-    get {
-      if (_OrthoLightWidthOffset == null) {
-        _OrthoLightWidthOffset = Schema.GetOffset(0x15B1C6A53E465C73);
-      }
-      return ref _Handle.AsRef<float>(_OrthoLightWidthOffset!.Value);
-    }
-  }
-  private static nint? _OrthoLightHeightOffset;
-
-  public ref float OrthoLightHeight {
-    get {
-      if (_OrthoLightHeightOffset == null) {
-        _OrthoLightHeightOffset = Schema.GetOffset(0x15B1C6A525F3CD2E);
-      }
-      return ref _Handle.AsRef<float>(_OrthoLightHeightOffset!.Value);
-    }
-  }
-  private static nint? _StyleOffset;
-
-  public ref int Style {
-    get {
-      if (_StyleOffset == null) {
-        _StyleOffset = Schema.GetOffset(0x15B1C6A5F6004492);
-      }
-      return ref _Handle.AsRef<int>(_StyleOffset!.Value);
-    }
-  }
-  private static nint? _PatternOffset;
-
-  public string Pattern {
-    get {
-      if (_PatternOffset == null) {
-        _PatternOffset = Schema.GetOffset(0x15B1C6A52E3F72A9);
-      }
-      var ptr = _Handle.Read<nint>(_PatternOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PatternOffset == null) {
-        _PatternOffset = Schema.GetOffset(0x15B1C6A52E3F72A9);
-      }
-      Schema.SetString(_Handle, _PatternOffset!.Value, value);
-    }
-  } 
-  private static nint? _CascadeRenderStaticObjectsOffset;
-
-  public ref int CascadeRenderStaticObjects {
-    get {
-      if (_CascadeRenderStaticObjectsOffset == null) {
-        _CascadeRenderStaticObjectsOffset = Schema.GetOffset(0x15B1C6A51197D9D5);
-      }
-      return ref _Handle.AsRef<int>(_CascadeRenderStaticObjectsOffset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeCrossFadeOffset;
-
-  public ref float ShadowCascadeCrossFade {
-    get {
-      if (_ShadowCascadeCrossFadeOffset == null) {
-        _ShadowCascadeCrossFadeOffset = Schema.GetOffset(0x15B1C6A5AB97244B);
-      }
-      return ref _Handle.AsRef<float>(_ShadowCascadeCrossFadeOffset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeDistanceFadeOffset;
-
-  public ref float ShadowCascadeDistanceFade {
-    get {
-      if (_ShadowCascadeDistanceFadeOffset == null) {
-        _ShadowCascadeDistanceFadeOffset = Schema.GetOffset(0x15B1C6A5FD0BFBEE);
-      }
-      return ref _Handle.AsRef<float>(_ShadowCascadeDistanceFadeOffset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeDistance0Offset;
-
-  public ref float ShadowCascadeDistance0 {
-    get {
-      if (_ShadowCascadeDistance0Offset == null) {
-        _ShadowCascadeDistance0Offset = Schema.GetOffset(0x15B1C6A59431AE78);
-      }
-      return ref _Handle.AsRef<float>(_ShadowCascadeDistance0Offset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeDistance1Offset;
-
-  public ref float ShadowCascadeDistance1 {
-    get {
-      if (_ShadowCascadeDistance1Offset == null) {
-        _ShadowCascadeDistance1Offset = Schema.GetOffset(0x15B1C6A59531B00B);
-      }
-      return ref _Handle.AsRef<float>(_ShadowCascadeDistance1Offset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeDistance2Offset;
-
-  public ref float ShadowCascadeDistance2 {
-    get {
-      if (_ShadowCascadeDistance2Offset == null) {
-        _ShadowCascadeDistance2Offset = Schema.GetOffset(0x15B1C6A59631B19E);
-      }
-      return ref _Handle.AsRef<float>(_ShadowCascadeDistance2Offset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeDistance3Offset;
-
-  public ref float ShadowCascadeDistance3 {
-    get {
-      if (_ShadowCascadeDistance3Offset == null) {
-        _ShadowCascadeDistance3Offset = Schema.GetOffset(0x15B1C6A59731B331);
-      }
-      return ref _Handle.AsRef<float>(_ShadowCascadeDistance3Offset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeResolution0Offset;
-
-  public ref int ShadowCascadeResolution0 {
-    get {
-      if (_ShadowCascadeResolution0Offset == null) {
-        _ShadowCascadeResolution0Offset = Schema.GetOffset(0x15B1C6A58B5CD1AD);
-      }
-      return ref _Handle.AsRef<int>(_ShadowCascadeResolution0Offset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeResolution1Offset;
-
-  public ref int ShadowCascadeResolution1 {
-    get {
-      if (_ShadowCascadeResolution1Offset == null) {
-        _ShadowCascadeResolution1Offset = Schema.GetOffset(0x15B1C6A58A5CD01A);
-      }
-      return ref _Handle.AsRef<int>(_ShadowCascadeResolution1Offset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeResolution2Offset;
-
-  public ref int ShadowCascadeResolution2 {
-    get {
-      if (_ShadowCascadeResolution2Offset == null) {
-        _ShadowCascadeResolution2Offset = Schema.GetOffset(0x15B1C6A5895CCE87);
-      }
-      return ref _Handle.AsRef<int>(_ShadowCascadeResolution2Offset!.Value);
-    }
-  }
-  private static nint? _ShadowCascadeResolution3Offset;
-
-  public ref int ShadowCascadeResolution3 {
-    get {
-      if (_ShadowCascadeResolution3Offset == null) {
-        _ShadowCascadeResolution3Offset = Schema.GetOffset(0x15B1C6A5885CCCF4);
-      }
-      return ref _Handle.AsRef<int>(_ShadowCascadeResolution3Offset!.Value);
-    }
-  }
-  private static nint? _UsesBakedShadowingOffset;
-
-  public ref bool UsesBakedShadowing {
-    get {
-      if (_UsesBakedShadowingOffset == null) {
-        _UsesBakedShadowingOffset = Schema.GetOffset(0x15B1C6A523C6D880);
-      }
-      return ref _Handle.AsRef<bool>(_UsesBakedShadowingOffset!.Value);
-    }
-  }
-  private static nint? _ShadowPriorityOffset;
-
-  public ref int ShadowPriority {
-    get {
-      if (_ShadowPriorityOffset == null) {
-        _ShadowPriorityOffset = Schema.GetOffset(0x15B1C6A515B296B9);
-      }
-      return ref _Handle.AsRef<int>(_ShadowPriorityOffset!.Value);
-    }
-  }
-  private static nint? _BakedShadowIndexOffset;
-
-  public ref int BakedShadowIndex {
-    get {
-      if (_BakedShadowIndexOffset == null) {
-        _BakedShadowIndexOffset = Schema.GetOffset(0x15B1C6A5D4F129E0);
-      }
-      return ref _Handle.AsRef<int>(_BakedShadowIndexOffset!.Value);
-    }
-  }
-  private static nint? _LightPathUniqueIdOffset;
-
-  public ref int LightPathUniqueId {
-    get {
-      if (_LightPathUniqueIdOffset == null) {
-        _LightPathUniqueIdOffset = Schema.GetOffset(0x15B1C6A58626C8FE);
-      }
-      return ref _Handle.AsRef<int>(_LightPathUniqueIdOffset!.Value);
-    }
-  }
-  private static nint? _LightMapUniqueIdOffset;
-
-  public ref int LightMapUniqueId {
-    get {
-      if (_LightMapUniqueIdOffset == null) {
-        _LightMapUniqueIdOffset = Schema.GetOffset(0x15B1C6A58E111BB5);
-      }
-      return ref _Handle.AsRef<int>(_LightMapUniqueIdOffset!.Value);
-    }
-  }
-  private static nint? _RenderToCubemapsOffset;
-
-  public ref bool RenderToCubemaps {
-    get {
-      if (_RenderToCubemapsOffset == null) {
-        _RenderToCubemapsOffset = Schema.GetOffset(0x15B1C6A58A23364A);
-      }
-      return ref _Handle.AsRef<bool>(_RenderToCubemapsOffset!.Value);
-    }
-  }
-  private static nint? _AllowSSTGenerationOffset;
-
-  public ref bool AllowSSTGeneration {
-    get {
-      if (_AllowSSTGenerationOffset == null) {
-        _AllowSSTGenerationOffset = Schema.GetOffset(0x15B1C6A54E93C4FA);
-      }
-      return ref _Handle.AsRef<bool>(_AllowSSTGenerationOffset!.Value);
-    }
-  }
-  private static nint? _DirectLightOffset;
-
-  public ref int DirectLight {
-    get {
-      if (_DirectLightOffset == null) {
-        _DirectLightOffset = Schema.GetOffset(0x15B1C6A5DEC0AAB4);
-      }
-      return ref _Handle.AsRef<int>(_DirectLightOffset!.Value);
-    }
-  }
-  private static nint? _IndirectLightOffset;
-
-  public ref int IndirectLight {
-    get {
-      if (_IndirectLightOffset == null) {
-        _IndirectLightOffset = Schema.GetOffset(0x15B1C6A5E5EAAFBD);
-      }
-      return ref _Handle.AsRef<int>(_IndirectLightOffset!.Value);
-    }
-  }
-  private static nint? _FadeMinDistOffset;
-
-  public ref float FadeMinDist {
-    get {
-      if (_FadeMinDistOffset == null) {
-        _FadeMinDistOffset = Schema.GetOffset(0x15B1C6A545D2BAAB);
-      }
-      return ref _Handle.AsRef<float>(_FadeMinDistOffset!.Value);
-    }
-  }
-  private static nint? _FadeMaxDistOffset;
-
-  public ref float FadeMaxDist {
-    get {
-      if (_FadeMaxDistOffset == null) {
-        _FadeMaxDistOffset = Schema.GetOffset(0x15B1C6A5ACCE9CB9);
-      }
-      return ref _Handle.AsRef<float>(_FadeMaxDistOffset!.Value);
-    }
-  }
-  private static nint? _ShadowFadeMinDistOffset;
-
-  public ref float ShadowFadeMinDist {
-    get {
-      if (_ShadowFadeMinDistOffset == null) {
-        _ShadowFadeMinDistOffset = Schema.GetOffset(0x15B1C6A589AB0803);
-      }
-      return ref _Handle.AsRef<float>(_ShadowFadeMinDistOffset!.Value);
-    }
-  }
-  private static nint? _ShadowFadeMaxDistOffset;
-
-  public ref float ShadowFadeMaxDist {
-    get {
-      if (_ShadowFadeMaxDistOffset == null) {
-        _ShadowFadeMaxDistOffset = Schema.GetOffset(0x15B1C6A534C66901);
-      }
-      return ref _Handle.AsRef<float>(_ShadowFadeMaxDistOffset!.Value);
-    }
-  }
-  private static nint? _EnabledOffset;
-
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0x15B1C6A56154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
-    }
-  }
-  private static nint? _FlickerOffset;
-
-  public ref bool Flicker {
-    get {
-      if (_FlickerOffset == null) {
-        _FlickerOffset = Schema.GetOffset(0x15B1C6A5D679F96F);
-      }
-      return ref _Handle.AsRef<bool>(_FlickerOffset!.Value);
-    }
-  }
-  private static nint? _PrecomputedFieldsValidOffset;
-
-  public ref bool PrecomputedFieldsValid {
-    get {
-      if (_PrecomputedFieldsValidOffset == null) {
-        _PrecomputedFieldsValidOffset = Schema.GetOffset(0x15B1C6A591C883D6);
-      }
-      return ref _Handle.AsRef<bool>(_PrecomputedFieldsValidOffset!.Value);
-    }
-  }
-  private static nint? _PrecomputedBoundsMinsOffset;
-
-  public ref Vector PrecomputedBoundsMins {
-    get {
-      if (_PrecomputedBoundsMinsOffset == null) {
-        _PrecomputedBoundsMinsOffset = Schema.GetOffset(0x15B1C6A56F3FE3C1);
-      }
-      return ref _Handle.AsRef<Vector>(_PrecomputedBoundsMinsOffset!.Value);
-    }
-  }
-  private static nint? _PrecomputedBoundsMaxsOffset;
-
-  public ref Vector PrecomputedBoundsMaxs {
-    get {
-      if (_PrecomputedBoundsMaxsOffset == null) {
-        _PrecomputedBoundsMaxsOffset = Schema.GetOffset(0x15B1C6A5C5E5BC03);
-      }
-      return ref _Handle.AsRef<Vector>(_PrecomputedBoundsMaxsOffset!.Value);
-    }
-  }
-  private static nint? _PrecomputedOBBOriginOffset;
-
-  public ref Vector PrecomputedOBBOrigin {
-    get {
-      if (_PrecomputedOBBOriginOffset == null) {
-        _PrecomputedOBBOriginOffset = Schema.GetOffset(0x15B1C6A5D6D011C8);
-      }
-      return ref _Handle.AsRef<Vector>(_PrecomputedOBBOriginOffset!.Value);
-    }
-  }
-  private static nint? _PrecomputedOBBAnglesOffset;
-
-  public ref QAngle PrecomputedOBBAngles {
-    get {
-      if (_PrecomputedOBBAnglesOffset == null) {
-        _PrecomputedOBBAnglesOffset = Schema.GetOffset(0x15B1C6A589054822);
-      }
-      return ref _Handle.AsRef<QAngle>(_PrecomputedOBBAnglesOffset!.Value);
-    }
-  }
-  private static nint? _PrecomputedOBBExtentOffset;
-
-  public ref Vector PrecomputedOBBExtent {
-    get {
-      if (_PrecomputedOBBExtentOffset == null) {
-        _PrecomputedOBBExtentOffset = Schema.GetOffset(0x15B1C6A585AE2732);
-      }
-      return ref _Handle.AsRef<Vector>(_PrecomputedOBBExtentOffset!.Value);
-    }
-  }
-  private static nint? _PrecomputedMaxRangeOffset;
-
-  public ref float PrecomputedMaxRange {
-    get {
-      if (_PrecomputedMaxRangeOffset == null) {
-        _PrecomputedMaxRangeOffset = Schema.GetOffset(0x15B1C6A5ACFF5B3C);
-      }
-      return ref _Handle.AsRef<float>(_PrecomputedMaxRangeOffset!.Value);
-    }
-  }
-  private static nint? _FogLightingModeOffset;
-
-  public ref int FogLightingMode {
-    get {
-      if (_FogLightingModeOffset == null) {
-        _FogLightingModeOffset = Schema.GetOffset(0x15B1C6A568C76B34);
-      }
-      return ref _Handle.AsRef<int>(_FogLightingModeOffset!.Value);
-    }
-  }
-  private static nint? _FogContributionStengthOffset;
-
-  public ref float FogContributionStength {
-    get {
-      if (_FogContributionStengthOffset == null) {
-        _FogContributionStengthOffset = Schema.GetOffset(0x15B1C6A535236D54);
-      }
-      return ref _Handle.AsRef<float>(_FogContributionStengthOffset!.Value);
-    }
-  }
-  private static nint? _NearClipPlaneOffset;
-
-  public ref float NearClipPlane {
-    get {
-      if (_NearClipPlaneOffset == null) {
-        _NearClipPlaneOffset = Schema.GetOffset(0x15B1C6A562E34A17);
-      }
-      return ref _Handle.AsRef<float>(_NearClipPlaneOffset!.Value);
-    }
-  }
-  private static nint? _SkyColorOffset;
-
-  public ref Color SkyColor {
-    get {
-      if (_SkyColorOffset == null) {
-        _SkyColorOffset = Schema.GetOffset(0x15B1C6A51DCFBBF9);
-      }
-      return ref _Handle.AsRef<Color>(_SkyColorOffset!.Value);
-    }
-  }
-  private static nint? _SkyIntensityOffset;
-
-  public ref float SkyIntensity {
-    get {
-      if (_SkyIntensityOffset == null) {
-        _SkyIntensityOffset = Schema.GetOffset(0x15B1C6A5C3AB3B4D);
-      }
-      return ref _Handle.AsRef<float>(_SkyIntensityOffset!.Value);
-    }
-  }
-  private static nint? _SkyAmbientBounceOffset;
-
-  public ref Color SkyAmbientBounce {
-    get {
-      if (_SkyAmbientBounceOffset == null) {
-        _SkyAmbientBounceOffset = Schema.GetOffset(0x15B1C6A57995A96A);
-      }
-      return ref _Handle.AsRef<Color>(_SkyAmbientBounceOffset!.Value);
-    }
-  }
-  private static nint? _UseSecondaryColorOffset;
-
-  public ref bool UseSecondaryColor {
-    get {
-      if (_UseSecondaryColorOffset == null) {
-        _UseSecondaryColorOffset = Schema.GetOffset(0x15B1C6A5447EF561);
-      }
-      return ref _Handle.AsRef<bool>(_UseSecondaryColorOffset!.Value);
-    }
-  }
-  private static nint? _MixedShadowsOffset;
-
-  public ref bool MixedShadows {
-    get {
-      if (_MixedShadowsOffset == null) {
-        _MixedShadowsOffset = Schema.GetOffset(0x15B1C6A5C557957D);
-      }
-      return ref _Handle.AsRef<bool>(_MixedShadowsOffset!.Value);
-    }
-  }
-  private static nint? _LightStyleStartTimeOffset;
-
-  public GameTime_t LightStyleStartTime {
-    get {
-      if (_LightStyleStartTimeOffset == null) {
-        _LightStyleStartTimeOffset = Schema.GetOffset(0x15B1C6A5A3B159A3);
-      }
-      return new GameTime_tImpl(_Handle + _LightStyleStartTimeOffset!.Value);
-    }
-  }
-  private static nint? _CapsuleLengthOffset;
-
-  public ref float CapsuleLength {
-    get {
-      if (_CapsuleLengthOffset == null) {
-        _CapsuleLengthOffset = Schema.GetOffset(0x15B1C6A5F692B376);
-      }
-      return ref _Handle.AsRef<float>(_CapsuleLengthOffset!.Value);
-    }
-  }
-  private static nint? _MinRoughnessOffset;
-
-  public ref float MinRoughness {
-    get {
-      if (_MinRoughnessOffset == null) {
-        _MinRoughnessOffset = Schema.GetOffset(0x15B1C6A5B3A6FDC9);
-      }
-      return ref _Handle.AsRef<float>(_MinRoughnessOffset!.Value);
-    }
-  }
-  private static nint? _PvsModifyEntityOffset;
-
-  public ref bool PvsModifyEntity {
-    get {
-      if (_PvsModifyEntityOffset == null) {
-        _PvsModifyEntityOffset = Schema.GetOffset(0x15B1C6A533895595);
-      }
-      return ref _Handle.AsRef<bool>(_PvsModifyEntityOffset!.Value);
-    }
-  }
-
-  public void ColorUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5D7D017D8);
-  }
-  public void SecondaryColorUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A549D78994);
-  }
-  public void BrightnessUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A59132D314);
-  }
-  public void BrightnessScaleUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A55EFC3AAE);
-  }
-  public void BrightnessMultUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5EAC09432);
-  }
-  public void RangeUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A53FC92844);
-  }
-  public void FalloffUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5FA143DCB);
-  }
-  public void Attenuation0Updated() {
-    Schema.Update(_Handle, 0x15B1C6A5F1CACD03);
-  }
-  public void Attenuation1Updated() {
-    Schema.Update(_Handle, 0x15B1C6A5F0CACB70);
-  }
-  public void Attenuation2Updated() {
-    Schema.Update(_Handle, 0x15B1C6A5F3CAD029);
-  }
-  public void ThetaUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5F8B2ACC1);
-  }
-  public void PhiUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5957450E2);
-  }
-  public void LightCookieUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A50609D103);
-  }
-  public void CascadesUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A567FE3EFE);
-  }
-  public void CastShadowsUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A551564EBB);
-  }
-  public void ShadowWidthUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5C671948F);
-  }
-  public void ShadowHeightUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5EC2D0CB2);
-  }
-  public void RenderDiffuseUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5DEDF2F65);
-  }
-  public void RenderSpecularUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A53728DE0C);
-  }
-  public void RenderTransmissiveUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5186B09E9);
-  }
-  public void OrthoLightWidthUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A53E465C73);
-  }
-  public void OrthoLightHeightUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A525F3CD2E);
-  }
-  public void StyleUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5F6004492);
-  }
-  public void PatternUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A52E3F72A9);
-  }
-  public void CascadeRenderStaticObjectsUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A51197D9D5);
-  }
-  public void ShadowCascadeCrossFadeUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5AB97244B);
-  }
-  public void ShadowCascadeDistanceFadeUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5FD0BFBEE);
-  }
-  public void ShadowCascadeDistance0Updated() {
-    Schema.Update(_Handle, 0x15B1C6A59431AE78);
-  }
-  public void ShadowCascadeDistance1Updated() {
-    Schema.Update(_Handle, 0x15B1C6A59531B00B);
-  }
-  public void ShadowCascadeDistance2Updated() {
-    Schema.Update(_Handle, 0x15B1C6A59631B19E);
-  }
-  public void ShadowCascadeDistance3Updated() {
-    Schema.Update(_Handle, 0x15B1C6A59731B331);
-  }
-  public void ShadowCascadeResolution0Updated() {
-    Schema.Update(_Handle, 0x15B1C6A58B5CD1AD);
-  }
-  public void ShadowCascadeResolution1Updated() {
-    Schema.Update(_Handle, 0x15B1C6A58A5CD01A);
-  }
-  public void ShadowCascadeResolution2Updated() {
-    Schema.Update(_Handle, 0x15B1C6A5895CCE87);
-  }
-  public void ShadowCascadeResolution3Updated() {
-    Schema.Update(_Handle, 0x15B1C6A5885CCCF4);
-  }
-  public void UsesBakedShadowingUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A523C6D880);
-  }
-  public void ShadowPriorityUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A515B296B9);
-  }
-  public void BakedShadowIndexUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5D4F129E0);
-  }
-  public void LightPathUniqueIdUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A58626C8FE);
-  }
-  public void LightMapUniqueIdUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A58E111BB5);
-  }
-  public void RenderToCubemapsUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A58A23364A);
-  }
-  public void AllowSSTGenerationUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A54E93C4FA);
-  }
-  public void DirectLightUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5DEC0AAB4);
-  }
-  public void IndirectLightUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5E5EAAFBD);
-  }
-  public void FadeMinDistUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A545D2BAAB);
-  }
-  public void FadeMaxDistUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5ACCE9CB9);
-  }
-  public void ShadowFadeMinDistUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A589AB0803);
-  }
-  public void ShadowFadeMaxDistUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A534C66901);
-  }
-  public void EnabledUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A56154EB7E);
-  }
-  public void FlickerUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5D679F96F);
-  }
-  public void PrecomputedFieldsValidUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A591C883D6);
-  }
-  public void PrecomputedBoundsMinsUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A56F3FE3C1);
-  }
-  public void PrecomputedBoundsMaxsUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5C5E5BC03);
-  }
-  public void PrecomputedOBBOriginUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5D6D011C8);
-  }
-  public void PrecomputedOBBAnglesUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A589054822);
-  }
-  public void PrecomputedOBBExtentUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A585AE2732);
-  }
-  public void PrecomputedMaxRangeUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5ACFF5B3C);
-  }
-  public void FogLightingModeUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A568C76B34);
-  }
-  public void FogContributionStengthUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A535236D54);
-  }
-  public void NearClipPlaneUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A562E34A17);
-  }
-  public void SkyColorUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A51DCFBBF9);
-  }
-  public void SkyIntensityUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5C3AB3B4D);
-  }
-  public void SkyAmbientBounceUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A57995A96A);
-  }
-  public void UseSecondaryColorUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5447EF561);
-  }
-  public void MixedShadowsUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5C557957D);
-  }
-  public void LightStyleStartTimeUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5A3B159A3);
-  }
-  public void CapsuleLengthUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5F692B376);
-  }
-  public void MinRoughnessUpdated() {
-    Schema.Update(_Handle, 0x15B1C6A5B3A6FDC9);
-  }
+internal partial class CLightComponentImpl : CEntityComponentImpl, CLightComponent
+{
+    public CLightComponentImpl(nint handle) : base(handle) { }
+
+    private static nint? ___m_pChainEntityOffset;
+
+    public ref CNetworkVarChainer __m_pChainEntity {
+        get {
+            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x15B1C6A5F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+        }
+    }
+    private static nint? _ColorOffset;
+
+    public ref Color Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x15B1C6A5D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+        }
+    }
+    private static nint? _SecondaryColorOffset;
+
+    public ref Color SecondaryColor {
+        get {
+            _SecondaryColorOffset = _SecondaryColorOffset ?? Schema.GetOffset(0x15B1C6A549D78994);
+            return ref _Handle.AsRef<Color>(_SecondaryColorOffset!.Value);
+        }
+    }
+    private static nint? _BrightnessOffset;
+
+    public ref float Brightness {
+        get {
+            _BrightnessOffset = _BrightnessOffset ?? Schema.GetOffset(0x15B1C6A59132D314);
+            return ref _Handle.AsRef<float>(_BrightnessOffset!.Value);
+        }
+    }
+    private static nint? _BrightnessScaleOffset;
+
+    public ref float BrightnessScale {
+        get {
+            _BrightnessScaleOffset = _BrightnessScaleOffset ?? Schema.GetOffset(0x15B1C6A55EFC3AAE);
+            return ref _Handle.AsRef<float>(_BrightnessScaleOffset!.Value);
+        }
+    }
+    private static nint? _BrightnessMultOffset;
+
+    public ref float BrightnessMult {
+        get {
+            _BrightnessMultOffset = _BrightnessMultOffset ?? Schema.GetOffset(0x15B1C6A5EAC09432);
+            return ref _Handle.AsRef<float>(_BrightnessMultOffset!.Value);
+        }
+    }
+    private static nint? _RangeOffset;
+
+    public ref float Range {
+        get {
+            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x15B1C6A53FC92844);
+            return ref _Handle.AsRef<float>(_RangeOffset!.Value);
+        }
+    }
+    private static nint? _FalloffOffset;
+
+    public ref float Falloff {
+        get {
+            _FalloffOffset = _FalloffOffset ?? Schema.GetOffset(0x15B1C6A5FA143DCB);
+            return ref _Handle.AsRef<float>(_FalloffOffset!.Value);
+        }
+    }
+    private static nint? _Attenuation0Offset;
+
+    public ref float Attenuation0 {
+        get {
+            _Attenuation0Offset = _Attenuation0Offset ?? Schema.GetOffset(0x15B1C6A5F1CACD03);
+            return ref _Handle.AsRef<float>(_Attenuation0Offset!.Value);
+        }
+    }
+    private static nint? _Attenuation1Offset;
+
+    public ref float Attenuation1 {
+        get {
+            _Attenuation1Offset = _Attenuation1Offset ?? Schema.GetOffset(0x15B1C6A5F0CACB70);
+            return ref _Handle.AsRef<float>(_Attenuation1Offset!.Value);
+        }
+    }
+    private static nint? _Attenuation2Offset;
+
+    public ref float Attenuation2 {
+        get {
+            _Attenuation2Offset = _Attenuation2Offset ?? Schema.GetOffset(0x15B1C6A5F3CAD029);
+            return ref _Handle.AsRef<float>(_Attenuation2Offset!.Value);
+        }
+    }
+    private static nint? _ThetaOffset;
+
+    public ref float Theta {
+        get {
+            _ThetaOffset = _ThetaOffset ?? Schema.GetOffset(0x15B1C6A5F8B2ACC1);
+            return ref _Handle.AsRef<float>(_ThetaOffset!.Value);
+        }
+    }
+    private static nint? _PhiOffset;
+
+    public ref float Phi {
+        get {
+            _PhiOffset = _PhiOffset ?? Schema.GetOffset(0x15B1C6A5957450E2);
+            return ref _Handle.AsRef<float>(_PhiOffset!.Value);
+        }
+    }
+    private static nint? _LightCookieOffset;
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie {
+        get {
+            _LightCookieOffset = _LightCookieOffset ?? Schema.GetOffset(0x15B1C6A50609D103);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_LightCookieOffset!.Value);
+        }
+    }
+    private static nint? _CascadesOffset;
+
+    public ref int Cascades {
+        get {
+            _CascadesOffset = _CascadesOffset ?? Schema.GetOffset(0x15B1C6A567FE3EFE);
+            return ref _Handle.AsRef<int>(_CascadesOffset!.Value);
+        }
+    }
+    private static nint? _CastShadowsOffset;
+
+    public ref int CastShadows {
+        get {
+            _CastShadowsOffset = _CastShadowsOffset ?? Schema.GetOffset(0x15B1C6A551564EBB);
+            return ref _Handle.AsRef<int>(_CastShadowsOffset!.Value);
+        }
+    }
+    private static nint? _ShadowWidthOffset;
+
+    public ref int ShadowWidth {
+        get {
+            _ShadowWidthOffset = _ShadowWidthOffset ?? Schema.GetOffset(0x15B1C6A5C671948F);
+            return ref _Handle.AsRef<int>(_ShadowWidthOffset!.Value);
+        }
+    }
+    private static nint? _ShadowHeightOffset;
+
+    public ref int ShadowHeight {
+        get {
+            _ShadowHeightOffset = _ShadowHeightOffset ?? Schema.GetOffset(0x15B1C6A5EC2D0CB2);
+            return ref _Handle.AsRef<int>(_ShadowHeightOffset!.Value);
+        }
+    }
+    private static nint? _RenderDiffuseOffset;
+
+    public ref bool RenderDiffuse {
+        get {
+            _RenderDiffuseOffset = _RenderDiffuseOffset ?? Schema.GetOffset(0x15B1C6A5DEDF2F65);
+            return ref _Handle.AsRef<bool>(_RenderDiffuseOffset!.Value);
+        }
+    }
+    private static nint? _RenderSpecularOffset;
+
+    public ref int RenderSpecular {
+        get {
+            _RenderSpecularOffset = _RenderSpecularOffset ?? Schema.GetOffset(0x15B1C6A53728DE0C);
+            return ref _Handle.AsRef<int>(_RenderSpecularOffset!.Value);
+        }
+    }
+    private static nint? _RenderTransmissiveOffset;
+
+    public ref bool RenderTransmissive {
+        get {
+            _RenderTransmissiveOffset = _RenderTransmissiveOffset ?? Schema.GetOffset(0x15B1C6A5186B09E9);
+            return ref _Handle.AsRef<bool>(_RenderTransmissiveOffset!.Value);
+        }
+    }
+    private static nint? _OrthoLightWidthOffset;
+
+    public ref float OrthoLightWidth {
+        get {
+            _OrthoLightWidthOffset = _OrthoLightWidthOffset ?? Schema.GetOffset(0x15B1C6A53E465C73);
+            return ref _Handle.AsRef<float>(_OrthoLightWidthOffset!.Value);
+        }
+    }
+    private static nint? _OrthoLightHeightOffset;
+
+    public ref float OrthoLightHeight {
+        get {
+            _OrthoLightHeightOffset = _OrthoLightHeightOffset ?? Schema.GetOffset(0x15B1C6A525F3CD2E);
+            return ref _Handle.AsRef<float>(_OrthoLightHeightOffset!.Value);
+        }
+    }
+    private static nint? _StyleOffset;
+
+    public ref int Style {
+        get {
+            _StyleOffset = _StyleOffset ?? Schema.GetOffset(0x15B1C6A5F6004492);
+            return ref _Handle.AsRef<int>(_StyleOffset!.Value);
+        }
+    }
+    private static nint? _PatternOffset;
+
+    public string Pattern {
+        get {
+            _PatternOffset = _PatternOffset ?? Schema.GetOffset(0x15B1C6A52E3F72A9);
+            return Schema.GetString(_Handle.Read<nint>(_PatternOffset!.Value));
+        }
+        set {
+            _PatternOffset = _PatternOffset ?? Schema.GetOffset(0x15B1C6A52E3F72A9);
+            Schema.SetString(_Handle, _PatternOffset!.Value, value);
+        }
+    } 
+    private static nint? _CascadeRenderStaticObjectsOffset;
+
+    public ref int CascadeRenderStaticObjects {
+        get {
+            _CascadeRenderStaticObjectsOffset = _CascadeRenderStaticObjectsOffset ?? Schema.GetOffset(0x15B1C6A51197D9D5);
+            return ref _Handle.AsRef<int>(_CascadeRenderStaticObjectsOffset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeCrossFadeOffset;
+
+    public ref float ShadowCascadeCrossFade {
+        get {
+            _ShadowCascadeCrossFadeOffset = _ShadowCascadeCrossFadeOffset ?? Schema.GetOffset(0x15B1C6A5AB97244B);
+            return ref _Handle.AsRef<float>(_ShadowCascadeCrossFadeOffset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeDistanceFadeOffset;
+
+    public ref float ShadowCascadeDistanceFade {
+        get {
+            _ShadowCascadeDistanceFadeOffset = _ShadowCascadeDistanceFadeOffset ?? Schema.GetOffset(0x15B1C6A5FD0BFBEE);
+            return ref _Handle.AsRef<float>(_ShadowCascadeDistanceFadeOffset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeDistance0Offset;
+
+    public ref float ShadowCascadeDistance0 {
+        get {
+            _ShadowCascadeDistance0Offset = _ShadowCascadeDistance0Offset ?? Schema.GetOffset(0x15B1C6A59431AE78);
+            return ref _Handle.AsRef<float>(_ShadowCascadeDistance0Offset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeDistance1Offset;
+
+    public ref float ShadowCascadeDistance1 {
+        get {
+            _ShadowCascadeDistance1Offset = _ShadowCascadeDistance1Offset ?? Schema.GetOffset(0x15B1C6A59531B00B);
+            return ref _Handle.AsRef<float>(_ShadowCascadeDistance1Offset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeDistance2Offset;
+
+    public ref float ShadowCascadeDistance2 {
+        get {
+            _ShadowCascadeDistance2Offset = _ShadowCascadeDistance2Offset ?? Schema.GetOffset(0x15B1C6A59631B19E);
+            return ref _Handle.AsRef<float>(_ShadowCascadeDistance2Offset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeDistance3Offset;
+
+    public ref float ShadowCascadeDistance3 {
+        get {
+            _ShadowCascadeDistance3Offset = _ShadowCascadeDistance3Offset ?? Schema.GetOffset(0x15B1C6A59731B331);
+            return ref _Handle.AsRef<float>(_ShadowCascadeDistance3Offset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeResolution0Offset;
+
+    public ref int ShadowCascadeResolution0 {
+        get {
+            _ShadowCascadeResolution0Offset = _ShadowCascadeResolution0Offset ?? Schema.GetOffset(0x15B1C6A58B5CD1AD);
+            return ref _Handle.AsRef<int>(_ShadowCascadeResolution0Offset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeResolution1Offset;
+
+    public ref int ShadowCascadeResolution1 {
+        get {
+            _ShadowCascadeResolution1Offset = _ShadowCascadeResolution1Offset ?? Schema.GetOffset(0x15B1C6A58A5CD01A);
+            return ref _Handle.AsRef<int>(_ShadowCascadeResolution1Offset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeResolution2Offset;
+
+    public ref int ShadowCascadeResolution2 {
+        get {
+            _ShadowCascadeResolution2Offset = _ShadowCascadeResolution2Offset ?? Schema.GetOffset(0x15B1C6A5895CCE87);
+            return ref _Handle.AsRef<int>(_ShadowCascadeResolution2Offset!.Value);
+        }
+    }
+    private static nint? _ShadowCascadeResolution3Offset;
+
+    public ref int ShadowCascadeResolution3 {
+        get {
+            _ShadowCascadeResolution3Offset = _ShadowCascadeResolution3Offset ?? Schema.GetOffset(0x15B1C6A5885CCCF4);
+            return ref _Handle.AsRef<int>(_ShadowCascadeResolution3Offset!.Value);
+        }
+    }
+    private static nint? _UsesBakedShadowingOffset;
+
+    public ref bool UsesBakedShadowing {
+        get {
+            _UsesBakedShadowingOffset = _UsesBakedShadowingOffset ?? Schema.GetOffset(0x15B1C6A523C6D880);
+            return ref _Handle.AsRef<bool>(_UsesBakedShadowingOffset!.Value);
+        }
+    }
+    private static nint? _ShadowPriorityOffset;
+
+    public ref int ShadowPriority {
+        get {
+            _ShadowPriorityOffset = _ShadowPriorityOffset ?? Schema.GetOffset(0x15B1C6A515B296B9);
+            return ref _Handle.AsRef<int>(_ShadowPriorityOffset!.Value);
+        }
+    }
+    private static nint? _BakedShadowIndexOffset;
+
+    public ref int BakedShadowIndex {
+        get {
+            _BakedShadowIndexOffset = _BakedShadowIndexOffset ?? Schema.GetOffset(0x15B1C6A5D4F129E0);
+            return ref _Handle.AsRef<int>(_BakedShadowIndexOffset!.Value);
+        }
+    }
+    private static nint? _LightPathUniqueIdOffset;
+
+    public ref int LightPathUniqueId {
+        get {
+            _LightPathUniqueIdOffset = _LightPathUniqueIdOffset ?? Schema.GetOffset(0x15B1C6A58626C8FE);
+            return ref _Handle.AsRef<int>(_LightPathUniqueIdOffset!.Value);
+        }
+    }
+    private static nint? _LightMapUniqueIdOffset;
+
+    public ref int LightMapUniqueId {
+        get {
+            _LightMapUniqueIdOffset = _LightMapUniqueIdOffset ?? Schema.GetOffset(0x15B1C6A58E111BB5);
+            return ref _Handle.AsRef<int>(_LightMapUniqueIdOffset!.Value);
+        }
+    }
+    private static nint? _RenderToCubemapsOffset;
+
+    public ref bool RenderToCubemaps {
+        get {
+            _RenderToCubemapsOffset = _RenderToCubemapsOffset ?? Schema.GetOffset(0x15B1C6A58A23364A);
+            return ref _Handle.AsRef<bool>(_RenderToCubemapsOffset!.Value);
+        }
+    }
+    private static nint? _AllowSSTGenerationOffset;
+
+    public ref bool AllowSSTGeneration {
+        get {
+            _AllowSSTGenerationOffset = _AllowSSTGenerationOffset ?? Schema.GetOffset(0x15B1C6A54E93C4FA);
+            return ref _Handle.AsRef<bool>(_AllowSSTGenerationOffset!.Value);
+        }
+    }
+    private static nint? _DirectLightOffset;
+
+    public ref int DirectLight {
+        get {
+            _DirectLightOffset = _DirectLightOffset ?? Schema.GetOffset(0x15B1C6A5DEC0AAB4);
+            return ref _Handle.AsRef<int>(_DirectLightOffset!.Value);
+        }
+    }
+    private static nint? _IndirectLightOffset;
+
+    public ref int IndirectLight {
+        get {
+            _IndirectLightOffset = _IndirectLightOffset ?? Schema.GetOffset(0x15B1C6A5E5EAAFBD);
+            return ref _Handle.AsRef<int>(_IndirectLightOffset!.Value);
+        }
+    }
+    private static nint? _FadeMinDistOffset;
+
+    public ref float FadeMinDist {
+        get {
+            _FadeMinDistOffset = _FadeMinDistOffset ?? Schema.GetOffset(0x15B1C6A545D2BAAB);
+            return ref _Handle.AsRef<float>(_FadeMinDistOffset!.Value);
+        }
+    }
+    private static nint? _FadeMaxDistOffset;
+
+    public ref float FadeMaxDist {
+        get {
+            _FadeMaxDistOffset = _FadeMaxDistOffset ?? Schema.GetOffset(0x15B1C6A5ACCE9CB9);
+            return ref _Handle.AsRef<float>(_FadeMaxDistOffset!.Value);
+        }
+    }
+    private static nint? _ShadowFadeMinDistOffset;
+
+    public ref float ShadowFadeMinDist {
+        get {
+            _ShadowFadeMinDistOffset = _ShadowFadeMinDistOffset ?? Schema.GetOffset(0x15B1C6A589AB0803);
+            return ref _Handle.AsRef<float>(_ShadowFadeMinDistOffset!.Value);
+        }
+    }
+    private static nint? _ShadowFadeMaxDistOffset;
+
+    public ref float ShadowFadeMaxDist {
+        get {
+            _ShadowFadeMaxDistOffset = _ShadowFadeMaxDistOffset ?? Schema.GetOffset(0x15B1C6A534C66901);
+            return ref _Handle.AsRef<float>(_ShadowFadeMaxDistOffset!.Value);
+        }
+    }
+    private static nint? _EnabledOffset;
+
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x15B1C6A56154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
+    }
+    private static nint? _FlickerOffset;
+
+    public ref bool Flicker {
+        get {
+            _FlickerOffset = _FlickerOffset ?? Schema.GetOffset(0x15B1C6A5D679F96F);
+            return ref _Handle.AsRef<bool>(_FlickerOffset!.Value);
+        }
+    }
+    private static nint? _PrecomputedFieldsValidOffset;
+
+    public ref bool PrecomputedFieldsValid {
+        get {
+            _PrecomputedFieldsValidOffset = _PrecomputedFieldsValidOffset ?? Schema.GetOffset(0x15B1C6A591C883D6);
+            return ref _Handle.AsRef<bool>(_PrecomputedFieldsValidOffset!.Value);
+        }
+    }
+    private static nint? _PrecomputedBoundsMinsOffset;
+
+    public ref Vector PrecomputedBoundsMins {
+        get {
+            _PrecomputedBoundsMinsOffset = _PrecomputedBoundsMinsOffset ?? Schema.GetOffset(0x15B1C6A56F3FE3C1);
+            return ref _Handle.AsRef<Vector>(_PrecomputedBoundsMinsOffset!.Value);
+        }
+    }
+    private static nint? _PrecomputedBoundsMaxsOffset;
+
+    public ref Vector PrecomputedBoundsMaxs {
+        get {
+            _PrecomputedBoundsMaxsOffset = _PrecomputedBoundsMaxsOffset ?? Schema.GetOffset(0x15B1C6A5C5E5BC03);
+            return ref _Handle.AsRef<Vector>(_PrecomputedBoundsMaxsOffset!.Value);
+        }
+    }
+    private static nint? _PrecomputedOBBOriginOffset;
+
+    public ref Vector PrecomputedOBBOrigin {
+        get {
+            _PrecomputedOBBOriginOffset = _PrecomputedOBBOriginOffset ?? Schema.GetOffset(0x15B1C6A5D6D011C8);
+            return ref _Handle.AsRef<Vector>(_PrecomputedOBBOriginOffset!.Value);
+        }
+    }
+    private static nint? _PrecomputedOBBAnglesOffset;
+
+    public ref QAngle PrecomputedOBBAngles {
+        get {
+            _PrecomputedOBBAnglesOffset = _PrecomputedOBBAnglesOffset ?? Schema.GetOffset(0x15B1C6A589054822);
+            return ref _Handle.AsRef<QAngle>(_PrecomputedOBBAnglesOffset!.Value);
+        }
+    }
+    private static nint? _PrecomputedOBBExtentOffset;
+
+    public ref Vector PrecomputedOBBExtent {
+        get {
+            _PrecomputedOBBExtentOffset = _PrecomputedOBBExtentOffset ?? Schema.GetOffset(0x15B1C6A585AE2732);
+            return ref _Handle.AsRef<Vector>(_PrecomputedOBBExtentOffset!.Value);
+        }
+    }
+    private static nint? _PrecomputedMaxRangeOffset;
+
+    public ref float PrecomputedMaxRange {
+        get {
+            _PrecomputedMaxRangeOffset = _PrecomputedMaxRangeOffset ?? Schema.GetOffset(0x15B1C6A5ACFF5B3C);
+            return ref _Handle.AsRef<float>(_PrecomputedMaxRangeOffset!.Value);
+        }
+    }
+    private static nint? _FogLightingModeOffset;
+
+    public ref int FogLightingMode {
+        get {
+            _FogLightingModeOffset = _FogLightingModeOffset ?? Schema.GetOffset(0x15B1C6A568C76B34);
+            return ref _Handle.AsRef<int>(_FogLightingModeOffset!.Value);
+        }
+    }
+    private static nint? _FogContributionStengthOffset;
+
+    public ref float FogContributionStength {
+        get {
+            _FogContributionStengthOffset = _FogContributionStengthOffset ?? Schema.GetOffset(0x15B1C6A535236D54);
+            return ref _Handle.AsRef<float>(_FogContributionStengthOffset!.Value);
+        }
+    }
+    private static nint? _NearClipPlaneOffset;
+
+    public ref float NearClipPlane {
+        get {
+            _NearClipPlaneOffset = _NearClipPlaneOffset ?? Schema.GetOffset(0x15B1C6A562E34A17);
+            return ref _Handle.AsRef<float>(_NearClipPlaneOffset!.Value);
+        }
+    }
+    private static nint? _SkyColorOffset;
+
+    public ref Color SkyColor {
+        get {
+            _SkyColorOffset = _SkyColorOffset ?? Schema.GetOffset(0x15B1C6A51DCFBBF9);
+            return ref _Handle.AsRef<Color>(_SkyColorOffset!.Value);
+        }
+    }
+    private static nint? _SkyIntensityOffset;
+
+    public ref float SkyIntensity {
+        get {
+            _SkyIntensityOffset = _SkyIntensityOffset ?? Schema.GetOffset(0x15B1C6A5C3AB3B4D);
+            return ref _Handle.AsRef<float>(_SkyIntensityOffset!.Value);
+        }
+    }
+    private static nint? _SkyAmbientBounceOffset;
+
+    public ref Color SkyAmbientBounce {
+        get {
+            _SkyAmbientBounceOffset = _SkyAmbientBounceOffset ?? Schema.GetOffset(0x15B1C6A57995A96A);
+            return ref _Handle.AsRef<Color>(_SkyAmbientBounceOffset!.Value);
+        }
+    }
+    private static nint? _UseSecondaryColorOffset;
+
+    public ref bool UseSecondaryColor {
+        get {
+            _UseSecondaryColorOffset = _UseSecondaryColorOffset ?? Schema.GetOffset(0x15B1C6A5447EF561);
+            return ref _Handle.AsRef<bool>(_UseSecondaryColorOffset!.Value);
+        }
+    }
+    private static nint? _MixedShadowsOffset;
+
+    public ref bool MixedShadows {
+        get {
+            _MixedShadowsOffset = _MixedShadowsOffset ?? Schema.GetOffset(0x15B1C6A5C557957D);
+            return ref _Handle.AsRef<bool>(_MixedShadowsOffset!.Value);
+        }
+    }
+    private static nint? _LightStyleStartTimeOffset;
+
+    public GameTime_t LightStyleStartTime {
+        get {
+            _LightStyleStartTimeOffset = _LightStyleStartTimeOffset ?? Schema.GetOffset(0x15B1C6A5A3B159A3);
+            return new GameTime_tImpl(_Handle + _LightStyleStartTimeOffset!.Value);
+        }
+    }
+    private static nint? _CapsuleLengthOffset;
+
+    public ref float CapsuleLength {
+        get {
+            _CapsuleLengthOffset = _CapsuleLengthOffset ?? Schema.GetOffset(0x15B1C6A5F692B376);
+            return ref _Handle.AsRef<float>(_CapsuleLengthOffset!.Value);
+        }
+    }
+    private static nint? _MinRoughnessOffset;
+
+    public ref float MinRoughness {
+        get {
+            _MinRoughnessOffset = _MinRoughnessOffset ?? Schema.GetOffset(0x15B1C6A5B3A6FDC9);
+            return ref _Handle.AsRef<float>(_MinRoughnessOffset!.Value);
+        }
+    }
+    private static nint? _PvsModifyEntityOffset;
+
+    public ref bool PvsModifyEntity {
+        get {
+            _PvsModifyEntityOffset = _PvsModifyEntityOffset ?? Schema.GetOffset(0x15B1C6A533895595);
+            return ref _Handle.AsRef<bool>(_PvsModifyEntityOffset!.Value);
+        }
+    }
+
+    public void ColorUpdated() => Schema.Update(_Handle, 0x15B1C6A5D7D017D8);
+    public void SecondaryColorUpdated() => Schema.Update(_Handle, 0x15B1C6A549D78994);
+    public void BrightnessUpdated() => Schema.Update(_Handle, 0x15B1C6A59132D314);
+    public void BrightnessScaleUpdated() => Schema.Update(_Handle, 0x15B1C6A55EFC3AAE);
+    public void BrightnessMultUpdated() => Schema.Update(_Handle, 0x15B1C6A5EAC09432);
+    public void RangeUpdated() => Schema.Update(_Handle, 0x15B1C6A53FC92844);
+    public void FalloffUpdated() => Schema.Update(_Handle, 0x15B1C6A5FA143DCB);
+    public void Attenuation0Updated() => Schema.Update(_Handle, 0x15B1C6A5F1CACD03);
+    public void Attenuation1Updated() => Schema.Update(_Handle, 0x15B1C6A5F0CACB70);
+    public void Attenuation2Updated() => Schema.Update(_Handle, 0x15B1C6A5F3CAD029);
+    public void ThetaUpdated() => Schema.Update(_Handle, 0x15B1C6A5F8B2ACC1);
+    public void PhiUpdated() => Schema.Update(_Handle, 0x15B1C6A5957450E2);
+    public void LightCookieUpdated() => Schema.Update(_Handle, 0x15B1C6A50609D103);
+    public void CascadesUpdated() => Schema.Update(_Handle, 0x15B1C6A567FE3EFE);
+    public void CastShadowsUpdated() => Schema.Update(_Handle, 0x15B1C6A551564EBB);
+    public void ShadowWidthUpdated() => Schema.Update(_Handle, 0x15B1C6A5C671948F);
+    public void ShadowHeightUpdated() => Schema.Update(_Handle, 0x15B1C6A5EC2D0CB2);
+    public void RenderDiffuseUpdated() => Schema.Update(_Handle, 0x15B1C6A5DEDF2F65);
+    public void RenderSpecularUpdated() => Schema.Update(_Handle, 0x15B1C6A53728DE0C);
+    public void RenderTransmissiveUpdated() => Schema.Update(_Handle, 0x15B1C6A5186B09E9);
+    public void OrthoLightWidthUpdated() => Schema.Update(_Handle, 0x15B1C6A53E465C73);
+    public void OrthoLightHeightUpdated() => Schema.Update(_Handle, 0x15B1C6A525F3CD2E);
+    public void StyleUpdated() => Schema.Update(_Handle, 0x15B1C6A5F6004492);
+    public void PatternUpdated() => Schema.Update(_Handle, 0x15B1C6A52E3F72A9);
+    public void CascadeRenderStaticObjectsUpdated() => Schema.Update(_Handle, 0x15B1C6A51197D9D5);
+    public void ShadowCascadeCrossFadeUpdated() => Schema.Update(_Handle, 0x15B1C6A5AB97244B);
+    public void ShadowCascadeDistanceFadeUpdated() => Schema.Update(_Handle, 0x15B1C6A5FD0BFBEE);
+    public void ShadowCascadeDistance0Updated() => Schema.Update(_Handle, 0x15B1C6A59431AE78);
+    public void ShadowCascadeDistance1Updated() => Schema.Update(_Handle, 0x15B1C6A59531B00B);
+    public void ShadowCascadeDistance2Updated() => Schema.Update(_Handle, 0x15B1C6A59631B19E);
+    public void ShadowCascadeDistance3Updated() => Schema.Update(_Handle, 0x15B1C6A59731B331);
+    public void ShadowCascadeResolution0Updated() => Schema.Update(_Handle, 0x15B1C6A58B5CD1AD);
+    public void ShadowCascadeResolution1Updated() => Schema.Update(_Handle, 0x15B1C6A58A5CD01A);
+    public void ShadowCascadeResolution2Updated() => Schema.Update(_Handle, 0x15B1C6A5895CCE87);
+    public void ShadowCascadeResolution3Updated() => Schema.Update(_Handle, 0x15B1C6A5885CCCF4);
+    public void UsesBakedShadowingUpdated() => Schema.Update(_Handle, 0x15B1C6A523C6D880);
+    public void ShadowPriorityUpdated() => Schema.Update(_Handle, 0x15B1C6A515B296B9);
+    public void BakedShadowIndexUpdated() => Schema.Update(_Handle, 0x15B1C6A5D4F129E0);
+    public void LightPathUniqueIdUpdated() => Schema.Update(_Handle, 0x15B1C6A58626C8FE);
+    public void LightMapUniqueIdUpdated() => Schema.Update(_Handle, 0x15B1C6A58E111BB5);
+    public void RenderToCubemapsUpdated() => Schema.Update(_Handle, 0x15B1C6A58A23364A);
+    public void AllowSSTGenerationUpdated() => Schema.Update(_Handle, 0x15B1C6A54E93C4FA);
+    public void DirectLightUpdated() => Schema.Update(_Handle, 0x15B1C6A5DEC0AAB4);
+    public void IndirectLightUpdated() => Schema.Update(_Handle, 0x15B1C6A5E5EAAFBD);
+    public void FadeMinDistUpdated() => Schema.Update(_Handle, 0x15B1C6A545D2BAAB);
+    public void FadeMaxDistUpdated() => Schema.Update(_Handle, 0x15B1C6A5ACCE9CB9);
+    public void ShadowFadeMinDistUpdated() => Schema.Update(_Handle, 0x15B1C6A589AB0803);
+    public void ShadowFadeMaxDistUpdated() => Schema.Update(_Handle, 0x15B1C6A534C66901);
+    public void EnabledUpdated() => Schema.Update(_Handle, 0x15B1C6A56154EB7E);
+    public void FlickerUpdated() => Schema.Update(_Handle, 0x15B1C6A5D679F96F);
+    public void PrecomputedFieldsValidUpdated() => Schema.Update(_Handle, 0x15B1C6A591C883D6);
+    public void PrecomputedBoundsMinsUpdated() => Schema.Update(_Handle, 0x15B1C6A56F3FE3C1);
+    public void PrecomputedBoundsMaxsUpdated() => Schema.Update(_Handle, 0x15B1C6A5C5E5BC03);
+    public void PrecomputedOBBOriginUpdated() => Schema.Update(_Handle, 0x15B1C6A5D6D011C8);
+    public void PrecomputedOBBAnglesUpdated() => Schema.Update(_Handle, 0x15B1C6A589054822);
+    public void PrecomputedOBBExtentUpdated() => Schema.Update(_Handle, 0x15B1C6A585AE2732);
+    public void PrecomputedMaxRangeUpdated() => Schema.Update(_Handle, 0x15B1C6A5ACFF5B3C);
+    public void FogLightingModeUpdated() => Schema.Update(_Handle, 0x15B1C6A568C76B34);
+    public void FogContributionStengthUpdated() => Schema.Update(_Handle, 0x15B1C6A535236D54);
+    public void NearClipPlaneUpdated() => Schema.Update(_Handle, 0x15B1C6A562E34A17);
+    public void SkyColorUpdated() => Schema.Update(_Handle, 0x15B1C6A51DCFBBF9);
+    public void SkyIntensityUpdated() => Schema.Update(_Handle, 0x15B1C6A5C3AB3B4D);
+    public void SkyAmbientBounceUpdated() => Schema.Update(_Handle, 0x15B1C6A57995A96A);
+    public void UseSecondaryColorUpdated() => Schema.Update(_Handle, 0x15B1C6A5447EF561);
+    public void MixedShadowsUpdated() => Schema.Update(_Handle, 0x15B1C6A5C557957D);
+    public void LightStyleStartTimeUpdated() => Schema.Update(_Handle, 0x15B1C6A5A3B159A3);
+    public void CapsuleLengthUpdated() => Schema.Update(_Handle, 0x15B1C6A5F692B376);
+    public void MinRoughnessUpdated() => Schema.Update(_Handle, 0x15B1C6A5B3A6FDC9);
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTonemapController2 : CBaseEntity, ISchemaClass<CTonemapController2> {
+public partial interface CTonemapController2 : CBaseEntity, ISchemaClass<CTonemapController2>
+{
+    static CTonemapController2 ISchemaClass<CTonemapController2>.From(nint handle) => new CTonemapController2Impl(handle);
+    static int ISchemaClass<CTonemapController2>.Size => 1288;
+    static string? ISchemaClass<CTonemapController2>.ClassName => "env_tonemap_controller2";
 
-  static CTonemapController2 ISchemaClass<CTonemapController2>.From(nint handle) => new CTonemapController2Impl(handle);
-  static int ISchemaClass<CTonemapController2>.Size => 1288;
-  static string? ISchemaClass<CTonemapController2>.ClassName => "env_tonemap_controller2";
 
-  
-  public ref float AutoExposureMin { get; }
-  
-  public ref float AutoExposureMax { get; }
-  
-  public ref float ExposureAdaptationSpeedUp { get; }
-  
-  public ref float ExposureAdaptationSpeedDown { get; }
-  
-  public ref float TonemapEVSmoothingRange { get; }
+    public ref float AutoExposureMin { get; }
 
-  public void AutoExposureMinUpdated();
-  public void AutoExposureMaxUpdated();
-  public void ExposureAdaptationSpeedUpUpdated();
-  public void ExposureAdaptationSpeedDownUpdated();
-  public void TonemapEVSmoothingRangeUpdated();
+    public ref float AutoExposureMax { get; }
+
+    public ref float ExposureAdaptationSpeedUp { get; }
+
+    public ref float ExposureAdaptationSpeedDown { get; }
+
+    public ref float TonemapEVSmoothingRange { get; }
+
+    public void AutoExposureMinUpdated();
+    public void AutoExposureMaxUpdated();
+    public void ExposureAdaptationSpeedUpUpdated();
+    public void ExposureAdaptationSpeedDownUpdated();
+    public void TonemapEVSmoothingRangeUpdated();
 }

@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysicsBodyGameMarkupData : ISchemaClass<CPhysicsBodyGameMarkupData> {
+public partial interface CPhysicsBodyGameMarkupData : ISchemaClass<CPhysicsBodyGameMarkupData>
+{
+    static CPhysicsBodyGameMarkupData ISchemaClass<CPhysicsBodyGameMarkupData>.From(nint handle) => new CPhysicsBodyGameMarkupDataImpl(handle);
+    static int ISchemaClass<CPhysicsBodyGameMarkupData>.Size => 40;
+    static string? ISchemaClass<CPhysicsBodyGameMarkupData>.ClassName => null;
 
-  static CPhysicsBodyGameMarkupData ISchemaClass<CPhysicsBodyGameMarkupData>.From(nint handle) => new CPhysicsBodyGameMarkupDataImpl(handle);
-  static int ISchemaClass<CPhysicsBodyGameMarkupData>.Size => 40;
-  static string? ISchemaClass<CPhysicsBodyGameMarkupData>.ClassName => null;
 
-  
-  // CUtlOrderedMap< CUtlString, CPhysicsBodyGameMarkup >
-  public SchemaUntypedField PhysicsBodyMarkupByBoneName { get; }
+    // CUtlOrderedMap< CUtlString, CPhysicsBodyGameMarkup >
+    public SchemaUntypedField PhysicsBodyMarkupByBoneName { get; }
 
 
 }

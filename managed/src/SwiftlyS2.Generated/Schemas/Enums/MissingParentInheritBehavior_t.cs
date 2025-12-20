@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum MissingParentInheritBehavior_t : uint {
-
+public enum MissingParentInheritBehavior_t : uint
+{
  MISSING_PARENT_DO_NOTHING = uint.MaxValue,
 
  MISSING_PARENT_KILL = 0,

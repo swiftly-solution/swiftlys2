@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointOrient : CBaseEntity, ISchemaClass<CPointOrient> {
+public partial interface CPointOrient : CBaseEntity, ISchemaClass<CPointOrient>
+{
+    static CPointOrient ISchemaClass<CPointOrient>.From(nint handle) => new CPointOrientImpl(handle);
+    static int ISchemaClass<CPointOrient>.Size => 1296;
+    static string? ISchemaClass<CPointOrient>.ClassName => "point_orient";
 
-  static CPointOrient ISchemaClass<CPointOrient>.From(nint handle) => new CPointOrientImpl(handle);
-  static int ISchemaClass<CPointOrient>.Size => 1296;
-  static string? ISchemaClass<CPointOrient>.ClassName => "point_orient";
 
-  
-  public string SpawnTargetName { get; set; }
-  
-  public ref CHandle<CBaseEntity> Target { get; }
-  
-  public ref bool Active { get; }
-  
-  public ref PointOrientGoalDirectionType_t GoalDirection { get; }
-  
-  public ref PointOrientConstraint_t Constraint { get; }
-  
-  public ref float MaxTurnRate { get; }
-  
-  public GameTime_t LastGameTime { get; }
+    public string SpawnTargetName { get; set; }
+
+    public ref CHandle<CBaseEntity> Target { get; }
+
+    public ref bool Active { get; }
+
+    public ref PointOrientGoalDirectionType_t GoalDirection { get; }
+
+    public ref PointOrientConstraint_t Constraint { get; }
+
+    public ref float MaxTurnRate { get; }
+
+    public GameTime_t LastGameTime { get; }
 
 
 }

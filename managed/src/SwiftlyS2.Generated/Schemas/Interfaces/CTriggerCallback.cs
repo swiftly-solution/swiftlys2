@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerCallback : CBaseTrigger, ISchemaClass<CTriggerCallback> {
-
-  static CTriggerCallback ISchemaClass<CTriggerCallback>.From(nint handle) => new CTriggerCallbackImpl(handle);
-  static int ISchemaClass<CTriggerCallback>.Size => 2480;
-  static string? ISchemaClass<CTriggerCallback>.ClassName => "trigger_callback";
+public partial interface CTriggerCallback : CBaseTrigger, ISchemaClass<CTriggerCallback>
+{
+    static CTriggerCallback ISchemaClass<CTriggerCallback>.From(nint handle) => new CTriggerCallbackImpl(handle);
+    static int ISchemaClass<CTriggerCallback>.Size => 2480;
+    static string? ISchemaClass<CTriggerCallback>.ClassName => "trigger_callback";
 
 
 

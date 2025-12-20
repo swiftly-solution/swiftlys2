@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SosEditItemInfo_t : ISchemaClass<SosEditItemInfo_t> {
+public partial interface SosEditItemInfo_t : ISchemaClass<SosEditItemInfo_t>
+{
+    static SosEditItemInfo_t ISchemaClass<SosEditItemInfo_t>.From(nint handle) => new SosEditItemInfo_tImpl(handle);
+    static int ISchemaClass<SosEditItemInfo_t>.Size => 48;
+    static string? ISchemaClass<SosEditItemInfo_t>.ClassName => null;
 
-  static SosEditItemInfo_t ISchemaClass<SosEditItemInfo_t>.From(nint handle) => new SosEditItemInfo_tImpl(handle);
-  static int ISchemaClass<SosEditItemInfo_t>.Size => 48;
-  static string? ISchemaClass<SosEditItemInfo_t>.ClassName => null;
 
-  
-  public ref SosEditItemType_t ItemType { get; }
-  
-  public string ItemName { get; set; }
-  
-  public string ItemTypeName { get; set; }
-  
-  public string ItemKVString { get; set; }
-  
-  public ref Vector2D ItemPos { get; }
+    public ref SosEditItemType_t ItemType { get; }
+
+    public string ItemName { get; set; }
+
+    public string ItemTypeName { get; set; }
+
+    public string ItemKVString { get; set; }
+
+    public ref Vector2D ItemPos { get; }
 
 
 }

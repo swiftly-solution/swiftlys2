@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseTrailRenderer : CBaseRendererSource2, ISchemaClass<CBaseTrailRenderer> {
+public partial interface CBaseTrailRenderer : CBaseRendererSource2, ISchemaClass<CBaseTrailRenderer>
+{
+    static CBaseTrailRenderer ISchemaClass<CBaseTrailRenderer>.From(nint handle) => new CBaseTrailRendererImpl(handle);
+    static int ISchemaClass<CBaseTrailRenderer>.Size => 12512;
+    static string? ISchemaClass<CBaseTrailRenderer>.ClassName => null;
 
-  static CBaseTrailRenderer ISchemaClass<CBaseTrailRenderer>.From(nint handle) => new CBaseTrailRendererImpl(handle);
-  static int ISchemaClass<CBaseTrailRenderer>.Size => 12512;
-  static string? ISchemaClass<CBaseTrailRenderer>.ClassName => null;
 
-  
-  public ref ParticleOrientationChoiceList_t OrientationType { get; }
-  
-  public ref int OrientationControlPoint { get; }
-  
-  public ref float MinSize { get; }
-  
-  public ref float MaxSize { get; }
-  
-  public CParticleCollectionRendererFloatInput StartFadeSize { get; }
-  
-  public CParticleCollectionRendererFloatInput EndFadeSize { get; }
-  
-  public ref bool ClampV { get; }
+    public ref ParticleOrientationChoiceList_t OrientationType { get; }
+
+    public ref int OrientationControlPoint { get; }
+
+    public ref float MinSize { get; }
+
+    public ref float MaxSize { get; }
+
+    public CParticleCollectionRendererFloatInput StartFadeSize { get; }
+
+    public CParticleCollectionRendererFloatInput EndFadeSize { get; }
+
+    public ref bool ClampV { get; }
 
 
 }

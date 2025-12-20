@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDecoyProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CDecoyProjectile> {
+public partial interface CDecoyProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CDecoyProjectile>
+{
+    static CDecoyProjectile ISchemaClass<CDecoyProjectile>.From(nint handle) => new CDecoyProjectileImpl(handle);
+    static int ISchemaClass<CDecoyProjectile>.Size => 3200;
+    static string? ISchemaClass<CDecoyProjectile>.ClassName => "decoy_projectile";
 
-  static CDecoyProjectile ISchemaClass<CDecoyProjectile>.From(nint handle) => new CDecoyProjectileImpl(handle);
-  static int ISchemaClass<CDecoyProjectile>.Size => 3200;
-  static string? ISchemaClass<CDecoyProjectile>.ClassName => "decoy_projectile";
 
-  
-  public ref int DecoyShotTick { get; }
-  
-  public ref int ShotsRemaining { get; }
-  
-  public GameTime_t ExpireTime { get; }
-  
-  public ref ushort DecoyWeaponDefIndex { get; }
+    public ref int DecoyShotTick { get; }
 
-  public void DecoyShotTickUpdated();
+    public ref int ShotsRemaining { get; }
+
+    public GameTime_t ExpireTime { get; }
+
+    public ref ushort DecoyWeaponDefIndex { get; }
+
+    public void DecoyShotTickUpdated();
 }

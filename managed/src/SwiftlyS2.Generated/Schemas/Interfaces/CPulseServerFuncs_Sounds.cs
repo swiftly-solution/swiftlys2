@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseServerFuncs_Sounds : ISchemaClass<CPulseServerFuncs_Sounds> {
-
-  static CPulseServerFuncs_Sounds ISchemaClass<CPulseServerFuncs_Sounds>.From(nint handle) => new CPulseServerFuncs_SoundsImpl(handle);
-  static int ISchemaClass<CPulseServerFuncs_Sounds>.Size => 1;
-  static string? ISchemaClass<CPulseServerFuncs_Sounds>.ClassName => null;
+public partial interface CPulseServerFuncs_Sounds : ISchemaClass<CPulseServerFuncs_Sounds>
+{
+    static CPulseServerFuncs_Sounds ISchemaClass<CPulseServerFuncs_Sounds>.From(nint handle) => new CPulseServerFuncs_SoundsImpl(handle);
+    static int ISchemaClass<CPulseServerFuncs_Sounds>.Size => 1;
+    static string? ISchemaClass<CPulseServerFuncs_Sounds>.ClassName => null;
 
 
 

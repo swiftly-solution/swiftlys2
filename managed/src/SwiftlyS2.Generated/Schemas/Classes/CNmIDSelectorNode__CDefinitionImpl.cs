@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmIDSelectorNode__CDefinitionImpl : CNmIDValueNode__CDefinitionImpl, CNmIDSelectorNode__CDefinition {
+internal partial class CNmIDSelectorNode__CDefinitionImpl : CNmIDValueNode__CDefinitionImpl, CNmIDSelectorNode__CDefinition
+{
+    public CNmIDSelectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmIDSelectorNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ConditionNodeIndicesOffset;
 
-  private static nint? _ConditionNodeIndicesOffset;
-
-  public SchemaUntypedField ConditionNodeIndices {
-    get {
-      if (_ConditionNodeIndicesOffset == null) {
-        _ConditionNodeIndicesOffset = Schema.GetOffset(0x23876114A144D0F);
-      }
-      return new SchemaUntypedField(_Handle + _ConditionNodeIndicesOffset!.Value);
+    public SchemaUntypedField ConditionNodeIndices {
+        get {
+            _ConditionNodeIndicesOffset = _ConditionNodeIndicesOffset ?? Schema.GetOffset(0x23876114A144D0F);
+            return new SchemaUntypedField(_Handle + _ConditionNodeIndicesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValuesOffset;
+    private static nint? _ValuesOffset;
 
-  public SchemaUntypedField Values {
-    get {
-      if (_ValuesOffset == null) {
-        _ValuesOffset = Schema.GetOffset(0x2387611FBEDDADB);
-      }
-      return new SchemaUntypedField(_Handle + _ValuesOffset!.Value);
+    public SchemaUntypedField Values {
+        get {
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0x2387611FBEDDADB);
+            return new SchemaUntypedField(_Handle + _ValuesOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultValueOffset;
+    private static nint? _DefaultValueOffset;
 
-  public ref CGlobalSymbol DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0x2387611BBE0341F);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
+    public ref CGlobalSymbol DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x2387611BBE0341F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerImpactImpl : CTriggerMultipleImpl, CTriggerImpact {
+internal partial class CTriggerImpactImpl : CTriggerMultipleImpl, CTriggerImpact
+{
+    public CTriggerImpactImpl(nint handle) : base(handle) { }
 
-  public CTriggerImpactImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MagnitudeOffset;
 
-  private static nint? _MagnitudeOffset;
-
-  public ref float Magnitude {
-    get {
-      if (_MagnitudeOffset == null) {
-        _MagnitudeOffset = Schema.GetOffset(0x2A6A2B48ED0A1D8B);
-      }
-      return ref _Handle.AsRef<float>(_MagnitudeOffset!.Value);
+    public ref float Magnitude {
+        get {
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x2A6A2B48ED0A1D8B);
+            return ref _Handle.AsRef<float>(_MagnitudeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoiseOffset;
+    private static nint? _NoiseOffset;
 
-  public ref float Noise {
-    get {
-      if (_NoiseOffset == null) {
-        _NoiseOffset = Schema.GetOffset(0x2A6A2B48C0E47FDB);
-      }
-      return ref _Handle.AsRef<float>(_NoiseOffset!.Value);
+    public ref float Noise {
+        get {
+            _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0x2A6A2B48C0E47FDB);
+            return ref _Handle.AsRef<float>(_NoiseOffset!.Value);
+        }
     }
-  }
-  private static nint? _ViewkickOffset;
+    private static nint? _ViewkickOffset;
 
-  public ref float Viewkick {
-    get {
-      if (_ViewkickOffset == null) {
-        _ViewkickOffset = Schema.GetOffset(0x2A6A2B48C8BC3FC4);
-      }
-      return ref _Handle.AsRef<float>(_ViewkickOffset!.Value);
+    public ref float Viewkick {
+        get {
+            _ViewkickOffset = _ViewkickOffset ?? Schema.GetOffset(0x2A6A2B48C8BC3FC4);
+            return ref _Handle.AsRef<float>(_ViewkickOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputForceOffset;
+    private static nint? _OutputForceOffset;
 
-  public SchemaUntypedField OutputForce {
-    get {
-      if (_OutputForceOffset == null) {
-        _OutputForceOffset = Schema.GetOffset(0x2A6A2B488653AFA9);
-      }
-      return new SchemaUntypedField(_Handle + _OutputForceOffset!.Value);
+    public SchemaUntypedField OutputForce {
+        get {
+            _OutputForceOffset = _OutputForceOffset ?? Schema.GetOffset(0x2A6A2B488653AFA9);
+            return new SchemaUntypedField(_Handle + _OutputForceOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ExtraVertexStreamOverride_t : BaseSceneObjectOverride_t, ISchemaClass<ExtraVertexStreamOverride_t> {
+public partial interface ExtraVertexStreamOverride_t : BaseSceneObjectOverride_t, ISchemaClass<ExtraVertexStreamOverride_t>
+{
+    static ExtraVertexStreamOverride_t ISchemaClass<ExtraVertexStreamOverride_t>.From(nint handle) => new ExtraVertexStreamOverride_tImpl(handle);
+    static int ISchemaClass<ExtraVertexStreamOverride_t>.Size => 48;
+    static string? ISchemaClass<ExtraVertexStreamOverride_t>.ClassName => null;
 
-  static ExtraVertexStreamOverride_t ISchemaClass<ExtraVertexStreamOverride_t>.From(nint handle) => new ExtraVertexStreamOverride_tImpl(handle);
-  static int ISchemaClass<ExtraVertexStreamOverride_t>.Size => 48;
-  static string? ISchemaClass<ExtraVertexStreamOverride_t>.ClassName => null;
 
-  
-  public ref uint SubSceneObject { get; }
-  
-  public ref uint DrawCallIndex { get; }
-  
-  public ref MeshDrawPrimitiveFlags_t AdditionalMeshDrawPrimitiveFlags { get; }
-  
-  public CRenderBufferBinding ExtraBufferBinding { get; }
+    public ref uint SubSceneObject { get; }
+
+    public ref uint DrawCallIndex { get; }
+
+    public ref MeshDrawPrimitiveFlags_t AdditionalMeshDrawPrimitiveFlags { get; }
+
+    public CRenderBufferBinding ExtraBufferBinding { get; }
 
 
 }

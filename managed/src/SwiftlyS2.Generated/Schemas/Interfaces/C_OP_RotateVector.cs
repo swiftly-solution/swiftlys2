@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RotateVector : CParticleFunctionOperator, ISchemaClass<C_OP_RotateVector> {
+public partial interface C_OP_RotateVector : CParticleFunctionOperator, ISchemaClass<C_OP_RotateVector>
+{
+    static C_OP_RotateVector ISchemaClass<C_OP_RotateVector>.From(nint handle) => new C_OP_RotateVectorImpl(handle);
+    static int ISchemaClass<C_OP_RotateVector>.Size => 872;
+    static string? ISchemaClass<C_OP_RotateVector>.ClassName => null;
 
-  static C_OP_RotateVector ISchemaClass<C_OP_RotateVector>.From(nint handle) => new C_OP_RotateVectorImpl(handle);
-  static int ISchemaClass<C_OP_RotateVector>.Size => 872;
-  static string? ISchemaClass<C_OP_RotateVector>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref Vector RotAxisMin { get; }
-  
-  public ref Vector RotAxisMax { get; }
-  
-  public ref float RotRateMin { get; }
-  
-  public ref float RotRateMax { get; }
-  
-  public ref bool Normalize { get; }
-  
-  public CPerParticleFloatInput Scale { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref Vector RotAxisMin { get; }
+
+    public ref Vector RotAxisMax { get; }
+
+    public ref float RotRateMin { get; }
+
+    public ref float RotRateMax { get; }
+
+    public ref bool Normalize { get; }
+
+    public CPerParticleFloatInput Scale { get; }
 
 
 }

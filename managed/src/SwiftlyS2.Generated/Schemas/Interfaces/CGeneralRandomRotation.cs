@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGeneralRandomRotation : CParticleFunctionInitializer, ISchemaClass<CGeneralRandomRotation> {
+public partial interface CGeneralRandomRotation : CParticleFunctionInitializer, ISchemaClass<CGeneralRandomRotation>
+{
+    static CGeneralRandomRotation ISchemaClass<CGeneralRandomRotation>.From(nint handle) => new CGeneralRandomRotationImpl(handle);
+    static int ISchemaClass<CGeneralRandomRotation>.Size => 504;
+    static string? ISchemaClass<CGeneralRandomRotation>.ClassName => null;
 
-  static CGeneralRandomRotation ISchemaClass<CGeneralRandomRotation>.From(nint handle) => new CGeneralRandomRotationImpl(handle);
-  static int ISchemaClass<CGeneralRandomRotation>.Size => 504;
-  static string? ISchemaClass<CGeneralRandomRotation>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float Degrees { get; }
-  
-  public ref float DegreesMin { get; }
-  
-  public ref float DegreesMax { get; }
-  
-  public ref float RotationRandExponent { get; }
-  
-  public ref bool RandomlyFlipDirection { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float Degrees { get; }
+
+    public ref float DegreesMin { get; }
+
+    public ref float DegreesMax { get; }
+
+    public ref float RotationRandExponent { get; }
+
+    public ref bool RandomlyFlipDirection { get; }
 
 
 }

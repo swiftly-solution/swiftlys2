@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnHullDesc_t : RnShapeDesc_t, ISchemaClass<RnHullDesc_t> {
+public partial interface RnHullDesc_t : RnShapeDesc_t, ISchemaClass<RnHullDesc_t>
+{
+    static RnHullDesc_t ISchemaClass<RnHullDesc_t>.From(nint handle) => new RnHullDesc_tImpl(handle);
+    static int ISchemaClass<RnHullDesc_t>.Size => 272;
+    static string? ISchemaClass<RnHullDesc_t>.ClassName => null;
 
-  static RnHullDesc_t ISchemaClass<RnHullDesc_t>.From(nint handle) => new RnHullDesc_tImpl(handle);
-  static int ISchemaClass<RnHullDesc_t>.Size => 272;
-  static string? ISchemaClass<RnHullDesc_t>.ClassName => null;
 
-  
-  public RnHull_t Hull { get; }
+    public RnHull_t Hull { get; }
 
 
 }

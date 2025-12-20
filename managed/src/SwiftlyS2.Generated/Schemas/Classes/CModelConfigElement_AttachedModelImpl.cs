@@ -6,199 +6,152 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigElement_AttachedModelImpl : CModelConfigElementImpl, CModelConfigElement_AttachedModel {
+internal partial class CModelConfigElement_AttachedModelImpl : CModelConfigElementImpl, CModelConfigElement_AttachedModel
+{
+    public CModelConfigElement_AttachedModelImpl(nint handle) : base(handle) { }
 
-  public CModelConfigElement_AttachedModelImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InstanceNameOffset;
 
-  private static nint? _InstanceNameOffset;
+    public string InstanceName {
+        get {
+            _InstanceNameOffset = _InstanceNameOffset ?? Schema.GetOffset(0x82D04A99643AE8F9);
+            return Schema.GetString(_Handle.Read<nint>(_InstanceNameOffset!.Value));
+        }
+        set {
+            _InstanceNameOffset = _InstanceNameOffset ?? Schema.GetOffset(0x82D04A99643AE8F9);
+            Schema.SetString(_Handle, _InstanceNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _EntityClassOffset;
 
-  public string InstanceName {
-    get {
-      if (_InstanceNameOffset == null) {
-        _InstanceNameOffset = Schema.GetOffset(0x82D04A99643AE8F9);
-      }
-      var ptr = _Handle.Read<nint>(_InstanceNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_InstanceNameOffset == null) {
-        _InstanceNameOffset = Schema.GetOffset(0x82D04A99643AE8F9);
-      }
-      Schema.SetString(_Handle, _InstanceNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _EntityClassOffset;
+    public string EntityClass {
+        get {
+            _EntityClassOffset = _EntityClassOffset ?? Schema.GetOffset(0x82D04A995BEE014A);
+            return Schema.GetString(_Handle.Read<nint>(_EntityClassOffset!.Value));
+        }
+        set {
+            _EntityClassOffset = _EntityClassOffset ?? Schema.GetOffset(0x82D04A995BEE014A);
+            Schema.SetString(_Handle, _EntityClassOffset!.Value, value);
+        }
+    } 
+    private static nint? _ModelOffset;
 
-  public string EntityClass {
-    get {
-      if (_EntityClassOffset == null) {
-        _EntityClassOffset = Schema.GetOffset(0x82D04A995BEE014A);
-      }
-      var ptr = _Handle.Read<nint>(_EntityClassOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model {
+        get {
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0x82D04A99E100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+        }
     }
-    set {
-      if (_EntityClassOffset == null) {
-        _EntityClassOffset = Schema.GetOffset(0x82D04A995BEE014A);
-      }
-      Schema.SetString(_Handle, _EntityClassOffset!.Value, value);
-    }
-  } 
-  private static nint? _ModelOffset;
+    private static nint? _OffsetOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get {
-      if (_ModelOffset == null) {
-        _ModelOffset = Schema.GetOffset(0x82D04A99E100C814);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+    public ref Vector Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x82D04A99FE159136);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetOffset;
+    private static nint? _AngOffsetOffset;
 
-  public ref Vector Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0x82D04A99FE159136);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    public ref QAngle AngOffset {
+        get {
+            _AngOffsetOffset = _AngOffsetOffset ?? Schema.GetOffset(0x82D04A9971C0EE4F);
+            return ref _Handle.AsRef<QAngle>(_AngOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngOffsetOffset;
+    private static nint? _AttachmentNameOffset;
 
-  public ref QAngle AngOffset {
-    get {
-      if (_AngOffsetOffset == null) {
-        _AngOffsetOffset = Schema.GetOffset(0x82D04A9971C0EE4F);
-      }
-      return ref _Handle.AsRef<QAngle>(_AngOffsetOffset!.Value);
-    }
-  }
-  private static nint? _AttachmentNameOffset;
+    public string AttachmentName {
+        get {
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x82D04A999CFCA76B);
+            return Schema.GetString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
+        }
+        set {
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x82D04A999CFCA76B);
+            Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _LocalAttachmentOffsetNameOffset;
 
-  public string AttachmentName {
-    get {
-      if (_AttachmentNameOffset == null) {
-        _AttachmentNameOffset = Schema.GetOffset(0x82D04A999CFCA76B);
-      }
-      var ptr = _Handle.Read<nint>(_AttachmentNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_AttachmentNameOffset == null) {
-        _AttachmentNameOffset = Schema.GetOffset(0x82D04A999CFCA76B);
-      }
-      Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _LocalAttachmentOffsetNameOffset;
+    public string LocalAttachmentOffsetName {
+        get {
+            _LocalAttachmentOffsetNameOffset = _LocalAttachmentOffsetNameOffset ?? Schema.GetOffset(0x82D04A9934391DC1);
+            return Schema.GetString(_Handle.Read<nint>(_LocalAttachmentOffsetNameOffset!.Value));
+        }
+        set {
+            _LocalAttachmentOffsetNameOffset = _LocalAttachmentOffsetNameOffset ?? Schema.GetOffset(0x82D04A9934391DC1);
+            Schema.SetString(_Handle, _LocalAttachmentOffsetNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _AttachmentTypeOffset;
 
-  public string LocalAttachmentOffsetName {
-    get {
-      if (_LocalAttachmentOffsetNameOffset == null) {
-        _LocalAttachmentOffsetNameOffset = Schema.GetOffset(0x82D04A9934391DC1);
-      }
-      var ptr = _Handle.Read<nint>(_LocalAttachmentOffsetNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref ModelConfigAttachmentType_t AttachmentType {
+        get {
+            _AttachmentTypeOffset = _AttachmentTypeOffset ?? Schema.GetOffset(0x82D04A99EB2E2AA0);
+            return ref _Handle.AsRef<ModelConfigAttachmentType_t>(_AttachmentTypeOffset!.Value);
+        }
     }
-    set {
-      if (_LocalAttachmentOffsetNameOffset == null) {
-        _LocalAttachmentOffsetNameOffset = Schema.GetOffset(0x82D04A9934391DC1);
-      }
-      Schema.SetString(_Handle, _LocalAttachmentOffsetNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _AttachmentTypeOffset;
+    private static nint? _BoneMergeFlexOffset;
 
-  public ref ModelConfigAttachmentType_t AttachmentType {
-    get {
-      if (_AttachmentTypeOffset == null) {
-        _AttachmentTypeOffset = Schema.GetOffset(0x82D04A99EB2E2AA0);
-      }
-      return ref _Handle.AsRef<ModelConfigAttachmentType_t>(_AttachmentTypeOffset!.Value);
+    public ref bool BoneMergeFlex {
+        get {
+            _BoneMergeFlexOffset = _BoneMergeFlexOffset ?? Schema.GetOffset(0x82D04A998B6BC852);
+            return ref _Handle.AsRef<bool>(_BoneMergeFlexOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneMergeFlexOffset;
+    private static nint? _UserSpecifiedColorOffset;
 
-  public ref bool BoneMergeFlex {
-    get {
-      if (_BoneMergeFlexOffset == null) {
-        _BoneMergeFlexOffset = Schema.GetOffset(0x82D04A998B6BC852);
-      }
-      return ref _Handle.AsRef<bool>(_BoneMergeFlexOffset!.Value);
+    public ref bool UserSpecifiedColor {
+        get {
+            _UserSpecifiedColorOffset = _UserSpecifiedColorOffset ?? Schema.GetOffset(0x82D04A9952ADA09B);
+            return ref _Handle.AsRef<bool>(_UserSpecifiedColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _UserSpecifiedColorOffset;
+    private static nint? _UserSpecifiedMaterialGroupOffset;
 
-  public ref bool UserSpecifiedColor {
-    get {
-      if (_UserSpecifiedColorOffset == null) {
-        _UserSpecifiedColorOffset = Schema.GetOffset(0x82D04A9952ADA09B);
-      }
-      return ref _Handle.AsRef<bool>(_UserSpecifiedColorOffset!.Value);
+    public ref bool UserSpecifiedMaterialGroup {
+        get {
+            _UserSpecifiedMaterialGroupOffset = _UserSpecifiedMaterialGroupOffset ?? Schema.GetOffset(0x82D04A99DBD8A8C4);
+            return ref _Handle.AsRef<bool>(_UserSpecifiedMaterialGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _UserSpecifiedMaterialGroupOffset;
+    private static nint? _AcceptParentMaterialDrivenDecalsOffset;
 
-  public ref bool UserSpecifiedMaterialGroup {
-    get {
-      if (_UserSpecifiedMaterialGroupOffset == null) {
-        _UserSpecifiedMaterialGroupOffset = Schema.GetOffset(0x82D04A99DBD8A8C4);
-      }
-      return ref _Handle.AsRef<bool>(_UserSpecifiedMaterialGroupOffset!.Value);
+    public ref bool AcceptParentMaterialDrivenDecals {
+        get {
+            _AcceptParentMaterialDrivenDecalsOffset = _AcceptParentMaterialDrivenDecalsOffset ?? Schema.GetOffset(0x82D04A996A2FFA80);
+            return ref _Handle.AsRef<bool>(_AcceptParentMaterialDrivenDecalsOffset!.Value);
+        }
     }
-  }
-  private static nint? _AcceptParentMaterialDrivenDecalsOffset;
+    private static nint? _BodygroupOnOtherModelsOffset;
 
-  public ref bool AcceptParentMaterialDrivenDecals {
-    get {
-      if (_AcceptParentMaterialDrivenDecalsOffset == null) {
-        _AcceptParentMaterialDrivenDecalsOffset = Schema.GetOffset(0x82D04A996A2FFA80);
-      }
-      return ref _Handle.AsRef<bool>(_AcceptParentMaterialDrivenDecalsOffset!.Value);
-    }
-  }
-  private static nint? _BodygroupOnOtherModelsOffset;
+    public string BodygroupOnOtherModels {
+        get {
+            _BodygroupOnOtherModelsOffset = _BodygroupOnOtherModelsOffset ?? Schema.GetOffset(0x82D04A994536DE3B);
+            return Schema.GetString(_Handle.Read<nint>(_BodygroupOnOtherModelsOffset!.Value));
+        }
+        set {
+            _BodygroupOnOtherModelsOffset = _BodygroupOnOtherModelsOffset ?? Schema.GetOffset(0x82D04A994536DE3B);
+            Schema.SetString(_Handle, _BodygroupOnOtherModelsOffset!.Value, value);
+        }
+    } 
+    private static nint? _MaterialGroupOnOtherModelsOffset;
 
-  public string BodygroupOnOtherModels {
-    get {
-      if (_BodygroupOnOtherModelsOffset == null) {
-        _BodygroupOnOtherModelsOffset = Schema.GetOffset(0x82D04A994536DE3B);
-      }
-      var ptr = _Handle.Read<nint>(_BodygroupOnOtherModelsOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_BodygroupOnOtherModelsOffset == null) {
-        _BodygroupOnOtherModelsOffset = Schema.GetOffset(0x82D04A994536DE3B);
-      }
-      Schema.SetString(_Handle, _BodygroupOnOtherModelsOffset!.Value, value);
-    }
-  } 
-  private static nint? _MaterialGroupOnOtherModelsOffset;
-
-  public string MaterialGroupOnOtherModels {
-    get {
-      if (_MaterialGroupOnOtherModelsOffset == null) {
-        _MaterialGroupOnOtherModelsOffset = Schema.GetOffset(0x82D04A9959E9920E);
-      }
-      var ptr = _Handle.Read<nint>(_MaterialGroupOnOtherModelsOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_MaterialGroupOnOtherModelsOffset == null) {
-        _MaterialGroupOnOtherModelsOffset = Schema.GetOffset(0x82D04A9959E9920E);
-      }
-      Schema.SetString(_Handle, _MaterialGroupOnOtherModelsOffset!.Value, value);
-    }
-  } 
+    public string MaterialGroupOnOtherModels {
+        get {
+            _MaterialGroupOnOtherModelsOffset = _MaterialGroupOnOtherModelsOffset ?? Schema.GetOffset(0x82D04A9959E9920E);
+            return Schema.GetString(_Handle.Read<nint>(_MaterialGroupOnOtherModelsOffset!.Value));
+        }
+        set {
+            _MaterialGroupOnOtherModelsOffset = _MaterialGroupOnOtherModelsOffset ?? Schema.GetOffset(0x82D04A9959E9920E);
+            Schema.SetString(_Handle, _MaterialGroupOnOtherModelsOffset!.Value, value);
+        }
+    } 
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCDOTANovelsList : ISchemaClass<InfoForResourceTypeCDOTANovelsList> {
-
-  static InfoForResourceTypeCDOTANovelsList ISchemaClass<InfoForResourceTypeCDOTANovelsList>.From(nint handle) => new InfoForResourceTypeCDOTANovelsListImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCDOTANovelsList>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCDOTANovelsList>.ClassName => null;
+public partial interface InfoForResourceTypeCDOTANovelsList : ISchemaClass<InfoForResourceTypeCDOTANovelsList>
+{
+    static InfoForResourceTypeCDOTANovelsList ISchemaClass<InfoForResourceTypeCDOTANovelsList>.From(nint handle) => new InfoForResourceTypeCDOTANovelsListImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCDOTANovelsList>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCDOTANovelsList>.ClassName => null;
 
 
 

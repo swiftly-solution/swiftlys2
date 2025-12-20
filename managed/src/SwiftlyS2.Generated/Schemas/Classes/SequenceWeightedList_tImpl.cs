@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SequenceWeightedList_tImpl : SchemaClass, SequenceWeightedList_t {
+internal partial class SequenceWeightedList_tImpl : SchemaClass, SequenceWeightedList_t
+{
+    public SequenceWeightedList_tImpl(nint handle) : base(handle) { }
 
-  public SequenceWeightedList_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SequenceOffset;
 
-  private static nint? _SequenceOffset;
-
-  public ref int Sequence {
-    get {
-      if (_SequenceOffset == null) {
-        _SequenceOffset = Schema.GetOffset(0x9BB15AFE3775D33C);
-      }
-      return ref _Handle.AsRef<int>(_SequenceOffset!.Value);
+    public ref int Sequence {
+        get {
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x9BB15AFE3775D33C);
+            return ref _Handle.AsRef<int>(_SequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _RelativeWeightOffset;
+    private static nint? _RelativeWeightOffset;
 
-  public ref float RelativeWeight {
-    get {
-      if (_RelativeWeightOffset == null) {
-        _RelativeWeightOffset = Schema.GetOffset(0x9BB15AFE1BC599BB);
-      }
-      return ref _Handle.AsRef<float>(_RelativeWeightOffset!.Value);
+    public ref float RelativeWeight {
+        get {
+            _RelativeWeightOffset = _RelativeWeightOffset ?? Schema.GetOffset(0x9BB15AFE1BC599BB);
+            return ref _Handle.AsRef<float>(_RelativeWeightOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSSDSMsg_LayerBase : ISchemaClass<CSSDSMsg_LayerBase> {
+public partial interface CSSDSMsg_LayerBase : ISchemaClass<CSSDSMsg_LayerBase>
+{
+    static CSSDSMsg_LayerBase ISchemaClass<CSSDSMsg_LayerBase>.From(nint handle) => new CSSDSMsg_LayerBaseImpl(handle);
+    static int ISchemaClass<CSSDSMsg_LayerBase>.Size => 48;
+    static string? ISchemaClass<CSSDSMsg_LayerBase>.ClassName => null;
 
-  static CSSDSMsg_LayerBase ISchemaClass<CSSDSMsg_LayerBase>.From(nint handle) => new CSSDSMsg_LayerBaseImpl(handle);
-  static int ISchemaClass<CSSDSMsg_LayerBase>.Size => 48;
-  static string? ISchemaClass<CSSDSMsg_LayerBase>.ClassName => null;
 
-  
-  public SceneViewId_t ViewId { get; }
-  
-  public string ViewName { get; set; }
-  
-  public ref ulong LayerId { get; }
-  
-  public string LayerName { get; set; }
-  
-  public string DisplayText { get; set; }
+    public SceneViewId_t ViewId { get; }
+
+    public string ViewName { get; set; }
+
+    public ref ulong LayerId { get; }
+
+    public string LayerName { get; set; }
+
+    public string DisplayText { get; set; }
 
 
 }

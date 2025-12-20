@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmConstFloatNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmConstFloatNode__CDefinition> {
+public partial interface CNmConstFloatNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmConstFloatNode__CDefinition>
+{
+    static CNmConstFloatNode__CDefinition ISchemaClass<CNmConstFloatNode__CDefinition>.From(nint handle) => new CNmConstFloatNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmConstFloatNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmConstFloatNode__CDefinition>.ClassName => null;
 
-  static CNmConstFloatNode__CDefinition ISchemaClass<CNmConstFloatNode__CDefinition>.From(nint handle) => new CNmConstFloatNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmConstFloatNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmConstFloatNode__CDefinition>.ClassName => null;
 
-  
-  public ref float Value { get; }
+    public ref float Value { get; }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvViewPunch : CPointEntity, ISchemaClass<CEnvViewPunch> {
+public partial interface CEnvViewPunch : CPointEntity, ISchemaClass<CEnvViewPunch>
+{
+    static CEnvViewPunch ISchemaClass<CEnvViewPunch>.From(nint handle) => new CEnvViewPunchImpl(handle);
+    static int ISchemaClass<CEnvViewPunch>.Size => 1280;
+    static string? ISchemaClass<CEnvViewPunch>.ClassName => "env_viewpunch";
 
-  static CEnvViewPunch ISchemaClass<CEnvViewPunch>.From(nint handle) => new CEnvViewPunchImpl(handle);
-  static int ISchemaClass<CEnvViewPunch>.Size => 1280;
-  static string? ISchemaClass<CEnvViewPunch>.ClassName => "env_viewpunch";
 
-  
-  public ref float Radius { get; }
-  
-  public ref QAngle ViewPunch { get; }
+    public ref float Radius { get; }
+
+    public ref QAngle ViewPunch { get; }
 
 
 }

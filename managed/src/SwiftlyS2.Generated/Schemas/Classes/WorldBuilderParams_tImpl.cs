@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class WorldBuilderParams_tImpl : SchemaClass, WorldBuilderParams_t {
+internal partial class WorldBuilderParams_tImpl : SchemaClass, WorldBuilderParams_t
+{
+    public WorldBuilderParams_tImpl(nint handle) : base(handle) { }
 
-  public WorldBuilderParams_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinDrawVolumeSizeOffset;
 
-  private static nint? _MinDrawVolumeSizeOffset;
-
-  public ref float MinDrawVolumeSize {
-    get {
-      if (_MinDrawVolumeSizeOffset == null) {
-        _MinDrawVolumeSizeOffset = Schema.GetOffset(0x37270ACBA9648390);
-      }
-      return ref _Handle.AsRef<float>(_MinDrawVolumeSizeOffset!.Value);
+    public ref float MinDrawVolumeSize {
+        get {
+            _MinDrawVolumeSizeOffset = _MinDrawVolumeSizeOffset ?? Schema.GetOffset(0x37270ACBA9648390);
+            return ref _Handle.AsRef<float>(_MinDrawVolumeSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _BuildBakedLightingOffset;
+    private static nint? _BuildBakedLightingOffset;
 
-  public ref bool BuildBakedLighting {
-    get {
-      if (_BuildBakedLightingOffset == null) {
-        _BuildBakedLightingOffset = Schema.GetOffset(0x37270ACBCF369FF6);
-      }
-      return ref _Handle.AsRef<bool>(_BuildBakedLightingOffset!.Value);
+    public ref bool BuildBakedLighting {
+        get {
+            _BuildBakedLightingOffset = _BuildBakedLightingOffset ?? Schema.GetOffset(0x37270ACBCF369FF6);
+            return ref _Handle.AsRef<bool>(_BuildBakedLightingOffset!.Value);
+        }
     }
-  }
-  private static nint? _AggregateInstanceStreamsOffset;
+    private static nint? _AggregateInstanceStreamsOffset;
 
-  public ref bool AggregateInstanceStreams {
-    get {
-      if (_AggregateInstanceStreamsOffset == null) {
-        _AggregateInstanceStreamsOffset = Schema.GetOffset(0x37270ACB36B2AE78);
-      }
-      return ref _Handle.AsRef<bool>(_AggregateInstanceStreamsOffset!.Value);
+    public ref bool AggregateInstanceStreams {
+        get {
+            _AggregateInstanceStreamsOffset = _AggregateInstanceStreamsOffset ?? Schema.GetOffset(0x37270ACB36B2AE78);
+            return ref _Handle.AsRef<bool>(_AggregateInstanceStreamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BakedLightingInfoOffset;
+    private static nint? _BakedLightingInfoOffset;
 
-  public BakedLightingInfo_t BakedLightingInfo {
-    get {
-      if (_BakedLightingInfoOffset == null) {
-        _BakedLightingInfoOffset = Schema.GetOffset(0x37270ACBC2128E04);
-      }
-      return new BakedLightingInfo_tImpl(_Handle + _BakedLightingInfoOffset!.Value);
+    public BakedLightingInfo_t BakedLightingInfo {
+        get {
+            _BakedLightingInfoOffset = _BakedLightingInfoOffset ?? Schema.GetOffset(0x37270ACBC2128E04);
+            return new BakedLightingInfo_tImpl(_Handle + _BakedLightingInfoOffset!.Value);
+        }
     }
-  }
-  private static nint? _CompileTimestampOffset;
+    private static nint? _CompileTimestampOffset;
 
-  public ref ulong CompileTimestamp {
-    get {
-      if (_CompileTimestampOffset == null) {
-        _CompileTimestampOffset = Schema.GetOffset(0x37270ACB1CAADE3A);
-      }
-      return ref _Handle.AsRef<ulong>(_CompileTimestampOffset!.Value);
+    public ref ulong CompileTimestamp {
+        get {
+            _CompileTimestampOffset = _CompileTimestampOffset ?? Schema.GetOffset(0x37270ACB1CAADE3A);
+            return ref _Handle.AsRef<ulong>(_CompileTimestampOffset!.Value);
+        }
     }
-  }
-  private static nint? _CompileFingerprintOffset;
+    private static nint? _CompileFingerprintOffset;
 
-  public ref ulong CompileFingerprint {
-    get {
-      if (_CompileFingerprintOffset == null) {
-        _CompileFingerprintOffset = Schema.GetOffset(0x37270ACB98F6F58A);
-      }
-      return ref _Handle.AsRef<ulong>(_CompileFingerprintOffset!.Value);
+    public ref ulong CompileFingerprint {
+        get {
+            _CompileFingerprintOffset = _CompileFingerprintOffset ?? Schema.GetOffset(0x37270ACB98F6F58A);
+            return ref _Handle.AsRef<ulong>(_CompileFingerprintOffset!.Value);
+        }
     }
-  }
 
 
 }

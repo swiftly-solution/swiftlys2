@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CDebugOverlayFilterType_t : uint {
-
+public enum CDebugOverlayFilterType_t : uint
+{
  NONE = 0,
 
  TEXT = 1,

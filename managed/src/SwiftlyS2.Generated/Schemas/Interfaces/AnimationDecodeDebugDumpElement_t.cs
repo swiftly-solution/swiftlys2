@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AnimationDecodeDebugDumpElement_t : ISchemaClass<AnimationDecodeDebugDumpElement_t> {
+public partial interface AnimationDecodeDebugDumpElement_t : ISchemaClass<AnimationDecodeDebugDumpElement_t>
+{
+    static AnimationDecodeDebugDumpElement_t ISchemaClass<AnimationDecodeDebugDumpElement_t>.From(nint handle) => new AnimationDecodeDebugDumpElement_tImpl(handle);
+    static int ISchemaClass<AnimationDecodeDebugDumpElement_t>.Size => 112;
+    static string? ISchemaClass<AnimationDecodeDebugDumpElement_t>.ClassName => null;
 
-  static AnimationDecodeDebugDumpElement_t ISchemaClass<AnimationDecodeDebugDumpElement_t>.From(nint handle) => new AnimationDecodeDebugDumpElement_tImpl(handle);
-  static int ISchemaClass<AnimationDecodeDebugDumpElement_t>.Size => 112;
-  static string? ISchemaClass<AnimationDecodeDebugDumpElement_t>.ClassName => null;
 
-  
-  public ref int EntityIndex { get; }
-  
-  public string ModelName { get; set; }
-  
-  public ref CUtlVector<CUtlString> PoseParams { get; }
-  
-  public ref CUtlVector<CUtlString> DecodeOps { get; }
-  
-  public ref CUtlVector<CUtlString> InternalOps { get; }
-  
-  public ref CUtlVector<CUtlString> DecodedAnims { get; }
+    public ref int EntityIndex { get; }
+
+    public string ModelName { get; set; }
+
+    public ref CUtlVector<CUtlString> PoseParams { get; }
+
+    public ref CUtlVector<CUtlString> DecodeOps { get; }
+
+    public ref CUtlVector<CUtlString> InternalOps { get; }
+
+    public ref CUtlVector<CUtlString> DecodedAnims { get; }
 
 
 }

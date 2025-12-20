@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseRuntimeChunkIndex_t : ISchemaClass<PulseRuntimeChunkIndex_t> {
+public partial interface PulseRuntimeChunkIndex_t : ISchemaClass<PulseRuntimeChunkIndex_t>
+{
+    static PulseRuntimeChunkIndex_t ISchemaClass<PulseRuntimeChunkIndex_t>.From(nint handle) => new PulseRuntimeChunkIndex_tImpl(handle);
+    static int ISchemaClass<PulseRuntimeChunkIndex_t>.Size => 4;
+    static string? ISchemaClass<PulseRuntimeChunkIndex_t>.ClassName => null;
 
-  static PulseRuntimeChunkIndex_t ISchemaClass<PulseRuntimeChunkIndex_t>.From(nint handle) => new PulseRuntimeChunkIndex_tImpl(handle);
-  static int ISchemaClass<PulseRuntimeChunkIndex_t>.Size => 4;
-  static string? ISchemaClass<PulseRuntimeChunkIndex_t>.ClassName => null;
 
-  
-  public ref int Value { get; }
+    public ref int Value { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface COmniLight : CBarnLight, ISchemaClass<COmniLight> {
+public partial interface COmniLight : CBarnLight, ISchemaClass<COmniLight>
+{
+    static COmniLight ISchemaClass<COmniLight>.From(nint handle) => new COmniLightImpl(handle);
+    static int ISchemaClass<COmniLight>.Size => 2832;
+    static string? ISchemaClass<COmniLight>.ClassName => "light_omni2";
 
-  static COmniLight ISchemaClass<COmniLight>.From(nint handle) => new COmniLightImpl(handle);
-  static int ISchemaClass<COmniLight>.Size => 2832;
-  static string? ISchemaClass<COmniLight>.ClassName => "light_omni2";
 
-  
-  public ref float InnerAngle { get; }
-  
-  public ref float OuterAngle { get; }
-  
-  public ref bool ShowLight { get; }
+    public ref float InnerAngle { get; }
 
-  public void InnerAngleUpdated();
-  public void OuterAngleUpdated();
-  public void ShowLightUpdated();
+    public ref float OuterAngle { get; }
+
+    public ref bool ShowLight { get; }
+
+    public void InnerAngleUpdated();
+    public void OuterAngleUpdated();
+    public void ShowLightUpdated();
 }

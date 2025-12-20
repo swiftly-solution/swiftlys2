@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetFloatCollection : CParticleFunctionOperator, ISchemaClass<C_OP_SetFloatCollection> {
+public partial interface C_OP_SetFloatCollection : CParticleFunctionOperator, ISchemaClass<C_OP_SetFloatCollection>
+{
+    static C_OP_SetFloatCollection ISchemaClass<C_OP_SetFloatCollection>.From(nint handle) => new C_OP_SetFloatCollectionImpl(handle);
+    static int ISchemaClass<C_OP_SetFloatCollection>.Size => 1248;
+    static string? ISchemaClass<C_OP_SetFloatCollection>.ClassName => null;
 
-  static C_OP_SetFloatCollection ISchemaClass<C_OP_SetFloatCollection>.From(nint handle) => new C_OP_SetFloatCollectionImpl(handle);
-  static int ISchemaClass<C_OP_SetFloatCollection>.Size => 1248;
-  static string? ISchemaClass<C_OP_SetFloatCollection>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput InputValue { get; }
-  
-  public ParticleAttributeIndex_t OutputField { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public CParticleCollectionFloatInput Lerp { get; }
+    public CParticleCollectionFloatInput InputValue { get; }
+
+    public ParticleAttributeIndex_t OutputField { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public CParticleCollectionFloatInput Lerp { get; }
 
 
 }

@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSeqAutoLayerImpl : SchemaClass, CSeqAutoLayer {
+internal partial class CSeqAutoLayerImpl : SchemaClass, CSeqAutoLayer
+{
+    public CSeqAutoLayerImpl(nint handle) : base(handle) { }
 
-  public CSeqAutoLayerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LocalReferenceOffset;
 
-  private static nint? _LocalReferenceOffset;
-
-  public ref short LocalReference {
-    get {
-      if (_LocalReferenceOffset == null) {
-        _LocalReferenceOffset = Schema.GetOffset(0x1506328FC8D571D9);
-      }
-      return ref _Handle.AsRef<short>(_LocalReferenceOffset!.Value);
+    public ref short LocalReference {
+        get {
+            _LocalReferenceOffset = _LocalReferenceOffset ?? Schema.GetOffset(0x1506328FC8D571D9);
+            return ref _Handle.AsRef<short>(_LocalReferenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalPoseOffset;
+    private static nint? _LocalPoseOffset;
 
-  public ref short LocalPose {
-    get {
-      if (_LocalPoseOffset == null) {
-        _LocalPoseOffset = Schema.GetOffset(0x1506328F70BF8111);
-      }
-      return ref _Handle.AsRef<short>(_LocalPoseOffset!.Value);
+    public ref short LocalPose {
+        get {
+            _LocalPoseOffset = _LocalPoseOffset ?? Schema.GetOffset(0x1506328F70BF8111);
+            return ref _Handle.AsRef<short>(_LocalPoseOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public CSeqAutoLayerFlag Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x1506328FDC74A14C);
-      }
-      return new CSeqAutoLayerFlagImpl(_Handle + _FlagsOffset!.Value);
+    public CSeqAutoLayerFlag Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x1506328FDC74A14C);
+            return new CSeqAutoLayerFlagImpl(_Handle + _FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartOffset;
+    private static nint? _StartOffset;
 
-  public ref float Start {
-    get {
-      if (_StartOffset == null) {
-        _StartOffset = Schema.GetOffset(0x1506328FA539BEFF);
-      }
-      return ref _Handle.AsRef<float>(_StartOffset!.Value);
+    public ref float Start {
+        get {
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0x1506328FA539BEFF);
+            return ref _Handle.AsRef<float>(_StartOffset!.Value);
+        }
     }
-  }
-  private static nint? _PeakOffset;
+    private static nint? _PeakOffset;
 
-  public ref float Peak {
-    get {
-      if (_PeakOffset == null) {
-        _PeakOffset = Schema.GetOffset(0x1506328F5BAE16B2);
-      }
-      return ref _Handle.AsRef<float>(_PeakOffset!.Value);
+    public ref float Peak {
+        get {
+            _PeakOffset = _PeakOffset ?? Schema.GetOffset(0x1506328F5BAE16B2);
+            return ref _Handle.AsRef<float>(_PeakOffset!.Value);
+        }
     }
-  }
-  private static nint? _TailOffset;
+    private static nint? _TailOffset;
 
-  public ref float Tail {
-    get {
-      if (_TailOffset == null) {
-        _TailOffset = Schema.GetOffset(0x1506328FCF8F4203);
-      }
-      return ref _Handle.AsRef<float>(_TailOffset!.Value);
+    public ref float Tail {
+        get {
+            _TailOffset = _TailOffset ?? Schema.GetOffset(0x1506328FCF8F4203);
+            return ref _Handle.AsRef<float>(_TailOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndOffset;
+    private static nint? _EndOffset;
 
-  public ref float End {
-    get {
-      if (_EndOffset == null) {
-        _EndOffset = Schema.GetOffset(0x1506328F5B29CFCA);
-      }
-      return ref _Handle.AsRef<float>(_EndOffset!.Value);
+    public ref float End {
+        get {
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0x1506328F5B29CFCA);
+            return ref _Handle.AsRef<float>(_EndOffset!.Value);
+        }
     }
-  }
 
 
 }

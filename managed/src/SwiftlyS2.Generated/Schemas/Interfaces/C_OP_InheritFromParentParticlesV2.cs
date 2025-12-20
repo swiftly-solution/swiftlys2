@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_InheritFromParentParticlesV2 : CParticleFunctionOperator, ISchemaClass<C_OP_InheritFromParentParticlesV2> {
+public partial interface C_OP_InheritFromParentParticlesV2 : CParticleFunctionOperator, ISchemaClass<C_OP_InheritFromParentParticlesV2>
+{
+    static C_OP_InheritFromParentParticlesV2 ISchemaClass<C_OP_InheritFromParentParticlesV2>.From(nint handle) => new C_OP_InheritFromParentParticlesV2Impl(handle);
+    static int ISchemaClass<C_OP_InheritFromParentParticlesV2>.Size => 1584;
+    static string? ISchemaClass<C_OP_InheritFromParentParticlesV2>.ClassName => null;
 
-  static C_OP_InheritFromParentParticlesV2 ISchemaClass<C_OP_InheritFromParentParticlesV2>.From(nint handle) => new C_OP_InheritFromParentParticlesV2Impl(handle);
-  static int ISchemaClass<C_OP_InheritFromParentParticlesV2>.Size => 1584;
-  static string? ISchemaClass<C_OP_InheritFromParentParticlesV2>.ClassName => null;
 
-  
-  public CPerParticleFloatInput Scale { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleFloatInput Increment { get; }
-  
-  public ref bool RandomDistribution { get; }
-  
-  public ref bool Reverse { get; }
-  
-  public ref MissingParentInheritBehavior_t MissingParentBehavior { get; }
-  
-  public CPerParticleFloatInput Interpolation { get; }
+    public CPerParticleFloatInput Scale { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleFloatInput Increment { get; }
+
+    public ref bool RandomDistribution { get; }
+
+    public ref bool Reverse { get; }
+
+    public ref MissingParentInheritBehavior_t MissingParentBehavior { get; }
+
+    public CPerParticleFloatInput Interpolation { get; }
 
 
 }

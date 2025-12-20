@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RenderInputLayoutField_t : ISchemaClass<RenderInputLayoutField_t> {
+public partial interface RenderInputLayoutField_t : ISchemaClass<RenderInputLayoutField_t>
+{
+    static RenderInputLayoutField_t ISchemaClass<RenderInputLayoutField_t>.From(nint handle) => new RenderInputLayoutField_tImpl(handle);
+    static int ISchemaClass<RenderInputLayoutField_t>.Size => 76;
+    static string? ISchemaClass<RenderInputLayoutField_t>.ClassName => null;
 
-  static RenderInputLayoutField_t ISchemaClass<RenderInputLayoutField_t>.From(nint handle) => new RenderInputLayoutField_tImpl(handle);
-  static int ISchemaClass<RenderInputLayoutField_t>.Size => 76;
-  static string? ISchemaClass<RenderInputLayoutField_t>.ClassName => null;
 
-  
-  public string SemanticName { get; set; }
-  
-  public ref byte SemanticIndex { get; }
-  
-  public ref short Offset { get; }
-  
-  public ref byte Slot { get; }
-  
-  public ref RenderSlotType_t SlotType { get; }
-  
-  public string ShaderSemantic { get; set; }
+    public string SemanticName { get; set; }
+
+    public ref byte SemanticIndex { get; }
+
+    public ref short Offset { get; }
+
+    public ref byte Slot { get; }
+
+    public ref RenderSlotType_t SlotType { get; }
+
+    public string ShaderSemantic { get; set; }
 
 
 }

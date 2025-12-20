@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmOrientationWarpNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmOrientationWarpNode__CDefinition {
+internal partial class CNmOrientationWarpNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmOrientationWarpNode__CDefinition
+{
+    public CNmOrientationWarpNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmOrientationWarpNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ClipReferenceNodeIdxOffset;
 
-  private static nint? _ClipReferenceNodeIdxOffset;
-
-  public ref short ClipReferenceNodeIdx {
-    get {
-      if (_ClipReferenceNodeIdxOffset == null) {
-        _ClipReferenceNodeIdxOffset = Schema.GetOffset(0x1265525761EC8947);
-      }
-      return ref _Handle.AsRef<short>(_ClipReferenceNodeIdxOffset!.Value);
+    public ref short ClipReferenceNodeIdx {
+        get {
+            _ClipReferenceNodeIdxOffset = _ClipReferenceNodeIdxOffset ?? Schema.GetOffset(0x1265525761EC8947);
+            return ref _Handle.AsRef<short>(_ClipReferenceNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetValueNodeIdxOffset;
+    private static nint? _TargetValueNodeIdxOffset;
 
-  public ref short TargetValueNodeIdx {
-    get {
-      if (_TargetValueNodeIdxOffset == null) {
-        _TargetValueNodeIdxOffset = Schema.GetOffset(0x12655257A040C7E8);
-      }
-      return ref _Handle.AsRef<short>(_TargetValueNodeIdxOffset!.Value);
+    public ref short TargetValueNodeIdx {
+        get {
+            _TargetValueNodeIdxOffset = _TargetValueNodeIdxOffset ?? Schema.GetOffset(0x12655257A040C7E8);
+            return ref _Handle.AsRef<short>(_TargetValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsOffsetNodeOffset;
+    private static nint? _IsOffsetNodeOffset;
 
-  public ref bool IsOffsetNode {
-    get {
-      if (_IsOffsetNodeOffset == null) {
-        _IsOffsetNodeOffset = Schema.GetOffset(0x12655257174AF9D6);
-      }
-      return ref _Handle.AsRef<bool>(_IsOffsetNodeOffset!.Value);
+    public ref bool IsOffsetNode {
+        get {
+            _IsOffsetNodeOffset = _IsOffsetNodeOffset ?? Schema.GetOffset(0x12655257174AF9D6);
+            return ref _Handle.AsRef<bool>(_IsOffsetNodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsOffsetRelativeToCharacterOffset;
+    private static nint? _IsOffsetRelativeToCharacterOffset;
 
-  public ref bool IsOffsetRelativeToCharacter {
-    get {
-      if (_IsOffsetRelativeToCharacterOffset == null) {
-        _IsOffsetRelativeToCharacterOffset = Schema.GetOffset(0x1265525793271816);
-      }
-      return ref _Handle.AsRef<bool>(_IsOffsetRelativeToCharacterOffset!.Value);
+    public ref bool IsOffsetRelativeToCharacter {
+        get {
+            _IsOffsetRelativeToCharacterOffset = _IsOffsetRelativeToCharacterOffset ?? Schema.GetOffset(0x1265525793271816);
+            return ref _Handle.AsRef<bool>(_IsOffsetRelativeToCharacterOffset!.Value);
+        }
     }
-  }
-  private static nint? _SamplingModeOffset;
+    private static nint? _SamplingModeOffset;
 
-  public ref CNmRootMotionData__SamplingMode_t SamplingMode {
-    get {
-      if (_SamplingModeOffset == null) {
-        _SamplingModeOffset = Schema.GetOffset(0x12655257DDB31BE3);
-      }
-      return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset!.Value);
+    public ref CNmRootMotionData__SamplingMode_t SamplingMode {
+        get {
+            _SamplingModeOffset = _SamplingModeOffset ?? Schema.GetOffset(0x12655257DDB31BE3);
+            return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset!.Value);
+        }
     }
-  }
 
 
 }

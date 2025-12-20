@@ -10,6 +10,7 @@ internal static class GameFunctions
 {
     private static readonly bool IsWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
     public static unsafe delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void > pCTakeDamageInfo_Constructor;
+    public static unsafe delegate* unmanaged< nint, CTakeDamageInfo*, CTakeDamageResult*, void > pTakeDamage;
     public static unsafe delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void > pTraceShape;
     public static unsafe delegate* unmanaged< Vector*, Vector*, BBox_t*, CTraceFilter*, CGameTrace*, void > pTracePlayerBBox;
     public static unsafe delegate* unmanaged< nint, IntPtr, void > pSetModel;
@@ -56,6 +57,7 @@ internal static class GameFunctions
         unsafe
         {
             pCTakeDamageInfo_Constructor = (delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void >)NativeSignatures.Fetch("CTakeDamageInfo::Constructor");
+            pTakeDamage = (delegate* unmanaged< nint, CTakeDamageInfo*, CTakeDamageResult*, void >)NativeSignatures.Fetch("CBaseEntity::TakeDamage");
             pTraceShape = (delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void >)NativeSignatures.Fetch("TraceShape");
             pTracePlayerBBox = (delegate* unmanaged< Vector*, Vector*, BBox_t*, CTraceFilter*, CGameTrace*, void >)NativeSignatures.Fetch("TracePlayerBBox");
             pSetModel = (delegate* unmanaged< nint, IntPtr, void >)NativeSignatures.Fetch("CBaseModelEntity::SetModel");
@@ -162,7 +164,7 @@ internal static class GameFunctions
         try
         {
             unsafe
-            {   
+            {
                 CheckPtr(handle, nameof(handle));
                 CheckPtr(controller, nameof(controller));
                 var vfunc = (delegate* unmanaged< nint, nint, nint, nint >)GetVirtualFunction(handle, FindPickerEntityOffset);
@@ -317,7 +319,7 @@ internal static class GameFunctions
                 CheckPtr(pTrace, nameof(pTrace));
                 var size = (nuint)sizeof(CGameTrace);
                 var pAligned = NativeMemory.AlignedAlloc(size, 16);
-                NativeMemory.Copy(pTrace, pAligned,  size);
+                NativeMemory.Copy(pTrace, pAligned, size);
                 pTraceShape(pEngineTrace, ray, &vecStart, &vecEnd, pFilter, (CGameTrace*)pAligned);
                 NativeMemory.Copy(pAligned, pTrace, size);
                 NativeMemory.Free(pAligned);
@@ -348,6 +350,22 @@ internal static class GameFunctions
             {
                 CheckPtr(pThis, nameof(pThis));
                 pCTakeDamageInfo_Constructor(pThis, pInflictor, pAttacker, pAbility, vecDamageForce, vecDamagePosition, flDamage, bitsDamageType, iCustomDamage, a10);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static unsafe void TakeDamage( nint pEntity, CTakeDamageInfo* info)
+    {
+        try
+        {
+            CheckPtr(pEntity, nameof(pEntity));
+            unsafe
+            {
+                pTakeDamage(pEntity, info, (CTakeDamageResult*)0);
             }
         }
         catch (Exception e)

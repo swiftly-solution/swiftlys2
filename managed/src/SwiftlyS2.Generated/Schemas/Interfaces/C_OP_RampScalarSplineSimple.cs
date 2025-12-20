@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RampScalarSplineSimple : CParticleFunctionOperator, ISchemaClass<C_OP_RampScalarSplineSimple> {
+public partial interface C_OP_RampScalarSplineSimple : CParticleFunctionOperator, ISchemaClass<C_OP_RampScalarSplineSimple>
+{
+    static C_OP_RampScalarSplineSimple ISchemaClass<C_OP_RampScalarSplineSimple>.From(nint handle) => new C_OP_RampScalarSplineSimpleImpl(handle);
+    static int ISchemaClass<C_OP_RampScalarSplineSimple>.Size => 528;
+    static string? ISchemaClass<C_OP_RampScalarSplineSimple>.ClassName => null;
 
-  static C_OP_RampScalarSplineSimple ISchemaClass<C_OP_RampScalarSplineSimple>.From(nint handle) => new C_OP_RampScalarSplineSimpleImpl(handle);
-  static int ISchemaClass<C_OP_RampScalarSplineSimple>.Size => 528;
-  static string? ISchemaClass<C_OP_RampScalarSplineSimple>.ClassName => null;
 
-  
-  public ref float Rate { get; }
-  
-  public ref float StartTime { get; }
-  
-  public ref float EndTime { get; }
-  
-  public ParticleAttributeIndex_t Field { get; }
-  
-  public ref bool EaseOut { get; }
+    public ref float Rate { get; }
+
+    public ref float StartTime { get; }
+
+    public ref float EndTime { get; }
+
+    public ParticleAttributeIndex_t Field { get; }
+
+    public ref bool EaseOut { get; }
 
 
 }

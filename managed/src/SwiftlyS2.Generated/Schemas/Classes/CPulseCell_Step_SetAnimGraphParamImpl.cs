@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Step_SetAnimGraphParamImpl : CPulseCell_BaseFlowImpl, CPulseCell_Step_SetAnimGraphParam {
+internal partial class CPulseCell_Step_SetAnimGraphParamImpl : CPulseCell_BaseFlowImpl, CPulseCell_Step_SetAnimGraphParam
+{
+    public CPulseCell_Step_SetAnimGraphParamImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Step_SetAnimGraphParamImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParamNameOffset;
 
-  private static nint? _ParamNameOffset;
-
-  public string ParamName {
-    get {
-      if (_ParamNameOffset == null) {
-        _ParamNameOffset = Schema.GetOffset(0x7727698D230FDA59);
-      }
-      var ptr = _Handle.Read<nint>(_ParamNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ParamNameOffset == null) {
-        _ParamNameOffset = Schema.GetOffset(0x7727698D230FDA59);
-      }
-      Schema.SetString(_Handle, _ParamNameOffset!.Value, value);
-    }
-  } 
+    public string ParamName {
+        get {
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x7727698D230FDA59);
+            return Schema.GetString(_Handle.Read<nint>(_ParamNameOffset!.Value));
+        }
+        set {
+            _ParamNameOffset = _ParamNameOffset ?? Schema.GetOffset(0x7727698D230FDA59);
+            Schema.SetString(_Handle, _ParamNameOffset!.Value, value);
+        }
+    } 
 
 
 }

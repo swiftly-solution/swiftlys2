@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFilterProximity : CBaseFilter, ISchemaClass<CFilterProximity> {
+public partial interface CFilterProximity : CBaseFilter, ISchemaClass<CFilterProximity>
+{
+    static CFilterProximity ISchemaClass<CFilterProximity>.From(nint handle) => new CFilterProximityImpl(handle);
+    static int ISchemaClass<CFilterProximity>.Size => 1360;
+    static string? ISchemaClass<CFilterProximity>.ClassName => "filter_proximity";
 
-  static CFilterProximity ISchemaClass<CFilterProximity>.From(nint handle) => new CFilterProximityImpl(handle);
-  static int ISchemaClass<CFilterProximity>.Size => 1360;
-  static string? ISchemaClass<CFilterProximity>.ClassName => "filter_proximity";
 
-  
-  public ref float Radius { get; }
+    public ref float Radius { get; }
 
 
 }

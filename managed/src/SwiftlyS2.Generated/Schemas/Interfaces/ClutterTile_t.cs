@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ClutterTile_t : ISchemaClass<ClutterTile_t> {
+public partial interface ClutterTile_t : ISchemaClass<ClutterTile_t>
+{
+    static ClutterTile_t ISchemaClass<ClutterTile_t>.From(nint handle) => new ClutterTile_tImpl(handle);
+    static int ISchemaClass<ClutterTile_t>.Size => 32;
+    static string? ISchemaClass<ClutterTile_t>.ClassName => null;
 
-  static ClutterTile_t ISchemaClass<ClutterTile_t>.From(nint handle) => new ClutterTile_tImpl(handle);
-  static int ISchemaClass<ClutterTile_t>.Size => 32;
-  static string? ISchemaClass<ClutterTile_t>.ClassName => null;
 
-  
-  public ref uint FirstInstance { get; }
-  
-  public ref uint LastInstance { get; }
-  
-  public AABB_t BoundsWs { get; }
+    public ref uint FirstInstance { get; }
+
+    public ref uint LastInstance { get; }
+
+    public AABB_t BoundsWs { get; }
 
 
 }

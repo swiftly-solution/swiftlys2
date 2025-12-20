@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Step_TestDomainEntFireImpl : CPulseCell_BaseFlowImpl, CPulseCell_Step_TestDomainEntFire {
+internal partial class CPulseCell_Step_TestDomainEntFireImpl : CPulseCell_BaseFlowImpl, CPulseCell_Step_TestDomainEntFire
+{
+    public CPulseCell_Step_TestDomainEntFireImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Step_TestDomainEntFireImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputOffset;
 
-  private static nint? _InputOffset;
-
-  public string Input {
-    get {
-      if (_InputOffset == null) {
-        _InputOffset = Schema.GetOffset(0x22A0E258942A24FB);
-      }
-      var ptr = _Handle.Read<nint>(_InputOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_InputOffset == null) {
-        _InputOffset = Schema.GetOffset(0x22A0E258942A24FB);
-      }
-      Schema.SetString(_Handle, _InputOffset!.Value, value);
-    }
-  } 
+    public string Input {
+        get {
+            _InputOffset = _InputOffset ?? Schema.GetOffset(0x22A0E258942A24FB);
+            return Schema.GetString(_Handle.Read<nint>(_InputOffset!.Value));
+        }
+        set {
+            _InputOffset = _InputOffset ?? Schema.GetOffset(0x22A0E258942A24FB);
+            Schema.SetString(_Handle, _InputOffset!.Value, value);
+        }
+    } 
 
 
 }

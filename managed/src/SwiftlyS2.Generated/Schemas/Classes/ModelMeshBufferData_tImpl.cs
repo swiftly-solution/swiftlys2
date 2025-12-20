@@ -6,127 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ModelMeshBufferData_tImpl : SchemaClass, ModelMeshBufferData_t {
+internal partial class ModelMeshBufferData_tImpl : SchemaClass, ModelMeshBufferData_t
+{
+    public ModelMeshBufferData_tImpl(nint handle) : base(handle) { }
 
-  public ModelMeshBufferData_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BlockIndexOffset;
 
-  private static nint? _BlockIndexOffset;
-
-  public ref int BlockIndex {
-    get {
-      if (_BlockIndexOffset == null) {
-        _BlockIndexOffset = Schema.GetOffset(0xA75611C261BAFD8A);
-      }
-      return ref _Handle.AsRef<int>(_BlockIndexOffset!.Value);
+    public ref int BlockIndex {
+        get {
+            _BlockIndexOffset = _BlockIndexOffset ?? Schema.GetOffset(0xA75611C261BAFD8A);
+            return ref _Handle.AsRef<int>(_BlockIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ElementCountOffset;
+    private static nint? _ElementCountOffset;
 
-  public ref uint ElementCount {
-    get {
-      if (_ElementCountOffset == null) {
-        _ElementCountOffset = Schema.GetOffset(0xA75611C251A2EF12);
-      }
-      return ref _Handle.AsRef<uint>(_ElementCountOffset!.Value);
+    public ref uint ElementCount {
+        get {
+            _ElementCountOffset = _ElementCountOffset ?? Schema.GetOffset(0xA75611C251A2EF12);
+            return ref _Handle.AsRef<uint>(_ElementCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _ElementSizeInBytesOffset;
+    private static nint? _ElementSizeInBytesOffset;
 
-  public ref uint ElementSizeInBytes {
-    get {
-      if (_ElementSizeInBytesOffset == null) {
-        _ElementSizeInBytesOffset = Schema.GetOffset(0xA75611C2F602975C);
-      }
-      return ref _Handle.AsRef<uint>(_ElementSizeInBytesOffset!.Value);
+    public ref uint ElementSizeInBytes {
+        get {
+            _ElementSizeInBytesOffset = _ElementSizeInBytesOffset ?? Schema.GetOffset(0xA75611C2F602975C);
+            return ref _Handle.AsRef<uint>(_ElementSizeInBytesOffset!.Value);
+        }
     }
-  }
-  private static nint? _MeshoptCompressedOffset;
+    private static nint? _MeshoptCompressedOffset;
 
-  public ref bool MeshoptCompressed {
-    get {
-      if (_MeshoptCompressedOffset == null) {
-        _MeshoptCompressedOffset = Schema.GetOffset(0xA75611C2BED25A2C);
-      }
-      return ref _Handle.AsRef<bool>(_MeshoptCompressedOffset!.Value);
+    public ref bool MeshoptCompressed {
+        get {
+            _MeshoptCompressedOffset = _MeshoptCompressedOffset ?? Schema.GetOffset(0xA75611C2BED25A2C);
+            return ref _Handle.AsRef<bool>(_MeshoptCompressedOffset!.Value);
+        }
     }
-  }
-  private static nint? _MeshoptIndexSequenceOffset;
+    private static nint? _MeshoptIndexSequenceOffset;
 
-  public ref bool MeshoptIndexSequence {
-    get {
-      if (_MeshoptIndexSequenceOffset == null) {
-        _MeshoptIndexSequenceOffset = Schema.GetOffset(0xA75611C21727BBF2);
-      }
-      return ref _Handle.AsRef<bool>(_MeshoptIndexSequenceOffset!.Value);
+    public ref bool MeshoptIndexSequence {
+        get {
+            _MeshoptIndexSequenceOffset = _MeshoptIndexSequenceOffset ?? Schema.GetOffset(0xA75611C21727BBF2);
+            return ref _Handle.AsRef<bool>(_MeshoptIndexSequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _CompressedZSTDOffset;
+    private static nint? _CompressedZSTDOffset;
 
-  public ref bool CompressedZSTD {
-    get {
-      if (_CompressedZSTDOffset == null) {
-        _CompressedZSTDOffset = Schema.GetOffset(0xA75611C2AB2B4F3B);
-      }
-      return ref _Handle.AsRef<bool>(_CompressedZSTDOffset!.Value);
+    public ref bool CompressedZSTD {
+        get {
+            _CompressedZSTDOffset = _CompressedZSTDOffset ?? Schema.GetOffset(0xA75611C2AB2B4F3B);
+            return ref _Handle.AsRef<bool>(_CompressedZSTDOffset!.Value);
+        }
     }
-  }
-  private static nint? _CreateBufferSRVOffset;
+    private static nint? _CreateBufferSRVOffset;
 
-  public ref bool CreateBufferSRV {
-    get {
-      if (_CreateBufferSRVOffset == null) {
-        _CreateBufferSRVOffset = Schema.GetOffset(0xA75611C2DCF67560);
-      }
-      return ref _Handle.AsRef<bool>(_CreateBufferSRVOffset!.Value);
+    public ref bool CreateBufferSRV {
+        get {
+            _CreateBufferSRVOffset = _CreateBufferSRVOffset ?? Schema.GetOffset(0xA75611C2DCF67560);
+            return ref _Handle.AsRef<bool>(_CreateBufferSRVOffset!.Value);
+        }
     }
-  }
-  private static nint? _CreateBufferUAVOffset;
+    private static nint? _CreateBufferUAVOffset;
 
-  public ref bool CreateBufferUAV {
-    get {
-      if (_CreateBufferUAVOffset == null) {
-        _CreateBufferUAVOffset = Schema.GetOffset(0xA75611C27C3596ED);
-      }
-      return ref _Handle.AsRef<bool>(_CreateBufferUAVOffset!.Value);
+    public ref bool CreateBufferUAV {
+        get {
+            _CreateBufferUAVOffset = _CreateBufferUAVOffset ?? Schema.GetOffset(0xA75611C27C3596ED);
+            return ref _Handle.AsRef<bool>(_CreateBufferUAVOffset!.Value);
+        }
     }
-  }
-  private static nint? _CreateRawBufferOffset;
+    private static nint? _CreateRawBufferOffset;
 
-  public ref bool CreateRawBuffer {
-    get {
-      if (_CreateRawBufferOffset == null) {
-        _CreateRawBufferOffset = Schema.GetOffset(0xA75611C232F79BCF);
-      }
-      return ref _Handle.AsRef<bool>(_CreateRawBufferOffset!.Value);
+    public ref bool CreateRawBuffer {
+        get {
+            _CreateRawBufferOffset = _CreateRawBufferOffset ?? Schema.GetOffset(0xA75611C232F79BCF);
+            return ref _Handle.AsRef<bool>(_CreateRawBufferOffset!.Value);
+        }
     }
-  }
-  private static nint? _CreatePooledBufferOffset;
+    private static nint? _CreatePooledBufferOffset;
 
-  public ref bool CreatePooledBuffer {
-    get {
-      if (_CreatePooledBufferOffset == null) {
-        _CreatePooledBufferOffset = Schema.GetOffset(0xA75611C2EFB854B4);
-      }
-      return ref _Handle.AsRef<bool>(_CreatePooledBufferOffset!.Value);
+    public ref bool CreatePooledBuffer {
+        get {
+            _CreatePooledBufferOffset = _CreatePooledBufferOffset ?? Schema.GetOffset(0xA75611C2EFB854B4);
+            return ref _Handle.AsRef<bool>(_CreatePooledBufferOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputLayoutFieldsOffset;
+    private static nint? _InputLayoutFieldsOffset;
 
-  public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields {
-    get {
-      if (_InputLayoutFieldsOffset == null) {
-        _InputLayoutFieldsOffset = Schema.GetOffset(0xA75611C2FDECA2D8);
-      }
-      return ref _Handle.AsRef<CUtlVector<RenderInputLayoutField_t>>(_InputLayoutFieldsOffset!.Value);
+    public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields {
+        get {
+            _InputLayoutFieldsOffset = _InputLayoutFieldsOffset ?? Schema.GetOffset(0xA75611C2FDECA2D8);
+            return ref _Handle.AsRef<CUtlVector<RenderInputLayoutField_t>>(_InputLayoutFieldsOffset!.Value);
+        }
     }
-  }
 
 
 }

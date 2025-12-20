@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SkeletonAnimCapture_t__Camera_t : ISchemaClass<SkeletonAnimCapture_t__Camera_t> {
+public partial interface SkeletonAnimCapture_t__Camera_t : ISchemaClass<SkeletonAnimCapture_t__Camera_t>
+{
+    static SkeletonAnimCapture_t__Camera_t ISchemaClass<SkeletonAnimCapture_t__Camera_t>.From(nint handle) => new SkeletonAnimCapture_t__Camera_tImpl(handle);
+    static int ISchemaClass<SkeletonAnimCapture_t__Camera_t>.Size => 48;
+    static string? ISchemaClass<SkeletonAnimCapture_t__Camera_t>.ClassName => null;
 
-  static SkeletonAnimCapture_t__Camera_t ISchemaClass<SkeletonAnimCapture_t__Camera_t>.From(nint handle) => new SkeletonAnimCapture_t__Camera_tImpl(handle);
-  static int ISchemaClass<SkeletonAnimCapture_t__Camera_t>.Size => 48;
-  static string? ISchemaClass<SkeletonAnimCapture_t__Camera_t>.ClassName => null;
 
-  
-  public ref CTransform TmCamera { get; }
-  
-  public ref float Time { get; }
+    public ref CTransform TmCamera { get; }
+
+    public ref float Time { get; }
 
 
 }

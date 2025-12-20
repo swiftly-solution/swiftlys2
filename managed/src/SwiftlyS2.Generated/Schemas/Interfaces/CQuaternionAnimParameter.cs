@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CQuaternionAnimParameter : CConcreteAnimParameter, ISchemaClass<CQuaternionAnimParameter> {
+public partial interface CQuaternionAnimParameter : CConcreteAnimParameter, ISchemaClass<CQuaternionAnimParameter>
+{
+    static CQuaternionAnimParameter ISchemaClass<CQuaternionAnimParameter>.From(nint handle) => new CQuaternionAnimParameterImpl(handle);
+    static int ISchemaClass<CQuaternionAnimParameter>.Size => 160;
+    static string? ISchemaClass<CQuaternionAnimParameter>.ClassName => null;
 
-  static CQuaternionAnimParameter ISchemaClass<CQuaternionAnimParameter>.From(nint handle) => new CQuaternionAnimParameterImpl(handle);
-  static int ISchemaClass<CQuaternionAnimParameter>.Size => 160;
-  static string? ISchemaClass<CQuaternionAnimParameter>.ClassName => null;
 
-  
-  public ref Quaternion DefaultValue { get; }
-  
-  public ref bool Interpolate { get; }
+    public ref Quaternion DefaultValue { get; }
+
+    public ref bool Interpolate { get; }
 
 
 }

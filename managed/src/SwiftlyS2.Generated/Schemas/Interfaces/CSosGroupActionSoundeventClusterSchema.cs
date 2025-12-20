@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSosGroupActionSoundeventClusterSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionSoundeventClusterSchema> {
+public partial interface CSosGroupActionSoundeventClusterSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionSoundeventClusterSchema>
+{
+    static CSosGroupActionSoundeventClusterSchema ISchemaClass<CSosGroupActionSoundeventClusterSchema>.From(nint handle) => new CSosGroupActionSoundeventClusterSchemaImpl(handle);
+    static int ISchemaClass<CSosGroupActionSoundeventClusterSchema>.Size => 80;
+    static string? ISchemaClass<CSosGroupActionSoundeventClusterSchema>.ClassName => null;
 
-  static CSosGroupActionSoundeventClusterSchema ISchemaClass<CSosGroupActionSoundeventClusterSchema>.From(nint handle) => new CSosGroupActionSoundeventClusterSchemaImpl(handle);
-  static int ISchemaClass<CSosGroupActionSoundeventClusterSchema>.Size => 80;
-  static string? ISchemaClass<CSosGroupActionSoundeventClusterSchema>.ClassName => null;
 
-  
-  public ref int MinNearby { get; }
-  
-  public ref float ClusterEpsilon { get; }
-  
-  public string ShouldPlayOpvar { get; set; }
-  
-  public string ShouldPlayClusterChild { get; set; }
-  
-  public string ClusterSizeOpvar { get; set; }
-  
-  public string GroupBoundingBoxMinsOpvar { get; set; }
-  
-  public string GroupBoundingBoxMaxsOpvar { get; set; }
+    public ref int MinNearby { get; }
+
+    public ref float ClusterEpsilon { get; }
+
+    public string ShouldPlayOpvar { get; set; }
+
+    public string ShouldPlayClusterChild { get; set; }
+
+    public string ClusterSizeOpvar { get; set; }
+
+    public string GroupBoundingBoxMinsOpvar { get; set; }
+
+    public string GroupBoundingBoxMaxsOpvar { get; set; }
 
 
 }

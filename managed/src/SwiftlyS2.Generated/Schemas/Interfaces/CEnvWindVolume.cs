@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvWindVolume : CBaseEntity, ISchemaClass<CEnvWindVolume> {
+public partial interface CEnvWindVolume : CBaseEntity, ISchemaClass<CEnvWindVolume>
+{
+    static CEnvWindVolume ISchemaClass<CEnvWindVolume>.From(nint handle) => new CEnvWindVolumeImpl(handle);
+    static int ISchemaClass<CEnvWindVolume>.Size => 1320;
+    static string? ISchemaClass<CEnvWindVolume>.ClassName => "env_wind_volume";
 
-  static CEnvWindVolume ISchemaClass<CEnvWindVolume>.From(nint handle) => new CEnvWindVolumeImpl(handle);
-  static int ISchemaClass<CEnvWindVolume>.Size => 1320;
-  static string? ISchemaClass<CEnvWindVolume>.ClassName => "env_wind_volume";
 
-  
-  public ref bool Active { get; }
-  
-  public ref Vector BoxMins { get; }
-  
-  public ref Vector BoxMaxs { get; }
-  
-  public ref bool StartDisabled { get; }
-  
-  public ref int Shape { get; }
-  
-  public ref float WindSpeedMultiplier { get; }
-  
-  public ref float WindTurbulenceMultiplier { get; }
-  
-  public ref float WindSpeedVariationMultiplier { get; }
-  
-  public ref float WindDirectionVariationMultiplier { get; }
+    public ref bool Active { get; }
 
-  public void ActiveUpdated();
-  public void BoxMinsUpdated();
-  public void BoxMaxsUpdated();
-  public void StartDisabledUpdated();
-  public void ShapeUpdated();
-  public void WindSpeedMultiplierUpdated();
-  public void WindTurbulenceMultiplierUpdated();
-  public void WindSpeedVariationMultiplierUpdated();
-  public void WindDirectionVariationMultiplierUpdated();
+    public ref Vector BoxMins { get; }
+
+    public ref Vector BoxMaxs { get; }
+
+    public ref bool StartDisabled { get; }
+
+    public ref int Shape { get; }
+
+    public ref float WindSpeedMultiplier { get; }
+
+    public ref float WindTurbulenceMultiplier { get; }
+
+    public ref float WindSpeedVariationMultiplier { get; }
+
+    public ref float WindDirectionVariationMultiplier { get; }
+
+    public void ActiveUpdated();
+    public void BoxMinsUpdated();
+    public void BoxMaxsUpdated();
+    public void StartDisabledUpdated();
+    public void ShapeUpdated();
+    public void WindSpeedMultiplierUpdated();
+    public void WindTurbulenceMultiplierUpdated();
+    public void WindSpeedVariationMultiplierUpdated();
+    public void WindDirectionVariationMultiplierUpdated();
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SeqCmd_t : uint {
-
+public enum SeqCmd_t : uint
+{
  SeqCmd_Nop = 0,
 
  SeqCmd_LinearDelta = 1,

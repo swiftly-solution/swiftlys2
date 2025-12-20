@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSGameModeRules : ISchemaClass<CCSGameModeRules> {
+public partial interface CCSGameModeRules : ISchemaClass<CCSGameModeRules>
+{
+    static CCSGameModeRules ISchemaClass<CCSGameModeRules>.From(nint handle) => new CCSGameModeRulesImpl(handle);
+    static int ISchemaClass<CCSGameModeRules>.Size => 48;
+    static string? ISchemaClass<CCSGameModeRules>.ClassName => null;
 
-  static CCSGameModeRules ISchemaClass<CCSGameModeRules>.From(nint handle) => new CCSGameModeRulesImpl(handle);
-  static int ISchemaClass<CCSGameModeRules>.Size => 48;
-  static string? ISchemaClass<CCSGameModeRules>.ClassName => null;
 
-  
-  public ref CNetworkVarChainer __m_pChainEntity { get; }
+    public ref CNetworkVarChainer __m_pChainEntity { get; }
 
 
 }

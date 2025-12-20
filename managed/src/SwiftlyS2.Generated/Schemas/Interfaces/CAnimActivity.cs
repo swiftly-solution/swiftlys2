@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimActivity : ISchemaClass<CAnimActivity> {
+public partial interface CAnimActivity : ISchemaClass<CAnimActivity>
+{
+    static CAnimActivity ISchemaClass<CAnimActivity>.From(nint handle) => new CAnimActivityImpl(handle);
+    static int ISchemaClass<CAnimActivity>.Size => 32;
+    static string? ISchemaClass<CAnimActivity>.ClassName => null;
 
-  static CAnimActivity ISchemaClass<CAnimActivity>.From(nint handle) => new CAnimActivityImpl(handle);
-  static int ISchemaClass<CAnimActivity>.Size => 32;
-  static string? ISchemaClass<CAnimActivity>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public ref int Activity { get; }
-  
-  public ref int Flags { get; }
-  
-  public ref int Weight { get; }
+    public ref CBufferString Name { get; }
+
+    public ref int Activity { get; }
+
+    public ref int Flags { get; }
+
+    public ref int Weight { get; }
 
 
 }

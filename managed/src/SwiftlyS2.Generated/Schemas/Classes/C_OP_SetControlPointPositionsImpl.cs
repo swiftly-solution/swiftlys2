@@ -6,137 +6,112 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetControlPointPositionsImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointPositions {
+internal partial class C_OP_SetControlPointPositionsImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointPositions
+{
+    public C_OP_SetControlPointPositionsImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetControlPointPositionsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _UseWorldLocationOffset;
 
-  private static nint? _UseWorldLocationOffset;
-
-  public ref bool UseWorldLocation {
-    get {
-      if (_UseWorldLocationOffset == null) {
-        _UseWorldLocationOffset = Schema.GetOffset(0x12B1A872F371AED7);
-      }
-      return ref _Handle.AsRef<bool>(_UseWorldLocationOffset!.Value);
+    public ref bool UseWorldLocation {
+        get {
+            _UseWorldLocationOffset = _UseWorldLocationOffset ?? Schema.GetOffset(0x12B1A872F371AED7);
+            return ref _Handle.AsRef<bool>(_UseWorldLocationOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientOffset;
+    private static nint? _OrientOffset;
 
-  public ref bool Orient {
-    get {
-      if (_OrientOffset == null) {
-        _OrientOffset = Schema.GetOffset(0x12B1A8727CD61854);
-      }
-      return ref _Handle.AsRef<bool>(_OrientOffset!.Value);
+    public ref bool Orient {
+        get {
+            _OrientOffset = _OrientOffset ?? Schema.GetOffset(0x12B1A8727CD61854);
+            return ref _Handle.AsRef<bool>(_OrientOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetOnceOffset;
+    private static nint? _SetOnceOffset;
 
-  public ref bool SetOnce {
-    get {
-      if (_SetOnceOffset == null) {
-        _SetOnceOffset = Schema.GetOffset(0x12B1A8726B261086);
-      }
-      return ref _Handle.AsRef<bool>(_SetOnceOffset!.Value);
+    public ref bool SetOnce {
+        get {
+            _SetOnceOffset = _SetOnceOffset ?? Schema.GetOffset(0x12B1A8726B261086);
+            return ref _Handle.AsRef<bool>(_SetOnceOffset!.Value);
+        }
     }
-  }
-  private static nint? _CP1Offset;
+    private static nint? _CP1Offset;
 
-  public ref int CP1 {
-    get {
-      if (_CP1Offset == null) {
-        _CP1Offset = Schema.GetOffset(0x12B1A872D4B1E579);
-      }
-      return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+    public ref int CP1 {
+        get {
+            _CP1Offset = _CP1Offset ?? Schema.GetOffset(0x12B1A872D4B1E579);
+            return ref _Handle.AsRef<int>(_CP1Offset!.Value);
+        }
     }
-  }
-  private static nint? _CP2Offset;
+    private static nint? _CP2Offset;
 
-  public ref int CP2 {
-    get {
-      if (_CP2Offset == null) {
-        _CP2Offset = Schema.GetOffset(0x12B1A872D1B1E0C0);
-      }
-      return ref _Handle.AsRef<int>(_CP2Offset!.Value);
+    public ref int CP2 {
+        get {
+            _CP2Offset = _CP2Offset ?? Schema.GetOffset(0x12B1A872D1B1E0C0);
+            return ref _Handle.AsRef<int>(_CP2Offset!.Value);
+        }
     }
-  }
-  private static nint? _CP3Offset;
+    private static nint? _CP3Offset;
 
-  public ref int CP3 {
-    get {
-      if (_CP3Offset == null) {
-        _CP3Offset = Schema.GetOffset(0x12B1A872D2B1E253);
-      }
-      return ref _Handle.AsRef<int>(_CP3Offset!.Value);
+    public ref int CP3 {
+        get {
+            _CP3Offset = _CP3Offset ?? Schema.GetOffset(0x12B1A872D2B1E253);
+            return ref _Handle.AsRef<int>(_CP3Offset!.Value);
+        }
     }
-  }
-  private static nint? _CP4Offset;
+    private static nint? _CP4Offset;
 
-  public ref int CP4 {
-    get {
-      if (_CP4Offset == null) {
-        _CP4Offset = Schema.GetOffset(0x12B1A872D7B1EA32);
-      }
-      return ref _Handle.AsRef<int>(_CP4Offset!.Value);
+    public ref int CP4 {
+        get {
+            _CP4Offset = _CP4Offset ?? Schema.GetOffset(0x12B1A872D7B1EA32);
+            return ref _Handle.AsRef<int>(_CP4Offset!.Value);
+        }
     }
-  }
-  private static nint? _CP1PosOffset;
+    private static nint? _CP1PosOffset;
 
-  public ref Vector CP1Pos {
-    get {
-      if (_CP1PosOffset == null) {
-        _CP1PosOffset = Schema.GetOffset(0x12B1A872408288D9);
-      }
-      return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+    public ref Vector CP1Pos {
+        get {
+            _CP1PosOffset = _CP1PosOffset ?? Schema.GetOffset(0x12B1A872408288D9);
+            return ref _Handle.AsRef<Vector>(_CP1PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _CP2PosOffset;
+    private static nint? _CP2PosOffset;
 
-  public ref Vector CP2Pos {
-    get {
-      if (_CP2PosOffset == null) {
-        _CP2PosOffset = Schema.GetOffset(0x12B1A872862C8D46);
-      }
-      return ref _Handle.AsRef<Vector>(_CP2PosOffset!.Value);
+    public ref Vector CP2Pos {
+        get {
+            _CP2PosOffset = _CP2PosOffset ?? Schema.GetOffset(0x12B1A872862C8D46);
+            return ref _Handle.AsRef<Vector>(_CP2PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _CP3PosOffset;
+    private static nint? _CP3PosOffset;
 
-  public ref Vector CP3Pos {
-    get {
-      if (_CP3PosOffset == null) {
-        _CP3PosOffset = Schema.GetOffset(0x12B1A872E3C5304F);
-      }
-      return ref _Handle.AsRef<Vector>(_CP3PosOffset!.Value);
+    public ref Vector CP3Pos {
+        get {
+            _CP3PosOffset = _CP3PosOffset ?? Schema.GetOffset(0x12B1A872E3C5304F);
+            return ref _Handle.AsRef<Vector>(_CP3PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _CP4PosOffset;
+    private static nint? _CP4PosOffset;
 
-  public ref Vector CP4Pos {
-    get {
-      if (_CP4PosOffset == null) {
-        _CP4PosOffset = Schema.GetOffset(0x12B1A872A5E5E51C);
-      }
-      return ref _Handle.AsRef<Vector>(_CP4PosOffset!.Value);
+    public ref Vector CP4Pos {
+        get {
+            _CP4PosOffset = _CP4PosOffset ?? Schema.GetOffset(0x12B1A872A5E5E51C);
+            return ref _Handle.AsRef<Vector>(_CP4PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeadLocationOffset;
+    private static nint? _HeadLocationOffset;
 
-  public ref int HeadLocation {
-    get {
-      if (_HeadLocationOffset == null) {
-        _HeadLocationOffset = Schema.GetOffset(0x12B1A872A8ECDA78);
-      }
-      return ref _Handle.AsRef<int>(_HeadLocationOffset!.Value);
+    public ref int HeadLocation {
+        get {
+            _HeadLocationOffset = _HeadLocationOffset ?? Schema.GetOffset(0x12B1A872A8ECDA78);
+            return ref _Handle.AsRef<int>(_HeadLocationOffset!.Value);
+        }
     }
-  }
 
 
 }

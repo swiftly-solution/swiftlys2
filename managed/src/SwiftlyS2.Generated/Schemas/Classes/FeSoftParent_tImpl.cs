@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeSoftParent_tImpl : SchemaClass, FeSoftParent_t {
+internal partial class FeSoftParent_tImpl : SchemaClass, FeSoftParent_t
+{
+    public FeSoftParent_tImpl(nint handle) : base(handle) { }
 
-  public FeSoftParent_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParentOffset;
 
-  private static nint? _ParentOffset;
-
-  public ref int Parent {
-    get {
-      if (_ParentOffset == null) {
-        _ParentOffset = Schema.GetOffset(0x2404393716640171);
-      }
-      return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+    public ref int Parent {
+        get {
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0x2404393716640171);
+            return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaOffset;
+    private static nint? _AlphaOffset;
 
-  public ref float Alpha {
-    get {
-      if (_AlphaOffset == null) {
-        _AlphaOffset = Schema.GetOffset(0x24043937684C8871);
-      }
-      return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
+    public ref float Alpha {
+        get {
+            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0x24043937684C8871);
+            return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
+        }
     }
-  }
 
 
 }

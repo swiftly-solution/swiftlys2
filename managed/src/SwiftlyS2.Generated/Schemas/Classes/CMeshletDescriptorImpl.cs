@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMeshletDescriptorImpl : SchemaClass, CMeshletDescriptor {
+internal partial class CMeshletDescriptorImpl : SchemaClass, CMeshletDescriptor
+{
+    public CMeshletDescriptorImpl(nint handle) : base(handle) { }
 
-  public CMeshletDescriptorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PackedAABBOffset;
 
-  private static nint? _PackedAABBOffset;
-
-  public PackedAABB_t PackedAABB {
-    get {
-      if (_PackedAABBOffset == null) {
-        _PackedAABBOffset = Schema.GetOffset(0xAF93495D8D638233);
-      }
-      return new PackedAABB_tImpl(_Handle + _PackedAABBOffset!.Value);
+    public PackedAABB_t PackedAABB {
+        get {
+            _PackedAABBOffset = _PackedAABBOffset ?? Schema.GetOffset(0xAF93495D8D638233);
+            return new PackedAABB_tImpl(_Handle + _PackedAABBOffset!.Value);
+        }
     }
-  }
-  private static nint? _CullingDataOffset;
+    private static nint? _CullingDataOffset;
 
-  public CDrawCullingData CullingData {
-    get {
-      if (_CullingDataOffset == null) {
-        _CullingDataOffset = Schema.GetOffset(0xAF93495DA6D54DC3);
-      }
-      return new CDrawCullingDataImpl(_Handle + _CullingDataOffset!.Value);
+    public CDrawCullingData CullingData {
+        get {
+            _CullingDataOffset = _CullingDataOffset ?? Schema.GetOffset(0xAF93495DA6D54DC3);
+            return new CDrawCullingDataImpl(_Handle + _CullingDataOffset!.Value);
+        }
     }
-  }
-  private static nint? _VertexOffsetOffset;
+    private static nint? _VertexOffsetOffset;
 
-  public ref uint VertexOffset {
-    get {
-      if (_VertexOffsetOffset == null) {
-        _VertexOffsetOffset = Schema.GetOffset(0xAF93495DF1F6FC40);
-      }
-      return ref _Handle.AsRef<uint>(_VertexOffsetOffset!.Value);
+    public ref uint VertexOffset {
+        get {
+            _VertexOffsetOffset = _VertexOffsetOffset ?? Schema.GetOffset(0xAF93495DF1F6FC40);
+            return ref _Handle.AsRef<uint>(_VertexOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriangleOffsetOffset;
+    private static nint? _TriangleOffsetOffset;
 
-  public ref uint TriangleOffset {
-    get {
-      if (_TriangleOffsetOffset == null) {
-        _TriangleOffsetOffset = Schema.GetOffset(0xAF93495DAFE22CE6);
-      }
-      return ref _Handle.AsRef<uint>(_TriangleOffsetOffset!.Value);
+    public ref uint TriangleOffset {
+        get {
+            _TriangleOffsetOffset = _TriangleOffsetOffset ?? Schema.GetOffset(0xAF93495DAFE22CE6);
+            return ref _Handle.AsRef<uint>(_TriangleOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _VertexCountOffset;
+    private static nint? _VertexCountOffset;
 
-  public ref byte VertexCount {
-    get {
-      if (_VertexCountOffset == null) {
-        _VertexCountOffset = Schema.GetOffset(0xAF93495D12923E12);
-      }
-      return ref _Handle.AsRef<byte>(_VertexCountOffset!.Value);
+    public ref byte VertexCount {
+        get {
+            _VertexCountOffset = _VertexCountOffset ?? Schema.GetOffset(0xAF93495D12923E12);
+            return ref _Handle.AsRef<byte>(_VertexCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriangleCountOffset;
+    private static nint? _TriangleCountOffset;
 
-  public ref byte TriangleCount {
-    get {
-      if (_TriangleCountOffset == null) {
-        _TriangleCountOffset = Schema.GetOffset(0xAF93495D5E82E240);
-      }
-      return ref _Handle.AsRef<byte>(_TriangleCountOffset!.Value);
+    public ref byte TriangleCount {
+        get {
+            _TriangleCountOffset = _TriangleCountOffset ?? Schema.GetOffset(0xAF93495D5E82E240);
+            return ref _Handle.AsRef<byte>(_TriangleCountOffset!.Value);
+        }
     }
-  }
 
 
 }

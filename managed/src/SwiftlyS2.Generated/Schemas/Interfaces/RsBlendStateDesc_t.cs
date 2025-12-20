@@ -8,37 +8,37 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RsBlendStateDesc_t : ISchemaClass<RsBlendStateDesc_t> {
+public partial interface RsBlendStateDesc_t : ISchemaClass<RsBlendStateDesc_t>
+{
+    static RsBlendStateDesc_t ISchemaClass<RsBlendStateDesc_t>.From(nint handle) => new RsBlendStateDesc_tImpl(handle);
+    static int ISchemaClass<RsBlendStateDesc_t>.Size => 32;
+    static string? ISchemaClass<RsBlendStateDesc_t>.ClassName => null;
 
-  static RsBlendStateDesc_t ISchemaClass<RsBlendStateDesc_t>.From(nint handle) => new RsBlendStateDesc_tImpl(handle);
-  static int ISchemaClass<RsBlendStateDesc_t>.Size => 32;
-  static string? ISchemaClass<RsBlendStateDesc_t>.ClassName => null;
 
-  
-  public ref uint SrcBlendBits { get; }
-  
-  public ref uint DestBlendBits { get; }
-  
-  public ref uint SrcBlendAlphaBits { get; }
-  
-  public ref uint DestBlendAlphaBits { get; }
-  
-  public ref uint RenderTargetWriteMaskBits { get; }
-  
-  // bitfield
-  public SchemaUntypedField BlendOpBits { get; }
-  
-  // bitfield
-  public SchemaUntypedField AlphaToCoverageEnable { get; }
-  
-  // bitfield
-  public SchemaUntypedField IndependentBlendEnable { get; }
-  
-  public ref uint BlendOpAlphaBits { get; }
-  
-  public ref byte BlendEnableBits { get; }
-  
-  public ref byte SrgbWriteEnableBits { get; }
+    public ref uint SrcBlendBits { get; }
+
+    public ref uint DestBlendBits { get; }
+
+    public ref uint SrcBlendAlphaBits { get; }
+
+    public ref uint DestBlendAlphaBits { get; }
+
+    public ref uint RenderTargetWriteMaskBits { get; }
+
+    // bitfield
+    public SchemaUntypedField BlendOpBits { get; }
+
+    // bitfield
+    public SchemaUntypedField AlphaToCoverageEnable { get; }
+
+    // bitfield
+    public SchemaUntypedField IndependentBlendEnable { get; }
+
+    public ref uint BlendOpAlphaBits { get; }
+
+    public ref byte BlendEnableBits { get; }
+
+    public ref byte SrgbWriteEnableBits { get; }
 
 
 }

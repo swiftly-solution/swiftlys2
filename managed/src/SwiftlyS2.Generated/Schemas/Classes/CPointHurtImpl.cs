@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointHurtImpl : CPointEntityImpl, CPointHurt {
+internal partial class CPointHurtImpl : CPointEntityImpl, CPointHurt
+{
+    public CPointHurtImpl(nint handle) : base(handle) { }
 
-  public CPointHurtImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DamageOffset;
 
-  private static nint? _DamageOffset;
-
-  public ref int Damage {
-    get {
-      if (_DamageOffset == null) {
-        _DamageOffset = Schema.GetOffset(0x4FEAE151C56D69C);
-      }
-      return ref _Handle.AsRef<int>(_DamageOffset!.Value);
+    public ref int Damage {
+        get {
+            _DamageOffset = _DamageOffset ?? Schema.GetOffset(0x4FEAE151C56D69C);
+            return ref _Handle.AsRef<int>(_DamageOffset!.Value);
+        }
     }
-  }
-  private static nint? _BitsDamageTypeOffset;
+    private static nint? _BitsDamageTypeOffset;
 
-  public ref DamageTypes_t BitsDamageType {
-    get {
-      if (_BitsDamageTypeOffset == null) {
-        _BitsDamageTypeOffset = Schema.GetOffset(0x4FEAE15EEAC35FC);
-      }
-      return ref _Handle.AsRef<DamageTypes_t>(_BitsDamageTypeOffset!.Value);
+    public ref DamageTypes_t BitsDamageType {
+        get {
+            _BitsDamageTypeOffset = _BitsDamageTypeOffset ?? Schema.GetOffset(0x4FEAE15EEAC35FC);
+            return ref _Handle.AsRef<DamageTypes_t>(_BitsDamageTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x4FEAE155ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x4FEAE155ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _DelayOffset;
+    private static nint? _DelayOffset;
 
-  public ref float Delay {
-    get {
-      if (_DelayOffset == null) {
-        _DelayOffset = Schema.GetOffset(0x4FEAE157D68FD6E);
-      }
-      return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+    public ref float Delay {
+        get {
+            _DelayOffset = _DelayOffset ?? Schema.GetOffset(0x4FEAE157D68FD6E);
+            return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrTargetOffset;
+    private static nint? _StrTargetOffset;
 
-  public string StrTarget {
-    get {
-      if (_StrTargetOffset == null) {
-        _StrTargetOffset = Schema.GetOffset(0x4FEAE15B8F64879);
-      }
-      var ptr = _Handle.Read<nint>(_StrTargetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrTargetOffset == null) {
-        _StrTargetOffset = Schema.GetOffset(0x4FEAE15B8F64879);
-      }
-      Schema.SetString(_Handle, _StrTargetOffset!.Value, value);
-    }
-  } 
-  private static nint? _ActivatorOffset;
+    public string StrTarget {
+        get {
+            _StrTargetOffset = _StrTargetOffset ?? Schema.GetOffset(0x4FEAE15B8F64879);
+            return Schema.GetString(_Handle.Read<nint>(_StrTargetOffset!.Value));
+        }
+        set {
+            _StrTargetOffset = _StrTargetOffset ?? Schema.GetOffset(0x4FEAE15B8F64879);
+            Schema.SetString(_Handle, _StrTargetOffset!.Value, value);
+        }
+    } 
+    private static nint? _ActivatorOffset;
 
-  public ref CHandle<CBaseEntity> Activator {
-    get {
-      if (_ActivatorOffset == null) {
-        _ActivatorOffset = Schema.GetOffset(0x4FEAE159C480B5A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
+    public ref CHandle<CBaseEntity> Activator {
+        get {
+            _ActivatorOffset = _ActivatorOffset ?? Schema.GetOffset(0x4FEAE159C480B5A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
+        }
     }
-  }
 
 
 }

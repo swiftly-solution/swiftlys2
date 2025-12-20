@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_GameDecalRenderer : CParticleFunctionRenderer, ISchemaClass<C_OP_GameDecalRenderer> {
+public partial interface C_OP_GameDecalRenderer : CParticleFunctionRenderer, ISchemaClass<C_OP_GameDecalRenderer>
+{
+    static C_OP_GameDecalRenderer ISchemaClass<C_OP_GameDecalRenderer>.From(nint handle) => new C_OP_GameDecalRendererImpl(handle);
+    static int ISchemaClass<C_OP_GameDecalRenderer>.Size => 7216;
+    static string? ISchemaClass<C_OP_GameDecalRenderer>.ClassName => null;
 
-  static C_OP_GameDecalRenderer ISchemaClass<C_OP_GameDecalRenderer>.From(nint handle) => new C_OP_GameDecalRendererImpl(handle);
-  static int ISchemaClass<C_OP_GameDecalRenderer>.Size => 7216;
-  static string? ISchemaClass<C_OP_GameDecalRenderer>.ClassName => null;
 
-  
-  public ref CGlobalSymbol DecalGroupName { get; }
-  
-  public ref EventTypeSelection_t EventType { get; }
-  
-  public ref ParticleCollisionMask_t InteractionMask { get; }
-  
-  public ref ParticleCollisionGroup_t CollisionGroup { get; }
-  
-  public CPerParticleVecInput StartPos { get; }
-  
-  public CPerParticleVecInput EndPos { get; }
-  
-  public CPerParticleFloatInput TraceBloat { get; }
-  
-  public CPerParticleFloatInput DecalSize { get; }
-  
-  public CPerParticleFloatInput DecalGroupIndex { get; }
-  
-  public CPerParticleFloatInput DecalRotation { get; }
-  
-  public CPerParticleVecInput ModulationColor { get; }
-  
-  public ref bool UseGameDefaultDecalSize { get; }
-  
-  public ref bool RandomDecalRotation { get; }
-  
-  public ref bool RandomlySelectDecalInGroup { get; }
-  
-  public ref bool NoDecalsOnOwner { get; }
-  
-  public ref bool VisualizeTraces { get; }
+    public ref CGlobalSymbol DecalGroupName { get; }
+
+    public ref EventTypeSelection_t EventType { get; }
+
+    public ref ParticleCollisionMask_t InteractionMask { get; }
+
+    public ref ParticleCollisionGroup_t CollisionGroup { get; }
+
+    public CPerParticleVecInput StartPos { get; }
+
+    public CPerParticleVecInput EndPos { get; }
+
+    public CPerParticleFloatInput TraceBloat { get; }
+
+    public CPerParticleFloatInput DecalSize { get; }
+
+    public CPerParticleFloatInput DecalGroupIndex { get; }
+
+    public CPerParticleFloatInput DecalRotation { get; }
+
+    public CPerParticleVecInput ModulationColor { get; }
+
+    public ref bool UseGameDefaultDecalSize { get; }
+
+    public ref bool RandomDecalRotation { get; }
+
+    public ref bool RandomlySelectDecalInGroup { get; }
+
+    public ref bool NoDecalsOnOwner { get; }
+
+    public ref bool VisualizeTraces { get; }
 
 
 }

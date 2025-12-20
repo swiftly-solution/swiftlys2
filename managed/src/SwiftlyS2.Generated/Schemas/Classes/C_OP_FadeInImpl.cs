@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_FadeInImpl : CParticleFunctionOperatorImpl, C_OP_FadeIn {
+internal partial class C_OP_FadeInImpl : CParticleFunctionOperatorImpl, C_OP_FadeIn
+{
+    public C_OP_FadeInImpl(nint handle) : base(handle) { }
 
-  public C_OP_FadeInImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FadeInTimeMinOffset;
 
-  private static nint? _FadeInTimeMinOffset;
-
-  public ref float FadeInTimeMin {
-    get {
-      if (_FadeInTimeMinOffset == null) {
-        _FadeInTimeMinOffset = Schema.GetOffset(0xA8B59B1091A2EFE5);
-      }
-      return ref _Handle.AsRef<float>(_FadeInTimeMinOffset!.Value);
+    public ref float FadeInTimeMin {
+        get {
+            _FadeInTimeMinOffset = _FadeInTimeMinOffset ?? Schema.GetOffset(0xA8B59B1091A2EFE5);
+            return ref _Handle.AsRef<float>(_FadeInTimeMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeInTimeMaxOffset;
+    private static nint? _FadeInTimeMaxOffset;
 
-  public ref float FadeInTimeMax {
-    get {
-      if (_FadeInTimeMaxOffset == null) {
-        _FadeInTimeMaxOffset = Schema.GetOffset(0xA8B59B109BB6875B);
-      }
-      return ref _Handle.AsRef<float>(_FadeInTimeMaxOffset!.Value);
+    public ref float FadeInTimeMax {
+        get {
+            _FadeInTimeMaxOffset = _FadeInTimeMaxOffset ?? Schema.GetOffset(0xA8B59B109BB6875B);
+            return ref _Handle.AsRef<float>(_FadeInTimeMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeInTimeExpOffset;
+    private static nint? _FadeInTimeExpOffset;
 
-  public ref float FadeInTimeExp {
-    get {
-      if (_FadeInTimeExpOffset == null) {
-        _FadeInTimeExpOffset = Schema.GetOffset(0xA8B59B1046BA449A);
-      }
-      return ref _Handle.AsRef<float>(_FadeInTimeExpOffset!.Value);
+    public ref float FadeInTimeExp {
+        get {
+            _FadeInTimeExpOffset = _FadeInTimeExpOffset ?? Schema.GetOffset(0xA8B59B1046BA449A);
+            return ref _Handle.AsRef<float>(_FadeInTimeExpOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProportionalOffset;
+    private static nint? _ProportionalOffset;
 
-  public ref bool Proportional {
-    get {
-      if (_ProportionalOffset == null) {
-        _ProportionalOffset = Schema.GetOffset(0xA8B59B10891F328A);
-      }
-      return ref _Handle.AsRef<bool>(_ProportionalOffset!.Value);
+    public ref bool Proportional {
+        get {
+            _ProportionalOffset = _ProportionalOffset ?? Schema.GetOffset(0xA8B59B10891F328A);
+            return ref _Handle.AsRef<bool>(_ProportionalOffset!.Value);
+        }
     }
-  }
 
 
 }

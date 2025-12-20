@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleAttachment_t : uint {
-
+public enum ParticleAttachment_t : uint
+{
  PATTACH_INVALID = uint.MaxValue,
 
  PATTACH_ABSORIGIN = 0,

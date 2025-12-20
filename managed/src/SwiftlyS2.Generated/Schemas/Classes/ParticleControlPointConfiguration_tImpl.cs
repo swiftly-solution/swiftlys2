@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ParticleControlPointConfiguration_tImpl : SchemaClass, ParticleControlPointConfiguration_t {
+internal partial class ParticleControlPointConfiguration_tImpl : SchemaClass, ParticleControlPointConfiguration_t
+{
+    public ParticleControlPointConfiguration_tImpl(nint handle) : base(handle) { }
 
-  public ParticleControlPointConfiguration_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xC54E49C74D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xC54E49C74D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _DriversOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xC54E49C74D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<ParticleControlPointDriver_t> Drivers {
+        get {
+            _DriversOffset = _DriversOffset ?? Schema.GetOffset(0xC54E49C7C63563E4);
+            return ref _Handle.AsRef<CUtlVector<ParticleControlPointDriver_t>>(_DriversOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xC54E49C74D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _DriversOffset;
+    private static nint? _PreviewStateOffset;
 
-  public ref CUtlVector<ParticleControlPointDriver_t> Drivers {
-    get {
-      if (_DriversOffset == null) {
-        _DriversOffset = Schema.GetOffset(0xC54E49C7C63563E4);
-      }
-      return ref _Handle.AsRef<CUtlVector<ParticleControlPointDriver_t>>(_DriversOffset!.Value);
+    public ParticlePreviewState_t PreviewState {
+        get {
+            _PreviewStateOffset = _PreviewStateOffset ?? Schema.GetOffset(0xC54E49C79E440558);
+            return new ParticlePreviewState_tImpl(_Handle + _PreviewStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _PreviewStateOffset;
-
-  public ParticlePreviewState_t PreviewState {
-    get {
-      if (_PreviewStateOffset == null) {
-        _PreviewStateOffset = Schema.GetOffset(0xC54E49C79E440558);
-      }
-      return new ParticlePreviewState_tImpl(_Handle + _PreviewStateOffset!.Value);
-    }
-  }
 
 
 }

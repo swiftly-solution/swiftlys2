@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicMeasureMovement : CLogicalEntity, ISchemaClass<CLogicMeasureMovement> {
+public partial interface CLogicMeasureMovement : CLogicalEntity, ISchemaClass<CLogicMeasureMovement>
+{
+    static CLogicMeasureMovement ISchemaClass<CLogicMeasureMovement>.From(nint handle) => new CLogicMeasureMovementImpl(handle);
+    static int ISchemaClass<CLogicMeasureMovement>.Size => 1312;
+    static string? ISchemaClass<CLogicMeasureMovement>.ClassName => "logic_measure_movement";
 
-  static CLogicMeasureMovement ISchemaClass<CLogicMeasureMovement>.From(nint handle) => new CLogicMeasureMovementImpl(handle);
-  static int ISchemaClass<CLogicMeasureMovement>.Size => 1312;
-  static string? ISchemaClass<CLogicMeasureMovement>.ClassName => "logic_measure_movement";
 
-  
-  public string StrMeasureTarget { get; set; }
-  
-  public string StrMeasureReference { get; set; }
-  
-  public string StrTargetReference { get; set; }
-  
-  public ref CHandle<CBaseEntity> MeasureTarget { get; }
-  
-  public ref CHandle<CBaseEntity> MeasureReference { get; }
-  
-  public ref CHandle<CBaseEntity> Target { get; }
-  
-  public ref CHandle<CBaseEntity> TargetReference { get; }
-  
-  public ref float Scale { get; }
-  
-  public ref int MeasureType { get; }
+    public string StrMeasureTarget { get; set; }
+
+    public string StrMeasureReference { get; set; }
+
+    public string StrTargetReference { get; set; }
+
+    public ref CHandle<CBaseEntity> MeasureTarget { get; }
+
+    public ref CHandle<CBaseEntity> MeasureReference { get; }
+
+    public ref CHandle<CBaseEntity> Target { get; }
+
+    public ref CHandle<CBaseEntity> TargetReference { get; }
+
+    public ref float Scale { get; }
+
+    public ref int MeasureType { get; }
 
 
 }

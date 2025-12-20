@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateSequentialPathV2 : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateSequentialPathV2> {
+public partial interface C_INIT_CreateSequentialPathV2 : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateSequentialPathV2>
+{
+    static C_INIT_CreateSequentialPathV2 ISchemaClass<C_INIT_CreateSequentialPathV2>.From(nint handle) => new C_INIT_CreateSequentialPathV2Impl(handle);
+    static int ISchemaClass<C_INIT_CreateSequentialPathV2>.Size => 1296;
+    static string? ISchemaClass<C_INIT_CreateSequentialPathV2>.ClassName => null;
 
-  static C_INIT_CreateSequentialPathV2 ISchemaClass<C_INIT_CreateSequentialPathV2>.From(nint handle) => new C_INIT_CreateSequentialPathV2Impl(handle);
-  static int ISchemaClass<C_INIT_CreateSequentialPathV2>.Size => 1296;
-  static string? ISchemaClass<C_INIT_CreateSequentialPathV2>.ClassName => null;
 
-  
-  public CPerParticleFloatInput MaxDistance { get; }
-  
-  public CParticleCollectionFloatInput NumToAssign { get; }
-  
-  public ref bool Loop { get; }
-  
-  public ref bool CPPairs { get; }
-  
-  public ref bool SaveOffset { get; }
-  
-  public CPathParameters PathParams { get; }
+    public CPerParticleFloatInput MaxDistance { get; }
+
+    public CParticleCollectionFloatInput NumToAssign { get; }
+
+    public ref bool Loop { get; }
+
+    public ref bool CPPairs { get; }
+
+    public ref bool SaveOffset { get; }
+
+    public CPathParameters PathParams { get; }
 
 
 }

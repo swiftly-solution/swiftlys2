@@ -4,7 +4,7 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PulseCollisionGroup_t : uint {
-
+public enum PulseCollisionGroup_t : uint
+{
  DEFAULT = 0,
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleFunctionConstraint : CParticleFunction, ISchemaClass<CParticleFunctionConstraint> {
-
-  static CParticleFunctionConstraint ISchemaClass<CParticleFunctionConstraint>.From(nint handle) => new CParticleFunctionConstraintImpl(handle);
-  static int ISchemaClass<CParticleFunctionConstraint>.Size => 464;
-  static string? ISchemaClass<CParticleFunctionConstraint>.ClassName => null;
+public partial interface CParticleFunctionConstraint : CParticleFunction, ISchemaClass<CParticleFunctionConstraint>
+{
+    static CParticleFunctionConstraint ISchemaClass<CParticleFunctionConstraint>.From(nint handle) => new CParticleFunctionConstraintImpl(handle);
+    static int ISchemaClass<CParticleFunctionConstraint>.Size => 464;
+    static string? ISchemaClass<CParticleFunctionConstraint>.ClassName => null;
 
 
 

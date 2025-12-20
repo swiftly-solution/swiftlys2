@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoDeathmatchSpawn : SpawnPoint, ISchemaClass<CInfoDeathmatchSpawn> {
-
-  static CInfoDeathmatchSpawn ISchemaClass<CInfoDeathmatchSpawn>.From(nint handle) => new CInfoDeathmatchSpawnImpl(handle);
-  static int ISchemaClass<CInfoDeathmatchSpawn>.Size => 1280;
-  static string? ISchemaClass<CInfoDeathmatchSpawn>.ClassName => "info_deathmatch_spawn";
+public partial interface CInfoDeathmatchSpawn : SpawnPoint, ISchemaClass<CInfoDeathmatchSpawn>
+{
+    static CInfoDeathmatchSpawn ISchemaClass<CInfoDeathmatchSpawn>.From(nint handle) => new CInfoDeathmatchSpawnImpl(handle);
+    static int ISchemaClass<CInfoDeathmatchSpawn>.Size => 1280;
+    static string? ISchemaClass<CInfoDeathmatchSpawn>.ClassName => "info_deathmatch_spawn";
 
 
 

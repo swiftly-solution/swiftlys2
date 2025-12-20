@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCSequenceGroupData : ISchemaClass<InfoForResourceTypeCSequenceGroupData> {
-
-  static InfoForResourceTypeCSequenceGroupData ISchemaClass<InfoForResourceTypeCSequenceGroupData>.From(nint handle) => new InfoForResourceTypeCSequenceGroupDataImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCSequenceGroupData>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCSequenceGroupData>.ClassName => null;
+public partial interface InfoForResourceTypeCSequenceGroupData : ISchemaClass<InfoForResourceTypeCSequenceGroupData>
+{
+    static InfoForResourceTypeCSequenceGroupData ISchemaClass<InfoForResourceTypeCSequenceGroupData>.From(nint handle) => new InfoForResourceTypeCSequenceGroupDataImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCSequenceGroupData>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCSequenceGroupData>.ClassName => null;
 
 
 

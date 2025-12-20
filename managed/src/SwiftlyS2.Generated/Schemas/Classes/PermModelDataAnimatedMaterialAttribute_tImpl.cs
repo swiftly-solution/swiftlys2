@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PermModelDataAnimatedMaterialAttribute_tImpl : SchemaClass, PermModelDataAnimatedMaterialAttribute_t {
+internal partial class PermModelDataAnimatedMaterialAttribute_tImpl : SchemaClass, PermModelDataAnimatedMaterialAttribute_t
+{
+    public PermModelDataAnimatedMaterialAttribute_tImpl(nint handle) : base(handle) { }
 
-  public PermModelDataAnimatedMaterialAttribute_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttributeNameOffset;
 
-  private static nint? _AttributeNameOffset;
+    public string AttributeName {
+        get {
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x6489C15F1408864C);
+            return Schema.GetString(_Handle.Read<nint>(_AttributeNameOffset!.Value));
+        }
+        set {
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0x6489C15F1408864C);
+            Schema.SetString(_Handle, _AttributeNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NumChannelsOffset;
 
-  public string AttributeName {
-    get {
-      if (_AttributeNameOffset == null) {
-        _AttributeNameOffset = Schema.GetOffset(0x6489C15F1408864C);
-      }
-      var ptr = _Handle.Read<nint>(_AttributeNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int NumChannels {
+        get {
+            _NumChannelsOffset = _NumChannelsOffset ?? Schema.GetOffset(0x6489C15FEA44FE77);
+            return ref _Handle.AsRef<int>(_NumChannelsOffset!.Value);
+        }
     }
-    set {
-      if (_AttributeNameOffset == null) {
-        _AttributeNameOffset = Schema.GetOffset(0x6489C15F1408864C);
-      }
-      Schema.SetString(_Handle, _AttributeNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NumChannelsOffset;
-
-  public ref int NumChannels {
-    get {
-      if (_NumChannelsOffset == null) {
-        _NumChannelsOffset = Schema.GetOffset(0x6489C15FEA44FE77);
-      }
-      return ref _Handle.AsRef<int>(_NumChannelsOffset!.Value);
-    }
-  }
 
 
 }

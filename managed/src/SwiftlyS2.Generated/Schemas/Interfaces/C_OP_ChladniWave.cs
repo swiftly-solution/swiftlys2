@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ChladniWave : CParticleFunctionOperator, ISchemaClass<C_OP_ChladniWave> {
+public partial interface C_OP_ChladniWave : CParticleFunctionOperator, ISchemaClass<C_OP_ChladniWave>
+{
+    static C_OP_ChladniWave ISchemaClass<C_OP_ChladniWave>.From(nint handle) => new C_OP_ChladniWaveImpl(handle);
+    static int ISchemaClass<C_OP_ChladniWave>.Size => 5400;
+    static string? ISchemaClass<C_OP_ChladniWave>.ClassName => null;
 
-  static C_OP_ChladniWave ISchemaClass<C_OP_ChladniWave>.From(nint handle) => new C_OP_ChladniWaveImpl(handle);
-  static int ISchemaClass<C_OP_ChladniWave>.Size => 5400;
-  static string? ISchemaClass<C_OP_ChladniWave>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleFloatInput InputMin { get; }
-  
-  public CPerParticleFloatInput InputMax { get; }
-  
-  public CPerParticleFloatInput OutputMin { get; }
-  
-  public CPerParticleFloatInput OutputMax { get; }
-  
-  public CPerParticleVecInput WaveLength { get; }
-  
-  public CPerParticleVecInput Harmonics { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref int LocalSpaceControlPoint { get; }
-  
-  public ref bool B3D { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleFloatInput InputMin { get; }
+
+    public CPerParticleFloatInput InputMax { get; }
+
+    public CPerParticleFloatInput OutputMin { get; }
+
+    public CPerParticleFloatInput OutputMax { get; }
+
+    public CPerParticleVecInput WaveLength { get; }
+
+    public CPerParticleVecInput Harmonics { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref int LocalSpaceControlPoint { get; }
+
+    public ref bool B3D { get; }
 
 
 }

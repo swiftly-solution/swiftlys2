@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_PickBestOutflowSelector : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_PickBestOutflowSelector> {
+public partial interface CPulseCell_PickBestOutflowSelector : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_PickBestOutflowSelector>
+{
+    static CPulseCell_PickBestOutflowSelector ISchemaClass<CPulseCell_PickBestOutflowSelector>.From(nint handle) => new CPulseCell_PickBestOutflowSelectorImpl(handle);
+    static int ISchemaClass<CPulseCell_PickBestOutflowSelector>.Size => 104;
+    static string? ISchemaClass<CPulseCell_PickBestOutflowSelector>.ClassName => null;
 
-  static CPulseCell_PickBestOutflowSelector ISchemaClass<CPulseCell_PickBestOutflowSelector>.From(nint handle) => new CPulseCell_PickBestOutflowSelectorImpl(handle);
-  static int ISchemaClass<CPulseCell_PickBestOutflowSelector>.Size => 104;
-  static string? ISchemaClass<CPulseCell_PickBestOutflowSelector>.ClassName => null;
 
-  
-  public ref PulseBestOutflowRules_t CheckType { get; }
-  
-  public PulseSelectorOutflowList_t OutflowList { get; }
+    public ref PulseBestOutflowRules_t CheckType { get; }
+
+    public PulseSelectorOutflowList_t OutflowList { get; }
 
 
 }

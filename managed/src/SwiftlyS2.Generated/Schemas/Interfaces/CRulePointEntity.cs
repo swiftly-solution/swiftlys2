@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRulePointEntity : CRuleEntity, ISchemaClass<CRulePointEntity> {
+public partial interface CRulePointEntity : CRuleEntity, ISchemaClass<CRulePointEntity>
+{
+    static CRulePointEntity ISchemaClass<CRulePointEntity>.From(nint handle) => new CRulePointEntityImpl(handle);
+    static int ISchemaClass<CRulePointEntity>.Size => 2024;
+    static string? ISchemaClass<CRulePointEntity>.ClassName => null;
 
-  static CRulePointEntity ISchemaClass<CRulePointEntity>.From(nint handle) => new CRulePointEntityImpl(handle);
-  static int ISchemaClass<CRulePointEntity>.Size => 2024;
-  static string? ISchemaClass<CRulePointEntity>.ClassName => null;
 
-  
-  public ref int Score { get; }
+    public ref int Score { get; }
 
 
 }

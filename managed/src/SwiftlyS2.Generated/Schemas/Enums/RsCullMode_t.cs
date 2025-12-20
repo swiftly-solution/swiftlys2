@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RsCullMode_t : byte {
-
+public enum RsCullMode_t : byte
+{
  RS_CULL_NONE = 0,
 
  RS_CULL_BACK = 1,

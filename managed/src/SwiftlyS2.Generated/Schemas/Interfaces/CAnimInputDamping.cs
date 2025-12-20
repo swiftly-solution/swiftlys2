@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimInputDamping : ISchemaClass<CAnimInputDamping> {
+public partial interface CAnimInputDamping : ISchemaClass<CAnimInputDamping>
+{
+    static CAnimInputDamping ISchemaClass<CAnimInputDamping>.From(nint handle) => new CAnimInputDampingImpl(handle);
+    static int ISchemaClass<CAnimInputDamping>.Size => 24;
+    static string? ISchemaClass<CAnimInputDamping>.ClassName => null;
 
-  static CAnimInputDamping ISchemaClass<CAnimInputDamping>.From(nint handle) => new CAnimInputDampingImpl(handle);
-  static int ISchemaClass<CAnimInputDamping>.Size => 24;
-  static string? ISchemaClass<CAnimInputDamping>.ClassName => null;
 
-  
-  public ref DampingSpeedFunction SpeedFunction { get; }
-  
-  public ref float SpeedScale { get; }
-  
-  public ref float FallingSpeedScale { get; }
+    public ref DampingSpeedFunction SpeedFunction { get; }
+
+    public ref float SpeedScale { get; }
+
+    public ref float FallingSpeedScale { get; }
 
 
 }

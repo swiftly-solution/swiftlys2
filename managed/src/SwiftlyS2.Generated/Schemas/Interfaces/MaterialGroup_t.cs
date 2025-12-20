@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface MaterialGroup_t : ISchemaClass<MaterialGroup_t> {
+public partial interface MaterialGroup_t : ISchemaClass<MaterialGroup_t>
+{
+    static MaterialGroup_t ISchemaClass<MaterialGroup_t>.From(nint handle) => new MaterialGroup_tImpl(handle);
+    static int ISchemaClass<MaterialGroup_t>.Size => 32;
+    static string? ISchemaClass<MaterialGroup_t>.ClassName => null;
 
-  static MaterialGroup_t ISchemaClass<MaterialGroup_t>.From(nint handle) => new MaterialGroup_tImpl(handle);
-  static int ISchemaClass<MaterialGroup_t>.Size => 32;
-  static string? ISchemaClass<MaterialGroup_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>> Materials { get; }
+    public string Name { get; set; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>> Materials { get; }
 
 
 }

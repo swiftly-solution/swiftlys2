@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixPlateverbDesc_t : ISchemaClass<VMixPlateverbDesc_t> {
+public partial interface VMixPlateverbDesc_t : ISchemaClass<VMixPlateverbDesc_t>
+{
+    static VMixPlateverbDesc_t ISchemaClass<VMixPlateverbDesc_t>.From(nint handle) => new VMixPlateverbDesc_tImpl(handle);
+    static int ISchemaClass<VMixPlateverbDesc_t>.Size => 28;
+    static string? ISchemaClass<VMixPlateverbDesc_t>.ClassName => null;
 
-  static VMixPlateverbDesc_t ISchemaClass<VMixPlateverbDesc_t>.From(nint handle) => new VMixPlateverbDesc_tImpl(handle);
-  static int ISchemaClass<VMixPlateverbDesc_t>.Size => 28;
-  static string? ISchemaClass<VMixPlateverbDesc_t>.ClassName => null;
 
-  
-  public ref float Prefilter { get; }
-  
-  public ref float InputDiffusion1 { get; }
-  
-  public ref float InputDiffusion2 { get; }
-  
-  public ref float Decay { get; }
-  
-  public ref float Damp { get; }
-  
-  public ref float FeedbackDiffusion1 { get; }
-  
-  public ref float FeedbackDiffusion2 { get; }
+    public ref float Prefilter { get; }
+
+    public ref float InputDiffusion1 { get; }
+
+    public ref float InputDiffusion2 { get; }
+
+    public ref float Decay { get; }
+
+    public ref float Damp { get; }
+
+    public ref float FeedbackDiffusion1 { get; }
+
+    public ref float FeedbackDiffusion2 { get; }
 
 
 }

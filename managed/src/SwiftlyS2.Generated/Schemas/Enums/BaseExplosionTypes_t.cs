@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum BaseExplosionTypes_t : uint {
-
+public enum BaseExplosionTypes_t : uint
+{
  EXPLOSION_TYPE_DEFAULT = 0,
 
  EXPLOSION_TYPE_GRENADE = 1,

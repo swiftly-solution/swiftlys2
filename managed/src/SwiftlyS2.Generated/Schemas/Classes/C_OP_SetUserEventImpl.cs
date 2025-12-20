@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetUserEventImpl : CParticleFunctionOperatorImpl, C_OP_SetUserEvent {
+internal partial class C_OP_SetUserEventImpl : CParticleFunctionOperatorImpl, C_OP_SetUserEvent
+{
+    public C_OP_SetUserEventImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetUserEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputOffset;
 
-  private static nint? _InputOffset;
-
-  public CPerParticleFloatInput Input {
-    get {
-      if (_InputOffset == null) {
-        _InputOffset = Schema.GetOffset(0x9A6F6FB81D4B7FFD);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InputOffset!.Value);
+    public CPerParticleFloatInput Input {
+        get {
+            _InputOffset = _InputOffset ?? Schema.GetOffset(0x9A6F6FB81D4B7FFD);
+            return new CPerParticleFloatInputImpl(_Handle + _InputOffset!.Value);
+        }
     }
-  }
-  private static nint? _RisingEdgeOffset;
+    private static nint? _RisingEdgeOffset;
 
-  public CPerParticleFloatInput RisingEdge {
-    get {
-      if (_RisingEdgeOffset == null) {
-        _RisingEdgeOffset = Schema.GetOffset(0x9A6F6FB8DCFBDCF4);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RisingEdgeOffset!.Value);
+    public CPerParticleFloatInput RisingEdge {
+        get {
+            _RisingEdgeOffset = _RisingEdgeOffset ?? Schema.GetOffset(0x9A6F6FB8DCFBDCF4);
+            return new CPerParticleFloatInputImpl(_Handle + _RisingEdgeOffset!.Value);
+        }
     }
-  }
-  private static nint? _RisingEventTypeOffset;
+    private static nint? _RisingEventTypeOffset;
 
-  public ref EventTypeSelection_t RisingEventType {
-    get {
-      if (_RisingEventTypeOffset == null) {
-        _RisingEventTypeOffset = Schema.GetOffset(0x9A6F6FB83790928D);
-      }
-      return ref _Handle.AsRef<EventTypeSelection_t>(_RisingEventTypeOffset!.Value);
+    public ref EventTypeSelection_t RisingEventType {
+        get {
+            _RisingEventTypeOffset = _RisingEventTypeOffset ?? Schema.GetOffset(0x9A6F6FB83790928D);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_RisingEventTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FallingEdgeOffset;
+    private static nint? _FallingEdgeOffset;
 
-  public CPerParticleFloatInput FallingEdge {
-    get {
-      if (_FallingEdgeOffset == null) {
-        _FallingEdgeOffset = Schema.GetOffset(0x9A6F6FB8CBE5115B);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _FallingEdgeOffset!.Value);
+    public CPerParticleFloatInput FallingEdge {
+        get {
+            _FallingEdgeOffset = _FallingEdgeOffset ?? Schema.GetOffset(0x9A6F6FB8CBE5115B);
+            return new CPerParticleFloatInputImpl(_Handle + _FallingEdgeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FallingEventTypeOffset;
+    private static nint? _FallingEventTypeOffset;
 
-  public ref EventTypeSelection_t FallingEventType {
-    get {
-      if (_FallingEventTypeOffset == null) {
-        _FallingEventTypeOffset = Schema.GetOffset(0x9A6F6FB8C79ED114);
-      }
-      return ref _Handle.AsRef<EventTypeSelection_t>(_FallingEventTypeOffset!.Value);
+    public ref EventTypeSelection_t FallingEventType {
+        get {
+            _FallingEventTypeOffset = _FallingEventTypeOffset ?? Schema.GetOffset(0x9A6F6FB8C79ED114);
+            return ref _Handle.AsRef<EventTypeSelection_t>(_FallingEventTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

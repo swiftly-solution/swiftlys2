@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRemapValueComponentUpdater : CAnimComponentUpdater, ISchemaClass<CRemapValueComponentUpdater> {
+public partial interface CRemapValueComponentUpdater : CAnimComponentUpdater, ISchemaClass<CRemapValueComponentUpdater>
+{
+    static CRemapValueComponentUpdater ISchemaClass<CRemapValueComponentUpdater>.From(nint handle) => new CRemapValueComponentUpdaterImpl(handle);
+    static int ISchemaClass<CRemapValueComponentUpdater>.Size => 72;
+    static string? ISchemaClass<CRemapValueComponentUpdater>.ClassName => null;
 
-  static CRemapValueComponentUpdater ISchemaClass<CRemapValueComponentUpdater>.From(nint handle) => new CRemapValueComponentUpdaterImpl(handle);
-  static int ISchemaClass<CRemapValueComponentUpdater>.Size => 72;
-  static string? ISchemaClass<CRemapValueComponentUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<CRemapValueUpdateItem> Items { get; }
+    public ref CUtlVector<CRemapValueUpdateItem> Items { get; }
 
 
 }

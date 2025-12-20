@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MaterialParamTexture_tImpl : MaterialParam_tImpl, MaterialParamTexture_t {
+internal partial class MaterialParamTexture_tImpl : MaterialParam_tImpl, MaterialParamTexture_t
+{
+    public MaterialParamTexture_tImpl(nint handle) : base(handle) { }
 
-  public MaterialParamTexture_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ValueOffset;
 
-  private static nint? _ValueOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0x17803E3B7F437844);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_ValueOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x17803E3B7F437844);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_ValueOffset!.Value);
+        }
     }
-  }
 
 
 }

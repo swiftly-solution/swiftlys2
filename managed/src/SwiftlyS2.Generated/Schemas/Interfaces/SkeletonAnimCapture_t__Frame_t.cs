@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SkeletonAnimCapture_t__Frame_t : ISchemaClass<SkeletonAnimCapture_t__Frame_t> {
+public partial interface SkeletonAnimCapture_t__Frame_t : ISchemaClass<SkeletonAnimCapture_t__Frame_t>
+{
+    static SkeletonAnimCapture_t__Frame_t ISchemaClass<SkeletonAnimCapture_t__Frame_t>.From(nint handle) => new SkeletonAnimCapture_t__Frame_tImpl(handle);
+    static int ISchemaClass<SkeletonAnimCapture_t__Frame_t>.Size => 192;
+    static string? ISchemaClass<SkeletonAnimCapture_t__Frame_t>.ClassName => null;
 
-  static SkeletonAnimCapture_t__Frame_t ISchemaClass<SkeletonAnimCapture_t__Frame_t>.From(nint handle) => new SkeletonAnimCapture_t__Frame_tImpl(handle);
-  static int ISchemaClass<SkeletonAnimCapture_t__Frame_t>.Size => 192;
-  static string? ISchemaClass<SkeletonAnimCapture_t__Frame_t>.ClassName => null;
 
-  
-  public ref float Time { get; }
-  
-  public SkeletonAnimCapture_t__FrameStamp_t Stamp { get; }
-  
-  public ref CTransform Transform { get; }
-  
-  public ref bool Teleport { get; }
-  
-  public ref CUtlVector<CTransform> CompositeBones { get; }
-  
-  public ref CUtlVector<CTransform> SimStateBones { get; }
-  
-  public ref CUtlVector<CTransform> FeModelAnims { get; }
-  
-  public ref CUtlVector<Vector> FeModelPos { get; }
-  
-  public ref CUtlVector<float> FlexControllerWeights { get; }
+    public ref float Time { get; }
+
+    public SkeletonAnimCapture_t__FrameStamp_t Stamp { get; }
+
+    public ref CTransform Transform { get; }
+
+    public ref bool Teleport { get; }
+
+    public ref CUtlVector<CTransform> CompositeBones { get; }
+
+    public ref CUtlVector<CTransform> SimStateBones { get; }
+
+    public ref CUtlVector<CTransform> FeModelAnims { get; }
+
+    public ref CUtlVector<Vector> FeModelPos { get; }
+
+    public ref CUtlVector<float> FlexControllerWeights { get; }
 
 
 }

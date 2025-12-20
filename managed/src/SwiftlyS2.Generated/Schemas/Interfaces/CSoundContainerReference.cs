@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundContainerReference : ISchemaClass<CSoundContainerReference> {
+public partial interface CSoundContainerReference : ISchemaClass<CSoundContainerReference>
+{
+    static CSoundContainerReference ISchemaClass<CSoundContainerReference>.From(nint handle) => new CSoundContainerReferenceImpl(handle);
+    static int ISchemaClass<CSoundContainerReference>.Size => 24;
+    static string? ISchemaClass<CSoundContainerReference>.ClassName => null;
 
-  static CSoundContainerReference ISchemaClass<CSoundContainerReference>.From(nint handle) => new CSoundContainerReferenceImpl(handle);
-  static int ISchemaClass<CSoundContainerReference>.Size => 24;
-  static string? ISchemaClass<CSoundContainerReference>.ClassName => null;
 
-  
-  public ref bool UseReference { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> Sound { get; }
-  
-  public CVoiceContainerBase? Sound1 { get; }
+    public ref bool UseReference { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> Sound { get; }
+
+    public CVoiceContainerBase? Sound1 { get; }
 
 
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RotatorQueueEntry_tImpl : SchemaClass, RotatorQueueEntry_t {
+internal partial class RotatorQueueEntry_tImpl : SchemaClass, RotatorQueueEntry_t
+{
+    public RotatorQueueEntry_tImpl(nint handle) : base(handle) { }
 
-  public RotatorQueueEntry_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetOffset;
 
-  private static nint? _TargetOffset;
-
-  public ref Quaternion Target {
-    get {
-      if (_TargetOffset == null) {
-        _TargetOffset = Schema.GetOffset(0x2A6B84384FFCC265);
-      }
-      return ref _Handle.AsRef<Quaternion>(_TargetOffset!.Value);
+    public ref Quaternion Target {
+        get {
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x2A6B84384FFCC265);
+            return ref _Handle.AsRef<Quaternion>(_TargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpaceOffset;
+    private static nint? _SpaceOffset;
 
-  public ref RotatorTargetSpace_t Space {
-    get {
-      if (_SpaceOffset == null) {
-        _SpaceOffset = Schema.GetOffset(0x2A6B8438EC1BD596);
-      }
-      return ref _Handle.AsRef<RotatorTargetSpace_t>(_SpaceOffset!.Value);
+    public ref RotatorTargetSpace_t Space {
+        get {
+            _SpaceOffset = _SpaceOffset ?? Schema.GetOffset(0x2A6B8438EC1BD596);
+            return ref _Handle.AsRef<RotatorTargetSpace_t>(_SpaceOffset!.Value);
+        }
     }
-  }
 
 
 }

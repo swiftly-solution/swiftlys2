@@ -6,55 +6,42 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInfoVisibilityBoxImpl : CBaseEntityImpl, CInfoVisibilityBox {
+internal partial class CInfoVisibilityBoxImpl : CBaseEntityImpl, CInfoVisibilityBox
+{
+    public CInfoVisibilityBoxImpl(nint handle) : base(handle) { }
 
-  public CInfoVisibilityBoxImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModeOffset;
 
-  private static nint? _ModeOffset;
-
-  public ref int Mode {
-    get {
-      if (_ModeOffset == null) {
-        _ModeOffset = Schema.GetOffset(0xD226824F137F1E0E);
-      }
-      return ref _Handle.AsRef<int>(_ModeOffset!.Value);
+    public ref int Mode {
+        get {
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0xD226824F137F1E0E);
+            return ref _Handle.AsRef<int>(_ModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoxSizeOffset;
+    private static nint? _BoxSizeOffset;
 
-  public ref Vector BoxSize {
-    get {
-      if (_BoxSizeOffset == null) {
-        _BoxSizeOffset = Schema.GetOffset(0xD226824FE553E487);
-      }
-      return ref _Handle.AsRef<Vector>(_BoxSizeOffset!.Value);
+    public ref Vector BoxSize {
+        get {
+            _BoxSizeOffset = _BoxSizeOffset ?? Schema.GetOffset(0xD226824FE553E487);
+            return ref _Handle.AsRef<Vector>(_BoxSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnabledOffset;
+    private static nint? _EnabledOffset;
 
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0xD226824F6154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xD226824F6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
     }
-  }
 
-  public void ModeUpdated() {
-    Schema.Update(_Handle, 0xD226824F137F1E0E);
-  }
-  public void BoxSizeUpdated() {
-    Schema.Update(_Handle, 0xD226824FE553E487);
-  }
-  public void EnabledUpdated() {
-    Schema.Update(_Handle, 0xD226824F6154EB7E);
-  }
+    public void ModeUpdated() => Schema.Update(_Handle, 0xD226824F137F1E0E);
+    public void BoxSizeUpdated() => Schema.Update(_Handle, 0xD226824FE553E487);
+    public void EnabledUpdated() => Schema.Update(_Handle, 0xD226824F6154EB7E);
 }

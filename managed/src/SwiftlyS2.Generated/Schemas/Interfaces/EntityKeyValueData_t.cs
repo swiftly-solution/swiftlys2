@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EntityKeyValueData_t : ISchemaClass<EntityKeyValueData_t> {
+public partial interface EntityKeyValueData_t : ISchemaClass<EntityKeyValueData_t>
+{
+    static EntityKeyValueData_t ISchemaClass<EntityKeyValueData_t>.From(nint handle) => new EntityKeyValueData_tImpl(handle);
+    static int ISchemaClass<EntityKeyValueData_t>.Size => 56;
+    static string? ISchemaClass<EntityKeyValueData_t>.ClassName => null;
 
-  static EntityKeyValueData_t ISchemaClass<EntityKeyValueData_t>.From(nint handle) => new EntityKeyValueData_tImpl(handle);
-  static int ISchemaClass<EntityKeyValueData_t>.Size => 56;
-  static string? ISchemaClass<EntityKeyValueData_t>.ClassName => null;
 
-  
-  public ref CUtlVector<EntityIOConnectionData_t> Connections { get; }
-  
-  public ref CUtlBinaryBlock KeyValuesData { get; }
+    public ref CUtlVector<EntityIOConnectionData_t> Connections { get; }
+
+    public ref CUtlBinaryBlock KeyValuesData { get; }
 
 
 }

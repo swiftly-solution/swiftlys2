@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RenderModelSubModelFieldType_t : uint {
-
+public enum RenderModelSubModelFieldType_t : uint
+{
  SUBMODEL_AS_BODYGROUP_SUBMODEL = 0,
 
  SUBMODEL_AS_MESHGROUP_INDEX = 1,

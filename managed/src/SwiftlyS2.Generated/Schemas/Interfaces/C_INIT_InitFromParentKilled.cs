@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_InitFromParentKilled : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitFromParentKilled> {
+public partial interface C_INIT_InitFromParentKilled : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitFromParentKilled>
+{
+    static C_INIT_InitFromParentKilled ISchemaClass<C_INIT_InitFromParentKilled>.From(nint handle) => new C_INIT_InitFromParentKilledImpl(handle);
+    static int ISchemaClass<C_INIT_InitFromParentKilled>.Size => 608;
+    static string? ISchemaClass<C_INIT_InitFromParentKilled>.ClassName => null;
 
-  static C_INIT_InitFromParentKilled ISchemaClass<C_INIT_InitFromParentKilled>.From(nint handle) => new C_INIT_InitFromParentKilledImpl(handle);
-  static int ISchemaClass<C_INIT_InitFromParentKilled>.Size => 608;
-  static string? ISchemaClass<C_INIT_InitFromParentKilled>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t AttributeToCopy { get; }
-  
-  public ref EventTypeSelection_t EventType { get; }
+    public ParticleAttributeIndex_t AttributeToCopy { get; }
+
+    public ref EventTypeSelection_t EventType { get; }
 
 
 }

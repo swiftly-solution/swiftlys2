@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EntityRenderAttribute_tImpl : SchemaClass, EntityRenderAttribute_t {
+internal partial class EntityRenderAttribute_tImpl : SchemaClass, EntityRenderAttribute_t
+{
+    public EntityRenderAttribute_tImpl(nint handle) : base(handle) { }
 
-  public EntityRenderAttribute_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IDOffset;
 
-  private static nint? _IDOffset;
-
-  public ref CUtlStringToken ID {
-    get {
-      if (_IDOffset == null) {
-        _IDOffset = Schema.GetOffset(0xBC8CD39195066900);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_IDOffset!.Value);
+    public ref CUtlStringToken ID {
+        get {
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0xBC8CD39195066900);
+            return ref _Handle.AsRef<CUtlStringToken>(_IDOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValuesOffset;
+    private static nint? _ValuesOffset;
 
-  public ref Vector4D Values {
-    get {
-      if (_ValuesOffset == null) {
-        _ValuesOffset = Schema.GetOffset(0xBC8CD391A2E804BB);
-      }
-      return ref _Handle.AsRef<Vector4D>(_ValuesOffset!.Value);
+    public ref Vector4D Values {
+        get {
+            _ValuesOffset = _ValuesOffset ?? Schema.GetOffset(0xBC8CD391A2E804BB);
+            return ref _Handle.AsRef<Vector4D>(_ValuesOffset!.Value);
+        }
     }
-  }
 
-  public void IDUpdated() {
-    Schema.Update(_Handle, 0xBC8CD39195066900);
-  }
-  public void ValuesUpdated() {
-    Schema.Update(_Handle, 0xBC8CD391A2E804BB);
-  }
+    public void IDUpdated() => Schema.Update(_Handle, 0xBC8CD39195066900);
+    public void ValuesUpdated() => Schema.Update(_Handle, 0xBC8CD391A2E804BB);
 }

@@ -6,16 +6,15 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventClientSimulate_tImpl : EventSimulate_tImpl, EventClientSimulate_t {
-
-  public EventClientSimulate_tImpl(nint handle) : base(handle) {
-  }
+internal partial class EventClientSimulate_tImpl : EventSimulate_tImpl, EventClientSimulate_t
+{
+    public EventClientSimulate_tImpl(nint handle) : base(handle) { }
 
 
 

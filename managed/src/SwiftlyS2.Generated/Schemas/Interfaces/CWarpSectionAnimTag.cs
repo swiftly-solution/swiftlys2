@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CWarpSectionAnimTag : CWarpSectionAnimTagBase, ISchemaClass<CWarpSectionAnimTag> {
+public partial interface CWarpSectionAnimTag : CWarpSectionAnimTagBase, ISchemaClass<CWarpSectionAnimTag>
+{
+    static CWarpSectionAnimTag ISchemaClass<CWarpSectionAnimTag>.From(nint handle) => new CWarpSectionAnimTagImpl(handle);
+    static int ISchemaClass<CWarpSectionAnimTag>.Size => 88;
+    static string? ISchemaClass<CWarpSectionAnimTag>.ClassName => null;
 
-  static CWarpSectionAnimTag ISchemaClass<CWarpSectionAnimTag>.From(nint handle) => new CWarpSectionAnimTagImpl(handle);
-  static int ISchemaClass<CWarpSectionAnimTag>.Size => 88;
-  static string? ISchemaClass<CWarpSectionAnimTag>.ClassName => null;
 
-  
-  public ref bool WarpPosition { get; }
-  
-  public ref bool WarpOrientation { get; }
+    public ref bool WarpPosition { get; }
+
+    public ref bool WarpOrientation { get; }
 
 
 }

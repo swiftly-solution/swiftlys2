@@ -6,111 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysicsSpringImpl : CBaseEntityImpl, CPhysicsSpring {
+internal partial class CPhysicsSpringImpl : CBaseEntityImpl, CPhysicsSpring
+{
+    public CPhysicsSpringImpl(nint handle) : base(handle) { }
 
-  public CPhysicsSpringImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FrequencyOffset;
 
-  private static nint? _FrequencyOffset;
+    public ref float Frequency {
+        get {
+            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0x5222EAAD2C16DD7);
+            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+        }
+    }
+    private static nint? _DampingRatioOffset;
 
-  public ref float Frequency {
-    get {
-      if (_FrequencyOffset == null) {
-        _FrequencyOffset = Schema.GetOffset(0x5222EAAD2C16DD7);
-      }
-      return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+    public ref float DampingRatio {
+        get {
+            _DampingRatioOffset = _DampingRatioOffset ?? Schema.GetOffset(0x5222EAAB40C859E);
+            return ref _Handle.AsRef<float>(_DampingRatioOffset!.Value);
+        }
     }
-  }
-  private static nint? _DampingRatioOffset;
+    private static nint? _RestLengthOffset;
 
-  public ref float DampingRatio {
-    get {
-      if (_DampingRatioOffset == null) {
-        _DampingRatioOffset = Schema.GetOffset(0x5222EAAB40C859E);
-      }
-      return ref _Handle.AsRef<float>(_DampingRatioOffset!.Value);
+    public ref float RestLength {
+        get {
+            _RestLengthOffset = _RestLengthOffset ?? Schema.GetOffset(0x5222EAA93AC4079);
+            return ref _Handle.AsRef<float>(_RestLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _RestLengthOffset;
+    private static nint? _NameAttachStartOffset;
 
-  public ref float RestLength {
-    get {
-      if (_RestLengthOffset == null) {
-        _RestLengthOffset = Schema.GetOffset(0x5222EAA93AC4079);
-      }
-      return ref _Handle.AsRef<float>(_RestLengthOffset!.Value);
-    }
-  }
-  private static nint? _NameAttachStartOffset;
+    public string NameAttachStart {
+        get {
+            _NameAttachStartOffset = _NameAttachStartOffset ?? Schema.GetOffset(0x5222EAAD19CEDD5);
+            return Schema.GetString(_Handle.Read<nint>(_NameAttachStartOffset!.Value));
+        }
+        set {
+            _NameAttachStartOffset = _NameAttachStartOffset ?? Schema.GetOffset(0x5222EAAD19CEDD5);
+            Schema.SetString(_Handle, _NameAttachStartOffset!.Value, value);
+        }
+    } 
+    private static nint? _NameAttachEndOffset;
 
-  public string NameAttachStart {
-    get {
-      if (_NameAttachStartOffset == null) {
-        _NameAttachStartOffset = Schema.GetOffset(0x5222EAAD19CEDD5);
-      }
-      var ptr = _Handle.Read<nint>(_NameAttachStartOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameAttachStartOffset == null) {
-        _NameAttachStartOffset = Schema.GetOffset(0x5222EAAD19CEDD5);
-      }
-      Schema.SetString(_Handle, _NameAttachStartOffset!.Value, value);
-    }
-  } 
-  private static nint? _NameAttachEndOffset;
+    public string NameAttachEnd {
+        get {
+            _NameAttachEndOffset = _NameAttachEndOffset ?? Schema.GetOffset(0x5222EAACF4DE50C);
+            return Schema.GetString(_Handle.Read<nint>(_NameAttachEndOffset!.Value));
+        }
+        set {
+            _NameAttachEndOffset = _NameAttachEndOffset ?? Schema.GetOffset(0x5222EAACF4DE50C);
+            Schema.SetString(_Handle, _NameAttachEndOffset!.Value, value);
+        }
+    } 
+    private static nint? _StartOffset;
 
-  public string NameAttachEnd {
-    get {
-      if (_NameAttachEndOffset == null) {
-        _NameAttachEndOffset = Schema.GetOffset(0x5222EAACF4DE50C);
-      }
-      var ptr = _Handle.Read<nint>(_NameAttachEndOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref Vector Start {
+        get {
+            _StartOffset = _StartOffset ?? Schema.GetOffset(0x5222EAAA539BEFF);
+            return ref _Handle.AsRef<Vector>(_StartOffset!.Value);
+        }
     }
-    set {
-      if (_NameAttachEndOffset == null) {
-        _NameAttachEndOffset = Schema.GetOffset(0x5222EAACF4DE50C);
-      }
-      Schema.SetString(_Handle, _NameAttachEndOffset!.Value, value);
-    }
-  } 
-  private static nint? _StartOffset;
+    private static nint? _EndOffset;
 
-  public ref Vector Start {
-    get {
-      if (_StartOffset == null) {
-        _StartOffset = Schema.GetOffset(0x5222EAAA539BEFF);
-      }
-      return ref _Handle.AsRef<Vector>(_StartOffset!.Value);
+    public ref Vector End {
+        get {
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0x5222EAA5B29CFCA);
+            return ref _Handle.AsRef<Vector>(_EndOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndOffset;
+    private static nint? _TeleportTickOffset;
 
-  public ref Vector End {
-    get {
-      if (_EndOffset == null) {
-        _EndOffset = Schema.GetOffset(0x5222EAA5B29CFCA);
-      }
-      return ref _Handle.AsRef<Vector>(_EndOffset!.Value);
+    public ref uint TeleportTick {
+        get {
+            _TeleportTickOffset = _TeleportTickOffset ?? Schema.GetOffset(0x5222EAA027C0C6B);
+            return ref _Handle.AsRef<uint>(_TeleportTickOffset!.Value);
+        }
     }
-  }
-  private static nint? _TeleportTickOffset;
-
-  public ref uint TeleportTick {
-    get {
-      if (_TeleportTickOffset == null) {
-        _TeleportTickOffset = Schema.GetOffset(0x5222EAA027C0C6B);
-      }
-      return ref _Handle.AsRef<uint>(_TeleportTickOffset!.Value);
-    }
-  }
 
 
 }

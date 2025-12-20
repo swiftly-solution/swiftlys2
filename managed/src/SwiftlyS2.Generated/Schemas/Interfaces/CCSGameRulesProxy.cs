@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSGameRulesProxy : CGameRulesProxy, ISchemaClass<CCSGameRulesProxy> {
+public partial interface CCSGameRulesProxy : CGameRulesProxy, ISchemaClass<CCSGameRulesProxy>
+{
+    static CCSGameRulesProxy ISchemaClass<CCSGameRulesProxy>.From(nint handle) => new CCSGameRulesProxyImpl(handle);
+    static int ISchemaClass<CCSGameRulesProxy>.Size => 1272;
+    static string? ISchemaClass<CCSGameRulesProxy>.ClassName => "cs_gamerules";
 
-  static CCSGameRulesProxy ISchemaClass<CCSGameRulesProxy>.From(nint handle) => new CCSGameRulesProxyImpl(handle);
-  static int ISchemaClass<CCSGameRulesProxy>.Size => 1272;
-  static string? ISchemaClass<CCSGameRulesProxy>.ClassName => "cs_gamerules";
 
-  
-  public CCSGameRules? GameRules { get; }
+    public CCSGameRules? GameRules { get; }
 
-  public void GameRulesUpdated();
+    public void GameRulesUpdated();
 }

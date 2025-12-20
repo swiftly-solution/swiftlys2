@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_Diffusion : CParticleFunctionOperator, ISchemaClass<C_OP_Diffusion> {
+public partial interface C_OP_Diffusion : CParticleFunctionOperator, ISchemaClass<C_OP_Diffusion>
+{
+    static C_OP_Diffusion ISchemaClass<C_OP_Diffusion>.From(nint handle) => new C_OP_DiffusionImpl(handle);
+    static int ISchemaClass<C_OP_Diffusion>.Size => 480;
+    static string? ISchemaClass<C_OP_Diffusion>.ClassName => null;
 
-  static C_OP_Diffusion ISchemaClass<C_OP_Diffusion>.From(nint handle) => new C_OP_DiffusionImpl(handle);
-  static int ISchemaClass<C_OP_Diffusion>.Size => 480;
-  static string? ISchemaClass<C_OP_Diffusion>.ClassName => null;
 
-  
-  public ref float RadiusScale { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref int VoxelGridResolution { get; }
+    public ref float RadiusScale { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref int VoxelGridResolution { get; }
 
 
 }

@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseIssue : ISchemaClass<CBaseIssue> {
+public partial interface CBaseIssue : ISchemaClass<CBaseIssue>
+{
+    static CBaseIssue ISchemaClass<CBaseIssue>.From(nint handle) => new CBaseIssueImpl(handle);
+    static int ISchemaClass<CBaseIssue>.Size => 376;
+    static string? ISchemaClass<CBaseIssue>.ClassName => null;
 
-  static CBaseIssue ISchemaClass<CBaseIssue>.From(nint handle) => new CBaseIssueImpl(handle);
-  static int ISchemaClass<CBaseIssue>.Size => 376;
-  static string? ISchemaClass<CBaseIssue>.ClassName => null;
 
-  
-  public string TypeString { get; set; }
-  
-  public string DetailsString { get; set; }
-  
-  public ref int NumYesVotes { get; }
-  
-  public ref int NumNoVotes { get; }
-  
-  public ref int NumPotentialVotes { get; }
-  
-  public CVoteController? VoteController { get; }
+    public string TypeString { get; set; }
+
+    public string DetailsString { get; set; }
+
+    public ref int NumYesVotes { get; }
+
+    public ref int NumNoVotes { get; }
+
+    public ref int NumPotentialVotes { get; }
+
+    public CVoteController? VoteController { get; }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvSplashImpl : CPointEntityImpl, CEnvSplash {
+internal partial class CEnvSplashImpl : CPointEntityImpl, CEnvSplash
+{
+    public CEnvSplashImpl(nint handle) : base(handle) { }
 
-  public CEnvSplashImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScaleOffset;
 
-  private static nint? _ScaleOffset;
-
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x7DD98956B731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x7DD98956B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

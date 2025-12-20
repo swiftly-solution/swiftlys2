@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlace : CServerOnlyModelEntity, ISchemaClass<CCSPlace> {
+public partial interface CCSPlace : CServerOnlyModelEntity, ISchemaClass<CCSPlace>
+{
+    static CCSPlace ISchemaClass<CCSPlace>.From(nint handle) => new CCSPlaceImpl(handle);
+    static int ISchemaClass<CCSPlace>.Size => 2040;
+    static string? ISchemaClass<CCSPlace>.ClassName => "env_cs_place";
 
-  static CCSPlace ISchemaClass<CCSPlace>.From(nint handle) => new CCSPlaceImpl(handle);
-  static int ISchemaClass<CCSPlace>.Size => 2040;
-  static string? ISchemaClass<CCSPlace>.ClassName => "env_cs_place";
 
-  
-  public string Name { get; set; }
+    public string Name { get; set; }
 
 
 }

@@ -8,29 +8,29 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayerVisibility : CBaseEntity, ISchemaClass<CPlayerVisibility> {
+public partial interface CPlayerVisibility : CBaseEntity, ISchemaClass<CPlayerVisibility>
+{
+    static CPlayerVisibility ISchemaClass<CPlayerVisibility>.From(nint handle) => new CPlayerVisibilityImpl(handle);
+    static int ISchemaClass<CPlayerVisibility>.Size => 1288;
+    static string? ISchemaClass<CPlayerVisibility>.ClassName => "env_player_visibility";
 
-  static CPlayerVisibility ISchemaClass<CPlayerVisibility>.From(nint handle) => new CPlayerVisibilityImpl(handle);
-  static int ISchemaClass<CPlayerVisibility>.Size => 1288;
-  static string? ISchemaClass<CPlayerVisibility>.ClassName => "env_player_visibility";
 
-  
-  public ref float VisibilityStrength { get; }
-  
-  public ref float FogDistanceMultiplier { get; }
-  
-  public ref float FogMaxDensityMultiplier { get; }
-  
-  public ref float FadeTime { get; }
-  
-  public ref bool StartDisabled { get; }
-  
-  public ref bool IsEnabled { get; }
+    public ref float VisibilityStrength { get; }
 
-  public void VisibilityStrengthUpdated();
-  public void FogDistanceMultiplierUpdated();
-  public void FogMaxDensityMultiplierUpdated();
-  public void FadeTimeUpdated();
-  public void StartDisabledUpdated();
-  public void IsEnabledUpdated();
+    public ref float FogDistanceMultiplier { get; }
+
+    public ref float FogMaxDensityMultiplier { get; }
+
+    public ref float FadeTime { get; }
+
+    public ref bool StartDisabled { get; }
+
+    public ref bool IsEnabled { get; }
+
+    public void VisibilityStrengthUpdated();
+    public void FogDistanceMultiplierUpdated();
+    public void FogMaxDensityMultiplierUpdated();
+    public void FadeTimeUpdated();
+    public void StartDisabledUpdated();
+    public void IsEnabledUpdated();
 }

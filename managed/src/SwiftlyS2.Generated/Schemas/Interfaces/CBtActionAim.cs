@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBtActionAim : CBtNode, ISchemaClass<CBtActionAim> {
+public partial interface CBtActionAim : CBtNode, ISchemaClass<CBtActionAim>
+{
+    static CBtActionAim ISchemaClass<CBtActionAim>.From(nint handle) => new CBtActionAimImpl(handle);
+    static int ISchemaClass<CBtActionAim>.Size => 248;
+    static string? ISchemaClass<CBtActionAim>.ClassName => null;
 
-  static CBtActionAim ISchemaClass<CBtActionAim>.From(nint handle) => new CBtActionAimImpl(handle);
-  static int ISchemaClass<CBtActionAim>.Size => 248;
-  static string? ISchemaClass<CBtActionAim>.ClassName => null;
 
-  
-  public string SensorInputKey { get; set; }
-  
-  public string AimReadyKey { get; set; }
-  
-  public ref float ZoomCooldownTimestamp { get; }
-  
-  public ref bool DoneAiming { get; }
-  
-  public ref float LerpStartTime { get; }
-  
-  public ref float NextLookTargetLerpTime { get; }
-  
-  public ref float PenaltyReductionRatio { get; }
-  
-  public ref QAngle NextLookTarget { get; }
-  
-  public CountdownTimer AimTimer { get; }
-  
-  public CountdownTimer SniperHoldTimer { get; }
-  
-  public CountdownTimer FocusIntervalTimer { get; }
-  
-  public ref bool Acquired { get; }
+    public string SensorInputKey { get; set; }
+
+    public string AimReadyKey { get; set; }
+
+    public ref float ZoomCooldownTimestamp { get; }
+
+    public ref bool DoneAiming { get; }
+
+    public ref float LerpStartTime { get; }
+
+    public ref float NextLookTargetLerpTime { get; }
+
+    public ref float PenaltyReductionRatio { get; }
+
+    public ref QAngle NextLookTarget { get; }
+
+    public CountdownTimer AimTimer { get; }
+
+    public CountdownTimer SniperHoldTimer { get; }
+
+    public CountdownTimer FocusIntervalTimer { get; }
+
+    public ref bool Acquired { get; }
 
 
 }

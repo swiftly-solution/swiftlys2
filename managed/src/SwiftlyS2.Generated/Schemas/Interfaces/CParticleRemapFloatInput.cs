@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleRemapFloatInput : CParticleFloatInput, ISchemaClass<CParticleRemapFloatInput> {
-
-  static CParticleRemapFloatInput ISchemaClass<CParticleRemapFloatInput>.From(nint handle) => new CParticleRemapFloatInputImpl(handle);
-  static int ISchemaClass<CParticleRemapFloatInput>.Size => 368;
-  static string? ISchemaClass<CParticleRemapFloatInput>.ClassName => null;
+public partial interface CParticleRemapFloatInput : CParticleFloatInput, ISchemaClass<CParticleRemapFloatInput>
+{
+    static CParticleRemapFloatInput ISchemaClass<CParticleRemapFloatInput>.From(nint handle) => new CParticleRemapFloatInputImpl(handle);
+    static int ISchemaClass<CParticleRemapFloatInput>.Size => 368;
+    static string? ISchemaClass<CParticleRemapFloatInput>.ClassName => null;
 
 
 

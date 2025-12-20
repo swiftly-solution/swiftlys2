@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeNodeWindBase_t : ISchemaClass<FeNodeWindBase_t> {
+public partial interface FeNodeWindBase_t : ISchemaClass<FeNodeWindBase_t>
+{
+    static FeNodeWindBase_t ISchemaClass<FeNodeWindBase_t>.From(nint handle) => new FeNodeWindBase_tImpl(handle);
+    static int ISchemaClass<FeNodeWindBase_t>.Size => 8;
+    static string? ISchemaClass<FeNodeWindBase_t>.ClassName => null;
 
-  static FeNodeWindBase_t ISchemaClass<FeNodeWindBase_t>.From(nint handle) => new FeNodeWindBase_tImpl(handle);
-  static int ISchemaClass<FeNodeWindBase_t>.Size => 8;
-  static string? ISchemaClass<FeNodeWindBase_t>.ClassName => null;
 
-  
-  public ref ushort NodeX0 { get; }
-  
-  public ref ushort NodeX1 { get; }
-  
-  public ref ushort NodeY0 { get; }
-  
-  public ref ushort NodeY1 { get; }
+    public ref ushort NodeX0 { get; }
+
+    public ref ushort NodeX1 { get; }
+
+    public ref ushort NodeY0 { get; }
+
+    public ref ushort NodeY1 { get; }
 
 
 }

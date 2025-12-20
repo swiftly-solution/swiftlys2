@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface audioparams_t : ISchemaClass<audioparams_t> {
+public partial interface audioparams_t : ISchemaClass<audioparams_t>
+{
+    static audioparams_t ISchemaClass<audioparams_t>.From(nint handle) => new audioparams_tImpl(handle);
+    static int ISchemaClass<audioparams_t>.Size => 120;
+    static string? ISchemaClass<audioparams_t>.ClassName => null;
 
-  static audioparams_t ISchemaClass<audioparams_t>.From(nint handle) => new audioparams_tImpl(handle);
-  static int ISchemaClass<audioparams_t>.Size => 120;
-  static string? ISchemaClass<audioparams_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<Vector> LocalSound { get; }
-  
-  public ref int SoundscapeIndex { get; }
-  
-  public ref byte LocalBits { get; }
-  
-  public ref int SoundscapeEntityListIndex { get; }
-  
-  public ref uint SoundEventHash { get; }
+    public ISchemaFixedArray<Vector> LocalSound { get; }
 
-  public void LocalSoundUpdated();
-  public void SoundscapeIndexUpdated();
-  public void LocalBitsUpdated();
-  public void SoundscapeEntityListIndexUpdated();
-  public void SoundEventHashUpdated();
+    public ref int SoundscapeIndex { get; }
+
+    public ref byte LocalBits { get; }
+
+    public ref int SoundscapeEntityListIndex { get; }
+
+    public ref uint SoundEventHash { get; }
+
+    public void LocalSoundUpdated();
+    public void SoundscapeIndexUpdated();
+    public void LocalBitsUpdated();
+    public void SoundscapeEntityListIndexUpdated();
+    public void SoundEventHashUpdated();
 }

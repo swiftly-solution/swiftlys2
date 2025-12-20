@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmVirtualParameterIDNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmVirtualParameterIDNode__CDefinition> {
+public partial interface CNmVirtualParameterIDNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmVirtualParameterIDNode__CDefinition>
+{
+    static CNmVirtualParameterIDNode__CDefinition ISchemaClass<CNmVirtualParameterIDNode__CDefinition>.From(nint handle) => new CNmVirtualParameterIDNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmVirtualParameterIDNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmVirtualParameterIDNode__CDefinition>.ClassName => null;
 
-  static CNmVirtualParameterIDNode__CDefinition ISchemaClass<CNmVirtualParameterIDNode__CDefinition>.From(nint handle) => new CNmVirtualParameterIDNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmVirtualParameterIDNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmVirtualParameterIDNode__CDefinition>.ClassName => null;
 
-  
-  public ref short ChildNodeIdx { get; }
+    public ref short ChildNodeIdx { get; }
 
 
 }

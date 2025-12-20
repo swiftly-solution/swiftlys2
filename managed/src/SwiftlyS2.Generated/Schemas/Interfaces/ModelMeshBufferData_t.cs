@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ModelMeshBufferData_t : ISchemaClass<ModelMeshBufferData_t> {
+public partial interface ModelMeshBufferData_t : ISchemaClass<ModelMeshBufferData_t>
+{
+    static ModelMeshBufferData_t ISchemaClass<ModelMeshBufferData_t>.From(nint handle) => new ModelMeshBufferData_tImpl(handle);
+    static int ISchemaClass<ModelMeshBufferData_t>.Size => 48;
+    static string? ISchemaClass<ModelMeshBufferData_t>.ClassName => null;
 
-  static ModelMeshBufferData_t ISchemaClass<ModelMeshBufferData_t>.From(nint handle) => new ModelMeshBufferData_tImpl(handle);
-  static int ISchemaClass<ModelMeshBufferData_t>.Size => 48;
-  static string? ISchemaClass<ModelMeshBufferData_t>.ClassName => null;
 
-  
-  public ref int BlockIndex { get; }
-  
-  public ref uint ElementCount { get; }
-  
-  public ref uint ElementSizeInBytes { get; }
-  
-  public ref bool MeshoptCompressed { get; }
-  
-  public ref bool MeshoptIndexSequence { get; }
-  
-  public ref bool CompressedZSTD { get; }
-  
-  public ref bool CreateBufferSRV { get; }
-  
-  public ref bool CreateBufferUAV { get; }
-  
-  public ref bool CreateRawBuffer { get; }
-  
-  public ref bool CreatePooledBuffer { get; }
-  
-  public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields { get; }
+    public ref int BlockIndex { get; }
+
+    public ref uint ElementCount { get; }
+
+    public ref uint ElementSizeInBytes { get; }
+
+    public ref bool MeshoptCompressed { get; }
+
+    public ref bool MeshoptIndexSequence { get; }
+
+    public ref bool CompressedZSTD { get; }
+
+    public ref bool CreateBufferSRV { get; }
+
+    public ref bool CreateBufferUAV { get; }
+
+    public ref bool CreateRawBuffer { get; }
+
+    public ref bool CreatePooledBuffer { get; }
+
+    public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields { get; }
 
 
 }

@@ -6,29 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAttributeContainerImpl : CAttributeManagerImpl, CAttributeContainer {
+internal partial class CAttributeContainerImpl : CAttributeManagerImpl, CAttributeContainer
+{
+    public CAttributeContainerImpl(nint handle) : base(handle) { }
 
-  public CAttributeContainerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ItemOffset;
 
-  private static nint? _ItemOffset;
-
-  public CEconItemView Item {
-    get {
-      if (_ItemOffset == null) {
-        _ItemOffset = Schema.GetOffset(0x554833CDDCE71866);
-      }
-      return new CEconItemViewImpl(_Handle + _ItemOffset!.Value);
+    public CEconItemView Item {
+        get {
+            _ItemOffset = _ItemOffset ?? Schema.GetOffset(0x554833CDDCE71866);
+            return new CEconItemViewImpl(_Handle + _ItemOffset!.Value);
+        }
     }
-  }
 
-  public void ItemUpdated() {
-    Schema.Update(_Handle, 0x554833CDDCE71866);
-  }
+    public void ItemUpdated() => Schema.Update(_Handle, 0x554833CDDCE71866);
 }

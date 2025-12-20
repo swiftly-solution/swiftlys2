@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMarkupVolumeWithRef : CMarkupVolumeTagged, ISchemaClass<CMarkupVolumeWithRef> {
+public partial interface CMarkupVolumeWithRef : CMarkupVolumeTagged, ISchemaClass<CMarkupVolumeWithRef>
+{
+    static CMarkupVolumeWithRef ISchemaClass<CMarkupVolumeWithRef>.From(nint handle) => new CMarkupVolumeWithRefImpl(handle);
+    static int ISchemaClass<CMarkupVolumeWithRef>.Size => 2112;
+    static string? ISchemaClass<CMarkupVolumeWithRef>.ClassName => "markup_volume_with_ref";
 
-  static CMarkupVolumeWithRef ISchemaClass<CMarkupVolumeWithRef>.From(nint handle) => new CMarkupVolumeWithRefImpl(handle);
-  static int ISchemaClass<CMarkupVolumeWithRef>.Size => 2112;
-  static string? ISchemaClass<CMarkupVolumeWithRef>.ClassName => "markup_volume_with_ref";
 
-  
-  public ref bool UseRef { get; }
-  
-  public ref Vector RefPosEntitySpace { get; }
-  
-  public ref Vector RefPosWorldSpace { get; }
-  
-  public ref float RefDot { get; }
+    public ref bool UseRef { get; }
+
+    public ref Vector RefPosEntitySpace { get; }
+
+    public ref Vector RefPosWorldSpace { get; }
+
+    public ref float RefDot { get; }
 
 
 }

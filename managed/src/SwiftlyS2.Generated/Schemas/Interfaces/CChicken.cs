@@ -8,70 +8,70 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CChicken : CDynamicProp, ISchemaClass<CChicken> {
+public partial interface CChicken : CDynamicProp, ISchemaClass<CChicken>
+{
+    static CChicken ISchemaClass<CChicken>.From(nint handle) => new CChickenImpl(handle);
+    static int ISchemaClass<CChicken>.Size => 12960;
+    static string? ISchemaClass<CChicken>.ClassName => "chicken";
 
-  static CChicken ISchemaClass<CChicken>.From(nint handle) => new CChickenImpl(handle);
-  static int ISchemaClass<CChicken>.Size => 12960;
-  static string? ISchemaClass<CChicken>.ClassName => "chicken";
 
-  
-  public CAttributeContainer AttributeManager { get; }
-  
-  public CountdownTimer UpdateTimer { get; }
-  
-  public ref Vector StuckAnchor { get; }
-  
-  public CountdownTimer StuckTimer { get; }
-  
-  public CountdownTimer CollisionStuckTimer { get; }
-  
-  public ref bool IsOnGround { get; }
-  
-  public ref Vector FallVelocity { get; }
-  
-  public ref ChickenActivity DesiredActivity { get; }
-  
-  public ref ChickenActivity CurrentActivity { get; }
-  
-  public CountdownTimer ActivityTimer { get; }
-  
-  public ref float TurnRate { get; }
-  
-  public ref CHandle<CBaseEntity> FleeFrom { get; }
-  
-  public CountdownTimer MoveRateThrottleTimer { get; }
-  
-  public CountdownTimer StartleTimer { get; }
-  
-  public CountdownTimer VocalizeTimer { get; }
-  
-  public GameTime_t WhenZombified { get; }
-  
-  public ref bool JumpedThisFrame { get; }
-  
-  public ref CHandle<CCSPlayerPawn> Leader { get; }
-  
-  public CountdownTimer ReuseTimer { get; }
-  
-  public ref bool HasBeenUsed { get; }
-  
-  public CountdownTimer JumpTimer { get; }
-  
-  public ref float LastJumpTime { get; }
-  
-  public ref bool InJump { get; }
-  
-  public CountdownTimer RepathTimer { get; }
-  
-  public ref Vector PathGoal { get; }
-  
-  public GameTime_t ActiveFollowStartTime { get; }
-  
-  public CountdownTimer FollowMinuteTimer { get; }
-  
-  public CountdownTimer BlockDirectionTimer { get; }
+    public CAttributeContainer AttributeManager { get; }
 
-  public void AttributeManagerUpdated();
-  public void JumpedThisFrameUpdated();
-  public void LeaderUpdated();
+    public CountdownTimer UpdateTimer { get; }
+
+    public ref Vector StuckAnchor { get; }
+
+    public CountdownTimer StuckTimer { get; }
+
+    public CountdownTimer CollisionStuckTimer { get; }
+
+    public ref bool IsOnGround { get; }
+
+    public ref Vector FallVelocity { get; }
+
+    public ref ChickenActivity DesiredActivity { get; }
+
+    public ref ChickenActivity CurrentActivity { get; }
+
+    public CountdownTimer ActivityTimer { get; }
+
+    public ref float TurnRate { get; }
+
+    public ref CHandle<CBaseEntity> FleeFrom { get; }
+
+    public CountdownTimer MoveRateThrottleTimer { get; }
+
+    public CountdownTimer StartleTimer { get; }
+
+    public CountdownTimer VocalizeTimer { get; }
+
+    public GameTime_t WhenZombified { get; }
+
+    public ref bool JumpedThisFrame { get; }
+
+    public ref CHandle<CCSPlayerPawn> Leader { get; }
+
+    public CountdownTimer ReuseTimer { get; }
+
+    public ref bool HasBeenUsed { get; }
+
+    public CountdownTimer JumpTimer { get; }
+
+    public ref float LastJumpTime { get; }
+
+    public ref bool InJump { get; }
+
+    public CountdownTimer RepathTimer { get; }
+
+    public ref Vector PathGoal { get; }
+
+    public GameTime_t ActiveFollowStartTime { get; }
+
+    public CountdownTimer FollowMinuteTimer { get; }
+
+    public CountdownTimer BlockDirectionTimer { get; }
+
+    public void AttributeManagerUpdated();
+    public void JumpedThisFrameUpdated();
+    public void LeaderUpdated();
 }

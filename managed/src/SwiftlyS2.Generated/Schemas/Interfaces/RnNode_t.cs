@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnNode_t : ISchemaClass<RnNode_t> {
+public partial interface RnNode_t : ISchemaClass<RnNode_t>
+{
+    static RnNode_t ISchemaClass<RnNode_t>.From(nint handle) => new RnNode_tImpl(handle);
+    static int ISchemaClass<RnNode_t>.Size => 32;
+    static string? ISchemaClass<RnNode_t>.ClassName => null;
 
-  static RnNode_t ISchemaClass<RnNode_t>.From(nint handle) => new RnNode_tImpl(handle);
-  static int ISchemaClass<RnNode_t>.Size => 32;
-  static string? ISchemaClass<RnNode_t>.ClassName => null;
 
-  
-  public ref Vector Min { get; }
-  
-  public ref uint Children { get; }
-  
-  public ref Vector Max { get; }
-  
-  public ref uint TriangleOffset { get; }
+    public ref Vector Min { get; }
+
+    public ref uint Children { get; }
+
+    public ref Vector Max { get; }
+
+    public ref uint TriangleOffset { get; }
 
 
 }

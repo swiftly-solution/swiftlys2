@@ -8,23 +8,23 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSimdSpringIntegrator_t : ISchemaClass<FeSimdSpringIntegrator_t> {
+public partial interface FeSimdSpringIntegrator_t : ISchemaClass<FeSimdSpringIntegrator_t>
+{
+    static FeSimdSpringIntegrator_t ISchemaClass<FeSimdSpringIntegrator_t>.From(nint handle) => new FeSimdSpringIntegrator_tImpl(handle);
+    static int ISchemaClass<FeSimdSpringIntegrator_t>.Size => 80;
+    static string? ISchemaClass<FeSimdSpringIntegrator_t>.ClassName => null;
 
-  static FeSimdSpringIntegrator_t ISchemaClass<FeSimdSpringIntegrator_t>.From(nint handle) => new FeSimdSpringIntegrator_tImpl(handle);
-  static int ISchemaClass<FeSimdSpringIntegrator_t>.Size => 80;
-  static string? ISchemaClass<FeSimdSpringIntegrator_t>.ClassName => null;
 
-  
-  // uint16[4]
-  public SchemaUntypedField Node { get; }
-  
-  public ref fltx4 SpringRestLength { get; }
-  
-  public ref fltx4 SpringConstant { get; }
-  
-  public ref fltx4 SpringDamping { get; }
-  
-  public ref fltx4 NodeWeight0 { get; }
+    // uint16[4]
+    public SchemaUntypedField Node { get; }
+
+    public ref fltx4 SpringRestLength { get; }
+
+    public ref fltx4 SpringConstant { get; }
+
+    public ref fltx4 SpringDamping { get; }
+
+    public ref fltx4 NodeWeight0 { get; }
 
 
 }

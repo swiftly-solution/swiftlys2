@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAudioEmphasisSampleImpl : SchemaClass, CAudioEmphasisSample {
+internal partial class CAudioEmphasisSampleImpl : SchemaClass, CAudioEmphasisSample
+{
+    public CAudioEmphasisSampleImpl(nint handle) : base(handle) { }
 
-  public CAudioEmphasisSampleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TimeOffset;
 
-  private static nint? _TimeOffset;
-
-  public ref float Time {
-    get {
-      if (_TimeOffset == null) {
-        _TimeOffset = Schema.GetOffset(0x37D4D710C957229E);
-      }
-      return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+    public ref float Time {
+        get {
+            _TimeOffset = _TimeOffset ?? Schema.GetOffset(0x37D4D710C957229E);
+            return ref _Handle.AsRef<float>(_TimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValueOffset;
+    private static nint? _ValueOffset;
 
-  public ref float Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0x37D4D7108DFCB984);
-      }
-      return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+    public ref float Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x37D4D7108DFCB984);
+            return ref _Handle.AsRef<float>(_ValueOffset!.Value);
+        }
     }
-  }
 
 
 }

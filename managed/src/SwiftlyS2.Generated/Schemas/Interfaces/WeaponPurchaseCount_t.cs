@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface WeaponPurchaseCount_t : ISchemaClass<WeaponPurchaseCount_t> {
+public partial interface WeaponPurchaseCount_t : ISchemaClass<WeaponPurchaseCount_t>
+{
+    static WeaponPurchaseCount_t ISchemaClass<WeaponPurchaseCount_t>.From(nint handle) => new WeaponPurchaseCount_tImpl(handle);
+    static int ISchemaClass<WeaponPurchaseCount_t>.Size => 56;
+    static string? ISchemaClass<WeaponPurchaseCount_t>.ClassName => null;
 
-  static WeaponPurchaseCount_t ISchemaClass<WeaponPurchaseCount_t>.From(nint handle) => new WeaponPurchaseCount_tImpl(handle);
-  static int ISchemaClass<WeaponPurchaseCount_t>.Size => 56;
-  static string? ISchemaClass<WeaponPurchaseCount_t>.ClassName => null;
 
-  
-  public ref ushort ItemDefIndex { get; }
-  
-  public ref ushort Count { get; }
+    public ref ushort ItemDefIndex { get; }
 
-  public void ItemDefIndexUpdated();
-  public void CountUpdated();
+    public ref ushort Count { get; }
+
+    public void ItemDefIndexUpdated();
+    public void CountUpdated();
 }

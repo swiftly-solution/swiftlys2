@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Test_MultiOutflow_WithParams_Yielding : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding> {
+public partial interface CPulseCell_Test_MultiOutflow_WithParams_Yielding : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding>
+{
+    static CPulseCell_Test_MultiOutflow_WithParams_Yielding ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding>.From(nint handle) => new CPulseCell_Test_MultiOutflow_WithParams_YieldingImpl(handle);
+    static int ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding>.Size => 432;
+    static string? ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding>.ClassName => null;
 
-  static CPulseCell_Test_MultiOutflow_WithParams_Yielding ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding>.From(nint handle) => new CPulseCell_Test_MultiOutflow_WithParams_YieldingImpl(handle);
-  static int ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding>.Size => 432;
-  static string? ISchemaClass<CPulseCell_Test_MultiOutflow_WithParams_Yielding>.ClassName => null;
 
-  
-  public SignatureOutflow_Continue Out1 { get; }
-  
-  public SignatureOutflow_Continue AsyncChild1 { get; }
-  
-  public SignatureOutflow_Continue AsyncChild2 { get; }
-  
-  public SignatureOutflow_Resume YieldResume1 { get; }
-  
-  public SignatureOutflow_Resume YieldResume2 { get; }
+    public SignatureOutflow_Continue Out1 { get; }
+
+    public SignatureOutflow_Continue AsyncChild1 { get; }
+
+    public SignatureOutflow_Continue AsyncChild2 { get; }
+
+    public SignatureOutflow_Resume YieldResume1 { get; }
+
+    public SignatureOutflow_Resume YieldResume2 { get; }
 
 
 }

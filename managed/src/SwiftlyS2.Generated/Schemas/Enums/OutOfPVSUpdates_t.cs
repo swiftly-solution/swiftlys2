@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum OutOfPVSUpdates_t : uint {
-
+public enum OutOfPVSUpdates_t : uint
+{
  OOPVSUpdates_OptOut = 0,
 
  OOPVSUpdates_OptIn = 1,

@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmIDEventConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmIDEventConditionNode__CDefinition> {
+public partial interface CNmIDEventConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmIDEventConditionNode__CDefinition>
+{
+    static CNmIDEventConditionNode__CDefinition ISchemaClass<CNmIDEventConditionNode__CDefinition>.From(nint handle) => new CNmIDEventConditionNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmIDEventConditionNode__CDefinition>.Size => 88;
+    static string? ISchemaClass<CNmIDEventConditionNode__CDefinition>.ClassName => null;
 
-  static CNmIDEventConditionNode__CDefinition ISchemaClass<CNmIDEventConditionNode__CDefinition>.From(nint handle) => new CNmIDEventConditionNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmIDEventConditionNode__CDefinition>.Size => 88;
-  static string? ISchemaClass<CNmIDEventConditionNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SourceStateNodeIdx { get; }
-  
-  public CNmBitFlags EventConditionRules { get; }
-  
-  // CUtlVectorFixedGrowable< CGlobalSymbol, 5 >
-  public SchemaUntypedField EventIDs { get; }
+    public ref short SourceStateNodeIdx { get; }
+
+    public CNmBitFlags EventConditionRules { get; }
+
+    // CUtlVectorFixedGrowable< CGlobalSymbol, 5 >
+    public SchemaUntypedField EventIDs { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CShatterGlassShardPhysics : CPhysicsProp, ISchemaClass<CShatterGlassShardPhysics> {
+public partial interface CShatterGlassShardPhysics : CPhysicsProp, ISchemaClass<CShatterGlassShardPhysics>
+{
+    static CShatterGlassShardPhysics ISchemaClass<CShatterGlassShardPhysics>.From(nint handle) => new CShatterGlassShardPhysicsImpl(handle);
+    static int ISchemaClass<CShatterGlassShardPhysics>.Size => 3728;
+    static string? ISchemaClass<CShatterGlassShardPhysics>.ClassName => "shatterglass_shard";
 
-  static CShatterGlassShardPhysics ISchemaClass<CShatterGlassShardPhysics>.From(nint handle) => new CShatterGlassShardPhysicsImpl(handle);
-  static int ISchemaClass<CShatterGlassShardPhysics>.Size => 3728;
-  static string? ISchemaClass<CShatterGlassShardPhysics>.ClassName => "shatterglass_shard";
 
-  
-  public ref bool Debris { get; }
-  
-  public ref uint ParentShard { get; }
-  
-  public shard_model_desc_t ShardDesc { get; }
+    public ref bool Debris { get; }
 
-  public void ShardDescUpdated();
+    public ref uint ParentShard { get; }
+
+    public shard_model_desc_t ShardDesc { get; }
+
+    public void ShardDescUpdated();
 }

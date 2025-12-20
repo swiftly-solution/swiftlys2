@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum Flags_t : uint {
-
+public enum Flags_t : uint
+{
  FL_ONGROUND = 1,
 
  FL_DUCKING = 2,

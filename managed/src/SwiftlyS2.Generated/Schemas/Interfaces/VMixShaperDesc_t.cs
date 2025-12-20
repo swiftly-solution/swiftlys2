@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixShaperDesc_t : ISchemaClass<VMixShaperDesc_t> {
+public partial interface VMixShaperDesc_t : ISchemaClass<VMixShaperDesc_t>
+{
+    static VMixShaperDesc_t ISchemaClass<VMixShaperDesc_t>.From(nint handle) => new VMixShaperDesc_tImpl(handle);
+    static int ISchemaClass<VMixShaperDesc_t>.Size => 20;
+    static string? ISchemaClass<VMixShaperDesc_t>.ClassName => null;
 
-  static VMixShaperDesc_t ISchemaClass<VMixShaperDesc_t>.From(nint handle) => new VMixShaperDesc_tImpl(handle);
-  static int ISchemaClass<VMixShaperDesc_t>.Size => 20;
-  static string? ISchemaClass<VMixShaperDesc_t>.ClassName => null;
 
-  
-  public ref int Shape { get; }
-  
-  public ref float FldbDrive { get; }
-  
-  public ref float FldbOutputGain { get; }
-  
-  public ref float WetMix { get; }
-  
-  public ref int OversampleFactor { get; }
+    public ref int Shape { get; }
+
+    public ref float FldbDrive { get; }
+
+    public ref float FldbOutputGain { get; }
+
+    public ref float WetMix { get; }
+
+    public ref int OversampleFactor { get; }
 
 
 }

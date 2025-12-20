@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmBoneWeightList : ISchemaClass<CNmBoneWeightList> {
+public partial interface CNmBoneWeightList : ISchemaClass<CNmBoneWeightList>
+{
+    static CNmBoneWeightList ISchemaClass<CNmBoneWeightList>.From(nint handle) => new CNmBoneWeightListImpl(handle);
+    static int ISchemaClass<CNmBoneWeightList>.Size => 272;
+    static string? ISchemaClass<CNmBoneWeightList>.ClassName => null;
 
-  static CNmBoneWeightList ISchemaClass<CNmBoneWeightList>.From(nint handle) => new CNmBoneWeightListImpl(handle);
-  static int ISchemaClass<CNmBoneWeightList>.Size => 272;
-  static string? ISchemaClass<CNmBoneWeightList>.ClassName => null;
 
-  
-  // CResourceName
-  public SchemaUntypedField SkeletonName { get; }
-  
-  public ref CUtlVector<CGlobalSymbol> BoneIDs { get; }
-  
-  public ref CUtlVector<float> Weights { get; }
+    // CResourceName
+    public SchemaUntypedField SkeletonName { get; }
+
+    public ref CUtlVector<CGlobalSymbol> BoneIDs { get; }
+
+    public ref CUtlVector<float> Weights { get; }
 
 
 }

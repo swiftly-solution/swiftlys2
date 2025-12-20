@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimGraphModelBinding : ISchemaClass<CAnimGraphModelBinding> {
+public partial interface CAnimGraphModelBinding : ISchemaClass<CAnimGraphModelBinding>
+{
+    static CAnimGraphModelBinding ISchemaClass<CAnimGraphModelBinding>.From(nint handle) => new CAnimGraphModelBindingImpl(handle);
+    static int ISchemaClass<CAnimGraphModelBinding>.Size => 40;
+    static string? ISchemaClass<CAnimGraphModelBinding>.ClassName => null;
 
-  static CAnimGraphModelBinding ISchemaClass<CAnimGraphModelBinding>.From(nint handle) => new CAnimGraphModelBindingImpl(handle);
-  static int ISchemaClass<CAnimGraphModelBinding>.Size => 40;
-  static string? ISchemaClass<CAnimGraphModelBinding>.ClassName => null;
 
-  
-  public string ModelName { get; set; }
-  
-  // CSmartPtr< CAnimUpdateSharedData >
-  public SchemaUntypedField SharedData { get; }
+    public string ModelName { get; set; }
+
+    // CSmartPtr< CAnimUpdateSharedData >
+    public SchemaUntypedField SharedData { get; }
 
 
 }

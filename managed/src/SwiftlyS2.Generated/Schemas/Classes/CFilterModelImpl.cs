@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFilterModelImpl : CBaseFilterImpl, CFilterModel {
+internal partial class CFilterModelImpl : CBaseFilterImpl, CFilterModel
+{
+    public CFilterModelImpl(nint handle) : base(handle) { }
 
-  public CFilterModelImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FilterModelOffset;
 
-  private static nint? _FilterModelOffset;
-
-  public string FilterModel {
-    get {
-      if (_FilterModelOffset == null) {
-        _FilterModelOffset = Schema.GetOffset(0x59DA03B921E36753);
-      }
-      var ptr = _Handle.Read<nint>(_FilterModelOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_FilterModelOffset == null) {
-        _FilterModelOffset = Schema.GetOffset(0x59DA03B921E36753);
-      }
-      Schema.SetString(_Handle, _FilterModelOffset!.Value, value);
-    }
-  } 
+    public string FilterModel {
+        get {
+            _FilterModelOffset = _FilterModelOffset ?? Schema.GetOffset(0x59DA03B921E36753);
+            return Schema.GetString(_Handle.Read<nint>(_FilterModelOffset!.Value));
+        }
+        set {
+            _FilterModelOffset = _FilterModelOffset ?? Schema.GetOffset(0x59DA03B921E36753);
+            Schema.SetString(_Handle, _FilterModelOffset!.Value, value);
+        }
+    } 
 
 
 }

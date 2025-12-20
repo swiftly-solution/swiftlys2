@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCCompositeMaterialKit : ISchemaClass<InfoForResourceTypeCCompositeMaterialKit> {
-
-  static InfoForResourceTypeCCompositeMaterialKit ISchemaClass<InfoForResourceTypeCCompositeMaterialKit>.From(nint handle) => new InfoForResourceTypeCCompositeMaterialKitImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCCompositeMaterialKit>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCCompositeMaterialKit>.ClassName => null;
+public partial interface InfoForResourceTypeCCompositeMaterialKit : ISchemaClass<InfoForResourceTypeCCompositeMaterialKit>
+{
+    static InfoForResourceTypeCCompositeMaterialKit ISchemaClass<InfoForResourceTypeCCompositeMaterialKit>.From(nint handle) => new InfoForResourceTypeCCompositeMaterialKitImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCCompositeMaterialKit>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCCompositeMaterialKit>.ClassName => null;
 
 
 

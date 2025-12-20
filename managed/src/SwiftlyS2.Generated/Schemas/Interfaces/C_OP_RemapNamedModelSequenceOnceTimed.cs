@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapNamedModelSequenceOnceTimed : C_OP_RemapNamedModelElementOnceTimed, ISchemaClass<C_OP_RemapNamedModelSequenceOnceTimed> {
-
-  static C_OP_RemapNamedModelSequenceOnceTimed ISchemaClass<C_OP_RemapNamedModelSequenceOnceTimed>.From(nint handle) => new C_OP_RemapNamedModelSequenceOnceTimedImpl(handle);
-  static int ISchemaClass<C_OP_RemapNamedModelSequenceOnceTimed>.Size => 560;
-  static string? ISchemaClass<C_OP_RemapNamedModelSequenceOnceTimed>.ClassName => null;
+public partial interface C_OP_RemapNamedModelSequenceOnceTimed : C_OP_RemapNamedModelElementOnceTimed, ISchemaClass<C_OP_RemapNamedModelSequenceOnceTimed>
+{
+    static C_OP_RemapNamedModelSequenceOnceTimed ISchemaClass<C_OP_RemapNamedModelSequenceOnceTimed>.From(nint handle) => new C_OP_RemapNamedModelSequenceOnceTimedImpl(handle);
+    static int ISchemaClass<C_OP_RemapNamedModelSequenceOnceTimed>.Size => 560;
+    static string? ISchemaClass<C_OP_RemapNamedModelSequenceOnceTimed>.ClassName => null;
 
 
 

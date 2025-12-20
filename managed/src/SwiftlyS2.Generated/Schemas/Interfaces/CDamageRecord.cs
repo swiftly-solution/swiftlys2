@@ -8,55 +8,55 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDamageRecord : ISchemaClass<CDamageRecord> {
+public partial interface CDamageRecord : ISchemaClass<CDamageRecord>
+{
+    static CDamageRecord ISchemaClass<CDamageRecord>.From(nint handle) => new CDamageRecordImpl(handle);
+    static int ISchemaClass<CDamageRecord>.Size => 120;
+    static string? ISchemaClass<CDamageRecord>.ClassName => null;
 
-  static CDamageRecord ISchemaClass<CDamageRecord>.From(nint handle) => new CDamageRecordImpl(handle);
-  static int ISchemaClass<CDamageRecord>.Size => 120;
-  static string? ISchemaClass<CDamageRecord>.ClassName => null;
 
-  
-  public ref CHandle<CCSPlayerPawn> PlayerDamager { get; }
-  
-  public ref CHandle<CCSPlayerPawn> PlayerRecipient { get; }
-  
-  public ref CHandle<CCSPlayerController> PlayerControllerDamager { get; }
-  
-  public ref CHandle<CCSPlayerController> PlayerControllerRecipient { get; }
-  
-  public string PlayerDamagerName { get; set; }
-  
-  public string PlayerRecipientName { get; set; }
-  
-  public ref ulong DamagerXuid { get; }
-  
-  public ref ulong RecipientXuid { get; }
-  
-  public ref float BulletsDamage { get; }
-  
-  public ref float Damage { get; }
-  
-  public ref float ActualHealthRemoved { get; }
-  
-  public ref int NumHits { get; }
-  
-  public ref int LastBulletUpdate { get; }
-  
-  public ref bool IsOtherEnemy { get; }
-  
-  public ref EKillTypes_t KillType { get; }
+    public ref CHandle<CCSPlayerPawn> PlayerDamager { get; }
 
-  public void PlayerDamagerUpdated();
-  public void PlayerRecipientUpdated();
-  public void PlayerControllerDamagerUpdated();
-  public void PlayerControllerRecipientUpdated();
-  public void PlayerDamagerNameUpdated();
-  public void PlayerRecipientNameUpdated();
-  public void DamagerXuidUpdated();
-  public void RecipientXuidUpdated();
-  public void DamageUpdated();
-  public void ActualHealthRemovedUpdated();
-  public void NumHitsUpdated();
-  public void LastBulletUpdateUpdated();
-  public void IsOtherEnemyUpdated();
-  public void KillTypeUpdated();
+    public ref CHandle<CCSPlayerPawn> PlayerRecipient { get; }
+
+    public ref CHandle<CCSPlayerController> PlayerControllerDamager { get; }
+
+    public ref CHandle<CCSPlayerController> PlayerControllerRecipient { get; }
+
+    public string PlayerDamagerName { get; set; }
+
+    public string PlayerRecipientName { get; set; }
+
+    public ref ulong DamagerXuid { get; }
+
+    public ref ulong RecipientXuid { get; }
+
+    public ref float BulletsDamage { get; }
+
+    public ref float Damage { get; }
+
+    public ref float ActualHealthRemoved { get; }
+
+    public ref int NumHits { get; }
+
+    public ref int LastBulletUpdate { get; }
+
+    public ref bool IsOtherEnemy { get; }
+
+    public ref EKillTypes_t KillType { get; }
+
+    public void PlayerDamagerUpdated();
+    public void PlayerRecipientUpdated();
+    public void PlayerControllerDamagerUpdated();
+    public void PlayerControllerRecipientUpdated();
+    public void PlayerDamagerNameUpdated();
+    public void PlayerRecipientNameUpdated();
+    public void DamagerXuidUpdated();
+    public void RecipientXuidUpdated();
+    public void DamageUpdated();
+    public void ActualHealthRemovedUpdated();
+    public void NumHitsUpdated();
+    public void LastBulletUpdateUpdated();
+    public void IsOtherEnemyUpdated();
+    public void KillTypeUpdated();
 }

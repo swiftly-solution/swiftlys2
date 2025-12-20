@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RsComparison_t : byte {
-
+public enum RsComparison_t : byte
+{
  RS_CMP_NEVER = 0,
 
  RS_CMP_LESS = 1,

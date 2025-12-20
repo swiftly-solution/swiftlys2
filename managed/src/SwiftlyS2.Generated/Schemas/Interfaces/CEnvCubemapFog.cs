@@ -8,64 +8,64 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvCubemapFog : CBaseEntity, ISchemaClass<CEnvCubemapFog> {
+public partial interface CEnvCubemapFog : CBaseEntity, ISchemaClass<CEnvCubemapFog>
+{
+    static CEnvCubemapFog ISchemaClass<CEnvCubemapFog>.From(nint handle) => new CEnvCubemapFogImpl(handle);
+    static int ISchemaClass<CEnvCubemapFog>.Size => 1344;
+    static string? ISchemaClass<CEnvCubemapFog>.ClassName => "env_cubemap_fog";
 
-  static CEnvCubemapFog ISchemaClass<CEnvCubemapFog>.From(nint handle) => new CEnvCubemapFogImpl(handle);
-  static int ISchemaClass<CEnvCubemapFog>.Size => 1344;
-  static string? ISchemaClass<CEnvCubemapFog>.ClassName => "env_cubemap_fog";
 
-  
-  public ref float EndDistance { get; }
-  
-  public ref float StartDistance { get; }
-  
-  public ref float FogFalloffExponent { get; }
-  
-  public ref bool HeightFogEnabled { get; }
-  
-  public ref float FogHeightWidth { get; }
-  
-  public ref float FogHeightEnd { get; }
-  
-  public ref float FogHeightStart { get; }
-  
-  public ref float FogHeightExponent { get; }
-  
-  public ref float LODBias { get; }
-  
-  public ref bool Active { get; }
-  
-  public ref bool StartDisabled { get; }
-  
-  public ref float FogMaxOpacity { get; }
-  
-  public ref int CubemapSourceType { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterial { get; }
-  
-  public string SkyEntity { get; set; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> FogCubemapTexture { get; }
-  
-  public ref bool HasHeightFogEnd { get; }
-  
-  public ref bool FirstTime { get; }
+    public ref float EndDistance { get; }
 
-  public void EndDistanceUpdated();
-  public void StartDistanceUpdated();
-  public void FogFalloffExponentUpdated();
-  public void HeightFogEnabledUpdated();
-  public void FogHeightWidthUpdated();
-  public void FogHeightEndUpdated();
-  public void FogHeightStartUpdated();
-  public void FogHeightExponentUpdated();
-  public void LODBiasUpdated();
-  public void ActiveUpdated();
-  public void StartDisabledUpdated();
-  public void FogMaxOpacityUpdated();
-  public void CubemapSourceTypeUpdated();
-  public void SkyMaterialUpdated();
-  public void SkyEntityUpdated();
-  public void FogCubemapTextureUpdated();
-  public void HasHeightFogEndUpdated();
+    public ref float StartDistance { get; }
+
+    public ref float FogFalloffExponent { get; }
+
+    public ref bool HeightFogEnabled { get; }
+
+    public ref float FogHeightWidth { get; }
+
+    public ref float FogHeightEnd { get; }
+
+    public ref float FogHeightStart { get; }
+
+    public ref float FogHeightExponent { get; }
+
+    public ref float LODBias { get; }
+
+    public ref bool Active { get; }
+
+    public ref bool StartDisabled { get; }
+
+    public ref float FogMaxOpacity { get; }
+
+    public ref int CubemapSourceType { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterial { get; }
+
+    public string SkyEntity { get; set; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> FogCubemapTexture { get; }
+
+    public ref bool HasHeightFogEnd { get; }
+
+    public ref bool FirstTime { get; }
+
+    public void EndDistanceUpdated();
+    public void StartDistanceUpdated();
+    public void FogFalloffExponentUpdated();
+    public void HeightFogEnabledUpdated();
+    public void FogHeightWidthUpdated();
+    public void FogHeightEndUpdated();
+    public void FogHeightStartUpdated();
+    public void FogHeightExponentUpdated();
+    public void LODBiasUpdated();
+    public void ActiveUpdated();
+    public void StartDisabledUpdated();
+    public void FogMaxOpacityUpdated();
+    public void CubemapSourceTypeUpdated();
+    public void SkyMaterialUpdated();
+    public void SkyEntityUpdated();
+    public void FogCubemapTextureUpdated();
+    public void HasHeightFogEndUpdated();
 }

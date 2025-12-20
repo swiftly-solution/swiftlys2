@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMarkupVolumeTagged : CMarkupVolume, ISchemaClass<CMarkupVolumeTagged> {
+public partial interface CMarkupVolumeTagged : CMarkupVolume, ISchemaClass<CMarkupVolumeTagged>
+{
+    static CMarkupVolumeTagged ISchemaClass<CMarkupVolumeTagged>.From(nint handle) => new CMarkupVolumeTaggedImpl(handle);
+    static int ISchemaClass<CMarkupVolumeTagged>.Size => 2072;
+    static string? ISchemaClass<CMarkupVolumeTagged>.ClassName => null;
 
-  static CMarkupVolumeTagged ISchemaClass<CMarkupVolumeTagged>.From(nint handle) => new CMarkupVolumeTaggedImpl(handle);
-  static int ISchemaClass<CMarkupVolumeTagged>.Size => 2072;
-  static string? ISchemaClass<CMarkupVolumeTagged>.ClassName => null;
 
-  
-  public ref CUtlVector<CGlobalSymbol> GroupNames { get; }
-  
-  public ref CUtlVector<CGlobalSymbol> Tags { get; }
-  
-  public ref bool IsGroup { get; }
-  
-  public ref bool GroupByPrefab { get; }
-  
-  public ref bool GroupByVolume { get; }
-  
-  public ref bool GroupOtherGroups { get; }
-  
-  public ref bool IsInGroup { get; }
+    public ref CUtlVector<CGlobalSymbol> GroupNames { get; }
+
+    public ref CUtlVector<CGlobalSymbol> Tags { get; }
+
+    public ref bool IsGroup { get; }
+
+    public ref bool GroupByPrefab { get; }
+
+    public ref bool GroupByVolume { get; }
+
+    public ref bool GroupOtherGroups { get; }
+
+    public ref bool IsInGroup { get; }
 
 
 }

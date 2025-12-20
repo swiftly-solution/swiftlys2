@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointOrientationToCPVelocity : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity> {
+public partial interface C_OP_SetControlPointOrientationToCPVelocity : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity>
+{
+    static C_OP_SetControlPointOrientationToCPVelocity ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity>.From(nint handle) => new C_OP_SetControlPointOrientationToCPVelocityImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity>.Size => 480;
+    static string? ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity>.ClassName => null;
 
-  static C_OP_SetControlPointOrientationToCPVelocity ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity>.From(nint handle) => new C_OP_SetControlPointOrientationToCPVelocityImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity>.Size => 480;
-  static string? ISchemaClass<C_OP_SetControlPointOrientationToCPVelocity>.ClassName => null;
 
-  
-  public ref int CPInput { get; }
-  
-  public ref int CPOutput { get; }
+    public ref int CPInput { get; }
+
+    public ref int CPOutput { get; }
 
 
 }

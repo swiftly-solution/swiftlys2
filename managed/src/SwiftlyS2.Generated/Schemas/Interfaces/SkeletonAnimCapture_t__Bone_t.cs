@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SkeletonAnimCapture_t__Bone_t : ISchemaClass<SkeletonAnimCapture_t__Bone_t> {
+public partial interface SkeletonAnimCapture_t__Bone_t : ISchemaClass<SkeletonAnimCapture_t__Bone_t>
+{
+    static SkeletonAnimCapture_t__Bone_t ISchemaClass<SkeletonAnimCapture_t__Bone_t>.From(nint handle) => new SkeletonAnimCapture_t__Bone_tImpl(handle);
+    static int ISchemaClass<SkeletonAnimCapture_t__Bone_t>.Size => 64;
+    static string? ISchemaClass<SkeletonAnimCapture_t__Bone_t>.ClassName => null;
 
-  static SkeletonAnimCapture_t__Bone_t ISchemaClass<SkeletonAnimCapture_t__Bone_t>.From(nint handle) => new SkeletonAnimCapture_t__Bone_tImpl(handle);
-  static int ISchemaClass<SkeletonAnimCapture_t__Bone_t>.Size => 64;
-  static string? ISchemaClass<SkeletonAnimCapture_t__Bone_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CTransform BindPose { get; }
-  
-  public ref int Parent { get; }
+    public string Name { get; set; }
+
+    public ref CTransform BindPose { get; }
+
+    public ref int Parent { get; }
 
 
 }

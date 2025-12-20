@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VariableInfo_t : ISchemaClass<VariableInfo_t> {
+public partial interface VariableInfo_t : ISchemaClass<VariableInfo_t>
+{
+    static VariableInfo_t ISchemaClass<VariableInfo_t>.From(nint handle) => new VariableInfo_tImpl(handle);
+    static int ISchemaClass<VariableInfo_t>.Size => 24;
+    static string? ISchemaClass<VariableInfo_t>.ClassName => null;
 
-  static VariableInfo_t ISchemaClass<VariableInfo_t>.From(nint handle) => new VariableInfo_tImpl(handle);
-  static int ISchemaClass<VariableInfo_t>.Size => 24;
-  static string? ISchemaClass<VariableInfo_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CUtlStringToken NameToken { get; }
-  
-  public FuseVariableIndex_t Index { get; }
-  
-  public ref byte NumComponents { get; }
-  
-  public ref FuseVariableType_t VarType { get; }
-  
-  public ref FuseVariableAccess_t Access { get; }
+    public string Name { get; set; }
+
+    public ref CUtlStringToken NameToken { get; }
+
+    public FuseVariableIndex_t Index { get; }
+
+    public ref byte NumComponents { get; }
+
+    public ref FuseVariableType_t VarType { get; }
+
+    public ref FuseVariableAccess_t Access { get; }
 
 
 }

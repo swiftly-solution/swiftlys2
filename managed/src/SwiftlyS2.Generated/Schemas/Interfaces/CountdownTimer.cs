@@ -8,23 +8,23 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CountdownTimer : ISchemaClass<CountdownTimer> {
+public partial interface CountdownTimer : ISchemaClass<CountdownTimer>
+{
+    static CountdownTimer ISchemaClass<CountdownTimer>.From(nint handle) => new CountdownTimerImpl(handle);
+    static int ISchemaClass<CountdownTimer>.Size => 24;
+    static string? ISchemaClass<CountdownTimer>.ClassName => null;
 
-  static CountdownTimer ISchemaClass<CountdownTimer>.From(nint handle) => new CountdownTimerImpl(handle);
-  static int ISchemaClass<CountdownTimer>.Size => 24;
-  static string? ISchemaClass<CountdownTimer>.ClassName => null;
 
-  
-  public ref float Duration { get; }
-  
-  public GameTime_t Timestamp { get; }
-  
-  public ref float Timescale { get; }
-  
-  public ref uint WorldGroupId { get; }
+    public ref float Duration { get; }
 
-  public void DurationUpdated();
-  public void TimestampUpdated();
-  public void TimescaleUpdated();
-  public void WorldGroupIdUpdated();
+    public GameTime_t Timestamp { get; }
+
+    public ref float Timescale { get; }
+
+    public ref uint WorldGroupId { get; }
+
+    public void DurationUpdated();
+    public void TimestampUpdated();
+    public void TimescaleUpdated();
+    public void WorldGroupIdUpdated();
 }

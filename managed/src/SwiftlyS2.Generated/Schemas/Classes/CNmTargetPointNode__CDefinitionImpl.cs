@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmTargetPointNode__CDefinitionImpl : CNmVectorValueNode__CDefinitionImpl, CNmTargetPointNode__CDefinition {
+internal partial class CNmTargetPointNode__CDefinitionImpl : CNmVectorValueNode__CDefinitionImpl, CNmTargetPointNode__CDefinition
+{
+    public CNmTargetPointNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmTargetPointNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueNodeIdxOffset;
 
-  private static nint? _InputValueNodeIdxOffset;
-
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0xCF5C70C495E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0xCF5C70C495E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsWorldSpaceTargetOffset;
+    private static nint? _IsWorldSpaceTargetOffset;
 
-  public ref bool IsWorldSpaceTarget {
-    get {
-      if (_IsWorldSpaceTargetOffset == null) {
-        _IsWorldSpaceTargetOffset = Schema.GetOffset(0xCF5C70C4B81D53F2);
-      }
-      return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset!.Value);
+    public ref bool IsWorldSpaceTarget {
+        get {
+            _IsWorldSpaceTargetOffset = _IsWorldSpaceTargetOffset ?? Schema.GetOffset(0xCF5C70C4B81D53F2);
+            return ref _Handle.AsRef<bool>(_IsWorldSpaceTargetOffset!.Value);
+        }
     }
-  }
 
 
 }

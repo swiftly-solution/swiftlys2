@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayer_CameraServices : CPlayerPawnComponent, ISchemaClass<CPlayer_CameraServices> {
+public partial interface CPlayer_CameraServices : CPlayerPawnComponent, ISchemaClass<CPlayer_CameraServices>
+{
+    static CPlayer_CameraServices ISchemaClass<CPlayer_CameraServices>.From(nint handle) => new CPlayer_CameraServicesImpl(handle);
+    static int ISchemaClass<CPlayer_CameraServices>.Size => 368;
+    static string? ISchemaClass<CPlayer_CameraServices>.ClassName => null;
 
-  static CPlayer_CameraServices ISchemaClass<CPlayer_CameraServices>.From(nint handle) => new CPlayer_CameraServicesImpl(handle);
-  static int ISchemaClass<CPlayer_CameraServices>.Size => 368;
-  static string? ISchemaClass<CPlayer_CameraServices>.ClassName => null;
 
-  
-  public ref QAngle CsViewPunchAngle { get; }
-  
-  public GameTick_t CsViewPunchAngleTick { get; }
-  
-  public ref float CsViewPunchAngleTickRatio { get; }
-  
-  public fogplayerparams_t PlayerFog { get; }
-  
-  public ref CHandle<CColorCorrection> ColorCorrectionCtrl { get; }
-  
-  public ref CHandle<CBaseEntity> ViewEntity { get; }
-  
-  public ref CHandle<CTonemapController2> TonemapController { get; }
-  
-  public audioparams_t Audio { get; }
-  
-  public ref CUtlVector<CHandle<CPostProcessingVolume>> PostProcessingVolumes { get; }
-  
-  public ref float OldPlayerZ { get; }
-  
-  public ref float OldPlayerViewOffsetZ { get; }
-  
-  public ref CUtlVector<CHandle<CEnvSoundscapeTriggerable>> TriggerSoundscapeList { get; }
+    public ref QAngle CsViewPunchAngle { get; }
 
-  public void CsViewPunchAngleUpdated();
-  public void CsViewPunchAngleTickUpdated();
-  public void CsViewPunchAngleTickRatioUpdated();
-  public void PlayerFogUpdated();
-  public void ColorCorrectionCtrlUpdated();
-  public void ViewEntityUpdated();
-  public void TonemapControllerUpdated();
-  public void AudioUpdated();
-  public void PostProcessingVolumesUpdated();
+    public GameTick_t CsViewPunchAngleTick { get; }
+
+    public ref float CsViewPunchAngleTickRatio { get; }
+
+    public fogplayerparams_t PlayerFog { get; }
+
+    public ref CHandle<CColorCorrection> ColorCorrectionCtrl { get; }
+
+    public ref CHandle<CBaseEntity> ViewEntity { get; }
+
+    public ref CHandle<CTonemapController2> TonemapController { get; }
+
+    public audioparams_t Audio { get; }
+
+    public ref CUtlVector<CHandle<CPostProcessingVolume>> PostProcessingVolumes { get; }
+
+    public ref float OldPlayerZ { get; }
+
+    public ref float OldPlayerViewOffsetZ { get; }
+
+    public ref CUtlVector<CHandle<CEnvSoundscapeTriggerable>> TriggerSoundscapeList { get; }
+
+    public void CsViewPunchAngleUpdated();
+    public void CsViewPunchAngleTickUpdated();
+    public void CsViewPunchAngleTickRatioUpdated();
+    public void PlayerFogUpdated();
+    public void ColorCorrectionCtrlUpdated();
+    public void ViewEntityUpdated();
+    public void TonemapControllerUpdated();
+    public void AudioUpdated();
+    public void PostProcessingVolumesUpdated();
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeProxyVertexMap_t : ISchemaClass<FeProxyVertexMap_t> {
+public partial interface FeProxyVertexMap_t : ISchemaClass<FeProxyVertexMap_t>
+{
+    static FeProxyVertexMap_t ISchemaClass<FeProxyVertexMap_t>.From(nint handle) => new FeProxyVertexMap_tImpl(handle);
+    static int ISchemaClass<FeProxyVertexMap_t>.Size => 16;
+    static string? ISchemaClass<FeProxyVertexMap_t>.ClassName => null;
 
-  static FeProxyVertexMap_t ISchemaClass<FeProxyVertexMap_t>.From(nint handle) => new FeProxyVertexMap_tImpl(handle);
-  static int ISchemaClass<FeProxyVertexMap_t>.Size => 16;
-  static string? ISchemaClass<FeProxyVertexMap_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref float Weight { get; }
+    public string Name { get; set; }
+
+    public ref float Weight { get; }
 
 
 }

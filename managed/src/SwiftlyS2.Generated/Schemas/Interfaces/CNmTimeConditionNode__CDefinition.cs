@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmTimeConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmTimeConditionNode__CDefinition> {
+public partial interface CNmTimeConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmTimeConditionNode__CDefinition>
+{
+    static CNmTimeConditionNode__CDefinition ISchemaClass<CNmTimeConditionNode__CDefinition>.From(nint handle) => new CNmTimeConditionNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmTimeConditionNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmTimeConditionNode__CDefinition>.ClassName => null;
 
-  static CNmTimeConditionNode__CDefinition ISchemaClass<CNmTimeConditionNode__CDefinition>.From(nint handle) => new CNmTimeConditionNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmTimeConditionNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmTimeConditionNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SourceStateNodeIdx { get; }
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref float Comparand { get; }
-  
-  public ref CNmTimeConditionNode__ComparisonType_t Type { get; }
-  
-  public ref CNmTimeConditionNode__Operator_t Operator { get; }
+    public ref short SourceStateNodeIdx { get; }
+
+    public ref short InputValueNodeIdx { get; }
+
+    public ref float Comparand { get; }
+
+    public ref CNmTimeConditionNode__ComparisonType_t Type { get; }
+
+    public ref CNmTimeConditionNode__Operator_t Operator { get; }
 
 
 }

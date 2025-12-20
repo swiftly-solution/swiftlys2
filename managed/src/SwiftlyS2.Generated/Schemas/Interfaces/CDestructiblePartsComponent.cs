@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDestructiblePartsComponent : ISchemaClass<CDestructiblePartsComponent> {
+public partial interface CDestructiblePartsComponent : ISchemaClass<CDestructiblePartsComponent>
+{
+    static CDestructiblePartsComponent ISchemaClass<CDestructiblePartsComponent>.From(nint handle) => new CDestructiblePartsComponentImpl(handle);
+    static int ISchemaClass<CDestructiblePartsComponent>.Size => 104;
+    static string? ISchemaClass<CDestructiblePartsComponent>.ClassName => null;
 
-  static CDestructiblePartsComponent ISchemaClass<CDestructiblePartsComponent>.From(nint handle) => new CDestructiblePartsComponentImpl(handle);
-  static int ISchemaClass<CDestructiblePartsComponent>.Size => 104;
-  static string? ISchemaClass<CDestructiblePartsComponent>.ClassName => null;
 
-  
-  public ref CNetworkVarChainer __m_pChainEntity { get; }
-  
-  public ref CUtlVector<ushort> DamageTakenByHitGroup { get; }
-  
-  public ref CHandle<CBaseModelEntity> Owner { get; }
-  
-  public ref int LastHitDamageLevel { get; }
+    public ref CNetworkVarChainer __m_pChainEntity { get; }
 
-  public void OwnerUpdated();
-  public void LastHitDamageLevelUpdated();
+    public ref CUtlVector<ushort> DamageTakenByHitGroup { get; }
+
+    public ref CHandle<CBaseModelEntity> Owner { get; }
+
+    public ref int LastHitDamageLevel { get; }
+
+    public void OwnerUpdated();
+    public void LastHitDamageLevelUpdated();
 }

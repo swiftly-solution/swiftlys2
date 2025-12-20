@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface MovementGaitId_t : ISchemaClass<MovementGaitId_t> {
+public partial interface MovementGaitId_t : ISchemaClass<MovementGaitId_t>
+{
+    static MovementGaitId_t ISchemaClass<MovementGaitId_t>.From(nint handle) => new MovementGaitId_tImpl(handle);
+    static int ISchemaClass<MovementGaitId_t>.Size => 8;
+    static string? ISchemaClass<MovementGaitId_t>.ClassName => null;
 
-  static MovementGaitId_t ISchemaClass<MovementGaitId_t>.From(nint handle) => new MovementGaitId_tImpl(handle);
-  static int ISchemaClass<MovementGaitId_t>.Size => 8;
-  static string? ISchemaClass<MovementGaitId_t>.ClassName => null;
 
-  
-  public ref CGlobalSymbol Id { get; }
+    public ref CGlobalSymbol Id { get; }
 
 
 }

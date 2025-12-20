@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleControlPointAxis_t : uint {
-
+public enum ParticleControlPointAxis_t : uint
+{
  PARTICLE_CP_AXIS_X = 0,
 
  PARTICLE_CP_AXIS_Y = 1,

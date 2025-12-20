@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvHudHintImpl : CPointEntityImpl, CEnvHudHint {
+internal partial class CEnvHudHintImpl : CPointEntityImpl, CEnvHudHint
+{
+    public CEnvHudHintImpl(nint handle) : base(handle) { }
 
-  public CEnvHudHintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MessageOffset;
 
-  private static nint? _MessageOffset;
-
-  public string Message {
-    get {
-      if (_MessageOffset == null) {
-        _MessageOffset = Schema.GetOffset(0xD3D49C23CC5243DC);
-      }
-      var ptr = _Handle.Read<nint>(_MessageOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_MessageOffset == null) {
-        _MessageOffset = Schema.GetOffset(0xD3D49C23CC5243DC);
-      }
-      Schema.SetString(_Handle, _MessageOffset!.Value, value);
-    }
-  } 
+    public string Message {
+        get {
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0xD3D49C23CC5243DC);
+            return Schema.GetString(_Handle.Read<nint>(_MessageOffset!.Value));
+        }
+        set {
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0xD3D49C23CC5243DC);
+            Schema.SetString(_Handle, _MessageOffset!.Value, value);
+        }
+    } 
 
 
 }

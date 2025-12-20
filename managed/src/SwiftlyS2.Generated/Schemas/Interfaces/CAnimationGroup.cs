@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimationGroup : ISchemaClass<CAnimationGroup> {
+public partial interface CAnimationGroup : ISchemaClass<CAnimationGroup>
+{
+    static CAnimationGroup ISchemaClass<CAnimationGroup>.From(nint handle) => new CAnimationGroupImpl(handle);
+    static int ISchemaClass<CAnimationGroup>.Size => 328;
+    static string? ISchemaClass<CAnimationGroup>.ClassName => null;
 
-  static CAnimationGroup ISchemaClass<CAnimationGroup>.From(nint handle) => new CAnimationGroupImpl(handle);
-  static int ISchemaClass<CAnimationGroup>.Size => 328;
-  static string? ISchemaClass<CAnimationGroup>.ClassName => null;
 
-  
-  public ref uint Flags { get; }
-  
-  public ref CBufferString Name { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimData>> LocalHAnimArray_Handle { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimationGroup>> IncludedGroupArray_Handle { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCSequenceGroupData> DirectHSeqGroup_Handle { get; }
-  
-  public CAnimKeyData DecodeKey { get; }
-  
-  public ref CUtlVector<CBufferString> Scripts { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> AdditionalExtRefs { get; }
+    public ref uint Flags { get; }
+
+    public ref CBufferString Name { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimData>> LocalHAnimArray_Handle { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimationGroup>> IncludedGroupArray_Handle { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCSequenceGroupData> DirectHSeqGroup_Handle { get; }
+
+    public CAnimKeyData DecodeKey { get; }
+
+    public ref CUtlVector<CBufferString> Scripts { get; }
+
+    public ref CUtlVector<SchemaUntypedField> AdditionalExtRefs { get; }
 
 
 }

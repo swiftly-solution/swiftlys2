@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SignatureOutflow_Resume : CPulse_ResumePoint, ISchemaClass<SignatureOutflow_Resume> {
-
-  static SignatureOutflow_Resume ISchemaClass<SignatureOutflow_Resume>.From(nint handle) => new SignatureOutflow_ResumeImpl(handle);
-  static int ISchemaClass<SignatureOutflow_Resume>.Size => 72;
-  static string? ISchemaClass<SignatureOutflow_Resume>.ClassName => null;
+public partial interface SignatureOutflow_Resume : CPulse_ResumePoint, ISchemaClass<SignatureOutflow_Resume>
+{
+    static SignatureOutflow_Resume ISchemaClass<SignatureOutflow_Resume>.From(nint handle) => new SignatureOutflow_ResumeImpl(handle);
+    static int ISchemaClass<SignatureOutflow_Resume>.Size => 72;
+    static string? ISchemaClass<SignatureOutflow_Resume>.ClassName => null;
 
 
 

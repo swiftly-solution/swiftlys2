@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseConstraint : CBoneConstraintBase, ISchemaClass<CBaseConstraint> {
+public partial interface CBaseConstraint : CBoneConstraintBase, ISchemaClass<CBaseConstraint>
+{
+    static CBaseConstraint ISchemaClass<CBaseConstraint>.From(nint handle) => new CBaseConstraintImpl(handle);
+    static int ISchemaClass<CBaseConstraint>.Size => 96;
+    static string? ISchemaClass<CBaseConstraint>.ClassName => null;
 
-  static CBaseConstraint ISchemaClass<CBaseConstraint>.From(nint handle) => new CBaseConstraintImpl(handle);
-  static int ISchemaClass<CBaseConstraint>.Size => 96;
-  static string? ISchemaClass<CBaseConstraint>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref Vector UpVector { get; }
-  
-  public ref CUtlLeanVector<CConstraintSlave, int> Slaves { get; }
-  
-  public ref CUtlVector<CConstraintTarget> Targets { get; }
+    public string Name { get; set; }
+
+    public ref Vector UpVector { get; }
+
+    public ref CUtlLeanVector<CConstraintSlave, int> Slaves { get; }
+
+    public ref CUtlVector<CConstraintTarget> Targets { get; }
 
 
 }

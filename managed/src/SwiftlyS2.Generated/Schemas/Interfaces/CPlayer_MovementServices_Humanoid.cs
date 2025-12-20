@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayer_MovementServices_Humanoid : CPlayer_MovementServices, ISchemaClass<CPlayer_MovementServices_Humanoid> {
+public partial interface CPlayer_MovementServices_Humanoid : CPlayer_MovementServices, ISchemaClass<CPlayer_MovementServices_Humanoid>
+{
+    static CPlayer_MovementServices_Humanoid ISchemaClass<CPlayer_MovementServices_Humanoid>.From(nint handle) => new CPlayer_MovementServices_HumanoidImpl(handle);
+    static int ISchemaClass<CPlayer_MovementServices_Humanoid>.Size => 640;
+    static string? ISchemaClass<CPlayer_MovementServices_Humanoid>.ClassName => null;
 
-  static CPlayer_MovementServices_Humanoid ISchemaClass<CPlayer_MovementServices_Humanoid>.From(nint handle) => new CPlayer_MovementServices_HumanoidImpl(handle);
-  static int ISchemaClass<CPlayer_MovementServices_Humanoid>.Size => 640;
-  static string? ISchemaClass<CPlayer_MovementServices_Humanoid>.ClassName => null;
 
-  
-  public ref float StepSoundTime { get; }
-  
-  public ref float FallVelocity { get; }
-  
-  public ref bool InCrouch { get; }
-  
-  public ref uint CrouchState { get; }
-  
-  public GameTime_t CrouchTransitionStartTime { get; }
-  
-  public ref bool Ducked { get; }
-  
-  public ref bool Ducking { get; }
-  
-  public ref bool InDuckJump { get; }
-  
-  public ref Vector GroundNormal { get; }
-  
-  public ref float SurfaceFriction { get; }
-  
-  public ref CUtlStringToken SurfaceProps { get; }
-  
-  public ref int Stepside { get; }
-  
-  public ref Vector SmoothedVelocity { get; }
+    public ref float StepSoundTime { get; }
 
-  public void FallVelocityUpdated();
-  public void InCrouchUpdated();
-  public void CrouchStateUpdated();
-  public void CrouchTransitionStartTimeUpdated();
-  public void DuckedUpdated();
-  public void DuckingUpdated();
-  public void InDuckJumpUpdated();
+    public ref float FallVelocity { get; }
+
+    public ref bool InCrouch { get; }
+
+    public ref uint CrouchState { get; }
+
+    public GameTime_t CrouchTransitionStartTime { get; }
+
+    public ref bool Ducked { get; }
+
+    public ref bool Ducking { get; }
+
+    public ref bool InDuckJump { get; }
+
+    public ref Vector GroundNormal { get; }
+
+    public ref float SurfaceFriction { get; }
+
+    public ref CUtlStringToken SurfaceProps { get; }
+
+    public ref int Stepside { get; }
+
+    public ref Vector SmoothedVelocity { get; }
+
+    public void FallVelocityUpdated();
+    public void InCrouchUpdated();
+    public void CrouchStateUpdated();
+    public void CrouchTransitionStartTimeUpdated();
+    public void DuckedUpdated();
+    public void DuckingUpdated();
+    public void InDuckJumpUpdated();
 }

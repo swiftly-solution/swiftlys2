@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayer_AutoaimServices : CPlayerPawnComponent, ISchemaClass<CPlayer_AutoaimServices> {
-
-  static CPlayer_AutoaimServices ISchemaClass<CPlayer_AutoaimServices>.From(nint handle) => new CPlayer_AutoaimServicesImpl(handle);
-  static int ISchemaClass<CPlayer_AutoaimServices>.Size => 64;
-  static string? ISchemaClass<CPlayer_AutoaimServices>.ClassName => null;
+public partial interface CPlayer_AutoaimServices : CPlayerPawnComponent, ISchemaClass<CPlayer_AutoaimServices>
+{
+    static CPlayer_AutoaimServices ISchemaClass<CPlayer_AutoaimServices>.From(nint handle) => new CPlayer_AutoaimServicesImpl(handle);
+    static int ISchemaClass<CPlayer_AutoaimServices>.Size => 64;
+    static string? ISchemaClass<CPlayer_AutoaimServices>.ClassName => null;
 
 
 

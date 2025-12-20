@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmBlendTaskBase : CNmPoseTask, ISchemaClass<CNmBlendTaskBase> {
-
-  static CNmBlendTaskBase ISchemaClass<CNmBlendTaskBase>.From(nint handle) => new CNmBlendTaskBaseImpl(handle);
-  static int ISchemaClass<CNmBlendTaskBase>.Size => 224;
-  static string? ISchemaClass<CNmBlendTaskBase>.ClassName => null;
+public partial interface CNmBlendTaskBase : CNmPoseTask, ISchemaClass<CNmBlendTaskBase>
+{
+    static CNmBlendTaskBase ISchemaClass<CNmBlendTaskBase>.From(nint handle) => new CNmBlendTaskBaseImpl(handle);
+    static int ISchemaClass<CNmBlendTaskBase>.Size => 224;
+    static string? ISchemaClass<CNmBlendTaskBase>.ClassName => null;
 
 
 

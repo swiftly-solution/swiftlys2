@@ -6,81 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SellbackPurchaseEntry_tImpl : SchemaClass, SellbackPurchaseEntry_t {
+internal partial class SellbackPurchaseEntry_tImpl : SchemaClass, SellbackPurchaseEntry_t
+{
+    public SellbackPurchaseEntry_tImpl(nint handle) : base(handle) { }
 
-  public SellbackPurchaseEntry_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DefIdxOffset;
 
-  private static nint? _DefIdxOffset;
-
-  public ref ushort DefIdx {
-    get {
-      if (_DefIdxOffset == null) {
-        _DefIdxOffset = Schema.GetOffset(0xAC9E0914F02DD274);
-      }
-      return ref _Handle.AsRef<ushort>(_DefIdxOffset!.Value);
+    public ref ushort DefIdx {
+        get {
+            _DefIdxOffset = _DefIdxOffset ?? Schema.GetOffset(0xAC9E0914F02DD274);
+            return ref _Handle.AsRef<ushort>(_DefIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _CostOffset;
+    private static nint? _CostOffset;
 
-  public ref int Cost {
-    get {
-      if (_CostOffset == null) {
-        _CostOffset = Schema.GetOffset(0xAC9E0914919660C4);
-      }
-      return ref _Handle.AsRef<int>(_CostOffset!.Value);
+    public ref int Cost {
+        get {
+            _CostOffset = _CostOffset ?? Schema.GetOffset(0xAC9E0914919660C4);
+            return ref _Handle.AsRef<int>(_CostOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevArmorOffset;
+    private static nint? _PrevArmorOffset;
 
-  public ref int PrevArmor {
-    get {
-      if (_PrevArmorOffset == null) {
-        _PrevArmorOffset = Schema.GetOffset(0xAC9E09143A18A19B);
-      }
-      return ref _Handle.AsRef<int>(_PrevArmorOffset!.Value);
+    public ref int PrevArmor {
+        get {
+            _PrevArmorOffset = _PrevArmorOffset ?? Schema.GetOffset(0xAC9E09143A18A19B);
+            return ref _Handle.AsRef<int>(_PrevArmorOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevHelmetOffset;
+    private static nint? _PrevHelmetOffset;
 
-  public ref bool PrevHelmet {
-    get {
-      if (_PrevHelmetOffset == null) {
-        _PrevHelmetOffset = Schema.GetOffset(0xAC9E0914DA638D65);
-      }
-      return ref _Handle.AsRef<bool>(_PrevHelmetOffset!.Value);
+    public ref bool PrevHelmet {
+        get {
+            _PrevHelmetOffset = _PrevHelmetOffset ?? Schema.GetOffset(0xAC9E0914DA638D65);
+            return ref _Handle.AsRef<bool>(_PrevHelmetOffset!.Value);
+        }
     }
-  }
-  private static nint? _ItemOffset;
+    private static nint? _ItemOffset;
 
-  public ref CHandle<CEntityInstance> Item {
-    get {
-      if (_ItemOffset == null) {
-        _ItemOffset = Schema.GetOffset(0xAC9E091452FF0710);
-      }
-      return ref _Handle.AsRef<CHandle<CEntityInstance>>(_ItemOffset!.Value);
+    public ref CHandle<CEntityInstance> Item {
+        get {
+            _ItemOffset = _ItemOffset ?? Schema.GetOffset(0xAC9E091452FF0710);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_ItemOffset!.Value);
+        }
     }
-  }
 
-  public void DefIdxUpdated() {
-    Schema.Update(_Handle, 0xAC9E0914F02DD274);
-  }
-  public void CostUpdated() {
-    Schema.Update(_Handle, 0xAC9E0914919660C4);
-  }
-  public void PrevArmorUpdated() {
-    Schema.Update(_Handle, 0xAC9E09143A18A19B);
-  }
-  public void PrevHelmetUpdated() {
-    Schema.Update(_Handle, 0xAC9E0914DA638D65);
-  }
-  public void ItemUpdated() {
-    Schema.Update(_Handle, 0xAC9E091452FF0710);
-  }
+    public void DefIdxUpdated() => Schema.Update(_Handle, 0xAC9E0914F02DD274);
+    public void CostUpdated() => Schema.Update(_Handle, 0xAC9E0914919660C4);
+    public void PrevArmorUpdated() => Schema.Update(_Handle, 0xAC9E09143A18A19B);
+    public void PrevHelmetUpdated() => Schema.Update(_Handle, 0xAC9E0914DA638D65);
+    public void ItemUpdated() => Schema.Update(_Handle, 0xAC9E091452FF0710);
 }

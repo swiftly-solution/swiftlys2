@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEmitTagActionUpdater : CAnimActionUpdater, ISchemaClass<CEmitTagActionUpdater> {
+public partial interface CEmitTagActionUpdater : CAnimActionUpdater, ISchemaClass<CEmitTagActionUpdater>
+{
+    static CEmitTagActionUpdater ISchemaClass<CEmitTagActionUpdater>.From(nint handle) => new CEmitTagActionUpdaterImpl(handle);
+    static int ISchemaClass<CEmitTagActionUpdater>.Size => 32;
+    static string? ISchemaClass<CEmitTagActionUpdater>.ClassName => null;
 
-  static CEmitTagActionUpdater ISchemaClass<CEmitTagActionUpdater>.From(nint handle) => new CEmitTagActionUpdaterImpl(handle);
-  static int ISchemaClass<CEmitTagActionUpdater>.Size => 32;
-  static string? ISchemaClass<CEmitTagActionUpdater>.ClassName => null;
 
-  
-  public ref int TagIndex { get; }
-  
-  public ref bool IsZeroDuration { get; }
+    public ref int TagIndex { get; }
+
+    public ref bool IsZeroDuration { get; }
 
 
 }

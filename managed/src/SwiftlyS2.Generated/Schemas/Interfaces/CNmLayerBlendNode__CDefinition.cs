@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmLayerBlendNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmLayerBlendNode__CDefinition> {
+public partial interface CNmLayerBlendNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmLayerBlendNode__CDefinition>
+{
+    static CNmLayerBlendNode__CDefinition ISchemaClass<CNmLayerBlendNode__CDefinition>.From(nint handle) => new CNmLayerBlendNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmLayerBlendNode__CDefinition>.Size => 72;
+    static string? ISchemaClass<CNmLayerBlendNode__CDefinition>.ClassName => null;
 
-  static CNmLayerBlendNode__CDefinition ISchemaClass<CNmLayerBlendNode__CDefinition>.From(nint handle) => new CNmLayerBlendNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmLayerBlendNode__CDefinition>.Size => 72;
-  static string? ISchemaClass<CNmLayerBlendNode__CDefinition>.ClassName => null;
 
-  
-  public ref short BaseNodeIdx { get; }
-  
-  public ref bool OnlySampleBaseRootMotion { get; }
-  
-  // CUtlLeanVectorFixedGrowable< CNmLayerBlendNode::LayerDefinition_t, 3 >
-  public SchemaUntypedField LayerDefinition { get; }
+    public ref short BaseNodeIdx { get; }
+
+    public ref bool OnlySampleBaseRootMotion { get; }
+
+    // CUtlLeanVectorFixedGrowable< CNmLayerBlendNode::LayerDefinition_t, 3 >
+    public SchemaUntypedField LayerDefinition { get; }
 
 
 }

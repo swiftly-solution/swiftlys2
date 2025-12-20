@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStateNodeStateData : ISchemaClass<CStateNodeStateData> {
+public partial interface CStateNodeStateData : ISchemaClass<CStateNodeStateData>
+{
+    static CStateNodeStateData ISchemaClass<CStateNodeStateData>.From(nint handle) => new CStateNodeStateDataImpl(handle);
+    static int ISchemaClass<CStateNodeStateData>.Size => 24;
+    static string? ISchemaClass<CStateNodeStateData>.ClassName => null;
 
-  static CStateNodeStateData ISchemaClass<CStateNodeStateData>.From(nint handle) => new CStateNodeStateDataImpl(handle);
-  static int ISchemaClass<CStateNodeStateData>.Size => 24;
-  static string? ISchemaClass<CStateNodeStateData>.ClassName => null;
 
-  
-  public CAnimUpdateNodeRef Child { get; }
-  
-  // bitfield
-  public SchemaUntypedField ExclusiveRootMotion { get; }
-  
-  // bitfield
-  public SchemaUntypedField ExclusiveRootMotionFirstFrame { get; }
+    public CAnimUpdateNodeRef Child { get; }
+
+    // bitfield
+    public SchemaUntypedField ExclusiveRootMotion { get; }
+
+    // bitfield
+    public SchemaUntypedField ExclusiveRootMotionFirstFrame { get; }
 
 
 }

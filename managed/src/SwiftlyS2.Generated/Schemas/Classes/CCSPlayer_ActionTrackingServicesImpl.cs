@@ -6,65 +6,50 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayer_ActionTrackingServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_ActionTrackingServices {
+internal partial class CCSPlayer_ActionTrackingServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_ActionTrackingServices
+{
+    public CCSPlayer_ActionTrackingServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayer_ActionTrackingServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LastWeaponBeforeC4AutoSwitchOffset;
 
-  private static nint? _LastWeaponBeforeC4AutoSwitchOffset;
-
-  public ref CHandle<CBasePlayerWeapon> LastWeaponBeforeC4AutoSwitch {
-    get {
-      if (_LastWeaponBeforeC4AutoSwitchOffset == null) {
-        _LastWeaponBeforeC4AutoSwitchOffset = Schema.GetOffset(0xC890019D6687BAC0);
-      }
-      return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponBeforeC4AutoSwitchOffset!.Value);
+    public ref CHandle<CBasePlayerWeapon> LastWeaponBeforeC4AutoSwitch {
+        get {
+            _LastWeaponBeforeC4AutoSwitchOffset = _LastWeaponBeforeC4AutoSwitchOffset ?? Schema.GetOffset(0xC890019D6687BAC0);
+            return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponBeforeC4AutoSwitchOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsRescuingOffset;
+    private static nint? _IsRescuingOffset;
 
-  public ref bool IsRescuing {
-    get {
-      if (_IsRescuingOffset == null) {
-        _IsRescuingOffset = Schema.GetOffset(0xC890019D225BDB2F);
-      }
-      return ref _Handle.AsRef<bool>(_IsRescuingOffset!.Value);
+    public ref bool IsRescuing {
+        get {
+            _IsRescuingOffset = _IsRescuingOffset ?? Schema.GetOffset(0xC890019D225BDB2F);
+            return ref _Handle.AsRef<bool>(_IsRescuingOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeaponPurchasesThisMatchOffset;
+    private static nint? _WeaponPurchasesThisMatchOffset;
 
-  public WeaponPurchaseTracker_t WeaponPurchasesThisMatch {
-    get {
-      if (_WeaponPurchasesThisMatchOffset == null) {
-        _WeaponPurchasesThisMatchOffset = Schema.GetOffset(0xC890019D43F68EE0);
-      }
-      return new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisMatchOffset!.Value);
+    public WeaponPurchaseTracker_t WeaponPurchasesThisMatch {
+        get {
+            _WeaponPurchasesThisMatchOffset = _WeaponPurchasesThisMatchOffset ?? Schema.GetOffset(0xC890019D43F68EE0);
+            return new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisMatchOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeaponPurchasesThisRoundOffset;
+    private static nint? _WeaponPurchasesThisRoundOffset;
 
-  public WeaponPurchaseTracker_t WeaponPurchasesThisRound {
-    get {
-      if (_WeaponPurchasesThisRoundOffset == null) {
-        _WeaponPurchasesThisRoundOffset = Schema.GetOffset(0xC890019D7C64F835);
-      }
-      return new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisRoundOffset!.Value);
+    public WeaponPurchaseTracker_t WeaponPurchasesThisRound {
+        get {
+            _WeaponPurchasesThisRoundOffset = _WeaponPurchasesThisRoundOffset ?? Schema.GetOffset(0xC890019D7C64F835);
+            return new WeaponPurchaseTracker_tImpl(_Handle + _WeaponPurchasesThisRoundOffset!.Value);
+        }
     }
-  }
 
-  public void IsRescuingUpdated() {
-    Schema.Update(_Handle, 0xC890019D225BDB2F);
-  }
-  public void WeaponPurchasesThisMatchUpdated() {
-    Schema.Update(_Handle, 0xC890019D43F68EE0);
-  }
-  public void WeaponPurchasesThisRoundUpdated() {
-    Schema.Update(_Handle, 0xC890019D7C64F835);
-  }
+    public void IsRescuingUpdated() => Schema.Update(_Handle, 0xC890019D225BDB2F);
+    public void WeaponPurchasesThisMatchUpdated() => Schema.Update(_Handle, 0xC890019D43F68EE0);
+    public void WeaponPurchasesThisRoundUpdated() => Schema.Update(_Handle, 0xC890019D7C64F835);
 }

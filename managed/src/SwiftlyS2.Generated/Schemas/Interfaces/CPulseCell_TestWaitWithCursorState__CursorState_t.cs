@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_TestWaitWithCursorState__CursorState_t : ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t> {
+public partial interface CPulseCell_TestWaitWithCursorState__CursorState_t : ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>
+{
+    static CPulseCell_TestWaitWithCursorState__CursorState_t ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.From(nint handle) => new CPulseCell_TestWaitWithCursorState__CursorState_tImpl(handle);
+    static int ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.Size => 8;
+    static string? ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.ClassName => null;
 
-  static CPulseCell_TestWaitWithCursorState__CursorState_t ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.From(nint handle) => new CPulseCell_TestWaitWithCursorState__CursorState_tImpl(handle);
-  static int ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.Size => 8;
-  static string? ISchemaClass<CPulseCell_TestWaitWithCursorState__CursorState_t>.ClassName => null;
 
-  
-  public ref float WaitValue { get; }
-  
-  public ref bool FailOnCancel { get; }
+    public ref float WaitValue { get; }
+
+    public ref bool FailOnCancel { get; }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CProductQuantizer : ISchemaClass<CProductQuantizer> {
+public partial interface CProductQuantizer : ISchemaClass<CProductQuantizer>
+{
+    static CProductQuantizer ISchemaClass<CProductQuantizer>.From(nint handle) => new CProductQuantizerImpl(handle);
+    static int ISchemaClass<CProductQuantizer>.Size => 32;
+    static string? ISchemaClass<CProductQuantizer>.ClassName => null;
 
-  static CProductQuantizer ISchemaClass<CProductQuantizer>.From(nint handle) => new CProductQuantizerImpl(handle);
-  static int ISchemaClass<CProductQuantizer>.Size => 32;
-  static string? ISchemaClass<CProductQuantizer>.ClassName => null;
 
-  
-  public ref CUtlVector<CVectorQuantizer> SubQuantizers { get; }
-  
-  public ref int Dimensions { get; }
+    public ref CUtlVector<CVectorQuantizer> SubQuantizers { get; }
+
+    public ref int Dimensions { get; }
 
 
 }

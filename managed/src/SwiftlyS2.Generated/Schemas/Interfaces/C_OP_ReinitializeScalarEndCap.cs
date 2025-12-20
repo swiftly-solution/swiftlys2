@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ReinitializeScalarEndCap : CParticleFunctionOperator, ISchemaClass<C_OP_ReinitializeScalarEndCap> {
+public partial interface C_OP_ReinitializeScalarEndCap : CParticleFunctionOperator, ISchemaClass<C_OP_ReinitializeScalarEndCap>
+{
+    static C_OP_ReinitializeScalarEndCap ISchemaClass<C_OP_ReinitializeScalarEndCap>.From(nint handle) => new C_OP_ReinitializeScalarEndCapImpl(handle);
+    static int ISchemaClass<C_OP_ReinitializeScalarEndCap>.Size => 480;
+    static string? ISchemaClass<C_OP_ReinitializeScalarEndCap>.ClassName => null;
 
-  static C_OP_ReinitializeScalarEndCap ISchemaClass<C_OP_ReinitializeScalarEndCap>.From(nint handle) => new C_OP_ReinitializeScalarEndCapImpl(handle);
-  static int ISchemaClass<C_OP_ReinitializeScalarEndCap>.Size => 480;
-  static string? ISchemaClass<C_OP_ReinitializeScalarEndCap>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
 
 
 }

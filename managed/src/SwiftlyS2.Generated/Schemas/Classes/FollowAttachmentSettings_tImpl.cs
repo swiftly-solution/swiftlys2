@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FollowAttachmentSettings_tImpl : SchemaClass, FollowAttachmentSettings_t {
+internal partial class FollowAttachmentSettings_tImpl : SchemaClass, FollowAttachmentSettings_t
+{
+    public FollowAttachmentSettings_tImpl(nint handle) : base(handle) { }
 
-  public FollowAttachmentSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttachmentOffset;
 
-  private static nint? _AttachmentOffset;
-
-  public CAnimAttachment Attachment {
-    get {
-      if (_AttachmentOffset == null) {
-        _AttachmentOffset = Schema.GetOffset(0x94FFC64B2C5CA308);
-      }
-      return new CAnimAttachmentImpl(_Handle + _AttachmentOffset!.Value);
+    public CAnimAttachment Attachment {
+        get {
+            _AttachmentOffset = _AttachmentOffset ?? Schema.GetOffset(0x94FFC64B2C5CA308);
+            return new CAnimAttachmentImpl(_Handle + _AttachmentOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneIndexOffset;
+    private static nint? _BoneIndexOffset;
 
-  public ref int BoneIndex {
-    get {
-      if (_BoneIndexOffset == null) {
-        _BoneIndexOffset = Schema.GetOffset(0x94FFC64B6AFA4155);
-      }
-      return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+    public ref int BoneIndex {
+        get {
+            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0x94FFC64B6AFA4155);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttachmentHandleOffset;
+    private static nint? _AttachmentHandleOffset;
 
-  public AttachmentHandle_t AttachmentHandle {
-    get {
-      if (_AttachmentHandleOffset == null) {
-        _AttachmentHandleOffset = Schema.GetOffset(0x94FFC64BA203035E);
-      }
-      return new AttachmentHandle_tImpl(_Handle + _AttachmentHandleOffset!.Value);
+    public AttachmentHandle_t AttachmentHandle {
+        get {
+            _AttachmentHandleOffset = _AttachmentHandleOffset ?? Schema.GetOffset(0x94FFC64BA203035E);
+            return new AttachmentHandle_tImpl(_Handle + _AttachmentHandleOffset!.Value);
+        }
     }
-  }
-  private static nint? _MatchTranslationOffset;
+    private static nint? _MatchTranslationOffset;
 
-  public ref bool MatchTranslation {
-    get {
-      if (_MatchTranslationOffset == null) {
-        _MatchTranslationOffset = Schema.GetOffset(0x94FFC64B96FCC779);
-      }
-      return ref _Handle.AsRef<bool>(_MatchTranslationOffset!.Value);
+    public ref bool MatchTranslation {
+        get {
+            _MatchTranslationOffset = _MatchTranslationOffset ?? Schema.GetOffset(0x94FFC64B96FCC779);
+            return ref _Handle.AsRef<bool>(_MatchTranslationOffset!.Value);
+        }
     }
-  }
-  private static nint? _MatchRotationOffset;
+    private static nint? _MatchRotationOffset;
 
-  public ref bool MatchRotation {
-    get {
-      if (_MatchRotationOffset == null) {
-        _MatchRotationOffset = Schema.GetOffset(0x94FFC64BA4FB561C);
-      }
-      return ref _Handle.AsRef<bool>(_MatchRotationOffset!.Value);
+    public ref bool MatchRotation {
+        get {
+            _MatchRotationOffset = _MatchRotationOffset ?? Schema.GetOffset(0x94FFC64BA4FB561C);
+            return ref _Handle.AsRef<bool>(_MatchRotationOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface IParticleCollection : ISchemaClass<IParticleCollection> {
-
-  static IParticleCollection ISchemaClass<IParticleCollection>.From(nint handle) => new IParticleCollectionImpl(handle);
-  static int ISchemaClass<IParticleCollection>.Size => 16;
-  static string? ISchemaClass<IParticleCollection>.ClassName => null;
+public partial interface IParticleCollection : ISchemaClass<IParticleCollection>
+{
+    static IParticleCollection ISchemaClass<IParticleCollection>.From(nint handle) => new IParticleCollectionImpl(handle);
+    static int ISchemaClass<IParticleCollection>.Size => 16;
+    static string? ISchemaClass<IParticleCollection>.ClassName => null;
 
 
 

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmSyncEventIndexConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition> {
+public partial interface CNmSyncEventIndexConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition>
+{
+    static CNmSyncEventIndexConditionNode__CDefinition ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition>.From(nint handle) => new CNmSyncEventIndexConditionNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition>.ClassName => null;
 
-  static CNmSyncEventIndexConditionNode__CDefinition ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition>.From(nint handle) => new CNmSyncEventIndexConditionNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmSyncEventIndexConditionNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SourceStateNodeIdx { get; }
-  
-  public ref CNmSyncEventIndexConditionNode__TriggerMode_t TriggerMode { get; }
-  
-  public ref int SyncEventIdx { get; }
+    public ref short SourceStateNodeIdx { get; }
+
+    public ref CNmSyncEventIndexConditionNode__TriggerMode_t TriggerMode { get; }
+
+    public ref int SyncEventIdx { get; }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ESceneObjectVisualization : uint {
-
+public enum ESceneObjectVisualization : uint
+{
  SCENEOBJECT_VIS_NONE = 0,
 
  SCENEOBJECT_VIS_OBJECT = 1,

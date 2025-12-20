@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMotionGraphConfig : ISchemaClass<CMotionGraphConfig> {
+public partial interface CMotionGraphConfig : ISchemaClass<CMotionGraphConfig>
+{
+    static CMotionGraphConfig ISchemaClass<CMotionGraphConfig>.From(nint handle) => new CMotionGraphConfigImpl(handle);
+    static int ISchemaClass<CMotionGraphConfig>.Size => 32;
+    static string? ISchemaClass<CMotionGraphConfig>.ClassName => null;
 
-  static CMotionGraphConfig ISchemaClass<CMotionGraphConfig>.From(nint handle) => new CMotionGraphConfigImpl(handle);
-  static int ISchemaClass<CMotionGraphConfig>.Size => 32;
-  static string? ISchemaClass<CMotionGraphConfig>.ClassName => null;
 
-  
-  public ISchemaFixedArray<float> ParamValues { get; }
-  
-  public ref float Duration { get; }
-  
-  public MotionIndex MotionIndex { get; }
-  
-  public ref int SampleStart { get; }
-  
-  public ref int SampleCount { get; }
+    public ISchemaFixedArray<float> ParamValues { get; }
+
+    public ref float Duration { get; }
+
+    public MotionIndex MotionIndex { get; }
+
+    public ref int SampleStart { get; }
+
+    public ref int SampleCount { get; }
 
 
 }

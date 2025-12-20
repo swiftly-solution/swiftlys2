@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Val_TestDomainFindEntityByName : CPulseCell_BaseValue, ISchemaClass<CPulseCell_Val_TestDomainFindEntityByName> {
-
-  static CPulseCell_Val_TestDomainFindEntityByName ISchemaClass<CPulseCell_Val_TestDomainFindEntityByName>.From(nint handle) => new CPulseCell_Val_TestDomainFindEntityByNameImpl(handle);
-  static int ISchemaClass<CPulseCell_Val_TestDomainFindEntityByName>.Size => 72;
-  static string? ISchemaClass<CPulseCell_Val_TestDomainFindEntityByName>.ClassName => null;
+public partial interface CPulseCell_Val_TestDomainFindEntityByName : CPulseCell_BaseValue, ISchemaClass<CPulseCell_Val_TestDomainFindEntityByName>
+{
+    static CPulseCell_Val_TestDomainFindEntityByName ISchemaClass<CPulseCell_Val_TestDomainFindEntityByName>.From(nint handle) => new CPulseCell_Val_TestDomainFindEntityByNameImpl(handle);
+    static int ISchemaClass<CPulseCell_Val_TestDomainFindEntityByName>.Size => 72;
+    static string? ISchemaClass<CPulseCell_Val_TestDomainFindEntityByName>.ClassName => null;
 
 
 

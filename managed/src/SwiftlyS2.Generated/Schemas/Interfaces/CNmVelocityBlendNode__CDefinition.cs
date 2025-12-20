@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmVelocityBlendNode__CDefinition : CNmParameterizedBlendNode__CDefinition, ISchemaClass<CNmVelocityBlendNode__CDefinition> {
-
-  static CNmVelocityBlendNode__CDefinition ISchemaClass<CNmVelocityBlendNode__CDefinition>.From(nint handle) => new CNmVelocityBlendNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmVelocityBlendNode__CDefinition>.Size => 64;
-  static string? ISchemaClass<CNmVelocityBlendNode__CDefinition>.ClassName => null;
+public partial interface CNmVelocityBlendNode__CDefinition : CNmParameterizedBlendNode__CDefinition, ISchemaClass<CNmVelocityBlendNode__CDefinition>
+{
+    static CNmVelocityBlendNode__CDefinition ISchemaClass<CNmVelocityBlendNode__CDefinition>.From(nint handle) => new CNmVelocityBlendNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmVelocityBlendNode__CDefinition>.Size => 64;
+    static string? ISchemaClass<CNmVelocityBlendNode__CDefinition>.ClassName => null;
 
 
 

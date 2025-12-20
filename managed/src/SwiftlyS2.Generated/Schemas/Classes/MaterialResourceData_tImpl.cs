@@ -6,171 +6,136 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MaterialResourceData_tImpl : SchemaClass, MaterialResourceData_t {
+internal partial class MaterialResourceData_tImpl : SchemaClass, MaterialResourceData_t
+{
+    public MaterialResourceData_tImpl(nint handle) : base(handle) { }
 
-  public MaterialResourceData_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaterialNameOffset;
 
-  private static nint? _MaterialNameOffset;
+    public string MaterialName {
+        get {
+            _MaterialNameOffset = _MaterialNameOffset ?? Schema.GetOffset(0xA8F70097AF8795A3);
+            return Schema.GetString(_Handle.Read<nint>(_MaterialNameOffset!.Value));
+        }
+        set {
+            _MaterialNameOffset = _MaterialNameOffset ?? Schema.GetOffset(0xA8F70097AF8795A3);
+            Schema.SetString(_Handle, _MaterialNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ShaderNameOffset;
 
-  public string MaterialName {
-    get {
-      if (_MaterialNameOffset == null) {
-        _MaterialNameOffset = Schema.GetOffset(0xA8F70097AF8795A3);
-      }
-      var ptr = _Handle.Read<nint>(_MaterialNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_MaterialNameOffset == null) {
-        _MaterialNameOffset = Schema.GetOffset(0xA8F70097AF8795A3);
-      }
-      Schema.SetString(_Handle, _MaterialNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ShaderNameOffset;
+    public string ShaderName {
+        get {
+            _ShaderNameOffset = _ShaderNameOffset ?? Schema.GetOffset(0xA8F70097F8B3D7CB);
+            return Schema.GetString(_Handle.Read<nint>(_ShaderNameOffset!.Value));
+        }
+        set {
+            _ShaderNameOffset = _ShaderNameOffset ?? Schema.GetOffset(0xA8F70097F8B3D7CB);
+            Schema.SetString(_Handle, _ShaderNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _IntParamsOffset;
 
-  public string ShaderName {
-    get {
-      if (_ShaderNameOffset == null) {
-        _ShaderNameOffset = Schema.GetOffset(0xA8F70097F8B3D7CB);
-      }
-      var ptr = _Handle.Read<nint>(_ShaderNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<MaterialParamInt_t> IntParams {
+        get {
+            _IntParamsOffset = _IntParamsOffset ?? Schema.GetOffset(0xA8F7009783517144);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamInt_t>>(_IntParamsOffset!.Value);
+        }
     }
-    set {
-      if (_ShaderNameOffset == null) {
-        _ShaderNameOffset = Schema.GetOffset(0xA8F70097F8B3D7CB);
-      }
-      Schema.SetString(_Handle, _ShaderNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _IntParamsOffset;
+    private static nint? _FloatParamsOffset;
 
-  public ref CUtlVector<MaterialParamInt_t> IntParams {
-    get {
-      if (_IntParamsOffset == null) {
-        _IntParamsOffset = Schema.GetOffset(0xA8F7009783517144);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamInt_t>>(_IntParamsOffset!.Value);
+    public ref CUtlVector<MaterialParamFloat_t> FloatParams {
+        get {
+            _FloatParamsOffset = _FloatParamsOffset ?? Schema.GetOffset(0xA8F70097E6B01113);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamFloat_t>>(_FloatParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FloatParamsOffset;
+    private static nint? _VectorParamsOffset;
 
-  public ref CUtlVector<MaterialParamFloat_t> FloatParams {
-    get {
-      if (_FloatParamsOffset == null) {
-        _FloatParamsOffset = Schema.GetOffset(0xA8F70097E6B01113);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamFloat_t>>(_FloatParamsOffset!.Value);
+    public ref CUtlVector<MaterialParamVector_t> VectorParams {
+        get {
+            _VectorParamsOffset = _VectorParamsOffset ?? Schema.GetOffset(0xA8F70097FA0211E0);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamVector_t>>(_VectorParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _VectorParamsOffset;
+    private static nint? _TextureParamsOffset;
 
-  public ref CUtlVector<MaterialParamVector_t> VectorParams {
-    get {
-      if (_VectorParamsOffset == null) {
-        _VectorParamsOffset = Schema.GetOffset(0xA8F70097FA0211E0);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamVector_t>>(_VectorParamsOffset!.Value);
+    public ref CUtlVector<MaterialParamTexture_t> TextureParams {
+        get {
+            _TextureParamsOffset = _TextureParamsOffset ?? Schema.GetOffset(0xA8F70097E53114F2);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamTexture_t>>(_TextureParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TextureParamsOffset;
+    private static nint? _DynamicParamsOffset;
 
-  public ref CUtlVector<MaterialParamTexture_t> TextureParams {
-    get {
-      if (_TextureParamsOffset == null) {
-        _TextureParamsOffset = Schema.GetOffset(0xA8F70097E53114F2);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamTexture_t>>(_TextureParamsOffset!.Value);
+    public ref CUtlVector<MaterialParamBuffer_t> DynamicParams {
+        get {
+            _DynamicParamsOffset = _DynamicParamsOffset ?? Schema.GetOffset(0xA8F70097CC06B734);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamBuffer_t>>(_DynamicParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DynamicParamsOffset;
+    private static nint? _DynamicTextureParamsOffset;
 
-  public ref CUtlVector<MaterialParamBuffer_t> DynamicParams {
-    get {
-      if (_DynamicParamsOffset == null) {
-        _DynamicParamsOffset = Schema.GetOffset(0xA8F70097CC06B734);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamBuffer_t>>(_DynamicParamsOffset!.Value);
+    public ref CUtlVector<MaterialParamBuffer_t> DynamicTextureParams {
+        get {
+            _DynamicTextureParamsOffset = _DynamicTextureParamsOffset ?? Schema.GetOffset(0xA8F70097A1DB64A7);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamBuffer_t>>(_DynamicTextureParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DynamicTextureParamsOffset;
+    private static nint? _IntAttributesOffset;
 
-  public ref CUtlVector<MaterialParamBuffer_t> DynamicTextureParams {
-    get {
-      if (_DynamicTextureParamsOffset == null) {
-        _DynamicTextureParamsOffset = Schema.GetOffset(0xA8F70097A1DB64A7);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamBuffer_t>>(_DynamicTextureParamsOffset!.Value);
+    public ref CUtlVector<MaterialParamInt_t> IntAttributes {
+        get {
+            _IntAttributesOffset = _IntAttributesOffset ?? Schema.GetOffset(0xA8F700974510A3FB);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamInt_t>>(_IntAttributesOffset!.Value);
+        }
     }
-  }
-  private static nint? _IntAttributesOffset;
+    private static nint? _FloatAttributesOffset;
 
-  public ref CUtlVector<MaterialParamInt_t> IntAttributes {
-    get {
-      if (_IntAttributesOffset == null) {
-        _IntAttributesOffset = Schema.GetOffset(0xA8F700974510A3FB);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamInt_t>>(_IntAttributesOffset!.Value);
+    public ref CUtlVector<MaterialParamFloat_t> FloatAttributes {
+        get {
+            _FloatAttributesOffset = _FloatAttributesOffset ?? Schema.GetOffset(0xA8F70097D7D0F554);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamFloat_t>>(_FloatAttributesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FloatAttributesOffset;
+    private static nint? _VectorAttributesOffset;
 
-  public ref CUtlVector<MaterialParamFloat_t> FloatAttributes {
-    get {
-      if (_FloatAttributesOffset == null) {
-        _FloatAttributesOffset = Schema.GetOffset(0xA8F70097D7D0F554);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamFloat_t>>(_FloatAttributesOffset!.Value);
+    public ref CUtlVector<MaterialParamVector_t> VectorAttributes {
+        get {
+            _VectorAttributesOffset = _VectorAttributesOffset ?? Schema.GetOffset(0xA8F70097FDB43687);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamVector_t>>(_VectorAttributesOffset!.Value);
+        }
     }
-  }
-  private static nint? _VectorAttributesOffset;
+    private static nint? _TextureAttributesOffset;
 
-  public ref CUtlVector<MaterialParamVector_t> VectorAttributes {
-    get {
-      if (_VectorAttributesOffset == null) {
-        _VectorAttributesOffset = Schema.GetOffset(0xA8F70097FDB43687);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamVector_t>>(_VectorAttributesOffset!.Value);
+    public ref CUtlVector<MaterialParamTexture_t> TextureAttributes {
+        get {
+            _TextureAttributesOffset = _TextureAttributesOffset ?? Schema.GetOffset(0xA8F70097417A5705);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamTexture_t>>(_TextureAttributesOffset!.Value);
+        }
     }
-  }
-  private static nint? _TextureAttributesOffset;
+    private static nint? _StringAttributesOffset;
 
-  public ref CUtlVector<MaterialParamTexture_t> TextureAttributes {
-    get {
-      if (_TextureAttributesOffset == null) {
-        _TextureAttributesOffset = Schema.GetOffset(0xA8F70097417A5705);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamTexture_t>>(_TextureAttributesOffset!.Value);
+    public ref CUtlVector<MaterialParamString_t> StringAttributes {
+        get {
+            _StringAttributesOffset = _StringAttributesOffset ?? Schema.GetOffset(0xA8F700973452D511);
+            return ref _Handle.AsRef<CUtlVector<MaterialParamString_t>>(_StringAttributesOffset!.Value);
+        }
     }
-  }
-  private static nint? _StringAttributesOffset;
+    private static nint? _RenderAttributesUsedOffset;
 
-  public ref CUtlVector<MaterialParamString_t> StringAttributes {
-    get {
-      if (_StringAttributesOffset == null) {
-        _StringAttributesOffset = Schema.GetOffset(0xA8F700973452D511);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialParamString_t>>(_StringAttributesOffset!.Value);
+    public ref CUtlVector<CUtlString> RenderAttributesUsed {
+        get {
+            _RenderAttributesUsedOffset = _RenderAttributesUsedOffset ?? Schema.GetOffset(0xA8F700979CB01DD9);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_RenderAttributesUsedOffset!.Value);
+        }
     }
-  }
-  private static nint? _RenderAttributesUsedOffset;
-
-  public ref CUtlVector<CUtlString> RenderAttributesUsed {
-    get {
-      if (_RenderAttributesUsedOffset == null) {
-        _RenderAttributesUsedOffset = Schema.GetOffset(0xA8F700979CB01DD9);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_RenderAttributesUsedOffset!.Value);
-    }
-  }
 
 
 }

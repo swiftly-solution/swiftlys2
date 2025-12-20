@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum StandardLightingAttenuationStyle_t : uint {
-
+public enum StandardLightingAttenuationStyle_t : uint
+{
  LIGHT_STYLE_OLD = 0,
 
  LIGHT_STYLE_NEW = 1,

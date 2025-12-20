@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface DynamicMeshDeformParams_t : ISchemaClass<DynamicMeshDeformParams_t> {
+public partial interface DynamicMeshDeformParams_t : ISchemaClass<DynamicMeshDeformParams_t>
+{
+    static DynamicMeshDeformParams_t ISchemaClass<DynamicMeshDeformParams_t>.From(nint handle) => new DynamicMeshDeformParams_tImpl(handle);
+    static int ISchemaClass<DynamicMeshDeformParams_t>.Size => 12;
+    static string? ISchemaClass<DynamicMeshDeformParams_t>.ClassName => null;
 
-  static DynamicMeshDeformParams_t ISchemaClass<DynamicMeshDeformParams_t>.From(nint handle) => new DynamicMeshDeformParams_tImpl(handle);
-  static int ISchemaClass<DynamicMeshDeformParams_t>.Size => 12;
-  static string? ISchemaClass<DynamicMeshDeformParams_t>.ClassName => null;
 
-  
-  public ref float TensionCompressScale { get; }
-  
-  public ref float TensionStretchScale { get; }
-  
-  public ref bool RecomputeSmoothNormalsAfterAnimation { get; }
-  
-  public ref bool ComputeDynamicMeshTensionAfterAnimation { get; }
-  
-  public ref bool SmoothNormalsAcrossUvSeams { get; }
+    public ref float TensionCompressScale { get; }
+
+    public ref float TensionStretchScale { get; }
+
+    public ref bool RecomputeSmoothNormalsAfterAnimation { get; }
+
+    public ref bool ComputeDynamicMeshTensionAfterAnimation { get; }
+
+    public ref bool SmoothNormalsAcrossUvSeams { get; }
 
 
 }

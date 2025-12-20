@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_FadeInSimpleImpl : CParticleFunctionOperatorImpl, C_OP_FadeInSimple {
+internal partial class C_OP_FadeInSimpleImpl : CParticleFunctionOperatorImpl, C_OP_FadeInSimple
+{
+    public C_OP_FadeInSimpleImpl(nint handle) : base(handle) { }
 
-  public C_OP_FadeInSimpleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FadeInTimeOffset;
 
-  private static nint? _FadeInTimeOffset;
-
-  public ref float FadeInTime {
-    get {
-      if (_FadeInTimeOffset == null) {
-        _FadeInTimeOffset = Schema.GetOffset(0x31D1B5A1F0255B3);
-      }
-      return ref _Handle.AsRef<float>(_FadeInTimeOffset!.Value);
+    public ref float FadeInTime {
+        get {
+            _FadeInTimeOffset = _FadeInTimeOffset ?? Schema.GetOffset(0x31D1B5A1F0255B3);
+            return ref _Handle.AsRef<float>(_FadeInTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x31D1B5AE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x31D1B5AE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
 
 
 }

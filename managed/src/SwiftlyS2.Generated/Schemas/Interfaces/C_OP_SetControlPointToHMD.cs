@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointToHMD : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToHMD> {
+public partial interface C_OP_SetControlPointToHMD : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToHMD>
+{
+    static C_OP_SetControlPointToHMD ISchemaClass<C_OP_SetControlPointToHMD>.From(nint handle) => new C_OP_SetControlPointToHMDImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointToHMD>.Size => 496;
+    static string? ISchemaClass<C_OP_SetControlPointToHMD>.ClassName => null;
 
-  static C_OP_SetControlPointToHMD ISchemaClass<C_OP_SetControlPointToHMD>.From(nint handle) => new C_OP_SetControlPointToHMDImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointToHMD>.Size => 496;
-  static string? ISchemaClass<C_OP_SetControlPointToHMD>.ClassName => null;
 
-  
-  public ref int CP1 { get; }
-  
-  public ref Vector CP1Pos { get; }
-  
-  public ref bool OrientToHMD { get; }
+    public ref int CP1 { get; }
+
+    public ref Vector CP1Pos { get; }
+
+    public ref bool OrientToHMD { get; }
 
 
 }

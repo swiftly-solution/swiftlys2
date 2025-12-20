@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ParticlePreviewBodyGroup_tImpl : SchemaClass, ParticlePreviewBodyGroup_t {
+internal partial class ParticlePreviewBodyGroup_tImpl : SchemaClass, ParticlePreviewBodyGroup_t
+{
+    public ParticlePreviewBodyGroup_tImpl(nint handle) : base(handle) { }
 
-  public ParticlePreviewBodyGroup_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BodyGroupNameOffset;
 
-  private static nint? _BodyGroupNameOffset;
+    public string BodyGroupName {
+        get {
+            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xB53436EB1E953217);
+            return Schema.GetString(_Handle.Read<nint>(_BodyGroupNameOffset!.Value));
+        }
+        set {
+            _BodyGroupNameOffset = _BodyGroupNameOffset ?? Schema.GetOffset(0xB53436EB1E953217);
+            Schema.SetString(_Handle, _BodyGroupNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ValueOffset;
 
-  public string BodyGroupName {
-    get {
-      if (_BodyGroupNameOffset == null) {
-        _BodyGroupNameOffset = Schema.GetOffset(0xB53436EB1E953217);
-      }
-      var ptr = _Handle.Read<nint>(_BodyGroupNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xB53436EB077D337E);
+            return ref _Handle.AsRef<int>(_ValueOffset!.Value);
+        }
     }
-    set {
-      if (_BodyGroupNameOffset == null) {
-        _BodyGroupNameOffset = Schema.GetOffset(0xB53436EB1E953217);
-      }
-      Schema.SetString(_Handle, _BodyGroupNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ValueOffset;
-
-  public ref int Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0xB53436EB077D337E);
-      }
-      return ref _Handle.AsRef<int>(_ValueOffset!.Value);
-    }
-  }
 
 
 }

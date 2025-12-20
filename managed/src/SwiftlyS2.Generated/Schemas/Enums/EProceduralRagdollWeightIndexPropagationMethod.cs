@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EProceduralRagdollWeightIndexPropagationMethod : uint {
-
+public enum EProceduralRagdollWeightIndexPropagationMethod : uint
+{
  Bone = 0,
 
  BoneAndChildren = 1,

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnSphereDesc_tImpl : RnShapeDesc_tImpl, RnSphereDesc_t {
+internal partial class RnSphereDesc_tImpl : RnShapeDesc_tImpl, RnSphereDesc_t
+{
+    public RnSphereDesc_tImpl(nint handle) : base(handle) { }
 
-  public RnSphereDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SphereOffset;
 
-  private static nint? _SphereOffset;
-
-  public SchemaUntypedField Sphere {
-    get {
-      if (_SphereOffset == null) {
-        _SphereOffset = Schema.GetOffset(0x6187F5E1E7A3D98);
-      }
-      return new SchemaUntypedField(_Handle + _SphereOffset!.Value);
+    public SchemaUntypedField Sphere {
+        get {
+            _SphereOffset = _SphereOffset ?? Schema.GetOffset(0x6187F5E1E7A3D98);
+            return new SchemaUntypedField(_Handle + _SphereOffset!.Value);
+        }
     }
-  }
 
 
 }

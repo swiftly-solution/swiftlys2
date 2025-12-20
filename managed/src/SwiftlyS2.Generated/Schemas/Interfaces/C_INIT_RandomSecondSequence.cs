@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomSecondSequence : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomSecondSequence> {
+public partial interface C_INIT_RandomSecondSequence : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomSecondSequence>
+{
+    static C_INIT_RandomSecondSequence ISchemaClass<C_INIT_RandomSecondSequence>.From(nint handle) => new C_INIT_RandomSecondSequenceImpl(handle);
+    static int ISchemaClass<C_INIT_RandomSecondSequence>.Size => 480;
+    static string? ISchemaClass<C_INIT_RandomSecondSequence>.ClassName => null;
 
-  static C_INIT_RandomSecondSequence ISchemaClass<C_INIT_RandomSecondSequence>.From(nint handle) => new C_INIT_RandomSecondSequenceImpl(handle);
-  static int ISchemaClass<C_INIT_RandomSecondSequence>.Size => 480;
-  static string? ISchemaClass<C_INIT_RandomSecondSequence>.ClassName => null;
 
-  
-  public ref int SequenceMin { get; }
-  
-  public ref int SequenceMax { get; }
+    public ref int SequenceMin { get; }
+
+    public ref int SequenceMax { get; }
 
 
 }

@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderLightBeamImpl : CParticleFunctionRendererImpl, C_OP_RenderLightBeam {
+internal partial class C_OP_RenderLightBeamImpl : CParticleFunctionRendererImpl, C_OP_RenderLightBeam
+{
+    public C_OP_RenderLightBeamImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderLightBeamImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ColorBlendOffset;
 
-  private static nint? _ColorBlendOffset;
-
-  public CParticleCollectionVecInput ColorBlend {
-    get {
-      if (_ColorBlendOffset == null) {
-        _ColorBlendOffset = Schema.GetOffset(0xD8A78450740E9A5F);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _ColorBlendOffset!.Value);
+    public CParticleCollectionVecInput ColorBlend {
+        get {
+            _ColorBlendOffset = _ColorBlendOffset ?? Schema.GetOffset(0xD8A78450740E9A5F);
+            return new CParticleCollectionVecInputImpl(_Handle + _ColorBlendOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorBlendTypeOffset;
+    private static nint? _ColorBlendTypeOffset;
 
-  public ref ParticleColorBlendType_t ColorBlendType {
-    get {
-      if (_ColorBlendTypeOffset == null) {
-        _ColorBlendTypeOffset = Schema.GetOffset(0xD8A78450DBC6EFCF);
-      }
-      return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+    public ref ParticleColorBlendType_t ColorBlendType {
+        get {
+            _ColorBlendTypeOffset = _ColorBlendTypeOffset ?? Schema.GetOffset(0xD8A78450DBC6EFCF);
+            return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessLumensPerMeterOffset;
+    private static nint? _BrightnessLumensPerMeterOffset;
 
-  public CParticleCollectionFloatInput BrightnessLumensPerMeter {
-    get {
-      if (_BrightnessLumensPerMeterOffset == null) {
-        _BrightnessLumensPerMeterOffset = Schema.GetOffset(0xD8A78450889235AE);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _BrightnessLumensPerMeterOffset!.Value);
+    public CParticleCollectionFloatInput BrightnessLumensPerMeter {
+        get {
+            _BrightnessLumensPerMeterOffset = _BrightnessLumensPerMeterOffset ?? Schema.GetOffset(0xD8A78450889235AE);
+            return new CParticleCollectionFloatInputImpl(_Handle + _BrightnessLumensPerMeterOffset!.Value);
+        }
     }
-  }
-  private static nint? _CastShadowsOffset;
+    private static nint? _CastShadowsOffset;
 
-  public ref bool CastShadows {
-    get {
-      if (_CastShadowsOffset == null) {
-        _CastShadowsOffset = Schema.GetOffset(0xD8A7845036113167);
-      }
-      return ref _Handle.AsRef<bool>(_CastShadowsOffset!.Value);
+    public ref bool CastShadows {
+        get {
+            _CastShadowsOffset = _CastShadowsOffset ?? Schema.GetOffset(0xD8A7845036113167);
+            return ref _Handle.AsRef<bool>(_CastShadowsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkirtOffset;
+    private static nint? _SkirtOffset;
 
-  public CParticleCollectionFloatInput Skirt {
-    get {
-      if (_SkirtOffset == null) {
-        _SkirtOffset = Schema.GetOffset(0xD8A78450EAFB6D2A);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _SkirtOffset!.Value);
+    public CParticleCollectionFloatInput Skirt {
+        get {
+            _SkirtOffset = _SkirtOffset ?? Schema.GetOffset(0xD8A78450EAFB6D2A);
+            return new CParticleCollectionFloatInputImpl(_Handle + _SkirtOffset!.Value);
+        }
     }
-  }
-  private static nint? _RangeOffset;
+    private static nint? _RangeOffset;
 
-  public CParticleCollectionFloatInput Range {
-    get {
-      if (_RangeOffset == null) {
-        _RangeOffset = Schema.GetOffset(0xD8A784503FC92844);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _RangeOffset!.Value);
+    public CParticleCollectionFloatInput Range {
+        get {
+            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0xD8A784503FC92844);
+            return new CParticleCollectionFloatInputImpl(_Handle + _RangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ThicknessOffset;
+    private static nint? _ThicknessOffset;
 
-  public CParticleCollectionFloatInput Thickness {
-    get {
-      if (_ThicknessOffset == null) {
-        _ThicknessOffset = Schema.GetOffset(0xD8A78450DC7C1987);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ThicknessOffset!.Value);
+    public CParticleCollectionFloatInput Thickness {
+        get {
+            _ThicknessOffset = _ThicknessOffset ?? Schema.GetOffset(0xD8A78450DC7C1987);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ThicknessOffset!.Value);
+        }
     }
-  }
 
 
 }

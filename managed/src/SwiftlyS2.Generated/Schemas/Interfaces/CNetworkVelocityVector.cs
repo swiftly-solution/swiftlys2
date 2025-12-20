@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNetworkVelocityVector : ISchemaClass<CNetworkVelocityVector> {
+public partial interface CNetworkVelocityVector : ISchemaClass<CNetworkVelocityVector>
+{
+    static CNetworkVelocityVector ISchemaClass<CNetworkVelocityVector>.From(nint handle) => new CNetworkVelocityVectorImpl(handle);
+    static int ISchemaClass<CNetworkVelocityVector>.Size => 40;
+    static string? ISchemaClass<CNetworkVelocityVector>.ClassName => null;
 
-  static CNetworkVelocityVector ISchemaClass<CNetworkVelocityVector>.From(nint handle) => new CNetworkVelocityVectorImpl(handle);
-  static int ISchemaClass<CNetworkVelocityVector>.Size => 40;
-  static string? ISchemaClass<CNetworkVelocityVector>.ClassName => null;
 
-  
-  public ref CNetworkedQuantizedFloat X { get; }
-  
-  public ref CNetworkedQuantizedFloat Y { get; }
-  
-  public ref CNetworkedQuantizedFloat Z { get; }
+    public ref CNetworkedQuantizedFloat X { get; }
 
-  public void XUpdated();
-  public void YUpdated();
-  public void ZUpdated();
+    public ref CNetworkedQuantizedFloat Y { get; }
+
+    public ref CNetworkedQuantizedFloat Z { get; }
+
+    public void XUpdated();
+    public void YUpdated();
+    public void ZUpdated();
 }

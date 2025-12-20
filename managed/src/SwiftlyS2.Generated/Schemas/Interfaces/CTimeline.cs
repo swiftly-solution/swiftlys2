@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTimeline : IntervalTimer, ISchemaClass<CTimeline> {
+public partial interface CTimeline : IntervalTimer, ISchemaClass<CTimeline>
+{
+    static CTimeline ISchemaClass<CTimeline>.From(nint handle) => new CTimelineImpl(handle);
+    static int ISchemaClass<CTimeline>.Size => 552;
+    static string? ISchemaClass<CTimeline>.ClassName => null;
 
-  static CTimeline ISchemaClass<CTimeline>.From(nint handle) => new CTimelineImpl(handle);
-  static int ISchemaClass<CTimeline>.Size => 552;
-  static string? ISchemaClass<CTimeline>.ClassName => null;
 
-  
-  public ISchemaFixedArray<float> Values { get; }
-  
-  public ISchemaFixedArray<int> ValueCounts { get; }
-  
-  public ref int BucketCount { get; }
-  
-  public ref float Interval { get; }
-  
-  public ref float FinalValue { get; }
-  
-  public ref TimelineCompression_t CompressionType { get; }
-  
-  public ref bool Stopped { get; }
+    public ISchemaFixedArray<float> Values { get; }
 
-  public void ValuesUpdated();
-  public void ValueCountsUpdated();
-  public void BucketCountUpdated();
-  public void IntervalUpdated();
-  public void FinalValueUpdated();
-  public void CompressionTypeUpdated();
-  public void StoppedUpdated();
+    public ISchemaFixedArray<int> ValueCounts { get; }
+
+    public ref int BucketCount { get; }
+
+    public ref float Interval { get; }
+
+    public ref float FinalValue { get; }
+
+    public ref TimelineCompression_t CompressionType { get; }
+
+    public ref bool Stopped { get; }
+
+    public void ValuesUpdated();
+    public void ValueCountsUpdated();
+    public void BucketCountUpdated();
+    public void IntervalUpdated();
+    public void FinalValueUpdated();
+    public void CompressionTypeUpdated();
+    public void StoppedUpdated();
 }

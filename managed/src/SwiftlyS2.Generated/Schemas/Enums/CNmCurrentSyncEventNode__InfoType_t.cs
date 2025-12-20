@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CNmCurrentSyncEventNode__InfoType_t : byte {
-
+public enum CNmCurrentSyncEventNode__InfoType_t : byte
+{
  IndexAndPercentage = 0,
 
  IndexOnly = 1,

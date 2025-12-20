@@ -6,147 +6,120 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PostProcessingResource_tImpl : SchemaClass, PostProcessingResource_t {
+internal partial class PostProcessingResource_tImpl : SchemaClass, PostProcessingResource_t
+{
+    public PostProcessingResource_tImpl(nint handle) : base(handle) { }
 
-  public PostProcessingResource_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HasTonemapParamsOffset;
 
-  private static nint? _HasTonemapParamsOffset;
-
-  public ref bool HasTonemapParams {
-    get {
-      if (_HasTonemapParamsOffset == null) {
-        _HasTonemapParamsOffset = Schema.GetOffset(0x81127543E6A6D70D);
-      }
-      return ref _Handle.AsRef<bool>(_HasTonemapParamsOffset!.Value);
+    public ref bool HasTonemapParams {
+        get {
+            _HasTonemapParamsOffset = _HasTonemapParamsOffset ?? Schema.GetOffset(0x81127543E6A6D70D);
+            return ref _Handle.AsRef<bool>(_HasTonemapParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ToneMapParamsOffset;
+    private static nint? _ToneMapParamsOffset;
 
-  public PostProcessingTonemapParameters_t ToneMapParams {
-    get {
-      if (_ToneMapParamsOffset == null) {
-        _ToneMapParamsOffset = Schema.GetOffset(0x811275437AD3669B);
-      }
-      return new PostProcessingTonemapParameters_tImpl(_Handle + _ToneMapParamsOffset!.Value);
+    public PostProcessingTonemapParameters_t ToneMapParams {
+        get {
+            _ToneMapParamsOffset = _ToneMapParamsOffset ?? Schema.GetOffset(0x811275437AD3669B);
+            return new PostProcessingTonemapParameters_tImpl(_Handle + _ToneMapParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasBloomParamsOffset;
+    private static nint? _HasBloomParamsOffset;
 
-  public ref bool HasBloomParams {
-    get {
-      if (_HasBloomParamsOffset == null) {
-        _HasBloomParamsOffset = Schema.GetOffset(0x81127543754C1410);
-      }
-      return ref _Handle.AsRef<bool>(_HasBloomParamsOffset!.Value);
+    public ref bool HasBloomParams {
+        get {
+            _HasBloomParamsOffset = _HasBloomParamsOffset ?? Schema.GetOffset(0x81127543754C1410);
+            return ref _Handle.AsRef<bool>(_HasBloomParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BloomParamsOffset;
+    private static nint? _BloomParamsOffset;
 
-  public PostProcessingBloomParameters_t BloomParams {
-    get {
-      if (_BloomParamsOffset == null) {
-        _BloomParamsOffset = Schema.GetOffset(0x81127543CEC3092A);
-      }
-      return new PostProcessingBloomParameters_tImpl(_Handle + _BloomParamsOffset!.Value);
+    public PostProcessingBloomParameters_t BloomParams {
+        get {
+            _BloomParamsOffset = _BloomParamsOffset ?? Schema.GetOffset(0x81127543CEC3092A);
+            return new PostProcessingBloomParameters_tImpl(_Handle + _BloomParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasVignetteParamsOffset;
+    private static nint? _HasVignetteParamsOffset;
 
-  public ref bool HasVignetteParams {
-    get {
-      if (_HasVignetteParamsOffset == null) {
-        _HasVignetteParamsOffset = Schema.GetOffset(0x81127543593E9813);
-      }
-      return ref _Handle.AsRef<bool>(_HasVignetteParamsOffset!.Value);
+    public ref bool HasVignetteParams {
+        get {
+            _HasVignetteParamsOffset = _HasVignetteParamsOffset ?? Schema.GetOffset(0x81127543593E9813);
+            return ref _Handle.AsRef<bool>(_HasVignetteParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _VignetteParamsOffset;
+    private static nint? _VignetteParamsOffset;
 
-  public PostProcessingVignetteParameters_t VignetteParams {
-    get {
-      if (_VignetteParamsOffset == null) {
-        _VignetteParamsOffset = Schema.GetOffset(0x81127543FBBFC5B9);
-      }
-      return new PostProcessingVignetteParameters_tImpl(_Handle + _VignetteParamsOffset!.Value);
+    public PostProcessingVignetteParameters_t VignetteParams {
+        get {
+            _VignetteParamsOffset = _VignetteParamsOffset ?? Schema.GetOffset(0x81127543FBBFC5B9);
+            return new PostProcessingVignetteParameters_tImpl(_Handle + _VignetteParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasLocalContrastParamsOffset;
+    private static nint? _HasLocalContrastParamsOffset;
 
-  public ref bool HasLocalContrastParams {
-    get {
-      if (_HasLocalContrastParamsOffset == null) {
-        _HasLocalContrastParamsOffset = Schema.GetOffset(0x81127543247F8B76);
-      }
-      return ref _Handle.AsRef<bool>(_HasLocalContrastParamsOffset!.Value);
+    public ref bool HasLocalContrastParams {
+        get {
+            _HasLocalContrastParamsOffset = _HasLocalContrastParamsOffset ?? Schema.GetOffset(0x81127543247F8B76);
+            return ref _Handle.AsRef<bool>(_HasLocalContrastParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalConstrastParamsOffset;
+    private static nint? _LocalConstrastParamsOffset;
 
-  public PostProcessingLocalContrastParameters_t LocalConstrastParams {
-    get {
-      if (_LocalConstrastParamsOffset == null) {
-        _LocalConstrastParamsOffset = Schema.GetOffset(0x811275437AB7080F);
-      }
-      return new PostProcessingLocalContrastParameters_tImpl(_Handle + _LocalConstrastParamsOffset!.Value);
+    public PostProcessingLocalContrastParameters_t LocalConstrastParams {
+        get {
+            _LocalConstrastParamsOffset = _LocalConstrastParamsOffset ?? Schema.GetOffset(0x811275437AB7080F);
+            return new PostProcessingLocalContrastParameters_tImpl(_Handle + _LocalConstrastParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorCorrectionVolumeDimOffset;
+    private static nint? _ColorCorrectionVolumeDimOffset;
 
-  public ref int ColorCorrectionVolumeDim {
-    get {
-      if (_ColorCorrectionVolumeDimOffset == null) {
-        _ColorCorrectionVolumeDimOffset = Schema.GetOffset(0x81127543BF8A2F78);
-      }
-      return ref _Handle.AsRef<int>(_ColorCorrectionVolumeDimOffset!.Value);
+    public ref int ColorCorrectionVolumeDim {
+        get {
+            _ColorCorrectionVolumeDimOffset = _ColorCorrectionVolumeDimOffset ?? Schema.GetOffset(0x81127543BF8A2F78);
+            return ref _Handle.AsRef<int>(_ColorCorrectionVolumeDimOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorCorrectionVolumeDataOffset;
+    private static nint? _ColorCorrectionVolumeDataOffset;
 
-  public ref CUtlBinaryBlock ColorCorrectionVolumeData {
-    get {
-      if (_ColorCorrectionVolumeDataOffset == null) {
-        _ColorCorrectionVolumeDataOffset = Schema.GetOffset(0x81127543211CF8FA);
-      }
-      return ref _Handle.AsRef<CUtlBinaryBlock>(_ColorCorrectionVolumeDataOffset!.Value);
+    public ref CUtlBinaryBlock ColorCorrectionVolumeData {
+        get {
+            _ColorCorrectionVolumeDataOffset = _ColorCorrectionVolumeDataOffset ?? Schema.GetOffset(0x81127543211CF8FA);
+            return ref _Handle.AsRef<CUtlBinaryBlock>(_ColorCorrectionVolumeDataOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasColorCorrectionOffset;
+    private static nint? _HasColorCorrectionOffset;
 
-  public ref bool HasColorCorrection {
-    get {
-      if (_HasColorCorrectionOffset == null) {
-        _HasColorCorrectionOffset = Schema.GetOffset(0x811275434EDD24C6);
-      }
-      return ref _Handle.AsRef<bool>(_HasColorCorrectionOffset!.Value);
+    public ref bool HasColorCorrection {
+        get {
+            _HasColorCorrectionOffset = _HasColorCorrectionOffset ?? Schema.GetOffset(0x811275434EDD24C6);
+            return ref _Handle.AsRef<bool>(_HasColorCorrectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasFogScatteringParamsOffset;
+    private static nint? _HasFogScatteringParamsOffset;
 
-  public ref bool HasFogScatteringParams {
-    get {
-      if (_HasFogScatteringParamsOffset == null) {
-        _HasFogScatteringParamsOffset = Schema.GetOffset(0x81127543EBB4887D);
-      }
-      return ref _Handle.AsRef<bool>(_HasFogScatteringParamsOffset!.Value);
+    public ref bool HasFogScatteringParams {
+        get {
+            _HasFogScatteringParamsOffset = _HasFogScatteringParamsOffset ?? Schema.GetOffset(0x81127543EBB4887D);
+            return ref _Handle.AsRef<bool>(_HasFogScatteringParamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogScatteringParamsOffset;
+    private static nint? _FogScatteringParamsOffset;
 
-  public PostProcessingFogScatteringParameters_t FogScatteringParams {
-    get {
-      if (_FogScatteringParamsOffset == null) {
-        _FogScatteringParamsOffset = Schema.GetOffset(0x8112754373861903);
-      }
-      return new PostProcessingFogScatteringParameters_tImpl(_Handle + _FogScatteringParamsOffset!.Value);
+    public PostProcessingFogScatteringParameters_t FogScatteringParams {
+        get {
+            _FogScatteringParamsOffset = _FogScatteringParamsOffset ?? Schema.GetOffset(0x8112754373861903);
+            return new PostProcessingFogScatteringParameters_tImpl(_Handle + _FogScatteringParamsOffset!.Value);
+        }
     }
-  }
 
 
 }

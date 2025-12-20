@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum NPCPhysicsHullType_t : uint {
-
+public enum NPCPhysicsHullType_t : uint
+{
  eInvalid = 0,
 
  eGroundCapsule = 1,

@@ -6,62 +6,46 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSGameModeRules_DeathmatchImpl : CCSGameModeRulesImpl, CCSGameModeRules_Deathmatch {
+internal partial class CCSGameModeRules_DeathmatchImpl : CCSGameModeRulesImpl, CCSGameModeRules_Deathmatch
+{
+    public CCSGameModeRules_DeathmatchImpl(nint handle) : base(handle) { }
 
-  public CCSGameModeRules_DeathmatchImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DMBonusStartTimeOffset;
 
-  private static nint? _DMBonusStartTimeOffset;
-
-  public GameTime_t DMBonusStartTime {
-    get {
-      if (_DMBonusStartTimeOffset == null) {
-        _DMBonusStartTimeOffset = Schema.GetOffset(0x77BC0D42870B2CD0);
-      }
-      return new GameTime_tImpl(_Handle + _DMBonusStartTimeOffset!.Value);
+    public GameTime_t DMBonusStartTime {
+        get {
+            _DMBonusStartTimeOffset = _DMBonusStartTimeOffset ?? Schema.GetOffset(0x77BC0D42870B2CD0);
+            return new GameTime_tImpl(_Handle + _DMBonusStartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DMBonusTimeLengthOffset;
+    private static nint? _DMBonusTimeLengthOffset;
 
-  public ref float DMBonusTimeLength {
-    get {
-      if (_DMBonusTimeLengthOffset == null) {
-        _DMBonusTimeLengthOffset = Schema.GetOffset(0x77BC0D42C4F13CC6);
-      }
-      return ref _Handle.AsRef<float>(_DMBonusTimeLengthOffset!.Value);
+    public ref float DMBonusTimeLength {
+        get {
+            _DMBonusTimeLengthOffset = _DMBonusTimeLengthOffset ?? Schema.GetOffset(0x77BC0D42C4F13CC6);
+            return ref _Handle.AsRef<float>(_DMBonusTimeLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _DMBonusWeaponOffset;
+    private static nint? _DMBonusWeaponOffset;
 
-  public string DMBonusWeapon {
-    get {
-      if (_DMBonusWeaponOffset == null) {
-        _DMBonusWeaponOffset = Schema.GetOffset(0x77BC0D42A33FC260);
-      }
-      var ptr = _Handle.Read<nint>(_DMBonusWeaponOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DMBonusWeaponOffset == null) {
-        _DMBonusWeaponOffset = Schema.GetOffset(0x77BC0D42A33FC260);
-      }
-      Schema.SetString(_Handle, _DMBonusWeaponOffset!.Value, value);
-    }
-  } 
+    public string DMBonusWeapon {
+        get {
+            _DMBonusWeaponOffset = _DMBonusWeaponOffset ?? Schema.GetOffset(0x77BC0D42A33FC260);
+            return Schema.GetString(_Handle.Read<nint>(_DMBonusWeaponOffset!.Value));
+        }
+        set {
+            _DMBonusWeaponOffset = _DMBonusWeaponOffset ?? Schema.GetOffset(0x77BC0D42A33FC260);
+            Schema.SetString(_Handle, _DMBonusWeaponOffset!.Value, value);
+        }
+    } 
 
-  public void DMBonusStartTimeUpdated() {
-    Schema.Update(_Handle, 0x77BC0D42870B2CD0);
-  }
-  public void DMBonusTimeLengthUpdated() {
-    Schema.Update(_Handle, 0x77BC0D42C4F13CC6);
-  }
-  public void DMBonusWeaponUpdated() {
-    Schema.Update(_Handle, 0x77BC0D42A33FC260);
-  }
+    public void DMBonusStartTimeUpdated() => Schema.Update(_Handle, 0x77BC0D42870B2CD0);
+    public void DMBonusTimeLengthUpdated() => Schema.Update(_Handle, 0x77BC0D42C4F13CC6);
+    public void DMBonusWeaponUpdated() => Schema.Update(_Handle, 0x77BC0D42A33FC260);
 }

@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerRandomSamplerImpl : CVoiceContainerBaseImpl, CVoiceContainerRandomSampler {
+internal partial class CVoiceContainerRandomSamplerImpl : CVoiceContainerBaseImpl, CVoiceContainerRandomSampler
+{
+    public CVoiceContainerRandomSamplerImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerRandomSamplerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AmplitudeOffset;
 
-  private static nint? _AmplitudeOffset;
-
-  public ref float Amplitude {
-    get {
-      if (_AmplitudeOffset == null) {
-        _AmplitudeOffset = Schema.GetOffset(0xDCA93E5CB44B0E18);
-      }
-      return ref _Handle.AsRef<float>(_AmplitudeOffset!.Value);
+    public ref float Amplitude {
+        get {
+            _AmplitudeOffset = _AmplitudeOffset ?? Schema.GetOffset(0xDCA93E5CB44B0E18);
+            return ref _Handle.AsRef<float>(_AmplitudeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AmplitudeJitterOffset;
+    private static nint? _AmplitudeJitterOffset;
 
-  public ref float AmplitudeJitter {
-    get {
-      if (_AmplitudeJitterOffset == null) {
-        _AmplitudeJitterOffset = Schema.GetOffset(0xDCA93E5C108296CE);
-      }
-      return ref _Handle.AsRef<float>(_AmplitudeJitterOffset!.Value);
+    public ref float AmplitudeJitter {
+        get {
+            _AmplitudeJitterOffset = _AmplitudeJitterOffset ?? Schema.GetOffset(0xDCA93E5C108296CE);
+            return ref _Handle.AsRef<float>(_AmplitudeJitterOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeJitterOffset;
+    private static nint? _TimeJitterOffset;
 
-  public ref float TimeJitter {
-    get {
-      if (_TimeJitterOffset == null) {
-        _TimeJitterOffset = Schema.GetOffset(0xDCA93E5C70047B44);
-      }
-      return ref _Handle.AsRef<float>(_TimeJitterOffset!.Value);
+    public ref float TimeJitter {
+        get {
+            _TimeJitterOffset = _TimeJitterOffset ?? Schema.GetOffset(0xDCA93E5C70047B44);
+            return ref _Handle.AsRef<float>(_TimeJitterOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxLengthOffset;
+    private static nint? _MaxLengthOffset;
 
-  public ref float MaxLength {
-    get {
-      if (_MaxLengthOffset == null) {
-        _MaxLengthOffset = Schema.GetOffset(0xDCA93E5C87A8B4C7);
-      }
-      return ref _Handle.AsRef<float>(_MaxLengthOffset!.Value);
+    public ref float MaxLength {
+        get {
+            _MaxLengthOffset = _MaxLengthOffset ?? Schema.GetOffset(0xDCA93E5C87A8B4C7);
+            return ref _Handle.AsRef<float>(_MaxLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumDelayVariationsOffset;
+    private static nint? _NumDelayVariationsOffset;
 
-  public ref int NumDelayVariations {
-    get {
-      if (_NumDelayVariationsOffset == null) {
-        _NumDelayVariationsOffset = Schema.GetOffset(0xDCA93E5C9356280C);
-      }
-      return ref _Handle.AsRef<int>(_NumDelayVariationsOffset!.Value);
+    public ref int NumDelayVariations {
+        get {
+            _NumDelayVariationsOffset = _NumDelayVariationsOffset ?? Schema.GetOffset(0xDCA93E5C9356280C);
+            return ref _Handle.AsRef<int>(_NumDelayVariationsOffset!.Value);
+        }
     }
-  }
-  private static nint? _GrainResourcesOffset;
+    private static nint? _GrainResourcesOffset;
 
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>> GrainResources {
-    get {
-      if (_GrainResourcesOffset == null) {
-        _GrainResourcesOffset = Schema.GetOffset(0xDCA93E5C95692BB9);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>>(_GrainResourcesOffset!.Value);
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>> GrainResources {
+        get {
+            _GrainResourcesOffset = _GrainResourcesOffset ?? Schema.GetOffset(0xDCA93E5C95692BB9);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>>(_GrainResourcesOffset!.Value);
+        }
     }
-  }
 
 
 }

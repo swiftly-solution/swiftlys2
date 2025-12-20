@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAudioAnimTag : CAnimTagBase, ISchemaClass<CAudioAnimTag> {
+public partial interface CAudioAnimTag : CAnimTagBase, ISchemaClass<CAudioAnimTag>
+{
+    static CAudioAnimTag ISchemaClass<CAudioAnimTag>.From(nint handle) => new CAudioAnimTagImpl(handle);
+    static int ISchemaClass<CAudioAnimTag>.Size => 112;
+    static string? ISchemaClass<CAudioAnimTag>.ClassName => null;
 
-  static CAudioAnimTag ISchemaClass<CAudioAnimTag>.From(nint handle) => new CAudioAnimTagImpl(handle);
-  static int ISchemaClass<CAudioAnimTag>.Size => 112;
-  static string? ISchemaClass<CAudioAnimTag>.ClassName => null;
 
-  
-  public string ClipName { get; set; }
-  
-  public string AttachmentName { get; set; }
-  
-  public ref float Volume { get; }
-  
-  public ref bool StopWhenTagEnds { get; }
-  
-  public ref bool StopWhenGraphEnds { get; }
-  
-  public ref bool PlayOnServer { get; }
-  
-  public ref bool PlayOnClient { get; }
+    public string ClipName { get; set; }
+
+    public string AttachmentName { get; set; }
+
+    public ref float Volume { get; }
+
+    public ref bool StopWhenTagEnds { get; }
+
+    public ref bool StopWhenGraphEnds { get; }
+
+    public ref bool PlayOnServer { get; }
+
+    public ref bool PlayOnClient { get; }
 
 
 }

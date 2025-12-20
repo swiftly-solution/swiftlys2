@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LocalAccelerationForce : CParticleFunctionForce, ISchemaClass<C_OP_LocalAccelerationForce> {
+public partial interface C_OP_LocalAccelerationForce : CParticleFunctionForce, ISchemaClass<C_OP_LocalAccelerationForce>
+{
+    static C_OP_LocalAccelerationForce ISchemaClass<C_OP_LocalAccelerationForce>.From(nint handle) => new C_OP_LocalAccelerationForceImpl(handle);
+    static int ISchemaClass<C_OP_LocalAccelerationForce>.Size => 2208;
+    static string? ISchemaClass<C_OP_LocalAccelerationForce>.ClassName => null;
 
-  static C_OP_LocalAccelerationForce ISchemaClass<C_OP_LocalAccelerationForce>.From(nint handle) => new C_OP_LocalAccelerationForceImpl(handle);
-  static int ISchemaClass<C_OP_LocalAccelerationForce>.Size => 2208;
-  static string? ISchemaClass<C_OP_LocalAccelerationForce>.ClassName => null;
 
-  
-  public ref int CP { get; }
-  
-  public ref int ScaleCP { get; }
-  
-  public CParticleCollectionVecInput Accel { get; }
+    public ref int CP { get; }
+
+    public ref int ScaleCP { get; }
+
+    public CParticleCollectionVecInput Accel { get; }
 
 
 }

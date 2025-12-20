@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_DistanceToTransform : CParticleFunctionOperator, ISchemaClass<C_OP_DistanceToTransform> {
+public partial interface C_OP_DistanceToTransform : CParticleFunctionOperator, ISchemaClass<C_OP_DistanceToTransform>
+{
+    static C_OP_DistanceToTransform ISchemaClass<C_OP_DistanceToTransform>.From(nint handle) => new C_OP_DistanceToTransformImpl(handle);
+    static int ISchemaClass<C_OP_DistanceToTransform>.Size => 3920;
+    static string? ISchemaClass<C_OP_DistanceToTransform>.ClassName => null;
 
-  static C_OP_DistanceToTransform ISchemaClass<C_OP_DistanceToTransform>.From(nint handle) => new C_OP_DistanceToTransformImpl(handle);
-  static int ISchemaClass<C_OP_DistanceToTransform>.Size => 3920;
-  static string? ISchemaClass<C_OP_DistanceToTransform>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleFloatInput InputMin { get; }
-  
-  public CPerParticleFloatInput InputMax { get; }
-  
-  public CPerParticleFloatInput OutputMin { get; }
-  
-  public CPerParticleFloatInput OutputMax { get; }
-  
-  public CParticleTransformInput TransformStart { get; }
-  
-  public ref bool LOS { get; }
-  
-  public string CollisionGroupName { get; set; }
-  
-  public ref ParticleTraceSet_t TraceSet { get; }
-  
-  public ref float MaxTraceLength { get; }
-  
-  public ref float LOSScale { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool ActiveRange { get; }
-  
-  public ref bool Additive { get; }
-  
-  public CPerParticleVecInput ComponentScale { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleFloatInput InputMin { get; }
+
+    public CPerParticleFloatInput InputMax { get; }
+
+    public CPerParticleFloatInput OutputMin { get; }
+
+    public CPerParticleFloatInput OutputMax { get; }
+
+    public CParticleTransformInput TransformStart { get; }
+
+    public ref bool LOS { get; }
+
+    public string CollisionGroupName { get; set; }
+
+    public ref ParticleTraceSet_t TraceSet { get; }
+
+    public ref float MaxTraceLength { get; }
+
+    public ref float LOSScale { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool ActiveRange { get; }
+
+    public ref bool Additive { get; }
+
+    public CPerParticleVecInput ComponentScale { get; }
 
 
 }

@@ -6,39 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CWeaponTaserImpl : CCSWeaponBaseGunImpl, CWeaponTaser {
+internal partial class CWeaponTaserImpl : CCSWeaponBaseGunImpl, CWeaponTaser
+{
+    public CWeaponTaserImpl(nint handle) : base(handle) { }
 
-  public CWeaponTaserImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FireTimeOffset;
 
-  private static nint? _FireTimeOffset;
-
-  public GameTime_t FireTime {
-    get {
-      if (_FireTimeOffset == null) {
-        _FireTimeOffset = Schema.GetOffset(0xA91A6CB965DBC00C);
-      }
-      return new GameTime_tImpl(_Handle + _FireTimeOffset!.Value);
+    public GameTime_t FireTime {
+        get {
+            _FireTimeOffset = _FireTimeOffset ?? Schema.GetOffset(0xA91A6CB965DBC00C);
+            return new GameTime_tImpl(_Handle + _FireTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastAttackTickOffset;
+    private static nint? _LastAttackTickOffset;
 
-  public ref int LastAttackTick {
-    get {
-      if (_LastAttackTickOffset == null) {
-        _LastAttackTickOffset = Schema.GetOffset(0xA91A6CB90BCAAD3C);
-      }
-      return ref _Handle.AsRef<int>(_LastAttackTickOffset!.Value);
+    public ref int LastAttackTick {
+        get {
+            _LastAttackTickOffset = _LastAttackTickOffset ?? Schema.GetOffset(0xA91A6CB90BCAAD3C);
+            return ref _Handle.AsRef<int>(_LastAttackTickOffset!.Value);
+        }
     }
-  }
 
-  public void FireTimeUpdated() {
-    Schema.Update(_Handle, 0xA91A6CB965DBC00C);
-  }
+    public void FireTimeUpdated() => Schema.Update(_Handle, 0xA91A6CB965DBC00C);
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum LatchDirtyPermission_t : uint {
-
+public enum LatchDirtyPermission_t : uint
+{
  LATCH_DIRTY_DISALLOW = 0,
 
  LATCH_DIRTY_SERVER_CONTROLLED = 1,

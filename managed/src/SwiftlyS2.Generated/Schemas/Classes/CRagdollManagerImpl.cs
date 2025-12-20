@@ -6,59 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRagdollManagerImpl : CBaseEntityImpl, CRagdollManager {
+internal partial class CRagdollManagerImpl : CBaseEntityImpl, CRagdollManager
+{
+    public CRagdollManagerImpl(nint handle) : base(handle) { }
 
-  public CRagdollManagerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CurrentMaxRagdollCountOffset;
 
-  private static nint? _CurrentMaxRagdollCountOffset;
-
-  public ref byte CurrentMaxRagdollCount {
-    get {
-      if (_CurrentMaxRagdollCountOffset == null) {
-        _CurrentMaxRagdollCountOffset = Schema.GetOffset(0x3C67654C8544F4A7);
-      }
-      return ref _Handle.AsRef<byte>(_CurrentMaxRagdollCountOffset!.Value);
+    public ref byte CurrentMaxRagdollCount {
+        get {
+            _CurrentMaxRagdollCountOffset = _CurrentMaxRagdollCountOffset ?? Schema.GetOffset(0x3C67654C8544F4A7);
+            return ref _Handle.AsRef<byte>(_CurrentMaxRagdollCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxRagdollCountOffset;
+    private static nint? _MaxRagdollCountOffset;
 
-  public ref int MaxRagdollCount {
-    get {
-      if (_MaxRagdollCountOffset == null) {
-        _MaxRagdollCountOffset = Schema.GetOffset(0x3C67654CC3A8C254);
-      }
-      return ref _Handle.AsRef<int>(_MaxRagdollCountOffset!.Value);
+    public ref int MaxRagdollCount {
+        get {
+            _MaxRagdollCountOffset = _MaxRagdollCountOffset ?? Schema.GetOffset(0x3C67654CC3A8C254);
+            return ref _Handle.AsRef<int>(_MaxRagdollCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _SaveImportantOffset;
+    private static nint? _SaveImportantOffset;
 
-  public ref bool SaveImportant {
-    get {
-      if (_SaveImportantOffset == null) {
-        _SaveImportantOffset = Schema.GetOffset(0x3C67654CB7710746);
-      }
-      return ref _Handle.AsRef<bool>(_SaveImportantOffset!.Value);
+    public ref bool SaveImportant {
+        get {
+            _SaveImportantOffset = _SaveImportantOffset ?? Schema.GetOffset(0x3C67654CB7710746);
+            return ref _Handle.AsRef<bool>(_SaveImportantOffset!.Value);
+        }
     }
-  }
-  private static nint? _CanTakeDamageOffset;
+    private static nint? _CanTakeDamageOffset;
 
-  public ref bool CanTakeDamage {
-    get {
-      if (_CanTakeDamageOffset == null) {
-        _CanTakeDamageOffset = Schema.GetOffset(0x3C67654C64446233);
-      }
-      return ref _Handle.AsRef<bool>(_CanTakeDamageOffset!.Value);
+    public ref bool CanTakeDamage {
+        get {
+            _CanTakeDamageOffset = _CanTakeDamageOffset ?? Schema.GetOffset(0x3C67654C64446233);
+            return ref _Handle.AsRef<bool>(_CanTakeDamageOffset!.Value);
+        }
     }
-  }
 
-  public void CurrentMaxRagdollCountUpdated() {
-    Schema.Update(_Handle, 0x3C67654C8544F4A7);
-  }
+    public void CurrentMaxRagdollCountUpdated() => Schema.Update(_Handle, 0x3C67654C8544F4A7);
 }

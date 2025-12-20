@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFilterMultiple : CBaseFilter, ISchemaClass<CFilterMultiple> {
+public partial interface CFilterMultiple : CBaseFilter, ISchemaClass<CFilterMultiple>
+{
+    static CFilterMultiple ISchemaClass<CFilterMultiple>.From(nint handle) => new CFilterMultipleImpl(handle);
+    static int ISchemaClass<CFilterMultiple>.Size => 1480;
+    static string? ISchemaClass<CFilterMultiple>.ClassName => "filter_multi";
 
-  static CFilterMultiple ISchemaClass<CFilterMultiple>.From(nint handle) => new CFilterMultipleImpl(handle);
-  static int ISchemaClass<CFilterMultiple>.Size => 1480;
-  static string? ISchemaClass<CFilterMultiple>.ClassName => "filter_multi";
 
-  
-  public ref filter_t FilterType { get; }
-  
-  public string FilterName { get; set; }
-  
-  public ISchemaFixedArray<CHandle<CBaseEntity>> Filter { get; }
+    public ref filter_t FilterType { get; }
+
+    public string FilterName { get; set; }
+
+    public ISchemaFixedArray<CHandle<CBaseEntity>> Filter { get; }
 
 
 }

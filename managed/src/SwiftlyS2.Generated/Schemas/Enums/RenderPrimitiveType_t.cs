@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RenderPrimitiveType_t : uint {
-
+public enum RenderPrimitiveType_t : uint
+{
  RENDER_PRIM_POINTS = 0,
 
  RENDER_PRIM_LINES = 1,

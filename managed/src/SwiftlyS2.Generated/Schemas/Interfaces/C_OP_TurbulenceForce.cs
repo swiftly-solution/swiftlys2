@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_TurbulenceForce : CParticleFunctionForce, ISchemaClass<C_OP_TurbulenceForce> {
+public partial interface C_OP_TurbulenceForce : CParticleFunctionForce, ISchemaClass<C_OP_TurbulenceForce>
+{
+    static C_OP_TurbulenceForce ISchemaClass<C_OP_TurbulenceForce>.From(nint handle) => new C_OP_TurbulenceForceImpl(handle);
+    static int ISchemaClass<C_OP_TurbulenceForce>.Size => 544;
+    static string? ISchemaClass<C_OP_TurbulenceForce>.ClassName => null;
 
-  static C_OP_TurbulenceForce ISchemaClass<C_OP_TurbulenceForce>.From(nint handle) => new C_OP_TurbulenceForceImpl(handle);
-  static int ISchemaClass<C_OP_TurbulenceForce>.Size => 544;
-  static string? ISchemaClass<C_OP_TurbulenceForce>.ClassName => null;
 
-  
-  public ref float NoiseCoordScale0 { get; }
-  
-  public ref float NoiseCoordScale1 { get; }
-  
-  public ref float NoiseCoordScale2 { get; }
-  
-  public ref float NoiseCoordScale3 { get; }
-  
-  public ref Vector NoiseAmount0 { get; }
-  
-  public ref Vector NoiseAmount1 { get; }
-  
-  public ref Vector NoiseAmount2 { get; }
-  
-  public ref Vector NoiseAmount3 { get; }
+    public ref float NoiseCoordScale0 { get; }
+
+    public ref float NoiseCoordScale1 { get; }
+
+    public ref float NoiseCoordScale2 { get; }
+
+    public ref float NoiseCoordScale3 { get; }
+
+    public ref Vector NoiseAmount0 { get; }
+
+    public ref Vector NoiseAmount1 { get; }
+
+    public ref Vector NoiseAmount2 { get; }
+
+    public ref Vector NoiseAmount3 { get; }
 
 
 }

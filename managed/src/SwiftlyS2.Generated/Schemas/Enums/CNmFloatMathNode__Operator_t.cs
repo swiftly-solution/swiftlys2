@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CNmFloatMathNode__Operator_t : byte {
-
+public enum CNmFloatMathNode__Operator_t : byte
+{
  Add = 0,
 
  Sub = 1,

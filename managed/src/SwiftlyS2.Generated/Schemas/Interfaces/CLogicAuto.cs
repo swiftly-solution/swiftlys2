@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicAuto : CBaseEntity, ISchemaClass<CLogicAuto> {
+public partial interface CLogicAuto : CBaseEntity, ISchemaClass<CLogicAuto>
+{
+    static CLogicAuto ISchemaClass<CLogicAuto>.From(nint handle) => new CLogicAutoImpl(handle);
+    static int ISchemaClass<CLogicAuto>.Size => 1672;
+    static string? ISchemaClass<CLogicAuto>.ClassName => "logic_auto";
 
-  static CLogicAuto ISchemaClass<CLogicAuto>.From(nint handle) => new CLogicAutoImpl(handle);
-  static int ISchemaClass<CLogicAuto>.Size => 1672;
-  static string? ISchemaClass<CLogicAuto>.ClassName => "logic_auto";
 
-  
-  public CEntityIOOutput OnMapSpawn { get; }
-  
-  public CEntityIOOutput OnDemoMapSpawn { get; }
-  
-  public CEntityIOOutput OnNewGame { get; }
-  
-  public CEntityIOOutput OnLoadGame { get; }
-  
-  public CEntityIOOutput OnMapTransition { get; }
-  
-  public CEntityIOOutput OnBackgroundMap { get; }
-  
-  public CEntityIOOutput OnMultiNewMap { get; }
-  
-  public CEntityIOOutput OnMultiNewRound { get; }
-  
-  public CEntityIOOutput OnVREnabled { get; }
-  
-  public CEntityIOOutput OnVRNotEnabled { get; }
-  
-  public string Globalstate { get; set; }
+    public CEntityIOOutput OnMapSpawn { get; }
+
+    public CEntityIOOutput OnDemoMapSpawn { get; }
+
+    public CEntityIOOutput OnNewGame { get; }
+
+    public CEntityIOOutput OnLoadGame { get; }
+
+    public CEntityIOOutput OnMapTransition { get; }
+
+    public CEntityIOOutput OnBackgroundMap { get; }
+
+    public CEntityIOOutput OnMultiNewMap { get; }
+
+    public CEntityIOOutput OnMultiNewRound { get; }
+
+    public CEntityIOOutput OnVREnabled { get; }
+
+    public CEntityIOOutput OnVRNotEnabled { get; }
+
+    public string Globalstate { get; set; }
 
 
 }

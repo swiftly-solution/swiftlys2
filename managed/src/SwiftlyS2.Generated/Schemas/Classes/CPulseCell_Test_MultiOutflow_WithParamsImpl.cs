@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Test_MultiOutflow_WithParamsImpl : CPulseCell_BaseFlowImpl, CPulseCell_Test_MultiOutflow_WithParams {
+internal partial class CPulseCell_Test_MultiOutflow_WithParamsImpl : CPulseCell_BaseFlowImpl, CPulseCell_Test_MultiOutflow_WithParams
+{
+    public CPulseCell_Test_MultiOutflow_WithParamsImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Test_MultiOutflow_WithParamsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Out1Offset;
 
-  private static nint? _Out1Offset;
-
-  public SignatureOutflow_Continue Out1 {
-    get {
-      if (_Out1Offset == null) {
-        _Out1Offset = Schema.GetOffset(0x99BFB89905F293AA);
-      }
-      return new SignatureOutflow_ContinueImpl(_Handle + _Out1Offset!.Value);
+    public SignatureOutflow_Continue Out1 {
+        get {
+            _Out1Offset = _Out1Offset ?? Schema.GetOffset(0x99BFB89905F293AA);
+            return new SignatureOutflow_ContinueImpl(_Handle + _Out1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Out2Offset;
+    private static nint? _Out2Offset;
 
-  public SignatureOutflow_Continue Out2 {
-    get {
-      if (_Out2Offset == null) {
-        _Out2Offset = Schema.GetOffset(0x99BFB89904F29217);
-      }
-      return new SignatureOutflow_ContinueImpl(_Handle + _Out2Offset!.Value);
+    public SignatureOutflow_Continue Out2 {
+        get {
+            _Out2Offset = _Out2Offset ?? Schema.GetOffset(0x99BFB89904F29217);
+            return new SignatureOutflow_ContinueImpl(_Handle + _Out2Offset!.Value);
+        }
     }
-  }
 
 
 }

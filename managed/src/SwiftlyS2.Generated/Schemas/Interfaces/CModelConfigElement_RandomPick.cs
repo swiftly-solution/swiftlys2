@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigElement_RandomPick : CModelConfigElement, ISchemaClass<CModelConfigElement_RandomPick> {
+public partial interface CModelConfigElement_RandomPick : CModelConfigElement, ISchemaClass<CModelConfigElement_RandomPick>
+{
+    static CModelConfigElement_RandomPick ISchemaClass<CModelConfigElement_RandomPick>.From(nint handle) => new CModelConfigElement_RandomPickImpl(handle);
+    static int ISchemaClass<CModelConfigElement_RandomPick>.Size => 128;
+    static string? ISchemaClass<CModelConfigElement_RandomPick>.ClassName => null;
 
-  static CModelConfigElement_RandomPick ISchemaClass<CModelConfigElement_RandomPick>.From(nint handle) => new CModelConfigElement_RandomPickImpl(handle);
-  static int ISchemaClass<CModelConfigElement_RandomPick>.Size => 128;
-  static string? ISchemaClass<CModelConfigElement_RandomPick>.ClassName => null;
 
-  
-  public ref CUtlVector<CUtlString> Choices { get; }
-  
-  public ref CUtlVector<float> ChoiceWeights { get; }
+    public ref CUtlVector<CUtlString> Choices { get; }
+
+    public ref CUtlVector<float> ChoiceWeights { get; }
 
 
 }

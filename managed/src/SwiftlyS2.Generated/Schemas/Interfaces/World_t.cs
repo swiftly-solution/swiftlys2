@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface World_t : ISchemaClass<World_t> {
+public partial interface World_t : ISchemaClass<World_t>
+{
+    static World_t ISchemaClass<World_t>.From(nint handle) => new World_tImpl(handle);
+    static int ISchemaClass<World_t>.Size => 216;
+    static string? ISchemaClass<World_t>.ClassName => null;
 
-  static World_t ISchemaClass<World_t>.From(nint handle) => new World_tImpl(handle);
-  static int ISchemaClass<World_t>.Size => 216;
-  static string? ISchemaClass<World_t>.ClassName => null;
 
-  
-  public WorldBuilderParams_t BuilderParams { get; }
-  
-  public ref CUtlVector<NodeData_t> WorldNodes { get; }
-  
-  public BakedLightingInfo_t WorldLightingInfo { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> EntityLumps { get; }
+    public WorldBuilderParams_t BuilderParams { get; }
+
+    public ref CUtlVector<NodeData_t> WorldNodes { get; }
+
+    public BakedLightingInfo_t WorldLightingInfo { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> EntityLumps { get; }
 
 
 }

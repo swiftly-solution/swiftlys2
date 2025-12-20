@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RenderMultisampleType_t : byte {
-
+public enum RenderMultisampleType_t : byte
+{
  RENDER_MULTISAMPLE_INVALID = byte.MaxValue,
 
  RENDER_MULTISAMPLE_NONE = 0,

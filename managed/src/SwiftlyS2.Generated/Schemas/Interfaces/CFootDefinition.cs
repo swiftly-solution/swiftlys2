@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootDefinition : ISchemaClass<CFootDefinition> {
+public partial interface CFootDefinition : ISchemaClass<CFootDefinition>
+{
+    static CFootDefinition ISchemaClass<CFootDefinition>.From(nint handle) => new CFootDefinitionImpl(handle);
+    static int ISchemaClass<CFootDefinition>.Size => 64;
+    static string? ISchemaClass<CFootDefinition>.ClassName => null;
 
-  static CFootDefinition ISchemaClass<CFootDefinition>.From(nint handle) => new CFootDefinitionImpl(handle);
-  static int ISchemaClass<CFootDefinition>.Size => 64;
-  static string? ISchemaClass<CFootDefinition>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public string AnkleBoneName { get; set; }
-  
-  public string ToeBoneName { get; set; }
-  
-  public ref Vector BallOffset { get; }
-  
-  public ref Vector HeelOffset { get; }
-  
-  public ref float FootLength { get; }
-  
-  public ref float BindPoseDirectionMS { get; }
-  
-  public ref float TraceHeight { get; }
-  
-  public ref float TraceRadius { get; }
+    public string Name { get; set; }
+
+    public string AnkleBoneName { get; set; }
+
+    public string ToeBoneName { get; set; }
+
+    public ref Vector BallOffset { get; }
+
+    public ref Vector HeelOffset { get; }
+
+    public ref float FootLength { get; }
+
+    public ref float BindPoseDirectionMS { get; }
+
+    public ref float TraceHeight { get; }
+
+    public ref float TraceRadius { get; }
 
 
 }

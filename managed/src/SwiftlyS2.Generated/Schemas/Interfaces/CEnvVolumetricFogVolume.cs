@@ -8,65 +8,65 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvVolumetricFogVolume : CBaseEntity, ISchemaClass<CEnvVolumetricFogVolume> {
+public partial interface CEnvVolumetricFogVolume : CBaseEntity, ISchemaClass<CEnvVolumetricFogVolume>
+{
+    static CEnvVolumetricFogVolume ISchemaClass<CEnvVolumetricFogVolume>.From(nint handle) => new CEnvVolumetricFogVolumeImpl(handle);
+    static int ISchemaClass<CEnvVolumetricFogVolume>.Size => 1336;
+    static string? ISchemaClass<CEnvVolumetricFogVolume>.ClassName => "env_volumetric_fog_volume";
 
-  static CEnvVolumetricFogVolume ISchemaClass<CEnvVolumetricFogVolume>.From(nint handle) => new CEnvVolumetricFogVolumeImpl(handle);
-  static int ISchemaClass<CEnvVolumetricFogVolume>.Size => 1336;
-  static string? ISchemaClass<CEnvVolumetricFogVolume>.ClassName => "env_volumetric_fog_volume";
 
-  
-  public ref bool Active { get; }
-  
-  public ref Vector BoxMins { get; }
-  
-  public ref Vector BoxMaxs { get; }
-  
-  public ref bool StartDisabled { get; }
-  
-  public ref bool IndirectUseLPVs { get; }
-  
-  public ref float Strength { get; }
-  
-  public ref int FalloffShape { get; }
-  
-  public ref float FalloffExponent { get; }
-  
-  public ref float HeightFogDepth { get; }
-  
-  public ref float HeightFogEdgeWidth { get; }
-  
-  public ref float IndirectLightStrength { get; }
-  
-  public ref float SunLightStrength { get; }
-  
-  public ref float NoiseStrength { get; }
-  
-  public ref Color TintColor { get; }
-  
-  public ref bool OverrideTintColor { get; }
-  
-  public ref bool OverrideIndirectLightStrength { get; }
-  
-  public ref bool OverrideSunLightStrength { get; }
-  
-  public ref bool OverrideNoiseStrength { get; }
+    public ref bool Active { get; }
 
-  public void ActiveUpdated();
-  public void BoxMinsUpdated();
-  public void BoxMaxsUpdated();
-  public void StartDisabledUpdated();
-  public void IndirectUseLPVsUpdated();
-  public void StrengthUpdated();
-  public void FalloffShapeUpdated();
-  public void FalloffExponentUpdated();
-  public void HeightFogDepthUpdated();
-  public void HeightFogEdgeWidthUpdated();
-  public void IndirectLightStrengthUpdated();
-  public void SunLightStrengthUpdated();
-  public void NoiseStrengthUpdated();
-  public void TintColorUpdated();
-  public void OverrideTintColorUpdated();
-  public void OverrideIndirectLightStrengthUpdated();
-  public void OverrideSunLightStrengthUpdated();
-  public void OverrideNoiseStrengthUpdated();
+    public ref Vector BoxMins { get; }
+
+    public ref Vector BoxMaxs { get; }
+
+    public ref bool StartDisabled { get; }
+
+    public ref bool IndirectUseLPVs { get; }
+
+    public ref float Strength { get; }
+
+    public ref int FalloffShape { get; }
+
+    public ref float FalloffExponent { get; }
+
+    public ref float HeightFogDepth { get; }
+
+    public ref float HeightFogEdgeWidth { get; }
+
+    public ref float IndirectLightStrength { get; }
+
+    public ref float SunLightStrength { get; }
+
+    public ref float NoiseStrength { get; }
+
+    public ref Color TintColor { get; }
+
+    public ref bool OverrideTintColor { get; }
+
+    public ref bool OverrideIndirectLightStrength { get; }
+
+    public ref bool OverrideSunLightStrength { get; }
+
+    public ref bool OverrideNoiseStrength { get; }
+
+    public void ActiveUpdated();
+    public void BoxMinsUpdated();
+    public void BoxMaxsUpdated();
+    public void StartDisabledUpdated();
+    public void IndirectUseLPVsUpdated();
+    public void StrengthUpdated();
+    public void FalloffShapeUpdated();
+    public void FalloffExponentUpdated();
+    public void HeightFogDepthUpdated();
+    public void HeightFogEdgeWidthUpdated();
+    public void IndirectLightStrengthUpdated();
+    public void SunLightStrengthUpdated();
+    public void NoiseStrengthUpdated();
+    public void TintColorUpdated();
+    public void OverrideTintColorUpdated();
+    public void OverrideIndirectLightStrengthUpdated();
+    public void OverrideSunLightStrengthUpdated();
+    public void OverrideNoiseStrengthUpdated();
 }

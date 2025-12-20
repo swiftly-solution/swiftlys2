@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmParameterizedBlendNode__BlendRange_tImpl : SchemaClass, CNmParameterizedBlendNode__BlendRange_t {
+internal partial class CNmParameterizedBlendNode__BlendRange_tImpl : SchemaClass, CNmParameterizedBlendNode__BlendRange_t
+{
+    public CNmParameterizedBlendNode__BlendRange_tImpl(nint handle) : base(handle) { }
 
-  public CNmParameterizedBlendNode__BlendRange_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputIdx0Offset;
 
-  private static nint? _InputIdx0Offset;
-
-  public ref short InputIdx0 {
-    get {
-      if (_InputIdx0Offset == null) {
-        _InputIdx0Offset = Schema.GetOffset(0x17812ECC5A8983D2);
-      }
-      return ref _Handle.AsRef<short>(_InputIdx0Offset!.Value);
+    public ref short InputIdx0 {
+        get {
+            _InputIdx0Offset = _InputIdx0Offset ?? Schema.GetOffset(0x17812ECC5A8983D2);
+            return ref _Handle.AsRef<short>(_InputIdx0Offset!.Value);
+        }
     }
-  }
-  private static nint? _InputIdx1Offset;
+    private static nint? _InputIdx1Offset;
 
-  public ref short InputIdx1 {
-    get {
-      if (_InputIdx1Offset == null) {
-        _InputIdx1Offset = Schema.GetOffset(0x17812ECC5B898565);
-      }
-      return ref _Handle.AsRef<short>(_InputIdx1Offset!.Value);
+    public ref short InputIdx1 {
+        get {
+            _InputIdx1Offset = _InputIdx1Offset ?? Schema.GetOffset(0x17812ECC5B898565);
+            return ref _Handle.AsRef<short>(_InputIdx1Offset!.Value);
+        }
     }
-  }
-  private static nint? _ParameterValueRangeOffset;
+    private static nint? _ParameterValueRangeOffset;
 
-  public SchemaUntypedField ParameterValueRange {
-    get {
-      if (_ParameterValueRangeOffset == null) {
-        _ParameterValueRangeOffset = Schema.GetOffset(0x17812ECC64AF37AE);
-      }
-      return new SchemaUntypedField(_Handle + _ParameterValueRangeOffset!.Value);
+    public SchemaUntypedField ParameterValueRange {
+        get {
+            _ParameterValueRangeOffset = _ParameterValueRangeOffset ?? Schema.GetOffset(0x17812ECC64AF37AE);
+            return new SchemaUntypedField(_Handle + _ParameterValueRangeOffset!.Value);
+        }
     }
-  }
 
 
 }

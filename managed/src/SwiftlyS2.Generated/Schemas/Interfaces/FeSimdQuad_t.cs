@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSimdQuad_t : ISchemaClass<FeSimdQuad_t> {
+public partial interface FeSimdQuad_t : ISchemaClass<FeSimdQuad_t>
+{
+    static FeSimdQuad_t ISchemaClass<FeSimdQuad_t>.From(nint handle) => new FeSimdQuad_tImpl(handle);
+    static int ISchemaClass<FeSimdQuad_t>.Size => 304;
+    static string? ISchemaClass<FeSimdQuad_t>.ClassName => null;
 
-  static FeSimdQuad_t ISchemaClass<FeSimdQuad_t>.From(nint handle) => new FeSimdQuad_tImpl(handle);
-  static int ISchemaClass<FeSimdQuad_t>.Size => 304;
-  static string? ISchemaClass<FeSimdQuad_t>.ClassName => null;
 
-  
-  // uint16[4]
-  public SchemaUntypedField Node { get; }
-  
-  public ref fltx4 F4Slack { get; }
-  
-  public ISchemaFixedArray<FourVectors> Shape { get; }
-  
-  public ISchemaFixedArray<fltx4> F4Weights { get; }
+    // uint16[4]
+    public SchemaUntypedField Node { get; }
+
+    public ref fltx4 F4Slack { get; }
+
+    public ISchemaFixedArray<FourVectors> Shape { get; }
+
+    public ISchemaFixedArray<fltx4> F4Weights { get; }
 
 
 }

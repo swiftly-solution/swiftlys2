@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleFanType_t : uint {
-
+public enum ParticleFanType_t : uint
+{
  PARTICLE_FAN_TYPE_FAN = 0,
 
  PARTICLE_FAN_TYPE_ROTOR_WASH = 1,

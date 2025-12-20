@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventFrameBoundary_t : ISchemaClass<EventFrameBoundary_t> {
+public partial interface EventFrameBoundary_t : ISchemaClass<EventFrameBoundary_t>
+{
+    static EventFrameBoundary_t ISchemaClass<EventFrameBoundary_t>.From(nint handle) => new EventFrameBoundary_tImpl(handle);
+    static int ISchemaClass<EventFrameBoundary_t>.Size => 4;
+    static string? ISchemaClass<EventFrameBoundary_t>.ClassName => null;
 
-  static EventFrameBoundary_t ISchemaClass<EventFrameBoundary_t>.From(nint handle) => new EventFrameBoundary_tImpl(handle);
-  static int ISchemaClass<EventFrameBoundary_t>.Size => 4;
-  static string? ISchemaClass<EventFrameBoundary_t>.ClassName => null;
 
-  
-  public ref float FrameTime { get; }
+    public ref float FrameTime { get; }
 
 
 }

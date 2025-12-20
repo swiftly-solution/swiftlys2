@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixFreeverbDesc_tImpl : SchemaClass, VMixFreeverbDesc_t {
+internal partial class VMixFreeverbDesc_tImpl : SchemaClass, VMixFreeverbDesc_t
+{
+    public VMixFreeverbDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixFreeverbDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RoomSizeOffset;
 
-  private static nint? _RoomSizeOffset;
-
-  public ref float RoomSize {
-    get {
-      if (_RoomSizeOffset == null) {
-        _RoomSizeOffset = Schema.GetOffset(0xF9EB6BF8DEA95199);
-      }
-      return ref _Handle.AsRef<float>(_RoomSizeOffset!.Value);
+    public ref float RoomSize {
+        get {
+            _RoomSizeOffset = _RoomSizeOffset ?? Schema.GetOffset(0xF9EB6BF8DEA95199);
+            return ref _Handle.AsRef<float>(_RoomSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DampOffset;
+    private static nint? _DampOffset;
 
-  public ref float Damp {
-    get {
-      if (_DampOffset == null) {
-        _DampOffset = Schema.GetOffset(0xF9EB6BF851CA5395);
-      }
-      return ref _Handle.AsRef<float>(_DampOffset!.Value);
+    public ref float Damp {
+        get {
+            _DampOffset = _DampOffset ?? Schema.GetOffset(0xF9EB6BF851CA5395);
+            return ref _Handle.AsRef<float>(_DampOffset!.Value);
+        }
     }
-  }
-  private static nint? _WidthOffset;
+    private static nint? _WidthOffset;
 
-  public ref float Width {
-    get {
-      if (_WidthOffset == null) {
-        _WidthOffset = Schema.GetOffset(0xF9EB6BF8B91935E1);
-      }
-      return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+    public ref float Width {
+        get {
+            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0xF9EB6BF8B91935E1);
+            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _LateReflectionsOffset;
+    private static nint? _LateReflectionsOffset;
 
-  public ref float LateReflections {
-    get {
-      if (_LateReflectionsOffset == null) {
-        _LateReflectionsOffset = Schema.GetOffset(0xF9EB6BF830A49ADF);
-      }
-      return ref _Handle.AsRef<float>(_LateReflectionsOffset!.Value);
+    public ref float LateReflections {
+        get {
+            _LateReflectionsOffset = _LateReflectionsOffset ?? Schema.GetOffset(0xF9EB6BF830A49ADF);
+            return ref _Handle.AsRef<float>(_LateReflectionsOffset!.Value);
+        }
     }
-  }
 
 
 }

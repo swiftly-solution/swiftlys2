@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimScriptBase : ISchemaClass<CAnimScriptBase> {
+public partial interface CAnimScriptBase : ISchemaClass<CAnimScriptBase>
+{
+    static CAnimScriptBase ISchemaClass<CAnimScriptBase>.From(nint handle) => new CAnimScriptBaseImpl(handle);
+    static int ISchemaClass<CAnimScriptBase>.Size => 16;
+    static string? ISchemaClass<CAnimScriptBase>.ClassName => null;
 
-  static CAnimScriptBase ISchemaClass<CAnimScriptBase>.From(nint handle) => new CAnimScriptBaseImpl(handle);
-  static int ISchemaClass<CAnimScriptBase>.Size => 16;
-  static string? ISchemaClass<CAnimScriptBase>.ClassName => null;
 
-  
-  public ref bool IsValid { get; }
+    public ref bool IsValid { get; }
 
 
 }

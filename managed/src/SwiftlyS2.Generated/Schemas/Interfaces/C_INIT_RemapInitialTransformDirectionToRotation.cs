@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RemapInitialTransformDirectionToRotation : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation> {
+public partial interface C_INIT_RemapInitialTransformDirectionToRotation : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation>
+{
+    static C_INIT_RemapInitialTransformDirectionToRotation ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation>.From(nint handle) => new C_INIT_RemapInitialTransformDirectionToRotationImpl(handle);
+    static int ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation>.Size => 592;
+    static string? ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation>.ClassName => null;
 
-  static C_INIT_RemapInitialTransformDirectionToRotation ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation>.From(nint handle) => new C_INIT_RemapInitialTransformDirectionToRotationImpl(handle);
-  static int ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation>.Size => 592;
-  static string? ISchemaClass<C_INIT_RemapInitialTransformDirectionToRotation>.ClassName => null;
 
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float OffsetRot { get; }
-  
-  public ref int Component { get; }
+    public CParticleTransformInput TransformInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float OffsetRot { get; }
+
+    public ref int Component { get; }
 
 
 }

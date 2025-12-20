@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EmptyTestScriptImpl : CAnimScriptBaseImpl, EmptyTestScript {
+internal partial class EmptyTestScriptImpl : CAnimScriptBaseImpl, EmptyTestScript
+{
+    public EmptyTestScriptImpl(nint handle) : base(handle) { }
 
-  public EmptyTestScriptImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TestOffset;
 
-  private static nint? _TestOffset;
-
-  public SchemaUntypedField Test {
-    get {
-      if (_TestOffset == null) {
-        _TestOffset = Schema.GetOffset(0xB7F6B6D5FAAC6DA3);
-      }
-      return new SchemaUntypedField(_Handle + _TestOffset!.Value);
+    public SchemaUntypedField Test {
+        get {
+            _TestOffset = _TestOffset ?? Schema.GetOffset(0xB7F6B6D5FAAC6DA3);
+            return new SchemaUntypedField(_Handle + _TestOffset!.Value);
+        }
     }
-  }
 
 
 }

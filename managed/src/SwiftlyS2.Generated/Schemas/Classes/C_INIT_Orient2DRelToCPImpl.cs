@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_Orient2DRelToCPImpl : CParticleFunctionInitializerImpl, C_INIT_Orient2DRelToCP {
+internal partial class C_INIT_Orient2DRelToCPImpl : CParticleFunctionInitializerImpl, C_INIT_Orient2DRelToCP
+{
+    public C_INIT_Orient2DRelToCPImpl(nint handle) : base(handle) { }
 
-  public C_INIT_Orient2DRelToCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPOffset;
 
-  private static nint? _CPOffset;
-
-  public ref int CP {
-    get {
-      if (_CPOffset == null) {
-        _CPOffset = Schema.GetOffset(0x4B55AD02EB661472);
-      }
-      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    public ref int CP {
+        get {
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x4B55AD02EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x4B55AD02E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x4B55AD02E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotOffsetOffset;
+    private static nint? _RotOffsetOffset;
 
-  public ref float RotOffset {
-    get {
-      if (_RotOffsetOffset == null) {
-        _RotOffsetOffset = Schema.GetOffset(0x4B55AD02D1EA9CDF);
-      }
-      return ref _Handle.AsRef<float>(_RotOffsetOffset!.Value);
+    public ref float RotOffset {
+        get {
+            _RotOffsetOffset = _RotOffsetOffset ?? Schema.GetOffset(0x4B55AD02D1EA9CDF);
+            return ref _Handle.AsRef<float>(_RotOffsetOffset!.Value);
+        }
     }
-  }
 
 
 }

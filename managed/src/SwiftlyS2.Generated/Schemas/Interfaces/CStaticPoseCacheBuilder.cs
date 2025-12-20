@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStaticPoseCacheBuilder : CStaticPoseCache, ISchemaClass<CStaticPoseCacheBuilder> {
-
-  static CStaticPoseCacheBuilder ISchemaClass<CStaticPoseCacheBuilder>.From(nint handle) => new CStaticPoseCacheBuilderImpl(handle);
-  static int ISchemaClass<CStaticPoseCacheBuilder>.Size => 56;
-  static string? ISchemaClass<CStaticPoseCacheBuilder>.ClassName => null;
+public partial interface CStaticPoseCacheBuilder : CStaticPoseCache, ISchemaClass<CStaticPoseCacheBuilder>
+{
+    static CStaticPoseCacheBuilder ISchemaClass<CStaticPoseCacheBuilder>.From(nint handle) => new CStaticPoseCacheBuilderImpl(handle);
+    static int ISchemaClass<CStaticPoseCacheBuilder>.Size => 56;
+    static string? ISchemaClass<CStaticPoseCacheBuilder>.ClassName => null;
 
 
 

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t : ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t> {
+public partial interface CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t : ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t>
+{
+    static CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t>.From(nint handle) => new CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_tImpl(handle);
+    static int ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t>.Size => 16;
+    static string? ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t>.ClassName => null;
 
-  static CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t>.From(nint handle) => new CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_tImpl(handle);
-  static int ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t>.Size => 16;
-  static string? ISchemaClass<CCSPlayerController_InventoryServices__NetworkedLoadoutSlot_t>.ClassName => null;
 
-  
-  public CEconItemView? Item { get; }
-  
-  public ref ushort Team { get; }
-  
-  public ref ushort Slot { get; }
+    public CEconItemView? Item { get; }
+
+    public ref ushort Team { get; }
+
+    public ref ushort Slot { get; }
 
 
 }

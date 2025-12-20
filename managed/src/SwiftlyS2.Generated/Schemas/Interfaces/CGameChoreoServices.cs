@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGameChoreoServices : IChoreoServices, ISchemaClass<CGameChoreoServices> {
+public partial interface CGameChoreoServices : IChoreoServices, ISchemaClass<CGameChoreoServices>
+{
+    static CGameChoreoServices ISchemaClass<CGameChoreoServices>.From(nint handle) => new CGameChoreoServicesImpl(handle);
+    static int ISchemaClass<CGameChoreoServices>.Size => 32;
+    static string? ISchemaClass<CGameChoreoServices>.ClassName => null;
 
-  static CGameChoreoServices ISchemaClass<CGameChoreoServices>.From(nint handle) => new CGameChoreoServicesImpl(handle);
-  static int ISchemaClass<CGameChoreoServices>.Size => 32;
-  static string? ISchemaClass<CGameChoreoServices>.ClassName => null;
 
-  
-  public ref CHandle<CBaseAnimGraph> Owner { get; }
-  
-  public ref CHandle<CScriptedSequence> ScriptedSequence { get; }
-  
-  public ref IChoreoServices__ScriptState_t ScriptState { get; }
-  
-  public ref IChoreoServices__ChoreoState_t ChoreoState { get; }
-  
-  public GameTime_t TimeStartedState { get; }
+    public ref CHandle<CBaseAnimGraph> Owner { get; }
+
+    public ref CHandle<CScriptedSequence> ScriptedSequence { get; }
+
+    public ref IChoreoServices__ScriptState_t ScriptState { get; }
+
+    public ref IChoreoServices__ChoreoState_t ChoreoState { get; }
+
+    public GameTime_t TimeStartedState { get; }
 
 
 }

@@ -6,131 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAmbientGenericImpl : CPointEntityImpl, CAmbientGeneric {
+internal partial class CAmbientGenericImpl : CPointEntityImpl, CAmbientGeneric
+{
+    public CAmbientGenericImpl(nint handle) : base(handle) { }
 
-  public CAmbientGenericImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusOffset;
 
-  private static nint? _RadiusOffset;
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xD45BE96FA921CA53);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
+    }
+    private static nint? _MaxRadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xD45BE96FA921CA53);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float MaxRadius {
+        get {
+            _MaxRadiusOffset = _MaxRadiusOffset ?? Schema.GetOffset(0xD45BE96F89E61C15);
+            return ref _Handle.AsRef<float>(_MaxRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxRadiusOffset;
+    private static nint? _SoundLevelOffset;
 
-  public ref float MaxRadius {
-    get {
-      if (_MaxRadiusOffset == null) {
-        _MaxRadiusOffset = Schema.GetOffset(0xD45BE96F89E61C15);
-      }
-      return ref _Handle.AsRef<float>(_MaxRadiusOffset!.Value);
+    public ref soundlevel_t SoundLevel {
+        get {
+            _SoundLevelOffset = _SoundLevelOffset ?? Schema.GetOffset(0xD45BE96FB69D19BB);
+            return ref _Handle.AsRef<soundlevel_t>(_SoundLevelOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundLevelOffset;
+    private static nint? _DpvOffset;
 
-  public ref soundlevel_t SoundLevel {
-    get {
-      if (_SoundLevelOffset == null) {
-        _SoundLevelOffset = Schema.GetOffset(0xD45BE96FB69D19BB);
-      }
-      return ref _Handle.AsRef<soundlevel_t>(_SoundLevelOffset!.Value);
+    public dynpitchvol_t Dpv {
+        get {
+            _DpvOffset = _DpvOffset ?? Schema.GetOffset(0xD45BE96FD7C5AFFD);
+            return new dynpitchvol_tImpl(_Handle + _DpvOffset!.Value);
+        }
     }
-  }
-  private static nint? _DpvOffset;
+    private static nint? _ActiveOffset;
 
-  public dynpitchvol_t Dpv {
-    get {
-      if (_DpvOffset == null) {
-        _DpvOffset = Schema.GetOffset(0xD45BE96FD7C5AFFD);
-      }
-      return new dynpitchvol_tImpl(_Handle + _DpvOffset!.Value);
+    public ref bool Active {
+        get {
+            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0xD45BE96FC4EB465B);
+            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveOffset;
+    private static nint? _LoopingOffset;
 
-  public ref bool Active {
-    get {
-      if (_ActiveOffset == null) {
-        _ActiveOffset = Schema.GetOffset(0xD45BE96FC4EB465B);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    public ref bool Looping {
+        get {
+            _LoopingOffset = _LoopingOffset ?? Schema.GetOffset(0xD45BE96F4FEBC8C1);
+            return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopingOffset;
+    private static nint? _SoundOffset;
 
-  public ref bool Looping {
-    get {
-      if (_LoopingOffset == null) {
-        _LoopingOffset = Schema.GetOffset(0xD45BE96F4FEBC8C1);
-      }
-      return ref _Handle.AsRef<bool>(_LoopingOffset!.Value);
-    }
-  }
-  private static nint? _SoundOffset;
+    public string Sound {
+        get {
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0xD45BE96F5FF1867C);
+            return Schema.GetString(_Handle.Read<nint>(_SoundOffset!.Value));
+        }
+        set {
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0xD45BE96F5FF1867C);
+            Schema.SetString(_Handle, _SoundOffset!.Value, value);
+        }
+    } 
+    private static nint? _SourceEntNameOffset;
 
-  public string Sound {
-    get {
-      if (_SoundOffset == null) {
-        _SoundOffset = Schema.GetOffset(0xD45BE96F5FF1867C);
-      }
-      var ptr = _Handle.Read<nint>(_SoundOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SoundOffset == null) {
-        _SoundOffset = Schema.GetOffset(0xD45BE96F5FF1867C);
-      }
-      Schema.SetString(_Handle, _SoundOffset!.Value, value);
-    }
-  } 
-  private static nint? _SourceEntNameOffset;
+    public string SourceEntName {
+        get {
+            _SourceEntNameOffset = _SourceEntNameOffset ?? Schema.GetOffset(0xD45BE96F2FABBF97);
+            return Schema.GetString(_Handle.Read<nint>(_SourceEntNameOffset!.Value));
+        }
+        set {
+            _SourceEntNameOffset = _SourceEntNameOffset ?? Schema.GetOffset(0xD45BE96F2FABBF97);
+            Schema.SetString(_Handle, _SourceEntNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _SoundSourceOffset;
 
-  public string SourceEntName {
-    get {
-      if (_SourceEntNameOffset == null) {
-        _SourceEntNameOffset = Schema.GetOffset(0xD45BE96F2FABBF97);
-      }
-      var ptr = _Handle.Read<nint>(_SourceEntNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CHandle<CBaseEntity> SoundSource {
+        get {
+            _SoundSourceOffset = _SoundSourceOffset ?? Schema.GetOffset(0xD45BE96FA2036C43);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SoundSourceOffset!.Value);
+        }
     }
-    set {
-      if (_SourceEntNameOffset == null) {
-        _SourceEntNameOffset = Schema.GetOffset(0xD45BE96F2FABBF97);
-      }
-      Schema.SetString(_Handle, _SourceEntNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _SoundSourceOffset;
+    private static nint? _SoundSourceEntIndexOffset;
 
-  public ref CHandle<CBaseEntity> SoundSource {
-    get {
-      if (_SoundSourceOffset == null) {
-        _SoundSourceOffset = Schema.GetOffset(0xD45BE96FA2036C43);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SoundSourceOffset!.Value);
+    public ref uint SoundSourceEntIndex {
+        get {
+            _SoundSourceEntIndexOffset = _SoundSourceEntIndexOffset ?? Schema.GetOffset(0xD45BE96F5C1CB026);
+            return ref _Handle.AsRef<uint>(_SoundSourceEntIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundSourceEntIndexOffset;
-
-  public ref uint SoundSourceEntIndex {
-    get {
-      if (_SoundSourceEntIndexOffset == null) {
-        _SoundSourceEntIndexOffset = Schema.GetOffset(0xD45BE96F5C1CB026);
-      }
-      return ref _Handle.AsRef<uint>(_SoundSourceEntIndexOffset!.Value);
-    }
-  }
 
 
 }

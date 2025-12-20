@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ClampScalar : CParticleFunctionOperator, ISchemaClass<C_OP_ClampScalar> {
+public partial interface C_OP_ClampScalar : CParticleFunctionOperator, ISchemaClass<C_OP_ClampScalar>
+{
+    static C_OP_ClampScalar ISchemaClass<C_OP_ClampScalar>.From(nint handle) => new C_OP_ClampScalarImpl(handle);
+    static int ISchemaClass<C_OP_ClampScalar>.Size => 1208;
+    static string? ISchemaClass<C_OP_ClampScalar>.ClassName => null;
 
-  static C_OP_ClampScalar ISchemaClass<C_OP_ClampScalar>.From(nint handle) => new C_OP_ClampScalarImpl(handle);
-  static int ISchemaClass<C_OP_ClampScalar>.Size => 1208;
-  static string? ISchemaClass<C_OP_ClampScalar>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleFloatInput OutputMin { get; }
-  
-  public CPerParticleFloatInput OutputMax { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleFloatInput OutputMin { get; }
+
+    public CPerParticleFloatInput OutputMax { get; }
 
 
 }

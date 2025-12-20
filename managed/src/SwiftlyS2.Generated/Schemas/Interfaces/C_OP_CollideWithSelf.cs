@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_CollideWithSelf : CParticleFunctionConstraint, ISchemaClass<C_OP_CollideWithSelf> {
+public partial interface C_OP_CollideWithSelf : CParticleFunctionConstraint, ISchemaClass<C_OP_CollideWithSelf>
+{
+    static C_OP_CollideWithSelf ISchemaClass<C_OP_CollideWithSelf>.From(nint handle) => new C_OP_CollideWithSelfImpl(handle);
+    static int ISchemaClass<C_OP_CollideWithSelf>.Size => 1200;
+    static string? ISchemaClass<C_OP_CollideWithSelf>.ClassName => null;
 
-  static C_OP_CollideWithSelf ISchemaClass<C_OP_CollideWithSelf>.From(nint handle) => new C_OP_CollideWithSelfImpl(handle);
-  static int ISchemaClass<C_OP_CollideWithSelf>.Size => 1200;
-  static string? ISchemaClass<C_OP_CollideWithSelf>.ClassName => null;
 
-  
-  public CPerParticleFloatInput RadiusScale { get; }
-  
-  public CPerParticleFloatInput MinimumSpeed { get; }
+    public CPerParticleFloatInput RadiusScale { get; }
+
+    public CPerParticleFloatInput MinimumSpeed { get; }
 
 
 }

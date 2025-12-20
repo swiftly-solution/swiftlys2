@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGameGibManager : CBaseEntity, ISchemaClass<CGameGibManager> {
+public partial interface CGameGibManager : CBaseEntity, ISchemaClass<CGameGibManager>
+{
+    static CGameGibManager ISchemaClass<CGameGibManager>.From(nint handle) => new CGameGibManagerImpl(handle);
+    static int ISchemaClass<CGameGibManager>.Size => 1304;
+    static string? ISchemaClass<CGameGibManager>.ClassName => "game_gib_manager";
 
-  static CGameGibManager ISchemaClass<CGameGibManager>.From(nint handle) => new CGameGibManagerImpl(handle);
-  static int ISchemaClass<CGameGibManager>.Size => 1304;
-  static string? ISchemaClass<CGameGibManager>.ClassName => "game_gib_manager";
 
-  
-  public ref bool AllowNewGibs { get; }
-  
-  public ref int CurrentMaxPieces { get; }
-  
-  public ref int MaxPieces { get; }
-  
-  public ref int LastFrame { get; }
+    public ref bool AllowNewGibs { get; }
+
+    public ref int CurrentMaxPieces { get; }
+
+    public ref int MaxPieces { get; }
+
+    public ref int LastFrame { get; }
 
 
 }

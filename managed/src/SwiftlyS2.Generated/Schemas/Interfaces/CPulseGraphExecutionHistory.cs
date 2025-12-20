@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseGraphExecutionHistory : ISchemaClass<CPulseGraphExecutionHistory> {
+public partial interface CPulseGraphExecutionHistory : ISchemaClass<CPulseGraphExecutionHistory>
+{
+    static CPulseGraphExecutionHistory ISchemaClass<CPulseGraphExecutionHistory>.From(nint handle) => new CPulseGraphExecutionHistoryImpl(handle);
+    static int ISchemaClass<CPulseGraphExecutionHistory>.Size => 120;
+    static string? ISchemaClass<CPulseGraphExecutionHistory>.ClassName => null;
 
-  static CPulseGraphExecutionHistory ISchemaClass<CPulseGraphExecutionHistory>.From(nint handle) => new CPulseGraphExecutionHistoryImpl(handle);
-  static int ISchemaClass<CPulseGraphExecutionHistory>.Size => 120;
-  static string? ISchemaClass<CPulseGraphExecutionHistory>.ClassName => null;
 
-  
-  public PulseGraphInstanceID_t InstanceID { get; }
-  
-  public string StrFileName { get; set; }
-  
-  public ref CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>> History { get; }
-  
-  // CUtlOrderedMap< PulseDocNodeID_t, PulseGraphExecutionHistoryNodeDesc_t* >
-  public SchemaUntypedField MapCellDesc { get; }
-  
-  // CUtlOrderedMap< PulseCursorID_t, PulseGraphExecutionHistoryCursorDesc_t* >
-  public SchemaUntypedField MapCursorDesc { get; }
+    public PulseGraphInstanceID_t InstanceID { get; }
+
+    public string StrFileName { get; set; }
+
+    public ref CUtlVector<PointerTo<PulseGraphExecutionHistoryEntry_t>> History { get; }
+
+    // CUtlOrderedMap< PulseDocNodeID_t, PulseGraphExecutionHistoryNodeDesc_t* >
+    public SchemaUntypedField MapCellDesc { get; }
+
+    // CUtlOrderedMap< PulseCursorID_t, PulseGraphExecutionHistoryCursorDesc_t* >
+    public SchemaUntypedField MapCursorDesc { get; }
 
 
 }

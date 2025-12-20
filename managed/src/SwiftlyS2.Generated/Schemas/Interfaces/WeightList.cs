@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface WeightList : ISchemaClass<WeightList> {
+public partial interface WeightList : ISchemaClass<WeightList>
+{
+    static WeightList ISchemaClass<WeightList>.From(nint handle) => new WeightListImpl(handle);
+    static int ISchemaClass<WeightList>.Size => 32;
+    static string? ISchemaClass<WeightList>.ClassName => null;
 
-  static WeightList ISchemaClass<WeightList>.From(nint handle) => new WeightListImpl(handle);
-  static int ISchemaClass<WeightList>.Size => 32;
-  static string? ISchemaClass<WeightList>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CUtlVector<float> Weights { get; }
+    public string Name { get; set; }
+
+    public ref CUtlVector<float> Weights { get; }
 
 
 }

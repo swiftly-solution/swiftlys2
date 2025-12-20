@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_VelocityDecayImpl : CParticleFunctionOperatorImpl, C_OP_VelocityDecay {
+internal partial class C_OP_VelocityDecayImpl : CParticleFunctionOperatorImpl, C_OP_VelocityDecay
+{
+    public C_OP_VelocityDecayImpl(nint handle) : base(handle) { }
 
-  public C_OP_VelocityDecayImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinVelocityOffset;
 
-  private static nint? _MinVelocityOffset;
-
-  public ref float MinVelocity {
-    get {
-      if (_MinVelocityOffset == null) {
-        _MinVelocityOffset = Schema.GetOffset(0xF59EE920AE8F0ADE);
-      }
-      return ref _Handle.AsRef<float>(_MinVelocityOffset!.Value);
+    public ref float MinVelocity {
+        get {
+            _MinVelocityOffset = _MinVelocityOffset ?? Schema.GetOffset(0xF59EE920AE8F0ADE);
+            return ref _Handle.AsRef<float>(_MinVelocityOffset!.Value);
+        }
     }
-  }
 
 
 }

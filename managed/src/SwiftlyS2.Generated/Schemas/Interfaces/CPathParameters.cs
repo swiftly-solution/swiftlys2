@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathParameters : ISchemaClass<CPathParameters> {
+public partial interface CPathParameters : ISchemaClass<CPathParameters>
+{
+    static CPathParameters ISchemaClass<CPathParameters>.From(nint handle) => new CPathParametersImpl(handle);
+    static int ISchemaClass<CPathParameters>.Size => 64;
+    static string? ISchemaClass<CPathParameters>.ClassName => null;
 
-  static CPathParameters ISchemaClass<CPathParameters>.From(nint handle) => new CPathParametersImpl(handle);
-  static int ISchemaClass<CPathParameters>.Size => 64;
-  static string? ISchemaClass<CPathParameters>.ClassName => null;
 
-  
-  public ref int StartControlPointNumber { get; }
-  
-  public ref int EndControlPointNumber { get; }
-  
-  public ref int BulgeControl { get; }
-  
-  public ref float Bulge { get; }
-  
-  public ref float MidPoint { get; }
-  
-  public ref Vector StartPointOffset { get; }
-  
-  public ref Vector MidPointOffset { get; }
-  
-  public ref Vector EndOffset { get; }
+    public ref int StartControlPointNumber { get; }
+
+    public ref int EndControlPointNumber { get; }
+
+    public ref int BulgeControl { get; }
+
+    public ref float Bulge { get; }
+
+    public ref float MidPoint { get; }
+
+    public ref Vector StartPointOffset { get; }
+
+    public ref Vector MidPointOffset { get; }
+
+    public ref Vector EndOffset { get; }
 
 
 }

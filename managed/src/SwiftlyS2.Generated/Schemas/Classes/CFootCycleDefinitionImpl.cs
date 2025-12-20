@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootCycleDefinitionImpl : SchemaClass, CFootCycleDefinition {
+internal partial class CFootCycleDefinitionImpl : SchemaClass, CFootCycleDefinition
+{
+    public CFootCycleDefinitionImpl(nint handle) : base(handle) { }
 
-  public CFootCycleDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StancePositionMSOffset;
 
-  private static nint? _StancePositionMSOffset;
-
-  public ref Vector StancePositionMS {
-    get {
-      if (_StancePositionMSOffset == null) {
-        _StancePositionMSOffset = Schema.GetOffset(0x6D604C9567085F86);
-      }
-      return ref _Handle.AsRef<Vector>(_StancePositionMSOffset!.Value);
+    public ref Vector StancePositionMS {
+        get {
+            _StancePositionMSOffset = _StancePositionMSOffset ?? Schema.GetOffset(0x6D604C9567085F86);
+            return ref _Handle.AsRef<Vector>(_StancePositionMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _MidpointPositionMSOffset;
+    private static nint? _MidpointPositionMSOffset;
 
-  public ref Vector MidpointPositionMS {
-    get {
-      if (_MidpointPositionMSOffset == null) {
-        _MidpointPositionMSOffset = Schema.GetOffset(0x6D604C9553980B1A);
-      }
-      return ref _Handle.AsRef<Vector>(_MidpointPositionMSOffset!.Value);
+    public ref Vector MidpointPositionMS {
+        get {
+            _MidpointPositionMSOffset = _MidpointPositionMSOffset ?? Schema.GetOffset(0x6D604C9553980B1A);
+            return ref _Handle.AsRef<Vector>(_MidpointPositionMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _StanceDirectionMSOffset;
+    private static nint? _StanceDirectionMSOffset;
 
-  public ref float StanceDirectionMS {
-    get {
-      if (_StanceDirectionMSOffset == null) {
-        _StanceDirectionMSOffset = Schema.GetOffset(0x6D604C95848F3868);
-      }
-      return ref _Handle.AsRef<float>(_StanceDirectionMSOffset!.Value);
+    public ref float StanceDirectionMS {
+        get {
+            _StanceDirectionMSOffset = _StanceDirectionMSOffset ?? Schema.GetOffset(0x6D604C95848F3868);
+            return ref _Handle.AsRef<float>(_StanceDirectionMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _ToStrideStartPosOffset;
+    private static nint? _ToStrideStartPosOffset;
 
-  public ref Vector ToStrideStartPos {
-    get {
-      if (_ToStrideStartPosOffset == null) {
-        _ToStrideStartPosOffset = Schema.GetOffset(0x6D604C953F2E1417);
-      }
-      return ref _Handle.AsRef<Vector>(_ToStrideStartPosOffset!.Value);
+    public ref Vector ToStrideStartPos {
+        get {
+            _ToStrideStartPosOffset = _ToStrideStartPosOffset ?? Schema.GetOffset(0x6D604C953F2E1417);
+            return ref _Handle.AsRef<Vector>(_ToStrideStartPosOffset!.Value);
+        }
     }
-  }
-  private static nint? _StanceCycleOffset;
+    private static nint? _StanceCycleOffset;
 
-  public CAnimCycle StanceCycle {
-    get {
-      if (_StanceCycleOffset == null) {
-        _StanceCycleOffset = Schema.GetOffset(0x6D604C954EDCBD91);
-      }
-      return new CAnimCycleImpl(_Handle + _StanceCycleOffset!.Value);
+    public CAnimCycle StanceCycle {
+        get {
+            _StanceCycleOffset = _StanceCycleOffset ?? Schema.GetOffset(0x6D604C954EDCBD91);
+            return new CAnimCycleImpl(_Handle + _StanceCycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FootLiftCycleOffset;
+    private static nint? _FootLiftCycleOffset;
 
-  public CFootCycle FootLiftCycle {
-    get {
-      if (_FootLiftCycleOffset == null) {
-        _FootLiftCycleOffset = Schema.GetOffset(0x6D604C9553A7B946);
-      }
-      return new CFootCycleImpl(_Handle + _FootLiftCycleOffset!.Value);
+    public CFootCycle FootLiftCycle {
+        get {
+            _FootLiftCycleOffset = _FootLiftCycleOffset ?? Schema.GetOffset(0x6D604C9553A7B946);
+            return new CFootCycleImpl(_Handle + _FootLiftCycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FootOffCycleOffset;
+    private static nint? _FootOffCycleOffset;
 
-  public CFootCycle FootOffCycle {
-    get {
-      if (_FootOffCycleOffset == null) {
-        _FootOffCycleOffset = Schema.GetOffset(0x6D604C959AC5AE30);
-      }
-      return new CFootCycleImpl(_Handle + _FootOffCycleOffset!.Value);
+    public CFootCycle FootOffCycle {
+        get {
+            _FootOffCycleOffset = _FootOffCycleOffset ?? Schema.GetOffset(0x6D604C959AC5AE30);
+            return new CFootCycleImpl(_Handle + _FootOffCycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FootStrikeCycleOffset;
+    private static nint? _FootStrikeCycleOffset;
 
-  public CFootCycle FootStrikeCycle {
-    get {
-      if (_FootStrikeCycleOffset == null) {
-        _FootStrikeCycleOffset = Schema.GetOffset(0x6D604C95E4D3DC2B);
-      }
-      return new CFootCycleImpl(_Handle + _FootStrikeCycleOffset!.Value);
+    public CFootCycle FootStrikeCycle {
+        get {
+            _FootStrikeCycleOffset = _FootStrikeCycleOffset ?? Schema.GetOffset(0x6D604C95E4D3DC2B);
+            return new CFootCycleImpl(_Handle + _FootStrikeCycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FootLandCycleOffset;
+    private static nint? _FootLandCycleOffset;
 
-  public CFootCycle FootLandCycle {
-    get {
-      if (_FootLandCycleOffset == null) {
-        _FootLandCycleOffset = Schema.GetOffset(0x6D604C954C100B46);
-      }
-      return new CFootCycleImpl(_Handle + _FootLandCycleOffset!.Value);
+    public CFootCycle FootLandCycle {
+        get {
+            _FootLandCycleOffset = _FootLandCycleOffset ?? Schema.GetOffset(0x6D604C954C100B46);
+            return new CFootCycleImpl(_Handle + _FootLandCycleOffset!.Value);
+        }
     }
-  }
 
 
 }

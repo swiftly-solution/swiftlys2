@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmIKRigImpl : SchemaClass, CNmIKRig {
+internal partial class CNmIKRigImpl : SchemaClass, CNmIKRig
+{
+    public CNmIKRigImpl(nint handle) : base(handle) { }
 
-  public CNmIKRigImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SkeletonOffset;
 
-  private static nint? _SkeletonOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton {
-    get {
-      if (_SkeletonOffset == null) {
-        _SkeletonOffset = Schema.GetOffset(0x9C509BCFE77F030E);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton {
+        get {
+            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0x9C509BCFE77F030E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset!.Value);
+        }
     }
-  }
-  private static nint? _BodiesOffset;
+    private static nint? _BodiesOffset;
 
-  public ref CUtlVector<CNmIKBody> Bodies {
-    get {
-      if (_BodiesOffset == null) {
-        _BodiesOffset = Schema.GetOffset(0x9C509BCF24483A49);
-      }
-      return ref _Handle.AsRef<CUtlVector<CNmIKBody>>(_BodiesOffset!.Value);
+    public ref CUtlVector<CNmIKBody> Bodies {
+        get {
+            _BodiesOffset = _BodiesOffset ?? Schema.GetOffset(0x9C509BCF24483A49);
+            return ref _Handle.AsRef<CUtlVector<CNmIKBody>>(_BodiesOffset!.Value);
+        }
     }
-  }
-  private static nint? _JointsOffset;
+    private static nint? _JointsOffset;
 
-  public ref CUtlVector<CNmIKJoint> Joints {
-    get {
-      if (_JointsOffset == null) {
-        _JointsOffset = Schema.GetOffset(0x9C509BCF364EA4AC);
-      }
-      return ref _Handle.AsRef<CUtlVector<CNmIKJoint>>(_JointsOffset!.Value);
+    public ref CUtlVector<CNmIKJoint> Joints {
+        get {
+            _JointsOffset = _JointsOffset ?? Schema.GetOffset(0x9C509BCF364EA4AC);
+            return ref _Handle.AsRef<CUtlVector<CNmIKJoint>>(_JointsOffset!.Value);
+        }
     }
-  }
 
 
 }

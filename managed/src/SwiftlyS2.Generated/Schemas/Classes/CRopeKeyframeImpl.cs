@@ -6,288 +6,207 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRopeKeyframeImpl : CBaseModelEntityImpl, CRopeKeyframe {
+internal partial class CRopeKeyframeImpl : CBaseModelEntityImpl, CRopeKeyframe
+{
+    public CRopeKeyframeImpl(nint handle) : base(handle) { }
 
-  public CRopeKeyframeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RopeFlagsOffset;
 
-  private static nint? _RopeFlagsOffset;
-
-  public ref ushort RopeFlags {
-    get {
-      if (_RopeFlagsOffset == null) {
-        _RopeFlagsOffset = Schema.GetOffset(0x76EE758E2EF994F4);
-      }
-      return ref _Handle.AsRef<ushort>(_RopeFlagsOffset!.Value);
+    public ref ushort RopeFlags {
+        get {
+            _RopeFlagsOffset = _RopeFlagsOffset ?? Schema.GetOffset(0x76EE758E2EF994F4);
+            return ref _Handle.AsRef<ushort>(_RopeFlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextLinkNameOffset;
+    private static nint? _NextLinkNameOffset;
 
-  public string NextLinkName {
-    get {
-      if (_NextLinkNameOffset == null) {
-        _NextLinkNameOffset = Schema.GetOffset(0x76EE758EFD59AE1A);
-      }
-      var ptr = _Handle.Read<nint>(_NextLinkNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NextLinkNameOffset == null) {
-        _NextLinkNameOffset = Schema.GetOffset(0x76EE758EFD59AE1A);
-      }
-      Schema.SetString(_Handle, _NextLinkNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _SlackOffset;
+    public string NextLinkName {
+        get {
+            _NextLinkNameOffset = _NextLinkNameOffset ?? Schema.GetOffset(0x76EE758EFD59AE1A);
+            return Schema.GetString(_Handle.Read<nint>(_NextLinkNameOffset!.Value));
+        }
+        set {
+            _NextLinkNameOffset = _NextLinkNameOffset ?? Schema.GetOffset(0x76EE758EFD59AE1A);
+            Schema.SetString(_Handle, _NextLinkNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _SlackOffset;
 
-  public ref short Slack {
-    get {
-      if (_SlackOffset == null) {
-        _SlackOffset = Schema.GetOffset(0x76EE758E84ECDEA7);
-      }
-      return ref _Handle.AsRef<short>(_SlackOffset!.Value);
+    public ref short Slack {
+        get {
+            _SlackOffset = _SlackOffset ?? Schema.GetOffset(0x76EE758E84ECDEA7);
+            return ref _Handle.AsRef<short>(_SlackOffset!.Value);
+        }
     }
-  }
-  private static nint? _WidthOffset;
+    private static nint? _WidthOffset;
 
-  public ref float Width {
-    get {
-      if (_WidthOffset == null) {
-        _WidthOffset = Schema.GetOffset(0x76EE758E2FD9239F);
-      }
-      return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+    public ref float Width {
+        get {
+            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0x76EE758E2FD9239F);
+            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _TextureScaleOffset;
+    private static nint? _TextureScaleOffset;
 
-  public ref float TextureScale {
-    get {
-      if (_TextureScaleOffset == null) {
-        _TextureScaleOffset = Schema.GetOffset(0x76EE758EA14A014E);
-      }
-      return ref _Handle.AsRef<float>(_TextureScaleOffset!.Value);
+    public ref float TextureScale {
+        get {
+            _TextureScaleOffset = _TextureScaleOffset ?? Schema.GetOffset(0x76EE758EA14A014E);
+            return ref _Handle.AsRef<float>(_TextureScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SegmentsOffset;
+    private static nint? _SegmentsOffset;
 
-  public ref byte Segments {
-    get {
-      if (_SegmentsOffset == null) {
-        _SegmentsOffset = Schema.GetOffset(0x76EE758E4878E17B);
-      }
-      return ref _Handle.AsRef<byte>(_SegmentsOffset!.Value);
+    public ref byte Segments {
+        get {
+            _SegmentsOffset = _SegmentsOffset ?? Schema.GetOffset(0x76EE758E4878E17B);
+            return ref _Handle.AsRef<byte>(_SegmentsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConstrainBetweenEndpointsOffset;
+    private static nint? _ConstrainBetweenEndpointsOffset;
 
-  public ref bool ConstrainBetweenEndpoints {
-    get {
-      if (_ConstrainBetweenEndpointsOffset == null) {
-        _ConstrainBetweenEndpointsOffset = Schema.GetOffset(0x76EE758E05033E3C);
-      }
-      return ref _Handle.AsRef<bool>(_ConstrainBetweenEndpointsOffset!.Value);
+    public ref bool ConstrainBetweenEndpoints {
+        get {
+            _ConstrainBetweenEndpointsOffset = _ConstrainBetweenEndpointsOffset ?? Schema.GetOffset(0x76EE758E05033E3C);
+            return ref _Handle.AsRef<bool>(_ConstrainBetweenEndpointsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrRopeMaterialModelOffset;
+    private static nint? _StrRopeMaterialModelOffset;
 
-  public string StrRopeMaterialModel {
-    get {
-      if (_StrRopeMaterialModelOffset == null) {
-        _StrRopeMaterialModelOffset = Schema.GetOffset(0x76EE758E7A58C07A);
-      }
-      var ptr = _Handle.Read<nint>(_StrRopeMaterialModelOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrRopeMaterialModelOffset == null) {
-        _StrRopeMaterialModelOffset = Schema.GetOffset(0x76EE758E7A58C07A);
-      }
-      Schema.SetString(_Handle, _StrRopeMaterialModelOffset!.Value, value);
-    }
-  } 
-  private static nint? _RopeMaterialModelIndexOffset;
+    public string StrRopeMaterialModel {
+        get {
+            _StrRopeMaterialModelOffset = _StrRopeMaterialModelOffset ?? Schema.GetOffset(0x76EE758E7A58C07A);
+            return Schema.GetString(_Handle.Read<nint>(_StrRopeMaterialModelOffset!.Value));
+        }
+        set {
+            _StrRopeMaterialModelOffset = _StrRopeMaterialModelOffset ?? Schema.GetOffset(0x76EE758E7A58C07A);
+            Schema.SetString(_Handle, _StrRopeMaterialModelOffset!.Value, value);
+        }
+    } 
+    private static nint? _RopeMaterialModelIndexOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> RopeMaterialModelIndex {
-    get {
-      if (_RopeMaterialModelIndexOffset == null) {
-        _RopeMaterialModelIndexOffset = Schema.GetOffset(0x76EE758E831DE452);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_RopeMaterialModelIndexOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> RopeMaterialModelIndex {
+        get {
+            _RopeMaterialModelIndexOffset = _RopeMaterialModelIndexOffset ?? Schema.GetOffset(0x76EE758E831DE452);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_RopeMaterialModelIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _SubdivOffset;
+    private static nint? _SubdivOffset;
 
-  public ref byte Subdiv {
-    get {
-      if (_SubdivOffset == null) {
-        _SubdivOffset = Schema.GetOffset(0x76EE758E785F10D8);
-      }
-      return ref _Handle.AsRef<byte>(_SubdivOffset!.Value);
+    public ref byte Subdiv {
+        get {
+            _SubdivOffset = _SubdivOffset ?? Schema.GetOffset(0x76EE758E785F10D8);
+            return ref _Handle.AsRef<byte>(_SubdivOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChangeCountOffset;
+    private static nint? _ChangeCountOffset;
 
-  public ref byte ChangeCount {
-    get {
-      if (_ChangeCountOffset == null) {
-        _ChangeCountOffset = Schema.GetOffset(0x76EE758E167C12A8);
-      }
-      return ref _Handle.AsRef<byte>(_ChangeCountOffset!.Value);
+    public ref byte ChangeCount {
+        get {
+            _ChangeCountOffset = _ChangeCountOffset ?? Schema.GetOffset(0x76EE758E167C12A8);
+            return ref _Handle.AsRef<byte>(_ChangeCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _RopeLengthOffset;
+    private static nint? _RopeLengthOffset;
 
-  public ref short RopeLength {
-    get {
-      if (_RopeLengthOffset == null) {
-        _RopeLengthOffset = Schema.GetOffset(0x76EE758EC27FC78D);
-      }
-      return ref _Handle.AsRef<short>(_RopeLengthOffset!.Value);
+    public ref short RopeLength {
+        get {
+            _RopeLengthOffset = _RopeLengthOffset ?? Schema.GetOffset(0x76EE758EC27FC78D);
+            return ref _Handle.AsRef<short>(_RopeLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _LockedPointsOffset;
+    private static nint? _LockedPointsOffset;
 
-  public ref byte LockedPoints {
-    get {
-      if (_LockedPointsOffset == null) {
-        _LockedPointsOffset = Schema.GetOffset(0x76EE758ECE6446D4);
-      }
-      return ref _Handle.AsRef<byte>(_LockedPointsOffset!.Value);
+    public ref byte LockedPoints {
+        get {
+            _LockedPointsOffset = _LockedPointsOffset ?? Schema.GetOffset(0x76EE758ECE6446D4);
+            return ref _Handle.AsRef<byte>(_LockedPointsOffset!.Value);
+        }
     }
-  }
-  private static nint? _CreatedFromMapFileOffset;
+    private static nint? _CreatedFromMapFileOffset;
 
-  public ref bool CreatedFromMapFile {
-    get {
-      if (_CreatedFromMapFileOffset == null) {
-        _CreatedFromMapFileOffset = Schema.GetOffset(0x76EE758EB4684909);
-      }
-      return ref _Handle.AsRef<bool>(_CreatedFromMapFileOffset!.Value);
+    public ref bool CreatedFromMapFile {
+        get {
+            _CreatedFromMapFileOffset = _CreatedFromMapFileOffset ?? Schema.GetOffset(0x76EE758EB4684909);
+            return ref _Handle.AsRef<bool>(_CreatedFromMapFileOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScrollSpeedOffset;
+    private static nint? _ScrollSpeedOffset;
 
-  public ref float ScrollSpeed {
-    get {
-      if (_ScrollSpeedOffset == null) {
-        _ScrollSpeedOffset = Schema.GetOffset(0x76EE758E448C9F71);
-      }
-      return ref _Handle.AsRef<float>(_ScrollSpeedOffset!.Value);
+    public ref float ScrollSpeed {
+        get {
+            _ScrollSpeedOffset = _ScrollSpeedOffset ?? Schema.GetOffset(0x76EE758E448C9F71);
+            return ref _Handle.AsRef<float>(_ScrollSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartPointValidOffset;
+    private static nint? _StartPointValidOffset;
 
-  public ref bool StartPointValid {
-    get {
-      if (_StartPointValidOffset == null) {
-        _StartPointValidOffset = Schema.GetOffset(0x76EE758E949209D3);
-      }
-      return ref _Handle.AsRef<bool>(_StartPointValidOffset!.Value);
+    public ref bool StartPointValid {
+        get {
+            _StartPointValidOffset = _StartPointValidOffset ?? Schema.GetOffset(0x76EE758E949209D3);
+            return ref _Handle.AsRef<bool>(_StartPointValidOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndPointValidOffset;
+    private static nint? _EndPointValidOffset;
 
-  public ref bool EndPointValid {
-    get {
-      if (_EndPointValidOffset == null) {
-        _EndPointValidOffset = Schema.GetOffset(0x76EE758E938F0CDE);
-      }
-      return ref _Handle.AsRef<bool>(_EndPointValidOffset!.Value);
+    public ref bool EndPointValid {
+        get {
+            _EndPointValidOffset = _EndPointValidOffset ?? Schema.GetOffset(0x76EE758E938F0CDE);
+            return ref _Handle.AsRef<bool>(_EndPointValidOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartPointOffset;
+    private static nint? _StartPointOffset;
 
-  public ref CHandle<CBaseEntity> StartPoint {
-    get {
-      if (_StartPointOffset == null) {
-        _StartPointOffset = Schema.GetOffset(0x76EE758ECCE549A9);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_StartPointOffset!.Value);
+    public ref CHandle<CBaseEntity> StartPoint {
+        get {
+            _StartPointOffset = _StartPointOffset ?? Schema.GetOffset(0x76EE758ECCE549A9);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_StartPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndPointOffset;
+    private static nint? _EndPointOffset;
 
-  public ref CHandle<CBaseEntity> EndPoint {
-    get {
-      if (_EndPointOffset == null) {
-        _EndPointOffset = Schema.GetOffset(0x76EE758E5E8C8D3A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EndPointOffset!.Value);
+    public ref CHandle<CBaseEntity> EndPoint {
+        get {
+            _EndPointOffset = _EndPointOffset ?? Schema.GetOffset(0x76EE758E5E8C8D3A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EndPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartAttachmentOffset;
+    private static nint? _StartAttachmentOffset;
 
-  public AttachmentHandle_t StartAttachment {
-    get {
-      if (_StartAttachmentOffset == null) {
-        _StartAttachmentOffset = Schema.GetOffset(0x76EE758E1022E6F5);
-      }
-      return new AttachmentHandle_tImpl(_Handle + _StartAttachmentOffset!.Value);
+    public AttachmentHandle_t StartAttachment {
+        get {
+            _StartAttachmentOffset = _StartAttachmentOffset ?? Schema.GetOffset(0x76EE758E1022E6F5);
+            return new AttachmentHandle_tImpl(_Handle + _StartAttachmentOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndAttachmentOffset;
+    private static nint? _EndAttachmentOffset;
 
-  public AttachmentHandle_t EndAttachment {
-    get {
-      if (_EndAttachmentOffset == null) {
-        _EndAttachmentOffset = Schema.GetOffset(0x76EE758ED537713C);
-      }
-      return new AttachmentHandle_tImpl(_Handle + _EndAttachmentOffset!.Value);
+    public AttachmentHandle_t EndAttachment {
+        get {
+            _EndAttachmentOffset = _EndAttachmentOffset ?? Schema.GetOffset(0x76EE758ED537713C);
+            return new AttachmentHandle_tImpl(_Handle + _EndAttachmentOffset!.Value);
+        }
     }
-  }
 
-  public void RopeFlagsUpdated() {
-    Schema.Update(_Handle, 0x76EE758E2EF994F4);
-  }
-  public void SlackUpdated() {
-    Schema.Update(_Handle, 0x76EE758E84ECDEA7);
-  }
-  public void WidthUpdated() {
-    Schema.Update(_Handle, 0x76EE758E2FD9239F);
-  }
-  public void TextureScaleUpdated() {
-    Schema.Update(_Handle, 0x76EE758EA14A014E);
-  }
-  public void SegmentsUpdated() {
-    Schema.Update(_Handle, 0x76EE758E4878E17B);
-  }
-  public void ConstrainBetweenEndpointsUpdated() {
-    Schema.Update(_Handle, 0x76EE758E05033E3C);
-  }
-  public void RopeMaterialModelIndexUpdated() {
-    Schema.Update(_Handle, 0x76EE758E831DE452);
-  }
-  public void SubdivUpdated() {
-    Schema.Update(_Handle, 0x76EE758E785F10D8);
-  }
-  public void ChangeCountUpdated() {
-    Schema.Update(_Handle, 0x76EE758E167C12A8);
-  }
-  public void RopeLengthUpdated() {
-    Schema.Update(_Handle, 0x76EE758EC27FC78D);
-  }
-  public void LockedPointsUpdated() {
-    Schema.Update(_Handle, 0x76EE758ECE6446D4);
-  }
-  public void ScrollSpeedUpdated() {
-    Schema.Update(_Handle, 0x76EE758E448C9F71);
-  }
-  public void StartPointUpdated() {
-    Schema.Update(_Handle, 0x76EE758ECCE549A9);
-  }
-  public void EndPointUpdated() {
-    Schema.Update(_Handle, 0x76EE758E5E8C8D3A);
-  }
-  public void StartAttachmentUpdated() {
-    Schema.Update(_Handle, 0x76EE758E1022E6F5);
-  }
-  public void EndAttachmentUpdated() {
-    Schema.Update(_Handle, 0x76EE758ED537713C);
-  }
+    public void RopeFlagsUpdated() => Schema.Update(_Handle, 0x76EE758E2EF994F4);
+    public void SlackUpdated() => Schema.Update(_Handle, 0x76EE758E84ECDEA7);
+    public void WidthUpdated() => Schema.Update(_Handle, 0x76EE758E2FD9239F);
+    public void TextureScaleUpdated() => Schema.Update(_Handle, 0x76EE758EA14A014E);
+    public void SegmentsUpdated() => Schema.Update(_Handle, 0x76EE758E4878E17B);
+    public void ConstrainBetweenEndpointsUpdated() => Schema.Update(_Handle, 0x76EE758E05033E3C);
+    public void RopeMaterialModelIndexUpdated() => Schema.Update(_Handle, 0x76EE758E831DE452);
+    public void SubdivUpdated() => Schema.Update(_Handle, 0x76EE758E785F10D8);
+    public void ChangeCountUpdated() => Schema.Update(_Handle, 0x76EE758E167C12A8);
+    public void RopeLengthUpdated() => Schema.Update(_Handle, 0x76EE758EC27FC78D);
+    public void LockedPointsUpdated() => Schema.Update(_Handle, 0x76EE758ECE6446D4);
+    public void ScrollSpeedUpdated() => Schema.Update(_Handle, 0x76EE758E448C9F71);
+    public void StartPointUpdated() => Schema.Update(_Handle, 0x76EE758ECCE549A9);
+    public void EndPointUpdated() => Schema.Update(_Handle, 0x76EE758E5E8C8D3A);
+    public void StartAttachmentUpdated() => Schema.Update(_Handle, 0x76EE758E1022E6F5);
+    public void EndAttachmentUpdated() => Schema.Update(_Handle, 0x76EE758ED537713C);
 }

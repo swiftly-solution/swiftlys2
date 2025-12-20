@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface GameAmmoTypeInfo_t : AmmoTypeInfo_t, ISchemaClass<GameAmmoTypeInfo_t> {
+public partial interface GameAmmoTypeInfo_t : AmmoTypeInfo_t, ISchemaClass<GameAmmoTypeInfo_t>
+{
+    static GameAmmoTypeInfo_t ISchemaClass<GameAmmoTypeInfo_t>.From(nint handle) => new GameAmmoTypeInfo_tImpl(handle);
+    static int ISchemaClass<GameAmmoTypeInfo_t>.Size => 80;
+    static string? ISchemaClass<GameAmmoTypeInfo_t>.ClassName => null;
 
-  static GameAmmoTypeInfo_t ISchemaClass<GameAmmoTypeInfo_t>.From(nint handle) => new GameAmmoTypeInfo_tImpl(handle);
-  static int ISchemaClass<GameAmmoTypeInfo_t>.Size => 80;
-  static string? ISchemaClass<GameAmmoTypeInfo_t>.ClassName => null;
 
-  
-  public ref int BuySize { get; }
-  
-  public ref int Cost { get; }
+    public ref int BuySize { get; }
+
+    public ref int Cost { get; }
 
 
 }

@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseGraphDef : ISchemaClass<CPulseGraphDef> {
+public partial interface CPulseGraphDef : ISchemaClass<CPulseGraphDef>
+{
+    static CPulseGraphDef ISchemaClass<CPulseGraphDef>.From(nint handle) => new CPulseGraphDefImpl(handle);
+    static int ISchemaClass<CPulseGraphDef>.Size => 408;
+    static string? ISchemaClass<CPulseGraphDef>.ClassName => null;
 
-  static CPulseGraphDef ISchemaClass<CPulseGraphDef>.From(nint handle) => new CPulseGraphDefImpl(handle);
-  static int ISchemaClass<CPulseGraphDef>.Size => 408;
-  static string? ISchemaClass<CPulseGraphDef>.ClassName => null;
 
-  
-  // PulseSymbol_t
-  public SchemaUntypedField DomainIdentifier { get; }
-  
-  // CPulseValueFullType
-  public SchemaUntypedField DomainSubType { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField ParentMapName { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField ParentXmlName { get; }
-  
-  public ref CUtlVector<PointerTo<CPulse_Chunk>> Chunks { get; }
-  
-  public ref CUtlVector<PointerTo<CPulseCell_Base>> Cells { get; }
-  
-  public ref CUtlVector<CPulse_Variable> Vars { get; }
-  
-  public ref CUtlVector<CPulse_PublicOutput> PublicOutputs { get; }
-  
-  public ref CUtlVector<PointerTo<CPulse_InvokeBinding>> InvokeBindings { get; }
-  
-  public ref CUtlVector<PointerTo<CPulse_CallInfo>> CallInfos { get; }
-  
-  public ref CUtlVector<CPulse_Constant> Constants { get; }
-  
-  public ref CUtlVector<CPulse_DomainValue> DomainValues { get; }
-  
-  public ref CUtlVector<CPulse_BlackboardReference> BlackboardReferences { get; }
-  
-  public ref CUtlVector<PointerTo<CPulse_OutputConnection>> OutputConnections { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField DomainIdentifier { get; }
+
+    // CPulseValueFullType
+    public SchemaUntypedField DomainSubType { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField ParentMapName { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField ParentXmlName { get; }
+
+    public ref CUtlVector<PointerTo<CPulse_Chunk>> Chunks { get; }
+
+    public ref CUtlVector<PointerTo<CPulseCell_Base>> Cells { get; }
+
+    public ref CUtlVector<CPulse_Variable> Vars { get; }
+
+    public ref CUtlVector<CPulse_PublicOutput> PublicOutputs { get; }
+
+    public ref CUtlVector<PointerTo<CPulse_InvokeBinding>> InvokeBindings { get; }
+
+    public ref CUtlVector<PointerTo<CPulse_CallInfo>> CallInfos { get; }
+
+    public ref CUtlVector<CPulse_Constant> Constants { get; }
+
+    public ref CUtlVector<CPulse_DomainValue> DomainValues { get; }
+
+    public ref CUtlVector<CPulse_BlackboardReference> BlackboardReferences { get; }
+
+    public ref CUtlVector<PointerTo<CPulse_OutputConnection>> OutputConnections { get; }
 
 
 }

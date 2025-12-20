@@ -8,76 +8,76 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBasePlayerPawn : CBaseCombatCharacter, ISchemaClass<CBasePlayerPawn> {
+public partial interface CBasePlayerPawn : CBaseCombatCharacter, ISchemaClass<CBasePlayerPawn>
+{
+    static CBasePlayerPawn ISchemaClass<CBasePlayerPawn>.From(nint handle) => new CBasePlayerPawnImpl(handle);
+    static int ISchemaClass<CBasePlayerPawn>.Size => 3472;
+    static string? ISchemaClass<CBasePlayerPawn>.ClassName => "baseplayerpawn";
 
-  static CBasePlayerPawn ISchemaClass<CBasePlayerPawn>.From(nint handle) => new CBasePlayerPawnImpl(handle);
-  static int ISchemaClass<CBasePlayerPawn>.Size => 3472;
-  static string? ISchemaClass<CBasePlayerPawn>.ClassName => "baseplayerpawn";
 
-  
-  public CPlayer_WeaponServices? WeaponServices { get; }
-  
-  public CPlayer_ItemServices? ItemServices { get; }
-  
-  public CPlayer_AutoaimServices? AutoaimServices { get; }
-  
-  public CPlayer_ObserverServices? ObserverServices { get; }
-  
-  public CPlayer_WaterServices? WaterServices { get; }
-  
-  public CPlayer_UseServices? UseServices { get; }
-  
-  public CPlayer_FlashlightServices? FlashlightServices { get; }
-  
-  public CPlayer_CameraServices? CameraServices { get; }
-  
-  public CPlayer_MovementServices? MovementServices { get; }
-  
-  public ref CUtlVector<ViewAngleServerChange_t> ServerViewAngleChanges { get; }
-  
-  public ref QAngle V_angle { get; }
-  
-  public ref QAngle V_anglePrevious { get; }
-  
-  public ref uint HideHUD { get; }
-  
-  public sky3dparams_t Skybox3d { get; }
-  
-  public GameTime_t TimeLastHurt { get; }
-  
-  public GameTime_t DeathTime { get; }
-  
-  public GameTime_t NextSuicideTime { get; }
-  
-  public ref bool InitHUD { get; }
-  
-  public CAI_Expresser? Expresser { get; }
-  
-  public ref CHandle<CBasePlayerController> Controller { get; }
-  
-  public ref CHandle<CBasePlayerController> DefaultController { get; }
-  
-  public ref float HltvReplayDelay { get; }
-  
-  public ref float HltvReplayEnd { get; }
-  
-  public ref uint HltvReplayEntity { get; }
-  
-  public ref CUtlVector<sndopvarlatchdata_t> SndOpvarLatchData { get; }
+    public CPlayer_WeaponServices? WeaponServices { get; }
 
-  public void WeaponServicesUpdated();
-  public void ItemServicesUpdated();
-  public void AutoaimServicesUpdated();
-  public void ObserverServicesUpdated();
-  public void WaterServicesUpdated();
-  public void UseServicesUpdated();
-  public void FlashlightServicesUpdated();
-  public void CameraServicesUpdated();
-  public void MovementServicesUpdated();
-  public void ServerViewAngleChangesUpdated();
-  public void HideHUDUpdated();
-  public void Skybox3dUpdated();
-  public void DeathTimeUpdated();
-  public void ControllerUpdated();
-  public void DefaultControllerUpdated();
+    public CPlayer_ItemServices? ItemServices { get; }
+
+    public CPlayer_AutoaimServices? AutoaimServices { get; }
+
+    public CPlayer_ObserverServices? ObserverServices { get; }
+
+    public CPlayer_WaterServices? WaterServices { get; }
+
+    public CPlayer_UseServices? UseServices { get; }
+
+    public CPlayer_FlashlightServices? FlashlightServices { get; }
+
+    public CPlayer_CameraServices? CameraServices { get; }
+
+    public CPlayer_MovementServices? MovementServices { get; }
+
+    public ref CUtlVector<ViewAngleServerChange_t> ServerViewAngleChanges { get; }
+
+    public ref QAngle V_angle { get; }
+
+    public ref QAngle V_anglePrevious { get; }
+
+    public ref uint HideHUD { get; }
+
+    public sky3dparams_t Skybox3d { get; }
+
+    public GameTime_t TimeLastHurt { get; }
+
+    public GameTime_t DeathTime { get; }
+
+    public GameTime_t NextSuicideTime { get; }
+
+    public ref bool InitHUD { get; }
+
+    public CAI_Expresser? Expresser { get; }
+
+    public ref CHandle<CBasePlayerController> Controller { get; }
+
+    public ref CHandle<CBasePlayerController> DefaultController { get; }
+
+    public ref float HltvReplayDelay { get; }
+
+    public ref float HltvReplayEnd { get; }
+
+    public ref uint HltvReplayEntity { get; }
+
+    public ref CUtlVector<sndopvarlatchdata_t> SndOpvarLatchData { get; }
+
+    public void WeaponServicesUpdated();
+    public void ItemServicesUpdated();
+    public void AutoaimServicesUpdated();
+    public void ObserverServicesUpdated();
+    public void WaterServicesUpdated();
+    public void UseServicesUpdated();
+    public void FlashlightServicesUpdated();
+    public void CameraServicesUpdated();
+    public void MovementServicesUpdated();
+    public void ServerViewAngleChangesUpdated();
+    public void HideHUDUpdated();
+    public void Skybox3dUpdated();
+    public void DeathTimeUpdated();
+    public void ControllerUpdated();
+    public void DefaultControllerUpdated();
 }

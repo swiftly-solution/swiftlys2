@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AggregateInstanceStream_t : byte {
-
+public enum AggregateInstanceStream_t : byte
+{
  AGGREGATE_INSTANCE_STREAM_NONE = 0,
 
  AGGREGATE_INSTANCE_STREAM_LIGHTMAPUV_UNORM16 = 1,

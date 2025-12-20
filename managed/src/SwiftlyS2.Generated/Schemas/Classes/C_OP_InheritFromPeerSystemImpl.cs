@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_InheritFromPeerSystemImpl : CParticleFunctionOperatorImpl, C_OP_InheritFromPeerSystem {
+internal partial class C_OP_InheritFromPeerSystemImpl : CParticleFunctionOperatorImpl, C_OP_InheritFromPeerSystem
+{
+    public C_OP_InheritFromPeerSystemImpl(nint handle) : base(handle) { }
 
-  public C_OP_InheritFromPeerSystemImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x8105C85DE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x8105C85DE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldInputOffset;
+    private static nint? _FieldInputOffset;
 
-  public ParticleAttributeIndex_t FieldInput {
-    get {
-      if (_FieldInputOffset == null) {
-        _FieldInputOffset = Schema.GetOffset(0x8105C85DAE775669);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+    public ParticleAttributeIndex_t FieldInput {
+        get {
+            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0x8105C85DAE775669);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _IncrementOffset;
+    private static nint? _IncrementOffset;
 
-  public ref int Increment {
-    get {
-      if (_IncrementOffset == null) {
-        _IncrementOffset = Schema.GetOffset(0x8105C85D2359F182);
-      }
-      return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+    public ref int Increment {
+        get {
+            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0x8105C85D2359F182);
+            return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+        }
     }
-  }
-  private static nint? _GroupIDOffset;
+    private static nint? _GroupIDOffset;
 
-  public ref int GroupID {
-    get {
-      if (_GroupIDOffset == null) {
-        _GroupIDOffset = Schema.GetOffset(0x8105C85D3BB05135);
-      }
-      return ref _Handle.AsRef<int>(_GroupIDOffset!.Value);
+    public ref int GroupID {
+        get {
+            _GroupIDOffset = _GroupIDOffset ?? Schema.GetOffset(0x8105C85D3BB05135);
+            return ref _Handle.AsRef<int>(_GroupIDOffset!.Value);
+        }
     }
-  }
 
 
 }

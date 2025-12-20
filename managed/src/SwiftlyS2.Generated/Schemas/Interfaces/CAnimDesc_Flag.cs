@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimDesc_Flag : ISchemaClass<CAnimDesc_Flag> {
+public partial interface CAnimDesc_Flag : ISchemaClass<CAnimDesc_Flag>
+{
+    static CAnimDesc_Flag ISchemaClass<CAnimDesc_Flag>.From(nint handle) => new CAnimDesc_FlagImpl(handle);
+    static int ISchemaClass<CAnimDesc_Flag>.Size => 8;
+    static string? ISchemaClass<CAnimDesc_Flag>.ClassName => null;
 
-  static CAnimDesc_Flag ISchemaClass<CAnimDesc_Flag>.From(nint handle) => new CAnimDesc_FlagImpl(handle);
-  static int ISchemaClass<CAnimDesc_Flag>.Size => 8;
-  static string? ISchemaClass<CAnimDesc_Flag>.ClassName => null;
 
-  
-  public ref bool Looping { get; }
-  
-  public ref bool AllZeros { get; }
-  
-  public ref bool Hidden { get; }
-  
-  public ref bool Delta { get; }
-  
-  public ref bool LegacyWorldspace { get; }
-  
-  public ref bool ModelDoc { get; }
-  
-  public ref bool ImplicitSeqIgnoreDelta { get; }
-  
-  public ref bool AnimGraphAdditive { get; }
+    public ref bool Looping { get; }
+
+    public ref bool AllZeros { get; }
+
+    public ref bool Hidden { get; }
+
+    public ref bool Delta { get; }
+
+    public ref bool LegacyWorldspace { get; }
+
+    public ref bool ModelDoc { get; }
+
+    public ref bool ImplicitSeqIgnoreDelta { get; }
+
+    public ref bool AnimGraphAdditive { get; }
 
 
 }

@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_MovementRigidAttachToCP : CParticleFunctionOperator, ISchemaClass<C_OP_MovementRigidAttachToCP> {
+public partial interface C_OP_MovementRigidAttachToCP : CParticleFunctionOperator, ISchemaClass<C_OP_MovementRigidAttachToCP>
+{
+    static C_OP_MovementRigidAttachToCP ISchemaClass<C_OP_MovementRigidAttachToCP>.From(nint handle) => new C_OP_MovementRigidAttachToCPImpl(handle);
+    static int ISchemaClass<C_OP_MovementRigidAttachToCP>.Size => 488;
+    static string? ISchemaClass<C_OP_MovementRigidAttachToCP>.ClassName => null;
 
-  static C_OP_MovementRigidAttachToCP ISchemaClass<C_OP_MovementRigidAttachToCP>.From(nint handle) => new C_OP_MovementRigidAttachToCPImpl(handle);
-  static int ISchemaClass<C_OP_MovementRigidAttachToCP>.Size => 488;
-  static string? ISchemaClass<C_OP_MovementRigidAttachToCP>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref int ScaleControlPoint { get; }
-  
-  public ref int ScaleCPField { get; }
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref bool OffsetLocal { get; }
+    public ref int ControlPointNumber { get; }
+
+    public ref int ScaleControlPoint { get; }
+
+    public ref int ScaleCPField { get; }
+
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref bool OffsetLocal { get; }
 
 
 }

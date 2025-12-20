@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLookComponentUpdater : CAnimComponentUpdater, ISchemaClass<CLookComponentUpdater> {
+public partial interface CLookComponentUpdater : CAnimComponentUpdater, ISchemaClass<CLookComponentUpdater>
+{
+    static CLookComponentUpdater ISchemaClass<CLookComponentUpdater>.From(nint handle) => new CLookComponentUpdaterImpl(handle);
+    static int ISchemaClass<CLookComponentUpdater>.Size => 72;
+    static string? ISchemaClass<CLookComponentUpdater>.ClassName => null;
 
-  static CLookComponentUpdater ISchemaClass<CLookComponentUpdater>.From(nint handle) => new CLookComponentUpdaterImpl(handle);
-  static int ISchemaClass<CLookComponentUpdater>.Size => 72;
-  static string? ISchemaClass<CLookComponentUpdater>.ClassName => null;
 
-  
-  public CAnimParamHandle LookHeading { get; }
-  
-  public CAnimParamHandle LookHeadingNormalized { get; }
-  
-  public CAnimParamHandle LookHeadingVelocity { get; }
-  
-  public CAnimParamHandle LookPitch { get; }
-  
-  public CAnimParamHandle LookDistance { get; }
-  
-  public CAnimParamHandle LookDirection { get; }
-  
-  public CAnimParamHandle LookTarget { get; }
-  
-  public CAnimParamHandle LookTargetWorldSpace { get; }
-  
-  public ref bool NetworkLookTarget { get; }
+    public CAnimParamHandle LookHeading { get; }
+
+    public CAnimParamHandle LookHeadingNormalized { get; }
+
+    public CAnimParamHandle LookHeadingVelocity { get; }
+
+    public CAnimParamHandle LookPitch { get; }
+
+    public CAnimParamHandle LookDistance { get; }
+
+    public CAnimParamHandle LookDirection { get; }
+
+    public CAnimParamHandle LookTarget { get; }
+
+    public CAnimParamHandle LookTargetWorldSpace { get; }
+
+    public ref bool NetworkLookTarget { get; }
 
 
 }

@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface TextureControls_t : ISchemaClass<TextureControls_t> {
+public partial interface TextureControls_t : ISchemaClass<TextureControls_t>
+{
+    static TextureControls_t ISchemaClass<TextureControls_t>.From(nint handle) => new TextureControls_tImpl(handle);
+    static int ISchemaClass<TextureControls_t>.Size => 2608;
+    static string? ISchemaClass<TextureControls_t>.ClassName => null;
 
-  static TextureControls_t ISchemaClass<TextureControls_t>.From(nint handle) => new TextureControls_tImpl(handle);
-  static int ISchemaClass<TextureControls_t>.Size => 2608;
-  static string? ISchemaClass<TextureControls_t>.ClassName => null;
 
-  
-  public CParticleCollectionRendererFloatInput FinalTextureScaleU { get; }
-  
-  public CParticleCollectionRendererFloatInput FinalTextureScaleV { get; }
-  
-  public CParticleCollectionRendererFloatInput FinalTextureOffsetU { get; }
-  
-  public CParticleCollectionRendererFloatInput FinalTextureOffsetV { get; }
-  
-  public CParticleCollectionRendererFloatInput FinalTextureUVRotation { get; }
-  
-  public CParticleCollectionRendererFloatInput ZoomScale { get; }
-  
-  public CParticleCollectionRendererFloatInput Distortion { get; }
-  
-  public ref bool RandomizeOffsets { get; }
-  
-  public ref bool ClampUVs { get; }
-  
-  public ref SpriteCardPerParticleScale_t PerParticleBlend { get; }
-  
-  public ref SpriteCardPerParticleScale_t PerParticleScale { get; }
-  
-  public ref SpriteCardPerParticleScale_t PerParticleOffsetU { get; }
-  
-  public ref SpriteCardPerParticleScale_t PerParticleOffsetV { get; }
-  
-  public ref SpriteCardPerParticleScale_t PerParticleRotation { get; }
-  
-  public ref SpriteCardPerParticleScale_t PerParticleZoom { get; }
-  
-  public ref SpriteCardPerParticleScale_t PerParticleDistortion { get; }
+    public CParticleCollectionRendererFloatInput FinalTextureScaleU { get; }
+
+    public CParticleCollectionRendererFloatInput FinalTextureScaleV { get; }
+
+    public CParticleCollectionRendererFloatInput FinalTextureOffsetU { get; }
+
+    public CParticleCollectionRendererFloatInput FinalTextureOffsetV { get; }
+
+    public CParticleCollectionRendererFloatInput FinalTextureUVRotation { get; }
+
+    public CParticleCollectionRendererFloatInput ZoomScale { get; }
+
+    public CParticleCollectionRendererFloatInput Distortion { get; }
+
+    public ref bool RandomizeOffsets { get; }
+
+    public ref bool ClampUVs { get; }
+
+    public ref SpriteCardPerParticleScale_t PerParticleBlend { get; }
+
+    public ref SpriteCardPerParticleScale_t PerParticleScale { get; }
+
+    public ref SpriteCardPerParticleScale_t PerParticleOffsetU { get; }
+
+    public ref SpriteCardPerParticleScale_t PerParticleOffsetV { get; }
+
+    public ref SpriteCardPerParticleScale_t PerParticleRotation { get; }
+
+    public ref SpriteCardPerParticleScale_t PerParticleZoom { get; }
+
+    public ref SpriteCardPerParticleScale_t PerParticleDistortion { get; }
 
 
 }

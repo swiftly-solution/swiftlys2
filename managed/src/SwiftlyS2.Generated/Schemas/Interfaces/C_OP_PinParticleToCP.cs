@@ -8,40 +8,40 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_PinParticleToCP : CParticleFunctionOperator, ISchemaClass<C_OP_PinParticleToCP> {
+public partial interface C_OP_PinParticleToCP : CParticleFunctionOperator, ISchemaClass<C_OP_PinParticleToCP>
+{
+    static C_OP_PinParticleToCP ISchemaClass<C_OP_PinParticleToCP>.From(nint handle) => new C_OP_PinParticleToCPImpl(handle);
+    static int ISchemaClass<C_OP_PinParticleToCP>.Size => 4432;
+    static string? ISchemaClass<C_OP_PinParticleToCP>.ClassName => null;
 
-  static C_OP_PinParticleToCP ISchemaClass<C_OP_PinParticleToCP>.From(nint handle) => new C_OP_PinParticleToCPImpl(handle);
-  static int ISchemaClass<C_OP_PinParticleToCP>.Size => 4432;
-  static string? ISchemaClass<C_OP_PinParticleToCP>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public CParticleCollectionVecInput Offset { get; }
-  
-  public ref bool OffsetLocal { get; }
-  
-  public ref ParticleSelection_t ParticleSelection { get; }
-  
-  public CParticleCollectionFloatInput ParticleNumber { get; }
-  
-  public ref ParticlePinDistance_t PinBreakType { get; }
-  
-  public CParticleCollectionFloatInput BreakDistance { get; }
-  
-  public CParticleCollectionFloatInput BreakSpeed { get; }
-  
-  public CParticleCollectionFloatInput Age { get; }
-  
-  public ref int BreakControlPointNumber { get; }
-  
-  public ref int BreakControlPointNumber2 { get; }
-  
-  public CParticleCollectionFloatInput BreakValue { get; }
-  
-  public CPerParticleFloatInput Interpolation { get; }
-  
-  public ref bool RetainInitialVelocity { get; }
+    public ref int ControlPointNumber { get; }
+
+    public CParticleCollectionVecInput Offset { get; }
+
+    public ref bool OffsetLocal { get; }
+
+    public ref ParticleSelection_t ParticleSelection { get; }
+
+    public CParticleCollectionFloatInput ParticleNumber { get; }
+
+    public ref ParticlePinDistance_t PinBreakType { get; }
+
+    public CParticleCollectionFloatInput BreakDistance { get; }
+
+    public CParticleCollectionFloatInput BreakSpeed { get; }
+
+    public CParticleCollectionFloatInput Age { get; }
+
+    public ref int BreakControlPointNumber { get; }
+
+    public ref int BreakControlPointNumber2 { get; }
+
+    public CParticleCollectionFloatInput BreakValue { get; }
+
+    public CPerParticleFloatInput Interpolation { get; }
+
+    public ref bool RetainInitialVelocity { get; }
 
 
 }

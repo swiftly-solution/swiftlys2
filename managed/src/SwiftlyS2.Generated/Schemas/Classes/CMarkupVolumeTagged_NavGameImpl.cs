@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMarkupVolumeTagged_NavGameImpl : CMarkupVolumeWithRefImpl, CMarkupVolumeTagged_NavGame {
+internal partial class CMarkupVolumeTagged_NavGameImpl : CMarkupVolumeWithRefImpl, CMarkupVolumeTagged_NavGame
+{
+    public CMarkupVolumeTagged_NavGameImpl(nint handle) : base(handle) { }
 
-  public CMarkupVolumeTagged_NavGameImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScopesOffset;
 
-  private static nint? _ScopesOffset;
-
-  public ref NavScopeFlags_t Scopes {
-    get {
-      if (_ScopesOffset == null) {
-        _ScopesOffset = Schema.GetOffset(0xFB4AC8A49E6C8A44);
-      }
-      return ref _Handle.AsRef<NavScopeFlags_t>(_ScopesOffset!.Value);
+    public ref NavScopeFlags_t Scopes {
+        get {
+            _ScopesOffset = _ScopesOffset ?? Schema.GetOffset(0xFB4AC8A49E6C8A44);
+            return ref _Handle.AsRef<NavScopeFlags_t>(_ScopesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FloodFillAttributeOffset;
+    private static nint? _FloodFillAttributeOffset;
 
-  public ref bool FloodFillAttribute {
-    get {
-      if (_FloodFillAttributeOffset == null) {
-        _FloodFillAttributeOffset = Schema.GetOffset(0xFB4AC8A4ECF24446);
-      }
-      return ref _Handle.AsRef<bool>(_FloodFillAttributeOffset!.Value);
+    public ref bool FloodFillAttribute {
+        get {
+            _FloodFillAttributeOffset = _FloodFillAttributeOffset ?? Schema.GetOffset(0xFB4AC8A4ECF24446);
+            return ref _Handle.AsRef<bool>(_FloodFillAttributeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SplitNavSpaceOffset;
+    private static nint? _SplitNavSpaceOffset;
 
-  public ref bool SplitNavSpace {
-    get {
-      if (_SplitNavSpaceOffset == null) {
-        _SplitNavSpaceOffset = Schema.GetOffset(0xFB4AC8A438B16FC2);
-      }
-      return ref _Handle.AsRef<bool>(_SplitNavSpaceOffset!.Value);
+    public ref bool SplitNavSpace {
+        get {
+            _SplitNavSpaceOffset = _SplitNavSpaceOffset ?? Schema.GetOffset(0xFB4AC8A438B16FC2);
+            return ref _Handle.AsRef<bool>(_SplitNavSpaceOffset!.Value);
+        }
     }
-  }
 
 
 }

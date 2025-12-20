@@ -6,267 +6,216 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDecalInstanceImpl : SchemaClass, CDecalInstance {
+internal partial class CDecalInstanceImpl : SchemaClass, CDecalInstance
+{
+    public CDecalInstanceImpl(nint handle) : base(handle) { }
 
-  public CDecalInstanceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DecalGroupOffset;
 
-  private static nint? _DecalGroupOffset;
-
-  public ref CGlobalSymbol DecalGroup {
-    get {
-      if (_DecalGroupOffset == null) {
-        _DecalGroupOffset = Schema.GetOffset(0x88CA447CCEBD4836);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_DecalGroupOffset!.Value);
+    public ref CGlobalSymbol DecalGroup {
+        get {
+            _DecalGroupOffset = _DecalGroupOffset ?? Schema.GetOffset(0x88CA447CCEBD4836);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DecalGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialOffset;
+    private static nint? _MaterialOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material {
-    get {
-      if (_MaterialOffset == null) {
-        _MaterialOffset = Schema.GetOffset(0x88CA447C888CE42E);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material {
+        get {
+            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0x88CA447C888CE42E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceNameOffset;
+    private static nint? _SequenceNameOffset;
 
-  public ref CUtlStringToken SequenceName {
-    get {
-      if (_SequenceNameOffset == null) {
-        _SequenceNameOffset = Schema.GetOffset(0x88CA447C7462AF30);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_SequenceNameOffset!.Value);
+    public ref CUtlStringToken SequenceName {
+        get {
+            _SequenceNameOffset = _SequenceNameOffset ?? Schema.GetOffset(0x88CA447C7462AF30);
+            return ref _Handle.AsRef<CUtlStringToken>(_SequenceNameOffset!.Value);
+        }
     }
-  }
-  private static nint? _EntityOffset;
+    private static nint? _EntityOffset;
 
-  public ref CHandle<CBaseEntity> Entity {
-    get {
-      if (_EntityOffset == null) {
-        _EntityOffset = Schema.GetOffset(0x88CA447C6EBADCB0);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+    public ref CHandle<CBaseEntity> Entity {
+        get {
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0x88CA447C6EBADCB0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneIndexOffset;
+    private static nint? _BoneIndexOffset;
 
-  public ref int BoneIndex {
-    get {
-      if (_BoneIndexOffset == null) {
-        _BoneIndexOffset = Schema.GetOffset(0x88CA447C9F407B79);
-      }
-      return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+    public ref int BoneIndex {
+        get {
+            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0x88CA447C9F407B79);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriangleIndexOffset;
+    private static nint? _TriangleIndexOffset;
 
-  public ref int TriangleIndex {
-    get {
-      if (_TriangleIndexOffset == null) {
-        _TriangleIndexOffset = Schema.GetOffset(0x88CA447C4465462F);
-      }
-      return ref _Handle.AsRef<int>(_TriangleIndexOffset!.Value);
+    public ref int TriangleIndex {
+        get {
+            _TriangleIndexOffset = _TriangleIndexOffset ?? Schema.GetOffset(0x88CA447C4465462F);
+            return ref _Handle.AsRef<int>(_TriangleIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _PositionLSOffset;
+    private static nint? _PositionLSOffset;
 
-  public ref Vector PositionLS {
-    get {
-      if (_PositionLSOffset == null) {
-        _PositionLSOffset = Schema.GetOffset(0x88CA447C9D27001F);
-      }
-      return ref _Handle.AsRef<Vector>(_PositionLSOffset!.Value);
+    public ref Vector PositionLS {
+        get {
+            _PositionLSOffset = _PositionLSOffset ?? Schema.GetOffset(0x88CA447C9D27001F);
+            return ref _Handle.AsRef<Vector>(_PositionLSOffset!.Value);
+        }
     }
-  }
-  private static nint? _NormalLSOffset;
+    private static nint? _NormalLSOffset;
 
-  public ref Vector NormalLS {
-    get {
-      if (_NormalLSOffset == null) {
-        _NormalLSOffset = Schema.GetOffset(0x88CA447C1C20D7C7);
-      }
-      return ref _Handle.AsRef<Vector>(_NormalLSOffset!.Value);
+    public ref Vector NormalLS {
+        get {
+            _NormalLSOffset = _NormalLSOffset ?? Schema.GetOffset(0x88CA447C1C20D7C7);
+            return ref _Handle.AsRef<Vector>(_NormalLSOffset!.Value);
+        }
     }
-  }
-  private static nint? _SAxisLSOffset;
+    private static nint? _SAxisLSOffset;
 
-  public ref Vector SAxisLS {
-    get {
-      if (_SAxisLSOffset == null) {
-        _SAxisLSOffset = Schema.GetOffset(0x88CA447C95DE878A);
-      }
-      return ref _Handle.AsRef<Vector>(_SAxisLSOffset!.Value);
+    public ref Vector SAxisLS {
+        get {
+            _SAxisLSOffset = _SAxisLSOffset ?? Schema.GetOffset(0x88CA447C95DE878A);
+            return ref _Handle.AsRef<Vector>(_SAxisLSOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref DecalFlags_t Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x88CA447CCE6E9C28);
-      }
-      return ref _Handle.AsRef<DecalFlags_t>(_FlagsOffset!.Value);
+    public ref DecalFlags_t Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x88CA447CCE6E9C28);
+            return ref _Handle.AsRef<DecalFlags_t>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorOffset;
+    private static nint? _ColorOffset;
 
-  public ref Color Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x88CA447CD7D017D8);
-      }
-      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+    public ref Color Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x88CA447CD7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _WidthOffset;
+    private static nint? _WidthOffset;
 
-  public ref float Width {
-    get {
-      if (_WidthOffset == null) {
-        _WidthOffset = Schema.GetOffset(0x88CA447CB91935E1);
-      }
-      return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+    public ref float Width {
+        get {
+            _WidthOffset = _WidthOffset ?? Schema.GetOffset(0x88CA447CB91935E1);
+            return ref _Handle.AsRef<float>(_WidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _HeightOffset;
+    private static nint? _HeightOffset;
 
-  public ref float Height {
-    get {
-      if (_HeightOffset == null) {
-        _HeightOffset = Schema.GetOffset(0x88CA447CEADD7FB0);
-      }
-      return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+    public ref float Height {
+        get {
+            _HeightOffset = _HeightOffset ?? Schema.GetOffset(0x88CA447CEADD7FB0);
+            return ref _Handle.AsRef<float>(_HeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepthOffset;
+    private static nint? _DepthOffset;
 
-  public ref float Depth {
-    get {
-      if (_DepthOffset == null) {
-        _DepthOffset = Schema.GetOffset(0x88CA447CD3AD54E8);
-      }
-      return ref _Handle.AsRef<float>(_DepthOffset!.Value);
+    public ref float Depth {
+        get {
+            _DepthOffset = _DepthOffset ?? Schema.GetOffset(0x88CA447CD3AD54E8);
+            return ref _Handle.AsRef<float>(_DepthOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimationScaleOffset;
+    private static nint? _AnimationScaleOffset;
 
-  public ref float AnimationScale {
-    get {
-      if (_AnimationScaleOffset == null) {
-        _AnimationScaleOffset = Schema.GetOffset(0x88CA447CE03B2F87);
-      }
-      return ref _Handle.AsRef<float>(_AnimationScaleOffset!.Value);
+    public ref float AnimationScale {
+        get {
+            _AnimationScaleOffset = _AnimationScaleOffset ?? Schema.GetOffset(0x88CA447CE03B2F87);
+            return ref _Handle.AsRef<float>(_AnimationScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimationStartTimeOffset;
+    private static nint? _AnimationStartTimeOffset;
 
-  public ref float AnimationStartTime {
-    get {
-      if (_AnimationStartTimeOffset == null) {
-        _AnimationStartTimeOffset = Schema.GetOffset(0x88CA447CDC58A88C);
-      }
-      return ref _Handle.AsRef<float>(_AnimationStartTimeOffset!.Value);
+    public ref float AnimationStartTime {
+        get {
+            _AnimationStartTimeOffset = _AnimationStartTimeOffset ?? Schema.GetOffset(0x88CA447CDC58A88C);
+            return ref _Handle.AsRef<float>(_AnimationStartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlaceTimeOffset;
+    private static nint? _PlaceTimeOffset;
 
-  public GameTime_t PlaceTime {
-    get {
-      if (_PlaceTimeOffset == null) {
-        _PlaceTimeOffset = Schema.GetOffset(0x88CA447C1103AE77);
-      }
-      return new GameTime_tImpl(_Handle + _PlaceTimeOffset!.Value);
+    public GameTime_t PlaceTime {
+        get {
+            _PlaceTimeOffset = _PlaceTimeOffset ?? Schema.GetOffset(0x88CA447C1103AE77);
+            return new GameTime_tImpl(_Handle + _PlaceTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeStartTimeOffset;
+    private static nint? _FadeStartTimeOffset;
 
-  public ref float FadeStartTime {
-    get {
-      if (_FadeStartTimeOffset == null) {
-        _FadeStartTimeOffset = Schema.GetOffset(0x88CA447C86B28BFA);
-      }
-      return ref _Handle.AsRef<float>(_FadeStartTimeOffset!.Value);
+    public ref float FadeStartTime {
+        get {
+            _FadeStartTimeOffset = _FadeStartTimeOffset ?? Schema.GetOffset(0x88CA447C86B28BFA);
+            return ref _Handle.AsRef<float>(_FadeStartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeDurationOffset;
+    private static nint? _FadeDurationOffset;
 
-  public ref float FadeDuration {
-    get {
-      if (_FadeDurationOffset == null) {
-        _FadeDurationOffset = Schema.GetOffset(0x88CA447CC4E6DEE1);
-      }
-      return ref _Handle.AsRef<float>(_FadeDurationOffset!.Value);
+    public ref float FadeDuration {
+        get {
+            _FadeDurationOffset = _FadeDurationOffset ?? Schema.GetOffset(0x88CA447CC4E6DEE1);
+            return ref _Handle.AsRef<float>(_FadeDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _LightingOriginOffsetOffset;
+    private static nint? _LightingOriginOffsetOffset;
 
-  public ref float LightingOriginOffset {
-    get {
-      if (_LightingOriginOffsetOffset == null) {
-        _LightingOriginOffsetOffset = Schema.GetOffset(0x88CA447CBB88AF36);
-      }
-      return ref _Handle.AsRef<float>(_LightingOriginOffsetOffset!.Value);
+    public ref float LightingOriginOffset {
+        get {
+            _LightingOriginOffsetOffset = _LightingOriginOffsetOffset ?? Schema.GetOffset(0x88CA447CBB88AF36);
+            return ref _Handle.AsRef<float>(_LightingOriginOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoundingRadiusSqrOffset;
+    private static nint? _BoundingRadiusSqrOffset;
 
-  public ref float BoundingRadiusSqr {
-    get {
-      if (_BoundingRadiusSqrOffset == null) {
-        _BoundingRadiusSqrOffset = Schema.GetOffset(0x88CA447CEA90D145);
-      }
-      return ref _Handle.AsRef<float>(_BoundingRadiusSqrOffset!.Value);
+    public ref float BoundingRadiusSqr {
+        get {
+            _BoundingRadiusSqrOffset = _BoundingRadiusSqrOffset ?? Schema.GetOffset(0x88CA447CEA90D145);
+            return ref _Handle.AsRef<float>(_BoundingRadiusSqrOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceIndexOffset;
+    private static nint? _SequenceIndexOffset;
 
-  public ref short SequenceIndex {
-    get {
-      if (_SequenceIndexOffset == null) {
-        _SequenceIndexOffset = Schema.GetOffset(0x88CA447CF87A9C78);
-      }
-      return ref _Handle.AsRef<short>(_SequenceIndexOffset!.Value);
+    public ref short SequenceIndex {
+        get {
+            _SequenceIndexOffset = _SequenceIndexOffset ?? Schema.GetOffset(0x88CA447CF87A9C78);
+            return ref _Handle.AsRef<short>(_SequenceIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsAdjacentOffset;
+    private static nint? _IsAdjacentOffset;
 
-  public ref bool IsAdjacent {
-    get {
-      if (_IsAdjacentOffset == null) {
-        _IsAdjacentOffset = Schema.GetOffset(0x88CA447C87EAB10F);
-      }
-      return ref _Handle.AsRef<bool>(_IsAdjacentOffset!.Value);
+    public ref bool IsAdjacent {
+        get {
+            _IsAdjacentOffset = _IsAdjacentOffset ?? Schema.GetOffset(0x88CA447C87EAB10F);
+            return ref _Handle.AsRef<bool>(_IsAdjacentOffset!.Value);
+        }
     }
-  }
-  private static nint? _DoDecalLightmappingOffset;
+    private static nint? _DoDecalLightmappingOffset;
 
-  public ref bool DoDecalLightmapping {
-    get {
-      if (_DoDecalLightmappingOffset == null) {
-        _DoDecalLightmappingOffset = Schema.GetOffset(0x88CA447C8A2CC817);
-      }
-      return ref _Handle.AsRef<bool>(_DoDecalLightmappingOffset!.Value);
+    public ref bool DoDecalLightmapping {
+        get {
+            _DoDecalLightmappingOffset = _DoDecalLightmappingOffset ?? Schema.GetOffset(0x88CA447C8A2CC817);
+            return ref _Handle.AsRef<bool>(_DoDecalLightmappingOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkinnedModelModeOffset;
+    private static nint? _SkinnedModelModeOffset;
 
-  public ref DecalMode_t SkinnedModelMode {
-    get {
-      if (_SkinnedModelModeOffset == null) {
-        _SkinnedModelModeOffset = Schema.GetOffset(0x88CA447CFB03C3D7);
-      }
-      return ref _Handle.AsRef<DecalMode_t>(_SkinnedModelModeOffset!.Value);
+    public ref DecalMode_t SkinnedModelMode {
+        get {
+            _SkinnedModelModeOffset = _SkinnedModelModeOffset ?? Schema.GetOffset(0x88CA447CFB03C3D7);
+            return ref _Handle.AsRef<DecalMode_t>(_SkinnedModelModeOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,70 +8,70 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleSystem : CBaseModelEntity, ISchemaClass<CParticleSystem> {
+public partial interface CParticleSystem : CBaseModelEntity, ISchemaClass<CParticleSystem>
+{
+    static CParticleSystem ISchemaClass<CParticleSystem>.From(nint handle) => new CParticleSystemImpl(handle);
+    static int ISchemaClass<CParticleSystem>.Size => 3408;
+    static string? ISchemaClass<CParticleSystem>.ClassName => "info_particle_system";
 
-  static CParticleSystem ISchemaClass<CParticleSystem>.From(nint handle) => new CParticleSystemImpl(handle);
-  static int ISchemaClass<CParticleSystem>.Size => 3408;
-  static string? ISchemaClass<CParticleSystem>.ClassName => "info_particle_system";
 
-  
-  public string SnapshotFileName { get; set; }
-  
-  public ref bool Active { get; }
-  
-  public ref bool Frozen { get; }
-  
-  public ref float FreezeTransitionDuration { get; }
-  
-  public ref int StopType { get; }
-  
-  public ref bool AnimateDuringGameplayPause { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> EffectIndex { get; }
-  
-  public GameTime_t StartTime { get; }
-  
-  public ref float PreSimTime { get; }
-  
-  public ISchemaFixedArray<Vector> ServerControlPoints { get; }
-  
-  public ISchemaFixedArray<byte> ServerControlPointAssignments { get; }
-  
-  public ISchemaFixedArray<CHandle<CBaseEntity>> ControlPointEnts { get; }
-  
-  public ref bool NoSave { get; }
-  
-  public ref bool NoFreeze { get; }
-  
-  public ref bool NoRamp { get; }
-  
-  public ref bool StartActive { get; }
-  
-  public string EffectName { get; set; }
-  
-  public string ControlPointNames { get; set; }
-  
-  public ref int DataCP { get; }
-  
-  public ref Vector DataCPValue { get; }
-  
-  public ref int TintCP { get; }
-  
-  public ref Color Tint { get; }
+    public string SnapshotFileName { get; set; }
 
-  public void SnapshotFileNameUpdated();
-  public void ActiveUpdated();
-  public void FrozenUpdated();
-  public void FreezeTransitionDurationUpdated();
-  public void StopTypeUpdated();
-  public void AnimateDuringGameplayPauseUpdated();
-  public void EffectIndexUpdated();
-  public void StartTimeUpdated();
-  public void PreSimTimeUpdated();
-  public void ServerControlPointsUpdated();
-  public void ServerControlPointAssignmentsUpdated();
-  public void ControlPointEntsUpdated();
-  public void NoSaveUpdated();
-  public void NoFreezeUpdated();
-  public void NoRampUpdated();
+    public ref bool Active { get; }
+
+    public ref bool Frozen { get; }
+
+    public ref float FreezeTransitionDuration { get; }
+
+    public ref int StopType { get; }
+
+    public ref bool AnimateDuringGameplayPause { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> EffectIndex { get; }
+
+    public GameTime_t StartTime { get; }
+
+    public ref float PreSimTime { get; }
+
+    public ISchemaFixedArray<Vector> ServerControlPoints { get; }
+
+    public ISchemaFixedArray<byte> ServerControlPointAssignments { get; }
+
+    public ISchemaFixedArray<CHandle<CBaseEntity>> ControlPointEnts { get; }
+
+    public ref bool NoSave { get; }
+
+    public ref bool NoFreeze { get; }
+
+    public ref bool NoRamp { get; }
+
+    public ref bool StartActive { get; }
+
+    public string EffectName { get; set; }
+
+    public string ControlPointNames { get; set; }
+
+    public ref int DataCP { get; }
+
+    public ref Vector DataCPValue { get; }
+
+    public ref int TintCP { get; }
+
+    public ref Color Tint { get; }
+
+    public void SnapshotFileNameUpdated();
+    public void ActiveUpdated();
+    public void FrozenUpdated();
+    public void FreezeTransitionDurationUpdated();
+    public void StopTypeUpdated();
+    public void AnimateDuringGameplayPauseUpdated();
+    public void EffectIndexUpdated();
+    public void StartTimeUpdated();
+    public void PreSimTimeUpdated();
+    public void ServerControlPointsUpdated();
+    public void ServerControlPointAssignmentsUpdated();
+    public void ControlPointEntsUpdated();
+    public void NoSaveUpdated();
+    public void NoFreezeUpdated();
+    public void NoRampUpdated();
 }

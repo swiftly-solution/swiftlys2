@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmBodyGroupEvent : CNmEvent, ISchemaClass<CNmBodyGroupEvent> {
+public partial interface CNmBodyGroupEvent : CNmEvent, ISchemaClass<CNmBodyGroupEvent>
+{
+    static CNmBodyGroupEvent ISchemaClass<CNmBodyGroupEvent>.From(nint handle) => new CNmBodyGroupEventImpl(handle);
+    static int ISchemaClass<CNmBodyGroupEvent>.Size => 40;
+    static string? ISchemaClass<CNmBodyGroupEvent>.ClassName => null;
 
-  static CNmBodyGroupEvent ISchemaClass<CNmBodyGroupEvent>.From(nint handle) => new CNmBodyGroupEventImpl(handle);
-  static int ISchemaClass<CNmBodyGroupEvent>.Size => 40;
-  static string? ISchemaClass<CNmBodyGroupEvent>.ClassName => null;
 
-  
-  public string GroupName { get; set; }
+    public string GroupName { get; set; }
 
 
 }

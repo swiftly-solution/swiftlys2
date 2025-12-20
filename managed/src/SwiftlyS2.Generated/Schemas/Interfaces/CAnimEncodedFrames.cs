@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimEncodedFrames : ISchemaClass<CAnimEncodedFrames> {
+public partial interface CAnimEncodedFrames : ISchemaClass<CAnimEncodedFrames>
+{
+    static CAnimEncodedFrames ISchemaClass<CAnimEncodedFrames>.From(nint handle) => new CAnimEncodedFramesImpl(handle);
+    static int ISchemaClass<CAnimEncodedFrames>.Size => 216;
+    static string? ISchemaClass<CAnimEncodedFrames>.ClassName => null;
 
-  static CAnimEncodedFrames ISchemaClass<CAnimEncodedFrames>.From(nint handle) => new CAnimEncodedFramesImpl(handle);
-  static int ISchemaClass<CAnimEncodedFrames>.Size => 216;
-  static string? ISchemaClass<CAnimEncodedFrames>.ClassName => null;
 
-  
-  public ref CBufferString FileName { get; }
-  
-  public ref int Frames { get; }
-  
-  public ref int FramesPerBlock { get; }
-  
-  public ref CUtlVector<CAnimFrameBlockAnim> FrameblockArray { get; }
-  
-  public CAnimEncodeDifference UsageDifferences { get; }
+    public ref CBufferString FileName { get; }
+
+    public ref int Frames { get; }
+
+    public ref int FramesPerBlock { get; }
+
+    public ref CUtlVector<CAnimFrameBlockAnim> FrameblockArray { get; }
+
+    public CAnimEncodeDifference UsageDifferences { get; }
 
 
 }

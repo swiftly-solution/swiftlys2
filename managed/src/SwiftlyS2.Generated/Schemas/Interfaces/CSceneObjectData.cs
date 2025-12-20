@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSceneObjectData : ISchemaClass<CSceneObjectData> {
+public partial interface CSceneObjectData : ISchemaClass<CSceneObjectData>
+{
+    static CSceneObjectData ISchemaClass<CSceneObjectData>.From(nint handle) => new CSceneObjectDataImpl(handle);
+    static int ISchemaClass<CSceneObjectData>.Size => 144;
+    static string? ISchemaClass<CSceneObjectData>.ClassName => null;
 
-  static CSceneObjectData ISchemaClass<CSceneObjectData>.From(nint handle) => new CSceneObjectDataImpl(handle);
-  static int ISchemaClass<CSceneObjectData>.Size => 144;
-  static string? ISchemaClass<CSceneObjectData>.ClassName => null;
 
-  
-  public ref Vector MinBounds { get; }
-  
-  public ref Vector MaxBounds { get; }
-  
-  public ref CUtlLeanVector<CMaterialDrawDescriptor, int> DrawCalls { get; }
-  
-  public ref CUtlLeanVector<AABB_t, int> DrawBounds { get; }
-  
-  public ref CUtlLeanVector<CMeshletDescriptor, int> Meshlets { get; }
-  
-  public ref Vector4D TintColor { get; }
+    public ref Vector MinBounds { get; }
+
+    public ref Vector MaxBounds { get; }
+
+    public ref CUtlLeanVector<CMaterialDrawDescriptor, int> DrawCalls { get; }
+
+    public ref CUtlLeanVector<AABB_t, int> DrawBounds { get; }
+
+    public ref CUtlLeanVector<CMeshletDescriptor, int> Meshlets { get; }
+
+    public ref Vector4D TintColor { get; }
 
 
 }

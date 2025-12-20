@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_CreateFromParentParticlesImpl : CParticleFunctionInitializerImpl, C_INIT_CreateFromParentParticles {
+internal partial class C_INIT_CreateFromParentParticlesImpl : CParticleFunctionInitializerImpl, C_INIT_CreateFromParentParticles
+{
+    public C_INIT_CreateFromParentParticlesImpl(nint handle) : base(handle) { }
 
-  public C_INIT_CreateFromParentParticlesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VelocityScaleOffset;
 
-  private static nint? _VelocityScaleOffset;
-
-  public ref float VelocityScale {
-    get {
-      if (_VelocityScaleOffset == null) {
-        _VelocityScaleOffset = Schema.GetOffset(0x4AEA47CDE161DDAA);
-      }
-      return ref _Handle.AsRef<float>(_VelocityScaleOffset!.Value);
+    public ref float VelocityScale {
+        get {
+            _VelocityScaleOffset = _VelocityScaleOffset ?? Schema.GetOffset(0x4AEA47CDE161DDAA);
+            return ref _Handle.AsRef<float>(_VelocityScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _IncrementOffset;
+    private static nint? _IncrementOffset;
 
-  public ref float Increment {
-    get {
-      if (_IncrementOffset == null) {
-        _IncrementOffset = Schema.GetOffset(0x4AEA47CDB3721674);
-      }
-      return ref _Handle.AsRef<float>(_IncrementOffset!.Value);
+    public ref float Increment {
+        get {
+            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0x4AEA47CDB3721674);
+            return ref _Handle.AsRef<float>(_IncrementOffset!.Value);
+        }
     }
-  }
-  private static nint? _RandomDistributionOffset;
+    private static nint? _RandomDistributionOffset;
 
-  public ref bool RandomDistribution {
-    get {
-      if (_RandomDistributionOffset == null) {
-        _RandomDistributionOffset = Schema.GetOffset(0x4AEA47CD830F6B38);
-      }
-      return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
+    public ref bool RandomDistribution {
+        get {
+            _RandomDistributionOffset = _RandomDistributionOffset ?? Schema.GetOffset(0x4AEA47CD830F6B38);
+            return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
+        }
     }
-  }
-  private static nint? _RandomSeedOffset;
+    private static nint? _RandomSeedOffset;
 
-  public ref int RandomSeed {
-    get {
-      if (_RandomSeedOffset == null) {
-        _RandomSeedOffset = Schema.GetOffset(0x4AEA47CD6388F067);
-      }
-      return ref _Handle.AsRef<int>(_RandomSeedOffset!.Value);
+    public ref int RandomSeed {
+        get {
+            _RandomSeedOffset = _RandomSeedOffset ?? Schema.GetOffset(0x4AEA47CD6388F067);
+            return ref _Handle.AsRef<int>(_RandomSeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _SubFrameOffset;
+    private static nint? _SubFrameOffset;
 
-  public ref bool SubFrame {
-    get {
-      if (_SubFrameOffset == null) {
-        _SubFrameOffset = Schema.GetOffset(0x4AEA47CD1BAEEAF6);
-      }
-      return ref _Handle.AsRef<bool>(_SubFrameOffset!.Value);
+    public ref bool SubFrame {
+        get {
+            _SubFrameOffset = _SubFrameOffset ?? Schema.GetOffset(0x4AEA47CD1BAEEAF6);
+            return ref _Handle.AsRef<bool>(_SubFrameOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetRopeSegmentIDOffset;
+    private static nint? _SetRopeSegmentIDOffset;
 
-  public ref bool SetRopeSegmentID {
-    get {
-      if (_SetRopeSegmentIDOffset == null) {
-        _SetRopeSegmentIDOffset = Schema.GetOffset(0x4AEA47CDAEFC2399);
-      }
-      return ref _Handle.AsRef<bool>(_SetRopeSegmentIDOffset!.Value);
+    public ref bool SetRopeSegmentID {
+        get {
+            _SetRopeSegmentIDOffset = _SetRopeSegmentIDOffset ?? Schema.GetOffset(0x4AEA47CDAEFC2399);
+            return ref _Handle.AsRef<bool>(_SetRopeSegmentIDOffset!.Value);
+        }
     }
-  }
 
 
 }

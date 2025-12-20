@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulse_BlackboardReferenceImpl : SchemaClass, CPulse_BlackboardReference {
+internal partial class CPulse_BlackboardReferenceImpl : SchemaClass, CPulse_BlackboardReference
+{
+    public CPulse_BlackboardReferenceImpl(nint handle) : base(handle) { }
 
-  public CPulse_BlackboardReferenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BlackboardResourceOffset;
 
-  private static nint? _BlackboardResourceOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeIPulseGraphDef> BlackboardResource {
-    get {
-      if (_BlackboardResourceOffset == null) {
-        _BlackboardResourceOffset = Schema.GetOffset(0xEF83970A45E704DE);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIPulseGraphDef>>(_BlackboardResourceOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIPulseGraphDef> BlackboardResource {
+        get {
+            _BlackboardResourceOffset = _BlackboardResourceOffset ?? Schema.GetOffset(0xEF83970A45E704DE);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIPulseGraphDef>>(_BlackboardResourceOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlackboardResource1Offset;
+    private static nint? _BlackboardResource1Offset;
 
-  public SchemaUntypedField BlackboardResource1 {
-    get {
-      if (_BlackboardResource1Offset == null) {
-        _BlackboardResource1Offset = Schema.GetOffset(0xEF83970A83127470);
-      }
-      return new SchemaUntypedField(_Handle + _BlackboardResource1Offset!.Value);
+    public SchemaUntypedField BlackboardResource1 {
+        get {
+            _BlackboardResource1Offset = _BlackboardResource1Offset ?? Schema.GetOffset(0xEF83970A83127470);
+            return new SchemaUntypedField(_Handle + _BlackboardResource1Offset!.Value);
+        }
     }
-  }
-  private static nint? _NodeIDOffset;
+    private static nint? _NodeIDOffset;
 
-  public PulseDocNodeID_t NodeID {
-    get {
-      if (_NodeIDOffset == null) {
-        _NodeIDOffset = Schema.GetOffset(0xEF83970A0FD6755C);
-      }
-      return new PulseDocNodeID_tImpl(_Handle + _NodeIDOffset!.Value);
+    public PulseDocNodeID_t NodeID {
+        get {
+            _NodeIDOffset = _NodeIDOffset ?? Schema.GetOffset(0xEF83970A0FD6755C);
+            return new PulseDocNodeID_tImpl(_Handle + _NodeIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodeNameOffset;
+    private static nint? _NodeNameOffset;
 
-  public ref CGlobalSymbol NodeName {
-    get {
-      if (_NodeNameOffset == null) {
-        _NodeNameOffset = Schema.GetOffset(0xEF83970A3FB4DAAE);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_NodeNameOffset!.Value);
+    public ref CGlobalSymbol NodeName {
+        get {
+            _NodeNameOffset = _NodeNameOffset ?? Schema.GetOffset(0xEF83970A3FB4DAAE);
+            return ref _Handle.AsRef<CGlobalSymbol>(_NodeNameOffset!.Value);
+        }
     }
-  }
 
 
 }

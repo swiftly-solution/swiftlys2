@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateWithinBox : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateWithinBox> {
+public partial interface C_INIT_CreateWithinBox : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateWithinBox>
+{
+    static C_INIT_CreateWithinBox ISchemaClass<C_INIT_CreateWithinBox>.From(nint handle) => new C_INIT_CreateWithinBoxImpl(handle);
+    static int ISchemaClass<C_INIT_CreateWithinBox>.Size => 3936;
+    static string? ISchemaClass<C_INIT_CreateWithinBox>.ClassName => null;
 
-  static C_INIT_CreateWithinBox ISchemaClass<C_INIT_CreateWithinBox>.From(nint handle) => new C_INIT_CreateWithinBoxImpl(handle);
-  static int ISchemaClass<C_INIT_CreateWithinBox>.Size => 3936;
-  static string? ISchemaClass<C_INIT_CreateWithinBox>.ClassName => null;
 
-  
-  public CPerParticleVecInput Min { get; }
-  
-  public CPerParticleVecInput Max { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref bool LocalSpace { get; }
-  
-  public CRandomNumberGeneratorParameters RandomnessParameters { get; }
-  
-  public ref bool UseNewCode { get; }
+    public CPerParticleVecInput Min { get; }
+
+    public CPerParticleVecInput Max { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref bool LocalSpace { get; }
+
+    public CRandomNumberGeneratorParameters RandomnessParameters { get; }
+
+    public ref bool UseNewCode { get; }
 
 
 }

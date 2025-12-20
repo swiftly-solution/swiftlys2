@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseRegisterMap_t : ISchemaClass<PulseRegisterMap_t> {
+public partial interface PulseRegisterMap_t : ISchemaClass<PulseRegisterMap_t>
+{
+    static PulseRegisterMap_t ISchemaClass<PulseRegisterMap_t>.From(nint handle) => new PulseRegisterMap_tImpl(handle);
+    static int ISchemaClass<PulseRegisterMap_t>.Size => 48;
+    static string? ISchemaClass<PulseRegisterMap_t>.ClassName => null;
 
-  static PulseRegisterMap_t ISchemaClass<PulseRegisterMap_t>.From(nint handle) => new PulseRegisterMap_tImpl(handle);
-  static int ISchemaClass<PulseRegisterMap_t>.Size => 48;
-  static string? ISchemaClass<PulseRegisterMap_t>.ClassName => null;
 
-  
-  // KeyValues3
-  public SchemaUntypedField Inparams { get; }
-  
-  // CKV3MemberNameSet
-  public SchemaUntypedField InparamsWhichCanBeMoved { get; }
-  
-  // KeyValues3
-  public SchemaUntypedField Outparams { get; }
+    // KeyValues3
+    public SchemaUntypedField Inparams { get; }
+
+    // CKV3MemberNameSet
+    public SchemaUntypedField InparamsWhichCanBeMoved { get; }
+
+    // KeyValues3
+    public SchemaUntypedField Outparams { get; }
 
 
 }

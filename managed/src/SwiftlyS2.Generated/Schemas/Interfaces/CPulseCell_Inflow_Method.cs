@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Inflow_Method : CPulseCell_Inflow_BaseEntrypoint, ISchemaClass<CPulseCell_Inflow_Method> {
+public partial interface CPulseCell_Inflow_Method : CPulseCell_Inflow_BaseEntrypoint, ISchemaClass<CPulseCell_Inflow_Method>
+{
+    static CPulseCell_Inflow_Method ISchemaClass<CPulseCell_Inflow_Method>.From(nint handle) => new CPulseCell_Inflow_MethodImpl(handle);
+    static int ISchemaClass<CPulseCell_Inflow_Method>.Size => 200;
+    static string? ISchemaClass<CPulseCell_Inflow_Method>.ClassName => null;
 
-  static CPulseCell_Inflow_Method ISchemaClass<CPulseCell_Inflow_Method>.From(nint handle) => new CPulseCell_Inflow_MethodImpl(handle);
-  static int ISchemaClass<CPulseCell_Inflow_Method>.Size => 200;
-  static string? ISchemaClass<CPulseCell_Inflow_Method>.ClassName => null;
 
-  
-  // PulseSymbol_t
-  public SchemaUntypedField MethodName { get; }
-  
-  public string Description { get; set; }
-  
-  public ref bool IsPublic { get; }
-  
-  // CPulseValueFullType
-  public SchemaUntypedField ReturnType { get; }
-  
-  public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField MethodName { get; }
+
+    public string Description { get; set; }
+
+    public ref bool IsPublic { get; }
+
+    // CPulseValueFullType
+    public SchemaUntypedField ReturnType { get; }
+
+    public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> Args { get; }
 
 
 }

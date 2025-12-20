@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseCursorYieldToken_t : ISchemaClass<PulseCursorYieldToken_t> {
+public partial interface PulseCursorYieldToken_t : ISchemaClass<PulseCursorYieldToken_t>
+{
+    static PulseCursorYieldToken_t ISchemaClass<PulseCursorYieldToken_t>.From(nint handle) => new PulseCursorYieldToken_tImpl(handle);
+    static int ISchemaClass<PulseCursorYieldToken_t>.Size => 4;
+    static string? ISchemaClass<PulseCursorYieldToken_t>.ClassName => null;
 
-  static PulseCursorYieldToken_t ISchemaClass<PulseCursorYieldToken_t>.From(nint handle) => new PulseCursorYieldToken_tImpl(handle);
-  static int ISchemaClass<PulseCursorYieldToken_t>.Size => 4;
-  static string? ISchemaClass<PulseCursorYieldToken_t>.ClassName => null;
 
-  
-  public ref int Value { get; }
+    public ref int Value { get; }
 
 
 }

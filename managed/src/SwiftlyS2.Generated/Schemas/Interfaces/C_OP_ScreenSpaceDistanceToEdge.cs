@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ScreenSpaceDistanceToEdge : CParticleFunctionOperator, ISchemaClass<C_OP_ScreenSpaceDistanceToEdge> {
+public partial interface C_OP_ScreenSpaceDistanceToEdge : CParticleFunctionOperator, ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>
+{
+    static C_OP_ScreenSpaceDistanceToEdge ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.From(nint handle) => new C_OP_ScreenSpaceDistanceToEdgeImpl(handle);
+    static int ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.Size => 1248;
+    static string? ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.ClassName => null;
 
-  static C_OP_ScreenSpaceDistanceToEdge ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.From(nint handle) => new C_OP_ScreenSpaceDistanceToEdgeImpl(handle);
-  static int ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.Size => 1248;
-  static string? ISchemaClass<C_OP_ScreenSpaceDistanceToEdge>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleFloatInput MaxDistFromEdge { get; }
-  
-  public CParticleRemapFloatInput OutputRemap { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleFloatInput MaxDistFromEdge { get; }
+
+    public CParticleRemapFloatInput OutputRemap { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
 
 
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvViewPunchImpl : CPointEntityImpl, CEnvViewPunch {
+internal partial class CEnvViewPunchImpl : CPointEntityImpl, CEnvViewPunch
+{
+    public CEnvViewPunchImpl(nint handle) : base(handle) { }
 
-  public CEnvViewPunchImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusOffset;
 
-  private static nint? _RadiusOffset;
-
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xB707E1B05ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xB707E1B05ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ViewPunchOffset;
+    private static nint? _ViewPunchOffset;
 
-  public ref QAngle ViewPunch {
-    get {
-      if (_ViewPunchOffset == null) {
-        _ViewPunchOffset = Schema.GetOffset(0xB707E1B0061B7CBA);
-      }
-      return ref _Handle.AsRef<QAngle>(_ViewPunchOffset!.Value);
+    public ref QAngle ViewPunch {
+        get {
+            _ViewPunchOffset = _ViewPunchOffset ?? Schema.GetOffset(0xB707E1B0061B7CBA);
+            return ref _Handle.AsRef<QAngle>(_ViewPunchOffset!.Value);
+        }
     }
-  }
 
 
 }

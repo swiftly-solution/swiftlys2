@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimSequenceParamsImpl : SchemaClass, CAnimSequenceParams {
+internal partial class CAnimSequenceParamsImpl : SchemaClass, CAnimSequenceParams
+{
+    public CAnimSequenceParamsImpl(nint handle) : base(handle) { }
 
-  public CAnimSequenceParamsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FadeInTimeOffset;
 
-  private static nint? _FadeInTimeOffset;
-
-  public ref float FadeInTime {
-    get {
-      if (_FadeInTimeOffset == null) {
-        _FadeInTimeOffset = Schema.GetOffset(0x651691F81F0255B3);
-      }
-      return ref _Handle.AsRef<float>(_FadeInTimeOffset!.Value);
+    public ref float FadeInTime {
+        get {
+            _FadeInTimeOffset = _FadeInTimeOffset ?? Schema.GetOffset(0x651691F81F0255B3);
+            return ref _Handle.AsRef<float>(_FadeInTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeOutTimeOffset;
+    private static nint? _FadeOutTimeOffset;
 
-  public ref float FadeOutTime {
-    get {
-      if (_FadeOutTimeOffset == null) {
-        _FadeOutTimeOffset = Schema.GetOffset(0x651691F8E86D2FC2);
-      }
-      return ref _Handle.AsRef<float>(_FadeOutTimeOffset!.Value);
+    public ref float FadeOutTime {
+        get {
+            _FadeOutTimeOffset = _FadeOutTimeOffset ?? Schema.GetOffset(0x651691F8E86D2FC2);
+            return ref _Handle.AsRef<float>(_FadeOutTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

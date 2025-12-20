@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CScriptNavBlocker : CFuncNavBlocker, ISchemaClass<CScriptNavBlocker> {
+public partial interface CScriptNavBlocker : CFuncNavBlocker, ISchemaClass<CScriptNavBlocker>
+{
+    static CScriptNavBlocker ISchemaClass<CScriptNavBlocker>.From(nint handle) => new CScriptNavBlockerImpl(handle);
+    static int ISchemaClass<CScriptNavBlocker>.Size => 2048;
+    static string? ISchemaClass<CScriptNavBlocker>.ClassName => "script_nav_blocker";
 
-  static CScriptNavBlocker ISchemaClass<CScriptNavBlocker>.From(nint handle) => new CScriptNavBlockerImpl(handle);
-  static int ISchemaClass<CScriptNavBlocker>.Size => 2048;
-  static string? ISchemaClass<CScriptNavBlocker>.ClassName => "script_nav_blocker";
 
-  
-  public ref Vector Extent { get; }
+    public ref Vector Extent { get; }
 
 
 }

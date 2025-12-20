@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEntityComponentHelper : ISchemaClass<CEntityComponentHelper> {
+public partial interface CEntityComponentHelper : ISchemaClass<CEntityComponentHelper>
+{
+    static CEntityComponentHelper ISchemaClass<CEntityComponentHelper>.From(nint handle) => new CEntityComponentHelperImpl(handle);
+    static int ISchemaClass<CEntityComponentHelper>.Size => 40;
+    static string? ISchemaClass<CEntityComponentHelper>.ClassName => null;
 
-  static CEntityComponentHelper ISchemaClass<CEntityComponentHelper>.From(nint handle) => new CEntityComponentHelperImpl(handle);
-  static int ISchemaClass<CEntityComponentHelper>.Size => 40;
-  static string? ISchemaClass<CEntityComponentHelper>.ClassName => null;
 
-  
-  public ref uint Flags { get; }
-  
-  public EntComponentInfo_t? Info { get; }
-  
-  public ref int Priority { get; }
-  
-  public CEntityComponentHelper? Next { get; }
+    public ref uint Flags { get; }
+
+    public EntComponentInfo_t? Info { get; }
+
+    public ref int Priority { get; }
+
+    public CEntityComponentHelper? Next { get; }
 
 
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotorControllerImpl : SchemaClass, CMotorController {
+internal partial class CMotorControllerImpl : SchemaClass, CMotorController
+{
+    public CMotorControllerImpl(nint handle) : base(handle) { }
 
-  public CMotorControllerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SpeedOffset;
 
-  private static nint? _SpeedOffset;
-
-  public ref float Speed {
-    get {
-      if (_SpeedOffset == null) {
-        _SpeedOffset = Schema.GetOffset(0x1A8B9067A4BD35A0);
-      }
-      return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+    public ref float Speed {
+        get {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x1A8B9067A4BD35A0);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxTorqueOffset;
+    private static nint? _MaxTorqueOffset;
 
-  public ref float MaxTorque {
-    get {
-      if (_MaxTorqueOffset == null) {
-        _MaxTorqueOffset = Schema.GetOffset(0x1A8B90677880BF37);
-      }
-      return ref _Handle.AsRef<float>(_MaxTorqueOffset!.Value);
+    public ref float MaxTorque {
+        get {
+            _MaxTorqueOffset = _MaxTorqueOffset ?? Schema.GetOffset(0x1A8B90677880BF37);
+            return ref _Handle.AsRef<float>(_MaxTorqueOffset!.Value);
+        }
     }
-  }
-  private static nint? _AxisOffset;
+    private static nint? _AxisOffset;
 
-  public ref Vector Axis {
-    get {
-      if (_AxisOffset == null) {
-        _AxisOffset = Schema.GetOffset(0x1A8B90672B06DE94);
-      }
-      return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+    public ref Vector Axis {
+        get {
+            _AxisOffset = _AxisOffset ?? Schema.GetOffset(0x1A8B90672B06DE94);
+            return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _InertiaFactorOffset;
+    private static nint? _InertiaFactorOffset;
 
-  public ref float InertiaFactor {
-    get {
-      if (_InertiaFactorOffset == null) {
-        _InertiaFactorOffset = Schema.GetOffset(0x1A8B9067B824C94A);
-      }
-      return ref _Handle.AsRef<float>(_InertiaFactorOffset!.Value);
+    public ref float InertiaFactor {
+        get {
+            _InertiaFactorOffset = _InertiaFactorOffset ?? Schema.GetOffset(0x1A8B9067B824C94A);
+            return ref _Handle.AsRef<float>(_InertiaFactorOffset!.Value);
+        }
     }
-  }
 
 
 }

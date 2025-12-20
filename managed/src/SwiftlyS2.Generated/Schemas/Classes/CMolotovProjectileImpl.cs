@@ -6,59 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMolotovProjectileImpl : CBaseCSGrenadeProjectileImpl, CMolotovProjectile {
+internal partial class CMolotovProjectileImpl : CBaseCSGrenadeProjectileImpl, CMolotovProjectile
+{
+    public CMolotovProjectileImpl(nint handle) : base(handle) { }
 
-  public CMolotovProjectileImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IsIncGrenadeOffset;
 
-  private static nint? _IsIncGrenadeOffset;
-
-  public ref bool IsIncGrenade {
-    get {
-      if (_IsIncGrenadeOffset == null) {
-        _IsIncGrenadeOffset = Schema.GetOffset(0xA239EA8F9D1C12B7);
-      }
-      return ref _Handle.AsRef<bool>(_IsIncGrenadeOffset!.Value);
+    public ref bool IsIncGrenade {
+        get {
+            _IsIncGrenadeOffset = _IsIncGrenadeOffset ?? Schema.GetOffset(0xA239EA8F9D1C12B7);
+            return ref _Handle.AsRef<bool>(_IsIncGrenadeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DetonatedOffset;
+    private static nint? _DetonatedOffset;
 
-  public ref bool Detonated {
-    get {
-      if (_DetonatedOffset == null) {
-        _DetonatedOffset = Schema.GetOffset(0xA239EA8F97D602AF);
-      }
-      return ref _Handle.AsRef<bool>(_DetonatedOffset!.Value);
+    public ref bool Detonated {
+        get {
+            _DetonatedOffset = _DetonatedOffset ?? Schema.GetOffset(0xA239EA8F97D602AF);
+            return ref _Handle.AsRef<bool>(_DetonatedOffset!.Value);
+        }
     }
-  }
-  private static nint? _StillTimerOffset;
+    private static nint? _StillTimerOffset;
 
-  public IntervalTimer StillTimer {
-    get {
-      if (_StillTimerOffset == null) {
-        _StillTimerOffset = Schema.GetOffset(0xA239EA8F2772246E);
-      }
-      return new IntervalTimerImpl(_Handle + _StillTimerOffset!.Value);
+    public IntervalTimer StillTimer {
+        get {
+            _StillTimerOffset = _StillTimerOffset ?? Schema.GetOffset(0xA239EA8F2772246E);
+            return new IntervalTimerImpl(_Handle + _StillTimerOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasBouncedOffPlayerOffset;
+    private static nint? _HasBouncedOffPlayerOffset;
 
-  public ref bool HasBouncedOffPlayer {
-    get {
-      if (_HasBouncedOffPlayerOffset == null) {
-        _HasBouncedOffPlayerOffset = Schema.GetOffset(0xA239EA8F2A625F7B);
-      }
-      return ref _Handle.AsRef<bool>(_HasBouncedOffPlayerOffset!.Value);
+    public ref bool HasBouncedOffPlayer {
+        get {
+            _HasBouncedOffPlayerOffset = _HasBouncedOffPlayerOffset ?? Schema.GetOffset(0xA239EA8F2A625F7B);
+            return ref _Handle.AsRef<bool>(_HasBouncedOffPlayerOffset!.Value);
+        }
     }
-  }
 
-  public void IsIncGrenadeUpdated() {
-    Schema.Update(_Handle, 0xA239EA8F9D1C12B7);
-  }
+    public void IsIncGrenadeUpdated() => Schema.Update(_Handle, 0xA239EA8F9D1C12B7);
 }

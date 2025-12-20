@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FilterHealth : CBaseFilter, ISchemaClass<FilterHealth> {
+public partial interface FilterHealth : CBaseFilter, ISchemaClass<FilterHealth>
+{
+    static FilterHealth ISchemaClass<FilterHealth>.From(nint handle) => new FilterHealthImpl(handle);
+    static int ISchemaClass<FilterHealth>.Size => 1368;
+    static string? ISchemaClass<FilterHealth>.ClassName => "filter_health";
 
-  static FilterHealth ISchemaClass<FilterHealth>.From(nint handle) => new FilterHealthImpl(handle);
-  static int ISchemaClass<FilterHealth>.Size => 1368;
-  static string? ISchemaClass<FilterHealth>.ClassName => "filter_health";
 
-  
-  public ref bool AdrenalineActive { get; }
-  
-  public ref int HealthMin { get; }
-  
-  public ref int HealthMax { get; }
+    public ref bool AdrenalineActive { get; }
+
+    public ref int HealthMin { get; }
+
+    public ref int HealthMax { get; }
 
 
 }

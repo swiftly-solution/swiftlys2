@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBoneConstraintPoseSpaceBone__Input_tImpl : SchemaClass, CBoneConstraintPoseSpaceBone__Input_t {
+internal partial class CBoneConstraintPoseSpaceBone__Input_tImpl : SchemaClass, CBoneConstraintPoseSpaceBone__Input_t
+{
+    public CBoneConstraintPoseSpaceBone__Input_tImpl(nint handle) : base(handle) { }
 
-  public CBoneConstraintPoseSpaceBone__Input_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueOffset;
 
-  private static nint? _InputValueOffset;
-
-  public ref Vector InputValue {
-    get {
-      if (_InputValueOffset == null) {
-        _InputValueOffset = Schema.GetOffset(0x4F2ED4014039DA98);
-      }
-      return ref _Handle.AsRef<Vector>(_InputValueOffset!.Value);
+    public ref Vector InputValue {
+        get {
+            _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x4F2ED4014039DA98);
+            return ref _Handle.AsRef<Vector>(_InputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputTransformListOffset;
+    private static nint? _OutputTransformListOffset;
 
-  public ref CUtlVector<CTransform> OutputTransformList {
-    get {
-      if (_OutputTransformListOffset == null) {
-        _OutputTransformListOffset = Schema.GetOffset(0x4F2ED401DAEA7058);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_OutputTransformListOffset!.Value);
+    public ref CUtlVector<CTransform> OutputTransformList {
+        get {
+            _OutputTransformListOffset = _OutputTransformListOffset ?? Schema.GetOffset(0x4F2ED401DAEA7058);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_OutputTransformListOffset!.Value);
+        }
     }
-  }
 
 
 }

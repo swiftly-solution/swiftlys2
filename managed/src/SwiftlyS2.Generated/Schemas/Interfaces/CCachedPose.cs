@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCachedPose : ISchemaClass<CCachedPose> {
+public partial interface CCachedPose : ISchemaClass<CCachedPose>
+{
+    static CCachedPose ISchemaClass<CCachedPose>.From(nint handle) => new CCachedPoseImpl(handle);
+    static int ISchemaClass<CCachedPose>.Size => 64;
+    static string? ISchemaClass<CCachedPose>.ClassName => null;
 
-  static CCachedPose ISchemaClass<CCachedPose>.From(nint handle) => new CCachedPoseImpl(handle);
-  static int ISchemaClass<CCachedPose>.Size => 64;
-  static string? ISchemaClass<CCachedPose>.ClassName => null;
 
-  
-  public ref CUtlVector<CTransform> Transforms { get; }
-  
-  public ref CUtlVector<float> MorphWeights { get; }
-  
-  public HSequence Sequence { get; }
-  
-  public ref float Cycle { get; }
+    public ref CUtlVector<CTransform> Transforms { get; }
+
+    public ref CUtlVector<float> MorphWeights { get; }
+
+    public HSequence Sequence { get; }
+
+    public ref float Cycle { get; }
 
 
 }

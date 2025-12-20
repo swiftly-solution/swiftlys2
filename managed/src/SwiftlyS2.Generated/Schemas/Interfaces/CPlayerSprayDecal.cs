@@ -8,56 +8,56 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayerSprayDecal : CModelPointEntity, ISchemaClass<CPlayerSprayDecal> {
+public partial interface CPlayerSprayDecal : CModelPointEntity, ISchemaClass<CPlayerSprayDecal>
+{
+    static CPlayerSprayDecal ISchemaClass<CPlayerSprayDecal>.From(nint handle) => new CPlayerSprayDecalImpl(handle);
+    static int ISchemaClass<CPlayerSprayDecal>.Size => 2224;
+    static string? ISchemaClass<CPlayerSprayDecal>.ClassName => "player_spray_decal";
 
-  static CPlayerSprayDecal ISchemaClass<CPlayerSprayDecal>.From(nint handle) => new CPlayerSprayDecalImpl(handle);
-  static int ISchemaClass<CPlayerSprayDecal>.Size => 2224;
-  static string? ISchemaClass<CPlayerSprayDecal>.ClassName => "player_spray_decal";
 
-  
-  public ref int UniqueID { get; }
-  
-  public ref uint AccountID { get; }
-  
-  public ref uint TraceID { get; }
-  
-  public ref uint RtGcTime { get; }
-  
-  public ref Vector EndPos { get; }
-  
-  public ref Vector Start { get; }
-  
-  public ref Vector Left { get; }
-  
-  public ref Vector Normal { get; }
-  
-  public ref int Player { get; }
-  
-  public ref int Entity { get; }
-  
-  public ref int Hitbox { get; }
-  
-  public ref float CreationTime { get; }
-  
-  public ref int TintID { get; }
-  
-  public ref byte Version { get; }
-  
-  public ISchemaFixedArray<byte> Signature { get; }
+    public ref int UniqueID { get; }
 
-  public void UniqueIDUpdated();
-  public void AccountIDUpdated();
-  public void TraceIDUpdated();
-  public void RtGcTimeUpdated();
-  public void EndPosUpdated();
-  public void StartUpdated();
-  public void LeftUpdated();
-  public void NormalUpdated();
-  public void PlayerUpdated();
-  public void EntityUpdated();
-  public void HitboxUpdated();
-  public void CreationTimeUpdated();
-  public void TintIDUpdated();
-  public void VersionUpdated();
-  public void SignatureUpdated();
+    public ref uint AccountID { get; }
+
+    public ref uint TraceID { get; }
+
+    public ref uint RtGcTime { get; }
+
+    public ref Vector EndPos { get; }
+
+    public ref Vector Start { get; }
+
+    public ref Vector Left { get; }
+
+    public ref Vector Normal { get; }
+
+    public ref int Player { get; }
+
+    public ref int Entity { get; }
+
+    public ref int Hitbox { get; }
+
+    public ref float CreationTime { get; }
+
+    public ref int TintID { get; }
+
+    public ref byte Version { get; }
+
+    public ISchemaFixedArray<byte> Signature { get; }
+
+    public void UniqueIDUpdated();
+    public void AccountIDUpdated();
+    public void TraceIDUpdated();
+    public void RtGcTimeUpdated();
+    public void EndPosUpdated();
+    public void StartUpdated();
+    public void LeftUpdated();
+    public void NormalUpdated();
+    public void PlayerUpdated();
+    public void EntityUpdated();
+    public void HitboxUpdated();
+    public void CreationTimeUpdated();
+    public void TintIDUpdated();
+    public void VersionUpdated();
+    public void SignatureUpdated();
 }

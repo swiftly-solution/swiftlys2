@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum MedalRank_t : uint {
-
+public enum MedalRank_t : uint
+{
  MEDAL_RANK_NONE = 0,
 
  MEDAL_RANK_BRONZE = 1,

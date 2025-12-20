@@ -8,40 +8,40 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface WorldNode_t : ISchemaClass<WorldNode_t> {
+public partial interface WorldNode_t : ISchemaClass<WorldNode_t>
+{
+    static WorldNode_t ISchemaClass<WorldNode_t>.From(nint handle) => new WorldNode_tImpl(handle);
+    static int ISchemaClass<WorldNode_t>.Size => 352;
+    static string? ISchemaClass<WorldNode_t>.ClassName => null;
 
-  static WorldNode_t ISchemaClass<WorldNode_t>.From(nint handle) => new WorldNode_tImpl(handle);
-  static int ISchemaClass<WorldNode_t>.Size => 352;
-  static string? ISchemaClass<WorldNode_t>.ClassName => null;
 
-  
-  public ref CUtlVector<SceneObject_t> SceneObjects { get; }
-  
-  public ref CUtlVector<ushort> VisClusterMembership { get; }
-  
-  public ref CUtlVector<AggregateSceneObject_t> AggregateSceneObjects { get; }
-  
-  public ref CUtlVector<ClutterSceneObject_t> ClutterSceneObjects { get; }
-  
-  public ref CUtlVector<ExtraVertexStreamOverride_t> ExtraVertexStreamOverrides { get; }
-  
-  public ref CUtlVector<MaterialOverride_t> MaterialOverrides { get; }
-  
-  public ref CUtlVector<WorldNodeOnDiskBufferData_t> ExtraVertexStreams { get; }
-  
-  public ref CUtlVector<AggregateInstanceStreamOnDiskData_t> AggregateInstanceStreams { get; }
-  
-  public ref CUtlVector<AggregateVertexAlbedoStreamOnDiskData_t> VertexAlbedoStreams { get; }
-  
-  public ref CUtlVector<CUtlString> LayerNames { get; }
-  
-  public ref CUtlVector<byte> SceneObjectLayerIndices { get; }
-  
-  public string GrassFileName { get; set; }
-  
-  public BakedLightingInfo_t NodeLightingInfo { get; }
-  
-  public ref bool HasBakedGeometryFlag { get; }
+    public ref CUtlVector<SceneObject_t> SceneObjects { get; }
+
+    public ref CUtlVector<ushort> VisClusterMembership { get; }
+
+    public ref CUtlVector<AggregateSceneObject_t> AggregateSceneObjects { get; }
+
+    public ref CUtlVector<ClutterSceneObject_t> ClutterSceneObjects { get; }
+
+    public ref CUtlVector<ExtraVertexStreamOverride_t> ExtraVertexStreamOverrides { get; }
+
+    public ref CUtlVector<MaterialOverride_t> MaterialOverrides { get; }
+
+    public ref CUtlVector<WorldNodeOnDiskBufferData_t> ExtraVertexStreams { get; }
+
+    public ref CUtlVector<AggregateInstanceStreamOnDiskData_t> AggregateInstanceStreams { get; }
+
+    public ref CUtlVector<AggregateVertexAlbedoStreamOnDiskData_t> VertexAlbedoStreams { get; }
+
+    public ref CUtlVector<CUtlString> LayerNames { get; }
+
+    public ref CUtlVector<byte> SceneObjectLayerIndices { get; }
+
+    public string GrassFileName { get; set; }
+
+    public BakedLightingInfo_t NodeLightingInfo { get; }
+
+    public ref bool HasBakedGeometryFlag { get; }
 
 
 }

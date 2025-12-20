@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointFromObjectScale : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointFromObjectScale> {
+public partial interface C_OP_SetControlPointFromObjectScale : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointFromObjectScale>
+{
+    static C_OP_SetControlPointFromObjectScale ISchemaClass<C_OP_SetControlPointFromObjectScale>.From(nint handle) => new C_OP_SetControlPointFromObjectScaleImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointFromObjectScale>.Size => 480;
+    static string? ISchemaClass<C_OP_SetControlPointFromObjectScale>.ClassName => null;
 
-  static C_OP_SetControlPointFromObjectScale ISchemaClass<C_OP_SetControlPointFromObjectScale>.From(nint handle) => new C_OP_SetControlPointFromObjectScaleImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointFromObjectScale>.Size => 480;
-  static string? ISchemaClass<C_OP_SetControlPointFromObjectScale>.ClassName => null;
 
-  
-  public ref int CPInput { get; }
-  
-  public ref int CPOutput { get; }
+    public ref int CPInput { get; }
+
+    public ref int CPOutput { get; }
 
 
 }

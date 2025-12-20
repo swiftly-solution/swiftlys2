@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimKeyData : ISchemaClass<CAnimKeyData> {
+public partial interface CAnimKeyData : ISchemaClass<CAnimKeyData>
+{
+    static CAnimKeyData ISchemaClass<CAnimKeyData>.From(nint handle) => new CAnimKeyDataImpl(handle);
+    static int ISchemaClass<CAnimKeyData>.Size => 120;
+    static string? ISchemaClass<CAnimKeyData>.ClassName => null;
 
-  static CAnimKeyData ISchemaClass<CAnimKeyData>.From(nint handle) => new CAnimKeyDataImpl(handle);
-  static int ISchemaClass<CAnimKeyData>.Size => 120;
-  static string? ISchemaClass<CAnimKeyData>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public ref CUtlVector<CAnimBone> BoneArray { get; }
-  
-  public ref CUtlVector<CAnimUser> UserArray { get; }
-  
-  public ref CUtlVector<CBufferString> MorphArray { get; }
-  
-  public ref int ChannelElements { get; }
-  
-  public ref CUtlVector<CAnimDataChannelDesc> DataChannelArray { get; }
+    public ref CBufferString Name { get; }
+
+    public ref CUtlVector<CAnimBone> BoneArray { get; }
+
+    public ref CUtlVector<CAnimUser> UserArray { get; }
+
+    public ref CUtlVector<CBufferString> MorphArray { get; }
+
+    public ref int ChannelElements { get; }
+
+    public ref CUtlVector<CAnimDataChannelDesc> DataChannelArray { get; }
 
 
 }

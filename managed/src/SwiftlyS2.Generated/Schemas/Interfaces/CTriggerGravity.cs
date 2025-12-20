@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerGravity : CBaseTrigger, ISchemaClass<CTriggerGravity> {
-
-  static CTriggerGravity ISchemaClass<CTriggerGravity>.From(nint handle) => new CTriggerGravityImpl(handle);
-  static int ISchemaClass<CTriggerGravity>.Size => 2472;
-  static string? ISchemaClass<CTriggerGravity>.ClassName => "trigger_gravity";
+public partial interface CTriggerGravity : CBaseTrigger, ISchemaClass<CTriggerGravity>
+{
+    static CTriggerGravity ISchemaClass<CTriggerGravity>.From(nint handle) => new CTriggerGravityImpl(handle);
+    static int ISchemaClass<CTriggerGravity>.Size => 2472;
+    static string? ISchemaClass<CTriggerGravity>.ClassName => "trigger_gravity";
 
 
 

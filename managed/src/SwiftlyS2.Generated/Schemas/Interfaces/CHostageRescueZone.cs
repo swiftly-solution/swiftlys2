@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHostageRescueZone : CHostageRescueZoneShim, ISchemaClass<CHostageRescueZone> {
-
-  static CHostageRescueZone ISchemaClass<CHostageRescueZone>.From(nint handle) => new CHostageRescueZoneImpl(handle);
-  static int ISchemaClass<CHostageRescueZone>.Size => 2504;
-  static string? ISchemaClass<CHostageRescueZone>.ClassName => "func_hostage_rescue";
+public partial interface CHostageRescueZone : CHostageRescueZoneShim, ISchemaClass<CHostageRescueZone>
+{
+    static CHostageRescueZone ISchemaClass<CHostageRescueZone>.From(nint handle) => new CHostageRescueZoneImpl(handle);
+    static int ISchemaClass<CHostageRescueZone>.Size => 2504;
+    static string? ISchemaClass<CHostageRescueZone>.ClassName => "func_hostage_rescue";
 
 
 

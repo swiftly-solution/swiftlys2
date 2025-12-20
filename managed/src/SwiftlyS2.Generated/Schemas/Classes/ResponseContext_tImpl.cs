@@ -6,61 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ResponseContext_tImpl : SchemaClass, ResponseContext_t {
+internal partial class ResponseContext_tImpl : SchemaClass, ResponseContext_t
+{
+    public ResponseContext_tImpl(nint handle) : base(handle) { }
 
-  public ResponseContext_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8F5A90A274FF65FE);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8F5A90A274FF65FE);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ValueOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x8F5A90A274FF65FE);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x8F5A90A274FF65FE);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ValueOffset;
+    public string Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x8F5A90A28044B702);
+            return Schema.GetString(_Handle.Read<nint>(_ValueOffset!.Value));
+        }
+        set {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x8F5A90A28044B702);
+            Schema.SetString(_Handle, _ValueOffset!.Value, value);
+        }
+    } 
+    private static nint? _ExpirationTimeOffset;
 
-  public string Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0x8F5A90A28044B702);
-      }
-      var ptr = _Handle.Read<nint>(_ValueOffset!.Value);
-      return Schema.GetString(ptr);
+    public GameTime_t ExpirationTime {
+        get {
+            _ExpirationTimeOffset = _ExpirationTimeOffset ?? Schema.GetOffset(0x8F5A90A20389142D);
+            return new GameTime_tImpl(_Handle + _ExpirationTimeOffset!.Value);
+        }
     }
-    set {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0x8F5A90A28044B702);
-      }
-      Schema.SetString(_Handle, _ValueOffset!.Value, value);
-    }
-  } 
-  private static nint? _ExpirationTimeOffset;
-
-  public GameTime_t ExpirationTime {
-    get {
-      if (_ExpirationTimeOffset == null) {
-        _ExpirationTimeOffset = Schema.GetOffset(0x8F5A90A20389142D);
-      }
-      return new GameTime_tImpl(_Handle + _ExpirationTimeOffset!.Value);
-    }
-  }
 
 
 }

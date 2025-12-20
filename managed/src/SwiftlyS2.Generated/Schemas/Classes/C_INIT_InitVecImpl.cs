@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_InitVecImpl : CParticleFunctionInitializerImpl, C_INIT_InitVec {
+internal partial class C_INIT_InitVecImpl : CParticleFunctionInitializerImpl, C_INIT_InitVec
+{
+    public C_INIT_InitVecImpl(nint handle) : base(handle) { }
 
-  public C_INIT_InitVecImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueOffset;
 
-  private static nint? _InputValueOffset;
-
-  public CPerParticleVecInput InputValue {
-    get {
-      if (_InputValueOffset == null) {
-        _InputValueOffset = Schema.GetOffset(0x60C95B0234445438);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _InputValueOffset!.Value);
+    public CPerParticleVecInput InputValue {
+        get {
+            _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x60C95B0234445438);
+            return new CPerParticleVecInputImpl(_Handle + _InputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputFieldOffset;
+    private static nint? _OutputFieldOffset;
 
-  public ParticleAttributeIndex_t OutputField {
-    get {
-      if (_OutputFieldOffset == null) {
-        _OutputFieldOffset = Schema.GetOffset(0x60C95B02324F6F74);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+    public ParticleAttributeIndex_t OutputField {
+        get {
+            _OutputFieldOffset = _OutputFieldOffset ?? Schema.GetOffset(0x60C95B02324F6F74);
+            return new ParticleAttributeIndex_tImpl(_Handle + _OutputFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetMethodOffset;
+    private static nint? _SetMethodOffset;
 
-  public ref ParticleSetMethod_t SetMethod {
-    get {
-      if (_SetMethodOffset == null) {
-        _SetMethodOffset = Schema.GetOffset(0x60C95B02FB53C31E);
-      }
-      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    public ref ParticleSetMethod_t SetMethod {
+        get {
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x60C95B02FB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+        }
     }
-  }
-  private static nint? _NormalizedOutputOffset;
+    private static nint? _NormalizedOutputOffset;
 
-  public ref bool NormalizedOutput {
-    get {
-      if (_NormalizedOutputOffset == null) {
-        _NormalizedOutputOffset = Schema.GetOffset(0x60C95B020AA98C55);
-      }
-      return ref _Handle.AsRef<bool>(_NormalizedOutputOffset!.Value);
+    public ref bool NormalizedOutput {
+        get {
+            _NormalizedOutputOffset = _NormalizedOutputOffset ?? Schema.GetOffset(0x60C95B020AA98C55);
+            return ref _Handle.AsRef<bool>(_NormalizedOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _WritePreviousPositionOffset;
+    private static nint? _WritePreviousPositionOffset;
 
-  public ref bool WritePreviousPosition {
-    get {
-      if (_WritePreviousPositionOffset == null) {
-        _WritePreviousPositionOffset = Schema.GetOffset(0x60C95B02EA635776);
-      }
-      return ref _Handle.AsRef<bool>(_WritePreviousPositionOffset!.Value);
+    public ref bool WritePreviousPosition {
+        get {
+            _WritePreviousPositionOffset = _WritePreviousPositionOffset ?? Schema.GetOffset(0x60C95B02EA635776);
+            return ref _Handle.AsRef<bool>(_WritePreviousPositionOffset!.Value);
+        }
     }
-  }
 
 
 }

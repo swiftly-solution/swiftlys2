@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBasePropImpl : CBaseAnimGraphImpl, CBaseProp {
+internal partial class CBasePropImpl : CBaseAnimGraphImpl, CBaseProp
+{
+    public CBasePropImpl(nint handle) : base(handle) { }
 
-  public CBasePropImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModelOverrodeBlockLOSOffset;
 
-  private static nint? _ModelOverrodeBlockLOSOffset;
-
-  public ref bool ModelOverrodeBlockLOS {
-    get {
-      if (_ModelOverrodeBlockLOSOffset == null) {
-        _ModelOverrodeBlockLOSOffset = Schema.GetOffset(0x14D39FA24CF7EDF1);
-      }
-      return ref _Handle.AsRef<bool>(_ModelOverrodeBlockLOSOffset!.Value);
+    public ref bool ModelOverrodeBlockLOS {
+        get {
+            _ModelOverrodeBlockLOSOffset = _ModelOverrodeBlockLOSOffset ?? Schema.GetOffset(0x14D39FA24CF7EDF1);
+            return ref _Handle.AsRef<bool>(_ModelOverrodeBlockLOSOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShapeTypeOffset;
+    private static nint? _ShapeTypeOffset;
 
-  public ref int ShapeType {
-    get {
-      if (_ShapeTypeOffset == null) {
-        _ShapeTypeOffset = Schema.GetOffset(0x14D39FA23BE42771);
-      }
-      return ref _Handle.AsRef<int>(_ShapeTypeOffset!.Value);
+    public ref int ShapeType {
+        get {
+            _ShapeTypeOffset = _ShapeTypeOffset ?? Schema.GetOffset(0x14D39FA23BE42771);
+            return ref _Handle.AsRef<int>(_ShapeTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConformToCollisionBoundsOffset;
+    private static nint? _ConformToCollisionBoundsOffset;
 
-  public ref bool ConformToCollisionBounds {
-    get {
-      if (_ConformToCollisionBoundsOffset == null) {
-        _ConformToCollisionBoundsOffset = Schema.GetOffset(0x14D39FA2A98E60A1);
-      }
-      return ref _Handle.AsRef<bool>(_ConformToCollisionBoundsOffset!.Value);
+    public ref bool ConformToCollisionBounds {
+        get {
+            _ConformToCollisionBoundsOffset = _ConformToCollisionBoundsOffset ?? Schema.GetOffset(0x14D39FA2A98E60A1);
+            return ref _Handle.AsRef<bool>(_ConformToCollisionBoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MPreferredCatchTransformOffset;
+    private static nint? _MPreferredCatchTransformOffset;
 
-  public ref CTransform MPreferredCatchTransform {
-    get {
-      if (_MPreferredCatchTransformOffset == null) {
-        _MPreferredCatchTransformOffset = Schema.GetOffset(0x14D39FA2CC626070);
-      }
-      return ref _Handle.AsRef<CTransform>(_MPreferredCatchTransformOffset!.Value);
+    public ref CTransform MPreferredCatchTransform {
+        get {
+            _MPreferredCatchTransformOffset = _MPreferredCatchTransformOffset ?? Schema.GetOffset(0x14D39FA2CC626070);
+            return ref _Handle.AsRef<CTransform>(_MPreferredCatchTransformOffset!.Value);
+        }
     }
-  }
 
 
 }

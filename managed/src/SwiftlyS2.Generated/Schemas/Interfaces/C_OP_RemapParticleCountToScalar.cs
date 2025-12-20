@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapParticleCountToScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapParticleCountToScalar> {
+public partial interface C_OP_RemapParticleCountToScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapParticleCountToScalar>
+{
+    static C_OP_RemapParticleCountToScalar ISchemaClass<C_OP_RemapParticleCountToScalar>.From(nint handle) => new C_OP_RemapParticleCountToScalarImpl(handle);
+    static int ISchemaClass<C_OP_RemapParticleCountToScalar>.Size => 1952;
+    static string? ISchemaClass<C_OP_RemapParticleCountToScalar>.ClassName => null;
 
-  static C_OP_RemapParticleCountToScalar ISchemaClass<C_OP_RemapParticleCountToScalar>.From(nint handle) => new C_OP_RemapParticleCountToScalarImpl(handle);
-  static int ISchemaClass<C_OP_RemapParticleCountToScalar>.Size => 1952;
-  static string? ISchemaClass<C_OP_RemapParticleCountToScalar>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CParticleCollectionFloatInput InputMin { get; }
-  
-  public CParticleCollectionFloatInput InputMax { get; }
-  
-  public CParticleCollectionFloatInput OutputMin { get; }
-  
-  public CParticleCollectionFloatInput OutputMax { get; }
-  
-  public ref bool ActiveRange { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CParticleCollectionFloatInput InputMin { get; }
+
+    public CParticleCollectionFloatInput InputMax { get; }
+
+    public CParticleCollectionFloatInput OutputMin { get; }
+
+    public CParticleCollectionFloatInput OutputMax { get; }
+
+    public ref bool ActiveRange { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
 
 
 }

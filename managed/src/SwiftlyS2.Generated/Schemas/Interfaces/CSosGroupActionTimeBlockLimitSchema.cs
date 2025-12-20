@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSosGroupActionTimeBlockLimitSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionTimeBlockLimitSchema> {
+public partial interface CSosGroupActionTimeBlockLimitSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionTimeBlockLimitSchema>
+{
+    static CSosGroupActionTimeBlockLimitSchema ISchemaClass<CSosGroupActionTimeBlockLimitSchema>.From(nint handle) => new CSosGroupActionTimeBlockLimitSchemaImpl(handle);
+    static int ISchemaClass<CSosGroupActionTimeBlockLimitSchema>.Size => 16;
+    static string? ISchemaClass<CSosGroupActionTimeBlockLimitSchema>.ClassName => null;
 
-  static CSosGroupActionTimeBlockLimitSchema ISchemaClass<CSosGroupActionTimeBlockLimitSchema>.From(nint handle) => new CSosGroupActionTimeBlockLimitSchemaImpl(handle);
-  static int ISchemaClass<CSosGroupActionTimeBlockLimitSchema>.Size => 16;
-  static string? ISchemaClass<CSosGroupActionTimeBlockLimitSchema>.ClassName => null;
 
-  
-  public ref int MaxCount { get; }
-  
-  public ref float MaxDuration { get; }
+    public ref int MaxCount { get; }
+
+    public ref float MaxDuration { get; }
 
 
 }

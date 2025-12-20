@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DecayOffscreenImpl : CParticleFunctionOperatorImpl, C_OP_DecayOffscreen {
+internal partial class C_OP_DecayOffscreenImpl : CParticleFunctionOperatorImpl, C_OP_DecayOffscreen
+{
+    public C_OP_DecayOffscreenImpl(nint handle) : base(handle) { }
 
-  public C_OP_DecayOffscreenImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OffscreenTimeOffset;
 
-  private static nint? _OffscreenTimeOffset;
-
-  public CParticleCollectionFloatInput OffscreenTime {
-    get {
-      if (_OffscreenTimeOffset == null) {
-        _OffscreenTimeOffset = Schema.GetOffset(0xA253F9AEB096E1F1);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _OffscreenTimeOffset!.Value);
+    public CParticleCollectionFloatInput OffscreenTime {
+        get {
+            _OffscreenTimeOffset = _OffscreenTimeOffset ?? Schema.GetOffset(0xA253F9AEB096E1F1);
+            return new CParticleCollectionFloatInputImpl(_Handle + _OffscreenTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

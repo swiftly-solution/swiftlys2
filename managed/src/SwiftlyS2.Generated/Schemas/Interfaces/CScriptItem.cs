@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CScriptItem : CItem, ISchemaClass<CScriptItem> {
+public partial interface CScriptItem : CItem, ISchemaClass<CScriptItem>
+{
+    static CScriptItem ISchemaClass<CScriptItem>.From(nint handle) => new CScriptItemImpl(handle);
+    static int ISchemaClass<CScriptItem>.Size => 2944;
+    static string? ISchemaClass<CScriptItem>.ClassName => "scripted_item_drop";
 
-  static CScriptItem ISchemaClass<CScriptItem>.From(nint handle) => new CScriptItemImpl(handle);
-  static int ISchemaClass<CScriptItem>.Size => 2944;
-  static string? ISchemaClass<CScriptItem>.ClassName => "scripted_item_drop";
 
-  
-  public ref MoveType_t MoveTypeOverride { get; }
+    public ref MoveType_t MoveTypeOverride { get; }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathAnimMotorUpdaterBase : CAnimMotorUpdaterBase, ISchemaClass<CPathAnimMotorUpdaterBase> {
+public partial interface CPathAnimMotorUpdaterBase : CAnimMotorUpdaterBase, ISchemaClass<CPathAnimMotorUpdaterBase>
+{
+    static CPathAnimMotorUpdaterBase ISchemaClass<CPathAnimMotorUpdaterBase>.From(nint handle) => new CPathAnimMotorUpdaterBaseImpl(handle);
+    static int ISchemaClass<CPathAnimMotorUpdaterBase>.Size => 40;
+    static string? ISchemaClass<CPathAnimMotorUpdaterBase>.ClassName => null;
 
-  static CPathAnimMotorUpdaterBase ISchemaClass<CPathAnimMotorUpdaterBase>.From(nint handle) => new CPathAnimMotorUpdaterBaseImpl(handle);
-  static int ISchemaClass<CPathAnimMotorUpdaterBase>.Size => 40;
-  static string? ISchemaClass<CPathAnimMotorUpdaterBase>.ClassName => null;
 
-  
-  public ref bool LockToPath { get; }
+    public ref bool LockToPath { get; }
 
 
 }

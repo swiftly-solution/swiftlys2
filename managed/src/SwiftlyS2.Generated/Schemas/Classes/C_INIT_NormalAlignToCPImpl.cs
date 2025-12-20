@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_NormalAlignToCPImpl : CParticleFunctionInitializerImpl, C_INIT_NormalAlignToCP {
+internal partial class C_INIT_NormalAlignToCPImpl : CParticleFunctionInitializerImpl, C_INIT_NormalAlignToCP
+{
+    public C_INIT_NormalAlignToCPImpl(nint handle) : base(handle) { }
 
-  public C_INIT_NormalAlignToCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformInputOffset;
 
-  private static nint? _TransformInputOffset;
-
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0xFA0441643A9ED669);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0xFA0441643A9ED669);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointAxisOffset;
+    private static nint? _ControlPointAxisOffset;
 
-  public ref ParticleControlPointAxis_t ControlPointAxis {
-    get {
-      if (_ControlPointAxisOffset == null) {
-        _ControlPointAxisOffset = Schema.GetOffset(0xFA04416471763CFD);
-      }
-      return ref _Handle.AsRef<ParticleControlPointAxis_t>(_ControlPointAxisOffset!.Value);
+    public ref ParticleControlPointAxis_t ControlPointAxis {
+        get {
+            _ControlPointAxisOffset = _ControlPointAxisOffset ?? Schema.GetOffset(0xFA04416471763CFD);
+            return ref _Handle.AsRef<ParticleControlPointAxis_t>(_ControlPointAxisOffset!.Value);
+        }
     }
-  }
 
 
 }

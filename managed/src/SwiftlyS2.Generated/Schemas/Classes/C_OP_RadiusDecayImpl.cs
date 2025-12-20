@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RadiusDecayImpl : CParticleFunctionOperatorImpl, C_OP_RadiusDecay {
+internal partial class C_OP_RadiusDecayImpl : CParticleFunctionOperatorImpl, C_OP_RadiusDecay
+{
+    public C_OP_RadiusDecayImpl(nint handle) : base(handle) { }
 
-  public C_OP_RadiusDecayImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinRadiusOffset;
 
-  private static nint? _MinRadiusOffset;
-
-  public ref float MinRadius {
-    get {
-      if (_MinRadiusOffset == null) {
-        _MinRadiusOffset = Schema.GetOffset(0x119375431D07C7B7);
-      }
-      return ref _Handle.AsRef<float>(_MinRadiusOffset!.Value);
+    public ref float MinRadius {
+        get {
+            _MinRadiusOffset = _MinRadiusOffset ?? Schema.GetOffset(0x119375431D07C7B7);
+            return ref _Handle.AsRef<float>(_MinRadiusOffset!.Value);
+        }
     }
-  }
 
 
 }

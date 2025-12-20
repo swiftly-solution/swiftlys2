@@ -8,25 +8,25 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointVelocitySensor : CPointEntity, ISchemaClass<CPointVelocitySensor> {
+public partial interface CPointVelocitySensor : CPointEntity, ISchemaClass<CPointVelocitySensor>
+{
+    static CPointVelocitySensor ISchemaClass<CPointVelocitySensor>.From(nint handle) => new CPointVelocitySensorImpl(handle);
+    static int ISchemaClass<CPointVelocitySensor>.Size => 1336;
+    static string? ISchemaClass<CPointVelocitySensor>.ClassName => "point_velocitysensor";
 
-  static CPointVelocitySensor ISchemaClass<CPointVelocitySensor>.From(nint handle) => new CPointVelocitySensorImpl(handle);
-  static int ISchemaClass<CPointVelocitySensor>.Size => 1336;
-  static string? ISchemaClass<CPointVelocitySensor>.ClassName => "point_velocitysensor";
 
-  
-  public ref CHandle<CBaseEntity> TargetEntity { get; }
-  
-  public ref Vector Axis { get; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref float PrevVelocity { get; }
-  
-  public ref float AvgInterval { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField Velocity { get; }
+    public ref CHandle<CBaseEntity> TargetEntity { get; }
+
+    public ref Vector Axis { get; }
+
+    public ref bool Enabled { get; }
+
+    public ref float PrevVelocity { get; }
+
+    public ref float AvgInterval { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField Velocity { get; }
 
 
 }

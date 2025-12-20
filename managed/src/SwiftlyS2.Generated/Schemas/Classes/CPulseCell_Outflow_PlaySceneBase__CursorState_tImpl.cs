@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Outflow_PlaySceneBase__CursorState_tImpl : SchemaClass, CPulseCell_Outflow_PlaySceneBase__CursorState_t {
+internal partial class CPulseCell_Outflow_PlaySceneBase__CursorState_tImpl : SchemaClass, CPulseCell_Outflow_PlaySceneBase__CursorState_t
+{
+    public CPulseCell_Outflow_PlaySceneBase__CursorState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Outflow_PlaySceneBase__CursorState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SceneInstanceOffset;
 
-  private static nint? _SceneInstanceOffset;
-
-  public ref CHandle<CBaseEntity> SceneInstance {
-    get {
-      if (_SceneInstanceOffset == null) {
-        _SceneInstanceOffset = Schema.GetOffset(0x16AE3F0C967C210);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SceneInstanceOffset!.Value);
+    public ref CHandle<CBaseEntity> SceneInstance {
+        get {
+            _SceneInstanceOffset = _SceneInstanceOffset ?? Schema.GetOffset(0x16AE3F0C967C210);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_SceneInstanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _MainActorOffset;
+    private static nint? _MainActorOffset;
 
-  public ref CHandle<CBaseEntity> MainActor {
-    get {
-      if (_MainActorOffset == null) {
-        _MainActorOffset = Schema.GetOffset(0x16AE3F0CCB20D99);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MainActorOffset!.Value);
+    public ref CHandle<CBaseEntity> MainActor {
+        get {
+            _MainActorOffset = _MainActorOffset ?? Schema.GetOffset(0x16AE3F0CCB20D99);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MainActorOffset!.Value);
+        }
     }
-  }
 
 
 }

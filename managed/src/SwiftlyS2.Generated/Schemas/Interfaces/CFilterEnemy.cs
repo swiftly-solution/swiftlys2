@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFilterEnemy : CBaseFilter, ISchemaClass<CFilterEnemy> {
+public partial interface CFilterEnemy : CBaseFilter, ISchemaClass<CFilterEnemy>
+{
+    static CFilterEnemy ISchemaClass<CFilterEnemy>.From(nint handle) => new CFilterEnemyImpl(handle);
+    static int ISchemaClass<CFilterEnemy>.Size => 1384;
+    static string? ISchemaClass<CFilterEnemy>.ClassName => "filter_enemy";
 
-  static CFilterEnemy ISchemaClass<CFilterEnemy>.From(nint handle) => new CFilterEnemyImpl(handle);
-  static int ISchemaClass<CFilterEnemy>.Size => 1384;
-  static string? ISchemaClass<CFilterEnemy>.ClassName => "filter_enemy";
 
-  
-  public string EnemyName { get; set; }
-  
-  public ref float Radius { get; }
-  
-  public ref float OuterRadius { get; }
-  
-  public ref int MaxSquadmatesPerEnemy { get; }
-  
-  public string PlayerName { get; set; }
+    public string EnemyName { get; set; }
+
+    public ref float Radius { get; }
+
+    public ref float OuterRadius { get; }
+
+    public ref int MaxSquadmatesPerEnemy { get; }
+
+    public string PlayerName { get; set; }
 
 
 }

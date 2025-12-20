@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRelativeLocation : ISchemaClass<CRelativeLocation> {
+public partial interface CRelativeLocation : ISchemaClass<CRelativeLocation>
+{
+    static CRelativeLocation ISchemaClass<CRelativeLocation>.From(nint handle) => new CRelativeLocationImpl(handle);
+    static int ISchemaClass<CRelativeLocation>.Size => 56;
+    static string? ISchemaClass<CRelativeLocation>.ClassName => null;
 
-  static CRelativeLocation ISchemaClass<CRelativeLocation>.From(nint handle) => new CRelativeLocationImpl(handle);
-  static int ISchemaClass<CRelativeLocation>.Size => 56;
-  static string? ISchemaClass<CRelativeLocation>.ClassName => null;
 
-  
-  public ref RelativeLocationType_t Type { get; }
-  
-  public ref Vector RelativeOffset { get; }
-  
-  public ref Vector WorldSpacePos { get; }
-  
-  public ref CHandle<CBaseEntity> Entity { get; }
+    public ref RelativeLocationType_t Type { get; }
+
+    public ref Vector RelativeOffset { get; }
+
+    public ref Vector WorldSpacePos { get; }
+
+    public ref CHandle<CBaseEntity> Entity { get; }
 
 
 }

@@ -6,154 +6,124 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ClientPhysicsImpl : CParticleFunctionRendererImpl, C_OP_ClientPhysics {
+internal partial class C_OP_ClientPhysicsImpl : CParticleFunctionRendererImpl, C_OP_ClientPhysics
+{
+    public C_OP_ClientPhysicsImpl(nint handle) : base(handle) { }
 
-  public C_OP_ClientPhysicsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StrPhysicsTypeOffset;
 
-  private static nint? _StrPhysicsTypeOffset;
+    public string StrPhysicsType {
+        get {
+            _StrPhysicsTypeOffset = _StrPhysicsTypeOffset ?? Schema.GetOffset(0xD58F5C47820348D9);
+            return Schema.GetString(_Handle.Read<nint>(_StrPhysicsTypeOffset!.Value));
+        }
+        set {
+            _StrPhysicsTypeOffset = _StrPhysicsTypeOffset ?? Schema.GetOffset(0xD58F5C47820348D9);
+            Schema.SetString(_Handle, _StrPhysicsTypeOffset!.Value, value);
+        }
+    } 
+    private static nint? _StartAsleepOffset;
 
-  public string StrPhysicsType {
-    get {
-      if (_StrPhysicsTypeOffset == null) {
-        _StrPhysicsTypeOffset = Schema.GetOffset(0xD58F5C47820348D9);
-      }
-      var ptr = _Handle.Read<nint>(_StrPhysicsTypeOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref bool StartAsleep {
+        get {
+            _StartAsleepOffset = _StartAsleepOffset ?? Schema.GetOffset(0xD58F5C4789BA22DD);
+            return ref _Handle.AsRef<bool>(_StartAsleepOffset!.Value);
+        }
     }
-    set {
-      if (_StrPhysicsTypeOffset == null) {
-        _StrPhysicsTypeOffset = Schema.GetOffset(0xD58F5C47820348D9);
-      }
-      Schema.SetString(_Handle, _StrPhysicsTypeOffset!.Value, value);
-    }
-  } 
-  private static nint? _StartAsleepOffset;
+    private static nint? _PlayerWakeRadiusOffset;
 
-  public ref bool StartAsleep {
-    get {
-      if (_StartAsleepOffset == null) {
-        _StartAsleepOffset = Schema.GetOffset(0xD58F5C4789BA22DD);
-      }
-      return ref _Handle.AsRef<bool>(_StartAsleepOffset!.Value);
+    public CParticleCollectionFloatInput PlayerWakeRadius {
+        get {
+            _PlayerWakeRadiusOffset = _PlayerWakeRadiusOffset ?? Schema.GetOffset(0xD58F5C47E624F15C);
+            return new CParticleCollectionFloatInputImpl(_Handle + _PlayerWakeRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayerWakeRadiusOffset;
+    private static nint? _VehicleWakeRadiusOffset;
 
-  public CParticleCollectionFloatInput PlayerWakeRadius {
-    get {
-      if (_PlayerWakeRadiusOffset == null) {
-        _PlayerWakeRadiusOffset = Schema.GetOffset(0xD58F5C47E624F15C);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _PlayerWakeRadiusOffset!.Value);
+    public CParticleCollectionFloatInput VehicleWakeRadius {
+        get {
+            _VehicleWakeRadiusOffset = _VehicleWakeRadiusOffset ?? Schema.GetOffset(0xD58F5C4733A7C27B);
+            return new CParticleCollectionFloatInputImpl(_Handle + _VehicleWakeRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _VehicleWakeRadiusOffset;
+    private static nint? _UseHighQualitySimulationOffset;
 
-  public CParticleCollectionFloatInput VehicleWakeRadius {
-    get {
-      if (_VehicleWakeRadiusOffset == null) {
-        _VehicleWakeRadiusOffset = Schema.GetOffset(0xD58F5C4733A7C27B);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _VehicleWakeRadiusOffset!.Value);
+    public ref bool UseHighQualitySimulation {
+        get {
+            _UseHighQualitySimulationOffset = _UseHighQualitySimulationOffset ?? Schema.GetOffset(0xD58F5C47B0E917EA);
+            return ref _Handle.AsRef<bool>(_UseHighQualitySimulationOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseHighQualitySimulationOffset;
+    private static nint? _MaxParticleCountOffset;
 
-  public ref bool UseHighQualitySimulation {
-    get {
-      if (_UseHighQualitySimulationOffset == null) {
-        _UseHighQualitySimulationOffset = Schema.GetOffset(0xD58F5C47B0E917EA);
-      }
-      return ref _Handle.AsRef<bool>(_UseHighQualitySimulationOffset!.Value);
+    public ref int MaxParticleCount {
+        get {
+            _MaxParticleCountOffset = _MaxParticleCountOffset ?? Schema.GetOffset(0xD58F5C47FD3F82B6);
+            return ref _Handle.AsRef<int>(_MaxParticleCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxParticleCountOffset;
+    private static nint? _RespectExclusionVolumesOffset;
 
-  public ref int MaxParticleCount {
-    get {
-      if (_MaxParticleCountOffset == null) {
-        _MaxParticleCountOffset = Schema.GetOffset(0xD58F5C47FD3F82B6);
-      }
-      return ref _Handle.AsRef<int>(_MaxParticleCountOffset!.Value);
+    public ref bool RespectExclusionVolumes {
+        get {
+            _RespectExclusionVolumesOffset = _RespectExclusionVolumesOffset ?? Schema.GetOffset(0xD58F5C47BF981E2A);
+            return ref _Handle.AsRef<bool>(_RespectExclusionVolumesOffset!.Value);
+        }
     }
-  }
-  private static nint? _RespectExclusionVolumesOffset;
+    private static nint? _KillParticlesOffset;
 
-  public ref bool RespectExclusionVolumes {
-    get {
-      if (_RespectExclusionVolumesOffset == null) {
-        _RespectExclusionVolumesOffset = Schema.GetOffset(0xD58F5C47BF981E2A);
-      }
-      return ref _Handle.AsRef<bool>(_RespectExclusionVolumesOffset!.Value);
+    public ref bool KillParticles {
+        get {
+            _KillParticlesOffset = _KillParticlesOffset ?? Schema.GetOffset(0xD58F5C47D2FD5948);
+            return ref _Handle.AsRef<bool>(_KillParticlesOffset!.Value);
+        }
     }
-  }
-  private static nint? _KillParticlesOffset;
+    private static nint? _DeleteSimOffset;
 
-  public ref bool KillParticles {
-    get {
-      if (_KillParticlesOffset == null) {
-        _KillParticlesOffset = Schema.GetOffset(0xD58F5C47D2FD5948);
-      }
-      return ref _Handle.AsRef<bool>(_KillParticlesOffset!.Value);
+    public ref bool DeleteSim {
+        get {
+            _DeleteSimOffset = _DeleteSimOffset ?? Schema.GetOffset(0xD58F5C478F438761);
+            return ref _Handle.AsRef<bool>(_DeleteSimOffset!.Value);
+        }
     }
-  }
-  private static nint? _DeleteSimOffset;
+    private static nint? _ControlPointOffset;
 
-  public ref bool DeleteSim {
-    get {
-      if (_DeleteSimOffset == null) {
-        _DeleteSimOffset = Schema.GetOffset(0xD58F5C478F438761);
-      }
-      return ref _Handle.AsRef<bool>(_DeleteSimOffset!.Value);
+    public ref int ControlPoint {
+        get {
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xD58F5C470D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointOffset;
+    private static nint? _ForcedSimIdOffset;
 
-  public ref int ControlPoint {
-    get {
-      if (_ControlPointOffset == null) {
-        _ControlPointOffset = Schema.GetOffset(0xD58F5C470D0DDF8C);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    public ref int ForcedSimId {
+        get {
+            _ForcedSimIdOffset = _ForcedSimIdOffset ?? Schema.GetOffset(0xD58F5C47998B388E);
+            return ref _Handle.AsRef<int>(_ForcedSimIdOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForcedSimIdOffset;
+    private static nint? _ColorBlendTypeOffset;
 
-  public ref int ForcedSimId {
-    get {
-      if (_ForcedSimIdOffset == null) {
-        _ForcedSimIdOffset = Schema.GetOffset(0xD58F5C47998B388E);
-      }
-      return ref _Handle.AsRef<int>(_ForcedSimIdOffset!.Value);
+    public ref ParticleColorBlendType_t ColorBlendType {
+        get {
+            _ColorBlendTypeOffset = _ColorBlendTypeOffset ?? Schema.GetOffset(0xD58F5C47DBC6EFCF);
+            return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorBlendTypeOffset;
+    private static nint? _ForcedStatusEffectsOffset;
 
-  public ref ParticleColorBlendType_t ColorBlendType {
-    get {
-      if (_ColorBlendTypeOffset == null) {
-        _ColorBlendTypeOffset = Schema.GetOffset(0xD58F5C47DBC6EFCF);
-      }
-      return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+    public ref ParticleAttrBoxFlags_t ForcedStatusEffects {
+        get {
+            _ForcedStatusEffectsOffset = _ForcedStatusEffectsOffset ?? Schema.GetOffset(0xD58F5C4712A659B8);
+            return ref _Handle.AsRef<ParticleAttrBoxFlags_t>(_ForcedStatusEffectsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForcedStatusEffectsOffset;
-
-  public ref ParticleAttrBoxFlags_t ForcedStatusEffects {
-    get {
-      if (_ForcedStatusEffectsOffset == null) {
-        _ForcedStatusEffectsOffset = Schema.GetOffset(0xD58F5C4712A659B8);
-      }
-      return ref _Handle.AsRef<ParticleAttrBoxFlags_t>(_ForcedStatusEffectsOffset!.Value);
-    }
-  }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathHelperUpdateNode : CUnaryUpdateNode, ISchemaClass<CPathHelperUpdateNode> {
+public partial interface CPathHelperUpdateNode : CUnaryUpdateNode, ISchemaClass<CPathHelperUpdateNode>
+{
+    static CPathHelperUpdateNode ISchemaClass<CPathHelperUpdateNode>.From(nint handle) => new CPathHelperUpdateNodeImpl(handle);
+    static int ISchemaClass<CPathHelperUpdateNode>.Size => 120;
+    static string? ISchemaClass<CPathHelperUpdateNode>.ClassName => null;
 
-  static CPathHelperUpdateNode ISchemaClass<CPathHelperUpdateNode>.From(nint handle) => new CPathHelperUpdateNodeImpl(handle);
-  static int ISchemaClass<CPathHelperUpdateNode>.Size => 120;
-  static string? ISchemaClass<CPathHelperUpdateNode>.ClassName => null;
 
-  
-  public ref float StoppingRadius { get; }
-  
-  public ref float StoppingSpeedScale { get; }
+    public ref float StoppingRadius { get; }
+
+    public ref float StoppingSpeedScale { get; }
 
 
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface JiggleBoneSettings_t : ISchemaClass<JiggleBoneSettings_t> {
+public partial interface JiggleBoneSettings_t : ISchemaClass<JiggleBoneSettings_t>
+{
+    static JiggleBoneSettings_t ISchemaClass<JiggleBoneSettings_t>.From(nint handle) => new JiggleBoneSettings_tImpl(handle);
+    static int ISchemaClass<JiggleBoneSettings_t>.Size => 44;
+    static string? ISchemaClass<JiggleBoneSettings_t>.ClassName => null;
 
-  static JiggleBoneSettings_t ISchemaClass<JiggleBoneSettings_t>.From(nint handle) => new JiggleBoneSettings_tImpl(handle);
-  static int ISchemaClass<JiggleBoneSettings_t>.Size => 44;
-  static string? ISchemaClass<JiggleBoneSettings_t>.ClassName => null;
 
-  
-  public ref int BoneIndex { get; }
-  
-  public ref float SpringStrength { get; }
-  
-  public ref float MaxTimeStep { get; }
-  
-  public ref float Damping { get; }
-  
-  public ref Vector BoundsMaxLS { get; }
-  
-  public ref Vector BoundsMinLS { get; }
-  
-  public ref JiggleBoneSimSpace SimSpace { get; }
+    public ref int BoneIndex { get; }
+
+    public ref float SpringStrength { get; }
+
+    public ref float MaxTimeStep { get; }
+
+    public ref float Damping { get; }
+
+    public ref Vector BoundsMaxLS { get; }
+
+    public ref Vector BoundsMinLS { get; }
+
+    public ref JiggleBoneSimSpace SimSpace { get; }
 
 
 }

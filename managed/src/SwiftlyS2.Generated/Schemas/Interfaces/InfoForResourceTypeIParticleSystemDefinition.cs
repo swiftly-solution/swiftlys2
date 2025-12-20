@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeIParticleSystemDefinition : ISchemaClass<InfoForResourceTypeIParticleSystemDefinition> {
-
-  static InfoForResourceTypeIParticleSystemDefinition ISchemaClass<InfoForResourceTypeIParticleSystemDefinition>.From(nint handle) => new InfoForResourceTypeIParticleSystemDefinitionImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeIParticleSystemDefinition>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeIParticleSystemDefinition>.ClassName => null;
+public partial interface InfoForResourceTypeIParticleSystemDefinition : ISchemaClass<InfoForResourceTypeIParticleSystemDefinition>
+{
+    static InfoForResourceTypeIParticleSystemDefinition ISchemaClass<InfoForResourceTypeIParticleSystemDefinition>.From(nint handle) => new InfoForResourceTypeIParticleSystemDefinitionImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeIParticleSystemDefinition>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeIParticleSystemDefinition>.ClassName => null;
 
 
 

@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CWayPointHelperUpdateNodeImpl : CUnaryUpdateNodeImpl, CWayPointHelperUpdateNode {
+internal partial class CWayPointHelperUpdateNodeImpl : CUnaryUpdateNodeImpl, CWayPointHelperUpdateNode
+{
+    public CWayPointHelperUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CWayPointHelperUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartCycleOffset;
 
-  private static nint? _StartCycleOffset;
-
-  public ref float StartCycle {
-    get {
-      if (_StartCycleOffset == null) {
-        _StartCycleOffset = Schema.GetOffset(0x109BD628ABB46051);
-      }
-      return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
+    public ref float StartCycle {
+        get {
+            _StartCycleOffset = _StartCycleOffset ?? Schema.GetOffset(0x109BD628ABB46051);
+            return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndCycleOffset;
+    private static nint? _EndCycleOffset;
 
-  public ref float EndCycle {
-    get {
-      if (_EndCycleOffset == null) {
-        _EndCycleOffset = Schema.GetOffset(0x109BD628176E8F62);
-      }
-      return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
+    public ref float EndCycle {
+        get {
+            _EndCycleOffset = _EndCycleOffset ?? Schema.GetOffset(0x109BD628176E8F62);
+            return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnlyGoalsOffset;
+    private static nint? _OnlyGoalsOffset;
 
-  public ref bool OnlyGoals {
-    get {
-      if (_OnlyGoalsOffset == null) {
-        _OnlyGoalsOffset = Schema.GetOffset(0x109BD6283526BA11);
-      }
-      return ref _Handle.AsRef<bool>(_OnlyGoalsOffset!.Value);
+    public ref bool OnlyGoals {
+        get {
+            _OnlyGoalsOffset = _OnlyGoalsOffset ?? Schema.GetOffset(0x109BD6283526BA11);
+            return ref _Handle.AsRef<bool>(_OnlyGoalsOffset!.Value);
+        }
     }
-  }
-  private static nint? _PreventOvershootOffset;
+    private static nint? _PreventOvershootOffset;
 
-  public ref bool PreventOvershoot {
-    get {
-      if (_PreventOvershootOffset == null) {
-        _PreventOvershootOffset = Schema.GetOffset(0x109BD628B161EADA);
-      }
-      return ref _Handle.AsRef<bool>(_PreventOvershootOffset!.Value);
+    public ref bool PreventOvershoot {
+        get {
+            _PreventOvershootOffset = _PreventOvershootOffset ?? Schema.GetOffset(0x109BD628B161EADA);
+            return ref _Handle.AsRef<bool>(_PreventOvershootOffset!.Value);
+        }
     }
-  }
-  private static nint? _PreventUndershootOffset;
+    private static nint? _PreventUndershootOffset;
 
-  public ref bool PreventUndershoot {
-    get {
-      if (_PreventUndershootOffset == null) {
-        _PreventUndershootOffset = Schema.GetOffset(0x109BD628C22276F8);
-      }
-      return ref _Handle.AsRef<bool>(_PreventUndershootOffset!.Value);
+    public ref bool PreventUndershoot {
+        get {
+            _PreventUndershootOffset = _PreventUndershootOffset ?? Schema.GetOffset(0x109BD628C22276F8);
+            return ref _Handle.AsRef<bool>(_PreventUndershootOffset!.Value);
+        }
     }
-  }
 
 
 }

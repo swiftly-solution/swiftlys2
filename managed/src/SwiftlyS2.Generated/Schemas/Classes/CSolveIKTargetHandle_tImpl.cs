@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSolveIKTargetHandle_tImpl : SchemaClass, CSolveIKTargetHandle_t {
+internal partial class CSolveIKTargetHandle_tImpl : SchemaClass, CSolveIKTargetHandle_t
+{
+    public CSolveIKTargetHandle_tImpl(nint handle) : base(handle) { }
 
-  public CSolveIKTargetHandle_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PositionHandleOffset;
 
-  private static nint? _PositionHandleOffset;
-
-  public CAnimParamHandle PositionHandle {
-    get {
-      if (_PositionHandleOffset == null) {
-        _PositionHandleOffset = Schema.GetOffset(0xC2940485B066E3D4);
-      }
-      return new CAnimParamHandleImpl(_Handle + _PositionHandleOffset!.Value);
+    public CAnimParamHandle PositionHandle {
+        get {
+            _PositionHandleOffset = _PositionHandleOffset ?? Schema.GetOffset(0xC2940485B066E3D4);
+            return new CAnimParamHandleImpl(_Handle + _PositionHandleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientationHandleOffset;
+    private static nint? _OrientationHandleOffset;
 
-  public CAnimParamHandle OrientationHandle {
-    get {
-      if (_OrientationHandleOffset == null) {
-        _OrientationHandleOffset = Schema.GetOffset(0xC294048597E9518F);
-      }
-      return new CAnimParamHandleImpl(_Handle + _OrientationHandleOffset!.Value);
+    public CAnimParamHandle OrientationHandle {
+        get {
+            _OrientationHandleOffset = _OrientationHandleOffset ?? Schema.GetOffset(0xC294048597E9518F);
+            return new CAnimParamHandleImpl(_Handle + _OrientationHandleOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigElement_Command : CModelConfigElement, ISchemaClass<CModelConfigElement_Command> {
+public partial interface CModelConfigElement_Command : CModelConfigElement, ISchemaClass<CModelConfigElement_Command>
+{
+    static CModelConfigElement_Command ISchemaClass<CModelConfigElement_Command>.From(nint handle) => new CModelConfigElement_CommandImpl(handle);
+    static int ISchemaClass<CModelConfigElement_Command>.Size => 96;
+    static string? ISchemaClass<CModelConfigElement_Command>.ClassName => null;
 
-  static CModelConfigElement_Command ISchemaClass<CModelConfigElement_Command>.From(nint handle) => new CModelConfigElement_CommandImpl(handle);
-  static int ISchemaClass<CModelConfigElement_Command>.Size => 96;
-  static string? ISchemaClass<CModelConfigElement_Command>.ClassName => null;
 
-  
-  public string Command { get; set; }
-  
-  // KeyValues3
-  public SchemaUntypedField Args { get; }
+    public string Command { get; set; }
+
+    // KeyValues3
+    public SchemaUntypedField Args { get; }
 
 
 }

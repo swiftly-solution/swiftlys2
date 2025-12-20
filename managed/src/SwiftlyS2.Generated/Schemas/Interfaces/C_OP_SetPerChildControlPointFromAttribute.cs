@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetPerChildControlPointFromAttribute : CParticleFunctionOperator, ISchemaClass<C_OP_SetPerChildControlPointFromAttribute> {
+public partial interface C_OP_SetPerChildControlPointFromAttribute : CParticleFunctionOperator, ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>
+{
+    static C_OP_SetPerChildControlPointFromAttribute ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.From(nint handle) => new C_OP_SetPerChildControlPointFromAttributeImpl(handle);
+    static int ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.Size => 496;
+    static string? ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.ClassName => null;
 
-  static C_OP_SetPerChildControlPointFromAttribute ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.From(nint handle) => new C_OP_SetPerChildControlPointFromAttributeImpl(handle);
-  static int ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.Size => 496;
-  static string? ISchemaClass<C_OP_SetPerChildControlPointFromAttribute>.ClassName => null;
 
-  
-  public ref int ChildGroupID { get; }
-  
-  public ref int FirstControlPoint { get; }
-  
-  public ref int NumControlPoints { get; }
-  
-  public ref int ParticleIncrement { get; }
-  
-  public ref int FirstSourcePoint { get; }
-  
-  public ref bool NumBasedOnParticleCount { get; }
-  
-  public ParticleAttributeIndex_t AttributeToRead { get; }
-  
-  public ref int CPField { get; }
+    public ref int ChildGroupID { get; }
+
+    public ref int FirstControlPoint { get; }
+
+    public ref int NumControlPoints { get; }
+
+    public ref int ParticleIncrement { get; }
+
+    public ref int FirstSourcePoint { get; }
+
+    public ref bool NumBasedOnParticleCount { get; }
+
+    public ParticleAttributeIndex_t AttributeToRead { get; }
+
+    public ref int CPField { get; }
 
 
 }

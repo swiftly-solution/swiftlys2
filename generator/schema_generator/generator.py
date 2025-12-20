@@ -509,6 +509,9 @@ classname_dict = {
   "CAmbientGeneric": "ambient_generic",
   "CAK47": "weapon_ak47",
   "CAI_ChangeHintGroup": "ai_changehintgroup",
+  "CPropDoorRotating": "prop_door_rotating",
+  "CPropDoorRotatingBreakable": "prop_door_rotating",
+  "CEnvTracer": "env_tracer",
 }
 
 found_dangerous_fields = []
@@ -653,9 +656,9 @@ class Writer():
 
         if field_info["IMPL_TYPE"] in erased_generics or field_info["IMPL_TYPE"] == "SchemaUntypedField":
           if "templated" in field:
-            field_info["COMMENT"] = f"\n  // {field['templated']}"
+            field_info["COMMENT"] = f"\n    // {field['templated']}"
           else:
-            field_info["COMMENT"] = f"\n  // {field['type']}"
+            field_info["COMMENT"] = f"\n    // {field['type']}"
 
         if field_info["IS_NETWORKED"] == "true":
           updators.append(render_template(self.interface_updator_template, field_info))

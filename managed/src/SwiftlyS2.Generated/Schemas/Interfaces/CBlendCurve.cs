@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBlendCurve : ISchemaClass<CBlendCurve> {
+public partial interface CBlendCurve : ISchemaClass<CBlendCurve>
+{
+    static CBlendCurve ISchemaClass<CBlendCurve>.From(nint handle) => new CBlendCurveImpl(handle);
+    static int ISchemaClass<CBlendCurve>.Size => 8;
+    static string? ISchemaClass<CBlendCurve>.ClassName => null;
 
-  static CBlendCurve ISchemaClass<CBlendCurve>.From(nint handle) => new CBlendCurveImpl(handle);
-  static int ISchemaClass<CBlendCurve>.Size => 8;
-  static string? ISchemaClass<CBlendCurve>.ClassName => null;
 
-  
-  public ref float ControlPoint1 { get; }
-  
-  public ref float ControlPoint2 { get; }
+    public ref float ControlPoint1 { get; }
+
+    public ref float ControlPoint2 { get; }
 
 
 }

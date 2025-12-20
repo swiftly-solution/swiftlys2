@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGameSceneNodeHandle : ISchemaClass<CGameSceneNodeHandle> {
+public partial interface CGameSceneNodeHandle : ISchemaClass<CGameSceneNodeHandle>
+{
+    static CGameSceneNodeHandle ISchemaClass<CGameSceneNodeHandle>.From(nint handle) => new CGameSceneNodeHandleImpl(handle);
+    static int ISchemaClass<CGameSceneNodeHandle>.Size => 16;
+    static string? ISchemaClass<CGameSceneNodeHandle>.ClassName => null;
 
-  static CGameSceneNodeHandle ISchemaClass<CGameSceneNodeHandle>.From(nint handle) => new CGameSceneNodeHandleImpl(handle);
-  static int ISchemaClass<CGameSceneNodeHandle>.Size => 16;
-  static string? ISchemaClass<CGameSceneNodeHandle>.ClassName => null;
 
-  
-  public ref CHandle<CEntityInstance> Owner { get; }
-  
-  public ref CUtlStringToken Name { get; }
+    public ref CHandle<CEntityInstance> Owner { get; }
 
-  public void OwnerUpdated();
-  public void NameUpdated();
+    public ref CUtlStringToken Name { get; }
+
+    public void OwnerUpdated();
+    public void NameUpdated();
 }

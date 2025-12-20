@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapAverageScalarValuetoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapAverageScalarValuetoCP> {
+public partial interface C_OP_RemapAverageScalarValuetoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapAverageScalarValuetoCP>
+{
+    static C_OP_RemapAverageScalarValuetoCP ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.From(nint handle) => new C_OP_RemapAverageScalarValuetoCPImpl(handle);
+    static int ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.Size => 1232;
+    static string? ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.ClassName => null;
 
-  static C_OP_RemapAverageScalarValuetoCP ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.From(nint handle) => new C_OP_RemapAverageScalarValuetoCPImpl(handle);
-  static int ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.Size => 1232;
-  static string? ISchemaClass<C_OP_RemapAverageScalarValuetoCP>.ClassName => null;
 
-  
-  public ref SetStatisticExpressionType_t Expression { get; }
-  
-  public CParticleCollectionFloatInput DecimalPlaces { get; }
-  
-  public ref int OutControlPointNumber { get; }
-  
-  public ref int OutVectorField { get; }
-  
-  public ParticleAttributeIndex_t Field { get; }
-  
-  public CParticleRemapFloatInput OutputRemap { get; }
+    public ref SetStatisticExpressionType_t Expression { get; }
+
+    public CParticleCollectionFloatInput DecimalPlaces { get; }
+
+    public ref int OutControlPointNumber { get; }
+
+    public ref int OutVectorField { get; }
+
+    public ParticleAttributeIndex_t Field { get; }
+
+    public CParticleRemapFloatInput OutputRemap { get; }
 
 
 }

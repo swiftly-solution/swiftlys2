@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotionNodeSequenceImpl : CMotionNodeImpl, CMotionNodeSequence {
+internal partial class CMotionNodeSequenceImpl : CMotionNodeImpl, CMotionNodeSequence
+{
+    public CMotionNodeSequenceImpl(nint handle) : base(handle) { }
 
-  public CMotionNodeSequenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagsOffset;
 
-  private static nint? _TagsOffset;
-
-  public ref CUtlVector<TagSpan_t> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0xA932DE59B46C8540);
-      }
-      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+    public ref CUtlVector<TagSpan_t> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xA932DE59B46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceOffset;
+    private static nint? _SequenceOffset;
 
-  public HSequence Sequence {
-    get {
-      if (_SequenceOffset == null) {
-        _SequenceOffset = Schema.GetOffset(0xA932DE59E0A0598E);
-      }
-      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    public HSequence Sequence {
+        get {
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xA932DE59E0A0598E);
+            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlaybackSpeedOffset;
+    private static nint? _PlaybackSpeedOffset;
 
-  public ref float PlaybackSpeed {
-    get {
-      if (_PlaybackSpeedOffset == null) {
-        _PlaybackSpeedOffset = Schema.GetOffset(0xA932DE59FA2B402D);
-      }
-      return ref _Handle.AsRef<float>(_PlaybackSpeedOffset!.Value);
+    public ref float PlaybackSpeed {
+        get {
+            _PlaybackSpeedOffset = _PlaybackSpeedOffset ?? Schema.GetOffset(0xA932DE59FA2B402D);
+            return ref _Handle.AsRef<float>(_PlaybackSpeedOffset!.Value);
+        }
     }
-  }
 
 
 }

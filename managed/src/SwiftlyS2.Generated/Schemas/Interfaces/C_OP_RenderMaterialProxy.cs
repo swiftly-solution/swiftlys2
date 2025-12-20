@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderMaterialProxy : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderMaterialProxy> {
+public partial interface C_OP_RenderMaterialProxy : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderMaterialProxy>
+{
+    static C_OP_RenderMaterialProxy ISchemaClass<C_OP_RenderMaterialProxy>.From(nint handle) => new C_OP_RenderMaterialProxyImpl(handle);
+    static int ISchemaClass<C_OP_RenderMaterialProxy>.Size => 3072;
+    static string? ISchemaClass<C_OP_RenderMaterialProxy>.ClassName => null;
 
-  static C_OP_RenderMaterialProxy ISchemaClass<C_OP_RenderMaterialProxy>.From(nint handle) => new C_OP_RenderMaterialProxyImpl(handle);
-  static int ISchemaClass<C_OP_RenderMaterialProxy>.Size => 3072;
-  static string? ISchemaClass<C_OP_RenderMaterialProxy>.ClassName => null;
 
-  
-  public ref int MaterialControlPoint { get; }
-  
-  public ref MaterialProxyType_t ProxyType { get; }
-  
-  public ref CUtlVector<MaterialVariable_t> MaterialVars { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> OverrideMaterial { get; }
-  
-  public CParticleCollectionFloatInput MaterialOverrideEnabled { get; }
-  
-  public CParticleCollectionVecInput ColorScale { get; }
-  
-  public CPerParticleFloatInput Alpha { get; }
-  
-  public ref ParticleColorBlendType_t ColorBlendType { get; }
+    public ref int MaterialControlPoint { get; }
+
+    public ref MaterialProxyType_t ProxyType { get; }
+
+    public ref CUtlVector<MaterialVariable_t> MaterialVars { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> OverrideMaterial { get; }
+
+    public CParticleCollectionFloatInput MaterialOverrideEnabled { get; }
+
+    public CParticleCollectionVecInput ColorScale { get; }
+
+    public CPerParticleFloatInput Alpha { get; }
+
+    public ref ParticleColorBlendType_t ColorBlendType { get; }
 
 
 }

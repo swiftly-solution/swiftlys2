@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventClientPreOutput_t : ISchemaClass<EventClientPreOutput_t> {
+public partial interface EventClientPreOutput_t : ISchemaClass<EventClientPreOutput_t>
+{
+    static EventClientPreOutput_t ISchemaClass<EventClientPreOutput_t>.From(nint handle) => new EventClientPreOutput_tImpl(handle);
+    static int ISchemaClass<EventClientPreOutput_t>.Size => 72;
+    static string? ISchemaClass<EventClientPreOutput_t>.ClassName => null;
 
-  static EventClientPreOutput_t ISchemaClass<EventClientPreOutput_t>.From(nint handle) => new EventClientPreOutput_tImpl(handle);
-  static int ISchemaClass<EventClientPreOutput_t>.Size => 72;
-  static string? ISchemaClass<EventClientPreOutput_t>.ClassName => null;
 
-  
-  public EngineLoopState_t LoopState { get; }
-  
-  public ref double RenderTime { get; }
-  
-  public ref double RenderFrameTime { get; }
-  
-  public ref double RenderFrameTimeUnbounded { get; }
-  
-  public ref float RealTime { get; }
-  
-  public ref bool RenderOnly { get; }
+    public EngineLoopState_t LoopState { get; }
+
+    public ref double RenderTime { get; }
+
+    public ref double RenderFrameTime { get; }
+
+    public ref double RenderFrameTimeUnbounded { get; }
+
+    public ref float RealTime { get; }
+
+    public ref bool RenderOnly { get; }
 
 
 }

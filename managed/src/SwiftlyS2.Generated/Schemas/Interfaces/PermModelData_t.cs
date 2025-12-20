@@ -8,58 +8,58 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PermModelData_t : ISchemaClass<PermModelData_t> {
+public partial interface PermModelData_t : ISchemaClass<PermModelData_t>
+{
+    static PermModelData_t ISchemaClass<PermModelData_t>.From(nint handle) => new PermModelData_tImpl(handle);
+    static int ISchemaClass<PermModelData_t>.Size => 712;
+    static string? ISchemaClass<PermModelData_t>.ClassName => null;
 
-  static PermModelData_t ISchemaClass<PermModelData_t>.From(nint handle) => new PermModelData_tImpl(handle);
-  static int ISchemaClass<PermModelData_t>.Size => 712;
-  static string? ISchemaClass<PermModelData_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public PermModelInfo_t ModelInfo { get; }
-  
-  public ref CUtlVector<PermModelExtPart_t> ExtParts { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCRenderMesh>> RefMeshes { get; }
-  
-  public ref CUtlVector<ulong> RefMeshGroupMasks { get; }
-  
-  public ref CUtlVector<ulong> RefPhysGroupMasks { get; }
-  
-  public ref CUtlVector<byte> RefLODGroupMasks { get; }
-  
-  public ref CUtlVector<float> LodGroupSwitchDistances { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCPhysAggregateData>> RefPhysicsData { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCPhysAggregateData>> RefPhysicsHitboxData { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimationGroup>> RefAnimGroups { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCSequenceGroupData>> RefSequenceGroups { get; }
-  
-  public ref CUtlVector<CUtlString> MeshGroups { get; }
-  
-  public ref CUtlVector<MaterialGroup_t> MaterialGroups { get; }
-  
-  public ref ulong DefaultMeshGroupMask { get; }
-  
-  public ModelSkeletonData_t ModelSkeleton { get; }
-  
-  public ref CUtlVector<short> RemappingTable { get; }
-  
-  public ref CUtlVector<ushort> RemappingTableStarts { get; }
-  
-  public ref CUtlVector<ModelBoneFlexDriver_t> BoneFlexDrivers { get; }
-  
-  public CModelConfigList? ModelConfigList { get; }
-  
-  public ref CUtlVector<CUtlString> BodyGroupsHiddenInTools { get; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCModel>> RefAnimIncludeModels { get; }
-  
-  public ref CUtlVector<PermModelDataAnimatedMaterialAttribute_t> AnimatedMaterialAttributes { get; }
+    public string Name { get; set; }
+
+    public PermModelInfo_t ModelInfo { get; }
+
+    public ref CUtlVector<PermModelExtPart_t> ExtParts { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCRenderMesh>> RefMeshes { get; }
+
+    public ref CUtlVector<ulong> RefMeshGroupMasks { get; }
+
+    public ref CUtlVector<ulong> RefPhysGroupMasks { get; }
+
+    public ref CUtlVector<byte> RefLODGroupMasks { get; }
+
+    public ref CUtlVector<float> LodGroupSwitchDistances { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCPhysAggregateData>> RefPhysicsData { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCPhysAggregateData>> RefPhysicsHitboxData { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCAnimationGroup>> RefAnimGroups { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCSequenceGroupData>> RefSequenceGroups { get; }
+
+    public ref CUtlVector<CUtlString> MeshGroups { get; }
+
+    public ref CUtlVector<MaterialGroup_t> MaterialGroups { get; }
+
+    public ref ulong DefaultMeshGroupMask { get; }
+
+    public ModelSkeletonData_t ModelSkeleton { get; }
+
+    public ref CUtlVector<short> RemappingTable { get; }
+
+    public ref CUtlVector<ushort> RemappingTableStarts { get; }
+
+    public ref CUtlVector<ModelBoneFlexDriver_t> BoneFlexDrivers { get; }
+
+    public CModelConfigList? ModelConfigList { get; }
+
+    public ref CUtlVector<CUtlString> BodyGroupsHiddenInTools { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCModel>> RefAnimIncludeModels { get; }
+
+    public ref CUtlVector<PermModelDataAnimatedMaterialAttribute_t> AnimatedMaterialAttributes { get; }
 
 
 }

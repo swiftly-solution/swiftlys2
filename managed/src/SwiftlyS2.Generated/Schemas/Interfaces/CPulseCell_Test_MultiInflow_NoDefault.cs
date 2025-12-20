@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Test_MultiInflow_NoDefault : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Test_MultiInflow_NoDefault> {
-
-  static CPulseCell_Test_MultiInflow_NoDefault ISchemaClass<CPulseCell_Test_MultiInflow_NoDefault>.From(nint handle) => new CPulseCell_Test_MultiInflow_NoDefaultImpl(handle);
-  static int ISchemaClass<CPulseCell_Test_MultiInflow_NoDefault>.Size => 72;
-  static string? ISchemaClass<CPulseCell_Test_MultiInflow_NoDefault>.ClassName => null;
+public partial interface CPulseCell_Test_MultiInflow_NoDefault : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Test_MultiInflow_NoDefault>
+{
+    static CPulseCell_Test_MultiInflow_NoDefault ISchemaClass<CPulseCell_Test_MultiInflow_NoDefault>.From(nint handle) => new CPulseCell_Test_MultiInflow_NoDefaultImpl(handle);
+    static int ISchemaClass<CPulseCell_Test_MultiInflow_NoDefault>.Size => 72;
+    static string? ISchemaClass<CPulseCell_Test_MultiInflow_NoDefault>.ClassName => null;
 
 
 

@@ -8,50 +8,50 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface shard_model_desc_t : ISchemaClass<shard_model_desc_t> {
+public partial interface shard_model_desc_t : ISchemaClass<shard_model_desc_t>
+{
+    static shard_model_desc_t ISchemaClass<shard_model_desc_t>.From(nint handle) => new shard_model_desc_tImpl(handle);
+    static int ISchemaClass<shard_model_desc_t>.Size => 128;
+    static string? ISchemaClass<shard_model_desc_t>.ClassName => null;
 
-  static shard_model_desc_t ISchemaClass<shard_model_desc_t>.From(nint handle) => new shard_model_desc_tImpl(handle);
-  static int ISchemaClass<shard_model_desc_t>.Size => 128;
-  static string? ISchemaClass<shard_model_desc_t>.ClassName => null;
 
-  
-  public ref int ModelID { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> MaterialBase { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> MaterialDamageOverlay { get; }
-  
-  public ref ShardSolid_t Solid { get; }
-  
-  public ref Vector2D PanelSize { get; }
-  
-  public ref Vector2D StressPositionA { get; }
-  
-  public ref Vector2D StressPositionB { get; }
-  
-  public ref CUtlVector<Vector2D> PanelVertices { get; }
-  
-  public ref CUtlVector<Vector4D> InitialPanelVertices { get; }
-  
-  public ref float GlassHalfThickness { get; }
-  
-  public ref bool HasParent { get; }
-  
-  public ref bool ParentFrozen { get; }
-  
-  public ref CUtlStringToken SurfacePropStringToken { get; }
+    public ref int ModelID { get; }
 
-  public void ModelIDUpdated();
-  public void MaterialBaseUpdated();
-  public void MaterialDamageOverlayUpdated();
-  public void SolidUpdated();
-  public void PanelSizeUpdated();
-  public void StressPositionAUpdated();
-  public void StressPositionBUpdated();
-  public void PanelVerticesUpdated();
-  public void InitialPanelVerticesUpdated();
-  public void GlassHalfThicknessUpdated();
-  public void HasParentUpdated();
-  public void ParentFrozenUpdated();
-  public void SurfacePropStringTokenUpdated();
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> MaterialBase { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> MaterialDamageOverlay { get; }
+
+    public ref ShardSolid_t Solid { get; }
+
+    public ref Vector2D PanelSize { get; }
+
+    public ref Vector2D StressPositionA { get; }
+
+    public ref Vector2D StressPositionB { get; }
+
+    public ref CUtlVector<Vector2D> PanelVertices { get; }
+
+    public ref CUtlVector<Vector4D> InitialPanelVertices { get; }
+
+    public ref float GlassHalfThickness { get; }
+
+    public ref bool HasParent { get; }
+
+    public ref bool ParentFrozen { get; }
+
+    public ref CUtlStringToken SurfacePropStringToken { get; }
+
+    public void ModelIDUpdated();
+    public void MaterialBaseUpdated();
+    public void MaterialDamageOverlayUpdated();
+    public void SolidUpdated();
+    public void PanelSizeUpdated();
+    public void StressPositionAUpdated();
+    public void StressPositionBUpdated();
+    public void PanelVerticesUpdated();
+    public void InitialPanelVerticesUpdated();
+    public void GlassHalfThicknessUpdated();
+    public void HasParentUpdated();
+    public void ParentFrozenUpdated();
+    public void SurfacePropStringTokenUpdated();
 }

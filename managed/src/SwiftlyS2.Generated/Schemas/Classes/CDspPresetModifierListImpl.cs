@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDspPresetModifierListImpl : SchemaClass, CDspPresetModifierList {
+internal partial class CDspPresetModifierListImpl : SchemaClass, CDspPresetModifierList
+{
+    public CDspPresetModifierListImpl(nint handle) : base(handle) { }
 
-  public CDspPresetModifierListImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DspNameOffset;
 
-  private static nint? _DspNameOffset;
+    public string DspName {
+        get {
+            _DspNameOffset = _DspNameOffset ?? Schema.GetOffset(0x68EE16FD7E9A0D3);
+            return Schema.GetString(_Handle.Read<nint>(_DspNameOffset!.Value));
+        }
+        set {
+            _DspNameOffset = _DspNameOffset ?? Schema.GetOffset(0x68EE16FD7E9A0D3);
+            Schema.SetString(_Handle, _DspNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ModifiersOffset;
 
-  public string DspName {
-    get {
-      if (_DspNameOffset == null) {
-        _DspNameOffset = Schema.GetOffset(0x68EE16FD7E9A0D3);
-      }
-      var ptr = _Handle.Read<nint>(_DspNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CDSPMixgroupModifier> Modifiers {
+        get {
+            _ModifiersOffset = _ModifiersOffset ?? Schema.GetOffset(0x68EE16F541F1439);
+            return ref _Handle.AsRef<CUtlVector<CDSPMixgroupModifier>>(_ModifiersOffset!.Value);
+        }
     }
-    set {
-      if (_DspNameOffset == null) {
-        _DspNameOffset = Schema.GetOffset(0x68EE16FD7E9A0D3);
-      }
-      Schema.SetString(_Handle, _DspNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ModifiersOffset;
-
-  public ref CUtlVector<CDSPMixgroupModifier> Modifiers {
-    get {
-      if (_ModifiersOffset == null) {
-        _ModifiersOffset = Schema.GetOffset(0x68EE16F541F1439);
-      }
-      return ref _Handle.AsRef<CUtlVector<CDSPMixgroupModifier>>(_ModifiersOffset!.Value);
-    }
-  }
 
 
 }

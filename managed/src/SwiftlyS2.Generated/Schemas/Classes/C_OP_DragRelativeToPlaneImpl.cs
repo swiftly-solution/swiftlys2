@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DragRelativeToPlaneImpl : CParticleFunctionOperatorImpl, C_OP_DragRelativeToPlane {
+internal partial class C_OP_DragRelativeToPlaneImpl : CParticleFunctionOperatorImpl, C_OP_DragRelativeToPlane
+{
+    public C_OP_DragRelativeToPlaneImpl(nint handle) : base(handle) { }
 
-  public C_OP_DragRelativeToPlaneImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DragAtPlaneOffset;
 
-  private static nint? _DragAtPlaneOffset;
-
-  public CParticleCollectionFloatInput DragAtPlane {
-    get {
-      if (_DragAtPlaneOffset == null) {
-        _DragAtPlaneOffset = Schema.GetOffset(0x9D049848176259A2);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _DragAtPlaneOffset!.Value);
+    public CParticleCollectionFloatInput DragAtPlane {
+        get {
+            _DragAtPlaneOffset = _DragAtPlaneOffset ?? Schema.GetOffset(0x9D049848176259A2);
+            return new CParticleCollectionFloatInputImpl(_Handle + _DragAtPlaneOffset!.Value);
+        }
     }
-  }
-  private static nint? _FalloffOffset;
+    private static nint? _FalloffOffset;
 
-  public CParticleCollectionFloatInput Falloff {
-    get {
-      if (_FalloffOffset == null) {
-        _FalloffOffset = Schema.GetOffset(0x9D049848FA143DCB);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _FalloffOffset!.Value);
+    public CParticleCollectionFloatInput Falloff {
+        get {
+            _FalloffOffset = _FalloffOffset ?? Schema.GetOffset(0x9D049848FA143DCB);
+            return new CParticleCollectionFloatInputImpl(_Handle + _FalloffOffset!.Value);
+        }
     }
-  }
-  private static nint? _DirectionalOffset;
+    private static nint? _DirectionalOffset;
 
-  public ref bool Directional {
-    get {
-      if (_DirectionalOffset == null) {
-        _DirectionalOffset = Schema.GetOffset(0x9D0498484C2A43E7);
-      }
-      return ref _Handle.AsRef<bool>(_DirectionalOffset!.Value);
+    public ref bool Directional {
+        get {
+            _DirectionalOffset = _DirectionalOffset ?? Schema.GetOffset(0x9D0498484C2A43E7);
+            return ref _Handle.AsRef<bool>(_DirectionalOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlaneNormalOffset;
+    private static nint? _PlaneNormalOffset;
 
-  public CParticleCollectionVecInput PlaneNormal {
-    get {
-      if (_PlaneNormalOffset == null) {
-        _PlaneNormalOffset = Schema.GetOffset(0x9D04984821103682);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _PlaneNormalOffset!.Value);
+    public CParticleCollectionVecInput PlaneNormal {
+        get {
+            _PlaneNormalOffset = _PlaneNormalOffset ?? Schema.GetOffset(0x9D04984821103682);
+            return new CParticleCollectionVecInputImpl(_Handle + _PlaneNormalOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointNumberOffset;
+    private static nint? _ControlPointNumberOffset;
 
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x9D0498483F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x9D0498483F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
 
 
 }

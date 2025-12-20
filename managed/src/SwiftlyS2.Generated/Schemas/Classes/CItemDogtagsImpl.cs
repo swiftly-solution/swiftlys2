@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CItemDogtagsImpl : CItemImpl, CItemDogtags {
+internal partial class CItemDogtagsImpl : CItemImpl, CItemDogtags
+{
+    public CItemDogtagsImpl(nint handle) : base(handle) { }
 
-  public CItemDogtagsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OwningPlayerOffset;
 
-  private static nint? _OwningPlayerOffset;
-
-  public ref CHandle<CCSPlayerPawn> OwningPlayer {
-    get {
-      if (_OwningPlayerOffset == null) {
-        _OwningPlayerOffset = Schema.GetOffset(0x69879A78258F5D24);
-      }
-      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_OwningPlayerOffset!.Value);
+    public ref CHandle<CCSPlayerPawn> OwningPlayer {
+        get {
+            _OwningPlayerOffset = _OwningPlayerOffset ?? Schema.GetOffset(0x69879A78258F5D24);
+            return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_OwningPlayerOffset!.Value);
+        }
     }
-  }
-  private static nint? _KillingPlayerOffset;
+    private static nint? _KillingPlayerOffset;
 
-  public ref CHandle<CCSPlayerPawn> KillingPlayer {
-    get {
-      if (_KillingPlayerOffset == null) {
-        _KillingPlayerOffset = Schema.GetOffset(0x69879A784617E6C6);
-      }
-      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_KillingPlayerOffset!.Value);
+    public ref CHandle<CCSPlayerPawn> KillingPlayer {
+        get {
+            _KillingPlayerOffset = _KillingPlayerOffset ?? Schema.GetOffset(0x69879A784617E6C6);
+            return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_KillingPlayerOffset!.Value);
+        }
     }
-  }
 
-  public void OwningPlayerUpdated() {
-    Schema.Update(_Handle, 0x69879A78258F5D24);
-  }
-  public void KillingPlayerUpdated() {
-    Schema.Update(_Handle, 0x69879A784617E6C6);
-  }
+    public void OwningPlayerUpdated() => Schema.Update(_Handle, 0x69879A78258F5D24);
+    public void KillingPlayerUpdated() => Schema.Update(_Handle, 0x69879A784617E6C6);
 }

@@ -8,49 +8,49 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSTeam : CTeam, ISchemaClass<CCSTeam> {
+public partial interface CCSTeam : CTeam, ISchemaClass<CCSTeam>
+{
+    static CCSTeam ISchemaClass<CCSTeam>.From(nint handle) => new CCSTeamImpl(handle);
+    static int ISchemaClass<CCSTeam>.Size => 2152;
+    static string? ISchemaClass<CCSTeam>.ClassName => "cs_team_manager";
 
-  static CCSTeam ISchemaClass<CCSTeam>.From(nint handle) => new CCSTeamImpl(handle);
-  static int ISchemaClass<CCSTeam>.Size => 2152;
-  static string? ISchemaClass<CCSTeam>.ClassName => "cs_team_manager";
 
-  
-  public ref int LastRecievedShorthandedRoundBonus { get; }
-  
-  public ref int ShorthandedRoundBonusStartRound { get; }
-  
-  public ref bool Surrendered { get; }
-  
-  public string TeamMatchStat { get; set; }
-  
-  public ref int NumMapVictories { get; }
-  
-  public ref int ScoreFirstHalf { get; }
-  
-  public ref int ScoreSecondHalf { get; }
-  
-  public ref int ScoreOvertime { get; }
-  
-  public string ClanTeamname { get; set; }
-  
-  public ref uint ClanID { get; }
-  
-  public string TeamFlagImage { get; set; }
-  
-  public string TeamLogoImage { get; set; }
-  
-  public ref float NextResourceTime { get; }
-  
-  public ref int LastUpdateSentAt { get; }
+    public ref int LastRecievedShorthandedRoundBonus { get; }
 
-  public void SurrenderedUpdated();
-  public void TeamMatchStatUpdated();
-  public void NumMapVictoriesUpdated();
-  public void ScoreFirstHalfUpdated();
-  public void ScoreSecondHalfUpdated();
-  public void ScoreOvertimeUpdated();
-  public void ClanTeamnameUpdated();
-  public void ClanIDUpdated();
-  public void TeamFlagImageUpdated();
-  public void TeamLogoImageUpdated();
+    public ref int ShorthandedRoundBonusStartRound { get; }
+
+    public ref bool Surrendered { get; }
+
+    public string TeamMatchStat { get; set; }
+
+    public ref int NumMapVictories { get; }
+
+    public ref int ScoreFirstHalf { get; }
+
+    public ref int ScoreSecondHalf { get; }
+
+    public ref int ScoreOvertime { get; }
+
+    public string ClanTeamname { get; set; }
+
+    public ref uint ClanID { get; }
+
+    public string TeamFlagImage { get; set; }
+
+    public string TeamLogoImage { get; set; }
+
+    public ref float NextResourceTime { get; }
+
+    public ref int LastUpdateSentAt { get; }
+
+    public void SurrenderedUpdated();
+    public void TeamMatchStatUpdated();
+    public void NumMapVictoriesUpdated();
+    public void ScoreFirstHalfUpdated();
+    public void ScoreSecondHalfUpdated();
+    public void ScoreOvertimeUpdated();
+    public void ClanTeamnameUpdated();
+    public void ClanIDUpdated();
+    public void TeamFlagImageUpdated();
+    public void TeamLogoImageUpdated();
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeAntiTunnelProbeBuild_t : ISchemaClass<FeAntiTunnelProbeBuild_t> {
+public partial interface FeAntiTunnelProbeBuild_t : ISchemaClass<FeAntiTunnelProbeBuild_t>
+{
+    static FeAntiTunnelProbeBuild_t ISchemaClass<FeAntiTunnelProbeBuild_t>.From(nint handle) => new FeAntiTunnelProbeBuild_tImpl(handle);
+    static int ISchemaClass<FeAntiTunnelProbeBuild_t>.Size => 48;
+    static string? ISchemaClass<FeAntiTunnelProbeBuild_t>.ClassName => null;
 
-  static FeAntiTunnelProbeBuild_t ISchemaClass<FeAntiTunnelProbeBuild_t>.From(nint handle) => new FeAntiTunnelProbeBuild_tImpl(handle);
-  static int ISchemaClass<FeAntiTunnelProbeBuild_t>.Size => 48;
-  static string? ISchemaClass<FeAntiTunnelProbeBuild_t>.ClassName => null;
 
-  
-  public ref float Weight { get; }
-  
-  public ref float ActivationDistance { get; }
-  
-  public ref float Bias { get; }
-  
-  public ref float Curvature { get; }
-  
-  public ref uint Flags { get; }
-  
-  public ref ushort ProbeNode { get; }
-  
-  public ref CUtlVector<ushort> TargetNodes { get; }
+    public ref float Weight { get; }
+
+    public ref float ActivationDistance { get; }
+
+    public ref float Bias { get; }
+
+    public ref float Curvature { get; }
+
+    public ref uint Flags { get; }
+
+    public ref ushort ProbeNode { get; }
+
+    public ref CUtlVector<ushort> TargetNodes { get; }
 
 
 }

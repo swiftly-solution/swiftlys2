@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqIKLock : ISchemaClass<CSeqIKLock> {
+public partial interface CSeqIKLock : ISchemaClass<CSeqIKLock>
+{
+    static CSeqIKLock ISchemaClass<CSeqIKLock>.From(nint handle) => new CSeqIKLockImpl(handle);
+    static int ISchemaClass<CSeqIKLock>.Size => 12;
+    static string? ISchemaClass<CSeqIKLock>.ClassName => null;
 
-  static CSeqIKLock ISchemaClass<CSeqIKLock>.From(nint handle) => new CSeqIKLockImpl(handle);
-  static int ISchemaClass<CSeqIKLock>.Size => 12;
-  static string? ISchemaClass<CSeqIKLock>.ClassName => null;
 
-  
-  public ref float PosWeight { get; }
-  
-  public ref float AngleWeight { get; }
-  
-  public ref short LocalBone { get; }
-  
-  public ref bool BonesOrientedAlongPositiveX { get; }
+    public ref float PosWeight { get; }
+
+    public ref float AngleWeight { get; }
+
+    public ref short LocalBone { get; }
+
+    public ref bool BonesOrientedAlongPositiveX { get; }
 
 
 }

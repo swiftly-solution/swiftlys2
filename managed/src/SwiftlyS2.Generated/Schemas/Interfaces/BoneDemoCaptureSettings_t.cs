@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface BoneDemoCaptureSettings_t : ISchemaClass<BoneDemoCaptureSettings_t> {
+public partial interface BoneDemoCaptureSettings_t : ISchemaClass<BoneDemoCaptureSettings_t>
+{
+    static BoneDemoCaptureSettings_t ISchemaClass<BoneDemoCaptureSettings_t>.From(nint handle) => new BoneDemoCaptureSettings_tImpl(handle);
+    static int ISchemaClass<BoneDemoCaptureSettings_t>.Size => 32;
+    static string? ISchemaClass<BoneDemoCaptureSettings_t>.ClassName => null;
 
-  static BoneDemoCaptureSettings_t ISchemaClass<BoneDemoCaptureSettings_t>.From(nint handle) => new BoneDemoCaptureSettings_tImpl(handle);
-  static int ISchemaClass<BoneDemoCaptureSettings_t>.Size => 32;
-  static string? ISchemaClass<BoneDemoCaptureSettings_t>.ClassName => null;
 
-  
-  public string BoneName { get; set; }
-  
-  public ref float ErrorSplineRotationMax { get; }
-  
-  public ref float ErrorSplineTranslationMax { get; }
-  
-  public ref float ErrorSplineScaleMax { get; }
-  
-  public ref float ErrorQuantizationRotationMax { get; }
-  
-  public ref float ErrorQuantizationTranslationMax { get; }
-  
-  public ref float ErrorQuantizationScaleMax { get; }
+    public string BoneName { get; set; }
+
+    public ref float ErrorSplineRotationMax { get; }
+
+    public ref float ErrorSplineTranslationMax { get; }
+
+    public ref float ErrorSplineScaleMax { get; }
+
+    public ref float ErrorQuantizationRotationMax { get; }
+
+    public ref float ErrorQuantizationTranslationMax { get; }
+
+    public ref float ErrorQuantizationScaleMax { get; }
 
 
 }

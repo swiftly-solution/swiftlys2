@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundOpvarSetPathCornerEntity : CSoundOpvarSetPointEntity, ISchemaClass<CSoundOpvarSetPathCornerEntity> {
+public partial interface CSoundOpvarSetPathCornerEntity : CSoundOpvarSetPointEntity, ISchemaClass<CSoundOpvarSetPathCornerEntity>
+{
+    static CSoundOpvarSetPathCornerEntity ISchemaClass<CSoundOpvarSetPathCornerEntity>.From(nint handle) => new CSoundOpvarSetPathCornerEntityImpl(handle);
+    static int ISchemaClass<CSoundOpvarSetPathCornerEntity>.Size => 1744;
+    static string? ISchemaClass<CSoundOpvarSetPathCornerEntity>.ClassName => "snd_opvar_set_path_corner";
 
-  static CSoundOpvarSetPathCornerEntity ISchemaClass<CSoundOpvarSetPathCornerEntity>.From(nint handle) => new CSoundOpvarSetPathCornerEntityImpl(handle);
-  static int ISchemaClass<CSoundOpvarSetPathCornerEntity>.Size => 1744;
-  static string? ISchemaClass<CSoundOpvarSetPathCornerEntity>.ClassName => "snd_opvar_set_path_corner";
 
-  
-  public ref float DistMinSqr { get; }
-  
-  public ref float DistMaxSqr { get; }
-  
-  public string PathCornerEntityName { get; set; }
+    public ref float DistMinSqr { get; }
+
+    public ref float DistMaxSqr { get; }
+
+    public string PathCornerEntityName { get; set; }
 
 
 }

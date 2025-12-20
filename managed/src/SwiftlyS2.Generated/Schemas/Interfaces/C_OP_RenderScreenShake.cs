@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderScreenShake : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderScreenShake> {
+public partial interface C_OP_RenderScreenShake : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderScreenShake>
+{
+    static C_OP_RenderScreenShake ISchemaClass<C_OP_RenderScreenShake>.From(nint handle) => new C_OP_RenderScreenShakeImpl(handle);
+    static int ISchemaClass<C_OP_RenderScreenShake>.Size => 584;
+    static string? ISchemaClass<C_OP_RenderScreenShake>.ClassName => null;
 
-  static C_OP_RenderScreenShake ISchemaClass<C_OP_RenderScreenShake>.From(nint handle) => new C_OP_RenderScreenShakeImpl(handle);
-  static int ISchemaClass<C_OP_RenderScreenShake>.Size => 584;
-  static string? ISchemaClass<C_OP_RenderScreenShake>.ClassName => null;
 
-  
-  public ref float DurationScale { get; }
-  
-  public ref float RadiusScale { get; }
-  
-  public ref float FrequencyScale { get; }
-  
-  public ref float AmplitudeScale { get; }
-  
-  public ParticleAttributeIndex_t RadiusField { get; }
-  
-  public ParticleAttributeIndex_t DurationField { get; }
-  
-  public ParticleAttributeIndex_t FrequencyField { get; }
-  
-  public ParticleAttributeIndex_t AmplitudeField { get; }
-  
-  public ref int FilterCP { get; }
+    public ref float DurationScale { get; }
+
+    public ref float RadiusScale { get; }
+
+    public ref float FrequencyScale { get; }
+
+    public ref float AmplitudeScale { get; }
+
+    public ParticleAttributeIndex_t RadiusField { get; }
+
+    public ParticleAttributeIndex_t DurationField { get; }
+
+    public ParticleAttributeIndex_t FrequencyField { get; }
+
+    public ParticleAttributeIndex_t AmplitudeField { get; }
+
+    public ref int FilterCP { get; }
 
 
 }

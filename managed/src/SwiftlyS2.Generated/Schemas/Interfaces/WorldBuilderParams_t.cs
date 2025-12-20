@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface WorldBuilderParams_t : ISchemaClass<WorldBuilderParams_t> {
+public partial interface WorldBuilderParams_t : ISchemaClass<WorldBuilderParams_t>
+{
+    static WorldBuilderParams_t ISchemaClass<WorldBuilderParams_t>.From(nint handle) => new WorldBuilderParams_tImpl(handle);
+    static int ISchemaClass<WorldBuilderParams_t>.Size => 96;
+    static string? ISchemaClass<WorldBuilderParams_t>.ClassName => null;
 
-  static WorldBuilderParams_t ISchemaClass<WorldBuilderParams_t>.From(nint handle) => new WorldBuilderParams_tImpl(handle);
-  static int ISchemaClass<WorldBuilderParams_t>.Size => 96;
-  static string? ISchemaClass<WorldBuilderParams_t>.ClassName => null;
 
-  
-  public ref float MinDrawVolumeSize { get; }
-  
-  public ref bool BuildBakedLighting { get; }
-  
-  public ref bool AggregateInstanceStreams { get; }
-  
-  public BakedLightingInfo_t BakedLightingInfo { get; }
-  
-  public ref ulong CompileTimestamp { get; }
-  
-  public ref ulong CompileFingerprint { get; }
+    public ref float MinDrawVolumeSize { get; }
+
+    public ref bool BuildBakedLighting { get; }
+
+    public ref bool AggregateInstanceStreams { get; }
+
+    public BakedLightingInfo_t BakedLightingInfo { get; }
+
+    public ref ulong CompileTimestamp { get; }
+
+    public ref ulong CompileFingerprint { get; }
 
 
 }

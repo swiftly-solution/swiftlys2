@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointGiveAmmoImpl : CPointEntityImpl, CPointGiveAmmo {
+internal partial class CPointGiveAmmoImpl : CPointEntityImpl, CPointGiveAmmo
+{
+    public CPointGiveAmmoImpl(nint handle) : base(handle) { }
 
-  public CPointGiveAmmoImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActivatorOffset;
 
-  private static nint? _ActivatorOffset;
-
-  public ref CHandle<CBaseEntity> Activator {
-    get {
-      if (_ActivatorOffset == null) {
-        _ActivatorOffset = Schema.GetOffset(0x2A4FB25F9C480B5A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
+    public ref CHandle<CBaseEntity> Activator {
+        get {
+            _ActivatorOffset = _ActivatorOffset ?? Schema.GetOffset(0x2A4FB25F9C480B5A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
+        }
     }
-  }
 
 
 }

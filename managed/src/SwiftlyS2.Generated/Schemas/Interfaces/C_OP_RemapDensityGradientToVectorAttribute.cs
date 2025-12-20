@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapDensityGradientToVectorAttribute : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute> {
+public partial interface C_OP_RemapDensityGradientToVectorAttribute : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute>
+{
+    static C_OP_RemapDensityGradientToVectorAttribute ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute>.From(nint handle) => new C_OP_RemapDensityGradientToVectorAttributeImpl(handle);
+    static int ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute>.Size => 472;
+    static string? ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute>.ClassName => null;
 
-  static C_OP_RemapDensityGradientToVectorAttribute ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute>.From(nint handle) => new C_OP_RemapDensityGradientToVectorAttributeImpl(handle);
-  static int ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute>.Size => 472;
-  static string? ISchemaClass<C_OP_RemapDensityGradientToVectorAttribute>.ClassName => null;
 
-  
-  public ref float RadiusScale { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
+    public ref float RadiusScale { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
 
 
 }

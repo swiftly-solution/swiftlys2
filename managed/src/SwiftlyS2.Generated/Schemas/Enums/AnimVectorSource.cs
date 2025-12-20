@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AnimVectorSource : uint {
-
+public enum AnimVectorSource : uint
+{
  MoveDirection = 0,
 
  FacingPosition = 1,

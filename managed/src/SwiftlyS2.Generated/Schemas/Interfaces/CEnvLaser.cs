@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvLaser : CBeam, ISchemaClass<CEnvLaser> {
+public partial interface CEnvLaser : CBeam, ISchemaClass<CEnvLaser>
+{
+    static CEnvLaser ISchemaClass<CEnvLaser>.From(nint handle) => new CEnvLaserImpl(handle);
+    static int ISchemaClass<CEnvLaser>.Size => 2208;
+    static string? ISchemaClass<CEnvLaser>.ClassName => "env_laser";
 
-  static CEnvLaser ISchemaClass<CEnvLaser>.From(nint handle) => new CEnvLaserImpl(handle);
-  static int ISchemaClass<CEnvLaser>.Size => 2208;
-  static string? ISchemaClass<CEnvLaser>.ClassName => "env_laser";
 
-  
-  public string LaserTarget { get; set; }
-  
-  public CSprite? Sprite { get; }
-  
-  public string SpriteName { get; set; }
-  
-  public ref Vector FirePosition { get; }
-  
-  public ref float StartFrame { get; }
+    public string LaserTarget { get; set; }
+
+    public CSprite? Sprite { get; }
+
+    public string SpriteName { get; set; }
+
+    public ref Vector FirePosition { get; }
+
+    public ref float StartFrame { get; }
 
 
 }

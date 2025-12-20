@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CNmTargetInfoNode__Info_t : uint {
-
+public enum CNmTargetInfoNode__Info_t : uint
+{
  AngleHorizontal = 0,
 
  AngleVertical = 1,
