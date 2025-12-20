@@ -91,17 +91,6 @@ CON_COMMAND(sw_crash, "")
     *ptr = 0;
 }
 
-CON_COMMAND(sw_dump_cvariant, "Dump CVariant memory layout")
-{
-    Msg("CVariant Memory Layout:\n");
-    Msg("  sizeof(CVariant) = %zu\n", sizeof(CVariant));
-    Msg("  offsetof(m_type) = %zu\n", offsetof(CVariant, m_type));
-    Msg("  offsetof(m_flags) = %zu\n", offsetof(CVariant, m_flags));
-    Msg("  sizeof(m_type) = %zu\n", sizeof(fieldtype_t));
-    Msg("  sizeof(m_flags) = %zu\n", sizeof(uint16));
-    Msg("  Union size (data) = %zu\n", offsetof(CVariant, m_type));
-}
-
 bool SwiftlyCore::Load(BridgeKind_t kind)
 {
     m_iKind = kind;
