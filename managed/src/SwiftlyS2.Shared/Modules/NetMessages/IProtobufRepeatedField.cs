@@ -14,4 +14,5 @@ public interface IProtobufRepeatedFieldSubMessageType<T> : IRepeatedField, IEnum
 
     public T Get( int index );
     public T Add();
+    public void Clear();
 }

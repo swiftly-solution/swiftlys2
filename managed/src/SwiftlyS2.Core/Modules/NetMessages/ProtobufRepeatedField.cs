@@ -3,24 +3,16 @@ using SwiftlyS2.Shared.NetMessages;
 
 namespace SwiftlyS2.Core.NetMessages;
 
-internal class ProtobufRepeatedFieldValueType<T> : IProtobufRepeatedFieldValueType<T>
+internal class ProtobufRepeatedFieldValueType<T>( IProtobufAccessor protobuf, string fieldName ) : IProtobufRepeatedFieldValueType<T>
 {
-    private readonly IProtobufAccessor protobuf;
-    private readonly string fieldName;
-    public ProtobufRepeatedFieldValueType( IProtobufAccessor protobuf, string fieldName )
-    {
-        this.protobuf = protobuf;
-        this.fieldName = fieldName;
-    }
+    public int Count => protobuf.GetRepeatedFieldSize(fieldName);
+
+    public bool IsReadOnly => false;
 
     public T this[int index] {
         get => protobuf.GetRepeated<T>(fieldName, index);
         set => protobuf.SetRepeated<T>(fieldName, index, value);
     }
-
-    public int Count => protobuf.GetRepeatedFieldSize(fieldName);
-
-    public bool IsReadOnly => false;
 
     public void Add( T item )
     {
@@ -94,25 +86,23 @@ internal class ProtobufRepeatedFieldValueType<T> : IProtobufRepeatedFieldValueTy
 }
 
 
-internal class ProtobufRepeatedFieldSubMessageType<T> : IProtobufRepeatedFieldSubMessageType<T> where T : ITypedProtobuf<T>
+internal class ProtobufRepeatedFieldSubMessageType<T>( IProtobufAccessor protobuf, string fieldName ) : IProtobufRepeatedFieldSubMessageType<T> where T : ITypedProtobuf<T>
 {
     public int Count => protobuf.GetRepeatedFieldSize(fieldName);
-
-    private readonly IProtobufAccessor protobuf;
-    private readonly string fieldName;
-    public ProtobufRepeatedFieldSubMessageType( IProtobufAccessor protobuf, string fieldName )
-    {
-        this.protobuf = protobuf;
-        this.fieldName = fieldName;
-    }
 
     public T Get( int index )
     {
         return T.Wrap(protobuf.GetRepeatedNestedMessage(fieldName, index), false);
     }
+
     public T Add()
     {
         return T.Wrap(protobuf.AddNestedMessage(fieldName), false);
+    }
+
+    public void Clear()
+    {
+        protobuf.ClearRepeatedField(fieldName);
     }
 
     public IEnumerator<T> GetEnumerator()
