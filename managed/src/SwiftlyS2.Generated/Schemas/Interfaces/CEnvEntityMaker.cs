@@ -35,9 +35,9 @@ public partial interface CEnvEntityMaker : CPointEntity, ISchemaClass<CEnvEntity
 
     public string Template { get; set; }
 
-    public CEntityIOOutput OutputOnSpawned { get; }
+    public ref CEntityIOOutput OutputOnSpawned { get; }
 
-    public CEntityIOOutput OutputOnFailedSpawn { get; }
+    public ref CEntityIOOutput OutputOnFailedSpawn { get; }
 
 
 }

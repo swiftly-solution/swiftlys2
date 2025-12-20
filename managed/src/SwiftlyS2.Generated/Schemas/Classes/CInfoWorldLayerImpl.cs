@@ -18,10 +18,10 @@ internal partial class CInfoWorldLayerImpl : CBaseEntityImpl, CInfoWorldLayer
 
     private static nint? _OutputOnEntitiesSpawnedOffset;
 
-    public CEntityIOOutput OutputOnEntitiesSpawned {
+    public ref CEntityIOOutput OutputOnEntitiesSpawned {
         get {
             _OutputOnEntitiesSpawnedOffset = _OutputOnEntitiesSpawnedOffset ?? Schema.GetOffset(0x74C9C61B31420D1E);
-            return new CEntityIOOutputImpl(_Handle + _OutputOnEntitiesSpawnedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OutputOnEntitiesSpawnedOffset!.Value);
         }
     }
     private static nint? _WorldNameOffset;

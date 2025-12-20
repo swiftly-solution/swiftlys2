@@ -15,9 +15,9 @@ public partial interface CGamePlayerZone : CRuleBrushEntity, ISchemaClass<CGameP
     static string? ISchemaClass<CGamePlayerZone>.ClassName => "game_zone_player";
 
 
-    public CEntityIOOutput OnPlayerInZone { get; }
+    public ref CEntityIOOutput OnPlayerInZone { get; }
 
-    public CEntityIOOutput OnPlayerOutZone { get; }
+    public ref CEntityIOOutput OnPlayerOutZone { get; }
 
     // CEntityOutputTemplate< int32 >
     public SchemaUntypedField PlayersInCount { get; }

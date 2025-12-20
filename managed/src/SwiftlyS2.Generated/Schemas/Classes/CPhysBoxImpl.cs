@@ -90,42 +90,42 @@ internal partial class CPhysBoxImpl : CBreakableImpl, CPhysBox
     }
     private static nint? _OnDamagedOffset;
 
-    public CEntityIOOutput OnDamaged {
+    public ref CEntityIOOutput OnDamaged {
         get {
             _OnDamagedOffset = _OnDamagedOffset ?? Schema.GetOffset(0x914B502B1667F41F);
-            return new CEntityIOOutputImpl(_Handle + _OnDamagedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDamagedOffset!.Value);
         }
     }
     private static nint? _OnAwakenedOffset;
 
-    public CEntityIOOutput OnAwakened {
+    public ref CEntityIOOutput OnAwakened {
         get {
             _OnAwakenedOffset = _OnAwakenedOffset ?? Schema.GetOffset(0x914B502B03EDBB66);
-            return new CEntityIOOutputImpl(_Handle + _OnAwakenedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAwakenedOffset!.Value);
         }
     }
     private static nint? _OnMotionEnabledOffset;
 
-    public CEntityIOOutput OnMotionEnabled {
+    public ref CEntityIOOutput OnMotionEnabled {
         get {
             _OnMotionEnabledOffset = _OnMotionEnabledOffset ?? Schema.GetOffset(0x914B502BBB216C9F);
-            return new CEntityIOOutputImpl(_Handle + _OnMotionEnabledOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMotionEnabledOffset!.Value);
         }
     }
     private static nint? _OnPlayerUseOffset;
 
-    public CEntityIOOutput OnPlayerUse {
+    public ref CEntityIOOutput OnPlayerUse {
         get {
             _OnPlayerUseOffset = _OnPlayerUseOffset ?? Schema.GetOffset(0x914B502B611C9A14);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerUseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerUseOffset!.Value);
         }
     }
     private static nint? _OnStartTouchOffset;
 
-    public CEntityIOOutput OnStartTouch {
+    public ref CEntityIOOutput OnStartTouch {
         get {
             _OnStartTouchOffset = _OnStartTouchOffset ?? Schema.GetOffset(0x914B502BB4E38193);
-            return new CEntityIOOutputImpl(_Handle + _OnStartTouchOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartTouchOffset!.Value);
         }
     }
     private static nint? _CarryingPlayerOffset;

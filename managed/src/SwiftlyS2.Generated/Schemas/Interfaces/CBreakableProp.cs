@@ -17,14 +17,14 @@ public partial interface CBreakableProp : CBaseProp, ISchemaClass<CBreakableProp
 
     public CPropDataComponent CPropDataComponent { get; }
 
-    public CEntityIOOutput OnStartDeath { get; }
+    public ref CEntityIOOutput OnStartDeath { get; }
 
-    public CEntityIOOutput OnBreak { get; }
+    public ref CEntityIOOutput OnBreak { get; }
 
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnHealthChanged { get; }
 
-    public CEntityIOOutput OnTakeDamage { get; }
+    public ref CEntityIOOutput OnTakeDamage { get; }
 
     public ref float ImpactEnergyScale { get; }
 

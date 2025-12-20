@@ -18,10 +18,10 @@ internal partial class CLogicGameEventListenerImpl : CLogicalEntityImpl, CLogicG
 
     private static nint? _OnEventFiredOffset;
 
-    public CEntityIOOutput OnEventFired {
+    public ref CEntityIOOutput OnEventFired {
         get {
             _OnEventFiredOffset = _OnEventFiredOffset ?? Schema.GetOffset(0xB18EF22E84EA158);
-            return new CEntityIOOutputImpl(_Handle + _OnEventFiredOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEventFiredOffset!.Value);
         }
     }
     private static nint? _GameEventNameOffset;

@@ -45,23 +45,23 @@ public partial interface CBaseDoor : CBaseToggle, ISchemaClass<CBaseDoor>
 
     public string ChainTarget { get; set; }
 
-    public CEntityIOOutput OnBlockedClosing { get; }
+    public ref CEntityIOOutput OnBlockedClosing { get; }
 
-    public CEntityIOOutput OnBlockedOpening { get; }
+    public ref CEntityIOOutput OnBlockedOpening { get; }
 
-    public CEntityIOOutput OnUnblockedClosing { get; }
+    public ref CEntityIOOutput OnUnblockedClosing { get; }
 
-    public CEntityIOOutput OnUnblockedOpening { get; }
+    public ref CEntityIOOutput OnUnblockedOpening { get; }
 
-    public CEntityIOOutput OnFullyClosed { get; }
+    public ref CEntityIOOutput OnFullyClosed { get; }
 
-    public CEntityIOOutput OnFullyOpen { get; }
+    public ref CEntityIOOutput OnFullyOpen { get; }
 
-    public CEntityIOOutput OnClose { get; }
+    public ref CEntityIOOutput OnClose { get; }
 
-    public CEntityIOOutput OnOpen { get; }
+    public ref CEntityIOOutput OnOpen { get; }
 
-    public CEntityIOOutput OnLockedUse { get; }
+    public ref CEntityIOOutput OnLockedUse { get; }
 
     public ref bool LoopMoveSound { get; }
 

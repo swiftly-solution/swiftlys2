@@ -18,26 +18,26 @@ internal partial class CTriggerBrushImpl : CBaseModelEntityImpl, CTriggerBrush
 
     private static nint? _OnStartTouchOffset;
 
-    public CEntityIOOutput OnStartTouch {
+    public ref CEntityIOOutput OnStartTouch {
         get {
             _OnStartTouchOffset = _OnStartTouchOffset ?? Schema.GetOffset(0xD9D3DFB2B4E38193);
-            return new CEntityIOOutputImpl(_Handle + _OnStartTouchOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartTouchOffset!.Value);
         }
     }
     private static nint? _OnEndTouchOffset;
 
-    public CEntityIOOutput OnEndTouch {
+    public ref CEntityIOOutput OnEndTouch {
         get {
             _OnEndTouchOffset = _OnEndTouchOffset ?? Schema.GetOffset(0xD9D3DFB25D181B48);
-            return new CEntityIOOutputImpl(_Handle + _OnEndTouchOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndTouchOffset!.Value);
         }
     }
     private static nint? _OnUseOffset;
 
-    public CEntityIOOutput OnUse {
+    public ref CEntityIOOutput OnUse {
         get {
             _OnUseOffset = _OnUseOffset ?? Schema.GetOffset(0xD9D3DFB2C3D50673);
-            return new CEntityIOOutputImpl(_Handle + _OnUseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUseOffset!.Value);
         }
     }
     private static nint? _InputFilterOffset;

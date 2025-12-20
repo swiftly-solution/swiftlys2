@@ -94,10 +94,10 @@ internal partial class CPhysExplosionImpl : CPointEntityImpl, CPhysExplosion
     }
     private static nint? _OnPushedPlayerOffset;
 
-    public CEntityIOOutput OnPushedPlayer {
+    public ref CEntityIOOutput OnPushedPlayer {
         get {
             _OnPushedPlayerOffset = _OnPushedPlayerOffset ?? Schema.GetOffset(0xACEBD74165C28180);
-            return new CEntityIOOutputImpl(_Handle + _OnPushedPlayerOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPushedPlayerOffset!.Value);
         }
     }
 

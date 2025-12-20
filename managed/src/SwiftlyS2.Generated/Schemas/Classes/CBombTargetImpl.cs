@@ -18,26 +18,26 @@ internal partial class CBombTargetImpl : CBaseTriggerImpl, CBombTarget
 
     private static nint? _OnBombExplodeOffset;
 
-    public CEntityIOOutput OnBombExplode {
+    public ref CEntityIOOutput OnBombExplode {
         get {
             _OnBombExplodeOffset = _OnBombExplodeOffset ?? Schema.GetOffset(0x1FEE3C3748E87715);
-            return new CEntityIOOutputImpl(_Handle + _OnBombExplodeOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombExplodeOffset!.Value);
         }
     }
     private static nint? _OnBombPlantedOffset;
 
-    public CEntityIOOutput OnBombPlanted {
+    public ref CEntityIOOutput OnBombPlanted {
         get {
             _OnBombPlantedOffset = _OnBombPlantedOffset ?? Schema.GetOffset(0x1FEE3C37B3C2496C);
-            return new CEntityIOOutputImpl(_Handle + _OnBombPlantedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombPlantedOffset!.Value);
         }
     }
     private static nint? _OnBombDefusedOffset;
 
-    public CEntityIOOutput OnBombDefused {
+    public ref CEntityIOOutput OnBombDefused {
         get {
             _OnBombDefusedOffset = _OnBombDefusedOffset ?? Schema.GetOffset(0x1FEE3C37BCDAD16E);
-            return new CEntityIOOutputImpl(_Handle + _OnBombDefusedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombDefusedOffset!.Value);
         }
     }
     private static nint? _IsBombSiteBOffset;

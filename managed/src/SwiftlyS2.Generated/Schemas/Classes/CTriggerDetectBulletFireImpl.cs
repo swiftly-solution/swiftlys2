@@ -26,10 +26,10 @@ internal partial class CTriggerDetectBulletFireImpl : CBaseTriggerImpl, CTrigger
     }
     private static nint? _OnDetectedBulletFireOffset;
 
-    public CEntityIOOutput OnDetectedBulletFire {
+    public ref CEntityIOOutput OnDetectedBulletFire {
         get {
             _OnDetectedBulletFireOffset = _OnDetectedBulletFireOffset ?? Schema.GetOffset(0x93930A3D11D6C936);
-            return new CEntityIOOutputImpl(_Handle + _OnDetectedBulletFireOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDetectedBulletFireOffset!.Value);
         }
     }
 

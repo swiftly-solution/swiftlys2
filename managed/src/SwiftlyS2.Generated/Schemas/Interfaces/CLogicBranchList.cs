@@ -21,11 +21,11 @@ public partial interface CLogicBranchList : CLogicalEntity, ISchemaClass<CLogicB
 
     public ref CLogicBranchList__LogicBranchListenerLastState_t LastState { get; }
 
-    public CEntityIOOutput OnAllTrue { get; }
+    public ref CEntityIOOutput OnAllTrue { get; }
 
-    public CEntityIOOutput OnAllFalse { get; }
+    public ref CEntityIOOutput OnAllFalse { get; }
 
-    public CEntityIOOutput OnMixed { get; }
+    public ref CEntityIOOutput OnMixed { get; }
 
 
 }

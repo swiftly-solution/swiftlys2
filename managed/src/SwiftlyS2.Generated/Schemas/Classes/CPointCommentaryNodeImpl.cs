@@ -198,18 +198,18 @@ internal partial class CPointCommentaryNodeImpl : CBaseAnimGraphImpl, CPointComm
     }
     private static nint? _OnCommentaryStartedOffset;
 
-    public CEntityIOOutput OnCommentaryStarted {
+    public ref CEntityIOOutput OnCommentaryStarted {
         get {
             _OnCommentaryStartedOffset = _OnCommentaryStartedOffset ?? Schema.GetOffset(0x1EE820D50D986100);
-            return new CEntityIOOutputImpl(_Handle + _OnCommentaryStartedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryStartedOffset!.Value);
         }
     }
     private static nint? _OnCommentaryStoppedOffset;
 
-    public CEntityIOOutput OnCommentaryStopped {
+    public ref CEntityIOOutput OnCommentaryStopped {
         get {
             _OnCommentaryStoppedOffset = _OnCommentaryStoppedOffset ?? Schema.GetOffset(0x1EE820D5C05AD020);
-            return new CEntityIOOutputImpl(_Handle + _OnCommentaryStoppedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryStoppedOffset!.Value);
         }
     }
     private static nint? _ActiveOffset;

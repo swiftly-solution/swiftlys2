@@ -18,34 +18,34 @@ internal partial class CInfoSpawnGroupLoadUnloadImpl : CLogicalEntityImpl, CInfo
 
     private static nint? _OnSpawnGroupLoadStartedOffset;
 
-    public CEntityIOOutput OnSpawnGroupLoadStarted {
+    public ref CEntityIOOutput OnSpawnGroupLoadStarted {
         get {
             _OnSpawnGroupLoadStartedOffset = _OnSpawnGroupLoadStartedOffset ?? Schema.GetOffset(0x2537640F52B8B787);
-            return new CEntityIOOutputImpl(_Handle + _OnSpawnGroupLoadStartedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSpawnGroupLoadStartedOffset!.Value);
         }
     }
     private static nint? _OnSpawnGroupLoadFinishedOffset;
 
-    public CEntityIOOutput OnSpawnGroupLoadFinished {
+    public ref CEntityIOOutput OnSpawnGroupLoadFinished {
         get {
             _OnSpawnGroupLoadFinishedOffset = _OnSpawnGroupLoadFinishedOffset ?? Schema.GetOffset(0x2537640FF5DA3EA8);
-            return new CEntityIOOutputImpl(_Handle + _OnSpawnGroupLoadFinishedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSpawnGroupLoadFinishedOffset!.Value);
         }
     }
     private static nint? _OnSpawnGroupUnloadStartedOffset;
 
-    public CEntityIOOutput OnSpawnGroupUnloadStarted {
+    public ref CEntityIOOutput OnSpawnGroupUnloadStarted {
         get {
             _OnSpawnGroupUnloadStartedOffset = _OnSpawnGroupUnloadStartedOffset ?? Schema.GetOffset(0x2537640F89E6672A);
-            return new CEntityIOOutputImpl(_Handle + _OnSpawnGroupUnloadStartedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSpawnGroupUnloadStartedOffset!.Value);
         }
     }
     private static nint? _OnSpawnGroupUnloadFinishedOffset;
 
-    public CEntityIOOutput OnSpawnGroupUnloadFinished {
+    public ref CEntityIOOutput OnSpawnGroupUnloadFinished {
         get {
             _OnSpawnGroupUnloadFinishedOffset = _OnSpawnGroupUnloadFinishedOffset ?? Schema.GetOffset(0x2537640F1268C477);
-            return new CEntityIOOutputImpl(_Handle + _OnSpawnGroupUnloadFinishedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSpawnGroupUnloadFinishedOffset!.Value);
         }
     }
     private static nint? _SpawnGroupNameOffset;

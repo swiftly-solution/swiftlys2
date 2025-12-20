@@ -15,7 +15,7 @@ public partial interface CCredits : CPointEntity, ISchemaClass<CCredits>
     static string? ISchemaClass<CCredits>.ClassName => "env_credits";
 
 
-    public CEntityIOOutput OnCreditsDone { get; }
+    public ref CEntityIOOutput OnCreditsDone { get; }
 
     public ref bool RolledOutroCredits { get; }
 

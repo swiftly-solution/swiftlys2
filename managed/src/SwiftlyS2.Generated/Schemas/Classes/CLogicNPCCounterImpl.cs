@@ -18,18 +18,18 @@ internal partial class CLogicNPCCounterImpl : CBaseEntityImpl, CLogicNPCCounter
 
     private static nint? _OnMinCountAllOffset;
 
-    public CEntityIOOutput OnMinCountAll {
+    public ref CEntityIOOutput OnMinCountAll {
         get {
             _OnMinCountAllOffset = _OnMinCountAllOffset ?? Schema.GetOffset(0x485D88795307A826);
-            return new CEntityIOOutputImpl(_Handle + _OnMinCountAllOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMinCountAllOffset!.Value);
         }
     }
     private static nint? _OnMaxCountAllOffset;
 
-    public CEntityIOOutput OnMaxCountAll {
+    public ref CEntityIOOutput OnMaxCountAll {
         get {
             _OnMaxCountAllOffset = _OnMaxCountAllOffset ?? Schema.GetOffset(0x485D8879DDCC356C);
-            return new CEntityIOOutputImpl(_Handle + _OnMaxCountAllOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMaxCountAllOffset!.Value);
         }
     }
     private static nint? _OnFactorAllOffset;
@@ -50,18 +50,18 @@ internal partial class CLogicNPCCounterImpl : CBaseEntityImpl, CLogicNPCCounter
     }
     private static nint? _OnMinCount_1Offset;
 
-    public CEntityIOOutput OnMinCount_1 {
+    public ref CEntityIOOutput OnMinCount_1 {
         get {
             _OnMinCount_1Offset = _OnMinCount_1Offset ?? Schema.GetOffset(0x485D88794C66E6EF);
-            return new CEntityIOOutputImpl(_Handle + _OnMinCount_1Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMinCount_1Offset!.Value);
         }
     }
     private static nint? _OnMaxCount_1Offset;
 
-    public CEntityIOOutput OnMaxCount_1 {
+    public ref CEntityIOOutput OnMaxCount_1 {
         get {
             _OnMaxCount_1Offset = _OnMaxCount_1Offset ?? Schema.GetOffset(0x485D8879A364ADD5);
-            return new CEntityIOOutputImpl(_Handle + _OnMaxCount_1Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMaxCount_1Offset!.Value);
         }
     }
     private static nint? _OnFactor_1Offset;
@@ -82,18 +82,18 @@ internal partial class CLogicNPCCounterImpl : CBaseEntityImpl, CLogicNPCCounter
     }
     private static nint? _OnMinCount_2Offset;
 
-    public CEntityIOOutput OnMinCount_2 {
+    public ref CEntityIOOutput OnMinCount_2 {
         get {
             _OnMinCount_2Offset = _OnMinCount_2Offset ?? Schema.GetOffset(0x485D88794D66E882);
-            return new CEntityIOOutputImpl(_Handle + _OnMinCount_2Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMinCount_2Offset!.Value);
         }
     }
     private static nint? _OnMaxCount_2Offset;
 
-    public CEntityIOOutput OnMaxCount_2 {
+    public ref CEntityIOOutput OnMaxCount_2 {
         get {
             _OnMaxCount_2Offset = _OnMaxCount_2Offset ?? Schema.GetOffset(0x485D8879A064A91C);
-            return new CEntityIOOutputImpl(_Handle + _OnMaxCount_2Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMaxCount_2Offset!.Value);
         }
     }
     private static nint? _OnFactor_2Offset;
@@ -114,18 +114,18 @@ internal partial class CLogicNPCCounterImpl : CBaseEntityImpl, CLogicNPCCounter
     }
     private static nint? _OnMinCount_3Offset;
 
-    public CEntityIOOutput OnMinCount_3 {
+    public ref CEntityIOOutput OnMinCount_3 {
         get {
             _OnMinCount_3Offset = _OnMinCount_3Offset ?? Schema.GetOffset(0x485D88794E66EA15);
-            return new CEntityIOOutputImpl(_Handle + _OnMinCount_3Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMinCount_3Offset!.Value);
         }
     }
     private static nint? _OnMaxCount_3Offset;
 
-    public CEntityIOOutput OnMaxCount_3 {
+    public ref CEntityIOOutput OnMaxCount_3 {
         get {
             _OnMaxCount_3Offset = _OnMaxCount_3Offset ?? Schema.GetOffset(0x485D8879A164AAAF);
-            return new CEntityIOOutputImpl(_Handle + _OnMaxCount_3Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMaxCount_3Offset!.Value);
         }
     }
     private static nint? _OnFactor_3Offset;

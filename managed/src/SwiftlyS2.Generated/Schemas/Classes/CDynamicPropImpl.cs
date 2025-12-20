@@ -50,42 +50,42 @@ internal partial class CDynamicPropImpl : CBreakablePropImpl, CDynamicProp
     }
     private static nint? _OutputAnimBegunOffset;
 
-    public CEntityIOOutput OutputAnimBegun {
+    public ref CEntityIOOutput OutputAnimBegun {
         get {
             _OutputAnimBegunOffset = _OutputAnimBegunOffset ?? Schema.GetOffset(0x6A5171A28FAC5E08);
-            return new CEntityIOOutputImpl(_Handle + _OutputAnimBegunOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OutputAnimBegunOffset!.Value);
         }
     }
     private static nint? _OutputAnimOverOffset;
 
-    public CEntityIOOutput OutputAnimOver {
+    public ref CEntityIOOutput OutputAnimOver {
         get {
             _OutputAnimOverOffset = _OutputAnimOverOffset ?? Schema.GetOffset(0x6A5171A2EA12DDC9);
-            return new CEntityIOOutputImpl(_Handle + _OutputAnimOverOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OutputAnimOverOffset!.Value);
         }
     }
     private static nint? _OutputAnimLoopCycleOverOffset;
 
-    public CEntityIOOutput OutputAnimLoopCycleOver {
+    public ref CEntityIOOutput OutputAnimLoopCycleOver {
         get {
             _OutputAnimLoopCycleOverOffset = _OutputAnimLoopCycleOverOffset ?? Schema.GetOffset(0x6A5171A2333A0537);
-            return new CEntityIOOutputImpl(_Handle + _OutputAnimLoopCycleOverOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OutputAnimLoopCycleOverOffset!.Value);
         }
     }
     private static nint? _OnAnimReachedStartOffset;
 
-    public CEntityIOOutput OnAnimReachedStart {
+    public ref CEntityIOOutput OnAnimReachedStart {
         get {
             _OnAnimReachedStartOffset = _OnAnimReachedStartOffset ?? Schema.GetOffset(0x6A5171A22545BE4B);
-            return new CEntityIOOutputImpl(_Handle + _OnAnimReachedStartOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAnimReachedStartOffset!.Value);
         }
     }
     private static nint? _OnAnimReachedEndOffset;
 
-    public CEntityIOOutput OnAnimReachedEnd {
+    public ref CEntityIOOutput OnAnimReachedEnd {
         get {
             _OnAnimReachedEndOffset = _OnAnimReachedEndOffset ?? Schema.GetOffset(0x6A5171A2E4470C0E);
-            return new CEntityIOOutputImpl(_Handle + _OnAnimReachedEndOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAnimReachedEndOffset!.Value);
         }
     }
     private static nint? _IdleAnimOffset;

@@ -94,18 +94,18 @@ internal partial class CFuncMoveLinearImpl : CBaseToggleImpl, CFuncMoveLinear
     }
     private static nint? _OnFullyOpenOffset;
 
-    public CEntityIOOutput OnFullyOpen {
+    public ref CEntityIOOutput OnFullyOpen {
         get {
             _OnFullyOpenOffset = _OnFullyOpenOffset ?? Schema.GetOffset(0xDC0EE89421733AE4);
-            return new CEntityIOOutputImpl(_Handle + _OnFullyOpenOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFullyOpenOffset!.Value);
         }
     }
     private static nint? _OnFullyClosedOffset;
 
-    public CEntityIOOutput OnFullyClosed {
+    public ref CEntityIOOutput OnFullyClosed {
         get {
             _OnFullyClosedOffset = _OnFullyClosedOffset ?? Schema.GetOffset(0xDC0EE89475470294);
-            return new CEntityIOOutputImpl(_Handle + _OnFullyClosedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFullyClosedOffset!.Value);
         }
     }
     private static nint? _CreateMovableNavMeshOffset;

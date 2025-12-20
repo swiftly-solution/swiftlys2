@@ -578,54 +578,54 @@ internal partial class CScriptedSequenceImpl : CBaseEntityImpl, CScriptedSequenc
     }
     private static nint? _OnBeginSequenceOffset;
 
-    public CEntityIOOutput OnBeginSequence {
+    public ref CEntityIOOutput OnBeginSequence {
         get {
             _OnBeginSequenceOffset = _OnBeginSequenceOffset ?? Schema.GetOffset(0xBB0C45ED4EFCFF18);
-            return new CEntityIOOutputImpl(_Handle + _OnBeginSequenceOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBeginSequenceOffset!.Value);
         }
     }
     private static nint? _OnActionStartOrLoopOffset;
 
-    public CEntityIOOutput OnActionStartOrLoop {
+    public ref CEntityIOOutput OnActionStartOrLoop {
         get {
             _OnActionStartOrLoopOffset = _OnActionStartOrLoopOffset ?? Schema.GetOffset(0xBB0C45ED709BE9C5);
-            return new CEntityIOOutputImpl(_Handle + _OnActionStartOrLoopOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnActionStartOrLoopOffset!.Value);
         }
     }
     private static nint? _OnEndSequenceOffset;
 
-    public CEntityIOOutput OnEndSequence {
+    public ref CEntityIOOutput OnEndSequence {
         get {
             _OnEndSequenceOffset = _OnEndSequenceOffset ?? Schema.GetOffset(0xBB0C45ED1F7AD018);
-            return new CEntityIOOutputImpl(_Handle + _OnEndSequenceOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndSequenceOffset!.Value);
         }
     }
     private static nint? _OnPostIdleEndSequenceOffset;
 
-    public CEntityIOOutput OnPostIdleEndSequence {
+    public ref CEntityIOOutput OnPostIdleEndSequence {
         get {
             _OnPostIdleEndSequenceOffset = _OnPostIdleEndSequenceOffset ?? Schema.GetOffset(0xBB0C45ED7770824C);
-            return new CEntityIOOutputImpl(_Handle + _OnPostIdleEndSequenceOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPostIdleEndSequenceOffset!.Value);
         }
     }
     private static nint? _OnCancelSequenceOffset;
 
-    public CEntityIOOutput OnCancelSequence {
+    public ref CEntityIOOutput OnCancelSequence {
         get {
             _OnCancelSequenceOffset = _OnCancelSequenceOffset ?? Schema.GetOffset(0xBB0C45ED3DF39D63);
-            return new CEntityIOOutputImpl(_Handle + _OnCancelSequenceOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCancelSequenceOffset!.Value);
         }
     }
     private static nint? _OnCancelFailedSequenceOffset;
 
-    public CEntityIOOutput OnCancelFailedSequence {
+    public ref CEntityIOOutput OnCancelFailedSequence {
         get {
             _OnCancelFailedSequenceOffset = _OnCancelFailedSequenceOffset ?? Schema.GetOffset(0xBB0C45ED1885A91A);
-            return new CEntityIOOutputImpl(_Handle + _OnCancelFailedSequenceOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCancelFailedSequenceOffset!.Value);
         }
     }
-    public ISchemaClassFixedArray<CEntityIOOutput> OnScriptEvent {
-        get => new SchemaClassFixedArray<CEntityIOOutput>(_Handle, 0xBB0C45ED8A68F621, 8, 40, 8);
+    public ISchemaFixedArray<CEntityIOOutput> OnScriptEvent {
+        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0xBB0C45ED8A68F621, 8, 40, 8);
     }
     private static nint? _MatOtherToMainOffset;
 

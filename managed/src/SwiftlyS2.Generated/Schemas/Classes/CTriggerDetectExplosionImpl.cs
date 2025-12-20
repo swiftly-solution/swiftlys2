@@ -18,10 +18,10 @@ internal partial class CTriggerDetectExplosionImpl : CBaseTriggerImpl, CTriggerD
 
     private static nint? _OnDetectedExplosionOffset;
 
-    public CEntityIOOutput OnDetectedExplosion {
+    public ref CEntityIOOutput OnDetectedExplosion {
         get {
             _OnDetectedExplosionOffset = _OnDetectedExplosionOffset ?? Schema.GetOffset(0xEDC17DD03CDD7F71);
-            return new CEntityIOOutputImpl(_Handle + _OnDetectedExplosionOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDetectedExplosionOffset!.Value);
         }
     }
 

@@ -15,7 +15,7 @@ public partial interface CInfoWorldLayer : CBaseEntity, ISchemaClass<CInfoWorldL
     static string? ISchemaClass<CInfoWorldLayer>.ClassName => "info_world_layer";
 
 
-    public CEntityIOOutput OutputOnEntitiesSpawned { get; }
+    public ref CEntityIOOutput OutputOnEntitiesSpawned { get; }
 
     public string WorldName { get; set; }
 

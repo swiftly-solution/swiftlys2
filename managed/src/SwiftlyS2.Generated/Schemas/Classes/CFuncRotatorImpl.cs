@@ -122,58 +122,58 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
     }
     private static nint? _OnRotationStartedOffset;
 
-    public CEntityIOOutput OnRotationStarted {
+    public ref CEntityIOOutput OnRotationStarted {
         get {
             _OnRotationStartedOffset = _OnRotationStartedOffset ?? Schema.GetOffset(0x73DA1BB9A2961697);
-            return new CEntityIOOutputImpl(_Handle + _OnRotationStartedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRotationStartedOffset!.Value);
         }
     }
     private static nint? _OnRotationCompletedOffset;
 
-    public CEntityIOOutput OnRotationCompleted {
+    public ref CEntityIOOutput OnRotationCompleted {
         get {
             _OnRotationCompletedOffset = _OnRotationCompletedOffset ?? Schema.GetOffset(0x73DA1BB90478C90B);
-            return new CEntityIOOutputImpl(_Handle + _OnRotationCompletedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRotationCompletedOffset!.Value);
         }
     }
     private static nint? _OnOscillateOffset;
 
-    public CEntityIOOutput OnOscillate {
+    public ref CEntityIOOutput OnOscillate {
         get {
             _OnOscillateOffset = _OnOscillateOffset ?? Schema.GetOffset(0x73DA1BB931B79B92);
-            return new CEntityIOOutputImpl(_Handle + _OnOscillateOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateOffset!.Value);
         }
     }
     private static nint? _OnOscillateStartArriveOffset;
 
-    public CEntityIOOutput OnOscillateStartArrive {
+    public ref CEntityIOOutput OnOscillateStartArrive {
         get {
             _OnOscillateStartArriveOffset = _OnOscillateStartArriveOffset ?? Schema.GetOffset(0x73DA1BB996E9B88D);
-            return new CEntityIOOutputImpl(_Handle + _OnOscillateStartArriveOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateStartArriveOffset!.Value);
         }
     }
     private static nint? _OnOscillateStartDepartOffset;
 
-    public CEntityIOOutput OnOscillateStartDepart {
+    public ref CEntityIOOutput OnOscillateStartDepart {
         get {
             _OnOscillateStartDepartOffset = _OnOscillateStartDepartOffset ?? Schema.GetOffset(0x73DA1BB908C9CF2C);
-            return new CEntityIOOutputImpl(_Handle + _OnOscillateStartDepartOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateStartDepartOffset!.Value);
         }
     }
     private static nint? _OnOscillateEndArriveOffset;
 
-    public CEntityIOOutput OnOscillateEndArrive {
+    public ref CEntityIOOutput OnOscillateEndArrive {
         get {
             _OnOscillateEndArriveOffset = _OnOscillateEndArriveOffset ?? Schema.GetOffset(0x73DA1BB98F4F6014);
-            return new CEntityIOOutputImpl(_Handle + _OnOscillateEndArriveOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateEndArriveOffset!.Value);
         }
     }
     private static nint? _OnOscillateEndDepartOffset;
 
-    public CEntityIOOutput OnOscillateEndDepart {
+    public ref CEntityIOOutput OnOscillateEndDepart {
         get {
             _OnOscillateEndDepartOffset = _OnOscillateEndDepartOffset ?? Schema.GetOffset(0x73DA1BB943D41D49);
-            return new CEntityIOOutputImpl(_Handle + _OnOscillateEndDepartOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateEndDepartOffset!.Value);
         }
     }
     private static nint? _OscillateDepartOffset;

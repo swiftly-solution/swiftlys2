@@ -25,7 +25,7 @@ public partial interface CMessage : CPointEntity, ISchemaClass<CMessage>
 
     public string Noise { get; set; }
 
-    public CEntityIOOutput OnShowMessage { get; }
+    public ref CEntityIOOutput OnShowMessage { get; }
 
 
 }

@@ -31,9 +31,9 @@ public partial interface CFuncMoveLinear : CBaseToggle, ISchemaClass<CFuncMoveLi
 
     public ref float StartPosition { get; }
 
-    public CEntityIOOutput OnFullyOpen { get; }
+    public ref CEntityIOOutput OnFullyOpen { get; }
 
-    public CEntityIOOutput OnFullyClosed { get; }
+    public ref CEntityIOOutput OnFullyClosed { get; }
 
     public ref bool CreateMovableNavMesh { get; }
 

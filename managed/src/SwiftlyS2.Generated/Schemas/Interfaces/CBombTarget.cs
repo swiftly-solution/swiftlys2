@@ -15,11 +15,11 @@ public partial interface CBombTarget : CBaseTrigger, ISchemaClass<CBombTarget>
     static string? ISchemaClass<CBombTarget>.ClassName => "func_bomb_target";
 
 
-    public CEntityIOOutput OnBombExplode { get; }
+    public ref CEntityIOOutput OnBombExplode { get; }
 
-    public CEntityIOOutput OnBombPlanted { get; }
+    public ref CEntityIOOutput OnBombPlanted { get; }
 
-    public CEntityIOOutput OnBombDefused { get; }
+    public ref CEntityIOOutput OnBombDefused { get; }
 
     public ref bool IsBombSiteB { get; }
 

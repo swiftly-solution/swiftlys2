@@ -18,18 +18,18 @@ internal partial class CSoundOpvarSetPointEntityImpl : CSoundOpvarSetPointBaseIm
 
     private static nint? _OnEnterOffset;
 
-    public CEntityIOOutput OnEnter {
+    public ref CEntityIOOutput OnEnter {
         get {
             _OnEnterOffset = _OnEnterOffset ?? Schema.GetOffset(0x20C7B9D2BEFE0C56);
-            return new CEntityIOOutputImpl(_Handle + _OnEnterOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEnterOffset!.Value);
         }
     }
     private static nint? _OnExitOffset;
 
-    public CEntityIOOutput OnExit {
+    public ref CEntityIOOutput OnExit {
         get {
             _OnExitOffset = _OnExitOffset ?? Schema.GetOffset(0x20C7B9D2DBE3B800);
-            return new CEntityIOOutputImpl(_Handle + _OnExitOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnExitOffset!.Value);
         }
     }
     private static nint? _AutoDisableOffset;

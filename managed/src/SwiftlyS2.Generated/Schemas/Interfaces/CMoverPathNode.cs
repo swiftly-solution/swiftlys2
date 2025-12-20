@@ -23,15 +23,15 @@ public partial interface CMoverPathNode : CPointEntity, ISchemaClass<CMoverPathN
 
     public string PathNodeParameter { get; set; }
 
-    public CEntityIOOutput OnStartFromOrInSegment { get; }
+    public ref CEntityIOOutput OnStartFromOrInSegment { get; }
 
-    public CEntityIOOutput OnStoppedAtOrInSegment { get; }
+    public ref CEntityIOOutput OnStoppedAtOrInSegment { get; }
 
-    public CEntityIOOutput OnPassThrough { get; }
+    public ref CEntityIOOutput OnPassThrough { get; }
 
-    public CEntityIOOutput OnPassThroughForward { get; }
+    public ref CEntityIOOutput OnPassThroughForward { get; }
 
-    public CEntityIOOutput OnPassThroughReverse { get; }
+    public ref CEntityIOOutput OnPassThroughReverse { get; }
 
     public ref CHandle<CPathMover> Mover { get; }
 

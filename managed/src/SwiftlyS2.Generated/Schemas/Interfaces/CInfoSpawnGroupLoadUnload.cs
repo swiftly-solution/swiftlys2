@@ -15,13 +15,13 @@ public partial interface CInfoSpawnGroupLoadUnload : CLogicalEntity, ISchemaClas
     static string? ISchemaClass<CInfoSpawnGroupLoadUnload>.ClassName => "info_spawngroup_load_unload";
 
 
-    public CEntityIOOutput OnSpawnGroupLoadStarted { get; }
+    public ref CEntityIOOutput OnSpawnGroupLoadStarted { get; }
 
-    public CEntityIOOutput OnSpawnGroupLoadFinished { get; }
+    public ref CEntityIOOutput OnSpawnGroupLoadFinished { get; }
 
-    public CEntityIOOutput OnSpawnGroupUnloadStarted { get; }
+    public ref CEntityIOOutput OnSpawnGroupUnloadStarted { get; }
 
-    public CEntityIOOutput OnSpawnGroupUnloadFinished { get; }
+    public ref CEntityIOOutput OnSpawnGroupUnloadFinished { get; }
 
     public string SpawnGroupName { get; set; }
 

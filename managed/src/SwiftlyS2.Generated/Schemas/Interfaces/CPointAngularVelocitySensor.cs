@@ -38,15 +38,15 @@ public partial interface CPointAngularVelocitySensor : CPointEntity, ISchemaClas
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField AngularVelocity { get; }
 
-    public CEntityIOOutput OnLessThan { get; }
+    public ref CEntityIOOutput OnLessThan { get; }
 
-    public CEntityIOOutput OnLessThanOrEqualTo { get; }
+    public ref CEntityIOOutput OnLessThanOrEqualTo { get; }
 
-    public CEntityIOOutput OnGreaterThan { get; }
+    public ref CEntityIOOutput OnGreaterThan { get; }
 
-    public CEntityIOOutput OnGreaterThanOrEqualTo { get; }
+    public ref CEntityIOOutput OnGreaterThanOrEqualTo { get; }
 
-    public CEntityIOOutput OnEqualTo { get; }
+    public ref CEntityIOOutput OnEqualTo { get; }
 
 
 }

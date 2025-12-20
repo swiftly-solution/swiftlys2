@@ -18,10 +18,10 @@ internal partial class CFuncTankTrainImpl : CFuncTrackTrainImpl, CFuncTankTrain
 
     private static nint? _OnDeathOffset;
 
-    public CEntityIOOutput OnDeath {
+    public ref CEntityIOOutput OnDeath {
         get {
             _OnDeathOffset = _OnDeathOffset ?? Schema.GetOffset(0xF7897E7E6F756BD2);
-            return new CEntityIOOutputImpl(_Handle + _OnDeathOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDeathOffset!.Value);
         }
     }
 

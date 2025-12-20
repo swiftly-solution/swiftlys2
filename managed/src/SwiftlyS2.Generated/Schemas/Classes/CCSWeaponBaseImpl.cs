@@ -98,10 +98,10 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
     }
     private static nint? _OnPlayerPickupOffset;
 
-    public CEntityIOOutput OnPlayerPickup {
+    public ref CEntityIOOutput OnPlayerPickup {
         get {
             _OnPlayerPickupOffset = _OnPlayerPickupOffset ?? Schema.GetOffset(0x8102BA51DE81BF25);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerPickupOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerPickupOffset!.Value);
         }
     }
     private static nint? _WeaponModeOffset;

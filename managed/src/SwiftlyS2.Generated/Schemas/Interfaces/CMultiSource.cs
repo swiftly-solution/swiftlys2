@@ -19,7 +19,7 @@ public partial interface CMultiSource : CLogicalEntity, ISchemaClass<CMultiSourc
 
     public ISchemaFixedArray<int> RgTriggered { get; }
 
-    public CEntityIOOutput OnTrigger { get; }
+    public ref CEntityIOOutput OnTrigger { get; }
 
     public ref int Total { get; }
 

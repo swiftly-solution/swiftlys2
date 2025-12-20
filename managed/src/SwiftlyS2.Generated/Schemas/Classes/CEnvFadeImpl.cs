@@ -42,10 +42,10 @@ internal partial class CEnvFadeImpl : CLogicalEntityImpl, CEnvFade
     }
     private static nint? _OnBeginFadeOffset;
 
-    public CEntityIOOutput OnBeginFade {
+    public ref CEntityIOOutput OnBeginFade {
         get {
             _OnBeginFadeOffset = _OnBeginFadeOffset ?? Schema.GetOffset(0xEFBFC0633308BA63);
-            return new CEntityIOOutputImpl(_Handle + _OnBeginFadeOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBeginFadeOffset!.Value);
         }
     }
 

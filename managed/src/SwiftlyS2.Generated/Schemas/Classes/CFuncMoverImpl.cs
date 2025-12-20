@@ -298,10 +298,10 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
     } 
     private static nint? _OnMovementEndOffset;
 
-    public CEntityIOOutput OnMovementEnd {
+    public ref CEntityIOOutput OnMovementEnd {
         get {
             _OnMovementEndOffset = _OnMovementEndOffset ?? Schema.GetOffset(0x320E8B699BD1966A);
-            return new CEntityIOOutputImpl(_Handle + _OnMovementEndOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMovementEndOffset!.Value);
         }
     }
     private static nint? _StartAtClosestPointOffset;
@@ -378,10 +378,10 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
     }
     private static nint? _OnNodePassedOffset;
 
-    public CEntityIOOutput OnNodePassed {
+    public ref CEntityIOOutput OnNodePassed {
         get {
             _OnNodePassedOffset = _OnNodePassedOffset ?? Schema.GetOffset(0x320E8B69709328FC);
-            return new CEntityIOOutputImpl(_Handle + _OnNodePassedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNodePassedOffset!.Value);
         }
     }
     private static nint? _OrientationMatchEntityNameOffset;
@@ -446,10 +446,10 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
     }
     private static nint? _OnLerpToPositionCompleteOffset;
 
-    public CEntityIOOutput OnLerpToPositionComplete {
+    public ref CEntityIOOutput OnLerpToPositionComplete {
         get {
             _OnLerpToPositionCompleteOffset = _OnLerpToPositionCompleteOffset ?? Schema.GetOffset(0x320E8B693D72E078);
-            return new CEntityIOOutputImpl(_Handle + _OnLerpToPositionCompleteOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLerpToPositionCompleteOffset!.Value);
         }
     }
     private static nint? _IsPausedOffset;
@@ -546,42 +546,42 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
     }
     private static nint? _OnStartOffset;
 
-    public CEntityIOOutput OnStart {
+    public ref CEntityIOOutput OnStart {
         get {
             _OnStartOffset = _OnStartOffset ?? Schema.GetOffset(0x320E8B69C3FE848C);
-            return new CEntityIOOutputImpl(_Handle + _OnStartOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartOffset!.Value);
         }
     }
     private static nint? _OnStartForwardOffset;
 
-    public CEntityIOOutput OnStartForward {
+    public ref CEntityIOOutput OnStartForward {
         get {
             _OnStartForwardOffset = _OnStartForwardOffset ?? Schema.GetOffset(0x320E8B69FC63B371);
-            return new CEntityIOOutputImpl(_Handle + _OnStartForwardOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartForwardOffset!.Value);
         }
     }
     private static nint? _OnStartReverseOffset;
 
-    public CEntityIOOutput OnStartReverse {
+    public ref CEntityIOOutput OnStartReverse {
         get {
             _OnStartReverseOffset = _OnStartReverseOffset ?? Schema.GetOffset(0x320E8B693AC2BDEA);
-            return new CEntityIOOutputImpl(_Handle + _OnStartReverseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartReverseOffset!.Value);
         }
     }
     private static nint? _OnStopOffset;
 
-    public CEntityIOOutput OnStop {
+    public ref CEntityIOOutput OnStop {
         get {
             _OnStopOffset = _OnStopOffset ?? Schema.GetOffset(0x320E8B6915A596E8);
-            return new CEntityIOOutputImpl(_Handle + _OnStopOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStopOffset!.Value);
         }
     }
     private static nint? _OnStoppedOffset;
 
-    public CEntityIOOutput OnStopped {
+    public ref CEntityIOOutput OnStopped {
         get {
             _OnStoppedOffset = _OnStoppedOffset ?? Schema.GetOffset(0x320E8B69161C44C9);
-            return new CEntityIOOutputImpl(_Handle + _OnStoppedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStoppedOffset!.Value);
         }
     }
     private static nint? _NextNodeReturnsCurrentOffset;

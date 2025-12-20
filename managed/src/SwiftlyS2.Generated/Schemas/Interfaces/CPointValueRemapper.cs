@@ -95,15 +95,15 @@ public partial interface CPointValueRemapper : CBaseEntity, ISchemaClass<CPointV
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField PositionDelta { get; }
 
-    public CEntityIOOutput OnReachedValueZero { get; }
+    public ref CEntityIOOutput OnReachedValueZero { get; }
 
-    public CEntityIOOutput OnReachedValueOne { get; }
+    public ref CEntityIOOutput OnReachedValueOne { get; }
 
-    public CEntityIOOutput OnReachedValueCustom { get; }
+    public ref CEntityIOOutput OnReachedValueCustom { get; }
 
-    public CEntityIOOutput OnEngage { get; }
+    public ref CEntityIOOutput OnEngage { get; }
 
-    public CEntityIOOutput OnDisengage { get; }
+    public ref CEntityIOOutput OnDisengage { get; }
 
     public void DisabledUpdated();
     public void UpdateOnClientUpdated();

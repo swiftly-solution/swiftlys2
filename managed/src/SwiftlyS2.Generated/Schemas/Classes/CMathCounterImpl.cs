@@ -74,34 +74,34 @@ internal partial class CMathCounterImpl : CLogicalEntityImpl, CMathCounter
     }
     private static nint? _OnHitMinOffset;
 
-    public CEntityIOOutput OnHitMin {
+    public ref CEntityIOOutput OnHitMin {
         get {
             _OnHitMinOffset = _OnHitMinOffset ?? Schema.GetOffset(0x516742BCFBD89E37);
-            return new CEntityIOOutputImpl(_Handle + _OnHitMinOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnHitMinOffset!.Value);
         }
     }
     private static nint? _OnHitMaxOffset;
 
-    public CEntityIOOutput OnHitMax {
+    public ref CEntityIOOutput OnHitMax {
         get {
             _OnHitMaxOffset = _OnHitMaxOffset ?? Schema.GetOffset(0x516742BC09EC3BF9);
-            return new CEntityIOOutputImpl(_Handle + _OnHitMaxOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnHitMaxOffset!.Value);
         }
     }
     private static nint? _OnChangedFromMinOffset;
 
-    public CEntityIOOutput OnChangedFromMin {
+    public ref CEntityIOOutput OnChangedFromMin {
         get {
             _OnChangedFromMinOffset = _OnChangedFromMinOffset ?? Schema.GetOffset(0x516742BC0DDBD960);
-            return new CEntityIOOutputImpl(_Handle + _OnChangedFromMinOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnChangedFromMinOffset!.Value);
         }
     }
     private static nint? _OnChangedFromMaxOffset;
 
-    public CEntityIOOutput OnChangedFromMax {
+    public ref CEntityIOOutput OnChangedFromMax {
         get {
             _OnChangedFromMaxOffset = _OnChangedFromMaxOffset ?? Schema.GetOffset(0x516742BC23C8744A);
-            return new CEntityIOOutputImpl(_Handle + _OnChangedFromMaxOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnChangedFromMaxOffset!.Value);
         }
     }
 

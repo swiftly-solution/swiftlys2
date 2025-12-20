@@ -158,74 +158,74 @@ internal partial class CBaseDoorImpl : CBaseToggleImpl, CBaseDoor
     } 
     private static nint? _OnBlockedClosingOffset;
 
-    public CEntityIOOutput OnBlockedClosing {
+    public ref CEntityIOOutput OnBlockedClosing {
         get {
             _OnBlockedClosingOffset = _OnBlockedClosingOffset ?? Schema.GetOffset(0x798B70E7EC8BC45F);
-            return new CEntityIOOutputImpl(_Handle + _OnBlockedClosingOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBlockedClosingOffset!.Value);
         }
     }
     private static nint? _OnBlockedOpeningOffset;
 
-    public CEntityIOOutput OnBlockedOpening {
+    public ref CEntityIOOutput OnBlockedOpening {
         get {
             _OnBlockedOpeningOffset = _OnBlockedOpeningOffset ?? Schema.GetOffset(0x798B70E7F0BA7AA8);
-            return new CEntityIOOutputImpl(_Handle + _OnBlockedOpeningOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBlockedOpeningOffset!.Value);
         }
     }
     private static nint? _OnUnblockedClosingOffset;
 
-    public CEntityIOOutput OnUnblockedClosing {
+    public ref CEntityIOOutput OnUnblockedClosing {
         get {
             _OnUnblockedClosingOffset = _OnUnblockedClosingOffset ?? Schema.GetOffset(0x798B70E7B150C15C);
-            return new CEntityIOOutputImpl(_Handle + _OnUnblockedClosingOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUnblockedClosingOffset!.Value);
         }
     }
     private static nint? _OnUnblockedOpeningOffset;
 
-    public CEntityIOOutput OnUnblockedOpening {
+    public ref CEntityIOOutput OnUnblockedOpening {
         get {
             _OnUnblockedOpeningOffset = _OnUnblockedOpeningOffset ?? Schema.GetOffset(0x798B70E71AC8E62F);
-            return new CEntityIOOutputImpl(_Handle + _OnUnblockedOpeningOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUnblockedOpeningOffset!.Value);
         }
     }
     private static nint? _OnFullyClosedOffset;
 
-    public CEntityIOOutput OnFullyClosed {
+    public ref CEntityIOOutput OnFullyClosed {
         get {
             _OnFullyClosedOffset = _OnFullyClosedOffset ?? Schema.GetOffset(0x798B70E775470294);
-            return new CEntityIOOutputImpl(_Handle + _OnFullyClosedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFullyClosedOffset!.Value);
         }
     }
     private static nint? _OnFullyOpenOffset;
 
-    public CEntityIOOutput OnFullyOpen {
+    public ref CEntityIOOutput OnFullyOpen {
         get {
             _OnFullyOpenOffset = _OnFullyOpenOffset ?? Schema.GetOffset(0x798B70E721733AE4);
-            return new CEntityIOOutputImpl(_Handle + _OnFullyOpenOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFullyOpenOffset!.Value);
         }
     }
     private static nint? _OnCloseOffset;
 
-    public CEntityIOOutput OnClose {
+    public ref CEntityIOOutput OnClose {
         get {
             _OnCloseOffset = _OnCloseOffset ?? Schema.GetOffset(0x798B70E7BE036874);
-            return new CEntityIOOutputImpl(_Handle + _OnCloseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCloseOffset!.Value);
         }
     }
     private static nint? _OnOpenOffset;
 
-    public CEntityIOOutput OnOpen {
+    public ref CEntityIOOutput OnOpen {
         get {
             _OnOpenOffset = _OnOpenOffset ?? Schema.GetOffset(0x798B70E7109A2278);
-            return new CEntityIOOutputImpl(_Handle + _OnOpenOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOpenOffset!.Value);
         }
     }
     private static nint? _OnLockedUseOffset;
 
-    public CEntityIOOutput OnLockedUse {
+    public ref CEntityIOOutput OnLockedUse {
         get {
             _OnLockedUseOffset = _OnLockedUseOffset ?? Schema.GetOffset(0x798B70E7FD62B6A1);
-            return new CEntityIOOutputImpl(_Handle + _OnLockedUseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLockedUseOffset!.Value);
         }
     }
     private static nint? _LoopMoveSoundOffset;

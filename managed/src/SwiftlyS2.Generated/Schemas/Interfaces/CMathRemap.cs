@@ -30,13 +30,13 @@ public partial interface CMathRemap : CLogicalEntity, ISchemaClass<CMathRemap>
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OutValue { get; }
 
-    public CEntityIOOutput OnRoseAboveMin { get; }
+    public ref CEntityIOOutput OnRoseAboveMin { get; }
 
-    public CEntityIOOutput OnRoseAboveMax { get; }
+    public ref CEntityIOOutput OnRoseAboveMax { get; }
 
-    public CEntityIOOutput OnFellBelowMin { get; }
+    public ref CEntityIOOutput OnFellBelowMin { get; }
 
-    public CEntityIOOutput OnFellBelowMax { get; }
+    public ref CEntityIOOutput OnFellBelowMax { get; }
 
 
 }

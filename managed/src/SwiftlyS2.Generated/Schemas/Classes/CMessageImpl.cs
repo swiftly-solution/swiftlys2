@@ -66,10 +66,10 @@ internal partial class CMessageImpl : CPointEntityImpl, CMessage
     } 
     private static nint? _OnShowMessageOffset;
 
-    public CEntityIOOutput OnShowMessage {
+    public ref CEntityIOOutput OnShowMessage {
         get {
             _OnShowMessageOffset = _OnShowMessageOffset ?? Schema.GetOffset(0xCCCF499D586D920);
-            return new CEntityIOOutputImpl(_Handle + _OnShowMessageOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnShowMessageOffset!.Value);
         }
     }
 

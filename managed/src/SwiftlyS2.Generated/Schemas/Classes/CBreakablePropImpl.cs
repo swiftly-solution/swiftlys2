@@ -26,18 +26,18 @@ internal partial class CBreakablePropImpl : CBasePropImpl, CBreakableProp
     }
     private static nint? _OnStartDeathOffset;
 
-    public CEntityIOOutput OnStartDeath {
+    public ref CEntityIOOutput OnStartDeath {
         get {
             _OnStartDeathOffset = _OnStartDeathOffset ?? Schema.GetOffset(0xD9F5AF34F3ED4C8E);
-            return new CEntityIOOutputImpl(_Handle + _OnStartDeathOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartDeathOffset!.Value);
         }
     }
     private static nint? _OnBreakOffset;
 
-    public CEntityIOOutput OnBreak {
+    public ref CEntityIOOutput OnBreak {
         get {
             _OnBreakOffset = _OnBreakOffset ?? Schema.GetOffset(0xD9F5AF3446BFEC4F);
-            return new CEntityIOOutputImpl(_Handle + _OnBreakOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBreakOffset!.Value);
         }
     }
     private static nint? _OnHealthChangedOffset;
@@ -50,10 +50,10 @@ internal partial class CBreakablePropImpl : CBasePropImpl, CBreakableProp
     }
     private static nint? _OnTakeDamageOffset;
 
-    public CEntityIOOutput OnTakeDamage {
+    public ref CEntityIOOutput OnTakeDamage {
         get {
             _OnTakeDamageOffset = _OnTakeDamageOffset ?? Schema.GetOffset(0xD9F5AF34CC9E35D2);
-            return new CEntityIOOutputImpl(_Handle + _OnTakeDamageOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTakeDamageOffset!.Value);
         }
     }
     private static nint? _ImpactEnergyScaleOffset;

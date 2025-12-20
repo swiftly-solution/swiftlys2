@@ -164,8 +164,8 @@ internal partial class CBarnLightImpl : CBaseModelEntityImpl, CBarnLight
             return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_LightStyleTargetsOffset!.Value);
         }
     }
-    public ISchemaClassFixedArray<CEntityIOOutput> StyleEvent {
-        get => new SchemaClassFixedArray<CEntityIOOutput>(_Handle, 0xB5E331D15EEF4062, 4, 40, 8);
+    public ISchemaFixedArray<CEntityIOOutput> StyleEvent {
+        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0xB5E331D15EEF4062, 4, 40, 8);
     }
     private static nint? _LightCookieOffset;
 

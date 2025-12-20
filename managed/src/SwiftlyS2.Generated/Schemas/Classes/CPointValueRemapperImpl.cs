@@ -374,42 +374,42 @@ internal partial class CPointValueRemapperImpl : CBaseEntityImpl, CPointValueRem
     }
     private static nint? _OnReachedValueZeroOffset;
 
-    public CEntityIOOutput OnReachedValueZero {
+    public ref CEntityIOOutput OnReachedValueZero {
         get {
             _OnReachedValueZeroOffset = _OnReachedValueZeroOffset ?? Schema.GetOffset(0xA8CB433D8746DCB5);
-            return new CEntityIOOutputImpl(_Handle + _OnReachedValueZeroOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnReachedValueZeroOffset!.Value);
         }
     }
     private static nint? _OnReachedValueOneOffset;
 
-    public CEntityIOOutput OnReachedValueOne {
+    public ref CEntityIOOutput OnReachedValueOne {
         get {
             _OnReachedValueOneOffset = _OnReachedValueOneOffset ?? Schema.GetOffset(0xA8CB433D40852301);
-            return new CEntityIOOutputImpl(_Handle + _OnReachedValueOneOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnReachedValueOneOffset!.Value);
         }
     }
     private static nint? _OnReachedValueCustomOffset;
 
-    public CEntityIOOutput OnReachedValueCustom {
+    public ref CEntityIOOutput OnReachedValueCustom {
         get {
             _OnReachedValueCustomOffset = _OnReachedValueCustomOffset ?? Schema.GetOffset(0xA8CB433DD209F610);
-            return new CEntityIOOutputImpl(_Handle + _OnReachedValueCustomOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnReachedValueCustomOffset!.Value);
         }
     }
     private static nint? _OnEngageOffset;
 
-    public CEntityIOOutput OnEngage {
+    public ref CEntityIOOutput OnEngage {
         get {
             _OnEngageOffset = _OnEngageOffset ?? Schema.GetOffset(0xA8CB433DF404507F);
-            return new CEntityIOOutputImpl(_Handle + _OnEngageOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEngageOffset!.Value);
         }
     }
     private static nint? _OnDisengageOffset;
 
-    public CEntityIOOutput OnDisengage {
+    public ref CEntityIOOutput OnDisengage {
         get {
             _OnDisengageOffset = _OnDisengageOffset ?? Schema.GetOffset(0xA8CB433D22E0E24B);
-            return new CEntityIOOutputImpl(_Handle + _OnDisengageOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDisengageOffset!.Value);
         }
     }
 

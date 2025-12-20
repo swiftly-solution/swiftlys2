@@ -15,7 +15,7 @@ public partial interface CTriggerMultiple : CBaseTrigger, ISchemaClass<CTriggerM
     static string? ISchemaClass<CTriggerMultiple>.ClassName => "trigger_multiple";
 
 
-    public CEntityIOOutput OnTrigger { get; }
+    public ref CEntityIOOutput OnTrigger { get; }
 
 
 }

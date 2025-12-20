@@ -43,9 +43,9 @@ public partial interface CEnvWindShared : ISchemaClass<CEnvWindShared>
 
     public ref Vector Location { get; }
 
-    public CEntityIOOutput OnGustStart { get; }
+    public ref CEntityIOOutput OnGustStart { get; }
 
-    public CEntityIOOutput OnGustEnd { get; }
+    public ref CEntityIOOutput OnGustEnd { get; }
 
     public ref CHandle<CBaseEntity> EntOwner { get; }
 

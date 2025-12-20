@@ -23,11 +23,11 @@ public partial interface CLogicDistanceCheck : CLogicalEntity, ISchemaClass<CLog
 
     public ref float Zone2Distance { get; }
 
-    public CEntityIOOutput InZone1 { get; }
+    public ref CEntityIOOutput InZone1 { get; }
 
-    public CEntityIOOutput InZone2 { get; }
+    public ref CEntityIOOutput InZone2 { get; }
 
-    public CEntityIOOutput InZone3 { get; }
+    public ref CEntityIOOutput InZone3 { get; }
 
 
 }

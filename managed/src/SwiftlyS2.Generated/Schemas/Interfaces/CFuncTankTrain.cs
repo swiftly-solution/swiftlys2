@@ -15,7 +15,7 @@ public partial interface CFuncTankTrain : CFuncTrackTrain, ISchemaClass<CFuncTan
     static string? ISchemaClass<CFuncTankTrain>.ClassName => "func_tanktrain";
 
 
-    public CEntityIOOutput OnDeath { get; }
+    public ref CEntityIOOutput OnDeath { get; }
 
 
 }

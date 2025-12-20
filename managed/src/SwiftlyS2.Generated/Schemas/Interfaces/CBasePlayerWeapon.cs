@@ -29,7 +29,7 @@ public partial interface CBasePlayerWeapon : CEconEntity, ISchemaClass<CBasePlay
 
     public ISchemaFixedArray<int> ReserveAmmo { get; }
 
-    public CEntityIOOutput OnPlayerUse { get; }
+    public ref CEntityIOOutput OnPlayerUse { get; }
 
     public void NextPrimaryAttackTickUpdated();
     public void NextPrimaryAttackTickRatioUpdated();

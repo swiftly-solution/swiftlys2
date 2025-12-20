@@ -102,18 +102,18 @@ internal partial class CNavLinkAreaEntityImpl : CPointEntityImpl, CNavLinkAreaEn
     }
     private static nint? _OnNavLinkStartOffset;
 
-    public CEntityIOOutput OnNavLinkStart {
+    public ref CEntityIOOutput OnNavLinkStart {
         get {
             _OnNavLinkStartOffset = _OnNavLinkStartOffset ?? Schema.GetOffset(0x1A0F185115E018DB);
-            return new CEntityIOOutputImpl(_Handle + _OnNavLinkStartOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNavLinkStartOffset!.Value);
         }
     }
     private static nint? _OnNavLinkFinishOffset;
 
-    public CEntityIOOutput OnNavLinkFinish {
+    public ref CEntityIOOutput OnNavLinkFinish {
         get {
             _OnNavLinkFinishOffset = _OnNavLinkFinishOffset ?? Schema.GetOffset(0x1A0F1851A3060EA6);
-            return new CEntityIOOutputImpl(_Handle + _OnNavLinkFinishOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNavLinkFinishOffset!.Value);
         }
     }
     private static nint? _IsTerminusOffset;

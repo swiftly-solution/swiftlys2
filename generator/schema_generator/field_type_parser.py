@@ -1,6 +1,5 @@
 from class_name_convertor import get_interface_name, get_impl_name
 
-
 unmanaged_type_maps = {
   "int8": "byte",
   "int16": "short",
@@ -53,6 +52,7 @@ unmanaged_type_maps = {
   "CNetworkVarChainer": "CNetworkVarChainer",
   "HSCRIPT": "HSCRIPTHandler",
   "QuaternionStorage": "QuaternionStorage",
+  "CEntityIOOutput": "CEntityIOOutput",
 }
 
 blacklisted_types = [

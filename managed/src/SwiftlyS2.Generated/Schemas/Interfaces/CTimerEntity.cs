@@ -15,11 +15,11 @@ public partial interface CTimerEntity : CLogicalEntity, ISchemaClass<CTimerEntit
     static string? ISchemaClass<CTimerEntity>.ClassName => "logic_timer";
 
 
-    public CEntityIOOutput OnTimer { get; }
+    public ref CEntityIOOutput OnTimer { get; }
 
-    public CEntityIOOutput OnTimerHigh { get; }
+    public ref CEntityIOOutput OnTimerHigh { get; }
 
-    public CEntityIOOutput OnTimerLow { get; }
+    public ref CEntityIOOutput OnTimerLow { get; }
 
     public ref int Disabled { get; }
 

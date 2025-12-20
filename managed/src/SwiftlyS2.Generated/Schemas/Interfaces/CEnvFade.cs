@@ -21,7 +21,7 @@ public partial interface CEnvFade : CLogicalEntity, ISchemaClass<CEnvFade>
 
     public ref float HoldDuration { get; }
 
-    public CEntityIOOutput OnBeginFade { get; }
+    public ref CEntityIOOutput OnBeginFade { get; }
 
     public void FadeColorUpdated();
 }

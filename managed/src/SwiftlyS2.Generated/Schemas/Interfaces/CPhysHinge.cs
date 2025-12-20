@@ -17,9 +17,9 @@ public partial interface CPhysHinge : CPhysConstraint, ISchemaClass<CPhysHinge>
 
     public ConstraintSoundInfo SoundInfo { get; }
 
-    public CEntityIOOutput NotifyMinLimitReached { get; }
+    public ref CEntityIOOutput NotifyMinLimitReached { get; }
 
-    public CEntityIOOutput NotifyMaxLimitReached { get; }
+    public ref CEntityIOOutput NotifyMaxLimitReached { get; }
 
     public ref bool AtMinLimit { get; }
 
@@ -47,9 +47,9 @@ public partial interface CPhysHinge : CPhysConstraint, ISchemaClass<CPhysHinge>
 
     public ref float AngleSpeedThreshold { get; }
 
-    public CEntityIOOutput OnStartMoving { get; }
+    public ref CEntityIOOutput OnStartMoving { get; }
 
-    public CEntityIOOutput OnStopMoving { get; }
+    public ref CEntityIOOutput OnStopMoving { get; }
 
 
 }

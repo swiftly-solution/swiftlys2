@@ -15,9 +15,9 @@ public partial interface CBaseGrenade : CBaseFlex, ISchemaClass<CBaseGrenade>
     static string? ISchemaClass<CBaseGrenade>.ClassName => "grenade";
 
 
-    public CEntityIOOutput OnPlayerPickup { get; }
+    public ref CEntityIOOutput OnPlayerPickup { get; }
 
-    public CEntityIOOutput OnExplode { get; }
+    public ref CEntityIOOutput OnExplode { get; }
 
     public ref bool HasWarnedAI { get; }
 

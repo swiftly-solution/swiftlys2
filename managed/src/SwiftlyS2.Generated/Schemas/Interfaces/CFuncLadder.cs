@@ -35,9 +35,9 @@ public partial interface CFuncLadder : CBaseModelEntity, ISchemaClass<CFuncLadde
 
     public string SurfacePropName { get; set; }
 
-    public CEntityIOOutput OnPlayerGotOnLadder { get; }
+    public ref CEntityIOOutput OnPlayerGotOnLadder { get; }
 
-    public CEntityIOOutput OnPlayerGotOffLadder { get; }
+    public ref CEntityIOOutput OnPlayerGotOffLadder { get; }
 
     public void LadderDirUpdated();
     public void PlayerMountPositionTopUpdated();

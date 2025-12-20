@@ -30,14 +30,7 @@ public struct EntityIOConnectionDesc_t
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct EntityIOConnection_t
 {
-    public nint m_targetDesc;
-    public nint m_targetInput;
-    public nint m_valueOverride;
-    public uint m_hTarget;
-    public EntityIOTargetType_t m_nTargetType;
-    public int m_nTimesToFire;
-    public float m_flDelay;
-
+    public EntityIOConnectionDesc_t m_desc;
     public bool m_bMarkedForRemoval;
     public EntityIOConnection_t* m_pNext;
 }
@@ -51,9 +44,12 @@ public unsafe struct EntityIOOutputDesc_t
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct NativeCEntityIOOutput
+public unsafe struct CEntityIOOutput
 {
     public void* vtable;
     public EntityIOConnection_t* m_pConnections;
     public EntityIOOutputDesc_t* m_pDesc;
+
+    public ref EntityIOConnection_t Connections => ref *m_pConnections;
+    public ref EntityIOOutputDesc_t Desc => ref *m_pDesc;
 }

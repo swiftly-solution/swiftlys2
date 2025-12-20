@@ -18,18 +18,18 @@ internal partial class CGameMoneyImpl : CRulePointEntityImpl, CGameMoney
 
     private static nint? _OnMoneySpentOffset;
 
-    public CEntityIOOutput OnMoneySpent {
+    public ref CEntityIOOutput OnMoneySpent {
         get {
             _OnMoneySpentOffset = _OnMoneySpentOffset ?? Schema.GetOffset(0xED17C684B6CD990C);
-            return new CEntityIOOutputImpl(_Handle + _OnMoneySpentOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMoneySpentOffset!.Value);
         }
     }
     private static nint? _OnMoneySpentFailOffset;
 
-    public CEntityIOOutput OnMoneySpentFail {
+    public ref CEntityIOOutput OnMoneySpentFail {
         get {
             _OnMoneySpentFailOffset = _OnMoneySpentFailOffset ?? Schema.GetOffset(0xED17C684DB165FC0);
-            return new CEntityIOOutputImpl(_Handle + _OnMoneySpentFailOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMoneySpentFailOffset!.Value);
         }
     }
     private static nint? _MoneyOffset;

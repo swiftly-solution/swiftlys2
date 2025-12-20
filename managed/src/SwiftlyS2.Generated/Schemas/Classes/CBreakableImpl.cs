@@ -106,10 +106,10 @@ internal partial class CBreakableImpl : CBaseModelEntityImpl, CBreakable
     }
     private static nint? _OnBreakOffset;
 
-    public CEntityIOOutput OnBreak {
+    public ref CEntityIOOutput OnBreak {
         get {
             _OnBreakOffset = _OnBreakOffset ?? Schema.GetOffset(0xC5CDE32946BFEC4F);
-            return new CEntityIOOutputImpl(_Handle + _OnBreakOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBreakOffset!.Value);
         }
     }
     private static nint? _OnHealthChangedOffset;

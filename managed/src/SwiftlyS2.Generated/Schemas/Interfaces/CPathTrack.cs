@@ -31,7 +31,7 @@ public partial interface CPathTrack : CPointEntity, ISchemaClass<CPathTrack>
 
     public ref TrackOrientationType_t OrientationType { get; }
 
-    public CEntityIOOutput OnPass { get; }
+    public ref CEntityIOOutput OnPass { get; }
 
 
 }

@@ -23,7 +23,7 @@ public partial interface CEnvSpark : CPointEntity, ISchemaClass<CEnvSpark>
 
     public ref int Type { get; }
 
-    public CEntityIOOutput OnSpark { get; }
+    public ref CEntityIOOutput OnSpark { get; }
 
 
 }

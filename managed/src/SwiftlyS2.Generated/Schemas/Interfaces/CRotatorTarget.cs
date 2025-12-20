@@ -15,7 +15,7 @@ public partial interface CRotatorTarget : CPointEntity, ISchemaClass<CRotatorTar
     static string? ISchemaClass<CRotatorTarget>.ClassName => "rotator_target";
 
 
-    public CEntityIOOutput OnArrivedAt { get; }
+    public ref CEntityIOOutput OnArrivedAt { get; }
 
     public ref RotatorTargetSpace_t Space { get; }
 

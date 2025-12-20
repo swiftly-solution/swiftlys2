@@ -51,7 +51,7 @@ public partial interface CBarnLight : CBaseModelEntity, ISchemaClass<CBarnLight>
 
     public ref CUtlVector<CHandle<CBaseModelEntity>> LightStyleTargets { get; }
 
-    public ISchemaClassFixedArray<CEntityIOOutput> StyleEvent { get; }
+    public ISchemaFixedArray<CEntityIOOutput> StyleEvent { get; }
 
     public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie { get; }
 

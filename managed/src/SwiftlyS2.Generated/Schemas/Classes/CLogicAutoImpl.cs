@@ -18,82 +18,82 @@ internal partial class CLogicAutoImpl : CBaseEntityImpl, CLogicAuto
 
     private static nint? _OnMapSpawnOffset;
 
-    public CEntityIOOutput OnMapSpawn {
+    public ref CEntityIOOutput OnMapSpawn {
         get {
             _OnMapSpawnOffset = _OnMapSpawnOffset ?? Schema.GetOffset(0x1FA33DC758EC03E5);
-            return new CEntityIOOutputImpl(_Handle + _OnMapSpawnOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMapSpawnOffset!.Value);
         }
     }
     private static nint? _OnDemoMapSpawnOffset;
 
-    public CEntityIOOutput OnDemoMapSpawn {
+    public ref CEntityIOOutput OnDemoMapSpawn {
         get {
             _OnDemoMapSpawnOffset = _OnDemoMapSpawnOffset ?? Schema.GetOffset(0x1FA33DC7798F0A72);
-            return new CEntityIOOutputImpl(_Handle + _OnDemoMapSpawnOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDemoMapSpawnOffset!.Value);
         }
     }
     private static nint? _OnNewGameOffset;
 
-    public CEntityIOOutput OnNewGame {
+    public ref CEntityIOOutput OnNewGame {
         get {
             _OnNewGameOffset = _OnNewGameOffset ?? Schema.GetOffset(0x1FA33DC7F77845A4);
-            return new CEntityIOOutputImpl(_Handle + _OnNewGameOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNewGameOffset!.Value);
         }
     }
     private static nint? _OnLoadGameOffset;
 
-    public CEntityIOOutput OnLoadGame {
+    public ref CEntityIOOutput OnLoadGame {
         get {
             _OnLoadGameOffset = _OnLoadGameOffset ?? Schema.GetOffset(0x1FA33DC748F2D9A6);
-            return new CEntityIOOutputImpl(_Handle + _OnLoadGameOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLoadGameOffset!.Value);
         }
     }
     private static nint? _OnMapTransitionOffset;
 
-    public CEntityIOOutput OnMapTransition {
+    public ref CEntityIOOutput OnMapTransition {
         get {
             _OnMapTransitionOffset = _OnMapTransitionOffset ?? Schema.GetOffset(0x1FA33DC7EEE1CA9D);
-            return new CEntityIOOutputImpl(_Handle + _OnMapTransitionOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMapTransitionOffset!.Value);
         }
     }
     private static nint? _OnBackgroundMapOffset;
 
-    public CEntityIOOutput OnBackgroundMap {
+    public ref CEntityIOOutput OnBackgroundMap {
         get {
             _OnBackgroundMapOffset = _OnBackgroundMapOffset ?? Schema.GetOffset(0x1FA33DC7FD54329A);
-            return new CEntityIOOutputImpl(_Handle + _OnBackgroundMapOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBackgroundMapOffset!.Value);
         }
     }
     private static nint? _OnMultiNewMapOffset;
 
-    public CEntityIOOutput OnMultiNewMap {
+    public ref CEntityIOOutput OnMultiNewMap {
         get {
             _OnMultiNewMapOffset = _OnMultiNewMapOffset ?? Schema.GetOffset(0x1FA33DC74D5DCA0D);
-            return new CEntityIOOutputImpl(_Handle + _OnMultiNewMapOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMultiNewMapOffset!.Value);
         }
     }
     private static nint? _OnMultiNewRoundOffset;
 
-    public CEntityIOOutput OnMultiNewRound {
+    public ref CEntityIOOutput OnMultiNewRound {
         get {
             _OnMultiNewRoundOffset = _OnMultiNewRoundOffset ?? Schema.GetOffset(0x1FA33DC70D4B293F);
-            return new CEntityIOOutputImpl(_Handle + _OnMultiNewRoundOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMultiNewRoundOffset!.Value);
         }
     }
     private static nint? _OnVREnabledOffset;
 
-    public CEntityIOOutput OnVREnabled {
+    public ref CEntityIOOutput OnVREnabled {
         get {
             _OnVREnabledOffset = _OnVREnabledOffset ?? Schema.GetOffset(0x1FA33DC79A1AB4C1);
-            return new CEntityIOOutputImpl(_Handle + _OnVREnabledOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVREnabledOffset!.Value);
         }
     }
     private static nint? _OnVRNotEnabledOffset;
 
-    public CEntityIOOutput OnVRNotEnabled {
+    public ref CEntityIOOutput OnVRNotEnabled {
         get {
             _OnVRNotEnabledOffset = _OnVRNotEnabledOffset ?? Schema.GetOffset(0x1FA33DC745E8A1DA);
-            return new CEntityIOOutputImpl(_Handle + _OnVRNotEnabledOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVRNotEnabledOffset!.Value);
         }
     }
     private static nint? _GlobalstateOffset;

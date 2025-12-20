@@ -130,42 +130,42 @@ internal partial class CBaseButtonImpl : CBaseToggleImpl, CBaseButton
     }
     private static nint? _OnDamagedOffset;
 
-    public CEntityIOOutput OnDamaged {
+    public ref CEntityIOOutput OnDamaged {
         get {
             _OnDamagedOffset = _OnDamagedOffset ?? Schema.GetOffset(0x1911FA7F1667F41F);
-            return new CEntityIOOutputImpl(_Handle + _OnDamagedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDamagedOffset!.Value);
         }
     }
     private static nint? _OnPressedOffset;
 
-    public CEntityIOOutput OnPressed {
+    public ref CEntityIOOutput OnPressed {
         get {
             _OnPressedOffset = _OnPressedOffset ?? Schema.GetOffset(0x1911FA7F6707E726);
-            return new CEntityIOOutputImpl(_Handle + _OnPressedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPressedOffset!.Value);
         }
     }
     private static nint? _OnUseLockedOffset;
 
-    public CEntityIOOutput OnUseLocked {
+    public ref CEntityIOOutput OnUseLocked {
         get {
             _OnUseLockedOffset = _OnUseLockedOffset ?? Schema.GetOffset(0x1911FA7FE603388D);
-            return new CEntityIOOutputImpl(_Handle + _OnUseLockedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUseLockedOffset!.Value);
         }
     }
     private static nint? _OnInOffset;
 
-    public CEntityIOOutput OnIn {
+    public ref CEntityIOOutput OnIn {
         get {
             _OnInOffset = _OnInOffset ?? Schema.GetOffset(0x1911FA7FE9F7186F);
-            return new CEntityIOOutputImpl(_Handle + _OnInOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnInOffset!.Value);
         }
     }
     private static nint? _OnOutOffset;
 
-    public CEntityIOOutput OnOut {
+    public ref CEntityIOOutput OnOut {
         get {
             _OnOutOffset = _OnOutOffset ?? Schema.GetOffset(0x1911FA7FF28E1D54);
-            return new CEntityIOOutputImpl(_Handle + _OnOutOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOutOffset!.Value);
         }
     }
     private static nint? _StateOffset;

@@ -27,11 +27,11 @@ public partial interface CPlantedC4 : CBaseAnimGraph, ISchemaClass<CPlantedC4>
 
     public CAttributeContainer AttributeManager { get; }
 
-    public CEntityIOOutput OnBombDefused { get; }
+    public ref CEntityIOOutput OnBombDefused { get; }
 
-    public CEntityIOOutput OnBombBeginDefuse { get; }
+    public ref CEntityIOOutput OnBombBeginDefuse { get; }
 
-    public CEntityIOOutput OnBombDefuseAborted { get; }
+    public ref CEntityIOOutput OnBombDefuseAborted { get; }
 
     public ref bool CannotBeDefused { get; }
 

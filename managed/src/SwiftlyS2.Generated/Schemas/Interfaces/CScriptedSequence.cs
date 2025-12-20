@@ -147,19 +147,19 @@ public partial interface CScriptedSequence : CBaseEntity, ISchemaClass<CScripted
 
     public ref ScriptedConflictResponse_t ConflictResponse { get; }
 
-    public CEntityIOOutput OnBeginSequence { get; }
+    public ref CEntityIOOutput OnBeginSequence { get; }
 
-    public CEntityIOOutput OnActionStartOrLoop { get; }
+    public ref CEntityIOOutput OnActionStartOrLoop { get; }
 
-    public CEntityIOOutput OnEndSequence { get; }
+    public ref CEntityIOOutput OnEndSequence { get; }
 
-    public CEntityIOOutput OnPostIdleEndSequence { get; }
+    public ref CEntityIOOutput OnPostIdleEndSequence { get; }
 
-    public CEntityIOOutput OnCancelSequence { get; }
+    public ref CEntityIOOutput OnCancelSequence { get; }
 
-    public CEntityIOOutput OnCancelFailedSequence { get; }
+    public ref CEntityIOOutput OnCancelFailedSequence { get; }
 
-    public ISchemaClassFixedArray<CEntityIOOutput> OnScriptEvent { get; }
+    public ISchemaFixedArray<CEntityIOOutput> OnScriptEvent { get; }
 
     public ref CTransform MatOtherToMain { get; }
 

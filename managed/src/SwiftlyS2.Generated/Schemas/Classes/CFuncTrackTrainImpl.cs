@@ -254,26 +254,26 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
     }
     private static nint? _OnStartOffset;
 
-    public CEntityIOOutput OnStart {
+    public ref CEntityIOOutput OnStart {
         get {
             _OnStartOffset = _OnStartOffset ?? Schema.GetOffset(0x416637FBC3FE848C);
-            return new CEntityIOOutputImpl(_Handle + _OnStartOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartOffset!.Value);
         }
     }
     private static nint? _OnNextOffset;
 
-    public CEntityIOOutput OnNext {
+    public ref CEntityIOOutput OnNext {
         get {
             _OnNextOffset = _OnNextOffset ?? Schema.GetOffset(0x416637FBFE51ADC1);
-            return new CEntityIOOutputImpl(_Handle + _OnNextOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNextOffset!.Value);
         }
     }
     private static nint? _OnArrivedAtDestinationNodeOffset;
 
-    public CEntityIOOutput OnArrivedAtDestinationNode {
+    public ref CEntityIOOutput OnArrivedAtDestinationNode {
         get {
             _OnArrivedAtDestinationNodeOffset = _OnArrivedAtDestinationNodeOffset ?? Schema.GetOffset(0x416637FBCAE21100);
-            return new CEntityIOOutputImpl(_Handle + _OnArrivedAtDestinationNodeOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnArrivedAtDestinationNodeOffset!.Value);
         }
     }
     private static nint? _ManualSpeedChangesOffset;

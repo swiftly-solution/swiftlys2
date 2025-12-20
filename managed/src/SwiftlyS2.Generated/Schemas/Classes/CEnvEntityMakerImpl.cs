@@ -102,18 +102,18 @@ internal partial class CEnvEntityMakerImpl : CPointEntityImpl, CEnvEntityMaker
     } 
     private static nint? _OutputOnSpawnedOffset;
 
-    public CEntityIOOutput OutputOnSpawned {
+    public ref CEntityIOOutput OutputOnSpawned {
         get {
             _OutputOnSpawnedOffset = _OutputOnSpawnedOffset ?? Schema.GetOffset(0x5EC1669629B86CFF);
-            return new CEntityIOOutputImpl(_Handle + _OutputOnSpawnedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OutputOnSpawnedOffset!.Value);
         }
     }
     private static nint? _OutputOnFailedSpawnOffset;
 
-    public CEntityIOOutput OutputOnFailedSpawn {
+    public ref CEntityIOOutput OutputOnFailedSpawn {
         get {
             _OutputOnFailedSpawnOffset = _OutputOnFailedSpawnOffset ?? Schema.GetOffset(0x5EC16696EBDC0A35);
-            return new CEntityIOOutputImpl(_Handle + _OutputOnFailedSpawnOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OutputOnFailedSpawnOffset!.Value);
         }
     }
 

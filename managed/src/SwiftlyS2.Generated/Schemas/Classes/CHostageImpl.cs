@@ -18,34 +18,34 @@ internal partial class CHostageImpl : CHostageExpresserShimImpl, CHostage
 
     private static nint? _OnHostageBeginGrabOffset;
 
-    public CEntityIOOutput OnHostageBeginGrab {
+    public ref CEntityIOOutput OnHostageBeginGrab {
         get {
             _OnHostageBeginGrabOffset = _OnHostageBeginGrabOffset ?? Schema.GetOffset(0x1A122BDF0DA44EAC);
-            return new CEntityIOOutputImpl(_Handle + _OnHostageBeginGrabOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnHostageBeginGrabOffset!.Value);
         }
     }
     private static nint? _OnFirstPickedUpOffset;
 
-    public CEntityIOOutput OnFirstPickedUp {
+    public ref CEntityIOOutput OnFirstPickedUp {
         get {
             _OnFirstPickedUpOffset = _OnFirstPickedUpOffset ?? Schema.GetOffset(0x1A122BDFCBF60E53);
-            return new CEntityIOOutputImpl(_Handle + _OnFirstPickedUpOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFirstPickedUpOffset!.Value);
         }
     }
     private static nint? _OnDroppedNotRescuedOffset;
 
-    public CEntityIOOutput OnDroppedNotRescued {
+    public ref CEntityIOOutput OnDroppedNotRescued {
         get {
             _OnDroppedNotRescuedOffset = _OnDroppedNotRescuedOffset ?? Schema.GetOffset(0x1A122BDFE6BC925E);
-            return new CEntityIOOutputImpl(_Handle + _OnDroppedNotRescuedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDroppedNotRescuedOffset!.Value);
         }
     }
     private static nint? _OnRescuedOffset;
 
-    public CEntityIOOutput OnRescued {
+    public ref CEntityIOOutput OnRescued {
         get {
             _OnRescuedOffset = _OnRescuedOffset ?? Schema.GetOffset(0x1A122BDF421F0657);
-            return new CEntityIOOutputImpl(_Handle + _OnRescuedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRescuedOffset!.Value);
         }
     }
     private static nint? _EntitySpottedStateOffset;

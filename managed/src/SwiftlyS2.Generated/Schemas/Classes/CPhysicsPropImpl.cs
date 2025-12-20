@@ -18,58 +18,58 @@ internal partial class CPhysicsPropImpl : CBreakablePropImpl, CPhysicsProp
 
     private static nint? _MotionEnabledOffset;
 
-    public CEntityIOOutput MotionEnabled {
+    public ref CEntityIOOutput MotionEnabled {
         get {
             _MotionEnabledOffset = _MotionEnabledOffset ?? Schema.GetOffset(0xC3FD37FE8956B83C);
-            return new CEntityIOOutputImpl(_Handle + _MotionEnabledOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_MotionEnabledOffset!.Value);
         }
     }
     private static nint? _OnAwakenedOffset;
 
-    public CEntityIOOutput OnAwakened {
+    public ref CEntityIOOutput OnAwakened {
         get {
             _OnAwakenedOffset = _OnAwakenedOffset ?? Schema.GetOffset(0xC3FD37FE03EDBB66);
-            return new CEntityIOOutputImpl(_Handle + _OnAwakenedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAwakenedOffset!.Value);
         }
     }
     private static nint? _OnAwakeOffset;
 
-    public CEntityIOOutput OnAwake {
+    public ref CEntityIOOutput OnAwake {
         get {
             _OnAwakeOffset = _OnAwakeOffset ?? Schema.GetOffset(0xC3FD37FEE3FE59B3);
-            return new CEntityIOOutputImpl(_Handle + _OnAwakeOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAwakeOffset!.Value);
         }
     }
     private static nint? _OnAsleepOffset;
 
-    public CEntityIOOutput OnAsleep {
+    public ref CEntityIOOutput OnAsleep {
         get {
             _OnAsleepOffset = _OnAsleepOffset ?? Schema.GetOffset(0xC3FD37FE8CFD4346);
-            return new CEntityIOOutputImpl(_Handle + _OnAsleepOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAsleepOffset!.Value);
         }
     }
     private static nint? _OnPlayerUseOffset;
 
-    public CEntityIOOutput OnPlayerUse {
+    public ref CEntityIOOutput OnPlayerUse {
         get {
             _OnPlayerUseOffset = _OnPlayerUseOffset ?? Schema.GetOffset(0xC3FD37FE611C9A14);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerUseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerUseOffset!.Value);
         }
     }
     private static nint? _OnOutOfWorldOffset;
 
-    public CEntityIOOutput OnOutOfWorld {
+    public ref CEntityIOOutput OnOutOfWorld {
         get {
             _OnOutOfWorldOffset = _OnOutOfWorldOffset ?? Schema.GetOffset(0xC3FD37FE3016DC53);
-            return new CEntityIOOutputImpl(_Handle + _OnOutOfWorldOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOutOfWorldOffset!.Value);
         }
     }
     private static nint? _OnPlayerPickupOffset;
 
-    public CEntityIOOutput OnPlayerPickup {
+    public ref CEntityIOOutput OnPlayerPickup {
         get {
             _OnPlayerPickupOffset = _OnPlayerPickupOffset ?? Schema.GetOffset(0xC3FD37FEDE81BF25);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerPickupOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerPickupOffset!.Value);
         }
     }
     private static nint? _ForceNavIgnoreOffset;

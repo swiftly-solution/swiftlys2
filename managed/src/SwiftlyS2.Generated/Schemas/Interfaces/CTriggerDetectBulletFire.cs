@@ -17,7 +17,7 @@ public partial interface CTriggerDetectBulletFire : CBaseTrigger, ISchemaClass<C
 
     public ref bool PlayerFireOnly { get; }
 
-    public CEntityIOOutput OnDetectedBulletFire { get; }
+    public ref CEntityIOOutput OnDetectedBulletFire { get; }
 
 
 }

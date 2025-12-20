@@ -18,10 +18,10 @@ internal partial class CTriggerActiveWeaponDetectImpl : CBaseTriggerImpl, CTrigg
 
     private static nint? _OnTouchedActiveWeaponOffset;
 
-    public CEntityIOOutput OnTouchedActiveWeapon {
+    public ref CEntityIOOutput OnTouchedActiveWeapon {
         get {
             _OnTouchedActiveWeaponOffset = _OnTouchedActiveWeaponOffset ?? Schema.GetOffset(0x68F50CC727D5D394);
-            return new CEntityIOOutputImpl(_Handle + _OnTouchedActiveWeaponOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchedActiveWeaponOffset!.Value);
         }
     }
     private static nint? _WeaponClassNameOffset;

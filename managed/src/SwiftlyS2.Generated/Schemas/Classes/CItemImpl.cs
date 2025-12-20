@@ -18,18 +18,18 @@ internal partial class CItemImpl : CBaseAnimGraphImpl, CItem
 
     private static nint? _OnPlayerTouchOffset;
 
-    public CEntityIOOutput OnPlayerTouch {
+    public ref CEntityIOOutput OnPlayerTouch {
         get {
             _OnPlayerTouchOffset = _OnPlayerTouchOffset ?? Schema.GetOffset(0x20C89FC926AD34F8);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerTouchOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerTouchOffset!.Value);
         }
     }
     private static nint? _OnPlayerPickupOffset;
 
-    public CEntityIOOutput OnPlayerPickup {
+    public ref CEntityIOOutput OnPlayerPickup {
         get {
             _OnPlayerPickupOffset = _OnPlayerPickupOffset ?? Schema.GetOffset(0x20C89FC9DE81BF25);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerPickupOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerPickupOffset!.Value);
         }
     }
     private static nint? _ActivateWhenAtRestOffset;
@@ -42,18 +42,18 @@ internal partial class CItemImpl : CBaseAnimGraphImpl, CItem
     }
     private static nint? _OnCacheInteractionOffset;
 
-    public CEntityIOOutput OnCacheInteraction {
+    public ref CEntityIOOutput OnCacheInteraction {
         get {
             _OnCacheInteractionOffset = _OnCacheInteractionOffset ?? Schema.GetOffset(0x20C89FC9FB2A1C2A);
-            return new CEntityIOOutputImpl(_Handle + _OnCacheInteractionOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCacheInteractionOffset!.Value);
         }
     }
     private static nint? _OnGlovePulledOffset;
 
-    public CEntityIOOutput OnGlovePulled {
+    public ref CEntityIOOutput OnGlovePulled {
         get {
             _OnGlovePulledOffset = _OnGlovePulledOffset ?? Schema.GetOffset(0x20C89FC928CF9923);
-            return new CEntityIOOutputImpl(_Handle + _OnGlovePulledOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnGlovePulledOffset!.Value);
         }
     }
     private static nint? _OriginalSpawnOriginOffset;

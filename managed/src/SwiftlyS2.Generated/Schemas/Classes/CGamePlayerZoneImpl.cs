@@ -18,18 +18,18 @@ internal partial class CGamePlayerZoneImpl : CRuleBrushEntityImpl, CGamePlayerZo
 
     private static nint? _OnPlayerInZoneOffset;
 
-    public CEntityIOOutput OnPlayerInZone {
+    public ref CEntityIOOutput OnPlayerInZone {
         get {
             _OnPlayerInZoneOffset = _OnPlayerInZoneOffset ?? Schema.GetOffset(0x35811C97FBD22730);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerInZoneOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerInZoneOffset!.Value);
         }
     }
     private static nint? _OnPlayerOutZoneOffset;
 
-    public CEntityIOOutput OnPlayerOutZone {
+    public ref CEntityIOOutput OnPlayerOutZone {
         get {
             _OnPlayerOutZoneOffset = _OnPlayerOutZoneOffset ?? Schema.GetOffset(0x35811C97E3DE880D);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerOutZoneOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerOutZoneOffset!.Value);
         }
     }
     private static nint? _PlayersInCountOffset;

@@ -15,7 +15,7 @@ public partial interface CTriggerRemove : CBaseTrigger, ISchemaClass<CTriggerRem
     static string? ISchemaClass<CTriggerRemove>.ClassName => "trigger_remove";
 
 
-    public CEntityIOOutput OnRemove { get; }
+    public ref CEntityIOOutput OnRemove { get; }
 
 
 }

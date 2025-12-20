@@ -74,10 +74,10 @@ internal partial class CPointEntityFinderImpl : CBaseEntityImpl, CPointEntityFin
     }
     private static nint? _OnFoundEntityOffset;
 
-    public CEntityIOOutput OnFoundEntity {
+    public ref CEntityIOOutput OnFoundEntity {
         get {
             _OnFoundEntityOffset = _OnFoundEntityOffset ?? Schema.GetOffset(0xC59CB133119B4E6F);
-            return new CEntityIOOutputImpl(_Handle + _OnFoundEntityOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFoundEntityOffset!.Value);
         }
     }
 

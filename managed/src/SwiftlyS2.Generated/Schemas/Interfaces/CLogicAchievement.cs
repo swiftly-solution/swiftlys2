@@ -19,7 +19,7 @@ public partial interface CLogicAchievement : CLogicalEntity, ISchemaClass<CLogic
 
     public string AchievementEventID { get; set; }
 
-    public CEntityIOOutput OnFired { get; }
+    public ref CEntityIOOutput OnFired { get; }
 
 
 }

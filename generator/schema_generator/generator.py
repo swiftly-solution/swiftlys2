@@ -20,7 +20,7 @@ blacklisted_classes = [
   "CTakeDamageResult",
   "CNetworkVarChainer",
   "CVariantDefaultAllocator",
-  # "CEntityIOOutput",
+  "CEntityIOOutput",
   "ChangeAccessorFieldPathIndex_t"
 ]
 

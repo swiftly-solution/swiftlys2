@@ -35,7 +35,7 @@ public partial interface CBreakable : CBaseModelEntity, ISchemaClass<CBreakable>
 
     public ref EOverrideBlockLOS_t OverrideBlockLOS { get; }
 
-    public CEntityIOOutput OnBreak { get; }
+    public ref CEntityIOOutput OnBreak { get; }
 
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnHealthChanged { get; }

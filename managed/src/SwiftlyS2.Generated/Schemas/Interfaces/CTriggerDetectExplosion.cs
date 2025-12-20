@@ -15,7 +15,7 @@ public partial interface CTriggerDetectExplosion : CBaseTrigger, ISchemaClass<CT
     static string? ISchemaClass<CTriggerDetectExplosion>.ClassName => "trigger_detect_explosion";
 
 
-    public CEntityIOOutput OnDetectedExplosion { get; }
+    public ref CEntityIOOutput OnDetectedExplosion { get; }
 
 
 }

@@ -62,82 +62,82 @@ internal partial class CBaseClientUIEntityImpl : CBaseModelEntityImpl, CBaseClie
     } 
     private static nint? _CustomOutput0Offset;
 
-    public CEntityIOOutput CustomOutput0 {
+    public ref CEntityIOOutput CustomOutput0 {
         get {
             _CustomOutput0Offset = _CustomOutput0Offset ?? Schema.GetOffset(0x51A22D119AA5C775);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput0Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput0Offset!.Value);
         }
     }
     private static nint? _CustomOutput1Offset;
 
-    public CEntityIOOutput CustomOutput1 {
+    public ref CEntityIOOutput CustomOutput1 {
         get {
             _CustomOutput1Offset = _CustomOutput1Offset ?? Schema.GetOffset(0x51A22D1199A5C5E2);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput1Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput1Offset!.Value);
         }
     }
     private static nint? _CustomOutput2Offset;
 
-    public CEntityIOOutput CustomOutput2 {
+    public ref CEntityIOOutput CustomOutput2 {
         get {
             _CustomOutput2Offset = _CustomOutput2Offset ?? Schema.GetOffset(0x51A22D1198A5C44F);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput2Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput2Offset!.Value);
         }
     }
     private static nint? _CustomOutput3Offset;
 
-    public CEntityIOOutput CustomOutput3 {
+    public ref CEntityIOOutput CustomOutput3 {
         get {
             _CustomOutput3Offset = _CustomOutput3Offset ?? Schema.GetOffset(0x51A22D1197A5C2BC);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput3Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput3Offset!.Value);
         }
     }
     private static nint? _CustomOutput4Offset;
 
-    public CEntityIOOutput CustomOutput4 {
+    public ref CEntityIOOutput CustomOutput4 {
         get {
             _CustomOutput4Offset = _CustomOutput4Offset ?? Schema.GetOffset(0x51A22D1196A5C129);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput4Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput4Offset!.Value);
         }
     }
     private static nint? _CustomOutput5Offset;
 
-    public CEntityIOOutput CustomOutput5 {
+    public ref CEntityIOOutput CustomOutput5 {
         get {
             _CustomOutput5Offset = _CustomOutput5Offset ?? Schema.GetOffset(0x51A22D1195A5BF96);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput5Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput5Offset!.Value);
         }
     }
     private static nint? _CustomOutput6Offset;
 
-    public CEntityIOOutput CustomOutput6 {
+    public ref CEntityIOOutput CustomOutput6 {
         get {
             _CustomOutput6Offset = _CustomOutput6Offset ?? Schema.GetOffset(0x51A22D1194A5BE03);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput6Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput6Offset!.Value);
         }
     }
     private static nint? _CustomOutput7Offset;
 
-    public CEntityIOOutput CustomOutput7 {
+    public ref CEntityIOOutput CustomOutput7 {
         get {
             _CustomOutput7Offset = _CustomOutput7Offset ?? Schema.GetOffset(0x51A22D1193A5BC70);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput7Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput7Offset!.Value);
         }
     }
     private static nint? _CustomOutput8Offset;
 
-    public CEntityIOOutput CustomOutput8 {
+    public ref CEntityIOOutput CustomOutput8 {
         get {
             _CustomOutput8Offset = _CustomOutput8Offset ?? Schema.GetOffset(0x51A22D11A2A5D40D);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput8Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput8Offset!.Value);
         }
     }
     private static nint? _CustomOutput9Offset;
 
-    public CEntityIOOutput CustomOutput9 {
+    public ref CEntityIOOutput CustomOutput9 {
         get {
             _CustomOutput9Offset = _CustomOutput9Offset ?? Schema.GetOffset(0x51A22D11A1A5D27A);
-            return new CEntityIOOutputImpl(_Handle + _CustomOutput9Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput9Offset!.Value);
         }
     }
 

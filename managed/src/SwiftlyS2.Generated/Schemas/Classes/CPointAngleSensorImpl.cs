@@ -86,18 +86,18 @@ internal partial class CPointAngleSensorImpl : CPointEntityImpl, CPointAngleSens
     }
     private static nint? _OnFacingLookatOffset;
 
-    public CEntityIOOutput OnFacingLookat {
+    public ref CEntityIOOutput OnFacingLookat {
         get {
             _OnFacingLookatOffset = _OnFacingLookatOffset ?? Schema.GetOffset(0x1E4356011F71721C);
-            return new CEntityIOOutputImpl(_Handle + _OnFacingLookatOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFacingLookatOffset!.Value);
         }
     }
     private static nint? _OnNotFacingLookatOffset;
 
-    public CEntityIOOutput OnNotFacingLookat {
+    public ref CEntityIOOutput OnNotFacingLookat {
         get {
             _OnNotFacingLookatOffset = _OnNotFacingLookatOffset ?? Schema.GetOffset(0x1E435601A7B496D5);
-            return new CEntityIOOutputImpl(_Handle + _OnNotFacingLookatOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNotFacingLookatOffset!.Value);
         }
     }
     private static nint? _TargetDirOffset;

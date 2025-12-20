@@ -61,7 +61,7 @@ public partial interface CFuncShatterglass : CBaseModelEntity, ISchemaClass<CFun
 
     public ref CUtlVector<Vector4D> InitialPanelVertices { get; }
 
-    public CEntityIOOutput OnBroken { get; }
+    public ref CEntityIOOutput OnBroken { get; }
 
     public ref byte SurfaceType { get; }
 

@@ -114,26 +114,26 @@ internal partial class CTriggerLookImpl : CTriggerOnceImpl, CTriggerLook
     }
     private static nint? _OnTimeoutOffset;
 
-    public CEntityIOOutput OnTimeout {
+    public ref CEntityIOOutput OnTimeout {
         get {
             _OnTimeoutOffset = _OnTimeoutOffset ?? Schema.GetOffset(0x400CA691C5301603);
-            return new CEntityIOOutputImpl(_Handle + _OnTimeoutOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimeoutOffset!.Value);
         }
     }
     private static nint? _OnStartLookOffset;
 
-    public CEntityIOOutput OnStartLook {
+    public ref CEntityIOOutput OnStartLook {
         get {
             _OnStartLookOffset = _OnStartLookOffset ?? Schema.GetOffset(0x400CA6914E36D787);
-            return new CEntityIOOutputImpl(_Handle + _OnStartLookOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartLookOffset!.Value);
         }
     }
     private static nint? _OnEndLookOffset;
 
-    public CEntityIOOutput OnEndLook {
+    public ref CEntityIOOutput OnEndLook {
         get {
             _OnEndLookOffset = _OnEndLookOffset ?? Schema.GetOffset(0x400CA6914D4626E6);
-            return new CEntityIOOutputImpl(_Handle + _OnEndLookOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndLookOffset!.Value);
         }
     }
 

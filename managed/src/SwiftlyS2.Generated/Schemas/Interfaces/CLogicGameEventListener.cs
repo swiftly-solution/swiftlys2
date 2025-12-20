@@ -15,7 +15,7 @@ public partial interface CLogicGameEventListener : CLogicalEntity, ISchemaClass<
     static string? ISchemaClass<CLogicGameEventListener>.ClassName => "logic_gameevent_listener";
 
 
-    public CEntityIOOutput OnEventFired { get; }
+    public ref CEntityIOOutput OnEventFired { get; }
 
     public string GameEventName { get; set; }
 

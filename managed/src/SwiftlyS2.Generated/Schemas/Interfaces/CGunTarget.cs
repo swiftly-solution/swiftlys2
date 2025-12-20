@@ -19,7 +19,7 @@ public partial interface CGunTarget : CBaseToggle, ISchemaClass<CGunTarget>
 
     public ref CHandle<CBaseEntity> TargetEnt { get; }
 
-    public CEntityIOOutput OnDeath { get; }
+    public ref CEntityIOOutput OnDeath { get; }
 
 
 }

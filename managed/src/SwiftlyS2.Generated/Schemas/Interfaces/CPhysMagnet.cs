@@ -15,9 +15,9 @@ public partial interface CPhysMagnet : CBaseAnimGraph, ISchemaClass<CPhysMagnet>
     static string? ISchemaClass<CPhysMagnet>.ClassName => "phys_magnet";
 
 
-    public CEntityIOOutput OnMagnetAttach { get; }
+    public ref CEntityIOOutput OnMagnetAttach { get; }
 
-    public CEntityIOOutput OnMagnetDetach { get; }
+    public ref CEntityIOOutput OnMagnetDetach { get; }
 
     public ref float MassScale { get; }
 

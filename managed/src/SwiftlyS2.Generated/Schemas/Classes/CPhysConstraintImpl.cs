@@ -134,10 +134,10 @@ internal partial class CPhysConstraintImpl : CLogicalEntityImpl, CPhysConstraint
     }
     private static nint? _OnBreakOffset;
 
-    public CEntityIOOutput OnBreak {
+    public ref CEntityIOOutput OnBreak {
         get {
             _OnBreakOffset = _OnBreakOffset ?? Schema.GetOffset(0xB172254546BFEC4F);
-            return new CEntityIOOutputImpl(_Handle + _OnBreakOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBreakOffset!.Value);
         }
     }
 

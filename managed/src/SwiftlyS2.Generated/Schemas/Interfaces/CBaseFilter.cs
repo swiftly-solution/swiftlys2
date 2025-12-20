@@ -17,9 +17,9 @@ public partial interface CBaseFilter : CLogicalEntity, ISchemaClass<CBaseFilter>
 
     public ref bool Negated { get; }
 
-    public CEntityIOOutput OnPass { get; }
+    public ref CEntityIOOutput OnPass { get; }
 
-    public CEntityIOOutput OnFail { get; }
+    public ref CEntityIOOutput OnFail { get; }
 
 
 }

@@ -102,18 +102,18 @@ internal partial class CFuncLadderImpl : CBaseModelEntityImpl, CFuncLadder
     } 
     private static nint? _OnPlayerGotOnLadderOffset;
 
-    public CEntityIOOutput OnPlayerGotOnLadder {
+    public ref CEntityIOOutput OnPlayerGotOnLadder {
         get {
             _OnPlayerGotOnLadderOffset = _OnPlayerGotOnLadderOffset ?? Schema.GetOffset(0xD85E02381B2BA3FC);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerGotOnLadderOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerGotOnLadderOffset!.Value);
         }
     }
     private static nint? _OnPlayerGotOffLadderOffset;
 
-    public CEntityIOOutput OnPlayerGotOffLadder {
+    public ref CEntityIOOutput OnPlayerGotOffLadder {
         get {
             _OnPlayerGotOffLadderOffset = _OnPlayerGotOffLadderOffset ?? Schema.GetOffset(0xD85E02388AD8997A);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerGotOffLadderOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerGotOffLadderOffset!.Value);
         }
     }
 

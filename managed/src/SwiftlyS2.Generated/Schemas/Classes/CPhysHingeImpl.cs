@@ -26,18 +26,18 @@ internal partial class CPhysHingeImpl : CPhysConstraintImpl, CPhysHinge
     }
     private static nint? _NotifyMinLimitReachedOffset;
 
-    public CEntityIOOutput NotifyMinLimitReached {
+    public ref CEntityIOOutput NotifyMinLimitReached {
         get {
             _NotifyMinLimitReachedOffset = _NotifyMinLimitReachedOffset ?? Schema.GetOffset(0xFCB149B1CD28EA23);
-            return new CEntityIOOutputImpl(_Handle + _NotifyMinLimitReachedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_NotifyMinLimitReachedOffset!.Value);
         }
     }
     private static nint? _NotifyMaxLimitReachedOffset;
 
-    public CEntityIOOutput NotifyMaxLimitReached {
+    public ref CEntityIOOutput NotifyMaxLimitReached {
         get {
             _NotifyMaxLimitReachedOffset = _NotifyMaxLimitReachedOffset ?? Schema.GetOffset(0xFCB149B15B33E6AD);
-            return new CEntityIOOutputImpl(_Handle + _NotifyMaxLimitReachedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_NotifyMaxLimitReachedOffset!.Value);
         }
     }
     private static nint? _AtMinLimitOffset;
@@ -146,18 +146,18 @@ internal partial class CPhysHingeImpl : CPhysConstraintImpl, CPhysHinge
     }
     private static nint? _OnStartMovingOffset;
 
-    public CEntityIOOutput OnStartMoving {
+    public ref CEntityIOOutput OnStartMoving {
         get {
             _OnStartMovingOffset = _OnStartMovingOffset ?? Schema.GetOffset(0xFCB149B1F38945EA);
-            return new CEntityIOOutputImpl(_Handle + _OnStartMovingOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartMovingOffset!.Value);
         }
     }
     private static nint? _OnStopMovingOffset;
 
-    public CEntityIOOutput OnStopMoving {
+    public ref CEntityIOOutput OnStopMoving {
         get {
             _OnStopMovingOffset = _OnStopMovingOffset ?? Schema.GetOffset(0xFCB149B1D3A538AE);
-            return new CEntityIOOutputImpl(_Handle + _OnStopMovingOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStopMovingOffset!.Value);
         }
     }
 

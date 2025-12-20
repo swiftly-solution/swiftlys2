@@ -58,26 +58,26 @@ internal partial class CLogicDistanceCheckImpl : CLogicalEntityImpl, CLogicDista
     }
     private static nint? _InZone1Offset;
 
-    public CEntityIOOutput InZone1 {
+    public ref CEntityIOOutput InZone1 {
         get {
             _InZone1Offset = _InZone1Offset ?? Schema.GetOffset(0x523E7E6D25378DB3);
-            return new CEntityIOOutputImpl(_Handle + _InZone1Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_InZone1Offset!.Value);
         }
     }
     private static nint? _InZone2Offset;
 
-    public CEntityIOOutput InZone2 {
+    public ref CEntityIOOutput InZone2 {
         get {
             _InZone2Offset = _InZone2Offset ?? Schema.GetOffset(0x523E7E6D26378F46);
-            return new CEntityIOOutputImpl(_Handle + _InZone2Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_InZone2Offset!.Value);
         }
     }
     private static nint? _InZone3Offset;
 
-    public CEntityIOOutput InZone3 {
+    public ref CEntityIOOutput InZone3 {
         get {
             _InZone3Offset = _InZone3Offset ?? Schema.GetOffset(0x523E7E6D273790D9);
-            return new CEntityIOOutputImpl(_Handle + _InZone3Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_InZone3Offset!.Value);
         }
     }
 

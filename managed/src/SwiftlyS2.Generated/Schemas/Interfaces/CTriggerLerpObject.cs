@@ -39,11 +39,11 @@ public partial interface CTriggerLerpObject : CBaseTrigger, ISchemaClass<CTrigge
 
     public ref CHandle<CBaseEntity> EntityToWaitForDisconnect { get; }
 
-    public CEntityIOOutput OnLerpStarted { get; }
+    public ref CEntityIOOutput OnLerpStarted { get; }
 
-    public CEntityIOOutput OnLerpFinished { get; }
+    public ref CEntityIOOutput OnLerpFinished { get; }
 
-    public CEntityIOOutput OnDetached { get; }
+    public ref CEntityIOOutput OnDetached { get; }
 
 
 }

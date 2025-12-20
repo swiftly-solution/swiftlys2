@@ -37,9 +37,9 @@ public partial interface CTriggerHurt : CBaseTrigger, ISchemaClass<CTriggerHurt>
 
     public ref float HurtThinkPeriod { get; }
 
-    public CEntityIOOutput OnHurt { get; }
+    public ref CEntityIOOutput OnHurt { get; }
 
-    public CEntityIOOutput OnHurtPlayer { get; }
+    public ref CEntityIOOutput OnHurtPlayer { get; }
 
     public ref CUtlVector<CHandle<CBaseEntity>> HurtEntities { get; }
 

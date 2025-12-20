@@ -51,7 +51,7 @@ public partial interface CEnvBeam : CBeam, ISchemaClass<CEnvBeam>
 
     public string Decal { get; set; }
 
-    public CEntityIOOutput OnTouchedByEntity { get; }
+    public ref CEntityIOOutput OnTouchedByEntity { get; }
 
 
 }

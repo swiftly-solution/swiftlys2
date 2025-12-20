@@ -33,15 +33,15 @@ public partial interface CPhysBox : CBreakable, ISchemaClass<CPhysBox>
 
     public ref float TouchOutputPerEntityDelay { get; }
 
-    public CEntityIOOutput OnDamaged { get; }
+    public ref CEntityIOOutput OnDamaged { get; }
 
-    public CEntityIOOutput OnAwakened { get; }
+    public ref CEntityIOOutput OnAwakened { get; }
 
-    public CEntityIOOutput OnMotionEnabled { get; }
+    public ref CEntityIOOutput OnMotionEnabled { get; }
 
-    public CEntityIOOutput OnPlayerUse { get; }
+    public ref CEntityIOOutput OnPlayerUse { get; }
 
-    public CEntityIOOutput OnStartTouch { get; }
+    public ref CEntityIOOutput OnStartTouch { get; }
 
     public ref CHandle<CBasePlayerPawn> CarryingPlayer { get; }
 

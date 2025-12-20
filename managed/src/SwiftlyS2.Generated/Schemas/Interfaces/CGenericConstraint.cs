@@ -105,11 +105,11 @@ public partial interface CGenericConstraint : CPhysConstraint, ISchemaClass<CGen
 
     public ref float MaxAngularImpulseZ { get; }
 
-    public CEntityIOOutput NotifyForceReachedX { get; }
+    public ref CEntityIOOutput NotifyForceReachedX { get; }
 
-    public CEntityIOOutput NotifyForceReachedY { get; }
+    public ref CEntityIOOutput NotifyForceReachedY { get; }
 
-    public CEntityIOOutput NotifyForceReachedZ { get; }
+    public ref CEntityIOOutput NotifyForceReachedZ { get; }
 
 
 }

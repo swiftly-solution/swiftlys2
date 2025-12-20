@@ -15,15 +15,15 @@ public partial interface CItem : CBaseAnimGraph, ISchemaClass<CItem>
     static string? ISchemaClass<CItem>.ClassName => null;
 
 
-    public CEntityIOOutput OnPlayerTouch { get; }
+    public ref CEntityIOOutput OnPlayerTouch { get; }
 
-    public CEntityIOOutput OnPlayerPickup { get; }
+    public ref CEntityIOOutput OnPlayerPickup { get; }
 
     public ref bool ActivateWhenAtRest { get; }
 
-    public CEntityIOOutput OnCacheInteraction { get; }
+    public ref CEntityIOOutput OnCacheInteraction { get; }
 
-    public CEntityIOOutput OnGlovePulled { get; }
+    public ref CEntityIOOutput OnGlovePulled { get; }
 
     public ref Vector OriginalSpawnOrigin { get; }
 

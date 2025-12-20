@@ -18,18 +18,18 @@ internal partial class CPhysMagnetImpl : CBaseAnimGraphImpl, CPhysMagnet
 
     private static nint? _OnMagnetAttachOffset;
 
-    public CEntityIOOutput OnMagnetAttach {
+    public ref CEntityIOOutput OnMagnetAttach {
         get {
             _OnMagnetAttachOffset = _OnMagnetAttachOffset ?? Schema.GetOffset(0x5772891055B6907B);
-            return new CEntityIOOutputImpl(_Handle + _OnMagnetAttachOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMagnetAttachOffset!.Value);
         }
     }
     private static nint? _OnMagnetDetachOffset;
 
-    public CEntityIOOutput OnMagnetDetach {
+    public ref CEntityIOOutput OnMagnetDetach {
         get {
             _OnMagnetDetachOffset = _OnMagnetDetachOffset ?? Schema.GetOffset(0x57728910FA716045);
-            return new CEntityIOOutputImpl(_Handle + _OnMagnetDetachOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMagnetDetachOffset!.Value);
         }
     }
     private static nint? _MassScaleOffset;

@@ -18,10 +18,10 @@ internal partial class CCreditsImpl : CPointEntityImpl, CCredits
 
     private static nint? _OnCreditsDoneOffset;
 
-    public CEntityIOOutput OnCreditsDone {
+    public ref CEntityIOOutput OnCreditsDone {
         get {
             _OnCreditsDoneOffset = _OnCreditsDoneOffset ?? Schema.GetOffset(0xF1224C0488A2DA7A);
-            return new CEntityIOOutputImpl(_Handle + _OnCreditsDoneOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCreditsDoneOffset!.Value);
         }
     }
     private static nint? _RolledOutroCreditsOffset;

@@ -100,7 +100,7 @@ public partial interface CBaseEntity : CEntityInstance, ISchemaClass<CBaseEntity
 
     public ref int SimulationTick { get; }
 
-    public CEntityIOOutput OnKilled { get; }
+    public ref CEntityIOOutput OnKilled { get; }
 
     public ref uint Flags { get; }
 
@@ -148,13 +148,13 @@ public partial interface CBaseEntity : CEntityInstance, ISchemaClass<CBaseEntity
 
     public ref int EFlags { get; }
 
-    public CEntityIOOutput OnUser1 { get; }
+    public ref CEntityIOOutput OnUser1 { get; }
 
-    public CEntityIOOutput OnUser2 { get; }
+    public ref CEntityIOOutput OnUser2 { get; }
 
-    public CEntityIOOutput OnUser3 { get; }
+    public ref CEntityIOOutput OnUser3 { get; }
 
-    public CEntityIOOutput OnUser4 { get; }
+    public ref CEntityIOOutput OnUser4 { get; }
 
     public ref int InitialTeamNum { get; }
 

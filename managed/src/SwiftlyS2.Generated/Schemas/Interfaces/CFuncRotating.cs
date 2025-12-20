@@ -15,11 +15,11 @@ public partial interface CFuncRotating : CBaseModelEntity, ISchemaClass<CFuncRot
     static string? ISchemaClass<CFuncRotating>.ClassName => "func_rotating";
 
 
-    public CEntityIOOutput OnStopped { get; }
+    public ref CEntityIOOutput OnStopped { get; }
 
-    public CEntityIOOutput OnStarted { get; }
+    public ref CEntityIOOutput OnStarted { get; }
 
-    public CEntityIOOutput OnReachedStart { get; }
+    public ref CEntityIOOutput OnReachedStart { get; }
 
     // RotationVector
     public SchemaUntypedField LocalRotationVector { get; }

@@ -15,7 +15,7 @@ public partial interface CEnvSoundscape : CBaseEntity, ISchemaClass<CEnvSoundsca
     static string? ISchemaClass<CEnvSoundscape>.ClassName => "env_soundscape";
 
 
-    public CEntityIOOutput OnPlay { get; }
+    public ref CEntityIOOutput OnPlay { get; }
 
     public ref float Radius { get; }
 

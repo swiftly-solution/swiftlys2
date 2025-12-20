@@ -19,7 +19,7 @@ public partial interface CChangeLevel : CBaseTrigger, ISchemaClass<CChangeLevel>
 
     public string LandmarkName { get; set; }
 
-    public CEntityIOOutput OnChangeLevel { get; }
+    public ref CEntityIOOutput OnChangeLevel { get; }
 
     public ref bool Touched { get; }
 

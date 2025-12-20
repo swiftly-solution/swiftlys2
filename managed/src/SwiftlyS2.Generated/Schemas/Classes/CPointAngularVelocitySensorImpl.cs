@@ -106,42 +106,42 @@ internal partial class CPointAngularVelocitySensorImpl : CPointEntityImpl, CPoin
     }
     private static nint? _OnLessThanOffset;
 
-    public CEntityIOOutput OnLessThan {
+    public ref CEntityIOOutput OnLessThan {
         get {
             _OnLessThanOffset = _OnLessThanOffset ?? Schema.GetOffset(0x5B09D8FB6AC02FE);
-            return new CEntityIOOutputImpl(_Handle + _OnLessThanOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLessThanOffset!.Value);
         }
     }
     private static nint? _OnLessThanOrEqualToOffset;
 
-    public CEntityIOOutput OnLessThanOrEqualTo {
+    public ref CEntityIOOutput OnLessThanOrEqualTo {
         get {
             _OnLessThanOrEqualToOffset = _OnLessThanOrEqualToOffset ?? Schema.GetOffset(0x5B09D8F28E696D8);
-            return new CEntityIOOutputImpl(_Handle + _OnLessThanOrEqualToOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLessThanOrEqualToOffset!.Value);
         }
     }
     private static nint? _OnGreaterThanOffset;
 
-    public CEntityIOOutput OnGreaterThan {
+    public ref CEntityIOOutput OnGreaterThan {
         get {
             _OnGreaterThanOffset = _OnGreaterThanOffset ?? Schema.GetOffset(0x5B09D8F50BD472D);
-            return new CEntityIOOutputImpl(_Handle + _OnGreaterThanOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnGreaterThanOffset!.Value);
         }
     }
     private static nint? _OnGreaterThanOrEqualToOffset;
 
-    public CEntityIOOutput OnGreaterThanOrEqualTo {
+    public ref CEntityIOOutput OnGreaterThanOrEqualTo {
         get {
             _OnGreaterThanOrEqualToOffset = _OnGreaterThanOrEqualToOffset ?? Schema.GetOffset(0x5B09D8F6483CABD);
-            return new CEntityIOOutputImpl(_Handle + _OnGreaterThanOrEqualToOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnGreaterThanOrEqualToOffset!.Value);
         }
     }
     private static nint? _OnEqualToOffset;
 
-    public CEntityIOOutput OnEqualTo {
+    public ref CEntityIOOutput OnEqualTo {
         get {
             _OnEqualToOffset = _OnEqualToOffset ?? Schema.GetOffset(0x5B09D8F87EEC581);
-            return new CEntityIOOutputImpl(_Handle + _OnEqualToOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEqualToOffset!.Value);
         }
     }
 

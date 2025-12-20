@@ -378,26 +378,26 @@ internal partial class CGenericConstraintImpl : CPhysConstraintImpl, CGenericCon
     }
     private static nint? _NotifyForceReachedXOffset;
 
-    public CEntityIOOutput NotifyForceReachedX {
+    public ref CEntityIOOutput NotifyForceReachedX {
         get {
             _NotifyForceReachedXOffset = _NotifyForceReachedXOffset ?? Schema.GetOffset(0x169828486707AE55);
-            return new CEntityIOOutputImpl(_Handle + _NotifyForceReachedXOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_NotifyForceReachedXOffset!.Value);
         }
     }
     private static nint? _NotifyForceReachedYOffset;
 
-    public CEntityIOOutput NotifyForceReachedY {
+    public ref CEntityIOOutput NotifyForceReachedY {
         get {
             _NotifyForceReachedYOffset = _NotifyForceReachedYOffset ?? Schema.GetOffset(0x169828486607ACC2);
-            return new CEntityIOOutputImpl(_Handle + _NotifyForceReachedYOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_NotifyForceReachedYOffset!.Value);
         }
     }
     private static nint? _NotifyForceReachedZOffset;
 
-    public CEntityIOOutput NotifyForceReachedZ {
+    public ref CEntityIOOutput NotifyForceReachedZ {
         get {
             _NotifyForceReachedZOffset = _NotifyForceReachedZOffset ?? Schema.GetOffset(0x169828486507AB2F);
-            return new CEntityIOOutputImpl(_Handle + _NotifyForceReachedZOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_NotifyForceReachedZOffset!.Value);
         }
     }
 

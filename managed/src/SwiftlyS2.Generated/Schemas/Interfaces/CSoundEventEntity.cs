@@ -34,7 +34,7 @@ public partial interface CSoundEventEntity : CBaseEntity, ISchemaClass<CSoundEve
     // CEntityOutputTemplate< uint64 >
     public SchemaUntypedField OnGUIDChanged { get; }
 
-    public CEntityIOOutput OnSoundFinished { get; }
+    public ref CEntityIOOutput OnSoundFinished { get; }
 
     public ref float ClientCullRadius { get; }
 

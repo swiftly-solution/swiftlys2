@@ -130,26 +130,26 @@ internal partial class CTriggerLerpObjectImpl : CBaseTriggerImpl, CTriggerLerpOb
     }
     private static nint? _OnLerpStartedOffset;
 
-    public CEntityIOOutput OnLerpStarted {
+    public ref CEntityIOOutput OnLerpStarted {
         get {
             _OnLerpStartedOffset = _OnLerpStartedOffset ?? Schema.GetOffset(0x42FE8EA4AE5EB5AA);
-            return new CEntityIOOutputImpl(_Handle + _OnLerpStartedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLerpStartedOffset!.Value);
         }
     }
     private static nint? _OnLerpFinishedOffset;
 
-    public CEntityIOOutput OnLerpFinished {
+    public ref CEntityIOOutput OnLerpFinished {
         get {
             _OnLerpFinishedOffset = _OnLerpFinishedOffset ?? Schema.GetOffset(0x42FE8EA4FBCC57F7);
-            return new CEntityIOOutputImpl(_Handle + _OnLerpFinishedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLerpFinishedOffset!.Value);
         }
     }
     private static nint? _OnDetachedOffset;
 
-    public CEntityIOOutput OnDetached {
+    public ref CEntityIOOutput OnDetached {
         get {
             _OnDetachedOffset = _OnDetachedOffset ?? Schema.GetOffset(0x42FE8EA465BAE906);
-            return new CEntityIOOutputImpl(_Handle + _OnDetachedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDetachedOffset!.Value);
         }
     }
 

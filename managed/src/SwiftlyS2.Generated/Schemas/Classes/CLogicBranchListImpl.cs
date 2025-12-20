@@ -46,26 +46,26 @@ internal partial class CLogicBranchListImpl : CLogicalEntityImpl, CLogicBranchLi
     }
     private static nint? _OnAllTrueOffset;
 
-    public CEntityIOOutput OnAllTrue {
+    public ref CEntityIOOutput OnAllTrue {
         get {
             _OnAllTrueOffset = _OnAllTrueOffset ?? Schema.GetOffset(0xB21E12B8419FFFAF);
-            return new CEntityIOOutputImpl(_Handle + _OnAllTrueOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAllTrueOffset!.Value);
         }
     }
     private static nint? _OnAllFalseOffset;
 
-    public CEntityIOOutput OnAllFalse {
+    public ref CEntityIOOutput OnAllFalse {
         get {
             _OnAllFalseOffset = _OnAllFalseOffset ?? Schema.GetOffset(0xB21E12B86EFCD332);
-            return new CEntityIOOutputImpl(_Handle + _OnAllFalseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAllFalseOffset!.Value);
         }
     }
     private static nint? _OnMixedOffset;
 
-    public CEntityIOOutput OnMixed {
+    public ref CEntityIOOutput OnMixed {
         get {
             _OnMixedOffset = _OnMixedOffset ?? Schema.GetOffset(0xB21E12B8EBC72437);
-            return new CEntityIOOutputImpl(_Handle + _OnMixedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMixedOffset!.Value);
         }
     }
 

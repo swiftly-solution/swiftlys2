@@ -35,7 +35,7 @@ public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeap
 
     public ref bool FireOnEmpty { get; }
 
-    public CEntityIOOutput OnPlayerPickup { get; }
+    public ref CEntityIOOutput OnPlayerPickup { get; }
 
     public ref CSWeaponMode WeaponMode { get; }
 

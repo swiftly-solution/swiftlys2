@@ -39,15 +39,15 @@ public partial interface CBaseButton : CBaseToggle, ISchemaClass<CBaseButton>
 
     public ref bool SolidBsp { get; }
 
-    public CEntityIOOutput OnDamaged { get; }
+    public ref CEntityIOOutput OnDamaged { get; }
 
-    public CEntityIOOutput OnPressed { get; }
+    public ref CEntityIOOutput OnPressed { get; }
 
-    public CEntityIOOutput OnUseLocked { get; }
+    public ref CEntityIOOutput OnUseLocked { get; }
 
-    public CEntityIOOutput OnIn { get; }
+    public ref CEntityIOOutput OnIn { get; }
 
-    public CEntityIOOutput OnOut { get; }
+    public ref CEntityIOOutput OnOut { get; }
 
     public ref int State { get; }
 

@@ -39,11 +39,11 @@ public partial interface CTriggerLook : CTriggerOnce, ISchemaClass<CTriggerLook>
 
     public ref bool TestAllVisibleOcclusion { get; }
 
-    public CEntityIOOutput OnTimeout { get; }
+    public ref CEntityIOOutput OnTimeout { get; }
 
-    public CEntityIOOutput OnStartLook { get; }
+    public ref CEntityIOOutput OnStartLook { get; }
 
-    public CEntityIOOutput OnEndLook { get; }
+    public ref CEntityIOOutput OnEndLook { get; }
 
     public void TestOcclusionUpdated();
     public void TestAllVisibleOcclusionUpdated();

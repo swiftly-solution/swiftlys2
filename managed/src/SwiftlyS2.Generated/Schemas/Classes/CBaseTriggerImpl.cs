@@ -18,58 +18,58 @@ internal partial class CBaseTriggerImpl : CBaseToggleImpl, CBaseTrigger
 
     private static nint? _OnStartTouchOffset;
 
-    public CEntityIOOutput OnStartTouch {
+    public ref CEntityIOOutput OnStartTouch {
         get {
             _OnStartTouchOffset = _OnStartTouchOffset ?? Schema.GetOffset(0x96DE10B1B4E38193);
-            return new CEntityIOOutputImpl(_Handle + _OnStartTouchOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartTouchOffset!.Value);
         }
     }
     private static nint? _OnStartTouchAllOffset;
 
-    public CEntityIOOutput OnStartTouchAll {
+    public ref CEntityIOOutput OnStartTouchAll {
         get {
             _OnStartTouchAllOffset = _OnStartTouchAllOffset ?? Schema.GetOffset(0x96DE10B1BE1133C6);
-            return new CEntityIOOutputImpl(_Handle + _OnStartTouchAllOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartTouchAllOffset!.Value);
         }
     }
     private static nint? _OnEndTouchOffset;
 
-    public CEntityIOOutput OnEndTouch {
+    public ref CEntityIOOutput OnEndTouch {
         get {
             _OnEndTouchOffset = _OnEndTouchOffset ?? Schema.GetOffset(0x96DE10B15D181B48);
-            return new CEntityIOOutputImpl(_Handle + _OnEndTouchOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndTouchOffset!.Value);
         }
     }
     private static nint? _OnEndTouchAllOffset;
 
-    public CEntityIOOutput OnEndTouchAll {
+    public ref CEntityIOOutput OnEndTouchAll {
         get {
             _OnEndTouchAllOffset = _OnEndTouchAllOffset ?? Schema.GetOffset(0x96DE10B1A5526E0B);
-            return new CEntityIOOutputImpl(_Handle + _OnEndTouchAllOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndTouchAllOffset!.Value);
         }
     }
     private static nint? _OnTouchingOffset;
 
-    public CEntityIOOutput OnTouching {
+    public ref CEntityIOOutput OnTouching {
         get {
             _OnTouchingOffset = _OnTouchingOffset ?? Schema.GetOffset(0x96DE10B1CD69EB01);
-            return new CEntityIOOutputImpl(_Handle + _OnTouchingOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchingOffset!.Value);
         }
     }
     private static nint? _OnTouchingEachEntityOffset;
 
-    public CEntityIOOutput OnTouchingEachEntity {
+    public ref CEntityIOOutput OnTouchingEachEntity {
         get {
             _OnTouchingEachEntityOffset = _OnTouchingEachEntityOffset ?? Schema.GetOffset(0x96DE10B1CBC29227);
-            return new CEntityIOOutputImpl(_Handle + _OnTouchingEachEntityOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchingEachEntityOffset!.Value);
         }
     }
     private static nint? _OnNotTouchingOffset;
 
-    public CEntityIOOutput OnNotTouching {
+    public ref CEntityIOOutput OnNotTouching {
         get {
             _OnNotTouchingOffset = _OnNotTouchingOffset ?? Schema.GetOffset(0x96DE10B19603AF34);
-            return new CEntityIOOutputImpl(_Handle + _OnNotTouchingOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNotTouchingOffset!.Value);
         }
     }
     private static nint? _TouchingEntitiesOffset;

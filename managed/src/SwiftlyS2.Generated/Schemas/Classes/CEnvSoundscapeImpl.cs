@@ -18,10 +18,10 @@ internal partial class CEnvSoundscapeImpl : CBaseEntityImpl, CEnvSoundscape
 
     private static nint? _OnPlayOffset;
 
-    public CEntityIOOutput OnPlay {
+    public ref CEntityIOOutput OnPlay {
         get {
             _OnPlayOffset = _OnPlayOffset ?? Schema.GetOffset(0x4C8F896A5C0BA6F2);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayOffset!.Value);
         }
     }
     private static nint? _RadiusOffset;

@@ -74,34 +74,34 @@ internal partial class CMathRemapImpl : CLogicalEntityImpl, CMathRemap
     }
     private static nint? _OnRoseAboveMinOffset;
 
-    public CEntityIOOutput OnRoseAboveMin {
+    public ref CEntityIOOutput OnRoseAboveMin {
         get {
             _OnRoseAboveMinOffset = _OnRoseAboveMinOffset ?? Schema.GetOffset(0xDE4BD86D814C5D50);
-            return new CEntityIOOutputImpl(_Handle + _OnRoseAboveMinOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRoseAboveMinOffset!.Value);
         }
     }
     private static nint? _OnRoseAboveMaxOffset;
 
-    public CEntityIOOutput OnRoseAboveMax {
+    public ref CEntityIOOutput OnRoseAboveMax {
         get {
             _OnRoseAboveMaxOffset = _OnRoseAboveMaxOffset ?? Schema.GetOffset(0xDE4BD86D7738C5DA);
-            return new CEntityIOOutputImpl(_Handle + _OnRoseAboveMaxOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRoseAboveMaxOffset!.Value);
         }
     }
     private static nint? _OnFellBelowMinOffset;
 
-    public CEntityIOOutput OnFellBelowMin {
+    public ref CEntityIOOutput OnFellBelowMin {
         get {
             _OnFellBelowMinOffset = _OnFellBelowMinOffset ?? Schema.GetOffset(0xDE4BD86DBF740886);
-            return new CEntityIOOutputImpl(_Handle + _OnFellBelowMinOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFellBelowMinOffset!.Value);
         }
     }
     private static nint? _OnFellBelowMaxOffset;
 
-    public CEntityIOOutput OnFellBelowMax {
+    public ref CEntityIOOutput OnFellBelowMax {
         get {
             _OnFellBelowMaxOffset = _OnFellBelowMaxOffset ?? Schema.GetOffset(0xDE4BD86DD187AC94);
-            return new CEntityIOOutputImpl(_Handle + _OnFellBelowMaxOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFellBelowMaxOffset!.Value);
         }
     }
 

@@ -15,13 +15,13 @@ public partial interface CHostage : CHostageExpresserShim, ISchemaClass<CHostage
     static string? ISchemaClass<CHostage>.ClassName => "hostage_entity";
 
 
-    public CEntityIOOutput OnHostageBeginGrab { get; }
+    public ref CEntityIOOutput OnHostageBeginGrab { get; }
 
-    public CEntityIOOutput OnFirstPickedUp { get; }
+    public ref CEntityIOOutput OnFirstPickedUp { get; }
 
-    public CEntityIOOutput OnDroppedNotRescued { get; }
+    public ref CEntityIOOutput OnDroppedNotRescued { get; }
 
-    public CEntityIOOutput OnRescued { get; }
+    public ref CEntityIOOutput OnRescued { get; }
 
     public EntitySpottedState_t EntitySpottedState { get; }
 

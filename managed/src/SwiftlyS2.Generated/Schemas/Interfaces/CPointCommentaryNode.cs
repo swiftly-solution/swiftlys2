@@ -55,9 +55,9 @@ public partial interface CPointCommentaryNode : CBaseAnimGraph, ISchemaClass<CPo
 
     public GameTime_t AbortedPlaybackAt { get; }
 
-    public CEntityIOOutput OnCommentaryStarted { get; }
+    public ref CEntityIOOutput OnCommentaryStarted { get; }
 
-    public CEntityIOOutput OnCommentaryStopped { get; }
+    public ref CEntityIOOutput OnCommentaryStopped { get; }
 
     public ref bool Active { get; }
 

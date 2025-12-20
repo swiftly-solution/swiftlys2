@@ -15,19 +15,19 @@ public partial interface CPhysicsProp : CBreakableProp, ISchemaClass<CPhysicsPro
     static string? ISchemaClass<CPhysicsProp>.ClassName => "prop_physics";
 
 
-    public CEntityIOOutput MotionEnabled { get; }
+    public ref CEntityIOOutput MotionEnabled { get; }
 
-    public CEntityIOOutput OnAwakened { get; }
+    public ref CEntityIOOutput OnAwakened { get; }
 
-    public CEntityIOOutput OnAwake { get; }
+    public ref CEntityIOOutput OnAwake { get; }
 
-    public CEntityIOOutput OnAsleep { get; }
+    public ref CEntityIOOutput OnAsleep { get; }
 
-    public CEntityIOOutput OnPlayerUse { get; }
+    public ref CEntityIOOutput OnPlayerUse { get; }
 
-    public CEntityIOOutput OnOutOfWorld { get; }
+    public ref CEntityIOOutput OnOutOfWorld { get; }
 
-    public CEntityIOOutput OnPlayerPickup { get; }
+    public ref CEntityIOOutput OnPlayerPickup { get; }
 
     public ref bool ForceNavIgnore { get; }
 

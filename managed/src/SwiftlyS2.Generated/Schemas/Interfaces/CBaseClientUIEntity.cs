@@ -23,25 +23,25 @@ public partial interface CBaseClientUIEntity : CBaseModelEntity, ISchemaClass<CB
 
     public string PanelID { get; set; }
 
-    public CEntityIOOutput CustomOutput0 { get; }
+    public ref CEntityIOOutput CustomOutput0 { get; }
 
-    public CEntityIOOutput CustomOutput1 { get; }
+    public ref CEntityIOOutput CustomOutput1 { get; }
 
-    public CEntityIOOutput CustomOutput2 { get; }
+    public ref CEntityIOOutput CustomOutput2 { get; }
 
-    public CEntityIOOutput CustomOutput3 { get; }
+    public ref CEntityIOOutput CustomOutput3 { get; }
 
-    public CEntityIOOutput CustomOutput4 { get; }
+    public ref CEntityIOOutput CustomOutput4 { get; }
 
-    public CEntityIOOutput CustomOutput5 { get; }
+    public ref CEntityIOOutput CustomOutput5 { get; }
 
-    public CEntityIOOutput CustomOutput6 { get; }
+    public ref CEntityIOOutput CustomOutput6 { get; }
 
-    public CEntityIOOutput CustomOutput7 { get; }
+    public ref CEntityIOOutput CustomOutput7 { get; }
 
-    public CEntityIOOutput CustomOutput8 { get; }
+    public ref CEntityIOOutput CustomOutput8 { get; }
 
-    public CEntityIOOutput CustomOutput9 { get; }
+    public ref CEntityIOOutput CustomOutput9 { get; }
 
     public void EnabledUpdated();
     public void DialogXMLNameUpdated();

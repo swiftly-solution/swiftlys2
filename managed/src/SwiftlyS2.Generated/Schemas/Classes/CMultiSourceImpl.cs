@@ -24,10 +24,10 @@ internal partial class CMultiSourceImpl : CLogicalEntityImpl, CMultiSource
     }
     private static nint? _OnTriggerOffset;
 
-    public CEntityIOOutput OnTrigger {
+    public ref CEntityIOOutput OnTrigger {
         get {
             _OnTriggerOffset = _OnTriggerOffset ?? Schema.GetOffset(0x87DC5C6681E0BFEC);
-            return new CEntityIOOutputImpl(_Handle + _OnTriggerOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerOffset!.Value);
         }
     }
     private static nint? _TotalOffset;

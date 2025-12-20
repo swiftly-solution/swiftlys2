@@ -107,17 +107,17 @@ public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
 
     public ref ushort SceneStringIndex { get; }
 
-    public CEntityIOOutput OnStart { get; }
+    public ref CEntityIOOutput OnStart { get; }
 
-    public CEntityIOOutput OnCompletion { get; }
+    public ref CEntityIOOutput OnCompletion { get; }
 
-    public CEntityIOOutput OnCanceled { get; }
+    public ref CEntityIOOutput OnCanceled { get; }
 
-    public CEntityIOOutput OnPaused { get; }
+    public ref CEntityIOOutput OnPaused { get; }
 
-    public CEntityIOOutput OnResumed { get; }
+    public ref CEntityIOOutput OnResumed { get; }
 
-    public ISchemaClassFixedArray<CEntityIOOutput> OnTrigger { get; }
+    public ISchemaFixedArray<CEntityIOOutput> OnTrigger { get; }
 
     public ref CHandle<CSceneEntity> InterruptScene { get; }
 

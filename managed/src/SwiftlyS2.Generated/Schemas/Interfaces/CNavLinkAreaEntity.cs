@@ -33,9 +33,9 @@ public partial interface CNavLinkAreaEntity : CPointEntity, ISchemaClass<CNavLin
 
     public ref CHandle<CBaseFilter> Filter { get; }
 
-    public CEntityIOOutput OnNavLinkStart { get; }
+    public ref CEntityIOOutput OnNavLinkStart { get; }
 
-    public CEntityIOOutput OnNavLinkFinish { get; }
+    public ref CEntityIOOutput OnNavLinkFinish { get; }
 
     public ref bool IsTerminus { get; }
 

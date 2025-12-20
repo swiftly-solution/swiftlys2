@@ -375,10 +375,10 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
     }
     private static nint? _OnKilledOffset;
 
-    public CEntityIOOutput OnKilled {
+    public ref CEntityIOOutput OnKilled {
         get {
             _OnKilledOffset = _OnKilledOffset ?? Schema.GetOffset(0x9DC483B8A64A5BF1);
-            return new CEntityIOOutputImpl(_Handle + _OnKilledOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnKilledOffset!.Value);
         }
     }
     private static nint? _FlagsOffset;
@@ -568,34 +568,34 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
     }
     private static nint? _OnUser1Offset;
 
-    public CEntityIOOutput OnUser1 {
+    public ref CEntityIOOutput OnUser1 {
         get {
             _OnUser1Offset = _OnUser1Offset ?? Schema.GetOffset(0x9DC483B8183E0806);
-            return new CEntityIOOutputImpl(_Handle + _OnUser1Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUser1Offset!.Value);
         }
     }
     private static nint? _OnUser2Offset;
 
-    public CEntityIOOutput OnUser2 {
+    public ref CEntityIOOutput OnUser2 {
         get {
             _OnUser2Offset = _OnUser2Offset ?? Schema.GetOffset(0x9DC483B8173E0673);
-            return new CEntityIOOutputImpl(_Handle + _OnUser2Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUser2Offset!.Value);
         }
     }
     private static nint? _OnUser3Offset;
 
-    public CEntityIOOutput OnUser3 {
+    public ref CEntityIOOutput OnUser3 {
         get {
             _OnUser3Offset = _OnUser3Offset ?? Schema.GetOffset(0x9DC483B8163E04E0);
-            return new CEntityIOOutputImpl(_Handle + _OnUser3Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUser3Offset!.Value);
         }
     }
     private static nint? _OnUser4Offset;
 
-    public CEntityIOOutput OnUser4 {
+    public ref CEntityIOOutput OnUser4 {
         get {
             _OnUser4Offset = _OnUser4Offset ?? Schema.GetOffset(0x9DC483B81D3E0FE5);
-            return new CEntityIOOutputImpl(_Handle + _OnUser4Offset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUser4Offset!.Value);
         }
     }
     private static nint? _InitialTeamNumOffset;

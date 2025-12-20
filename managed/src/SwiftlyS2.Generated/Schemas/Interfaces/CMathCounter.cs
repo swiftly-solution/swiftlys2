@@ -31,13 +31,13 @@ public partial interface CMathCounter : CLogicalEntity, ISchemaClass<CMathCounte
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnGetValue { get; }
 
-    public CEntityIOOutput OnHitMin { get; }
+    public ref CEntityIOOutput OnHitMin { get; }
 
-    public CEntityIOOutput OnHitMax { get; }
+    public ref CEntityIOOutput OnHitMax { get; }
 
-    public CEntityIOOutput OnChangedFromMin { get; }
+    public ref CEntityIOOutput OnChangedFromMin { get; }
 
-    public CEntityIOOutput OnChangedFromMax { get; }
+    public ref CEntityIOOutput OnChangedFromMax { get; }
 
 
 }

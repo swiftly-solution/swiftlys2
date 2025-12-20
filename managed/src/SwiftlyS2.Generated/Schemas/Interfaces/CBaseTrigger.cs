@@ -15,19 +15,19 @@ public partial interface CBaseTrigger : CBaseToggle, ISchemaClass<CBaseTrigger>
     static string? ISchemaClass<CBaseTrigger>.ClassName => "trigger";
 
 
-    public CEntityIOOutput OnStartTouch { get; }
+    public ref CEntityIOOutput OnStartTouch { get; }
 
-    public CEntityIOOutput OnStartTouchAll { get; }
+    public ref CEntityIOOutput OnStartTouchAll { get; }
 
-    public CEntityIOOutput OnEndTouch { get; }
+    public ref CEntityIOOutput OnEndTouch { get; }
 
-    public CEntityIOOutput OnEndTouchAll { get; }
+    public ref CEntityIOOutput OnEndTouchAll { get; }
 
-    public CEntityIOOutput OnTouching { get; }
+    public ref CEntityIOOutput OnTouching { get; }
 
-    public CEntityIOOutput OnTouchingEachEntity { get; }
+    public ref CEntityIOOutput OnTouchingEachEntity { get; }
 
-    public CEntityIOOutput OnNotTouching { get; }
+    public ref CEntityIOOutput OnNotTouching { get; }
 
     public ref CUtlVector<CHandle<CBaseEntity>> TouchingEntities { get; }
 

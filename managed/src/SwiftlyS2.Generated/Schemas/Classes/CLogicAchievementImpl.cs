@@ -38,10 +38,10 @@ internal partial class CLogicAchievementImpl : CLogicalEntityImpl, CLogicAchieve
     } 
     private static nint? _OnFiredOffset;
 
-    public CEntityIOOutput OnFired {
+    public ref CEntityIOOutput OnFired {
         get {
             _OnFiredOffset = _OnFiredOffset ?? Schema.GetOffset(0xE8C4579F84825730);
-            return new CEntityIOOutputImpl(_Handle + _OnFiredOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFiredOffset!.Value);
         }
     }
 

@@ -18,26 +18,26 @@ internal partial class CTimerEntityImpl : CLogicalEntityImpl, CTimerEntity
 
     private static nint? _OnTimerOffset;
 
-    public CEntityIOOutput OnTimer {
+    public ref CEntityIOOutput OnTimer {
         get {
             _OnTimerOffset = _OnTimerOffset ?? Schema.GetOffset(0xE96486ECF7551DA1);
-            return new CEntityIOOutputImpl(_Handle + _OnTimerOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimerOffset!.Value);
         }
     }
     private static nint? _OnTimerHighOffset;
 
-    public CEntityIOOutput OnTimerHigh {
+    public ref CEntityIOOutput OnTimerHigh {
         get {
             _OnTimerHighOffset = _OnTimerHighOffset ?? Schema.GetOffset(0xE96486ECEAFE5EC1);
-            return new CEntityIOOutputImpl(_Handle + _OnTimerHighOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimerHighOffset!.Value);
         }
     }
     private static nint? _OnTimerLowOffset;
 
-    public CEntityIOOutput OnTimerLow {
+    public ref CEntityIOOutput OnTimerLow {
         get {
             _OnTimerLowOffset = _OnTimerLowOffset ?? Schema.GetOffset(0xE96486EC60BA6A4D);
-            return new CEntityIOOutputImpl(_Handle + _OnTimerLowOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimerLowOffset!.Value);
         }
     }
     private static nint? _DisabledOffset;

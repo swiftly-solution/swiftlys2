@@ -156,10 +156,10 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
     }
     private static nint? _OnIgniteOffset;
 
-    public CEntityIOOutput OnIgnite {
+    public ref CEntityIOOutput OnIgnite {
         get {
             _OnIgniteOffset = _OnIgniteOffset ?? Schema.GetOffset(0x517849F757BDA972);
-            return new CEntityIOOutputImpl(_Handle + _OnIgniteOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnIgniteOffset!.Value);
         }
     }
     private static nint? _RenderModeOffset;

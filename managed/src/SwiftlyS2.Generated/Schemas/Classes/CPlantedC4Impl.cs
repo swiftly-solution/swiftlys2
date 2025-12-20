@@ -66,26 +66,26 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
     }
     private static nint? _OnBombDefusedOffset;
 
-    public CEntityIOOutput OnBombDefused {
+    public ref CEntityIOOutput OnBombDefused {
         get {
             _OnBombDefusedOffset = _OnBombDefusedOffset ?? Schema.GetOffset(0xE1614C81BCDAD16E);
-            return new CEntityIOOutputImpl(_Handle + _OnBombDefusedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombDefusedOffset!.Value);
         }
     }
     private static nint? _OnBombBeginDefuseOffset;
 
-    public CEntityIOOutput OnBombBeginDefuse {
+    public ref CEntityIOOutput OnBombBeginDefuse {
         get {
             _OnBombBeginDefuseOffset = _OnBombBeginDefuseOffset ?? Schema.GetOffset(0xE1614C81CD3D21A7);
-            return new CEntityIOOutputImpl(_Handle + _OnBombBeginDefuseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombBeginDefuseOffset!.Value);
         }
     }
     private static nint? _OnBombDefuseAbortedOffset;
 
-    public CEntityIOOutput OnBombDefuseAborted {
+    public ref CEntityIOOutput OnBombDefuseAborted {
         get {
             _OnBombDefuseAbortedOffset = _OnBombDefuseAbortedOffset ?? Schema.GetOffset(0xE1614C81DCF21D69);
-            return new CEntityIOOutputImpl(_Handle + _OnBombDefuseAbortedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombDefuseAbortedOffset!.Value);
         }
     }
     private static nint? _CannotBeDefusedOffset;

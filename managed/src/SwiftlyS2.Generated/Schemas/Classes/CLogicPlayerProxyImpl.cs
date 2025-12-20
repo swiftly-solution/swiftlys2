@@ -26,26 +26,26 @@ internal partial class CLogicPlayerProxyImpl : CLogicalEntityImpl, CLogicPlayerP
     }
     private static nint? _PlayerHasAmmoOffset;
 
-    public CEntityIOOutput PlayerHasAmmo {
+    public ref CEntityIOOutput PlayerHasAmmo {
         get {
             _PlayerHasAmmoOffset = _PlayerHasAmmoOffset ?? Schema.GetOffset(0x81D444EB6A23AB96);
-            return new CEntityIOOutputImpl(_Handle + _PlayerHasAmmoOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerHasAmmoOffset!.Value);
         }
     }
     private static nint? _PlayerHasNoAmmoOffset;
 
-    public CEntityIOOutput PlayerHasNoAmmo {
+    public ref CEntityIOOutput PlayerHasNoAmmo {
         get {
             _PlayerHasNoAmmoOffset = _PlayerHasNoAmmoOffset ?? Schema.GetOffset(0x81D444EB06CA340D);
-            return new CEntityIOOutputImpl(_Handle + _PlayerHasNoAmmoOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerHasNoAmmoOffset!.Value);
         }
     }
     private static nint? _PlayerDiedOffset;
 
-    public CEntityIOOutput PlayerDied {
+    public ref CEntityIOOutput PlayerDied {
         get {
             _PlayerDiedOffset = _PlayerDiedOffset ?? Schema.GetOffset(0x81D444EBB440E03E);
-            return new CEntityIOOutputImpl(_Handle + _PlayerDiedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerDiedOffset!.Value);
         }
     }
     private static nint? _RequestedPlayerHealthOffset;

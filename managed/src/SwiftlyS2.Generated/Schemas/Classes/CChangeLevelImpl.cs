@@ -42,10 +42,10 @@ internal partial class CChangeLevelImpl : CBaseTriggerImpl, CChangeLevel
     } 
     private static nint? _OnChangeLevelOffset;
 
-    public CEntityIOOutput OnChangeLevel {
+    public ref CEntityIOOutput OnChangeLevel {
         get {
             _OnChangeLevelOffset = _OnChangeLevelOffset ?? Schema.GetOffset(0x52008134EED57EDE);
-            return new CEntityIOOutputImpl(_Handle + _OnChangeLevelOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnChangeLevelOffset!.Value);
         }
     }
     private static nint? _TouchedOffset;

@@ -130,18 +130,18 @@ internal partial class CEnvWindSharedImpl : SchemaClass, CEnvWindShared
     }
     private static nint? _OnGustStartOffset;
 
-    public CEntityIOOutput OnGustStart {
+    public ref CEntityIOOutput OnGustStart {
         get {
             _OnGustStartOffset = _OnGustStartOffset ?? Schema.GetOffset(0x4E8F86FE2832424D);
-            return new CEntityIOOutputImpl(_Handle + _OnGustStartOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnGustStartOffset!.Value);
         }
     }
     private static nint? _OnGustEndOffset;
 
-    public CEntityIOOutput OnGustEnd {
+    public ref CEntityIOOutput OnGustEnd {
         get {
             _OnGustEndOffset = _OnGustEndOffset ?? Schema.GetOffset(0x4E8F86FE82E285B4);
-            return new CEntityIOOutputImpl(_Handle + _OnGustEndOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnGustEndOffset!.Value);
         }
     }
     private static nint? _EntOwnerOffset;

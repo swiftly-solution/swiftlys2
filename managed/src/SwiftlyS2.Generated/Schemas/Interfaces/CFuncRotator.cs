@@ -41,19 +41,19 @@ public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRota
 
     public ref Quaternion LSOrientation { get; }
 
-    public CEntityIOOutput OnRotationStarted { get; }
+    public ref CEntityIOOutput OnRotationStarted { get; }
 
-    public CEntityIOOutput OnRotationCompleted { get; }
+    public ref CEntityIOOutput OnRotationCompleted { get; }
 
-    public CEntityIOOutput OnOscillate { get; }
+    public ref CEntityIOOutput OnOscillate { get; }
 
-    public CEntityIOOutput OnOscillateStartArrive { get; }
+    public ref CEntityIOOutput OnOscillateStartArrive { get; }
 
-    public CEntityIOOutput OnOscillateStartDepart { get; }
+    public ref CEntityIOOutput OnOscillateStartDepart { get; }
 
-    public CEntityIOOutput OnOscillateEndArrive { get; }
+    public ref CEntityIOOutput OnOscillateEndArrive { get; }
 
-    public CEntityIOOutput OnOscillateEndDepart { get; }
+    public ref CEntityIOOutput OnOscillateEndDepart { get; }
 
     public ref bool OscillateDepart { get; }
 

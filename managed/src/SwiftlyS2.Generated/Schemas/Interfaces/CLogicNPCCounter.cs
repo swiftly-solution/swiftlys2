@@ -15,9 +15,9 @@ public partial interface CLogicNPCCounter : CBaseEntity, ISchemaClass<CLogicNPCC
     static string? ISchemaClass<CLogicNPCCounter>.ClassName => "logic_npc_counter_radius";
 
 
-    public CEntityIOOutput OnMinCountAll { get; }
+    public ref CEntityIOOutput OnMinCountAll { get; }
 
-    public CEntityIOOutput OnMaxCountAll { get; }
+    public ref CEntityIOOutput OnMaxCountAll { get; }
 
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnFactorAll { get; }
@@ -25,9 +25,9 @@ public partial interface CLogicNPCCounter : CBaseEntity, ISchemaClass<CLogicNPCC
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnMinPlayerDistAll { get; }
 
-    public CEntityIOOutput OnMinCount_1 { get; }
+    public ref CEntityIOOutput OnMinCount_1 { get; }
 
-    public CEntityIOOutput OnMaxCount_1 { get; }
+    public ref CEntityIOOutput OnMaxCount_1 { get; }
 
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnFactor_1 { get; }
@@ -35,9 +35,9 @@ public partial interface CLogicNPCCounter : CBaseEntity, ISchemaClass<CLogicNPCC
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnMinPlayerDist_1 { get; }
 
-    public CEntityIOOutput OnMinCount_2 { get; }
+    public ref CEntityIOOutput OnMinCount_2 { get; }
 
-    public CEntityIOOutput OnMaxCount_2 { get; }
+    public ref CEntityIOOutput OnMaxCount_2 { get; }
 
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnFactor_2 { get; }
@@ -45,9 +45,9 @@ public partial interface CLogicNPCCounter : CBaseEntity, ISchemaClass<CLogicNPCC
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnMinPlayerDist_2 { get; }
 
-    public CEntityIOOutput OnMinCount_3 { get; }
+    public ref CEntityIOOutput OnMinCount_3 { get; }
 
-    public CEntityIOOutput OnMaxCount_3 { get; }
+    public ref CEntityIOOutput OnMaxCount_3 { get; }
 
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField OnFactor_3 { get; }

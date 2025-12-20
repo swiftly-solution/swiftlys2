@@ -19,7 +19,7 @@ public partial interface CPathCorner : CPointEntity, ISchemaClass<CPathCorner>
 
     public ref float Radius { get; }
 
-    public CEntityIOOutput OnPass { get; }
+    public ref CEntityIOOutput OnPass { get; }
 
 
 }

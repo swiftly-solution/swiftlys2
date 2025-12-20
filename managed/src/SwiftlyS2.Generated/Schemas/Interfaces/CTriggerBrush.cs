@@ -15,11 +15,11 @@ public partial interface CTriggerBrush : CBaseModelEntity, ISchemaClass<CTrigger
     static string? ISchemaClass<CTriggerBrush>.ClassName => "trigger_brush";
 
 
-    public CEntityIOOutput OnStartTouch { get; }
+    public ref CEntityIOOutput OnStartTouch { get; }
 
-    public CEntityIOOutput OnEndTouch { get; }
+    public ref CEntityIOOutput OnEndTouch { get; }
 
-    public CEntityIOOutput OnUse { get; }
+    public ref CEntityIOOutput OnUse { get; }
 
     public ref int InputFilter { get; }
 

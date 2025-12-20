@@ -89,10 +89,10 @@ internal partial class CPathTrackImpl : CPointEntityImpl, CPathTrack
     }
     private static nint? _OnPassOffset;
 
-    public CEntityIOOutput OnPass {
+    public ref CEntityIOOutput OnPass {
         get {
             _OnPassOffset = _OnPassOffset ?? Schema.GetOffset(0xF86750E89B527249);
-            return new CEntityIOOutputImpl(_Handle + _OnPassOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassOffset!.Value);
         }
     }
 

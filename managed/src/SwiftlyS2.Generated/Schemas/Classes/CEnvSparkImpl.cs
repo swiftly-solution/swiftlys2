@@ -50,10 +50,10 @@ internal partial class CEnvSparkImpl : CPointEntityImpl, CEnvSpark
     }
     private static nint? _OnSparkOffset;
 
-    public CEntityIOOutput OnSpark {
+    public ref CEntityIOOutput OnSpark {
         get {
             _OnSparkOffset = _OnSparkOffset ?? Schema.GetOffset(0x3BACCABA67E1EE5D);
-            return new CEntityIOOutputImpl(_Handle + _OnSparkOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSparkOffset!.Value);
         }
     }
 

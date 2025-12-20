@@ -15,19 +15,19 @@ public partial interface CTestPulseIO : CLogicalEntity, ISchemaClass<CTestPulseI
     static string? ISchemaClass<CTestPulseIO>.ClassName => "test_io_combinations";
 
 
-    public CEntityIOOutput OnVariantVoid { get; }
+    public ref CEntityIOOutput OnVariantVoid { get; }
 
-    public CEntityIOOutput OnVariantBool { get; }
+    public ref CEntityIOOutput OnVariantBool { get; }
 
-    public CEntityIOOutput OnVariantInt { get; }
+    public ref CEntityIOOutput OnVariantInt { get; }
 
-    public CEntityIOOutput OnVariantFloat { get; }
+    public ref CEntityIOOutput OnVariantFloat { get; }
 
-    public CEntityIOOutput OnVariantString { get; }
+    public ref CEntityIOOutput OnVariantString { get; }
 
-    public CEntityIOOutput OnVariantColor { get; }
+    public ref CEntityIOOutput OnVariantColor { get; }
 
-    public CEntityIOOutput OnVariantVector { get; }
+    public ref CEntityIOOutput OnVariantVector { get; }
 
     public ref bool AllowEmptyInputs { get; }
 

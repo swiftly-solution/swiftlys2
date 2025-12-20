@@ -182,10 +182,10 @@ internal partial class CEnvBeamImpl : CBeamImpl, CEnvBeam
     } 
     private static nint? _OnTouchedByEntityOffset;
 
-    public CEntityIOOutput OnTouchedByEntity {
+    public ref CEntityIOOutput OnTouchedByEntity {
         get {
             _OnTouchedByEntityOffset = _OnTouchedByEntityOffset ?? Schema.GetOffset(0x84C6714ACB930C48);
-            return new CEntityIOOutputImpl(_Handle + _OnTouchedByEntityOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchedByEntityOffset!.Value);
         }
     }
 

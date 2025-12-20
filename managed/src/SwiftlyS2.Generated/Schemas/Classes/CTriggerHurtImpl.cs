@@ -106,18 +106,18 @@ internal partial class CTriggerHurtImpl : CBaseTriggerImpl, CTriggerHurt
     }
     private static nint? _OnHurtOffset;
 
-    public CEntityIOOutput OnHurt {
+    public ref CEntityIOOutput OnHurt {
         get {
             _OnHurtOffset = _OnHurtOffset ?? Schema.GetOffset(0x8D022787361573C1);
-            return new CEntityIOOutputImpl(_Handle + _OnHurtOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnHurtOffset!.Value);
         }
     }
     private static nint? _OnHurtPlayerOffset;
 
-    public CEntityIOOutput OnHurtPlayer {
+    public ref CEntityIOOutput OnHurtPlayer {
         get {
             _OnHurtPlayerOffset = _OnHurtPlayerOffset ?? Schema.GetOffset(0x8D02278771C2F34C);
-            return new CEntityIOOutputImpl(_Handle + _OnHurtPlayerOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnHurtPlayerOffset!.Value);
         }
     }
     private static nint? _HurtEntitiesOffset;

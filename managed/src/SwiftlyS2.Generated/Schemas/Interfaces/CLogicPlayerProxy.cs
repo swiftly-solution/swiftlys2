@@ -17,11 +17,11 @@ public partial interface CLogicPlayerProxy : CLogicalEntity, ISchemaClass<CLogic
 
     public ref CHandle<CBaseEntity> Player { get; }
 
-    public CEntityIOOutput PlayerHasAmmo { get; }
+    public ref CEntityIOOutput PlayerHasAmmo { get; }
 
-    public CEntityIOOutput PlayerHasNoAmmo { get; }
+    public ref CEntityIOOutput PlayerHasNoAmmo { get; }
 
-    public CEntityIOOutput PlayerDied { get; }
+    public ref CEntityIOOutput PlayerDied { get; }
 
     // CEntityOutputTemplate< int32 >
     public SchemaUntypedField RequestedPlayerHealth { get; }

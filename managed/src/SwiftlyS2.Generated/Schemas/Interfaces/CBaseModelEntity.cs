@@ -49,7 +49,7 @@ public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModel
 
     public GameTime_t DissolveStartTime { get; }
 
-    public CEntityIOOutput OnIgnite { get; }
+    public ref CEntityIOOutput OnIgnite { get; }
 
     public ref RenderMode_t RenderMode { get; }
 

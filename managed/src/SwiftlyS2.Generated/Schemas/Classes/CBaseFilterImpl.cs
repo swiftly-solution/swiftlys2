@@ -26,18 +26,18 @@ internal partial class CBaseFilterImpl : CLogicalEntityImpl, CBaseFilter
     }
     private static nint? _OnPassOffset;
 
-    public CEntityIOOutput OnPass {
+    public ref CEntityIOOutput OnPass {
         get {
             _OnPassOffset = _OnPassOffset ?? Schema.GetOffset(0x2D59B2899B527249);
-            return new CEntityIOOutputImpl(_Handle + _OnPassOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassOffset!.Value);
         }
     }
     private static nint? _OnFailOffset;
 
-    public CEntityIOOutput OnFail {
+    public ref CEntityIOOutput OnFail {
         get {
             _OnFailOffset = _OnFailOffset ?? Schema.GetOffset(0x2D59B289794EF854);
-            return new CEntityIOOutputImpl(_Handle + _OnFailOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFailOffset!.Value);
         }
     }
 

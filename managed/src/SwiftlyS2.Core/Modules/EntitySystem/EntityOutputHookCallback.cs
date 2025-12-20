@@ -1,6 +1,9 @@
 ﻿using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Profiler;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Core.SchemaDefinitions;
@@ -13,15 +16,20 @@ internal delegate int EntityOutputHookCallbackDelegate( nint entityio, nint outp
 internal class EntityOutputHookCallback : IDisposable
 {
     public Guid Guid { get; init; }
+
     private readonly ILogger<EntityOutputHookCallback> logger;
     private readonly EntityOutputHookCallbackDelegate unmanagedCallback;
     private readonly nint unmanagedCallbackPtr;
     private readonly ulong nativeHookId;
 
+    private volatile bool disposed;
+
     public EntityOutputHookCallback( string className, string outputName, IEntitySystemService.EntityOutputHandler callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler )
     {
         this.Guid = Guid.NewGuid();
         this.logger = loggerFactory.CreateLogger<EntityOutputHookCallback>();
+        this.disposed = false;
+
         unmanagedCallback = ( entityio, outputName, activator, caller, delay ) =>
         {
             try
@@ -29,13 +37,17 @@ internal class EntityOutputHookCallback : IDisposable
                 var category = "EntityOutputHookCallback::" + outputName;
                 profiler.StartRecording(category);
                 var outputStr = Marshal.PtrToStringAnsi(outputName) ?? string.Empty;
-                var result = callback(
-                    new CEntityIOOutputImpl(entityio),
-                    Marshal.PtrToStringAnsi(outputName) ?? string.Empty,
-                    new CEntityInstanceImpl(activator),
-                    new CEntityInstanceImpl(caller),
-                    delay
-                );
+                HookResult result;
+                unsafe
+                {
+                    result = callback(
+                        Unsafe.AsRef<CEntityIOOutput>((void*)entityio),
+                        Marshal.PtrToStringAnsi(outputName) ?? string.Empty,
+                        new CEntityInstanceImpl(activator),
+                        new CEntityInstanceImpl(caller),
+                        delay
+                    );
+                }
                 profiler.StopRecording(category);
                 return (int)result;
             }
@@ -54,8 +66,21 @@ internal class EntityOutputHookCallback : IDisposable
         nativeHookId = NativeEntitySystem.HookEntityOutput(className, outputName, unmanagedCallbackPtr);
     }
 
+    ~EntityOutputHookCallback()
+    {
+        Dispose();
+    }
+
     public void Dispose()
     {
+        if (disposed)
+        {
+            return;
+        }
+        disposed = true;
+
         NativeEntitySystem.UnhookEntityOutput(nativeHookId);
+
+        GC.SuppressFinalize(this);
     }
 }

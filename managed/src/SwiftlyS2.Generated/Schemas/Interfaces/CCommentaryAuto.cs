@@ -15,11 +15,11 @@ public partial interface CCommentaryAuto : CBaseEntity, ISchemaClass<CCommentary
     static string? ISchemaClass<CCommentaryAuto>.ClassName => "commentary_auto";
 
 
-    public CEntityIOOutput OnCommentaryNewGame { get; }
+    public ref CEntityIOOutput OnCommentaryNewGame { get; }
 
-    public CEntityIOOutput OnCommentaryMidGame { get; }
+    public ref CEntityIOOutput OnCommentaryMidGame { get; }
 
-    public CEntityIOOutput OnCommentaryMultiplayerSpawn { get; }
+    public ref CEntityIOOutput OnCommentaryMultiplayerSpawn { get; }
 
 
 }

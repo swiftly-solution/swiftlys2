@@ -98,10 +98,10 @@ internal partial class CSoundEventEntityImpl : CBaseEntityImpl, CSoundEventEntit
     }
     private static nint? _OnSoundFinishedOffset;
 
-    public CEntityIOOutput OnSoundFinished {
+    public ref CEntityIOOutput OnSoundFinished {
         get {
             _OnSoundFinishedOffset = _OnSoundFinishedOffset ?? Schema.GetOffset(0x85BC270C35E97239);
-            return new CEntityIOOutputImpl(_Handle + _OnSoundFinishedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSoundFinishedOffset!.Value);
         }
     }
     private static nint? _ClientCullRadiusOffset;

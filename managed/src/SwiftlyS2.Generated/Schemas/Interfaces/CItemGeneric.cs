@@ -53,15 +53,15 @@ public partial interface CItemGeneric : CItem, ISchemaClass<CItemGeneric>
 
     public ref CHandle<CBaseFilter> PickupFilter { get; }
 
-    public CEntityIOOutput OnPickup { get; }
+    public ref CEntityIOOutput OnPickup { get; }
 
-    public CEntityIOOutput OnTimeout { get; }
+    public ref CEntityIOOutput OnTimeout { get; }
 
-    public CEntityIOOutput OnTriggerStartTouch { get; }
+    public ref CEntityIOOutput OnTriggerStartTouch { get; }
 
-    public CEntityIOOutput OnTriggerTouch { get; }
+    public ref CEntityIOOutput OnTriggerTouch { get; }
 
-    public CEntityIOOutput OnTriggerEndTouch { get; }
+    public ref CEntityIOOutput OnTriggerEndTouch { get; }
 
     public string AllowPickupScriptFunction { get; set; }
 

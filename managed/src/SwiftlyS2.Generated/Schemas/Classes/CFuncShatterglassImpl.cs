@@ -218,10 +218,10 @@ internal partial class CFuncShatterglassImpl : CBaseModelEntityImpl, CFuncShatte
     }
     private static nint? _OnBrokenOffset;
 
-    public CEntityIOOutput OnBroken {
+    public ref CEntityIOOutput OnBroken {
         get {
             _OnBrokenOffset = _OnBrokenOffset ?? Schema.GetOffset(0xB755F0FB961F60E5);
-            return new CEntityIOOutputImpl(_Handle + _OnBrokenOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBrokenOffset!.Value);
         }
     }
     private static nint? _SurfaceTypeOffset;

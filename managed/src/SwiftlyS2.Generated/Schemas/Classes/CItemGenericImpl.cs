@@ -198,42 +198,42 @@ internal partial class CItemGenericImpl : CItemImpl, CItemGeneric
     }
     private static nint? _OnPickupOffset;
 
-    public CEntityIOOutput OnPickup {
+    public ref CEntityIOOutput OnPickup {
         get {
             _OnPickupOffset = _OnPickupOffset ?? Schema.GetOffset(0xE5C051B628BC1F6C);
-            return new CEntityIOOutputImpl(_Handle + _OnPickupOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPickupOffset!.Value);
         }
     }
     private static nint? _OnTimeoutOffset;
 
-    public CEntityIOOutput OnTimeout {
+    public ref CEntityIOOutput OnTimeout {
         get {
             _OnTimeoutOffset = _OnTimeoutOffset ?? Schema.GetOffset(0xE5C051B6C5301603);
-            return new CEntityIOOutputImpl(_Handle + _OnTimeoutOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimeoutOffset!.Value);
         }
     }
     private static nint? _OnTriggerStartTouchOffset;
 
-    public CEntityIOOutput OnTriggerStartTouch {
+    public ref CEntityIOOutput OnTriggerStartTouch {
         get {
             _OnTriggerStartTouchOffset = _OnTriggerStartTouchOffset ?? Schema.GetOffset(0xE5C051B66E537987);
-            return new CEntityIOOutputImpl(_Handle + _OnTriggerStartTouchOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerStartTouchOffset!.Value);
         }
     }
     private static nint? _OnTriggerTouchOffset;
 
-    public CEntityIOOutput OnTriggerTouch {
+    public ref CEntityIOOutput OnTriggerTouch {
         get {
             _OnTriggerTouchOffset = _OnTriggerTouchOffset ?? Schema.GetOffset(0xE5C051B63BCAE033);
-            return new CEntityIOOutputImpl(_Handle + _OnTriggerTouchOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerTouchOffset!.Value);
         }
     }
     private static nint? _OnTriggerEndTouchOffset;
 
-    public CEntityIOOutput OnTriggerEndTouch {
+    public ref CEntityIOOutput OnTriggerEndTouch {
         get {
             _OnTriggerEndTouchOffset = _OnTriggerEndTouchOffset ?? Schema.GetOffset(0xE5C051B63DA3CB84);
-            return new CEntityIOOutputImpl(_Handle + _OnTriggerEndTouchOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerEndTouchOffset!.Value);
         }
     }
     private static nint? _AllowPickupScriptFunctionOffset;

@@ -19,9 +19,9 @@ public partial interface CLogicBranch : CLogicalEntity, ISchemaClass<CLogicBranc
 
     public ref CUtlVector<CHandle<CBaseEntity>> Listeners { get; }
 
-    public CEntityIOOutput OnTrue { get; }
+    public ref CEntityIOOutput OnTrue { get; }
 
-    public CEntityIOOutput OnFalse { get; }
+    public ref CEntityIOOutput OnFalse { get; }
 
 
 }

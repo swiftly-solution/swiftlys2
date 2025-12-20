@@ -23,15 +23,15 @@ public partial interface CDynamicProp : CBreakableProp, ISchemaClass<CDynamicPro
 
     public ref bool UseAnimGraph { get; }
 
-    public CEntityIOOutput OutputAnimBegun { get; }
+    public ref CEntityIOOutput OutputAnimBegun { get; }
 
-    public CEntityIOOutput OutputAnimOver { get; }
+    public ref CEntityIOOutput OutputAnimOver { get; }
 
-    public CEntityIOOutput OutputAnimLoopCycleOver { get; }
+    public ref CEntityIOOutput OutputAnimLoopCycleOver { get; }
 
-    public CEntityIOOutput OnAnimReachedStart { get; }
+    public ref CEntityIOOutput OnAnimReachedStart { get; }
 
-    public CEntityIOOutput OnAnimReachedEnd { get; }
+    public ref CEntityIOOutput OnAnimReachedEnd { get; }
 
     public string IdleAnim { get; set; }
 

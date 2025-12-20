@@ -15,7 +15,7 @@ public partial interface CTriggerActiveWeaponDetect : CBaseTrigger, ISchemaClass
     static string? ISchemaClass<CTriggerActiveWeaponDetect>.ClassName => "trigger_active_weapon_detect";
 
 
-    public CEntityIOOutput OnTouchedActiveWeapon { get; }
+    public ref CEntityIOOutput OnTouchedActiveWeapon { get; }
 
     public string WeaponClassName { get; set; }
 

@@ -75,7 +75,7 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public string ArriveAtDestinationSound { get; set; }
 
-    public CEntityIOOutput OnMovementEnd { get; }
+    public ref CEntityIOOutput OnMovementEnd { get; }
 
     public ref bool StartAtClosestPoint { get; }
 
@@ -95,7 +95,7 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public ref bool AllowMovableNavMeshDockingOnEntireEntity { get; }
 
-    public CEntityIOOutput OnNodePassed { get; }
+    public ref CEntityIOOutput OnNodePassed { get; }
 
     public string OrientationMatchEntityName { get; set; }
 
@@ -111,7 +111,7 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public ref float LerpToPositionDeltaT { get; }
 
-    public CEntityIOOutput OnLerpToPositionComplete { get; }
+    public ref CEntityIOOutput OnLerpToPositionComplete { get; }
 
     public ref bool IsPaused { get; }
 
@@ -135,15 +135,15 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public ref CHandle<CBaseEntity> OrientationFaceEntity { get; }
 
-    public CEntityIOOutput OnStart { get; }
+    public ref CEntityIOOutput OnStart { get; }
 
-    public CEntityIOOutput OnStartForward { get; }
+    public ref CEntityIOOutput OnStartForward { get; }
 
-    public CEntityIOOutput OnStartReverse { get; }
+    public ref CEntityIOOutput OnStartReverse { get; }
 
-    public CEntityIOOutput OnStop { get; }
+    public ref CEntityIOOutput OnStop { get; }
 
-    public CEntityIOOutput OnStopped { get; }
+    public ref CEntityIOOutput OnStopped { get; }
 
     public ref bool NextNodeReturnsCurrent { get; }
 

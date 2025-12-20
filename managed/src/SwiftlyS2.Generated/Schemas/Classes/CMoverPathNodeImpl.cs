@@ -58,42 +58,42 @@ internal partial class CMoverPathNodeImpl : CPointEntityImpl, CMoverPathNode
     } 
     private static nint? _OnStartFromOrInSegmentOffset;
 
-    public CEntityIOOutput OnStartFromOrInSegment {
+    public ref CEntityIOOutput OnStartFromOrInSegment {
         get {
             _OnStartFromOrInSegmentOffset = _OnStartFromOrInSegmentOffset ?? Schema.GetOffset(0x5847AABC6622BECB);
-            return new CEntityIOOutputImpl(_Handle + _OnStartFromOrInSegmentOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartFromOrInSegmentOffset!.Value);
         }
     }
     private static nint? _OnStoppedAtOrInSegmentOffset;
 
-    public CEntityIOOutput OnStoppedAtOrInSegment {
+    public ref CEntityIOOutput OnStoppedAtOrInSegment {
         get {
             _OnStoppedAtOrInSegmentOffset = _OnStoppedAtOrInSegmentOffset ?? Schema.GetOffset(0x5847AABCBF4204DB);
-            return new CEntityIOOutputImpl(_Handle + _OnStoppedAtOrInSegmentOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStoppedAtOrInSegmentOffset!.Value);
         }
     }
     private static nint? _OnPassThroughOffset;
 
-    public CEntityIOOutput OnPassThrough {
+    public ref CEntityIOOutput OnPassThrough {
         get {
             _OnPassThroughOffset = _OnPassThroughOffset ?? Schema.GetOffset(0x5847AABC3A5F20B6);
-            return new CEntityIOOutputImpl(_Handle + _OnPassThroughOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassThroughOffset!.Value);
         }
     }
     private static nint? _OnPassThroughForwardOffset;
 
-    public CEntityIOOutput OnPassThroughForward {
+    public ref CEntityIOOutput OnPassThroughForward {
         get {
             _OnPassThroughForwardOffset = _OnPassThroughForwardOffset ?? Schema.GetOffset(0x5847AABCA62F443B);
-            return new CEntityIOOutputImpl(_Handle + _OnPassThroughForwardOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassThroughForwardOffset!.Value);
         }
     }
     private static nint? _OnPassThroughReverseOffset;
 
-    public CEntityIOOutput OnPassThroughReverse {
+    public ref CEntityIOOutput OnPassThroughReverse {
         get {
             _OnPassThroughReverseOffset = _OnPassThroughReverseOffset ?? Schema.GetOffset(0x5847AABC37667FA8);
-            return new CEntityIOOutputImpl(_Handle + _OnPassThroughReverseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassThroughReverseOffset!.Value);
         }
     }
     private static nint? _MoverOffset;

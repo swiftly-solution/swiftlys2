@@ -18,26 +18,26 @@ internal partial class CFuncRotatingImpl : CBaseModelEntityImpl, CFuncRotating
 
     private static nint? _OnStoppedOffset;
 
-    public CEntityIOOutput OnStopped {
+    public ref CEntityIOOutput OnStopped {
         get {
             _OnStoppedOffset = _OnStoppedOffset ?? Schema.GetOffset(0x1A29EA94161C44C9);
-            return new CEntityIOOutputImpl(_Handle + _OnStoppedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStoppedOffset!.Value);
         }
     }
     private static nint? _OnStartedOffset;
 
-    public CEntityIOOutput OnStarted {
+    public ref CEntityIOOutput OnStarted {
         get {
             _OnStartedOffset = _OnStartedOffset ?? Schema.GetOffset(0x1A29EA94328D617D);
-            return new CEntityIOOutputImpl(_Handle + _OnStartedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartedOffset!.Value);
         }
     }
     private static nint? _OnReachedStartOffset;
 
-    public CEntityIOOutput OnReachedStart {
+    public ref CEntityIOOutput OnReachedStart {
         get {
             _OnReachedStartOffset = _OnReachedStartOffset ?? Schema.GetOffset(0x1A29EA945C72A242);
-            return new CEntityIOOutputImpl(_Handle + _OnReachedStartOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnReachedStartOffset!.Value);
         }
     }
     private static nint? _LocalRotationVectorOffset;

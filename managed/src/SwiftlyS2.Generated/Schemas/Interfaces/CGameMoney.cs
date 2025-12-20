@@ -15,9 +15,9 @@ public partial interface CGameMoney : CRulePointEntity, ISchemaClass<CGameMoney>
     static string? ISchemaClass<CGameMoney>.ClassName => "game_money";
 
 
-    public CEntityIOOutput OnMoneySpent { get; }
+    public ref CEntityIOOutput OnMoneySpent { get; }
 
-    public CEntityIOOutput OnMoneySpentFail { get; }
+    public ref CEntityIOOutput OnMoneySpentFail { get; }
 
     public ref int Money { get; }
 

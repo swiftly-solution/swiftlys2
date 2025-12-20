@@ -69,10 +69,10 @@ internal partial class CBasePlayerWeaponImpl : CEconEntityImpl, CBasePlayerWeapo
     }
     private static nint? _OnPlayerUseOffset;
 
-    public CEntityIOOutput OnPlayerUse {
+    public ref CEntityIOOutput OnPlayerUse {
         get {
             _OnPlayerUseOffset = _OnPlayerUseOffset ?? Schema.GetOffset(0x4174B75E611C9A14);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerUseOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerUseOffset!.Value);
         }
     }
 

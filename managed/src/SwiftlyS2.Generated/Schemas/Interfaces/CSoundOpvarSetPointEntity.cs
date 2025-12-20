@@ -15,9 +15,9 @@ public partial interface CSoundOpvarSetPointEntity : CSoundOpvarSetPointBase, IS
     static string? ISchemaClass<CSoundOpvarSetPointEntity>.ClassName => "snd_opvar_set_point";
 
 
-    public CEntityIOOutput OnEnter { get; }
+    public ref CEntityIOOutput OnEnter { get; }
 
-    public CEntityIOOutput OnExit { get; }
+    public ref CEntityIOOutput OnExit { get; }
 
     public ref bool AutoDisable { get; }
 

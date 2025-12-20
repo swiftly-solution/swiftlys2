@@ -69,11 +69,11 @@ public partial interface CFuncTrackTrain : CBaseModelEntity, ISchemaClass<CFuncT
 
     public ref TrainVelocityType_t VelocityType { get; }
 
-    public CEntityIOOutput OnStart { get; }
+    public ref CEntityIOOutput OnStart { get; }
 
-    public CEntityIOOutput OnNext { get; }
+    public ref CEntityIOOutput OnNext { get; }
 
-    public CEntityIOOutput OnArrivedAtDestinationNode { get; }
+    public ref CEntityIOOutput OnArrivedAtDestinationNode { get; }
 
     public ref bool ManualSpeedChanges { get; }
 

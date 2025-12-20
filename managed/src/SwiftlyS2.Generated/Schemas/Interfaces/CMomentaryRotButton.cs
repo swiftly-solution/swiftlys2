@@ -18,13 +18,13 @@ public partial interface CMomentaryRotButton : CRotButton, ISchemaClass<CMomenta
     // CEntityOutputTemplate< float32 >
     public SchemaUntypedField Position { get; }
 
-    public CEntityIOOutput OnUnpressed { get; }
+    public ref CEntityIOOutput OnUnpressed { get; }
 
-    public CEntityIOOutput OnFullyOpen { get; }
+    public ref CEntityIOOutput OnFullyOpen { get; }
 
-    public CEntityIOOutput OnFullyClosed { get; }
+    public ref CEntityIOOutput OnFullyClosed { get; }
 
-    public CEntityIOOutput OnReachedPosition { get; }
+    public ref CEntityIOOutput OnReachedPosition { get; }
 
     public ref int LastUsed { get; }
 

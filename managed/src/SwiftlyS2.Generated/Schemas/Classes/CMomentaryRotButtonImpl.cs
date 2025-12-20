@@ -26,34 +26,34 @@ internal partial class CMomentaryRotButtonImpl : CRotButtonImpl, CMomentaryRotBu
     }
     private static nint? _OnUnpressedOffset;
 
-    public CEntityIOOutput OnUnpressed {
+    public ref CEntityIOOutput OnUnpressed {
         get {
             _OnUnpressedOffset = _OnUnpressedOffset ?? Schema.GetOffset(0x85A553CD446980EB);
-            return new CEntityIOOutputImpl(_Handle + _OnUnpressedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUnpressedOffset!.Value);
         }
     }
     private static nint? _OnFullyOpenOffset;
 
-    public CEntityIOOutput OnFullyOpen {
+    public ref CEntityIOOutput OnFullyOpen {
         get {
             _OnFullyOpenOffset = _OnFullyOpenOffset ?? Schema.GetOffset(0x85A553CD21733AE4);
-            return new CEntityIOOutputImpl(_Handle + _OnFullyOpenOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFullyOpenOffset!.Value);
         }
     }
     private static nint? _OnFullyClosedOffset;
 
-    public CEntityIOOutput OnFullyClosed {
+    public ref CEntityIOOutput OnFullyClosed {
         get {
             _OnFullyClosedOffset = _OnFullyClosedOffset ?? Schema.GetOffset(0x85A553CD75470294);
-            return new CEntityIOOutputImpl(_Handle + _OnFullyClosedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFullyClosedOffset!.Value);
         }
     }
     private static nint? _OnReachedPositionOffset;
 
-    public CEntityIOOutput OnReachedPosition {
+    public ref CEntityIOOutput OnReachedPosition {
         get {
             _OnReachedPositionOffset = _OnReachedPositionOffset ?? Schema.GetOffset(0x85A553CDC5B3EAA5);
-            return new CEntityIOOutputImpl(_Handle + _OnReachedPositionOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnReachedPositionOffset!.Value);
         }
     }
     private static nint? _LastUsedOffset;

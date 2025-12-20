@@ -21,7 +21,7 @@ public partial interface CLogicEventListener : CLogicalEntity, ISchemaClass<CLog
 
     public ref int Team { get; }
 
-    public CEntityIOOutput OnEventFired { get; }
+    public ref CEntityIOOutput OnEventFired { get; }
 
 
 }

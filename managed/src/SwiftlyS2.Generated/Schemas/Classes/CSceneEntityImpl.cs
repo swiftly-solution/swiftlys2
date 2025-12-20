@@ -430,46 +430,46 @@ internal partial class CSceneEntityImpl : CPointEntityImpl, CSceneEntity
     }
     private static nint? _OnStartOffset;
 
-    public CEntityIOOutput OnStart {
+    public ref CEntityIOOutput OnStart {
         get {
             _OnStartOffset = _OnStartOffset ?? Schema.GetOffset(0x1099B701C3FE848C);
-            return new CEntityIOOutputImpl(_Handle + _OnStartOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartOffset!.Value);
         }
     }
     private static nint? _OnCompletionOffset;
 
-    public CEntityIOOutput OnCompletion {
+    public ref CEntityIOOutput OnCompletion {
         get {
             _OnCompletionOffset = _OnCompletionOffset ?? Schema.GetOffset(0x1099B7010EADA43E);
-            return new CEntityIOOutputImpl(_Handle + _OnCompletionOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCompletionOffset!.Value);
         }
     }
     private static nint? _OnCanceledOffset;
 
-    public CEntityIOOutput OnCanceled {
+    public ref CEntityIOOutput OnCanceled {
         get {
             _OnCanceledOffset = _OnCanceledOffset ?? Schema.GetOffset(0x1099B701F02162DB);
-            return new CEntityIOOutputImpl(_Handle + _OnCanceledOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCanceledOffset!.Value);
         }
     }
     private static nint? _OnPausedOffset;
 
-    public CEntityIOOutput OnPaused {
+    public ref CEntityIOOutput OnPaused {
         get {
             _OnPausedOffset = _OnPausedOffset ?? Schema.GetOffset(0x1099B70191D78012);
-            return new CEntityIOOutputImpl(_Handle + _OnPausedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPausedOffset!.Value);
         }
     }
     private static nint? _OnResumedOffset;
 
-    public CEntityIOOutput OnResumed {
+    public ref CEntityIOOutput OnResumed {
         get {
             _OnResumedOffset = _OnResumedOffset ?? Schema.GetOffset(0x1099B701CCA87325);
-            return new CEntityIOOutputImpl(_Handle + _OnResumedOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnResumedOffset!.Value);
         }
     }
-    public ISchemaClassFixedArray<CEntityIOOutput> OnTrigger {
-        get => new SchemaClassFixedArray<CEntityIOOutput>(_Handle, 0x1099B70181E0BFEC, 16, 40, 8);
+    public ISchemaFixedArray<CEntityIOOutput> OnTrigger {
+        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0x1099B70181E0BFEC, 16, 40, 8);
     }
     private static nint? _InterruptSceneOffset;
 

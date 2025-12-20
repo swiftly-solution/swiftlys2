@@ -18,18 +18,18 @@ internal partial class CBaseGrenadeImpl : CBaseFlexImpl, CBaseGrenade
 
     private static nint? _OnPlayerPickupOffset;
 
-    public CEntityIOOutput OnPlayerPickup {
+    public ref CEntityIOOutput OnPlayerPickup {
         get {
             _OnPlayerPickupOffset = _OnPlayerPickupOffset ?? Schema.GetOffset(0xB6ACD98FDE81BF25);
-            return new CEntityIOOutputImpl(_Handle + _OnPlayerPickupOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerPickupOffset!.Value);
         }
     }
     private static nint? _OnExplodeOffset;
 
-    public CEntityIOOutput OnExplode {
+    public ref CEntityIOOutput OnExplode {
         get {
             _OnExplodeOffset = _OnExplodeOffset ?? Schema.GetOffset(0xB6ACD98F5153ED85);
-            return new CEntityIOOutputImpl(_Handle + _OnExplodeOffset!.Value);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnExplodeOffset!.Value);
         }
     }
     private static nint? _HasWarnedAIOffset;
