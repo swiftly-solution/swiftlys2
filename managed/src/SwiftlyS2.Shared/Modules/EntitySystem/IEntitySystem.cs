@@ -97,6 +97,14 @@ public interface IEntitySystemService
     public T? GetEntityByIndex<T>( uint index ) where T : class, ISchemaClass<T>;
 
     /// <summary>
+    /// Get an entity by its address.
+    /// </summary>
+    /// <typeparam name="T">Entity type.</typeparam>
+    /// <param name="address">Entity address.</param>
+    /// <returns>Entity by index. Nullable.</returns>
+    public T? GetEntityByAddress<T>( nint address ) where T : class, ISchemaClass<T>;
+
+    /// <summary>
     /// Hooks an output of the specified entity type to a callback function.
     /// </summary>
     /// <remarks>This method allows you to attach a handler to a specific output of an entity. The callback will

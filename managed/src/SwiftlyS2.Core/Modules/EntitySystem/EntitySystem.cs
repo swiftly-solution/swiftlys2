@@ -92,6 +92,11 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
         return handle == nint.Zero ? null : T.From(handle);
     }
 
+    public T? GetEntityByAddress<T>( nint address ) where T : class, ISchemaClass<T>
+    {
+        return address == 0 ? null : T.From(address);
+    }
+
     [Obsolete("Use HookEntityOutput(string outputName, Action<IOnEntityFireOutputHookEvent> callback) instead.")]
     public Guid HookEntityOutput<T>( string outputName, IEntitySystemService.EntityOutputHandler callback ) where T : class, ISchemaClass<T>
     {
