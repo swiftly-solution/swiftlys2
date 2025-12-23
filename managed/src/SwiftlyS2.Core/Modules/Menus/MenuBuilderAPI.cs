@@ -100,10 +100,13 @@ internal sealed class MenuBuilderAPI : IMenuBuilderAPI
     public IMenuAPI Build()
     {
         var menu = new MenuAPI(core, configuration, keybindOverrides, this/*, parent*/, optionScrollStyle/*, optionTextStyle*/) { Parent = (parent, null) };
-        options.ForEach(option => menu.AddOption(option));
-        if (options.Count() <= 0)
+        if (options.Count > 0)
         {
-            menu.AddOption(new TextMenuOption("No options."));
+            options.ForEach(menu.AddOption);
+        }
+        else
+        {
+            menu.AddOption(MenuAPI.noOptionsOption);
         }
         return menu;
     }

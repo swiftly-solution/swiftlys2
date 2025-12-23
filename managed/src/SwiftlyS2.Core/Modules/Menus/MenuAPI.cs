@@ -12,6 +12,8 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 {
     private (IMenuAPI? ParentMenu, IMenuOption? TriggerOption) parent;
 
+    internal static readonly IMenuOption noOptionsOption = new TextMenuOption("No options");
+
     /// <summary>
     /// The menu manager that this menu belongs to.
     /// </summary>
@@ -642,6 +644,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             {
                 baseOption.Menu = this;
             }
+            if (option != noOptionsOption && maxOptions == 1) _ = RemoveOption(noOptionsOption);
             options.Add(option);
             maxOptions = options.Count;
             // maxDisplayLines = options.Sum(option => option.LineCount);
@@ -658,7 +661,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             // {
             //     submenuOption.SubmenuRequested -= OnSubmenuRequested;
             // }
-
+            if (option != noOptionsOption && maxOptions == 1) AddOption(noOptionsOption);
             var result = options.Remove(option);
             maxOptions = options.Count;
             // maxDisplayLines = options.Sum(option => option.LineCount);
