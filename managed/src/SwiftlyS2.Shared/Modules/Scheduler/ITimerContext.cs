@@ -4,7 +4,7 @@ public interface ITimerContext
 {
     /// <summary>
     /// Gets the number of times the timer has been executed.
-    /// The first execution is 0.
+    /// The first execution count is 0.
     /// </summary>
     public ulong ExecutionCount { get; }
 }
