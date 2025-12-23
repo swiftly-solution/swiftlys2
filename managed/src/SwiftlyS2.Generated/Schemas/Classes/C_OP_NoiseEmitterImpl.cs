@@ -6,167 +6,136 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_NoiseEmitterImpl : CParticleFunctionEmitterImpl, C_OP_NoiseEmitter {
+internal partial class C_OP_NoiseEmitterImpl : CParticleFunctionEmitterImpl, C_OP_NoiseEmitter
+{
+    public C_OP_NoiseEmitterImpl(nint handle) : base(handle) { }
 
-  public C_OP_NoiseEmitterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EmissionDurationOffset;
 
-  private static nint? _EmissionDurationOffset;
-
-  public ref float EmissionDuration {
-    get {
-      if (_EmissionDurationOffset == null) {
-        _EmissionDurationOffset = Schema.GetOffset(0x42B1C7990181C90);
-      }
-      return ref _Handle.AsRef<float>(_EmissionDurationOffset!.Value);
+    public ref float EmissionDuration {
+        get {
+            _EmissionDurationOffset = _EmissionDurationOffset ?? Schema.GetOffset(0x42B1C7990181C90);
+            return ref _Handle.AsRef<float>(_EmissionDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTimeOffset;
+    private static nint? _StartTimeOffset;
 
-  public ref float StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x42B1C7967FE9DC4);
-      }
-      return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+    public ref float StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x42B1C7967FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EmissionScaleOffset;
+    private static nint? _EmissionScaleOffset;
 
-  public ref float EmissionScale {
-    get {
-      if (_EmissionScaleOffset == null) {
-        _EmissionScaleOffset = Schema.GetOffset(0x42B1C7953003112);
-      }
-      return ref _Handle.AsRef<float>(_EmissionScaleOffset!.Value);
+    public ref float EmissionScale {
+        get {
+            _EmissionScaleOffset = _EmissionScaleOffset ?? Schema.GetOffset(0x42B1C7953003112);
+            return ref _Handle.AsRef<float>(_EmissionScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleControlPointOffset;
+    private static nint? _ScaleControlPointOffset;
 
-  public ref int ScaleControlPoint {
-    get {
-      if (_ScaleControlPointOffset == null) {
-        _ScaleControlPointOffset = Schema.GetOffset(0x42B1C79B0577A70);
-      }
-      return ref _Handle.AsRef<int>(_ScaleControlPointOffset!.Value);
+    public ref int ScaleControlPoint {
+        get {
+            _ScaleControlPointOffset = _ScaleControlPointOffset ?? Schema.GetOffset(0x42B1C79B0577A70);
+            return ref _Handle.AsRef<int>(_ScaleControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleControlPointFieldOffset;
+    private static nint? _ScaleControlPointFieldOffset;
 
-  public ref int ScaleControlPointField {
-    get {
-      if (_ScaleControlPointFieldOffset == null) {
-        _ScaleControlPointFieldOffset = Schema.GetOffset(0x42B1C79360C613C);
-      }
-      return ref _Handle.AsRef<int>(_ScaleControlPointFieldOffset!.Value);
+    public ref int ScaleControlPointField {
+        get {
+            _ScaleControlPointFieldOffset = _ScaleControlPointFieldOffset ?? Schema.GetOffset(0x42B1C79360C613C);
+            return ref _Handle.AsRef<int>(_ScaleControlPointFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldNoisePointOffset;
+    private static nint? _WorldNoisePointOffset;
 
-  public ref int WorldNoisePoint {
-    get {
-      if (_WorldNoisePointOffset == null) {
-        _WorldNoisePointOffset = Schema.GetOffset(0x42B1C79BE38A15B);
-      }
-      return ref _Handle.AsRef<int>(_WorldNoisePointOffset!.Value);
+    public ref int WorldNoisePoint {
+        get {
+            _WorldNoisePointOffset = _WorldNoisePointOffset ?? Schema.GetOffset(0x42B1C79BE38A15B);
+            return ref _Handle.AsRef<int>(_WorldNoisePointOffset!.Value);
+        }
     }
-  }
-  private static nint? _AbsValOffset;
+    private static nint? _AbsValOffset;
 
-  public ref bool AbsVal {
-    get {
-      if (_AbsValOffset == null) {
-        _AbsValOffset = Schema.GetOffset(0x42B1C79AD2CCF0A);
-      }
-      return ref _Handle.AsRef<bool>(_AbsValOffset!.Value);
+    public ref bool AbsVal {
+        get {
+            _AbsValOffset = _AbsValOffset ?? Schema.GetOffset(0x42B1C79AD2CCF0A);
+            return ref _Handle.AsRef<bool>(_AbsValOffset!.Value);
+        }
     }
-  }
-  private static nint? _AbsValInvOffset;
+    private static nint? _AbsValInvOffset;
 
-  public ref bool AbsValInv {
-    get {
-      if (_AbsValInvOffset == null) {
-        _AbsValInvOffset = Schema.GetOffset(0x42B1C79024BCB79);
-      }
-      return ref _Handle.AsRef<bool>(_AbsValInvOffset!.Value);
+    public ref bool AbsValInv {
+        get {
+            _AbsValInvOffset = _AbsValInvOffset ?? Schema.GetOffset(0x42B1C79024BCB79);
+            return ref _Handle.AsRef<bool>(_AbsValInvOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetOffset;
+    private static nint? _OffsetOffset;
 
-  public ref float Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0x42B1C797F14BA34);
-      }
-      return ref _Handle.AsRef<float>(_OffsetOffset!.Value);
+    public ref float Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0x42B1C797F14BA34);
+            return ref _Handle.AsRef<float>(_OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMinOffset;
+    private static nint? _OutputMinOffset;
 
-  public ref float OutputMin {
-    get {
-      if (_OutputMinOffset == null) {
-        _OutputMinOffset = Schema.GetOffset(0x42B1C795F8D7716);
-      }
-      return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+    public ref float OutputMin {
+        get {
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x42B1C795F8D7716);
+            return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMaxOffset;
+    private static nint? _OutputMaxOffset;
 
-  public ref float OutputMax {
-    get {
-      if (_OutputMaxOffset == null) {
-        _OutputMaxOffset = Schema.GetOffset(0x42B1C7951A0E8C4);
-      }
-      return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+    public ref float OutputMax {
+        get {
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x42B1C7951A0E8C4);
+            return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoiseScaleOffset;
+    private static nint? _NoiseScaleOffset;
 
-  public ref float NoiseScale {
-    get {
-      if (_NoiseScaleOffset == null) {
-        _NoiseScaleOffset = Schema.GetOffset(0x42B1C7932FE2EF3);
-      }
-      return ref _Handle.AsRef<float>(_NoiseScaleOffset!.Value);
+    public ref float NoiseScale {
+        get {
+            _NoiseScaleOffset = _NoiseScaleOffset ?? Schema.GetOffset(0x42B1C7932FE2EF3);
+            return ref _Handle.AsRef<float>(_NoiseScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldNoiseScaleOffset;
+    private static nint? _WorldNoiseScaleOffset;
 
-  public ref float WorldNoiseScale {
-    get {
-      if (_WorldNoiseScaleOffset == null) {
-        _WorldNoiseScaleOffset = Schema.GetOffset(0x42B1C79A5AC912D);
-      }
-      return ref _Handle.AsRef<float>(_WorldNoiseScaleOffset!.Value);
+    public ref float WorldNoiseScale {
+        get {
+            _WorldNoiseScaleOffset = _WorldNoiseScaleOffset ?? Schema.GetOffset(0x42B1C79A5AC912D);
+            return ref _Handle.AsRef<float>(_WorldNoiseScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetLocOffset;
+    private static nint? _OffsetLocOffset;
 
-  public ref Vector OffsetLoc {
-    get {
-      if (_OffsetLocOffset == null) {
-        _OffsetLocOffset = Schema.GetOffset(0x42B1C79EFAB26AC);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetLocOffset!.Value);
+    public ref Vector OffsetLoc {
+        get {
+            _OffsetLocOffset = _OffsetLocOffset ?? Schema.GetOffset(0x42B1C79EFAB26AC);
+            return ref _Handle.AsRef<Vector>(_OffsetLocOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldTimeScaleOffset;
+    private static nint? _WorldTimeScaleOffset;
 
-  public ref float WorldTimeScale {
-    get {
-      if (_WorldTimeScaleOffset == null) {
-        _WorldTimeScaleOffset = Schema.GetOffset(0x42B1C79314F4986);
-      }
-      return ref _Handle.AsRef<float>(_WorldTimeScaleOffset!.Value);
+    public ref float WorldTimeScale {
+        get {
+            _WorldTimeScaleOffset = _WorldTimeScaleOffset ?? Schema.GetOffset(0x42B1C79314F4986);
+            return ref _Handle.AsRef<float>(_WorldTimeScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

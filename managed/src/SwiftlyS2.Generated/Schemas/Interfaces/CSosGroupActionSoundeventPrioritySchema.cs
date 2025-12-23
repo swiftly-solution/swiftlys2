@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSosGroupActionSoundeventPrioritySchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionSoundeventPrioritySchema> {
+public partial interface CSosGroupActionSoundeventPrioritySchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionSoundeventPrioritySchema>
+{
+    static CSosGroupActionSoundeventPrioritySchema ISchemaClass<CSosGroupActionSoundeventPrioritySchema>.From(nint handle) => new CSosGroupActionSoundeventPrioritySchemaImpl(handle);
+    static int ISchemaClass<CSosGroupActionSoundeventPrioritySchema>.Size => 56;
+    static string? ISchemaClass<CSosGroupActionSoundeventPrioritySchema>.ClassName => null;
 
-  static CSosGroupActionSoundeventPrioritySchema ISchemaClass<CSosGroupActionSoundeventPrioritySchema>.From(nint handle) => new CSosGroupActionSoundeventPrioritySchemaImpl(handle);
-  static int ISchemaClass<CSosGroupActionSoundeventPrioritySchema>.Size => 56;
-  static string? ISchemaClass<CSosGroupActionSoundeventPrioritySchema>.ClassName => null;
 
-  
-  public string PriorityValue { get; set; }
-  
-  public string PriorityVolumeScalar { get; set; }
-  
-  public string PriorityContributeButDontRead { get; set; }
-  
-  public string PriorityReadButDontContribute { get; set; }
+    public string PriorityValue { get; set; }
+
+    public string PriorityVolumeScalar { get; set; }
+
+    public string PriorityContributeButDontRead { get; set; }
+
+    public string PriorityReadButDontContribute { get; set; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmSnapWeaponNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmSnapWeaponNode__CDefinition> {
+public partial interface CNmSnapWeaponNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmSnapWeaponNode__CDefinition>
+{
+    static CNmSnapWeaponNode__CDefinition ISchemaClass<CNmSnapWeaponNode__CDefinition>.From(nint handle) => new CNmSnapWeaponNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmSnapWeaponNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmSnapWeaponNode__CDefinition>.ClassName => null;
 
-  static CNmSnapWeaponNode__CDefinition ISchemaClass<CNmSnapWeaponNode__CDefinition>.From(nint handle) => new CNmSnapWeaponNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmSnapWeaponNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmSnapWeaponNode__CDefinition>.ClassName => null;
 
-  
-  public ref short EnabledNodeIdx { get; }
-  
-  public ref short LockLeftHandNodeIdx { get; }
-  
-  public ref float BlendTimeSeconds { get; }
+    public ref short EnabledNodeIdx { get; }
+
+    public ref short LockLeftHandNodeIdx { get; }
+
+    public ref float BlendTimeSeconds { get; }
 
 
 }

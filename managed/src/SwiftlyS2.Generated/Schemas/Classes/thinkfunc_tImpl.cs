@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class thinkfunc_tImpl : SchemaClass, thinkfunc_t {
+internal partial class thinkfunc_tImpl : SchemaClass, thinkfunc_t
+{
+    public thinkfunc_tImpl(nint handle) : base(handle) { }
 
-  public thinkfunc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FnOffset;
 
-  private static nint? _FnOffset;
-
-  public SchemaUntypedField Fn {
-    get {
-      if (_FnOffset == null) {
-        _FnOffset = Schema.GetOffset(0x8ED693FAD922E237);
-      }
-      return new SchemaUntypedField(_Handle + _FnOffset!.Value);
+    public ref HSCRIPTHandler Fn {
+        get {
+            _FnOffset = _FnOffset ?? Schema.GetOffset(0x8ED693FAD922E237);
+            return ref _Handle.AsRef<HSCRIPTHandler>(_FnOffset!.Value);
+        }
     }
-  }
-  private static nint? _ContextOffset;
+    private static nint? _ContextOffset;
 
-  public ref CUtlStringToken Context {
-    get {
-      if (_ContextOffset == null) {
-        _ContextOffset = Schema.GetOffset(0x8ED693FAB16905F8);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_ContextOffset!.Value);
+    public ref CUtlStringToken Context {
+        get {
+            _ContextOffset = _ContextOffset ?? Schema.GetOffset(0x8ED693FAB16905F8);
+            return ref _Handle.AsRef<CUtlStringToken>(_ContextOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextThinkTickOffset;
+    private static nint? _NextThinkTickOffset;
 
-  public GameTick_t NextThinkTick {
-    get {
-      if (_NextThinkTickOffset == null) {
-        _NextThinkTickOffset = Schema.GetOffset(0x8ED693FAB7CEF021);
-      }
-      return new GameTick_tImpl(_Handle + _NextThinkTickOffset!.Value);
+    public GameTick_t NextThinkTick {
+        get {
+            _NextThinkTickOffset = _NextThinkTickOffset ?? Schema.GetOffset(0x8ED693FAB7CEF021);
+            return new GameTick_tImpl(_Handle + _NextThinkTickOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastThinkTickOffset;
+    private static nint? _LastThinkTickOffset;
 
-  public GameTick_t LastThinkTick {
-    get {
-      if (_LastThinkTickOffset == null) {
-        _LastThinkTickOffset = Schema.GetOffset(0x8ED693FACE8FE7F2);
-      }
-      return new GameTick_tImpl(_Handle + _LastThinkTickOffset!.Value);
+    public GameTick_t LastThinkTick {
+        get {
+            _LastThinkTickOffset = _LastThinkTickOffset ?? Schema.GetOffset(0x8ED693FACE8FE7F2);
+            return new GameTick_tImpl(_Handle + _LastThinkTickOffset!.Value);
+        }
     }
-  }
 
 
 }

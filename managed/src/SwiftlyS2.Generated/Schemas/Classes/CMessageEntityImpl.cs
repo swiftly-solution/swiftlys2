@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMessageEntityImpl : CPointEntityImpl, CMessageEntity {
+internal partial class CMessageEntityImpl : CPointEntityImpl, CMessageEntity
+{
+    public CMessageEntityImpl(nint handle) : base(handle) { }
 
-  public CMessageEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusOffset;
 
-  private static nint? _RadiusOffset;
-
-  public ref int Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x893EADCEA921CA53);
-      }
-      return ref _Handle.AsRef<int>(_RadiusOffset!.Value);
+    public ref int Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x893EADCEA921CA53);
+            return ref _Handle.AsRef<int>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _MessageTextOffset;
+    private static nint? _MessageTextOffset;
 
-  public string MessageText {
-    get {
-      if (_MessageTextOffset == null) {
-        _MessageTextOffset = Schema.GetOffset(0x893EADCEBA6E5D73);
-      }
-      var ptr = _Handle.Read<nint>(_MessageTextOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_MessageTextOffset == null) {
-        _MessageTextOffset = Schema.GetOffset(0x893EADCEBA6E5D73);
-      }
-      Schema.SetString(_Handle, _MessageTextOffset!.Value, value);
-    }
-  } 
-  private static nint? _DrawTextOffset;
+    public string MessageText {
+        get {
+            _MessageTextOffset = _MessageTextOffset ?? Schema.GetOffset(0x893EADCEBA6E5D73);
+            return Schema.GetString(_Handle.Read<nint>(_MessageTextOffset!.Value));
+        }
+        set {
+            _MessageTextOffset = _MessageTextOffset ?? Schema.GetOffset(0x893EADCEBA6E5D73);
+            Schema.SetString(_Handle, _MessageTextOffset!.Value, value);
+        }
+    } 
+    private static nint? _DrawTextOffset;
 
-  public ref bool DrawText {
-    get {
-      if (_DrawTextOffset == null) {
-        _DrawTextOffset = Schema.GetOffset(0x893EADCE598871D4);
-      }
-      return ref _Handle.AsRef<bool>(_DrawTextOffset!.Value);
+    public ref bool DrawText {
+        get {
+            _DrawTextOffset = _DrawTextOffset ?? Schema.GetOffset(0x893EADCE598871D4);
+            return ref _Handle.AsRef<bool>(_DrawTextOffset!.Value);
+        }
     }
-  }
-  private static nint? _DeveloperOnlyOffset;
+    private static nint? _DeveloperOnlyOffset;
 
-  public ref bool DeveloperOnly {
-    get {
-      if (_DeveloperOnlyOffset == null) {
-        _DeveloperOnlyOffset = Schema.GetOffset(0x893EADCE981A6E5F);
-      }
-      return ref _Handle.AsRef<bool>(_DeveloperOnlyOffset!.Value);
+    public ref bool DeveloperOnly {
+        get {
+            _DeveloperOnlyOffset = _DeveloperOnlyOffset ?? Schema.GetOffset(0x893EADCE981A6E5F);
+            return ref _Handle.AsRef<bool>(_DeveloperOnlyOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnabledOffset;
+    private static nint? _EnabledOffset;
 
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0x893EADCE6154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x893EADCE6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
     }
-  }
 
 
 }

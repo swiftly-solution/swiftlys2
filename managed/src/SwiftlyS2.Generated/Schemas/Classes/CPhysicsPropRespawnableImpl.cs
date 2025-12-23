@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysicsPropRespawnableImpl : CPhysicsPropImpl, CPhysicsPropRespawnable {
+internal partial class CPhysicsPropRespawnableImpl : CPhysicsPropImpl, CPhysicsPropRespawnable
+{
+    public CPhysicsPropRespawnableImpl(nint handle) : base(handle) { }
 
-  public CPhysicsPropRespawnableImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OriginalSpawnOriginOffset;
 
-  private static nint? _OriginalSpawnOriginOffset;
-
-  public ref Vector OriginalSpawnOrigin {
-    get {
-      if (_OriginalSpawnOriginOffset == null) {
-        _OriginalSpawnOriginOffset = Schema.GetOffset(0x6C5980BAB6F410AF);
-      }
-      return ref _Handle.AsRef<Vector>(_OriginalSpawnOriginOffset!.Value);
+    public ref Vector OriginalSpawnOrigin {
+        get {
+            _OriginalSpawnOriginOffset = _OriginalSpawnOriginOffset ?? Schema.GetOffset(0x6C5980BAB6F410AF);
+            return ref _Handle.AsRef<Vector>(_OriginalSpawnOriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginalSpawnAnglesOffset;
+    private static nint? _OriginalSpawnAnglesOffset;
 
-  public ref QAngle OriginalSpawnAngles {
-    get {
-      if (_OriginalSpawnAnglesOffset == null) {
-        _OriginalSpawnAnglesOffset = Schema.GetOffset(0x6C5980BAF7A16BD1);
-      }
-      return ref _Handle.AsRef<QAngle>(_OriginalSpawnAnglesOffset!.Value);
+    public ref QAngle OriginalSpawnAngles {
+        get {
+            _OriginalSpawnAnglesOffset = _OriginalSpawnAnglesOffset ?? Schema.GetOffset(0x6C5980BAF7A16BD1);
+            return ref _Handle.AsRef<QAngle>(_OriginalSpawnAnglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginalMinsOffset;
+    private static nint? _OriginalMinsOffset;
 
-  public ref Vector OriginalMins {
-    get {
-      if (_OriginalMinsOffset == null) {
-        _OriginalMinsOffset = Schema.GetOffset(0x6C5980BAFBA3B1D3);
-      }
-      return ref _Handle.AsRef<Vector>(_OriginalMinsOffset!.Value);
+    public ref Vector OriginalMins {
+        get {
+            _OriginalMinsOffset = _OriginalMinsOffset ?? Schema.GetOffset(0x6C5980BAFBA3B1D3);
+            return ref _Handle.AsRef<Vector>(_OriginalMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginalMaxsOffset;
+    private static nint? _OriginalMaxsOffset;
 
-  public ref Vector OriginalMaxs {
-    get {
-      if (_OriginalMaxsOffset == null) {
-        _OriginalMaxsOffset = Schema.GetOffset(0x6C5980BAA4FDD991);
-      }
-      return ref _Handle.AsRef<Vector>(_OriginalMaxsOffset!.Value);
+    public ref Vector OriginalMaxs {
+        get {
+            _OriginalMaxsOffset = _OriginalMaxsOffset ?? Schema.GetOffset(0x6C5980BAA4FDD991);
+            return ref _Handle.AsRef<Vector>(_OriginalMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _RespawnDurationOffset;
+    private static nint? _RespawnDurationOffset;
 
-  public ref float RespawnDuration {
-    get {
-      if (_RespawnDurationOffset == null) {
-        _RespawnDurationOffset = Schema.GetOffset(0x6C5980BA476C78ED);
-      }
-      return ref _Handle.AsRef<float>(_RespawnDurationOffset!.Value);
+    public ref float RespawnDuration {
+        get {
+            _RespawnDurationOffset = _RespawnDurationOffset ?? Schema.GetOffset(0x6C5980BA476C78ED);
+            return ref _Handle.AsRef<float>(_RespawnDurationOffset!.Value);
+        }
     }
-  }
 
 
 }

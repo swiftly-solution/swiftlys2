@@ -6,146 +6,105 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEntityDissolveImpl : CBaseModelEntityImpl, CEntityDissolve {
+internal partial class CEntityDissolveImpl : CBaseModelEntityImpl, CEntityDissolve
+{
+    public CEntityDissolveImpl(nint handle) : base(handle) { }
 
-  public CEntityDissolveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FadeInStartOffset;
 
-  private static nint? _FadeInStartOffset;
-
-  public ref float FadeInStart {
-    get {
-      if (_FadeInStartOffset == null) {
-        _FadeInStartOffset = Schema.GetOffset(0x443F205EF5AD2D6A);
-      }
-      return ref _Handle.AsRef<float>(_FadeInStartOffset!.Value);
+    public ref float FadeInStart {
+        get {
+            _FadeInStartOffset = _FadeInStartOffset ?? Schema.GetOffset(0x443F205EF5AD2D6A);
+            return ref _Handle.AsRef<float>(_FadeInStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeInLengthOffset;
+    private static nint? _FadeInLengthOffset;
 
-  public ref float FadeInLength {
-    get {
-      if (_FadeInLengthOffset == null) {
-        _FadeInLengthOffset = Schema.GetOffset(0x443F205E74538EE6);
-      }
-      return ref _Handle.AsRef<float>(_FadeInLengthOffset!.Value);
+    public ref float FadeInLength {
+        get {
+            _FadeInLengthOffset = _FadeInLengthOffset ?? Schema.GetOffset(0x443F205E74538EE6);
+            return ref _Handle.AsRef<float>(_FadeInLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeOutModelStartOffset;
+    private static nint? _FadeOutModelStartOffset;
 
-  public ref float FadeOutModelStart {
-    get {
-      if (_FadeOutModelStartOffset == null) {
-        _FadeOutModelStartOffset = Schema.GetOffset(0x443F205E9C8AC6F4);
-      }
-      return ref _Handle.AsRef<float>(_FadeOutModelStartOffset!.Value);
+    public ref float FadeOutModelStart {
+        get {
+            _FadeOutModelStartOffset = _FadeOutModelStartOffset ?? Schema.GetOffset(0x443F205E9C8AC6F4);
+            return ref _Handle.AsRef<float>(_FadeOutModelStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeOutModelLengthOffset;
+    private static nint? _FadeOutModelLengthOffset;
 
-  public ref float FadeOutModelLength {
-    get {
-      if (_FadeOutModelLengthOffset == null) {
-        _FadeOutModelLengthOffset = Schema.GetOffset(0x443F205E6FC0EC34);
-      }
-      return ref _Handle.AsRef<float>(_FadeOutModelLengthOffset!.Value);
+    public ref float FadeOutModelLength {
+        get {
+            _FadeOutModelLengthOffset = _FadeOutModelLengthOffset ?? Schema.GetOffset(0x443F205E6FC0EC34);
+            return ref _Handle.AsRef<float>(_FadeOutModelLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeOutStartOffset;
+    private static nint? _FadeOutStartOffset;
 
-  public ref float FadeOutStart {
-    get {
-      if (_FadeOutStartOffset == null) {
-        _FadeOutStartOffset = Schema.GetOffset(0x443F205E3F5B2209);
-      }
-      return ref _Handle.AsRef<float>(_FadeOutStartOffset!.Value);
+    public ref float FadeOutStart {
+        get {
+            _FadeOutStartOffset = _FadeOutStartOffset ?? Schema.GetOffset(0x443F205E3F5B2209);
+            return ref _Handle.AsRef<float>(_FadeOutStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeOutLengthOffset;
+    private static nint? _FadeOutLengthOffset;
 
-  public ref float FadeOutLength {
-    get {
-      if (_FadeOutLengthOffset == null) {
-        _FadeOutLengthOffset = Schema.GetOffset(0x443F205E9D0749A3);
-      }
-      return ref _Handle.AsRef<float>(_FadeOutLengthOffset!.Value);
+    public ref float FadeOutLength {
+        get {
+            _FadeOutLengthOffset = _FadeOutLengthOffset ?? Schema.GetOffset(0x443F205E9D0749A3);
+            return ref _Handle.AsRef<float>(_FadeOutLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTimeOffset;
+    private static nint? _StartTimeOffset;
 
-  public GameTime_t StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x443F205E67FE9DC4);
-      }
-      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    public GameTime_t StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x443F205E67FE9DC4);
+            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DissolveTypeOffset;
+    private static nint? _DissolveTypeOffset;
 
-  public ref EntityDisolveType_t DissolveType {
-    get {
-      if (_DissolveTypeOffset == null) {
-        _DissolveTypeOffset = Schema.GetOffset(0x443F205E79AB525E);
-      }
-      return ref _Handle.AsRef<EntityDisolveType_t>(_DissolveTypeOffset!.Value);
+    public ref EntityDisolveType_t DissolveType {
+        get {
+            _DissolveTypeOffset = _DissolveTypeOffset ?? Schema.GetOffset(0x443F205E79AB525E);
+            return ref _Handle.AsRef<EntityDisolveType_t>(_DissolveTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DissolverOriginOffset;
+    private static nint? _DissolverOriginOffset;
 
-  public ref Vector DissolverOrigin {
-    get {
-      if (_DissolverOriginOffset == null) {
-        _DissolverOriginOffset = Schema.GetOffset(0x443F205E34A16EE6);
-      }
-      return ref _Handle.AsRef<Vector>(_DissolverOriginOffset!.Value);
+    public ref Vector DissolverOrigin {
+        get {
+            _DissolverOriginOffset = _DissolverOriginOffset ?? Schema.GetOffset(0x443F205E34A16EE6);
+            return ref _Handle.AsRef<Vector>(_DissolverOriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _MagnitudeOffset;
+    private static nint? _MagnitudeOffset;
 
-  public ref uint Magnitude {
-    get {
-      if (_MagnitudeOffset == null) {
-        _MagnitudeOffset = Schema.GetOffset(0x443F205E0C71BDF1);
-      }
-      return ref _Handle.AsRef<uint>(_MagnitudeOffset!.Value);
+    public ref uint Magnitude {
+        get {
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x443F205E0C71BDF1);
+            return ref _Handle.AsRef<uint>(_MagnitudeOffset!.Value);
+        }
     }
-  }
 
-  public void FadeInStartUpdated() {
-    Schema.Update(_Handle, 0x443F205EF5AD2D6A);
-  }
-  public void FadeInLengthUpdated() {
-    Schema.Update(_Handle, 0x443F205E74538EE6);
-  }
-  public void FadeOutModelStartUpdated() {
-    Schema.Update(_Handle, 0x443F205E9C8AC6F4);
-  }
-  public void FadeOutModelLengthUpdated() {
-    Schema.Update(_Handle, 0x443F205E6FC0EC34);
-  }
-  public void FadeOutStartUpdated() {
-    Schema.Update(_Handle, 0x443F205E3F5B2209);
-  }
-  public void FadeOutLengthUpdated() {
-    Schema.Update(_Handle, 0x443F205E9D0749A3);
-  }
-  public void StartTimeUpdated() {
-    Schema.Update(_Handle, 0x443F205E67FE9DC4);
-  }
-  public void DissolveTypeUpdated() {
-    Schema.Update(_Handle, 0x443F205E79AB525E);
-  }
-  public void DissolverOriginUpdated() {
-    Schema.Update(_Handle, 0x443F205E34A16EE6);
-  }
-  public void MagnitudeUpdated() {
-    Schema.Update(_Handle, 0x443F205E0C71BDF1);
-  }
+    public void FadeInStartUpdated() => Schema.Update(_Handle, 0x443F205EF5AD2D6A);
+    public void FadeInLengthUpdated() => Schema.Update(_Handle, 0x443F205E74538EE6);
+    public void FadeOutModelStartUpdated() => Schema.Update(_Handle, 0x443F205E9C8AC6F4);
+    public void FadeOutModelLengthUpdated() => Schema.Update(_Handle, 0x443F205E6FC0EC34);
+    public void FadeOutStartUpdated() => Schema.Update(_Handle, 0x443F205E3F5B2209);
+    public void FadeOutLengthUpdated() => Schema.Update(_Handle, 0x443F205E9D0749A3);
+    public void StartTimeUpdated() => Schema.Update(_Handle, 0x443F205E67FE9DC4);
+    public void DissolveTypeUpdated() => Schema.Update(_Handle, 0x443F205E79AB525E);
+    public void DissolverOriginUpdated() => Schema.Update(_Handle, 0x443F205E34A16EE6);
+    public void MagnitudeUpdated() => Schema.Update(_Handle, 0x443F205E0C71BDF1);
 }

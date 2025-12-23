@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ParticleIndex_t : ISchemaClass<ParticleIndex_t> {
+public partial interface ParticleIndex_t : ISchemaClass<ParticleIndex_t>
+{
+    static ParticleIndex_t ISchemaClass<ParticleIndex_t>.From(nint handle) => new ParticleIndex_tImpl(handle);
+    static int ISchemaClass<ParticleIndex_t>.Size => 4;
+    static string? ISchemaClass<ParticleIndex_t>.ClassName => null;
 
-  static ParticleIndex_t ISchemaClass<ParticleIndex_t>.From(nint handle) => new ParticleIndex_tImpl(handle);
-  static int ISchemaClass<ParticleIndex_t>.Size => 4;
-  static string? ISchemaClass<ParticleIndex_t>.ClassName => null;
 
-  
-  public ref int Value { get; }
+    public ref int Value { get; }
 
 
 }

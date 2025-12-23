@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_PerParticleForce : CParticleFunctionForce, ISchemaClass<C_OP_PerParticleForce> {
+public partial interface C_OP_PerParticleForce : CParticleFunctionForce, ISchemaClass<C_OP_PerParticleForce>
+{
+    static C_OP_PerParticleForce ISchemaClass<C_OP_PerParticleForce>.From(nint handle) => new C_OP_PerParticleForceImpl(handle);
+    static int ISchemaClass<C_OP_PerParticleForce>.Size => 2576;
+    static string? ISchemaClass<C_OP_PerParticleForce>.ClassName => null;
 
-  static C_OP_PerParticleForce ISchemaClass<C_OP_PerParticleForce>.From(nint handle) => new C_OP_PerParticleForceImpl(handle);
-  static int ISchemaClass<C_OP_PerParticleForce>.Size => 2576;
-  static string? ISchemaClass<C_OP_PerParticleForce>.ClassName => null;
 
-  
-  public CPerParticleFloatInput ForceScale { get; }
-  
-  public CPerParticleVecInput Force { get; }
-  
-  public ref int CP { get; }
+    public CPerParticleFloatInput ForceScale { get; }
+
+    public CPerParticleVecInput Force { get; }
+
+    public ref int CP { get; }
 
 
 }

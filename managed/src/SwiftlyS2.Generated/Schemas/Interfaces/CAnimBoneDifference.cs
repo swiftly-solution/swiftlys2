@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimBoneDifference : ISchemaClass<CAnimBoneDifference> {
+public partial interface CAnimBoneDifference : ISchemaClass<CAnimBoneDifference>
+{
+    static CAnimBoneDifference ISchemaClass<CAnimBoneDifference>.From(nint handle) => new CAnimBoneDifferenceImpl(handle);
+    static int ISchemaClass<CAnimBoneDifference>.Size => 48;
+    static string? ISchemaClass<CAnimBoneDifference>.ClassName => null;
 
-  static CAnimBoneDifference ISchemaClass<CAnimBoneDifference>.From(nint handle) => new CAnimBoneDifferenceImpl(handle);
-  static int ISchemaClass<CAnimBoneDifference>.Size => 48;
-  static string? ISchemaClass<CAnimBoneDifference>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public ref CBufferString Parent { get; }
-  
-  public ref Vector PosError { get; }
-  
-  public ref bool HasRotation { get; }
-  
-  public ref bool HasMovement { get; }
+    public ref CBufferString Name { get; }
+
+    public ref CBufferString Parent { get; }
+
+    public ref Vector PosError { get; }
+
+    public ref bool HasRotation { get; }
+
+    public ref bool HasMovement { get; }
 
 
 }

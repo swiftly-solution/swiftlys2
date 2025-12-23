@@ -5,14 +5,14 @@ namespace TestPlugin;
 
 public class PlayerBenchmarks
 {
-    private CCSPlayerController _controller;
+    private CCSPlayerController? controller;
 
     [GlobalSetup]
     public void Setup()
     {
-        _controller = BenchContext.Controller;
+        controller = BenchContext.Controller;
 
-        if (_controller is null)
+        if (controller == null)
         {
             throw new InvalidOperationException("Controller is not set");
         }
@@ -21,9 +21,9 @@ public class PlayerBenchmarks
     [Benchmark]
     public void Test()
     {
-        for (int i = 0; i < 10000; i++)
+        for (var i = 0; i < 10000; i++)
         {
-            var a = _controller.Pawn.Value.WeaponServices.ActiveWeapon;
+            _ = controller?.Pawn.Value?.WeaponServices?.ActiveWeapon;
         }
     }
 }

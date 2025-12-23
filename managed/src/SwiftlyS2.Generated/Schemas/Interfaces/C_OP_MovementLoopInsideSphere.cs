@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_MovementLoopInsideSphere : CParticleFunctionOperator, ISchemaClass<C_OP_MovementLoopInsideSphere> {
+public partial interface C_OP_MovementLoopInsideSphere : CParticleFunctionOperator, ISchemaClass<C_OP_MovementLoopInsideSphere>
+{
+    static C_OP_MovementLoopInsideSphere ISchemaClass<C_OP_MovementLoopInsideSphere>.From(nint handle) => new C_OP_MovementLoopInsideSphereImpl(handle);
+    static int ISchemaClass<C_OP_MovementLoopInsideSphere>.Size => 2568;
+    static string? ISchemaClass<C_OP_MovementLoopInsideSphere>.ClassName => null;
 
-  static C_OP_MovementLoopInsideSphere ISchemaClass<C_OP_MovementLoopInsideSphere>.From(nint handle) => new C_OP_MovementLoopInsideSphereImpl(handle);
-  static int ISchemaClass<C_OP_MovementLoopInsideSphere>.Size => 2568;
-  static string? ISchemaClass<C_OP_MovementLoopInsideSphere>.ClassName => null;
 
-  
-  public ref int CP { get; }
-  
-  public CParticleCollectionFloatInput Distance { get; }
-  
-  public CParticleCollectionVecInput Scale { get; }
-  
-  public ParticleAttributeIndex_t DistSqrAttr { get; }
+    public ref int CP { get; }
+
+    public CParticleCollectionFloatInput Distance { get; }
+
+    public CParticleCollectionVecInput Scale { get; }
+
+    public ParticleAttributeIndex_t DistSqrAttr { get; }
 
 
 }

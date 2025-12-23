@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_VelocityFromCPImpl : CParticleFunctionInitializerImpl, C_INIT_VelocityFromCP {
+internal partial class C_INIT_VelocityFromCPImpl : CParticleFunctionInitializerImpl, C_INIT_VelocityFromCP
+{
+    public C_INIT_VelocityFromCPImpl(nint handle) : base(handle) { }
 
-  public C_INIT_VelocityFromCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VelocityInputOffset;
 
-  private static nint? _VelocityInputOffset;
-
-  public CParticleCollectionVecInput VelocityInput {
-    get {
-      if (_VelocityInputOffset == null) {
-        _VelocityInputOffset = Schema.GetOffset(0x1788D69A30C18956);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _VelocityInputOffset!.Value);
+    public CParticleCollectionVecInput VelocityInput {
+        get {
+            _VelocityInputOffset = _VelocityInputOffset ?? Schema.GetOffset(0x1788D69A30C18956);
+            return new CParticleCollectionVecInputImpl(_Handle + _VelocityInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransformInputOffset;
+    private static nint? _TransformInputOffset;
 
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0x1788D69A3A9ED669);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x1788D69A3A9ED669);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _VelocityScaleOffset;
+    private static nint? _VelocityScaleOffset;
 
-  public ref float VelocityScale {
-    get {
-      if (_VelocityScaleOffset == null) {
-        _VelocityScaleOffset = Schema.GetOffset(0x1788D69AE161DDAA);
-      }
-      return ref _Handle.AsRef<float>(_VelocityScaleOffset!.Value);
+    public ref float VelocityScale {
+        get {
+            _VelocityScaleOffset = _VelocityScaleOffset ?? Schema.GetOffset(0x1788D69AE161DDAA);
+            return ref _Handle.AsRef<float>(_VelocityScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _DirectionOnlyOffset;
+    private static nint? _DirectionOnlyOffset;
 
-  public ref bool DirectionOnly {
-    get {
-      if (_DirectionOnlyOffset == null) {
-        _DirectionOnlyOffset = Schema.GetOffset(0x1788D69A7F403B2C);
-      }
-      return ref _Handle.AsRef<bool>(_DirectionOnlyOffset!.Value);
+    public ref bool DirectionOnly {
+        get {
+            _DirectionOnlyOffset = _DirectionOnlyOffset ?? Schema.GetOffset(0x1788D69A7F403B2C);
+            return ref _Handle.AsRef<bool>(_DirectionOnlyOffset!.Value);
+        }
     }
-  }
 
 
 }

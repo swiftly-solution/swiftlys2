@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerStaticAdditiveSynth : CVoiceContainerBase, ISchemaClass<CVoiceContainerStaticAdditiveSynth> {
+public partial interface CVoiceContainerStaticAdditiveSynth : CVoiceContainerBase, ISchemaClass<CVoiceContainerStaticAdditiveSynth>
+{
+    static CVoiceContainerStaticAdditiveSynth ISchemaClass<CVoiceContainerStaticAdditiveSynth>.From(nint handle) => new CVoiceContainerStaticAdditiveSynthImpl(handle);
+    static int ISchemaClass<CVoiceContainerStaticAdditiveSynth>.Size => 232;
+    static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth>.ClassName => null;
 
-  static CVoiceContainerStaticAdditiveSynth ISchemaClass<CVoiceContainerStaticAdditiveSynth>.From(nint handle) => new CVoiceContainerStaticAdditiveSynthImpl(handle);
-  static int ISchemaClass<CVoiceContainerStaticAdditiveSynth>.Size => 232;
-  static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth>.ClassName => null;
 
-  
-  public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CTone> Tones { get; }
+    public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CTone> Tones { get; }
 
 
 }

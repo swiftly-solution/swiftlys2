@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface sndopvarlatchdata_t : ISchemaClass<sndopvarlatchdata_t> {
+public partial interface sndopvarlatchdata_t : ISchemaClass<sndopvarlatchdata_t>
+{
+    static sndopvarlatchdata_t ISchemaClass<sndopvarlatchdata_t>.From(nint handle) => new sndopvarlatchdata_tImpl(handle);
+    static int ISchemaClass<sndopvarlatchdata_t>.Size => 48;
+    static string? ISchemaClass<sndopvarlatchdata_t>.ClassName => null;
 
-  static sndopvarlatchdata_t ISchemaClass<sndopvarlatchdata_t>.From(nint handle) => new sndopvarlatchdata_tImpl(handle);
-  static int ISchemaClass<sndopvarlatchdata_t>.Size => 48;
-  static string? ISchemaClass<sndopvarlatchdata_t>.ClassName => null;
 
-  
-  public string Stack { get; set; }
-  
-  public string Operator { get; set; }
-  
-  public string Opvar { get; set; }
-  
-  public ref float Val { get; }
-  
-  public ref Vector Pos { get; }
+    public string Stack { get; set; }
+
+    public string Operator { get; set; }
+
+    public string Opvar { get; set; }
+
+    public ref float Val { get; }
+
+    public ref Vector Pos { get; }
 
 
 }

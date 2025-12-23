@@ -8,29 +8,29 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoWorldLayer : CBaseEntity, ISchemaClass<CInfoWorldLayer> {
+public partial interface CInfoWorldLayer : CBaseEntity, ISchemaClass<CInfoWorldLayer>
+{
+    static CInfoWorldLayer ISchemaClass<CInfoWorldLayer>.From(nint handle) => new CInfoWorldLayerImpl(handle);
+    static int ISchemaClass<CInfoWorldLayer>.Size => 1328;
+    static string? ISchemaClass<CInfoWorldLayer>.ClassName => "info_world_layer";
 
-  static CInfoWorldLayer ISchemaClass<CInfoWorldLayer>.From(nint handle) => new CInfoWorldLayerImpl(handle);
-  static int ISchemaClass<CInfoWorldLayer>.Size => 1328;
-  static string? ISchemaClass<CInfoWorldLayer>.ClassName => "info_world_layer";
 
-  
-  public CEntityIOOutput OutputOnEntitiesSpawned { get; }
-  
-  public string WorldName { get; set; }
-  
-  public string LayerName { get; set; }
-  
-  public ref bool WorldLayerVisible { get; }
-  
-  public ref bool EntitiesSpawned { get; }
-  
-  public ref bool CreateAsChildSpawnGroup { get; }
-  
-  public ref uint LayerSpawnGroup { get; }
+    public ref CEntityIOOutput OutputOnEntitiesSpawned { get; }
 
-  public void WorldNameUpdated();
-  public void LayerNameUpdated();
-  public void WorldLayerVisibleUpdated();
-  public void EntitiesSpawnedUpdated();
+    public string WorldName { get; set; }
+
+    public string LayerName { get; set; }
+
+    public ref bool WorldLayerVisible { get; }
+
+    public ref bool EntitiesSpawned { get; }
+
+    public ref bool CreateAsChildSpawnGroup { get; }
+
+    public ref uint LayerSpawnGroup { get; }
+
+    public void WorldNameUpdated();
+    public void LayerNameUpdated();
+    public void WorldLayerVisibleUpdated();
+    public void EntitiesSpawnedUpdated();
 }

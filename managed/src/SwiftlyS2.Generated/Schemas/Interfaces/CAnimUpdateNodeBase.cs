@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimUpdateNodeBase : ISchemaClass<CAnimUpdateNodeBase> {
+public partial interface CAnimUpdateNodeBase : ISchemaClass<CAnimUpdateNodeBase>
+{
+    static CAnimUpdateNodeBase ISchemaClass<CAnimUpdateNodeBase>.From(nint handle) => new CAnimUpdateNodeBaseImpl(handle);
+    static int ISchemaClass<CAnimUpdateNodeBase>.Size => 88;
+    static string? ISchemaClass<CAnimUpdateNodeBase>.ClassName => null;
 
-  static CAnimUpdateNodeBase ISchemaClass<CAnimUpdateNodeBase>.From(nint handle) => new CAnimUpdateNodeBaseImpl(handle);
-  static int ISchemaClass<CAnimUpdateNodeBase>.Size => 88;
-  static string? ISchemaClass<CAnimUpdateNodeBase>.ClassName => null;
 
-  
-  public CAnimNodePath NodePath { get; }
-  
-  public ref AnimNodeNetworkMode NetworkMode { get; }
-  
-  public string Name { get; set; }
+    public CAnimNodePath NodePath { get; }
+
+    public ref AnimNodeNetworkMode NetworkMode { get; }
+
+    public string Name { get; set; }
 
 
 }

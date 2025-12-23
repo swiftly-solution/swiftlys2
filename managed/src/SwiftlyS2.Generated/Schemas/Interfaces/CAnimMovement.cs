@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimMovement : ISchemaClass<CAnimMovement> {
+public partial interface CAnimMovement : ISchemaClass<CAnimMovement>
+{
+    static CAnimMovement ISchemaClass<CAnimMovement>.From(nint handle) => new CAnimMovementImpl(handle);
+    static int ISchemaClass<CAnimMovement>.Size => 44;
+    static string? ISchemaClass<CAnimMovement>.ClassName => null;
 
-  static CAnimMovement ISchemaClass<CAnimMovement>.From(nint handle) => new CAnimMovementImpl(handle);
-  static int ISchemaClass<CAnimMovement>.Size => 44;
-  static string? ISchemaClass<CAnimMovement>.ClassName => null;
 
-  
-  public ref int Endframe { get; }
-  
-  public ref int Motionflags { get; }
-  
-  public ref float V0 { get; }
-  
-  public ref float V1 { get; }
-  
-  public ref float Angle { get; }
-  
-  public ref Vector Vector { get; }
-  
-  public ref Vector Position { get; }
+    public ref int Endframe { get; }
+
+    public ref int Motionflags { get; }
+
+    public ref float V0 { get; }
+
+    public ref float V1 { get; }
+
+    public ref float Angle { get; }
+
+    public ref Vector Vector { get; }
+
+    public ref Vector Position { get; }
 
 
 }

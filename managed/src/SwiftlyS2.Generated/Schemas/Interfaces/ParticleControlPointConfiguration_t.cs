@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ParticleControlPointConfiguration_t : ISchemaClass<ParticleControlPointConfiguration_t> {
+public partial interface ParticleControlPointConfiguration_t : ISchemaClass<ParticleControlPointConfiguration_t>
+{
+    static ParticleControlPointConfiguration_t ISchemaClass<ParticleControlPointConfiguration_t>.From(nint handle) => new ParticleControlPointConfiguration_tImpl(handle);
+    static int ISchemaClass<ParticleControlPointConfiguration_t>.Size => 136;
+    static string? ISchemaClass<ParticleControlPointConfiguration_t>.ClassName => null;
 
-  static ParticleControlPointConfiguration_t ISchemaClass<ParticleControlPointConfiguration_t>.From(nint handle) => new ParticleControlPointConfiguration_tImpl(handle);
-  static int ISchemaClass<ParticleControlPointConfiguration_t>.Size => 136;
-  static string? ISchemaClass<ParticleControlPointConfiguration_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CUtlVector<ParticleControlPointDriver_t> Drivers { get; }
-  
-  public ParticlePreviewState_t PreviewState { get; }
+    public string Name { get; set; }
+
+    public ref CUtlVector<ParticleControlPointDriver_t> Drivers { get; }
+
+    public ParticlePreviewState_t PreviewState { get; }
 
 
 }

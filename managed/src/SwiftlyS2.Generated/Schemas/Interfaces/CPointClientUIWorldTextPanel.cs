@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointClientUIWorldTextPanel : CPointClientUIWorldPanel, ISchemaClass<CPointClientUIWorldTextPanel> {
+public partial interface CPointClientUIWorldTextPanel : CPointClientUIWorldPanel, ISchemaClass<CPointClientUIWorldTextPanel>
+{
+    static CPointClientUIWorldTextPanel ISchemaClass<CPointClientUIWorldTextPanel>.From(nint handle) => new CPointClientUIWorldTextPanelImpl(handle);
+    static int ISchemaClass<CPointClientUIWorldTextPanel>.Size => 3040;
+    static string? ISchemaClass<CPointClientUIWorldTextPanel>.ClassName => "point_clientui_world_text_panel";
 
-  static CPointClientUIWorldTextPanel ISchemaClass<CPointClientUIWorldTextPanel>.From(nint handle) => new CPointClientUIWorldTextPanelImpl(handle);
-  static int ISchemaClass<CPointClientUIWorldTextPanel>.Size => 3040;
-  static string? ISchemaClass<CPointClientUIWorldTextPanel>.ClassName => "point_clientui_world_text_panel";
 
-  
-  public string MessageText { get; set; }
+    public string MessageText { get; set; }
 
-  public void MessageTextUpdated();
+    public void MessageTextUpdated();
 }

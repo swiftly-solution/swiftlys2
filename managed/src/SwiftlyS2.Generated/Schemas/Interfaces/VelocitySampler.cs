@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VelocitySampler : ISchemaClass<VelocitySampler> {
+public partial interface VelocitySampler : ISchemaClass<VelocitySampler>
+{
+    static VelocitySampler ISchemaClass<VelocitySampler>.From(nint handle) => new VelocitySamplerImpl(handle);
+    static int ISchemaClass<VelocitySampler>.Size => 20;
+    static string? ISchemaClass<VelocitySampler>.ClassName => null;
 
-  static VelocitySampler ISchemaClass<VelocitySampler>.From(nint handle) => new VelocitySamplerImpl(handle);
-  static int ISchemaClass<VelocitySampler>.Size => 20;
-  static string? ISchemaClass<VelocitySampler>.ClassName => null;
 
-  
-  public ref Vector PrevSample { get; }
-  
-  public GameTime_t PrevSampleTime { get; }
-  
-  public ref float IdealSampleRate { get; }
+    public ref Vector PrevSample { get; }
+
+    public GameTime_t PrevSampleTime { get; }
+
+    public ref float IdealSampleRate { get; }
 
 
 }

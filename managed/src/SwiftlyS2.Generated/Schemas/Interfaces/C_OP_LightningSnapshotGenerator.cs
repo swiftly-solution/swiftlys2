@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LightningSnapshotGenerator : CParticleFunctionPreEmission, ISchemaClass<C_OP_LightningSnapshotGenerator> {
+public partial interface C_OP_LightningSnapshotGenerator : CParticleFunctionPreEmission, ISchemaClass<C_OP_LightningSnapshotGenerator>
+{
+    static C_OP_LightningSnapshotGenerator ISchemaClass<C_OP_LightningSnapshotGenerator>.From(nint handle) => new C_OP_LightningSnapshotGeneratorImpl(handle);
+    static int ISchemaClass<C_OP_LightningSnapshotGenerator>.Size => 4544;
+    static string? ISchemaClass<C_OP_LightningSnapshotGenerator>.ClassName => null;
 
-  static C_OP_LightningSnapshotGenerator ISchemaClass<C_OP_LightningSnapshotGenerator>.From(nint handle) => new C_OP_LightningSnapshotGeneratorImpl(handle);
-  static int ISchemaClass<C_OP_LightningSnapshotGenerator>.Size => 4544;
-  static string? ISchemaClass<C_OP_LightningSnapshotGenerator>.ClassName => null;
 
-  
-  public ref int CPSnapshot { get; }
-  
-  public ref int CPStartPnt { get; }
-  
-  public ref int CPEndPnt { get; }
-  
-  public CParticleCollectionFloatInput Segments { get; }
-  
-  public CParticleCollectionFloatInput Offset { get; }
-  
-  public CParticleCollectionFloatInput OffsetDecay { get; }
-  
-  public CParticleCollectionFloatInput RecalcRate { get; }
-  
-  public CParticleCollectionFloatInput UVScale { get; }
-  
-  public CParticleCollectionFloatInput UVOffset { get; }
-  
-  public CParticleCollectionFloatInput SplitRate { get; }
-  
-  public CParticleCollectionFloatInput BranchTwist { get; }
-  
-  public ref ParticleLightnintBranchBehavior_t BranchBehavior { get; }
-  
-  public CParticleCollectionFloatInput RadiusStart { get; }
-  
-  public CParticleCollectionFloatInput RadiusEnd { get; }
-  
-  public CParticleCollectionFloatInput DedicatedPool { get; }
+    public ref int CPSnapshot { get; }
+
+    public ref int CPStartPnt { get; }
+
+    public ref int CPEndPnt { get; }
+
+    public CParticleCollectionFloatInput Segments { get; }
+
+    public CParticleCollectionFloatInput Offset { get; }
+
+    public CParticleCollectionFloatInput OffsetDecay { get; }
+
+    public CParticleCollectionFloatInput RecalcRate { get; }
+
+    public CParticleCollectionFloatInput UVScale { get; }
+
+    public CParticleCollectionFloatInput UVOffset { get; }
+
+    public CParticleCollectionFloatInput SplitRate { get; }
+
+    public CParticleCollectionFloatInput BranchTwist { get; }
+
+    public ref ParticleLightnintBranchBehavior_t BranchBehavior { get; }
+
+    public CParticleCollectionFloatInput RadiusStart { get; }
+
+    public CParticleCollectionFloatInput RadiusEnd { get; }
+
+    public CParticleCollectionFloatInput DedicatedPool { get; }
 
 
 }

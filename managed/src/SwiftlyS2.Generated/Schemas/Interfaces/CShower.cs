@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CShower : CModelPointEntity, ISchemaClass<CShower> {
-
-  static CShower ISchemaClass<CShower>.From(nint handle) => new CShowerImpl(handle);
-  static int ISchemaClass<CShower>.Size => 2008;
-  static string? ISchemaClass<CShower>.ClassName => "spark_shower";
+public partial interface CShower : CModelPointEntity, ISchemaClass<CShower>
+{
+    static CShower ISchemaClass<CShower>.From(nint handle) => new CShowerImpl(handle);
+    static int ISchemaClass<CShower>.Size => 2008;
+    static string? ISchemaClass<CShower>.ClassName => "spark_shower";
 
 
 

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum IChoreoServices__ScriptState_t : uint {
-
+public enum IChoreoServices__ScriptState_t : uint
+{
  SCRIPT_PLAYING = 0,
 
  SCRIPT_WAIT = 1,

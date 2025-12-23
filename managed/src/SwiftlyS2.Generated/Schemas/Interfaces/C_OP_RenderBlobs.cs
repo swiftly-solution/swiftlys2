@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderBlobs : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderBlobs> {
+public partial interface C_OP_RenderBlobs : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderBlobs>
+{
+    static C_OP_RenderBlobs ISchemaClass<C_OP_RenderBlobs>.From(nint handle) => new C_OP_RenderBlobsImpl(handle);
+    static int ISchemaClass<C_OP_RenderBlobs>.Size => 1720;
+    static string? ISchemaClass<C_OP_RenderBlobs>.ClassName => null;
 
-  static C_OP_RenderBlobs ISchemaClass<C_OP_RenderBlobs>.From(nint handle) => new C_OP_RenderBlobsImpl(handle);
-  static int ISchemaClass<C_OP_RenderBlobs>.Size => 1720;
-  static string? ISchemaClass<C_OP_RenderBlobs>.ClassName => null;
 
-  
-  public CParticleCollectionRendererFloatInput CubeWidth { get; }
-  
-  public CParticleCollectionRendererFloatInput CutoffRadius { get; }
-  
-  public CParticleCollectionRendererFloatInput RenderRadius { get; }
-  
-  public ref uint VertexCountKb { get; }
-  
-  public ref uint IndexCountKb { get; }
-  
-  public ref int ScaleCP { get; }
-  
-  public ref CUtlVector<MaterialVariable_t> MaterialVars { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
+    public CParticleCollectionRendererFloatInput CubeWidth { get; }
+
+    public CParticleCollectionRendererFloatInput CutoffRadius { get; }
+
+    public CParticleCollectionRendererFloatInput RenderRadius { get; }
+
+    public ref uint VertexCountKb { get; }
+
+    public ref uint IndexCountKb { get; }
+
+    public ref int ScaleCP { get; }
+
+    public ref CUtlVector<MaterialVariable_t> MaterialVars { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
 
 
 }

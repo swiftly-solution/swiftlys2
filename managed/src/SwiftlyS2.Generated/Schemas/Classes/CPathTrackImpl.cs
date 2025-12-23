@@ -6,117 +6,95 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPathTrackImpl : CPointEntityImpl, CPathTrack {
+internal partial class CPathTrackImpl : CPointEntityImpl, CPathTrack
+{
+    public CPathTrackImpl(nint handle) : base(handle) { }
 
-  public CPathTrackImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PnextOffset;
 
-  private static nint? _PnextOffset;
-
-  public CPathTrack? Pnext {
-    get {
-      if (_PnextOffset == null) {
-        _PnextOffset = Schema.GetOffset(0xF86750E8B008D5EE);
-      }
-      var ptr = _Handle.Read<nint>(_PnextOffset!.Value);
-      return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+    public CPathTrack? Pnext {
+        get {
+            _PnextOffset = _PnextOffset ?? Schema.GetOffset(0xF86750E8B008D5EE);
+            var ptr = _Handle.Read<nint>(_PnextOffset!.Value);
+            return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _PpreviousOffset;
+    private static nint? _PpreviousOffset;
 
-  public CPathTrack? Pprevious {
-    get {
-      if (_PpreviousOffset == null) {
-        _PpreviousOffset = Schema.GetOffset(0xF86750E8BD38AFD2);
-      }
-      var ptr = _Handle.Read<nint>(_PpreviousOffset!.Value);
-      return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+    public CPathTrack? Pprevious {
+        get {
+            _PpreviousOffset = _PpreviousOffset ?? Schema.GetOffset(0xF86750E8BD38AFD2);
+            var ptr = _Handle.Read<nint>(_PpreviousOffset!.Value);
+            return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _PaltpathOffset;
+    private static nint? _PaltpathOffset;
 
-  public CPathTrack? Paltpath {
-    get {
-      if (_PaltpathOffset == null) {
-        _PaltpathOffset = Schema.GetOffset(0xF86750E868D10551);
-      }
-      var ptr = _Handle.Read<nint>(_PaltpathOffset!.Value);
-      return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+    public CPathTrack? Paltpath {
+        get {
+            _PaltpathOffset = _PaltpathOffset ?? Schema.GetOffset(0xF86750E868D10551);
+            var ptr = _Handle.Read<nint>(_PaltpathOffset!.Value);
+            return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xF86750E85ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xF86750E85ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _LengthOffset;
+    private static nint? _LengthOffset;
 
-  public ref float Length {
-    get {
-      if (_LengthOffset == null) {
-        _LengthOffset = Schema.GetOffset(0xF86750E83AFED1B5);
-      }
-      return ref _Handle.AsRef<float>(_LengthOffset!.Value);
+    public ref float Length {
+        get {
+            _LengthOffset = _LengthOffset ?? Schema.GetOffset(0xF86750E83AFED1B5);
+            return ref _Handle.AsRef<float>(_LengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _AltNameOffset;
+    private static nint? _AltNameOffset;
 
-  public string AltName {
-    get {
-      if (_AltNameOffset == null) {
-        _AltNameOffset = Schema.GetOffset(0xF86750E8501CA457);
-      }
-      var ptr = _Handle.Read<nint>(_AltNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_AltNameOffset == null) {
-        _AltNameOffset = Schema.GetOffset(0xF86750E8501CA457);
-      }
-      Schema.SetString(_Handle, _AltNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _IterValOffset;
+    public string AltName {
+        get {
+            _AltNameOffset = _AltNameOffset ?? Schema.GetOffset(0xF86750E8501CA457);
+            return Schema.GetString(_Handle.Read<nint>(_AltNameOffset!.Value));
+        }
+        set {
+            _AltNameOffset = _AltNameOffset ?? Schema.GetOffset(0xF86750E8501CA457);
+            Schema.SetString(_Handle, _AltNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _IterValOffset;
 
-  public ref int IterVal {
-    get {
-      if (_IterValOffset == null) {
-        _IterValOffset = Schema.GetOffset(0xF86750E808061552);
-      }
-      return ref _Handle.AsRef<int>(_IterValOffset!.Value);
+    public ref int IterVal {
+        get {
+            _IterValOffset = _IterValOffset ?? Schema.GetOffset(0xF86750E808061552);
+            return ref _Handle.AsRef<int>(_IterValOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientationTypeOffset;
+    private static nint? _OrientationTypeOffset;
 
-  public ref TrackOrientationType_t OrientationType {
-    get {
-      if (_OrientationTypeOffset == null) {
-        _OrientationTypeOffset = Schema.GetOffset(0xF86750E8468ECE0A);
-      }
-      return ref _Handle.AsRef<TrackOrientationType_t>(_OrientationTypeOffset!.Value);
+    public ref TrackOrientationType_t OrientationType {
+        get {
+            _OrientationTypeOffset = _OrientationTypeOffset ?? Schema.GetOffset(0xF86750E8468ECE0A);
+            return ref _Handle.AsRef<TrackOrientationType_t>(_OrientationTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnPassOffset;
+    private static nint? _OnPassOffset;
 
-  public CEntityIOOutput OnPass {
-    get {
-      if (_OnPassOffset == null) {
-        _OnPassOffset = Schema.GetOffset(0xF86750E89B527249);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnPassOffset!.Value);
+    public ref CEntityIOOutput OnPass {
+        get {
+            _OnPassOffset = _OnPassOffset ?? Schema.GetOffset(0xF86750E89B527249);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassOffset!.Value);
+        }
     }
-  }
 
 
 }

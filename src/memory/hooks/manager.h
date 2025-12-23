@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,13 +22,13 @@
 #include <api/memory/hooks/manager.h>
 #include <vector>
 
-#include "vfunction.h"
 #include "function.h"
 #include "mfunction.h"
- 
-#include <string_t.h>
+#include "vfunction.h"
+
 #include <entityhandle.h>
 #include <public/entity2/entitysystem.h>
+#include <string_t.h>
 
 class HooksManager : public IHooksManager
 {

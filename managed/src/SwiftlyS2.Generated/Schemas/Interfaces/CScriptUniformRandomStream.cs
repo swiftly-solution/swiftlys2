@@ -8,17 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CScriptUniformRandomStream : ISchemaClass<CScriptUniformRandomStream> {
+public partial interface CScriptUniformRandomStream : ISchemaClass<CScriptUniformRandomStream>
+{
+    static CScriptUniformRandomStream ISchemaClass<CScriptUniformRandomStream>.From(nint handle) => new CScriptUniformRandomStreamImpl(handle);
+    static int ISchemaClass<CScriptUniformRandomStream>.Size => 160;
+    static string? ISchemaClass<CScriptUniformRandomStream>.ClassName => null;
 
-  static CScriptUniformRandomStream ISchemaClass<CScriptUniformRandomStream>.From(nint handle) => new CScriptUniformRandomStreamImpl(handle);
-  static int ISchemaClass<CScriptUniformRandomStream>.Size => 160;
-  static string? ISchemaClass<CScriptUniformRandomStream>.ClassName => null;
 
-  
-  // HSCRIPT
-  public SchemaUntypedField ScriptScope { get; }
-  
-  public ref int InitialSeed { get; }
+    public ref HSCRIPTHandler ScriptScope { get; }
+
+    public ref int InitialSeed { get; }
 
 
 }

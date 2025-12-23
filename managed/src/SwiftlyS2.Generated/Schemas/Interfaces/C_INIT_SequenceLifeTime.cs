@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_SequenceLifeTime : CParticleFunctionInitializer, ISchemaClass<C_INIT_SequenceLifeTime> {
+public partial interface C_INIT_SequenceLifeTime : CParticleFunctionInitializer, ISchemaClass<C_INIT_SequenceLifeTime>
+{
+    static C_INIT_SequenceLifeTime ISchemaClass<C_INIT_SequenceLifeTime>.From(nint handle) => new C_INIT_SequenceLifeTimeImpl(handle);
+    static int ISchemaClass<C_INIT_SequenceLifeTime>.Size => 480;
+    static string? ISchemaClass<C_INIT_SequenceLifeTime>.ClassName => null;
 
-  static C_INIT_SequenceLifeTime ISchemaClass<C_INIT_SequenceLifeTime>.From(nint handle) => new C_INIT_SequenceLifeTimeImpl(handle);
-  static int ISchemaClass<C_INIT_SequenceLifeTime>.Size => 480;
-  static string? ISchemaClass<C_INIT_SequenceLifeTime>.ClassName => null;
 
-  
-  public ref float Framerate { get; }
+    public ref float Framerate { get; }
 
 
 }

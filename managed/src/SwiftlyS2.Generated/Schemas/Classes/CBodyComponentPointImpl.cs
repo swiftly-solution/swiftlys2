@@ -6,29 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBodyComponentPointImpl : CBodyComponentImpl, CBodyComponentPoint {
+internal partial class CBodyComponentPointImpl : CBodyComponentImpl, CBodyComponentPoint
+{
+    public CBodyComponentPointImpl(nint handle) : base(handle) { }
 
-  public CBodyComponentPointImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SceneNodeOffset;
 
-  private static nint? _SceneNodeOffset;
-
-  public CGameSceneNode SceneNode {
-    get {
-      if (_SceneNodeOffset == null) {
-        _SceneNodeOffset = Schema.GetOffset(0x21A4C11041577E3);
-      }
-      return new CGameSceneNodeImpl(_Handle + _SceneNodeOffset!.Value);
+    public CGameSceneNode SceneNode {
+        get {
+            _SceneNodeOffset = _SceneNodeOffset ?? Schema.GetOffset(0x21A4C11041577E3);
+            return new CGameSceneNodeImpl(_Handle + _SceneNodeOffset!.Value);
+        }
     }
-  }
 
-  public void SceneNodeUpdated() {
-    Schema.Update(_Handle, 0x21A4C11041577E3);
-  }
+    public void SceneNodeUpdated() => Schema.Update(_Handle, 0x21A4C11041577E3);
 }

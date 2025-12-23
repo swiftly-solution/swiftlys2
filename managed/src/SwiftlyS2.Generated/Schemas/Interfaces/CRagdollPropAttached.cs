@@ -8,27 +8,27 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRagdollPropAttached : CRagdollProp, ISchemaClass<CRagdollPropAttached> {
+public partial interface CRagdollPropAttached : CRagdollProp, ISchemaClass<CRagdollPropAttached>
+{
+    static CRagdollPropAttached ISchemaClass<CRagdollPropAttached>.From(nint handle) => new CRagdollPropAttachedImpl(handle);
+    static int ISchemaClass<CRagdollPropAttached>.Size => 3104;
+    static string? ISchemaClass<CRagdollPropAttached>.ClassName => "prop_ragdoll_attached";
 
-  static CRagdollPropAttached ISchemaClass<CRagdollPropAttached>.From(nint handle) => new CRagdollPropAttachedImpl(handle);
-  static int ISchemaClass<CRagdollPropAttached>.Size => 3104;
-  static string? ISchemaClass<CRagdollPropAttached>.ClassName => "prop_ragdoll_attached";
 
-  
-  public ref uint BoneIndexAttached { get; }
-  
-  public ref uint RagdollAttachedObjectIndex { get; }
-  
-  public ref Vector AttachmentPointBoneSpace { get; }
-  
-  public ref Vector AttachmentPointRagdollSpace { get; }
-  
-  public ref bool ShouldDetach { get; }
-  
-  public ref bool ShouldDeleteAttachedActivationRecord { get; }
+    public ref uint BoneIndexAttached { get; }
 
-  public void BoneIndexAttachedUpdated();
-  public void RagdollAttachedObjectIndexUpdated();
-  public void AttachmentPointBoneSpaceUpdated();
-  public void AttachmentPointRagdollSpaceUpdated();
+    public ref uint RagdollAttachedObjectIndex { get; }
+
+    public ref Vector AttachmentPointBoneSpace { get; }
+
+    public ref Vector AttachmentPointRagdollSpace { get; }
+
+    public ref bool ShouldDetach { get; }
+
+    public ref bool ShouldDeleteAttachedActivationRecord { get; }
+
+    public void BoneIndexAttachedUpdated();
+    public void RagdollAttachedObjectIndexUpdated();
+    public void AttachmentPointBoneSpaceUpdated();
+    public void AttachmentPointRagdollSpaceUpdated();
 }

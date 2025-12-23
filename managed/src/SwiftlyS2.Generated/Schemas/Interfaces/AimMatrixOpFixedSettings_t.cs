@@ -8,39 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AimMatrixOpFixedSettings_t : ISchemaClass<AimMatrixOpFixedSettings_t> {
+public partial interface AimMatrixOpFixedSettings_t : ISchemaClass<AimMatrixOpFixedSettings_t>
+{
+    static AimMatrixOpFixedSettings_t ISchemaClass<AimMatrixOpFixedSettings_t>.From(nint handle) => new AimMatrixOpFixedSettings_tImpl(handle);
+    static int ISchemaClass<AimMatrixOpFixedSettings_t>.Size => 240;
+    static string? ISchemaClass<AimMatrixOpFixedSettings_t>.ClassName => null;
 
-  static AimMatrixOpFixedSettings_t ISchemaClass<AimMatrixOpFixedSettings_t>.From(nint handle) => new AimMatrixOpFixedSettings_tImpl(handle);
-  static int ISchemaClass<AimMatrixOpFixedSettings_t>.Size => 240;
-  static string? ISchemaClass<AimMatrixOpFixedSettings_t>.ClassName => null;
 
-  
-  public CAnimAttachment Attachment { get; }
-  
-  public CAnimInputDamping Damping { get; }
-  
-  // CPoseHandle
-  public SchemaUntypedField PoseCacheHandles { get; }
-  
-  public ref AimMatrixBlendMode BlendMode { get; }
-  
-  public ref float MaxYawAngle { get; }
-  
-  public ref float MaxPitchAngle { get; }
-  
-  public ref int SequenceMaxFrame { get; }
-  
-  public ref int BoneMaskIndex { get; }
-  
-  public ref bool TargetIsPosition { get; }
-  
-  public ref bool UseBiasAndClamp { get; }
-  
-  public ref float BiasAndClampYawOffset { get; }
-  
-  public ref float BiasAndClampPitchOffset { get; }
-  
-  public CBlendCurve BiasAndClampBlendCurve { get; }
+    public CAnimAttachment Attachment { get; }
+
+    public CAnimInputDamping Damping { get; }
+
+    public ISchemaClassFixedArray<CPoseHandle> PoseCacheHandles { get; }
+
+    public ref AimMatrixBlendMode BlendMode { get; }
+
+    public ref float MaxYawAngle { get; }
+
+    public ref float MaxPitchAngle { get; }
+
+    public ref int SequenceMaxFrame { get; }
+
+    public ref int BoneMaskIndex { get; }
+
+    public ref bool TargetIsPosition { get; }
+
+    public ref bool UseBiasAndClamp { get; }
+
+    public ref float BiasAndClampYawOffset { get; }
+
+    public ref float BiasAndClampPitchOffset { get; }
+
+    public CBlendCurve BiasAndClampBlendCurve { get; }
 
 
 }

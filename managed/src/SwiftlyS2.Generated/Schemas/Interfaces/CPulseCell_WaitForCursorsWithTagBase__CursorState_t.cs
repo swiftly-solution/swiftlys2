@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_WaitForCursorsWithTagBase__CursorState_t : ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t> {
+public partial interface CPulseCell_WaitForCursorsWithTagBase__CursorState_t : ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t>
+{
+    static CPulseCell_WaitForCursorsWithTagBase__CursorState_t ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t>.From(nint handle) => new CPulseCell_WaitForCursorsWithTagBase__CursorState_tImpl(handle);
+    static int ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t>.Size => 48;
+    static string? ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t>.ClassName => null;
 
-  static CPulseCell_WaitForCursorsWithTagBase__CursorState_t ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t>.From(nint handle) => new CPulseCell_WaitForCursorsWithTagBase__CursorState_tImpl(handle);
-  static int ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t>.Size => 48;
-  static string? ISchemaClass<CPulseCell_WaitForCursorsWithTagBase__CursorState_t>.ClassName => null;
 
-  
-  // PulseSymbol_t
-  public SchemaUntypedField TagName { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField TagName { get; }
 
 
 }

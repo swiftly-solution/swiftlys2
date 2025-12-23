@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmIDComparisonNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmIDComparisonNode__CDefinition {
+internal partial class CNmIDComparisonNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmIDComparisonNode__CDefinition
+{
+    public CNmIDComparisonNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmIDComparisonNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueNodeIdxOffset;
 
-  private static nint? _InputValueNodeIdxOffset;
-
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0xE0D928B595E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0xE0D928B595E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComparisonOffset;
+    private static nint? _ComparisonOffset;
 
-  public ref CNmIDComparisonNode__Comparison_t Comparison {
-    get {
-      if (_ComparisonOffset == null) {
-        _ComparisonOffset = Schema.GetOffset(0xE0D928B5897F8DE4);
-      }
-      return ref _Handle.AsRef<CNmIDComparisonNode__Comparison_t>(_ComparisonOffset!.Value);
+    public ref CNmIDComparisonNode__Comparison_t Comparison {
+        get {
+            _ComparisonOffset = _ComparisonOffset ?? Schema.GetOffset(0xE0D928B5897F8DE4);
+            return ref _Handle.AsRef<CNmIDComparisonNode__Comparison_t>(_ComparisonOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComparisionIDsOffset;
+    private static nint? _ComparisionIDsOffset;
 
-  public SchemaUntypedField ComparisionIDs {
-    get {
-      if (_ComparisionIDsOffset == null) {
-        _ComparisionIDsOffset = Schema.GetOffset(0xE0D928B5E68D53FD);
-      }
-      return new SchemaUntypedField(_Handle + _ComparisionIDsOffset!.Value);
+    public SchemaUntypedField ComparisionIDs {
+        get {
+            _ComparisionIDsOffset = _ComparisionIDsOffset ?? Schema.GetOffset(0xE0D928B5E68D53FD);
+            return new SchemaUntypedField(_Handle + _ComparisionIDsOffset!.Value);
+        }
     }
-  }
 
 
 }

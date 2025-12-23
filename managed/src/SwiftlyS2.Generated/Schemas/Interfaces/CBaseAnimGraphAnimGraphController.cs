@@ -8,57 +8,57 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseAnimGraphAnimGraphController : CAnimGraphControllerBase, ISchemaClass<CBaseAnimGraphAnimGraphController> {
+public partial interface CBaseAnimGraphAnimGraphController : CAnimGraphControllerBase, ISchemaClass<CBaseAnimGraphAnimGraphController>
+{
+    static CBaseAnimGraphAnimGraphController ISchemaClass<CBaseAnimGraphAnimGraphController>.From(nint handle) => new CBaseAnimGraphAnimGraphControllerImpl(handle);
+    static int ISchemaClass<CBaseAnimGraphAnimGraphController>.Size => 616;
+    static string? ISchemaClass<CBaseAnimGraphAnimGraphController>.ClassName => null;
 
-  static CBaseAnimGraphAnimGraphController ISchemaClass<CBaseAnimGraphAnimGraphController>.From(nint handle) => new CBaseAnimGraphAnimGraphControllerImpl(handle);
-  static int ISchemaClass<CBaseAnimGraphAnimGraphController>.Size => 616;
-  static string? ISchemaClass<CBaseAnimGraphAnimGraphController>.ClassName => null;
 
-  
-  // CAnimGraphParamOptionalRef< CGlobalSymbol >
-  public SchemaUntypedField DestructiblePartDestroyedHitGroup { get; }
-  
-  // CAnimGraphParamOptionalRef< int32 >
-  public SchemaUntypedField DestructiblePartDestroyedPartIndex { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_INVALID_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_GENERIC_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_HEAD_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_CHEST_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_STOMACH_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_LEFTARM_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_RIGHTARM_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_LEFTLEG_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_RIGHTLEG_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_NECK_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_UNUSED_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_GEAR_Destroyed { get; }
-  
-  // CAnimGraphParamOptionalRef< bool >
-  public SchemaUntypedField HITGROUP_SPECIAL_Destroyed { get; }
+    // CAnimGraphParamOptionalRef< CGlobalSymbol >
+    public SchemaUntypedField DestructiblePartDestroyedHitGroup { get; }
+
+    // CAnimGraphParamOptionalRef< int32 >
+    public SchemaUntypedField DestructiblePartDestroyedPartIndex { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_INVALID_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_GENERIC_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_HEAD_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_CHEST_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_STOMACH_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_LEFTARM_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_RIGHTARM_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_LEFTLEG_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_RIGHTLEG_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_NECK_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_UNUSED_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_GEAR_Destroyed { get; }
+
+    // CAnimGraphParamOptionalRef< bool >
+    public SchemaUntypedField HITGROUP_SPECIAL_Destroyed { get; }
 
 
 }

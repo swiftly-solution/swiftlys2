@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSequenceUpdateNodeImpl : CSequenceUpdateNodeBaseImpl, CSequenceUpdateNode {
+internal partial class CSequenceUpdateNodeImpl : CSequenceUpdateNodeBaseImpl, CSequenceUpdateNode
+{
+    public CSequenceUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CSequenceUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SequenceOffset;
 
-  private static nint? _SequenceOffset;
-
-  public HSequence Sequence {
-    get {
-      if (_SequenceOffset == null) {
-        _SequenceOffset = Schema.GetOffset(0xB5F91396E0A0598E);
-      }
-      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    public HSequence Sequence {
+        get {
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xB5F91396E0A0598E);
+            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _DurationOffset;
+    private static nint? _DurationOffset;
 
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0xB5F913963D9FF5AD);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xB5F913963D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamSpansOffset;
+    private static nint? _ParamSpansOffset;
 
-  public CParamSpanUpdater ParamSpans {
-    get {
-      if (_ParamSpansOffset == null) {
-        _ParamSpansOffset = Schema.GetOffset(0xB5F91396DAC91553);
-      }
-      return new CParamSpanUpdaterImpl(_Handle + _ParamSpansOffset!.Value);
+    public CParamSpanUpdater ParamSpans {
+        get {
+            _ParamSpansOffset = _ParamSpansOffset ?? Schema.GetOffset(0xB5F91396DAC91553);
+            return new CParamSpanUpdaterImpl(_Handle + _ParamSpansOffset!.Value);
+        }
     }
-  }
-  private static nint? _TagsOffset;
+    private static nint? _TagsOffset;
 
-  public ref CUtlVector<TagSpan_t> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0xB5F91396B46C8540);
-      }
-      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+    public ref CUtlVector<TagSpan_t> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xB5F91396B46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_CylindricalDistanceToTransform : CParticleFunctionOperator, ISchemaClass<C_OP_CylindricalDistanceToTransform> {
+public partial interface C_OP_CylindricalDistanceToTransform : CParticleFunctionOperator, ISchemaClass<C_OP_CylindricalDistanceToTransform>
+{
+    static C_OP_CylindricalDistanceToTransform ISchemaClass<C_OP_CylindricalDistanceToTransform>.From(nint handle) => new C_OP_CylindricalDistanceToTransformImpl(handle);
+    static int ISchemaClass<C_OP_CylindricalDistanceToTransform>.Size => 2160;
+    static string? ISchemaClass<C_OP_CylindricalDistanceToTransform>.ClassName => null;
 
-  static C_OP_CylindricalDistanceToTransform ISchemaClass<C_OP_CylindricalDistanceToTransform>.From(nint handle) => new C_OP_CylindricalDistanceToTransformImpl(handle);
-  static int ISchemaClass<C_OP_CylindricalDistanceToTransform>.Size => 2160;
-  static string? ISchemaClass<C_OP_CylindricalDistanceToTransform>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleFloatInput InputMin { get; }
-  
-  public CPerParticleFloatInput InputMax { get; }
-  
-  public CPerParticleFloatInput OutputMin { get; }
-  
-  public CPerParticleFloatInput OutputMax { get; }
-  
-  public CParticleTransformInput TransformStart { get; }
-  
-  public CParticleTransformInput TransformEnd { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool ActiveRange { get; }
-  
-  public ref bool Additive { get; }
-  
-  public ref bool Capsule { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleFloatInput InputMin { get; }
+
+    public CPerParticleFloatInput InputMax { get; }
+
+    public CPerParticleFloatInput OutputMin { get; }
+
+    public CPerParticleFloatInput OutputMax { get; }
+
+    public CParticleTransformInput TransformStart { get; }
+
+    public CParticleTransformInput TransformEnd { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool ActiveRange { get; }
+
+    public ref bool Additive { get; }
+
+    public ref bool Capsule { get; }
 
 
 }

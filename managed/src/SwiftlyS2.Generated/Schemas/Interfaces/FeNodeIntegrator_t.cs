@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeNodeIntegrator_t : ISchemaClass<FeNodeIntegrator_t> {
+public partial interface FeNodeIntegrator_t : ISchemaClass<FeNodeIntegrator_t>
+{
+    static FeNodeIntegrator_t ISchemaClass<FeNodeIntegrator_t>.From(nint handle) => new FeNodeIntegrator_tImpl(handle);
+    static int ISchemaClass<FeNodeIntegrator_t>.Size => 16;
+    static string? ISchemaClass<FeNodeIntegrator_t>.ClassName => null;
 
-  static FeNodeIntegrator_t ISchemaClass<FeNodeIntegrator_t>.From(nint handle) => new FeNodeIntegrator_tImpl(handle);
-  static int ISchemaClass<FeNodeIntegrator_t>.Size => 16;
-  static string? ISchemaClass<FeNodeIntegrator_t>.ClassName => null;
 
-  
-  public ref float PointDamping { get; }
-  
-  public ref float AnimationForceAttraction { get; }
-  
-  public ref float AnimationVertexAttraction { get; }
-  
-  public ref float Gravity { get; }
+    public ref float PointDamping { get; }
+
+    public ref float AnimationForceAttraction { get; }
+
+    public ref float AnimationVertexAttraction { get; }
+
+    public ref float Gravity { get; }
 
 
 }

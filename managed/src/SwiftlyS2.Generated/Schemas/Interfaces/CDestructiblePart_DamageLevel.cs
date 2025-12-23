@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDestructiblePart_DamageLevel : ISchemaClass<CDestructiblePart_DamageLevel> {
+public partial interface CDestructiblePart_DamageLevel : ISchemaClass<CDestructiblePart_DamageLevel>
+{
+    static CDestructiblePart_DamageLevel ISchemaClass<CDestructiblePart_DamageLevel>.From(nint handle) => new CDestructiblePart_DamageLevelImpl(handle);
+    static int ISchemaClass<CDestructiblePart_DamageLevel>.Size => 72;
+    static string? ISchemaClass<CDestructiblePart_DamageLevel>.ClassName => null;
 
-  static CDestructiblePart_DamageLevel ISchemaClass<CDestructiblePart_DamageLevel>.From(nint handle) => new CDestructiblePart_DamageLevelImpl(handle);
-  static int ISchemaClass<CDestructiblePart_DamageLevel>.Size => 72;
-  static string? ISchemaClass<CDestructiblePart_DamageLevel>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CGlobalSymbol BreakablePieceName { get; }
-  
-  public ref int BodyGroupValue { get; }
-  
-  public CSkillInt Health { get; }
-  
-  public ref float CriticalDamagePercent { get; }
-  
-  public ref EDestructiblePartDamagePassThroughType DamagePassthroughType { get; }
-  
-  public ref DestructiblePartDestructionDeathBehavior_t DestructionDeathBehavior { get; }
-  
-  public ref CGlobalSymbol CustomDeathHandshake { get; }
-  
-  public ref bool ShouldDestroyOnDeath { get; }
-  
-  public CRangeFloat DeathDestroyTime { get; }
+    public string Name { get; set; }
+
+    public ref CGlobalSymbol BreakablePieceName { get; }
+
+    public ref int BodyGroupValue { get; }
+
+    public CSkillInt Health { get; }
+
+    public ref float CriticalDamagePercent { get; }
+
+    public ref EDestructiblePartDamagePassThroughType DamagePassthroughType { get; }
+
+    public ref DestructiblePartDestructionDeathBehavior_t DestructionDeathBehavior { get; }
+
+    public ref CGlobalSymbol CustomDeathHandshake { get; }
+
+    public ref bool ShouldDestroyOnDeath { get; }
+
+    public CRangeFloat DeathDestroyTime { get; }
 
 
 }

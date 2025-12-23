@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class GameTick_tImpl : SchemaClass, GameTick_t {
+internal partial class GameTick_tImpl : SchemaClass, GameTick_t
+{
+    public GameTick_tImpl(nint handle) : base(handle) { }
 
-  public GameTick_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ValueOffset;
 
-  private static nint? _ValueOffset;
-
-  public ref int Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0x89A0CF8DDCB0894A);
-      }
-      return ref _Handle.AsRef<int>(_ValueOffset!.Value);
+    public ref int Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x89A0CF8DDCB0894A);
+            return ref _Handle.AsRef<int>(_ValueOffset!.Value);
+        }
     }
-  }
 
 
 }

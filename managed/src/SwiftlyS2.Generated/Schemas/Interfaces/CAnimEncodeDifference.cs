@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimEncodeDifference : ISchemaClass<CAnimEncodeDifference> {
+public partial interface CAnimEncodeDifference : ISchemaClass<CAnimEncodeDifference>
+{
+    static CAnimEncodeDifference ISchemaClass<CAnimEncodeDifference>.From(nint handle) => new CAnimEncodeDifferenceImpl(handle);
+    static int ISchemaClass<CAnimEncodeDifference>.Size => 168;
+    static string? ISchemaClass<CAnimEncodeDifference>.ClassName => null;
 
-  static CAnimEncodeDifference ISchemaClass<CAnimEncodeDifference>.From(nint handle) => new CAnimEncodeDifferenceImpl(handle);
-  static int ISchemaClass<CAnimEncodeDifference>.Size => 168;
-  static string? ISchemaClass<CAnimEncodeDifference>.ClassName => null;
 
-  
-  public ref CUtlVector<CAnimBoneDifference> BoneArray { get; }
-  
-  public ref CUtlVector<CAnimMorphDifference> MorphArray { get; }
-  
-  public ref CUtlVector<CAnimUserDifference> UserArray { get; }
-  
-  public ref CUtlVector<byte> HasRotationBitArray { get; }
-  
-  public ref CUtlVector<byte> HasMovementBitArray { get; }
-  
-  public ref CUtlVector<byte> HasMorphBitArray { get; }
-  
-  public ref CUtlVector<byte> HasUserBitArray { get; }
+    public ref CUtlVector<CAnimBoneDifference> BoneArray { get; }
+
+    public ref CUtlVector<CAnimMorphDifference> MorphArray { get; }
+
+    public ref CUtlVector<CAnimUserDifference> UserArray { get; }
+
+    public ref CUtlVector<byte> HasRotationBitArray { get; }
+
+    public ref CUtlVector<byte> HasMovementBitArray { get; }
+
+    public ref CUtlVector<byte> HasMorphBitArray { get; }
+
+    public ref CUtlVector<byte> HasUserBitArray { get; }
 
 
 }

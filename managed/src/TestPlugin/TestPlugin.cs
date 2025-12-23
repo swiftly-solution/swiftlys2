@@ -2,7 +2,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Tomlyn.Extensions.Configuration;
-using System.Text.RegularExpressions;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Commands;
 using SwiftlyS2.Shared.GameEventDefinitions;
@@ -13,31 +12,21 @@ using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Plugins;
 using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.ProtobufDefinitions;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.Memory;
-using YamlDotNet.Core.Tokens;
 using Dapper;
 using SwiftlyS2.Shared.Sounds;
 using SwiftlyS2.Shared.EntitySystem;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Hosting;
 using SwiftlyS2.Shared.Players;
-using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Toolchains.InProcess.NoEmit;
-using BenchmarkDotNet.Toolchains.InProcess.Emit;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Loggers;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
-using System.Collections.Concurrent;
-using Dia2Lib;
-using System.Reflection.Metadata;
-using Microsoft.Diagnostics.Tracing.Parsers.MicrosoftWindowsTCPIP;
 
 namespace TestPlugin;
 
@@ -141,8 +130,8 @@ public class InProcessConfig : ManualConfig
 {
     public InProcessConfig()
     {
-        AddLogger(ConsoleLogger.Default);
-        AddJob(Job.Default
+        _ = AddLogger(ConsoleLogger.Default);
+        _ = AddJob(Job.Default
             .WithToolchain(new InProcessNoEmitToolchain(true))
             .WithId("InProcess"));
     }
@@ -163,10 +152,10 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("be")]
-    [CommandAlias("beh", false)]
     public void Test2Command( ICommandContext context )
     {
-        Console.WriteLine("hello world\n");
+        var entity = context.Sender!.RequiredPawn;
+        entity.TakeDamage(100, DamageTypes_t.DMG_GENERIC);
     }
 
     [Command("CommandAliasTest")]
@@ -174,6 +163,32 @@ public class TestPlugin : BasePlugin
     public void CommandAliasTest( ICommandContext context )
     {
         context.Reply("CommandAliasTest\n");
+    }
+
+    [Command("dbtest")]
+    public void DatabaseTestCommand( ICommandContext context )
+    {
+        var connectionName = context.Args.Length > 0 ? context.Args[0] : "default";
+        var connectionInfo = Core.Database.GetConnectionInfo(connectionName);
+        Core.Logger.LogInformation("[Database] Connection info: {Info}", connectionInfo);
+
+        try
+        {
+            using var connection = Core.Database.GetConnection(connectionName);
+            connection.Open();
+            Core.Logger.LogInformation("[Database] Connection opened successfully!");
+
+            // Simple query test
+            var result = connection.QueryFirstOrDefault<int>("SELECT 1");
+            Core.Logger.LogInformation("[Database] Query 'SELECT 1' returned: {Result}", result);
+
+            connection.Close();
+            Core.Logger.LogInformation("[Database] Connection closed.");
+        }
+        catch (Exception ex)
+        {
+            Core.Logger.LogError(ex, "[Database] Connection failed: {Message}", ex.Message);
+        }
     }
 
     [GameEventHandler(HookMode.Pre)]
@@ -219,39 +234,40 @@ public class TestPlugin : BasePlugin
         }
     }
 
-    public unsafe delegate void SetPendingHostStateRequestDelegate( nint hostStateManager, CHostStateRequest* pRequest );
-    private IUnmanagedFunction<SetPendingHostStateRequestDelegate>? _SetPendingHostStateRequestDelegate;
+    // public unsafe delegate void SetPendingHostStateRequestDelegate( nint hostStateManager, CHostStateRequest* pRequest );
+    // private IUnmanagedFunction<SetPendingHostStateRequestDelegate>? _SetPendingHostStateRequestDelegate;
 
     public override void Load( bool hotReload )
     {
-        _SetPendingHostStateRequestDelegate = Core.Memory.GetUnmanagedFunctionByAddress<SetPendingHostStateRequestDelegate>(
-            Core.Memory.GetAddressBySignature(
-                Library.Engine,
-                "48 89 74 24 ? 57 48 83 EC ? 33 F6 48 8B FA 48 39 35"
-            )!.Value
-        );
+        // _SetPendingHostStateRequestDelegate = Core.Memory.GetUnmanagedFunctionByAddress<SetPendingHostStateRequestDelegate>(
+        //     Core.Memory.GetAddressBySignature(
+        //         Library.Engine,
+        //         "48 89 74 24 ? 57 48 83 EC ? 33 F6 48 8B FA 48 39 35"
+        //     )!.Value
+        // );
 
-        _ = _SetPendingHostStateRequestDelegate.AddHook(( next ) =>
-        {
-            unsafe
-            {
-                return ( pHostStateManager, pRequest ) =>
-                {
-                    if (pRequest->pKV != 0)
-                    {
-                        var kv = (KeyValues*)pRequest->pKV;
-                        Console.WriteLine($"Name '{kv->GetName()}'");
+        // _ = _SetPendingHostStateRequestDelegate.AddHook(( next ) =>
+        // {
+        //     unsafe
+        //     {
+        //         return ( pHostStateManager, pRequest ) =>
+        //         {
+        //             if (pRequest->pKV != 0)
+        //             {
+        //                 var kv = (KeyValues*)pRequest->pKV;
+        //                 Console.WriteLine($"Name '{kv->GetName()}'");
 
-                        for (var subKey = kv->GetFirstSubKey(); subKey != null; subKey = subKey->GetNextKey())
-                        {
-                            Console.WriteLine($"  {subKey->GetName()} {(kv->GetName() == "map_workshop" ? kv->GetString("customgamemode", "") : string.Empty)}");
-                        }
-                    }
+        //                 for (var subKey = kv->GetFirstSubKey(); subKey != null; subKey = subKey->GetNextKey())
+        //                 {
+        //                     Console.WriteLine($"  {subKey->GetName()} {(kv->GetName() == "map_workshop" ? kv->GetString("customgamemode", "") : string.Empty)}");
+        //                 }
+        //             }
 
-                    next()(pHostStateManager, pRequest);
-                };
-            }
-        });
+        //             next()(pHostStateManager, pRequest);
+        //         };
+        //     }
+        // });
+
         // Core.Command.HookClientCommand((playerId, commandLine) =>
         // {
         //   Console.WriteLine("TestPlugin HookClientCommand " + playerId + " " + commandLine);
@@ -305,39 +321,37 @@ public class TestPlugin : BasePlugin
         //     Console.WriteLine($"pong: {buffer}");
         // });
 
-        Core.GameEvent.HookPre<EventShowSurvivalRespawnStatus>(@event =>
-        {
-            @event.LocToken = "test";
-            return HookResult.Continue;
-        });
+        // _ = Core.GameEvent.HookPre<EventShowSurvivalRespawnStatus>(@event =>
+        // {
+        //     @event.LocToken = "test";
+        //     return HookResult.Continue;
+        // });
 
-        Core.Configuration
+        _ = Core.Configuration
             .InitializeJsonWithModel<PluginConfig>("test.jsonc", "Main")
             .InitializeTomlWithModel<PluginConfig>("test.toml", "Main")
             .Configure(( builder ) =>
             {
-                builder.AddJsonFile("test.jsonc", optional: false, reloadOnChange: true);
-                builder.AddTomlFile("test.toml", optional: true, reloadOnChange: true);
+                _ = builder.AddJsonFile("test.jsonc", optional: false, reloadOnChange: true);
+                _ = builder.AddTomlFile("test.toml", optional: true, reloadOnChange: true);
             });
 
         ServiceCollection services = new();
 
-        services
+        _ = services
             .AddSwiftly(Core);
 
-        Core.Event.OnPrecacheResource += ( @event ) => { @event.AddItem("soundevents/mvp_anthem.vsndevts"); };
+        // Core.Event.OnPrecacheResource += ( @event ) => { @event.AddItem("soundevents/mvp_anthem.vsndevts"); };
 
-        Core.Event.OnConVarValueChanged += ( @event ) =>
-        {
-            Console.WriteLine(
-                $"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
-        };
+        // Core.Event.OnConVarValueChanged += ( @event ) =>
+        // {
+        //     Console.WriteLine($"ConVar {@event.ConVarName} changed from {@event.OldValue} to {@event.NewValue} by player {@event.PlayerId}");
+        // };
 
-        Core.Event.OnEntityIdentityAcceptInputHook += ( @event ) =>
-        {
-            Console.WriteLine(
-                $"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.InputName}");
-        };
+        // Core.Event.OnEntityIdentityAcceptInputHook += ( @event ) =>
+        // {
+        //     Console.WriteLine($"EntityIdentityAcceptInput: {@event.EntityInstance.DesignerName} - {@event.VariantValue.Data.Int32}");
+        // };
 
 
         // var provider = services.BuildServiceProvider();
@@ -369,7 +383,7 @@ public class TestPlugin : BasePlugin
 
         // Core.
 
-        int i = 0;
+        // var i = 0;
 
         // var token2 = Core.Scheduler.Repeat(10, () => {
         //   Console.WriteLine(Core.Engine.TickCount);
@@ -460,17 +474,31 @@ public class TestPlugin : BasePlugin
         // };
 
         using CEntityKeyValues kv = new();
-
         kv.SetBool("test", true);
-
         Console.WriteLine(kv.Get<bool>("test2"));
 
         CUtlStringToken token = new("hello");
         Console.WriteLine($"2");
+
+        // _ = Core.EntitySystem.HookEntityOutput<CPropDoorRotating>("OnFullyOpen", ( entityIO, outputName, activator, caller, delay ) =>
+        // {
+        //     Console.WriteLine($"HookEntityOutput -> entityIO: {entityIO.Desc.Name} output: {outputName}, activator: {activator?.As<CBaseEntity>()?.DesignerName}, caller: {caller?.As<CBaseEntity>()?.DesignerName}");
+        //     return HookResult.Continue;
+        // });
+
+        _ = Core.EntitySystem.HookEntityInput<CCSPlayerPawn>("SetBodygroup", ( @event ) =>
+        {
+            Console.WriteLine($"EntityInput -> Identity: {@event.Identity.DesignerName} InputName: {@event.InputName}, Activator: {@event.Activator?.As<CBaseEntity>()?.DesignerName}, Caller: {@event.Caller?.As<CBaseEntity>()?.DesignerName}");
+        });
+
+        _ = Core.EntitySystem.HookEntityOutput<CPropDoorRotating>("OnFullyOpen", ( @event ) =>
+        {
+            Console.WriteLine($"EntityOutput -> EntityIO: {@event.EntityIO.Desc.Name} OutputName: {@event.OutputName}, Activator: {@event.Activator?.As<CBaseEntity>()?.DesignerName}, Caller: {@event.Caller?.As<CBaseEntity>()?.DesignerName}");
+        });
     }
 
-    CEntityKeyValues kv { get; set; }
-    CEntityInstance entity { get; set; }
+    // private readonly CEntityKeyValues? kv;
+    // private readonly CEntityInstance? entity;
 
     [Command("gd")]
     public void TestCommandGD( ICommandContext ctx )
@@ -523,7 +551,7 @@ public class TestPlugin : BasePlugin
         var weapons = pawn.WeaponServices!.MyValidWeapons;
         foreach (var weapon in weapons)
         {
-            weapon.AcceptInput("SetAmmoAmount", "9999");
+            weapon.AcceptInput("SetAmmoAmount", "0");
         }
     }
 
@@ -531,25 +559,25 @@ public class TestPlugin : BasePlugin
     public void TestCommand1( ICommandContext context )
     {
         var player = context.Sender!;
-        for (int i = 0; i < 10000; i++)
+        for (var i = 0; i < 10000; i++)
         {
-            Task.Run(async () =>
+            _ = Task.Run(async () =>
             {
                 await Task.Delay(100);
                 Core.Scheduler.NextTick(() =>
                 {
-                    player.PlayerPawn.SetModel("characters/models/tm_jumpsuit/tm_jumpsuit_varianta.vmdl");
+                    player.PlayerPawn!.SetModel("characters/models/tm_jumpsuit/tm_jumpsuit_varianta.vmdl");
                 });
             });
         }
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    delegate nint DispatchSpawnDelegate( nint pEntity, nint pKV );
+    private delegate nint DispatchSpawnDelegate( nint pEntity, nint pKV );
 
-    int order = 0;
+    // private int order = 0;
 
-    IUnmanagedFunction<DispatchSpawnDelegate>? _dispatchspawn;
+    // private readonly IUnmanagedFunction<DispatchSpawnDelegate>? _dispatchspawn;
 
     [Command("h0")]
     public void TestCommand0( ICommandContext _ )
@@ -567,39 +595,38 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("h1")]
-    public void TestCommand2( ICommandContext _ )
+    public void TestCommand2( ICommandContext context )
     {
-        Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+        Console.WriteLine(Environment.CurrentManagedThreadId);
         Console.WriteLine("\n");
         Console.WriteLine(Core.Engine.GlobalVars.TickCount);
         Console.WriteLine("\n");
         Console.WriteLine("END");
-        var sender = _.Sender!;
+        var sender = context.Sender!;
         var cvar = Core.ConVar.FindAsString("sv_enablebunnyhopping");
-        for (int i = 0; i < 1000; i++)
+        for (var i = 0; i < 1000; i++)
         {
-            Task.Run(async () =>
+            _ = Task.Run(async () =>
             {
                 await Task.Delay(100);
                 Console.WriteLine("Setting cvar value");
                 Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
-                cvar.DefaultValueAsString = "1";
+                cvar!.DefaultValueAsString = "1";
             });
-
         }
     }
 
-    [EventListener<EventDelegates.OnEntityCreated>]
-    public void OnEntityCreated( IOnEntityCreatedEvent @event )
-    {
-        // @event.Entity.Entity.DesignerName = "abc";
-        Console.WriteLine("TestPlugin OnEntityCreated222 " + @event.Entity.Entity?.DesignerName);
-    }
+    // [EventListener<EventDelegates.OnEntityCreated>]
+    // public void OnEntityCreated( IOnEntityCreatedEvent @event )
+    // {
+    //     // @event.Entity.Entity.DesignerName = "abc";
+    //     Console.WriteLine("TestPlugin OnEntityCreated222 " + @event.Entity.Entity?.DesignerName);
+    // }
 
-    Guid _hookId = Guid.Empty;
+    // private Guid _hookId = Guid.Empty;
 
     [Command("bad")]
-    public void TestCommandBad( ICommandContext context )
+    public void TestCommandBad( ICommandContext _ )
     {
         try
         {
@@ -630,7 +657,7 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("h2")]
-    public void TestCommand3( ICommandContext context )
+    public void TestCommand3( ICommandContext _ )
     {
         var ent = Core.EntitySystem.CreateEntity<CPointWorldText>();
         ent.DispatchSpawn();
@@ -646,10 +673,7 @@ public class TestPlugin : BasePlugin
         kv.Set<uint>("m_spawnflags", 256);
         ent.DispatchSpawn(kv);
         ent.SetModel("weapons/models/grenade/incendiary/weapon_incendiarygrenade.vmdl");
-        ent.Teleport(
-            new Vector(context.Sender!.PlayerPawn!.AbsOrigin!.Value.X + 50,
-                context.Sender!.PlayerPawn!.AbsOrigin!.Value.Y + 50,
-                context.Sender!.PlayerPawn!.AbsOrigin!.Value.Z + 30), QAngle.Zero, Vector.Zero);
+        ent.Teleport(new Vector(context.Sender!.PlayerPawn!.AbsOrigin!.Value.X + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Y + 50, context.Sender!.PlayerPawn!.AbsOrigin!.Value.Z + 30), QAngle.Zero, Vector.Zero);
     }
 
     [Command("tt4")]
@@ -659,13 +683,13 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("tt5")]
-    public void TestCommand5( ICommandContext context )
+    public void TestCommand5( ICommandContext _ )
     {
         Console.WriteLine("TestPlugin TestCommand5");
     }
 
     [Command("tt6", permission: "tt6")]
-    public void TestCommand6( ICommandContext context )
+    public void TestCommand6( ICommandContext _ )
     {
         Console.WriteLine("TestPlugin TestCommand6");
     }
@@ -678,7 +702,7 @@ public class TestPlugin : BasePlugin
     }
 
     [Command("tt7")]
-    public void TestCommand7( ICommandContext context )
+    public void TestCommand7( ICommandContext _ )
     {
         Core.Engine.ExecuteCommandWithBuffer("@ping", ( buffer ) => { Console.WriteLine($"pong: {buffer}"); });
     }
@@ -688,7 +712,7 @@ public class TestPlugin : BasePlugin
     {
         Core.EntitySystem.GetAllEntitiesByDesignerName<CBuyZone>("func_buyzone").ToList().ForEach(zone =>
         {
-            if ((zone?.IsValid ?? false))
+            if (zone?.IsValid ?? false)
             {
                 zone.Despawn();
             }
@@ -738,14 +762,10 @@ public class TestPlugin : BasePlugin
         Core.Trace.TraceShape(origin, targetOrigin, ray, filter, ref trace);
 
         Console.WriteLine(trace.pEntity != null ? $"! Hit Entity: {trace.Entity.DesignerName}" : "! No entity hit");
-        Console.WriteLine(
-            $"! SurfaceProperties: {(nint)trace.SurfaceProperties}, pEntity: {(nint)trace.pEntity}, HitBox: {(nint)trace.HitBox}({trace.HitBox->m_name.Value}), Body: {(nint)trace.Body}, Shape: {(nint)trace.Shape}, Contents: {trace.Contents}");
-        Console.WriteLine(
-            $"! StartPos: {trace.StartPos}, EndPos: {trace.EndPos}, HitNormal: {trace.HitNormal}, HitPoint: {trace.HitPoint}");
-        Console.WriteLine(
-            $"! HitOffset: {trace.HitOffset}, Fraction: {trace.Fraction}, Triangle: {trace.Triangle}, HitboxBoneIndex: {trace.HitboxBoneIndex}");
-        Console.WriteLine(
-            $"! RayType: {trace.RayType}, StartInSolid: {trace.StartInSolid}, ExactHitPoint: {trace.ExactHitPoint}");
+        Console.WriteLine($"! SurfaceProperties: {(nint)trace.SurfaceProperties}, pEntity: {(nint)trace.pEntity}, HitBox: {(nint)trace.HitBox}({trace.HitBox->m_name.Value}), Body: {(nint)trace.Body}, Shape: {(nint)trace.Shape}, Contents: {trace.Contents}");
+        Console.WriteLine($"! StartPos: {trace.StartPos}, EndPos: {trace.EndPos}, HitNormal: {trace.HitNormal}, HitPoint: {trace.HitPoint}");
+        Console.WriteLine($"! HitOffset: {trace.HitOffset}, Fraction: {trace.Fraction}, Triangle: {trace.Triangle}, HitboxBoneIndex: {trace.HitboxBoneIndex}");
+        Console.WriteLine($"! RayType: {trace.RayType}, StartInSolid: {trace.StartInSolid}, ExactHitPoint: {trace.ExactHitPoint}");
         Console.WriteLine("\n");
     }
 
@@ -765,13 +785,13 @@ public class TestPlugin : BasePlugin
     }
 
     [ServerNetMessageHandler]
-    public HookResult TestServerNetMessageHandler( CCSUsrMsg_SendPlayerItemDrops msg )
+    public HookResult TestServerNetMessageHandler( CCSUsrMsg_SendPlayerItemDrops _ )
     {
         Console.WriteLine("FIRED");
         return HookResult.Continue;
     }
 
-    private Callback<GCMessageAvailable_t> _authTicketResponse;
+    private Callback<GCMessageAvailable_t>? _authTicketResponse;
 
     [EventListener<EventDelegates.OnSteamAPIActivated>]
     public void OnSteamAPIActivated()
@@ -872,9 +892,7 @@ public class TestPlugin : BasePlugin
         Core.PlayerManager.GetAlive()
             .Where(player => player.PlayerID != context.Sender!.PlayerID && player.IsValid && player.IsFakeClient)
             .ToList()
-            .ForEach(player =>
-                player.PlayerPawn!.WeaponServices!.ActiveWeapon.Value!.SetTransmitState(false,
-                    context.Sender!.PlayerID));
+            .ForEach(player => player.PlayerPawn!.WeaponServices!.ActiveWeapon.Value!.SetTransmitState(false, context.Sender!.PlayerID));
     }
 
     [Command("sihb")]
@@ -883,9 +901,7 @@ public class TestPlugin : BasePlugin
         Core.PlayerManager.GetAlive()
             .Where(player => player.PlayerID != context.Sender!.PlayerID && player.IsValid && player.IsFakeClient)
             .ToList()
-            .ForEach(player =>
-                Console.WriteLine(
-                    $"{player.Controller!.PlayerName} -> {(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID) ? "Hide" : "V")}"));
+            .ForEach(player => Console.WriteLine($"{player.Controller!.PlayerName} -> {(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID) ? "Hide" : "V")}"));
     }
 
     [Command("hb")]
@@ -897,8 +913,7 @@ public class TestPlugin : BasePlugin
             .ForEach(player =>
             {
                 // Console.WriteLine($"{player.Controller!.PlayerName}(B) -> {player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID)}({player.PlayerPawn!.IsTransmitting(player.PlayerID)})");
-                player.PlayerPawn!.SetTransmitState(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID),
-                    context.Sender!.PlayerID);
+                player.PlayerPawn!.SetTransmitState(!player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID), context.Sender!.PlayerID);
                 // Console.WriteLine($"{player.Controller!.PlayerName} -> {player.PlayerPawn!.IsTransmitting(context.Sender!.PlayerID)}({player.PlayerPawn!.IsTransmitting(player.PlayerID)})");
             });
     }
@@ -986,6 +1001,16 @@ public class TestPlugin : BasePlugin
                 return shopMenu;
             }))
             .Build();
+
+        mainMenu.OptionHovered += ( sender, args ) =>
+        {
+            Console.WriteLine($"{args.Options?[0].Text} hovered for player: {args.Player?.Controller.PlayerName}");
+        };
+
+        mainMenu.OptionSelected += ( sender, args ) =>
+        {
+            Console.WriteLine($"{(sender as IMenuAPI)?.Configuration.Title} selected for player: {args.Player?.Controller.PlayerName}");
+        };
 
         Core.MenusAPI.OpenMenu(mainMenu,
             ( player, menu ) =>

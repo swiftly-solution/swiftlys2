@@ -6,16 +6,15 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FakeEntityDerivedB_tAPIImpl : SchemaClass, FakeEntityDerivedB_tAPI {
-
-  public FakeEntityDerivedB_tAPIImpl(nint handle) : base(handle) {
-  }
+internal partial class FakeEntityDerivedB_tAPIImpl : SchemaClass, FakeEntityDerivedB_tAPI
+{
+    public FakeEntityDerivedB_tAPIImpl(nint handle) : base(handle) { }
 
 
 

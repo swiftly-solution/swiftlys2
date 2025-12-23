@@ -8,17 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayer_PingServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_PingServices> {
+public partial interface CCSPlayer_PingServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_PingServices>
+{
+    static CCSPlayer_PingServices ISchemaClass<CCSPlayer_PingServices>.From(nint handle) => new CCSPlayer_PingServicesImpl(handle);
+    static int ISchemaClass<CCSPlayer_PingServices>.Size => 88;
+    static string? ISchemaClass<CCSPlayer_PingServices>.ClassName => null;
 
-  static CCSPlayer_PingServices ISchemaClass<CCSPlayer_PingServices>.From(nint handle) => new CCSPlayer_PingServicesImpl(handle);
-  static int ISchemaClass<CCSPlayer_PingServices>.Size => 88;
-  static string? ISchemaClass<CCSPlayer_PingServices>.ClassName => null;
 
-  
-  // GameTime_t
-  public SchemaUntypedField PlayerPingTokens { get; }
-  
-  public ref CHandle<CPlayerPing> PlayerPing { get; }
+    public ISchemaClassFixedArray<GameTime_t> PlayerPingTokens { get; }
 
-  public void PlayerPingUpdated();
+    public ref CHandle<CPlayerPing> PlayerPing { get; }
+
+    public void PlayerPingUpdated();
 }

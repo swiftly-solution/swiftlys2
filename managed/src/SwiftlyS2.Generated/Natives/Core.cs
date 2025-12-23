@@ -31,4 +31,11 @@ internal static class NativeCore {
       return retString;
     }
   }
+
+  private unsafe static delegate* unmanaged<byte> _EnableProfilerByDefault;
+
+  public unsafe static bool EnableProfilerByDefault() {
+    var ret = _EnableProfilerByDefault();
+    return ret == 1;
+  }
 }

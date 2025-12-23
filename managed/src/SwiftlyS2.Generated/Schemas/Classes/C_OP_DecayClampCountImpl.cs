@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DecayClampCountImpl : CParticleFunctionOperatorImpl, C_OP_DecayClampCount {
+internal partial class C_OP_DecayClampCountImpl : CParticleFunctionOperatorImpl, C_OP_DecayClampCount
+{
+    public C_OP_DecayClampCountImpl(nint handle) : base(handle) { }
 
-  public C_OP_DecayClampCountImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CountOffset;
 
-  private static nint? _CountOffset;
-
-  public CParticleCollectionFloatInput Count {
-    get {
-      if (_CountOffset == null) {
-        _CountOffset = Schema.GetOffset(0xBBD38E0B7D31AC08);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _CountOffset!.Value);
+    public CParticleCollectionFloatInput Count {
+        get {
+            _CountOffset = _CountOffset ?? Schema.GetOffset(0xBBD38E0B7D31AC08);
+            return new CParticleCollectionFloatInputImpl(_Handle + _CountOffset!.Value);
+        }
     }
-  }
 
 
 }

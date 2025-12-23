@@ -8,43 +8,43 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerLook : CTriggerOnce, ISchemaClass<CTriggerLook> {
+public partial interface CTriggerLook : CTriggerOnce, ISchemaClass<CTriggerLook>
+{
+    static CTriggerLook ISchemaClass<CTriggerLook>.From(nint handle) => new CTriggerLookImpl(handle);
+    static int ISchemaClass<CTriggerLook>.Size => 2664;
+    static string? ISchemaClass<CTriggerLook>.ClassName => "trigger_look";
 
-  static CTriggerLook ISchemaClass<CTriggerLook>.From(nint handle) => new CTriggerLookImpl(handle);
-  static int ISchemaClass<CTriggerLook>.Size => 2664;
-  static string? ISchemaClass<CTriggerLook>.ClassName => "trigger_look";
 
-  
-  public ref CHandle<CBaseEntity> LookTarget { get; }
-  
-  public ref float FieldOfView { get; }
-  
-  public ref float LookTime { get; }
-  
-  public ref float LookTimeTotal { get; }
-  
-  public GameTime_t LookTimeLast { get; }
-  
-  public ref float TimeoutDuration { get; }
-  
-  public ref bool TimeoutFired { get; }
-  
-  public ref bool IsLooking { get; }
-  
-  public ref bool B2DFOV { get; }
-  
-  public ref bool UseVelocity { get; }
-  
-  public ref bool TestOcclusion { get; }
-  
-  public ref bool TestAllVisibleOcclusion { get; }
-  
-  public CEntityIOOutput OnTimeout { get; }
-  
-  public CEntityIOOutput OnStartLook { get; }
-  
-  public CEntityIOOutput OnEndLook { get; }
+    public ref CHandle<CBaseEntity> LookTarget { get; }
 
-  public void TestOcclusionUpdated();
-  public void TestAllVisibleOcclusionUpdated();
+    public ref float FieldOfView { get; }
+
+    public ref float LookTime { get; }
+
+    public ref float LookTimeTotal { get; }
+
+    public GameTime_t LookTimeLast { get; }
+
+    public ref float TimeoutDuration { get; }
+
+    public ref bool TimeoutFired { get; }
+
+    public ref bool IsLooking { get; }
+
+    public ref bool B2DFOV { get; }
+
+    public ref bool UseVelocity { get; }
+
+    public ref bool TestOcclusion { get; }
+
+    public ref bool TestAllVisibleOcclusion { get; }
+
+    public ref CEntityIOOutput OnTimeout { get; }
+
+    public ref CEntityIOOutput OnStartLook { get; }
+
+    public ref CEntityIOOutput OnEndLook { get; }
+
+    public void TestOcclusionUpdated();
+    public void TestAllVisibleOcclusionUpdated();
 }

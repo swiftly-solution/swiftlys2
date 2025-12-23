@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFootstepEventIDNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmFootstepEventIDNode__CDefinition> {
+public partial interface CNmFootstepEventIDNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmFootstepEventIDNode__CDefinition>
+{
+    static CNmFootstepEventIDNode__CDefinition ISchemaClass<CNmFootstepEventIDNode__CDefinition>.From(nint handle) => new CNmFootstepEventIDNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFootstepEventIDNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmFootstepEventIDNode__CDefinition>.ClassName => null;
 
-  static CNmFootstepEventIDNode__CDefinition ISchemaClass<CNmFootstepEventIDNode__CDefinition>.From(nint handle) => new CNmFootstepEventIDNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFootstepEventIDNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmFootstepEventIDNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SourceStateNodeIdx { get; }
-  
-  public CNmBitFlags EventConditionRules { get; }
+    public ref short SourceStateNodeIdx { get; }
+
+    public CNmBitFlags EventConditionRules { get; }
 
 
 }

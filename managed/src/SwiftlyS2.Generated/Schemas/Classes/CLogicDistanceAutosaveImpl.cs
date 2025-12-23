@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicDistanceAutosaveImpl : CLogicalEntityImpl, CLogicDistanceAutosave {
+internal partial class CLogicDistanceAutosaveImpl : CLogicalEntityImpl, CLogicDistanceAutosave
+{
+    public CLogicDistanceAutosaveImpl(nint handle) : base(handle) { }
 
-  public CLogicDistanceAutosaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetEntityOffset;
 
-  private static nint? _TargetEntityOffset;
+    public string TargetEntity {
+        get {
+            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x8E908EDD8951B0FB);
+            return Schema.GetString(_Handle.Read<nint>(_TargetEntityOffset!.Value));
+        }
+        set {
+            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x8E908EDD8951B0FB);
+            Schema.SetString(_Handle, _TargetEntityOffset!.Value, value);
+        }
+    } 
+    private static nint? _DistanceToPlayerOffset;
 
-  public string TargetEntity {
-    get {
-      if (_TargetEntityOffset == null) {
-        _TargetEntityOffset = Schema.GetOffset(0x8E908EDD8951B0FB);
-      }
-      var ptr = _Handle.Read<nint>(_TargetEntityOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float DistanceToPlayer {
+        get {
+            _DistanceToPlayerOffset = _DistanceToPlayerOffset ?? Schema.GetOffset(0x8E908EDDF04AFE0C);
+            return ref _Handle.AsRef<float>(_DistanceToPlayerOffset!.Value);
+        }
     }
-    set {
-      if (_TargetEntityOffset == null) {
-        _TargetEntityOffset = Schema.GetOffset(0x8E908EDD8951B0FB);
-      }
-      Schema.SetString(_Handle, _TargetEntityOffset!.Value, value);
-    }
-  } 
-  private static nint? _DistanceToPlayerOffset;
+    private static nint? _ForceNewLevelUnitOffset;
 
-  public ref float DistanceToPlayer {
-    get {
-      if (_DistanceToPlayerOffset == null) {
-        _DistanceToPlayerOffset = Schema.GetOffset(0x8E908EDDF04AFE0C);
-      }
-      return ref _Handle.AsRef<float>(_DistanceToPlayerOffset!.Value);
+    public ref bool ForceNewLevelUnit {
+        get {
+            _ForceNewLevelUnitOffset = _ForceNewLevelUnitOffset ?? Schema.GetOffset(0x8E908EDD1473BFDE);
+            return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceNewLevelUnitOffset;
+    private static nint? _CheckCoughOffset;
 
-  public ref bool ForceNewLevelUnit {
-    get {
-      if (_ForceNewLevelUnitOffset == null) {
-        _ForceNewLevelUnitOffset = Schema.GetOffset(0x8E908EDD1473BFDE);
-      }
-      return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset!.Value);
+    public ref bool CheckCough {
+        get {
+            _CheckCoughOffset = _CheckCoughOffset ?? Schema.GetOffset(0x8E908EDD25C565C3);
+            return ref _Handle.AsRef<bool>(_CheckCoughOffset!.Value);
+        }
     }
-  }
-  private static nint? _CheckCoughOffset;
+    private static nint? _ThinkDangerousOffset;
 
-  public ref bool CheckCough {
-    get {
-      if (_CheckCoughOffset == null) {
-        _CheckCoughOffset = Schema.GetOffset(0x8E908EDD25C565C3);
-      }
-      return ref _Handle.AsRef<bool>(_CheckCoughOffset!.Value);
+    public ref bool ThinkDangerous {
+        get {
+            _ThinkDangerousOffset = _ThinkDangerousOffset ?? Schema.GetOffset(0x8E908EDDE079F1C9);
+            return ref _Handle.AsRef<bool>(_ThinkDangerousOffset!.Value);
+        }
     }
-  }
-  private static nint? _ThinkDangerousOffset;
+    private static nint? _DangerousTimeOffset;
 
-  public ref bool ThinkDangerous {
-    get {
-      if (_ThinkDangerousOffset == null) {
-        _ThinkDangerousOffset = Schema.GetOffset(0x8E908EDDE079F1C9);
-      }
-      return ref _Handle.AsRef<bool>(_ThinkDangerousOffset!.Value);
+    public ref float DangerousTime {
+        get {
+            _DangerousTimeOffset = _DangerousTimeOffset ?? Schema.GetOffset(0x8E908EDD19BC5644);
+            return ref _Handle.AsRef<float>(_DangerousTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DangerousTimeOffset;
-
-  public ref float DangerousTime {
-    get {
-      if (_DangerousTimeOffset == null) {
-        _DangerousTimeOffset = Schema.GetOffset(0x8E908EDD19BC5644);
-      }
-      return ref _Handle.AsRef<float>(_DangerousTimeOffset!.Value);
-    }
-  }
 
 
 }

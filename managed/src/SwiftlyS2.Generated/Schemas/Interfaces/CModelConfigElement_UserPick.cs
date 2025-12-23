@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigElement_UserPick : CModelConfigElement, ISchemaClass<CModelConfigElement_UserPick> {
+public partial interface CModelConfigElement_UserPick : CModelConfigElement, ISchemaClass<CModelConfigElement_UserPick>
+{
+    static CModelConfigElement_UserPick ISchemaClass<CModelConfigElement_UserPick>.From(nint handle) => new CModelConfigElement_UserPickImpl(handle);
+    static int ISchemaClass<CModelConfigElement_UserPick>.Size => 96;
+    static string? ISchemaClass<CModelConfigElement_UserPick>.ClassName => null;
 
-  static CModelConfigElement_UserPick ISchemaClass<CModelConfigElement_UserPick>.From(nint handle) => new CModelConfigElement_UserPickImpl(handle);
-  static int ISchemaClass<CModelConfigElement_UserPick>.Size => 96;
-  static string? ISchemaClass<CModelConfigElement_UserPick>.ClassName => null;
 
-  
-  public ref CUtlVector<CUtlString> Choices { get; }
+    public ref CUtlVector<CUtlString> Choices { get; }
 
 
 }

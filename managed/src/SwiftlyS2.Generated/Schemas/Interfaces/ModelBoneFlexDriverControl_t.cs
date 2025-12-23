@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ModelBoneFlexDriverControl_t : ISchemaClass<ModelBoneFlexDriverControl_t> {
+public partial interface ModelBoneFlexDriverControl_t : ISchemaClass<ModelBoneFlexDriverControl_t>
+{
+    static ModelBoneFlexDriverControl_t ISchemaClass<ModelBoneFlexDriverControl_t>.From(nint handle) => new ModelBoneFlexDriverControl_tImpl(handle);
+    static int ISchemaClass<ModelBoneFlexDriverControl_t>.Size => 32;
+    static string? ISchemaClass<ModelBoneFlexDriverControl_t>.ClassName => null;
 
-  static ModelBoneFlexDriverControl_t ISchemaClass<ModelBoneFlexDriverControl_t>.From(nint handle) => new ModelBoneFlexDriverControl_tImpl(handle);
-  static int ISchemaClass<ModelBoneFlexDriverControl_t>.Size => 32;
-  static string? ISchemaClass<ModelBoneFlexDriverControl_t>.ClassName => null;
 
-  
-  public ref ModelBoneFlexComponent_t BoneComponent { get; }
-  
-  public string FlexController { get; set; }
-  
-  public ref uint FlexControllerToken { get; }
-  
-  public ref float Min { get; }
-  
-  public ref float Max { get; }
+    public ref ModelBoneFlexComponent_t BoneComponent { get; }
+
+    public string FlexController { get; set; }
+
+    public ref uint FlexControllerToken { get; }
+
+    public ref float Min { get; }
+
+    public ref float Max { get; }
 
 
 }

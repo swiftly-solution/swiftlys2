@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDampedValueUpdateItem : ISchemaClass<CDampedValueUpdateItem> {
+public partial interface CDampedValueUpdateItem : ISchemaClass<CDampedValueUpdateItem>
+{
+    static CDampedValueUpdateItem ISchemaClass<CDampedValueUpdateItem>.From(nint handle) => new CDampedValueUpdateItemImpl(handle);
+    static int ISchemaClass<CDampedValueUpdateItem>.Size => 40;
+    static string? ISchemaClass<CDampedValueUpdateItem>.ClassName => null;
 
-  static CDampedValueUpdateItem ISchemaClass<CDampedValueUpdateItem>.From(nint handle) => new CDampedValueUpdateItemImpl(handle);
-  static int ISchemaClass<CDampedValueUpdateItem>.Size => 40;
-  static string? ISchemaClass<CDampedValueUpdateItem>.ClassName => null;
 
-  
-  public CAnimInputDamping Damping { get; }
-  
-  public CAnimParamHandle ParamIn { get; }
-  
-  public CAnimParamHandle ParamOut { get; }
+    public CAnimInputDamping Damping { get; }
+
+    public CAnimParamHandle ParamIn { get; }
+
+    public CAnimParamHandle ParamOut { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRagdollManager : CBaseEntity, ISchemaClass<CRagdollManager> {
+public partial interface CRagdollManager : CBaseEntity, ISchemaClass<CRagdollManager>
+{
+    static CRagdollManager ISchemaClass<CRagdollManager>.From(nint handle) => new CRagdollManagerImpl(handle);
+    static int ISchemaClass<CRagdollManager>.Size => 1280;
+    static string? ISchemaClass<CRagdollManager>.ClassName => "game_ragdoll_manager";
 
-  static CRagdollManager ISchemaClass<CRagdollManager>.From(nint handle) => new CRagdollManagerImpl(handle);
-  static int ISchemaClass<CRagdollManager>.Size => 1280;
-  static string? ISchemaClass<CRagdollManager>.ClassName => "game_ragdoll_manager";
 
-  
-  public ref byte CurrentMaxRagdollCount { get; }
-  
-  public ref int MaxRagdollCount { get; }
-  
-  public ref bool SaveImportant { get; }
-  
-  public ref bool CanTakeDamage { get; }
+    public ref byte CurrentMaxRagdollCount { get; }
 
-  public void CurrentMaxRagdollCountUpdated();
+    public ref int MaxRagdollCount { get; }
+
+    public ref bool SaveImportant { get; }
+
+    public ref bool CanTakeDamage { get; }
+
+    public void CurrentMaxRagdollCountUpdated();
 }

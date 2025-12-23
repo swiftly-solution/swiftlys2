@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerDetectBulletFireImpl : CBaseTriggerImpl, CTriggerDetectBulletFire {
+internal partial class CTriggerDetectBulletFireImpl : CBaseTriggerImpl, CTriggerDetectBulletFire
+{
+    public CTriggerDetectBulletFireImpl(nint handle) : base(handle) { }
 
-  public CTriggerDetectBulletFireImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PlayerFireOnlyOffset;
 
-  private static nint? _PlayerFireOnlyOffset;
-
-  public ref bool PlayerFireOnly {
-    get {
-      if (_PlayerFireOnlyOffset == null) {
-        _PlayerFireOnlyOffset = Schema.GetOffset(0x93930A3D56D51CFE);
-      }
-      return ref _Handle.AsRef<bool>(_PlayerFireOnlyOffset!.Value);
+    public ref bool PlayerFireOnly {
+        get {
+            _PlayerFireOnlyOffset = _PlayerFireOnlyOffset ?? Schema.GetOffset(0x93930A3D56D51CFE);
+            return ref _Handle.AsRef<bool>(_PlayerFireOnlyOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnDetectedBulletFireOffset;
+    private static nint? _OnDetectedBulletFireOffset;
 
-  public CEntityIOOutput OnDetectedBulletFire {
-    get {
-      if (_OnDetectedBulletFireOffset == null) {
-        _OnDetectedBulletFireOffset = Schema.GetOffset(0x93930A3D11D6C936);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnDetectedBulletFireOffset!.Value);
+    public ref CEntityIOOutput OnDetectedBulletFire {
+        get {
+            _OnDetectedBulletFireOffset = _OnDetectedBulletFireOffset ?? Schema.GetOffset(0x93930A3D11D6C936);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDetectedBulletFireOffset!.Value);
+        }
     }
-  }
 
 
 }

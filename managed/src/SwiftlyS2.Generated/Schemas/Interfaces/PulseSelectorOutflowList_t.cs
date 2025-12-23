@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseSelectorOutflowList_t : ISchemaClass<PulseSelectorOutflowList_t> {
+public partial interface PulseSelectorOutflowList_t : ISchemaClass<PulseSelectorOutflowList_t>
+{
+    static PulseSelectorOutflowList_t ISchemaClass<PulseSelectorOutflowList_t>.From(nint handle) => new PulseSelectorOutflowList_tImpl(handle);
+    static int ISchemaClass<PulseSelectorOutflowList_t>.Size => 24;
+    static string? ISchemaClass<PulseSelectorOutflowList_t>.ClassName => null;
 
-  static PulseSelectorOutflowList_t ISchemaClass<PulseSelectorOutflowList_t>.From(nint handle) => new PulseSelectorOutflowList_tImpl(handle);
-  static int ISchemaClass<PulseSelectorOutflowList_t>.Size => 24;
-  static string? ISchemaClass<PulseSelectorOutflowList_t>.ClassName => null;
 
-  
-  public ref CUtlVector<OutflowWithRequirements_t> Outflows { get; }
+    public ref CUtlVector<OutflowWithRequirements_t> Outflows { get; }
 
 
 }

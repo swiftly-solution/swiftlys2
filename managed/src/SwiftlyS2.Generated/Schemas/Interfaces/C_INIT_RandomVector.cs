@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomVector : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomVector> {
+public partial interface C_INIT_RandomVector : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomVector>
+{
+    static C_INIT_RandomVector ISchemaClass<C_INIT_RandomVector>.From(nint handle) => new C_INIT_RandomVectorImpl(handle);
+    static int ISchemaClass<C_INIT_RandomVector>.Size => 512;
+    static string? ISchemaClass<C_INIT_RandomVector>.ClassName => null;
 
-  static C_INIT_RandomVector ISchemaClass<C_INIT_RandomVector>.From(nint handle) => new C_INIT_RandomVectorImpl(handle);
-  static int ISchemaClass<C_INIT_RandomVector>.Size => 512;
-  static string? ISchemaClass<C_INIT_RandomVector>.ClassName => null;
 
-  
-  public ref Vector Min { get; }
-  
-  public ref Vector Max { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CRandomNumberGeneratorParameters RandomnessParameters { get; }
+    public ref Vector Min { get; }
+
+    public ref Vector Max { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CRandomNumberGeneratorParameters RandomnessParameters { get; }
 
 
 }

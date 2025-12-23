@@ -6,115 +6,87 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CColorCorrectionVolumeImpl : CBaseTriggerImpl, CColorCorrectionVolume {
+internal partial class CColorCorrectionVolumeImpl : CBaseTriggerImpl, CColorCorrectionVolume
+{
+    public CColorCorrectionVolumeImpl(nint handle) : base(handle) { }
 
-  public CColorCorrectionVolumeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaxWeightOffset;
 
-  private static nint? _MaxWeightOffset;
-
-  public ref float MaxWeight {
-    get {
-      if (_MaxWeightOffset == null) {
-        _MaxWeightOffset = Schema.GetOffset(0x78A9E01BEE8A2F2D);
-      }
-      return ref _Handle.AsRef<float>(_MaxWeightOffset!.Value);
-    }
-  }
-  private static nint? _FadeDurationOffset;
-
-  public ref float FadeDuration {
-    get {
-      if (_FadeDurationOffset == null) {
-        _FadeDurationOffset = Schema.GetOffset(0x78A9E01B46550027);
-      }
-      return ref _Handle.AsRef<float>(_FadeDurationOffset!.Value);
-    }
-  }
-  private static nint? _WeightOffset;
-
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0x78A9E01BBF415739);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
-    }
-  }
-  private static nint? _LookupFilenameOffset;
-
-  public string LookupFilename {
-    get {
-        if (_LookupFilenameOffset == null) {
-            _LookupFilenameOffset = Schema.GetOffset(0x78A9E01B2611A2C6);
+    public ref float MaxWeight {
+        get {
+            _MaxWeightOffset = _MaxWeightOffset ?? Schema.GetOffset(0x78A9E01BEE8A2F2D);
+            return ref _Handle.AsRef<float>(_MaxWeightOffset!.Value);
         }
-        var ptr = _Handle + _LookupFilenameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_LookupFilenameOffset == null) {
-            _LookupFilenameOffset = Schema.GetOffset(0x78A9E01B2611A2C6);
+    private static nint? _FadeDurationOffset;
+
+    public ref float FadeDuration {
+        get {
+            _FadeDurationOffset = _FadeDurationOffset ?? Schema.GetOffset(0x78A9E01B46550027);
+            return ref _Handle.AsRef<float>(_FadeDurationOffset!.Value);
         }
-        Schema.SetFixedString(_Handle, _LookupFilenameOffset!.Value, value, 512);
     }
-  } 
-  private static nint? _LastEnterWeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref float LastEnterWeight {
-    get {
-      if (_LastEnterWeightOffset == null) {
-        _LastEnterWeightOffset = Schema.GetOffset(0x78A9E01B2F53D64D);
-      }
-      return ref _Handle.AsRef<float>(_LastEnterWeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x78A9E01BBF415739);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastEnterTimeOffset;
+    private static nint? _LookupFilenameOffset;
 
-  public GameTime_t LastEnterTime {
-    get {
-      if (_LastEnterTimeOffset == null) {
-        _LastEnterTimeOffset = Schema.GetOffset(0x78A9E01B01977F10);
-      }
-      return new GameTime_tImpl(_Handle + _LastEnterTimeOffset!.Value);
+    public string LookupFilename {
+        get {
+            _LookupFilenameOffset = _LookupFilenameOffset ?? Schema.GetOffset(0x78A9E01B2611A2C6);
+            return Schema.GetString(_Handle + _LookupFilenameOffset!.Value);
+        }
+        set {
+            _LookupFilenameOffset = _LookupFilenameOffset ?? Schema.GetOffset(0x78A9E01B2611A2C6);
+            Schema.SetFixedString(_Handle, _LookupFilenameOffset!.Value, value, 512);
+        }
+    } 
+    private static nint? _LastEnterWeightOffset;
+
+    public ref float LastEnterWeight {
+        get {
+            _LastEnterWeightOffset = _LastEnterWeightOffset ?? Schema.GetOffset(0x78A9E01B2F53D64D);
+            return ref _Handle.AsRef<float>(_LastEnterWeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastExitWeightOffset;
+    private static nint? _LastEnterTimeOffset;
 
-  public ref float LastExitWeight {
-    get {
-      if (_LastExitWeightOffset == null) {
-        _LastExitWeightOffset = Schema.GetOffset(0x78A9E01B59C9642D);
-      }
-      return ref _Handle.AsRef<float>(_LastExitWeightOffset!.Value);
+    public GameTime_t LastEnterTime {
+        get {
+            _LastEnterTimeOffset = _LastEnterTimeOffset ?? Schema.GetOffset(0x78A9E01B01977F10);
+            return new GameTime_tImpl(_Handle + _LastEnterTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastExitTimeOffset;
+    private static nint? _LastExitWeightOffset;
 
-  public GameTime_t LastExitTime {
-    get {
-      if (_LastExitTimeOffset == null) {
-        _LastExitTimeOffset = Schema.GetOffset(0x78A9E01B183C8DF0);
-      }
-      return new GameTime_tImpl(_Handle + _LastExitTimeOffset!.Value);
+    public ref float LastExitWeight {
+        get {
+            _LastExitWeightOffset = _LastExitWeightOffset ?? Schema.GetOffset(0x78A9E01B59C9642D);
+            return ref _Handle.AsRef<float>(_LastExitWeightOffset!.Value);
+        }
     }
-  }
+    private static nint? _LastExitTimeOffset;
 
-  public void MaxWeightUpdated() {
-    Schema.Update(_Handle, 0x78A9E01BEE8A2F2D);
-  }
-  public void FadeDurationUpdated() {
-    Schema.Update(_Handle, 0x78A9E01B46550027);
-  }
-  public void WeightUpdated() {
-    Schema.Update(_Handle, 0x78A9E01BBF415739);
-  }
-  public void LookupFilenameUpdated() {
-    Schema.Update(_Handle, 0x78A9E01B2611A2C6);
-  }
+    public GameTime_t LastExitTime {
+        get {
+            _LastExitTimeOffset = _LastExitTimeOffset ?? Schema.GetOffset(0x78A9E01B183C8DF0);
+            return new GameTime_tImpl(_Handle + _LastExitTimeOffset!.Value);
+        }
+    }
+
+    public void MaxWeightUpdated() => Schema.Update(_Handle, 0x78A9E01BEE8A2F2D);
+    public void FadeDurationUpdated() => Schema.Update(_Handle, 0x78A9E01B46550027);
+    public void WeightUpdated() => Schema.Update(_Handle, 0x78A9E01BBF415739);
+    public void LookupFilenameUpdated() => Schema.Update(_Handle, 0x78A9E01B2611A2C6);
 }

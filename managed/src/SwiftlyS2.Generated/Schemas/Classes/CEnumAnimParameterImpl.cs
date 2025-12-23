@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnumAnimParameterImpl : CConcreteAnimParameterImpl, CEnumAnimParameter {
+internal partial class CEnumAnimParameterImpl : CConcreteAnimParameterImpl, CEnumAnimParameter
+{
+    public CEnumAnimParameterImpl(nint handle) : base(handle) { }
 
-  public CEnumAnimParameterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DefaultValueOffset;
 
-  private static nint? _DefaultValueOffset;
-
-  public ref byte DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0xCCD4BF1DBBE0341F);
-      }
-      return ref _Handle.AsRef<byte>(_DefaultValueOffset!.Value);
+    public ref byte DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xCCD4BF1DBBE0341F);
+            return ref _Handle.AsRef<byte>(_DefaultValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnumOptionsOffset;
+    private static nint? _EnumOptionsOffset;
 
-  public ref CUtlVector<CUtlString> EnumOptions {
-    get {
-      if (_EnumOptionsOffset == null) {
-        _EnumOptionsOffset = Schema.GetOffset(0xCCD4BF1D5A08D71E);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_EnumOptionsOffset!.Value);
+    public ref CUtlVector<CUtlString> EnumOptions {
+        get {
+            _EnumOptionsOffset = _EnumOptionsOffset ?? Schema.GetOffset(0xCCD4BF1D5A08D71E);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_EnumOptionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnumReferencedOffset;
+    private static nint? _EnumReferencedOffset;
 
-  public ref CUtlVector<ulong> EnumReferenced {
-    get {
-      if (_EnumReferencedOffset == null) {
-        _EnumReferencedOffset = Schema.GetOffset(0xCCD4BF1D5C66779B);
-      }
-      return ref _Handle.AsRef<CUtlVector<ulong>>(_EnumReferencedOffset!.Value);
+    public ref CUtlVector<ulong> EnumReferenced {
+        get {
+            _EnumReferencedOffset = _EnumReferencedOffset ?? Schema.GetOffset(0xCCD4BF1D5C66779B);
+            return ref _Handle.AsRef<CUtlVector<ulong>>(_EnumReferencedOffset!.Value);
+        }
     }
-  }
 
 
 }

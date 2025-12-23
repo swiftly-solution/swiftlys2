@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -145,22 +145,14 @@ void CPlayer::SendMsg(MessageType type, const std::string& message, int duration
             centerMessageText = message;
         }
     }
-    else if (type == MessageType::Console)
-    {
-        if (message.size() == 0)
-            return;
-
-        auto msg = ClearColors(message);
-        auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
-        if (!engine)
-            return;
-
-        std::string with_newline = msg + "\n";
-        engine->ClientPrintf(CPlayerSlot(m_iPlayerId), with_newline.c_str());
-    }
     else
     {
         auto msg = RemoveHtmlTags(message);
+        if (type == MessageType::Console)
+        {
+            msg = ClearColors(msg);
+            msg += "\n";
+        }
         if (msg.size() > 0)
         {
             if (msg.ends_with("\n"))
@@ -206,20 +198,14 @@ bool CPlayer::IsAuthorized()
     return m_bAuthorized;
 }
 
+void CPlayer::SetFakeClient(bool state)
+{
+    m_bIsFakeClient = state;
+}
+
 bool CPlayer::IsFakeClient()
 {
-    auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    if (!schema)
-        return true;
-
-    if (!GetController())
-        return true;
-
-    uint32_t* flagsPtr = (uint32_t*)schema->GetPropPtr(GetController(), CBaseEntity_m_fFlags);
-    if (flagsPtr == nullptr)
-        return true;
-
-    return (*flagsPtr & Flags_t::FL_FAKECLIENT);
+    return m_bIsFakeClient;
 }
 
 uint32_t CPlayer::GetConnectedTime()
@@ -239,6 +225,9 @@ void CPlayer::SetUnauthorizedSteamID(uint64_t steamID)
 
 uint64_t CPlayer::GetUnauthorizedSteamID()
 {
+    if (IsFakeClient())
+        return 0;
+
     auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
     if (!engine)
         return m_uUnauthorizedSteamID;
@@ -252,15 +241,16 @@ uint64_t CPlayer::GetUnauthorizedSteamID()
 
 uint64_t CPlayer::GetSteamID()
 {
+    if (IsFakeClient())
+        return 0;
+
     auto config = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
     if (!config)
         return 0;
+
     auto s = std::get_if<std::string>(&config->GetValue("core.SteamAuth.Mode"));
     if (m_bAuthorized)
     {
-        if (IsFakeClient())
-            return 0;
-
         auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
         if (!engine)
             return 0;

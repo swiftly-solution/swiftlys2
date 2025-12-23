@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysicsSpring : CBaseEntity, ISchemaClass<CPhysicsSpring> {
+public partial interface CPhysicsSpring : CBaseEntity, ISchemaClass<CPhysicsSpring>
+{
+    static CPhysicsSpring ISchemaClass<CPhysicsSpring>.From(nint handle) => new CPhysicsSpringImpl(handle);
+    static int ISchemaClass<CPhysicsSpring>.Size => 1336;
+    static string? ISchemaClass<CPhysicsSpring>.ClassName => "phys_spring";
 
-  static CPhysicsSpring ISchemaClass<CPhysicsSpring>.From(nint handle) => new CPhysicsSpringImpl(handle);
-  static int ISchemaClass<CPhysicsSpring>.Size => 1336;
-  static string? ISchemaClass<CPhysicsSpring>.ClassName => "phys_spring";
 
-  
-  public ref float Frequency { get; }
-  
-  public ref float DampingRatio { get; }
-  
-  public ref float RestLength { get; }
-  
-  public string NameAttachStart { get; set; }
-  
-  public string NameAttachEnd { get; set; }
-  
-  public ref Vector Start { get; }
-  
-  public ref Vector End { get; }
-  
-  public ref uint TeleportTick { get; }
+    public ref float Frequency { get; }
+
+    public ref float DampingRatio { get; }
+
+    public ref float RestLength { get; }
+
+    public string NameAttachStart { get; set; }
+
+    public string NameAttachEnd { get; set; }
+
+    public ref Vector Start { get; }
+
+    public ref Vector End { get; }
+
+    public ref uint TeleportTick { get; }
 
 
 }

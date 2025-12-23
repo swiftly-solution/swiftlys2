@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatEaseNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatEaseNode__CDefinition {
+internal partial class CNmFloatEaseNode__CDefinitionImpl : CNmFloatValueNode__CDefinitionImpl, CNmFloatEaseNode__CDefinition
+{
+    public CNmFloatEaseNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFloatEaseNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EaseTimeOffset;
 
-  private static nint? _EaseTimeOffset;
-
-  public ref float EaseTime {
-    get {
-      if (_EaseTimeOffset == null) {
-        _EaseTimeOffset = Schema.GetOffset(0x9D7103D0A54FCC);
-      }
-      return ref _Handle.AsRef<float>(_EaseTimeOffset!.Value);
+    public ref float EaseTime {
+        get {
+            _EaseTimeOffset = _EaseTimeOffset ?? Schema.GetOffset(0x9D7103D0A54FCC);
+            return ref _Handle.AsRef<float>(_EaseTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartValueOffset;
+    private static nint? _StartValueOffset;
 
-  public ref float StartValue {
-    get {
-      if (_StartValueOffset == null) {
-        _StartValueOffset = Schema.GetOffset(0x9D710351C82C2A);
-      }
-      return ref _Handle.AsRef<float>(_StartValueOffset!.Value);
+    public ref float StartValue {
+        get {
+            _StartValueOffset = _StartValueOffset ?? Schema.GetOffset(0x9D710351C82C2A);
+            return ref _Handle.AsRef<float>(_StartValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputValueNodeIdxOffset;
+    private static nint? _InputValueNodeIdxOffset;
 
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0x9D710395E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x9D710395E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EasingOpOffset;
+    private static nint? _EasingOpOffset;
 
-  public ref NmEasingOperation_t EasingOp {
-    get {
-      if (_EasingOpOffset == null) {
-        _EasingOpOffset = Schema.GetOffset(0x9D7103CF457EAF);
-      }
-      return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset!.Value);
+    public ref NmEasingOperation_t EasingOp {
+        get {
+            _EasingOpOffset = _EasingOpOffset ?? Schema.GetOffset(0x9D7103CF457EAF);
+            return ref _Handle.AsRef<NmEasingOperation_t>(_EasingOpOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseStartValueOffset;
+    private static nint? _UseStartValueOffset;
 
-  public ref bool UseStartValue {
-    get {
-      if (_UseStartValueOffset == null) {
-        _UseStartValueOffset = Schema.GetOffset(0x9D710306DE6089);
-      }
-      return ref _Handle.AsRef<bool>(_UseStartValueOffset!.Value);
+    public ref bool UseStartValue {
+        get {
+            _UseStartValueOffset = _UseStartValueOffset ?? Schema.GetOffset(0x9D710306DE6089);
+            return ref _Handle.AsRef<bool>(_UseStartValueOffset!.Value);
+        }
     }
-  }
 
 
 }

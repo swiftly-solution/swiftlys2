@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBoneConstraintPoseSpaceMorph__Input_t : ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t> {
+public partial interface CBoneConstraintPoseSpaceMorph__Input_t : ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t>
+{
+    static CBoneConstraintPoseSpaceMorph__Input_t ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t>.From(nint handle) => new CBoneConstraintPoseSpaceMorph__Input_tImpl(handle);
+    static int ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t>.Size => 40;
+    static string? ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t>.ClassName => null;
 
-  static CBoneConstraintPoseSpaceMorph__Input_t ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t>.From(nint handle) => new CBoneConstraintPoseSpaceMorph__Input_tImpl(handle);
-  static int ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t>.Size => 40;
-  static string? ISchemaClass<CBoneConstraintPoseSpaceMorph__Input_t>.ClassName => null;
 
-  
-  public ref Vector InputValue { get; }
-  
-  public ref CUtlVector<float> OutputWeightList { get; }
+    public ref Vector InputValue { get; }
+
+    public ref CUtlVector<float> OutputWeightList { get; }
 
 
 }

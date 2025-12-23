@@ -6,81 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFilterEnemyImpl : CBaseFilterImpl, CFilterEnemy {
+internal partial class CFilterEnemyImpl : CBaseFilterImpl, CFilterEnemy
+{
+    public CFilterEnemyImpl(nint handle) : base(handle) { }
 
-  public CFilterEnemyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EnemyNameOffset;
 
-  private static nint? _EnemyNameOffset;
+    public string EnemyName {
+        get {
+            _EnemyNameOffset = _EnemyNameOffset ?? Schema.GetOffset(0x23F92540C9E922A8);
+            return Schema.GetString(_Handle.Read<nint>(_EnemyNameOffset!.Value));
+        }
+        set {
+            _EnemyNameOffset = _EnemyNameOffset ?? Schema.GetOffset(0x23F92540C9E922A8);
+            Schema.SetString(_Handle, _EnemyNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _RadiusOffset;
 
-  public string EnemyName {
-    get {
-      if (_EnemyNameOffset == null) {
-        _EnemyNameOffset = Schema.GetOffset(0x23F92540C9E922A8);
-      }
-      var ptr = _Handle.Read<nint>(_EnemyNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x23F925405ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-    set {
-      if (_EnemyNameOffset == null) {
-        _EnemyNameOffset = Schema.GetOffset(0x23F92540C9E922A8);
-      }
-      Schema.SetString(_Handle, _EnemyNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _RadiusOffset;
+    private static nint? _OuterRadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x23F925405ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float OuterRadius {
+        get {
+            _OuterRadiusOffset = _OuterRadiusOffset ?? Schema.GetOffset(0x23F925407B66A818);
+            return ref _Handle.AsRef<float>(_OuterRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _OuterRadiusOffset;
+    private static nint? _MaxSquadmatesPerEnemyOffset;
 
-  public ref float OuterRadius {
-    get {
-      if (_OuterRadiusOffset == null) {
-        _OuterRadiusOffset = Schema.GetOffset(0x23F925407B66A818);
-      }
-      return ref _Handle.AsRef<float>(_OuterRadiusOffset!.Value);
+    public ref int MaxSquadmatesPerEnemy {
+        get {
+            _MaxSquadmatesPerEnemyOffset = _MaxSquadmatesPerEnemyOffset ?? Schema.GetOffset(0x23F925407AA226A0);
+            return ref _Handle.AsRef<int>(_MaxSquadmatesPerEnemyOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxSquadmatesPerEnemyOffset;
+    private static nint? _PlayerNameOffset;
 
-  public ref int MaxSquadmatesPerEnemy {
-    get {
-      if (_MaxSquadmatesPerEnemyOffset == null) {
-        _MaxSquadmatesPerEnemyOffset = Schema.GetOffset(0x23F925407AA226A0);
-      }
-      return ref _Handle.AsRef<int>(_MaxSquadmatesPerEnemyOffset!.Value);
-    }
-  }
-  private static nint? _PlayerNameOffset;
-
-  public string PlayerName {
-    get {
-      if (_PlayerNameOffset == null) {
-        _PlayerNameOffset = Schema.GetOffset(0x23F92540DE61DD3B);
-      }
-      var ptr = _Handle.Read<nint>(_PlayerNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PlayerNameOffset == null) {
-        _PlayerNameOffset = Schema.GetOffset(0x23F92540DE61DD3B);
-      }
-      Schema.SetString(_Handle, _PlayerNameOffset!.Value, value);
-    }
-  } 
+    public string PlayerName {
+        get {
+            _PlayerNameOffset = _PlayerNameOffset ?? Schema.GetOffset(0x23F92540DE61DD3B);
+            return Schema.GetString(_Handle.Read<nint>(_PlayerNameOffset!.Value));
+        }
+        set {
+            _PlayerNameOffset = _PlayerNameOffset ?? Schema.GetOffset(0x23F92540DE61DD3B);
+            Schema.SetString(_Handle, _PlayerNameOffset!.Value, value);
+        }
+    } 
 
 
 }

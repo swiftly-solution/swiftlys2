@@ -8,34 +8,33 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLeanMatrixUpdateNode : CLeafUpdateNode, ISchemaClass<CLeanMatrixUpdateNode> {
+public partial interface CLeanMatrixUpdateNode : CLeafUpdateNode, ISchemaClass<CLeanMatrixUpdateNode>
+{
+    static CLeanMatrixUpdateNode ISchemaClass<CLeanMatrixUpdateNode>.From(nint handle) => new CLeanMatrixUpdateNodeImpl(handle);
+    static int ISchemaClass<CLeanMatrixUpdateNode>.Size => 240;
+    static string? ISchemaClass<CLeanMatrixUpdateNode>.ClassName => null;
 
-  static CLeanMatrixUpdateNode ISchemaClass<CLeanMatrixUpdateNode>.From(nint handle) => new CLeanMatrixUpdateNodeImpl(handle);
-  static int ISchemaClass<CLeanMatrixUpdateNode>.Size => 240;
-  static string? ISchemaClass<CLeanMatrixUpdateNode>.ClassName => null;
 
-  
-  // int32[3]
-  public SchemaUntypedField FrameCorners { get; }
-  
-  // CPoseHandle
-  public SchemaUntypedField Poses { get; }
-  
-  public CAnimInputDamping Damping { get; }
-  
-  public ref AnimVectorSource BlendSource { get; }
-  
-  public CAnimParamHandle ParamIndex { get; }
-  
-  public ref Vector VerticalAxis { get; }
-  
-  public ref Vector HorizontalAxis { get; }
-  
-  public HSequence Sequence { get; }
-  
-  public ref float MaxValue { get; }
-  
-  public ref int SequenceMaxFrame { get; }
+    // int32[3]
+    public SchemaUntypedField FrameCorners { get; }
+
+    public ISchemaClassFixedArray<CPoseHandle> Poses { get; }
+
+    public CAnimInputDamping Damping { get; }
+
+    public ref AnimVectorSource BlendSource { get; }
+
+    public CAnimParamHandle ParamIndex { get; }
+
+    public ref Vector VerticalAxis { get; }
+
+    public ref Vector HorizontalAxis { get; }
+
+    public HSequence Sequence { get; }
+
+    public ref float MaxValue { get; }
+
+    public ref int SequenceMaxFrame { get; }
 
 
 }

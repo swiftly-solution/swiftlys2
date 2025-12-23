@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PhysSoftbodyDesc_t : ISchemaClass<PhysSoftbodyDesc_t> {
+public partial interface PhysSoftbodyDesc_t : ISchemaClass<PhysSoftbodyDesc_t>
+{
+    static PhysSoftbodyDesc_t ISchemaClass<PhysSoftbodyDesc_t>.From(nint handle) => new PhysSoftbodyDesc_tImpl(handle);
+    static int ISchemaClass<PhysSoftbodyDesc_t>.Size => 144;
+    static string? ISchemaClass<PhysSoftbodyDesc_t>.ClassName => null;
 
-  static PhysSoftbodyDesc_t ISchemaClass<PhysSoftbodyDesc_t>.From(nint handle) => new PhysSoftbodyDesc_tImpl(handle);
-  static int ISchemaClass<PhysSoftbodyDesc_t>.Size => 144;
-  static string? ISchemaClass<PhysSoftbodyDesc_t>.ClassName => null;
 
-  
-  public ref CUtlVector<uint> ParticleBoneHash { get; }
-  
-  public ref CUtlVector<RnSoftbodyParticle_t> Particles { get; }
-  
-  public ref CUtlVector<RnSoftbodySpring_t> Springs { get; }
-  
-  public ref CUtlVector<RnSoftbodyCapsule_t> Capsules { get; }
-  
-  public ref CUtlVector<CTransform> InitPose { get; }
-  
-  public ref CUtlVector<CUtlString> ParticleBoneName { get; }
+    public ref CUtlVector<uint> ParticleBoneHash { get; }
+
+    public ref CUtlVector<RnSoftbodyParticle_t> Particles { get; }
+
+    public ref CUtlVector<RnSoftbodySpring_t> Springs { get; }
+
+    public ref CUtlVector<RnSoftbodyCapsule_t> Capsules { get; }
+
+    public ref CUtlVector<CTransform> InitPose { get; }
+
+    public ref CUtlVector<CUtlString> ParticleBoneName { get; }
 
 
 }

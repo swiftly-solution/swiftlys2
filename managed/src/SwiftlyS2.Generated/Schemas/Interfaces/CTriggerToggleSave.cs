@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerToggleSave : CBaseTrigger, ISchemaClass<CTriggerToggleSave> {
-
-  static CTriggerToggleSave ISchemaClass<CTriggerToggleSave>.From(nint handle) => new CTriggerToggleSaveImpl(handle);
-  static int ISchemaClass<CTriggerToggleSave>.Size => 2472;
-  static string? ISchemaClass<CTriggerToggleSave>.ClassName => "trigger_togglesave";
+public partial interface CTriggerToggleSave : CBaseTrigger, ISchemaClass<CTriggerToggleSave>
+{
+    static CTriggerToggleSave ISchemaClass<CTriggerToggleSave>.From(nint handle) => new CTriggerToggleSaveImpl(handle);
+    static int ISchemaClass<CTriggerToggleSave>.Size => 2472;
+    static string? ISchemaClass<CTriggerToggleSave>.ClassName => "trigger_togglesave";
 
 
 

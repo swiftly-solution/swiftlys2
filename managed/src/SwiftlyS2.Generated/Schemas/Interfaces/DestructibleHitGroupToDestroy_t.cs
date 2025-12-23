@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface DestructibleHitGroupToDestroy_t : ISchemaClass<DestructibleHitGroupToDestroy_t> {
+public partial interface DestructibleHitGroupToDestroy_t : ISchemaClass<DestructibleHitGroupToDestroy_t>
+{
+    static DestructibleHitGroupToDestroy_t ISchemaClass<DestructibleHitGroupToDestroy_t>.From(nint handle) => new DestructibleHitGroupToDestroy_tImpl(handle);
+    static int ISchemaClass<DestructibleHitGroupToDestroy_t>.Size => 8;
+    static string? ISchemaClass<DestructibleHitGroupToDestroy_t>.ClassName => null;
 
-  static DestructibleHitGroupToDestroy_t ISchemaClass<DestructibleHitGroupToDestroy_t>.From(nint handle) => new DestructibleHitGroupToDestroy_tImpl(handle);
-  static int ISchemaClass<DestructibleHitGroupToDestroy_t>.Size => 8;
-  static string? ISchemaClass<DestructibleHitGroupToDestroy_t>.ClassName => null;
 
-  
-  public ref HitGroup_t HitGroup { get; }
-  
-  public ref int MaxDamageLevel { get; }
+    public ref HitGroup_t HitGroup { get; }
+
+    public ref int MaxDamageLevel { get; }
 
 
 }

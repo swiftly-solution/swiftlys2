@@ -8,112 +8,112 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleFloatInput : CParticleInput, ISchemaClass<CParticleFloatInput> {
+public partial interface CParticleFloatInput : CParticleInput, ISchemaClass<CParticleFloatInput>
+{
+    static CParticleFloatInput ISchemaClass<CParticleFloatInput>.From(nint handle) => new CParticleFloatInputImpl(handle);
+    static int ISchemaClass<CParticleFloatInput>.Size => 368;
+    static string? ISchemaClass<CParticleFloatInput>.ClassName => null;
 
-  static CParticleFloatInput ISchemaClass<CParticleFloatInput>.From(nint handle) => new CParticleFloatInputImpl(handle);
-  static int ISchemaClass<CParticleFloatInput>.Size => 368;
-  static string? ISchemaClass<CParticleFloatInput>.ClassName => null;
 
-  
-  public ref ParticleFloatType_t Type { get; }
-  
-  public ref ParticleFloatMapType_t MapType { get; }
-  
-  public ref float LiteralValue { get; }
-  
-  // CParticleNamedValueRef
-  public SchemaUntypedField NamedValue { get; }
-  
-  public ref int ControlPoint { get; }
-  
-  public ParticleAttributeIndex_t ScalarAttribute { get; }
-  
-  public ParticleAttributeIndex_t VectorAttribute { get; }
-  
-  public ref int VectorComponent { get; }
-  
-  public ref bool ReverseOrder { get; }
-  
-  public ref float RandomMin { get; }
-  
-  public ref float RandomMax { get; }
-  
-  public ref bool HasRandomSignFlip { get; }
-  
-  public ref int RandomSeed { get; }
-  
-  public ref ParticleFloatRandomMode_t RandomMode { get; }
-  
-  public string StrSnapshotSubset { get; set; }
-  
-  public ref float LOD0 { get; }
-  
-  public ref float LOD1 { get; }
-  
-  public ref float LOD2 { get; }
-  
-  public ref float LOD3 { get; }
-  
-  public ParticleAttributeIndex_t NoiseInputVectorAttribute { get; }
-  
-  public ref float NoiseOutputMin { get; }
-  
-  public ref float NoiseOutputMax { get; }
-  
-  public ref float NoiseScale { get; }
-  
-  public ref Vector NoiseOffsetRate { get; }
-  
-  public ref float NoiseOffset { get; }
-  
-  public ref int NoiseOctaves { get; }
-  
-  public ref PFNoiseTurbulence_t NoiseTurbulence { get; }
-  
-  public ref PFNoiseType_t NoiseType { get; }
-  
-  public ref PFNoiseModifier_t NoiseModifier { get; }
-  
-  public ref float NoiseTurbulenceScale { get; }
-  
-  public ref float NoiseTurbulenceMix { get; }
-  
-  public ref float NoiseImgPreviewScale { get; }
-  
-  public ref bool NoiseImgPreviewLive { get; }
-  
-  public ref float NoCameraFallback { get; }
-  
-  public ref bool UseBoundsCenter { get; }
-  
-  public ref ParticleFloatInputMode_t InputMode { get; }
-  
-  public ref float MultFactor { get; }
-  
-  public ref float Input0 { get; }
-  
-  public ref float Input1 { get; }
-  
-  public ref float Output0 { get; }
-  
-  public ref float Output1 { get; }
-  
-  public ref float NotchedRangeMin { get; }
-  
-  public ref float NotchedRangeMax { get; }
-  
-  public ref float NotchedOutputOutside { get; }
-  
-  public ref float NotchedOutputInside { get; }
-  
-  public ref ParticleFloatRoundType_t RoundType { get; }
-  
-  public ref ParticleFloatBiasType_t BiasType { get; }
-  
-  public ref float BiasParameter { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Curve { get; }
+    public ref ParticleFloatType_t Type { get; }
+
+    public ref ParticleFloatMapType_t MapType { get; }
+
+    public ref float LiteralValue { get; }
+
+    // CParticleNamedValueRef
+    public SchemaUntypedField NamedValue { get; }
+
+    public ref int ControlPoint { get; }
+
+    public ParticleAttributeIndex_t ScalarAttribute { get; }
+
+    public ParticleAttributeIndex_t VectorAttribute { get; }
+
+    public ref int VectorComponent { get; }
+
+    public ref bool ReverseOrder { get; }
+
+    public ref float RandomMin { get; }
+
+    public ref float RandomMax { get; }
+
+    public ref bool HasRandomSignFlip { get; }
+
+    public ref int RandomSeed { get; }
+
+    public ref ParticleFloatRandomMode_t RandomMode { get; }
+
+    public string StrSnapshotSubset { get; set; }
+
+    public ref float LOD0 { get; }
+
+    public ref float LOD1 { get; }
+
+    public ref float LOD2 { get; }
+
+    public ref float LOD3 { get; }
+
+    public ParticleAttributeIndex_t NoiseInputVectorAttribute { get; }
+
+    public ref float NoiseOutputMin { get; }
+
+    public ref float NoiseOutputMax { get; }
+
+    public ref float NoiseScale { get; }
+
+    public ref Vector NoiseOffsetRate { get; }
+
+    public ref float NoiseOffset { get; }
+
+    public ref int NoiseOctaves { get; }
+
+    public ref PFNoiseTurbulence_t NoiseTurbulence { get; }
+
+    public ref PFNoiseType_t NoiseType { get; }
+
+    public ref PFNoiseModifier_t NoiseModifier { get; }
+
+    public ref float NoiseTurbulenceScale { get; }
+
+    public ref float NoiseTurbulenceMix { get; }
+
+    public ref float NoiseImgPreviewScale { get; }
+
+    public ref bool NoiseImgPreviewLive { get; }
+
+    public ref float NoCameraFallback { get; }
+
+    public ref bool UseBoundsCenter { get; }
+
+    public ref ParticleFloatInputMode_t InputMode { get; }
+
+    public ref float MultFactor { get; }
+
+    public ref float Input0 { get; }
+
+    public ref float Input1 { get; }
+
+    public ref float Output0 { get; }
+
+    public ref float Output1 { get; }
+
+    public ref float NotchedRangeMin { get; }
+
+    public ref float NotchedRangeMax { get; }
+
+    public ref float NotchedOutputOutside { get; }
+
+    public ref float NotchedOutputInside { get; }
+
+    public ref ParticleFloatRoundType_t RoundType { get; }
+
+    public ref ParticleFloatBiasType_t BiasType { get; }
+
+    public ref float BiasParameter { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Curve { get; }
 
 
 }

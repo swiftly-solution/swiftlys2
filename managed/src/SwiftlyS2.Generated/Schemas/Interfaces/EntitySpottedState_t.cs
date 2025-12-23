@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EntitySpottedState_t : ISchemaClass<EntitySpottedState_t> {
+public partial interface EntitySpottedState_t : ISchemaClass<EntitySpottedState_t>
+{
+    static EntitySpottedState_t ISchemaClass<EntitySpottedState_t>.From(nint handle) => new EntitySpottedState_tImpl(handle);
+    static int ISchemaClass<EntitySpottedState_t>.Size => 24;
+    static string? ISchemaClass<EntitySpottedState_t>.ClassName => null;
 
-  static EntitySpottedState_t ISchemaClass<EntitySpottedState_t>.From(nint handle) => new EntitySpottedState_tImpl(handle);
-  static int ISchemaClass<EntitySpottedState_t>.Size => 24;
-  static string? ISchemaClass<EntitySpottedState_t>.ClassName => null;
 
-  
-  public ref bool Spotted { get; }
-  
-  public ISchemaFixedArray<uint> SpottedByMask { get; }
+    public ref bool Spotted { get; }
 
-  public void SpottedUpdated();
-  public void SpottedByMaskUpdated();
+    public ISchemaFixedArray<uint> SpottedByMask { get; }
+
+    public void SpottedUpdated();
+    public void SpottedByMaskUpdated();
 }

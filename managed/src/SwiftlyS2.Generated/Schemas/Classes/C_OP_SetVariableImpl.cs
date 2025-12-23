@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetVariableImpl : CParticleFunctionPreEmissionImpl, C_OP_SetVariable {
+internal partial class C_OP_SetVariableImpl : CParticleFunctionPreEmissionImpl, C_OP_SetVariable
+{
+    public C_OP_SetVariableImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetVariableImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VariableReferenceOffset;
 
-  private static nint? _VariableReferenceOffset;
-
-  public CParticleVariableRef VariableReference {
-    get {
-      if (_VariableReferenceOffset == null) {
-        _VariableReferenceOffset = Schema.GetOffset(0x9BAC801F3731E65A);
-      }
-      return new CParticleVariableRefImpl(_Handle + _VariableReferenceOffset!.Value);
+    public CParticleVariableRef VariableReference {
+        get {
+            _VariableReferenceOffset = _VariableReferenceOffset ?? Schema.GetOffset(0x9BAC801F3731E65A);
+            return new CParticleVariableRefImpl(_Handle + _VariableReferenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransformInputOffset;
+    private static nint? _TransformInputOffset;
 
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0x9BAC801F3A9ED669);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x9BAC801F3A9ED669);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _PositionOffsetOffset;
+    private static nint? _PositionOffsetOffset;
 
-  public ref Vector PositionOffset {
-    get {
-      if (_PositionOffsetOffset == null) {
-        _PositionOffsetOffset = Schema.GetOffset(0x9BAC801FC9C9DB1D);
-      }
-      return ref _Handle.AsRef<Vector>(_PositionOffsetOffset!.Value);
+    public ref Vector PositionOffset {
+        get {
+            _PositionOffsetOffset = _PositionOffsetOffset ?? Schema.GetOffset(0x9BAC801FC9C9DB1D);
+            return ref _Handle.AsRef<Vector>(_PositionOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotationOffsetOffset;
+    private static nint? _RotationOffsetOffset;
 
-  public ref QAngle RotationOffset {
-    get {
-      if (_RotationOffsetOffset == null) {
-        _RotationOffsetOffset = Schema.GetOffset(0x9BAC801FD70314A4);
-      }
-      return ref _Handle.AsRef<QAngle>(_RotationOffsetOffset!.Value);
+    public ref QAngle RotationOffset {
+        get {
+            _RotationOffsetOffset = _RotationOffsetOffset ?? Schema.GetOffset(0x9BAC801FD70314A4);
+            return ref _Handle.AsRef<QAngle>(_RotationOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputOffset;
+    private static nint? _InputOffset;
 
-  public CParticleCollectionVecInput Input {
-    get {
-      if (_InputOffset == null) {
-        _InputOffset = Schema.GetOffset(0x9BAC801F1EA0ED5B);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _InputOffset!.Value);
+    public CParticleCollectionVecInput Input {
+        get {
+            _InputOffset = _InputOffset ?? Schema.GetOffset(0x9BAC801F1EA0ED5B);
+            return new CParticleCollectionVecInputImpl(_Handle + _InputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FloatInputOffset;
+    private static nint? _FloatInputOffset;
 
-  public CParticleCollectionFloatInput FloatInput {
-    get {
-      if (_FloatInputOffset == null) {
-        _FloatInputOffset = Schema.GetOffset(0x9BAC801F7107333B);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _FloatInputOffset!.Value);
+    public CParticleCollectionFloatInput FloatInput {
+        get {
+            _FloatInputOffset = _FloatInputOffset ?? Schema.GetOffset(0x9BAC801F7107333B);
+            return new CParticleCollectionFloatInputImpl(_Handle + _FloatInputOffset!.Value);
+        }
     }
-  }
 
 
 }

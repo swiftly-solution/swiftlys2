@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_CullImpl : CParticleFunctionOperatorImpl, C_OP_Cull {
+internal partial class C_OP_CullImpl : CParticleFunctionOperatorImpl, C_OP_Cull
+{
+    public C_OP_CullImpl(nint handle) : base(handle) { }
 
-  public C_OP_CullImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CullPercOffset;
 
-  private static nint? _CullPercOffset;
-
-  public ref float CullPerc {
-    get {
-      if (_CullPercOffset == null) {
-        _CullPercOffset = Schema.GetOffset(0xD1E3C83568069ED3);
-      }
-      return ref _Handle.AsRef<float>(_CullPercOffset!.Value);
+    public ref float CullPerc {
+        get {
+            _CullPercOffset = _CullPercOffset ?? Schema.GetOffset(0xD1E3C83568069ED3);
+            return ref _Handle.AsRef<float>(_CullPercOffset!.Value);
+        }
     }
-  }
-  private static nint? _CullStartOffset;
+    private static nint? _CullStartOffset;
 
-  public ref float CullStart {
-    get {
-      if (_CullStartOffset == null) {
-        _CullStartOffset = Schema.GetOffset(0xD1E3C835AB265851);
-      }
-      return ref _Handle.AsRef<float>(_CullStartOffset!.Value);
+    public ref float CullStart {
+        get {
+            _CullStartOffset = _CullStartOffset ?? Schema.GetOffset(0xD1E3C835AB265851);
+            return ref _Handle.AsRef<float>(_CullStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _CullEndOffset;
+    private static nint? _CullEndOffset;
 
-  public ref float CullEnd {
-    get {
-      if (_CullEndOffset == null) {
-        _CullEndOffset = Schema.GetOffset(0xD1E3C835B8217F50);
-      }
-      return ref _Handle.AsRef<float>(_CullEndOffset!.Value);
+    public ref float CullEnd {
+        get {
+            _CullEndOffset = _CullEndOffset ?? Schema.GetOffset(0xD1E3C835B8217F50);
+            return ref _Handle.AsRef<float>(_CullEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _CullExpOffset;
+    private static nint? _CullExpOffset;
 
-  public ref float CullExp {
-    get {
-      if (_CullExpOffset == null) {
-        _CullExpOffset = Schema.GetOffset(0xD1E3C835BFF46C4A);
-      }
-      return ref _Handle.AsRef<float>(_CullExpOffset!.Value);
+    public ref float CullExp {
+        get {
+            _CullExpOffset = _CullExpOffset ?? Schema.GetOffset(0xD1E3C835BFF46C4A);
+            return ref _Handle.AsRef<float>(_CullExpOffset!.Value);
+        }
     }
-  }
 
 
 }

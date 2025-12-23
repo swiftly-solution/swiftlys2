@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LerpEndCapVector : CParticleFunctionOperator, ISchemaClass<C_OP_LerpEndCapVector> {
+public partial interface C_OP_LerpEndCapVector : CParticleFunctionOperator, ISchemaClass<C_OP_LerpEndCapVector>
+{
+    static C_OP_LerpEndCapVector ISchemaClass<C_OP_LerpEndCapVector>.From(nint handle) => new C_OP_LerpEndCapVectorImpl(handle);
+    static int ISchemaClass<C_OP_LerpEndCapVector>.Size => 488;
+    static string? ISchemaClass<C_OP_LerpEndCapVector>.ClassName => null;
 
-  static C_OP_LerpEndCapVector ISchemaClass<C_OP_LerpEndCapVector>.From(nint handle) => new C_OP_LerpEndCapVectorImpl(handle);
-  static int ISchemaClass<C_OP_LerpEndCapVector>.Size => 488;
-  static string? ISchemaClass<C_OP_LerpEndCapVector>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref Vector Output { get; }
-  
-  public ref float LerpTime { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref Vector Output { get; }
+
+    public ref float LerpTime { get; }
 
 
 }

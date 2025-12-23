@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFollowBoneNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmFollowBoneNode__CDefinition> {
+public partial interface CNmFollowBoneNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmFollowBoneNode__CDefinition>
+{
+    static CNmFollowBoneNode__CDefinition ISchemaClass<CNmFollowBoneNode__CDefinition>.From(nint handle) => new CNmFollowBoneNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFollowBoneNode__CDefinition>.Size => 48;
+    static string? ISchemaClass<CNmFollowBoneNode__CDefinition>.ClassName => null;
 
-  static CNmFollowBoneNode__CDefinition ISchemaClass<CNmFollowBoneNode__CDefinition>.From(nint handle) => new CNmFollowBoneNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFollowBoneNode__CDefinition>.Size => 48;
-  static string? ISchemaClass<CNmFollowBoneNode__CDefinition>.ClassName => null;
 
-  
-  public ref CGlobalSymbol Bone { get; }
-  
-  public ref CGlobalSymbol FollowTargetBone { get; }
-  
-  public ref short EnabledNodeIdx { get; }
-  
-  public ref NmFollowBoneMode_t Mode { get; }
+    public ref CGlobalSymbol Bone { get; }
+
+    public ref CGlobalSymbol FollowTargetBone { get; }
+
+    public ref short EnabledNodeIdx { get; }
+
+    public ref NmFollowBoneMode_t Mode { get; }
 
 
 }

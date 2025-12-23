@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmVirtualParameterTargetNode__CDefinitionImpl : CNmTargetValueNode__CDefinitionImpl, CNmVirtualParameterTargetNode__CDefinition {
+internal partial class CNmVirtualParameterTargetNode__CDefinitionImpl : CNmTargetValueNode__CDefinitionImpl, CNmVirtualParameterTargetNode__CDefinition
+{
+    public CNmVirtualParameterTargetNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmVirtualParameterTargetNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChildNodeIdxOffset;
 
-  private static nint? _ChildNodeIdxOffset;
-
-  public ref short ChildNodeIdx {
-    get {
-      if (_ChildNodeIdxOffset == null) {
-        _ChildNodeIdxOffset = Schema.GetOffset(0xB17F7CE05C29A73C);
-      }
-      return ref _Handle.AsRef<short>(_ChildNodeIdxOffset!.Value);
+    public ref short ChildNodeIdx {
+        get {
+            _ChildNodeIdxOffset = _ChildNodeIdxOffset ?? Schema.GetOffset(0xB17F7CE05C29A73C);
+            return ref _Handle.AsRef<short>(_ChildNodeIdxOffset!.Value);
+        }
     }
-  }
 
 
 }

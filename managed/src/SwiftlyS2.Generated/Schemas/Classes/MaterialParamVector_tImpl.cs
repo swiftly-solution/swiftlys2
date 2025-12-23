@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MaterialParamVector_tImpl : MaterialParam_tImpl, MaterialParamVector_t {
+internal partial class MaterialParamVector_tImpl : MaterialParam_tImpl, MaterialParamVector_t
+{
+    public MaterialParamVector_tImpl(nint handle) : base(handle) { }
 
-  public MaterialParamVector_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ValueOffset;
 
-  private static nint? _ValueOffset;
-
-  public ref Vector4D Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0xC82210956B99AEEA);
-      }
-      return ref _Handle.AsRef<Vector4D>(_ValueOffset!.Value);
+    public ref Vector4D Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0xC82210956B99AEEA);
+            return ref _Handle.AsRef<Vector4D>(_ValueOffset!.Value);
+        }
     }
-  }
 
 
 }

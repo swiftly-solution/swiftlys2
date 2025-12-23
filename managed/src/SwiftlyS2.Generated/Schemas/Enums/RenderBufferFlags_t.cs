@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RenderBufferFlags_t : uint {
-
+public enum RenderBufferFlags_t : uint
+{
  RENDER_BUFFER_USAGE_NONE = 0,
 
  RENDER_BUFFER_USAGE_VERTEX_BUFFER = 1,

@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeMorphLayerDepr_t : ISchemaClass<FeMorphLayerDepr_t> {
+public partial interface FeMorphLayerDepr_t : ISchemaClass<FeMorphLayerDepr_t>
+{
+    static FeMorphLayerDepr_t ISchemaClass<FeMorphLayerDepr_t>.From(nint handle) => new FeMorphLayerDepr_tImpl(handle);
+    static int ISchemaClass<FeMorphLayerDepr_t>.Size => 144;
+    static string? ISchemaClass<FeMorphLayerDepr_t>.ClassName => null;
 
-  static FeMorphLayerDepr_t ISchemaClass<FeMorphLayerDepr_t>.From(nint handle) => new FeMorphLayerDepr_tImpl(handle);
-  static int ISchemaClass<FeMorphLayerDepr_t>.Size => 144;
-  static string? ISchemaClass<FeMorphLayerDepr_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref uint NameHash { get; }
-  
-  public ref CUtlVector<ushort> Nodes { get; }
-  
-  public ref CUtlVector<Vector> InitPos { get; }
-  
-  public ref CUtlVector<float> Gravity { get; }
-  
-  public ref CUtlVector<float> GoalStrength { get; }
-  
-  public ref CUtlVector<float> GoalDamping { get; }
-  
-  public ref uint Flags { get; }
+    public string Name { get; set; }
+
+    public ref uint NameHash { get; }
+
+    public ref CUtlVector<ushort> Nodes { get; }
+
+    public ref CUtlVector<Vector> InitPos { get; }
+
+    public ref CUtlVector<float> Gravity { get; }
+
+    public ref CUtlVector<float> GoalStrength { get; }
+
+    public ref CUtlVector<float> GoalDamping { get; }
+
+    public ref uint Flags { get; }
 
 
 }

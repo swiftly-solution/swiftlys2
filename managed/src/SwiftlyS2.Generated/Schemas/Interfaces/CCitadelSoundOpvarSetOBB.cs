@@ -8,35 +8,35 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCitadelSoundOpvarSetOBB : CBaseEntity, ISchemaClass<CCitadelSoundOpvarSetOBB> {
+public partial interface CCitadelSoundOpvarSetOBB : CBaseEntity, ISchemaClass<CCitadelSoundOpvarSetOBB>
+{
+    static CCitadelSoundOpvarSetOBB ISchemaClass<CCitadelSoundOpvarSetOBB>.From(nint handle) => new CCitadelSoundOpvarSetOBBImpl(handle);
+    static int ISchemaClass<CCitadelSoundOpvarSetOBB>.Size => 1344;
+    static string? ISchemaClass<CCitadelSoundOpvarSetOBB>.ClassName => "citadel_snd_opvar_set_obb";
 
-  static CCitadelSoundOpvarSetOBB ISchemaClass<CCitadelSoundOpvarSetOBB>.From(nint handle) => new CCitadelSoundOpvarSetOBBImpl(handle);
-  static int ISchemaClass<CCitadelSoundOpvarSetOBB>.Size => 1344;
-  static string? ISchemaClass<CCitadelSoundOpvarSetOBB>.ClassName => "citadel_snd_opvar_set_obb";
 
-  
-  public string StackName { get; set; }
-  
-  public string OperatorName { get; set; }
-  
-  public string OpvarName { get; set; }
-  
-  public ref Vector DistanceInnerMins { get; }
-  
-  public ref Vector DistanceInnerMaxs { get; }
-  
-  public ref Vector DistanceOuterMins { get; }
-  
-  public ref Vector DistanceOuterMaxs { get; }
-  
-  public ref int AABBDirection { get; }
+    public string StackName { get; set; }
 
-  public void StackNameUpdated();
-  public void OperatorNameUpdated();
-  public void OpvarNameUpdated();
-  public void DistanceInnerMinsUpdated();
-  public void DistanceInnerMaxsUpdated();
-  public void DistanceOuterMinsUpdated();
-  public void DistanceOuterMaxsUpdated();
-  public void AABBDirectionUpdated();
+    public string OperatorName { get; set; }
+
+    public string OpvarName { get; set; }
+
+    public ref Vector DistanceInnerMins { get; }
+
+    public ref Vector DistanceInnerMaxs { get; }
+
+    public ref Vector DistanceOuterMins { get; }
+
+    public ref Vector DistanceOuterMaxs { get; }
+
+    public ref int AABBDirection { get; }
+
+    public void StackNameUpdated();
+    public void OperatorNameUpdated();
+    public void OpvarNameUpdated();
+    public void DistanceInnerMinsUpdated();
+    public void DistanceInnerMaxsUpdated();
+    public void DistanceOuterMinsUpdated();
+    public void DistanceOuterMaxsUpdated();
+    public void AABBDirectionUpdated();
 }

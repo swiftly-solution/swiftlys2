@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class NmSyncTrackTime_tImpl : SchemaClass, NmSyncTrackTime_t {
+internal partial class NmSyncTrackTime_tImpl : SchemaClass, NmSyncTrackTime_t
+{
+    public NmSyncTrackTime_tImpl(nint handle) : base(handle) { }
 
-  public NmSyncTrackTime_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EventIdxOffset;
 
-  private static nint? _EventIdxOffset;
-
-  public ref int EventIdx {
-    get {
-      if (_EventIdxOffset == null) {
-        _EventIdxOffset = Schema.GetOffset(0x12BF3F3C2A6FC8DA);
-      }
-      return ref _Handle.AsRef<int>(_EventIdxOffset!.Value);
+    public ref int EventIdx {
+        get {
+            _EventIdxOffset = _EventIdxOffset ?? Schema.GetOffset(0x12BF3F3C2A6FC8DA);
+            return ref _Handle.AsRef<int>(_EventIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _PercentageThroughOffset;
+    private static nint? _PercentageThroughOffset;
 
-  public NmPercent_t PercentageThrough {
-    get {
-      if (_PercentageThroughOffset == null) {
-        _PercentageThroughOffset = Schema.GetOffset(0x12BF3F3C77B731AA);
-      }
-      return new NmPercent_tImpl(_Handle + _PercentageThroughOffset!.Value);
+    public NmPercent_t PercentageThrough {
+        get {
+            _PercentageThroughOffset = _PercentageThroughOffset ?? Schema.GetOffset(0x12BF3F3C77B731AA);
+            return new NmPercent_tImpl(_Handle + _PercentageThroughOffset!.Value);
+        }
     }
-  }
 
 
 }

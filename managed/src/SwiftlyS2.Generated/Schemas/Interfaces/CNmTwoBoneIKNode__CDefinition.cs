@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmTwoBoneIKNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmTwoBoneIKNode__CDefinition> {
+public partial interface CNmTwoBoneIKNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmTwoBoneIKNode__CDefinition>
+{
+    static CNmTwoBoneIKNode__CDefinition ISchemaClass<CNmTwoBoneIKNode__CDefinition>.From(nint handle) => new CNmTwoBoneIKNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmTwoBoneIKNode__CDefinition>.Size => 48;
+    static string? ISchemaClass<CNmTwoBoneIKNode__CDefinition>.ClassName => null;
 
-  static CNmTwoBoneIKNode__CDefinition ISchemaClass<CNmTwoBoneIKNode__CDefinition>.From(nint handle) => new CNmTwoBoneIKNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmTwoBoneIKNode__CDefinition>.Size => 48;
-  static string? ISchemaClass<CNmTwoBoneIKNode__CDefinition>.ClassName => null;
 
-  
-  public ref CGlobalSymbol EffectorBoneID { get; }
-  
-  public ref short EffectorTargetNodeIdx { get; }
-  
-  public ref short EnabledNodeIdx { get; }
-  
-  public ref float BlendTimeSeconds { get; }
-  
-  public ref NmIKBlendMode_t BlendMode { get; }
-  
-  public ref bool IsTargetInWorldSpace { get; }
+    public ref CGlobalSymbol EffectorBoneID { get; }
+
+    public ref short EffectorTargetNodeIdx { get; }
+
+    public ref short EnabledNodeIdx { get; }
+
+    public ref float BlendTimeSeconds { get; }
+
+    public ref NmIKBlendMode_t BlendMode { get; }
+
+    public ref bool IsTargetInWorldSpace { get; }
 
 
 }

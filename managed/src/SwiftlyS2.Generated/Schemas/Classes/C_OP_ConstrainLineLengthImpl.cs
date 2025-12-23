@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ConstrainLineLengthImpl : CParticleFunctionConstraintImpl, C_OP_ConstrainLineLength {
+internal partial class C_OP_ConstrainLineLengthImpl : CParticleFunctionConstraintImpl, C_OP_ConstrainLineLength
+{
+    public C_OP_ConstrainLineLengthImpl(nint handle) : base(handle) { }
 
-  public C_OP_ConstrainLineLengthImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinDistanceOffset;
 
-  private static nint? _MinDistanceOffset;
-
-  public ref float MinDistance {
-    get {
-      if (_MinDistanceOffset == null) {
-        _MinDistanceOffset = Schema.GetOffset(0x50EFFC4492BCAD06);
-      }
-      return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
+    public ref float MinDistance {
+        get {
+            _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0x50EFFC4492BCAD06);
+            return ref _Handle.AsRef<float>(_MinDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxDistanceOffset;
+    private static nint? _MaxDistanceOffset;
 
-  public ref float MaxDistance {
-    get {
-      if (_MaxDistanceOffset == null) {
-        _MaxDistanceOffset = Schema.GetOffset(0x50EFFC4498893360);
-      }
-      return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+    public ref float MaxDistance {
+        get {
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0x50EFFC4498893360);
+            return ref _Handle.AsRef<float>(_MaxDistanceOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAmbientGeneric : CPointEntity, ISchemaClass<CAmbientGeneric> {
+public partial interface CAmbientGeneric : CPointEntity, ISchemaClass<CAmbientGeneric>
+{
+    static CAmbientGeneric ISchemaClass<CAmbientGeneric>.From(nint handle) => new CAmbientGenericImpl(handle);
+    static int ISchemaClass<CAmbientGeneric>.Size => 1432;
+    static string? ISchemaClass<CAmbientGeneric>.ClassName => "ambient_generic";
 
-  static CAmbientGeneric ISchemaClass<CAmbientGeneric>.From(nint handle) => new CAmbientGenericImpl(handle);
-  static int ISchemaClass<CAmbientGeneric>.Size => 1432;
-  static string? ISchemaClass<CAmbientGeneric>.ClassName => "ambient_generic";
 
-  
-  public ref float Radius { get; }
-  
-  public ref float MaxRadius { get; }
-  
-  public ref soundlevel_t SoundLevel { get; }
-  
-  public dynpitchvol_t Dpv { get; }
-  
-  public ref bool Active { get; }
-  
-  public ref bool Looping { get; }
-  
-  public string Sound { get; set; }
-  
-  public string SourceEntName { get; set; }
-  
-  public ref CHandle<CBaseEntity> SoundSource { get; }
-  
-  public ref uint SoundSourceEntIndex { get; }
+    public ref float Radius { get; }
+
+    public ref float MaxRadius { get; }
+
+    public ref soundlevel_t SoundLevel { get; }
+
+    public dynpitchvol_t Dpv { get; }
+
+    public ref bool Active { get; }
+
+    public ref bool Looping { get; }
+
+    public string Sound { get; set; }
+
+    public string SourceEntName { get; set; }
+
+    public ref CHandle<CBaseEntity> SoundSource { get; }
+
+    public ref uint SoundSourceEntIndex { get; }
 
 
 }

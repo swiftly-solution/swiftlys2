@@ -8,60 +8,60 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundOpvarSetPointEntity : CSoundOpvarSetPointBase, ISchemaClass<CSoundOpvarSetPointEntity> {
+public partial interface CSoundOpvarSetPointEntity : CSoundOpvarSetPointBase, ISchemaClass<CSoundOpvarSetPointEntity>
+{
+    static CSoundOpvarSetPointEntity ISchemaClass<CSoundOpvarSetPointEntity>.From(nint handle) => new CSoundOpvarSetPointEntityImpl(handle);
+    static int ISchemaClass<CSoundOpvarSetPointEntity>.Size => 1704;
+    static string? ISchemaClass<CSoundOpvarSetPointEntity>.ClassName => "snd_opvar_set_point";
 
-  static CSoundOpvarSetPointEntity ISchemaClass<CSoundOpvarSetPointEntity>.From(nint handle) => new CSoundOpvarSetPointEntityImpl(handle);
-  static int ISchemaClass<CSoundOpvarSetPointEntity>.Size => 1704;
-  static string? ISchemaClass<CSoundOpvarSetPointEntity>.ClassName => "snd_opvar_set_point";
 
-  
-  public CEntityIOOutput OnEnter { get; }
-  
-  public CEntityIOOutput OnExit { get; }
-  
-  public ref bool AutoDisable { get; }
-  
-  public ref float DistanceMin { get; }
-  
-  public ref float DistanceMax { get; }
-  
-  public ref float DistanceMapMin { get; }
-  
-  public ref float DistanceMapMax { get; }
-  
-  public ref float OcclusionRadius { get; }
-  
-  public ref float OcclusionMin { get; }
-  
-  public ref float OcclusionMax { get; }
-  
-  public ref float ValSetOnDisable { get; }
-  
-  public ref bool SetValueOnDisable { get; }
-  
-  public ref bool Reloading { get; }
-  
-  public ref int SimulationMode { get; }
-  
-  public ref int VisibilitySamples { get; }
-  
-  public ref Vector DynamicProxyPoint { get; }
-  
-  public ref float DynamicMaximumOcclusion { get; }
-  
-  public ref CHandle<CEntityInstance> DynamicEntity { get; }
-  
-  public string DynamicEntityName { get; set; }
-  
-  public ref float PathingDistanceNormFactor { get; }
-  
-  public ref Vector PathingSourcePos { get; }
-  
-  public ref Vector PathingListenerPos { get; }
-  
-  public ref Vector PathingDirection { get; }
-  
-  public ref int PathingSourceIndex { get; }
+    public ref CEntityIOOutput OnEnter { get; }
+
+    public ref CEntityIOOutput OnExit { get; }
+
+    public ref bool AutoDisable { get; }
+
+    public ref float DistanceMin { get; }
+
+    public ref float DistanceMax { get; }
+
+    public ref float DistanceMapMin { get; }
+
+    public ref float DistanceMapMax { get; }
+
+    public ref float OcclusionRadius { get; }
+
+    public ref float OcclusionMin { get; }
+
+    public ref float OcclusionMax { get; }
+
+    public ref float ValSetOnDisable { get; }
+
+    public ref bool SetValueOnDisable { get; }
+
+    public ref bool Reloading { get; }
+
+    public ref int SimulationMode { get; }
+
+    public ref int VisibilitySamples { get; }
+
+    public ref Vector DynamicProxyPoint { get; }
+
+    public ref float DynamicMaximumOcclusion { get; }
+
+    public ref CHandle<CEntityInstance> DynamicEntity { get; }
+
+    public string DynamicEntityName { get; set; }
+
+    public ref float PathingDistanceNormFactor { get; }
+
+    public ref Vector PathingSourcePos { get; }
+
+    public ref Vector PathingListenerPos { get; }
+
+    public ref Vector PathingDirection { get; }
+
+    public ref int PathingSourceIndex { get; }
 
 
 }

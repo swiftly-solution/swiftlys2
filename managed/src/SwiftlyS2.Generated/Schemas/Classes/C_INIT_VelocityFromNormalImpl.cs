@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_VelocityFromNormalImpl : CParticleFunctionInitializerImpl, C_INIT_VelocityFromNormal {
+internal partial class C_INIT_VelocityFromNormalImpl : CParticleFunctionInitializerImpl, C_INIT_VelocityFromNormal
+{
+    public C_INIT_VelocityFromNormalImpl(nint handle) : base(handle) { }
 
-  public C_INIT_VelocityFromNormalImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SpeedMinOffset;
 
-  private static nint? _SpeedMinOffset;
-
-  public ref float SpeedMin {
-    get {
-      if (_SpeedMinOffset == null) {
-        _SpeedMinOffset = Schema.GetOffset(0x33D27066B989E1F8);
-      }
-      return ref _Handle.AsRef<float>(_SpeedMinOffset!.Value);
+    public ref float SpeedMin {
+        get {
+            _SpeedMinOffset = _SpeedMinOffset ?? Schema.GetOffset(0x33D27066B989E1F8);
+            return ref _Handle.AsRef<float>(_SpeedMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpeedMaxOffset;
+    private static nint? _SpeedMaxOffset;
 
-  public ref float SpeedMax {
-    get {
-      if (_SpeedMaxOffset == null) {
-        _SpeedMaxOffset = Schema.GetOffset(0x33D27066CF9D8C52);
-      }
-      return ref _Handle.AsRef<float>(_SpeedMaxOffset!.Value);
+    public ref float SpeedMax {
+        get {
+            _SpeedMaxOffset = _SpeedMaxOffset ?? Schema.GetOffset(0x33D27066CF9D8C52);
+            return ref _Handle.AsRef<float>(_SpeedMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _IgnoreDtOffset;
+    private static nint? _IgnoreDtOffset;
 
-  public ref bool IgnoreDt {
-    get {
-      if (_IgnoreDtOffset == null) {
-        _IgnoreDtOffset = Schema.GetOffset(0x33D27066330C0603);
-      }
-      return ref _Handle.AsRef<bool>(_IgnoreDtOffset!.Value);
+    public ref bool IgnoreDt {
+        get {
+            _IgnoreDtOffset = _IgnoreDtOffset ?? Schema.GetOffset(0x33D27066330C0603);
+            return ref _Handle.AsRef<bool>(_IgnoreDtOffset!.Value);
+        }
     }
-  }
 
 
 }

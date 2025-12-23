@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncWater : CBaseModelEntity, ISchemaClass<CFuncWater> {
+public partial interface CFuncWater : CBaseModelEntity, ISchemaClass<CFuncWater>
+{
+    static CFuncWater ISchemaClass<CFuncWater>.From(nint handle) => new CFuncWaterImpl(handle);
+    static int ISchemaClass<CFuncWater>.Size => 2288;
+    static string? ISchemaClass<CFuncWater>.ClassName => "func_water";
 
-  static CFuncWater ISchemaClass<CFuncWater>.From(nint handle) => new CFuncWaterImpl(handle);
-  static int ISchemaClass<CFuncWater>.Size => 2288;
-  static string? ISchemaClass<CFuncWater>.ClassName => "func_water";
 
-  
-  public CBuoyancyHelper BuoyancyHelper { get; }
+    public CBuoyancyHelper BuoyancyHelper { get; }
 
 
 }

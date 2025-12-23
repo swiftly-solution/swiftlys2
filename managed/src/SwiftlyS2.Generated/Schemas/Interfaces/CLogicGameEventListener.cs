@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicGameEventListener : CLogicalEntity, ISchemaClass<CLogicGameEventListener> {
+public partial interface CLogicGameEventListener : CLogicalEntity, ISchemaClass<CLogicGameEventListener>
+{
+    static CLogicGameEventListener ISchemaClass<CLogicGameEventListener>.From(nint handle) => new CLogicGameEventListenerImpl(handle);
+    static int ISchemaClass<CLogicGameEventListener>.Size => 1344;
+    static string? ISchemaClass<CLogicGameEventListener>.ClassName => "logic_gameevent_listener";
 
-  static CLogicGameEventListener ISchemaClass<CLogicGameEventListener>.From(nint handle) => new CLogicGameEventListenerImpl(handle);
-  static int ISchemaClass<CLogicGameEventListener>.Size => 1344;
-  static string? ISchemaClass<CLogicGameEventListener>.ClassName => "logic_gameevent_listener";
 
-  
-  public CEntityIOOutput OnEventFired { get; }
-  
-  public string GameEventName { get; set; }
-  
-  public string GameEventItem { get; set; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref bool StartDisabled { get; }
+    public ref CEntityIOOutput OnEventFired { get; }
 
-  public void EnabledUpdated();
+    public string GameEventName { get; set; }
+
+    public string GameEventItem { get; set; }
+
+    public ref bool Enabled { get; }
+
+    public ref bool StartDisabled { get; }
+
+    public void EnabledUpdated();
 }

@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncMoveLinear : CBaseToggle, ISchemaClass<CFuncMoveLinear> {
+public partial interface CFuncMoveLinear : CBaseToggle, ISchemaClass<CFuncMoveLinear>
+{
+    static CFuncMoveLinear ISchemaClass<CFuncMoveLinear>.From(nint handle) => new CFuncMoveLinearImpl(handle);
+    static int ISchemaClass<CFuncMoveLinear>.Size => 2304;
+    static string? ISchemaClass<CFuncMoveLinear>.ClassName => "momentary_door";
 
-  static CFuncMoveLinear ISchemaClass<CFuncMoveLinear>.From(nint handle) => new CFuncMoveLinearImpl(handle);
-  static int ISchemaClass<CFuncMoveLinear>.Size => 2304;
-  static string? ISchemaClass<CFuncMoveLinear>.ClassName => "momentary_door";
 
-  
-  public ref MoveLinearAuthoredPos_t AuthoredPosition { get; }
-  
-  public ref QAngle MoveEntitySpace { get; }
-  
-  public ref Vector MoveDirParentSpace { get; }
-  
-  public string SoundStart { get; set; }
-  
-  public string SoundStop { get; set; }
-  
-  public string CurrentSound { get; set; }
-  
-  public ref float BlockDamage { get; }
-  
-  public ref float StartPosition { get; }
-  
-  public CEntityIOOutput OnFullyOpen { get; }
-  
-  public CEntityIOOutput OnFullyClosed { get; }
-  
-  public ref bool CreateMovableNavMesh { get; }
-  
-  public ref bool AllowMovableNavMeshDockingOnEntireEntity { get; }
-  
-  public ref bool CreateNavObstacle { get; }
+    public ref MoveLinearAuthoredPos_t AuthoredPosition { get; }
+
+    public ref QAngle MoveEntitySpace { get; }
+
+    public ref Vector MoveDirParentSpace { get; }
+
+    public string SoundStart { get; set; }
+
+    public string SoundStop { get; set; }
+
+    public string CurrentSound { get; set; }
+
+    public ref float BlockDamage { get; }
+
+    public ref float StartPosition { get; }
+
+    public ref CEntityIOOutput OnFullyOpen { get; }
+
+    public ref CEntityIOOutput OnFullyClosed { get; }
+
+    public ref bool CreateMovableNavMesh { get; }
+
+    public ref bool AllowMovableNavMeshDockingOnEntireEntity { get; }
+
+    public ref bool CreateNavObstacle { get; }
 
 
 }

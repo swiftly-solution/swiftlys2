@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMotionNode : ISchemaClass<CMotionNode> {
+public partial interface CMotionNode : ISchemaClass<CMotionNode>
+{
+    static CMotionNode ISchemaClass<CMotionNode>.From(nint handle) => new CMotionNodeImpl(handle);
+    static int ISchemaClass<CMotionNode>.Size => 40;
+    static string? ISchemaClass<CMotionNode>.ClassName => null;
 
-  static CMotionNode ISchemaClass<CMotionNode>.From(nint handle) => new CMotionNodeImpl(handle);
-  static int ISchemaClass<CMotionNode>.Size => 40;
-  static string? ISchemaClass<CMotionNode>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public AnimNodeID Id { get; }
+    public string Name { get; set; }
+
+    public AnimNodeID Id { get; }
 
 
 }

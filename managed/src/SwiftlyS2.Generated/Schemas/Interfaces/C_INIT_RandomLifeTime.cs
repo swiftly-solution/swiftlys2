@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomLifeTime : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomLifeTime> {
+public partial interface C_INIT_RandomLifeTime : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomLifeTime>
+{
+    static C_INIT_RandomLifeTime ISchemaClass<C_INIT_RandomLifeTime>.From(nint handle) => new C_INIT_RandomLifeTimeImpl(handle);
+    static int ISchemaClass<C_INIT_RandomLifeTime>.Size => 488;
+    static string? ISchemaClass<C_INIT_RandomLifeTime>.ClassName => null;
 
-  static C_INIT_RandomLifeTime ISchemaClass<C_INIT_RandomLifeTime>.From(nint handle) => new C_INIT_RandomLifeTimeImpl(handle);
-  static int ISchemaClass<C_INIT_RandomLifeTime>.Size => 488;
-  static string? ISchemaClass<C_INIT_RandomLifeTime>.ClassName => null;
 
-  
-  public ref float LifetimeMin { get; }
-  
-  public ref float LifetimeMax { get; }
-  
-  public ref float LifetimeRandExponent { get; }
+    public ref float LifetimeMin { get; }
+
+    public ref float LifetimeMax { get; }
+
+    public ref float LifetimeRandExponent { get; }
 
 
 }

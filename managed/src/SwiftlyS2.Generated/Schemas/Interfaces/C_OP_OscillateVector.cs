@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_OscillateVector : CParticleFunctionOperator, ISchemaClass<C_OP_OscillateVector> {
+public partial interface C_OP_OscillateVector : CParticleFunctionOperator, ISchemaClass<C_OP_OscillateVector>
+{
+    static C_OP_OscillateVector ISchemaClass<C_OP_OscillateVector>.From(nint handle) => new C_OP_OscillateVectorImpl(handle);
+    static int ISchemaClass<C_OP_OscillateVector>.Size => 1640;
+    static string? ISchemaClass<C_OP_OscillateVector>.ClassName => null;
 
-  static C_OP_OscillateVector ISchemaClass<C_OP_OscillateVector>.From(nint handle) => new C_OP_OscillateVectorImpl(handle);
-  static int ISchemaClass<C_OP_OscillateVector>.Size => 1640;
-  static string? ISchemaClass<C_OP_OscillateVector>.ClassName => null;
 
-  
-  public ref Vector RateMin { get; }
-  
-  public ref Vector RateMax { get; }
-  
-  public ref Vector FrequencyMin { get; }
-  
-  public ref Vector FrequencyMax { get; }
-  
-  public ParticleAttributeIndex_t Field { get; }
-  
-  public ref bool Proportional { get; }
-  
-  public ref bool ProportionalOp { get; }
-  
-  public ref bool Offset { get; }
-  
-  public ref float StartTime_min { get; }
-  
-  public ref float StartTime_max { get; }
-  
-  public ref float EndTime_min { get; }
-  
-  public ref float EndTime_max { get; }
-  
-  public CPerParticleFloatInput OscMult { get; }
-  
-  public CPerParticleFloatInput OscAdd { get; }
-  
-  public CPerParticleFloatInput RateScale { get; }
+    public ref Vector RateMin { get; }
+
+    public ref Vector RateMax { get; }
+
+    public ref Vector FrequencyMin { get; }
+
+    public ref Vector FrequencyMax { get; }
+
+    public ParticleAttributeIndex_t Field { get; }
+
+    public ref bool Proportional { get; }
+
+    public ref bool ProportionalOp { get; }
+
+    public ref bool Offset { get; }
+
+    public ref float StartTime_min { get; }
+
+    public ref float StartTime_max { get; }
+
+    public ref float EndTime_min { get; }
+
+    public ref float EndTime_max { get; }
+
+    public CPerParticleFloatInput OscMult { get; }
+
+    public CPerParticleFloatInput OscAdd { get; }
+
+    public CPerParticleFloatInput RateScale { get; }
 
 
 }

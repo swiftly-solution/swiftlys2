@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvSparkImpl : CPointEntityImpl, CEnvSpark {
+internal partial class CEnvSparkImpl : CPointEntityImpl, CEnvSpark
+{
+    public CEnvSparkImpl(nint handle) : base(handle) { }
 
-  public CEnvSparkImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DelayOffset;
 
-  private static nint? _DelayOffset;
-
-  public ref float Delay {
-    get {
-      if (_DelayOffset == null) {
-        _DelayOffset = Schema.GetOffset(0x3BACCABA7D68FD6E);
-      }
-      return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+    public ref float Delay {
+        get {
+            _DelayOffset = _DelayOffset ?? Schema.GetOffset(0x3BACCABA7D68FD6E);
+            return ref _Handle.AsRef<float>(_DelayOffset!.Value);
+        }
     }
-  }
-  private static nint? _MagnitudeOffset;
+    private static nint? _MagnitudeOffset;
 
-  public ref int Magnitude {
-    get {
-      if (_MagnitudeOffset == null) {
-        _MagnitudeOffset = Schema.GetOffset(0x3BACCABA0C71BDF1);
-      }
-      return ref _Handle.AsRef<int>(_MagnitudeOffset!.Value);
+    public ref int Magnitude {
+        get {
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x3BACCABA0C71BDF1);
+            return ref _Handle.AsRef<int>(_MagnitudeOffset!.Value);
+        }
     }
-  }
-  private static nint? _TrailLengthOffset;
+    private static nint? _TrailLengthOffset;
 
-  public ref int TrailLength {
-    get {
-      if (_TrailLengthOffset == null) {
-        _TrailLengthOffset = Schema.GetOffset(0x3BACCABA65AAB1A7);
-      }
-      return ref _Handle.AsRef<int>(_TrailLengthOffset!.Value);
+    public ref int TrailLength {
+        get {
+            _TrailLengthOffset = _TrailLengthOffset ?? Schema.GetOffset(0x3BACCABA65AAB1A7);
+            return ref _Handle.AsRef<int>(_TrailLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _TypeOffset;
+    private static nint? _TypeOffset;
 
-  public ref int Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x3BACCABA18853D59);
-      }
-      return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+    public ref int Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x3BACCABA18853D59);
+            return ref _Handle.AsRef<int>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnSparkOffset;
+    private static nint? _OnSparkOffset;
 
-  public CEntityIOOutput OnSpark {
-    get {
-      if (_OnSparkOffset == null) {
-        _OnSparkOffset = Schema.GetOffset(0x3BACCABA67E1EE5D);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnSparkOffset!.Value);
+    public ref CEntityIOOutput OnSpark {
+        get {
+            _OnSparkOffset = _OnSparkOffset ?? Schema.GetOffset(0x3BACCABA67E1EE5D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSparkOffset!.Value);
+        }
     }
-  }
 
 
 }

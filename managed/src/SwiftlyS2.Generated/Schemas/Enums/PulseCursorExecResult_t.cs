@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PulseCursorExecResult_t : uint {
-
+public enum PulseCursorExecResult_t : uint
+{
  Succeeded = 0,
 
  Canceled = 1,

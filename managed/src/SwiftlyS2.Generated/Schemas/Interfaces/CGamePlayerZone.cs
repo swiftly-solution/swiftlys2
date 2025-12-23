@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGamePlayerZone : CRuleBrushEntity, ISchemaClass<CGamePlayerZone> {
+public partial interface CGamePlayerZone : CRuleBrushEntity, ISchemaClass<CGamePlayerZone>
+{
+    static CGamePlayerZone ISchemaClass<CGamePlayerZone>.From(nint handle) => new CGamePlayerZoneImpl(handle);
+    static int ISchemaClass<CGamePlayerZone>.Size => 2176;
+    static string? ISchemaClass<CGamePlayerZone>.ClassName => "game_zone_player";
 
-  static CGamePlayerZone ISchemaClass<CGamePlayerZone>.From(nint handle) => new CGamePlayerZoneImpl(handle);
-  static int ISchemaClass<CGamePlayerZone>.Size => 2176;
-  static string? ISchemaClass<CGamePlayerZone>.ClassName => "game_zone_player";
 
-  
-  public CEntityIOOutput OnPlayerInZone { get; }
-  
-  public CEntityIOOutput OnPlayerOutZone { get; }
-  
-  // CEntityOutputTemplate< int32 >
-  public SchemaUntypedField PlayersInCount { get; }
-  
-  // CEntityOutputTemplate< int32 >
-  public SchemaUntypedField PlayersOutCount { get; }
+    public ref CEntityIOOutput OnPlayerInZone { get; }
+
+    public ref CEntityIOOutput OnPlayerOutZone { get; }
+
+    // CEntityOutputTemplate< int32 >
+    public SchemaUntypedField PlayersInCount { get; }
+
+    // CEntityOutputTemplate< int32 >
+    public SchemaUntypedField PlayersOutCount { get; }
 
 
 }

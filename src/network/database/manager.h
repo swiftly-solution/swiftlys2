@@ -1,6 +1,6 @@
 /************************************************************************************************
  * SwiftlyS2 is a scripting framework for Source2-based games.
- * Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ * Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,13 +28,16 @@ class CDatabaseManager : public IDatabaseManager
 public:
     virtual void Initialize() override;
 
-    virtual std::string GetDefaultConnection() override;
-    virtual std::string GetDefaultConnectionCredentials() override;
-    virtual std::string GetCredentials(const std::string& connectionName) override;
+    virtual std::string GetDefaultDriver() override;
+    virtual std::string GetDefaultConnectionName() override;
+    virtual DatabaseConnection GetDefaultConnection() override;
+    virtual DatabaseConnection GetConnection(const std::string& connectionName) override;
     virtual bool ConnectionExists(const std::string& connectionName) override;
+
 private:
-    std::string m_sDefaultConnection;
-    std::map<std::string, std::string> m_mConnectionCredentials;
+    DatabaseConnection ParseUri(const std::string& uri);
+    std::string m_sDefaultConnectionName;
+    std::map<std::string, DatabaseConnection> m_mConnections;
 };
 
 #endif

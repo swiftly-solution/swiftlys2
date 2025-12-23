@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCPPScriptComponentUpdaterImpl : CAnimComponentUpdaterImpl, CCPPScriptComponentUpdater {
+internal partial class CCPPScriptComponentUpdaterImpl : CAnimComponentUpdaterImpl, CCPPScriptComponentUpdater
+{
+    public CCPPScriptComponentUpdaterImpl(nint handle) : base(handle) { }
 
-  public CCPPScriptComponentUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScriptsToRunOffset;
 
-  private static nint? _ScriptsToRunOffset;
-
-  public ref CUtlVector<CGlobalSymbol> ScriptsToRun {
-    get {
-      if (_ScriptsToRunOffset == null) {
-        _ScriptsToRunOffset = Schema.GetOffset(0x4785DAC8378F3E0F);
-      }
-      return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ScriptsToRunOffset!.Value);
+    public ref CUtlVector<CGlobalSymbol> ScriptsToRun {
+        get {
+            _ScriptsToRunOffset = _ScriptsToRunOffset ?? Schema.GetOffset(0x4785DAC8378F3E0F);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_ScriptsToRunOffset!.Value);
+        }
     }
-  }
 
 
 }

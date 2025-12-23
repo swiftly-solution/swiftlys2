@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmChainLookatNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmChainLookatNode__CDefinition> {
+public partial interface CNmChainLookatNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmChainLookatNode__CDefinition>
+{
+    static CNmChainLookatNode__CDefinition ISchemaClass<CNmChainLookatNode__CDefinition>.From(nint handle) => new CNmChainLookatNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmChainLookatNode__CDefinition>.Size => 56;
+    static string? ISchemaClass<CNmChainLookatNode__CDefinition>.ClassName => null;
 
-  static CNmChainLookatNode__CDefinition ISchemaClass<CNmChainLookatNode__CDefinition>.From(nint handle) => new CNmChainLookatNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmChainLookatNode__CDefinition>.Size => 56;
-  static string? ISchemaClass<CNmChainLookatNode__CDefinition>.ClassName => null;
 
-  
-  public ref CGlobalSymbol ChainEndBoneID { get; }
-  
-  public ref short LookatTargetNodeIdx { get; }
-  
-  public ref short EnabledNodeIdx { get; }
-  
-  public ref float BlendTimeSeconds { get; }
-  
-  public ref byte ChainLength { get; }
-  
-  public ref bool IsTargetInWorldSpace { get; }
-  
-  public ref Vector ChainForwardDir { get; }
+    public ref CGlobalSymbol ChainEndBoneID { get; }
+
+    public ref short LookatTargetNodeIdx { get; }
+
+    public ref short EnabledNodeIdx { get; }
+
+    public ref float BlendTimeSeconds { get; }
+
+    public ref byte ChainLength { get; }
+
+    public ref bool IsTargetInWorldSpace { get; }
+
+    public ref Vector ChainForwardDir { get; }
 
 
 }

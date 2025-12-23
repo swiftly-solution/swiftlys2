@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSymbolAnimParameterImpl : CConcreteAnimParameterImpl, CSymbolAnimParameter {
+internal partial class CSymbolAnimParameterImpl : CConcreteAnimParameterImpl, CSymbolAnimParameter
+{
+    public CSymbolAnimParameterImpl(nint handle) : base(handle) { }
 
-  public CSymbolAnimParameterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DefaultValueOffset;
 
-  private static nint? _DefaultValueOffset;
-
-  public ref CGlobalSymbol DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0xA3486AA2BBE0341F);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
+    public ref CGlobalSymbol DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xA3486AA2BBE0341F);
+            return ref _Handle.AsRef<CGlobalSymbol>(_DefaultValueOffset!.Value);
+        }
     }
-  }
 
 
 }

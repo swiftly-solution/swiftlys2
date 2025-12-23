@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeVertexMapBuild_t : ISchemaClass<FeVertexMapBuild_t> {
+public partial interface FeVertexMapBuild_t : ISchemaClass<FeVertexMapBuild_t>
+{
+    static FeVertexMapBuild_t ISchemaClass<FeVertexMapBuild_t>.From(nint handle) => new FeVertexMapBuild_tImpl(handle);
+    static int ISchemaClass<FeVertexMapBuild_t>.Size => 48;
+    static string? ISchemaClass<FeVertexMapBuild_t>.ClassName => null;
 
-  static FeVertexMapBuild_t ISchemaClass<FeVertexMapBuild_t>.From(nint handle) => new FeVertexMapBuild_tImpl(handle);
-  static int ISchemaClass<FeVertexMapBuild_t>.Size => 48;
-  static string? ISchemaClass<FeVertexMapBuild_t>.ClassName => null;
 
-  
-  public string VertexMapName { get; set; }
-  
-  public ref uint NameHash { get; }
-  
-  public ref Color Color { get; }
-  
-  public ref float VolumetricSolveStrength { get; }
-  
-  public ref int ScaleSourceNode { get; }
-  
-  public ref CUtlVector<float> Weights { get; }
+    public string VertexMapName { get; set; }
+
+    public ref uint NameHash { get; }
+
+    public ref Color Color { get; }
+
+    public ref float VolumetricSolveStrength { get; }
+
+    public ref int ScaleSourceNode { get; }
+
+    public ref CUtlVector<float> Weights { get; }
 
 
 }

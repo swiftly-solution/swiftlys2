@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMarkupVolumeTagged_NavImpl : CMarkupVolumeTaggedImpl, CMarkupVolumeTagged_Nav {
+internal partial class CMarkupVolumeTagged_NavImpl : CMarkupVolumeTaggedImpl, CMarkupVolumeTagged_Nav
+{
+    public CMarkupVolumeTagged_NavImpl(nint handle) : base(handle) { }
 
-  public CMarkupVolumeTagged_NavImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScopesOffset;
 
-  private static nint? _ScopesOffset;
-
-  public ref NavScopeFlags_t Scopes {
-    get {
-      if (_ScopesOffset == null) {
-        _ScopesOffset = Schema.GetOffset(0x3E97D28E9E6C8A44);
-      }
-      return ref _Handle.AsRef<NavScopeFlags_t>(_ScopesOffset!.Value);
+    public ref NavScopeFlags_t Scopes {
+        get {
+            _ScopesOffset = _ScopesOffset ?? Schema.GetOffset(0x3E97D28E9E6C8A44);
+            return ref _Handle.AsRef<NavScopeFlags_t>(_ScopesOffset!.Value);
+        }
     }
-  }
 
 
 }

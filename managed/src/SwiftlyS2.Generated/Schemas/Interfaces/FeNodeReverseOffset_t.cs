@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeNodeReverseOffset_t : ISchemaClass<FeNodeReverseOffset_t> {
+public partial interface FeNodeReverseOffset_t : ISchemaClass<FeNodeReverseOffset_t>
+{
+    static FeNodeReverseOffset_t ISchemaClass<FeNodeReverseOffset_t>.From(nint handle) => new FeNodeReverseOffset_tImpl(handle);
+    static int ISchemaClass<FeNodeReverseOffset_t>.Size => 16;
+    static string? ISchemaClass<FeNodeReverseOffset_t>.ClassName => null;
 
-  static FeNodeReverseOffset_t ISchemaClass<FeNodeReverseOffset_t>.From(nint handle) => new FeNodeReverseOffset_tImpl(handle);
-  static int ISchemaClass<FeNodeReverseOffset_t>.Size => 16;
-  static string? ISchemaClass<FeNodeReverseOffset_t>.ClassName => null;
 
-  
-  public ref Vector Offset { get; }
-  
-  public ref ushort BoneCtrl { get; }
-  
-  public ref ushort TargetNode { get; }
+    public ref Vector Offset { get; }
+
+    public ref ushort BoneCtrl { get; }
+
+    public ref ushort TargetNode { get; }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VPhysics2ShapeDef_t : ISchemaClass<VPhysics2ShapeDef_t> {
+public partial interface VPhysics2ShapeDef_t : ISchemaClass<VPhysics2ShapeDef_t>
+{
+    static VPhysics2ShapeDef_t ISchemaClass<VPhysics2ShapeDef_t>.From(nint handle) => new VPhysics2ShapeDef_tImpl(handle);
+    static int ISchemaClass<VPhysics2ShapeDef_t>.Size => 120;
+    static string? ISchemaClass<VPhysics2ShapeDef_t>.ClassName => null;
 
-  static VPhysics2ShapeDef_t ISchemaClass<VPhysics2ShapeDef_t>.From(nint handle) => new VPhysics2ShapeDef_tImpl(handle);
-  static int ISchemaClass<VPhysics2ShapeDef_t>.Size => 120;
-  static string? ISchemaClass<VPhysics2ShapeDef_t>.ClassName => null;
 
-  
-  public ref CUtlVector<RnSphereDesc_t> Spheres { get; }
-  
-  public ref CUtlVector<RnCapsuleDesc_t> Capsules { get; }
-  
-  public ref CUtlVector<RnHullDesc_t> Hulls { get; }
-  
-  public ref CUtlVector<RnMeshDesc_t> Meshes { get; }
-  
-  public ref CUtlVector<ushort> CollisionAttributeIndices { get; }
+    public ref CUtlVector<RnSphereDesc_t> Spheres { get; }
+
+    public ref CUtlVector<RnCapsuleDesc_t> Capsules { get; }
+
+    public ref CUtlVector<RnHullDesc_t> Hulls { get; }
+
+    public ref CUtlVector<RnMeshDesc_t> Meshes { get; }
+
+    public ref CUtlVector<ushort> CollisionAttributeIndices { get; }
 
 
 }

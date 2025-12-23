@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseServerCursorImpl : CPulseExecCursorImpl, CPulseServerCursor {
+internal partial class CPulseServerCursorImpl : CPulseExecCursorImpl, CPulseServerCursor
+{
+    public CPulseServerCursorImpl(nint handle) : base(handle) { }
 
-  public CPulseServerCursorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActivatorOffset;
 
-  private static nint? _ActivatorOffset;
-
-  public ref CHandle<CBaseEntity> Activator {
-    get {
-      if (_ActivatorOffset == null) {
-        _ActivatorOffset = Schema.GetOffset(0x4FFA7BD2AB093BB2);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
+    public ref CHandle<CBaseEntity> Activator {
+        get {
+            _ActivatorOffset = _ActivatorOffset ?? Schema.GetOffset(0x4FFA7BD2AB093BB2);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
+        }
     }
-  }
-  private static nint? _CallerOffset;
+    private static nint? _CallerOffset;
 
-  public ref CHandle<CBaseEntity> Caller {
-    get {
-      if (_CallerOffset == null) {
-        _CallerOffset = Schema.GetOffset(0x4FFA7BD23F9735FC);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CallerOffset!.Value);
+    public ref CHandle<CBaseEntity> Caller {
+        get {
+            _CallerOffset = _CallerOffset ?? Schema.GetOffset(0x4FFA7BD23F9735FC);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_CallerOffset!.Value);
+        }
     }
-  }
 
 
 }

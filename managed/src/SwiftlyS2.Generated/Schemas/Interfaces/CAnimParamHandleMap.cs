@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimParamHandleMap : ISchemaClass<CAnimParamHandleMap> {
+public partial interface CAnimParamHandleMap : ISchemaClass<CAnimParamHandleMap>
+{
+    static CAnimParamHandleMap ISchemaClass<CAnimParamHandleMap>.From(nint handle) => new CAnimParamHandleMapImpl(handle);
+    static int ISchemaClass<CAnimParamHandleMap>.Size => 32;
+    static string? ISchemaClass<CAnimParamHandleMap>.ClassName => null;
 
-  static CAnimParamHandleMap ISchemaClass<CAnimParamHandleMap>.From(nint handle) => new CAnimParamHandleMapImpl(handle);
-  static int ISchemaClass<CAnimParamHandleMap>.Size => 32;
-  static string? ISchemaClass<CAnimParamHandleMap>.ClassName => null;
 
-  
-  // CUtlHashtable< uint16, int16 >
-  public SchemaUntypedField List { get; }
+    // CUtlHashtable< uint16, int16 >
+    public SchemaUntypedField List { get; }
 
 
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapDirectionToCPToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDirectionToCPToVector> {
+public partial interface C_OP_RemapDirectionToCPToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDirectionToCPToVector>
+{
+    static C_OP_RemapDirectionToCPToVector ISchemaClass<C_OP_RemapDirectionToCPToVector>.From(nint handle) => new C_OP_RemapDirectionToCPToVectorImpl(handle);
+    static int ISchemaClass<C_OP_RemapDirectionToCPToVector>.Size => 504;
+    static string? ISchemaClass<C_OP_RemapDirectionToCPToVector>.ClassName => null;
 
-  static C_OP_RemapDirectionToCPToVector ISchemaClass<C_OP_RemapDirectionToCPToVector>.From(nint handle) => new C_OP_RemapDirectionToCPToVectorImpl(handle);
-  static int ISchemaClass<C_OP_RemapDirectionToCPToVector>.Size => 504;
-  static string? ISchemaClass<C_OP_RemapDirectionToCPToVector>.ClassName => null;
 
-  
-  public ref int CP { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float Scale { get; }
-  
-  public ref float OffsetRot { get; }
-  
-  public ref Vector OffsetAxis { get; }
-  
-  public ref bool Normalize { get; }
-  
-  public ParticleAttributeIndex_t FieldStrength { get; }
+    public ref int CP { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float Scale { get; }
+
+    public ref float OffsetRot { get; }
+
+    public ref Vector OffsetAxis { get; }
+
+    public ref bool Normalize { get; }
+
+    public ParticleAttributeIndex_t FieldStrength { get; }
 
 
 }

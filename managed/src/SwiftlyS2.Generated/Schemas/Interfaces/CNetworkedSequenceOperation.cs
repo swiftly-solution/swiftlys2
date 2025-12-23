@@ -8,31 +8,31 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNetworkedSequenceOperation : ISchemaClass<CNetworkedSequenceOperation> {
+public partial interface CNetworkedSequenceOperation : ISchemaClass<CNetworkedSequenceOperation>
+{
+    static CNetworkedSequenceOperation ISchemaClass<CNetworkedSequenceOperation>.From(nint handle) => new CNetworkedSequenceOperationImpl(handle);
+    static int ISchemaClass<CNetworkedSequenceOperation>.Size => 40;
+    static string? ISchemaClass<CNetworkedSequenceOperation>.ClassName => null;
 
-  static CNetworkedSequenceOperation ISchemaClass<CNetworkedSequenceOperation>.From(nint handle) => new CNetworkedSequenceOperationImpl(handle);
-  static int ISchemaClass<CNetworkedSequenceOperation>.Size => 40;
-  static string? ISchemaClass<CNetworkedSequenceOperation>.ClassName => null;
 
-  
-  public HSequence Sequence { get; }
-  
-  public ref float PrevCycle { get; }
-  
-  public ref float Cycle { get; }
-  
-  public ref CNetworkedQuantizedFloat Weight { get; }
-  
-  public ref bool SequenceChangeNetworked { get; }
-  
-  public ref bool Discontinuity { get; }
-  
-  public ref float PrevCycleFromDiscontinuity { get; }
-  
-  public ref float PrevCycleForAnimEventDetection { get; }
+    public HSequence Sequence { get; }
 
-  public void SequenceUpdated();
-  public void PrevCycleUpdated();
-  public void CycleUpdated();
-  public void WeightUpdated();
+    public ref float PrevCycle { get; }
+
+    public ref float Cycle { get; }
+
+    public ref CNetworkedQuantizedFloat Weight { get; }
+
+    public ref bool SequenceChangeNetworked { get; }
+
+    public ref bool Discontinuity { get; }
+
+    public ref float PrevCycleFromDiscontinuity { get; }
+
+    public ref float PrevCycleForAnimEventDetection { get; }
+
+    public void SequenceUpdated();
+    public void PrevCycleUpdated();
+    public void CycleUpdated();
+    public void WeightUpdated();
 }

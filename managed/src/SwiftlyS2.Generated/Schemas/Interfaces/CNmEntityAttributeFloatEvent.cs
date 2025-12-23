@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmEntityAttributeFloatEvent : CNmEntityAttributeEventBase, ISchemaClass<CNmEntityAttributeFloatEvent> {
+public partial interface CNmEntityAttributeFloatEvent : CNmEntityAttributeEventBase, ISchemaClass<CNmEntityAttributeFloatEvent>
+{
+    static CNmEntityAttributeFloatEvent ISchemaClass<CNmEntityAttributeFloatEvent>.From(nint handle) => new CNmEntityAttributeFloatEventImpl(handle);
+    static int ISchemaClass<CNmEntityAttributeFloatEvent>.Size => 120;
+    static string? ISchemaClass<CNmEntityAttributeFloatEvent>.ClassName => null;
 
-  static CNmEntityAttributeFloatEvent ISchemaClass<CNmEntityAttributeFloatEvent>.From(nint handle) => new CNmEntityAttributeFloatEventImpl(handle);
-  static int ISchemaClass<CNmEntityAttributeFloatEvent>.Size => 120;
-  static string? ISchemaClass<CNmEntityAttributeFloatEvent>.ClassName => null;
 
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField FloatValue { get; }
+    // CPiecewiseCurve
+    public SchemaUntypedField FloatValue { get; }
 
 
 }

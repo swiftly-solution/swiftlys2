@@ -6,20 +6,19 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRangeIntImpl : SchemaClass, CRangeInt {
+internal partial class CRangeIntImpl : SchemaClass, CRangeInt
+{
+    public CRangeIntImpl(nint handle) : base(handle) { }
 
-  public CRangeIntImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<int> Value {
-    get => new SchemaFixedArray<int>(_Handle, 0xF42199F07F437844, 2, 4, 4);
-  }
+    public ISchemaFixedArray<int> Value {
+        get => new SchemaFixedArray<int>(_Handle, 0xF42199F07F437844, 2, 4, 4);
+    }
 
 
 }

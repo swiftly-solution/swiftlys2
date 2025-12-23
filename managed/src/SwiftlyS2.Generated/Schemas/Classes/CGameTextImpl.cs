@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGameTextImpl : CRulePointEntityImpl, CGameText {
+internal partial class CGameTextImpl : CRulePointEntityImpl, CGameText
+{
+    public CGameTextImpl(nint handle) : base(handle) { }
 
-  public CGameTextImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MessageOffset;
 
-  private static nint? _MessageOffset;
+    public string Message {
+        get {
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0x8AF55797CC5243DC);
+            return Schema.GetString(_Handle.Read<nint>(_MessageOffset!.Value));
+        }
+        set {
+            _MessageOffset = _MessageOffset ?? Schema.GetOffset(0x8AF55797CC5243DC);
+            Schema.SetString(_Handle, _MessageOffset!.Value, value);
+        }
+    } 
+    private static nint? _TextParmsOffset;
 
-  public string Message {
-    get {
-      if (_MessageOffset == null) {
-        _MessageOffset = Schema.GetOffset(0x8AF55797CC5243DC);
-      }
-      var ptr = _Handle.Read<nint>(_MessageOffset!.Value);
-      return Schema.GetString(ptr);
+    public hudtextparms_t TextParms {
+        get {
+            _TextParmsOffset = _TextParmsOffset ?? Schema.GetOffset(0x8AF5579715FCA35D);
+            return new hudtextparms_tImpl(_Handle + _TextParmsOffset!.Value);
+        }
     }
-    set {
-      if (_MessageOffset == null) {
-        _MessageOffset = Schema.GetOffset(0x8AF55797CC5243DC);
-      }
-      Schema.SetString(_Handle, _MessageOffset!.Value, value);
-    }
-  } 
-  private static nint? _TextParmsOffset;
-
-  public hudtextparms_t TextParms {
-    get {
-      if (_TextParmsOffset == null) {
-        _TextParmsOffset = Schema.GetOffset(0x8AF5579715FCA35D);
-      }
-      return new hudtextparms_tImpl(_Handle + _TextParmsOffset!.Value);
-    }
-  }
 
 
 }

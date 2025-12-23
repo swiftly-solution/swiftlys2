@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AggregateLODSetup_tImpl : SchemaClass, AggregateLODSetup_t {
+internal partial class AggregateLODSetup_tImpl : SchemaClass, AggregateLODSetup_t
+{
+    public AggregateLODSetup_tImpl(nint handle) : base(handle) { }
 
-  public AggregateLODSetup_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LODOriginOffset;
 
-  private static nint? _LODOriginOffset;
-
-  public ref Vector LODOrigin {
-    get {
-      if (_LODOriginOffset == null) {
-        _LODOriginOffset = Schema.GetOffset(0xA931690332EC7486);
-      }
-      return ref _Handle.AsRef<Vector>(_LODOriginOffset!.Value);
+    public ref Vector LODOrigin {
+        get {
+            _LODOriginOffset = _LODOriginOffset ?? Schema.GetOffset(0xA931690332EC7486);
+            return ref _Handle.AsRef<Vector>(_LODOriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxObjectScaleOffset;
+    private static nint? _MaxObjectScaleOffset;
 
-  public ref float MaxObjectScale {
-    get {
-      if (_MaxObjectScaleOffset == null) {
-        _MaxObjectScaleOffset = Schema.GetOffset(0xA9316903D0DAF878);
-      }
-      return ref _Handle.AsRef<float>(_MaxObjectScaleOffset!.Value);
+    public ref float MaxObjectScale {
+        get {
+            _MaxObjectScaleOffset = _MaxObjectScaleOffset ?? Schema.GetOffset(0xA9316903D0DAF878);
+            return ref _Handle.AsRef<float>(_MaxObjectScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SwitchDistancesOffset;
+    private static nint? _SwitchDistancesOffset;
 
-  public ref CUtlVector<float> SwitchDistances {
-    get {
-      if (_SwitchDistancesOffset == null) {
-        _SwitchDistancesOffset = Schema.GetOffset(0xA9316903E49F3FC3);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_SwitchDistancesOffset!.Value);
+    public ref CUtlVector<float> SwitchDistances {
+        get {
+            _SwitchDistancesOffset = _SwitchDistancesOffset ?? Schema.GetOffset(0xA9316903E49F3FC3);
+            return ref _Handle.AsRef<CUtlVector<float>>(_SwitchDistancesOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_EndCapTimedDecayImpl : CParticleFunctionOperatorImpl, C_OP_EndCapTimedDecay {
+internal partial class C_OP_EndCapTimedDecayImpl : CParticleFunctionOperatorImpl, C_OP_EndCapTimedDecay
+{
+    public C_OP_EndCapTimedDecayImpl(nint handle) : base(handle) { }
 
-  public C_OP_EndCapTimedDecayImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DecayTimeOffset;
 
-  private static nint? _DecayTimeOffset;
-
-  public ref float DecayTime {
-    get {
-      if (_DecayTimeOffset == null) {
-        _DecayTimeOffset = Schema.GetOffset(0x2866C865E94A0656);
-      }
-      return ref _Handle.AsRef<float>(_DecayTimeOffset!.Value);
+    public ref float DecayTime {
+        get {
+            _DecayTimeOffset = _DecayTimeOffset ?? Schema.GetOffset(0x2866C865E94A0656);
+            return ref _Handle.AsRef<float>(_DecayTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

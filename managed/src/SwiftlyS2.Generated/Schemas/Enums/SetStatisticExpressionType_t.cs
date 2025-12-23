@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SetStatisticExpressionType_t : uint {
-
+public enum SetStatisticExpressionType_t : uint
+{
  SET_EXPRESSION_UNINITIALIZED = uint.MaxValue,
 
  SET_EXPRESSION_SUM = 0,

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum BBoxVolumeType_t : uint {
-
+public enum BBoxVolumeType_t : uint
+{
  BBOX_VOLUME = 0,
 
  BBOX_DIMENSIONS = 1,

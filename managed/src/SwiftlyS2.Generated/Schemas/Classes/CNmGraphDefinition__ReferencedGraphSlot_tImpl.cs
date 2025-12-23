@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmGraphDefinition__ReferencedGraphSlot_tImpl : SchemaClass, CNmGraphDefinition__ReferencedGraphSlot_t {
+internal partial class CNmGraphDefinition__ReferencedGraphSlot_tImpl : SchemaClass, CNmGraphDefinition__ReferencedGraphSlot_t
+{
+    public CNmGraphDefinition__ReferencedGraphSlot_tImpl(nint handle) : base(handle) { }
 
-  public CNmGraphDefinition__ReferencedGraphSlot_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodeIdxOffset;
 
-  private static nint? _NodeIdxOffset;
-
-  public ref short NodeIdx {
-    get {
-      if (_NodeIdxOffset == null) {
-        _NodeIdxOffset = Schema.GetOffset(0x33C2E12E124AB5CC);
-      }
-      return ref _Handle.AsRef<short>(_NodeIdxOffset!.Value);
+    public ref short NodeIdx {
+        get {
+            _NodeIdxOffset = _NodeIdxOffset ?? Schema.GetOffset(0x33C2E12E124AB5CC);
+            return ref _Handle.AsRef<short>(_NodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _DataSlotIdxOffset;
+    private static nint? _DataSlotIdxOffset;
 
-  public ref short DataSlotIdx {
-    get {
-      if (_DataSlotIdxOffset == null) {
-        _DataSlotIdxOffset = Schema.GetOffset(0x33C2E12E7115A3B4);
-      }
-      return ref _Handle.AsRef<short>(_DataSlotIdxOffset!.Value);
+    public ref short DataSlotIdx {
+        get {
+            _DataSlotIdxOffset = _DataSlotIdxOffset ?? Schema.GetOffset(0x33C2E12E7115A3B4);
+            return ref _Handle.AsRef<short>(_DataSlotIdxOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGunTargetImpl : CBaseToggleImpl, CGunTarget {
+internal partial class CGunTargetImpl : CBaseToggleImpl, CGunTarget
+{
+    public CGunTargetImpl(nint handle) : base(handle) { }
 
-  public CGunTargetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnOffset;
 
-  private static nint? _OnOffset;
-
-  public ref bool On {
-    get {
-      if (_OnOffset == null) {
-        _OnOffset = Schema.GetOffset(0x4CB42969DEB2AE70);
-      }
-      return ref _Handle.AsRef<bool>(_OnOffset!.Value);
+    public ref bool On {
+        get {
+            _OnOffset = _OnOffset ?? Schema.GetOffset(0x4CB42969DEB2AE70);
+            return ref _Handle.AsRef<bool>(_OnOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetEntOffset;
+    private static nint? _TargetEntOffset;
 
-  public ref CHandle<CBaseEntity> TargetEnt {
-    get {
-      if (_TargetEntOffset == null) {
-        _TargetEntOffset = Schema.GetOffset(0x4CB429692DD292D7);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntOffset!.Value);
+    public ref CHandle<CBaseEntity> TargetEnt {
+        get {
+            _TargetEntOffset = _TargetEntOffset ?? Schema.GetOffset(0x4CB429692DD292D7);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnDeathOffset;
+    private static nint? _OnDeathOffset;
 
-  public CEntityIOOutput OnDeath {
-    get {
-      if (_OnDeathOffset == null) {
-        _OnDeathOffset = Schema.GetOffset(0x4CB429696F756BD2);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnDeathOffset!.Value);
+    public ref CEntityIOOutput OnDeath {
+        get {
+            _OnDeathOffset = _OnDeathOffset ?? Schema.GetOffset(0x4CB429696F756BD2);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDeathOffset!.Value);
+        }
     }
-  }
 
 
 }

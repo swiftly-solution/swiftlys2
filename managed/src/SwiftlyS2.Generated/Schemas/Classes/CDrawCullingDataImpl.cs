@@ -6,30 +6,27 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDrawCullingDataImpl : SchemaClass, CDrawCullingData {
+internal partial class CDrawCullingDataImpl : SchemaClass, CDrawCullingData
+{
+    public CDrawCullingDataImpl(nint handle) : base(handle) { }
 
-  public CDrawCullingDataImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<byte> ConeAxis {
-    get => new SchemaFixedArray<byte>(_Handle, 0x80665970C59E234F, 3, 1, 1);
-  }
-  private static nint? _ConeCutoffOffset;
-
-  public ref byte ConeCutoff {
-    get {
-      if (_ConeCutoffOffset == null) {
-        _ConeCutoffOffset = Schema.GetOffset(0x80665970CAE61D67);
-      }
-      return ref _Handle.AsRef<byte>(_ConeCutoffOffset!.Value);
+    public ISchemaFixedArray<byte> ConeAxis {
+        get => new SchemaFixedArray<byte>(_Handle, 0x80665970C59E234F, 3, 1, 1);
     }
-  }
+    private static nint? _ConeCutoffOffset;
+
+    public ref byte ConeCutoff {
+        get {
+            _ConeCutoffOffset = _ConeCutoffOffset ?? Schema.GetOffset(0x80665970CAE61D67);
+            return ref _Handle.AsRef<byte>(_ConeCutoffOffset!.Value);
+        }
+    }
 
 
 }

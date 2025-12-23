@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ParentVorticesImpl : CParticleFunctionForceImpl, C_OP_ParentVortices {
+internal partial class C_OP_ParentVorticesImpl : CParticleFunctionForceImpl, C_OP_ParentVortices
+{
+    public C_OP_ParentVorticesImpl(nint handle) : base(handle) { }
 
-  public C_OP_ParentVorticesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceScaleOffset;
 
-  private static nint? _ForceScaleOffset;
-
-  public ref float ForceScale {
-    get {
-      if (_ForceScaleOffset == null) {
-        _ForceScaleOffset = Schema.GetOffset(0xBB2B6F884817F390);
-      }
-      return ref _Handle.AsRef<float>(_ForceScaleOffset!.Value);
+    public ref float ForceScale {
+        get {
+            _ForceScaleOffset = _ForceScaleOffset ?? Schema.GetOffset(0xBB2B6F884817F390);
+            return ref _Handle.AsRef<float>(_ForceScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _TwistAxisOffset;
+    private static nint? _TwistAxisOffset;
 
-  public ref Vector TwistAxis {
-    get {
-      if (_TwistAxisOffset == null) {
-        _TwistAxisOffset = Schema.GetOffset(0xBB2B6F8808970741);
-      }
-      return ref _Handle.AsRef<Vector>(_TwistAxisOffset!.Value);
+    public ref Vector TwistAxis {
+        get {
+            _TwistAxisOffset = _TwistAxisOffset ?? Schema.GetOffset(0xBB2B6F8808970741);
+            return ref _Handle.AsRef<Vector>(_TwistAxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlipBasedOnYawOffset;
+    private static nint? _FlipBasedOnYawOffset;
 
-  public ref bool FlipBasedOnYaw {
-    get {
-      if (_FlipBasedOnYawOffset == null) {
-        _FlipBasedOnYawOffset = Schema.GetOffset(0xBB2B6F88BCFD5843);
-      }
-      return ref _Handle.AsRef<bool>(_FlipBasedOnYawOffset!.Value);
+    public ref bool FlipBasedOnYaw {
+        get {
+            _FlipBasedOnYawOffset = _FlipBasedOnYawOffset ?? Schema.GetOffset(0xBB2B6F88BCFD5843);
+            return ref _Handle.AsRef<bool>(_FlipBasedOnYawOffset!.Value);
+        }
     }
-  }
 
 
 }

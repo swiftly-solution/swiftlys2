@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerDecayingSineWaveImpl : CVoiceContainerBaseImpl, CVoiceContainerDecayingSineWave {
+internal partial class CVoiceContainerDecayingSineWaveImpl : CVoiceContainerBaseImpl, CVoiceContainerDecayingSineWave
+{
+    public CVoiceContainerDecayingSineWaveImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerDecayingSineWaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FrequencyOffset;
 
-  private static nint? _FrequencyOffset;
-
-  public ref float Frequency {
-    get {
-      if (_FrequencyOffset == null) {
-        _FrequencyOffset = Schema.GetOffset(0x3383CD01D2C16DD7);
-      }
-      return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+    public ref float Frequency {
+        get {
+            _FrequencyOffset = _FrequencyOffset ?? Schema.GetOffset(0x3383CD01D2C16DD7);
+            return ref _Handle.AsRef<float>(_FrequencyOffset!.Value);
+        }
     }
-  }
-  private static nint? _DecayTimeOffset;
+    private static nint? _DecayTimeOffset;
 
-  public ref float DecayTime {
-    get {
-      if (_DecayTimeOffset == null) {
-        _DecayTimeOffset = Schema.GetOffset(0x3383CD01E94A0656);
-      }
-      return ref _Handle.AsRef<float>(_DecayTimeOffset!.Value);
+    public ref float DecayTime {
+        get {
+            _DecayTimeOffset = _DecayTimeOffset ?? Schema.GetOffset(0x3383CD01E94A0656);
+            return ref _Handle.AsRef<float>(_DecayTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -5,8 +5,13 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.Natives;
 
+public interface ICHandle
+{
+  public uint Raw { get; }
+}
+
 [StructLayout(LayoutKind.Sequential, Size = 4)]
-public struct CHandle<T> where T : class, ISchemaClass<T>
+public struct CHandle<T> : ICHandle where T : class, ISchemaClass<T>
 {
   private uint _index;
 

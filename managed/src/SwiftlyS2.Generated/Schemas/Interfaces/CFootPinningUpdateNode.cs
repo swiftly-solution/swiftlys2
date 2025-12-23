@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootPinningUpdateNode : CUnaryUpdateNode, ISchemaClass<CFootPinningUpdateNode> {
+public partial interface CFootPinningUpdateNode : CUnaryUpdateNode, ISchemaClass<CFootPinningUpdateNode>
+{
+    static CFootPinningUpdateNode ISchemaClass<CFootPinningUpdateNode>.From(nint handle) => new CFootPinningUpdateNodeImpl(handle);
+    static int ISchemaClass<CFootPinningUpdateNode>.Size => 208;
+    static string? ISchemaClass<CFootPinningUpdateNode>.ClassName => null;
 
-  static CFootPinningUpdateNode ISchemaClass<CFootPinningUpdateNode>.From(nint handle) => new CFootPinningUpdateNodeImpl(handle);
-  static int ISchemaClass<CFootPinningUpdateNode>.Size => 208;
-  static string? ISchemaClass<CFootPinningUpdateNode>.ClassName => null;
 
-  
-  public FootPinningPoseOpFixedData_t PoseOpFixedData { get; }
-  
-  public ref FootPinningTimingSource TimingSource { get; }
-  
-  public ref CUtlVector<CAnimParamHandle> Params { get; }
-  
-  public ref bool ResetChild { get; }
+    public FootPinningPoseOpFixedData_t PoseOpFixedData { get; }
+
+    public ref FootPinningTimingSource TimingSource { get; }
+
+    public ref CUtlVector<CAnimParamHandle> Params { get; }
+
+    public ref bool ResetChild { get; }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FootStepTriggerImpl : SchemaClass, FootStepTrigger {
+internal partial class FootStepTriggerImpl : SchemaClass, FootStepTrigger
+{
+    public FootStepTriggerImpl(nint handle) : base(handle) { }
 
-  public FootStepTriggerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagsOffset;
 
-  private static nint? _TagsOffset;
-
-  public ref CUtlVector<int> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0xD1D326CDB46C8540);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_TagsOffset!.Value);
+    public ref CUtlVector<int> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0xD1D326CDB46C8540);
+            return ref _Handle.AsRef<CUtlVector<int>>(_TagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FootIndexOffset;
+    private static nint? _FootIndexOffset;
 
-  public ref int FootIndex {
-    get {
-      if (_FootIndexOffset == null) {
-        _FootIndexOffset = Schema.GetOffset(0xD1D326CD67D56BAB);
-      }
-      return ref _Handle.AsRef<int>(_FootIndexOffset!.Value);
+    public ref int FootIndex {
+        get {
+            _FootIndexOffset = _FootIndexOffset ?? Schema.GetOffset(0xD1D326CD67D56BAB);
+            return ref _Handle.AsRef<int>(_FootIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriggerPhaseOffset;
+    private static nint? _TriggerPhaseOffset;
 
-  public ref StepPhase TriggerPhase {
-    get {
-      if (_TriggerPhaseOffset == null) {
-        _TriggerPhaseOffset = Schema.GetOffset(0xD1D326CD486B84EE);
-      }
-      return ref _Handle.AsRef<StepPhase>(_TriggerPhaseOffset!.Value);
+    public ref StepPhase TriggerPhase {
+        get {
+            _TriggerPhaseOffset = _TriggerPhaseOffset ?? Schema.GetOffset(0xD1D326CD486B84EE);
+            return ref _Handle.AsRef<StepPhase>(_TriggerPhaseOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CHintMessageImpl : SchemaClass, CHintMessage {
+internal partial class CHintMessageImpl : SchemaClass, CHintMessage
+{
+    public CHintMessageImpl(nint handle) : base(handle) { }
 
-  public CHintMessageImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HintStringOffset;
 
-  private static nint? _HintStringOffset;
+    public string HintString {
+        get {
+            _HintStringOffset = _HintStringOffset ?? Schema.GetOffset(0x7663729E433E2101);
+            return Schema.GetString(_Handle.Read<nint>(_HintStringOffset!.Value));
+        }
+        set {
+            _HintStringOffset = _HintStringOffset ?? Schema.GetOffset(0x7663729E433E2101);
+            Schema.SetString(_Handle, _HintStringOffset!.Value, value);
+        }
+    } 
+    private static nint? _ArgsOffset;
 
-  public string HintString {
-    get {
-      if (_HintStringOffset == null) {
-        _HintStringOffset = Schema.GetOffset(0x7663729E433E2101);
-      }
-      var ptr = _Handle.Read<nint>(_HintStringOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CString> Args {
+        get {
+            _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0x7663729E5D6040DC);
+            return ref _Handle.AsRef<CUtlVector<CString>>(_ArgsOffset!.Value);
+        }
     }
-    set {
-      if (_HintStringOffset == null) {
-        _HintStringOffset = Schema.GetOffset(0x7663729E433E2101);
-      }
-      Schema.SetString(_Handle, _HintStringOffset!.Value, value);
-    }
-  } 
-  private static nint? _ArgsOffset;
+    private static nint? _DurationOffset;
 
-  public ref CUtlVector<CString> Args {
-    get {
-      if (_ArgsOffset == null) {
-        _ArgsOffset = Schema.GetOffset(0x7663729E5D6040DC);
-      }
-      return ref _Handle.AsRef<CUtlVector<CString>>(_ArgsOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x7663729E3D9FF5AD);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _DurationOffset;
-
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0x7663729E3D9FF5AD);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
-    }
-  }
 
 
 }

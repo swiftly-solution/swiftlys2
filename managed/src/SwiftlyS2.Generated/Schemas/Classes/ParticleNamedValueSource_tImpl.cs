@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ParticleNamedValueSource_tImpl : SchemaClass, ParticleNamedValueSource_t {
+internal partial class ParticleNamedValueSource_tImpl : SchemaClass, ParticleNamedValueSource_t
+{
+    public ParticleNamedValueSource_tImpl(nint handle) : base(handle) { }
 
-  public ParticleNamedValueSource_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x740B6BEFCAE8A266);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x740B6BEFCAE8A266);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _IsPublicOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x740B6BEFCAE8A266);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref bool IsPublic {
+        get {
+            _IsPublicOffset = _IsPublicOffset ?? Schema.GetOffset(0x740B6BEFD2D88EB0);
+            return ref _Handle.AsRef<bool>(_IsPublicOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x740B6BEFCAE8A266);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _IsPublicOffset;
+    private static nint? _ValueTypeOffset;
 
-  public ref bool IsPublic {
-    get {
-      if (_IsPublicOffset == null) {
-        _IsPublicOffset = Schema.GetOffset(0x740B6BEFD2D88EB0);
-      }
-      return ref _Handle.AsRef<bool>(_IsPublicOffset!.Value);
+    public SchemaUntypedField ValueType {
+        get {
+            _ValueTypeOffset = _ValueTypeOffset ?? Schema.GetOffset(0x740B6BEFC2A673CA);
+            return new SchemaUntypedField(_Handle + _ValueTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValueTypeOffset;
+    private static nint? _DefaultConfigOffset;
 
-  public SchemaUntypedField ValueType {
-    get {
-      if (_ValueTypeOffset == null) {
-        _ValueTypeOffset = Schema.GetOffset(0x740B6BEFC2A673CA);
-      }
-      return new SchemaUntypedField(_Handle + _ValueTypeOffset!.Value);
+    public ParticleNamedValueConfiguration_t DefaultConfig {
+        get {
+            _DefaultConfigOffset = _DefaultConfigOffset ?? Schema.GetOffset(0x740B6BEF05A58128);
+            return new ParticleNamedValueConfiguration_tImpl(_Handle + _DefaultConfigOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultConfigOffset;
-
-  public ParticleNamedValueConfiguration_t DefaultConfig {
-    get {
-      if (_DefaultConfigOffset == null) {
-        _DefaultConfigOffset = Schema.GetOffset(0x740B6BEF05A58128);
-      }
-      return new ParticleNamedValueConfiguration_tImpl(_Handle + _DefaultConfigOffset!.Value);
-    }
-  }
 
 
 }

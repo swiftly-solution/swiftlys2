@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerSetImpl : CVoiceContainerBaseImpl, CVoiceContainerSet {
+internal partial class CVoiceContainerSetImpl : CVoiceContainerBaseImpl, CVoiceContainerSet
+{
+    public CVoiceContainerSetImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerSetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SoundsToPlayOffset;
 
-  private static nint? _SoundsToPlayOffset;
-
-  public ref CUtlVector<CVoiceContainerSetElement> SoundsToPlay {
-    get {
-      if (_SoundsToPlayOffset == null) {
-        _SoundsToPlayOffset = Schema.GetOffset(0xA07D279DCB5F70E);
-      }
-      return ref _Handle.AsRef<CUtlVector<CVoiceContainerSetElement>>(_SoundsToPlayOffset!.Value);
+    public ref CUtlVector<CVoiceContainerSetElement> SoundsToPlay {
+        get {
+            _SoundsToPlayOffset = _SoundsToPlayOffset ?? Schema.GetOffset(0xA07D279DCB5F70E);
+            return ref _Handle.AsRef<CUtlVector<CVoiceContainerSetElement>>(_SoundsToPlayOffset!.Value);
+        }
     }
-  }
 
 
 }

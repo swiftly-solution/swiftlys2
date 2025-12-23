@@ -8,56 +8,56 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CColorCorrection : CBaseEntity, ISchemaClass<CColorCorrection> {
+public partial interface CColorCorrection : CBaseEntity, ISchemaClass<CColorCorrection>
+{
+    static CColorCorrection ISchemaClass<CColorCorrection>.From(nint handle) => new CColorCorrectionImpl(handle);
+    static int ISchemaClass<CColorCorrection>.Size => 1832;
+    static string? ISchemaClass<CColorCorrection>.ClassName => "color_correction";
 
-  static CColorCorrection ISchemaClass<CColorCorrection>.From(nint handle) => new CColorCorrectionImpl(handle);
-  static int ISchemaClass<CColorCorrection>.Size => 1832;
-  static string? ISchemaClass<CColorCorrection>.ClassName => "color_correction";
 
-  
-  public ref float FadeInDuration { get; }
-  
-  public ref float FadeOutDuration { get; }
-  
-  public ref float StartFadeInWeight { get; }
-  
-  public ref float StartFadeOutWeight { get; }
-  
-  public GameTime_t TimeStartFadeIn { get; }
-  
-  public GameTime_t TimeStartFadeOut { get; }
-  
-  public ref float MaxWeight { get; }
-  
-  public ref bool StartDisabled { get; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref bool Master { get; }
-  
-  public ref bool ClientSide { get; }
-  
-  public ref bool Exclusive { get; }
-  
-  public ref float MinFalloff { get; }
-  
-  public ref float MaxFalloff { get; }
-  
-  public ref float CurWeight { get; }
-  
-  public string NetlookupFilename { get; set; }
-  
-  public string LookupFilename { get; set; }
+    public ref float FadeInDuration { get; }
 
-  public void FadeInDurationUpdated();
-  public void FadeOutDurationUpdated();
-  public void MaxWeightUpdated();
-  public void EnabledUpdated();
-  public void MasterUpdated();
-  public void ClientSideUpdated();
-  public void ExclusiveUpdated();
-  public void MinFalloffUpdated();
-  public void MaxFalloffUpdated();
-  public void CurWeightUpdated();
-  public void NetlookupFilenameUpdated();
+    public ref float FadeOutDuration { get; }
+
+    public ref float StartFadeInWeight { get; }
+
+    public ref float StartFadeOutWeight { get; }
+
+    public GameTime_t TimeStartFadeIn { get; }
+
+    public GameTime_t TimeStartFadeOut { get; }
+
+    public ref float MaxWeight { get; }
+
+    public ref bool StartDisabled { get; }
+
+    public ref bool Enabled { get; }
+
+    public ref bool Master { get; }
+
+    public ref bool ClientSide { get; }
+
+    public ref bool Exclusive { get; }
+
+    public ref float MinFalloff { get; }
+
+    public ref float MaxFalloff { get; }
+
+    public ref float CurWeight { get; }
+
+    public string NetlookupFilename { get; set; }
+
+    public string LookupFilename { get; set; }
+
+    public void FadeInDurationUpdated();
+    public void FadeOutDurationUpdated();
+    public void MaxWeightUpdated();
+    public void EnabledUpdated();
+    public void MasterUpdated();
+    public void ClientSideUpdated();
+    public void ExclusiveUpdated();
+    public void MinFalloffUpdated();
+    public void MaxFalloffUpdated();
+    public void CurWeightUpdated();
+    public void NetlookupFilenameUpdated();
 }

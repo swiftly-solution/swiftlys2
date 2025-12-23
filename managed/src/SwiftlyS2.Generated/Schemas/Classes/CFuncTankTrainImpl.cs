@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncTankTrainImpl : CFuncTrackTrainImpl, CFuncTankTrain {
+internal partial class CFuncTankTrainImpl : CFuncTrackTrainImpl, CFuncTankTrain
+{
+    public CFuncTankTrainImpl(nint handle) : base(handle) { }
 
-  public CFuncTankTrainImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnDeathOffset;
 
-  private static nint? _OnDeathOffset;
-
-  public CEntityIOOutput OnDeath {
-    get {
-      if (_OnDeathOffset == null) {
-        _OnDeathOffset = Schema.GetOffset(0xF7897E7E6F756BD2);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnDeathOffset!.Value);
+    public ref CEntityIOOutput OnDeath {
+        get {
+            _OnDeathOffset = _OnDeathOffset ?? Schema.GetOffset(0xF7897E7E6F756BD2);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDeathOffset!.Value);
+        }
     }
-  }
 
 
 }

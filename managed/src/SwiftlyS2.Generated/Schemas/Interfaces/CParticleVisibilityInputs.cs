@@ -8,50 +8,50 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleVisibilityInputs : ISchemaClass<CParticleVisibilityInputs> {
+public partial interface CParticleVisibilityInputs : ISchemaClass<CParticleVisibilityInputs>
+{
+    static CParticleVisibilityInputs ISchemaClass<CParticleVisibilityInputs>.From(nint handle) => new CParticleVisibilityInputsImpl(handle);
+    static int ISchemaClass<CParticleVisibilityInputs>.Size => 72;
+    static string? ISchemaClass<CParticleVisibilityInputs>.ClassName => null;
 
-  static CParticleVisibilityInputs ISchemaClass<CParticleVisibilityInputs>.From(nint handle) => new CParticleVisibilityInputsImpl(handle);
-  static int ISchemaClass<CParticleVisibilityInputs>.Size => 72;
-  static string? ISchemaClass<CParticleVisibilityInputs>.ClassName => null;
 
-  
-  public ref float CameraBias { get; }
-  
-  public ref int CPin { get; }
-  
-  public ref float ProxyRadius { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float InputPixelVisFade { get; }
-  
-  public ref float NoPixelVisibilityFallback { get; }
-  
-  public ref float DistanceInputMin { get; }
-  
-  public ref float DistanceInputMax { get; }
-  
-  public ref float DotInputMin { get; }
-  
-  public ref float DotInputMax { get; }
-  
-  public ref bool DotCPAngles { get; }
-  
-  public ref bool DotCameraAngles { get; }
-  
-  public ref float AlphaScaleMin { get; }
-  
-  public ref float AlphaScaleMax { get; }
-  
-  public ref float RadiusScaleMin { get; }
-  
-  public ref float RadiusScaleMax { get; }
-  
-  public ref float RadiusScaleFOVBase { get; }
-  
-  public ref bool RightEye { get; }
+    public ref float CameraBias { get; }
+
+    public ref int CPin { get; }
+
+    public ref float ProxyRadius { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float InputPixelVisFade { get; }
+
+    public ref float NoPixelVisibilityFallback { get; }
+
+    public ref float DistanceInputMin { get; }
+
+    public ref float DistanceInputMax { get; }
+
+    public ref float DotInputMin { get; }
+
+    public ref float DotInputMax { get; }
+
+    public ref bool DotCPAngles { get; }
+
+    public ref bool DotCameraAngles { get; }
+
+    public ref float AlphaScaleMin { get; }
+
+    public ref float AlphaScaleMax { get; }
+
+    public ref float RadiusScaleMin { get; }
+
+    public ref float RadiusScaleMax { get; }
+
+    public ref float RadiusScaleFOVBase { get; }
+
+    public ref bool RightEye { get; }
 
 
 }

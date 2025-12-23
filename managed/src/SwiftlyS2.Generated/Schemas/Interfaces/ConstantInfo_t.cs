@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ConstantInfo_t : ISchemaClass<ConstantInfo_t> {
+public partial interface ConstantInfo_t : ISchemaClass<ConstantInfo_t>
+{
+    static ConstantInfo_t ISchemaClass<ConstantInfo_t>.From(nint handle) => new ConstantInfo_tImpl(handle);
+    static int ISchemaClass<ConstantInfo_t>.Size => 16;
+    static string? ISchemaClass<ConstantInfo_t>.ClassName => null;
 
-  static ConstantInfo_t ISchemaClass<ConstantInfo_t>.From(nint handle) => new ConstantInfo_tImpl(handle);
-  static int ISchemaClass<ConstantInfo_t>.Size => 16;
-  static string? ISchemaClass<ConstantInfo_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CUtlStringToken NameToken { get; }
-  
-  public ref float Value { get; }
+    public string Name { get; set; }
+
+    public ref CUtlStringToken NameToken { get; }
+
+    public ref float Value { get; }
 
 
 }

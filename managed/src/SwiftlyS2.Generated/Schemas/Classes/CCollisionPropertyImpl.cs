@@ -6,228 +6,165 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCollisionPropertyImpl : SchemaClass, CCollisionProperty {
+internal partial class CCollisionPropertyImpl : SchemaClass, CCollisionProperty
+{
+    public CCollisionPropertyImpl(nint handle) : base(handle) { }
 
-  public CCollisionPropertyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CollisionAttributeOffset;
 
-  private static nint? _CollisionAttributeOffset;
-
-  public VPhysicsCollisionAttribute_t CollisionAttribute {
-    get {
-      if (_CollisionAttributeOffset == null) {
-        _CollisionAttributeOffset = Schema.GetOffset(0x794D87F77E1AEF05);
-      }
-      return new VPhysicsCollisionAttribute_tImpl(_Handle + _CollisionAttributeOffset!.Value);
+    public VPhysicsCollisionAttribute_t CollisionAttribute {
+        get {
+            _CollisionAttributeOffset = _CollisionAttributeOffset ?? Schema.GetOffset(0x794D87F77E1AEF05);
+            return new VPhysicsCollisionAttribute_tImpl(_Handle + _CollisionAttributeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinsOffset;
+    private static nint? _MinsOffset;
 
-  public ref Vector Mins {
-    get {
-      if (_MinsOffset == null) {
-        _MinsOffset = Schema.GetOffset(0x794D87F70E57F80C);
-      }
-      return ref _Handle.AsRef<Vector>(_MinsOffset!.Value);
+    public ref Vector Mins {
+        get {
+            _MinsOffset = _MinsOffset ?? Schema.GetOffset(0x794D87F70E57F80C);
+            return ref _Handle.AsRef<Vector>(_MinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxsOffset;
+    private static nint? _MaxsOffset;
 
-  public ref Vector Maxs {
-    get {
-      if (_MaxsOffset == null) {
-        _MaxsOffset = Schema.GetOffset(0x794D87F77D388D3E);
-      }
-      return ref _Handle.AsRef<Vector>(_MaxsOffset!.Value);
+    public ref Vector Maxs {
+        get {
+            _MaxsOffset = _MaxsOffset ?? Schema.GetOffset(0x794D87F77D388D3E);
+            return ref _Handle.AsRef<Vector>(_MaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SolidFlagsOffset;
+    private static nint? _SolidFlagsOffset;
 
-  public ref byte SolidFlags {
-    get {
-      if (_SolidFlagsOffset == null) {
-        _SolidFlagsOffset = Schema.GetOffset(0x794D87F7B21D0CFB);
-      }
-      return ref _Handle.AsRef<byte>(_SolidFlagsOffset!.Value);
+    public ref byte SolidFlags {
+        get {
+            _SolidFlagsOffset = _SolidFlagsOffset ?? Schema.GetOffset(0x794D87F7B21D0CFB);
+            return ref _Handle.AsRef<byte>(_SolidFlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SolidTypeOffset;
+    private static nint? _SolidTypeOffset;
 
-  public ref SolidType_t SolidType {
-    get {
-      if (_SolidTypeOffset == null) {
-        _SolidTypeOffset = Schema.GetOffset(0x794D87F7BE0FC0E8);
-      }
-      return ref _Handle.AsRef<SolidType_t>(_SolidTypeOffset!.Value);
+    public ref SolidType_t SolidType {
+        get {
+            _SolidTypeOffset = _SolidTypeOffset ?? Schema.GetOffset(0x794D87F7BE0FC0E8);
+            return ref _Handle.AsRef<SolidType_t>(_SolidTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriggerBloatOffset;
+    private static nint? _TriggerBloatOffset;
 
-  public ref byte TriggerBloat {
-    get {
-      if (_TriggerBloatOffset == null) {
-        _TriggerBloatOffset = Schema.GetOffset(0x794D87F789A6F5C3);
-      }
-      return ref _Handle.AsRef<byte>(_TriggerBloatOffset!.Value);
+    public ref byte TriggerBloat {
+        get {
+            _TriggerBloatOffset = _TriggerBloatOffset ?? Schema.GetOffset(0x794D87F789A6F5C3);
+            return ref _Handle.AsRef<byte>(_TriggerBloatOffset!.Value);
+        }
     }
-  }
-  private static nint? _SurroundTypeOffset;
+    private static nint? _SurroundTypeOffset;
 
-  public ref SurroundingBoundsType_t SurroundType {
-    get {
-      if (_SurroundTypeOffset == null) {
-        _SurroundTypeOffset = Schema.GetOffset(0x794D87F725FA3137);
-      }
-      return ref _Handle.AsRef<SurroundingBoundsType_t>(_SurroundTypeOffset!.Value);
+    public ref SurroundingBoundsType_t SurroundType {
+        get {
+            _SurroundTypeOffset = _SurroundTypeOffset ?? Schema.GetOffset(0x794D87F725FA3137);
+            return ref _Handle.AsRef<SurroundingBoundsType_t>(_SurroundTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _CollisionGroupOffset;
+    private static nint? _CollisionGroupOffset;
 
-  public ref byte CollisionGroup {
-    get {
-      if (_CollisionGroupOffset == null) {
-        _CollisionGroupOffset = Schema.GetOffset(0x794D87F791BF7016);
-      }
-      return ref _Handle.AsRef<byte>(_CollisionGroupOffset!.Value);
+    public ref byte CollisionGroup {
+        get {
+            _CollisionGroupOffset = _CollisionGroupOffset ?? Schema.GetOffset(0x794D87F791BF7016);
+            return ref _Handle.AsRef<byte>(_CollisionGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnablePhysicsOffset;
+    private static nint? _EnablePhysicsOffset;
 
-  public ref byte EnablePhysics {
-    get {
-      if (_EnablePhysicsOffset == null) {
-        _EnablePhysicsOffset = Schema.GetOffset(0x794D87F7BCD6B6BB);
-      }
-      return ref _Handle.AsRef<byte>(_EnablePhysicsOffset!.Value);
+    public ref byte EnablePhysics {
+        get {
+            _EnablePhysicsOffset = _EnablePhysicsOffset ?? Schema.GetOffset(0x794D87F7BCD6B6BB);
+            return ref _Handle.AsRef<byte>(_EnablePhysicsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoundingRadiusOffset;
+    private static nint? _BoundingRadiusOffset;
 
-  public ref float BoundingRadius {
-    get {
-      if (_BoundingRadiusOffset == null) {
-        _BoundingRadiusOffset = Schema.GetOffset(0x794D87F74C638611);
-      }
-      return ref _Handle.AsRef<float>(_BoundingRadiusOffset!.Value);
+    public ref float BoundingRadius {
+        get {
+            _BoundingRadiusOffset = _BoundingRadiusOffset ?? Schema.GetOffset(0x794D87F74C638611);
+            return ref _Handle.AsRef<float>(_BoundingRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpecifiedSurroundingMinsOffset;
+    private static nint? _SpecifiedSurroundingMinsOffset;
 
-  public ref Vector SpecifiedSurroundingMins {
-    get {
-      if (_SpecifiedSurroundingMinsOffset == null) {
-        _SpecifiedSurroundingMinsOffset = Schema.GetOffset(0x794D87F71406E000);
-      }
-      return ref _Handle.AsRef<Vector>(_SpecifiedSurroundingMinsOffset!.Value);
+    public ref Vector SpecifiedSurroundingMins {
+        get {
+            _SpecifiedSurroundingMinsOffset = _SpecifiedSurroundingMinsOffset ?? Schema.GetOffset(0x794D87F71406E000);
+            return ref _Handle.AsRef<Vector>(_SpecifiedSurroundingMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpecifiedSurroundingMaxsOffset;
+    private static nint? _SpecifiedSurroundingMaxsOffset;
 
-  public ref Vector SpecifiedSurroundingMaxs {
-    get {
-      if (_SpecifiedSurroundingMaxsOffset == null) {
-        _SpecifiedSurroundingMaxsOffset = Schema.GetOffset(0x794D87F792FCA91A);
-      }
-      return ref _Handle.AsRef<Vector>(_SpecifiedSurroundingMaxsOffset!.Value);
+    public ref Vector SpecifiedSurroundingMaxs {
+        get {
+            _SpecifiedSurroundingMaxsOffset = _SpecifiedSurroundingMaxsOffset ?? Schema.GetOffset(0x794D87F792FCA91A);
+            return ref _Handle.AsRef<Vector>(_SpecifiedSurroundingMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SurroundingMaxsOffset;
+    private static nint? _SurroundingMaxsOffset;
 
-  public ref Vector SurroundingMaxs {
-    get {
-      if (_SurroundingMaxsOffset == null) {
-        _SurroundingMaxsOffset = Schema.GetOffset(0x794D87F7F5AED3D6);
-      }
-      return ref _Handle.AsRef<Vector>(_SurroundingMaxsOffset!.Value);
+    public ref Vector SurroundingMaxs {
+        get {
+            _SurroundingMaxsOffset = _SurroundingMaxsOffset ?? Schema.GetOffset(0x794D87F7F5AED3D6);
+            return ref _Handle.AsRef<Vector>(_SurroundingMaxsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SurroundingMinsOffset;
+    private static nint? _SurroundingMinsOffset;
 
-  public ref Vector SurroundingMins {
-    get {
-      if (_SurroundingMinsOffset == null) {
-        _SurroundingMinsOffset = Schema.GetOffset(0x794D87F7749A0F94);
-      }
-      return ref _Handle.AsRef<Vector>(_SurroundingMinsOffset!.Value);
+    public ref Vector SurroundingMins {
+        get {
+            _SurroundingMinsOffset = _SurroundingMinsOffset ?? Schema.GetOffset(0x794D87F7749A0F94);
+            return ref _Handle.AsRef<Vector>(_SurroundingMinsOffset!.Value);
+        }
     }
-  }
-  private static nint? _CapsuleCenter1Offset;
+    private static nint? _CapsuleCenter1Offset;
 
-  public ref Vector CapsuleCenter1 {
-    get {
-      if (_CapsuleCenter1Offset == null) {
-        _CapsuleCenter1Offset = Schema.GetOffset(0x794D87F7A5E81978);
-      }
-      return ref _Handle.AsRef<Vector>(_CapsuleCenter1Offset!.Value);
+    public ref Vector CapsuleCenter1 {
+        get {
+            _CapsuleCenter1Offset = _CapsuleCenter1Offset ?? Schema.GetOffset(0x794D87F7A5E81978);
+            return ref _Handle.AsRef<Vector>(_CapsuleCenter1Offset!.Value);
+        }
     }
-  }
-  private static nint? _CapsuleCenter2Offset;
+    private static nint? _CapsuleCenter2Offset;
 
-  public ref Vector CapsuleCenter2 {
-    get {
-      if (_CapsuleCenter2Offset == null) {
-        _CapsuleCenter2Offset = Schema.GetOffset(0x794D87F7A8E81E31);
-      }
-      return ref _Handle.AsRef<Vector>(_CapsuleCenter2Offset!.Value);
+    public ref Vector CapsuleCenter2 {
+        get {
+            _CapsuleCenter2Offset = _CapsuleCenter2Offset ?? Schema.GetOffset(0x794D87F7A8E81E31);
+            return ref _Handle.AsRef<Vector>(_CapsuleCenter2Offset!.Value);
+        }
     }
-  }
-  private static nint? _CapsuleRadiusOffset;
+    private static nint? _CapsuleRadiusOffset;
 
-  public ref float CapsuleRadius {
-    get {
-      if (_CapsuleRadiusOffset == null) {
-        _CapsuleRadiusOffset = Schema.GetOffset(0x794D87F7A1A593D0);
-      }
-      return ref _Handle.AsRef<float>(_CapsuleRadiusOffset!.Value);
+    public ref float CapsuleRadius {
+        get {
+            _CapsuleRadiusOffset = _CapsuleRadiusOffset ?? Schema.GetOffset(0x794D87F7A1A593D0);
+            return ref _Handle.AsRef<float>(_CapsuleRadiusOffset!.Value);
+        }
     }
-  }
 
-  public void CollisionAttributeUpdated() {
-    Schema.Update(_Handle, 0x794D87F77E1AEF05);
-  }
-  public void MinsUpdated() {
-    Schema.Update(_Handle, 0x794D87F70E57F80C);
-  }
-  public void MaxsUpdated() {
-    Schema.Update(_Handle, 0x794D87F77D388D3E);
-  }
-  public void SolidFlagsUpdated() {
-    Schema.Update(_Handle, 0x794D87F7B21D0CFB);
-  }
-  public void SolidTypeUpdated() {
-    Schema.Update(_Handle, 0x794D87F7BE0FC0E8);
-  }
-  public void TriggerBloatUpdated() {
-    Schema.Update(_Handle, 0x794D87F789A6F5C3);
-  }
-  public void SurroundTypeUpdated() {
-    Schema.Update(_Handle, 0x794D87F725FA3137);
-  }
-  public void CollisionGroupUpdated() {
-    Schema.Update(_Handle, 0x794D87F791BF7016);
-  }
-  public void EnablePhysicsUpdated() {
-    Schema.Update(_Handle, 0x794D87F7BCD6B6BB);
-  }
-  public void SpecifiedSurroundingMinsUpdated() {
-    Schema.Update(_Handle, 0x794D87F71406E000);
-  }
-  public void SpecifiedSurroundingMaxsUpdated() {
-    Schema.Update(_Handle, 0x794D87F792FCA91A);
-  }
-  public void CapsuleCenter1Updated() {
-    Schema.Update(_Handle, 0x794D87F7A5E81978);
-  }
-  public void CapsuleCenter2Updated() {
-    Schema.Update(_Handle, 0x794D87F7A8E81E31);
-  }
-  public void CapsuleRadiusUpdated() {
-    Schema.Update(_Handle, 0x794D87F7A1A593D0);
-  }
+    public void CollisionAttributeUpdated() => Schema.Update(_Handle, 0x794D87F77E1AEF05);
+    public void MinsUpdated() => Schema.Update(_Handle, 0x794D87F70E57F80C);
+    public void MaxsUpdated() => Schema.Update(_Handle, 0x794D87F77D388D3E);
+    public void SolidFlagsUpdated() => Schema.Update(_Handle, 0x794D87F7B21D0CFB);
+    public void SolidTypeUpdated() => Schema.Update(_Handle, 0x794D87F7BE0FC0E8);
+    public void TriggerBloatUpdated() => Schema.Update(_Handle, 0x794D87F789A6F5C3);
+    public void SurroundTypeUpdated() => Schema.Update(_Handle, 0x794D87F725FA3137);
+    public void CollisionGroupUpdated() => Schema.Update(_Handle, 0x794D87F791BF7016);
+    public void EnablePhysicsUpdated() => Schema.Update(_Handle, 0x794D87F7BCD6B6BB);
+    public void SpecifiedSurroundingMinsUpdated() => Schema.Update(_Handle, 0x794D87F71406E000);
+    public void SpecifiedSurroundingMaxsUpdated() => Schema.Update(_Handle, 0x794D87F792FCA91A);
+    public void CapsuleCenter1Updated() => Schema.Update(_Handle, 0x794D87F7A5E81978);
+    public void CapsuleCenter2Updated() => Schema.Update(_Handle, 0x794D87F7A8E81E31);
+    public void CapsuleRadiusUpdated() => Schema.Update(_Handle, 0x794D87F7A1A593D0);
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RemapParticleCountToNamedModelElementScalar : C_INIT_RemapParticleCountToScalar, ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar> {
+public partial interface C_INIT_RemapParticleCountToNamedModelElementScalar : C_INIT_RemapParticleCountToScalar, ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar>
+{
+    static C_INIT_RemapParticleCountToNamedModelElementScalar ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar>.From(nint handle) => new C_INIT_RemapParticleCountToNamedModelElementScalarImpl(handle);
+    static int ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar>.Size => 552;
+    static string? ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar>.ClassName => null;
 
-  static C_INIT_RemapParticleCountToNamedModelElementScalar ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar>.From(nint handle) => new C_INIT_RemapParticleCountToNamedModelElementScalarImpl(handle);
-  static int ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar>.Size => 552;
-  static string? ISchemaClass<C_INIT_RemapParticleCountToNamedModelElementScalar>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-  
-  public string OutputMinName { get; set; }
-  
-  public string OutputMaxName { get; set; }
-  
-  public ref bool ModelFromRenderer { get; }
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
+
+    public string OutputMinName { get; set; }
+
+    public string OutputMaxName { get; set; }
+
+    public ref bool ModelFromRenderer { get; }
 
 
 }

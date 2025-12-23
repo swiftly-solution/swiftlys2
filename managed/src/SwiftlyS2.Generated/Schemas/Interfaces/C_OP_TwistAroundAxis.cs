@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_TwistAroundAxis : CParticleFunctionForce, ISchemaClass<C_OP_TwistAroundAxis> {
+public partial interface C_OP_TwistAroundAxis : CParticleFunctionForce, ISchemaClass<C_OP_TwistAroundAxis>
+{
+    static C_OP_TwistAroundAxis ISchemaClass<C_OP_TwistAroundAxis>.From(nint handle) => new C_OP_TwistAroundAxisImpl(handle);
+    static int ISchemaClass<C_OP_TwistAroundAxis>.Size => 504;
+    static string? ISchemaClass<C_OP_TwistAroundAxis>.ClassName => null;
 
-  static C_OP_TwistAroundAxis ISchemaClass<C_OP_TwistAroundAxis>.From(nint handle) => new C_OP_TwistAroundAxisImpl(handle);
-  static int ISchemaClass<C_OP_TwistAroundAxis>.Size => 504;
-  static string? ISchemaClass<C_OP_TwistAroundAxis>.ClassName => null;
 
-  
-  public ref float ForceAmount { get; }
-  
-  public ref Vector TwistAxis { get; }
-  
-  public ref bool LocalSpace { get; }
-  
-  public ref int ControlPointNumber { get; }
+    public ref float ForceAmount { get; }
+
+    public ref Vector TwistAxis { get; }
+
+    public ref bool LocalSpace { get; }
+
+    public ref int ControlPointNumber { get; }
 
 
 }

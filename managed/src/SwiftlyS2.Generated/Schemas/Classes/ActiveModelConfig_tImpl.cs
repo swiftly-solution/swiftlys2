@@ -6,75 +6,55 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ActiveModelConfig_tImpl : SchemaClass, ActiveModelConfig_t {
+internal partial class ActiveModelConfig_tImpl : SchemaClass, ActiveModelConfig_t
+{
+    public ActiveModelConfig_tImpl(nint handle) : base(handle) { }
 
-  public ActiveModelConfig_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HandleOffset;
 
-  private static nint? _HandleOffset;
-
-  public ModelConfigHandle_t Handle {
-    get {
-      if (_HandleOffset == null) {
-        _HandleOffset = Schema.GetOffset(0x554D81919D208453);
-      }
-      return new ModelConfigHandle_tImpl(_Handle + _HandleOffset!.Value);
+    public ModelConfigHandle_t Handle {
+        get {
+            _HandleOffset = _HandleOffset ?? Schema.GetOffset(0x554D81919D208453);
+            return new ModelConfigHandle_tImpl(_Handle + _HandleOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameOffset;
+    private static nint? _NameOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x554D8191CAE8A266);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x554D8191CAE8A266);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _AssociatedEntitiesOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x554D8191CAE8A266);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x554D8191CAE8A266);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _AssociatedEntitiesOffset;
 
-  public ref CUtlVector<CHandle<CBaseModelEntity>> AssociatedEntities {
-    get {
-      if (_AssociatedEntitiesOffset == null) {
-        _AssociatedEntitiesOffset = Schema.GetOffset(0x554D8191D6EB4F18);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AssociatedEntitiesOffset!.Value);
+    public ref CUtlVector<CHandle<CBaseModelEntity>> AssociatedEntities {
+        get {
+            _AssociatedEntitiesOffset = _AssociatedEntitiesOffset ?? Schema.GetOffset(0x554D8191D6EB4F18);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_AssociatedEntitiesOffset!.Value);
+        }
     }
-  }
-  private static nint? _AssociatedEntityNamesOffset;
+    private static nint? _AssociatedEntityNamesOffset;
 
-  public ref CUtlVector<SchemaUntypedField> AssociatedEntityNames {
-    get {
-      if (_AssociatedEntityNamesOffset == null) {
-        _AssociatedEntityNamesOffset = Schema.GetOffset(0x554D8191EB3B241C);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AssociatedEntityNamesOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> AssociatedEntityNames {
+        get {
+            _AssociatedEntityNamesOffset = _AssociatedEntityNamesOffset ?? Schema.GetOffset(0x554D8191EB3B241C);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_AssociatedEntityNamesOffset!.Value);
+        }
     }
-  }
 
-  public void HandleUpdated() {
-    Schema.Update(_Handle, 0x554D81919D208453);
-  }
-  public void NameUpdated() {
-    Schema.Update(_Handle, 0x554D8191CAE8A266);
-  }
-  public void AssociatedEntitiesUpdated() {
-    Schema.Update(_Handle, 0x554D8191D6EB4F18);
-  }
-  public void AssociatedEntityNamesUpdated() {
-    Schema.Update(_Handle, 0x554D8191EB3B241C);
-  }
+    public void HandleUpdated() => Schema.Update(_Handle, 0x554D81919D208453);
+    public void NameUpdated() => Schema.Update(_Handle, 0x554D8191CAE8A266);
+    public void AssociatedEntitiesUpdated() => Schema.Update(_Handle, 0x554D8191D6EB4F18);
+    public void AssociatedEntityNamesUpdated() => Schema.Update(_Handle, 0x554D8191EB3B241C);
 }

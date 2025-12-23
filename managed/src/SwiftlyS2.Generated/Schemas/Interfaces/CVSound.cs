@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVSound : ISchemaClass<CVSound> {
+public partial interface CVSound : ISchemaClass<CVSound>
+{
+    static CVSound ISchemaClass<CVSound>.From(nint handle) => new CVSoundImpl(handle);
+    static int ISchemaClass<CVSound>.Size => 120;
+    static string? ISchemaClass<CVSound>.ClassName => null;
 
-  static CVSound ISchemaClass<CVSound>.From(nint handle) => new CVSoundImpl(handle);
-  static int ISchemaClass<CVSound>.Size => 120;
-  static string? ISchemaClass<CVSound>.ClassName => null;
 
-  
-  public ref int Rate { get; }
-  
-  public ref CVSoundFormat_t Format { get; }
-  
-  public ref uint Channels { get; }
-  
-  public ref int LoopStart { get; }
-  
-  public ref uint SampleCount { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref CUtlVector<CAudioSentence> Sentences { get; }
-  
-  public ref uint StreamingSize { get; }
-  
-  public ref CUtlVector<int> SeekTable { get; }
-  
-  public ref int LoopEnd { get; }
-  
-  public ref CUtlBinaryBlock EncodedHeader { get; }
+    public ref int Rate { get; }
+
+    public ref CVSoundFormat_t Format { get; }
+
+    public ref uint Channels { get; }
+
+    public ref int LoopStart { get; }
+
+    public ref uint SampleCount { get; }
+
+    public ref float Duration { get; }
+
+    public ref CUtlVector<CAudioSentence> Sentences { get; }
+
+    public ref uint StreamingSize { get; }
+
+    public ref CUtlVector<int> SeekTable { get; }
+
+    public ref int LoopEnd { get; }
+
+    public ref CUtlBinaryBlock EncodedHeader { get; }
 
 
 }

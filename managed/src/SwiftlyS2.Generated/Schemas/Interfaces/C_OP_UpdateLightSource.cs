@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_UpdateLightSource : CParticleFunctionOperator, ISchemaClass<C_OP_UpdateLightSource> {
+public partial interface C_OP_UpdateLightSource : CParticleFunctionOperator, ISchemaClass<C_OP_UpdateLightSource>
+{
+    static C_OP_UpdateLightSource ISchemaClass<C_OP_UpdateLightSource>.From(nint handle) => new C_OP_UpdateLightSourceImpl(handle);
+    static int ISchemaClass<C_OP_UpdateLightSource>.Size => 488;
+    static string? ISchemaClass<C_OP_UpdateLightSource>.ClassName => null;
 
-  static C_OP_UpdateLightSource ISchemaClass<C_OP_UpdateLightSource>.From(nint handle) => new C_OP_UpdateLightSourceImpl(handle);
-  static int ISchemaClass<C_OP_UpdateLightSource>.Size => 488;
-  static string? ISchemaClass<C_OP_UpdateLightSource>.ClassName => null;
 
-  
-  public ref Color ColorTint { get; }
-  
-  public ref float BrightnessScale { get; }
-  
-  public ref float RadiusScale { get; }
-  
-  public ref float MinimumLightingRadius { get; }
-  
-  public ref float MaximumLightingRadius { get; }
-  
-  public ref float PositionDampingConstant { get; }
+    public ref Color ColorTint { get; }
+
+    public ref float BrightnessScale { get; }
+
+    public ref float RadiusScale { get; }
+
+    public ref float MinimumLightingRadius { get; }
+
+    public ref float MaximumLightingRadius { get; }
+
+    public ref float PositionDampingConstant { get; }
 
 
 }

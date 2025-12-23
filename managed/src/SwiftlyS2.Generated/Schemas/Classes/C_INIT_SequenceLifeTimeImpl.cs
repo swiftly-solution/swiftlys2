@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_SequenceLifeTimeImpl : CParticleFunctionInitializerImpl, C_INIT_SequenceLifeTime {
+internal partial class C_INIT_SequenceLifeTimeImpl : CParticleFunctionInitializerImpl, C_INIT_SequenceLifeTime
+{
+    public C_INIT_SequenceLifeTimeImpl(nint handle) : base(handle) { }
 
-  public C_INIT_SequenceLifeTimeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FramerateOffset;
 
-  private static nint? _FramerateOffset;
-
-  public ref float Framerate {
-    get {
-      if (_FramerateOffset == null) {
-        _FramerateOffset = Schema.GetOffset(0xC4BD3FF8F4EAA666);
-      }
-      return ref _Handle.AsRef<float>(_FramerateOffset!.Value);
+    public ref float Framerate {
+        get {
+            _FramerateOffset = _FramerateOffset ?? Schema.GetOffset(0xC4BD3FF8F4EAA666);
+            return ref _Handle.AsRef<float>(_FramerateOffset!.Value);
+        }
     }
-  }
 
 
 }

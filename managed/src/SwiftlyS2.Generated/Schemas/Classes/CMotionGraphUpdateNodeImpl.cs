@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotionGraphUpdateNodeImpl : CLeafUpdateNodeImpl, CMotionGraphUpdateNode {
+internal partial class CMotionGraphUpdateNodeImpl : CLeafUpdateNodeImpl, CMotionGraphUpdateNode
+{
+    public CMotionGraphUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CMotionGraphUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MotionGraphOffset;
 
-  private static nint? _MotionGraphOffset;
-
-  public SchemaUntypedField MotionGraph {
-    get {
-      if (_MotionGraphOffset == null) {
-        _MotionGraphOffset = Schema.GetOffset(0x69396A054F70C737);
-      }
-      return new SchemaUntypedField(_Handle + _MotionGraphOffset!.Value);
+    public SchemaUntypedField MotionGraph {
+        get {
+            _MotionGraphOffset = _MotionGraphOffset ?? Schema.GetOffset(0x69396A054F70C737);
+            return new SchemaUntypedField(_Handle + _MotionGraphOffset!.Value);
+        }
     }
-  }
 
 
 }

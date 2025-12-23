@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRevertSaved : CModelPointEntity, ISchemaClass<CRevertSaved> {
+public partial interface CRevertSaved : CModelPointEntity, ISchemaClass<CRevertSaved>
+{
+    static CRevertSaved ISchemaClass<CRevertSaved>.From(nint handle) => new CRevertSavedImpl(handle);
+    static int ISchemaClass<CRevertSaved>.Size => 2024;
+    static string? ISchemaClass<CRevertSaved>.ClassName => "player_loadsaved";
 
-  static CRevertSaved ISchemaClass<CRevertSaved>.From(nint handle) => new CRevertSavedImpl(handle);
-  static int ISchemaClass<CRevertSaved>.Size => 2024;
-  static string? ISchemaClass<CRevertSaved>.ClassName => "player_loadsaved";
 
-  
-  public ref float LoadTime { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref float HoldTime { get; }
+    public ref float LoadTime { get; }
+
+    public ref float Duration { get; }
+
+    public ref float HoldTime { get; }
 
 
 }

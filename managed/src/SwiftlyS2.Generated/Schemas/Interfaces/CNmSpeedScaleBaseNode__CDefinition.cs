@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmSpeedScaleBaseNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmSpeedScaleBaseNode__CDefinition> {
+public partial interface CNmSpeedScaleBaseNode__CDefinition : CNmPassthroughNode__CDefinition, ISchemaClass<CNmSpeedScaleBaseNode__CDefinition>
+{
+    static CNmSpeedScaleBaseNode__CDefinition ISchemaClass<CNmSpeedScaleBaseNode__CDefinition>.From(nint handle) => new CNmSpeedScaleBaseNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmSpeedScaleBaseNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmSpeedScaleBaseNode__CDefinition>.ClassName => null;
 
-  static CNmSpeedScaleBaseNode__CDefinition ISchemaClass<CNmSpeedScaleBaseNode__CDefinition>.From(nint handle) => new CNmSpeedScaleBaseNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmSpeedScaleBaseNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmSpeedScaleBaseNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref float DefaultInputValue { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    public ref float DefaultInputValue { get; }
 
 
 }

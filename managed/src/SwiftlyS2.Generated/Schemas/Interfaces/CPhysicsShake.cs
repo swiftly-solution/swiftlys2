@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysicsShake : ISchemaClass<CPhysicsShake> {
+public partial interface CPhysicsShake : ISchemaClass<CPhysicsShake>
+{
+    static CPhysicsShake ISchemaClass<CPhysicsShake>.From(nint handle) => new CPhysicsShakeImpl(handle);
+    static int ISchemaClass<CPhysicsShake>.Size => 24;
+    static string? ISchemaClass<CPhysicsShake>.ClassName => null;
 
-  static CPhysicsShake ISchemaClass<CPhysicsShake>.From(nint handle) => new CPhysicsShakeImpl(handle);
-  static int ISchemaClass<CPhysicsShake>.Size => 24;
-  static string? ISchemaClass<CPhysicsShake>.ClassName => null;
 
-  
-  public ref Vector Force { get; }
+    public ref Vector Force { get; }
 
 
 }

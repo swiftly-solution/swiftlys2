@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_VelocityMatchingForce : CParticleFunctionOperator, ISchemaClass<C_OP_VelocityMatchingForce> {
+public partial interface C_OP_VelocityMatchingForce : CParticleFunctionOperator, ISchemaClass<C_OP_VelocityMatchingForce>
+{
+    static C_OP_VelocityMatchingForce ISchemaClass<C_OP_VelocityMatchingForce>.From(nint handle) => new C_OP_VelocityMatchingForceImpl(handle);
+    static int ISchemaClass<C_OP_VelocityMatchingForce>.Size => 488;
+    static string? ISchemaClass<C_OP_VelocityMatchingForce>.ClassName => null;
 
-  static C_OP_VelocityMatchingForce ISchemaClass<C_OP_VelocityMatchingForce>.From(nint handle) => new C_OP_VelocityMatchingForceImpl(handle);
-  static int ISchemaClass<C_OP_VelocityMatchingForce>.Size => 488;
-  static string? ISchemaClass<C_OP_VelocityMatchingForce>.ClassName => null;
 
-  
-  public ref float DirScale { get; }
-  
-  public ref float SpdScale { get; }
-  
-  public ref float NeighborDistance { get; }
-  
-  public ref float FacingStrength { get; }
-  
-  public ref bool UseAABB { get; }
-  
-  public ref int CPBroadcast { get; }
+    public ref float DirScale { get; }
+
+    public ref float SpdScale { get; }
+
+    public ref float NeighborDistance { get; }
+
+    public ref float FacingStrength { get; }
+
+    public ref bool UseAABB { get; }
+
+    public ref int CPBroadcast { get; }
 
 
 }

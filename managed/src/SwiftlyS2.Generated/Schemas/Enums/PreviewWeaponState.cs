@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PreviewWeaponState : uint {
-
+public enum PreviewWeaponState : uint
+{
  DROPPED = 0,
 
  HOLSTERED = 1,

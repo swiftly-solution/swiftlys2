@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleFloatRoundType_t : uint {
-
+public enum ParticleFloatRoundType_t : uint
+{
  PF_ROUND_TYPE_INVALID = uint.MaxValue,
 
  PF_ROUND_TYPE_NEAREST = 0,

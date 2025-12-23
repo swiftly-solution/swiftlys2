@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmOrientationWarpEvent : CNmEvent, ISchemaClass<CNmOrientationWarpEvent> {
-
-  static CNmOrientationWarpEvent ISchemaClass<CNmOrientationWarpEvent>.From(nint handle) => new CNmOrientationWarpEventImpl(handle);
-  static int ISchemaClass<CNmOrientationWarpEvent>.Size => 32;
-  static string? ISchemaClass<CNmOrientationWarpEvent>.ClassName => null;
+public partial interface CNmOrientationWarpEvent : CNmEvent, ISchemaClass<CNmOrientationWarpEvent>
+{
+    static CNmOrientationWarpEvent ISchemaClass<CNmOrientationWarpEvent>.From(nint handle) => new CNmOrientationWarpEventImpl(handle);
+    static int ISchemaClass<CNmOrientationWarpEvent>.Size => 32;
+    static string? ISchemaClass<CNmOrientationWarpEvent>.ClassName => null;
 
 
 

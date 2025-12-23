@@ -6,343 +6,246 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointCameraImpl : CBaseEntityImpl, CPointCamera {
+internal partial class CPointCameraImpl : CBaseEntityImpl, CPointCamera
+{
+    public CPointCameraImpl(nint handle) : base(handle) { }
 
-  public CPointCameraImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FOVOffset;
 
-  private static nint? _FOVOffset;
-
-  public ref float FOV {
-    get {
-      if (_FOVOffset == null) {
-        _FOVOffset = Schema.GetOffset(0x3E5CC0835C3A63DC);
-      }
-      return ref _Handle.AsRef<float>(_FOVOffset!.Value);
+    public ref float FOV {
+        get {
+            _FOVOffset = _FOVOffset ?? Schema.GetOffset(0x3E5CC0835C3A63DC);
+            return ref _Handle.AsRef<float>(_FOVOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResolutionOffset;
+    private static nint? _ResolutionOffset;
 
-  public ref float Resolution {
-    get {
-      if (_ResolutionOffset == null) {
-        _ResolutionOffset = Schema.GetOffset(0x3E5CC083B9351D0F);
-      }
-      return ref _Handle.AsRef<float>(_ResolutionOffset!.Value);
+    public ref float Resolution {
+        get {
+            _ResolutionOffset = _ResolutionOffset ?? Schema.GetOffset(0x3E5CC083B9351D0F);
+            return ref _Handle.AsRef<float>(_ResolutionOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogEnableOffset;
+    private static nint? _FogEnableOffset;
 
-  public ref bool FogEnable {
-    get {
-      if (_FogEnableOffset == null) {
-        _FogEnableOffset = Schema.GetOffset(0x3E5CC0837ED6A448);
-      }
-      return ref _Handle.AsRef<bool>(_FogEnableOffset!.Value);
+    public ref bool FogEnable {
+        get {
+            _FogEnableOffset = _FogEnableOffset ?? Schema.GetOffset(0x3E5CC0837ED6A448);
+            return ref _Handle.AsRef<bool>(_FogEnableOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogColorOffset;
+    private static nint? _FogColorOffset;
 
-  public ref Color FogColor {
-    get {
-      if (_FogColorOffset == null) {
-        _FogColorOffset = Schema.GetOffset(0x3E5CC083C5585AAE);
-      }
-      return ref _Handle.AsRef<Color>(_FogColorOffset!.Value);
+    public ref Color FogColor {
+        get {
+            _FogColorOffset = _FogColorOffset ?? Schema.GetOffset(0x3E5CC083C5585AAE);
+            return ref _Handle.AsRef<Color>(_FogColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogStartOffset;
+    private static nint? _FogStartOffset;
 
-  public ref float FogStart {
-    get {
-      if (_FogStartOffset == null) {
-        _FogStartOffset = Schema.GetOffset(0x3E5CC0832A8DE023);
-      }
-      return ref _Handle.AsRef<float>(_FogStartOffset!.Value);
+    public ref float FogStart {
+        get {
+            _FogStartOffset = _FogStartOffset ?? Schema.GetOffset(0x3E5CC0832A8DE023);
+            return ref _Handle.AsRef<float>(_FogStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogEndOffset;
+    private static nint? _FogEndOffset;
 
-  public ref float FogEnd {
-    get {
-      if (_FogEndOffset == null) {
-        _FogEndOffset = Schema.GetOffset(0x3E5CC08334D4BC16);
-      }
-      return ref _Handle.AsRef<float>(_FogEndOffset!.Value);
+    public ref float FogEnd {
+        get {
+            _FogEndOffset = _FogEndOffset ?? Schema.GetOffset(0x3E5CC08334D4BC16);
+            return ref _Handle.AsRef<float>(_FogEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogMaxDensityOffset;
+    private static nint? _FogMaxDensityOffset;
 
-  public ref float FogMaxDensity {
-    get {
-      if (_FogMaxDensityOffset == null) {
-        _FogMaxDensityOffset = Schema.GetOffset(0x3E5CC08343CD4C8B);
-      }
-      return ref _Handle.AsRef<float>(_FogMaxDensityOffset!.Value);
+    public ref float FogMaxDensity {
+        get {
+            _FogMaxDensityOffset = _FogMaxDensityOffset ?? Schema.GetOffset(0x3E5CC08343CD4C8B);
+            return ref _Handle.AsRef<float>(_FogMaxDensityOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveOffset;
+    private static nint? _ActiveOffset;
 
-  public ref bool Active {
-    get {
-      if (_ActiveOffset == null) {
-        _ActiveOffset = Schema.GetOffset(0x3E5CC0838334208F);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    public ref bool Active {
+        get {
+            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0x3E5CC0838334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseScreenAspectRatioOffset;
+    private static nint? _UseScreenAspectRatioOffset;
 
-  public ref bool UseScreenAspectRatio {
-    get {
-      if (_UseScreenAspectRatioOffset == null) {
-        _UseScreenAspectRatioOffset = Schema.GetOffset(0x3E5CC08353101AA3);
-      }
-      return ref _Handle.AsRef<bool>(_UseScreenAspectRatioOffset!.Value);
+    public ref bool UseScreenAspectRatio {
+        get {
+            _UseScreenAspectRatioOffset = _UseScreenAspectRatioOffset ?? Schema.GetOffset(0x3E5CC08353101AA3);
+            return ref _Handle.AsRef<bool>(_UseScreenAspectRatioOffset!.Value);
+        }
     }
-  }
-  private static nint? _AspectRatioOffset;
+    private static nint? _AspectRatioOffset;
 
-  public ref float AspectRatio {
-    get {
-      if (_AspectRatioOffset == null) {
-        _AspectRatioOffset = Schema.GetOffset(0x3E5CC08381C7922E);
-      }
-      return ref _Handle.AsRef<float>(_AspectRatioOffset!.Value);
+    public ref float AspectRatio {
+        get {
+            _AspectRatioOffset = _AspectRatioOffset ?? Schema.GetOffset(0x3E5CC08381C7922E);
+            return ref _Handle.AsRef<float>(_AspectRatioOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoSkyOffset;
+    private static nint? _NoSkyOffset;
 
-  public ref bool NoSky {
-    get {
-      if (_NoSkyOffset == null) {
-        _NoSkyOffset = Schema.GetOffset(0x3E5CC083760FF03B);
-      }
-      return ref _Handle.AsRef<bool>(_NoSkyOffset!.Value);
+    public ref bool NoSky {
+        get {
+            _NoSkyOffset = _NoSkyOffset ?? Schema.GetOffset(0x3E5CC083760FF03B);
+            return ref _Handle.AsRef<bool>(_NoSkyOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessOffset;
+    private static nint? _BrightnessOffset;
 
-  public ref float Brightness {
-    get {
-      if (_BrightnessOffset == null) {
-        _BrightnessOffset = Schema.GetOffset(0x3E5CC0832E2B25BE);
-      }
-      return ref _Handle.AsRef<float>(_BrightnessOffset!.Value);
+    public ref float Brightness {
+        get {
+            _BrightnessOffset = _BrightnessOffset ?? Schema.GetOffset(0x3E5CC0832E2B25BE);
+            return ref _Handle.AsRef<float>(_BrightnessOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZFarOffset;
+    private static nint? _ZFarOffset;
 
-  public ref float ZFar {
-    get {
-      if (_ZFarOffset == null) {
-        _ZFarOffset = Schema.GetOffset(0x3E5CC083578834A4);
-      }
-      return ref _Handle.AsRef<float>(_ZFarOffset!.Value);
+    public ref float ZFar {
+        get {
+            _ZFarOffset = _ZFarOffset ?? Schema.GetOffset(0x3E5CC083578834A4);
+            return ref _Handle.AsRef<float>(_ZFarOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZNearOffset;
+    private static nint? _ZNearOffset;
 
-  public ref float ZNear {
-    get {
-      if (_ZNearOffset == null) {
-        _ZNearOffset = Schema.GetOffset(0x3E5CC083C81DED31);
-      }
-      return ref _Handle.AsRef<float>(_ZNearOffset!.Value);
+    public ref float ZNear {
+        get {
+            _ZNearOffset = _ZNearOffset ?? Schema.GetOffset(0x3E5CC083C81DED31);
+            return ref _Handle.AsRef<float>(_ZNearOffset!.Value);
+        }
     }
-  }
-  private static nint? _CanHLTVUseOffset;
+    private static nint? _CanHLTVUseOffset;
 
-  public ref bool CanHLTVUse {
-    get {
-      if (_CanHLTVUseOffset == null) {
-        _CanHLTVUseOffset = Schema.GetOffset(0x3E5CC083EF15745A);
-      }
-      return ref _Handle.AsRef<bool>(_CanHLTVUseOffset!.Value);
+    public ref bool CanHLTVUse {
+        get {
+            _CanHLTVUseOffset = _CanHLTVUseOffset ?? Schema.GetOffset(0x3E5CC083EF15745A);
+            return ref _Handle.AsRef<bool>(_CanHLTVUseOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlignWithParentOffset;
+    private static nint? _AlignWithParentOffset;
 
-  public ref bool AlignWithParent {
-    get {
-      if (_AlignWithParentOffset == null) {
-        _AlignWithParentOffset = Schema.GetOffset(0x3E5CC08371E0F322);
-      }
-      return ref _Handle.AsRef<bool>(_AlignWithParentOffset!.Value);
+    public ref bool AlignWithParent {
+        get {
+            _AlignWithParentOffset = _AlignWithParentOffset ?? Schema.GetOffset(0x3E5CC08371E0F322);
+            return ref _Handle.AsRef<bool>(_AlignWithParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _DofEnabledOffset;
+    private static nint? _DofEnabledOffset;
 
-  public ref bool DofEnabled {
-    get {
-      if (_DofEnabledOffset == null) {
-        _DofEnabledOffset = Schema.GetOffset(0x3E5CC083EDC8F923);
-      }
-      return ref _Handle.AsRef<bool>(_DofEnabledOffset!.Value);
+    public ref bool DofEnabled {
+        get {
+            _DofEnabledOffset = _DofEnabledOffset ?? Schema.GetOffset(0x3E5CC083EDC8F923);
+            return ref _Handle.AsRef<bool>(_DofEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _DofNearBlurryOffset;
+    private static nint? _DofNearBlurryOffset;
 
-  public ref float DofNearBlurry {
-    get {
-      if (_DofNearBlurryOffset == null) {
-        _DofNearBlurryOffset = Schema.GetOffset(0x3E5CC0837C69D002);
-      }
-      return ref _Handle.AsRef<float>(_DofNearBlurryOffset!.Value);
+    public ref float DofNearBlurry {
+        get {
+            _DofNearBlurryOffset = _DofNearBlurryOffset ?? Schema.GetOffset(0x3E5CC0837C69D002);
+            return ref _Handle.AsRef<float>(_DofNearBlurryOffset!.Value);
+        }
     }
-  }
-  private static nint? _DofNearCrispOffset;
+    private static nint? _DofNearCrispOffset;
 
-  public ref float DofNearCrisp {
-    get {
-      if (_DofNearCrispOffset == null) {
-        _DofNearCrispOffset = Schema.GetOffset(0x3E5CC083B0E97BC1);
-      }
-      return ref _Handle.AsRef<float>(_DofNearCrispOffset!.Value);
+    public ref float DofNearCrisp {
+        get {
+            _DofNearCrispOffset = _DofNearCrispOffset ?? Schema.GetOffset(0x3E5CC083B0E97BC1);
+            return ref _Handle.AsRef<float>(_DofNearCrispOffset!.Value);
+        }
     }
-  }
-  private static nint? _DofFarCrispOffset;
+    private static nint? _DofFarCrispOffset;
 
-  public ref float DofFarCrisp {
-    get {
-      if (_DofFarCrispOffset == null) {
-        _DofFarCrispOffset = Schema.GetOffset(0x3E5CC0832EC98B88);
-      }
-      return ref _Handle.AsRef<float>(_DofFarCrispOffset!.Value);
+    public ref float DofFarCrisp {
+        get {
+            _DofFarCrispOffset = _DofFarCrispOffset ?? Schema.GetOffset(0x3E5CC0832EC98B88);
+            return ref _Handle.AsRef<float>(_DofFarCrispOffset!.Value);
+        }
     }
-  }
-  private static nint? _DofFarBlurryOffset;
+    private static nint? _DofFarBlurryOffset;
 
-  public ref float DofFarBlurry {
-    get {
-      if (_DofFarBlurryOffset == null) {
-        _DofFarBlurryOffset = Schema.GetOffset(0x3E5CC083312C6605);
-      }
-      return ref _Handle.AsRef<float>(_DofFarBlurryOffset!.Value);
+    public ref float DofFarBlurry {
+        get {
+            _DofFarBlurryOffset = _DofFarBlurryOffset ?? Schema.GetOffset(0x3E5CC083312C6605);
+            return ref _Handle.AsRef<float>(_DofFarBlurryOffset!.Value);
+        }
     }
-  }
-  private static nint? _DofTiltToGroundOffset;
+    private static nint? _DofTiltToGroundOffset;
 
-  public ref float DofTiltToGround {
-    get {
-      if (_DofTiltToGroundOffset == null) {
-        _DofTiltToGroundOffset = Schema.GetOffset(0x3E5CC0833DF50E81);
-      }
-      return ref _Handle.AsRef<float>(_DofTiltToGroundOffset!.Value);
+    public ref float DofTiltToGround {
+        get {
+            _DofTiltToGroundOffset = _DofTiltToGroundOffset ?? Schema.GetOffset(0x3E5CC0833DF50E81);
+            return ref _Handle.AsRef<float>(_DofTiltToGroundOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetFOVOffset;
+    private static nint? _TargetFOVOffset;
 
-  public ref float TargetFOV {
-    get {
-      if (_TargetFOVOffset == null) {
-        _TargetFOVOffset = Schema.GetOffset(0x3E5CC0835BA7ABEB);
-      }
-      return ref _Handle.AsRef<float>(_TargetFOVOffset!.Value);
+    public ref float TargetFOV {
+        get {
+            _TargetFOVOffset = _TargetFOVOffset ?? Schema.GetOffset(0x3E5CC0835BA7ABEB);
+            return ref _Handle.AsRef<float>(_TargetFOVOffset!.Value);
+        }
     }
-  }
-  private static nint? _DegreesPerSecondOffset;
+    private static nint? _DegreesPerSecondOffset;
 
-  public ref float DegreesPerSecond {
-    get {
-      if (_DegreesPerSecondOffset == null) {
-        _DegreesPerSecondOffset = Schema.GetOffset(0x3E5CC083469C1605);
-      }
-      return ref _Handle.AsRef<float>(_DegreesPerSecondOffset!.Value);
+    public ref float DegreesPerSecond {
+        get {
+            _DegreesPerSecondOffset = _DegreesPerSecondOffset ?? Schema.GetOffset(0x3E5CC083469C1605);
+            return ref _Handle.AsRef<float>(_DegreesPerSecondOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsOnOffset;
+    private static nint? _IsOnOffset;
 
-  public ref bool IsOn {
-    get {
-      if (_IsOnOffset == null) {
-        _IsOnOffset = Schema.GetOffset(0x3E5CC0836387DB60);
-      }
-      return ref _Handle.AsRef<bool>(_IsOnOffset!.Value);
+    public ref bool IsOn {
+        get {
+            _IsOnOffset = _IsOnOffset ?? Schema.GetOffset(0x3E5CC0836387DB60);
+            return ref _Handle.AsRef<bool>(_IsOnOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextOffset;
+    private static nint? _NextOffset;
 
-  public CPointCamera? Next {
-    get {
-      if (_NextOffset == null) {
-        _NextOffset = Schema.GetOffset(0x3E5CC08332B11E0E);
-      }
-      var ptr = _Handle.Read<nint>(_NextOffset!.Value);
-      return ptr.IsValidPtr() ? new CPointCameraImpl(ptr) : null;
+    public CPointCamera? Next {
+        get {
+            _NextOffset = _NextOffset ?? Schema.GetOffset(0x3E5CC08332B11E0E);
+            var ptr = _Handle.Read<nint>(_NextOffset!.Value);
+            return ptr.IsValidPtr() ? new CPointCameraImpl(ptr) : null;
+        }
     }
-  }
 
-  public void FOVUpdated() {
-    Schema.Update(_Handle, 0x3E5CC0835C3A63DC);
-  }
-  public void ResolutionUpdated() {
-    Schema.Update(_Handle, 0x3E5CC083B9351D0F);
-  }
-  public void FogEnableUpdated() {
-    Schema.Update(_Handle, 0x3E5CC0837ED6A448);
-  }
-  public void FogColorUpdated() {
-    Schema.Update(_Handle, 0x3E5CC083C5585AAE);
-  }
-  public void FogStartUpdated() {
-    Schema.Update(_Handle, 0x3E5CC0832A8DE023);
-  }
-  public void FogEndUpdated() {
-    Schema.Update(_Handle, 0x3E5CC08334D4BC16);
-  }
-  public void FogMaxDensityUpdated() {
-    Schema.Update(_Handle, 0x3E5CC08343CD4C8B);
-  }
-  public void ActiveUpdated() {
-    Schema.Update(_Handle, 0x3E5CC0838334208F);
-  }
-  public void UseScreenAspectRatioUpdated() {
-    Schema.Update(_Handle, 0x3E5CC08353101AA3);
-  }
-  public void AspectRatioUpdated() {
-    Schema.Update(_Handle, 0x3E5CC08381C7922E);
-  }
-  public void NoSkyUpdated() {
-    Schema.Update(_Handle, 0x3E5CC083760FF03B);
-  }
-  public void BrightnessUpdated() {
-    Schema.Update(_Handle, 0x3E5CC0832E2B25BE);
-  }
-  public void ZFarUpdated() {
-    Schema.Update(_Handle, 0x3E5CC083578834A4);
-  }
-  public void ZNearUpdated() {
-    Schema.Update(_Handle, 0x3E5CC083C81DED31);
-  }
-  public void CanHLTVUseUpdated() {
-    Schema.Update(_Handle, 0x3E5CC083EF15745A);
-  }
-  public void AlignWithParentUpdated() {
-    Schema.Update(_Handle, 0x3E5CC08371E0F322);
-  }
-  public void DofEnabledUpdated() {
-    Schema.Update(_Handle, 0x3E5CC083EDC8F923);
-  }
-  public void DofNearBlurryUpdated() {
-    Schema.Update(_Handle, 0x3E5CC0837C69D002);
-  }
-  public void DofNearCrispUpdated() {
-    Schema.Update(_Handle, 0x3E5CC083B0E97BC1);
-  }
-  public void DofFarCrispUpdated() {
-    Schema.Update(_Handle, 0x3E5CC0832EC98B88);
-  }
-  public void DofFarBlurryUpdated() {
-    Schema.Update(_Handle, 0x3E5CC083312C6605);
-  }
-  public void DofTiltToGroundUpdated() {
-    Schema.Update(_Handle, 0x3E5CC0833DF50E81);
-  }
+    public void FOVUpdated() => Schema.Update(_Handle, 0x3E5CC0835C3A63DC);
+    public void ResolutionUpdated() => Schema.Update(_Handle, 0x3E5CC083B9351D0F);
+    public void FogEnableUpdated() => Schema.Update(_Handle, 0x3E5CC0837ED6A448);
+    public void FogColorUpdated() => Schema.Update(_Handle, 0x3E5CC083C5585AAE);
+    public void FogStartUpdated() => Schema.Update(_Handle, 0x3E5CC0832A8DE023);
+    public void FogEndUpdated() => Schema.Update(_Handle, 0x3E5CC08334D4BC16);
+    public void FogMaxDensityUpdated() => Schema.Update(_Handle, 0x3E5CC08343CD4C8B);
+    public void ActiveUpdated() => Schema.Update(_Handle, 0x3E5CC0838334208F);
+    public void UseScreenAspectRatioUpdated() => Schema.Update(_Handle, 0x3E5CC08353101AA3);
+    public void AspectRatioUpdated() => Schema.Update(_Handle, 0x3E5CC08381C7922E);
+    public void NoSkyUpdated() => Schema.Update(_Handle, 0x3E5CC083760FF03B);
+    public void BrightnessUpdated() => Schema.Update(_Handle, 0x3E5CC0832E2B25BE);
+    public void ZFarUpdated() => Schema.Update(_Handle, 0x3E5CC083578834A4);
+    public void ZNearUpdated() => Schema.Update(_Handle, 0x3E5CC083C81DED31);
+    public void CanHLTVUseUpdated() => Schema.Update(_Handle, 0x3E5CC083EF15745A);
+    public void AlignWithParentUpdated() => Schema.Update(_Handle, 0x3E5CC08371E0F322);
+    public void DofEnabledUpdated() => Schema.Update(_Handle, 0x3E5CC083EDC8F923);
+    public void DofNearBlurryUpdated() => Schema.Update(_Handle, 0x3E5CC0837C69D002);
+    public void DofNearCrispUpdated() => Schema.Update(_Handle, 0x3E5CC083B0E97BC1);
+    public void DofFarCrispUpdated() => Schema.Update(_Handle, 0x3E5CC0832EC98B88);
+    public void DofFarBlurryUpdated() => Schema.Update(_Handle, 0x3E5CC083312C6605);
+    public void DofTiltToGroundUpdated() => Schema.Update(_Handle, 0x3E5CC0833DF50E81);
 }

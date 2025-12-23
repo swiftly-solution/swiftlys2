@@ -6,61 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class locksound_tImpl : SchemaClass, locksound_t {
+internal partial class locksound_tImpl : SchemaClass, locksound_t
+{
+    public locksound_tImpl(nint handle) : base(handle) { }
 
-  public locksound_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LockedSoundOffset;
 
-  private static nint? _LockedSoundOffset;
+    public string LockedSound {
+        get {
+            _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0xDAD0AE229881D7AB);
+            return Schema.GetString(_Handle.Read<nint>(_LockedSoundOffset!.Value));
+        }
+        set {
+            _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0xDAD0AE229881D7AB);
+            Schema.SetString(_Handle, _LockedSoundOffset!.Value, value);
+        }
+    } 
+    private static nint? _UnlockedSoundOffset;
 
-  public string LockedSound {
-    get {
-      if (_LockedSoundOffset == null) {
-        _LockedSoundOffset = Schema.GetOffset(0xDAD0AE229881D7AB);
-      }
-      var ptr = _Handle.Read<nint>(_LockedSoundOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_LockedSoundOffset == null) {
-        _LockedSoundOffset = Schema.GetOffset(0xDAD0AE229881D7AB);
-      }
-      Schema.SetString(_Handle, _LockedSoundOffset!.Value, value);
-    }
-  } 
-  private static nint? _UnlockedSoundOffset;
+    public string UnlockedSound {
+        get {
+            _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0xDAD0AE227EE88276);
+            return Schema.GetString(_Handle.Read<nint>(_UnlockedSoundOffset!.Value));
+        }
+        set {
+            _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0xDAD0AE227EE88276);
+            Schema.SetString(_Handle, _UnlockedSoundOffset!.Value, value);
+        }
+    } 
+    private static nint? _FlwaitSoundOffset;
 
-  public string UnlockedSound {
-    get {
-      if (_UnlockedSoundOffset == null) {
-        _UnlockedSoundOffset = Schema.GetOffset(0xDAD0AE227EE88276);
-      }
-      var ptr = _Handle.Read<nint>(_UnlockedSoundOffset!.Value);
-      return Schema.GetString(ptr);
+    public GameTime_t FlwaitSound {
+        get {
+            _FlwaitSoundOffset = _FlwaitSoundOffset ?? Schema.GetOffset(0xDAD0AE2297A4A845);
+            return new GameTime_tImpl(_Handle + _FlwaitSoundOffset!.Value);
+        }
     }
-    set {
-      if (_UnlockedSoundOffset == null) {
-        _UnlockedSoundOffset = Schema.GetOffset(0xDAD0AE227EE88276);
-      }
-      Schema.SetString(_Handle, _UnlockedSoundOffset!.Value, value);
-    }
-  } 
-  private static nint? _FlwaitSoundOffset;
-
-  public GameTime_t FlwaitSound {
-    get {
-      if (_FlwaitSoundOffset == null) {
-        _FlwaitSoundOffset = Schema.GetOffset(0xDAD0AE2297A4A845);
-      }
-      return new GameTime_tImpl(_Handle + _FlwaitSoundOffset!.Value);
-    }
-  }
 
 
 }

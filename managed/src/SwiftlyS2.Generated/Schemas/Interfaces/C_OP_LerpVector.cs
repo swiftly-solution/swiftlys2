@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LerpVector : CParticleFunctionOperator, ISchemaClass<C_OP_LerpVector> {
+public partial interface C_OP_LerpVector : CParticleFunctionOperator, ISchemaClass<C_OP_LerpVector>
+{
+    static C_OP_LerpVector ISchemaClass<C_OP_LerpVector>.From(nint handle) => new C_OP_LerpVectorImpl(handle);
+    static int ISchemaClass<C_OP_LerpVector>.Size => 496;
+    static string? ISchemaClass<C_OP_LerpVector>.ClassName => null;
 
-  static C_OP_LerpVector ISchemaClass<C_OP_LerpVector>.From(nint handle) => new C_OP_LerpVectorImpl(handle);
-  static int ISchemaClass<C_OP_LerpVector>.Size => 496;
-  static string? ISchemaClass<C_OP_LerpVector>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref Vector Output { get; }
-  
-  public ref float StartTime { get; }
-  
-  public ref float EndTime { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref Vector Output { get; }
+
+    public ref float StartTime { get; }
+
+    public ref float EndTime { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
 
 
 }

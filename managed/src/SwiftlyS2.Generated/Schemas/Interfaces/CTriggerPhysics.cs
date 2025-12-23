@@ -8,50 +8,50 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerPhysics : CBaseTrigger, ISchemaClass<CTriggerPhysics> {
+public partial interface CTriggerPhysics : CBaseTrigger, ISchemaClass<CTriggerPhysics>
+{
+    static CTriggerPhysics ISchemaClass<CTriggerPhysics>.From(nint handle) => new CTriggerPhysicsImpl(handle);
+    static int ISchemaClass<CTriggerPhysics>.Size => 2568;
+    static string? ISchemaClass<CTriggerPhysics>.ClassName => "trigger_physics";
 
-  static CTriggerPhysics ISchemaClass<CTriggerPhysics>.From(nint handle) => new CTriggerPhysicsImpl(handle);
-  static int ISchemaClass<CTriggerPhysics>.Size => 2568;
-  static string? ISchemaClass<CTriggerPhysics>.ClassName => "trigger_physics";
 
-  
-  public ref float GravityScale { get; }
-  
-  public ref float LinearLimit { get; }
-  
-  public ref float LinearDamping { get; }
-  
-  public ref float AngularLimit { get; }
-  
-  public ref float AngularDamping { get; }
-  
-  public ref float LinearForce { get; }
-  
-  public ref float Frequency { get; }
-  
-  public ref float DampingRatio { get; }
-  
-  public ref Vector LinearForcePointAt { get; }
-  
-  public ref bool CollapseToForcePoint { get; }
-  
-  public ref Vector LinearForcePointAtWorld { get; }
-  
-  public ref Vector LinearForceDirection { get; }
-  
-  public ref bool ConvertToDebrisWhenPossible { get; }
+    public ref float GravityScale { get; }
 
-  public void GravityScaleUpdated();
-  public void LinearLimitUpdated();
-  public void LinearDampingUpdated();
-  public void AngularLimitUpdated();
-  public void AngularDampingUpdated();
-  public void LinearForceUpdated();
-  public void FrequencyUpdated();
-  public void DampingRatioUpdated();
-  public void LinearForcePointAtUpdated();
-  public void CollapseToForcePointUpdated();
-  public void LinearForcePointAtWorldUpdated();
-  public void LinearForceDirectionUpdated();
-  public void ConvertToDebrisWhenPossibleUpdated();
+    public ref float LinearLimit { get; }
+
+    public ref float LinearDamping { get; }
+
+    public ref float AngularLimit { get; }
+
+    public ref float AngularDamping { get; }
+
+    public ref float LinearForce { get; }
+
+    public ref float Frequency { get; }
+
+    public ref float DampingRatio { get; }
+
+    public ref Vector LinearForcePointAt { get; }
+
+    public ref bool CollapseToForcePoint { get; }
+
+    public ref Vector LinearForcePointAtWorld { get; }
+
+    public ref Vector LinearForceDirection { get; }
+
+    public ref bool ConvertToDebrisWhenPossible { get; }
+
+    public void GravityScaleUpdated();
+    public void LinearLimitUpdated();
+    public void LinearDampingUpdated();
+    public void AngularLimitUpdated();
+    public void AngularDampingUpdated();
+    public void LinearForceUpdated();
+    public void FrequencyUpdated();
+    public void DampingRatioUpdated();
+    public void LinearForcePointAtUpdated();
+    public void CollapseToForcePointUpdated();
+    public void LinearForcePointAtWorldUpdated();
+    public void LinearForceDirectionUpdated();
+    public void ConvertToDebrisWhenPossibleUpdated();
 }

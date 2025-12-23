@@ -8,47 +8,47 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPostProcessingVolume : CBaseTrigger, ISchemaClass<CPostProcessingVolume> {
+public partial interface CPostProcessingVolume : CBaseTrigger, ISchemaClass<CPostProcessingVolume>
+{
+    static CPostProcessingVolume ISchemaClass<CPostProcessingVolume>.From(nint handle) => new CPostProcessingVolumeImpl(handle);
+    static int ISchemaClass<CPostProcessingVolume>.Size => 2536;
+    static string? ISchemaClass<CPostProcessingVolume>.ClassName => "post_processing_volume";
 
-  static CPostProcessingVolume ISchemaClass<CPostProcessingVolume>.From(nint handle) => new CPostProcessingVolumeImpl(handle);
-  static int ISchemaClass<CPostProcessingVolume>.Size => 2536;
-  static string? ISchemaClass<CPostProcessingVolume>.ClassName => "post_processing_volume";
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostSettings { get; }
-  
-  public ref float FadeDuration { get; }
-  
-  public ref float MinLogExposure { get; }
-  
-  public ref float MaxLogExposure { get; }
-  
-  public ref float MinExposure { get; }
-  
-  public ref float MaxExposure { get; }
-  
-  public ref float ExposureCompensation { get; }
-  
-  public ref float ExposureFadeSpeedUp { get; }
-  
-  public ref float ExposureFadeSpeedDown { get; }
-  
-  public ref float TonemapEVSmoothingRange { get; }
-  
-  public ref bool Master { get; }
-  
-  public ref bool ExposureControl { get; }
+    public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostSettings { get; }
 
-  public void PostSettingsUpdated();
-  public void FadeDurationUpdated();
-  public void MinLogExposureUpdated();
-  public void MaxLogExposureUpdated();
-  public void MinExposureUpdated();
-  public void MaxExposureUpdated();
-  public void ExposureCompensationUpdated();
-  public void ExposureFadeSpeedUpUpdated();
-  public void ExposureFadeSpeedDownUpdated();
-  public void TonemapEVSmoothingRangeUpdated();
-  public void MasterUpdated();
-  public void ExposureControlUpdated();
+    public ref float FadeDuration { get; }
+
+    public ref float MinLogExposure { get; }
+
+    public ref float MaxLogExposure { get; }
+
+    public ref float MinExposure { get; }
+
+    public ref float MaxExposure { get; }
+
+    public ref float ExposureCompensation { get; }
+
+    public ref float ExposureFadeSpeedUp { get; }
+
+    public ref float ExposureFadeSpeedDown { get; }
+
+    public ref float TonemapEVSmoothingRange { get; }
+
+    public ref bool Master { get; }
+
+    public ref bool ExposureControl { get; }
+
+    public void PostSettingsUpdated();
+    public void FadeDurationUpdated();
+    public void MinLogExposureUpdated();
+    public void MaxLogExposureUpdated();
+    public void MinExposureUpdated();
+    public void MaxExposureUpdated();
+    public void ExposureCompensationUpdated();
+    public void ExposureFadeSpeedUpUpdated();
+    public void ExposureFadeSpeedDownUpdated();
+    public void TonemapEVSmoothingRangeUpdated();
+    public void MasterUpdated();
+    public void ExposureControlUpdated();
 }

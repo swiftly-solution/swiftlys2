@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RampScalarSplineSimpleImpl : CParticleFunctionOperatorImpl, C_OP_RampScalarSplineSimple {
+internal partial class C_OP_RampScalarSplineSimpleImpl : CParticleFunctionOperatorImpl, C_OP_RampScalarSplineSimple
+{
+    public C_OP_RampScalarSplineSimpleImpl(nint handle) : base(handle) { }
 
-  public C_OP_RampScalarSplineSimpleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RateOffset;
 
-  private static nint? _RateOffset;
-
-  public ref float Rate {
-    get {
-      if (_RateOffset == null) {
-        _RateOffset = Schema.GetOffset(0xA8BA5EF2EC3280E7);
-      }
-      return ref _Handle.AsRef<float>(_RateOffset!.Value);
+    public ref float Rate {
+        get {
+            _RateOffset = _RateOffset ?? Schema.GetOffset(0xA8BA5EF2EC3280E7);
+            return ref _Handle.AsRef<float>(_RateOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTimeOffset;
+    private static nint? _StartTimeOffset;
 
-  public ref float StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0xA8BA5EF267FE9DC4);
-      }
-      return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+    public ref float StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xA8BA5EF267FE9DC4);
+            return ref _Handle.AsRef<float>(_StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndTimeOffset;
+    private static nint? _EndTimeOffset;
 
-  public ref float EndTime {
-    get {
-      if (_EndTimeOffset == null) {
-        _EndTimeOffset = Schema.GetOffset(0xA8BA5EF22041DF9D);
-      }
-      return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+    public ref float EndTime {
+        get {
+            _EndTimeOffset = _EndTimeOffset ?? Schema.GetOffset(0xA8BA5EF22041DF9D);
+            return ref _Handle.AsRef<float>(_EndTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOffset;
+    private static nint? _FieldOffset;
 
-  public ParticleAttributeIndex_t Field {
-    get {
-      if (_FieldOffset == null) {
-        _FieldOffset = Schema.GetOffset(0xA8BA5EF2C257B93B);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+    public ParticleAttributeIndex_t Field {
+        get {
+            _FieldOffset = _FieldOffset ?? Schema.GetOffset(0xA8BA5EF2C257B93B);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseOutOffset;
+    private static nint? _EaseOutOffset;
 
-  public ref bool EaseOut {
-    get {
-      if (_EaseOutOffset == null) {
-        _EaseOutOffset = Schema.GetOffset(0xA8BA5EF28E58B9D1);
-      }
-      return ref _Handle.AsRef<bool>(_EaseOutOffset!.Value);
+    public ref bool EaseOut {
+        get {
+            _EaseOutOffset = _EaseOutOffset ?? Schema.GetOffset(0xA8BA5EF28E58B9D1);
+            return ref _Handle.AsRef<bool>(_EaseOutOffset!.Value);
+        }
     }
-  }
 
 
 }

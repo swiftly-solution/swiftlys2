@@ -844,4 +844,25 @@ internal static class NativeConvars {
       }
     }
   }
+
+  private unsafe static delegate* unmanaged<byte*, byte*, int> _GetDescription;
+
+  public unsafe static string GetDescription(string cvarName) {
+    var pool = ArrayPool<byte>.Shared;
+    var cvarNameLength = Encoding.UTF8.GetByteCount(cvarName);
+    var cvarNameBuffer = pool.Rent(cvarNameLength + 1);
+    Encoding.UTF8.GetBytes(cvarName, cvarNameBuffer);
+    cvarNameBuffer[cvarNameLength] = 0;
+    fixed (byte* cvarNameBufferPtr = cvarNameBuffer) {
+      var ret = _GetDescription(null, cvarNameBufferPtr);
+      var retBuffer = pool.Rent(ret + 1);
+      fixed (byte* retBufferPtr = retBuffer) {
+        ret = _GetDescription(retBufferPtr, cvarNameBufferPtr);
+        var retString = Encoding.UTF8.GetString(retBufferPtr, ret);
+        pool.Return(retBuffer);
+        pool.Return(cvarNameBuffer);
+        return retString;
+      }
+    }
+  }
 }

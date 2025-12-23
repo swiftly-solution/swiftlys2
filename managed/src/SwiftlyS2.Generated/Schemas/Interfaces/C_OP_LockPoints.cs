@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LockPoints : CParticleFunctionOperator, ISchemaClass<C_OP_LockPoints> {
+public partial interface C_OP_LockPoints : CParticleFunctionOperator, ISchemaClass<C_OP_LockPoints>
+{
+    static C_OP_LockPoints ISchemaClass<C_OP_LockPoints>.From(nint handle) => new C_OP_LockPointsImpl(handle);
+    static int ISchemaClass<C_OP_LockPoints>.Size => 488;
+    static string? ISchemaClass<C_OP_LockPoints>.ClassName => null;
 
-  static C_OP_LockPoints ISchemaClass<C_OP_LockPoints>.From(nint handle) => new C_OP_LockPointsImpl(handle);
-  static int ISchemaClass<C_OP_LockPoints>.Size => 488;
-  static string? ISchemaClass<C_OP_LockPoints>.ClassName => null;
 
-  
-  public ref int MinCol { get; }
-  
-  public ref int MaxCol { get; }
-  
-  public ref int MinRow { get; }
-  
-  public ref int MaxRow { get; }
-  
-  public ref int ControlPoint { get; }
-  
-  public ref float BlendValue { get; }
+    public ref int MinCol { get; }
+
+    public ref int MaxCol { get; }
+
+    public ref int MinRow { get; }
+
+    public ref int MaxRow { get; }
+
+    public ref int ControlPoint { get; }
+
+    public ref float BlendValue { get; }
 
 
 }

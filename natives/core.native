@@ -2,3 +2,4 @@ class Core
 
 bool PluginManualLoadState = void
 string PluginLoadOrder = void
+bool EnableProfilerByDefault = void

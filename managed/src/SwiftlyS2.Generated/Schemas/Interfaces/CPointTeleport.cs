@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointTeleport : CServerOnlyPointEntity, ISchemaClass<CPointTeleport> {
+public partial interface CPointTeleport : CServerOnlyPointEntity, ISchemaClass<CPointTeleport>
+{
+    static CPointTeleport ISchemaClass<CPointTeleport>.From(nint handle) => new CPointTeleportImpl(handle);
+    static int ISchemaClass<CPointTeleport>.Size => 1296;
+    static string? ISchemaClass<CPointTeleport>.ClassName => "point_teleport";
 
-  static CPointTeleport ISchemaClass<CPointTeleport>.From(nint handle) => new CPointTeleportImpl(handle);
-  static int ISchemaClass<CPointTeleport>.Size => 1296;
-  static string? ISchemaClass<CPointTeleport>.ClassName => "point_teleport";
 
-  
-  public ref Vector SaveOrigin { get; }
-  
-  public ref QAngle SaveAngles { get; }
-  
-  public ref bool TeleportParentedEntities { get; }
-  
-  public ref bool TeleportUseCurrentAngle { get; }
+    public ref Vector SaveOrigin { get; }
+
+    public ref QAngle SaveAngles { get; }
+
+    public ref bool TeleportParentedEntities { get; }
+
+    public ref bool TeleportUseCurrentAngle { get; }
 
 
 }

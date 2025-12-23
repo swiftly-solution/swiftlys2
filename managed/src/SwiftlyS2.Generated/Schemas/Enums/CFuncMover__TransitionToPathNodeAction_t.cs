@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CFuncMover__TransitionToPathNodeAction_t : uint {
-
+public enum CFuncMover__TransitionToPathNodeAction_t : uint
+{
  TRANSITION_TO_PATH_NODE_ACTION_NONE = 0,
 
  TRANSITION_TO_PATH_NODE_ACTION_START_FORWARD = 1,

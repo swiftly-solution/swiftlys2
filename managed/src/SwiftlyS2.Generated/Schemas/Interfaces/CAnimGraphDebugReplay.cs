@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimGraphDebugReplay : ISchemaClass<CAnimGraphDebugReplay> {
+public partial interface CAnimGraphDebugReplay : ISchemaClass<CAnimGraphDebugReplay>
+{
+    static CAnimGraphDebugReplay ISchemaClass<CAnimGraphDebugReplay>.From(nint handle) => new CAnimGraphDebugReplayImpl(handle);
+    static int ISchemaClass<CAnimGraphDebugReplay>.Size => 112;
+    static string? ISchemaClass<CAnimGraphDebugReplay>.ClassName => null;
 
-  static CAnimGraphDebugReplay ISchemaClass<CAnimGraphDebugReplay>.From(nint handle) => new CAnimGraphDebugReplayImpl(handle);
-  static int ISchemaClass<CAnimGraphDebugReplay>.Size => 112;
-  static string? ISchemaClass<CAnimGraphDebugReplay>.ClassName => null;
 
-  
-  public string AnimGraphFileName { get; set; }
-  
-  public ref CUtlVector<SchemaUntypedField> FrameList { get; }
-  
-  public ref int StartIndex { get; }
-  
-  public ref int WriteIndex { get; }
-  
-  public ref int FrameCount { get; }
+    public string AnimGraphFileName { get; set; }
+
+    public ref CUtlVector<SchemaUntypedField> FrameList { get; }
+
+    public ref int StartIndex { get; }
+
+    public ref int WriteIndex { get; }
+
+    public ref int FrameCount { get; }
 
 
 }

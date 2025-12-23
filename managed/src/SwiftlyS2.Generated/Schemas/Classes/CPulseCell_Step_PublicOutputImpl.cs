@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Step_PublicOutputImpl : CPulseCell_BaseFlowImpl, CPulseCell_Step_PublicOutput {
+internal partial class CPulseCell_Step_PublicOutputImpl : CPulseCell_BaseFlowImpl, CPulseCell_Step_PublicOutput
+{
+    public CPulseCell_Step_PublicOutputImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Step_PublicOutputImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OutputIndexOffset;
 
-  private static nint? _OutputIndexOffset;
-
-  public PulseRuntimeOutputIndex_t OutputIndex {
-    get {
-      if (_OutputIndexOffset == null) {
-        _OutputIndexOffset = Schema.GetOffset(0x40053C931E4D5BA0);
-      }
-      return new PulseRuntimeOutputIndex_tImpl(_Handle + _OutputIndexOffset!.Value);
+    public PulseRuntimeOutputIndex_t OutputIndex {
+        get {
+            _OutputIndexOffset = _OutputIndexOffset ?? Schema.GetOffset(0x40053C931E4D5BA0);
+            return new PulseRuntimeOutputIndex_tImpl(_Handle + _OutputIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

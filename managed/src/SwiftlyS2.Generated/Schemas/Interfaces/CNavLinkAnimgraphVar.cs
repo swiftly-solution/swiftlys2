@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNavLinkAnimgraphVar : ISchemaClass<CNavLinkAnimgraphVar> {
+public partial interface CNavLinkAnimgraphVar : ISchemaClass<CNavLinkAnimgraphVar>
+{
+    static CNavLinkAnimgraphVar ISchemaClass<CNavLinkAnimgraphVar>.From(nint handle) => new CNavLinkAnimgraphVarImpl(handle);
+    static int ISchemaClass<CNavLinkAnimgraphVar>.Size => 16;
+    static string? ISchemaClass<CNavLinkAnimgraphVar>.ClassName => null;
 
-  static CNavLinkAnimgraphVar ISchemaClass<CNavLinkAnimgraphVar>.From(nint handle) => new CNavLinkAnimgraphVarImpl(handle);
-  static int ISchemaClass<CNavLinkAnimgraphVar>.Size => 16;
-  static string? ISchemaClass<CNavLinkAnimgraphVar>.ClassName => null;
 
-  
-  public ref CGlobalSymbol AnimGraphNavlinkType { get; }
-  
-  public ref uint AlignmentDegrees { get; }
+    public ref CGlobalSymbol AnimGraphNavlinkType { get; }
+
+    public ref uint AlignmentDegrees { get; }
 
 
 }

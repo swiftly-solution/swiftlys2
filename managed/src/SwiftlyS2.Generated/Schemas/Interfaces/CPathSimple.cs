@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathSimple : CBaseEntity, ISchemaClass<CPathSimple> {
+public partial interface CPathSimple : CBaseEntity, ISchemaClass<CPathSimple>
+{
+    static CPathSimple ISchemaClass<CPathSimple>.From(nint handle) => new CPathSimpleImpl(handle);
+    static int ISchemaClass<CPathSimple>.Size => 1536;
+    static string? ISchemaClass<CPathSimple>.ClassName => "path_simple";
 
-  static CPathSimple ISchemaClass<CPathSimple>.From(nint handle) => new CPathSimpleImpl(handle);
-  static int ISchemaClass<CPathSimple>.Size => 1536;
-  static string? ISchemaClass<CPathSimple>.ClassName => "path_simple";
 
-  
-  public CPathQueryComponent CPathQueryComponent { get; }
-  
-  public string PathString { get; set; }
-  
-  public ref bool ClosedLoop { get; }
+    public CPathQueryComponent CPathQueryComponent { get; }
 
-  public void CPathQueryComponentUpdated();
-  public void PathStringUpdated();
+    public string PathString { get; set; }
+
+    public ref bool ClosedLoop { get; }
+
+    public void CPathQueryComponentUpdated();
+    public void PathStringUpdated();
 }

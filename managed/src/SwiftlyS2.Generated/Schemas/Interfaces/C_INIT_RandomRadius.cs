@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomRadius : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomRadius> {
+public partial interface C_INIT_RandomRadius : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomRadius>
+{
+    static C_INIT_RandomRadius ISchemaClass<C_INIT_RandomRadius>.From(nint handle) => new C_INIT_RandomRadiusImpl(handle);
+    static int ISchemaClass<C_INIT_RandomRadius>.Size => 488;
+    static string? ISchemaClass<C_INIT_RandomRadius>.ClassName => null;
 
-  static C_INIT_RandomRadius ISchemaClass<C_INIT_RandomRadius>.From(nint handle) => new C_INIT_RandomRadiusImpl(handle);
-  static int ISchemaClass<C_INIT_RandomRadius>.Size => 488;
-  static string? ISchemaClass<C_INIT_RandomRadius>.ClassName => null;
 
-  
-  public ref float RadiusMin { get; }
-  
-  public ref float RadiusMax { get; }
-  
-  public ref float RadiusRandExponent { get; }
+    public ref float RadiusMin { get; }
+
+    public ref float RadiusMax { get; }
+
+    public ref float RadiusRandExponent { get; }
 
 
 }

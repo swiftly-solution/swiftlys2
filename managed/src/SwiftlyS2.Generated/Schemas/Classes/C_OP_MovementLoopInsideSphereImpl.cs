@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_MovementLoopInsideSphereImpl : CParticleFunctionOperatorImpl, C_OP_MovementLoopInsideSphere {
+internal partial class C_OP_MovementLoopInsideSphereImpl : CParticleFunctionOperatorImpl, C_OP_MovementLoopInsideSphere
+{
+    public C_OP_MovementLoopInsideSphereImpl(nint handle) : base(handle) { }
 
-  public C_OP_MovementLoopInsideSphereImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPOffset;
 
-  private static nint? _CPOffset;
-
-  public ref int CP {
-    get {
-      if (_CPOffset == null) {
-        _CPOffset = Schema.GetOffset(0x7C19959FEB661472);
-      }
-      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    public ref int CP {
+        get {
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x7C19959FEB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceOffset;
+    private static nint? _DistanceOffset;
 
-  public CParticleCollectionFloatInput Distance {
-    get {
-      if (_DistanceOffset == null) {
-        _DistanceOffset = Schema.GetOffset(0x7C19959F00DC4A68);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset!.Value);
+    public CParticleCollectionFloatInput Distance {
+        get {
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x7C19959F00DC4A68);
+            return new CParticleCollectionFloatInputImpl(_Handle + _DistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public CParticleCollectionVecInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x7C19959F5F596B51);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset!.Value);
+    public CParticleCollectionVecInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x7C19959F5F596B51);
+            return new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistSqrAttrOffset;
+    private static nint? _DistSqrAttrOffset;
 
-  public ParticleAttributeIndex_t DistSqrAttr {
-    get {
-      if (_DistSqrAttrOffset == null) {
-        _DistSqrAttrOffset = Schema.GetOffset(0x7C19959F767818FE);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _DistSqrAttrOffset!.Value);
+    public ParticleAttributeIndex_t DistSqrAttr {
+        get {
+            _DistSqrAttrOffset = _DistSqrAttrOffset ?? Schema.GetOffset(0x7C19959F767818FE);
+            return new ParticleAttributeIndex_tImpl(_Handle + _DistSqrAttrOffset!.Value);
+        }
     }
-  }
 
 
 }

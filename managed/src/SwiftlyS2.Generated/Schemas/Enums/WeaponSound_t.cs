@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum WeaponSound_t : uint {
-
+public enum WeaponSound_t : uint
+{
  WEAPON_SOUND_EMPTY = 0,
 
  WEAPON_SOUND_SECONDARY_EMPTY = 1,

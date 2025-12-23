@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTurnHelperUpdateNode : CUnaryUpdateNode, ISchemaClass<CTurnHelperUpdateNode> {
+public partial interface CTurnHelperUpdateNode : CUnaryUpdateNode, ISchemaClass<CTurnHelperUpdateNode>
+{
+    static CTurnHelperUpdateNode ISchemaClass<CTurnHelperUpdateNode>.From(nint handle) => new CTurnHelperUpdateNodeImpl(handle);
+    static int ISchemaClass<CTurnHelperUpdateNode>.Size => 144;
+    static string? ISchemaClass<CTurnHelperUpdateNode>.ClassName => null;
 
-  static CTurnHelperUpdateNode ISchemaClass<CTurnHelperUpdateNode>.From(nint handle) => new CTurnHelperUpdateNodeImpl(handle);
-  static int ISchemaClass<CTurnHelperUpdateNode>.Size => 144;
-  static string? ISchemaClass<CTurnHelperUpdateNode>.ClassName => null;
 
-  
-  public ref AnimValueSource FacingTarget { get; }
-  
-  public ref float TurnStartTimeOffset { get; }
-  
-  public ref float TurnDuration { get; }
-  
-  public ref bool MatchChildDuration { get; }
-  
-  public ref float ManualTurnOffset { get; }
-  
-  public ref bool UseManualTurnOffset { get; }
+    public ref AnimValueSource FacingTarget { get; }
+
+    public ref float TurnStartTimeOffset { get; }
+
+    public ref float TurnDuration { get; }
+
+    public ref bool MatchChildDuration { get; }
+
+    public ref float ManualTurnOffset { get; }
+
+    public ref bool UseManualTurnOffset { get; }
 
 
 }

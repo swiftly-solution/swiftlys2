@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface HullFlags_t : ISchemaClass<HullFlags_t> {
+public partial interface HullFlags_t : ISchemaClass<HullFlags_t>
+{
+    static HullFlags_t ISchemaClass<HullFlags_t>.From(nint handle) => new HullFlags_tImpl(handle);
+    static int ISchemaClass<HullFlags_t>.Size => 10;
+    static string? ISchemaClass<HullFlags_t>.ClassName => null;
 
-  static HullFlags_t ISchemaClass<HullFlags_t>.From(nint handle) => new HullFlags_tImpl(handle);
-  static int ISchemaClass<HullFlags_t>.Size => 10;
-  static string? ISchemaClass<HullFlags_t>.ClassName => null;
 
-  
-  public ref bool Hull_Human { get; }
-  
-  public ref bool Hull_SmallCentered { get; }
-  
-  public ref bool Hull_WideHuman { get; }
-  
-  public ref bool Hull_Tiny { get; }
-  
-  public ref bool Hull_Medium { get; }
-  
-  public ref bool Hull_TinyCentered { get; }
-  
-  public ref bool Hull_Large { get; }
-  
-  public ref bool Hull_LargeCentered { get; }
-  
-  public ref bool Hull_MediumTall { get; }
-  
-  public ref bool Hull_Small { get; }
+    public ref bool Hull_Human { get; }
+
+    public ref bool Hull_SmallCentered { get; }
+
+    public ref bool Hull_WideHuman { get; }
+
+    public ref bool Hull_Tiny { get; }
+
+    public ref bool Hull_Medium { get; }
+
+    public ref bool Hull_TinyCentered { get; }
+
+    public ref bool Hull_Large { get; }
+
+    public ref bool Hull_LargeCentered { get; }
+
+    public ref bool Hull_MediumTall { get; }
+
+    public ref bool Hull_Small { get; }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleSetMethod_t : uint {
-
+public enum ParticleSetMethod_t : uint
+{
  PARTICLE_SET_REPLACE_VALUE = 0,
 
  PARTICLE_SET_SCALE_INITIAL_VALUE = 1,

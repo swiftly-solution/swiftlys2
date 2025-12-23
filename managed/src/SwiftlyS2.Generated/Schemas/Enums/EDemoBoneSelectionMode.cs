@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EDemoBoneSelectionMode : uint {
-
+public enum EDemoBoneSelectionMode : uint
+{
  CaptureAllBones = 0,
 
  CaptureSelectedBones = 1,

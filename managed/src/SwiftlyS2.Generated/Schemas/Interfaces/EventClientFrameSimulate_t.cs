@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventClientFrameSimulate_t : ISchemaClass<EventClientFrameSimulate_t> {
+public partial interface EventClientFrameSimulate_t : ISchemaClass<EventClientFrameSimulate_t>
+{
+    static EventClientFrameSimulate_t ISchemaClass<EventClientFrameSimulate_t>.From(nint handle) => new EventClientFrameSimulate_tImpl(handle);
+    static int ISchemaClass<EventClientFrameSimulate_t>.Size => 56;
+    static string? ISchemaClass<EventClientFrameSimulate_t>.ClassName => null;
 
-  static EventClientFrameSimulate_t ISchemaClass<EventClientFrameSimulate_t>.From(nint handle) => new EventClientFrameSimulate_tImpl(handle);
-  static int ISchemaClass<EventClientFrameSimulate_t>.Size => 56;
-  static string? ISchemaClass<EventClientFrameSimulate_t>.ClassName => null;
 
-  
-  public EngineLoopState_t LoopState { get; }
-  
-  public ref float RealTime { get; }
-  
-  public ref float FrameTime { get; }
-  
-  public ref bool ScheduleSendTickPacket { get; }
+    public EngineLoopState_t LoopState { get; }
+
+    public ref float RealTime { get; }
+
+    public ref float FrameTime { get; }
+
+    public ref bool ScheduleSendTickPacket { get; }
 
 
 }

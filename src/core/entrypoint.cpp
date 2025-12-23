@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -71,6 +71,12 @@ IVFunctionHook* g_pLoopInitHook = nullptr;
 //     return 1337;
 // }
 
+#ifdef _WIN32
+#include <regex>
+IFunctionHook* g_pPreloadDLLHook = nullptr;
+void __fastcall PreloadDLLHook(HMODULE hModule);
+#endif
+
 void GameServerSteamAPIActivatedHook(void* _this);
 void GameServerSteamAPIDeactivatedHook(void* _this);
 
@@ -78,10 +84,30 @@ bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry);
 
 extern ICvar* g_pCVar;
 
+CON_COMMAND(sw_crash, "")
+{
+    int* ptr = nullptr;
+    *ptr = 0;
+}
+
 bool SwiftlyCore::Load(BridgeKind_t kind)
 {
     m_iKind = kind;
     SetupConsoleColors();
+
+    m_sCorePath = CommandLine()->ParmValue(CUtlStringToken("-sw_path"), WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2"));
+    if (!ends_with(m_sCorePath, WIN_LINUX("\\", "/")))
+    {
+        m_sCorePath += WIN_LINUX("\\", "/");
+    }
+    m_sLogPath = CommandLine()->ParmValue(CUtlStringToken("-sw_logpath"), WIN_LINUX("addons\\swiftlys2\\logs", "addons/swiftlys2/logs"));
+    if (!ends_with(m_sLogPath, WIN_LINUX("\\", "/")))
+    {
+        m_sLogPath += WIN_LINUX("\\", "/");
+    }
+
+    auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
+    crashreporter->Init();
 
     s2binlib_initialize(Plat_GetGameDirectory(), "csgo");
 
@@ -90,6 +116,17 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
     void* libEngine = load_library((const char_t*)WIN_LINUX(StringWide(Plat_GetGameDirectory() + std::string("\\bin\\win64\\engine2.dll")).c_str(), (Plat_GetGameDirectory() + std::string("/bin/linuxsteamrt64/libengine2.so")).c_str()));
     s2binlib_set_module_base_from_pointer("server", libServer);
     s2binlib_set_module_base_from_pointer("engine2", libEngine);
+
+    // Hook PreloadDLL to skip managed DLLs
+    void* preloadDLLAddr = nullptr;
+    s2binlib_pattern_scan("engine2", "48 89 4C 24 ? 53 56 57 48 83 EC ? 48 8B F1", &preloadDLLAddr);
+    if (preloadDLLAddr)
+    {
+        auto hooksmanager = g_ifaceService.FetchInterface<IHooksManager>(HOOKSMANAGER_INTERFACE_VERSION);
+        g_pPreloadDLLHook = hooksmanager->CreateFunctionHook();
+        g_pPreloadDLLHook->SetHookFunction(preloadDLLAddr, reinterpret_cast<void*>(PreloadDLLHook));
+        g_pPreloadDLLHook->Enable();
+    }
 #endif
 
     auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
@@ -124,23 +161,21 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
         return false;
     }
 
-    m_sCorePath = CommandLine()->ParmValue(CUtlStringToken("-sw_path"), WIN_LINUX("addons\\swiftlys2", "addons/swiftlys2"));
-    if (!ends_with(m_sCorePath, WIN_LINUX("\\", "/")))
-    {
-        m_sCorePath += WIN_LINUX("\\", "/");
-    }
-    m_sLogPath = CommandLine()->ParmValue(CUtlStringToken("-sw_logpath"), WIN_LINUX("addons\\swiftlys2\\logs", "addons/swiftlys2/logs"));
-    if (!ends_with(m_sLogPath, WIN_LINUX("\\", "/")))
-    {
-        m_sLogPath += WIN_LINUX("\\", "/");
-    }
-
     auto configuration = g_ifaceService.FetchInterface<IConfiguration>(CONFIGURATION_INTERFACE_VERSION);
     configuration->InitializeExamples();
     if (!configuration->Load())
     {
         logger->Error("Entrypoint", "Couldn't load the core configuration.");
         return false;
+    }
+
+    if (int* level = std::get_if<int>(&configuration->GetValue("core.DotnetCrashTracerLevel")))
+    {
+        if (*level > 0)
+        {
+            auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
+            crashreporter->EnableDotnetCrashTracer(*level);
+        }
     }
 
     auto sdkclass = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
@@ -290,8 +325,43 @@ bool SwiftlyCore::Unload()
 
     ShutdownGameSystem();
 
+    auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
+    crashreporter->Shutdown();
+
     return true;
 }
+
+#ifdef _WIN32
+void __fastcall PreloadDLLHook(HMODULE hModule)
+{
+    if (!g_pPreloadDLLHook || !g_pPreloadDLLHook->GetOriginal())
+    {
+        return;
+    }
+
+    if (hModule)
+    {
+        char modulePath[MAX_PATH] = { 0 };
+        DWORD len = GetModuleFileNameA(hModule, modulePath, MAX_PATH);
+        if (len > 0 && len < MAX_PATH)
+        {
+            // Skip DLLs in managed and exports directory
+            static const std::regex skipPattern(R"([/\\](bin[/\\]managed|resources[/\\]exports)[/\\])", std::regex_constants::icase);
+            if (std::regex_search(modulePath, skipPattern))
+            {
+                auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
+                if (logger)
+                {
+                    logger->Info("PreloadDLL", fmt::format("Skipping DLL: {}\n", modulePath));
+                }
+                return;
+            }
+        }
+    }
+
+    return reinterpret_cast<decltype(&PreloadDLLHook)>(g_pPreloadDLLHook->GetOriginal())(hModule);
+}
+#endif
 
 void GameServerSteamAPIActivatedHook(void* _this)
 {

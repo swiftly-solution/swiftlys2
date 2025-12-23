@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class lerpdata_tImpl : SchemaClass, lerpdata_t {
+internal partial class lerpdata_tImpl : SchemaClass, lerpdata_t
+{
+    public lerpdata_tImpl(nint handle) : base(handle) { }
 
-  public lerpdata_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EntOffset;
 
-  private static nint? _EntOffset;
-
-  public ref CHandle<CBaseEntity> Ent {
-    get {
-      if (_EntOffset == null) {
-        _EntOffset = Schema.GetOffset(0x70C58DAB8BBDB334);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOffset!.Value);
+    public ref CHandle<CBaseEntity> Ent {
+        get {
+            _EntOffset = _EntOffset ?? Schema.GetOffset(0x70C58DAB8BBDB334);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOffset!.Value);
+        }
     }
-  }
-  private static nint? _MoveTypeOffset;
+    private static nint? _MoveTypeOffset;
 
-  public ref MoveType_t MoveType {
-    get {
-      if (_MoveTypeOffset == null) {
-        _MoveTypeOffset = Schema.GetOffset(0x70C58DAB90BCCC1C);
-      }
-      return ref _Handle.AsRef<MoveType_t>(_MoveTypeOffset!.Value);
+    public ref MoveType_t MoveType {
+        get {
+            _MoveTypeOffset = _MoveTypeOffset ?? Schema.GetOffset(0x70C58DAB90BCCC1C);
+            return ref _Handle.AsRef<MoveType_t>(_MoveTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartTimeOffset;
+    private static nint? _StartTimeOffset;
 
-  public GameTime_t StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x70C58DAB67FE9DC4);
-      }
-      return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+    public GameTime_t StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x70C58DAB67FE9DC4);
+            return new GameTime_tImpl(_Handle + _StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartOriginOffset;
+    private static nint? _StartOriginOffset;
 
-  public ref Vector StartOrigin {
-    get {
-      if (_StartOriginOffset == null) {
-        _StartOriginOffset = Schema.GetOffset(0x70C58DAB7C574331);
-      }
-      return ref _Handle.AsRef<Vector>(_StartOriginOffset!.Value);
+    public ref Vector StartOrigin {
+        get {
+            _StartOriginOffset = _StartOriginOffset ?? Schema.GetOffset(0x70C58DAB7C574331);
+            return ref _Handle.AsRef<Vector>(_StartOriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartRotOffset;
+    private static nint? _StartRotOffset;
 
-  public ref Quaternion StartRot {
-    get {
-      if (_StartRotOffset == null) {
-        _StartRotOffset = Schema.GetOffset(0x70C58DAB6246A06D);
-      }
-      return ref _Handle.AsRef<Quaternion>(_StartRotOffset!.Value);
+    public ref Quaternion StartRot {
+        get {
+            _StartRotOffset = _StartRotOffset ?? Schema.GetOffset(0x70C58DAB6246A06D);
+            return ref _Handle.AsRef<Quaternion>(_StartRotOffset!.Value);
+        }
     }
-  }
-  private static nint? _FXIndexOffset;
+    private static nint? _FXIndexOffset;
 
-  public ParticleIndex_t FXIndex {
-    get {
-      if (_FXIndexOffset == null) {
-        _FXIndexOffset = Schema.GetOffset(0x70C58DAB1E8452FD);
-      }
-      return new ParticleIndex_tImpl(_Handle + _FXIndexOffset!.Value);
+    public ParticleIndex_t FXIndex {
+        get {
+            _FXIndexOffset = _FXIndexOffset ?? Schema.GetOffset(0x70C58DAB1E8452FD);
+            return new ParticleIndex_tImpl(_Handle + _FXIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

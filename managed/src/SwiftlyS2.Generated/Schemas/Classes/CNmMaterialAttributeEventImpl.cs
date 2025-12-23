@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmMaterialAttributeEventImpl : CNmEventImpl, CNmMaterialAttributeEvent {
+internal partial class CNmMaterialAttributeEventImpl : CNmEventImpl, CNmMaterialAttributeEvent
+{
+    public CNmMaterialAttributeEventImpl(nint handle) : base(handle) { }
 
-  public CNmMaterialAttributeEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttributeNameOffset;
 
-  private static nint? _AttributeNameOffset;
+    public string AttributeName {
+        get {
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0xFC131DA9168F02C);
+            return Schema.GetString(_Handle.Read<nint>(_AttributeNameOffset!.Value));
+        }
+        set {
+            _AttributeNameOffset = _AttributeNameOffset ?? Schema.GetOffset(0xFC131DA9168F02C);
+            Schema.SetString(_Handle, _AttributeNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _AttributeNameTokenOffset;
 
-  public string AttributeName {
-    get {
-      if (_AttributeNameOffset == null) {
-        _AttributeNameOffset = Schema.GetOffset(0xFC131DA9168F02C);
-      }
-      var ptr = _Handle.Read<nint>(_AttributeNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlStringToken AttributeNameToken {
+        get {
+            _AttributeNameTokenOffset = _AttributeNameTokenOffset ?? Schema.GetOffset(0xFC131DA4C1F86C9);
+            return ref _Handle.AsRef<CUtlStringToken>(_AttributeNameTokenOffset!.Value);
+        }
     }
-    set {
-      if (_AttributeNameOffset == null) {
-        _AttributeNameOffset = Schema.GetOffset(0xFC131DA9168F02C);
-      }
-      Schema.SetString(_Handle, _AttributeNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _AttributeNameTokenOffset;
+    private static nint? _XOffset;
 
-  public ref CUtlStringToken AttributeNameToken {
-    get {
-      if (_AttributeNameTokenOffset == null) {
-        _AttributeNameTokenOffset = Schema.GetOffset(0xFC131DA4C1F86C9);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_AttributeNameTokenOffset!.Value);
+    public SchemaUntypedField X {
+        get {
+            _XOffset = _XOffset ?? Schema.GetOffset(0xFC131DADBC57BA7);
+            return new SchemaUntypedField(_Handle + _XOffset!.Value);
+        }
     }
-  }
-  private static nint? _XOffset;
+    private static nint? _YOffset;
 
-  public SchemaUntypedField X {
-    get {
-      if (_XOffset == null) {
-        _XOffset = Schema.GetOffset(0xFC131DADBC57BA7);
-      }
-      return new SchemaUntypedField(_Handle + _XOffset!.Value);
+    public SchemaUntypedField Y {
+        get {
+            _YOffset = _YOffset ?? Schema.GetOffset(0xFC131DADAC57A14);
+            return new SchemaUntypedField(_Handle + _YOffset!.Value);
+        }
     }
-  }
-  private static nint? _YOffset;
+    private static nint? _ZOffset;
 
-  public SchemaUntypedField Y {
-    get {
-      if (_YOffset == null) {
-        _YOffset = Schema.GetOffset(0xFC131DADAC57A14);
-      }
-      return new SchemaUntypedField(_Handle + _YOffset!.Value);
+    public SchemaUntypedField Z {
+        get {
+            _ZOffset = _ZOffset ?? Schema.GetOffset(0xFC131DADDC57ECD);
+            return new SchemaUntypedField(_Handle + _ZOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZOffset;
+    private static nint? _WOffset;
 
-  public SchemaUntypedField Z {
-    get {
-      if (_ZOffset == null) {
-        _ZOffset = Schema.GetOffset(0xFC131DADDC57ECD);
-      }
-      return new SchemaUntypedField(_Handle + _ZOffset!.Value);
+    public SchemaUntypedField W {
+        get {
+            _WOffset = _WOffset ?? Schema.GetOffset(0xFC131DAD0C56A56);
+            return new SchemaUntypedField(_Handle + _WOffset!.Value);
+        }
     }
-  }
-  private static nint? _WOffset;
-
-  public SchemaUntypedField W {
-    get {
-      if (_WOffset == null) {
-        _WOffset = Schema.GetOffset(0xFC131DAD0C56A56);
-      }
-      return new SchemaUntypedField(_Handle + _WOffset!.Value);
-    }
-  }
 
 
 }

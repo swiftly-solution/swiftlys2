@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderLights : C_OP_RenderPoints, ISchemaClass<C_OP_RenderLights> {
+public partial interface C_OP_RenderLights : C_OP_RenderPoints, ISchemaClass<C_OP_RenderLights>
+{
+    static C_OP_RenderLights ISchemaClass<C_OP_RenderLights>.From(nint handle) => new C_OP_RenderLightsImpl(handle);
+    static int ISchemaClass<C_OP_RenderLights>.Size => 584;
+    static string? ISchemaClass<C_OP_RenderLights>.ClassName => null;
 
-  static C_OP_RenderLights ISchemaClass<C_OP_RenderLights>.From(nint handle) => new C_OP_RenderLightsImpl(handle);
-  static int ISchemaClass<C_OP_RenderLights>.Size => 584;
-  static string? ISchemaClass<C_OP_RenderLights>.ClassName => null;
 
-  
-  public ref float AnimationRate { get; }
-  
-  public ref AnimationType_t AnimationType { get; }
-  
-  public ref bool AnimateInFPS { get; }
-  
-  public ref float MinSize { get; }
-  
-  public ref float MaxSize { get; }
-  
-  public ref float StartFadeSize { get; }
-  
-  public ref float EndFadeSize { get; }
+    public ref float AnimationRate { get; }
+
+    public ref AnimationType_t AnimationType { get; }
+
+    public ref bool AnimateInFPS { get; }
+
+    public ref float MinSize { get; }
+
+    public ref float MaxSize { get; }
+
+    public ref float StartFadeSize { get; }
+
+    public ref float EndFadeSize { get; }
 
 
 }

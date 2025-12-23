@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface IPhysicsPlayerController : ISchemaClass<IPhysicsPlayerController> {
-
-  static IPhysicsPlayerController ISchemaClass<IPhysicsPlayerController>.From(nint handle) => new IPhysicsPlayerControllerImpl(handle);
-  static int ISchemaClass<IPhysicsPlayerController>.Size => 8;
-  static string? ISchemaClass<IPhysicsPlayerController>.ClassName => null;
+public partial interface IPhysicsPlayerController : ISchemaClass<IPhysicsPlayerController>
+{
+    static IPhysicsPlayerController ISchemaClass<IPhysicsPlayerController>.From(nint handle) => new IPhysicsPlayerControllerImpl(handle);
+    static int ISchemaClass<IPhysicsPlayerController>.Size => 8;
+    static string? ISchemaClass<IPhysicsPlayerController>.ClassName => null;
 
 
 

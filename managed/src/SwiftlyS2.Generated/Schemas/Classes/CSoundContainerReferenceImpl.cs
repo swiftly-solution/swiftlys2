@@ -6,48 +6,41 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundContainerReferenceImpl : SchemaClass, CSoundContainerReference {
+internal partial class CSoundContainerReferenceImpl : SchemaClass, CSoundContainerReference
+{
+    public CSoundContainerReferenceImpl(nint handle) : base(handle) { }
 
-  public CSoundContainerReferenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _UseReferenceOffset;
 
-  private static nint? _UseReferenceOffset;
-
-  public ref bool UseReference {
-    get {
-      if (_UseReferenceOffset == null) {
-        _UseReferenceOffset = Schema.GetOffset(0x4663CCA145BCD5C9);
-      }
-      return ref _Handle.AsRef<bool>(_UseReferenceOffset!.Value);
+    public ref bool UseReference {
+        get {
+            _UseReferenceOffset = _UseReferenceOffset ?? Schema.GetOffset(0x4663CCA145BCD5C9);
+            return ref _Handle.AsRef<bool>(_UseReferenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundOffset;
+    private static nint? _SoundOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> Sound {
-    get {
-      if (_SoundOffset == null) {
-        _SoundOffset = Schema.GetOffset(0x4663CCA14E1C4FB4);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SoundOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> Sound {
+        get {
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x4663CCA14E1C4FB4);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _Sound1Offset;
+    private static nint? _Sound1Offset;
 
-  public CVoiceContainerBase? Sound1 {
-    get {
-      if (_Sound1Offset == null) {
-        _Sound1Offset = Schema.GetOffset(0x4663CCA13D8D58B6);
-      }
-      var ptr = _Handle.Read<nint>(_Sound1Offset!.Value);
-      return ptr.IsValidPtr() ? new CVoiceContainerBaseImpl(ptr) : null;
+    public CVoiceContainerBase? Sound1 {
+        get {
+            _Sound1Offset = _Sound1Offset ?? Schema.GetOffset(0x4663CCA13D8D58B6);
+            var ptr = _Handle.Read<nint>(_Sound1Offset!.Value);
+            return ptr.IsValidPtr() ? new CVoiceContainerBaseImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

@@ -1,17 +1,12 @@
-  private static nint? _$NAME$Offset;
+    private static nint? _$NAME$Offset;
 
-  public string $NAME$ {
-    get {
-        if (_$NAME$Offset == null) {
-            _$NAME$Offset = Schema.GetOffset($HASH$);
+    public string $NAME$ {
+        get {
+            _$NAME$Offset = _$NAME$Offset ?? Schema.GetOffset($HASH$);
+            return Schema.GetString(_Handle + _$NAME$Offset!.Value);
         }
-        var ptr = _Handle + _$NAME$Offset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_$NAME$Offset == null) {
-            _$NAME$Offset = Schema.GetOffset($HASH$);
+        set {
+            _$NAME$Offset = _$NAME$Offset ?? Schema.GetOffset($HASH$);
+            Schema.SetFixedString(_Handle, _$NAME$Offset!.Value, value, $ELEMENT_COUNT$);
         }
-        Schema.SetFixedString(_Handle, _$NAME$Offset!.Value, value, $ELEMENT_COUNT$);
-    }
-  } 
+    } 

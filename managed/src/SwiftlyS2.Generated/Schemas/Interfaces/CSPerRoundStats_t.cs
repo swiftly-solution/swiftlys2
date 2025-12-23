@@ -8,50 +8,50 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSPerRoundStats_t : ISchemaClass<CSPerRoundStats_t> {
+public partial interface CSPerRoundStats_t : ISchemaClass<CSPerRoundStats_t>
+{
+    static CSPerRoundStats_t ISchemaClass<CSPerRoundStats_t>.From(nint handle) => new CSPerRoundStats_tImpl(handle);
+    static int ISchemaClass<CSPerRoundStats_t>.Size => 104;
+    static string? ISchemaClass<CSPerRoundStats_t>.ClassName => null;
 
-  static CSPerRoundStats_t ISchemaClass<CSPerRoundStats_t>.From(nint handle) => new CSPerRoundStats_tImpl(handle);
-  static int ISchemaClass<CSPerRoundStats_t>.Size => 104;
-  static string? ISchemaClass<CSPerRoundStats_t>.ClassName => null;
 
-  
-  public ref int Kills { get; }
-  
-  public ref int Deaths { get; }
-  
-  public ref int Assists { get; }
-  
-  public ref int Damage { get; }
-  
-  public ref int EquipmentValue { get; }
-  
-  public ref int MoneySaved { get; }
-  
-  public ref int KillReward { get; }
-  
-  public ref int LiveTime { get; }
-  
-  public ref int HeadShotKills { get; }
-  
-  public ref int Objective { get; }
-  
-  public ref int CashEarned { get; }
-  
-  public ref int UtilityDamage { get; }
-  
-  public ref int EnemiesFlashed { get; }
+    public ref int Kills { get; }
 
-  public void KillsUpdated();
-  public void DeathsUpdated();
-  public void AssistsUpdated();
-  public void DamageUpdated();
-  public void EquipmentValueUpdated();
-  public void MoneySavedUpdated();
-  public void KillRewardUpdated();
-  public void LiveTimeUpdated();
-  public void HeadShotKillsUpdated();
-  public void ObjectiveUpdated();
-  public void CashEarnedUpdated();
-  public void UtilityDamageUpdated();
-  public void EnemiesFlashedUpdated();
+    public ref int Deaths { get; }
+
+    public ref int Assists { get; }
+
+    public ref int Damage { get; }
+
+    public ref int EquipmentValue { get; }
+
+    public ref int MoneySaved { get; }
+
+    public ref int KillReward { get; }
+
+    public ref int LiveTime { get; }
+
+    public ref int HeadShotKills { get; }
+
+    public ref int Objective { get; }
+
+    public ref int CashEarned { get; }
+
+    public ref int UtilityDamage { get; }
+
+    public ref int EnemiesFlashed { get; }
+
+    public void KillsUpdated();
+    public void DeathsUpdated();
+    public void AssistsUpdated();
+    public void DamageUpdated();
+    public void EquipmentValueUpdated();
+    public void MoneySavedUpdated();
+    public void KillRewardUpdated();
+    public void LiveTimeUpdated();
+    public void HeadShotKillsUpdated();
+    public void ObjectiveUpdated();
+    public void CashEarnedUpdated();
+    public void UtilityDamageUpdated();
+    public void EnemiesFlashedUpdated();
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EPulseGraphExecutionHistoryFlag : uint {
-
+public enum EPulseGraphExecutionHistoryFlag : uint
+{
  NO_FLAGS = 0,
 
  CURSOR_ADD_TAG = 1,

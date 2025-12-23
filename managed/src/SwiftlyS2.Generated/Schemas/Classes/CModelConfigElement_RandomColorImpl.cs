@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigElement_RandomColorImpl : CModelConfigElementImpl, CModelConfigElement_RandomColor {
+internal partial class CModelConfigElement_RandomColorImpl : CModelConfigElementImpl, CModelConfigElement_RandomColor
+{
+    public CModelConfigElement_RandomColorImpl(nint handle) : base(handle) { }
 
-  public CModelConfigElement_RandomColorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GradientOffset;
 
-  private static nint? _GradientOffset;
-
-  public SchemaUntypedField Gradient {
-    get {
-      if (_GradientOffset == null) {
-        _GradientOffset = Schema.GetOffset(0x375CC66605C95F25);
-      }
-      return new SchemaUntypedField(_Handle + _GradientOffset!.Value);
+    public SchemaUntypedField Gradient {
+        get {
+            _GradientOffset = _GradientOffset ?? Schema.GetOffset(0x375CC66605C95F25);
+            return new SchemaUntypedField(_Handle + _GradientOffset!.Value);
+        }
     }
-  }
 
 
 }

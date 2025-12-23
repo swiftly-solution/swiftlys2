@@ -6,267 +6,216 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class dynpitchvol_base_tImpl : SchemaClass, dynpitchvol_base_t {
+internal partial class dynpitchvol_base_tImpl : SchemaClass, dynpitchvol_base_t
+{
+    public dynpitchvol_base_tImpl(nint handle) : base(handle) { }
 
-  public dynpitchvol_base_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PresetOffset;
 
-  private static nint? _PresetOffset;
-
-  public ref int Preset {
-    get {
-      if (_PresetOffset == null) {
-        _PresetOffset = Schema.GetOffset(0x43D191DAF510291E);
-      }
-      return ref _Handle.AsRef<int>(_PresetOffset!.Value);
+    public ref int Preset {
+        get {
+            _PresetOffset = _PresetOffset ?? Schema.GetOffset(0x43D191DAF510291E);
+            return ref _Handle.AsRef<int>(_PresetOffset!.Value);
+        }
     }
-  }
-  private static nint? _PitchrunOffset;
+    private static nint? _PitchrunOffset;
 
-  public ref int Pitchrun {
-    get {
-      if (_PitchrunOffset == null) {
-        _PitchrunOffset = Schema.GetOffset(0x43D191DA742593BE);
-      }
-      return ref _Handle.AsRef<int>(_PitchrunOffset!.Value);
+    public ref int Pitchrun {
+        get {
+            _PitchrunOffset = _PitchrunOffset ?? Schema.GetOffset(0x43D191DA742593BE);
+            return ref _Handle.AsRef<int>(_PitchrunOffset!.Value);
+        }
     }
-  }
-  private static nint? _PitchstartOffset;
+    private static nint? _PitchstartOffset;
 
-  public ref int Pitchstart {
-    get {
-      if (_PitchstartOffset == null) {
-        _PitchstartOffset = Schema.GetOffset(0x43D191DA4CEFD303);
-      }
-      return ref _Handle.AsRef<int>(_PitchstartOffset!.Value);
+    public ref int Pitchstart {
+        get {
+            _PitchstartOffset = _PitchstartOffset ?? Schema.GetOffset(0x43D191DA4CEFD303);
+            return ref _Handle.AsRef<int>(_PitchstartOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpinupOffset;
+    private static nint? _SpinupOffset;
 
-  public ref int Spinup {
-    get {
-      if (_SpinupOffset == null) {
-        _SpinupOffset = Schema.GetOffset(0x43D191DAD188EC9C);
-      }
-      return ref _Handle.AsRef<int>(_SpinupOffset!.Value);
+    public ref int Spinup {
+        get {
+            _SpinupOffset = _SpinupOffset ?? Schema.GetOffset(0x43D191DAD188EC9C);
+            return ref _Handle.AsRef<int>(_SpinupOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpindownOffset;
+    private static nint? _SpindownOffset;
 
-  public ref int Spindown {
-    get {
-      if (_SpindownOffset == null) {
-        _SpindownOffset = Schema.GetOffset(0x43D191DA2231BF89);
-      }
-      return ref _Handle.AsRef<int>(_SpindownOffset!.Value);
+    public ref int Spindown {
+        get {
+            _SpindownOffset = _SpindownOffset ?? Schema.GetOffset(0x43D191DA2231BF89);
+            return ref _Handle.AsRef<int>(_SpindownOffset!.Value);
+        }
     }
-  }
-  private static nint? _VolrunOffset;
+    private static nint? _VolrunOffset;
 
-  public ref int Volrun {
-    get {
-      if (_VolrunOffset == null) {
-        _VolrunOffset = Schema.GetOffset(0x43D191DA3F973C1B);
-      }
-      return ref _Handle.AsRef<int>(_VolrunOffset!.Value);
+    public ref int Volrun {
+        get {
+            _VolrunOffset = _VolrunOffset ?? Schema.GetOffset(0x43D191DA3F973C1B);
+            return ref _Handle.AsRef<int>(_VolrunOffset!.Value);
+        }
     }
-  }
-  private static nint? _VolstartOffset;
+    private static nint? _VolstartOffset;
 
-  public ref int Volstart {
-    get {
-      if (_VolstartOffset == null) {
-        _VolstartOffset = Schema.GetOffset(0x43D191DAF69D02A2);
-      }
-      return ref _Handle.AsRef<int>(_VolstartOffset!.Value);
+    public ref int Volstart {
+        get {
+            _VolstartOffset = _VolstartOffset ?? Schema.GetOffset(0x43D191DAF69D02A2);
+            return ref _Handle.AsRef<int>(_VolstartOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeinOffset;
+    private static nint? _FadeinOffset;
 
-  public ref int Fadein {
-    get {
-      if (_FadeinOffset == null) {
-        _FadeinOffset = Schema.GetOffset(0x43D191DAAE01FB20);
-      }
-      return ref _Handle.AsRef<int>(_FadeinOffset!.Value);
+    public ref int Fadein {
+        get {
+            _FadeinOffset = _FadeinOffset ?? Schema.GetOffset(0x43D191DAAE01FB20);
+            return ref _Handle.AsRef<int>(_FadeinOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeoutOffset;
+    private static nint? _FadeoutOffset;
 
-  public ref int Fadeout {
-    get {
-      if (_FadeoutOffset == null) {
-        _FadeoutOffset = Schema.GetOffset(0x43D191DA20407665);
-      }
-      return ref _Handle.AsRef<int>(_FadeoutOffset!.Value);
+    public ref int Fadeout {
+        get {
+            _FadeoutOffset = _FadeoutOffset ?? Schema.GetOffset(0x43D191DA20407665);
+            return ref _Handle.AsRef<int>(_FadeoutOffset!.Value);
+        }
     }
-  }
-  private static nint? _LfotypeOffset;
+    private static nint? _LfotypeOffset;
 
-  public ref int Lfotype {
-    get {
-      if (_LfotypeOffset == null) {
-        _LfotypeOffset = Schema.GetOffset(0x43D191DAF7F77640);
-      }
-      return ref _Handle.AsRef<int>(_LfotypeOffset!.Value);
+    public ref int Lfotype {
+        get {
+            _LfotypeOffset = _LfotypeOffset ?? Schema.GetOffset(0x43D191DAF7F77640);
+            return ref _Handle.AsRef<int>(_LfotypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LforateOffset;
+    private static nint? _LforateOffset;
 
-  public ref int Lforate {
-    get {
-      if (_LforateOffset == null) {
-        _LforateOffset = Schema.GetOffset(0x43D191DA51C3D86A);
-      }
-      return ref _Handle.AsRef<int>(_LforateOffset!.Value);
+    public ref int Lforate {
+        get {
+            _LforateOffset = _LforateOffset ?? Schema.GetOffset(0x43D191DA51C3D86A);
+            return ref _Handle.AsRef<int>(_LforateOffset!.Value);
+        }
     }
-  }
-  private static nint? _LfomodpitchOffset;
+    private static nint? _LfomodpitchOffset;
 
-  public ref int Lfomodpitch {
-    get {
-      if (_LfomodpitchOffset == null) {
-        _LfomodpitchOffset = Schema.GetOffset(0x43D191DAA31EEA52);
-      }
-      return ref _Handle.AsRef<int>(_LfomodpitchOffset!.Value);
+    public ref int Lfomodpitch {
+        get {
+            _LfomodpitchOffset = _LfomodpitchOffset ?? Schema.GetOffset(0x43D191DAA31EEA52);
+            return ref _Handle.AsRef<int>(_LfomodpitchOffset!.Value);
+        }
     }
-  }
-  private static nint? _LfomodvolOffset;
+    private static nint? _LfomodvolOffset;
 
-  public ref int Lfomodvol {
-    get {
-      if (_LfomodvolOffset == null) {
-        _LfomodvolOffset = Schema.GetOffset(0x43D191DA23BDFF5D);
-      }
-      return ref _Handle.AsRef<int>(_LfomodvolOffset!.Value);
+    public ref int Lfomodvol {
+        get {
+            _LfomodvolOffset = _LfomodvolOffset ?? Schema.GetOffset(0x43D191DA23BDFF5D);
+            return ref _Handle.AsRef<int>(_LfomodvolOffset!.Value);
+        }
     }
-  }
-  private static nint? _CspinupOffset;
+    private static nint? _CspinupOffset;
 
-  public ref int Cspinup {
-    get {
-      if (_CspinupOffset == null) {
-        _CspinupOffset = Schema.GetOffset(0x43D191DAB6785957);
-      }
-      return ref _Handle.AsRef<int>(_CspinupOffset!.Value);
+    public ref int Cspinup {
+        get {
+            _CspinupOffset = _CspinupOffset ?? Schema.GetOffset(0x43D191DAB6785957);
+            return ref _Handle.AsRef<int>(_CspinupOffset!.Value);
+        }
     }
-  }
-  private static nint? _CspincountOffset;
+    private static nint? _CspincountOffset;
 
-  public ref int Cspincount {
-    get {
-      if (_CspincountOffset == null) {
-        _CspincountOffset = Schema.GetOffset(0x43D191DAEF206411);
-      }
-      return ref _Handle.AsRef<int>(_CspincountOffset!.Value);
+    public ref int Cspincount {
+        get {
+            _CspincountOffset = _CspincountOffset ?? Schema.GetOffset(0x43D191DAEF206411);
+            return ref _Handle.AsRef<int>(_CspincountOffset!.Value);
+        }
     }
-  }
-  private static nint? _PitchOffset;
+    private static nint? _PitchOffset;
 
-  public ref int Pitch {
-    get {
-      if (_PitchOffset == null) {
-        _PitchOffset = Schema.GetOffset(0x43D191DABD324AB1);
-      }
-      return ref _Handle.AsRef<int>(_PitchOffset!.Value);
+    public ref int Pitch {
+        get {
+            _PitchOffset = _PitchOffset ?? Schema.GetOffset(0x43D191DABD324AB1);
+            return ref _Handle.AsRef<int>(_PitchOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpinupsavOffset;
+    private static nint? _SpinupsavOffset;
 
-  public ref int Spinupsav {
-    get {
-      if (_SpinupsavOffset == null) {
-        _SpinupsavOffset = Schema.GetOffset(0x43D191DA49CF0B06);
-      }
-      return ref _Handle.AsRef<int>(_SpinupsavOffset!.Value);
+    public ref int Spinupsav {
+        get {
+            _SpinupsavOffset = _SpinupsavOffset ?? Schema.GetOffset(0x43D191DA49CF0B06);
+            return ref _Handle.AsRef<int>(_SpinupsavOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpindownsavOffset;
+    private static nint? _SpindownsavOffset;
 
-  public ref int Spindownsav {
-    get {
-      if (_SpindownsavOffset == null) {
-        _SpindownsavOffset = Schema.GetOffset(0x43D191DA495B8411);
-      }
-      return ref _Handle.AsRef<int>(_SpindownsavOffset!.Value);
+    public ref int Spindownsav {
+        get {
+            _SpindownsavOffset = _SpindownsavOffset ?? Schema.GetOffset(0x43D191DA495B8411);
+            return ref _Handle.AsRef<int>(_SpindownsavOffset!.Value);
+        }
     }
-  }
-  private static nint? _PitchfracOffset;
+    private static nint? _PitchfracOffset;
 
-  public ref int Pitchfrac {
-    get {
-      if (_PitchfracOffset == null) {
-        _PitchfracOffset = Schema.GetOffset(0x43D191DAB47FB19D);
-      }
-      return ref _Handle.AsRef<int>(_PitchfracOffset!.Value);
+    public ref int Pitchfrac {
+        get {
+            _PitchfracOffset = _PitchfracOffset ?? Schema.GetOffset(0x43D191DAB47FB19D);
+            return ref _Handle.AsRef<int>(_PitchfracOffset!.Value);
+        }
     }
-  }
-  private static nint? _VolOffset;
+    private static nint? _VolOffset;
 
-  public ref int Vol {
-    get {
-      if (_VolOffset == null) {
-        _VolOffset = Schema.GetOffset(0x43D191DA9821809A);
-      }
-      return ref _Handle.AsRef<int>(_VolOffset!.Value);
+    public ref int Vol {
+        get {
+            _VolOffset = _VolOffset ?? Schema.GetOffset(0x43D191DA9821809A);
+            return ref _Handle.AsRef<int>(_VolOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeinsavOffset;
+    private static nint? _FadeinsavOffset;
 
-  public ref int Fadeinsav {
-    get {
-      if (_FadeinsavOffset == null) {
-        _FadeinsavOffset = Schema.GetOffset(0x43D191DAB42E3AEA);
-      }
-      return ref _Handle.AsRef<int>(_FadeinsavOffset!.Value);
+    public ref int Fadeinsav {
+        get {
+            _FadeinsavOffset = _FadeinsavOffset ?? Schema.GetOffset(0x43D191DAB42E3AEA);
+            return ref _Handle.AsRef<int>(_FadeinsavOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeoutsavOffset;
+    private static nint? _FadeoutsavOffset;
 
-  public ref int Fadeoutsav {
-    get {
-      if (_FadeoutsavOffset == null) {
-        _FadeoutsavOffset = Schema.GetOffset(0x43D191DA6D891B1D);
-      }
-      return ref _Handle.AsRef<int>(_FadeoutsavOffset!.Value);
+    public ref int Fadeoutsav {
+        get {
+            _FadeoutsavOffset = _FadeoutsavOffset ?? Schema.GetOffset(0x43D191DA6D891B1D);
+            return ref _Handle.AsRef<int>(_FadeoutsavOffset!.Value);
+        }
     }
-  }
-  private static nint? _VolfracOffset;
+    private static nint? _VolfracOffset;
 
-  public ref int Volfrac {
-    get {
-      if (_VolfracOffset == null) {
-        _VolfracOffset = Schema.GetOffset(0x43D191DAB7D22B7E);
-      }
-      return ref _Handle.AsRef<int>(_VolfracOffset!.Value);
+    public ref int Volfrac {
+        get {
+            _VolfracOffset = _VolfracOffset ?? Schema.GetOffset(0x43D191DAB7D22B7E);
+            return ref _Handle.AsRef<int>(_VolfracOffset!.Value);
+        }
     }
-  }
-  private static nint? _LfofracOffset;
+    private static nint? _LfofracOffset;
 
-  public ref int Lfofrac {
-    get {
-      if (_LfofracOffset == null) {
-        _LfofracOffset = Schema.GetOffset(0x43D191DAC4C70DD8);
-      }
-      return ref _Handle.AsRef<int>(_LfofracOffset!.Value);
+    public ref int Lfofrac {
+        get {
+            _LfofracOffset = _LfofracOffset ?? Schema.GetOffset(0x43D191DAC4C70DD8);
+            return ref _Handle.AsRef<int>(_LfofracOffset!.Value);
+        }
     }
-  }
-  private static nint? _LfomultOffset;
+    private static nint? _LfomultOffset;
 
-  public ref int Lfomult {
-    get {
-      if (_LfomultOffset == null) {
-        _LfomultOffset = Schema.GetOffset(0x43D191DAE90F60A6);
-      }
-      return ref _Handle.AsRef<int>(_LfomultOffset!.Value);
+    public ref int Lfomult {
+        get {
+            _LfomultOffset = _LfomultOffset ?? Schema.GetOffset(0x43D191DAE90F60A6);
+            return ref _Handle.AsRef<int>(_LfomultOffset!.Value);
+        }
     }
-  }
 
 
 }

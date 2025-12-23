@@ -6,33 +6,30 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnSoftbodyCapsule_tImpl : SchemaClass, RnSoftbodyCapsule_t {
+internal partial class RnSoftbodyCapsule_tImpl : SchemaClass, RnSoftbodyCapsule_t
+{
+    public RnSoftbodyCapsule_tImpl(nint handle) : base(handle) { }
 
-  public RnSoftbodyCapsule_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<Vector> Center {
-    get => new SchemaFixedArray<Vector>(_Handle, 0x896978BC82A5908, 2, 12, 4);
-  }
-  private static nint? _RadiusOffset;
-
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x896978B5ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ISchemaFixedArray<Vector> Center {
+        get => new SchemaFixedArray<Vector>(_Handle, 0x896978BC82A5908, 2, 12, 4);
     }
-  }
-  public ISchemaFixedArray<ushort> Particle {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x896978B863A8E83, 2, 2, 2);
-  }
+    private static nint? _RadiusOffset;
+
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x896978B5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
+    }
+    public ISchemaFixedArray<ushort> Particle {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x896978B863A8E83, 2, 2, 2);
+    }
 
 
 }

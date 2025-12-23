@@ -8,122 +8,122 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderModels : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderModels> {
+public partial interface C_OP_RenderModels : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderModels>
+{
+    static C_OP_RenderModels ISchemaClass<C_OP_RenderModels>.From(nint handle) => new C_OP_RenderModelsImpl(handle);
+    static int ISchemaClass<C_OP_RenderModels>.Size => 11424;
+    static string? ISchemaClass<C_OP_RenderModels>.ClassName => null;
 
-  static C_OP_RenderModels ISchemaClass<C_OP_RenderModels>.From(nint handle) => new C_OP_RenderModelsImpl(handle);
-  static int ISchemaClass<C_OP_RenderModels>.Size => 11424;
-  static string? ISchemaClass<C_OP_RenderModels>.ClassName => null;
 
-  
-  public ref bool OnlyRenderInEffectsBloomPass { get; }
-  
-  public ref bool OnlyRenderInEffectsWaterPass { get; }
-  
-  public ref bool UseMixedResolutionRendering { get; }
-  
-  public ref bool OnlyRenderInEffecsGameOverlay { get; }
-  
-  public ref CUtlVector<ModelReference_t> ModelList { get; }
-  
-  public ParticleAttributeIndex_t BodyGroupField { get; }
-  
-  public ParticleAttributeIndex_t SubModelField { get; }
-  
-  public ref bool IgnoreNormal { get; }
-  
-  public ref bool OrientZ { get; }
-  
-  public ref bool CenterOffset { get; }
-  
-  public CPerParticleVecInput LocalOffset { get; }
-  
-  public CPerParticleVecInput LocalRotation { get; }
-  
-  public ref bool IgnoreRadius { get; }
-  
-  public ref int ModelScaleCP { get; }
-  
-  public CPerParticleVecInput ComponentScale { get; }
-  
-  public ref bool LocalScale { get; }
-  
-  public ref int SizeCullBloat { get; }
-  
-  public ref bool Animated { get; }
-  
-  public CPerParticleFloatInput AnimationRate { get; }
-  
-  public ref bool ScaleAnimationRate { get; }
-  
-  public ref bool ForceLoopingAnimation { get; }
-  
-  public ref bool ResetAnimOnStop { get; }
-  
-  public ref bool ManualAnimFrame { get; }
-  
-  public ParticleAttributeIndex_t AnimationScaleField { get; }
-  
-  public ParticleAttributeIndex_t AnimationField { get; }
-  
-  public ParticleAttributeIndex_t ManualFrameField { get; }
-  
-  public string ActivityName { get; set; }
-  
-  public string SequenceName { get; set; }
-  
-  public ref bool EnableClothSimulation { get; }
-  
-  public string ClothEffectName { get; set; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> OverrideMaterial { get; }
-  
-  public ref bool OverrideTranslucentMaterials { get; }
-  
-  public CPerParticleFloatInput Skin { get; }
-  
-  public ref CUtlVector<MaterialVariable_t> MaterialVars { get; }
-  
-  public CPerParticleFloatInput RenderFilter { get; }
-  
-  public CPerParticleFloatInput ManualModelSelection { get; }
-  
-  public CParticleModelInput ModelInput { get; }
-  
-  public ref int LOD { get; }
-  
-  public string EconSlotName { get; set; }
-  
-  public ref bool OriginalModel { get; }
-  
-  public ref bool SuppressTint { get; }
-  
-  public ref RenderModelSubModelFieldType_t SubModelFieldType { get; }
-  
-  public ref bool DisableShadows { get; }
-  
-  public ref bool DisableDepthPrepass { get; }
-  
-  public ref bool AcceptsDecals { get; }
-  
-  public ref bool ForceDrawInterlevedWithSiblings { get; }
-  
-  public ref bool DoNotDrawInParticlePass { get; }
-  
-  public ref bool AllowApproximateTransforms { get; }
-  
-  public string RenderAttribute { get; set; }
-  
-  public CParticleCollectionFloatInput RadiusScale { get; }
-  
-  public CParticleCollectionFloatInput AlphaScale { get; }
-  
-  public CParticleCollectionFloatInput RollScale { get; }
-  
-  public ParticleAttributeIndex_t Alpha2Field { get; }
-  
-  public CParticleCollectionVecInput ColorScale { get; }
-  
-  public ref ParticleColorBlendType_t ColorBlendType { get; }
+    public ref bool OnlyRenderInEffectsBloomPass { get; }
+
+    public ref bool OnlyRenderInEffectsWaterPass { get; }
+
+    public ref bool UseMixedResolutionRendering { get; }
+
+    public ref bool OnlyRenderInEffecsGameOverlay { get; }
+
+    public ref CUtlVector<ModelReference_t> ModelList { get; }
+
+    public ParticleAttributeIndex_t BodyGroupField { get; }
+
+    public ParticleAttributeIndex_t SubModelField { get; }
+
+    public ref bool IgnoreNormal { get; }
+
+    public ref bool OrientZ { get; }
+
+    public ref bool CenterOffset { get; }
+
+    public CPerParticleVecInput LocalOffset { get; }
+
+    public CPerParticleVecInput LocalRotation { get; }
+
+    public ref bool IgnoreRadius { get; }
+
+    public ref int ModelScaleCP { get; }
+
+    public CPerParticleVecInput ComponentScale { get; }
+
+    public ref bool LocalScale { get; }
+
+    public ref int SizeCullBloat { get; }
+
+    public ref bool Animated { get; }
+
+    public CPerParticleFloatInput AnimationRate { get; }
+
+    public ref bool ScaleAnimationRate { get; }
+
+    public ref bool ForceLoopingAnimation { get; }
+
+    public ref bool ResetAnimOnStop { get; }
+
+    public ref bool ManualAnimFrame { get; }
+
+    public ParticleAttributeIndex_t AnimationScaleField { get; }
+
+    public ParticleAttributeIndex_t AnimationField { get; }
+
+    public ParticleAttributeIndex_t ManualFrameField { get; }
+
+    public string ActivityName { get; set; }
+
+    public string SequenceName { get; set; }
+
+    public ref bool EnableClothSimulation { get; }
+
+    public string ClothEffectName { get; set; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> OverrideMaterial { get; }
+
+    public ref bool OverrideTranslucentMaterials { get; }
+
+    public CPerParticleFloatInput Skin { get; }
+
+    public ref CUtlVector<MaterialVariable_t> MaterialVars { get; }
+
+    public CPerParticleFloatInput RenderFilter { get; }
+
+    public CPerParticleFloatInput ManualModelSelection { get; }
+
+    public CParticleModelInput ModelInput { get; }
+
+    public ref int LOD { get; }
+
+    public string EconSlotName { get; set; }
+
+    public ref bool OriginalModel { get; }
+
+    public ref bool SuppressTint { get; }
+
+    public ref RenderModelSubModelFieldType_t SubModelFieldType { get; }
+
+    public ref bool DisableShadows { get; }
+
+    public ref bool DisableDepthPrepass { get; }
+
+    public ref bool AcceptsDecals { get; }
+
+    public ref bool ForceDrawInterlevedWithSiblings { get; }
+
+    public ref bool DoNotDrawInParticlePass { get; }
+
+    public ref bool AllowApproximateTransforms { get; }
+
+    public string RenderAttribute { get; set; }
+
+    public CParticleCollectionFloatInput RadiusScale { get; }
+
+    public CParticleCollectionFloatInput AlphaScale { get; }
+
+    public CParticleCollectionFloatInput RollScale { get; }
+
+    public ParticleAttributeIndex_t Alpha2Field { get; }
+
+    public CParticleCollectionVecInput ColorScale { get; }
+
+    public ref ParticleColorBlendType_t ColorBlendType { get; }
 
 
 }

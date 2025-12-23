@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AttachmentHandle_t : ISchemaClass<AttachmentHandle_t> {
+public partial interface AttachmentHandle_t : ISchemaClass<AttachmentHandle_t>
+{
+    static AttachmentHandle_t ISchemaClass<AttachmentHandle_t>.From(nint handle) => new AttachmentHandle_tImpl(handle);
+    static int ISchemaClass<AttachmentHandle_t>.Size => 1;
+    static string? ISchemaClass<AttachmentHandle_t>.ClassName => null;
 
-  static AttachmentHandle_t ISchemaClass<AttachmentHandle_t>.From(nint handle) => new AttachmentHandle_tImpl(handle);
-  static int ISchemaClass<AttachmentHandle_t>.Size => 1;
-  static string? ISchemaClass<AttachmentHandle_t>.ClassName => null;
 
-  
-  public ref byte Value { get; }
+    public ref byte Value { get; }
 
 
 }

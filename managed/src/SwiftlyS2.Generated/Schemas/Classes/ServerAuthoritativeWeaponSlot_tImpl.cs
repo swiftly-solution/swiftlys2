@@ -6,55 +6,42 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ServerAuthoritativeWeaponSlot_tImpl : SchemaClass, ServerAuthoritativeWeaponSlot_t {
+internal partial class ServerAuthoritativeWeaponSlot_tImpl : SchemaClass, ServerAuthoritativeWeaponSlot_t
+{
+    public ServerAuthoritativeWeaponSlot_tImpl(nint handle) : base(handle) { }
 
-  public ServerAuthoritativeWeaponSlot_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ClassOffset;
 
-  private static nint? _ClassOffset;
-
-  public ref ushort Class {
-    get {
-      if (_ClassOffset == null) {
-        _ClassOffset = Schema.GetOffset(0x8AF3F5CAECD2A54A);
-      }
-      return ref _Handle.AsRef<ushort>(_ClassOffset!.Value);
+    public ref ushort Class {
+        get {
+            _ClassOffset = _ClassOffset ?? Schema.GetOffset(0x8AF3F5CAECD2A54A);
+            return ref _Handle.AsRef<ushort>(_ClassOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlotOffset;
+    private static nint? _SlotOffset;
 
-  public ref ushort Slot {
-    get {
-      if (_SlotOffset == null) {
-        _SlotOffset = Schema.GetOffset(0x8AF3F5CAF5443C5E);
-      }
-      return ref _Handle.AsRef<ushort>(_SlotOffset!.Value);
+    public ref ushort Slot {
+        get {
+            _SlotOffset = _SlotOffset ?? Schema.GetOffset(0x8AF3F5CAF5443C5E);
+            return ref _Handle.AsRef<ushort>(_SlotOffset!.Value);
+        }
     }
-  }
-  private static nint? _ItemDefIdxOffset;
+    private static nint? _ItemDefIdxOffset;
 
-  public ref ushort ItemDefIdx {
-    get {
-      if (_ItemDefIdxOffset == null) {
-        _ItemDefIdxOffset = Schema.GetOffset(0x8AF3F5CA7BE26777);
-      }
-      return ref _Handle.AsRef<ushort>(_ItemDefIdxOffset!.Value);
+    public ref ushort ItemDefIdx {
+        get {
+            _ItemDefIdxOffset = _ItemDefIdxOffset ?? Schema.GetOffset(0x8AF3F5CA7BE26777);
+            return ref _Handle.AsRef<ushort>(_ItemDefIdxOffset!.Value);
+        }
     }
-  }
 
-  public void ClassUpdated() {
-    Schema.Update(_Handle, 0x8AF3F5CAECD2A54A);
-  }
-  public void SlotUpdated() {
-    Schema.Update(_Handle, 0x8AF3F5CAF5443C5E);
-  }
-  public void ItemDefIdxUpdated() {
-    Schema.Update(_Handle, 0x8AF3F5CA7BE26777);
-  }
+    public void ClassUpdated() => Schema.Update(_Handle, 0x8AF3F5CAECD2A54A);
+    public void SlotUpdated() => Schema.Update(_Handle, 0x8AF3F5CAF5443C5E);
+    public void ItemDefIdxUpdated() => Schema.Update(_Handle, 0x8AF3F5CA7BE26777);
 }

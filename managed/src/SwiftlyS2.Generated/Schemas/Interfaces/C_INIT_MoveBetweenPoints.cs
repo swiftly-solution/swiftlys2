@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_MoveBetweenPoints : CParticleFunctionInitializer, ISchemaClass<C_INIT_MoveBetweenPoints> {
+public partial interface C_INIT_MoveBetweenPoints : CParticleFunctionInitializer, ISchemaClass<C_INIT_MoveBetweenPoints>
+{
+    static C_INIT_MoveBetweenPoints ISchemaClass<C_INIT_MoveBetweenPoints>.From(nint handle) => new C_INIT_MoveBetweenPointsImpl(handle);
+    static int ISchemaClass<C_INIT_MoveBetweenPoints>.Size => 2320;
+    static string? ISchemaClass<C_INIT_MoveBetweenPoints>.ClassName => null;
 
-  static C_INIT_MoveBetweenPoints ISchemaClass<C_INIT_MoveBetweenPoints>.From(nint handle) => new C_INIT_MoveBetweenPointsImpl(handle);
-  static int ISchemaClass<C_INIT_MoveBetweenPoints>.Size => 2320;
-  static string? ISchemaClass<C_INIT_MoveBetweenPoints>.ClassName => null;
 
-  
-  public CPerParticleFloatInput SpeedMin { get; }
-  
-  public CPerParticleFloatInput SpeedMax { get; }
-  
-  public CPerParticleFloatInput EndSpread { get; }
-  
-  public CPerParticleFloatInput StartOffset { get; }
-  
-  public CPerParticleFloatInput EndOffset { get; }
-  
-  public ref int EndControlPointNumber { get; }
-  
-  public ref bool TrailBias { get; }
+    public CPerParticleFloatInput SpeedMin { get; }
+
+    public CPerParticleFloatInput SpeedMax { get; }
+
+    public CPerParticleFloatInput EndSpread { get; }
+
+    public CPerParticleFloatInput StartOffset { get; }
+
+    public CPerParticleFloatInput EndOffset { get; }
+
+    public ref int EndControlPointNumber { get; }
+
+    public ref bool TrailBias { get; }
 
 
 }

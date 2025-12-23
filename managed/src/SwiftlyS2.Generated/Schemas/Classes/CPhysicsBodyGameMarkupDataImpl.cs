@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysicsBodyGameMarkupDataImpl : SchemaClass, CPhysicsBodyGameMarkupData {
+internal partial class CPhysicsBodyGameMarkupDataImpl : SchemaClass, CPhysicsBodyGameMarkupData
+{
+    public CPhysicsBodyGameMarkupDataImpl(nint handle) : base(handle) { }
 
-  public CPhysicsBodyGameMarkupDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PhysicsBodyMarkupByBoneNameOffset;
 
-  private static nint? _PhysicsBodyMarkupByBoneNameOffset;
-
-  public SchemaUntypedField PhysicsBodyMarkupByBoneName {
-    get {
-      if (_PhysicsBodyMarkupByBoneNameOffset == null) {
-        _PhysicsBodyMarkupByBoneNameOffset = Schema.GetOffset(0x29262AE188A1FE22);
-      }
-      return new SchemaUntypedField(_Handle + _PhysicsBodyMarkupByBoneNameOffset!.Value);
+    public SchemaUntypedField PhysicsBodyMarkupByBoneName {
+        get {
+            _PhysicsBodyMarkupByBoneNameOffset = _PhysicsBodyMarkupByBoneNameOffset ?? Schema.GetOffset(0x29262AE188A1FE22);
+            return new SchemaUntypedField(_Handle + _PhysicsBodyMarkupByBoneNameOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,33 +8,33 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerShapedNoise : CVoiceContainerBase, ISchemaClass<CVoiceContainerShapedNoise> {
+public partial interface CVoiceContainerShapedNoise : CVoiceContainerBase, ISchemaClass<CVoiceContainerShapedNoise>
+{
+    static CVoiceContainerShapedNoise ISchemaClass<CVoiceContainerShapedNoise>.From(nint handle) => new CVoiceContainerShapedNoiseImpl(handle);
+    static int ISchemaClass<CVoiceContainerShapedNoise>.Size => 400;
+    static string? ISchemaClass<CVoiceContainerShapedNoise>.ClassName => null;
 
-  static CVoiceContainerShapedNoise ISchemaClass<CVoiceContainerShapedNoise>.From(nint handle) => new CVoiceContainerShapedNoiseImpl(handle);
-  static int ISchemaClass<CVoiceContainerShapedNoise>.Size => 400;
-  static string? ISchemaClass<CVoiceContainerShapedNoise>.ClassName => null;
 
-  
-  public ref bool UseCurveForFrequency { get; }
-  
-  public ref float Frequency { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField FrequencySweep { get; }
-  
-  public ref bool UseCurveForResonance { get; }
-  
-  public ref float Resonance { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField ResonanceSweep { get; }
-  
-  public ref bool UseCurveForAmplitude { get; }
-  
-  public ref float GainInDecibels { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField GainSweep { get; }
+    public ref bool UseCurveForFrequency { get; }
+
+    public ref float Frequency { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField FrequencySweep { get; }
+
+    public ref bool UseCurveForResonance { get; }
+
+    public ref float Resonance { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField ResonanceSweep { get; }
+
+    public ref bool UseCurveForAmplitude { get; }
+
+    public ref float GainInDecibels { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField GainSweep { get; }
 
 
 }

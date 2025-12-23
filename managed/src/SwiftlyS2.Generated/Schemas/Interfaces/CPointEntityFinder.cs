@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointEntityFinder : CBaseEntity, ISchemaClass<CPointEntityFinder> {
+public partial interface CPointEntityFinder : CBaseEntity, ISchemaClass<CPointEntityFinder>
+{
+    static CPointEntityFinder ISchemaClass<CPointEntityFinder>.From(nint handle) => new CPointEntityFinderImpl(handle);
+    static int ISchemaClass<CPointEntityFinder>.Size => 1344;
+    static string? ISchemaClass<CPointEntityFinder>.ClassName => "point_entity_finder";
 
-  static CPointEntityFinder ISchemaClass<CPointEntityFinder>.From(nint handle) => new CPointEntityFinderImpl(handle);
-  static int ISchemaClass<CPointEntityFinder>.Size => 1344;
-  static string? ISchemaClass<CPointEntityFinder>.ClassName => "point_entity_finder";
 
-  
-  public ref CHandle<CBaseEntity> Entity { get; }
-  
-  public string FilterName { get; set; }
-  
-  public ref CHandle<CBaseFilter> Filter { get; }
-  
-  public string RefName { get; set; }
-  
-  public ref CHandle<CBaseEntity> Reference { get; }
-  
-  public ref EntFinderMethod_t FindMethod { get; }
-  
-  public CEntityIOOutput OnFoundEntity { get; }
+    public ref CHandle<CBaseEntity> Entity { get; }
+
+    public string FilterName { get; set; }
+
+    public ref CHandle<CBaseFilter> Filter { get; }
+
+    public string RefName { get; set; }
+
+    public ref CHandle<CBaseEntity> Reference { get; }
+
+    public ref EntFinderMethod_t FindMethod { get; }
+
+    public ref CEntityIOOutput OnFoundEntity { get; }
 
 
 }

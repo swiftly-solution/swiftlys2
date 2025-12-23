@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSimdRodConstraintAnim_t : ISchemaClass<FeSimdRodConstraintAnim_t> {
+public partial interface FeSimdRodConstraintAnim_t : ISchemaClass<FeSimdRodConstraintAnim_t>
+{
+    static FeSimdRodConstraintAnim_t ISchemaClass<FeSimdRodConstraintAnim_t>.From(nint handle) => new FeSimdRodConstraintAnim_tImpl(handle);
+    static int ISchemaClass<FeSimdRodConstraintAnim_t>.Size => 48;
+    static string? ISchemaClass<FeSimdRodConstraintAnim_t>.ClassName => null;
 
-  static FeSimdRodConstraintAnim_t ISchemaClass<FeSimdRodConstraintAnim_t>.From(nint handle) => new FeSimdRodConstraintAnim_tImpl(handle);
-  static int ISchemaClass<FeSimdRodConstraintAnim_t>.Size => 48;
-  static string? ISchemaClass<FeSimdRodConstraintAnim_t>.ClassName => null;
 
-  
-  // uint16[4]
-  public SchemaUntypedField Node { get; }
-  
-  public ref fltx4 F4Weight0 { get; }
-  
-  public ref fltx4 F4RelaxationFactor { get; }
+    // uint16[4]
+    public SchemaUntypedField Node { get; }
+
+    public ref fltx4 F4Weight0 { get; }
+
+    public ref fltx4 F4RelaxationFactor { get; }
 
 
 }

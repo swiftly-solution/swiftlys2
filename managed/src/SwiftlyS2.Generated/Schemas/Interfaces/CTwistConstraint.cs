@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTwistConstraint : CBaseConstraint, ISchemaClass<CTwistConstraint> {
+public partial interface CTwistConstraint : CBaseConstraint, ISchemaClass<CTwistConstraint>
+{
+    static CTwistConstraint ISchemaClass<CTwistConstraint>.From(nint handle) => new CTwistConstraintImpl(handle);
+    static int ISchemaClass<CTwistConstraint>.Size => 144;
+    static string? ISchemaClass<CTwistConstraint>.ClassName => null;
 
-  static CTwistConstraint ISchemaClass<CTwistConstraint>.From(nint handle) => new CTwistConstraintImpl(handle);
-  static int ISchemaClass<CTwistConstraint>.Size => 144;
-  static string? ISchemaClass<CTwistConstraint>.ClassName => null;
 
-  
-  public ref bool Inverse { get; }
-  
-  public ref Quaternion ParentBindRotation { get; }
-  
-  public ref Quaternion ChildBindRotation { get; }
+    public ref bool Inverse { get; }
+
+    public ref Quaternion ParentBindRotation { get; }
+
+    public ref Quaternion ChildBindRotation { get; }
 
 
 }

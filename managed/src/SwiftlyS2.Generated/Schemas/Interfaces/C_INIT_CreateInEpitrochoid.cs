@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CreateInEpitrochoid : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateInEpitrochoid> {
+public partial interface C_INIT_CreateInEpitrochoid : CParticleFunctionInitializer, ISchemaClass<C_INIT_CreateInEpitrochoid>
+{
+    static C_INIT_CreateInEpitrochoid ISchemaClass<C_INIT_CreateInEpitrochoid>.From(nint handle) => new C_INIT_CreateInEpitrochoidImpl(handle);
+    static int ISchemaClass<C_INIT_CreateInEpitrochoid>.Size => 2064;
+    static string? ISchemaClass<C_INIT_CreateInEpitrochoid>.ClassName => null;
 
-  static C_INIT_CreateInEpitrochoid ISchemaClass<C_INIT_CreateInEpitrochoid>.From(nint handle) => new C_INIT_CreateInEpitrochoidImpl(handle);
-  static int ISchemaClass<C_INIT_CreateInEpitrochoid>.Size => 2064;
-  static string? ISchemaClass<C_INIT_CreateInEpitrochoid>.ClassName => null;
 
-  
-  public ref int Component1 { get; }
-  
-  public ref int Component2 { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public CPerParticleFloatInput ParticleDensity { get; }
-  
-  public CPerParticleFloatInput Offset { get; }
-  
-  public CPerParticleFloatInput Radius1 { get; }
-  
-  public CPerParticleFloatInput Radius2 { get; }
-  
-  public ref bool UseCount { get; }
-  
-  public ref bool UseLocalCoords { get; }
-  
-  public ref bool OffsetExistingPos { get; }
+    public ref int Component1 { get; }
+
+    public ref int Component2 { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public CPerParticleFloatInput ParticleDensity { get; }
+
+    public CPerParticleFloatInput Offset { get; }
+
+    public CPerParticleFloatInput Radius1 { get; }
+
+    public CPerParticleFloatInput Radius2 { get; }
+
+    public ref bool UseCount { get; }
+
+    public ref bool UseLocalCoords { get; }
+
+    public ref bool OffsetExistingPos { get; }
 
 
 }

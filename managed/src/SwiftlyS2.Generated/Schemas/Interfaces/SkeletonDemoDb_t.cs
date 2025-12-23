@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SkeletonDemoDb_t : ISchemaClass<SkeletonDemoDb_t> {
+public partial interface SkeletonDemoDb_t : ISchemaClass<SkeletonDemoDb_t>
+{
+    static SkeletonDemoDb_t ISchemaClass<SkeletonDemoDb_t>.From(nint handle) => new SkeletonDemoDb_tImpl(handle);
+    static int ISchemaClass<SkeletonDemoDb_t>.Size => 56;
+    static string? ISchemaClass<SkeletonDemoDb_t>.ClassName => null;
 
-  static SkeletonDemoDb_t ISchemaClass<SkeletonDemoDb_t>.From(nint handle) => new SkeletonDemoDb_tImpl(handle);
-  static int ISchemaClass<SkeletonDemoDb_t>.Size => 56;
-  static string? ISchemaClass<SkeletonDemoDb_t>.ClassName => null;
 
-  
-  public ref CUtlVector<PointerTo<SkeletonAnimCapture_t>> AnimCaptures { get; }
-  
-  public ref CUtlVector<SkeletonAnimCapture_t__Camera_t> CameraTrack { get; }
-  
-  public ref float RecordingTime { get; }
+    public ref CUtlVector<PointerTo<SkeletonAnimCapture_t>> AnimCaptures { get; }
+
+    public ref CUtlVector<SkeletonAnimCapture_t__Camera_t> CameraTrack { get; }
+
+    public ref float RecordingTime { get; }
 
 
 }

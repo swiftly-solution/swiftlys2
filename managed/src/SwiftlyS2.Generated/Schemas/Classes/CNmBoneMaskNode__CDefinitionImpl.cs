@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmBoneMaskNode__CDefinitionImpl : CNmBoneMaskValueNode__CDefinitionImpl, CNmBoneMaskNode__CDefinition {
+internal partial class CNmBoneMaskNode__CDefinitionImpl : CNmBoneMaskValueNode__CDefinitionImpl, CNmBoneMaskNode__CDefinition
+{
+    public CNmBoneMaskNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmBoneMaskNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneMaskIDOffset;
 
-  private static nint? _BoneMaskIDOffset;
-
-  public ref CGlobalSymbol BoneMaskID {
-    get {
-      if (_BoneMaskIDOffset == null) {
-        _BoneMaskIDOffset = Schema.GetOffset(0xC50CAD4B5F09FD66);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_BoneMaskIDOffset!.Value);
+    public ref CGlobalSymbol BoneMaskID {
+        get {
+            _BoneMaskIDOffset = _BoneMaskIDOffset ?? Schema.GetOffset(0xC50CAD4B5F09FD66);
+            return ref _Handle.AsRef<CGlobalSymbol>(_BoneMaskIDOffset!.Value);
+        }
     }
-  }
 
 
 }

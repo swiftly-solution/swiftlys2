@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTargetSelectorUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CTargetSelectorUpdateNode> {
+public partial interface CTargetSelectorUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CTargetSelectorUpdateNode>
+{
+    static CTargetSelectorUpdateNode ISchemaClass<CTargetSelectorUpdateNode>.From(nint handle) => new CTargetSelectorUpdateNodeImpl(handle);
+    static int ISchemaClass<CTargetSelectorUpdateNode>.Size => 160;
+    static string? ISchemaClass<CTargetSelectorUpdateNode>.ClassName => null;
 
-  static CTargetSelectorUpdateNode ISchemaClass<CTargetSelectorUpdateNode>.From(nint handle) => new CTargetSelectorUpdateNodeImpl(handle);
-  static int ISchemaClass<CTargetSelectorUpdateNode>.Size => 160;
-  static string? ISchemaClass<CTargetSelectorUpdateNode>.ClassName => null;
 
-  
-  public ref TargetSelectorAngleMode_t AngleMode { get; }
-  
-  public ref CUtlVector<CAnimUpdateNodeRef> Children { get; }
-  
-  public CAnimParamHandle TargetPosition { get; }
-  
-  public CAnimParamHandle TargetFacePositionParameter { get; }
-  
-  public CAnimParamHandle MoveHeadingParameter { get; }
-  
-  public CAnimParamHandle DesiredMoveHeadingParameter { get; }
-  
-  public ref bool TargetPositionIsWorldSpace { get; }
-  
-  public ref bool TargetFacePositionIsWorldSpace { get; }
-  
-  public ref bool EnablePhaseMatching { get; }
-  
-  public ref float PhaseMatchingMaxRootMotionSkip { get; }
+    public ref TargetSelectorAngleMode_t AngleMode { get; }
+
+    public ref CUtlVector<CAnimUpdateNodeRef> Children { get; }
+
+    public CAnimParamHandle TargetPosition { get; }
+
+    public CAnimParamHandle TargetFacePositionParameter { get; }
+
+    public CAnimParamHandle MoveHeadingParameter { get; }
+
+    public CAnimParamHandle DesiredMoveHeadingParameter { get; }
+
+    public ref bool TargetPositionIsWorldSpace { get; }
+
+    public ref bool TargetFacePositionIsWorldSpace { get; }
+
+    public ref bool EnablePhaseMatching { get; }
+
+    public ref float PhaseMatchingMaxRootMotionSkip { get; }
 
 
 }

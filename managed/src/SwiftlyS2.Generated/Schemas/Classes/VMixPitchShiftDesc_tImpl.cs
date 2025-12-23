@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixPitchShiftDesc_tImpl : SchemaClass, VMixPitchShiftDesc_t {
+internal partial class VMixPitchShiftDesc_tImpl : SchemaClass, VMixPitchShiftDesc_t
+{
+    public VMixPitchShiftDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixPitchShiftDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GrainSampleCountOffset;
 
-  private static nint? _GrainSampleCountOffset;
-
-  public ref int GrainSampleCount {
-    get {
-      if (_GrainSampleCountOffset == null) {
-        _GrainSampleCountOffset = Schema.GetOffset(0xE7EEA08D6AA1D059);
-      }
-      return ref _Handle.AsRef<int>(_GrainSampleCountOffset!.Value);
+    public ref int GrainSampleCount {
+        get {
+            _GrainSampleCountOffset = _GrainSampleCountOffset ?? Schema.GetOffset(0xE7EEA08D6AA1D059);
+            return ref _Handle.AsRef<int>(_GrainSampleCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _PitchShiftOffset;
+    private static nint? _PitchShiftOffset;
 
-  public ref float PitchShift {
-    get {
-      if (_PitchShiftOffset == null) {
-        _PitchShiftOffset = Schema.GetOffset(0xE7EEA08DD8E35569);
-      }
-      return ref _Handle.AsRef<float>(_PitchShiftOffset!.Value);
+    public ref float PitchShift {
+        get {
+            _PitchShiftOffset = _PitchShiftOffset ?? Schema.GetOffset(0xE7EEA08DD8E35569);
+            return ref _Handle.AsRef<float>(_PitchShiftOffset!.Value);
+        }
     }
-  }
-  private static nint? _QualityOffset;
+    private static nint? _QualityOffset;
 
-  public ref int Quality {
-    get {
-      if (_QualityOffset == null) {
-        _QualityOffset = Schema.GetOffset(0xE7EEA08D60857B42);
-      }
-      return ref _Handle.AsRef<int>(_QualityOffset!.Value);
+    public ref int Quality {
+        get {
+            _QualityOffset = _QualityOffset ?? Schema.GetOffset(0xE7EEA08D60857B42);
+            return ref _Handle.AsRef<int>(_QualityOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProcTypeOffset;
+    private static nint? _ProcTypeOffset;
 
-  public ref int ProcType {
-    get {
-      if (_ProcTypeOffset == null) {
-        _ProcTypeOffset = Schema.GetOffset(0xE7EEA08DB256235D);
-      }
-      return ref _Handle.AsRef<int>(_ProcTypeOffset!.Value);
+    public ref int ProcType {
+        get {
+            _ProcTypeOffset = _ProcTypeOffset ?? Schema.GetOffset(0xE7EEA08DB256235D);
+            return ref _Handle.AsRef<int>(_ProcTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

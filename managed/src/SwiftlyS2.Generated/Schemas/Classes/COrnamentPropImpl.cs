@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class COrnamentPropImpl : CDynamicPropImpl, COrnamentProp {
+internal partial class COrnamentPropImpl : CDynamicPropImpl, COrnamentProp
+{
+    public COrnamentPropImpl(nint handle) : base(handle) { }
 
-  public COrnamentPropImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InitialOwnerOffset;
 
-  private static nint? _InitialOwnerOffset;
-
-  public string InitialOwner {
-    get {
-      if (_InitialOwnerOffset == null) {
-        _InitialOwnerOffset = Schema.GetOffset(0x1B8675B7BAA055D6);
-      }
-      var ptr = _Handle.Read<nint>(_InitialOwnerOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_InitialOwnerOffset == null) {
-        _InitialOwnerOffset = Schema.GetOffset(0x1B8675B7BAA055D6);
-      }
-      Schema.SetString(_Handle, _InitialOwnerOffset!.Value, value);
-    }
-  } 
+    public string InitialOwner {
+        get {
+            _InitialOwnerOffset = _InitialOwnerOffset ?? Schema.GetOffset(0x1B8675B7BAA055D6);
+            return Schema.GetString(_Handle.Read<nint>(_InitialOwnerOffset!.Value));
+        }
+        set {
+            _InitialOwnerOffset = _InitialOwnerOffset ?? Schema.GetOffset(0x1B8675B7BAA055D6);
+            Schema.SetString(_Handle, _InitialOwnerOffset!.Value, value);
+        }
+    } 
 
 
 }

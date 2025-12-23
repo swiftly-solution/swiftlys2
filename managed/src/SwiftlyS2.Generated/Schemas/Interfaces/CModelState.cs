@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelState : ISchemaClass<CModelState> {
+public partial interface CModelState : ISchemaClass<CModelState>
+{
+    static CModelState ISchemaClass<CModelState>.From(nint handle) => new CModelStateImpl(handle);
+    static int ISchemaClass<CModelState>.Size => 640;
+    static string? ISchemaClass<CModelState>.ClassName => null;
 
-  static CModelState ISchemaClass<CModelState>.From(nint handle) => new CModelStateImpl(handle);
-  static int ISchemaClass<CModelState>.Size => 640;
-  static string? ISchemaClass<CModelState>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-  
-  public string ModelName { get; set; }
-  
-  public ref bool ClientClothCreationSuppressed { get; }
-  
-  public ref ulong MeshGroupMask { get; }
-  
-  public ref CUtlVector<int> BodyGroupChoices { get; }
-  
-  public ref byte IdealMotionType { get; }
-  
-  public ref byte ForceLOD { get; }
-  
-  public ref byte ClothUpdateFlags { get; }
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
 
-  public void ModelUpdated();
-  public void ClientClothCreationSuppressedUpdated();
-  public void MeshGroupMaskUpdated();
-  public void BodyGroupChoicesUpdated();
-  public void IdealMotionTypeUpdated();
+    public string ModelName { get; set; }
+
+    public ref bool ClientClothCreationSuppressed { get; }
+
+    public ref ulong MeshGroupMask { get; }
+
+    public ref CUtlVector<int> BodyGroupChoices { get; }
+
+    public ref byte IdealMotionType { get; }
+
+    public ref byte ForceLOD { get; }
+
+    public ref byte ClothUpdateFlags { get; }
+
+    public void ModelUpdated();
+    public void ClientClothCreationSuppressedUpdated();
+    public void MeshGroupMaskUpdated();
+    public void BodyGroupChoicesUpdated();
+    public void IdealMotionTypeUpdated();
 }

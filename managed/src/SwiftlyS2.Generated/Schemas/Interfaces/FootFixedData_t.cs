@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FootFixedData_t : ISchemaClass<FootFixedData_t> {
+public partial interface FootFixedData_t : ISchemaClass<FootFixedData_t>
+{
+    static FootFixedData_t ISchemaClass<FootFixedData_t>.From(nint handle) => new FootFixedData_tImpl(handle);
+    static int ISchemaClass<FootFixedData_t>.Size => 80;
+    static string? ISchemaClass<FootFixedData_t>.ClassName => null;
 
-  static FootFixedData_t ISchemaClass<FootFixedData_t>.From(nint handle) => new FootFixedData_tImpl(handle);
-  static int ISchemaClass<FootFixedData_t>.Size => 80;
-  static string? ISchemaClass<FootFixedData_t>.ClassName => null;
 
-  
-  public ref Vector ToeOffset { get; }
-  
-  public ref Vector HeelOffset { get; }
-  
-  public ref int TargetBoneIndex { get; }
-  
-  public ref int AnkleBoneIndex { get; }
-  
-  public ref int IKAnchorBoneIndex { get; }
-  
-  public ref int IkChainIndex { get; }
-  
-  public ref float MaxIKLength { get; }
-  
-  public ref int FootIndex { get; }
-  
-  public ref int TagIndex { get; }
-  
-  public ref float MaxRotationLeft { get; }
-  
-  public ref float MaxRotationRight { get; }
+    public ref Vector ToeOffset { get; }
+
+    public ref Vector HeelOffset { get; }
+
+    public ref int TargetBoneIndex { get; }
+
+    public ref int AnkleBoneIndex { get; }
+
+    public ref int IKAnchorBoneIndex { get; }
+
+    public ref int IkChainIndex { get; }
+
+    public ref float MaxIKLength { get; }
+
+    public ref int FootIndex { get; }
+
+    public ref int TagIndex { get; }
+
+    public ref float MaxRotationLeft { get; }
+
+    public ref float MaxRotationRight { get; }
 
 
 }

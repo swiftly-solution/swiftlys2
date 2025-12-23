@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapDirectionToCPToVectorImpl : CParticleFunctionOperatorImpl, C_OP_RemapDirectionToCPToVector {
+internal partial class C_OP_RemapDirectionToCPToVectorImpl : CParticleFunctionOperatorImpl, C_OP_RemapDirectionToCPToVector
+{
+    public C_OP_RemapDirectionToCPToVectorImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapDirectionToCPToVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPOffset;
 
-  private static nint? _CPOffset;
-
-  public ref int CP {
-    get {
-      if (_CPOffset == null) {
-        _CPOffset = Schema.GetOffset(0x80443C5BEB661472);
-      }
-      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    public ref int CP {
+        get {
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x80443C5BEB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x80443C5BE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x80443C5BE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x80443C5BB731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x80443C5BB731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetRotOffset;
+    private static nint? _OffsetRotOffset;
 
-  public ref float OffsetRot {
-    get {
-      if (_OffsetRotOffset == null) {
-        _OffsetRotOffset = Schema.GetOffset(0x80443C5BB414F849);
-      }
-      return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+    public ref float OffsetRot {
+        get {
+            _OffsetRotOffset = _OffsetRotOffset ?? Schema.GetOffset(0x80443C5BB414F849);
+            return ref _Handle.AsRef<float>(_OffsetRotOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetAxisOffset;
+    private static nint? _OffsetAxisOffset;
 
-  public ref Vector OffsetAxis {
-    get {
-      if (_OffsetAxisOffset == null) {
-        _OffsetAxisOffset = Schema.GetOffset(0x80443C5BFAB4918F);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetAxisOffset!.Value);
+    public ref Vector OffsetAxis {
+        get {
+            _OffsetAxisOffset = _OffsetAxisOffset ?? Schema.GetOffset(0x80443C5BFAB4918F);
+            return ref _Handle.AsRef<Vector>(_OffsetAxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _NormalizeOffset;
+    private static nint? _NormalizeOffset;
 
-  public ref bool Normalize {
-    get {
-      if (_NormalizeOffset == null) {
-        _NormalizeOffset = Schema.GetOffset(0x80443C5B48BC424C);
-      }
-      return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+    public ref bool Normalize {
+        get {
+            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0x80443C5B48BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldStrengthOffset;
+    private static nint? _FieldStrengthOffset;
 
-  public ParticleAttributeIndex_t FieldStrength {
-    get {
-      if (_FieldStrengthOffset == null) {
-        _FieldStrengthOffset = Schema.GetOffset(0x80443C5BDBA3663E);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldStrengthOffset!.Value);
+    public ParticleAttributeIndex_t FieldStrength {
+        get {
+            _FieldStrengthOffset = _FieldStrengthOffset ?? Schema.GetOffset(0x80443C5BDBA3663E);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldStrengthOffset!.Value);
+        }
     }
-  }
 
 
 }

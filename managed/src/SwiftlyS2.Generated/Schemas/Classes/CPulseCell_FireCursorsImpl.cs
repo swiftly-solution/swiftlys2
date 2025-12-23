@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_FireCursorsImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_FireCursors {
+internal partial class CPulseCell_FireCursorsImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_FireCursors
+{
+    public CPulseCell_FireCursorsImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_FireCursorsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OutflowsOffset;
 
-  private static nint? _OutflowsOffset;
-
-  public ref CUtlVector<CPulse_OutflowConnection> Outflows {
-    get {
-      if (_OutflowsOffset == null) {
-        _OutflowsOffset = Schema.GetOffset(0x9BFA034F8F0AFDF8);
-      }
-      return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_OutflowsOffset!.Value);
+    public ref CUtlVector<CPulse_OutflowConnection> Outflows {
+        get {
+            _OutflowsOffset = _OutflowsOffset ?? Schema.GetOffset(0x9BFA034F8F0AFDF8);
+            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_OutflowsOffset!.Value);
+        }
     }
-  }
-  private static nint? _WaitForChildOutflowsOffset;
+    private static nint? _WaitForChildOutflowsOffset;
 
-  public ref bool WaitForChildOutflows {
-    get {
-      if (_WaitForChildOutflowsOffset == null) {
-        _WaitForChildOutflowsOffset = Schema.GetOffset(0x9BFA034F3F8E29C6);
-      }
-      return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset!.Value);
+    public ref bool WaitForChildOutflows {
+        get {
+            _WaitForChildOutflowsOffset = _WaitForChildOutflowsOffset ?? Schema.GetOffset(0x9BFA034F3F8E29C6);
+            return ref _Handle.AsRef<bool>(_WaitForChildOutflowsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnFinishedOffset;
+    private static nint? _OnFinishedOffset;
 
-  public CPulse_ResumePoint OnFinished {
-    get {
-      if (_OnFinishedOffset == null) {
-        _OnFinishedOffset = Schema.GetOffset(0x9BFA034F8D903E5E);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+    public CPulse_ResumePoint OnFinished {
+        get {
+            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x9BFA034F8D903E5E);
+            return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnCanceledOffset;
+    private static nint? _OnCanceledOffset;
 
-  public CPulse_ResumePoint OnCanceled {
-    get {
-      if (_OnCanceledOffset == null) {
-        _OnCanceledOffset = Schema.GetOffset(0x9BFA034FF02162DB);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+    public CPulse_ResumePoint OnCanceled {
+        get {
+            _OnCanceledOffset = _OnCanceledOffset ?? Schema.GetOffset(0x9BFA034FF02162DB);
+            return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+        }
     }
-  }
 
 
 }

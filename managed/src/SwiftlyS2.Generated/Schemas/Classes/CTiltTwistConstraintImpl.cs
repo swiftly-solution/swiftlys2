@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTiltTwistConstraintImpl : CBaseConstraintImpl, CTiltTwistConstraint {
+internal partial class CTiltTwistConstraintImpl : CBaseConstraintImpl, CTiltTwistConstraint
+{
+    public CTiltTwistConstraintImpl(nint handle) : base(handle) { }
 
-  public CTiltTwistConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetAxisOffset;
 
-  private static nint? _TargetAxisOffset;
-
-  public ref int TargetAxis {
-    get {
-      if (_TargetAxisOffset == null) {
-        _TargetAxisOffset = Schema.GetOffset(0x4A56E4D341CC84D5);
-      }
-      return ref _Handle.AsRef<int>(_TargetAxisOffset!.Value);
+    public ref int TargetAxis {
+        get {
+            _TargetAxisOffset = _TargetAxisOffset ?? Schema.GetOffset(0x4A56E4D341CC84D5);
+            return ref _Handle.AsRef<int>(_TargetAxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlaveAxisOffset;
+    private static nint? _SlaveAxisOffset;
 
-  public ref int SlaveAxis {
-    get {
-      if (_SlaveAxisOffset == null) {
-        _SlaveAxisOffset = Schema.GetOffset(0x4A56E4D3CA99CDBD);
-      }
-      return ref _Handle.AsRef<int>(_SlaveAxisOffset!.Value);
+    public ref int SlaveAxis {
+        get {
+            _SlaveAxisOffset = _SlaveAxisOffset ?? Schema.GetOffset(0x4A56E4D3CA99CDBD);
+            return ref _Handle.AsRef<int>(_SlaveAxisOffset!.Value);
+        }
     }
-  }
 
 
 }

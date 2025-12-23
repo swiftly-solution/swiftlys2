@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SnapshotSkinToBones : CParticleFunctionOperator, ISchemaClass<C_OP_SnapshotSkinToBones> {
+public partial interface C_OP_SnapshotSkinToBones : CParticleFunctionOperator, ISchemaClass<C_OP_SnapshotSkinToBones>
+{
+    static C_OP_SnapshotSkinToBones ISchemaClass<C_OP_SnapshotSkinToBones>.From(nint handle) => new C_OP_SnapshotSkinToBonesImpl(handle);
+    static int ISchemaClass<C_OP_SnapshotSkinToBones>.Size => 488;
+    static string? ISchemaClass<C_OP_SnapshotSkinToBones>.ClassName => null;
 
-  static C_OP_SnapshotSkinToBones ISchemaClass<C_OP_SnapshotSkinToBones>.From(nint handle) => new C_OP_SnapshotSkinToBonesImpl(handle);
-  static int ISchemaClass<C_OP_SnapshotSkinToBones>.Size => 488;
-  static string? ISchemaClass<C_OP_SnapshotSkinToBones>.ClassName => null;
 
-  
-  public ref bool TransformNormals { get; }
-  
-  public ref bool TransformRadii { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref float LifeTimeFadeStart { get; }
-  
-  public ref float LifeTimeFadeEnd { get; }
-  
-  public ref float JumpThreshold { get; }
-  
-  public ref float PrevPosScale { get; }
+    public ref bool TransformNormals { get; }
+
+    public ref bool TransformRadii { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref float LifeTimeFadeStart { get; }
+
+    public ref float LifeTimeFadeEnd { get; }
+
+    public ref float JumpThreshold { get; }
+
+    public ref float PrevPosScale { get; }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ObserverMode_t : uint {
-
+public enum ObserverMode_t : uint
+{
  OBS_MODE_NONE = 0,
 
  OBS_MODE_FIXED = 1,

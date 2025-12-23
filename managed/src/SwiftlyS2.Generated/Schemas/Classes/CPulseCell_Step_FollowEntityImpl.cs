@@ -6,51 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Step_FollowEntityImpl : CPulseCell_BaseFlowImpl, CPulseCell_Step_FollowEntity {
+internal partial class CPulseCell_Step_FollowEntityImpl : CPulseCell_BaseFlowImpl, CPulseCell_Step_FollowEntity
+{
+    public CPulseCell_Step_FollowEntityImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Step_FollowEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParamBoneOrAttachNameOffset;
 
-  private static nint? _ParamBoneOrAttachNameOffset;
+    public string ParamBoneOrAttachName {
+        get {
+            _ParamBoneOrAttachNameOffset = _ParamBoneOrAttachNameOffset ?? Schema.GetOffset(0x75FAF4A9B89867BB);
+            return Schema.GetString(_Handle.Read<nint>(_ParamBoneOrAttachNameOffset!.Value));
+        }
+        set {
+            _ParamBoneOrAttachNameOffset = _ParamBoneOrAttachNameOffset ?? Schema.GetOffset(0x75FAF4A9B89867BB);
+            Schema.SetString(_Handle, _ParamBoneOrAttachNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ParamBoneOrAttachNameChildOffset;
 
-  public string ParamBoneOrAttachName {
-    get {
-      if (_ParamBoneOrAttachNameOffset == null) {
-        _ParamBoneOrAttachNameOffset = Schema.GetOffset(0x75FAF4A9B89867BB);
-      }
-      var ptr = _Handle.Read<nint>(_ParamBoneOrAttachNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ParamBoneOrAttachNameOffset == null) {
-        _ParamBoneOrAttachNameOffset = Schema.GetOffset(0x75FAF4A9B89867BB);
-      }
-      Schema.SetString(_Handle, _ParamBoneOrAttachNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ParamBoneOrAttachNameChildOffset;
-
-  public string ParamBoneOrAttachNameChild {
-    get {
-      if (_ParamBoneOrAttachNameChildOffset == null) {
-        _ParamBoneOrAttachNameChildOffset = Schema.GetOffset(0x75FAF4A902011093);
-      }
-      var ptr = _Handle.Read<nint>(_ParamBoneOrAttachNameChildOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ParamBoneOrAttachNameChildOffset == null) {
-        _ParamBoneOrAttachNameChildOffset = Schema.GetOffset(0x75FAF4A902011093);
-      }
-      Schema.SetString(_Handle, _ParamBoneOrAttachNameChildOffset!.Value, value);
-    }
-  } 
+    public string ParamBoneOrAttachNameChild {
+        get {
+            _ParamBoneOrAttachNameChildOffset = _ParamBoneOrAttachNameChildOffset ?? Schema.GetOffset(0x75FAF4A902011093);
+            return Schema.GetString(_Handle.Read<nint>(_ParamBoneOrAttachNameChildOffset!.Value));
+        }
+        set {
+            _ParamBoneOrAttachNameChildOffset = _ParamBoneOrAttachNameChildOffset ?? Schema.GetOffset(0x75FAF4A902011093);
+            Schema.SetString(_Handle, _ParamBoneOrAttachNameChildOffset!.Value, value);
+        }
+    } 
 
 
 }

@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmIDComparisonNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmIDComparisonNode__CDefinition> {
+public partial interface CNmIDComparisonNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmIDComparisonNode__CDefinition>
+{
+    static CNmIDComparisonNode__CDefinition ISchemaClass<CNmIDComparisonNode__CDefinition>.From(nint handle) => new CNmIDComparisonNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmIDComparisonNode__CDefinition>.Size => 64;
+    static string? ISchemaClass<CNmIDComparisonNode__CDefinition>.ClassName => null;
 
-  static CNmIDComparisonNode__CDefinition ISchemaClass<CNmIDComparisonNode__CDefinition>.From(nint handle) => new CNmIDComparisonNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmIDComparisonNode__CDefinition>.Size => 64;
-  static string? ISchemaClass<CNmIDComparisonNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref CNmIDComparisonNode__Comparison_t Comparison { get; }
-  
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 4 >
-  public SchemaUntypedField ComparisionIDs { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    public ref CNmIDComparisonNode__Comparison_t Comparison { get; }
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 4 >
+    public SchemaUntypedField ComparisionIDs { get; }
 
 
 }

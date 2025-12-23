@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootTrajectory : ISchemaClass<CFootTrajectory> {
+public partial interface CFootTrajectory : ISchemaClass<CFootTrajectory>
+{
+    static CFootTrajectory ISchemaClass<CFootTrajectory>.From(nint handle) => new CFootTrajectoryImpl(handle);
+    static int ISchemaClass<CFootTrajectory>.Size => 32;
+    static string? ISchemaClass<CFootTrajectory>.ClassName => null;
 
-  static CFootTrajectory ISchemaClass<CFootTrajectory>.From(nint handle) => new CFootTrajectoryImpl(handle);
-  static int ISchemaClass<CFootTrajectory>.Size => 32;
-  static string? ISchemaClass<CFootTrajectory>.ClassName => null;
 
-  
-  public ref Vector Offset { get; }
-  
-  public ref float RotationOffset { get; }
-  
-  public ref float Progression { get; }
+    public ref Vector Offset { get; }
+
+    public ref float RotationOffset { get; }
+
+    public ref float Progression { get; }
 
 
 }

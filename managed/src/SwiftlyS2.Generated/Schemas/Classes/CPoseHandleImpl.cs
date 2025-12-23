@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPoseHandleImpl : SchemaClass, CPoseHandle {
+internal partial class CPoseHandleImpl : SchemaClass, CPoseHandle
+{
+    public CPoseHandleImpl(nint handle) : base(handle) { }
 
-  public CPoseHandleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IndexOffset;
 
-  private static nint? _IndexOffset;
-
-  public ref ushort Index {
-    get {
-      if (_IndexOffset == null) {
-        _IndexOffset = Schema.GetOffset(0x2F05C439B73DBE67);
-      }
-      return ref _Handle.AsRef<ushort>(_IndexOffset!.Value);
+    public ref ushort Index {
+        get {
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x2F05C439B73DBE67);
+            return ref _Handle.AsRef<ushort>(_IndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _TypeOffset;
+    private static nint? _TypeOffset;
 
-  public ref PoseType_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x2F05C43921B39888);
-      }
-      return ref _Handle.AsRef<PoseType_t>(_TypeOffset!.Value);
+    public ref PoseType_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x2F05C43921B39888);
+            return ref _Handle.AsRef<PoseType_t>(_TypeOffset!.Value);
+        }
     }
-  }
 
 
 }

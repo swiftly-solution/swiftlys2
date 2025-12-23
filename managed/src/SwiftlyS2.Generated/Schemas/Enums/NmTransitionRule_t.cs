@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum NmTransitionRule_t : byte {
-
+public enum NmTransitionRule_t : byte
+{
  AllowTransition = 0,
 
  ConditionallyAllowTransition = 1,

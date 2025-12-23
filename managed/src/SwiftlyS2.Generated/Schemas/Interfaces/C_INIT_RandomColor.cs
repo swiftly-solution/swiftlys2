@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomColor : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomColor> {
+public partial interface C_INIT_RandomColor : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomColor>
+{
+    static C_INIT_RandomColor ISchemaClass<C_INIT_RandomColor>.From(nint handle) => new C_INIT_RandomColorImpl(handle);
+    static int ISchemaClass<C_INIT_RandomColor>.Size => 544;
+    static string? ISchemaClass<C_INIT_RandomColor>.ClassName => null;
 
-  static C_INIT_RandomColor ISchemaClass<C_INIT_RandomColor>.From(nint handle) => new C_INIT_RandomColorImpl(handle);
-  static int ISchemaClass<C_INIT_RandomColor>.Size => 544;
-  static string? ISchemaClass<C_INIT_RandomColor>.ClassName => null;
 
-  
-  public ref Color ColorMin { get; }
-  
-  public ref Color ColorMax { get; }
-  
-  public ref Color TintMin { get; }
-  
-  public ref Color TintMax { get; }
-  
-  public ref float TintPerc { get; }
-  
-  public ref float UpdateThreshold { get; }
-  
-  public ref int TintCP { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref ParticleColorBlendMode_t TintBlendMode { get; }
-  
-  public ref float LightAmplification { get; }
+    public ref Color ColorMin { get; }
+
+    public ref Color ColorMax { get; }
+
+    public ref Color TintMin { get; }
+
+    public ref Color TintMax { get; }
+
+    public ref float TintPerc { get; }
+
+    public ref float UpdateThreshold { get; }
+
+    public ref int TintCP { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref ParticleColorBlendMode_t TintBlendMode { get; }
+
+    public ref float LightAmplification { get; }
 
 
 }

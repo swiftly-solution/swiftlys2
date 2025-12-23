@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPairedSequenceComponentUpdater : CAnimComponentUpdater, ISchemaClass<CPairedSequenceComponentUpdater> {
-
-  static CPairedSequenceComponentUpdater ISchemaClass<CPairedSequenceComponentUpdater>.From(nint handle) => new CPairedSequenceComponentUpdaterImpl(handle);
-  static int ISchemaClass<CPairedSequenceComponentUpdater>.Size => 56;
-  static string? ISchemaClass<CPairedSequenceComponentUpdater>.ClassName => null;
+public partial interface CPairedSequenceComponentUpdater : CAnimComponentUpdater, ISchemaClass<CPairedSequenceComponentUpdater>
+{
+    static CPairedSequenceComponentUpdater ISchemaClass<CPairedSequenceComponentUpdater>.From(nint handle) => new CPairedSequenceComponentUpdaterImpl(handle);
+    static int ISchemaClass<CPairedSequenceComponentUpdater>.Size => 56;
+    static string? ISchemaClass<CPairedSequenceComponentUpdater>.ClassName => null;
 
 
 

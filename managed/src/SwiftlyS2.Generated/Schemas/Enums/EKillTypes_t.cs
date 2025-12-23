@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EKillTypes_t : byte {
-
+public enum EKillTypes_t : byte
+{
  KILL_NONE = 0,
 
  KILL_DEFAULT = 1,

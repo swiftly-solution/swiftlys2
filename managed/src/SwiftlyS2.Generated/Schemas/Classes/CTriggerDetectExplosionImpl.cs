@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerDetectExplosionImpl : CBaseTriggerImpl, CTriggerDetectExplosion {
+internal partial class CTriggerDetectExplosionImpl : CBaseTriggerImpl, CTriggerDetectExplosion
+{
+    public CTriggerDetectExplosionImpl(nint handle) : base(handle) { }
 
-  public CTriggerDetectExplosionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnDetectedExplosionOffset;
 
-  private static nint? _OnDetectedExplosionOffset;
-
-  public CEntityIOOutput OnDetectedExplosion {
-    get {
-      if (_OnDetectedExplosionOffset == null) {
-        _OnDetectedExplosionOffset = Schema.GetOffset(0xEDC17DD03CDD7F71);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnDetectedExplosionOffset!.Value);
+    public ref CEntityIOOutput OnDetectedExplosion {
+        get {
+            _OnDetectedExplosionOffset = _OnDetectedExplosionOffset ?? Schema.GetOffset(0xEDC17DD03CDD7F71);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDetectedExplosionOffset!.Value);
+        }
     }
-  }
 
 
 }

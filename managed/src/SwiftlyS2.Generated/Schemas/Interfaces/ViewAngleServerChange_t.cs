@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ViewAngleServerChange_t : ISchemaClass<ViewAngleServerChange_t> {
+public partial interface ViewAngleServerChange_t : ISchemaClass<ViewAngleServerChange_t>
+{
+    static ViewAngleServerChange_t ISchemaClass<ViewAngleServerChange_t>.From(nint handle) => new ViewAngleServerChange_tImpl(handle);
+    static int ISchemaClass<ViewAngleServerChange_t>.Size => 72;
+    static string? ISchemaClass<ViewAngleServerChange_t>.ClassName => null;
 
-  static ViewAngleServerChange_t ISchemaClass<ViewAngleServerChange_t>.From(nint handle) => new ViewAngleServerChange_tImpl(handle);
-  static int ISchemaClass<ViewAngleServerChange_t>.Size => 72;
-  static string? ISchemaClass<ViewAngleServerChange_t>.ClassName => null;
 
-  
-  public ref FixAngleSet_t Type { get; }
-  
-  public ref QAngle Angle { get; }
-  
-  public ref uint Index { get; }
+    public ref FixAngleSet_t Type { get; }
 
-  public void TypeUpdated();
-  public void AngleUpdated();
-  public void IndexUpdated();
+    public ref QAngle Angle { get; }
+
+    public ref uint Index { get; }
+
+    public void TypeUpdated();
+    public void AngleUpdated();
+    public void IndexUpdated();
 }

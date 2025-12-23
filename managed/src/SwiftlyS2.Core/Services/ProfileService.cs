@@ -35,6 +35,8 @@ internal class ProfileService
     var epochTicks = DateTimeOffset.UtcNow.Ticks - DateTimeOffset.UnixEpoch.Ticks; // 100ns ticks
     _epochBaseMicros = (ulong)(epochTicks / 10);
     _ticksToMicro = 1_000_000.0 / Stopwatch.Frequency;
+
+    _enabled = NativeCore.EnableProfilerByDefault();
   }
 
   private ulong NowMicrosecondsSinceUnixEpoch()

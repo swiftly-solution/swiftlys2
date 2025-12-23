@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysicsBodyGameMarkup : ISchemaClass<CPhysicsBodyGameMarkup> {
+public partial interface CPhysicsBodyGameMarkup : ISchemaClass<CPhysicsBodyGameMarkup>
+{
+    static CPhysicsBodyGameMarkup ISchemaClass<CPhysicsBodyGameMarkup>.From(nint handle) => new CPhysicsBodyGameMarkupImpl(handle);
+    static int ISchemaClass<CPhysicsBodyGameMarkup>.Size => 16;
+    static string? ISchemaClass<CPhysicsBodyGameMarkup>.ClassName => null;
 
-  static CPhysicsBodyGameMarkup ISchemaClass<CPhysicsBodyGameMarkup>.From(nint handle) => new CPhysicsBodyGameMarkupImpl(handle);
-  static int ISchemaClass<CPhysicsBodyGameMarkup>.Size => 16;
-  static string? ISchemaClass<CPhysicsBodyGameMarkup>.ClassName => null;
 
-  
-  public string TargetBody { get; set; }
-  
-  public ref CGlobalSymbol Tag { get; }
+    public string TargetBody { get; set; }
+
+    public ref CGlobalSymbol Tag { get; }
 
 
 }

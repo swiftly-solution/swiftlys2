@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicBranch : CLogicalEntity, ISchemaClass<CLogicBranch> {
+public partial interface CLogicBranch : CLogicalEntity, ISchemaClass<CLogicBranch>
+{
+    static CLogicBranch ISchemaClass<CLogicBranch>.From(nint handle) => new CLogicBranchImpl(handle);
+    static int ISchemaClass<CLogicBranch>.Size => 1376;
+    static string? ISchemaClass<CLogicBranch>.ClassName => "logic_branch";
 
-  static CLogicBranch ISchemaClass<CLogicBranch>.From(nint handle) => new CLogicBranchImpl(handle);
-  static int ISchemaClass<CLogicBranch>.Size => 1376;
-  static string? ISchemaClass<CLogicBranch>.ClassName => "logic_branch";
 
-  
-  public ref bool InValue { get; }
-  
-  public ref CUtlVector<CHandle<CBaseEntity>> Listeners { get; }
-  
-  public CEntityIOOutput OnTrue { get; }
-  
-  public CEntityIOOutput OnFalse { get; }
+    public ref bool InValue { get; }
+
+    public ref CUtlVector<CHandle<CBaseEntity>> Listeners { get; }
+
+    public ref CEntityIOOutput OnTrue { get; }
+
+    public ref CEntityIOOutput OnFalse { get; }
 
 
 }

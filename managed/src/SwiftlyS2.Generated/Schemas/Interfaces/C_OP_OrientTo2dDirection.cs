@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_OrientTo2dDirection : CParticleFunctionOperator, ISchemaClass<C_OP_OrientTo2dDirection> {
+public partial interface C_OP_OrientTo2dDirection : CParticleFunctionOperator, ISchemaClass<C_OP_OrientTo2dDirection>
+{
+    static C_OP_OrientTo2dDirection ISchemaClass<C_OP_OrientTo2dDirection>.From(nint handle) => new C_OP_OrientTo2dDirectionImpl(handle);
+    static int ISchemaClass<C_OP_OrientTo2dDirection>.Size => 480;
+    static string? ISchemaClass<C_OP_OrientTo2dDirection>.ClassName => null;
 
-  static C_OP_OrientTo2dDirection ISchemaClass<C_OP_OrientTo2dDirection>.From(nint handle) => new C_OP_OrientTo2dDirectionImpl(handle);
-  static int ISchemaClass<C_OP_OrientTo2dDirection>.Size => 480;
-  static string? ISchemaClass<C_OP_OrientTo2dDirection>.ClassName => null;
 
-  
-  public ref float RotOffset { get; }
-  
-  public ref float SpinStrength { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
+    public ref float RotOffset { get; }
+
+    public ref float SpinStrength { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
 
 
 }

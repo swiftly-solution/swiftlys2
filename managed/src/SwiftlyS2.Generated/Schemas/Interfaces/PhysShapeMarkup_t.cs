@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PhysShapeMarkup_t : ISchemaClass<PhysShapeMarkup_t> {
+public partial interface PhysShapeMarkup_t : ISchemaClass<PhysShapeMarkup_t>
+{
+    static PhysShapeMarkup_t ISchemaClass<PhysShapeMarkup_t>.From(nint handle) => new PhysShapeMarkup_tImpl(handle);
+    static int ISchemaClass<PhysShapeMarkup_t>.Size => 16;
+    static string? ISchemaClass<PhysShapeMarkup_t>.ClassName => null;
 
-  static PhysShapeMarkup_t ISchemaClass<PhysShapeMarkup_t>.From(nint handle) => new PhysShapeMarkup_tImpl(handle);
-  static int ISchemaClass<PhysShapeMarkup_t>.Size => 16;
-  static string? ISchemaClass<PhysShapeMarkup_t>.ClassName => null;
 
-  
-  public ref int BodyInAggregate { get; }
-  
-  public ref int ShapeInBody { get; }
-  
-  public ref CGlobalSymbol HitGroup { get; }
+    public ref int BodyInAggregate { get; }
+
+    public ref int ShapeInBody { get; }
+
+    public ref CGlobalSymbol HitGroup { get; }
 
 
 }

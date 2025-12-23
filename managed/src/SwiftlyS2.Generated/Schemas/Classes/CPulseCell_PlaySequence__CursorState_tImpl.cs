@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_PlaySequence__CursorState_tImpl : SchemaClass, CPulseCell_PlaySequence__CursorState_t {
+internal partial class CPulseCell_PlaySequence__CursorState_tImpl : SchemaClass, CPulseCell_PlaySequence__CursorState_t
+{
+    public CPulseCell_PlaySequence__CursorState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_PlaySequence__CursorState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetOffset;
 
-  private static nint? _TargetOffset;
-
-  public ref CHandle<CBaseAnimGraph> Target {
-    get {
-      if (_TargetOffset == null) {
-        _TargetOffset = Schema.GetOffset(0x2C22B771CE35901A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_TargetOffset!.Value);
+    public ref CHandle<CBaseAnimGraph> Target {
+        get {
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x2C22B771CE35901A);
+            return ref _Handle.AsRef<CHandle<CBaseAnimGraph>>(_TargetOffset!.Value);
+        }
     }
-  }
 
 
 }

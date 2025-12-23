@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMotionGraphUpdateNode : CLeafUpdateNode, ISchemaClass<CMotionGraphUpdateNode> {
+public partial interface CMotionGraphUpdateNode : CLeafUpdateNode, ISchemaClass<CMotionGraphUpdateNode>
+{
+    static CMotionGraphUpdateNode ISchemaClass<CMotionGraphUpdateNode>.From(nint handle) => new CMotionGraphUpdateNodeImpl(handle);
+    static int ISchemaClass<CMotionGraphUpdateNode>.Size => 104;
+    static string? ISchemaClass<CMotionGraphUpdateNode>.ClassName => null;
 
-  static CMotionGraphUpdateNode ISchemaClass<CMotionGraphUpdateNode>.From(nint handle) => new CMotionGraphUpdateNodeImpl(handle);
-  static int ISchemaClass<CMotionGraphUpdateNode>.Size => 104;
-  static string? ISchemaClass<CMotionGraphUpdateNode>.ClassName => null;
 
-  
-  // CSmartPtr< CMotionGraph >
-  public SchemaUntypedField MotionGraph { get; }
+    // CSmartPtr< CMotionGraph >
+    public SchemaUntypedField MotionGraph { get; }
 
 
 }

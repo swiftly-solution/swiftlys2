@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatRemapNode__RemapRange_tImpl : SchemaClass, CNmFloatRemapNode__RemapRange_t {
+internal partial class CNmFloatRemapNode__RemapRange_tImpl : SchemaClass, CNmFloatRemapNode__RemapRange_t
+{
+    public CNmFloatRemapNode__RemapRange_tImpl(nint handle) : base(handle) { }
 
-  public CNmFloatRemapNode__RemapRange_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BeginOffset;
 
-  private static nint? _BeginOffset;
-
-  public ref float Begin {
-    get {
-      if (_BeginOffset == null) {
-        _BeginOffset = Schema.GetOffset(0x35C6A3517504C130);
-      }
-      return ref _Handle.AsRef<float>(_BeginOffset!.Value);
+    public ref float Begin {
+        get {
+            _BeginOffset = _BeginOffset ?? Schema.GetOffset(0x35C6A3517504C130);
+            return ref _Handle.AsRef<float>(_BeginOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndOffset;
+    private static nint? _EndOffset;
 
-  public ref float End {
-    get {
-      if (_EndOffset == null) {
-        _EndOffset = Schema.GetOffset(0x35C6A3519616A27C);
-      }
-      return ref _Handle.AsRef<float>(_EndOffset!.Value);
+    public ref float End {
+        get {
+            _EndOffset = _EndOffset ?? Schema.GetOffset(0x35C6A3519616A27C);
+            return ref _Handle.AsRef<float>(_EndOffset!.Value);
+        }
     }
-  }
 
 
 }

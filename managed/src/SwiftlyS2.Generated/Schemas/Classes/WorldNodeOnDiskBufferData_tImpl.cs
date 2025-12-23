@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class WorldNodeOnDiskBufferData_tImpl : SchemaClass, WorldNodeOnDiskBufferData_t {
+internal partial class WorldNodeOnDiskBufferData_tImpl : SchemaClass, WorldNodeOnDiskBufferData_t
+{
+    public WorldNodeOnDiskBufferData_tImpl(nint handle) : base(handle) { }
 
-  public WorldNodeOnDiskBufferData_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ElementCountOffset;
 
-  private static nint? _ElementCountOffset;
-
-  public ref int ElementCount {
-    get {
-      if (_ElementCountOffset == null) {
-        _ElementCountOffset = Schema.GetOffset(0xC4F557DA51A2EF12);
-      }
-      return ref _Handle.AsRef<int>(_ElementCountOffset!.Value);
+    public ref int ElementCount {
+        get {
+            _ElementCountOffset = _ElementCountOffset ?? Schema.GetOffset(0xC4F557DA51A2EF12);
+            return ref _Handle.AsRef<int>(_ElementCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _ElementSizeInBytesOffset;
+    private static nint? _ElementSizeInBytesOffset;
 
-  public ref int ElementSizeInBytes {
-    get {
-      if (_ElementSizeInBytesOffset == null) {
-        _ElementSizeInBytesOffset = Schema.GetOffset(0xC4F557DAF602975C);
-      }
-      return ref _Handle.AsRef<int>(_ElementSizeInBytesOffset!.Value);
+    public ref int ElementSizeInBytes {
+        get {
+            _ElementSizeInBytesOffset = _ElementSizeInBytesOffset ?? Schema.GetOffset(0xC4F557DAF602975C);
+            return ref _Handle.AsRef<int>(_ElementSizeInBytesOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputLayoutFieldsOffset;
+    private static nint? _InputLayoutFieldsOffset;
 
-  public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields {
-    get {
-      if (_InputLayoutFieldsOffset == null) {
-        _InputLayoutFieldsOffset = Schema.GetOffset(0xC4F557DAFDECA2D8);
-      }
-      return ref _Handle.AsRef<CUtlVector<RenderInputLayoutField_t>>(_InputLayoutFieldsOffset!.Value);
+    public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields {
+        get {
+            _InputLayoutFieldsOffset = _InputLayoutFieldsOffset ?? Schema.GetOffset(0xC4F557DAFDECA2D8);
+            return ref _Handle.AsRef<CUtlVector<RenderInputLayoutField_t>>(_InputLayoutFieldsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DataOffset;
+    private static nint? _DataOffset;
 
-  public ref CUtlVector<byte> Data {
-    get {
-      if (_DataOffset == null) {
-        _DataOffset = Schema.GetOffset(0xC4F557DA27938BB7);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_DataOffset!.Value);
+    public ref CUtlVector<byte> Data {
+        get {
+            _DataOffset = _DataOffset ?? Schema.GetOffset(0xC4F557DA27938BB7);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_DataOffset!.Value);
+        }
     }
-  }
 
 
 }

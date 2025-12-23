@@ -6,134 +6,108 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicAutoImpl : CBaseEntityImpl, CLogicAuto {
+internal partial class CLogicAutoImpl : CBaseEntityImpl, CLogicAuto
+{
+    public CLogicAutoImpl(nint handle) : base(handle) { }
 
-  public CLogicAutoImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnMapSpawnOffset;
 
-  private static nint? _OnMapSpawnOffset;
-
-  public CEntityIOOutput OnMapSpawn {
-    get {
-      if (_OnMapSpawnOffset == null) {
-        _OnMapSpawnOffset = Schema.GetOffset(0x1FA33DC758EC03E5);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnMapSpawnOffset!.Value);
+    public ref CEntityIOOutput OnMapSpawn {
+        get {
+            _OnMapSpawnOffset = _OnMapSpawnOffset ?? Schema.GetOffset(0x1FA33DC758EC03E5);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMapSpawnOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnDemoMapSpawnOffset;
+    private static nint? _OnDemoMapSpawnOffset;
 
-  public CEntityIOOutput OnDemoMapSpawn {
-    get {
-      if (_OnDemoMapSpawnOffset == null) {
-        _OnDemoMapSpawnOffset = Schema.GetOffset(0x1FA33DC7798F0A72);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnDemoMapSpawnOffset!.Value);
+    public ref CEntityIOOutput OnDemoMapSpawn {
+        get {
+            _OnDemoMapSpawnOffset = _OnDemoMapSpawnOffset ?? Schema.GetOffset(0x1FA33DC7798F0A72);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnDemoMapSpawnOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnNewGameOffset;
+    private static nint? _OnNewGameOffset;
 
-  public CEntityIOOutput OnNewGame {
-    get {
-      if (_OnNewGameOffset == null) {
-        _OnNewGameOffset = Schema.GetOffset(0x1FA33DC7F77845A4);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnNewGameOffset!.Value);
+    public ref CEntityIOOutput OnNewGame {
+        get {
+            _OnNewGameOffset = _OnNewGameOffset ?? Schema.GetOffset(0x1FA33DC7F77845A4);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNewGameOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnLoadGameOffset;
+    private static nint? _OnLoadGameOffset;
 
-  public CEntityIOOutput OnLoadGame {
-    get {
-      if (_OnLoadGameOffset == null) {
-        _OnLoadGameOffset = Schema.GetOffset(0x1FA33DC748F2D9A6);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnLoadGameOffset!.Value);
+    public ref CEntityIOOutput OnLoadGame {
+        get {
+            _OnLoadGameOffset = _OnLoadGameOffset ?? Schema.GetOffset(0x1FA33DC748F2D9A6);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnLoadGameOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnMapTransitionOffset;
+    private static nint? _OnMapTransitionOffset;
 
-  public CEntityIOOutput OnMapTransition {
-    get {
-      if (_OnMapTransitionOffset == null) {
-        _OnMapTransitionOffset = Schema.GetOffset(0x1FA33DC7EEE1CA9D);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnMapTransitionOffset!.Value);
+    public ref CEntityIOOutput OnMapTransition {
+        get {
+            _OnMapTransitionOffset = _OnMapTransitionOffset ?? Schema.GetOffset(0x1FA33DC7EEE1CA9D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMapTransitionOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnBackgroundMapOffset;
+    private static nint? _OnBackgroundMapOffset;
 
-  public CEntityIOOutput OnBackgroundMap {
-    get {
-      if (_OnBackgroundMapOffset == null) {
-        _OnBackgroundMapOffset = Schema.GetOffset(0x1FA33DC7FD54329A);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnBackgroundMapOffset!.Value);
+    public ref CEntityIOOutput OnBackgroundMap {
+        get {
+            _OnBackgroundMapOffset = _OnBackgroundMapOffset ?? Schema.GetOffset(0x1FA33DC7FD54329A);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBackgroundMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnMultiNewMapOffset;
+    private static nint? _OnMultiNewMapOffset;
 
-  public CEntityIOOutput OnMultiNewMap {
-    get {
-      if (_OnMultiNewMapOffset == null) {
-        _OnMultiNewMapOffset = Schema.GetOffset(0x1FA33DC74D5DCA0D);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnMultiNewMapOffset!.Value);
+    public ref CEntityIOOutput OnMultiNewMap {
+        get {
+            _OnMultiNewMapOffset = _OnMultiNewMapOffset ?? Schema.GetOffset(0x1FA33DC74D5DCA0D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMultiNewMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnMultiNewRoundOffset;
+    private static nint? _OnMultiNewRoundOffset;
 
-  public CEntityIOOutput OnMultiNewRound {
-    get {
-      if (_OnMultiNewRoundOffset == null) {
-        _OnMultiNewRoundOffset = Schema.GetOffset(0x1FA33DC70D4B293F);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnMultiNewRoundOffset!.Value);
+    public ref CEntityIOOutput OnMultiNewRound {
+        get {
+            _OnMultiNewRoundOffset = _OnMultiNewRoundOffset ?? Schema.GetOffset(0x1FA33DC70D4B293F);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMultiNewRoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnVREnabledOffset;
+    private static nint? _OnVREnabledOffset;
 
-  public CEntityIOOutput OnVREnabled {
-    get {
-      if (_OnVREnabledOffset == null) {
-        _OnVREnabledOffset = Schema.GetOffset(0x1FA33DC79A1AB4C1);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnVREnabledOffset!.Value);
+    public ref CEntityIOOutput OnVREnabled {
+        get {
+            _OnVREnabledOffset = _OnVREnabledOffset ?? Schema.GetOffset(0x1FA33DC79A1AB4C1);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVREnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnVRNotEnabledOffset;
+    private static nint? _OnVRNotEnabledOffset;
 
-  public CEntityIOOutput OnVRNotEnabled {
-    get {
-      if (_OnVRNotEnabledOffset == null) {
-        _OnVRNotEnabledOffset = Schema.GetOffset(0x1FA33DC745E8A1DA);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnVRNotEnabledOffset!.Value);
+    public ref CEntityIOOutput OnVRNotEnabled {
+        get {
+            _OnVRNotEnabledOffset = _OnVRNotEnabledOffset ?? Schema.GetOffset(0x1FA33DC745E8A1DA);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVRNotEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlobalstateOffset;
+    private static nint? _GlobalstateOffset;
 
-  public string Globalstate {
-    get {
-      if (_GlobalstateOffset == null) {
-        _GlobalstateOffset = Schema.GetOffset(0x1FA33DC777A86653);
-      }
-      var ptr = _Handle.Read<nint>(_GlobalstateOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_GlobalstateOffset == null) {
-        _GlobalstateOffset = Schema.GetOffset(0x1FA33DC777A86653);
-      }
-      Schema.SetString(_Handle, _GlobalstateOffset!.Value, value);
-    }
-  } 
+    public string Globalstate {
+        get {
+            _GlobalstateOffset = _GlobalstateOffset ?? Schema.GetOffset(0x1FA33DC777A86653);
+            return Schema.GetString(_Handle.Read<nint>(_GlobalstateOffset!.Value));
+        }
+        set {
+            _GlobalstateOffset = _GlobalstateOffset ?? Schema.GetOffset(0x1FA33DC777A86653);
+            Schema.SetString(_Handle, _GlobalstateOffset!.Value, value);
+        }
+    } 
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SosActionLimitSortType_t : uint {
-
+public enum SosActionLimitSortType_t : uint
+{
  SOS_LIMIT_SORTTYPE_HIGHEST = 0,
 
  SOS_LIMIT_SORTTYPE_LOWEST = 1,

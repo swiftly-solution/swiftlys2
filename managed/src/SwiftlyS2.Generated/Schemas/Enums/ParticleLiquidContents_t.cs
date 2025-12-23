@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleLiquidContents_t : uint {
-
+public enum ParticleLiquidContents_t : uint
+{
  PARTICLE_LIQUID_NONE = 0,
 
  PARTICLE_LIQUID_OIL = 1,

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSGameModeRules_Deathmatch : CCSGameModeRules, ISchemaClass<CCSGameModeRules_Deathmatch> {
+public partial interface CCSGameModeRules_Deathmatch : CCSGameModeRules, ISchemaClass<CCSGameModeRules_Deathmatch>
+{
+    static CCSGameModeRules_Deathmatch ISchemaClass<CCSGameModeRules_Deathmatch>.From(nint handle) => new CCSGameModeRules_DeathmatchImpl(handle);
+    static int ISchemaClass<CCSGameModeRules_Deathmatch>.Size => 136;
+    static string? ISchemaClass<CCSGameModeRules_Deathmatch>.ClassName => null;
 
-  static CCSGameModeRules_Deathmatch ISchemaClass<CCSGameModeRules_Deathmatch>.From(nint handle) => new CCSGameModeRules_DeathmatchImpl(handle);
-  static int ISchemaClass<CCSGameModeRules_Deathmatch>.Size => 136;
-  static string? ISchemaClass<CCSGameModeRules_Deathmatch>.ClassName => null;
 
-  
-  public GameTime_t DMBonusStartTime { get; }
-  
-  public ref float DMBonusTimeLength { get; }
-  
-  public string DMBonusWeapon { get; set; }
+    public GameTime_t DMBonusStartTime { get; }
 
-  public void DMBonusStartTimeUpdated();
-  public void DMBonusTimeLengthUpdated();
-  public void DMBonusWeaponUpdated();
+    public ref float DMBonusTimeLength { get; }
+
+    public string DMBonusWeapon { get; set; }
+
+    public void DMBonusStartTimeUpdated();
+    public void DMBonusTimeLengthUpdated();
+    public void DMBonusWeaponUpdated();
 }

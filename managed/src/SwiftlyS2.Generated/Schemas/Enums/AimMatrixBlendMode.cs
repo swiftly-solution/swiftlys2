@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AimMatrixBlendMode : uint {
-
+public enum AimMatrixBlendMode : uint
+{
  AimMatrixBlendMode_None = 0,
 
  AimMatrixBlendMode_Additive = 1,

@@ -8,17 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimNodePath : ISchemaClass<CAnimNodePath> {
+public partial interface CAnimNodePath : ISchemaClass<CAnimNodePath>
+{
+    static CAnimNodePath ISchemaClass<CAnimNodePath>.From(nint handle) => new CAnimNodePathImpl(handle);
+    static int ISchemaClass<CAnimNodePath>.Size => 48;
+    static string? ISchemaClass<CAnimNodePath>.ClassName => null;
 
-  static CAnimNodePath ISchemaClass<CAnimNodePath>.From(nint handle) => new CAnimNodePathImpl(handle);
-  static int ISchemaClass<CAnimNodePath>.Size => 48;
-  static string? ISchemaClass<CAnimNodePath>.ClassName => null;
 
-  
-  // AnimNodeID
-  public SchemaUntypedField Path { get; }
-  
-  public ref int Count { get; }
+    public ISchemaClassFixedArray<AnimNodeID> Path { get; }
+
+    public ref int Count { get; }
 
 
 }

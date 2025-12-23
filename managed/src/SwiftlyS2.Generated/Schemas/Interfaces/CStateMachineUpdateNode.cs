@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStateMachineUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CStateMachineUpdateNode> {
+public partial interface CStateMachineUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CStateMachineUpdateNode>
+{
+    static CStateMachineUpdateNode ISchemaClass<CStateMachineUpdateNode>.From(nint handle) => new CStateMachineUpdateNodeImpl(handle);
+    static int ISchemaClass<CStateMachineUpdateNode>.Size => 256;
+    static string? ISchemaClass<CStateMachineUpdateNode>.ClassName => null;
 
-  static CStateMachineUpdateNode ISchemaClass<CStateMachineUpdateNode>.From(nint handle) => new CStateMachineUpdateNodeImpl(handle);
-  static int ISchemaClass<CStateMachineUpdateNode>.Size => 256;
-  static string? ISchemaClass<CStateMachineUpdateNode>.ClassName => null;
 
-  
-  public CAnimStateMachineUpdater StateMachine { get; }
-  
-  public ref CUtlVector<CStateNodeStateData> StateData { get; }
-  
-  public ref CUtlVector<CStateNodeTransitionData> TransitionData { get; }
-  
-  public ref bool BlockWaningTags { get; }
-  
-  public ref bool LockStateWhenWaning { get; }
-  
-  public ref bool ResetWhenActivated { get; }
+    public CAnimStateMachineUpdater StateMachine { get; }
+
+    public ref CUtlVector<CStateNodeStateData> StateData { get; }
+
+    public ref CUtlVector<CStateNodeTransitionData> TransitionData { get; }
+
+    public ref bool BlockWaningTags { get; }
+
+    public ref bool LockStateWhenWaning { get; }
+
+    public ref bool ResetWhenActivated { get; }
 
 
 }

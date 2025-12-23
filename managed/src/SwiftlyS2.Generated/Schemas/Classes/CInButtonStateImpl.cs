@@ -6,20 +6,19 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInButtonStateImpl : SchemaClass, CInButtonState {
+internal partial class CInButtonStateImpl : SchemaClass, CInButtonState
+{
+    public CInButtonStateImpl(nint handle) : base(handle) { }
 
-  public CInButtonStateImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ulong> ButtonStates {
-    get => new SchemaFixedArray<ulong>(_Handle, 0x6C8AF06A00121DF9, 3, 8, 8);
-  }
+    public ISchemaFixedArray<ulong> ButtonStates {
+        get => new SchemaFixedArray<ulong>(_Handle, 0x6C8AF06A00121DF9, 3, 8, 8);
+    }
 
 
 }

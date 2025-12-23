@@ -8,95 +8,95 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNewParticleEffect : IParticleEffect, ISchemaClass<CNewParticleEffect> {
+public partial interface CNewParticleEffect : IParticleEffect, ISchemaClass<CNewParticleEffect>
+{
+    static CNewParticleEffect ISchemaClass<CNewParticleEffect>.From(nint handle) => new CNewParticleEffectImpl(handle);
+    static int ISchemaClass<CNewParticleEffect>.Size => 216;
+    static string? ISchemaClass<CNewParticleEffect>.ClassName => null;
 
-  static CNewParticleEffect ISchemaClass<CNewParticleEffect>.From(nint handle) => new CNewParticleEffectImpl(handle);
-  static int ISchemaClass<CNewParticleEffect>.Size => 216;
-  static string? ISchemaClass<CNewParticleEffect>.ClassName => null;
 
-  
-  public CNewParticleEffect? Next { get; }
-  
-  public CNewParticleEffect? Prev { get; }
-  
-  public IParticleCollection? Particles { get; }
-  
-  public string DebugName { get; set; }
-  
-  // bitfield
-  public SchemaUntypedField DontRemove { get; }
-  
-  // bitfield
-  public SchemaUntypedField Remove { get; }
-  
-  // bitfield
-  public SchemaUntypedField NeedsBBoxUpdate { get; }
-  
-  // bitfield
-  public SchemaUntypedField IsFirstFrame { get; }
-  
-  // bitfield
-  public SchemaUntypedField AutoUpdateBBox { get; }
-  
-  // bitfield
-  public SchemaUntypedField Allocated { get; }
-  
-  // bitfield
-  public SchemaUntypedField Simulate { get; }
-  
-  // bitfield
-  public SchemaUntypedField ShouldPerformCullCheck { get; }
-  
-  // bitfield
-  public SchemaUntypedField ForceNoDraw { get; }
-  
-  // bitfield
-  public SchemaUntypedField SuppressScreenSpaceEffect { get; }
-  
-  // bitfield
-  public SchemaUntypedField ShouldSave { get; }
-  
-  // bitfield
-  public SchemaUntypedField ShouldSimulateDuringGamePaused { get; }
-  
-  // bitfield
-  public SchemaUntypedField ShouldCheckFoW { get; }
-  
-  // bitfield
-  public SchemaUntypedField IsAsyncCreate { get; }
-  
-  // bitfield
-  public SchemaUntypedField FreezeTransitionActive { get; }
-  
-  // bitfield
-  public SchemaUntypedField FreezeTargetState { get; }
-  
-  // bitfield
-  public SchemaUntypedField CanFreeze { get; }
-  
-  public ref Vector SortOrigin { get; }
-  
-  public ref float Scale { get; }
-  
-  public PARTICLE_EHANDLE__? Owner { get; }
-  
-  public CParticleProperty? OwningParticleProperty { get; }
-  
-  public ref float FreezeTransitionStart { get; }
-  
-  public ref float FreezeTransitionDuration { get; }
-  
-  public ref float FreezeTransitionOverride { get; }
-  
-  public ref Vector LastMin { get; }
-  
-  public ref Vector LastMax { get; }
-  
-  public ref uint SplitScreenUser { get; }
-  
-  public ref Vector AggregationCenter { get; }
-  
-  public ref int RefCount { get; }
+    public CNewParticleEffect? Next { get; }
+
+    public CNewParticleEffect? Prev { get; }
+
+    public IParticleCollection? Particles { get; }
+
+    public string DebugName { get; set; }
+
+    // bitfield
+    public SchemaUntypedField DontRemove { get; }
+
+    // bitfield
+    public SchemaUntypedField Remove { get; }
+
+    // bitfield
+    public SchemaUntypedField NeedsBBoxUpdate { get; }
+
+    // bitfield
+    public SchemaUntypedField IsFirstFrame { get; }
+
+    // bitfield
+    public SchemaUntypedField AutoUpdateBBox { get; }
+
+    // bitfield
+    public SchemaUntypedField Allocated { get; }
+
+    // bitfield
+    public SchemaUntypedField Simulate { get; }
+
+    // bitfield
+    public SchemaUntypedField ShouldPerformCullCheck { get; }
+
+    // bitfield
+    public SchemaUntypedField ForceNoDraw { get; }
+
+    // bitfield
+    public SchemaUntypedField SuppressScreenSpaceEffect { get; }
+
+    // bitfield
+    public SchemaUntypedField ShouldSave { get; }
+
+    // bitfield
+    public SchemaUntypedField ShouldSimulateDuringGamePaused { get; }
+
+    // bitfield
+    public SchemaUntypedField ShouldCheckFoW { get; }
+
+    // bitfield
+    public SchemaUntypedField IsAsyncCreate { get; }
+
+    // bitfield
+    public SchemaUntypedField FreezeTransitionActive { get; }
+
+    // bitfield
+    public SchemaUntypedField FreezeTargetState { get; }
+
+    // bitfield
+    public SchemaUntypedField CanFreeze { get; }
+
+    public ref Vector SortOrigin { get; }
+
+    public ref float Scale { get; }
+
+    public PARTICLE_EHANDLE__? Owner { get; }
+
+    public CParticleProperty? OwningParticleProperty { get; }
+
+    public ref float FreezeTransitionStart { get; }
+
+    public ref float FreezeTransitionDuration { get; }
+
+    public ref float FreezeTransitionOverride { get; }
+
+    public ref Vector LastMin { get; }
+
+    public ref Vector LastMax { get; }
+
+    public ref uint SplitScreenUser { get; }
+
+    public ref Vector AggregationCenter { get; }
+
+    public ref int RefCount { get; }
 
 
 }

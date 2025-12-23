@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFlexOp : ISchemaClass<CFlexOp> {
+public partial interface CFlexOp : ISchemaClass<CFlexOp>
+{
+    static CFlexOp ISchemaClass<CFlexOp>.From(nint handle) => new CFlexOpImpl(handle);
+    static int ISchemaClass<CFlexOp>.Size => 8;
+    static string? ISchemaClass<CFlexOp>.ClassName => null;
 
-  static CFlexOp ISchemaClass<CFlexOp>.From(nint handle) => new CFlexOpImpl(handle);
-  static int ISchemaClass<CFlexOp>.Size => 8;
-  static string? ISchemaClass<CFlexOp>.ClassName => null;
 
-  
-  public ref FlexOpCode_t OpCode { get; }
-  
-  public ref int Data { get; }
+    public ref FlexOpCode_t OpCode { get; }
+
+    public ref int Data { get; }
 
 
 }

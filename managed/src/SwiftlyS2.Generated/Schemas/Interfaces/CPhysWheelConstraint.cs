@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysWheelConstraint : CPhysConstraint, ISchemaClass<CPhysWheelConstraint> {
+public partial interface CPhysWheelConstraint : CPhysConstraint, ISchemaClass<CPhysWheelConstraint>
+{
+    static CPhysWheelConstraint ISchemaClass<CPhysWheelConstraint>.From(nint handle) => new CPhysWheelConstraintImpl(handle);
+    static int ISchemaClass<CPhysWheelConstraint>.Size => 1432;
+    static string? ISchemaClass<CPhysWheelConstraint>.ClassName => "phys_wheelconstraint";
 
-  static CPhysWheelConstraint ISchemaClass<CPhysWheelConstraint>.From(nint handle) => new CPhysWheelConstraintImpl(handle);
-  static int ISchemaClass<CPhysWheelConstraint>.Size => 1432;
-  static string? ISchemaClass<CPhysWheelConstraint>.ClassName => "phys_wheelconstraint";
 
-  
-  public ref float SuspensionFrequency { get; }
-  
-  public ref float SuspensionDampingRatio { get; }
-  
-  public ref float SuspensionHeightOffset { get; }
-  
-  public ref bool EnableSuspensionLimit { get; }
-  
-  public ref float MinSuspensionOffset { get; }
-  
-  public ref float MaxSuspensionOffset { get; }
-  
-  public ref bool EnableSteeringLimit { get; }
-  
-  public ref float MinSteeringAngle { get; }
-  
-  public ref float MaxSteeringAngle { get; }
-  
-  public ref float SteeringAxisFriction { get; }
-  
-  public ref float SpinAxisFriction { get; }
-  
-  public ref CHandle<CBaseEntity> SteeringMimicsEntity { get; }
+    public ref float SuspensionFrequency { get; }
+
+    public ref float SuspensionDampingRatio { get; }
+
+    public ref float SuspensionHeightOffset { get; }
+
+    public ref bool EnableSuspensionLimit { get; }
+
+    public ref float MinSuspensionOffset { get; }
+
+    public ref float MaxSuspensionOffset { get; }
+
+    public ref bool EnableSteeringLimit { get; }
+
+    public ref float MinSteeringAngle { get; }
+
+    public ref float MaxSteeringAngle { get; }
+
+    public ref float SteeringAxisFriction { get; }
+
+    public ref float SpinAxisFriction { get; }
+
+    public ref CHandle<CBaseEntity> SteeringMimicsEntity { get; }
 
 
 }

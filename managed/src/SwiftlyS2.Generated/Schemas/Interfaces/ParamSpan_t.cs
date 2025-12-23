@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ParamSpan_t : ISchemaClass<ParamSpan_t> {
+public partial interface ParamSpan_t : ISchemaClass<ParamSpan_t>
+{
+    static ParamSpan_t ISchemaClass<ParamSpan_t>.From(nint handle) => new ParamSpan_tImpl(handle);
+    static int ISchemaClass<ParamSpan_t>.Size => 40;
+    static string? ISchemaClass<ParamSpan_t>.ClassName => null;
 
-  static ParamSpan_t ISchemaClass<ParamSpan_t>.From(nint handle) => new ParamSpan_tImpl(handle);
-  static int ISchemaClass<ParamSpan_t>.Size => 40;
-  static string? ISchemaClass<ParamSpan_t>.ClassName => null;
 
-  
-  public ref CUtlVector<ParamSpanSample_t> Samples { get; }
-  
-  public CAnimParamHandle Param { get; }
-  
-  public ref AnimParamType_t ParamType { get; }
-  
-  public ref float StartCycle { get; }
-  
-  public ref float EndCycle { get; }
+    public ref CUtlVector<ParamSpanSample_t> Samples { get; }
+
+    public CAnimParamHandle Param { get; }
+
+    public ref AnimParamType_t ParamType { get; }
+
+    public ref float StartCycle { get; }
+
+    public ref float EndCycle { get; }
 
 
 }

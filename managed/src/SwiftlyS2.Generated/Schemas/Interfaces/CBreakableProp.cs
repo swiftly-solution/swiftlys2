@@ -8,77 +8,77 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBreakableProp : CBaseProp, ISchemaClass<CBreakableProp> {
+public partial interface CBreakableProp : CBaseProp, ISchemaClass<CBreakableProp>
+{
+    static CBreakableProp ISchemaClass<CBreakableProp>.From(nint handle) => new CBreakablePropImpl(handle);
+    static int ISchemaClass<CBreakableProp>.Size => 3152;
+    static string? ISchemaClass<CBreakableProp>.ClassName => null;
 
-  static CBreakableProp ISchemaClass<CBreakableProp>.From(nint handle) => new CBreakablePropImpl(handle);
-  static int ISchemaClass<CBreakableProp>.Size => 3152;
-  static string? ISchemaClass<CBreakableProp>.ClassName => null;
 
-  
-  public CPropDataComponent CPropDataComponent { get; }
-  
-  public CEntityIOOutput OnStartDeath { get; }
-  
-  public CEntityIOOutput OnBreak { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnHealthChanged { get; }
-  
-  public CEntityIOOutput OnTakeDamage { get; }
-  
-  public ref float ImpactEnergyScale { get; }
-  
-  public ref int MinHealthDmg { get; }
-  
-  public ref QAngle PreferredCarryAngles { get; }
-  
-  public ref float PressureDelay { get; }
-  
-  public ref float DefBurstScale { get; }
-  
-  public ref Vector DefBurstOffset { get; }
-  
-  public ref CHandle<CBaseEntity> Breaker { get; }
-  
-  public ref PerformanceMode_t PerformanceMode { get; }
-  
-  public GameTime_t PreventDamageBeforeTime { get; }
-  
-  public ref BreakableContentsType_t BreakableContentsType { get; }
-  
-  public string StrBreakableContentsPropGroupOverride { get; set; }
-  
-  public string StrBreakableContentsParticleOverride { get; set; }
-  
-  public ref bool HasBreakPiecesOrCommands { get; }
-  
-  public ref float ExplodeDamage { get; }
-  
-  public ref float ExplodeRadius { get; }
-  
-  public ref float ExplosionDelay { get; }
-  
-  public string ExplosionBuildupSound { get; set; }
-  
-  public string ExplosionCustomEffect { get; set; }
-  
-  public string ExplosionCustomSound { get; set; }
-  
-  public string ExplosionModifier { get; set; }
-  
-  public ref CHandle<CBasePlayerPawn> PhysicsAttacker { get; }
-  
-  public GameTime_t LastPhysicsInfluenceTime { get; }
-  
-  public ref float DefaultFadeScale { get; }
-  
-  public ref CHandle<CBaseEntity> LastAttacker { get; }
-  
-  public string PuntSound { get; set; }
-  
-  public ref bool UsePuntSound { get; }
-  
-  public ref bool OriginalBlockLOS { get; }
+    public CPropDataComponent CPropDataComponent { get; }
 
-  public void CPropDataComponentUpdated();
+    public ref CEntityIOOutput OnStartDeath { get; }
+
+    public ref CEntityIOOutput OnBreak { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnHealthChanged { get; }
+
+    public ref CEntityIOOutput OnTakeDamage { get; }
+
+    public ref float ImpactEnergyScale { get; }
+
+    public ref int MinHealthDmg { get; }
+
+    public ref QAngle PreferredCarryAngles { get; }
+
+    public ref float PressureDelay { get; }
+
+    public ref float DefBurstScale { get; }
+
+    public ref Vector DefBurstOffset { get; }
+
+    public ref CHandle<CBaseEntity> Breaker { get; }
+
+    public ref PerformanceMode_t PerformanceMode { get; }
+
+    public GameTime_t PreventDamageBeforeTime { get; }
+
+    public ref BreakableContentsType_t BreakableContentsType { get; }
+
+    public string StrBreakableContentsPropGroupOverride { get; set; }
+
+    public string StrBreakableContentsParticleOverride { get; set; }
+
+    public ref bool HasBreakPiecesOrCommands { get; }
+
+    public ref float ExplodeDamage { get; }
+
+    public ref float ExplodeRadius { get; }
+
+    public ref float ExplosionDelay { get; }
+
+    public string ExplosionBuildupSound { get; set; }
+
+    public string ExplosionCustomEffect { get; set; }
+
+    public string ExplosionCustomSound { get; set; }
+
+    public string ExplosionModifier { get; set; }
+
+    public ref CHandle<CBasePlayerPawn> PhysicsAttacker { get; }
+
+    public GameTime_t LastPhysicsInfluenceTime { get; }
+
+    public ref float DefaultFadeScale { get; }
+
+    public ref CHandle<CBaseEntity> LastAttacker { get; }
+
+    public string PuntSound { get; set; }
+
+    public ref bool UsePuntSound { get; }
+
+    public ref bool OriginalBlockLOS { get; }
+
+    public void CPropDataComponentUpdated();
 }

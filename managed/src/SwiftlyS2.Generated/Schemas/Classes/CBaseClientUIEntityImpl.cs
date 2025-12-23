@@ -6,189 +6,143 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseClientUIEntityImpl : CBaseModelEntityImpl, CBaseClientUIEntity {
+internal partial class CBaseClientUIEntityImpl : CBaseModelEntityImpl, CBaseClientUIEntity
+{
+    public CBaseClientUIEntityImpl(nint handle) : base(handle) { }
 
-  public CBaseClientUIEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EnabledOffset;
 
-  private static nint? _EnabledOffset;
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x51A22D116154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
+    }
+    private static nint? _DialogXMLNameOffset;
 
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0x51A22D116154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
-    }
-  }
-  private static nint? _DialogXMLNameOffset;
+    public string DialogXMLName {
+        get {
+            _DialogXMLNameOffset = _DialogXMLNameOffset ?? Schema.GetOffset(0x51A22D11D13858C9);
+            return Schema.GetString(_Handle.Read<nint>(_DialogXMLNameOffset!.Value));
+        }
+        set {
+            _DialogXMLNameOffset = _DialogXMLNameOffset ?? Schema.GetOffset(0x51A22D11D13858C9);
+            Schema.SetString(_Handle, _DialogXMLNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _PanelClassNameOffset;
 
-  public string DialogXMLName {
-    get {
-      if (_DialogXMLNameOffset == null) {
-        _DialogXMLNameOffset = Schema.GetOffset(0x51A22D11D13858C9);
-      }
-      var ptr = _Handle.Read<nint>(_DialogXMLNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DialogXMLNameOffset == null) {
-        _DialogXMLNameOffset = Schema.GetOffset(0x51A22D11D13858C9);
-      }
-      Schema.SetString(_Handle, _DialogXMLNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _PanelClassNameOffset;
+    public string PanelClassName {
+        get {
+            _PanelClassNameOffset = _PanelClassNameOffset ?? Schema.GetOffset(0x51A22D115C958CBC);
+            return Schema.GetString(_Handle.Read<nint>(_PanelClassNameOffset!.Value));
+        }
+        set {
+            _PanelClassNameOffset = _PanelClassNameOffset ?? Schema.GetOffset(0x51A22D115C958CBC);
+            Schema.SetString(_Handle, _PanelClassNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _PanelIDOffset;
 
-  public string PanelClassName {
-    get {
-      if (_PanelClassNameOffset == null) {
-        _PanelClassNameOffset = Schema.GetOffset(0x51A22D115C958CBC);
-      }
-      var ptr = _Handle.Read<nint>(_PanelClassNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_PanelClassNameOffset == null) {
-        _PanelClassNameOffset = Schema.GetOffset(0x51A22D115C958CBC);
-      }
-      Schema.SetString(_Handle, _PanelClassNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _PanelIDOffset;
+    public string PanelID {
+        get {
+            _PanelIDOffset = _PanelIDOffset ?? Schema.GetOffset(0x51A22D1107A4EF60);
+            return Schema.GetString(_Handle.Read<nint>(_PanelIDOffset!.Value));
+        }
+        set {
+            _PanelIDOffset = _PanelIDOffset ?? Schema.GetOffset(0x51A22D1107A4EF60);
+            Schema.SetString(_Handle, _PanelIDOffset!.Value, value);
+        }
+    } 
+    private static nint? _CustomOutput0Offset;
 
-  public string PanelID {
-    get {
-      if (_PanelIDOffset == null) {
-        _PanelIDOffset = Schema.GetOffset(0x51A22D1107A4EF60);
-      }
-      var ptr = _Handle.Read<nint>(_PanelIDOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CEntityIOOutput CustomOutput0 {
+        get {
+            _CustomOutput0Offset = _CustomOutput0Offset ?? Schema.GetOffset(0x51A22D119AA5C775);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput0Offset!.Value);
+        }
     }
-    set {
-      if (_PanelIDOffset == null) {
-        _PanelIDOffset = Schema.GetOffset(0x51A22D1107A4EF60);
-      }
-      Schema.SetString(_Handle, _PanelIDOffset!.Value, value);
-    }
-  } 
-  private static nint? _CustomOutput0Offset;
+    private static nint? _CustomOutput1Offset;
 
-  public CEntityIOOutput CustomOutput0 {
-    get {
-      if (_CustomOutput0Offset == null) {
-        _CustomOutput0Offset = Schema.GetOffset(0x51A22D119AA5C775);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput0Offset!.Value);
+    public ref CEntityIOOutput CustomOutput1 {
+        get {
+            _CustomOutput1Offset = _CustomOutput1Offset ?? Schema.GetOffset(0x51A22D1199A5C5E2);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput1Offset!.Value);
+        }
     }
-  }
-  private static nint? _CustomOutput1Offset;
+    private static nint? _CustomOutput2Offset;
 
-  public CEntityIOOutput CustomOutput1 {
-    get {
-      if (_CustomOutput1Offset == null) {
-        _CustomOutput1Offset = Schema.GetOffset(0x51A22D1199A5C5E2);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput1Offset!.Value);
+    public ref CEntityIOOutput CustomOutput2 {
+        get {
+            _CustomOutput2Offset = _CustomOutput2Offset ?? Schema.GetOffset(0x51A22D1198A5C44F);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput2Offset!.Value);
+        }
     }
-  }
-  private static nint? _CustomOutput2Offset;
+    private static nint? _CustomOutput3Offset;
 
-  public CEntityIOOutput CustomOutput2 {
-    get {
-      if (_CustomOutput2Offset == null) {
-        _CustomOutput2Offset = Schema.GetOffset(0x51A22D1198A5C44F);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput2Offset!.Value);
+    public ref CEntityIOOutput CustomOutput3 {
+        get {
+            _CustomOutput3Offset = _CustomOutput3Offset ?? Schema.GetOffset(0x51A22D1197A5C2BC);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput3Offset!.Value);
+        }
     }
-  }
-  private static nint? _CustomOutput3Offset;
+    private static nint? _CustomOutput4Offset;
 
-  public CEntityIOOutput CustomOutput3 {
-    get {
-      if (_CustomOutput3Offset == null) {
-        _CustomOutput3Offset = Schema.GetOffset(0x51A22D1197A5C2BC);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput3Offset!.Value);
+    public ref CEntityIOOutput CustomOutput4 {
+        get {
+            _CustomOutput4Offset = _CustomOutput4Offset ?? Schema.GetOffset(0x51A22D1196A5C129);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput4Offset!.Value);
+        }
     }
-  }
-  private static nint? _CustomOutput4Offset;
+    private static nint? _CustomOutput5Offset;
 
-  public CEntityIOOutput CustomOutput4 {
-    get {
-      if (_CustomOutput4Offset == null) {
-        _CustomOutput4Offset = Schema.GetOffset(0x51A22D1196A5C129);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput4Offset!.Value);
+    public ref CEntityIOOutput CustomOutput5 {
+        get {
+            _CustomOutput5Offset = _CustomOutput5Offset ?? Schema.GetOffset(0x51A22D1195A5BF96);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput5Offset!.Value);
+        }
     }
-  }
-  private static nint? _CustomOutput5Offset;
+    private static nint? _CustomOutput6Offset;
 
-  public CEntityIOOutput CustomOutput5 {
-    get {
-      if (_CustomOutput5Offset == null) {
-        _CustomOutput5Offset = Schema.GetOffset(0x51A22D1195A5BF96);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput5Offset!.Value);
+    public ref CEntityIOOutput CustomOutput6 {
+        get {
+            _CustomOutput6Offset = _CustomOutput6Offset ?? Schema.GetOffset(0x51A22D1194A5BE03);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput6Offset!.Value);
+        }
     }
-  }
-  private static nint? _CustomOutput6Offset;
+    private static nint? _CustomOutput7Offset;
 
-  public CEntityIOOutput CustomOutput6 {
-    get {
-      if (_CustomOutput6Offset == null) {
-        _CustomOutput6Offset = Schema.GetOffset(0x51A22D1194A5BE03);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput6Offset!.Value);
+    public ref CEntityIOOutput CustomOutput7 {
+        get {
+            _CustomOutput7Offset = _CustomOutput7Offset ?? Schema.GetOffset(0x51A22D1193A5BC70);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput7Offset!.Value);
+        }
     }
-  }
-  private static nint? _CustomOutput7Offset;
+    private static nint? _CustomOutput8Offset;
 
-  public CEntityIOOutput CustomOutput7 {
-    get {
-      if (_CustomOutput7Offset == null) {
-        _CustomOutput7Offset = Schema.GetOffset(0x51A22D1193A5BC70);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput7Offset!.Value);
+    public ref CEntityIOOutput CustomOutput8 {
+        get {
+            _CustomOutput8Offset = _CustomOutput8Offset ?? Schema.GetOffset(0x51A22D11A2A5D40D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput8Offset!.Value);
+        }
     }
-  }
-  private static nint? _CustomOutput8Offset;
+    private static nint? _CustomOutput9Offset;
 
-  public CEntityIOOutput CustomOutput8 {
-    get {
-      if (_CustomOutput8Offset == null) {
-        _CustomOutput8Offset = Schema.GetOffset(0x51A22D11A2A5D40D);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput8Offset!.Value);
+    public ref CEntityIOOutput CustomOutput9 {
+        get {
+            _CustomOutput9Offset = _CustomOutput9Offset ?? Schema.GetOffset(0x51A22D11A1A5D27A);
+            return ref _Handle.AsRef<CEntityIOOutput>(_CustomOutput9Offset!.Value);
+        }
     }
-  }
-  private static nint? _CustomOutput9Offset;
 
-  public CEntityIOOutput CustomOutput9 {
-    get {
-      if (_CustomOutput9Offset == null) {
-        _CustomOutput9Offset = Schema.GetOffset(0x51A22D11A1A5D27A);
-      }
-      return new CEntityIOOutputImpl(_Handle + _CustomOutput9Offset!.Value);
-    }
-  }
-
-  public void EnabledUpdated() {
-    Schema.Update(_Handle, 0x51A22D116154EB7E);
-  }
-  public void DialogXMLNameUpdated() {
-    Schema.Update(_Handle, 0x51A22D11D13858C9);
-  }
-  public void PanelClassNameUpdated() {
-    Schema.Update(_Handle, 0x51A22D115C958CBC);
-  }
-  public void PanelIDUpdated() {
-    Schema.Update(_Handle, 0x51A22D1107A4EF60);
-  }
+    public void EnabledUpdated() => Schema.Update(_Handle, 0x51A22D116154EB7E);
+    public void DialogXMLNameUpdated() => Schema.Update(_Handle, 0x51A22D11D13858C9);
+    public void PanelClassNameUpdated() => Schema.Update(_Handle, 0x51A22D115C958CBC);
+    public void PanelIDUpdated() => Schema.Update(_Handle, 0x51A22D1107A4EF60);
 }

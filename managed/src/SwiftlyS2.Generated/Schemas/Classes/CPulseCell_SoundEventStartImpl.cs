@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_SoundEventStartImpl : CPulseCell_BaseFlowImpl, CPulseCell_SoundEventStart {
+internal partial class CPulseCell_SoundEventStartImpl : CPulseCell_BaseFlowImpl, CPulseCell_SoundEventStart
+{
+    public CPulseCell_SoundEventStartImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_SoundEventStartImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref SoundEventStartType_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x9CC546478ED6D5CD);
-      }
-      return ref _Handle.AsRef<SoundEventStartType_t>(_TypeOffset!.Value);
+    public ref SoundEventStartType_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x9CC546478ED6D5CD);
+            return ref _Handle.AsRef<SoundEventStartType_t>(_TypeOffset!.Value);
+        }
     }
-  }
 
 
 }

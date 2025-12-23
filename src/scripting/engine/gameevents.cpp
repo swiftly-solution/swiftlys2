@@ -1,6 +1,6 @@
 /************************************************************************************************
  * SwiftlyS2 is a scripting framework for Source2-based games.
- * Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ * Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -171,24 +171,24 @@ uint64_t Bridge_GameEvents_AddListenerPreCallback(void* callback)
 {
     static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
     return eventmanager->AddGameEventFireListener([callback](std::string event_name, IGameEvent* event, bool& dont_broadcast) -> int
-    {
-        auto hash = hash_32_fnv1a_const(event_name.c_str());
-        typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
-        auto cb = reinterpret_cast<CallbackType>(callback);
-        return cb(hash, event, &dont_broadcast);
-    });
+        {
+            auto hash = hash_32_fnv1a_const(event_name.c_str());
+            typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
+            auto cb = reinterpret_cast<CallbackType>(callback);
+            return cb(hash, event, &dont_broadcast);
+        });
 }
 
 uint64_t Bridge_GameEvents_AddListenerPostCallback(void* callback)
 {
     static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
     return eventmanager->AddPostGameEventFireListener([callback](std::string event_name, IGameEvent* event, bool& dont_broadcast) -> int
-    {
-        auto hash = hash_32_fnv1a_const(event_name.c_str());
-        typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
-        auto cb = reinterpret_cast<CallbackType>(callback);
-        return cb(hash, event, &dont_broadcast);
-    });
+        {
+            auto hash = hash_32_fnv1a_const(event_name.c_str());
+            typedef int (*CallbackType)(uint32_t hash, void* event, bool* dont_broadcast);
+            auto cb = reinterpret_cast<CallbackType>(callback);
+            return cb(hash, event, &dont_broadcast);
+        });
 }
 
 void Bridge_GameEvents_RemoveListenerPreCallback(uint64_t listener_id)

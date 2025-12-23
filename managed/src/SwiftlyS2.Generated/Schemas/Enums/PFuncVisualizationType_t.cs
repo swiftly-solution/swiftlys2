@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PFuncVisualizationType_t : uint {
-
+public enum PFuncVisualizationType_t : uint
+{
  PFUNC_VISUALIZATION_SPHERE_WIREFRAME = 0,
 
  PFUNC_VISUALIZATION_SPHERE_SOLID = 1,

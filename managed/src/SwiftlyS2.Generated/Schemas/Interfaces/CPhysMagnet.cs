@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysMagnet : CBaseAnimGraph, ISchemaClass<CPhysMagnet> {
+public partial interface CPhysMagnet : CBaseAnimGraph, ISchemaClass<CPhysMagnet>
+{
+    static CPhysMagnet ISchemaClass<CPhysMagnet>.From(nint handle) => new CPhysMagnetImpl(handle);
+    static int ISchemaClass<CPhysMagnet>.Size => 2848;
+    static string? ISchemaClass<CPhysMagnet>.ClassName => "phys_magnet";
 
-  static CPhysMagnet ISchemaClass<CPhysMagnet>.From(nint handle) => new CPhysMagnetImpl(handle);
-  static int ISchemaClass<CPhysMagnet>.Size => 2848;
-  static string? ISchemaClass<CPhysMagnet>.ClassName => "phys_magnet";
 
-  
-  public CEntityIOOutput OnMagnetAttach { get; }
-  
-  public CEntityIOOutput OnMagnetDetach { get; }
-  
-  public ref float MassScale { get; }
-  
-  public ref float ForceLimit { get; }
-  
-  public ref float TorqueLimit { get; }
-  
-  public ref CUtlVector<magnetted_objects_t> MagnettedEntities { get; }
-  
-  public ref bool Active { get; }
-  
-  public ref bool HasHitSomething { get; }
-  
-  public ref float TotalMass { get; }
-  
-  public ref float Radius { get; }
-  
-  public GameTime_t NextSuckTime { get; }
-  
-  public ref int MaxObjectsAttached { get; }
+    public ref CEntityIOOutput OnMagnetAttach { get; }
+
+    public ref CEntityIOOutput OnMagnetDetach { get; }
+
+    public ref float MassScale { get; }
+
+    public ref float ForceLimit { get; }
+
+    public ref float TorqueLimit { get; }
+
+    public ref CUtlVector<magnetted_objects_t> MagnettedEntities { get; }
+
+    public ref bool Active { get; }
+
+    public ref bool HasHitSomething { get; }
+
+    public ref float TotalMass { get; }
+
+    public ref float Radius { get; }
+
+    public GameTime_t NextSuckTime { get; }
+
+    public ref int MaxObjectsAttached { get; }
 
 
 }

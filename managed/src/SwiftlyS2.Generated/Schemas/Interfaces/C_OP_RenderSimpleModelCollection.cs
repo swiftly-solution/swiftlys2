@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderSimpleModelCollection : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderSimpleModelCollection> {
+public partial interface C_OP_RenderSimpleModelCollection : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderSimpleModelCollection>
+{
+    static C_OP_RenderSimpleModelCollection ISchemaClass<C_OP_RenderSimpleModelCollection>.From(nint handle) => new C_OP_RenderSimpleModelCollectionImpl(handle);
+    static int ISchemaClass<C_OP_RenderSimpleModelCollection>.Size => 1424;
+    static string? ISchemaClass<C_OP_RenderSimpleModelCollection>.ClassName => null;
 
-  static C_OP_RenderSimpleModelCollection ISchemaClass<C_OP_RenderSimpleModelCollection>.From(nint handle) => new C_OP_RenderSimpleModelCollectionImpl(handle);
-  static int ISchemaClass<C_OP_RenderSimpleModelCollection>.Size => 1424;
-  static string? ISchemaClass<C_OP_RenderSimpleModelCollection>.ClassName => null;
 
-  
-  public ref bool CenterOffset { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-  
-  public CParticleModelInput ModelInput { get; }
-  
-  public CParticleCollectionFloatInput SizeCullScale { get; }
-  
-  public ref bool DisableShadows { get; }
-  
-  public ref bool DisableMotionBlur { get; }
-  
-  public ref bool AcceptsDecals { get; }
-  
-  public CPerParticleFloatInput DrawFilter { get; }
-  
-  public ParticleAttributeIndex_t AngularVelocityField { get; }
+    public ref bool CenterOffset { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
+
+    public CParticleModelInput ModelInput { get; }
+
+    public CParticleCollectionFloatInput SizeCullScale { get; }
+
+    public ref bool DisableShadows { get; }
+
+    public ref bool DisableMotionBlur { get; }
+
+    public ref bool AcceptsDecals { get; }
+
+    public CPerParticleFloatInput DrawFilter { get; }
+
+    public ParticleAttributeIndex_t AngularVelocityField { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerBlender : CVoiceContainerBase, ISchemaClass<CVoiceContainerBlender> {
+public partial interface CVoiceContainerBlender : CVoiceContainerBase, ISchemaClass<CVoiceContainerBlender>
+{
+    static CVoiceContainerBlender ISchemaClass<CVoiceContainerBlender>.From(nint handle) => new CVoiceContainerBlenderImpl(handle);
+    static int ISchemaClass<CVoiceContainerBlender>.Size => 240;
+    static string? ISchemaClass<CVoiceContainerBlender>.ClassName => null;
 
-  static CVoiceContainerBlender ISchemaClass<CVoiceContainerBlender>.From(nint handle) => new CVoiceContainerBlenderImpl(handle);
-  static int ISchemaClass<CVoiceContainerBlender>.Size => 240;
-  static string? ISchemaClass<CVoiceContainerBlender>.ClassName => null;
 
-  
-  public CSoundContainerReference FirstSound { get; }
-  
-  public CSoundContainerReference SecondSound { get; }
-  
-  public ref float BlendFactor { get; }
+    public CSoundContainerReference FirstSound { get; }
+
+    public CSoundContainerReference SecondSound { get; }
+
+    public ref float BlendFactor { get; }
 
 
 }

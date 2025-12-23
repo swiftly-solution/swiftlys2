@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AimCameraOpFixedSettings_tImpl : SchemaClass, AimCameraOpFixedSettings_t {
+internal partial class AimCameraOpFixedSettings_tImpl : SchemaClass, AimCameraOpFixedSettings_t
+{
+    public AimCameraOpFixedSettings_tImpl(nint handle) : base(handle) { }
 
-  public AimCameraOpFixedSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChainIndexOffset;
 
-  private static nint? _ChainIndexOffset;
-
-  public ref int ChainIndex {
-    get {
-      if (_ChainIndexOffset == null) {
-        _ChainIndexOffset = Schema.GetOffset(0xA3971F52A34589B6);
-      }
-      return ref _Handle.AsRef<int>(_ChainIndexOffset!.Value);
+    public ref int ChainIndex {
+        get {
+            _ChainIndexOffset = _ChainIndexOffset ?? Schema.GetOffset(0xA3971F52A34589B6);
+            return ref _Handle.AsRef<int>(_ChainIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _CameraJointIndexOffset;
+    private static nint? _CameraJointIndexOffset;
 
-  public ref int CameraJointIndex {
-    get {
-      if (_CameraJointIndexOffset == null) {
-        _CameraJointIndexOffset = Schema.GetOffset(0xA3971F52346981DA);
-      }
-      return ref _Handle.AsRef<int>(_CameraJointIndexOffset!.Value);
+    public ref int CameraJointIndex {
+        get {
+            _CameraJointIndexOffset = _CameraJointIndexOffset ?? Schema.GetOffset(0xA3971F52346981DA);
+            return ref _Handle.AsRef<int>(_CameraJointIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _PelvisJointIndexOffset;
+    private static nint? _PelvisJointIndexOffset;
 
-  public ref int PelvisJointIndex {
-    get {
-      if (_PelvisJointIndexOffset == null) {
-        _PelvisJointIndexOffset = Schema.GetOffset(0xA3971F52800F5FB4);
-      }
-      return ref _Handle.AsRef<int>(_PelvisJointIndexOffset!.Value);
+    public ref int PelvisJointIndex {
+        get {
+            _PelvisJointIndexOffset = _PelvisJointIndexOffset ?? Schema.GetOffset(0xA3971F52800F5FB4);
+            return ref _Handle.AsRef<int>(_PelvisJointIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClavicleLeftJointIndexOffset;
+    private static nint? _ClavicleLeftJointIndexOffset;
 
-  public ref int ClavicleLeftJointIndex {
-    get {
-      if (_ClavicleLeftJointIndexOffset == null) {
-        _ClavicleLeftJointIndexOffset = Schema.GetOffset(0xA3971F5207F7ABDB);
-      }
-      return ref _Handle.AsRef<int>(_ClavicleLeftJointIndexOffset!.Value);
+    public ref int ClavicleLeftJointIndex {
+        get {
+            _ClavicleLeftJointIndexOffset = _ClavicleLeftJointIndexOffset ?? Schema.GetOffset(0xA3971F5207F7ABDB);
+            return ref _Handle.AsRef<int>(_ClavicleLeftJointIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClavicleRightJointIndexOffset;
+    private static nint? _ClavicleRightJointIndexOffset;
 
-  public ref int ClavicleRightJointIndex {
-    get {
-      if (_ClavicleRightJointIndexOffset == null) {
-        _ClavicleRightJointIndexOffset = Schema.GetOffset(0xA3971F522F2C40A4);
-      }
-      return ref _Handle.AsRef<int>(_ClavicleRightJointIndexOffset!.Value);
+    public ref int ClavicleRightJointIndex {
+        get {
+            _ClavicleRightJointIndexOffset = _ClavicleRightJointIndexOffset ?? Schema.GetOffset(0xA3971F522F2C40A4);
+            return ref _Handle.AsRef<int>(_ClavicleRightJointIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _DepenetrationJointIndexOffset;
+    private static nint? _DepenetrationJointIndexOffset;
 
-  public ref int DepenetrationJointIndex {
-    get {
-      if (_DepenetrationJointIndexOffset == null) {
-        _DepenetrationJointIndexOffset = Schema.GetOffset(0xA3971F526307286F);
-      }
-      return ref _Handle.AsRef<int>(_DepenetrationJointIndexOffset!.Value);
+    public ref int DepenetrationJointIndex {
+        get {
+            _DepenetrationJointIndexOffset = _DepenetrationJointIndexOffset ?? Schema.GetOffset(0xA3971F526307286F);
+            return ref _Handle.AsRef<int>(_DepenetrationJointIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _PropJointsOffset;
+    private static nint? _PropJointsOffset;
 
-  public ref CUtlVector<int> PropJoints {
-    get {
-      if (_PropJointsOffset == null) {
-        _PropJointsOffset = Schema.GetOffset(0xA3971F5224880565);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_PropJointsOffset!.Value);
+    public ref CUtlVector<int> PropJoints {
+        get {
+            _PropJointsOffset = _PropJointsOffset ?? Schema.GetOffset(0xA3971F5224880565);
+            return ref _Handle.AsRef<CUtlVector<int>>(_PropJointsOffset!.Value);
+        }
     }
-  }
 
 
 }

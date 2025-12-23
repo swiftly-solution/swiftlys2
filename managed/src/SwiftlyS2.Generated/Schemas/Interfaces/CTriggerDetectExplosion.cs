@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerDetectExplosion : CBaseTrigger, ISchemaClass<CTriggerDetectExplosion> {
+public partial interface CTriggerDetectExplosion : CBaseTrigger, ISchemaClass<CTriggerDetectExplosion>
+{
+    static CTriggerDetectExplosion ISchemaClass<CTriggerDetectExplosion>.From(nint handle) => new CTriggerDetectExplosionImpl(handle);
+    static int ISchemaClass<CTriggerDetectExplosion>.Size => 2544;
+    static string? ISchemaClass<CTriggerDetectExplosion>.ClassName => "trigger_detect_explosion";
 
-  static CTriggerDetectExplosion ISchemaClass<CTriggerDetectExplosion>.From(nint handle) => new CTriggerDetectExplosionImpl(handle);
-  static int ISchemaClass<CTriggerDetectExplosion>.Size => 2544;
-  static string? ISchemaClass<CTriggerDetectExplosion>.ClassName => "trigger_detect_explosion";
 
-  
-  public CEntityIOOutput OnDetectedExplosion { get; }
+    public ref CEntityIOOutput OnDetectedExplosion { get; }
 
 
 }

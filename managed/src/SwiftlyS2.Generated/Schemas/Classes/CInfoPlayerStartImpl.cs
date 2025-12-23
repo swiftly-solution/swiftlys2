@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInfoPlayerStartImpl : CPointEntityImpl, CInfoPlayerStart {
+internal partial class CInfoPlayerStartImpl : CPointEntityImpl, CInfoPlayerStart
+{
+    public CInfoPlayerStartImpl(nint handle) : base(handle) { }
 
-  public CInfoPlayerStartImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DisabledOffset;
 
-  private static nint? _DisabledOffset;
-
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0xE0799D713A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xE0799D713A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsMasterOffset;
+    private static nint? _IsMasterOffset;
 
-  public ref bool IsMaster {
-    get {
-      if (_IsMasterOffset == null) {
-        _IsMasterOffset = Schema.GetOffset(0xE0799D71DE5719A3);
-      }
-      return ref _Handle.AsRef<bool>(_IsMasterOffset!.Value);
+    public ref bool IsMaster {
+        get {
+            _IsMasterOffset = _IsMasterOffset ?? Schema.GetOffset(0xE0799D71DE5719A3);
+            return ref _Handle.AsRef<bool>(_IsMasterOffset!.Value);
+        }
     }
-  }
-  private static nint? _PawnSubclassOffset;
+    private static nint? _PawnSubclassOffset;
 
-  public ref CGlobalSymbol PawnSubclass {
-    get {
-      if (_PawnSubclassOffset == null) {
-        _PawnSubclassOffset = Schema.GetOffset(0xE0799D7190AFB5EF);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_PawnSubclassOffset!.Value);
+    public ref CGlobalSymbol PawnSubclass {
+        get {
+            _PawnSubclassOffset = _PawnSubclassOffset ?? Schema.GetOffset(0xE0799D7190AFB5EF);
+            return ref _Handle.AsRef<CGlobalSymbol>(_PawnSubclassOffset!.Value);
+        }
     }
-  }
 
 
 }

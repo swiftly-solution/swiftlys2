@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_VelocityDecay : CParticleFunctionOperator, ISchemaClass<C_OP_VelocityDecay> {
+public partial interface C_OP_VelocityDecay : CParticleFunctionOperator, ISchemaClass<C_OP_VelocityDecay>
+{
+    static C_OP_VelocityDecay ISchemaClass<C_OP_VelocityDecay>.From(nint handle) => new C_OP_VelocityDecayImpl(handle);
+    static int ISchemaClass<C_OP_VelocityDecay>.Size => 472;
+    static string? ISchemaClass<C_OP_VelocityDecay>.ClassName => null;
 
-  static C_OP_VelocityDecay ISchemaClass<C_OP_VelocityDecay>.From(nint handle) => new C_OP_VelocityDecayImpl(handle);
-  static int ISchemaClass<C_OP_VelocityDecay>.Size => 472;
-  static string? ISchemaClass<C_OP_VelocityDecay>.ClassName => null;
 
-  
-  public ref float MinVelocity { get; }
+    public ref float MinVelocity { get; }
 
 
 }

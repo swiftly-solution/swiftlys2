@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ClientPhysics : CParticleFunctionRenderer, ISchemaClass<C_OP_ClientPhysics> {
+public partial interface C_OP_ClientPhysics : CParticleFunctionRenderer, ISchemaClass<C_OP_ClientPhysics>
+{
+    static C_OP_ClientPhysics ISchemaClass<C_OP_ClientPhysics>.From(nint handle) => new C_OP_ClientPhysicsImpl(handle);
+    static int ISchemaClass<C_OP_ClientPhysics>.Size => 1328;
+    static string? ISchemaClass<C_OP_ClientPhysics>.ClassName => null;
 
-  static C_OP_ClientPhysics ISchemaClass<C_OP_ClientPhysics>.From(nint handle) => new C_OP_ClientPhysicsImpl(handle);
-  static int ISchemaClass<C_OP_ClientPhysics>.Size => 1328;
-  static string? ISchemaClass<C_OP_ClientPhysics>.ClassName => null;
 
-  
-  public string StrPhysicsType { get; set; }
-  
-  public ref bool StartAsleep { get; }
-  
-  public CParticleCollectionFloatInput PlayerWakeRadius { get; }
-  
-  public CParticleCollectionFloatInput VehicleWakeRadius { get; }
-  
-  public ref bool UseHighQualitySimulation { get; }
-  
-  public ref int MaxParticleCount { get; }
-  
-  public ref bool RespectExclusionVolumes { get; }
-  
-  public ref bool KillParticles { get; }
-  
-  public ref bool DeleteSim { get; }
-  
-  public ref int ControlPoint { get; }
-  
-  public ref int ForcedSimId { get; }
-  
-  public ref ParticleColorBlendType_t ColorBlendType { get; }
-  
-  public ref ParticleAttrBoxFlags_t ForcedStatusEffects { get; }
+    public string StrPhysicsType { get; set; }
+
+    public ref bool StartAsleep { get; }
+
+    public CParticleCollectionFloatInput PlayerWakeRadius { get; }
+
+    public CParticleCollectionFloatInput VehicleWakeRadius { get; }
+
+    public ref bool UseHighQualitySimulation { get; }
+
+    public ref int MaxParticleCount { get; }
+
+    public ref bool RespectExclusionVolumes { get; }
+
+    public ref bool KillParticles { get; }
+
+    public ref bool DeleteSim { get; }
+
+    public ref int ControlPoint { get; }
+
+    public ref int ForcedSimId { get; }
+
+    public ref ParticleColorBlendType_t ColorBlendType { get; }
+
+    public ref ParticleAttrBoxFlags_t ForcedStatusEffects { get; }
 
 
 }

@@ -8,29 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMovementComponentUpdater : CAnimComponentUpdater, ISchemaClass<CMovementComponentUpdater> {
+public partial interface CMovementComponentUpdater : CAnimComponentUpdater, ISchemaClass<CMovementComponentUpdater>
+{
+    static CMovementComponentUpdater ISchemaClass<CMovementComponentUpdater>.From(nint handle) => new CMovementComponentUpdaterImpl(handle);
+    static int ISchemaClass<CMovementComponentUpdater>.Size => 184;
+    static string? ISchemaClass<CMovementComponentUpdater>.ClassName => null;
 
-  static CMovementComponentUpdater ISchemaClass<CMovementComponentUpdater>.From(nint handle) => new CMovementComponentUpdaterImpl(handle);
-  static int ISchemaClass<CMovementComponentUpdater>.Size => 184;
-  static string? ISchemaClass<CMovementComponentUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<SchemaUntypedField> Motors { get; }
-  
-  public CAnimInputDamping FacingDamping { get; }
-  
-  public ref int DefaultMotorIndex { get; }
-  
-  public ref float DefaultRunSpeed { get; }
-  
-  public ref bool MoveVarsDisabled { get; }
-  
-  public ref bool NetworkPath { get; }
-  
-  public ref bool NetworkFacing { get; }
-  
-  // CAnimParamHandle
-  public SchemaUntypedField ParamHandles { get; }
+    public ref CUtlVector<SchemaUntypedField> Motors { get; }
+
+    public CAnimInputDamping FacingDamping { get; }
+
+    public ref int DefaultMotorIndex { get; }
+
+    public ref float DefaultRunSpeed { get; }
+
+    public ref bool MoveVarsDisabled { get; }
+
+    public ref bool NetworkPath { get; }
+
+    public ref bool NetworkFacing { get; }
+
+    public ISchemaClassFixedArray<CAnimParamHandle> ParamHandles { get; }
 
 
 }

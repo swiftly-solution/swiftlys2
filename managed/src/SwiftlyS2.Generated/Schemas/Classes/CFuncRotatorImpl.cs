@@ -6,374 +6,300 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator {
+internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
+{
+    public CFuncRotatorImpl(nint handle) : base(handle) { }
 
-  public CFuncRotatorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RotatorTargetOffset;
 
-  private static nint? _RotatorTargetOffset;
-
-  public ref CHandle<CBaseEntity> RotatorTarget {
-    get {
-      if (_RotatorTargetOffset == null) {
-        _RotatorTargetOffset = Schema.GetOffset(0x73DA1BB9F324C519);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_RotatorTargetOffset!.Value);
+    public ref CHandle<CBaseEntity> RotatorTarget {
+        get {
+            _RotatorTargetOffset = _RotatorTargetOffset ?? Schema.GetOffset(0x73DA1BB9F324C519);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_RotatorTargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsRotatingOffset;
+    private static nint? _IsRotatingOffset;
 
-  public ref bool IsRotating {
-    get {
-      if (_IsRotatingOffset == null) {
-        _IsRotatingOffset = Schema.GetOffset(0x73DA1BB94C9E159D);
-      }
-      return ref _Handle.AsRef<bool>(_IsRotatingOffset!.Value);
+    public ref bool IsRotating {
+        get {
+            _IsRotatingOffset = _IsRotatingOffset ?? Schema.GetOffset(0x73DA1BB94C9E159D);
+            return ref _Handle.AsRef<bool>(_IsRotatingOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsReversingOffset;
+    private static nint? _IsReversingOffset;
 
-  public ref bool IsReversing {
-    get {
-      if (_IsReversingOffset == null) {
-        _IsReversingOffset = Schema.GetOffset(0x73DA1BB9899E5BEE);
-      }
-      return ref _Handle.AsRef<bool>(_IsReversingOffset!.Value);
+    public ref bool IsReversing {
+        get {
+            _IsReversingOffset = _IsReversingOffset ?? Schema.GetOffset(0x73DA1BB9899E5BEE);
+            return ref _Handle.AsRef<bool>(_IsReversingOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeToReachMaxSpeedOffset;
+    private static nint? _TimeToReachMaxSpeedOffset;
 
-  public ref float TimeToReachMaxSpeed {
-    get {
-      if (_TimeToReachMaxSpeedOffset == null) {
-        _TimeToReachMaxSpeedOffset = Schema.GetOffset(0x73DA1BB99452902F);
-      }
-      return ref _Handle.AsRef<float>(_TimeToReachMaxSpeedOffset!.Value);
+    public ref float TimeToReachMaxSpeed {
+        get {
+            _TimeToReachMaxSpeedOffset = _TimeToReachMaxSpeedOffset ?? Schema.GetOffset(0x73DA1BB99452902F);
+            return ref _Handle.AsRef<float>(_TimeToReachMaxSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeToReachZeroSpeedOffset;
+    private static nint? _TimeToReachZeroSpeedOffset;
 
-  public ref float TimeToReachZeroSpeed {
-    get {
-      if (_TimeToReachZeroSpeedOffset == null) {
-        _TimeToReachZeroSpeedOffset = Schema.GetOffset(0x73DA1BB9816228FB);
-      }
-      return ref _Handle.AsRef<float>(_TimeToReachZeroSpeedOffset!.Value);
+    public ref float TimeToReachZeroSpeed {
+        get {
+            _TimeToReachZeroSpeedOffset = _TimeToReachZeroSpeedOffset ?? Schema.GetOffset(0x73DA1BB9816228FB);
+            return ref _Handle.AsRef<float>(_TimeToReachZeroSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceAlongArcTraveledOffset;
+    private static nint? _DistanceAlongArcTraveledOffset;
 
-  public ref float DistanceAlongArcTraveled {
-    get {
-      if (_DistanceAlongArcTraveledOffset == null) {
-        _DistanceAlongArcTraveledOffset = Schema.GetOffset(0x73DA1BB9AF2FCEDE);
-      }
-      return ref _Handle.AsRef<float>(_DistanceAlongArcTraveledOffset!.Value);
+    public ref float DistanceAlongArcTraveled {
+        get {
+            _DistanceAlongArcTraveledOffset = _DistanceAlongArcTraveledOffset ?? Schema.GetOffset(0x73DA1BB9AF2FCEDE);
+            return ref _Handle.AsRef<float>(_DistanceAlongArcTraveledOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeToWaitOscillateOffset;
+    private static nint? _TimeToWaitOscillateOffset;
 
-  public ref float TimeToWaitOscillate {
-    get {
-      if (_TimeToWaitOscillateOffset == null) {
-        _TimeToWaitOscillateOffset = Schema.GetOffset(0x73DA1BB96E3B4BF4);
-      }
-      return ref _Handle.AsRef<float>(_TimeToWaitOscillateOffset!.Value);
+    public ref float TimeToWaitOscillate {
+        get {
+            _TimeToWaitOscillateOffset = _TimeToWaitOscillateOffset ?? Schema.GetOffset(0x73DA1BB96E3B4BF4);
+            return ref _Handle.AsRef<float>(_TimeToWaitOscillateOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeRotationStartOffset;
+    private static nint? _TimeRotationStartOffset;
 
-  public GameTime_t TimeRotationStart {
-    get {
-      if (_TimeRotationStartOffset == null) {
-        _TimeRotationStartOffset = Schema.GetOffset(0x73DA1BB952C0B2E8);
-      }
-      return new GameTime_tImpl(_Handle + _TimeRotationStartOffset!.Value);
+    public GameTime_t TimeRotationStart {
+        get {
+            _TimeRotationStartOffset = _TimeRotationStartOffset ?? Schema.GetOffset(0x73DA1BB952C0B2E8);
+            return new GameTime_tImpl(_Handle + _TimeRotationStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _LSPrevChangeOffset;
+    private static nint? _LSPrevChangeOffset;
 
-  public ref Quaternion LSPrevChange {
-    get {
-      if (_LSPrevChangeOffset == null) {
-        _LSPrevChangeOffset = Schema.GetOffset(0x73DA1BB9BC15BD54);
-      }
-      return ref _Handle.AsRef<Quaternion>(_LSPrevChangeOffset!.Value);
+    public ref Quaternion LSPrevChange {
+        get {
+            _LSPrevChangeOffset = _LSPrevChangeOffset ?? Schema.GetOffset(0x73DA1BB9BC15BD54);
+            return ref _Handle.AsRef<Quaternion>(_LSPrevChangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WSPrevOffset;
+    private static nint? _WSPrevOffset;
 
-  public ref Quaternion WSPrev {
-    get {
-      if (_WSPrevOffset == null) {
-        _WSPrevOffset = Schema.GetOffset(0x73DA1BB9C3EEEFFB);
-      }
-      return ref _Handle.AsRef<Quaternion>(_WSPrevOffset!.Value);
+    public ref Quaternion WSPrev {
+        get {
+            _WSPrevOffset = _WSPrevOffset ?? Schema.GetOffset(0x73DA1BB9C3EEEFFB);
+            return ref _Handle.AsRef<Quaternion>(_WSPrevOffset!.Value);
+        }
     }
-  }
-  private static nint? _WSInitOffset;
+    private static nint? _WSInitOffset;
 
-  public ref Quaternion WSInit {
-    get {
-      if (_WSInitOffset == null) {
-        _WSInitOffset = Schema.GetOffset(0x73DA1BB99E7E023C);
-      }
-      return ref _Handle.AsRef<Quaternion>(_WSInitOffset!.Value);
+    public ref Quaternion WSInit {
+        get {
+            _WSInitOffset = _WSInitOffset ?? Schema.GetOffset(0x73DA1BB99E7E023C);
+            return ref _Handle.AsRef<Quaternion>(_WSInitOffset!.Value);
+        }
     }
-  }
-  private static nint? _LSInitOffset;
+    private static nint? _LSInitOffset;
 
-  public ref Quaternion LSInit {
-    get {
-      if (_LSInitOffset == null) {
-        _LSInitOffset = Schema.GetOffset(0x73DA1BB966C62507);
-      }
-      return ref _Handle.AsRef<Quaternion>(_LSInitOffset!.Value);
+    public ref Quaternion LSInit {
+        get {
+            _LSInitOffset = _LSInitOffset ?? Schema.GetOffset(0x73DA1BB966C62507);
+            return ref _Handle.AsRef<Quaternion>(_LSInitOffset!.Value);
+        }
     }
-  }
-  private static nint? _LSOrientationOffset;
+    private static nint? _LSOrientationOffset;
 
-  public ref Quaternion LSOrientation {
-    get {
-      if (_LSOrientationOffset == null) {
-        _LSOrientationOffset = Schema.GetOffset(0x73DA1BB9BD794B25);
-      }
-      return ref _Handle.AsRef<Quaternion>(_LSOrientationOffset!.Value);
+    public ref Quaternion LSOrientation {
+        get {
+            _LSOrientationOffset = _LSOrientationOffset ?? Schema.GetOffset(0x73DA1BB9BD794B25);
+            return ref _Handle.AsRef<Quaternion>(_LSOrientationOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnRotationStartedOffset;
+    private static nint? _OnRotationStartedOffset;
 
-  public CEntityIOOutput OnRotationStarted {
-    get {
-      if (_OnRotationStartedOffset == null) {
-        _OnRotationStartedOffset = Schema.GetOffset(0x73DA1BB9A2961697);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnRotationStartedOffset!.Value);
+    public ref CEntityIOOutput OnRotationStarted {
+        get {
+            _OnRotationStartedOffset = _OnRotationStartedOffset ?? Schema.GetOffset(0x73DA1BB9A2961697);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRotationStartedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnRotationCompletedOffset;
+    private static nint? _OnRotationCompletedOffset;
 
-  public CEntityIOOutput OnRotationCompleted {
-    get {
-      if (_OnRotationCompletedOffset == null) {
-        _OnRotationCompletedOffset = Schema.GetOffset(0x73DA1BB90478C90B);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnRotationCompletedOffset!.Value);
+    public ref CEntityIOOutput OnRotationCompleted {
+        get {
+            _OnRotationCompletedOffset = _OnRotationCompletedOffset ?? Schema.GetOffset(0x73DA1BB90478C90B);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRotationCompletedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnOscillateOffset;
+    private static nint? _OnOscillateOffset;
 
-  public CEntityIOOutput OnOscillate {
-    get {
-      if (_OnOscillateOffset == null) {
-        _OnOscillateOffset = Schema.GetOffset(0x73DA1BB931B79B92);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnOscillateOffset!.Value);
+    public ref CEntityIOOutput OnOscillate {
+        get {
+            _OnOscillateOffset = _OnOscillateOffset ?? Schema.GetOffset(0x73DA1BB931B79B92);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnOscillateStartArriveOffset;
+    private static nint? _OnOscillateStartArriveOffset;
 
-  public CEntityIOOutput OnOscillateStartArrive {
-    get {
-      if (_OnOscillateStartArriveOffset == null) {
-        _OnOscillateStartArriveOffset = Schema.GetOffset(0x73DA1BB996E9B88D);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnOscillateStartArriveOffset!.Value);
+    public ref CEntityIOOutput OnOscillateStartArrive {
+        get {
+            _OnOscillateStartArriveOffset = _OnOscillateStartArriveOffset ?? Schema.GetOffset(0x73DA1BB996E9B88D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateStartArriveOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnOscillateStartDepartOffset;
+    private static nint? _OnOscillateStartDepartOffset;
 
-  public CEntityIOOutput OnOscillateStartDepart {
-    get {
-      if (_OnOscillateStartDepartOffset == null) {
-        _OnOscillateStartDepartOffset = Schema.GetOffset(0x73DA1BB908C9CF2C);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnOscillateStartDepartOffset!.Value);
+    public ref CEntityIOOutput OnOscillateStartDepart {
+        get {
+            _OnOscillateStartDepartOffset = _OnOscillateStartDepartOffset ?? Schema.GetOffset(0x73DA1BB908C9CF2C);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateStartDepartOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnOscillateEndArriveOffset;
+    private static nint? _OnOscillateEndArriveOffset;
 
-  public CEntityIOOutput OnOscillateEndArrive {
-    get {
-      if (_OnOscillateEndArriveOffset == null) {
-        _OnOscillateEndArriveOffset = Schema.GetOffset(0x73DA1BB98F4F6014);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnOscillateEndArriveOffset!.Value);
+    public ref CEntityIOOutput OnOscillateEndArrive {
+        get {
+            _OnOscillateEndArriveOffset = _OnOscillateEndArriveOffset ?? Schema.GetOffset(0x73DA1BB98F4F6014);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateEndArriveOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnOscillateEndDepartOffset;
+    private static nint? _OnOscillateEndDepartOffset;
 
-  public CEntityIOOutput OnOscillateEndDepart {
-    get {
-      if (_OnOscillateEndDepartOffset == null) {
-        _OnOscillateEndDepartOffset = Schema.GetOffset(0x73DA1BB943D41D49);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnOscillateEndDepartOffset!.Value);
+    public ref CEntityIOOutput OnOscillateEndDepart {
+        get {
+            _OnOscillateEndDepartOffset = _OnOscillateEndDepartOffset ?? Schema.GetOffset(0x73DA1BB943D41D49);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnOscillateEndDepartOffset!.Value);
+        }
     }
-  }
-  private static nint? _OscillateDepartOffset;
+    private static nint? _OscillateDepartOffset;
 
-  public ref bool OscillateDepart {
-    get {
-      if (_OscillateDepartOffset == null) {
-        _OscillateDepartOffset = Schema.GetOffset(0x73DA1BB9CAB88EEB);
-      }
-      return ref _Handle.AsRef<bool>(_OscillateDepartOffset!.Value);
+    public ref bool OscillateDepart {
+        get {
+            _OscillateDepartOffset = _OscillateDepartOffset ?? Schema.GetOffset(0x73DA1BB9CAB88EEB);
+            return ref _Handle.AsRef<bool>(_OscillateDepartOffset!.Value);
+        }
     }
-  }
-  private static nint? _OscillateCountOffset;
+    private static nint? _OscillateCountOffset;
 
-  public ref int OscillateCount {
-    get {
-      if (_OscillateCountOffset == null) {
-        _OscillateCountOffset = Schema.GetOffset(0x73DA1BB9C2609150);
-      }
-      return ref _Handle.AsRef<int>(_OscillateCountOffset!.Value);
+    public ref int OscillateCount {
+        get {
+            _OscillateCountOffset = _OscillateCountOffset ?? Schema.GetOffset(0x73DA1BB9C2609150);
+            return ref _Handle.AsRef<int>(_OscillateCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotateTypeOffset;
+    private static nint? _RotateTypeOffset;
 
-  public ref CFuncRotator__Rotate_t RotateType {
-    get {
-      if (_RotateTypeOffset == null) {
-        _RotateTypeOffset = Schema.GetOffset(0x73DA1BB94BD69967);
-      }
-      return ref _Handle.AsRef<CFuncRotator__Rotate_t>(_RotateTypeOffset!.Value);
+    public ref CFuncRotator__Rotate_t RotateType {
+        get {
+            _RotateTypeOffset = _RotateTypeOffset ?? Schema.GetOffset(0x73DA1BB94BD69967);
+            return ref _Handle.AsRef<CFuncRotator__Rotate_t>(_RotateTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevRotateTypeOffset;
+    private static nint? _PrevRotateTypeOffset;
 
-  public ref CFuncRotator__Rotate_t PrevRotateType {
-    get {
-      if (_PrevRotateTypeOffset == null) {
-        _PrevRotateTypeOffset = Schema.GetOffset(0x73DA1BB9DB4BE282);
-      }
-      return ref _Handle.AsRef<CFuncRotator__Rotate_t>(_PrevRotateTypeOffset!.Value);
+    public ref CFuncRotator__Rotate_t PrevRotateType {
+        get {
+            _PrevRotateTypeOffset = _PrevRotateTypeOffset ?? Schema.GetOffset(0x73DA1BB9DB4BE282);
+            return ref _Handle.AsRef<CFuncRotator__Rotate_t>(_PrevRotateTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasTargetOverrideOffset;
+    private static nint? _HasTargetOverrideOffset;
 
-  public ref bool HasTargetOverride {
-    get {
-      if (_HasTargetOverrideOffset == null) {
-        _HasTargetOverrideOffset = Schema.GetOffset(0x73DA1BB9E91C45E6);
-      }
-      return ref _Handle.AsRef<bool>(_HasTargetOverrideOffset!.Value);
+    public ref bool HasTargetOverride {
+        get {
+            _HasTargetOverrideOffset = _HasTargetOverrideOffset ?? Schema.GetOffset(0x73DA1BB9E91C45E6);
+            return ref _Handle.AsRef<bool>(_HasTargetOverrideOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientationOverrideOffset;
+    private static nint? _OrientationOverrideOffset;
 
-  public ref Quaternion OrientationOverride {
-    get {
-      if (_OrientationOverrideOffset == null) {
-        _OrientationOverrideOffset = Schema.GetOffset(0x73DA1BB9EE27F696);
-      }
-      return ref _Handle.AsRef<Quaternion>(_OrientationOverrideOffset!.Value);
+    public ref Quaternion OrientationOverride {
+        get {
+            _OrientationOverrideOffset = _OrientationOverrideOffset ?? Schema.GetOffset(0x73DA1BB9EE27F696);
+            return ref _Handle.AsRef<Quaternion>(_OrientationOverrideOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpaceOverrideOffset;
+    private static nint? _SpaceOverrideOffset;
 
-  public ref RotatorTargetSpace_t SpaceOverride {
-    get {
-      if (_SpaceOverrideOffset == null) {
-        _SpaceOverrideOffset = Schema.GetOffset(0x73DA1BB9BAF52F16);
-      }
-      return ref _Handle.AsRef<RotatorTargetSpace_t>(_SpaceOverrideOffset!.Value);
+    public ref RotatorTargetSpace_t SpaceOverride {
+        get {
+            _SpaceOverrideOffset = _SpaceOverrideOffset ?? Schema.GetOffset(0x73DA1BB9BAF52F16);
+            return ref _Handle.AsRef<RotatorTargetSpace_t>(_SpaceOverrideOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularVelocityOffset;
+    private static nint? _AngularVelocityOffset;
 
-  public ref QAngle AngularVelocity {
-    get {
-      if (_AngularVelocityOffset == null) {
-        _AngularVelocityOffset = Schema.GetOffset(0x73DA1BB9CB9A90B9);
-      }
-      return ref _Handle.AsRef<QAngle>(_AngularVelocityOffset!.Value);
+    public ref QAngle AngularVelocity {
+        get {
+            _AngularVelocityOffset = _AngularVelocityOffset ?? Schema.GetOffset(0x73DA1BB9CB9A90B9);
+            return ref _Handle.AsRef<QAngle>(_AngularVelocityOffset!.Value);
+        }
     }
-  }
-  private static nint? _LookAtForcedUpOffset;
+    private static nint? _LookAtForcedUpOffset;
 
-  public ref Vector LookAtForcedUp {
-    get {
-      if (_LookAtForcedUpOffset == null) {
-        _LookAtForcedUpOffset = Schema.GetOffset(0x73DA1BB948B272FF);
-      }
-      return ref _Handle.AsRef<Vector>(_LookAtForcedUpOffset!.Value);
+    public ref Vector LookAtForcedUp {
+        get {
+            _LookAtForcedUpOffset = _LookAtForcedUpOffset ?? Schema.GetOffset(0x73DA1BB948B272FF);
+            return ref _Handle.AsRef<Vector>(_LookAtForcedUpOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrRotatorTargetOffset;
+    private static nint? _StrRotatorTargetOffset;
 
-  public string StrRotatorTarget {
-    get {
-      if (_StrRotatorTargetOffset == null) {
-        _StrRotatorTargetOffset = Schema.GetOffset(0x73DA1BB95D9EF510);
-      }
-      var ptr = _Handle.Read<nint>(_StrRotatorTargetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrRotatorTargetOffset == null) {
-        _StrRotatorTargetOffset = Schema.GetOffset(0x73DA1BB95D9EF510);
-      }
-      Schema.SetString(_Handle, _StrRotatorTargetOffset!.Value, value);
-    }
-  } 
-  private static nint? _RecordHistoryOffset;
+    public string StrRotatorTarget {
+        get {
+            _StrRotatorTargetOffset = _StrRotatorTargetOffset ?? Schema.GetOffset(0x73DA1BB95D9EF510);
+            return Schema.GetString(_Handle.Read<nint>(_StrRotatorTargetOffset!.Value));
+        }
+        set {
+            _StrRotatorTargetOffset = _StrRotatorTargetOffset ?? Schema.GetOffset(0x73DA1BB95D9EF510);
+            Schema.SetString(_Handle, _StrRotatorTargetOffset!.Value, value);
+        }
+    } 
+    private static nint? _RecordHistoryOffset;
 
-  public ref bool RecordHistory {
-    get {
-      if (_RecordHistoryOffset == null) {
-        _RecordHistoryOffset = Schema.GetOffset(0x73DA1BB9A1A2B6DC);
-      }
-      return ref _Handle.AsRef<bool>(_RecordHistoryOffset!.Value);
+    public ref bool RecordHistory {
+        get {
+            _RecordHistoryOffset = _RecordHistoryOffset ?? Schema.GetOffset(0x73DA1BB9A1A2B6DC);
+            return ref _Handle.AsRef<bool>(_RecordHistoryOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotatorHistoryOffset;
+    private static nint? _RotatorHistoryOffset;
 
-  public ref CUtlVector<RotatorHistoryEntry_t> RotatorHistory {
-    get {
-      if (_RotatorHistoryOffset == null) {
-        _RotatorHistoryOffset = Schema.GetOffset(0x73DA1BB91907536A);
-      }
-      return ref _Handle.AsRef<CUtlVector<RotatorHistoryEntry_t>>(_RotatorHistoryOffset!.Value);
+    public ref CUtlVector<RotatorHistoryEntry_t> RotatorHistory {
+        get {
+            _RotatorHistoryOffset = _RotatorHistoryOffset ?? Schema.GetOffset(0x73DA1BB91907536A);
+            return ref _Handle.AsRef<CUtlVector<RotatorHistoryEntry_t>>(_RotatorHistoryOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReturningToPreviousOrientationOffset;
+    private static nint? _ReturningToPreviousOrientationOffset;
 
-  public ref bool ReturningToPreviousOrientation {
-    get {
-      if (_ReturningToPreviousOrientationOffset == null) {
-        _ReturningToPreviousOrientationOffset = Schema.GetOffset(0x73DA1BB9540035F9);
-      }
-      return ref _Handle.AsRef<bool>(_ReturningToPreviousOrientationOffset!.Value);
+    public ref bool ReturningToPreviousOrientation {
+        get {
+            _ReturningToPreviousOrientationOffset = _ReturningToPreviousOrientationOffset ?? Schema.GetOffset(0x73DA1BB9540035F9);
+            return ref _Handle.AsRef<bool>(_ReturningToPreviousOrientationOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotatorQueueOffset;
+    private static nint? _RotatorQueueOffset;
 
-  public ref CUtlVector<RotatorQueueEntry_t> RotatorQueue {
-    get {
-      if (_RotatorQueueOffset == null) {
-        _RotatorQueueOffset = Schema.GetOffset(0x73DA1BB941C250ED);
-      }
-      return ref _Handle.AsRef<CUtlVector<RotatorQueueEntry_t>>(_RotatorQueueOffset!.Value);
+    public ref CUtlVector<RotatorQueueEntry_t> RotatorQueue {
+        get {
+            _RotatorQueueOffset = _RotatorQueueOffset ?? Schema.GetOffset(0x73DA1BB941C250ED);
+            return ref _Handle.AsRef<CUtlVector<RotatorQueueEntry_t>>(_RotatorQueueOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotatorQueueHistoryOffset;
+    private static nint? _RotatorQueueHistoryOffset;
 
-  public ref CUtlVector<RotatorHistoryEntry_t> RotatorQueueHistory {
-    get {
-      if (_RotatorQueueHistoryOffset == null) {
-        _RotatorQueueHistoryOffset = Schema.GetOffset(0x73DA1BB9671778B7);
-      }
-      return ref _Handle.AsRef<CUtlVector<RotatorHistoryEntry_t>>(_RotatorQueueHistoryOffset!.Value);
+    public ref CUtlVector<RotatorHistoryEntry_t> RotatorQueueHistory {
+        get {
+            _RotatorQueueHistoryOffset = _RotatorQueueHistoryOffset ?? Schema.GetOffset(0x73DA1BB9671778B7);
+            return ref _Handle.AsRef<CUtlVector<RotatorHistoryEntry_t>>(_RotatorQueueHistoryOffset!.Value);
+        }
     }
-  }
 
 
 }

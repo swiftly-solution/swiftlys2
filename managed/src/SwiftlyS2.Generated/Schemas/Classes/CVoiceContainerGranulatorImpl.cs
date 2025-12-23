@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerGranulatorImpl : CVoiceContainerBaseImpl, CVoiceContainerGranulator {
+internal partial class CVoiceContainerGranulatorImpl : CVoiceContainerBaseImpl, CVoiceContainerGranulator
+{
+    public CVoiceContainerGranulatorImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerGranulatorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GrainLengthOffset;
 
-  private static nint? _GrainLengthOffset;
-
-  public ref float GrainLength {
-    get {
-      if (_GrainLengthOffset == null) {
-        _GrainLengthOffset = Schema.GetOffset(0x30F273589D2BE672);
-      }
-      return ref _Handle.AsRef<float>(_GrainLengthOffset!.Value);
+    public ref float GrainLength {
+        get {
+            _GrainLengthOffset = _GrainLengthOffset ?? Schema.GetOffset(0x30F273589D2BE672);
+            return ref _Handle.AsRef<float>(_GrainLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _GrainCrossfadeAmountOffset;
+    private static nint? _GrainCrossfadeAmountOffset;
 
-  public ref float GrainCrossfadeAmount {
-    get {
-      if (_GrainCrossfadeAmountOffset == null) {
-        _GrainCrossfadeAmountOffset = Schema.GetOffset(0x30F27358AE31A7DC);
-      }
-      return ref _Handle.AsRef<float>(_GrainCrossfadeAmountOffset!.Value);
+    public ref float GrainCrossfadeAmount {
+        get {
+            _GrainCrossfadeAmountOffset = _GrainCrossfadeAmountOffset ?? Schema.GetOffset(0x30F27358AE31A7DC);
+            return ref _Handle.AsRef<float>(_GrainCrossfadeAmountOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartJitterOffset;
+    private static nint? _StartJitterOffset;
 
-  public ref float StartJitter {
-    get {
-      if (_StartJitterOffset == null) {
-        _StartJitterOffset = Schema.GetOffset(0x30F27358FBAD6833);
-      }
-      return ref _Handle.AsRef<float>(_StartJitterOffset!.Value);
+    public ref float StartJitter {
+        get {
+            _StartJitterOffset = _StartJitterOffset ?? Schema.GetOffset(0x30F27358FBAD6833);
+            return ref _Handle.AsRef<float>(_StartJitterOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlaybackJitterOffset;
+    private static nint? _PlaybackJitterOffset;
 
-  public ref float PlaybackJitter {
-    get {
-      if (_PlaybackJitterOffset == null) {
-        _PlaybackJitterOffset = Schema.GetOffset(0x30F273583904EEB8);
-      }
-      return ref _Handle.AsRef<float>(_PlaybackJitterOffset!.Value);
+    public ref float PlaybackJitter {
+        get {
+            _PlaybackJitterOffset = _PlaybackJitterOffset ?? Schema.GetOffset(0x30F273583904EEB8);
+            return ref _Handle.AsRef<float>(_PlaybackJitterOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShouldWraparoundOffset;
+    private static nint? _ShouldWraparoundOffset;
 
-  public ref bool ShouldWraparound {
-    get {
-      if (_ShouldWraparoundOffset == null) {
-        _ShouldWraparoundOffset = Schema.GetOffset(0x30F273585F9E45A3);
-      }
-      return ref _Handle.AsRef<bool>(_ShouldWraparoundOffset!.Value);
+    public ref bool ShouldWraparound {
+        get {
+            _ShouldWraparoundOffset = _ShouldWraparoundOffset ?? Schema.GetOffset(0x30F273585F9E45A3);
+            return ref _Handle.AsRef<bool>(_ShouldWraparoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _SourceAudioOffset;
+    private static nint? _SourceAudioOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SourceAudio {
-    get {
-      if (_SourceAudioOffset == null) {
-        _SourceAudioOffset = Schema.GetOffset(0x30F27358E5E00DE2);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SourceAudioOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SourceAudio {
+        get {
+            _SourceAudioOffset = _SourceAudioOffset ?? Schema.GetOffset(0x30F27358E5E00DE2);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SourceAudioOffset!.Value);
+        }
     }
-  }
 
 
 }

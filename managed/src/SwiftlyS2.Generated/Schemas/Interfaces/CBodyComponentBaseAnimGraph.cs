@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBodyComponentBaseAnimGraph : CBodyComponentSkeletonInstance, ISchemaClass<CBodyComponentBaseAnimGraph> {
+public partial interface CBodyComponentBaseAnimGraph : CBodyComponentSkeletonInstance, ISchemaClass<CBodyComponentBaseAnimGraph>
+{
+    static CBodyComponentBaseAnimGraph ISchemaClass<CBodyComponentBaseAnimGraph>.From(nint handle) => new CBodyComponentBaseAnimGraphImpl(handle);
+    static int ISchemaClass<CBodyComponentBaseAnimGraph>.Size => 3264;
+    static string? ISchemaClass<CBodyComponentBaseAnimGraph>.ClassName => null;
 
-  static CBodyComponentBaseAnimGraph ISchemaClass<CBodyComponentBaseAnimGraph>.From(nint handle) => new CBodyComponentBaseAnimGraphImpl(handle);
-  static int ISchemaClass<CBodyComponentBaseAnimGraph>.Size => 3264;
-  static string? ISchemaClass<CBodyComponentBaseAnimGraph>.ClassName => null;
 
-  
-  public CBaseAnimGraphController AnimationController { get; }
+    public CBaseAnimGraphController AnimationController { get; }
 
-  public void AnimationControllerUpdated();
+    public void AnimationControllerUpdated();
 }

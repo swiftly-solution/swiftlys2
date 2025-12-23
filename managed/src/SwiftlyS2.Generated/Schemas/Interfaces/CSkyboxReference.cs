@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSkyboxReference : CBaseEntity, ISchemaClass<CSkyboxReference> {
+public partial interface CSkyboxReference : CBaseEntity, ISchemaClass<CSkyboxReference>
+{
+    static CSkyboxReference ISchemaClass<CSkyboxReference>.From(nint handle) => new CSkyboxReferenceImpl(handle);
+    static int ISchemaClass<CSkyboxReference>.Size => 1272;
+    static string? ISchemaClass<CSkyboxReference>.ClassName => "skybox_reference";
 
-  static CSkyboxReference ISchemaClass<CSkyboxReference>.From(nint handle) => new CSkyboxReferenceImpl(handle);
-  static int ISchemaClass<CSkyboxReference>.Size => 1272;
-  static string? ISchemaClass<CSkyboxReference>.ClassName => "skybox_reference";
 
-  
-  public ref uint WorldGroupId { get; }
-  
-  public ref CHandle<CSkyCamera> SkyCamera { get; }
+    public ref uint WorldGroupId { get; }
+
+    public ref CHandle<CSkyCamera> SkyCamera { get; }
 
 
 }

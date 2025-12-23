@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmTransitionEventConditionNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmTransitionEventConditionNode__CDefinition {
+internal partial class CNmTransitionEventConditionNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmTransitionEventConditionNode__CDefinition
+{
+    public CNmTransitionEventConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmTransitionEventConditionNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RequireRuleIDOffset;
 
-  private static nint? _RequireRuleIDOffset;
-
-  public ref CGlobalSymbol RequireRuleID {
-    get {
-      if (_RequireRuleIDOffset == null) {
-        _RequireRuleIDOffset = Schema.GetOffset(0x874AC07F75BFD237);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_RequireRuleIDOffset!.Value);
+    public ref CGlobalSymbol RequireRuleID {
+        get {
+            _RequireRuleIDOffset = _RequireRuleIDOffset ?? Schema.GetOffset(0x874AC07F75BFD237);
+            return ref _Handle.AsRef<CGlobalSymbol>(_RequireRuleIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventConditionRulesOffset;
+    private static nint? _EventConditionRulesOffset;
 
-  public CNmBitFlags EventConditionRules {
-    get {
-      if (_EventConditionRulesOffset == null) {
-        _EventConditionRulesOffset = Schema.GetOffset(0x874AC07FA904315F);
-      }
-      return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+    public CNmBitFlags EventConditionRules {
+        get {
+            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0x874AC07FA904315F);
+            return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+        }
     }
-  }
-  private static nint? _SourceStateNodeIdxOffset;
+    private static nint? _SourceStateNodeIdxOffset;
 
-  public ref short SourceStateNodeIdx {
-    get {
-      if (_SourceStateNodeIdxOffset == null) {
-        _SourceStateNodeIdxOffset = Schema.GetOffset(0x874AC07F63F0228C);
-      }
-      return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+    public ref short SourceStateNodeIdx {
+        get {
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x874AC07F63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _RuleConditionOffset;
+    private static nint? _RuleConditionOffset;
 
-  public ref NmTransitionRuleCondition_t RuleCondition {
-    get {
-      if (_RuleConditionOffset == null) {
-        _RuleConditionOffset = Schema.GetOffset(0x874AC07FE5B98074);
-      }
-      return ref _Handle.AsRef<NmTransitionRuleCondition_t>(_RuleConditionOffset!.Value);
+    public ref NmTransitionRuleCondition_t RuleCondition {
+        get {
+            _RuleConditionOffset = _RuleConditionOffset ?? Schema.GetOffset(0x874AC07FE5B98074);
+            return ref _Handle.AsRef<NmTransitionRuleCondition_t>(_RuleConditionOffset!.Value);
+        }
     }
-  }
 
 
 }

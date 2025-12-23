@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointsToModelParticles : CParticleFunctionOperator, ISchemaClass<C_OP_SetControlPointsToModelParticles> {
+public partial interface C_OP_SetControlPointsToModelParticles : CParticleFunctionOperator, ISchemaClass<C_OP_SetControlPointsToModelParticles>
+{
+    static C_OP_SetControlPointsToModelParticles ISchemaClass<C_OP_SetControlPointsToModelParticles>.From(nint handle) => new C_OP_SetControlPointsToModelParticlesImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointsToModelParticles>.Size => 736;
+    static string? ISchemaClass<C_OP_SetControlPointsToModelParticles>.ClassName => null;
 
-  static C_OP_SetControlPointsToModelParticles ISchemaClass<C_OP_SetControlPointsToModelParticles>.From(nint handle) => new C_OP_SetControlPointsToModelParticlesImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointsToModelParticles>.Size => 736;
-  static string? ISchemaClass<C_OP_SetControlPointsToModelParticles>.ClassName => null;
 
-  
-  public string HitboxSetName { get; set; }
-  
-  public string AttachmentName { get; set; }
-  
-  public ref int FirstControlPoint { get; }
-  
-  public ref int NumControlPoints { get; }
-  
-  public ref int FirstSourcePoint { get; }
-  
-  public ref bool Skin { get; }
-  
-  public ref bool Attachment { get; }
+    public string HitboxSetName { get; set; }
+
+    public string AttachmentName { get; set; }
+
+    public ref int FirstControlPoint { get; }
+
+    public ref int NumControlPoints { get; }
+
+    public ref int FirstSourcePoint { get; }
+
+    public ref bool Skin { get; }
+
+    public ref bool Attachment { get; }
 
 
 }

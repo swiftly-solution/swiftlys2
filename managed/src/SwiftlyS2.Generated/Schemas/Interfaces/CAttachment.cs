@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAttachment : ISchemaClass<CAttachment> {
+public partial interface CAttachment : ISchemaClass<CAttachment>
+{
+    static CAttachment ISchemaClass<CAttachment>.From(nint handle) => new CAttachmentImpl(handle);
+    static int ISchemaClass<CAttachment>.Size => 144;
+    static string? ISchemaClass<CAttachment>.ClassName => null;
 
-  static CAttachment ISchemaClass<CAttachment>.From(nint handle) => new CAttachmentImpl(handle);
-  static int ISchemaClass<CAttachment>.Size => 144;
-  static string? ISchemaClass<CAttachment>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public string InfluenceNames { get; set; }
-  
-  public ISchemaFixedArray<Quaternion> InfluenceRotations { get; }
-  
-  public ISchemaFixedArray<Vector> InfluenceOffsets { get; }
-  
-  public ISchemaFixedArray<float> InfluenceWeights { get; }
-  
-  public ISchemaFixedArray<bool> InfluenceRootTransform { get; }
-  
-  public ref byte Influences { get; }
-  
-  public ref bool IgnoreRotation { get; }
+    public string Name { get; set; }
+
+    public string InfluenceNames { get; set; }
+
+    public ISchemaFixedArray<Quaternion> InfluenceRotations { get; }
+
+    public ISchemaFixedArray<Vector> InfluenceOffsets { get; }
+
+    public ISchemaFixedArray<float> InfluenceWeights { get; }
+
+    public ISchemaFixedArray<bool> InfluenceRootTransform { get; }
+
+    public ref byte Influences { get; }
+
+    public ref bool IgnoreRotation { get; }
 
 
 }

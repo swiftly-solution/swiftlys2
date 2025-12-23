@@ -6,118 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelStateImpl : SchemaClass, CModelState {
+internal partial class CModelStateImpl : SchemaClass, CModelState
+{
+    public CModelStateImpl(nint handle) : base(handle) { }
 
-  public CModelStateImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ModelOffset;
 
-  private static nint? _ModelOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model {
-    get {
-      if (_ModelOffset == null) {
-        _ModelOffset = Schema.GetOffset(0xC0A51C0E100C814);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model {
+        get {
+            _ModelOffset = _ModelOffset ?? Schema.GetOffset(0xC0A51C0E100C814);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_ModelOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModelNameOffset;
+    private static nint? _ModelNameOffset;
 
-  public string ModelName {
-    get {
-      if (_ModelNameOffset == null) {
-        _ModelNameOffset = Schema.GetOffset(0xC0A51C0D7A1D881);
-      }
-      var ptr = _Handle.Read<nint>(_ModelNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ModelNameOffset == null) {
-        _ModelNameOffset = Schema.GetOffset(0xC0A51C0D7A1D881);
-      }
-      Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ClientClothCreationSuppressedOffset;
+    public string ModelName {
+        get {
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xC0A51C0D7A1D881);
+            return Schema.GetString(_Handle.Read<nint>(_ModelNameOffset!.Value));
+        }
+        set {
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xC0A51C0D7A1D881);
+            Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ClientClothCreationSuppressedOffset;
 
-  public ref bool ClientClothCreationSuppressed {
-    get {
-      if (_ClientClothCreationSuppressedOffset == null) {
-        _ClientClothCreationSuppressedOffset = Schema.GetOffset(0xC0A51C0953717E1);
-      }
-      return ref _Handle.AsRef<bool>(_ClientClothCreationSuppressedOffset!.Value);
+    public ref bool ClientClothCreationSuppressed {
+        get {
+            _ClientClothCreationSuppressedOffset = _ClientClothCreationSuppressedOffset ?? Schema.GetOffset(0xC0A51C0953717E1);
+            return ref _Handle.AsRef<bool>(_ClientClothCreationSuppressedOffset!.Value);
+        }
     }
-  }
-  private static nint? _MeshGroupMaskOffset;
+    private static nint? _MeshGroupMaskOffset;
 
-  public ref ulong MeshGroupMask {
-    get {
-      if (_MeshGroupMaskOffset == null) {
-        _MeshGroupMaskOffset = Schema.GetOffset(0xC0A51C009C93F2B);
-      }
-      return ref _Handle.AsRef<ulong>(_MeshGroupMaskOffset!.Value);
+    public ref ulong MeshGroupMask {
+        get {
+            _MeshGroupMaskOffset = _MeshGroupMaskOffset ?? Schema.GetOffset(0xC0A51C009C93F2B);
+            return ref _Handle.AsRef<ulong>(_MeshGroupMaskOffset!.Value);
+        }
     }
-  }
-  private static nint? _BodyGroupChoicesOffset;
+    private static nint? _BodyGroupChoicesOffset;
 
-  public ref CUtlVector<int> BodyGroupChoices {
-    get {
-      if (_BodyGroupChoicesOffset == null) {
-        _BodyGroupChoicesOffset = Schema.GetOffset(0xC0A51C02395D0B0);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_BodyGroupChoicesOffset!.Value);
+    public ref CUtlVector<int> BodyGroupChoices {
+        get {
+            _BodyGroupChoicesOffset = _BodyGroupChoicesOffset ?? Schema.GetOffset(0xC0A51C02395D0B0);
+            return ref _Handle.AsRef<CUtlVector<int>>(_BodyGroupChoicesOffset!.Value);
+        }
     }
-  }
-  private static nint? _IdealMotionTypeOffset;
+    private static nint? _IdealMotionTypeOffset;
 
-  public ref byte IdealMotionType {
-    get {
-      if (_IdealMotionTypeOffset == null) {
-        _IdealMotionTypeOffset = Schema.GetOffset(0xC0A51C00A904E94);
-      }
-      return ref _Handle.AsRef<byte>(_IdealMotionTypeOffset!.Value);
+    public ref byte IdealMotionType {
+        get {
+            _IdealMotionTypeOffset = _IdealMotionTypeOffset ?? Schema.GetOffset(0xC0A51C00A904E94);
+            return ref _Handle.AsRef<byte>(_IdealMotionTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceLODOffset;
+    private static nint? _ForceLODOffset;
 
-  public ref byte ForceLOD {
-    get {
-      if (_ForceLODOffset == null) {
-        _ForceLODOffset = Schema.GetOffset(0xC0A51C091D53D5F);
-      }
-      return ref _Handle.AsRef<byte>(_ForceLODOffset!.Value);
+    public ref byte ForceLOD {
+        get {
+            _ForceLODOffset = _ForceLODOffset ?? Schema.GetOffset(0xC0A51C091D53D5F);
+            return ref _Handle.AsRef<byte>(_ForceLODOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClothUpdateFlagsOffset;
+    private static nint? _ClothUpdateFlagsOffset;
 
-  public ref byte ClothUpdateFlags {
-    get {
-      if (_ClothUpdateFlagsOffset == null) {
-        _ClothUpdateFlagsOffset = Schema.GetOffset(0xC0A51C0C74A2B81);
-      }
-      return ref _Handle.AsRef<byte>(_ClothUpdateFlagsOffset!.Value);
+    public ref byte ClothUpdateFlags {
+        get {
+            _ClothUpdateFlagsOffset = _ClothUpdateFlagsOffset ?? Schema.GetOffset(0xC0A51C0C74A2B81);
+            return ref _Handle.AsRef<byte>(_ClothUpdateFlagsOffset!.Value);
+        }
     }
-  }
 
-  public void ModelUpdated() {
-    Schema.Update(_Handle, 0xC0A51C0E100C814);
-  }
-  public void ClientClothCreationSuppressedUpdated() {
-    Schema.Update(_Handle, 0xC0A51C0953717E1);
-  }
-  public void MeshGroupMaskUpdated() {
-    Schema.Update(_Handle, 0xC0A51C009C93F2B);
-  }
-  public void BodyGroupChoicesUpdated() {
-    Schema.Update(_Handle, 0xC0A51C02395D0B0);
-  }
-  public void IdealMotionTypeUpdated() {
-    Schema.Update(_Handle, 0xC0A51C00A904E94);
-  }
+    public void ModelUpdated() => Schema.Update(_Handle, 0xC0A51C0E100C814);
+    public void ClientClothCreationSuppressedUpdated() => Schema.Update(_Handle, 0xC0A51C0953717E1);
+    public void MeshGroupMaskUpdated() => Schema.Update(_Handle, 0xC0A51C009C93F2B);
+    public void BodyGroupChoicesUpdated() => Schema.Update(_Handle, 0xC0A51C02395D0B0);
+    public void IdealMotionTypeUpdated() => Schema.Update(_Handle, 0xC0A51C00A904E94);
 }

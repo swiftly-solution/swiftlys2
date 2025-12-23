@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_PositionLock : CParticleFunctionOperator, ISchemaClass<C_OP_PositionLock> {
+public partial interface C_OP_PositionLock : CParticleFunctionOperator, ISchemaClass<C_OP_PositionLock>
+{
+    static C_OP_PositionLock ISchemaClass<C_OP_PositionLock>.From(nint handle) => new C_OP_PositionLockImpl(handle);
+    static int ISchemaClass<C_OP_PositionLock>.Size => 2712;
+    static string? ISchemaClass<C_OP_PositionLock>.ClassName => null;
 
-  static C_OP_PositionLock ISchemaClass<C_OP_PositionLock>.From(nint handle) => new C_OP_PositionLockImpl(handle);
-  static int ISchemaClass<C_OP_PositionLock>.Size => 2712;
-  static string? ISchemaClass<C_OP_PositionLock>.ClassName => null;
 
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref float StartTime_min { get; }
-  
-  public ref float StartTime_max { get; }
-  
-  public ref float StartTime_exp { get; }
-  
-  public ref float EndTime_min { get; }
-  
-  public ref float EndTime_max { get; }
-  
-  public ref float EndTime_exp { get; }
-  
-  public ref float Range { get; }
-  
-  public CParticleCollectionFloatInput RangeBias { get; }
-  
-  public ref float JumpThreshold { get; }
-  
-  public ref float PrevPosScale { get; }
-  
-  public ref bool LockRot { get; }
-  
-  public CParticleCollectionVecInput Scale { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutputPrev { get; }
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref float StartTime_min { get; }
+
+    public ref float StartTime_max { get; }
+
+    public ref float StartTime_exp { get; }
+
+    public ref float EndTime_min { get; }
+
+    public ref float EndTime_max { get; }
+
+    public ref float EndTime_exp { get; }
+
+    public ref float Range { get; }
+
+    public CParticleCollectionFloatInput RangeBias { get; }
+
+    public ref float JumpThreshold { get; }
+
+    public ref float PrevPosScale { get; }
+
+    public ref bool LockRot { get; }
+
+    public CParticleCollectionVecInput Scale { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ParticleAttributeIndex_t FieldOutputPrev { get; }
 
 
 }

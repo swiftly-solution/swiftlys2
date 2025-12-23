@@ -48,3 +48,4 @@ string GetMinValueAsString = string cvarName
 bool SetMaxValueAsString = string cvarName, string value
 string GetMaxValueAsString = string cvarName
 void SetValueInternalAsString = string cvarName, string value
+string GetDescription = string cvarName

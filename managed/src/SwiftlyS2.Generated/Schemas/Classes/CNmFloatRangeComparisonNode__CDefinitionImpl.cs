@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatRangeComparisonNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmFloatRangeComparisonNode__CDefinition {
+internal partial class CNmFloatRangeComparisonNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmFloatRangeComparisonNode__CDefinition
+{
+    public CNmFloatRangeComparisonNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFloatRangeComparisonNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RangeOffset;
 
-  private static nint? _RangeOffset;
-
-  public SchemaUntypedField Range {
-    get {
-      if (_RangeOffset == null) {
-        _RangeOffset = Schema.GetOffset(0x6F364CB3D639CF2);
-      }
-      return new SchemaUntypedField(_Handle + _RangeOffset!.Value);
+    public SchemaUntypedField Range {
+        get {
+            _RangeOffset = _RangeOffset ?? Schema.GetOffset(0x6F364CB3D639CF2);
+            return new SchemaUntypedField(_Handle + _RangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputValueNodeIdxOffset;
+    private static nint? _InputValueNodeIdxOffset;
 
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0x6F364CB95E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x6F364CB95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsInclusiveCheckOffset;
+    private static nint? _IsInclusiveCheckOffset;
 
-  public ref bool IsInclusiveCheck {
-    get {
-      if (_IsInclusiveCheckOffset == null) {
-        _IsInclusiveCheckOffset = Schema.GetOffset(0x6F364CBA95FA7C3);
-      }
-      return ref _Handle.AsRef<bool>(_IsInclusiveCheckOffset!.Value);
+    public ref bool IsInclusiveCheck {
+        get {
+            _IsInclusiveCheckOffset = _IsInclusiveCheckOffset ?? Schema.GetOffset(0x6F364CBA95FA7C3);
+            return ref _Handle.AsRef<bool>(_IsInclusiveCheckOffset!.Value);
+        }
     }
-  }
 
 
 }

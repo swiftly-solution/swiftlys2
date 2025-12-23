@@ -6,101 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CChangeLevelImpl : CBaseTriggerImpl, CChangeLevel {
+internal partial class CChangeLevelImpl : CBaseTriggerImpl, CChangeLevel
+{
+    public CChangeLevelImpl(nint handle) : base(handle) { }
 
-  public CChangeLevelImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MapNameOffset;
 
-  private static nint? _MapNameOffset;
+    public string MapName {
+        get {
+            _MapNameOffset = _MapNameOffset ?? Schema.GetOffset(0x52008134CE11EF47);
+            return Schema.GetString(_Handle.Read<nint>(_MapNameOffset!.Value));
+        }
+        set {
+            _MapNameOffset = _MapNameOffset ?? Schema.GetOffset(0x52008134CE11EF47);
+            Schema.SetString(_Handle, _MapNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _LandmarkNameOffset;
 
-  public string MapName {
-    get {
-      if (_MapNameOffset == null) {
-        _MapNameOffset = Schema.GetOffset(0x52008134CE11EF47);
-      }
-      var ptr = _Handle.Read<nint>(_MapNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_MapNameOffset == null) {
-        _MapNameOffset = Schema.GetOffset(0x52008134CE11EF47);
-      }
-      Schema.SetString(_Handle, _MapNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _LandmarkNameOffset;
+    public string LandmarkName {
+        get {
+            _LandmarkNameOffset = _LandmarkNameOffset ?? Schema.GetOffset(0x520081342DEE941D);
+            return Schema.GetString(_Handle.Read<nint>(_LandmarkNameOffset!.Value));
+        }
+        set {
+            _LandmarkNameOffset = _LandmarkNameOffset ?? Schema.GetOffset(0x520081342DEE941D);
+            Schema.SetString(_Handle, _LandmarkNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OnChangeLevelOffset;
 
-  public string LandmarkName {
-    get {
-      if (_LandmarkNameOffset == null) {
-        _LandmarkNameOffset = Schema.GetOffset(0x520081342DEE941D);
-      }
-      var ptr = _Handle.Read<nint>(_LandmarkNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CEntityIOOutput OnChangeLevel {
+        get {
+            _OnChangeLevelOffset = _OnChangeLevelOffset ?? Schema.GetOffset(0x52008134EED57EDE);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnChangeLevelOffset!.Value);
+        }
     }
-    set {
-      if (_LandmarkNameOffset == null) {
-        _LandmarkNameOffset = Schema.GetOffset(0x520081342DEE941D);
-      }
-      Schema.SetString(_Handle, _LandmarkNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OnChangeLevelOffset;
+    private static nint? _TouchedOffset;
 
-  public CEntityIOOutput OnChangeLevel {
-    get {
-      if (_OnChangeLevelOffset == null) {
-        _OnChangeLevelOffset = Schema.GetOffset(0x52008134EED57EDE);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnChangeLevelOffset!.Value);
+    public ref bool Touched {
+        get {
+            _TouchedOffset = _TouchedOffset ?? Schema.GetOffset(0x520081342BF07839);
+            return ref _Handle.AsRef<bool>(_TouchedOffset!.Value);
+        }
     }
-  }
-  private static nint? _TouchedOffset;
+    private static nint? _NoTouchOffset;
 
-  public ref bool Touched {
-    get {
-      if (_TouchedOffset == null) {
-        _TouchedOffset = Schema.GetOffset(0x520081342BF07839);
-      }
-      return ref _Handle.AsRef<bool>(_TouchedOffset!.Value);
+    public ref bool NoTouch {
+        get {
+            _NoTouchOffset = _NoTouchOffset ?? Schema.GetOffset(0x520081343004899D);
+            return ref _Handle.AsRef<bool>(_NoTouchOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoTouchOffset;
+    private static nint? _NewChapterOffset;
 
-  public ref bool NoTouch {
-    get {
-      if (_NoTouchOffset == null) {
-        _NoTouchOffset = Schema.GetOffset(0x520081343004899D);
-      }
-      return ref _Handle.AsRef<bool>(_NoTouchOffset!.Value);
+    public ref bool NewChapter {
+        get {
+            _NewChapterOffset = _NewChapterOffset ?? Schema.GetOffset(0x520081342D184126);
+            return ref _Handle.AsRef<bool>(_NewChapterOffset!.Value);
+        }
     }
-  }
-  private static nint? _NewChapterOffset;
+    private static nint? _OnChangeLevelFiredOffset;
 
-  public ref bool NewChapter {
-    get {
-      if (_NewChapterOffset == null) {
-        _NewChapterOffset = Schema.GetOffset(0x520081342D184126);
-      }
-      return ref _Handle.AsRef<bool>(_NewChapterOffset!.Value);
+    public ref bool OnChangeLevelFired {
+        get {
+            _OnChangeLevelFiredOffset = _OnChangeLevelFiredOffset ?? Schema.GetOffset(0x520081341173C672);
+            return ref _Handle.AsRef<bool>(_OnChangeLevelFiredOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnChangeLevelFiredOffset;
-
-  public ref bool OnChangeLevelFired {
-    get {
-      if (_OnChangeLevelFiredOffset == null) {
-        _OnChangeLevelFiredOffset = Schema.GetOffset(0x520081341173C672);
-      }
-      return ref _Handle.AsRef<bool>(_OnChangeLevelFiredOffset!.Value);
-    }
-  }
 
 
 }

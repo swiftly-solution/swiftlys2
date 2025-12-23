@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmPassthroughNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmPassthroughNode__CDefinition> {
+public partial interface CNmPassthroughNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmPassthroughNode__CDefinition>
+{
+    static CNmPassthroughNode__CDefinition ISchemaClass<CNmPassthroughNode__CDefinition>.From(nint handle) => new CNmPassthroughNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmPassthroughNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmPassthroughNode__CDefinition>.ClassName => null;
 
-  static CNmPassthroughNode__CDefinition ISchemaClass<CNmPassthroughNode__CDefinition>.From(nint handle) => new CNmPassthroughNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmPassthroughNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmPassthroughNode__CDefinition>.ClassName => null;
 
-  
-  public ref short ChildNodeIdx { get; }
+    public ref short ChildNodeIdx { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMaterialAttributeAnimTag : CAnimTagBase, ISchemaClass<CMaterialAttributeAnimTag> {
+public partial interface CMaterialAttributeAnimTag : CAnimTagBase, ISchemaClass<CMaterialAttributeAnimTag>
+{
+    static CMaterialAttributeAnimTag ISchemaClass<CMaterialAttributeAnimTag>.From(nint handle) => new CMaterialAttributeAnimTagImpl(handle);
+    static int ISchemaClass<CMaterialAttributeAnimTag>.Size => 112;
+    static string? ISchemaClass<CMaterialAttributeAnimTag>.ClassName => null;
 
-  static CMaterialAttributeAnimTag ISchemaClass<CMaterialAttributeAnimTag>.From(nint handle) => new CMaterialAttributeAnimTagImpl(handle);
-  static int ISchemaClass<CMaterialAttributeAnimTag>.Size => 112;
-  static string? ISchemaClass<CMaterialAttributeAnimTag>.ClassName => null;
 
-  
-  public string AttributeName { get; set; }
-  
-  public ref MatterialAttributeTagType_t AttributeType { get; }
-  
-  public ref float Value { get; }
-  
-  public ref Color Color { get; }
+    public string AttributeName { get; set; }
+
+    public ref MatterialAttributeTagType_t AttributeType { get; }
+
+    public ref float Value { get; }
+
+    public ref Color Color { get; }
 
 
 }

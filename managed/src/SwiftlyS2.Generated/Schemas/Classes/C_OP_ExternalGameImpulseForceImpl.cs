@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ExternalGameImpulseForceImpl : CParticleFunctionForceImpl, C_OP_ExternalGameImpulseForce {
+internal partial class C_OP_ExternalGameImpulseForceImpl : CParticleFunctionForceImpl, C_OP_ExternalGameImpulseForce
+{
+    public C_OP_ExternalGameImpulseForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_ExternalGameImpulseForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceScaleOffset;
 
-  private static nint? _ForceScaleOffset;
-
-  public CPerParticleFloatInput ForceScale {
-    get {
-      if (_ForceScaleOffset == null) {
-        _ForceScaleOffset = Schema.GetOffset(0x9579EDD64817F390);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset!.Value);
+    public CPerParticleFloatInput ForceScale {
+        get {
+            _ForceScaleOffset = _ForceScaleOffset ?? Schema.GetOffset(0x9579EDD64817F390);
+            return new CPerParticleFloatInputImpl(_Handle + _ForceScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _RopesOffset;
+    private static nint? _RopesOffset;
 
-  public ref bool Ropes {
-    get {
-      if (_RopesOffset == null) {
-        _RopesOffset = Schema.GetOffset(0x9579EDD63A651EDA);
-      }
-      return ref _Handle.AsRef<bool>(_RopesOffset!.Value);
+    public ref bool Ropes {
+        get {
+            _RopesOffset = _RopesOffset ?? Schema.GetOffset(0x9579EDD63A651EDA);
+            return ref _Handle.AsRef<bool>(_RopesOffset!.Value);
+        }
     }
-  }
-  private static nint? _RopesZOnlyOffset;
+    private static nint? _RopesZOnlyOffset;
 
-  public ref bool RopesZOnly {
-    get {
-      if (_RopesZOnlyOffset == null) {
-        _RopesZOnlyOffset = Schema.GetOffset(0x9579EDD686709BB2);
-      }
-      return ref _Handle.AsRef<bool>(_RopesZOnlyOffset!.Value);
+    public ref bool RopesZOnly {
+        get {
+            _RopesZOnlyOffset = _RopesZOnlyOffset ?? Schema.GetOffset(0x9579EDD686709BB2);
+            return ref _Handle.AsRef<bool>(_RopesZOnlyOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExplosionsOffset;
+    private static nint? _ExplosionsOffset;
 
-  public ref bool Explosions {
-    get {
-      if (_ExplosionsOffset == null) {
-        _ExplosionsOffset = Schema.GetOffset(0x9579EDD64CD39BC9);
-      }
-      return ref _Handle.AsRef<bool>(_ExplosionsOffset!.Value);
+    public ref bool Explosions {
+        get {
+            _ExplosionsOffset = _ExplosionsOffset ?? Schema.GetOffset(0x9579EDD64CD39BC9);
+            return ref _Handle.AsRef<bool>(_ExplosionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParticlesOffset;
+    private static nint? _ParticlesOffset;
 
-  public ref bool Particles {
-    get {
-      if (_ParticlesOffset == null) {
-        _ParticlesOffset = Schema.GetOffset(0x9579EDD6B287A104);
-      }
-      return ref _Handle.AsRef<bool>(_ParticlesOffset!.Value);
+    public ref bool Particles {
+        get {
+            _ParticlesOffset = _ParticlesOffset ?? Schema.GetOffset(0x9579EDD6B287A104);
+            return ref _Handle.AsRef<bool>(_ParticlesOffset!.Value);
+        }
     }
-  }
 
 
 }

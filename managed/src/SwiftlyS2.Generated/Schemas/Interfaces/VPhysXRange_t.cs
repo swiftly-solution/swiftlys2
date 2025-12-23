@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VPhysXRange_t : ISchemaClass<VPhysXRange_t> {
+public partial interface VPhysXRange_t : ISchemaClass<VPhysXRange_t>
+{
+    static VPhysXRange_t ISchemaClass<VPhysXRange_t>.From(nint handle) => new VPhysXRange_tImpl(handle);
+    static int ISchemaClass<VPhysXRange_t>.Size => 8;
+    static string? ISchemaClass<VPhysXRange_t>.ClassName => null;
 
-  static VPhysXRange_t ISchemaClass<VPhysXRange_t>.From(nint handle) => new VPhysXRange_tImpl(handle);
-  static int ISchemaClass<VPhysXRange_t>.Size => 8;
-  static string? ISchemaClass<VPhysXRange_t>.ClassName => null;
 
-  
-  public ref float Min { get; }
-  
-  public ref float Max { get; }
+    public ref float Min { get; }
+
+    public ref float Max { get; }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RemapParticleCountToNamedModelBodyPartScalar : C_INIT_RemapParticleCountToNamedModelElementScalar, ISchemaClass<C_INIT_RemapParticleCountToNamedModelBodyPartScalar> {
-
-  static C_INIT_RemapParticleCountToNamedModelBodyPartScalar ISchemaClass<C_INIT_RemapParticleCountToNamedModelBodyPartScalar>.From(nint handle) => new C_INIT_RemapParticleCountToNamedModelBodyPartScalarImpl(handle);
-  static int ISchemaClass<C_INIT_RemapParticleCountToNamedModelBodyPartScalar>.Size => 552;
-  static string? ISchemaClass<C_INIT_RemapParticleCountToNamedModelBodyPartScalar>.ClassName => null;
+public partial interface C_INIT_RemapParticleCountToNamedModelBodyPartScalar : C_INIT_RemapParticleCountToNamedModelElementScalar, ISchemaClass<C_INIT_RemapParticleCountToNamedModelBodyPartScalar>
+{
+    static C_INIT_RemapParticleCountToNamedModelBodyPartScalar ISchemaClass<C_INIT_RemapParticleCountToNamedModelBodyPartScalar>.From(nint handle) => new C_INIT_RemapParticleCountToNamedModelBodyPartScalarImpl(handle);
+    static int ISchemaClass<C_INIT_RemapParticleCountToNamedModelBodyPartScalar>.Size => 552;
+    static string? ISchemaClass<C_INIT_RemapParticleCountToNamedModelBodyPartScalar>.ClassName => null;
 
 
 

@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_PositionPlaceOnGround : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionPlaceOnGround> {
+public partial interface C_INIT_PositionPlaceOnGround : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionPlaceOnGround>
+{
+    static C_INIT_PositionPlaceOnGround ISchemaClass<C_INIT_PositionPlaceOnGround>.From(nint handle) => new C_INIT_PositionPlaceOnGroundImpl(handle);
+    static int ISchemaClass<C_INIT_PositionPlaceOnGround>.Size => 1392;
+    static string? ISchemaClass<C_INIT_PositionPlaceOnGround>.ClassName => null;
 
-  static C_INIT_PositionPlaceOnGround ISchemaClass<C_INIT_PositionPlaceOnGround>.From(nint handle) => new C_INIT_PositionPlaceOnGroundImpl(handle);
-  static int ISchemaClass<C_INIT_PositionPlaceOnGround>.Size => 1392;
-  static string? ISchemaClass<C_INIT_PositionPlaceOnGround>.ClassName => null;
 
-  
-  public CPerParticleFloatInput Offset { get; }
-  
-  public CPerParticleFloatInput MaxTraceLength { get; }
-  
-  public string CollisionGroupName { get; set; }
-  
-  public ref ParticleTraceSet_t TraceSet { get; }
-  
-  public ref ParticleTraceMissBehavior_t TraceMissBehavior { get; }
-  
-  public ref bool IncludeWater { get; }
-  
-  public ref bool SetNormal { get; }
-  
-  public ParticleAttributeIndex_t Attribute { get; }
-  
-  public ref bool SetPXYZOnly { get; }
-  
-  public ref bool TraceAlongNormal { get; }
-  
-  public ParticleAttributeIndex_t TraceDirectionAttribute { get; }
-  
-  public ref bool OffsetonColOnly { get; }
-  
-  public ref float OffsetByRadiusFactor { get; }
-  
-  public ref int PreserveOffsetCP { get; }
-  
-  public ref int IgnoreCP { get; }
+    public CPerParticleFloatInput Offset { get; }
+
+    public CPerParticleFloatInput MaxTraceLength { get; }
+
+    public string CollisionGroupName { get; set; }
+
+    public ref ParticleTraceSet_t TraceSet { get; }
+
+    public ref ParticleTraceMissBehavior_t TraceMissBehavior { get; }
+
+    public ref bool IncludeWater { get; }
+
+    public ref bool SetNormal { get; }
+
+    public ParticleAttributeIndex_t Attribute { get; }
+
+    public ref bool SetPXYZOnly { get; }
+
+    public ref bool TraceAlongNormal { get; }
+
+    public ParticleAttributeIndex_t TraceDirectionAttribute { get; }
+
+    public ref bool OffsetonColOnly { get; }
+
+    public ref float OffsetByRadiusFactor { get; }
+
+    public ref int PreserveOffsetCP { get; }
+
+    public ref int IgnoreCP { get; }
 
 
 }

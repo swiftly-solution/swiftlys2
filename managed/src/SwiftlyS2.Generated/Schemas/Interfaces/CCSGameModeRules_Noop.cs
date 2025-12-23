@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSGameModeRules_Noop : CCSGameModeRules, ISchemaClass<CCSGameModeRules_Noop> {
-
-  static CCSGameModeRules_Noop ISchemaClass<CCSGameModeRules_Noop>.From(nint handle) => new CCSGameModeRules_NoopImpl(handle);
-  static int ISchemaClass<CCSGameModeRules_Noop>.Size => 48;
-  static string? ISchemaClass<CCSGameModeRules_Noop>.ClassName => null;
+public partial interface CCSGameModeRules_Noop : CCSGameModeRules, ISchemaClass<CCSGameModeRules_Noop>
+{
+    static CCSGameModeRules_Noop ISchemaClass<CCSGameModeRules_Noop>.From(nint handle) => new CCSGameModeRules_NoopImpl(handle);
+    static int ISchemaClass<CCSGameModeRules_Noop>.Size => 48;
+    static string? ISchemaClass<CCSGameModeRules_Noop>.ClassName => null;
 
 
 

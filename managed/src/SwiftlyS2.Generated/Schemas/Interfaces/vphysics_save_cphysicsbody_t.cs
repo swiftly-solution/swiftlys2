@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface vphysics_save_cphysicsbody_t : RnBodyDesc_t, ISchemaClass<vphysics_save_cphysicsbody_t> {
+public partial interface vphysics_save_cphysicsbody_t : RnBodyDesc_t, ISchemaClass<vphysics_save_cphysicsbody_t>
+{
+    static vphysics_save_cphysicsbody_t ISchemaClass<vphysics_save_cphysicsbody_t>.From(nint handle) => new vphysics_save_cphysicsbody_tImpl(handle);
+    static int ISchemaClass<vphysics_save_cphysicsbody_t>.Size => 232;
+    static string? ISchemaClass<vphysics_save_cphysicsbody_t>.ClassName => null;
 
-  static vphysics_save_cphysicsbody_t ISchemaClass<vphysics_save_cphysicsbody_t>.From(nint handle) => new vphysics_save_cphysicsbody_tImpl(handle);
-  static int ISchemaClass<vphysics_save_cphysicsbody_t>.Size => 232;
-  static string? ISchemaClass<vphysics_save_cphysicsbody_t>.ClassName => null;
 
-  
-  public ref ulong OldPointer { get; }
+    public ref ulong OldPointer { get; }
 
 
 }

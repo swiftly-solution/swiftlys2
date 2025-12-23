@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum DebugOverlayBits_t : ulong {
-
+public enum DebugOverlayBits_t : ulong
+{
  OVERLAY_TEXT_BIT = 1,
 
  OVERLAY_NAME_BIT = 2,

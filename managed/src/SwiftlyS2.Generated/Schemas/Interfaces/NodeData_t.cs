@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface NodeData_t : ISchemaClass<NodeData_t> {
+public partial interface NodeData_t : ISchemaClass<NodeData_t>
+{
+    static NodeData_t ISchemaClass<NodeData_t>.From(nint handle) => new NodeData_tImpl(handle);
+    static int ISchemaClass<NodeData_t>.Size => 80;
+    static string? ISchemaClass<NodeData_t>.ClassName => null;
 
-  static NodeData_t ISchemaClass<NodeData_t>.From(nint handle) => new NodeData_tImpl(handle);
-  static int ISchemaClass<NodeData_t>.Size => 80;
-  static string? ISchemaClass<NodeData_t>.ClassName => null;
 
-  
-  public ref int Parent { get; }
-  
-  public ref Vector Origin { get; }
-  
-  public ref Vector MinBounds { get; }
-  
-  public ref Vector MaxBounds { get; }
-  
-  public ref float MinimumDistance { get; }
-  
-  public ref CUtlVector<int> ChildNodeIndices { get; }
-  
-  public string WorldNodePrefix { get; set; }
+    public ref int Parent { get; }
+
+    public ref Vector Origin { get; }
+
+    public ref Vector MinBounds { get; }
+
+    public ref Vector MaxBounds { get; }
+
+    public ref float MinimumDistance { get; }
+
+    public ref CUtlVector<int> ChildNodeIndices { get; }
+
+    public string WorldNodePrefix { get; set; }
 
 
 }

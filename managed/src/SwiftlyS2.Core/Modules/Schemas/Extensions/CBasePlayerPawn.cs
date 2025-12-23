@@ -1,4 +1,5 @@
 using SwiftlyS2.Shared.Natives;
+using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
@@ -23,4 +24,11 @@ public partial interface CBasePlayerPawn
     /// <param name="fieldOfViewDegrees">Optional field of view in degrees.</param>
     /// <returns>True if the target player is visible; otherwise, false.</returns>
     public bool HasLineOfSight( CCSPlayerPawn targetPlayer, float? fieldOfViewDegrees = null );
+
+    /// <summary>
+    /// Converts the pawn to a player.
+    /// </summary>
+    /// <returns>An <see cref="IPlayer"/> instance representing the player with the specified pawn, or <c>null</c> if no such
+    /// player exists.</returns>
+    public IPlayer? ToPlayer();
 }

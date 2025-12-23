@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvExplosion : CModelPointEntity, ISchemaClass<CEnvExplosion> {
+public partial interface CEnvExplosion : CModelPointEntity, ISchemaClass<CEnvExplosion>
+{
+    static CEnvExplosion ISchemaClass<CEnvExplosion>.From(nint handle) => new CEnvExplosionImpl(handle);
+    static int ISchemaClass<CEnvExplosion>.Size => 2096;
+    static string? ISchemaClass<CEnvExplosion>.ClassName => "env_explosion";
 
-  static CEnvExplosion ISchemaClass<CEnvExplosion>.From(nint handle) => new CEnvExplosionImpl(handle);
-  static int ISchemaClass<CEnvExplosion>.Size => 2096;
-  static string? ISchemaClass<CEnvExplosion>.ClassName => "env_explosion";
 
-  
-  public ref int Magnitude { get; }
-  
-  public ref float PlayerDamage { get; }
-  
-  public ref int RadiusOverride { get; }
-  
-  public ref float InnerRadius { get; }
-  
-  public ref float DamageForce { get; }
-  
-  public ref CHandle<CBaseEntity> Inflictor { get; }
-  
-  public ref DamageTypes_t CustomDamageType { get; }
-  
-  public ref bool CreateDebris { get; }
-  
-  public string CustomEffectName { get; set; }
-  
-  public string CustomSoundName { get; set; }
-  
-  public ref bool SuppressParticleImpulse { get; }
-  
-  public ref Class_T ClassIgnore { get; }
-  
-  public ref Class_T ClassIgnore2 { get; }
-  
-  public string EntityIgnoreName { get; set; }
-  
-  public ref CHandle<CBaseEntity> EntityIgnore { get; }
+    public ref int Magnitude { get; }
+
+    public ref float PlayerDamage { get; }
+
+    public ref int RadiusOverride { get; }
+
+    public ref float InnerRadius { get; }
+
+    public ref float DamageForce { get; }
+
+    public ref CHandle<CBaseEntity> Inflictor { get; }
+
+    public ref DamageTypes_t CustomDamageType { get; }
+
+    public ref bool CreateDebris { get; }
+
+    public string CustomEffectName { get; set; }
+
+    public string CustomSoundName { get; set; }
+
+    public ref bool SuppressParticleImpulse { get; }
+
+    public ref Class_T ClassIgnore { get; }
+
+    public ref Class_T ClassIgnore2 { get; }
+
+    public string EntityIgnoreName { get; set; }
+
+    public ref CHandle<CBaseEntity> EntityIgnore { get; }
 
 
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRagdollMagnetImpl : CPointEntityImpl, CRagdollMagnet {
+internal partial class CRagdollMagnetImpl : CPointEntityImpl, CRagdollMagnet
+{
+    public CRagdollMagnetImpl(nint handle) : base(handle) { }
 
-  public CRagdollMagnetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DisabledOffset;
 
-  private static nint? _DisabledOffset;
-
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0x7C6BA43F3A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x7C6BA43F3A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x7C6BA43FA921CA53);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x7C6BA43FA921CA53);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceOffset;
+    private static nint? _ForceOffset;
 
-  public ref float Force {
-    get {
-      if (_ForceOffset == null) {
-        _ForceOffset = Schema.GetOffset(0x7C6BA43FB9B6AFA4);
-      }
-      return ref _Handle.AsRef<float>(_ForceOffset!.Value);
+    public ref float Force {
+        get {
+            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0x7C6BA43FB9B6AFA4);
+            return ref _Handle.AsRef<float>(_ForceOffset!.Value);
+        }
     }
-  }
-  private static nint? _AxisOffset;
+    private static nint? _AxisOffset;
 
-  public ref Vector Axis {
-    get {
-      if (_AxisOffset == null) {
-        _AxisOffset = Schema.GetOffset(0x7C6BA43F2B06DE94);
-      }
-      return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+    public ref Vector Axis {
+        get {
+            _AxisOffset = _AxisOffset ?? Schema.GetOffset(0x7C6BA43F2B06DE94);
+            return ref _Handle.AsRef<Vector>(_AxisOffset!.Value);
+        }
     }
-  }
 
 
 }

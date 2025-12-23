@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_CurlNoiseForceImpl : CParticleFunctionForceImpl, C_OP_CurlNoiseForce {
+internal partial class C_OP_CurlNoiseForceImpl : CParticleFunctionForceImpl, C_OP_CurlNoiseForce
+{
+    public C_OP_CurlNoiseForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_CurlNoiseForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NoiseTypeOffset;
 
-  private static nint? _NoiseTypeOffset;
-
-  public ref ParticleDirectionNoiseType_t NoiseType {
-    get {
-      if (_NoiseTypeOffset == null) {
-        _NoiseTypeOffset = Schema.GetOffset(0xC8D644B26758ED35);
-      }
-      return ref _Handle.AsRef<ParticleDirectionNoiseType_t>(_NoiseTypeOffset!.Value);
+    public ref ParticleDirectionNoiseType_t NoiseType {
+        get {
+            _NoiseTypeOffset = _NoiseTypeOffset ?? Schema.GetOffset(0xC8D644B26758ED35);
+            return ref _Handle.AsRef<ParticleDirectionNoiseType_t>(_NoiseTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoiseFreqOffset;
+    private static nint? _NoiseFreqOffset;
 
-  public CPerParticleVecInput NoiseFreq {
-    get {
-      if (_NoiseFreqOffset == null) {
-        _NoiseFreqOffset = Schema.GetOffset(0xC8D644B20A299A63);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _NoiseFreqOffset!.Value);
+    public CPerParticleVecInput NoiseFreq {
+        get {
+            _NoiseFreqOffset = _NoiseFreqOffset ?? Schema.GetOffset(0xC8D644B20A299A63);
+            return new CPerParticleVecInputImpl(_Handle + _NoiseFreqOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoiseScaleOffset;
+    private static nint? _NoiseScaleOffset;
 
-  public CPerParticleVecInput NoiseScale {
-    get {
-      if (_NoiseScaleOffset == null) {
-        _NoiseScaleOffset = Schema.GetOffset(0xC8D644B29CE92E45);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _NoiseScaleOffset!.Value);
+    public CPerParticleVecInput NoiseScale {
+        get {
+            _NoiseScaleOffset = _NoiseScaleOffset ?? Schema.GetOffset(0xC8D644B29CE92E45);
+            return new CPerParticleVecInputImpl(_Handle + _NoiseScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetOffset;
+    private static nint? _OffsetOffset;
 
-  public CPerParticleVecInput Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0xC8D644B2BD25CC2A);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _OffsetOffset!.Value);
+    public CPerParticleVecInput Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xC8D644B2BD25CC2A);
+            return new CPerParticleVecInputImpl(_Handle + _OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetRateOffset;
+    private static nint? _OffsetRateOffset;
 
-  public CPerParticleVecInput OffsetRate {
-    get {
-      if (_OffsetRateOffset == null) {
-        _OffsetRateOffset = Schema.GetOffset(0xC8D644B23D58FFB8);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _OffsetRateOffset!.Value);
+    public CPerParticleVecInput OffsetRate {
+        get {
+            _OffsetRateOffset = _OffsetRateOffset ?? Schema.GetOffset(0xC8D644B23D58FFB8);
+            return new CPerParticleVecInputImpl(_Handle + _OffsetRateOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorleySeedOffset;
+    private static nint? _WorleySeedOffset;
 
-  public CPerParticleFloatInput WorleySeed {
-    get {
-      if (_WorleySeedOffset == null) {
-        _WorleySeedOffset = Schema.GetOffset(0xC8D644B2D6881198);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _WorleySeedOffset!.Value);
+    public CPerParticleFloatInput WorleySeed {
+        get {
+            _WorleySeedOffset = _WorleySeedOffset ?? Schema.GetOffset(0xC8D644B2D6881198);
+            return new CPerParticleFloatInputImpl(_Handle + _WorleySeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorleyJitterOffset;
+    private static nint? _WorleyJitterOffset;
 
-  public CPerParticleFloatInput WorleyJitter {
-    get {
-      if (_WorleyJitterOffset == null) {
-        _WorleyJitterOffset = Schema.GetOffset(0xC8D644B2C7509CCF);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _WorleyJitterOffset!.Value);
+    public CPerParticleFloatInput WorleyJitter {
+        get {
+            _WorleyJitterOffset = _WorleyJitterOffset ?? Schema.GetOffset(0xC8D644B2C7509CCF);
+            return new CPerParticleFloatInputImpl(_Handle + _WorleyJitterOffset!.Value);
+        }
     }
-  }
 
 
 }

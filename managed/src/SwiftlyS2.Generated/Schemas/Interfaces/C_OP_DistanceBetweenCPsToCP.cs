@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_DistanceBetweenCPsToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_DistanceBetweenCPsToCP> {
+public partial interface C_OP_DistanceBetweenCPsToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_DistanceBetweenCPsToCP>
+{
+    static C_OP_DistanceBetweenCPsToCP ISchemaClass<C_OP_DistanceBetweenCPsToCP>.From(nint handle) => new C_OP_DistanceBetweenCPsToCPImpl(handle);
+    static int ISchemaClass<C_OP_DistanceBetweenCPsToCP>.Size => 656;
+    static string? ISchemaClass<C_OP_DistanceBetweenCPsToCP>.ClassName => null;
 
-  static C_OP_DistanceBetweenCPsToCP ISchemaClass<C_OP_DistanceBetweenCPsToCP>.From(nint handle) => new C_OP_DistanceBetweenCPsToCPImpl(handle);
-  static int ISchemaClass<C_OP_DistanceBetweenCPsToCP>.Size => 656;
-  static string? ISchemaClass<C_OP_DistanceBetweenCPsToCP>.ClassName => null;
 
-  
-  public ref int StartCP { get; }
-  
-  public ref int EndCP { get; }
-  
-  public ref int OutputCP { get; }
-  
-  public ref int OutputCPField { get; }
-  
-  public ref bool SetOnce { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref float MaxTraceLength { get; }
-  
-  public ref float LOSScale { get; }
-  
-  public ref bool LOS { get; }
-  
-  public string CollisionGroupName { get; set; }
-  
-  public ref ParticleTraceSet_t TraceSet { get; }
-  
-  public ref ParticleParentSetMode_t SetParent { get; }
+    public ref int StartCP { get; }
+
+    public ref int EndCP { get; }
+
+    public ref int OutputCP { get; }
+
+    public ref int OutputCPField { get; }
+
+    public ref bool SetOnce { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref float MaxTraceLength { get; }
+
+    public ref float LOSScale { get; }
+
+    public ref bool LOS { get; }
+
+    public string CollisionGroupName { get; set; }
+
+    public ref ParticleTraceSet_t TraceSet { get; }
+
+    public ref ParticleParentSetMode_t SetParent { get; }
 
 
 }

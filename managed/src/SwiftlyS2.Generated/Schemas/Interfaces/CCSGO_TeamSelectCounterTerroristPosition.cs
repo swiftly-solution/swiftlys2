@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSGO_TeamSelectCounterTerroristPosition : CCSGO_TeamSelectCharacterPosition, ISchemaClass<CCSGO_TeamSelectCounterTerroristPosition> {
-
-  static CCSGO_TeamSelectCounterTerroristPosition ISchemaClass<CCSGO_TeamSelectCounterTerroristPosition>.From(nint handle) => new CCSGO_TeamSelectCounterTerroristPositionImpl(handle);
-  static int ISchemaClass<CCSGO_TeamSelectCounterTerroristPosition>.Size => 3336;
-  static string? ISchemaClass<CCSGO_TeamSelectCounterTerroristPosition>.ClassName => "team_select_counterterrorist";
+public partial interface CCSGO_TeamSelectCounterTerroristPosition : CCSGO_TeamSelectCharacterPosition, ISchemaClass<CCSGO_TeamSelectCounterTerroristPosition>
+{
+    static CCSGO_TeamSelectCounterTerroristPosition ISchemaClass<CCSGO_TeamSelectCounterTerroristPosition>.From(nint handle) => new CCSGO_TeamSelectCounterTerroristPositionImpl(handle);
+    static int ISchemaClass<CCSGO_TeamSelectCounterTerroristPosition>.Size => 3336;
+    static string? ISchemaClass<CCSGO_TeamSelectCounterTerroristPosition>.ClassName => "team_select_counterterrorist";
 
 
 

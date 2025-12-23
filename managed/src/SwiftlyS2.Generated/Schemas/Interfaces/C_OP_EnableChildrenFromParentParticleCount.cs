@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_EnableChildrenFromParentParticleCount : CParticleFunctionPreEmission, ISchemaClass<C_OP_EnableChildrenFromParentParticleCount> {
+public partial interface C_OP_EnableChildrenFromParentParticleCount : CParticleFunctionPreEmission, ISchemaClass<C_OP_EnableChildrenFromParentParticleCount>
+{
+    static C_OP_EnableChildrenFromParentParticleCount ISchemaClass<C_OP_EnableChildrenFromParentParticleCount>.From(nint handle) => new C_OP_EnableChildrenFromParentParticleCountImpl(handle);
+    static int ISchemaClass<C_OP_EnableChildrenFromParentParticleCount>.Size => 856;
+    static string? ISchemaClass<C_OP_EnableChildrenFromParentParticleCount>.ClassName => null;
 
-  static C_OP_EnableChildrenFromParentParticleCount ISchemaClass<C_OP_EnableChildrenFromParentParticleCount>.From(nint handle) => new C_OP_EnableChildrenFromParentParticleCountImpl(handle);
-  static int ISchemaClass<C_OP_EnableChildrenFromParentParticleCount>.Size => 856;
-  static string? ISchemaClass<C_OP_EnableChildrenFromParentParticleCount>.ClassName => null;
 
-  
-  public ref int ChildGroupID { get; }
-  
-  public ref int FirstChild { get; }
-  
-  public CParticleCollectionFloatInput NumChildrenToEnable { get; }
-  
-  public ref bool DisableChildren { get; }
-  
-  public ref bool PlayEndcapOnStop { get; }
-  
-  public ref bool DestroyImmediately { get; }
+    public ref int ChildGroupID { get; }
+
+    public ref int FirstChild { get; }
+
+    public CParticleCollectionFloatInput NumChildrenToEnable { get; }
+
+    public ref bool DisableChildren { get; }
+
+    public ref bool PlayEndcapOnStop { get; }
+
+    public ref bool DestroyImmediately { get; }
 
 
 }

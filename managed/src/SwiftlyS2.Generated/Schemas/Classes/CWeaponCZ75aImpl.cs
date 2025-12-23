@@ -6,29 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CWeaponCZ75aImpl : CCSWeaponBaseGunImpl, CWeaponCZ75a {
+internal partial class CWeaponCZ75aImpl : CCSWeaponBaseGunImpl, CWeaponCZ75a
+{
+    public CWeaponCZ75aImpl(nint handle) : base(handle) { }
 
-  public CWeaponCZ75aImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MagazineRemovedOffset;
 
-  private static nint? _MagazineRemovedOffset;
-
-  public ref bool MagazineRemoved {
-    get {
-      if (_MagazineRemovedOffset == null) {
-        _MagazineRemovedOffset = Schema.GetOffset(0x5FFE9C69188A471);
-      }
-      return ref _Handle.AsRef<bool>(_MagazineRemovedOffset!.Value);
+    public ref bool MagazineRemoved {
+        get {
+            _MagazineRemovedOffset = _MagazineRemovedOffset ?? Schema.GetOffset(0x5FFE9C69188A471);
+            return ref _Handle.AsRef<bool>(_MagazineRemovedOffset!.Value);
+        }
     }
-  }
 
-  public void MagazineRemovedUpdated() {
-    Schema.Update(_Handle, 0x5FFE9C69188A471);
-  }
+    public void MagazineRemovedUpdated() => Schema.Update(_Handle, 0x5FFE9C69188A471);
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHostageAlias_info_hostage_spawn : CHostage, ISchemaClass<CHostageAlias_info_hostage_spawn> {
-
-  static CHostageAlias_info_hostage_spawn ISchemaClass<CHostageAlias_info_hostage_spawn>.From(nint handle) => new CHostageAlias_info_hostage_spawnImpl(handle);
-  static int ISchemaClass<CHostageAlias_info_hostage_spawn>.Size => 11952;
-  static string? ISchemaClass<CHostageAlias_info_hostage_spawn>.ClassName => null;
+public partial interface CHostageAlias_info_hostage_spawn : CHostage, ISchemaClass<CHostageAlias_info_hostage_spawn>
+{
+    static CHostageAlias_info_hostage_spawn ISchemaClass<CHostageAlias_info_hostage_spawn>.From(nint handle) => new CHostageAlias_info_hostage_spawnImpl(handle);
+    static int ISchemaClass<CHostageAlias_info_hostage_spawn>.Size => 11952;
+    static string? ISchemaClass<CHostageAlias_info_hostage_spawn>.ClassName => null;
 
 
 

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSkyboxReferenceImpl : CBaseEntityImpl, CSkyboxReference {
+internal partial class CSkyboxReferenceImpl : CBaseEntityImpl, CSkyboxReference
+{
+    public CSkyboxReferenceImpl(nint handle) : base(handle) { }
 
-  public CSkyboxReferenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WorldGroupIdOffset;
 
-  private static nint? _WorldGroupIdOffset;
-
-  public ref uint WorldGroupId {
-    get {
-      if (_WorldGroupIdOffset == null) {
-        _WorldGroupIdOffset = Schema.GetOffset(0x98809790BECFAC7);
-      }
-      return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+    public ref uint WorldGroupId {
+        get {
+            _WorldGroupIdOffset = _WorldGroupIdOffset ?? Schema.GetOffset(0x98809790BECFAC7);
+            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkyCameraOffset;
+    private static nint? _SkyCameraOffset;
 
-  public ref CHandle<CSkyCamera> SkyCamera {
-    get {
-      if (_SkyCameraOffset == null) {
-        _SkyCameraOffset = Schema.GetOffset(0x988097906BB5B33);
-      }
-      return ref _Handle.AsRef<CHandle<CSkyCamera>>(_SkyCameraOffset!.Value);
+    public ref CHandle<CSkyCamera> SkyCamera {
+        get {
+            _SkyCameraOffset = _SkyCameraOffset ?? Schema.GetOffset(0x988097906BB5B33);
+            return ref _Handle.AsRef<CHandle<CSkyCamera>>(_SkyCameraOffset!.Value);
+        }
     }
-  }
 
 
 }

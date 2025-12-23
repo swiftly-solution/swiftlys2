@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleImpulseType_t : uint {
-
+public enum ParticleImpulseType_t : uint
+{
  IMPULSE_TYPE_NONE = 0,
 
  IMPULSE_TYPE_GENERIC = 1,

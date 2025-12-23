@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCommentaryAutoImpl : CBaseEntityImpl, CCommentaryAuto {
+internal partial class CCommentaryAutoImpl : CBaseEntityImpl, CCommentaryAuto
+{
+    public CCommentaryAutoImpl(nint handle) : base(handle) { }
 
-  public CCommentaryAutoImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnCommentaryNewGameOffset;
 
-  private static nint? _OnCommentaryNewGameOffset;
-
-  public CEntityIOOutput OnCommentaryNewGame {
-    get {
-      if (_OnCommentaryNewGameOffset == null) {
-        _OnCommentaryNewGameOffset = Schema.GetOffset(0x5BB39498C3245D97);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnCommentaryNewGameOffset!.Value);
+    public ref CEntityIOOutput OnCommentaryNewGame {
+        get {
+            _OnCommentaryNewGameOffset = _OnCommentaryNewGameOffset ?? Schema.GetOffset(0x5BB39498C3245D97);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryNewGameOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnCommentaryMidGameOffset;
+    private static nint? _OnCommentaryMidGameOffset;
 
-  public CEntityIOOutput OnCommentaryMidGame {
-    get {
-      if (_OnCommentaryMidGameOffset == null) {
-        _OnCommentaryMidGameOffset = Schema.GetOffset(0x5BB39498A1777FCB);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnCommentaryMidGameOffset!.Value);
+    public ref CEntityIOOutput OnCommentaryMidGame {
+        get {
+            _OnCommentaryMidGameOffset = _OnCommentaryMidGameOffset ?? Schema.GetOffset(0x5BB39498A1777FCB);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryMidGameOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnCommentaryMultiplayerSpawnOffset;
+    private static nint? _OnCommentaryMultiplayerSpawnOffset;
 
-  public CEntityIOOutput OnCommentaryMultiplayerSpawn {
-    get {
-      if (_OnCommentaryMultiplayerSpawnOffset == null) {
-        _OnCommentaryMultiplayerSpawnOffset = Schema.GetOffset(0x5BB3949819FDEEB2);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnCommentaryMultiplayerSpawnOffset!.Value);
+    public ref CEntityIOOutput OnCommentaryMultiplayerSpawn {
+        get {
+            _OnCommentaryMultiplayerSpawnOffset = _OnCommentaryMultiplayerSpawnOffset ?? Schema.GetOffset(0x5BB3949819FDEEB2);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCommentaryMultiplayerSpawnOffset!.Value);
+        }
     }
-  }
 
 
 }

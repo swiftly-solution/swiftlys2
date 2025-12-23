@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmOrientationWarpNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmOrientationWarpNode__CDefinition> {
+public partial interface CNmOrientationWarpNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmOrientationWarpNode__CDefinition>
+{
+    static CNmOrientationWarpNode__CDefinition ISchemaClass<CNmOrientationWarpNode__CDefinition>.From(nint handle) => new CNmOrientationWarpNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmOrientationWarpNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmOrientationWarpNode__CDefinition>.ClassName => null;
 
-  static CNmOrientationWarpNode__CDefinition ISchemaClass<CNmOrientationWarpNode__CDefinition>.From(nint handle) => new CNmOrientationWarpNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmOrientationWarpNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmOrientationWarpNode__CDefinition>.ClassName => null;
 
-  
-  public ref short ClipReferenceNodeIdx { get; }
-  
-  public ref short TargetValueNodeIdx { get; }
-  
-  public ref bool IsOffsetNode { get; }
-  
-  public ref bool IsOffsetRelativeToCharacter { get; }
-  
-  public ref CNmRootMotionData__SamplingMode_t SamplingMode { get; }
+    public ref short ClipReferenceNodeIdx { get; }
+
+    public ref short TargetValueNodeIdx { get; }
+
+    public ref bool IsOffsetNode { get; }
+
+    public ref bool IsOffsetRelativeToCharacter { get; }
+
+    public ref CNmRootMotionData__SamplingMode_t SamplingMode { get; }
 
 
 }

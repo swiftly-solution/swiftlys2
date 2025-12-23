@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Inflow_ObservableVariableListener : CPulseCell_Inflow_BaseEntrypoint, ISchemaClass<CPulseCell_Inflow_ObservableVariableListener> {
+public partial interface CPulseCell_Inflow_ObservableVariableListener : CPulseCell_Inflow_BaseEntrypoint, ISchemaClass<CPulseCell_Inflow_ObservableVariableListener>
+{
+    static CPulseCell_Inflow_ObservableVariableListener ISchemaClass<CPulseCell_Inflow_ObservableVariableListener>.From(nint handle) => new CPulseCell_Inflow_ObservableVariableListenerImpl(handle);
+    static int ISchemaClass<CPulseCell_Inflow_ObservableVariableListener>.Size => 136;
+    static string? ISchemaClass<CPulseCell_Inflow_ObservableVariableListener>.ClassName => null;
 
-  static CPulseCell_Inflow_ObservableVariableListener ISchemaClass<CPulseCell_Inflow_ObservableVariableListener>.From(nint handle) => new CPulseCell_Inflow_ObservableVariableListenerImpl(handle);
-  static int ISchemaClass<CPulseCell_Inflow_ObservableVariableListener>.Size => 136;
-  static string? ISchemaClass<CPulseCell_Inflow_ObservableVariableListener>.ClassName => null;
 
-  
-  public PulseRuntimeBlackboardReferenceIndex_t BlackboardReference { get; }
-  
-  public ref bool SelfReference { get; }
+    public PulseRuntimeBlackboardReferenceIndex_t BlackboardReference { get; }
+
+    public ref bool SelfReference { get; }
 
 
 }

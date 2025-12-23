@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CResponseCriteriaSet : ISchemaClass<CResponseCriteriaSet> {
+public partial interface CResponseCriteriaSet : ISchemaClass<CResponseCriteriaSet>
+{
+    static CResponseCriteriaSet ISchemaClass<CResponseCriteriaSet>.From(nint handle) => new CResponseCriteriaSetImpl(handle);
+    static int ISchemaClass<CResponseCriteriaSet>.Size => 56;
+    static string? ISchemaClass<CResponseCriteriaSet>.ClassName => null;
 
-  static CResponseCriteriaSet ISchemaClass<CResponseCriteriaSet>.From(nint handle) => new CResponseCriteriaSetImpl(handle);
-  static int ISchemaClass<CResponseCriteriaSet>.Size => 56;
-  static string? ISchemaClass<CResponseCriteriaSet>.ClassName => null;
 
-  
-  public ref int NumPrefixedContexts { get; }
-  
-  public ref bool OverrideOnAppend { get; }
+    public ref int NumPrefixedContexts { get; }
+
+    public ref bool OverrideOnAppend { get; }
 
 
 }

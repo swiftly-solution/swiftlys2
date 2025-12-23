@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSoftParent_t : ISchemaClass<FeSoftParent_t> {
+public partial interface FeSoftParent_t : ISchemaClass<FeSoftParent_t>
+{
+    static FeSoftParent_t ISchemaClass<FeSoftParent_t>.From(nint handle) => new FeSoftParent_tImpl(handle);
+    static int ISchemaClass<FeSoftParent_t>.Size => 8;
+    static string? ISchemaClass<FeSoftParent_t>.ClassName => null;
 
-  static FeSoftParent_t ISchemaClass<FeSoftParent_t>.From(nint handle) => new FeSoftParent_tImpl(handle);
-  static int ISchemaClass<FeSoftParent_t>.Size => 8;
-  static string? ISchemaClass<FeSoftParent_t>.ClassName => null;
 
-  
-  public ref int Parent { get; }
-  
-  public ref float Alpha { get; }
+    public ref int Parent { get; }
+
+    public ref float Alpha { get; }
 
 
 }

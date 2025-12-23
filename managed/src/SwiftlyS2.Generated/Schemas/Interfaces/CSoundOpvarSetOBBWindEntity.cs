@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundOpvarSetOBBWindEntity : CSoundOpvarSetPointBase, ISchemaClass<CSoundOpvarSetOBBWindEntity> {
+public partial interface CSoundOpvarSetOBBWindEntity : CSoundOpvarSetPointBase, ISchemaClass<CSoundOpvarSetOBBWindEntity>
+{
+    static CSoundOpvarSetOBBWindEntity ISchemaClass<CSoundOpvarSetOBBWindEntity>.From(nint handle) => new CSoundOpvarSetOBBWindEntityImpl(handle);
+    static int ISchemaClass<CSoundOpvarSetOBBWindEntity>.Size => 1496;
+    static string? ISchemaClass<CSoundOpvarSetOBBWindEntity>.ClassName => "snd_opvar_set_wind_obb";
 
-  static CSoundOpvarSetOBBWindEntity ISchemaClass<CSoundOpvarSetOBBWindEntity>.From(nint handle) => new CSoundOpvarSetOBBWindEntityImpl(handle);
-  static int ISchemaClass<CSoundOpvarSetOBBWindEntity>.Size => 1496;
-  static string? ISchemaClass<CSoundOpvarSetOBBWindEntity>.ClassName => "snd_opvar_set_wind_obb";
 
-  
-  public ref Vector Mins { get; }
-  
-  public ref Vector Maxs { get; }
-  
-  public ref Vector DistanceMins { get; }
-  
-  public ref Vector DistanceMaxs { get; }
-  
-  public ref float WindMin { get; }
-  
-  public ref float WindMax { get; }
-  
-  public ref float WindMapMin { get; }
-  
-  public ref float WindMapMax { get; }
+    public ref Vector Mins { get; }
+
+    public ref Vector Maxs { get; }
+
+    public ref Vector DistanceMins { get; }
+
+    public ref Vector DistanceMaxs { get; }
+
+    public ref float WindMin { get; }
+
+    public ref float WindMax { get; }
+
+    public ref float WindMapMin { get; }
+
+    public ref float WindMapMax { get; }
 
 
 }

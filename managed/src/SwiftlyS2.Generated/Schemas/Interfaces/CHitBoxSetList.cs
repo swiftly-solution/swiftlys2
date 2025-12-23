@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHitBoxSetList : ISchemaClass<CHitBoxSetList> {
+public partial interface CHitBoxSetList : ISchemaClass<CHitBoxSetList>
+{
+    static CHitBoxSetList ISchemaClass<CHitBoxSetList>.From(nint handle) => new CHitBoxSetListImpl(handle);
+    static int ISchemaClass<CHitBoxSetList>.Size => 24;
+    static string? ISchemaClass<CHitBoxSetList>.ClassName => null;
 
-  static CHitBoxSetList ISchemaClass<CHitBoxSetList>.From(nint handle) => new CHitBoxSetListImpl(handle);
-  static int ISchemaClass<CHitBoxSetList>.Size => 24;
-  static string? ISchemaClass<CHitBoxSetList>.ClassName => null;
 
-  
-  public ref CUtlVector<CHitBoxSet> HitBoxSets { get; }
+    public ref CUtlVector<CHitBoxSet> HitBoxSets { get; }
 
 
 }

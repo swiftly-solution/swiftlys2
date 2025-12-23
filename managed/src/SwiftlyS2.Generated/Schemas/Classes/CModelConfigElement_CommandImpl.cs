@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigElement_CommandImpl : CModelConfigElementImpl, CModelConfigElement_Command {
+internal partial class CModelConfigElement_CommandImpl : CModelConfigElementImpl, CModelConfigElement_Command
+{
+    public CModelConfigElement_CommandImpl(nint handle) : base(handle) { }
 
-  public CModelConfigElement_CommandImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CommandOffset;
 
-  private static nint? _CommandOffset;
+    public string Command {
+        get {
+            _CommandOffset = _CommandOffset ?? Schema.GetOffset(0x89334ED93A5BBC32);
+            return Schema.GetString(_Handle.Read<nint>(_CommandOffset!.Value));
+        }
+        set {
+            _CommandOffset = _CommandOffset ?? Schema.GetOffset(0x89334ED93A5BBC32);
+            Schema.SetString(_Handle, _CommandOffset!.Value, value);
+        }
+    } 
+    private static nint? _ArgsOffset;
 
-  public string Command {
-    get {
-      if (_CommandOffset == null) {
-        _CommandOffset = Schema.GetOffset(0x89334ED93A5BBC32);
-      }
-      var ptr = _Handle.Read<nint>(_CommandOffset!.Value);
-      return Schema.GetString(ptr);
+    public SchemaUntypedField Args {
+        get {
+            _ArgsOffset = _ArgsOffset ?? Schema.GetOffset(0x89334ED9DAB98BBC);
+            return new SchemaUntypedField(_Handle + _ArgsOffset!.Value);
+        }
     }
-    set {
-      if (_CommandOffset == null) {
-        _CommandOffset = Schema.GetOffset(0x89334ED93A5BBC32);
-      }
-      Schema.SetString(_Handle, _CommandOffset!.Value, value);
-    }
-  } 
-  private static nint? _ArgsOffset;
-
-  public SchemaUntypedField Args {
-    get {
-      if (_ArgsOffset == null) {
-        _ArgsOffset = Schema.GetOffset(0x89334ED9DAB98BBC);
-      }
-      return new SchemaUntypedField(_Handle + _ArgsOffset!.Value);
-    }
-  }
 
 
 }

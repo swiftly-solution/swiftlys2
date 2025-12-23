@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ForceBasedOnDistanceToPlaneImpl : CParticleFunctionForceImpl, C_OP_ForceBasedOnDistanceToPlane {
+internal partial class C_OP_ForceBasedOnDistanceToPlaneImpl : CParticleFunctionForceImpl, C_OP_ForceBasedOnDistanceToPlane
+{
+    public C_OP_ForceBasedOnDistanceToPlaneImpl(nint handle) : base(handle) { }
 
-  public C_OP_ForceBasedOnDistanceToPlaneImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinDistOffset;
 
-  private static nint? _MinDistOffset;
-
-  public ref float MinDist {
-    get {
-      if (_MinDistOffset == null) {
-        _MinDistOffset = Schema.GetOffset(0x41A5EAC25219494D);
-      }
-      return ref _Handle.AsRef<float>(_MinDistOffset!.Value);
+    public ref float MinDist {
+        get {
+            _MinDistOffset = _MinDistOffset ?? Schema.GetOffset(0x41A5EAC25219494D);
+            return ref _Handle.AsRef<float>(_MinDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceAtMinDistOffset;
+    private static nint? _ForceAtMinDistOffset;
 
-  public ref Vector ForceAtMinDist {
-    get {
-      if (_ForceAtMinDistOffset == null) {
-        _ForceAtMinDistOffset = Schema.GetOffset(0x41A5EAC23BD9C5EB);
-      }
-      return ref _Handle.AsRef<Vector>(_ForceAtMinDistOffset!.Value);
+    public ref Vector ForceAtMinDist {
+        get {
+            _ForceAtMinDistOffset = _ForceAtMinDistOffset ?? Schema.GetOffset(0x41A5EAC23BD9C5EB);
+            return ref _Handle.AsRef<Vector>(_ForceAtMinDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxDistOffset;
+    private static nint? _MaxDistOffset;
 
-  public ref float MaxDist {
-    get {
-      if (_MaxDistOffset == null) {
-        _MaxDistOffset = Schema.GetOffset(0x41A5EAC2EFFD23F7);
-      }
-      return ref _Handle.AsRef<float>(_MaxDistOffset!.Value);
+    public ref float MaxDist {
+        get {
+            _MaxDistOffset = _MaxDistOffset ?? Schema.GetOffset(0x41A5EAC2EFFD23F7);
+            return ref _Handle.AsRef<float>(_MaxDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceAtMaxDistOffset;
+    private static nint? _ForceAtMaxDistOffset;
 
-  public ref Vector ForceAtMaxDist {
-    get {
-      if (_ForceAtMaxDistOffset == null) {
-        _ForceAtMaxDistOffset = Schema.GetOffset(0x41A5EAC24119AAF9);
-      }
-      return ref _Handle.AsRef<Vector>(_ForceAtMaxDistOffset!.Value);
+    public ref Vector ForceAtMaxDist {
+        get {
+            _ForceAtMaxDistOffset = _ForceAtMaxDistOffset ?? Schema.GetOffset(0x41A5EAC24119AAF9);
+            return ref _Handle.AsRef<Vector>(_ForceAtMaxDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlaneNormalOffset;
+    private static nint? _PlaneNormalOffset;
 
-  public ref Vector PlaneNormal {
-    get {
-      if (_PlaneNormalOffset == null) {
-        _PlaneNormalOffset = Schema.GetOffset(0x41A5EAC221103682);
-      }
-      return ref _Handle.AsRef<Vector>(_PlaneNormalOffset!.Value);
+    public ref Vector PlaneNormal {
+        get {
+            _PlaneNormalOffset = _PlaneNormalOffset ?? Schema.GetOffset(0x41A5EAC221103682);
+            return ref _Handle.AsRef<Vector>(_PlaneNormalOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointNumberOffset;
+    private static nint? _ControlPointNumberOffset;
 
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x41A5EAC23F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x41A5EAC23F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExponentOffset;
+    private static nint? _ExponentOffset;
 
-  public ref float Exponent {
-    get {
-      if (_ExponentOffset == null) {
-        _ExponentOffset = Schema.GetOffset(0x41A5EAC220A7BCBC);
-      }
-      return ref _Handle.AsRef<float>(_ExponentOffset!.Value);
+    public ref float Exponent {
+        get {
+            _ExponentOffset = _ExponentOffset ?? Schema.GetOffset(0x41A5EAC220A7BCBC);
+            return ref _Handle.AsRef<float>(_ExponentOffset!.Value);
+        }
     }
-  }
 
 
 }

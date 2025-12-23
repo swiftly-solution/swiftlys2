@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CWeaponTaser : CCSWeaponBaseGun, ISchemaClass<CWeaponTaser> {
+public partial interface CWeaponTaser : CCSWeaponBaseGun, ISchemaClass<CWeaponTaser>
+{
+    static CWeaponTaser ISchemaClass<CWeaponTaser>.From(nint handle) => new CWeaponTaserImpl(handle);
+    static int ISchemaClass<CWeaponTaser>.Size => 4608;
+    static string? ISchemaClass<CWeaponTaser>.ClassName => "weapon_taser";
 
-  static CWeaponTaser ISchemaClass<CWeaponTaser>.From(nint handle) => new CWeaponTaserImpl(handle);
-  static int ISchemaClass<CWeaponTaser>.Size => 4608;
-  static string? ISchemaClass<CWeaponTaser>.ClassName => "weapon_taser";
 
-  
-  public GameTime_t FireTime { get; }
-  
-  public ref int LastAttackTick { get; }
+    public GameTime_t FireTime { get; }
 
-  public void FireTimeUpdated();
+    public ref int LastAttackTick { get; }
+
+    public void FireTimeUpdated();
 }

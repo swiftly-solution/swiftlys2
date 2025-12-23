@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FloatInputMaterialVariable_t : ISchemaClass<FloatInputMaterialVariable_t> {
+public partial interface FloatInputMaterialVariable_t : ISchemaClass<FloatInputMaterialVariable_t>
+{
+    static FloatInputMaterialVariable_t ISchemaClass<FloatInputMaterialVariable_t>.From(nint handle) => new FloatInputMaterialVariable_tImpl(handle);
+    static int ISchemaClass<FloatInputMaterialVariable_t>.Size => 376;
+    static string? ISchemaClass<FloatInputMaterialVariable_t>.ClassName => null;
 
-  static FloatInputMaterialVariable_t ISchemaClass<FloatInputMaterialVariable_t>.From(nint handle) => new FloatInputMaterialVariable_tImpl(handle);
-  static int ISchemaClass<FloatInputMaterialVariable_t>.Size => 376;
-  static string? ISchemaClass<FloatInputMaterialVariable_t>.ClassName => null;
 
-  
-  public string StrVariable { get; set; }
-  
-  public CParticleCollectionFloatInput Input { get; }
+    public string StrVariable { get; set; }
+
+    public CParticleCollectionFloatInput Input { get; }
 
 
 }

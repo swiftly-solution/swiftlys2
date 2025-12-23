@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCJavaScriptResource : ISchemaClass<InfoForResourceTypeCJavaScriptResource> {
-
-  static InfoForResourceTypeCJavaScriptResource ISchemaClass<InfoForResourceTypeCJavaScriptResource>.From(nint handle) => new InfoForResourceTypeCJavaScriptResourceImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCJavaScriptResource>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCJavaScriptResource>.ClassName => null;
+public partial interface InfoForResourceTypeCJavaScriptResource : ISchemaClass<InfoForResourceTypeCJavaScriptResource>
+{
+    static InfoForResourceTypeCJavaScriptResource ISchemaClass<InfoForResourceTypeCJavaScriptResource>.From(nint handle) => new InfoForResourceTypeCJavaScriptResourceImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCJavaScriptResource>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCJavaScriptResource>.ClassName => null;
 
 
 

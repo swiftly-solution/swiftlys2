@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerBombReset : CBaseTrigger, ISchemaClass<CTriggerBombReset> {
-
-  static CTriggerBombReset ISchemaClass<CTriggerBombReset>.From(nint handle) => new CTriggerBombResetImpl(handle);
-  static int ISchemaClass<CTriggerBombReset>.Size => 2472;
-  static string? ISchemaClass<CTriggerBombReset>.ClassName => "trigger_bomb_reset";
+public partial interface CTriggerBombReset : CBaseTrigger, ISchemaClass<CTriggerBombReset>
+{
+    static CTriggerBombReset ISchemaClass<CTriggerBombReset>.From(nint handle) => new CTriggerBombResetImpl(handle);
+    static int ISchemaClass<CTriggerBombReset>.Size => 2472;
+    static string? ISchemaClass<CTriggerBombReset>.ClassName => "trigger_bomb_reset";
 
 
 

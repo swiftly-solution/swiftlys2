@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRagdollConstraintImpl : CPhysConstraintImpl, CRagdollConstraint {
+internal partial class CRagdollConstraintImpl : CPhysConstraintImpl, CRagdollConstraint
+{
+    public CRagdollConstraintImpl(nint handle) : base(handle) { }
 
-  public CRagdollConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _XminOffset;
 
-  private static nint? _XminOffset;
-
-  public ref float Xmin {
-    get {
-      if (_XminOffset == null) {
-        _XminOffset = Schema.GetOffset(0xF36946DA76E67DC1);
-      }
-      return ref _Handle.AsRef<float>(_XminOffset!.Value);
+    public ref float Xmin {
+        get {
+            _XminOffset = _XminOffset ?? Schema.GetOffset(0xF36946DA76E67DC1);
+            return ref _Handle.AsRef<float>(_XminOffset!.Value);
+        }
     }
-  }
-  private static nint? _XmaxOffset;
+    private static nint? _XmaxOffset;
 
-  public ref float Xmax {
-    get {
-      if (_XmaxOffset == null) {
-        _XmaxOffset = Schema.GetOffset(0xF36946DA68F9EF6F);
-      }
-      return ref _Handle.AsRef<float>(_XmaxOffset!.Value);
+    public ref float Xmax {
+        get {
+            _XmaxOffset = _XmaxOffset ?? Schema.GetOffset(0xF36946DA68F9EF6F);
+            return ref _Handle.AsRef<float>(_XmaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _YminOffset;
+    private static nint? _YminOffset;
 
-  public ref float Ymin {
-    get {
-      if (_YminOffset == null) {
-        _YminOffset = Schema.GetOffset(0xF36946DACE2F1828);
-      }
-      return ref _Handle.AsRef<float>(_YminOffset!.Value);
+    public ref float Ymin {
+        get {
+            _YminOffset = _YminOffset ?? Schema.GetOffset(0xF36946DACE2F1828);
+            return ref _Handle.AsRef<float>(_YminOffset!.Value);
+        }
     }
-  }
-  private static nint? _YmaxOffset;
+    private static nint? _YmaxOffset;
 
-  public ref float Ymax {
-    get {
-      if (_YmaxOffset == null) {
-        _YmaxOffset = Schema.GetOffset(0xF36946DAC4429022);
-      }
-      return ref _Handle.AsRef<float>(_YmaxOffset!.Value);
+    public ref float Ymax {
+        get {
+            _YmaxOffset = _YmaxOffset ?? Schema.GetOffset(0xF36946DAC4429022);
+            return ref _Handle.AsRef<float>(_YmaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZminOffset;
+    private static nint? _ZminOffset;
 
-  public ref float Zmin {
-    get {
-      if (_ZminOffset == null) {
-        _ZminOffset = Schema.GetOffset(0xF36946DAC34E881F);
-      }
-      return ref _Handle.AsRef<float>(_ZminOffset!.Value);
+    public ref float Zmin {
+        get {
+            _ZminOffset = _ZminOffset ?? Schema.GetOffset(0xF36946DAC34E881F);
+            return ref _Handle.AsRef<float>(_ZminOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZmaxOffset;
+    private static nint? _ZmaxOffset;
 
-  public ref float Zmax {
-    get {
-      if (_ZmaxOffset == null) {
-        _ZmaxOffset = Schema.GetOffset(0xF36946DAD13B1671);
-      }
-      return ref _Handle.AsRef<float>(_ZmaxOffset!.Value);
+    public ref float Zmax {
+        get {
+            _ZmaxOffset = _ZmaxOffset ?? Schema.GetOffset(0xF36946DAD13B1671);
+            return ref _Handle.AsRef<float>(_ZmaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _XfrictionOffset;
+    private static nint? _XfrictionOffset;
 
-  public ref float Xfriction {
-    get {
-      if (_XfrictionOffset == null) {
-        _XfrictionOffset = Schema.GetOffset(0xF36946DA08758E19);
-      }
-      return ref _Handle.AsRef<float>(_XfrictionOffset!.Value);
+    public ref float Xfriction {
+        get {
+            _XfrictionOffset = _XfrictionOffset ?? Schema.GetOffset(0xF36946DA08758E19);
+            return ref _Handle.AsRef<float>(_XfrictionOffset!.Value);
+        }
     }
-  }
-  private static nint? _YfrictionOffset;
+    private static nint? _YfrictionOffset;
 
-  public ref float Yfriction {
-    get {
-      if (_YfrictionOffset == null) {
-        _YfrictionOffset = Schema.GetOffset(0xF36946DAEFC8C6C6);
-      }
-      return ref _Handle.AsRef<float>(_YfrictionOffset!.Value);
+    public ref float Yfriction {
+        get {
+            _YfrictionOffset = _YfrictionOffset ?? Schema.GetOffset(0xF36946DAEFC8C6C6);
+            return ref _Handle.AsRef<float>(_YfrictionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZfrictionOffset;
+    private static nint? _ZfrictionOffset;
 
-  public ref float Zfriction {
-    get {
-      if (_ZfrictionOffset == null) {
-        _ZfrictionOffset = Schema.GetOffset(0xF36946DA5587BDC3);
-      }
-      return ref _Handle.AsRef<float>(_ZfrictionOffset!.Value);
+    public ref float Zfriction {
+        get {
+            _ZfrictionOffset = _ZfrictionOffset ?? Schema.GetOffset(0xF36946DA5587BDC3);
+            return ref _Handle.AsRef<float>(_ZfrictionOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncMoverAPI : ISchemaClass<CFuncMoverAPI> {
-
-  static CFuncMoverAPI ISchemaClass<CFuncMoverAPI>.From(nint handle) => new CFuncMoverAPIImpl(handle);
-  static int ISchemaClass<CFuncMoverAPI>.Size => 8;
-  static string? ISchemaClass<CFuncMoverAPI>.ClassName => null;
+public partial interface CFuncMoverAPI : ISchemaClass<CFuncMoverAPI>
+{
+    static CFuncMoverAPI ISchemaClass<CFuncMoverAPI>.From(nint handle) => new CFuncMoverAPIImpl(handle);
+    static int ISchemaClass<CFuncMoverAPI>.Size => 8;
+    static string? ISchemaClass<CFuncMoverAPI>.ClassName => null;
 
 
 

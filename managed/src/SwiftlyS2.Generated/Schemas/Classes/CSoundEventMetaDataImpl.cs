@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundEventMetaDataImpl : SchemaClass, CSoundEventMetaData {
+internal partial class CSoundEventMetaDataImpl : SchemaClass, CSoundEventMetaData
+{
+    public CSoundEventMetaDataImpl(nint handle) : base(handle) { }
 
-  public CSoundEventMetaDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SoundEventVMixOffset;
 
-  private static nint? _SoundEventVMixOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCVMixListResource> SoundEventVMix {
-    get {
-      if (_SoundEventVMixOffset == null) {
-        _SoundEventVMixOffset = Schema.GetOffset(0xE03E2D8ED7B83398);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVMixListResource>>(_SoundEventVMixOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCVMixListResource> SoundEventVMix {
+        get {
+            _SoundEventVMixOffset = _SoundEventVMixOffset ?? Schema.GetOffset(0xE03E2D8ED7B83398);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVMixListResource>>(_SoundEventVMixOffset!.Value);
+        }
     }
-  }
 
 
 }

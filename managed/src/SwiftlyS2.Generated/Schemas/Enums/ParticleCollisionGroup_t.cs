@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleCollisionGroup_t : uint {
-
+public enum ParticleCollisionGroup_t : uint
+{
  PARTICLE_COLLISION_GROUP_DEFAULT = 4,
 
  PARTICLE_COLLISION_GROUP_DEBRIS = 5,

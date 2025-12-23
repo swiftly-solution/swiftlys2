@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_DistanceToCPInit : CParticleFunctionInitializer, ISchemaClass<C_INIT_DistanceToCPInit> {
+public partial interface C_INIT_DistanceToCPInit : CParticleFunctionInitializer, ISchemaClass<C_INIT_DistanceToCPInit>
+{
+    static C_INIT_DistanceToCPInit ISchemaClass<C_INIT_DistanceToCPInit>.From(nint handle) => new C_INIT_DistanceToCPInitImpl(handle);
+    static int ISchemaClass<C_INIT_DistanceToCPInit>.Size => 2496;
+    static string? ISchemaClass<C_INIT_DistanceToCPInit>.ClassName => null;
 
-  static C_INIT_DistanceToCPInit ISchemaClass<C_INIT_DistanceToCPInit>.From(nint handle) => new C_INIT_DistanceToCPInitImpl(handle);
-  static int ISchemaClass<C_INIT_DistanceToCPInit>.Size => 2496;
-  static string? ISchemaClass<C_INIT_DistanceToCPInit>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleFloatInput InputMin { get; }
-  
-  public CPerParticleFloatInput InputMax { get; }
-  
-  public CPerParticleFloatInput OutputMin { get; }
-  
-  public CPerParticleFloatInput OutputMax { get; }
-  
-  public ref int StartCP { get; }
-  
-  public ref bool LOS { get; }
-  
-  public string CollisionGroupName { get; set; }
-  
-  public ref ParticleTraceSet_t TraceSet { get; }
-  
-  public CPerParticleFloatInput MaxTraceLength { get; }
-  
-  public ref float LOSScale { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool ActiveRange { get; }
-  
-  public ref Vector DistanceScale { get; }
-  
-  public ref float RemapBias { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleFloatInput InputMin { get; }
+
+    public CPerParticleFloatInput InputMax { get; }
+
+    public CPerParticleFloatInput OutputMin { get; }
+
+    public CPerParticleFloatInput OutputMax { get; }
+
+    public ref int StartCP { get; }
+
+    public ref bool LOS { get; }
+
+    public string CollisionGroupName { get; set; }
+
+    public ref ParticleTraceSet_t TraceSet { get; }
+
+    public CPerParticleFloatInput MaxTraceLength { get; }
+
+    public ref float LOSScale { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool ActiveRange { get; }
+
+    public ref Vector DistanceScale { get; }
+
+    public ref float RemapBias { get; }
 
 
 }

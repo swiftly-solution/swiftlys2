@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomSequenceImpl : CParticleFunctionInitializerImpl, C_INIT_RandomSequence {
+internal partial class C_INIT_RandomSequenceImpl : CParticleFunctionInitializerImpl, C_INIT_RandomSequence
+{
+    public C_INIT_RandomSequenceImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RandomSequenceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SequenceMinOffset;
 
-  private static nint? _SequenceMinOffset;
-
-  public ref int SequenceMin {
-    get {
-      if (_SequenceMinOffset == null) {
-        _SequenceMinOffset = Schema.GetOffset(0x78382338D30682F0);
-      }
-      return ref _Handle.AsRef<int>(_SequenceMinOffset!.Value);
+    public ref int SequenceMin {
+        get {
+            _SequenceMinOffset = _SequenceMinOffset ?? Schema.GetOffset(0x78382338D30682F0);
+            return ref _Handle.AsRef<int>(_SequenceMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceMaxOffset;
+    private static nint? _SequenceMaxOffset;
 
-  public ref int SequenceMax {
-    get {
-      if (_SequenceMaxOffset == null) {
-        _SequenceMaxOffset = Schema.GetOffset(0x78382338C8F2EB7A);
-      }
-      return ref _Handle.AsRef<int>(_SequenceMaxOffset!.Value);
+    public ref int SequenceMax {
+        get {
+            _SequenceMaxOffset = _SequenceMaxOffset ?? Schema.GetOffset(0x78382338C8F2EB7A);
+            return ref _Handle.AsRef<int>(_SequenceMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShuffleOffset;
+    private static nint? _ShuffleOffset;
 
-  public ref bool Shuffle {
-    get {
-      if (_ShuffleOffset == null) {
-        _ShuffleOffset = Schema.GetOffset(0x7838233828BD2B2E);
-      }
-      return ref _Handle.AsRef<bool>(_ShuffleOffset!.Value);
+    public ref bool Shuffle {
+        get {
+            _ShuffleOffset = _ShuffleOffset ?? Schema.GetOffset(0x7838233828BD2B2E);
+            return ref _Handle.AsRef<bool>(_ShuffleOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearOffset;
+    private static nint? _LinearOffset;
 
-  public ref bool Linear {
-    get {
-      if (_LinearOffset == null) {
-        _LinearOffset = Schema.GetOffset(0x78382338B9313720);
-      }
-      return ref _Handle.AsRef<bool>(_LinearOffset!.Value);
+    public ref bool Linear {
+        get {
+            _LinearOffset = _LinearOffset ?? Schema.GetOffset(0x78382338B9313720);
+            return ref _Handle.AsRef<bool>(_LinearOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightedListOffset;
+    private static nint? _WeightedListOffset;
 
-  public ref CUtlVector<SequenceWeightedList_t> WeightedList {
-    get {
-      if (_WeightedListOffset == null) {
-        _WeightedListOffset = Schema.GetOffset(0x783823385554D8B8);
-      }
-      return ref _Handle.AsRef<CUtlVector<SequenceWeightedList_t>>(_WeightedListOffset!.Value);
+    public ref CUtlVector<SequenceWeightedList_t> WeightedList {
+        get {
+            _WeightedListOffset = _WeightedListOffset ?? Schema.GetOffset(0x783823385554D8B8);
+            return ref _Handle.AsRef<CUtlVector<SequenceWeightedList_t>>(_WeightedListOffset!.Value);
+        }
     }
-  }
 
 
 }

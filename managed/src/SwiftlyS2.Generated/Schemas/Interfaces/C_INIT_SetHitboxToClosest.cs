@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_SetHitboxToClosest : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetHitboxToClosest> {
+public partial interface C_INIT_SetHitboxToClosest : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetHitboxToClosest>
+{
+    static C_INIT_SetHitboxToClosest ISchemaClass<C_INIT_SetHitboxToClosest>.From(nint handle) => new C_INIT_SetHitboxToClosestImpl(handle);
+    static int ISchemaClass<C_INIT_SetHitboxToClosest>.Size => 2712;
+    static string? ISchemaClass<C_INIT_SetHitboxToClosest>.ClassName => null;
 
-  static C_INIT_SetHitboxToClosest ISchemaClass<C_INIT_SetHitboxToClosest>.From(nint handle) => new C_INIT_SetHitboxToClosestImpl(handle);
-  static int ISchemaClass<C_INIT_SetHitboxToClosest>.Size => 2712;
-  static string? ISchemaClass<C_INIT_SetHitboxToClosest>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref int DesiredHitbox { get; }
-  
-  public CParticleCollectionVecInput HitBoxScale { get; }
-  
-  public string HitboxSetName { get; set; }
-  
-  public ref bool UseBones { get; }
-  
-  public ref bool UseClosestPointOnHitbox { get; }
-  
-  public ref ClosestPointTestType_t TestType { get; }
-  
-  public CParticleCollectionFloatInput HybridRatio { get; }
-  
-  public ref bool UpdatePosition { get; }
+    public ref int ControlPointNumber { get; }
+
+    public ref int DesiredHitbox { get; }
+
+    public CParticleCollectionVecInput HitBoxScale { get; }
+
+    public string HitboxSetName { get; set; }
+
+    public ref bool UseBones { get; }
+
+    public ref bool UseClosestPointOnHitbox { get; }
+
+    public ref ClosestPointTestType_t TestType { get; }
+
+    public CParticleCollectionFloatInput HybridRatio { get; }
+
+    public ref bool UpdatePosition { get; }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerStaticAdditiveSynth__CToneImpl : SchemaClass, CVoiceContainerStaticAdditiveSynth__CTone {
+internal partial class CVoiceContainerStaticAdditiveSynth__CToneImpl : SchemaClass, CVoiceContainerStaticAdditiveSynth__CTone
+{
+    public CVoiceContainerStaticAdditiveSynth__CToneImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerStaticAdditiveSynth__CToneImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HarmonicsOffset;
 
-  private static nint? _HarmonicsOffset;
-
-  public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic> Harmonics {
-    get {
-      if (_HarmonicsOffset == null) {
-        _HarmonicsOffset = Schema.GetOffset(0x1501082A3A08CDBF);
-      }
-      return ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic>>(_HarmonicsOffset!.Value);
+    public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic> Harmonics {
+        get {
+            _HarmonicsOffset = _HarmonicsOffset ?? Schema.GetOffset(0x1501082A3A08CDBF);
+            return ref _Handle.AsRef<CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic>>(_HarmonicsOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurveOffset;
+    private static nint? _CurveOffset;
 
-  public SchemaUntypedField Curve {
-    get {
-      if (_CurveOffset == null) {
-        _CurveOffset = Schema.GetOffset(0x1501082ABFFA0B34);
-      }
-      return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+    public SchemaUntypedField Curve {
+        get {
+            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0x1501082ABFFA0B34);
+            return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+        }
     }
-  }
-  private static nint? _SyncInstancesOffset;
+    private static nint? _SyncInstancesOffset;
 
-  public ref bool SyncInstances {
-    get {
-      if (_SyncInstancesOffset == null) {
-        _SyncInstancesOffset = Schema.GetOffset(0x1501082A21EE9902);
-      }
-      return ref _Handle.AsRef<bool>(_SyncInstancesOffset!.Value);
+    public ref bool SyncInstances {
+        get {
+            _SyncInstancesOffset = _SyncInstancesOffset ?? Schema.GetOffset(0x1501082A21EE9902);
+            return ref _Handle.AsRef<bool>(_SyncInstancesOffset!.Value);
+        }
     }
-  }
 
 
 }

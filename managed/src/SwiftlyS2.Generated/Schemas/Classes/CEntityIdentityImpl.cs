@@ -6,147 +6,116 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity {
+internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity
+{
+    public CEntityIdentityImpl(nint handle) : base(handle) { }
 
-  public CEntityIdentityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameStringableIndexOffset;
 
-  private static nint? _NameStringableIndexOffset;
-
-  public ref int NameStringableIndex {
-    get {
-      if (_NameStringableIndexOffset == null) {
-        _NameStringableIndexOffset = Schema.GetOffset(0xAE42345F9A4938C9);
-      }
-      return ref _Handle.AsRef<int>(_NameStringableIndexOffset!.Value);
+    public ref int NameStringableIndex {
+        get {
+            _NameStringableIndexOffset = _NameStringableIndexOffset ?? Schema.GetOffset(0xAE42345F9A4938C9);
+            return ref _Handle.AsRef<int>(_NameStringableIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameOffset;
+    private static nint? _NameOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xAE42345F4D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xAE42345F4D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _DesignerNameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAE42345F4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xAE42345F4D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _DesignerNameOffset;
 
-  public string DesignerName {
-    get {
-      if (_DesignerNameOffset == null) {
-        _DesignerNameOffset = Schema.GetOffset(0xAE42345FBFC1F33F);
-      }
-      var ptr = _Handle.Read<nint>(_DesignerNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DesignerNameOffset == null) {
-        _DesignerNameOffset = Schema.GetOffset(0xAE42345FBFC1F33F);
-      }
-      Schema.SetString(_Handle, _DesignerNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _FlagsOffset;
+    public string DesignerName {
+        get {
+            _DesignerNameOffset = _DesignerNameOffset ?? Schema.GetOffset(0xAE42345FBFC1F33F);
+            return Schema.GetString(_Handle.Read<nint>(_DesignerNameOffset!.Value));
+        }
+        set {
+            _DesignerNameOffset = _DesignerNameOffset ?? Schema.GetOffset(0xAE42345FBFC1F33F);
+            Schema.SetString(_Handle, _DesignerNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FlagsOffset;
 
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0xAE42345FDC74A14C);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xAE42345FDC74A14C);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldGroupIdOffset;
+    private static nint? _WorldGroupIdOffset;
 
-  public ref uint WorldGroupId {
-    get {
-      if (_WorldGroupIdOffset == null) {
-        _WorldGroupIdOffset = Schema.GetOffset(0xAE42345F0BECFAC7);
-      }
-      return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+    public ref uint WorldGroupId {
+        get {
+            _WorldGroupIdOffset = _WorldGroupIdOffset ?? Schema.GetOffset(0xAE42345F0BECFAC7);
+            return ref _Handle.AsRef<uint>(_WorldGroupIdOffset!.Value);
+        }
     }
-  }
-  private static nint? _DataObjectTypesOffset;
+    private static nint? _DataObjectTypesOffset;
 
-  public ref uint DataObjectTypes {
-    get {
-      if (_DataObjectTypesOffset == null) {
-        _DataObjectTypesOffset = Schema.GetOffset(0xAE42345F6C7E475F);
-      }
-      return ref _Handle.AsRef<uint>(_DataObjectTypesOffset!.Value);
+    public ref uint DataObjectTypes {
+        get {
+            _DataObjectTypesOffset = _DataObjectTypesOffset ?? Schema.GetOffset(0xAE42345F6C7E475F);
+            return ref _Handle.AsRef<uint>(_DataObjectTypesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathIndexOffset;
+    private static nint? _PathIndexOffset;
 
-  public ref ChangeAccessorFieldPathIndex_t PathIndex {
-    get {
-      if (_PathIndexOffset == null) {
-        _PathIndexOffset = Schema.GetOffset(0xAE42345F2DA3F47A);
-      }
-      return ref _Handle.AsRef<ChangeAccessorFieldPathIndex_t>(_PathIndexOffset!.Value);
+    public ref ChangeAccessorFieldPathIndex_t PathIndex {
+        get {
+            _PathIndexOffset = _PathIndexOffset ?? Schema.GetOffset(0xAE42345F2DA3F47A);
+            return ref _Handle.AsRef<ChangeAccessorFieldPathIndex_t>(_PathIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevOffset;
+    private static nint? _PrevOffset;
 
-  public CEntityIdentity? Prev {
-    get {
-      if (_PrevOffset == null) {
-        _PrevOffset = Schema.GetOffset(0xAE42345FD49AD9AA);
-      }
-      var ptr = _Handle.Read<nint>(_PrevOffset!.Value);
-      return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+    public CEntityIdentity? Prev {
+        get {
+            _PrevOffset = _PrevOffset ?? Schema.GetOffset(0xAE42345FD49AD9AA);
+            var ptr = _Handle.Read<nint>(_PrevOffset!.Value);
+            return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _NextOffset;
+    private static nint? _NextOffset;
 
-  public CEntityIdentity? Next {
-    get {
-      if (_NextOffset == null) {
-        _NextOffset = Schema.GetOffset(0xAE42345F32B11E0E);
-      }
-      var ptr = _Handle.Read<nint>(_NextOffset!.Value);
-      return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+    public CEntityIdentity? Next {
+        get {
+            _NextOffset = _NextOffset ?? Schema.GetOffset(0xAE42345F32B11E0E);
+            var ptr = _Handle.Read<nint>(_NextOffset!.Value);
+            return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _PrevByClassOffset;
+    private static nint? _PrevByClassOffset;
 
-  public CEntityIdentity? PrevByClass {
-    get {
-      if (_PrevByClassOffset == null) {
-        _PrevByClassOffset = Schema.GetOffset(0xAE42345F1F46E9A5);
-      }
-      var ptr = _Handle.Read<nint>(_PrevByClassOffset!.Value);
-      return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+    public CEntityIdentity? PrevByClass {
+        get {
+            _PrevByClassOffset = _PrevByClassOffset ?? Schema.GetOffset(0xAE42345F1F46E9A5);
+            var ptr = _Handle.Read<nint>(_PrevByClassOffset!.Value);
+            return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _NextByClassOffset;
+    private static nint? _NextByClassOffset;
 
-  public CEntityIdentity? NextByClass {
-    get {
-      if (_NextByClassOffset == null) {
-        _NextByClassOffset = Schema.GetOffset(0xAE42345F908D6209);
-      }
-      var ptr = _Handle.Read<nint>(_NextByClassOffset!.Value);
-      return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+    public CEntityIdentity? NextByClass {
+        get {
+            _NextByClassOffset = _NextByClassOffset ?? Schema.GetOffset(0xAE42345F908D6209);
+            var ptr = _Handle.Read<nint>(_NextByClassOffset!.Value);
+            return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+        }
     }
-  }
 
-  public void NameStringableIndexUpdated() {
-    Schema.Update(_Handle, 0xAE42345F9A4938C9);
-  }
+    public void NameStringableIndexUpdated() => Schema.Update(_Handle, 0xAE42345F9A4938C9);
 }

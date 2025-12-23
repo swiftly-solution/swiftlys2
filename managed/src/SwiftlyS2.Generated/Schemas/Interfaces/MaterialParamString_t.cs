@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface MaterialParamString_t : MaterialParam_t, ISchemaClass<MaterialParamString_t> {
+public partial interface MaterialParamString_t : MaterialParam_t, ISchemaClass<MaterialParamString_t>
+{
+    static MaterialParamString_t ISchemaClass<MaterialParamString_t>.From(nint handle) => new MaterialParamString_tImpl(handle);
+    static int ISchemaClass<MaterialParamString_t>.Size => 16;
+    static string? ISchemaClass<MaterialParamString_t>.ClassName => null;
 
-  static MaterialParamString_t ISchemaClass<MaterialParamString_t>.From(nint handle) => new MaterialParamString_tImpl(handle);
-  static int ISchemaClass<MaterialParamString_t>.Size => 16;
-  static string? ISchemaClass<MaterialParamString_t>.ClassName => null;
 
-  
-  public string Value { get; set; }
+    public string Value { get; set; }
 
 
 }

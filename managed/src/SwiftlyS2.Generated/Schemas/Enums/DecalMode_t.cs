@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum DecalMode_t : byte {
-
+public enum DecalMode_t : byte
+{
  kDecalInvalid = 255,
 
  kDecalBlood = 0,

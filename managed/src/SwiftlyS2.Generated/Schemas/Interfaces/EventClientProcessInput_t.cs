@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventClientProcessInput_t : ISchemaClass<EventClientProcessInput_t> {
+public partial interface EventClientProcessInput_t : ISchemaClass<EventClientProcessInput_t>
+{
+    static EventClientProcessInput_t ISchemaClass<EventClientProcessInput_t>.From(nint handle) => new EventClientProcessInput_tImpl(handle);
+    static int ISchemaClass<EventClientProcessInput_t>.Size => 56;
+    static string? ISchemaClass<EventClientProcessInput_t>.ClassName => null;
 
-  static EventClientProcessInput_t ISchemaClass<EventClientProcessInput_t>.From(nint handle) => new EventClientProcessInput_tImpl(handle);
-  static int ISchemaClass<EventClientProcessInput_t>.Size => 56;
-  static string? ISchemaClass<EventClientProcessInput_t>.ClassName => null;
 
-  
-  public EngineLoopState_t LoopState { get; }
-  
-  public ref float RealTime { get; }
-  
-  public ref float TickInterval { get; }
-  
-  public ref double TickStartTime { get; }
+    public EngineLoopState_t LoopState { get; }
+
+    public ref float RealTime { get; }
+
+    public ref float TickInterval { get; }
+
+    public ref double TickStartTime { get; }
 
 
 }

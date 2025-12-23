@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CExampleSchemaVData_PolymorphicBase : ISchemaClass<CExampleSchemaVData_PolymorphicBase> {
+public partial interface CExampleSchemaVData_PolymorphicBase : ISchemaClass<CExampleSchemaVData_PolymorphicBase>
+{
+    static CExampleSchemaVData_PolymorphicBase ISchemaClass<CExampleSchemaVData_PolymorphicBase>.From(nint handle) => new CExampleSchemaVData_PolymorphicBaseImpl(handle);
+    static int ISchemaClass<CExampleSchemaVData_PolymorphicBase>.Size => 16;
+    static string? ISchemaClass<CExampleSchemaVData_PolymorphicBase>.ClassName => null;
 
-  static CExampleSchemaVData_PolymorphicBase ISchemaClass<CExampleSchemaVData_PolymorphicBase>.From(nint handle) => new CExampleSchemaVData_PolymorphicBaseImpl(handle);
-  static int ISchemaClass<CExampleSchemaVData_PolymorphicBase>.Size => 16;
-  static string? ISchemaClass<CExampleSchemaVData_PolymorphicBase>.ClassName => null;
 
-  
-  public ref int Base { get; }
+    public ref int Base { get; }
 
 
 }

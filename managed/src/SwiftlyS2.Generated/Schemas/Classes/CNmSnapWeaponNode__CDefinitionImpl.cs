@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmSnapWeaponNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmSnapWeaponNode__CDefinition {
+internal partial class CNmSnapWeaponNode__CDefinitionImpl : CNmPassthroughNode__CDefinitionImpl, CNmSnapWeaponNode__CDefinition
+{
+    public CNmSnapWeaponNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmSnapWeaponNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EnabledNodeIdxOffset;
 
-  private static nint? _EnabledNodeIdxOffset;
-
-  public ref short EnabledNodeIdx {
-    get {
-      if (_EnabledNodeIdxOffset == null) {
-        _EnabledNodeIdxOffset = Schema.GetOffset(0x60733C89F7CDF5E9);
-      }
-      return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+    public ref short EnabledNodeIdx {
+        get {
+            _EnabledNodeIdxOffset = _EnabledNodeIdxOffset ?? Schema.GetOffset(0x60733C89F7CDF5E9);
+            return ref _Handle.AsRef<short>(_EnabledNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _LockLeftHandNodeIdxOffset;
+    private static nint? _LockLeftHandNodeIdxOffset;
 
-  public ref short LockLeftHandNodeIdx {
-    get {
-      if (_LockLeftHandNodeIdxOffset == null) {
-        _LockLeftHandNodeIdxOffset = Schema.GetOffset(0x60733C89493D63C1);
-      }
-      return ref _Handle.AsRef<short>(_LockLeftHandNodeIdxOffset!.Value);
+    public ref short LockLeftHandNodeIdx {
+        get {
+            _LockLeftHandNodeIdxOffset = _LockLeftHandNodeIdxOffset ?? Schema.GetOffset(0x60733C89493D63C1);
+            return ref _Handle.AsRef<short>(_LockLeftHandNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendTimeSecondsOffset;
+    private static nint? _BlendTimeSecondsOffset;
 
-  public ref float BlendTimeSeconds {
-    get {
-      if (_BlendTimeSecondsOffset == null) {
-        _BlendTimeSecondsOffset = Schema.GetOffset(0x60733C896D3A08FC);
-      }
-      return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+    public ref float BlendTimeSeconds {
+        get {
+            _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0x60733C896D3A08FC);
+            return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_GlobalScale : CParticleFunctionInitializer, ISchemaClass<C_INIT_GlobalScale> {
+public partial interface C_INIT_GlobalScale : CParticleFunctionInitializer, ISchemaClass<C_INIT_GlobalScale>
+{
+    static C_INIT_GlobalScale ISchemaClass<C_INIT_GlobalScale>.From(nint handle) => new C_INIT_GlobalScaleImpl(handle);
+    static int ISchemaClass<C_INIT_GlobalScale>.Size => 488;
+    static string? ISchemaClass<C_INIT_GlobalScale>.ClassName => null;
 
-  static C_INIT_GlobalScale ISchemaClass<C_INIT_GlobalScale>.From(nint handle) => new C_INIT_GlobalScaleImpl(handle);
-  static int ISchemaClass<C_INIT_GlobalScale>.Size => 488;
-  static string? ISchemaClass<C_INIT_GlobalScale>.ClassName => null;
 
-  
-  public ref float Scale { get; }
-  
-  public ref int ScaleControlPointNumber { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref bool ScaleRadius { get; }
-  
-  public ref bool ScalePosition { get; }
-  
-  public ref bool ScaleVelocity { get; }
+    public ref float Scale { get; }
+
+    public ref int ScaleControlPointNumber { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref bool ScaleRadius { get; }
+
+    public ref bool ScalePosition { get; }
+
+    public ref bool ScaleVelocity { get; }
 
 
 }

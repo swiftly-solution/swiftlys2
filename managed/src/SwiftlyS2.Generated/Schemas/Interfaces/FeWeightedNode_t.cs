@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeWeightedNode_t : ISchemaClass<FeWeightedNode_t> {
+public partial interface FeWeightedNode_t : ISchemaClass<FeWeightedNode_t>
+{
+    static FeWeightedNode_t ISchemaClass<FeWeightedNode_t>.From(nint handle) => new FeWeightedNode_tImpl(handle);
+    static int ISchemaClass<FeWeightedNode_t>.Size => 4;
+    static string? ISchemaClass<FeWeightedNode_t>.ClassName => null;
 
-  static FeWeightedNode_t ISchemaClass<FeWeightedNode_t>.From(nint handle) => new FeWeightedNode_tImpl(handle);
-  static int ISchemaClass<FeWeightedNode_t>.Size => 4;
-  static string? ISchemaClass<FeWeightedNode_t>.ClassName => null;
 
-  
-  public ref ushort Node { get; }
-  
-  public ref ushort Weight { get; }
+    public ref ushort Node { get; }
+
+    public ref ushort Weight { get; }
 
 
 }

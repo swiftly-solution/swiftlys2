@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCycleControlUpdateNode : CUnaryUpdateNode, ISchemaClass<CCycleControlUpdateNode> {
+public partial interface CCycleControlUpdateNode : CUnaryUpdateNode, ISchemaClass<CCycleControlUpdateNode>
+{
+    static CCycleControlUpdateNode ISchemaClass<CCycleControlUpdateNode>.From(nint handle) => new CCycleControlUpdateNodeImpl(handle);
+    static int ISchemaClass<CCycleControlUpdateNode>.Size => 120;
+    static string? ISchemaClass<CCycleControlUpdateNode>.ClassName => null;
 
-  static CCycleControlUpdateNode ISchemaClass<CCycleControlUpdateNode>.From(nint handle) => new CCycleControlUpdateNodeImpl(handle);
-  static int ISchemaClass<CCycleControlUpdateNode>.Size => 120;
-  static string? ISchemaClass<CCycleControlUpdateNode>.ClassName => null;
 
-  
-  public ref AnimValueSource ValueSource { get; }
-  
-  public CAnimParamHandle ParamIndex { get; }
-  
-  public ref bool LockWhenWaning { get; }
+    public ref AnimValueSource ValueSource { get; }
+
+    public CAnimParamHandle ParamIndex { get; }
+
+    public ref bool LockWhenWaning { get; }
 
 
 }

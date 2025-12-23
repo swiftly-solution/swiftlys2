@@ -6,185 +6,140 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseGrenadeImpl : CBaseFlexImpl, CBaseGrenade {
+internal partial class CBaseGrenadeImpl : CBaseFlexImpl, CBaseGrenade
+{
+    public CBaseGrenadeImpl(nint handle) : base(handle) { }
 
-  public CBaseGrenadeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnPlayerPickupOffset;
 
-  private static nint? _OnPlayerPickupOffset;
-
-  public CEntityIOOutput OnPlayerPickup {
-    get {
-      if (_OnPlayerPickupOffset == null) {
-        _OnPlayerPickupOffset = Schema.GetOffset(0xB6ACD98FDE81BF25);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnPlayerPickupOffset!.Value);
+    public ref CEntityIOOutput OnPlayerPickup {
+        get {
+            _OnPlayerPickupOffset = _OnPlayerPickupOffset ?? Schema.GetOffset(0xB6ACD98FDE81BF25);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerPickupOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnExplodeOffset;
+    private static nint? _OnExplodeOffset;
 
-  public CEntityIOOutput OnExplode {
-    get {
-      if (_OnExplodeOffset == null) {
-        _OnExplodeOffset = Schema.GetOffset(0xB6ACD98F5153ED85);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnExplodeOffset!.Value);
+    public ref CEntityIOOutput OnExplode {
+        get {
+            _OnExplodeOffset = _OnExplodeOffset ?? Schema.GetOffset(0xB6ACD98F5153ED85);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnExplodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasWarnedAIOffset;
+    private static nint? _HasWarnedAIOffset;
 
-  public ref bool HasWarnedAI {
-    get {
-      if (_HasWarnedAIOffset == null) {
-        _HasWarnedAIOffset = Schema.GetOffset(0xB6ACD98F52149340);
-      }
-      return ref _Handle.AsRef<bool>(_HasWarnedAIOffset!.Value);
+    public ref bool HasWarnedAI {
+        get {
+            _HasWarnedAIOffset = _HasWarnedAIOffset ?? Schema.GetOffset(0xB6ACD98F52149340);
+            return ref _Handle.AsRef<bool>(_HasWarnedAIOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsSmokeGrenadeOffset;
+    private static nint? _IsSmokeGrenadeOffset;
 
-  public ref bool IsSmokeGrenade {
-    get {
-      if (_IsSmokeGrenadeOffset == null) {
-        _IsSmokeGrenadeOffset = Schema.GetOffset(0xB6ACD98FD26F58DC);
-      }
-      return ref _Handle.AsRef<bool>(_IsSmokeGrenadeOffset!.Value);
+    public ref bool IsSmokeGrenade {
+        get {
+            _IsSmokeGrenadeOffset = _IsSmokeGrenadeOffset ?? Schema.GetOffset(0xB6ACD98FD26F58DC);
+            return ref _Handle.AsRef<bool>(_IsSmokeGrenadeOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsLiveOffset;
+    private static nint? _IsLiveOffset;
 
-  public ref bool IsLive {
-    get {
-      if (_IsLiveOffset == null) {
-        _IsLiveOffset = Schema.GetOffset(0xB6ACD98F4DBE6B1F);
-      }
-      return ref _Handle.AsRef<bool>(_IsLiveOffset!.Value);
+    public ref bool IsLive {
+        get {
+            _IsLiveOffset = _IsLiveOffset ?? Schema.GetOffset(0xB6ACD98F4DBE6B1F);
+            return ref _Handle.AsRef<bool>(_IsLiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _DmgRadiusOffset;
+    private static nint? _DmgRadiusOffset;
 
-  public ref float DmgRadius {
-    get {
-      if (_DmgRadiusOffset == null) {
-        _DmgRadiusOffset = Schema.GetOffset(0xB6ACD98FB9ADFB35);
-      }
-      return ref _Handle.AsRef<float>(_DmgRadiusOffset!.Value);
+    public ref float DmgRadius {
+        get {
+            _DmgRadiusOffset = _DmgRadiusOffset ?? Schema.GetOffset(0xB6ACD98FB9ADFB35);
+            return ref _Handle.AsRef<float>(_DmgRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _DetonateTimeOffset;
+    private static nint? _DetonateTimeOffset;
 
-  public GameTime_t DetonateTime {
-    get {
-      if (_DetonateTimeOffset == null) {
-        _DetonateTimeOffset = Schema.GetOffset(0xB6ACD98F884102F2);
-      }
-      return new GameTime_tImpl(_Handle + _DetonateTimeOffset!.Value);
+    public GameTime_t DetonateTime {
+        get {
+            _DetonateTimeOffset = _DetonateTimeOffset ?? Schema.GetOffset(0xB6ACD98F884102F2);
+            return new GameTime_tImpl(_Handle + _DetonateTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WarnAITimeOffset;
+    private static nint? _WarnAITimeOffset;
 
-  public ref float WarnAITime {
-    get {
-      if (_WarnAITimeOffset == null) {
-        _WarnAITimeOffset = Schema.GetOffset(0xB6ACD98FFC4F4550);
-      }
-      return ref _Handle.AsRef<float>(_WarnAITimeOffset!.Value);
+    public ref float WarnAITime {
+        get {
+            _WarnAITimeOffset = _WarnAITimeOffset ?? Schema.GetOffset(0xB6ACD98FFC4F4550);
+            return ref _Handle.AsRef<float>(_WarnAITimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamageOffset;
+    private static nint? _DamageOffset;
 
-  public ref float Damage {
-    get {
-      if (_DamageOffset == null) {
-        _DamageOffset = Schema.GetOffset(0xB6ACD98FDC60E53E);
-      }
-      return ref _Handle.AsRef<float>(_DamageOffset!.Value);
+    public ref float Damage {
+        get {
+            _DamageOffset = _DamageOffset ?? Schema.GetOffset(0xB6ACD98FDC60E53E);
+            return ref _Handle.AsRef<float>(_DamageOffset!.Value);
+        }
     }
-  }
-  private static nint? _BounceSoundOffset;
+    private static nint? _BounceSoundOffset;
 
-  public string BounceSound {
-    get {
-      if (_BounceSoundOffset == null) {
-        _BounceSoundOffset = Schema.GetOffset(0xB6ACD98F060D1544);
-      }
-      var ptr = _Handle.Read<nint>(_BounceSoundOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_BounceSoundOffset == null) {
-        _BounceSoundOffset = Schema.GetOffset(0xB6ACD98F060D1544);
-      }
-      Schema.SetString(_Handle, _BounceSoundOffset!.Value, value);
-    }
-  } 
-  private static nint? _ExplosionSoundOffset;
+    public string BounceSound {
+        get {
+            _BounceSoundOffset = _BounceSoundOffset ?? Schema.GetOffset(0xB6ACD98F060D1544);
+            return Schema.GetString(_Handle.Read<nint>(_BounceSoundOffset!.Value));
+        }
+        set {
+            _BounceSoundOffset = _BounceSoundOffset ?? Schema.GetOffset(0xB6ACD98F060D1544);
+            Schema.SetString(_Handle, _BounceSoundOffset!.Value, value);
+        }
+    } 
+    private static nint? _ExplosionSoundOffset;
 
-  public string ExplosionSound {
-    get {
-      if (_ExplosionSoundOffset == null) {
-        _ExplosionSoundOffset = Schema.GetOffset(0xB6ACD98FEA1C20EF);
-      }
-      var ptr = _Handle.Read<nint>(_ExplosionSoundOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ExplosionSoundOffset == null) {
-        _ExplosionSoundOffset = Schema.GetOffset(0xB6ACD98FEA1C20EF);
-      }
-      Schema.SetString(_Handle, _ExplosionSoundOffset!.Value, value);
-    }
-  } 
-  private static nint? _ThrowerOffset;
+    public string ExplosionSound {
+        get {
+            _ExplosionSoundOffset = _ExplosionSoundOffset ?? Schema.GetOffset(0xB6ACD98FEA1C20EF);
+            return Schema.GetString(_Handle.Read<nint>(_ExplosionSoundOffset!.Value));
+        }
+        set {
+            _ExplosionSoundOffset = _ExplosionSoundOffset ?? Schema.GetOffset(0xB6ACD98FEA1C20EF);
+            Schema.SetString(_Handle, _ExplosionSoundOffset!.Value, value);
+        }
+    } 
+    private static nint? _ThrowerOffset;
 
-  public ref CHandle<CCSPlayerPawn> Thrower {
-    get {
-      if (_ThrowerOffset == null) {
-        _ThrowerOffset = Schema.GetOffset(0xB6ACD98FC9CF8702);
-      }
-      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_ThrowerOffset!.Value);
+    public ref CHandle<CCSPlayerPawn> Thrower {
+        get {
+            _ThrowerOffset = _ThrowerOffset ?? Schema.GetOffset(0xB6ACD98FC9CF8702);
+            return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_ThrowerOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextAttackOffset;
+    private static nint? _NextAttackOffset;
 
-  public GameTime_t NextAttack {
-    get {
-      if (_NextAttackOffset == null) {
-        _NextAttackOffset = Schema.GetOffset(0xB6ACD98F3DFDCDEA);
-      }
-      return new GameTime_tImpl(_Handle + _NextAttackOffset!.Value);
+    public GameTime_t NextAttack {
+        get {
+            _NextAttackOffset = _NextAttackOffset ?? Schema.GetOffset(0xB6ACD98F3DFDCDEA);
+            return new GameTime_tImpl(_Handle + _NextAttackOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginalThrowerOffset;
+    private static nint? _OriginalThrowerOffset;
 
-  public ref CHandle<CCSPlayerPawn> OriginalThrower {
-    get {
-      if (_OriginalThrowerOffset == null) {
-        _OriginalThrowerOffset = Schema.GetOffset(0xB6ACD98F34FD45A3);
-      }
-      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_OriginalThrowerOffset!.Value);
+    public ref CHandle<CCSPlayerPawn> OriginalThrower {
+        get {
+            _OriginalThrowerOffset = _OriginalThrowerOffset ?? Schema.GetOffset(0xB6ACD98F34FD45A3);
+            return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_OriginalThrowerOffset!.Value);
+        }
     }
-  }
 
-  public void IsLiveUpdated() {
-    Schema.Update(_Handle, 0xB6ACD98F4DBE6B1F);
-  }
-  public void DmgRadiusUpdated() {
-    Schema.Update(_Handle, 0xB6ACD98FB9ADFB35);
-  }
-  public void DetonateTimeUpdated() {
-    Schema.Update(_Handle, 0xB6ACD98F884102F2);
-  }
-  public void DamageUpdated() {
-    Schema.Update(_Handle, 0xB6ACD98FDC60E53E);
-  }
-  public void ThrowerUpdated() {
-    Schema.Update(_Handle, 0xB6ACD98FC9CF8702);
-  }
+    public void IsLiveUpdated() => Schema.Update(_Handle, 0xB6ACD98F4DBE6B1F);
+    public void DmgRadiusUpdated() => Schema.Update(_Handle, 0xB6ACD98FB9ADFB35);
+    public void DetonateTimeUpdated() => Schema.Update(_Handle, 0xB6ACD98F884102F2);
+    public void DamageUpdated() => Schema.Update(_Handle, 0xB6ACD98FDC60E53E);
+    public void ThrowerUpdated() => Schema.Update(_Handle, 0xB6ACD98FC9CF8702);
 }

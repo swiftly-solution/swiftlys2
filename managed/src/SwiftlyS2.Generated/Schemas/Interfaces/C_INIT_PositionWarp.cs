@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_PositionWarp : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionWarp> {
+public partial interface C_INIT_PositionWarp : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionWarp>
+{
+    static C_INIT_PositionWarp ISchemaClass<C_INIT_PositionWarp>.From(nint handle) => new C_INIT_PositionWarpImpl(handle);
+    static int ISchemaClass<C_INIT_PositionWarp>.Size => 3944;
+    static string? ISchemaClass<C_INIT_PositionWarp>.ClassName => null;
 
-  static C_INIT_PositionWarp ISchemaClass<C_INIT_PositionWarp>.From(nint handle) => new C_INIT_PositionWarpImpl(handle);
-  static int ISchemaClass<C_INIT_PositionWarp>.Size => 3944;
-  static string? ISchemaClass<C_INIT_PositionWarp>.ClassName => null;
 
-  
-  public CParticleCollectionVecInput WarpMin { get; }
-  
-  public CParticleCollectionVecInput WarpMax { get; }
-  
-  public ref int ScaleControlPointNumber { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref int RadiusComponent { get; }
-  
-  public ref float WarpTime { get; }
-  
-  public ref float WarpStartTime { get; }
-  
-  public ref float PrevPosScale { get; }
-  
-  public ref bool InvertWarp { get; }
-  
-  public ref bool UseCount { get; }
+    public CParticleCollectionVecInput WarpMin { get; }
+
+    public CParticleCollectionVecInput WarpMax { get; }
+
+    public ref int ScaleControlPointNumber { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref int RadiusComponent { get; }
+
+    public ref float WarpTime { get; }
+
+    public ref float WarpStartTime { get; }
+
+    public ref float PrevPosScale { get; }
+
+    public ref bool InvertWarp { get; }
+
+    public ref bool UseCount { get; }
 
 
 }

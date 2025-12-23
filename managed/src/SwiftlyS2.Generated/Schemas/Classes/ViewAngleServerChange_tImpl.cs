@@ -6,55 +6,42 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ViewAngleServerChange_tImpl : SchemaClass, ViewAngleServerChange_t {
+internal partial class ViewAngleServerChange_tImpl : SchemaClass, ViewAngleServerChange_t
+{
+    public ViewAngleServerChange_tImpl(nint handle) : base(handle) { }
 
-  public ViewAngleServerChange_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref FixAngleSet_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x84AFC64BEEF036F9);
-      }
-      return ref _Handle.AsRef<FixAngleSet_t>(_TypeOffset!.Value);
+    public ref FixAngleSet_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x84AFC64BEEF036F9);
+            return ref _Handle.AsRef<FixAngleSet_t>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngleOffset;
+    private static nint? _AngleOffset;
 
-  public ref QAngle Angle {
-    get {
-      if (_AngleOffset == null) {
-        _AngleOffset = Schema.GetOffset(0x84AFC64B64F7DFC7);
-      }
-      return ref _Handle.AsRef<QAngle>(_AngleOffset!.Value);
+    public ref QAngle Angle {
+        get {
+            _AngleOffset = _AngleOffset ?? Schema.GetOffset(0x84AFC64B64F7DFC7);
+            return ref _Handle.AsRef<QAngle>(_AngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _IndexOffset;
+    private static nint? _IndexOffset;
 
-  public ref uint Index {
-    get {
-      if (_IndexOffset == null) {
-        _IndexOffset = Schema.GetOffset(0x84AFC64BA1A45087);
-      }
-      return ref _Handle.AsRef<uint>(_IndexOffset!.Value);
+    public ref uint Index {
+        get {
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x84AFC64BA1A45087);
+            return ref _Handle.AsRef<uint>(_IndexOffset!.Value);
+        }
     }
-  }
 
-  public void TypeUpdated() {
-    Schema.Update(_Handle, 0x84AFC64BEEF036F9);
-  }
-  public void AngleUpdated() {
-    Schema.Update(_Handle, 0x84AFC64B64F7DFC7);
-  }
-  public void IndexUpdated() {
-    Schema.Update(_Handle, 0x84AFC64BA1A45087);
-  }
+    public void TypeUpdated() => Schema.Update(_Handle, 0x84AFC64BEEF036F9);
+    public void AngleUpdated() => Schema.Update(_Handle, 0x84AFC64B64F7DFC7);
+    public void IndexUpdated() => Schema.Update(_Handle, 0x84AFC64BA1A45087);
 }

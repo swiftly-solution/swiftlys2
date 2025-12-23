@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPropDoorRotatingBreakable : CPropDoorRotating, ISchemaClass<CPropDoorRotatingBreakable> {
+public partial interface CPropDoorRotatingBreakable : CPropDoorRotating, ISchemaClass<CPropDoorRotatingBreakable>
+{
+    static CPropDoorRotatingBreakable ISchemaClass<CPropDoorRotatingBreakable>.From(nint handle) => new CPropDoorRotatingBreakableImpl(handle);
+    static int ISchemaClass<CPropDoorRotatingBreakable>.Size => 4272;
+    static string? ISchemaClass<CPropDoorRotatingBreakable>.ClassName => "prop_door_rotating";
 
-  static CPropDoorRotatingBreakable ISchemaClass<CPropDoorRotatingBreakable>.From(nint handle) => new CPropDoorRotatingBreakableImpl(handle);
-  static int ISchemaClass<CPropDoorRotatingBreakable>.Size => 4272;
-  static string? ISchemaClass<CPropDoorRotatingBreakable>.ClassName => "prop_door_rotating";
 
-  
-  public ref bool Breakable { get; }
-  
-  public ref bool IsAbleToCloseAreaPortals { get; }
-  
-  public ref int CurrentDamageState { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> DamageStates { get; }
+    public ref bool Breakable { get; }
+
+    public ref bool IsAbleToCloseAreaPortals { get; }
+
+    public ref int CurrentDamageState { get; }
+
+    public ref CUtlVector<SchemaUntypedField> DamageStates { get; }
 
 
 }

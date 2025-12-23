@@ -8,92 +8,92 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGameSceneNode : ISchemaClass<CGameSceneNode> {
+public partial interface CGameSceneNode : ISchemaClass<CGameSceneNode>
+{
+    static CGameSceneNode ISchemaClass<CGameSceneNode>.From(nint handle) => new CGameSceneNodeImpl(handle);
+    static int ISchemaClass<CGameSceneNode>.Size => 352;
+    static string? ISchemaClass<CGameSceneNode>.ClassName => null;
 
-  static CGameSceneNode ISchemaClass<CGameSceneNode>.From(nint handle) => new CGameSceneNodeImpl(handle);
-  static int ISchemaClass<CGameSceneNode>.Size => 352;
-  static string? ISchemaClass<CGameSceneNode>.ClassName => null;
 
-  
-  public ref CTransform NodeToWorld { get; }
-  
-  public CEntityInstance? Owner { get; }
-  
-  public CGameSceneNode? Parent { get; }
-  
-  public CGameSceneNode? Child { get; }
-  
-  public CGameSceneNode? NextSibling { get; }
-  
-  public CGameSceneNodeHandle Parent1 { get; }
-  
-  public CNetworkOriginCellCoordQuantizedVector Origin { get; }
-  
-  public ref QAngle Rotation { get; }
-  
-  public ref float Scale { get; }
-  
-  public ref Vector AbsOrigin { get; }
-  
-  public ref QAngle AbsRotation { get; }
-  
-  public ref float AbsScale { get; }
-  
-  public ref short ParentAttachmentOrBone { get; }
-  
-  public ref bool DebugAbsOriginChanges { get; }
-  
-  public ref bool Dormant { get; }
-  
-  public ref bool ForceParentToBeNetworked { get; }
-  
-  // bitfield
-  public SchemaUntypedField DirtyHierarchy { get; }
-  
-  // bitfield
-  public SchemaUntypedField DirtyBoneMergeInfo { get; }
-  
-  // bitfield
-  public SchemaUntypedField NetworkedPositionChanged { get; }
-  
-  // bitfield
-  public SchemaUntypedField NetworkedAnglesChanged { get; }
-  
-  // bitfield
-  public SchemaUntypedField NetworkedScaleChanged { get; }
-  
-  // bitfield
-  public SchemaUntypedField WillBeCallingPostDataUpdate { get; }
-  
-  // bitfield
-  public SchemaUntypedField BoneMergeFlex { get; }
-  
-  // bitfield
-  public SchemaUntypedField LatchAbsOrigin { get; }
-  
-  // bitfield
-  public SchemaUntypedField DirtyBoneMergeBoneToRoot { get; }
-  
-  public ref byte HierarchicalDepth { get; }
-  
-  public ref byte HierarchyType { get; }
-  
-  public ref byte DoNotSetAnimTimeInInvalidatePhysicsCount { get; }
-  
-  public ref CUtlStringToken Name { get; }
-  
-  public ref CUtlStringToken HierarchyAttachName { get; }
-  
-  public ref float ZOffset { get; }
-  
-  public ref float ClientLocalScale { get; }
-  
-  public ref Vector RenderOrigin { get; }
+    public ref CTransform NodeToWorld { get; }
 
-  public void Parent1Updated();
-  public void OriginUpdated();
-  public void RotationUpdated();
-  public void ScaleUpdated();
-  public void NameUpdated();
-  public void HierarchyAttachNameUpdated();
+    public CEntityInstance? Owner { get; }
+
+    public CGameSceneNode? Parent { get; }
+
+    public CGameSceneNode? Child { get; }
+
+    public CGameSceneNode? NextSibling { get; }
+
+    public CGameSceneNodeHandle Parent1 { get; }
+
+    public CNetworkOriginCellCoordQuantizedVector Origin { get; }
+
+    public ref QAngle Rotation { get; }
+
+    public ref float Scale { get; }
+
+    public ref Vector AbsOrigin { get; }
+
+    public ref QAngle AbsRotation { get; }
+
+    public ref float AbsScale { get; }
+
+    public ref short ParentAttachmentOrBone { get; }
+
+    public ref bool DebugAbsOriginChanges { get; }
+
+    public ref bool Dormant { get; }
+
+    public ref bool ForceParentToBeNetworked { get; }
+
+    // bitfield
+    public SchemaUntypedField DirtyHierarchy { get; }
+
+    // bitfield
+    public SchemaUntypedField DirtyBoneMergeInfo { get; }
+
+    // bitfield
+    public SchemaUntypedField NetworkedPositionChanged { get; }
+
+    // bitfield
+    public SchemaUntypedField NetworkedAnglesChanged { get; }
+
+    // bitfield
+    public SchemaUntypedField NetworkedScaleChanged { get; }
+
+    // bitfield
+    public SchemaUntypedField WillBeCallingPostDataUpdate { get; }
+
+    // bitfield
+    public SchemaUntypedField BoneMergeFlex { get; }
+
+    // bitfield
+    public SchemaUntypedField LatchAbsOrigin { get; }
+
+    // bitfield
+    public SchemaUntypedField DirtyBoneMergeBoneToRoot { get; }
+
+    public ref byte HierarchicalDepth { get; }
+
+    public ref byte HierarchyType { get; }
+
+    public ref byte DoNotSetAnimTimeInInvalidatePhysicsCount { get; }
+
+    public ref CUtlStringToken Name { get; }
+
+    public ref CUtlStringToken HierarchyAttachName { get; }
+
+    public ref float ZOffset { get; }
+
+    public ref float ClientLocalScale { get; }
+
+    public ref Vector RenderOrigin { get; }
+
+    public void Parent1Updated();
+    public void OriginUpdated();
+    public void RotationUpdated();
+    public void ScaleUpdated();
+    public void NameUpdated();
+    public void HierarchyAttachNameUpdated();
 }

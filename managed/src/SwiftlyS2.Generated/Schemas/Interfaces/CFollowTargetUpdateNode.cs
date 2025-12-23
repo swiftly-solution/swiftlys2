@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFollowTargetUpdateNode : CUnaryUpdateNode, ISchemaClass<CFollowTargetUpdateNode> {
+public partial interface CFollowTargetUpdateNode : CUnaryUpdateNode, ISchemaClass<CFollowTargetUpdateNode>
+{
+    static CFollowTargetUpdateNode ISchemaClass<CFollowTargetUpdateNode>.From(nint handle) => new CFollowTargetUpdateNodeImpl(handle);
+    static int ISchemaClass<CFollowTargetUpdateNode>.Size => 144;
+    static string? ISchemaClass<CFollowTargetUpdateNode>.ClassName => null;
 
-  static CFollowTargetUpdateNode ISchemaClass<CFollowTargetUpdateNode>.From(nint handle) => new CFollowTargetUpdateNodeImpl(handle);
-  static int ISchemaClass<CFollowTargetUpdateNode>.Size => 144;
-  static string? ISchemaClass<CFollowTargetUpdateNode>.ClassName => null;
 
-  
-  public FollowTargetOpFixedSettings_t OpFixedData { get; }
-  
-  public CAnimParamHandle ParameterPosition { get; }
-  
-  public CAnimParamHandle ParameterOrientation { get; }
+    public FollowTargetOpFixedSettings_t OpFixedData { get; }
+
+    public CAnimParamHandle ParameterPosition { get; }
+
+    public CAnimParamHandle ParameterOrientation { get; }
 
 
 }

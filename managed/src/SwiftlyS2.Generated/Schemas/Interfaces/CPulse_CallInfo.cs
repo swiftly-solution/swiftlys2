@@ -8,25 +8,25 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulse_CallInfo : ISchemaClass<CPulse_CallInfo> {
+public partial interface CPulse_CallInfo : ISchemaClass<CPulse_CallInfo>
+{
+    static CPulse_CallInfo ISchemaClass<CPulse_CallInfo>.From(nint handle) => new CPulse_CallInfoImpl(handle);
+    static int ISchemaClass<CPulse_CallInfo>.Size => 88;
+    static string? ISchemaClass<CPulse_CallInfo>.ClassName => null;
 
-  static CPulse_CallInfo ISchemaClass<CPulse_CallInfo>.From(nint handle) => new CPulse_CallInfoImpl(handle);
-  static int ISchemaClass<CPulse_CallInfo>.Size => 88;
-  static string? ISchemaClass<CPulse_CallInfo>.ClassName => null;
 
-  
-  // PulseSymbol_t
-  public SchemaUntypedField PortName { get; }
-  
-  public PulseDocNodeID_t EditorNodeID { get; }
-  
-  public PulseRegisterMap_t RegisterMap { get; }
-  
-  public PulseDocNodeID_t CallMethodID { get; }
-  
-  public PulseRuntimeChunkIndex_t SrcChunk { get; }
-  
-  public ref int SrcInstruction { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField PortName { get; }
+
+    public PulseDocNodeID_t EditorNodeID { get; }
+
+    public PulseRegisterMap_t RegisterMap { get; }
+
+    public PulseDocNodeID_t CallMethodID { get; }
+
+    public PulseRuntimeChunkIndex_t SrcChunk { get; }
+
+    public ref int SrcInstruction { get; }
 
 
 }

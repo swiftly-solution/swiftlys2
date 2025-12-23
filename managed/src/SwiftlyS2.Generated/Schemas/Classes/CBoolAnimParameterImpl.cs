@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBoolAnimParameterImpl : CConcreteAnimParameterImpl, CBoolAnimParameter {
+internal partial class CBoolAnimParameterImpl : CConcreteAnimParameterImpl, CBoolAnimParameter
+{
+    public CBoolAnimParameterImpl(nint handle) : base(handle) { }
 
-  public CBoolAnimParameterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DefaultValueOffset;
 
-  private static nint? _DefaultValueOffset;
-
-  public ref bool DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0x3BF60C6A26126DF);
-      }
-      return ref _Handle.AsRef<bool>(_DefaultValueOffset!.Value);
+    public ref bool DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x3BF60C6A26126DF);
+            return ref _Handle.AsRef<bool>(_DefaultValueOffset!.Value);
+        }
     }
-  }
 
 
 }

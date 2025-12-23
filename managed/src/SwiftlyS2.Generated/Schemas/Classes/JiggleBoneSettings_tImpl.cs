@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class JiggleBoneSettings_tImpl : SchemaClass, JiggleBoneSettings_t {
+internal partial class JiggleBoneSettings_tImpl : SchemaClass, JiggleBoneSettings_t
+{
+    public JiggleBoneSettings_tImpl(nint handle) : base(handle) { }
 
-  public JiggleBoneSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneIndexOffset;
 
-  private static nint? _BoneIndexOffset;
-
-  public ref int BoneIndex {
-    get {
-      if (_BoneIndexOffset == null) {
-        _BoneIndexOffset = Schema.GetOffset(0xBEFF05219F407B79);
-      }
-      return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+    public ref int BoneIndex {
+        get {
+            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xBEFF05219F407B79);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpringStrengthOffset;
+    private static nint? _SpringStrengthOffset;
 
-  public ref float SpringStrength {
-    get {
-      if (_SpringStrengthOffset == null) {
-        _SpringStrengthOffset = Schema.GetOffset(0xBEFF0521595D254F);
-      }
-      return ref _Handle.AsRef<float>(_SpringStrengthOffset!.Value);
+    public ref float SpringStrength {
+        get {
+            _SpringStrengthOffset = _SpringStrengthOffset ?? Schema.GetOffset(0xBEFF0521595D254F);
+            return ref _Handle.AsRef<float>(_SpringStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxTimeStepOffset;
+    private static nint? _MaxTimeStepOffset;
 
-  public ref float MaxTimeStep {
-    get {
-      if (_MaxTimeStepOffset == null) {
-        _MaxTimeStepOffset = Schema.GetOffset(0xBEFF052177D1E0C4);
-      }
-      return ref _Handle.AsRef<float>(_MaxTimeStepOffset!.Value);
+    public ref float MaxTimeStep {
+        get {
+            _MaxTimeStepOffset = _MaxTimeStepOffset ?? Schema.GetOffset(0xBEFF052177D1E0C4);
+            return ref _Handle.AsRef<float>(_MaxTimeStepOffset!.Value);
+        }
     }
-  }
-  private static nint? _DampingOffset;
+    private static nint? _DampingOffset;
 
-  public ref float Damping {
-    get {
-      if (_DampingOffset == null) {
-        _DampingOffset = Schema.GetOffset(0xBEFF0521AAC624EB);
-      }
-      return ref _Handle.AsRef<float>(_DampingOffset!.Value);
+    public ref float Damping {
+        get {
+            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xBEFF0521AAC624EB);
+            return ref _Handle.AsRef<float>(_DampingOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoundsMaxLSOffset;
+    private static nint? _BoundsMaxLSOffset;
 
-  public ref Vector BoundsMaxLS {
-    get {
-      if (_BoundsMaxLSOffset == null) {
-        _BoundsMaxLSOffset = Schema.GetOffset(0xBEFF0521ABADA913);
-      }
-      return ref _Handle.AsRef<Vector>(_BoundsMaxLSOffset!.Value);
+    public ref Vector BoundsMaxLS {
+        get {
+            _BoundsMaxLSOffset = _BoundsMaxLSOffset ?? Schema.GetOffset(0xBEFF0521ABADA913);
+            return ref _Handle.AsRef<Vector>(_BoundsMaxLSOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoundsMinLSOffset;
+    private static nint? _BoundsMinLSOffset;
 
-  public ref Vector BoundsMinLS {
-    get {
-      if (_BoundsMinLSOffset == null) {
-        _BoundsMinLSOffset = Schema.GetOffset(0xBEFF0521FF607855);
-      }
-      return ref _Handle.AsRef<Vector>(_BoundsMinLSOffset!.Value);
+    public ref Vector BoundsMinLS {
+        get {
+            _BoundsMinLSOffset = _BoundsMinLSOffset ?? Schema.GetOffset(0xBEFF0521FF607855);
+            return ref _Handle.AsRef<Vector>(_BoundsMinLSOffset!.Value);
+        }
     }
-  }
-  private static nint? _SimSpaceOffset;
+    private static nint? _SimSpaceOffset;
 
-  public ref JiggleBoneSimSpace SimSpace {
-    get {
-      if (_SimSpaceOffset == null) {
-        _SimSpaceOffset = Schema.GetOffset(0xBEFF052186872533);
-      }
-      return ref _Handle.AsRef<JiggleBoneSimSpace>(_SimSpaceOffset!.Value);
+    public ref JiggleBoneSimSpace SimSpace {
+        get {
+            _SimSpaceOffset = _SimSpaceOffset ?? Schema.GetOffset(0xBEFF052186872533);
+            return ref _Handle.AsRef<JiggleBoneSimSpace>(_SimSpaceOffset!.Value);
+        }
     }
-  }
 
 
 }

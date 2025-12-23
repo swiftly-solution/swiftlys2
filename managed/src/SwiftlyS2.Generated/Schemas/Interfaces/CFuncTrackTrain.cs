@@ -8,86 +8,86 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncTrackTrain : CBaseModelEntity, ISchemaClass<CFuncTrackTrain> {
+public partial interface CFuncTrackTrain : CBaseModelEntity, ISchemaClass<CFuncTrackTrain>
+{
+    static CFuncTrackTrain ISchemaClass<CFuncTrackTrain>.From(nint handle) => new CFuncTrackTrainImpl(handle);
+    static int ISchemaClass<CFuncTrackTrain>.Size => 2352;
+    static string? ISchemaClass<CFuncTrackTrain>.ClassName => "func_tracktrain";
 
-  static CFuncTrackTrain ISchemaClass<CFuncTrackTrain>.From(nint handle) => new CFuncTrackTrainImpl(handle);
-  static int ISchemaClass<CFuncTrackTrain>.Size => 2352;
-  static string? ISchemaClass<CFuncTrackTrain>.ClassName => "func_tracktrain";
 
-  
-  public ref CHandle<CPathTrack> Ppath { get; }
-  
-  public ref float Length { get; }
-  
-  public ref Vector PosPrev { get; }
-  
-  public ref QAngle Prev { get; }
-  
-  public ref Vector ControlMins { get; }
-  
-  public ref Vector ControlMaxs { get; }
-  
-  public ref Vector LastBlockPos { get; }
-  
-  public ref int LastBlockTick { get; }
-  
-  public ref float Volume { get; }
-  
-  public ref float Bank { get; }
-  
-  public ref float OldSpeed { get; }
-  
-  public ref float BlockDamage { get; }
-  
-  public ref float Height { get; }
-  
-  public ref float MaxSpeed { get; }
-  
-  public ref float Dir { get; }
-  
-  public string SoundMove { get; set; }
-  
-  public string SoundMovePing { get; set; }
-  
-  public string SoundStart { get; set; }
-  
-  public string SoundStop { get; set; }
-  
-  public string StrPathTarget { get; set; }
-  
-  public ref float MoveSoundMinDuration { get; }
-  
-  public ref float MoveSoundMaxDuration { get; }
-  
-  public GameTime_t NextMoveSoundTime { get; }
-  
-  public ref float MoveSoundMinPitch { get; }
-  
-  public ref float MoveSoundMaxPitch { get; }
-  
-  public ref TrainOrientationType_t OrientationType { get; }
-  
-  public ref TrainVelocityType_t VelocityType { get; }
-  
-  public CEntityIOOutput OnStart { get; }
-  
-  public CEntityIOOutput OnNext { get; }
-  
-  public CEntityIOOutput OnArrivedAtDestinationNode { get; }
-  
-  public ref bool ManualSpeedChanges { get; }
-  
-  public ref float DesiredSpeed { get; }
-  
-  public GameTime_t SpeedChangeTime { get; }
-  
-  public ref float AccelSpeed { get; }
-  
-  public ref float DecelSpeed { get; }
-  
-  public ref bool AccelToSpeed { get; }
-  
-  public GameTime_t NextMPSoundTime { get; }
+    public ref CHandle<CPathTrack> Ppath { get; }
+
+    public ref float Length { get; }
+
+    public ref Vector PosPrev { get; }
+
+    public ref QAngle Prev { get; }
+
+    public ref Vector ControlMins { get; }
+
+    public ref Vector ControlMaxs { get; }
+
+    public ref Vector LastBlockPos { get; }
+
+    public ref int LastBlockTick { get; }
+
+    public ref float Volume { get; }
+
+    public ref float Bank { get; }
+
+    public ref float OldSpeed { get; }
+
+    public ref float BlockDamage { get; }
+
+    public ref float Height { get; }
+
+    public ref float MaxSpeed { get; }
+
+    public ref float Dir { get; }
+
+    public string SoundMove { get; set; }
+
+    public string SoundMovePing { get; set; }
+
+    public string SoundStart { get; set; }
+
+    public string SoundStop { get; set; }
+
+    public string StrPathTarget { get; set; }
+
+    public ref float MoveSoundMinDuration { get; }
+
+    public ref float MoveSoundMaxDuration { get; }
+
+    public GameTime_t NextMoveSoundTime { get; }
+
+    public ref float MoveSoundMinPitch { get; }
+
+    public ref float MoveSoundMaxPitch { get; }
+
+    public ref TrainOrientationType_t OrientationType { get; }
+
+    public ref TrainVelocityType_t VelocityType { get; }
+
+    public ref CEntityIOOutput OnStart { get; }
+
+    public ref CEntityIOOutput OnNext { get; }
+
+    public ref CEntityIOOutput OnArrivedAtDestinationNode { get; }
+
+    public ref bool ManualSpeedChanges { get; }
+
+    public ref float DesiredSpeed { get; }
+
+    public GameTime_t SpeedChangeTime { get; }
+
+    public ref float AccelSpeed { get; }
+
+    public ref float DecelSpeed { get; }
+
+    public ref bool AccelToSpeed { get; }
+
+    public GameTime_t NextMPSoundTime { get; }
 
 
 }

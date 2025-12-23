@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CToggleComponentActionUpdater : CAnimActionUpdater, ISchemaClass<CToggleComponentActionUpdater> {
+public partial interface CToggleComponentActionUpdater : CAnimActionUpdater, ISchemaClass<CToggleComponentActionUpdater>
+{
+    static CToggleComponentActionUpdater ISchemaClass<CToggleComponentActionUpdater>.From(nint handle) => new CToggleComponentActionUpdaterImpl(handle);
+    static int ISchemaClass<CToggleComponentActionUpdater>.Size => 32;
+    static string? ISchemaClass<CToggleComponentActionUpdater>.ClassName => null;
 
-  static CToggleComponentActionUpdater ISchemaClass<CToggleComponentActionUpdater>.From(nint handle) => new CToggleComponentActionUpdaterImpl(handle);
-  static int ISchemaClass<CToggleComponentActionUpdater>.Size => 32;
-  static string? ISchemaClass<CToggleComponentActionUpdater>.ClassName => null;
 
-  
-  public AnimComponentID ComponentID { get; }
-  
-  public ref bool SetEnabled { get; }
+    public AnimComponentID ComponentID { get; }
+
+    public ref bool SetEnabled { get; }
 
 
 }

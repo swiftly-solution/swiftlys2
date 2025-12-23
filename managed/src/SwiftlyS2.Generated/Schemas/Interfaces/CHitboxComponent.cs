@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHitboxComponent : CEntityComponent, ISchemaClass<CHitboxComponent> {
+public partial interface CHitboxComponent : CEntityComponent, ISchemaClass<CHitboxComponent>
+{
+    static CHitboxComponent ISchemaClass<CHitboxComponent>.From(nint handle) => new CHitboxComponentImpl(handle);
+    static int ISchemaClass<CHitboxComponent>.Size => 24;
+    static string? ISchemaClass<CHitboxComponent>.ClassName => null;
 
-  static CHitboxComponent ISchemaClass<CHitboxComponent>.From(nint handle) => new CHitboxComponentImpl(handle);
-  static int ISchemaClass<CHitboxComponent>.Size => 24;
-  static string? ISchemaClass<CHitboxComponent>.ClassName => null;
 
-  
-  public ref float BoundsExpandRadius { get; }
+    public ref float BoundsExpandRadius { get; }
 
 
 }

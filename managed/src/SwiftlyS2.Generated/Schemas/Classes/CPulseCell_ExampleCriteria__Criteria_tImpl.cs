@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_ExampleCriteria__Criteria_tImpl : SchemaClass, CPulseCell_ExampleCriteria__Criteria_t {
+internal partial class CPulseCell_ExampleCriteria__Criteria_tImpl : SchemaClass, CPulseCell_ExampleCriteria__Criteria_t
+{
+    public CPulseCell_ExampleCriteria__Criteria_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_ExampleCriteria__Criteria_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FloatValue1Offset;
 
-  private static nint? _FloatValue1Offset;
-
-  public ref float FloatValue1 {
-    get {
-      if (_FloatValue1Offset == null) {
-        _FloatValue1Offset = Schema.GetOffset(0x9C86EC19138B644B);
-      }
-      return ref _Handle.AsRef<float>(_FloatValue1Offset!.Value);
+    public ref float FloatValue1 {
+        get {
+            _FloatValue1Offset = _FloatValue1Offset ?? Schema.GetOffset(0x9C86EC19138B644B);
+            return ref _Handle.AsRef<float>(_FloatValue1Offset!.Value);
+        }
     }
-  }
-  private static nint? _FloatValue2Offset;
+    private static nint? _FloatValue2Offset;
 
-  public ref float FloatValue2 {
-    get {
-      if (_FloatValue2Offset == null) {
-        _FloatValue2Offset = Schema.GetOffset(0x9C86EC19148B65DE);
-      }
-      return ref _Handle.AsRef<float>(_FloatValue2Offset!.Value);
+    public ref float FloatValue2 {
+        get {
+            _FloatValue2Offset = _FloatValue2Offset ?? Schema.GetOffset(0x9C86EC19148B65DE);
+            return ref _Handle.AsRef<float>(_FloatValue2Offset!.Value);
+        }
     }
-  }
-  private static nint? _MyBoolOffset;
+    private static nint? _MyBoolOffset;
 
-  public ref bool MyBool {
-    get {
-      if (_MyBoolOffset == null) {
-        _MyBoolOffset = Schema.GetOffset(0x9C86EC19BAFBA8C7);
-      }
-      return ref _Handle.AsRef<bool>(_MyBoolOffset!.Value);
+    public ref bool MyBool {
+        get {
+            _MyBoolOffset = _MyBoolOffset ?? Schema.GetOffset(0x9C86EC19BAFBA8C7);
+            return ref _Handle.AsRef<bool>(_MyBoolOffset!.Value);
+        }
     }
-  }
 
 
 }

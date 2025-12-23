@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RestartAfterDuration : CParticleFunctionOperator, ISchemaClass<C_OP_RestartAfterDuration> {
+public partial interface C_OP_RestartAfterDuration : CParticleFunctionOperator, ISchemaClass<C_OP_RestartAfterDuration>
+{
+    static C_OP_RestartAfterDuration ISchemaClass<C_OP_RestartAfterDuration>.From(nint handle) => new C_OP_RestartAfterDurationImpl(handle);
+    static int ISchemaClass<C_OP_RestartAfterDuration>.Size => 488;
+    static string? ISchemaClass<C_OP_RestartAfterDuration>.ClassName => null;
 
-  static C_OP_RestartAfterDuration ISchemaClass<C_OP_RestartAfterDuration>.From(nint handle) => new C_OP_RestartAfterDurationImpl(handle);
-  static int ISchemaClass<C_OP_RestartAfterDuration>.Size => 488;
-  static string? ISchemaClass<C_OP_RestartAfterDuration>.ClassName => null;
 
-  
-  public ref float DurationMin { get; }
-  
-  public ref float DurationMax { get; }
-  
-  public ref int CP { get; }
-  
-  public ref int CPField { get; }
-  
-  public ref int ChildGroupID { get; }
-  
-  public ref bool OnlyChildren { get; }
+    public ref float DurationMin { get; }
+
+    public ref float DurationMax { get; }
+
+    public ref int CP { get; }
+
+    public ref int CPField { get; }
+
+    public ref int ChildGroupID { get; }
+
+    public ref bool OnlyChildren { get; }
 
 
 }

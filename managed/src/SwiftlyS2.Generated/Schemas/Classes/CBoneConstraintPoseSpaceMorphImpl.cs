@@ -6,81 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBoneConstraintPoseSpaceMorphImpl : CBoneConstraintBaseImpl, CBoneConstraintPoseSpaceMorph {
+internal partial class CBoneConstraintPoseSpaceMorphImpl : CBoneConstraintBaseImpl, CBoneConstraintPoseSpaceMorph
+{
+    public CBoneConstraintPoseSpaceMorphImpl(nint handle) : base(handle) { }
 
-  public CBoneConstraintPoseSpaceMorphImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneNameOffset;
 
-  private static nint? _BoneNameOffset;
+    public string BoneName {
+        get {
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x6ECAD65A7559AC1F);
+            return Schema.GetString(_Handle.Read<nint>(_BoneNameOffset!.Value));
+        }
+        set {
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x6ECAD65A7559AC1F);
+            Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _AttachmentNameOffset;
 
-  public string BoneName {
-    get {
-      if (_BoneNameOffset == null) {
-        _BoneNameOffset = Schema.GetOffset(0x6ECAD65A7559AC1F);
-      }
-      var ptr = _Handle.Read<nint>(_BoneNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_BoneNameOffset == null) {
-        _BoneNameOffset = Schema.GetOffset(0x6ECAD65A7559AC1F);
-      }
-      Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _AttachmentNameOffset;
+    public string AttachmentName {
+        get {
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x6ECAD65A7B86DB7C);
+            return Schema.GetString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
+        }
+        set {
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x6ECAD65A7B86DB7C);
+            Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OutputMorphOffset;
 
-  public string AttachmentName {
-    get {
-      if (_AttachmentNameOffset == null) {
-        _AttachmentNameOffset = Schema.GetOffset(0x6ECAD65A7B86DB7C);
-      }
-      var ptr = _Handle.Read<nint>(_AttachmentNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CUtlString> OutputMorph {
+        get {
+            _OutputMorphOffset = _OutputMorphOffset ?? Schema.GetOffset(0x6ECAD65ADC9A8262);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutputMorphOffset!.Value);
+        }
     }
-    set {
-      if (_AttachmentNameOffset == null) {
-        _AttachmentNameOffset = Schema.GetOffset(0x6ECAD65A7B86DB7C);
-      }
-      Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OutputMorphOffset;
+    private static nint? _InputListOffset;
 
-  public ref CUtlVector<CUtlString> OutputMorph {
-    get {
-      if (_OutputMorphOffset == null) {
-        _OutputMorphOffset = Schema.GetOffset(0x6ECAD65ADC9A8262);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_OutputMorphOffset!.Value);
+    public ref CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t> InputList {
+        get {
+            _InputListOffset = _InputListOffset ?? Schema.GetOffset(0x6ECAD65A15EB8D83);
+            return ref _Handle.AsRef<CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t>>(_InputListOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputListOffset;
+    private static nint? _ClampOffset;
 
-  public ref CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t> InputList {
-    get {
-      if (_InputListOffset == null) {
-        _InputListOffset = Schema.GetOffset(0x6ECAD65A15EB8D83);
-      }
-      return ref _Handle.AsRef<CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t>>(_InputListOffset!.Value);
+    public ref bool Clamp {
+        get {
+            _ClampOffset = _ClampOffset ?? Schema.GetOffset(0x6ECAD65A84C7929C);
+            return ref _Handle.AsRef<bool>(_ClampOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClampOffset;
-
-  public ref bool Clamp {
-    get {
-      if (_ClampOffset == null) {
-        _ClampOffset = Schema.GetOffset(0x6ECAD65A84C7929C);
-      }
-      return ref _Handle.AsRef<bool>(_ClampOffset!.Value);
-    }
-  }
 
 
 }

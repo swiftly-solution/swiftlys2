@@ -17,6 +17,13 @@ public interface IMenuDesignAPI
     public IMenuBuilderAPI SetMenuTitleVisible( bool visible = true );
 
     /// <summary>
+    /// Controls the visibility of the item count in the menu title.
+    /// </summary>
+    /// <param name="visible">True to show the item count, false to hide it. Default is true.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetMenuTitleItemCountVisible( bool visible = true );
+
+    /// <summary>
     /// Controls the visibility of the menu footer.
     /// </summary>
     /// <param name="visible">True to show the footer, false to hide it. Default is true.</param>

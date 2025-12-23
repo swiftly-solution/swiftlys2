@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAttributeList : ISchemaClass<CAttributeList> {
+public partial interface CAttributeList : ISchemaClass<CAttributeList>
+{
+    static CAttributeList ISchemaClass<CAttributeList>.From(nint handle) => new CAttributeListImpl(handle);
+    static int ISchemaClass<CAttributeList>.Size => 120;
+    static string? ISchemaClass<CAttributeList>.ClassName => null;
 
-  static CAttributeList ISchemaClass<CAttributeList>.From(nint handle) => new CAttributeListImpl(handle);
-  static int ISchemaClass<CAttributeList>.Size => 120;
-  static string? ISchemaClass<CAttributeList>.ClassName => null;
 
-  
-  public ref CUtlVector<CEconItemAttribute> Attributes { get; }
-  
-  public CAttributeManager? Manager { get; }
+    public ref CUtlVector<CEconItemAttribute> Attributes { get; }
 
-  public void AttributesUpdated();
+    public CAttributeManager? Manager { get; }
+
+    public void AttributesUpdated();
 }

@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapModelVolumetoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapModelVolumetoCP> {
+public partial interface C_OP_RemapModelVolumetoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapModelVolumetoCP>
+{
+    static C_OP_RemapModelVolumetoCP ISchemaClass<C_OP_RemapModelVolumetoCP>.From(nint handle) => new C_OP_RemapModelVolumetoCPImpl(handle);
+    static int ISchemaClass<C_OP_RemapModelVolumetoCP>.Size => 512;
+    static string? ISchemaClass<C_OP_RemapModelVolumetoCP>.ClassName => null;
 
-  static C_OP_RemapModelVolumetoCP ISchemaClass<C_OP_RemapModelVolumetoCP>.From(nint handle) => new C_OP_RemapModelVolumetoCPImpl(handle);
-  static int ISchemaClass<C_OP_RemapModelVolumetoCP>.Size => 512;
-  static string? ISchemaClass<C_OP_RemapModelVolumetoCP>.ClassName => null;
 
-  
-  public ref BBoxVolumeType_t BBoxType { get; }
-  
-  public ref int InControlPointNumber { get; }
-  
-  public ref int OutControlPointNumber { get; }
-  
-  public ref int OutControlPointMaxNumber { get; }
-  
-  public ref int Field { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref bool BBoxOnly { get; }
-  
-  public ref bool CubeRoot { get; }
+    public ref BBoxVolumeType_t BBoxType { get; }
+
+    public ref int InControlPointNumber { get; }
+
+    public ref int OutControlPointNumber { get; }
+
+    public ref int OutControlPointMaxNumber { get; }
+
+    public ref int Field { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref bool BBoxOnly { get; }
+
+    public ref bool CubeRoot { get; }
 
 
 }

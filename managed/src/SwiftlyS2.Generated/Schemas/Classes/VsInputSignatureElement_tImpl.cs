@@ -6,78 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VsInputSignatureElement_tImpl : SchemaClass, VsInputSignatureElement_t {
+internal partial class VsInputSignatureElement_tImpl : SchemaClass, VsInputSignatureElement_t
+{
+    public VsInputSignatureElement_tImpl(nint handle) : base(handle) { }
 
-  public VsInputSignatureElement_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFD3BBE5B5B47C92C);
+            return Schema.GetString(_Handle + _NameOffset!.Value);
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFD3BBE5B5B47C92C);
+            Schema.SetFixedString(_Handle, _NameOffset!.Value, value, 64);
+        }
+    } 
+    private static nint? _SemanticOffset;
 
-  public string Name {
-    get {
-        if (_NameOffset == null) {
-            _NameOffset = Schema.GetOffset(0xFD3BBE5B5B47C92C);
+    public string Semantic {
+        get {
+            _SemanticOffset = _SemanticOffset ?? Schema.GetOffset(0xFD3BBE5B14684E6F);
+            return Schema.GetString(_Handle + _SemanticOffset!.Value);
         }
-        var ptr = _Handle + _NameOffset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_NameOffset == null) {
-            _NameOffset = Schema.GetOffset(0xFD3BBE5B5B47C92C);
+        set {
+            _SemanticOffset = _SemanticOffset ?? Schema.GetOffset(0xFD3BBE5B14684E6F);
+            Schema.SetFixedString(_Handle, _SemanticOffset!.Value, value, 64);
         }
-        Schema.SetFixedString(_Handle, _NameOffset!.Value, value, 64);
-    }
-  } 
-  private static nint? _SemanticOffset;
+    } 
+    private static nint? _D3DSemanticNameOffset;
 
-  public string Semantic {
-    get {
-        if (_SemanticOffset == null) {
-            _SemanticOffset = Schema.GetOffset(0xFD3BBE5B14684E6F);
+    public string D3DSemanticName {
+        get {
+            _D3DSemanticNameOffset = _D3DSemanticNameOffset ?? Schema.GetOffset(0xFD3BBE5B66524995);
+            return Schema.GetString(_Handle + _D3DSemanticNameOffset!.Value);
         }
-        var ptr = _Handle + _SemanticOffset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_SemanticOffset == null) {
-            _SemanticOffset = Schema.GetOffset(0xFD3BBE5B14684E6F);
+        set {
+            _D3DSemanticNameOffset = _D3DSemanticNameOffset ?? Schema.GetOffset(0xFD3BBE5B66524995);
+            Schema.SetFixedString(_Handle, _D3DSemanticNameOffset!.Value, value, 64);
         }
-        Schema.SetFixedString(_Handle, _SemanticOffset!.Value, value, 64);
-    }
-  } 
-  private static nint? _D3DSemanticNameOffset;
+    } 
+    private static nint? _D3DSemanticIndexOffset;
 
-  public string D3DSemanticName {
-    get {
-        if (_D3DSemanticNameOffset == null) {
-            _D3DSemanticNameOffset = Schema.GetOffset(0xFD3BBE5B66524995);
+    public ref int D3DSemanticIndex {
+        get {
+            _D3DSemanticIndexOffset = _D3DSemanticIndexOffset ?? Schema.GetOffset(0xFD3BBE5B67F2BA80);
+            return ref _Handle.AsRef<int>(_D3DSemanticIndexOffset!.Value);
         }
-        var ptr = _Handle + _D3DSemanticNameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_D3DSemanticNameOffset == null) {
-            _D3DSemanticNameOffset = Schema.GetOffset(0xFD3BBE5B66524995);
-        }
-        Schema.SetFixedString(_Handle, _D3DSemanticNameOffset!.Value, value, 64);
-    }
-  } 
-  private static nint? _D3DSemanticIndexOffset;
-
-  public ref int D3DSemanticIndex {
-    get {
-      if (_D3DSemanticIndexOffset == null) {
-        _D3DSemanticIndexOffset = Schema.GetOffset(0xFD3BBE5B67F2BA80);
-      }
-      return ref _Handle.AsRef<int>(_D3DSemanticIndexOffset!.Value);
-    }
-  }
 
 
 }

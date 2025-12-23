@@ -6,29 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayer_BulletServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_BulletServices {
+internal partial class CCSPlayer_BulletServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_BulletServices
+{
+    public CCSPlayer_BulletServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayer_BulletServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TotalHitsOnServerOffset;
 
-  private static nint? _TotalHitsOnServerOffset;
-
-  public ref int TotalHitsOnServer {
-    get {
-      if (_TotalHitsOnServerOffset == null) {
-        _TotalHitsOnServerOffset = Schema.GetOffset(0x39B0E99E8006CF29);
-      }
-      return ref _Handle.AsRef<int>(_TotalHitsOnServerOffset!.Value);
+    public ref int TotalHitsOnServer {
+        get {
+            _TotalHitsOnServerOffset = _TotalHitsOnServerOffset ?? Schema.GetOffset(0x39B0E99E8006CF29);
+            return ref _Handle.AsRef<int>(_TotalHitsOnServerOffset!.Value);
+        }
     }
-  }
 
-  public void TotalHitsOnServerUpdated() {
-    Schema.Update(_Handle, 0x39B0E99E8006CF29);
-  }
+    public void TotalHitsOnServerUpdated() => Schema.Update(_Handle, 0x39B0E99E8006CF29);
 }

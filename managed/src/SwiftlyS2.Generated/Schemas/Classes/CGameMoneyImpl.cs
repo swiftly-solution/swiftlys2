@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGameMoneyImpl : CRulePointEntityImpl, CGameMoney {
+internal partial class CGameMoneyImpl : CRulePointEntityImpl, CGameMoney
+{
+    public CGameMoneyImpl(nint handle) : base(handle) { }
 
-  public CGameMoneyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnMoneySpentOffset;
 
-  private static nint? _OnMoneySpentOffset;
-
-  public CEntityIOOutput OnMoneySpent {
-    get {
-      if (_OnMoneySpentOffset == null) {
-        _OnMoneySpentOffset = Schema.GetOffset(0xED17C684B6CD990C);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnMoneySpentOffset!.Value);
+    public ref CEntityIOOutput OnMoneySpent {
+        get {
+            _OnMoneySpentOffset = _OnMoneySpentOffset ?? Schema.GetOffset(0xED17C684B6CD990C);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMoneySpentOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnMoneySpentFailOffset;
+    private static nint? _OnMoneySpentFailOffset;
 
-  public CEntityIOOutput OnMoneySpentFail {
-    get {
-      if (_OnMoneySpentFailOffset == null) {
-        _OnMoneySpentFailOffset = Schema.GetOffset(0xED17C684DB165FC0);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnMoneySpentFailOffset!.Value);
+    public ref CEntityIOOutput OnMoneySpentFail {
+        get {
+            _OnMoneySpentFailOffset = _OnMoneySpentFailOffset ?? Schema.GetOffset(0xED17C684DB165FC0);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMoneySpentFailOffset!.Value);
+        }
     }
-  }
-  private static nint? _MoneyOffset;
+    private static nint? _MoneyOffset;
 
-  public ref int Money {
-    get {
-      if (_MoneyOffset == null) {
-        _MoneyOffset = Schema.GetOffset(0xED17C6845BE25D03);
-      }
-      return ref _Handle.AsRef<int>(_MoneyOffset!.Value);
+    public ref int Money {
+        get {
+            _MoneyOffset = _MoneyOffset ?? Schema.GetOffset(0xED17C6845BE25D03);
+            return ref _Handle.AsRef<int>(_MoneyOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrAwardTextOffset;
+    private static nint? _StrAwardTextOffset;
 
-  public string StrAwardText {
-    get {
-      if (_StrAwardTextOffset == null) {
-        _StrAwardTextOffset = Schema.GetOffset(0xED17C684B48AB662);
-      }
-      var ptr = _Handle.Read<nint>(_StrAwardTextOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrAwardTextOffset == null) {
-        _StrAwardTextOffset = Schema.GetOffset(0xED17C684B48AB662);
-      }
-      Schema.SetString(_Handle, _StrAwardTextOffset!.Value, value);
-    }
-  } 
+    public string StrAwardText {
+        get {
+            _StrAwardTextOffset = _StrAwardTextOffset ?? Schema.GetOffset(0xED17C684B48AB662);
+            return Schema.GetString(_Handle.Read<nint>(_StrAwardTextOffset!.Value));
+        }
+        set {
+            _StrAwardTextOffset = _StrAwardTextOffset ?? Schema.GetOffset(0xED17C684B48AB662);
+            Schema.SetString(_Handle, _StrAwardTextOffset!.Value, value);
+        }
+    } 
 
 
 }

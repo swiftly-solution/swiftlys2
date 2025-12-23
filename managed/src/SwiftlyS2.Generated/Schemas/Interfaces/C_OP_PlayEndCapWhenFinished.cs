@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_PlayEndCapWhenFinished : CParticleFunctionPreEmission, ISchemaClass<C_OP_PlayEndCapWhenFinished> {
+public partial interface C_OP_PlayEndCapWhenFinished : CParticleFunctionPreEmission, ISchemaClass<C_OP_PlayEndCapWhenFinished>
+{
+    static C_OP_PlayEndCapWhenFinished ISchemaClass<C_OP_PlayEndCapWhenFinished>.From(nint handle) => new C_OP_PlayEndCapWhenFinishedImpl(handle);
+    static int ISchemaClass<C_OP_PlayEndCapWhenFinished>.Size => 480;
+    static string? ISchemaClass<C_OP_PlayEndCapWhenFinished>.ClassName => null;
 
-  static C_OP_PlayEndCapWhenFinished ISchemaClass<C_OP_PlayEndCapWhenFinished>.From(nint handle) => new C_OP_PlayEndCapWhenFinishedImpl(handle);
-  static int ISchemaClass<C_OP_PlayEndCapWhenFinished>.Size => 480;
-  static string? ISchemaClass<C_OP_PlayEndCapWhenFinished>.ClassName => null;
 
-  
-  public ref bool FireOnEmissionEnd { get; }
-  
-  public ref bool IncludeChildren { get; }
+    public ref bool FireOnEmissionEnd { get; }
+
+    public ref bool IncludeChildren { get; }
 
 
 }

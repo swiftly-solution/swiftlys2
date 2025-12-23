@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_PositionWarpScalarImpl : CParticleFunctionInitializerImpl, C_INIT_PositionWarpScalar {
+internal partial class C_INIT_PositionWarpScalarImpl : CParticleFunctionInitializerImpl, C_INIT_PositionWarpScalar
+{
+    public C_INIT_PositionWarpScalarImpl(nint handle) : base(handle) { }
 
-  public C_INIT_PositionWarpScalarImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WarpMinOffset;
 
-  private static nint? _WarpMinOffset;
-
-  public ref Vector WarpMin {
-    get {
-      if (_WarpMinOffset == null) {
-        _WarpMinOffset = Schema.GetOffset(0x36E409431B8A7F09);
-      }
-      return ref _Handle.AsRef<Vector>(_WarpMinOffset!.Value);
+    public ref Vector WarpMin {
+        get {
+            _WarpMinOffset = _WarpMinOffset ?? Schema.GetOffset(0x36E409431B8A7F09);
+            return ref _Handle.AsRef<Vector>(_WarpMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _WarpMaxOffset;
+    private static nint? _WarpMaxOffset;
 
-  public ref Vector WarpMax {
-    get {
-      if (_WarpMaxOffset == null) {
-        _WarpMaxOffset = Schema.GetOffset(0x36E409430D76E147);
-      }
-      return ref _Handle.AsRef<Vector>(_WarpMaxOffset!.Value);
+    public ref Vector WarpMax {
+        get {
+            _WarpMaxOffset = _WarpMaxOffset ?? Schema.GetOffset(0x36E409430D76E147);
+            return ref _Handle.AsRef<Vector>(_WarpMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputValueOffset;
+    private static nint? _InputValueOffset;
 
-  public CPerParticleFloatInput InputValue {
-    get {
-      if (_InputValueOffset == null) {
-        _InputValueOffset = Schema.GetOffset(0x36E4094334445438);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InputValueOffset!.Value);
+    public CPerParticleFloatInput InputValue {
+        get {
+            _InputValueOffset = _InputValueOffset ?? Schema.GetOffset(0x36E4094334445438);
+            return new CPerParticleFloatInputImpl(_Handle + _InputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevPosScaleOffset;
+    private static nint? _PrevPosScaleOffset;
 
-  public ref float PrevPosScale {
-    get {
-      if (_PrevPosScaleOffset == null) {
-        _PrevPosScaleOffset = Schema.GetOffset(0x36E4094346CED122);
-      }
-      return ref _Handle.AsRef<float>(_PrevPosScaleOffset!.Value);
+    public ref float PrevPosScale {
+        get {
+            _PrevPosScaleOffset = _PrevPosScaleOffset ?? Schema.GetOffset(0x36E4094346CED122);
+            return ref _Handle.AsRef<float>(_PrevPosScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleControlPointNumberOffset;
+    private static nint? _ScaleControlPointNumberOffset;
 
-  public ref int ScaleControlPointNumber {
-    get {
-      if (_ScaleControlPointNumberOffset == null) {
-        _ScaleControlPointNumberOffset = Schema.GetOffset(0x36E409439A649261);
-      }
-      return ref _Handle.AsRef<int>(_ScaleControlPointNumberOffset!.Value);
+    public ref int ScaleControlPointNumber {
+        get {
+            _ScaleControlPointNumberOffset = _ScaleControlPointNumberOffset ?? Schema.GetOffset(0x36E409439A649261);
+            return ref _Handle.AsRef<int>(_ScaleControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointNumberOffset;
+    private static nint? _ControlPointNumberOffset;
 
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x36E409433F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x36E409433F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
 
 
 }

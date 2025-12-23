@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoteController : CBaseEntity, ISchemaClass<CVoteController> {
+public partial interface CVoteController : CBaseEntity, ISchemaClass<CVoteController>
+{
+    static CVoteController ISchemaClass<CVoteController>.From(nint handle) => new CVoteControllerImpl(handle);
+    static int ISchemaClass<CVoteController>.Size => 1696;
+    static string? ISchemaClass<CVoteController>.ClassName => "vote_controller";
 
-  static CVoteController ISchemaClass<CVoteController>.From(nint handle) => new CVoteControllerImpl(handle);
-  static int ISchemaClass<CVoteController>.Size => 1696;
-  static string? ISchemaClass<CVoteController>.ClassName => "vote_controller";
 
-  
-  public ref int ActiveIssueIndex { get; }
-  
-  public ref int OnlyTeamToVote { get; }
-  
-  public ISchemaFixedArray<int> VoteOptionCount { get; }
-  
-  public ref int PotentialVotes { get; }
-  
-  public ref bool IsYesNoVote { get; }
-  
-  public CountdownTimer AcceptingVotesTimer { get; }
-  
-  public CountdownTimer ExecuteCommandTimer { get; }
-  
-  public CountdownTimer ResetVoteTimer { get; }
-  
-  public ISchemaFixedArray<int> VotesCast { get; }
-  
-  public ref uint PlayerHoldingVote { get; }
-  
-  public ref uint PlayerOverrideForVote { get; }
-  
-  public ref int HighestCountIndex { get; }
-  
-  public ref CUtlVector<PointerTo<CBaseIssue>> PotentialIssues { get; }
-  
-  public ref CUtlVector<CString> VoteOptions { get; }
+    public ref int ActiveIssueIndex { get; }
 
-  public void ActiveIssueIndexUpdated();
-  public void OnlyTeamToVoteUpdated();
-  public void VoteOptionCountUpdated();
-  public void PotentialVotesUpdated();
-  public void IsYesNoVoteUpdated();
+    public ref int OnlyTeamToVote { get; }
+
+    public ISchemaFixedArray<int> VoteOptionCount { get; }
+
+    public ref int PotentialVotes { get; }
+
+    public ref bool IsYesNoVote { get; }
+
+    public CountdownTimer AcceptingVotesTimer { get; }
+
+    public CountdownTimer ExecuteCommandTimer { get; }
+
+    public CountdownTimer ResetVoteTimer { get; }
+
+    public ISchemaFixedArray<int> VotesCast { get; }
+
+    public ref uint PlayerHoldingVote { get; }
+
+    public ref uint PlayerOverrideForVote { get; }
+
+    public ref int HighestCountIndex { get; }
+
+    public ref CUtlVector<PointerTo<CBaseIssue>> PotentialIssues { get; }
+
+    public ref CUtlVector<CString> VoteOptions { get; }
+
+    public void ActiveIssueIndexUpdated();
+    public void OnlyTeamToVoteUpdated();
+    public void VoteOptionCountUpdated();
+    public void PotentialVotesUpdated();
+    public void IsYesNoVoteUpdated();
 }

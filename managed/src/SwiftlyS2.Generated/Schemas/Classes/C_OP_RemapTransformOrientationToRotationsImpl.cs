@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapTransformOrientationToRotationsImpl : CParticleFunctionOperatorImpl, C_OP_RemapTransformOrientationToRotations {
+internal partial class C_OP_RemapTransformOrientationToRotationsImpl : CParticleFunctionOperatorImpl, C_OP_RemapTransformOrientationToRotations
+{
+    public C_OP_RemapTransformOrientationToRotationsImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapTransformOrientationToRotationsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformInputOffset;
 
-  private static nint? _TransformInputOffset;
-
-  public CParticleTransformInput TransformInput {
-    get {
-      if (_TransformInputOffset == null) {
-        _TransformInputOffset = Schema.GetOffset(0x73EBC1F8B3FDC289);
-      }
-      return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+    public CParticleTransformInput TransformInput {
+        get {
+            _TransformInputOffset = _TransformInputOffset ?? Schema.GetOffset(0x73EBC1F8B3FDC289);
+            return new CParticleTransformInputImpl(_Handle + _TransformInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotationOffset;
+    private static nint? _RotationOffset;
 
-  public ref Vector Rotation {
-    get {
-      if (_RotationOffset == null) {
-        _RotationOffset = Schema.GetOffset(0x73EBC1F81992E6BF);
-      }
-      return ref _Handle.AsRef<Vector>(_RotationOffset!.Value);
+    public ref Vector Rotation {
+        get {
+            _RotationOffset = _RotationOffset ?? Schema.GetOffset(0x73EBC1F81992E6BF);
+            return ref _Handle.AsRef<Vector>(_RotationOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseQuatOffset;
+    private static nint? _UseQuatOffset;
 
-  public ref bool UseQuat {
-    get {
-      if (_UseQuatOffset == null) {
-        _UseQuatOffset = Schema.GetOffset(0x73EBC1F843F0D4DB);
-      }
-      return ref _Handle.AsRef<bool>(_UseQuatOffset!.Value);
+    public ref bool UseQuat {
+        get {
+            _UseQuatOffset = _UseQuatOffset ?? Schema.GetOffset(0x73EBC1F843F0D4DB);
+            return ref _Handle.AsRef<bool>(_UseQuatOffset!.Value);
+        }
     }
-  }
-  private static nint? _WriteNormalOffset;
+    private static nint? _WriteNormalOffset;
 
-  public ref bool WriteNormal {
-    get {
-      if (_WriteNormalOffset == null) {
-        _WriteNormalOffset = Schema.GetOffset(0x73EBC1F8C2EF44FF);
-      }
-      return ref _Handle.AsRef<bool>(_WriteNormalOffset!.Value);
+    public ref bool WriteNormal {
+        get {
+            _WriteNormalOffset = _WriteNormalOffset ?? Schema.GetOffset(0x73EBC1F8C2EF44FF);
+            return ref _Handle.AsRef<bool>(_WriteNormalOffset!.Value);
+        }
     }
-  }
 
 
 }

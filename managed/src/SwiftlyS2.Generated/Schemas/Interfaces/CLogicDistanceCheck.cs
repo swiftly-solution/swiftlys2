@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicDistanceCheck : CLogicalEntity, ISchemaClass<CLogicDistanceCheck> {
+public partial interface CLogicDistanceCheck : CLogicalEntity, ISchemaClass<CLogicDistanceCheck>
+{
+    static CLogicDistanceCheck ISchemaClass<CLogicDistanceCheck>.From(nint handle) => new CLogicDistanceCheckImpl(handle);
+    static int ISchemaClass<CLogicDistanceCheck>.Size => 1408;
+    static string? ISchemaClass<CLogicDistanceCheck>.ClassName => "logic_distance_check";
 
-  static CLogicDistanceCheck ISchemaClass<CLogicDistanceCheck>.From(nint handle) => new CLogicDistanceCheckImpl(handle);
-  static int ISchemaClass<CLogicDistanceCheck>.Size => 1408;
-  static string? ISchemaClass<CLogicDistanceCheck>.ClassName => "logic_distance_check";
 
-  
-  public string EntityA { get; set; }
-  
-  public string EntityB { get; set; }
-  
-  public ref float Zone1Distance { get; }
-  
-  public ref float Zone2Distance { get; }
-  
-  public CEntityIOOutput InZone1 { get; }
-  
-  public CEntityIOOutput InZone2 { get; }
-  
-  public CEntityIOOutput InZone3 { get; }
+    public string EntityA { get; set; }
+
+    public string EntityB { get; set; }
+
+    public ref float Zone1Distance { get; }
+
+    public ref float Zone2Distance { get; }
+
+    public ref CEntityIOOutput InZone1 { get; }
+
+    public ref CEntityIOOutput InZone2 { get; }
+
+    public ref CEntityIOOutput InZone3 { get; }
 
 
 }

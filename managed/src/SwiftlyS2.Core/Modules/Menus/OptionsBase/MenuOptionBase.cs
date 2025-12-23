@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
+using Spectre.Console;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Core.Menus.OptionsBase.Helpers;
@@ -46,12 +47,14 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 
         if (updateIntervalMs < (int)(1 / 64f * 1000))
         {
-            Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(updateIntervalMs), $"updateIntervalMs: value {updateIntervalMs} is out of range."));
+            Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(updateIntervalMs),
+                $"updateIntervalMs: value {updateIntervalMs} is out of range."));
         }
 
         if (pauseIntervalMs < (int)(1 / 64f * 1000))
         {
-            Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(pauseIntervalMs), $"pauseIntervalMs: value {pauseIntervalMs} is out of range."));
+            Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(pauseIntervalMs),
+                $"pauseIntervalMs: value {pauseIntervalMs} is out of range."));
         }
 
         dynamicTextUpdater = new DynamicTextUpdater(
@@ -148,7 +151,15 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
 
             field = value;
-            TextChanged?.Invoke(this, new MenuOptionEventArgs { Player = null!, Option = this });
+            try
+            {
+                TextChanged?.Invoke(this, new MenuOptionEventArgs { Player = null!, Option = this });
+            }
+            catch (Exception e)
+            {
+                if (!GlobalExceptionHandler.Handle(e)) return;
+                AnsiConsole.WriteException(e);
+            }
         }
     } = null;
 
@@ -172,12 +183,21 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
         get {
             if (BindingText != null)
             {
-                var boundValue = BindingText.Invoke();
-                if (boundValue != null)
+                try
                 {
-                    return boundValue;
+                    var boundValue = BindingText.Invoke();
+                    if (boundValue != null)
+                    {
+                        return boundValue;
+                    }
+                }
+                catch (Exception e)
+                {
+                    if (!GlobalExceptionHandler.Handle(e)) return string.Empty;
+                    AnsiConsole.WriteException(e);
                 }
             }
+
             return field;
         }
         set {
@@ -188,7 +208,15 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 
             field = value;
 
-            TextChanged?.Invoke(this, new MenuOptionEventArgs { Player = null!, Option = this });
+            try
+            {
+                TextChanged?.Invoke(this, new MenuOptionEventArgs { Player = null, Option = this });
+            }
+            catch (Exception e)
+            {
+                if (!GlobalExceptionHandler.Handle(e)) return;
+                AnsiConsole.WriteException(e);
+            }
         }
     } = string.Empty;
 
@@ -213,7 +241,8 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 
             if (value < 1f)
             {
-                Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(MaxWidth), $"MaxWidth: value {value:F3} is out of range."));
+                Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(MaxWidth),
+                    $"MaxWidth: value {value:F3} is out of range."));
             }
 
             field = Math.Max(value, 1f);
@@ -236,7 +265,16 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
 
             field = value;
-            VisibilityChanged?.Invoke(this, new MenuOptionEventArgs { Player = null!, Option = this });
+
+            try
+            {
+                VisibilityChanged?.Invoke(this, new MenuOptionEventArgs { Player = null, Option = this });
+            }
+            catch (Exception e)
+            {
+                if (!GlobalExceptionHandler.Handle(e)) return;
+                AnsiConsole.WriteException(e);
+            }
         }
     } = true;
 
@@ -255,7 +293,16 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             }
 
             field = value;
-            EnabledChanged?.Invoke(this, new MenuOptionEventArgs { Player = null!, Option = this });
+
+            try
+            {
+                EnabledChanged?.Invoke(this, new MenuOptionEventArgs { Player = null, Option = this });
+            }
+            catch (Exception e)
+            {
+                if (!GlobalExceptionHandler.Handle(e)) return;
+                AnsiConsole.WriteException(e);
+            }
         }
     } = true;
 
@@ -340,14 +387,16 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// </summary>
     /// <param name="player">The player to check.</param>
     /// <returns>True if the click task is completed; otherwise, false.</returns>
-    public virtual bool IsClickTaskCompleted( IPlayer player ) => !playerClickTask.TryGetValue(player.PlayerID, out var value) || value.IsCompleted;
+    public virtual bool IsClickTaskCompleted( IPlayer player ) =>
+        !playerClickTask.TryGetValue(player.PlayerID, out var value) || value.IsCompleted;
 
     /// <summary>
     /// Determines whether this option is visible to the specified player.
     /// </summary>
     /// <param name="player">The player to check visibility for.</param>
     /// <returns>True if the option is visible to the player; otherwise, false.</returns>
-    public virtual bool GetVisible( IPlayer player ) => playerVisible.TryGetValue(player.PlayerID, out var value) ? value : Visible;
+    public virtual bool GetVisible( IPlayer player ) =>
+        playerVisible.TryGetValue(player.PlayerID, out var value) ? value : Visible;
 
     /// <summary>
     /// Sets the visibility of this option for a specific player.
@@ -357,14 +406,16 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// <remarks>
     /// The per-player visibility has lower priority than the global <see cref="Visible"/> property.
     /// </remarks>
-    public virtual void SetVisible( IPlayer player, bool visible ) => playerVisible.AddOrUpdate(player.PlayerID, visible, ( key, value ) => visible);
+    public virtual void SetVisible( IPlayer player, bool visible ) =>
+        playerVisible.AddOrUpdate(player.PlayerID, visible, ( key, value ) => visible);
 
     /// <summary>
     /// Determines whether this option is enabled for the specified player.
     /// </summary>
     /// <param name="player">The player to check enabled state for.</param>
     /// <returns>True if the option is enabled for the player; otherwise, false.</returns>
-    public virtual bool GetEnabled( IPlayer player ) => playerEnabled.TryGetValue(player.PlayerID, out var value) ? value : Enabled;
+    public virtual bool GetEnabled( IPlayer player ) =>
+        playerEnabled.TryGetValue(player.PlayerID, out var value) ? value : Enabled;
 
     /// <summary>
     /// Sets the enabled state of this option for a specific player.
@@ -374,7 +425,8 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// <remarks>
     /// The per-player enabled state has lower priority than the global <see cref="Enabled"/> property.
     /// </remarks>
-    public virtual void SetEnabled( IPlayer player, bool enabled ) => playerEnabled.AddOrUpdate(player.PlayerID, enabled, ( key, value ) => enabled);
+    public virtual void SetEnabled( IPlayer player, bool enabled ) =>
+        playerEnabled.AddOrUpdate(player.PlayerID, enabled, ( key, value ) => enabled);
 
     // /// <summary>
     // /// Gets the text to display for this option for the specified player.
@@ -440,7 +492,15 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             CustomText = null
         };
 
-        BeforeFormat?.Invoke(this, args);
+        try
+        {
+            BeforeFormat?.Invoke(this, args);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return string.Empty;
+            AnsiConsole.WriteException(e);
+        }
 
         if (playerClickTask.TryGetValue(player.PlayerID, out var value) && !value.IsCompleted)
         {
@@ -473,7 +533,16 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
 
             args.CustomText = result;
         }
-        AfterFormat?.Invoke(this, args);
+
+        try
+        {
+            AfterFormat?.Invoke(this, args);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return string.Empty;
+            AnsiConsole.WriteException(e);
+        }
 
         return args.CustomText;
     }
@@ -496,7 +565,15 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
             Cancel = false
         };
 
-        Validating?.Invoke(this, args);
+        try
+        {
+            Validating?.Invoke(this, args);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return ValueTask.FromResult(true);
+            AnsiConsole.WriteException(e);
+        }
         return ValueTask.FromResult(!args.Cancel);
     }
 
@@ -566,6 +643,11 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
                 _ = playerClickTask.AddOrUpdate(player.PlayerID, clickTask, ( _, _ ) => clickTask);
                 await clickTask;
             }
+            catch (Exception e)
+            {
+                if (!GlobalExceptionHandler.Handle(e)) return;
+                AnsiConsole.WriteException(e);
+            }
             finally
             {
                 _ = playerClickTask.TryRemove(player.PlayerID, out _);
@@ -599,7 +681,9 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// This method MUST be synchronous to ensure immediate UI feedback.
     /// </summary>
     /// <param name="player">The player who pressed the key.</param>
-    internal virtual void OnClaimedExit( IPlayer player ) { }
+    internal virtual void OnClaimedExit( IPlayer player )
+    {
+    }
 
     /// <summary>
     /// Called when the claimed Use key is pressed while this option is selected.
@@ -607,14 +691,18 @@ public abstract partial class MenuOptionBase : IMenuOption, IDisposable
     /// This method MUST be synchronous to ensure immediate UI feedback.
     /// </summary>
     /// <param name="player">The player who pressed the key.</param>
-    internal virtual void OnClaimedUse( IPlayer player ) { }
+    internal virtual void OnClaimedUse( IPlayer player )
+    {
+    }
 
     /// <summary>
     /// Called to update custom animations for this option.
     /// Override this method to implement custom animation logic.
     /// </summary>
     /// <param name="now">The current time.</param>
-    internal virtual void UpdateCustomAnimations( DateTime now ) { }
+    internal virtual void UpdateCustomAnimations( DateTime now )
+    {
+    }
 
     /// <summary>
     /// Updates dynamic text.

@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBombTarget : CBaseTrigger, ISchemaClass<CBombTarget> {
+public partial interface CBombTarget : CBaseTrigger, ISchemaClass<CBombTarget>
+{
+    static CBombTarget ISchemaClass<CBombTarget>.From(nint handle) => new CBombTargetImpl(handle);
+    static int ISchemaClass<CBombTarget>.Size => 2616;
+    static string? ISchemaClass<CBombTarget>.ClassName => "func_bomb_target";
 
-  static CBombTarget ISchemaClass<CBombTarget>.From(nint handle) => new CBombTargetImpl(handle);
-  static int ISchemaClass<CBombTarget>.Size => 2616;
-  static string? ISchemaClass<CBombTarget>.ClassName => "func_bomb_target";
 
-  
-  public CEntityIOOutput OnBombExplode { get; }
-  
-  public CEntityIOOutput OnBombPlanted { get; }
-  
-  public CEntityIOOutput OnBombDefused { get; }
-  
-  public ref bool IsBombSiteB { get; }
-  
-  public ref bool IsHeistBombTarget { get; }
-  
-  public ref bool BombPlantedHere { get; }
-  
-  public string MountTarget { get; set; }
-  
-  public ref CHandle<CBaseEntity> InstructorHint { get; }
-  
-  public ref int BombSiteDesignation { get; }
+    public ref CEntityIOOutput OnBombExplode { get; }
 
-  public void BombPlantedHereUpdated();
+    public ref CEntityIOOutput OnBombPlanted { get; }
+
+    public ref CEntityIOOutput OnBombDefused { get; }
+
+    public ref bool IsBombSiteB { get; }
+
+    public ref bool IsHeistBombTarget { get; }
+
+    public ref bool BombPlantedHere { get; }
+
+    public string MountTarget { get; set; }
+
+    public ref CHandle<CBaseEntity> InstructorHint { get; }
+
+    public ref int BombSiteDesignation { get; }
+
+    public void BombPlantedHereUpdated();
 }

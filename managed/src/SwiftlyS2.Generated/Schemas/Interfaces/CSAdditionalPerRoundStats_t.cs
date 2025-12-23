@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSAdditionalPerRoundStats_t : ISchemaClass<CSAdditionalPerRoundStats_t> {
+public partial interface CSAdditionalPerRoundStats_t : ISchemaClass<CSAdditionalPerRoundStats_t>
+{
+    static CSAdditionalPerRoundStats_t ISchemaClass<CSAdditionalPerRoundStats_t>.From(nint handle) => new CSAdditionalPerRoundStats_tImpl(handle);
+    static int ISchemaClass<CSAdditionalPerRoundStats_t>.Size => 24;
+    static string? ISchemaClass<CSAdditionalPerRoundStats_t>.ClassName => null;
 
-  static CSAdditionalPerRoundStats_t ISchemaClass<CSAdditionalPerRoundStats_t>.From(nint handle) => new CSAdditionalPerRoundStats_tImpl(handle);
-  static int ISchemaClass<CSAdditionalPerRoundStats_t>.Size => 24;
-  static string? ISchemaClass<CSAdditionalPerRoundStats_t>.ClassName => null;
 
-  
-  public ref int NumChickensKilled { get; }
-  
-  public ref int KillsWhileBlind { get; }
-  
-  public ref int BombCarrierkills { get; }
-  
-  public ref float BurnDamageInflicted { get; }
-  
-  public ref float BlastDamageInflicted { get; }
-  
-  public ref int Dinks { get; }
+    public ref int NumChickensKilled { get; }
+
+    public ref int KillsWhileBlind { get; }
+
+    public ref int BombCarrierkills { get; }
+
+    public ref float BurnDamageInflicted { get; }
+
+    public ref float BlastDamageInflicted { get; }
+
+    public ref int Dinks { get; }
 
 
 }

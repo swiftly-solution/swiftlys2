@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCGcExportableExternalData : ISchemaClass<InfoForResourceTypeCGcExportableExternalData> {
-
-  static InfoForResourceTypeCGcExportableExternalData ISchemaClass<InfoForResourceTypeCGcExportableExternalData>.From(nint handle) => new InfoForResourceTypeCGcExportableExternalDataImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCGcExportableExternalData>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCGcExportableExternalData>.ClassName => null;
+public partial interface InfoForResourceTypeCGcExportableExternalData : ISchemaClass<InfoForResourceTypeCGcExportableExternalData>
+{
+    static InfoForResourceTypeCGcExportableExternalData ISchemaClass<InfoForResourceTypeCGcExportableExternalData>.From(nint handle) => new InfoForResourceTypeCGcExportableExternalDataImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCGcExportableExternalData>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCGcExportableExternalData>.ClassName => null;
 
 
 

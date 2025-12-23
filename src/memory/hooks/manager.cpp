@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -74,28 +74,39 @@ void HooksManager::Shutdown()
 
 void CEntityIOOutput_FireOutputInternal_Hook(CEntityIOOutput* pThis, CEntityInstance* pActivator, CEntityInstance* pCaller, void* variantValue, float delay, void* unk01, void* unk02)
 {
-    std::vector searchOutputs{
-       ((uint64_t)hash_32_fnv1a_const("*") << 32 | hash_32_fnv1a_const(pThis->m_pDesc->m_pName)),
-       ((uint64_t)hash_32_fnv1a_const("*") << 32 | hash_32_fnv1a_const("*"))
-    };
+    const char* outputName = pThis->m_pDesc->m_pName;
+    const char* callerClassName = pCaller ? pCaller->GetClassname() : "(null)";
+    std::vector searchOutputs{ ((uint64_t)hash_32_fnv1a_const("*") << 32 | hash_32_fnv1a_const(outputName)), ((uint64_t)hash_32_fnv1a_const("*") << 32 | hash_32_fnv1a_const("*")) };
 
     if (pCaller)
     {
-        searchOutputs.push_back(((uint64_t)hash_32_fnv1a_const(pCaller->GetClassname()) << 32 | hash_32_fnv1a_const(pThis->m_pDesc->m_pName)));
-        searchOutputs.push_back(((uint64_t)hash_32_fnv1a_const(pCaller->GetClassname()) << 32 | hash_32_fnv1a_const("*")));
+        uint64_t classHash = hash_32_fnv1a_const(callerClassName);
+        uint64_t outputHash = hash_32_fnv1a_const(outputName);
+        uint64_t combinedHash = (classHash << 32) | outputHash;
+        searchOutputs.push_back(combinedHash);
+        searchOutputs.push_back(((uint64_t)hash_32_fnv1a_const(callerClassName) << 32 | hash_32_fnv1a_const("*")));
     }
 
-    for (auto& output : searchOutputs) {
+    for (auto& output : searchOutputs)
+    {
         bool shouldStop = false;
-        for (auto& hook : outputHooksList[output]) {
-            int result = reinterpret_cast<int(*)(CEntityIOOutput*, const char*, CEntityInstance*, CEntityInstance*, float)>(hook.second)(pThis, pThis->m_pDesc->m_pName, pActivator, pCaller, delay);
-            if (result == 1) return;
-            else if (result == 2) {
+        for (auto& hook : outputHooksList[output])
+        {
+            int result = reinterpret_cast<int (*)(CEntityIOOutput*, const char*, CEntityInstance*, CEntityInstance*, float)>(hook.second)(pThis, outputName, pActivator, pCaller, delay);
+            if (result == 1)
+            {
+                return;
+            }
+            else if (result == 2)
+            {
                 shouldStop = true;
                 break;
             }
         }
-        if (shouldStop) break;
+        if (shouldStop)
+        {
+            break;
+        }
     }
 
     reinterpret_cast<decltype(&CEntityIOOutput_FireOutputInternal_Hook)>(g_pFireOutputHook->GetOriginal())(pThis, pActivator, pCaller, variantValue, delay, unk01, unk02);

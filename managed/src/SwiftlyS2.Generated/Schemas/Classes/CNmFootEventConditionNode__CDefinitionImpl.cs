@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFootEventConditionNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmFootEventConditionNode__CDefinition {
+internal partial class CNmFootEventConditionNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmFootEventConditionNode__CDefinition
+{
+    public CNmFootEventConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmFootEventConditionNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceStateNodeIdxOffset;
 
-  private static nint? _SourceStateNodeIdxOffset;
-
-  public ref short SourceStateNodeIdx {
-    get {
-      if (_SourceStateNodeIdxOffset == null) {
-        _SourceStateNodeIdxOffset = Schema.GetOffset(0xA837BCFE63F0228C);
-      }
-      return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+    public ref short SourceStateNodeIdx {
+        get {
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0xA837BCFE63F0228C);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _PhaseConditionOffset;
+    private static nint? _PhaseConditionOffset;
 
-  public ref NmFootPhaseCondition_t PhaseCondition {
-    get {
-      if (_PhaseConditionOffset == null) {
-        _PhaseConditionOffset = Schema.GetOffset(0xA837BCFE79D4BD7D);
-      }
-      return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset!.Value);
+    public ref NmFootPhaseCondition_t PhaseCondition {
+        get {
+            _PhaseConditionOffset = _PhaseConditionOffset ?? Schema.GetOffset(0xA837BCFE79D4BD7D);
+            return ref _Handle.AsRef<NmFootPhaseCondition_t>(_PhaseConditionOffset!.Value);
+        }
     }
-  }
-  private static nint? _EventConditionRulesOffset;
+    private static nint? _EventConditionRulesOffset;
 
-  public CNmBitFlags EventConditionRules {
-    get {
-      if (_EventConditionRulesOffset == null) {
-        _EventConditionRulesOffset = Schema.GetOffset(0xA837BCFEA904315F);
-      }
-      return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+    public CNmBitFlags EventConditionRules {
+        get {
+            _EventConditionRulesOffset = _EventConditionRulesOffset ?? Schema.GetOffset(0xA837BCFEA904315F);
+            return new CNmBitFlagsImpl(_Handle + _EventConditionRulesOffset!.Value);
+        }
     }
-  }
 
 
 }

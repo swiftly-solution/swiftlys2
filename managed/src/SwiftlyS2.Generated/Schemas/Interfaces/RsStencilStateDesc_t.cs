@@ -8,43 +8,43 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RsStencilStateDesc_t : ISchemaClass<RsStencilStateDesc_t> {
+public partial interface RsStencilStateDesc_t : ISchemaClass<RsStencilStateDesc_t>
+{
+    static RsStencilStateDesc_t ISchemaClass<RsStencilStateDesc_t>.From(nint handle) => new RsStencilStateDesc_tImpl(handle);
+    static int ISchemaClass<RsStencilStateDesc_t>.Size => 6;
+    static string? ISchemaClass<RsStencilStateDesc_t>.ClassName => null;
 
-  static RsStencilStateDesc_t ISchemaClass<RsStencilStateDesc_t>.From(nint handle) => new RsStencilStateDesc_tImpl(handle);
-  static int ISchemaClass<RsStencilStateDesc_t>.Size => 6;
-  static string? ISchemaClass<RsStencilStateDesc_t>.ClassName => null;
 
-  
-  // bitfield
-  public SchemaUntypedField StencilEnable { get; }
-  
-  // bitfield
-  public SchemaUntypedField FrontStencilFailOp { get; }
-  
-  // bitfield
-  public SchemaUntypedField FrontStencilDepthFailOp { get; }
-  
-  // bitfield
-  public SchemaUntypedField FrontStencilPassOp { get; }
-  
-  // bitfield
-  public SchemaUntypedField FrontStencilFunc { get; }
-  
-  // bitfield
-  public SchemaUntypedField BackStencilFailOp { get; }
-  
-  // bitfield
-  public SchemaUntypedField BackStencilDepthFailOp { get; }
-  
-  // bitfield
-  public SchemaUntypedField BackStencilPassOp { get; }
-  
-  // bitfield
-  public SchemaUntypedField BackStencilFunc { get; }
-  
-  public ref byte StencilReadMask { get; }
-  
-  public ref byte StencilWriteMask { get; }
+    // bitfield
+    public SchemaUntypedField StencilEnable { get; }
+
+    // bitfield
+    public SchemaUntypedField FrontStencilFailOp { get; }
+
+    // bitfield
+    public SchemaUntypedField FrontStencilDepthFailOp { get; }
+
+    // bitfield
+    public SchemaUntypedField FrontStencilPassOp { get; }
+
+    // bitfield
+    public SchemaUntypedField FrontStencilFunc { get; }
+
+    // bitfield
+    public SchemaUntypedField BackStencilFailOp { get; }
+
+    // bitfield
+    public SchemaUntypedField BackStencilDepthFailOp { get; }
+
+    // bitfield
+    public SchemaUntypedField BackStencilPassOp { get; }
+
+    // bitfield
+    public SchemaUntypedField BackStencilFunc { get; }
+
+    public ref byte StencilReadMask { get; }
+
+    public ref byte StencilWriteMask { get; }
 
 
 }

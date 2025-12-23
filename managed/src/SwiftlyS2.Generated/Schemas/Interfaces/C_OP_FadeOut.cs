@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_FadeOut : CParticleFunctionOperator, ISchemaClass<C_OP_FadeOut> {
+public partial interface C_OP_FadeOut : CParticleFunctionOperator, ISchemaClass<C_OP_FadeOut>
+{
+    static C_OP_FadeOut ISchemaClass<C_OP_FadeOut>.From(nint handle) => new C_OP_FadeOutImpl(handle);
+    static int ISchemaClass<C_OP_FadeOut>.Size => 544;
+    static string? ISchemaClass<C_OP_FadeOut>.ClassName => null;
 
-  static C_OP_FadeOut ISchemaClass<C_OP_FadeOut>.From(nint handle) => new C_OP_FadeOutImpl(handle);
-  static int ISchemaClass<C_OP_FadeOut>.Size => 544;
-  static string? ISchemaClass<C_OP_FadeOut>.ClassName => null;
 
-  
-  public ref float FadeOutTimeMin { get; }
-  
-  public ref float FadeOutTimeMax { get; }
-  
-  public ref float FadeOutTimeExp { get; }
-  
-  public ref float FadeBias { get; }
-  
-  public ref bool Proportional { get; }
-  
-  public ref bool EaseInAndOut { get; }
+    public ref float FadeOutTimeMin { get; }
+
+    public ref float FadeOutTimeMax { get; }
+
+    public ref float FadeOutTimeExp { get; }
+
+    public ref float FadeBias { get; }
+
+    public ref bool Proportional { get; }
+
+    public ref bool EaseInAndOut { get; }
 
 
 }

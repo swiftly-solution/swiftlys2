@@ -168,6 +168,11 @@ public interface IEventSubscriber
     public event EventDelegates.OnEntityIdentityAcceptInputHook? OnEntityIdentityAcceptInputHook;
 
     /// <summary>
+    /// Called when an entity fires output.
+    /// </summary>
+    public event EventDelegates.OnEntityFireOutputHookEvent? OnEntityFireOutputHook;
+
+    /// <summary>
     /// Called when the server is started.
     /// </summary>
     public event EventDelegates.OnStartupServer? OnStartupServer;

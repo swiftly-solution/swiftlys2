@@ -6,16 +6,15 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseGraphInstance_TurtleGraphicsImpl : CBasePulseGraphInstanceImpl, CPulseGraphInstance_TurtleGraphics {
-
-  public CPulseGraphInstance_TurtleGraphicsImpl(nint handle) : base(handle) {
-  }
+internal partial class CPulseGraphInstance_TurtleGraphicsImpl : CBasePulseGraphInstanceImpl, CPulseGraphInstance_TurtleGraphics
+{
+    public CPulseGraphInstance_TurtleGraphicsImpl(nint handle) : base(handle) { }
 
 
 

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBodyComponentPoint : CBodyComponent, ISchemaClass<CBodyComponentPoint> {
+public partial interface CBodyComponentPoint : CBodyComponent, ISchemaClass<CBodyComponentPoint>
+{
+    static CBodyComponentPoint ISchemaClass<CBodyComponentPoint>.From(nint handle) => new CBodyComponentPointImpl(handle);
+    static int ISchemaClass<CBodyComponentPoint>.Size => 480;
+    static string? ISchemaClass<CBodyComponentPoint>.ClassName => null;
 
-  static CBodyComponentPoint ISchemaClass<CBodyComponentPoint>.From(nint handle) => new CBodyComponentPointImpl(handle);
-  static int ISchemaClass<CBodyComponentPoint>.Size => 480;
-  static string? ISchemaClass<CBodyComponentPoint>.ClassName => null;
 
-  
-  public CGameSceneNode SceneNode { get; }
+    public CGameSceneNode SceneNode { get; }
 
-  public void SceneNodeUpdated();
+    public void SceneNodeUpdated();
 }

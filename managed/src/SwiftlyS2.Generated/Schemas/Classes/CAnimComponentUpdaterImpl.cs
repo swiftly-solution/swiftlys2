@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimComponentUpdaterImpl : SchemaClass, CAnimComponentUpdater {
+internal partial class CAnimComponentUpdaterImpl : SchemaClass, CAnimComponentUpdater
+{
+    public CAnimComponentUpdaterImpl(nint handle) : base(handle) { }
 
-  public CAnimComponentUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3E0F51C74D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3E0F51C74D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _IdOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x3E0F51C74D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public AnimComponentID Id {
+        get {
+            _IdOffset = _IdOffset ?? Schema.GetOffset(0x3E0F51C7B4B6E980);
+            return new AnimComponentIDImpl(_Handle + _IdOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x3E0F51C74D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _IdOffset;
+    private static nint? _NetworkModeOffset;
 
-  public AnimComponentID Id {
-    get {
-      if (_IdOffset == null) {
-        _IdOffset = Schema.GetOffset(0x3E0F51C7B4B6E980);
-      }
-      return new AnimComponentIDImpl(_Handle + _IdOffset!.Value);
+    public ref AnimNodeNetworkMode NetworkMode {
+        get {
+            _NetworkModeOffset = _NetworkModeOffset ?? Schema.GetOffset(0x3E0F51C7E3307112);
+            return ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NetworkModeOffset;
+    private static nint? _StartEnabledOffset;
 
-  public ref AnimNodeNetworkMode NetworkMode {
-    get {
-      if (_NetworkModeOffset == null) {
-        _NetworkModeOffset = Schema.GetOffset(0x3E0F51C7E3307112);
-      }
-      return ref _Handle.AsRef<AnimNodeNetworkMode>(_NetworkModeOffset!.Value);
+    public ref bool StartEnabled {
+        get {
+            _StartEnabledOffset = _StartEnabledOffset ?? Schema.GetOffset(0x3E0F51C7500D5C24);
+            return ref _Handle.AsRef<bool>(_StartEnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartEnabledOffset;
-
-  public ref bool StartEnabled {
-    get {
-      if (_StartEnabledOffset == null) {
-        _StartEnabledOffset = Schema.GetOffset(0x3E0F51C7500D5C24);
-      }
-      return ref _Handle.AsRef<bool>(_StartEnabledOffset!.Value);
-    }
-  }
 
 
 }

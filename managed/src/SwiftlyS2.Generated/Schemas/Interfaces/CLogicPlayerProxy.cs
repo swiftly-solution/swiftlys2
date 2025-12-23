@@ -8,23 +8,23 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicPlayerProxy : CLogicalEntity, ISchemaClass<CLogicPlayerProxy> {
+public partial interface CLogicPlayerProxy : CLogicalEntity, ISchemaClass<CLogicPlayerProxy>
+{
+    static CLogicPlayerProxy ISchemaClass<CLogicPlayerProxy>.From(nint handle) => new CLogicPlayerProxyImpl(handle);
+    static int ISchemaClass<CLogicPlayerProxy>.Size => 1432;
+    static string? ISchemaClass<CLogicPlayerProxy>.ClassName => "logic_playerproxy";
 
-  static CLogicPlayerProxy ISchemaClass<CLogicPlayerProxy>.From(nint handle) => new CLogicPlayerProxyImpl(handle);
-  static int ISchemaClass<CLogicPlayerProxy>.Size => 1432;
-  static string? ISchemaClass<CLogicPlayerProxy>.ClassName => "logic_playerproxy";
 
-  
-  public ref CHandle<CBaseEntity> Player { get; }
-  
-  public CEntityIOOutput PlayerHasAmmo { get; }
-  
-  public CEntityIOOutput PlayerHasNoAmmo { get; }
-  
-  public CEntityIOOutput PlayerDied { get; }
-  
-  // CEntityOutputTemplate< int32 >
-  public SchemaUntypedField RequestedPlayerHealth { get; }
+    public ref CHandle<CBaseEntity> Player { get; }
+
+    public ref CEntityIOOutput PlayerHasAmmo { get; }
+
+    public ref CEntityIOOutput PlayerHasNoAmmo { get; }
+
+    public ref CEntityIOOutput PlayerDied { get; }
+
+    // CEntityOutputTemplate< int32 >
+    public SchemaUntypedField RequestedPlayerHealth { get; }
 
 
 }

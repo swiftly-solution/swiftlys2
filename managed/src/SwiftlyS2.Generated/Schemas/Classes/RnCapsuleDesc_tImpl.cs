@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnCapsuleDesc_tImpl : RnShapeDesc_tImpl, RnCapsuleDesc_t {
+internal partial class RnCapsuleDesc_tImpl : RnShapeDesc_tImpl, RnCapsuleDesc_t
+{
+    public RnCapsuleDesc_tImpl(nint handle) : base(handle) { }
 
-  public RnCapsuleDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CapsuleOffset;
 
-  private static nint? _CapsuleOffset;
-
-  public RnCapsule_t Capsule {
-    get {
-      if (_CapsuleOffset == null) {
-        _CapsuleOffset = Schema.GetOffset(0x842345E29A32484C);
-      }
-      return new RnCapsule_tImpl(_Handle + _CapsuleOffset!.Value);
+    public RnCapsule_t Capsule {
+        get {
+            _CapsuleOffset = _CapsuleOffset ?? Schema.GetOffset(0x842345E29A32484C);
+            return new RnCapsule_tImpl(_Handle + _CapsuleOffset!.Value);
+        }
     }
-  }
 
 
 }

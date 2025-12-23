@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSosGroupActionLimitSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionLimitSchema> {
+public partial interface CSosGroupActionLimitSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionLimitSchema>
+{
+    static CSosGroupActionLimitSchema ISchemaClass<CSosGroupActionLimitSchema>.From(nint handle) => new CSosGroupActionLimitSchemaImpl(handle);
+    static int ISchemaClass<CSosGroupActionLimitSchema>.Size => 24;
+    static string? ISchemaClass<CSosGroupActionLimitSchema>.ClassName => null;
 
-  static CSosGroupActionLimitSchema ISchemaClass<CSosGroupActionLimitSchema>.From(nint handle) => new CSosGroupActionLimitSchemaImpl(handle);
-  static int ISchemaClass<CSosGroupActionLimitSchema>.Size => 24;
-  static string? ISchemaClass<CSosGroupActionLimitSchema>.ClassName => null;
 
-  
-  public ref int MaxCount { get; }
-  
-  public ref SosActionStopType_t StopType { get; }
-  
-  public ref SosActionLimitSortType_t SortType { get; }
-  
-  public ref bool StopImmediate { get; }
-  
-  public ref bool CountStopped { get; }
+    public ref int MaxCount { get; }
+
+    public ref SosActionStopType_t StopType { get; }
+
+    public ref SosActionLimitSortType_t SortType { get; }
+
+    public ref bool StopImmediate { get; }
+
+    public ref bool CountStopped { get; }
 
 
 }

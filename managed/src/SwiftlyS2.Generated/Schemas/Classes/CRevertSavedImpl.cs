@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRevertSavedImpl : CModelPointEntityImpl, CRevertSaved {
+internal partial class CRevertSavedImpl : CModelPointEntityImpl, CRevertSaved
+{
+    public CRevertSavedImpl(nint handle) : base(handle) { }
 
-  public CRevertSavedImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LoadTimeOffset;
 
-  private static nint? _LoadTimeOffset;
-
-  public ref float LoadTime {
-    get {
-      if (_LoadTimeOffset == null) {
-        _LoadTimeOffset = Schema.GetOffset(0x8E0EAC0F9925A540);
-      }
-      return ref _Handle.AsRef<float>(_LoadTimeOffset!.Value);
+    public ref float LoadTime {
+        get {
+            _LoadTimeOffset = _LoadTimeOffset ?? Schema.GetOffset(0x8E0EAC0F9925A540);
+            return ref _Handle.AsRef<float>(_LoadTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DurationOffset;
+    private static nint? _DurationOffset;
 
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0x8E0EAC0F9879A98D);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x8E0EAC0F9879A98D);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _HoldTimeOffset;
+    private static nint? _HoldTimeOffset;
 
-  public ref float HoldTime {
-    get {
-      if (_HoldTimeOffset == null) {
-        _HoldTimeOffset = Schema.GetOffset(0x8E0EAC0F105A1BF1);
-      }
-      return ref _Handle.AsRef<float>(_HoldTimeOffset!.Value);
+    public ref float HoldTime {
+        get {
+            _HoldTimeOffset = _HoldTimeOffset ?? Schema.GetOffset(0x8E0EAC0F105A1BF1);
+            return ref _Handle.AsRef<float>(_HoldTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

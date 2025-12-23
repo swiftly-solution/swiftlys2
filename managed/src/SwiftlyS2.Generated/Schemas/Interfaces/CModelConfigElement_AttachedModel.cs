@@ -8,40 +8,40 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigElement_AttachedModel : CModelConfigElement, ISchemaClass<CModelConfigElement_AttachedModel> {
+public partial interface CModelConfigElement_AttachedModel : CModelConfigElement, ISchemaClass<CModelConfigElement_AttachedModel>
+{
+    static CModelConfigElement_AttachedModel ISchemaClass<CModelConfigElement_AttachedModel>.From(nint handle) => new CModelConfigElement_AttachedModelImpl(handle);
+    static int ISchemaClass<CModelConfigElement_AttachedModel>.Size => 232;
+    static string? ISchemaClass<CModelConfigElement_AttachedModel>.ClassName => null;
 
-  static CModelConfigElement_AttachedModel ISchemaClass<CModelConfigElement_AttachedModel>.From(nint handle) => new CModelConfigElement_AttachedModelImpl(handle);
-  static int ISchemaClass<CModelConfigElement_AttachedModel>.Size => 232;
-  static string? ISchemaClass<CModelConfigElement_AttachedModel>.ClassName => null;
 
-  
-  public string InstanceName { get; set; }
-  
-  public string EntityClass { get; set; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-  
-  public ref Vector Offset { get; }
-  
-  public ref QAngle AngOffset { get; }
-  
-  public string AttachmentName { get; set; }
-  
-  public string LocalAttachmentOffsetName { get; set; }
-  
-  public ref ModelConfigAttachmentType_t AttachmentType { get; }
-  
-  public ref bool BoneMergeFlex { get; }
-  
-  public ref bool UserSpecifiedColor { get; }
-  
-  public ref bool UserSpecifiedMaterialGroup { get; }
-  
-  public ref bool AcceptParentMaterialDrivenDecals { get; }
-  
-  public string BodygroupOnOtherModels { get; set; }
-  
-  public string MaterialGroupOnOtherModels { get; set; }
+    public string InstanceName { get; set; }
+
+    public string EntityClass { get; set; }
+
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
+
+    public ref Vector Offset { get; }
+
+    public ref QAngle AngOffset { get; }
+
+    public string AttachmentName { get; set; }
+
+    public string LocalAttachmentOffsetName { get; set; }
+
+    public ref ModelConfigAttachmentType_t AttachmentType { get; }
+
+    public ref bool BoneMergeFlex { get; }
+
+    public ref bool UserSpecifiedColor { get; }
+
+    public ref bool UserSpecifiedMaterialGroup { get; }
+
+    public ref bool AcceptParentMaterialDrivenDecals { get; }
+
+    public string BodygroupOnOtherModels { get; set; }
+
+    public string MaterialGroupOnOtherModels { get; set; }
 
 
 }

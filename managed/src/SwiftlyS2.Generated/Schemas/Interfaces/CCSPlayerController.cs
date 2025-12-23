@@ -8,248 +8,248 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerController : CBasePlayerController, ISchemaClass<CCSPlayerController> {
+public partial interface CCSPlayerController : CBasePlayerController, ISchemaClass<CCSPlayerController>
+{
+    static CCSPlayerController ISchemaClass<CCSPlayerController>.From(nint handle) => new CCSPlayerControllerImpl(handle);
+    static int ISchemaClass<CCSPlayerController>.Size => 2792;
+    static string? ISchemaClass<CCSPlayerController>.ClassName => "cs_player_controller";
 
-  static CCSPlayerController ISchemaClass<CCSPlayerController>.From(nint handle) => new CCSPlayerControllerImpl(handle);
-  static int ISchemaClass<CCSPlayerController>.Size => 2792;
-  static string? ISchemaClass<CCSPlayerController>.ClassName => "cs_player_controller";
 
-  
-  public CCSPlayerController_InGameMoneyServices? InGameMoneyServices { get; }
-  
-  public CCSPlayerController_InventoryServices? InventoryServices { get; }
-  
-  public CCSPlayerController_ActionTrackingServices? ActionTrackingServices { get; }
-  
-  public CCSPlayerController_DamageServices? DamageServices { get; }
-  
-  public ref uint Ping { get; }
-  
-  public ref bool HasCommunicationAbuseMute { get; }
-  
-  public ref uint UiCommunicationMuteFlags { get; }
-  
-  public string CrosshairCodes { get; set; }
-  
-  public ref byte PendingTeamNum { get; }
-  
-  public GameTime_t ForceTeamTime { get; }
-  
-  public ref int CompTeammateColor { get; }
-  
-  public ref bool EverPlayedOnTeam { get; }
-  
-  public ref bool AttemptedToGetColor { get; }
-  
-  public ref int TeammatePreferredColor { get; }
-  
-  public ref bool TeamChanged { get; }
-  
-  public ref bool InSwitchTeam { get; }
-  
-  public ref bool HasSeenJoinGame { get; }
-  
-  public ref bool JustBecameSpectator { get; }
-  
-  public ref bool SwitchTeamsOnNextRoundReset { get; }
-  
-  public ref bool RemoveAllItemsOnNextRoundReset { get; }
-  
-  public GameTime_t LastJoinTeamTime { get; }
-  
-  public string Clan { get; set; }
-  
-  public ref int CoachingTeam { get; }
-  
-  public ref ulong PlayerDominated { get; }
-  
-  public ref ulong PlayerDominatingMe { get; }
-  
-  public ref int CompetitiveRanking { get; }
-  
-  public ref int CompetitiveWins { get; }
-  
-  public ref byte CompetitiveRankType { get; }
-  
-  public ref int CompetitiveRankingPredicted_Win { get; }
-  
-  public ref int CompetitiveRankingPredicted_Loss { get; }
-  
-  public ref int CompetitiveRankingPredicted_Tie { get; }
-  
-  public ref int EndMatchNextMapVote { get; }
-  
-  public ref ushort ActiveQuestId { get; }
-  
-  public ref uint RtActiveMissionPeriod { get; }
-  
-  public ref QuestProgress__Reason QuestProgressReason { get; }
-  
-  public ref uint PlayerTvControlFlags { get; }
-  
-  public ref int DraftIndex { get; }
-  
-  public ref uint MsQueuedModeDisconnectionTimestamp { get; }
-  
-  public ref uint UiAbandonRecordedReason { get; }
-  
-  public ref uint NetworkDisconnectionReason { get; }
-  
-  public ref bool CannotBeKicked { get; }
-  
-  public ref bool EverFullyConnected { get; }
-  
-  public ref bool AbandonAllowsSurrender { get; }
-  
-  public ref bool AbandonOffersInstantSurrender { get; }
-  
-  public ref bool Disconnection1MinWarningPrinted { get; }
-  
-  public ref bool ScoreReported { get; }
-  
-  public ref int DisconnectionTick { get; }
-  
-  public ref bool ControllingBot { get; }
-  
-  public ref bool HasControlledBotThisRound { get; }
-  
-  public ref bool HasBeenControlledByPlayerThisRound { get; }
-  
-  public ref int BotsControlledThisRound { get; }
-  
-  public ref bool CanControlObservedBot { get; }
-  
-  public ref CHandle<CCSPlayerPawn> PlayerPawn { get; }
-  
-  public ref CHandle<CCSObserverPawn> ObserverPawn { get; }
-  
-  public ref int DesiredObserverMode { get; }
-  
-  public ref CHandle<CEntityInstance> DesiredObserverTarget { get; }
-  
-  public ref bool PawnIsAlive { get; }
-  
-  public ref uint PawnHealth { get; }
-  
-  public ref int PawnArmor { get; }
-  
-  public ref bool PawnHasDefuser { get; }
-  
-  public ref bool PawnHasHelmet { get; }
-  
-  public ref ushort PawnCharacterDefIndex { get; }
-  
-  public ref int PawnLifetimeStart { get; }
-  
-  public ref int PawnLifetimeEnd { get; }
-  
-  public ref int PawnBotDifficulty { get; }
-  
-  public ref CHandle<CCSPlayerController> OriginalControllerOfCurrentPawn { get; }
-  
-  public ref int Score { get; }
-  
-  public ref int RoundScore { get; }
-  
-  public ref int RoundsWon { get; }
-  
-  public ISchemaFixedArray<byte> RecentKillQueue { get; }
-  
-  public ref byte FirstKill { get; }
-  
-  public ref byte KillCount { get; }
-  
-  public ref bool MvpNoMusic { get; }
-  
-  public ref int MvpReason { get; }
-  
-  public ref int MusicKitID { get; }
-  
-  public ref int MusicKitMVPs { get; }
-  
-  public ref int MVPs { get; }
-  
-  public ref int UpdateCounter { get; }
-  
-  public ref float SmoothedPing { get; }
-  
-  public IntervalTimer LastHeldVoteTimer { get; }
-  
-  public ref bool ShowHints { get; }
-  
-  public ref int NextTimeCheck { get; }
-  
-  public ref bool JustDidTeamKill { get; }
-  
-  public ref bool PunishForTeamKill { get; }
-  
-  public ref bool GaveTeamDamageWarning { get; }
-  
-  public ref bool GaveTeamDamageWarningThisRound { get; }
-  
-  public ref double DblLastReceivedPacketPlatFloatTime { get; }
-  
-  public GameTime_t LastTeamDamageWarningTime { get; }
-  
-  public GameTime_t LastTimePlayerWasDisconnectedForPawnsRemove { get; }
-  
-  public ref uint SuspiciousHitCount { get; }
-  
-  public ref uint NonSuspiciousHitStreak { get; }
-  
-  public ref bool FireBulletsSeedSynchronized { get; }
+    public CCSPlayerController_InGameMoneyServices? InGameMoneyServices { get; }
 
-  public void InGameMoneyServicesUpdated();
-  public void InventoryServicesUpdated();
-  public void ActionTrackingServicesUpdated();
-  public void DamageServicesUpdated();
-  public void PingUpdated();
-  public void HasCommunicationAbuseMuteUpdated();
-  public void UiCommunicationMuteFlagsUpdated();
-  public void CrosshairCodesUpdated();
-  public void PendingTeamNumUpdated();
-  public void ForceTeamTimeUpdated();
-  public void CompTeammateColorUpdated();
-  public void EverPlayedOnTeamUpdated();
-  public void ClanUpdated();
-  public void CoachingTeamUpdated();
-  public void PlayerDominatedUpdated();
-  public void PlayerDominatingMeUpdated();
-  public void CompetitiveRankingUpdated();
-  public void CompetitiveWinsUpdated();
-  public void CompetitiveRankTypeUpdated();
-  public void CompetitiveRankingPredicted_WinUpdated();
-  public void CompetitiveRankingPredicted_LossUpdated();
-  public void CompetitiveRankingPredicted_TieUpdated();
-  public void EndMatchNextMapVoteUpdated();
-  public void ActiveQuestIdUpdated();
-  public void RtActiveMissionPeriodUpdated();
-  public void QuestProgressReasonUpdated();
-  public void PlayerTvControlFlagsUpdated();
-  public void DisconnectionTickUpdated();
-  public void ControllingBotUpdated();
-  public void HasControlledBotThisRoundUpdated();
-  public void CanControlObservedBotUpdated();
-  public void PlayerPawnUpdated();
-  public void ObserverPawnUpdated();
-  public void PawnIsAliveUpdated();
-  public void PawnHealthUpdated();
-  public void PawnArmorUpdated();
-  public void PawnHasDefuserUpdated();
-  public void PawnHasHelmetUpdated();
-  public void PawnCharacterDefIndexUpdated();
-  public void PawnLifetimeStartUpdated();
-  public void PawnLifetimeEndUpdated();
-  public void PawnBotDifficultyUpdated();
-  public void OriginalControllerOfCurrentPawnUpdated();
-  public void ScoreUpdated();
-  public void RecentKillQueueUpdated();
-  public void FirstKillUpdated();
-  public void KillCountUpdated();
-  public void MvpNoMusicUpdated();
-  public void MvpReasonUpdated();
-  public void MusicKitIDUpdated();
-  public void MusicKitMVPsUpdated();
-  public void MVPsUpdated();
-  public void FireBulletsSeedSynchronizedUpdated();
+    public CCSPlayerController_InventoryServices? InventoryServices { get; }
+
+    public CCSPlayerController_ActionTrackingServices? ActionTrackingServices { get; }
+
+    public CCSPlayerController_DamageServices? DamageServices { get; }
+
+    public ref uint Ping { get; }
+
+    public ref bool HasCommunicationAbuseMute { get; }
+
+    public ref uint UiCommunicationMuteFlags { get; }
+
+    public string CrosshairCodes { get; set; }
+
+    public ref byte PendingTeamNum { get; }
+
+    public GameTime_t ForceTeamTime { get; }
+
+    public ref int CompTeammateColor { get; }
+
+    public ref bool EverPlayedOnTeam { get; }
+
+    public ref bool AttemptedToGetColor { get; }
+
+    public ref int TeammatePreferredColor { get; }
+
+    public ref bool TeamChanged { get; }
+
+    public ref bool InSwitchTeam { get; }
+
+    public ref bool HasSeenJoinGame { get; }
+
+    public ref bool JustBecameSpectator { get; }
+
+    public ref bool SwitchTeamsOnNextRoundReset { get; }
+
+    public ref bool RemoveAllItemsOnNextRoundReset { get; }
+
+    public GameTime_t LastJoinTeamTime { get; }
+
+    public string Clan { get; set; }
+
+    public ref int CoachingTeam { get; }
+
+    public ref ulong PlayerDominated { get; }
+
+    public ref ulong PlayerDominatingMe { get; }
+
+    public ref int CompetitiveRanking { get; }
+
+    public ref int CompetitiveWins { get; }
+
+    public ref byte CompetitiveRankType { get; }
+
+    public ref int CompetitiveRankingPredicted_Win { get; }
+
+    public ref int CompetitiveRankingPredicted_Loss { get; }
+
+    public ref int CompetitiveRankingPredicted_Tie { get; }
+
+    public ref int EndMatchNextMapVote { get; }
+
+    public ref ushort ActiveQuestId { get; }
+
+    public ref uint RtActiveMissionPeriod { get; }
+
+    public ref QuestProgress__Reason QuestProgressReason { get; }
+
+    public ref uint PlayerTvControlFlags { get; }
+
+    public ref int DraftIndex { get; }
+
+    public ref uint MsQueuedModeDisconnectionTimestamp { get; }
+
+    public ref uint UiAbandonRecordedReason { get; }
+
+    public ref uint NetworkDisconnectionReason { get; }
+
+    public ref bool CannotBeKicked { get; }
+
+    public ref bool EverFullyConnected { get; }
+
+    public ref bool AbandonAllowsSurrender { get; }
+
+    public ref bool AbandonOffersInstantSurrender { get; }
+
+    public ref bool Disconnection1MinWarningPrinted { get; }
+
+    public ref bool ScoreReported { get; }
+
+    public ref int DisconnectionTick { get; }
+
+    public ref bool ControllingBot { get; }
+
+    public ref bool HasControlledBotThisRound { get; }
+
+    public ref bool HasBeenControlledByPlayerThisRound { get; }
+
+    public ref int BotsControlledThisRound { get; }
+
+    public ref bool CanControlObservedBot { get; }
+
+    public ref CHandle<CCSPlayerPawn> PlayerPawn { get; }
+
+    public ref CHandle<CCSObserverPawn> ObserverPawn { get; }
+
+    public ref int DesiredObserverMode { get; }
+
+    public ref CHandle<CEntityInstance> DesiredObserverTarget { get; }
+
+    public ref bool PawnIsAlive { get; }
+
+    public ref uint PawnHealth { get; }
+
+    public ref int PawnArmor { get; }
+
+    public ref bool PawnHasDefuser { get; }
+
+    public ref bool PawnHasHelmet { get; }
+
+    public ref ushort PawnCharacterDefIndex { get; }
+
+    public ref int PawnLifetimeStart { get; }
+
+    public ref int PawnLifetimeEnd { get; }
+
+    public ref int PawnBotDifficulty { get; }
+
+    public ref CHandle<CCSPlayerController> OriginalControllerOfCurrentPawn { get; }
+
+    public ref int Score { get; }
+
+    public ref int RoundScore { get; }
+
+    public ref int RoundsWon { get; }
+
+    public ISchemaFixedArray<byte> RecentKillQueue { get; }
+
+    public ref byte FirstKill { get; }
+
+    public ref byte KillCount { get; }
+
+    public ref bool MvpNoMusic { get; }
+
+    public ref int MvpReason { get; }
+
+    public ref int MusicKitID { get; }
+
+    public ref int MusicKitMVPs { get; }
+
+    public ref int MVPs { get; }
+
+    public ref int UpdateCounter { get; }
+
+    public ref float SmoothedPing { get; }
+
+    public IntervalTimer LastHeldVoteTimer { get; }
+
+    public ref bool ShowHints { get; }
+
+    public ref int NextTimeCheck { get; }
+
+    public ref bool JustDidTeamKill { get; }
+
+    public ref bool PunishForTeamKill { get; }
+
+    public ref bool GaveTeamDamageWarning { get; }
+
+    public ref bool GaveTeamDamageWarningThisRound { get; }
+
+    public ref double DblLastReceivedPacketPlatFloatTime { get; }
+
+    public GameTime_t LastTeamDamageWarningTime { get; }
+
+    public GameTime_t LastTimePlayerWasDisconnectedForPawnsRemove { get; }
+
+    public ref uint SuspiciousHitCount { get; }
+
+    public ref uint NonSuspiciousHitStreak { get; }
+
+    public ref bool FireBulletsSeedSynchronized { get; }
+
+    public void InGameMoneyServicesUpdated();
+    public void InventoryServicesUpdated();
+    public void ActionTrackingServicesUpdated();
+    public void DamageServicesUpdated();
+    public void PingUpdated();
+    public void HasCommunicationAbuseMuteUpdated();
+    public void UiCommunicationMuteFlagsUpdated();
+    public void CrosshairCodesUpdated();
+    public void PendingTeamNumUpdated();
+    public void ForceTeamTimeUpdated();
+    public void CompTeammateColorUpdated();
+    public void EverPlayedOnTeamUpdated();
+    public void ClanUpdated();
+    public void CoachingTeamUpdated();
+    public void PlayerDominatedUpdated();
+    public void PlayerDominatingMeUpdated();
+    public void CompetitiveRankingUpdated();
+    public void CompetitiveWinsUpdated();
+    public void CompetitiveRankTypeUpdated();
+    public void CompetitiveRankingPredicted_WinUpdated();
+    public void CompetitiveRankingPredicted_LossUpdated();
+    public void CompetitiveRankingPredicted_TieUpdated();
+    public void EndMatchNextMapVoteUpdated();
+    public void ActiveQuestIdUpdated();
+    public void RtActiveMissionPeriodUpdated();
+    public void QuestProgressReasonUpdated();
+    public void PlayerTvControlFlagsUpdated();
+    public void DisconnectionTickUpdated();
+    public void ControllingBotUpdated();
+    public void HasControlledBotThisRoundUpdated();
+    public void CanControlObservedBotUpdated();
+    public void PlayerPawnUpdated();
+    public void ObserverPawnUpdated();
+    public void PawnIsAliveUpdated();
+    public void PawnHealthUpdated();
+    public void PawnArmorUpdated();
+    public void PawnHasDefuserUpdated();
+    public void PawnHasHelmetUpdated();
+    public void PawnCharacterDefIndexUpdated();
+    public void PawnLifetimeStartUpdated();
+    public void PawnLifetimeEndUpdated();
+    public void PawnBotDifficultyUpdated();
+    public void OriginalControllerOfCurrentPawnUpdated();
+    public void ScoreUpdated();
+    public void RecentKillQueueUpdated();
+    public void FirstKillUpdated();
+    public void KillCountUpdated();
+    public void MvpNoMusicUpdated();
+    public void MvpReasonUpdated();
+    public void MusicKitIDUpdated();
+    public void MusicKitMVPsUpdated();
+    public void MVPsUpdated();
+    public void FireBulletsSeedSynchronizedUpdated();
 }

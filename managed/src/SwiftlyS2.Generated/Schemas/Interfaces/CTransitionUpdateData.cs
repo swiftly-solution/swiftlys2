@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTransitionUpdateData : ISchemaClass<CTransitionUpdateData> {
+public partial interface CTransitionUpdateData : ISchemaClass<CTransitionUpdateData>
+{
+    static CTransitionUpdateData ISchemaClass<CTransitionUpdateData>.From(nint handle) => new CTransitionUpdateDataImpl(handle);
+    static int ISchemaClass<CTransitionUpdateData>.Size => 3;
+    static string? ISchemaClass<CTransitionUpdateData>.ClassName => null;
 
-  static CTransitionUpdateData ISchemaClass<CTransitionUpdateData>.From(nint handle) => new CTransitionUpdateDataImpl(handle);
-  static int ISchemaClass<CTransitionUpdateData>.Size => 3;
-  static string? ISchemaClass<CTransitionUpdateData>.ClassName => null;
 
-  
-  public ref byte SrcStateIndex { get; }
-  
-  public ref byte DestStateIndex { get; }
-  
-  // bitfield
-  public SchemaUntypedField HandshakeMaskToDisableFirst { get; }
-  
-  // bitfield
-  public SchemaUntypedField Disabled { get; }
+    public ref byte SrcStateIndex { get; }
+
+    public ref byte DestStateIndex { get; }
+
+    // bitfield
+    public SchemaUntypedField HandshakeMaskToDisableFirst { get; }
+
+    // bitfield
+    public SchemaUntypedField Disabled { get; }
 
 
 }

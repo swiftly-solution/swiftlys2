@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ResourceId_t : ISchemaClass<ResourceId_t> {
+public partial interface ResourceId_t : ISchemaClass<ResourceId_t>
+{
+    static ResourceId_t ISchemaClass<ResourceId_t>.From(nint handle) => new ResourceId_tImpl(handle);
+    static int ISchemaClass<ResourceId_t>.Size => 8;
+    static string? ISchemaClass<ResourceId_t>.ClassName => null;
 
-  static ResourceId_t ISchemaClass<ResourceId_t>.From(nint handle) => new ResourceId_tImpl(handle);
-  static int ISchemaClass<ResourceId_t>.Size => 8;
-  static string? ISchemaClass<ResourceId_t>.ClassName => null;
 
-  
-  public ref ulong Value { get; }
+    public ref ulong Value { get; }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class IKSolverSettings_tImpl : SchemaClass, IKSolverSettings_t {
+internal partial class IKSolverSettings_tImpl : SchemaClass, IKSolverSettings_t
+{
+    public IKSolverSettings_tImpl(nint handle) : base(handle) { }
 
-  public IKSolverSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SolverTypeOffset;
 
-  private static nint? _SolverTypeOffset;
-
-  public ref IKSolverType SolverType {
-    get {
-      if (_SolverTypeOffset == null) {
-        _SolverTypeOffset = Schema.GetOffset(0x368DC59819CA61B6);
-      }
-      return ref _Handle.AsRef<IKSolverType>(_SolverTypeOffset!.Value);
+    public ref IKSolverType SolverType {
+        get {
+            _SolverTypeOffset = _SolverTypeOffset ?? Schema.GetOffset(0x368DC59819CA61B6);
+            return ref _Handle.AsRef<IKSolverType>(_SolverTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumIterationsOffset;
+    private static nint? _NumIterationsOffset;
 
-  public ref int NumIterations {
-    get {
-      if (_NumIterationsOffset == null) {
-        _NumIterationsOffset = Schema.GetOffset(0x368DC59878BB0057);
-      }
-      return ref _Handle.AsRef<int>(_NumIterationsOffset!.Value);
+    public ref int NumIterations {
+        get {
+            _NumIterationsOffset = _NumIterationsOffset ?? Schema.GetOffset(0x368DC59878BB0057);
+            return ref _Handle.AsRef<int>(_NumIterationsOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndEffectorRotationFixUpModeOffset;
+    private static nint? _EndEffectorRotationFixUpModeOffset;
 
-  public ref EIKEndEffectorRotationFixUpMode EndEffectorRotationFixUpMode {
-    get {
-      if (_EndEffectorRotationFixUpModeOffset == null) {
-        _EndEffectorRotationFixUpModeOffset = Schema.GetOffset(0x368DC5980B45E281);
-      }
-      return ref _Handle.AsRef<EIKEndEffectorRotationFixUpMode>(_EndEffectorRotationFixUpModeOffset!.Value);
+    public ref EIKEndEffectorRotationFixUpMode EndEffectorRotationFixUpMode {
+        get {
+            _EndEffectorRotationFixUpModeOffset = _EndEffectorRotationFixUpModeOffset ?? Schema.GetOffset(0x368DC5980B45E281);
+            return ref _Handle.AsRef<EIKEndEffectorRotationFixUpMode>(_EndEffectorRotationFixUpModeOffset!.Value);
+        }
     }
-  }
 
 
 }

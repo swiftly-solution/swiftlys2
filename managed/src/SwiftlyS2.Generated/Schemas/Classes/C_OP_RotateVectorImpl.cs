@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RotateVectorImpl : CParticleFunctionOperatorImpl, C_OP_RotateVector {
+internal partial class C_OP_RotateVectorImpl : CParticleFunctionOperatorImpl, C_OP_RotateVector
+{
+    public C_OP_RotateVectorImpl(nint handle) : base(handle) { }
 
-  public C_OP_RotateVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x43DEF471E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x43DEF471E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotAxisMinOffset;
+    private static nint? _RotAxisMinOffset;
 
-  public ref Vector RotAxisMin {
-    get {
-      if (_RotAxisMinOffset == null) {
-        _RotAxisMinOffset = Schema.GetOffset(0x43DEF471E51ED175);
-      }
-      return ref _Handle.AsRef<Vector>(_RotAxisMinOffset!.Value);
+    public ref Vector RotAxisMin {
+        get {
+            _RotAxisMinOffset = _RotAxisMinOffset ?? Schema.GetOffset(0x43DEF471E51ED175);
+            return ref _Handle.AsRef<Vector>(_RotAxisMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotAxisMaxOffset;
+    private static nint? _RotAxisMaxOffset;
 
-  public ref Vector RotAxisMax {
-    get {
-      if (_RotAxisMaxOffset == null) {
-        _RotAxisMaxOffset = Schema.GetOffset(0x43DEF471CF32368B);
-      }
-      return ref _Handle.AsRef<Vector>(_RotAxisMaxOffset!.Value);
+    public ref Vector RotAxisMax {
+        get {
+            _RotAxisMaxOffset = _RotAxisMaxOffset ?? Schema.GetOffset(0x43DEF471CF32368B);
+            return ref _Handle.AsRef<Vector>(_RotAxisMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotRateMinOffset;
+    private static nint? _RotRateMinOffset;
 
-  public ref float RotRateMin {
-    get {
-      if (_RotRateMinOffset == null) {
-        _RotRateMinOffset = Schema.GetOffset(0x43DEF4710EE55F62);
-      }
-      return ref _Handle.AsRef<float>(_RotRateMinOffset!.Value);
+    public ref float RotRateMin {
+        get {
+            _RotRateMinOffset = _RotRateMinOffset ?? Schema.GetOffset(0x43DEF4710EE55F62);
+            return ref _Handle.AsRef<float>(_RotRateMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _RotRateMaxOffset;
+    private static nint? _RotRateMaxOffset;
 
-  public ref float RotRateMax {
-    get {
-      if (_RotRateMaxOffset == null) {
-        _RotRateMaxOffset = Schema.GetOffset(0x43DEF471F8D1B508);
-      }
-      return ref _Handle.AsRef<float>(_RotRateMaxOffset!.Value);
+    public ref float RotRateMax {
+        get {
+            _RotRateMaxOffset = _RotRateMaxOffset ?? Schema.GetOffset(0x43DEF471F8D1B508);
+            return ref _Handle.AsRef<float>(_RotRateMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _NormalizeOffset;
+    private static nint? _NormalizeOffset;
 
-  public ref bool Normalize {
-    get {
-      if (_NormalizeOffset == null) {
-        _NormalizeOffset = Schema.GetOffset(0x43DEF47148BC424C);
-      }
-      return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+    public ref bool Normalize {
+        get {
+            _NormalizeOffset = _NormalizeOffset ?? Schema.GetOffset(0x43DEF47148BC424C);
+            return ref _Handle.AsRef<bool>(_NormalizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public CPerParticleFloatInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x43DEF471B731A42F);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+    public CPerParticleFloatInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x43DEF471B731A42F);
+            return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -202,6 +202,11 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 }
                 else if (option != null && option.Enabled && option.GetEnabled(player) && option.IsClickTaskCompleted(player))
                 {
+                    if (menu is MenuAPI currentMenu)
+                    {
+                        currentMenu.InvokeOptionSelected(player, option);
+                    }
+
                     _ = Task.Run(async () => await option.OnClickAsync(player));
 
                     if (menu.Configuration.PlaySound && option.PlaySound)
@@ -285,6 +290,11 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
                 }
                 else if (option != null && option.Enabled && option.GetEnabled(player) && option.IsClickTaskCompleted(player))
                 {
+                    if (menu is MenuAPI currentMenu)
+                    {
+                        currentMenu.InvokeOptionSelected(player, option);
+                    }
+
                     _ = Task.Run(async () => await option.OnClickAsync(player));
 
                     if (menu.Configuration.PlaySound && option.PlaySound)

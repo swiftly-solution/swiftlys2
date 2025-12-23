@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseGraphInstance_TestDomain_Derived : CPulseGraphInstance_TestDomain, ISchemaClass<CPulseGraphInstance_TestDomain_Derived> {
+public partial interface CPulseGraphInstance_TestDomain_Derived : CPulseGraphInstance_TestDomain, ISchemaClass<CPulseGraphInstance_TestDomain_Derived>
+{
+    static CPulseGraphInstance_TestDomain_Derived ISchemaClass<CPulseGraphInstance_TestDomain_Derived>.From(nint handle) => new CPulseGraphInstance_TestDomain_DerivedImpl(handle);
+    static int ISchemaClass<CPulseGraphInstance_TestDomain_Derived>.Size => 360;
+    static string? ISchemaClass<CPulseGraphInstance_TestDomain_Derived>.ClassName => null;
 
-  static CPulseGraphInstance_TestDomain_Derived ISchemaClass<CPulseGraphInstance_TestDomain_Derived>.From(nint handle) => new CPulseGraphInstance_TestDomain_DerivedImpl(handle);
-  static int ISchemaClass<CPulseGraphInstance_TestDomain_Derived>.Size => 360;
-  static string? ISchemaClass<CPulseGraphInstance_TestDomain_Derived>.ClassName => null;
 
-  
-  public ref int InstanceValueX { get; }
+    public ref int InstanceValueX { get; }
 
 
 }

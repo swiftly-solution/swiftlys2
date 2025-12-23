@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulse_DomainValueImpl : SchemaClass, CPulse_DomainValue {
+internal partial class CPulse_DomainValueImpl : SchemaClass, CPulse_DomainValue
+{
+    public CPulse_DomainValueImpl(nint handle) : base(handle) { }
 
-  public CPulse_DomainValueImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref PulseDomainValueType_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x8F29D60118853D59);
-      }
-      return ref _Handle.AsRef<PulseDomainValueType_t>(_TypeOffset!.Value);
+    public ref PulseDomainValueType_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x8F29D60118853D59);
+            return ref _Handle.AsRef<PulseDomainValueType_t>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValueOffset;
+    private static nint? _ValueOffset;
 
-  public ref CGlobalSymbol Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0x8F29D601DCB0894A);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_ValueOffset!.Value);
+    public ref CGlobalSymbol Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x8F29D601DCB0894A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_ValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _RequiredRuntimeTypeOffset;
+    private static nint? _RequiredRuntimeTypeOffset;
 
-  public SchemaUntypedField RequiredRuntimeType {
-    get {
-      if (_RequiredRuntimeTypeOffset == null) {
-        _RequiredRuntimeTypeOffset = Schema.GetOffset(0x8F29D6013355393C);
-      }
-      return new SchemaUntypedField(_Handle + _RequiredRuntimeTypeOffset!.Value);
+    public SchemaUntypedField RequiredRuntimeType {
+        get {
+            _RequiredRuntimeTypeOffset = _RequiredRuntimeTypeOffset ?? Schema.GetOffset(0x8F29D6013355393C);
+            return new SchemaUntypedField(_Handle + _RequiredRuntimeTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

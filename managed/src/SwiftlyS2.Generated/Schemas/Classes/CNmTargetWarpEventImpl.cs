@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmTargetWarpEventImpl : CNmEventImpl, CNmTargetWarpEvent {
+internal partial class CNmTargetWarpEventImpl : CNmEventImpl, CNmTargetWarpEvent
+{
+    public CNmTargetWarpEventImpl(nint handle) : base(handle) { }
 
-  public CNmTargetWarpEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RuleOffset;
 
-  private static nint? _RuleOffset;
-
-  public ref NmTargetWarpRule_t Rule {
-    get {
-      if (_RuleOffset == null) {
-        _RuleOffset = Schema.GetOffset(0x573F0894BA097173);
-      }
-      return ref _Handle.AsRef<NmTargetWarpRule_t>(_RuleOffset!.Value);
+    public ref NmTargetWarpRule_t Rule {
+        get {
+            _RuleOffset = _RuleOffset ?? Schema.GetOffset(0x573F0894BA097173);
+            return ref _Handle.AsRef<NmTargetWarpRule_t>(_RuleOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlgorithmOffset;
+    private static nint? _AlgorithmOffset;
 
-  public ref NmTargetWarpAlgorithm_t Algorithm {
-    get {
-      if (_AlgorithmOffset == null) {
-        _AlgorithmOffset = Schema.GetOffset(0x573F0894265CAE8A);
-      }
-      return ref _Handle.AsRef<NmTargetWarpAlgorithm_t>(_AlgorithmOffset!.Value);
+    public ref NmTargetWarpAlgorithm_t Algorithm {
+        get {
+            _AlgorithmOffset = _AlgorithmOffset ?? Schema.GetOffset(0x573F0894265CAE8A);
+            return ref _Handle.AsRef<NmTargetWarpAlgorithm_t>(_AlgorithmOffset!.Value);
+        }
     }
-  }
 
 
 }

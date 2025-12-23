@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnPlane_t : ISchemaClass<RnPlane_t> {
+public partial interface RnPlane_t : ISchemaClass<RnPlane_t>
+{
+    static RnPlane_t ISchemaClass<RnPlane_t>.From(nint handle) => new RnPlane_tImpl(handle);
+    static int ISchemaClass<RnPlane_t>.Size => 16;
+    static string? ISchemaClass<RnPlane_t>.ClassName => null;
 
-  static RnPlane_t ISchemaClass<RnPlane_t>.From(nint handle) => new RnPlane_tImpl(handle);
-  static int ISchemaClass<RnPlane_t>.Size => 16;
-  static string? ISchemaClass<RnPlane_t>.ClassName => null;
 
-  
-  public ref Vector Normal { get; }
-  
-  public ref float Offset { get; }
+    public ref Vector Normal { get; }
+
+    public ref float Offset { get; }
 
 
 }

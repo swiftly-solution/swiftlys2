@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CNmFloatComparisonNode__Comparison_t : byte {
-
+public enum CNmFloatComparisonNode__Comparison_t : byte
+{
  GreaterThanEqual = 0,
 
  LessThanEqual = 1,

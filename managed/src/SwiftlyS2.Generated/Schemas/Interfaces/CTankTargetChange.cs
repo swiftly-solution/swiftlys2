@@ -8,17 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTankTargetChange : CPointEntity, ISchemaClass<CTankTargetChange> {
+public partial interface CTankTargetChange : CPointEntity, ISchemaClass<CTankTargetChange>
+{
+    static CTankTargetChange ISchemaClass<CTankTargetChange>.From(nint handle) => new CTankTargetChangeImpl(handle);
+    static int ISchemaClass<CTankTargetChange>.Size => 1288;
+    static string? ISchemaClass<CTankTargetChange>.ClassName => "tanktrain_aitarget";
 
-  static CTankTargetChange ISchemaClass<CTankTargetChange>.From(nint handle) => new CTankTargetChangeImpl(handle);
-  static int ISchemaClass<CTankTargetChange>.Size => 1288;
-  static string? ISchemaClass<CTankTargetChange>.ClassName => "tanktrain_aitarget";
 
-  
-  // CVariantBase< CVariantDefaultAllocator >
-  public SchemaUntypedField NewTarget { get; }
-  
-  public string NewTargetName { get; set; }
+    public ref CVariant<CVariantDefaultAllocator> NewTarget { get; }
+
+    public string NewTargetName { get; set; }
 
 
 }

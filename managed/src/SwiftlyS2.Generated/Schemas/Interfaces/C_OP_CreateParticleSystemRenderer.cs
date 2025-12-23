@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_CreateParticleSystemRenderer : CParticleFunctionRenderer, ISchemaClass<C_OP_CreateParticleSystemRenderer> {
+public partial interface C_OP_CreateParticleSystemRenderer : CParticleFunctionRenderer, ISchemaClass<C_OP_CreateParticleSystemRenderer>
+{
+    static C_OP_CreateParticleSystemRenderer ISchemaClass<C_OP_CreateParticleSystemRenderer>.From(nint handle) => new C_OP_CreateParticleSystemRendererImpl(handle);
+    static int ISchemaClass<C_OP_CreateParticleSystemRenderer>.Size => 2304;
+    static string? ISchemaClass<C_OP_CreateParticleSystemRenderer>.ClassName => null;
 
-  static C_OP_CreateParticleSystemRenderer ISchemaClass<C_OP_CreateParticleSystemRenderer>.From(nint handle) => new C_OP_CreateParticleSystemRendererImpl(handle);
-  static int ISchemaClass<C_OP_CreateParticleSystemRenderer>.Size => 2304;
-  static string? ISchemaClass<C_OP_CreateParticleSystemRenderer>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> Effect { get; }
-  
-  public ref EventTypeSelection_t EventType { get; }
-  
-  public ref CUtlLeanVector<CPAssignment_t, int> CPs { get; }
-  
-  public string ParticleConfig { get; set; }
-  
-  public CPerParticleVecInput AggregationPos { get; }
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> Effect { get; }
+
+    public ref EventTypeSelection_t EventType { get; }
+
+    public ref CUtlLeanVector<CPAssignment_t, int> CPs { get; }
+
+    public string ParticleConfig { get; set; }
+
+    public CPerParticleVecInput AggregationPos { get; }
 
 
 }

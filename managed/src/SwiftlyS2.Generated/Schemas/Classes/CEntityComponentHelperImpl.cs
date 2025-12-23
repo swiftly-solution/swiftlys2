@@ -6,59 +6,50 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEntityComponentHelperImpl : SchemaClass, CEntityComponentHelper {
+internal partial class CEntityComponentHelperImpl : SchemaClass, CEntityComponentHelper
+{
+    public CEntityComponentHelperImpl(nint handle) : base(handle) { }
 
-  public CEntityComponentHelperImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FlagsOffset;
 
-  private static nint? _FlagsOffset;
-
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x714DB384DC74A14C);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x714DB384DC74A14C);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _InfoOffset;
+    private static nint? _InfoOffset;
 
-  public EntComponentInfo_t? Info {
-    get {
-      if (_InfoOffset == null) {
-        _InfoOffset = Schema.GetOffset(0x714DB3840F0BFD1B);
-      }
-      var ptr = _Handle.Read<nint>(_InfoOffset!.Value);
-      return ptr.IsValidPtr() ? new EntComponentInfo_tImpl(ptr) : null;
+    public EntComponentInfo_t? Info {
+        get {
+            _InfoOffset = _InfoOffset ?? Schema.GetOffset(0x714DB3840F0BFD1B);
+            var ptr = _Handle.Read<nint>(_InfoOffset!.Value);
+            return ptr.IsValidPtr() ? new EntComponentInfo_tImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _PriorityOffset;
+    private static nint? _PriorityOffset;
 
-  public ref int Priority {
-    get {
-      if (_PriorityOffset == null) {
-        _PriorityOffset = Schema.GetOffset(0x714DB384E7EFB335);
-      }
-      return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+    public ref int Priority {
+        get {
+            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0x714DB384E7EFB335);
+            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextOffset;
+    private static nint? _NextOffset;
 
-  public CEntityComponentHelper? Next {
-    get {
-      if (_NextOffset == null) {
-        _NextOffset = Schema.GetOffset(0x714DB38432B11E0E);
-      }
-      var ptr = _Handle.Read<nint>(_NextOffset!.Value);
-      return ptr.IsValidPtr() ? new CEntityComponentHelperImpl(ptr) : null;
+    public CEntityComponentHelper? Next {
+        get {
+            _NextOffset = _NextOffset ?? Schema.GetOffset(0x714DB38432B11E0E);
+            var ptr = _Handle.Read<nint>(_NextOffset!.Value);
+            return ptr.IsValidPtr() ? new CEntityComponentHelperImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

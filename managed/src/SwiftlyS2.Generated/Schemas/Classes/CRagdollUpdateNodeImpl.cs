@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRagdollUpdateNodeImpl : CUnaryUpdateNodeImpl, CRagdollUpdateNode {
+internal partial class CRagdollUpdateNodeImpl : CUnaryUpdateNodeImpl, CRagdollUpdateNode
+{
+    public CRagdollUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CRagdollUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WeightListIndexOffset;
 
-  private static nint? _WeightListIndexOffset;
-
-  public ref int WeightListIndex {
-    get {
-      if (_WeightListIndexOffset == null) {
-        _WeightListIndexOffset = Schema.GetOffset(0xB7502AF030288377);
-      }
-      return ref _Handle.AsRef<int>(_WeightListIndexOffset!.Value);
+    public ref int WeightListIndex {
+        get {
+            _WeightListIndexOffset = _WeightListIndexOffset ?? Schema.GetOffset(0xB7502AF030288377);
+            return ref _Handle.AsRef<int>(_WeightListIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _PoseControlMethodOffset;
+    private static nint? _PoseControlMethodOffset;
 
-  public ref RagdollPoseControl PoseControlMethod {
-    get {
-      if (_PoseControlMethodOffset == null) {
-        _PoseControlMethodOffset = Schema.GetOffset(0xB7502AF088DA12AC);
-      }
-      return ref _Handle.AsRef<RagdollPoseControl>(_PoseControlMethodOffset!.Value);
+    public ref RagdollPoseControl PoseControlMethod {
+        get {
+            _PoseControlMethodOffset = _PoseControlMethodOffset ?? Schema.GetOffset(0xB7502AF088DA12AC);
+            return ref _Handle.AsRef<RagdollPoseControl>(_PoseControlMethodOffset!.Value);
+        }
     }
-  }
 
 
 }

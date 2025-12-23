@@ -6,94 +6,69 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPlayerVisibilityImpl : CBaseEntityImpl, CPlayerVisibility {
+internal partial class CPlayerVisibilityImpl : CBaseEntityImpl, CPlayerVisibility
+{
+    public CPlayerVisibilityImpl(nint handle) : base(handle) { }
 
-  public CPlayerVisibilityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VisibilityStrengthOffset;
 
-  private static nint? _VisibilityStrengthOffset;
-
-  public ref float VisibilityStrength {
-    get {
-      if (_VisibilityStrengthOffset == null) {
-        _VisibilityStrengthOffset = Schema.GetOffset(0x695BAF9B9E8E4E);
-      }
-      return ref _Handle.AsRef<float>(_VisibilityStrengthOffset!.Value);
+    public ref float VisibilityStrength {
+        get {
+            _VisibilityStrengthOffset = _VisibilityStrengthOffset ?? Schema.GetOffset(0x695BAF9B9E8E4E);
+            return ref _Handle.AsRef<float>(_VisibilityStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogDistanceMultiplierOffset;
+    private static nint? _FogDistanceMultiplierOffset;
 
-  public ref float FogDistanceMultiplier {
-    get {
-      if (_FogDistanceMultiplierOffset == null) {
-        _FogDistanceMultiplierOffset = Schema.GetOffset(0x695BAFDB1CD031);
-      }
-      return ref _Handle.AsRef<float>(_FogDistanceMultiplierOffset!.Value);
+    public ref float FogDistanceMultiplier {
+        get {
+            _FogDistanceMultiplierOffset = _FogDistanceMultiplierOffset ?? Schema.GetOffset(0x695BAFDB1CD031);
+            return ref _Handle.AsRef<float>(_FogDistanceMultiplierOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogMaxDensityMultiplierOffset;
+    private static nint? _FogMaxDensityMultiplierOffset;
 
-  public ref float FogMaxDensityMultiplier {
-    get {
-      if (_FogMaxDensityMultiplierOffset == null) {
-        _FogMaxDensityMultiplierOffset = Schema.GetOffset(0x695BAF7F993C70);
-      }
-      return ref _Handle.AsRef<float>(_FogMaxDensityMultiplierOffset!.Value);
+    public ref float FogMaxDensityMultiplier {
+        get {
+            _FogMaxDensityMultiplierOffset = _FogMaxDensityMultiplierOffset ?? Schema.GetOffset(0x695BAF7F993C70);
+            return ref _Handle.AsRef<float>(_FogMaxDensityMultiplierOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeTimeOffset;
+    private static nint? _FadeTimeOffset;
 
-  public ref float FadeTime {
-    get {
-      if (_FadeTimeOffset == null) {
-        _FadeTimeOffset = Schema.GetOffset(0x695BAF00BEDB08);
-      }
-      return ref _Handle.AsRef<float>(_FadeTimeOffset!.Value);
+    public ref float FadeTime {
+        get {
+            _FadeTimeOffset = _FadeTimeOffset ?? Schema.GetOffset(0x695BAF00BEDB08);
+            return ref _Handle.AsRef<float>(_FadeTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartDisabledOffset;
+    private static nint? _StartDisabledOffset;
 
-  public ref bool StartDisabled {
-    get {
-      if (_StartDisabledOffset == null) {
-        _StartDisabledOffset = Schema.GetOffset(0x695BAF61ED0C4F);
-      }
-      return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+    public ref bool StartDisabled {
+        get {
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0x695BAF61ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsEnabledOffset;
+    private static nint? _IsEnabledOffset;
 
-  public ref bool IsEnabled {
-    get {
-      if (_IsEnabledOffset == null) {
-        _IsEnabledOffset = Schema.GetOffset(0x695BAF5360D70E);
-      }
-      return ref _Handle.AsRef<bool>(_IsEnabledOffset!.Value);
+    public ref bool IsEnabled {
+        get {
+            _IsEnabledOffset = _IsEnabledOffset ?? Schema.GetOffset(0x695BAF5360D70E);
+            return ref _Handle.AsRef<bool>(_IsEnabledOffset!.Value);
+        }
     }
-  }
 
-  public void VisibilityStrengthUpdated() {
-    Schema.Update(_Handle, 0x695BAF9B9E8E4E);
-  }
-  public void FogDistanceMultiplierUpdated() {
-    Schema.Update(_Handle, 0x695BAFDB1CD031);
-  }
-  public void FogMaxDensityMultiplierUpdated() {
-    Schema.Update(_Handle, 0x695BAF7F993C70);
-  }
-  public void FadeTimeUpdated() {
-    Schema.Update(_Handle, 0x695BAF00BEDB08);
-  }
-  public void StartDisabledUpdated() {
-    Schema.Update(_Handle, 0x695BAF61ED0C4F);
-  }
-  public void IsEnabledUpdated() {
-    Schema.Update(_Handle, 0x695BAF5360D70E);
-  }
+    public void VisibilityStrengthUpdated() => Schema.Update(_Handle, 0x695BAF9B9E8E4E);
+    public void FogDistanceMultiplierUpdated() => Schema.Update(_Handle, 0x695BAFDB1CD031);
+    public void FogMaxDensityMultiplierUpdated() => Schema.Update(_Handle, 0x695BAF7F993C70);
+    public void FadeTimeUpdated() => Schema.Update(_Handle, 0x695BAF00BEDB08);
+    public void StartDisabledUpdated() => Schema.Update(_Handle, 0x695BAF61ED0C4F);
+    public void IsEnabledUpdated() => Schema.Update(_Handle, 0x695BAF5360D70E);
 }

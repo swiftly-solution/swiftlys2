@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderTreeShake : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderTreeShake> {
+public partial interface C_OP_RenderTreeShake : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderTreeShake>
+{
+    static C_OP_RenderTreeShake ISchemaClass<C_OP_RenderTreeShake>.From(nint handle) => new C_OP_RenderTreeShakeImpl(handle);
+    static int ISchemaClass<C_OP_RenderTreeShake>.Size => 584;
+    static string? ISchemaClass<C_OP_RenderTreeShake>.ClassName => null;
 
-  static C_OP_RenderTreeShake ISchemaClass<C_OP_RenderTreeShake>.From(nint handle) => new C_OP_RenderTreeShakeImpl(handle);
-  static int ISchemaClass<C_OP_RenderTreeShake>.Size => 584;
-  static string? ISchemaClass<C_OP_RenderTreeShake>.ClassName => null;
 
-  
-  public ref float PeakStrength { get; }
-  
-  public ParticleAttributeIndex_t PeakStrengthFieldOverride { get; }
-  
-  public ref float Radius { get; }
-  
-  public ParticleAttributeIndex_t RadiusFieldOverride { get; }
-  
-  public ref float ShakeDuration { get; }
-  
-  public ref float TransitionTime { get; }
-  
-  public ref float TwistAmount { get; }
-  
-  public ref float RadialAmount { get; }
-  
-  public ref float ControlPointOrientationAmount { get; }
-  
-  public ref int ControlPointForLinearDirection { get; }
+    public ref float PeakStrength { get; }
+
+    public ParticleAttributeIndex_t PeakStrengthFieldOverride { get; }
+
+    public ref float Radius { get; }
+
+    public ParticleAttributeIndex_t RadiusFieldOverride { get; }
+
+    public ref float ShakeDuration { get; }
+
+    public ref float TransitionTime { get; }
+
+    public ref float TwistAmount { get; }
+
+    public ref float RadialAmount { get; }
+
+    public ref float ControlPointOrientationAmount { get; }
+
+    public ref int ControlPointForLinearDirection { get; }
 
 
 }

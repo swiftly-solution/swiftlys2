@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ColorInterpolateRandomImpl : CParticleFunctionOperatorImpl, C_OP_ColorInterpolateRandom {
+internal partial class C_OP_ColorInterpolateRandomImpl : CParticleFunctionOperatorImpl, C_OP_ColorInterpolateRandom
+{
+    public C_OP_ColorInterpolateRandomImpl(nint handle) : base(handle) { }
 
-  public C_OP_ColorInterpolateRandomImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ColorFadeMinOffset;
 
-  private static nint? _ColorFadeMinOffset;
-
-  public ref Color ColorFadeMin {
-    get {
-      if (_ColorFadeMinOffset == null) {
-        _ColorFadeMinOffset = Schema.GetOffset(0x6185EEC8EFCBE55A);
-      }
-      return ref _Handle.AsRef<Color>(_ColorFadeMinOffset!.Value);
+    public ref Color ColorFadeMin {
+        get {
+            _ColorFadeMinOffset = _ColorFadeMinOffset ?? Schema.GetOffset(0x6185EEC8EFCBE55A);
+            return ref _Handle.AsRef<Color>(_ColorFadeMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorFadeMaxOffset;
+    private static nint? _ColorFadeMaxOffset;
 
-  public ref Color ColorFadeMax {
-    get {
-      if (_ColorFadeMaxOffset == null) {
-        _ColorFadeMaxOffset = Schema.GetOffset(0x6185EEC8D9DF4A70);
-      }
-      return ref _Handle.AsRef<Color>(_ColorFadeMaxOffset!.Value);
+    public ref Color ColorFadeMax {
+        get {
+            _ColorFadeMaxOffset = _ColorFadeMaxOffset ?? Schema.GetOffset(0x6185EEC8D9DF4A70);
+            return ref _Handle.AsRef<Color>(_ColorFadeMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeStartTimeOffset;
+    private static nint? _FadeStartTimeOffset;
 
-  public ref float FadeStartTime {
-    get {
-      if (_FadeStartTimeOffset == null) {
-        _FadeStartTimeOffset = Schema.GetOffset(0x6185EEC886B28BFA);
-      }
-      return ref _Handle.AsRef<float>(_FadeStartTimeOffset!.Value);
+    public ref float FadeStartTime {
+        get {
+            _FadeStartTimeOffset = _FadeStartTimeOffset ?? Schema.GetOffset(0x6185EEC886B28BFA);
+            return ref _Handle.AsRef<float>(_FadeStartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeEndTimeOffset;
+    private static nint? _FadeEndTimeOffset;
 
-  public ref float FadeEndTime {
-    get {
-      if (_FadeEndTimeOffset == null) {
-        _FadeEndTimeOffset = Schema.GetOffset(0x6185EEC800D5CA4F);
-      }
-      return ref _Handle.AsRef<float>(_FadeEndTimeOffset!.Value);
+    public ref float FadeEndTime {
+        get {
+            _FadeEndTimeOffset = _FadeEndTimeOffset ?? Schema.GetOffset(0x6185EEC800D5CA4F);
+            return ref _Handle.AsRef<float>(_FadeEndTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x6185EEC8E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x6185EEC8E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseInOutOffset;
+    private static nint? _EaseInOutOffset;
 
-  public ref bool EaseInOut {
-    get {
-      if (_EaseInOutOffset == null) {
-        _EaseInOutOffset = Schema.GetOffset(0x6185EEC85172CF48);
-      }
-      return ref _Handle.AsRef<bool>(_EaseInOutOffset!.Value);
+    public ref bool EaseInOut {
+        get {
+            _EaseInOutOffset = _EaseInOutOffset ?? Schema.GetOffset(0x6185EEC85172CF48);
+            return ref _Handle.AsRef<bool>(_EaseInOutOffset!.Value);
+        }
     }
-  }
 
 
 }

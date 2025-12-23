@@ -8,68 +8,68 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseDoor : CBaseToggle, ISchemaClass<CBaseDoor> {
+public partial interface CBaseDoor : CBaseToggle, ISchemaClass<CBaseDoor>
+{
+    static CBaseDoor ISchemaClass<CBaseDoor>.From(nint handle) => new CBaseDoorImpl(handle);
+    static int ISchemaClass<CBaseDoor>.Size => 2664;
+    static string? ISchemaClass<CBaseDoor>.ClassName => "func_door";
 
-  static CBaseDoor ISchemaClass<CBaseDoor>.From(nint handle) => new CBaseDoorImpl(handle);
-  static int ISchemaClass<CBaseDoor>.Size => 2664;
-  static string? ISchemaClass<CBaseDoor>.ClassName => "func_door";
 
-  
-  public ref QAngle MoveEntitySpace { get; }
-  
-  public ref Vector MoveDirParentSpace { get; }
-  
-  public locksound_t Ls { get; }
-  
-  public ref bool ForceClosed { get; }
-  
-  public ref bool DoorGroup { get; }
-  
-  public ref bool Locked { get; }
-  
-  public ref bool IgnoreDebris { get; }
-  
-  public ref bool NoNPCs { get; }
-  
-  public ref FuncDoorSpawnPos_t SpawnPosition { get; }
-  
-  public ref float BlockDamage { get; }
-  
-  public string NoiseMoving { get; set; }
-  
-  public string NoiseArrived { get; set; }
-  
-  public string NoiseMovingClosed { get; set; }
-  
-  public string NoiseArrivedClosed { get; set; }
-  
-  public string ChainTarget { get; set; }
-  
-  public CEntityIOOutput OnBlockedClosing { get; }
-  
-  public CEntityIOOutput OnBlockedOpening { get; }
-  
-  public CEntityIOOutput OnUnblockedClosing { get; }
-  
-  public CEntityIOOutput OnUnblockedOpening { get; }
-  
-  public CEntityIOOutput OnFullyClosed { get; }
-  
-  public CEntityIOOutput OnFullyOpen { get; }
-  
-  public CEntityIOOutput OnClose { get; }
-  
-  public CEntityIOOutput OnOpen { get; }
-  
-  public CEntityIOOutput OnLockedUse { get; }
-  
-  public ref bool LoopMoveSound { get; }
-  
-  public ref bool CreateNavObstacle { get; }
-  
-  public ref bool IsChaining { get; }
-  
-  public ref bool IsUsable { get; }
+    public ref QAngle MoveEntitySpace { get; }
 
-  public void IsUsableUpdated();
+    public ref Vector MoveDirParentSpace { get; }
+
+    public locksound_t Ls { get; }
+
+    public ref bool ForceClosed { get; }
+
+    public ref bool DoorGroup { get; }
+
+    public ref bool Locked { get; }
+
+    public ref bool IgnoreDebris { get; }
+
+    public ref bool NoNPCs { get; }
+
+    public ref FuncDoorSpawnPos_t SpawnPosition { get; }
+
+    public ref float BlockDamage { get; }
+
+    public string NoiseMoving { get; set; }
+
+    public string NoiseArrived { get; set; }
+
+    public string NoiseMovingClosed { get; set; }
+
+    public string NoiseArrivedClosed { get; set; }
+
+    public string ChainTarget { get; set; }
+
+    public ref CEntityIOOutput OnBlockedClosing { get; }
+
+    public ref CEntityIOOutput OnBlockedOpening { get; }
+
+    public ref CEntityIOOutput OnUnblockedClosing { get; }
+
+    public ref CEntityIOOutput OnUnblockedOpening { get; }
+
+    public ref CEntityIOOutput OnFullyClosed { get; }
+
+    public ref CEntityIOOutput OnFullyOpen { get; }
+
+    public ref CEntityIOOutput OnClose { get; }
+
+    public ref CEntityIOOutput OnOpen { get; }
+
+    public ref CEntityIOOutput OnLockedUse { get; }
+
+    public ref bool LoopMoveSound { get; }
+
+    public ref bool CreateNavObstacle { get; }
+
+    public ref bool IsChaining { get; }
+
+    public ref bool IsUsable { get; }
+
+    public void IsUsableUpdated();
 }

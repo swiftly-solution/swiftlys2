@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_DecayClampCount : CParticleFunctionOperator, ISchemaClass<C_OP_DecayClampCount> {
+public partial interface C_OP_DecayClampCount : CParticleFunctionOperator, ISchemaClass<C_OP_DecayClampCount>
+{
+    static C_OP_DecayClampCount ISchemaClass<C_OP_DecayClampCount>.From(nint handle) => new C_OP_DecayClampCountImpl(handle);
+    static int ISchemaClass<C_OP_DecayClampCount>.Size => 832;
+    static string? ISchemaClass<C_OP_DecayClampCount>.ClassName => null;
 
-  static C_OP_DecayClampCount ISchemaClass<C_OP_DecayClampCount>.From(nint handle) => new C_OP_DecayClampCountImpl(handle);
-  static int ISchemaClass<C_OP_DecayClampCount>.Size => 832;
-  static string? ISchemaClass<C_OP_DecayClampCount>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput Count { get; }
+    public CParticleCollectionFloatInput Count { get; }
 
 
 }

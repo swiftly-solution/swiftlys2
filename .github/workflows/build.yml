@@ -64,7 +64,7 @@ jobs:
     - name: Install dependencies
       run: |
         apt-get update
-        apt install libreadline-dev
+        apt install -y libreadline-dev
     - name: Checkout repository and submodules
       uses: actions/checkout@v4
       with:
@@ -88,6 +88,11 @@ jobs:
       with:
         name: swiftlys2_linux
         path: build/package/addons
+    - name: Upload tracer as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_linux_tracer
+        path: tracer/libsw2tracer.so
 
   windows_core:
     needs: versioning
@@ -118,6 +123,11 @@ jobs:
       with:
         name: swiftlys2_windows_pdb
         path: build/windows/x64/release/swiftlys2.pdb
+    - name: Upload tracer as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: swiftlys2_windows_tracer
+        path: tracer/sw2tracer.dll
 
   linux_loader:
     needs: versioning
@@ -221,7 +231,16 @@ jobs:
       with:
         name: swiftlys2_loader_windows_pdb
         path: ./server.pdb
-    
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_linux_tracer
+        path: ./libsw2tracer.so
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: swiftlys2_windows_tracer
+        path: ./sw2tracer.dll
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
@@ -252,6 +271,9 @@ jobs:
 
         cp -r ./swiftlys2.pdb/swiftlys2.pdb ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/win64/
         cp -r ./server.pdb/server.pdb ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/win64/
+
+        cp -r ./libsw2tracer.so/libsw2tracer.so ${{ env.LINUX_FOLDER }}/swiftlys2/bin/linuxsteamrt64/libsw2tracer.so
+        cp -r ./sw2tracer.dll/sw2tracer.dll ${{ env.WINDOWS_FOLDER }}/swiftlys2/bin/win64/sw2tracer.dll
 
         mkdir -p ${{ env.LINUX_FOLDER }}/swiftlys2/plugins/
         mkdir -p ${{ env.LINUX_FOLDER }}/swiftlys2/plugins/disabled

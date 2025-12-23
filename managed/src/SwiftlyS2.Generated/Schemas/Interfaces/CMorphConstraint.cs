@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMorphConstraint : CBaseConstraint, ISchemaClass<CMorphConstraint> {
+public partial interface CMorphConstraint : CBaseConstraint, ISchemaClass<CMorphConstraint>
+{
+    static CMorphConstraint ISchemaClass<CMorphConstraint>.From(nint handle) => new CMorphConstraintImpl(handle);
+    static int ISchemaClass<CMorphConstraint>.Size => 128;
+    static string? ISchemaClass<CMorphConstraint>.ClassName => null;
 
-  static CMorphConstraint ISchemaClass<CMorphConstraint>.From(nint handle) => new CMorphConstraintImpl(handle);
-  static int ISchemaClass<CMorphConstraint>.Size => 128;
-  static string? ISchemaClass<CMorphConstraint>.ClassName => null;
 
-  
-  public string TargetMorph { get; set; }
-  
-  public ref int SlaveChannel { get; }
-  
-  public ref float Min { get; }
-  
-  public ref float Max { get; }
+    public string TargetMorph { get; set; }
+
+    public ref int SlaveChannel { get; }
+
+    public ref float Min { get; }
+
+    public ref float Max { get; }
 
 
 }

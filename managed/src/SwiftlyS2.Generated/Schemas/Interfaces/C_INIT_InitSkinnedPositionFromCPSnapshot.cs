@@ -8,50 +8,50 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_InitSkinnedPositionFromCPSnapshot : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitSkinnedPositionFromCPSnapshot> {
+public partial interface C_INIT_InitSkinnedPositionFromCPSnapshot : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitSkinnedPositionFromCPSnapshot>
+{
+    static C_INIT_InitSkinnedPositionFromCPSnapshot ISchemaClass<C_INIT_InitSkinnedPositionFromCPSnapshot>.From(nint handle) => new C_INIT_InitSkinnedPositionFromCPSnapshotImpl(handle);
+    static int ISchemaClass<C_INIT_InitSkinnedPositionFromCPSnapshot>.Size => 896;
+    static string? ISchemaClass<C_INIT_InitSkinnedPositionFromCPSnapshot>.ClassName => null;
 
-  static C_INIT_InitSkinnedPositionFromCPSnapshot ISchemaClass<C_INIT_InitSkinnedPositionFromCPSnapshot>.From(nint handle) => new C_INIT_InitSkinnedPositionFromCPSnapshotImpl(handle);
-  static int ISchemaClass<C_INIT_InitSkinnedPositionFromCPSnapshot>.Size => 896;
-  static string? ISchemaClass<C_INIT_InitSkinnedPositionFromCPSnapshot>.ClassName => null;
 
-  
-  public ref int SnapshotControlPointNumber { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref bool Random { get; }
-  
-  public ref int RandomSeed { get; }
-  
-  public ref bool Rigid { get; }
-  
-  public ref bool SetNormal { get; }
-  
-  public ref bool IgnoreDt { get; }
-  
-  public ref float MinNormalVelocity { get; }
-  
-  public ref float MaxNormalVelocity { get; }
-  
-  public ref SnapshotIndexType_t IndexType { get; }
-  
-  public CPerParticleFloatInput ReadIndex { get; }
-  
-  public ref float Increment { get; }
-  
-  public ref int FullLoopIncrement { get; }
-  
-  public ref int SnapShotStartPoint { get; }
-  
-  public ref float BoneVelocity { get; }
-  
-  public ref float BoneVelocityMax { get; }
-  
-  public ref bool CopyColor { get; }
-  
-  public ref bool CopyAlpha { get; }
-  
-  public ref bool SetRadius { get; }
+    public ref int SnapshotControlPointNumber { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref bool Random { get; }
+
+    public ref int RandomSeed { get; }
+
+    public ref bool Rigid { get; }
+
+    public ref bool SetNormal { get; }
+
+    public ref bool IgnoreDt { get; }
+
+    public ref float MinNormalVelocity { get; }
+
+    public ref float MaxNormalVelocity { get; }
+
+    public ref SnapshotIndexType_t IndexType { get; }
+
+    public CPerParticleFloatInput ReadIndex { get; }
+
+    public ref float Increment { get; }
+
+    public ref int FullLoopIncrement { get; }
+
+    public ref int SnapShotStartPoint { get; }
+
+    public ref float BoneVelocity { get; }
+
+    public ref float BoneVelocityMax { get; }
+
+    public ref bool CopyColor { get; }
+
+    public ref bool CopyAlpha { get; }
+
+    public ref bool SetRadius { get; }
 
 
 }

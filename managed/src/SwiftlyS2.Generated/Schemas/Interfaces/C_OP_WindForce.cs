@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_WindForce : CParticleFunctionForce, ISchemaClass<C_OP_WindForce> {
+public partial interface C_OP_WindForce : CParticleFunctionForce, ISchemaClass<C_OP_WindForce>
+{
+    static C_OP_WindForce ISchemaClass<C_OP_WindForce>.From(nint handle) => new C_OP_WindForceImpl(handle);
+    static int ISchemaClass<C_OP_WindForce>.Size => 496;
+    static string? ISchemaClass<C_OP_WindForce>.ClassName => null;
 
-  static C_OP_WindForce ISchemaClass<C_OP_WindForce>.From(nint handle) => new C_OP_WindForceImpl(handle);
-  static int ISchemaClass<C_OP_WindForce>.Size => 496;
-  static string? ISchemaClass<C_OP_WindForce>.ClassName => null;
 
-  
-  public ref Vector Force { get; }
+    public ref Vector Force { get; }
 
 
 }

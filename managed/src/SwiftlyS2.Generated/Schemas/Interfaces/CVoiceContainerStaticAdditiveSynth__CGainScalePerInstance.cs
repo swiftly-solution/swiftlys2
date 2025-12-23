@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance : ISchemaClass<CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance> {
+public partial interface CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance : ISchemaClass<CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance>
+{
+    static CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance ISchemaClass<CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance>.From(nint handle) => new CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(handle);
+    static int ISchemaClass<CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance>.Size => 16;
+    static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance>.ClassName => null;
 
-  static CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance ISchemaClass<CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance>.From(nint handle) => new CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(handle);
-  static int ISchemaClass<CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance>.Size => 16;
-  static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance>.ClassName => null;
 
-  
-  public ref float MinVolume { get; }
-  
-  public ref int InstancesAtMinVolume { get; }
-  
-  public ref float MaxVolume { get; }
-  
-  public ref int InstancesAtMaxVolume { get; }
+    public ref float MinVolume { get; }
+
+    public ref int InstancesAtMinVolume { get; }
+
+    public ref float MaxVolume { get; }
+
+    public ref int InstancesAtMaxVolume { get; }
 
 
 }

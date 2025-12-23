@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SnapshotRigidSkinToBones : CParticleFunctionOperator, ISchemaClass<C_OP_SnapshotRigidSkinToBones> {
+public partial interface C_OP_SnapshotRigidSkinToBones : CParticleFunctionOperator, ISchemaClass<C_OP_SnapshotRigidSkinToBones>
+{
+    static C_OP_SnapshotRigidSkinToBones ISchemaClass<C_OP_SnapshotRigidSkinToBones>.From(nint handle) => new C_OP_SnapshotRigidSkinToBonesImpl(handle);
+    static int ISchemaClass<C_OP_SnapshotRigidSkinToBones>.Size => 472;
+    static string? ISchemaClass<C_OP_SnapshotRigidSkinToBones>.ClassName => null;
 
-  static C_OP_SnapshotRigidSkinToBones ISchemaClass<C_OP_SnapshotRigidSkinToBones>.From(nint handle) => new C_OP_SnapshotRigidSkinToBonesImpl(handle);
-  static int ISchemaClass<C_OP_SnapshotRigidSkinToBones>.Size => 472;
-  static string? ISchemaClass<C_OP_SnapshotRigidSkinToBones>.ClassName => null;
 
-  
-  public ref bool TransformNormals { get; }
-  
-  public ref bool TransformRadii { get; }
-  
-  public ref int ControlPointNumber { get; }
+    public ref bool TransformNormals { get; }
+
+    public ref bool TransformRadii { get; }
+
+    public ref int ControlPointNumber { get; }
 
 
 }

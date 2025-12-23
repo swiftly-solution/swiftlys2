@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmSkeleton__SecondarySkeleton_tImpl : SchemaClass, CNmSkeleton__SecondarySkeleton_t {
+internal partial class CNmSkeleton__SecondarySkeleton_tImpl : SchemaClass, CNmSkeleton__SecondarySkeleton_t
+{
+    public CNmSkeleton__SecondarySkeleton_tImpl(nint handle) : base(handle) { }
 
-  public CNmSkeleton__SecondarySkeleton_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _AttachToBoneIDOffset;
 
-  private static nint? _AttachToBoneIDOffset;
-
-  public ref CGlobalSymbol AttachToBoneID {
-    get {
-      if (_AttachToBoneIDOffset == null) {
-        _AttachToBoneIDOffset = Schema.GetOffset(0x50F456DAB2F06B3A);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_AttachToBoneIDOffset!.Value);
+    public ref CGlobalSymbol AttachToBoneID {
+        get {
+            _AttachToBoneIDOffset = _AttachToBoneIDOffset ?? Schema.GetOffset(0x50F456DAB2F06B3A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AttachToBoneIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkeletonOffset;
+    private static nint? _SkeletonOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton {
-    get {
-      if (_SkeletonOffset == null) {
-        _SkeletonOffset = Schema.GetOffset(0x50F456DAE77F030E);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton {
+        get {
+            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0x50F456DAE77F030E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapNamedModelElementEndCap : CParticleFunctionOperator, ISchemaClass<C_OP_RemapNamedModelElementEndCap> {
+public partial interface C_OP_RemapNamedModelElementEndCap : CParticleFunctionOperator, ISchemaClass<C_OP_RemapNamedModelElementEndCap>
+{
+    static C_OP_RemapNamedModelElementEndCap ISchemaClass<C_OP_RemapNamedModelElementEndCap>.From(nint handle) => new C_OP_RemapNamedModelElementEndCapImpl(handle);
+    static int ISchemaClass<C_OP_RemapNamedModelElementEndCap>.Size => 560;
+    static string? ISchemaClass<C_OP_RemapNamedModelElementEndCap>.ClassName => null;
 
-  static C_OP_RemapNamedModelElementEndCap ISchemaClass<C_OP_RemapNamedModelElementEndCap>.From(nint handle) => new C_OP_RemapNamedModelElementEndCapImpl(handle);
-  static int ISchemaClass<C_OP_RemapNamedModelElementEndCap>.Size => 560;
-  static string? ISchemaClass<C_OP_RemapNamedModelElementEndCap>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-  
-  public ref CUtlVector<CUtlString> InNames { get; }
-  
-  public ref CUtlVector<CUtlString> OutNames { get; }
-  
-  public ref CUtlVector<CUtlString> FallbackNames { get; }
-  
-  public ref bool ModelFromRenderer { get; }
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
+
+    public ref CUtlVector<CUtlString> InNames { get; }
+
+    public ref CUtlVector<CUtlString> OutNames { get; }
+
+    public ref CUtlVector<CUtlString> FallbackNames { get; }
+
+    public ref bool ModelFromRenderer { get; }
+
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
 
 
 }

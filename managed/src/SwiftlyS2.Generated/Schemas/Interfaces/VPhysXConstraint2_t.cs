@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VPhysXConstraint2_t : ISchemaClass<VPhysXConstraint2_t> {
+public partial interface VPhysXConstraint2_t : ISchemaClass<VPhysXConstraint2_t>
+{
+    static VPhysXConstraint2_t ISchemaClass<VPhysXConstraint2_t>.From(nint handle) => new VPhysXConstraint2_tImpl(handle);
+    static int ISchemaClass<VPhysXConstraint2_t>.Size => 256;
+    static string? ISchemaClass<VPhysXConstraint2_t>.ClassName => null;
 
-  static VPhysXConstraint2_t ISchemaClass<VPhysXConstraint2_t>.From(nint handle) => new VPhysXConstraint2_tImpl(handle);
-  static int ISchemaClass<VPhysXConstraint2_t>.Size => 256;
-  static string? ISchemaClass<VPhysXConstraint2_t>.ClassName => null;
 
-  
-  public ref uint Flags { get; }
-  
-  public ref ushort Parent { get; }
-  
-  public ref ushort Child { get; }
-  
-  public VPhysXConstraintParams_t Params { get; }
+    public ref uint Flags { get; }
+
+    public ref ushort Parent { get; }
+
+    public ref ushort Child { get; }
+
+    public VPhysXConstraintParams_t Params { get; }
 
 
 }

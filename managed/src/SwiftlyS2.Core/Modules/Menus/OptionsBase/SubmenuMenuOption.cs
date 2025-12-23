@@ -1,3 +1,4 @@
+using Spectre.Console;
 using SwiftlyS2.Shared.Menus;
 
 namespace SwiftlyS2.Core.Menus.OptionsBase;
@@ -121,28 +122,36 @@ public sealed class SubmenuMenuOption : MenuOptionBase
 
     private async ValueTask OnSubmenuClick( object? sender, MenuOptionClickEventArgs args )
     {
-        if (submenuBuilderAsync == null || Menu == null)
+        try
         {
-            return;
-        }
+            if (submenuBuilderAsync == null || Menu == null)
+            {
+                return;
+            }
 
-        var menu = await submenuBuilderAsync.Invoke();
-        if (menu is not MenuAPI submenu)
+            var menu = await submenuBuilderAsync.Invoke();
+            if (menu is not MenuAPI submenu)
+            {
+                return;
+            }
+
+            var currentMenu = Menu.MenuManager.GetCurrentMenu(args.Player);
+            if (Menu != currentMenu || currentMenu == null)
+            {
+                return;
+            }
+
+            // SubmenuRequested?.Invoke(this, new MenuManagerEventArgs {
+            //     Player = args.Player,
+            //     Menu = menu
+            // });
+            submenu.Parent = (Menu, this);
+            Menu.MenuManager.OpenMenuForPlayer(args.Player, submenu);
+        }
+        catch (Exception e)
         {
-            return;
+            if (!GlobalExceptionHandler.Handle(e)) return;
+            AnsiConsole.WriteException(e);
         }
-
-        var currentMenu = Menu.MenuManager.GetCurrentMenu(args.Player);
-        if (Menu != currentMenu || currentMenu == null)
-        {
-            return;
-        }
-
-        // SubmenuRequested?.Invoke(this, new MenuManagerEventArgs {
-        //     Player = args.Player,
-        //     Menu = menu
-        // });
-        submenu.Parent = (Menu, this);
-        Menu.MenuManager.OpenMenuForPlayer(args.Player, submenu);
     }
 }

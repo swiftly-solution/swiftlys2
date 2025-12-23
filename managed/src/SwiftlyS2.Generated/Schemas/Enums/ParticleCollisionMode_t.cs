@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleCollisionMode_t : uint {
-
+public enum ParticleCollisionMode_t : uint
+{
  COLLISION_MODE_PER_PARTICLE_TRACE = 3,
 
  COLLISION_MODE_USE_NEAREST_TRACE = 2,

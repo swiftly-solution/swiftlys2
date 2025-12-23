@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FunctionInfo_tImpl : SchemaClass, FunctionInfo_t {
+internal partial class FunctionInfo_tImpl : SchemaClass, FunctionInfo_t
+{
+    public FunctionInfo_tImpl(nint handle) : base(handle) { }
 
-  public FunctionInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFCE0933A4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xFCE0933A4D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NameTokenOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xFCE0933A4D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlStringToken NameToken {
+        get {
+            _NameTokenOffset = _NameTokenOffset ?? Schema.GetOffset(0xFCE0933A9293FEF3);
+            return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xFCE0933A4D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NameTokenOffset;
+    private static nint? _ParamCountOffset;
 
-  public ref CUtlStringToken NameToken {
-    get {
-      if (_NameTokenOffset == null) {
-        _NameTokenOffset = Schema.GetOffset(0xFCE0933A9293FEF3);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset!.Value);
+    public ref int ParamCount {
+        get {
+            _ParamCountOffset = _ParamCountOffset ?? Schema.GetOffset(0xFCE0933ADD5DEEAD);
+            return ref _Handle.AsRef<int>(_ParamCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamCountOffset;
+    private static nint? _IndexOffset;
 
-  public ref int ParamCount {
-    get {
-      if (_ParamCountOffset == null) {
-        _ParamCountOffset = Schema.GetOffset(0xFCE0933ADD5DEEAD);
-      }
-      return ref _Handle.AsRef<int>(_ParamCountOffset!.Value);
+    public FuseFunctionIndex_t Index {
+        get {
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0xFCE0933AB73DBE67);
+            return new FuseFunctionIndex_tImpl(_Handle + _IndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _IndexOffset;
+    private static nint? _IsPureOffset;
 
-  public FuseFunctionIndex_t Index {
-    get {
-      if (_IndexOffset == null) {
-        _IndexOffset = Schema.GetOffset(0xFCE0933AB73DBE67);
-      }
-      return new FuseFunctionIndex_tImpl(_Handle + _IndexOffset!.Value);
+    public ref bool IsPure {
+        get {
+            _IsPureOffset = _IsPureOffset ?? Schema.GetOffset(0xFCE0933AA5A65B13);
+            return ref _Handle.AsRef<bool>(_IsPureOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsPureOffset;
-
-  public ref bool IsPure {
-    get {
-      if (_IsPureOffset == null) {
-        _IsPureOffset = Schema.GetOffset(0xFCE0933AA5A65B13);
-      }
-      return ref _Handle.AsRef<bool>(_IsPureOffset!.Value);
-    }
-  }
 
 
 }

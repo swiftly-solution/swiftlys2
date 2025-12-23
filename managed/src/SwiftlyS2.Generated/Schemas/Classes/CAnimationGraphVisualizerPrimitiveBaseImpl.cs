@@ -6,47 +6,35 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimationGraphVisualizerPrimitiveBaseImpl : SchemaClass, CAnimationGraphVisualizerPrimitiveBase {
+internal partial class CAnimationGraphVisualizerPrimitiveBaseImpl : SchemaClass, CAnimationGraphVisualizerPrimitiveBase
+{
+    public CAnimationGraphVisualizerPrimitiveBaseImpl(nint handle) : base(handle) { }
 
-  public CAnimationGraphVisualizerPrimitiveBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref CAnimationGraphVisualizerPrimitiveType Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x5204B0848ED6D5CD);
-      }
-      return ref _Handle.AsRef<CAnimationGraphVisualizerPrimitiveType>(_TypeOffset!.Value);
+    public ref CAnimationGraphVisualizerPrimitiveType Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x5204B0848ED6D5CD);
+            return ref _Handle.AsRef<CAnimationGraphVisualizerPrimitiveType>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwningAnimNodePathsOffset;
-
-  public SchemaUntypedField OwningAnimNodePaths {
-    get {
-      if (_OwningAnimNodePathsOffset == null) {
-        _OwningAnimNodePathsOffset = Schema.GetOffset(0x5204B08461A2E55C);
-      }
-      return new SchemaUntypedField(_Handle + _OwningAnimNodePathsOffset!.Value);
+    public ISchemaClassFixedArray<AnimNodeID> OwningAnimNodePaths {
+        get => new SchemaClassFixedArray<AnimNodeID>(_Handle, 0x5204B08461A2E55C, 11, 4, 4);
     }
-  }
-  private static nint? _OwningAnimNodePathCountOffset;
+    private static nint? _OwningAnimNodePathCountOffset;
 
-  public ref int OwningAnimNodePathCount {
-    get {
-      if (_OwningAnimNodePathCountOffset == null) {
-        _OwningAnimNodePathCountOffset = Schema.GetOffset(0x5204B0844241A972);
-      }
-      return ref _Handle.AsRef<int>(_OwningAnimNodePathCountOffset!.Value);
+    public ref int OwningAnimNodePathCount {
+        get {
+            _OwningAnimNodePathCountOffset = _OwningAnimNodePathCountOffset ?? Schema.GetOffset(0x5204B0844241A972);
+            return ref _Handle.AsRef<int>(_OwningAnimNodePathCountOffset!.Value);
+        }
     }
-  }
 
 
 }

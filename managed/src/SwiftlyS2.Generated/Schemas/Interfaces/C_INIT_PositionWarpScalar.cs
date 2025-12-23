@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_PositionWarpScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionWarpScalar> {
+public partial interface C_INIT_PositionWarpScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionWarpScalar>
+{
+    static C_INIT_PositionWarpScalar ISchemaClass<C_INIT_PositionWarpScalar>.From(nint handle) => new C_INIT_PositionWarpScalarImpl(handle);
+    static int ISchemaClass<C_INIT_PositionWarpScalar>.Size => 880;
+    static string? ISchemaClass<C_INIT_PositionWarpScalar>.ClassName => null;
 
-  static C_INIT_PositionWarpScalar ISchemaClass<C_INIT_PositionWarpScalar>.From(nint handle) => new C_INIT_PositionWarpScalarImpl(handle);
-  static int ISchemaClass<C_INIT_PositionWarpScalar>.Size => 880;
-  static string? ISchemaClass<C_INIT_PositionWarpScalar>.ClassName => null;
 
-  
-  public ref Vector WarpMin { get; }
-  
-  public ref Vector WarpMax { get; }
-  
-  public CPerParticleFloatInput InputValue { get; }
-  
-  public ref float PrevPosScale { get; }
-  
-  public ref int ScaleControlPointNumber { get; }
-  
-  public ref int ControlPointNumber { get; }
+    public ref Vector WarpMin { get; }
+
+    public ref Vector WarpMax { get; }
+
+    public CPerParticleFloatInput InputValue { get; }
+
+    public ref float PrevPosScale { get; }
+
+    public ref int ScaleControlPointNumber { get; }
+
+    public ref int ControlPointNumber { get; }
 
 
 }

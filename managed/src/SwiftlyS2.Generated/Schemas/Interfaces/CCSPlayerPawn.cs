@@ -8,324 +8,324 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlayerPawn> {
+public partial interface CCSPlayerPawn : CCSPlayerPawnBase, ISchemaClass<CCSPlayerPawn>
+{
+    static CCSPlayerPawn ISchemaClass<CCSPlayerPawn>.From(nint handle) => new CCSPlayerPawnImpl(handle);
+    static int ISchemaClass<CCSPlayerPawn>.Size => 7280;
+    static string? ISchemaClass<CCSPlayerPawn>.ClassName => "player";
 
-  static CCSPlayerPawn ISchemaClass<CCSPlayerPawn>.From(nint handle) => new CCSPlayerPawnImpl(handle);
-  static int ISchemaClass<CCSPlayerPawn>.Size => 7280;
-  static string? ISchemaClass<CCSPlayerPawn>.ClassName => "player";
 
-  
-  public CCSPlayer_BulletServices? BulletServices { get; }
-  
-  public CCSPlayer_HostageServices? HostageServices { get; }
-  
-  public CCSPlayer_BuyServices? BuyServices { get; }
-  
-  public CCSPlayer_ActionTrackingServices? ActionTrackingServices { get; }
-  
-  public CCSPlayer_RadioServices? RadioServices { get; }
-  
-  public CCSPlayer_DamageReactServices? DamageReactServices { get; }
-  
-  public ref ushort CharacterDefIndex { get; }
-  
-  public ref bool HasFemaleVoice { get; }
-  
-  public string StrVOPrefix { get; set; }
-  
-  public string LastPlaceName { get; set; }
-  
-  public ref bool InHostageResetZone { get; }
-  
-  public ref bool InBuyZone { get; }
-  
-  public ref CUtlVector<CHandle<CBaseEntity>> TouchingBuyZones { get; }
-  
-  public ref bool WasInBuyZone { get; }
-  
-  public ref bool InHostageRescueZone { get; }
-  
-  public ref bool InBombZone { get; }
-  
-  public ref bool WasInHostageRescueZone { get; }
-  
-  public ref int RetakesOffering { get; }
-  
-  public ref int RetakesOfferingCard { get; }
-  
-  public ref bool RetakesHasDefuseKit { get; }
-  
-  public ref bool RetakesMVPLastRound { get; }
-  
-  public ref int RetakesMVPBoostItem { get; }
-  
-  public ref loadout_slot_t RetakesMVPBoostExtraUtility { get; }
-  
-  public GameTime_t HealthShotBoostExpirationTime { get; }
-  
-  public ref float LandingTimeSeconds { get; }
-  
-  public ref QAngle AimPunchAngle { get; }
-  
-  public ref QAngle AimPunchAngleVel { get; }
-  
-  public GameTick_t AimPunchTickBase { get; }
-  
-  public ref float AimPunchTickFraction { get; }
-  
-  public ref CUtlVector<QAngle> AimPunchCache { get; }
-  
-  public ref bool IsBuyMenuOpen { get; }
-  
-  public GameTime_t LastLandTime { get; }
-  
-  public ref bool OnGroundLastTick { get; }
-  
-  public ref int PlayerLocked { get; }
-  
-  public GameTime_t TimeOfLastInjury { get; }
-  
-  public GameTime_t NextSprayDecalTime { get; }
-  
-  public ref bool NextSprayDecalTimeExpedited { get; }
-  
-  public ref int RagdollDamageBone { get; }
-  
-  public ref Vector RagdollDamageForce { get; }
-  
-  public ref Vector RagdollDamagePosition { get; }
-  
-  public string RagdollDamageWeaponName { get; set; }
-  
-  public ref bool RagdollDamageHeadshot { get; }
-  
-  public ref Vector RagdollServerOrigin { get; }
-  
-  public CEconItemView EconGloves { get; }
-  
-  public ref byte EconGlovesChanged { get; }
-  
-  public ref QAngle DeathEyeAngles { get; }
-  
-  public ref bool SkipOneHeadConstraintUpdate { get; }
-  
-  public ref bool LeftHanded { get; }
-  
-  public GameTime_t SwitchedHandednessTime { get; }
-  
-  public ref float ViewmodelOffsetX { get; }
-  
-  public ref float ViewmodelOffsetY { get; }
-  
-  public ref float ViewmodelOffsetZ { get; }
-  
-  public ref float ViewmodelFOV { get; }
-  
-  public ref bool IsWalking { get; }
-  
-  public ref float LastGivenDefuserTime { get; }
-  
-  public ref float LastGivenBombTime { get; }
-  
-  public ref float DealtDamageToEnemyMostRecentTimestamp { get; }
-  
-  public ref uint DisplayHistoryBits { get; }
-  
-  public ref float LastAttackedTeammate { get; }
-  
-  public GameTime_t AllowAutoFollowTime { get; }
-  
-  public ref bool ResetArmorNextSpawn { get; }
-  
-  public ref uint LastKillerIndex { get; }
-  
-  public EntitySpottedState_t EntitySpottedState { get; }
-  
-  public ref int SpotRules { get; }
-  
-  public ref bool IsScoped { get; }
-  
-  public ref bool ResumeZoom { get; }
-  
-  public ref bool IsDefusing { get; }
-  
-  public ref bool IsGrabbingHostage { get; }
-  
-  public ref CSPlayerBlockingUseAction_t BlockingUseActionInProgress { get; }
-  
-  public GameTime_t EmitSoundTime { get; }
-  
-  public ref bool InNoDefuseArea { get; }
-  
-  public ref uint BombSiteIndex { get; }
-  
-  public ref int WhichBombZone { get; }
-  
-  public ref bool InBombZoneTrigger { get; }
-  
-  public ref bool WasInBombZoneTrigger { get; }
-  
-  public ref int ShotsFired { get; }
-  
-  public ref float FlinchStack { get; }
-  
-  public ref float VelocityModifier { get; }
-  
-  public ref float HitHeading { get; }
-  
-  public ref int HitBodyPart { get; }
-  
-  public ref Vector TotalBulletForce { get; }
-  
-  public ref bool WaitForNoAttack { get; }
-  
-  public ref float IgnoreLadderJumpTime { get; }
-  
-  public ref bool KilledByHeadshot { get; }
-  
-  public ref int LastHitBox { get; }
-  
-  public CCSBot? Bot { get; }
-  
-  public ref bool BotAllowActive { get; }
-  
-  public ref QAngle ThirdPersonHeading { get; }
-  
-  public ref float SlopeDropOffset { get; }
-  
-  public ref float SlopeDropHeight { get; }
-  
-  public ref Vector HeadConstraintOffset { get; }
-  
-  public ref int LastPickupPriority { get; }
-  
-  public ref float LastPickupPriorityTime { get; }
-  
-  public ref int ArmorValue { get; }
-  
-  public ref ushort CurrentEquipmentValue { get; }
-  
-  public ref ushort RoundStartEquipmentValue { get; }
-  
-  public ref ushort FreezetimeEndEquipmentValue { get; }
-  
-  public ref int LastWeaponFireUsercmd { get; }
-  
-  public ref bool IsSpawning { get; }
-  
-  public ref int DeathFlags { get; }
-  
-  public ref bool HasDeathInfo { get; }
-  
-  public ref float DeathInfoTime { get; }
-  
-  public ref Vector DeathInfoOrigin { get; }
-  
-  public ISchemaFixedArray<uint> PlayerPatchEconIndices { get; }
-  
-  public ref Color GunGameImmunityColor { get; }
-  
-  public GameTime_t GrenadeParameterStashTime { get; }
-  
-  public ref bool GrenadeParametersStashed { get; }
-  
-  public ref QAngle StashedShootAngles { get; }
-  
-  public ref Vector StashedGrenadeThrowPosition { get; }
-  
-  public ref Vector StashedVelocity { get; }
-  
-  public ISchemaFixedArray<QAngle> ShootAngleHistory { get; }
-  
-  public ISchemaFixedArray<Vector> ThrowPositionHistory { get; }
-  
-  public ISchemaFixedArray<Vector> VelocityHistory { get; }
-  
-  public ref CUtlVector<PredictedDamageTag_t> PredictedDamageTags { get; }
-  
-  public ref int HighestAppliedDamageTagTick { get; }
-  
-  public ref bool CommittingSuicideOnTeamChange { get; }
-  
-  public ref bool WasNotKilledNaturally { get; }
-  
-  public GameTime_t ImmuneToGunGameDamageTime { get; }
-  
-  public ref bool GunGameImmunity { get; }
-  
-  public ref float MolotovDamageTime { get; }
-  
-  public ref QAngle EyeAngles { get; }
+    public CCSPlayer_BulletServices? BulletServices { get; }
 
-  public void BulletServicesUpdated();
-  public void HostageServicesUpdated();
-  public void BuyServicesUpdated();
-  public void ActionTrackingServicesUpdated();
-  public void HasFemaleVoiceUpdated();
-  public void LastPlaceNameUpdated();
-  public void InBuyZoneUpdated();
-  public void InHostageRescueZoneUpdated();
-  public void InBombZoneUpdated();
-  public void RetakesOfferingUpdated();
-  public void RetakesOfferingCardUpdated();
-  public void RetakesHasDefuseKitUpdated();
-  public void RetakesMVPLastRoundUpdated();
-  public void RetakesMVPBoostItemUpdated();
-  public void RetakesMVPBoostExtraUtilityUpdated();
-  public void HealthShotBoostExpirationTimeUpdated();
-  public void AimPunchAngleUpdated();
-  public void AimPunchAngleVelUpdated();
-  public void AimPunchTickBaseUpdated();
-  public void AimPunchTickFractionUpdated();
-  public void IsBuyMenuOpenUpdated();
-  public void TimeOfLastInjuryUpdated();
-  public void NextSprayDecalTimeUpdated();
-  public void RagdollDamageBoneUpdated();
-  public void RagdollDamageForceUpdated();
-  public void RagdollDamagePositionUpdated();
-  public void RagdollDamageWeaponNameUpdated();
-  public void RagdollDamageHeadshotUpdated();
-  public void RagdollServerOriginUpdated();
-  public void EconGlovesUpdated();
-  public void EconGlovesChangedUpdated();
-  public void DeathEyeAnglesUpdated();
-  public void LeftHandedUpdated();
-  public void SwitchedHandednessTimeUpdated();
-  public void ViewmodelOffsetXUpdated();
-  public void ViewmodelOffsetYUpdated();
-  public void ViewmodelOffsetZUpdated();
-  public void ViewmodelFOVUpdated();
-  public void IsWalkingUpdated();
-  public void LastKillerIndexUpdated();
-  public void EntitySpottedStateUpdated();
-  public void IsScopedUpdated();
-  public void ResumeZoomUpdated();
-  public void IsDefusingUpdated();
-  public void IsGrabbingHostageUpdated();
-  public void BlockingUseActionInProgressUpdated();
-  public void EmitSoundTimeUpdated();
-  public void InNoDefuseAreaUpdated();
-  public void WhichBombZoneUpdated();
-  public void ShotsFiredUpdated();
-  public void FlinchStackUpdated();
-  public void VelocityModifierUpdated();
-  public void HitHeadingUpdated();
-  public void HitBodyPartUpdated();
-  public void WaitForNoAttackUpdated();
-  public void KilledByHeadshotUpdated();
-  public void ThirdPersonHeadingUpdated();
-  public void SlopeDropOffsetUpdated();
-  public void SlopeDropHeightUpdated();
-  public void HeadConstraintOffsetUpdated();
-  public void ArmorValueUpdated();
-  public void CurrentEquipmentValueUpdated();
-  public void RoundStartEquipmentValueUpdated();
-  public void FreezetimeEndEquipmentValueUpdated();
-  public void PlayerPatchEconIndicesUpdated();
-  public void GunGameImmunityColorUpdated();
-  public void PredictedDamageTagsUpdated();
-  public void ImmuneToGunGameDamageTimeUpdated();
-  public void GunGameImmunityUpdated();
-  public void MolotovDamageTimeUpdated();
-  public void EyeAnglesUpdated();
+    public CCSPlayer_HostageServices? HostageServices { get; }
+
+    public CCSPlayer_BuyServices? BuyServices { get; }
+
+    public CCSPlayer_ActionTrackingServices? ActionTrackingServices { get; }
+
+    public CCSPlayer_RadioServices? RadioServices { get; }
+
+    public CCSPlayer_DamageReactServices? DamageReactServices { get; }
+
+    public ref ushort CharacterDefIndex { get; }
+
+    public ref bool HasFemaleVoice { get; }
+
+    public string StrVOPrefix { get; set; }
+
+    public string LastPlaceName { get; set; }
+
+    public ref bool InHostageResetZone { get; }
+
+    public ref bool InBuyZone { get; }
+
+    public ref CUtlVector<CHandle<CBaseEntity>> TouchingBuyZones { get; }
+
+    public ref bool WasInBuyZone { get; }
+
+    public ref bool InHostageRescueZone { get; }
+
+    public ref bool InBombZone { get; }
+
+    public ref bool WasInHostageRescueZone { get; }
+
+    public ref int RetakesOffering { get; }
+
+    public ref int RetakesOfferingCard { get; }
+
+    public ref bool RetakesHasDefuseKit { get; }
+
+    public ref bool RetakesMVPLastRound { get; }
+
+    public ref int RetakesMVPBoostItem { get; }
+
+    public ref loadout_slot_t RetakesMVPBoostExtraUtility { get; }
+
+    public GameTime_t HealthShotBoostExpirationTime { get; }
+
+    public ref float LandingTimeSeconds { get; }
+
+    public ref QAngle AimPunchAngle { get; }
+
+    public ref QAngle AimPunchAngleVel { get; }
+
+    public GameTick_t AimPunchTickBase { get; }
+
+    public ref float AimPunchTickFraction { get; }
+
+    public ref CUtlVector<QAngle> AimPunchCache { get; }
+
+    public ref bool IsBuyMenuOpen { get; }
+
+    public GameTime_t LastLandTime { get; }
+
+    public ref bool OnGroundLastTick { get; }
+
+    public ref int PlayerLocked { get; }
+
+    public GameTime_t TimeOfLastInjury { get; }
+
+    public GameTime_t NextSprayDecalTime { get; }
+
+    public ref bool NextSprayDecalTimeExpedited { get; }
+
+    public ref int RagdollDamageBone { get; }
+
+    public ref Vector RagdollDamageForce { get; }
+
+    public ref Vector RagdollDamagePosition { get; }
+
+    public string RagdollDamageWeaponName { get; set; }
+
+    public ref bool RagdollDamageHeadshot { get; }
+
+    public ref Vector RagdollServerOrigin { get; }
+
+    public CEconItemView EconGloves { get; }
+
+    public ref byte EconGlovesChanged { get; }
+
+    public ref QAngle DeathEyeAngles { get; }
+
+    public ref bool SkipOneHeadConstraintUpdate { get; }
+
+    public ref bool LeftHanded { get; }
+
+    public GameTime_t SwitchedHandednessTime { get; }
+
+    public ref float ViewmodelOffsetX { get; }
+
+    public ref float ViewmodelOffsetY { get; }
+
+    public ref float ViewmodelOffsetZ { get; }
+
+    public ref float ViewmodelFOV { get; }
+
+    public ref bool IsWalking { get; }
+
+    public ref float LastGivenDefuserTime { get; }
+
+    public ref float LastGivenBombTime { get; }
+
+    public ref float DealtDamageToEnemyMostRecentTimestamp { get; }
+
+    public ref uint DisplayHistoryBits { get; }
+
+    public ref float LastAttackedTeammate { get; }
+
+    public GameTime_t AllowAutoFollowTime { get; }
+
+    public ref bool ResetArmorNextSpawn { get; }
+
+    public ref uint LastKillerIndex { get; }
+
+    public EntitySpottedState_t EntitySpottedState { get; }
+
+    public ref int SpotRules { get; }
+
+    public ref bool IsScoped { get; }
+
+    public ref bool ResumeZoom { get; }
+
+    public ref bool IsDefusing { get; }
+
+    public ref bool IsGrabbingHostage { get; }
+
+    public ref CSPlayerBlockingUseAction_t BlockingUseActionInProgress { get; }
+
+    public GameTime_t EmitSoundTime { get; }
+
+    public ref bool InNoDefuseArea { get; }
+
+    public ref uint BombSiteIndex { get; }
+
+    public ref int WhichBombZone { get; }
+
+    public ref bool InBombZoneTrigger { get; }
+
+    public ref bool WasInBombZoneTrigger { get; }
+
+    public ref int ShotsFired { get; }
+
+    public ref float FlinchStack { get; }
+
+    public ref float VelocityModifier { get; }
+
+    public ref float HitHeading { get; }
+
+    public ref int HitBodyPart { get; }
+
+    public ref Vector TotalBulletForce { get; }
+
+    public ref bool WaitForNoAttack { get; }
+
+    public ref float IgnoreLadderJumpTime { get; }
+
+    public ref bool KilledByHeadshot { get; }
+
+    public ref int LastHitBox { get; }
+
+    public CCSBot? Bot { get; }
+
+    public ref bool BotAllowActive { get; }
+
+    public ref QAngle ThirdPersonHeading { get; }
+
+    public ref float SlopeDropOffset { get; }
+
+    public ref float SlopeDropHeight { get; }
+
+    public ref Vector HeadConstraintOffset { get; }
+
+    public ref int LastPickupPriority { get; }
+
+    public ref float LastPickupPriorityTime { get; }
+
+    public ref int ArmorValue { get; }
+
+    public ref ushort CurrentEquipmentValue { get; }
+
+    public ref ushort RoundStartEquipmentValue { get; }
+
+    public ref ushort FreezetimeEndEquipmentValue { get; }
+
+    public ref int LastWeaponFireUsercmd { get; }
+
+    public ref bool IsSpawning { get; }
+
+    public ref int DeathFlags { get; }
+
+    public ref bool HasDeathInfo { get; }
+
+    public ref float DeathInfoTime { get; }
+
+    public ref Vector DeathInfoOrigin { get; }
+
+    public ISchemaFixedArray<uint> PlayerPatchEconIndices { get; }
+
+    public ref Color GunGameImmunityColor { get; }
+
+    public GameTime_t GrenadeParameterStashTime { get; }
+
+    public ref bool GrenadeParametersStashed { get; }
+
+    public ref QAngle StashedShootAngles { get; }
+
+    public ref Vector StashedGrenadeThrowPosition { get; }
+
+    public ref Vector StashedVelocity { get; }
+
+    public ISchemaFixedArray<QAngle> ShootAngleHistory { get; }
+
+    public ISchemaFixedArray<Vector> ThrowPositionHistory { get; }
+
+    public ISchemaFixedArray<Vector> VelocityHistory { get; }
+
+    public ref CUtlVector<PredictedDamageTag_t> PredictedDamageTags { get; }
+
+    public ref int HighestAppliedDamageTagTick { get; }
+
+    public ref bool CommittingSuicideOnTeamChange { get; }
+
+    public ref bool WasNotKilledNaturally { get; }
+
+    public GameTime_t ImmuneToGunGameDamageTime { get; }
+
+    public ref bool GunGameImmunity { get; }
+
+    public ref float MolotovDamageTime { get; }
+
+    public ref QAngle EyeAngles { get; }
+
+    public void BulletServicesUpdated();
+    public void HostageServicesUpdated();
+    public void BuyServicesUpdated();
+    public void ActionTrackingServicesUpdated();
+    public void HasFemaleVoiceUpdated();
+    public void LastPlaceNameUpdated();
+    public void InBuyZoneUpdated();
+    public void InHostageRescueZoneUpdated();
+    public void InBombZoneUpdated();
+    public void RetakesOfferingUpdated();
+    public void RetakesOfferingCardUpdated();
+    public void RetakesHasDefuseKitUpdated();
+    public void RetakesMVPLastRoundUpdated();
+    public void RetakesMVPBoostItemUpdated();
+    public void RetakesMVPBoostExtraUtilityUpdated();
+    public void HealthShotBoostExpirationTimeUpdated();
+    public void AimPunchAngleUpdated();
+    public void AimPunchAngleVelUpdated();
+    public void AimPunchTickBaseUpdated();
+    public void AimPunchTickFractionUpdated();
+    public void IsBuyMenuOpenUpdated();
+    public void TimeOfLastInjuryUpdated();
+    public void NextSprayDecalTimeUpdated();
+    public void RagdollDamageBoneUpdated();
+    public void RagdollDamageForceUpdated();
+    public void RagdollDamagePositionUpdated();
+    public void RagdollDamageWeaponNameUpdated();
+    public void RagdollDamageHeadshotUpdated();
+    public void RagdollServerOriginUpdated();
+    public void EconGlovesUpdated();
+    public void EconGlovesChangedUpdated();
+    public void DeathEyeAnglesUpdated();
+    public void LeftHandedUpdated();
+    public void SwitchedHandednessTimeUpdated();
+    public void ViewmodelOffsetXUpdated();
+    public void ViewmodelOffsetYUpdated();
+    public void ViewmodelOffsetZUpdated();
+    public void ViewmodelFOVUpdated();
+    public void IsWalkingUpdated();
+    public void LastKillerIndexUpdated();
+    public void EntitySpottedStateUpdated();
+    public void IsScopedUpdated();
+    public void ResumeZoomUpdated();
+    public void IsDefusingUpdated();
+    public void IsGrabbingHostageUpdated();
+    public void BlockingUseActionInProgressUpdated();
+    public void EmitSoundTimeUpdated();
+    public void InNoDefuseAreaUpdated();
+    public void WhichBombZoneUpdated();
+    public void ShotsFiredUpdated();
+    public void FlinchStackUpdated();
+    public void VelocityModifierUpdated();
+    public void HitHeadingUpdated();
+    public void HitBodyPartUpdated();
+    public void WaitForNoAttackUpdated();
+    public void KilledByHeadshotUpdated();
+    public void ThirdPersonHeadingUpdated();
+    public void SlopeDropOffsetUpdated();
+    public void SlopeDropHeightUpdated();
+    public void HeadConstraintOffsetUpdated();
+    public void ArmorValueUpdated();
+    public void CurrentEquipmentValueUpdated();
+    public void RoundStartEquipmentValueUpdated();
+    public void FreezetimeEndEquipmentValueUpdated();
+    public void PlayerPatchEconIndicesUpdated();
+    public void GunGameImmunityColorUpdated();
+    public void PredictedDamageTagsUpdated();
+    public void ImmuneToGunGameDamageTimeUpdated();
+    public void GunGameImmunityUpdated();
+    public void MolotovDamageTimeUpdated();
+    public void EyeAnglesUpdated();
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum EntityDistanceMode_t : uint {
-
+public enum EntityDistanceMode_t : uint
+{
  eOriginToOrigin = 0,
 
  eCenterToCenter = 1,

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMotorController : ISchemaClass<CMotorController> {
+public partial interface CMotorController : ISchemaClass<CMotorController>
+{
+    static CMotorController ISchemaClass<CMotorController>.From(nint handle) => new CMotorControllerImpl(handle);
+    static int ISchemaClass<CMotorController>.Size => 32;
+    static string? ISchemaClass<CMotorController>.ClassName => null;
 
-  static CMotorController ISchemaClass<CMotorController>.From(nint handle) => new CMotorControllerImpl(handle);
-  static int ISchemaClass<CMotorController>.Size => 32;
-  static string? ISchemaClass<CMotorController>.ClassName => null;
 
-  
-  public ref float Speed { get; }
-  
-  public ref float MaxTorque { get; }
-  
-  public ref Vector Axis { get; }
-  
-  public ref float InertiaFactor { get; }
+    public ref float Speed { get; }
+
+    public ref float MaxTorque { get; }
+
+    public ref Vector Axis { get; }
+
+    public ref float InertiaFactor { get; }
 
 
 }

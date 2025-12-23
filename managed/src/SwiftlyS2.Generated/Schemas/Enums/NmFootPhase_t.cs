@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum NmFootPhase_t : byte {
-
+public enum NmFootPhase_t : byte
+{
  LeftFootDown = 0,
 
  RightFootPassing = 1,

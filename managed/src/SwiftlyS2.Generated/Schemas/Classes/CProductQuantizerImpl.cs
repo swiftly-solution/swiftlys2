@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CProductQuantizerImpl : SchemaClass, CProductQuantizer {
+internal partial class CProductQuantizerImpl : SchemaClass, CProductQuantizer
+{
+    public CProductQuantizerImpl(nint handle) : base(handle) { }
 
-  public CProductQuantizerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SubQuantizersOffset;
 
-  private static nint? _SubQuantizersOffset;
-
-  public ref CUtlVector<CVectorQuantizer> SubQuantizers {
-    get {
-      if (_SubQuantizersOffset == null) {
-        _SubQuantizersOffset = Schema.GetOffset(0x5B1A8128593CF0B5);
-      }
-      return ref _Handle.AsRef<CUtlVector<CVectorQuantizer>>(_SubQuantizersOffset!.Value);
+    public ref CUtlVector<CVectorQuantizer> SubQuantizers {
+        get {
+            _SubQuantizersOffset = _SubQuantizersOffset ?? Schema.GetOffset(0x5B1A8128593CF0B5);
+            return ref _Handle.AsRef<CUtlVector<CVectorQuantizer>>(_SubQuantizersOffset!.Value);
+        }
     }
-  }
-  private static nint? _DimensionsOffset;
+    private static nint? _DimensionsOffset;
 
-  public ref int Dimensions {
-    get {
-      if (_DimensionsOffset == null) {
-        _DimensionsOffset = Schema.GetOffset(0x5B1A81282D8795AC);
-      }
-      return ref _Handle.AsRef<int>(_DimensionsOffset!.Value);
+    public ref int Dimensions {
+        get {
+            _DimensionsOffset = _DimensionsOffset ?? Schema.GetOffset(0x5B1A81282D8795AC);
+            return ref _Handle.AsRef<int>(_DimensionsOffset!.Value);
+        }
     }
-  }
 
 
 }

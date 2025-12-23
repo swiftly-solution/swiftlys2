@@ -6,101 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointEntityFinderImpl : CBaseEntityImpl, CPointEntityFinder {
+internal partial class CPointEntityFinderImpl : CBaseEntityImpl, CPointEntityFinder
+{
+    public CPointEntityFinderImpl(nint handle) : base(handle) { }
 
-  public CPointEntityFinderImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EntityOffset;
 
-  private static nint? _EntityOffset;
+    public ref CHandle<CBaseEntity> Entity {
+        get {
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xC59CB1336EBADCB0);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+        }
+    }
+    private static nint? _FilterNameOffset;
 
-  public ref CHandle<CBaseEntity> Entity {
-    get {
-      if (_EntityOffset == null) {
-        _EntityOffset = Schema.GetOffset(0xC59CB1336EBADCB0);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
-    }
-  }
-  private static nint? _FilterNameOffset;
+    public string FilterName {
+        get {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0xC59CB13309C86445);
+            return Schema.GetString(_Handle.Read<nint>(_FilterNameOffset!.Value));
+        }
+        set {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0xC59CB13309C86445);
+            Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FilterOffset;
 
-  public string FilterName {
-    get {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0xC59CB13309C86445);
-      }
-      var ptr = _Handle.Read<nint>(_FilterNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CHandle<CBaseFilter> Filter {
+        get {
+            _FilterOffset = _FilterOffset ?? Schema.GetOffset(0xC59CB13345D9E0B1);
+            return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset!.Value);
+        }
     }
-    set {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0xC59CB13309C86445);
-      }
-      Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _FilterOffset;
+    private static nint? _RefNameOffset;
 
-  public ref CHandle<CBaseFilter> Filter {
-    get {
-      if (_FilterOffset == null) {
-        _FilterOffset = Schema.GetOffset(0xC59CB13345D9E0B1);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset!.Value);
-    }
-  }
-  private static nint? _RefNameOffset;
+    public string RefName {
+        get {
+            _RefNameOffset = _RefNameOffset ?? Schema.GetOffset(0xC59CB1339640D172);
+            return Schema.GetString(_Handle.Read<nint>(_RefNameOffset!.Value));
+        }
+        set {
+            _RefNameOffset = _RefNameOffset ?? Schema.GetOffset(0xC59CB1339640D172);
+            Schema.SetString(_Handle, _RefNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ReferenceOffset;
 
-  public string RefName {
-    get {
-      if (_RefNameOffset == null) {
-        _RefNameOffset = Schema.GetOffset(0xC59CB1339640D172);
-      }
-      var ptr = _Handle.Read<nint>(_RefNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CHandle<CBaseEntity> Reference {
+        get {
+            _ReferenceOffset = _ReferenceOffset ?? Schema.GetOffset(0xC59CB1338100A1A4);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ReferenceOffset!.Value);
+        }
     }
-    set {
-      if (_RefNameOffset == null) {
-        _RefNameOffset = Schema.GetOffset(0xC59CB1339640D172);
-      }
-      Schema.SetString(_Handle, _RefNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ReferenceOffset;
+    private static nint? _FindMethodOffset;
 
-  public ref CHandle<CBaseEntity> Reference {
-    get {
-      if (_ReferenceOffset == null) {
-        _ReferenceOffset = Schema.GetOffset(0xC59CB1338100A1A4);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ReferenceOffset!.Value);
+    public ref EntFinderMethod_t FindMethod {
+        get {
+            _FindMethodOffset = _FindMethodOffset ?? Schema.GetOffset(0xC59CB1331B37C627);
+            return ref _Handle.AsRef<EntFinderMethod_t>(_FindMethodOffset!.Value);
+        }
     }
-  }
-  private static nint? _FindMethodOffset;
+    private static nint? _OnFoundEntityOffset;
 
-  public ref EntFinderMethod_t FindMethod {
-    get {
-      if (_FindMethodOffset == null) {
-        _FindMethodOffset = Schema.GetOffset(0xC59CB1331B37C627);
-      }
-      return ref _Handle.AsRef<EntFinderMethod_t>(_FindMethodOffset!.Value);
+    public ref CEntityIOOutput OnFoundEntity {
+        get {
+            _OnFoundEntityOffset = _OnFoundEntityOffset ?? Schema.GetOffset(0xC59CB133119B4E6F);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFoundEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnFoundEntityOffset;
-
-  public CEntityIOOutput OnFoundEntity {
-    get {
-      if (_OnFoundEntityOffset == null) {
-        _OnFoundEntityOffset = Schema.GetOffset(0xC59CB133119B4E6F);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnFoundEntityOffset!.Value);
-    }
-  }
 
 
 }

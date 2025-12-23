@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -116,10 +116,12 @@ void CSDKSchema::Load()
 			if (result == 0) {
 				inlineNetworkVarVtbs[(uint64_t)vtable] = index;
 				logger->Info("SDK", fmt::format("Loaded vfunc '{}::{}->StateChanged' => {}.\n", name.first, name.second, index));
-			} else {
+			}
+			else {
 				logger->Error("SDK", fmt::format("Failed to find inline network var vtable state changed: {}, error: {}\n", name.first, name.second, result));
 			}
-		} else {
+		}
+		else {
 			logger->Error("SDK", fmt::format("Failed to find inline network var vtable: {}::{}, error: {}\n", name.first, name.second, result));
 		}
 	}

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicEventListener : CLogicalEntity, ISchemaClass<CLogicEventListener> {
+public partial interface CLogicEventListener : CLogicalEntity, ISchemaClass<CLogicEventListener>
+{
+    static CLogicEventListener ISchemaClass<CLogicEventListener>.From(nint handle) => new CLogicEventListenerImpl(handle);
+    static int ISchemaClass<CLogicEventListener>.Size => 1336;
+    static string? ISchemaClass<CLogicEventListener>.ClassName => "logic_eventlistener";
 
-  static CLogicEventListener ISchemaClass<CLogicEventListener>.From(nint handle) => new CLogicEventListenerImpl(handle);
-  static int ISchemaClass<CLogicEventListener>.Size => 1336;
-  static string? ISchemaClass<CLogicEventListener>.ClassName => "logic_eventlistener";
 
-  
-  public string StrEventName { get; set; }
-  
-  public ref bool IsEnabled { get; }
-  
-  public ref int Team { get; }
-  
-  public CEntityIOOutput OnEventFired { get; }
+    public string StrEventName { get; set; }
+
+    public ref bool IsEnabled { get; }
+
+    public ref int Team { get; }
+
+    public ref CEntityIOOutput OnEventFired { get; }
 
 
 }

@@ -8,88 +8,88 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysicsProp : CBreakableProp, ISchemaClass<CPhysicsProp> {
+public partial interface CPhysicsProp : CBreakableProp, ISchemaClass<CPhysicsProp>
+{
+    static CPhysicsProp ISchemaClass<CPhysicsProp>.From(nint handle) => new CPhysicsPropImpl(handle);
+    static int ISchemaClass<CPhysicsProp>.Size => 3584;
+    static string? ISchemaClass<CPhysicsProp>.ClassName => "prop_physics";
 
-  static CPhysicsProp ISchemaClass<CPhysicsProp>.From(nint handle) => new CPhysicsPropImpl(handle);
-  static int ISchemaClass<CPhysicsProp>.Size => 3584;
-  static string? ISchemaClass<CPhysicsProp>.ClassName => "prop_physics";
 
-  
-  public CEntityIOOutput MotionEnabled { get; }
-  
-  public CEntityIOOutput OnAwakened { get; }
-  
-  public CEntityIOOutput OnAwake { get; }
-  
-  public CEntityIOOutput OnAsleep { get; }
-  
-  public CEntityIOOutput OnPlayerUse { get; }
-  
-  public CEntityIOOutput OnOutOfWorld { get; }
-  
-  public CEntityIOOutput OnPlayerPickup { get; }
-  
-  public ref bool ForceNavIgnore { get; }
-  
-  public ref bool NoNavmeshBlocker { get; }
-  
-  public ref bool ForceNpcExclude { get; }
-  
-  public ref float MassScale { get; }
-  
-  public ref float BuoyancyScale { get; }
-  
-  public ref int DamageType { get; }
-  
-  public ref int DamageToEnableMotion { get; }
-  
-  public ref float ForceToEnableMotion { get; }
-  
-  public ref bool ThrownByPlayer { get; }
-  
-  public ref bool DroppedByPlayer { get; }
-  
-  public ref bool TouchedByPlayer { get; }
-  
-  public ref bool FirstCollisionAfterLaunch { get; }
-  
-  public ref bool HasBeenAwakened { get; }
-  
-  public ref bool IsOverrideProp { get; }
-  
-  public GameTime_t LastBurn { get; }
-  
-  public ref DynamicContinuousContactBehavior_t DynamicContinuousContactBehavior { get; }
-  
-  public GameTime_t NextCheckDisableMotionContactsTime { get; }
-  
-  public ref int InitialGlowState { get; }
-  
-  public ref int GlowRange { get; }
-  
-  public ref int GlowRangeMin { get; }
-  
-  public ref Color GlowColor { get; }
-  
-  public ref bool ShouldAutoConvertBackFromDebris { get; }
-  
-  public ref bool MuteImpactEffects { get; }
-  
-  public ref bool AcceptDamageFromHeldObjects { get; }
-  
-  public ref bool EnableUseOutput { get; }
-  
-  public ref CPhysicsProp__CrateType_t CrateType { get; }
-  
-  public string StrItemClass { get; set; }
-  
-  public ISchemaFixedArray<int> ItemCount { get; }
-  
-  public ref bool RemovableForAmmoBalancing { get; }
-  
-  public ref bool Awake { get; }
-  
-  public ref bool AttachedToReferenceFrame { get; }
+    public ref CEntityIOOutput MotionEnabled { get; }
 
-  public void AwakeUpdated();
+    public ref CEntityIOOutput OnAwakened { get; }
+
+    public ref CEntityIOOutput OnAwake { get; }
+
+    public ref CEntityIOOutput OnAsleep { get; }
+
+    public ref CEntityIOOutput OnPlayerUse { get; }
+
+    public ref CEntityIOOutput OnOutOfWorld { get; }
+
+    public ref CEntityIOOutput OnPlayerPickup { get; }
+
+    public ref bool ForceNavIgnore { get; }
+
+    public ref bool NoNavmeshBlocker { get; }
+
+    public ref bool ForceNpcExclude { get; }
+
+    public ref float MassScale { get; }
+
+    public ref float BuoyancyScale { get; }
+
+    public ref int DamageType { get; }
+
+    public ref int DamageToEnableMotion { get; }
+
+    public ref float ForceToEnableMotion { get; }
+
+    public ref bool ThrownByPlayer { get; }
+
+    public ref bool DroppedByPlayer { get; }
+
+    public ref bool TouchedByPlayer { get; }
+
+    public ref bool FirstCollisionAfterLaunch { get; }
+
+    public ref bool HasBeenAwakened { get; }
+
+    public ref bool IsOverrideProp { get; }
+
+    public GameTime_t LastBurn { get; }
+
+    public ref DynamicContinuousContactBehavior_t DynamicContinuousContactBehavior { get; }
+
+    public GameTime_t NextCheckDisableMotionContactsTime { get; }
+
+    public ref int InitialGlowState { get; }
+
+    public ref int GlowRange { get; }
+
+    public ref int GlowRangeMin { get; }
+
+    public ref Color GlowColor { get; }
+
+    public ref bool ShouldAutoConvertBackFromDebris { get; }
+
+    public ref bool MuteImpactEffects { get; }
+
+    public ref bool AcceptDamageFromHeldObjects { get; }
+
+    public ref bool EnableUseOutput { get; }
+
+    public ref CPhysicsProp__CrateType_t CrateType { get; }
+
+    public string StrItemClass { get; set; }
+
+    public ISchemaFixedArray<int> ItemCount { get; }
+
+    public ref bool RemovableForAmmoBalancing { get; }
+
+    public ref bool Awake { get; }
+
+    public ref bool AttachedToReferenceFrame { get; }
+
+    public void AwakeUpdated();
 }

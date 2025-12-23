@@ -6,497 +6,400 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGenericConstraintImpl : CPhysConstraintImpl, CGenericConstraint {
+internal partial class CGenericConstraintImpl : CPhysConstraintImpl, CGenericConstraint
+{
+    public CGenericConstraintImpl(nint handle) : base(handle) { }
 
-  public CGenericConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LinearMotionXOffset;
 
-  private static nint? _LinearMotionXOffset;
-
-  public ref JointMotion_t LinearMotionX {
-    get {
-      if (_LinearMotionXOffset == null) {
-        _LinearMotionXOffset = Schema.GetOffset(0x1698284879962AA2);
-      }
-      return ref _Handle.AsRef<JointMotion_t>(_LinearMotionXOffset!.Value);
+    public ref JointMotion_t LinearMotionX {
+        get {
+            _LinearMotionXOffset = _LinearMotionXOffset ?? Schema.GetOffset(0x1698284879962AA2);
+            return ref _Handle.AsRef<JointMotion_t>(_LinearMotionXOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearMotionYOffset;
+    private static nint? _LinearMotionYOffset;
 
-  public ref JointMotion_t LinearMotionY {
-    get {
-      if (_LinearMotionYOffset == null) {
-        _LinearMotionYOffset = Schema.GetOffset(0x169828487A962C35);
-      }
-      return ref _Handle.AsRef<JointMotion_t>(_LinearMotionYOffset!.Value);
+    public ref JointMotion_t LinearMotionY {
+        get {
+            _LinearMotionYOffset = _LinearMotionYOffset ?? Schema.GetOffset(0x169828487A962C35);
+            return ref _Handle.AsRef<JointMotion_t>(_LinearMotionYOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearMotionZOffset;
+    private static nint? _LinearMotionZOffset;
 
-  public ref JointMotion_t LinearMotionZ {
-    get {
-      if (_LinearMotionZOffset == null) {
-        _LinearMotionZOffset = Schema.GetOffset(0x169828487796277C);
-      }
-      return ref _Handle.AsRef<JointMotion_t>(_LinearMotionZOffset!.Value);
+    public ref JointMotion_t LinearMotionZ {
+        get {
+            _LinearMotionZOffset = _LinearMotionZOffset ?? Schema.GetOffset(0x169828487796277C);
+            return ref _Handle.AsRef<JointMotion_t>(_LinearMotionZOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearFrequencyXOffset;
+    private static nint? _LinearFrequencyXOffset;
 
-  public ref float LinearFrequencyX {
-    get {
-      if (_LinearFrequencyXOffset == null) {
-        _LinearFrequencyXOffset = Schema.GetOffset(0x16982848D427BA04);
-      }
-      return ref _Handle.AsRef<float>(_LinearFrequencyXOffset!.Value);
+    public ref float LinearFrequencyX {
+        get {
+            _LinearFrequencyXOffset = _LinearFrequencyXOffset ?? Schema.GetOffset(0x16982848D427BA04);
+            return ref _Handle.AsRef<float>(_LinearFrequencyXOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearFrequencyYOffset;
+    private static nint? _LinearFrequencyYOffset;
 
-  public ref float LinearFrequencyY {
-    get {
-      if (_LinearFrequencyYOffset == null) {
-        _LinearFrequencyYOffset = Schema.GetOffset(0x16982848D527BB97);
-      }
-      return ref _Handle.AsRef<float>(_LinearFrequencyYOffset!.Value);
+    public ref float LinearFrequencyY {
+        get {
+            _LinearFrequencyYOffset = _LinearFrequencyYOffset ?? Schema.GetOffset(0x16982848D527BB97);
+            return ref _Handle.AsRef<float>(_LinearFrequencyYOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearFrequencyZOffset;
+    private static nint? _LinearFrequencyZOffset;
 
-  public ref float LinearFrequencyZ {
-    get {
-      if (_LinearFrequencyZOffset == null) {
-        _LinearFrequencyZOffset = Schema.GetOffset(0x16982848D627BD2A);
-      }
-      return ref _Handle.AsRef<float>(_LinearFrequencyZOffset!.Value);
+    public ref float LinearFrequencyZ {
+        get {
+            _LinearFrequencyZOffset = _LinearFrequencyZOffset ?? Schema.GetOffset(0x16982848D627BD2A);
+            return ref _Handle.AsRef<float>(_LinearFrequencyZOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearDampingRatioXOffset;
+    private static nint? _LinearDampingRatioXOffset;
 
-  public ref float LinearDampingRatioX {
-    get {
-      if (_LinearDampingRatioXOffset == null) {
-        _LinearDampingRatioXOffset = Schema.GetOffset(0x16982848075BA1D5);
-      }
-      return ref _Handle.AsRef<float>(_LinearDampingRatioXOffset!.Value);
+    public ref float LinearDampingRatioX {
+        get {
+            _LinearDampingRatioXOffset = _LinearDampingRatioXOffset ?? Schema.GetOffset(0x16982848075BA1D5);
+            return ref _Handle.AsRef<float>(_LinearDampingRatioXOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearDampingRatioYOffset;
+    private static nint? _LinearDampingRatioYOffset;
 
-  public ref float LinearDampingRatioY {
-    get {
-      if (_LinearDampingRatioYOffset == null) {
-        _LinearDampingRatioYOffset = Schema.GetOffset(0x16982848065BA042);
-      }
-      return ref _Handle.AsRef<float>(_LinearDampingRatioYOffset!.Value);
+    public ref float LinearDampingRatioY {
+        get {
+            _LinearDampingRatioYOffset = _LinearDampingRatioYOffset ?? Schema.GetOffset(0x16982848065BA042);
+            return ref _Handle.AsRef<float>(_LinearDampingRatioYOffset!.Value);
+        }
     }
-  }
-  private static nint? _LinearDampingRatioZOffset;
+    private static nint? _LinearDampingRatioZOffset;
 
-  public ref float LinearDampingRatioZ {
-    get {
-      if (_LinearDampingRatioZOffset == null) {
-        _LinearDampingRatioZOffset = Schema.GetOffset(0x16982848055B9EAF);
-      }
-      return ref _Handle.AsRef<float>(_LinearDampingRatioZOffset!.Value);
+    public ref float LinearDampingRatioZ {
+        get {
+            _LinearDampingRatioZOffset = _LinearDampingRatioZOffset ?? Schema.GetOffset(0x16982848055B9EAF);
+            return ref _Handle.AsRef<float>(_LinearDampingRatioZOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxLinearImpulseXOffset;
+    private static nint? _MaxLinearImpulseXOffset;
 
-  public ref float MaxLinearImpulseX {
-    get {
-      if (_MaxLinearImpulseXOffset == null) {
-        _MaxLinearImpulseXOffset = Schema.GetOffset(0x16982848DA6330BF);
-      }
-      return ref _Handle.AsRef<float>(_MaxLinearImpulseXOffset!.Value);
+    public ref float MaxLinearImpulseX {
+        get {
+            _MaxLinearImpulseXOffset = _MaxLinearImpulseXOffset ?? Schema.GetOffset(0x16982848DA6330BF);
+            return ref _Handle.AsRef<float>(_MaxLinearImpulseXOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxLinearImpulseYOffset;
+    private static nint? _MaxLinearImpulseYOffset;
 
-  public ref float MaxLinearImpulseY {
-    get {
-      if (_MaxLinearImpulseYOffset == null) {
-        _MaxLinearImpulseYOffset = Schema.GetOffset(0x16982848D9632F2C);
-      }
-      return ref _Handle.AsRef<float>(_MaxLinearImpulseYOffset!.Value);
+    public ref float MaxLinearImpulseY {
+        get {
+            _MaxLinearImpulseYOffset = _MaxLinearImpulseYOffset ?? Schema.GetOffset(0x16982848D9632F2C);
+            return ref _Handle.AsRef<float>(_MaxLinearImpulseYOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxLinearImpulseZOffset;
+    private static nint? _MaxLinearImpulseZOffset;
 
-  public ref float MaxLinearImpulseZ {
-    get {
-      if (_MaxLinearImpulseZOffset == null) {
-        _MaxLinearImpulseZOffset = Schema.GetOffset(0x16982848DC6333E5);
-      }
-      return ref _Handle.AsRef<float>(_MaxLinearImpulseZOffset!.Value);
+    public ref float MaxLinearImpulseZ {
+        get {
+            _MaxLinearImpulseZOffset = _MaxLinearImpulseZOffset ?? Schema.GetOffset(0x16982848DC6333E5);
+            return ref _Handle.AsRef<float>(_MaxLinearImpulseZOffset!.Value);
+        }
     }
-  }
-  private static nint? _BreakAfterTimeXOffset;
+    private static nint? _BreakAfterTimeXOffset;
 
-  public ref float BreakAfterTimeX {
-    get {
-      if (_BreakAfterTimeXOffset == null) {
-        _BreakAfterTimeXOffset = Schema.GetOffset(0x16982848D1BE25CB);
-      }
-      return ref _Handle.AsRef<float>(_BreakAfterTimeXOffset!.Value);
+    public ref float BreakAfterTimeX {
+        get {
+            _BreakAfterTimeXOffset = _BreakAfterTimeXOffset ?? Schema.GetOffset(0x16982848D1BE25CB);
+            return ref _Handle.AsRef<float>(_BreakAfterTimeXOffset!.Value);
+        }
     }
-  }
-  private static nint? _BreakAfterTimeYOffset;
+    private static nint? _BreakAfterTimeYOffset;
 
-  public ref float BreakAfterTimeY {
-    get {
-      if (_BreakAfterTimeYOffset == null) {
-        _BreakAfterTimeYOffset = Schema.GetOffset(0x16982848D0BE2438);
-      }
-      return ref _Handle.AsRef<float>(_BreakAfterTimeYOffset!.Value);
+    public ref float BreakAfterTimeY {
+        get {
+            _BreakAfterTimeYOffset = _BreakAfterTimeYOffset ?? Schema.GetOffset(0x16982848D0BE2438);
+            return ref _Handle.AsRef<float>(_BreakAfterTimeYOffset!.Value);
+        }
     }
-  }
-  private static nint? _BreakAfterTimeZOffset;
+    private static nint? _BreakAfterTimeZOffset;
 
-  public ref float BreakAfterTimeZ {
-    get {
-      if (_BreakAfterTimeZOffset == null) {
-        _BreakAfterTimeZOffset = Schema.GetOffset(0x16982848D3BE28F1);
-      }
-      return ref _Handle.AsRef<float>(_BreakAfterTimeZOffset!.Value);
+    public ref float BreakAfterTimeZ {
+        get {
+            _BreakAfterTimeZOffset = _BreakAfterTimeZOffset ?? Schema.GetOffset(0x16982848D3BE28F1);
+            return ref _Handle.AsRef<float>(_BreakAfterTimeZOffset!.Value);
+        }
     }
-  }
-  private static nint? _BreakAfterTimeStartTimeXOffset;
+    private static nint? _BreakAfterTimeStartTimeXOffset;
 
-  public GameTime_t BreakAfterTimeStartTimeX {
-    get {
-      if (_BreakAfterTimeStartTimeXOffset == null) {
-        _BreakAfterTimeStartTimeXOffset = Schema.GetOffset(0x169828480B0683A6);
-      }
-      return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeXOffset!.Value);
+    public GameTime_t BreakAfterTimeStartTimeX {
+        get {
+            _BreakAfterTimeStartTimeXOffset = _BreakAfterTimeStartTimeXOffset ?? Schema.GetOffset(0x169828480B0683A6);
+            return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeXOffset!.Value);
+        }
     }
-  }
-  private static nint? _BreakAfterTimeStartTimeYOffset;
+    private static nint? _BreakAfterTimeStartTimeYOffset;
 
-  public GameTime_t BreakAfterTimeStartTimeY {
-    get {
-      if (_BreakAfterTimeStartTimeYOffset == null) {
-        _BreakAfterTimeStartTimeYOffset = Schema.GetOffset(0x169828480C068539);
-      }
-      return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeYOffset!.Value);
+    public GameTime_t BreakAfterTimeStartTimeY {
+        get {
+            _BreakAfterTimeStartTimeYOffset = _BreakAfterTimeStartTimeYOffset ?? Schema.GetOffset(0x169828480C068539);
+            return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeYOffset!.Value);
+        }
     }
-  }
-  private static nint? _BreakAfterTimeStartTimeZOffset;
+    private static nint? _BreakAfterTimeStartTimeZOffset;
 
-  public GameTime_t BreakAfterTimeStartTimeZ {
-    get {
-      if (_BreakAfterTimeStartTimeZOffset == null) {
-        _BreakAfterTimeStartTimeZOffset = Schema.GetOffset(0x1698284809068080);
-      }
-      return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeZOffset!.Value);
+    public GameTime_t BreakAfterTimeStartTimeZ {
+        get {
+            _BreakAfterTimeStartTimeZOffset = _BreakAfterTimeStartTimeZOffset ?? Schema.GetOffset(0x1698284809068080);
+            return new GameTime_tImpl(_Handle + _BreakAfterTimeStartTimeZOffset!.Value);
+        }
     }
-  }
-  private static nint? _BreakAfterTimeThresholdXOffset;
+    private static nint? _BreakAfterTimeThresholdXOffset;
 
-  public ref float BreakAfterTimeThresholdX {
-    get {
-      if (_BreakAfterTimeThresholdXOffset == null) {
-        _BreakAfterTimeThresholdXOffset = Schema.GetOffset(0x16982848EA81B5D4);
-      }
-      return ref _Handle.AsRef<float>(_BreakAfterTimeThresholdXOffset!.Value);
+    public ref float BreakAfterTimeThresholdX {
+        get {
+            _BreakAfterTimeThresholdXOffset = _BreakAfterTimeThresholdXOffset ?? Schema.GetOffset(0x16982848EA81B5D4);
+            return ref _Handle.AsRef<float>(_BreakAfterTimeThresholdXOffset!.Value);
+        }
     }
-  }
-  private static nint? _BreakAfterTimeThresholdYOffset;
+    private static nint? _BreakAfterTimeThresholdYOffset;
 
-  public ref float BreakAfterTimeThresholdY {
-    get {
-      if (_BreakAfterTimeThresholdYOffset == null) {
-        _BreakAfterTimeThresholdYOffset = Schema.GetOffset(0x16982848EB81B767);
-      }
-      return ref _Handle.AsRef<float>(_BreakAfterTimeThresholdYOffset!.Value);
+    public ref float BreakAfterTimeThresholdY {
+        get {
+            _BreakAfterTimeThresholdYOffset = _BreakAfterTimeThresholdYOffset ?? Schema.GetOffset(0x16982848EB81B767);
+            return ref _Handle.AsRef<float>(_BreakAfterTimeThresholdYOffset!.Value);
+        }
     }
-  }
-  private static nint? _BreakAfterTimeThresholdZOffset;
+    private static nint? _BreakAfterTimeThresholdZOffset;
 
-  public ref float BreakAfterTimeThresholdZ {
-    get {
-      if (_BreakAfterTimeThresholdZOffset == null) {
-        _BreakAfterTimeThresholdZOffset = Schema.GetOffset(0x16982848EC81B8FA);
-      }
-      return ref _Handle.AsRef<float>(_BreakAfterTimeThresholdZOffset!.Value);
+    public ref float BreakAfterTimeThresholdZ {
+        get {
+            _BreakAfterTimeThresholdZOffset = _BreakAfterTimeThresholdZOffset ?? Schema.GetOffset(0x16982848EC81B8FA);
+            return ref _Handle.AsRef<float>(_BreakAfterTimeThresholdZOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceXOffset;
+    private static nint? _NotifyForceXOffset;
 
-  public ref float NotifyForceX {
-    get {
-      if (_NotifyForceXOffset == null) {
-        _NotifyForceXOffset = Schema.GetOffset(0x1698284842CA87EB);
-      }
-      return ref _Handle.AsRef<float>(_NotifyForceXOffset!.Value);
+    public ref float NotifyForceX {
+        get {
+            _NotifyForceXOffset = _NotifyForceXOffset ?? Schema.GetOffset(0x1698284842CA87EB);
+            return ref _Handle.AsRef<float>(_NotifyForceXOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceYOffset;
+    private static nint? _NotifyForceYOffset;
 
-  public ref float NotifyForceY {
-    get {
-      if (_NotifyForceYOffset == null) {
-        _NotifyForceYOffset = Schema.GetOffset(0x1698284841CA8658);
-      }
-      return ref _Handle.AsRef<float>(_NotifyForceYOffset!.Value);
+    public ref float NotifyForceY {
+        get {
+            _NotifyForceYOffset = _NotifyForceYOffset ?? Schema.GetOffset(0x1698284841CA8658);
+            return ref _Handle.AsRef<float>(_NotifyForceYOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceZOffset;
+    private static nint? _NotifyForceZOffset;
 
-  public ref float NotifyForceZ {
-    get {
-      if (_NotifyForceZOffset == null) {
-        _NotifyForceZOffset = Schema.GetOffset(0x1698284844CA8B11);
-      }
-      return ref _Handle.AsRef<float>(_NotifyForceZOffset!.Value);
+    public ref float NotifyForceZ {
+        get {
+            _NotifyForceZOffset = _NotifyForceZOffset ?? Schema.GetOffset(0x1698284844CA8B11);
+            return ref _Handle.AsRef<float>(_NotifyForceZOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceMinTimeXOffset;
+    private static nint? _NotifyForceMinTimeXOffset;
 
-  public ref float NotifyForceMinTimeX {
-    get {
-      if (_NotifyForceMinTimeXOffset == null) {
-        _NotifyForceMinTimeXOffset = Schema.GetOffset(0x169828482CB94C2E);
-      }
-      return ref _Handle.AsRef<float>(_NotifyForceMinTimeXOffset!.Value);
+    public ref float NotifyForceMinTimeX {
+        get {
+            _NotifyForceMinTimeXOffset = _NotifyForceMinTimeXOffset ?? Schema.GetOffset(0x169828482CB94C2E);
+            return ref _Handle.AsRef<float>(_NotifyForceMinTimeXOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceMinTimeYOffset;
+    private static nint? _NotifyForceMinTimeYOffset;
 
-  public ref float NotifyForceMinTimeY {
-    get {
-      if (_NotifyForceMinTimeYOffset == null) {
-        _NotifyForceMinTimeYOffset = Schema.GetOffset(0x169828482DB94DC1);
-      }
-      return ref _Handle.AsRef<float>(_NotifyForceMinTimeYOffset!.Value);
+    public ref float NotifyForceMinTimeY {
+        get {
+            _NotifyForceMinTimeYOffset = _NotifyForceMinTimeYOffset ?? Schema.GetOffset(0x169828482DB94DC1);
+            return ref _Handle.AsRef<float>(_NotifyForceMinTimeYOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceMinTimeZOffset;
+    private static nint? _NotifyForceMinTimeZOffset;
 
-  public ref float NotifyForceMinTimeZ {
-    get {
-      if (_NotifyForceMinTimeZOffset == null) {
-        _NotifyForceMinTimeZOffset = Schema.GetOffset(0x169828482AB94908);
-      }
-      return ref _Handle.AsRef<float>(_NotifyForceMinTimeZOffset!.Value);
+    public ref float NotifyForceMinTimeZ {
+        get {
+            _NotifyForceMinTimeZOffset = _NotifyForceMinTimeZOffset ?? Schema.GetOffset(0x169828482AB94908);
+            return ref _Handle.AsRef<float>(_NotifyForceMinTimeZOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceLastTimeXOffset;
+    private static nint? _NotifyForceLastTimeXOffset;
 
-  public GameTime_t NotifyForceLastTimeX {
-    get {
-      if (_NotifyForceLastTimeXOffset == null) {
-        _NotifyForceLastTimeXOffset = Schema.GetOffset(0x169828485B7371B4);
-      }
-      return new GameTime_tImpl(_Handle + _NotifyForceLastTimeXOffset!.Value);
+    public GameTime_t NotifyForceLastTimeX {
+        get {
+            _NotifyForceLastTimeXOffset = _NotifyForceLastTimeXOffset ?? Schema.GetOffset(0x169828485B7371B4);
+            return new GameTime_tImpl(_Handle + _NotifyForceLastTimeXOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceLastTimeYOffset;
+    private static nint? _NotifyForceLastTimeYOffset;
 
-  public GameTime_t NotifyForceLastTimeY {
-    get {
-      if (_NotifyForceLastTimeYOffset == null) {
-        _NotifyForceLastTimeYOffset = Schema.GetOffset(0x169828485C737347);
-      }
-      return new GameTime_tImpl(_Handle + _NotifyForceLastTimeYOffset!.Value);
+    public GameTime_t NotifyForceLastTimeY {
+        get {
+            _NotifyForceLastTimeYOffset = _NotifyForceLastTimeYOffset ?? Schema.GetOffset(0x169828485C737347);
+            return new GameTime_tImpl(_Handle + _NotifyForceLastTimeYOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceLastTimeZOffset;
+    private static nint? _NotifyForceLastTimeZOffset;
 
-  public GameTime_t NotifyForceLastTimeZ {
-    get {
-      if (_NotifyForceLastTimeZOffset == null) {
-        _NotifyForceLastTimeZOffset = Schema.GetOffset(0x169828485D7374DA);
-      }
-      return new GameTime_tImpl(_Handle + _NotifyForceLastTimeZOffset!.Value);
+    public GameTime_t NotifyForceLastTimeZ {
+        get {
+            _NotifyForceLastTimeZOffset = _NotifyForceLastTimeZOffset ?? Schema.GetOffset(0x169828485D7374DA);
+            return new GameTime_tImpl(_Handle + _NotifyForceLastTimeZOffset!.Value);
+        }
     }
-  }
-  private static nint? _AxisNotifiedXOffset;
+    private static nint? _AxisNotifiedXOffset;
 
-  public ref bool AxisNotifiedX {
-    get {
-      if (_AxisNotifiedXOffset == null) {
-        _AxisNotifiedXOffset = Schema.GetOffset(0x169828483F5088F4);
-      }
-      return ref _Handle.AsRef<bool>(_AxisNotifiedXOffset!.Value);
+    public ref bool AxisNotifiedX {
+        get {
+            _AxisNotifiedXOffset = _AxisNotifiedXOffset ?? Schema.GetOffset(0x169828483F5088F4);
+            return ref _Handle.AsRef<bool>(_AxisNotifiedXOffset!.Value);
+        }
     }
-  }
-  private static nint? _AxisNotifiedYOffset;
+    private static nint? _AxisNotifiedYOffset;
 
-  public ref bool AxisNotifiedY {
-    get {
-      if (_AxisNotifiedYOffset == null) {
-        _AxisNotifiedYOffset = Schema.GetOffset(0x1698284840508A87);
-      }
-      return ref _Handle.AsRef<bool>(_AxisNotifiedYOffset!.Value);
+    public ref bool AxisNotifiedY {
+        get {
+            _AxisNotifiedYOffset = _AxisNotifiedYOffset ?? Schema.GetOffset(0x1698284840508A87);
+            return ref _Handle.AsRef<bool>(_AxisNotifiedYOffset!.Value);
+        }
     }
-  }
-  private static nint? _AxisNotifiedZOffset;
+    private static nint? _AxisNotifiedZOffset;
 
-  public ref bool AxisNotifiedZ {
-    get {
-      if (_AxisNotifiedZOffset == null) {
-        _AxisNotifiedZOffset = Schema.GetOffset(0x1698284841508C1A);
-      }
-      return ref _Handle.AsRef<bool>(_AxisNotifiedZOffset!.Value);
+    public ref bool AxisNotifiedZ {
+        get {
+            _AxisNotifiedZOffset = _AxisNotifiedZOffset ?? Schema.GetOffset(0x1698284841508C1A);
+            return ref _Handle.AsRef<bool>(_AxisNotifiedZOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularMotionXOffset;
+    private static nint? _AngularMotionXOffset;
 
-  public ref JointMotion_t AngularMotionX {
-    get {
-      if (_AngularMotionXOffset == null) {
-        _AngularMotionXOffset = Schema.GetOffset(0x16982848F5DC3335);
-      }
-      return ref _Handle.AsRef<JointMotion_t>(_AngularMotionXOffset!.Value);
+    public ref JointMotion_t AngularMotionX {
+        get {
+            _AngularMotionXOffset = _AngularMotionXOffset ?? Schema.GetOffset(0x16982848F5DC3335);
+            return ref _Handle.AsRef<JointMotion_t>(_AngularMotionXOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularMotionYOffset;
+    private static nint? _AngularMotionYOffset;
 
-  public ref JointMotion_t AngularMotionY {
-    get {
-      if (_AngularMotionYOffset == null) {
-        _AngularMotionYOffset = Schema.GetOffset(0x16982848F4DC31A2);
-      }
-      return ref _Handle.AsRef<JointMotion_t>(_AngularMotionYOffset!.Value);
+    public ref JointMotion_t AngularMotionY {
+        get {
+            _AngularMotionYOffset = _AngularMotionYOffset ?? Schema.GetOffset(0x16982848F4DC31A2);
+            return ref _Handle.AsRef<JointMotion_t>(_AngularMotionYOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularMotionZOffset;
+    private static nint? _AngularMotionZOffset;
 
-  public ref JointMotion_t AngularMotionZ {
-    get {
-      if (_AngularMotionZOffset == null) {
-        _AngularMotionZOffset = Schema.GetOffset(0x16982848F3DC300F);
-      }
-      return ref _Handle.AsRef<JointMotion_t>(_AngularMotionZOffset!.Value);
+    public ref JointMotion_t AngularMotionZ {
+        get {
+            _AngularMotionZOffset = _AngularMotionZOffset ?? Schema.GetOffset(0x16982848F3DC300F);
+            return ref _Handle.AsRef<JointMotion_t>(_AngularMotionZOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularFrequencyXOffset;
+    private static nint? _AngularFrequencyXOffset;
 
-  public ref float AngularFrequencyX {
-    get {
-      if (_AngularFrequencyXOffset == null) {
-        _AngularFrequencyXOffset = Schema.GetOffset(0x1698284874F93B19);
-      }
-      return ref _Handle.AsRef<float>(_AngularFrequencyXOffset!.Value);
+    public ref float AngularFrequencyX {
+        get {
+            _AngularFrequencyXOffset = _AngularFrequencyXOffset ?? Schema.GetOffset(0x1698284874F93B19);
+            return ref _Handle.AsRef<float>(_AngularFrequencyXOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularFrequencyYOffset;
+    private static nint? _AngularFrequencyYOffset;
 
-  public ref float AngularFrequencyY {
-    get {
-      if (_AngularFrequencyYOffset == null) {
-        _AngularFrequencyYOffset = Schema.GetOffset(0x1698284873F93986);
-      }
-      return ref _Handle.AsRef<float>(_AngularFrequencyYOffset!.Value);
+    public ref float AngularFrequencyY {
+        get {
+            _AngularFrequencyYOffset = _AngularFrequencyYOffset ?? Schema.GetOffset(0x1698284873F93986);
+            return ref _Handle.AsRef<float>(_AngularFrequencyYOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularFrequencyZOffset;
+    private static nint? _AngularFrequencyZOffset;
 
-  public ref float AngularFrequencyZ {
-    get {
-      if (_AngularFrequencyZOffset == null) {
-        _AngularFrequencyZOffset = Schema.GetOffset(0x1698284872F937F3);
-      }
-      return ref _Handle.AsRef<float>(_AngularFrequencyZOffset!.Value);
+    public ref float AngularFrequencyZ {
+        get {
+            _AngularFrequencyZOffset = _AngularFrequencyZOffset ?? Schema.GetOffset(0x1698284872F937F3);
+            return ref _Handle.AsRef<float>(_AngularFrequencyZOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularDampingRatioXOffset;
+    private static nint? _AngularDampingRatioXOffset;
 
-  public ref float AngularDampingRatioX {
-    get {
-      if (_AngularDampingRatioXOffset == null) {
-        _AngularDampingRatioXOffset = Schema.GetOffset(0x169828486B71C0CE);
-      }
-      return ref _Handle.AsRef<float>(_AngularDampingRatioXOffset!.Value);
+    public ref float AngularDampingRatioX {
+        get {
+            _AngularDampingRatioXOffset = _AngularDampingRatioXOffset ?? Schema.GetOffset(0x169828486B71C0CE);
+            return ref _Handle.AsRef<float>(_AngularDampingRatioXOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularDampingRatioYOffset;
+    private static nint? _AngularDampingRatioYOffset;
 
-  public ref float AngularDampingRatioY {
-    get {
-      if (_AngularDampingRatioYOffset == null) {
-        _AngularDampingRatioYOffset = Schema.GetOffset(0x169828486C71C261);
-      }
-      return ref _Handle.AsRef<float>(_AngularDampingRatioYOffset!.Value);
+    public ref float AngularDampingRatioY {
+        get {
+            _AngularDampingRatioYOffset = _AngularDampingRatioYOffset ?? Schema.GetOffset(0x169828486C71C261);
+            return ref _Handle.AsRef<float>(_AngularDampingRatioYOffset!.Value);
+        }
     }
-  }
-  private static nint? _AngularDampingRatioZOffset;
+    private static nint? _AngularDampingRatioZOffset;
 
-  public ref float AngularDampingRatioZ {
-    get {
-      if (_AngularDampingRatioZOffset == null) {
-        _AngularDampingRatioZOffset = Schema.GetOffset(0x169828486971BDA8);
-      }
-      return ref _Handle.AsRef<float>(_AngularDampingRatioZOffset!.Value);
+    public ref float AngularDampingRatioZ {
+        get {
+            _AngularDampingRatioZOffset = _AngularDampingRatioZOffset ?? Schema.GetOffset(0x169828486971BDA8);
+            return ref _Handle.AsRef<float>(_AngularDampingRatioZOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxAngularImpulseXOffset;
+    private static nint? _MaxAngularImpulseXOffset;
 
-  public ref float MaxAngularImpulseX {
-    get {
-      if (_MaxAngularImpulseXOffset == null) {
-        _MaxAngularImpulseXOffset = Schema.GetOffset(0x169828489B259BC6);
-      }
-      return ref _Handle.AsRef<float>(_MaxAngularImpulseXOffset!.Value);
+    public ref float MaxAngularImpulseX {
+        get {
+            _MaxAngularImpulseXOffset = _MaxAngularImpulseXOffset ?? Schema.GetOffset(0x169828489B259BC6);
+            return ref _Handle.AsRef<float>(_MaxAngularImpulseXOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxAngularImpulseYOffset;
+    private static nint? _MaxAngularImpulseYOffset;
 
-  public ref float MaxAngularImpulseY {
-    get {
-      if (_MaxAngularImpulseYOffset == null) {
-        _MaxAngularImpulseYOffset = Schema.GetOffset(0x169828489C259D59);
-      }
-      return ref _Handle.AsRef<float>(_MaxAngularImpulseYOffset!.Value);
+    public ref float MaxAngularImpulseY {
+        get {
+            _MaxAngularImpulseYOffset = _MaxAngularImpulseYOffset ?? Schema.GetOffset(0x169828489C259D59);
+            return ref _Handle.AsRef<float>(_MaxAngularImpulseYOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxAngularImpulseZOffset;
+    private static nint? _MaxAngularImpulseZOffset;
 
-  public ref float MaxAngularImpulseZ {
-    get {
-      if (_MaxAngularImpulseZOffset == null) {
-        _MaxAngularImpulseZOffset = Schema.GetOffset(0x16982848992598A0);
-      }
-      return ref _Handle.AsRef<float>(_MaxAngularImpulseZOffset!.Value);
+    public ref float MaxAngularImpulseZ {
+        get {
+            _MaxAngularImpulseZOffset = _MaxAngularImpulseZOffset ?? Schema.GetOffset(0x16982848992598A0);
+            return ref _Handle.AsRef<float>(_MaxAngularImpulseZOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceReachedXOffset;
+    private static nint? _NotifyForceReachedXOffset;
 
-  public CEntityIOOutput NotifyForceReachedX {
-    get {
-      if (_NotifyForceReachedXOffset == null) {
-        _NotifyForceReachedXOffset = Schema.GetOffset(0x169828486707AE55);
-      }
-      return new CEntityIOOutputImpl(_Handle + _NotifyForceReachedXOffset!.Value);
+    public ref CEntityIOOutput NotifyForceReachedX {
+        get {
+            _NotifyForceReachedXOffset = _NotifyForceReachedXOffset ?? Schema.GetOffset(0x169828486707AE55);
+            return ref _Handle.AsRef<CEntityIOOutput>(_NotifyForceReachedXOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceReachedYOffset;
+    private static nint? _NotifyForceReachedYOffset;
 
-  public CEntityIOOutput NotifyForceReachedY {
-    get {
-      if (_NotifyForceReachedYOffset == null) {
-        _NotifyForceReachedYOffset = Schema.GetOffset(0x169828486607ACC2);
-      }
-      return new CEntityIOOutputImpl(_Handle + _NotifyForceReachedYOffset!.Value);
+    public ref CEntityIOOutput NotifyForceReachedY {
+        get {
+            _NotifyForceReachedYOffset = _NotifyForceReachedYOffset ?? Schema.GetOffset(0x169828486607ACC2);
+            return ref _Handle.AsRef<CEntityIOOutput>(_NotifyForceReachedYOffset!.Value);
+        }
     }
-  }
-  private static nint? _NotifyForceReachedZOffset;
+    private static nint? _NotifyForceReachedZOffset;
 
-  public CEntityIOOutput NotifyForceReachedZ {
-    get {
-      if (_NotifyForceReachedZOffset == null) {
-        _NotifyForceReachedZOffset = Schema.GetOffset(0x169828486507AB2F);
-      }
-      return new CEntityIOOutputImpl(_Handle + _NotifyForceReachedZOffset!.Value);
+    public ref CEntityIOOutput NotifyForceReachedZ {
+        get {
+            _NotifyForceReachedZOffset = _NotifyForceReachedZOffset ?? Schema.GetOffset(0x169828486507AB2F);
+            return ref _Handle.AsRef<CEntityIOOutput>(_NotifyForceReachedZOffset!.Value);
+        }
     }
-  }
 
 
 }

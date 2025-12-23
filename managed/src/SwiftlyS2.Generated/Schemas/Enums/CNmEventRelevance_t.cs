@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CNmEventRelevance_t : uint {
-
+public enum CNmEventRelevance_t : uint
+{
  ClientOnly = 0,
 
  ServerOnly = 1,

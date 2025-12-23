@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleProperty : ISchemaClass<CParticleProperty> {
-
-  static CParticleProperty ISchemaClass<CParticleProperty>.From(nint handle) => new CParticlePropertyImpl(handle);
-  static int ISchemaClass<CParticleProperty>.Size => 40;
-  static string? ISchemaClass<CParticleProperty>.ClassName => null;
+public partial interface CParticleProperty : ISchemaClass<CParticleProperty>
+{
+    static CParticleProperty ISchemaClass<CParticleProperty>.From(nint handle) => new CParticlePropertyImpl(handle);
+    static int ISchemaClass<CParticleProperty>.Size => 40;
+    static string? ISchemaClass<CParticleProperty>.ClassName => null;
 
 
 

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBodyGroupAnimTag : CAnimTagBase, ISchemaClass<CBodyGroupAnimTag> {
+public partial interface CBodyGroupAnimTag : CAnimTagBase, ISchemaClass<CBodyGroupAnimTag>
+{
+    static CBodyGroupAnimTag ISchemaClass<CBodyGroupAnimTag>.From(nint handle) => new CBodyGroupAnimTagImpl(handle);
+    static int ISchemaClass<CBodyGroupAnimTag>.Size => 120;
+    static string? ISchemaClass<CBodyGroupAnimTag>.ClassName => null;
 
-  static CBodyGroupAnimTag ISchemaClass<CBodyGroupAnimTag>.From(nint handle) => new CBodyGroupAnimTagImpl(handle);
-  static int ISchemaClass<CBodyGroupAnimTag>.Size => 120;
-  static string? ISchemaClass<CBodyGroupAnimTag>.ClassName => null;
 
-  
-  public ref int Priority { get; }
-  
-  public ref CUtlVector<CBodyGroupSetting> BodyGroupSettings { get; }
+    public ref int Priority { get; }
+
+    public ref CUtlVector<CBodyGroupSetting> BodyGroupSettings { get; }
 
 
 }

@@ -8,50 +8,50 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_StatusEffectCitadel : CParticleFunctionInitializer, ISchemaClass<C_INIT_StatusEffectCitadel> {
+public partial interface C_INIT_StatusEffectCitadel : CParticleFunctionInitializer, ISchemaClass<C_INIT_StatusEffectCitadel>
+{
+    static C_INIT_StatusEffectCitadel ISchemaClass<C_INIT_StatusEffectCitadel>.From(nint handle) => new C_INIT_StatusEffectCitadelImpl(handle);
+    static int ISchemaClass<C_INIT_StatusEffectCitadel>.Size => 552;
+    static string? ISchemaClass<C_INIT_StatusEffectCitadel>.ClassName => null;
 
-  static C_INIT_StatusEffectCitadel ISchemaClass<C_INIT_StatusEffectCitadel>.From(nint handle) => new C_INIT_StatusEffectCitadelImpl(handle);
-  static int ISchemaClass<C_INIT_StatusEffectCitadel>.Size => 552;
-  static string? ISchemaClass<C_INIT_StatusEffectCitadel>.ClassName => null;
 
-  
-  public ref float SFXColorWarpAmount { get; }
-  
-  public ref float SFXNormalAmount { get; }
-  
-  public ref float SFXMetalnessAmount { get; }
-  
-  public ref float SFXRoughnessAmount { get; }
-  
-  public ref float SFXSelfIllumAmount { get; }
-  
-  public ref float SFXSScale { get; }
-  
-  public ref float SFXSScrollX { get; }
-  
-  public ref float SFXSScrollY { get; }
-  
-  public ref float SFXSScrollZ { get; }
-  
-  public ref float SFXSOffsetX { get; }
-  
-  public ref float SFXSOffsetY { get; }
-  
-  public ref float SFXSOffsetZ { get; }
-  
-  public ref DetailCombo_t DetailCombo { get; }
-  
-  public ref float SFXSDetailAmount { get; }
-  
-  public ref float SFXSDetailScale { get; }
-  
-  public ref float SFXSDetailScrollX { get; }
-  
-  public ref float SFXSDetailScrollY { get; }
-  
-  public ref float SFXSDetailScrollZ { get; }
-  
-  public ref float SFXSUseModelUVs { get; }
+    public ref float SFXColorWarpAmount { get; }
+
+    public ref float SFXNormalAmount { get; }
+
+    public ref float SFXMetalnessAmount { get; }
+
+    public ref float SFXRoughnessAmount { get; }
+
+    public ref float SFXSelfIllumAmount { get; }
+
+    public ref float SFXSScale { get; }
+
+    public ref float SFXSScrollX { get; }
+
+    public ref float SFXSScrollY { get; }
+
+    public ref float SFXSScrollZ { get; }
+
+    public ref float SFXSOffsetX { get; }
+
+    public ref float SFXSOffsetY { get; }
+
+    public ref float SFXSOffsetZ { get; }
+
+    public ref DetailCombo_t DetailCombo { get; }
+
+    public ref float SFXSDetailAmount { get; }
+
+    public ref float SFXSDetailScale { get; }
+
+    public ref float SFXSDetailScrollX { get; }
+
+    public ref float SFXSDetailScrollY { get; }
+
+    public ref float SFXSDetailScrollZ { get; }
+
+    public ref float SFXSUseModelUVs { get; }
 
 
 }

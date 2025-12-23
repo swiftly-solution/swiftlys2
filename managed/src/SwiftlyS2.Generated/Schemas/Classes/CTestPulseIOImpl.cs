@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTestPulseIOImpl : CLogicalEntityImpl, CTestPulseIO {
+internal partial class CTestPulseIOImpl : CLogicalEntityImpl, CTestPulseIO
+{
+    public CTestPulseIOImpl(nint handle) : base(handle) { }
 
-  public CTestPulseIOImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnVariantVoidOffset;
 
-  private static nint? _OnVariantVoidOffset;
-
-  public CEntityIOOutput OnVariantVoid {
-    get {
-      if (_OnVariantVoidOffset == null) {
-        _OnVariantVoidOffset = Schema.GetOffset(0x3CAD66134B0C5D73);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnVariantVoidOffset!.Value);
+    public ref CEntityIOOutput OnVariantVoid {
+        get {
+            _OnVariantVoidOffset = _OnVariantVoidOffset ?? Schema.GetOffset(0x3CAD66134B0C5D73);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVariantVoidOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnVariantBoolOffset;
+    private static nint? _OnVariantBoolOffset;
 
-  public CEntityIOOutput OnVariantBool {
-    get {
-      if (_OnVariantBoolOffset == null) {
-        _OnVariantBoolOffset = Schema.GetOffset(0x3CAD66138350E481);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnVariantBoolOffset!.Value);
+    public ref CEntityIOOutput OnVariantBool {
+        get {
+            _OnVariantBoolOffset = _OnVariantBoolOffset ?? Schema.GetOffset(0x3CAD66138350E481);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVariantBoolOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnVariantIntOffset;
+    private static nint? _OnVariantIntOffset;
 
-  public CEntityIOOutput OnVariantInt {
-    get {
-      if (_OnVariantIntOffset == null) {
-        _OnVariantIntOffset = Schema.GetOffset(0x3CAD66131C6BA682);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnVariantIntOffset!.Value);
+    public ref CEntityIOOutput OnVariantInt {
+        get {
+            _OnVariantIntOffset = _OnVariantIntOffset ?? Schema.GetOffset(0x3CAD66131C6BA682);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVariantIntOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnVariantFloatOffset;
+    private static nint? _OnVariantFloatOffset;
 
-  public CEntityIOOutput OnVariantFloat {
-    get {
-      if (_OnVariantFloatOffset == null) {
-        _OnVariantFloatOffset = Schema.GetOffset(0x3CAD661378E46379);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnVariantFloatOffset!.Value);
+    public ref CEntityIOOutput OnVariantFloat {
+        get {
+            _OnVariantFloatOffset = _OnVariantFloatOffset ?? Schema.GetOffset(0x3CAD661378E46379);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVariantFloatOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnVariantStringOffset;
+    private static nint? _OnVariantStringOffset;
 
-  public CEntityIOOutput OnVariantString {
-    get {
-      if (_OnVariantStringOffset == null) {
-        _OnVariantStringOffset = Schema.GetOffset(0x3CAD6613DE2E3E5C);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnVariantStringOffset!.Value);
+    public ref CEntityIOOutput OnVariantString {
+        get {
+            _OnVariantStringOffset = _OnVariantStringOffset ?? Schema.GetOffset(0x3CAD6613DE2E3E5C);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVariantStringOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnVariantColorOffset;
+    private static nint? _OnVariantColorOffset;
 
-  public CEntityIOOutput OnVariantColor {
-    get {
-      if (_OnVariantColorOffset == null) {
-        _OnVariantColorOffset = Schema.GetOffset(0x3CAD66139A1362C4);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnVariantColorOffset!.Value);
+    public ref CEntityIOOutput OnVariantColor {
+        get {
+            _OnVariantColorOffset = _OnVariantColorOffset ?? Schema.GetOffset(0x3CAD66139A1362C4);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVariantColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnVariantVectorOffset;
+    private static nint? _OnVariantVectorOffset;
 
-  public CEntityIOOutput OnVariantVector {
-    get {
-      if (_OnVariantVectorOffset == null) {
-        _OnVariantVectorOffset = Schema.GetOffset(0x3CAD6613A6D8BE1E);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnVariantVectorOffset!.Value);
+    public ref CEntityIOOutput OnVariantVector {
+        get {
+            _OnVariantVectorOffset = _OnVariantVectorOffset ?? Schema.GetOffset(0x3CAD6613A6D8BE1E);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnVariantVectorOffset!.Value);
+        }
     }
-  }
-  private static nint? _AllowEmptyInputsOffset;
+    private static nint? _AllowEmptyInputsOffset;
 
-  public ref bool AllowEmptyInputs {
-    get {
-      if (_AllowEmptyInputsOffset == null) {
-        _AllowEmptyInputsOffset = Schema.GetOffset(0x3CAD661342A93BD2);
-      }
-      return ref _Handle.AsRef<bool>(_AllowEmptyInputsOffset!.Value);
+    public ref bool AllowEmptyInputs {
+        get {
+            _AllowEmptyInputsOffset = _AllowEmptyInputsOffset ?? Schema.GetOffset(0x3CAD661342A93BD2);
+            return ref _Handle.AsRef<bool>(_AllowEmptyInputsOffset!.Value);
+        }
     }
-  }
 
 
 }

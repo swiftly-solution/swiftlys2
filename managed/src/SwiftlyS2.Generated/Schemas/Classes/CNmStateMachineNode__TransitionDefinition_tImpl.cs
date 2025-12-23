@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmStateMachineNode__TransitionDefinition_tImpl : SchemaClass, CNmStateMachineNode__TransitionDefinition_t {
+internal partial class CNmStateMachineNode__TransitionDefinition_tImpl : SchemaClass, CNmStateMachineNode__TransitionDefinition_t
+{
+    public CNmStateMachineNode__TransitionDefinition_tImpl(nint handle) : base(handle) { }
 
-  public CNmStateMachineNode__TransitionDefinition_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TargetStateIdxOffset;
 
-  private static nint? _TargetStateIdxOffset;
-
-  public ref short TargetStateIdx {
-    get {
-      if (_TargetStateIdxOffset == null) {
-        _TargetStateIdxOffset = Schema.GetOffset(0x9404D2C4E5C0218C);
-      }
-      return ref _Handle.AsRef<short>(_TargetStateIdxOffset!.Value);
+    public ref short TargetStateIdx {
+        get {
+            _TargetStateIdxOffset = _TargetStateIdxOffset ?? Schema.GetOffset(0x9404D2C4E5C0218C);
+            return ref _Handle.AsRef<short>(_TargetStateIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConditionNodeIdxOffset;
+    private static nint? _ConditionNodeIdxOffset;
 
-  public ref short ConditionNodeIdx {
-    get {
-      if (_ConditionNodeIdxOffset == null) {
-        _ConditionNodeIdxOffset = Schema.GetOffset(0x9404D2C4773FE641);
-      }
-      return ref _Handle.AsRef<short>(_ConditionNodeIdxOffset!.Value);
+    public ref short ConditionNodeIdx {
+        get {
+            _ConditionNodeIdxOffset = _ConditionNodeIdxOffset ?? Schema.GetOffset(0x9404D2C4773FE641);
+            return ref _Handle.AsRef<short>(_ConditionNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransitionNodeIdxOffset;
+    private static nint? _TransitionNodeIdxOffset;
 
-  public ref short TransitionNodeIdx {
-    get {
-      if (_TransitionNodeIdxOffset == null) {
-        _TransitionNodeIdxOffset = Schema.GetOffset(0x9404D2C40D5CDE45);
-      }
-      return ref _Handle.AsRef<short>(_TransitionNodeIdxOffset!.Value);
+    public ref short TransitionNodeIdx {
+        get {
+            _TransitionNodeIdxOffset = _TransitionNodeIdxOffset ?? Schema.GetOffset(0x9404D2C40D5CDE45);
+            return ref _Handle.AsRef<short>(_TransitionNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _CanBeForcedOffset;
+    private static nint? _CanBeForcedOffset;
 
-  public ref bool CanBeForced {
-    get {
-      if (_CanBeForcedOffset == null) {
-        _CanBeForcedOffset = Schema.GetOffset(0x9404D2C4B6EB0555);
-      }
-      return ref _Handle.AsRef<bool>(_CanBeForcedOffset!.Value);
+    public ref bool CanBeForced {
+        get {
+            _CanBeForcedOffset = _CanBeForcedOffset ?? Schema.GetOffset(0x9404D2C4B6EB0555);
+            return ref _Handle.AsRef<bool>(_CanBeForcedOffset!.Value);
+        }
     }
-  }
 
 
 }

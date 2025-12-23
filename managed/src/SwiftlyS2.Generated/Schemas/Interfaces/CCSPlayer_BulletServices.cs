@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayer_BulletServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_BulletServices> {
+public partial interface CCSPlayer_BulletServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_BulletServices>
+{
+    static CCSPlayer_BulletServices ISchemaClass<CCSPlayer_BulletServices>.From(nint handle) => new CCSPlayer_BulletServicesImpl(handle);
+    static int ISchemaClass<CCSPlayer_BulletServices>.Size => 104;
+    static string? ISchemaClass<CCSPlayer_BulletServices>.ClassName => null;
 
-  static CCSPlayer_BulletServices ISchemaClass<CCSPlayer_BulletServices>.From(nint handle) => new CCSPlayer_BulletServicesImpl(handle);
-  static int ISchemaClass<CCSPlayer_BulletServices>.Size => 104;
-  static string? ISchemaClass<CCSPlayer_BulletServices>.ClassName => null;
 
-  
-  public ref int TotalHitsOnServer { get; }
+    public ref int TotalHitsOnServer { get; }
 
-  public void TotalHitsOnServerUpdated();
+    public void TotalHitsOnServerUpdated();
 }

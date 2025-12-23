@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoDynamicShadowHint : CPointEntity, ISchemaClass<CInfoDynamicShadowHint> {
+public partial interface CInfoDynamicShadowHint : CPointEntity, ISchemaClass<CInfoDynamicShadowHint>
+{
+    static CInfoDynamicShadowHint ISchemaClass<CInfoDynamicShadowHint>.From(nint handle) => new CInfoDynamicShadowHintImpl(handle);
+    static int ISchemaClass<CInfoDynamicShadowHint>.Size => 1288;
+    static string? ISchemaClass<CInfoDynamicShadowHint>.ClassName => "info_dynamic_shadow_hint";
 
-  static CInfoDynamicShadowHint ISchemaClass<CInfoDynamicShadowHint>.From(nint handle) => new CInfoDynamicShadowHintImpl(handle);
-  static int ISchemaClass<CInfoDynamicShadowHint>.Size => 1288;
-  static string? ISchemaClass<CInfoDynamicShadowHint>.ClassName => "info_dynamic_shadow_hint";
 
-  
-  public ref bool Disabled { get; }
-  
-  public ref float Range { get; }
-  
-  public ref int Importance { get; }
-  
-  public ref int LightChoice { get; }
-  
-  public ref CHandle<CBaseEntity> Light { get; }
+    public ref bool Disabled { get; }
+
+    public ref float Range { get; }
+
+    public ref int Importance { get; }
+
+    public ref int LightChoice { get; }
+
+    public ref CHandle<CBaseEntity> Light { get; }
 
 
 }

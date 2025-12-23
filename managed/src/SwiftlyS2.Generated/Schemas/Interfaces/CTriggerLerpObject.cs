@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerLerpObject : CBaseTrigger, ISchemaClass<CTriggerLerpObject> {
+public partial interface CTriggerLerpObject : CBaseTrigger, ISchemaClass<CTriggerLerpObject>
+{
+    static CTriggerLerpObject ISchemaClass<CTriggerLerpObject>.From(nint handle) => new CTriggerLerpObjectImpl(handle);
+    static int ISchemaClass<CTriggerLerpObject>.Size => 2680;
+    static string? ISchemaClass<CTriggerLerpObject>.ClassName => "trigger_lerp_object";
 
-  static CTriggerLerpObject ISchemaClass<CTriggerLerpObject>.From(nint handle) => new CTriggerLerpObjectImpl(handle);
-  static int ISchemaClass<CTriggerLerpObject>.Size => 2680;
-  static string? ISchemaClass<CTriggerLerpObject>.ClassName => "trigger_lerp_object";
 
-  
-  public string LerpTarget { get; set; }
-  
-  public ref CHandle<CBaseEntity> LerpTarget1 { get; }
-  
-  public string LerpTargetAttachment { get; set; }
-  
-  public AttachmentHandle_t LerpTargetAttachment2 { get; }
-  
-  public ref float LerpDuration { get; }
-  
-  public ref bool LerpRestoreMoveType { get; }
-  
-  public ref bool SingleLerpObject { get; }
-  
-  public ref CUtlVector<lerpdata_t> LerpingObjects { get; }
-  
-  public string LerpEffect { get; set; }
-  
-  public string LerpSound { get; set; }
-  
-  public ref bool AttachTouchingObject { get; }
-  
-  public ref CHandle<CBaseEntity> EntityToWaitForDisconnect { get; }
-  
-  public CEntityIOOutput OnLerpStarted { get; }
-  
-  public CEntityIOOutput OnLerpFinished { get; }
-  
-  public CEntityIOOutput OnDetached { get; }
+    public string LerpTarget { get; set; }
+
+    public ref CHandle<CBaseEntity> LerpTarget1 { get; }
+
+    public string LerpTargetAttachment { get; set; }
+
+    public AttachmentHandle_t LerpTargetAttachment2 { get; }
+
+    public ref float LerpDuration { get; }
+
+    public ref bool LerpRestoreMoveType { get; }
+
+    public ref bool SingleLerpObject { get; }
+
+    public ref CUtlVector<lerpdata_t> LerpingObjects { get; }
+
+    public string LerpEffect { get; set; }
+
+    public string LerpSound { get; set; }
+
+    public ref bool AttachTouchingObject { get; }
+
+    public ref CHandle<CBaseEntity> EntityToWaitForDisconnect { get; }
+
+    public ref CEntityIOOutput OnLerpStarted { get; }
+
+    public ref CEntityIOOutput OnLerpFinished { get; }
+
+    public ref CEntityIOOutput OnDetached { get; }
 
 
 }

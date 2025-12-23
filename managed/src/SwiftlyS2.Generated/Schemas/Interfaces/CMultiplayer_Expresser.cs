@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMultiplayer_Expresser : CAI_ExpresserWithFollowup, ISchemaClass<CMultiplayer_Expresser> {
+public partial interface CMultiplayer_Expresser : CAI_ExpresserWithFollowup, ISchemaClass<CMultiplayer_Expresser>
+{
+    static CMultiplayer_Expresser ISchemaClass<CMultiplayer_Expresser>.From(nint handle) => new CMultiplayer_ExpresserImpl(handle);
+    static int ISchemaClass<CMultiplayer_Expresser>.Size => 168;
+    static string? ISchemaClass<CMultiplayer_Expresser>.ClassName => null;
 
-  static CMultiplayer_Expresser ISchemaClass<CMultiplayer_Expresser>.From(nint handle) => new CMultiplayer_ExpresserImpl(handle);
-  static int ISchemaClass<CMultiplayer_Expresser>.Size => 168;
-  static string? ISchemaClass<CMultiplayer_Expresser>.ClassName => null;
 
-  
-  public ref bool AllowMultipleScenes { get; }
+    public ref bool AllowMultipleScenes { get; }
 
 
 }

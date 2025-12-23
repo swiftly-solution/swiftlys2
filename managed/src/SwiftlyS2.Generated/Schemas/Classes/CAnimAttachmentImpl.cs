@@ -6,39 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimAttachmentImpl : SchemaClass, CAnimAttachment {
+internal partial class CAnimAttachmentImpl : SchemaClass, CAnimAttachment
+{
+    public CAnimAttachmentImpl(nint handle) : base(handle) { }
 
-  public CAnimAttachmentImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<Quaternion> InfluenceRotations {
-    get => new SchemaFixedArray<Quaternion>(_Handle, 0xCF918186B393B857, 3, 16, 16);
-  }
-  public ISchemaFixedArray<Vector> InfluenceOffsets {
-    get => new SchemaFixedArray<Vector>(_Handle, 0xCF918186E75BDA68, 3, 16, 16);
-  }
-  public ISchemaFixedArray<int> InfluenceIndices {
-    get => new SchemaFixedArray<int>(_Handle, 0xCF9181862FA09BA5, 3, 4, 4);
-  }
-  public ISchemaFixedArray<float> InfluenceWeights {
-    get => new SchemaFixedArray<float>(_Handle, 0xCF91818649916951, 3, 4, 4);
-  }
-  private static nint? _NumInfluencesOffset;
-
-  public ref byte NumInfluences {
-    get {
-      if (_NumInfluencesOffset == null) {
-        _NumInfluencesOffset = Schema.GetOffset(0xCF9181861B36F553);
-      }
-      return ref _Handle.AsRef<byte>(_NumInfluencesOffset!.Value);
+    public ISchemaFixedArray<Quaternion> InfluenceRotations {
+        get => new SchemaFixedArray<Quaternion>(_Handle, 0xCF918186B393B857, 3, 16, 16);
     }
-  }
+    public ISchemaFixedArray<Vector> InfluenceOffsets {
+        get => new SchemaFixedArray<Vector>(_Handle, 0xCF918186E75BDA68, 3, 16, 16);
+    }
+    public ISchemaFixedArray<int> InfluenceIndices {
+        get => new SchemaFixedArray<int>(_Handle, 0xCF9181862FA09BA5, 3, 4, 4);
+    }
+    public ISchemaFixedArray<float> InfluenceWeights {
+        get => new SchemaFixedArray<float>(_Handle, 0xCF91818649916951, 3, 4, 4);
+    }
+    private static nint? _NumInfluencesOffset;
+
+    public ref byte NumInfluences {
+        get {
+            _NumInfluencesOffset = _NumInfluencesOffset ?? Schema.GetOffset(0xCF9181861B36F553);
+            return ref _Handle.AsRef<byte>(_NumInfluencesOffset!.Value);
+        }
+    }
 
 
 }

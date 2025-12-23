@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmIKJoint : ISchemaClass<CNmIKJoint> {
+public partial interface CNmIKJoint : ISchemaClass<CNmIKJoint>
+{
+    static CNmIKJoint ISchemaClass<CNmIKJoint>.From(nint handle) => new CNmIKJointImpl(handle);
+    static int ISchemaClass<CNmIKJoint>.Size => 64;
+    static string? ISchemaClass<CNmIKJoint>.ClassName => null;
 
-  static CNmIKJoint ISchemaClass<CNmIKJoint>.From(nint handle) => new CNmIKJointImpl(handle);
-  static int ISchemaClass<CNmIKJoint>.Size => 64;
-  static string? ISchemaClass<CNmIKJoint>.ClassName => null;
 
-  
-  public ref int ParentIndex { get; }
-  
-  public ref int BodyIndex { get; }
-  
-  public ref CTransform XLocalFrame { get; }
-  
-  public ref float SwingLimit { get; }
-  
-  public ref float MinTwistLimit { get; }
-  
-  public ref float MaxTwistLimit { get; }
-  
-  public ref float Weight { get; }
+    public ref int ParentIndex { get; }
+
+    public ref int BodyIndex { get; }
+
+    public ref CTransform XLocalFrame { get; }
+
+    public ref float SwingLimit { get; }
+
+    public ref float MinTwistLimit { get; }
+
+    public ref float MaxTwistLimit { get; }
+
+    public ref float Weight { get; }
 
 
 }

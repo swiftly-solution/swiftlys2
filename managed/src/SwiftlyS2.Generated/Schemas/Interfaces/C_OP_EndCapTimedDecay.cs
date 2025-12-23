@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_EndCapTimedDecay : CParticleFunctionOperator, ISchemaClass<C_OP_EndCapTimedDecay> {
+public partial interface C_OP_EndCapTimedDecay : CParticleFunctionOperator, ISchemaClass<C_OP_EndCapTimedDecay>
+{
+    static C_OP_EndCapTimedDecay ISchemaClass<C_OP_EndCapTimedDecay>.From(nint handle) => new C_OP_EndCapTimedDecayImpl(handle);
+    static int ISchemaClass<C_OP_EndCapTimedDecay>.Size => 472;
+    static string? ISchemaClass<C_OP_EndCapTimedDecay>.ClassName => null;
 
-  static C_OP_EndCapTimedDecay ISchemaClass<C_OP_EndCapTimedDecay>.From(nint handle) => new C_OP_EndCapTimedDecayImpl(handle);
-  static int ISchemaClass<C_OP_EndCapTimedDecay>.Size => 472;
-  static string? ISchemaClass<C_OP_EndCapTimedDecay>.ClassName => null;
 
-  
-  public ref float DecayTime { get; }
+    public ref float DecayTime { get; }
 
 
 }

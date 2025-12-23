@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RelativeLocationType_t : byte {
-
+public enum RelativeLocationType_t : byte
+{
  WORLD_SPACE_POSITION = 0,
 
  RELATIVE_TO_ENTITY_IN_LOCAL_SPACE = 1,

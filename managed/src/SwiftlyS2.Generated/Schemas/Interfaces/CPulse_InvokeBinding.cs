@@ -8,23 +8,23 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulse_InvokeBinding : ISchemaClass<CPulse_InvokeBinding> {
+public partial interface CPulse_InvokeBinding : ISchemaClass<CPulse_InvokeBinding>
+{
+    static CPulse_InvokeBinding ISchemaClass<CPulse_InvokeBinding>.From(nint handle) => new CPulse_InvokeBindingImpl(handle);
+    static int ISchemaClass<CPulse_InvokeBinding>.Size => 176;
+    static string? ISchemaClass<CPulse_InvokeBinding>.ClassName => null;
 
-  static CPulse_InvokeBinding ISchemaClass<CPulse_InvokeBinding>.From(nint handle) => new CPulse_InvokeBindingImpl(handle);
-  static int ISchemaClass<CPulse_InvokeBinding>.Size => 176;
-  static string? ISchemaClass<CPulse_InvokeBinding>.ClassName => null;
 
-  
-  public PulseRegisterMap_t RegisterMap { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField FuncName { get; }
-  
-  public PulseRuntimeCellIndex_t CellIndex { get; }
-  
-  public PulseRuntimeChunkIndex_t SrcChunk { get; }
-  
-  public ref int SrcInstruction { get; }
+    public PulseRegisterMap_t RegisterMap { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField FuncName { get; }
+
+    public PulseRuntimeCellIndex_t CellIndex { get; }
+
+    public PulseRuntimeChunkIndex_t SrcChunk { get; }
+
+    public ref int SrcInstruction { get; }
 
 
 }

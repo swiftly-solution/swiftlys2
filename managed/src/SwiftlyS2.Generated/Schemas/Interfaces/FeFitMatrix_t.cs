@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeFitMatrix_t : ISchemaClass<FeFitMatrix_t> {
+public partial interface FeFitMatrix_t : ISchemaClass<FeFitMatrix_t>
+{
+    static FeFitMatrix_t ISchemaClass<FeFitMatrix_t>.From(nint handle) => new FeFitMatrix_tImpl(handle);
+    static int ISchemaClass<FeFitMatrix_t>.Size => 64;
+    static string? ISchemaClass<FeFitMatrix_t>.ClassName => null;
 
-  static FeFitMatrix_t ISchemaClass<FeFitMatrix_t>.From(nint handle) => new FeFitMatrix_tImpl(handle);
-  static int ISchemaClass<FeFitMatrix_t>.Size => 64;
-  static string? ISchemaClass<FeFitMatrix_t>.ClassName => null;
 
-  
-  public ref CTransform Bone { get; }
-  
-  public ref Vector Center { get; }
-  
-  public ref ushort End { get; }
-  
-  public ref ushort Node { get; }
-  
-  public ref ushort BeginDynamic { get; }
+    public ref CTransform Bone { get; }
+
+    public ref Vector Center { get; }
+
+    public ref ushort End { get; }
+
+    public ref ushort Node { get; }
+
+    public ref ushort BeginDynamic { get; }
 
 
 }

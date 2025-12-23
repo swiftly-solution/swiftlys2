@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CScriptUniformRandomStreamImpl : SchemaClass, CScriptUniformRandomStream {
+internal partial class CScriptUniformRandomStreamImpl : SchemaClass, CScriptUniformRandomStream
+{
+    public CScriptUniformRandomStreamImpl(nint handle) : base(handle) { }
 
-  public CScriptUniformRandomStreamImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScriptScopeOffset;
 
-  private static nint? _ScriptScopeOffset;
-
-  public SchemaUntypedField ScriptScope {
-    get {
-      if (_ScriptScopeOffset == null) {
-        _ScriptScopeOffset = Schema.GetOffset(0xF6699588B14F90D4);
-      }
-      return new SchemaUntypedField(_Handle + _ScriptScopeOffset!.Value);
+    public ref HSCRIPTHandler ScriptScope {
+        get {
+            _ScriptScopeOffset = _ScriptScopeOffset ?? Schema.GetOffset(0xF6699588B14F90D4);
+            return ref _Handle.AsRef<HSCRIPTHandler>(_ScriptScopeOffset!.Value);
+        }
     }
-  }
-  private static nint? _InitialSeedOffset;
+    private static nint? _InitialSeedOffset;
 
-  public ref int InitialSeed {
-    get {
-      if (_InitialSeedOffset == null) {
-        _InitialSeedOffset = Schema.GetOffset(0xF6699588944D5EB2);
-      }
-      return ref _Handle.AsRef<int>(_InitialSeedOffset!.Value);
+    public ref int InitialSeed {
+        get {
+            _InitialSeedOffset = _InitialSeedOffset ?? Schema.GetOffset(0xF6699588944D5EB2);
+            return ref _Handle.AsRef<int>(_InitialSeedOffset!.Value);
+        }
     }
-  }
 
 
 }

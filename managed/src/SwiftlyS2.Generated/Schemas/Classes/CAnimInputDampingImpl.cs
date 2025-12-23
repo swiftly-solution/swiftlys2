@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimInputDampingImpl : SchemaClass, CAnimInputDamping {
+internal partial class CAnimInputDampingImpl : SchemaClass, CAnimInputDamping
+{
+    public CAnimInputDampingImpl(nint handle) : base(handle) { }
 
-  public CAnimInputDampingImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SpeedFunctionOffset;
 
-  private static nint? _SpeedFunctionOffset;
-
-  public ref DampingSpeedFunction SpeedFunction {
-    get {
-      if (_SpeedFunctionOffset == null) {
-        _SpeedFunctionOffset = Schema.GetOffset(0xFAECFC318682F508);
-      }
-      return ref _Handle.AsRef<DampingSpeedFunction>(_SpeedFunctionOffset!.Value);
+    public ref DampingSpeedFunction SpeedFunction {
+        get {
+            _SpeedFunctionOffset = _SpeedFunctionOffset ?? Schema.GetOffset(0xFAECFC318682F508);
+            return ref _Handle.AsRef<DampingSpeedFunction>(_SpeedFunctionOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpeedScaleOffset;
+    private static nint? _SpeedScaleOffset;
 
-  public ref float SpeedScale {
-    get {
-      if (_SpeedScaleOffset == null) {
-        _SpeedScaleOffset = Schema.GetOffset(0xFAECFC31E70BB6FE);
-      }
-      return ref _Handle.AsRef<float>(_SpeedScaleOffset!.Value);
+    public ref float SpeedScale {
+        get {
+            _SpeedScaleOffset = _SpeedScaleOffset ?? Schema.GetOffset(0xFAECFC31E70BB6FE);
+            return ref _Handle.AsRef<float>(_SpeedScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FallingSpeedScaleOffset;
+    private static nint? _FallingSpeedScaleOffset;
 
-  public ref float FallingSpeedScale {
-    get {
-      if (_FallingSpeedScaleOffset == null) {
-        _FallingSpeedScaleOffset = Schema.GetOffset(0xFAECFC31128A6857);
-      }
-      return ref _Handle.AsRef<float>(_FallingSpeedScaleOffset!.Value);
+    public ref float FallingSpeedScale {
+        get {
+            _FallingSpeedScaleOffset = _FallingSpeedScaleOffset ?? Schema.GetOffset(0xFAECFC31128A6857);
+            return ref _Handle.AsRef<float>(_FallingSpeedScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

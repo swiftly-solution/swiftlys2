@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapDensityToVectorImpl : CParticleFunctionOperatorImpl, C_OP_RemapDensityToVector {
+internal partial class C_OP_RemapDensityToVectorImpl : CParticleFunctionOperatorImpl, C_OP_RemapDensityToVector
+{
+    public C_OP_RemapDensityToVectorImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapDensityToVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusScaleOffset;
 
-  private static nint? _RadiusScaleOffset;
-
-  public ref float RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0x81794CB4A7A20159);
-      }
-      return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+    public ref float RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x81794CB4A7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x81794CB4E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x81794CB4E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _DensityMinOffset;
+    private static nint? _DensityMinOffset;
 
-  public ref float DensityMin {
-    get {
-      if (_DensityMinOffset == null) {
-        _DensityMinOffset = Schema.GetOffset(0x81794CB4B4D8467B);
-      }
-      return ref _Handle.AsRef<float>(_DensityMinOffset!.Value);
+    public ref float DensityMin {
+        get {
+            _DensityMinOffset = _DensityMinOffset ?? Schema.GetOffset(0x81794CB4B4D8467B);
+            return ref _Handle.AsRef<float>(_DensityMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _DensityMaxOffset;
+    private static nint? _DensityMaxOffset;
 
-  public ref float DensityMax {
-    get {
-      if (_DensityMaxOffset == null) {
-        _DensityMaxOffset = Schema.GetOffset(0x81794CB4AAC31C05);
-      }
-      return ref _Handle.AsRef<float>(_DensityMaxOffset!.Value);
+    public ref float DensityMax {
+        get {
+            _DensityMaxOffset = _DensityMaxOffset ?? Schema.GetOffset(0x81794CB4AAC31C05);
+            return ref _Handle.AsRef<float>(_DensityMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMinOffset;
+    private static nint? _OutputMinOffset;
 
-  public ref Vector OutputMin {
-    get {
-      if (_OutputMinOffset == null) {
-        _OutputMinOffset = Schema.GetOffset(0x81794CB42EFED678);
-      }
-      return ref _Handle.AsRef<Vector>(_OutputMinOffset!.Value);
+    public ref Vector OutputMin {
+        get {
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x81794CB42EFED678);
+            return ref _Handle.AsRef<Vector>(_OutputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMaxOffset;
+    private static nint? _OutputMaxOffset;
 
-  public ref Vector OutputMax {
-    get {
-      if (_OutputMaxOffset == null) {
-        _OutputMaxOffset = Schema.GetOffset(0x81794CB4451280D2);
-      }
-      return ref _Handle.AsRef<Vector>(_OutputMaxOffset!.Value);
+    public ref Vector OutputMax {
+        get {
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x81794CB4451280D2);
+            return ref _Handle.AsRef<Vector>(_OutputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseParentDensityOffset;
+    private static nint? _UseParentDensityOffset;
 
-  public ref bool UseParentDensity {
-    get {
-      if (_UseParentDensityOffset == null) {
-        _UseParentDensityOffset = Schema.GetOffset(0x81794CB40FE31F64);
-      }
-      return ref _Handle.AsRef<bool>(_UseParentDensityOffset!.Value);
+    public ref bool UseParentDensity {
+        get {
+            _UseParentDensityOffset = _UseParentDensityOffset ?? Schema.GetOffset(0x81794CB40FE31F64);
+            return ref _Handle.AsRef<bool>(_UseParentDensityOffset!.Value);
+        }
     }
-  }
-  private static nint? _VoxelGridResolutionOffset;
+    private static nint? _VoxelGridResolutionOffset;
 
-  public ref int VoxelGridResolution {
-    get {
-      if (_VoxelGridResolutionOffset == null) {
-        _VoxelGridResolutionOffset = Schema.GetOffset(0x81794CB45AA7D7ED);
-      }
-      return ref _Handle.AsRef<int>(_VoxelGridResolutionOffset!.Value);
+    public ref int VoxelGridResolution {
+        get {
+            _VoxelGridResolutionOffset = _VoxelGridResolutionOffset ?? Schema.GetOffset(0x81794CB45AA7D7ED);
+            return ref _Handle.AsRef<int>(_VoxelGridResolutionOffset!.Value);
+        }
     }
-  }
 
 
 }

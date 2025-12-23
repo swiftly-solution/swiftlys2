@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerActiveWeaponDetectImpl : CBaseTriggerImpl, CTriggerActiveWeaponDetect {
+internal partial class CTriggerActiveWeaponDetectImpl : CBaseTriggerImpl, CTriggerActiveWeaponDetect
+{
+    public CTriggerActiveWeaponDetectImpl(nint handle) : base(handle) { }
 
-  public CTriggerActiveWeaponDetectImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnTouchedActiveWeaponOffset;
 
-  private static nint? _OnTouchedActiveWeaponOffset;
-
-  public CEntityIOOutput OnTouchedActiveWeapon {
-    get {
-      if (_OnTouchedActiveWeaponOffset == null) {
-        _OnTouchedActiveWeaponOffset = Schema.GetOffset(0x68F50CC727D5D394);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnTouchedActiveWeaponOffset!.Value);
+    public ref CEntityIOOutput OnTouchedActiveWeapon {
+        get {
+            _OnTouchedActiveWeaponOffset = _OnTouchedActiveWeaponOffset ?? Schema.GetOffset(0x68F50CC727D5D394);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchedActiveWeaponOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeaponClassNameOffset;
+    private static nint? _WeaponClassNameOffset;
 
-  public string WeaponClassName {
-    get {
-      if (_WeaponClassNameOffset == null) {
-        _WeaponClassNameOffset = Schema.GetOffset(0x68F50CC7BD3D5B08);
-      }
-      var ptr = _Handle.Read<nint>(_WeaponClassNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_WeaponClassNameOffset == null) {
-        _WeaponClassNameOffset = Schema.GetOffset(0x68F50CC7BD3D5B08);
-      }
-      Schema.SetString(_Handle, _WeaponClassNameOffset!.Value, value);
-    }
-  } 
+    public string WeaponClassName {
+        get {
+            _WeaponClassNameOffset = _WeaponClassNameOffset ?? Schema.GetOffset(0x68F50CC7BD3D5B08);
+            return Schema.GetString(_Handle.Read<nint>(_WeaponClassNameOffset!.Value));
+        }
+        set {
+            _WeaponClassNameOffset = _WeaponClassNameOffset ?? Schema.GetOffset(0x68F50CC7BD3D5B08);
+            Schema.SetString(_Handle, _WeaponClassNameOffset!.Value, value);
+        }
+    } 
 
 
 }

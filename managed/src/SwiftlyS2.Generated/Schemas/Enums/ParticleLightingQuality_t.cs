@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleLightingQuality_t : uint {
-
+public enum ParticleLightingQuality_t : uint
+{
  PARTICLE_LIGHTING_PER_PARTICLE = 0,
 
  PARTICLE_LIGHTING_PER_VERTEX = 1,

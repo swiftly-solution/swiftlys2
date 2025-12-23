@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SummaryTakeDamageInfo_t : ISchemaClass<SummaryTakeDamageInfo_t> {
+public partial interface SummaryTakeDamageInfo_t : ISchemaClass<SummaryTakeDamageInfo_t>
+{
+    static SummaryTakeDamageInfo_t ISchemaClass<SummaryTakeDamageInfo_t>.From(nint handle) => new SummaryTakeDamageInfo_tImpl(handle);
+    static int ISchemaClass<SummaryTakeDamageInfo_t>.Size => 352;
+    static string? ISchemaClass<SummaryTakeDamageInfo_t>.ClassName => null;
 
-  static SummaryTakeDamageInfo_t ISchemaClass<SummaryTakeDamageInfo_t>.From(nint handle) => new SummaryTakeDamageInfo_tImpl(handle);
-  static int ISchemaClass<SummaryTakeDamageInfo_t>.Size => 352;
-  static string? ISchemaClass<SummaryTakeDamageInfo_t>.ClassName => null;
 
-  
-  public ref int SummarisedCount { get; }
-  
-  public ref CTakeDamageInfo Info { get; }
-  
-  public ref CTakeDamageResult Result { get; }
-  
-  public ref CHandle<CBaseEntity> Target { get; }
+    public ref int SummarisedCount { get; }
+
+    public ref CTakeDamageInfo Info { get; }
+
+    public ref CTakeDamageResult Result { get; }
+
+    public ref CHandle<CBaseEntity> Target { get; }
 
 
 }

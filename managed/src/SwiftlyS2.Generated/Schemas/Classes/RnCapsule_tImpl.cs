@@ -6,30 +6,27 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnCapsule_tImpl : SchemaClass, RnCapsule_t {
+internal partial class RnCapsule_tImpl : SchemaClass, RnCapsule_t
+{
+    public RnCapsule_tImpl(nint handle) : base(handle) { }
 
-  public RnCapsule_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<Vector> Center {
-    get => new SchemaFixedArray<Vector>(_Handle, 0xA2412C03C82A5908, 2, 12, 4);
-  }
-  private static nint? _RadiusOffset;
-
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xA2412C035ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ISchemaFixedArray<Vector> Center {
+        get => new SchemaFixedArray<Vector>(_Handle, 0xA2412C03C82A5908, 2, 12, 4);
     }
-  }
+    private static nint? _RadiusOffset;
+
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xA2412C035ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
+    }
 
 
 }

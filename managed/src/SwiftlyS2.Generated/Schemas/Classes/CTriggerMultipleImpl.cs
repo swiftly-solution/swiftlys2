@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerMultipleImpl : CBaseTriggerImpl, CTriggerMultiple {
+internal partial class CTriggerMultipleImpl : CBaseTriggerImpl, CTriggerMultiple
+{
+    public CTriggerMultipleImpl(nint handle) : base(handle) { }
 
-  public CTriggerMultipleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnTriggerOffset;
 
-  private static nint? _OnTriggerOffset;
-
-  public CEntityIOOutput OnTrigger {
-    get {
-      if (_OnTriggerOffset == null) {
-        _OnTriggerOffset = Schema.GetOffset(0x327F607E81E0BFEC);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnTriggerOffset!.Value);
+    public ref CEntityIOOutput OnTrigger {
+        get {
+            _OnTriggerOffset = _OnTriggerOffset ?? Schema.GetOffset(0x327F607E81E0BFEC);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerOffset!.Value);
+        }
     }
-  }
 
 
 }

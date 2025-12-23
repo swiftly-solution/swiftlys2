@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayer_ActionTrackingServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_ActionTrackingServices> {
+public partial interface CCSPlayer_ActionTrackingServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_ActionTrackingServices>
+{
+    static CCSPlayer_ActionTrackingServices ISchemaClass<CCSPlayer_ActionTrackingServices>.From(nint handle) => new CCSPlayer_ActionTrackingServicesImpl(handle);
+    static int ISchemaClass<CCSPlayer_ActionTrackingServices>.Size => 776;
+    static string? ISchemaClass<CCSPlayer_ActionTrackingServices>.ClassName => null;
 
-  static CCSPlayer_ActionTrackingServices ISchemaClass<CCSPlayer_ActionTrackingServices>.From(nint handle) => new CCSPlayer_ActionTrackingServicesImpl(handle);
-  static int ISchemaClass<CCSPlayer_ActionTrackingServices>.Size => 776;
-  static string? ISchemaClass<CCSPlayer_ActionTrackingServices>.ClassName => null;
 
-  
-  public ref CHandle<CBasePlayerWeapon> LastWeaponBeforeC4AutoSwitch { get; }
-  
-  public ref bool IsRescuing { get; }
-  
-  public WeaponPurchaseTracker_t WeaponPurchasesThisMatch { get; }
-  
-  public WeaponPurchaseTracker_t WeaponPurchasesThisRound { get; }
+    public ref CHandle<CBasePlayerWeapon> LastWeaponBeforeC4AutoSwitch { get; }
 
-  public void IsRescuingUpdated();
-  public void WeaponPurchasesThisMatchUpdated();
-  public void WeaponPurchasesThisRoundUpdated();
+    public ref bool IsRescuing { get; }
+
+    public WeaponPurchaseTracker_t WeaponPurchasesThisMatch { get; }
+
+    public WeaponPurchaseTracker_t WeaponPurchasesThisRound { get; }
+
+    public void IsRescuingUpdated();
+    public void WeaponPurchasesThisMatchUpdated();
+    public void WeaponPurchasesThisRoundUpdated();
 }

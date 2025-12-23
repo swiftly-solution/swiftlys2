@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CScriptTriggerMultiple : CTriggerMultiple, ISchemaClass<CScriptTriggerMultiple> {
+public partial interface CScriptTriggerMultiple : CTriggerMultiple, ISchemaClass<CScriptTriggerMultiple>
+{
+    static CScriptTriggerMultiple ISchemaClass<CScriptTriggerMultiple>.From(nint handle) => new CScriptTriggerMultipleImpl(handle);
+    static int ISchemaClass<CScriptTriggerMultiple>.Size => 2528;
+    static string? ISchemaClass<CScriptTriggerMultiple>.ClassName => "script_trigger_multiple";
 
-  static CScriptTriggerMultiple ISchemaClass<CScriptTriggerMultiple>.From(nint handle) => new CScriptTriggerMultipleImpl(handle);
-  static int ISchemaClass<CScriptTriggerMultiple>.Size => 2528;
-  static string? ISchemaClass<CScriptTriggerMultiple>.ClassName => "script_trigger_multiple";
 
-  
-  public ref Vector Extent { get; }
+    public ref Vector Extent { get; }
 
 
 }

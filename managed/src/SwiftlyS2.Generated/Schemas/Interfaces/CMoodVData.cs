@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMoodVData : ISchemaClass<CMoodVData> {
+public partial interface CMoodVData : ISchemaClass<CMoodVData>
+{
+    static CMoodVData ISchemaClass<CMoodVData>.From(nint handle) => new CMoodVDataImpl(handle);
+    static int ISchemaClass<CMoodVData>.Size => 256;
+    static string? ISchemaClass<CMoodVData>.ClassName => null;
 
-  static CMoodVData ISchemaClass<CMoodVData>.From(nint handle) => new CMoodVDataImpl(handle);
-  static int ISchemaClass<CMoodVData>.Size => 256;
-  static string? ISchemaClass<CMoodVData>.ClassName => null;
 
-  
-  // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
-  public SchemaUntypedField ModelName { get; }
-  
-  public ref MoodType_t MoodType { get; }
-  
-  public ref CUtlVector<MoodAnimationLayer_t> AnimationLayers { get; }
+    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
+    public SchemaUntypedField ModelName { get; }
+
+    public ref MoodType_t MoodType { get; }
+
+    public ref CUtlVector<MoodAnimationLayer_t> AnimationLayers { get; }
 
 
 }

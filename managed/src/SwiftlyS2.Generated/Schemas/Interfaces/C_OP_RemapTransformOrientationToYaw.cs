@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapTransformOrientationToYaw : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformOrientationToYaw> {
+public partial interface C_OP_RemapTransformOrientationToYaw : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformOrientationToYaw>
+{
+    static C_OP_RemapTransformOrientationToYaw ISchemaClass<C_OP_RemapTransformOrientationToYaw>.From(nint handle) => new C_OP_RemapTransformOrientationToYawImpl(handle);
+    static int ISchemaClass<C_OP_RemapTransformOrientationToYaw>.Size => 584;
+    static string? ISchemaClass<C_OP_RemapTransformOrientationToYaw>.ClassName => null;
 
-  static C_OP_RemapTransformOrientationToYaw ISchemaClass<C_OP_RemapTransformOrientationToYaw>.From(nint handle) => new C_OP_RemapTransformOrientationToYawImpl(handle);
-  static int ISchemaClass<C_OP_RemapTransformOrientationToYaw>.Size => 584;
-  static string? ISchemaClass<C_OP_RemapTransformOrientationToYaw>.ClassName => null;
 
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float RotOffset { get; }
-  
-  public ref float SpinStrength { get; }
+    public CParticleTransformInput TransformInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float RotOffset { get; }
+
+    public ref float SpinStrength { get; }
 
 
 }

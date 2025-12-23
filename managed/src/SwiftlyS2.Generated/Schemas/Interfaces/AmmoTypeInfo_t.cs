@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AmmoTypeInfo_t : ISchemaClass<AmmoTypeInfo_t> {
+public partial interface AmmoTypeInfo_t : ISchemaClass<AmmoTypeInfo_t>
+{
+    static AmmoTypeInfo_t ISchemaClass<AmmoTypeInfo_t>.From(nint handle) => new AmmoTypeInfo_tImpl(handle);
+    static int ISchemaClass<AmmoTypeInfo_t>.Size => 56;
+    static string? ISchemaClass<AmmoTypeInfo_t>.ClassName => null;
 
-  static AmmoTypeInfo_t ISchemaClass<AmmoTypeInfo_t>.From(nint handle) => new AmmoTypeInfo_tImpl(handle);
-  static int ISchemaClass<AmmoTypeInfo_t>.Size => 56;
-  static string? ISchemaClass<AmmoTypeInfo_t>.ClassName => null;
 
-  
-  public ref int MaxCarry { get; }
-  
-  public CRangeInt SplashSize { get; }
-  
-  public ref AmmoFlags_t Flags { get; }
-  
-  public ref float Mass { get; }
-  
-  public CRangeFloat Speed { get; }
+    public ref int MaxCarry { get; }
+
+    public CRangeInt SplashSize { get; }
+
+    public ref AmmoFlags_t Flags { get; }
+
+    public ref float Mass { get; }
+
+    public CRangeFloat Speed { get; }
 
 
 }

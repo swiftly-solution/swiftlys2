@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmIDEvent : CNmEvent, ISchemaClass<CNmIDEvent> {
+public partial interface CNmIDEvent : CNmEvent, ISchemaClass<CNmIDEvent>
+{
+    static CNmIDEvent ISchemaClass<CNmIDEvent>.From(nint handle) => new CNmIDEventImpl(handle);
+    static int ISchemaClass<CNmIDEvent>.Size => 48;
+    static string? ISchemaClass<CNmIDEvent>.ClassName => null;
 
-  static CNmIDEvent ISchemaClass<CNmIDEvent>.From(nint handle) => new CNmIDEventImpl(handle);
-  static int ISchemaClass<CNmIDEvent>.Size => 48;
-  static string? ISchemaClass<CNmIDEvent>.ClassName => null;
 
-  
-  public ref CGlobalSymbol ID { get; }
-  
-  public ref CGlobalSymbol SecondaryID { get; }
+    public ref CGlobalSymbol ID { get; }
+
+    public ref CGlobalSymbol SecondaryID { get; }
 
 
 }

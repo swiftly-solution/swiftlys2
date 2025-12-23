@@ -1,7 +1,33 @@
 {
-    "default_connection": "host",
+    // Default connection name
+    "default_connection": "default",
+    // Connections can be defined in two formats:
+    // 1. URI format: "driver://user:password@host:port/database"
+    // 2. Object format: { "driver": "...", "host": "...", ... }
     "connections": {
-        "host": "mysql://<username>:<password>@<host>:<port>/<database>",
-        "mongodbhost": "mongodb://<username>:<password>@<host>:<port>/<database>"
+        // URI format examples
+        "default": "mysql://root:@localhost:3306/swiftlys2",
+        "postgres_uri": "postgresql://postgres:@localhost:5432/swiftlys2",
+        "local": "sqlite://swiftlys2-local.db",
+        // Object format example (supports additional options like timeout, charset)
+        "mysql_detailed": {
+            "driver": "mysql",
+            "host": "localhost",
+            "database": "swiftlys2",
+            "user": "root",
+            "pass": "",
+            "port": 3306,
+            "timeout": 30,
+            "charset": "utf8mb4"
+        },
+        "postgres_detailed": {
+            "driver": "postgresql",
+            "host": "localhost",
+            "database": "swiftlys2",
+            "user": "postgres",
+            "pass": "",
+            "port": 5432,
+            "timeout": 30
+        }
     }
 }

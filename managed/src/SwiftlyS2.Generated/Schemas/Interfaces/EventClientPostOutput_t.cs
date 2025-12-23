@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventClientPostOutput_t : ISchemaClass<EventClientPostOutput_t> {
+public partial interface EventClientPostOutput_t : ISchemaClass<EventClientPostOutput_t>
+{
+    static EventClientPostOutput_t ISchemaClass<EventClientPostOutput_t>.From(nint handle) => new EventClientPostOutput_tImpl(handle);
+    static int ISchemaClass<EventClientPostOutput_t>.Size => 64;
+    static string? ISchemaClass<EventClientPostOutput_t>.ClassName => null;
 
-  static EventClientPostOutput_t ISchemaClass<EventClientPostOutput_t>.From(nint handle) => new EventClientPostOutput_tImpl(handle);
-  static int ISchemaClass<EventClientPostOutput_t>.Size => 64;
-  static string? ISchemaClass<EventClientPostOutput_t>.ClassName => null;
 
-  
-  public EngineLoopState_t LoopState { get; }
-  
-  public ref double RenderTime { get; }
-  
-  public ref float RenderFrameTime { get; }
-  
-  public ref float RenderFrameTimeUnbounded { get; }
-  
-  public ref bool RenderOnly { get; }
+    public EngineLoopState_t LoopState { get; }
+
+    public ref double RenderTime { get; }
+
+    public ref float RenderFrameTime { get; }
+
+    public ref float RenderFrameTimeUnbounded { get; }
+
+    public ref bool RenderOnly { get; }
 
 
 }

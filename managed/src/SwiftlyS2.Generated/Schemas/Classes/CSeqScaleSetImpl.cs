@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSeqScaleSetImpl : SchemaClass, CSeqScaleSet {
+internal partial class CSeqScaleSetImpl : SchemaClass, CSeqScaleSet
+{
+    public CSeqScaleSetImpl(nint handle) : base(handle) { }
 
-  public CSeqScaleSetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public ref CBufferString Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x34C951AB63D22D49);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    public ref CBufferString Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x34C951AB63D22D49);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _RootOffsetOffset;
+    private static nint? _RootOffsetOffset;
 
-  public ref bool RootOffset {
-    get {
-      if (_RootOffsetOffset == null) {
-        _RootOffsetOffset = Schema.GetOffset(0x34C951ABEE69828A);
-      }
-      return ref _Handle.AsRef<bool>(_RootOffsetOffset!.Value);
+    public ref bool RootOffset {
+        get {
+            _RootOffsetOffset = _RootOffsetOffset ?? Schema.GetOffset(0x34C951ABEE69828A);
+            return ref _Handle.AsRef<bool>(_RootOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _RootOffset1Offset;
+    private static nint? _RootOffset1Offset;
 
-  public ref Vector RootOffset1 {
-    get {
-      if (_RootOffset1Offset == null) {
-        _RootOffset1Offset = Schema.GetOffset(0x34C951ABA62E010E);
-      }
-      return ref _Handle.AsRef<Vector>(_RootOffset1Offset!.Value);
+    public ref Vector RootOffset1 {
+        get {
+            _RootOffset1Offset = _RootOffset1Offset ?? Schema.GetOffset(0x34C951ABA62E010E);
+            return ref _Handle.AsRef<Vector>(_RootOffset1Offset!.Value);
+        }
     }
-  }
-  private static nint? _LocalBoneArrayOffset;
+    private static nint? _LocalBoneArrayOffset;
 
-  public ref CUtlVector<short> LocalBoneArray {
-    get {
-      if (_LocalBoneArrayOffset == null) {
-        _LocalBoneArrayOffset = Schema.GetOffset(0x34C951AB0B8EFD6B);
-      }
-      return ref _Handle.AsRef<CUtlVector<short>>(_LocalBoneArrayOffset!.Value);
+    public ref CUtlVector<short> LocalBoneArray {
+        get {
+            _LocalBoneArrayOffset = _LocalBoneArrayOffset ?? Schema.GetOffset(0x34C951AB0B8EFD6B);
+            return ref _Handle.AsRef<CUtlVector<short>>(_LocalBoneArrayOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneScaleArrayOffset;
+    private static nint? _BoneScaleArrayOffset;
 
-  public ref CUtlVector<float> BoneScaleArray {
-    get {
-      if (_BoneScaleArrayOffset == null) {
-        _BoneScaleArrayOffset = Schema.GetOffset(0x34C951ABC4BD868A);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_BoneScaleArrayOffset!.Value);
+    public ref CUtlVector<float> BoneScaleArray {
+        get {
+            _BoneScaleArrayOffset = _BoneScaleArrayOffset ?? Schema.GetOffset(0x34C951ABC4BD868A);
+            return ref _Handle.AsRef<CUtlVector<float>>(_BoneScaleArrayOffset!.Value);
+        }
     }
-  }
 
 
 }

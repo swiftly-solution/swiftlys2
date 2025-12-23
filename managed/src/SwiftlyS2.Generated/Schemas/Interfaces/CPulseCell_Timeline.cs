@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Timeline : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Timeline> {
+public partial interface CPulseCell_Timeline : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Timeline>
+{
+    static CPulseCell_Timeline ISchemaClass<CPulseCell_Timeline>.From(nint handle) => new CPulseCell_TimelineImpl(handle);
+    static int ISchemaClass<CPulseCell_Timeline>.Size => 248;
+    static string? ISchemaClass<CPulseCell_Timeline>.ClassName => null;
 
-  static CPulseCell_Timeline ISchemaClass<CPulseCell_Timeline>.From(nint handle) => new CPulseCell_TimelineImpl(handle);
-  static int ISchemaClass<CPulseCell_Timeline>.Size => 248;
-  static string? ISchemaClass<CPulseCell_Timeline>.ClassName => null;
 
-  
-  public ref CUtlVector<CPulseCell_Timeline__TimelineEvent_t> TimelineEvents { get; }
-  
-  public ref bool WaitForChildOutflows { get; }
-  
-  public CPulse_ResumePoint OnFinished { get; }
-  
-  public CPulse_ResumePoint OnCanceled { get; }
+    public ref CUtlVector<CPulseCell_Timeline__TimelineEvent_t> TimelineEvents { get; }
+
+    public ref bool WaitForChildOutflows { get; }
+
+    public CPulse_ResumePoint OnFinished { get; }
+
+    public CPulse_ResumePoint OnCanceled { get; }
 
 
 }

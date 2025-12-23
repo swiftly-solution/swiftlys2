@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicLineToEntity : CLogicalEntity, ISchemaClass<CLogicLineToEntity> {
+public partial interface CLogicLineToEntity : CLogicalEntity, ISchemaClass<CLogicLineToEntity>
+{
+    static CLogicLineToEntity ISchemaClass<CLogicLineToEntity>.From(nint handle) => new CLogicLineToEntityImpl(handle);
+    static int ISchemaClass<CLogicLineToEntity>.Size => 1320;
+    static string? ISchemaClass<CLogicLineToEntity>.ClassName => "logic_lineto";
 
-  static CLogicLineToEntity ISchemaClass<CLogicLineToEntity>.From(nint handle) => new CLogicLineToEntityImpl(handle);
-  static int ISchemaClass<CLogicLineToEntity>.Size => 1320;
-  static string? ISchemaClass<CLogicLineToEntity>.ClassName => "logic_lineto";
 
-  
-  // CEntityOutputTemplate< Vector >
-  public SchemaUntypedField Line { get; }
-  
-  public string SourceName { get; set; }
-  
-  public ref CHandle<CBaseEntity> StartEntity { get; }
-  
-  public ref CHandle<CBaseEntity> EndEntity { get; }
+    // CEntityOutputTemplate< Vector >
+    public SchemaUntypedField Line { get; }
+
+    public string SourceName { get; set; }
+
+    public ref CHandle<CBaseEntity> StartEntity { get; }
+
+    public ref CHandle<CBaseEntity> EndEntity { get; }
 
 
 }

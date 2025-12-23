@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ParticleControlPointDriver_t : ISchemaClass<ParticleControlPointDriver_t> {
+public partial interface ParticleControlPointDriver_t : ISchemaClass<ParticleControlPointDriver_t>
+{
+    static ParticleControlPointDriver_t ISchemaClass<ParticleControlPointDriver_t>.From(nint handle) => new ParticleControlPointDriver_tImpl(handle);
+    static int ISchemaClass<ParticleControlPointDriver_t>.Size => 48;
+    static string? ISchemaClass<ParticleControlPointDriver_t>.ClassName => null;
 
-  static ParticleControlPointDriver_t ISchemaClass<ParticleControlPointDriver_t>.From(nint handle) => new ParticleControlPointDriver_tImpl(handle);
-  static int ISchemaClass<ParticleControlPointDriver_t>.Size => 48;
-  static string? ISchemaClass<ParticleControlPointDriver_t>.ClassName => null;
 
-  
-  public ref int ControlPoint { get; }
-  
-  public ref ParticleAttachment_t AttachType { get; }
-  
-  public string AttachmentName { get; set; }
-  
-  public ref Vector Offset { get; }
-  
-  public ref QAngle Offset1 { get; }
-  
-  public string EntityName { get; set; }
+    public ref int ControlPoint { get; }
+
+    public ref ParticleAttachment_t AttachType { get; }
+
+    public string AttachmentName { get; set; }
+
+    public ref Vector Offset { get; }
+
+    public ref QAngle Offset1 { get; }
+
+    public string EntityName { get; set; }
 
 
 }

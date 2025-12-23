@@ -8,43 +8,43 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvWindController : CBaseEntity, ISchemaClass<CEnvWindController> {
+public partial interface CEnvWindController : CBaseEntity, ISchemaClass<CEnvWindController>
+{
+    static CEnvWindController ISchemaClass<CEnvWindController>.From(nint handle) => new CEnvWindControllerImpl(handle);
+    static int ISchemaClass<CEnvWindController>.Size => 1640;
+    static string? ISchemaClass<CEnvWindController>.ClassName => "env_wind_controller";
 
-  static CEnvWindController ISchemaClass<CEnvWindController>.From(nint handle) => new CEnvWindControllerImpl(handle);
-  static int ISchemaClass<CEnvWindController>.Size => 1640;
-  static string? ISchemaClass<CEnvWindController>.ClassName => "env_wind_controller";
 
-  
-  public CEnvWindShared EnvWindShared { get; }
-  
-  public ref float DirectionVariation { get; }
-  
-  public ref float SpeedVariation { get; }
-  
-  public ref float Turbulence { get; }
-  
-  public ref float VolumeHalfExtentXY { get; }
-  
-  public ref float VolumeHalfExtentZ { get; }
-  
-  public ref int VolumeResolutionXY { get; }
-  
-  public ref int VolumeResolutionZ { get; }
-  
-  public ref int ClipmapLevels { get; }
-  
-  public ref bool IsMaster { get; }
-  
-  public ref bool FirstTime { get; }
+    public CEnvWindShared EnvWindShared { get; }
 
-  public void EnvWindSharedUpdated();
-  public void DirectionVariationUpdated();
-  public void SpeedVariationUpdated();
-  public void TurbulenceUpdated();
-  public void VolumeHalfExtentXYUpdated();
-  public void VolumeHalfExtentZUpdated();
-  public void VolumeResolutionXYUpdated();
-  public void VolumeResolutionZUpdated();
-  public void ClipmapLevelsUpdated();
-  public void IsMasterUpdated();
+    public ref float DirectionVariation { get; }
+
+    public ref float SpeedVariation { get; }
+
+    public ref float Turbulence { get; }
+
+    public ref float VolumeHalfExtentXY { get; }
+
+    public ref float VolumeHalfExtentZ { get; }
+
+    public ref int VolumeResolutionXY { get; }
+
+    public ref int VolumeResolutionZ { get; }
+
+    public ref int ClipmapLevels { get; }
+
+    public ref bool IsMaster { get; }
+
+    public ref bool FirstTime { get; }
+
+    public void EnvWindSharedUpdated();
+    public void DirectionVariationUpdated();
+    public void SpeedVariationUpdated();
+    public void TurbulenceUpdated();
+    public void VolumeHalfExtentXYUpdated();
+    public void VolumeHalfExtentZUpdated();
+    public void VolumeResolutionXYUpdated();
+    public void VolumeResolutionZUpdated();
+    public void ClipmapLevelsUpdated();
+    public void IsMasterUpdated();
 }

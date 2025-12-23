@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmFloatCurveEventImpl : CNmEventImpl, CNmFloatCurveEvent {
+internal partial class CNmFloatCurveEventImpl : CNmEventImpl, CNmFloatCurveEvent
+{
+    public CNmFloatCurveEventImpl(nint handle) : base(handle) { }
 
-  public CNmFloatCurveEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IDOffset;
 
-  private static nint? _IDOffset;
-
-  public ref CGlobalSymbol ID {
-    get {
-      if (_IDOffset == null) {
-        _IDOffset = Schema.GetOffset(0x79BEBEA95066900);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+    public ref CGlobalSymbol ID {
+        get {
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x79BEBEA95066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurveOffset;
+    private static nint? _CurveOffset;
 
-  public SchemaUntypedField Curve {
-    get {
-      if (_CurveOffset == null) {
-        _CurveOffset = Schema.GetOffset(0x79BEBEABFFA0B34);
-      }
-      return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+    public SchemaUntypedField Curve {
+        get {
+            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0x79BEBEABFFA0B34);
+            return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+        }
     }
-  }
 
 
 }

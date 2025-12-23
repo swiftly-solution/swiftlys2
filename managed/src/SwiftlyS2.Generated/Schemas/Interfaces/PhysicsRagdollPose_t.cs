@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PhysicsRagdollPose_t : ISchemaClass<PhysicsRagdollPose_t> {
+public partial interface PhysicsRagdollPose_t : ISchemaClass<PhysicsRagdollPose_t>
+{
+    static PhysicsRagdollPose_t ISchemaClass<PhysicsRagdollPose_t>.From(nint handle) => new PhysicsRagdollPose_tImpl(handle);
+    static int ISchemaClass<PhysicsRagdollPose_t>.Size => 40;
+    static string? ISchemaClass<PhysicsRagdollPose_t>.ClassName => null;
 
-  static PhysicsRagdollPose_t ISchemaClass<PhysicsRagdollPose_t>.From(nint handle) => new PhysicsRagdollPose_tImpl(handle);
-  static int ISchemaClass<PhysicsRagdollPose_t>.Size => 40;
-  static string? ISchemaClass<PhysicsRagdollPose_t>.ClassName => null;
 
-  
-  public ref CUtlVector<CTransform> Transforms { get; }
-  
-  public ref CHandle<CBaseEntity> Owner { get; }
-  
-  public ref bool SetFromDebugHistory { get; }
+    public ref CUtlVector<CTransform> Transforms { get; }
 
-  public void TransformsUpdated();
-  public void OwnerUpdated();
+    public ref CHandle<CBaseEntity> Owner { get; }
+
+    public ref bool SetFromDebugHistory { get; }
+
+    public void TransformsUpdated();
+    public void OwnerUpdated();
 }

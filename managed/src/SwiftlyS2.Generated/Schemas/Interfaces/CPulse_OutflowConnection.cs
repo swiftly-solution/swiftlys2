@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulse_OutflowConnection : ISchemaClass<CPulse_OutflowConnection> {
+public partial interface CPulse_OutflowConnection : ISchemaClass<CPulse_OutflowConnection>
+{
+    static CPulse_OutflowConnection ISchemaClass<CPulse_OutflowConnection>.From(nint handle) => new CPulse_OutflowConnectionImpl(handle);
+    static int ISchemaClass<CPulse_OutflowConnection>.Size => 72;
+    static string? ISchemaClass<CPulse_OutflowConnection>.ClassName => null;
 
-  static CPulse_OutflowConnection ISchemaClass<CPulse_OutflowConnection>.From(nint handle) => new CPulse_OutflowConnectionImpl(handle);
-  static int ISchemaClass<CPulse_OutflowConnection>.Size => 72;
-  static string? ISchemaClass<CPulse_OutflowConnection>.ClassName => null;
 
-  
-  // PulseSymbol_t
-  public SchemaUntypedField SourceOutflowName { get; }
-  
-  public PulseRuntimeChunkIndex_t DestChunk { get; }
-  
-  public ref int Instruction { get; }
-  
-  public PulseRegisterMap_t OutflowRegisterMap { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField SourceOutflowName { get; }
+
+    public PulseRuntimeChunkIndex_t DestChunk { get; }
+
+    public ref int Instruction { get; }
+
+    public PulseRegisterMap_t OutflowRegisterMap { get; }
 
 
 }

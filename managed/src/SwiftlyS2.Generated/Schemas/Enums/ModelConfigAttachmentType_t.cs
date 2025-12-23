@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ModelConfigAttachmentType_t : uint {
-
+public enum ModelConfigAttachmentType_t : uint
+{
  MODEL_CONFIG_ATTACHMENT_INVALID = uint.MaxValue,
 
  MODEL_CONFIG_ATTACHMENT_BONE_OR_ATTACHMENT = 0,

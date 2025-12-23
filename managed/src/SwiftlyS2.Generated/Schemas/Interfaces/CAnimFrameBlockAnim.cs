@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimFrameBlockAnim : ISchemaClass<CAnimFrameBlockAnim> {
+public partial interface CAnimFrameBlockAnim : ISchemaClass<CAnimFrameBlockAnim>
+{
+    static CAnimFrameBlockAnim ISchemaClass<CAnimFrameBlockAnim>.From(nint handle) => new CAnimFrameBlockAnimImpl(handle);
+    static int ISchemaClass<CAnimFrameBlockAnim>.Size => 32;
+    static string? ISchemaClass<CAnimFrameBlockAnim>.ClassName => null;
 
-  static CAnimFrameBlockAnim ISchemaClass<CAnimFrameBlockAnim>.From(nint handle) => new CAnimFrameBlockAnimImpl(handle);
-  static int ISchemaClass<CAnimFrameBlockAnim>.Size => 32;
-  static string? ISchemaClass<CAnimFrameBlockAnim>.ClassName => null;
 
-  
-  public ref int StartFrame { get; }
-  
-  public ref int EndFrame { get; }
-  
-  public ref CUtlVector<int> SegmentIndexArray { get; }
+    public ref int StartFrame { get; }
+
+    public ref int EndFrame { get; }
+
+    public ref CUtlVector<int> SegmentIndexArray { get; }
 
 
 }

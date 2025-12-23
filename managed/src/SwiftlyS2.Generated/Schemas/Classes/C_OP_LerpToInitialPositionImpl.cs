@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_LerpToInitialPositionImpl : CParticleFunctionOperatorImpl, C_OP_LerpToInitialPosition {
+internal partial class C_OP_LerpToInitialPositionImpl : CParticleFunctionOperatorImpl, C_OP_LerpToInitialPosition
+{
+    public C_OP_LerpToInitialPositionImpl(nint handle) : base(handle) { }
 
-  public C_OP_LerpToInitialPositionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x56175BC3F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x56175BC3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _InterpolationOffset;
+    private static nint? _InterpolationOffset;
 
-  public CPerParticleFloatInput Interpolation {
-    get {
-      if (_InterpolationOffset == null) {
-        _InterpolationOffset = Schema.GetOffset(0x56175BCCF55B987);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    public CPerParticleFloatInput Interpolation {
+        get {
+            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x56175BCCF55B987);
+            return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+        }
     }
-  }
-  private static nint? _CacheFieldOffset;
+    private static nint? _CacheFieldOffset;
 
-  public ParticleAttributeIndex_t CacheField {
-    get {
-      if (_CacheFieldOffset == null) {
-        _CacheFieldOffset = Schema.GetOffset(0x56175BCB3696EEB);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _CacheFieldOffset!.Value);
+    public ParticleAttributeIndex_t CacheField {
+        get {
+            _CacheFieldOffset = _CacheFieldOffset ?? Schema.GetOffset(0x56175BCB3696EEB);
+            return new ParticleAttributeIndex_tImpl(_Handle + _CacheFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public CParticleCollectionFloatInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x56175BCB731A42F);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+    public CParticleCollectionFloatInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x56175BCB731A42F);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _Scale1Offset;
+    private static nint? _Scale1Offset;
 
-  public CParticleCollectionVecInput Scale1 {
-    get {
-      if (_Scale1Offset == null) {
-        _Scale1Offset = Schema.GetOffset(0x56175BC5F596B51);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _Scale1Offset!.Value);
+    public CParticleCollectionVecInput Scale1 {
+        get {
+            _Scale1Offset = _Scale1Offset ?? Schema.GetOffset(0x56175BC5F596B51);
+            return new CParticleCollectionVecInputImpl(_Handle + _Scale1Offset!.Value);
+        }
     }
-  }
 
 
 }

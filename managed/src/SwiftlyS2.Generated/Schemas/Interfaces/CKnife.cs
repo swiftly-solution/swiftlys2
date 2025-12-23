@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CKnife : CCSWeaponBase, ISchemaClass<CKnife> {
+public partial interface CKnife : CCSWeaponBase, ISchemaClass<CKnife>
+{
+    static CKnife ISchemaClass<CKnife>.From(nint handle) => new CKnifeImpl(handle);
+    static int ISchemaClass<CKnife>.Size => 4576;
+    static string? ISchemaClass<CKnife>.ClassName => "weapon_knife";
 
-  static CKnife ISchemaClass<CKnife>.From(nint handle) => new CKnifeImpl(handle);
-  static int ISchemaClass<CKnife>.Size => 4576;
-  static string? ISchemaClass<CKnife>.ClassName => "weapon_knife";
 
-  
-  public ref bool FirstAttack { get; }
+    public ref bool FirstAttack { get; }
 
-  public void FirstAttackUpdated();
+    public void FirstAttackUpdated();
 }

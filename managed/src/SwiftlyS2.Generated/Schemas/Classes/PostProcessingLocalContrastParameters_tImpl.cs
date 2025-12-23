@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PostProcessingLocalContrastParameters_tImpl : SchemaClass, PostProcessingLocalContrastParameters_t {
+internal partial class PostProcessingLocalContrastParameters_tImpl : SchemaClass, PostProcessingLocalContrastParameters_t
+{
+    public PostProcessingLocalContrastParameters_tImpl(nint handle) : base(handle) { }
 
-  public PostProcessingLocalContrastParameters_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LocalContrastStrengthOffset;
 
-  private static nint? _LocalContrastStrengthOffset;
-
-  public ref float LocalContrastStrength {
-    get {
-      if (_LocalContrastStrengthOffset == null) {
-        _LocalContrastStrengthOffset = Schema.GetOffset(0x43910BD66A89DF05);
-      }
-      return ref _Handle.AsRef<float>(_LocalContrastStrengthOffset!.Value);
+    public ref float LocalContrastStrength {
+        get {
+            _LocalContrastStrengthOffset = _LocalContrastStrengthOffset ?? Schema.GetOffset(0x43910BD66A89DF05);
+            return ref _Handle.AsRef<float>(_LocalContrastStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalContrastEdgeStrengthOffset;
+    private static nint? _LocalContrastEdgeStrengthOffset;
 
-  public ref float LocalContrastEdgeStrength {
-    get {
-      if (_LocalContrastEdgeStrengthOffset == null) {
-        _LocalContrastEdgeStrengthOffset = Schema.GetOffset(0x43910BD6CC517324);
-      }
-      return ref _Handle.AsRef<float>(_LocalContrastEdgeStrengthOffset!.Value);
+    public ref float LocalContrastEdgeStrength {
+        get {
+            _LocalContrastEdgeStrengthOffset = _LocalContrastEdgeStrengthOffset ?? Schema.GetOffset(0x43910BD6CC517324);
+            return ref _Handle.AsRef<float>(_LocalContrastEdgeStrengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalContrastVignetteStartOffset;
+    private static nint? _LocalContrastVignetteStartOffset;
 
-  public ref float LocalContrastVignetteStart {
-    get {
-      if (_LocalContrastVignetteStartOffset == null) {
-        _LocalContrastVignetteStartOffset = Schema.GetOffset(0x43910BD633264BD6);
-      }
-      return ref _Handle.AsRef<float>(_LocalContrastVignetteStartOffset!.Value);
+    public ref float LocalContrastVignetteStart {
+        get {
+            _LocalContrastVignetteStartOffset = _LocalContrastVignetteStartOffset ?? Schema.GetOffset(0x43910BD633264BD6);
+            return ref _Handle.AsRef<float>(_LocalContrastVignetteStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalContrastVignetteEndOffset;
+    private static nint? _LocalContrastVignetteEndOffset;
 
-  public ref float LocalContrastVignetteEnd {
-    get {
-      if (_LocalContrastVignetteEndOffset == null) {
-        _LocalContrastVignetteEndOffset = Schema.GetOffset(0x43910BD689634873);
-      }
-      return ref _Handle.AsRef<float>(_LocalContrastVignetteEndOffset!.Value);
+    public ref float LocalContrastVignetteEnd {
+        get {
+            _LocalContrastVignetteEndOffset = _LocalContrastVignetteEndOffset ?? Schema.GetOffset(0x43910BD689634873);
+            return ref _Handle.AsRef<float>(_LocalContrastVignetteEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalContrastVignetteBlurOffset;
+    private static nint? _LocalContrastVignetteBlurOffset;
 
-  public ref float LocalContrastVignetteBlur {
-    get {
-      if (_LocalContrastVignetteBlurOffset == null) {
-        _LocalContrastVignetteBlurOffset = Schema.GetOffset(0x43910BD6D8C40957);
-      }
-      return ref _Handle.AsRef<float>(_LocalContrastVignetteBlurOffset!.Value);
+    public ref float LocalContrastVignetteBlur {
+        get {
+            _LocalContrastVignetteBlurOffset = _LocalContrastVignetteBlurOffset ?? Schema.GetOffset(0x43910BD6D8C40957);
+            return ref _Handle.AsRef<float>(_LocalContrastVignetteBlurOffset!.Value);
+        }
     }
-  }
 
 
 }

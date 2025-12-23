@@ -6,197 +6,160 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderProjectedImpl : CParticleFunctionRendererImpl, C_OP_RenderProjected {
+internal partial class C_OP_RenderProjectedImpl : CParticleFunctionRendererImpl, C_OP_RenderProjected
+{
+    public C_OP_RenderProjectedImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderProjectedImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ProjectCharacterOffset;
 
-  private static nint? _ProjectCharacterOffset;
-
-  public ref bool ProjectCharacter {
-    get {
-      if (_ProjectCharacterOffset == null) {
-        _ProjectCharacterOffset = Schema.GetOffset(0xA370F307B21A6149);
-      }
-      return ref _Handle.AsRef<bool>(_ProjectCharacterOffset!.Value);
+    public ref bool ProjectCharacter {
+        get {
+            _ProjectCharacterOffset = _ProjectCharacterOffset ?? Schema.GetOffset(0xA370F307B21A6149);
+            return ref _Handle.AsRef<bool>(_ProjectCharacterOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProjectWorldOffset;
+    private static nint? _ProjectWorldOffset;
 
-  public ref bool ProjectWorld {
-    get {
-      if (_ProjectWorldOffset == null) {
-        _ProjectWorldOffset = Schema.GetOffset(0xA370F307078C32D2);
-      }
-      return ref _Handle.AsRef<bool>(_ProjectWorldOffset!.Value);
+    public ref bool ProjectWorld {
+        get {
+            _ProjectWorldOffset = _ProjectWorldOffset ?? Schema.GetOffset(0xA370F307078C32D2);
+            return ref _Handle.AsRef<bool>(_ProjectWorldOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProjectWaterOffset;
+    private static nint? _ProjectWaterOffset;
 
-  public ref bool ProjectWater {
-    get {
-      if (_ProjectWaterOffset == null) {
-        _ProjectWaterOffset = Schema.GetOffset(0xA370F3077E2B6E09);
-      }
-      return ref _Handle.AsRef<bool>(_ProjectWaterOffset!.Value);
+    public ref bool ProjectWater {
+        get {
+            _ProjectWaterOffset = _ProjectWaterOffset ?? Schema.GetOffset(0xA370F3077E2B6E09);
+            return ref _Handle.AsRef<bool>(_ProjectWaterOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlipHorizontalOffset;
+    private static nint? _FlipHorizontalOffset;
 
-  public ref bool FlipHorizontal {
-    get {
-      if (_FlipHorizontalOffset == null) {
-        _FlipHorizontalOffset = Schema.GetOffset(0xA370F307B0A49AFA);
-      }
-      return ref _Handle.AsRef<bool>(_FlipHorizontalOffset!.Value);
+    public ref bool FlipHorizontal {
+        get {
+            _FlipHorizontalOffset = _FlipHorizontalOffset ?? Schema.GetOffset(0xA370F307B0A49AFA);
+            return ref _Handle.AsRef<bool>(_FlipHorizontalOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnableProjectedDepthControlsOffset;
+    private static nint? _EnableProjectedDepthControlsOffset;
 
-  public ref bool EnableProjectedDepthControls {
-    get {
-      if (_EnableProjectedDepthControlsOffset == null) {
-        _EnableProjectedDepthControlsOffset = Schema.GetOffset(0xA370F307B614A221);
-      }
-      return ref _Handle.AsRef<bool>(_EnableProjectedDepthControlsOffset!.Value);
+    public ref bool EnableProjectedDepthControls {
+        get {
+            _EnableProjectedDepthControlsOffset = _EnableProjectedDepthControlsOffset ?? Schema.GetOffset(0xA370F307B614A221);
+            return ref _Handle.AsRef<bool>(_EnableProjectedDepthControlsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinProjectionDepthOffset;
+    private static nint? _MinProjectionDepthOffset;
 
-  public ref float MinProjectionDepth {
-    get {
-      if (_MinProjectionDepthOffset == null) {
-        _MinProjectionDepthOffset = Schema.GetOffset(0xA370F3076A7B1FB1);
-      }
-      return ref _Handle.AsRef<float>(_MinProjectionDepthOffset!.Value);
+    public ref float MinProjectionDepth {
+        get {
+            _MinProjectionDepthOffset = _MinProjectionDepthOffset ?? Schema.GetOffset(0xA370F3076A7B1FB1);
+            return ref _Handle.AsRef<float>(_MinProjectionDepthOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxProjectionDepthOffset;
+    private static nint? _MaxProjectionDepthOffset;
 
-  public ref float MaxProjectionDepth {
-    get {
-      if (_MaxProjectionDepthOffset == null) {
-        _MaxProjectionDepthOffset = Schema.GetOffset(0xA370F3078C7219DB);
-      }
-      return ref _Handle.AsRef<float>(_MaxProjectionDepthOffset!.Value);
+    public ref float MaxProjectionDepth {
+        get {
+            _MaxProjectionDepthOffset = _MaxProjectionDepthOffset ?? Schema.GetOffset(0xA370F3078C7219DB);
+            return ref _Handle.AsRef<float>(_MaxProjectionDepthOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProjectedMaterialsOffset;
+    private static nint? _ProjectedMaterialsOffset;
 
-  public ref CUtlVector<RenderProjectedMaterial_t> ProjectedMaterials {
-    get {
-      if (_ProjectedMaterialsOffset == null) {
-        _ProjectedMaterialsOffset = Schema.GetOffset(0xA370F30718968FAF);
-      }
-      return ref _Handle.AsRef<CUtlVector<RenderProjectedMaterial_t>>(_ProjectedMaterialsOffset!.Value);
+    public ref CUtlVector<RenderProjectedMaterial_t> ProjectedMaterials {
+        get {
+            _ProjectedMaterialsOffset = _ProjectedMaterialsOffset ?? Schema.GetOffset(0xA370F30718968FAF);
+            return ref _Handle.AsRef<CUtlVector<RenderProjectedMaterial_t>>(_ProjectedMaterialsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialSelectionOffset;
+    private static nint? _MaterialSelectionOffset;
 
-  public CPerParticleFloatInput MaterialSelection {
-    get {
-      if (_MaterialSelectionOffset == null) {
-        _MaterialSelectionOffset = Schema.GetOffset(0xA370F3075A88A590);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _MaterialSelectionOffset!.Value);
+    public CPerParticleFloatInput MaterialSelection {
+        get {
+            _MaterialSelectionOffset = _MaterialSelectionOffset ?? Schema.GetOffset(0xA370F3075A88A590);
+            return new CPerParticleFloatInputImpl(_Handle + _MaterialSelectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnimationTimeScaleOffset;
+    private static nint? _AnimationTimeScaleOffset;
 
-  public ref float AnimationTimeScale {
-    get {
-      if (_AnimationTimeScaleOffset == null) {
-        _AnimationTimeScaleOffset = Schema.GetOffset(0xA370F3071CD3BFF4);
-      }
-      return ref _Handle.AsRef<float>(_AnimationTimeScaleOffset!.Value);
+    public ref float AnimationTimeScale {
+        get {
+            _AnimationTimeScaleOffset = _AnimationTimeScaleOffset ?? Schema.GetOffset(0xA370F3071CD3BFF4);
+            return ref _Handle.AsRef<float>(_AnimationTimeScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrientToNormalOffset;
+    private static nint? _OrientToNormalOffset;
 
-  public ref bool OrientToNormal {
-    get {
-      if (_OrientToNormalOffset == null) {
-        _OrientToNormalOffset = Schema.GetOffset(0xA370F307FAC0D30A);
-      }
-      return ref _Handle.AsRef<bool>(_OrientToNormalOffset!.Value);
+    public ref bool OrientToNormal {
+        get {
+            _OrientToNormalOffset = _OrientToNormalOffset ?? Schema.GetOffset(0xA370F307FAC0D30A);
+            return ref _Handle.AsRef<bool>(_OrientToNormalOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialVarsOffset;
+    private static nint? _MaterialVarsOffset;
 
-  public ref CUtlVector<MaterialVariable_t> MaterialVars {
-    get {
-      if (_MaterialVarsOffset == null) {
-        _MaterialVarsOffset = Schema.GetOffset(0xA370F307FA861D66);
-      }
-      return ref _Handle.AsRef<CUtlVector<MaterialVariable_t>>(_MaterialVarsOffset!.Value);
+    public ref CUtlVector<MaterialVariable_t> MaterialVars {
+        get {
+            _MaterialVarsOffset = _MaterialVarsOffset ?? Schema.GetOffset(0xA370F307FA861D66);
+            return ref _Handle.AsRef<CUtlVector<MaterialVariable_t>>(_MaterialVarsOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleOffset;
+    private static nint? _RadiusScaleOffset;
 
-  public CParticleCollectionFloatInput RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0xA370F307A7A20159);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+    public CParticleCollectionFloatInput RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0xA370F307A7A20159);
+            return new CParticleCollectionFloatInputImpl(_Handle + _RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaScaleOffset;
+    private static nint? _AlphaScaleOffset;
 
-  public CParticleCollectionFloatInput AlphaScale {
-    get {
-      if (_AlphaScaleOffset == null) {
-        _AlphaScaleOffset = Schema.GetOffset(0xA370F307EC6D3C25);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _AlphaScaleOffset!.Value);
+    public CParticleCollectionFloatInput AlphaScale {
+        get {
+            _AlphaScaleOffset = _AlphaScaleOffset ?? Schema.GetOffset(0xA370F307EC6D3C25);
+            return new CParticleCollectionFloatInputImpl(_Handle + _AlphaScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _RollScaleOffset;
+    private static nint? _RollScaleOffset;
 
-  public CParticleCollectionFloatInput RollScale {
-    get {
-      if (_RollScaleOffset == null) {
-        _RollScaleOffset = Schema.GetOffset(0xA370F307F2113F72);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _RollScaleOffset!.Value);
+    public CParticleCollectionFloatInput RollScale {
+        get {
+            _RollScaleOffset = _RollScaleOffset ?? Schema.GetOffset(0xA370F307F2113F72);
+            return new CParticleCollectionFloatInputImpl(_Handle + _RollScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _Alpha2FieldOffset;
+    private static nint? _Alpha2FieldOffset;
 
-  public ParticleAttributeIndex_t Alpha2Field {
-    get {
-      if (_Alpha2FieldOffset == null) {
-        _Alpha2FieldOffset = Schema.GetOffset(0xA370F307F60EADC1);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _Alpha2FieldOffset!.Value);
+    public ParticleAttributeIndex_t Alpha2Field {
+        get {
+            _Alpha2FieldOffset = _Alpha2FieldOffset ?? Schema.GetOffset(0xA370F307F60EADC1);
+            return new ParticleAttributeIndex_tImpl(_Handle + _Alpha2FieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorScaleOffset;
+    private static nint? _ColorScaleOffset;
 
-  public CParticleCollectionVecInput ColorScale {
-    get {
-      if (_ColorScaleOffset == null) {
-        _ColorScaleOffset = Schema.GetOffset(0xA370F3079F9BB8BA);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+    public CParticleCollectionVecInput ColorScale {
+        get {
+            _ColorScaleOffset = _ColorScaleOffset ?? Schema.GetOffset(0xA370F3079F9BB8BA);
+            return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorBlendTypeOffset;
+    private static nint? _ColorBlendTypeOffset;
 
-  public ref ParticleColorBlendType_t ColorBlendType {
-    get {
-      if (_ColorBlendTypeOffset == null) {
-        _ColorBlendTypeOffset = Schema.GetOffset(0xA370F307DBC6EFCF);
-      }
-      return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+    public ref ParticleColorBlendType_t ColorBlendType {
+        get {
+            _ColorBlendTypeOffset = _ColorBlendTypeOffset ?? Schema.GetOffset(0xA370F307DBC6EFCF);
+            return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

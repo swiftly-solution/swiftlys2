@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayer_ItemServicesImpl : CPlayer_ItemServicesImpl, CCSPlayer_ItemServices {
+internal partial class CCSPlayer_ItemServicesImpl : CPlayer_ItemServicesImpl, CCSPlayer_ItemServices
+{
+    public CCSPlayer_ItemServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayer_ItemServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HasDefuserOffset;
 
-  private static nint? _HasDefuserOffset;
-
-  public ref bool HasDefuser {
-    get {
-      if (_HasDefuserOffset == null) {
-        _HasDefuserOffset = Schema.GetOffset(0x6BB85EAD5AF87AF5);
-      }
-      return ref _Handle.AsRef<bool>(_HasDefuserOffset!.Value);
+    public ref bool HasDefuser {
+        get {
+            _HasDefuserOffset = _HasDefuserOffset ?? Schema.GetOffset(0x6BB85EAD5AF87AF5);
+            return ref _Handle.AsRef<bool>(_HasDefuserOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasHelmetOffset;
+    private static nint? _HasHelmetOffset;
 
-  public ref bool HasHelmet {
-    get {
-      if (_HasHelmetOffset == null) {
-        _HasHelmetOffset = Schema.GetOffset(0x6BB85EAD4240B6F6);
-      }
-      return ref _Handle.AsRef<bool>(_HasHelmetOffset!.Value);
+    public ref bool HasHelmet {
+        get {
+            _HasHelmetOffset = _HasHelmetOffset ?? Schema.GetOffset(0x6BB85EAD4240B6F6);
+            return ref _Handle.AsRef<bool>(_HasHelmetOffset!.Value);
+        }
     }
-  }
 
-  public void HasDefuserUpdated() {
-    Schema.Update(_Handle, 0x6BB85EAD5AF87AF5);
-  }
-  public void HasHelmetUpdated() {
-    Schema.Update(_Handle, 0x6BB85EAD4240B6F6);
-  }
+    public void HasDefuserUpdated() => Schema.Update(_Handle, 0x6BB85EAD5AF87AF5);
+    public void HasHelmetUpdated() => Schema.Update(_Handle, 0x6BB85EAD4240B6F6);
 }

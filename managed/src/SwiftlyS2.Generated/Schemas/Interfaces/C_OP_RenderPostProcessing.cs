@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderPostProcessing : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderPostProcessing> {
+public partial interface C_OP_RenderPostProcessing : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderPostProcessing>
+{
+    static C_OP_RenderPostProcessing ISchemaClass<C_OP_RenderPostProcessing>.From(nint handle) => new C_OP_RenderPostProcessingImpl(handle);
+    static int ISchemaClass<C_OP_RenderPostProcessing>.Size => 928;
+    static string? ISchemaClass<C_OP_RenderPostProcessing>.ClassName => null;
 
-  static C_OP_RenderPostProcessing ISchemaClass<C_OP_RenderPostProcessing>.From(nint handle) => new C_OP_RenderPostProcessingImpl(handle);
-  static int ISchemaClass<C_OP_RenderPostProcessing>.Size => 928;
-  static string? ISchemaClass<C_OP_RenderPostProcessing>.ClassName => null;
 
-  
-  public CPerParticleFloatInput PostProcessStrength { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostTexture { get; }
-  
-  public ref ParticlePostProcessPriorityGroup_t Priority { get; }
+    public CPerParticleFloatInput PostProcessStrength { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCPostProcessingResource> PostTexture { get; }
+
+    public ref ParticlePostProcessPriorityGroup_t Priority { get; }
 
 
 }

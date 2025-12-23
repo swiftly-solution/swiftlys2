@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeNodeReverseOffset_tImpl : SchemaClass, FeNodeReverseOffset_t {
+internal partial class FeNodeReverseOffset_tImpl : SchemaClass, FeNodeReverseOffset_t
+{
+    public FeNodeReverseOffset_tImpl(nint handle) : base(handle) { }
 
-  public FeNodeReverseOffset_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OffsetOffset;
 
-  private static nint? _OffsetOffset;
-
-  public ref Vector Offset {
-    get {
-      if (_OffsetOffset == null) {
-        _OffsetOffset = Schema.GetOffset(0xA3D68D6AB2913856);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+    public ref Vector Offset {
+        get {
+            _OffsetOffset = _OffsetOffset ?? Schema.GetOffset(0xA3D68D6AB2913856);
+            return ref _Handle.AsRef<Vector>(_OffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneCtrlOffset;
+    private static nint? _BoneCtrlOffset;
 
-  public ref ushort BoneCtrl {
-    get {
-      if (_BoneCtrlOffset == null) {
-        _BoneCtrlOffset = Schema.GetOffset(0xA3D68D6AE9730872);
-      }
-      return ref _Handle.AsRef<ushort>(_BoneCtrlOffset!.Value);
+    public ref ushort BoneCtrl {
+        get {
+            _BoneCtrlOffset = _BoneCtrlOffset ?? Schema.GetOffset(0xA3D68D6AE9730872);
+            return ref _Handle.AsRef<ushort>(_BoneCtrlOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetNodeOffset;
+    private static nint? _TargetNodeOffset;
 
-  public ref ushort TargetNode {
-    get {
-      if (_TargetNodeOffset == null) {
-        _TargetNodeOffset = Schema.GetOffset(0xA3D68D6A817BD540);
-      }
-      return ref _Handle.AsRef<ushort>(_TargetNodeOffset!.Value);
+    public ref ushort TargetNode {
+        get {
+            _TargetNodeOffset = _TargetNodeOffset ?? Schema.GetOffset(0xA3D68D6A817BD540);
+            return ref _Handle.AsRef<ushort>(_TargetNodeOffset!.Value);
+        }
     }
-  }
 
 
 }

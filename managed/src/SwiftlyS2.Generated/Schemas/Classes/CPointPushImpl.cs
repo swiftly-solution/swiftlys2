@@ -6,94 +6,76 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointPushImpl : CPointEntityImpl, CPointPush {
+internal partial class CPointPushImpl : CPointEntityImpl, CPointPush
+{
+    public CPointPushImpl(nint handle) : base(handle) { }
 
-  public CPointPushImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EnabledOffset;
 
-  private static nint? _EnabledOffset;
-
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0x282695C06154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x282695C06154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _MagnitudeOffset;
+    private static nint? _MagnitudeOffset;
 
-  public ref float Magnitude {
-    get {
-      if (_MagnitudeOffset == null) {
-        _MagnitudeOffset = Schema.GetOffset(0x282695C0ED0A1D8B);
-      }
-      return ref _Handle.AsRef<float>(_MagnitudeOffset!.Value);
+    public ref float Magnitude {
+        get {
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x282695C0ED0A1D8B);
+            return ref _Handle.AsRef<float>(_MagnitudeOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x282695C05ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x282695C05ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _InnerRadiusOffset;
+    private static nint? _InnerRadiusOffset;
 
-  public ref float InnerRadius {
-    get {
-      if (_InnerRadiusOffset == null) {
-        _InnerRadiusOffset = Schema.GetOffset(0x282695C032121407);
-      }
-      return ref _Handle.AsRef<float>(_InnerRadiusOffset!.Value);
+    public ref float InnerRadius {
+        get {
+            _InnerRadiusOffset = _InnerRadiusOffset ?? Schema.GetOffset(0x282695C032121407);
+            return ref _Handle.AsRef<float>(_InnerRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConeOfInfluenceOffset;
+    private static nint? _ConeOfInfluenceOffset;
 
-  public ref float ConeOfInfluence {
-    get {
-      if (_ConeOfInfluenceOffset == null) {
-        _ConeOfInfluenceOffset = Schema.GetOffset(0x282695C02EA47D9C);
-      }
-      return ref _Handle.AsRef<float>(_ConeOfInfluenceOffset!.Value);
+    public ref float ConeOfInfluence {
+        get {
+            _ConeOfInfluenceOffset = _ConeOfInfluenceOffset ?? Schema.GetOffset(0x282695C02EA47D9C);
+            return ref _Handle.AsRef<float>(_ConeOfInfluenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _FilterNameOffset;
+    private static nint? _FilterNameOffset;
 
-  public string FilterName {
-    get {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0x282695C042E1968C);
-      }
-      var ptr = _Handle.Read<nint>(_FilterNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0x282695C042E1968C);
-      }
-      Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _FilterOffset;
+    public string FilterName {
+        get {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x282695C042E1968C);
+            return Schema.GetString(_Handle.Read<nint>(_FilterNameOffset!.Value));
+        }
+        set {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x282695C042E1968C);
+            Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FilterOffset;
 
-  public ref CHandle<CBaseFilter> Filter {
-    get {
-      if (_FilterOffset == null) {
-        _FilterOffset = Schema.GetOffset(0x282695C045D9E0B1);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset!.Value);
+    public ref CHandle<CBaseFilter> Filter {
+        get {
+            _FilterOffset = _FilterOffset ?? Schema.GetOffset(0x282695C045D9E0B1);
+            return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset!.Value);
+        }
     }
-  }
 
 
 }

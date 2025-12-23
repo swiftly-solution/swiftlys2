@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum OrientationWarpMode_t : uint {
-
+public enum OrientationWarpMode_t : uint
+{
  eInvalid = 0,
 
  eAngle = 1,

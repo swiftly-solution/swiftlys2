@@ -8,48 +8,48 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGameScriptedMoveData : ISchemaClass<CGameScriptedMoveData> {
+public partial interface CGameScriptedMoveData : ISchemaClass<CGameScriptedMoveData>
+{
+    static CGameScriptedMoveData ISchemaClass<CGameScriptedMoveData>.From(nint handle) => new CGameScriptedMoveDataImpl(handle);
+    static int ISchemaClass<CGameScriptedMoveData>.Size => 116;
+    static string? ISchemaClass<CGameScriptedMoveData>.ClassName => null;
 
-  static CGameScriptedMoveData ISchemaClass<CGameScriptedMoveData>.From(nint handle) => new CGameScriptedMoveDataImpl(handle);
-  static int ISchemaClass<CGameScriptedMoveData>.Size => 116;
-  static string? ISchemaClass<CGameScriptedMoveData>.ClassName => null;
 
-  
-  public ref Vector AccumulatedRootMotion { get; }
-  
-  public ref QAngle AccumulatedRootMotionRotation { get; }
-  
-  public ref Vector Src { get; }
-  
-  public ref QAngle Src1 { get; }
-  
-  public ref QAngle Current { get; }
-  
-  public ref float LockedSpeed { get; }
-  
-  public ref float AngRate { get; }
-  
-  public ref float Duration { get; }
-  
-  public GameTime_t StartTime { get; }
-  
-  public ref bool Active { get; }
-  
-  public ref bool TeleportOnEnd { get; }
-  
-  public ref bool IgnoreRotation { get; }
-  
-  public ref bool Success { get; }
-  
-  public ref ForcedCrouchState_t ForcedCrouchState { get; }
-  
-  public ref bool IgnoreCollisions { get; }
-  
-  public ref Vector Dest { get; }
-  
-  public ref QAngle Dst { get; }
-  
-  public ref CHandle<CBaseEntity> DestEntity { get; }
+    public ref Vector AccumulatedRootMotion { get; }
+
+    public ref QAngle AccumulatedRootMotionRotation { get; }
+
+    public ref Vector Src { get; }
+
+    public ref QAngle Src1 { get; }
+
+    public ref QAngle Current { get; }
+
+    public ref float LockedSpeed { get; }
+
+    public ref float AngRate { get; }
+
+    public ref float Duration { get; }
+
+    public GameTime_t StartTime { get; }
+
+    public ref bool Active { get; }
+
+    public ref bool TeleportOnEnd { get; }
+
+    public ref bool IgnoreRotation { get; }
+
+    public ref bool Success { get; }
+
+    public ref ForcedCrouchState_t ForcedCrouchState { get; }
+
+    public ref bool IgnoreCollisions { get; }
+
+    public ref Vector Dest { get; }
+
+    public ref QAngle Dst { get; }
+
+    public ref CHandle<CBaseEntity> DestEntity { get; }
 
 
 }

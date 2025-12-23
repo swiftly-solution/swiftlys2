@@ -8,49 +8,49 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncRotating : CBaseModelEntity, ISchemaClass<CFuncRotating> {
+public partial interface CFuncRotating : CBaseModelEntity, ISchemaClass<CFuncRotating>
+{
+    static CFuncRotating ISchemaClass<CFuncRotating>.From(nint handle) => new CFuncRotatingImpl(handle);
+    static int ISchemaClass<CFuncRotating>.Size => 2256;
+    static string? ISchemaClass<CFuncRotating>.ClassName => "func_rotating";
 
-  static CFuncRotating ISchemaClass<CFuncRotating>.From(nint handle) => new CFuncRotatingImpl(handle);
-  static int ISchemaClass<CFuncRotating>.Size => 2256;
-  static string? ISchemaClass<CFuncRotating>.ClassName => "func_rotating";
 
-  
-  public CEntityIOOutput OnStopped { get; }
-  
-  public CEntityIOOutput OnStarted { get; }
-  
-  public CEntityIOOutput OnReachedStart { get; }
-  
-  // RotationVector
-  public SchemaUntypedField LocalRotationVector { get; }
-  
-  public ref float FanFriction { get; }
-  
-  public ref float Attenuation { get; }
-  
-  public ref float Volume { get; }
-  
-  public ref float TargetSpeed { get; }
-  
-  public ref float MaxSpeed { get; }
-  
-  public ref float BlockDamage { get; }
-  
-  public string NoiseRunning { get; set; }
-  
-  public ref bool Reversed { get; }
-  
-  public ref bool AccelDecel { get; }
-  
-  public ref QAngle PrevLocalAngles { get; }
-  
-  public ref QAngle Start { get; }
-  
-  public ref bool StopAtStartPos { get; }
-  
-  public ref Vector ClientOrigin { get; }
-  
-  public ref QAngle ClientAngles { get; }
+    public ref CEntityIOOutput OnStopped { get; }
+
+    public ref CEntityIOOutput OnStarted { get; }
+
+    public ref CEntityIOOutput OnReachedStart { get; }
+
+    // RotationVector
+    public SchemaUntypedField LocalRotationVector { get; }
+
+    public ref float FanFriction { get; }
+
+    public ref float Attenuation { get; }
+
+    public ref float Volume { get; }
+
+    public ref float TargetSpeed { get; }
+
+    public ref float MaxSpeed { get; }
+
+    public ref float BlockDamage { get; }
+
+    public string NoiseRunning { get; set; }
+
+    public ref bool Reversed { get; }
+
+    public ref bool AccelDecel { get; }
+
+    public ref QAngle PrevLocalAngles { get; }
+
+    public ref QAngle Start { get; }
+
+    public ref bool StopAtStartPos { get; }
+
+    public ref Vector ClientOrigin { get; }
+
+    public ref QAngle ClientAngles { get; }
 
 
 }

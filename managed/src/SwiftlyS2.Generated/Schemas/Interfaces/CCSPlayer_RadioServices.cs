@@ -8,23 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayer_RadioServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_RadioServices> {
+public partial interface CCSPlayer_RadioServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_RadioServices>
+{
+    static CCSPlayer_RadioServices ISchemaClass<CCSPlayer_RadioServices>.From(nint handle) => new CCSPlayer_RadioServicesImpl(handle);
+    static int ISchemaClass<CCSPlayer_RadioServices>.Size => 96;
+    static string? ISchemaClass<CCSPlayer_RadioServices>.ClassName => null;
 
-  static CCSPlayer_RadioServices ISchemaClass<CCSPlayer_RadioServices>.From(nint handle) => new CCSPlayer_RadioServicesImpl(handle);
-  static int ISchemaClass<CCSPlayer_RadioServices>.Size => 96;
-  static string? ISchemaClass<CCSPlayer_RadioServices>.ClassName => null;
 
-  
-  public GameTime_t GotHostageTalkTimer { get; }
-  
-  public GameTime_t DefusingTalkTimer { get; }
-  
-  public GameTime_t C4PlantTalkTimer { get; }
-  
-  // GameTime_t
-  public SchemaUntypedField RadioTokenSlots { get; }
-  
-  public ref bool IgnoreRadio { get; }
+    public GameTime_t GotHostageTalkTimer { get; }
+
+    public GameTime_t DefusingTalkTimer { get; }
+
+    public GameTime_t C4PlantTalkTimer { get; }
+
+    public ISchemaClassFixedArray<GameTime_t> RadioTokenSlots { get; }
+
+    public ref bool IgnoreRadio { get; }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDynamicPropAlias_cable_dynamic : CDynamicProp, ISchemaClass<CDynamicPropAlias_cable_dynamic> {
-
-  static CDynamicPropAlias_cable_dynamic ISchemaClass<CDynamicPropAlias_cable_dynamic>.From(nint handle) => new CDynamicPropAlias_cable_dynamicImpl(handle);
-  static int ISchemaClass<CDynamicPropAlias_cable_dynamic>.Size => 3408;
-  static string? ISchemaClass<CDynamicPropAlias_cable_dynamic>.ClassName => null;
+public partial interface CDynamicPropAlias_cable_dynamic : CDynamicProp, ISchemaClass<CDynamicPropAlias_cable_dynamic>
+{
+    static CDynamicPropAlias_cable_dynamic ISchemaClass<CDynamicPropAlias_cable_dynamic>.From(nint handle) => new CDynamicPropAlias_cable_dynamicImpl(handle);
+    static int ISchemaClass<CDynamicPropAlias_cable_dynamic>.Size => 3408;
+    static string? ISchemaClass<CDynamicPropAlias_cable_dynamic>.ClassName => null;
 
 
 

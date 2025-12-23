@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCommentaryAuto : CBaseEntity, ISchemaClass<CCommentaryAuto> {
+public partial interface CCommentaryAuto : CBaseEntity, ISchemaClass<CCommentaryAuto>
+{
+    static CCommentaryAuto ISchemaClass<CCommentaryAuto>.From(nint handle) => new CCommentaryAutoImpl(handle);
+    static int ISchemaClass<CCommentaryAuto>.Size => 1384;
+    static string? ISchemaClass<CCommentaryAuto>.ClassName => "commentary_auto";
 
-  static CCommentaryAuto ISchemaClass<CCommentaryAuto>.From(nint handle) => new CCommentaryAutoImpl(handle);
-  static int ISchemaClass<CCommentaryAuto>.Size => 1384;
-  static string? ISchemaClass<CCommentaryAuto>.ClassName => "commentary_auto";
 
-  
-  public CEntityIOOutput OnCommentaryNewGame { get; }
-  
-  public CEntityIOOutput OnCommentaryMidGame { get; }
-  
-  public CEntityIOOutput OnCommentaryMultiplayerSpawn { get; }
+    public ref CEntityIOOutput OnCommentaryNewGame { get; }
+
+    public ref CEntityIOOutput OnCommentaryMidGame { get; }
+
+    public ref CEntityIOOutput OnCommentaryMultiplayerSpawn { get; }
 
 
 }

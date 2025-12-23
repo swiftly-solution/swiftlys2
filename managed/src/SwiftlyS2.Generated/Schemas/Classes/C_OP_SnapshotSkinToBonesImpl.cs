@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SnapshotSkinToBonesImpl : CParticleFunctionOperatorImpl, C_OP_SnapshotSkinToBones {
+internal partial class C_OP_SnapshotSkinToBonesImpl : CParticleFunctionOperatorImpl, C_OP_SnapshotSkinToBones
+{
+    public C_OP_SnapshotSkinToBonesImpl(nint handle) : base(handle) { }
 
-  public C_OP_SnapshotSkinToBonesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformNormalsOffset;
 
-  private static nint? _TransformNormalsOffset;
-
-  public ref bool TransformNormals {
-    get {
-      if (_TransformNormalsOffset == null) {
-        _TransformNormalsOffset = Schema.GetOffset(0xCA48FCF83C6BFD75);
-      }
-      return ref _Handle.AsRef<bool>(_TransformNormalsOffset!.Value);
+    public ref bool TransformNormals {
+        get {
+            _TransformNormalsOffset = _TransformNormalsOffset ?? Schema.GetOffset(0xCA48FCF83C6BFD75);
+            return ref _Handle.AsRef<bool>(_TransformNormalsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransformRadiiOffset;
+    private static nint? _TransformRadiiOffset;
 
-  public ref bool TransformRadii {
-    get {
-      if (_TransformRadiiOffset == null) {
-        _TransformRadiiOffset = Schema.GetOffset(0xCA48FCF88183F664);
-      }
-      return ref _Handle.AsRef<bool>(_TransformRadiiOffset!.Value);
+    public ref bool TransformRadii {
+        get {
+            _TransformRadiiOffset = _TransformRadiiOffset ?? Schema.GetOffset(0xCA48FCF88183F664);
+            return ref _Handle.AsRef<bool>(_TransformRadiiOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointNumberOffset;
+    private static nint? _ControlPointNumberOffset;
 
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0xCA48FCF83F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xCA48FCF83F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _LifeTimeFadeStartOffset;
+    private static nint? _LifeTimeFadeStartOffset;
 
-  public ref float LifeTimeFadeStart {
-    get {
-      if (_LifeTimeFadeStartOffset == null) {
-        _LifeTimeFadeStartOffset = Schema.GetOffset(0xCA48FCF895A2845A);
-      }
-      return ref _Handle.AsRef<float>(_LifeTimeFadeStartOffset!.Value);
+    public ref float LifeTimeFadeStart {
+        get {
+            _LifeTimeFadeStartOffset = _LifeTimeFadeStartOffset ?? Schema.GetOffset(0xCA48FCF895A2845A);
+            return ref _Handle.AsRef<float>(_LifeTimeFadeStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _LifeTimeFadeEndOffset;
+    private static nint? _LifeTimeFadeEndOffset;
 
-  public ref float LifeTimeFadeEnd {
-    get {
-      if (_LifeTimeFadeEndOffset == null) {
-        _LifeTimeFadeEndOffset = Schema.GetOffset(0xCA48FCF8222841EF);
-      }
-      return ref _Handle.AsRef<float>(_LifeTimeFadeEndOffset!.Value);
+    public ref float LifeTimeFadeEnd {
+        get {
+            _LifeTimeFadeEndOffset = _LifeTimeFadeEndOffset ?? Schema.GetOffset(0xCA48FCF8222841EF);
+            return ref _Handle.AsRef<float>(_LifeTimeFadeEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _JumpThresholdOffset;
+    private static nint? _JumpThresholdOffset;
 
-  public ref float JumpThreshold {
-    get {
-      if (_JumpThresholdOffset == null) {
-        _JumpThresholdOffset = Schema.GetOffset(0xCA48FCF8B6BB1AD6);
-      }
-      return ref _Handle.AsRef<float>(_JumpThresholdOffset!.Value);
+    public ref float JumpThreshold {
+        get {
+            _JumpThresholdOffset = _JumpThresholdOffset ?? Schema.GetOffset(0xCA48FCF8B6BB1AD6);
+            return ref _Handle.AsRef<float>(_JumpThresholdOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevPosScaleOffset;
+    private static nint? _PrevPosScaleOffset;
 
-  public ref float PrevPosScale {
-    get {
-      if (_PrevPosScaleOffset == null) {
-        _PrevPosScaleOffset = Schema.GetOffset(0xCA48FCF846CED122);
-      }
-      return ref _Handle.AsRef<float>(_PrevPosScaleOffset!.Value);
+    public ref float PrevPosScale {
+        get {
+            _PrevPosScaleOffset = _PrevPosScaleOffset ?? Schema.GetOffset(0xCA48FCF846CED122);
+            return ref _Handle.AsRef<float>(_PrevPosScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

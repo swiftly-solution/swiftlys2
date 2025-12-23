@@ -8,46 +8,46 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VPhysXAggregateData_t : ISchemaClass<VPhysXAggregateData_t> {
+public partial interface VPhysXAggregateData_t : ISchemaClass<VPhysXAggregateData_t>
+{
+    static VPhysXAggregateData_t ISchemaClass<VPhysXAggregateData_t>.From(nint handle) => new VPhysXAggregateData_tImpl(handle);
+    static int ISchemaClass<VPhysXAggregateData_t>.Size => 336;
+    static string? ISchemaClass<VPhysXAggregateData_t>.ClassName => null;
 
-  static VPhysXAggregateData_t ISchemaClass<VPhysXAggregateData_t>.From(nint handle) => new VPhysXAggregateData_tImpl(handle);
-  static int ISchemaClass<VPhysXAggregateData_t>.Size => 336;
-  static string? ISchemaClass<VPhysXAggregateData_t>.ClassName => null;
 
-  
-  public ref ushort Flags { get; }
-  
-  public ref ushort RefCounter { get; }
-  
-  public ref CUtlVector<uint> BonesHash { get; }
-  
-  public ref CUtlVector<CUtlString> BoneNames { get; }
-  
-  public ref CUtlVector<ushort> IndexNames { get; }
-  
-  public ref CUtlVector<ushort> IndexHash { get; }
-  
-  public ref CUtlVector<matrix3x4_t> BindPose { get; }
-  
-  public ref CUtlVector<VPhysXBodyPart_t> Parts { get; }
-  
-  public ref CUtlVector<PhysShapeMarkup_t> ShapeMarkups { get; }
-  
-  public ref CUtlVector<VPhysXConstraint2_t> Constraints2 { get; }
-  
-  public ref CUtlVector<VPhysXJoint_t> Joints { get; }
-  
-  public PhysFeModelDesc_t? FeModel { get; }
-  
-  public ref CUtlVector<ushort> BoneParents { get; }
-  
-  public ref CUtlVector<uint> SurfacePropertyHashes { get; }
-  
-  public ref CUtlVector<VPhysXCollisionAttributes_t> CollisionAttributes { get; }
-  
-  public ref CUtlVector<CUtlString> DebugPartNames { get; }
-  
-  public string EmbeddedKeyvalues { get; set; }
+    public ref ushort Flags { get; }
+
+    public ref ushort RefCounter { get; }
+
+    public ref CUtlVector<uint> BonesHash { get; }
+
+    public ref CUtlVector<CUtlString> BoneNames { get; }
+
+    public ref CUtlVector<ushort> IndexNames { get; }
+
+    public ref CUtlVector<ushort> IndexHash { get; }
+
+    public ref CUtlVector<matrix3x4_t> BindPose { get; }
+
+    public ref CUtlVector<VPhysXBodyPart_t> Parts { get; }
+
+    public ref CUtlVector<PhysShapeMarkup_t> ShapeMarkups { get; }
+
+    public ref CUtlVector<VPhysXConstraint2_t> Constraints2 { get; }
+
+    public ref CUtlVector<VPhysXJoint_t> Joints { get; }
+
+    public PhysFeModelDesc_t? FeModel { get; }
+
+    public ref CUtlVector<ushort> BoneParents { get; }
+
+    public ref CUtlVector<uint> SurfacePropertyHashes { get; }
+
+    public ref CUtlVector<VPhysXCollisionAttributes_t> CollisionAttributes { get; }
+
+    public ref CUtlVector<CUtlString> DebugPartNames { get; }
+
+    public string EmbeddedKeyvalues { get; set; }
 
 
 }

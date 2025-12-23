@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNetworkOriginCellCoordQuantizedVector : ISchemaClass<CNetworkOriginCellCoordQuantizedVector> {
+public partial interface CNetworkOriginCellCoordQuantizedVector : ISchemaClass<CNetworkOriginCellCoordQuantizedVector>
+{
+    static CNetworkOriginCellCoordQuantizedVector ISchemaClass<CNetworkOriginCellCoordQuantizedVector>.From(nint handle) => new CNetworkOriginCellCoordQuantizedVectorImpl(handle);
+    static int ISchemaClass<CNetworkOriginCellCoordQuantizedVector>.Size => 48;
+    static string? ISchemaClass<CNetworkOriginCellCoordQuantizedVector>.ClassName => null;
 
-  static CNetworkOriginCellCoordQuantizedVector ISchemaClass<CNetworkOriginCellCoordQuantizedVector>.From(nint handle) => new CNetworkOriginCellCoordQuantizedVectorImpl(handle);
-  static int ISchemaClass<CNetworkOriginCellCoordQuantizedVector>.Size => 48;
-  static string? ISchemaClass<CNetworkOriginCellCoordQuantizedVector>.ClassName => null;
 
-  
-  public ref ushort CellX { get; }
-  
-  public ref ushort CellY { get; }
-  
-  public ref ushort CellZ { get; }
-  
-  public ref ushort OutsideWorld { get; }
-  
-  public ref CNetworkedQuantizedFloat X { get; }
-  
-  public ref CNetworkedQuantizedFloat Y { get; }
-  
-  public ref CNetworkedQuantizedFloat Z { get; }
+    public ref ushort CellX { get; }
 
-  public void CellXUpdated();
-  public void CellYUpdated();
-  public void CellZUpdated();
-  public void OutsideWorldUpdated();
-  public void XUpdated();
-  public void YUpdated();
-  public void ZUpdated();
+    public ref ushort CellY { get; }
+
+    public ref ushort CellZ { get; }
+
+    public ref ushort OutsideWorld { get; }
+
+    public ref CNetworkedQuantizedFloat X { get; }
+
+    public ref CNetworkedQuantizedFloat Y { get; }
+
+    public ref CNetworkedQuantizedFloat Z { get; }
+
+    public void CellXUpdated();
+    public void CellYUpdated();
+    public void CellZUpdated();
+    public void OutsideWorldUpdated();
+    public void XUpdated();
+    public void YUpdated();
+    public void ZUpdated();
 }

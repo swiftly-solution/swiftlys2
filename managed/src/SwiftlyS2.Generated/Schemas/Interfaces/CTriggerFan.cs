@@ -8,70 +8,70 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerFan : CBaseTrigger, ISchemaClass<CTriggerFan> {
+public partial interface CTriggerFan : CBaseTrigger, ISchemaClass<CTriggerFan>
+{
+    static CTriggerFan ISchemaClass<CTriggerFan>.From(nint handle) => new CTriggerFanImpl(handle);
+    static int ISchemaClass<CTriggerFan>.Size => 2672;
+    static string? ISchemaClass<CTriggerFan>.ClassName => "trigger_fan";
 
-  static CTriggerFan ISchemaClass<CTriggerFan>.From(nint handle) => new CTriggerFanImpl(handle);
-  static int ISchemaClass<CTriggerFan>.Size => 2672;
-  static string? ISchemaClass<CTriggerFan>.ClassName => "trigger_fan";
 
-  
-  public ref Vector FanOriginOffset { get; }
-  
-  public ref Vector Direction { get; }
-  
-  public ref bool PushTowardsInfoTarget { get; }
-  
-  public ref bool PushAwayFromInfoTarget { get; }
-  
-  public ref Quaternion NoiseDelta { get; }
-  
-  public ref CHandle<CInfoFan> InfoFan { get; }
-  
-  public ref float Force { get; }
-  
-  public ref bool Falloff { get; }
-  
-  public CountdownTimer RampTimer { get; }
-  
-  public ref Vector FanOriginWS { get; }
-  
-  public ref Vector FanOriginLS { get; }
-  
-  public ref Vector FanEndLS { get; }
-  
-  public ref Vector NoiseDirectionTarget { get; }
-  
-  public string InfoFan1 { get; set; }
-  
-  public ref float RopeForceScale { get; }
-  
-  public ref float ParticleForceScale { get; }
-  
-  public ref float PlayerForce { get; }
-  
-  public ref bool PlayerWindblock { get; }
-  
-  public ref float NPCForce { get; }
-  
-  public ref float RampTime { get; }
-  
-  public ref float NoiseDegrees { get; }
-  
-  public ref float NoiseSpeed { get; }
-  
-  public ref bool PushPlayer { get; }
-  
-  public ref bool RampDown { get; }
-  
-  public ref int ManagerFanIdx { get; }
+    public ref Vector FanOriginOffset { get; }
 
-  public void FanOriginOffsetUpdated();
-  public void DirectionUpdated();
-  public void PushTowardsInfoTargetUpdated();
-  public void PushAwayFromInfoTargetUpdated();
-  public void NoiseDeltaUpdated();
-  public void InfoFanUpdated();
-  public void ForceUpdated();
-  public void FalloffUpdated();
-  public void RampTimerUpdated();
+    public ref Vector Direction { get; }
+
+    public ref bool PushTowardsInfoTarget { get; }
+
+    public ref bool PushAwayFromInfoTarget { get; }
+
+    public ref Quaternion NoiseDelta { get; }
+
+    public ref CHandle<CInfoFan> InfoFan { get; }
+
+    public ref float Force { get; }
+
+    public ref bool Falloff { get; }
+
+    public CountdownTimer RampTimer { get; }
+
+    public ref Vector FanOriginWS { get; }
+
+    public ref Vector FanOriginLS { get; }
+
+    public ref Vector FanEndLS { get; }
+
+    public ref Vector NoiseDirectionTarget { get; }
+
+    public string InfoFan1 { get; set; }
+
+    public ref float RopeForceScale { get; }
+
+    public ref float ParticleForceScale { get; }
+
+    public ref float PlayerForce { get; }
+
+    public ref bool PlayerWindblock { get; }
+
+    public ref float NPCForce { get; }
+
+    public ref float RampTime { get; }
+
+    public ref float NoiseDegrees { get; }
+
+    public ref float NoiseSpeed { get; }
+
+    public ref bool PushPlayer { get; }
+
+    public ref bool RampDown { get; }
+
+    public ref int ManagerFanIdx { get; }
+
+    public void FanOriginOffsetUpdated();
+    public void DirectionUpdated();
+    public void PushTowardsInfoTargetUpdated();
+    public void PushAwayFromInfoTargetUpdated();
+    public void NoiseDeltaUpdated();
+    public void InfoFanUpdated();
+    public void ForceUpdated();
+    public void FalloffUpdated();
+    public void RampTimerUpdated();
 }

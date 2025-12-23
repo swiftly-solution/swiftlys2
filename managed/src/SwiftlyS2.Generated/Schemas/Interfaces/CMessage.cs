@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMessage : CPointEntity, ISchemaClass<CMessage> {
+public partial interface CMessage : CPointEntity, ISchemaClass<CMessage>
+{
+    static CMessage ISchemaClass<CMessage>.From(nint handle) => new CMessageImpl(handle);
+    static int ISchemaClass<CMessage>.Size => 1336;
+    static string? ISchemaClass<CMessage>.ClassName => "env_message";
 
-  static CMessage ISchemaClass<CMessage>.From(nint handle) => new CMessageImpl(handle);
-  static int ISchemaClass<CMessage>.Size => 1336;
-  static string? ISchemaClass<CMessage>.ClassName => "env_message";
 
-  
-  public string Message { get; set; }
-  
-  public ref float MessageVolume { get; }
-  
-  public ref int MessageAttenuation { get; }
-  
-  public ref float Radius { get; }
-  
-  public string Noise { get; set; }
-  
-  public CEntityIOOutput OnShowMessage { get; }
+    public string Message { get; set; }
+
+    public ref float MessageVolume { get; }
+
+    public ref int MessageAttenuation { get; }
+
+    public ref float Radius { get; }
+
+    public string Noise { get; set; }
+
+    public ref CEntityIOOutput OnShowMessage { get; }
 
 
 }

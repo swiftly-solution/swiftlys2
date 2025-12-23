@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum HorizJustification_e : uint {
-
+public enum HorizJustification_e : uint
+{
  HORIZ_JUSTIFICATION_LEFT = 0,
 
  HORIZ_JUSTIFICATION_CENTER = 1,

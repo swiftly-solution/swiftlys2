@@ -6,177 +6,144 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class TextureControls_tImpl : SchemaClass, TextureControls_t {
+internal partial class TextureControls_tImpl : SchemaClass, TextureControls_t
+{
+    public TextureControls_tImpl(nint handle) : base(handle) { }
 
-  public TextureControls_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FinalTextureScaleUOffset;
 
-  private static nint? _FinalTextureScaleUOffset;
-
-  public CParticleCollectionRendererFloatInput FinalTextureScaleU {
-    get {
-      if (_FinalTextureScaleUOffset == null) {
-        _FinalTextureScaleUOffset = Schema.GetOffset(0x6019C255986FEDD1);
-      }
-      return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureScaleUOffset!.Value);
+    public CParticleCollectionRendererFloatInput FinalTextureScaleU {
+        get {
+            _FinalTextureScaleUOffset = _FinalTextureScaleUOffset ?? Schema.GetOffset(0x6019C255986FEDD1);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureScaleUOffset!.Value);
+        }
     }
-  }
-  private static nint? _FinalTextureScaleVOffset;
+    private static nint? _FinalTextureScaleVOffset;
 
-  public CParticleCollectionRendererFloatInput FinalTextureScaleV {
-    get {
-      if (_FinalTextureScaleVOffset == null) {
-        _FinalTextureScaleVOffset = Schema.GetOffset(0x6019C255956FE918);
-      }
-      return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureScaleVOffset!.Value);
+    public CParticleCollectionRendererFloatInput FinalTextureScaleV {
+        get {
+            _FinalTextureScaleVOffset = _FinalTextureScaleVOffset ?? Schema.GetOffset(0x6019C255956FE918);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureScaleVOffset!.Value);
+        }
     }
-  }
-  private static nint? _FinalTextureOffsetUOffset;
+    private static nint? _FinalTextureOffsetUOffset;
 
-  public CParticleCollectionRendererFloatInput FinalTextureOffsetU {
-    get {
-      if (_FinalTextureOffsetUOffset == null) {
-        _FinalTextureOffsetUOffset = Schema.GetOffset(0x6019C25524B7447E);
-      }
-      return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureOffsetUOffset!.Value);
+    public CParticleCollectionRendererFloatInput FinalTextureOffsetU {
+        get {
+            _FinalTextureOffsetUOffset = _FinalTextureOffsetUOffset ?? Schema.GetOffset(0x6019C25524B7447E);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureOffsetUOffset!.Value);
+        }
     }
-  }
-  private static nint? _FinalTextureOffsetVOffset;
+    private static nint? _FinalTextureOffsetVOffset;
 
-  public CParticleCollectionRendererFloatInput FinalTextureOffsetV {
-    get {
-      if (_FinalTextureOffsetVOffset == null) {
-        _FinalTextureOffsetVOffset = Schema.GetOffset(0x6019C25523B742EB);
-      }
-      return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureOffsetVOffset!.Value);
+    public CParticleCollectionRendererFloatInput FinalTextureOffsetV {
+        get {
+            _FinalTextureOffsetVOffset = _FinalTextureOffsetVOffset ?? Schema.GetOffset(0x6019C25523B742EB);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureOffsetVOffset!.Value);
+        }
     }
-  }
-  private static nint? _FinalTextureUVRotationOffset;
+    private static nint? _FinalTextureUVRotationOffset;
 
-  public CParticleCollectionRendererFloatInput FinalTextureUVRotation {
-    get {
-      if (_FinalTextureUVRotationOffset == null) {
-        _FinalTextureUVRotationOffset = Schema.GetOffset(0x6019C2550D61C771);
-      }
-      return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureUVRotationOffset!.Value);
+    public CParticleCollectionRendererFloatInput FinalTextureUVRotation {
+        get {
+            _FinalTextureUVRotationOffset = _FinalTextureUVRotationOffset ?? Schema.GetOffset(0x6019C2550D61C771);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _FinalTextureUVRotationOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZoomScaleOffset;
+    private static nint? _ZoomScaleOffset;
 
-  public CParticleCollectionRendererFloatInput ZoomScale {
-    get {
-      if (_ZoomScaleOffset == null) {
-        _ZoomScaleOffset = Schema.GetOffset(0x6019C25565643B72);
-      }
-      return new CParticleCollectionRendererFloatInputImpl(_Handle + _ZoomScaleOffset!.Value);
+    public CParticleCollectionRendererFloatInput ZoomScale {
+        get {
+            _ZoomScaleOffset = _ZoomScaleOffset ?? Schema.GetOffset(0x6019C25565643B72);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _ZoomScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistortionOffset;
+    private static nint? _DistortionOffset;
 
-  public CParticleCollectionRendererFloatInput Distortion {
-    get {
-      if (_DistortionOffset == null) {
-        _DistortionOffset = Schema.GetOffset(0x6019C25570283608);
-      }
-      return new CParticleCollectionRendererFloatInputImpl(_Handle + _DistortionOffset!.Value);
+    public CParticleCollectionRendererFloatInput Distortion {
+        get {
+            _DistortionOffset = _DistortionOffset ?? Schema.GetOffset(0x6019C25570283608);
+            return new CParticleCollectionRendererFloatInputImpl(_Handle + _DistortionOffset!.Value);
+        }
     }
-  }
-  private static nint? _RandomizeOffsetsOffset;
+    private static nint? _RandomizeOffsetsOffset;
 
-  public ref bool RandomizeOffsets {
-    get {
-      if (_RandomizeOffsetsOffset == null) {
-        _RandomizeOffsetsOffset = Schema.GetOffset(0x6019C25541B7E31C);
-      }
-      return ref _Handle.AsRef<bool>(_RandomizeOffsetsOffset!.Value);
+    public ref bool RandomizeOffsets {
+        get {
+            _RandomizeOffsetsOffset = _RandomizeOffsetsOffset ?? Schema.GetOffset(0x6019C25541B7E31C);
+            return ref _Handle.AsRef<bool>(_RandomizeOffsetsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ClampUVsOffset;
+    private static nint? _ClampUVsOffset;
 
-  public ref bool ClampUVs {
-    get {
-      if (_ClampUVsOffset == null) {
-        _ClampUVsOffset = Schema.GetOffset(0x6019C255993F389C);
-      }
-      return ref _Handle.AsRef<bool>(_ClampUVsOffset!.Value);
+    public ref bool ClampUVs {
+        get {
+            _ClampUVsOffset = _ClampUVsOffset ?? Schema.GetOffset(0x6019C255993F389C);
+            return ref _Handle.AsRef<bool>(_ClampUVsOffset!.Value);
+        }
     }
-  }
-  private static nint? _PerParticleBlendOffset;
+    private static nint? _PerParticleBlendOffset;
 
-  public ref SpriteCardPerParticleScale_t PerParticleBlend {
-    get {
-      if (_PerParticleBlendOffset == null) {
-        _PerParticleBlendOffset = Schema.GetOffset(0x6019C25569A29D11);
-      }
-      return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleBlendOffset!.Value);
+    public ref SpriteCardPerParticleScale_t PerParticleBlend {
+        get {
+            _PerParticleBlendOffset = _PerParticleBlendOffset ?? Schema.GetOffset(0x6019C25569A29D11);
+            return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleBlendOffset!.Value);
+        }
     }
-  }
-  private static nint? _PerParticleScaleOffset;
+    private static nint? _PerParticleScaleOffset;
 
-  public ref SpriteCardPerParticleScale_t PerParticleScale {
-    get {
-      if (_PerParticleScaleOffset == null) {
-        _PerParticleScaleOffset = Schema.GetOffset(0x6019C255E1BE0540);
-      }
-      return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleScaleOffset!.Value);
+    public ref SpriteCardPerParticleScale_t PerParticleScale {
+        get {
+            _PerParticleScaleOffset = _PerParticleScaleOffset ?? Schema.GetOffset(0x6019C255E1BE0540);
+            return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _PerParticleOffsetUOffset;
+    private static nint? _PerParticleOffsetUOffset;
 
-  public ref SpriteCardPerParticleScale_t PerParticleOffsetU {
-    get {
-      if (_PerParticleOffsetUOffset == null) {
-        _PerParticleOffsetUOffset = Schema.GetOffset(0x6019C2559749CC58);
-      }
-      return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleOffsetUOffset!.Value);
+    public ref SpriteCardPerParticleScale_t PerParticleOffsetU {
+        get {
+            _PerParticleOffsetUOffset = _PerParticleOffsetUOffset ?? Schema.GetOffset(0x6019C2559749CC58);
+            return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleOffsetUOffset!.Value);
+        }
     }
-  }
-  private static nint? _PerParticleOffsetVOffset;
+    private static nint? _PerParticleOffsetVOffset;
 
-  public ref SpriteCardPerParticleScale_t PerParticleOffsetV {
-    get {
-      if (_PerParticleOffsetVOffset == null) {
-        _PerParticleOffsetVOffset = Schema.GetOffset(0x6019C2559A49D111);
-      }
-      return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleOffsetVOffset!.Value);
+    public ref SpriteCardPerParticleScale_t PerParticleOffsetV {
+        get {
+            _PerParticleOffsetVOffset = _PerParticleOffsetVOffset ?? Schema.GetOffset(0x6019C2559A49D111);
+            return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleOffsetVOffset!.Value);
+        }
     }
-  }
-  private static nint? _PerParticleRotationOffset;
+    private static nint? _PerParticleRotationOffset;
 
-  public ref SpriteCardPerParticleScale_t PerParticleRotation {
-    get {
-      if (_PerParticleRotationOffset == null) {
-        _PerParticleRotationOffset = Schema.GetOffset(0x6019C2557AD51358);
-      }
-      return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleRotationOffset!.Value);
+    public ref SpriteCardPerParticleScale_t PerParticleRotation {
+        get {
+            _PerParticleRotationOffset = _PerParticleRotationOffset ?? Schema.GetOffset(0x6019C2557AD51358);
+            return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleRotationOffset!.Value);
+        }
     }
-  }
-  private static nint? _PerParticleZoomOffset;
+    private static nint? _PerParticleZoomOffset;
 
-  public ref SpriteCardPerParticleScale_t PerParticleZoom {
-    get {
-      if (_PerParticleZoomOffset == null) {
-        _PerParticleZoomOffset = Schema.GetOffset(0x6019C255F0492151);
-      }
-      return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleZoomOffset!.Value);
+    public ref SpriteCardPerParticleScale_t PerParticleZoom {
+        get {
+            _PerParticleZoomOffset = _PerParticleZoomOffset ?? Schema.GetOffset(0x6019C255F0492151);
+            return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleZoomOffset!.Value);
+        }
     }
-  }
-  private static nint? _PerParticleDistortionOffset;
+    private static nint? _PerParticleDistortionOffset;
 
-  public ref SpriteCardPerParticleScale_t PerParticleDistortion {
-    get {
-      if (_PerParticleDistortionOffset == null) {
-        _PerParticleDistortionOffset = Schema.GetOffset(0x6019C2553A9977DD);
-      }
-      return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleDistortionOffset!.Value);
+    public ref SpriteCardPerParticleScale_t PerParticleDistortion {
+        get {
+            _PerParticleDistortionOffset = _PerParticleDistortionOffset ?? Schema.GetOffset(0x6019C2553A9977DD);
+            return ref _Handle.AsRef<SpriteCardPerParticleScale_t>(_PerParticleDistortionOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnVertex_t : ISchemaClass<RnVertex_t> {
+public partial interface RnVertex_t : ISchemaClass<RnVertex_t>
+{
+    static RnVertex_t ISchemaClass<RnVertex_t>.From(nint handle) => new RnVertex_tImpl(handle);
+    static int ISchemaClass<RnVertex_t>.Size => 1;
+    static string? ISchemaClass<RnVertex_t>.ClassName => null;
 
-  static RnVertex_t ISchemaClass<RnVertex_t>.From(nint handle) => new RnVertex_tImpl(handle);
-  static int ISchemaClass<RnVertex_t>.Size => 1;
-  static string? ISchemaClass<RnVertex_t>.ClassName => null;
 
-  
-  public ref byte Edge { get; }
+    public ref byte Edge { get; }
 
 
 }

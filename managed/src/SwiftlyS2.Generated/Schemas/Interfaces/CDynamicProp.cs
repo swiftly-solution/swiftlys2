@@ -8,57 +8,57 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDynamicProp : CBreakableProp, ISchemaClass<CDynamicProp> {
+public partial interface CDynamicProp : CBreakableProp, ISchemaClass<CDynamicProp>
+{
+    static CDynamicProp ISchemaClass<CDynamicProp>.From(nint handle) => new CDynamicPropImpl(handle);
+    static int ISchemaClass<CDynamicProp>.Size => 3408;
+    static string? ISchemaClass<CDynamicProp>.ClassName => "dynamic_prop";
 
-  static CDynamicProp ISchemaClass<CDynamicProp>.From(nint handle) => new CDynamicPropImpl(handle);
-  static int ISchemaClass<CDynamicProp>.Size => 3408;
-  static string? ISchemaClass<CDynamicProp>.ClassName => "dynamic_prop";
 
-  
-  public ref bool CreateNavObstacle { get; }
-  
-  public ref bool NavObstacleUpdatesOverridden { get; }
-  
-  public ref bool UseHitboxesForRenderBox { get; }
-  
-  public ref bool UseAnimGraph { get; }
-  
-  public CEntityIOOutput OutputAnimBegun { get; }
-  
-  public CEntityIOOutput OutputAnimOver { get; }
-  
-  public CEntityIOOutput OutputAnimLoopCycleOver { get; }
-  
-  public CEntityIOOutput OnAnimReachedStart { get; }
-  
-  public CEntityIOOutput OnAnimReachedEnd { get; }
-  
-  public string IdleAnim { get; set; }
-  
-  public ref AnimLoopMode_t IdleAnimLoopMode { get; }
-  
-  public ref bool RandomizeCycle { get; }
-  
-  public ref bool StartDisabled { get; }
-  
-  public ref bool FiredStartEndOutput { get; }
-  
-  public ref bool ForceNpcExclude { get; }
-  
-  public ref bool CreateNonSolid { get; }
-  
-  public ref bool IsOverrideProp { get; }
-  
-  public ref int InitialGlowState { get; }
-  
-  public ref int GlowRange { get; }
-  
-  public ref int GlowRangeMin { get; }
-  
-  public ref Color GlowColor { get; }
-  
-  public ref int GlowTeam { get; }
+    public ref bool CreateNavObstacle { get; }
 
-  public void UseHitboxesForRenderBoxUpdated();
-  public void UseAnimGraphUpdated();
+    public ref bool NavObstacleUpdatesOverridden { get; }
+
+    public ref bool UseHitboxesForRenderBox { get; }
+
+    public ref bool UseAnimGraph { get; }
+
+    public ref CEntityIOOutput OutputAnimBegun { get; }
+
+    public ref CEntityIOOutput OutputAnimOver { get; }
+
+    public ref CEntityIOOutput OutputAnimLoopCycleOver { get; }
+
+    public ref CEntityIOOutput OnAnimReachedStart { get; }
+
+    public ref CEntityIOOutput OnAnimReachedEnd { get; }
+
+    public string IdleAnim { get; set; }
+
+    public ref AnimLoopMode_t IdleAnimLoopMode { get; }
+
+    public ref bool RandomizeCycle { get; }
+
+    public ref bool StartDisabled { get; }
+
+    public ref bool FiredStartEndOutput { get; }
+
+    public ref bool ForceNpcExclude { get; }
+
+    public ref bool CreateNonSolid { get; }
+
+    public ref bool IsOverrideProp { get; }
+
+    public ref int InitialGlowState { get; }
+
+    public ref int GlowRange { get; }
+
+    public ref int GlowRangeMin { get; }
+
+    public ref Color GlowColor { get; }
+
+    public ref int GlowTeam { get; }
+
+    public void UseHitboxesForRenderBoxUpdated();
+    public void UseAnimGraphUpdated();
 }

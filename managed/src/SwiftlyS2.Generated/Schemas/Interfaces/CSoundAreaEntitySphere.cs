@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundAreaEntitySphere : CSoundAreaEntityBase, ISchemaClass<CSoundAreaEntitySphere> {
+public partial interface CSoundAreaEntitySphere : CSoundAreaEntityBase, ISchemaClass<CSoundAreaEntitySphere>
+{
+    static CSoundAreaEntitySphere ISchemaClass<CSoundAreaEntitySphere>.From(nint handle) => new CSoundAreaEntitySphereImpl(handle);
+    static int ISchemaClass<CSoundAreaEntitySphere>.Size => 1304;
+    static string? ISchemaClass<CSoundAreaEntitySphere>.ClassName => "snd_sound_area_sphere";
 
-  static CSoundAreaEntitySphere ISchemaClass<CSoundAreaEntitySphere>.From(nint handle) => new CSoundAreaEntitySphereImpl(handle);
-  static int ISchemaClass<CSoundAreaEntitySphere>.Size => 1304;
-  static string? ISchemaClass<CSoundAreaEntitySphere>.ClassName => "snd_sound_area_sphere";
 
-  
-  public ref float Radius { get; }
+    public ref float Radius { get; }
 
-  public void RadiusUpdated();
+    public void RadiusUpdated();
 }

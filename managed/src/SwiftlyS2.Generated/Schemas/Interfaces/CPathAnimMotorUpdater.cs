@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathAnimMotorUpdater : CPathAnimMotorUpdaterBase, ISchemaClass<CPathAnimMotorUpdater> {
-
-  static CPathAnimMotorUpdater ISchemaClass<CPathAnimMotorUpdater>.From(nint handle) => new CPathAnimMotorUpdaterImpl(handle);
-  static int ISchemaClass<CPathAnimMotorUpdater>.Size => 40;
-  static string? ISchemaClass<CPathAnimMotorUpdater>.ClassName => null;
+public partial interface CPathAnimMotorUpdater : CPathAnimMotorUpdaterBase, ISchemaClass<CPathAnimMotorUpdater>
+{
+    static CPathAnimMotorUpdater ISchemaClass<CPathAnimMotorUpdater>.From(nint handle) => new CPathAnimMotorUpdaterImpl(handle);
+    static int ISchemaClass<CPathAnimMotorUpdater>.Size => 40;
+    static string? ISchemaClass<CPathAnimMotorUpdater>.ClassName => null;
 
 
 

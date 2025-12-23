@@ -1,6 +1,6 @@
 /************************************************************************************************
  * SwiftlyS2 is a scripting framework for Source2-based games.
- * Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ * Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ int Bridge_Commands_HandleCommandForPlayer(int playerid, const char* command)
         return -1;
     }
 
-    return servercommands->HandleCommand(playerid, command);
+    return servercommands->HandleCommand(playerid, command, false);
 }
 
 uint64_t Bridge_Commands_RegisterCommand(const char* commandName, void* callback, bool registerRaw)

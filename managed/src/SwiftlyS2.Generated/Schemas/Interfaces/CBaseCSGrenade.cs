@@ -8,50 +8,50 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseCSGrenade : CCSWeaponBase, ISchemaClass<CBaseCSGrenade> {
+public partial interface CBaseCSGrenade : CCSWeaponBase, ISchemaClass<CBaseCSGrenade>
+{
+    static CBaseCSGrenade ISchemaClass<CBaseCSGrenade>.From(nint handle) => new CBaseCSGrenadeImpl(handle);
+    static int ISchemaClass<CBaseCSGrenade>.Size => 4624;
+    static string? ISchemaClass<CBaseCSGrenade>.ClassName => "weapon_basecsgrenade";
 
-  static CBaseCSGrenade ISchemaClass<CBaseCSGrenade>.From(nint handle) => new CBaseCSGrenadeImpl(handle);
-  static int ISchemaClass<CBaseCSGrenade>.Size => 4624;
-  static string? ISchemaClass<CBaseCSGrenade>.ClassName => "weapon_basecsgrenade";
 
-  
-  public ref bool Redraw { get; }
-  
-  public ref bool IsHeldByPlayer { get; }
-  
-  public ref bool PinPulled { get; }
-  
-  public ref bool JumpThrow { get; }
-  
-  public ref bool ThrowAnimating { get; }
-  
-  public GameTime_t ThrowTime { get; }
-  
-  public ref float ThrowStrength { get; }
-  
-  public GameTime_t DropTime { get; }
-  
-  public GameTime_t PinPullTime { get; }
-  
-  public ref bool JustPulledPin { get; }
-  
-  public GameTick_t NextHoldTick { get; }
-  
-  public ref float NextHoldFrac { get; }
-  
-  public ref CHandle<CCSWeaponBase> SwitchToWeaponAfterThrow { get; }
+    public ref bool Redraw { get; }
 
-  public void RedrawUpdated();
-  public void IsHeldByPlayerUpdated();
-  public void PinPulledUpdated();
-  public void JumpThrowUpdated();
-  public void ThrowAnimatingUpdated();
-  public void ThrowTimeUpdated();
-  public void ThrowStrengthUpdated();
-  public void DropTimeUpdated();
-  public void PinPullTimeUpdated();
-  public void JustPulledPinUpdated();
-  public void NextHoldTickUpdated();
-  public void NextHoldFracUpdated();
-  public void SwitchToWeaponAfterThrowUpdated();
+    public ref bool IsHeldByPlayer { get; }
+
+    public ref bool PinPulled { get; }
+
+    public ref bool JumpThrow { get; }
+
+    public ref bool ThrowAnimating { get; }
+
+    public GameTime_t ThrowTime { get; }
+
+    public ref float ThrowStrength { get; }
+
+    public GameTime_t DropTime { get; }
+
+    public GameTime_t PinPullTime { get; }
+
+    public ref bool JustPulledPin { get; }
+
+    public GameTick_t NextHoldTick { get; }
+
+    public ref float NextHoldFrac { get; }
+
+    public ref CHandle<CCSWeaponBase> SwitchToWeaponAfterThrow { get; }
+
+    public void RedrawUpdated();
+    public void IsHeldByPlayerUpdated();
+    public void PinPulledUpdated();
+    public void JumpThrowUpdated();
+    public void ThrowAnimatingUpdated();
+    public void ThrowTimeUpdated();
+    public void ThrowStrengthUpdated();
+    public void DropTimeUpdated();
+    public void PinPullTimeUpdated();
+    public void JustPulledPinUpdated();
+    public void NextHoldTickUpdated();
+    public void NextHoldFracUpdated();
+    public void SwitchToWeaponAfterThrowUpdated();
 }

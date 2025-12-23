@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SimpleConstraintSoundProfile : ISchemaClass<SimpleConstraintSoundProfile> {
+public partial interface SimpleConstraintSoundProfile : ISchemaClass<SimpleConstraintSoundProfile>
+{
+    static SimpleConstraintSoundProfile ISchemaClass<SimpleConstraintSoundProfile>.From(nint handle) => new SimpleConstraintSoundProfileImpl(handle);
+    static int ISchemaClass<SimpleConstraintSoundProfile>.Size => 32;
+    static string? ISchemaClass<SimpleConstraintSoundProfile>.ClassName => null;
 
-  static SimpleConstraintSoundProfile ISchemaClass<SimpleConstraintSoundProfile>.From(nint handle) => new SimpleConstraintSoundProfileImpl(handle);
-  static int ISchemaClass<SimpleConstraintSoundProfile>.Size => 32;
-  static string? ISchemaClass<SimpleConstraintSoundProfile>.ClassName => null;
 
-  
-  public ref SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t Keypoints { get; }
-  
-  public ISchemaFixedArray<float> KeyPoints { get; }
-  
-  public ISchemaFixedArray<float> ReversalSoundThresholds { get; }
+    public ref SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t Keypoints { get; }
+
+    public ISchemaFixedArray<float> KeyPoints { get; }
+
+    public ISchemaFixedArray<float> ReversalSoundThresholds { get; }
 
 
 }

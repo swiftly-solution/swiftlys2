@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDirectPlaybackTagData : ISchemaClass<CDirectPlaybackTagData> {
+public partial interface CDirectPlaybackTagData : ISchemaClass<CDirectPlaybackTagData>
+{
+    static CDirectPlaybackTagData ISchemaClass<CDirectPlaybackTagData>.From(nint handle) => new CDirectPlaybackTagDataImpl(handle);
+    static int ISchemaClass<CDirectPlaybackTagData>.Size => 32;
+    static string? ISchemaClass<CDirectPlaybackTagData>.ClassName => null;
 
-  static CDirectPlaybackTagData ISchemaClass<CDirectPlaybackTagData>.From(nint handle) => new CDirectPlaybackTagDataImpl(handle);
-  static int ISchemaClass<CDirectPlaybackTagData>.Size => 32;
-  static string? ISchemaClass<CDirectPlaybackTagData>.ClassName => null;
 
-  
-  public string SequenceName { get; set; }
-  
-  public ref CUtlVector<TagSpan_t> Tags { get; }
+    public string SequenceName { get; set; }
+
+    public ref CUtlVector<TagSpan_t> Tags { get; }
 
 
 }

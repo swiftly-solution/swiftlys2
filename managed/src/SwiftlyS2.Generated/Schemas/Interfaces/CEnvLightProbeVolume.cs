@@ -8,77 +8,77 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvLightProbeVolume : CBaseEntity, ISchemaClass<CEnvLightProbeVolume> {
+public partial interface CEnvLightProbeVolume : CBaseEntity, ISchemaClass<CEnvLightProbeVolume>
+{
+    static CEnvLightProbeVolume ISchemaClass<CEnvLightProbeVolume>.From(nint handle) => new CEnvLightProbeVolumeImpl(handle);
+    static int ISchemaClass<CEnvLightProbeVolume>.Size => 5504;
+    static string? ISchemaClass<CEnvLightProbeVolume>.ClassName => "env_light_probe_volume";
 
-  static CEnvLightProbeVolume ISchemaClass<CEnvLightProbeVolume>.From(nint handle) => new CEnvLightProbeVolumeImpl(handle);
-  static int ISchemaClass<CEnvLightProbeVolume>.Size => 5504;
-  static string? ISchemaClass<CEnvLightProbeVolume>.ClassName => "env_light_probe_volume";
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_AmbientCube { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SDF { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_DC { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_R { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_G { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_B { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightIndicesTexture { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightScalarsTexture { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightShadowsTexture { get; }
-  
-  public ref Vector Entity_vBoxMins { get; }
-  
-  public ref Vector Entity_vBoxMaxs { get; }
-  
-  public ref bool Entity_bMoveable { get; }
-  
-  public ref int Entity_nHandshake { get; }
-  
-  public ref int Entity_nPriority { get; }
-  
-  public ref bool Entity_bStartDisabled { get; }
-  
-  public ref int Entity_nLightProbeSizeX { get; }
-  
-  public ref int Entity_nLightProbeSizeY { get; }
-  
-  public ref int Entity_nLightProbeSizeZ { get; }
-  
-  public ref int Entity_nLightProbeAtlasX { get; }
-  
-  public ref int Entity_nLightProbeAtlasY { get; }
-  
-  public ref int Entity_nLightProbeAtlasZ { get; }
-  
-  public ref bool Entity_bEnabled { get; }
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_AmbientCube { get; }
 
-  public void Entity_hLightProbeTexture_AmbientCubeUpdated();
-  public void Entity_hLightProbeTexture_SDFUpdated();
-  public void Entity_hLightProbeTexture_SH2_DCUpdated();
-  public void Entity_hLightProbeTexture_SH2_RUpdated();
-  public void Entity_hLightProbeTexture_SH2_GUpdated();
-  public void Entity_hLightProbeTexture_SH2_BUpdated();
-  public void Entity_hLightProbeDirectLightIndicesTextureUpdated();
-  public void Entity_hLightProbeDirectLightScalarsTextureUpdated();
-  public void Entity_hLightProbeDirectLightShadowsTextureUpdated();
-  public void Entity_vBoxMinsUpdated();
-  public void Entity_vBoxMaxsUpdated();
-  public void Entity_bMoveableUpdated();
-  public void Entity_nHandshakeUpdated();
-  public void Entity_nPriorityUpdated();
-  public void Entity_bStartDisabledUpdated();
-  public void Entity_nLightProbeSizeXUpdated();
-  public void Entity_nLightProbeSizeYUpdated();
-  public void Entity_nLightProbeSizeZUpdated();
-  public void Entity_nLightProbeAtlasXUpdated();
-  public void Entity_nLightProbeAtlasYUpdated();
-  public void Entity_nLightProbeAtlasZUpdated();
-  public void Entity_bEnabledUpdated();
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SDF { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_DC { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_R { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_G { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeTexture_SH2_B { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightIndicesTexture { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightScalarsTexture { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Entity_hLightProbeDirectLightShadowsTexture { get; }
+
+    public ref Vector Entity_vBoxMins { get; }
+
+    public ref Vector Entity_vBoxMaxs { get; }
+
+    public ref bool Entity_bMoveable { get; }
+
+    public ref int Entity_nHandshake { get; }
+
+    public ref int Entity_nPriority { get; }
+
+    public ref bool Entity_bStartDisabled { get; }
+
+    public ref int Entity_nLightProbeSizeX { get; }
+
+    public ref int Entity_nLightProbeSizeY { get; }
+
+    public ref int Entity_nLightProbeSizeZ { get; }
+
+    public ref int Entity_nLightProbeAtlasX { get; }
+
+    public ref int Entity_nLightProbeAtlasY { get; }
+
+    public ref int Entity_nLightProbeAtlasZ { get; }
+
+    public ref bool Entity_bEnabled { get; }
+
+    public void Entity_hLightProbeTexture_AmbientCubeUpdated();
+    public void Entity_hLightProbeTexture_SDFUpdated();
+    public void Entity_hLightProbeTexture_SH2_DCUpdated();
+    public void Entity_hLightProbeTexture_SH2_RUpdated();
+    public void Entity_hLightProbeTexture_SH2_GUpdated();
+    public void Entity_hLightProbeTexture_SH2_BUpdated();
+    public void Entity_hLightProbeDirectLightIndicesTextureUpdated();
+    public void Entity_hLightProbeDirectLightScalarsTextureUpdated();
+    public void Entity_hLightProbeDirectLightShadowsTextureUpdated();
+    public void Entity_vBoxMinsUpdated();
+    public void Entity_vBoxMaxsUpdated();
+    public void Entity_bMoveableUpdated();
+    public void Entity_nHandshakeUpdated();
+    public void Entity_nPriorityUpdated();
+    public void Entity_bStartDisabledUpdated();
+    public void Entity_nLightProbeSizeXUpdated();
+    public void Entity_nLightProbeSizeYUpdated();
+    public void Entity_nLightProbeSizeZUpdated();
+    public void Entity_nLightProbeAtlasXUpdated();
+    public void Entity_nLightProbeAtlasYUpdated();
+    public void Entity_nLightProbeAtlasZUpdated();
+    public void Entity_bEnabledUpdated();
 }

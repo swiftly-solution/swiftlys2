@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapControlPointOrientationToRotation : CParticleFunctionOperator, ISchemaClass<C_OP_RemapControlPointOrientationToRotation> {
+public partial interface C_OP_RemapControlPointOrientationToRotation : CParticleFunctionOperator, ISchemaClass<C_OP_RemapControlPointOrientationToRotation>
+{
+    static C_OP_RemapControlPointOrientationToRotation ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.From(nint handle) => new C_OP_RemapControlPointOrientationToRotationImpl(handle);
+    static int ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.Size => 480;
+    static string? ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.ClassName => null;
 
-  static C_OP_RemapControlPointOrientationToRotation ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.From(nint handle) => new C_OP_RemapControlPointOrientationToRotationImpl(handle);
-  static int ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.Size => 480;
-  static string? ISchemaClass<C_OP_RemapControlPointOrientationToRotation>.ClassName => null;
 
-  
-  public ref int CP { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float OffsetRot { get; }
-  
-  public ref int Component { get; }
+    public ref int CP { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float OffsetRot { get; }
+
+    public ref int Component { get; }
 
 
 }

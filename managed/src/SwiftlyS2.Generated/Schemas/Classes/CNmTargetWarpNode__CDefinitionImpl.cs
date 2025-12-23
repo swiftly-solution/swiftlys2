@@ -6,107 +6,88 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmTargetWarpNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmTargetWarpNode__CDefinition {
+internal partial class CNmTargetWarpNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmTargetWarpNode__CDefinition
+{
+    public CNmTargetWarpNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmTargetWarpNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ClipReferenceNodeIdxOffset;
 
-  private static nint? _ClipReferenceNodeIdxOffset;
-
-  public ref short ClipReferenceNodeIdx {
-    get {
-      if (_ClipReferenceNodeIdxOffset == null) {
-        _ClipReferenceNodeIdxOffset = Schema.GetOffset(0xEA16BCF061EC8947);
-      }
-      return ref _Handle.AsRef<short>(_ClipReferenceNodeIdxOffset!.Value);
+    public ref short ClipReferenceNodeIdx {
+        get {
+            _ClipReferenceNodeIdxOffset = _ClipReferenceNodeIdxOffset ?? Schema.GetOffset(0xEA16BCF061EC8947);
+            return ref _Handle.AsRef<short>(_ClipReferenceNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetValueNodeIdxOffset;
+    private static nint? _TargetValueNodeIdxOffset;
 
-  public ref short TargetValueNodeIdx {
-    get {
-      if (_TargetValueNodeIdxOffset == null) {
-        _TargetValueNodeIdxOffset = Schema.GetOffset(0xEA16BCF0A040C7E8);
-      }
-      return ref _Handle.AsRef<short>(_TargetValueNodeIdxOffset!.Value);
+    public ref short TargetValueNodeIdx {
+        get {
+            _TargetValueNodeIdxOffset = _TargetValueNodeIdxOffset ?? Schema.GetOffset(0xEA16BCF0A040C7E8);
+            return ref _Handle.AsRef<short>(_TargetValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _SamplingModeOffset;
+    private static nint? _SamplingModeOffset;
 
-  public ref CNmRootMotionData__SamplingMode_t SamplingMode {
-    get {
-      if (_SamplingModeOffset == null) {
-        _SamplingModeOffset = Schema.GetOffset(0xEA16BCF0DDB31BE3);
-      }
-      return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset!.Value);
+    public ref CNmRootMotionData__SamplingMode_t SamplingMode {
+        get {
+            _SamplingModeOffset = _SamplingModeOffset ?? Schema.GetOffset(0xEA16BCF0DDB31BE3);
+            return ref _Handle.AsRef<CNmRootMotionData__SamplingMode_t>(_SamplingModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _AllowTargetUpdateOffset;
+    private static nint? _AllowTargetUpdateOffset;
 
-  public ref bool AllowTargetUpdate {
-    get {
-      if (_AllowTargetUpdateOffset == null) {
-        _AllowTargetUpdateOffset = Schema.GetOffset(0xEA16BCF08A9C0712);
-      }
-      return ref _Handle.AsRef<bool>(_AllowTargetUpdateOffset!.Value);
+    public ref bool AllowTargetUpdate {
+        get {
+            _AllowTargetUpdateOffset = _AllowTargetUpdateOffset ?? Schema.GetOffset(0xEA16BCF08A9C0712);
+            return ref _Handle.AsRef<bool>(_AllowTargetUpdateOffset!.Value);
+        }
     }
-  }
-  private static nint? _SamplingPositionErrorThresholdSqOffset;
+    private static nint? _SamplingPositionErrorThresholdSqOffset;
 
-  public ref float SamplingPositionErrorThresholdSq {
-    get {
-      if (_SamplingPositionErrorThresholdSqOffset == null) {
-        _SamplingPositionErrorThresholdSqOffset = Schema.GetOffset(0xEA16BCF0C538C7A0);
-      }
-      return ref _Handle.AsRef<float>(_SamplingPositionErrorThresholdSqOffset!.Value);
+    public ref float SamplingPositionErrorThresholdSq {
+        get {
+            _SamplingPositionErrorThresholdSqOffset = _SamplingPositionErrorThresholdSqOffset ?? Schema.GetOffset(0xEA16BCF0C538C7A0);
+            return ref _Handle.AsRef<float>(_SamplingPositionErrorThresholdSqOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxTangentLengthOffset;
+    private static nint? _MaxTangentLengthOffset;
 
-  public ref float MaxTangentLength {
-    get {
-      if (_MaxTangentLengthOffset == null) {
-        _MaxTangentLengthOffset = Schema.GetOffset(0xEA16BCF046EAA410);
-      }
-      return ref _Handle.AsRef<float>(_MaxTangentLengthOffset!.Value);
+    public ref float MaxTangentLength {
+        get {
+            _MaxTangentLengthOffset = _MaxTangentLengthOffset ?? Schema.GetOffset(0xEA16BCF046EAA410);
+            return ref _Handle.AsRef<float>(_MaxTangentLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _LerpFallbackDistanceThresholdOffset;
+    private static nint? _LerpFallbackDistanceThresholdOffset;
 
-  public ref float LerpFallbackDistanceThreshold {
-    get {
-      if (_LerpFallbackDistanceThresholdOffset == null) {
-        _LerpFallbackDistanceThresholdOffset = Schema.GetOffset(0xEA16BCF0BBC41F32);
-      }
-      return ref _Handle.AsRef<float>(_LerpFallbackDistanceThresholdOffset!.Value);
+    public ref float LerpFallbackDistanceThreshold {
+        get {
+            _LerpFallbackDistanceThresholdOffset = _LerpFallbackDistanceThresholdOffset ?? Schema.GetOffset(0xEA16BCF0BBC41F32);
+            return ref _Handle.AsRef<float>(_LerpFallbackDistanceThresholdOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetUpdateDistanceThresholdOffset;
+    private static nint? _TargetUpdateDistanceThresholdOffset;
 
-  public ref float TargetUpdateDistanceThreshold {
-    get {
-      if (_TargetUpdateDistanceThresholdOffset == null) {
-        _TargetUpdateDistanceThresholdOffset = Schema.GetOffset(0xEA16BCF074F10F17);
-      }
-      return ref _Handle.AsRef<float>(_TargetUpdateDistanceThresholdOffset!.Value);
+    public ref float TargetUpdateDistanceThreshold {
+        get {
+            _TargetUpdateDistanceThresholdOffset = _TargetUpdateDistanceThresholdOffset ?? Schema.GetOffset(0xEA16BCF074F10F17);
+            return ref _Handle.AsRef<float>(_TargetUpdateDistanceThresholdOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetUpdateAngleThresholdRadiansOffset;
+    private static nint? _TargetUpdateAngleThresholdRadiansOffset;
 
-  public ref float TargetUpdateAngleThresholdRadians {
-    get {
-      if (_TargetUpdateAngleThresholdRadiansOffset == null) {
-        _TargetUpdateAngleThresholdRadiansOffset = Schema.GetOffset(0xEA16BCF09A1C1D31);
-      }
-      return ref _Handle.AsRef<float>(_TargetUpdateAngleThresholdRadiansOffset!.Value);
+    public ref float TargetUpdateAngleThresholdRadians {
+        get {
+            _TargetUpdateAngleThresholdRadiansOffset = _TargetUpdateAngleThresholdRadiansOffset ?? Schema.GetOffset(0xEA16BCF09A1C1D31);
+            return ref _Handle.AsRef<float>(_TargetUpdateAngleThresholdRadiansOffset!.Value);
+        }
     }
-  }
 
 
 }

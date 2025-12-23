@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderScreenVelocityRotateImpl : CParticleFunctionRendererImpl, C_OP_RenderScreenVelocityRotate {
+internal partial class C_OP_RenderScreenVelocityRotateImpl : CParticleFunctionRendererImpl, C_OP_RenderScreenVelocityRotate
+{
+    public C_OP_RenderScreenVelocityRotateImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderScreenVelocityRotateImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RotateRateDegreesOffset;
 
-  private static nint? _RotateRateDegreesOffset;
-
-  public ref float RotateRateDegrees {
-    get {
-      if (_RotateRateDegreesOffset == null) {
-        _RotateRateDegreesOffset = Schema.GetOffset(0x6288600D11A21BC7);
-      }
-      return ref _Handle.AsRef<float>(_RotateRateDegreesOffset!.Value);
+    public ref float RotateRateDegrees {
+        get {
+            _RotateRateDegreesOffset = _RotateRateDegreesOffset ?? Schema.GetOffset(0x6288600D11A21BC7);
+            return ref _Handle.AsRef<float>(_RotateRateDegreesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForwardDegreesOffset;
+    private static nint? _ForwardDegreesOffset;
 
-  public ref float ForwardDegrees {
-    get {
-      if (_ForwardDegreesOffset == null) {
-        _ForwardDegreesOffset = Schema.GetOffset(0x6288600D44D44C45);
-      }
-      return ref _Handle.AsRef<float>(_ForwardDegreesOffset!.Value);
+    public ref float ForwardDegrees {
+        get {
+            _ForwardDegreesOffset = _ForwardDegreesOffset ?? Schema.GetOffset(0x6288600D44D44C45);
+            return ref _Handle.AsRef<float>(_ForwardDegreesOffset!.Value);
+        }
     }
-  }
 
 
 }

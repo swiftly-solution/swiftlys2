@@ -8,82 +8,82 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRotator> {
+public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRotator>
+{
+    static CFuncRotator ISchemaClass<CFuncRotator>.From(nint handle) => new CFuncRotatorImpl(handle);
+    static int ISchemaClass<CFuncRotator>.Size => 2576;
+    static string? ISchemaClass<CFuncRotator>.ClassName => "func_rotator";
 
-  static CFuncRotator ISchemaClass<CFuncRotator>.From(nint handle) => new CFuncRotatorImpl(handle);
-  static int ISchemaClass<CFuncRotator>.Size => 2576;
-  static string? ISchemaClass<CFuncRotator>.ClassName => "func_rotator";
 
-  
-  public ref CHandle<CBaseEntity> RotatorTarget { get; }
-  
-  public ref bool IsRotating { get; }
-  
-  public ref bool IsReversing { get; }
-  
-  public ref float TimeToReachMaxSpeed { get; }
-  
-  public ref float TimeToReachZeroSpeed { get; }
-  
-  public ref float DistanceAlongArcTraveled { get; }
-  
-  public ref float TimeToWaitOscillate { get; }
-  
-  public GameTime_t TimeRotationStart { get; }
-  
-  public ref Quaternion LSPrevChange { get; }
-  
-  public ref Quaternion WSPrev { get; }
-  
-  public ref Quaternion WSInit { get; }
-  
-  public ref Quaternion LSInit { get; }
-  
-  public ref Quaternion LSOrientation { get; }
-  
-  public CEntityIOOutput OnRotationStarted { get; }
-  
-  public CEntityIOOutput OnRotationCompleted { get; }
-  
-  public CEntityIOOutput OnOscillate { get; }
-  
-  public CEntityIOOutput OnOscillateStartArrive { get; }
-  
-  public CEntityIOOutput OnOscillateStartDepart { get; }
-  
-  public CEntityIOOutput OnOscillateEndArrive { get; }
-  
-  public CEntityIOOutput OnOscillateEndDepart { get; }
-  
-  public ref bool OscillateDepart { get; }
-  
-  public ref int OscillateCount { get; }
-  
-  public ref CFuncRotator__Rotate_t RotateType { get; }
-  
-  public ref CFuncRotator__Rotate_t PrevRotateType { get; }
-  
-  public ref bool HasTargetOverride { get; }
-  
-  public ref Quaternion OrientationOverride { get; }
-  
-  public ref RotatorTargetSpace_t SpaceOverride { get; }
-  
-  public ref QAngle AngularVelocity { get; }
-  
-  public ref Vector LookAtForcedUp { get; }
-  
-  public string StrRotatorTarget { get; set; }
-  
-  public ref bool RecordHistory { get; }
-  
-  public ref CUtlVector<RotatorHistoryEntry_t> RotatorHistory { get; }
-  
-  public ref bool ReturningToPreviousOrientation { get; }
-  
-  public ref CUtlVector<RotatorQueueEntry_t> RotatorQueue { get; }
-  
-  public ref CUtlVector<RotatorHistoryEntry_t> RotatorQueueHistory { get; }
+    public ref CHandle<CBaseEntity> RotatorTarget { get; }
+
+    public ref bool IsRotating { get; }
+
+    public ref bool IsReversing { get; }
+
+    public ref float TimeToReachMaxSpeed { get; }
+
+    public ref float TimeToReachZeroSpeed { get; }
+
+    public ref float DistanceAlongArcTraveled { get; }
+
+    public ref float TimeToWaitOscillate { get; }
+
+    public GameTime_t TimeRotationStart { get; }
+
+    public ref Quaternion LSPrevChange { get; }
+
+    public ref Quaternion WSPrev { get; }
+
+    public ref Quaternion WSInit { get; }
+
+    public ref Quaternion LSInit { get; }
+
+    public ref Quaternion LSOrientation { get; }
+
+    public ref CEntityIOOutput OnRotationStarted { get; }
+
+    public ref CEntityIOOutput OnRotationCompleted { get; }
+
+    public ref CEntityIOOutput OnOscillate { get; }
+
+    public ref CEntityIOOutput OnOscillateStartArrive { get; }
+
+    public ref CEntityIOOutput OnOscillateStartDepart { get; }
+
+    public ref CEntityIOOutput OnOscillateEndArrive { get; }
+
+    public ref CEntityIOOutput OnOscillateEndDepart { get; }
+
+    public ref bool OscillateDepart { get; }
+
+    public ref int OscillateCount { get; }
+
+    public ref CFuncRotator__Rotate_t RotateType { get; }
+
+    public ref CFuncRotator__Rotate_t PrevRotateType { get; }
+
+    public ref bool HasTargetOverride { get; }
+
+    public ref Quaternion OrientationOverride { get; }
+
+    public ref RotatorTargetSpace_t SpaceOverride { get; }
+
+    public ref QAngle AngularVelocity { get; }
+
+    public ref Vector LookAtForcedUp { get; }
+
+    public string StrRotatorTarget { get; set; }
+
+    public ref bool RecordHistory { get; }
+
+    public ref CUtlVector<RotatorHistoryEntry_t> RotatorHistory { get; }
+
+    public ref bool ReturningToPreviousOrientation { get; }
+
+    public ref CUtlVector<RotatorQueueEntry_t> RotatorQueue { get; }
+
+    public ref CUtlVector<RotatorHistoryEntry_t> RotatorQueueHistory { get; }
 
 
 }

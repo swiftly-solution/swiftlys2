@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInButtonState : ISchemaClass<CInButtonState> {
+public partial interface CInButtonState : ISchemaClass<CInButtonState>
+{
+    static CInButtonState ISchemaClass<CInButtonState>.From(nint handle) => new CInButtonStateImpl(handle);
+    static int ISchemaClass<CInButtonState>.Size => 32;
+    static string? ISchemaClass<CInButtonState>.ClassName => null;
 
-  static CInButtonState ISchemaClass<CInButtonState>.From(nint handle) => new CInButtonStateImpl(handle);
-  static int ISchemaClass<CInButtonState>.Size => 32;
-  static string? ISchemaClass<CInButtonState>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ulong> ButtonStates { get; }
+    public ISchemaFixedArray<ulong> ButtonStates { get; }
 
 
 }

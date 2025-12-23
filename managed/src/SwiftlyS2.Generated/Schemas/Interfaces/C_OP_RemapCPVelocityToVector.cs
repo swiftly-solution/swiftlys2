@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapCPVelocityToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapCPVelocityToVector> {
+public partial interface C_OP_RemapCPVelocityToVector : CParticleFunctionOperator, ISchemaClass<C_OP_RemapCPVelocityToVector>
+{
+    static C_OP_RemapCPVelocityToVector ISchemaClass<C_OP_RemapCPVelocityToVector>.From(nint handle) => new C_OP_RemapCPVelocityToVectorImpl(handle);
+    static int ISchemaClass<C_OP_RemapCPVelocityToVector>.Size => 480;
+    static string? ISchemaClass<C_OP_RemapCPVelocityToVector>.ClassName => null;
 
-  static C_OP_RemapCPVelocityToVector ISchemaClass<C_OP_RemapCPVelocityToVector>.From(nint handle) => new C_OP_RemapCPVelocityToVectorImpl(handle);
-  static int ISchemaClass<C_OP_RemapCPVelocityToVector>.Size => 480;
-  static string? ISchemaClass<C_OP_RemapCPVelocityToVector>.ClassName => null;
 
-  
-  public ref int ControlPoint { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float Scale { get; }
-  
-  public ref bool Normalize { get; }
+    public ref int ControlPoint { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float Scale { get; }
+
+    public ref bool Normalize { get; }
 
 
 }

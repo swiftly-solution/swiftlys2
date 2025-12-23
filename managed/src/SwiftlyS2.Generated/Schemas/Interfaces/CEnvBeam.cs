@@ -8,50 +8,50 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvBeam : CBeam, ISchemaClass<CEnvBeam> {
+public partial interface CEnvBeam : CBeam, ISchemaClass<CEnvBeam>
+{
+    static CEnvBeam ISchemaClass<CEnvBeam>.From(nint handle) => new CEnvBeamImpl(handle);
+    static int ISchemaClass<CEnvBeam>.Size => 2336;
+    static string? ISchemaClass<CEnvBeam>.ClassName => "env_beam";
 
-  static CEnvBeam ISchemaClass<CEnvBeam>.From(nint handle) => new CEnvBeamImpl(handle);
-  static int ISchemaClass<CEnvBeam>.Size => 2336;
-  static string? ISchemaClass<CEnvBeam>.ClassName => "env_beam";
 
-  
-  public ref int Active { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> SpriteTexture { get; }
-  
-  public string StartEntity { get; set; }
-  
-  public string EndEntity { get; set; }
-  
-  public ref float Life { get; }
-  
-  public ref float BoltWidth { get; }
-  
-  public ref float NoiseAmplitude { get; }
-  
-  public ref int Speed { get; }
-  
-  public ref float Restrike { get; }
-  
-  public string SpriteName { get; set; }
-  
-  public ref int FrameStart { get; }
-  
-  public ref Vector EndPointWorld { get; }
-  
-  public ref Vector EndPointRelative { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref Touch_t TouchType { get; }
-  
-  public string FilterName { get; set; }
-  
-  public ref CHandle<CBaseEntity> Filter { get; }
-  
-  public string Decal { get; set; }
-  
-  public CEntityIOOutput OnTouchedByEntity { get; }
+    public ref int Active { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> SpriteTexture { get; }
+
+    public string StartEntity { get; set; }
+
+    public string EndEntity { get; set; }
+
+    public ref float Life { get; }
+
+    public ref float BoltWidth { get; }
+
+    public ref float NoiseAmplitude { get; }
+
+    public ref int Speed { get; }
+
+    public ref float Restrike { get; }
+
+    public string SpriteName { get; set; }
+
+    public ref int FrameStart { get; }
+
+    public ref Vector EndPointWorld { get; }
+
+    public ref Vector EndPointRelative { get; }
+
+    public ref float Radius { get; }
+
+    public ref Touch_t TouchType { get; }
+
+    public string FilterName { get; set; }
+
+    public ref CHandle<CBaseEntity> Filter { get; }
+
+    public string Decal { get; set; }
+
+    public ref CEntityIOOutput OnTouchedByEntity { get; }
 
 
 }

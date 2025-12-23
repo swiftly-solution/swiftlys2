@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPathQueryUtilImpl : SchemaClass, CPathQueryUtil {
+internal partial class CPathQueryUtilImpl : SchemaClass, CPathQueryUtil
+{
+    public CPathQueryUtilImpl(nint handle) : base(handle) { }
 
-  public CPathQueryUtilImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PathToEntityTransformOffset;
 
-  private static nint? _PathToEntityTransformOffset;
-
-  public ref CTransform PathToEntityTransform {
-    get {
-      if (_PathToEntityTransformOffset == null) {
-        _PathToEntityTransformOffset = Schema.GetOffset(0x52D1B6431A6FA220);
-      }
-      return ref _Handle.AsRef<CTransform>(_PathToEntityTransformOffset!.Value);
+    public ref CTransform PathToEntityTransform {
+        get {
+            _PathToEntityTransformOffset = _PathToEntityTransformOffset ?? Schema.GetOffset(0x52D1B6431A6FA220);
+            return ref _Handle.AsRef<CTransform>(_PathToEntityTransformOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathSamplePositionsOffset;
+    private static nint? _PathSamplePositionsOffset;
 
-  public ref CUtlVector<Vector> PathSamplePositions {
-    get {
-      if (_PathSamplePositionsOffset == null) {
-        _PathSamplePositionsOffset = Schema.GetOffset(0x52D1B643099F5ECC);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_PathSamplePositionsOffset!.Value);
+    public ref CUtlVector<Vector> PathSamplePositions {
+        get {
+            _PathSamplePositionsOffset = _PathSamplePositionsOffset ?? Schema.GetOffset(0x52D1B643099F5ECC);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_PathSamplePositionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathSampleParametersOffset;
+    private static nint? _PathSampleParametersOffset;
 
-  public ref CUtlVector<float> PathSampleParameters {
-    get {
-      if (_PathSampleParametersOffset == null) {
-        _PathSampleParametersOffset = Schema.GetOffset(0x52D1B6431D6E0D08);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleParametersOffset!.Value);
+    public ref CUtlVector<float> PathSampleParameters {
+        get {
+            _PathSampleParametersOffset = _PathSampleParametersOffset ?? Schema.GetOffset(0x52D1B6431D6E0D08);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleParametersOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathSampleDistancesOffset;
+    private static nint? _PathSampleDistancesOffset;
 
-  public ref CUtlVector<float> PathSampleDistances {
-    get {
-      if (_PathSampleDistancesOffset == null) {
-        _PathSampleDistancesOffset = Schema.GetOffset(0x52D1B6435680B274);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleDistancesOffset!.Value);
+    public ref CUtlVector<float> PathSampleDistances {
+        get {
+            _PathSampleDistancesOffset = _PathSampleDistancesOffset ?? Schema.GetOffset(0x52D1B6435680B274);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PathSampleDistancesOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsClosedLoopOffset;
+    private static nint? _IsClosedLoopOffset;
 
-  public ref bool IsClosedLoop {
-    get {
-      if (_IsClosedLoopOffset == null) {
-        _IsClosedLoopOffset = Schema.GetOffset(0x52D1B6430806319B);
-      }
-      return ref _Handle.AsRef<bool>(_IsClosedLoopOffset!.Value);
+    public ref bool IsClosedLoop {
+        get {
+            _IsClosedLoopOffset = _IsClosedLoopOffset ?? Schema.GetOffset(0x52D1B6430806319B);
+            return ref _Handle.AsRef<bool>(_IsClosedLoopOffset!.Value);
+        }
     }
-  }
 
 
 }

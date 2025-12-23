@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AggregateInstanceStreamOnDiskData_t : ISchemaClass<AggregateInstanceStreamOnDiskData_t> {
+public partial interface AggregateInstanceStreamOnDiskData_t : ISchemaClass<AggregateInstanceStreamOnDiskData_t>
+{
+    static AggregateInstanceStreamOnDiskData_t ISchemaClass<AggregateInstanceStreamOnDiskData_t>.From(nint handle) => new AggregateInstanceStreamOnDiskData_tImpl(handle);
+    static int ISchemaClass<AggregateInstanceStreamOnDiskData_t>.Size => 24;
+    static string? ISchemaClass<AggregateInstanceStreamOnDiskData_t>.ClassName => null;
 
-  static AggregateInstanceStreamOnDiskData_t ISchemaClass<AggregateInstanceStreamOnDiskData_t>.From(nint handle) => new AggregateInstanceStreamOnDiskData_tImpl(handle);
-  static int ISchemaClass<AggregateInstanceStreamOnDiskData_t>.Size => 24;
-  static string? ISchemaClass<AggregateInstanceStreamOnDiskData_t>.ClassName => null;
 
-  
-  public ref uint DecodedSize { get; }
-  
-  public ref CUtlBinaryBlock BufferData { get; }
+    public ref uint DecodedSize { get; }
+
+    public ref CUtlBinaryBlock BufferData { get; }
 
 
 }

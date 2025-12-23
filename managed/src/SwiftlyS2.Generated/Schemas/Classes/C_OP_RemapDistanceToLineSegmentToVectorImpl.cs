@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapDistanceToLineSegmentToVectorImpl : C_OP_RemapDistanceToLineSegmentBaseImpl, C_OP_RemapDistanceToLineSegmentToVector {
+internal partial class C_OP_RemapDistanceToLineSegmentToVectorImpl : C_OP_RemapDistanceToLineSegmentBaseImpl, C_OP_RemapDistanceToLineSegmentToVector
+{
+    public C_OP_RemapDistanceToLineSegmentToVectorImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapDistanceToLineSegmentToVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0xF88068A9E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xF88068A9E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinOutputValueOffset;
+    private static nint? _MinOutputValueOffset;
 
-  public ref Vector MinOutputValue {
-    get {
-      if (_MinOutputValueOffset == null) {
-        _MinOutputValueOffset = Schema.GetOffset(0xF88068A94BF7BCBF);
-      }
-      return ref _Handle.AsRef<Vector>(_MinOutputValueOffset!.Value);
+    public ref Vector MinOutputValue {
+        get {
+            _MinOutputValueOffset = _MinOutputValueOffset ?? Schema.GetOffset(0xF88068A94BF7BCBF);
+            return ref _Handle.AsRef<Vector>(_MinOutputValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOutputValueOffset;
+    private static nint? _MaxOutputValueOffset;
 
-  public ref Vector MaxOutputValue {
-    get {
-      if (_MaxOutputValueOffset == null) {
-        _MaxOutputValueOffset = Schema.GetOffset(0xF88068A9A7A69BC5);
-      }
-      return ref _Handle.AsRef<Vector>(_MaxOutputValueOffset!.Value);
+    public ref Vector MaxOutputValue {
+        get {
+            _MaxOutputValueOffset = _MaxOutputValueOffset ?? Schema.GetOffset(0xF88068A9A7A69BC5);
+            return ref _Handle.AsRef<Vector>(_MaxOutputValueOffset!.Value);
+        }
     }
-  }
 
 
 }

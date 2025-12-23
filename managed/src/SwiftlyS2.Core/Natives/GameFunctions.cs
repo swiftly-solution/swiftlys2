@@ -1,5 +1,6 @@
 using System.Text;
 using System.Buffers;
+using System.Runtime.InteropServices;
 using Spectre.Console;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Players;
@@ -9,6 +10,7 @@ internal static class GameFunctions
 {
     private static readonly bool IsWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
     public static unsafe delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void > pCTakeDamageInfo_Constructor;
+    public static unsafe delegate* unmanaged< nint, CTakeDamageInfo*, CTakeDamageResult*, void > pTakeDamage;
     public static unsafe delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void > pTraceShape;
     public static unsafe delegate* unmanaged< Vector*, Vector*, BBox_t*, CTraceFilter*, CGameTrace*, void > pTracePlayerBBox;
     public static unsafe delegate* unmanaged< nint, IntPtr, void > pSetModel;
@@ -37,11 +39,25 @@ internal static class GameFunctions
     public static int CollisionRulesChangedOffset => NativeOffsets.Fetch("CBaseEntity::CollisionRulesChanged");
     public static int RespawnOffset => NativeOffsets.Fetch("CCSPlayerController::Respawn");
 
+    private static void CheckPtr( nint ptr, string name )
+    {
+        if (ptr == 0)
+        {
+            throw new ArgumentException($"Invalid pointer: {name}={ptr}");
+        }
+    }
+
+    private static unsafe void CheckPtr( void* ptr, string name )
+    {
+        CheckPtr((nint)ptr, name);
+    }
+
     public static void Initialize()
     {
         unsafe
         {
             pCTakeDamageInfo_Constructor = (delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void >)NativeSignatures.Fetch("CTakeDamageInfo::Constructor");
+            pTakeDamage = (delegate* unmanaged< nint, CTakeDamageInfo*, CTakeDamageResult*, void >)NativeSignatures.Fetch("CBaseEntity::TakeDamage");
             pTraceShape = (delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void >)NativeSignatures.Fetch("TraceShape");
             pTracePlayerBBox = (delegate* unmanaged< Vector*, Vector*, BBox_t*, CTraceFilter*, CGameTrace*, void >)NativeSignatures.Fetch("TracePlayerBBox");
             pSetModel = (delegate* unmanaged< nint, IntPtr, void >)NativeSignatures.Fetch("CBaseModelEntity::SetModel");
@@ -100,6 +116,7 @@ internal static class GameFunctions
     {
         try
         {
+            CheckPtr(gameRules, nameof(gameRules));
             unsafe
             {
                 if (IsWindows)
@@ -148,6 +165,8 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(handle, nameof(handle));
+                CheckPtr(controller, nameof(controller));
                 var vfunc = (delegate* unmanaged< nint, nint, nint, nint >)GetVirtualFunction(handle, FindPickerEntityOffset);
                 return vfunc(handle, controller, IntPtr.Zero);
             }
@@ -163,6 +182,7 @@ internal static class GameFunctions
     {
         try
         {
+            CheckPtr(handle, nameof(handle));
             unsafe
             {
                 var pSkeletonInstance = (delegate* unmanaged< nint, nint >)GetVirtualFunction(handle, GetSkeletonInstanceOffset);
@@ -180,6 +200,7 @@ internal static class GameFunctions
     {
         try
         {
+            CheckPtr(pPawn, nameof(pPawn));
             unsafe
             {
                 var pCommitSuicide = (delegate* unmanaged< nint, byte, byte, void >)GetVirtualFunction(pPawn, CommitSuicideOffset);
@@ -196,6 +217,7 @@ internal static class GameFunctions
     {
         try
         {
+            CheckPtr(pController, nameof(pController));
             unsafe
             {
                 pSetPlayerControllerPawn(pController, pPawn, (byte)(b1 ? 1 : 0), (byte)(b2 ? 1 : 0), (byte)(b3 ? 1 : 0), (byte)(b4 ? 1 : 0));
@@ -211,6 +233,7 @@ internal static class GameFunctions
     {
         try
         {
+            CheckPtr(pEntity, nameof(pEntity));
             unsafe
             {
                 var pool = ArrayPool<byte>.Shared;
@@ -240,6 +263,7 @@ internal static class GameFunctions
     {
         try
         {
+            CheckPtr(pEntity, nameof(pEntity));
             unsafe
             {
                 pTeleport(pEntity, vecPosition, vecAngle, vecVelocity);
@@ -251,6 +275,8 @@ internal static class GameFunctions
         }
     }
 
+    private static unsafe bool Is16Aligned(CGameTrace* pTrace) => ((nuint)pTrace & 15) == 0;
+
     public static unsafe void TracePlayerBBox(
       Vector vecStart,
       Vector vecEnd,
@@ -261,9 +287,23 @@ internal static class GameFunctions
     {
         try
         {
+            CheckPtr(pTrace, nameof(pTrace));
             unsafe
             {
-                pTracePlayerBBox(&vecStart, &vecEnd, &bounds, pFilter, pTrace);
+                // FUCK ALL OF YOU SHIT
+                if (IsWindows || Is16Aligned(pTrace))
+                {
+                    pTracePlayerBBox(&vecStart, &vecEnd, &bounds, pFilter, pTrace);
+                }
+                else
+                {
+                    var size = (nuint)sizeof(CGameTrace);
+                    var rawBuffer = stackalloc byte[(int)size + 16];
+                    var pAligned = (CGameTrace*)(((nuint)rawBuffer + 15) & ~(nuint)15);
+                    NativeMemory.Copy(pTrace, pAligned, size);
+                    pTracePlayerBBox(&vecStart, &vecEnd, &bounds, pFilter, pAligned);
+                    NativeMemory.Copy(pAligned, pTrace, size);
+                }
             }
         }
         catch (Exception e)
@@ -285,7 +325,23 @@ internal static class GameFunctions
         {
             unsafe
             {
-                pTraceShape(pEngineTrace, ray, &vecStart, &vecEnd, pFilter, pTrace);
+                CheckPtr(pEngineTrace, nameof(pEngineTrace));
+                CheckPtr(pTrace, nameof(pTrace));
+                // FUCK YOU WINDOWS
+                if (IsWindows || Is16Aligned(pTrace))
+                {
+                    pTraceShape(pEngineTrace, ray, &vecStart, &vecEnd, pFilter, pTrace);
+                }
+                // FUCK YOU LINUX SIMD ALIGNMENT
+                else
+                {
+                    var size = (nuint)sizeof(CGameTrace);
+                    var rawBuffer = stackalloc byte[(int)size + 16];
+                    var pAligned = (CGameTrace*)(((nuint)rawBuffer + 15) & ~(nuint)15);
+                    NativeMemory.Copy(pTrace, pAligned, size);
+                    pTraceShape(pEngineTrace, ray, &vecStart, &vecEnd, pFilter, pAligned);
+                    NativeMemory.Copy(pAligned, pTrace, size);
+                }
             }
         }
         catch (Exception e)
@@ -311,7 +367,24 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(pThis, nameof(pThis));
                 pCTakeDamageInfo_Constructor(pThis, pInflictor, pAttacker, pAbility, vecDamageForce, vecDamagePosition, flDamage, bitsDamageType, iCustomDamage, a10);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static unsafe void TakeDamage( nint pEntity, CTakeDamageInfo* info )
+    {
+        try
+        {
+            CheckPtr(pEntity, nameof(pEntity));
+            unsafe
+            {
+                pTakeDamage(pEntity, info, (CTakeDamageResult*)0);
             }
         }
         catch (Exception e)
@@ -326,6 +399,7 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(pThis, nameof(pThis));
                 var pRemoveWeapons = (delegate* unmanaged< nint, void >)GetVirtualFunction(pThis, RemoveWeaponsOffset);
                 pRemoveWeapons(pThis);
             }
@@ -342,6 +416,7 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(pThis, nameof(pThis));
                 var ppVTable = (void***)pThis;
                 var pGiveNamedItem = (delegate* unmanaged< nint, nint, nint >)ppVTable[0][GiveNamedItemOffset];
                 var pool = ArrayPool<byte>.Shared;
@@ -368,6 +443,7 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(pThis, nameof(pThis));
                 var pDropActiveItem = (delegate* unmanaged< nint, Vector*, void >)GetVirtualFunction(pThis, DropActiveItemOffset);
                 pDropActiveItem(pThis, &momentum);
             }
@@ -384,6 +460,8 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(pThis, nameof(pThis));
+                CheckPtr(pWeapon, nameof(pWeapon));
                 var pDropWeapon = (delegate* unmanaged< nint, nint, nint, nint, void >)GetVirtualFunction(pThis, DropWeaponOffset);
                 pDropWeapon(pThis, pWeapon, 0, 0);
             }
@@ -400,6 +478,8 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(pThis, nameof(pThis));
+                CheckPtr(pWeapon, nameof(pWeapon));
                 var pSelectWeapon = (delegate* unmanaged< nint, nint, void >)GetVirtualFunction(pThis, SelectWeaponOffset);
                 pSelectWeapon(pThis, pWeapon);
             }
@@ -416,6 +496,7 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(pThis, nameof(pThis));
                 var pool = ArrayPool<byte>.Shared;
                 var pathLength = Encoding.UTF8.GetByteCount(path);
                 var pathBuffer = pool.Rent(pathLength + 1);
@@ -441,6 +522,7 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(handle, nameof(handle));
                 var pool = ArrayPool<byte>.Shared;
                 var nameLength = Encoding.UTF8.GetByteCount(name);
                 var nameBuffer = pool.Rent(nameLength + 1);
@@ -465,6 +547,7 @@ internal static class GameFunctions
         {
             unsafe
             {
+                CheckPtr(pThis, nameof(pThis));
                 var pCollisionRulesChanged = (delegate* unmanaged< nint, void >)GetVirtualFunction(pThis, CollisionRulesChangedOffset);
                 pCollisionRulesChanged(pThis);
             }
@@ -479,6 +562,7 @@ internal static class GameFunctions
     {
         try
         {
+            CheckPtr(pThis, nameof(pThis));
             unsafe
             {
                 var pRespawn = (delegate* unmanaged< nint, void >)GetVirtualFunction(pThis, RespawnOffset);

@@ -8,26 +8,25 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicCase : CLogicalEntity, ISchemaClass<CLogicCase> {
+public partial interface CLogicCase : CLogicalEntity, ISchemaClass<CLogicCase>
+{
+    static CLogicCase ISchemaClass<CLogicCase>.From(nint handle) => new CLogicCaseImpl(handle);
+    static int ISchemaClass<CLogicCase>.Size => 2880;
+    static string? ISchemaClass<CLogicCase>.ClassName => "logic_case";
 
-  static CLogicCase ISchemaClass<CLogicCase>.From(nint handle) => new CLogicCaseImpl(handle);
-  static int ISchemaClass<CLogicCase>.Size => 2880;
-  static string? ISchemaClass<CLogicCase>.ClassName => "logic_case";
 
-  
-  public string Case { get; set; }
-  
-  public ref int ShuffleCases { get; }
-  
-  public ref int LastShuffleCase { get; }
-  
-  public ISchemaFixedArray<byte> UchShuffleCaseMap { get; }
-  
-  // CEntityIOOutput
-  public SchemaUntypedField OnCase { get; }
-  
-  // CEntityOutputTemplate< CVariantBase< CVariantDefaultAllocator > >
-  public SchemaUntypedField OnDefault { get; }
+    public string Case { get; set; }
+
+    public ref int ShuffleCases { get; }
+
+    public ref int LastShuffleCase { get; }
+
+    public ISchemaFixedArray<byte> UchShuffleCaseMap { get; }
+
+    public ISchemaFixedArray<CEntityIOOutput> OnCase { get; }
+
+    // CEntityOutputTemplate< CVariantBase< CVariantDefaultAllocator > >
+    public SchemaUntypedField OnDefault { get; }
 
 
 }

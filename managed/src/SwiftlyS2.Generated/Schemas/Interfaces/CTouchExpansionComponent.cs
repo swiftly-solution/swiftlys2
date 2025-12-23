@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTouchExpansionComponent : CEntityComponent, ISchemaClass<CTouchExpansionComponent> {
-
-  static CTouchExpansionComponent ISchemaClass<CTouchExpansionComponent>.From(nint handle) => new CTouchExpansionComponentImpl(handle);
-  static int ISchemaClass<CTouchExpansionComponent>.Size => 80;
-  static string? ISchemaClass<CTouchExpansionComponent>.ClassName => null;
+public partial interface CTouchExpansionComponent : CEntityComponent, ISchemaClass<CTouchExpansionComponent>
+{
+    static CTouchExpansionComponent ISchemaClass<CTouchExpansionComponent>.From(nint handle) => new CTouchExpansionComponentImpl(handle);
+    static int ISchemaClass<CTouchExpansionComponent>.Size => 80;
+    static string? ISchemaClass<CTouchExpansionComponent>.ClassName => null;
 
 
 

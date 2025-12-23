@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysFixed : CPhysConstraint, ISchemaClass<CPhysFixed> {
+public partial interface CPhysFixed : CPhysConstraint, ISchemaClass<CPhysFixed>
+{
+    static CPhysFixed ISchemaClass<CPhysFixed>.From(nint handle) => new CPhysFixedImpl(handle);
+    static int ISchemaClass<CPhysFixed>.Size => 1416;
+    static string? ISchemaClass<CPhysFixed>.ClassName => "phys_constraint";
 
-  static CPhysFixed ISchemaClass<CPhysFixed>.From(nint handle) => new CPhysFixedImpl(handle);
-  static int ISchemaClass<CPhysFixed>.Size => 1416;
-  static string? ISchemaClass<CPhysFixed>.ClassName => "phys_constraint";
 
-  
-  public ref float LinearFrequency { get; }
-  
-  public ref float LinearDampingRatio { get; }
-  
-  public ref float AngularFrequency { get; }
-  
-  public ref float AngularDampingRatio { get; }
-  
-  public ref bool EnableLinearConstraint { get; }
-  
-  public ref bool EnableAngularConstraint { get; }
-  
-  public string BoneName1 { get; set; }
-  
-  public string BoneName2 { get; set; }
+    public ref float LinearFrequency { get; }
+
+    public ref float LinearDampingRatio { get; }
+
+    public ref float AngularFrequency { get; }
+
+    public ref float AngularDampingRatio { get; }
+
+    public ref bool EnableLinearConstraint { get; }
+
+    public ref bool EnableAngularConstraint { get; }
+
+    public string BoneName1 { get; set; }
+
+    public string BoneName2 { get; set; }
 
 
 }

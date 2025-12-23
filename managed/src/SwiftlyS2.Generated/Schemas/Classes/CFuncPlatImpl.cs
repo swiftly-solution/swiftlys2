@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncPlatImpl : CBasePlatTrainImpl, CFuncPlat {
+internal partial class CFuncPlatImpl : CBasePlatTrainImpl, CFuncPlat
+{
+    public CFuncPlatImpl(nint handle) : base(handle) { }
 
-  public CFuncPlatImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NoiseOffset;
 
-  private static nint? _NoiseOffset;
-
-  public string Noise {
-    get {
-      if (_NoiseOffset == null) {
-        _NoiseOffset = Schema.GetOffset(0x57400D651F22B8CC);
-      }
-      var ptr = _Handle.Read<nint>(_NoiseOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NoiseOffset == null) {
-        _NoiseOffset = Schema.GetOffset(0x57400D651F22B8CC);
-      }
-      Schema.SetString(_Handle, _NoiseOffset!.Value, value);
-    }
-  } 
+    public string Noise {
+        get {
+            _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0x57400D651F22B8CC);
+            return Schema.GetString(_Handle.Read<nint>(_NoiseOffset!.Value));
+        }
+        set {
+            _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0x57400D651F22B8CC);
+            Schema.SetString(_Handle, _NoiseOffset!.Value, value);
+        }
+    } 
 
 
 }

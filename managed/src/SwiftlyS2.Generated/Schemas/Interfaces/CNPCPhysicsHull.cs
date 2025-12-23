@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNPCPhysicsHull : ISchemaClass<CNPCPhysicsHull> {
+public partial interface CNPCPhysicsHull : ISchemaClass<CNPCPhysicsHull>
+{
+    static CNPCPhysicsHull ISchemaClass<CNPCPhysicsHull>.From(nint handle) => new CNPCPhysicsHullImpl(handle);
+    static int ISchemaClass<CNPCPhysicsHull>.Size => 56;
+    static string? ISchemaClass<CNPCPhysicsHull>.ClassName => null;
 
-  static CNPCPhysicsHull ISchemaClass<CNPCPhysicsHull>.From(nint handle) => new CNPCPhysicsHullImpl(handle);
-  static int ISchemaClass<CNPCPhysicsHull>.Size => 56;
-  static string? ISchemaClass<CNPCPhysicsHull>.ClassName => null;
 
-  
-  public ref CGlobalSymbol Name { get; }
-  
-  public ref NPCPhysicsHullType_t Type { get; }
-  
-  public ref float CapsuleHeight { get; }
-  
-  public ref float CapsuleRadius { get; }
-  
-  public ref Vector CapsuleCenter1 { get; }
-  
-  public ref Vector CapsuleCenter2 { get; }
-  
-  public ref float GroundBoxHeight { get; }
-  
-  public ref float GroundBoxWidth { get; }
+    public ref CGlobalSymbol Name { get; }
+
+    public ref NPCPhysicsHullType_t Type { get; }
+
+    public ref float CapsuleHeight { get; }
+
+    public ref float CapsuleRadius { get; }
+
+    public ref Vector CapsuleCenter1 { get; }
+
+    public ref Vector CapsuleCenter2 { get; }
+
+    public ref float GroundBoxHeight { get; }
+
+    public ref float GroundBoxWidth { get; }
 
 
 }

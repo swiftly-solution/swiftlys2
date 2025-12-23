@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_LerpCameraSettings__CursorState_tImpl : CPulseCell_BaseLerp__CursorState_tImpl, CPulseCell_LerpCameraSettings__CursorState_t {
+internal partial class CPulseCell_LerpCameraSettings__CursorState_tImpl : CPulseCell_BaseLerp__CursorState_tImpl, CPulseCell_LerpCameraSettings__CursorState_t
+{
+    public CPulseCell_LerpCameraSettings__CursorState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_LerpCameraSettings__CursorState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CameraOffset;
 
-  private static nint? _CameraOffset;
-
-  public ref CHandle<CPointCamera> Camera {
-    get {
-      if (_CameraOffset == null) {
-        _CameraOffset = Schema.GetOffset(0x84AB53FD538EFB98);
-      }
-      return ref _Handle.AsRef<CHandle<CPointCamera>>(_CameraOffset!.Value);
+    public ref CHandle<CPointCamera> Camera {
+        get {
+            _CameraOffset = _CameraOffset ?? Schema.GetOffset(0x84AB53FD538EFB98);
+            return ref _Handle.AsRef<CHandle<CPointCamera>>(_CameraOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverlaidStartOffset;
+    private static nint? _OverlaidStartOffset;
 
-  public PointCameraSettings_t OverlaidStart {
-    get {
-      if (_OverlaidStartOffset == null) {
-        _OverlaidStartOffset = Schema.GetOffset(0x84AB53FD54E9A76F);
-      }
-      return new PointCameraSettings_tImpl(_Handle + _OverlaidStartOffset!.Value);
+    public PointCameraSettings_t OverlaidStart {
+        get {
+            _OverlaidStartOffset = _OverlaidStartOffset ?? Schema.GetOffset(0x84AB53FD54E9A76F);
+            return new PointCameraSettings_tImpl(_Handle + _OverlaidStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverlaidEndOffset;
+    private static nint? _OverlaidEndOffset;
 
-  public PointCameraSettings_t OverlaidEnd {
-    get {
-      if (_OverlaidEndOffset == null) {
-        _OverlaidEndOffset = Schema.GetOffset(0x84AB53FD3CDFDEFA);
-      }
-      return new PointCameraSettings_tImpl(_Handle + _OverlaidEndOffset!.Value);
+    public PointCameraSettings_t OverlaidEnd {
+        get {
+            _OverlaidEndOffset = _OverlaidEndOffset ?? Schema.GetOffset(0x84AB53FD3CDFDEFA);
+            return new PointCameraSettings_tImpl(_Handle + _OverlaidEndOffset!.Value);
+        }
     }
-  }
 
 
 }

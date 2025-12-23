@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSimdAnimStrayRadius_t : ISchemaClass<FeSimdAnimStrayRadius_t> {
+public partial interface FeSimdAnimStrayRadius_t : ISchemaClass<FeSimdAnimStrayRadius_t>
+{
+    static FeSimdAnimStrayRadius_t ISchemaClass<FeSimdAnimStrayRadius_t>.From(nint handle) => new FeSimdAnimStrayRadius_tImpl(handle);
+    static int ISchemaClass<FeSimdAnimStrayRadius_t>.Size => 48;
+    static string? ISchemaClass<FeSimdAnimStrayRadius_t>.ClassName => null;
 
-  static FeSimdAnimStrayRadius_t ISchemaClass<FeSimdAnimStrayRadius_t>.From(nint handle) => new FeSimdAnimStrayRadius_tImpl(handle);
-  static int ISchemaClass<FeSimdAnimStrayRadius_t>.Size => 48;
-  static string? ISchemaClass<FeSimdAnimStrayRadius_t>.ClassName => null;
 
-  
-  // uint16[4]
-  public SchemaUntypedField Node { get; }
-  
-  public ref fltx4 MaxDist { get; }
-  
-  public ref fltx4 RelaxationFactor { get; }
+    // uint16[4]
+    public SchemaUntypedField Node { get; }
+
+    public ref fltx4 MaxDist { get; }
+
+    public ref fltx4 RelaxationFactor { get; }
 
 
 }

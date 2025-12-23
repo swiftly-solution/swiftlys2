@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FakeEntityDerivedA_tAPI : ISchemaClass<FakeEntityDerivedA_tAPI> {
-
-  static FakeEntityDerivedA_tAPI ISchemaClass<FakeEntityDerivedA_tAPI>.From(nint handle) => new FakeEntityDerivedA_tAPIImpl(handle);
-  static int ISchemaClass<FakeEntityDerivedA_tAPI>.Size => 8;
-  static string? ISchemaClass<FakeEntityDerivedA_tAPI>.ClassName => null;
+public partial interface FakeEntityDerivedA_tAPI : ISchemaClass<FakeEntityDerivedA_tAPI>
+{
+    static FakeEntityDerivedA_tAPI ISchemaClass<FakeEntityDerivedA_tAPI>.From(nint handle) => new FakeEntityDerivedA_tAPIImpl(handle);
+    static int ISchemaClass<FakeEntityDerivedA_tAPI>.Size => 8;
+    static string? ISchemaClass<FakeEntityDerivedA_tAPI>.ClassName => null;
 
 
 

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCVoxelVisibility : ISchemaClass<InfoForResourceTypeCVoxelVisibility> {
-
-  static InfoForResourceTypeCVoxelVisibility ISchemaClass<InfoForResourceTypeCVoxelVisibility>.From(nint handle) => new InfoForResourceTypeCVoxelVisibilityImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCVoxelVisibility>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCVoxelVisibility>.ClassName => null;
+public partial interface InfoForResourceTypeCVoxelVisibility : ISchemaClass<InfoForResourceTypeCVoxelVisibility>
+{
+    static InfoForResourceTypeCVoxelVisibility ISchemaClass<InfoForResourceTypeCVoxelVisibility>.From(nint handle) => new InfoForResourceTypeCVoxelVisibilityImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCVoxelVisibility>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCVoxelVisibility>.ClassName => null;
 
 
 

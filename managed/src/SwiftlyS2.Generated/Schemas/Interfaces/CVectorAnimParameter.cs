@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVectorAnimParameter : CConcreteAnimParameter, ISchemaClass<CVectorAnimParameter> {
+public partial interface CVectorAnimParameter : CConcreteAnimParameter, ISchemaClass<CVectorAnimParameter>
+{
+    static CVectorAnimParameter ISchemaClass<CVectorAnimParameter>.From(nint handle) => new CVectorAnimParameterImpl(handle);
+    static int ISchemaClass<CVectorAnimParameter>.Size => 152;
+    static string? ISchemaClass<CVectorAnimParameter>.ClassName => null;
 
-  static CVectorAnimParameter ISchemaClass<CVectorAnimParameter>.From(nint handle) => new CVectorAnimParameterImpl(handle);
-  static int ISchemaClass<CVectorAnimParameter>.Size => 152;
-  static string? ISchemaClass<CVectorAnimParameter>.ClassName => null;
 
-  
-  public ref Vector DefaultValue { get; }
-  
-  public ref bool Interpolate { get; }
-  
-  public ref AnimParamVectorType_t VectorType { get; }
+    public ref Vector DefaultValue { get; }
+
+    public ref bool Interpolate { get; }
+
+    public ref AnimParamVectorType_t VectorType { get; }
 
 
 }

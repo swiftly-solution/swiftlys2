@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ragdoll_t : ISchemaClass<ragdoll_t> {
+public partial interface ragdoll_t : ISchemaClass<ragdoll_t>
+{
+    static ragdoll_t ISchemaClass<ragdoll_t>.From(nint handle) => new ragdoll_tImpl(handle);
+    static int ISchemaClass<ragdoll_t>.Size => 80;
+    static string? ISchemaClass<ragdoll_t>.ClassName => null;
 
-  static ragdoll_t ISchemaClass<ragdoll_t>.From(nint handle) => new ragdoll_tImpl(handle);
-  static int ISchemaClass<ragdoll_t>.Size => 80;
-  static string? ISchemaClass<ragdoll_t>.ClassName => null;
 
-  
-  public ref CUtlVector<ragdollelement_t> List { get; }
-  
-  public ref CUtlVector<ragdollhierarchyjoint_t> HierarchyJoints { get; }
-  
-  public ref CUtlVector<int> BoneIndex { get; }
-  
-  public ref bool AllowStretch { get; }
-  
-  public ref bool Unused { get; }
+    public ref CUtlVector<ragdollelement_t> List { get; }
+
+    public ref CUtlVector<ragdollhierarchyjoint_t> HierarchyJoints { get; }
+
+    public ref CUtlVector<int> BoneIndex { get; }
+
+    public ref bool AllowStretch { get; }
+
+    public ref bool Unused { get; }
 
 
 }

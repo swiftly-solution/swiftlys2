@@ -1,10 +1,13 @@
+
 using System.Text;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Events;
+using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
@@ -12,15 +15,14 @@ using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Core.ProtobufDefinitions;
 using SwiftlyS2.Shared.SchemaDefinitions;
-using SwiftlyS2.Core.Schemas;
-using SwiftlyS2.Core.Natives;
 
 namespace SwiftlyS2.Core.Services;
 
 internal class CoreHookService : IDisposable
 {
-    private readonly ILogger<CoreHookService> logger;
+
     private readonly ISwiftlyCore core;
+    private readonly ILogger<CoreHookService> logger;
 
     public CoreHookService( ILogger<CoreHookService> logger, ISwiftlyCore core )
     {
@@ -36,6 +38,7 @@ internal class CoreHookService : IDisposable
         HookCPlayerMovementServicesRunCommand();
         HookCCSPlayerPawnPostThink();
         HookEntityIdentityAcceptInput();
+        HookEntityIOOutputFireOutputInternal();
     }
 
     /*
@@ -72,6 +75,7 @@ internal class CoreHookService : IDisposable
     private delegate nint CPlayerMovementServicesRunCommand( nint pMovementServices, nint pUserCmd );
     private delegate void CCSPlayerPawnPostThink( nint pPlayerPawn );
     private delegate void CEntityIdentityAcceptInput( nint pEntityIdentity, nint inputName, nint activator, nint caller, nint variant, int outputId, nint unk1, nint unk2 );
+    private delegate void CEntityIOOutputFireOutputInternal( nint pEntityIO, nint pActivator, nint pCaller, nint pVariant, float flDelay, nint unk1, nint unk2 );
 
     private IUnmanagedFunction<ExecuteCommand>? executeCommand;
     private Guid executeCommandGuid;
@@ -96,6 +100,8 @@ internal class CoreHookService : IDisposable
     private Guid playerPawnPostThinkGuid;
     private IUnmanagedFunction<CEntityIdentityAcceptInput>? entityIdentityAcceptInput;
     private Guid entityIdentityAcceptInputGuid;
+    private IUnmanagedFunction<CEntityIOOutputFireOutputInternal>? entityIOOutputFireOutputInternal;
+    private Guid entityIOOutputFireOutputInternalGuid;
 
     private void HookEntityIdentityAcceptInput()
     {
@@ -108,31 +114,77 @@ internal class CoreHookService : IDisposable
         {
             return ( pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2 ) =>
             {
-                var entityIdentity = core.Memory.ToSchemaClass<CEntityIdentity>(pEntityIdentity);
-                var inputName = pInputName.AsRef<CUtlSymbolLarge>();
+                unsafe
+                {
+                    var entityIdentity = core.Memory.ToSchemaClass<CEntityIdentity>(pEntityIdentity);
+                    var inputName = pInputName.AsRef<CUtlSymbolLarge>();
+                    var activator = pActivator != nint.Zero ? core.Memory.ToSchemaClass<CEntityInstance>(pActivator) : null;
+                    var caller = pCaller != nint.Zero ? core.Memory.ToSchemaClass<CEntityInstance>(pCaller) : null;
+
+                    var variant = pVariant.AsRef<CVariant<CVariantDefaultAllocator>>();
+
+                    var @event = new OnEntityIdentityAcceptInputHookEvent {
+                        Identity = entityIdentity,
+                        EntityInstance = entityIdentity.EntityInstance,
+                        DesignerName = entityIdentity?.DesignerName ?? string.Empty,
+                        InputName = inputName.Value,
+                        Activator = activator,
+                        Caller = caller,
+                        _variant = (CVariant<CVariantDefaultAllocator>*)pVariant,
+                        OutputId = outputId,
+                        Result = HookResult.Continue
+                    };
+                    EventPublisher.InvokeOnEntityIdentityAcceptInputHook(@event);
+
+                    if (@event.Result == HookResult.Stop)
+                    {
+                        return;
+                    }
+
+                    next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
+                }
+            };
+        });
+    }
+
+    private unsafe void HookEntityIOOutputFireOutputInternal()
+    {
+        var address = core.GameData.GetSignature("CEntityIOOutput::FireOutputInternal");
+
+        logger.LogInformation("Hooking CEntityIOOutput_FireOutputInternal at {Address}", address);
+
+        entityIOOutputFireOutputInternal = core.Memory.GetUnmanagedFunctionByAddress<CEntityIOOutputFireOutputInternal>(address);
+        entityIOOutputFireOutputInternalGuid = entityIOOutputFireOutputInternal.AddHook(next =>
+        {
+            return ( pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2 ) =>
+            {
+                var entityIO = pEntityIO.AsRef<CEntityIOOutput>();
+
+                var outputName = entityIO.Desc.Name.Value;
                 var activator = pActivator != nint.Zero ? core.Memory.ToSchemaClass<CEntityInstance>(pActivator) : null;
                 var caller = pCaller != nint.Zero ? core.Memory.ToSchemaClass<CEntityInstance>(pCaller) : null;
 
-                var variant = pVariant.AsRef<CVariant>();
+                var variant = pVariant.AsRef<CVariant<CVariantDefaultAllocator>>();
 
-                var @event = new OnEntityIdentityAcceptInputHookEvent {
-                    Identity = entityIdentity,
-                    EntityInstance = entityIdentity.EntityInstance,
-                    InputName = inputName.Value,
+                var @event = new OnEntityFireOutputHookEvent {
+                    _entityIO = (CEntityIOOutput*)pEntityIO,
+                    _variant = (CVariant<CVariantDefaultAllocator>*)pVariant,
+                    DesignerName = caller?.DesignerName ?? string.Empty,
+                    OutputName = outputName,
                     Activator = activator,
                     Caller = caller,
                     VariantValue = variant,
-                    OutputId = outputId,
+                    Delay = flDelay,
                     Result = HookResult.Continue
                 };
-                EventPublisher.InvokeOnEntityIdentityAcceptInputHook(@event);
+                EventPublisher.InvokeEntityFireOutputHook(@event);
 
                 if (@event.Result == HookResult.Stop)
                 {
                     return;
                 }
 
-                next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
+                next()(pEntityIO, pActivator, pCaller, pVariant, flDelay, unk1, unk2);
             };
         });
     }
@@ -459,5 +511,6 @@ internal class CoreHookService : IDisposable
         movementServiceRunCommand?.RemoveHook(movementServiceRunCommandGuid);
         playerPawnPostThink?.RemoveHook(playerPawnPostThinkGuid);
         entityIdentityAcceptInput?.RemoveHook(entityIdentityAcceptInputGuid);
+        entityIOOutputFireOutputInternal?.RemoveHook(entityIOOutputFireOutputInternalGuid);
     }
 }

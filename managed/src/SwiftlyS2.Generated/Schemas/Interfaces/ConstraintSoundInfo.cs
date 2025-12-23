@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ConstraintSoundInfo : ISchemaClass<ConstraintSoundInfo> {
+public partial interface ConstraintSoundInfo : ISchemaClass<ConstraintSoundInfo>
+{
+    static ConstraintSoundInfo ISchemaClass<ConstraintSoundInfo>.From(nint handle) => new ConstraintSoundInfoImpl(handle);
+    static int ISchemaClass<ConstraintSoundInfo>.Size => 152;
+    static string? ISchemaClass<ConstraintSoundInfo>.ClassName => null;
 
-  static ConstraintSoundInfo ISchemaClass<ConstraintSoundInfo>.From(nint handle) => new ConstraintSoundInfoImpl(handle);
-  static int ISchemaClass<ConstraintSoundInfo>.Size => 152;
-  static string? ISchemaClass<ConstraintSoundInfo>.ClassName => null;
 
-  
-  public VelocitySampler Sampler { get; }
-  
-  public SimpleConstraintSoundProfile SoundProfile { get; }
-  
-  public ref Vector ForwardAxis { get; }
-  
-  public string TravelSoundFwd { get; set; }
-  
-  public string TravelSoundBack { get; set; }
-  
-  public string ReversalSounds { get; set; }
-  
-  public ref bool PlayTravelSound { get; }
-  
-  public ref bool PlayReversalSound { get; }
+    public VelocitySampler Sampler { get; }
+
+    public SimpleConstraintSoundProfile SoundProfile { get; }
+
+    public ref Vector ForwardAxis { get; }
+
+    public string TravelSoundFwd { get; set; }
+
+    public string TravelSoundBack { get; set; }
+
+    public string ReversalSounds { get; set; }
+
+    public ref bool PlayTravelSound { get; }
+
+    public ref bool PlayReversalSound { get; }
 
 
 }

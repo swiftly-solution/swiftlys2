@@ -8,43 +8,43 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSmokeGrenadeProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CSmokeGrenadeProjectile> {
+public partial interface CSmokeGrenadeProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CSmokeGrenadeProjectile>
+{
+    static CSmokeGrenadeProjectile ISchemaClass<CSmokeGrenadeProjectile>.From(nint handle) => new CSmokeGrenadeProjectileImpl(handle);
+    static int ISchemaClass<CSmokeGrenadeProjectile>.Size => 12096;
+    static string? ISchemaClass<CSmokeGrenadeProjectile>.ClassName => "smokegrenade_projectile";
 
-  static CSmokeGrenadeProjectile ISchemaClass<CSmokeGrenadeProjectile>.From(nint handle) => new CSmokeGrenadeProjectileImpl(handle);
-  static int ISchemaClass<CSmokeGrenadeProjectile>.Size => 12096;
-  static string? ISchemaClass<CSmokeGrenadeProjectile>.ClassName => "smokegrenade_projectile";
 
-  
-  public ref int SmokeEffectTickBegin { get; }
-  
-  public ref bool DidSmokeEffect { get; }
-  
-  public ref int RandomSeed { get; }
-  
-  public ref Vector SmokeColor { get; }
-  
-  public ref Vector SmokeDetonationPos { get; }
-  
-  public ref CUtlVector<byte> VoxelFrameData { get; }
-  
-  public ref int VoxelFrameDataSize { get; }
-  
-  public ref int VoxelUpdate { get; }
-  
-  public GameTime_t LastBounce { get; }
-  
-  public GameTime_t FllastSimulationTime { get; }
-  
-  public ref bool ExplodeFromInferno { get; }
-  
-  public ref bool DidGroundScorch { get; }
+    public ref int SmokeEffectTickBegin { get; }
 
-  public void SmokeEffectTickBeginUpdated();
-  public void DidSmokeEffectUpdated();
-  public void RandomSeedUpdated();
-  public void SmokeColorUpdated();
-  public void SmokeDetonationPosUpdated();
-  public void VoxelFrameDataUpdated();
-  public void VoxelFrameDataSizeUpdated();
-  public void VoxelUpdateUpdated();
+    public ref bool DidSmokeEffect { get; }
+
+    public ref int RandomSeed { get; }
+
+    public ref Vector SmokeColor { get; }
+
+    public ref Vector SmokeDetonationPos { get; }
+
+    public ref CUtlVector<byte> VoxelFrameData { get; }
+
+    public ref int VoxelFrameDataSize { get; }
+
+    public ref int VoxelUpdate { get; }
+
+    public GameTime_t LastBounce { get; }
+
+    public GameTime_t FllastSimulationTime { get; }
+
+    public ref bool ExplodeFromInferno { get; }
+
+    public ref bool DidGroundScorch { get; }
+
+    public void SmokeEffectTickBeginUpdated();
+    public void DidSmokeEffectUpdated();
+    public void RandomSeedUpdated();
+    public void SmokeColorUpdated();
+    public void SmokeDetonationPosUpdated();
+    public void VoxelFrameDataUpdated();
+    public void VoxelFrameDataSizeUpdated();
+    public void VoxelUpdateUpdated();
 }

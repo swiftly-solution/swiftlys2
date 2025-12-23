@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGunTarget : CBaseToggle, ISchemaClass<CGunTarget> {
+public partial interface CGunTarget : CBaseToggle, ISchemaClass<CGunTarget>
+{
+    static CGunTarget ISchemaClass<CGunTarget>.From(nint handle) => new CGunTargetImpl(handle);
+    static int ISchemaClass<CGunTarget>.Size => 2184;
+    static string? ISchemaClass<CGunTarget>.ClassName => "func_guntarget";
 
-  static CGunTarget ISchemaClass<CGunTarget>.From(nint handle) => new CGunTargetImpl(handle);
-  static int ISchemaClass<CGunTarget>.Size => 2184;
-  static string? ISchemaClass<CGunTarget>.ClassName => "func_guntarget";
 
-  
-  public ref bool On { get; }
-  
-  public ref CHandle<CBaseEntity> TargetEnt { get; }
-  
-  public CEntityIOOutput OnDeath { get; }
+    public ref bool On { get; }
+
+    public ref CHandle<CBaseEntity> TargetEnt { get; }
+
+    public ref CEntityIOOutput OnDeath { get; }
 
 
 }

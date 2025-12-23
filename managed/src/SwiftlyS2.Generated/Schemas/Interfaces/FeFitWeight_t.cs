@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeFitWeight_t : ISchemaClass<FeFitWeight_t> {
+public partial interface FeFitWeight_t : ISchemaClass<FeFitWeight_t>
+{
+    static FeFitWeight_t ISchemaClass<FeFitWeight_t>.From(nint handle) => new FeFitWeight_tImpl(handle);
+    static int ISchemaClass<FeFitWeight_t>.Size => 8;
+    static string? ISchemaClass<FeFitWeight_t>.ClassName => null;
 
-  static FeFitWeight_t ISchemaClass<FeFitWeight_t>.From(nint handle) => new FeFitWeight_tImpl(handle);
-  static int ISchemaClass<FeFitWeight_t>.Size => 8;
-  static string? ISchemaClass<FeFitWeight_t>.ClassName => null;
 
-  
-  public ref float Weight { get; }
-  
-  public ref ushort Node { get; }
-  
-  public ref ushort Dummy { get; }
+    public ref float Weight { get; }
+
+    public ref ushort Node { get; }
+
+    public ref ushort Dummy { get; }
 
 
 }

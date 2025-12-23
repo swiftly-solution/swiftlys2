@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmIKEffectorImpl : SchemaClass, CNmIKEffector {
+internal partial class CNmIKEffectorImpl : SchemaClass, CNmIKEffector
+{
+    public CNmIKEffectorImpl(nint handle) : base(handle) { }
 
-  public CNmIKEffectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BodyIndexOffset;
 
-  private static nint? _BodyIndexOffset;
-
-  public ref int BodyIndex {
-    get {
-      if (_BodyIndexOffset == null) {
-        _BodyIndexOffset = Schema.GetOffset(0xA45D61F2B50B497);
-      }
-      return ref _Handle.AsRef<int>(_BodyIndexOffset!.Value);
+    public ref int BodyIndex {
+        get {
+            _BodyIndexOffset = _BodyIndexOffset ?? Schema.GetOffset(0xA45D61F2B50B497);
+            return ref _Handle.AsRef<int>(_BodyIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnabledOffset;
+    private static nint? _EnabledOffset;
 
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0xA45D61F6154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xA45D61F6154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetPositionOffset;
+    private static nint? _TargetPositionOffset;
 
-  public ref Vector TargetPosition {
-    get {
-      if (_TargetPositionOffset == null) {
-        _TargetPositionOffset = Schema.GetOffset(0xA45D61FF028CBBF);
-      }
-      return ref _Handle.AsRef<Vector>(_TargetPositionOffset!.Value);
+    public ref Vector TargetPosition {
+        get {
+            _TargetPositionOffset = _TargetPositionOffset ?? Schema.GetOffset(0xA45D61FF028CBBF);
+            return ref _Handle.AsRef<Vector>(_TargetPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetOrientationOffset;
+    private static nint? _TargetOrientationOffset;
 
-  public ref Quaternion TargetOrientation {
-    get {
-      if (_TargetOrientationOffset == null) {
-        _TargetOrientationOffset = Schema.GetOffset(0xA45D61FED14ED41);
-      }
-      return ref _Handle.AsRef<Quaternion>(_TargetOrientationOffset!.Value);
+    public ref Quaternion TargetOrientation {
+        get {
+            _TargetOrientationOffset = _TargetOrientationOffset ?? Schema.GetOffset(0xA45D61FED14ED41);
+            return ref _Handle.AsRef<Quaternion>(_TargetOrientationOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0xA45D61F7B81E7AB);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xA45D61F7B81E7AB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
 
 
 }

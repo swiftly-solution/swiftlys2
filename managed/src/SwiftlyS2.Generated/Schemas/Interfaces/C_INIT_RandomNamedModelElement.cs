@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomNamedModelElement : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomNamedModelElement> {
+public partial interface C_INIT_RandomNamedModelElement : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomNamedModelElement>
+{
+    static C_INIT_RandomNamedModelElement ISchemaClass<C_INIT_RandomNamedModelElement>.From(nint handle) => new C_INIT_RandomNamedModelElementImpl(handle);
+    static int ISchemaClass<C_INIT_RandomNamedModelElement>.Size => 512;
+    static string? ISchemaClass<C_INIT_RandomNamedModelElement>.ClassName => null;
 
-  static C_INIT_RandomNamedModelElement ISchemaClass<C_INIT_RandomNamedModelElement>.From(nint handle) => new C_INIT_RandomNamedModelElementImpl(handle);
-  static int ISchemaClass<C_INIT_RandomNamedModelElement>.Size => 512;
-  static string? ISchemaClass<C_INIT_RandomNamedModelElement>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-  
-  public ref CUtlVector<CUtlString> Names { get; }
-  
-  public ref bool Shuffle { get; }
-  
-  public ref bool Linear { get; }
-  
-  public ref bool ModelFromRenderer { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
+
+    public ref CUtlVector<CUtlString> Names { get; }
+
+    public ref bool Shuffle { get; }
+
+    public ref bool Linear { get; }
+
+    public ref bool ModelFromRenderer { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRandomNumberGeneratorParameters : ISchemaClass<CRandomNumberGeneratorParameters> {
+public partial interface CRandomNumberGeneratorParameters : ISchemaClass<CRandomNumberGeneratorParameters>
+{
+    static CRandomNumberGeneratorParameters ISchemaClass<CRandomNumberGeneratorParameters>.From(nint handle) => new CRandomNumberGeneratorParametersImpl(handle);
+    static int ISchemaClass<CRandomNumberGeneratorParameters>.Size => 8;
+    static string? ISchemaClass<CRandomNumberGeneratorParameters>.ClassName => null;
 
-  static CRandomNumberGeneratorParameters ISchemaClass<CRandomNumberGeneratorParameters>.From(nint handle) => new CRandomNumberGeneratorParametersImpl(handle);
-  static int ISchemaClass<CRandomNumberGeneratorParameters>.Size => 8;
-  static string? ISchemaClass<CRandomNumberGeneratorParameters>.ClassName => null;
 
-  
-  public ref bool DistributeEvenly { get; }
-  
-  public ref int Seed { get; }
+    public ref bool DistributeEvenly { get; }
+
+    public ref int Seed { get; }
 
 
 }

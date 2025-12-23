@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeEffectDesc_t : ISchemaClass<FeEffectDesc_t> {
+public partial interface FeEffectDesc_t : ISchemaClass<FeEffectDesc_t>
+{
+    static FeEffectDesc_t ISchemaClass<FeEffectDesc_t>.From(nint handle) => new FeEffectDesc_tImpl(handle);
+    static int ISchemaClass<FeEffectDesc_t>.Size => 32;
+    static string? ISchemaClass<FeEffectDesc_t>.ClassName => null;
 
-  static FeEffectDesc_t ISchemaClass<FeEffectDesc_t>.From(nint handle) => new FeEffectDesc_tImpl(handle);
-  static int ISchemaClass<FeEffectDesc_t>.Size => 32;
-  static string? ISchemaClass<FeEffectDesc_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref uint NameHash { get; }
-  
-  public ref int Type { get; }
-  
-  // KeyValues3
-  public SchemaUntypedField Params { get; }
+    public string Name { get; set; }
+
+    public ref uint NameHash { get; }
+
+    public ref int Type { get; }
+
+    // KeyValues3
+    public SchemaUntypedField Params { get; }
 
 
 }

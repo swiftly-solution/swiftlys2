@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootPositionMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CFootPositionMetricEvaluator> {
+public partial interface CFootPositionMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CFootPositionMetricEvaluator>
+{
+    static CFootPositionMetricEvaluator ISchemaClass<CFootPositionMetricEvaluator>.From(nint handle) => new CFootPositionMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CFootPositionMetricEvaluator>.Size => 112;
+    static string? ISchemaClass<CFootPositionMetricEvaluator>.ClassName => null;
 
-  static CFootPositionMetricEvaluator ISchemaClass<CFootPositionMetricEvaluator>.From(nint handle) => new CFootPositionMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CFootPositionMetricEvaluator>.Size => 112;
-  static string? ISchemaClass<CFootPositionMetricEvaluator>.ClassName => null;
 
-  
-  public ref CUtlVector<int> FootIndices { get; }
-  
-  public ref bool IgnoreSlope { get; }
+    public ref CUtlVector<int> FootIndices { get; }
+
+    public ref bool IgnoreSlope { get; }
 
 
 }

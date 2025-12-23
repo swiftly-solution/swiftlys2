@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmStateCompletedConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmStateCompletedConditionNode__CDefinition> {
+public partial interface CNmStateCompletedConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmStateCompletedConditionNode__CDefinition>
+{
+    static CNmStateCompletedConditionNode__CDefinition ISchemaClass<CNmStateCompletedConditionNode__CDefinition>.From(nint handle) => new CNmStateCompletedConditionNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmStateCompletedConditionNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmStateCompletedConditionNode__CDefinition>.ClassName => null;
 
-  static CNmStateCompletedConditionNode__CDefinition ISchemaClass<CNmStateCompletedConditionNode__CDefinition>.From(nint handle) => new CNmStateCompletedConditionNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmStateCompletedConditionNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmStateCompletedConditionNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SourceStateNodeIdx { get; }
-  
-  public ref short TransitionDurationOverrideNodeIdx { get; }
-  
-  public ref float TransitionDurationSeconds { get; }
+    public ref short SourceStateNodeIdx { get; }
+
+    public ref short TransitionDurationOverrideNodeIdx { get; }
+
+    public ref float TransitionDurationSeconds { get; }
 
 
 }

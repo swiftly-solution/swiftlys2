@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ConstrainDistanceImpl : CParticleFunctionConstraintImpl, C_OP_ConstrainDistance {
+internal partial class C_OP_ConstrainDistanceImpl : CParticleFunctionConstraintImpl, C_OP_ConstrainDistance
+{
+    public C_OP_ConstrainDistanceImpl(nint handle) : base(handle) { }
 
-  public C_OP_ConstrainDistanceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinDistanceOffset;
 
-  private static nint? _MinDistanceOffset;
-
-  public CParticleCollectionFloatInput MinDistance {
-    get {
-      if (_MinDistanceOffset == null) {
-        _MinDistanceOffset = Schema.GetOffset(0xDF3E3FA1F016B7AC);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _MinDistanceOffset!.Value);
+    public CParticleCollectionFloatInput MinDistance {
+        get {
+            _MinDistanceOffset = _MinDistanceOffset ?? Schema.GetOffset(0xDF3E3FA1F016B7AC);
+            return new CParticleCollectionFloatInputImpl(_Handle + _MinDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxDistanceOffset;
+    private static nint? _MaxDistanceOffset;
 
-  public CParticleCollectionFloatInput MaxDistance {
-    get {
-      if (_MaxDistanceOffset == null) {
-        _MaxDistanceOffset = Schema.GetOffset(0xDF3E3FA1844E396A);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+    public CParticleCollectionFloatInput MaxDistance {
+        get {
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0xDF3E3FA1844E396A);
+            return new CParticleCollectionFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointNumberOffset;
+    private static nint? _ControlPointNumberOffset;
 
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0xDF3E3FA13F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xDF3E3FA13F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _CenterOffsetOffset;
+    private static nint? _CenterOffsetOffset;
 
-  public ref Vector CenterOffset {
-    get {
-      if (_CenterOffsetOffset == null) {
-        _CenterOffsetOffset = Schema.GetOffset(0xDF3E3FA108F7D41F);
-      }
-      return ref _Handle.AsRef<Vector>(_CenterOffsetOffset!.Value);
+    public ref Vector CenterOffset {
+        get {
+            _CenterOffsetOffset = _CenterOffsetOffset ?? Schema.GetOffset(0xDF3E3FA108F7D41F);
+            return ref _Handle.AsRef<Vector>(_CenterOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlobalCenterOffset;
+    private static nint? _GlobalCenterOffset;
 
-  public ref bool GlobalCenter {
-    get {
-      if (_GlobalCenterOffset == null) {
-        _GlobalCenterOffset = Schema.GetOffset(0xDF3E3FA1196669C3);
-      }
-      return ref _Handle.AsRef<bool>(_GlobalCenterOffset!.Value);
+    public ref bool GlobalCenter {
+        get {
+            _GlobalCenterOffset = _GlobalCenterOffset ?? Schema.GetOffset(0xDF3E3FA1196669C3);
+            return ref _Handle.AsRef<bool>(_GlobalCenterOffset!.Value);
+        }
     }
-  }
 
 
 }

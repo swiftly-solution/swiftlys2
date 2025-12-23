@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseServerCursor : CPulseExecCursor, ISchemaClass<CPulseServerCursor> {
+public partial interface CPulseServerCursor : CPulseExecCursor, ISchemaClass<CPulseServerCursor>
+{
+    static CPulseServerCursor ISchemaClass<CPulseServerCursor>.From(nint handle) => new CPulseServerCursorImpl(handle);
+    static int ISchemaClass<CPulseServerCursor>.Size => 224;
+    static string? ISchemaClass<CPulseServerCursor>.ClassName => null;
 
-  static CPulseServerCursor ISchemaClass<CPulseServerCursor>.From(nint handle) => new CPulseServerCursorImpl(handle);
-  static int ISchemaClass<CPulseServerCursor>.Size => 224;
-  static string? ISchemaClass<CPulseServerCursor>.ClassName => null;
 
-  
-  public ref CHandle<CBaseEntity> Activator { get; }
-  
-  public ref CHandle<CBaseEntity> Caller { get; }
+    public ref CHandle<CBaseEntity> Activator { get; }
+
+    public ref CHandle<CBaseEntity> Caller { get; }
 
 
 }

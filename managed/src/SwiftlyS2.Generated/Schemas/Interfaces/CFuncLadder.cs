@@ -8,40 +8,40 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncLadder : CBaseModelEntity, ISchemaClass<CFuncLadder> {
+public partial interface CFuncLadder : CBaseModelEntity, ISchemaClass<CFuncLadder>
+{
+    static CFuncLadder ISchemaClass<CFuncLadder>.From(nint handle) => new CFuncLadderImpl(handle);
+    static int ISchemaClass<CFuncLadder>.Size => 2184;
+    static string? ISchemaClass<CFuncLadder>.ClassName => "func_useableladder";
 
-  static CFuncLadder ISchemaClass<CFuncLadder>.From(nint handle) => new CFuncLadderImpl(handle);
-  static int ISchemaClass<CFuncLadder>.Size => 2184;
-  static string? ISchemaClass<CFuncLadder>.ClassName => "func_useableladder";
 
-  
-  public ref Vector LadderDir { get; }
-  
-  public ref CUtlVector<CHandle<CInfoLadderDismount>> Dismounts { get; }
-  
-  public ref Vector LocalTop { get; }
-  
-  public ref Vector PlayerMountPositionTop { get; }
-  
-  public ref Vector PlayerMountPositionBottom { get; }
-  
-  public ref float AutoRideSpeed { get; }
-  
-  public ref bool Disabled { get; }
-  
-  public ref bool FakeLadder { get; }
-  
-  public ref bool HasSlack { get; }
-  
-  public string SurfacePropName { get; set; }
-  
-  public CEntityIOOutput OnPlayerGotOnLadder { get; }
-  
-  public CEntityIOOutput OnPlayerGotOffLadder { get; }
+    public ref Vector LadderDir { get; }
 
-  public void LadderDirUpdated();
-  public void PlayerMountPositionTopUpdated();
-  public void PlayerMountPositionBottomUpdated();
-  public void AutoRideSpeedUpdated();
-  public void FakeLadderUpdated();
+    public ref CUtlVector<CHandle<CInfoLadderDismount>> Dismounts { get; }
+
+    public ref Vector LocalTop { get; }
+
+    public ref Vector PlayerMountPositionTop { get; }
+
+    public ref Vector PlayerMountPositionBottom { get; }
+
+    public ref float AutoRideSpeed { get; }
+
+    public ref bool Disabled { get; }
+
+    public ref bool FakeLadder { get; }
+
+    public ref bool HasSlack { get; }
+
+    public string SurfacePropName { get; set; }
+
+    public ref CEntityIOOutput OnPlayerGotOnLadder { get; }
+
+    public ref CEntityIOOutput OnPlayerGotOffLadder { get; }
+
+    public void LadderDirUpdated();
+    public void PlayerMountPositionTopUpdated();
+    public void PlayerMountPositionBottomUpdated();
+    public void AutoRideSpeedUpdated();
+    public void FakeLadderUpdated();
 }

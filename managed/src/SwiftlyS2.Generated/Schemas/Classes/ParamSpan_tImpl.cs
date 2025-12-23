@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ParamSpan_tImpl : SchemaClass, ParamSpan_t {
+internal partial class ParamSpan_tImpl : SchemaClass, ParamSpan_t
+{
+    public ParamSpan_tImpl(nint handle) : base(handle) { }
 
-  public ParamSpan_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SamplesOffset;
 
-  private static nint? _SamplesOffset;
-
-  public ref CUtlVector<ParamSpanSample_t> Samples {
-    get {
-      if (_SamplesOffset == null) {
-        _SamplesOffset = Schema.GetOffset(0x5EE209D9364CA9DC);
-      }
-      return ref _Handle.AsRef<CUtlVector<ParamSpanSample_t>>(_SamplesOffset!.Value);
+    public ref CUtlVector<ParamSpanSample_t> Samples {
+        get {
+            _SamplesOffset = _SamplesOffset ?? Schema.GetOffset(0x5EE209D9364CA9DC);
+            return ref _Handle.AsRef<CUtlVector<ParamSpanSample_t>>(_SamplesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamOffset;
+    private static nint? _ParamOffset;
 
-  public CAnimParamHandle Param {
-    get {
-      if (_ParamOffset == null) {
-        _ParamOffset = Schema.GetOffset(0x5EE209D9679286A4);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamOffset!.Value);
+    public CAnimParamHandle Param {
+        get {
+            _ParamOffset = _ParamOffset ?? Schema.GetOffset(0x5EE209D9679286A4);
+            return new CAnimParamHandleImpl(_Handle + _ParamOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamTypeOffset;
+    private static nint? _ParamTypeOffset;
 
-  public ref AnimParamType_t ParamType {
-    get {
-      if (_ParamTypeOffset == null) {
-        _ParamTypeOffset = Schema.GetOffset(0x5EE209D9F05DFDD9);
-      }
-      return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
+    public ref AnimParamType_t ParamType {
+        get {
+            _ParamTypeOffset = _ParamTypeOffset ?? Schema.GetOffset(0x5EE209D9F05DFDD9);
+            return ref _Handle.AsRef<AnimParamType_t>(_ParamTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartCycleOffset;
+    private static nint? _StartCycleOffset;
 
-  public ref float StartCycle {
-    get {
-      if (_StartCycleOffset == null) {
-        _StartCycleOffset = Schema.GetOffset(0x5EE209D9ABB46051);
-      }
-      return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
+    public ref float StartCycle {
+        get {
+            _StartCycleOffset = _StartCycleOffset ?? Schema.GetOffset(0x5EE209D9ABB46051);
+            return ref _Handle.AsRef<float>(_StartCycleOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndCycleOffset;
+    private static nint? _EndCycleOffset;
 
-  public ref float EndCycle {
-    get {
-      if (_EndCycleOffset == null) {
-        _EndCycleOffset = Schema.GetOffset(0x5EE209D9176E8F62);
-      }
-      return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
+    public ref float EndCycle {
+        get {
+            _EndCycleOffset = _EndCycleOffset ?? Schema.GetOffset(0x5EE209D9176E8F62);
+            return ref _Handle.AsRef<float>(_EndCycleOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysSlideConstraint : CPhysConstraint, ISchemaClass<CPhysSlideConstraint> {
+public partial interface CPhysSlideConstraint : CPhysConstraint, ISchemaClass<CPhysSlideConstraint>
+{
+    static CPhysSlideConstraint ISchemaClass<CPhysSlideConstraint>.From(nint handle) => new CPhysSlideConstraintImpl(handle);
+    static int ISchemaClass<CPhysSlideConstraint>.Size => 1576;
+    static string? ISchemaClass<CPhysSlideConstraint>.ClassName => "phys_slideconstraint";
 
-  static CPhysSlideConstraint ISchemaClass<CPhysSlideConstraint>.From(nint handle) => new CPhysSlideConstraintImpl(handle);
-  static int ISchemaClass<CPhysSlideConstraint>.Size => 1576;
-  static string? ISchemaClass<CPhysSlideConstraint>.ClassName => "phys_slideconstraint";
 
-  
-  public ref Vector AxisEnd { get; }
-  
-  public ref float SlideFriction { get; }
-  
-  public ref float SystemLoadScale { get; }
-  
-  public ref float InitialOffset { get; }
-  
-  public ref bool EnableLinearConstraint { get; }
-  
-  public ref bool EnableAngularConstraint { get; }
-  
-  public ref float MotorFrequency { get; }
-  
-  public ref float MotorDampingRatio { get; }
-  
-  public ref bool UseEntityPivot { get; }
-  
-  public ConstraintSoundInfo SoundInfo { get; }
+    public ref Vector AxisEnd { get; }
+
+    public ref float SlideFriction { get; }
+
+    public ref float SystemLoadScale { get; }
+
+    public ref float InitialOffset { get; }
+
+    public ref bool EnableLinearConstraint { get; }
+
+    public ref bool EnableAngularConstraint { get; }
+
+    public ref float MotorFrequency { get; }
+
+    public ref float MotorDampingRatio { get; }
+
+    public ref bool UseEntityPivot { get; }
+
+    public ConstraintSoundInfo SoundInfo { get; }
 
 
 }

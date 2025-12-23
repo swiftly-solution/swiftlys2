@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEntityInstance : ISchemaClass<CEntityInstance> {
+public partial interface CEntityInstance : ISchemaClass<CEntityInstance>
+{
+    static CEntityInstance ISchemaClass<CEntityInstance>.From(nint handle) => new CEntityInstanceImpl(handle);
+    static int ISchemaClass<CEntityInstance>.Size => 56;
+    static string? ISchemaClass<CEntityInstance>.ClassName => "root";
 
-  static CEntityInstance ISchemaClass<CEntityInstance>.From(nint handle) => new CEntityInstanceImpl(handle);
-  static int ISchemaClass<CEntityInstance>.Size => 56;
-  static string? ISchemaClass<CEntityInstance>.ClassName => "root";
 
-  
-  public string PrivateVScripts { get; set; }
-  
-  public CEntityIdentity? Entity { get; }
-  
-  public CScriptComponent? CScriptComponent { get; }
+    public string PrivateVScripts { get; set; }
 
-  public void EntityUpdated();
+    public CEntityIdentity? Entity { get; }
+
+    public CScriptComponent? CScriptComponent { get; }
+
+    public void EntityUpdated();
 }

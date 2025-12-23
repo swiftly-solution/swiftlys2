@@ -6,127 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_TeleportBeamImpl : CParticleFunctionOperatorImpl, C_OP_TeleportBeam {
+internal partial class C_OP_TeleportBeamImpl : CParticleFunctionOperatorImpl, C_OP_TeleportBeam
+{
+    public C_OP_TeleportBeamImpl(nint handle) : base(handle) { }
 
-  public C_OP_TeleportBeamImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPPositionOffset;
 
-  private static nint? _CPPositionOffset;
-
-  public ref int CPPosition {
-    get {
-      if (_CPPositionOffset == null) {
-        _CPPositionOffset = Schema.GetOffset(0xD80BE8C1AECEEF2D);
-      }
-      return ref _Handle.AsRef<int>(_CPPositionOffset!.Value);
+    public ref int CPPosition {
+        get {
+            _CPPositionOffset = _CPPositionOffset ?? Schema.GetOffset(0xD80BE8C1AECEEF2D);
+            return ref _Handle.AsRef<int>(_CPPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPVelocityOffset;
+    private static nint? _CPVelocityOffset;
 
-  public ref int CPVelocity {
-    get {
-      if (_CPVelocityOffset == null) {
-        _CPVelocityOffset = Schema.GetOffset(0xD80BE8C165FA13B9);
-      }
-      return ref _Handle.AsRef<int>(_CPVelocityOffset!.Value);
+    public ref int CPVelocity {
+        get {
+            _CPVelocityOffset = _CPVelocityOffset ?? Schema.GetOffset(0xD80BE8C165FA13B9);
+            return ref _Handle.AsRef<int>(_CPVelocityOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPMiscOffset;
+    private static nint? _CPMiscOffset;
 
-  public ref int CPMisc {
-    get {
-      if (_CPMiscOffset == null) {
-        _CPMiscOffset = Schema.GetOffset(0xD80BE8C1466D5C8A);
-      }
-      return ref _Handle.AsRef<int>(_CPMiscOffset!.Value);
+    public ref int CPMisc {
+        get {
+            _CPMiscOffset = _CPMiscOffset ?? Schema.GetOffset(0xD80BE8C1466D5C8A);
+            return ref _Handle.AsRef<int>(_CPMiscOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPColorOffset;
+    private static nint? _CPColorOffset;
 
-  public ref int CPColor {
-    get {
-      if (_CPColorOffset == null) {
-        _CPColorOffset = Schema.GetOffset(0xD80BE8C14B880225);
-      }
-      return ref _Handle.AsRef<int>(_CPColorOffset!.Value);
+    public ref int CPColor {
+        get {
+            _CPColorOffset = _CPColorOffset ?? Schema.GetOffset(0xD80BE8C14B880225);
+            return ref _Handle.AsRef<int>(_CPColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPInvalidColorOffset;
+    private static nint? _CPInvalidColorOffset;
 
-  public ref int CPInvalidColor {
-    get {
-      if (_CPInvalidColorOffset == null) {
-        _CPInvalidColorOffset = Schema.GetOffset(0xD80BE8C1370493BC);
-      }
-      return ref _Handle.AsRef<int>(_CPInvalidColorOffset!.Value);
+    public ref int CPInvalidColor {
+        get {
+            _CPInvalidColorOffset = _CPInvalidColorOffset ?? Schema.GetOffset(0xD80BE8C1370493BC);
+            return ref _Handle.AsRef<int>(_CPInvalidColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPExtraArcDataOffset;
+    private static nint? _CPExtraArcDataOffset;
 
-  public ref int CPExtraArcData {
-    get {
-      if (_CPExtraArcDataOffset == null) {
-        _CPExtraArcDataOffset = Schema.GetOffset(0xD80BE8C1FE881B08);
-      }
-      return ref _Handle.AsRef<int>(_CPExtraArcDataOffset!.Value);
+    public ref int CPExtraArcData {
+        get {
+            _CPExtraArcDataOffset = _CPExtraArcDataOffset ?? Schema.GetOffset(0xD80BE8C1FE881B08);
+            return ref _Handle.AsRef<int>(_CPExtraArcDataOffset!.Value);
+        }
     }
-  }
-  private static nint? _GravityOffset;
+    private static nint? _GravityOffset;
 
-  public ref Vector Gravity {
-    get {
-      if (_GravityOffset == null) {
-        _GravityOffset = Schema.GetOffset(0xD80BE8C1A5AE4779);
-      }
-      return ref _Handle.AsRef<Vector>(_GravityOffset!.Value);
+    public ref Vector Gravity {
+        get {
+            _GravityOffset = _GravityOffset ?? Schema.GetOffset(0xD80BE8C1A5AE4779);
+            return ref _Handle.AsRef<Vector>(_GravityOffset!.Value);
+        }
     }
-  }
-  private static nint? _ArcMaxDurationOffset;
+    private static nint? _ArcMaxDurationOffset;
 
-  public ref float ArcMaxDuration {
-    get {
-      if (_ArcMaxDurationOffset == null) {
-        _ArcMaxDurationOffset = Schema.GetOffset(0xD80BE8C150FE58BD);
-      }
-      return ref _Handle.AsRef<float>(_ArcMaxDurationOffset!.Value);
+    public ref float ArcMaxDuration {
+        get {
+            _ArcMaxDurationOffset = _ArcMaxDurationOffset ?? Schema.GetOffset(0xD80BE8C150FE58BD);
+            return ref _Handle.AsRef<float>(_ArcMaxDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _SegmentBreakOffset;
+    private static nint? _SegmentBreakOffset;
 
-  public ref float SegmentBreak {
-    get {
-      if (_SegmentBreakOffset == null) {
-        _SegmentBreakOffset = Schema.GetOffset(0xD80BE8C18DEE8E2F);
-      }
-      return ref _Handle.AsRef<float>(_SegmentBreakOffset!.Value);
+    public ref float SegmentBreak {
+        get {
+            _SegmentBreakOffset = _SegmentBreakOffset ?? Schema.GetOffset(0xD80BE8C18DEE8E2F);
+            return ref _Handle.AsRef<float>(_SegmentBreakOffset!.Value);
+        }
     }
-  }
-  private static nint? _ArcSpeedOffset;
+    private static nint? _ArcSpeedOffset;
 
-  public ref float ArcSpeed {
-    get {
-      if (_ArcSpeedOffset == null) {
-        _ArcSpeedOffset = Schema.GetOffset(0xD80BE8C14E9BC58C);
-      }
-      return ref _Handle.AsRef<float>(_ArcSpeedOffset!.Value);
+    public ref float ArcSpeed {
+        get {
+            _ArcSpeedOffset = _ArcSpeedOffset ?? Schema.GetOffset(0xD80BE8C14E9BC58C);
+            return ref _Handle.AsRef<float>(_ArcSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaOffset;
+    private static nint? _AlphaOffset;
 
-  public ref float Alpha {
-    get {
-      if (_AlphaOffset == null) {
-        _AlphaOffset = Schema.GetOffset(0xD80BE8C1A0DB7DD1);
-      }
-      return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
+    public ref float Alpha {
+        get {
+            _AlphaOffset = _AlphaOffset ?? Schema.GetOffset(0xD80BE8C1A0DB7DD1);
+            return ref _Handle.AsRef<float>(_AlphaOffset!.Value);
+        }
     }
-  }
 
 
 }

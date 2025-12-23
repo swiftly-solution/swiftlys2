@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFeVertexMapBuildArrayImpl : SchemaClass, CFeVertexMapBuildArray {
+internal partial class CFeVertexMapBuildArrayImpl : SchemaClass, CFeVertexMapBuildArray
+{
+    public CFeVertexMapBuildArrayImpl(nint handle) : base(handle) { }
 
-  public CFeVertexMapBuildArrayImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ArrayOffset;
 
-  private static nint? _ArrayOffset;
-
-  public ref CUtlVector<PointerTo<FeVertexMapBuild_t>> Array {
-    get {
-      if (_ArrayOffset == null) {
-        _ArrayOffset = Schema.GetOffset(0x7F8ABE7424AA62A6);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointerTo<FeVertexMapBuild_t>>>(_ArrayOffset!.Value);
+    public ref CUtlVector<PointerTo<FeVertexMapBuild_t>> Array {
+        get {
+            _ArrayOffset = _ArrayOffset ?? Schema.GetOffset(0x7F8ABE7424AA62A6);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<FeVertexMapBuild_t>>>(_ArrayOffset!.Value);
+        }
     }
-  }
 
 
 }

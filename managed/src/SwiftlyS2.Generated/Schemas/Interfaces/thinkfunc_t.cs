@@ -8,21 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface thinkfunc_t : ISchemaClass<thinkfunc_t> {
+public partial interface thinkfunc_t : ISchemaClass<thinkfunc_t>
+{
+    static thinkfunc_t ISchemaClass<thinkfunc_t>.From(nint handle) => new thinkfunc_tImpl(handle);
+    static int ISchemaClass<thinkfunc_t>.Size => 32;
+    static string? ISchemaClass<thinkfunc_t>.ClassName => null;
 
-  static thinkfunc_t ISchemaClass<thinkfunc_t>.From(nint handle) => new thinkfunc_tImpl(handle);
-  static int ISchemaClass<thinkfunc_t>.Size => 32;
-  static string? ISchemaClass<thinkfunc_t>.ClassName => null;
 
-  
-  // HSCRIPT
-  public SchemaUntypedField Fn { get; }
-  
-  public ref CUtlStringToken Context { get; }
-  
-  public GameTick_t NextThinkTick { get; }
-  
-  public GameTick_t LastThinkTick { get; }
+    public ref HSCRIPTHandler Fn { get; }
+
+    public ref CUtlStringToken Context { get; }
+
+    public GameTick_t NextThinkTick { get; }
+
+    public GameTick_t LastThinkTick { get; }
 
 
 }

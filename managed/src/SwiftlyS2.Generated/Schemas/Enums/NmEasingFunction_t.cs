@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum NmEasingFunction_t : byte {
-
+public enum NmEasingFunction_t : byte
+{
  Linear = 0,
 
  Quad = 1,

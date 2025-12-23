@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleOutputBlendMode_t : uint {
-
+public enum ParticleOutputBlendMode_t : uint
+{
  PARTICLE_OUTPUT_BLEND_MODE_ALPHA = 0,
 
  PARTICLE_OUTPUT_BLEND_MODE_ADD = 1,

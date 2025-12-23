@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum WaterLevel_t : byte {
-
+public enum WaterLevel_t : byte
+{
  WL_NotInWater = 0,
 
  WL_Feet = 1,

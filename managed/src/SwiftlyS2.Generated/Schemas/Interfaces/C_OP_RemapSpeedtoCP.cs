@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapSpeedtoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapSpeedtoCP> {
+public partial interface C_OP_RemapSpeedtoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapSpeedtoCP>
+{
+    static C_OP_RemapSpeedtoCP ISchemaClass<C_OP_RemapSpeedtoCP>.From(nint handle) => new C_OP_RemapSpeedtoCPImpl(handle);
+    static int ISchemaClass<C_OP_RemapSpeedtoCP>.Size => 504;
+    static string? ISchemaClass<C_OP_RemapSpeedtoCP>.ClassName => null;
 
-  static C_OP_RemapSpeedtoCP ISchemaClass<C_OP_RemapSpeedtoCP>.From(nint handle) => new C_OP_RemapSpeedtoCPImpl(handle);
-  static int ISchemaClass<C_OP_RemapSpeedtoCP>.Size => 504;
-  static string? ISchemaClass<C_OP_RemapSpeedtoCP>.ClassName => null;
 
-  
-  public ref int InControlPointNumber { get; }
-  
-  public ref int OutControlPointNumber { get; }
-  
-  public ref int Field { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref bool UseDeltaV { get; }
+    public ref int InControlPointNumber { get; }
+
+    public ref int OutControlPointNumber { get; }
+
+    public ref int Field { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref bool UseDeltaV { get; }
 
 
 }

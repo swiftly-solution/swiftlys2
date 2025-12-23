@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ControlPointReference_tImpl : SchemaClass, ControlPointReference_t {
+internal partial class ControlPointReference_tImpl : SchemaClass, ControlPointReference_t
+{
+    public ControlPointReference_tImpl(nint handle) : base(handle) { }
 
-  public ControlPointReference_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNameStringOffset;
 
-  private static nint? _ControlPointNameStringOffset;
-
-  public ref int ControlPointNameString {
-    get {
-      if (_ControlPointNameStringOffset == null) {
-        _ControlPointNameStringOffset = Schema.GetOffset(0x83CD020625F4E2B6);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNameStringOffset!.Value);
+    public ref int ControlPointNameString {
+        get {
+            _ControlPointNameStringOffset = _ControlPointNameStringOffset ?? Schema.GetOffset(0x83CD020625F4E2B6);
+            return ref _Handle.AsRef<int>(_ControlPointNameStringOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetFromControlPointOffset;
+    private static nint? _OffsetFromControlPointOffset;
 
-  public ref Vector OffsetFromControlPoint {
-    get {
-      if (_OffsetFromControlPointOffset == null) {
-        _OffsetFromControlPointOffset = Schema.GetOffset(0x83CD0206C9E39FFF);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetFromControlPointOffset!.Value);
+    public ref Vector OffsetFromControlPoint {
+        get {
+            _OffsetFromControlPointOffset = _OffsetFromControlPointOffset ?? Schema.GetOffset(0x83CD0206C9E39FFF);
+            return ref _Handle.AsRef<Vector>(_OffsetFromControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetInLocalSpaceOffset;
+    private static nint? _OffsetInLocalSpaceOffset;
 
-  public ref bool OffsetInLocalSpace {
-    get {
-      if (_OffsetInLocalSpaceOffset == null) {
-        _OffsetInLocalSpaceOffset = Schema.GetOffset(0x83CD02064ADEF5FE);
-      }
-      return ref _Handle.AsRef<bool>(_OffsetInLocalSpaceOffset!.Value);
+    public ref bool OffsetInLocalSpace {
+        get {
+            _OffsetInLocalSpaceOffset = _OffsetInLocalSpaceOffset ?? Schema.GetOffset(0x83CD02064ADEF5FE);
+            return ref _Handle.AsRef<bool>(_OffsetInLocalSpaceOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmIsInactiveBranchConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmIsInactiveBranchConditionNode__CDefinition> {
-
-  static CNmIsInactiveBranchConditionNode__CDefinition ISchemaClass<CNmIsInactiveBranchConditionNode__CDefinition>.From(nint handle) => new CNmIsInactiveBranchConditionNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmIsInactiveBranchConditionNode__CDefinition>.Size => 16;
-  static string? ISchemaClass<CNmIsInactiveBranchConditionNode__CDefinition>.ClassName => null;
+public partial interface CNmIsInactiveBranchConditionNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmIsInactiveBranchConditionNode__CDefinition>
+{
+    static CNmIsInactiveBranchConditionNode__CDefinition ISchemaClass<CNmIsInactiveBranchConditionNode__CDefinition>.From(nint handle) => new CNmIsInactiveBranchConditionNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmIsInactiveBranchConditionNode__CDefinition>.Size => 16;
+    static string? ISchemaClass<CNmIsInactiveBranchConditionNode__CDefinition>.ClassName => null;
 
 
 

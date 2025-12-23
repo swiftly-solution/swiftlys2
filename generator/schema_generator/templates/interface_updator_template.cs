@@ -1,1 +1,1 @@
-  public void $NAME$Updated();
+    public void $NAME$Updated();

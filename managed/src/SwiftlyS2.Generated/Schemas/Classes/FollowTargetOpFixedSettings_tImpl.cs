@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FollowTargetOpFixedSettings_tImpl : SchemaClass, FollowTargetOpFixedSettings_t {
+internal partial class FollowTargetOpFixedSettings_tImpl : SchemaClass, FollowTargetOpFixedSettings_t
+{
+    public FollowTargetOpFixedSettings_tImpl(nint handle) : base(handle) { }
 
-  public FollowTargetOpFixedSettings_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneIndexOffset;
 
-  private static nint? _BoneIndexOffset;
-
-  public ref int BoneIndex {
-    get {
-      if (_BoneIndexOffset == null) {
-        _BoneIndexOffset = Schema.GetOffset(0xF6423DF66AFA4155);
-      }
-      return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+    public ref int BoneIndex {
+        get {
+            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xF6423DF66AFA4155);
+            return ref _Handle.AsRef<int>(_BoneIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneTargetOffset;
+    private static nint? _BoneTargetOffset;
 
-  public ref bool BoneTarget {
-    get {
-      if (_BoneTargetOffset == null) {
-        _BoneTargetOffset = Schema.GetOffset(0xF6423DF60E626FD2);
-      }
-      return ref _Handle.AsRef<bool>(_BoneTargetOffset!.Value);
+    public ref bool BoneTarget {
+        get {
+            _BoneTargetOffset = _BoneTargetOffset ?? Schema.GetOffset(0xF6423DF60E626FD2);
+            return ref _Handle.AsRef<bool>(_BoneTargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneTargetIndexOffset;
+    private static nint? _BoneTargetIndexOffset;
 
-  public ref int BoneTargetIndex {
-    get {
-      if (_BoneTargetIndexOffset == null) {
-        _BoneTargetIndexOffset = Schema.GetOffset(0xF6423DF62218DF46);
-      }
-      return ref _Handle.AsRef<int>(_BoneTargetIndexOffset!.Value);
+    public ref int BoneTargetIndex {
+        get {
+            _BoneTargetIndexOffset = _BoneTargetIndexOffset ?? Schema.GetOffset(0xF6423DF62218DF46);
+            return ref _Handle.AsRef<int>(_BoneTargetIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldCoodinateTargetOffset;
+    private static nint? _WorldCoodinateTargetOffset;
 
-  public ref bool WorldCoodinateTarget {
-    get {
-      if (_WorldCoodinateTargetOffset == null) {
-        _WorldCoodinateTargetOffset = Schema.GetOffset(0xF6423DF60B5B2B16);
-      }
-      return ref _Handle.AsRef<bool>(_WorldCoodinateTargetOffset!.Value);
+    public ref bool WorldCoodinateTarget {
+        get {
+            _WorldCoodinateTargetOffset = _WorldCoodinateTargetOffset ?? Schema.GetOffset(0xF6423DF60B5B2B16);
+            return ref _Handle.AsRef<bool>(_WorldCoodinateTargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _MatchTargetOrientationOffset;
+    private static nint? _MatchTargetOrientationOffset;
 
-  public ref bool MatchTargetOrientation {
-    get {
-      if (_MatchTargetOrientationOffset == null) {
-        _MatchTargetOrientationOffset = Schema.GetOffset(0xF6423DF642E0C3DB);
-      }
-      return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset!.Value);
+    public ref bool MatchTargetOrientation {
+        get {
+            _MatchTargetOrientationOffset = _MatchTargetOrientationOffset ?? Schema.GetOffset(0xF6423DF642E0C3DB);
+            return ref _Handle.AsRef<bool>(_MatchTargetOrientationOffset!.Value);
+        }
     }
-  }
 
 
 }

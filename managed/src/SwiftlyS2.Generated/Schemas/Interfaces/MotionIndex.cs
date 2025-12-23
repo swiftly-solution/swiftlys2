@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface MotionIndex : ISchemaClass<MotionIndex> {
+public partial interface MotionIndex : ISchemaClass<MotionIndex>
+{
+    static MotionIndex ISchemaClass<MotionIndex>.From(nint handle) => new MotionIndexImpl(handle);
+    static int ISchemaClass<MotionIndex>.Size => 4;
+    static string? ISchemaClass<MotionIndex>.ClassName => null;
 
-  static MotionIndex ISchemaClass<MotionIndex>.From(nint handle) => new MotionIndexImpl(handle);
-  static int ISchemaClass<MotionIndex>.Size => 4;
-  static string? ISchemaClass<MotionIndex>.ClassName => null;
 
-  
-  public ref ushort Group { get; }
-  
-  public ref ushort Motion { get; }
+    public ref ushort Group { get; }
+
+    public ref ushort Motion { get; }
 
 
 }

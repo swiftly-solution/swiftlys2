@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_PositionOffsetToCP : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionOffsetToCP> {
+public partial interface C_INIT_PositionOffsetToCP : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionOffsetToCP>
+{
+    static C_INIT_PositionOffsetToCP ISchemaClass<C_INIT_PositionOffsetToCP>.From(nint handle) => new C_INIT_PositionOffsetToCPImpl(handle);
+    static int ISchemaClass<C_INIT_PositionOffsetToCP>.Size => 488;
+    static string? ISchemaClass<C_INIT_PositionOffsetToCP>.ClassName => null;
 
-  static C_INIT_PositionOffsetToCP ISchemaClass<C_INIT_PositionOffsetToCP>.From(nint handle) => new C_INIT_PositionOffsetToCPImpl(handle);
-  static int ISchemaClass<C_INIT_PositionOffsetToCP>.Size => 488;
-  static string? ISchemaClass<C_INIT_PositionOffsetToCP>.ClassName => null;
 
-  
-  public ref int ControlPointNumberStart { get; }
-  
-  public ref int ControlPointNumberEnd { get; }
-  
-  public ref bool LocalCoords { get; }
+    public ref int ControlPointNumberStart { get; }
+
+    public ref int ControlPointNumberEnd { get; }
+
+    public ref bool LocalCoords { get; }
 
 
 }

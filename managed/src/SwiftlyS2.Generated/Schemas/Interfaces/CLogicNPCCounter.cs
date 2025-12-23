@@ -8,116 +8,116 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicNPCCounter : CBaseEntity, ISchemaClass<CLogicNPCCounter> {
+public partial interface CLogicNPCCounter : CBaseEntity, ISchemaClass<CLogicNPCCounter>
+{
+    static CLogicNPCCounter ISchemaClass<CLogicNPCCounter>.From(nint handle) => new CLogicNPCCounterImpl(handle);
+    static int ISchemaClass<CLogicNPCCounter>.Size => 2096;
+    static string? ISchemaClass<CLogicNPCCounter>.ClassName => "logic_npc_counter_radius";
 
-  static CLogicNPCCounter ISchemaClass<CLogicNPCCounter>.From(nint handle) => new CLogicNPCCounterImpl(handle);
-  static int ISchemaClass<CLogicNPCCounter>.Size => 2096;
-  static string? ISchemaClass<CLogicNPCCounter>.ClassName => "logic_npc_counter_radius";
 
-  
-  public CEntityIOOutput OnMinCountAll { get; }
-  
-  public CEntityIOOutput OnMaxCountAll { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnFactorAll { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnMinPlayerDistAll { get; }
-  
-  public CEntityIOOutput OnMinCount_1 { get; }
-  
-  public CEntityIOOutput OnMaxCount_1 { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnFactor_1 { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnMinPlayerDist_1 { get; }
-  
-  public CEntityIOOutput OnMinCount_2 { get; }
-  
-  public CEntityIOOutput OnMaxCount_2 { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnFactor_2 { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnMinPlayerDist_2 { get; }
-  
-  public CEntityIOOutput OnMinCount_3 { get; }
-  
-  public CEntityIOOutput OnMaxCount_3 { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnFactor_3 { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnMinPlayerDist_3 { get; }
-  
-  public ref CHandle<CEntityInstance> Source { get; }
-  
-  public string SourceEntityName { get; set; }
-  
-  public ref float DistanceMax { get; }
-  
-  public ref bool Disabled { get; }
-  
-  public ref int MinCountAll { get; }
-  
-  public ref int MaxCountAll { get; }
-  
-  public ref int MinFactorAll { get; }
-  
-  public ref int MaxFactorAll { get; }
-  
-  public string NPCClassname_1 { get; set; }
-  
-  public ref int NPCState_1 { get; }
-  
-  public ref bool InvertState_1 { get; }
-  
-  public ref int MinCount_1 { get; }
-  
-  public ref int MaxCount_1 { get; }
-  
-  public ref int MinFactor_1 { get; }
-  
-  public ref int MaxFactor_1 { get; }
-  
-  public ref float DefaultDist_1 { get; }
-  
-  public string NPCClassname_2 { get; set; }
-  
-  public ref int NPCState_2 { get; }
-  
-  public ref bool InvertState_2 { get; }
-  
-  public ref int MinCount_2 { get; }
-  
-  public ref int MaxCount_2 { get; }
-  
-  public ref int MinFactor_2 { get; }
-  
-  public ref int MaxFactor_2 { get; }
-  
-  public ref float DefaultDist_2 { get; }
-  
-  public string NPCClassname_3 { get; set; }
-  
-  public ref int NPCState_3 { get; }
-  
-  public ref bool InvertState_3 { get; }
-  
-  public ref int MinCount_3 { get; }
-  
-  public ref int MaxCount_3 { get; }
-  
-  public ref int MinFactor_3 { get; }
-  
-  public ref int MaxFactor_3 { get; }
-  
-  public ref float DefaultDist_3 { get; }
+    public ref CEntityIOOutput OnMinCountAll { get; }
+
+    public ref CEntityIOOutput OnMaxCountAll { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnFactorAll { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnMinPlayerDistAll { get; }
+
+    public ref CEntityIOOutput OnMinCount_1 { get; }
+
+    public ref CEntityIOOutput OnMaxCount_1 { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnFactor_1 { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnMinPlayerDist_1 { get; }
+
+    public ref CEntityIOOutput OnMinCount_2 { get; }
+
+    public ref CEntityIOOutput OnMaxCount_2 { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnFactor_2 { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnMinPlayerDist_2 { get; }
+
+    public ref CEntityIOOutput OnMinCount_3 { get; }
+
+    public ref CEntityIOOutput OnMaxCount_3 { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnFactor_3 { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnMinPlayerDist_3 { get; }
+
+    public ref CHandle<CEntityInstance> Source { get; }
+
+    public string SourceEntityName { get; set; }
+
+    public ref float DistanceMax { get; }
+
+    public ref bool Disabled { get; }
+
+    public ref int MinCountAll { get; }
+
+    public ref int MaxCountAll { get; }
+
+    public ref int MinFactorAll { get; }
+
+    public ref int MaxFactorAll { get; }
+
+    public string NPCClassname_1 { get; set; }
+
+    public ref int NPCState_1 { get; }
+
+    public ref bool InvertState_1 { get; }
+
+    public ref int MinCount_1 { get; }
+
+    public ref int MaxCount_1 { get; }
+
+    public ref int MinFactor_1 { get; }
+
+    public ref int MaxFactor_1 { get; }
+
+    public ref float DefaultDist_1 { get; }
+
+    public string NPCClassname_2 { get; set; }
+
+    public ref int NPCState_2 { get; }
+
+    public ref bool InvertState_2 { get; }
+
+    public ref int MinCount_2 { get; }
+
+    public ref int MaxCount_2 { get; }
+
+    public ref int MinFactor_2 { get; }
+
+    public ref int MaxFactor_2 { get; }
+
+    public ref float DefaultDist_2 { get; }
+
+    public string NPCClassname_3 { get; set; }
+
+    public ref int NPCState_3 { get; }
+
+    public ref bool InvertState_3 { get; }
+
+    public ref int MinCount_3 { get; }
+
+    public ref int MaxCount_3 { get; }
+
+    public ref int MinFactor_3 { get; }
+
+    public ref int MaxFactor_3 { get; }
+
+    public ref float DefaultDist_3 { get; }
 
 
 }

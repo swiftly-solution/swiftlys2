@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicAchievement : CLogicalEntity, ISchemaClass<CLogicAchievement> {
+public partial interface CLogicAchievement : CLogicalEntity, ISchemaClass<CLogicAchievement>
+{
+    static CLogicAchievement ISchemaClass<CLogicAchievement>.From(nint handle) => new CLogicAchievementImpl(handle);
+    static int ISchemaClass<CLogicAchievement>.Size => 1320;
+    static string? ISchemaClass<CLogicAchievement>.ClassName => "logic_achievement";
 
-  static CLogicAchievement ISchemaClass<CLogicAchievement>.From(nint handle) => new CLogicAchievementImpl(handle);
-  static int ISchemaClass<CLogicAchievement>.Size => 1320;
-  static string? ISchemaClass<CLogicAchievement>.ClassName => "logic_achievement";
 
-  
-  public ref bool Disabled { get; }
-  
-  public string AchievementEventID { get; set; }
-  
-  public CEntityIOOutput OnFired { get; }
+    public ref bool Disabled { get; }
+
+    public string AchievementEventID { get; set; }
+
+    public ref CEntityIOOutput OnFired { get; }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CConstraintAnchorImpl : CBaseAnimGraphImpl, CConstraintAnchor {
+internal partial class CConstraintAnchorImpl : CBaseAnimGraphImpl, CConstraintAnchor
+{
+    public CConstraintAnchorImpl(nint handle) : base(handle) { }
 
-  public CConstraintAnchorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MassScaleOffset;
 
-  private static nint? _MassScaleOffset;
-
-  public ref float MassScale {
-    get {
-      if (_MassScaleOffset == null) {
-        _MassScaleOffset = Schema.GetOffset(0xD8ABF41001B9E905);
-      }
-      return ref _Handle.AsRef<float>(_MassScaleOffset!.Value);
+    public ref float MassScale {
+        get {
+            _MassScaleOffset = _MassScaleOffset ?? Schema.GetOffset(0xD8ABF41001B9E905);
+            return ref _Handle.AsRef<float>(_MassScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

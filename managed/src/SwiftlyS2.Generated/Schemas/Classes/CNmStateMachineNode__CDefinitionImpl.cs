@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmStateMachineNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmStateMachineNode__CDefinition {
+internal partial class CNmStateMachineNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmStateMachineNode__CDefinition
+{
+    public CNmStateMachineNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmStateMachineNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StateDefinitionsOffset;
 
-  private static nint? _StateDefinitionsOffset;
-
-  public SchemaUntypedField StateDefinitions {
-    get {
-      if (_StateDefinitionsOffset == null) {
-        _StateDefinitionsOffset = Schema.GetOffset(0xA73F392775230B54);
-      }
-      return new SchemaUntypedField(_Handle + _StateDefinitionsOffset!.Value);
+    public SchemaUntypedField StateDefinitions {
+        get {
+            _StateDefinitionsOffset = _StateDefinitionsOffset ?? Schema.GetOffset(0xA73F392775230B54);
+            return new SchemaUntypedField(_Handle + _StateDefinitionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultStateIndexOffset;
+    private static nint? _DefaultStateIndexOffset;
 
-  public ref short DefaultStateIndex {
-    get {
-      if (_DefaultStateIndexOffset == null) {
-        _DefaultStateIndexOffset = Schema.GetOffset(0xA73F39276C1EC5ED);
-      }
-      return ref _Handle.AsRef<short>(_DefaultStateIndexOffset!.Value);
+    public ref short DefaultStateIndex {
+        get {
+            _DefaultStateIndexOffset = _DefaultStateIndexOffset ?? Schema.GetOffset(0xA73F39276C1EC5ED);
+            return ref _Handle.AsRef<short>(_DefaultStateIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

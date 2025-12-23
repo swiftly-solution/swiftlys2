@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_ExampleSelectorImpl : CPulseCell_BaseFlowImpl, CPulseCell_ExampleSelector {
+internal partial class CPulseCell_ExampleSelectorImpl : CPulseCell_BaseFlowImpl, CPulseCell_ExampleSelector
+{
+    public CPulseCell_ExampleSelectorImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_ExampleSelectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OutflowListOffset;
 
-  private static nint? _OutflowListOffset;
-
-  public PulseSelectorOutflowList_t OutflowList {
-    get {
-      if (_OutflowListOffset == null) {
-        _OutflowListOffset = Schema.GetOffset(0x97417F8B1461E743);
-      }
-      return new PulseSelectorOutflowList_tImpl(_Handle + _OutflowListOffset!.Value);
+    public PulseSelectorOutflowList_t OutflowList {
+        get {
+            _OutflowListOffset = _OutflowListOffset ?? Schema.GetOffset(0x97417F8B1461E743);
+            return new PulseSelectorOutflowList_tImpl(_Handle + _OutflowListOffset!.Value);
+        }
     }
-  }
 
 
 }

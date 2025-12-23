@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBasePlayerWeapon : CEconEntity, ISchemaClass<CBasePlayerWeapon> {
+public partial interface CBasePlayerWeapon : CEconEntity, ISchemaClass<CBasePlayerWeapon>
+{
+    static CBasePlayerWeapon ISchemaClass<CBasePlayerWeapon>.From(nint handle) => new CBasePlayerWeaponImpl(handle);
+    static int ISchemaClass<CBasePlayerWeapon>.Size => 3744;
+    static string? ISchemaClass<CBasePlayerWeapon>.ClassName => null;
 
-  static CBasePlayerWeapon ISchemaClass<CBasePlayerWeapon>.From(nint handle) => new CBasePlayerWeaponImpl(handle);
-  static int ISchemaClass<CBasePlayerWeapon>.Size => 3744;
-  static string? ISchemaClass<CBasePlayerWeapon>.ClassName => null;
 
-  
-  public GameTick_t NextPrimaryAttackTick { get; }
-  
-  public ref float NextPrimaryAttackTickRatio { get; }
-  
-  public GameTick_t NextSecondaryAttackTick { get; }
-  
-  public ref float NextSecondaryAttackTickRatio { get; }
-  
-  public ref int Clip1 { get; }
-  
-  public ref int Clip2 { get; }
-  
-  public ISchemaFixedArray<int> ReserveAmmo { get; }
-  
-  public CEntityIOOutput OnPlayerUse { get; }
+    public GameTick_t NextPrimaryAttackTick { get; }
 
-  public void NextPrimaryAttackTickUpdated();
-  public void NextPrimaryAttackTickRatioUpdated();
-  public void NextSecondaryAttackTickUpdated();
-  public void NextSecondaryAttackTickRatioUpdated();
-  public void Clip1Updated();
-  public void Clip2Updated();
-  public void ReserveAmmoUpdated();
+    public ref float NextPrimaryAttackTickRatio { get; }
+
+    public GameTick_t NextSecondaryAttackTick { get; }
+
+    public ref float NextSecondaryAttackTickRatio { get; }
+
+    public ref int Clip1 { get; }
+
+    public ref int Clip2 { get; }
+
+    public ISchemaFixedArray<int> ReserveAmmo { get; }
+
+    public ref CEntityIOOutput OnPlayerUse { get; }
+
+    public void NextPrimaryAttackTickUpdated();
+    public void NextPrimaryAttackTickRatioUpdated();
+    public void NextSecondaryAttackTickUpdated();
+    public void NextSecondaryAttackTickRatioUpdated();
+    public void Clip1Updated();
+    public void Clip2Updated();
+    public void ReserveAmmoUpdated();
 }

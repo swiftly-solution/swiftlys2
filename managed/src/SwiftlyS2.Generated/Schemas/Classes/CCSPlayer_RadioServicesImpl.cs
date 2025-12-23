@@ -6,67 +6,51 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayer_RadioServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_RadioServices {
+internal partial class CCSPlayer_RadioServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_RadioServices
+{
+    public CCSPlayer_RadioServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayer_RadioServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GotHostageTalkTimerOffset;
 
-  private static nint? _GotHostageTalkTimerOffset;
-
-  public GameTime_t GotHostageTalkTimer {
-    get {
-      if (_GotHostageTalkTimerOffset == null) {
-        _GotHostageTalkTimerOffset = Schema.GetOffset(0x8E7F7B35729FE1A3);
-      }
-      return new GameTime_tImpl(_Handle + _GotHostageTalkTimerOffset!.Value);
+    public GameTime_t GotHostageTalkTimer {
+        get {
+            _GotHostageTalkTimerOffset = _GotHostageTalkTimerOffset ?? Schema.GetOffset(0x8E7F7B35729FE1A3);
+            return new GameTime_tImpl(_Handle + _GotHostageTalkTimerOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefusingTalkTimerOffset;
+    private static nint? _DefusingTalkTimerOffset;
 
-  public GameTime_t DefusingTalkTimer {
-    get {
-      if (_DefusingTalkTimerOffset == null) {
-        _DefusingTalkTimerOffset = Schema.GetOffset(0x8E7F7B355AF7F835);
-      }
-      return new GameTime_tImpl(_Handle + _DefusingTalkTimerOffset!.Value);
+    public GameTime_t DefusingTalkTimer {
+        get {
+            _DefusingTalkTimerOffset = _DefusingTalkTimerOffset ?? Schema.GetOffset(0x8E7F7B355AF7F835);
+            return new GameTime_tImpl(_Handle + _DefusingTalkTimerOffset!.Value);
+        }
     }
-  }
-  private static nint? _C4PlantTalkTimerOffset;
+    private static nint? _C4PlantTalkTimerOffset;
 
-  public GameTime_t C4PlantTalkTimer {
-    get {
-      if (_C4PlantTalkTimerOffset == null) {
-        _C4PlantTalkTimerOffset = Schema.GetOffset(0x8E7F7B35CE58ABD4);
-      }
-      return new GameTime_tImpl(_Handle + _C4PlantTalkTimerOffset!.Value);
+    public GameTime_t C4PlantTalkTimer {
+        get {
+            _C4PlantTalkTimerOffset = _C4PlantTalkTimerOffset ?? Schema.GetOffset(0x8E7F7B35CE58ABD4);
+            return new GameTime_tImpl(_Handle + _C4PlantTalkTimerOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadioTokenSlotsOffset;
+    public ISchemaClassFixedArray<GameTime_t> RadioTokenSlots {
+        get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0x8E7F7B356FB722D0, 3, 4, 4);
+    }
+    private static nint? _IgnoreRadioOffset;
 
-  public SchemaUntypedField RadioTokenSlots {
-    get {
-      if (_RadioTokenSlotsOffset == null) {
-        _RadioTokenSlotsOffset = Schema.GetOffset(0x8E7F7B356FB722D0);
-      }
-      return new SchemaUntypedField(_Handle + _RadioTokenSlotsOffset!.Value);
+    public ref bool IgnoreRadio {
+        get {
+            _IgnoreRadioOffset = _IgnoreRadioOffset ?? Schema.GetOffset(0x8E7F7B3562FA7576);
+            return ref _Handle.AsRef<bool>(_IgnoreRadioOffset!.Value);
+        }
     }
-  }
-  private static nint? _IgnoreRadioOffset;
-
-  public ref bool IgnoreRadio {
-    get {
-      if (_IgnoreRadioOffset == null) {
-        _IgnoreRadioOffset = Schema.GetOffset(0x8E7F7B3562FA7576);
-      }
-      return ref _Handle.AsRef<bool>(_IgnoreRadioOffset!.Value);
-    }
-  }
 
 
 }

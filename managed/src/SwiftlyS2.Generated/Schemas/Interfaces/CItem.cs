@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CItem : CBaseAnimGraph, ISchemaClass<CItem> {
+public partial interface CItem : CBaseAnimGraph, ISchemaClass<CItem>
+{
+    static CItem ISchemaClass<CItem>.From(nint handle) => new CItemImpl(handle);
+    static int ISchemaClass<CItem>.Size => 2928;
+    static string? ISchemaClass<CItem>.ClassName => null;
 
-  static CItem ISchemaClass<CItem>.From(nint handle) => new CItemImpl(handle);
-  static int ISchemaClass<CItem>.Size => 2928;
-  static string? ISchemaClass<CItem>.ClassName => null;
 
-  
-  public CEntityIOOutput OnPlayerTouch { get; }
-  
-  public CEntityIOOutput OnPlayerPickup { get; }
-  
-  public ref bool ActivateWhenAtRest { get; }
-  
-  public CEntityIOOutput OnCacheInteraction { get; }
-  
-  public CEntityIOOutput OnGlovePulled { get; }
-  
-  public ref Vector OriginalSpawnOrigin { get; }
-  
-  public ref QAngle OriginalSpawnAngles { get; }
-  
-  public ref bool PhysStartAsleep { get; }
+    public ref CEntityIOOutput OnPlayerTouch { get; }
+
+    public ref CEntityIOOutput OnPlayerPickup { get; }
+
+    public ref bool ActivateWhenAtRest { get; }
+
+    public ref CEntityIOOutput OnCacheInteraction { get; }
+
+    public ref CEntityIOOutput OnGlovePulled { get; }
+
+    public ref Vector OriginalSpawnOrigin { get; }
+
+    public ref QAngle OriginalSpawnAngles { get; }
+
+    public ref bool PhysStartAsleep { get; }
 
 
 }

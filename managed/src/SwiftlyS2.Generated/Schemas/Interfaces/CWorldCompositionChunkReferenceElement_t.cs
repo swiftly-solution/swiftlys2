@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CWorldCompositionChunkReferenceElement_t : ISchemaClass<CWorldCompositionChunkReferenceElement_t> {
+public partial interface CWorldCompositionChunkReferenceElement_t : ISchemaClass<CWorldCompositionChunkReferenceElement_t>
+{
+    static CWorldCompositionChunkReferenceElement_t ISchemaClass<CWorldCompositionChunkReferenceElement_t>.From(nint handle) => new CWorldCompositionChunkReferenceElement_tImpl(handle);
+    static int ISchemaClass<CWorldCompositionChunkReferenceElement_t>.Size => 16;
+    static string? ISchemaClass<CWorldCompositionChunkReferenceElement_t>.ClassName => null;
 
-  static CWorldCompositionChunkReferenceElement_t ISchemaClass<CWorldCompositionChunkReferenceElement_t>.From(nint handle) => new CWorldCompositionChunkReferenceElement_tImpl(handle);
-  static int ISchemaClass<CWorldCompositionChunkReferenceElement_t>.Size => 16;
-  static string? ISchemaClass<CWorldCompositionChunkReferenceElement_t>.ClassName => null;
 
-  
-  public string StrMapToLoad { get; set; }
-  
-  public string StrLandmarkName { get; set; }
+    public string StrMapToLoad { get; set; }
+
+    public string StrLandmarkName { get; set; }
 
 
 }

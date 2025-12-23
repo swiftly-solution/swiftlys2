@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseConstraintImpl : CBoneConstraintBaseImpl, CBaseConstraint {
+internal partial class CBaseConstraintImpl : CBoneConstraintBaseImpl, CBaseConstraint
+{
+    public CBaseConstraintImpl(nint handle) : base(handle) { }
 
-  public CBaseConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE972C2844D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xE972C2844D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _UpVectorOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xE972C2844D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref Vector UpVector {
+        get {
+            _UpVectorOffset = _UpVectorOffset ?? Schema.GetOffset(0xE972C28487645F1B);
+            return ref _Handle.AsRef<Vector>(_UpVectorOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xE972C2844D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _UpVectorOffset;
+    private static nint? _SlavesOffset;
 
-  public ref Vector UpVector {
-    get {
-      if (_UpVectorOffset == null) {
-        _UpVectorOffset = Schema.GetOffset(0xE972C28487645F1B);
-      }
-      return ref _Handle.AsRef<Vector>(_UpVectorOffset!.Value);
+    public ref CUtlLeanVector<CConstraintSlave, int> Slaves {
+        get {
+            _SlavesOffset = _SlavesOffset ?? Schema.GetOffset(0xE972C284A62BA9E9);
+            return ref _Handle.AsRef<CUtlLeanVector<CConstraintSlave, int>>(_SlavesOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlavesOffset;
+    private static nint? _TargetsOffset;
 
-  public ref CUtlLeanVector<CConstraintSlave, int> Slaves {
-    get {
-      if (_SlavesOffset == null) {
-        _SlavesOffset = Schema.GetOffset(0xE972C284A62BA9E9);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<CConstraintSlave, int>>(_SlavesOffset!.Value);
+    public ref CUtlVector<CConstraintTarget> Targets {
+        get {
+            _TargetsOffset = _TargetsOffset ?? Schema.GetOffset(0xE972C28436A2FF01);
+            return ref _Handle.AsRef<CUtlVector<CConstraintTarget>>(_TargetsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetsOffset;
-
-  public ref CUtlVector<CConstraintTarget> Targets {
-    get {
-      if (_TargetsOffset == null) {
-        _TargetsOffset = Schema.GetOffset(0xE972C28436A2FF01);
-      }
-      return ref _Handle.AsRef<CUtlVector<CConstraintTarget>>(_TargetsOffset!.Value);
-    }
-  }
 
 
 }

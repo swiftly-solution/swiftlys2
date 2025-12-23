@@ -6,81 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RenderSkeletonBone_tImpl : SchemaClass, RenderSkeletonBone_t {
+internal partial class RenderSkeletonBone_tImpl : SchemaClass, RenderSkeletonBone_t
+{
+    public RenderSkeletonBone_tImpl(nint handle) : base(handle) { }
 
-  public RenderSkeletonBone_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BoneNameOffset;
 
-  private static nint? _BoneNameOffset;
+    public string BoneName {
+        get {
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x6A3BCC9BFDEE0E0C);
+            return Schema.GetString(_Handle.Read<nint>(_BoneNameOffset!.Value));
+        }
+        set {
+            _BoneNameOffset = _BoneNameOffset ?? Schema.GetOffset(0x6A3BCC9BFDEE0E0C);
+            Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ParentNameOffset;
 
-  public string BoneName {
-    get {
-      if (_BoneNameOffset == null) {
-        _BoneNameOffset = Schema.GetOffset(0x6A3BCC9BFDEE0E0C);
-      }
-      var ptr = _Handle.Read<nint>(_BoneNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_BoneNameOffset == null) {
-        _BoneNameOffset = Schema.GetOffset(0x6A3BCC9BFDEE0E0C);
-      }
-      Schema.SetString(_Handle, _BoneNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ParentNameOffset;
+    public string ParentName {
+        get {
+            _ParentNameOffset = _ParentNameOffset ?? Schema.GetOffset(0x6A3BCC9BC45C5BBE);
+            return Schema.GetString(_Handle.Read<nint>(_ParentNameOffset!.Value));
+        }
+        set {
+            _ParentNameOffset = _ParentNameOffset ?? Schema.GetOffset(0x6A3BCC9BC45C5BBE);
+            Schema.SetString(_Handle, _ParentNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _InvBindPoseOffset;
 
-  public string ParentName {
-    get {
-      if (_ParentNameOffset == null) {
-        _ParentNameOffset = Schema.GetOffset(0x6A3BCC9BC45C5BBE);
-      }
-      var ptr = _Handle.Read<nint>(_ParentNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref matrix3x4_t InvBindPose {
+        get {
+            _InvBindPoseOffset = _InvBindPoseOffset ?? Schema.GetOffset(0x6A3BCC9B265CACBE);
+            return ref _Handle.AsRef<matrix3x4_t>(_InvBindPoseOffset!.Value);
+        }
     }
-    set {
-      if (_ParentNameOffset == null) {
-        _ParentNameOffset = Schema.GetOffset(0x6A3BCC9BC45C5BBE);
-      }
-      Schema.SetString(_Handle, _ParentNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _InvBindPoseOffset;
+    private static nint? _BboxOffset;
 
-  public ref matrix3x4_t InvBindPose {
-    get {
-      if (_InvBindPoseOffset == null) {
-        _InvBindPoseOffset = Schema.GetOffset(0x6A3BCC9B265CACBE);
-      }
-      return ref _Handle.AsRef<matrix3x4_t>(_InvBindPoseOffset!.Value);
+    public SkeletonBoneBounds_t Bbox {
+        get {
+            _BboxOffset = _BboxOffset ?? Schema.GetOffset(0x6A3BCC9B39392A72);
+            return new SkeletonBoneBounds_tImpl(_Handle + _BboxOffset!.Value);
+        }
     }
-  }
-  private static nint? _BboxOffset;
+    private static nint? _SphereRadiusOffset;
 
-  public SkeletonBoneBounds_t Bbox {
-    get {
-      if (_BboxOffset == null) {
-        _BboxOffset = Schema.GetOffset(0x6A3BCC9B39392A72);
-      }
-      return new SkeletonBoneBounds_tImpl(_Handle + _BboxOffset!.Value);
+    public ref float SphereRadius {
+        get {
+            _SphereRadiusOffset = _SphereRadiusOffset ?? Schema.GetOffset(0x6A3BCC9B7AF55658);
+            return ref _Handle.AsRef<float>(_SphereRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _SphereRadiusOffset;
-
-  public ref float SphereRadius {
-    get {
-      if (_SphereRadiusOffset == null) {
-        _SphereRadiusOffset = Schema.GetOffset(0x6A3BCC9B7AF55658);
-      }
-      return ref _Handle.AsRef<float>(_SphereRadiusOffset!.Value);
-    }
-  }
 
 
 }

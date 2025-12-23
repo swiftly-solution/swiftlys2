@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSlopeComponentUpdater : CAnimComponentUpdater, ISchemaClass<CSlopeComponentUpdater> {
+public partial interface CSlopeComponentUpdater : CAnimComponentUpdater, ISchemaClass<CSlopeComponentUpdater>
+{
+    static CSlopeComponentUpdater ISchemaClass<CSlopeComponentUpdater>.From(nint handle) => new CSlopeComponentUpdaterImpl(handle);
+    static int ISchemaClass<CSlopeComponentUpdater>.Size => 72;
+    static string? ISchemaClass<CSlopeComponentUpdater>.ClassName => null;
 
-  static CSlopeComponentUpdater ISchemaClass<CSlopeComponentUpdater>.From(nint handle) => new CSlopeComponentUpdaterImpl(handle);
-  static int ISchemaClass<CSlopeComponentUpdater>.Size => 72;
-  static string? ISchemaClass<CSlopeComponentUpdater>.ClassName => null;
 
-  
-  public ref float TraceDistance { get; }
-  
-  public CAnimParamHandle SlopeAngle { get; }
-  
-  public CAnimParamHandle SlopeAngleFront { get; }
-  
-  public CAnimParamHandle SlopeAngleSide { get; }
-  
-  public CAnimParamHandle SlopeHeading { get; }
-  
-  public CAnimParamHandle SlopeNormal { get; }
-  
-  public CAnimParamHandle SlopeNormal_WorldSpace { get; }
+    public ref float TraceDistance { get; }
+
+    public CAnimParamHandle SlopeAngle { get; }
+
+    public CAnimParamHandle SlopeAngleFront { get; }
+
+    public CAnimParamHandle SlopeAngleSide { get; }
+
+    public CAnimParamHandle SlopeHeading { get; }
+
+    public CAnimParamHandle SlopeNormal { get; }
+
+    public CAnimParamHandle SlopeNormal_WorldSpace { get; }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigElement_SetRenderColorImpl : CModelConfigElementImpl, CModelConfigElement_SetRenderColor {
+internal partial class CModelConfigElement_SetRenderColorImpl : CModelConfigElementImpl, CModelConfigElement_SetRenderColor
+{
+    public CModelConfigElement_SetRenderColorImpl(nint handle) : base(handle) { }
 
-  public CModelConfigElement_SetRenderColorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ColorOffset;
 
-  private static nint? _ColorOffset;
-
-  public ref Color Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x4B560F27D7D017D8);
-      }
-      return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+    public ref Color Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x4B560F27D7D017D8);
+            return ref _Handle.AsRef<Color>(_ColorOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,10 +23,14 @@
 
 class CrashReporter : public ICrashReporter
 {
+private:
+    int m_tracerLevel;
 public:
     virtual void Init() override;
     virtual void Shutdown() override;
 
+    virtual void EnableDotnetCrashTracer(int level) override;
+    virtual int GetDotnetCrashTracerLevel() override;
     virtual void ReportPreventionIncident(std::string category, std::string reason) override;
 };
 

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetParentControlPointsToChildCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetParentControlPointsToChildCP> {
+public partial interface C_OP_SetParentControlPointsToChildCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetParentControlPointsToChildCP>
+{
+    static C_OP_SetParentControlPointsToChildCP ISchemaClass<C_OP_SetParentControlPointsToChildCP>.From(nint handle) => new C_OP_SetParentControlPointsToChildCPImpl(handle);
+    static int ISchemaClass<C_OP_SetParentControlPointsToChildCP>.Size => 496;
+    static string? ISchemaClass<C_OP_SetParentControlPointsToChildCP>.ClassName => null;
 
-  static C_OP_SetParentControlPointsToChildCP ISchemaClass<C_OP_SetParentControlPointsToChildCP>.From(nint handle) => new C_OP_SetParentControlPointsToChildCPImpl(handle);
-  static int ISchemaClass<C_OP_SetParentControlPointsToChildCP>.Size => 496;
-  static string? ISchemaClass<C_OP_SetParentControlPointsToChildCP>.ClassName => null;
 
-  
-  public ref int ChildGroupID { get; }
-  
-  public ref int ChildControlPoint { get; }
-  
-  public ref int NumControlPoints { get; }
-  
-  public ref int FirstSourcePoint { get; }
-  
-  public ref bool SetOrientation { get; }
+    public ref int ChildGroupID { get; }
+
+    public ref int ChildControlPoint { get; }
+
+    public ref int NumControlPoints { get; }
+
+    public ref int FirstSourcePoint { get; }
+
+    public ref bool SetOrientation { get; }
 
 
 }

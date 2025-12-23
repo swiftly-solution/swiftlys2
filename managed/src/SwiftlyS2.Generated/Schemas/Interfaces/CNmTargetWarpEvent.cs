@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmTargetWarpEvent : CNmEvent, ISchemaClass<CNmTargetWarpEvent> {
+public partial interface CNmTargetWarpEvent : CNmEvent, ISchemaClass<CNmTargetWarpEvent>
+{
+    static CNmTargetWarpEvent ISchemaClass<CNmTargetWarpEvent>.From(nint handle) => new CNmTargetWarpEventImpl(handle);
+    static int ISchemaClass<CNmTargetWarpEvent>.Size => 40;
+    static string? ISchemaClass<CNmTargetWarpEvent>.ClassName => null;
 
-  static CNmTargetWarpEvent ISchemaClass<CNmTargetWarpEvent>.From(nint handle) => new CNmTargetWarpEventImpl(handle);
-  static int ISchemaClass<CNmTargetWarpEvent>.Size => 40;
-  static string? ISchemaClass<CNmTargetWarpEvent>.ClassName => null;
 
-  
-  public ref NmTargetWarpRule_t Rule { get; }
-  
-  public ref NmTargetWarpAlgorithm_t Algorithm { get; }
+    public ref NmTargetWarpRule_t Rule { get; }
+
+    public ref NmTargetWarpAlgorithm_t Algorithm { get; }
 
 
 }

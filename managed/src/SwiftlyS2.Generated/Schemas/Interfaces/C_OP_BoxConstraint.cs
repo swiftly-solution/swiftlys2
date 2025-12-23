@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_BoxConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_BoxConstraint> {
+public partial interface C_OP_BoxConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_BoxConstraint>
+{
+    static C_OP_BoxConstraint ISchemaClass<C_OP_BoxConstraint>.From(nint handle) => new C_OP_BoxConstraintImpl(handle);
+    static int ISchemaClass<C_OP_BoxConstraint>.Size => 3912;
+    static string? ISchemaClass<C_OP_BoxConstraint>.ClassName => null;
 
-  static C_OP_BoxConstraint ISchemaClass<C_OP_BoxConstraint>.From(nint handle) => new C_OP_BoxConstraintImpl(handle);
-  static int ISchemaClass<C_OP_BoxConstraint>.Size => 3912;
-  static string? ISchemaClass<C_OP_BoxConstraint>.ClassName => null;
 
-  
-  public CParticleCollectionVecInput Min { get; }
-  
-  public CParticleCollectionVecInput Max { get; }
-  
-  public ref int CP { get; }
-  
-  public ref bool LocalSpace { get; }
-  
-  public ref bool AccountForRadius { get; }
+    public CParticleCollectionVecInput Min { get; }
+
+    public CParticleCollectionVecInput Max { get; }
+
+    public ref int CP { get; }
+
+    public ref bool LocalSpace { get; }
+
+    public ref bool AccountForRadius { get; }
 
 
 }

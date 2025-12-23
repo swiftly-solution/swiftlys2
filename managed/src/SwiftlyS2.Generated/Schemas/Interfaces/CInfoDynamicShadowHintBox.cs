@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoDynamicShadowHintBox : CInfoDynamicShadowHint, ISchemaClass<CInfoDynamicShadowHintBox> {
+public partial interface CInfoDynamicShadowHintBox : CInfoDynamicShadowHint, ISchemaClass<CInfoDynamicShadowHintBox>
+{
+    static CInfoDynamicShadowHintBox ISchemaClass<CInfoDynamicShadowHintBox>.From(nint handle) => new CInfoDynamicShadowHintBoxImpl(handle);
+    static int ISchemaClass<CInfoDynamicShadowHintBox>.Size => 1312;
+    static string? ISchemaClass<CInfoDynamicShadowHintBox>.ClassName => "info_dynamic_shadow_hint_box";
 
-  static CInfoDynamicShadowHintBox ISchemaClass<CInfoDynamicShadowHintBox>.From(nint handle) => new CInfoDynamicShadowHintBoxImpl(handle);
-  static int ISchemaClass<CInfoDynamicShadowHintBox>.Size => 1312;
-  static string? ISchemaClass<CInfoDynamicShadowHintBox>.ClassName => "info_dynamic_shadow_hint_box";
 
-  
-  public ref Vector BoxMins { get; }
-  
-  public ref Vector BoxMaxs { get; }
+    public ref Vector BoxMins { get; }
+
+    public ref Vector BoxMaxs { get; }
 
 
 }

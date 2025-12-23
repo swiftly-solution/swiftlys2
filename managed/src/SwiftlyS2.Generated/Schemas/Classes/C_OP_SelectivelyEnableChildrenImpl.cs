@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SelectivelyEnableChildrenImpl : CParticleFunctionPreEmissionImpl, C_OP_SelectivelyEnableChildren {
+internal partial class C_OP_SelectivelyEnableChildrenImpl : CParticleFunctionPreEmissionImpl, C_OP_SelectivelyEnableChildren
+{
+    public C_OP_SelectivelyEnableChildrenImpl(nint handle) : base(handle) { }
 
-  public C_OP_SelectivelyEnableChildrenImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChildGroupIDOffset;
 
-  private static nint? _ChildGroupIDOffset;
-
-  public CParticleCollectionFloatInput ChildGroupID {
-    get {
-      if (_ChildGroupIDOffset == null) {
-        _ChildGroupIDOffset = Schema.GetOffset(0x73804886E3F3C965);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ChildGroupIDOffset!.Value);
+    public CParticleCollectionFloatInput ChildGroupID {
+        get {
+            _ChildGroupIDOffset = _ChildGroupIDOffset ?? Schema.GetOffset(0x73804886E3F3C965);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ChildGroupIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _FirstChildOffset;
+    private static nint? _FirstChildOffset;
 
-  public CParticleCollectionFloatInput FirstChild {
-    get {
-      if (_FirstChildOffset == null) {
-        _FirstChildOffset = Schema.GetOffset(0x738048862DF4A8BD);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _FirstChildOffset!.Value);
+    public CParticleCollectionFloatInput FirstChild {
+        get {
+            _FirstChildOffset = _FirstChildOffset ?? Schema.GetOffset(0x738048862DF4A8BD);
+            return new CParticleCollectionFloatInputImpl(_Handle + _FirstChildOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumChildrenToEnableOffset;
+    private static nint? _NumChildrenToEnableOffset;
 
-  public CParticleCollectionFloatInput NumChildrenToEnable {
-    get {
-      if (_NumChildrenToEnableOffset == null) {
-        _NumChildrenToEnableOffset = Schema.GetOffset(0x738048868039247A);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _NumChildrenToEnableOffset!.Value);
+    public CParticleCollectionFloatInput NumChildrenToEnable {
+        get {
+            _NumChildrenToEnableOffset = _NumChildrenToEnableOffset ?? Schema.GetOffset(0x738048868039247A);
+            return new CParticleCollectionFloatInputImpl(_Handle + _NumChildrenToEnableOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayEndcapOnStopOffset;
+    private static nint? _PlayEndcapOnStopOffset;
 
-  public ref bool PlayEndcapOnStop {
-    get {
-      if (_PlayEndcapOnStopOffset == null) {
-        _PlayEndcapOnStopOffset = Schema.GetOffset(0x73804886CEC82FA1);
-      }
-      return ref _Handle.AsRef<bool>(_PlayEndcapOnStopOffset!.Value);
+    public ref bool PlayEndcapOnStop {
+        get {
+            _PlayEndcapOnStopOffset = _PlayEndcapOnStopOffset ?? Schema.GetOffset(0x73804886CEC82FA1);
+            return ref _Handle.AsRef<bool>(_PlayEndcapOnStopOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestroyImmediatelyOffset;
+    private static nint? _DestroyImmediatelyOffset;
 
-  public ref bool DestroyImmediately {
-    get {
-      if (_DestroyImmediatelyOffset == null) {
-        _DestroyImmediatelyOffset = Schema.GetOffset(0x7380488675F43101);
-      }
-      return ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset!.Value);
+    public ref bool DestroyImmediately {
+        get {
+            _DestroyImmediatelyOffset = _DestroyImmediatelyOffset ?? Schema.GetOffset(0x7380488675F43101);
+            return ref _Handle.AsRef<bool>(_DestroyImmediatelyOffset!.Value);
+        }
     }
-  }
 
 
 }

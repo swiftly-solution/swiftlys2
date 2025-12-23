@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Outflow_CycleShuffledImpl : CPulseCell_BaseFlowImpl, CPulseCell_Outflow_CycleShuffled {
+internal partial class CPulseCell_Outflow_CycleShuffledImpl : CPulseCell_BaseFlowImpl, CPulseCell_Outflow_CycleShuffled
+{
+    public CPulseCell_Outflow_CycleShuffledImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Outflow_CycleShuffledImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OutputsOffset;
 
-  private static nint? _OutputsOffset;
-
-  public ref CUtlVector<CPulse_OutflowConnection> Outputs {
-    get {
-      if (_OutputsOffset == null) {
-        _OutputsOffset = Schema.GetOffset(0xA7823F26A38A89D5);
-      }
-      return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_OutputsOffset!.Value);
+    public ref CUtlVector<CPulse_OutflowConnection> Outputs {
+        get {
+            _OutputsOffset = _OutputsOffset ?? Schema.GetOffset(0xA7823F26A38A89D5);
+            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_OutputsOffset!.Value);
+        }
     }
-  }
 
 
 }

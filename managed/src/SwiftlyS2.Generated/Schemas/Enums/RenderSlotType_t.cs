@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RenderSlotType_t : byte {
-
+public enum RenderSlotType_t : byte
+{
  RENDER_SLOT_INVALID = byte.MaxValue,
 
  RENDER_SLOT_PER_VERTEX = 0,

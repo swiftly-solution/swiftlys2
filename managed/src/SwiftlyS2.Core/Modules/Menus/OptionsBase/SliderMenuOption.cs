@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Spectre.Console;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Players;
 
@@ -152,12 +153,20 @@ public sealed class SliderMenuOption : MenuOptionBase
 
         _ = values.AddOrUpdate(args.Player.PlayerID, newValue, ( _, _ ) => newValue);
 
-        ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<float> {
-            Player = args.Player,
-            Option = this,
-            OldValue = oldValue,
-            NewValue = newValue
-        });
+        try
+        {
+            ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<float> {
+                Player = args.Player,
+                Option = this,
+                OldValue = oldValue,
+                NewValue = newValue
+            });
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return ValueTask.CompletedTask;
+            AnsiConsole.WriteException(e);
+        }
 
         return ValueTask.CompletedTask;
     }

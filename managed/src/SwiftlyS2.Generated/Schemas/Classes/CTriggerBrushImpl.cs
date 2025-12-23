@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerBrushImpl : CBaseModelEntityImpl, CTriggerBrush {
+internal partial class CTriggerBrushImpl : CBaseModelEntityImpl, CTriggerBrush
+{
+    public CTriggerBrushImpl(nint handle) : base(handle) { }
 
-  public CTriggerBrushImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnStartTouchOffset;
 
-  private static nint? _OnStartTouchOffset;
-
-  public CEntityIOOutput OnStartTouch {
-    get {
-      if (_OnStartTouchOffset == null) {
-        _OnStartTouchOffset = Schema.GetOffset(0xD9D3DFB2B4E38193);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnStartTouchOffset!.Value);
+    public ref CEntityIOOutput OnStartTouch {
+        get {
+            _OnStartTouchOffset = _OnStartTouchOffset ?? Schema.GetOffset(0xD9D3DFB2B4E38193);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartTouchOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnEndTouchOffset;
+    private static nint? _OnEndTouchOffset;
 
-  public CEntityIOOutput OnEndTouch {
-    get {
-      if (_OnEndTouchOffset == null) {
-        _OnEndTouchOffset = Schema.GetOffset(0xD9D3DFB25D181B48);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnEndTouchOffset!.Value);
+    public ref CEntityIOOutput OnEndTouch {
+        get {
+            _OnEndTouchOffset = _OnEndTouchOffset ?? Schema.GetOffset(0xD9D3DFB25D181B48);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndTouchOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnUseOffset;
+    private static nint? _OnUseOffset;
 
-  public CEntityIOOutput OnUse {
-    get {
-      if (_OnUseOffset == null) {
-        _OnUseOffset = Schema.GetOffset(0xD9D3DFB2C3D50673);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnUseOffset!.Value);
+    public ref CEntityIOOutput OnUse {
+        get {
+            _OnUseOffset = _OnUseOffset ?? Schema.GetOffset(0xD9D3DFB2C3D50673);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUseOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputFilterOffset;
+    private static nint? _InputFilterOffset;
 
-  public ref int InputFilter {
-    get {
-      if (_InputFilterOffset == null) {
-        _InputFilterOffset = Schema.GetOffset(0xD9D3DFB2D5B46E3A);
-      }
-      return ref _Handle.AsRef<int>(_InputFilterOffset!.Value);
+    public ref int InputFilter {
+        get {
+            _InputFilterOffset = _InputFilterOffset ?? Schema.GetOffset(0xD9D3DFB2D5B46E3A);
+            return ref _Handle.AsRef<int>(_InputFilterOffset!.Value);
+        }
     }
-  }
-  private static nint? _DontMessageParentOffset;
+    private static nint? _DontMessageParentOffset;
 
-  public ref int DontMessageParent {
-    get {
-      if (_DontMessageParentOffset == null) {
-        _DontMessageParentOffset = Schema.GetOffset(0xD9D3DFB2EE2AF166);
-      }
-      return ref _Handle.AsRef<int>(_DontMessageParentOffset!.Value);
+    public ref int DontMessageParent {
+        get {
+            _DontMessageParentOffset = _DontMessageParentOffset ?? Schema.GetOffset(0xD9D3DFB2EE2AF166);
+            return ref _Handle.AsRef<int>(_DontMessageParentOffset!.Value);
+        }
     }
-  }
 
 
 }

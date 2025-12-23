@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRandomNumberGeneratorParametersImpl : SchemaClass, CRandomNumberGeneratorParameters {
+internal partial class CRandomNumberGeneratorParametersImpl : SchemaClass, CRandomNumberGeneratorParameters
+{
+    public CRandomNumberGeneratorParametersImpl(nint handle) : base(handle) { }
 
-  public CRandomNumberGeneratorParametersImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DistributeEvenlyOffset;
 
-  private static nint? _DistributeEvenlyOffset;
-
-  public ref bool DistributeEvenly {
-    get {
-      if (_DistributeEvenlyOffset == null) {
-        _DistributeEvenlyOffset = Schema.GetOffset(0x60FDB8F9BED90721);
-      }
-      return ref _Handle.AsRef<bool>(_DistributeEvenlyOffset!.Value);
+    public ref bool DistributeEvenly {
+        get {
+            _DistributeEvenlyOffset = _DistributeEvenlyOffset ?? Schema.GetOffset(0x60FDB8F9BED90721);
+            return ref _Handle.AsRef<bool>(_DistributeEvenlyOffset!.Value);
+        }
     }
-  }
-  private static nint? _SeedOffset;
+    private static nint? _SeedOffset;
 
-  public ref int Seed {
-    get {
-      if (_SeedOffset == null) {
-        _SeedOffset = Schema.GetOffset(0x60FDB8F99A113550);
-      }
-      return ref _Handle.AsRef<int>(_SeedOffset!.Value);
+    public ref int Seed {
+        get {
+            _SeedOffset = _SeedOffset ?? Schema.GetOffset(0x60FDB8F99A113550);
+            return ref _Handle.AsRef<int>(_SeedOffset!.Value);
+        }
     }
-  }
 
 
 }

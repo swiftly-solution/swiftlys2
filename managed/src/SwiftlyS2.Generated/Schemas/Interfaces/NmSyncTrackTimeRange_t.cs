@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface NmSyncTrackTimeRange_t : ISchemaClass<NmSyncTrackTimeRange_t> {
+public partial interface NmSyncTrackTimeRange_t : ISchemaClass<NmSyncTrackTimeRange_t>
+{
+    static NmSyncTrackTimeRange_t ISchemaClass<NmSyncTrackTimeRange_t>.From(nint handle) => new NmSyncTrackTimeRange_tImpl(handle);
+    static int ISchemaClass<NmSyncTrackTimeRange_t>.Size => 16;
+    static string? ISchemaClass<NmSyncTrackTimeRange_t>.ClassName => null;
 
-  static NmSyncTrackTimeRange_t ISchemaClass<NmSyncTrackTimeRange_t>.From(nint handle) => new NmSyncTrackTimeRange_tImpl(handle);
-  static int ISchemaClass<NmSyncTrackTimeRange_t>.Size => 16;
-  static string? ISchemaClass<NmSyncTrackTimeRange_t>.ClassName => null;
 
-  
-  public NmSyncTrackTime_t StartTime { get; }
-  
-  public NmSyncTrackTime_t EndTime { get; }
+    public NmSyncTrackTime_t StartTime { get; }
+
+    public NmSyncTrackTime_t EndTime { get; }
 
 
 }

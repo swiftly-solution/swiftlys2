@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigList : ISchemaClass<CModelConfigList> {
+public partial interface CModelConfigList : ISchemaClass<CModelConfigList>
+{
+    static CModelConfigList ISchemaClass<CModelConfigList>.From(nint handle) => new CModelConfigListImpl(handle);
+    static int ISchemaClass<CModelConfigList>.Size => 32;
+    static string? ISchemaClass<CModelConfigList>.ClassName => null;
 
-  static CModelConfigList ISchemaClass<CModelConfigList>.From(nint handle) => new CModelConfigListImpl(handle);
-  static int ISchemaClass<CModelConfigList>.Size => 32;
-  static string? ISchemaClass<CModelConfigList>.ClassName => null;
 
-  
-  public ref bool HideMaterialGroupInTools { get; }
-  
-  public ref bool HideRenderColorInTools { get; }
-  
-  public ref CUtlVector<PointerTo<CModelConfig>> Configs { get; }
+    public ref bool HideMaterialGroupInTools { get; }
+
+    public ref bool HideRenderColorInTools { get; }
+
+    public ref CUtlVector<PointerTo<CModelConfig>> Configs { get; }
 
 
 }

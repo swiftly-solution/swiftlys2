@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmReferencedGraphNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmReferencedGraphNode__CDefinition> {
+public partial interface CNmReferencedGraphNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmReferencedGraphNode__CDefinition>
+{
+    static CNmReferencedGraphNode__CDefinition ISchemaClass<CNmReferencedGraphNode__CDefinition>.From(nint handle) => new CNmReferencedGraphNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmReferencedGraphNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmReferencedGraphNode__CDefinition>.ClassName => null;
 
-  static CNmReferencedGraphNode__CDefinition ISchemaClass<CNmReferencedGraphNode__CDefinition>.From(nint handle) => new CNmReferencedGraphNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmReferencedGraphNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmReferencedGraphNode__CDefinition>.ClassName => null;
 
-  
-  public ref short ReferencedGraphIdx { get; }
-  
-  public ref short FallbackNodeIdx { get; }
+    public ref short ReferencedGraphIdx { get; }
+
+    public ref short FallbackNodeIdx { get; }
 
 
 }

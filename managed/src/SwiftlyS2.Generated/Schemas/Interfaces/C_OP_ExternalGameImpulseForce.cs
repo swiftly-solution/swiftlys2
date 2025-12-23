@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ExternalGameImpulseForce : CParticleFunctionForce, ISchemaClass<C_OP_ExternalGameImpulseForce> {
+public partial interface C_OP_ExternalGameImpulseForce : CParticleFunctionForce, ISchemaClass<C_OP_ExternalGameImpulseForce>
+{
+    static C_OP_ExternalGameImpulseForce ISchemaClass<C_OP_ExternalGameImpulseForce>.From(nint handle) => new C_OP_ExternalGameImpulseForceImpl(handle);
+    static int ISchemaClass<C_OP_ExternalGameImpulseForce>.Size => 856;
+    static string? ISchemaClass<C_OP_ExternalGameImpulseForce>.ClassName => null;
 
-  static C_OP_ExternalGameImpulseForce ISchemaClass<C_OP_ExternalGameImpulseForce>.From(nint handle) => new C_OP_ExternalGameImpulseForceImpl(handle);
-  static int ISchemaClass<C_OP_ExternalGameImpulseForce>.Size => 856;
-  static string? ISchemaClass<C_OP_ExternalGameImpulseForce>.ClassName => null;
 
-  
-  public CPerParticleFloatInput ForceScale { get; }
-  
-  public ref bool Ropes { get; }
-  
-  public ref bool RopesZOnly { get; }
-  
-  public ref bool Explosions { get; }
-  
-  public ref bool Particles { get; }
+    public CPerParticleFloatInput ForceScale { get; }
+
+    public ref bool Ropes { get; }
+
+    public ref bool RopesZOnly { get; }
+
+    public ref bool Explosions { get; }
+
+    public ref bool Particles { get; }
 
 
 }

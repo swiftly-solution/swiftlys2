@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmIKBody : ISchemaClass<CNmIKBody> {
+public partial interface CNmIKBody : ISchemaClass<CNmIKBody>
+{
+    static CNmIKBody ISchemaClass<CNmIKBody>.From(nint handle) => new CNmIKBodyImpl(handle);
+    static int ISchemaClass<CNmIKBody>.Size => 32;
+    static string? ISchemaClass<CNmIKBody>.ClassName => null;
 
-  static CNmIKBody ISchemaClass<CNmIKBody>.From(nint handle) => new CNmIKBodyImpl(handle);
-  static int ISchemaClass<CNmIKBody>.Size => 32;
-  static string? ISchemaClass<CNmIKBody>.ClassName => null;
 
-  
-  public ref float Mass { get; }
-  
-  public ref Vector LocalMassCenter { get; }
-  
-  public ref Vector Radius { get; }
-  
-  public ref float Resistance { get; }
+    public ref float Mass { get; }
+
+    public ref Vector LocalMassCenter { get; }
+
+    public ref Vector Radius { get; }
+
+    public ref float Resistance { get; }
 
 
 }

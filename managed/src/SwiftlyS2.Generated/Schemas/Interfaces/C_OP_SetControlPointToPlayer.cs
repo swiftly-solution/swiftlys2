@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointToPlayer : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToPlayer> {
+public partial interface C_OP_SetControlPointToPlayer : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToPlayer>
+{
+    static C_OP_SetControlPointToPlayer ISchemaClass<C_OP_SetControlPointToPlayer>.From(nint handle) => new C_OP_SetControlPointToPlayerImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointToPlayer>.Size => 496;
+    static string? ISchemaClass<C_OP_SetControlPointToPlayer>.ClassName => null;
 
-  static C_OP_SetControlPointToPlayer ISchemaClass<C_OP_SetControlPointToPlayer>.From(nint handle) => new C_OP_SetControlPointToPlayerImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointToPlayer>.Size => 496;
-  static string? ISchemaClass<C_OP_SetControlPointToPlayer>.ClassName => null;
 
-  
-  public ref int CP1 { get; }
-  
-  public ref Vector CP1Pos { get; }
-  
-  public ref bool OrientToEyes { get; }
+    public ref int CP1 { get; }
+
+    public ref Vector CP1Pos { get; }
+
+    public ref bool OrientToEyes { get; }
 
 
 }

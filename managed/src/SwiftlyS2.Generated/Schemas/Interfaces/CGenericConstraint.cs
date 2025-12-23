@@ -8,108 +8,108 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGenericConstraint : CPhysConstraint, ISchemaClass<CGenericConstraint> {
+public partial interface CGenericConstraint : CPhysConstraint, ISchemaClass<CGenericConstraint>
+{
+    static CGenericConstraint ISchemaClass<CGenericConstraint>.From(nint handle) => new CGenericConstraintImpl(handle);
+    static int ISchemaClass<CGenericConstraint>.Size => 1680;
+    static string? ISchemaClass<CGenericConstraint>.ClassName => "phys_genericconstraint";
 
-  static CGenericConstraint ISchemaClass<CGenericConstraint>.From(nint handle) => new CGenericConstraintImpl(handle);
-  static int ISchemaClass<CGenericConstraint>.Size => 1680;
-  static string? ISchemaClass<CGenericConstraint>.ClassName => "phys_genericconstraint";
 
-  
-  public ref JointMotion_t LinearMotionX { get; }
-  
-  public ref JointMotion_t LinearMotionY { get; }
-  
-  public ref JointMotion_t LinearMotionZ { get; }
-  
-  public ref float LinearFrequencyX { get; }
-  
-  public ref float LinearFrequencyY { get; }
-  
-  public ref float LinearFrequencyZ { get; }
-  
-  public ref float LinearDampingRatioX { get; }
-  
-  public ref float LinearDampingRatioY { get; }
-  
-  public ref float LinearDampingRatioZ { get; }
-  
-  public ref float MaxLinearImpulseX { get; }
-  
-  public ref float MaxLinearImpulseY { get; }
-  
-  public ref float MaxLinearImpulseZ { get; }
-  
-  public ref float BreakAfterTimeX { get; }
-  
-  public ref float BreakAfterTimeY { get; }
-  
-  public ref float BreakAfterTimeZ { get; }
-  
-  public GameTime_t BreakAfterTimeStartTimeX { get; }
-  
-  public GameTime_t BreakAfterTimeStartTimeY { get; }
-  
-  public GameTime_t BreakAfterTimeStartTimeZ { get; }
-  
-  public ref float BreakAfterTimeThresholdX { get; }
-  
-  public ref float BreakAfterTimeThresholdY { get; }
-  
-  public ref float BreakAfterTimeThresholdZ { get; }
-  
-  public ref float NotifyForceX { get; }
-  
-  public ref float NotifyForceY { get; }
-  
-  public ref float NotifyForceZ { get; }
-  
-  public ref float NotifyForceMinTimeX { get; }
-  
-  public ref float NotifyForceMinTimeY { get; }
-  
-  public ref float NotifyForceMinTimeZ { get; }
-  
-  public GameTime_t NotifyForceLastTimeX { get; }
-  
-  public GameTime_t NotifyForceLastTimeY { get; }
-  
-  public GameTime_t NotifyForceLastTimeZ { get; }
-  
-  public ref bool AxisNotifiedX { get; }
-  
-  public ref bool AxisNotifiedY { get; }
-  
-  public ref bool AxisNotifiedZ { get; }
-  
-  public ref JointMotion_t AngularMotionX { get; }
-  
-  public ref JointMotion_t AngularMotionY { get; }
-  
-  public ref JointMotion_t AngularMotionZ { get; }
-  
-  public ref float AngularFrequencyX { get; }
-  
-  public ref float AngularFrequencyY { get; }
-  
-  public ref float AngularFrequencyZ { get; }
-  
-  public ref float AngularDampingRatioX { get; }
-  
-  public ref float AngularDampingRatioY { get; }
-  
-  public ref float AngularDampingRatioZ { get; }
-  
-  public ref float MaxAngularImpulseX { get; }
-  
-  public ref float MaxAngularImpulseY { get; }
-  
-  public ref float MaxAngularImpulseZ { get; }
-  
-  public CEntityIOOutput NotifyForceReachedX { get; }
-  
-  public CEntityIOOutput NotifyForceReachedY { get; }
-  
-  public CEntityIOOutput NotifyForceReachedZ { get; }
+    public ref JointMotion_t LinearMotionX { get; }
+
+    public ref JointMotion_t LinearMotionY { get; }
+
+    public ref JointMotion_t LinearMotionZ { get; }
+
+    public ref float LinearFrequencyX { get; }
+
+    public ref float LinearFrequencyY { get; }
+
+    public ref float LinearFrequencyZ { get; }
+
+    public ref float LinearDampingRatioX { get; }
+
+    public ref float LinearDampingRatioY { get; }
+
+    public ref float LinearDampingRatioZ { get; }
+
+    public ref float MaxLinearImpulseX { get; }
+
+    public ref float MaxLinearImpulseY { get; }
+
+    public ref float MaxLinearImpulseZ { get; }
+
+    public ref float BreakAfterTimeX { get; }
+
+    public ref float BreakAfterTimeY { get; }
+
+    public ref float BreakAfterTimeZ { get; }
+
+    public GameTime_t BreakAfterTimeStartTimeX { get; }
+
+    public GameTime_t BreakAfterTimeStartTimeY { get; }
+
+    public GameTime_t BreakAfterTimeStartTimeZ { get; }
+
+    public ref float BreakAfterTimeThresholdX { get; }
+
+    public ref float BreakAfterTimeThresholdY { get; }
+
+    public ref float BreakAfterTimeThresholdZ { get; }
+
+    public ref float NotifyForceX { get; }
+
+    public ref float NotifyForceY { get; }
+
+    public ref float NotifyForceZ { get; }
+
+    public ref float NotifyForceMinTimeX { get; }
+
+    public ref float NotifyForceMinTimeY { get; }
+
+    public ref float NotifyForceMinTimeZ { get; }
+
+    public GameTime_t NotifyForceLastTimeX { get; }
+
+    public GameTime_t NotifyForceLastTimeY { get; }
+
+    public GameTime_t NotifyForceLastTimeZ { get; }
+
+    public ref bool AxisNotifiedX { get; }
+
+    public ref bool AxisNotifiedY { get; }
+
+    public ref bool AxisNotifiedZ { get; }
+
+    public ref JointMotion_t AngularMotionX { get; }
+
+    public ref JointMotion_t AngularMotionY { get; }
+
+    public ref JointMotion_t AngularMotionZ { get; }
+
+    public ref float AngularFrequencyX { get; }
+
+    public ref float AngularFrequencyY { get; }
+
+    public ref float AngularFrequencyZ { get; }
+
+    public ref float AngularDampingRatioX { get; }
+
+    public ref float AngularDampingRatioY { get; }
+
+    public ref float AngularDampingRatioZ { get; }
+
+    public ref float MaxAngularImpulseX { get; }
+
+    public ref float MaxAngularImpulseY { get; }
+
+    public ref float MaxAngularImpulseZ { get; }
+
+    public ref CEntityIOOutput NotifyForceReachedX { get; }
+
+    public ref CEntityIOOutput NotifyForceReachedY { get; }
+
+    public ref CEntityIOOutput NotifyForceReachedZ { get; }
 
 
 }

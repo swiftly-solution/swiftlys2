@@ -6,71 +6,54 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPlayer_WeaponServicesImpl : CPlayerPawnComponentImpl, CPlayer_WeaponServices {
+internal partial class CPlayer_WeaponServicesImpl : CPlayerPawnComponentImpl, CPlayer_WeaponServices
+{
+    public CPlayer_WeaponServicesImpl(nint handle) : base(handle) { }
 
-  public CPlayer_WeaponServicesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MyWeaponsOffset;
 
-  private static nint? _MyWeaponsOffset;
-
-  public ref CUtlVector<CHandle<CBasePlayerWeapon>> MyWeapons {
-    get {
-      if (_MyWeaponsOffset == null) {
-        _MyWeaponsOffset = Schema.GetOffset(0x634D22804C8A13A6);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerWeapon>>>(_MyWeaponsOffset!.Value);
+    public ref CUtlVector<CHandle<CBasePlayerWeapon>> MyWeapons {
+        get {
+            _MyWeaponsOffset = _MyWeaponsOffset ?? Schema.GetOffset(0x634D22804C8A13A6);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBasePlayerWeapon>>>(_MyWeaponsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveWeaponOffset;
+    private static nint? _ActiveWeaponOffset;
 
-  public ref CHandle<CBasePlayerWeapon> ActiveWeapon {
-    get {
-      if (_ActiveWeaponOffset == null) {
-        _ActiveWeaponOffset = Schema.GetOffset(0x634D2280940131C5);
-      }
-      return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_ActiveWeaponOffset!.Value);
+    public ref CHandle<CBasePlayerWeapon> ActiveWeapon {
+        get {
+            _ActiveWeaponOffset = _ActiveWeaponOffset ?? Schema.GetOffset(0x634D2280940131C5);
+            return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_ActiveWeaponOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastWeaponOffset;
+    private static nint? _LastWeaponOffset;
 
-  public ref CHandle<CBasePlayerWeapon> LastWeapon {
-    get {
-      if (_LastWeaponOffset == null) {
-        _LastWeaponOffset = Schema.GetOffset(0x634D2280EA5C9547);
-      }
-      return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponOffset!.Value);
+    public ref CHandle<CBasePlayerWeapon> LastWeapon {
+        get {
+            _LastWeaponOffset = _LastWeaponOffset ?? Schema.GetOffset(0x634D2280EA5C9547);
+            return ref _Handle.AsRef<CHandle<CBasePlayerWeapon>>(_LastWeaponOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<ushort> Ammo {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x634D22800D59E6CA, 32, 2, 2);
-  }
-  private static nint? _PreventWeaponPickupOffset;
-
-  public ref bool PreventWeaponPickup {
-    get {
-      if (_PreventWeaponPickupOffset == null) {
-        _PreventWeaponPickupOffset = Schema.GetOffset(0x634D228093894029);
-      }
-      return ref _Handle.AsRef<bool>(_PreventWeaponPickupOffset!.Value);
+    public ISchemaFixedArray<ushort> Ammo {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x634D22800D59E6CA, 32, 2, 2);
     }
-  }
+    private static nint? _PreventWeaponPickupOffset;
 
-  public void MyWeaponsUpdated() {
-    Schema.Update(_Handle, 0x634D22804C8A13A6);
-  }
-  public void ActiveWeaponUpdated() {
-    Schema.Update(_Handle, 0x634D2280940131C5);
-  }
-  public void LastWeaponUpdated() {
-    Schema.Update(_Handle, 0x634D2280EA5C9547);
-  }
-  public void AmmoUpdated() {
-    Schema.Update(_Handle, 0x634D22800D59E6CA);
-  }
+    public ref bool PreventWeaponPickup {
+        get {
+            _PreventWeaponPickupOffset = _PreventWeaponPickupOffset ?? Schema.GetOffset(0x634D228093894029);
+            return ref _Handle.AsRef<bool>(_PreventWeaponPickupOffset!.Value);
+        }
+    }
+
+    public void MyWeaponsUpdated() => Schema.Update(_Handle, 0x634D22804C8A13A6);
+    public void ActiveWeaponUpdated() => Schema.Update(_Handle, 0x634D2280940131C5);
+    public void LastWeaponUpdated() => Schema.Update(_Handle, 0x634D2280EA5C9547);
+    public void AmmoUpdated() => Schema.Update(_Handle, 0x634D22800D59E6CA);
 }

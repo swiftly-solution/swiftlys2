@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimTagManagerUpdater : ISchemaClass<CAnimTagManagerUpdater> {
+public partial interface CAnimTagManagerUpdater : ISchemaClass<CAnimTagManagerUpdater>
+{
+    static CAnimTagManagerUpdater ISchemaClass<CAnimTagManagerUpdater>.From(nint handle) => new CAnimTagManagerUpdaterImpl(handle);
+    static int ISchemaClass<CAnimTagManagerUpdater>.Size => 120;
+    static string? ISchemaClass<CAnimTagManagerUpdater>.ClassName => null;
 
-  static CAnimTagManagerUpdater ISchemaClass<CAnimTagManagerUpdater>.From(nint handle) => new CAnimTagManagerUpdaterImpl(handle);
-  static int ISchemaClass<CAnimTagManagerUpdater>.Size => 120;
-  static string? ISchemaClass<CAnimTagManagerUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<SchemaUntypedField> Tags { get; }
+    public ref CUtlVector<SchemaUntypedField> Tags { get; }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimMotorUpdaterBase : ISchemaClass<CAnimMotorUpdaterBase> {
+public partial interface CAnimMotorUpdaterBase : ISchemaClass<CAnimMotorUpdaterBase>
+{
+    static CAnimMotorUpdaterBase ISchemaClass<CAnimMotorUpdaterBase>.From(nint handle) => new CAnimMotorUpdaterBaseImpl(handle);
+    static int ISchemaClass<CAnimMotorUpdaterBase>.Size => 32;
+    static string? ISchemaClass<CAnimMotorUpdaterBase>.ClassName => null;
 
-  static CAnimMotorUpdaterBase ISchemaClass<CAnimMotorUpdaterBase>.From(nint handle) => new CAnimMotorUpdaterBaseImpl(handle);
-  static int ISchemaClass<CAnimMotorUpdaterBase>.Size => 32;
-  static string? ISchemaClass<CAnimMotorUpdaterBase>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref bool Default { get; }
+    public string Name { get; set; }
+
+    public ref bool Default { get; }
 
 
 }

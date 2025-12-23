@@ -1,6 +1,5 @@
 from class_name_convertor import get_interface_name, get_impl_name
 
-
 unmanaged_type_maps = {
   "int8": "byte",
   "int16": "short",
@@ -50,7 +49,11 @@ unmanaged_type_maps = {
   "CTakeDamageInfo": "CTakeDamageInfo",
   "CTakeDamageResult": "CTakeDamageResult",
   "ChangeAccessorFieldPathIndex_t": "ChangeAccessorFieldPathIndex_t",
-  "CNetworkVarChainer": "CNetworkVarChainer"
+  "CNetworkVarChainer": "CNetworkVarChainer",
+  "HSCRIPT": "HSCRIPTHandler",
+  "QuaternionStorage": "QuaternionStorage",
+  "CEntityIOOutput": "CEntityIOOutput",
+  "CVariantBase<CVariantDefaultAllocator>": "CVariant<CVariantDefaultAllocator>",
 }
 
 blacklisted_types = [
@@ -60,20 +63,19 @@ blacklisted_types = [
   "CStrongHandleVoid",
   "CUtlVectorFixedGrowable",
   "CUtlLeanVectorFixedGrowable",
-  "QuaternionStorage",
   "CWeakHandle",
   "DegreeEuler",
   "CTypedBitVec",
   "CUtlSymbol",
+  "CUtlOrderedMap",
+  "CUtlMap",
   "CSmartPtr",
   "CUtlHashtable",
-  "CUtlOrderedMap",
   "CPulseValueFullType",
   "PulseSymbol_t",
   "CColorGradient",
   "CPiecewiseCurve",
   "CAnimGraph2ParamOptionalRef",
-  "HSCRIPT",
   "Range_t",
   "CAnimGraphParamRef",
   "bitfield",
@@ -93,7 +95,6 @@ blacklisted_types = [
   "CModelAnimNameWithDeltas",
   "CAnimValue",
   "CEntityOutputTemplate",
-  "CVariantBase",
   "SphereBase_t",
   "CAttachmentNameSymbolWithStorage",
   "std::pair",
@@ -186,8 +187,6 @@ def convert_field_type(type, kind, all_class_names, all_enum_names, interface = 
   if kind == "ptr" and type == "char": # char*
     return (f"CString", True)
   
-
-
   for key, value in unmanaged_type_maps.items():
     if type.startswith(key):
 
@@ -202,7 +201,7 @@ def convert_field_type(type, kind, all_class_names, all_enum_names, interface = 
         if kind == "fixed_array":
           return (f"{prefix}SchemaFixedArray<{name}>", False)
         return (name, is_value_type)
-    
+      
       if kind == "fixed_array":
         if type == "char":
           return (f"{prefix}SchemaFixedString", False)
@@ -222,7 +221,7 @@ def convert_field_type(type, kind, all_class_names, all_enum_names, interface = 
 
   if type in all_class_names:
     if kind == "fixed_array":
-      return (f"SchemaUntypedField", False)
+      return (f"{prefix}SchemaClassFixedArray<{type}>", False)
     complex_type = get_impl_name(type) if not interface else get_interface_name(type)
     return (complex_type, False)
   

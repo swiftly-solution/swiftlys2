@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvWind : CBaseEntity, ISchemaClass<CEnvWind> {
+public partial interface CEnvWind : CBaseEntity, ISchemaClass<CEnvWind>
+{
+    static CEnvWind ISchemaClass<CEnvWind>.From(nint handle) => new CEnvWindImpl(handle);
+    static int ISchemaClass<CEnvWind>.Size => 1600;
+    static string? ISchemaClass<CEnvWind>.ClassName => "env_wind";
 
-  static CEnvWind ISchemaClass<CEnvWind>.From(nint handle) => new CEnvWindImpl(handle);
-  static int ISchemaClass<CEnvWind>.Size => 1600;
-  static string? ISchemaClass<CEnvWind>.ClassName => "env_wind";
 
-  
-  public CEnvWindShared EnvWindShared { get; }
+    public CEnvWindShared EnvWindShared { get; }
 
-  public void EnvWindSharedUpdated();
+    public void EnvWindSharedUpdated();
 }

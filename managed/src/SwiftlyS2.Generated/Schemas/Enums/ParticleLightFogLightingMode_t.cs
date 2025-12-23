@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleLightFogLightingMode_t : uint {
-
+public enum ParticleLightFogLightingMode_t : uint
+{
  PARTICLE_LIGHT_FOG_LIGHTING_MODE_NONE = 0,
 
  PARTICLE_LIGHT_FOG_LIGHTING_MODE_DYNAMIC = 2,

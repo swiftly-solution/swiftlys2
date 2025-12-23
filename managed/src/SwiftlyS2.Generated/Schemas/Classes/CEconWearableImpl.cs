@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEconWearableImpl : CEconEntityImpl, CEconWearable {
+internal partial class CEconWearableImpl : CEconEntityImpl, CEconWearable
+{
+    public CEconWearableImpl(nint handle) : base(handle) { }
 
-  public CEconWearableImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceSkinOffset;
 
-  private static nint? _ForceSkinOffset;
-
-  public ref int ForceSkin {
-    get {
-      if (_ForceSkinOffset == null) {
-        _ForceSkinOffset = Schema.GetOffset(0x491C03F4E5817B39);
-      }
-      return ref _Handle.AsRef<int>(_ForceSkinOffset!.Value);
+    public ref int ForceSkin {
+        get {
+            _ForceSkinOffset = _ForceSkinOffset ?? Schema.GetOffset(0x491C03F4E5817B39);
+            return ref _Handle.AsRef<int>(_ForceSkinOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlwaysAllowOffset;
+    private static nint? _AlwaysAllowOffset;
 
-  public ref bool AlwaysAllow {
-    get {
-      if (_AlwaysAllowOffset == null) {
-        _AlwaysAllowOffset = Schema.GetOffset(0x491C03F4AD06B805);
-      }
-      return ref _Handle.AsRef<bool>(_AlwaysAllowOffset!.Value);
+    public ref bool AlwaysAllow {
+        get {
+            _AlwaysAllowOffset = _AlwaysAllowOffset ?? Schema.GetOffset(0x491C03F4AD06B805);
+            return ref _Handle.AsRef<bool>(_AlwaysAllowOffset!.Value);
+        }
     }
-  }
 
 
 }

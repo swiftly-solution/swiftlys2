@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixDualCompressorDesc_tImpl : SchemaClass, VMixDualCompressorDesc_t {
+internal partial class VMixDualCompressorDesc_tImpl : SchemaClass, VMixDualCompressorDesc_t
+{
+    public VMixDualCompressorDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixDualCompressorDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RMSTimeMSOffset;
 
-  private static nint? _RMSTimeMSOffset;
-
-  public ref float RMSTimeMS {
-    get {
-      if (_RMSTimeMSOffset == null) {
-        _RMSTimeMSOffset = Schema.GetOffset(0x6B9BDFD8FB749526);
-      }
-      return ref _Handle.AsRef<float>(_RMSTimeMSOffset!.Value);
+    public ref float RMSTimeMS {
+        get {
+            _RMSTimeMSOffset = _RMSTimeMSOffset ?? Schema.GetOffset(0x6B9BDFD8FB749526);
+            return ref _Handle.AsRef<float>(_RMSTimeMSOffset!.Value);
+        }
     }
-  }
-  private static nint? _FldbKneeWidthOffset;
+    private static nint? _FldbKneeWidthOffset;
 
-  public ref float FldbKneeWidth {
-    get {
-      if (_FldbKneeWidthOffset == null) {
-        _FldbKneeWidthOffset = Schema.GetOffset(0x6B9BDFD835532FF2);
-      }
-      return ref _Handle.AsRef<float>(_FldbKneeWidthOffset!.Value);
+    public ref float FldbKneeWidth {
+        get {
+            _FldbKneeWidthOffset = _FldbKneeWidthOffset ?? Schema.GetOffset(0x6B9BDFD835532FF2);
+            return ref _Handle.AsRef<float>(_FldbKneeWidthOffset!.Value);
+        }
     }
-  }
-  private static nint? _WetMixOffset;
+    private static nint? _WetMixOffset;
 
-  public ref float WetMix {
-    get {
-      if (_WetMixOffset == null) {
-        _WetMixOffset = Schema.GetOffset(0x6B9BDFD8D5453C15);
-      }
-      return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+    public ref float WetMix {
+        get {
+            _WetMixOffset = _WetMixOffset ?? Schema.GetOffset(0x6B9BDFD8D5453C15);
+            return ref _Handle.AsRef<float>(_WetMixOffset!.Value);
+        }
     }
-  }
-  private static nint? _PeakModeOffset;
+    private static nint? _PeakModeOffset;
 
-  public ref bool PeakMode {
-    get {
-      if (_PeakModeOffset == null) {
-        _PeakModeOffset = Schema.GetOffset(0x6B9BDFD887DF35F9);
-      }
-      return ref _Handle.AsRef<bool>(_PeakModeOffset!.Value);
+    public ref bool PeakMode {
+        get {
+            _PeakModeOffset = _PeakModeOffset ?? Schema.GetOffset(0x6B9BDFD887DF35F9);
+            return ref _Handle.AsRef<bool>(_PeakModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _BandDescOffset;
+    private static nint? _BandDescOffset;
 
-  public VMixDynamicsBand_t BandDesc {
-    get {
-      if (_BandDescOffset == null) {
-        _BandDescOffset = Schema.GetOffset(0x6B9BDFD804203F47);
-      }
-      return new VMixDynamicsBand_tImpl(_Handle + _BandDescOffset!.Value);
+    public VMixDynamicsBand_t BandDesc {
+        get {
+            _BandDescOffset = _BandDescOffset ?? Schema.GetOffset(0x6B9BDFD804203F47);
+            return new VMixDynamicsBand_tImpl(_Handle + _BandDescOffset!.Value);
+        }
     }
-  }
 
 
 }

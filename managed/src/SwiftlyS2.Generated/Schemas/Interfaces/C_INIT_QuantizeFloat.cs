@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_QuantizeFloat : CParticleFunctionInitializer, ISchemaClass<C_INIT_QuantizeFloat> {
+public partial interface C_INIT_QuantizeFloat : CParticleFunctionInitializer, ISchemaClass<C_INIT_QuantizeFloat>
+{
+    static C_INIT_QuantizeFloat ISchemaClass<C_INIT_QuantizeFloat>.From(nint handle) => new C_INIT_QuantizeFloatImpl(handle);
+    static int ISchemaClass<C_INIT_QuantizeFloat>.Size => 848;
+    static string? ISchemaClass<C_INIT_QuantizeFloat>.ClassName => null;
 
-  static C_INIT_QuantizeFloat ISchemaClass<C_INIT_QuantizeFloat>.From(nint handle) => new C_INIT_QuantizeFloatImpl(handle);
-  static int ISchemaClass<C_INIT_QuantizeFloat>.Size => 848;
-  static string? ISchemaClass<C_INIT_QuantizeFloat>.ClassName => null;
 
-  
-  public CPerParticleFloatInput InputValue { get; }
-  
-  public ParticleAttributeIndex_t OutputField { get; }
+    public CPerParticleFloatInput InputValue { get; }
+
+    public ParticleAttributeIndex_t OutputField { get; }
 
 
 }

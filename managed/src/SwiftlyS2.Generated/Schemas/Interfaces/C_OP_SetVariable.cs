@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetVariable : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetVariable> {
+public partial interface C_OP_SetVariable : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetVariable>
+{
+    static C_OP_SetVariable ISchemaClass<C_OP_SetVariable>.From(nint handle) => new C_OP_SetVariableImpl(handle);
+    static int ISchemaClass<C_OP_SetVariable>.Size => 2768;
+    static string? ISchemaClass<C_OP_SetVariable>.ClassName => null;
 
-  static C_OP_SetVariable ISchemaClass<C_OP_SetVariable>.From(nint handle) => new C_OP_SetVariableImpl(handle);
-  static int ISchemaClass<C_OP_SetVariable>.Size => 2768;
-  static string? ISchemaClass<C_OP_SetVariable>.ClassName => null;
 
-  
-  public CParticleVariableRef VariableReference { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref Vector PositionOffset { get; }
-  
-  public ref QAngle RotationOffset { get; }
-  
-  public CParticleCollectionVecInput Input { get; }
-  
-  public CParticleCollectionFloatInput FloatInput { get; }
+    public CParticleVariableRef VariableReference { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref Vector PositionOffset { get; }
+
+    public ref QAngle RotationOffset { get; }
+
+    public CParticleCollectionVecInput Input { get; }
+
+    public CParticleCollectionFloatInput FloatInput { get; }
 
 
 }

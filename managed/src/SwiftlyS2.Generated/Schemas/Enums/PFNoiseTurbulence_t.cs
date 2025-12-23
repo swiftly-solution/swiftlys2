@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PFNoiseTurbulence_t : uint {
-
+public enum PFNoiseTurbulence_t : uint
+{
  PF_NOISE_TURB_NONE = 0,
 
  PF_NOISE_TURB_HIGHLIGHT = 1,

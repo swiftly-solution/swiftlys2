@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Spectre.Console;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Players;
@@ -127,12 +128,20 @@ public sealed class InputMenuOption : MenuOptionBase
         var oldValue = values.GetOrAdd(player.PlayerID, defaultValue);
         _ = values.AddOrUpdate(player.PlayerID, value, ( _, _ ) => value);
 
-        ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<string> {
-            Player = player,
-            Option = this,
-            OldValue = oldValue,
-            NewValue = value
-        });
+        try
+        {
+            ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<string> {
+                Player = player,
+                Option = this,
+                OldValue = oldValue,
+                NewValue = value
+            });
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return false;
+            AnsiConsole.WriteException(e);
+        }
 
         return true;
     }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixOscDesc_t : ISchemaClass<VMixOscDesc_t> {
+public partial interface VMixOscDesc_t : ISchemaClass<VMixOscDesc_t>
+{
+    static VMixOscDesc_t ISchemaClass<VMixOscDesc_t>.From(nint handle) => new VMixOscDesc_tImpl(handle);
+    static int ISchemaClass<VMixOscDesc_t>.Size => 12;
+    static string? ISchemaClass<VMixOscDesc_t>.ClassName => null;
 
-  static VMixOscDesc_t ISchemaClass<VMixOscDesc_t>.From(nint handle) => new VMixOscDesc_tImpl(handle);
-  static int ISchemaClass<VMixOscDesc_t>.Size => 12;
-  static string? ISchemaClass<VMixOscDesc_t>.ClassName => null;
 
-  
-  public ref VMixLFOShape_t OscType { get; }
-  
-  public ref float Freq { get; }
-  
-  public ref float Phase { get; }
+    public ref VMixLFOShape_t OscType { get; }
+
+    public ref float Freq { get; }
+
+    public ref float Phase { get; }
 
 
 }

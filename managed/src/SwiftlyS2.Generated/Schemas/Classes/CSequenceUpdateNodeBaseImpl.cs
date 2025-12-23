@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSequenceUpdateNodeBaseImpl : CLeafUpdateNodeImpl, CSequenceUpdateNodeBase {
+internal partial class CSequenceUpdateNodeBaseImpl : CLeafUpdateNodeImpl, CSequenceUpdateNodeBase
+{
+    public CSequenceUpdateNodeBaseImpl(nint handle) : base(handle) { }
 
-  public CSequenceUpdateNodeBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PlaybackSpeedOffset;
 
-  private static nint? _PlaybackSpeedOffset;
-
-  public ref float PlaybackSpeed {
-    get {
-      if (_PlaybackSpeedOffset == null) {
-        _PlaybackSpeedOffset = Schema.GetOffset(0x6FCA4DDB1AFA7387);
-      }
-      return ref _Handle.AsRef<float>(_PlaybackSpeedOffset!.Value);
+    public ref float PlaybackSpeed {
+        get {
+            _PlaybackSpeedOffset = _PlaybackSpeedOffset ?? Schema.GetOffset(0x6FCA4DDB1AFA7387);
+            return ref _Handle.AsRef<float>(_PlaybackSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopOffset;
+    private static nint? _LoopOffset;
 
-  public ref bool Loop {
-    get {
-      if (_LoopOffset == null) {
-        _LoopOffset = Schema.GetOffset(0x6FCA4DDBC668A4CB);
-      }
-      return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+    public ref bool Loop {
+        get {
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0x6FCA4DDBC668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+        }
     }
-  }
 
 
 }

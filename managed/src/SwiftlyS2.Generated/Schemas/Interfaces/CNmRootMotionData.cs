@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmRootMotionData : ISchemaClass<CNmRootMotionData> {
+public partial interface CNmRootMotionData : ISchemaClass<CNmRootMotionData>
+{
+    static CNmRootMotionData ISchemaClass<CNmRootMotionData>.From(nint handle) => new CNmRootMotionDataImpl(handle);
+    static int ISchemaClass<CNmRootMotionData>.Size => 80;
+    static string? ISchemaClass<CNmRootMotionData>.ClassName => null;
 
-  static CNmRootMotionData ISchemaClass<CNmRootMotionData>.From(nint handle) => new CNmRootMotionDataImpl(handle);
-  static int ISchemaClass<CNmRootMotionData>.Size => 80;
-  static string? ISchemaClass<CNmRootMotionData>.ClassName => null;
 
-  
-  public ref CUtlVector<CTransform> Transforms { get; }
-  
-  public ref int NumFrames { get; }
-  
-  public ref float AverageLinearVelocity { get; }
-  
-  public ref float AverageAngularVelocityRadians { get; }
-  
-  public ref CTransform TotalDelta { get; }
+    public ref CUtlVector<CTransform> Transforms { get; }
+
+    public ref int NumFrames { get; }
+
+    public ref float AverageLinearVelocity { get; }
+
+    public ref float AverageAngularVelocityRadians { get; }
+
+    public ref CTransform TotalDelta { get; }
 
 
 }

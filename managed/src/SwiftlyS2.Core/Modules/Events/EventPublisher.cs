@@ -1,32 +1,36 @@
 using System.Runtime.InteropServices;
+using Spectre.Console;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Events;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.ProtobufDefinitions;
-using SwiftlyS2.Core.SchemaDefinitions;
-using SwiftlyS2.Shared.SchemaDefinitions;
-using Spectre.Console;
-using System.Runtime.CompilerServices;
-using SwiftlyS2.Core.ProtobufDefinitions;
-using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Core.Scheduler;
-using SwiftlyS2.Shared.SteamAPI;
+using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Core.ProtobufDefinitions;
+using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.ProtobufDefinitions;
 
 namespace SwiftlyS2.Core.Events;
 
 internal static class EventPublisher
 {
-
-    private static List<EventSubscriber> _subscribers = new();
+    internal static event Action? InternalOnMapLoad;
+    private static readonly List<EventSubscriber> subscribers = [];
+    private static readonly Lock subscribersLock = new();
 
     public static void Subscribe( EventSubscriber subscriber )
     {
-        _subscribers.Add(subscriber);
+        lock (subscribersLock)
+        {
+            subscribers.Add(subscriber);
+        }
     }
+
     public static void Unsubscribe( EventSubscriber subscriber )
     {
-        _subscribers.Remove(subscriber);
+        lock (subscribersLock)
+        {
+            _ = subscribers.Remove(subscriber);
+        }
     }
 
     public static void Register()
@@ -51,31 +55,35 @@ internal static class EventPublisher
             NativeEvents.RegisterOnEntityTakeDamageCallback((nint)(delegate* unmanaged< nint, nint, nint, byte >)&OnEntityTakeDamage);
             NativeEvents.RegisterOnPrecacheResourceCallback((nint)(delegate* unmanaged< nint, void >)&OnPrecacheResource);
             NativeEvents.RegisterOnStartupServerCallback((nint)(delegate* unmanaged< void >)&OnStartupServer);
-            NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated);
-            NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
-            NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
-            NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
+            _ = NativeConvars.AddConvarCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConVarCreated);
+            _ = NativeConvars.AddConCommandCreatedListener((nint)(delegate* unmanaged< nint, void >)&OnConCommandCreated);
+            _ = NativeConvars.AddGlobalChangeListener((nint)(delegate* unmanaged< nint, int, nint, nint, void >)&OnConVarValueChanged);
+            _ = NativeConsoleOutput.AddConsoleListener((nint)(delegate* unmanaged< nint, void >)&OnConsoleOutput);
         }
     }
 
     [UnmanagedCallersOnly]
     public static void OnConVarCreated( nint convarNamePtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            string convarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty;
-            OnConVarCreated @event = new() {
-                ConVarName = convarName
-            };
-            foreach (var subscriber in _subscribers)
+            OnConVarCreated @event = new() { ConVarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnConVarCreated(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -83,21 +91,25 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnConCommandCreated( nint commandNamePtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            string commandName = Marshal.PtrToStringUTF8(commandNamePtr) ?? string.Empty;
-            OnConCommandCreated @event = new() {
-                CommandName = commandName
-            };
-            foreach (var subscriber in _subscribers)
+            OnConCommandCreated @event = new() { CommandName = Marshal.PtrToStringUTF8(commandNamePtr) ?? string.Empty };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnConCommandCreated(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -105,26 +117,30 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnConVarValueChanged( nint convarNamePtr, int playerid, nint newValuePtr, nint oldValuePtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            string convarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty;
-            string newValue = Marshal.PtrToStringUTF8(newValuePtr) ?? string.Empty;
-            string oldValue = Marshal.PtrToStringUTF8(oldValuePtr) ?? string.Empty;
             OnConVarValueChanged @event = new() {
-                ConVarName = convarName,
                 PlayerId = playerid,
-                NewValue = newValue,
-                OldValue = oldValue
+                ConVarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty,
+                NewValue = Marshal.PtrToStringUTF8(newValuePtr) ?? string.Empty,
+                OldValue = Marshal.PtrToStringUTF8(oldValuePtr) ?? string.Empty,
             };
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnConVarValueChanged(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -134,14 +150,25 @@ internal static class EventPublisher
     {
         SchedulerManager.OnTick();
         // CallbackDispatcher.RunFrame(true);
-        if (_subscribers.Count == 0) return;
+
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            _subscribers.ForEach(subscriber => subscriber.InvokeOnTick());
+            foreach (var subscriber in subscribers)
+            {
+                subscriber.InvokeOnTick();
+            }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -150,14 +177,25 @@ internal static class EventPublisher
     public static void OnPreworldUpdate( byte simulating )
     {
         SchedulerManager.OnWorldUpdate();
-        if (_subscribers.Count == 0) return;
+
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            _subscribers.ForEach(subscriber => subscriber.InvokeOnWorldUpdate());
+            foreach (var subscriber in subscribers)
+            {
+                subscriber.InvokeOnWorldUpdate();
+            }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -165,13 +203,15 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static byte OnClientConnected( int playerId )
     {
-        if (_subscribers.Count == 0) return 1;
+        if (subscribers.Count == 0)
+        {
+            return 1;
+        }
+
         try
         {
-            OnClientConnectedEvent @event = new() {
-                PlayerId = playerId
-            };
-            foreach (var subscriber in _subscribers)
+            OnClientConnectedEvent @event = new() { PlayerId = playerId };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnClientConnected(@event);
 
@@ -190,7 +230,10 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return 1;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return 1;
+            }
             AnsiConsole.WriteException(e);
             return 1;
         }
@@ -199,22 +242,28 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnClientDisconnected( int playerId, int reason )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
             OnClientDisconnectedEvent @event = new() {
                 PlayerId = playerId,
                 Reason = (ENetworkDisconnectionReason)reason
             };
-
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnClientDisconnected(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -222,7 +271,11 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnClientKeyStateChanged( int playerId, GameButtons key, byte pressed )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
             OnClientKeyStateChangedEvent @event = new() {
@@ -230,14 +283,17 @@ internal static class EventPublisher
                 Key = key.ToKeyKind(),
                 Pressed = pressed != 0
             };
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnClientKeyStateChanged(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -245,21 +301,28 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnClientPutInServer( int playerId, int clientKind )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
             OnClientPutInServerEvent @event = new() {
                 PlayerId = playerId,
                 Kind = (ClientKind)clientKind
             };
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnClientPutInServer(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -267,20 +330,25 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorize( int playerId )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            OnClientSteamAuthorizeEvent @event = new() {
-                PlayerId = playerId
-            };
-            foreach (var subscriber in _subscribers)
+            OnClientSteamAuthorizeEvent @event = new() { PlayerId = playerId };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnClientSteamAuthorize(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -288,20 +356,25 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnClientSteamAuthorizeFail( int playerId )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            OnClientSteamAuthorizeFailEvent @event = new() {
-                PlayerId = playerId
-            };
-            foreach (var subscriber in _subscribers)
+            OnClientSteamAuthorizeFailEvent @event = new() { PlayerId = playerId };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnClientSteamAuthorizeFail(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -309,21 +382,25 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnEntityCreated( nint entityPtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            var entity = new CEntityInstanceImpl(entityPtr);
-            OnEntityCreatedEvent @event = new() {
-                Entity = entity
-            };
-            foreach (var subscriber in _subscribers)
+            OnEntityCreatedEvent @event = new() { Entity = new CEntityInstanceImpl(entityPtr) };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnEntityCreated(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -331,21 +408,25 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnEntityDeleted( nint entityPtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            var entity = new CEntityInstanceImpl(entityPtr);
-            OnEntityDeletedEvent @event = new() {
-                Entity = entity
-            };
-            foreach (var subscriber in _subscribers)
+            OnEntityDeletedEvent @event = new() { Entity = new CEntityInstanceImpl(entityPtr) };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnEntityDeleted(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -353,23 +434,28 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnEntityParentChanged( nint entityPtr, nint newParentPtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            var entity = new CEntityInstanceImpl(entityPtr);
-            CEntityInstance? parent = newParentPtr != 0 ? new CEntityInstanceImpl(newParentPtr) : null;
             OnEntityParentChangedEvent @event = new() {
-                Entity = entity,
-                NewParent = parent
+                Entity = new CEntityInstanceImpl(entityPtr),
+                NewParent = newParentPtr != 0 ? new CEntityInstanceImpl(newParentPtr) : null
             };
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnEntityParentChanged(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -377,21 +463,25 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnEntitySpawned( nint entityPtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            var entity = new CEntityInstanceImpl(entityPtr);
-            OnEntitySpawnedEvent @event = new() {
-                Entity = entity
-            };
-            foreach (var subscriber in _subscribers)
+            OnEntitySpawnedEvent @event = new() { Entity = new CEntityInstanceImpl(entityPtr) };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnEntitySpawned(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -399,21 +489,38 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnMapLoad( nint mapNamePtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            string map = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty;
-            OnMapLoadEvent @event = new() {
-                MapName = map
-            };
-            foreach (var subscriber in _subscribers)
+            InternalOnMapLoad?.Invoke(); // calls before all plugins.
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
+            AnsiConsole.WriteException(e);
+        }
+
+        try
+        {
+            OnMapLoadEvent @event = new() { MapName = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnMapLoad(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -421,21 +528,25 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnMapUnload( nint mapNamePtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            string map = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty;
-            OnMapUnloadEvent @event = new() {
-                MapName = map
-            };
-            foreach (var subscriber in _subscribers)
+            OnMapUnloadEvent @event = new() { MapName = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnMapUnload(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -443,13 +554,17 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnClientProcessUsercmds( int playerId, nint usercmdsPtr, int numcmds, byte paused, float margin )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
             unsafe
             {
-                ReadOnlySpan<nint> usercmdPtrs = new ReadOnlySpan<nint>(usercmdsPtr.ToPointer(), numcmds);
-                List<CSGOUserCmdPB> usercmds = new();
+                var usercmdPtrs = new ReadOnlySpan<nint>(usercmdsPtr.ToPointer(), numcmds);
+                List<CSGOUserCmdPB> usercmds = [];
                 foreach (var pUsercmd in usercmdPtrs)
                 {
                     var usercmd = new CSGOUserCmdPBImpl(pUsercmd, false);
@@ -462,7 +577,7 @@ internal static class EventPublisher
                     Paused = paused != 0,
                     Margin = margin
                 };
-                foreach (var subscriber in _subscribers)
+                foreach (var subscriber in subscribers)
                 {
                     subscriber.InvokeOnClientProcessUsercmds(@event);
                 }
@@ -470,7 +585,10 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -478,18 +596,21 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static byte OnEntityTakeDamage( nint entityPtr, nint takeDamageInfoPtr, nint takeDamageResultPtr )
     {
-        if (_subscribers.Count == 0) return 1;
+        if (subscribers.Count == 0)
+        {
+            return 1;
+        }
+
         try
         {
             unsafe
             {
-                var entity = new CEntityInstanceImpl(entityPtr);
                 OnEntityTakeDamageEvent @event = new() {
-                    Entity = entity,
+                    Entity = new CEntityInstanceImpl(entityPtr),
                     _infoPtr = takeDamageInfoPtr,
                     _resultPtr = takeDamageResultPtr
                 };
-                foreach (var subscriber in _subscribers)
+                foreach (var subscriber in subscribers)
                 {
                     subscriber.InvokeOnEntityTakeDamage(@event);
 
@@ -508,7 +629,10 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return 1;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return 1;
+            }
             AnsiConsole.WriteException(e);
             return 1;
         }
@@ -517,38 +641,50 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnPrecacheResource( nint pResourceManifest )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            OnPrecacheResourceEvent @event = new() {
-                pResourceManifest = pResourceManifest
-            };
-            foreach (var subscriber in _subscribers)
+            OnPrecacheResourceEvent @event = new() { pResourceManifest = pResourceManifest };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnPrecacheResource(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
 
     [UnmanagedCallersOnly]
-    public static void OnStartupServer( )
+    public static void OnStartupServer()
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnStartupServer();
             }
-        } 
+        }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -556,135 +692,172 @@ internal static class EventPublisher
     [Obsolete("InvokeOnEntityTouchHook is deprecated. Use InvokeOnEntityStartTouch, InvokeOnEntityTouch, or InvokeOnEntityEndTouch instead.")]
     public static void InvokeOnEntityTouchHook( OnEntityTouchHookEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnEntityTouchHook(@event);
             }
-            return;
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
-            return;
         }
     }
 
     public static void InvokeOnEntityStartTouch( OnEntityStartTouchEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnEntityStartTouch(@event);
             }
-            return;
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
-            return;
         }
     }
 
     public static void InvokeOnEntityTouch( OnEntityTouchEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnEntityTouch(@event);
             }
-            return;
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
-            return;
         }
     }
 
     public static void InvokeOnEntityEndTouch( OnEntityEndTouchEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnEntityEndTouch(@event);
             }
-            return;
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
-            return;
         }
     }
 
     public static void InvokeOnSteamAPIActivatedHook()
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnSteamAPIActivatedHook();
             }
-            return;
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
-            return;
         }
     }
 
     public static void InvokeOnCanAcquireHook( OnItemServicesCanAcquireHookEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnItemServicesCanAcquireHook(@event);
                 if (@event.Intercepted)
                 {
-                    return;
+                    break;
                 }
             }
-            return;
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
-            return;
         }
     }
 
     public static void InvokeOnWeaponServicesCanUseHook( OnWeaponServicesCanUseHookEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnWeaponServicesCanUseHook(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
@@ -692,89 +865,145 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnConsoleOutput( nint messagePtr )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            OnConsoleOutputEvent @event = new() {
-                Message = Marshal.PtrToStringUTF8(messagePtr) ?? string.Empty
-            };
-            foreach (var subscriber in _subscribers)
+            OnConsoleOutputEvent @event = new() { Message = Marshal.PtrToStringUTF8(messagePtr) ?? string.Empty };
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnConsoleOutput(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
 
     public static void InvokeOnCommandExecuteHook( OnCommandExecuteHookEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnCommandExecuteHook(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
 
     public static void InvokeOnMovementServicesRunCommandHook( OnMovementServicesRunCommandHookEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnMovementServicesRunCommandHook(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
-            return;
         }
     }
 
     public static void InvokeOnPlayerPawnPostThinkHook( OnPlayerPawnPostThinkHookEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnPlayerPawnPostThinkHook(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }
 
     public static void InvokeOnEntityIdentityAcceptInputHook( OnEntityIdentityAcceptInputHookEvent @event )
     {
-        if (_subscribers.Count == 0) return;
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
         try
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in subscribers)
             {
                 subscriber.InvokeOnEntityIdentityAcceptInputHook(@event);
             }
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void InvokeEntityFireOutputHook( OnEntityFireOutputHookEvent @event )
+    {
+        if (subscribers.Count == 0)
+        {
+            return;
+        }
+
+        try
+        {
+            foreach (var subscriber in subscribers)
+            {
+                subscriber.InvokeOnEntityFireOutputHook(@event);
+            }
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }

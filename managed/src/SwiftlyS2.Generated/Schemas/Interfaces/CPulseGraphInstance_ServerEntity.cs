@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseGraphInstance_ServerEntity : CBasePulseGraphInstance, ISchemaClass<CPulseGraphInstance_ServerEntity> {
+public partial interface CPulseGraphInstance_ServerEntity : CBasePulseGraphInstance, ISchemaClass<CPulseGraphInstance_ServerEntity>
+{
+    static CPulseGraphInstance_ServerEntity ISchemaClass<CPulseGraphInstance_ServerEntity>.From(nint handle) => new CPulseGraphInstance_ServerEntityImpl(handle);
+    static int ISchemaClass<CPulseGraphInstance_ServerEntity>.Size => 440;
+    static string? ISchemaClass<CPulseGraphInstance_ServerEntity>.ClassName => null;
 
-  static CPulseGraphInstance_ServerEntity ISchemaClass<CPulseGraphInstance_ServerEntity>.From(nint handle) => new CPulseGraphInstance_ServerEntityImpl(handle);
-  static int ISchemaClass<CPulseGraphInstance_ServerEntity>.Size => 440;
-  static string? ISchemaClass<CPulseGraphInstance_ServerEntity>.ClassName => null;
 
-  
-  public ref CHandle<CBaseEntity> Owner { get; }
-  
-  public ref bool Activated { get; }
-  
-  public string NameFixupStaticPrefix { get; set; }
-  
-  public string NameFixupParent { get; set; }
-  
-  public string NameFixupLocal { get; set; }
-  
-  public string ProceduralWorldNameForRelays { get; set; }
+    public ref CHandle<CBaseEntity> Owner { get; }
+
+    public ref bool Activated { get; }
+
+    public string NameFixupStaticPrefix { get; set; }
+
+    public string NameFixupParent { get; set; }
+
+    public string NameFixupLocal { get; set; }
+
+    public string ProceduralWorldNameForRelays { get; set; }
 
 
 }

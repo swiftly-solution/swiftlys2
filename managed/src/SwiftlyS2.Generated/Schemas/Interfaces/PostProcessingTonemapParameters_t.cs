@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PostProcessingTonemapParameters_t : ISchemaClass<PostProcessingTonemapParameters_t> {
+public partial interface PostProcessingTonemapParameters_t : ISchemaClass<PostProcessingTonemapParameters_t>
+{
+    static PostProcessingTonemapParameters_t ISchemaClass<PostProcessingTonemapParameters_t>.From(nint handle) => new PostProcessingTonemapParameters_tImpl(handle);
+    static int ISchemaClass<PostProcessingTonemapParameters_t>.Size => 60;
+    static string? ISchemaClass<PostProcessingTonemapParameters_t>.ClassName => null;
 
-  static PostProcessingTonemapParameters_t ISchemaClass<PostProcessingTonemapParameters_t>.From(nint handle) => new PostProcessingTonemapParameters_tImpl(handle);
-  static int ISchemaClass<PostProcessingTonemapParameters_t>.Size => 60;
-  static string? ISchemaClass<PostProcessingTonemapParameters_t>.ClassName => null;
 
-  
-  public ref float ExposureBias { get; }
-  
-  public ref float ShoulderStrength { get; }
-  
-  public ref float LinearStrength { get; }
-  
-  public ref float LinearAngle { get; }
-  
-  public ref float ToeStrength { get; }
-  
-  public ref float ToeNum { get; }
-  
-  public ref float ToeDenom { get; }
-  
-  public ref float WhitePoint { get; }
-  
-  public ref float LuminanceSource { get; }
-  
-  public ref float ExposureBiasShadows { get; }
-  
-  public ref float ExposureBiasHighlights { get; }
-  
-  public ref float MinShadowLum { get; }
-  
-  public ref float MaxShadowLum { get; }
-  
-  public ref float MinHighlightLum { get; }
-  
-  public ref float MaxHighlightLum { get; }
+    public ref float ExposureBias { get; }
+
+    public ref float ShoulderStrength { get; }
+
+    public ref float LinearStrength { get; }
+
+    public ref float LinearAngle { get; }
+
+    public ref float ToeStrength { get; }
+
+    public ref float ToeNum { get; }
+
+    public ref float ToeDenom { get; }
+
+    public ref float WhitePoint { get; }
+
+    public ref float LuminanceSource { get; }
+
+    public ref float ExposureBiasShadows { get; }
+
+    public ref float ExposureBiasHighlights { get; }
+
+    public ref float MinShadowLum { get; }
+
+    public ref float MaxShadowLum { get; }
+
+    public ref float MinHighlightLum { get; }
+
+    public ref float MaxHighlightLum { get; }
 
 
 }

@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimScriptManagerImpl : SchemaClass, CAnimScriptManager {
+internal partial class CAnimScriptManagerImpl : SchemaClass, CAnimScriptManager
+{
+    public CAnimScriptManagerImpl(nint handle) : base(handle) { }
 
-  public CAnimScriptManagerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScriptInfoOffset;
 
-  private static nint? _ScriptInfoOffset;
-
-  public ref CUtlVector<ScriptInfo_t> ScriptInfo {
-    get {
-      if (_ScriptInfoOffset == null) {
-        _ScriptInfoOffset = Schema.GetOffset(0x13962EC3119509F2);
-      }
-      return ref _Handle.AsRef<CUtlVector<ScriptInfo_t>>(_ScriptInfoOffset!.Value);
+    public ref CUtlVector<ScriptInfo_t> ScriptInfo {
+        get {
+            _ScriptInfoOffset = _ScriptInfoOffset ?? Schema.GetOffset(0x13962EC3119509F2);
+            return ref _Handle.AsRef<CUtlVector<ScriptInfo_t>>(_ScriptInfoOffset!.Value);
+        }
     }
-  }
 
 
 }

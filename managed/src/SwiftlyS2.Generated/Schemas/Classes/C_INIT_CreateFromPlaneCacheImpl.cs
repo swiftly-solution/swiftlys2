@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_CreateFromPlaneCacheImpl : CParticleFunctionInitializerImpl, C_INIT_CreateFromPlaneCache {
+internal partial class C_INIT_CreateFromPlaneCacheImpl : CParticleFunctionInitializerImpl, C_INIT_CreateFromPlaneCache
+{
+    public C_INIT_CreateFromPlaneCacheImpl(nint handle) : base(handle) { }
 
-  public C_INIT_CreateFromPlaneCacheImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OffsetMinOffset;
 
-  private static nint? _OffsetMinOffset;
-
-  public ref Vector OffsetMin {
-    get {
-      if (_OffsetMinOffset == null) {
-        _OffsetMinOffset = Schema.GetOffset(0x349002765EE9C8FE);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetMinOffset!.Value);
+    public ref Vector OffsetMin {
+        get {
+            _OffsetMinOffset = _OffsetMinOffset ?? Schema.GetOffset(0x349002765EE9C8FE);
+            return ref _Handle.AsRef<Vector>(_OffsetMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetMaxOffset;
+    private static nint? _OffsetMaxOffset;
 
-  public ref Vector OffsetMax {
-    get {
-      if (_OffsetMaxOffset == null) {
-        _OffsetMaxOffset = Schema.GetOffset(0x3490027670D65D9C);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetMaxOffset!.Value);
+    public ref Vector OffsetMax {
+        get {
+            _OffsetMaxOffset = _OffsetMaxOffset ?? Schema.GetOffset(0x3490027670D65D9C);
+            return ref _Handle.AsRef<Vector>(_OffsetMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseNormalOffset;
+    private static nint? _UseNormalOffset;
 
-  public ref bool UseNormal {
-    get {
-      if (_UseNormalOffset == null) {
-        _UseNormalOffset = Schema.GetOffset(0x349002769FA2D197);
-      }
-      return ref _Handle.AsRef<bool>(_UseNormalOffset!.Value);
+    public ref bool UseNormal {
+        get {
+            _UseNormalOffset = _UseNormalOffset ?? Schema.GetOffset(0x349002769FA2D197);
+            return ref _Handle.AsRef<bool>(_UseNormalOffset!.Value);
+        }
     }
-  }
 
 
 }

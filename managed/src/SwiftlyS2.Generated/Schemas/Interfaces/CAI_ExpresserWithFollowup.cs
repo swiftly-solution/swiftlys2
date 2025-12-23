@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAI_ExpresserWithFollowup : CAI_Expresser, ISchemaClass<CAI_ExpresserWithFollowup> {
-
-  static CAI_ExpresserWithFollowup ISchemaClass<CAI_ExpresserWithFollowup>.From(nint handle) => new CAI_ExpresserWithFollowupImpl(handle);
-  static int ISchemaClass<CAI_ExpresserWithFollowup>.Size => 160;
-  static string? ISchemaClass<CAI_ExpresserWithFollowup>.ClassName => null;
+public partial interface CAI_ExpresserWithFollowup : CAI_Expresser, ISchemaClass<CAI_ExpresserWithFollowup>
+{
+    static CAI_ExpresserWithFollowup ISchemaClass<CAI_ExpresserWithFollowup>.From(nint handle) => new CAI_ExpresserWithFollowupImpl(handle);
+    static int ISchemaClass<CAI_ExpresserWithFollowup>.Size => 160;
+    static string? ISchemaClass<CAI_ExpresserWithFollowup>.ClassName => null;
 
 
 

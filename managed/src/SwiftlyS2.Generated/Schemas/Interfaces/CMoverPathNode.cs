@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMoverPathNode : CPointEntity, ISchemaClass<CMoverPathNode> {
+public partial interface CMoverPathNode : CPointEntity, ISchemaClass<CMoverPathNode>
+{
+    static CMoverPathNode ISchemaClass<CMoverPathNode>.From(nint handle) => new CMoverPathNodeImpl(handle);
+    static int ISchemaClass<CMoverPathNode>.Size => 1552;
+    static string? ISchemaClass<CMoverPathNode>.ClassName => "path_node_mover";
 
-  static CMoverPathNode ISchemaClass<CMoverPathNode>.From(nint handle) => new CMoverPathNodeImpl(handle);
-  static int ISchemaClass<CMoverPathNode>.Size => 1552;
-  static string? ISchemaClass<CMoverPathNode>.ClassName => "path_node_mover";
 
-  
-  public ref Vector InTangentLocal { get; }
-  
-  public ref Vector OutTangentLocal { get; }
-  
-  public string ParentPathUniqueID { get; set; }
-  
-  public string PathNodeParameter { get; set; }
-  
-  public CEntityIOOutput OnStartFromOrInSegment { get; }
-  
-  public CEntityIOOutput OnStoppedAtOrInSegment { get; }
-  
-  public CEntityIOOutput OnPassThrough { get; }
-  
-  public CEntityIOOutput OnPassThroughForward { get; }
-  
-  public CEntityIOOutput OnPassThroughReverse { get; }
-  
-  public ref CHandle<CPathMover> Mover { get; }
-  
-  public ref CTransform XWSPrevParent { get; }
+    public ref Vector InTangentLocal { get; }
+
+    public ref Vector OutTangentLocal { get; }
+
+    public string ParentPathUniqueID { get; set; }
+
+    public string PathNodeParameter { get; set; }
+
+    public ref CEntityIOOutput OnStartFromOrInSegment { get; }
+
+    public ref CEntityIOOutput OnStoppedAtOrInSegment { get; }
+
+    public ref CEntityIOOutput OnPassThrough { get; }
+
+    public ref CEntityIOOutput OnPassThroughForward { get; }
+
+    public ref CEntityIOOutput OnPassThroughReverse { get; }
+
+    public ref CHandle<CPathMover> Mover { get; }
+
+    public ref CTransform XWSPrevParent { get; }
 
 
 }

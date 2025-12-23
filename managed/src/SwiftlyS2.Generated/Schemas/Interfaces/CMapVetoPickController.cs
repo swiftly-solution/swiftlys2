@@ -8,79 +8,79 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMapVetoPickController : CBaseEntity, ISchemaClass<CMapVetoPickController> {
+public partial interface CMapVetoPickController : CBaseEntity, ISchemaClass<CMapVetoPickController>
+{
+    static CMapVetoPickController ISchemaClass<CMapVetoPickController>.From(nint handle) => new CMapVetoPickControllerImpl(handle);
+    static int ISchemaClass<CMapVetoPickController>.Size => 3864;
+    static string? ISchemaClass<CMapVetoPickController>.ClassName => "mapvetopick_controller";
 
-  static CMapVetoPickController ISchemaClass<CMapVetoPickController>.From(nint handle) => new CMapVetoPickControllerImpl(handle);
-  static int ISchemaClass<CMapVetoPickController>.Size => 3864;
-  static string? ISchemaClass<CMapVetoPickController>.ClassName => "mapvetopick_controller";
 
-  
-  public ref bool PlayedIntroVcd { get; }
-  
-  public ref bool NeedToPlayFiveSecondsRemaining { get; }
-  
-  public ref double DblPreMatchDraftSequenceTime { get; }
-  
-  public ref bool PreMatchDraftStateChanged { get; }
-  
-  public ref int DraftType { get; }
-  
-  public ref int TeamWinningCoinToss { get; }
-  
-  public ISchemaFixedArray<int> TeamWithFirstChoice { get; }
-  
-  public ISchemaFixedArray<int> VoteMapIdsList { get; }
-  
-  public ISchemaFixedArray<int> AccountIDs { get; }
-  
-  public ISchemaFixedArray<int> MapId0 { get; }
-  
-  public ISchemaFixedArray<int> MapId1 { get; }
-  
-  public ISchemaFixedArray<int> MapId2 { get; }
-  
-  public ISchemaFixedArray<int> MapId3 { get; }
-  
-  public ISchemaFixedArray<int> MapId4 { get; }
-  
-  public ISchemaFixedArray<int> MapId5 { get; }
-  
-  public ISchemaFixedArray<int> StartingSide0 { get; }
-  
-  public ref int CurrentPhase { get; }
-  
-  public ref int PhaseStartTick { get; }
-  
-  public ref int PhaseDurationTicks { get; }
-  
-  // CEntityOutputTemplate< CUtlSymbolLarge >
-  public SchemaUntypedField OnMapVetoed { get; }
-  
-  // CEntityOutputTemplate< CUtlSymbolLarge >
-  public SchemaUntypedField OnMapPicked { get; }
-  
-  // CEntityOutputTemplate< int32 >
-  public SchemaUntypedField OnSidesPicked { get; }
-  
-  // CEntityOutputTemplate< int32 >
-  public SchemaUntypedField OnNewPhaseStarted { get; }
-  
-  // CEntityOutputTemplate< int32 >
-  public SchemaUntypedField OnLevelTransition { get; }
+    public ref bool PlayedIntroVcd { get; }
 
-  public void DraftTypeUpdated();
-  public void TeamWinningCoinTossUpdated();
-  public void TeamWithFirstChoiceUpdated();
-  public void VoteMapIdsListUpdated();
-  public void AccountIDsUpdated();
-  public void MapId0Updated();
-  public void MapId1Updated();
-  public void MapId2Updated();
-  public void MapId3Updated();
-  public void MapId4Updated();
-  public void MapId5Updated();
-  public void StartingSide0Updated();
-  public void CurrentPhaseUpdated();
-  public void PhaseStartTickUpdated();
-  public void PhaseDurationTicksUpdated();
+    public ref bool NeedToPlayFiveSecondsRemaining { get; }
+
+    public ref double DblPreMatchDraftSequenceTime { get; }
+
+    public ref bool PreMatchDraftStateChanged { get; }
+
+    public ref int DraftType { get; }
+
+    public ref int TeamWinningCoinToss { get; }
+
+    public ISchemaFixedArray<int> TeamWithFirstChoice { get; }
+
+    public ISchemaFixedArray<int> VoteMapIdsList { get; }
+
+    public ISchemaFixedArray<int> AccountIDs { get; }
+
+    public ISchemaFixedArray<int> MapId0 { get; }
+
+    public ISchemaFixedArray<int> MapId1 { get; }
+
+    public ISchemaFixedArray<int> MapId2 { get; }
+
+    public ISchemaFixedArray<int> MapId3 { get; }
+
+    public ISchemaFixedArray<int> MapId4 { get; }
+
+    public ISchemaFixedArray<int> MapId5 { get; }
+
+    public ISchemaFixedArray<int> StartingSide0 { get; }
+
+    public ref int CurrentPhase { get; }
+
+    public ref int PhaseStartTick { get; }
+
+    public ref int PhaseDurationTicks { get; }
+
+    // CEntityOutputTemplate< CUtlSymbolLarge >
+    public SchemaUntypedField OnMapVetoed { get; }
+
+    // CEntityOutputTemplate< CUtlSymbolLarge >
+    public SchemaUntypedField OnMapPicked { get; }
+
+    // CEntityOutputTemplate< int32 >
+    public SchemaUntypedField OnSidesPicked { get; }
+
+    // CEntityOutputTemplate< int32 >
+    public SchemaUntypedField OnNewPhaseStarted { get; }
+
+    // CEntityOutputTemplate< int32 >
+    public SchemaUntypedField OnLevelTransition { get; }
+
+    public void DraftTypeUpdated();
+    public void TeamWinningCoinTossUpdated();
+    public void TeamWithFirstChoiceUpdated();
+    public void VoteMapIdsListUpdated();
+    public void AccountIDsUpdated();
+    public void MapId0Updated();
+    public void MapId1Updated();
+    public void MapId2Updated();
+    public void MapId3Updated();
+    public void MapId4Updated();
+    public void MapId5Updated();
+    public void StartingSide0Updated();
+    public void CurrentPhaseUpdated();
+    public void PhaseStartTickUpdated();
+    public void PhaseDurationTicksUpdated();
 }

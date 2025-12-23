@@ -6,158 +6,120 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncLadderImpl : CBaseModelEntityImpl, CFuncLadder {
+internal partial class CFuncLadderImpl : CBaseModelEntityImpl, CFuncLadder
+{
+    public CFuncLadderImpl(nint handle) : base(handle) { }
 
-  public CFuncLadderImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LadderDirOffset;
 
-  private static nint? _LadderDirOffset;
-
-  public ref Vector LadderDir {
-    get {
-      if (_LadderDirOffset == null) {
-        _LadderDirOffset = Schema.GetOffset(0xD85E0238BEE3D218);
-      }
-      return ref _Handle.AsRef<Vector>(_LadderDirOffset!.Value);
+    public ref Vector LadderDir {
+        get {
+            _LadderDirOffset = _LadderDirOffset ?? Schema.GetOffset(0xD85E0238BEE3D218);
+            return ref _Handle.AsRef<Vector>(_LadderDirOffset!.Value);
+        }
     }
-  }
-  private static nint? _DismountsOffset;
+    private static nint? _DismountsOffset;
 
-  public ref CUtlVector<CHandle<CInfoLadderDismount>> Dismounts {
-    get {
-      if (_DismountsOffset == null) {
-        _DismountsOffset = Schema.GetOffset(0xD85E0238E1BF2F19);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CInfoLadderDismount>>>(_DismountsOffset!.Value);
+    public ref CUtlVector<CHandle<CInfoLadderDismount>> Dismounts {
+        get {
+            _DismountsOffset = _DismountsOffset ?? Schema.GetOffset(0xD85E0238E1BF2F19);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CInfoLadderDismount>>>(_DismountsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalTopOffset;
+    private static nint? _LocalTopOffset;
 
-  public ref Vector LocalTop {
-    get {
-      if (_LocalTopOffset == null) {
-        _LocalTopOffset = Schema.GetOffset(0xD85E0238A709E4E3);
-      }
-      return ref _Handle.AsRef<Vector>(_LocalTopOffset!.Value);
+    public ref Vector LocalTop {
+        get {
+            _LocalTopOffset = _LocalTopOffset ?? Schema.GetOffset(0xD85E0238A709E4E3);
+            return ref _Handle.AsRef<Vector>(_LocalTopOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayerMountPositionTopOffset;
+    private static nint? _PlayerMountPositionTopOffset;
 
-  public ref Vector PlayerMountPositionTop {
-    get {
-      if (_PlayerMountPositionTopOffset == null) {
-        _PlayerMountPositionTopOffset = Schema.GetOffset(0xD85E02383DC07685);
-      }
-      return ref _Handle.AsRef<Vector>(_PlayerMountPositionTopOffset!.Value);
+    public ref Vector PlayerMountPositionTop {
+        get {
+            _PlayerMountPositionTopOffset = _PlayerMountPositionTopOffset ?? Schema.GetOffset(0xD85E02383DC07685);
+            return ref _Handle.AsRef<Vector>(_PlayerMountPositionTopOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayerMountPositionBottomOffset;
+    private static nint? _PlayerMountPositionBottomOffset;
 
-  public ref Vector PlayerMountPositionBottom {
-    get {
-      if (_PlayerMountPositionBottomOffset == null) {
-        _PlayerMountPositionBottomOffset = Schema.GetOffset(0xD85E02387AC961B1);
-      }
-      return ref _Handle.AsRef<Vector>(_PlayerMountPositionBottomOffset!.Value);
+    public ref Vector PlayerMountPositionBottom {
+        get {
+            _PlayerMountPositionBottomOffset = _PlayerMountPositionBottomOffset ?? Schema.GetOffset(0xD85E02387AC961B1);
+            return ref _Handle.AsRef<Vector>(_PlayerMountPositionBottomOffset!.Value);
+        }
     }
-  }
-  private static nint? _AutoRideSpeedOffset;
+    private static nint? _AutoRideSpeedOffset;
 
-  public ref float AutoRideSpeed {
-    get {
-      if (_AutoRideSpeedOffset == null) {
-        _AutoRideSpeedOffset = Schema.GetOffset(0xD85E0238B5C8CE19);
-      }
-      return ref _Handle.AsRef<float>(_AutoRideSpeedOffset!.Value);
+    public ref float AutoRideSpeed {
+        get {
+            _AutoRideSpeedOffset = _AutoRideSpeedOffset ?? Schema.GetOffset(0xD85E0238B5C8CE19);
+            return ref _Handle.AsRef<float>(_AutoRideSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisabledOffset;
+    private static nint? _DisabledOffset;
 
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0xD85E02383A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xD85E02383A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _FakeLadderOffset;
+    private static nint? _FakeLadderOffset;
 
-  public ref bool FakeLadder {
-    get {
-      if (_FakeLadderOffset == null) {
-        _FakeLadderOffset = Schema.GetOffset(0xD85E023887708598);
-      }
-      return ref _Handle.AsRef<bool>(_FakeLadderOffset!.Value);
+    public ref bool FakeLadder {
+        get {
+            _FakeLadderOffset = _FakeLadderOffset ?? Schema.GetOffset(0xD85E023887708598);
+            return ref _Handle.AsRef<bool>(_FakeLadderOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasSlackOffset;
+    private static nint? _HasSlackOffset;
 
-  public ref bool HasSlack {
-    get {
-      if (_HasSlackOffset == null) {
-        _HasSlackOffset = Schema.GetOffset(0xD85E02381745DB1D);
-      }
-      return ref _Handle.AsRef<bool>(_HasSlackOffset!.Value);
+    public ref bool HasSlack {
+        get {
+            _HasSlackOffset = _HasSlackOffset ?? Schema.GetOffset(0xD85E02381745DB1D);
+            return ref _Handle.AsRef<bool>(_HasSlackOffset!.Value);
+        }
     }
-  }
-  private static nint? _SurfacePropNameOffset;
+    private static nint? _SurfacePropNameOffset;
 
-  public string SurfacePropName {
-    get {
-      if (_SurfacePropNameOffset == null) {
-        _SurfacePropNameOffset = Schema.GetOffset(0xD85E0238749EACC6);
-      }
-      var ptr = _Handle.Read<nint>(_SurfacePropNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SurfacePropNameOffset == null) {
-        _SurfacePropNameOffset = Schema.GetOffset(0xD85E0238749EACC6);
-      }
-      Schema.SetString(_Handle, _SurfacePropNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _OnPlayerGotOnLadderOffset;
+    public string SurfacePropName {
+        get {
+            _SurfacePropNameOffset = _SurfacePropNameOffset ?? Schema.GetOffset(0xD85E0238749EACC6);
+            return Schema.GetString(_Handle.Read<nint>(_SurfacePropNameOffset!.Value));
+        }
+        set {
+            _SurfacePropNameOffset = _SurfacePropNameOffset ?? Schema.GetOffset(0xD85E0238749EACC6);
+            Schema.SetString(_Handle, _SurfacePropNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _OnPlayerGotOnLadderOffset;
 
-  public CEntityIOOutput OnPlayerGotOnLadder {
-    get {
-      if (_OnPlayerGotOnLadderOffset == null) {
-        _OnPlayerGotOnLadderOffset = Schema.GetOffset(0xD85E02381B2BA3FC);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnPlayerGotOnLadderOffset!.Value);
+    public ref CEntityIOOutput OnPlayerGotOnLadder {
+        get {
+            _OnPlayerGotOnLadderOffset = _OnPlayerGotOnLadderOffset ?? Schema.GetOffset(0xD85E02381B2BA3FC);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerGotOnLadderOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnPlayerGotOffLadderOffset;
+    private static nint? _OnPlayerGotOffLadderOffset;
 
-  public CEntityIOOutput OnPlayerGotOffLadder {
-    get {
-      if (_OnPlayerGotOffLadderOffset == null) {
-        _OnPlayerGotOffLadderOffset = Schema.GetOffset(0xD85E02388AD8997A);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnPlayerGotOffLadderOffset!.Value);
+    public ref CEntityIOOutput OnPlayerGotOffLadder {
+        get {
+            _OnPlayerGotOffLadderOffset = _OnPlayerGotOffLadderOffset ?? Schema.GetOffset(0xD85E02388AD8997A);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerGotOffLadderOffset!.Value);
+        }
     }
-  }
 
-  public void LadderDirUpdated() {
-    Schema.Update(_Handle, 0xD85E0238BEE3D218);
-  }
-  public void PlayerMountPositionTopUpdated() {
-    Schema.Update(_Handle, 0xD85E02383DC07685);
-  }
-  public void PlayerMountPositionBottomUpdated() {
-    Schema.Update(_Handle, 0xD85E02387AC961B1);
-  }
-  public void AutoRideSpeedUpdated() {
-    Schema.Update(_Handle, 0xD85E0238B5C8CE19);
-  }
-  public void FakeLadderUpdated() {
-    Schema.Update(_Handle, 0xD85E023887708598);
-  }
+    public void LadderDirUpdated() => Schema.Update(_Handle, 0xD85E0238BEE3D218);
+    public void PlayerMountPositionTopUpdated() => Schema.Update(_Handle, 0xD85E02383DC07685);
+    public void PlayerMountPositionBottomUpdated() => Schema.Update(_Handle, 0xD85E02387AC961B1);
+    public void AutoRideSpeedUpdated() => Schema.Update(_Handle, 0xD85E0238B5C8CE19);
+    public void FakeLadderUpdated() => Schema.Update(_Handle, 0xD85E023887708598);
 }

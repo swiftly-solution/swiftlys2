@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSAdditionalPerRoundStats_tImpl : SchemaClass, CSAdditionalPerRoundStats_t {
+internal partial class CSAdditionalPerRoundStats_tImpl : SchemaClass, CSAdditionalPerRoundStats_t
+{
+    public CSAdditionalPerRoundStats_tImpl(nint handle) : base(handle) { }
 
-  public CSAdditionalPerRoundStats_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NumChickensKilledOffset;
 
-  private static nint? _NumChickensKilledOffset;
-
-  public ref int NumChickensKilled {
-    get {
-      if (_NumChickensKilledOffset == null) {
-        _NumChickensKilledOffset = Schema.GetOffset(0x719C617993548CDE);
-      }
-      return ref _Handle.AsRef<int>(_NumChickensKilledOffset!.Value);
+    public ref int NumChickensKilled {
+        get {
+            _NumChickensKilledOffset = _NumChickensKilledOffset ?? Schema.GetOffset(0x719C617993548CDE);
+            return ref _Handle.AsRef<int>(_NumChickensKilledOffset!.Value);
+        }
     }
-  }
-  private static nint? _KillsWhileBlindOffset;
+    private static nint? _KillsWhileBlindOffset;
 
-  public ref int KillsWhileBlind {
-    get {
-      if (_KillsWhileBlindOffset == null) {
-        _KillsWhileBlindOffset = Schema.GetOffset(0x719C61794FEC6186);
-      }
-      return ref _Handle.AsRef<int>(_KillsWhileBlindOffset!.Value);
+    public ref int KillsWhileBlind {
+        get {
+            _KillsWhileBlindOffset = _KillsWhileBlindOffset ?? Schema.GetOffset(0x719C61794FEC6186);
+            return ref _Handle.AsRef<int>(_KillsWhileBlindOffset!.Value);
+        }
     }
-  }
-  private static nint? _BombCarrierkillsOffset;
+    private static nint? _BombCarrierkillsOffset;
 
-  public ref int BombCarrierkills {
-    get {
-      if (_BombCarrierkillsOffset == null) {
-        _BombCarrierkillsOffset = Schema.GetOffset(0x719C617913457A30);
-      }
-      return ref _Handle.AsRef<int>(_BombCarrierkillsOffset!.Value);
+    public ref int BombCarrierkills {
+        get {
+            _BombCarrierkillsOffset = _BombCarrierkillsOffset ?? Schema.GetOffset(0x719C617913457A30);
+            return ref _Handle.AsRef<int>(_BombCarrierkillsOffset!.Value);
+        }
     }
-  }
-  private static nint? _BurnDamageInflictedOffset;
+    private static nint? _BurnDamageInflictedOffset;
 
-  public ref float BurnDamageInflicted {
-    get {
-      if (_BurnDamageInflictedOffset == null) {
-        _BurnDamageInflictedOffset = Schema.GetOffset(0x719C6179ADDF061F);
-      }
-      return ref _Handle.AsRef<float>(_BurnDamageInflictedOffset!.Value);
+    public ref float BurnDamageInflicted {
+        get {
+            _BurnDamageInflictedOffset = _BurnDamageInflictedOffset ?? Schema.GetOffset(0x719C6179ADDF061F);
+            return ref _Handle.AsRef<float>(_BurnDamageInflictedOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlastDamageInflictedOffset;
+    private static nint? _BlastDamageInflictedOffset;
 
-  public ref float BlastDamageInflicted {
-    get {
-      if (_BlastDamageInflictedOffset == null) {
-        _BlastDamageInflictedOffset = Schema.GetOffset(0x719C6179FDBAB060);
-      }
-      return ref _Handle.AsRef<float>(_BlastDamageInflictedOffset!.Value);
+    public ref float BlastDamageInflicted {
+        get {
+            _BlastDamageInflictedOffset = _BlastDamageInflictedOffset ?? Schema.GetOffset(0x719C6179FDBAB060);
+            return ref _Handle.AsRef<float>(_BlastDamageInflictedOffset!.Value);
+        }
     }
-  }
-  private static nint? _DinksOffset;
+    private static nint? _DinksOffset;
 
-  public ref int Dinks {
-    get {
-      if (_DinksOffset == null) {
-        _DinksOffset = Schema.GetOffset(0x719C617910BCE83D);
-      }
-      return ref _Handle.AsRef<int>(_DinksOffset!.Value);
+    public ref int Dinks {
+        get {
+            _DinksOffset = _DinksOffset ?? Schema.GetOffset(0x719C617910BCE83D);
+            return ref _Handle.AsRef<int>(_DinksOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathKeyFrame : CLogicalEntity, ISchemaClass<CPathKeyFrame> {
+public partial interface CPathKeyFrame : CLogicalEntity, ISchemaClass<CPathKeyFrame>
+{
+    static CPathKeyFrame ISchemaClass<CPathKeyFrame>.From(nint handle) => new CPathKeyFrameImpl(handle);
+    static int ISchemaClass<CPathKeyFrame>.Size => 1360;
+    static string? ISchemaClass<CPathKeyFrame>.ClassName => "keyframe_track";
 
-  static CPathKeyFrame ISchemaClass<CPathKeyFrame>.From(nint handle) => new CPathKeyFrameImpl(handle);
-  static int ISchemaClass<CPathKeyFrame>.Size => 1360;
-  static string? ISchemaClass<CPathKeyFrame>.ClassName => "keyframe_track";
 
-  
-  public ref Vector Origin { get; }
-  
-  public ref QAngle Angles { get; }
-  
-  public ref Quaternion Angle { get; }
-  
-  public string NextKey { get; set; }
-  
-  public ref float NextTime { get; }
-  
-  public CPathKeyFrame? NextKey1 { get; }
-  
-  public CPathKeyFrame? PrevKey { get; }
-  
-  public ref float MoveSpeed { get; }
+    public ref Vector Origin { get; }
+
+    public ref QAngle Angles { get; }
+
+    public ref Quaternion Angle { get; }
+
+    public string NextKey { get; set; }
+
+    public ref float NextTime { get; }
+
+    public CPathKeyFrame? NextKey1 { get; }
+
+    public CPathKeyFrame? PrevKey { get; }
+
+    public ref float MoveSpeed { get; }
 
 
 }

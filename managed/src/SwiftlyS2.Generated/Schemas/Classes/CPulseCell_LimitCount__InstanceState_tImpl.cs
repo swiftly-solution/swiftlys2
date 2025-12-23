@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_LimitCount__InstanceState_tImpl : SchemaClass, CPulseCell_LimitCount__InstanceState_t {
+internal partial class CPulseCell_LimitCount__InstanceState_tImpl : SchemaClass, CPulseCell_LimitCount__InstanceState_t
+{
+    public CPulseCell_LimitCount__InstanceState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_LimitCount__InstanceState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CurrentCountOffset;
 
-  private static nint? _CurrentCountOffset;
-
-  public ref int CurrentCount {
-    get {
-      if (_CurrentCountOffset == null) {
-        _CurrentCountOffset = Schema.GetOffset(0x8CD3F919BE40B2AD);
-      }
-      return ref _Handle.AsRef<int>(_CurrentCountOffset!.Value);
+    public ref int CurrentCount {
+        get {
+            _CurrentCountOffset = _CurrentCountOffset ?? Schema.GetOffset(0x8CD3F919BE40B2AD);
+            return ref _Handle.AsRef<int>(_CurrentCountOffset!.Value);
+        }
     }
-  }
 
 
 }

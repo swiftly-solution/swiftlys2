@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvInstructorVRHint : CPointEntity, ISchemaClass<CEnvInstructorVRHint> {
+public partial interface CEnvInstructorVRHint : CPointEntity, ISchemaClass<CEnvInstructorVRHint>
+{
+    static CEnvInstructorVRHint ISchemaClass<CEnvInstructorVRHint>.From(nint handle) => new CEnvInstructorVRHintImpl(handle);
+    static int ISchemaClass<CEnvInstructorVRHint>.Size => 1328;
+    static string? ISchemaClass<CEnvInstructorVRHint>.ClassName => "env_instructor_vr_hint";
 
-  static CEnvInstructorVRHint ISchemaClass<CEnvInstructorVRHint>.From(nint handle) => new CEnvInstructorVRHintImpl(handle);
-  static int ISchemaClass<CEnvInstructorVRHint>.Size => 1328;
-  static string? ISchemaClass<CEnvInstructorVRHint>.ClassName => "env_instructor_vr_hint";
 
-  
-  public string Name { get; set; }
-  
-  public string HintTargetEntity { get; set; }
-  
-  public ref int Timeout { get; }
-  
-  public string Caption { get; set; }
-  
-  public string StartSound { get; set; }
-  
-  public ref int LayoutFileType { get; }
-  
-  public string CustomLayoutFile { get; set; }
-  
-  public ref int AttachType { get; }
-  
-  public ref float HeightOffset { get; }
+    public string Name { get; set; }
+
+    public string HintTargetEntity { get; set; }
+
+    public ref int Timeout { get; }
+
+    public string Caption { get; set; }
+
+    public string StartSound { get; set; }
+
+    public ref int LayoutFileType { get; }
+
+    public string CustomLayoutFile { get; set; }
+
+    public ref int AttachType { get; }
+
+    public ref float HeightOffset { get; }
 
 
 }

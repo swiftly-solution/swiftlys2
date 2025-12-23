@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseGraphInstance_TestDomain : CBasePulseGraphInstance, ISchemaClass<CPulseGraphInstance_TestDomain> {
+public partial interface CPulseGraphInstance_TestDomain : CBasePulseGraphInstance, ISchemaClass<CPulseGraphInstance_TestDomain>
+{
+    static CPulseGraphInstance_TestDomain ISchemaClass<CPulseGraphInstance_TestDomain>.From(nint handle) => new CPulseGraphInstance_TestDomainImpl(handle);
+    static int ISchemaClass<CPulseGraphInstance_TestDomain>.Size => 352;
+    static string? ISchemaClass<CPulseGraphInstance_TestDomain>.ClassName => null;
 
-  static CPulseGraphInstance_TestDomain ISchemaClass<CPulseGraphInstance_TestDomain>.From(nint handle) => new CPulseGraphInstance_TestDomainImpl(handle);
-  static int ISchemaClass<CPulseGraphInstance_TestDomain>.Size => 352;
-  static string? ISchemaClass<CPulseGraphInstance_TestDomain>.ClassName => null;
 
-  
-  public ref bool IsRunningUnitTests { get; }
-  
-  public ref bool ExplicitTimeStepping { get; }
-  
-  public ref bool ExpectingToDestroyWithYieldedCursors { get; }
-  
-  public ref bool QuietTracepoints { get; }
-  
-  public ref bool ExpectingCursorTerminatedDueToMaxInstructions { get; }
-  
-  public ref int CursorsTerminatedDueToMaxInstructions { get; }
-  
-  public ref int NextValidateIndex { get; }
-  
-  public ref CUtlVector<CUtlString> Tracepoints { get; }
-  
-  public ref bool TestYesOrNoPath { get; }
+    public ref bool IsRunningUnitTests { get; }
+
+    public ref bool ExplicitTimeStepping { get; }
+
+    public ref bool ExpectingToDestroyWithYieldedCursors { get; }
+
+    public ref bool QuietTracepoints { get; }
+
+    public ref bool ExpectingCursorTerminatedDueToMaxInstructions { get; }
+
+    public ref int CursorsTerminatedDueToMaxInstructions { get; }
+
+    public ref int NextValidateIndex { get; }
+
+    public ref CUtlVector<CUtlString> Tracepoints { get; }
+
+    public ref bool TestYesOrNoPath { get; }
 
 
 }

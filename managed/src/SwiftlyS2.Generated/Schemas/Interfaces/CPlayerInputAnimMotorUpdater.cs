@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayerInputAnimMotorUpdater : CAnimMotorUpdaterBase, ISchemaClass<CPlayerInputAnimMotorUpdater> {
+public partial interface CPlayerInputAnimMotorUpdater : CAnimMotorUpdaterBase, ISchemaClass<CPlayerInputAnimMotorUpdater>
+{
+    static CPlayerInputAnimMotorUpdater ISchemaClass<CPlayerInputAnimMotorUpdater>.From(nint handle) => new CPlayerInputAnimMotorUpdaterImpl(handle);
+    static int ISchemaClass<CPlayerInputAnimMotorUpdater>.Size => 80;
+    static string? ISchemaClass<CPlayerInputAnimMotorUpdater>.ClassName => null;
 
-  static CPlayerInputAnimMotorUpdater ISchemaClass<CPlayerInputAnimMotorUpdater>.From(nint handle) => new CPlayerInputAnimMotorUpdaterImpl(handle);
-  static int ISchemaClass<CPlayerInputAnimMotorUpdater>.Size => 80;
-  static string? ISchemaClass<CPlayerInputAnimMotorUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<float> SampleTimes { get; }
-  
-  public ref float SpringConstant { get; }
-  
-  public ref float AnticipationDistance { get; }
-  
-  public CAnimParamHandle AnticipationPosParam { get; }
-  
-  public CAnimParamHandle AnticipationHeadingParam { get; }
-  
-  public ref bool UseAcceleration { get; }
+    public ref CUtlVector<float> SampleTimes { get; }
+
+    public ref float SpringConstant { get; }
+
+    public ref float AnticipationDistance { get; }
+
+    public CAnimParamHandle AnticipationPosParam { get; }
+
+    public CAnimParamHandle AnticipationHeadingParam { get; }
+
+    public ref bool UseAcceleration { get; }
 
 
 }

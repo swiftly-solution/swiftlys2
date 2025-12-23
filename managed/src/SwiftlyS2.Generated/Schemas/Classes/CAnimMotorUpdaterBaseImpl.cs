@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimMotorUpdaterBaseImpl : SchemaClass, CAnimMotorUpdaterBase {
+internal partial class CAnimMotorUpdaterBaseImpl : SchemaClass, CAnimMotorUpdaterBase
+{
+    public CAnimMotorUpdaterBaseImpl(nint handle) : base(handle) { }
 
-  public CAnimMotorUpdaterBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3FB6E1144D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x3FB6E1144D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _DefaultOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x3FB6E1144D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref bool Default {
+        get {
+            _DefaultOffset = _DefaultOffset ?? Schema.GetOffset(0x3FB6E11485F067BE);
+            return ref _Handle.AsRef<bool>(_DefaultOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x3FB6E1144D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _DefaultOffset;
-
-  public ref bool Default {
-    get {
-      if (_DefaultOffset == null) {
-        _DefaultOffset = Schema.GetOffset(0x3FB6E11485F067BE);
-      }
-      return ref _Handle.AsRef<bool>(_DefaultOffset!.Value);
-    }
-  }
 
 
 }

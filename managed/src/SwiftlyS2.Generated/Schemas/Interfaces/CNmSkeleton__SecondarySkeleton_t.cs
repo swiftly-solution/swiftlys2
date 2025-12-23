@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmSkeleton__SecondarySkeleton_t : ISchemaClass<CNmSkeleton__SecondarySkeleton_t> {
+public partial interface CNmSkeleton__SecondarySkeleton_t : ISchemaClass<CNmSkeleton__SecondarySkeleton_t>
+{
+    static CNmSkeleton__SecondarySkeleton_t ISchemaClass<CNmSkeleton__SecondarySkeleton_t>.From(nint handle) => new CNmSkeleton__SecondarySkeleton_tImpl(handle);
+    static int ISchemaClass<CNmSkeleton__SecondarySkeleton_t>.Size => 16;
+    static string? ISchemaClass<CNmSkeleton__SecondarySkeleton_t>.ClassName => null;
 
-  static CNmSkeleton__SecondarySkeleton_t ISchemaClass<CNmSkeleton__SecondarySkeleton_t>.From(nint handle) => new CNmSkeleton__SecondarySkeleton_tImpl(handle);
-  static int ISchemaClass<CNmSkeleton__SecondarySkeleton_t>.Size => 16;
-  static string? ISchemaClass<CNmSkeleton__SecondarySkeleton_t>.ClassName => null;
 
-  
-  public ref CGlobalSymbol AttachToBoneID { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton { get; }
+    public ref CGlobalSymbol AttachToBoneID { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton { get; }
 
 
 }

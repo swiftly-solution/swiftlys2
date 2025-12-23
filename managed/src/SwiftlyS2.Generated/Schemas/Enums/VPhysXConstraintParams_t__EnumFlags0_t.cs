@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VPhysXConstraintParams_t__EnumFlags0_t : uint {
-
+public enum VPhysXConstraintParams_t__EnumFlags0_t : uint
+{
  FLAG0_SHIFT_INTERPENETRATE = 0,
 
  FLAG0_SHIFT_CONSTRAIN = 1,

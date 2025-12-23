@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimUser : ISchemaClass<CAnimUser> {
+public partial interface CAnimUser : ISchemaClass<CAnimUser>
+{
+    static CAnimUser ISchemaClass<CAnimUser>.From(nint handle) => new CAnimUserImpl(handle);
+    static int ISchemaClass<CAnimUser>.Size => 24;
+    static string? ISchemaClass<CAnimUser>.ClassName => null;
 
-  static CAnimUser ISchemaClass<CAnimUser>.From(nint handle) => new CAnimUserImpl(handle);
-  static int ISchemaClass<CAnimUser>.Size => 24;
-  static string? ISchemaClass<CAnimUser>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public ref int Type { get; }
+    public ref CBufferString Name { get; }
+
+    public ref int Type { get; }
 
 
 }

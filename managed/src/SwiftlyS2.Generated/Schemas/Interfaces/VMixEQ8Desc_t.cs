@@ -8,15 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixEQ8Desc_t : ISchemaClass<VMixEQ8Desc_t> {
+public partial interface VMixEQ8Desc_t : ISchemaClass<VMixEQ8Desc_t>
+{
+    static VMixEQ8Desc_t ISchemaClass<VMixEQ8Desc_t>.From(nint handle) => new VMixEQ8Desc_tImpl(handle);
+    static int ISchemaClass<VMixEQ8Desc_t>.Size => 128;
+    static string? ISchemaClass<VMixEQ8Desc_t>.ClassName => null;
 
-  static VMixEQ8Desc_t ISchemaClass<VMixEQ8Desc_t>.From(nint handle) => new VMixEQ8Desc_tImpl(handle);
-  static int ISchemaClass<VMixEQ8Desc_t>.Size => 128;
-  static string? ISchemaClass<VMixEQ8Desc_t>.ClassName => null;
 
-  
-  // VMixFilterDesc_t
-  public SchemaUntypedField Stages { get; }
+    public ISchemaClassFixedArray<VMixFilterDesc_t> Stages { get; }
 
 
 }

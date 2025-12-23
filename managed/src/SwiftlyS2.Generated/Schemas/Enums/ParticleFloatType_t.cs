@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleFloatType_t : uint {
-
+public enum ParticleFloatType_t : uint
+{
  PF_TYPE_INVALID = uint.MaxValue,
 
  PF_TYPE_LITERAL = 0,

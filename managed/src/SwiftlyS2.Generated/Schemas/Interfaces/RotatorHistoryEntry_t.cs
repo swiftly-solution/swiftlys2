@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RotatorHistoryEntry_t : ISchemaClass<RotatorHistoryEntry_t> {
+public partial interface RotatorHistoryEntry_t : ISchemaClass<RotatorHistoryEntry_t>
+{
+    static RotatorHistoryEntry_t ISchemaClass<RotatorHistoryEntry_t>.From(nint handle) => new RotatorHistoryEntry_tImpl(handle);
+    static int ISchemaClass<RotatorHistoryEntry_t>.Size => 32;
+    static string? ISchemaClass<RotatorHistoryEntry_t>.ClassName => null;
 
-  static RotatorHistoryEntry_t ISchemaClass<RotatorHistoryEntry_t>.From(nint handle) => new RotatorHistoryEntry_tImpl(handle);
-  static int ISchemaClass<RotatorHistoryEntry_t>.Size => 32;
-  static string? ISchemaClass<RotatorHistoryEntry_t>.ClassName => null;
 
-  
-  public ref Quaternion InvChange { get; }
-  
-  public GameTime_t TimeRotationStart { get; }
+    public ref Quaternion InvChange { get; }
+
+    public GameTime_t TimeRotationStart { get; }
 
 
 }

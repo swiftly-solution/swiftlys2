@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerSetElementImpl : SchemaClass, CVoiceContainerSetElement {
+internal partial class CVoiceContainerSetElementImpl : SchemaClass, CVoiceContainerSetElement
+{
+    public CVoiceContainerSetElementImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerSetElementImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SoundOffset;
 
-  private static nint? _SoundOffset;
-
-  public CSoundContainerReference Sound {
-    get {
-      if (_SoundOffset == null) {
-        _SoundOffset = Schema.GetOffset(0x1280027B4E1C4FB4);
-      }
-      return new CSoundContainerReferenceImpl(_Handle + _SoundOffset!.Value);
+    public CSoundContainerReference Sound {
+        get {
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x1280027B4E1C4FB4);
+            return new CSoundContainerReferenceImpl(_Handle + _SoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _VolumeDBOffset;
+    private static nint? _VolumeDBOffset;
 
-  public ref float VolumeDB {
-    get {
-      if (_VolumeDBOffset == null) {
-        _VolumeDBOffset = Schema.GetOffset(0x1280027B3197E3EF);
-      }
-      return ref _Handle.AsRef<float>(_VolumeDBOffset!.Value);
+    public ref float VolumeDB {
+        get {
+            _VolumeDBOffset = _VolumeDBOffset ?? Schema.GetOffset(0x1280027B3197E3EF);
+            return ref _Handle.AsRef<float>(_VolumeDBOffset!.Value);
+        }
     }
-  }
 
 
 }

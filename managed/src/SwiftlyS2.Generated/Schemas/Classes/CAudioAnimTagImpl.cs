@@ -6,101 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAudioAnimTagImpl : CAnimTagBaseImpl, CAudioAnimTag {
+internal partial class CAudioAnimTagImpl : CAnimTagBaseImpl, CAudioAnimTag
+{
+    public CAudioAnimTagImpl(nint handle) : base(handle) { }
 
-  public CAudioAnimTagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ClipNameOffset;
 
-  private static nint? _ClipNameOffset;
+    public string ClipName {
+        get {
+            _ClipNameOffset = _ClipNameOffset ?? Schema.GetOffset(0x785914777D84420);
+            return Schema.GetString(_Handle.Read<nint>(_ClipNameOffset!.Value));
+        }
+        set {
+            _ClipNameOffset = _ClipNameOffset ?? Schema.GetOffset(0x785914777D84420);
+            Schema.SetString(_Handle, _ClipNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _AttachmentNameOffset;
 
-  public string ClipName {
-    get {
-      if (_ClipNameOffset == null) {
-        _ClipNameOffset = Schema.GetOffset(0x785914777D84420);
-      }
-      var ptr = _Handle.Read<nint>(_ClipNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ClipNameOffset == null) {
-        _ClipNameOffset = Schema.GetOffset(0x785914777D84420);
-      }
-      Schema.SetString(_Handle, _ClipNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _AttachmentNameOffset;
+    public string AttachmentName {
+        get {
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x7859147295DA9CB);
+            return Schema.GetString(_Handle.Read<nint>(_AttachmentNameOffset!.Value));
+        }
+        set {
+            _AttachmentNameOffset = _AttachmentNameOffset ?? Schema.GetOffset(0x7859147295DA9CB);
+            Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _VolumeOffset;
 
-  public string AttachmentName {
-    get {
-      if (_AttachmentNameOffset == null) {
-        _AttachmentNameOffset = Schema.GetOffset(0x7859147295DA9CB);
-      }
-      var ptr = _Handle.Read<nint>(_AttachmentNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Volume {
+        get {
+            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0x78591477647E0C9);
+            return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+        }
     }
-    set {
-      if (_AttachmentNameOffset == null) {
-        _AttachmentNameOffset = Schema.GetOffset(0x7859147295DA9CB);
-      }
-      Schema.SetString(_Handle, _AttachmentNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _VolumeOffset;
+    private static nint? _StopWhenTagEndsOffset;
 
-  public ref float Volume {
-    get {
-      if (_VolumeOffset == null) {
-        _VolumeOffset = Schema.GetOffset(0x78591477647E0C9);
-      }
-      return ref _Handle.AsRef<float>(_VolumeOffset!.Value);
+    public ref bool StopWhenTagEnds {
+        get {
+            _StopWhenTagEndsOffset = _StopWhenTagEndsOffset ?? Schema.GetOffset(0x7859147878BB46D);
+            return ref _Handle.AsRef<bool>(_StopWhenTagEndsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StopWhenTagEndsOffset;
+    private static nint? _StopWhenGraphEndsOffset;
 
-  public ref bool StopWhenTagEnds {
-    get {
-      if (_StopWhenTagEndsOffset == null) {
-        _StopWhenTagEndsOffset = Schema.GetOffset(0x7859147878BB46D);
-      }
-      return ref _Handle.AsRef<bool>(_StopWhenTagEndsOffset!.Value);
+    public ref bool StopWhenGraphEnds {
+        get {
+            _StopWhenGraphEndsOffset = _StopWhenGraphEndsOffset ?? Schema.GetOffset(0x785914705444061);
+            return ref _Handle.AsRef<bool>(_StopWhenGraphEndsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StopWhenGraphEndsOffset;
+    private static nint? _PlayOnServerOffset;
 
-  public ref bool StopWhenGraphEnds {
-    get {
-      if (_StopWhenGraphEndsOffset == null) {
-        _StopWhenGraphEndsOffset = Schema.GetOffset(0x785914705444061);
-      }
-      return ref _Handle.AsRef<bool>(_StopWhenGraphEndsOffset!.Value);
+    public ref bool PlayOnServer {
+        get {
+            _PlayOnServerOffset = _PlayOnServerOffset ?? Schema.GetOffset(0x7859147BAA179F9);
+            return ref _Handle.AsRef<bool>(_PlayOnServerOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayOnServerOffset;
+    private static nint? _PlayOnClientOffset;
 
-  public ref bool PlayOnServer {
-    get {
-      if (_PlayOnServerOffset == null) {
-        _PlayOnServerOffset = Schema.GetOffset(0x7859147BAA179F9);
-      }
-      return ref _Handle.AsRef<bool>(_PlayOnServerOffset!.Value);
+    public ref bool PlayOnClient {
+        get {
+            _PlayOnClientOffset = _PlayOnClientOffset ?? Schema.GetOffset(0x78591471136791D);
+            return ref _Handle.AsRef<bool>(_PlayOnClientOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayOnClientOffset;
-
-  public ref bool PlayOnClient {
-    get {
-      if (_PlayOnClientOffset == null) {
-        _PlayOnClientOffset = Schema.GetOffset(0x78591471136791D);
-      }
-      return ref _Handle.AsRef<bool>(_PlayOnClientOffset!.Value);
-    }
-  }
 
 
 }

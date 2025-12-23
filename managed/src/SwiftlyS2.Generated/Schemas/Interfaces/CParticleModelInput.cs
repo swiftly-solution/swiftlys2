@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleModelInput : CParticleInput, ISchemaClass<CParticleModelInput> {
+public partial interface CParticleModelInput : CParticleInput, ISchemaClass<CParticleModelInput>
+{
+    static CParticleModelInput ISchemaClass<CParticleModelInput>.From(nint handle) => new CParticleModelInputImpl(handle);
+    static int ISchemaClass<CParticleModelInput>.Size => 96;
+    static string? ISchemaClass<CParticleModelInput>.ClassName => null;
 
-  static CParticleModelInput ISchemaClass<CParticleModelInput>.From(nint handle) => new CParticleModelInputImpl(handle);
-  static int ISchemaClass<CParticleModelInput>.Size => 96;
-  static string? ISchemaClass<CParticleModelInput>.ClassName => null;
 
-  
-  public ref ParticleModelType_t Type { get; }
-  
-  // CParticleNamedValueRef
-  public SchemaUntypedField NamedValue { get; }
-  
-  public ref int ControlPoint { get; }
+    public ref ParticleModelType_t Type { get; }
+
+    // CParticleNamedValueRef
+    public SchemaUntypedField NamedValue { get; }
+
+    public ref int ControlPoint { get; }
 
 
 }

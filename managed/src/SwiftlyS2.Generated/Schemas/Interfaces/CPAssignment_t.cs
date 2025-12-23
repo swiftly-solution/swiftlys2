@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPAssignment_t : ISchemaClass<CPAssignment_t> {
+public partial interface CPAssignment_t : ISchemaClass<CPAssignment_t>
+{
+    static CPAssignment_t ISchemaClass<CPAssignment_t>.From(nint handle) => new CPAssignment_tImpl(handle);
+    static int ISchemaClass<CPAssignment_t>.Size => 1736;
+    static string? ISchemaClass<CPAssignment_t>.ClassName => null;
 
-  static CPAssignment_t ISchemaClass<CPAssignment_t>.From(nint handle) => new CPAssignment_tImpl(handle);
-  static int ISchemaClass<CPAssignment_t>.Size => 1736;
-  static string? ISchemaClass<CPAssignment_t>.ClassName => null;
 
-  
-  public ref int CPNumber { get; }
-  
-  public CPerParticleVecInput Pos { get; }
-  
-  public ref ParticleOrientationSetMode_t OrientationMode { get; }
+    public ref int CPNumber { get; }
+
+    public CPerParticleVecInput Pos { get; }
+
+    public ref ParticleOrientationSetMode_t OrientationMode { get; }
 
 
 }

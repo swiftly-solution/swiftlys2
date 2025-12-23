@@ -6,126 +6,100 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseCombatCharacterImpl : CBaseFlexImpl, CBaseCombatCharacter {
+internal partial class CBaseCombatCharacterImpl : CBaseFlexImpl, CBaseCombatCharacter
+{
+    public CBaseCombatCharacterImpl(nint handle) : base(handle) { }
 
-  public CBaseCombatCharacterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceServerRagdollOffset;
 
-  private static nint? _ForceServerRagdollOffset;
-
-  public ref bool ForceServerRagdoll {
-    get {
-      if (_ForceServerRagdollOffset == null) {
-        _ForceServerRagdollOffset = Schema.GetOffset(0xB47DE3DEC0D0B742);
-      }
-      return ref _Handle.AsRef<bool>(_ForceServerRagdollOffset!.Value);
+    public ref bool ForceServerRagdoll {
+        get {
+            _ForceServerRagdollOffset = _ForceServerRagdollOffset ?? Schema.GetOffset(0xB47DE3DEC0D0B742);
+            return ref _Handle.AsRef<bool>(_ForceServerRagdollOffset!.Value);
+        }
     }
-  }
-  private static nint? _MyWearablesOffset;
+    private static nint? _MyWearablesOffset;
 
-  public ref CUtlVector<CHandle<CEconWearable>> MyWearables {
-    get {
-      if (_MyWearablesOffset == null) {
-        _MyWearablesOffset = Schema.GetOffset(0xB47DE3DE000B8B43);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CEconWearable>>>(_MyWearablesOffset!.Value);
+    public ref CUtlVector<CHandle<CEconWearable>> MyWearables {
+        get {
+            _MyWearablesOffset = _MyWearablesOffset ?? Schema.GetOffset(0xB47DE3DE000B8B43);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CEconWearable>>>(_MyWearablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ImpactEnergyScaleOffset;
+    private static nint? _ImpactEnergyScaleOffset;
 
-  public ref float ImpactEnergyScale {
-    get {
-      if (_ImpactEnergyScaleOffset == null) {
-        _ImpactEnergyScaleOffset = Schema.GetOffset(0xB47DE3DEC66BAC1B);
-      }
-      return ref _Handle.AsRef<float>(_ImpactEnergyScaleOffset!.Value);
+    public ref float ImpactEnergyScale {
+        get {
+            _ImpactEnergyScaleOffset = _ImpactEnergyScaleOffset ?? Schema.GetOffset(0xB47DE3DEC66BAC1B);
+            return ref _Handle.AsRef<float>(_ImpactEnergyScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ApplyStressDamageOffset;
+    private static nint? _ApplyStressDamageOffset;
 
-  public ref bool ApplyStressDamage {
-    get {
-      if (_ApplyStressDamageOffset == null) {
-        _ApplyStressDamageOffset = Schema.GetOffset(0xB47DE3DEC16FF452);
-      }
-      return ref _Handle.AsRef<bool>(_ApplyStressDamageOffset!.Value);
+    public ref bool ApplyStressDamage {
+        get {
+            _ApplyStressDamageOffset = _ApplyStressDamageOffset ?? Schema.GetOffset(0xB47DE3DEC16FF452);
+            return ref _Handle.AsRef<bool>(_ApplyStressDamageOffset!.Value);
+        }
     }
-  }
-  private static nint? _DeathEventsDispatchedOffset;
+    private static nint? _DeathEventsDispatchedOffset;
 
-  public ref bool DeathEventsDispatched {
-    get {
-      if (_DeathEventsDispatchedOffset == null) {
-        _DeathEventsDispatchedOffset = Schema.GetOffset(0xB47DE3DE8F5C8C9F);
-      }
-      return ref _Handle.AsRef<bool>(_DeathEventsDispatchedOffset!.Value);
+    public ref bool DeathEventsDispatched {
+        get {
+            _DeathEventsDispatchedOffset = _DeathEventsDispatchedOffset ?? Schema.GetOffset(0xB47DE3DE8F5C8C9F);
+            return ref _Handle.AsRef<bool>(_DeathEventsDispatchedOffset!.Value);
+        }
     }
-  }
-  private static nint? _VecRelationshipsOffset;
+    private static nint? _VecRelationshipsOffset;
 
-  public ref CUtlVector<RelationshipOverride_t> VecRelationships {
-    get {
-      if (_VecRelationshipsOffset == null) {
-        _VecRelationshipsOffset = Schema.GetOffset(0xB47DE3DE2B978F5E);
-      }
-      return ref _Handle.Deref<CUtlVector<RelationshipOverride_t>>(_VecRelationshipsOffset!.Value);
+    public ref CUtlVector<RelationshipOverride_t> VecRelationships {
+        get {
+            _VecRelationshipsOffset = _VecRelationshipsOffset ?? Schema.GetOffset(0xB47DE3DE2B978F5E);
+            return ref _Handle.Deref<CUtlVector<RelationshipOverride_t>>(_VecRelationshipsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrRelationshipsOffset;
+    private static nint? _StrRelationshipsOffset;
 
-  public string StrRelationships {
-    get {
-      if (_StrRelationshipsOffset == null) {
-        _StrRelationshipsOffset = Schema.GetOffset(0xB47DE3DEF96E2AD7);
-      }
-      var ptr = _Handle.Read<nint>(_StrRelationshipsOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrRelationshipsOffset == null) {
-        _StrRelationshipsOffset = Schema.GetOffset(0xB47DE3DEF96E2AD7);
-      }
-      Schema.SetString(_Handle, _StrRelationshipsOffset!.Value, value);
-    }
-  } 
-  private static nint? _HullOffset;
+    public string StrRelationships {
+        get {
+            _StrRelationshipsOffset = _StrRelationshipsOffset ?? Schema.GetOffset(0xB47DE3DEF96E2AD7);
+            return Schema.GetString(_Handle.Read<nint>(_StrRelationshipsOffset!.Value));
+        }
+        set {
+            _StrRelationshipsOffset = _StrRelationshipsOffset ?? Schema.GetOffset(0xB47DE3DEF96E2AD7);
+            Schema.SetString(_Handle, _StrRelationshipsOffset!.Value, value);
+        }
+    } 
+    private static nint? _HullOffset;
 
-  public ref Hull_t Hull {
-    get {
-      if (_HullOffset == null) {
-        _HullOffset = Schema.GetOffset(0xB47DE3DE20B7E577);
-      }
-      return ref _Handle.AsRef<Hull_t>(_HullOffset!.Value);
+    public ref Hull_t Hull {
+        get {
+            _HullOffset = _HullOffset ?? Schema.GetOffset(0xB47DE3DE20B7E577);
+            return ref _Handle.AsRef<Hull_t>(_HullOffset!.Value);
+        }
     }
-  }
-  private static nint? _NavHullIdxOffset;
+    private static nint? _NavHullIdxOffset;
 
-  public ref uint NavHullIdx {
-    get {
-      if (_NavHullIdxOffset == null) {
-        _NavHullIdxOffset = Schema.GetOffset(0xB47DE3DE90C08DF0);
-      }
-      return ref _Handle.AsRef<uint>(_NavHullIdxOffset!.Value);
+    public ref uint NavHullIdx {
+        get {
+            _NavHullIdxOffset = _NavHullIdxOffset ?? Schema.GetOffset(0xB47DE3DE90C08DF0);
+            return ref _Handle.AsRef<uint>(_NavHullIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _MovementStatsOffset;
+    private static nint? _MovementStatsOffset;
 
-  public CMovementStatsProperty MovementStats {
-    get {
-      if (_MovementStatsOffset == null) {
-        _MovementStatsOffset = Schema.GetOffset(0xB47DE3DE4CF2CCDB);
-      }
-      return new CMovementStatsPropertyImpl(_Handle + _MovementStatsOffset!.Value);
+    public CMovementStatsProperty MovementStats {
+        get {
+            _MovementStatsOffset = _MovementStatsOffset ?? Schema.GetOffset(0xB47DE3DE4CF2CCDB);
+            return new CMovementStatsPropertyImpl(_Handle + _MovementStatsOffset!.Value);
+        }
     }
-  }
 
-  public void MyWearablesUpdated() {
-    Schema.Update(_Handle, 0xB47DE3DE000B8B43);
-  }
+    public void MyWearablesUpdated() => Schema.Update(_Handle, 0xB47DE3DE000B8B43);
 }

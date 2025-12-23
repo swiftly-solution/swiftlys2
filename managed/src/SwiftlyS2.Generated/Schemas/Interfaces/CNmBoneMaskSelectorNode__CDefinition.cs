@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmBoneMaskSelectorNode__CDefinition : CNmBoneMaskValueNode__CDefinition, ISchemaClass<CNmBoneMaskSelectorNode__CDefinition> {
+public partial interface CNmBoneMaskSelectorNode__CDefinition : CNmBoneMaskValueNode__CDefinition, ISchemaClass<CNmBoneMaskSelectorNode__CDefinition>
+{
+    static CNmBoneMaskSelectorNode__CDefinition ISchemaClass<CNmBoneMaskSelectorNode__CDefinition>.From(nint handle) => new CNmBoneMaskSelectorNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmBoneMaskSelectorNode__CDefinition>.Size => 152;
+    static string? ISchemaClass<CNmBoneMaskSelectorNode__CDefinition>.ClassName => null;
 
-  static CNmBoneMaskSelectorNode__CDefinition ISchemaClass<CNmBoneMaskSelectorNode__CDefinition>.From(nint handle) => new CNmBoneMaskSelectorNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmBoneMaskSelectorNode__CDefinition>.Size => 152;
-  static string? ISchemaClass<CNmBoneMaskSelectorNode__CDefinition>.ClassName => null;
 
-  
-  public ref short DefaultMaskNodeIdx { get; }
-  
-  public ref short ParameterValueNodeIdx { get; }
-  
-  public ref bool SwitchDynamically { get; }
-  
-  // CUtlVectorFixedGrowable< int16, 7 >
-  public SchemaUntypedField MaskNodeIndices { get; }
-  
-  // CUtlVectorFixedGrowable< CGlobalSymbol, 7 >
-  public SchemaUntypedField ParameterValues { get; }
-  
-  public ref float BlendTimeSeconds { get; }
+    public ref short DefaultMaskNodeIdx { get; }
+
+    public ref short ParameterValueNodeIdx { get; }
+
+    public ref bool SwitchDynamically { get; }
+
+    // CUtlVectorFixedGrowable< int16, 7 >
+    public SchemaUntypedField MaskNodeIndices { get; }
+
+    // CUtlVectorFixedGrowable< CGlobalSymbol, 7 >
+    public SchemaUntypedField ParameterValues { get; }
+
+    public ref float BlendTimeSeconds { get; }
 
 
 }

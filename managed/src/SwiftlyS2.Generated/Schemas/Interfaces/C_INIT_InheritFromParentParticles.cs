@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_InheritFromParentParticles : CParticleFunctionInitializer, ISchemaClass<C_INIT_InheritFromParentParticles> {
+public partial interface C_INIT_InheritFromParentParticles : CParticleFunctionInitializer, ISchemaClass<C_INIT_InheritFromParentParticles>
+{
+    static C_INIT_InheritFromParentParticles ISchemaClass<C_INIT_InheritFromParentParticles>.From(nint handle) => new C_INIT_InheritFromParentParticlesImpl(handle);
+    static int ISchemaClass<C_INIT_InheritFromParentParticles>.Size => 496;
+    static string? ISchemaClass<C_INIT_InheritFromParentParticles>.ClassName => null;
 
-  static C_INIT_InheritFromParentParticles ISchemaClass<C_INIT_InheritFromParentParticles>.From(nint handle) => new C_INIT_InheritFromParentParticlesImpl(handle);
-  static int ISchemaClass<C_INIT_InheritFromParentParticles>.Size => 496;
-  static string? ISchemaClass<C_INIT_InheritFromParentParticles>.ClassName => null;
 
-  
-  public ref float Scale { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref int Increment { get; }
-  
-  public ref bool RandomDistribution { get; }
-  
-  public ref int RandomSeed { get; }
+    public ref float Scale { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref int Increment { get; }
+
+    public ref bool RandomDistribution { get; }
+
+    public ref int RandomSeed { get; }
 
 
 }

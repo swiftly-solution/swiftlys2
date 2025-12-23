@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimBoneImpl : SchemaClass, CAnimBone {
+internal partial class CAnimBoneImpl : SchemaClass, CAnimBone
+{
+    public CAnimBoneImpl(nint handle) : base(handle) { }
 
-  public CAnimBoneImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public ref CBufferString Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x891F6AB94D8F5786);
-      }
-      return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+    public ref CBufferString Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x891F6AB94D8F5786);
+            return ref _Handle.AsRef<CBufferString>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentOffset;
+    private static nint? _ParentOffset;
 
-  public ref int Parent {
-    get {
-      if (_ParentOffset == null) {
-        _ParentOffset = Schema.GetOffset(0x891F6AB92FF7A69D);
-      }
-      return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+    public ref int Parent {
+        get {
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0x891F6AB92FF7A69D);
+            return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _PosOffset;
+    private static nint? _PosOffset;
 
-  public ref Vector Pos {
-    get {
-      if (_PosOffset == null) {
-        _PosOffset = Schema.GetOffset(0x891F6AB944CEBEA9);
-      }
-      return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+    public ref Vector Pos {
+        get {
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0x891F6AB944CEBEA9);
+            return ref _Handle.AsRef<Vector>(_PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _QuatOffset;
+    private static nint? _QuatOffset;
 
-  public SchemaUntypedField Quat {
-    get {
-      if (_QuatOffset == null) {
-        _QuatOffset = Schema.GetOffset(0x891F6AB9157658BE);
-      }
-      return new SchemaUntypedField(_Handle + _QuatOffset!.Value);
+    public ref QuaternionStorage Quat {
+        get {
+            _QuatOffset = _QuatOffset ?? Schema.GetOffset(0x891F6AB9157658BE);
+            return ref _Handle.AsRef<QuaternionStorage>(_QuatOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x891F6AB9C2A44391);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x891F6AB9C2A44391);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlignmentOffset;
+    private static nint? _AlignmentOffset;
 
-  public SchemaUntypedField Alignment {
-    get {
-      if (_AlignmentOffset == null) {
-        _AlignmentOffset = Schema.GetOffset(0x891F6AB9CA0E45D1);
-      }
-      return new SchemaUntypedField(_Handle + _AlignmentOffset!.Value);
+    public ref QuaternionStorage Alignment {
+        get {
+            _AlignmentOffset = _AlignmentOffset ?? Schema.GetOffset(0x891F6AB9CA0E45D1);
+            return ref _Handle.AsRef<QuaternionStorage>(_AlignmentOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref int Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x891F6AB9DC74A14C);
-      }
-      return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+    public ref int Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x891F6AB9DC74A14C);
+            return ref _Handle.AsRef<int>(_FlagsOffset!.Value);
+        }
     }
-  }
 
 
 }

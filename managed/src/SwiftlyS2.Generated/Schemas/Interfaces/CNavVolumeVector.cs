@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNavVolumeVector : CNavVolume, ISchemaClass<CNavVolumeVector> {
+public partial interface CNavVolumeVector : CNavVolume, ISchemaClass<CNavVolumeVector>
+{
+    static CNavVolumeVector ISchemaClass<CNavVolumeVector>.From(nint handle) => new CNavVolumeVectorImpl(handle);
+    static int ISchemaClass<CNavVolumeVector>.Size => 160;
+    static string? ISchemaClass<CNavVolumeVector>.ClassName => null;
 
-  static CNavVolumeVector ISchemaClass<CNavVolumeVector>.From(nint handle) => new CNavVolumeVectorImpl(handle);
-  static int ISchemaClass<CNavVolumeVector>.Size => 160;
-  static string? ISchemaClass<CNavVolumeVector>.ClassName => null;
 
-  
-  public ref bool HasBeenPreFiltered { get; }
+    public ref bool HasBeenPreFiltered { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuseProgram : ISchemaClass<CFuseProgram> {
+public partial interface CFuseProgram : ISchemaClass<CFuseProgram>
+{
+    static CFuseProgram ISchemaClass<CFuseProgram>.From(nint handle) => new CFuseProgramImpl(handle);
+    static int ISchemaClass<CFuseProgram>.Size => 80;
+    static string? ISchemaClass<CFuseProgram>.ClassName => null;
 
-  static CFuseProgram ISchemaClass<CFuseProgram>.From(nint handle) => new CFuseProgramImpl(handle);
-  static int ISchemaClass<CFuseProgram>.Size => 80;
-  static string? ISchemaClass<CFuseProgram>.ClassName => null;
 
-  
-  public ref CUtlVector<byte> ProgramBuffer { get; }
-  
-  public ref CUtlVector<FuseVariableIndex_t> VariablesRead { get; }
-  
-  public ref CUtlVector<FuseVariableIndex_t> VariablesWritten { get; }
-  
-  public ref int MaxTempVarsUsed { get; }
+    public ref CUtlVector<byte> ProgramBuffer { get; }
+
+    public ref CUtlVector<FuseVariableIndex_t> VariablesRead { get; }
+
+    public ref CUtlVector<FuseVariableIndex_t> VariablesWritten { get; }
+
+    public ref int MaxTempVarsUsed { get; }
 
 
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_BooleanSwitchStateImpl : CPulseCell_BaseStateImpl, CPulseCell_BooleanSwitchState {
+internal partial class CPulseCell_BooleanSwitchStateImpl : CPulseCell_BaseStateImpl, CPulseCell_BooleanSwitchState
+{
+    public CPulseCell_BooleanSwitchStateImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_BooleanSwitchStateImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ConditionOffset;
 
-  private static nint? _ConditionOffset;
-
-  public PulseObservableBoolExpression_t Condition {
-    get {
-      if (_ConditionOffset == null) {
-        _ConditionOffset = Schema.GetOffset(0xB0380EFD5F2A883E);
-      }
-      return new PulseObservableBoolExpression_tImpl(_Handle + _ConditionOffset!.Value);
+    public PulseObservableBoolExpression_t Condition {
+        get {
+            _ConditionOffset = _ConditionOffset ?? Schema.GetOffset(0xB0380EFD5F2A883E);
+            return new PulseObservableBoolExpression_tImpl(_Handle + _ConditionOffset!.Value);
+        }
     }
-  }
-  private static nint? _SubGraphOffset;
+    private static nint? _SubGraphOffset;
 
-  public CPulse_OutflowConnection SubGraph {
-    get {
-      if (_SubGraphOffset == null) {
-        _SubGraphOffset = Schema.GetOffset(0xB0380EFD979BD817);
-      }
-      return new CPulse_OutflowConnectionImpl(_Handle + _SubGraphOffset!.Value);
+    public CPulse_OutflowConnection SubGraph {
+        get {
+            _SubGraphOffset = _SubGraphOffset ?? Schema.GetOffset(0xB0380EFD979BD817);
+            return new CPulse_OutflowConnectionImpl(_Handle + _SubGraphOffset!.Value);
+        }
     }
-  }
-  private static nint? _WhenTrueOffset;
+    private static nint? _WhenTrueOffset;
 
-  public CPulse_OutflowConnection WhenTrue {
-    get {
-      if (_WhenTrueOffset == null) {
-        _WhenTrueOffset = Schema.GetOffset(0xB0380EFDB329ED61);
-      }
-      return new CPulse_OutflowConnectionImpl(_Handle + _WhenTrueOffset!.Value);
+    public CPulse_OutflowConnection WhenTrue {
+        get {
+            _WhenTrueOffset = _WhenTrueOffset ?? Schema.GetOffset(0xB0380EFDB329ED61);
+            return new CPulse_OutflowConnectionImpl(_Handle + _WhenTrueOffset!.Value);
+        }
     }
-  }
-  private static nint? _WhenFalseOffset;
+    private static nint? _WhenFalseOffset;
 
-  public CPulse_OutflowConnection WhenFalse {
-    get {
-      if (_WhenFalseOffset == null) {
-        _WhenFalseOffset = Schema.GetOffset(0xB0380EFD4DD1A01C);
-      }
-      return new CPulse_OutflowConnectionImpl(_Handle + _WhenFalseOffset!.Value);
+    public CPulse_OutflowConnection WhenFalse {
+        get {
+            _WhenFalseOffset = _WhenFalseOffset ?? Schema.GetOffset(0xB0380EFD4DD1A01C);
+            return new CPulse_OutflowConnectionImpl(_Handle + _WhenFalseOffset!.Value);
+        }
     }
-  }
 
 
 }

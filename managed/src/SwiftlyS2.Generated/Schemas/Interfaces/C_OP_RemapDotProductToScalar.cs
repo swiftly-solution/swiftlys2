@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapDotProductToScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDotProductToScalar> {
+public partial interface C_OP_RemapDotProductToScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapDotProductToScalar>
+{
+    static C_OP_RemapDotProductToScalar ISchemaClass<C_OP_RemapDotProductToScalar>.From(nint handle) => new C_OP_RemapDotProductToScalarImpl(handle);
+    static int ISchemaClass<C_OP_RemapDotProductToScalar>.Size => 504;
+    static string? ISchemaClass<C_OP_RemapDotProductToScalar>.ClassName => null;
 
-  static C_OP_RemapDotProductToScalar ISchemaClass<C_OP_RemapDotProductToScalar>.From(nint handle) => new C_OP_RemapDotProductToScalarImpl(handle);
-  static int ISchemaClass<C_OP_RemapDotProductToScalar>.Size => 504;
-  static string? ISchemaClass<C_OP_RemapDotProductToScalar>.ClassName => null;
 
-  
-  public ref int InputCP1 { get; }
-  
-  public ref int InputCP2 { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref bool UseParticleVelocity { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool ActiveRange { get; }
-  
-  public ref bool UseParticleNormal { get; }
+    public ref int InputCP1 { get; }
+
+    public ref int InputCP2 { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref bool UseParticleVelocity { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool ActiveRange { get; }
+
+    public ref bool UseParticleNormal { get; }
 
 
 }

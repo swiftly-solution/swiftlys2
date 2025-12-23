@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PackedAABB_t : ISchemaClass<PackedAABB_t> {
+public partial interface PackedAABB_t : ISchemaClass<PackedAABB_t>
+{
+    static PackedAABB_t ISchemaClass<PackedAABB_t>.From(nint handle) => new PackedAABB_tImpl(handle);
+    static int ISchemaClass<PackedAABB_t>.Size => 8;
+    static string? ISchemaClass<PackedAABB_t>.ClassName => null;
 
-  static PackedAABB_t ISchemaClass<PackedAABB_t>.From(nint handle) => new PackedAABB_tImpl(handle);
-  static int ISchemaClass<PackedAABB_t>.Size => 8;
-  static string? ISchemaClass<PackedAABB_t>.ClassName => null;
 
-  
-  public ref uint PackedMin { get; }
-  
-  public ref uint PackedMax { get; }
+    public ref uint PackedMin { get; }
+
+    public ref uint PackedMax { get; }
 
 
 }

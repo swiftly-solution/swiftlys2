@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomNamedModelSequence : C_INIT_RandomNamedModelElement, ISchemaClass<C_INIT_RandomNamedModelSequence> {
-
-  static C_INIT_RandomNamedModelSequence ISchemaClass<C_INIT_RandomNamedModelSequence>.From(nint handle) => new C_INIT_RandomNamedModelSequenceImpl(handle);
-  static int ISchemaClass<C_INIT_RandomNamedModelSequence>.Size => 512;
-  static string? ISchemaClass<C_INIT_RandomNamedModelSequence>.ClassName => null;
+public partial interface C_INIT_RandomNamedModelSequence : C_INIT_RandomNamedModelElement, ISchemaClass<C_INIT_RandomNamedModelSequence>
+{
+    static C_INIT_RandomNamedModelSequence ISchemaClass<C_INIT_RandomNamedModelSequence>.From(nint handle) => new C_INIT_RandomNamedModelSequenceImpl(handle);
+    static int ISchemaClass<C_INIT_RandomNamedModelSequence>.Size => 512;
+    static string? ISchemaClass<C_INIT_RandomNamedModelSequence>.ClassName => null;
 
 
 

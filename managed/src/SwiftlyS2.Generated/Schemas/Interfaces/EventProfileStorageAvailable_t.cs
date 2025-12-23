@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventProfileStorageAvailable_t : ISchemaClass<EventProfileStorageAvailable_t> {
+public partial interface EventProfileStorageAvailable_t : ISchemaClass<EventProfileStorageAvailable_t>
+{
+    static EventProfileStorageAvailable_t ISchemaClass<EventProfileStorageAvailable_t>.From(nint handle) => new EventProfileStorageAvailable_tImpl(handle);
+    static int ISchemaClass<EventProfileStorageAvailable_t>.Size => 4;
+    static string? ISchemaClass<EventProfileStorageAvailable_t>.ClassName => null;
 
-  static EventProfileStorageAvailable_t ISchemaClass<EventProfileStorageAvailable_t>.From(nint handle) => new EventProfileStorageAvailable_tImpl(handle);
-  static int ISchemaClass<EventProfileStorageAvailable_t>.Size => 4;
-  static string? ISchemaClass<EventProfileStorageAvailable_t>.ClassName => null;
 
-  
-  public ref uint SplitScreenSlot { get; }
+    public ref uint SplitScreenSlot { get; }
 
 
 }

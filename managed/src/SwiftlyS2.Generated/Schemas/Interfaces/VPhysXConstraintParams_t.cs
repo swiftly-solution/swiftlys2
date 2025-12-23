@@ -8,106 +8,104 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VPhysXConstraintParams_t : ISchemaClass<VPhysXConstraintParams_t> {
+public partial interface VPhysXConstraintParams_t : ISchemaClass<VPhysXConstraintParams_t>
+{
+    static VPhysXConstraintParams_t ISchemaClass<VPhysXConstraintParams_t>.From(nint handle) => new VPhysXConstraintParams_tImpl(handle);
+    static int ISchemaClass<VPhysXConstraintParams_t>.Size => 248;
+    static string? ISchemaClass<VPhysXConstraintParams_t>.ClassName => null;
 
-  static VPhysXConstraintParams_t ISchemaClass<VPhysXConstraintParams_t>.From(nint handle) => new VPhysXConstraintParams_tImpl(handle);
-  static int ISchemaClass<VPhysXConstraintParams_t>.Size => 248;
-  static string? ISchemaClass<VPhysXConstraintParams_t>.ClassName => null;
 
-  
-  public ref byte Type { get; }
-  
-  public ref byte TranslateMotion { get; }
-  
-  public ref byte RotateMotion { get; }
-  
-  public ref byte Flags { get; }
-  
-  public ISchemaFixedArray<Vector> Anchor { get; }
-  
-  // QuaternionStorage
-  public SchemaUntypedField Axes { get; }
-  
-  public ref float MaxForce { get; }
-  
-  public ref float MaxTorque { get; }
-  
-  public ref float LinearLimitValue { get; }
-  
-  public ref float LinearLimitRestitution { get; }
-  
-  public ref float LinearLimitSpring { get; }
-  
-  public ref float LinearLimitDamping { get; }
-  
-  public ref float TwistLowLimitValue { get; }
-  
-  public ref float TwistLowLimitRestitution { get; }
-  
-  public ref float TwistLowLimitSpring { get; }
-  
-  public ref float TwistLowLimitDamping { get; }
-  
-  public ref float TwistHighLimitValue { get; }
-  
-  public ref float TwistHighLimitRestitution { get; }
-  
-  public ref float TwistHighLimitSpring { get; }
-  
-  public ref float TwistHighLimitDamping { get; }
-  
-  public ref float Swing1LimitValue { get; }
-  
-  public ref float Swing1LimitRestitution { get; }
-  
-  public ref float Swing1LimitSpring { get; }
-  
-  public ref float Swing1LimitDamping { get; }
-  
-  public ref float Swing2LimitValue { get; }
-  
-  public ref float Swing2LimitRestitution { get; }
-  
-  public ref float Swing2LimitSpring { get; }
-  
-  public ref float Swing2LimitDamping { get; }
-  
-  public ref Vector GoalPosition { get; }
-  
-  // QuaternionStorage
-  public SchemaUntypedField GoalOrientation { get; }
-  
-  public ref Vector GoalAngularVelocity { get; }
-  
-  public ref float DriveSpringX { get; }
-  
-  public ref float DriveSpringY { get; }
-  
-  public ref float DriveSpringZ { get; }
-  
-  public ref float DriveDampingX { get; }
-  
-  public ref float DriveDampingY { get; }
-  
-  public ref float DriveDampingZ { get; }
-  
-  public ref float DriveSpringTwist { get; }
-  
-  public ref float DriveSpringSwing { get; }
-  
-  public ref float DriveSpringSlerp { get; }
-  
-  public ref float DriveDampingTwist { get; }
-  
-  public ref float DriveDampingSwing { get; }
-  
-  public ref float DriveDampingSlerp { get; }
-  
-  public ref int SolverIterationCount { get; }
-  
-  public ref float ProjectionLinearTolerance { get; }
-  
-  public ref float ProjectionAngularTolerance { get; }
+    public ref byte Type { get; }
+
+    public ref byte TranslateMotion { get; }
+
+    public ref byte RotateMotion { get; }
+
+    public ref byte Flags { get; }
+
+    public ISchemaFixedArray<Vector> Anchor { get; }
+
+    public ISchemaFixedArray<QuaternionStorage> Axes { get; }
+
+    public ref float MaxForce { get; }
+
+    public ref float MaxTorque { get; }
+
+    public ref float LinearLimitValue { get; }
+
+    public ref float LinearLimitRestitution { get; }
+
+    public ref float LinearLimitSpring { get; }
+
+    public ref float LinearLimitDamping { get; }
+
+    public ref float TwistLowLimitValue { get; }
+
+    public ref float TwistLowLimitRestitution { get; }
+
+    public ref float TwistLowLimitSpring { get; }
+
+    public ref float TwistLowLimitDamping { get; }
+
+    public ref float TwistHighLimitValue { get; }
+
+    public ref float TwistHighLimitRestitution { get; }
+
+    public ref float TwistHighLimitSpring { get; }
+
+    public ref float TwistHighLimitDamping { get; }
+
+    public ref float Swing1LimitValue { get; }
+
+    public ref float Swing1LimitRestitution { get; }
+
+    public ref float Swing1LimitSpring { get; }
+
+    public ref float Swing1LimitDamping { get; }
+
+    public ref float Swing2LimitValue { get; }
+
+    public ref float Swing2LimitRestitution { get; }
+
+    public ref float Swing2LimitSpring { get; }
+
+    public ref float Swing2LimitDamping { get; }
+
+    public ref Vector GoalPosition { get; }
+
+    public ref QuaternionStorage GoalOrientation { get; }
+
+    public ref Vector GoalAngularVelocity { get; }
+
+    public ref float DriveSpringX { get; }
+
+    public ref float DriveSpringY { get; }
+
+    public ref float DriveSpringZ { get; }
+
+    public ref float DriveDampingX { get; }
+
+    public ref float DriveDampingY { get; }
+
+    public ref float DriveDampingZ { get; }
+
+    public ref float DriveSpringTwist { get; }
+
+    public ref float DriveSpringSwing { get; }
+
+    public ref float DriveSpringSlerp { get; }
+
+    public ref float DriveDampingTwist { get; }
+
+    public ref float DriveDampingSwing { get; }
+
+    public ref float DriveDampingSlerp { get; }
+
+    public ref int SolverIterationCount { get; }
+
+    public ref float ProjectionLinearTolerance { get; }
+
+    public ref float ProjectionAngularTolerance { get; }
 
 
 }

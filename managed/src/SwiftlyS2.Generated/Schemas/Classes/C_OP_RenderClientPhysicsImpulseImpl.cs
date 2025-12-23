@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderClientPhysicsImpulseImpl : CParticleFunctionRendererImpl, C_OP_RenderClientPhysicsImpulse {
+internal partial class C_OP_RenderClientPhysicsImpulseImpl : CParticleFunctionRendererImpl, C_OP_RenderClientPhysicsImpulse
+{
+    public C_OP_RenderClientPhysicsImpulseImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderClientPhysicsImpulseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RadiusOffset;
 
-  private static nint? _RadiusOffset;
-
-  public CPerParticleFloatInput Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x618F365ACFC08D);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+    public CPerParticleFloatInput Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x618F365ACFC08D);
+            return new CPerParticleFloatInputImpl(_Handle + _RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _MagnitudeOffset;
+    private static nint? _MagnitudeOffset;
 
-  public CPerParticleFloatInput Magnitude {
-    get {
-      if (_MagnitudeOffset == null) {
-        _MagnitudeOffset = Schema.GetOffset(0x618F36ED0A1D8B);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _MagnitudeOffset!.Value);
+    public CPerParticleFloatInput Magnitude {
+        get {
+            _MagnitudeOffset = _MagnitudeOffset ?? Schema.GetOffset(0x618F36ED0A1D8B);
+            return new CPerParticleFloatInputImpl(_Handle + _MagnitudeOffset!.Value);
+        }
     }
-  }
-  private static nint? _SimIdFilterOffset;
+    private static nint? _SimIdFilterOffset;
 
-  public ref int SimIdFilter {
-    get {
-      if (_SimIdFilterOffset == null) {
-        _SimIdFilterOffset = Schema.GetOffset(0x618F36C5FA023F);
-      }
-      return ref _Handle.AsRef<int>(_SimIdFilterOffset!.Value);
+    public ref int SimIdFilter {
+        get {
+            _SimIdFilterOffset = _SimIdFilterOffset ?? Schema.GetOffset(0x618F36C5FA023F);
+            return ref _Handle.AsRef<int>(_SimIdFilterOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCVoiceContainerBase : ISchemaClass<InfoForResourceTypeCVoiceContainerBase> {
-
-  static InfoForResourceTypeCVoiceContainerBase ISchemaClass<InfoForResourceTypeCVoiceContainerBase>.From(nint handle) => new InfoForResourceTypeCVoiceContainerBaseImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCVoiceContainerBase>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCVoiceContainerBase>.ClassName => null;
+public partial interface InfoForResourceTypeCVoiceContainerBase : ISchemaClass<InfoForResourceTypeCVoiceContainerBase>
+{
+    static InfoForResourceTypeCVoiceContainerBase ISchemaClass<InfoForResourceTypeCVoiceContainerBase>.From(nint handle) => new InfoForResourceTypeCVoiceContainerBaseImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCVoiceContainerBase>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCVoiceContainerBase>.ClassName => null;
 
 
 

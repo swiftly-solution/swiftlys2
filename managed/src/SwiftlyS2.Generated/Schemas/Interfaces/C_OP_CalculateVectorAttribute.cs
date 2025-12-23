@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_CalculateVectorAttribute : CParticleFunctionOperator, ISchemaClass<C_OP_CalculateVectorAttribute> {
+public partial interface C_OP_CalculateVectorAttribute : CParticleFunctionOperator, ISchemaClass<C_OP_CalculateVectorAttribute>
+{
+    static C_OP_CalculateVectorAttribute ISchemaClass<C_OP_CalculateVectorAttribute>.From(nint handle) => new C_OP_CalculateVectorAttributeImpl(handle);
+    static int ISchemaClass<C_OP_CalculateVectorAttribute>.Size => 560;
+    static string? ISchemaClass<C_OP_CalculateVectorAttribute>.ClassName => null;
 
-  static C_OP_CalculateVectorAttribute ISchemaClass<C_OP_CalculateVectorAttribute>.From(nint handle) => new C_OP_CalculateVectorAttributeImpl(handle);
-  static int ISchemaClass<C_OP_CalculateVectorAttribute>.Size => 560;
-  static string? ISchemaClass<C_OP_CalculateVectorAttribute>.ClassName => null;
 
-  
-  public ref Vector StartValue { get; }
-  
-  public ParticleAttributeIndex_t FieldInput1 { get; }
-  
-  public ref float InputScale1 { get; }
-  
-  public ParticleAttributeIndex_t FieldInput2 { get; }
-  
-  public ref float InputScale2 { get; }
-  
-  public ControlPointReference_t ControlPointInput1 { get; }
-  
-  public ref float ControlPointScale1 { get; }
-  
-  public ControlPointReference_t ControlPointInput2 { get; }
-  
-  public ref float ControlPointScale2 { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref Vector FinalOutputScale { get; }
+    public ref Vector StartValue { get; }
+
+    public ParticleAttributeIndex_t FieldInput1 { get; }
+
+    public ref float InputScale1 { get; }
+
+    public ParticleAttributeIndex_t FieldInput2 { get; }
+
+    public ref float InputScale2 { get; }
+
+    public ControlPointReference_t ControlPointInput1 { get; }
+
+    public ref float ControlPointScale1 { get; }
+
+    public ControlPointReference_t ControlPointInput2 { get; }
+
+    public ref float ControlPointScale2 { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref Vector FinalOutputScale { get; }
 
 
 }

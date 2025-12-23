@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBuoyancyHelper : ISchemaClass<CBuoyancyHelper> {
+public partial interface CBuoyancyHelper : ISchemaClass<CBuoyancyHelper>
+{
+    static CBuoyancyHelper ISchemaClass<CBuoyancyHelper>.From(nint handle) => new CBuoyancyHelperImpl(handle);
+    static int ISchemaClass<CBuoyancyHelper>.Size => 280;
+    static string? ISchemaClass<CBuoyancyHelper>.ClassName => null;
 
-  static CBuoyancyHelper ISchemaClass<CBuoyancyHelper>.From(nint handle) => new CBuoyancyHelperImpl(handle);
-  static int ISchemaClass<CBuoyancyHelper>.Size => 280;
-  static string? ISchemaClass<CBuoyancyHelper>.ClassName => null;
 
-  
-  public ref CUtlStringToken FluidType { get; }
-  
-  public ref float FluidDensity { get; }
-  
-  public ref float NeutrallyBuoyantGravity { get; }
-  
-  public ref float NeutrallyBuoyantLinearDamping { get; }
-  
-  public ref float NeutrallyBuoyantAngularDamping { get; }
-  
-  public ref bool NeutrallyBuoyant { get; }
-  
-  public ref CUtlVector<float> FractionOfWheelSubmergedForWheelFriction { get; }
-  
-  public ref CUtlVector<float> WheelFrictionScales { get; }
-  
-  public ref CUtlVector<float> FractionOfWheelSubmergedForWheelDrag { get; }
-  
-  public ref CUtlVector<float> WheelDrag { get; }
+    public ref CUtlStringToken FluidType { get; }
+
+    public ref float FluidDensity { get; }
+
+    public ref float NeutrallyBuoyantGravity { get; }
+
+    public ref float NeutrallyBuoyantLinearDamping { get; }
+
+    public ref float NeutrallyBuoyantAngularDamping { get; }
+
+    public ref bool NeutrallyBuoyant { get; }
+
+    public ref CUtlVector<float> FractionOfWheelSubmergedForWheelFriction { get; }
+
+    public ref CUtlVector<float> WheelFrictionScales { get; }
+
+    public ref CUtlVector<float> FractionOfWheelSubmergedForWheelDrag { get; }
+
+    public ref CUtlVector<float> WheelDrag { get; }
 
 
 }

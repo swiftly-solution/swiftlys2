@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmEntityAttributeFloatEventImpl : CNmEntityAttributeEventBaseImpl, CNmEntityAttributeFloatEvent {
+internal partial class CNmEntityAttributeFloatEventImpl : CNmEntityAttributeEventBaseImpl, CNmEntityAttributeFloatEvent
+{
+    public CNmEntityAttributeFloatEventImpl(nint handle) : base(handle) { }
 
-  public CNmEntityAttributeFloatEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FloatValueOffset;
 
-  private static nint? _FloatValueOffset;
-
-  public SchemaUntypedField FloatValue {
-    get {
-      if (_FloatValueOffset == null) {
-        _FloatValueOffset = Schema.GetOffset(0x3ADB66C2ADBE62AA);
-      }
-      return new SchemaUntypedField(_Handle + _FloatValueOffset!.Value);
+    public SchemaUntypedField FloatValue {
+        get {
+            _FloatValueOffset = _FloatValueOffset ?? Schema.GetOffset(0x3ADB66C2ADBE62AA);
+            return new SchemaUntypedField(_Handle + _FloatValueOffset!.Value);
+        }
     }
-  }
 
 
 }

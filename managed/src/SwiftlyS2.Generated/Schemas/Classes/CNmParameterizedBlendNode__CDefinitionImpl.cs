@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmParameterizedBlendNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmParameterizedBlendNode__CDefinition {
+internal partial class CNmParameterizedBlendNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmParameterizedBlendNode__CDefinition
+{
+    public CNmParameterizedBlendNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmParameterizedBlendNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceNodeIndicesOffset;
 
-  private static nint? _SourceNodeIndicesOffset;
-
-  public SchemaUntypedField SourceNodeIndices {
-    get {
-      if (_SourceNodeIndicesOffset == null) {
-        _SourceNodeIndicesOffset = Schema.GetOffset(0x83A56F31E90F1FE1);
-      }
-      return new SchemaUntypedField(_Handle + _SourceNodeIndicesOffset!.Value);
+    public SchemaUntypedField SourceNodeIndices {
+        get {
+            _SourceNodeIndicesOffset = _SourceNodeIndicesOffset ?? Schema.GetOffset(0x83A56F31E90F1FE1);
+            return new SchemaUntypedField(_Handle + _SourceNodeIndicesOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputParameterValueNodeIdxOffset;
+    private static nint? _InputParameterValueNodeIdxOffset;
 
-  public ref short InputParameterValueNodeIdx {
-    get {
-      if (_InputParameterValueNodeIdxOffset == null) {
-        _InputParameterValueNodeIdxOffset = Schema.GetOffset(0x83A56F31AEA94516);
-      }
-      return ref _Handle.AsRef<short>(_InputParameterValueNodeIdxOffset!.Value);
+    public ref short InputParameterValueNodeIdx {
+        get {
+            _InputParameterValueNodeIdxOffset = _InputParameterValueNodeIdxOffset ?? Schema.GetOffset(0x83A56F31AEA94516);
+            return ref _Handle.AsRef<short>(_InputParameterValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _AllowLoopingOffset;
+    private static nint? _AllowLoopingOffset;
 
-  public ref bool AllowLooping {
-    get {
-      if (_AllowLoopingOffset == null) {
-        _AllowLoopingOffset = Schema.GetOffset(0x83A56F31FEB26D98);
-      }
-      return ref _Handle.AsRef<bool>(_AllowLoopingOffset!.Value);
+    public ref bool AllowLooping {
+        get {
+            _AllowLoopingOffset = _AllowLoopingOffset ?? Schema.GetOffset(0x83A56F31FEB26D98);
+            return ref _Handle.AsRef<bool>(_AllowLoopingOffset!.Value);
+        }
     }
-  }
 
 
 }

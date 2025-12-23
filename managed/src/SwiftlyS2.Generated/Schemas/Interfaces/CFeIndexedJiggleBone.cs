@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFeIndexedJiggleBone : ISchemaClass<CFeIndexedJiggleBone> {
+public partial interface CFeIndexedJiggleBone : ISchemaClass<CFeIndexedJiggleBone>
+{
+    static CFeIndexedJiggleBone ISchemaClass<CFeIndexedJiggleBone>.From(nint handle) => new CFeIndexedJiggleBoneImpl(handle);
+    static int ISchemaClass<CFeIndexedJiggleBone>.Size => 164;
+    static string? ISchemaClass<CFeIndexedJiggleBone>.ClassName => null;
 
-  static CFeIndexedJiggleBone ISchemaClass<CFeIndexedJiggleBone>.From(nint handle) => new CFeIndexedJiggleBoneImpl(handle);
-  static int ISchemaClass<CFeIndexedJiggleBone>.Size => 164;
-  static string? ISchemaClass<CFeIndexedJiggleBone>.ClassName => null;
 
-  
-  public ref uint Node { get; }
-  
-  public ref uint JiggleParent { get; }
-  
-  public CFeJiggleBone JiggleBone { get; }
+    public ref uint Node { get; }
+
+    public ref uint JiggleParent { get; }
+
+    public CFeJiggleBone JiggleBone { get; }
 
 
 }

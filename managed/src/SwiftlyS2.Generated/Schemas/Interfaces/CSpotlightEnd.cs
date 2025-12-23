@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSpotlightEnd : CBaseModelEntity, ISchemaClass<CSpotlightEnd> {
+public partial interface CSpotlightEnd : CBaseModelEntity, ISchemaClass<CSpotlightEnd>
+{
+    static CSpotlightEnd ISchemaClass<CSpotlightEnd>.From(nint handle) => new CSpotlightEndImpl(handle);
+    static int ISchemaClass<CSpotlightEnd>.Size => 2040;
+    static string? ISchemaClass<CSpotlightEnd>.ClassName => "spotlight_end";
 
-  static CSpotlightEnd ISchemaClass<CSpotlightEnd>.From(nint handle) => new CSpotlightEndImpl(handle);
-  static int ISchemaClass<CSpotlightEnd>.Size => 2040;
-  static string? ISchemaClass<CSpotlightEnd>.ClassName => "spotlight_end";
 
-  
-  public ref float LightScale { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref Vector SpotlightDir { get; }
-  
-  public ref Vector SpotlightOrg { get; }
+    public ref float LightScale { get; }
 
-  public void LightScaleUpdated();
-  public void RadiusUpdated();
+    public ref float Radius { get; }
+
+    public ref Vector SpotlightDir { get; }
+
+    public ref Vector SpotlightOrg { get; }
+
+    public void LightScaleUpdated();
+    public void RadiusUpdated();
 }

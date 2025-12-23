@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum NavAttributeEnum : ulong {
-
+public enum NavAttributeEnum : ulong
+{
  NAV_MESH_AVOID = 128,
 
  NAV_MESH_STAIRS = 4096,

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqBoneMaskList : ISchemaClass<CSeqBoneMaskList> {
+public partial interface CSeqBoneMaskList : ISchemaClass<CSeqBoneMaskList>
+{
+    static CSeqBoneMaskList ISchemaClass<CSeqBoneMaskList>.From(nint handle) => new CSeqBoneMaskListImpl(handle);
+    static int ISchemaClass<CSeqBoneMaskList>.Size => 96;
+    static string? ISchemaClass<CSeqBoneMaskList>.ClassName => null;
 
-  static CSeqBoneMaskList ISchemaClass<CSeqBoneMaskList>.From(nint handle) => new CSeqBoneMaskListImpl(handle);
-  static int ISchemaClass<CSeqBoneMaskList>.Size => 96;
-  static string? ISchemaClass<CSeqBoneMaskList>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public ref CUtlVector<short> LocalBoneArray { get; }
-  
-  public ref CUtlVector<float> BoneWeightArray { get; }
-  
-  public ref float DefaultMorphCtrlWeight { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> MorphCtrlWeightArray { get; }
+    public ref CBufferString Name { get; }
+
+    public ref CUtlVector<short> LocalBoneArray { get; }
+
+    public ref CUtlVector<float> BoneWeightArray { get; }
+
+    public ref float DefaultMorphCtrlWeight { get; }
+
+    public ref CUtlVector<SchemaUntypedField> MorphCtrlWeightArray { get; }
 
 
 }

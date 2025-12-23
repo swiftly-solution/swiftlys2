@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AnimationSnapshot_t : AnimationSnapshotBase_t, ISchemaClass<AnimationSnapshot_t> {
+public partial interface AnimationSnapshot_t : AnimationSnapshotBase_t, ISchemaClass<AnimationSnapshot_t>
+{
+    static AnimationSnapshot_t ISchemaClass<AnimationSnapshot_t>.From(nint handle) => new AnimationSnapshot_tImpl(handle);
+    static int ISchemaClass<AnimationSnapshot_t>.Size => 288;
+    static string? ISchemaClass<AnimationSnapshot_t>.ClassName => null;
 
-  static AnimationSnapshot_t ISchemaClass<AnimationSnapshot_t>.From(nint handle) => new AnimationSnapshot_tImpl(handle);
-  static int ISchemaClass<AnimationSnapshot_t>.Size => 288;
-  static string? ISchemaClass<AnimationSnapshot_t>.ClassName => null;
 
-  
-  public ref int EntIndex { get; }
-  
-  public string ModelName { get; set; }
+    public ref int EntIndex { get; }
+
+    public string ModelName { get; set; }
 
 
 }

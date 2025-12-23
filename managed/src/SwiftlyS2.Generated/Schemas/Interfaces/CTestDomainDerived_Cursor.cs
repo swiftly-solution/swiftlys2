@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTestDomainDerived_Cursor : CPulseExecCursor, ISchemaClass<CTestDomainDerived_Cursor> {
+public partial interface CTestDomainDerived_Cursor : CPulseExecCursor, ISchemaClass<CTestDomainDerived_Cursor>
+{
+    static CTestDomainDerived_Cursor ISchemaClass<CTestDomainDerived_Cursor>.From(nint handle) => new CTestDomainDerived_CursorImpl(handle);
+    static int ISchemaClass<CTestDomainDerived_Cursor>.Size => 216;
+    static string? ISchemaClass<CTestDomainDerived_Cursor>.ClassName => null;
 
-  static CTestDomainDerived_Cursor ISchemaClass<CTestDomainDerived_Cursor>.From(nint handle) => new CTestDomainDerived_CursorImpl(handle);
-  static int ISchemaClass<CTestDomainDerived_Cursor>.Size => 216;
-  static string? ISchemaClass<CTestDomainDerived_Cursor>.ClassName => null;
 
-  
-  public ref int CursorValueA { get; }
-  
-  public ref int CursorValueB { get; }
+    public ref int CursorValueA { get; }
+
+    public ref int CursorValueB { get; }
 
 
 }

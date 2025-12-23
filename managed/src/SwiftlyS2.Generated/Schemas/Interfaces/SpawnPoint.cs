@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SpawnPoint : CServerOnlyPointEntity, ISchemaClass<SpawnPoint> {
+public partial interface SpawnPoint : CServerOnlyPointEntity, ISchemaClass<SpawnPoint>
+{
+    static SpawnPoint ISchemaClass<SpawnPoint>.From(nint handle) => new SpawnPointImpl(handle);
+    static int ISchemaClass<SpawnPoint>.Size => 1280;
+    static string? ISchemaClass<SpawnPoint>.ClassName => "spawnpoint";
 
-  static SpawnPoint ISchemaClass<SpawnPoint>.From(nint handle) => new SpawnPointImpl(handle);
-  static int ISchemaClass<SpawnPoint>.Size => 1280;
-  static string? ISchemaClass<SpawnPoint>.ClassName => "spawnpoint";
 
-  
-  public ref int Priority { get; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref int Type { get; }
+    public ref int Priority { get; }
+
+    public ref bool Enabled { get; }
+
+    public ref int Type { get; }
 
 
 }

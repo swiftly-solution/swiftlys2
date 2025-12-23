@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CActionComponentUpdater : CAnimComponentUpdater, ISchemaClass<CActionComponentUpdater> {
+public partial interface CActionComponentUpdater : CAnimComponentUpdater, ISchemaClass<CActionComponentUpdater>
+{
+    static CActionComponentUpdater ISchemaClass<CActionComponentUpdater>.From(nint handle) => new CActionComponentUpdaterImpl(handle);
+    static int ISchemaClass<CActionComponentUpdater>.Size => 72;
+    static string? ISchemaClass<CActionComponentUpdater>.ClassName => null;
 
-  static CActionComponentUpdater ISchemaClass<CActionComponentUpdater>.From(nint handle) => new CActionComponentUpdaterImpl(handle);
-  static int ISchemaClass<CActionComponentUpdater>.Size => 72;
-  static string? ISchemaClass<CActionComponentUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<SchemaUntypedField> Actions { get; }
+    public ref CUtlVector<SchemaUntypedField> Actions { get; }
 
 
 }

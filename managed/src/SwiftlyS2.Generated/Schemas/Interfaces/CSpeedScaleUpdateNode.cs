@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSpeedScaleUpdateNode : CUnaryUpdateNode, ISchemaClass<CSpeedScaleUpdateNode> {
+public partial interface CSpeedScaleUpdateNode : CUnaryUpdateNode, ISchemaClass<CSpeedScaleUpdateNode>
+{
+    static CSpeedScaleUpdateNode ISchemaClass<CSpeedScaleUpdateNode>.From(nint handle) => new CSpeedScaleUpdateNodeImpl(handle);
+    static int ISchemaClass<CSpeedScaleUpdateNode>.Size => 120;
+    static string? ISchemaClass<CSpeedScaleUpdateNode>.ClassName => null;
 
-  static CSpeedScaleUpdateNode ISchemaClass<CSpeedScaleUpdateNode>.From(nint handle) => new CSpeedScaleUpdateNodeImpl(handle);
-  static int ISchemaClass<CSpeedScaleUpdateNode>.Size => 120;
-  static string? ISchemaClass<CSpeedScaleUpdateNode>.ClassName => null;
 
-  
-  public CAnimParamHandle ParamIndex { get; }
+    public CAnimParamHandle ParamIndex { get; }
 
 
 }

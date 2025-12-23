@@ -6,60 +6,50 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMultiSourceImpl : CLogicalEntityImpl, CMultiSource {
+internal partial class CMultiSourceImpl : CLogicalEntityImpl, CMultiSource
+{
+    public CMultiSourceImpl(nint handle) : base(handle) { }
 
-  public CMultiSourceImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<CHandle<CBaseEntity>> RgEntities {
-    get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x87DC5C660CB2E479, 32, 4, 4);
-  }
-  public ISchemaFixedArray<int> RgTriggered {
-    get => new SchemaFixedArray<int>(_Handle, 0x87DC5C664616C37F, 32, 4, 4);
-  }
-  private static nint? _OnTriggerOffset;
-
-  public CEntityIOOutput OnTrigger {
-    get {
-      if (_OnTriggerOffset == null) {
-        _OnTriggerOffset = Schema.GetOffset(0x87DC5C6681E0BFEC);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnTriggerOffset!.Value);
+    public ISchemaFixedArray<CHandle<CBaseEntity>> RgEntities {
+        get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x87DC5C660CB2E479, 32, 4, 4);
     }
-  }
-  private static nint? _TotalOffset;
+    public ISchemaFixedArray<int> RgTriggered {
+        get => new SchemaFixedArray<int>(_Handle, 0x87DC5C664616C37F, 32, 4, 4);
+    }
+    private static nint? _OnTriggerOffset;
 
-  public ref int Total {
-    get {
-      if (_TotalOffset == null) {
-        _TotalOffset = Schema.GetOffset(0x87DC5C667223ED06);
-      }
-      return ref _Handle.AsRef<int>(_TotalOffset!.Value);
+    public ref CEntityIOOutput OnTrigger {
+        get {
+            _OnTriggerOffset = _OnTriggerOffset ?? Schema.GetOffset(0x87DC5C6681E0BFEC);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTriggerOffset!.Value);
+        }
     }
-  }
-  private static nint? _GlobalstateOffset;
+    private static nint? _TotalOffset;
 
-  public string Globalstate {
-    get {
-      if (_GlobalstateOffset == null) {
-        _GlobalstateOffset = Schema.GetOffset(0x87DC5C6677A86653);
-      }
-      var ptr = _Handle.Read<nint>(_GlobalstateOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int Total {
+        get {
+            _TotalOffset = _TotalOffset ?? Schema.GetOffset(0x87DC5C667223ED06);
+            return ref _Handle.AsRef<int>(_TotalOffset!.Value);
+        }
     }
-    set {
-      if (_GlobalstateOffset == null) {
-        _GlobalstateOffset = Schema.GetOffset(0x87DC5C6677A86653);
-      }
-      Schema.SetString(_Handle, _GlobalstateOffset!.Value, value);
-    }
-  } 
+    private static nint? _GlobalstateOffset;
+
+    public string Globalstate {
+        get {
+            _GlobalstateOffset = _GlobalstateOffset ?? Schema.GetOffset(0x87DC5C6677A86653);
+            return Schema.GetString(_Handle.Read<nint>(_GlobalstateOffset!.Value));
+        }
+        set {
+            _GlobalstateOffset = _GlobalstateOffset ?? Schema.GetOffset(0x87DC5C6677A86653);
+            Schema.SetString(_Handle, _GlobalstateOffset!.Value, value);
+        }
+    } 
 
 
 }

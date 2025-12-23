@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RenderSkeletonBone_t : ISchemaClass<RenderSkeletonBone_t> {
+public partial interface RenderSkeletonBone_t : ISchemaClass<RenderSkeletonBone_t>
+{
+    static RenderSkeletonBone_t ISchemaClass<RenderSkeletonBone_t>.From(nint handle) => new RenderSkeletonBone_tImpl(handle);
+    static int ISchemaClass<RenderSkeletonBone_t>.Size => 96;
+    static string? ISchemaClass<RenderSkeletonBone_t>.ClassName => null;
 
-  static RenderSkeletonBone_t ISchemaClass<RenderSkeletonBone_t>.From(nint handle) => new RenderSkeletonBone_tImpl(handle);
-  static int ISchemaClass<RenderSkeletonBone_t>.Size => 96;
-  static string? ISchemaClass<RenderSkeletonBone_t>.ClassName => null;
 
-  
-  public string BoneName { get; set; }
-  
-  public string ParentName { get; set; }
-  
-  public ref matrix3x4_t InvBindPose { get; }
-  
-  public SkeletonBoneBounds_t Bbox { get; }
-  
-  public ref float SphereRadius { get; }
+    public string BoneName { get; set; }
+
+    public string ParentName { get; set; }
+
+    public ref matrix3x4_t InvBindPose { get; }
+
+    public SkeletonBoneBounds_t Bbox { get; }
+
+    public ref float SphereRadius { get; }
 
 
 }

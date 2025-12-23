@@ -6,94 +6,76 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_DecayMaintainCountImpl : CParticleFunctionOperatorImpl, C_OP_DecayMaintainCount {
+internal partial class C_OP_DecayMaintainCountImpl : CParticleFunctionOperatorImpl, C_OP_DecayMaintainCount
+{
+    public C_OP_DecayMaintainCountImpl(nint handle) : base(handle) { }
 
-  public C_OP_DecayMaintainCountImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParticlesToMaintainOffset;
 
-  private static nint? _ParticlesToMaintainOffset;
-
-  public ref int ParticlesToMaintain {
-    get {
-      if (_ParticlesToMaintainOffset == null) {
-        _ParticlesToMaintainOffset = Schema.GetOffset(0x168E27F3537AE378);
-      }
-      return ref _Handle.AsRef<int>(_ParticlesToMaintainOffset!.Value);
+    public ref int ParticlesToMaintain {
+        get {
+            _ParticlesToMaintainOffset = _ParticlesToMaintainOffset ?? Schema.GetOffset(0x168E27F3537AE378);
+            return ref _Handle.AsRef<int>(_ParticlesToMaintainOffset!.Value);
+        }
     }
-  }
-  private static nint? _DecayDelayOffset;
+    private static nint? _DecayDelayOffset;
 
-  public ref float DecayDelay {
-    get {
-      if (_DecayDelayOffset == null) {
-        _DecayDelayOffset = Schema.GetOffset(0x168E27F38D6DD836);
-      }
-      return ref _Handle.AsRef<float>(_DecayDelayOffset!.Value);
+    public ref float DecayDelay {
+        get {
+            _DecayDelayOffset = _DecayDelayOffset ?? Schema.GetOffset(0x168E27F38D6DD836);
+            return ref _Handle.AsRef<float>(_DecayDelayOffset!.Value);
+        }
     }
-  }
-  private static nint? _SnapshotControlPointOffset;
+    private static nint? _SnapshotControlPointOffset;
 
-  public ref int SnapshotControlPoint {
-    get {
-      if (_SnapshotControlPointOffset == null) {
-        _SnapshotControlPointOffset = Schema.GetOffset(0x168E27F3192638EC);
-      }
-      return ref _Handle.AsRef<int>(_SnapshotControlPointOffset!.Value);
+    public ref int SnapshotControlPoint {
+        get {
+            _SnapshotControlPointOffset = _SnapshotControlPointOffset ?? Schema.GetOffset(0x168E27F3192638EC);
+            return ref _Handle.AsRef<int>(_SnapshotControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrSnapshotSubsetOffset;
+    private static nint? _StrSnapshotSubsetOffset;
 
-  public string StrSnapshotSubset {
-    get {
-      if (_StrSnapshotSubsetOffset == null) {
-        _StrSnapshotSubsetOffset = Schema.GetOffset(0x168E27F3BD8A8E5E);
-      }
-      var ptr = _Handle.Read<nint>(_StrSnapshotSubsetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrSnapshotSubsetOffset == null) {
-        _StrSnapshotSubsetOffset = Schema.GetOffset(0x168E27F3BD8A8E5E);
-      }
-      Schema.SetString(_Handle, _StrSnapshotSubsetOffset!.Value, value);
-    }
-  } 
-  private static nint? _LifespanDecayOffset;
+    public string StrSnapshotSubset {
+        get {
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0x168E27F3BD8A8E5E);
+            return Schema.GetString(_Handle.Read<nint>(_StrSnapshotSubsetOffset!.Value));
+        }
+        set {
+            _StrSnapshotSubsetOffset = _StrSnapshotSubsetOffset ?? Schema.GetOffset(0x168E27F3BD8A8E5E);
+            Schema.SetString(_Handle, _StrSnapshotSubsetOffset!.Value, value);
+        }
+    } 
+    private static nint? _LifespanDecayOffset;
 
-  public ref bool LifespanDecay {
-    get {
-      if (_LifespanDecayOffset == null) {
-        _LifespanDecayOffset = Schema.GetOffset(0x168E27F39642CC6B);
-      }
-      return ref _Handle.AsRef<bool>(_LifespanDecayOffset!.Value);
+    public ref bool LifespanDecay {
+        get {
+            _LifespanDecayOffset = _LifespanDecayOffset ?? Schema.GetOffset(0x168E27F39642CC6B);
+            return ref _Handle.AsRef<bool>(_LifespanDecayOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public CParticleCollectionFloatInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x168E27F3B731A42F);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+    public CParticleCollectionFloatInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x168E27F3B731A42F);
+            return new CParticleCollectionFloatInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _KillNewestOffset;
+    private static nint? _KillNewestOffset;
 
-  public ref bool KillNewest {
-    get {
-      if (_KillNewestOffset == null) {
-        _KillNewestOffset = Schema.GetOffset(0x168E27F3B8EA2EC7);
-      }
-      return ref _Handle.AsRef<bool>(_KillNewestOffset!.Value);
+    public ref bool KillNewest {
+        get {
+            _KillNewestOffset = _KillNewestOffset ?? Schema.GetOffset(0x168E27F3B8EA2EC7);
+            return ref _Handle.AsRef<bool>(_KillNewestOffset!.Value);
+        }
     }
-  }
 
 
 }

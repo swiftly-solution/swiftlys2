@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VariableInfo_tImpl : SchemaClass, VariableInfo_t {
+internal partial class VariableInfo_tImpl : SchemaClass, VariableInfo_t
+{
+    public VariableInfo_tImpl(nint handle) : base(handle) { }
 
-  public VariableInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xED8F756E4D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xED8F756E4D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _NameTokenOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xED8F756E4D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlStringToken NameToken {
+        get {
+            _NameTokenOffset = _NameTokenOffset ?? Schema.GetOffset(0xED8F756E9293FEF3);
+            return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xED8F756E4D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _NameTokenOffset;
+    private static nint? _IndexOffset;
 
-  public ref CUtlStringToken NameToken {
-    get {
-      if (_NameTokenOffset == null) {
-        _NameTokenOffset = Schema.GetOffset(0xED8F756E9293FEF3);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_NameTokenOffset!.Value);
+    public FuseVariableIndex_t Index {
+        get {
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0xED8F756EB73DBE67);
+            return new FuseVariableIndex_tImpl(_Handle + _IndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _IndexOffset;
+    private static nint? _NumComponentsOffset;
 
-  public FuseVariableIndex_t Index {
-    get {
-      if (_IndexOffset == null) {
-        _IndexOffset = Schema.GetOffset(0xED8F756EB73DBE67);
-      }
-      return new FuseVariableIndex_tImpl(_Handle + _IndexOffset!.Value);
+    public ref byte NumComponents {
+        get {
+            _NumComponentsOffset = _NumComponentsOffset ?? Schema.GetOffset(0xED8F756EC5454F4B);
+            return ref _Handle.AsRef<byte>(_NumComponentsOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumComponentsOffset;
+    private static nint? _VarTypeOffset;
 
-  public ref byte NumComponents {
-    get {
-      if (_NumComponentsOffset == null) {
-        _NumComponentsOffset = Schema.GetOffset(0xED8F756EC5454F4B);
-      }
-      return ref _Handle.AsRef<byte>(_NumComponentsOffset!.Value);
+    public ref FuseVariableType_t VarType {
+        get {
+            _VarTypeOffset = _VarTypeOffset ?? Schema.GetOffset(0xED8F756E3AC34F99);
+            return ref _Handle.AsRef<FuseVariableType_t>(_VarTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _VarTypeOffset;
+    private static nint? _AccessOffset;
 
-  public ref FuseVariableType_t VarType {
-    get {
-      if (_VarTypeOffset == null) {
-        _VarTypeOffset = Schema.GetOffset(0xED8F756E3AC34F99);
-      }
-      return ref _Handle.AsRef<FuseVariableType_t>(_VarTypeOffset!.Value);
+    public ref FuseVariableAccess_t Access {
+        get {
+            _AccessOffset = _AccessOffset ?? Schema.GetOffset(0xED8F756E73907152);
+            return ref _Handle.AsRef<FuseVariableAccess_t>(_AccessOffset!.Value);
+        }
     }
-  }
-  private static nint? _AccessOffset;
-
-  public ref FuseVariableAccess_t Access {
-    get {
-      if (_AccessOffset == null) {
-        _AccessOffset = Schema.GetOffset(0xED8F756E73907152);
-      }
-      return ref _Handle.AsRef<FuseVariableAccess_t>(_AccessOffset!.Value);
-    }
-  }
 
 
 }

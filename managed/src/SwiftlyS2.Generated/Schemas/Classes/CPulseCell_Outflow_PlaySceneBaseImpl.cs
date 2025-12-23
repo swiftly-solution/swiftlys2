@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Outflow_PlaySceneBaseImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Outflow_PlaySceneBase {
+internal partial class CPulseCell_Outflow_PlaySceneBaseImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_Outflow_PlaySceneBase
+{
+    public CPulseCell_Outflow_PlaySceneBaseImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Outflow_PlaySceneBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnFinishedOffset;
 
-  private static nint? _OnFinishedOffset;
-
-  public CPulse_ResumePoint OnFinished {
-    get {
-      if (_OnFinishedOffset == null) {
-        _OnFinishedOffset = Schema.GetOffset(0x647C41D08D903E5E);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+    public CPulse_ResumePoint OnFinished {
+        get {
+            _OnFinishedOffset = _OnFinishedOffset ?? Schema.GetOffset(0x647C41D08D903E5E);
+            return new CPulse_ResumePointImpl(_Handle + _OnFinishedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnCanceledOffset;
+    private static nint? _OnCanceledOffset;
 
-  public CPulse_ResumePoint OnCanceled {
-    get {
-      if (_OnCanceledOffset == null) {
-        _OnCanceledOffset = Schema.GetOffset(0x647C41D0F02162DB);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+    public CPulse_ResumePoint OnCanceled {
+        get {
+            _OnCanceledOffset = _OnCanceledOffset ?? Schema.GetOffset(0x647C41D0F02162DB);
+            return new CPulse_ResumePointImpl(_Handle + _OnCanceledOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriggersOffset;
+    private static nint? _TriggersOffset;
 
-  public ref CUtlVector<CPulse_OutflowConnection> Triggers {
-    get {
-      if (_TriggersOffset == null) {
-        _TriggersOffset = Schema.GetOffset(0x647C41D06E7B12D0);
-      }
-      return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_TriggersOffset!.Value);
+    public ref CUtlVector<CPulse_OutflowConnection> Triggers {
+        get {
+            _TriggersOffset = _TriggersOffset ?? Schema.GetOffset(0x647C41D06E7B12D0);
+            return ref _Handle.AsRef<CUtlVector<CPulse_OutflowConnection>>(_TriggersOffset!.Value);
+        }
     }
-  }
 
 
 }

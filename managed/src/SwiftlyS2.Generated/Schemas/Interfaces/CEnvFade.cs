@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvFade : CLogicalEntity, ISchemaClass<CEnvFade> {
+public partial interface CEnvFade : CLogicalEntity, ISchemaClass<CEnvFade>
+{
+    static CEnvFade ISchemaClass<CEnvFade>.From(nint handle) => new CEnvFadeImpl(handle);
+    static int ISchemaClass<CEnvFade>.Size => 1320;
+    static string? ISchemaClass<CEnvFade>.ClassName => "env_fade";
 
-  static CEnvFade ISchemaClass<CEnvFade>.From(nint handle) => new CEnvFadeImpl(handle);
-  static int ISchemaClass<CEnvFade>.Size => 1320;
-  static string? ISchemaClass<CEnvFade>.ClassName => "env_fade";
 
-  
-  public ref Color FadeColor { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref float HoldDuration { get; }
-  
-  public CEntityIOOutput OnBeginFade { get; }
+    public ref Color FadeColor { get; }
 
-  public void FadeColorUpdated();
+    public ref float Duration { get; }
+
+    public ref float HoldDuration { get; }
+
+    public ref CEntityIOOutput OnBeginFade { get; }
+
+    public void FadeColorUpdated();
 }

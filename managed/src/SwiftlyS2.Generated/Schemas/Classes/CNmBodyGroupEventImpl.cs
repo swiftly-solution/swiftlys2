@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmBodyGroupEventImpl : CNmEventImpl, CNmBodyGroupEvent {
+internal partial class CNmBodyGroupEventImpl : CNmEventImpl, CNmBodyGroupEvent
+{
+    public CNmBodyGroupEventImpl(nint handle) : base(handle) { }
 
-  public CNmBodyGroupEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GroupNameOffset;
 
-  private static nint? _GroupNameOffset;
-
-  public string GroupName {
-    get {
-      if (_GroupNameOffset == null) {
-        _GroupNameOffset = Schema.GetOffset(0xBC3A0016025FB2C7);
-      }
-      var ptr = _Handle.Read<nint>(_GroupNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_GroupNameOffset == null) {
-        _GroupNameOffset = Schema.GetOffset(0xBC3A0016025FB2C7);
-      }
-      Schema.SetString(_Handle, _GroupNameOffset!.Value, value);
-    }
-  } 
+    public string GroupName {
+        get {
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xBC3A0016025FB2C7);
+            return Schema.GetString(_Handle.Read<nint>(_GroupNameOffset!.Value));
+        }
+        set {
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xBC3A0016025FB2C7);
+            Schema.SetString(_Handle, _GroupNameOffset!.Value, value);
+        }
+    } 
 
 
 }

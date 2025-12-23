@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_WaitForCursorsWithTag : CPulseCell_WaitForCursorsWithTagBase, ISchemaClass<CPulseCell_WaitForCursorsWithTag> {
+public partial interface CPulseCell_WaitForCursorsWithTag : CPulseCell_WaitForCursorsWithTagBase, ISchemaClass<CPulseCell_WaitForCursorsWithTag>
+{
+    static CPulseCell_WaitForCursorsWithTag ISchemaClass<CPulseCell_WaitForCursorsWithTag>.From(nint handle) => new CPulseCell_WaitForCursorsWithTagImpl(handle);
+    static int ISchemaClass<CPulseCell_WaitForCursorsWithTag>.Size => 160;
+    static string? ISchemaClass<CPulseCell_WaitForCursorsWithTag>.ClassName => null;
 
-  static CPulseCell_WaitForCursorsWithTag ISchemaClass<CPulseCell_WaitForCursorsWithTag>.From(nint handle) => new CPulseCell_WaitForCursorsWithTagImpl(handle);
-  static int ISchemaClass<CPulseCell_WaitForCursorsWithTag>.Size => 160;
-  static string? ISchemaClass<CPulseCell_WaitForCursorsWithTag>.ClassName => null;
 
-  
-  public ref bool TagSelfWhenComplete { get; }
-  
-  public ref PulseCursorCancelPriority_t DesiredKillPriority { get; }
+    public ref bool TagSelfWhenComplete { get; }
+
+    public ref PulseCursorCancelPriority_t DesiredKillPriority { get; }
 
 
 }

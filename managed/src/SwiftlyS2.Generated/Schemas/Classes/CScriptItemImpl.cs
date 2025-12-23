@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CScriptItemImpl : CItemImpl, CScriptItem {
+internal partial class CScriptItemImpl : CItemImpl, CScriptItem
+{
+    public CScriptItemImpl(nint handle) : base(handle) { }
 
-  public CScriptItemImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MoveTypeOverrideOffset;
 
-  private static nint? _MoveTypeOverrideOffset;
-
-  public ref MoveType_t MoveTypeOverride {
-    get {
-      if (_MoveTypeOverrideOffset == null) {
-        _MoveTypeOverrideOffset = Schema.GetOffset(0x501D9DD2B4DC8A64);
-      }
-      return ref _Handle.AsRef<MoveType_t>(_MoveTypeOverrideOffset!.Value);
+    public ref MoveType_t MoveTypeOverride {
+        get {
+            _MoveTypeOverrideOffset = _MoveTypeOverrideOffset ?? Schema.GetOffset(0x501D9DD2B4DC8A64);
+            return ref _Handle.AsRef<MoveType_t>(_MoveTypeOverrideOffset!.Value);
+        }
     }
-  }
 
 
 }

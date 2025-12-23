@@ -6,55 +6,42 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class COmniLightImpl : CBarnLightImpl, COmniLight {
+internal partial class COmniLightImpl : CBarnLightImpl, COmniLight
+{
+    public COmniLightImpl(nint handle) : base(handle) { }
 
-  public COmniLightImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InnerAngleOffset;
 
-  private static nint? _InnerAngleOffset;
-
-  public ref float InnerAngle {
-    get {
-      if (_InnerAngleOffset == null) {
-        _InnerAngleOffset = Schema.GetOffset(0x46F0D2E5142C32F4);
-      }
-      return ref _Handle.AsRef<float>(_InnerAngleOffset!.Value);
+    public ref float InnerAngle {
+        get {
+            _InnerAngleOffset = _InnerAngleOffset ?? Schema.GetOffset(0x46F0D2E5142C32F4);
+            return ref _Handle.AsRef<float>(_InnerAngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _OuterAngleOffset;
+    private static nint? _OuterAngleOffset;
 
-  public ref float OuterAngle {
-    get {
-      if (_OuterAngleOffset == null) {
-        _OuterAngleOffset = Schema.GetOffset(0x46F0D2E5ECB8B519);
-      }
-      return ref _Handle.AsRef<float>(_OuterAngleOffset!.Value);
+    public ref float OuterAngle {
+        get {
+            _OuterAngleOffset = _OuterAngleOffset ?? Schema.GetOffset(0x46F0D2E5ECB8B519);
+            return ref _Handle.AsRef<float>(_OuterAngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShowLightOffset;
+    private static nint? _ShowLightOffset;
 
-  public ref bool ShowLight {
-    get {
-      if (_ShowLightOffset == null) {
-        _ShowLightOffset = Schema.GetOffset(0x46F0D2E5D67BC720);
-      }
-      return ref _Handle.AsRef<bool>(_ShowLightOffset!.Value);
+    public ref bool ShowLight {
+        get {
+            _ShowLightOffset = _ShowLightOffset ?? Schema.GetOffset(0x46F0D2E5D67BC720);
+            return ref _Handle.AsRef<bool>(_ShowLightOffset!.Value);
+        }
     }
-  }
 
-  public void InnerAngleUpdated() {
-    Schema.Update(_Handle, 0x46F0D2E5142C32F4);
-  }
-  public void OuterAngleUpdated() {
-    Schema.Update(_Handle, 0x46F0D2E5ECB8B519);
-  }
-  public void ShowLightUpdated() {
-    Schema.Update(_Handle, 0x46F0D2E5D67BC720);
-  }
+    public void InnerAngleUpdated() => Schema.Update(_Handle, 0x46F0D2E5142C32F4);
+    public void OuterAngleUpdated() => Schema.Update(_Handle, 0x46F0D2E5ECB8B519);
+    public void ShowLightUpdated() => Schema.Update(_Handle, 0x46F0D2E5D67BC720);
 }

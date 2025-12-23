@@ -8,45 +8,45 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointAngularVelocitySensor : CPointEntity, ISchemaClass<CPointAngularVelocitySensor> {
+public partial interface CPointAngularVelocitySensor : CPointEntity, ISchemaClass<CPointAngularVelocitySensor>
+{
+    static CPointAngularVelocitySensor ISchemaClass<CPointAngularVelocitySensor>.From(nint handle) => new CPointAngularVelocitySensorImpl(handle);
+    static int ISchemaClass<CPointAngularVelocitySensor>.Size => 1560;
+    static string? ISchemaClass<CPointAngularVelocitySensor>.ClassName => "point_angularvelocitysensor";
 
-  static CPointAngularVelocitySensor ISchemaClass<CPointAngularVelocitySensor>.From(nint handle) => new CPointAngularVelocitySensorImpl(handle);
-  static int ISchemaClass<CPointAngularVelocitySensor>.Size => 1560;
-  static string? ISchemaClass<CPointAngularVelocitySensor>.ClassName => "point_angularvelocitysensor";
 
-  
-  public ref CHandle<CBaseEntity> TargetEntity { get; }
-  
-  public ref float Threshold { get; }
-  
-  public ref int LastCompareResult { get; }
-  
-  public ref int LastFireResult { get; }
-  
-  public GameTime_t FireTime { get; }
-  
-  public ref float FireInterval { get; }
-  
-  public ref float LastAngVelocity { get; }
-  
-  public ref QAngle LastOrientation { get; }
-  
-  public ref Vector Axis { get; }
-  
-  public ref bool UseHelper { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField AngularVelocity { get; }
-  
-  public CEntityIOOutput OnLessThan { get; }
-  
-  public CEntityIOOutput OnLessThanOrEqualTo { get; }
-  
-  public CEntityIOOutput OnGreaterThan { get; }
-  
-  public CEntityIOOutput OnGreaterThanOrEqualTo { get; }
-  
-  public CEntityIOOutput OnEqualTo { get; }
+    public ref CHandle<CBaseEntity> TargetEntity { get; }
+
+    public ref float Threshold { get; }
+
+    public ref int LastCompareResult { get; }
+
+    public ref int LastFireResult { get; }
+
+    public GameTime_t FireTime { get; }
+
+    public ref float FireInterval { get; }
+
+    public ref float LastAngVelocity { get; }
+
+    public ref QAngle LastOrientation { get; }
+
+    public ref Vector Axis { get; }
+
+    public ref bool UseHelper { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField AngularVelocity { get; }
+
+    public ref CEntityIOOutput OnLessThan { get; }
+
+    public ref CEntityIOOutput OnLessThanOrEqualTo { get; }
+
+    public ref CEntityIOOutput OnGreaterThan { get; }
+
+    public ref CEntityIOOutput OnGreaterThanOrEqualTo { get; }
+
+    public ref CEntityIOOutput OnEqualTo { get; }
 
 
 }

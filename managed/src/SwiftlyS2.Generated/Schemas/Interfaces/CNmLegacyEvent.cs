@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmLegacyEvent : CNmEvent, ISchemaClass<CNmLegacyEvent> {
+public partial interface CNmLegacyEvent : CNmEvent, ISchemaClass<CNmLegacyEvent>
+{
+    static CNmLegacyEvent ISchemaClass<CNmLegacyEvent>.From(nint handle) => new CNmLegacyEventImpl(handle);
+    static int ISchemaClass<CNmLegacyEvent>.Size => 64;
+    static string? ISchemaClass<CNmLegacyEvent>.ClassName => null;
 
-  static CNmLegacyEvent ISchemaClass<CNmLegacyEvent>.From(nint handle) => new CNmLegacyEventImpl(handle);
-  static int ISchemaClass<CNmLegacyEvent>.Size => 64;
-  static string? ISchemaClass<CNmLegacyEvent>.ClassName => null;
 
-  
-  public string AnimEventClassName { get; set; }
-  
-  // KeyValues3
-  public SchemaUntypedField KV { get; }
+    public string AnimEventClassName { get; set; }
+
+    // KeyValues3
+    public SchemaUntypedField KV { get; }
 
 
 }

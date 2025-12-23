@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Value_CurveImpl : CPulseCell_BaseValueImpl, CPulseCell_Value_Curve {
+internal partial class CPulseCell_Value_CurveImpl : CPulseCell_BaseValueImpl, CPulseCell_Value_Curve
+{
+    public CPulseCell_Value_CurveImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Value_CurveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CurveOffset;
 
-  private static nint? _CurveOffset;
-
-  public SchemaUntypedField Curve {
-    get {
-      if (_CurveOffset == null) {
-        _CurveOffset = Schema.GetOffset(0x63C5632D3389BB94);
-      }
-      return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+    public SchemaUntypedField Curve {
+        get {
+            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0x63C5632D3389BB94);
+            return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+        }
     }
-  }
 
 
 }

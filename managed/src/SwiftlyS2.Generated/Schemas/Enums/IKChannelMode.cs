@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum IKChannelMode : uint {
-
+public enum IKChannelMode : uint
+{
  TwoBone = 0,
 
  TwoBone_Translate = 1,

@@ -8,58 +8,58 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGradientFog : CBaseEntity, ISchemaClass<CGradientFog> {
+public partial interface CGradientFog : CBaseEntity, ISchemaClass<CGradientFog>
+{
+    static CGradientFog ISchemaClass<CGradientFog>.From(nint handle) => new CGradientFogImpl(handle);
+    static int ISchemaClass<CGradientFog>.Size => 1328;
+    static string? ISchemaClass<CGradientFog>.ClassName => "env_gradient_fog";
 
-  static CGradientFog ISchemaClass<CGradientFog>.From(nint handle) => new CGradientFogImpl(handle);
-  static int ISchemaClass<CGradientFog>.Size => 1328;
-  static string? ISchemaClass<CGradientFog>.ClassName => "env_gradient_fog";
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> GradientFogTexture { get; }
-  
-  public ref float FogStartDistance { get; }
-  
-  public ref float FogEndDistance { get; }
-  
-  public ref bool HeightFogEnabled { get; }
-  
-  public ref float FogStartHeight { get; }
-  
-  public ref float FogEndHeight { get; }
-  
-  public ref float FarZ { get; }
-  
-  public ref float FogMaxOpacity { get; }
-  
-  public ref float FogFalloffExponent { get; }
-  
-  public ref float FogVerticalExponent { get; }
-  
-  public ref Color FogColor { get; }
-  
-  public ref float FogStrength { get; }
-  
-  public ref float FadeTime { get; }
-  
-  public ref bool StartDisabled { get; }
-  
-  public ref bool IsEnabled { get; }
-  
-  public ref bool GradientFogNeedsTextures { get; }
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> GradientFogTexture { get; }
 
-  public void GradientFogTextureUpdated();
-  public void FogStartDistanceUpdated();
-  public void FogEndDistanceUpdated();
-  public void HeightFogEnabledUpdated();
-  public void FogStartHeightUpdated();
-  public void FogEndHeightUpdated();
-  public void FarZUpdated();
-  public void FogMaxOpacityUpdated();
-  public void FogFalloffExponentUpdated();
-  public void FogVerticalExponentUpdated();
-  public void FogColorUpdated();
-  public void FogStrengthUpdated();
-  public void FadeTimeUpdated();
-  public void StartDisabledUpdated();
-  public void IsEnabledUpdated();
+    public ref float FogStartDistance { get; }
+
+    public ref float FogEndDistance { get; }
+
+    public ref bool HeightFogEnabled { get; }
+
+    public ref float FogStartHeight { get; }
+
+    public ref float FogEndHeight { get; }
+
+    public ref float FarZ { get; }
+
+    public ref float FogMaxOpacity { get; }
+
+    public ref float FogFalloffExponent { get; }
+
+    public ref float FogVerticalExponent { get; }
+
+    public ref Color FogColor { get; }
+
+    public ref float FogStrength { get; }
+
+    public ref float FadeTime { get; }
+
+    public ref bool StartDisabled { get; }
+
+    public ref bool IsEnabled { get; }
+
+    public ref bool GradientFogNeedsTextures { get; }
+
+    public void GradientFogTextureUpdated();
+    public void FogStartDistanceUpdated();
+    public void FogEndDistanceUpdated();
+    public void HeightFogEnabledUpdated();
+    public void FogStartHeightUpdated();
+    public void FogEndHeightUpdated();
+    public void FarZUpdated();
+    public void FogMaxOpacityUpdated();
+    public void FogFalloffExponentUpdated();
+    public void FogVerticalExponentUpdated();
+    public void FogColorUpdated();
+    public void FogStrengthUpdated();
+    public void FadeTimeUpdated();
+    public void StartDisabledUpdated();
+    public void IsEnabledUpdated();
 }

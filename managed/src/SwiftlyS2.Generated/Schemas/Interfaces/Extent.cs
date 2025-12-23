@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface Extent : ISchemaClass<Extent> {
+public partial interface Extent : ISchemaClass<Extent>
+{
+    static Extent ISchemaClass<Extent>.From(nint handle) => new ExtentImpl(handle);
+    static int ISchemaClass<Extent>.Size => 24;
+    static string? ISchemaClass<Extent>.ClassName => null;
 
-  static Extent ISchemaClass<Extent>.From(nint handle) => new ExtentImpl(handle);
-  static int ISchemaClass<Extent>.Size => 24;
-  static string? ISchemaClass<Extent>.ClassName => null;
 
-  
-  public ref Vector Lo { get; }
-  
-  public ref Vector Hi { get; }
+    public ref Vector Lo { get; }
+
+    public ref Vector Hi { get; }
 
 
 }

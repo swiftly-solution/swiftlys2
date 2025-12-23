@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCreditsImpl : CPointEntityImpl, CCredits {
+internal partial class CCreditsImpl : CPointEntityImpl, CCredits
+{
+    public CCreditsImpl(nint handle) : base(handle) { }
 
-  public CCreditsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnCreditsDoneOffset;
 
-  private static nint? _OnCreditsDoneOffset;
-
-  public CEntityIOOutput OnCreditsDone {
-    get {
-      if (_OnCreditsDoneOffset == null) {
-        _OnCreditsDoneOffset = Schema.GetOffset(0xF1224C0488A2DA7A);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnCreditsDoneOffset!.Value);
+    public ref CEntityIOOutput OnCreditsDone {
+        get {
+            _OnCreditsDoneOffset = _OnCreditsDoneOffset ?? Schema.GetOffset(0xF1224C0488A2DA7A);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnCreditsDoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _RolledOutroCreditsOffset;
+    private static nint? _RolledOutroCreditsOffset;
 
-  public ref bool RolledOutroCredits {
-    get {
-      if (_RolledOutroCreditsOffset == null) {
-        _RolledOutroCreditsOffset = Schema.GetOffset(0xF1224C048E1511D4);
-      }
-      return ref _Handle.AsRef<bool>(_RolledOutroCreditsOffset!.Value);
+    public ref bool RolledOutroCredits {
+        get {
+            _RolledOutroCreditsOffset = _RolledOutroCreditsOffset ?? Schema.GetOffset(0xF1224C048E1511D4);
+            return ref _Handle.AsRef<bool>(_RolledOutroCreditsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LogoLengthOffset;
+    private static nint? _LogoLengthOffset;
 
-  public ref float LogoLength {
-    get {
-      if (_LogoLengthOffset == null) {
-        _LogoLengthOffset = Schema.GetOffset(0xF1224C04D283492C);
-      }
-      return ref _Handle.AsRef<float>(_LogoLengthOffset!.Value);
+    public ref float LogoLength {
+        get {
+            _LogoLengthOffset = _LogoLengthOffset ?? Schema.GetOffset(0xF1224C04D283492C);
+            return ref _Handle.AsRef<float>(_LogoLengthOffset!.Value);
+        }
     }
-  }
 
 
 }

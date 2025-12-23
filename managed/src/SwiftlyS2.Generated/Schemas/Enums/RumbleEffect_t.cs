@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum RumbleEffect_t : uint {
-
+public enum RumbleEffect_t : uint
+{
  RUMBLE_INVALID = uint.MaxValue,
 
  RUMBLE_STOP_ALL = 0,

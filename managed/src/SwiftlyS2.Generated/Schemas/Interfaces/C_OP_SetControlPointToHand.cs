@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointToHand : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToHand> {
+public partial interface C_OP_SetControlPointToHand : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToHand>
+{
+    static C_OP_SetControlPointToHand ISchemaClass<C_OP_SetControlPointToHand>.From(nint handle) => new C_OP_SetControlPointToHandImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointToHand>.Size => 496;
+    static string? ISchemaClass<C_OP_SetControlPointToHand>.ClassName => null;
 
-  static C_OP_SetControlPointToHand ISchemaClass<C_OP_SetControlPointToHand>.From(nint handle) => new C_OP_SetControlPointToHandImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointToHand>.Size => 496;
-  static string? ISchemaClass<C_OP_SetControlPointToHand>.ClassName => null;
 
-  
-  public ref int CP1 { get; }
-  
-  public ref int Hand { get; }
-  
-  public ref Vector CP1Pos { get; }
-  
-  public ref bool OrientToHand { get; }
+    public ref int CP1 { get; }
+
+    public ref int Hand { get; }
+
+    public ref Vector CP1Pos { get; }
+
+    public ref bool OrientToHand { get; }
 
 
 }

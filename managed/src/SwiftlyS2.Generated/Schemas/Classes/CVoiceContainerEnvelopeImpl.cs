@@ -6,38 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerEnvelopeImpl : CVoiceContainerBaseImpl, CVoiceContainerEnvelope {
+internal partial class CVoiceContainerEnvelopeImpl : CVoiceContainerBaseImpl, CVoiceContainerEnvelope
+{
+    public CVoiceContainerEnvelopeImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerEnvelopeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SoundOffset;
 
-  private static nint? _SoundOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> Sound {
-    get {
-      if (_SoundOffset == null) {
-        _SoundOffset = Schema.GetOffset(0x5CEF97E74E1C4FB4);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SoundOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> Sound {
+        get {
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x5CEF97E74E1C4FB4);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCVoiceContainerBase>>(_SoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _AnalysisContainerOffset;
+    private static nint? _AnalysisContainerOffset;
 
-  public CVoiceContainerAnalysisBase? AnalysisContainer {
-    get {
-      if (_AnalysisContainerOffset == null) {
-        _AnalysisContainerOffset = Schema.GetOffset(0x5CEF97E74C85F50E);
-      }
-      var ptr = _Handle.Read<nint>(_AnalysisContainerOffset!.Value);
-      return ptr.IsValidPtr() ? new CVoiceContainerAnalysisBaseImpl(ptr) : null;
+    public CVoiceContainerAnalysisBase? AnalysisContainer {
+        get {
+            _AnalysisContainerOffset = _AnalysisContainerOffset ?? Schema.GetOffset(0x5CEF97E74C85F50E);
+            var ptr = _Handle.Read<nint>(_AnalysisContainerOffset!.Value);
+            return ptr.IsValidPtr() ? new CVoiceContainerAnalysisBaseImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

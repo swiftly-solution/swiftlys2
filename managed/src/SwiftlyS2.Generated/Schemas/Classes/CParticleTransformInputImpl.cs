@@ -6,97 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParticleTransformInputImpl : CParticleInputImpl, CParticleTransformInput {
+internal partial class CParticleTransformInputImpl : CParticleInputImpl, CParticleTransformInput
+{
+    public CParticleTransformInputImpl(nint handle) : base(handle) { }
 
-  public CParticleTransformInputImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public ref ParticleTransformType_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x9DF3328C18853D59);
-      }
-      return ref _Handle.AsRef<ParticleTransformType_t>(_TypeOffset!.Value);
+    public ref ParticleTransformType_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x9DF3328C18853D59);
+            return ref _Handle.AsRef<ParticleTransformType_t>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NamedValueOffset;
+    private static nint? _NamedValueOffset;
 
-  public SchemaUntypedField NamedValue {
-    get {
-      if (_NamedValueOffset == null) {
-        _NamedValueOffset = Schema.GetOffset(0x9DF3328CE0618727);
-      }
-      return new SchemaUntypedField(_Handle + _NamedValueOffset!.Value);
+    public SchemaUntypedField NamedValue {
+        get {
+            _NamedValueOffset = _NamedValueOffset ?? Schema.GetOffset(0x9DF3328CE0618727);
+            return new SchemaUntypedField(_Handle + _NamedValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _FollowNamedValueOffset;
+    private static nint? _FollowNamedValueOffset;
 
-  public ref bool FollowNamedValue {
-    get {
-      if (_FollowNamedValueOffset == null) {
-        _FollowNamedValueOffset = Schema.GetOffset(0x9DF3328C0F6CBBBA);
-      }
-      return ref _Handle.AsRef<bool>(_FollowNamedValueOffset!.Value);
+    public ref bool FollowNamedValue {
+        get {
+            _FollowNamedValueOffset = _FollowNamedValueOffset ?? Schema.GetOffset(0x9DF3328C0F6CBBBA);
+            return ref _Handle.AsRef<bool>(_FollowNamedValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _SupportsDisabledOffset;
+    private static nint? _SupportsDisabledOffset;
 
-  public ref bool SupportsDisabled {
-    get {
-      if (_SupportsDisabledOffset == null) {
-        _SupportsDisabledOffset = Schema.GetOffset(0x9DF3328CCCD6A201);
-      }
-      return ref _Handle.AsRef<bool>(_SupportsDisabledOffset!.Value);
+    public ref bool SupportsDisabled {
+        get {
+            _SupportsDisabledOffset = _SupportsDisabledOffset ?? Schema.GetOffset(0x9DF3328CCCD6A201);
+            return ref _Handle.AsRef<bool>(_SupportsDisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseOrientationOffset;
+    private static nint? _UseOrientationOffset;
 
-  public ref bool UseOrientation {
-    get {
-      if (_UseOrientationOffset == null) {
-        _UseOrientationOffset = Schema.GetOffset(0x9DF3328C8DAE39FE);
-      }
-      return ref _Handle.AsRef<bool>(_UseOrientationOffset!.Value);
+    public ref bool UseOrientation {
+        get {
+            _UseOrientationOffset = _UseOrientationOffset ?? Schema.GetOffset(0x9DF3328C8DAE39FE);
+            return ref _Handle.AsRef<bool>(_UseOrientationOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointOffset;
+    private static nint? _ControlPointOffset;
 
-  public ref int ControlPoint {
-    get {
-      if (_ControlPointOffset == null) {
-        _ControlPointOffset = Schema.GetOffset(0x9DF3328C0D0DDF8C);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    public ref int ControlPoint {
+        get {
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0x9DF3328C0D0DDF8C);
+            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _ControlPointRangeMaxOffset;
+    private static nint? _ControlPointRangeMaxOffset;
 
-  public ref int ControlPointRangeMax {
-    get {
-      if (_ControlPointRangeMaxOffset == null) {
-        _ControlPointRangeMaxOffset = Schema.GetOffset(0x9DF3328CE07DB935);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointRangeMaxOffset!.Value);
+    public ref int ControlPointRangeMax {
+        get {
+            _ControlPointRangeMaxOffset = _ControlPointRangeMaxOffset ?? Schema.GetOffset(0x9DF3328CE07DB935);
+            return ref _Handle.AsRef<int>(_ControlPointRangeMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EndCPGrowthTimeOffset;
+    private static nint? _EndCPGrowthTimeOffset;
 
-  public ref float EndCPGrowthTime {
-    get {
-      if (_EndCPGrowthTimeOffset == null) {
-        _EndCPGrowthTimeOffset = Schema.GetOffset(0x9DF3328CC156B981);
-      }
-      return ref _Handle.AsRef<float>(_EndCPGrowthTimeOffset!.Value);
+    public ref float EndCPGrowthTime {
+        get {
+            _EndCPGrowthTimeOffset = _EndCPGrowthTimeOffset ?? Schema.GetOffset(0x9DF3328CC156B981);
+            return ref _Handle.AsRef<float>(_EndCPGrowthTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

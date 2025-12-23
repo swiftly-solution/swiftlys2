@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDestructiblePart : ISchemaClass<CDestructiblePart> {
+public partial interface CDestructiblePart : ISchemaClass<CDestructiblePart>
+{
+    static CDestructiblePart ISchemaClass<CDestructiblePart>.From(nint handle) => new CDestructiblePartImpl(handle);
+    static int ISchemaClass<CDestructiblePart>.Size => 80;
+    static string? ISchemaClass<CDestructiblePart>.ClassName => null;
 
-  static CDestructiblePart ISchemaClass<CDestructiblePart>.From(nint handle) => new CDestructiblePartImpl(handle);
-  static int ISchemaClass<CDestructiblePart>.Size => 80;
-  static string? ISchemaClass<CDestructiblePart>.ClassName => null;
 
-  
-  public ref CGlobalSymbol DebugName { get; }
-  
-  public ref HitGroup_t HitGroup { get; }
-  
-  public ref bool DisableHitGroupWhenDestroyed { get; }
-  
-  public ref CUtlVector<HitGroup_t> OtherHitgroupsToDestroyWhenFullyDestructed { get; }
-  
-  public ref bool OnlyDestroyWhenGibbing { get; }
-  
-  public ref CGlobalSymbol BodyGroupName { get; }
-  
-  public ref CUtlVector<CDestructiblePart_DamageLevel> DamageLevels { get; }
+    public ref CGlobalSymbol DebugName { get; }
+
+    public ref HitGroup_t HitGroup { get; }
+
+    public ref bool DisableHitGroupWhenDestroyed { get; }
+
+    public ref CUtlVector<HitGroup_t> OtherHitgroupsToDestroyWhenFullyDestructed { get; }
+
+    public ref bool OnlyDestroyWhenGibbing { get; }
+
+    public ref CGlobalSymbol BodyGroupName { get; }
+
+    public ref CUtlVector<CDestructiblePart_DamageLevel> DamageLevels { get; }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTwistConstraintImpl : CBaseConstraintImpl, CTwistConstraint {
+internal partial class CTwistConstraintImpl : CBaseConstraintImpl, CTwistConstraint
+{
+    public CTwistConstraintImpl(nint handle) : base(handle) { }
 
-  public CTwistConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InverseOffset;
 
-  private static nint? _InverseOffset;
-
-  public ref bool Inverse {
-    get {
-      if (_InverseOffset == null) {
-        _InverseOffset = Schema.GetOffset(0xA3EC320A0DE8C163);
-      }
-      return ref _Handle.AsRef<bool>(_InverseOffset!.Value);
+    public ref bool Inverse {
+        get {
+            _InverseOffset = _InverseOffset ?? Schema.GetOffset(0xA3EC320A0DE8C163);
+            return ref _Handle.AsRef<bool>(_InverseOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParentBindRotationOffset;
+    private static nint? _ParentBindRotationOffset;
 
-  public ref Quaternion ParentBindRotation {
-    get {
-      if (_ParentBindRotationOffset == null) {
-        _ParentBindRotationOffset = Schema.GetOffset(0xA3EC320AE46C74E5);
-      }
-      return ref _Handle.AsRef<Quaternion>(_ParentBindRotationOffset!.Value);
+    public ref Quaternion ParentBindRotation {
+        get {
+            _ParentBindRotationOffset = _ParentBindRotationOffset ?? Schema.GetOffset(0xA3EC320AE46C74E5);
+            return ref _Handle.AsRef<Quaternion>(_ParentBindRotationOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChildBindRotationOffset;
+    private static nint? _ChildBindRotationOffset;
 
-  public ref Quaternion ChildBindRotation {
-    get {
-      if (_ChildBindRotationOffset == null) {
-        _ChildBindRotationOffset = Schema.GetOffset(0xA3EC320A0FCDDACB);
-      }
-      return ref _Handle.AsRef<Quaternion>(_ChildBindRotationOffset!.Value);
+    public ref Quaternion ChildBindRotation {
+        get {
+            _ChildBindRotationOffset = _ChildBindRotationOffset ?? Schema.GetOffset(0xA3EC320A0FCDDACB);
+            return ref _Handle.AsRef<Quaternion>(_ChildBindRotationOffset!.Value);
+        }
     }
-  }
 
 
 }

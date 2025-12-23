@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvDetailController : CBaseEntity, ISchemaClass<CEnvDetailController> {
+public partial interface CEnvDetailController : CBaseEntity, ISchemaClass<CEnvDetailController>
+{
+    static CEnvDetailController ISchemaClass<CEnvDetailController>.From(nint handle) => new CEnvDetailControllerImpl(handle);
+    static int ISchemaClass<CEnvDetailController>.Size => 1272;
+    static string? ISchemaClass<CEnvDetailController>.ClassName => "env_detail_controller";
 
-  static CEnvDetailController ISchemaClass<CEnvDetailController>.From(nint handle) => new CEnvDetailControllerImpl(handle);
-  static int ISchemaClass<CEnvDetailController>.Size => 1272;
-  static string? ISchemaClass<CEnvDetailController>.ClassName => "env_detail_controller";
 
-  
-  public ref float FadeStartDist { get; }
-  
-  public ref float FadeEndDist { get; }
+    public ref float FadeStartDist { get; }
 
-  public void FadeStartDistUpdated();
-  public void FadeEndDistUpdated();
+    public ref float FadeEndDist { get; }
+
+    public void FadeStartDistUpdated();
+    public void FadeEndDistUpdated();
 }

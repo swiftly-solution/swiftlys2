@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface NmCompressionSettings_t__QuantizationRange_t : ISchemaClass<NmCompressionSettings_t__QuantizationRange_t> {
+public partial interface NmCompressionSettings_t__QuantizationRange_t : ISchemaClass<NmCompressionSettings_t__QuantizationRange_t>
+{
+    static NmCompressionSettings_t__QuantizationRange_t ISchemaClass<NmCompressionSettings_t__QuantizationRange_t>.From(nint handle) => new NmCompressionSettings_t__QuantizationRange_tImpl(handle);
+    static int ISchemaClass<NmCompressionSettings_t__QuantizationRange_t>.Size => 8;
+    static string? ISchemaClass<NmCompressionSettings_t__QuantizationRange_t>.ClassName => null;
 
-  static NmCompressionSettings_t__QuantizationRange_t ISchemaClass<NmCompressionSettings_t__QuantizationRange_t>.From(nint handle) => new NmCompressionSettings_t__QuantizationRange_tImpl(handle);
-  static int ISchemaClass<NmCompressionSettings_t__QuantizationRange_t>.Size => 8;
-  static string? ISchemaClass<NmCompressionSettings_t__QuantizationRange_t>.ClassName => null;
 
-  
-  public ref float RangeStart { get; }
-  
-  public ref float RangeLength { get; }
+    public ref float RangeStart { get; }
+
+    public ref float RangeLength { get; }
 
 
 }

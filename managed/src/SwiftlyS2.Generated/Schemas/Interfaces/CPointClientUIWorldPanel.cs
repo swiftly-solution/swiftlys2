@@ -8,83 +8,83 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointClientUIWorldPanel : CBaseClientUIEntity, ISchemaClass<CPointClientUIWorldPanel> {
+public partial interface CPointClientUIWorldPanel : CBaseClientUIEntity, ISchemaClass<CPointClientUIWorldPanel>
+{
+    static CPointClientUIWorldPanel ISchemaClass<CPointClientUIWorldPanel>.From(nint handle) => new CPointClientUIWorldPanelImpl(handle);
+    static int ISchemaClass<CPointClientUIWorldPanel>.Size => 2528;
+    static string? ISchemaClass<CPointClientUIWorldPanel>.ClassName => "point_clientui_world_panel";
 
-  static CPointClientUIWorldPanel ISchemaClass<CPointClientUIWorldPanel>.From(nint handle) => new CPointClientUIWorldPanelImpl(handle);
-  static int ISchemaClass<CPointClientUIWorldPanel>.Size => 2528;
-  static string? ISchemaClass<CPointClientUIWorldPanel>.ClassName => "point_clientui_world_panel";
 
-  
-  public ref bool IgnoreInput { get; }
-  
-  public ref bool Lit { get; }
-  
-  public ref bool FollowPlayerAcrossTeleport { get; }
-  
-  public ref float Width { get; }
-  
-  public ref float Height { get; }
-  
-  public ref float DPI { get; }
-  
-  public ref float InteractDistance { get; }
-  
-  public ref float DepthOffset { get; }
-  
-  public ref uint OwnerContext { get; }
-  
-  public ref uint HorizontalAlign { get; }
-  
-  public ref uint VerticalAlign { get; }
-  
-  public ref uint Orientation { get; }
-  
-  public ref bool AllowInteractionFromAllSceneWorlds { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> CSSClasses { get; }
-  
-  public ref bool Opaque { get; }
-  
-  public ref bool NoDepth { get; }
-  
-  public ref bool VisibleWhenParentNoDraw { get; }
-  
-  public ref bool RenderBackface { get; }
-  
-  public ref bool UseOffScreenIndicator { get; }
-  
-  public ref bool ExcludeFromSaveGames { get; }
-  
-  public ref bool Grabbable { get; }
-  
-  public ref bool OnlyRenderToTexture { get; }
-  
-  public ref bool DisableMipGen { get; }
-  
-  public ref int ExplicitImageLayout { get; }
+    public ref bool IgnoreInput { get; }
 
-  public void IgnoreInputUpdated();
-  public void LitUpdated();
-  public void FollowPlayerAcrossTeleportUpdated();
-  public void WidthUpdated();
-  public void HeightUpdated();
-  public void DPIUpdated();
-  public void InteractDistanceUpdated();
-  public void DepthOffsetUpdated();
-  public void OwnerContextUpdated();
-  public void HorizontalAlignUpdated();
-  public void VerticalAlignUpdated();
-  public void OrientationUpdated();
-  public void AllowInteractionFromAllSceneWorldsUpdated();
-  public void CSSClassesUpdated();
-  public void OpaqueUpdated();
-  public void NoDepthUpdated();
-  public void VisibleWhenParentNoDrawUpdated();
-  public void RenderBackfaceUpdated();
-  public void UseOffScreenIndicatorUpdated();
-  public void ExcludeFromSaveGamesUpdated();
-  public void GrabbableUpdated();
-  public void OnlyRenderToTextureUpdated();
-  public void DisableMipGenUpdated();
-  public void ExplicitImageLayoutUpdated();
+    public ref bool Lit { get; }
+
+    public ref bool FollowPlayerAcrossTeleport { get; }
+
+    public ref float Width { get; }
+
+    public ref float Height { get; }
+
+    public ref float DPI { get; }
+
+    public ref float InteractDistance { get; }
+
+    public ref float DepthOffset { get; }
+
+    public ref uint OwnerContext { get; }
+
+    public ref uint HorizontalAlign { get; }
+
+    public ref uint VerticalAlign { get; }
+
+    public ref uint Orientation { get; }
+
+    public ref bool AllowInteractionFromAllSceneWorlds { get; }
+
+    public ref CUtlVector<SchemaUntypedField> CSSClasses { get; }
+
+    public ref bool Opaque { get; }
+
+    public ref bool NoDepth { get; }
+
+    public ref bool VisibleWhenParentNoDraw { get; }
+
+    public ref bool RenderBackface { get; }
+
+    public ref bool UseOffScreenIndicator { get; }
+
+    public ref bool ExcludeFromSaveGames { get; }
+
+    public ref bool Grabbable { get; }
+
+    public ref bool OnlyRenderToTexture { get; }
+
+    public ref bool DisableMipGen { get; }
+
+    public ref int ExplicitImageLayout { get; }
+
+    public void IgnoreInputUpdated();
+    public void LitUpdated();
+    public void FollowPlayerAcrossTeleportUpdated();
+    public void WidthUpdated();
+    public void HeightUpdated();
+    public void DPIUpdated();
+    public void InteractDistanceUpdated();
+    public void DepthOffsetUpdated();
+    public void OwnerContextUpdated();
+    public void HorizontalAlignUpdated();
+    public void VerticalAlignUpdated();
+    public void OrientationUpdated();
+    public void AllowInteractionFromAllSceneWorldsUpdated();
+    public void CSSClassesUpdated();
+    public void OpaqueUpdated();
+    public void NoDepthUpdated();
+    public void VisibleWhenParentNoDrawUpdated();
+    public void RenderBackfaceUpdated();
+    public void UseOffScreenIndicatorUpdated();
+    public void ExcludeFromSaveGamesUpdated();
+    public void GrabbableUpdated();
+    public void OnlyRenderToTextureUpdated();
+    public void DisableMipGenUpdated();
+    public void ExplicitImageLayoutUpdated();
 }

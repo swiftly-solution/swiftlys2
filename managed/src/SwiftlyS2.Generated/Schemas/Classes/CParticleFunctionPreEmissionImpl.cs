@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParticleFunctionPreEmissionImpl : CParticleFunctionOperatorImpl, CParticleFunctionPreEmission {
+internal partial class CParticleFunctionPreEmissionImpl : CParticleFunctionOperatorImpl, CParticleFunctionPreEmission
+{
+    public CParticleFunctionPreEmissionImpl(nint handle) : base(handle) { }
 
-  public CParticleFunctionPreEmissionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RunOnceOffset;
 
-  private static nint? _RunOnceOffset;
-
-  public ref bool RunOnce {
-    get {
-      if (_RunOnceOffset == null) {
-        _RunOnceOffset = Schema.GetOffset(0x60FF68618CD905F);
-      }
-      return ref _Handle.AsRef<bool>(_RunOnceOffset!.Value);
+    public ref bool RunOnce {
+        get {
+            _RunOnceOffset = _RunOnceOffset ?? Schema.GetOffset(0x60FF68618CD905F);
+            return ref _Handle.AsRef<bool>(_RunOnceOffset!.Value);
+        }
     }
-  }
 
 
 }

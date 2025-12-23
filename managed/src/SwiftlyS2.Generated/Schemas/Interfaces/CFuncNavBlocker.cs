@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncNavBlocker : CBaseModelEntity, ISchemaClass<CFuncNavBlocker> {
+public partial interface CFuncNavBlocker : CBaseModelEntity, ISchemaClass<CFuncNavBlocker>
+{
+    static CFuncNavBlocker ISchemaClass<CFuncNavBlocker>.From(nint handle) => new CFuncNavBlockerImpl(handle);
+    static int ISchemaClass<CFuncNavBlocker>.Size => 2032;
+    static string? ISchemaClass<CFuncNavBlocker>.ClassName => "func_nav_blocker";
 
-  static CFuncNavBlocker ISchemaClass<CFuncNavBlocker>.From(nint handle) => new CFuncNavBlockerImpl(handle);
-  static int ISchemaClass<CFuncNavBlocker>.Size => 2032;
-  static string? ISchemaClass<CFuncNavBlocker>.ClassName => "func_nav_blocker";
 
-  
-  public ref bool Disabled { get; }
-  
-  public ref int BlockedTeamNumber { get; }
+    public ref bool Disabled { get; }
+
+    public ref int BlockedTeamNumber { get; }
 
 
 }

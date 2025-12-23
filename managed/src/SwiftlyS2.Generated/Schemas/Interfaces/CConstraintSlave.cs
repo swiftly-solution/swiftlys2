@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CConstraintSlave : ISchemaClass<CConstraintSlave> {
+public partial interface CConstraintSlave : ISchemaClass<CConstraintSlave>
+{
+    static CConstraintSlave ISchemaClass<CConstraintSlave>.From(nint handle) => new CConstraintSlaveImpl(handle);
+    static int ISchemaClass<CConstraintSlave>.Size => 80;
+    static string? ISchemaClass<CConstraintSlave>.ClassName => null;
 
-  static CConstraintSlave ISchemaClass<CConstraintSlave>.From(nint handle) => new CConstraintSlaveImpl(handle);
-  static int ISchemaClass<CConstraintSlave>.Size => 80;
-  static string? ISchemaClass<CConstraintSlave>.ClassName => null;
 
-  
-  public ref Quaternion BaseOrientation { get; }
-  
-  public ref Vector BasePosition { get; }
-  
-  public ref uint BoneHash { get; }
-  
-  public ref float Weight { get; }
-  
-  public string Name { get; set; }
+    public ref Quaternion BaseOrientation { get; }
+
+    public ref Vector BasePosition { get; }
+
+    public ref uint BoneHash { get; }
+
+    public ref float Weight { get; }
+
+    public string Name { get; set; }
 
 
 }

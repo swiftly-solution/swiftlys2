@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapDotProductToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapDotProductToCP> {
+public partial interface C_OP_RemapDotProductToCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapDotProductToCP>
+{
+    static C_OP_RemapDotProductToCP ISchemaClass<C_OP_RemapDotProductToCP>.From(nint handle) => new C_OP_RemapDotProductToCPImpl(handle);
+    static int ISchemaClass<C_OP_RemapDotProductToCP>.Size => 1960;
+    static string? ISchemaClass<C_OP_RemapDotProductToCP>.ClassName => null;
 
-  static C_OP_RemapDotProductToCP ISchemaClass<C_OP_RemapDotProductToCP>.From(nint handle) => new C_OP_RemapDotProductToCPImpl(handle);
-  static int ISchemaClass<C_OP_RemapDotProductToCP>.Size => 1960;
-  static string? ISchemaClass<C_OP_RemapDotProductToCP>.ClassName => null;
 
-  
-  public ref int InputCP1 { get; }
-  
-  public ref int InputCP2 { get; }
-  
-  public ref int OutputCP { get; }
-  
-  public ref int OutVectorField { get; }
-  
-  public CParticleCollectionFloatInput InputMin { get; }
-  
-  public CParticleCollectionFloatInput InputMax { get; }
-  
-  public CParticleCollectionFloatInput OutputMin { get; }
-  
-  public CParticleCollectionFloatInput OutputMax { get; }
+    public ref int InputCP1 { get; }
+
+    public ref int InputCP2 { get; }
+
+    public ref int OutputCP { get; }
+
+    public ref int OutVectorField { get; }
+
+    public CParticleCollectionFloatInput InputMin { get; }
+
+    public CParticleCollectionFloatInput InputMax { get; }
+
+    public CParticleCollectionFloatInput OutputMin { get; }
+
+    public CParticleCollectionFloatInput OutputMax { get; }
 
 
 }

@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAudioMorphDataImpl : SchemaClass, CAudioMorphData {
+internal partial class CAudioMorphDataImpl : SchemaClass, CAudioMorphData
+{
+    public CAudioMorphDataImpl(nint handle) : base(handle) { }
 
-  public CAudioMorphDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TimesOffset;
 
-  private static nint? _TimesOffset;
-
-  public ref CUtlVector<float> Times {
-    get {
-      if (_TimesOffset == null) {
-        _TimesOffset = Schema.GetOffset(0xA13726EA86A55CD5);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_TimesOffset!.Value);
+    public ref CUtlVector<float> Times {
+        get {
+            _TimesOffset = _TimesOffset ?? Schema.GetOffset(0xA13726EA86A55CD5);
+            return ref _Handle.AsRef<CUtlVector<float>>(_TimesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameHashCodesOffset;
+    private static nint? _NameHashCodesOffset;
 
-  public ref CUtlVector<uint> NameHashCodes {
-    get {
-      if (_NameHashCodesOffset == null) {
-        _NameHashCodesOffset = Schema.GetOffset(0xA13726EAC13918BC);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_NameHashCodesOffset!.Value);
+    public ref CUtlVector<uint> NameHashCodes {
+        get {
+            _NameHashCodesOffset = _NameHashCodesOffset ?? Schema.GetOffset(0xA13726EAC13918BC);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_NameHashCodesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameStringsOffset;
+    private static nint? _NameStringsOffset;
 
-  public ref CUtlVector<CUtlString> NameStrings {
-    get {
-      if (_NameStringsOffset == null) {
-        _NameStringsOffset = Schema.GetOffset(0xA13726EA23776A0C);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NameStringsOffset!.Value);
+    public ref CUtlVector<CUtlString> NameStrings {
+        get {
+            _NameStringsOffset = _NameStringsOffset ?? Schema.GetOffset(0xA13726EA23776A0C);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_NameStringsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SamplesOffset;
+    private static nint? _SamplesOffset;
 
-  public ref CUtlVector<CUtlVector<float>> Samples {
-    get {
-      if (_SamplesOffset == null) {
-        _SamplesOffset = Schema.GetOffset(0xA13726EA364CA9DC);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlVector<float>>>(_SamplesOffset!.Value);
+    public ref CUtlVector<CUtlVector<float>> Samples {
+        get {
+            _SamplesOffset = _SamplesOffset ?? Schema.GetOffset(0xA13726EA364CA9DC);
+            return ref _Handle.AsRef<CUtlVector<CUtlVector<float>>>(_SamplesOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseInOffset;
+    private static nint? _EaseInOffset;
 
-  public ref float EaseIn {
-    get {
-      if (_EaseInOffset == null) {
-        _EaseInOffset = Schema.GetOffset(0xA13726EA4514C026);
-      }
-      return ref _Handle.AsRef<float>(_EaseInOffset!.Value);
+    public ref float EaseIn {
+        get {
+            _EaseInOffset = _EaseInOffset ?? Schema.GetOffset(0xA13726EA4514C026);
+            return ref _Handle.AsRef<float>(_EaseInOffset!.Value);
+        }
     }
-  }
-  private static nint? _EaseOutOffset;
+    private static nint? _EaseOutOffset;
 
-  public ref float EaseOut {
-    get {
-      if (_EaseOutOffset == null) {
-        _EaseOutOffset = Schema.GetOffset(0xA13726EA46B49C07);
-      }
-      return ref _Handle.AsRef<float>(_EaseOutOffset!.Value);
+    public ref float EaseOut {
+        get {
+            _EaseOutOffset = _EaseOutOffset ?? Schema.GetOffset(0xA13726EA46B49C07);
+            return ref _Handle.AsRef<float>(_EaseOutOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,177 +6,144 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderDeferredLightImpl : CParticleFunctionRendererImpl, C_OP_RenderDeferredLight {
+internal partial class C_OP_RenderDeferredLightImpl : CParticleFunctionRendererImpl, C_OP_RenderDeferredLight
+{
+    public C_OP_RenderDeferredLightImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderDeferredLightImpl(nint handle) : base(handle) {
-  }
+    private static nint? _UseAlphaTestWindowOffset;
 
-  private static nint? _UseAlphaTestWindowOffset;
-
-  public ref bool UseAlphaTestWindow {
-    get {
-      if (_UseAlphaTestWindowOffset == null) {
-        _UseAlphaTestWindowOffset = Schema.GetOffset(0x44291266951B0D10);
-      }
-      return ref _Handle.AsRef<bool>(_UseAlphaTestWindowOffset!.Value);
+    public ref bool UseAlphaTestWindow {
+        get {
+            _UseAlphaTestWindowOffset = _UseAlphaTestWindowOffset ?? Schema.GetOffset(0x44291266951B0D10);
+            return ref _Handle.AsRef<bool>(_UseAlphaTestWindowOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseTextureOffset;
+    private static nint? _UseTextureOffset;
 
-  public ref bool UseTexture {
-    get {
-      if (_UseTextureOffset == null) {
-        _UseTextureOffset = Schema.GetOffset(0x4429126624A2D28F);
-      }
-      return ref _Handle.AsRef<bool>(_UseTextureOffset!.Value);
+    public ref bool UseTexture {
+        get {
+            _UseTextureOffset = _UseTextureOffset ?? Schema.GetOffset(0x4429126624A2D28F);
+            return ref _Handle.AsRef<bool>(_UseTextureOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusScaleOffset;
+    private static nint? _RadiusScaleOffset;
 
-  public ref float RadiusScale {
-    get {
-      if (_RadiusScaleOffset == null) {
-        _RadiusScaleOffset = Schema.GetOffset(0x44291266A7A20159);
-      }
-      return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+    public ref float RadiusScale {
+        get {
+            _RadiusScaleOffset = _RadiusScaleOffset ?? Schema.GetOffset(0x44291266A7A20159);
+            return ref _Handle.AsRef<float>(_RadiusScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaScaleOffset;
+    private static nint? _AlphaScaleOffset;
 
-  public ref float AlphaScale {
-    get {
-      if (_AlphaScaleOffset == null) {
-        _AlphaScaleOffset = Schema.GetOffset(0x44291266EC6D3C25);
-      }
-      return ref _Handle.AsRef<float>(_AlphaScaleOffset!.Value);
+    public ref float AlphaScale {
+        get {
+            _AlphaScaleOffset = _AlphaScaleOffset ?? Schema.GetOffset(0x44291266EC6D3C25);
+            return ref _Handle.AsRef<float>(_AlphaScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _Alpha2FieldOffset;
+    private static nint? _Alpha2FieldOffset;
 
-  public ParticleAttributeIndex_t Alpha2Field {
-    get {
-      if (_Alpha2FieldOffset == null) {
-        _Alpha2FieldOffset = Schema.GetOffset(0x44291266F60EADC1);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _Alpha2FieldOffset!.Value);
+    public ParticleAttributeIndex_t Alpha2Field {
+        get {
+            _Alpha2FieldOffset = _Alpha2FieldOffset ?? Schema.GetOffset(0x44291266F60EADC1);
+            return new ParticleAttributeIndex_tImpl(_Handle + _Alpha2FieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorScaleOffset;
+    private static nint? _ColorScaleOffset;
 
-  public CParticleCollectionVecInput ColorScale {
-    get {
-      if (_ColorScaleOffset == null) {
-        _ColorScaleOffset = Schema.GetOffset(0x442912669F9BB8BA);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+    public CParticleCollectionVecInput ColorScale {
+        get {
+            _ColorScaleOffset = _ColorScaleOffset ?? Schema.GetOffset(0x442912669F9BB8BA);
+            return new CParticleCollectionVecInputImpl(_Handle + _ColorScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorBlendTypeOffset;
+    private static nint? _ColorBlendTypeOffset;
 
-  public ref ParticleColorBlendType_t ColorBlendType {
-    get {
-      if (_ColorBlendTypeOffset == null) {
-        _ColorBlendTypeOffset = Schema.GetOffset(0x44291266DBC6EFCF);
-      }
-      return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+    public ref ParticleColorBlendType_t ColorBlendType {
+        get {
+            _ColorBlendTypeOffset = _ColorBlendTypeOffset ?? Schema.GetOffset(0x44291266DBC6EFCF);
+            return ref _Handle.AsRef<ParticleColorBlendType_t>(_ColorBlendTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LightDistanceOffset;
+    private static nint? _LightDistanceOffset;
 
-  public ref float LightDistance {
-    get {
-      if (_LightDistanceOffset == null) {
-        _LightDistanceOffset = Schema.GetOffset(0x44291266FAE1FD66);
-      }
-      return ref _Handle.AsRef<float>(_LightDistanceOffset!.Value);
+    public ref float LightDistance {
+        get {
+            _LightDistanceOffset = _LightDistanceOffset ?? Schema.GetOffset(0x44291266FAE1FD66);
+            return ref _Handle.AsRef<float>(_LightDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartFalloffOffset;
+    private static nint? _StartFalloffOffset;
 
-  public ref float StartFalloff {
-    get {
-      if (_StartFalloffOffset == null) {
-        _StartFalloffOffset = Schema.GetOffset(0x44291266A8F25925);
-      }
-      return ref _Handle.AsRef<float>(_StartFalloffOffset!.Value);
+    public ref float StartFalloff {
+        get {
+            _StartFalloffOffset = _StartFalloffOffset ?? Schema.GetOffset(0x44291266A8F25925);
+            return ref _Handle.AsRef<float>(_StartFalloffOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceFalloffOffset;
+    private static nint? _DistanceFalloffOffset;
 
-  public ref float DistanceFalloff {
-    get {
-      if (_DistanceFalloffOffset == null) {
-        _DistanceFalloffOffset = Schema.GetOffset(0x44291266A9C33036);
-      }
-      return ref _Handle.AsRef<float>(_DistanceFalloffOffset!.Value);
+    public ref float DistanceFalloff {
+        get {
+            _DistanceFalloffOffset = _DistanceFalloffOffset ?? Schema.GetOffset(0x44291266A9C33036);
+            return ref _Handle.AsRef<float>(_DistanceFalloffOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpotFoVOffset;
+    private static nint? _SpotFoVOffset;
 
-  public ref float SpotFoV {
-    get {
-      if (_SpotFoVOffset == null) {
-        _SpotFoVOffset = Schema.GetOffset(0x44291266D202E536);
-      }
-      return ref _Handle.AsRef<float>(_SpotFoVOffset!.Value);
+    public ref float SpotFoV {
+        get {
+            _SpotFoVOffset = _SpotFoVOffset ?? Schema.GetOffset(0x44291266D202E536);
+            return ref _Handle.AsRef<float>(_SpotFoVOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaTestPointFieldOffset;
+    private static nint? _AlphaTestPointFieldOffset;
 
-  public ParticleAttributeIndex_t AlphaTestPointField {
-    get {
-      if (_AlphaTestPointFieldOffset == null) {
-        _AlphaTestPointFieldOffset = Schema.GetOffset(0x442912666AD21C15);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _AlphaTestPointFieldOffset!.Value);
+    public ParticleAttributeIndex_t AlphaTestPointField {
+        get {
+            _AlphaTestPointFieldOffset = _AlphaTestPointFieldOffset ?? Schema.GetOffset(0x442912666AD21C15);
+            return new ParticleAttributeIndex_tImpl(_Handle + _AlphaTestPointFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaTestRangeFieldOffset;
+    private static nint? _AlphaTestRangeFieldOffset;
 
-  public ParticleAttributeIndex_t AlphaTestRangeField {
-    get {
-      if (_AlphaTestRangeFieldOffset == null) {
-        _AlphaTestRangeFieldOffset = Schema.GetOffset(0x442912663E3E66D4);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _AlphaTestRangeFieldOffset!.Value);
+    public ParticleAttributeIndex_t AlphaTestRangeField {
+        get {
+            _AlphaTestRangeFieldOffset = _AlphaTestRangeFieldOffset ?? Schema.GetOffset(0x442912663E3E66D4);
+            return new ParticleAttributeIndex_tImpl(_Handle + _AlphaTestRangeFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _AlphaTestSharpnessFieldOffset;
+    private static nint? _AlphaTestSharpnessFieldOffset;
 
-  public ParticleAttributeIndex_t AlphaTestSharpnessField {
-    get {
-      if (_AlphaTestSharpnessFieldOffset == null) {
-        _AlphaTestSharpnessFieldOffset = Schema.GetOffset(0x44291266BCB74B82);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _AlphaTestSharpnessFieldOffset!.Value);
+    public ParticleAttributeIndex_t AlphaTestSharpnessField {
+        get {
+            _AlphaTestSharpnessFieldOffset = _AlphaTestSharpnessFieldOffset ?? Schema.GetOffset(0x44291266BCB74B82);
+            return new ParticleAttributeIndex_tImpl(_Handle + _AlphaTestSharpnessFieldOffset!.Value);
+        }
     }
-  }
-  private static nint? _TextureOffset;
+    private static nint? _TextureOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture {
-    get {
-      if (_TextureOffset == null) {
-        _TextureOffset = Schema.GetOffset(0x442912668C0A2FB6);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture {
+        get {
+            _TextureOffset = _TextureOffset ?? Schema.GetOffset(0x442912668C0A2FB6);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCTextureBase>>(_TextureOffset!.Value);
+        }
     }
-  }
-  private static nint? _HSVShiftControlPointOffset;
+    private static nint? _HSVShiftControlPointOffset;
 
-  public ref int HSVShiftControlPoint {
-    get {
-      if (_HSVShiftControlPointOffset == null) {
-        _HSVShiftControlPointOffset = Schema.GetOffset(0x442912668848C01F);
-      }
-      return ref _Handle.AsRef<int>(_HSVShiftControlPointOffset!.Value);
+    public ref int HSVShiftControlPoint {
+        get {
+            _HSVShiftControlPointOffset = _HSVShiftControlPointOffset ?? Schema.GetOffset(0x442912668848C01F);
+            return ref _Handle.AsRef<int>(_HSVShiftControlPointOffset!.Value);
+        }
     }
-  }
 
 
 }

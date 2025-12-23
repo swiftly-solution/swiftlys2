@@ -6,231 +6,172 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMapVetoPickControllerImpl : CBaseEntityImpl, CMapVetoPickController {
+internal partial class CMapVetoPickControllerImpl : CBaseEntityImpl, CMapVetoPickController
+{
+    public CMapVetoPickControllerImpl(nint handle) : base(handle) { }
 
-  public CMapVetoPickControllerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PlayedIntroVcdOffset;
 
-  private static nint? _PlayedIntroVcdOffset;
-
-  public ref bool PlayedIntroVcd {
-    get {
-      if (_PlayedIntroVcdOffset == null) {
-        _PlayedIntroVcdOffset = Schema.GetOffset(0xD5DDD68DA8EE58C9);
-      }
-      return ref _Handle.AsRef<bool>(_PlayedIntroVcdOffset!.Value);
+    public ref bool PlayedIntroVcd {
+        get {
+            _PlayedIntroVcdOffset = _PlayedIntroVcdOffset ?? Schema.GetOffset(0xD5DDD68DA8EE58C9);
+            return ref _Handle.AsRef<bool>(_PlayedIntroVcdOffset!.Value);
+        }
     }
-  }
-  private static nint? _NeedToPlayFiveSecondsRemainingOffset;
+    private static nint? _NeedToPlayFiveSecondsRemainingOffset;
 
-  public ref bool NeedToPlayFiveSecondsRemaining {
-    get {
-      if (_NeedToPlayFiveSecondsRemainingOffset == null) {
-        _NeedToPlayFiveSecondsRemainingOffset = Schema.GetOffset(0xD5DDD68D94B61BAD);
-      }
-      return ref _Handle.AsRef<bool>(_NeedToPlayFiveSecondsRemainingOffset!.Value);
+    public ref bool NeedToPlayFiveSecondsRemaining {
+        get {
+            _NeedToPlayFiveSecondsRemainingOffset = _NeedToPlayFiveSecondsRemainingOffset ?? Schema.GetOffset(0xD5DDD68D94B61BAD);
+            return ref _Handle.AsRef<bool>(_NeedToPlayFiveSecondsRemainingOffset!.Value);
+        }
     }
-  }
-  private static nint? _DblPreMatchDraftSequenceTimeOffset;
+    private static nint? _DblPreMatchDraftSequenceTimeOffset;
 
-  public ref double DblPreMatchDraftSequenceTime {
-    get {
-      if (_DblPreMatchDraftSequenceTimeOffset == null) {
-        _DblPreMatchDraftSequenceTimeOffset = Schema.GetOffset(0xD5DDD68DB69AE022);
-      }
-      return ref _Handle.AsRef<double>(_DblPreMatchDraftSequenceTimeOffset!.Value);
+    public ref double DblPreMatchDraftSequenceTime {
+        get {
+            _DblPreMatchDraftSequenceTimeOffset = _DblPreMatchDraftSequenceTimeOffset ?? Schema.GetOffset(0xD5DDD68DB69AE022);
+            return ref _Handle.AsRef<double>(_DblPreMatchDraftSequenceTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _PreMatchDraftStateChangedOffset;
+    private static nint? _PreMatchDraftStateChangedOffset;
 
-  public ref bool PreMatchDraftStateChanged {
-    get {
-      if (_PreMatchDraftStateChangedOffset == null) {
-        _PreMatchDraftStateChangedOffset = Schema.GetOffset(0xD5DDD68D114D7C7D);
-      }
-      return ref _Handle.AsRef<bool>(_PreMatchDraftStateChangedOffset!.Value);
+    public ref bool PreMatchDraftStateChanged {
+        get {
+            _PreMatchDraftStateChangedOffset = _PreMatchDraftStateChangedOffset ?? Schema.GetOffset(0xD5DDD68D114D7C7D);
+            return ref _Handle.AsRef<bool>(_PreMatchDraftStateChangedOffset!.Value);
+        }
     }
-  }
-  private static nint? _DraftTypeOffset;
+    private static nint? _DraftTypeOffset;
 
-  public ref int DraftType {
-    get {
-      if (_DraftTypeOffset == null) {
-        _DraftTypeOffset = Schema.GetOffset(0xD5DDD68D6BFCF590);
-      }
-      return ref _Handle.AsRef<int>(_DraftTypeOffset!.Value);
+    public ref int DraftType {
+        get {
+            _DraftTypeOffset = _DraftTypeOffset ?? Schema.GetOffset(0xD5DDD68D6BFCF590);
+            return ref _Handle.AsRef<int>(_DraftTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _TeamWinningCoinTossOffset;
+    private static nint? _TeamWinningCoinTossOffset;
 
-  public ref int TeamWinningCoinToss {
-    get {
-      if (_TeamWinningCoinTossOffset == null) {
-        _TeamWinningCoinTossOffset = Schema.GetOffset(0xD5DDD68D45B5B5A2);
-      }
-      return ref _Handle.AsRef<int>(_TeamWinningCoinTossOffset!.Value);
+    public ref int TeamWinningCoinToss {
+        get {
+            _TeamWinningCoinTossOffset = _TeamWinningCoinTossOffset ?? Schema.GetOffset(0xD5DDD68D45B5B5A2);
+            return ref _Handle.AsRef<int>(_TeamWinningCoinTossOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<int> TeamWithFirstChoice {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D8887D005, 64, 4, 4);
-  }
-  public ISchemaFixedArray<int> VoteMapIdsList {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DE64EA3ED, 7, 4, 4);
-  }
-  public ISchemaFixedArray<int> AccountIDs {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D2F303A1A, 64, 4, 4);
-  }
-  public ISchemaFixedArray<int> MapId0 {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D9E2BC198, 64, 4, 4);
-  }
-  public ISchemaFixedArray<int> MapId1 {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D9F2BC32B, 64, 4, 4);
-  }
-  public ISchemaFixedArray<int> MapId2 {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA02BC4BE, 64, 4, 4);
-  }
-  public ISchemaFixedArray<int> MapId3 {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA12BC651, 64, 4, 4);
-  }
-  public ISchemaFixedArray<int> MapId4 {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA22BC7E4, 64, 4, 4);
-  }
-  public ISchemaFixedArray<int> MapId5 {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA32BC977, 64, 4, 4);
-  }
-  public ISchemaFixedArray<int> StartingSide0 {
-    get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DDAE5D5BA, 64, 4, 4);
-  }
-  private static nint? _CurrentPhaseOffset;
-
-  public ref int CurrentPhase {
-    get {
-      if (_CurrentPhaseOffset == null) {
-        _CurrentPhaseOffset = Schema.GetOffset(0xD5DDD68DA6D9FE15);
-      }
-      return ref _Handle.AsRef<int>(_CurrentPhaseOffset!.Value);
+    public ISchemaFixedArray<int> TeamWithFirstChoice {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D8887D005, 64, 4, 4);
     }
-  }
-  private static nint? _PhaseStartTickOffset;
-
-  public ref int PhaseStartTick {
-    get {
-      if (_PhaseStartTickOffset == null) {
-        _PhaseStartTickOffset = Schema.GetOffset(0xD5DDD68DD6F24225);
-      }
-      return ref _Handle.AsRef<int>(_PhaseStartTickOffset!.Value);
+    public ISchemaFixedArray<int> VoteMapIdsList {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DE64EA3ED, 7, 4, 4);
     }
-  }
-  private static nint? _PhaseDurationTicksOffset;
-
-  public ref int PhaseDurationTicks {
-    get {
-      if (_PhaseDurationTicksOffset == null) {
-        _PhaseDurationTicksOffset = Schema.GetOffset(0xD5DDD68D77B8F176);
-      }
-      return ref _Handle.AsRef<int>(_PhaseDurationTicksOffset!.Value);
+    public ISchemaFixedArray<int> AccountIDs {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D2F303A1A, 64, 4, 4);
     }
-  }
-  private static nint? _OnMapVetoedOffset;
-
-  public SchemaUntypedField OnMapVetoed {
-    get {
-      if (_OnMapVetoedOffset == null) {
-        _OnMapVetoedOffset = Schema.GetOffset(0xD5DDD68D6C16E77B);
-      }
-      return new SchemaUntypedField(_Handle + _OnMapVetoedOffset!.Value);
+    public ISchemaFixedArray<int> MapId0 {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D9E2BC198, 64, 4, 4);
     }
-  }
-  private static nint? _OnMapPickedOffset;
-
-  public SchemaUntypedField OnMapPicked {
-    get {
-      if (_OnMapPickedOffset == null) {
-        _OnMapPickedOffset = Schema.GetOffset(0xD5DDD68DF50BA186);
-      }
-      return new SchemaUntypedField(_Handle + _OnMapPickedOffset!.Value);
+    public ISchemaFixedArray<int> MapId1 {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68D9F2BC32B, 64, 4, 4);
     }
-  }
-  private static nint? _OnSidesPickedOffset;
-
-  public SchemaUntypedField OnSidesPicked {
-    get {
-      if (_OnSidesPickedOffset == null) {
-        _OnSidesPickedOffset = Schema.GetOffset(0xD5DDD68DC852D128);
-      }
-      return new SchemaUntypedField(_Handle + _OnSidesPickedOffset!.Value);
+    public ISchemaFixedArray<int> MapId2 {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA02BC4BE, 64, 4, 4);
     }
-  }
-  private static nint? _OnNewPhaseStartedOffset;
-
-  public SchemaUntypedField OnNewPhaseStarted {
-    get {
-      if (_OnNewPhaseStartedOffset == null) {
-        _OnNewPhaseStartedOffset = Schema.GetOffset(0xD5DDD68D40B650EE);
-      }
-      return new SchemaUntypedField(_Handle + _OnNewPhaseStartedOffset!.Value);
+    public ISchemaFixedArray<int> MapId3 {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA12BC651, 64, 4, 4);
     }
-  }
-  private static nint? _OnLevelTransitionOffset;
-
-  public SchemaUntypedField OnLevelTransition {
-    get {
-      if (_OnLevelTransitionOffset == null) {
-        _OnLevelTransitionOffset = Schema.GetOffset(0xD5DDD68D2AEE71AD);
-      }
-      return new SchemaUntypedField(_Handle + _OnLevelTransitionOffset!.Value);
+    public ISchemaFixedArray<int> MapId4 {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA22BC7E4, 64, 4, 4);
     }
-  }
+    public ISchemaFixedArray<int> MapId5 {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DA32BC977, 64, 4, 4);
+    }
+    public ISchemaFixedArray<int> StartingSide0 {
+        get => new SchemaFixedArray<int>(_Handle, 0xD5DDD68DDAE5D5BA, 64, 4, 4);
+    }
+    private static nint? _CurrentPhaseOffset;
 
-  public void DraftTypeUpdated() {
-    Schema.Update(_Handle, 0xD5DDD68D6BFCF590);
-  }
-  public void TeamWinningCoinTossUpdated() {
-    Schema.Update(_Handle, 0xD5DDD68D45B5B5A2);
-  }
-  public void TeamWithFirstChoiceUpdated() {
-    Schema.Update(_Handle, 0xD5DDD68D8887D005);
-  }
-  public void VoteMapIdsListUpdated() {
-    Schema.Update(_Handle, 0xD5DDD68DE64EA3ED);
-  }
-  public void AccountIDsUpdated() {
-    Schema.Update(_Handle, 0xD5DDD68D2F303A1A);
-  }
-  public void MapId0Updated() {
-    Schema.Update(_Handle, 0xD5DDD68D9E2BC198);
-  }
-  public void MapId1Updated() {
-    Schema.Update(_Handle, 0xD5DDD68D9F2BC32B);
-  }
-  public void MapId2Updated() {
-    Schema.Update(_Handle, 0xD5DDD68DA02BC4BE);
-  }
-  public void MapId3Updated() {
-    Schema.Update(_Handle, 0xD5DDD68DA12BC651);
-  }
-  public void MapId4Updated() {
-    Schema.Update(_Handle, 0xD5DDD68DA22BC7E4);
-  }
-  public void MapId5Updated() {
-    Schema.Update(_Handle, 0xD5DDD68DA32BC977);
-  }
-  public void StartingSide0Updated() {
-    Schema.Update(_Handle, 0xD5DDD68DDAE5D5BA);
-  }
-  public void CurrentPhaseUpdated() {
-    Schema.Update(_Handle, 0xD5DDD68DA6D9FE15);
-  }
-  public void PhaseStartTickUpdated() {
-    Schema.Update(_Handle, 0xD5DDD68DD6F24225);
-  }
-  public void PhaseDurationTicksUpdated() {
-    Schema.Update(_Handle, 0xD5DDD68D77B8F176);
-  }
+    public ref int CurrentPhase {
+        get {
+            _CurrentPhaseOffset = _CurrentPhaseOffset ?? Schema.GetOffset(0xD5DDD68DA6D9FE15);
+            return ref _Handle.AsRef<int>(_CurrentPhaseOffset!.Value);
+        }
+    }
+    private static nint? _PhaseStartTickOffset;
+
+    public ref int PhaseStartTick {
+        get {
+            _PhaseStartTickOffset = _PhaseStartTickOffset ?? Schema.GetOffset(0xD5DDD68DD6F24225);
+            return ref _Handle.AsRef<int>(_PhaseStartTickOffset!.Value);
+        }
+    }
+    private static nint? _PhaseDurationTicksOffset;
+
+    public ref int PhaseDurationTicks {
+        get {
+            _PhaseDurationTicksOffset = _PhaseDurationTicksOffset ?? Schema.GetOffset(0xD5DDD68D77B8F176);
+            return ref _Handle.AsRef<int>(_PhaseDurationTicksOffset!.Value);
+        }
+    }
+    private static nint? _OnMapVetoedOffset;
+
+    public SchemaUntypedField OnMapVetoed {
+        get {
+            _OnMapVetoedOffset = _OnMapVetoedOffset ?? Schema.GetOffset(0xD5DDD68D6C16E77B);
+            return new SchemaUntypedField(_Handle + _OnMapVetoedOffset!.Value);
+        }
+    }
+    private static nint? _OnMapPickedOffset;
+
+    public SchemaUntypedField OnMapPicked {
+        get {
+            _OnMapPickedOffset = _OnMapPickedOffset ?? Schema.GetOffset(0xD5DDD68DF50BA186);
+            return new SchemaUntypedField(_Handle + _OnMapPickedOffset!.Value);
+        }
+    }
+    private static nint? _OnSidesPickedOffset;
+
+    public SchemaUntypedField OnSidesPicked {
+        get {
+            _OnSidesPickedOffset = _OnSidesPickedOffset ?? Schema.GetOffset(0xD5DDD68DC852D128);
+            return new SchemaUntypedField(_Handle + _OnSidesPickedOffset!.Value);
+        }
+    }
+    private static nint? _OnNewPhaseStartedOffset;
+
+    public SchemaUntypedField OnNewPhaseStarted {
+        get {
+            _OnNewPhaseStartedOffset = _OnNewPhaseStartedOffset ?? Schema.GetOffset(0xD5DDD68D40B650EE);
+            return new SchemaUntypedField(_Handle + _OnNewPhaseStartedOffset!.Value);
+        }
+    }
+    private static nint? _OnLevelTransitionOffset;
+
+    public SchemaUntypedField OnLevelTransition {
+        get {
+            _OnLevelTransitionOffset = _OnLevelTransitionOffset ?? Schema.GetOffset(0xD5DDD68D2AEE71AD);
+            return new SchemaUntypedField(_Handle + _OnLevelTransitionOffset!.Value);
+        }
+    }
+
+    public void DraftTypeUpdated() => Schema.Update(_Handle, 0xD5DDD68D6BFCF590);
+    public void TeamWinningCoinTossUpdated() => Schema.Update(_Handle, 0xD5DDD68D45B5B5A2);
+    public void TeamWithFirstChoiceUpdated() => Schema.Update(_Handle, 0xD5DDD68D8887D005);
+    public void VoteMapIdsListUpdated() => Schema.Update(_Handle, 0xD5DDD68DE64EA3ED);
+    public void AccountIDsUpdated() => Schema.Update(_Handle, 0xD5DDD68D2F303A1A);
+    public void MapId0Updated() => Schema.Update(_Handle, 0xD5DDD68D9E2BC198);
+    public void MapId1Updated() => Schema.Update(_Handle, 0xD5DDD68D9F2BC32B);
+    public void MapId2Updated() => Schema.Update(_Handle, 0xD5DDD68DA02BC4BE);
+    public void MapId3Updated() => Schema.Update(_Handle, 0xD5DDD68DA12BC651);
+    public void MapId4Updated() => Schema.Update(_Handle, 0xD5DDD68DA22BC7E4);
+    public void MapId5Updated() => Schema.Update(_Handle, 0xD5DDD68DA32BC977);
+    public void StartingSide0Updated() => Schema.Update(_Handle, 0xD5DDD68DDAE5D5BA);
+    public void CurrentPhaseUpdated() => Schema.Update(_Handle, 0xD5DDD68DA6D9FE15);
+    public void PhaseStartTickUpdated() => Schema.Update(_Handle, 0xD5DDD68DD6F24225);
+    public void PhaseDurationTicksUpdated() => Schema.Update(_Handle, 0xD5DDD68D77B8F176);
 }

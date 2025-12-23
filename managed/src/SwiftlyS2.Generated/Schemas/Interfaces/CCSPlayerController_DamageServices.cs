@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerController_DamageServices : CPlayerControllerComponent, ISchemaClass<CCSPlayerController_DamageServices> {
+public partial interface CCSPlayerController_DamageServices : CPlayerControllerComponent, ISchemaClass<CCSPlayerController_DamageServices>
+{
+    static CCSPlayerController_DamageServices ISchemaClass<CCSPlayerController_DamageServices>.From(nint handle) => new CCSPlayerController_DamageServicesImpl(handle);
+    static int ISchemaClass<CCSPlayerController_DamageServices>.Size => 208;
+    static string? ISchemaClass<CCSPlayerController_DamageServices>.ClassName => null;
 
-  static CCSPlayerController_DamageServices ISchemaClass<CCSPlayerController_DamageServices>.From(nint handle) => new CCSPlayerController_DamageServicesImpl(handle);
-  static int ISchemaClass<CCSPlayerController_DamageServices>.Size => 208;
-  static string? ISchemaClass<CCSPlayerController_DamageServices>.ClassName => null;
 
-  
-  public ref int SendUpdate { get; }
-  
-  public ref CUtlVector<CDamageRecord> DamageList { get; }
+    public ref int SendUpdate { get; }
 
-  public void SendUpdateUpdated();
-  public void DamageListUpdated();
+    public ref CUtlVector<CDamageRecord> DamageList { get; }
+
+    public void SendUpdateUpdated();
+    public void DamageListUpdated();
 }

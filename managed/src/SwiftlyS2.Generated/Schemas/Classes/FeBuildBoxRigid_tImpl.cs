@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeBuildBoxRigid_tImpl : FeBoxRigid_tImpl, FeBuildBoxRigid_t {
+internal partial class FeBuildBoxRigid_tImpl : FeBoxRigid_tImpl, FeBuildBoxRigid_t
+{
+    public FeBuildBoxRigid_tImpl(nint handle) : base(handle) { }
 
-  public FeBuildBoxRigid_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PriorityOffset;
 
-  private static nint? _PriorityOffset;
-
-  public ref int Priority {
-    get {
-      if (_PriorityOffset == null) {
-        _PriorityOffset = Schema.GetOffset(0x9E8528AFE7EFB335);
-      }
-      return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+    public ref int Priority {
+        get {
+            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0x9E8528AFE7EFB335);
+            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+        }
     }
-  }
-  private static nint? _VertexMapHashOffset;
+    private static nint? _VertexMapHashOffset;
 
-  public ref uint VertexMapHash {
-    get {
-      if (_VertexMapHashOffset == null) {
-        _VertexMapHashOffset = Schema.GetOffset(0x9E8528AF06BCA0A3);
-      }
-      return ref _Handle.AsRef<uint>(_VertexMapHashOffset!.Value);
+    public ref uint VertexMapHash {
+        get {
+            _VertexMapHashOffset = _VertexMapHashOffset ?? Schema.GetOffset(0x9E8528AF06BCA0A3);
+            return ref _Handle.AsRef<uint>(_VertexMapHashOffset!.Value);
+        }
     }
-  }
-  private static nint? _AntitunnelGroupBitsOffset;
+    private static nint? _AntitunnelGroupBitsOffset;
 
-  public ref uint AntitunnelGroupBits {
-    get {
-      if (_AntitunnelGroupBitsOffset == null) {
-        _AntitunnelGroupBitsOffset = Schema.GetOffset(0x9E8528AFA5C6E91A);
-      }
-      return ref _Handle.AsRef<uint>(_AntitunnelGroupBitsOffset!.Value);
+    public ref uint AntitunnelGroupBits {
+        get {
+            _AntitunnelGroupBitsOffset = _AntitunnelGroupBitsOffset ?? Schema.GetOffset(0x9E8528AFA5C6E91A);
+            return ref _Handle.AsRef<uint>(_AntitunnelGroupBitsOffset!.Value);
+        }
     }
-  }
 
 
 }

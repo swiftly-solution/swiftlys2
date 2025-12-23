@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCycleControlClipUpdateNode : CLeafUpdateNode, ISchemaClass<CCycleControlClipUpdateNode> {
+public partial interface CCycleControlClipUpdateNode : CLeafUpdateNode, ISchemaClass<CCycleControlClipUpdateNode>
+{
+    static CCycleControlClipUpdateNode ISchemaClass<CCycleControlClipUpdateNode>.From(nint handle) => new CCycleControlClipUpdateNodeImpl(handle);
+    static int ISchemaClass<CCycleControlClipUpdateNode>.Size => 144;
+    static string? ISchemaClass<CCycleControlClipUpdateNode>.ClassName => null;
 
-  static CCycleControlClipUpdateNode ISchemaClass<CCycleControlClipUpdateNode>.From(nint handle) => new CCycleControlClipUpdateNodeImpl(handle);
-  static int ISchemaClass<CCycleControlClipUpdateNode>.Size => 144;
-  static string? ISchemaClass<CCycleControlClipUpdateNode>.ClassName => null;
 
-  
-  public ref CUtlVector<TagSpan_t> Tags { get; }
-  
-  public HSequence Sequence { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref AnimValueSource ValueSource { get; }
-  
-  public CAnimParamHandle ParamIndex { get; }
-  
-  public ref bool LockWhenWaning { get; }
+    public ref CUtlVector<TagSpan_t> Tags { get; }
+
+    public HSequence Sequence { get; }
+
+    public ref float Duration { get; }
+
+    public ref AnimValueSource ValueSource { get; }
+
+    public CAnimParamHandle ParamIndex { get; }
+
+    public ref bool LockWhenWaning { get; }
 
 
 }

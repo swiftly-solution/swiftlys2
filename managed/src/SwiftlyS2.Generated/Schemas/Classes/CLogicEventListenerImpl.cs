@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicEventListenerImpl : CLogicalEntityImpl, CLogicEventListener {
+internal partial class CLogicEventListenerImpl : CLogicalEntityImpl, CLogicEventListener
+{
+    public CLogicEventListenerImpl(nint handle) : base(handle) { }
 
-  public CLogicEventListenerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StrEventNameOffset;
 
-  private static nint? _StrEventNameOffset;
+    public string StrEventName {
+        get {
+            _StrEventNameOffset = _StrEventNameOffset ?? Schema.GetOffset(0xD797C990BC41C13B);
+            return Schema.GetString(_Handle.Read<nint>(_StrEventNameOffset!.Value));
+        }
+        set {
+            _StrEventNameOffset = _StrEventNameOffset ?? Schema.GetOffset(0xD797C990BC41C13B);
+            Schema.SetString(_Handle, _StrEventNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _IsEnabledOffset;
 
-  public string StrEventName {
-    get {
-      if (_StrEventNameOffset == null) {
-        _StrEventNameOffset = Schema.GetOffset(0xD797C990BC41C13B);
-      }
-      var ptr = _Handle.Read<nint>(_StrEventNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref bool IsEnabled {
+        get {
+            _IsEnabledOffset = _IsEnabledOffset ?? Schema.GetOffset(0xD797C9905360D70E);
+            return ref _Handle.AsRef<bool>(_IsEnabledOffset!.Value);
+        }
     }
-    set {
-      if (_StrEventNameOffset == null) {
-        _StrEventNameOffset = Schema.GetOffset(0xD797C990BC41C13B);
-      }
-      Schema.SetString(_Handle, _StrEventNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _IsEnabledOffset;
+    private static nint? _TeamOffset;
 
-  public ref bool IsEnabled {
-    get {
-      if (_IsEnabledOffset == null) {
-        _IsEnabledOffset = Schema.GetOffset(0xD797C9905360D70E);
-      }
-      return ref _Handle.AsRef<bool>(_IsEnabledOffset!.Value);
+    public ref int Team {
+        get {
+            _TeamOffset = _TeamOffset ?? Schema.GetOffset(0xD797C990BEB42230);
+            return ref _Handle.AsRef<int>(_TeamOffset!.Value);
+        }
     }
-  }
-  private static nint? _TeamOffset;
+    private static nint? _OnEventFiredOffset;
 
-  public ref int Team {
-    get {
-      if (_TeamOffset == null) {
-        _TeamOffset = Schema.GetOffset(0xD797C990BEB42230);
-      }
-      return ref _Handle.AsRef<int>(_TeamOffset!.Value);
+    public ref CEntityIOOutput OnEventFired {
+        get {
+            _OnEventFiredOffset = _OnEventFiredOffset ?? Schema.GetOffset(0xD797C990E84EA158);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEventFiredOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnEventFiredOffset;
-
-  public CEntityIOOutput OnEventFired {
-    get {
-      if (_OnEventFiredOffset == null) {
-        _OnEventFiredOffset = Schema.GetOffset(0xD797C990E84EA158);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnEventFiredOffset!.Value);
-    }
-  }
 
 
 }

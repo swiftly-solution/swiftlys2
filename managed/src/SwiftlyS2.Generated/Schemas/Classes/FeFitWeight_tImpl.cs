@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeFitWeight_tImpl : SchemaClass, FeFitWeight_t {
+internal partial class FeFitWeight_tImpl : SchemaClass, FeFitWeight_t
+{
+    public FeFitWeight_tImpl(nint handle) : base(handle) { }
 
-  public FeFitWeight_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WeightOffset;
 
-  private static nint? _WeightOffset;
-
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0x292AB604CFFC66CB);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x292AB604CFFC66CB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodeOffset;
+    private static nint? _NodeOffset;
 
-  public ref ushort Node {
-    get {
-      if (_NodeOffset == null) {
-        _NodeOffset = Schema.GetOffset(0x292AB604CD6694B9);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
+    public ref ushort Node {
+        get {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x292AB604CD6694B9);
+            return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DummyOffset;
+    private static nint? _DummyOffset;
 
-  public ref ushort Dummy {
-    get {
-      if (_DummyOffset == null) {
-        _DummyOffset = Schema.GetOffset(0x292AB604CD8BAE5F);
-      }
-      return ref _Handle.AsRef<ushort>(_DummyOffset!.Value);
+    public ref ushort Dummy {
+        get {
+            _DummyOffset = _DummyOffset ?? Schema.GetOffset(0x292AB604CD8BAE5F);
+            return ref _Handle.AsRef<ushort>(_DummyOffset!.Value);
+        }
     }
-  }
 
 
 }

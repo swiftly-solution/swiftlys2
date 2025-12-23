@@ -6,62 +6,49 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDestructiblePartsComponentImpl : SchemaClass, CDestructiblePartsComponent {
+internal partial class CDestructiblePartsComponentImpl : SchemaClass, CDestructiblePartsComponent
+{
+    public CDestructiblePartsComponentImpl(nint handle) : base(handle) { }
 
-  public CDestructiblePartsComponentImpl(nint handle) : base(handle) {
-  }
+    private static nint? ___m_pChainEntityOffset;
 
-  private static nint? ___m_pChainEntityOffset;
-
-  public ref CNetworkVarChainer __m_pChainEntity {
-    get {
-      if (___m_pChainEntityOffset == null) {
-        ___m_pChainEntityOffset = Schema.GetOffset(0xE69A9E51F63F0E7D);
-      }
-      return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+    public ref CNetworkVarChainer __m_pChainEntity {
+        get {
+            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0xE69A9E51F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _DamageTakenByHitGroupOffset;
+    private static nint? _DamageTakenByHitGroupOffset;
 
-  public ref CUtlVector<ushort> DamageTakenByHitGroup {
-    get {
-      if (_DamageTakenByHitGroupOffset == null) {
-        _DamageTakenByHitGroupOffset = Schema.GetOffset(0xE69A9E51F137427A);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_DamageTakenByHitGroupOffset!.Value);
+    public ref CUtlVector<ushort> DamageTakenByHitGroup {
+        get {
+            _DamageTakenByHitGroupOffset = _DamageTakenByHitGroupOffset ?? Schema.GetOffset(0xE69A9E51F137427A);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_DamageTakenByHitGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOffset;
+    private static nint? _OwnerOffset;
 
-  public ref CHandle<CBaseModelEntity> Owner {
-    get {
-      if (_OwnerOffset == null) {
-        _OwnerOffset = Schema.GetOffset(0xE69A9E51F6D89572);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset!.Value);
+    public ref CHandle<CBaseModelEntity> Owner {
+        get {
+            _OwnerOffset = _OwnerOffset ?? Schema.GetOffset(0xE69A9E51F6D89572);
+            return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastHitDamageLevelOffset;
+    private static nint? _LastHitDamageLevelOffset;
 
-  public ref int LastHitDamageLevel {
-    get {
-      if (_LastHitDamageLevelOffset == null) {
-        _LastHitDamageLevelOffset = Schema.GetOffset(0xE69A9E51042B0657);
-      }
-      return ref _Handle.AsRef<int>(_LastHitDamageLevelOffset!.Value);
+    public ref int LastHitDamageLevel {
+        get {
+            _LastHitDamageLevelOffset = _LastHitDamageLevelOffset ?? Schema.GetOffset(0xE69A9E51042B0657);
+            return ref _Handle.AsRef<int>(_LastHitDamageLevelOffset!.Value);
+        }
     }
-  }
 
-  public void OwnerUpdated() {
-    Schema.Update(_Handle, 0xE69A9E51F6D89572);
-  }
-  public void LastHitDamageLevelUpdated() {
-    Schema.Update(_Handle, 0xE69A9E51042B0657);
-  }
+    public void OwnerUpdated() => Schema.Update(_Handle, 0xE69A9E51F6D89572);
+    public void LastHitDamageLevelUpdated() => Schema.Update(_Handle, 0xE69A9E51042B0657);
 }

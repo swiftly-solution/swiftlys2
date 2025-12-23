@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CConcreteAnimParameterImpl : CAnimParameterBaseImpl, CConcreteAnimParameter {
+internal partial class CConcreteAnimParameterImpl : CAnimParameterBaseImpl, CConcreteAnimParameter
+{
+    public CConcreteAnimParameterImpl(nint handle) : base(handle) { }
 
-  public CConcreteAnimParameterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PreviewButtonOffset;
 
-  private static nint? _PreviewButtonOffset;
-
-  public ref AnimParamButton_t PreviewButton {
-    get {
-      if (_PreviewButtonOffset == null) {
-        _PreviewButtonOffset = Schema.GetOffset(0xFB67B7E37D0352C7);
-      }
-      return ref _Handle.AsRef<AnimParamButton_t>(_PreviewButtonOffset!.Value);
+    public ref AnimParamButton_t PreviewButton {
+        get {
+            _PreviewButtonOffset = _PreviewButtonOffset ?? Schema.GetOffset(0xFB67B7E37D0352C7);
+            return ref _Handle.AsRef<AnimParamButton_t>(_PreviewButtonOffset!.Value);
+        }
     }
-  }
-  private static nint? _NetworkSettingOffset;
+    private static nint? _NetworkSettingOffset;
 
-  public ref AnimParamNetworkSetting NetworkSetting {
-    get {
-      if (_NetworkSettingOffset == null) {
-        _NetworkSettingOffset = Schema.GetOffset(0xFB67B7E3EEBF9DD2);
-      }
-      return ref _Handle.AsRef<AnimParamNetworkSetting>(_NetworkSettingOffset!.Value);
+    public ref AnimParamNetworkSetting NetworkSetting {
+        get {
+            _NetworkSettingOffset = _NetworkSettingOffset ?? Schema.GetOffset(0xFB67B7E3EEBF9DD2);
+            return ref _Handle.AsRef<AnimParamNetworkSetting>(_NetworkSettingOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseMostRecentValueOffset;
+    private static nint? _UseMostRecentValueOffset;
 
-  public ref bool UseMostRecentValue {
-    get {
-      if (_UseMostRecentValueOffset == null) {
-        _UseMostRecentValueOffset = Schema.GetOffset(0xFB67B7E37693B669);
-      }
-      return ref _Handle.AsRef<bool>(_UseMostRecentValueOffset!.Value);
+    public ref bool UseMostRecentValue {
+        get {
+            _UseMostRecentValueOffset = _UseMostRecentValueOffset ?? Schema.GetOffset(0xFB67B7E37693B669);
+            return ref _Handle.AsRef<bool>(_UseMostRecentValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _AutoResetOffset;
+    private static nint? _AutoResetOffset;
 
-  public ref bool AutoReset {
-    get {
-      if (_AutoResetOffset == null) {
-        _AutoResetOffset = Schema.GetOffset(0xFB67B7E3EBC32499);
-      }
-      return ref _Handle.AsRef<bool>(_AutoResetOffset!.Value);
+    public ref bool AutoReset {
+        get {
+            _AutoResetOffset = _AutoResetOffset ?? Schema.GetOffset(0xFB67B7E3EBC32499);
+            return ref _Handle.AsRef<bool>(_AutoResetOffset!.Value);
+        }
     }
-  }
-  private static nint? _GameWritableOffset;
+    private static nint? _GameWritableOffset;
 
-  public ref bool GameWritable {
-    get {
-      if (_GameWritableOffset == null) {
-        _GameWritableOffset = Schema.GetOffset(0xFB67B7E3FB2CA7F7);
-      }
-      return ref _Handle.AsRef<bool>(_GameWritableOffset!.Value);
+    public ref bool GameWritable {
+        get {
+            _GameWritableOffset = _GameWritableOffset ?? Schema.GetOffset(0xFB67B7E3FB2CA7F7);
+            return ref _Handle.AsRef<bool>(_GameWritableOffset!.Value);
+        }
     }
-  }
-  private static nint? _GraphWritableOffset;
+    private static nint? _GraphWritableOffset;
 
-  public ref bool GraphWritable {
-    get {
-      if (_GraphWritableOffset == null) {
-        _GraphWritableOffset = Schema.GetOffset(0xFB67B7E30633E7B7);
-      }
-      return ref _Handle.AsRef<bool>(_GraphWritableOffset!.Value);
+    public ref bool GraphWritable {
+        get {
+            _GraphWritableOffset = _GraphWritableOffset ?? Schema.GetOffset(0xFB67B7E30633E7B7);
+            return ref _Handle.AsRef<bool>(_GraphWritableOffset!.Value);
+        }
     }
-  }
 
 
 }

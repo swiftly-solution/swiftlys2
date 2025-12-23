@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Inflow_BaseEntrypointImpl : CPulseCell_BaseFlowImpl, CPulseCell_Inflow_BaseEntrypoint {
+internal partial class CPulseCell_Inflow_BaseEntrypointImpl : CPulseCell_BaseFlowImpl, CPulseCell_Inflow_BaseEntrypoint
+{
+    public CPulseCell_Inflow_BaseEntrypointImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Inflow_BaseEntrypointImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EntryChunkOffset;
 
-  private static nint? _EntryChunkOffset;
-
-  public PulseRuntimeChunkIndex_t EntryChunk {
-    get {
-      if (_EntryChunkOffset == null) {
-        _EntryChunkOffset = Schema.GetOffset(0x1747DEDF279F0A60);
-      }
-      return new PulseRuntimeChunkIndex_tImpl(_Handle + _EntryChunkOffset!.Value);
+    public PulseRuntimeChunkIndex_t EntryChunk {
+        get {
+            _EntryChunkOffset = _EntryChunkOffset ?? Schema.GetOffset(0x1747DEDF279F0A60);
+            return new PulseRuntimeChunkIndex_tImpl(_Handle + _EntryChunkOffset!.Value);
+        }
     }
-  }
-  private static nint? _RegisterMapOffset;
+    private static nint? _RegisterMapOffset;
 
-  public PulseRegisterMap_t RegisterMap {
-    get {
-      if (_RegisterMapOffset == null) {
-        _RegisterMapOffset = Schema.GetOffset(0x1747DEDF7BD4CE96);
-      }
-      return new PulseRegisterMap_tImpl(_Handle + _RegisterMapOffset!.Value);
+    public PulseRegisterMap_t RegisterMap {
+        get {
+            _RegisterMapOffset = _RegisterMapOffset ?? Schema.GetOffset(0x1747DEDF7BD4CE96);
+            return new PulseRegisterMap_tImpl(_Handle + _RegisterMapOffset!.Value);
+        }
     }
-  }
 
 
 }

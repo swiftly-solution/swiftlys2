@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMultiSource : CLogicalEntity, ISchemaClass<CMultiSource> {
+public partial interface CMultiSource : CLogicalEntity, ISchemaClass<CMultiSource>
+{
+    static CMultiSource ISchemaClass<CMultiSource>.From(nint handle) => new CMultiSourceImpl(handle);
+    static int ISchemaClass<CMultiSource>.Size => 1576;
+    static string? ISchemaClass<CMultiSource>.ClassName => "multisource";
 
-  static CMultiSource ISchemaClass<CMultiSource>.From(nint handle) => new CMultiSourceImpl(handle);
-  static int ISchemaClass<CMultiSource>.Size => 1576;
-  static string? ISchemaClass<CMultiSource>.ClassName => "multisource";
 
-  
-  public ISchemaFixedArray<CHandle<CBaseEntity>> RgEntities { get; }
-  
-  public ISchemaFixedArray<int> RgTriggered { get; }
-  
-  public CEntityIOOutput OnTrigger { get; }
-  
-  public ref int Total { get; }
-  
-  public string Globalstate { get; set; }
+    public ISchemaFixedArray<CHandle<CBaseEntity>> RgEntities { get; }
+
+    public ISchemaFixedArray<int> RgTriggered { get; }
+
+    public ref CEntityIOOutput OnTrigger { get; }
+
+    public ref int Total { get; }
+
+    public string Globalstate { get; set; }
 
 
 }

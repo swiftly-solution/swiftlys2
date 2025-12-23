@@ -6,49 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFogControllerImpl : CBaseEntityImpl, CFogController {
+internal partial class CFogControllerImpl : CBaseEntityImpl, CFogController
+{
+    public CFogControllerImpl(nint handle) : base(handle) { }
 
-  public CFogControllerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FogOffset;
 
-  private static nint? _FogOffset;
-
-  public fogparams_t Fog {
-    get {
-      if (_FogOffset == null) {
-        _FogOffset = Schema.GetOffset(0x719804B29014635F);
-      }
-      return new fogparams_tImpl(_Handle + _FogOffset!.Value);
+    public fogparams_t Fog {
+        get {
+            _FogOffset = _FogOffset ?? Schema.GetOffset(0x719804B29014635F);
+            return new fogparams_tImpl(_Handle + _FogOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseAnglesOffset;
+    private static nint? _UseAnglesOffset;
 
-  public ref bool UseAngles {
-    get {
-      if (_UseAnglesOffset == null) {
-        _UseAnglesOffset = Schema.GetOffset(0x719804B2434C3DB4);
-      }
-      return ref _Handle.AsRef<bool>(_UseAnglesOffset!.Value);
+    public ref bool UseAngles {
+        get {
+            _UseAnglesOffset = _UseAnglesOffset ?? Schema.GetOffset(0x719804B2434C3DB4);
+            return ref _Handle.AsRef<bool>(_UseAnglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChangedVariablesOffset;
+    private static nint? _ChangedVariablesOffset;
 
-  public ref int ChangedVariables {
-    get {
-      if (_ChangedVariablesOffset == null) {
-        _ChangedVariablesOffset = Schema.GetOffset(0x719804B2BC173F39);
-      }
-      return ref _Handle.AsRef<int>(_ChangedVariablesOffset!.Value);
+    public ref int ChangedVariables {
+        get {
+            _ChangedVariablesOffset = _ChangedVariablesOffset ?? Schema.GetOffset(0x719804B2BC173F39);
+            return ref _Handle.AsRef<int>(_ChangedVariablesOffset!.Value);
+        }
     }
-  }
 
-  public void FogUpdated() {
-    Schema.Update(_Handle, 0x719804B29014635F);
-  }
+    public void FogUpdated() => Schema.Update(_Handle, 0x719804B29014635F);
 }

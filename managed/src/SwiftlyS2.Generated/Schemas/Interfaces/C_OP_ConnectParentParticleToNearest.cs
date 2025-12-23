@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ConnectParentParticleToNearest : CParticleFunctionOperator, ISchemaClass<C_OP_ConnectParentParticleToNearest> {
+public partial interface C_OP_ConnectParentParticleToNearest : CParticleFunctionOperator, ISchemaClass<C_OP_ConnectParentParticleToNearest>
+{
+    static C_OP_ConnectParentParticleToNearest ISchemaClass<C_OP_ConnectParentParticleToNearest>.From(nint handle) => new C_OP_ConnectParentParticleToNearestImpl(handle);
+    static int ISchemaClass<C_OP_ConnectParentParticleToNearest>.Size => 1216;
+    static string? ISchemaClass<C_OP_ConnectParentParticleToNearest>.ClassName => null;
 
-  static C_OP_ConnectParentParticleToNearest ISchemaClass<C_OP_ConnectParentParticleToNearest>.From(nint handle) => new C_OP_ConnectParentParticleToNearestImpl(handle);
-  static int ISchemaClass<C_OP_ConnectParentParticleToNearest>.Size => 1216;
-  static string? ISchemaClass<C_OP_ConnectParentParticleToNearest>.ClassName => null;
 
-  
-  public ref int FirstControlPoint { get; }
-  
-  public ref int SecondControlPoint { get; }
-  
-  public ref bool UseRadius { get; }
-  
-  public CParticleCollectionFloatInput RadiusScale { get; }
-  
-  public CParticleCollectionFloatInput ParentRadiusScale { get; }
+    public ref int FirstControlPoint { get; }
+
+    public ref int SecondControlPoint { get; }
+
+    public ref bool UseRadius { get; }
+
+    public CParticleCollectionFloatInput RadiusScale { get; }
+
+    public CParticleCollectionFloatInput ParentRadiusScale { get; }
 
 
 }

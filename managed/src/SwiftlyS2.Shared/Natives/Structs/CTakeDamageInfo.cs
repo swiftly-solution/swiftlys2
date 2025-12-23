@@ -47,8 +47,8 @@ public unsafe struct CTakeDamageInfo
     public TakeDamageFlags_t DamageFlags;
     public CString DamageSourceName;
 
-    [Obsolete("This field somehow holds garbage value in game. Use ActualHitGroup instead.")]
     /// <see cref="ActualHitGroup"/>
+    [Obsolete("This field somehow holds garbage value in game. Use ActualHitGroup instead.")]
     public HitGroup_t HitGroupId;
     public int NumObjectsPenetrated;
     public float FriendlyFireDamageReductionRatio;
@@ -72,7 +72,7 @@ public unsafe struct CTakeDamageInfo
         }
     }
 
-    public CTakeDamageInfo(CBaseEntity inflictor, CBaseEntity attacker, CBaseEntity ability, float flDamage, DamageTypes_t bitsDamageType)
+    public CTakeDamageInfo( CBaseEntity inflictor, CBaseEntity attacker, CBaseEntity ability, float flDamage, DamageTypes_t bitsDamageType )
     {
         Vector vec3_origin = Vector.Zero;
 
@@ -82,10 +82,20 @@ public unsafe struct CTakeDamageInfo
         }
     }
 
+    public CTakeDamageInfo( float flDamage, DamageTypes_t bitsDamageType, CBaseEntity? inflictor = null, CBaseEntity? attacker = null, CBaseEntity? ability = null )
+    {
+        Vector vec3_origin = Vector.Zero;
+
+        fixed (CTakeDamageInfo* info = &this)
+        {
+            GameFunctions.CTakeDamageInfoConstructor(info, inflictor?.Address ?? IntPtr.Zero, attacker?.Address ?? IntPtr.Zero, ability?.Address ?? IntPtr.Zero, &vec3_origin, &vec3_origin, flDamage, (int)bitsDamageType, 0, null);
+        }
+    }
+
     public HitGroup_t ActualHitGroup => Trace->HitBox->m_nGroupId;
 }
 
-[StructLayout(LayoutKind.Sequential,Pack=8,Size=40)]
+[StructLayout(LayoutKind.Sequential, Pack = 8, Size = 40)]
 public unsafe struct CTakeDamageResult
 {
     public CTakeDamageInfo* OriginatingInfo;

@@ -8,40 +8,40 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerResource : CBaseEntity, ISchemaClass<CCSPlayerResource> {
+public partial interface CCSPlayerResource : CBaseEntity, ISchemaClass<CCSPlayerResource>
+{
+    static CCSPlayerResource ISchemaClass<CCSPlayerResource>.From(nint handle) => new CCSPlayerResourceImpl(handle);
+    static int ISchemaClass<CCSPlayerResource>.Size => 1416;
+    static string? ISchemaClass<CCSPlayerResource>.ClassName => "cs_player_manager";
 
-  static CCSPlayerResource ISchemaClass<CCSPlayerResource>.From(nint handle) => new CCSPlayerResourceImpl(handle);
-  static int ISchemaClass<CCSPlayerResource>.Size => 1416;
-  static string? ISchemaClass<CCSPlayerResource>.ClassName => "cs_player_manager";
 
-  
-  public ISchemaFixedArray<bool> HostageAlive { get; }
-  
-  public ISchemaFixedArray<bool> IsHostageFollowingSomeone { get; }
-  
-  public ISchemaFixedArray<uint> HostageEntityIDs { get; }
-  
-  public ref Vector BombsiteCenterA { get; }
-  
-  public ref Vector BombsiteCenterB { get; }
-  
-  public ISchemaFixedArray<int> HostageRescueX { get; }
-  
-  public ISchemaFixedArray<int> HostageRescueY { get; }
-  
-  public ISchemaFixedArray<int> HostageRescueZ { get; }
-  
-  public ref bool EndMatchNextMapAllVoted { get; }
-  
-  public ref bool FoundGoalPositions { get; }
+    public ISchemaFixedArray<bool> HostageAlive { get; }
 
-  public void HostageAliveUpdated();
-  public void IsHostageFollowingSomeoneUpdated();
-  public void HostageEntityIDsUpdated();
-  public void BombsiteCenterAUpdated();
-  public void BombsiteCenterBUpdated();
-  public void HostageRescueXUpdated();
-  public void HostageRescueYUpdated();
-  public void HostageRescueZUpdated();
-  public void EndMatchNextMapAllVotedUpdated();
+    public ISchemaFixedArray<bool> IsHostageFollowingSomeone { get; }
+
+    public ISchemaFixedArray<uint> HostageEntityIDs { get; }
+
+    public ref Vector BombsiteCenterA { get; }
+
+    public ref Vector BombsiteCenterB { get; }
+
+    public ISchemaFixedArray<int> HostageRescueX { get; }
+
+    public ISchemaFixedArray<int> HostageRescueY { get; }
+
+    public ISchemaFixedArray<int> HostageRescueZ { get; }
+
+    public ref bool EndMatchNextMapAllVoted { get; }
+
+    public ref bool FoundGoalPositions { get; }
+
+    public void HostageAliveUpdated();
+    public void IsHostageFollowingSomeoneUpdated();
+    public void HostageEntityIDsUpdated();
+    public void BombsiteCenterAUpdated();
+    public void BombsiteCenterBUpdated();
+    public void HostageRescueXUpdated();
+    public void HostageRescueYUpdated();
+    public void HostageRescueZUpdated();
+    public void EndMatchNextMapAllVotedUpdated();
 }

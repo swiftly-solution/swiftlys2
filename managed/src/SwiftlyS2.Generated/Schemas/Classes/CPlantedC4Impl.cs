@@ -6,321 +6,240 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4 {
+internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
+{
+    public CPlantedC4Impl(nint handle) : base(handle) { }
 
-  public CPlantedC4Impl(nint handle) : base(handle) {
-  }
+    private static nint? _BombTickingOffset;
 
-  private static nint? _BombTickingOffset;
-
-  public ref bool BombTicking {
-    get {
-      if (_BombTickingOffset == null) {
-        _BombTickingOffset = Schema.GetOffset(0xE1614C81CA7488E0);
-      }
-      return ref _Handle.AsRef<bool>(_BombTickingOffset!.Value);
+    public ref bool BombTicking {
+        get {
+            _BombTickingOffset = _BombTickingOffset ?? Schema.GetOffset(0xE1614C81CA7488E0);
+            return ref _Handle.AsRef<bool>(_BombTickingOffset!.Value);
+        }
     }
-  }
-  private static nint? _C4BlowOffset;
+    private static nint? _C4BlowOffset;
 
-  public GameTime_t C4Blow {
-    get {
-      if (_C4BlowOffset == null) {
-        _C4BlowOffset = Schema.GetOffset(0xE1614C812C4CFDAC);
-      }
-      return new GameTime_tImpl(_Handle + _C4BlowOffset!.Value);
+    public GameTime_t C4Blow {
+        get {
+            _C4BlowOffset = _C4BlowOffset ?? Schema.GetOffset(0xE1614C812C4CFDAC);
+            return new GameTime_tImpl(_Handle + _C4BlowOffset!.Value);
+        }
     }
-  }
-  private static nint? _BombSiteOffset;
+    private static nint? _BombSiteOffset;
 
-  public ref int BombSite {
-    get {
-      if (_BombSiteOffset == null) {
-        _BombSiteOffset = Schema.GetOffset(0xE1614C81E027AC16);
-      }
-      return ref _Handle.AsRef<int>(_BombSiteOffset!.Value);
+    public ref int BombSite {
+        get {
+            _BombSiteOffset = _BombSiteOffset ?? Schema.GetOffset(0xE1614C81E027AC16);
+            return ref _Handle.AsRef<int>(_BombSiteOffset!.Value);
+        }
     }
-  }
-  private static nint? _SourceSoundscapeHashOffset;
+    private static nint? _SourceSoundscapeHashOffset;
 
-  public ref int SourceSoundscapeHash {
-    get {
-      if (_SourceSoundscapeHashOffset == null) {
-        _SourceSoundscapeHashOffset = Schema.GetOffset(0xE1614C8185EE0527);
-      }
-      return ref _Handle.AsRef<int>(_SourceSoundscapeHashOffset!.Value);
+    public ref int SourceSoundscapeHash {
+        get {
+            _SourceSoundscapeHashOffset = _SourceSoundscapeHashOffset ?? Schema.GetOffset(0xE1614C8185EE0527);
+            return ref _Handle.AsRef<int>(_SourceSoundscapeHashOffset!.Value);
+        }
     }
-  }
-  private static nint? _AbortDetonationBecauseWorldIsFrozenOffset;
+    private static nint? _AbortDetonationBecauseWorldIsFrozenOffset;
 
-  public ref bool AbortDetonationBecauseWorldIsFrozen {
-    get {
-      if (_AbortDetonationBecauseWorldIsFrozenOffset == null) {
-        _AbortDetonationBecauseWorldIsFrozenOffset = Schema.GetOffset(0xE1614C812D71EDD6);
-      }
-      return ref _Handle.AsRef<bool>(_AbortDetonationBecauseWorldIsFrozenOffset!.Value);
+    public ref bool AbortDetonationBecauseWorldIsFrozen {
+        get {
+            _AbortDetonationBecauseWorldIsFrozenOffset = _AbortDetonationBecauseWorldIsFrozenOffset ?? Schema.GetOffset(0xE1614C812D71EDD6);
+            return ref _Handle.AsRef<bool>(_AbortDetonationBecauseWorldIsFrozenOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttributeManagerOffset;
+    private static nint? _AttributeManagerOffset;
 
-  public CAttributeContainer AttributeManager {
-    get {
-      if (_AttributeManagerOffset == null) {
-        _AttributeManagerOffset = Schema.GetOffset(0xE1614C81537B0586);
-      }
-      return new CAttributeContainerImpl(_Handle + _AttributeManagerOffset!.Value);
+    public CAttributeContainer AttributeManager {
+        get {
+            _AttributeManagerOffset = _AttributeManagerOffset ?? Schema.GetOffset(0xE1614C81537B0586);
+            return new CAttributeContainerImpl(_Handle + _AttributeManagerOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnBombDefusedOffset;
+    private static nint? _OnBombDefusedOffset;
 
-  public CEntityIOOutput OnBombDefused {
-    get {
-      if (_OnBombDefusedOffset == null) {
-        _OnBombDefusedOffset = Schema.GetOffset(0xE1614C81BCDAD16E);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnBombDefusedOffset!.Value);
+    public ref CEntityIOOutput OnBombDefused {
+        get {
+            _OnBombDefusedOffset = _OnBombDefusedOffset ?? Schema.GetOffset(0xE1614C81BCDAD16E);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombDefusedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnBombBeginDefuseOffset;
+    private static nint? _OnBombBeginDefuseOffset;
 
-  public CEntityIOOutput OnBombBeginDefuse {
-    get {
-      if (_OnBombBeginDefuseOffset == null) {
-        _OnBombBeginDefuseOffset = Schema.GetOffset(0xE1614C81CD3D21A7);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnBombBeginDefuseOffset!.Value);
+    public ref CEntityIOOutput OnBombBeginDefuse {
+        get {
+            _OnBombBeginDefuseOffset = _OnBombBeginDefuseOffset ?? Schema.GetOffset(0xE1614C81CD3D21A7);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombBeginDefuseOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnBombDefuseAbortedOffset;
+    private static nint? _OnBombDefuseAbortedOffset;
 
-  public CEntityIOOutput OnBombDefuseAborted {
-    get {
-      if (_OnBombDefuseAbortedOffset == null) {
-        _OnBombDefuseAbortedOffset = Schema.GetOffset(0xE1614C81DCF21D69);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnBombDefuseAbortedOffset!.Value);
+    public ref CEntityIOOutput OnBombDefuseAborted {
+        get {
+            _OnBombDefuseAbortedOffset = _OnBombDefuseAbortedOffset ?? Schema.GetOffset(0xE1614C81DCF21D69);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombDefuseAbortedOffset!.Value);
+        }
     }
-  }
-  private static nint? _CannotBeDefusedOffset;
+    private static nint? _CannotBeDefusedOffset;
 
-  public ref bool CannotBeDefused {
-    get {
-      if (_CannotBeDefusedOffset == null) {
-        _CannotBeDefusedOffset = Schema.GetOffset(0xE1614C81AF7C9CFF);
-      }
-      return ref _Handle.AsRef<bool>(_CannotBeDefusedOffset!.Value);
+    public ref bool CannotBeDefused {
+        get {
+            _CannotBeDefusedOffset = _CannotBeDefusedOffset ?? Schema.GetOffset(0xE1614C81AF7C9CFF);
+            return ref _Handle.AsRef<bool>(_CannotBeDefusedOffset!.Value);
+        }
     }
-  }
-  private static nint? _EntitySpottedStateOffset;
+    private static nint? _EntitySpottedStateOffset;
 
-  public EntitySpottedState_t EntitySpottedState {
-    get {
-      if (_EntitySpottedStateOffset == null) {
-        _EntitySpottedStateOffset = Schema.GetOffset(0xE1614C81032B547C);
-      }
-      return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+    public EntitySpottedState_t EntitySpottedState {
+        get {
+            _EntitySpottedStateOffset = _EntitySpottedStateOffset ?? Schema.GetOffset(0xE1614C81032B547C);
+            return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpotRulesOffset;
+    private static nint? _SpotRulesOffset;
 
-  public ref int SpotRules {
-    get {
-      if (_SpotRulesOffset == null) {
-        _SpotRulesOffset = Schema.GetOffset(0xE1614C81776CCE44);
-      }
-      return ref _Handle.AsRef<int>(_SpotRulesOffset!.Value);
+    public ref int SpotRules {
+        get {
+            _SpotRulesOffset = _SpotRulesOffset ?? Schema.GetOffset(0xE1614C81776CCE44);
+            return ref _Handle.AsRef<int>(_SpotRulesOffset!.Value);
+        }
     }
-  }
-  private static nint? _TrainingPlacedByPlayerOffset;
+    private static nint? _TrainingPlacedByPlayerOffset;
 
-  public ref bool TrainingPlacedByPlayer {
-    get {
-      if (_TrainingPlacedByPlayerOffset == null) {
-        _TrainingPlacedByPlayerOffset = Schema.GetOffset(0xE1614C818D8A976E);
-      }
-      return ref _Handle.AsRef<bool>(_TrainingPlacedByPlayerOffset!.Value);
+    public ref bool TrainingPlacedByPlayer {
+        get {
+            _TrainingPlacedByPlayerOffset = _TrainingPlacedByPlayerOffset ?? Schema.GetOffset(0xE1614C818D8A976E);
+            return ref _Handle.AsRef<bool>(_TrainingPlacedByPlayerOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasExplodedOffset;
+    private static nint? _HasExplodedOffset;
 
-  public ref bool HasExploded {
-    get {
-      if (_HasExplodedOffset == null) {
-        _HasExplodedOffset = Schema.GetOffset(0xE1614C814F35E7B0);
-      }
-      return ref _Handle.AsRef<bool>(_HasExplodedOffset!.Value);
+    public ref bool HasExploded {
+        get {
+            _HasExplodedOffset = _HasExplodedOffset ?? Schema.GetOffset(0xE1614C814F35E7B0);
+            return ref _Handle.AsRef<bool>(_HasExplodedOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimerLengthOffset;
+    private static nint? _TimerLengthOffset;
 
-  public ref float TimerLength {
-    get {
-      if (_TimerLengthOffset == null) {
-        _TimerLengthOffset = Schema.GetOffset(0xE1614C815758DBE8);
-      }
-      return ref _Handle.AsRef<float>(_TimerLengthOffset!.Value);
+    public ref float TimerLength {
+        get {
+            _TimerLengthOffset = _TimerLengthOffset ?? Schema.GetOffset(0xE1614C815758DBE8);
+            return ref _Handle.AsRef<float>(_TimerLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _BeingDefusedOffset;
+    private static nint? _BeingDefusedOffset;
 
-  public ref bool BeingDefused {
-    get {
-      if (_BeingDefusedOffset == null) {
-        _BeingDefusedOffset = Schema.GetOffset(0xE1614C81E52E1146);
-      }
-      return ref _Handle.AsRef<bool>(_BeingDefusedOffset!.Value);
+    public ref bool BeingDefused {
+        get {
+            _BeingDefusedOffset = _BeingDefusedOffset ?? Schema.GetOffset(0xE1614C81E52E1146);
+            return ref _Handle.AsRef<bool>(_BeingDefusedOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastDefuseTimeOffset;
+    private static nint? _LastDefuseTimeOffset;
 
-  public GameTime_t LastDefuseTime {
-    get {
-      if (_LastDefuseTimeOffset == null) {
-        _LastDefuseTimeOffset = Schema.GetOffset(0xE1614C81F3BD810E);
-      }
-      return new GameTime_tImpl(_Handle + _LastDefuseTimeOffset!.Value);
+    public GameTime_t LastDefuseTime {
+        get {
+            _LastDefuseTimeOffset = _LastDefuseTimeOffset ?? Schema.GetOffset(0xE1614C81F3BD810E);
+            return new GameTime_tImpl(_Handle + _LastDefuseTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefuseLengthOffset;
+    private static nint? _DefuseLengthOffset;
 
-  public ref float DefuseLength {
-    get {
-      if (_DefuseLengthOffset == null) {
-        _DefuseLengthOffset = Schema.GetOffset(0xE1614C8164CC4751);
-      }
-      return ref _Handle.AsRef<float>(_DefuseLengthOffset!.Value);
+    public ref float DefuseLength {
+        get {
+            _DefuseLengthOffset = _DefuseLengthOffset ?? Schema.GetOffset(0xE1614C8164CC4751);
+            return ref _Handle.AsRef<float>(_DefuseLengthOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefuseCountDownOffset;
+    private static nint? _DefuseCountDownOffset;
 
-  public GameTime_t DefuseCountDown {
-    get {
-      if (_DefuseCountDownOffset == null) {
-        _DefuseCountDownOffset = Schema.GetOffset(0xE1614C81BCF3DB7C);
-      }
-      return new GameTime_tImpl(_Handle + _DefuseCountDownOffset!.Value);
+    public GameTime_t DefuseCountDown {
+        get {
+            _DefuseCountDownOffset = _DefuseCountDownOffset ?? Schema.GetOffset(0xE1614C81BCF3DB7C);
+            return new GameTime_tImpl(_Handle + _DefuseCountDownOffset!.Value);
+        }
     }
-  }
-  private static nint? _BombDefusedOffset;
+    private static nint? _BombDefusedOffset;
 
-  public ref bool BombDefused {
-    get {
-      if (_BombDefusedOffset == null) {
-        _BombDefusedOffset = Schema.GetOffset(0xE1614C81CA9F868D);
-      }
-      return ref _Handle.AsRef<bool>(_BombDefusedOffset!.Value);
+    public ref bool BombDefused {
+        get {
+            _BombDefusedOffset = _BombDefusedOffset ?? Schema.GetOffset(0xE1614C81CA9F868D);
+            return ref _Handle.AsRef<bool>(_BombDefusedOffset!.Value);
+        }
     }
-  }
-  private static nint? _BombDefuserOffset;
+    private static nint? _BombDefuserOffset;
 
-  public ref CHandle<CCSPlayerPawn> BombDefuser {
-    get {
-      if (_BombDefuserOffset == null) {
-        _BombDefuserOffset = Schema.GetOffset(0xE1614C8174E01381);
-      }
-      return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_BombDefuserOffset!.Value);
+    public ref CHandle<CCSPlayerPawn> BombDefuser {
+        get {
+            _BombDefuserOffset = _BombDefuserOffset ?? Schema.GetOffset(0xE1614C8174E01381);
+            return ref _Handle.AsRef<CHandle<CCSPlayerPawn>>(_BombDefuserOffset!.Value);
+        }
     }
-  }
-  private static nint? _ProgressBarTimeOffset;
+    private static nint? _ProgressBarTimeOffset;
 
-  public ref int ProgressBarTime {
-    get {
-      if (_ProgressBarTimeOffset == null) {
-        _ProgressBarTimeOffset = Schema.GetOffset(0xE1614C81FFF19E89);
-      }
-      return ref _Handle.AsRef<int>(_ProgressBarTimeOffset!.Value);
+    public ref int ProgressBarTime {
+        get {
+            _ProgressBarTimeOffset = _ProgressBarTimeOffset ?? Schema.GetOffset(0xE1614C81FFF19E89);
+            return ref _Handle.AsRef<int>(_ProgressBarTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _VoiceAlertFiredOffset;
+    private static nint? _VoiceAlertFiredOffset;
 
-  public ref bool VoiceAlertFired {
-    get {
-      if (_VoiceAlertFiredOffset == null) {
-        _VoiceAlertFiredOffset = Schema.GetOffset(0xE1614C8139790C5F);
-      }
-      return ref _Handle.AsRef<bool>(_VoiceAlertFiredOffset!.Value);
+    public ref bool VoiceAlertFired {
+        get {
+            _VoiceAlertFiredOffset = _VoiceAlertFiredOffset ?? Schema.GetOffset(0xE1614C8139790C5F);
+            return ref _Handle.AsRef<bool>(_VoiceAlertFiredOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<bool> VoiceAlertPlayed {
-    get => new SchemaFixedArray<bool>(_Handle, 0xE1614C812559EA7A, 4, 1, 1);
-  }
-  private static nint? _NextBotBeepTimeOffset;
-
-  public GameTime_t NextBotBeepTime {
-    get {
-      if (_NextBotBeepTimeOffset == null) {
-        _NextBotBeepTimeOffset = Schema.GetOffset(0xE1614C81DCAF5642);
-      }
-      return new GameTime_tImpl(_Handle + _NextBotBeepTimeOffset!.Value);
+    public ISchemaFixedArray<bool> VoiceAlertPlayed {
+        get => new SchemaFixedArray<bool>(_Handle, 0xE1614C812559EA7A, 4, 1, 1);
     }
-  }
-  private static nint? _CatchUpToPlayerEyeOffset;
+    private static nint? _NextBotBeepTimeOffset;
 
-  public ref QAngle CatchUpToPlayerEye {
-    get {
-      if (_CatchUpToPlayerEyeOffset == null) {
-        _CatchUpToPlayerEyeOffset = Schema.GetOffset(0xE1614C816AE78258);
-      }
-      return ref _Handle.AsRef<QAngle>(_CatchUpToPlayerEyeOffset!.Value);
+    public GameTime_t NextBotBeepTime {
+        get {
+            _NextBotBeepTimeOffset = _NextBotBeepTimeOffset ?? Schema.GetOffset(0xE1614C81DCAF5642);
+            return new GameTime_tImpl(_Handle + _NextBotBeepTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastSpinDetectionTimeOffset;
+    private static nint? _CatchUpToPlayerEyeOffset;
 
-  public GameTime_t LastSpinDetectionTime {
-    get {
-      if (_LastSpinDetectionTimeOffset == null) {
-        _LastSpinDetectionTimeOffset = Schema.GetOffset(0xE1614C811BF3E683);
-      }
-      return new GameTime_tImpl(_Handle + _LastSpinDetectionTimeOffset!.Value);
+    public ref QAngle CatchUpToPlayerEye {
+        get {
+            _CatchUpToPlayerEyeOffset = _CatchUpToPlayerEyeOffset ?? Schema.GetOffset(0xE1614C816AE78258);
+            return ref _Handle.AsRef<QAngle>(_CatchUpToPlayerEyeOffset!.Value);
+        }
     }
-  }
+    private static nint? _LastSpinDetectionTimeOffset;
 
-  public void BombTickingUpdated() {
-    Schema.Update(_Handle, 0xE1614C81CA7488E0);
-  }
-  public void C4BlowUpdated() {
-    Schema.Update(_Handle, 0xE1614C812C4CFDAC);
-  }
-  public void BombSiteUpdated() {
-    Schema.Update(_Handle, 0xE1614C81E027AC16);
-  }
-  public void SourceSoundscapeHashUpdated() {
-    Schema.Update(_Handle, 0xE1614C8185EE0527);
-  }
-  public void AttributeManagerUpdated() {
-    Schema.Update(_Handle, 0xE1614C81537B0586);
-  }
-  public void CannotBeDefusedUpdated() {
-    Schema.Update(_Handle, 0xE1614C81AF7C9CFF);
-  }
-  public void EntitySpottedStateUpdated() {
-    Schema.Update(_Handle, 0xE1614C81032B547C);
-  }
-  public void HasExplodedUpdated() {
-    Schema.Update(_Handle, 0xE1614C814F35E7B0);
-  }
-  public void TimerLengthUpdated() {
-    Schema.Update(_Handle, 0xE1614C815758DBE8);
-  }
-  public void BeingDefusedUpdated() {
-    Schema.Update(_Handle, 0xE1614C81E52E1146);
-  }
-  public void DefuseLengthUpdated() {
-    Schema.Update(_Handle, 0xE1614C8164CC4751);
-  }
-  public void DefuseCountDownUpdated() {
-    Schema.Update(_Handle, 0xE1614C81BCF3DB7C);
-  }
-  public void BombDefusedUpdated() {
-    Schema.Update(_Handle, 0xE1614C81CA9F868D);
-  }
-  public void BombDefuserUpdated() {
-    Schema.Update(_Handle, 0xE1614C8174E01381);
-  }
+    public GameTime_t LastSpinDetectionTime {
+        get {
+            _LastSpinDetectionTimeOffset = _LastSpinDetectionTimeOffset ?? Schema.GetOffset(0xE1614C811BF3E683);
+            return new GameTime_tImpl(_Handle + _LastSpinDetectionTimeOffset!.Value);
+        }
+    }
+
+    public void BombTickingUpdated() => Schema.Update(_Handle, 0xE1614C81CA7488E0);
+    public void C4BlowUpdated() => Schema.Update(_Handle, 0xE1614C812C4CFDAC);
+    public void BombSiteUpdated() => Schema.Update(_Handle, 0xE1614C81E027AC16);
+    public void SourceSoundscapeHashUpdated() => Schema.Update(_Handle, 0xE1614C8185EE0527);
+    public void AttributeManagerUpdated() => Schema.Update(_Handle, 0xE1614C81537B0586);
+    public void CannotBeDefusedUpdated() => Schema.Update(_Handle, 0xE1614C81AF7C9CFF);
+    public void EntitySpottedStateUpdated() => Schema.Update(_Handle, 0xE1614C81032B547C);
+    public void HasExplodedUpdated() => Schema.Update(_Handle, 0xE1614C814F35E7B0);
+    public void TimerLengthUpdated() => Schema.Update(_Handle, 0xE1614C815758DBE8);
+    public void BeingDefusedUpdated() => Schema.Update(_Handle, 0xE1614C81E52E1146);
+    public void DefuseLengthUpdated() => Schema.Update(_Handle, 0xE1614C8164CC4751);
+    public void DefuseCountDownUpdated() => Schema.Update(_Handle, 0xE1614C81BCF3DB7C);
+    public void BombDefusedUpdated() => Schema.Update(_Handle, 0xE1614C81CA9F868D);
+    public void BombDefuserUpdated() => Schema.Update(_Handle, 0xE1614C8174E01381);
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapBoundingVolumetoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapBoundingVolumetoCP> {
+public partial interface C_OP_RemapBoundingVolumetoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapBoundingVolumetoCP>
+{
+    static C_OP_RemapBoundingVolumetoCP ISchemaClass<C_OP_RemapBoundingVolumetoCP>.From(nint handle) => new C_OP_RemapBoundingVolumetoCPImpl(handle);
+    static int ISchemaClass<C_OP_RemapBoundingVolumetoCP>.Size => 496;
+    static string? ISchemaClass<C_OP_RemapBoundingVolumetoCP>.ClassName => null;
 
-  static C_OP_RemapBoundingVolumetoCP ISchemaClass<C_OP_RemapBoundingVolumetoCP>.From(nint handle) => new C_OP_RemapBoundingVolumetoCPImpl(handle);
-  static int ISchemaClass<C_OP_RemapBoundingVolumetoCP>.Size => 496;
-  static string? ISchemaClass<C_OP_RemapBoundingVolumetoCP>.ClassName => null;
 
-  
-  public ref int OutControlPointNumber { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
+    public ref int OutControlPointNumber { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
 
 
 }

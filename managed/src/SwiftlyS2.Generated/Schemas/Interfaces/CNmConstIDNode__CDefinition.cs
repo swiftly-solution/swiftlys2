@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmConstIDNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmConstIDNode__CDefinition> {
+public partial interface CNmConstIDNode__CDefinition : CNmIDValueNode__CDefinition, ISchemaClass<CNmConstIDNode__CDefinition>
+{
+    static CNmConstIDNode__CDefinition ISchemaClass<CNmConstIDNode__CDefinition>.From(nint handle) => new CNmConstIDNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmConstIDNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmConstIDNode__CDefinition>.ClassName => null;
 
-  static CNmConstIDNode__CDefinition ISchemaClass<CNmConstIDNode__CDefinition>.From(nint handle) => new CNmConstIDNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmConstIDNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmConstIDNode__CDefinition>.ClassName => null;
 
-  
-  public ref CGlobalSymbol Value { get; }
+    public ref CGlobalSymbol Value { get; }
 
 
 }

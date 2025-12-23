@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmAndNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmAndNode__CDefinition> {
+public partial interface CNmAndNode__CDefinition : CNmBoolValueNode__CDefinition, ISchemaClass<CNmAndNode__CDefinition>
+{
+    static CNmAndNode__CDefinition ISchemaClass<CNmAndNode__CDefinition>.From(nint handle) => new CNmAndNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmAndNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmAndNode__CDefinition>.ClassName => null;
 
-  static CNmAndNode__CDefinition ISchemaClass<CNmAndNode__CDefinition>.From(nint handle) => new CNmAndNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmAndNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmAndNode__CDefinition>.ClassName => null;
 
-  
-  // CUtlLeanVectorFixedGrowable< int16, 4 >
-  public SchemaUntypedField ConditionNodeIndices { get; }
+    // CUtlLeanVectorFixedGrowable< int16, 4 >
+    public SchemaUntypedField ConditionNodeIndices { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CPathMetricEvaluator> {
+public partial interface CPathMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CPathMetricEvaluator>
+{
+    static CPathMetricEvaluator ISchemaClass<CPathMetricEvaluator>.From(nint handle) => new CPathMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CPathMetricEvaluator>.Size => 120;
+    static string? ISchemaClass<CPathMetricEvaluator>.ClassName => null;
 
-  static CPathMetricEvaluator ISchemaClass<CPathMetricEvaluator>.From(nint handle) => new CPathMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CPathMetricEvaluator>.Size => 120;
-  static string? ISchemaClass<CPathMetricEvaluator>.ClassName => null;
 
-  
-  public ref CUtlVector<float> PathTimeSamples { get; }
-  
-  public ref float Distance { get; }
-  
-  public ref bool ExtrapolateMovement { get; }
-  
-  public ref float MinExtrapolationSpeed { get; }
+    public ref CUtlVector<float> PathTimeSamples { get; }
+
+    public ref float Distance { get; }
+
+    public ref bool ExtrapolateMovement { get; }
+
+    public ref float MinExtrapolationSpeed { get; }
 
 
 }

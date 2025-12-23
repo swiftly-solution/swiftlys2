@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRotDoor : CBaseDoor, ISchemaClass<CRotDoor> {
+public partial interface CRotDoor : CBaseDoor, ISchemaClass<CRotDoor>
+{
+    static CRotDoor ISchemaClass<CRotDoor>.From(nint handle) => new CRotDoorImpl(handle);
+    static int ISchemaClass<CRotDoor>.Size => 2672;
+    static string? ISchemaClass<CRotDoor>.ClassName => "func_door_rotating";
 
-  static CRotDoor ISchemaClass<CRotDoor>.From(nint handle) => new CRotDoorImpl(handle);
-  static int ISchemaClass<CRotDoor>.Size => 2672;
-  static string? ISchemaClass<CRotDoor>.ClassName => "func_door_rotating";
 
-  
-  public ref bool SolidBsp { get; }
+    public ref bool SolidBsp { get; }
 
 
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStateNodeTransitionData : ISchemaClass<CStateNodeTransitionData> {
+public partial interface CStateNodeTransitionData : ISchemaClass<CStateNodeTransitionData>
+{
+    static CStateNodeTransitionData ISchemaClass<CStateNodeTransitionData>.From(nint handle) => new CStateNodeTransitionDataImpl(handle);
+    static int ISchemaClass<CStateNodeTransitionData>.Size => 28;
+    static string? ISchemaClass<CStateNodeTransitionData>.ClassName => null;
 
-  static CStateNodeTransitionData ISchemaClass<CStateNodeTransitionData>.From(nint handle) => new CStateNodeTransitionDataImpl(handle);
-  static int ISchemaClass<CStateNodeTransitionData>.Size => 28;
-  static string? ISchemaClass<CStateNodeTransitionData>.ClassName => null;
 
-  
-  public CBlendCurve Curve { get; }
-  
-  // CAnimValue< float32 >
-  public SchemaUntypedField BlendDuration { get; }
-  
-  // CAnimValue< float32 >
-  public SchemaUntypedField ResetCycleValue { get; }
-  
-  // bitfield
-  public SchemaUntypedField Reset { get; }
-  
-  // bitfield
-  public SchemaUntypedField ResetCycleOption { get; }
+    public CBlendCurve Curve { get; }
+
+    // CAnimValue< float32 >
+    public SchemaUntypedField BlendDuration { get; }
+
+    // CAnimValue< float32 >
+    public SchemaUntypedField ResetCycleValue { get; }
+
+    // bitfield
+    public SchemaUntypedField Reset { get; }
+
+    // bitfield
+    public SchemaUntypedField ResetCycleOption { get; }
 
 
 }

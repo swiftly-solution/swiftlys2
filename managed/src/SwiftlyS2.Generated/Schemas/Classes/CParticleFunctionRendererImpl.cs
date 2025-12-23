@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CParticleFunctionRendererImpl : CParticleFunctionImpl, CParticleFunctionRenderer {
+internal partial class CParticleFunctionRendererImpl : CParticleFunctionImpl, CParticleFunctionRenderer
+{
+    public CParticleFunctionRendererImpl(nint handle) : base(handle) { }
 
-  public CParticleFunctionRendererImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VisibilityInputsOffset;
 
-  private static nint? _VisibilityInputsOffset;
-
-  public CParticleVisibilityInputs VisibilityInputs {
-    get {
-      if (_VisibilityInputsOffset == null) {
-        _VisibilityInputsOffset = Schema.GetOffset(0xAE332DA3CF8264F8);
-      }
-      return new CParticleVisibilityInputsImpl(_Handle + _VisibilityInputsOffset!.Value);
+    public CParticleVisibilityInputs VisibilityInputs {
+        get {
+            _VisibilityInputsOffset = _VisibilityInputsOffset ?? Schema.GetOffset(0xAE332DA3CF8264F8);
+            return new CParticleVisibilityInputsImpl(_Handle + _VisibilityInputsOffset!.Value);
+        }
     }
-  }
-  private static nint? _CannotBeRefractedOffset;
+    private static nint? _CannotBeRefractedOffset;
 
-  public ref bool CannotBeRefracted {
-    get {
-      if (_CannotBeRefractedOffset == null) {
-        _CannotBeRefractedOffset = Schema.GetOffset(0xAE332DA3CC78C4FB);
-      }
-      return ref _Handle.AsRef<bool>(_CannotBeRefractedOffset!.Value);
+    public ref bool CannotBeRefracted {
+        get {
+            _CannotBeRefractedOffset = _CannotBeRefractedOffset ?? Schema.GetOffset(0xAE332DA3CC78C4FB);
+            return ref _Handle.AsRef<bool>(_CannotBeRefractedOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkipRenderingOnMobileOffset;
+    private static nint? _SkipRenderingOnMobileOffset;
 
-  public ref bool SkipRenderingOnMobile {
-    get {
-      if (_SkipRenderingOnMobileOffset == null) {
-        _SkipRenderingOnMobileOffset = Schema.GetOffset(0xAE332DA33F34EA75);
-      }
-      return ref _Handle.AsRef<bool>(_SkipRenderingOnMobileOffset!.Value);
+    public ref bool SkipRenderingOnMobile {
+        get {
+            _SkipRenderingOnMobileOffset = _SkipRenderingOnMobileOffset ?? Schema.GetOffset(0xAE332DA33F34EA75);
+            return ref _Handle.AsRef<bool>(_SkipRenderingOnMobileOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Step_TestDomainEntFire : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Step_TestDomainEntFire> {
+public partial interface CPulseCell_Step_TestDomainEntFire : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Step_TestDomainEntFire>
+{
+    static CPulseCell_Step_TestDomainEntFire ISchemaClass<CPulseCell_Step_TestDomainEntFire>.From(nint handle) => new CPulseCell_Step_TestDomainEntFireImpl(handle);
+    static int ISchemaClass<CPulseCell_Step_TestDomainEntFire>.Size => 80;
+    static string? ISchemaClass<CPulseCell_Step_TestDomainEntFire>.ClassName => null;
 
-  static CPulseCell_Step_TestDomainEntFire ISchemaClass<CPulseCell_Step_TestDomainEntFire>.From(nint handle) => new CPulseCell_Step_TestDomainEntFireImpl(handle);
-  static int ISchemaClass<CPulseCell_Step_TestDomainEntFire>.Size => 80;
-  static string? ISchemaClass<CPulseCell_Step_TestDomainEntFire>.ClassName => null;
 
-  
-  public string Input { get; set; }
+    public string Input { get; set; }
 
 
 }

@@ -6,167 +6,136 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseAnimGraphAnimGraphControllerImpl : CAnimGraphControllerBaseImpl, CBaseAnimGraphAnimGraphController {
+internal partial class CBaseAnimGraphAnimGraphControllerImpl : CAnimGraphControllerBaseImpl, CBaseAnimGraphAnimGraphController
+{
+    public CBaseAnimGraphAnimGraphControllerImpl(nint handle) : base(handle) { }
 
-  public CBaseAnimGraphAnimGraphControllerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DestructiblePartDestroyedHitGroupOffset;
 
-  private static nint? _DestructiblePartDestroyedHitGroupOffset;
-
-  public SchemaUntypedField DestructiblePartDestroyedHitGroup {
-    get {
-      if (_DestructiblePartDestroyedHitGroupOffset == null) {
-        _DestructiblePartDestroyedHitGroupOffset = Schema.GetOffset(0x14CE6891659B7288);
-      }
-      return new SchemaUntypedField(_Handle + _DestructiblePartDestroyedHitGroupOffset!.Value);
+    public SchemaUntypedField DestructiblePartDestroyedHitGroup {
+        get {
+            _DestructiblePartDestroyedHitGroupOffset = _DestructiblePartDestroyedHitGroupOffset ?? Schema.GetOffset(0x14CE6891659B7288);
+            return new SchemaUntypedField(_Handle + _DestructiblePartDestroyedHitGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestructiblePartDestroyedPartIndexOffset;
+    private static nint? _DestructiblePartDestroyedPartIndexOffset;
 
-  public SchemaUntypedField DestructiblePartDestroyedPartIndex {
-    get {
-      if (_DestructiblePartDestroyedPartIndexOffset == null) {
-        _DestructiblePartDestroyedPartIndexOffset = Schema.GetOffset(0x14CE68913BC00A58);
-      }
-      return new SchemaUntypedField(_Handle + _DestructiblePartDestroyedPartIndexOffset!.Value);
+    public SchemaUntypedField DestructiblePartDestroyedPartIndex {
+        get {
+            _DestructiblePartDestroyedPartIndexOffset = _DestructiblePartDestroyedPartIndexOffset ?? Schema.GetOffset(0x14CE68913BC00A58);
+            return new SchemaUntypedField(_Handle + _DestructiblePartDestroyedPartIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_INVALID_DestroyedOffset;
+    private static nint? _HITGROUP_INVALID_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_INVALID_Destroyed {
-    get {
-      if (_HITGROUP_INVALID_DestroyedOffset == null) {
-        _HITGROUP_INVALID_DestroyedOffset = Schema.GetOffset(0x14CE68919028C031);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_INVALID_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_INVALID_Destroyed {
+        get {
+            _HITGROUP_INVALID_DestroyedOffset = _HITGROUP_INVALID_DestroyedOffset ?? Schema.GetOffset(0x14CE68919028C031);
+            return new SchemaUntypedField(_Handle + _HITGROUP_INVALID_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_GENERIC_DestroyedOffset;
+    private static nint? _HITGROUP_GENERIC_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_GENERIC_Destroyed {
-    get {
-      if (_HITGROUP_GENERIC_DestroyedOffset == null) {
-        _HITGROUP_GENERIC_DestroyedOffset = Schema.GetOffset(0x14CE689176845553);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_GENERIC_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_GENERIC_Destroyed {
+        get {
+            _HITGROUP_GENERIC_DestroyedOffset = _HITGROUP_GENERIC_DestroyedOffset ?? Schema.GetOffset(0x14CE689176845553);
+            return new SchemaUntypedField(_Handle + _HITGROUP_GENERIC_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_HEAD_DestroyedOffset;
+    private static nint? _HITGROUP_HEAD_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_HEAD_Destroyed {
-    get {
-      if (_HITGROUP_HEAD_DestroyedOffset == null) {
-        _HITGROUP_HEAD_DestroyedOffset = Schema.GetOffset(0x14CE6891AEFB4EB4);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_HEAD_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_HEAD_Destroyed {
+        get {
+            _HITGROUP_HEAD_DestroyedOffset = _HITGROUP_HEAD_DestroyedOffset ?? Schema.GetOffset(0x14CE6891AEFB4EB4);
+            return new SchemaUntypedField(_Handle + _HITGROUP_HEAD_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_CHEST_DestroyedOffset;
+    private static nint? _HITGROUP_CHEST_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_CHEST_Destroyed {
-    get {
-      if (_HITGROUP_CHEST_DestroyedOffset == null) {
-        _HITGROUP_CHEST_DestroyedOffset = Schema.GetOffset(0x14CE68917B0D9613);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_CHEST_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_CHEST_Destroyed {
+        get {
+            _HITGROUP_CHEST_DestroyedOffset = _HITGROUP_CHEST_DestroyedOffset ?? Schema.GetOffset(0x14CE68917B0D9613);
+            return new SchemaUntypedField(_Handle + _HITGROUP_CHEST_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_STOMACH_DestroyedOffset;
+    private static nint? _HITGROUP_STOMACH_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_STOMACH_Destroyed {
-    get {
-      if (_HITGROUP_STOMACH_DestroyedOffset == null) {
-        _HITGROUP_STOMACH_DestroyedOffset = Schema.GetOffset(0x14CE689174D1B79B);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_STOMACH_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_STOMACH_Destroyed {
+        get {
+            _HITGROUP_STOMACH_DestroyedOffset = _HITGROUP_STOMACH_DestroyedOffset ?? Schema.GetOffset(0x14CE689174D1B79B);
+            return new SchemaUntypedField(_Handle + _HITGROUP_STOMACH_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_LEFTARM_DestroyedOffset;
+    private static nint? _HITGROUP_LEFTARM_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_LEFTARM_Destroyed {
-    get {
-      if (_HITGROUP_LEFTARM_DestroyedOffset == null) {
-        _HITGROUP_LEFTARM_DestroyedOffset = Schema.GetOffset(0x14CE6891FF25BE87);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_LEFTARM_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_LEFTARM_Destroyed {
+        get {
+            _HITGROUP_LEFTARM_DestroyedOffset = _HITGROUP_LEFTARM_DestroyedOffset ?? Schema.GetOffset(0x14CE6891FF25BE87);
+            return new SchemaUntypedField(_Handle + _HITGROUP_LEFTARM_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_RIGHTARM_DestroyedOffset;
+    private static nint? _HITGROUP_RIGHTARM_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_RIGHTARM_Destroyed {
-    get {
-      if (_HITGROUP_RIGHTARM_DestroyedOffset == null) {
-        _HITGROUP_RIGHTARM_DestroyedOffset = Schema.GetOffset(0x14CE6891525B05D2);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_RIGHTARM_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_RIGHTARM_Destroyed {
+        get {
+            _HITGROUP_RIGHTARM_DestroyedOffset = _HITGROUP_RIGHTARM_DestroyedOffset ?? Schema.GetOffset(0x14CE6891525B05D2);
+            return new SchemaUntypedField(_Handle + _HITGROUP_RIGHTARM_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_LEFTLEG_DestroyedOffset;
+    private static nint? _HITGROUP_LEFTLEG_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_LEFTLEG_Destroyed {
-    get {
-      if (_HITGROUP_LEFTLEG_DestroyedOffset == null) {
-        _HITGROUP_LEFTLEG_DestroyedOffset = Schema.GetOffset(0x14CE6891C7C4CE19);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_LEFTLEG_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_LEFTLEG_Destroyed {
+        get {
+            _HITGROUP_LEFTLEG_DestroyedOffset = _HITGROUP_LEFTLEG_DestroyedOffset ?? Schema.GetOffset(0x14CE6891C7C4CE19);
+            return new SchemaUntypedField(_Handle + _HITGROUP_LEFTLEG_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_RIGHTLEG_DestroyedOffset;
+    private static nint? _HITGROUP_RIGHTLEG_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_RIGHTLEG_Destroyed {
-    get {
-      if (_HITGROUP_RIGHTLEG_DestroyedOffset == null) {
-        _HITGROUP_RIGHTLEG_DestroyedOffset = Schema.GetOffset(0x14CE68915A8CF65C);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_RIGHTLEG_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_RIGHTLEG_Destroyed {
+        get {
+            _HITGROUP_RIGHTLEG_DestroyedOffset = _HITGROUP_RIGHTLEG_DestroyedOffset ?? Schema.GetOffset(0x14CE68915A8CF65C);
+            return new SchemaUntypedField(_Handle + _HITGROUP_RIGHTLEG_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_NECK_DestroyedOffset;
+    private static nint? _HITGROUP_NECK_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_NECK_Destroyed {
-    get {
-      if (_HITGROUP_NECK_DestroyedOffset == null) {
-        _HITGROUP_NECK_DestroyedOffset = Schema.GetOffset(0x14CE689195C0D851);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_NECK_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_NECK_Destroyed {
+        get {
+            _HITGROUP_NECK_DestroyedOffset = _HITGROUP_NECK_DestroyedOffset ?? Schema.GetOffset(0x14CE689195C0D851);
+            return new SchemaUntypedField(_Handle + _HITGROUP_NECK_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_UNUSED_DestroyedOffset;
+    private static nint? _HITGROUP_UNUSED_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_UNUSED_Destroyed {
-    get {
-      if (_HITGROUP_UNUSED_DestroyedOffset == null) {
-        _HITGROUP_UNUSED_DestroyedOffset = Schema.GetOffset(0x14CE689157414A54);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_UNUSED_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_UNUSED_Destroyed {
+        get {
+            _HITGROUP_UNUSED_DestroyedOffset = _HITGROUP_UNUSED_DestroyedOffset ?? Schema.GetOffset(0x14CE689157414A54);
+            return new SchemaUntypedField(_Handle + _HITGROUP_UNUSED_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_GEAR_DestroyedOffset;
+    private static nint? _HITGROUP_GEAR_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_GEAR_Destroyed {
-    get {
-      if (_HITGROUP_GEAR_DestroyedOffset == null) {
-        _HITGROUP_GEAR_DestroyedOffset = Schema.GetOffset(0x14CE68918C532735);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_GEAR_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_GEAR_Destroyed {
+        get {
+            _HITGROUP_GEAR_DestroyedOffset = _HITGROUP_GEAR_DestroyedOffset ?? Schema.GetOffset(0x14CE68918C532735);
+            return new SchemaUntypedField(_Handle + _HITGROUP_GEAR_DestroyedOffset!.Value);
+        }
     }
-  }
-  private static nint? _HITGROUP_SPECIAL_DestroyedOffset;
+    private static nint? _HITGROUP_SPECIAL_DestroyedOffset;
 
-  public SchemaUntypedField HITGROUP_SPECIAL_Destroyed {
-    get {
-      if (_HITGROUP_SPECIAL_DestroyedOffset == null) {
-        _HITGROUP_SPECIAL_DestroyedOffset = Schema.GetOffset(0x14CE68918FBDE7C1);
-      }
-      return new SchemaUntypedField(_Handle + _HITGROUP_SPECIAL_DestroyedOffset!.Value);
+    public SchemaUntypedField HITGROUP_SPECIAL_Destroyed {
+        get {
+            _HITGROUP_SPECIAL_DestroyedOffset = _HITGROUP_SPECIAL_DestroyedOffset ?? Schema.GetOffset(0x14CE68918FBDE7C1);
+            return new SchemaUntypedField(_Handle + _HITGROUP_SPECIAL_DestroyedOffset!.Value);
+        }
     }
-  }
 
 
 }

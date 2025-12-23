@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_MaxVelocityImpl : CParticleFunctionOperatorImpl, C_OP_MaxVelocity {
+internal partial class C_OP_MaxVelocityImpl : CParticleFunctionOperatorImpl, C_OP_MaxVelocity
+{
+    public C_OP_MaxVelocityImpl(nint handle) : base(handle) { }
 
-  public C_OP_MaxVelocityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaxVelocityOffset;
 
-  private static nint? _MaxVelocityOffset;
-
-  public ref float MaxVelocity {
-    get {
-      if (_MaxVelocityOffset == null) {
-        _MaxVelocityOffset = Schema.GetOffset(0xE7D67D7E281BD640);
-      }
-      return ref _Handle.AsRef<float>(_MaxVelocityOffset!.Value);
+    public ref float MaxVelocity {
+        get {
+            _MaxVelocityOffset = _MaxVelocityOffset ?? Schema.GetOffset(0xE7D67D7E281BD640);
+            return ref _Handle.AsRef<float>(_MaxVelocityOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinVelocityOffset;
+    private static nint? _MinVelocityOffset;
 
-  public ref float MinVelocity {
-    get {
-      if (_MinVelocityOffset == null) {
-        _MinVelocityOffset = Schema.GetOffset(0xE7D67D7EAE8F0ADE);
-      }
-      return ref _Handle.AsRef<float>(_MinVelocityOffset!.Value);
+    public ref float MinVelocity {
+        get {
+            _MinVelocityOffset = _MinVelocityOffset ?? Schema.GetOffset(0xE7D67D7EAE8F0ADE);
+            return ref _Handle.AsRef<float>(_MinVelocityOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverrideCPOffset;
+    private static nint? _OverrideCPOffset;
 
-  public ref int OverrideCP {
-    get {
-      if (_OverrideCPOffset == null) {
-        _OverrideCPOffset = Schema.GetOffset(0xE7D67D7EDD495162);
-      }
-      return ref _Handle.AsRef<int>(_OverrideCPOffset!.Value);
+    public ref int OverrideCP {
+        get {
+            _OverrideCPOffset = _OverrideCPOffset ?? Schema.GetOffset(0xE7D67D7EDD495162);
+            return ref _Handle.AsRef<int>(_OverrideCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _OverrideCPFieldOffset;
+    private static nint? _OverrideCPFieldOffset;
 
-  public ref int OverrideCPField {
-    get {
-      if (_OverrideCPFieldOffset == null) {
-        _OverrideCPFieldOffset = Schema.GetOffset(0xE7D67D7E2FF9A086);
-      }
-      return ref _Handle.AsRef<int>(_OverrideCPFieldOffset!.Value);
+    public ref int OverrideCPField {
+        get {
+            _OverrideCPFieldOffset = _OverrideCPFieldOffset ?? Schema.GetOffset(0xE7D67D7E2FF9A086);
+            return ref _Handle.AsRef<int>(_OverrideCPFieldOffset!.Value);
+        }
     }
-  }
 
 
 }

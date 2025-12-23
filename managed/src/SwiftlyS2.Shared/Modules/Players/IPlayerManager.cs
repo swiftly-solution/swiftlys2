@@ -1,4 +1,5 @@
 ﻿using SwiftlyS2.Shared.Misc;
+using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Translation;
 
 namespace SwiftlyS2.Shared.Players;
@@ -221,6 +222,22 @@ public interface IPlayerManagerService
     /// <returns>An <see cref="IPlayer"/> instance representing the player with the specified ID, or <c>null</c> if no such
     /// player exists.</returns>
     public IPlayer? GetPlayer( int playerid );
+
+    /// <summary>
+    /// Retrieves the player associated with the specified controller.
+    /// </summary>
+    /// <param name="controller">The controller to retrieve the player from.</param>
+    /// <returns>An <see cref="IPlayer"/> instance representing the player with the specified controller, or <c>null</c> if no such
+    /// player exists.</returns>
+    public IPlayer? GetPlayerFromController( CBasePlayerController controller );
+
+/// <summary>
+/// Retrieves the player associated with the specified pawn.
+/// </summary>
+/// <param name="pawn">The pawn to retrieve the player from.</param>
+/// <returns>An <see cref="IPlayer"/> instance representing the player with the specified pawn, or <c>null</c> if no such
+/// player exists.</returns>
+    public IPlayer? GetPlayerFromPawn( CBasePlayerPawn pawn );
 
     /// <summary>
     /// Retrieves all players currently online.

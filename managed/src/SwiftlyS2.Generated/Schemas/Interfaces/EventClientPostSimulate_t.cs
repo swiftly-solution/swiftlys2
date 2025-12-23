@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventClientPostSimulate_t : EventSimulate_t, ISchemaClass<EventClientPostSimulate_t> {
-
-  static EventClientPostSimulate_t ISchemaClass<EventClientPostSimulate_t>.From(nint handle) => new EventClientPostSimulate_tImpl(handle);
-  static int ISchemaClass<EventClientPostSimulate_t>.Size => 48;
-  static string? ISchemaClass<EventClientPostSimulate_t>.ClassName => null;
+public partial interface EventClientPostSimulate_t : EventSimulate_t, ISchemaClass<EventClientPostSimulate_t>
+{
+    static EventClientPostSimulate_t ISchemaClass<EventClientPostSimulate_t>.From(nint handle) => new EventClientPostSimulate_tImpl(handle);
+    static int ISchemaClass<EventClientPostSimulate_t>.Size => 48;
+    static string? ISchemaClass<EventClientPostSimulate_t>.ClassName => null;
 
 
 

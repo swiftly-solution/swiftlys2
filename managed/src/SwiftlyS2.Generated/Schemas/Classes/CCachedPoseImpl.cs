@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCachedPoseImpl : SchemaClass, CCachedPose {
+internal partial class CCachedPoseImpl : SchemaClass, CCachedPose
+{
+    public CCachedPoseImpl(nint handle) : base(handle) { }
 
-  public CCachedPoseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformsOffset;
 
-  private static nint? _TransformsOffset;
-
-  public ref CUtlVector<CTransform> Transforms {
-    get {
-      if (_TransformsOffset == null) {
-        _TransformsOffset = Schema.GetOffset(0x4B6C235988C82C58);
-      }
-      return ref _Handle.AsRef<CUtlVector<CTransform>>(_TransformsOffset!.Value);
+    public ref CUtlVector<CTransform> Transforms {
+        get {
+            _TransformsOffset = _TransformsOffset ?? Schema.GetOffset(0x4B6C235988C82C58);
+            return ref _Handle.AsRef<CUtlVector<CTransform>>(_TransformsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MorphWeightsOffset;
+    private static nint? _MorphWeightsOffset;
 
-  public ref CUtlVector<float> MorphWeights {
-    get {
-      if (_MorphWeightsOffset == null) {
-        _MorphWeightsOffset = Schema.GetOffset(0x4B6C23596B6689BE);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_MorphWeightsOffset!.Value);
+    public ref CUtlVector<float> MorphWeights {
+        get {
+            _MorphWeightsOffset = _MorphWeightsOffset ?? Schema.GetOffset(0x4B6C23596B6689BE);
+            return ref _Handle.AsRef<CUtlVector<float>>(_MorphWeightsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceOffset;
+    private static nint? _SequenceOffset;
 
-  public HSequence Sequence {
-    get {
-      if (_SequenceOffset == null) {
-        _SequenceOffset = Schema.GetOffset(0x4B6C2359E0A0598E);
-      }
-      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    public HSequence Sequence {
+        get {
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x4B6C2359E0A0598E);
+            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _CycleOffset;
+    private static nint? _CycleOffset;
 
-  public ref float Cycle {
-    get {
-      if (_CycleOffset == null) {
-        _CycleOffset = Schema.GetOffset(0x4B6C23590C77829F);
-      }
-      return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+    public ref float Cycle {
+        get {
+            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x4B6C23590C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+        }
     }
-  }
 
 
 }

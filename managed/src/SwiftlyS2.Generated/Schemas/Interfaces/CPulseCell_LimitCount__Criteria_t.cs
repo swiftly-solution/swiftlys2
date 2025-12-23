@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_LimitCount__Criteria_t : ISchemaClass<CPulseCell_LimitCount__Criteria_t> {
+public partial interface CPulseCell_LimitCount__Criteria_t : ISchemaClass<CPulseCell_LimitCount__Criteria_t>
+{
+    static CPulseCell_LimitCount__Criteria_t ISchemaClass<CPulseCell_LimitCount__Criteria_t>.From(nint handle) => new CPulseCell_LimitCount__Criteria_tImpl(handle);
+    static int ISchemaClass<CPulseCell_LimitCount__Criteria_t>.Size => 1;
+    static string? ISchemaClass<CPulseCell_LimitCount__Criteria_t>.ClassName => null;
 
-  static CPulseCell_LimitCount__Criteria_t ISchemaClass<CPulseCell_LimitCount__Criteria_t>.From(nint handle) => new CPulseCell_LimitCount__Criteria_tImpl(handle);
-  static int ISchemaClass<CPulseCell_LimitCount__Criteria_t>.Size => 1;
-  static string? ISchemaClass<CPulseCell_LimitCount__Criteria_t>.ClassName => null;
 
-  
-  public ref bool LimitCountPasses { get; }
+    public ref bool LimitCountPasses { get; }
 
 
 }

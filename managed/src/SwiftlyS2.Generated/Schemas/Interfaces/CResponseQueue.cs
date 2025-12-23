@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CResponseQueue : ISchemaClass<CResponseQueue> {
+public partial interface CResponseQueue : ISchemaClass<CResponseQueue>
+{
+    static CResponseQueue ISchemaClass<CResponseQueue>.From(nint handle) => new CResponseQueueImpl(handle);
+    static int ISchemaClass<CResponseQueue>.Size => 80;
+    static string? ISchemaClass<CResponseQueue>.ClassName => null;
 
-  static CResponseQueue ISchemaClass<CResponseQueue>.From(nint handle) => new CResponseQueueImpl(handle);
-  static int ISchemaClass<CResponseQueue>.Size => 80;
-  static string? ISchemaClass<CResponseQueue>.ClassName => null;
 
-  
-  public ref CUtlVector<PointerTo<CAI_Expresser>> ExpresserTargets { get; }
+    public ref CUtlVector<PointerTo<CAI_Expresser>> ExpresserTargets { get; }
 
 
 }

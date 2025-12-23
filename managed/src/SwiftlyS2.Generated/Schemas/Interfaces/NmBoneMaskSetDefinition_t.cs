@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface NmBoneMaskSetDefinition_t : ISchemaClass<NmBoneMaskSetDefinition_t> {
+public partial interface NmBoneMaskSetDefinition_t : ISchemaClass<NmBoneMaskSetDefinition_t>
+{
+    static NmBoneMaskSetDefinition_t ISchemaClass<NmBoneMaskSetDefinition_t>.From(nint handle) => new NmBoneMaskSetDefinition_tImpl(handle);
+    static int ISchemaClass<NmBoneMaskSetDefinition_t>.Size => 296;
+    static string? ISchemaClass<NmBoneMaskSetDefinition_t>.ClassName => null;
 
-  static NmBoneMaskSetDefinition_t ISchemaClass<NmBoneMaskSetDefinition_t>.From(nint handle) => new NmBoneMaskSetDefinition_tImpl(handle);
-  static int ISchemaClass<NmBoneMaskSetDefinition_t>.Size => 296;
-  static string? ISchemaClass<NmBoneMaskSetDefinition_t>.ClassName => null;
 
-  
-  public ref CGlobalSymbol ID { get; }
-  
-  public CNmBoneWeightList PrimaryWeightList { get; }
-  
-  public ref CUtlLeanVector<CNmBoneWeightList, int> SecondaryWeightLists { get; }
+    public ref CGlobalSymbol ID { get; }
+
+    public CNmBoneWeightList PrimaryWeightList { get; }
+
+    public ref CUtlLeanVector<CNmBoneWeightList, int> SecondaryWeightLists { get; }
 
 
 }

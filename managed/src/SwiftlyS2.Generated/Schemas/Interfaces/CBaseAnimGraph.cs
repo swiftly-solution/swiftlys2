@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseAnimGraph : CBaseModelEntity, ISchemaClass<CBaseAnimGraph> {
+public partial interface CBaseAnimGraph : CBaseModelEntity, ISchemaClass<CBaseAnimGraph>
+{
+    static CBaseAnimGraph ISchemaClass<CBaseAnimGraph>.From(nint handle) => new CBaseAnimGraphImpl(handle);
+    static int ISchemaClass<CBaseAnimGraph>.Size => 2704;
+    static string? ISchemaClass<CBaseAnimGraph>.ClassName => "baseanimgraph";
 
-  static CBaseAnimGraph ISchemaClass<CBaseAnimGraph>.From(nint handle) => new CBaseAnimGraphImpl(handle);
-  static int ISchemaClass<CBaseAnimGraph>.Size => 2704;
-  static string? ISchemaClass<CBaseAnimGraph>.ClassName => "baseanimgraph";
 
-  
-  public ref bool InitiallyPopulateInterpHistory { get; }
-  
-  public IChoreoServices? ChoreoServices { get; }
-  
-  public ref bool AnimGraphUpdateEnabled { get; }
-  
-  public ref float MaxSlopeDistance { get; }
-  
-  public ref Vector LastSlopeCheckPos { get; }
-  
-  public ref bool AnimationUpdateScheduled { get; }
-  
-  public ref Vector Force { get; }
-  
-  public ref int ForceBone { get; }
-  
-  public PhysicsRagdollPose_t RagdollPose { get; }
-  
-  public ref bool RagdollEnabled { get; }
-  
-  public ref bool RagdollClientSide { get; }
-  
-  public ref CTransform XParentedRagdollRootInEntitySpace { get; }
+    public ref bool InitiallyPopulateInterpHistory { get; }
 
-  public void InitiallyPopulateInterpHistoryUpdated();
-  public void AnimGraphUpdateEnabledUpdated();
-  public void ForceUpdated();
-  public void ForceBoneUpdated();
-  public void RagdollPoseUpdated();
-  public void RagdollEnabledUpdated();
-  public void RagdollClientSideUpdated();
+    public IChoreoServices? ChoreoServices { get; }
+
+    public ref bool AnimGraphUpdateEnabled { get; }
+
+    public ref float MaxSlopeDistance { get; }
+
+    public ref Vector LastSlopeCheckPos { get; }
+
+    public ref bool AnimationUpdateScheduled { get; }
+
+    public ref Vector Force { get; }
+
+    public ref int ForceBone { get; }
+
+    public PhysicsRagdollPose_t RagdollPose { get; }
+
+    public ref bool RagdollEnabled { get; }
+
+    public ref bool RagdollClientSide { get; }
+
+    public ref CTransform XParentedRagdollRootInEntitySpace { get; }
+
+    public void InitiallyPopulateInterpHistoryUpdated();
+    public void AnimGraphUpdateEnabledUpdated();
+    public void ForceUpdated();
+    public void ForceBoneUpdated();
+    public void RagdollPoseUpdated();
+    public void RagdollEnabledUpdated();
+    public void RagdollClientSideUpdated();
 }

@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CJumpHelperUpdateNode : CSequenceUpdateNode, ISchemaClass<CJumpHelperUpdateNode> {
+public partial interface CJumpHelperUpdateNode : CSequenceUpdateNode, ISchemaClass<CJumpHelperUpdateNode>
+{
+    static CJumpHelperUpdateNode ISchemaClass<CJumpHelperUpdateNode>.From(nint handle) => new CJumpHelperUpdateNodeImpl(handle);
+    static int ISchemaClass<CJumpHelperUpdateNode>.Size => 216;
+    static string? ISchemaClass<CJumpHelperUpdateNode>.ClassName => null;
 
-  static CJumpHelperUpdateNode ISchemaClass<CJumpHelperUpdateNode>.From(nint handle) => new CJumpHelperUpdateNodeImpl(handle);
-  static int ISchemaClass<CJumpHelperUpdateNode>.Size => 216;
-  static string? ISchemaClass<CJumpHelperUpdateNode>.ClassName => null;
 
-  
-  public CAnimParamHandle TargetParam { get; }
-  
-  public ref Vector OriginalJumpMovement { get; }
-  
-  public ref float OriginalJumpDuration { get; }
-  
-  public ref float JumpStartCycle { get; }
-  
-  public ref float JumpEndCycle { get; }
-  
-  public ref JumpCorrectionMethod CorrectionMethod { get; }
-  
-  public ISchemaFixedArray<bool> TranslationAxis { get; }
-  
-  public ref bool ScaleSpeed { get; }
+    public CAnimParamHandle TargetParam { get; }
+
+    public ref Vector OriginalJumpMovement { get; }
+
+    public ref float OriginalJumpDuration { get; }
+
+    public ref float JumpStartCycle { get; }
+
+    public ref float JumpEndCycle { get; }
+
+    public ref JumpCorrectionMethod CorrectionMethod { get; }
+
+    public ISchemaFixedArray<bool> TranslationAxis { get; }
+
+    public ref bool ScaleSpeed { get; }
 
 
 }

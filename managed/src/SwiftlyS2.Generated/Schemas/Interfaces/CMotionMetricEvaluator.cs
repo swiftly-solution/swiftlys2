@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMotionMetricEvaluator : ISchemaClass<CMotionMetricEvaluator> {
+public partial interface CMotionMetricEvaluator : ISchemaClass<CMotionMetricEvaluator>
+{
+    static CMotionMetricEvaluator ISchemaClass<CMotionMetricEvaluator>.From(nint handle) => new CMotionMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CMotionMetricEvaluator>.Size => 80;
+    static string? ISchemaClass<CMotionMetricEvaluator>.ClassName => null;
 
-  static CMotionMetricEvaluator ISchemaClass<CMotionMetricEvaluator>.From(nint handle) => new CMotionMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CMotionMetricEvaluator>.Size => 80;
-  static string? ISchemaClass<CMotionMetricEvaluator>.ClassName => null;
 
-  
-  public ref CUtlVector<float> Means { get; }
-  
-  public ref CUtlVector<float> StandardDeviations { get; }
-  
-  public ref float Weight { get; }
-  
-  public ref int DimensionStartIndex { get; }
+    public ref CUtlVector<float> Means { get; }
+
+    public ref CUtlVector<float> StandardDeviations { get; }
+
+    public ref float Weight { get; }
+
+    public ref int DimensionStartIndex { get; }
 
 
 }

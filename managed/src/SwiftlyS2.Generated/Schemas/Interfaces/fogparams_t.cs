@@ -8,84 +8,84 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface fogparams_t : ISchemaClass<fogparams_t> {
+public partial interface fogparams_t : ISchemaClass<fogparams_t>
+{
+    static fogparams_t ISchemaClass<fogparams_t>.From(nint handle) => new fogparams_tImpl(handle);
+    static int ISchemaClass<fogparams_t>.Size => 104;
+    static string? ISchemaClass<fogparams_t>.ClassName => null;
 
-  static fogparams_t ISchemaClass<fogparams_t>.From(nint handle) => new fogparams_tImpl(handle);
-  static int ISchemaClass<fogparams_t>.Size => 104;
-  static string? ISchemaClass<fogparams_t>.ClassName => null;
 
-  
-  public ref Vector DirPrimary { get; }
-  
-  public ref Color ColorPrimary { get; }
-  
-  public ref Color ColorSecondary { get; }
-  
-  public ref Color ColorPrimaryLerpTo { get; }
-  
-  public ref Color ColorSecondaryLerpTo { get; }
-  
-  public ref float Start { get; }
-  
-  public ref float End { get; }
-  
-  public ref float Farz { get; }
-  
-  public ref float Maxdensity { get; }
-  
-  public ref float Exponent { get; }
-  
-  public ref float HDRColorScale { get; }
-  
-  public ref float SkyboxFogFactor { get; }
-  
-  public ref float SkyboxFogFactorLerpTo { get; }
-  
-  public ref float StartLerpTo { get; }
-  
-  public ref float EndLerpTo { get; }
-  
-  public ref float MaxdensityLerpTo { get; }
-  
-  public GameTime_t Lerptime { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref float Blendtobackground { get; }
-  
-  public ref float Scattering { get; }
-  
-  public ref float Locallightscale { get; }
-  
-  public ref bool Enable { get; }
-  
-  public ref bool Blend { get; }
-  
-  public ref bool Padding2 { get; }
-  
-  public ref bool Padding { get; }
+    public ref Vector DirPrimary { get; }
 
-  public void DirPrimaryUpdated();
-  public void ColorPrimaryUpdated();
-  public void ColorSecondaryUpdated();
-  public void ColorPrimaryLerpToUpdated();
-  public void ColorSecondaryLerpToUpdated();
-  public void StartUpdated();
-  public void EndUpdated();
-  public void FarzUpdated();
-  public void MaxdensityUpdated();
-  public void ExponentUpdated();
-  public void HDRColorScaleUpdated();
-  public void SkyboxFogFactorUpdated();
-  public void SkyboxFogFactorLerpToUpdated();
-  public void StartLerpToUpdated();
-  public void EndLerpToUpdated();
-  public void MaxdensityLerpToUpdated();
-  public void LerptimeUpdated();
-  public void DurationUpdated();
-  public void BlendtobackgroundUpdated();
-  public void ScatteringUpdated();
-  public void LocallightscaleUpdated();
-  public void EnableUpdated();
-  public void BlendUpdated();
+    public ref Color ColorPrimary { get; }
+
+    public ref Color ColorSecondary { get; }
+
+    public ref Color ColorPrimaryLerpTo { get; }
+
+    public ref Color ColorSecondaryLerpTo { get; }
+
+    public ref float Start { get; }
+
+    public ref float End { get; }
+
+    public ref float Farz { get; }
+
+    public ref float Maxdensity { get; }
+
+    public ref float Exponent { get; }
+
+    public ref float HDRColorScale { get; }
+
+    public ref float SkyboxFogFactor { get; }
+
+    public ref float SkyboxFogFactorLerpTo { get; }
+
+    public ref float StartLerpTo { get; }
+
+    public ref float EndLerpTo { get; }
+
+    public ref float MaxdensityLerpTo { get; }
+
+    public GameTime_t Lerptime { get; }
+
+    public ref float Duration { get; }
+
+    public ref float Blendtobackground { get; }
+
+    public ref float Scattering { get; }
+
+    public ref float Locallightscale { get; }
+
+    public ref bool Enable { get; }
+
+    public ref bool Blend { get; }
+
+    public ref bool Padding2 { get; }
+
+    public ref bool Padding { get; }
+
+    public void DirPrimaryUpdated();
+    public void ColorPrimaryUpdated();
+    public void ColorSecondaryUpdated();
+    public void ColorPrimaryLerpToUpdated();
+    public void ColorSecondaryLerpToUpdated();
+    public void StartUpdated();
+    public void EndUpdated();
+    public void FarzUpdated();
+    public void MaxdensityUpdated();
+    public void ExponentUpdated();
+    public void HDRColorScaleUpdated();
+    public void SkyboxFogFactorUpdated();
+    public void SkyboxFogFactorLerpToUpdated();
+    public void StartLerpToUpdated();
+    public void EndLerpToUpdated();
+    public void MaxdensityLerpToUpdated();
+    public void LerptimeUpdated();
+    public void DurationUpdated();
+    public void BlendtobackgroundUpdated();
+    public void ScatteringUpdated();
+    public void LocallightscaleUpdated();
+    public void EnableUpdated();
+    public void BlendUpdated();
 }

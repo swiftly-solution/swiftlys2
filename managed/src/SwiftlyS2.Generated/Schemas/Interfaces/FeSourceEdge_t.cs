@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSourceEdge_t : ISchemaClass<FeSourceEdge_t> {
+public partial interface FeSourceEdge_t : ISchemaClass<FeSourceEdge_t>
+{
+    static FeSourceEdge_t ISchemaClass<FeSourceEdge_t>.From(nint handle) => new FeSourceEdge_tImpl(handle);
+    static int ISchemaClass<FeSourceEdge_t>.Size => 4;
+    static string? ISchemaClass<FeSourceEdge_t>.ClassName => null;
 
-  static FeSourceEdge_t ISchemaClass<FeSourceEdge_t>.From(nint handle) => new FeSourceEdge_tImpl(handle);
-  static int ISchemaClass<FeSourceEdge_t>.Size => 4;
-  static string? ISchemaClass<FeSourceEdge_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Node { get; }
+    public ISchemaFixedArray<ushort> Node { get; }
 
 
 }

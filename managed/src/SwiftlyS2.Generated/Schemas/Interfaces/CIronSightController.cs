@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CIronSightController : ISchemaClass<CIronSightController> {
+public partial interface CIronSightController : ISchemaClass<CIronSightController>
+{
+    static CIronSightController ISchemaClass<CIronSightController>.From(nint handle) => new CIronSightControllerImpl(handle);
+    static int ISchemaClass<CIronSightController>.Size => 24;
+    static string? ISchemaClass<CIronSightController>.ClassName => null;
 
-  static CIronSightController ISchemaClass<CIronSightController>.From(nint handle) => new CIronSightControllerImpl(handle);
-  static int ISchemaClass<CIronSightController>.Size => 24;
-  static string? ISchemaClass<CIronSightController>.ClassName => null;
 
-  
-  public ref bool IronSightAvailable { get; }
-  
-  public ref float IronSightAmount { get; }
-  
-  public ref float IronSightAmountGained { get; }
-  
-  public ref float IronSightAmountBiased { get; }
+    public ref bool IronSightAvailable { get; }
+
+    public ref float IronSightAmount { get; }
+
+    public ref float IronSightAmountGained { get; }
+
+    public ref float IronSightAmountBiased { get; }
 
 
 }

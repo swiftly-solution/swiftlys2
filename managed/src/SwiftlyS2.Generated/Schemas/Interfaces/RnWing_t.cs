@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnWing_t : ISchemaClass<RnWing_t> {
+public partial interface RnWing_t : ISchemaClass<RnWing_t>
+{
+    static RnWing_t ISchemaClass<RnWing_t>.From(nint handle) => new RnWing_tImpl(handle);
+    static int ISchemaClass<RnWing_t>.Size => 12;
+    static string? ISchemaClass<RnWing_t>.ClassName => null;
 
-  static RnWing_t ISchemaClass<RnWing_t>.From(nint handle) => new RnWing_tImpl(handle);
-  static int ISchemaClass<RnWing_t>.Size => 12;
-  static string? ISchemaClass<RnWing_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<int> Index { get; }
+    public ISchemaFixedArray<int> Index { get; }
 
 
 }

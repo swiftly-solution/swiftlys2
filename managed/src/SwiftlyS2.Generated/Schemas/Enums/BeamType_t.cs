@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum BeamType_t : uint {
-
+public enum BeamType_t : uint
+{
  BEAM_INVALID = 0,
 
  BEAM_POINTS = 1,

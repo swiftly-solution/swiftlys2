@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FilterDamageTypeImpl : CBaseFilterImpl, FilterDamageType {
+internal partial class FilterDamageTypeImpl : CBaseFilterImpl, FilterDamageType
+{
+    public FilterDamageTypeImpl(nint handle) : base(handle) { }
 
-  public FilterDamageTypeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DamageTypeOffset;
 
-  private static nint? _DamageTypeOffset;
-
-  public ref int DamageType {
-    get {
-      if (_DamageTypeOffset == null) {
-        _DamageTypeOffset = Schema.GetOffset(0xEBD649E6AF4EB7BD);
-      }
-      return ref _Handle.AsRef<int>(_DamageTypeOffset!.Value);
+    public ref int DamageType {
+        get {
+            _DamageTypeOffset = _DamageTypeOffset ?? Schema.GetOffset(0xEBD649E6AF4EB7BD);
+            return ref _Handle.AsRef<int>(_DamageTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

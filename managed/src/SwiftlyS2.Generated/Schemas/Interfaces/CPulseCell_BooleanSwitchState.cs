@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_BooleanSwitchState : CPulseCell_BaseState, ISchemaClass<CPulseCell_BooleanSwitchState> {
+public partial interface CPulseCell_BooleanSwitchState : CPulseCell_BaseState, ISchemaClass<CPulseCell_BooleanSwitchState>
+{
+    static CPulseCell_BooleanSwitchState ISchemaClass<CPulseCell_BooleanSwitchState>.From(nint handle) => new CPulseCell_BooleanSwitchStateImpl(handle);
+    static int ISchemaClass<CPulseCell_BooleanSwitchState>.Size => 408;
+    static string? ISchemaClass<CPulseCell_BooleanSwitchState>.ClassName => null;
 
-  static CPulseCell_BooleanSwitchState ISchemaClass<CPulseCell_BooleanSwitchState>.From(nint handle) => new CPulseCell_BooleanSwitchStateImpl(handle);
-  static int ISchemaClass<CPulseCell_BooleanSwitchState>.Size => 408;
-  static string? ISchemaClass<CPulseCell_BooleanSwitchState>.ClassName => null;
 
-  
-  public PulseObservableBoolExpression_t Condition { get; }
-  
-  public CPulse_OutflowConnection SubGraph { get; }
-  
-  public CPulse_OutflowConnection WhenTrue { get; }
-  
-  public CPulse_OutflowConnection WhenFalse { get; }
+    public PulseObservableBoolExpression_t Condition { get; }
+
+    public CPulse_OutflowConnection SubGraph { get; }
+
+    public CPulse_OutflowConnection WhenTrue { get; }
+
+    public CPulse_OutflowConnection WhenFalse { get; }
 
 
 }

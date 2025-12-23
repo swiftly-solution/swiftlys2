@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_PinRopeSegmentParticleToParent : CParticleFunctionOperator, ISchemaClass<C_OP_PinRopeSegmentParticleToParent> {
+public partial interface C_OP_PinRopeSegmentParticleToParent : CParticleFunctionOperator, ISchemaClass<C_OP_PinRopeSegmentParticleToParent>
+{
+    static C_OP_PinRopeSegmentParticleToParent ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.From(nint handle) => new C_OP_PinRopeSegmentParticleToParentImpl(handle);
+    static int ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.Size => 1208;
+    static string? ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.ClassName => null;
 
-  static C_OP_PinRopeSegmentParticleToParent ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.From(nint handle) => new C_OP_PinRopeSegmentParticleToParentImpl(handle);
-  static int ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.Size => 1208;
-  static string? ISchemaClass<C_OP_PinRopeSegmentParticleToParent>.ClassName => null;
 
-  
-  public ref ParticleSelection_t ParticleSelection { get; }
-  
-  public CParticleCollectionFloatInput ParticleNumber { get; }
-  
-  public CPerParticleFloatInput Interpolation { get; }
+    public ref ParticleSelection_t ParticleSelection { get; }
+
+    public CParticleCollectionFloatInput ParticleNumber { get; }
+
+    public CPerParticleFloatInput Interpolation { get; }
 
 
 }

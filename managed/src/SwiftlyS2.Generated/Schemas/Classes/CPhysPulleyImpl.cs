@@ -6,50 +6,43 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysPulleyImpl : CPhysConstraintImpl, CPhysPulley {
+internal partial class CPhysPulleyImpl : CPhysConstraintImpl, CPhysPulley
+{
+    public CPhysPulleyImpl(nint handle) : base(handle) { }
 
-  public CPhysPulleyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Position2Offset;
 
-  private static nint? _Position2Offset;
-
-  public ref Vector Position2 {
-    get {
-      if (_Position2Offset == null) {
-        _Position2Offset = Schema.GetOffset(0xDCB3A22333568F48);
-      }
-      return ref _Handle.AsRef<Vector>(_Position2Offset!.Value);
+    public ref Vector Position2 {
+        get {
+            _Position2Offset = _Position2Offset ?? Schema.GetOffset(0xDCB3A22333568F48);
+            return ref _Handle.AsRef<Vector>(_Position2Offset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<Vector> Offset {
-    get => new SchemaFixedArray<Vector>(_Handle, 0xDCB3A223F836806A, 2, 12, 4);
-  }
-  private static nint? _AddLengthOffset;
-
-  public ref float AddLength {
-    get {
-      if (_AddLengthOffset == null) {
-        _AddLengthOffset = Schema.GetOffset(0xDCB3A223A30AA6D8);
-      }
-      return ref _Handle.AsRef<float>(_AddLengthOffset!.Value);
+    public ISchemaFixedArray<Vector> Offset {
+        get => new SchemaFixedArray<Vector>(_Handle, 0xDCB3A223F836806A, 2, 12, 4);
     }
-  }
-  private static nint? _GearRatioOffset;
+    private static nint? _AddLengthOffset;
 
-  public ref float GearRatio {
-    get {
-      if (_GearRatioOffset == null) {
-        _GearRatioOffset = Schema.GetOffset(0xDCB3A223DF6EB135);
-      }
-      return ref _Handle.AsRef<float>(_GearRatioOffset!.Value);
+    public ref float AddLength {
+        get {
+            _AddLengthOffset = _AddLengthOffset ?? Schema.GetOffset(0xDCB3A223A30AA6D8);
+            return ref _Handle.AsRef<float>(_AddLengthOffset!.Value);
+        }
     }
-  }
+    private static nint? _GearRatioOffset;
+
+    public ref float GearRatio {
+        get {
+            _GearRatioOffset = _GearRatioOffset ?? Schema.GetOffset(0xDCB3A223DF6EB135);
+            return ref _Handle.AsRef<float>(_GearRatioOffset!.Value);
+        }
+    }
 
 
 }

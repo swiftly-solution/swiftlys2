@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CModelConfigElement_SetMaterialGroup : CModelConfigElement, ISchemaClass<CModelConfigElement_SetMaterialGroup> {
+public partial interface CModelConfigElement_SetMaterialGroup : CModelConfigElement, ISchemaClass<CModelConfigElement_SetMaterialGroup>
+{
+    static CModelConfigElement_SetMaterialGroup ISchemaClass<CModelConfigElement_SetMaterialGroup>.From(nint handle) => new CModelConfigElement_SetMaterialGroupImpl(handle);
+    static int ISchemaClass<CModelConfigElement_SetMaterialGroup>.Size => 80;
+    static string? ISchemaClass<CModelConfigElement_SetMaterialGroup>.ClassName => null;
 
-  static CModelConfigElement_SetMaterialGroup ISchemaClass<CModelConfigElement_SetMaterialGroup>.From(nint handle) => new CModelConfigElement_SetMaterialGroupImpl(handle);
-  static int ISchemaClass<CModelConfigElement_SetMaterialGroup>.Size => 80;
-  static string? ISchemaClass<CModelConfigElement_SetMaterialGroup>.ClassName => null;
 
-  
-  public string MaterialGroupName { get; set; }
+    public string MaterialGroupName { get; set; }
 
 
 }

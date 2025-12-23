@@ -8,36 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointTemplate : CLogicalEntity, ISchemaClass<CPointTemplate> {
+public partial interface CPointTemplate : CLogicalEntity, ISchemaClass<CPointTemplate>
+{
+    static CPointTemplate ISchemaClass<CPointTemplate>.From(nint handle) => new CPointTemplateImpl(handle);
+    static int ISchemaClass<CPointTemplate>.Size => 1368;
+    static string? ISchemaClass<CPointTemplate>.ClassName => "point_template";
 
-  static CPointTemplate ISchemaClass<CPointTemplate>.From(nint handle) => new CPointTemplateImpl(handle);
-  static int ISchemaClass<CPointTemplate>.Size => 1368;
-  static string? ISchemaClass<CPointTemplate>.ClassName => "point_template";
 
-  
-  public string WorldName { get; set; }
-  
-  public string Source2EntityLumpName { get; set; }
-  
-  public string EntityFilterName { get; set; }
-  
-  public ref float TimeoutInterval { get; }
-  
-  public ref bool AsynchronouslySpawnEntities { get; }
-  
-  public ref PointTemplateClientOnlyEntityBehavior_t ClientOnlyEntityBehavior { get; }
-  
-  public ref PointTemplateOwnerSpawnGroupType_t OwnerSpawnGroupType { get; }
-  
-  public ref CUtlVector<uint> CreatedSpawnGroupHandles { get; }
-  
-  public ref CUtlVector<CHandle<CEntityInstance>> SpawnedEntityHandles { get; }
-  
-  // HSCRIPT
-  public SchemaUntypedField ScriptSpawnCallback { get; }
-  
-  // HSCRIPT
-  public SchemaUntypedField ScriptCallbackScope { get; }
+    public string WorldName { get; set; }
+
+    public string Source2EntityLumpName { get; set; }
+
+    public string EntityFilterName { get; set; }
+
+    public ref float TimeoutInterval { get; }
+
+    public ref bool AsynchronouslySpawnEntities { get; }
+
+    public ref PointTemplateClientOnlyEntityBehavior_t ClientOnlyEntityBehavior { get; }
+
+    public ref PointTemplateOwnerSpawnGroupType_t OwnerSpawnGroupType { get; }
+
+    public ref CUtlVector<uint> CreatedSpawnGroupHandles { get; }
+
+    public ref CUtlVector<CHandle<CEntityInstance>> SpawnedEntityHandles { get; }
+
+    public ref HSCRIPTHandler ScriptSpawnCallback { get; }
+
+    public ref HSCRIPTHandler ScriptCallbackScope { get; }
 
 
 }

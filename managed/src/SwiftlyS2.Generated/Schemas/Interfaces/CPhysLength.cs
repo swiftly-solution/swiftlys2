@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysLength : CPhysConstraint, ISchemaClass<CPhysLength> {
+public partial interface CPhysLength : CPhysConstraint, ISchemaClass<CPhysLength>
+{
+    static CPhysLength ISchemaClass<CPhysLength>.From(nint handle) => new CPhysLengthImpl(handle);
+    static int ISchemaClass<CPhysLength>.Size => 1432;
+    static string? ISchemaClass<CPhysLength>.ClassName => "phys_lengthconstraint";
 
-  static CPhysLength ISchemaClass<CPhysLength>.From(nint handle) => new CPhysLengthImpl(handle);
-  static int ISchemaClass<CPhysLength>.Size => 1432;
-  static string? ISchemaClass<CPhysLength>.ClassName => "phys_lengthconstraint";
 
-  
-  public ISchemaFixedArray<Vector> Offset { get; }
-  
-  public ref Vector Attach { get; }
-  
-  public ref float AddLength { get; }
-  
-  public ref float MinLength { get; }
-  
-  public ref float TotalLength { get; }
-  
-  public ref bool EnableCollision { get; }
+    public ISchemaFixedArray<Vector> Offset { get; }
+
+    public ref Vector Attach { get; }
+
+    public ref float AddLength { get; }
+
+    public ref float MinLength { get; }
+
+    public ref float TotalLength { get; }
+
+    public ref bool EnableCollision { get; }
 
 
 }

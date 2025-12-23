@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixAutoFilterDesc_t : ISchemaClass<VMixAutoFilterDesc_t> {
+public partial interface VMixAutoFilterDesc_t : ISchemaClass<VMixAutoFilterDesc_t>
+{
+    static VMixAutoFilterDesc_t ISchemaClass<VMixAutoFilterDesc_t>.From(nint handle) => new VMixAutoFilterDesc_tImpl(handle);
+    static int ISchemaClass<VMixAutoFilterDesc_t>.Size => 44;
+    static string? ISchemaClass<VMixAutoFilterDesc_t>.ClassName => null;
 
-  static VMixAutoFilterDesc_t ISchemaClass<VMixAutoFilterDesc_t>.From(nint handle) => new VMixAutoFilterDesc_tImpl(handle);
-  static int ISchemaClass<VMixAutoFilterDesc_t>.Size => 44;
-  static string? ISchemaClass<VMixAutoFilterDesc_t>.ClassName => null;
 
-  
-  public ref float EnvelopeAmount { get; }
-  
-  public ref float AttackTimeMS { get; }
-  
-  public ref float ReleaseTimeMS { get; }
-  
-  public VMixFilterDesc_t Filter { get; }
-  
-  public ref float LFOAmount { get; }
-  
-  public ref float LFORate { get; }
-  
-  public ref float Phase { get; }
-  
-  public ref VMixLFOShape_t LFOShape { get; }
+    public ref float EnvelopeAmount { get; }
+
+    public ref float AttackTimeMS { get; }
+
+    public ref float ReleaseTimeMS { get; }
+
+    public VMixFilterDesc_t Filter { get; }
+
+    public ref float LFOAmount { get; }
+
+    public ref float LFORate { get; }
+
+    public ref float Phase { get; }
+
+    public ref VMixLFOShape_t LFOShape { get; }
 
 
 }

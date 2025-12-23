@@ -6,110 +6,81 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBasePlayerWeaponImpl : CEconEntityImpl, CBasePlayerWeapon {
+internal partial class CBasePlayerWeaponImpl : CEconEntityImpl, CBasePlayerWeapon
+{
+    public CBasePlayerWeaponImpl(nint handle) : base(handle) { }
 
-  public CBasePlayerWeaponImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NextPrimaryAttackTickOffset;
 
-  private static nint? _NextPrimaryAttackTickOffset;
-
-  public GameTick_t NextPrimaryAttackTick {
-    get {
-      if (_NextPrimaryAttackTickOffset == null) {
-        _NextPrimaryAttackTickOffset = Schema.GetOffset(0x4174B75E11BA24E3);
-      }
-      return new GameTick_tImpl(_Handle + _NextPrimaryAttackTickOffset!.Value);
+    public GameTick_t NextPrimaryAttackTick {
+        get {
+            _NextPrimaryAttackTickOffset = _NextPrimaryAttackTickOffset ?? Schema.GetOffset(0x4174B75E11BA24E3);
+            return new GameTick_tImpl(_Handle + _NextPrimaryAttackTickOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextPrimaryAttackTickRatioOffset;
+    private static nint? _NextPrimaryAttackTickRatioOffset;
 
-  public ref float NextPrimaryAttackTickRatio {
-    get {
-      if (_NextPrimaryAttackTickRatioOffset == null) {
-        _NextPrimaryAttackTickRatioOffset = Schema.GetOffset(0x4174B75E0D9A9E18);
-      }
-      return ref _Handle.AsRef<float>(_NextPrimaryAttackTickRatioOffset!.Value);
+    public ref float NextPrimaryAttackTickRatio {
+        get {
+            _NextPrimaryAttackTickRatioOffset = _NextPrimaryAttackTickRatioOffset ?? Schema.GetOffset(0x4174B75E0D9A9E18);
+            return ref _Handle.AsRef<float>(_NextPrimaryAttackTickRatioOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextSecondaryAttackTickOffset;
+    private static nint? _NextSecondaryAttackTickOffset;
 
-  public GameTick_t NextSecondaryAttackTick {
-    get {
-      if (_NextSecondaryAttackTickOffset == null) {
-        _NextSecondaryAttackTickOffset = Schema.GetOffset(0x4174B75EDE66C257);
-      }
-      return new GameTick_tImpl(_Handle + _NextSecondaryAttackTickOffset!.Value);
+    public GameTick_t NextSecondaryAttackTick {
+        get {
+            _NextSecondaryAttackTickOffset = _NextSecondaryAttackTickOffset ?? Schema.GetOffset(0x4174B75EDE66C257);
+            return new GameTick_tImpl(_Handle + _NextSecondaryAttackTickOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextSecondaryAttackTickRatioOffset;
+    private static nint? _NextSecondaryAttackTickRatioOffset;
 
-  public ref float NextSecondaryAttackTickRatio {
-    get {
-      if (_NextSecondaryAttackTickRatioOffset == null) {
-        _NextSecondaryAttackTickRatioOffset = Schema.GetOffset(0x4174B75EF3E6AF88);
-      }
-      return ref _Handle.AsRef<float>(_NextSecondaryAttackTickRatioOffset!.Value);
+    public ref float NextSecondaryAttackTickRatio {
+        get {
+            _NextSecondaryAttackTickRatioOffset = _NextSecondaryAttackTickRatioOffset ?? Schema.GetOffset(0x4174B75EF3E6AF88);
+            return ref _Handle.AsRef<float>(_NextSecondaryAttackTickRatioOffset!.Value);
+        }
     }
-  }
-  private static nint? _Clip1Offset;
+    private static nint? _Clip1Offset;
 
-  public ref int Clip1 {
-    get {
-      if (_Clip1Offset == null) {
-        _Clip1Offset = Schema.GetOffset(0x4174B75ED0250969);
-      }
-      return ref _Handle.AsRef<int>(_Clip1Offset!.Value);
+    public ref int Clip1 {
+        get {
+            _Clip1Offset = _Clip1Offset ?? Schema.GetOffset(0x4174B75ED0250969);
+            return ref _Handle.AsRef<int>(_Clip1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Clip2Offset;
+    private static nint? _Clip2Offset;
 
-  public ref int Clip2 {
-    get {
-      if (_Clip2Offset == null) {
-        _Clip2Offset = Schema.GetOffset(0x4174B75ECD2504B0);
-      }
-      return ref _Handle.AsRef<int>(_Clip2Offset!.Value);
+    public ref int Clip2 {
+        get {
+            _Clip2Offset = _Clip2Offset ?? Schema.GetOffset(0x4174B75ECD2504B0);
+            return ref _Handle.AsRef<int>(_Clip2Offset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<int> ReserveAmmo {
-    get => new SchemaFixedArray<int>(_Handle, 0x4174B75EB3FEBB0B, 2, 4, 4);
-  }
-  private static nint? _OnPlayerUseOffset;
-
-  public CEntityIOOutput OnPlayerUse {
-    get {
-      if (_OnPlayerUseOffset == null) {
-        _OnPlayerUseOffset = Schema.GetOffset(0x4174B75E611C9A14);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnPlayerUseOffset!.Value);
+    public ISchemaFixedArray<int> ReserveAmmo {
+        get => new SchemaFixedArray<int>(_Handle, 0x4174B75EB3FEBB0B, 2, 4, 4);
     }
-  }
+    private static nint? _OnPlayerUseOffset;
 
-  public void NextPrimaryAttackTickUpdated() {
-    Schema.Update(_Handle, 0x4174B75E11BA24E3);
-  }
-  public void NextPrimaryAttackTickRatioUpdated() {
-    Schema.Update(_Handle, 0x4174B75E0D9A9E18);
-  }
-  public void NextSecondaryAttackTickUpdated() {
-    Schema.Update(_Handle, 0x4174B75EDE66C257);
-  }
-  public void NextSecondaryAttackTickRatioUpdated() {
-    Schema.Update(_Handle, 0x4174B75EF3E6AF88);
-  }
-  public void Clip1Updated() {
-    Schema.Update(_Handle, 0x4174B75ED0250969);
-  }
-  public void Clip2Updated() {
-    Schema.Update(_Handle, 0x4174B75ECD2504B0);
-  }
-  public void ReserveAmmoUpdated() {
-    Schema.Update(_Handle, 0x4174B75EB3FEBB0B);
-  }
+    public ref CEntityIOOutput OnPlayerUse {
+        get {
+            _OnPlayerUseOffset = _OnPlayerUseOffset ?? Schema.GetOffset(0x4174B75E611C9A14);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerUseOffset!.Value);
+        }
+    }
+
+    public void NextPrimaryAttackTickUpdated() => Schema.Update(_Handle, 0x4174B75E11BA24E3);
+    public void NextPrimaryAttackTickRatioUpdated() => Schema.Update(_Handle, 0x4174B75E0D9A9E18);
+    public void NextSecondaryAttackTickUpdated() => Schema.Update(_Handle, 0x4174B75EDE66C257);
+    public void NextSecondaryAttackTickRatioUpdated() => Schema.Update(_Handle, 0x4174B75EF3E6AF88);
+    public void Clip1Updated() => Schema.Update(_Handle, 0x4174B75ED0250969);
+    public void Clip2Updated() => Schema.Update(_Handle, 0x4174B75ECD2504B0);
+    public void ReserveAmmoUpdated() => Schema.Update(_Handle, 0x4174B75EB3FEBB0B);
 }

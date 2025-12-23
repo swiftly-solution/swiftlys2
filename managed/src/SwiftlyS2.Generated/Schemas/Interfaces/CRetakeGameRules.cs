@@ -8,29 +8,29 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRetakeGameRules : ISchemaClass<CRetakeGameRules> {
+public partial interface CRetakeGameRules : ISchemaClass<CRetakeGameRules>
+{
+    static CRetakeGameRules ISchemaClass<CRetakeGameRules>.From(nint handle) => new CRetakeGameRulesImpl(handle);
+    static int ISchemaClass<CRetakeGameRules>.Size => 496;
+    static string? ISchemaClass<CRetakeGameRules>.ClassName => null;
 
-  static CRetakeGameRules ISchemaClass<CRetakeGameRules>.From(nint handle) => new CRetakeGameRulesImpl(handle);
-  static int ISchemaClass<CRetakeGameRules>.Size => 496;
-  static string? ISchemaClass<CRetakeGameRules>.ClassName => null;
 
-  
-  public ref int MatchSeed { get; }
-  
-  public ref bool BlockersPresent { get; }
-  
-  public ref bool RoundInProgress { get; }
-  
-  public ref int FirstSecondHalfRound { get; }
-  
-  public ref int BombSite { get; }
-  
-  public ref CHandle<CCSPlayerPawn> BombPlanter { get; }
+    public ref int MatchSeed { get; }
 
-  public void MatchSeedUpdated();
-  public void BlockersPresentUpdated();
-  public void RoundInProgressUpdated();
-  public void FirstSecondHalfRoundUpdated();
-  public void BombSiteUpdated();
-  public void BombPlanterUpdated();
+    public ref bool BlockersPresent { get; }
+
+    public ref bool RoundInProgress { get; }
+
+    public ref int FirstSecondHalfRound { get; }
+
+    public ref int BombSite { get; }
+
+    public ref CHandle<CCSPlayerPawn> BombPlanter { get; }
+
+    public void MatchSeedUpdated();
+    public void BlockersPresentUpdated();
+    public void RoundInProgressUpdated();
+    public void FirstSecondHalfRoundUpdated();
+    public void BombSiteUpdated();
+    public void BombPlanterUpdated();
 }

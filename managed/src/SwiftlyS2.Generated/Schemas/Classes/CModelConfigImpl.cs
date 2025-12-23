@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigImpl : SchemaClass, CModelConfig {
+internal partial class CModelConfigImpl : SchemaClass, CModelConfig
+{
+    public CModelConfigImpl(nint handle) : base(handle) { }
 
-  public CModelConfigImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ConfigNameOffset;
 
-  private static nint? _ConfigNameOffset;
+    public string ConfigName {
+        get {
+            _ConfigNameOffset = _ConfigNameOffset ?? Schema.GetOffset(0xF6401D5DA7B74064);
+            return Schema.GetString(_Handle.Read<nint>(_ConfigNameOffset!.Value));
+        }
+        set {
+            _ConfigNameOffset = _ConfigNameOffset ?? Schema.GetOffset(0xF6401D5DA7B74064);
+            Schema.SetString(_Handle, _ConfigNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ElementsOffset;
 
-  public string ConfigName {
-    get {
-      if (_ConfigNameOffset == null) {
-        _ConfigNameOffset = Schema.GetOffset(0xF6401D5DA7B74064);
-      }
-      var ptr = _Handle.Read<nint>(_ConfigNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<PointerTo<CModelConfigElement>> Elements {
+        get {
+            _ElementsOffset = _ElementsOffset ?? Schema.GetOffset(0xF6401D5DC36D5D4C);
+            return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfigElement>>>(_ElementsOffset!.Value);
+        }
     }
-    set {
-      if (_ConfigNameOffset == null) {
-        _ConfigNameOffset = Schema.GetOffset(0xF6401D5DA7B74064);
-      }
-      Schema.SetString(_Handle, _ConfigNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ElementsOffset;
+    private static nint? _TopLevelOffset;
 
-  public ref CUtlVector<PointerTo<CModelConfigElement>> Elements {
-    get {
-      if (_ElementsOffset == null) {
-        _ElementsOffset = Schema.GetOffset(0xF6401D5DC36D5D4C);
-      }
-      return ref _Handle.AsRef<CUtlVector<PointerTo<CModelConfigElement>>>(_ElementsOffset!.Value);
+    public ref bool TopLevel {
+        get {
+            _TopLevelOffset = _TopLevelOffset ?? Schema.GetOffset(0xF6401D5D0EC64BE2);
+            return ref _Handle.AsRef<bool>(_TopLevelOffset!.Value);
+        }
     }
-  }
-  private static nint? _TopLevelOffset;
+    private static nint? _ActiveInEditorByDefaultOffset;
 
-  public ref bool TopLevel {
-    get {
-      if (_TopLevelOffset == null) {
-        _TopLevelOffset = Schema.GetOffset(0xF6401D5D0EC64BE2);
-      }
-      return ref _Handle.AsRef<bool>(_TopLevelOffset!.Value);
+    public ref bool ActiveInEditorByDefault {
+        get {
+            _ActiveInEditorByDefaultOffset = _ActiveInEditorByDefaultOffset ?? Schema.GetOffset(0xF6401D5D6E287741);
+            return ref _Handle.AsRef<bool>(_ActiveInEditorByDefaultOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveInEditorByDefaultOffset;
-
-  public ref bool ActiveInEditorByDefault {
-    get {
-      if (_ActiveInEditorByDefaultOffset == null) {
-        _ActiveInEditorByDefaultOffset = Schema.GetOffset(0xF6401D5D6E287741);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveInEditorByDefaultOffset!.Value);
-    }
-  }
 
 
 }

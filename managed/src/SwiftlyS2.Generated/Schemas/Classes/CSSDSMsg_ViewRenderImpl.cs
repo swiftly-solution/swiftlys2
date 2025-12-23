@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSSDSMsg_ViewRenderImpl : SchemaClass, CSSDSMsg_ViewRender {
+internal partial class CSSDSMsg_ViewRenderImpl : SchemaClass, CSSDSMsg_ViewRender
+{
+    public CSSDSMsg_ViewRenderImpl(nint handle) : base(handle) { }
 
-  public CSSDSMsg_ViewRenderImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ViewIdOffset;
 
-  private static nint? _ViewIdOffset;
-
-  public SceneViewId_t ViewId {
-    get {
-      if (_ViewIdOffset == null) {
-        _ViewIdOffset = Schema.GetOffset(0x2CD48EEEE976CB25);
-      }
-      return new SceneViewId_tImpl(_Handle + _ViewIdOffset!.Value);
+    public SceneViewId_t ViewId {
+        get {
+            _ViewIdOffset = _ViewIdOffset ?? Schema.GetOffset(0x2CD48EEEE976CB25);
+            return new SceneViewId_tImpl(_Handle + _ViewIdOffset!.Value);
+        }
     }
-  }
-  private static nint? _ViewNameOffset;
+    private static nint? _ViewNameOffset;
 
-  public string ViewName {
-    get {
-      if (_ViewNameOffset == null) {
-        _ViewNameOffset = Schema.GetOffset(0x2CD48EEEBA5BBDBB);
-      }
-      var ptr = _Handle.Read<nint>(_ViewNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ViewNameOffset == null) {
-        _ViewNameOffset = Schema.GetOffset(0x2CD48EEEBA5BBDBB);
-      }
-      Schema.SetString(_Handle, _ViewNameOffset!.Value, value);
-    }
-  } 
+    public string ViewName {
+        get {
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0x2CD48EEEBA5BBDBB);
+            return Schema.GetString(_Handle.Read<nint>(_ViewNameOffset!.Value));
+        }
+        set {
+            _ViewNameOffset = _ViewNameOffset ?? Schema.GetOffset(0x2CD48EEEBA5BBDBB);
+            Schema.SetString(_Handle, _ViewNameOffset!.Value, value);
+        }
+    } 
 
 
 }

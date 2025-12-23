@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapTransformVisibilityToScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformVisibilityToScalar> {
+public partial interface C_OP_RemapTransformVisibilityToScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapTransformVisibilityToScalar>
+{
+    static C_OP_RemapTransformVisibilityToScalar ISchemaClass<C_OP_RemapTransformVisibilityToScalar>.From(nint handle) => new C_OP_RemapTransformVisibilityToScalarImpl(handle);
+    static int ISchemaClass<C_OP_RemapTransformVisibilityToScalar>.Size => 600;
+    static string? ISchemaClass<C_OP_RemapTransformVisibilityToScalar>.ClassName => null;
 
-  static C_OP_RemapTransformVisibilityToScalar ISchemaClass<C_OP_RemapTransformVisibilityToScalar>.From(nint handle) => new C_OP_RemapTransformVisibilityToScalarImpl(handle);
-  static int ISchemaClass<C_OP_RemapTransformVisibilityToScalar>.Size => 600;
-  static string? ISchemaClass<C_OP_RemapTransformVisibilityToScalar>.ClassName => null;
 
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref float Radius { get; }
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref float Radius { get; }
 
 
 }

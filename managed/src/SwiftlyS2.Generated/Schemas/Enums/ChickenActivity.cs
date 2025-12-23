@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ChickenActivity : uint {
-
+public enum ChickenActivity : uint
+{
  IDLE = 0,
 
  SQUAT = 1,

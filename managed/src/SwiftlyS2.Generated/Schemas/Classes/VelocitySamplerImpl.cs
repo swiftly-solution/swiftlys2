@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VelocitySamplerImpl : SchemaClass, VelocitySampler {
+internal partial class VelocitySamplerImpl : SchemaClass, VelocitySampler
+{
+    public VelocitySamplerImpl(nint handle) : base(handle) { }
 
-  public VelocitySamplerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PrevSampleOffset;
 
-  private static nint? _PrevSampleOffset;
-
-  public ref Vector PrevSample {
-    get {
-      if (_PrevSampleOffset == null) {
-        _PrevSampleOffset = Schema.GetOffset(0x5547216E1BCE7EF2);
-      }
-      return ref _Handle.AsRef<Vector>(_PrevSampleOffset!.Value);
+    public ref Vector PrevSample {
+        get {
+            _PrevSampleOffset = _PrevSampleOffset ?? Schema.GetOffset(0x5547216E1BCE7EF2);
+            return ref _Handle.AsRef<Vector>(_PrevSampleOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrevSampleTimeOffset;
+    private static nint? _PrevSampleTimeOffset;
 
-  public GameTime_t PrevSampleTime {
-    get {
-      if (_PrevSampleTimeOffset == null) {
-        _PrevSampleTimeOffset = Schema.GetOffset(0x5547216E0D491EE7);
-      }
-      return new GameTime_tImpl(_Handle + _PrevSampleTimeOffset!.Value);
+    public GameTime_t PrevSampleTime {
+        get {
+            _PrevSampleTimeOffset = _PrevSampleTimeOffset ?? Schema.GetOffset(0x5547216E0D491EE7);
+            return new GameTime_tImpl(_Handle + _PrevSampleTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _IdealSampleRateOffset;
+    private static nint? _IdealSampleRateOffset;
 
-  public ref float IdealSampleRate {
-    get {
-      if (_IdealSampleRateOffset == null) {
-        _IdealSampleRateOffset = Schema.GetOffset(0x5547216EF1562586);
-      }
-      return ref _Handle.AsRef<float>(_IdealSampleRateOffset!.Value);
+    public ref float IdealSampleRate {
+        get {
+            _IdealSampleRateOffset = _IdealSampleRateOffset ?? Schema.GetOffset(0x5547216EF1562586);
+            return ref _Handle.AsRef<float>(_IdealSampleRateOffset!.Value);
+        }
     }
-  }
 
 
 }

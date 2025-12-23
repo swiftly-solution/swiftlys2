@@ -8,25 +8,25 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayer_WeaponServices : CPlayerPawnComponent, ISchemaClass<CPlayer_WeaponServices> {
+public partial interface CPlayer_WeaponServices : CPlayerPawnComponent, ISchemaClass<CPlayer_WeaponServices>
+{
+    static CPlayer_WeaponServices ISchemaClass<CPlayer_WeaponServices>.From(nint handle) => new CPlayer_WeaponServicesImpl(handle);
+    static int ISchemaClass<CPlayer_WeaponServices>.Size => 168;
+    static string? ISchemaClass<CPlayer_WeaponServices>.ClassName => null;
 
-  static CPlayer_WeaponServices ISchemaClass<CPlayer_WeaponServices>.From(nint handle) => new CPlayer_WeaponServicesImpl(handle);
-  static int ISchemaClass<CPlayer_WeaponServices>.Size => 168;
-  static string? ISchemaClass<CPlayer_WeaponServices>.ClassName => null;
 
-  
-  public ref CUtlVector<CHandle<CBasePlayerWeapon>> MyWeapons { get; }
-  
-  public ref CHandle<CBasePlayerWeapon> ActiveWeapon { get; }
-  
-  public ref CHandle<CBasePlayerWeapon> LastWeapon { get; }
-  
-  public ISchemaFixedArray<ushort> Ammo { get; }
-  
-  public ref bool PreventWeaponPickup { get; }
+    public ref CUtlVector<CHandle<CBasePlayerWeapon>> MyWeapons { get; }
 
-  public void MyWeaponsUpdated();
-  public void ActiveWeaponUpdated();
-  public void LastWeaponUpdated();
-  public void AmmoUpdated();
+    public ref CHandle<CBasePlayerWeapon> ActiveWeapon { get; }
+
+    public ref CHandle<CBasePlayerWeapon> LastWeapon { get; }
+
+    public ISchemaFixedArray<ushort> Ammo { get; }
+
+    public ref bool PreventWeaponPickup { get; }
+
+    public void MyWeaponsUpdated();
+    public void ActiveWeaponUpdated();
+    public void LastWeaponUpdated();
+    public void AmmoUpdated();
 }

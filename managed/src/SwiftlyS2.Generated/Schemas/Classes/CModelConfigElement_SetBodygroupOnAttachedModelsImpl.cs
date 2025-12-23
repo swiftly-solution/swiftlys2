@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigElement_SetBodygroupOnAttachedModelsImpl : CModelConfigElementImpl, CModelConfigElement_SetBodygroupOnAttachedModels {
+internal partial class CModelConfigElement_SetBodygroupOnAttachedModelsImpl : CModelConfigElementImpl, CModelConfigElement_SetBodygroupOnAttachedModels
+{
+    public CModelConfigElement_SetBodygroupOnAttachedModelsImpl(nint handle) : base(handle) { }
 
-  public CModelConfigElement_SetBodygroupOnAttachedModelsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _GroupNameOffset;
 
-  private static nint? _GroupNameOffset;
+    public string GroupName {
+        get {
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xCC9BDB84E0A55E67);
+            return Schema.GetString(_Handle.Read<nint>(_GroupNameOffset!.Value));
+        }
+        set {
+            _GroupNameOffset = _GroupNameOffset ?? Schema.GetOffset(0xCC9BDB84E0A55E67);
+            Schema.SetString(_Handle, _GroupNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ChoiceOffset;
 
-  public string GroupName {
-    get {
-      if (_GroupNameOffset == null) {
-        _GroupNameOffset = Schema.GetOffset(0xCC9BDB84E0A55E67);
-      }
-      var ptr = _Handle.Read<nint>(_GroupNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int Choice {
+        get {
+            _ChoiceOffset = _ChoiceOffset ?? Schema.GetOffset(0xCC9BDB847CC11192);
+            return ref _Handle.AsRef<int>(_ChoiceOffset!.Value);
+        }
     }
-    set {
-      if (_GroupNameOffset == null) {
-        _GroupNameOffset = Schema.GetOffset(0xCC9BDB84E0A55E67);
-      }
-      Schema.SetString(_Handle, _GroupNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ChoiceOffset;
-
-  public ref int Choice {
-    get {
-      if (_ChoiceOffset == null) {
-        _ChoiceOffset = Schema.GetOffset(0xCC9BDB847CC11192);
-      }
-      return ref _Handle.AsRef<int>(_ChoiceOffset!.Value);
-    }
-  }
 
 
 }

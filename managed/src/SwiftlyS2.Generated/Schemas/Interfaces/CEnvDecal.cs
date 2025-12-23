@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvDecal : CBaseModelEntity, ISchemaClass<CEnvDecal> {
+public partial interface CEnvDecal : CBaseModelEntity, ISchemaClass<CEnvDecal>
+{
+    static CEnvDecal ISchemaClass<CEnvDecal>.From(nint handle) => new CEnvDecalImpl(handle);
+    static int ISchemaClass<CEnvDecal>.Size => 2040;
+    static string? ISchemaClass<CEnvDecal>.ClassName => "env_decal";
 
-  static CEnvDecal ISchemaClass<CEnvDecal>.From(nint handle) => new CEnvDecalImpl(handle);
-  static int ISchemaClass<CEnvDecal>.Size => 2040;
-  static string? ISchemaClass<CEnvDecal>.ClassName => "env_decal";
 
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> DecalMaterial { get; }
-  
-  public ref float Width { get; }
-  
-  public ref float Height { get; }
-  
-  public ref float Depth { get; }
-  
-  public ref uint RenderOrder { get; }
-  
-  public ref bool ProjectOnWorld { get; }
-  
-  public ref bool ProjectOnCharacters { get; }
-  
-  public ref bool ProjectOnWater { get; }
-  
-  public ref float DepthSortBias { get; }
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> DecalMaterial { get; }
 
-  public void DecalMaterialUpdated();
-  public void WidthUpdated();
-  public void HeightUpdated();
-  public void DepthUpdated();
-  public void RenderOrderUpdated();
-  public void ProjectOnWorldUpdated();
-  public void ProjectOnCharactersUpdated();
-  public void ProjectOnWaterUpdated();
-  public void DepthSortBiasUpdated();
+    public ref float Width { get; }
+
+    public ref float Height { get; }
+
+    public ref float Depth { get; }
+
+    public ref uint RenderOrder { get; }
+
+    public ref bool ProjectOnWorld { get; }
+
+    public ref bool ProjectOnCharacters { get; }
+
+    public ref bool ProjectOnWater { get; }
+
+    public ref float DepthSortBias { get; }
+
+    public void DecalMaterialUpdated();
+    public void WidthUpdated();
+    public void HeightUpdated();
+    public void DepthUpdated();
+    public void RenderOrderUpdated();
+    public void ProjectOnWorldUpdated();
+    public void ProjectOnCharactersUpdated();
+    public void ProjectOnWaterUpdated();
+    public void DepthSortBiasUpdated();
 }

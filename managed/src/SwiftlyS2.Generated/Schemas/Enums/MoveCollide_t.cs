@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum MoveCollide_t : byte {
-
+public enum MoveCollide_t : byte
+{
  MOVECOLLIDE_DEFAULT = 0,
 
  MOVECOLLIDE_FLY_BOUNCE = 1,

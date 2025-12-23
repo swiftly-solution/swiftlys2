@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CStaticPoseCacheImpl : SchemaClass, CStaticPoseCache {
+internal partial class CStaticPoseCacheImpl : SchemaClass, CStaticPoseCache
+{
+    public CStaticPoseCacheImpl(nint handle) : base(handle) { }
 
-  public CStaticPoseCacheImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PosesOffset;
 
-  private static nint? _PosesOffset;
-
-  public ref CUtlVector<CCachedPose> Poses {
-    get {
-      if (_PosesOffset == null) {
-        _PosesOffset = Schema.GetOffset(0x2223EF1DB851C9F5);
-      }
-      return ref _Handle.AsRef<CUtlVector<CCachedPose>>(_PosesOffset!.Value);
+    public ref CUtlVector<CCachedPose> Poses {
+        get {
+            _PosesOffset = _PosesOffset ?? Schema.GetOffset(0x2223EF1DB851C9F5);
+            return ref _Handle.AsRef<CUtlVector<CCachedPose>>(_PosesOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneCountOffset;
+    private static nint? _BoneCountOffset;
 
-  public ref int BoneCount {
-    get {
-      if (_BoneCountOffset == null) {
-        _BoneCountOffset = Schema.GetOffset(0x2223EF1D71FE39A2);
-      }
-      return ref _Handle.AsRef<int>(_BoneCountOffset!.Value);
+    public ref int BoneCount {
+        get {
+            _BoneCountOffset = _BoneCountOffset ?? Schema.GetOffset(0x2223EF1D71FE39A2);
+            return ref _Handle.AsRef<int>(_BoneCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _MorphCountOffset;
+    private static nint? _MorphCountOffset;
 
-  public ref int MorphCount {
-    get {
-      if (_MorphCountOffset == null) {
-        _MorphCountOffset = Schema.GetOffset(0x2223EF1D32C62DD0);
-      }
-      return ref _Handle.AsRef<int>(_MorphCountOffset!.Value);
+    public ref int MorphCount {
+        get {
+            _MorphCountOffset = _MorphCountOffset ?? Schema.GetOffset(0x2223EF1D32C62DD0);
+            return ref _Handle.AsRef<int>(_MorphCountOffset!.Value);
+        }
     }
-  }
 
 
 }

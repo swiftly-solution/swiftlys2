@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface NmSyncTrackTime_t : ISchemaClass<NmSyncTrackTime_t> {
+public partial interface NmSyncTrackTime_t : ISchemaClass<NmSyncTrackTime_t>
+{
+    static NmSyncTrackTime_t ISchemaClass<NmSyncTrackTime_t>.From(nint handle) => new NmSyncTrackTime_tImpl(handle);
+    static int ISchemaClass<NmSyncTrackTime_t>.Size => 8;
+    static string? ISchemaClass<NmSyncTrackTime_t>.ClassName => null;
 
-  static NmSyncTrackTime_t ISchemaClass<NmSyncTrackTime_t>.From(nint handle) => new NmSyncTrackTime_tImpl(handle);
-  static int ISchemaClass<NmSyncTrackTime_t>.Size => 8;
-  static string? ISchemaClass<NmSyncTrackTime_t>.ClassName => null;
 
-  
-  public ref int EventIdx { get; }
-  
-  public NmPercent_t PercentageThrough { get; }
+    public ref int EventIdx { get; }
+
+    public NmPercent_t PercentageThrough { get; }
 
 
 }

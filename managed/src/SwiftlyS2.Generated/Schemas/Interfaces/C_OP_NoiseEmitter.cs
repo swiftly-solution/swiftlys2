@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_NoiseEmitter : CParticleFunctionEmitter, ISchemaClass<C_OP_NoiseEmitter> {
+public partial interface C_OP_NoiseEmitter : CParticleFunctionEmitter, ISchemaClass<C_OP_NoiseEmitter>
+{
+    static C_OP_NoiseEmitter ISchemaClass<C_OP_NoiseEmitter>.From(nint handle) => new C_OP_NoiseEmitterImpl(handle);
+    static int ISchemaClass<C_OP_NoiseEmitter>.Size => 536;
+    static string? ISchemaClass<C_OP_NoiseEmitter>.ClassName => null;
 
-  static C_OP_NoiseEmitter ISchemaClass<C_OP_NoiseEmitter>.From(nint handle) => new C_OP_NoiseEmitterImpl(handle);
-  static int ISchemaClass<C_OP_NoiseEmitter>.Size => 536;
-  static string? ISchemaClass<C_OP_NoiseEmitter>.ClassName => null;
 
-  
-  public ref float EmissionDuration { get; }
-  
-  public ref float StartTime { get; }
-  
-  public ref float EmissionScale { get; }
-  
-  public ref int ScaleControlPoint { get; }
-  
-  public ref int ScaleControlPointField { get; }
-  
-  public ref int WorldNoisePoint { get; }
-  
-  public ref bool AbsVal { get; }
-  
-  public ref bool AbsValInv { get; }
-  
-  public ref float Offset { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref float NoiseScale { get; }
-  
-  public ref float WorldNoiseScale { get; }
-  
-  public ref Vector OffsetLoc { get; }
-  
-  public ref float WorldTimeScale { get; }
+    public ref float EmissionDuration { get; }
+
+    public ref float StartTime { get; }
+
+    public ref float EmissionScale { get; }
+
+    public ref int ScaleControlPoint { get; }
+
+    public ref int ScaleControlPointField { get; }
+
+    public ref int WorldNoisePoint { get; }
+
+    public ref bool AbsVal { get; }
+
+    public ref bool AbsValInv { get; }
+
+    public ref float Offset { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref float NoiseScale { get; }
+
+    public ref float WorldNoiseScale { get; }
+
+    public ref Vector OffsetLoc { get; }
+
+    public ref float WorldTimeScale { get; }
 
 
 }

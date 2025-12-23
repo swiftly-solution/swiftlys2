@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_OscillateScalar : CParticleFunctionOperator, ISchemaClass<C_OP_OscillateScalar> {
+public partial interface C_OP_OscillateScalar : CParticleFunctionOperator, ISchemaClass<C_OP_OscillateScalar>
+{
+    static C_OP_OscillateScalar ISchemaClass<C_OP_OscillateScalar>.From(nint handle) => new C_OP_OscillateScalarImpl(handle);
+    static int ISchemaClass<C_OP_OscillateScalar>.Size => 512;
+    static string? ISchemaClass<C_OP_OscillateScalar>.ClassName => null;
 
-  static C_OP_OscillateScalar ISchemaClass<C_OP_OscillateScalar>.From(nint handle) => new C_OP_OscillateScalarImpl(handle);
-  static int ISchemaClass<C_OP_OscillateScalar>.Size => 512;
-  static string? ISchemaClass<C_OP_OscillateScalar>.ClassName => null;
 
-  
-  public ref float RateMin { get; }
-  
-  public ref float RateMax { get; }
-  
-  public ref float FrequencyMin { get; }
-  
-  public ref float FrequencyMax { get; }
-  
-  public ParticleAttributeIndex_t Field { get; }
-  
-  public ref bool Proportional { get; }
-  
-  public ref bool ProportionalOp { get; }
-  
-  public ref float StartTime_min { get; }
-  
-  public ref float StartTime_max { get; }
-  
-  public ref float EndTime_min { get; }
-  
-  public ref float EndTime_max { get; }
-  
-  public ref float OscMult { get; }
-  
-  public ref float OscAdd { get; }
+    public ref float RateMin { get; }
+
+    public ref float RateMax { get; }
+
+    public ref float FrequencyMin { get; }
+
+    public ref float FrequencyMax { get; }
+
+    public ParticleAttributeIndex_t Field { get; }
+
+    public ref bool Proportional { get; }
+
+    public ref bool ProportionalOp { get; }
+
+    public ref float StartTime_min { get; }
+
+    public ref float StartTime_max { get; }
+
+    public ref float EndTime_min { get; }
+
+    public ref float EndTime_max { get; }
+
+    public ref float OscMult { get; }
+
+    public ref float OscAdd { get; }
 
 
 }

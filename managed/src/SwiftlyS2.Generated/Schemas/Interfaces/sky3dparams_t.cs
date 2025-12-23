@@ -8,29 +8,29 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface sky3dparams_t : ISchemaClass<sky3dparams_t> {
+public partial interface sky3dparams_t : ISchemaClass<sky3dparams_t>
+{
+    static sky3dparams_t ISchemaClass<sky3dparams_t>.From(nint handle) => new sky3dparams_tImpl(handle);
+    static int ISchemaClass<sky3dparams_t>.Size => 144;
+    static string? ISchemaClass<sky3dparams_t>.ClassName => null;
 
-  static sky3dparams_t ISchemaClass<sky3dparams_t>.From(nint handle) => new sky3dparams_tImpl(handle);
-  static int ISchemaClass<sky3dparams_t>.Size => 144;
-  static string? ISchemaClass<sky3dparams_t>.ClassName => null;
 
-  
-  public ref short Scale { get; }
-  
-  public ref Vector Origin { get; }
-  
-  public ref bool Clip3DSkyBoxNearToWorldFar { get; }
-  
-  public ref float Clip3DSkyBoxNearToWorldFarOffset { get; }
-  
-  public fogparams_t Fog { get; }
-  
-  public ref uint WorldGroupID { get; }
+    public ref short Scale { get; }
 
-  public void ScaleUpdated();
-  public void OriginUpdated();
-  public void Clip3DSkyBoxNearToWorldFarUpdated();
-  public void Clip3DSkyBoxNearToWorldFarOffsetUpdated();
-  public void FogUpdated();
-  public void WorldGroupIDUpdated();
+    public ref Vector Origin { get; }
+
+    public ref bool Clip3DSkyBoxNearToWorldFar { get; }
+
+    public ref float Clip3DSkyBoxNearToWorldFarOffset { get; }
+
+    public fogparams_t Fog { get; }
+
+    public ref uint WorldGroupID { get; }
+
+    public void ScaleUpdated();
+    public void OriginUpdated();
+    public void Clip3DSkyBoxNearToWorldFarUpdated();
+    public void Clip3DSkyBoxNearToWorldFarOffsetUpdated();
+    public void FogUpdated();
+    public void WorldGroupIDUpdated();
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum IChoreoServices__ChoreoState_t : uint {
-
+public enum IChoreoServices__ChoreoState_t : uint
+{
  STATE_PRE_SCRIPT = 0,
 
  STATE_WAIT_FOR_SCRIPT = 1,

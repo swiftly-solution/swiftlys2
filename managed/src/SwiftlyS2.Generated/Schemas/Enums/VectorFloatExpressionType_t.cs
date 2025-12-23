@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VectorFloatExpressionType_t : uint {
-
+public enum VectorFloatExpressionType_t : uint
+{
  VECTOR_FLOAT_EXPRESSION_UNINITIALIZED = uint.MaxValue,
 
  VECTOR_FLOAT_EXPRESSION_DOTPRODUCT = 0,

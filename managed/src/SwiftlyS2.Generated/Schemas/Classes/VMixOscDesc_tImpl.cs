@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixOscDesc_tImpl : SchemaClass, VMixOscDesc_t {
+internal partial class VMixOscDesc_tImpl : SchemaClass, VMixOscDesc_t
+{
+    public VMixOscDesc_tImpl(nint handle) : base(handle) { }
 
-  public VMixOscDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OscTypeOffset;
 
-  private static nint? _OscTypeOffset;
-
-  public ref VMixLFOShape_t OscType {
-    get {
-      if (_OscTypeOffset == null) {
-        _OscTypeOffset = Schema.GetOffset(0x414F0016106B4054);
-      }
-      return ref _Handle.AsRef<VMixLFOShape_t>(_OscTypeOffset!.Value);
+    public ref VMixLFOShape_t OscType {
+        get {
+            _OscTypeOffset = _OscTypeOffset ?? Schema.GetOffset(0x414F0016106B4054);
+            return ref _Handle.AsRef<VMixLFOShape_t>(_OscTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FreqOffset;
+    private static nint? _FreqOffset;
 
-  public ref float Freq {
-    get {
-      if (_FreqOffset == null) {
-        _FreqOffset = Schema.GetOffset(0x414F00164E0B0897);
-      }
-      return ref _Handle.AsRef<float>(_FreqOffset!.Value);
+    public ref float Freq {
+        get {
+            _FreqOffset = _FreqOffset ?? Schema.GetOffset(0x414F00164E0B0897);
+            return ref _Handle.AsRef<float>(_FreqOffset!.Value);
+        }
     }
-  }
-  private static nint? _PhaseOffset;
+    private static nint? _PhaseOffset;
 
-  public ref float Phase {
-    get {
-      if (_PhaseOffset == null) {
-        _PhaseOffset = Schema.GetOffset(0x414F00163C22A9CA);
-      }
-      return ref _Handle.AsRef<float>(_PhaseOffset!.Value);
+    public ref float Phase {
+        get {
+            _PhaseOffset = _PhaseOffset ?? Schema.GetOffset(0x414F00163C22A9CA);
+            return ref _Handle.AsRef<float>(_PhaseOffset!.Value);
+        }
     }
-  }
 
 
 }

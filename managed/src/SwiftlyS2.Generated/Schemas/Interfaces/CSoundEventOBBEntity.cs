@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSoundEventOBBEntity : CSoundEventEntity, ISchemaClass<CSoundEventOBBEntity> {
+public partial interface CSoundEventOBBEntity : CSoundEventEntity, ISchemaClass<CSoundEventOBBEntity>
+{
+    static CSoundEventOBBEntity ISchemaClass<CSoundEventOBBEntity>.From(nint handle) => new CSoundEventOBBEntityImpl(handle);
+    static int ISchemaClass<CSoundEventOBBEntity>.Size => 1504;
+    static string? ISchemaClass<CSoundEventOBBEntity>.ClassName => "snd_event_orientedbox";
 
-  static CSoundEventOBBEntity ISchemaClass<CSoundEventOBBEntity>.From(nint handle) => new CSoundEventOBBEntityImpl(handle);
-  static int ISchemaClass<CSoundEventOBBEntity>.Size => 1504;
-  static string? ISchemaClass<CSoundEventOBBEntity>.ClassName => "snd_event_orientedbox";
 
-  
-  public ref Vector Mins { get; }
-  
-  public ref Vector Maxs { get; }
+    public ref Vector Mins { get; }
 
-  public void MinsUpdated();
-  public void MaxsUpdated();
+    public ref Vector Maxs { get; }
+
+    public void MinsUpdated();
+    public void MaxsUpdated();
 }

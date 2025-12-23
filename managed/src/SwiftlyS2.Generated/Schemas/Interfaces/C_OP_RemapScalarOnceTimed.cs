@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapScalarOnceTimed : CParticleFunctionOperator, ISchemaClass<C_OP_RemapScalarOnceTimed> {
+public partial interface C_OP_RemapScalarOnceTimed : CParticleFunctionOperator, ISchemaClass<C_OP_RemapScalarOnceTimed>
+{
+    static C_OP_RemapScalarOnceTimed ISchemaClass<C_OP_RemapScalarOnceTimed>.From(nint handle) => new C_OP_RemapScalarOnceTimedImpl(handle);
+    static int ISchemaClass<C_OP_RemapScalarOnceTimed>.Size => 496;
+    static string? ISchemaClass<C_OP_RemapScalarOnceTimed>.ClassName => null;
 
-  static C_OP_RemapScalarOnceTimed ISchemaClass<C_OP_RemapScalarOnceTimed>.From(nint handle) => new C_OP_RemapScalarOnceTimedImpl(handle);
-  static int ISchemaClass<C_OP_RemapScalarOnceTimed>.Size => 496;
-  static string? ISchemaClass<C_OP_RemapScalarOnceTimed>.ClassName => null;
 
-  
-  public ref bool Proportional { get; }
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public ref float RemapTime { get; }
+    public ref bool Proportional { get; }
+
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public ref float RemapTime { get; }
 
 
 }

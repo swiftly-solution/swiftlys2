@@ -6,105 +6,80 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ParticleNamedValueConfiguration_tImpl : SchemaClass, ParticleNamedValueConfiguration_t {
+internal partial class ParticleNamedValueConfiguration_tImpl : SchemaClass, ParticleNamedValueConfiguration_t
+{
+    public ParticleNamedValueConfiguration_tImpl(nint handle) : base(handle) { }
 
-  public ParticleNamedValueConfiguration_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ConfigNameOffset;
 
-  private static nint? _ConfigNameOffset;
+    public string ConfigName {
+        get {
+            _ConfigNameOffset = _ConfigNameOffset ?? Schema.GetOffset(0x4C42AD0EA7B74064);
+            return Schema.GetString(_Handle.Read<nint>(_ConfigNameOffset!.Value));
+        }
+        set {
+            _ConfigNameOffset = _ConfigNameOffset ?? Schema.GetOffset(0x4C42AD0EA7B74064);
+            Schema.SetString(_Handle, _ConfigNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ConfigValueOffset;
 
-  public string ConfigName {
-    get {
-      if (_ConfigNameOffset == null) {
-        _ConfigNameOffset = Schema.GetOffset(0x4C42AD0EA7B74064);
-      }
-      var ptr = _Handle.Read<nint>(_ConfigNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public SchemaUntypedField ConfigValue {
+        get {
+            _ConfigValueOffset = _ConfigValueOffset ?? Schema.GetOffset(0x4C42AD0ECF981D3C);
+            return new SchemaUntypedField(_Handle + _ConfigValueOffset!.Value);
+        }
     }
-    set {
-      if (_ConfigNameOffset == null) {
-        _ConfigNameOffset = Schema.GetOffset(0x4C42AD0EA7B74064);
-      }
-      Schema.SetString(_Handle, _ConfigNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ConfigValueOffset;
+    private static nint? _BoundValuePathOffset;
 
-  public SchemaUntypedField ConfigValue {
-    get {
-      if (_ConfigValueOffset == null) {
-        _ConfigValueOffset = Schema.GetOffset(0x4C42AD0ECF981D3C);
-      }
-      return new SchemaUntypedField(_Handle + _ConfigValueOffset!.Value);
-    }
-  }
-  private static nint? _BoundValuePathOffset;
+    public string BoundValuePath {
+        get {
+            _BoundValuePathOffset = _BoundValuePathOffset ?? Schema.GetOffset(0x4C42AD0ED4977C9F);
+            return Schema.GetString(_Handle.Read<nint>(_BoundValuePathOffset!.Value));
+        }
+        set {
+            _BoundValuePathOffset = _BoundValuePathOffset ?? Schema.GetOffset(0x4C42AD0ED4977C9F);
+            Schema.SetString(_Handle, _BoundValuePathOffset!.Value, value);
+        }
+    } 
+    private static nint? _AttachTypeOffset;
 
-  public string BoundValuePath {
-    get {
-      if (_BoundValuePathOffset == null) {
-        _BoundValuePathOffset = Schema.GetOffset(0x4C42AD0ED4977C9F);
-      }
-      var ptr = _Handle.Read<nint>(_BoundValuePathOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref ParticleAttachment_t AttachType {
+        get {
+            _AttachTypeOffset = _AttachTypeOffset ?? Schema.GetOffset(0x4C42AD0E432E8381);
+            return ref _Handle.AsRef<ParticleAttachment_t>(_AttachTypeOffset!.Value);
+        }
     }
-    set {
-      if (_BoundValuePathOffset == null) {
-        _BoundValuePathOffset = Schema.GetOffset(0x4C42AD0ED4977C9F);
-      }
-      Schema.SetString(_Handle, _BoundValuePathOffset!.Value, value);
-    }
-  } 
-  private static nint? _AttachTypeOffset;
+    private static nint? _StrEntityScopeOffset;
 
-  public ref ParticleAttachment_t AttachType {
-    get {
-      if (_AttachTypeOffset == null) {
-        _AttachTypeOffset = Schema.GetOffset(0x4C42AD0E432E8381);
-      }
-      return ref _Handle.AsRef<ParticleAttachment_t>(_AttachTypeOffset!.Value);
-    }
-  }
-  private static nint? _StrEntityScopeOffset;
+    public string StrEntityScope {
+        get {
+            _StrEntityScopeOffset = _StrEntityScopeOffset ?? Schema.GetOffset(0x4C42AD0ECCAF0621);
+            return Schema.GetString(_Handle.Read<nint>(_StrEntityScopeOffset!.Value));
+        }
+        set {
+            _StrEntityScopeOffset = _StrEntityScopeOffset ?? Schema.GetOffset(0x4C42AD0ECCAF0621);
+            Schema.SetString(_Handle, _StrEntityScopeOffset!.Value, value);
+        }
+    } 
+    private static nint? _StrAttachmentNameOffset;
 
-  public string StrEntityScope {
-    get {
-      if (_StrEntityScopeOffset == null) {
-        _StrEntityScopeOffset = Schema.GetOffset(0x4C42AD0ECCAF0621);
-      }
-      var ptr = _Handle.Read<nint>(_StrEntityScopeOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrEntityScopeOffset == null) {
-        _StrEntityScopeOffset = Schema.GetOffset(0x4C42AD0ECCAF0621);
-      }
-      Schema.SetString(_Handle, _StrEntityScopeOffset!.Value, value);
-    }
-  } 
-  private static nint? _StrAttachmentNameOffset;
-
-  public string StrAttachmentName {
-    get {
-      if (_StrAttachmentNameOffset == null) {
-        _StrAttachmentNameOffset = Schema.GetOffset(0x4C42AD0EEB143B4E);
-      }
-      var ptr = _Handle.Read<nint>(_StrAttachmentNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrAttachmentNameOffset == null) {
-        _StrAttachmentNameOffset = Schema.GetOffset(0x4C42AD0EEB143B4E);
-      }
-      Schema.SetString(_Handle, _StrAttachmentNameOffset!.Value, value);
-    }
-  } 
+    public string StrAttachmentName {
+        get {
+            _StrAttachmentNameOffset = _StrAttachmentNameOffset ?? Schema.GetOffset(0x4C42AD0EEB143B4E);
+            return Schema.GetString(_Handle.Read<nint>(_StrAttachmentNameOffset!.Value));
+        }
+        set {
+            _StrAttachmentNameOffset = _StrAttachmentNameOffset ?? Schema.GetOffset(0x4C42AD0EEB143B4E);
+            Schema.SetString(_Handle, _StrAttachmentNameOffset!.Value, value);
+        }
+    } 
 
 
 }

@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ModelCullImpl : CParticleFunctionOperatorImpl, C_OP_ModelCull {
+internal partial class C_OP_ModelCullImpl : CParticleFunctionOperatorImpl, C_OP_ModelCull
+{
+    public C_OP_ModelCullImpl(nint handle) : base(handle) { }
 
-  public C_OP_ModelCullImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0xED02878A3F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
-    }
-  }
-  private static nint? _BoundBoxOffset;
-
-  public ref bool BoundBox {
-    get {
-      if (_BoundBoxOffset == null) {
-        _BoundBoxOffset = Schema.GetOffset(0xED02878AAB65CDDC);
-      }
-      return ref _Handle.AsRef<bool>(_BoundBoxOffset!.Value);
-    }
-  }
-  private static nint? _CullOutsideOffset;
-
-  public ref bool CullOutside {
-    get {
-      if (_CullOutsideOffset == null) {
-        _CullOutsideOffset = Schema.GetOffset(0xED02878AA6EF9E04);
-      }
-      return ref _Handle.AsRef<bool>(_CullOutsideOffset!.Value);
-    }
-  }
-  private static nint? _UseBonesOffset;
-
-  public ref bool UseBones {
-    get {
-      if (_UseBonesOffset == null) {
-        _UseBonesOffset = Schema.GetOffset(0xED02878A10D1938B);
-      }
-      return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
-    }
-  }
-  private static nint? _HitboxSetNameOffset;
-
-  public string HitboxSetName {
-    get {
-        if (_HitboxSetNameOffset == null) {
-            _HitboxSetNameOffset = Schema.GetOffset(0xED02878A6A21BB0E);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0xED02878A3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
-        var ptr = _Handle + _HitboxSetNameOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_HitboxSetNameOffset == null) {
-            _HitboxSetNameOffset = Schema.GetOffset(0xED02878A6A21BB0E);
+    private static nint? _BoundBoxOffset;
+
+    public ref bool BoundBox {
+        get {
+            _BoundBoxOffset = _BoundBoxOffset ?? Schema.GetOffset(0xED02878AAB65CDDC);
+            return ref _Handle.AsRef<bool>(_BoundBoxOffset!.Value);
         }
-        Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
     }
-  } 
+    private static nint? _CullOutsideOffset;
+
+    public ref bool CullOutside {
+        get {
+            _CullOutsideOffset = _CullOutsideOffset ?? Schema.GetOffset(0xED02878AA6EF9E04);
+            return ref _Handle.AsRef<bool>(_CullOutsideOffset!.Value);
+        }
+    }
+    private static nint? _UseBonesOffset;
+
+    public ref bool UseBones {
+        get {
+            _UseBonesOffset = _UseBonesOffset ?? Schema.GetOffset(0xED02878A10D1938B);
+            return ref _Handle.AsRef<bool>(_UseBonesOffset!.Value);
+        }
+    }
+    private static nint? _HitboxSetNameOffset;
+
+    public string HitboxSetName {
+        get {
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0xED02878A6A21BB0E);
+            return Schema.GetString(_Handle + _HitboxSetNameOffset!.Value);
+        }
+        set {
+            _HitboxSetNameOffset = _HitboxSetNameOffset ?? Schema.GetOffset(0xED02878A6A21BB0E);
+            Schema.SetFixedString(_Handle, _HitboxSetNameOffset!.Value, value, 128);
+        }
+    } 
 
 
 }

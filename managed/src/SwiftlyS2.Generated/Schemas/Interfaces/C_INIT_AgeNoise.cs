@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_AgeNoise : CParticleFunctionInitializer, ISchemaClass<C_INIT_AgeNoise> {
+public partial interface C_INIT_AgeNoise : CParticleFunctionInitializer, ISchemaClass<C_INIT_AgeNoise>
+{
+    static C_INIT_AgeNoise ISchemaClass<C_INIT_AgeNoise>.From(nint handle) => new C_INIT_AgeNoiseImpl(handle);
+    static int ISchemaClass<C_INIT_AgeNoise>.Size => 512;
+    static string? ISchemaClass<C_INIT_AgeNoise>.ClassName => null;
 
-  static C_INIT_AgeNoise ISchemaClass<C_INIT_AgeNoise>.From(nint handle) => new C_INIT_AgeNoiseImpl(handle);
-  static int ISchemaClass<C_INIT_AgeNoise>.Size => 512;
-  static string? ISchemaClass<C_INIT_AgeNoise>.ClassName => null;
 
-  
-  public ref bool AbsVal { get; }
-  
-  public ref bool AbsValInv { get; }
-  
-  public ref float Offset { get; }
-  
-  public ref float AgeMin { get; }
-  
-  public ref float AgeMax { get; }
-  
-  public ref float NoiseScale { get; }
-  
-  public ref float NoiseScaleLoc { get; }
-  
-  public ref Vector OffsetLoc { get; }
+    public ref bool AbsVal { get; }
+
+    public ref bool AbsValInv { get; }
+
+    public ref float Offset { get; }
+
+    public ref float AgeMin { get; }
+
+    public ref float AgeMax { get; }
+
+    public ref float NoiseScale { get; }
+
+    public ref float NoiseScaleLoc { get; }
+
+    public ref Vector OffsetLoc { get; }
 
 
 }

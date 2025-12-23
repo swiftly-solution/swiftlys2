@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDSPMixgroupModifier : ISchemaClass<CDSPMixgroupModifier> {
+public partial interface CDSPMixgroupModifier : ISchemaClass<CDSPMixgroupModifier>
+{
+    static CDSPMixgroupModifier ISchemaClass<CDSPMixgroupModifier>.From(nint handle) => new CDSPMixgroupModifierImpl(handle);
+    static int ISchemaClass<CDSPMixgroupModifier>.Size => 32;
+    static string? ISchemaClass<CDSPMixgroupModifier>.ClassName => null;
 
-  static CDSPMixgroupModifier ISchemaClass<CDSPMixgroupModifier>.From(nint handle) => new CDSPMixgroupModifierImpl(handle);
-  static int ISchemaClass<CDSPMixgroupModifier>.Size => 32;
-  static string? ISchemaClass<CDSPMixgroupModifier>.ClassName => null;
 
-  
-  public string Mixgroup { get; set; }
-  
-  public ref float Modifier { get; }
-  
-  public ref float ModifierMin { get; }
-  
-  public ref float SourceModifier { get; }
-  
-  public ref float SourceModifierMin { get; }
-  
-  public ref float ListenerReverbModifierWhenSourceReverbIsActive { get; }
+    public string Mixgroup { get; set; }
+
+    public ref float Modifier { get; }
+
+    public ref float ModifierMin { get; }
+
+    public ref float SourceModifier { get; }
+
+    public ref float SourceModifierMin { get; }
+
+    public ref float ListenerReverbModifierWhenSourceReverbIsActive { get; }
 
 
 }

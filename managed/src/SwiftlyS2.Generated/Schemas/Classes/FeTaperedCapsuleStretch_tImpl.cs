@@ -6,43 +6,38 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeTaperedCapsuleStretch_tImpl : SchemaClass, FeTaperedCapsuleStretch_t {
+internal partial class FeTaperedCapsuleStretch_tImpl : SchemaClass, FeTaperedCapsuleStretch_t
+{
+    public FeTaperedCapsuleStretch_tImpl(nint handle) : base(handle) { }
 
-  public FeTaperedCapsuleStretch_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x627474D0CD6694B9, 2, 2, 2);
-  }
-  private static nint? _CollisionMaskOffset;
-
-  public ref ushort CollisionMask {
-    get {
-      if (_CollisionMaskOffset == null) {
-        _CollisionMaskOffset = Schema.GetOffset(0x627474D00ED3454F);
-      }
-      return ref _Handle.AsRef<ushort>(_CollisionMaskOffset!.Value);
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x627474D0CD6694B9, 2, 2, 2);
     }
-  }
-  private static nint? _DummyOffset;
+    private static nint? _CollisionMaskOffset;
 
-  public ref ushort Dummy {
-    get {
-      if (_DummyOffset == null) {
-        _DummyOffset = Schema.GetOffset(0x627474D0CD8BAE5F);
-      }
-      return ref _Handle.AsRef<ushort>(_DummyOffset!.Value);
+    public ref ushort CollisionMask {
+        get {
+            _CollisionMaskOffset = _CollisionMaskOffset ?? Schema.GetOffset(0x627474D00ED3454F);
+            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<float> Radius {
-    get => new SchemaFixedArray<float>(_Handle, 0x627474D095FBF7AD, 2, 4, 4);
-  }
+    private static nint? _DummyOffset;
+
+    public ref ushort Dummy {
+        get {
+            _DummyOffset = _DummyOffset ?? Schema.GetOffset(0x627474D0CD8BAE5F);
+            return ref _Handle.AsRef<ushort>(_DummyOffset!.Value);
+        }
+    }
+    public ISchemaFixedArray<float> Radius {
+        get => new SchemaFixedArray<float>(_Handle, 0x627474D095FBF7AD, 2, 4, 4);
+    }
 
 
 }

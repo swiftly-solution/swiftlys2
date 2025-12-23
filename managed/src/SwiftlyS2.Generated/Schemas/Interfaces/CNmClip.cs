@@ -8,45 +8,45 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmClip : ISchemaClass<CNmClip> {
+public partial interface CNmClip : ISchemaClass<CNmClip>
+{
+    static CNmClip ISchemaClass<CNmClip>.From(nint handle) => new CNmClipImpl(handle);
+    static int ISchemaClass<CNmClip>.Size => 576;
+    static string? ISchemaClass<CNmClip>.ClassName => null;
 
-  static CNmClip ISchemaClass<CNmClip>.From(nint handle) => new CNmClipImpl(handle);
-  static int ISchemaClass<CNmClip>.Size => 576;
-  static string? ISchemaClass<CNmClip>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton { get; }
-  
-  public ref uint NumFrames { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref CUtlBinaryBlock CompressedPoseData { get; }
-  
-  public ref CUtlVector<NmCompressionSettings_t> TrackCompressionSettings { get; }
-  
-  public ref CUtlVector<uint> CompressedPoseOffsets { get; }
-  
-  public ref CUtlVector<CGlobalSymbol> FloatCurveIDs { get; }
-  
-  public ref CUtlVector<NmFloatCurveCompressionSettings_t> FloatCurveDefs { get; }
-  
-  public ref CUtlVector<ushort> CompressedFloatCurveData { get; }
-  
-  public ref CUtlVector<uint> CompressedFloatCurveOffsets { get; }
-  
-  // CUtlVectorFixedGrowable< CNmClip*, 1 >
-  public SchemaUntypedField SecondaryAnimations { get; }
-  
-  public CNmSyncTrack SyncTrack { get; }
-  
-  public CNmRootMotionData RootMotion { get; }
-  
-  public ref bool IsAdditive { get; }
-  
-  public ref CUtlVector<CNmClip__ModelSpaceSamplingChainLink_t> ModelSpaceSamplingChain { get; }
-  
-  public ref CUtlVector<int> ModelSpaceBoneSamplingIndices { get; }
+    public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton { get; }
+
+    public ref uint NumFrames { get; }
+
+    public ref float Duration { get; }
+
+    public ref CUtlBinaryBlock CompressedPoseData { get; }
+
+    public ref CUtlVector<NmCompressionSettings_t> TrackCompressionSettings { get; }
+
+    public ref CUtlVector<uint> CompressedPoseOffsets { get; }
+
+    public ref CUtlVector<CGlobalSymbol> FloatCurveIDs { get; }
+
+    public ref CUtlVector<NmFloatCurveCompressionSettings_t> FloatCurveDefs { get; }
+
+    public ref CUtlVector<ushort> CompressedFloatCurveData { get; }
+
+    public ref CUtlVector<uint> CompressedFloatCurveOffsets { get; }
+
+    // CUtlVectorFixedGrowable< CNmClip*, 1 >
+    public SchemaUntypedField SecondaryAnimations { get; }
+
+    public CNmSyncTrack SyncTrack { get; }
+
+    public CNmRootMotionData RootMotion { get; }
+
+    public ref bool IsAdditive { get; }
+
+    public ref CUtlVector<CNmClip__ModelSpaceSamplingChainLink_t> ModelSpaceSamplingChain { get; }
+
+    public ref CUtlVector<int> ModelSpaceBoneSamplingIndices { get; }
 
 
 }

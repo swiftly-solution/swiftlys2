@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_VectorNoise : CParticleFunctionOperator, ISchemaClass<C_OP_VectorNoise> {
+public partial interface C_OP_VectorNoise : CParticleFunctionOperator, ISchemaClass<C_OP_VectorNoise>
+{
+    static C_OP_VectorNoise ISchemaClass<C_OP_VectorNoise>.From(nint handle) => new C_OP_VectorNoiseImpl(handle);
+    static int ISchemaClass<C_OP_VectorNoise>.Size => 504;
+    static string? ISchemaClass<C_OP_VectorNoise>.ClassName => null;
 
-  static C_OP_VectorNoise ISchemaClass<C_OP_VectorNoise>.From(nint handle) => new C_OP_VectorNoiseImpl(handle);
-  static int ISchemaClass<C_OP_VectorNoise>.Size => 504;
-  static string? ISchemaClass<C_OP_VectorNoise>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref Vector OutputMin { get; }
-  
-  public ref Vector OutputMax { get; }
-  
-  public ref float Fl4NoiseScale { get; }
-  
-  public ref bool Additive { get; }
-  
-  public ref bool Offset { get; }
-  
-  public ref float NoiseAnimationTimeScale { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref Vector OutputMin { get; }
+
+    public ref Vector OutputMax { get; }
+
+    public ref float Fl4NoiseScale { get; }
+
+    public ref bool Additive { get; }
+
+    public ref bool Offset { get; }
+
+    public ref float NoiseAnimationTimeScale { get; }
 
 
 }

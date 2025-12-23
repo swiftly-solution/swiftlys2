@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_LazyCullCompareFloat : CParticleFunctionOperator, ISchemaClass<C_OP_LazyCullCompareFloat> {
+public partial interface C_OP_LazyCullCompareFloat : CParticleFunctionOperator, ISchemaClass<C_OP_LazyCullCompareFloat>
+{
+    static C_OP_LazyCullCompareFloat ISchemaClass<C_OP_LazyCullCompareFloat>.From(nint handle) => new C_OP_LazyCullCompareFloatImpl(handle);
+    static int ISchemaClass<C_OP_LazyCullCompareFloat>.Size => 1568;
+    static string? ISchemaClass<C_OP_LazyCullCompareFloat>.ClassName => null;
 
-  static C_OP_LazyCullCompareFloat ISchemaClass<C_OP_LazyCullCompareFloat>.From(nint handle) => new C_OP_LazyCullCompareFloatImpl(handle);
-  static int ISchemaClass<C_OP_LazyCullCompareFloat>.Size => 1568;
-  static string? ISchemaClass<C_OP_LazyCullCompareFloat>.ClassName => null;
 
-  
-  public CPerParticleFloatInput Comparsion1 { get; }
-  
-  public CPerParticleFloatInput Comparsion2 { get; }
-  
-  public CPerParticleFloatInput CullTime { get; }
+    public CPerParticleFloatInput Comparsion1 { get; }
+
+    public CPerParticleFloatInput Comparsion2 { get; }
+
+    public CPerParticleFloatInput CullTime { get; }
 
 
 }

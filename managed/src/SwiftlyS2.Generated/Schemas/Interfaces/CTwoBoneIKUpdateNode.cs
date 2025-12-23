@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTwoBoneIKUpdateNode : CUnaryUpdateNode, ISchemaClass<CTwoBoneIKUpdateNode> {
+public partial interface CTwoBoneIKUpdateNode : CUnaryUpdateNode, ISchemaClass<CTwoBoneIKUpdateNode>
+{
+    static CTwoBoneIKUpdateNode ISchemaClass<CTwoBoneIKUpdateNode>.From(nint handle) => new CTwoBoneIKUpdateNodeImpl(handle);
+    static int ISchemaClass<CTwoBoneIKUpdateNode>.Size => 480;
+    static string? ISchemaClass<CTwoBoneIKUpdateNode>.ClassName => null;
 
-  static CTwoBoneIKUpdateNode ISchemaClass<CTwoBoneIKUpdateNode>.From(nint handle) => new CTwoBoneIKUpdateNodeImpl(handle);
-  static int ISchemaClass<CTwoBoneIKUpdateNode>.Size => 480;
-  static string? ISchemaClass<CTwoBoneIKUpdateNode>.ClassName => null;
 
-  
-  public TwoBoneIKSettings_t OpFixedData { get; }
+    public TwoBoneIKSettings_t OpFixedData { get; }
 
 
 }

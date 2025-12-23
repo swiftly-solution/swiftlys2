@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ValueRemapperRatchetType_t : uint {
-
+public enum ValueRemapperRatchetType_t : uint
+{
  RatchetType_Absolute = 0,
 
  RatchetType_EachEngage = 1,

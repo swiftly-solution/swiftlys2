@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLightEntity : CBaseModelEntity, ISchemaClass<CLightEntity> {
+public partial interface CLightEntity : CBaseModelEntity, ISchemaClass<CLightEntity>
+{
+    static CLightEntity ISchemaClass<CLightEntity>.From(nint handle) => new CLightEntityImpl(handle);
+    static int ISchemaClass<CLightEntity>.Size => 2016;
+    static string? ISchemaClass<CLightEntity>.ClassName => "light_omni";
 
-  static CLightEntity ISchemaClass<CLightEntity>.From(nint handle) => new CLightEntityImpl(handle);
-  static int ISchemaClass<CLightEntity>.Size => 2016;
-  static string? ISchemaClass<CLightEntity>.ClassName => "light_omni";
 
-  
-  public CLightComponent? CLightComponent { get; }
+    public CLightComponent? CLightComponent { get; }
 
-  public void CLightComponentUpdated();
+    public void CLightComponentUpdated();
 }

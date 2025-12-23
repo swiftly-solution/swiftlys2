@@ -6,94 +6,76 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointOrientImpl : CBaseEntityImpl, CPointOrient {
+internal partial class CPointOrientImpl : CBaseEntityImpl, CPointOrient
+{
+    public CPointOrientImpl(nint handle) : base(handle) { }
 
-  public CPointOrientImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SpawnTargetNameOffset;
 
-  private static nint? _SpawnTargetNameOffset;
+    public string SpawnTargetName {
+        get {
+            _SpawnTargetNameOffset = _SpawnTargetNameOffset ?? Schema.GetOffset(0x31E4EBC561780472);
+            return Schema.GetString(_Handle.Read<nint>(_SpawnTargetNameOffset!.Value));
+        }
+        set {
+            _SpawnTargetNameOffset = _SpawnTargetNameOffset ?? Schema.GetOffset(0x31E4EBC561780472);
+            Schema.SetString(_Handle, _SpawnTargetNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _TargetOffset;
 
-  public string SpawnTargetName {
-    get {
-      if (_SpawnTargetNameOffset == null) {
-        _SpawnTargetNameOffset = Schema.GetOffset(0x31E4EBC561780472);
-      }
-      var ptr = _Handle.Read<nint>(_SpawnTargetNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CHandle<CBaseEntity> Target {
+        get {
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x31E4EBC5CE35901A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+        }
     }
-    set {
-      if (_SpawnTargetNameOffset == null) {
-        _SpawnTargetNameOffset = Schema.GetOffset(0x31E4EBC561780472);
-      }
-      Schema.SetString(_Handle, _SpawnTargetNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _TargetOffset;
+    private static nint? _ActiveOffset;
 
-  public ref CHandle<CBaseEntity> Target {
-    get {
-      if (_TargetOffset == null) {
-        _TargetOffset = Schema.GetOffset(0x31E4EBC5CE35901A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+    public ref bool Active {
+        get {
+            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0x31E4EBC58334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveOffset;
+    private static nint? _GoalDirectionOffset;
 
-  public ref bool Active {
-    get {
-      if (_ActiveOffset == null) {
-        _ActiveOffset = Schema.GetOffset(0x31E4EBC58334208F);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    public ref PointOrientGoalDirectionType_t GoalDirection {
+        get {
+            _GoalDirectionOffset = _GoalDirectionOffset ?? Schema.GetOffset(0x31E4EBC5EF8D5D0F);
+            return ref _Handle.AsRef<PointOrientGoalDirectionType_t>(_GoalDirectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _GoalDirectionOffset;
+    private static nint? _ConstraintOffset;
 
-  public ref PointOrientGoalDirectionType_t GoalDirection {
-    get {
-      if (_GoalDirectionOffset == null) {
-        _GoalDirectionOffset = Schema.GetOffset(0x31E4EBC5EF8D5D0F);
-      }
-      return ref _Handle.AsRef<PointOrientGoalDirectionType_t>(_GoalDirectionOffset!.Value);
+    public ref PointOrientConstraint_t Constraint {
+        get {
+            _ConstraintOffset = _ConstraintOffset ?? Schema.GetOffset(0x31E4EBC5A20016CE);
+            return ref _Handle.AsRef<PointOrientConstraint_t>(_ConstraintOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConstraintOffset;
+    private static nint? _MaxTurnRateOffset;
 
-  public ref PointOrientConstraint_t Constraint {
-    get {
-      if (_ConstraintOffset == null) {
-        _ConstraintOffset = Schema.GetOffset(0x31E4EBC5A20016CE);
-      }
-      return ref _Handle.AsRef<PointOrientConstraint_t>(_ConstraintOffset!.Value);
+    public ref float MaxTurnRate {
+        get {
+            _MaxTurnRateOffset = _MaxTurnRateOffset ?? Schema.GetOffset(0x31E4EBC5860DD1C6);
+            return ref _Handle.AsRef<float>(_MaxTurnRateOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxTurnRateOffset;
+    private static nint? _LastGameTimeOffset;
 
-  public ref float MaxTurnRate {
-    get {
-      if (_MaxTurnRateOffset == null) {
-        _MaxTurnRateOffset = Schema.GetOffset(0x31E4EBC5860DD1C6);
-      }
-      return ref _Handle.AsRef<float>(_MaxTurnRateOffset!.Value);
+    public GameTime_t LastGameTime {
+        get {
+            _LastGameTimeOffset = _LastGameTimeOffset ?? Schema.GetOffset(0x31E4EBC591D10404);
+            return new GameTime_tImpl(_Handle + _LastGameTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastGameTimeOffset;
-
-  public GameTime_t LastGameTime {
-    get {
-      if (_LastGameTimeOffset == null) {
-        _LastGameTimeOffset = Schema.GetOffset(0x31E4EBC591D10404);
-      }
-      return new GameTime_tImpl(_Handle + _LastGameTimeOffset!.Value);
-    }
-  }
 
 
 }

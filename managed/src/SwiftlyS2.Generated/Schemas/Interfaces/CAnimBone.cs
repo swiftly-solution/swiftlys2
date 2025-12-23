@@ -8,28 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimBone : ISchemaClass<CAnimBone> {
+public partial interface CAnimBone : ISchemaClass<CAnimBone>
+{
+    static CAnimBone ISchemaClass<CAnimBone>.From(nint handle) => new CAnimBoneImpl(handle);
+    static int ISchemaClass<CAnimBone>.Size => 72;
+    static string? ISchemaClass<CAnimBone>.ClassName => null;
 
-  static CAnimBone ISchemaClass<CAnimBone>.From(nint handle) => new CAnimBoneImpl(handle);
-  static int ISchemaClass<CAnimBone>.Size => 72;
-  static string? ISchemaClass<CAnimBone>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public ref int Parent { get; }
-  
-  public ref Vector Pos { get; }
-  
-  // QuaternionStorage
-  public SchemaUntypedField Quat { get; }
-  
-  public ref float Scale { get; }
-  
-  // QuaternionStorage
-  public SchemaUntypedField Alignment { get; }
-  
-  public ref int Flags { get; }
+    public ref CBufferString Name { get; }
+
+    public ref int Parent { get; }
+
+    public ref Vector Pos { get; }
+
+    public ref QuaternionStorage Quat { get; }
+
+    public ref float Scale { get; }
+
+    public ref QuaternionStorage Alignment { get; }
+
+    public ref int Flags { get; }
 
 
 }

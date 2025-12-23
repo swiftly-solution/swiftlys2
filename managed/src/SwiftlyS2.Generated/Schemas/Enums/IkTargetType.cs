@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum IkTargetType : uint {
-
+public enum IkTargetType : uint
+{
  IkTarget_Attachment = 0,
 
  IkTarget_Bone = 1,

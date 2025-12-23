@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeCollisionPlane_t : ISchemaClass<FeCollisionPlane_t> {
+public partial interface FeCollisionPlane_t : ISchemaClass<FeCollisionPlane_t>
+{
+    static FeCollisionPlane_t ISchemaClass<FeCollisionPlane_t>.From(nint handle) => new FeCollisionPlane_tImpl(handle);
+    static int ISchemaClass<FeCollisionPlane_t>.Size => 24;
+    static string? ISchemaClass<FeCollisionPlane_t>.ClassName => null;
 
-  static FeCollisionPlane_t ISchemaClass<FeCollisionPlane_t>.From(nint handle) => new FeCollisionPlane_tImpl(handle);
-  static int ISchemaClass<FeCollisionPlane_t>.Size => 24;
-  static string? ISchemaClass<FeCollisionPlane_t>.ClassName => null;
 
-  
-  public ref ushort CtrlParent { get; }
-  
-  public ref ushort ChildNode { get; }
-  
-  public RnPlane_t Plane { get; }
-  
-  public ref float Strength { get; }
+    public ref ushort CtrlParent { get; }
+
+    public ref ushort ChildNode { get; }
+
+    public RnPlane_t Plane { get; }
+
+    public ref float Strength { get; }
 
 
 }

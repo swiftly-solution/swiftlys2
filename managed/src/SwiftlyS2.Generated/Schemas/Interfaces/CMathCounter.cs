@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMathCounter : CLogicalEntity, ISchemaClass<CMathCounter> {
+public partial interface CMathCounter : CLogicalEntity, ISchemaClass<CMathCounter>
+{
+    static CMathCounter ISchemaClass<CMathCounter>.From(nint handle) => new CMathCounterImpl(handle);
+    static int ISchemaClass<CMathCounter>.Size => 1520;
+    static string? ISchemaClass<CMathCounter>.ClassName => "math_counter";
 
-  static CMathCounter ISchemaClass<CMathCounter>.From(nint handle) => new CMathCounterImpl(handle);
-  static int ISchemaClass<CMathCounter>.Size => 1520;
-  static string? ISchemaClass<CMathCounter>.ClassName => "math_counter";
 
-  
-  public ref float Min { get; }
-  
-  public ref float Max { get; }
-  
-  public ref bool HitMin { get; }
-  
-  public ref bool HitMax { get; }
-  
-  public ref bool Disabled { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OutValue { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnGetValue { get; }
-  
-  public CEntityIOOutput OnHitMin { get; }
-  
-  public CEntityIOOutput OnHitMax { get; }
-  
-  public CEntityIOOutput OnChangedFromMin { get; }
-  
-  public CEntityIOOutput OnChangedFromMax { get; }
+    public ref float Min { get; }
+
+    public ref float Max { get; }
+
+    public ref bool HitMin { get; }
+
+    public ref bool HitMax { get; }
+
+    public ref bool Disabled { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OutValue { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnGetValue { get; }
+
+    public ref CEntityIOOutput OnHitMin { get; }
+
+    public ref CEntityIOOutput OnHitMax { get; }
+
+    public ref CEntityIOOutput OnChangedFromMin { get; }
+
+    public ref CEntityIOOutput OnChangedFromMax { get; }
 
 
 }

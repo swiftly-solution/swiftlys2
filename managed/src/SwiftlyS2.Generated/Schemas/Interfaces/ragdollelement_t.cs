@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ragdollelement_t : ISchemaClass<ragdollelement_t> {
+public partial interface ragdollelement_t : ISchemaClass<ragdollelement_t>
+{
+    static ragdollelement_t ISchemaClass<ragdollelement_t>.From(nint handle) => new ragdollelement_tImpl(handle);
+    static int ISchemaClass<ragdollelement_t>.Size => 48;
+    static string? ISchemaClass<ragdollelement_t>.ClassName => null;
 
-  static ragdollelement_t ISchemaClass<ragdollelement_t>.From(nint handle) => new ragdollelement_tImpl(handle);
-  static int ISchemaClass<ragdollelement_t>.Size => 48;
-  static string? ISchemaClass<ragdollelement_t>.ClassName => null;
 
-  
-  public ref Vector OriginParentSpace { get; }
-  
-  public ref int ParentIndex { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref int Height { get; }
+    public ref Vector OriginParentSpace { get; }
+
+    public ref int ParentIndex { get; }
+
+    public ref float Radius { get; }
+
+    public ref int Height { get; }
 
 
 }

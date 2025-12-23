@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMorphSetData : ISchemaClass<CMorphSetData> {
+public partial interface CMorphSetData : ISchemaClass<CMorphSetData>
+{
+    static CMorphSetData ISchemaClass<CMorphSetData>.From(nint handle) => new CMorphSetDataImpl(handle);
+    static int ISchemaClass<CMorphSetData>.Size => 152;
+    static string? ISchemaClass<CMorphSetData>.ClassName => null;
 
-  static CMorphSetData ISchemaClass<CMorphSetData>.From(nint handle) => new CMorphSetDataImpl(handle);
-  static int ISchemaClass<CMorphSetData>.Size => 152;
-  static string? ISchemaClass<CMorphSetData>.ClassName => null;
 
-  
-  public ref int Width { get; }
-  
-  public ref int Height { get; }
-  
-  public ref CUtlVector<MorphBundleType_t> BundleTypes { get; }
-  
-  public ref CUtlVector<CMorphData> MorphDatas { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureAtlas { get; }
-  
-  public ref CUtlVector<CFlexDesc> FlexDesc { get; }
-  
-  public ref CUtlVector<CFlexController> FlexControllers { get; }
-  
-  public ref CUtlVector<CFlexRule> FlexRules { get; }
+    public ref int Width { get; }
+
+    public ref int Height { get; }
+
+    public ref CUtlVector<MorphBundleType_t> BundleTypes { get; }
+
+    public ref CUtlVector<CMorphData> MorphDatas { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureAtlas { get; }
+
+    public ref CUtlVector<CFlexDesc> FlexDesc { get; }
+
+    public ref CUtlVector<CFlexController> FlexControllers { get; }
+
+    public ref CUtlVector<CFlexRule> FlexRules { get; }
 
 
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeWeightedNode_tImpl : SchemaClass, FeWeightedNode_t {
+internal partial class FeWeightedNode_tImpl : SchemaClass, FeWeightedNode_t
+{
+    public FeWeightedNode_tImpl(nint handle) : base(handle) { }
 
-  public FeWeightedNode_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodeOffset;
 
-  private static nint? _NodeOffset;
-
-  public ref ushort Node {
-    get {
-      if (_NodeOffset == null) {
-        _NodeOffset = Schema.GetOffset(0x7CA6E056CD6694B9);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
+    public ref ushort Node {
+        get {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x7CA6E056CD6694B9);
+            return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref ushort Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0x7CA6E0564C8D62A5);
-      }
-      return ref _Handle.AsRef<ushort>(_WeightOffset!.Value);
+    public ref ushort Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x7CA6E0564C8D62A5);
+            return ref _Handle.AsRef<ushort>(_WeightOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSphereRigid_t : ISchemaClass<FeSphereRigid_t> {
+public partial interface FeSphereRigid_t : ISchemaClass<FeSphereRigid_t>
+{
+    static FeSphereRigid_t ISchemaClass<FeSphereRigid_t>.From(nint handle) => new FeSphereRigid_tImpl(handle);
+    static int ISchemaClass<FeSphereRigid_t>.Size => 32;
+    static string? ISchemaClass<FeSphereRigid_t>.ClassName => null;
 
-  static FeSphereRigid_t ISchemaClass<FeSphereRigid_t>.From(nint handle) => new FeSphereRigid_tImpl(handle);
-  static int ISchemaClass<FeSphereRigid_t>.Size => 32;
-  static string? ISchemaClass<FeSphereRigid_t>.ClassName => null;
 
-  
-  public ref fltx4 Sphere { get; }
-  
-  public ref ushort Node { get; }
-  
-  public ref ushort CollisionMask { get; }
-  
-  public ref ushort VertexMapIndex { get; }
-  
-  public ref ushort Flags { get; }
+    public ref fltx4 Sphere { get; }
+
+    public ref ushort Node { get; }
+
+    public ref ushort CollisionMask { get; }
+
+    public ref ushort VertexMapIndex { get; }
+
+    public ref ushort Flags { get; }
 
 
 }

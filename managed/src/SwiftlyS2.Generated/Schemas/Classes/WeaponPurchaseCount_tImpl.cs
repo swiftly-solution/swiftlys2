@@ -6,42 +6,33 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class WeaponPurchaseCount_tImpl : SchemaClass, WeaponPurchaseCount_t {
+internal partial class WeaponPurchaseCount_tImpl : SchemaClass, WeaponPurchaseCount_t
+{
+    public WeaponPurchaseCount_tImpl(nint handle) : base(handle) { }
 
-  public WeaponPurchaseCount_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ItemDefIndexOffset;
 
-  private static nint? _ItemDefIndexOffset;
-
-  public ref ushort ItemDefIndex {
-    get {
-      if (_ItemDefIndexOffset == null) {
-        _ItemDefIndexOffset = Schema.GetOffset(0xF7F0C6E61BF10FB7);
-      }
-      return ref _Handle.AsRef<ushort>(_ItemDefIndexOffset!.Value);
+    public ref ushort ItemDefIndex {
+        get {
+            _ItemDefIndexOffset = _ItemDefIndexOffset ?? Schema.GetOffset(0xF7F0C6E61BF10FB7);
+            return ref _Handle.AsRef<ushort>(_ItemDefIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _CountOffset;
+    private static nint? _CountOffset;
 
-  public ref ushort Count {
-    get {
-      if (_CountOffset == null) {
-        _CountOffset = Schema.GetOffset(0xF7F0C6E67D31AC08);
-      }
-      return ref _Handle.AsRef<ushort>(_CountOffset!.Value);
+    public ref ushort Count {
+        get {
+            _CountOffset = _CountOffset ?? Schema.GetOffset(0xF7F0C6E67D31AC08);
+            return ref _Handle.AsRef<ushort>(_CountOffset!.Value);
+        }
     }
-  }
 
-  public void ItemDefIndexUpdated() {
-    Schema.Update(_Handle, 0xF7F0C6E61BF10FB7);
-  }
-  public void CountUpdated() {
-    Schema.Update(_Handle, 0xF7F0C6E67D31AC08);
-  }
+    public void ItemDefIndexUpdated() => Schema.Update(_Handle, 0xF7F0C6E61BF10FB7);
+    public void CountUpdated() => Schema.Update(_Handle, 0xF7F0C6E67D31AC08);
 }

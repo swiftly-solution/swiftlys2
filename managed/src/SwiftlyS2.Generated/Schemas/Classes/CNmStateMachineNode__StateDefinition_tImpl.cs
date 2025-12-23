@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmStateMachineNode__StateDefinition_tImpl : SchemaClass, CNmStateMachineNode__StateDefinition_t {
+internal partial class CNmStateMachineNode__StateDefinition_tImpl : SchemaClass, CNmStateMachineNode__StateDefinition_t
+{
+    public CNmStateMachineNode__StateDefinition_tImpl(nint handle) : base(handle) { }
 
-  public CNmStateMachineNode__StateDefinition_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StateNodeIdxOffset;
 
-  private static nint? _StateNodeIdxOffset;
-
-  public ref short StateNodeIdx {
-    get {
-      if (_StateNodeIdxOffset == null) {
-        _StateNodeIdxOffset = Schema.GetOffset(0x539BB818074CB7A1);
-      }
-      return ref _Handle.AsRef<short>(_StateNodeIdxOffset!.Value);
+    public ref short StateNodeIdx {
+        get {
+            _StateNodeIdxOffset = _StateNodeIdxOffset ?? Schema.GetOffset(0x539BB818074CB7A1);
+            return ref _Handle.AsRef<short>(_StateNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _EntryConditionNodeIdxOffset;
+    private static nint? _EntryConditionNodeIdxOffset;
 
-  public ref short EntryConditionNodeIdx {
-    get {
-      if (_EntryConditionNodeIdxOffset == null) {
-        _EntryConditionNodeIdxOffset = Schema.GetOffset(0x539BB8180B262993);
-      }
-      return ref _Handle.AsRef<short>(_EntryConditionNodeIdxOffset!.Value);
+    public ref short EntryConditionNodeIdx {
+        get {
+            _EntryConditionNodeIdxOffset = _EntryConditionNodeIdxOffset ?? Schema.GetOffset(0x539BB8180B262993);
+            return ref _Handle.AsRef<short>(_EntryConditionNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _TransitionDefinitionsOffset;
+    private static nint? _TransitionDefinitionsOffset;
 
-  public SchemaUntypedField TransitionDefinitions {
-    get {
-      if (_TransitionDefinitionsOffset == null) {
-        _TransitionDefinitionsOffset = Schema.GetOffset(0x539BB818F02EF580);
-      }
-      return new SchemaUntypedField(_Handle + _TransitionDefinitionsOffset!.Value);
+    public SchemaUntypedField TransitionDefinitions {
+        get {
+            _TransitionDefinitionsOffset = _TransitionDefinitionsOffset ?? Schema.GetOffset(0x539BB818F02EF580);
+            return new SchemaUntypedField(_Handle + _TransitionDefinitionsOffset!.Value);
+        }
     }
-  }
 
 
 }

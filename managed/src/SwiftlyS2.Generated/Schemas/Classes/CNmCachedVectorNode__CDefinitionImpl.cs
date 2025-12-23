@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmCachedVectorNode__CDefinitionImpl : CNmVectorValueNode__CDefinitionImpl, CNmCachedVectorNode__CDefinition {
+internal partial class CNmCachedVectorNode__CDefinitionImpl : CNmVectorValueNode__CDefinitionImpl, CNmCachedVectorNode__CDefinition
+{
+    public CNmCachedVectorNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmCachedVectorNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InputValueNodeIdxOffset;
 
-  private static nint? _InputValueNodeIdxOffset;
-
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0x4F6FE2EA95E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x4F6FE2EA95E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModeOffset;
+    private static nint? _ModeOffset;
 
-  public ref NmCachedValueMode_t Mode {
-    get {
-      if (_ModeOffset == null) {
-        _ModeOffset = Schema.GetOffset(0x4F6FE2EA90FD5BB2);
-      }
-      return ref _Handle.AsRef<NmCachedValueMode_t>(_ModeOffset!.Value);
+    public ref NmCachedValueMode_t Mode {
+        get {
+            _ModeOffset = _ModeOffset ?? Schema.GetOffset(0x4F6FE2EA90FD5BB2);
+            return ref _Handle.AsRef<NmCachedValueMode_t>(_ModeOffset!.Value);
+        }
     }
-  }
 
 
 }

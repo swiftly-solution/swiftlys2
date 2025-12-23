@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VPhysXBodyPart_t : ISchemaClass<VPhysXBodyPart_t> {
+public partial interface VPhysXBodyPart_t : ISchemaClass<VPhysXBodyPart_t>
+{
+    static VPhysXBodyPart_t ISchemaClass<VPhysXBodyPart_t>.From(nint handle) => new VPhysXBodyPart_tImpl(handle);
+    static int ISchemaClass<VPhysXBodyPart_t>.Size => 168;
+    static string? ISchemaClass<VPhysXBodyPart_t>.ClassName => null;
 
-  static VPhysXBodyPart_t ISchemaClass<VPhysXBodyPart_t>.From(nint handle) => new VPhysXBodyPart_tImpl(handle);
-  static int ISchemaClass<VPhysXBodyPart_t>.Size => 168;
-  static string? ISchemaClass<VPhysXBodyPart_t>.ClassName => null;
 
-  
-  public ref uint Flags { get; }
-  
-  public ref float Mass { get; }
-  
-  public VPhysics2ShapeDef_t RnShape { get; }
-  
-  public ref ushort CollisionAttributeIndex { get; }
-  
-  public ref ushort Reserved { get; }
-  
-  public ref float InertiaScale { get; }
-  
-  public ref float LinearDamping { get; }
-  
-  public ref float AngularDamping { get; }
-  
-  public ref float LinearDrag { get; }
-  
-  public ref float AngularDrag { get; }
-  
-  public ref bool OverrideMassCenter { get; }
-  
-  public ref Vector MassCenterOverride { get; }
+    public ref uint Flags { get; }
+
+    public ref float Mass { get; }
+
+    public VPhysics2ShapeDef_t RnShape { get; }
+
+    public ref ushort CollisionAttributeIndex { get; }
+
+    public ref ushort Reserved { get; }
+
+    public ref float InertiaScale { get; }
+
+    public ref float LinearDamping { get; }
+
+    public ref float AngularDamping { get; }
+
+    public ref float LinearDrag { get; }
+
+    public ref float AngularDrag { get; }
+
+    public ref bool OverrideMassCenter { get; }
+
+    public ref Vector MassCenterOverride { get; }
 
 
 }

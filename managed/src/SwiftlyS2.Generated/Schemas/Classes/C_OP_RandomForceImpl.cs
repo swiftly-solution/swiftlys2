@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RandomForceImpl : CParticleFunctionForceImpl, C_OP_RandomForce {
+internal partial class C_OP_RandomForceImpl : CParticleFunctionForceImpl, C_OP_RandomForce
+{
+    public C_OP_RandomForceImpl(nint handle) : base(handle) { }
 
-  public C_OP_RandomForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinForceOffset;
 
-  private static nint? _MinForceOffset;
-
-  public ref Vector MinForce {
-    get {
-      if (_MinForceOffset == null) {
-        _MinForceOffset = Schema.GetOffset(0x4BB81519FA8D2AE2);
-      }
-      return ref _Handle.AsRef<Vector>(_MinForceOffset!.Value);
+    public ref Vector MinForce {
+        get {
+            _MinForceOffset = _MinForceOffset ?? Schema.GetOffset(0x4BB81519FA8D2AE2);
+            return ref _Handle.AsRef<Vector>(_MinForceOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxForceOffset;
+    private static nint? _MaxForceOffset;
 
-  public ref Vector MaxForce {
-    get {
-      if (_MaxForceOffset == null) {
-        _MaxForceOffset = Schema.GetOffset(0x4BB815192324D8D8);
-      }
-      return ref _Handle.AsRef<Vector>(_MaxForceOffset!.Value);
+    public ref Vector MaxForce {
+        get {
+            _MaxForceOffset = _MaxForceOffset ?? Schema.GetOffset(0x4BB815192324D8D8);
+            return ref _Handle.AsRef<Vector>(_MaxForceOffset!.Value);
+        }
     }
-  }
 
 
 }

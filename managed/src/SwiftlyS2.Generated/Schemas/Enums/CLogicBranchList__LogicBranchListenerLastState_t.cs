@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CLogicBranchList__LogicBranchListenerLastState_t : uint {
-
+public enum CLogicBranchList__LogicBranchListenerLastState_t : uint
+{
  LOGIC_BRANCH_LISTENER_NOT_INIT = 0,
 
  LOGIC_BRANCH_LISTENER_ALL_TRUE = 1,

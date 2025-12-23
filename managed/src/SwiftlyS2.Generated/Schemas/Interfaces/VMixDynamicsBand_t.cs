@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixDynamicsBand_t : ISchemaClass<VMixDynamicsBand_t> {
+public partial interface VMixDynamicsBand_t : ISchemaClass<VMixDynamicsBand_t>
+{
+    static VMixDynamicsBand_t ISchemaClass<VMixDynamicsBand_t>.From(nint handle) => new VMixDynamicsBand_tImpl(handle);
+    static int ISchemaClass<VMixDynamicsBand_t>.Size => 36;
+    static string? ISchemaClass<VMixDynamicsBand_t>.ClassName => null;
 
-  static VMixDynamicsBand_t ISchemaClass<VMixDynamicsBand_t>.From(nint handle) => new VMixDynamicsBand_tImpl(handle);
-  static int ISchemaClass<VMixDynamicsBand_t>.Size => 36;
-  static string? ISchemaClass<VMixDynamicsBand_t>.ClassName => null;
 
-  
-  public ref float FldbGainInput { get; }
-  
-  public ref float FldbGainOutput { get; }
-  
-  public ref float FldbThresholdBelow { get; }
-  
-  public ref float FldbThresholdAbove { get; }
-  
-  public ref float RatioBelow { get; }
-  
-  public ref float RatioAbove { get; }
-  
-  public ref float AttackTimeMS { get; }
-  
-  public ref float ReleaseTimeMS { get; }
-  
-  public ref bool Enable { get; }
-  
-  public ref bool Solo { get; }
+    public ref float FldbGainInput { get; }
+
+    public ref float FldbGainOutput { get; }
+
+    public ref float FldbThresholdBelow { get; }
+
+    public ref float FldbThresholdAbove { get; }
+
+    public ref float RatioBelow { get; }
+
+    public ref float RatioAbove { get; }
+
+    public ref float AttackTimeMS { get; }
+
+    public ref float ReleaseTimeMS { get; }
+
+    public ref bool Enable { get; }
+
+    public ref bool Solo { get; }
 
 
 }

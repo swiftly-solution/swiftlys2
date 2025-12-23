@@ -8,87 +8,86 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnBodyDesc_t : ISchemaClass<RnBodyDesc_t> {
+public partial interface RnBodyDesc_t : ISchemaClass<RnBodyDesc_t>
+{
+    static RnBodyDesc_t ISchemaClass<RnBodyDesc_t>.From(nint handle) => new RnBodyDesc_tImpl(handle);
+    static int ISchemaClass<RnBodyDesc_t>.Size => 224;
+    static string? ISchemaClass<RnBodyDesc_t>.ClassName => null;
 
-  static RnBodyDesc_t ISchemaClass<RnBodyDesc_t>.From(nint handle) => new RnBodyDesc_tImpl(handle);
-  static int ISchemaClass<RnBodyDesc_t>.Size => 224;
-  static string? ISchemaClass<RnBodyDesc_t>.ClassName => null;
 
-  
-  public string DebugName { get; set; }
-  
-  public ref Vector Position { get; }
-  
-  // QuaternionStorage
-  public SchemaUntypedField Orientation { get; }
-  
-  public ref Vector LinearVelocity { get; }
-  
-  public ref Vector AngularVelocity { get; }
-  
-  public ref Vector LocalMassCenter { get; }
-  
-  public ISchemaFixedArray<Vector> LocalInertiaInv { get; }
-  
-  public ref float MassInv { get; }
-  
-  public ref float GameMass { get; }
-  
-  public ref float MassScaleInv { get; }
-  
-  public ref float InertiaScaleInv { get; }
-  
-  public ref float LinearDamping { get; }
-  
-  public ref float AngularDamping { get; }
-  
-  public ref float LinearDrag { get; }
-  
-  public ref float AngularDrag { get; }
-  
-  public ref float LinearBuoyancyDrag { get; }
-  
-  public ref float AngularBuoyancyDrag { get; }
-  
-  public ref Vector LastAwakeForceAccum { get; }
-  
-  public ref Vector LastAwakeTorqueAccum { get; }
-  
-  public ref float BuoyancyFactor { get; }
-  
-  public ref float GravityScale { get; }
-  
-  public ref float TimeScale { get; }
-  
-  public ref int BodyType { get; }
-  
-  public ref uint GameIndex { get; }
-  
-  public ref uint GameFlags { get; }
-  
-  public ref byte MinVelocityIterations { get; }
-  
-  public ref byte MinPositionIterations { get; }
-  
-  public ref byte MassPriority { get; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref bool Sleeping { get; }
-  
-  public ref bool IsContinuousEnabled { get; }
-  
-  public ref bool DragEnabled { get; }
-  
-  public ref bool BuoyancyDragEnabled { get; }
-  
-  public ref Vector Gravity { get; }
-  
-  public ref bool SpeculativeEnabled { get; }
-  
-  public ref bool HasShadowController { get; }
-  
-  public ref DynamicContinuousContactBehavior_t DynamicContinuousContactBehavior { get; }
+    public string DebugName { get; set; }
+
+    public ref Vector Position { get; }
+
+    public ref QuaternionStorage Orientation { get; }
+
+    public ref Vector LinearVelocity { get; }
+
+    public ref Vector AngularVelocity { get; }
+
+    public ref Vector LocalMassCenter { get; }
+
+    public ISchemaFixedArray<Vector> LocalInertiaInv { get; }
+
+    public ref float MassInv { get; }
+
+    public ref float GameMass { get; }
+
+    public ref float MassScaleInv { get; }
+
+    public ref float InertiaScaleInv { get; }
+
+    public ref float LinearDamping { get; }
+
+    public ref float AngularDamping { get; }
+
+    public ref float LinearDrag { get; }
+
+    public ref float AngularDrag { get; }
+
+    public ref float LinearBuoyancyDrag { get; }
+
+    public ref float AngularBuoyancyDrag { get; }
+
+    public ref Vector LastAwakeForceAccum { get; }
+
+    public ref Vector LastAwakeTorqueAccum { get; }
+
+    public ref float BuoyancyFactor { get; }
+
+    public ref float GravityScale { get; }
+
+    public ref float TimeScale { get; }
+
+    public ref int BodyType { get; }
+
+    public ref uint GameIndex { get; }
+
+    public ref uint GameFlags { get; }
+
+    public ref byte MinVelocityIterations { get; }
+
+    public ref byte MinPositionIterations { get; }
+
+    public ref byte MassPriority { get; }
+
+    public ref bool Enabled { get; }
+
+    public ref bool Sleeping { get; }
+
+    public ref bool IsContinuousEnabled { get; }
+
+    public ref bool DragEnabled { get; }
+
+    public ref bool BuoyancyDragEnabled { get; }
+
+    public ref Vector Gravity { get; }
+
+    public ref bool SpeculativeEnabled { get; }
+
+    public ref bool HasShadowController { get; }
+
+    public ref DynamicContinuousContactBehavior_t DynamicContinuousContactBehavior { get; }
 
 
 }

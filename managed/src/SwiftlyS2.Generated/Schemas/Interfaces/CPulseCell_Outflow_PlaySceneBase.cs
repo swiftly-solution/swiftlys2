@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Outflow_PlaySceneBase : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Outflow_PlaySceneBase> {
+public partial interface CPulseCell_Outflow_PlaySceneBase : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Outflow_PlaySceneBase>
+{
+    static CPulseCell_Outflow_PlaySceneBase ISchemaClass<CPulseCell_Outflow_PlaySceneBase>.From(nint handle) => new CPulseCell_Outflow_PlaySceneBaseImpl(handle);
+    static int ISchemaClass<CPulseCell_Outflow_PlaySceneBase>.Size => 240;
+    static string? ISchemaClass<CPulseCell_Outflow_PlaySceneBase>.ClassName => null;
 
-  static CPulseCell_Outflow_PlaySceneBase ISchemaClass<CPulseCell_Outflow_PlaySceneBase>.From(nint handle) => new CPulseCell_Outflow_PlaySceneBaseImpl(handle);
-  static int ISchemaClass<CPulseCell_Outflow_PlaySceneBase>.Size => 240;
-  static string? ISchemaClass<CPulseCell_Outflow_PlaySceneBase>.ClassName => null;
 
-  
-  public CPulse_ResumePoint OnFinished { get; }
-  
-  public CPulse_ResumePoint OnCanceled { get; }
-  
-  public ref CUtlVector<CPulse_OutflowConnection> Triggers { get; }
+    public CPulse_ResumePoint OnFinished { get; }
+
+    public CPulse_ResumePoint OnCanceled { get; }
+
+    public ref CUtlVector<CPulse_OutflowConnection> Triggers { get; }
 
 
 }

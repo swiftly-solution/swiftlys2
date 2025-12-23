@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView : CPulseGraphInstance_TestDomain, ISchemaClass<CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView> {
-
-  static CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView ISchemaClass<CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView>.From(nint handle) => new CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardViewImpl(handle);
-  static int ISchemaClass<CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView>.Size => 352;
-  static string? ISchemaClass<CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView>.ClassName => null;
+public partial interface CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView : CPulseGraphInstance_TestDomain, ISchemaClass<CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView>
+{
+    static CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView ISchemaClass<CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView>.From(nint handle) => new CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardViewImpl(handle);
+    static int ISchemaClass<CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView>.Size => 352;
+    static string? ISchemaClass<CPulseGraphInstance_TestDomain_UseReadOnlyBlackboardView>.ClassName => null;
 
 
 

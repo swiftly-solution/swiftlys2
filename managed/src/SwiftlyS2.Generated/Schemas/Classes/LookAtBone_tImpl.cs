@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class LookAtBone_tImpl : SchemaClass, LookAtBone_t {
+internal partial class LookAtBone_tImpl : SchemaClass, LookAtBone_t
+{
+    public LookAtBone_tImpl(nint handle) : base(handle) { }
 
-  public LookAtBone_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IndexOffset;
 
-  private static nint? _IndexOffset;
-
-  public ref int Index {
-    get {
-      if (_IndexOffset == null) {
-        _IndexOffset = Schema.GetOffset(0x25E8B58A491963CB);
-      }
-      return ref _Handle.AsRef<int>(_IndexOffset!.Value);
+    public ref int Index {
+        get {
+            _IndexOffset = _IndexOffset ?? Schema.GetOffset(0x25E8B58A491963CB);
+            return ref _Handle.AsRef<int>(_IndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0x25E8B58A07D0CD59);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x25E8B58A07D0CD59);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
 
 
 }

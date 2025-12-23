@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDampedValueComponentUpdater : CAnimComponentUpdater, ISchemaClass<CDampedValueComponentUpdater> {
+public partial interface CDampedValueComponentUpdater : CAnimComponentUpdater, ISchemaClass<CDampedValueComponentUpdater>
+{
+    static CDampedValueComponentUpdater ISchemaClass<CDampedValueComponentUpdater>.From(nint handle) => new CDampedValueComponentUpdaterImpl(handle);
+    static int ISchemaClass<CDampedValueComponentUpdater>.Size => 72;
+    static string? ISchemaClass<CDampedValueComponentUpdater>.ClassName => null;
 
-  static CDampedValueComponentUpdater ISchemaClass<CDampedValueComponentUpdater>.From(nint handle) => new CDampedValueComponentUpdaterImpl(handle);
-  static int ISchemaClass<CDampedValueComponentUpdater>.Size => 72;
-  static string? ISchemaClass<CDampedValueComponentUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<CDampedValueUpdateItem> Items { get; }
+    public ref CUtlVector<CDampedValueUpdateItem> Items { get; }
 
 
 }

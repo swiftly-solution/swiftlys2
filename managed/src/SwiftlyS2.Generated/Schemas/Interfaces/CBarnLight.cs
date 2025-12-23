@@ -8,238 +8,237 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBarnLight : CBaseModelEntity, ISchemaClass<CBarnLight> {
+public partial interface CBarnLight : CBaseModelEntity, ISchemaClass<CBarnLight>
+{
+    static CBarnLight ISchemaClass<CBarnLight>.From(nint handle) => new CBarnLightImpl(handle);
+    static int ISchemaClass<CBarnLight>.Size => 2816;
+    static string? ISchemaClass<CBarnLight>.ClassName => "light_barn";
 
-  static CBarnLight ISchemaClass<CBarnLight>.From(nint handle) => new CBarnLightImpl(handle);
-  static int ISchemaClass<CBarnLight>.Size => 2816;
-  static string? ISchemaClass<CBarnLight>.ClassName => "light_barn";
 
-  
-  public ref bool Enabled { get; }
-  
-  public ref int ColorMode { get; }
-  
-  public ref Color Color { get; }
-  
-  public ref float ColorTemperature { get; }
-  
-  public ref float Brightness { get; }
-  
-  public ref float BrightnessScale { get; }
-  
-  public ref int DirectLight { get; }
-  
-  public ref int BakedShadowIndex { get; }
-  
-  public ref int LightPathUniqueId { get; }
-  
-  public ref int LightMapUniqueId { get; }
-  
-  public ref int LuminaireShape { get; }
-  
-  public ref float LuminaireSize { get; }
-  
-  public ref float LuminaireAnisotropy { get; }
-  
-  public string LightStyleString { get; set; }
-  
-  public GameTime_t LightStyleStartTime { get; }
-  
-  public ref CUtlVector<CUtlString> QueuedLightStyleStrings { get; }
-  
-  public ref CUtlVector<CUtlString> LightStyleEvents { get; }
-  
-  public ref CUtlVector<CHandle<CBaseModelEntity>> LightStyleTargets { get; }
-  
-  // CEntityIOOutput
-  public SchemaUntypedField StyleEvent { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie { get; }
-  
-  public ref float Shape { get; }
-  
-  public ref float SoftX { get; }
-  
-  public ref float SoftY { get; }
-  
-  public ref float Skirt { get; }
-  
-  public ref float SkirtNear { get; }
-  
-  public ref Vector SizeParams { get; }
-  
-  public ref float Range { get; }
-  
-  public ref Vector Shear { get; }
-  
-  public ref int BakeSpecularToCubemaps { get; }
-  
-  public ref Vector BakeSpecularToCubemapsSize { get; }
-  
-  public ref int CastShadows { get; }
-  
-  public ref int ShadowMapSize { get; }
-  
-  public ref int ShadowPriority { get; }
-  
-  public ref bool ContactShadow { get; }
-  
-  public ref bool ForceShadowsEnabled { get; }
-  
-  public ref int BounceLight { get; }
-  
-  public ref float BounceScale { get; }
-  
-  public ref float MinRoughness { get; }
-  
-  public ref Vector AlternateColor { get; }
-  
-  public ref float AlternateColorBrightness { get; }
-  
-  public ref int Fog { get; }
-  
-  public ref float FogStrength { get; }
-  
-  public ref int FogShadows { get; }
-  
-  public ref float FogScale { get; }
-  
-  public ref bool FogMixedShadows { get; }
-  
-  public ref float FadeSizeStart { get; }
-  
-  public ref float FadeSizeEnd { get; }
-  
-  public ref float ShadowFadeSizeStart { get; }
-  
-  public ref float ShadowFadeSizeEnd { get; }
-  
-  public ref bool PrecomputedFieldsValid { get; }
-  
-  public ref Vector PrecomputedBoundsMins { get; }
-  
-  public ref Vector PrecomputedBoundsMaxs { get; }
-  
-  public ref Vector PrecomputedOBBOrigin { get; }
-  
-  public ref QAngle PrecomputedOBBAngles { get; }
-  
-  public ref Vector PrecomputedOBBExtent { get; }
-  
-  public ref int PrecomputedSubFrusta { get; }
-  
-  public ref Vector PrecomputedOBBOrigin0 { get; }
-  
-  public ref QAngle PrecomputedOBBAngles0 { get; }
-  
-  public ref Vector PrecomputedOBBExtent0 { get; }
-  
-  public ref Vector PrecomputedOBBOrigin1 { get; }
-  
-  public ref QAngle PrecomputedOBBAngles1 { get; }
-  
-  public ref Vector PrecomputedOBBExtent1 { get; }
-  
-  public ref Vector PrecomputedOBBOrigin2 { get; }
-  
-  public ref QAngle PrecomputedOBBAngles2 { get; }
-  
-  public ref Vector PrecomputedOBBExtent2 { get; }
-  
-  public ref Vector PrecomputedOBBOrigin3 { get; }
-  
-  public ref QAngle PrecomputedOBBAngles3 { get; }
-  
-  public ref Vector PrecomputedOBBExtent3 { get; }
-  
-  public ref Vector PrecomputedOBBOrigin4 { get; }
-  
-  public ref QAngle PrecomputedOBBAngles4 { get; }
-  
-  public ref Vector PrecomputedOBBExtent4 { get; }
-  
-  public ref Vector PrecomputedOBBOrigin5 { get; }
-  
-  public ref QAngle PrecomputedOBBAngles5 { get; }
-  
-  public ref Vector PrecomputedOBBExtent5 { get; }
-  
-  public ref bool PvsModifyEntity { get; }
-  
-  public ref CUtlVector<ushort> VisClusters { get; }
+    public ref bool Enabled { get; }
 
-  public void EnabledUpdated();
-  public void ColorModeUpdated();
-  public void ColorUpdated();
-  public void ColorTemperatureUpdated();
-  public void BrightnessUpdated();
-  public void BrightnessScaleUpdated();
-  public void DirectLightUpdated();
-  public void BakedShadowIndexUpdated();
-  public void LightPathUniqueIdUpdated();
-  public void LightMapUniqueIdUpdated();
-  public void LuminaireShapeUpdated();
-  public void LuminaireSizeUpdated();
-  public void LuminaireAnisotropyUpdated();
-  public void LightStyleStringUpdated();
-  public void LightStyleStartTimeUpdated();
-  public void QueuedLightStyleStringsUpdated();
-  public void LightStyleEventsUpdated();
-  public void LightStyleTargetsUpdated();
-  public void LightCookieUpdated();
-  public void ShapeUpdated();
-  public void SoftXUpdated();
-  public void SoftYUpdated();
-  public void SkirtUpdated();
-  public void SkirtNearUpdated();
-  public void SizeParamsUpdated();
-  public void RangeUpdated();
-  public void ShearUpdated();
-  public void BakeSpecularToCubemapsUpdated();
-  public void BakeSpecularToCubemapsSizeUpdated();
-  public void CastShadowsUpdated();
-  public void ShadowMapSizeUpdated();
-  public void ShadowPriorityUpdated();
-  public void ContactShadowUpdated();
-  public void ForceShadowsEnabledUpdated();
-  public void BounceLightUpdated();
-  public void BounceScaleUpdated();
-  public void MinRoughnessUpdated();
-  public void AlternateColorUpdated();
-  public void AlternateColorBrightnessUpdated();
-  public void FogUpdated();
-  public void FogStrengthUpdated();
-  public void FogShadowsUpdated();
-  public void FogScaleUpdated();
-  public void FogMixedShadowsUpdated();
-  public void FadeSizeStartUpdated();
-  public void FadeSizeEndUpdated();
-  public void ShadowFadeSizeStartUpdated();
-  public void ShadowFadeSizeEndUpdated();
-  public void PrecomputedFieldsValidUpdated();
-  public void PrecomputedBoundsMinsUpdated();
-  public void PrecomputedBoundsMaxsUpdated();
-  public void PrecomputedOBBOriginUpdated();
-  public void PrecomputedOBBAnglesUpdated();
-  public void PrecomputedOBBExtentUpdated();
-  public void PrecomputedSubFrustaUpdated();
-  public void PrecomputedOBBOrigin0Updated();
-  public void PrecomputedOBBAngles0Updated();
-  public void PrecomputedOBBExtent0Updated();
-  public void PrecomputedOBBOrigin1Updated();
-  public void PrecomputedOBBAngles1Updated();
-  public void PrecomputedOBBExtent1Updated();
-  public void PrecomputedOBBOrigin2Updated();
-  public void PrecomputedOBBAngles2Updated();
-  public void PrecomputedOBBExtent2Updated();
-  public void PrecomputedOBBOrigin3Updated();
-  public void PrecomputedOBBAngles3Updated();
-  public void PrecomputedOBBExtent3Updated();
-  public void PrecomputedOBBOrigin4Updated();
-  public void PrecomputedOBBAngles4Updated();
-  public void PrecomputedOBBExtent4Updated();
-  public void PrecomputedOBBOrigin5Updated();
-  public void PrecomputedOBBAngles5Updated();
-  public void PrecomputedOBBExtent5Updated();
-  public void VisClustersUpdated();
+    public ref int ColorMode { get; }
+
+    public ref Color Color { get; }
+
+    public ref float ColorTemperature { get; }
+
+    public ref float Brightness { get; }
+
+    public ref float BrightnessScale { get; }
+
+    public ref int DirectLight { get; }
+
+    public ref int BakedShadowIndex { get; }
+
+    public ref int LightPathUniqueId { get; }
+
+    public ref int LightMapUniqueId { get; }
+
+    public ref int LuminaireShape { get; }
+
+    public ref float LuminaireSize { get; }
+
+    public ref float LuminaireAnisotropy { get; }
+
+    public string LightStyleString { get; set; }
+
+    public GameTime_t LightStyleStartTime { get; }
+
+    public ref CUtlVector<CUtlString> QueuedLightStyleStrings { get; }
+
+    public ref CUtlVector<CUtlString> LightStyleEvents { get; }
+
+    public ref CUtlVector<CHandle<CBaseModelEntity>> LightStyleTargets { get; }
+
+    public ISchemaFixedArray<CEntityIOOutput> StyleEvent { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> LightCookie { get; }
+
+    public ref float Shape { get; }
+
+    public ref float SoftX { get; }
+
+    public ref float SoftY { get; }
+
+    public ref float Skirt { get; }
+
+    public ref float SkirtNear { get; }
+
+    public ref Vector SizeParams { get; }
+
+    public ref float Range { get; }
+
+    public ref Vector Shear { get; }
+
+    public ref int BakeSpecularToCubemaps { get; }
+
+    public ref Vector BakeSpecularToCubemapsSize { get; }
+
+    public ref int CastShadows { get; }
+
+    public ref int ShadowMapSize { get; }
+
+    public ref int ShadowPriority { get; }
+
+    public ref bool ContactShadow { get; }
+
+    public ref bool ForceShadowsEnabled { get; }
+
+    public ref int BounceLight { get; }
+
+    public ref float BounceScale { get; }
+
+    public ref float MinRoughness { get; }
+
+    public ref Vector AlternateColor { get; }
+
+    public ref float AlternateColorBrightness { get; }
+
+    public ref int Fog { get; }
+
+    public ref float FogStrength { get; }
+
+    public ref int FogShadows { get; }
+
+    public ref float FogScale { get; }
+
+    public ref bool FogMixedShadows { get; }
+
+    public ref float FadeSizeStart { get; }
+
+    public ref float FadeSizeEnd { get; }
+
+    public ref float ShadowFadeSizeStart { get; }
+
+    public ref float ShadowFadeSizeEnd { get; }
+
+    public ref bool PrecomputedFieldsValid { get; }
+
+    public ref Vector PrecomputedBoundsMins { get; }
+
+    public ref Vector PrecomputedBoundsMaxs { get; }
+
+    public ref Vector PrecomputedOBBOrigin { get; }
+
+    public ref QAngle PrecomputedOBBAngles { get; }
+
+    public ref Vector PrecomputedOBBExtent { get; }
+
+    public ref int PrecomputedSubFrusta { get; }
+
+    public ref Vector PrecomputedOBBOrigin0 { get; }
+
+    public ref QAngle PrecomputedOBBAngles0 { get; }
+
+    public ref Vector PrecomputedOBBExtent0 { get; }
+
+    public ref Vector PrecomputedOBBOrigin1 { get; }
+
+    public ref QAngle PrecomputedOBBAngles1 { get; }
+
+    public ref Vector PrecomputedOBBExtent1 { get; }
+
+    public ref Vector PrecomputedOBBOrigin2 { get; }
+
+    public ref QAngle PrecomputedOBBAngles2 { get; }
+
+    public ref Vector PrecomputedOBBExtent2 { get; }
+
+    public ref Vector PrecomputedOBBOrigin3 { get; }
+
+    public ref QAngle PrecomputedOBBAngles3 { get; }
+
+    public ref Vector PrecomputedOBBExtent3 { get; }
+
+    public ref Vector PrecomputedOBBOrigin4 { get; }
+
+    public ref QAngle PrecomputedOBBAngles4 { get; }
+
+    public ref Vector PrecomputedOBBExtent4 { get; }
+
+    public ref Vector PrecomputedOBBOrigin5 { get; }
+
+    public ref QAngle PrecomputedOBBAngles5 { get; }
+
+    public ref Vector PrecomputedOBBExtent5 { get; }
+
+    public ref bool PvsModifyEntity { get; }
+
+    public ref CUtlVector<ushort> VisClusters { get; }
+
+    public void EnabledUpdated();
+    public void ColorModeUpdated();
+    public void ColorUpdated();
+    public void ColorTemperatureUpdated();
+    public void BrightnessUpdated();
+    public void BrightnessScaleUpdated();
+    public void DirectLightUpdated();
+    public void BakedShadowIndexUpdated();
+    public void LightPathUniqueIdUpdated();
+    public void LightMapUniqueIdUpdated();
+    public void LuminaireShapeUpdated();
+    public void LuminaireSizeUpdated();
+    public void LuminaireAnisotropyUpdated();
+    public void LightStyleStringUpdated();
+    public void LightStyleStartTimeUpdated();
+    public void QueuedLightStyleStringsUpdated();
+    public void LightStyleEventsUpdated();
+    public void LightStyleTargetsUpdated();
+    public void LightCookieUpdated();
+    public void ShapeUpdated();
+    public void SoftXUpdated();
+    public void SoftYUpdated();
+    public void SkirtUpdated();
+    public void SkirtNearUpdated();
+    public void SizeParamsUpdated();
+    public void RangeUpdated();
+    public void ShearUpdated();
+    public void BakeSpecularToCubemapsUpdated();
+    public void BakeSpecularToCubemapsSizeUpdated();
+    public void CastShadowsUpdated();
+    public void ShadowMapSizeUpdated();
+    public void ShadowPriorityUpdated();
+    public void ContactShadowUpdated();
+    public void ForceShadowsEnabledUpdated();
+    public void BounceLightUpdated();
+    public void BounceScaleUpdated();
+    public void MinRoughnessUpdated();
+    public void AlternateColorUpdated();
+    public void AlternateColorBrightnessUpdated();
+    public void FogUpdated();
+    public void FogStrengthUpdated();
+    public void FogShadowsUpdated();
+    public void FogScaleUpdated();
+    public void FogMixedShadowsUpdated();
+    public void FadeSizeStartUpdated();
+    public void FadeSizeEndUpdated();
+    public void ShadowFadeSizeStartUpdated();
+    public void ShadowFadeSizeEndUpdated();
+    public void PrecomputedFieldsValidUpdated();
+    public void PrecomputedBoundsMinsUpdated();
+    public void PrecomputedBoundsMaxsUpdated();
+    public void PrecomputedOBBOriginUpdated();
+    public void PrecomputedOBBAnglesUpdated();
+    public void PrecomputedOBBExtentUpdated();
+    public void PrecomputedSubFrustaUpdated();
+    public void PrecomputedOBBOrigin0Updated();
+    public void PrecomputedOBBAngles0Updated();
+    public void PrecomputedOBBExtent0Updated();
+    public void PrecomputedOBBOrigin1Updated();
+    public void PrecomputedOBBAngles1Updated();
+    public void PrecomputedOBBExtent1Updated();
+    public void PrecomputedOBBOrigin2Updated();
+    public void PrecomputedOBBAngles2Updated();
+    public void PrecomputedOBBExtent2Updated();
+    public void PrecomputedOBBOrigin3Updated();
+    public void PrecomputedOBBAngles3Updated();
+    public void PrecomputedOBBExtent3Updated();
+    public void PrecomputedOBBOrigin4Updated();
+    public void PrecomputedOBBAngles4Updated();
+    public void PrecomputedOBBExtent4Updated();
+    public void PrecomputedOBBOrigin5Updated();
+    public void PrecomputedOBBAngles5Updated();
+    public void PrecomputedOBBExtent5Updated();
+    public void VisClustersUpdated();
 }

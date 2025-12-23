@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SosEditItemType_t : uint {
-
+public enum SosEditItemType_t : uint
+{
  SOS_EDIT_ITEM_TYPE_SOUNDEVENTS = 0,
 
  SOS_EDIT_ITEM_TYPE_SOUNDEVENT = 1,

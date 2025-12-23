@@ -6,117 +6,91 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLeanMatrixUpdateNodeImpl : CLeafUpdateNodeImpl, CLeanMatrixUpdateNode {
+internal partial class CLeanMatrixUpdateNodeImpl : CLeafUpdateNodeImpl, CLeanMatrixUpdateNode
+{
+    public CLeanMatrixUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CLeanMatrixUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FrameCornersOffset;
 
-  private static nint? _FrameCornersOffset;
-
-  public SchemaUntypedField FrameCorners {
-    get {
-      if (_FrameCornersOffset == null) {
-        _FrameCornersOffset = Schema.GetOffset(0xDB33C9A617463774);
-      }
-      return new SchemaUntypedField(_Handle + _FrameCornersOffset!.Value);
+    public SchemaUntypedField FrameCorners {
+        get {
+            _FrameCornersOffset = _FrameCornersOffset ?? Schema.GetOffset(0xDB33C9A617463774);
+            return new SchemaUntypedField(_Handle + _FrameCornersOffset!.Value);
+        }
     }
-  }
-  private static nint? _PosesOffset;
-
-  public SchemaUntypedField Poses {
-    get {
-      if (_PosesOffset == null) {
-        _PosesOffset = Schema.GetOffset(0xDB33C9A6B851C9F5);
-      }
-      return new SchemaUntypedField(_Handle + _PosesOffset!.Value);
+    public ISchemaClassFixedArray<CPoseHandle> Poses {
+        get => new SchemaClassFixedArray<CPoseHandle>(_Handle, 0xDB33C9A6B851C9F5, 9, 4, 2);
     }
-  }
-  private static nint? _DampingOffset;
+    private static nint? _DampingOffset;
 
-  public CAnimInputDamping Damping {
-    get {
-      if (_DampingOffset == null) {
-        _DampingOffset = Schema.GetOffset(0xDB33C9A615440FB5);
-      }
-      return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+    public CAnimInputDamping Damping {
+        get {
+            _DampingOffset = _DampingOffset ?? Schema.GetOffset(0xDB33C9A615440FB5);
+            return new CAnimInputDampingImpl(_Handle + _DampingOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlendSourceOffset;
+    private static nint? _BlendSourceOffset;
 
-  public ref AnimVectorSource BlendSource {
-    get {
-      if (_BlendSourceOffset == null) {
-        _BlendSourceOffset = Schema.GetOffset(0xDB33C9A6EB9142CD);
-      }
-      return ref _Handle.AsRef<AnimVectorSource>(_BlendSourceOffset!.Value);
+    public ref AnimVectorSource BlendSource {
+        get {
+            _BlendSourceOffset = _BlendSourceOffset ?? Schema.GetOffset(0xDB33C9A6EB9142CD);
+            return ref _Handle.AsRef<AnimVectorSource>(_BlendSourceOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamIndexOffset;
+    private static nint? _ParamIndexOffset;
 
-  public CAnimParamHandle ParamIndex {
-    get {
-      if (_ParamIndexOffset == null) {
-        _ParamIndexOffset = Schema.GetOffset(0xDB33C9A661990A86);
-      }
-      return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+    public CAnimParamHandle ParamIndex {
+        get {
+            _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xDB33C9A661990A86);
+            return new CAnimParamHandleImpl(_Handle + _ParamIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _VerticalAxisOffset;
+    private static nint? _VerticalAxisOffset;
 
-  public ref Vector VerticalAxis {
-    get {
-      if (_VerticalAxisOffset == null) {
-        _VerticalAxisOffset = Schema.GetOffset(0xDB33C9A6F82ED1C6);
-      }
-      return ref _Handle.AsRef<Vector>(_VerticalAxisOffset!.Value);
+    public ref Vector VerticalAxis {
+        get {
+            _VerticalAxisOffset = _VerticalAxisOffset ?? Schema.GetOffset(0xDB33C9A6F82ED1C6);
+            return ref _Handle.AsRef<Vector>(_VerticalAxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _HorizontalAxisOffset;
+    private static nint? _HorizontalAxisOffset;
 
-  public ref Vector HorizontalAxis {
-    get {
-      if (_HorizontalAxisOffset == null) {
-        _HorizontalAxisOffset = Schema.GetOffset(0xDB33C9A6FE8AD688);
-      }
-      return ref _Handle.AsRef<Vector>(_HorizontalAxisOffset!.Value);
+    public ref Vector HorizontalAxis {
+        get {
+            _HorizontalAxisOffset = _HorizontalAxisOffset ?? Schema.GetOffset(0xDB33C9A6FE8AD688);
+            return ref _Handle.AsRef<Vector>(_HorizontalAxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceOffset;
+    private static nint? _SequenceOffset;
 
-  public HSequence Sequence {
-    get {
-      if (_SequenceOffset == null) {
-        _SequenceOffset = Schema.GetOffset(0xDB33C9A6E0A0598E);
-      }
-      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    public HSequence Sequence {
+        get {
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0xDB33C9A6E0A0598E);
+            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxValueOffset;
+    private static nint? _MaxValueOffset;
 
-  public ref float MaxValue {
-    get {
-      if (_MaxValueOffset == null) {
-        _MaxValueOffset = Schema.GetOffset(0xDB33C9A6D0A5C87C);
-      }
-      return ref _Handle.AsRef<float>(_MaxValueOffset!.Value);
+    public ref float MaxValue {
+        get {
+            _MaxValueOffset = _MaxValueOffset ?? Schema.GetOffset(0xDB33C9A6D0A5C87C);
+            return ref _Handle.AsRef<float>(_MaxValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceMaxFrameOffset;
+    private static nint? _SequenceMaxFrameOffset;
 
-  public ref int SequenceMaxFrame {
-    get {
-      if (_SequenceMaxFrameOffset == null) {
-        _SequenceMaxFrameOffset = Schema.GetOffset(0xDB33C9A65FD0AE0B);
-      }
-      return ref _Handle.AsRef<int>(_SequenceMaxFrameOffset!.Value);
+    public ref int SequenceMaxFrame {
+        get {
+            _SequenceMaxFrameOffset = _SequenceMaxFrameOffset ?? Schema.GetOffset(0xDB33C9A65FD0AE0B);
+            return ref _Handle.AsRef<int>(_SequenceMaxFrameOffset!.Value);
+        }
     }
-  }
 
 
 }

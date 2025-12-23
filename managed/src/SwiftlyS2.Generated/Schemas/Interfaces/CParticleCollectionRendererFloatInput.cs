@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleCollectionRendererFloatInput : CParticleCollectionFloatInput, ISchemaClass<CParticleCollectionRendererFloatInput> {
-
-  static CParticleCollectionRendererFloatInput ISchemaClass<CParticleCollectionRendererFloatInput>.From(nint handle) => new CParticleCollectionRendererFloatInputImpl(handle);
-  static int ISchemaClass<CParticleCollectionRendererFloatInput>.Size => 368;
-  static string? ISchemaClass<CParticleCollectionRendererFloatInput>.ClassName => null;
+public partial interface CParticleCollectionRendererFloatInput : CParticleCollectionFloatInput, ISchemaClass<CParticleCollectionRendererFloatInput>
+{
+    static CParticleCollectionRendererFloatInput ISchemaClass<CParticleCollectionRendererFloatInput>.From(nint handle) => new CParticleCollectionRendererFloatInputImpl(handle);
+    static int ISchemaClass<CParticleCollectionRendererFloatInput>.Size => 368;
+    static string? ISchemaClass<CParticleCollectionRendererFloatInput>.ClassName => null;
 
 
 

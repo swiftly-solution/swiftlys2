@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class BlendItem_tImpl : SchemaClass, BlendItem_t {
+internal partial class BlendItem_tImpl : SchemaClass, BlendItem_t
+{
+    public BlendItem_tImpl(nint handle) : base(handle) { }
 
-  public BlendItem_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TagsOffset;
 
-  private static nint? _TagsOffset;
-
-  public ref CUtlVector<TagSpan_t> Tags {
-    get {
-      if (_TagsOffset == null) {
-        _TagsOffset = Schema.GetOffset(0x8FC3054B46C8540);
-      }
-      return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+    public ref CUtlVector<TagSpan_t> Tags {
+        get {
+            _TagsOffset = _TagsOffset ?? Schema.GetOffset(0x8FC3054B46C8540);
+            return ref _Handle.AsRef<CUtlVector<TagSpan_t>>(_TagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChildOffset;
+    private static nint? _ChildOffset;
 
-  public CAnimUpdateNodeRef Child {
-    get {
-      if (_ChildOffset == null) {
-        _ChildOffset = Schema.GetOffset(0x8FC30544A0B773F);
-      }
-      return new CAnimUpdateNodeRefImpl(_Handle + _ChildOffset!.Value);
+    public CAnimUpdateNodeRef Child {
+        get {
+            _ChildOffset = _ChildOffset ?? Schema.GetOffset(0x8FC30544A0B773F);
+            return new CAnimUpdateNodeRefImpl(_Handle + _ChildOffset!.Value);
+        }
     }
-  }
-  private static nint? _SequenceOffset;
+    private static nint? _SequenceOffset;
 
-  public HSequence Sequence {
-    get {
-      if (_SequenceOffset == null) {
-        _SequenceOffset = Schema.GetOffset(0x8FC3054E0A0598E);
-      }
-      return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+    public HSequence Sequence {
+        get {
+            _SequenceOffset = _SequenceOffset ?? Schema.GetOffset(0x8FC3054E0A0598E);
+            return new HSequenceImpl(_Handle + _SequenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _PosOffset;
+    private static nint? _PosOffset;
 
-  public ref Vector2D Pos {
-    get {
-      if (_PosOffset == null) {
-        _PosOffset = Schema.GetOffset(0x8FC3054DE9CFC5D);
-      }
-      return ref _Handle.AsRef<Vector2D>(_PosOffset!.Value);
+    public ref Vector2D Pos {
+        get {
+            _PosOffset = _PosOffset ?? Schema.GetOffset(0x8FC3054DE9CFC5D);
+            return ref _Handle.AsRef<Vector2D>(_PosOffset!.Value);
+        }
     }
-  }
-  private static nint? _DurationOffset;
+    private static nint? _DurationOffset;
 
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0x8FC3054BC5E3BAB);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0x8FC3054BC5E3BAB);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseCustomDurationOffset;
+    private static nint? _UseCustomDurationOffset;
 
-  public ref bool UseCustomDuration {
-    get {
-      if (_UseCustomDurationOffset == null) {
-        _UseCustomDurationOffset = Schema.GetOffset(0x8FC3054F9BF05AB);
-      }
-      return ref _Handle.AsRef<bool>(_UseCustomDurationOffset!.Value);
+    public ref bool UseCustomDuration {
+        get {
+            _UseCustomDurationOffset = _UseCustomDurationOffset ?? Schema.GetOffset(0x8FC3054F9BF05AB);
+            return ref _Handle.AsRef<bool>(_UseCustomDurationOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnumAnimParameter : CConcreteAnimParameter, ISchemaClass<CEnumAnimParameter> {
+public partial interface CEnumAnimParameter : CConcreteAnimParameter, ISchemaClass<CEnumAnimParameter>
+{
+    static CEnumAnimParameter ISchemaClass<CEnumAnimParameter>.From(nint handle) => new CEnumAnimParameterImpl(handle);
+    static int ISchemaClass<CEnumAnimParameter>.Size => 216;
+    static string? ISchemaClass<CEnumAnimParameter>.ClassName => null;
 
-  static CEnumAnimParameter ISchemaClass<CEnumAnimParameter>.From(nint handle) => new CEnumAnimParameterImpl(handle);
-  static int ISchemaClass<CEnumAnimParameter>.Size => 216;
-  static string? ISchemaClass<CEnumAnimParameter>.ClassName => null;
 
-  
-  public ref byte DefaultValue { get; }
-  
-  public ref CUtlVector<CUtlString> EnumOptions { get; }
-  
-  public ref CUtlVector<ulong> EnumReferenced { get; }
+    public ref byte DefaultValue { get; }
+
+    public ref CUtlVector<CUtlString> EnumOptions { get; }
+
+    public ref CUtlVector<ulong> EnumReferenced { get; }
 
 
 }

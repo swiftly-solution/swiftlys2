@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAimMatrixUpdateNode : CUnaryUpdateNode, ISchemaClass<CAimMatrixUpdateNode> {
+public partial interface CAimMatrixUpdateNode : CUnaryUpdateNode, ISchemaClass<CAimMatrixUpdateNode>
+{
+    static CAimMatrixUpdateNode ISchemaClass<CAimMatrixUpdateNode>.From(nint handle) => new CAimMatrixUpdateNodeImpl(handle);
+    static int ISchemaClass<CAimMatrixUpdateNode>.Size => 384;
+    static string? ISchemaClass<CAimMatrixUpdateNode>.ClassName => null;
 
-  static CAimMatrixUpdateNode ISchemaClass<CAimMatrixUpdateNode>.From(nint handle) => new CAimMatrixUpdateNodeImpl(handle);
-  static int ISchemaClass<CAimMatrixUpdateNode>.Size => 384;
-  static string? ISchemaClass<CAimMatrixUpdateNode>.ClassName => null;
 
-  
-  public AimMatrixOpFixedSettings_t OpFixedSettings { get; }
-  
-  public ref AnimVectorSource Target { get; }
-  
-  public CAnimParamHandle ParamIndex { get; }
-  
-  public HSequence Sequence { get; }
-  
-  public ref bool ResetChild { get; }
-  
-  public ref bool LockWhenWaning { get; }
+    public AimMatrixOpFixedSettings_t OpFixedSettings { get; }
+
+    public ref AnimVectorSource Target { get; }
+
+    public CAnimParamHandle ParamIndex { get; }
+
+    public HSequence Sequence { get; }
+
+    public ref bool ResetChild { get; }
+
+    public ref bool LockWhenWaning { get; }
 
 
 }

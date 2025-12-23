@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PermModelExtPart_tImpl : SchemaClass, PermModelExtPart_t {
+internal partial class PermModelExtPart_tImpl : SchemaClass, PermModelExtPart_t
+{
+    public PermModelExtPart_tImpl(nint handle) : base(handle) { }
 
-  public PermModelExtPart_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TransformOffset;
 
-  private static nint? _TransformOffset;
-
-  public ref CTransform Transform {
-    get {
-      if (_TransformOffset == null) {
-        _TransformOffset = Schema.GetOffset(0xCA30851D6EC5209B);
-      }
-      return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+    public ref CTransform Transform {
+        get {
+            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0xCA30851D6EC5209B);
+            return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameOffset;
+    private static nint? _NameOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xCA30851DCAE8A266);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xCA30851DCAE8A266);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ParentOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCA30851DCAE8A266);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xCA30851DCAE8A266);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ParentOffset;
 
-  public ref int Parent {
-    get {
-      if (_ParentOffset == null) {
-        _ParentOffset = Schema.GetOffset(0xCA30851D0AABB9D1);
-      }
-      return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+    public ref int Parent {
+        get {
+            _ParentOffset = _ParentOffset ?? Schema.GetOffset(0xCA30851D0AABB9D1);
+            return ref _Handle.AsRef<int>(_ParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _RefModelOffset;
+    private static nint? _RefModelOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeCModel> RefModel {
-    get {
-      if (_RefModelOffset == null) {
-        _RefModelOffset = Schema.GetOffset(0xCA30851D63E6E3DF);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RefModelOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeCModel> RefModel {
+        get {
+            _RefModelOffset = _RefModelOffset ?? Schema.GetOffset(0xCA30851D63E6E3DF);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCModel>>(_RefModelOffset!.Value);
+        }
     }
-  }
 
 
 }

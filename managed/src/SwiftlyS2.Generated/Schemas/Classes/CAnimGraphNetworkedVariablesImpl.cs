@@ -6,328 +6,231 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimGraphNetworkedVariablesImpl : SchemaClass, CAnimGraphNetworkedVariables {
+internal partial class CAnimGraphNetworkedVariablesImpl : SchemaClass, CAnimGraphNetworkedVariables
+{
+    public CAnimGraphNetworkedVariablesImpl(nint handle) : base(handle) { }
 
-  public CAnimGraphNetworkedVariablesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PredNetBoolVariablesOffset;
 
-  private static nint? _PredNetBoolVariablesOffset;
-
-  public ref CUtlVector<uint> PredNetBoolVariables {
-    get {
-      if (_PredNetBoolVariablesOffset == null) {
-        _PredNetBoolVariablesOffset = Schema.GetOffset(0x1E17B4B906DCE9F6);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_PredNetBoolVariablesOffset!.Value);
+    public ref CUtlVector<uint> PredNetBoolVariables {
+        get {
+            _PredNetBoolVariablesOffset = _PredNetBoolVariablesOffset ?? Schema.GetOffset(0x1E17B4B906DCE9F6);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_PredNetBoolVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PredNetByteVariablesOffset;
+    private static nint? _PredNetByteVariablesOffset;
 
-  public ref CUtlVector<byte> PredNetByteVariables {
-    get {
-      if (_PredNetByteVariablesOffset == null) {
-        _PredNetByteVariablesOffset = Schema.GetOffset(0x1E17B4B989E64D04);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_PredNetByteVariablesOffset!.Value);
+    public ref CUtlVector<byte> PredNetByteVariables {
+        get {
+            _PredNetByteVariablesOffset = _PredNetByteVariablesOffset ?? Schema.GetOffset(0x1E17B4B989E64D04);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_PredNetByteVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PredNetUInt16VariablesOffset;
+    private static nint? _PredNetUInt16VariablesOffset;
 
-  public ref CUtlVector<ushort> PredNetUInt16Variables {
-    get {
-      if (_PredNetUInt16VariablesOffset == null) {
-        _PredNetUInt16VariablesOffset = Schema.GetOffset(0x1E17B4B977F08773);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_PredNetUInt16VariablesOffset!.Value);
+    public ref CUtlVector<ushort> PredNetUInt16Variables {
+        get {
+            _PredNetUInt16VariablesOffset = _PredNetUInt16VariablesOffset ?? Schema.GetOffset(0x1E17B4B977F08773);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_PredNetUInt16VariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PredNetIntVariablesOffset;
+    private static nint? _PredNetIntVariablesOffset;
 
-  public ref CUtlVector<int> PredNetIntVariables {
-    get {
-      if (_PredNetIntVariablesOffset == null) {
-        _PredNetIntVariablesOffset = Schema.GetOffset(0x1E17B4B96B8A2ED7);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_PredNetIntVariablesOffset!.Value);
+    public ref CUtlVector<int> PredNetIntVariables {
+        get {
+            _PredNetIntVariablesOffset = _PredNetIntVariablesOffset ?? Schema.GetOffset(0x1E17B4B96B8A2ED7);
+            return ref _Handle.AsRef<CUtlVector<int>>(_PredNetIntVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PredNetUInt32VariablesOffset;
+    private static nint? _PredNetUInt32VariablesOffset;
 
-  public ref CUtlVector<uint> PredNetUInt32Variables {
-    get {
-      if (_PredNetUInt32VariablesOffset == null) {
-        _PredNetUInt32VariablesOffset = Schema.GetOffset(0x1E17B4B9E4E7C391);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_PredNetUInt32VariablesOffset!.Value);
+    public ref CUtlVector<uint> PredNetUInt32Variables {
+        get {
+            _PredNetUInt32VariablesOffset = _PredNetUInt32VariablesOffset ?? Schema.GetOffset(0x1E17B4B9E4E7C391);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_PredNetUInt32VariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PredNetUInt64VariablesOffset;
+    private static nint? _PredNetUInt64VariablesOffset;
 
-  public ref CUtlVector<ulong> PredNetUInt64Variables {
-    get {
-      if (_PredNetUInt64VariablesOffset == null) {
-        _PredNetUInt64VariablesOffset = Schema.GetOffset(0x1E17B4B99DAD8E90);
-      }
-      return ref _Handle.AsRef<CUtlVector<ulong>>(_PredNetUInt64VariablesOffset!.Value);
+    public ref CUtlVector<ulong> PredNetUInt64Variables {
+        get {
+            _PredNetUInt64VariablesOffset = _PredNetUInt64VariablesOffset ?? Schema.GetOffset(0x1E17B4B99DAD8E90);
+            return ref _Handle.AsRef<CUtlVector<ulong>>(_PredNetUInt64VariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PredNetFloatVariablesOffset;
+    private static nint? _PredNetFloatVariablesOffset;
 
-  public ref CUtlVector<float> PredNetFloatVariables {
-    get {
-      if (_PredNetFloatVariablesOffset == null) {
-        _PredNetFloatVariablesOffset = Schema.GetOffset(0x1E17B4B998D66E5E);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_PredNetFloatVariablesOffset!.Value);
+    public ref CUtlVector<float> PredNetFloatVariables {
+        get {
+            _PredNetFloatVariablesOffset = _PredNetFloatVariablesOffset ?? Schema.GetOffset(0x1E17B4B998D66E5E);
+            return ref _Handle.AsRef<CUtlVector<float>>(_PredNetFloatVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PredNetVectorVariablesOffset;
+    private static nint? _PredNetVectorVariablesOffset;
 
-  public ref CUtlVector<Vector> PredNetVectorVariables {
-    get {
-      if (_PredNetVectorVariablesOffset == null) {
-        _PredNetVectorVariablesOffset = Schema.GetOffset(0x1E17B4B9181E9E43);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_PredNetVectorVariablesOffset!.Value);
+    public ref CUtlVector<Vector> PredNetVectorVariables {
+        get {
+            _PredNetVectorVariablesOffset = _PredNetVectorVariablesOffset ?? Schema.GetOffset(0x1E17B4B9181E9E43);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_PredNetVectorVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PredNetQuaternionVariablesOffset;
+    private static nint? _PredNetQuaternionVariablesOffset;
 
-  public ref CUtlVector<Quaternion> PredNetQuaternionVariables {
-    get {
-      if (_PredNetQuaternionVariablesOffset == null) {
-        _PredNetQuaternionVariablesOffset = Schema.GetOffset(0x1E17B4B97DB635DE);
-      }
-      return ref _Handle.AsRef<CUtlVector<Quaternion>>(_PredNetQuaternionVariablesOffset!.Value);
+    public ref CUtlVector<Quaternion> PredNetQuaternionVariables {
+        get {
+            _PredNetQuaternionVariablesOffset = _PredNetQuaternionVariablesOffset ?? Schema.GetOffset(0x1E17B4B97DB635DE);
+            return ref _Handle.AsRef<CUtlVector<Quaternion>>(_PredNetQuaternionVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _PredNetGlobalSymbolVariablesOffset;
+    private static nint? _PredNetGlobalSymbolVariablesOffset;
 
-  public ref CUtlVector<CGlobalSymbol> PredNetGlobalSymbolVariables {
-    get {
-      if (_PredNetGlobalSymbolVariablesOffset == null) {
-        _PredNetGlobalSymbolVariablesOffset = Schema.GetOffset(0x1E17B4B9617FC65F);
-      }
-      return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_PredNetGlobalSymbolVariablesOffset!.Value);
+    public ref CUtlVector<CGlobalSymbol> PredNetGlobalSymbolVariables {
+        get {
+            _PredNetGlobalSymbolVariablesOffset = _PredNetGlobalSymbolVariablesOffset ?? Schema.GetOffset(0x1E17B4B9617FC65F);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_PredNetGlobalSymbolVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetBoolVariablesOffset;
+    private static nint? _OwnerOnlyPredNetBoolVariablesOffset;
 
-  public ref CUtlVector<uint> OwnerOnlyPredNetBoolVariables {
-    get {
-      if (_OwnerOnlyPredNetBoolVariablesOffset == null) {
-        _OwnerOnlyPredNetBoolVariablesOffset = Schema.GetOffset(0x1E17B4B929EC42ED);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_OwnerOnlyPredNetBoolVariablesOffset!.Value);
+    public ref CUtlVector<uint> OwnerOnlyPredNetBoolVariables {
+        get {
+            _OwnerOnlyPredNetBoolVariablesOffset = _OwnerOnlyPredNetBoolVariablesOffset ?? Schema.GetOffset(0x1E17B4B929EC42ED);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_OwnerOnlyPredNetBoolVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetByteVariablesOffset;
+    private static nint? _OwnerOnlyPredNetByteVariablesOffset;
 
-  public ref CUtlVector<byte> OwnerOnlyPredNetByteVariables {
-    get {
-      if (_OwnerOnlyPredNetByteVariablesOffset == null) {
-        _OwnerOnlyPredNetByteVariablesOffset = Schema.GetOffset(0x1E17B4B930A63C33);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_OwnerOnlyPredNetByteVariablesOffset!.Value);
+    public ref CUtlVector<byte> OwnerOnlyPredNetByteVariables {
+        get {
+            _OwnerOnlyPredNetByteVariablesOffset = _OwnerOnlyPredNetByteVariablesOffset ?? Schema.GetOffset(0x1E17B4B930A63C33);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_OwnerOnlyPredNetByteVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetUInt16VariablesOffset;
+    private static nint? _OwnerOnlyPredNetUInt16VariablesOffset;
 
-  public ref CUtlVector<ushort> OwnerOnlyPredNetUInt16Variables {
-    get {
-      if (_OwnerOnlyPredNetUInt16VariablesOffset == null) {
-        _OwnerOnlyPredNetUInt16VariablesOffset = Schema.GetOffset(0x1E17B4B9F4141ACC);
-      }
-      return ref _Handle.AsRef<CUtlVector<ushort>>(_OwnerOnlyPredNetUInt16VariablesOffset!.Value);
+    public ref CUtlVector<ushort> OwnerOnlyPredNetUInt16Variables {
+        get {
+            _OwnerOnlyPredNetUInt16VariablesOffset = _OwnerOnlyPredNetUInt16VariablesOffset ?? Schema.GetOffset(0x1E17B4B9F4141ACC);
+            return ref _Handle.AsRef<CUtlVector<ushort>>(_OwnerOnlyPredNetUInt16VariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetIntVariablesOffset;
+    private static nint? _OwnerOnlyPredNetIntVariablesOffset;
 
-  public ref CUtlVector<int> OwnerOnlyPredNetIntVariables {
-    get {
-      if (_OwnerOnlyPredNetIntVariablesOffset == null) {
-        _OwnerOnlyPredNetIntVariablesOffset = Schema.GetOffset(0x1E17B4B9334BC692);
-      }
-      return ref _Handle.AsRef<CUtlVector<int>>(_OwnerOnlyPredNetIntVariablesOffset!.Value);
+    public ref CUtlVector<int> OwnerOnlyPredNetIntVariables {
+        get {
+            _OwnerOnlyPredNetIntVariablesOffset = _OwnerOnlyPredNetIntVariablesOffset ?? Schema.GetOffset(0x1E17B4B9334BC692);
+            return ref _Handle.AsRef<CUtlVector<int>>(_OwnerOnlyPredNetIntVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetUInt32VariablesOffset;
+    private static nint? _OwnerOnlyPredNetUInt32VariablesOffset;
 
-  public ref CUtlVector<uint> OwnerOnlyPredNetUInt32Variables {
-    get {
-      if (_OwnerOnlyPredNetUInt32VariablesOffset == null) {
-        _OwnerOnlyPredNetUInt32VariablesOffset = Schema.GetOffset(0x1E17B4B92F3399D2);
-      }
-      return ref _Handle.AsRef<CUtlVector<uint>>(_OwnerOnlyPredNetUInt32VariablesOffset!.Value);
+    public ref CUtlVector<uint> OwnerOnlyPredNetUInt32Variables {
+        get {
+            _OwnerOnlyPredNetUInt32VariablesOffset = _OwnerOnlyPredNetUInt32VariablesOffset ?? Schema.GetOffset(0x1E17B4B92F3399D2);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_OwnerOnlyPredNetUInt32VariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetUInt64VariablesOffset;
+    private static nint? _OwnerOnlyPredNetUInt64VariablesOffset;
 
-  public ref CUtlVector<ulong> OwnerOnlyPredNetUInt64Variables {
-    get {
-      if (_OwnerOnlyPredNetUInt64VariablesOffset == null) {
-        _OwnerOnlyPredNetUInt64VariablesOffset = Schema.GetOffset(0x1E17B4B922F96523);
-      }
-      return ref _Handle.AsRef<CUtlVector<ulong>>(_OwnerOnlyPredNetUInt64VariablesOffset!.Value);
+    public ref CUtlVector<ulong> OwnerOnlyPredNetUInt64Variables {
+        get {
+            _OwnerOnlyPredNetUInt64VariablesOffset = _OwnerOnlyPredNetUInt64VariablesOffset ?? Schema.GetOffset(0x1E17B4B922F96523);
+            return ref _Handle.AsRef<CUtlVector<ulong>>(_OwnerOnlyPredNetUInt64VariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetFloatVariablesOffset;
+    private static nint? _OwnerOnlyPredNetFloatVariablesOffset;
 
-  public ref CUtlVector<float> OwnerOnlyPredNetFloatVariables {
-    get {
-      if (_OwnerOnlyPredNetFloatVariablesOffset == null) {
-        _OwnerOnlyPredNetFloatVariablesOffset = Schema.GetOffset(0x1E17B4B9BA2D74CB);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_OwnerOnlyPredNetFloatVariablesOffset!.Value);
+    public ref CUtlVector<float> OwnerOnlyPredNetFloatVariables {
+        get {
+            _OwnerOnlyPredNetFloatVariablesOffset = _OwnerOnlyPredNetFloatVariablesOffset ?? Schema.GetOffset(0x1E17B4B9BA2D74CB);
+            return ref _Handle.AsRef<CUtlVector<float>>(_OwnerOnlyPredNetFloatVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetVectorVariablesOffset;
+    private static nint? _OwnerOnlyPredNetVectorVariablesOffset;
 
-  public ref CUtlVector<Vector> OwnerOnlyPredNetVectorVariables {
-    get {
-      if (_OwnerOnlyPredNetVectorVariablesOffset == null) {
-        _OwnerOnlyPredNetVectorVariablesOffset = Schema.GetOffset(0x1E17B4B91BA357BC);
-      }
-      return ref _Handle.AsRef<CUtlVector<Vector>>(_OwnerOnlyPredNetVectorVariablesOffset!.Value);
+    public ref CUtlVector<Vector> OwnerOnlyPredNetVectorVariables {
+        get {
+            _OwnerOnlyPredNetVectorVariablesOffset = _OwnerOnlyPredNetVectorVariablesOffset ?? Schema.GetOffset(0x1E17B4B91BA357BC);
+            return ref _Handle.AsRef<CUtlVector<Vector>>(_OwnerOnlyPredNetVectorVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetQuaternionVariablesOffset;
+    private static nint? _OwnerOnlyPredNetQuaternionVariablesOffset;
 
-  public ref CUtlVector<Quaternion> OwnerOnlyPredNetQuaternionVariables {
-    get {
-      if (_OwnerOnlyPredNetQuaternionVariablesOffset == null) {
-        _OwnerOnlyPredNetQuaternionVariablesOffset = Schema.GetOffset(0x1E17B4B9D91AD9ED);
-      }
-      return ref _Handle.AsRef<CUtlVector<Quaternion>>(_OwnerOnlyPredNetQuaternionVariablesOffset!.Value);
+    public ref CUtlVector<Quaternion> OwnerOnlyPredNetQuaternionVariables {
+        get {
+            _OwnerOnlyPredNetQuaternionVariablesOffset = _OwnerOnlyPredNetQuaternionVariablesOffset ?? Schema.GetOffset(0x1E17B4B9D91AD9ED);
+            return ref _Handle.AsRef<CUtlVector<Quaternion>>(_OwnerOnlyPredNetQuaternionVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyPredNetGlobalSymbolVariablesOffset;
+    private static nint? _OwnerOnlyPredNetGlobalSymbolVariablesOffset;
 
-  public ref CUtlVector<CGlobalSymbol> OwnerOnlyPredNetGlobalSymbolVariables {
-    get {
-      if (_OwnerOnlyPredNetGlobalSymbolVariablesOffset == null) {
-        _OwnerOnlyPredNetGlobalSymbolVariablesOffset = Schema.GetOffset(0x1E17B4B9F5EB98E4);
-      }
-      return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_OwnerOnlyPredNetGlobalSymbolVariablesOffset!.Value);
+    public ref CUtlVector<CGlobalSymbol> OwnerOnlyPredNetGlobalSymbolVariables {
+        get {
+            _OwnerOnlyPredNetGlobalSymbolVariablesOffset = _OwnerOnlyPredNetGlobalSymbolVariablesOffset ?? Schema.GetOffset(0x1E17B4B9F5EB98E4);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_OwnerOnlyPredNetGlobalSymbolVariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoolVariablesCountOffset;
+    private static nint? _BoolVariablesCountOffset;
 
-  public ref int BoolVariablesCount {
-    get {
-      if (_BoolVariablesCountOffset == null) {
-        _BoolVariablesCountOffset = Schema.GetOffset(0x1E17B4B9C49C7BDD);
-      }
-      return ref _Handle.AsRef<int>(_BoolVariablesCountOffset!.Value);
+    public ref int BoolVariablesCount {
+        get {
+            _BoolVariablesCountOffset = _BoolVariablesCountOffset ?? Schema.GetOffset(0x1E17B4B9C49C7BDD);
+            return ref _Handle.AsRef<int>(_BoolVariablesCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerOnlyBoolVariablesCountOffset;
+    private static nint? _OwnerOnlyBoolVariablesCountOffset;
 
-  public ref int OwnerOnlyBoolVariablesCount {
-    get {
-      if (_OwnerOnlyBoolVariablesCountOffset == null) {
-        _OwnerOnlyBoolVariablesCountOffset = Schema.GetOffset(0x1E17B4B9CF1E0D52);
-      }
-      return ref _Handle.AsRef<int>(_OwnerOnlyBoolVariablesCountOffset!.Value);
+    public ref int OwnerOnlyBoolVariablesCount {
+        get {
+            _OwnerOnlyBoolVariablesCountOffset = _OwnerOnlyBoolVariablesCountOffset ?? Schema.GetOffset(0x1E17B4B9CF1E0D52);
+            return ref _Handle.AsRef<int>(_OwnerOnlyBoolVariablesCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _RandomSeedOffsetOffset;
+    private static nint? _RandomSeedOffsetOffset;
 
-  public ref int RandomSeedOffset {
-    get {
-      if (_RandomSeedOffsetOffset == null) {
-        _RandomSeedOffsetOffset = Schema.GetOffset(0x1E17B4B942BA3B9C);
-      }
-      return ref _Handle.AsRef<int>(_RandomSeedOffsetOffset!.Value);
+    public ref int RandomSeedOffset {
+        get {
+            _RandomSeedOffsetOffset = _RandomSeedOffsetOffset ?? Schema.GetOffset(0x1E17B4B942BA3B9C);
+            return ref _Handle.AsRef<int>(_RandomSeedOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastTeleportTimeOffset;
+    private static nint? _LastTeleportTimeOffset;
 
-  public ref float LastTeleportTime {
-    get {
-      if (_LastTeleportTimeOffset == null) {
-        _LastTeleportTimeOffset = Schema.GetOffset(0x1E17B4B9C1AD2641);
-      }
-      return ref _Handle.AsRef<float>(_LastTeleportTimeOffset!.Value);
+    public ref float LastTeleportTime {
+        get {
+            _LastTeleportTimeOffset = _LastTeleportTimeOffset ?? Schema.GetOffset(0x1E17B4B9C1AD2641);
+            return ref _Handle.AsRef<float>(_LastTeleportTimeOffset!.Value);
+        }
     }
-  }
 
-  public void PredNetBoolVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B906DCE9F6);
-  }
-  public void PredNetByteVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B989E64D04);
-  }
-  public void PredNetUInt16VariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B977F08773);
-  }
-  public void PredNetIntVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B96B8A2ED7);
-  }
-  public void PredNetUInt32VariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9E4E7C391);
-  }
-  public void PredNetUInt64VariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B99DAD8E90);
-  }
-  public void PredNetFloatVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B998D66E5E);
-  }
-  public void PredNetVectorVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9181E9E43);
-  }
-  public void PredNetQuaternionVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B97DB635DE);
-  }
-  public void PredNetGlobalSymbolVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9617FC65F);
-  }
-  public void OwnerOnlyPredNetBoolVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B929EC42ED);
-  }
-  public void OwnerOnlyPredNetByteVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B930A63C33);
-  }
-  public void OwnerOnlyPredNetUInt16VariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9F4141ACC);
-  }
-  public void OwnerOnlyPredNetIntVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9334BC692);
-  }
-  public void OwnerOnlyPredNetUInt32VariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B92F3399D2);
-  }
-  public void OwnerOnlyPredNetUInt64VariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B922F96523);
-  }
-  public void OwnerOnlyPredNetFloatVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9BA2D74CB);
-  }
-  public void OwnerOnlyPredNetVectorVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B91BA357BC);
-  }
-  public void OwnerOnlyPredNetQuaternionVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9D91AD9ED);
-  }
-  public void OwnerOnlyPredNetGlobalSymbolVariablesUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9F5EB98E4);
-  }
-  public void BoolVariablesCountUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9C49C7BDD);
-  }
-  public void OwnerOnlyBoolVariablesCountUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9CF1E0D52);
-  }
-  public void RandomSeedOffsetUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B942BA3B9C);
-  }
-  public void LastTeleportTimeUpdated() {
-    Schema.Update(_Handle, 0x1E17B4B9C1AD2641);
-  }
+    public void PredNetBoolVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B906DCE9F6);
+    public void PredNetByteVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B989E64D04);
+    public void PredNetUInt16VariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B977F08773);
+    public void PredNetIntVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B96B8A2ED7);
+    public void PredNetUInt32VariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B9E4E7C391);
+    public void PredNetUInt64VariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B99DAD8E90);
+    public void PredNetFloatVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B998D66E5E);
+    public void PredNetVectorVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B9181E9E43);
+    public void PredNetQuaternionVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B97DB635DE);
+    public void PredNetGlobalSymbolVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B9617FC65F);
+    public void OwnerOnlyPredNetBoolVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B929EC42ED);
+    public void OwnerOnlyPredNetByteVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B930A63C33);
+    public void OwnerOnlyPredNetUInt16VariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B9F4141ACC);
+    public void OwnerOnlyPredNetIntVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B9334BC692);
+    public void OwnerOnlyPredNetUInt32VariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B92F3399D2);
+    public void OwnerOnlyPredNetUInt64VariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B922F96523);
+    public void OwnerOnlyPredNetFloatVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B9BA2D74CB);
+    public void OwnerOnlyPredNetVectorVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B91BA357BC);
+    public void OwnerOnlyPredNetQuaternionVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B9D91AD9ED);
+    public void OwnerOnlyPredNetGlobalSymbolVariablesUpdated() => Schema.Update(_Handle, 0x1E17B4B9F5EB98E4);
+    public void BoolVariablesCountUpdated() => Schema.Update(_Handle, 0x1E17B4B9C49C7BDD);
+    public void OwnerOnlyBoolVariablesCountUpdated() => Schema.Update(_Handle, 0x1E17B4B9CF1E0D52);
+    public void RandomSeedOffsetUpdated() => Schema.Update(_Handle, 0x1E17B4B942BA3B9C);
+    public void LastTeleportTimeUpdated() => Schema.Update(_Handle, 0x1E17B4B9C1AD2641);
 }

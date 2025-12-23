@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulse_OutputConnection : ISchemaClass<CPulse_OutputConnection> {
+public partial interface CPulse_OutputConnection : ISchemaClass<CPulse_OutputConnection>
+{
+    static CPulse_OutputConnection ISchemaClass<CPulse_OutputConnection>.From(nint handle) => new CPulse_OutputConnectionImpl(handle);
+    static int ISchemaClass<CPulse_OutputConnection>.Size => 64;
+    static string? ISchemaClass<CPulse_OutputConnection>.ClassName => null;
 
-  static CPulse_OutputConnection ISchemaClass<CPulse_OutputConnection>.From(nint handle) => new CPulse_OutputConnectionImpl(handle);
-  static int ISchemaClass<CPulse_OutputConnection>.Size => 64;
-  static string? ISchemaClass<CPulse_OutputConnection>.ClassName => null;
 
-  
-  // PulseSymbol_t
-  public SchemaUntypedField SourceOutput { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField TargetEntity { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField TargetInput { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField Param { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField SourceOutput { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField TargetEntity { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField TargetInput { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField Param { get; }
 
 
 }

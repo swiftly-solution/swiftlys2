@@ -8,31 +8,31 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CColorCorrectionVolume : CBaseTrigger, ISchemaClass<CColorCorrectionVolume> {
+public partial interface CColorCorrectionVolume : CBaseTrigger, ISchemaClass<CColorCorrectionVolume>
+{
+    static CColorCorrectionVolume ISchemaClass<CColorCorrectionVolume>.From(nint handle) => new CColorCorrectionVolumeImpl(handle);
+    static int ISchemaClass<CColorCorrectionVolume>.Size => 3016;
+    static string? ISchemaClass<CColorCorrectionVolume>.ClassName => "color_correction_volume";
 
-  static CColorCorrectionVolume ISchemaClass<CColorCorrectionVolume>.From(nint handle) => new CColorCorrectionVolumeImpl(handle);
-  static int ISchemaClass<CColorCorrectionVolume>.Size => 3016;
-  static string? ISchemaClass<CColorCorrectionVolume>.ClassName => "color_correction_volume";
 
-  
-  public ref float MaxWeight { get; }
-  
-  public ref float FadeDuration { get; }
-  
-  public ref float Weight { get; }
-  
-  public string LookupFilename { get; set; }
-  
-  public ref float LastEnterWeight { get; }
-  
-  public GameTime_t LastEnterTime { get; }
-  
-  public ref float LastExitWeight { get; }
-  
-  public GameTime_t LastExitTime { get; }
+    public ref float MaxWeight { get; }
 
-  public void MaxWeightUpdated();
-  public void FadeDurationUpdated();
-  public void WeightUpdated();
-  public void LookupFilenameUpdated();
+    public ref float FadeDuration { get; }
+
+    public ref float Weight { get; }
+
+    public string LookupFilename { get; set; }
+
+    public ref float LastEnterWeight { get; }
+
+    public GameTime_t LastEnterTime { get; }
+
+    public ref float LastExitWeight { get; }
+
+    public GameTime_t LastExitTime { get; }
+
+    public void MaxWeightUpdated();
+    public void FadeDurationUpdated();
+    public void WeightUpdated();
+    public void LookupFilenameUpdated();
 }

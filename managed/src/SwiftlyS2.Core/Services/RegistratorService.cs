@@ -1,24 +1,23 @@
-using Microsoft.Extensions.DependencyInjection;
-using SwiftlyS2.Core.AttributeParsers;
-using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Services;
+using SwiftlyS2.Core.AttributeParsers;
 
 namespace SwiftlyS2.Core.Services;
 
-internal class RegistratorService : IRegistratorService {
+internal class RegistratorService : IRegistratorService
+{
+    private readonly SwiftlyCore core;
 
-  public RegistratorService(SwiftlyCore core) {
-    _Core = core;
-  }
+    public RegistratorService( SwiftlyCore core )
+    {
+        this.core = core;
+    }
 
-  private SwiftlyCore _Core { get; }
-
-  public void Register(object instance) {
-
-    _Core.CommandService.ParseFromObject(instance);
-    _Core.EventSubscriber.ParseFromObject(instance);
-    _Core.GameEventService.ParseFromObject(instance);
-    _Core.NetMessageService.ParseFromObject(instance);
-
-  }
+    public void Register( object instance )
+    {
+        core.CommandService.ParseFromObject(instance);
+        core.EventSubscriber.ParseFromObject(instance);
+        core.GameEventService.ParseFromObject(instance);
+        core.NetMessageService.ParseFromObject(instance);
+        core.EntitySystemService.ParseFromObject(instance);
+    }
 }

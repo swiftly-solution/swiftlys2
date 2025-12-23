@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMaterialDrawDescriptor__RigidMeshPart_tImpl : SchemaClass, CMaterialDrawDescriptor__RigidMeshPart_t {
+internal partial class CMaterialDrawDescriptor__RigidMeshPart_tImpl : SchemaClass, CMaterialDrawDescriptor__RigidMeshPart_t
+{
+    public CMaterialDrawDescriptor__RigidMeshPart_tImpl(nint handle) : base(handle) { }
 
-  public CMaterialDrawDescriptor__RigidMeshPart_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RigidBLASIndexOffset;
 
-  private static nint? _RigidBLASIndexOffset;
-
-  public ref ushort RigidBLASIndex {
-    get {
-      if (_RigidBLASIndexOffset == null) {
-        _RigidBLASIndexOffset = Schema.GetOffset(0xD375EED8EE87873E);
-      }
-      return ref _Handle.AsRef<ushort>(_RigidBLASIndexOffset!.Value);
+    public ref ushort RigidBLASIndex {
+        get {
+            _RigidBLASIndexOffset = _RigidBLASIndexOffset ?? Schema.GetOffset(0xD375EED8EE87873E);
+            return ref _Handle.AsRef<ushort>(_RigidBLASIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _BoneIndexOffset;
+    private static nint? _BoneIndexOffset;
 
-  public ref short BoneIndex {
-    get {
-      if (_BoneIndexOffset == null) {
-        _BoneIndexOffset = Schema.GetOffset(0xD375EED89F407B79);
-      }
-      return ref _Handle.AsRef<short>(_BoneIndexOffset!.Value);
+    public ref short BoneIndex {
+        get {
+            _BoneIndexOffset = _BoneIndexOffset ?? Schema.GetOffset(0xD375EED89F407B79);
+            return ref _Handle.AsRef<short>(_BoneIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartIndexOffsetOffset;
+    private static nint? _StartIndexOffsetOffset;
 
-  public ref uint StartIndexOffset {
-    get {
-      if (_StartIndexOffsetOffset == null) {
-        _StartIndexOffsetOffset = Schema.GetOffset(0xD375EED891EF1626);
-      }
-      return ref _Handle.AsRef<uint>(_StartIndexOffsetOffset!.Value);
+    public ref uint StartIndexOffset {
+        get {
+            _StartIndexOffsetOffset = _StartIndexOffsetOffset ?? Schema.GetOffset(0xD375EED891EF1626);
+            return ref _Handle.AsRef<uint>(_StartIndexOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _PrimitiveCountOffset;
+    private static nint? _PrimitiveCountOffset;
 
-  public ref uint PrimitiveCount {
-    get {
-      if (_PrimitiveCountOffset == null) {
-        _PrimitiveCountOffset = Schema.GetOffset(0xD375EED8B627A621);
-      }
-      return ref _Handle.AsRef<uint>(_PrimitiveCountOffset!.Value);
+    public ref uint PrimitiveCount {
+        get {
+            _PrimitiveCountOffset = _PrimitiveCountOffset ?? Schema.GetOffset(0xD375EED8B627A621);
+            return ref _Handle.AsRef<uint>(_PrimitiveCountOffset!.Value);
+        }
     }
-  }
 
 
 }

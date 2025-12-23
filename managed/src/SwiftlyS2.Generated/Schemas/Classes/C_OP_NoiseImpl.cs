@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_NoiseImpl : CParticleFunctionOperatorImpl, C_OP_Noise {
+internal partial class C_OP_NoiseImpl : CParticleFunctionOperatorImpl, C_OP_Noise
+{
+    public C_OP_NoiseImpl(nint handle) : base(handle) { }
 
-  public C_OP_NoiseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x1F035961E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x1F035961E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMinOffset;
+    private static nint? _OutputMinOffset;
 
-  public ref float OutputMin {
-    get {
-      if (_OutputMinOffset == null) {
-        _OutputMinOffset = Schema.GetOffset(0x1F0359615F8D7716);
-      }
-      return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+    public ref float OutputMin {
+        get {
+            _OutputMinOffset = _OutputMinOffset ?? Schema.GetOffset(0x1F0359615F8D7716);
+            return ref _Handle.AsRef<float>(_OutputMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputMaxOffset;
+    private static nint? _OutputMaxOffset;
 
-  public ref float OutputMax {
-    get {
-      if (_OutputMaxOffset == null) {
-        _OutputMaxOffset = Schema.GetOffset(0x1F03596151A0E8C4);
-      }
-      return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+    public ref float OutputMax {
+        get {
+            _OutputMaxOffset = _OutputMaxOffset ?? Schema.GetOffset(0x1F03596151A0E8C4);
+            return ref _Handle.AsRef<float>(_OutputMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _Fl4NoiseScaleOffset;
+    private static nint? _Fl4NoiseScaleOffset;
 
-  public ref float Fl4NoiseScale {
-    get {
-      if (_Fl4NoiseScaleOffset == null) {
-        _Fl4NoiseScaleOffset = Schema.GetOffset(0x1F035961F340DAD9);
-      }
-      return ref _Handle.AsRef<float>(_Fl4NoiseScaleOffset!.Value);
+    public ref float Fl4NoiseScale {
+        get {
+            _Fl4NoiseScaleOffset = _Fl4NoiseScaleOffset ?? Schema.GetOffset(0x1F035961F340DAD9);
+            return ref _Handle.AsRef<float>(_Fl4NoiseScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _AdditiveOffset;
+    private static nint? _AdditiveOffset;
 
-  public ref bool Additive {
-    get {
-      if (_AdditiveOffset == null) {
-        _AdditiveOffset = Schema.GetOffset(0x1F0359610FA86105);
-      }
-      return ref _Handle.AsRef<bool>(_AdditiveOffset!.Value);
+    public ref bool Additive {
+        get {
+            _AdditiveOffset = _AdditiveOffset ?? Schema.GetOffset(0x1F0359610FA86105);
+            return ref _Handle.AsRef<bool>(_AdditiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _NoiseAnimationTimeScaleOffset;
+    private static nint? _NoiseAnimationTimeScaleOffset;
 
-  public ref float NoiseAnimationTimeScale {
-    get {
-      if (_NoiseAnimationTimeScaleOffset == null) {
-        _NoiseAnimationTimeScaleOffset = Schema.GetOffset(0x1F035961504CBE30);
-      }
-      return ref _Handle.AsRef<float>(_NoiseAnimationTimeScaleOffset!.Value);
+    public ref float NoiseAnimationTimeScale {
+        get {
+            _NoiseAnimationTimeScaleOffset = _NoiseAnimationTimeScaleOffset ?? Schema.GetOffset(0x1F035961504CBE30);
+            return ref _Handle.AsRef<float>(_NoiseAnimationTimeScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

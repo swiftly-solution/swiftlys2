@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicBranchList : CLogicalEntity, ISchemaClass<CLogicBranchList> {
+public partial interface CLogicBranchList : CLogicalEntity, ISchemaClass<CLogicBranchList>
+{
+    static CLogicBranchList ISchemaClass<CLogicBranchList>.From(nint handle) => new CLogicBranchListImpl(handle);
+    static int ISchemaClass<CLogicBranchList>.Size => 1544;
+    static string? ISchemaClass<CLogicBranchList>.ClassName => "logic_branch_listener";
 
-  static CLogicBranchList ISchemaClass<CLogicBranchList>.From(nint handle) => new CLogicBranchListImpl(handle);
-  static int ISchemaClass<CLogicBranchList>.Size => 1544;
-  static string? ISchemaClass<CLogicBranchList>.ClassName => "logic_branch_listener";
 
-  
-  public string LogicBranchNames { get; set; }
-  
-  public ref CUtlVector<CHandle<CBaseEntity>> LogicBranchList { get; }
-  
-  public ref CLogicBranchList__LogicBranchListenerLastState_t LastState { get; }
-  
-  public CEntityIOOutput OnAllTrue { get; }
-  
-  public CEntityIOOutput OnAllFalse { get; }
-  
-  public CEntityIOOutput OnMixed { get; }
+    public string LogicBranchNames { get; set; }
+
+    public ref CUtlVector<CHandle<CBaseEntity>> LogicBranchList { get; }
+
+    public ref CLogicBranchList__LogicBranchListenerLastState_t LastState { get; }
+
+    public ref CEntityIOOutput OnAllTrue { get; }
+
+    public ref CEntityIOOutput OnAllFalse { get; }
+
+    public ref CEntityIOOutput OnMixed { get; }
 
 
 }

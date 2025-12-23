@@ -8,35 +8,35 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSWeaponBaseGun : CCSWeaponBase, ISchemaClass<CCSWeaponBaseGun> {
+public partial interface CCSWeaponBaseGun : CCSWeaponBase, ISchemaClass<CCSWeaponBaseGun>
+{
+    static CCSWeaponBaseGun ISchemaClass<CCSWeaponBaseGun>.From(nint handle) => new CCSWeaponBaseGunImpl(handle);
+    static int ISchemaClass<CCSWeaponBaseGun>.Size => 4592;
+    static string? ISchemaClass<CCSWeaponBaseGun>.ClassName => null;
 
-  static CCSWeaponBaseGun ISchemaClass<CCSWeaponBaseGun>.From(nint handle) => new CCSWeaponBaseGunImpl(handle);
-  static int ISchemaClass<CCSWeaponBaseGun>.Size => 4592;
-  static string? ISchemaClass<CCSWeaponBaseGun>.ClassName => null;
 
-  
-  public ref int ZoomLevel { get; }
-  
-  public ref int BurstShotsRemaining { get; }
-  
-  public ref int SilencedModelIndex { get; }
-  
-  public ref bool InPrecache { get; }
-  
-  public ref bool NeedsBoltAction { get; }
-  
-  public ref int RevolverCylinderIdx { get; }
-  
-  public ref bool SkillReloadAvailable { get; }
-  
-  public ref bool SkillReloadLiftedReloadKey { get; }
-  
-  public ref bool SkillBoltInterruptAvailable { get; }
-  
-  public ref bool SkillBoltLiftedFireKey { get; }
+    public ref int ZoomLevel { get; }
 
-  public void ZoomLevelUpdated();
-  public void BurstShotsRemainingUpdated();
-  public void NeedsBoltActionUpdated();
-  public void RevolverCylinderIdxUpdated();
+    public ref int BurstShotsRemaining { get; }
+
+    public ref int SilencedModelIndex { get; }
+
+    public ref bool InPrecache { get; }
+
+    public ref bool NeedsBoltAction { get; }
+
+    public ref int RevolverCylinderIdx { get; }
+
+    public ref bool SkillReloadAvailable { get; }
+
+    public ref bool SkillReloadLiftedReloadKey { get; }
+
+    public ref bool SkillBoltInterruptAvailable { get; }
+
+    public ref bool SkillBoltLiftedFireKey { get; }
+
+    public void ZoomLevelUpdated();
+    public void BurstShotsRemainingUpdated();
+    public void NeedsBoltActionUpdated();
+    public void RevolverCylinderIdxUpdated();
 }

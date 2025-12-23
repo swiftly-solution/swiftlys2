@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RemapNamedModelElementToScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapNamedModelElementToScalar> {
+public partial interface C_INIT_RemapNamedModelElementToScalar : CParticleFunctionInitializer, ISchemaClass<C_INIT_RemapNamedModelElementToScalar>
+{
+    static C_INIT_RemapNamedModelElementToScalar ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.From(nint handle) => new C_INIT_RemapNamedModelElementToScalarImpl(handle);
+    static int ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.Size => 544;
+    static string? ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.ClassName => null;
 
-  static C_INIT_RemapNamedModelElementToScalar ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.From(nint handle) => new C_INIT_RemapNamedModelElementToScalarImpl(handle);
-  static int ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.Size => 544;
-  static string? ISchemaClass<C_INIT_RemapNamedModelElementToScalar>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
-  
-  public ref CUtlVector<CUtlString> Names { get; }
-  
-  public ref CUtlVector<float> Values { get; }
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool ModelFromRenderer { get; }
+    public ref CStrongHandle<InfoForResourceTypeCModel> Model { get; }
+
+    public ref CUtlVector<CUtlString> Names { get; }
+
+    public ref CUtlVector<float> Values { get; }
+
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool ModelFromRenderer { get; }
 
 
 }

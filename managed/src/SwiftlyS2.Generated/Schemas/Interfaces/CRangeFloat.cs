@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRangeFloat : ISchemaClass<CRangeFloat> {
+public partial interface CRangeFloat : ISchemaClass<CRangeFloat>
+{
+    static CRangeFloat ISchemaClass<CRangeFloat>.From(nint handle) => new CRangeFloatImpl(handle);
+    static int ISchemaClass<CRangeFloat>.Size => 8;
+    static string? ISchemaClass<CRangeFloat>.ClassName => null;
 
-  static CRangeFloat ISchemaClass<CRangeFloat>.From(nint handle) => new CRangeFloatImpl(handle);
-  static int ISchemaClass<CRangeFloat>.Size => 8;
-  static string? ISchemaClass<CRangeFloat>.ClassName => null;
 
-  
-  public ISchemaFixedArray<float> Value { get; }
+    public ISchemaFixedArray<float> Value { get; }
 
 
 }

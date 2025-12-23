@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PostProcessingFogScatteringParameters_t : ISchemaClass<PostProcessingFogScatteringParameters_t> {
+public partial interface PostProcessingFogScatteringParameters_t : ISchemaClass<PostProcessingFogScatteringParameters_t>
+{
+    static PostProcessingFogScatteringParameters_t ISchemaClass<PostProcessingFogScatteringParameters_t>.From(nint handle) => new PostProcessingFogScatteringParameters_tImpl(handle);
+    static int ISchemaClass<PostProcessingFogScatteringParameters_t>.Size => 20;
+    static string? ISchemaClass<PostProcessingFogScatteringParameters_t>.ClassName => null;
 
-  static PostProcessingFogScatteringParameters_t ISchemaClass<PostProcessingFogScatteringParameters_t>.From(nint handle) => new PostProcessingFogScatteringParameters_tImpl(handle);
-  static int ISchemaClass<PostProcessingFogScatteringParameters_t>.Size => 20;
-  static string? ISchemaClass<PostProcessingFogScatteringParameters_t>.ClassName => null;
 
-  
-  public ref float Radius { get; }
-  
-  public ref float Scale { get; }
-  
-  public ref float CubemapScale { get; }
-  
-  public ref float VolumetricScale { get; }
-  
-  public ref float GradientScale { get; }
+    public ref float Radius { get; }
+
+    public ref float Scale { get; }
+
+    public ref float CubemapScale { get; }
+
+    public ref float VolumetricScale { get; }
+
+    public ref float GradientScale { get; }
 
 
 }

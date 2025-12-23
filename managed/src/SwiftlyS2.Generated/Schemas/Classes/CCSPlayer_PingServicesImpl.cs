@@ -6,39 +6,27 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSPlayer_PingServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_PingServices {
+internal partial class CCSPlayer_PingServicesImpl : CPlayerPawnComponentImpl, CCSPlayer_PingServices
+{
+    public CCSPlayer_PingServicesImpl(nint handle) : base(handle) { }
 
-  public CCSPlayer_PingServicesImpl(nint handle) : base(handle) {
-  }
-
-  private static nint? _PlayerPingTokensOffset;
-
-  public SchemaUntypedField PlayerPingTokens {
-    get {
-      if (_PlayerPingTokensOffset == null) {
-        _PlayerPingTokensOffset = Schema.GetOffset(0xC78D79CA55696280);
-      }
-      return new SchemaUntypedField(_Handle + _PlayerPingTokensOffset!.Value);
+    public ISchemaClassFixedArray<GameTime_t> PlayerPingTokens {
+        get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0xC78D79CA55696280, 5, 4, 4);
     }
-  }
-  private static nint? _PlayerPingOffset;
+    private static nint? _PlayerPingOffset;
 
-  public ref CHandle<CPlayerPing> PlayerPing {
-    get {
-      if (_PlayerPingOffset == null) {
-        _PlayerPingOffset = Schema.GetOffset(0xC78D79CA464EEA6E);
-      }
-      return ref _Handle.AsRef<CHandle<CPlayerPing>>(_PlayerPingOffset!.Value);
+    public ref CHandle<CPlayerPing> PlayerPing {
+        get {
+            _PlayerPingOffset = _PlayerPingOffset ?? Schema.GetOffset(0xC78D79CA464EEA6E);
+            return ref _Handle.AsRef<CHandle<CPlayerPing>>(_PlayerPingOffset!.Value);
+        }
     }
-  }
 
-  public void PlayerPingUpdated() {
-    Schema.Update(_Handle, 0xC78D79CA464EEA6E);
-  }
+    public void PlayerPingUpdated() => Schema.Update(_Handle, 0xC78D79CA464EEA6E);
 }

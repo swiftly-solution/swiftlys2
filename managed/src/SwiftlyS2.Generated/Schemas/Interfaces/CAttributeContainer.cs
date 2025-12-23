@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAttributeContainer : CAttributeManager, ISchemaClass<CAttributeContainer> {
+public partial interface CAttributeContainer : CAttributeManager, ISchemaClass<CAttributeContainer>
+{
+    static CAttributeContainer ISchemaClass<CAttributeContainer>.From(nint handle) => new CAttributeContainerImpl(handle);
+    static int ISchemaClass<CAttributeContainer>.Size => 760;
+    static string? ISchemaClass<CAttributeContainer>.ClassName => null;
 
-  static CAttributeContainer ISchemaClass<CAttributeContainer>.From(nint handle) => new CAttributeContainerImpl(handle);
-  static int ISchemaClass<CAttributeContainer>.Size => 760;
-  static string? ISchemaClass<CAttributeContainer>.ClassName => null;
 
-  
-  public CEconItemView Item { get; }
+    public CEconItemView Item { get; }
 
-  public void ItemUpdated();
+    public void ItemUpdated();
 }

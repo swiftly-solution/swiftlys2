@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFutureFacingMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CFutureFacingMetricEvaluator> {
+public partial interface CFutureFacingMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CFutureFacingMetricEvaluator>
+{
+    static CFutureFacingMetricEvaluator ISchemaClass<CFutureFacingMetricEvaluator>.From(nint handle) => new CFutureFacingMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CFutureFacingMetricEvaluator>.Size => 88;
+    static string? ISchemaClass<CFutureFacingMetricEvaluator>.ClassName => null;
 
-  static CFutureFacingMetricEvaluator ISchemaClass<CFutureFacingMetricEvaluator>.From(nint handle) => new CFutureFacingMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CFutureFacingMetricEvaluator>.Size => 88;
-  static string? ISchemaClass<CFutureFacingMetricEvaluator>.ClassName => null;
 
-  
-  public ref float Distance { get; }
-  
-  public ref float Time { get; }
+    public ref float Distance { get; }
+
+    public ref float Time { get; }
 
 
 }

@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFilterLOS : CBaseFilter, ISchemaClass<CFilterLOS> {
-
-  static CFilterLOS ISchemaClass<CFilterLOS>.From(nint handle) => new CFilterLOSImpl(handle);
-  static int ISchemaClass<CFilterLOS>.Size => 1352;
-  static string? ISchemaClass<CFilterLOS>.ClassName => "filter_los";
+public partial interface CFilterLOS : CBaseFilter, ISchemaClass<CFilterLOS>
+{
+    static CFilterLOS ISchemaClass<CFilterLOS>.From(nint handle) => new CFilterLOSImpl(handle);
+    static int ISchemaClass<CFilterLOS>.Size => 1352;
+    static string? ISchemaClass<CFilterLOS>.ClassName => "filter_los";
 
 
 

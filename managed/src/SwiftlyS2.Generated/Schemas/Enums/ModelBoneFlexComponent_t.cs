@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ModelBoneFlexComponent_t : uint {
-
+public enum ModelBoneFlexComponent_t : uint
+{
  MODEL_BONE_FLEX_INVALID = uint.MaxValue,
 
  MODEL_BONE_FLEX_TX = 0,

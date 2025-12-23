@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulse_RegisterInfo : ISchemaClass<CPulse_RegisterInfo> {
+public partial interface CPulse_RegisterInfo : ISchemaClass<CPulse_RegisterInfo>
+{
+    static CPulse_RegisterInfo ISchemaClass<CPulse_RegisterInfo>.From(nint handle) => new CPulse_RegisterInfoImpl(handle);
+    static int ISchemaClass<CPulse_RegisterInfo>.Size => 96;
+    static string? ISchemaClass<CPulse_RegisterInfo>.ClassName => null;
 
-  static CPulse_RegisterInfo ISchemaClass<CPulse_RegisterInfo>.From(nint handle) => new CPulse_RegisterInfoImpl(handle);
-  static int ISchemaClass<CPulse_RegisterInfo>.Size => 96;
-  static string? ISchemaClass<CPulse_RegisterInfo>.ClassName => null;
 
-  
-  public PulseRuntimeRegisterIndex_t Reg { get; }
-  
-  // CPulseValueFullType
-  public SchemaUntypedField Type { get; }
-  
-  // CKV3MemberNameWithStorage
-  public SchemaUntypedField OriginName { get; }
-  
-  public ref int WrittenByInstruction { get; }
-  
-  public ref int LastReadByInstruction { get; }
+    public PulseRuntimeRegisterIndex_t Reg { get; }
+
+    // CPulseValueFullType
+    public SchemaUntypedField Type { get; }
+
+    // CKV3MemberNameWithStorage
+    public SchemaUntypedField OriginName { get; }
+
+    public ref int WrittenByInstruction { get; }
+
+    public ref int LastReadByInstruction { get; }
 
 
 }

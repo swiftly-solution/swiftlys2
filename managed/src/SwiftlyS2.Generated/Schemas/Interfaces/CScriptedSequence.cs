@@ -8,167 +8,166 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CScriptedSequence : CBaseEntity, ISchemaClass<CScriptedSequence> {
+public partial interface CScriptedSequence : CBaseEntity, ISchemaClass<CScriptedSequence>
+{
+    static CScriptedSequence ISchemaClass<CScriptedSequence>.From(nint handle) => new CScriptedSequenceImpl(handle);
+    static int ISchemaClass<CScriptedSequence>.Size => 2064;
+    static string? ISchemaClass<CScriptedSequence>.ClassName => "scripted_sequence";
 
-  static CScriptedSequence ISchemaClass<CScriptedSequence>.From(nint handle) => new CScriptedSequenceImpl(handle);
-  static int ISchemaClass<CScriptedSequence>.Size => 2064;
-  static string? ISchemaClass<CScriptedSequence>.ClassName => "scripted_sequence";
 
-  
-  public string Entry { get; set; }
-  
-  public string PreIdle { get; set; }
-  
-  public string Play { get; set; }
-  
-  public string PostIdle { get; set; }
-  
-  public string ModifierToAddOnPlay { get; set; }
-  
-  public string NextScript { get; set; }
-  
-  public string Entity { get; set; }
-  
-  public string SyncGroup { get; set; }
-  
-  public ref ScriptedMoveTo_t MoveTo { get; }
-  
-  public ref SharedMovementGait_t MoveToGait { get; }
-  
-  public ref ScriptedHeldWeaponBehavior_t HeldWeaponBehavior { get; }
-  
-  public ref ForcedCrouchState_t ForcedCrouchState { get; }
-  
-  public ref bool IsPlayingPreIdle { get; }
-  
-  public ref bool IsPlayingEntry { get; }
-  
-  public ref bool IsPlayingAction { get; }
-  
-  public ref bool IsPlayingPostIdle { get; }
-  
-  public ref bool DontRotateOther { get; }
-  
-  public ref bool IsRepeatable { get; }
-  
-  public ref bool ShouldLeaveCorpse { get; }
-  
-  public ref bool StartOnSpawn { get; }
-  
-  public ref bool DisallowInterrupts { get; }
-  
-  public ref bool CanOverrideNPCState { get; }
-  
-  public ref bool DontTeleportAtEnd { get; }
-  
-  public ref bool HighPriority { get; }
-  
-  public ref bool HideDebugComplaints { get; }
-  
-  public ref bool ContinueOnDeath { get; }
-  
-  public ref bool LoopPreIdleSequence { get; }
-  
-  public ref bool LoopActionSequence { get; }
-  
-  public ref bool LoopPostIdleSequence { get; }
-  
-  public ref bool SynchPostIdles { get; }
-  
-  public ref bool IgnoreLookAt { get; }
-  
-  public ref bool IgnoreGravity { get; }
-  
-  public ref bool DisableNPCCollisions { get; }
-  
-  public ref bool KeepAnimgraphLockedPost { get; }
-  
-  public ref bool DontAddModifiers { get; }
-  
-  public ref bool DisableAimingWhileMoving { get; }
-  
-  public ref bool IgnoreRotation { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref float Repeat { get; }
-  
-  public ref float PlayAnimFadeInTime { get; }
-  
-  public ref float MoveInterpTime { get; }
-  
-  public ref float AngRate { get; }
-  
-  public ref float MoveSpeed { get; }
-  
-  public ref bool WaitUntilMoveCompletesToStartAnimation { get; }
-  
-  public ref int NotReadySequenceCount { get; }
-  
-  public GameTime_t StartTime { get; }
-  
-  public ref bool WaitForBeginSequence { get; }
-  
-  public ref int Saved_effects { get; }
-  
-  public ref int SavedFlags { get; }
-  
-  public ref int SavedCollisionGroup { get; }
-  
-  public ref bool Interruptable { get; }
-  
-  public ref bool SequenceStarted { get; }
-  
-  public ref bool PositionRelativeToOtherEntity { get; }
-  
-  public ref CHandle<CBaseEntity> TargetEnt { get; }
-  
-  public ref CHandle<CScriptedSequence> NextCine { get; }
-  
-  public ref bool Thinking { get; }
-  
-  public ref bool InitiatedSelfDelete { get; }
-  
-  public ref bool IsTeleportingDueToMoveTo { get; }
-  
-  public ref bool AllowCustomInterruptConditions { get; }
-  
-  public ref CHandle<CBaseAnimGraph> ForcedTarget { get; }
-  
-  public ref bool DontCancelOtherSequences { get; }
-  
-  public ref bool ForceSynch { get; }
-  
-  public ref bool PreventUpdateYawOnFinish { get; }
-  
-  public ref bool EnsureOnNavmeshOnFinish { get; }
-  
-  public ref ScriptedOnDeath_t OnDeathBehavior { get; }
-  
-  public ref ScriptedConflictResponse_t ConflictResponse { get; }
-  
-  public CEntityIOOutput OnBeginSequence { get; }
-  
-  public CEntityIOOutput OnActionStartOrLoop { get; }
-  
-  public CEntityIOOutput OnEndSequence { get; }
-  
-  public CEntityIOOutput OnPostIdleEndSequence { get; }
-  
-  public CEntityIOOutput OnCancelSequence { get; }
-  
-  public CEntityIOOutput OnCancelFailedSequence { get; }
-  
-  // CEntityIOOutput
-  public SchemaUntypedField OnScriptEvent { get; }
-  
-  public ref CTransform MatOtherToMain { get; }
-  
-  public ref CHandle<CBaseEntity> InteractionMainEntity { get; }
-  
-  public ref int PlayerDeathBehavior { get; }
-  
-  public ref bool SkipFadeIn { get; }
+    public string Entry { get; set; }
+
+    public string PreIdle { get; set; }
+
+    public string Play { get; set; }
+
+    public string PostIdle { get; set; }
+
+    public string ModifierToAddOnPlay { get; set; }
+
+    public string NextScript { get; set; }
+
+    public string Entity { get; set; }
+
+    public string SyncGroup { get; set; }
+
+    public ref ScriptedMoveTo_t MoveTo { get; }
+
+    public ref SharedMovementGait_t MoveToGait { get; }
+
+    public ref ScriptedHeldWeaponBehavior_t HeldWeaponBehavior { get; }
+
+    public ref ForcedCrouchState_t ForcedCrouchState { get; }
+
+    public ref bool IsPlayingPreIdle { get; }
+
+    public ref bool IsPlayingEntry { get; }
+
+    public ref bool IsPlayingAction { get; }
+
+    public ref bool IsPlayingPostIdle { get; }
+
+    public ref bool DontRotateOther { get; }
+
+    public ref bool IsRepeatable { get; }
+
+    public ref bool ShouldLeaveCorpse { get; }
+
+    public ref bool StartOnSpawn { get; }
+
+    public ref bool DisallowInterrupts { get; }
+
+    public ref bool CanOverrideNPCState { get; }
+
+    public ref bool DontTeleportAtEnd { get; }
+
+    public ref bool HighPriority { get; }
+
+    public ref bool HideDebugComplaints { get; }
+
+    public ref bool ContinueOnDeath { get; }
+
+    public ref bool LoopPreIdleSequence { get; }
+
+    public ref bool LoopActionSequence { get; }
+
+    public ref bool LoopPostIdleSequence { get; }
+
+    public ref bool SynchPostIdles { get; }
+
+    public ref bool IgnoreLookAt { get; }
+
+    public ref bool IgnoreGravity { get; }
+
+    public ref bool DisableNPCCollisions { get; }
+
+    public ref bool KeepAnimgraphLockedPost { get; }
+
+    public ref bool DontAddModifiers { get; }
+
+    public ref bool DisableAimingWhileMoving { get; }
+
+    public ref bool IgnoreRotation { get; }
+
+    public ref float Radius { get; }
+
+    public ref float Repeat { get; }
+
+    public ref float PlayAnimFadeInTime { get; }
+
+    public ref float MoveInterpTime { get; }
+
+    public ref float AngRate { get; }
+
+    public ref float MoveSpeed { get; }
+
+    public ref bool WaitUntilMoveCompletesToStartAnimation { get; }
+
+    public ref int NotReadySequenceCount { get; }
+
+    public GameTime_t StartTime { get; }
+
+    public ref bool WaitForBeginSequence { get; }
+
+    public ref int Saved_effects { get; }
+
+    public ref int SavedFlags { get; }
+
+    public ref int SavedCollisionGroup { get; }
+
+    public ref bool Interruptable { get; }
+
+    public ref bool SequenceStarted { get; }
+
+    public ref bool PositionRelativeToOtherEntity { get; }
+
+    public ref CHandle<CBaseEntity> TargetEnt { get; }
+
+    public ref CHandle<CScriptedSequence> NextCine { get; }
+
+    public ref bool Thinking { get; }
+
+    public ref bool InitiatedSelfDelete { get; }
+
+    public ref bool IsTeleportingDueToMoveTo { get; }
+
+    public ref bool AllowCustomInterruptConditions { get; }
+
+    public ref CHandle<CBaseAnimGraph> ForcedTarget { get; }
+
+    public ref bool DontCancelOtherSequences { get; }
+
+    public ref bool ForceSynch { get; }
+
+    public ref bool PreventUpdateYawOnFinish { get; }
+
+    public ref bool EnsureOnNavmeshOnFinish { get; }
+
+    public ref ScriptedOnDeath_t OnDeathBehavior { get; }
+
+    public ref ScriptedConflictResponse_t ConflictResponse { get; }
+
+    public ref CEntityIOOutput OnBeginSequence { get; }
+
+    public ref CEntityIOOutput OnActionStartOrLoop { get; }
+
+    public ref CEntityIOOutput OnEndSequence { get; }
+
+    public ref CEntityIOOutput OnPostIdleEndSequence { get; }
+
+    public ref CEntityIOOutput OnCancelSequence { get; }
+
+    public ref CEntityIOOutput OnCancelFailedSequence { get; }
+
+    public ISchemaFixedArray<CEntityIOOutput> OnScriptEvent { get; }
+
+    public ref CTransform MatOtherToMain { get; }
+
+    public ref CHandle<CBaseEntity> InteractionMainEntity { get; }
+
+    public ref int PlayerDeathBehavior { get; }
+
+    public ref bool SkipFadeIn { get; }
 
 
 }

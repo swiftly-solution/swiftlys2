@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface DynamicVolumeDef_t : ISchemaClass<DynamicVolumeDef_t> {
+public partial interface DynamicVolumeDef_t : ISchemaClass<DynamicVolumeDef_t>
+{
+    static DynamicVolumeDef_t ISchemaClass<DynamicVolumeDef_t>.From(nint handle) => new DynamicVolumeDef_tImpl(handle);
+    static int ISchemaClass<DynamicVolumeDef_t>.Size => 48;
+    static string? ISchemaClass<DynamicVolumeDef_t>.ClassName => null;
 
-  static DynamicVolumeDef_t ISchemaClass<DynamicVolumeDef_t>.From(nint handle) => new DynamicVolumeDef_tImpl(handle);
-  static int ISchemaClass<DynamicVolumeDef_t>.Size => 48;
-  static string? ISchemaClass<DynamicVolumeDef_t>.ClassName => null;
 
-  
-  public ref CHandle<CBaseEntity> Source { get; }
-  
-  public ref CHandle<CBaseEntity> Target { get; }
-  
-  public ref int HullIdx { get; }
-  
-  public ref Vector SourceAnchorPos { get; }
-  
-  public ref Vector TargetAnchorPos { get; }
-  
-  public ref uint AreaSrc { get; }
-  
-  public ref uint AreaDst { get; }
-  
-  public ref bool Attached { get; }
+    public ref CHandle<CBaseEntity> Source { get; }
+
+    public ref CHandle<CBaseEntity> Target { get; }
+
+    public ref int HullIdx { get; }
+
+    public ref Vector SourceAnchorPos { get; }
+
+    public ref Vector TargetAnchorPos { get; }
+
+    public ref uint AreaSrc { get; }
+
+    public ref uint AreaDst { get; }
+
+    public ref bool Attached { get; }
 
 
 }

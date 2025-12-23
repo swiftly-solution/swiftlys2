@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimSequenceParams : ISchemaClass<CAnimSequenceParams> {
+public partial interface CAnimSequenceParams : ISchemaClass<CAnimSequenceParams>
+{
+    static CAnimSequenceParams ISchemaClass<CAnimSequenceParams>.From(nint handle) => new CAnimSequenceParamsImpl(handle);
+    static int ISchemaClass<CAnimSequenceParams>.Size => 8;
+    static string? ISchemaClass<CAnimSequenceParams>.ClassName => null;
 
-  static CAnimSequenceParams ISchemaClass<CAnimSequenceParams>.From(nint handle) => new CAnimSequenceParamsImpl(handle);
-  static int ISchemaClass<CAnimSequenceParams>.Size => 8;
-  static string? ISchemaClass<CAnimSequenceParams>.ClassName => null;
 
-  
-  public ref float FadeInTime { get; }
-  
-  public ref float FadeOutTime { get; }
+    public ref float FadeInTime { get; }
+
+    public ref float FadeOutTime { get; }
 
 
 }

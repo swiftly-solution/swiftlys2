@@ -8,27 +8,27 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerStaticAdditiveSynth__CHarmonic : ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic> {
+public partial interface CVoiceContainerStaticAdditiveSynth__CHarmonic : ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic>
+{
+    static CVoiceContainerStaticAdditiveSynth__CHarmonic ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic>.From(nint handle) => new CVoiceContainerStaticAdditiveSynth__CHarmonicImpl(handle);
+    static int ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic>.Size => 104;
+    static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic>.ClassName => null;
 
-  static CVoiceContainerStaticAdditiveSynth__CHarmonic ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic>.From(nint handle) => new CVoiceContainerStaticAdditiveSynth__CHarmonicImpl(handle);
-  static int ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic>.Size => 104;
-  static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth__CHarmonic>.ClassName => null;
 
-  
-  public ref EWaveform Waveform { get; }
-  
-  public ref EMidiNote Fundamental { get; }
-  
-  public ref int Octave { get; }
-  
-  public ref float Cents { get; }
-  
-  public ref float Phase { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Curve { get; }
-  
-  public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance VolumeScaling { get; }
+    public ref EWaveform Waveform { get; }
+
+    public ref EMidiNote Fundamental { get; }
+
+    public ref int Octave { get; }
+
+    public ref float Cents { get; }
+
+    public ref float Phase { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Curve { get; }
+
+    public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance VolumeScaling { get; }
 
 
 }

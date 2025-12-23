@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AnimParamButton_t : uint {
-
+public enum AnimParamButton_t : uint
+{
  ANIMPARAM_BUTTON_NONE = 0,
 
  ANIMPARAM_BUTTON_DPAD_UP = 1,

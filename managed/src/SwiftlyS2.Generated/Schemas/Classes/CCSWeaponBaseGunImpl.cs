@@ -6,128 +6,99 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCSWeaponBaseGunImpl : CCSWeaponBaseImpl, CCSWeaponBaseGun {
+internal partial class CCSWeaponBaseGunImpl : CCSWeaponBaseImpl, CCSWeaponBaseGun
+{
+    public CCSWeaponBaseGunImpl(nint handle) : base(handle) { }
 
-  public CCSWeaponBaseGunImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ZoomLevelOffset;
 
-  private static nint? _ZoomLevelOffset;
-
-  public ref int ZoomLevel {
-    get {
-      if (_ZoomLevelOffset == null) {
-        _ZoomLevelOffset = Schema.GetOffset(0xBC30B081444E63A0);
-      }
-      return ref _Handle.AsRef<int>(_ZoomLevelOffset!.Value);
+    public ref int ZoomLevel {
+        get {
+            _ZoomLevelOffset = _ZoomLevelOffset ?? Schema.GetOffset(0xBC30B081444E63A0);
+            return ref _Handle.AsRef<int>(_ZoomLevelOffset!.Value);
+        }
     }
-  }
-  private static nint? _BurstShotsRemainingOffset;
+    private static nint? _BurstShotsRemainingOffset;
 
-  public ref int BurstShotsRemaining {
-    get {
-      if (_BurstShotsRemainingOffset == null) {
-        _BurstShotsRemainingOffset = Schema.GetOffset(0xBC30B081F53841A5);
-      }
-      return ref _Handle.AsRef<int>(_BurstShotsRemainingOffset!.Value);
+    public ref int BurstShotsRemaining {
+        get {
+            _BurstShotsRemainingOffset = _BurstShotsRemainingOffset ?? Schema.GetOffset(0xBC30B081F53841A5);
+            return ref _Handle.AsRef<int>(_BurstShotsRemainingOffset!.Value);
+        }
     }
-  }
-  private static nint? _SilencedModelIndexOffset;
+    private static nint? _SilencedModelIndexOffset;
 
-  public ref int SilencedModelIndex {
-    get {
-      if (_SilencedModelIndexOffset == null) {
-        _SilencedModelIndexOffset = Schema.GetOffset(0xBC30B08178E5CAAB);
-      }
-      return ref _Handle.AsRef<int>(_SilencedModelIndexOffset!.Value);
+    public ref int SilencedModelIndex {
+        get {
+            _SilencedModelIndexOffset = _SilencedModelIndexOffset ?? Schema.GetOffset(0xBC30B08178E5CAAB);
+            return ref _Handle.AsRef<int>(_SilencedModelIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _InPrecacheOffset;
+    private static nint? _InPrecacheOffset;
 
-  public ref bool InPrecache {
-    get {
-      if (_InPrecacheOffset == null) {
-        _InPrecacheOffset = Schema.GetOffset(0xBC30B081495003CB);
-      }
-      return ref _Handle.AsRef<bool>(_InPrecacheOffset!.Value);
+    public ref bool InPrecache {
+        get {
+            _InPrecacheOffset = _InPrecacheOffset ?? Schema.GetOffset(0xBC30B081495003CB);
+            return ref _Handle.AsRef<bool>(_InPrecacheOffset!.Value);
+        }
     }
-  }
-  private static nint? _NeedsBoltActionOffset;
+    private static nint? _NeedsBoltActionOffset;
 
-  public ref bool NeedsBoltAction {
-    get {
-      if (_NeedsBoltActionOffset == null) {
-        _NeedsBoltActionOffset = Schema.GetOffset(0xBC30B0813632E797);
-      }
-      return ref _Handle.AsRef<bool>(_NeedsBoltActionOffset!.Value);
+    public ref bool NeedsBoltAction {
+        get {
+            _NeedsBoltActionOffset = _NeedsBoltActionOffset ?? Schema.GetOffset(0xBC30B0813632E797);
+            return ref _Handle.AsRef<bool>(_NeedsBoltActionOffset!.Value);
+        }
     }
-  }
-  private static nint? _RevolverCylinderIdxOffset;
+    private static nint? _RevolverCylinderIdxOffset;
 
-  public ref int RevolverCylinderIdx {
-    get {
-      if (_RevolverCylinderIdxOffset == null) {
-        _RevolverCylinderIdxOffset = Schema.GetOffset(0xBC30B08119D0E90B);
-      }
-      return ref _Handle.AsRef<int>(_RevolverCylinderIdxOffset!.Value);
+    public ref int RevolverCylinderIdx {
+        get {
+            _RevolverCylinderIdxOffset = _RevolverCylinderIdxOffset ?? Schema.GetOffset(0xBC30B08119D0E90B);
+            return ref _Handle.AsRef<int>(_RevolverCylinderIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkillReloadAvailableOffset;
+    private static nint? _SkillReloadAvailableOffset;
 
-  public ref bool SkillReloadAvailable {
-    get {
-      if (_SkillReloadAvailableOffset == null) {
-        _SkillReloadAvailableOffset = Schema.GetOffset(0xBC30B081C7961BE2);
-      }
-      return ref _Handle.AsRef<bool>(_SkillReloadAvailableOffset!.Value);
+    public ref bool SkillReloadAvailable {
+        get {
+            _SkillReloadAvailableOffset = _SkillReloadAvailableOffset ?? Schema.GetOffset(0xBC30B081C7961BE2);
+            return ref _Handle.AsRef<bool>(_SkillReloadAvailableOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkillReloadLiftedReloadKeyOffset;
+    private static nint? _SkillReloadLiftedReloadKeyOffset;
 
-  public ref bool SkillReloadLiftedReloadKey {
-    get {
-      if (_SkillReloadLiftedReloadKeyOffset == null) {
-        _SkillReloadLiftedReloadKeyOffset = Schema.GetOffset(0xBC30B0819C3A15B5);
-      }
-      return ref _Handle.AsRef<bool>(_SkillReloadLiftedReloadKeyOffset!.Value);
+    public ref bool SkillReloadLiftedReloadKey {
+        get {
+            _SkillReloadLiftedReloadKeyOffset = _SkillReloadLiftedReloadKeyOffset ?? Schema.GetOffset(0xBC30B0819C3A15B5);
+            return ref _Handle.AsRef<bool>(_SkillReloadLiftedReloadKeyOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkillBoltInterruptAvailableOffset;
+    private static nint? _SkillBoltInterruptAvailableOffset;
 
-  public ref bool SkillBoltInterruptAvailable {
-    get {
-      if (_SkillBoltInterruptAvailableOffset == null) {
-        _SkillBoltInterruptAvailableOffset = Schema.GetOffset(0xBC30B0816FE62EEF);
-      }
-      return ref _Handle.AsRef<bool>(_SkillBoltInterruptAvailableOffset!.Value);
+    public ref bool SkillBoltInterruptAvailable {
+        get {
+            _SkillBoltInterruptAvailableOffset = _SkillBoltInterruptAvailableOffset ?? Schema.GetOffset(0xBC30B0816FE62EEF);
+            return ref _Handle.AsRef<bool>(_SkillBoltInterruptAvailableOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkillBoltLiftedFireKeyOffset;
+    private static nint? _SkillBoltLiftedFireKeyOffset;
 
-  public ref bool SkillBoltLiftedFireKey {
-    get {
-      if (_SkillBoltLiftedFireKeyOffset == null) {
-        _SkillBoltLiftedFireKeyOffset = Schema.GetOffset(0xBC30B081AB7AEB7C);
-      }
-      return ref _Handle.AsRef<bool>(_SkillBoltLiftedFireKeyOffset!.Value);
+    public ref bool SkillBoltLiftedFireKey {
+        get {
+            _SkillBoltLiftedFireKeyOffset = _SkillBoltLiftedFireKeyOffset ?? Schema.GetOffset(0xBC30B081AB7AEB7C);
+            return ref _Handle.AsRef<bool>(_SkillBoltLiftedFireKeyOffset!.Value);
+        }
     }
-  }
 
-  public void ZoomLevelUpdated() {
-    Schema.Update(_Handle, 0xBC30B081444E63A0);
-  }
-  public void BurstShotsRemainingUpdated() {
-    Schema.Update(_Handle, 0xBC30B081F53841A5);
-  }
-  public void NeedsBoltActionUpdated() {
-    Schema.Update(_Handle, 0xBC30B0813632E797);
-  }
-  public void RevolverCylinderIdxUpdated() {
-    Schema.Update(_Handle, 0xBC30B08119D0E90B);
-  }
+    public void ZoomLevelUpdated() => Schema.Update(_Handle, 0xBC30B081444E63A0);
+    public void BurstShotsRemainingUpdated() => Schema.Update(_Handle, 0xBC30B081F53841A5);
+    public void NeedsBoltActionUpdated() => Schema.Update(_Handle, 0xBC30B0813632E797);
+    public void RevolverCylinderIdxUpdated() => Schema.Update(_Handle, 0xBC30B08119D0E90B);
 }

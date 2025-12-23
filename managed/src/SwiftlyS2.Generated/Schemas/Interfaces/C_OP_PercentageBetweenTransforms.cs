@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_PercentageBetweenTransforms : CParticleFunctionOperator, ISchemaClass<C_OP_PercentageBetweenTransforms> {
+public partial interface C_OP_PercentageBetweenTransforms : CParticleFunctionOperator, ISchemaClass<C_OP_PercentageBetweenTransforms>
+{
+    static C_OP_PercentageBetweenTransforms ISchemaClass<C_OP_PercentageBetweenTransforms>.From(nint handle) => new C_OP_PercentageBetweenTransformsImpl(handle);
+    static int ISchemaClass<C_OP_PercentageBetweenTransforms>.Size => 704;
+    static string? ISchemaClass<C_OP_PercentageBetweenTransforms>.ClassName => null;
 
-  static C_OP_PercentageBetweenTransforms ISchemaClass<C_OP_PercentageBetweenTransforms>.From(nint handle) => new C_OP_PercentageBetweenTransformsImpl(handle);
-  static int ISchemaClass<C_OP_PercentageBetweenTransforms>.Size => 704;
-  static string? ISchemaClass<C_OP_PercentageBetweenTransforms>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
-  
-  public CParticleTransformInput TransformStart { get; }
-  
-  public CParticleTransformInput TransformEnd { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool ActiveRange { get; }
-  
-  public ref bool RadialCheck { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
+
+    public CParticleTransformInput TransformStart { get; }
+
+    public CParticleTransformInput TransformEnd { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool ActiveRange { get; }
+
+    public ref bool RadialCheck { get; }
 
 
 }

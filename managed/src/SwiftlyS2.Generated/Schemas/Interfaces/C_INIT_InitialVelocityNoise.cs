@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_InitialVelocityNoise : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitialVelocityNoise> {
+public partial interface C_INIT_InitialVelocityNoise : CParticleFunctionInitializer, ISchemaClass<C_INIT_InitialVelocityNoise>
+{
+    static C_INIT_InitialVelocityNoise ISchemaClass<C_INIT_InitialVelocityNoise>.From(nint handle) => new C_INIT_InitialVelocityNoiseImpl(handle);
+    static int ISchemaClass<C_INIT_InitialVelocityNoise>.Size => 6872;
+    static string? ISchemaClass<C_INIT_InitialVelocityNoise>.ClassName => null;
 
-  static C_INIT_InitialVelocityNoise ISchemaClass<C_INIT_InitialVelocityNoise>.From(nint handle) => new C_INIT_InitialVelocityNoiseImpl(handle);
-  static int ISchemaClass<C_INIT_InitialVelocityNoise>.Size => 6872;
-  static string? ISchemaClass<C_INIT_InitialVelocityNoise>.ClassName => null;
 
-  
-  public ref Vector AbsVal { get; }
-  
-  public ref Vector AbsValInv { get; }
-  
-  public CPerParticleVecInput OffsetLoc { get; }
-  
-  public CPerParticleFloatInput Offset { get; }
-  
-  public CPerParticleVecInput OutputMin { get; }
-  
-  public CPerParticleVecInput OutputMax { get; }
-  
-  public CPerParticleFloatInput NoiseScale { get; }
-  
-  public CPerParticleFloatInput NoiseScaleLoc { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref bool IgnoreDt { get; }
+    public ref Vector AbsVal { get; }
+
+    public ref Vector AbsValInv { get; }
+
+    public CPerParticleVecInput OffsetLoc { get; }
+
+    public CPerParticleFloatInput Offset { get; }
+
+    public CPerParticleVecInput OutputMin { get; }
+
+    public CPerParticleVecInput OutputMax { get; }
+
+    public CPerParticleFloatInput NoiseScale { get; }
+
+    public CPerParticleFloatInput NoiseScaleLoc { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref bool IgnoreDt { get; }
 
 
 }

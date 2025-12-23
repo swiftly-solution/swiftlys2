@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPairedSequenceUpdateNode : CSequenceUpdateNodeBase, ISchemaClass<CPairedSequenceUpdateNode> {
+public partial interface CPairedSequenceUpdateNode : CSequenceUpdateNodeBase, ISchemaClass<CPairedSequenceUpdateNode>
+{
+    static CPairedSequenceUpdateNode ISchemaClass<CPairedSequenceUpdateNode>.From(nint handle) => new CPairedSequenceUpdateNodeImpl(handle);
+    static int ISchemaClass<CPairedSequenceUpdateNode>.Size => 136;
+    static string? ISchemaClass<CPairedSequenceUpdateNode>.ClassName => null;
 
-  static CPairedSequenceUpdateNode ISchemaClass<CPairedSequenceUpdateNode>.From(nint handle) => new CPairedSequenceUpdateNodeImpl(handle);
-  static int ISchemaClass<CPairedSequenceUpdateNode>.Size => 136;
-  static string? ISchemaClass<CPairedSequenceUpdateNode>.ClassName => null;
 
-  
-  public ref CGlobalSymbol PairedSequenceRole { get; }
+    public ref CGlobalSymbol PairedSequenceRole { get; }
 
 
 }

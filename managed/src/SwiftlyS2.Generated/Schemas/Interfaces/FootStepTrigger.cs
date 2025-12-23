@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FootStepTrigger : ISchemaClass<FootStepTrigger> {
+public partial interface FootStepTrigger : ISchemaClass<FootStepTrigger>
+{
+    static FootStepTrigger ISchemaClass<FootStepTrigger>.From(nint handle) => new FootStepTriggerImpl(handle);
+    static int ISchemaClass<FootStepTrigger>.Size => 32;
+    static string? ISchemaClass<FootStepTrigger>.ClassName => null;
 
-  static FootStepTrigger ISchemaClass<FootStepTrigger>.From(nint handle) => new FootStepTriggerImpl(handle);
-  static int ISchemaClass<FootStepTrigger>.Size => 32;
-  static string? ISchemaClass<FootStepTrigger>.ClassName => null;
 
-  
-  public ref CUtlVector<int> Tags { get; }
-  
-  public ref int FootIndex { get; }
-  
-  public ref StepPhase TriggerPhase { get; }
+    public ref CUtlVector<int> Tags { get; }
+
+    public ref int FootIndex { get; }
+
+    public ref StepPhase TriggerPhase { get; }
 
 
 }

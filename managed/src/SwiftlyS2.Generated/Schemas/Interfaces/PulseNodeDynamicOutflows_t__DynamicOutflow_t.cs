@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseNodeDynamicOutflows_t__DynamicOutflow_t : ISchemaClass<PulseNodeDynamicOutflows_t__DynamicOutflow_t> {
+public partial interface PulseNodeDynamicOutflows_t__DynamicOutflow_t : ISchemaClass<PulseNodeDynamicOutflows_t__DynamicOutflow_t>
+{
+    static PulseNodeDynamicOutflows_t__DynamicOutflow_t ISchemaClass<PulseNodeDynamicOutflows_t__DynamicOutflow_t>.From(nint handle) => new PulseNodeDynamicOutflows_t__DynamicOutflow_tImpl(handle);
+    static int ISchemaClass<PulseNodeDynamicOutflows_t__DynamicOutflow_t>.Size => 80;
+    static string? ISchemaClass<PulseNodeDynamicOutflows_t__DynamicOutflow_t>.ClassName => null;
 
-  static PulseNodeDynamicOutflows_t__DynamicOutflow_t ISchemaClass<PulseNodeDynamicOutflows_t__DynamicOutflow_t>.From(nint handle) => new PulseNodeDynamicOutflows_t__DynamicOutflow_tImpl(handle);
-  static int ISchemaClass<PulseNodeDynamicOutflows_t__DynamicOutflow_t>.Size => 80;
-  static string? ISchemaClass<PulseNodeDynamicOutflows_t__DynamicOutflow_t>.ClassName => null;
 
-  
-  public ref CGlobalSymbol OutflowID { get; }
-  
-  public CPulse_OutflowConnection Connection { get; }
+    public ref CGlobalSymbol OutflowID { get; }
+
+    public CPulse_OutflowConnection Connection { get; }
 
 
 }

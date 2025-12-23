@@ -8,148 +8,148 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover> {
+public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
+{
+    static CFuncMover ISchemaClass<CFuncMover>.From(nint handle) => new CFuncMoverImpl(handle);
+    static int ISchemaClass<CFuncMover>.Size => 2696;
+    static string? ISchemaClass<CFuncMover>.ClassName => "func_mover";
 
-  static CFuncMover ISchemaClass<CFuncMover>.From(nint handle) => new CFuncMoverImpl(handle);
-  static int ISchemaClass<CFuncMover>.Size => 2696;
-  static string? ISchemaClass<CFuncMover>.ClassName => "func_mover";
 
-  
-  public string PathName { get; set; }
-  
-  public ref CHandle<CPathMover> PathMover { get; }
-  
-  public ref CHandle<CPathMover> PrevPathMover { get; }
-  
-  public string PathNodeStart { get; set; }
-  
-  public string PathNodeEnd { get; set; }
-  
-  public ref CFuncMover__Move_t MoveType { get; }
-  
-  public ref bool IsReversing { get; }
-  
-  public ref Vector Target { get; }
-  
-  public ref float StartSpeed { get; }
-  
-  public ref float PathLocation { get; }
-  
-  public ref float T { get; }
-  
-  public ref int CurrentNodeIndex { get; }
-  
-  public ref int PreviousNodeIndex { get; }
-  
-  public ref SolidType_t SolidType { get; }
-  
-  public ref bool IsMoving { get; }
-  
-  public ref float TimeToReachMaxSpeed { get; }
-  
-  public ref float DistanceToReachMaxSpeed { get; }
-  
-  public ref float TimeToReachZeroSpeed { get; }
-  
-  public ref float DistanceToReachZeroSpeed { get; }
-  
-  public GameTime_t TimeMovementStart { get; }
-  
-  public GameTime_t TimeMovementStop { get; }
-  
-  public ref CHandle<CMoverPathNode> StopAtNode { get; }
-  
-  public ref float PathLocationToBeginStop { get; }
-  
-  public string StartForwardSound { get; set; }
-  
-  public string LoopForwardSound { get; set; }
-  
-  public string StopForwardSound { get; set; }
-  
-  public string StartReverseSound { get; set; }
-  
-  public string LoopReverseSound { get; set; }
-  
-  public string StopReverseSound { get; set; }
-  
-  public string ArriveAtDestinationSound { get; set; }
-  
-  public CEntityIOOutput OnMovementEnd { get; }
-  
-  public ref bool StartAtClosestPoint { get; }
-  
-  public ref bool StartAtEnd { get; }
-  
-  public ref CFuncMover__OrientationUpdate_t OrientationUpdate { get; }
-  
-  public GameTime_t TimeStartOrientationChange { get; }
-  
-  public ref float TimeToBlendToNewOrientation { get; }
-  
-  public ref float DurationBlendToNewOrientationRan { get; }
-  
-  public ref int OriginalOrientationIndex { get; }
-  
-  public ref bool CreateMovableNavMesh { get; }
-  
-  public ref bool AllowMovableNavMeshDockingOnEntireEntity { get; }
-  
-  public CEntityIOOutput OnNodePassed { get; }
-  
-  public string OrientationMatchEntityName { get; set; }
-  
-  public ref CHandle<CBaseEntity> OrientationMatchEntity { get; }
-  
-  public ref float TimeToTraverseToNextNode { get; }
-  
-  public ref Vector LerpToNewPosStartInPathEntitySpace { get; }
-  
-  public ref Vector LerpToNewPosEndInPathEntitySpace { get; }
-  
-  public ref float LerpToPositionT { get; }
-  
-  public ref float LerpToPositionDeltaT { get; }
-  
-  public CEntityIOOutput OnLerpToPositionComplete { get; }
-  
-  public ref bool IsPaused { get; }
-  
-  public ref CFuncMover__TransitionToPathNodeAction_t TransitionedToPathNodeAction { get; }
-  
-  public ref int DelayedTeleportToNode { get; }
-  
-  public ref bool IsVerboseLogging { get; }
-  
-  public ref CHandle<CBaseEntity> FollowEntity { get; }
-  
-  public ref float FollowDistance { get; }
-  
-  public ref float FollowMinimumSpeed { get; }
-  
-  public ref float CurFollowEntityT { get; }
-  
-  public ref float CurFollowSpeed { get; }
-  
-  public string StrOrientationFaceEntityName { get; set; }
-  
-  public ref CHandle<CBaseEntity> OrientationFaceEntity { get; }
-  
-  public CEntityIOOutput OnStart { get; }
-  
-  public CEntityIOOutput OnStartForward { get; }
-  
-  public CEntityIOOutput OnStartReverse { get; }
-  
-  public CEntityIOOutput OnStop { get; }
-  
-  public CEntityIOOutput OnStopped { get; }
-  
-  public ref bool NextNodeReturnsCurrent { get; }
-  
-  public ref bool StartedMoving { get; }
-  
-  public ref CFuncMover__FollowEntityDirection_t FollowEntityDirection { get; }
+    public string PathName { get; set; }
+
+    public ref CHandle<CPathMover> PathMover { get; }
+
+    public ref CHandle<CPathMover> PrevPathMover { get; }
+
+    public string PathNodeStart { get; set; }
+
+    public string PathNodeEnd { get; set; }
+
+    public ref CFuncMover__Move_t MoveType { get; }
+
+    public ref bool IsReversing { get; }
+
+    public ref Vector Target { get; }
+
+    public ref float StartSpeed { get; }
+
+    public ref float PathLocation { get; }
+
+    public ref float T { get; }
+
+    public ref int CurrentNodeIndex { get; }
+
+    public ref int PreviousNodeIndex { get; }
+
+    public ref SolidType_t SolidType { get; }
+
+    public ref bool IsMoving { get; }
+
+    public ref float TimeToReachMaxSpeed { get; }
+
+    public ref float DistanceToReachMaxSpeed { get; }
+
+    public ref float TimeToReachZeroSpeed { get; }
+
+    public ref float DistanceToReachZeroSpeed { get; }
+
+    public GameTime_t TimeMovementStart { get; }
+
+    public GameTime_t TimeMovementStop { get; }
+
+    public ref CHandle<CMoverPathNode> StopAtNode { get; }
+
+    public ref float PathLocationToBeginStop { get; }
+
+    public string StartForwardSound { get; set; }
+
+    public string LoopForwardSound { get; set; }
+
+    public string StopForwardSound { get; set; }
+
+    public string StartReverseSound { get; set; }
+
+    public string LoopReverseSound { get; set; }
+
+    public string StopReverseSound { get; set; }
+
+    public string ArriveAtDestinationSound { get; set; }
+
+    public ref CEntityIOOutput OnMovementEnd { get; }
+
+    public ref bool StartAtClosestPoint { get; }
+
+    public ref bool StartAtEnd { get; }
+
+    public ref CFuncMover__OrientationUpdate_t OrientationUpdate { get; }
+
+    public GameTime_t TimeStartOrientationChange { get; }
+
+    public ref float TimeToBlendToNewOrientation { get; }
+
+    public ref float DurationBlendToNewOrientationRan { get; }
+
+    public ref int OriginalOrientationIndex { get; }
+
+    public ref bool CreateMovableNavMesh { get; }
+
+    public ref bool AllowMovableNavMeshDockingOnEntireEntity { get; }
+
+    public ref CEntityIOOutput OnNodePassed { get; }
+
+    public string OrientationMatchEntityName { get; set; }
+
+    public ref CHandle<CBaseEntity> OrientationMatchEntity { get; }
+
+    public ref float TimeToTraverseToNextNode { get; }
+
+    public ref Vector LerpToNewPosStartInPathEntitySpace { get; }
+
+    public ref Vector LerpToNewPosEndInPathEntitySpace { get; }
+
+    public ref float LerpToPositionT { get; }
+
+    public ref float LerpToPositionDeltaT { get; }
+
+    public ref CEntityIOOutput OnLerpToPositionComplete { get; }
+
+    public ref bool IsPaused { get; }
+
+    public ref CFuncMover__TransitionToPathNodeAction_t TransitionedToPathNodeAction { get; }
+
+    public ref int DelayedTeleportToNode { get; }
+
+    public ref bool IsVerboseLogging { get; }
+
+    public ref CHandle<CBaseEntity> FollowEntity { get; }
+
+    public ref float FollowDistance { get; }
+
+    public ref float FollowMinimumSpeed { get; }
+
+    public ref float CurFollowEntityT { get; }
+
+    public ref float CurFollowSpeed { get; }
+
+    public string StrOrientationFaceEntityName { get; set; }
+
+    public ref CHandle<CBaseEntity> OrientationFaceEntity { get; }
+
+    public ref CEntityIOOutput OnStart { get; }
+
+    public ref CEntityIOOutput OnStartForward { get; }
+
+    public ref CEntityIOOutput OnStartReverse { get; }
+
+    public ref CEntityIOOutput OnStop { get; }
+
+    public ref CEntityIOOutput OnStopped { get; }
+
+    public ref bool NextNodeReturnsCurrent { get; }
+
+    public ref bool StartedMoving { get; }
+
+    public ref CFuncMover__FollowEntityDirection_t FollowEntityDirection { get; }
 
 
 }

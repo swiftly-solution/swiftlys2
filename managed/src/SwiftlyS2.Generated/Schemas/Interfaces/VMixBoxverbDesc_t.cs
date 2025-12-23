@@ -8,46 +8,46 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixBoxverbDesc_t : ISchemaClass<VMixBoxverbDesc_t> {
+public partial interface VMixBoxverbDesc_t : ISchemaClass<VMixBoxverbDesc_t>
+{
+    static VMixBoxverbDesc_t ISchemaClass<VMixBoxverbDesc_t>.From(nint handle) => new VMixBoxverbDesc_tImpl(handle);
+    static int ISchemaClass<VMixBoxverbDesc_t>.Size => 80;
+    static string? ISchemaClass<VMixBoxverbDesc_t>.ClassName => null;
 
-  static VMixBoxverbDesc_t ISchemaClass<VMixBoxverbDesc_t>.From(nint handle) => new VMixBoxverbDesc_tImpl(handle);
-  static int ISchemaClass<VMixBoxverbDesc_t>.Size => 80;
-  static string? ISchemaClass<VMixBoxverbDesc_t>.ClassName => null;
 
-  
-  public ref float SizeMax { get; }
-  
-  public ref float SizeMin { get; }
-  
-  public ref float Complexity { get; }
-  
-  public ref float Diffusion { get; }
-  
-  public ref float ModDepth { get; }
-  
-  public ref float ModRate { get; }
-  
-  public ref bool Parallel { get; }
-  
-  public VMixFilterDesc_t FilterType { get; }
-  
-  public ref float Width { get; }
-  
-  public ref float Height { get; }
-  
-  public ref float Depth { get; }
-  
-  public ref float FeedbackScale { get; }
-  
-  public ref float FeedbackWidth { get; }
-  
-  public ref float FeedbackHeight { get; }
-  
-  public ref float FeedbackDepth { get; }
-  
-  public ref float OutputGain { get; }
-  
-  public ref float Taps { get; }
+    public ref float SizeMax { get; }
+
+    public ref float SizeMin { get; }
+
+    public ref float Complexity { get; }
+
+    public ref float Diffusion { get; }
+
+    public ref float ModDepth { get; }
+
+    public ref float ModRate { get; }
+
+    public ref bool Parallel { get; }
+
+    public VMixFilterDesc_t FilterType { get; }
+
+    public ref float Width { get; }
+
+    public ref float Height { get; }
+
+    public ref float Depth { get; }
+
+    public ref float FeedbackScale { get; }
+
+    public ref float FeedbackWidth { get; }
+
+    public ref float FeedbackHeight { get; }
+
+    public ref float FeedbackDepth { get; }
+
+    public ref float OutputGain { get; }
+
+    public ref float Taps { get; }
 
 
 }

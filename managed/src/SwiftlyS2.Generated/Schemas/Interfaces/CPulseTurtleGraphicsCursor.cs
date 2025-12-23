@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseTurtleGraphicsCursor : CPulseExecCursor, ISchemaClass<CPulseTurtleGraphicsCursor> {
+public partial interface CPulseTurtleGraphicsCursor : CPulseExecCursor, ISchemaClass<CPulseTurtleGraphicsCursor>
+{
+    static CPulseTurtleGraphicsCursor ISchemaClass<CPulseTurtleGraphicsCursor>.From(nint handle) => new CPulseTurtleGraphicsCursorImpl(handle);
+    static int ISchemaClass<CPulseTurtleGraphicsCursor>.Size => 232;
+    static string? ISchemaClass<CPulseTurtleGraphicsCursor>.ClassName => null;
 
-  static CPulseTurtleGraphicsCursor ISchemaClass<CPulseTurtleGraphicsCursor>.From(nint handle) => new CPulseTurtleGraphicsCursorImpl(handle);
-  static int ISchemaClass<CPulseTurtleGraphicsCursor>.Size => 232;
-  static string? ISchemaClass<CPulseTurtleGraphicsCursor>.ClassName => null;
 
-  
-  public ref Color Color { get; }
-  
-  public ref Vector2D Pos { get; }
-  
-  public ref float HeadingDeg { get; }
-  
-  public ref bool PenUp { get; }
+    public ref Color Color { get; }
+
+    public ref Vector2D Pos { get; }
+
+    public ref float HeadingDeg { get; }
+
+    public ref bool PenUp { get; }
 
 
 }

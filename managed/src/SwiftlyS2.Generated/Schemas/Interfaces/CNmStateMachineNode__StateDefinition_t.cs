@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmStateMachineNode__StateDefinition_t : ISchemaClass<CNmStateMachineNode__StateDefinition_t> {
+public partial interface CNmStateMachineNode__StateDefinition_t : ISchemaClass<CNmStateMachineNode__StateDefinition_t>
+{
+    static CNmStateMachineNode__StateDefinition_t ISchemaClass<CNmStateMachineNode__StateDefinition_t>.From(nint handle) => new CNmStateMachineNode__StateDefinition_tImpl(handle);
+    static int ISchemaClass<CNmStateMachineNode__StateDefinition_t>.Size => 56;
+    static string? ISchemaClass<CNmStateMachineNode__StateDefinition_t>.ClassName => null;
 
-  static CNmStateMachineNode__StateDefinition_t ISchemaClass<CNmStateMachineNode__StateDefinition_t>.From(nint handle) => new CNmStateMachineNode__StateDefinition_tImpl(handle);
-  static int ISchemaClass<CNmStateMachineNode__StateDefinition_t>.Size => 56;
-  static string? ISchemaClass<CNmStateMachineNode__StateDefinition_t>.ClassName => null;
 
-  
-  public ref short StateNodeIdx { get; }
-  
-  public ref short EntryConditionNodeIdx { get; }
-  
-  // CUtlLeanVectorFixedGrowable< CNmStateMachineNode::TransitionDefinition_t, 5 >
-  public SchemaUntypedField TransitionDefinitions { get; }
+    public ref short StateNodeIdx { get; }
+
+    public ref short EntryConditionNodeIdx { get; }
+
+    // CUtlLeanVectorFixedGrowable< CNmStateMachineNode::TransitionDefinition_t, 5 >
+    public SchemaUntypedField TransitionDefinitions { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerRealtimeFMSineWave : CVoiceContainerBase, ISchemaClass<CVoiceContainerRealtimeFMSineWave> {
+public partial interface CVoiceContainerRealtimeFMSineWave : CVoiceContainerBase, ISchemaClass<CVoiceContainerRealtimeFMSineWave>
+{
+    static CVoiceContainerRealtimeFMSineWave ISchemaClass<CVoiceContainerRealtimeFMSineWave>.From(nint handle) => new CVoiceContainerRealtimeFMSineWaveImpl(handle);
+    static int ISchemaClass<CVoiceContainerRealtimeFMSineWave>.Size => 200;
+    static string? ISchemaClass<CVoiceContainerRealtimeFMSineWave>.ClassName => null;
 
-  static CVoiceContainerRealtimeFMSineWave ISchemaClass<CVoiceContainerRealtimeFMSineWave>.From(nint handle) => new CVoiceContainerRealtimeFMSineWaveImpl(handle);
-  static int ISchemaClass<CVoiceContainerRealtimeFMSineWave>.Size => 200;
-  static string? ISchemaClass<CVoiceContainerRealtimeFMSineWave>.ClassName => null;
 
-  
-  public ref float CarrierFrequency { get; }
-  
-  public ref float ModulatorFrequency { get; }
-  
-  public ref float ModulatorAmount { get; }
+    public ref float CarrierFrequency { get; }
+
+    public ref float ModulatorFrequency { get; }
+
+    public ref float ModulatorAmount { get; }
 
 
 }

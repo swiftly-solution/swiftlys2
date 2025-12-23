@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseFilter : CLogicalEntity, ISchemaClass<CBaseFilter> {
+public partial interface CBaseFilter : CLogicalEntity, ISchemaClass<CBaseFilter>
+{
+    static CBaseFilter ISchemaClass<CBaseFilter>.From(nint handle) => new CBaseFilterImpl(handle);
+    static int ISchemaClass<CBaseFilter>.Size => 1352;
+    static string? ISchemaClass<CBaseFilter>.ClassName => "filter_base";
 
-  static CBaseFilter ISchemaClass<CBaseFilter>.From(nint handle) => new CBaseFilterImpl(handle);
-  static int ISchemaClass<CBaseFilter>.Size => 1352;
-  static string? ISchemaClass<CBaseFilter>.ClassName => "filter_base";
 
-  
-  public ref bool Negated { get; }
-  
-  public CEntityIOOutput OnPass { get; }
-  
-  public CEntityIOOutput OnFail { get; }
+    public ref bool Negated { get; }
+
+    public ref CEntityIOOutput OnPass { get; }
+
+    public ref CEntityIOOutput OnFail { get; }
 
 
 }

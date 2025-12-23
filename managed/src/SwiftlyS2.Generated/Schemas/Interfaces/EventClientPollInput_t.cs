@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventClientPollInput_t : ISchemaClass<EventClientPollInput_t> {
+public partial interface EventClientPollInput_t : ISchemaClass<EventClientPollInput_t>
+{
+    static EventClientPollInput_t ISchemaClass<EventClientPollInput_t>.From(nint handle) => new EventClientPollInput_tImpl(handle);
+    static int ISchemaClass<EventClientPollInput_t>.Size => 48;
+    static string? ISchemaClass<EventClientPollInput_t>.ClassName => null;
 
-  static EventClientPollInput_t ISchemaClass<EventClientPollInput_t>.From(nint handle) => new EventClientPollInput_tImpl(handle);
-  static int ISchemaClass<EventClientPollInput_t>.Size => 48;
-  static string? ISchemaClass<EventClientPollInput_t>.ClassName => null;
 
-  
-  public EngineLoopState_t LoopState { get; }
-  
-  public ref float RealTime { get; }
+    public EngineLoopState_t LoopState { get; }
+
+    public ref float RealTime { get; }
 
 
 }

@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderStatusEffectCitadel : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderStatusEffectCitadel> {
+public partial interface C_OP_RenderStatusEffectCitadel : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderStatusEffectCitadel>
+{
+    static C_OP_RenderStatusEffectCitadel ISchemaClass<C_OP_RenderStatusEffectCitadel>.From(nint handle) => new C_OP_RenderStatusEffectCitadelImpl(handle);
+    static int ISchemaClass<C_OP_RenderStatusEffectCitadel>.Size => 592;
+    static string? ISchemaClass<C_OP_RenderStatusEffectCitadel>.ClassName => null;
 
-  static C_OP_RenderStatusEffectCitadel ISchemaClass<C_OP_RenderStatusEffectCitadel>.From(nint handle) => new C_OP_RenderStatusEffectCitadelImpl(handle);
-  static int ISchemaClass<C_OP_RenderStatusEffectCitadel>.Size => 592;
-  static string? ISchemaClass<C_OP_RenderStatusEffectCitadel>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureColorWarp { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureNormal { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureMetalness { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureRoughness { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureSelfIllum { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDetail { get; }
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureColorWarp { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureNormal { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureMetalness { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureRoughness { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureSelfIllum { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> TextureDetail { get; }
 
 
 }

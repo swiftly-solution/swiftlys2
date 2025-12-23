@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTimeRemainingMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CTimeRemainingMetricEvaluator> {
+public partial interface CTimeRemainingMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CTimeRemainingMetricEvaluator>
+{
+    static CTimeRemainingMetricEvaluator ISchemaClass<CTimeRemainingMetricEvaluator>.From(nint handle) => new CTimeRemainingMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CTimeRemainingMetricEvaluator>.Size => 96;
+    static string? ISchemaClass<CTimeRemainingMetricEvaluator>.ClassName => null;
 
-  static CTimeRemainingMetricEvaluator ISchemaClass<CTimeRemainingMetricEvaluator>.From(nint handle) => new CTimeRemainingMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CTimeRemainingMetricEvaluator>.Size => 96;
-  static string? ISchemaClass<CTimeRemainingMetricEvaluator>.ClassName => null;
 
-  
-  public ref bool MatchByTimeRemaining { get; }
-  
-  public ref float MaxTimeRemaining { get; }
-  
-  public ref bool FilterByTimeRemaining { get; }
-  
-  public ref float MinTimeRemaining { get; }
+    public ref bool MatchByTimeRemaining { get; }
+
+    public ref float MaxTimeRemaining { get; }
+
+    public ref bool FilterByTimeRemaining { get; }
+
+    public ref float MinTimeRemaining { get; }
 
 
 }

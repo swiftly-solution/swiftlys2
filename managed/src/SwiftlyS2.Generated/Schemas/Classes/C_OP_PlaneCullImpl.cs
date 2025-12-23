@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_PlaneCullImpl : CParticleFunctionOperatorImpl, C_OP_PlaneCull {
+internal partial class C_OP_PlaneCullImpl : CParticleFunctionOperatorImpl, C_OP_PlaneCull
+{
+    public C_OP_PlaneCullImpl(nint handle) : base(handle) { }
 
-  public C_OP_PlaneCullImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PlaneControlPointOffset;
 
-  private static nint? _PlaneControlPointOffset;
-
-  public ref int PlaneControlPoint {
-    get {
-      if (_PlaneControlPointOffset == null) {
-        _PlaneControlPointOffset = Schema.GetOffset(0x352AAF45E621E9BC);
-      }
-      return ref _Handle.AsRef<int>(_PlaneControlPointOffset!.Value);
+    public ref int PlaneControlPoint {
+        get {
+            _PlaneControlPointOffset = _PlaneControlPointOffset ?? Schema.GetOffset(0x352AAF45E621E9BC);
+            return ref _Handle.AsRef<int>(_PlaneControlPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlaneDirectionOffset;
+    private static nint? _PlaneDirectionOffset;
 
-  public ref Vector PlaneDirection {
-    get {
-      if (_PlaneDirectionOffset == null) {
-        _PlaneDirectionOffset = Schema.GetOffset(0x352AAF45B00A585A);
-      }
-      return ref _Handle.AsRef<Vector>(_PlaneDirectionOffset!.Value);
+    public ref Vector PlaneDirection {
+        get {
+            _PlaneDirectionOffset = _PlaneDirectionOffset ?? Schema.GetOffset(0x352AAF45B00A585A);
+            return ref _Handle.AsRef<Vector>(_PlaneDirectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalSpaceOffset;
+    private static nint? _LocalSpaceOffset;
 
-  public ref bool LocalSpace {
-    get {
-      if (_LocalSpaceOffset == null) {
-        _LocalSpaceOffset = Schema.GetOffset(0x352AAF4562418E6E);
-      }
-      return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+    public ref bool LocalSpace {
+        get {
+            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0x352AAF4562418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlaneOffsetOffset;
+    private static nint? _PlaneOffsetOffset;
 
-  public ref float PlaneOffset {
-    get {
-      if (_PlaneOffsetOffset == null) {
-        _PlaneOffsetOffset = Schema.GetOffset(0x352AAF45D394676C);
-      }
-      return ref _Handle.AsRef<float>(_PlaneOffsetOffset!.Value);
+    public ref float PlaneOffset {
+        get {
+            _PlaneOffsetOffset = _PlaneOffsetOffset ?? Schema.GetOffset(0x352AAF45D394676C);
+            return ref _Handle.AsRef<float>(_PlaneOffsetOffset!.Value);
+        }
     }
-  }
 
 
 }

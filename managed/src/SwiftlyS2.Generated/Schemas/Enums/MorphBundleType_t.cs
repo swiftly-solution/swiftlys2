@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum MorphBundleType_t : uint {
-
+public enum MorphBundleType_t : uint
+{
  MORPH_BUNDLE_TYPE_NONE = 0,
 
  MORPH_BUNDLE_TYPE_POSITION_SPEED = 1,

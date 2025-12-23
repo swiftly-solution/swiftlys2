@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Spectre.Console;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Players;
 
@@ -114,12 +115,21 @@ public sealed class ChoiceMenuOption : MenuOptionBase
         );
 
         var selectedChoice = choices[newIndex];
-        ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<string> {
-            Player = args.Player,
-            Option = this,
-            OldValue = choices[(newIndex - 1 + choices.Count) % choices.Count],
-            NewValue = selectedChoice
-        });
+
+        try
+        {
+            ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<string> {
+                Player = args.Player,
+                Option = this,
+                OldValue = choices[(newIndex - 1 + choices.Count) % choices.Count],
+                NewValue = selectedChoice
+            });
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return ValueTask.CompletedTask;
+            AnsiConsole.WriteException(e);
+        }
 
         return ValueTask.CompletedTask;
     }

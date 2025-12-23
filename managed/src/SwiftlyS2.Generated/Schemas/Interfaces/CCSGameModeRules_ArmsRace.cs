@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSGameModeRules_ArmsRace : CCSGameModeRules, ISchemaClass<CCSGameModeRules_ArmsRace> {
+public partial interface CCSGameModeRules_ArmsRace : CCSGameModeRules, ISchemaClass<CCSGameModeRules_ArmsRace>
+{
+    static CCSGameModeRules_ArmsRace ISchemaClass<CCSGameModeRules_ArmsRace>.From(nint handle) => new CCSGameModeRules_ArmsRaceImpl(handle);
+    static int ISchemaClass<CCSGameModeRules_ArmsRace>.Size => 136;
+    static string? ISchemaClass<CCSGameModeRules_ArmsRace>.ClassName => null;
 
-  static CCSGameModeRules_ArmsRace ISchemaClass<CCSGameModeRules_ArmsRace>.From(nint handle) => new CCSGameModeRules_ArmsRaceImpl(handle);
-  static int ISchemaClass<CCSGameModeRules_ArmsRace>.Size => 136;
-  static string? ISchemaClass<CCSGameModeRules_ArmsRace>.ClassName => null;
 
-  
-  public ref CUtlVector<CUtlString> WeaponSequence { get; }
+    public ref CUtlVector<CUtlString> WeaponSequence { get; }
 
-  public void WeaponSequenceUpdated();
+    public void WeaponSequenceUpdated();
 }

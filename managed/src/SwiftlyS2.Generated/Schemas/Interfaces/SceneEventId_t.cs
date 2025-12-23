@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SceneEventId_t : ISchemaClass<SceneEventId_t> {
+public partial interface SceneEventId_t : ISchemaClass<SceneEventId_t>
+{
+    static SceneEventId_t ISchemaClass<SceneEventId_t>.From(nint handle) => new SceneEventId_tImpl(handle);
+    static int ISchemaClass<SceneEventId_t>.Size => 4;
+    static string? ISchemaClass<SceneEventId_t>.ClassName => null;
 
-  static SceneEventId_t ISchemaClass<SceneEventId_t>.From(nint handle) => new SceneEventId_tImpl(handle);
-  static int ISchemaClass<SceneEventId_t>.Size => 4;
-  static string? ISchemaClass<SceneEventId_t>.ClassName => null;
 
-  
-  public ref uint Value { get; }
+    public ref uint Value { get; }
 
 
 }

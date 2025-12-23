@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDestructiblePartsSystemData : ISchemaClass<CDestructiblePartsSystemData> {
+public partial interface CDestructiblePartsSystemData : ISchemaClass<CDestructiblePartsSystemData>
+{
+    static CDestructiblePartsSystemData ISchemaClass<CDestructiblePartsSystemData>.From(nint handle) => new CDestructiblePartsSystemDataImpl(handle);
+    static int ISchemaClass<CDestructiblePartsSystemData>.Size => 48;
+    static string? ISchemaClass<CDestructiblePartsSystemData>.ClassName => null;
 
-  static CDestructiblePartsSystemData ISchemaClass<CDestructiblePartsSystemData>.From(nint handle) => new CDestructiblePartsSystemDataImpl(handle);
-  static int ISchemaClass<CDestructiblePartsSystemData>.Size => 48;
-  static string? ISchemaClass<CDestructiblePartsSystemData>.ClassName => null;
 
-  
-  // CUtlOrderedMap< HitGroup_t, CDestructiblePart >
-  public SchemaUntypedField PartsDataByHitGroup { get; }
-  
-  public CRangeInt MinMaxNumberHitGroupsToDestroyWhenGibbing { get; }
+    // CUtlOrderedMap< HitGroup_t, CDestructiblePart >
+    public SchemaUntypedField PartsDataByHitGroup { get; }
+
+    public CRangeInt MinMaxNumberHitGroupsToDestroyWhenGibbing { get; }
 
 
 }

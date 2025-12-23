@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAttributeManager : ISchemaClass<CAttributeManager> {
+public partial interface CAttributeManager : ISchemaClass<CAttributeManager>
+{
+    static CAttributeManager ISchemaClass<CAttributeManager>.From(nint handle) => new CAttributeManagerImpl(handle);
+    static int ISchemaClass<CAttributeManager>.Size => 80;
+    static string? ISchemaClass<CAttributeManager>.ClassName => null;
 
-  static CAttributeManager ISchemaClass<CAttributeManager>.From(nint handle) => new CAttributeManagerImpl(handle);
-  static int ISchemaClass<CAttributeManager>.Size => 80;
-  static string? ISchemaClass<CAttributeManager>.ClassName => null;
 
-  
-  public ref CUtlVector<CHandle<CBaseEntity>> Providers { get; }
-  
-  public ref int ReapplyProvisionParity { get; }
-  
-  public ref CHandle<CBaseEntity> Outer { get; }
-  
-  public ref bool PreventLoopback { get; }
-  
-  public ref attributeprovidertypes_t ProviderType { get; }
-  
-  public ref CUtlVector<CAttributeManager__cached_attribute_float_t> CachedResults { get; }
+    public ref CUtlVector<CHandle<CBaseEntity>> Providers { get; }
 
-  public void ReapplyProvisionParityUpdated();
-  public void OuterUpdated();
-  public void ProviderTypeUpdated();
+    public ref int ReapplyProvisionParity { get; }
+
+    public ref CHandle<CBaseEntity> Outer { get; }
+
+    public ref bool PreventLoopback { get; }
+
+    public ref attributeprovidertypes_t ProviderType { get; }
+
+    public ref CUtlVector<CAttributeManager__cached_attribute_float_t> CachedResults { get; }
+
+    public void ReapplyProvisionParityUpdated();
+    public void OuterUpdated();
+    public void ProviderTypeUpdated();
 }

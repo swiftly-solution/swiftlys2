@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PulseGraphExecutionHistoryNodeDesc_tImpl : SchemaClass, PulseGraphExecutionHistoryNodeDesc_t {
+internal partial class PulseGraphExecutionHistoryNodeDesc_tImpl : SchemaClass, PulseGraphExecutionHistoryNodeDesc_t
+{
+    public PulseGraphExecutionHistoryNodeDesc_tImpl(nint handle) : base(handle) { }
 
-  public PulseGraphExecutionHistoryNodeDesc_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StrCellDescOffset;
 
-  private static nint? _StrCellDescOffset;
-
-  public ref CBufferString StrCellDesc {
-    get {
-      if (_StrCellDescOffset == null) {
-        _StrCellDescOffset = Schema.GetOffset(0x7F4ECA02AD3F01DD);
-      }
-      return ref _Handle.AsRef<CBufferString>(_StrCellDescOffset!.Value);
+    public ref CBufferString StrCellDesc {
+        get {
+            _StrCellDescOffset = _StrCellDescOffset ?? Schema.GetOffset(0x7F4ECA02AD3F01DD);
+            return ref _Handle.AsRef<CBufferString>(_StrCellDescOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrBindingNameOffset;
+    private static nint? _StrBindingNameOffset;
 
-  public SchemaUntypedField StrBindingName {
-    get {
-      if (_StrBindingNameOffset == null) {
-        _StrBindingNameOffset = Schema.GetOffset(0x7F4ECA021A5069AA);
-      }
-      return new SchemaUntypedField(_Handle + _StrBindingNameOffset!.Value);
+    public SchemaUntypedField StrBindingName {
+        get {
+            _StrBindingNameOffset = _StrBindingNameOffset ?? Schema.GetOffset(0x7F4ECA021A5069AA);
+            return new SchemaUntypedField(_Handle + _StrBindingNameOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBoneConstraintDotToMorph : CBoneConstraintBase, ISchemaClass<CBoneConstraintDotToMorph> {
+public partial interface CBoneConstraintDotToMorph : CBoneConstraintBase, ISchemaClass<CBoneConstraintDotToMorph>
+{
+    static CBoneConstraintDotToMorph ISchemaClass<CBoneConstraintDotToMorph>.From(nint handle) => new CBoneConstraintDotToMorphImpl(handle);
+    static int ISchemaClass<CBoneConstraintDotToMorph>.Size => 88;
+    static string? ISchemaClass<CBoneConstraintDotToMorph>.ClassName => null;
 
-  static CBoneConstraintDotToMorph ISchemaClass<CBoneConstraintDotToMorph>.From(nint handle) => new CBoneConstraintDotToMorphImpl(handle);
-  static int ISchemaClass<CBoneConstraintDotToMorph>.Size => 88;
-  static string? ISchemaClass<CBoneConstraintDotToMorph>.ClassName => null;
 
-  
-  public string BoneName { get; set; }
-  
-  public string TargetBoneName { get; set; }
-  
-  public string MorphChannelName { get; set; }
-  
-  public ISchemaFixedArray<float> Remap { get; }
+    public string BoneName { get; set; }
+
+    public string TargetBoneName { get; set; }
+
+    public string MorphChannelName { get; set; }
+
+    public ISchemaFixedArray<float> Remap { get; }
 
 
 }

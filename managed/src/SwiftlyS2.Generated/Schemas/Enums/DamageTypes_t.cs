@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum DamageTypes_t : uint {
-
+public enum DamageTypes_t : uint
+{
  DMG_GENERIC = 0,
 
  DMG_CRUSH = 1,

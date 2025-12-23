@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_IntervalTimer : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_IntervalTimer> {
+public partial interface CPulseCell_IntervalTimer : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_IntervalTimer>
+{
+    static CPulseCell_IntervalTimer ISchemaClass<CPulseCell_IntervalTimer>.From(nint handle) => new CPulseCell_IntervalTimerImpl(handle);
+    static int ISchemaClass<CPulseCell_IntervalTimer>.Size => 216;
+    static string? ISchemaClass<CPulseCell_IntervalTimer>.ClassName => null;
 
-  static CPulseCell_IntervalTimer ISchemaClass<CPulseCell_IntervalTimer>.From(nint handle) => new CPulseCell_IntervalTimerImpl(handle);
-  static int ISchemaClass<CPulseCell_IntervalTimer>.Size => 216;
-  static string? ISchemaClass<CPulseCell_IntervalTimer>.ClassName => null;
 
-  
-  public CPulse_ResumePoint Completed { get; }
-  
-  public SignatureOutflow_Continue OnInterval { get; }
+    public CPulse_ResumePoint Completed { get; }
+
+    public SignatureOutflow_Continue OnInterval { get; }
 
 
 }

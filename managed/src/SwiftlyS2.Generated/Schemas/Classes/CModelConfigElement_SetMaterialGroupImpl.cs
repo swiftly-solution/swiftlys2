@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigElement_SetMaterialGroupImpl : CModelConfigElementImpl, CModelConfigElement_SetMaterialGroup {
+internal partial class CModelConfigElement_SetMaterialGroupImpl : CModelConfigElementImpl, CModelConfigElement_SetMaterialGroup
+{
+    public CModelConfigElement_SetMaterialGroupImpl(nint handle) : base(handle) { }
 
-  public CModelConfigElement_SetMaterialGroupImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaterialGroupNameOffset;
 
-  private static nint? _MaterialGroupNameOffset;
-
-  public string MaterialGroupName {
-    get {
-      if (_MaterialGroupNameOffset == null) {
-        _MaterialGroupNameOffset = Schema.GetOffset(0xFF9AED50C2DD3048);
-      }
-      var ptr = _Handle.Read<nint>(_MaterialGroupNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_MaterialGroupNameOffset == null) {
-        _MaterialGroupNameOffset = Schema.GetOffset(0xFF9AED50C2DD3048);
-      }
-      Schema.SetString(_Handle, _MaterialGroupNameOffset!.Value, value);
-    }
-  } 
+    public string MaterialGroupName {
+        get {
+            _MaterialGroupNameOffset = _MaterialGroupNameOffset ?? Schema.GetOffset(0xFF9AED50C2DD3048);
+            return Schema.GetString(_Handle.Read<nint>(_MaterialGroupNameOffset!.Value));
+        }
+        set {
+            _MaterialGroupNameOffset = _MaterialGroupNameOffset ?? Schema.GetOffset(0xFF9AED50C2DD3048);
+            Schema.SetString(_Handle, _MaterialGroupNameOffset!.Value, value);
+        }
+    } 
 
 
 }

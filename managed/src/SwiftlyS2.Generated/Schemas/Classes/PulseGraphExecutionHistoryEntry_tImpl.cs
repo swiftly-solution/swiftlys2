@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PulseGraphExecutionHistoryEntry_tImpl : SchemaClass, PulseGraphExecutionHistoryEntry_t {
+internal partial class PulseGraphExecutionHistoryEntry_tImpl : SchemaClass, PulseGraphExecutionHistoryEntry_t
+{
+    public PulseGraphExecutionHistoryEntry_tImpl(nint handle) : base(handle) { }
 
-  public PulseGraphExecutionHistoryEntry_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CursorIDOffset;
 
-  private static nint? _CursorIDOffset;
-
-  public PulseCursorID_t CursorID {
-    get {
-      if (_CursorIDOffset == null) {
-        _CursorIDOffset = Schema.GetOffset(0x9346B0AB0B44CBF6);
-      }
-      return new PulseCursorID_tImpl(_Handle + _CursorIDOffset!.Value);
+    public PulseCursorID_t CursorID {
+        get {
+            _CursorIDOffset = _CursorIDOffset ?? Schema.GetOffset(0x9346B0AB0B44CBF6);
+            return new PulseCursorID_tImpl(_Handle + _CursorIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _EditorIDOffset;
+    private static nint? _EditorIDOffset;
 
-  public PulseDocNodeID_t EditorID {
-    get {
-      if (_EditorIDOffset == null) {
-        _EditorIDOffset = Schema.GetOffset(0x9346B0AB74188E69);
-      }
-      return new PulseDocNodeID_tImpl(_Handle + _EditorIDOffset!.Value);
+    public PulseDocNodeID_t EditorID {
+        get {
+            _EditorIDOffset = _EditorIDOffset ?? Schema.GetOffset(0x9346B0AB74188E69);
+            return new PulseDocNodeID_tImpl(_Handle + _EditorIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _ExecTimeOffset;
+    private static nint? _ExecTimeOffset;
 
-  public ref float ExecTime {
-    get {
-      if (_ExecTimeOffset == null) {
-        _ExecTimeOffset = Schema.GetOffset(0x9346B0ABFAE08483);
-      }
-      return ref _Handle.AsRef<float>(_ExecTimeOffset!.Value);
+    public ref float ExecTime {
+        get {
+            _ExecTimeOffset = _ExecTimeOffset ?? Schema.GetOffset(0x9346B0ABFAE08483);
+            return ref _Handle.AsRef<float>(_ExecTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x9346B0AB5E9538F5);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x9346B0AB5E9538F5);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TagNameOffset;
+    private static nint? _TagNameOffset;
 
-  public SchemaUntypedField TagName {
-    get {
-      if (_TagNameOffset == null) {
-        _TagNameOffset = Schema.GetOffset(0x9346B0ABBD7B50F8);
-      }
-      return new SchemaUntypedField(_Handle + _TagNameOffset!.Value);
+    public SchemaUntypedField TagName {
+        get {
+            _TagNameOffset = _TagNameOffset ?? Schema.GetOffset(0x9346B0ABBD7B50F8);
+            return new SchemaUntypedField(_Handle + _TagNameOffset!.Value);
+        }
     }
-  }
 
 
 }

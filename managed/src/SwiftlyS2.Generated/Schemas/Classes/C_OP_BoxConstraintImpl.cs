@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_BoxConstraintImpl : CParticleFunctionConstraintImpl, C_OP_BoxConstraint {
+internal partial class C_OP_BoxConstraintImpl : CParticleFunctionConstraintImpl, C_OP_BoxConstraint
+{
+    public C_OP_BoxConstraintImpl(nint handle) : base(handle) { }
 
-  public C_OP_BoxConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinOffset;
 
-  private static nint? _MinOffset;
-
-  public CParticleCollectionVecInput Min {
-    get {
-      if (_MinOffset == null) {
-        _MinOffset = Schema.GetOffset(0x111EED71B0765F37);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _MinOffset!.Value);
+    public CParticleCollectionVecInput Min {
+        get {
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x111EED71B0765F37);
+            return new CParticleCollectionVecInputImpl(_Handle + _MinOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOffset;
+    private static nint? _MaxOffset;
 
-  public CParticleCollectionVecInput Max {
-    get {
-      if (_MaxOffset == null) {
-        _MaxOffset = Schema.GetOffset(0x111EED71BE89FCF9);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _MaxOffset!.Value);
+    public CParticleCollectionVecInput Max {
+        get {
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x111EED71BE89FCF9);
+            return new CParticleCollectionVecInputImpl(_Handle + _MaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPOffset;
+    private static nint? _CPOffset;
 
-  public ref int CP {
-    get {
-      if (_CPOffset == null) {
-        _CPOffset = Schema.GetOffset(0x111EED71EB661472);
-      }
-      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    public ref int CP {
+        get {
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x111EED71EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalSpaceOffset;
+    private static nint? _LocalSpaceOffset;
 
-  public ref bool LocalSpace {
-    get {
-      if (_LocalSpaceOffset == null) {
-        _LocalSpaceOffset = Schema.GetOffset(0x111EED7162418E6E);
-      }
-      return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+    public ref bool LocalSpace {
+        get {
+            _LocalSpaceOffset = _LocalSpaceOffset ?? Schema.GetOffset(0x111EED7162418E6E);
+            return ref _Handle.AsRef<bool>(_LocalSpaceOffset!.Value);
+        }
     }
-  }
-  private static nint? _AccountForRadiusOffset;
+    private static nint? _AccountForRadiusOffset;
 
-  public ref bool AccountForRadius {
-    get {
-      if (_AccountForRadiusOffset == null) {
-        _AccountForRadiusOffset = Schema.GetOffset(0x111EED71E4DE9E21);
-      }
-      return ref _Handle.AsRef<bool>(_AccountForRadiusOffset!.Value);
+    public ref bool AccountForRadius {
+        get {
+            _AccountForRadiusOffset = _AccountForRadiusOffset ?? Schema.GetOffset(0x111EED71E4DE9E21);
+            return ref _Handle.AsRef<bool>(_AccountForRadiusOffset!.Value);
+        }
     }
-  }
 
 
 }

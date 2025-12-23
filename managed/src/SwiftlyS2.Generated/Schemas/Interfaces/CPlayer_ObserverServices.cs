@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlayer_ObserverServices : CPlayerPawnComponent, ISchemaClass<CPlayer_ObserverServices> {
+public partial interface CPlayer_ObserverServices : CPlayerPawnComponent, ISchemaClass<CPlayer_ObserverServices>
+{
+    static CPlayer_ObserverServices ISchemaClass<CPlayer_ObserverServices>.From(nint handle) => new CPlayer_ObserverServicesImpl(handle);
+    static int ISchemaClass<CPlayer_ObserverServices>.Size => 80;
+    static string? ISchemaClass<CPlayer_ObserverServices>.ClassName => null;
 
-  static CPlayer_ObserverServices ISchemaClass<CPlayer_ObserverServices>.From(nint handle) => new CPlayer_ObserverServicesImpl(handle);
-  static int ISchemaClass<CPlayer_ObserverServices>.Size => 80;
-  static string? ISchemaClass<CPlayer_ObserverServices>.ClassName => null;
 
-  
-  public ref byte ObserverMode { get; }
-  
-  public ref CHandle<CBaseEntity> ObserverTarget { get; }
-  
-  public ref ObserverMode_t ObserverLastMode { get; }
-  
-  public ref bool ForcedObserverMode { get; }
+    public ref byte ObserverMode { get; }
 
-  public void ObserverModeUpdated();
-  public void ObserverTargetUpdated();
+    public ref CHandle<CBaseEntity> ObserverTarget { get; }
+
+    public ref ObserverMode_t ObserverLastMode { get; }
+
+    public ref bool ForcedObserverMode { get; }
+
+    public void ObserverModeUpdated();
+    public void ObserverTargetUpdated();
 }

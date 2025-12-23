@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmStateNode__TimedEvent_tImpl : SchemaClass, CNmStateNode__TimedEvent_t {
+internal partial class CNmStateNode__TimedEvent_tImpl : SchemaClass, CNmStateNode__TimedEvent_t
+{
+    public CNmStateNode__TimedEvent_tImpl(nint handle) : base(handle) { }
 
-  public CNmStateNode__TimedEvent_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IDOffset;
 
-  private static nint? _IDOffset;
-
-  public ref CGlobalSymbol ID {
-    get {
-      if (_IDOffset == null) {
-        _IDOffset = Schema.GetOffset(0x256373A95066900);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+    public ref CGlobalSymbol ID {
+        get {
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x256373A95066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeValueSecondsOffset;
+    private static nint? _TimeValueSecondsOffset;
 
-  public ref float TimeValueSeconds {
-    get {
-      if (_TimeValueSecondsOffset == null) {
-        _TimeValueSecondsOffset = Schema.GetOffset(0x256373A3B175F1C);
-      }
-      return ref _Handle.AsRef<float>(_TimeValueSecondsOffset!.Value);
+    public ref float TimeValueSeconds {
+        get {
+            _TimeValueSecondsOffset = _TimeValueSecondsOffset ?? Schema.GetOffset(0x256373A3B175F1C);
+            return ref _Handle.AsRef<float>(_TimeValueSecondsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComparisionOperatorOffset;
+    private static nint? _ComparisionOperatorOffset;
 
-  public ref CNmStateNode__TimedEvent_t__Comparison_t ComparisionOperator {
-    get {
-      if (_ComparisionOperatorOffset == null) {
-        _ComparisionOperatorOffset = Schema.GetOffset(0x256373A5C6D84A1);
-      }
-      return ref _Handle.AsRef<CNmStateNode__TimedEvent_t__Comparison_t>(_ComparisionOperatorOffset!.Value);
+    public ref CNmStateNode__TimedEvent_t__Comparison_t ComparisionOperator {
+        get {
+            _ComparisionOperatorOffset = _ComparisionOperatorOffset ?? Schema.GetOffset(0x256373A5C6D84A1);
+            return ref _Handle.AsRef<CNmStateNode__TimedEvent_t__Comparison_t>(_ComparisionOperatorOffset!.Value);
+        }
     }
-  }
 
 
 }

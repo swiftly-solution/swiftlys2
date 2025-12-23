@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicAutosave : CLogicalEntity, ISchemaClass<CLogicAutosave> {
+public partial interface CLogicAutosave : CLogicalEntity, ISchemaClass<CLogicAutosave>
+{
+    static CLogicAutosave ISchemaClass<CLogicAutosave>.From(nint handle) => new CLogicAutosaveImpl(handle);
+    static int ISchemaClass<CLogicAutosave>.Size => 1280;
+    static string? ISchemaClass<CLogicAutosave>.ClassName => "logic_autosave";
 
-  static CLogicAutosave ISchemaClass<CLogicAutosave>.From(nint handle) => new CLogicAutosaveImpl(handle);
-  static int ISchemaClass<CLogicAutosave>.Size => 1280;
-  static string? ISchemaClass<CLogicAutosave>.ClassName => "logic_autosave";
 
-  
-  public ref bool ForceNewLevelUnit { get; }
-  
-  public ref int MinHitPoints { get; }
-  
-  public ref int MinHitPointsToCommit { get; }
+    public ref bool ForceNewLevelUnit { get; }
+
+    public ref int MinHitPoints { get; }
+
+    public ref int MinHitPointsToCommit { get; }
 
 
 }

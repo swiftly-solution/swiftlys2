@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SharedMovementGait_t : byte {
-
+public enum SharedMovementGait_t : byte
+{
  eInvalid = byte.MaxValue,
 
  eSlow = 0,

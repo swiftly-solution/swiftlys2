@@ -8,43 +8,43 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBreakable : CBaseModelEntity, ISchemaClass<CBreakable> {
+public partial interface CBreakable : CBaseModelEntity, ISchemaClass<CBreakable>
+{
+    static CBreakable ISchemaClass<CBreakable>.From(nint handle) => new CBreakableImpl(handle);
+    static int ISchemaClass<CBreakable>.Size => 2224;
+    static string? ISchemaClass<CBreakable>.ClassName => "func_breakable";
 
-  static CBreakable ISchemaClass<CBreakable>.From(nint handle) => new CBreakableImpl(handle);
-  static int ISchemaClass<CBreakable>.Size => 2224;
-  static string? ISchemaClass<CBreakable>.ClassName => "func_breakable";
 
-  
-  public CPropDataComponent CPropDataComponent { get; }
-  
-  public ref Materials Material { get; }
-  
-  public ref CHandle<CBaseEntity> Breaker { get; }
-  
-  public ref Explosions Explosion { get; }
-  
-  public string SpawnObject { get; set; }
-  
-  public ref float PressureDelay { get; }
-  
-  public ref int MinHealthDmg { get; }
-  
-  public string PropData { get; set; }
-  
-  public ref float ImpactEnergyScale { get; }
-  
-  public ref EOverrideBlockLOS_t OverrideBlockLOS { get; }
-  
-  public CEntityIOOutput OnBreak { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OnHealthChanged { get; }
-  
-  public ref PerformanceMode_t PerformanceMode { get; }
-  
-  public ref CHandle<CBasePlayerPawn> PhysicsAttacker { get; }
-  
-  public GameTime_t LastPhysicsInfluenceTime { get; }
+    public CPropDataComponent CPropDataComponent { get; }
 
-  public void CPropDataComponentUpdated();
+    public ref Materials Material { get; }
+
+    public ref CHandle<CBaseEntity> Breaker { get; }
+
+    public ref Explosions Explosion { get; }
+
+    public string SpawnObject { get; set; }
+
+    public ref float PressureDelay { get; }
+
+    public ref int MinHealthDmg { get; }
+
+    public string PropData { get; set; }
+
+    public ref float ImpactEnergyScale { get; }
+
+    public ref EOverrideBlockLOS_t OverrideBlockLOS { get; }
+
+    public ref CEntityIOOutput OnBreak { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OnHealthChanged { get; }
+
+    public ref PerformanceMode_t PerformanceMode { get; }
+
+    public ref CHandle<CBasePlayerPawn> PhysicsAttacker { get; }
+
+    public GameTime_t LastPhysicsInfluenceTime { get; }
+
+    public void CPropDataComponentUpdated();
 }

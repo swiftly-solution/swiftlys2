@@ -6,116 +6,92 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBombTargetImpl : CBaseTriggerImpl, CBombTarget {
+internal partial class CBombTargetImpl : CBaseTriggerImpl, CBombTarget
+{
+    public CBombTargetImpl(nint handle) : base(handle) { }
 
-  public CBombTargetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnBombExplodeOffset;
 
-  private static nint? _OnBombExplodeOffset;
-
-  public CEntityIOOutput OnBombExplode {
-    get {
-      if (_OnBombExplodeOffset == null) {
-        _OnBombExplodeOffset = Schema.GetOffset(0x1FEE3C3748E87715);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnBombExplodeOffset!.Value);
+    public ref CEntityIOOutput OnBombExplode {
+        get {
+            _OnBombExplodeOffset = _OnBombExplodeOffset ?? Schema.GetOffset(0x1FEE3C3748E87715);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombExplodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnBombPlantedOffset;
+    private static nint? _OnBombPlantedOffset;
 
-  public CEntityIOOutput OnBombPlanted {
-    get {
-      if (_OnBombPlantedOffset == null) {
-        _OnBombPlantedOffset = Schema.GetOffset(0x1FEE3C37B3C2496C);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnBombPlantedOffset!.Value);
+    public ref CEntityIOOutput OnBombPlanted {
+        get {
+            _OnBombPlantedOffset = _OnBombPlantedOffset ?? Schema.GetOffset(0x1FEE3C37B3C2496C);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombPlantedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnBombDefusedOffset;
+    private static nint? _OnBombDefusedOffset;
 
-  public CEntityIOOutput OnBombDefused {
-    get {
-      if (_OnBombDefusedOffset == null) {
-        _OnBombDefusedOffset = Schema.GetOffset(0x1FEE3C37BCDAD16E);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnBombDefusedOffset!.Value);
+    public ref CEntityIOOutput OnBombDefused {
+        get {
+            _OnBombDefusedOffset = _OnBombDefusedOffset ?? Schema.GetOffset(0x1FEE3C37BCDAD16E);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBombDefusedOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsBombSiteBOffset;
+    private static nint? _IsBombSiteBOffset;
 
-  public ref bool IsBombSiteB {
-    get {
-      if (_IsBombSiteBOffset == null) {
-        _IsBombSiteBOffset = Schema.GetOffset(0x1FEE3C37A00C3E68);
-      }
-      return ref _Handle.AsRef<bool>(_IsBombSiteBOffset!.Value);
+    public ref bool IsBombSiteB {
+        get {
+            _IsBombSiteBOffset = _IsBombSiteBOffset ?? Schema.GetOffset(0x1FEE3C37A00C3E68);
+            return ref _Handle.AsRef<bool>(_IsBombSiteBOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsHeistBombTargetOffset;
+    private static nint? _IsHeistBombTargetOffset;
 
-  public ref bool IsHeistBombTarget {
-    get {
-      if (_IsHeistBombTargetOffset == null) {
-        _IsHeistBombTargetOffset = Schema.GetOffset(0x1FEE3C374F83FD3F);
-      }
-      return ref _Handle.AsRef<bool>(_IsHeistBombTargetOffset!.Value);
+    public ref bool IsHeistBombTarget {
+        get {
+            _IsHeistBombTargetOffset = _IsHeistBombTargetOffset ?? Schema.GetOffset(0x1FEE3C374F83FD3F);
+            return ref _Handle.AsRef<bool>(_IsHeistBombTargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _BombPlantedHereOffset;
+    private static nint? _BombPlantedHereOffset;
 
-  public ref bool BombPlantedHere {
-    get {
-      if (_BombPlantedHereOffset == null) {
-        _BombPlantedHereOffset = Schema.GetOffset(0x1FEE3C37E2D52CF9);
-      }
-      return ref _Handle.AsRef<bool>(_BombPlantedHereOffset!.Value);
+    public ref bool BombPlantedHere {
+        get {
+            _BombPlantedHereOffset = _BombPlantedHereOffset ?? Schema.GetOffset(0x1FEE3C37E2D52CF9);
+            return ref _Handle.AsRef<bool>(_BombPlantedHereOffset!.Value);
+        }
     }
-  }
-  private static nint? _MountTargetOffset;
+    private static nint? _MountTargetOffset;
 
-  public string MountTarget {
-    get {
-      if (_MountTargetOffset == null) {
-        _MountTargetOffset = Schema.GetOffset(0x1FEE3C375F784258);
-      }
-      var ptr = _Handle.Read<nint>(_MountTargetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_MountTargetOffset == null) {
-        _MountTargetOffset = Schema.GetOffset(0x1FEE3C375F784258);
-      }
-      Schema.SetString(_Handle, _MountTargetOffset!.Value, value);
-    }
-  } 
-  private static nint? _InstructorHintOffset;
+    public string MountTarget {
+        get {
+            _MountTargetOffset = _MountTargetOffset ?? Schema.GetOffset(0x1FEE3C375F784258);
+            return Schema.GetString(_Handle.Read<nint>(_MountTargetOffset!.Value));
+        }
+        set {
+            _MountTargetOffset = _MountTargetOffset ?? Schema.GetOffset(0x1FEE3C375F784258);
+            Schema.SetString(_Handle, _MountTargetOffset!.Value, value);
+        }
+    } 
+    private static nint? _InstructorHintOffset;
 
-  public ref CHandle<CBaseEntity> InstructorHint {
-    get {
-      if (_InstructorHintOffset == null) {
-        _InstructorHintOffset = Schema.GetOffset(0x1FEE3C37D6C2F245);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_InstructorHintOffset!.Value);
+    public ref CHandle<CBaseEntity> InstructorHint {
+        get {
+            _InstructorHintOffset = _InstructorHintOffset ?? Schema.GetOffset(0x1FEE3C37D6C2F245);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_InstructorHintOffset!.Value);
+        }
     }
-  }
-  private static nint? _BombSiteDesignationOffset;
+    private static nint? _BombSiteDesignationOffset;
 
-  public ref int BombSiteDesignation {
-    get {
-      if (_BombSiteDesignationOffset == null) {
-        _BombSiteDesignationOffset = Schema.GetOffset(0x1FEE3C376B71EF25);
-      }
-      return ref _Handle.AsRef<int>(_BombSiteDesignationOffset!.Value);
+    public ref int BombSiteDesignation {
+        get {
+            _BombSiteDesignationOffset = _BombSiteDesignationOffset ?? Schema.GetOffset(0x1FEE3C376B71EF25);
+            return ref _Handle.AsRef<int>(_BombSiteDesignationOffset!.Value);
+        }
     }
-  }
 
-  public void BombPlantedHereUpdated() {
-    Schema.Update(_Handle, 0x1FEE3C37E2D52CF9);
-  }
+    public void BombPlantedHereUpdated() => Schema.Update(_Handle, 0x1FEE3C37E2D52CF9);
 }

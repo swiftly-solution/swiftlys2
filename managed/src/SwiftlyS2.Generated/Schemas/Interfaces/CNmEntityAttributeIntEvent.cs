@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmEntityAttributeIntEvent : CNmEntityAttributeEventBase, ISchemaClass<CNmEntityAttributeIntEvent> {
+public partial interface CNmEntityAttributeIntEvent : CNmEntityAttributeEventBase, ISchemaClass<CNmEntityAttributeIntEvent>
+{
+    static CNmEntityAttributeIntEvent ISchemaClass<CNmEntityAttributeIntEvent>.From(nint handle) => new CNmEntityAttributeIntEventImpl(handle);
+    static int ISchemaClass<CNmEntityAttributeIntEvent>.Size => 64;
+    static string? ISchemaClass<CNmEntityAttributeIntEvent>.ClassName => null;
 
-  static CNmEntityAttributeIntEvent ISchemaClass<CNmEntityAttributeIntEvent>.From(nint handle) => new CNmEntityAttributeIntEventImpl(handle);
-  static int ISchemaClass<CNmEntityAttributeIntEvent>.Size => 64;
-  static string? ISchemaClass<CNmEntityAttributeIntEvent>.ClassName => null;
 
-  
-  public ref int IntValue { get; }
+    public ref int IntValue { get; }
 
 
 }

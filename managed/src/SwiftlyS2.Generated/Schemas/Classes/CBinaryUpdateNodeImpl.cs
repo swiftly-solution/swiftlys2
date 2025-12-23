@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBinaryUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CBinaryUpdateNode {
+internal partial class CBinaryUpdateNodeImpl : CAnimUpdateNodeBaseImpl, CBinaryUpdateNode
+{
+    public CBinaryUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CBinaryUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _Child1Offset;
 
-  private static nint? _Child1Offset;
-
-  public CAnimUpdateNodeRef Child1 {
-    get {
-      if (_Child1Offset == null) {
-        _Child1Offset = Schema.GetOffset(0xA1CFA91E9E0C6B0A);
-      }
-      return new CAnimUpdateNodeRefImpl(_Handle + _Child1Offset!.Value);
+    public CAnimUpdateNodeRef Child1 {
+        get {
+            _Child1Offset = _Child1Offset ?? Schema.GetOffset(0xA1CFA91E9E0C6B0A);
+            return new CAnimUpdateNodeRefImpl(_Handle + _Child1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Child2Offset;
+    private static nint? _Child2Offset;
 
-  public CAnimUpdateNodeRef Child2 {
-    get {
-      if (_Child2Offset == null) {
-        _Child2Offset = Schema.GetOffset(0xA1CFA91E9D0C6977);
-      }
-      return new CAnimUpdateNodeRefImpl(_Handle + _Child2Offset!.Value);
+    public CAnimUpdateNodeRef Child2 {
+        get {
+            _Child2Offset = _Child2Offset ?? Schema.GetOffset(0xA1CFA91E9D0C6977);
+            return new CAnimUpdateNodeRefImpl(_Handle + _Child2Offset!.Value);
+        }
     }
-  }
-  private static nint? _TimingBehaviorOffset;
+    private static nint? _TimingBehaviorOffset;
 
-  public ref BinaryNodeTiming TimingBehavior {
-    get {
-      if (_TimingBehaviorOffset == null) {
-        _TimingBehaviorOffset = Schema.GetOffset(0xA1CFA91EF9A9BA01);
-      }
-      return ref _Handle.AsRef<BinaryNodeTiming>(_TimingBehaviorOffset!.Value);
+    public ref BinaryNodeTiming TimingBehavior {
+        get {
+            _TimingBehaviorOffset = _TimingBehaviorOffset ?? Schema.GetOffset(0xA1CFA91EF9A9BA01);
+            return ref _Handle.AsRef<BinaryNodeTiming>(_TimingBehaviorOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimingBlendOffset;
+    private static nint? _TimingBlendOffset;
 
-  public ref float TimingBlend {
-    get {
-      if (_TimingBlendOffset == null) {
-        _TimingBlendOffset = Schema.GetOffset(0xA1CFA91E884E1874);
-      }
-      return ref _Handle.AsRef<float>(_TimingBlendOffset!.Value);
+    public ref float TimingBlend {
+        get {
+            _TimingBlendOffset = _TimingBlendOffset ?? Schema.GetOffset(0xA1CFA91E884E1874);
+            return ref _Handle.AsRef<float>(_TimingBlendOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResetChild1Offset;
+    private static nint? _ResetChild1Offset;
 
-  public ref bool ResetChild1 {
-    get {
-      if (_ResetChild1Offset == null) {
-        _ResetChild1Offset = Schema.GetOffset(0xA1CFA91EC7FAEC85);
-      }
-      return ref _Handle.AsRef<bool>(_ResetChild1Offset!.Value);
+    public ref bool ResetChild1 {
+        get {
+            _ResetChild1Offset = _ResetChild1Offset ?? Schema.GetOffset(0xA1CFA91EC7FAEC85);
+            return ref _Handle.AsRef<bool>(_ResetChild1Offset!.Value);
+        }
     }
-  }
-  private static nint? _ResetChild2Offset;
+    private static nint? _ResetChild2Offset;
 
-  public ref bool ResetChild2 {
-    get {
-      if (_ResetChild2Offset == null) {
-        _ResetChild2Offset = Schema.GetOffset(0xA1CFA91EC4FAE7CC);
-      }
-      return ref _Handle.AsRef<bool>(_ResetChild2Offset!.Value);
+    public ref bool ResetChild2 {
+        get {
+            _ResetChild2Offset = _ResetChild2Offset ?? Schema.GetOffset(0xA1CFA91EC4FAE7CC);
+            return ref _Handle.AsRef<bool>(_ResetChild2Offset!.Value);
+        }
     }
-  }
 
 
 }

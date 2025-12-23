@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseDocNodeID_t : ISchemaClass<PulseDocNodeID_t> {
+public partial interface PulseDocNodeID_t : ISchemaClass<PulseDocNodeID_t>
+{
+    static PulseDocNodeID_t ISchemaClass<PulseDocNodeID_t>.From(nint handle) => new PulseDocNodeID_tImpl(handle);
+    static int ISchemaClass<PulseDocNodeID_t>.Size => 4;
+    static string? ISchemaClass<PulseDocNodeID_t>.ClassName => null;
 
-  static PulseDocNodeID_t ISchemaClass<PulseDocNodeID_t>.From(nint handle) => new PulseDocNodeID_tImpl(handle);
-  static int ISchemaClass<PulseDocNodeID_t>.Size => 4;
-  static string? ISchemaClass<PulseDocNodeID_t>.ClassName => null;
 
-  
-  public ref int Value { get; }
+    public ref int Value { get; }
 
 
 }

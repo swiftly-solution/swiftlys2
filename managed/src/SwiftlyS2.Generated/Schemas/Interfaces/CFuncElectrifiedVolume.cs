@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncElectrifiedVolume : CFuncBrush, ISchemaClass<CFuncElectrifiedVolume> {
+public partial interface CFuncElectrifiedVolume : CFuncBrush, ISchemaClass<CFuncElectrifiedVolume>
+{
+    static CFuncElectrifiedVolume ISchemaClass<CFuncElectrifiedVolume>.From(nint handle) => new CFuncElectrifiedVolumeImpl(handle);
+    static int ISchemaClass<CFuncElectrifiedVolume>.Size => 2096;
+    static string? ISchemaClass<CFuncElectrifiedVolume>.ClassName => "func_electrified_volume";
 
-  static CFuncElectrifiedVolume ISchemaClass<CFuncElectrifiedVolume>.From(nint handle) => new CFuncElectrifiedVolumeImpl(handle);
-  static int ISchemaClass<CFuncElectrifiedVolume>.Size => 2096;
-  static string? ISchemaClass<CFuncElectrifiedVolume>.ClassName => "func_electrified_volume";
 
-  
-  public string EffectName { get; set; }
-  
-  public string EffectInterpenetrateName { get; set; }
-  
-  public string EffectZapName { get; set; }
-  
-  public string EffectSource { get; set; }
+    public string EffectName { get; set; }
 
-  public void EffectNameUpdated();
+    public string EffectInterpenetrateName { get; set; }
+
+    public string EffectZapName { get; set; }
+
+    public string EffectSource { get; set; }
+
+    public void EffectNameUpdated();
 }

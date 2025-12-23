@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootStepTriggerUpdateNode : CUnaryUpdateNode, ISchemaClass<CFootStepTriggerUpdateNode> {
+public partial interface CFootStepTriggerUpdateNode : CUnaryUpdateNode, ISchemaClass<CFootStepTriggerUpdateNode>
+{
+    static CFootStepTriggerUpdateNode ISchemaClass<CFootStepTriggerUpdateNode>.From(nint handle) => new CFootStepTriggerUpdateNodeImpl(handle);
+    static int ISchemaClass<CFootStepTriggerUpdateNode>.Size => 144;
+    static string? ISchemaClass<CFootStepTriggerUpdateNode>.ClassName => null;
 
-  static CFootStepTriggerUpdateNode ISchemaClass<CFootStepTriggerUpdateNode>.From(nint handle) => new CFootStepTriggerUpdateNodeImpl(handle);
-  static int ISchemaClass<CFootStepTriggerUpdateNode>.Size => 144;
-  static string? ISchemaClass<CFootStepTriggerUpdateNode>.ClassName => null;
 
-  
-  public ref CUtlVector<FootStepTrigger> Triggers { get; }
-  
-  public ref float Tolerance { get; }
+    public ref CUtlVector<FootStepTrigger> Triggers { get; }
+
+    public ref float Tolerance { get; }
 
 
 }

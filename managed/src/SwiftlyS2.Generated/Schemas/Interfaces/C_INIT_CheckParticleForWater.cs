@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_CheckParticleForWater : CParticleFunctionInitializer, ISchemaClass<C_INIT_CheckParticleForWater> {
+public partial interface C_INIT_CheckParticleForWater : CParticleFunctionInitializer, ISchemaClass<C_INIT_CheckParticleForWater>
+{
+    static C_INIT_CheckParticleForWater ISchemaClass<C_INIT_CheckParticleForWater>.From(nint handle) => new C_INIT_CheckParticleForWaterImpl(handle);
+    static int ISchemaClass<C_INIT_CheckParticleForWater>.Size => 1224;
+    static string? ISchemaClass<C_INIT_CheckParticleForWater>.ClassName => null;
 
-  static C_INIT_CheckParticleForWater ISchemaClass<C_INIT_CheckParticleForWater>.From(nint handle) => new C_INIT_CheckParticleForWaterImpl(handle);
-  static int ISchemaClass<C_INIT_CheckParticleForWater>.Size => 1224;
-  static string? ISchemaClass<C_INIT_CheckParticleForWater>.ClassName => null;
 
-  
-  public CPerParticleFloatInput Radius { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CParticleRemapFloatInput OutputRemap { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
+    public CPerParticleFloatInput Radius { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CParticleRemapFloatInput OutputRemap { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
 
 
 }

@@ -8,33 +8,33 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRR_Response : ISchemaClass<CRR_Response> {
+public partial interface CRR_Response : ISchemaClass<CRR_Response>
+{
+    static CRR_Response ISchemaClass<CRR_Response>.From(nint handle) => new CRR_ResponseImpl(handle);
+    static int ISchemaClass<CRR_Response>.Size => 464;
+    static string? ISchemaClass<CRR_Response>.ClassName => null;
 
-  static CRR_Response ISchemaClass<CRR_Response>.From(nint handle) => new CRR_ResponseImpl(handle);
-  static int ISchemaClass<CRR_Response>.Size => 464;
-  static string? ISchemaClass<CRR_Response>.ClassName => null;
 
-  
-  public ref byte Type { get; }
-  
-  public string ResponseName { get; set; }
-  
-  public string MatchingRule { get; set; }
-  
-  public ResponseParams Params { get; }
-  
-  public ref float MatchScore { get; }
-  
-  public ref bool AnyMatchingRulesInCooldown { get; }
-  
-  public string SpeakerContext { get; set; }
-  
-  public string WorldContext { get; set; }
-  
-  public ResponseFollowup Followup { get; }
-  
-  // CUtlSymbol
-  public SchemaUntypedField RecipientFilter { get; }
+    public ref byte Type { get; }
+
+    public string ResponseName { get; set; }
+
+    public string MatchingRule { get; set; }
+
+    public ResponseParams Params { get; }
+
+    public ref float MatchScore { get; }
+
+    public ref bool AnyMatchingRulesInCooldown { get; }
+
+    public string SpeakerContext { get; set; }
+
+    public string WorldContext { get; set; }
+
+    public ResponseFollowup Followup { get; }
+
+    // CUtlSymbol
+    public SchemaUntypedField RecipientFilter { get; }
 
 
 }

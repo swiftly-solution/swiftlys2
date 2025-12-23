@@ -8,29 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDirectionalBlendUpdateNode : CLeafUpdateNode, ISchemaClass<CDirectionalBlendUpdateNode> {
+public partial interface CDirectionalBlendUpdateNode : CLeafUpdateNode, ISchemaClass<CDirectionalBlendUpdateNode>
+{
+    static CDirectionalBlendUpdateNode ISchemaClass<CDirectionalBlendUpdateNode>.From(nint handle) => new CDirectionalBlendUpdateNodeImpl(handle);
+    static int ISchemaClass<CDirectionalBlendUpdateNode>.Size => 176;
+    static string? ISchemaClass<CDirectionalBlendUpdateNode>.ClassName => null;
 
-  static CDirectionalBlendUpdateNode ISchemaClass<CDirectionalBlendUpdateNode>.From(nint handle) => new CDirectionalBlendUpdateNodeImpl(handle);
-  static int ISchemaClass<CDirectionalBlendUpdateNode>.Size => 176;
-  static string? ISchemaClass<CDirectionalBlendUpdateNode>.ClassName => null;
 
-  
-  // HSequence
-  public SchemaUntypedField Sequences { get; }
-  
-  public CAnimInputDamping Damping { get; }
-  
-  public ref AnimValueSource BlendValueSource { get; }
-  
-  public CAnimParamHandle ParamIndex { get; }
-  
-  public ref float PlaybackSpeed { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref bool Loop { get; }
-  
-  public ref bool LockBlendOnReset { get; }
+    public ISchemaClassFixedArray<HSequence> Sequences { get; }
+
+    public CAnimInputDamping Damping { get; }
+
+    public ref AnimValueSource BlendValueSource { get; }
+
+    public CAnimParamHandle ParamIndex { get; }
+
+    public ref float PlaybackSpeed { get; }
+
+    public ref float Duration { get; }
+
+    public ref bool Loop { get; }
+
+    public ref bool LockBlendOnReset { get; }
 
 
 }

@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSAdditionalMatchStats_t : CSAdditionalPerRoundStats_t, ISchemaClass<CSAdditionalMatchStats_t> {
+public partial interface CSAdditionalMatchStats_t : CSAdditionalPerRoundStats_t, ISchemaClass<CSAdditionalMatchStats_t>
+{
+    static CSAdditionalMatchStats_t ISchemaClass<CSAdditionalMatchStats_t>.From(nint handle) => new CSAdditionalMatchStats_tImpl(handle);
+    static int ISchemaClass<CSAdditionalMatchStats_t>.Size => 72;
+    static string? ISchemaClass<CSAdditionalMatchStats_t>.ClassName => null;
 
-  static CSAdditionalMatchStats_t ISchemaClass<CSAdditionalMatchStats_t>.From(nint handle) => new CSAdditionalMatchStats_tImpl(handle);
-  static int ISchemaClass<CSAdditionalMatchStats_t>.Size => 72;
-  static string? ISchemaClass<CSAdditionalMatchStats_t>.ClassName => null;
 
-  
-  public ref int NumRoundsSurvived { get; }
-  
-  public ref int MaxNumRoundsSurvived { get; }
-  
-  public ref int NumRoundsSurvivedTotal { get; }
-  
-  public ref int RoundsWonWithoutPurchase { get; }
-  
-  public ref int RoundsWonWithoutPurchaseTotal { get; }
-  
-  public ref int NumFirstKills { get; }
-  
-  public ref int NumClutchKills { get; }
-  
-  public ref int NumPistolKills { get; }
-  
-  public ref int NumSniperKills { get; }
-  
-  public ref int NumSuicides { get; }
-  
-  public ref int NumTeamKills { get; }
-  
-  public ref float TeamDamage { get; }
+    public ref int NumRoundsSurvived { get; }
+
+    public ref int MaxNumRoundsSurvived { get; }
+
+    public ref int NumRoundsSurvivedTotal { get; }
+
+    public ref int RoundsWonWithoutPurchase { get; }
+
+    public ref int RoundsWonWithoutPurchaseTotal { get; }
+
+    public ref int NumFirstKills { get; }
+
+    public ref int NumClutchKills { get; }
+
+    public ref int NumPistolKills { get; }
+
+    public ref int NumSniperKills { get; }
+
+    public ref int NumSuicides { get; }
+
+    public ref int NumTeamKills { get; }
+
+    public ref float TeamDamage { get; }
 
 
 }

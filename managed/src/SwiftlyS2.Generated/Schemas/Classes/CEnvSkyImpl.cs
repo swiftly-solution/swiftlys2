@@ -6,172 +6,123 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvSkyImpl : CBaseModelEntityImpl, CEnvSky {
+internal partial class CEnvSkyImpl : CBaseModelEntityImpl, CEnvSky
+{
+    public CEnvSkyImpl(nint handle) : base(handle) { }
 
-  public CEnvSkyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SkyMaterialOffset;
 
-  private static nint? _SkyMaterialOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterial {
-    get {
-      if (_SkyMaterialOffset == null) {
-        _SkyMaterialOffset = Schema.GetOffset(0x34E51BE6C887319D);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterial {
+        get {
+            _SkyMaterialOffset = _SkyMaterialOffset ?? Schema.GetOffset(0x34E51BE6C887319D);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkyMaterialLightingOnlyOffset;
+    private static nint? _SkyMaterialLightingOnlyOffset;
 
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterialLightingOnly {
-    get {
-      if (_SkyMaterialLightingOnlyOffset == null) {
-        _SkyMaterialLightingOnlyOffset = Schema.GetOffset(0x34E51BE6E01C512B);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialLightingOnlyOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> SkyMaterialLightingOnly {
+        get {
+            _SkyMaterialLightingOnlyOffset = _SkyMaterialLightingOnlyOffset ?? Schema.GetOffset(0x34E51BE6E01C512B);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_SkyMaterialLightingOnlyOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartDisabledOffset;
+    private static nint? _StartDisabledOffset;
 
-  public ref bool StartDisabled {
-    get {
-      if (_StartDisabledOffset == null) {
-        _StartDisabledOffset = Schema.GetOffset(0x34E51BE661ED0C4F);
-      }
-      return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+    public ref bool StartDisabled {
+        get {
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0x34E51BE661ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _TintColorOffset;
+    private static nint? _TintColorOffset;
 
-  public ref Color TintColor {
-    get {
-      if (_TintColorOffset == null) {
-        _TintColorOffset = Schema.GetOffset(0x34E51BE650AFF21F);
-      }
-      return ref _Handle.AsRef<Color>(_TintColorOffset!.Value);
+    public ref Color TintColor {
+        get {
+            _TintColorOffset = _TintColorOffset ?? Schema.GetOffset(0x34E51BE650AFF21F);
+            return ref _Handle.AsRef<Color>(_TintColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _TintColorLightingOnlyOffset;
+    private static nint? _TintColorLightingOnlyOffset;
 
-  public ref Color TintColorLightingOnly {
-    get {
-      if (_TintColorLightingOnlyOffset == null) {
-        _TintColorLightingOnlyOffset = Schema.GetOffset(0x34E51BE6D8D1D8C9);
-      }
-      return ref _Handle.AsRef<Color>(_TintColorLightingOnlyOffset!.Value);
+    public ref Color TintColorLightingOnly {
+        get {
+            _TintColorLightingOnlyOffset = _TintColorLightingOnlyOffset ?? Schema.GetOffset(0x34E51BE6D8D1D8C9);
+            return ref _Handle.AsRef<Color>(_TintColorLightingOnlyOffset!.Value);
+        }
     }
-  }
-  private static nint? _BrightnessScaleOffset;
+    private static nint? _BrightnessScaleOffset;
 
-  public ref float BrightnessScale {
-    get {
-      if (_BrightnessScaleOffset == null) {
-        _BrightnessScaleOffset = Schema.GetOffset(0x34E51BE65EFC3AAE);
-      }
-      return ref _Handle.AsRef<float>(_BrightnessScaleOffset!.Value);
+    public ref float BrightnessScale {
+        get {
+            _BrightnessScaleOffset = _BrightnessScaleOffset ?? Schema.GetOffset(0x34E51BE65EFC3AAE);
+            return ref _Handle.AsRef<float>(_BrightnessScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogTypeOffset;
+    private static nint? _FogTypeOffset;
 
-  public ref int FogType {
-    get {
-      if (_FogTypeOffset == null) {
-        _FogTypeOffset = Schema.GetOffset(0x34E51BE6381735D3);
-      }
-      return ref _Handle.AsRef<int>(_FogTypeOffset!.Value);
+    public ref int FogType {
+        get {
+            _FogTypeOffset = _FogTypeOffset ?? Schema.GetOffset(0x34E51BE6381735D3);
+            return ref _Handle.AsRef<int>(_FogTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogMinStartOffset;
+    private static nint? _FogMinStartOffset;
 
-  public ref float FogMinStart {
-    get {
-      if (_FogMinStartOffset == null) {
-        _FogMinStartOffset = Schema.GetOffset(0x34E51BE62D8BACA9);
-      }
-      return ref _Handle.AsRef<float>(_FogMinStartOffset!.Value);
+    public ref float FogMinStart {
+        get {
+            _FogMinStartOffset = _FogMinStartOffset ?? Schema.GetOffset(0x34E51BE62D8BACA9);
+            return ref _Handle.AsRef<float>(_FogMinStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogMinEndOffset;
+    private static nint? _FogMinEndOffset;
 
-  public ref float FogMinEnd {
-    get {
-      if (_FogMinEndOffset == null) {
-        _FogMinEndOffset = Schema.GetOffset(0x34E51BE69BF661F8);
-      }
-      return ref _Handle.AsRef<float>(_FogMinEndOffset!.Value);
+    public ref float FogMinEnd {
+        get {
+            _FogMinEndOffset = _FogMinEndOffset ?? Schema.GetOffset(0x34E51BE69BF661F8);
+            return ref _Handle.AsRef<float>(_FogMinEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogMaxStartOffset;
+    private static nint? _FogMaxStartOffset;
 
-  public ref float FogMaxStart {
-    get {
-      if (_FogMaxStartOffset == null) {
-        _FogMaxStartOffset = Schema.GetOffset(0x34E51BE6DACCD72F);
-      }
-      return ref _Handle.AsRef<float>(_FogMaxStartOffset!.Value);
+    public ref float FogMaxStart {
+        get {
+            _FogMaxStartOffset = _FogMaxStartOffset ?? Schema.GetOffset(0x34E51BE6DACCD72F);
+            return ref _Handle.AsRef<float>(_FogMaxStartOffset!.Value);
+        }
     }
-  }
-  private static nint? _FogMaxEndOffset;
+    private static nint? _FogMaxEndOffset;
 
-  public ref float FogMaxEnd {
-    get {
-      if (_FogMaxEndOffset == null) {
-        _FogMaxEndOffset = Schema.GetOffset(0x34E51BE61D0E34BA);
-      }
-      return ref _Handle.AsRef<float>(_FogMaxEndOffset!.Value);
+    public ref float FogMaxEnd {
+        get {
+            _FogMaxEndOffset = _FogMaxEndOffset ?? Schema.GetOffset(0x34E51BE61D0E34BA);
+            return ref _Handle.AsRef<float>(_FogMaxEndOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnabledOffset;
+    private static nint? _EnabledOffset;
 
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0x34E51BE66154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0x34E51BE66154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
     }
-  }
 
-  public void SkyMaterialUpdated() {
-    Schema.Update(_Handle, 0x34E51BE6C887319D);
-  }
-  public void SkyMaterialLightingOnlyUpdated() {
-    Schema.Update(_Handle, 0x34E51BE6E01C512B);
-  }
-  public void StartDisabledUpdated() {
-    Schema.Update(_Handle, 0x34E51BE661ED0C4F);
-  }
-  public void TintColorUpdated() {
-    Schema.Update(_Handle, 0x34E51BE650AFF21F);
-  }
-  public void TintColorLightingOnlyUpdated() {
-    Schema.Update(_Handle, 0x34E51BE6D8D1D8C9);
-  }
-  public void BrightnessScaleUpdated() {
-    Schema.Update(_Handle, 0x34E51BE65EFC3AAE);
-  }
-  public void FogTypeUpdated() {
-    Schema.Update(_Handle, 0x34E51BE6381735D3);
-  }
-  public void FogMinStartUpdated() {
-    Schema.Update(_Handle, 0x34E51BE62D8BACA9);
-  }
-  public void FogMinEndUpdated() {
-    Schema.Update(_Handle, 0x34E51BE69BF661F8);
-  }
-  public void FogMaxStartUpdated() {
-    Schema.Update(_Handle, 0x34E51BE6DACCD72F);
-  }
-  public void FogMaxEndUpdated() {
-    Schema.Update(_Handle, 0x34E51BE61D0E34BA);
-  }
-  public void EnabledUpdated() {
-    Schema.Update(_Handle, 0x34E51BE66154EB7E);
-  }
+    public void SkyMaterialUpdated() => Schema.Update(_Handle, 0x34E51BE6C887319D);
+    public void SkyMaterialLightingOnlyUpdated() => Schema.Update(_Handle, 0x34E51BE6E01C512B);
+    public void StartDisabledUpdated() => Schema.Update(_Handle, 0x34E51BE661ED0C4F);
+    public void TintColorUpdated() => Schema.Update(_Handle, 0x34E51BE650AFF21F);
+    public void TintColorLightingOnlyUpdated() => Schema.Update(_Handle, 0x34E51BE6D8D1D8C9);
+    public void BrightnessScaleUpdated() => Schema.Update(_Handle, 0x34E51BE65EFC3AAE);
+    public void FogTypeUpdated() => Schema.Update(_Handle, 0x34E51BE6381735D3);
+    public void FogMinStartUpdated() => Schema.Update(_Handle, 0x34E51BE62D8BACA9);
+    public void FogMinEndUpdated() => Schema.Update(_Handle, 0x34E51BE69BF661F8);
+    public void FogMaxStartUpdated() => Schema.Update(_Handle, 0x34E51BE6DACCD72F);
+    public void FogMaxEndUpdated() => Schema.Update(_Handle, 0x34E51BE61D0E34BA);
+    public void EnabledUpdated() => Schema.Update(_Handle, 0x34E51BE66154EB7E);
 }

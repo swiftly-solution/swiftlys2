@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_AddVectorToVectorImpl : CParticleFunctionInitializerImpl, C_INIT_AddVectorToVector {
+internal partial class C_INIT_AddVectorToVectorImpl : CParticleFunctionInitializerImpl, C_INIT_AddVectorToVector
+{
+    public C_INIT_AddVectorToVectorImpl(nint handle) : base(handle) { }
 
-  public C_INIT_AddVectorToVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScaleOffset;
 
-  private static nint? _ScaleOffset;
-
-  public ref Vector Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0xFBD8AC005F596B51);
-      }
-      return ref _Handle.AsRef<Vector>(_ScaleOffset!.Value);
+    public ref Vector Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xFBD8AC005F596B51);
+            return ref _Handle.AsRef<Vector>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0xFBD8AC00E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xFBD8AC00E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldInputOffset;
+    private static nint? _FieldInputOffset;
 
-  public ParticleAttributeIndex_t FieldInput {
-    get {
-      if (_FieldInputOffset == null) {
-        _FieldInputOffset = Schema.GetOffset(0xFBD8AC00AE775669);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+    public ParticleAttributeIndex_t FieldInput {
+        get {
+            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0xFBD8AC00AE775669);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetMinOffset;
+    private static nint? _OffsetMinOffset;
 
-  public ref Vector OffsetMin {
-    get {
-      if (_OffsetMinOffset == null) {
-        _OffsetMinOffset = Schema.GetOffset(0xFBD8AC00ABED1082);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetMinOffset!.Value);
+    public ref Vector OffsetMin {
+        get {
+            _OffsetMinOffset = _OffsetMinOffset ?? Schema.GetOffset(0xFBD8AC00ABED1082);
+            return ref _Handle.AsRef<Vector>(_OffsetMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _OffsetMaxOffset;
+    private static nint? _OffsetMaxOffset;
 
-  public ref Vector OffsetMax {
-    get {
-      if (_OffsetMaxOffset == null) {
-        _OffsetMaxOffset = Schema.GetOffset(0xFBD8AC0095D96628);
-      }
-      return ref _Handle.AsRef<Vector>(_OffsetMaxOffset!.Value);
+    public ref Vector OffsetMax {
+        get {
+            _OffsetMaxOffset = _OffsetMaxOffset ?? Schema.GetOffset(0xFBD8AC0095D96628);
+            return ref _Handle.AsRef<Vector>(_OffsetMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _RandomnessParametersOffset;
+    private static nint? _RandomnessParametersOffset;
 
-  public CRandomNumberGeneratorParameters RandomnessParameters {
-    get {
-      if (_RandomnessParametersOffset == null) {
-        _RandomnessParametersOffset = Schema.GetOffset(0xFBD8AC007EDF50AD);
-      }
-      return new CRandomNumberGeneratorParametersImpl(_Handle + _RandomnessParametersOffset!.Value);
+    public CRandomNumberGeneratorParameters RandomnessParameters {
+        get {
+            _RandomnessParametersOffset = _RandomnessParametersOffset ?? Schema.GetOffset(0xFBD8AC007EDF50AD);
+            return new CRandomNumberGeneratorParametersImpl(_Handle + _RandomnessParametersOffset!.Value);
+        }
     }
-  }
 
 
 }

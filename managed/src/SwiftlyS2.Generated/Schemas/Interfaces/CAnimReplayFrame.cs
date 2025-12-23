@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimReplayFrame : ISchemaClass<CAnimReplayFrame> {
+public partial interface CAnimReplayFrame : ISchemaClass<CAnimReplayFrame>
+{
+    static CAnimReplayFrame ISchemaClass<CAnimReplayFrame>.From(nint handle) => new CAnimReplayFrameImpl(handle);
+    static int ISchemaClass<CAnimReplayFrame>.Size => 144;
+    static string? ISchemaClass<CAnimReplayFrame>.ClassName => null;
 
-  static CAnimReplayFrame ISchemaClass<CAnimReplayFrame>.From(nint handle) => new CAnimReplayFrameImpl(handle);
-  static int ISchemaClass<CAnimReplayFrame>.Size => 144;
-  static string? ISchemaClass<CAnimReplayFrame>.ClassName => null;
 
-  
-  public ref CUtlVector<CUtlBinaryBlock> InputDataBlocks { get; }
-  
-  public ref CUtlBinaryBlock InstanceData { get; }
-  
-  public ref CTransform StartingLocalToWorldTransform { get; }
-  
-  public ref CTransform LocalToWorldTransform { get; }
-  
-  public ref float TimeStamp { get; }
+    public ref CUtlVector<CUtlBinaryBlock> InputDataBlocks { get; }
+
+    public ref CUtlBinaryBlock InstanceData { get; }
+
+    public ref CTransform StartingLocalToWorldTransform { get; }
+
+    public ref CTransform LocalToWorldTransform { get; }
+
+    public ref float TimeStamp { get; }
 
 
 }

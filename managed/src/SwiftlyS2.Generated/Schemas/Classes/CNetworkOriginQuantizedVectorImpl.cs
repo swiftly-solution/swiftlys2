@@ -6,55 +6,42 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNetworkOriginQuantizedVectorImpl : SchemaClass, CNetworkOriginQuantizedVector {
+internal partial class CNetworkOriginQuantizedVectorImpl : SchemaClass, CNetworkOriginQuantizedVector
+{
+    public CNetworkOriginQuantizedVectorImpl(nint handle) : base(handle) { }
 
-  public CNetworkOriginQuantizedVectorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _XOffset;
 
-  private static nint? _XOffset;
-
-  public ref CNetworkedQuantizedFloat X {
-    get {
-      if (_XOffset == null) {
-        _XOffset = Schema.GetOffset(0xB34626888FEB7867);
-      }
-      return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_XOffset!.Value);
+    public ref CNetworkedQuantizedFloat X {
+        get {
+            _XOffset = _XOffset ?? Schema.GetOffset(0xB34626888FEB7867);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_XOffset!.Value);
+        }
     }
-  }
-  private static nint? _YOffset;
+    private static nint? _YOffset;
 
-  public ref CNetworkedQuantizedFloat Y {
-    get {
-      if (_YOffset == null) {
-        _YOffset = Schema.GetOffset(0xB34626888EEB76D4);
-      }
-      return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_YOffset!.Value);
+    public ref CNetworkedQuantizedFloat Y {
+        get {
+            _YOffset = _YOffset ?? Schema.GetOffset(0xB34626888EEB76D4);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_YOffset!.Value);
+        }
     }
-  }
-  private static nint? _ZOffset;
+    private static nint? _ZOffset;
 
-  public ref CNetworkedQuantizedFloat Z {
-    get {
-      if (_ZOffset == null) {
-        _ZOffset = Schema.GetOffset(0xB346268891EB7B8D);
-      }
-      return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_ZOffset!.Value);
+    public ref CNetworkedQuantizedFloat Z {
+        get {
+            _ZOffset = _ZOffset ?? Schema.GetOffset(0xB346268891EB7B8D);
+            return ref _Handle.AsRef<CNetworkedQuantizedFloat>(_ZOffset!.Value);
+        }
     }
-  }
 
-  public void XUpdated() {
-    Schema.Update(_Handle, 0xB34626888FEB7867);
-  }
-  public void YUpdated() {
-    Schema.Update(_Handle, 0xB34626888EEB76D4);
-  }
-  public void ZUpdated() {
-    Schema.Update(_Handle, 0xB346268891EB7B8D);
-  }
+    public void XUpdated() => Schema.Update(_Handle, 0xB34626888FEB7867);
+    public void YUpdated() => Schema.Update(_Handle, 0xB34626888EEB76D4);
+    public void ZUpdated() => Schema.Update(_Handle, 0xB346268891EB7B8D);
 }

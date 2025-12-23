@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnShapeDesc_t : ISchemaClass<RnShapeDesc_t> {
+public partial interface RnShapeDesc_t : ISchemaClass<RnShapeDesc_t>
+{
+    static RnShapeDesc_t ISchemaClass<RnShapeDesc_t>.From(nint handle) => new RnShapeDesc_tImpl(handle);
+    static int ISchemaClass<RnShapeDesc_t>.Size => 24;
+    static string? ISchemaClass<RnShapeDesc_t>.ClassName => null;
 
-  static RnShapeDesc_t ISchemaClass<RnShapeDesc_t>.From(nint handle) => new RnShapeDesc_tImpl(handle);
-  static int ISchemaClass<RnShapeDesc_t>.Size => 24;
-  static string? ISchemaClass<RnShapeDesc_t>.ClassName => null;
 
-  
-  public ref uint CollisionAttributeIndex { get; }
-  
-  public ref uint SurfacePropertyIndex { get; }
-  
-  public string UserFriendlyName { get; set; }
-  
-  public ref bool UserFriendlyNameSealed { get; }
-  
-  public ref bool UserFriendlyNameLong { get; }
-  
-  public ref uint ToolMaterialHash { get; }
+    public ref uint CollisionAttributeIndex { get; }
+
+    public ref uint SurfacePropertyIndex { get; }
+
+    public string UserFriendlyName { get; set; }
+
+    public ref bool UserFriendlyNameSealed { get; }
+
+    public ref bool UserFriendlyNameLong { get; }
+
+    public ref uint ToolMaterialHash { get; }
 
 
 }

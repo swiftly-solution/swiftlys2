@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ConstrainDistanceToUserSpecifiedPath : CParticleFunctionConstraint, ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath> {
+public partial interface C_OP_ConstrainDistanceToUserSpecifiedPath : CParticleFunctionConstraint, ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>
+{
+    static C_OP_ConstrainDistanceToUserSpecifiedPath ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.From(nint handle) => new C_OP_ConstrainDistanceToUserSpecifiedPathImpl(handle);
+    static int ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.Size => 504;
+    static string? ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.ClassName => null;
 
-  static C_OP_ConstrainDistanceToUserSpecifiedPath ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.From(nint handle) => new C_OP_ConstrainDistanceToUserSpecifiedPathImpl(handle);
-  static int ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.Size => 504;
-  static string? ISchemaClass<C_OP_ConstrainDistanceToUserSpecifiedPath>.ClassName => null;
 
-  
-  public ref float MinDistance { get; }
-  
-  public ref float MaxDistance { get; }
-  
-  public ref float TimeScale { get; }
-  
-  public ref bool LoopedPath { get; }
-  
-  public ref CUtlVector<PointDefinitionWithTimeValues_t> PointList { get; }
+    public ref float MinDistance { get; }
+
+    public ref float MaxDistance { get; }
+
+    public ref float TimeScale { get; }
+
+    public ref bool LoopedPath { get; }
+
+    public ref CUtlVector<PointDefinitionWithTimeValues_t> PointList { get; }
 
 
 }

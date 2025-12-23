@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ConstrainDistanceToPath : CParticleFunctionConstraint, ISchemaClass<C_OP_ConstrainDistanceToPath> {
+public partial interface C_OP_ConstrainDistanceToPath : CParticleFunctionConstraint, ISchemaClass<C_OP_ConstrainDistanceToPath>
+{
+    static C_OP_ConstrainDistanceToPath ISchemaClass<C_OP_ConstrainDistanceToPath>.From(nint handle) => new C_OP_ConstrainDistanceToPathImpl(handle);
+    static int ISchemaClass<C_OP_ConstrainDistanceToPath>.Size => 560;
+    static string? ISchemaClass<C_OP_ConstrainDistanceToPath>.ClassName => null;
 
-  static C_OP_ConstrainDistanceToPath ISchemaClass<C_OP_ConstrainDistanceToPath>.From(nint handle) => new C_OP_ConstrainDistanceToPathImpl(handle);
-  static int ISchemaClass<C_OP_ConstrainDistanceToPath>.Size => 560;
-  static string? ISchemaClass<C_OP_ConstrainDistanceToPath>.ClassName => null;
 
-  
-  public ref float MinDistance { get; }
-  
-  public ref float MaxDistance0 { get; }
-  
-  public ref float MaxDistanceMid { get; }
-  
-  public ref float MaxDistance1 { get; }
-  
-  public CPathParameters PathParameters { get; }
-  
-  public ref float TravelTime { get; }
-  
-  public ParticleAttributeIndex_t FieldScale { get; }
-  
-  public ParticleAttributeIndex_t ManualTField { get; }
+    public ref float MinDistance { get; }
+
+    public ref float MaxDistance0 { get; }
+
+    public ref float MaxDistanceMid { get; }
+
+    public ref float MaxDistance1 { get; }
+
+    public CPathParameters PathParameters { get; }
+
+    public ref float TravelTime { get; }
+
+    public ParticleAttributeIndex_t FieldScale { get; }
+
+    public ParticleAttributeIndex_t ManualTField { get; }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBasePlatTrain : CBaseToggle, ISchemaClass<CBasePlatTrain> {
+public partial interface CBasePlatTrain : CBaseToggle, ISchemaClass<CBasePlatTrain>
+{
+    static CBasePlatTrain ISchemaClass<CBasePlatTrain>.From(nint handle) => new CBasePlatTrainImpl(handle);
+    static int ISchemaClass<CBasePlatTrain>.Size => 2176;
+    static string? ISchemaClass<CBasePlatTrain>.ClassName => null;
 
-  static CBasePlatTrain ISchemaClass<CBasePlatTrain>.From(nint handle) => new CBasePlatTrainImpl(handle);
-  static int ISchemaClass<CBasePlatTrain>.Size => 2176;
-  static string? ISchemaClass<CBasePlatTrain>.ClassName => null;
 
-  
-  public string NoiseMoving { get; set; }
-  
-  public string NoiseArrived { get; set; }
-  
-  public ref float Volume { get; }
-  
-  public ref float TWidth { get; }
-  
-  public ref float TLength { get; }
+    public string NoiseMoving { get; set; }
+
+    public string NoiseArrived { get; set; }
+
+    public ref float Volume { get; }
+
+    public ref float TWidth { get; }
+
+    public ref float TLength { get; }
 
 
 }

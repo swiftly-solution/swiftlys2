@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_CreateFromCPsImpl : CParticleFunctionInitializerImpl, C_INIT_CreateFromCPs {
+internal partial class C_INIT_CreateFromCPsImpl : CParticleFunctionInitializerImpl, C_INIT_CreateFromCPs
+{
+    public C_INIT_CreateFromCPsImpl(nint handle) : base(handle) { }
 
-  public C_INIT_CreateFromCPsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IncrementOffset;
 
-  private static nint? _IncrementOffset;
-
-  public ref int Increment {
-    get {
-      if (_IncrementOffset == null) {
-        _IncrementOffset = Schema.GetOffset(0x2593FF962359F182);
-      }
-      return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+    public ref int Increment {
+        get {
+            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0x2593FF962359F182);
+            return ref _Handle.AsRef<int>(_IncrementOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinCPOffset;
+    private static nint? _MinCPOffset;
 
-  public ref int MinCP {
-    get {
-      if (_MinCPOffset == null) {
-        _MinCPOffset = Schema.GetOffset(0x2593FF9663AFBE98);
-      }
-      return ref _Handle.AsRef<int>(_MinCPOffset!.Value);
+    public ref int MinCP {
+        get {
+            _MinCPOffset = _MinCPOffset ?? Schema.GetOffset(0x2593FF9663AFBE98);
+            return ref _Handle.AsRef<int>(_MinCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxCPOffset;
+    private static nint? _MaxCPOffset;
 
-  public ref int MaxCP {
-    get {
-      if (_MaxCPOffset == null) {
-        _MaxCPOffset = Schema.GetOffset(0x2593FF964C307D96);
-      }
-      return ref _Handle.AsRef<int>(_MaxCPOffset!.Value);
+    public ref int MaxCP {
+        get {
+            _MaxCPOffset = _MaxCPOffset ?? Schema.GetOffset(0x2593FF964C307D96);
+            return ref _Handle.AsRef<int>(_MaxCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _DynamicCPCountOffset;
+    private static nint? _DynamicCPCountOffset;
 
-  public CParticleCollectionFloatInput DynamicCPCount {
-    get {
-      if (_DynamicCPCountOffset == null) {
-        _DynamicCPCountOffset = Schema.GetOffset(0x2593FF96DF30CE38);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _DynamicCPCountOffset!.Value);
+    public CParticleCollectionFloatInput DynamicCPCount {
+        get {
+            _DynamicCPCountOffset = _DynamicCPCountOffset ?? Schema.GetOffset(0x2593FF96DF30CE38);
+            return new CParticleCollectionFloatInputImpl(_Handle + _DynamicCPCountOffset!.Value);
+        }
     }
-  }
 
 
 }

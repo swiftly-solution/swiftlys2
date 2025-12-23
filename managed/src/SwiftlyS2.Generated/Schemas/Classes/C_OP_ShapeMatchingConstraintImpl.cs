@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ShapeMatchingConstraintImpl : CParticleFunctionConstraintImpl, C_OP_ShapeMatchingConstraint {
+internal partial class C_OP_ShapeMatchingConstraintImpl : CParticleFunctionConstraintImpl, C_OP_ShapeMatchingConstraint
+{
+    public C_OP_ShapeMatchingConstraintImpl(nint handle) : base(handle) { }
 
-  public C_OP_ShapeMatchingConstraintImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ShapeRestorationTimeOffset;
 
-  private static nint? _ShapeRestorationTimeOffset;
-
-  public ref float ShapeRestorationTime {
-    get {
-      if (_ShapeRestorationTimeOffset == null) {
-        _ShapeRestorationTimeOffset = Schema.GetOffset(0x4FF42FB6A86E05A9);
-      }
-      return ref _Handle.AsRef<float>(_ShapeRestorationTimeOffset!.Value);
+    public ref float ShapeRestorationTime {
+        get {
+            _ShapeRestorationTimeOffset = _ShapeRestorationTimeOffset ?? Schema.GetOffset(0x4FF42FB6A86E05A9);
+            return ref _Handle.AsRef<float>(_ShapeRestorationTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

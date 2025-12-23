@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_DragRelativeToPlane : CParticleFunctionOperator, ISchemaClass<C_OP_DragRelativeToPlane> {
+public partial interface C_OP_DragRelativeToPlane : CParticleFunctionOperator, ISchemaClass<C_OP_DragRelativeToPlane>
+{
+    static C_OP_DragRelativeToPlane ISchemaClass<C_OP_DragRelativeToPlane>.From(nint handle) => new C_OP_DragRelativeToPlaneImpl(handle);
+    static int ISchemaClass<C_OP_DragRelativeToPlane>.Size => 2936;
+    static string? ISchemaClass<C_OP_DragRelativeToPlane>.ClassName => null;
 
-  static C_OP_DragRelativeToPlane ISchemaClass<C_OP_DragRelativeToPlane>.From(nint handle) => new C_OP_DragRelativeToPlaneImpl(handle);
-  static int ISchemaClass<C_OP_DragRelativeToPlane>.Size => 2936;
-  static string? ISchemaClass<C_OP_DragRelativeToPlane>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput DragAtPlane { get; }
-  
-  public CParticleCollectionFloatInput Falloff { get; }
-  
-  public ref bool Directional { get; }
-  
-  public CParticleCollectionVecInput PlaneNormal { get; }
-  
-  public ref int ControlPointNumber { get; }
+    public CParticleCollectionFloatInput DragAtPlane { get; }
+
+    public CParticleCollectionFloatInput Falloff { get; }
+
+    public ref bool Directional { get; }
+
+    public CParticleCollectionVecInput PlaneNormal { get; }
+
+    public ref int ControlPointNumber { get; }
 
 
 }

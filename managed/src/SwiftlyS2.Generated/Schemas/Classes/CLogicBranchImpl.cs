@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicBranchImpl : CLogicalEntityImpl, CLogicBranch {
+internal partial class CLogicBranchImpl : CLogicalEntityImpl, CLogicBranch
+{
+    public CLogicBranchImpl(nint handle) : base(handle) { }
 
-  public CLogicBranchImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InValueOffset;
 
-  private static nint? _InValueOffset;
-
-  public ref bool InValue {
-    get {
-      if (_InValueOffset == null) {
-        _InValueOffset = Schema.GetOffset(0x5B700E1052400A1F);
-      }
-      return ref _Handle.AsRef<bool>(_InValueOffset!.Value);
+    public ref bool InValue {
+        get {
+            _InValueOffset = _InValueOffset ?? Schema.GetOffset(0x5B700E1052400A1F);
+            return ref _Handle.AsRef<bool>(_InValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _ListenersOffset;
+    private static nint? _ListenersOffset;
 
-  public ref CUtlVector<CHandle<CBaseEntity>> Listeners {
-    get {
-      if (_ListenersOffset == null) {
-        _ListenersOffset = Schema.GetOffset(0x5B700E10E4AECE86);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ListenersOffset!.Value);
+    public ref CUtlVector<CHandle<CBaseEntity>> Listeners {
+        get {
+            _ListenersOffset = _ListenersOffset ?? Schema.GetOffset(0x5B700E10E4AECE86);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_ListenersOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnTrueOffset;
+    private static nint? _OnTrueOffset;
 
-  public CEntityIOOutput OnTrue {
-    get {
-      if (_OnTrueOffset == null) {
-        _OnTrueOffset = Schema.GetOffset(0x5B700E106EAE5D88);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnTrueOffset!.Value);
+    public ref CEntityIOOutput OnTrue {
+        get {
+            _OnTrueOffset = _OnTrueOffset ?? Schema.GetOffset(0x5B700E106EAE5D88);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTrueOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnFalseOffset;
+    private static nint? _OnFalseOffset;
 
-  public CEntityIOOutput OnFalse {
-    get {
-      if (_OnFalseOffset == null) {
-        _OnFalseOffset = Schema.GetOffset(0x5B700E104973AF03);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnFalseOffset!.Value);
+    public ref CEntityIOOutput OnFalse {
+        get {
+            _OnFalseOffset = _OnFalseOffset ?? Schema.GetOffset(0x5B700E104973AF03);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFalseOffset!.Value);
+        }
     }
-  }
 
 
 }

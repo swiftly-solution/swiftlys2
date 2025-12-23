@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VPhysXJoint_t__Flags_t : uint {
-
+public enum VPhysXJoint_t__Flags_t : uint
+{
  JOINT_FLAGS_NONE = 0,
 
  JOINT_FLAGS_BODY1_FIXED = 1,

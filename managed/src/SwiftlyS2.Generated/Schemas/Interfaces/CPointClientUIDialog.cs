@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointClientUIDialog : CBaseClientUIEntity, ISchemaClass<CPointClientUIDialog> {
+public partial interface CPointClientUIDialog : CBaseClientUIEntity, ISchemaClass<CPointClientUIDialog>
+{
+    static CPointClientUIDialog ISchemaClass<CPointClientUIDialog>.From(nint handle) => new CPointClientUIDialogImpl(handle);
+    static int ISchemaClass<CPointClientUIDialog>.Size => 2448;
+    static string? ISchemaClass<CPointClientUIDialog>.ClassName => "point_clientui_dialog";
 
-  static CPointClientUIDialog ISchemaClass<CPointClientUIDialog>.From(nint handle) => new CPointClientUIDialogImpl(handle);
-  static int ISchemaClass<CPointClientUIDialog>.Size => 2448;
-  static string? ISchemaClass<CPointClientUIDialog>.ClassName => "point_clientui_dialog";
 
-  
-  public ref CHandle<CBaseEntity> Activator { get; }
-  
-  public ref bool StartEnabled { get; }
+    public ref CHandle<CBaseEntity> Activator { get; }
 
-  public void ActivatorUpdated();
+    public ref bool StartEnabled { get; }
+
+    public void ActivatorUpdated();
 }

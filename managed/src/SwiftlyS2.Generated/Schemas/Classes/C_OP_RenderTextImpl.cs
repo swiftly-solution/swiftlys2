@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RenderTextImpl : CParticleFunctionRendererImpl, C_OP_RenderText {
+internal partial class C_OP_RenderTextImpl : CParticleFunctionRendererImpl, C_OP_RenderText
+{
+    public C_OP_RenderTextImpl(nint handle) : base(handle) { }
 
-  public C_OP_RenderTextImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OutlineColorOffset;
 
-  private static nint? _OutlineColorOffset;
-
-  public ref Color OutlineColor {
-    get {
-      if (_OutlineColorOffset == null) {
-        _OutlineColorOffset = Schema.GetOffset(0x376BB2E675B94BB0);
-      }
-      return ref _Handle.AsRef<Color>(_OutlineColorOffset!.Value);
+    public ref Color OutlineColor {
+        get {
+            _OutlineColorOffset = _OutlineColorOffset ?? Schema.GetOffset(0x376BB2E675B94BB0);
+            return ref _Handle.AsRef<Color>(_OutlineColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultTextOffset;
+    private static nint? _DefaultTextOffset;
 
-  public string DefaultText {
-    get {
-      if (_DefaultTextOffset == null) {
-        _DefaultTextOffset = Schema.GetOffset(0x376BB2E67556AF5D);
-      }
-      var ptr = _Handle.Read<nint>(_DefaultTextOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DefaultTextOffset == null) {
-        _DefaultTextOffset = Schema.GetOffset(0x376BB2E67556AF5D);
-      }
-      Schema.SetString(_Handle, _DefaultTextOffset!.Value, value);
-    }
-  } 
+    public string DefaultText {
+        get {
+            _DefaultTextOffset = _DefaultTextOffset ?? Schema.GetOffset(0x376BB2E67556AF5D);
+            return Schema.GetString(_Handle.Read<nint>(_DefaultTextOffset!.Value));
+        }
+        set {
+            _DefaultTextOffset = _DefaultTextOffset ?? Schema.GetOffset(0x376BB2E67556AF5D);
+            Schema.SetString(_Handle, _DefaultTextOffset!.Value, value);
+        }
+    } 
 
 
 }

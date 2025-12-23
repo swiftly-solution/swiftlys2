@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Inflow_BaseEntrypoint : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Inflow_BaseEntrypoint> {
+public partial interface CPulseCell_Inflow_BaseEntrypoint : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Inflow_BaseEntrypoint>
+{
+    static CPulseCell_Inflow_BaseEntrypoint ISchemaClass<CPulseCell_Inflow_BaseEntrypoint>.From(nint handle) => new CPulseCell_Inflow_BaseEntrypointImpl(handle);
+    static int ISchemaClass<CPulseCell_Inflow_BaseEntrypoint>.Size => 128;
+    static string? ISchemaClass<CPulseCell_Inflow_BaseEntrypoint>.ClassName => null;
 
-  static CPulseCell_Inflow_BaseEntrypoint ISchemaClass<CPulseCell_Inflow_BaseEntrypoint>.From(nint handle) => new CPulseCell_Inflow_BaseEntrypointImpl(handle);
-  static int ISchemaClass<CPulseCell_Inflow_BaseEntrypoint>.Size => 128;
-  static string? ISchemaClass<CPulseCell_Inflow_BaseEntrypoint>.ClassName => null;
 
-  
-  public PulseRuntimeChunkIndex_t EntryChunk { get; }
-  
-  public PulseRegisterMap_t RegisterMap { get; }
+    public PulseRuntimeChunkIndex_t EntryChunk { get; }
+
+    public PulseRegisterMap_t RegisterMap { get; }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PulseRegisterMap_tImpl : SchemaClass, PulseRegisterMap_t {
+internal partial class PulseRegisterMap_tImpl : SchemaClass, PulseRegisterMap_t
+{
+    public PulseRegisterMap_tImpl(nint handle) : base(handle) { }
 
-  public PulseRegisterMap_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InparamsOffset;
 
-  private static nint? _InparamsOffset;
-
-  public SchemaUntypedField Inparams {
-    get {
-      if (_InparamsOffset == null) {
-        _InparamsOffset = Schema.GetOffset(0x833FEA64B9B18E04);
-      }
-      return new SchemaUntypedField(_Handle + _InparamsOffset!.Value);
+    public SchemaUntypedField Inparams {
+        get {
+            _InparamsOffset = _InparamsOffset ?? Schema.GetOffset(0x833FEA64B9B18E04);
+            return new SchemaUntypedField(_Handle + _InparamsOffset!.Value);
+        }
     }
-  }
-  private static nint? _InparamsWhichCanBeMovedOffset;
+    private static nint? _InparamsWhichCanBeMovedOffset;
 
-  public SchemaUntypedField InparamsWhichCanBeMoved {
-    get {
-      if (_InparamsWhichCanBeMovedOffset == null) {
-        _InparamsWhichCanBeMovedOffset = Schema.GetOffset(0x833FEA6405245E23);
-      }
-      return new SchemaUntypedField(_Handle + _InparamsWhichCanBeMovedOffset!.Value);
+    public SchemaUntypedField InparamsWhichCanBeMoved {
+        get {
+            _InparamsWhichCanBeMovedOffset = _InparamsWhichCanBeMovedOffset ?? Schema.GetOffset(0x833FEA6405245E23);
+            return new SchemaUntypedField(_Handle + _InparamsWhichCanBeMovedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutparamsOffset;
+    private static nint? _OutparamsOffset;
 
-  public SchemaUntypedField Outparams {
-    get {
-      if (_OutparamsOffset == null) {
-        _OutparamsOffset = Schema.GetOffset(0x833FEA64798D964D);
-      }
-      return new SchemaUntypedField(_Handle + _OutparamsOffset!.Value);
+    public SchemaUntypedField Outparams {
+        get {
+            _OutparamsOffset = _OutparamsOffset ?? Schema.GetOffset(0x833FEA64798D964D);
+            return new SchemaUntypedField(_Handle + _OutparamsOffset!.Value);
+        }
     }
-  }
 
 
 }

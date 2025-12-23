@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,20 +22,19 @@
 #include <string>
 #include <vector>
 
-std::string GeneratePath(std::string path);
-
 namespace Files
 {
+    std::string GeneratePath(std::string path);
     std::string Read(std::string path);
     void Append(std::string path, std::string content, bool hasdate = true);
     void Write(std::string path, std::string content, bool hasdate = true);
     void Delete(std::string path);
-    std::string getBase(std::string filePath);
+    std::string GetFileName(std::string filePath);
     bool ExistsPath(std::string path);
     bool IsDirectory(std::string path);
     std::vector<std::string> FetchFileNames(std::string path);
     std::vector<std::string> FetchDirectories(std::string path);
     bool CreateDir(std::string path);
-};
+}; // namespace Files
 
 #endif

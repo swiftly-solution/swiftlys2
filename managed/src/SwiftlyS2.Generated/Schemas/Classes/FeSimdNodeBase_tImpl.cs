@@ -6,45 +6,42 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeSimdNodeBase_tImpl : SchemaClass, FeSimdNodeBase_t {
+internal partial class FeSimdNodeBase_tImpl : SchemaClass, FeSimdNodeBase_t
+{
+    public FeSimdNodeBase_tImpl(nint handle) : base(handle) { }
 
-  public FeSimdNodeBase_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x8B863723CD6694B9, 4, 2, 2);
-  }
-  public ISchemaFixedArray<ushort> NodeX0 {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x8B86372381C7FEB9, 4, 2, 2);
-  }
-  public ISchemaFixedArray<ushort> NodeX1 {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x8B86372380C7FD26, 4, 2, 2);
-  }
-  public ISchemaFixedArray<ushort> NodeY0 {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x8B8637237BC5B6B0, 4, 2, 2);
-  }
-  public ISchemaFixedArray<ushort> NodeY1 {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x8B8637237CC5B843, 4, 2, 2);
-  }
-  public ISchemaFixedArray<ushort> Dummy {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x8B863723CD8BAE5F, 4, 2, 2);
-  }
-  private static nint? _AdjustOffset;
-
-  public FourQuaternions Adjust {
-    get {
-      if (_AdjustOffset == null) {
-        _AdjustOffset = Schema.GetOffset(0x8B8637230F6C0983);
-      }
-      return new FourQuaternionsImpl(_Handle + _AdjustOffset!.Value);
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x8B863723CD6694B9, 4, 2, 2);
     }
-  }
+    public ISchemaFixedArray<ushort> NodeX0 {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x8B86372381C7FEB9, 4, 2, 2);
+    }
+    public ISchemaFixedArray<ushort> NodeX1 {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x8B86372380C7FD26, 4, 2, 2);
+    }
+    public ISchemaFixedArray<ushort> NodeY0 {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x8B8637237BC5B6B0, 4, 2, 2);
+    }
+    public ISchemaFixedArray<ushort> NodeY1 {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x8B8637237CC5B843, 4, 2, 2);
+    }
+    public ISchemaFixedArray<ushort> Dummy {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x8B863723CD8BAE5F, 4, 2, 2);
+    }
+    private static nint? _AdjustOffset;
+
+    public FourQuaternions Adjust {
+        get {
+            _AdjustOffset = _AdjustOffset ?? Schema.GetOffset(0x8B8637230F6C0983);
+            return new FourQuaternionsImpl(_Handle + _AdjustOffset!.Value);
+        }
+    }
 
 
 }

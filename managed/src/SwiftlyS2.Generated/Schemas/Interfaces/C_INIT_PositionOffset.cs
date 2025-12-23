@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_PositionOffset : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionOffset> {
+public partial interface C_INIT_PositionOffset : CParticleFunctionInitializer, ISchemaClass<C_INIT_PositionOffset>
+{
+    static C_INIT_PositionOffset ISchemaClass<C_INIT_PositionOffset>.From(nint handle) => new C_INIT_PositionOffsetImpl(handle);
+    static int ISchemaClass<C_INIT_PositionOffset>.Size => 4032;
+    static string? ISchemaClass<C_INIT_PositionOffset>.ClassName => null;
 
-  static C_INIT_PositionOffset ISchemaClass<C_INIT_PositionOffset>.From(nint handle) => new C_INIT_PositionOffsetImpl(handle);
-  static int ISchemaClass<C_INIT_PositionOffset>.Size => 4032;
-  static string? ISchemaClass<C_INIT_PositionOffset>.ClassName => null;
 
-  
-  public CPerParticleVecInput OffsetMin { get; }
-  
-  public CPerParticleVecInput OffsetMax { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref bool LocalCoords { get; }
-  
-  public ref bool Proportional { get; }
-  
-  public CRandomNumberGeneratorParameters RandomnessParameters { get; }
+    public CPerParticleVecInput OffsetMin { get; }
+
+    public CPerParticleVecInput OffsetMax { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref bool LocalCoords { get; }
+
+    public ref bool Proportional { get; }
+
+    public CRandomNumberGeneratorParameters RandomnessParameters { get; }
 
 
 }

@@ -6,39 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointClientUIDialogImpl : CBaseClientUIEntityImpl, CPointClientUIDialog {
+internal partial class CPointClientUIDialogImpl : CBaseClientUIEntityImpl, CPointClientUIDialog
+{
+    public CPointClientUIDialogImpl(nint handle) : base(handle) { }
 
-  public CPointClientUIDialogImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ActivatorOffset;
 
-  private static nint? _ActivatorOffset;
-
-  public ref CHandle<CBaseEntity> Activator {
-    get {
-      if (_ActivatorOffset == null) {
-        _ActivatorOffset = Schema.GetOffset(0x1136C185AB093BB2);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
+    public ref CHandle<CBaseEntity> Activator {
+        get {
+            _ActivatorOffset = _ActivatorOffset ?? Schema.GetOffset(0x1136C185AB093BB2);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_ActivatorOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartEnabledOffset;
+    private static nint? _StartEnabledOffset;
 
-  public ref bool StartEnabled {
-    get {
-      if (_StartEnabledOffset == null) {
-        _StartEnabledOffset = Schema.GetOffset(0x1136C185500D5C24);
-      }
-      return ref _Handle.AsRef<bool>(_StartEnabledOffset!.Value);
+    public ref bool StartEnabled {
+        get {
+            _StartEnabledOffset = _StartEnabledOffset ?? Schema.GetOffset(0x1136C185500D5C24);
+            return ref _Handle.AsRef<bool>(_StartEnabledOffset!.Value);
+        }
     }
-  }
 
-  public void ActivatorUpdated() {
-    Schema.Update(_Handle, 0x1136C185AB093BB2);
-  }
+    public void ActivatorUpdated() => Schema.Update(_Handle, 0x1136C185AB093BB2);
 }

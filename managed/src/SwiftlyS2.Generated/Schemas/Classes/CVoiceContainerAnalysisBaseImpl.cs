@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerAnalysisBaseImpl : SchemaClass, CVoiceContainerAnalysisBase {
+internal partial class CVoiceContainerAnalysisBaseImpl : SchemaClass, CVoiceContainerAnalysisBase
+{
+    public CVoiceContainerAnalysisBaseImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerAnalysisBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _RegenerateCurveOnCompileOffset;
 
-  private static nint? _RegenerateCurveOnCompileOffset;
-
-  public ref bool RegenerateCurveOnCompile {
-    get {
-      if (_RegenerateCurveOnCompileOffset == null) {
-        _RegenerateCurveOnCompileOffset = Schema.GetOffset(0xC0BE2FE061AFA19C);
-      }
-      return ref _Handle.AsRef<bool>(_RegenerateCurveOnCompileOffset!.Value);
+    public ref bool RegenerateCurveOnCompile {
+        get {
+            _RegenerateCurveOnCompileOffset = _RegenerateCurveOnCompileOffset ?? Schema.GetOffset(0xC0BE2FE061AFA19C);
+            return ref _Handle.AsRef<bool>(_RegenerateCurveOnCompileOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurveOffset;
+    private static nint? _CurveOffset;
 
-  public SchemaUntypedField Curve {
-    get {
-      if (_CurveOffset == null) {
-        _CurveOffset = Schema.GetOffset(0xC0BE2FE0BFFA0B34);
-      }
-      return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+    public SchemaUntypedField Curve {
+        get {
+            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xC0BE2FE0BFFA0B34);
+            return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,58 +8,58 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderCables : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderCables> {
+public partial interface C_OP_RenderCables : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderCables>
+{
+    static C_OP_RenderCables ISchemaClass<C_OP_RenderCables>.From(nint handle) => new C_OP_RenderCablesImpl(handle);
+    static int ISchemaClass<C_OP_RenderCables>.Size => 5432;
+    static string? ISchemaClass<C_OP_RenderCables>.ClassName => null;
 
-  static C_OP_RenderCables ISchemaClass<C_OP_RenderCables>.From(nint handle) => new C_OP_RenderCablesImpl(handle);
-  static int ISchemaClass<C_OP_RenderCables>.Size => 5432;
-  static string? ISchemaClass<C_OP_RenderCables>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput RadiusScale { get; }
-  
-  public CParticleCollectionFloatInput AlphaScale { get; }
-  
-  public CParticleCollectionVecInput ColorScale { get; }
-  
-  public ref ParticleColorBlendType_t ColorBlendType { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
-  
-  public ref TextureRepetitionMode_t TextureRepetitionMode { get; }
-  
-  public CParticleCollectionFloatInput TextureRepeatsPerSegment { get; }
-  
-  public CParticleCollectionFloatInput TextureRepeatsCircumference { get; }
-  
-  public CParticleCollectionFloatInput ColorMapOffsetV { get; }
-  
-  public CParticleCollectionFloatInput ColorMapOffsetU { get; }
-  
-  public CParticleCollectionFloatInput NormalMapOffsetV { get; }
-  
-  public CParticleCollectionFloatInput NormalMapOffsetU { get; }
-  
-  public ref bool DrawCableCaps { get; }
-  
-  public ref float CapRoundness { get; }
-  
-  public ref float CapOffsetAmount { get; }
-  
-  public ref float TessScale { get; }
-  
-  public ref int MinTesselation { get; }
-  
-  public ref int MaxTesselation { get; }
-  
-  public ref int Roundness { get; }
-  
-  public ref bool ForceRoundnessFixed { get; }
-  
-  public CParticleTransformInput LightingTransform { get; }
-  
-  public ref CUtlLeanVector<FloatInputMaterialVariable_t, int> MaterialFloatVars { get; }
-  
-  public ref CUtlLeanVector<VecInputMaterialVariable_t, int> MaterialVecVars { get; }
+    public CParticleCollectionFloatInput RadiusScale { get; }
+
+    public CParticleCollectionFloatInput AlphaScale { get; }
+
+    public CParticleCollectionVecInput ColorScale { get; }
+
+    public ref ParticleColorBlendType_t ColorBlendType { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
+
+    public ref TextureRepetitionMode_t TextureRepetitionMode { get; }
+
+    public CParticleCollectionFloatInput TextureRepeatsPerSegment { get; }
+
+    public CParticleCollectionFloatInput TextureRepeatsCircumference { get; }
+
+    public CParticleCollectionFloatInput ColorMapOffsetV { get; }
+
+    public CParticleCollectionFloatInput ColorMapOffsetU { get; }
+
+    public CParticleCollectionFloatInput NormalMapOffsetV { get; }
+
+    public CParticleCollectionFloatInput NormalMapOffsetU { get; }
+
+    public ref bool DrawCableCaps { get; }
+
+    public ref float CapRoundness { get; }
+
+    public ref float CapOffsetAmount { get; }
+
+    public ref float TessScale { get; }
+
+    public ref int MinTesselation { get; }
+
+    public ref int MaxTesselation { get; }
+
+    public ref int Roundness { get; }
+
+    public ref bool ForceRoundnessFixed { get; }
+
+    public CParticleTransformInput LightingTransform { get; }
+
+    public ref CUtlLeanVector<FloatInputMaterialVariable_t, int> MaterialFloatVars { get; }
+
+    public ref CUtlLeanVector<VecInputMaterialVariable_t, int> MaterialVecVars { get; }
 
 
 }

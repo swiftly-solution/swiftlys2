@@ -6,58 +6,46 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEntityInstanceImpl : SchemaClass, CEntityInstance {
+internal partial class CEntityInstanceImpl : SchemaClass, CEntityInstance
+{
+    public CEntityInstanceImpl(nint handle) : base(handle) { }
 
-  public CEntityInstanceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PrivateVScriptsOffset;
 
-  private static nint? _PrivateVScriptsOffset;
+    public string PrivateVScripts {
+        get {
+            _PrivateVScriptsOffset = _PrivateVScriptsOffset ?? Schema.GetOffset(0xB6DD442EB087F3B2);
+            return Schema.GetString(_Handle.Read<nint>(_PrivateVScriptsOffset!.Value));
+        }
+        set {
+            _PrivateVScriptsOffset = _PrivateVScriptsOffset ?? Schema.GetOffset(0xB6DD442EB087F3B2);
+            Schema.SetString(_Handle, _PrivateVScriptsOffset!.Value, value);
+        }
+    } 
+    private static nint? _EntityOffset;
 
-  public string PrivateVScripts {
-    get {
-      if (_PrivateVScriptsOffset == null) {
-        _PrivateVScriptsOffset = Schema.GetOffset(0xB6DD442EB087F3B2);
-      }
-      var ptr = _Handle.Read<nint>(_PrivateVScriptsOffset!.Value);
-      return Schema.GetString(ptr);
+    public CEntityIdentity? Entity {
+        get {
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xB6DD442EA8A45978);
+            var ptr = _Handle.Read<nint>(_EntityOffset!.Value);
+            return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+        }
     }
-    set {
-      if (_PrivateVScriptsOffset == null) {
-        _PrivateVScriptsOffset = Schema.GetOffset(0xB6DD442EB087F3B2);
-      }
-      Schema.SetString(_Handle, _PrivateVScriptsOffset!.Value, value);
-    }
-  } 
-  private static nint? _EntityOffset;
+    private static nint? _CScriptComponentOffset;
 
-  public CEntityIdentity? Entity {
-    get {
-      if (_EntityOffset == null) {
-        _EntityOffset = Schema.GetOffset(0xB6DD442EA8A45978);
-      }
-      var ptr = _Handle.Read<nint>(_EntityOffset!.Value);
-      return ptr.IsValidPtr() ? new CEntityIdentityImpl(ptr) : null;
+    public CScriptComponent? CScriptComponent {
+        get {
+            _CScriptComponentOffset = _CScriptComponentOffset ?? Schema.GetOffset(0xB6DD442E3F4202B4);
+            var ptr = _Handle.Read<nint>(_CScriptComponentOffset!.Value);
+            return ptr.IsValidPtr() ? new CScriptComponentImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _CScriptComponentOffset;
 
-  public CScriptComponent? CScriptComponent {
-    get {
-      if (_CScriptComponentOffset == null) {
-        _CScriptComponentOffset = Schema.GetOffset(0xB6DD442E3F4202B4);
-      }
-      var ptr = _Handle.Read<nint>(_CScriptComponentOffset!.Value);
-      return ptr.IsValidPtr() ? new CScriptComponentImpl(ptr) : null;
-    }
-  }
-
-  public void EntityUpdated() {
-    Schema.Update(_Handle, 0xB6DD442EA8A45978);
-  }
+    public void EntityUpdated() => Schema.Update(_Handle, 0xB6DD442EA8A45978);
 }

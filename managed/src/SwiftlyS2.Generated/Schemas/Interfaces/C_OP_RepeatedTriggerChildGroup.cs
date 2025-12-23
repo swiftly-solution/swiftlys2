@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RepeatedTriggerChildGroup : CParticleFunctionPreEmission, ISchemaClass<C_OP_RepeatedTriggerChildGroup> {
+public partial interface C_OP_RepeatedTriggerChildGroup : CParticleFunctionPreEmission, ISchemaClass<C_OP_RepeatedTriggerChildGroup>
+{
+    static C_OP_RepeatedTriggerChildGroup ISchemaClass<C_OP_RepeatedTriggerChildGroup>.From(nint handle) => new C_OP_RepeatedTriggerChildGroupImpl(handle);
+    static int ISchemaClass<C_OP_RepeatedTriggerChildGroup>.Size => 1592;
+    static string? ISchemaClass<C_OP_RepeatedTriggerChildGroup>.ClassName => null;
 
-  static C_OP_RepeatedTriggerChildGroup ISchemaClass<C_OP_RepeatedTriggerChildGroup>.From(nint handle) => new C_OP_RepeatedTriggerChildGroupImpl(handle);
-  static int ISchemaClass<C_OP_RepeatedTriggerChildGroup>.Size => 1592;
-  static string? ISchemaClass<C_OP_RepeatedTriggerChildGroup>.ClassName => null;
 
-  
-  public ref int ChildGroupID { get; }
-  
-  public CParticleCollectionFloatInput ClusterRefireTime { get; }
-  
-  public CParticleCollectionFloatInput ClusterSize { get; }
-  
-  public CParticleCollectionFloatInput ClusterCooldown { get; }
-  
-  public ref bool LimitChildCount { get; }
+    public ref int ChildGroupID { get; }
+
+    public CParticleCollectionFloatInput ClusterRefireTime { get; }
+
+    public CParticleCollectionFloatInput ClusterSize { get; }
+
+    public CParticleCollectionFloatInput ClusterCooldown { get; }
+
+    public ref bool LimitChildCount { get; }
 
 
 }

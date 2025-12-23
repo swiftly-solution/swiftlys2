@@ -6,114 +6,92 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ModelEmbeddedMesh_tImpl : SchemaClass, ModelEmbeddedMesh_t {
+internal partial class ModelEmbeddedMesh_tImpl : SchemaClass, ModelEmbeddedMesh_t
+{
+    public ModelEmbeddedMesh_tImpl(nint handle) : base(handle) { }
 
-  public ModelEmbeddedMesh_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9EB0DD6ECAE8A266);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9EB0DD6ECAE8A266);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _MeshIndexOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x9EB0DD6ECAE8A266);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int MeshIndex {
+        get {
+            _MeshIndexOffset = _MeshIndexOffset ?? Schema.GetOffset(0x9EB0DD6E07C0EC64);
+            return ref _Handle.AsRef<int>(_MeshIndexOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x9EB0DD6ECAE8A266);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _MeshIndexOffset;
+    private static nint? _DataBlockOffset;
 
-  public ref int MeshIndex {
-    get {
-      if (_MeshIndexOffset == null) {
-        _MeshIndexOffset = Schema.GetOffset(0x9EB0DD6E07C0EC64);
-      }
-      return ref _Handle.AsRef<int>(_MeshIndexOffset!.Value);
+    public ref int DataBlock {
+        get {
+            _DataBlockOffset = _DataBlockOffset ?? Schema.GetOffset(0x9EB0DD6E3D4FDE56);
+            return ref _Handle.AsRef<int>(_DataBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _DataBlockOffset;
+    private static nint? _MorphBlockOffset;
 
-  public ref int DataBlock {
-    get {
-      if (_DataBlockOffset == null) {
-        _DataBlockOffset = Schema.GetOffset(0x9EB0DD6E3D4FDE56);
-      }
-      return ref _Handle.AsRef<int>(_DataBlockOffset!.Value);
+    public ref int MorphBlock {
+        get {
+            _MorphBlockOffset = _MorphBlockOffset ?? Schema.GetOffset(0x9EB0DD6E73C9235E);
+            return ref _Handle.AsRef<int>(_MorphBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _MorphBlockOffset;
+    private static nint? _VertexBuffersOffset;
 
-  public ref int MorphBlock {
-    get {
-      if (_MorphBlockOffset == null) {
-        _MorphBlockOffset = Schema.GetOffset(0x9EB0DD6E73C9235E);
-      }
-      return ref _Handle.AsRef<int>(_MorphBlockOffset!.Value);
+    public ref CUtlVector<ModelMeshBufferData_t> VertexBuffers {
+        get {
+            _VertexBuffersOffset = _VertexBuffersOffset ?? Schema.GetOffset(0x9EB0DD6E967BB5EA);
+            return ref _Handle.AsRef<CUtlVector<ModelMeshBufferData_t>>(_VertexBuffersOffset!.Value);
+        }
     }
-  }
-  private static nint? _VertexBuffersOffset;
+    private static nint? _IndexBuffersOffset;
 
-  public ref CUtlVector<ModelMeshBufferData_t> VertexBuffers {
-    get {
-      if (_VertexBuffersOffset == null) {
-        _VertexBuffersOffset = Schema.GetOffset(0x9EB0DD6E967BB5EA);
-      }
-      return ref _Handle.AsRef<CUtlVector<ModelMeshBufferData_t>>(_VertexBuffersOffset!.Value);
+    public ref CUtlVector<ModelMeshBufferData_t> IndexBuffers {
+        get {
+            _IndexBuffersOffset = _IndexBuffersOffset ?? Schema.GetOffset(0x9EB0DD6EF9221876);
+            return ref _Handle.AsRef<CUtlVector<ModelMeshBufferData_t>>(_IndexBuffersOffset!.Value);
+        }
     }
-  }
-  private static nint? _IndexBuffersOffset;
+    private static nint? _ToolsBuffersOffset;
 
-  public ref CUtlVector<ModelMeshBufferData_t> IndexBuffers {
-    get {
-      if (_IndexBuffersOffset == null) {
-        _IndexBuffersOffset = Schema.GetOffset(0x9EB0DD6EF9221876);
-      }
-      return ref _Handle.AsRef<CUtlVector<ModelMeshBufferData_t>>(_IndexBuffersOffset!.Value);
+    public ref CUtlVector<ModelMeshBufferData_t> ToolsBuffers {
+        get {
+            _ToolsBuffersOffset = _ToolsBuffersOffset ?? Schema.GetOffset(0x9EB0DD6ED56473DF);
+            return ref _Handle.AsRef<CUtlVector<ModelMeshBufferData_t>>(_ToolsBuffersOffset!.Value);
+        }
     }
-  }
-  private static nint? _ToolsBuffersOffset;
+    private static nint? _VBIBBlockOffset;
 
-  public ref CUtlVector<ModelMeshBufferData_t> ToolsBuffers {
-    get {
-      if (_ToolsBuffersOffset == null) {
-        _ToolsBuffersOffset = Schema.GetOffset(0x9EB0DD6ED56473DF);
-      }
-      return ref _Handle.AsRef<CUtlVector<ModelMeshBufferData_t>>(_ToolsBuffersOffset!.Value);
+    public ref int VBIBBlock {
+        get {
+            _VBIBBlockOffset = _VBIBBlockOffset ?? Schema.GetOffset(0x9EB0DD6EF5E4DCB7);
+            return ref _Handle.AsRef<int>(_VBIBBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _VBIBBlockOffset;
+    private static nint? _ToolsVBBlockOffset;
 
-  public ref int VBIBBlock {
-    get {
-      if (_VBIBBlockOffset == null) {
-        _VBIBBlockOffset = Schema.GetOffset(0x9EB0DD6EF5E4DCB7);
-      }
-      return ref _Handle.AsRef<int>(_VBIBBlockOffset!.Value);
+    public ref int ToolsVBBlock {
+        get {
+            _ToolsVBBlockOffset = _ToolsVBBlockOffset ?? Schema.GetOffset(0x9EB0DD6EB4D00411);
+            return ref _Handle.AsRef<int>(_ToolsVBBlockOffset!.Value);
+        }
     }
-  }
-  private static nint? _ToolsVBBlockOffset;
-
-  public ref int ToolsVBBlock {
-    get {
-      if (_ToolsVBBlockOffset == null) {
-        _ToolsVBBlockOffset = Schema.GetOffset(0x9EB0DD6EB4D00411);
-      }
-      return ref _Handle.AsRef<int>(_ToolsVBBlockOffset!.Value);
-    }
-  }
 
 
 }

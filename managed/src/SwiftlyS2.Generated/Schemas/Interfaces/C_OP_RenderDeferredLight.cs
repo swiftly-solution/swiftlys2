@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderDeferredLight : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderDeferredLight> {
+public partial interface C_OP_RenderDeferredLight : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderDeferredLight>
+{
+    static C_OP_RenderDeferredLight ISchemaClass<C_OP_RenderDeferredLight>.From(nint handle) => new C_OP_RenderDeferredLightImpl(handle);
+    static int ISchemaClass<C_OP_RenderDeferredLight>.Size => 2328;
+    static string? ISchemaClass<C_OP_RenderDeferredLight>.ClassName => null;
 
-  static C_OP_RenderDeferredLight ISchemaClass<C_OP_RenderDeferredLight>.From(nint handle) => new C_OP_RenderDeferredLightImpl(handle);
-  static int ISchemaClass<C_OP_RenderDeferredLight>.Size => 2328;
-  static string? ISchemaClass<C_OP_RenderDeferredLight>.ClassName => null;
 
-  
-  public ref bool UseAlphaTestWindow { get; }
-  
-  public ref bool UseTexture { get; }
-  
-  public ref float RadiusScale { get; }
-  
-  public ref float AlphaScale { get; }
-  
-  public ParticleAttributeIndex_t Alpha2Field { get; }
-  
-  public CParticleCollectionVecInput ColorScale { get; }
-  
-  public ref ParticleColorBlendType_t ColorBlendType { get; }
-  
-  public ref float LightDistance { get; }
-  
-  public ref float StartFalloff { get; }
-  
-  public ref float DistanceFalloff { get; }
-  
-  public ref float SpotFoV { get; }
-  
-  public ParticleAttributeIndex_t AlphaTestPointField { get; }
-  
-  public ParticleAttributeIndex_t AlphaTestRangeField { get; }
-  
-  public ParticleAttributeIndex_t AlphaTestSharpnessField { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture { get; }
-  
-  public ref int HSVShiftControlPoint { get; }
+    public ref bool UseAlphaTestWindow { get; }
+
+    public ref bool UseTexture { get; }
+
+    public ref float RadiusScale { get; }
+
+    public ref float AlphaScale { get; }
+
+    public ParticleAttributeIndex_t Alpha2Field { get; }
+
+    public CParticleCollectionVecInput ColorScale { get; }
+
+    public ref ParticleColorBlendType_t ColorBlendType { get; }
+
+    public ref float LightDistance { get; }
+
+    public ref float StartFalloff { get; }
+
+    public ref float DistanceFalloff { get; }
+
+    public ref float SpotFoV { get; }
+
+    public ParticleAttributeIndex_t AlphaTestPointField { get; }
+
+    public ParticleAttributeIndex_t AlphaTestRangeField { get; }
+
+    public ParticleAttributeIndex_t AlphaTestSharpnessField { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCTextureBase> Texture { get; }
+
+    public ref int HSVShiftControlPoint { get; }
 
 
 }

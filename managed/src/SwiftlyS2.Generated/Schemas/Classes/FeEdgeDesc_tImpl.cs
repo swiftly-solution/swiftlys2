@@ -6,33 +6,30 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeEdgeDesc_tImpl : SchemaClass, FeEdgeDesc_t {
+internal partial class FeEdgeDesc_tImpl : SchemaClass, FeEdgeDesc_t
+{
+    public FeEdgeDesc_tImpl(nint handle) : base(handle) { }
 
-  public FeEdgeDesc_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<ushort> Edge {
-    get => new SchemaFixedArray<ushort>(_Handle, 0xD483120F9FB47768, 2, 2, 2);
-  }
-  private static nint? _SideOffset;
-
-  public SchemaUntypedField Side {
-    get {
-      if (_SideOffset == null) {
-        _SideOffset = Schema.GetOffset(0xD483120FA0D97E1A);
-      }
-      return new SchemaUntypedField(_Handle + _SideOffset!.Value);
+    public ISchemaFixedArray<ushort> Edge {
+        get => new SchemaFixedArray<ushort>(_Handle, 0xD483120F9FB47768, 2, 2, 2);
     }
-  }
-  public ISchemaFixedArray<ushort> VirtElem {
-    get => new SchemaFixedArray<ushort>(_Handle, 0xD483120F64A695A5, 2, 2, 2);
-  }
+    private static nint? _SideOffset;
+
+    public SchemaUntypedField Side {
+        get {
+            _SideOffset = _SideOffset ?? Schema.GetOffset(0xD483120FA0D97E1A);
+            return new SchemaUntypedField(_Handle + _SideOffset!.Value);
+        }
+    }
+    public ISchemaFixedArray<ushort> VirtElem {
+        get => new SchemaFixedArray<ushort>(_Handle, 0xD483120F64A695A5, 2, 2, 2);
+    }
 
 
 }

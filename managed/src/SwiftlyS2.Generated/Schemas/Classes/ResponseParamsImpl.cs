@@ -6,48 +6,41 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class ResponseParamsImpl : SchemaClass, ResponseParams {
+internal partial class ResponseParamsImpl : SchemaClass, ResponseParams
+{
+    public ResponseParamsImpl(nint handle) : base(handle) { }
 
-  public ResponseParamsImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OddsOffset;
 
-  private static nint? _OddsOffset;
-
-  public ref short Odds {
-    get {
-      if (_OddsOffset == null) {
-        _OddsOffset = Schema.GetOffset(0x5C5BE8C4E9B76DD7);
-      }
-      return ref _Handle.AsRef<short>(_OddsOffset!.Value);
+    public ref short Odds {
+        get {
+            _OddsOffset = _OddsOffset ?? Schema.GetOffset(0x5C5BE8C4E9B76DD7);
+            return ref _Handle.AsRef<short>(_OddsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref short Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x5C5BE8C49C677A2C);
-      }
-      return ref _Handle.AsRef<short>(_FlagsOffset!.Value);
+    public ref short Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x5C5BE8C49C677A2C);
+            return ref _Handle.AsRef<short>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FollowupOffset;
+    private static nint? _FollowupOffset;
 
-  public ResponseFollowup? Followup {
-    get {
-      if (_FollowupOffset == null) {
-        _FollowupOffset = Schema.GetOffset(0x5C5BE8C481D8C38F);
-      }
-      var ptr = _Handle.Read<nint>(_FollowupOffset!.Value);
-      return ptr.IsValidPtr() ? new ResponseFollowupImpl(ptr) : null;
+    public ResponseFollowup? Followup {
+        get {
+            _FollowupOffset = _FollowupOffset ?? Schema.GetOffset(0x5C5BE8C481D8C38F);
+            var ptr = _Handle.Read<nint>(_FollowupOffset!.Value);
+            return ptr.IsValidPtr() ? new ResponseFollowupImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

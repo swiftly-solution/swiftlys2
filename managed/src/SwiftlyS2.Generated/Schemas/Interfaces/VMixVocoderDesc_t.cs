@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixVocoderDesc_t : ISchemaClass<VMixVocoderDesc_t> {
+public partial interface VMixVocoderDesc_t : ISchemaClass<VMixVocoderDesc_t>
+{
+    static VMixVocoderDesc_t ISchemaClass<VMixVocoderDesc_t>.From(nint handle) => new VMixVocoderDesc_tImpl(handle);
+    static int ISchemaClass<VMixVocoderDesc_t>.Size => 40;
+    static string? ISchemaClass<VMixVocoderDesc_t>.ClassName => null;
 
-  static VMixVocoderDesc_t ISchemaClass<VMixVocoderDesc_t>.From(nint handle) => new VMixVocoderDesc_tImpl(handle);
-  static int ISchemaClass<VMixVocoderDesc_t>.Size => 40;
-  static string? ISchemaClass<VMixVocoderDesc_t>.ClassName => null;
 
-  
-  public ref int BandCount { get; }
-  
-  public ref float Bandwidth { get; }
-  
-  public ref float FldBModGain { get; }
-  
-  public ref float FreqRangeStart { get; }
-  
-  public ref float FreqRangeEnd { get; }
-  
-  public ref float FldBUnvoicedGain { get; }
-  
-  public ref float AttackTimeMS { get; }
-  
-  public ref float ReleaseTimeMS { get; }
-  
-  public ref int DebugBand { get; }
-  
-  public ref bool PeakMode { get; }
+    public ref int BandCount { get; }
+
+    public ref float Bandwidth { get; }
+
+    public ref float FldBModGain { get; }
+
+    public ref float FreqRangeStart { get; }
+
+    public ref float FreqRangeEnd { get; }
+
+    public ref float FldBUnvoicedGain { get; }
+
+    public ref float AttackTimeMS { get; }
+
+    public ref float ReleaseTimeMS { get; }
+
+    public ref int DebugBand { get; }
+
+    public ref bool PeakMode { get; }
 
 
 }

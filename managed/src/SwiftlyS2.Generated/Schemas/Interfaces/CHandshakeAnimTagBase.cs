@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CHandshakeAnimTagBase : CAnimTagBase, ISchemaClass<CHandshakeAnimTagBase> {
+public partial interface CHandshakeAnimTagBase : CAnimTagBase, ISchemaClass<CHandshakeAnimTagBase>
+{
+    static CHandshakeAnimTagBase ISchemaClass<CHandshakeAnimTagBase>.From(nint handle) => new CHandshakeAnimTagBaseImpl(handle);
+    static int ISchemaClass<CHandshakeAnimTagBase>.Size => 88;
+    static string? ISchemaClass<CHandshakeAnimTagBase>.ClassName => null;
 
-  static CHandshakeAnimTagBase ISchemaClass<CHandshakeAnimTagBase>.From(nint handle) => new CHandshakeAnimTagBaseImpl(handle);
-  static int ISchemaClass<CHandshakeAnimTagBase>.Size => 88;
-  static string? ISchemaClass<CHandshakeAnimTagBase>.ClassName => null;
 
-  
-  public ref bool IsDisableTag { get; }
+    public ref bool IsDisableTag { get; }
 
 
 }

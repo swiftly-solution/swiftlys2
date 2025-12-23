@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_MaintainEmitter : CParticleFunctionEmitter, ISchemaClass<C_OP_MaintainEmitter> {
+public partial interface C_OP_MaintainEmitter : CParticleFunctionEmitter, ISchemaClass<C_OP_MaintainEmitter>
+{
+    static C_OP_MaintainEmitter ISchemaClass<C_OP_MaintainEmitter>.From(nint handle) => new C_OP_MaintainEmitterImpl(handle);
+    static int ISchemaClass<C_OP_MaintainEmitter>.Size => 1608;
+    static string? ISchemaClass<C_OP_MaintainEmitter>.ClassName => null;
 
-  static C_OP_MaintainEmitter ISchemaClass<C_OP_MaintainEmitter>.From(nint handle) => new C_OP_MaintainEmitterImpl(handle);
-  static int ISchemaClass<C_OP_MaintainEmitter>.Size => 1608;
-  static string? ISchemaClass<C_OP_MaintainEmitter>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput ParticlesToMaintain { get; }
-  
-  public ref float StartTime { get; }
-  
-  public CParticleCollectionFloatInput EmissionDuration { get; }
-  
-  public ref float EmissionRate { get; }
-  
-  public ref int SnapshotControlPoint { get; }
-  
-  public string StrSnapshotSubset { get; set; }
-  
-  public ref bool EmitInstantaneously { get; }
-  
-  public ref bool FinalEmitOnStop { get; }
-  
-  public CParticleCollectionFloatInput Scale { get; }
+    public CParticleCollectionFloatInput ParticlesToMaintain { get; }
+
+    public ref float StartTime { get; }
+
+    public CParticleCollectionFloatInput EmissionDuration { get; }
+
+    public ref float EmissionRate { get; }
+
+    public ref int SnapshotControlPoint { get; }
+
+    public string StrSnapshotSubset { get; set; }
+
+    public ref bool EmitInstantaneously { get; }
+
+    public ref bool FinalEmitOnStop { get; }
+
+    public CParticleCollectionFloatInput Scale { get; }
 
 
 }

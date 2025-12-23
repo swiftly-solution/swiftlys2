@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ModelDampenMovement : CParticleFunctionOperator, ISchemaClass<C_OP_ModelDampenMovement> {
+public partial interface C_OP_ModelDampenMovement : CParticleFunctionOperator, ISchemaClass<C_OP_ModelDampenMovement>
+{
+    static C_OP_ModelDampenMovement ISchemaClass<C_OP_ModelDampenMovement>.From(nint handle) => new C_OP_ModelDampenMovementImpl(handle);
+    static int ISchemaClass<C_OP_ModelDampenMovement>.Size => 2328;
+    static string? ISchemaClass<C_OP_ModelDampenMovement>.ClassName => null;
 
-  static C_OP_ModelDampenMovement ISchemaClass<C_OP_ModelDampenMovement>.From(nint handle) => new C_OP_ModelDampenMovementImpl(handle);
-  static int ISchemaClass<C_OP_ModelDampenMovement>.Size => 2328;
-  static string? ISchemaClass<C_OP_ModelDampenMovement>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref bool BoundBox { get; }
-  
-  public ref bool Outside { get; }
-  
-  public ref bool UseBones { get; }
-  
-  public string HitboxSetName { get; set; }
-  
-  public CPerParticleVecInput PosOffset { get; }
-  
-  public ref float Drag { get; }
+    public ref int ControlPointNumber { get; }
+
+    public ref bool BoundBox { get; }
+
+    public ref bool Outside { get; }
+
+    public ref bool UseBones { get; }
+
+    public string HitboxSetName { get; set; }
+
+    public CPerParticleVecInput PosOffset { get; }
+
+    public ref float Drag { get; }
 
 
 }

@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointGamestatsCounter : CPointEntity, ISchemaClass<CPointGamestatsCounter> {
+public partial interface CPointGamestatsCounter : CPointEntity, ISchemaClass<CPointGamestatsCounter>
+{
+    static CPointGamestatsCounter ISchemaClass<CPointGamestatsCounter>.From(nint handle) => new CPointGamestatsCounterImpl(handle);
+    static int ISchemaClass<CPointGamestatsCounter>.Size => 1280;
+    static string? ISchemaClass<CPointGamestatsCounter>.ClassName => "point_gamestats_counter";
 
-  static CPointGamestatsCounter ISchemaClass<CPointGamestatsCounter>.From(nint handle) => new CPointGamestatsCounterImpl(handle);
-  static int ISchemaClass<CPointGamestatsCounter>.Size => 1280;
-  static string? ISchemaClass<CPointGamestatsCounter>.ClassName => "point_gamestats_counter";
 
-  
-  public string StrStatisticName { get; set; }
-  
-  public ref bool Disabled { get; }
+    public string StrStatisticName { get; set; }
+
+    public ref bool Disabled { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStaticPoseCache : ISchemaClass<CStaticPoseCache> {
+public partial interface CStaticPoseCache : ISchemaClass<CStaticPoseCache>
+{
+    static CStaticPoseCache ISchemaClass<CStaticPoseCache>.From(nint handle) => new CStaticPoseCacheImpl(handle);
+    static int ISchemaClass<CStaticPoseCache>.Size => 48;
+    static string? ISchemaClass<CStaticPoseCache>.ClassName => null;
 
-  static CStaticPoseCache ISchemaClass<CStaticPoseCache>.From(nint handle) => new CStaticPoseCacheImpl(handle);
-  static int ISchemaClass<CStaticPoseCache>.Size => 48;
-  static string? ISchemaClass<CStaticPoseCache>.ClassName => null;
 
-  
-  public ref CUtlVector<CCachedPose> Poses { get; }
-  
-  public ref int BoneCount { get; }
-  
-  public ref int MorphCount { get; }
+    public ref CUtlVector<CCachedPose> Poses { get; }
+
+    public ref int BoneCount { get; }
+
+    public ref int MorphCount { get; }
 
 
 }

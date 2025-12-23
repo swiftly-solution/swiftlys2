@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeSimdAnimStrayRadius_tImpl : SchemaClass, FeSimdAnimStrayRadius_t {
+internal partial class FeSimdAnimStrayRadius_tImpl : SchemaClass, FeSimdAnimStrayRadius_t
+{
+    public FeSimdAnimStrayRadius_tImpl(nint handle) : base(handle) { }
 
-  public FeSimdAnimStrayRadius_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodeOffset;
 
-  private static nint? _NodeOffset;
-
-  public SchemaUntypedField Node {
-    get {
-      if (_NodeOffset == null) {
-        _NodeOffset = Schema.GetOffset(0xEEC96A9CCD6694B9);
-      }
-      return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+    public SchemaUntypedField Node {
+        get {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0xEEC96A9CCD6694B9);
+            return new SchemaUntypedField(_Handle + _NodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxDistOffset;
+    private static nint? _MaxDistOffset;
 
-  public ref fltx4 MaxDist {
-    get {
-      if (_MaxDistOffset == null) {
-        _MaxDistOffset = Schema.GetOffset(0xEEC96A9CC9FFDD57);
-      }
-      return ref _Handle.AsRef<fltx4>(_MaxDistOffset!.Value);
+    public ref fltx4 MaxDist {
+        get {
+            _MaxDistOffset = _MaxDistOffset ?? Schema.GetOffset(0xEEC96A9CC9FFDD57);
+            return ref _Handle.AsRef<fltx4>(_MaxDistOffset!.Value);
+        }
     }
-  }
-  private static nint? _RelaxationFactorOffset;
+    private static nint? _RelaxationFactorOffset;
 
-  public ref fltx4 RelaxationFactor {
-    get {
-      if (_RelaxationFactorOffset == null) {
-        _RelaxationFactorOffset = Schema.GetOffset(0xEEC96A9C357F3BFF);
-      }
-      return ref _Handle.AsRef<fltx4>(_RelaxationFactorOffset!.Value);
+    public ref fltx4 RelaxationFactor {
+        get {
+            _RelaxationFactorOffset = _RelaxationFactorOffset ?? Schema.GetOffset(0xEEC96A9C357F3BFF);
+            return ref _Handle.AsRef<fltx4>(_RelaxationFactorOffset!.Value);
+        }
     }
-  }
 
 
 }

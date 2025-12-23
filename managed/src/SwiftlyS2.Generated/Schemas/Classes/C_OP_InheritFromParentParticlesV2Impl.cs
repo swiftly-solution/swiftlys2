@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_InheritFromParentParticlesV2Impl : CParticleFunctionOperatorImpl, C_OP_InheritFromParentParticlesV2 {
+internal partial class C_OP_InheritFromParentParticlesV2Impl : CParticleFunctionOperatorImpl, C_OP_InheritFromParentParticlesV2
+{
+    public C_OP_InheritFromParentParticlesV2Impl(nint handle) : base(handle) { }
 
-  public C_OP_InheritFromParentParticlesV2Impl(nint handle) : base(handle) {
-  }
+    private static nint? _ScaleOffset;
 
-  private static nint? _ScaleOffset;
-
-  public CPerParticleFloatInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0xF948CFAFB731A42F);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+    public CPerParticleFloatInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0xF948CFAFB731A42F);
+            return new CPerParticleFloatInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0xF948CFAFE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0xF948CFAFE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _IncrementOffset;
+    private static nint? _IncrementOffset;
 
-  public CPerParticleFloatInput Increment {
-    get {
-      if (_IncrementOffset == null) {
-        _IncrementOffset = Schema.GetOffset(0xF948CFAF2359F182);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _IncrementOffset!.Value);
+    public CPerParticleFloatInput Increment {
+        get {
+            _IncrementOffset = _IncrementOffset ?? Schema.GetOffset(0xF948CFAF2359F182);
+            return new CPerParticleFloatInputImpl(_Handle + _IncrementOffset!.Value);
+        }
     }
-  }
-  private static nint? _RandomDistributionOffset;
+    private static nint? _RandomDistributionOffset;
 
-  public ref bool RandomDistribution {
-    get {
-      if (_RandomDistributionOffset == null) {
-        _RandomDistributionOffset = Schema.GetOffset(0xF948CFAF830F6B38);
-      }
-      return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
+    public ref bool RandomDistribution {
+        get {
+            _RandomDistributionOffset = _RandomDistributionOffset ?? Schema.GetOffset(0xF948CFAF830F6B38);
+            return ref _Handle.AsRef<bool>(_RandomDistributionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReverseOffset;
+    private static nint? _ReverseOffset;
 
-  public ref bool Reverse {
-    get {
-      if (_ReverseOffset == null) {
-        _ReverseOffset = Schema.GetOffset(0xF948CFAFEA4E22E5);
-      }
-      return ref _Handle.AsRef<bool>(_ReverseOffset!.Value);
+    public ref bool Reverse {
+        get {
+            _ReverseOffset = _ReverseOffset ?? Schema.GetOffset(0xF948CFAFEA4E22E5);
+            return ref _Handle.AsRef<bool>(_ReverseOffset!.Value);
+        }
     }
-  }
-  private static nint? _MissingParentBehaviorOffset;
+    private static nint? _MissingParentBehaviorOffset;
 
-  public ref MissingParentInheritBehavior_t MissingParentBehavior {
-    get {
-      if (_MissingParentBehaviorOffset == null) {
-        _MissingParentBehaviorOffset = Schema.GetOffset(0xF948CFAF9B0F277D);
-      }
-      return ref _Handle.AsRef<MissingParentInheritBehavior_t>(_MissingParentBehaviorOffset!.Value);
+    public ref MissingParentInheritBehavior_t MissingParentBehavior {
+        get {
+            _MissingParentBehaviorOffset = _MissingParentBehaviorOffset ?? Schema.GetOffset(0xF948CFAF9B0F277D);
+            return ref _Handle.AsRef<MissingParentInheritBehavior_t>(_MissingParentBehaviorOffset!.Value);
+        }
     }
-  }
-  private static nint? _InterpolationOffset;
+    private static nint? _InterpolationOffset;
 
-  public CPerParticleFloatInput Interpolation {
-    get {
-      if (_InterpolationOffset == null) {
-        _InterpolationOffset = Schema.GetOffset(0xF948CFAFCF55B987);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+    public CPerParticleFloatInput Interpolation {
+        get {
+            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0xF948CFAFCF55B987);
+            return new CPerParticleFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+        }
     }
-  }
 
 
 }

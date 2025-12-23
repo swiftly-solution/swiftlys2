@@ -6,37 +6,27 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimNodePathImpl : SchemaClass, CAnimNodePath {
+internal partial class CAnimNodePathImpl : SchemaClass, CAnimNodePath
+{
+    public CAnimNodePathImpl(nint handle) : base(handle) { }
 
-  public CAnimNodePathImpl(nint handle) : base(handle) {
-  }
-
-  private static nint? _PathOffset;
-
-  public SchemaUntypedField Path {
-    get {
-      if (_PathOffset == null) {
-        _PathOffset = Schema.GetOffset(0xE070E30C2915C8D6);
-      }
-      return new SchemaUntypedField(_Handle + _PathOffset!.Value);
+    public ISchemaClassFixedArray<AnimNodeID> Path {
+        get => new SchemaClassFixedArray<AnimNodeID>(_Handle, 0xE070E30C2915C8D6, 11, 4, 4);
     }
-  }
-  private static nint? _CountOffset;
+    private static nint? _CountOffset;
 
-  public ref int Count {
-    get {
-      if (_CountOffset == null) {
-        _CountOffset = Schema.GetOffset(0xE070E30C7D31AC08);
-      }
-      return ref _Handle.AsRef<int>(_CountOffset!.Value);
+    public ref int Count {
+        get {
+            _CountOffset = _CountOffset ?? Schema.GetOffset(0xE070E30C7D31AC08);
+            return ref _Handle.AsRef<int>(_CountOffset!.Value);
+        }
     }
-  }
 
 
 }

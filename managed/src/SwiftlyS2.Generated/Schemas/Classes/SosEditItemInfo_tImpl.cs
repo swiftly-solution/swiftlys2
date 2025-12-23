@@ -6,88 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class SosEditItemInfo_tImpl : SchemaClass, SosEditItemInfo_t {
+internal partial class SosEditItemInfo_tImpl : SchemaClass, SosEditItemInfo_t
+{
+    public SosEditItemInfo_tImpl(nint handle) : base(handle) { }
 
-  public SosEditItemInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ItemTypeOffset;
 
-  private static nint? _ItemTypeOffset;
+    public ref SosEditItemType_t ItemType {
+        get {
+            _ItemTypeOffset = _ItemTypeOffset ?? Schema.GetOffset(0x8E29E1C0C91C9136);
+            return ref _Handle.AsRef<SosEditItemType_t>(_ItemTypeOffset!.Value);
+        }
+    }
+    private static nint? _ItemNameOffset;
 
-  public ref SosEditItemType_t ItemType {
-    get {
-      if (_ItemTypeOffset == null) {
-        _ItemTypeOffset = Schema.GetOffset(0x8E29E1C0C91C9136);
-      }
-      return ref _Handle.AsRef<SosEditItemType_t>(_ItemTypeOffset!.Value);
-    }
-  }
-  private static nint? _ItemNameOffset;
+    public string ItemName {
+        get {
+            _ItemNameOffset = _ItemNameOffset ?? Schema.GetOffset(0x8E29E1C0575A2B25);
+            return Schema.GetString(_Handle.Read<nint>(_ItemNameOffset!.Value));
+        }
+        set {
+            _ItemNameOffset = _ItemNameOffset ?? Schema.GetOffset(0x8E29E1C0575A2B25);
+            Schema.SetString(_Handle, _ItemNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ItemTypeNameOffset;
 
-  public string ItemName {
-    get {
-      if (_ItemNameOffset == null) {
-        _ItemNameOffset = Schema.GetOffset(0x8E29E1C0575A2B25);
-      }
-      var ptr = _Handle.Read<nint>(_ItemNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ItemNameOffset == null) {
-        _ItemNameOffset = Schema.GetOffset(0x8E29E1C0575A2B25);
-      }
-      Schema.SetString(_Handle, _ItemNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ItemTypeNameOffset;
+    public string ItemTypeName {
+        get {
+            _ItemTypeNameOffset = _ItemTypeNameOffset ?? Schema.GetOffset(0x8E29E1C0B2F8CB75);
+            return Schema.GetString(_Handle.Read<nint>(_ItemTypeNameOffset!.Value));
+        }
+        set {
+            _ItemTypeNameOffset = _ItemTypeNameOffset ?? Schema.GetOffset(0x8E29E1C0B2F8CB75);
+            Schema.SetString(_Handle, _ItemTypeNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _ItemKVStringOffset;
 
-  public string ItemTypeName {
-    get {
-      if (_ItemTypeNameOffset == null) {
-        _ItemTypeNameOffset = Schema.GetOffset(0x8E29E1C0B2F8CB75);
-      }
-      var ptr = _Handle.Read<nint>(_ItemTypeNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ItemTypeNameOffset == null) {
-        _ItemTypeNameOffset = Schema.GetOffset(0x8E29E1C0B2F8CB75);
-      }
-      Schema.SetString(_Handle, _ItemTypeNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _ItemKVStringOffset;
+    public string ItemKVString {
+        get {
+            _ItemKVStringOffset = _ItemKVStringOffset ?? Schema.GetOffset(0x8E29E1C0A0151DD6);
+            return Schema.GetString(_Handle.Read<nint>(_ItemKVStringOffset!.Value));
+        }
+        set {
+            _ItemKVStringOffset = _ItemKVStringOffset ?? Schema.GetOffset(0x8E29E1C0A0151DD6);
+            Schema.SetString(_Handle, _ItemKVStringOffset!.Value, value);
+        }
+    } 
+    private static nint? _ItemPosOffset;
 
-  public string ItemKVString {
-    get {
-      if (_ItemKVStringOffset == null) {
-        _ItemKVStringOffset = Schema.GetOffset(0x8E29E1C0A0151DD6);
-      }
-      var ptr = _Handle.Read<nint>(_ItemKVStringOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref Vector2D ItemPos {
+        get {
+            _ItemPosOffset = _ItemPosOffset ?? Schema.GetOffset(0x8E29E1C0AB2D0B6C);
+            return ref _Handle.AsRef<Vector2D>(_ItemPosOffset!.Value);
+        }
     }
-    set {
-      if (_ItemKVStringOffset == null) {
-        _ItemKVStringOffset = Schema.GetOffset(0x8E29E1C0A0151DD6);
-      }
-      Schema.SetString(_Handle, _ItemKVStringOffset!.Value, value);
-    }
-  } 
-  private static nint? _ItemPosOffset;
-
-  public ref Vector2D ItemPos {
-    get {
-      if (_ItemPosOffset == null) {
-        _ItemPosOffset = Schema.GetOffset(0x8E29E1C0AB2D0B6C);
-      }
-      return ref _Handle.AsRef<Vector2D>(_ItemPosOffset!.Value);
-    }
-  }
 
 
 }

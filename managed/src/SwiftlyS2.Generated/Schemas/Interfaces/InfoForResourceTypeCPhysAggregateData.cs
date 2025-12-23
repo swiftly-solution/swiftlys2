@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCPhysAggregateData : ISchemaClass<InfoForResourceTypeCPhysAggregateData> {
-
-  static InfoForResourceTypeCPhysAggregateData ISchemaClass<InfoForResourceTypeCPhysAggregateData>.From(nint handle) => new InfoForResourceTypeCPhysAggregateDataImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCPhysAggregateData>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCPhysAggregateData>.ClassName => null;
+public partial interface InfoForResourceTypeCPhysAggregateData : ISchemaClass<InfoForResourceTypeCPhysAggregateData>
+{
+    static InfoForResourceTypeCPhysAggregateData ISchemaClass<InfoForResourceTypeCPhysAggregateData>.From(nint handle) => new InfoForResourceTypeCPhysAggregateDataImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCPhysAggregateData>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCPhysAggregateData>.ClassName => null;
 
 
 

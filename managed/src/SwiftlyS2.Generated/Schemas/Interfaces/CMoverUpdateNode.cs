@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMoverUpdateNode : CUnaryUpdateNode, ISchemaClass<CMoverUpdateNode> {
+public partial interface CMoverUpdateNode : CUnaryUpdateNode, ISchemaClass<CMoverUpdateNode>
+{
+    static CMoverUpdateNode ISchemaClass<CMoverUpdateNode>.From(nint handle) => new CMoverUpdateNodeImpl(handle);
+    static int ISchemaClass<CMoverUpdateNode>.Size => 176;
+    static string? ISchemaClass<CMoverUpdateNode>.ClassName => null;
 
-  static CMoverUpdateNode ISchemaClass<CMoverUpdateNode>.From(nint handle) => new CMoverUpdateNodeImpl(handle);
-  static int ISchemaClass<CMoverUpdateNode>.Size => 176;
-  static string? ISchemaClass<CMoverUpdateNode>.ClassName => null;
 
-  
-  public CAnimInputDamping Damping { get; }
-  
-  public ref AnimValueSource FacingTarget { get; }
-  
-  public CAnimParamHandle MoveVecParam { get; }
-  
-  public CAnimParamHandle MoveHeadingParam { get; }
-  
-  public CAnimParamHandle TurnToFaceParam { get; }
-  
-  public ref float TurnToFaceOffset { get; }
-  
-  public ref float TurnToFaceLimit { get; }
-  
-  public ref bool Additive { get; }
-  
-  public ref bool ApplyMovement { get; }
-  
-  public ref bool OrientMovement { get; }
-  
-  public ref bool ApplyRotation { get; }
-  
-  public ref bool LimitOnly { get; }
+    public CAnimInputDamping Damping { get; }
+
+    public ref AnimValueSource FacingTarget { get; }
+
+    public CAnimParamHandle MoveVecParam { get; }
+
+    public CAnimParamHandle MoveHeadingParam { get; }
+
+    public CAnimParamHandle TurnToFaceParam { get; }
+
+    public ref float TurnToFaceOffset { get; }
+
+    public ref float TurnToFaceLimit { get; }
+
+    public ref bool Additive { get; }
+
+    public ref bool ApplyMovement { get; }
+
+    public ref bool OrientMovement { get; }
+
+    public ref bool ApplyRotation { get; }
+
+    public ref bool LimitOnly { get; }
 
 
 }

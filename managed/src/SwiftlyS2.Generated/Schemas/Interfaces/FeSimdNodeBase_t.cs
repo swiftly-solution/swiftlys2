@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeSimdNodeBase_t : ISchemaClass<FeSimdNodeBase_t> {
+public partial interface FeSimdNodeBase_t : ISchemaClass<FeSimdNodeBase_t>
+{
+    static FeSimdNodeBase_t ISchemaClass<FeSimdNodeBase_t>.From(nint handle) => new FeSimdNodeBase_tImpl(handle);
+    static int ISchemaClass<FeSimdNodeBase_t>.Size => 112;
+    static string? ISchemaClass<FeSimdNodeBase_t>.ClassName => null;
 
-  static FeSimdNodeBase_t ISchemaClass<FeSimdNodeBase_t>.From(nint handle) => new FeSimdNodeBase_tImpl(handle);
-  static int ISchemaClass<FeSimdNodeBase_t>.Size => 112;
-  static string? ISchemaClass<FeSimdNodeBase_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Node { get; }
-  
-  public ISchemaFixedArray<ushort> NodeX0 { get; }
-  
-  public ISchemaFixedArray<ushort> NodeX1 { get; }
-  
-  public ISchemaFixedArray<ushort> NodeY0 { get; }
-  
-  public ISchemaFixedArray<ushort> NodeY1 { get; }
-  
-  public ISchemaFixedArray<ushort> Dummy { get; }
-  
-  public FourQuaternions Adjust { get; }
+    public ISchemaFixedArray<ushort> Node { get; }
+
+    public ISchemaFixedArray<ushort> NodeX0 { get; }
+
+    public ISchemaFixedArray<ushort> NodeX1 { get; }
+
+    public ISchemaFixedArray<ushort> NodeY0 { get; }
+
+    public ISchemaFixedArray<ushort> NodeY1 { get; }
+
+    public ISchemaFixedArray<ushort> Dummy { get; }
+
+    public FourQuaternions Adjust { get; }
 
 
 }

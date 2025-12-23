@@ -8,82 +8,82 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFeJiggleBone : ISchemaClass<CFeJiggleBone> {
+public partial interface CFeJiggleBone : ISchemaClass<CFeJiggleBone>
+{
+    static CFeJiggleBone ISchemaClass<CFeJiggleBone>.From(nint handle) => new CFeJiggleBoneImpl(handle);
+    static int ISchemaClass<CFeJiggleBone>.Size => 156;
+    static string? ISchemaClass<CFeJiggleBone>.ClassName => null;
 
-  static CFeJiggleBone ISchemaClass<CFeJiggleBone>.From(nint handle) => new CFeJiggleBoneImpl(handle);
-  static int ISchemaClass<CFeJiggleBone>.Size => 156;
-  static string? ISchemaClass<CFeJiggleBone>.ClassName => null;
 
-  
-  public ref uint Flags { get; }
-  
-  public ref float Length { get; }
-  
-  public ref float TipMass { get; }
-  
-  public ref float YawStiffness { get; }
-  
-  public ref float YawDamping { get; }
-  
-  public ref float PitchStiffness { get; }
-  
-  public ref float PitchDamping { get; }
-  
-  public ref float AlongStiffness { get; }
-  
-  public ref float AlongDamping { get; }
-  
-  public ref float AngleLimit { get; }
-  
-  public ref float MinYaw { get; }
-  
-  public ref float MaxYaw { get; }
-  
-  public ref float YawFriction { get; }
-  
-  public ref float YawBounce { get; }
-  
-  public ref float MinPitch { get; }
-  
-  public ref float MaxPitch { get; }
-  
-  public ref float PitchFriction { get; }
-  
-  public ref float PitchBounce { get; }
-  
-  public ref float BaseMass { get; }
-  
-  public ref float BaseStiffness { get; }
-  
-  public ref float BaseDamping { get; }
-  
-  public ref float BaseMinLeft { get; }
-  
-  public ref float BaseMaxLeft { get; }
-  
-  public ref float BaseLeftFriction { get; }
-  
-  public ref float BaseMinUp { get; }
-  
-  public ref float BaseMaxUp { get; }
-  
-  public ref float BaseUpFriction { get; }
-  
-  public ref float BaseMinForward { get; }
-  
-  public ref float BaseMaxForward { get; }
-  
-  public ref float BaseForwardFriction { get; }
-  
-  public ref float Radius0 { get; }
-  
-  public ref float Radius1 { get; }
-  
-  public ref Vector Point0 { get; }
-  
-  public ref Vector Point1 { get; }
-  
-  public ref ushort CollisionMask { get; }
+    public ref uint Flags { get; }
+
+    public ref float Length { get; }
+
+    public ref float TipMass { get; }
+
+    public ref float YawStiffness { get; }
+
+    public ref float YawDamping { get; }
+
+    public ref float PitchStiffness { get; }
+
+    public ref float PitchDamping { get; }
+
+    public ref float AlongStiffness { get; }
+
+    public ref float AlongDamping { get; }
+
+    public ref float AngleLimit { get; }
+
+    public ref float MinYaw { get; }
+
+    public ref float MaxYaw { get; }
+
+    public ref float YawFriction { get; }
+
+    public ref float YawBounce { get; }
+
+    public ref float MinPitch { get; }
+
+    public ref float MaxPitch { get; }
+
+    public ref float PitchFriction { get; }
+
+    public ref float PitchBounce { get; }
+
+    public ref float BaseMass { get; }
+
+    public ref float BaseStiffness { get; }
+
+    public ref float BaseDamping { get; }
+
+    public ref float BaseMinLeft { get; }
+
+    public ref float BaseMaxLeft { get; }
+
+    public ref float BaseLeftFriction { get; }
+
+    public ref float BaseMinUp { get; }
+
+    public ref float BaseMaxUp { get; }
+
+    public ref float BaseUpFriction { get; }
+
+    public ref float BaseMinForward { get; }
+
+    public ref float BaseMaxForward { get; }
+
+    public ref float BaseForwardFriction { get; }
+
+    public ref float Radius0 { get; }
+
+    public ref float Radius1 { get; }
+
+    public ref Vector Point0 { get; }
+
+    public ref Vector Point1 { get; }
+
+    public ref ushort CollisionMask { get; }
 
 
 }

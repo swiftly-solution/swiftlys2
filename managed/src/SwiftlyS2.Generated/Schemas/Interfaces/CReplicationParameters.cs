@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CReplicationParameters : ISchemaClass<CReplicationParameters> {
+public partial interface CReplicationParameters : ISchemaClass<CReplicationParameters>
+{
+    static CReplicationParameters ISchemaClass<CReplicationParameters>.From(nint handle) => new CReplicationParametersImpl(handle);
+    static int ISchemaClass<CReplicationParameters>.Size => 4552;
+    static string? ISchemaClass<CReplicationParameters>.ClassName => null;
 
-  static CReplicationParameters ISchemaClass<CReplicationParameters>.From(nint handle) => new CReplicationParametersImpl(handle);
-  static int ISchemaClass<CReplicationParameters>.Size => 4552;
-  static string? ISchemaClass<CReplicationParameters>.ClassName => null;
 
-  
-  public ref ParticleReplicationMode_t ReplicationMode { get; }
-  
-  public ref bool ScaleChildParticleRadii { get; }
-  
-  public CParticleCollectionFloatInput MinRandomRadiusScale { get; }
-  
-  public CParticleCollectionFloatInput MaxRandomRadiusScale { get; }
-  
-  public CParticleCollectionVecInput MinRandomDisplacement { get; }
-  
-  public CParticleCollectionVecInput MaxRandomDisplacement { get; }
-  
-  public CParticleCollectionFloatInput ModellingScale { get; }
+    public ref ParticleReplicationMode_t ReplicationMode { get; }
+
+    public ref bool ScaleChildParticleRadii { get; }
+
+    public CParticleCollectionFloatInput MinRandomRadiusScale { get; }
+
+    public CParticleCollectionFloatInput MaxRandomRadiusScale { get; }
+
+    public CParticleCollectionVecInput MinRandomDisplacement { get; }
+
+    public CParticleCollectionVecInput MaxRandomDisplacement { get; }
+
+    public CParticleCollectionFloatInput ModellingScale { get; }
 
 
 }

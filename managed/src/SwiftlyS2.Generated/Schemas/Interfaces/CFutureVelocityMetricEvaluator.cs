@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFutureVelocityMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CFutureVelocityMetricEvaluator> {
+public partial interface CFutureVelocityMetricEvaluator : CMotionMetricEvaluator, ISchemaClass<CFutureVelocityMetricEvaluator>
+{
+    static CFutureVelocityMetricEvaluator ISchemaClass<CFutureVelocityMetricEvaluator>.From(nint handle) => new CFutureVelocityMetricEvaluatorImpl(handle);
+    static int ISchemaClass<CFutureVelocityMetricEvaluator>.Size => 96;
+    static string? ISchemaClass<CFutureVelocityMetricEvaluator>.ClassName => null;
 
-  static CFutureVelocityMetricEvaluator ISchemaClass<CFutureVelocityMetricEvaluator>.From(nint handle) => new CFutureVelocityMetricEvaluatorImpl(handle);
-  static int ISchemaClass<CFutureVelocityMetricEvaluator>.Size => 96;
-  static string? ISchemaClass<CFutureVelocityMetricEvaluator>.ClassName => null;
 
-  
-  public ref float Distance { get; }
-  
-  public ref float StoppingDistance { get; }
-  
-  public ref float TargetSpeed { get; }
-  
-  public ref VelocityMetricMode Mode { get; }
+    public ref float Distance { get; }
+
+    public ref float StoppingDistance { get; }
+
+    public ref float TargetSpeed { get; }
+
+    public ref VelocityMetricMode Mode { get; }
 
 
 }

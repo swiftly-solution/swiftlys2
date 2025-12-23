@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCredits : CPointEntity, ISchemaClass<CCredits> {
+public partial interface CCredits : CPointEntity, ISchemaClass<CCredits>
+{
+    static CCredits ISchemaClass<CCredits>.From(nint handle) => new CCreditsImpl(handle);
+    static int ISchemaClass<CCredits>.Size => 1312;
+    static string? ISchemaClass<CCredits>.ClassName => "env_credits";
 
-  static CCredits ISchemaClass<CCredits>.From(nint handle) => new CCreditsImpl(handle);
-  static int ISchemaClass<CCredits>.Size => 1312;
-  static string? ISchemaClass<CCredits>.ClassName => "env_credits";
 
-  
-  public CEntityIOOutput OnCreditsDone { get; }
-  
-  public ref bool RolledOutroCredits { get; }
-  
-  public ref float LogoLength { get; }
+    public ref CEntityIOOutput OnCreditsDone { get; }
+
+    public ref bool RolledOutroCredits { get; }
+
+    public ref float LogoLength { get; }
 
 
 }

@@ -8,93 +8,93 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBasePropDoor : CDynamicProp, ISchemaClass<CBasePropDoor> {
+public partial interface CBasePropDoor : CDynamicProp, ISchemaClass<CBasePropDoor>
+{
+    static CBasePropDoor ISchemaClass<CBasePropDoor>.From(nint handle) => new CBasePropDoorImpl(handle);
+    static int ISchemaClass<CBasePropDoor>.Size => 4080;
+    static string? ISchemaClass<CBasePropDoor>.ClassName => null;
 
-  static CBasePropDoor ISchemaClass<CBasePropDoor>.From(nint handle) => new CBasePropDoorImpl(handle);
-  static int ISchemaClass<CBasePropDoor>.Size => 4080;
-  static string? ISchemaClass<CBasePropDoor>.ClassName => null;
 
-  
-  public ref float AutoReturnDelay { get; }
-  
-  public ref CUtlVector<CHandle<CBasePropDoor>> DoorList { get; }
-  
-  public ref int HardwareType { get; }
-  
-  public ref bool NeedsHardware { get; }
-  
-  public ref DoorState_t DoorState { get; }
-  
-  public ref bool Locked { get; }
-  
-  public ref bool NoNPCs { get; }
-  
-  public ref Vector ClosedPosition { get; }
-  
-  public ref QAngle ClosedAngles { get; }
-  
-  public ref CHandle<CBaseEntity> Blocker { get; }
-  
-  public ref bool FirstBlocked { get; }
-  
-  public locksound_t Ls { get; }
-  
-  public ref bool ForceClosed { get; }
-  
-  public ref Vector LatchWorldPosition { get; }
-  
-  public ref CHandle<CBaseEntity> Activator { get; }
-  
-  public string SoundMoving { get; set; }
-  
-  public string SoundOpen { get; set; }
-  
-  public string SoundClose { get; set; }
-  
-  public string SoundLock { get; set; }
-  
-  public string SoundUnlock { get; set; }
-  
-  public string SoundLatch { get; set; }
-  
-  public string SoundPound { get; set; }
-  
-  public string SoundJiggle { get; set; }
-  
-  public string SoundLockedAnim { get; set; }
-  
-  public ref int NumCloseAttempts { get; }
-  
-  public ref CUtlStringToken PhysicsMaterial { get; }
-  
-  public string SlaveName { get; set; }
-  
-  public ref CHandle<CBasePropDoor> Master { get; }
-  
-  public CEntityIOOutput OnBlockedClosing { get; }
-  
-  public CEntityIOOutput OnBlockedOpening { get; }
-  
-  public CEntityIOOutput OnUnblockedClosing { get; }
-  
-  public CEntityIOOutput OnUnblockedOpening { get; }
-  
-  public CEntityIOOutput OnFullyClosed { get; }
-  
-  public CEntityIOOutput OnFullyOpen { get; }
-  
-  public CEntityIOOutput OnClose { get; }
-  
-  public CEntityIOOutput OnOpen { get; }
-  
-  public CEntityIOOutput OnLockedUse { get; }
-  
-  public CEntityIOOutput OnAjarOpen { get; }
+    public ref float AutoReturnDelay { get; }
 
-  public void DoorStateUpdated();
-  public void LockedUpdated();
-  public void NoNPCsUpdated();
-  public void ClosedPositionUpdated();
-  public void ClosedAnglesUpdated();
-  public void MasterUpdated();
+    public ref CUtlVector<CHandle<CBasePropDoor>> DoorList { get; }
+
+    public ref int HardwareType { get; }
+
+    public ref bool NeedsHardware { get; }
+
+    public ref DoorState_t DoorState { get; }
+
+    public ref bool Locked { get; }
+
+    public ref bool NoNPCs { get; }
+
+    public ref Vector ClosedPosition { get; }
+
+    public ref QAngle ClosedAngles { get; }
+
+    public ref CHandle<CBaseEntity> Blocker { get; }
+
+    public ref bool FirstBlocked { get; }
+
+    public locksound_t Ls { get; }
+
+    public ref bool ForceClosed { get; }
+
+    public ref Vector LatchWorldPosition { get; }
+
+    public ref CHandle<CBaseEntity> Activator { get; }
+
+    public string SoundMoving { get; set; }
+
+    public string SoundOpen { get; set; }
+
+    public string SoundClose { get; set; }
+
+    public string SoundLock { get; set; }
+
+    public string SoundUnlock { get; set; }
+
+    public string SoundLatch { get; set; }
+
+    public string SoundPound { get; set; }
+
+    public string SoundJiggle { get; set; }
+
+    public string SoundLockedAnim { get; set; }
+
+    public ref int NumCloseAttempts { get; }
+
+    public ref CUtlStringToken PhysicsMaterial { get; }
+
+    public string SlaveName { get; set; }
+
+    public ref CHandle<CBasePropDoor> Master { get; }
+
+    public ref CEntityIOOutput OnBlockedClosing { get; }
+
+    public ref CEntityIOOutput OnBlockedOpening { get; }
+
+    public ref CEntityIOOutput OnUnblockedClosing { get; }
+
+    public ref CEntityIOOutput OnUnblockedOpening { get; }
+
+    public ref CEntityIOOutput OnFullyClosed { get; }
+
+    public ref CEntityIOOutput OnFullyOpen { get; }
+
+    public ref CEntityIOOutput OnClose { get; }
+
+    public ref CEntityIOOutput OnOpen { get; }
+
+    public ref CEntityIOOutput OnLockedUse { get; }
+
+    public ref CEntityIOOutput OnAjarOpen { get; }
+
+    public void DoorStateUpdated();
+    public void LockedUpdated();
+    public void NoNPCsUpdated();
+    public void ClosedPositionUpdated();
+    public void ClosedAnglesUpdated();
+    public void MasterUpdated();
 }

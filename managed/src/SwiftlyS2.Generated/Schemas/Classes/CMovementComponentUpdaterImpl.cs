@@ -6,97 +6,75 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMovementComponentUpdaterImpl : CAnimComponentUpdaterImpl, CMovementComponentUpdater {
+internal partial class CMovementComponentUpdaterImpl : CAnimComponentUpdaterImpl, CMovementComponentUpdater
+{
+    public CMovementComponentUpdaterImpl(nint handle) : base(handle) { }
 
-  public CMovementComponentUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MotorsOffset;
 
-  private static nint? _MotorsOffset;
-
-  public ref CUtlVector<SchemaUntypedField> Motors {
-    get {
-      if (_MotorsOffset == null) {
-        _MotorsOffset = Schema.GetOffset(0xCAAB73FD817BF33);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotorsOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> Motors {
+        get {
+            _MotorsOffset = _MotorsOffset ?? Schema.GetOffset(0xCAAB73FD817BF33);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_MotorsOffset!.Value);
+        }
     }
-  }
-  private static nint? _FacingDampingOffset;
+    private static nint? _FacingDampingOffset;
 
-  public CAnimInputDamping FacingDamping {
-    get {
-      if (_FacingDampingOffset == null) {
-        _FacingDampingOffset = Schema.GetOffset(0xCAAB73F9A430F4B);
-      }
-      return new CAnimInputDampingImpl(_Handle + _FacingDampingOffset!.Value);
+    public CAnimInputDamping FacingDamping {
+        get {
+            _FacingDampingOffset = _FacingDampingOffset ?? Schema.GetOffset(0xCAAB73F9A430F4B);
+            return new CAnimInputDampingImpl(_Handle + _FacingDampingOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultMotorIndexOffset;
+    private static nint? _DefaultMotorIndexOffset;
 
-  public ref int DefaultMotorIndex {
-    get {
-      if (_DefaultMotorIndexOffset == null) {
-        _DefaultMotorIndexOffset = Schema.GetOffset(0xCAAB73F5A788411);
-      }
-      return ref _Handle.AsRef<int>(_DefaultMotorIndexOffset!.Value);
+    public ref int DefaultMotorIndex {
+        get {
+            _DefaultMotorIndexOffset = _DefaultMotorIndexOffset ?? Schema.GetOffset(0xCAAB73F5A788411);
+            return ref _Handle.AsRef<int>(_DefaultMotorIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _DefaultRunSpeedOffset;
+    private static nint? _DefaultRunSpeedOffset;
 
-  public ref float DefaultRunSpeed {
-    get {
-      if (_DefaultRunSpeedOffset == null) {
-        _DefaultRunSpeedOffset = Schema.GetOffset(0xCAAB73F47B9DED8);
-      }
-      return ref _Handle.AsRef<float>(_DefaultRunSpeedOffset!.Value);
+    public ref float DefaultRunSpeed {
+        get {
+            _DefaultRunSpeedOffset = _DefaultRunSpeedOffset ?? Schema.GetOffset(0xCAAB73F47B9DED8);
+            return ref _Handle.AsRef<float>(_DefaultRunSpeedOffset!.Value);
+        }
     }
-  }
-  private static nint? _MoveVarsDisabledOffset;
+    private static nint? _MoveVarsDisabledOffset;
 
-  public ref bool MoveVarsDisabled {
-    get {
-      if (_MoveVarsDisabledOffset == null) {
-        _MoveVarsDisabledOffset = Schema.GetOffset(0xCAAB73FB55A4C6A);
-      }
-      return ref _Handle.AsRef<bool>(_MoveVarsDisabledOffset!.Value);
+    public ref bool MoveVarsDisabled {
+        get {
+            _MoveVarsDisabledOffset = _MoveVarsDisabledOffset ?? Schema.GetOffset(0xCAAB73FB55A4C6A);
+            return ref _Handle.AsRef<bool>(_MoveVarsDisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _NetworkPathOffset;
+    private static nint? _NetworkPathOffset;
 
-  public ref bool NetworkPath {
-    get {
-      if (_NetworkPathOffset == null) {
-        _NetworkPathOffset = Schema.GetOffset(0xCAAB73F86C36FF6);
-      }
-      return ref _Handle.AsRef<bool>(_NetworkPathOffset!.Value);
+    public ref bool NetworkPath {
+        get {
+            _NetworkPathOffset = _NetworkPathOffset ?? Schema.GetOffset(0xCAAB73F86C36FF6);
+            return ref _Handle.AsRef<bool>(_NetworkPathOffset!.Value);
+        }
     }
-  }
-  private static nint? _NetworkFacingOffset;
+    private static nint? _NetworkFacingOffset;
 
-  public ref bool NetworkFacing {
-    get {
-      if (_NetworkFacingOffset == null) {
-        _NetworkFacingOffset = Schema.GetOffset(0xCAAB73FE3436E8F);
-      }
-      return ref _Handle.AsRef<bool>(_NetworkFacingOffset!.Value);
+    public ref bool NetworkFacing {
+        get {
+            _NetworkFacingOffset = _NetworkFacingOffset ?? Schema.GetOffset(0xCAAB73FE3436E8F);
+            return ref _Handle.AsRef<bool>(_NetworkFacingOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamHandlesOffset;
-
-  public SchemaUntypedField ParamHandles {
-    get {
-      if (_ParamHandlesOffset == null) {
-        _ParamHandlesOffset = Schema.GetOffset(0xCAAB73FF6A771ED);
-      }
-      return new SchemaUntypedField(_Handle + _ParamHandlesOffset!.Value);
+    public ISchemaClassFixedArray<CAnimParamHandle> ParamHandles {
+        get => new SchemaClassFixedArray<CAnimParamHandle>(_Handle, 0xCAAB73FF6A771ED, 34, 2, 1);
     }
-  }
 
 
 }

@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_InitFromVectorFieldSnapshotImpl : CParticleFunctionInitializerImpl, C_INIT_InitFromVectorFieldSnapshot {
+internal partial class C_INIT_InitFromVectorFieldSnapshotImpl : CParticleFunctionInitializerImpl, C_INIT_InitFromVectorFieldSnapshot
+{
+    public C_INIT_InitFromVectorFieldSnapshotImpl(nint handle) : base(handle) { }
 
-  public C_INIT_InitFromVectorFieldSnapshotImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x1F4AA8713F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x1F4AA8713F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
+        }
     }
-  }
-  private static nint? _LocalSpaceCPOffset;
+    private static nint? _LocalSpaceCPOffset;
 
-  public ref int LocalSpaceCP {
-    get {
-      if (_LocalSpaceCPOffset == null) {
-        _LocalSpaceCPOffset = Schema.GetOffset(0x1F4AA871C8E9CB31);
-      }
-      return ref _Handle.AsRef<int>(_LocalSpaceCPOffset!.Value);
+    public ref int LocalSpaceCP {
+        get {
+            _LocalSpaceCPOffset = _LocalSpaceCPOffset ?? Schema.GetOffset(0x1F4AA871C8E9CB31);
+            return ref _Handle.AsRef<int>(_LocalSpaceCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightUpdateCPOffset;
+    private static nint? _WeightUpdateCPOffset;
 
-  public ref int WeightUpdateCP {
-    get {
-      if (_WeightUpdateCPOffset == null) {
-        _WeightUpdateCPOffset = Schema.GetOffset(0x1F4AA8712CCDE17F);
-      }
-      return ref _Handle.AsRef<int>(_WeightUpdateCPOffset!.Value);
+    public ref int WeightUpdateCP {
+        get {
+            _WeightUpdateCPOffset = _WeightUpdateCPOffset ?? Schema.GetOffset(0x1F4AA8712CCDE17F);
+            return ref _Handle.AsRef<int>(_WeightUpdateCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseVerticalVelocityOffset;
+    private static nint? _UseVerticalVelocityOffset;
 
-  public ref bool UseVerticalVelocity {
-    get {
-      if (_UseVerticalVelocityOffset == null) {
-        _UseVerticalVelocityOffset = Schema.GetOffset(0x1F4AA8713C99C6FD);
-      }
-      return ref _Handle.AsRef<bool>(_UseVerticalVelocityOffset!.Value);
+    public ref bool UseVerticalVelocity {
+        get {
+            _UseVerticalVelocityOffset = _UseVerticalVelocityOffset ?? Schema.GetOffset(0x1F4AA8713C99C6FD);
+            return ref _Handle.AsRef<bool>(_UseVerticalVelocityOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public CPerParticleVecInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x1F4AA8715F596B51);
-      }
-      return new CPerParticleVecInputImpl(_Handle + _ScaleOffset!.Value);
+    public CPerParticleVecInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x1F4AA8715F596B51);
+            return new CPerParticleVecInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

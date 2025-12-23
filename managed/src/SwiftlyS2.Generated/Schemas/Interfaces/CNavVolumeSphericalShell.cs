@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNavVolumeSphericalShell : CNavVolumeSphere, ISchemaClass<CNavVolumeSphericalShell> {
+public partial interface CNavVolumeSphericalShell : CNavVolumeSphere, ISchemaClass<CNavVolumeSphericalShell>
+{
+    static CNavVolumeSphericalShell ISchemaClass<CNavVolumeSphericalShell>.From(nint handle) => new CNavVolumeSphericalShellImpl(handle);
+    static int ISchemaClass<CNavVolumeSphericalShell>.Size => 144;
+    static string? ISchemaClass<CNavVolumeSphericalShell>.ClassName => null;
 
-  static CNavVolumeSphericalShell ISchemaClass<CNavVolumeSphericalShell>.From(nint handle) => new CNavVolumeSphericalShellImpl(handle);
-  static int ISchemaClass<CNavVolumeSphericalShell>.Size => 144;
-  static string? ISchemaClass<CNavVolumeSphericalShell>.ClassName => null;
 
-  
-  public ref float RadiusInner { get; }
+    public ref float RadiusInner { get; }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Outflow_CycleRandom : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Outflow_CycleRandom> {
+public partial interface CPulseCell_Outflow_CycleRandom : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_Outflow_CycleRandom>
+{
+    static CPulseCell_Outflow_CycleRandom ISchemaClass<CPulseCell_Outflow_CycleRandom>.From(nint handle) => new CPulseCell_Outflow_CycleRandomImpl(handle);
+    static int ISchemaClass<CPulseCell_Outflow_CycleRandom>.Size => 96;
+    static string? ISchemaClass<CPulseCell_Outflow_CycleRandom>.ClassName => null;
 
-  static CPulseCell_Outflow_CycleRandom ISchemaClass<CPulseCell_Outflow_CycleRandom>.From(nint handle) => new CPulseCell_Outflow_CycleRandomImpl(handle);
-  static int ISchemaClass<CPulseCell_Outflow_CycleRandom>.Size => 96;
-  static string? ISchemaClass<CPulseCell_Outflow_CycleRandom>.ClassName => null;
 
-  
-  public ref CUtlVector<CPulse_OutflowConnection> Outputs { get; }
+    public ref CUtlVector<CPulse_OutflowConnection> Outputs { get; }
 
 
 }

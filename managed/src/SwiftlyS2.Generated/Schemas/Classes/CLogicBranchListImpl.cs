@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicBranchListImpl : CLogicalEntityImpl, CLogicBranchList {
+internal partial class CLogicBranchListImpl : CLogicalEntityImpl, CLogicBranchList
+{
+    public CLogicBranchListImpl(nint handle) : base(handle) { }
 
-  public CLogicBranchListImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LogicBranchNamesOffset;
 
-  private static nint? _LogicBranchNamesOffset;
+    public string LogicBranchNames {
+        get {
+            _LogicBranchNamesOffset = _LogicBranchNamesOffset ?? Schema.GetOffset(0xB21E12B82C1677D7);
+            return Schema.GetString(_Handle.Read<nint>(_LogicBranchNamesOffset!.Value));
+        }
+        set {
+            _LogicBranchNamesOffset = _LogicBranchNamesOffset ?? Schema.GetOffset(0xB21E12B82C1677D7);
+            Schema.SetString(_Handle, _LogicBranchNamesOffset!.Value, value);
+        }
+    } 
+    private static nint? _LogicBranchListOffset;
 
-  public string LogicBranchNames {
-    get {
-      if (_LogicBranchNamesOffset == null) {
-        _LogicBranchNamesOffset = Schema.GetOffset(0xB21E12B82C1677D7);
-      }
-      var ptr = _Handle.Read<nint>(_LogicBranchNamesOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CHandle<CBaseEntity>> LogicBranchList {
+        get {
+            _LogicBranchListOffset = _LogicBranchListOffset ?? Schema.GetOffset(0xB21E12B8E4DEC285);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_LogicBranchListOffset!.Value);
+        }
     }
-    set {
-      if (_LogicBranchNamesOffset == null) {
-        _LogicBranchNamesOffset = Schema.GetOffset(0xB21E12B82C1677D7);
-      }
-      Schema.SetString(_Handle, _LogicBranchNamesOffset!.Value, value);
-    }
-  } 
-  private static nint? _LogicBranchListOffset;
+    private static nint? _LastStateOffset;
 
-  public ref CUtlVector<CHandle<CBaseEntity>> LogicBranchList {
-    get {
-      if (_LogicBranchListOffset == null) {
-        _LogicBranchListOffset = Schema.GetOffset(0xB21E12B8E4DEC285);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_LogicBranchListOffset!.Value);
+    public ref CLogicBranchList__LogicBranchListenerLastState_t LastState {
+        get {
+            _LastStateOffset = _LastStateOffset ?? Schema.GetOffset(0xB21E12B89A391AC5);
+            return ref _Handle.AsRef<CLogicBranchList__LogicBranchListenerLastState_t>(_LastStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastStateOffset;
+    private static nint? _OnAllTrueOffset;
 
-  public ref CLogicBranchList__LogicBranchListenerLastState_t LastState {
-    get {
-      if (_LastStateOffset == null) {
-        _LastStateOffset = Schema.GetOffset(0xB21E12B89A391AC5);
-      }
-      return ref _Handle.AsRef<CLogicBranchList__LogicBranchListenerLastState_t>(_LastStateOffset!.Value);
+    public ref CEntityIOOutput OnAllTrue {
+        get {
+            _OnAllTrueOffset = _OnAllTrueOffset ?? Schema.GetOffset(0xB21E12B8419FFFAF);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAllTrueOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnAllTrueOffset;
+    private static nint? _OnAllFalseOffset;
 
-  public CEntityIOOutput OnAllTrue {
-    get {
-      if (_OnAllTrueOffset == null) {
-        _OnAllTrueOffset = Schema.GetOffset(0xB21E12B8419FFFAF);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnAllTrueOffset!.Value);
+    public ref CEntityIOOutput OnAllFalse {
+        get {
+            _OnAllFalseOffset = _OnAllFalseOffset ?? Schema.GetOffset(0xB21E12B86EFCD332);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnAllFalseOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnAllFalseOffset;
+    private static nint? _OnMixedOffset;
 
-  public CEntityIOOutput OnAllFalse {
-    get {
-      if (_OnAllFalseOffset == null) {
-        _OnAllFalseOffset = Schema.GetOffset(0xB21E12B86EFCD332);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnAllFalseOffset!.Value);
+    public ref CEntityIOOutput OnMixed {
+        get {
+            _OnMixedOffset = _OnMixedOffset ?? Schema.GetOffset(0xB21E12B8EBC72437);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMixedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnMixedOffset;
-
-  public CEntityIOOutput OnMixed {
-    get {
-      if (_OnMixedOffset == null) {
-        _OnMixedOffset = Schema.GetOffset(0xB21E12B8EBC72437);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnMixedOffset!.Value);
-    }
-  }
 
 
 }

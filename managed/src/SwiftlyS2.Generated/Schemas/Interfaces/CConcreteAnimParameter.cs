@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CConcreteAnimParameter : CAnimParameterBase, ISchemaClass<CConcreteAnimParameter> {
+public partial interface CConcreteAnimParameter : CAnimParameterBase, ISchemaClass<CConcreteAnimParameter>
+{
+    static CConcreteAnimParameter ISchemaClass<CConcreteAnimParameter>.From(nint handle) => new CConcreteAnimParameterImpl(handle);
+    static int ISchemaClass<CConcreteAnimParameter>.Size => 128;
+    static string? ISchemaClass<CConcreteAnimParameter>.ClassName => null;
 
-  static CConcreteAnimParameter ISchemaClass<CConcreteAnimParameter>.From(nint handle) => new CConcreteAnimParameterImpl(handle);
-  static int ISchemaClass<CConcreteAnimParameter>.Size => 128;
-  static string? ISchemaClass<CConcreteAnimParameter>.ClassName => null;
 
-  
-  public ref AnimParamButton_t PreviewButton { get; }
-  
-  public ref AnimParamNetworkSetting NetworkSetting { get; }
-  
-  public ref bool UseMostRecentValue { get; }
-  
-  public ref bool AutoReset { get; }
-  
-  public ref bool GameWritable { get; }
-  
-  public ref bool GraphWritable { get; }
+    public ref AnimParamButton_t PreviewButton { get; }
+
+    public ref AnimParamNetworkSetting NetworkSetting { get; }
+
+    public ref bool UseMostRecentValue { get; }
+
+    public ref bool AutoReset { get; }
+
+    public ref bool GameWritable { get; }
+
+    public ref bool GraphWritable { get; }
 
 
 }

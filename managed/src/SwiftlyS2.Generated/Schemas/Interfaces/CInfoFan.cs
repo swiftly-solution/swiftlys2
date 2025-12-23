@@ -8,23 +8,23 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoFan : CPointEntity, ISchemaClass<CInfoFan> {
+public partial interface CInfoFan : CPointEntity, ISchemaClass<CInfoFan>
+{
+    static CInfoFan ISchemaClass<CInfoFan>.From(nint handle) => new CInfoFanImpl(handle);
+    static int ISchemaClass<CInfoFan>.Size => 1352;
+    static string? ISchemaClass<CInfoFan>.ClassName => "info_trigger_fan";
 
-  static CInfoFan ISchemaClass<CInfoFan>.From(nint handle) => new CInfoFanImpl(handle);
-  static int ISchemaClass<CInfoFan>.Size => 1352;
-  static string? ISchemaClass<CInfoFan>.ClassName => "info_trigger_fan";
 
-  
-  public ref float FanForceMaxRadius { get; }
-  
-  public ref float FanForceMinRadius { get; }
-  
-  public ref float CurveDistRange { get; }
-  
-  public string FanForceCurveString { get; set; }
+    public ref float FanForceMaxRadius { get; }
 
-  public void FanForceMaxRadiusUpdated();
-  public void FanForceMinRadiusUpdated();
-  public void CurveDistRangeUpdated();
-  public void FanForceCurveStringUpdated();
+    public ref float FanForceMinRadius { get; }
+
+    public ref float CurveDistRange { get; }
+
+    public string FanForceCurveString { get; set; }
+
+    public void FanForceMaxRadiusUpdated();
+    public void FanForceMinRadiusUpdated();
+    public void CurveDistRangeUpdated();
+    public void FanForceCurveStringUpdated();
 }

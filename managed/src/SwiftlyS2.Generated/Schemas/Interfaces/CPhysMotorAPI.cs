@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysMotorAPI : ISchemaClass<CPhysMotorAPI> {
-
-  static CPhysMotorAPI ISchemaClass<CPhysMotorAPI>.From(nint handle) => new CPhysMotorAPIImpl(handle);
-  static int ISchemaClass<CPhysMotorAPI>.Size => 8;
-  static string? ISchemaClass<CPhysMotorAPI>.ClassName => null;
+public partial interface CPhysMotorAPI : ISchemaClass<CPhysMotorAPI>
+{
+    static CPhysMotorAPI ISchemaClass<CPhysMotorAPI>.From(nint handle) => new CPhysMotorAPIImpl(handle);
+    static int ISchemaClass<CPhysMotorAPI>.Size => 8;
+    static string? ISchemaClass<CPhysMotorAPI>.ClassName => null;
 
 
 

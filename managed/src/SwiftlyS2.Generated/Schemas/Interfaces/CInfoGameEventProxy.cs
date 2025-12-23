@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoGameEventProxy : CPointEntity, ISchemaClass<CInfoGameEventProxy> {
+public partial interface CInfoGameEventProxy : CPointEntity, ISchemaClass<CInfoGameEventProxy>
+{
+    static CInfoGameEventProxy ISchemaClass<CInfoGameEventProxy>.From(nint handle) => new CInfoGameEventProxyImpl(handle);
+    static int ISchemaClass<CInfoGameEventProxy>.Size => 1280;
+    static string? ISchemaClass<CInfoGameEventProxy>.ClassName => "info_game_event_proxy";
 
-  static CInfoGameEventProxy ISchemaClass<CInfoGameEventProxy>.From(nint handle) => new CInfoGameEventProxyImpl(handle);
-  static int ISchemaClass<CInfoGameEventProxy>.Size => 1280;
-  static string? ISchemaClass<CInfoGameEventProxy>.ClassName => "info_game_event_proxy";
 
-  
-  public string EventName { get; set; }
-  
-  public ref float Range { get; }
+    public string EventName { get; set; }
+
+    public ref float Range { get; }
 
 
 }

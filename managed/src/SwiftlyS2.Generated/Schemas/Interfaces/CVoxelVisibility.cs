@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoxelVisibility : ISchemaClass<CVoxelVisibility> {
+public partial interface CVoxelVisibility : ISchemaClass<CVoxelVisibility>
+{
+    static CVoxelVisibility ISchemaClass<CVoxelVisibility>.From(nint handle) => new CVoxelVisibilityImpl(handle);
+    static int ISchemaClass<CVoxelVisibility>.Size => 160;
+    static string? ISchemaClass<CVoxelVisibility>.ClassName => null;
 
-  static CVoxelVisibility ISchemaClass<CVoxelVisibility>.From(nint handle) => new CVoxelVisibilityImpl(handle);
-  static int ISchemaClass<CVoxelVisibility>.Size => 160;
-  static string? ISchemaClass<CVoxelVisibility>.ClassName => null;
 
-  
-  public ref uint BaseClusterCount { get; }
-  
-  public ref uint PVSBytesPerCluster { get; }
-  
-  public ref Vector MinBounds { get; }
-  
-  public ref Vector MaxBounds { get; }
-  
-  public ref float GridSize { get; }
-  
-  public ref uint SkyVisibilityCluster { get; }
-  
-  public ref uint SunVisibilityCluster { get; }
-  
-  public VoxelVisBlockOffset_t NodeBlock { get; }
-  
-  public VoxelVisBlockOffset_t RegionBlock { get; }
-  
-  public VoxelVisBlockOffset_t EnclosedClusterListBlock { get; }
-  
-  public VoxelVisBlockOffset_t EnclosedClustersBlock { get; }
-  
-  public VoxelVisBlockOffset_t MasksBlock { get; }
-  
-  public VoxelVisBlockOffset_t VisBlocks { get; }
+    public ref uint BaseClusterCount { get; }
+
+    public ref uint PVSBytesPerCluster { get; }
+
+    public ref Vector MinBounds { get; }
+
+    public ref Vector MaxBounds { get; }
+
+    public ref float GridSize { get; }
+
+    public ref uint SkyVisibilityCluster { get; }
+
+    public ref uint SunVisibilityCluster { get; }
+
+    public VoxelVisBlockOffset_t NodeBlock { get; }
+
+    public VoxelVisBlockOffset_t RegionBlock { get; }
+
+    public VoxelVisBlockOffset_t EnclosedClusterListBlock { get; }
+
+    public VoxelVisBlockOffset_t EnclosedClustersBlock { get; }
+
+    public VoxelVisBlockOffset_t MasksBlock { get; }
+
+    public VoxelVisBlockOffset_t VisBlocks { get; }
 
 
 }

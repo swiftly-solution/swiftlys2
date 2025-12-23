@@ -6,59 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CEnvFadeImpl : CLogicalEntityImpl, CEnvFade {
+internal partial class CEnvFadeImpl : CLogicalEntityImpl, CEnvFade
+{
+    public CEnvFadeImpl(nint handle) : base(handle) { }
 
-  public CEnvFadeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FadeColorOffset;
 
-  private static nint? _FadeColorOffset;
-
-  public ref Color FadeColor {
-    get {
-      if (_FadeColorOffset == null) {
-        _FadeColorOffset = Schema.GetOffset(0xEFBFC063C1517BF2);
-      }
-      return ref _Handle.AsRef<Color>(_FadeColorOffset!.Value);
+    public ref Color FadeColor {
+        get {
+            _FadeColorOffset = _FadeColorOffset ?? Schema.GetOffset(0xEFBFC063C1517BF2);
+            return ref _Handle.AsRef<Color>(_FadeColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _DurationOffset;
+    private static nint? _DurationOffset;
 
-  public ref float Duration {
-    get {
-      if (_DurationOffset == null) {
-        _DurationOffset = Schema.GetOffset(0xEFBFC0639879A98D);
-      }
-      return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+    public ref float Duration {
+        get {
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xEFBFC0639879A98D);
+            return ref _Handle.AsRef<float>(_DurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _HoldDurationOffset;
+    private static nint? _HoldDurationOffset;
 
-  public ref float HoldDuration {
-    get {
-      if (_HoldDurationOffset == null) {
-        _HoldDurationOffset = Schema.GetOffset(0xEFBFC0631D577A68);
-      }
-      return ref _Handle.AsRef<float>(_HoldDurationOffset!.Value);
+    public ref float HoldDuration {
+        get {
+            _HoldDurationOffset = _HoldDurationOffset ?? Schema.GetOffset(0xEFBFC0631D577A68);
+            return ref _Handle.AsRef<float>(_HoldDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnBeginFadeOffset;
+    private static nint? _OnBeginFadeOffset;
 
-  public CEntityIOOutput OnBeginFade {
-    get {
-      if (_OnBeginFadeOffset == null) {
-        _OnBeginFadeOffset = Schema.GetOffset(0xEFBFC0633308BA63);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnBeginFadeOffset!.Value);
+    public ref CEntityIOOutput OnBeginFade {
+        get {
+            _OnBeginFadeOffset = _OnBeginFadeOffset ?? Schema.GetOffset(0xEFBFC0633308BA63);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnBeginFadeOffset!.Value);
+        }
     }
-  }
 
-  public void FadeColorUpdated() {
-    Schema.Update(_Handle, 0xEFBFC063C1517BF2);
-  }
+    public void FadeColorUpdated() => Schema.Update(_Handle, 0xEFBFC063C1517BF2);
 }

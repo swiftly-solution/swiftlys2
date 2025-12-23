@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVectorMovingAverage : ISchemaClass<CVectorMovingAverage> {
-
-  static CVectorMovingAverage ISchemaClass<CVectorMovingAverage>.From(nint handle) => new CVectorMovingAverageImpl(handle);
-  static int ISchemaClass<CVectorMovingAverage>.Size => 32;
-  static string? ISchemaClass<CVectorMovingAverage>.ClassName => null;
+public partial interface CVectorMovingAverage : ISchemaClass<CVectorMovingAverage>
+{
+    static CVectorMovingAverage ISchemaClass<CVectorMovingAverage>.From(nint handle) => new CVectorMovingAverageImpl(handle);
+    static int ISchemaClass<CVectorMovingAverage>.Size => 32;
+    static string? ISchemaClass<CVectorMovingAverage>.ClassName => null;
 
 
 

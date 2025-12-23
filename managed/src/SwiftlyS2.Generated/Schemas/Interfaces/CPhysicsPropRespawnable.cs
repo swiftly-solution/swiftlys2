@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysicsPropRespawnable : CPhysicsProp, ISchemaClass<CPhysicsPropRespawnable> {
+public partial interface CPhysicsPropRespawnable : CPhysicsProp, ISchemaClass<CPhysicsPropRespawnable>
+{
+    static CPhysicsPropRespawnable ISchemaClass<CPhysicsPropRespawnable>.From(nint handle) => new CPhysicsPropRespawnableImpl(handle);
+    static int ISchemaClass<CPhysicsPropRespawnable>.Size => 3648;
+    static string? ISchemaClass<CPhysicsPropRespawnable>.ClassName => "prop_physics_respawnable";
 
-  static CPhysicsPropRespawnable ISchemaClass<CPhysicsPropRespawnable>.From(nint handle) => new CPhysicsPropRespawnableImpl(handle);
-  static int ISchemaClass<CPhysicsPropRespawnable>.Size => 3648;
-  static string? ISchemaClass<CPhysicsPropRespawnable>.ClassName => "prop_physics_respawnable";
 
-  
-  public ref Vector OriginalSpawnOrigin { get; }
-  
-  public ref QAngle OriginalSpawnAngles { get; }
-  
-  public ref Vector OriginalMins { get; }
-  
-  public ref Vector OriginalMaxs { get; }
-  
-  public ref float RespawnDuration { get; }
+    public ref Vector OriginalSpawnOrigin { get; }
+
+    public ref QAngle OriginalSpawnAngles { get; }
+
+    public ref Vector OriginalMins { get; }
+
+    public ref Vector OriginalMaxs { get; }
+
+    public ref float RespawnDuration { get; }
 
 
 }

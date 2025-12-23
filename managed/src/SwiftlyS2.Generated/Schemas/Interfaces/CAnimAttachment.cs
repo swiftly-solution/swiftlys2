@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimAttachment : ISchemaClass<CAnimAttachment> {
+public partial interface CAnimAttachment : ISchemaClass<CAnimAttachment>
+{
+    static CAnimAttachment ISchemaClass<CAnimAttachment>.From(nint handle) => new CAnimAttachmentImpl(handle);
+    static int ISchemaClass<CAnimAttachment>.Size => 128;
+    static string? ISchemaClass<CAnimAttachment>.ClassName => null;
 
-  static CAnimAttachment ISchemaClass<CAnimAttachment>.From(nint handle) => new CAnimAttachmentImpl(handle);
-  static int ISchemaClass<CAnimAttachment>.Size => 128;
-  static string? ISchemaClass<CAnimAttachment>.ClassName => null;
 
-  
-  public ISchemaFixedArray<Quaternion> InfluenceRotations { get; }
-  
-  public ISchemaFixedArray<Vector> InfluenceOffsets { get; }
-  
-  public ISchemaFixedArray<int> InfluenceIndices { get; }
-  
-  public ISchemaFixedArray<float> InfluenceWeights { get; }
-  
-  public ref byte NumInfluences { get; }
+    public ISchemaFixedArray<Quaternion> InfluenceRotations { get; }
+
+    public ISchemaFixedArray<Vector> InfluenceOffsets { get; }
+
+    public ISchemaFixedArray<int> InfluenceIndices { get; }
+
+    public ISchemaFixedArray<float> InfluenceWeights { get; }
+
+    public ref byte NumInfluences { get; }
 
 
 }

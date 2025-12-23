@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_DirectionBetweenVecsToVec : CParticleFunctionOperator, ISchemaClass<C_OP_DirectionBetweenVecsToVec> {
+public partial interface C_OP_DirectionBetweenVecsToVec : CParticleFunctionOperator, ISchemaClass<C_OP_DirectionBetweenVecsToVec>
+{
+    static C_OP_DirectionBetweenVecsToVec ISchemaClass<C_OP_DirectionBetweenVecsToVec>.From(nint handle) => new C_OP_DirectionBetweenVecsToVecImpl(handle);
+    static int ISchemaClass<C_OP_DirectionBetweenVecsToVec>.Size => 3912;
+    static string? ISchemaClass<C_OP_DirectionBetweenVecsToVec>.ClassName => null;
 
-  static C_OP_DirectionBetweenVecsToVec ISchemaClass<C_OP_DirectionBetweenVecsToVec>.From(nint handle) => new C_OP_DirectionBetweenVecsToVecImpl(handle);
-  static int ISchemaClass<C_OP_DirectionBetweenVecsToVec>.Size => 3912;
-  static string? ISchemaClass<C_OP_DirectionBetweenVecsToVec>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleVecInput Point1 { get; }
-  
-  public CPerParticleVecInput Point2 { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleVecInput Point1 { get; }
+
+    public CPerParticleVecInput Point2 { get; }
 
 
 }

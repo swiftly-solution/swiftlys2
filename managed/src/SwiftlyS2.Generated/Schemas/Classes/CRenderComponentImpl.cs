@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRenderComponentImpl : CEntityComponentImpl, CRenderComponent {
+internal partial class CRenderComponentImpl : CEntityComponentImpl, CRenderComponent
+{
+    public CRenderComponentImpl(nint handle) : base(handle) { }
 
-  public CRenderComponentImpl(nint handle) : base(handle) {
-  }
+    private static nint? ___m_pChainEntityOffset;
 
-  private static nint? ___m_pChainEntityOffset;
-
-  public ref CNetworkVarChainer __m_pChainEntity {
-    get {
-      if (___m_pChainEntityOffset == null) {
-        ___m_pChainEntityOffset = Schema.GetOffset(0x8830FA5F63F0E7D);
-      }
-      return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+    public ref CNetworkVarChainer __m_pChainEntity {
+        get {
+            ___m_pChainEntityOffset = ___m_pChainEntityOffset ?? Schema.GetOffset(0x8830FA5F63F0E7D);
+            return ref _Handle.AsRef<CNetworkVarChainer>(___m_pChainEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsRenderingWithViewModelsOffset;
+    private static nint? _IsRenderingWithViewModelsOffset;
 
-  public ref bool IsRenderingWithViewModels {
-    get {
-      if (_IsRenderingWithViewModelsOffset == null) {
-        _IsRenderingWithViewModelsOffset = Schema.GetOffset(0x8830FA5700AA428);
-      }
-      return ref _Handle.AsRef<bool>(_IsRenderingWithViewModelsOffset!.Value);
+    public ref bool IsRenderingWithViewModels {
+        get {
+            _IsRenderingWithViewModelsOffset = _IsRenderingWithViewModelsOffset ?? Schema.GetOffset(0x8830FA5700AA428);
+            return ref _Handle.AsRef<bool>(_IsRenderingWithViewModelsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SplitscreenFlagsOffset;
+    private static nint? _SplitscreenFlagsOffset;
 
-  public ref uint SplitscreenFlags {
-    get {
-      if (_SplitscreenFlagsOffset == null) {
-        _SplitscreenFlagsOffset = Schema.GetOffset(0x8830FA5CACF9032);
-      }
-      return ref _Handle.AsRef<uint>(_SplitscreenFlagsOffset!.Value);
+    public ref uint SplitscreenFlags {
+        get {
+            _SplitscreenFlagsOffset = _SplitscreenFlagsOffset ?? Schema.GetOffset(0x8830FA5CACF9032);
+            return ref _Handle.AsRef<uint>(_SplitscreenFlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnableRenderingOffset;
+    private static nint? _EnableRenderingOffset;
 
-  public ref bool EnableRendering {
-    get {
-      if (_EnableRenderingOffset == null) {
-        _EnableRenderingOffset = Schema.GetOffset(0x8830FA50FAC7C5E);
-      }
-      return ref _Handle.AsRef<bool>(_EnableRenderingOffset!.Value);
+    public ref bool EnableRendering {
+        get {
+            _EnableRenderingOffset = _EnableRenderingOffset ?? Schema.GetOffset(0x8830FA50FAC7C5E);
+            return ref _Handle.AsRef<bool>(_EnableRenderingOffset!.Value);
+        }
     }
-  }
-  private static nint? _InterpolationReadyToDrawOffset;
+    private static nint? _InterpolationReadyToDrawOffset;
 
-  public ref bool InterpolationReadyToDraw {
-    get {
-      if (_InterpolationReadyToDrawOffset == null) {
-        _InterpolationReadyToDrawOffset = Schema.GetOffset(0x8830FA51A075A53);
-      }
-      return ref _Handle.AsRef<bool>(_InterpolationReadyToDrawOffset!.Value);
+    public ref bool InterpolationReadyToDraw {
+        get {
+            _InterpolationReadyToDrawOffset = _InterpolationReadyToDrawOffset ?? Schema.GetOffset(0x8830FA51A075A53);
+            return ref _Handle.AsRef<bool>(_InterpolationReadyToDrawOffset!.Value);
+        }
     }
-  }
 
 
 }

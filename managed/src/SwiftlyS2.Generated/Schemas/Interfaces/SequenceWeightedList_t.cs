@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SequenceWeightedList_t : ISchemaClass<SequenceWeightedList_t> {
+public partial interface SequenceWeightedList_t : ISchemaClass<SequenceWeightedList_t>
+{
+    static SequenceWeightedList_t ISchemaClass<SequenceWeightedList_t>.From(nint handle) => new SequenceWeightedList_tImpl(handle);
+    static int ISchemaClass<SequenceWeightedList_t>.Size => 8;
+    static string? ISchemaClass<SequenceWeightedList_t>.ClassName => null;
 
-  static SequenceWeightedList_t ISchemaClass<SequenceWeightedList_t>.From(nint handle) => new SequenceWeightedList_tImpl(handle);
-  static int ISchemaClass<SequenceWeightedList_t>.Size => 8;
-  static string? ISchemaClass<SequenceWeightedList_t>.ClassName => null;
 
-  
-  public ref int Sequence { get; }
-  
-  public ref float RelativeWeight { get; }
+    public ref int Sequence { get; }
+
+    public ref float RelativeWeight { get; }
 
 
 }

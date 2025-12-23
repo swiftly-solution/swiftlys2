@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDestructiblePartsSystemDataImpl : SchemaClass, CDestructiblePartsSystemData {
+internal partial class CDestructiblePartsSystemDataImpl : SchemaClass, CDestructiblePartsSystemData
+{
+    public CDestructiblePartsSystemDataImpl(nint handle) : base(handle) { }
 
-  public CDestructiblePartsSystemDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PartsDataByHitGroupOffset;
 
-  private static nint? _PartsDataByHitGroupOffset;
-
-  public SchemaUntypedField PartsDataByHitGroup {
-    get {
-      if (_PartsDataByHitGroupOffset == null) {
-        _PartsDataByHitGroupOffset = Schema.GetOffset(0xABDCB98361E96220);
-      }
-      return new SchemaUntypedField(_Handle + _PartsDataByHitGroupOffset!.Value);
+    public SchemaUntypedField PartsDataByHitGroup {
+        get {
+            _PartsDataByHitGroupOffset = _PartsDataByHitGroupOffset ?? Schema.GetOffset(0xABDCB98361E96220);
+            return new SchemaUntypedField(_Handle + _PartsDataByHitGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset;
+    private static nint? _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset;
 
-  public CRangeInt MinMaxNumberHitGroupsToDestroyWhenGibbing {
-    get {
-      if (_MinMaxNumberHitGroupsToDestroyWhenGibbingOffset == null) {
-        _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset = Schema.GetOffset(0xABDCB9834CA810D8);
-      }
-      return new CRangeIntImpl(_Handle + _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset!.Value);
+    public CRangeInt MinMaxNumberHitGroupsToDestroyWhenGibbing {
+        get {
+            _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset = _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset ?? Schema.GetOffset(0xABDCB9834CA810D8);
+            return new CRangeIntImpl(_Handle + _MinMaxNumberHitGroupsToDestroyWhenGibbingOffset!.Value);
+        }
     }
-  }
 
 
 }

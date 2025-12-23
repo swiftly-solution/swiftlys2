@@ -8,15 +8,15 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Unknown : CPulseCell_Base, ISchemaClass<CPulseCell_Unknown> {
+public partial interface CPulseCell_Unknown : CPulseCell_Base, ISchemaClass<CPulseCell_Unknown>
+{
+    static CPulseCell_Unknown ISchemaClass<CPulseCell_Unknown>.From(nint handle) => new CPulseCell_UnknownImpl(handle);
+    static int ISchemaClass<CPulseCell_Unknown>.Size => 88;
+    static string? ISchemaClass<CPulseCell_Unknown>.ClassName => null;
 
-  static CPulseCell_Unknown ISchemaClass<CPulseCell_Unknown>.From(nint handle) => new CPulseCell_UnknownImpl(handle);
-  static int ISchemaClass<CPulseCell_Unknown>.Size => 88;
-  static string? ISchemaClass<CPulseCell_Unknown>.ClassName => null;
 
-  
-  // KeyValues3
-  public SchemaUntypedField UnknownKeys { get; }
+    // KeyValues3
+    public SchemaUntypedField UnknownKeys { get; }
 
 
 }

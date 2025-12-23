@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPointScriptEntity : CBaseEntity, ISchemaClass<CCSPointScriptEntity> {
-
-  static CCSPointScriptEntity ISchemaClass<CCSPointScriptEntity>.From(nint handle) => new CCSPointScriptEntityImpl(handle);
-  static int ISchemaClass<CCSPointScriptEntity>.Size => 1624;
-  static string? ISchemaClass<CCSPointScriptEntity>.ClassName => null;
+public partial interface CCSPointScriptEntity : CBaseEntity, ISchemaClass<CCSPointScriptEntity>
+{
+    static CCSPointScriptEntity ISchemaClass<CCSPointScriptEntity>.From(nint handle) => new CCSPointScriptEntityImpl(handle);
+    static int ISchemaClass<CCSPointScriptEntity>.Size => 1624;
+    static string? ISchemaClass<CCSPointScriptEntity>.ClassName => null;
 
 
 

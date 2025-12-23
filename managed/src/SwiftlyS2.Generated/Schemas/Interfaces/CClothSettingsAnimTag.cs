@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CClothSettingsAnimTag : CAnimTagBase, ISchemaClass<CClothSettingsAnimTag> {
+public partial interface CClothSettingsAnimTag : CAnimTagBase, ISchemaClass<CClothSettingsAnimTag>
+{
+    static CClothSettingsAnimTag ISchemaClass<CClothSettingsAnimTag>.From(nint handle) => new CClothSettingsAnimTagImpl(handle);
+    static int ISchemaClass<CClothSettingsAnimTag>.Size => 112;
+    static string? ISchemaClass<CClothSettingsAnimTag>.ClassName => null;
 
-  static CClothSettingsAnimTag ISchemaClass<CClothSettingsAnimTag>.From(nint handle) => new CClothSettingsAnimTagImpl(handle);
-  static int ISchemaClass<CClothSettingsAnimTag>.Size => 112;
-  static string? ISchemaClass<CClothSettingsAnimTag>.ClassName => null;
 
-  
-  public ref float Stiffness { get; }
-  
-  public ref float EaseIn { get; }
-  
-  public ref float EaseOut { get; }
-  
-  public string VertexSet { get; set; }
+    public ref float Stiffness { get; }
+
+    public ref float EaseIn { get; }
+
+    public ref float EaseOut { get; }
+
+    public string VertexSet { get; set; }
 
 
 }

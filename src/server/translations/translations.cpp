@@ -1,6 +1,6 @@
 /************************************************************************************************
  * SwiftlyS2 is a scripting framework for Source2-based games.
- * Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ * Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -79,5 +79,5 @@ void CTranslations::Initialize()
             player->GetLanguage() = it->second;
         else
             player->GetLanguage() = std::get<std::string>(configuration->GetValue("core.Language"));
-    });
+        });
 }

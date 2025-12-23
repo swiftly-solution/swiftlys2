@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VMixChannelOperation_t : uint {
-
+public enum VMixChannelOperation_t : uint
+{
  VMIX_CHAN_STEREO = 0,
 
  VMIX_CHAN_LEFT = 1,

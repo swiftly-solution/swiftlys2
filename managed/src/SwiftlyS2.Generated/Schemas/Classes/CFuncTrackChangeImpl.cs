@@ -6,131 +6,103 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuncTrackChangeImpl : CFuncPlatRotImpl, CFuncTrackChange {
+internal partial class CFuncTrackChangeImpl : CFuncPlatRotImpl, CFuncTrackChange
+{
+    public CFuncTrackChangeImpl(nint handle) : base(handle) { }
 
-  public CFuncTrackChangeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TrackTopOffset;
 
-  private static nint? _TrackTopOffset;
+    public CPathTrack? TrackTop {
+        get {
+            _TrackTopOffset = _TrackTopOffset ?? Schema.GetOffset(0x25A8A26FF7C2CCBF);
+            var ptr = _Handle.Read<nint>(_TrackTopOffset!.Value);
+            return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+        }
+    }
+    private static nint? _TrackBottomOffset;
 
-  public CPathTrack? TrackTop {
-    get {
-      if (_TrackTopOffset == null) {
-        _TrackTopOffset = Schema.GetOffset(0x25A8A26FF7C2CCBF);
-      }
-      var ptr = _Handle.Read<nint>(_TrackTopOffset!.Value);
-      return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+    public CPathTrack? TrackBottom {
+        get {
+            _TrackBottomOffset = _TrackBottomOffset ?? Schema.GetOffset(0x25A8A26F37EC7637);
+            var ptr = _Handle.Read<nint>(_TrackBottomOffset!.Value);
+            return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _TrackBottomOffset;
+    private static nint? _TrainOffset;
 
-  public CPathTrack? TrackBottom {
-    get {
-      if (_TrackBottomOffset == null) {
-        _TrackBottomOffset = Schema.GetOffset(0x25A8A26F37EC7637);
-      }
-      var ptr = _Handle.Read<nint>(_TrackBottomOffset!.Value);
-      return ptr.IsValidPtr() ? new CPathTrackImpl(ptr) : null;
+    public CFuncTrackTrain? Train {
+        get {
+            _TrainOffset = _TrainOffset ?? Schema.GetOffset(0x25A8A26FB8642689);
+            var ptr = _Handle.Read<nint>(_TrainOffset!.Value);
+            return ptr.IsValidPtr() ? new CFuncTrackTrainImpl(ptr) : null;
+        }
     }
-  }
-  private static nint? _TrainOffset;
+    private static nint? _TrackTopNameOffset;
 
-  public CFuncTrackTrain? Train {
-    get {
-      if (_TrainOffset == null) {
-        _TrainOffset = Schema.GetOffset(0x25A8A26FB8642689);
-      }
-      var ptr = _Handle.Read<nint>(_TrainOffset!.Value);
-      return ptr.IsValidPtr() ? new CFuncTrackTrainImpl(ptr) : null;
-    }
-  }
-  private static nint? _TrackTopNameOffset;
+    public string TrackTopName {
+        get {
+            _TrackTopNameOffset = _TrackTopNameOffset ?? Schema.GetOffset(0x25A8A26FF9BD489C);
+            return Schema.GetString(_Handle.Read<nint>(_TrackTopNameOffset!.Value));
+        }
+        set {
+            _TrackTopNameOffset = _TrackTopNameOffset ?? Schema.GetOffset(0x25A8A26FF9BD489C);
+            Schema.SetString(_Handle, _TrackTopNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _TrackBottomNameOffset;
 
-  public string TrackTopName {
-    get {
-      if (_TrackTopNameOffset == null) {
-        _TrackTopNameOffset = Schema.GetOffset(0x25A8A26FF9BD489C);
-      }
-      var ptr = _Handle.Read<nint>(_TrackTopNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_TrackTopNameOffset == null) {
-        _TrackTopNameOffset = Schema.GetOffset(0x25A8A26FF9BD489C);
-      }
-      Schema.SetString(_Handle, _TrackTopNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _TrackBottomNameOffset;
+    public string TrackBottomName {
+        get {
+            _TrackBottomNameOffset = _TrackBottomNameOffset ?? Schema.GetOffset(0x25A8A26F7F34C2D4);
+            return Schema.GetString(_Handle.Read<nint>(_TrackBottomNameOffset!.Value));
+        }
+        set {
+            _TrackBottomNameOffset = _TrackBottomNameOffset ?? Schema.GetOffset(0x25A8A26F7F34C2D4);
+            Schema.SetString(_Handle, _TrackBottomNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _TrainNameOffset;
 
-  public string TrackBottomName {
-    get {
-      if (_TrackBottomNameOffset == null) {
-        _TrackBottomNameOffset = Schema.GetOffset(0x25A8A26F7F34C2D4);
-      }
-      var ptr = _Handle.Read<nint>(_TrackBottomNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_TrackBottomNameOffset == null) {
-        _TrackBottomNameOffset = Schema.GetOffset(0x25A8A26F7F34C2D4);
-      }
-      Schema.SetString(_Handle, _TrackBottomNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _TrainNameOffset;
+    public string TrainName {
+        get {
+            _TrainNameOffset = _TrainNameOffset ?? Schema.GetOffset(0x25A8A26FA3DC4C82);
+            return Schema.GetString(_Handle.Read<nint>(_TrainNameOffset!.Value));
+        }
+        set {
+            _TrainNameOffset = _TrainNameOffset ?? Schema.GetOffset(0x25A8A26FA3DC4C82);
+            Schema.SetString(_Handle, _TrainNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _CodeOffset;
 
-  public string TrainName {
-    get {
-      if (_TrainNameOffset == null) {
-        _TrainNameOffset = Schema.GetOffset(0x25A8A26FA3DC4C82);
-      }
-      var ptr = _Handle.Read<nint>(_TrainNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref TRAIN_CODE Code {
+        get {
+            _CodeOffset = _CodeOffset ?? Schema.GetOffset(0x25A8A26FB70C9D94);
+            return ref _Handle.AsRef<TRAIN_CODE>(_CodeOffset!.Value);
+        }
     }
-    set {
-      if (_TrainNameOffset == null) {
-        _TrainNameOffset = Schema.GetOffset(0x25A8A26FA3DC4C82);
-      }
-      Schema.SetString(_Handle, _TrainNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _CodeOffset;
+    private static nint? _TargetStateOffset;
 
-  public ref TRAIN_CODE Code {
-    get {
-      if (_CodeOffset == null) {
-        _CodeOffset = Schema.GetOffset(0x25A8A26FB70C9D94);
-      }
-      return ref _Handle.AsRef<TRAIN_CODE>(_CodeOffset!.Value);
+    public ref int TargetState {
+        get {
+            _TargetStateOffset = _TargetStateOffset ?? Schema.GetOffset(0x25A8A26F9EA3444D);
+            return ref _Handle.AsRef<int>(_TargetStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetStateOffset;
+    private static nint? _UseOffset;
 
-  public ref int TargetState {
-    get {
-      if (_TargetStateOffset == null) {
-        _TargetStateOffset = Schema.GetOffset(0x25A8A26F9EA3444D);
-      }
-      return ref _Handle.AsRef<int>(_TargetStateOffset!.Value);
+    public ref int Use {
+        get {
+            _UseOffset = _UseOffset ?? Schema.GetOffset(0x25A8A26F45B2B614);
+            return ref _Handle.AsRef<int>(_UseOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseOffset;
-
-  public ref int Use {
-    get {
-      if (_UseOffset == null) {
-        _UseOffset = Schema.GetOffset(0x25A8A26F45B2B614);
-      }
-      return ref _Handle.AsRef<int>(_UseOffset!.Value);
-    }
-  }
 
 
 }

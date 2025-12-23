@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBodyComponent : CEntityComponent, ISchemaClass<CBodyComponent> {
+public partial interface CBodyComponent : CEntityComponent, ISchemaClass<CBodyComponent>
+{
+    static CBodyComponent ISchemaClass<CBodyComponent>.From(nint handle) => new CBodyComponentImpl(handle);
+    static int ISchemaClass<CBodyComponent>.Size => 120;
+    static string? ISchemaClass<CBodyComponent>.ClassName => null;
 
-  static CBodyComponent ISchemaClass<CBodyComponent>.From(nint handle) => new CBodyComponentImpl(handle);
-  static int ISchemaClass<CBodyComponent>.Size => 120;
-  static string? ISchemaClass<CBodyComponent>.ClassName => null;
 
-  
-  public CGameSceneNode? SceneNode { get; }
-  
-  public ref CNetworkVarChainer __m_pChainEntity { get; }
+    public CGameSceneNode? SceneNode { get; }
+
+    public ref CNetworkVarChainer __m_pChainEntity { get; }
 
 
 }

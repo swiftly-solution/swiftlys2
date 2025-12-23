@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface LookAtOpFixedSettings_t : ISchemaClass<LookAtOpFixedSettings_t> {
+public partial interface LookAtOpFixedSettings_t : ISchemaClass<LookAtOpFixedSettings_t>
+{
+    static LookAtOpFixedSettings_t ISchemaClass<LookAtOpFixedSettings_t>.From(nint handle) => new LookAtOpFixedSettings_tImpl(handle);
+    static int ISchemaClass<LookAtOpFixedSettings_t>.Size => 208;
+    static string? ISchemaClass<LookAtOpFixedSettings_t>.ClassName => null;
 
-  static LookAtOpFixedSettings_t ISchemaClass<LookAtOpFixedSettings_t>.From(nint handle) => new LookAtOpFixedSettings_tImpl(handle);
-  static int ISchemaClass<LookAtOpFixedSettings_t>.Size => 208;
-  static string? ISchemaClass<LookAtOpFixedSettings_t>.ClassName => null;
 
-  
-  public CAnimAttachment Attachment { get; }
-  
-  public CAnimInputDamping Damping { get; }
-  
-  public ref CUtlVector<LookAtBone_t> Bones { get; }
-  
-  public ref float YawLimit { get; }
-  
-  public ref float PitchLimit { get; }
-  
-  public ref float HysteresisInnerAngle { get; }
-  
-  public ref float HysteresisOuterAngle { get; }
-  
-  public ref bool RotateYawForward { get; }
-  
-  public ref bool MaintainUpDirection { get; }
-  
-  public ref bool TargetIsPosition { get; }
-  
-  public ref bool UseHysteresis { get; }
+    public CAnimAttachment Attachment { get; }
+
+    public CAnimInputDamping Damping { get; }
+
+    public ref CUtlVector<LookAtBone_t> Bones { get; }
+
+    public ref float YawLimit { get; }
+
+    public ref float PitchLimit { get; }
+
+    public ref float HysteresisInnerAngle { get; }
+
+    public ref float HysteresisOuterAngle { get; }
+
+    public ref bool RotateYawForward { get; }
+
+    public ref bool MaintainUpDirection { get; }
+
+    public ref bool TargetIsPosition { get; }
+
+    public ref bool UseHysteresis { get; }
 
 
 }

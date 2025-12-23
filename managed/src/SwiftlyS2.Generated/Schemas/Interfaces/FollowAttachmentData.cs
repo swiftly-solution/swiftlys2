@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FollowAttachmentData : ISchemaClass<FollowAttachmentData> {
+public partial interface FollowAttachmentData : ISchemaClass<FollowAttachmentData>
+{
+    static FollowAttachmentData ISchemaClass<FollowAttachmentData>.From(nint handle) => new FollowAttachmentDataImpl(handle);
+    static int ISchemaClass<FollowAttachmentData>.Size => 8;
+    static string? ISchemaClass<FollowAttachmentData>.ClassName => null;
 
-  static FollowAttachmentData ISchemaClass<FollowAttachmentData>.From(nint handle) => new FollowAttachmentDataImpl(handle);
-  static int ISchemaClass<FollowAttachmentData>.Size => 8;
-  static string? ISchemaClass<FollowAttachmentData>.ClassName => null;
 
-  
-  public ref int BoneIndex { get; }
-  
-  public AttachmentHandle_t AttachmentHandle { get; }
+    public ref int BoneIndex { get; }
+
+    public AttachmentHandle_t AttachmentHandle { get; }
 
 
 }

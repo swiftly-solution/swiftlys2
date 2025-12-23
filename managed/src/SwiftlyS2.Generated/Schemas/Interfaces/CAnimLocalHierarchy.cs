@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimLocalHierarchy : ISchemaClass<CAnimLocalHierarchy> {
+public partial interface CAnimLocalHierarchy : ISchemaClass<CAnimLocalHierarchy>
+{
+    static CAnimLocalHierarchy ISchemaClass<CAnimLocalHierarchy>.From(nint handle) => new CAnimLocalHierarchyImpl(handle);
+    static int ISchemaClass<CAnimLocalHierarchy>.Size => 48;
+    static string? ISchemaClass<CAnimLocalHierarchy>.ClassName => null;
 
-  static CAnimLocalHierarchy ISchemaClass<CAnimLocalHierarchy>.From(nint handle) => new CAnimLocalHierarchyImpl(handle);
-  static int ISchemaClass<CAnimLocalHierarchy>.Size => 48;
-  static string? ISchemaClass<CAnimLocalHierarchy>.ClassName => null;
 
-  
-  public ref CBufferString Bone { get; }
-  
-  public ref CBufferString NewParent { get; }
-  
-  public ref int StartFrame { get; }
-  
-  public ref int PeakFrame { get; }
-  
-  public ref int TailFrame { get; }
-  
-  public ref int EndFrame { get; }
+    public ref CBufferString Bone { get; }
+
+    public ref CBufferString NewParent { get; }
+
+    public ref int StartFrame { get; }
+
+    public ref int PeakFrame { get; }
+
+    public ref int TailFrame { get; }
+
+    public ref int EndFrame { get; }
 
 
 }

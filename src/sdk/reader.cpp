@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -172,7 +172,7 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass, json& outJson)
         {"alignment", classInfo->m_nAlignment},
         {"size", classInfo->m_nSize},
         {"fields_count", classInfo->m_nFieldCount},
-    });
+        });
 
     classes.insert({ class_hash, {isStruct, (uint32_t)classInfo->m_nSize, (uint32_t)classInfo->m_nAlignment, class_hash} });
 
@@ -227,7 +227,7 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass, json& outJson)
             {"offset", field.m_nSingleInheritanceOffset},
             {"size", size},
             {"alignment", alignment},
-        });
+            });
 
         auto& lastField = cls["fields"].back();
 
@@ -270,7 +270,7 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass, json& outJson)
                     lastField["template"].push_back({
                         {"type", "literal"},
                         {"value", atomic->m_nFixedBufferCount}
-                    });
+                        });
                 }
                 break;
             }
@@ -280,7 +280,7 @@ void ReadClasses(CSchemaType_DeclaredClass* declClass, json& outJson)
                 lastField["template"].push_back({
                     {"type", "literal"},
                     {"value", atomic->m_nInteger}
-                });
+                    });
                 break;
             }
             }
@@ -326,7 +326,7 @@ void ReadEnums(CSchemaType_DeclaredEnum* declClass, json& outJson)
         {"alignment", enumInfo->m_nAlignment},
         {"size", enumInfo->m_nSize},
         {"fields_count", enumInfo->m_nEnumeratorCount},
-    });
+        });
 
     auto& enm = outJson["enums"].back();
 
@@ -339,6 +339,6 @@ void ReadEnums(CSchemaType_DeclaredEnum* declClass, json& outJson)
         enm["fields"].push_back({
             {"name", field.m_pszName},
             {"value", field.m_nValue},
-        });
+            });
     }
 }

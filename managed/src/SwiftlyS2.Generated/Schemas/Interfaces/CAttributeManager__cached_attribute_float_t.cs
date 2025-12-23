@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAttributeManager__cached_attribute_float_t : ISchemaClass<CAttributeManager__cached_attribute_float_t> {
+public partial interface CAttributeManager__cached_attribute_float_t : ISchemaClass<CAttributeManager__cached_attribute_float_t>
+{
+    static CAttributeManager__cached_attribute_float_t ISchemaClass<CAttributeManager__cached_attribute_float_t>.From(nint handle) => new CAttributeManager__cached_attribute_float_tImpl(handle);
+    static int ISchemaClass<CAttributeManager__cached_attribute_float_t>.Size => 24;
+    static string? ISchemaClass<CAttributeManager__cached_attribute_float_t>.ClassName => null;
 
-  static CAttributeManager__cached_attribute_float_t ISchemaClass<CAttributeManager__cached_attribute_float_t>.From(nint handle) => new CAttributeManager__cached_attribute_float_tImpl(handle);
-  static int ISchemaClass<CAttributeManager__cached_attribute_float_t>.Size => 24;
-  static string? ISchemaClass<CAttributeManager__cached_attribute_float_t>.ClassName => null;
 
-  
-  public ref float In { get; }
-  
-  public string AttribHook { get; set; }
-  
-  public ref float Out { get; }
+    public ref float In { get; }
+
+    public string AttribHook { get; set; }
+
+    public ref float Out { get; }
 
 
 }

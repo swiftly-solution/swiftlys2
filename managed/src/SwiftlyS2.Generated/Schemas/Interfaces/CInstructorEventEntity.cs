@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInstructorEventEntity : CPointEntity, ISchemaClass<CInstructorEventEntity> {
+public partial interface CInstructorEventEntity : CPointEntity, ISchemaClass<CInstructorEventEntity>
+{
+    static CInstructorEventEntity ISchemaClass<CInstructorEventEntity>.From(nint handle) => new CInstructorEventEntityImpl(handle);
+    static int ISchemaClass<CInstructorEventEntity>.Size => 1288;
+    static string? ISchemaClass<CInstructorEventEntity>.ClassName => "point_instructor_event";
 
-  static CInstructorEventEntity ISchemaClass<CInstructorEventEntity>.From(nint handle) => new CInstructorEventEntityImpl(handle);
-  static int ISchemaClass<CInstructorEventEntity>.Size => 1288;
-  static string? ISchemaClass<CInstructorEventEntity>.ClassName => "point_instructor_event";
 
-  
-  public string Name { get; set; }
-  
-  public string HintTargetEntity { get; set; }
-  
-  public ref CHandle<CBasePlayerPawn> TargetPlayer { get; }
+    public string Name { get; set; }
+
+    public string HintTargetEntity { get; set; }
+
+    public ref CHandle<CBasePlayerPawn> TargetPlayer { get; }
 
 
 }

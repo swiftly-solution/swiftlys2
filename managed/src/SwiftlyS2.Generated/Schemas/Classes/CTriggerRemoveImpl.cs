@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerRemoveImpl : CBaseTriggerImpl, CTriggerRemove {
+internal partial class CTriggerRemoveImpl : CBaseTriggerImpl, CTriggerRemove
+{
+    public CTriggerRemoveImpl(nint handle) : base(handle) { }
 
-  public CTriggerRemoveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnRemoveOffset;
 
-  private static nint? _OnRemoveOffset;
-
-  public CEntityIOOutput OnRemove {
-    get {
-      if (_OnRemoveOffset == null) {
-        _OnRemoveOffset = Schema.GetOffset(0x97A9D4D67DC268F8);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnRemoveOffset!.Value);
+    public ref CEntityIOOutput OnRemove {
+        get {
+            _OnRemoveOffset = _OnRemoveOffset ?? Schema.GetOffset(0x97A9D4D67DC268F8);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnRemoveOffset!.Value);
+        }
     }
-  }
 
 
 }

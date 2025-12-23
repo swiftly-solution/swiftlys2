@@ -8,39 +8,39 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmStateNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmStateNode__CDefinition> {
+public partial interface CNmStateNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmStateNode__CDefinition>
+{
+    static CNmStateNode__CDefinition ISchemaClass<CNmStateNode__CDefinition>.From(nint handle) => new CNmStateNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmStateNode__CDefinition>.Size => 176;
+    static string? ISchemaClass<CNmStateNode__CDefinition>.ClassName => null;
 
-  static CNmStateNode__CDefinition ISchemaClass<CNmStateNode__CDefinition>.From(nint handle) => new CNmStateNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmStateNode__CDefinition>.Size => 176;
-  static string? ISchemaClass<CNmStateNode__CDefinition>.ClassName => null;
 
-  
-  public ref short ChildNodeIdx { get; }
-  
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
-  public SchemaUntypedField EntryEvents { get; }
-  
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
-  public SchemaUntypedField ExecuteEvents { get; }
-  
-  // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
-  public SchemaUntypedField ExitEvents { get; }
-  
-  // CUtlLeanVectorFixedGrowable< CNmStateNode::TimedEvent_t, 1 >
-  public SchemaUntypedField TimedRemainingEvents { get; }
-  
-  // CUtlLeanVectorFixedGrowable< CNmStateNode::TimedEvent_t, 1 >
-  public SchemaUntypedField TimedElapsedEvents { get; }
-  
-  public ref short LayerWeightNodeIdx { get; }
-  
-  public ref short LayerRootMotionWeightNodeIdx { get; }
-  
-  public ref short LayerBoneMaskNodeIdx { get; }
-  
-  public ref bool IsOffState { get; }
-  
-  public ref bool UseActualElapsedTimeInStateForTimedEvents { get; }
+    public ref short ChildNodeIdx { get; }
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
+    public SchemaUntypedField EntryEvents { get; }
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
+    public SchemaUntypedField ExecuteEvents { get; }
+
+    // CUtlLeanVectorFixedGrowable< CGlobalSymbol, 3 >
+    public SchemaUntypedField ExitEvents { get; }
+
+    // CUtlLeanVectorFixedGrowable< CNmStateNode::TimedEvent_t, 1 >
+    public SchemaUntypedField TimedRemainingEvents { get; }
+
+    // CUtlLeanVectorFixedGrowable< CNmStateNode::TimedEvent_t, 1 >
+    public SchemaUntypedField TimedElapsedEvents { get; }
+
+    public ref short LayerWeightNodeIdx { get; }
+
+    public ref short LayerRootMotionWeightNodeIdx { get; }
+
+    public ref short LayerBoneMaskNodeIdx { get; }
+
+    public ref bool IsOffState { get; }
+
+    public ref bool UseActualElapsedTimeInStateForTimedEvents { get; }
 
 
 }

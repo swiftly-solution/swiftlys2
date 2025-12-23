@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTimerEntity : CLogicalEntity, ISchemaClass<CTimerEntity> {
+public partial interface CTimerEntity : CLogicalEntity, ISchemaClass<CTimerEntity>
+{
+    static CTimerEntity ISchemaClass<CTimerEntity>.From(nint handle) => new CTimerEntityImpl(handle);
+    static int ISchemaClass<CTimerEntity>.Size => 1424;
+    static string? ISchemaClass<CTimerEntity>.ClassName => "logic_timer";
 
-  static CTimerEntity ISchemaClass<CTimerEntity>.From(nint handle) => new CTimerEntityImpl(handle);
-  static int ISchemaClass<CTimerEntity>.Size => 1424;
-  static string? ISchemaClass<CTimerEntity>.ClassName => "logic_timer";
 
-  
-  public CEntityIOOutput OnTimer { get; }
-  
-  public CEntityIOOutput OnTimerHigh { get; }
-  
-  public CEntityIOOutput OnTimerLow { get; }
-  
-  public ref int Disabled { get; }
-  
-  public ref float InitialDelay { get; }
-  
-  public ref float RefireTime { get; }
-  
-  public ref bool UpDownState { get; }
-  
-  public ref int UseRandomTime { get; }
-  
-  public ref bool PauseAfterFiring { get; }
-  
-  public ref float LowerRandomBound { get; }
-  
-  public ref float UpperRandomBound { get; }
-  
-  public ref float RemainingTime { get; }
-  
-  public ref bool Paused { get; }
+    public ref CEntityIOOutput OnTimer { get; }
+
+    public ref CEntityIOOutput OnTimerHigh { get; }
+
+    public ref CEntityIOOutput OnTimerLow { get; }
+
+    public ref int Disabled { get; }
+
+    public ref float InitialDelay { get; }
+
+    public ref float RefireTime { get; }
+
+    public ref bool UpDownState { get; }
+
+    public ref int UseRandomTime { get; }
+
+    public ref bool PauseAfterFiring { get; }
+
+    public ref float LowerRandomBound { get; }
+
+    public ref float UpperRandomBound { get; }
+
+    public ref float RemainingTime { get; }
+
+    public ref bool Paused { get; }
 
 
 }

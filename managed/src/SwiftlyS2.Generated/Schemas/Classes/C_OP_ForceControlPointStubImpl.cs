@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ForceControlPointStubImpl : CParticleFunctionPreEmissionImpl, C_OP_ForceControlPointStub {
+internal partial class C_OP_ForceControlPointStubImpl : CParticleFunctionPreEmissionImpl, C_OP_ForceControlPointStub
+{
+    public C_OP_ForceControlPointStubImpl(nint handle) : base(handle) { }
 
-  public C_OP_ForceControlPointStubImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointOffset;
 
-  private static nint? _ControlPointOffset;
-
-  public ref int ControlPoint {
-    get {
-      if (_ControlPointOffset == null) {
-        _ControlPointOffset = Schema.GetOffset(0xE0FD255D5EDF730);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+    public ref int ControlPoint {
+        get {
+            _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xE0FD255D5EDF730);
+            return ref _Handle.AsRef<int>(_ControlPointOffset!.Value);
+        }
     }
-  }
 
 
 }

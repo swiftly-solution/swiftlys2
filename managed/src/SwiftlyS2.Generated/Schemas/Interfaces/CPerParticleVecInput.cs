@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPerParticleVecInput : CParticleVecInput, ISchemaClass<CPerParticleVecInput> {
-
-  static CPerParticleVecInput ISchemaClass<CPerParticleVecInput>.From(nint handle) => new CPerParticleVecInputImpl(handle);
-  static int ISchemaClass<CPerParticleVecInput>.Size => 1720;
-  static string? ISchemaClass<CPerParticleVecInput>.ClassName => null;
+public partial interface CPerParticleVecInput : CParticleVecInput, ISchemaClass<CPerParticleVecInput>
+{
+    static CPerParticleVecInput ISchemaClass<CPerParticleVecInput>.From(nint handle) => new CPerParticleVecInputImpl(handle);
+    static int ISchemaClass<CPerParticleVecInput>.Size => 1720;
+    static string? ISchemaClass<CPerParticleVecInput>.ClassName => null;
 
 
 

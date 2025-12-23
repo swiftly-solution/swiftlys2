@@ -8,27 +8,27 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimEventDefinition : ISchemaClass<CAnimEventDefinition> {
+public partial interface CAnimEventDefinition : ISchemaClass<CAnimEventDefinition>
+{
+    static CAnimEventDefinition ISchemaClass<CAnimEventDefinition>.From(nint handle) => new CAnimEventDefinitionImpl(handle);
+    static int ISchemaClass<CAnimEventDefinition>.Size => 64;
+    static string? ISchemaClass<CAnimEventDefinition>.ClassName => null;
 
-  static CAnimEventDefinition ISchemaClass<CAnimEventDefinition>.From(nint handle) => new CAnimEventDefinitionImpl(handle);
-  static int ISchemaClass<CAnimEventDefinition>.Size => 64;
-  static string? ISchemaClass<CAnimEventDefinition>.ClassName => null;
 
-  
-  public ref int Frame { get; }
-  
-  public ref int EndFrame { get; }
-  
-  public ref float Cycle { get; }
-  
-  public ref float Duration { get; }
-  
-  // KeyValues3
-  public SchemaUntypedField EventData { get; }
-  
-  public ref CBufferString LegacyOptions { get; }
-  
-  public ref CGlobalSymbol EventName { get; }
+    public ref int Frame { get; }
+
+    public ref int EndFrame { get; }
+
+    public ref float Cycle { get; }
+
+    public ref float Duration { get; }
+
+    // KeyValues3
+    public SchemaUntypedField EventData { get; }
+
+    public ref CBufferString LegacyOptions { get; }
+
+    public ref CGlobalSymbol EventName { get; }
 
 
 }

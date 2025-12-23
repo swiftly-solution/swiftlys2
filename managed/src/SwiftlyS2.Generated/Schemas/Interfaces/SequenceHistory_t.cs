@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SequenceHistory_t : ISchemaClass<SequenceHistory_t> {
+public partial interface SequenceHistory_t : ISchemaClass<SequenceHistory_t>
+{
+    static SequenceHistory_t ISchemaClass<SequenceHistory_t>.From(nint handle) => new SequenceHistory_tImpl(handle);
+    static int ISchemaClass<SequenceHistory_t>.Size => 24;
+    static string? ISchemaClass<SequenceHistory_t>.ClassName => null;
 
-  static SequenceHistory_t ISchemaClass<SequenceHistory_t>.From(nint handle) => new SequenceHistory_tImpl(handle);
-  static int ISchemaClass<SequenceHistory_t>.Size => 24;
-  static string? ISchemaClass<SequenceHistory_t>.ClassName => null;
 
-  
-  public HSequence Sequence { get; }
-  
-  public GameTime_t SeqStartTime { get; }
-  
-  public ref float SeqFixedCycle { get; }
-  
-  public ref AnimLoopMode_t SeqLoopMode { get; }
-  
-  public ref float PlaybackRate { get; }
-  
-  public ref float CyclesPerSecond { get; }
+    public HSequence Sequence { get; }
+
+    public GameTime_t SeqStartTime { get; }
+
+    public ref float SeqFixedCycle { get; }
+
+    public ref AnimLoopMode_t SeqLoopMode { get; }
+
+    public ref float PlaybackRate { get; }
+
+    public ref float CyclesPerSecond { get; }
 
 
 }

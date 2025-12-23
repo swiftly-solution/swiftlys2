@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VMixFilterSlope_t : byte {
-
+public enum VMixFilterSlope_t : byte
+{
  FILTER_SLOPE_1POLE_6dB = 0,
 
  FILTER_SLOPE_1POLE_12dB = 1,

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixPitchShiftDesc_t : ISchemaClass<VMixPitchShiftDesc_t> {
+public partial interface VMixPitchShiftDesc_t : ISchemaClass<VMixPitchShiftDesc_t>
+{
+    static VMixPitchShiftDesc_t ISchemaClass<VMixPitchShiftDesc_t>.From(nint handle) => new VMixPitchShiftDesc_tImpl(handle);
+    static int ISchemaClass<VMixPitchShiftDesc_t>.Size => 16;
+    static string? ISchemaClass<VMixPitchShiftDesc_t>.ClassName => null;
 
-  static VMixPitchShiftDesc_t ISchemaClass<VMixPitchShiftDesc_t>.From(nint handle) => new VMixPitchShiftDesc_tImpl(handle);
-  static int ISchemaClass<VMixPitchShiftDesc_t>.Size => 16;
-  static string? ISchemaClass<VMixPitchShiftDesc_t>.ClassName => null;
 
-  
-  public ref int GrainSampleCount { get; }
-  
-  public ref float PitchShift { get; }
-  
-  public ref int Quality { get; }
-  
-  public ref int ProcType { get; }
+    public ref int GrainSampleCount { get; }
+
+    public ref float PitchShift { get; }
+
+    public ref int Quality { get; }
+
+    public ref int ProcType { get; }
 
 
 }

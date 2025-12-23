@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCVSoundEventScriptList : ISchemaClass<InfoForResourceTypeCVSoundEventScriptList> {
-
-  static InfoForResourceTypeCVSoundEventScriptList ISchemaClass<InfoForResourceTypeCVSoundEventScriptList>.From(nint handle) => new InfoForResourceTypeCVSoundEventScriptListImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCVSoundEventScriptList>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCVSoundEventScriptList>.ClassName => null;
+public partial interface InfoForResourceTypeCVSoundEventScriptList : ISchemaClass<InfoForResourceTypeCVSoundEventScriptList>
+{
+    static InfoForResourceTypeCVSoundEventScriptList ISchemaClass<InfoForResourceTypeCVSoundEventScriptList>.From(nint handle) => new InfoForResourceTypeCVSoundEventScriptListImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCVSoundEventScriptList>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCVSoundEventScriptList>.ClassName => null;
 
 
 

@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using System.Security;
 using Spectre.Console;
 using SwiftlyS2.Core;
 
@@ -8,8 +7,7 @@ namespace SwiftlyS2;
 internal class Entrypoint
 {
     [UnmanagedCallersOnly]
-    [SecurityCritical]
-    public unsafe static void Start( IntPtr nativeTable, int nativeTableSize, IntPtr basePath, IntPtr logsPath )
+    public static unsafe void Start( IntPtr nativeTable, int nativeTableSize, IntPtr basePath, IntPtr logsPath)
     {
         try
         {
@@ -17,7 +15,10 @@ internal class Entrypoint
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(e)) return;
+            if (!GlobalExceptionHandler.Handle(e))
+            {
+                return;
+            }
             AnsiConsole.WriteException(e);
         }
     }

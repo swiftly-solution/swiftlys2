@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFlashbangProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CFlashbangProjectile> {
+public partial interface CFlashbangProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CFlashbangProjectile>
+{
+    static CFlashbangProjectile ISchemaClass<CFlashbangProjectile>.From(nint handle) => new CFlashbangProjectileImpl(handle);
+    static int ISchemaClass<CFlashbangProjectile>.Size => 3152;
+    static string? ISchemaClass<CFlashbangProjectile>.ClassName => "flashbang_projectile";
 
-  static CFlashbangProjectile ISchemaClass<CFlashbangProjectile>.From(nint handle) => new CFlashbangProjectileImpl(handle);
-  static int ISchemaClass<CFlashbangProjectile>.Size => 3152;
-  static string? ISchemaClass<CFlashbangProjectile>.ClassName => "flashbang_projectile";
 
-  
-  public ref float TimeToDetonate { get; }
-  
-  public ref byte NumOpponentsHit { get; }
-  
-  public ref byte NumTeammatesHit { get; }
+    public ref float TimeToDetonate { get; }
+
+    public ref byte NumOpponentsHit { get; }
+
+    public ref byte NumTeammatesHit { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ScreenSpaceRotateTowardTarget : CParticleFunctionOperator, ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget> {
+public partial interface C_OP_ScreenSpaceRotateTowardTarget : CParticleFunctionOperator, ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget>
+{
+    static C_OP_ScreenSpaceRotateTowardTarget ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget>.From(nint handle) => new C_OP_ScreenSpaceRotateTowardTargetImpl(handle);
+    static int ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget>.Size => 2928;
+    static string? ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget>.ClassName => null;
 
-  static C_OP_ScreenSpaceRotateTowardTarget ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget>.From(nint handle) => new C_OP_ScreenSpaceRotateTowardTargetImpl(handle);
-  static int ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget>.Size => 2928;
-  static string? ISchemaClass<C_OP_ScreenSpaceRotateTowardTarget>.ClassName => null;
 
-  
-  public CPerParticleVecInput TargetPosition { get; }
-  
-  public CParticleRemapFloatInput OutputRemap { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public CPerParticleFloatInput ScreenEdgeAlignmentDistance { get; }
+    public CPerParticleVecInput TargetPosition { get; }
+
+    public CParticleRemapFloatInput OutputRemap { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public CPerParticleFloatInput ScreenEdgeAlignmentDistance { get; }
 
 
 }

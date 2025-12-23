@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSolveIKChainUpdateNode : CUnaryUpdateNode, ISchemaClass<CSolveIKChainUpdateNode> {
+public partial interface CSolveIKChainUpdateNode : CUnaryUpdateNode, ISchemaClass<CSolveIKChainUpdateNode>
+{
+    static CSolveIKChainUpdateNode ISchemaClass<CSolveIKChainUpdateNode>.From(nint handle) => new CSolveIKChainUpdateNodeImpl(handle);
+    static int ISchemaClass<CSolveIKChainUpdateNode>.Size => 168;
+    static string? ISchemaClass<CSolveIKChainUpdateNode>.ClassName => null;
 
-  static CSolveIKChainUpdateNode ISchemaClass<CSolveIKChainUpdateNode>.From(nint handle) => new CSolveIKChainUpdateNodeImpl(handle);
-  static int ISchemaClass<CSolveIKChainUpdateNode>.Size => 168;
-  static string? ISchemaClass<CSolveIKChainUpdateNode>.ClassName => null;
 
-  
-  public ref CUtlVector<CSolveIKTargetHandle_t> TargetHandles { get; }
-  
-  public SolveIKChainPoseOpFixedSettings_t OpFixedData { get; }
+    public ref CUtlVector<CSolveIKTargetHandle_t> TargetHandles { get; }
+
+    public SolveIKChainPoseOpFixedSettings_t OpFixedData { get; }
 
 
 }

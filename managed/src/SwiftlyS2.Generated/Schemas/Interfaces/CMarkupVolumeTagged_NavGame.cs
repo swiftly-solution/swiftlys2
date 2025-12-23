@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMarkupVolumeTagged_NavGame : CMarkupVolumeWithRef, ISchemaClass<CMarkupVolumeTagged_NavGame> {
+public partial interface CMarkupVolumeTagged_NavGame : CMarkupVolumeWithRef, ISchemaClass<CMarkupVolumeTagged_NavGame>
+{
+    static CMarkupVolumeTagged_NavGame ISchemaClass<CMarkupVolumeTagged_NavGame>.From(nint handle) => new CMarkupVolumeTagged_NavGameImpl(handle);
+    static int ISchemaClass<CMarkupVolumeTagged_NavGame>.Size => 2120;
+    static string? ISchemaClass<CMarkupVolumeTagged_NavGame>.ClassName => "func_nav_markup_game";
 
-  static CMarkupVolumeTagged_NavGame ISchemaClass<CMarkupVolumeTagged_NavGame>.From(nint handle) => new CMarkupVolumeTagged_NavGameImpl(handle);
-  static int ISchemaClass<CMarkupVolumeTagged_NavGame>.Size => 2120;
-  static string? ISchemaClass<CMarkupVolumeTagged_NavGame>.ClassName => "func_nav_markup_game";
 
-  
-  public ref NavScopeFlags_t Scopes { get; }
-  
-  public ref bool FloodFillAttribute { get; }
-  
-  public ref bool SplitNavSpace { get; }
+    public ref NavScopeFlags_t Scopes { get; }
+
+    public ref bool FloodFillAttribute { get; }
+
+    public ref bool SplitNavSpace { get; }
 
 
 }

@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBlendUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CBlendUpdateNode> {
+public partial interface CBlendUpdateNode : CAnimUpdateNodeBase, ISchemaClass<CBlendUpdateNode>
+{
+    static CBlendUpdateNode ISchemaClass<CBlendUpdateNode>.From(nint handle) => new CBlendUpdateNodeImpl(handle);
+    static int ISchemaClass<CBlendUpdateNode>.Size => 224;
+    static string? ISchemaClass<CBlendUpdateNode>.ClassName => null;
 
-  static CBlendUpdateNode ISchemaClass<CBlendUpdateNode>.From(nint handle) => new CBlendUpdateNodeImpl(handle);
-  static int ISchemaClass<CBlendUpdateNode>.Size => 224;
-  static string? ISchemaClass<CBlendUpdateNode>.ClassName => null;
 
-  
-  public ref CUtlVector<CAnimUpdateNodeRef> Children { get; }
-  
-  public ref CUtlVector<byte> SortedOrder { get; }
-  
-  public ref CUtlVector<float> TargetValues { get; }
-  
-  public ref AnimValueSource BlendValueSource { get; }
-  
-  public ref LinearRootMotionBlendMode_t LinearRootMotionBlendMode { get; }
-  
-  public CAnimParamHandle ParamIndex { get; }
-  
-  public CAnimInputDamping Damping { get; }
-  
-  public ref BlendKeyType BlendKeyType { get; }
-  
-  public ref bool LockBlendOnReset { get; }
-  
-  public ref bool SyncCycles { get; }
-  
-  public ref bool Loop { get; }
-  
-  public ref bool LockWhenWaning { get; }
-  
-  public ref bool IsAngle { get; }
+    public ref CUtlVector<CAnimUpdateNodeRef> Children { get; }
+
+    public ref CUtlVector<byte> SortedOrder { get; }
+
+    public ref CUtlVector<float> TargetValues { get; }
+
+    public ref AnimValueSource BlendValueSource { get; }
+
+    public ref LinearRootMotionBlendMode_t LinearRootMotionBlendMode { get; }
+
+    public CAnimParamHandle ParamIndex { get; }
+
+    public CAnimInputDamping Damping { get; }
+
+    public ref BlendKeyType BlendKeyType { get; }
+
+    public ref bool LockBlendOnReset { get; }
+
+    public ref bool SyncCycles { get; }
+
+    public ref bool Loop { get; }
+
+    public ref bool LockWhenWaning { get; }
+
+    public ref bool IsAngle { get; }
 
 
 }

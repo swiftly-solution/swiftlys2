@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDrawCullingData : ISchemaClass<CDrawCullingData> {
+public partial interface CDrawCullingData : ISchemaClass<CDrawCullingData>
+{
+    static CDrawCullingData ISchemaClass<CDrawCullingData>.From(nint handle) => new CDrawCullingDataImpl(handle);
+    static int ISchemaClass<CDrawCullingData>.Size => 4;
+    static string? ISchemaClass<CDrawCullingData>.ClassName => null;
 
-  static CDrawCullingData ISchemaClass<CDrawCullingData>.From(nint handle) => new CDrawCullingDataImpl(handle);
-  static int ISchemaClass<CDrawCullingData>.Size => 4;
-  static string? ISchemaClass<CDrawCullingData>.ClassName => null;
 
-  
-  public ISchemaFixedArray<byte> ConeAxis { get; }
-  
-  public ref byte ConeCutoff { get; }
+    public ISchemaFixedArray<byte> ConeAxis { get; }
+
+    public ref byte ConeCutoff { get; }
 
 
 }

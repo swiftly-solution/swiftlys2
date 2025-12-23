@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmBlend1DNode__CDefinitionImpl : CNmParameterizedBlendNode__CDefinitionImpl, CNmBlend1DNode__CDefinition {
+internal partial class CNmBlend1DNode__CDefinitionImpl : CNmParameterizedBlendNode__CDefinitionImpl, CNmBlend1DNode__CDefinition
+{
+    public CNmBlend1DNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmBlend1DNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParameterizationOffset;
 
-  private static nint? _ParameterizationOffset;
-
-  public CNmParameterizedBlendNode__Parameterization_t Parameterization {
-    get {
-      if (_ParameterizationOffset == null) {
-        _ParameterizationOffset = Schema.GetOffset(0xA5E668CDE173A928);
-      }
-      return new CNmParameterizedBlendNode__Parameterization_tImpl(_Handle + _ParameterizationOffset!.Value);
+    public CNmParameterizedBlendNode__Parameterization_t Parameterization {
+        get {
+            _ParameterizationOffset = _ParameterizationOffset ?? Schema.GetOffset(0xA5E668CDE173A928);
+            return new CNmParameterizedBlendNode__Parameterization_tImpl(_Handle + _ParameterizationOffset!.Value);
+        }
     }
-  }
 
 
 }

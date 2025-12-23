@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysSurfacePropertiesVehicle : ISchemaClass<CPhysSurfacePropertiesVehicle> {
+public partial interface CPhysSurfacePropertiesVehicle : ISchemaClass<CPhysSurfacePropertiesVehicle>
+{
+    static CPhysSurfacePropertiesVehicle ISchemaClass<CPhysSurfacePropertiesVehicle>.From(nint handle) => new CPhysSurfacePropertiesVehicleImpl(handle);
+    static int ISchemaClass<CPhysSurfacePropertiesVehicle>.Size => 8;
+    static string? ISchemaClass<CPhysSurfacePropertiesVehicle>.ClassName => null;
 
-  static CPhysSurfacePropertiesVehicle ISchemaClass<CPhysSurfacePropertiesVehicle>.From(nint handle) => new CPhysSurfacePropertiesVehicleImpl(handle);
-  static int ISchemaClass<CPhysSurfacePropertiesVehicle>.Size => 8;
-  static string? ISchemaClass<CPhysSurfacePropertiesVehicle>.ClassName => null;
 
-  
-  public ref float WheelDrag { get; }
-  
-  public ref float WheelFrictionScale { get; }
+    public ref float WheelDrag { get; }
+
+    public ref float WheelFrictionScale { get; }
 
 
 }

@@ -6,60 +6,51 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeTaperedCapsuleRigid_tImpl : SchemaClass, FeTaperedCapsuleRigid_t {
+internal partial class FeTaperedCapsuleRigid_tImpl : SchemaClass, FeTaperedCapsuleRigid_t
+{
+    public FeTaperedCapsuleRigid_tImpl(nint handle) : base(handle) { }
 
-  public FeTaperedCapsuleRigid_tImpl(nint handle) : base(handle) {
-  }
-
-  public ISchemaFixedArray<fltx4> Sphere {
-    get => new SchemaFixedArray<fltx4>(_Handle, 0x4B2017EE9E2AC48C, 2, 16, 16);
-  }
-  private static nint? _NodeOffset;
-
-  public ref ushort Node {
-    get {
-      if (_NodeOffset == null) {
-        _NodeOffset = Schema.GetOffset(0x4B2017EECD6694B9);
-      }
-      return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
+    public ISchemaFixedArray<fltx4> Sphere {
+        get => new SchemaFixedArray<fltx4>(_Handle, 0x4B2017EE9E2AC48C, 2, 16, 16);
     }
-  }
-  private static nint? _CollisionMaskOffset;
+    private static nint? _NodeOffset;
 
-  public ref ushort CollisionMask {
-    get {
-      if (_CollisionMaskOffset == null) {
-        _CollisionMaskOffset = Schema.GetOffset(0x4B2017EE0ED3454F);
-      }
-      return ref _Handle.AsRef<ushort>(_CollisionMaskOffset!.Value);
+    public ref ushort Node {
+        get {
+            _NodeOffset = _NodeOffset ?? Schema.GetOffset(0x4B2017EECD6694B9);
+            return ref _Handle.AsRef<ushort>(_NodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _VertexMapIndexOffset;
+    private static nint? _CollisionMaskOffset;
 
-  public ref ushort VertexMapIndex {
-    get {
-      if (_VertexMapIndexOffset == null) {
-        _VertexMapIndexOffset = Schema.GetOffset(0x4B2017EE7B332E39);
-      }
-      return ref _Handle.AsRef<ushort>(_VertexMapIndexOffset!.Value);
+    public ref ushort CollisionMask {
+        get {
+            _CollisionMaskOffset = _CollisionMaskOffset ?? Schema.GetOffset(0x4B2017EE0ED3454F);
+            return ref _Handle.AsRef<ushort>(_CollisionMaskOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _VertexMapIndexOffset;
 
-  public ref ushort Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x4B2017EEB8D52E48);
-      }
-      return ref _Handle.AsRef<ushort>(_FlagsOffset!.Value);
+    public ref ushort VertexMapIndex {
+        get {
+            _VertexMapIndexOffset = _VertexMapIndexOffset ?? Schema.GetOffset(0x4B2017EE7B332E39);
+            return ref _Handle.AsRef<ushort>(_VertexMapIndexOffset!.Value);
+        }
     }
-  }
+    private static nint? _FlagsOffset;
+
+    public ref ushort Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x4B2017EEB8D52E48);
+            return ref _Handle.AsRef<ushort>(_FlagsOffset!.Value);
+        }
+    }
 
 
 }

@@ -8,59 +8,59 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvWindShared : ISchemaClass<CEnvWindShared> {
+public partial interface CEnvWindShared : ISchemaClass<CEnvWindShared>
+{
+    static CEnvWindShared ISchemaClass<CEnvWindShared>.From(nint handle) => new CEnvWindSharedImpl(handle);
+    static int ISchemaClass<CEnvWindShared>.Size => 336;
+    static string? ISchemaClass<CEnvWindShared>.ClassName => null;
 
-  static CEnvWindShared ISchemaClass<CEnvWindShared>.From(nint handle) => new CEnvWindSharedImpl(handle);
-  static int ISchemaClass<CEnvWindShared>.Size => 336;
-  static string? ISchemaClass<CEnvWindShared>.ClassName => null;
 
-  
-  public GameTime_t StartTime { get; }
-  
-  public ref uint WindSeed { get; }
-  
-  public ref ushort MinWind { get; }
-  
-  public ref ushort MaxWind { get; }
-  
-  public ref int WindRadius { get; }
-  
-  public ref ushort MinGust { get; }
-  
-  public ref ushort MaxGust { get; }
-  
-  public ref float MinGustDelay { get; }
-  
-  public ref float MaxGustDelay { get; }
-  
-  public ref float GustDuration { get; }
-  
-  public ref ushort GustDirChange { get; }
-  
-  public ref ushort InitialWindDir { get; }
-  
-  public ref float InitialWindSpeed { get; }
-  
-  public ref Vector Location { get; }
-  
-  public CEntityIOOutput OnGustStart { get; }
-  
-  public CEntityIOOutput OnGustEnd { get; }
-  
-  public ref CHandle<CBaseEntity> EntOwner { get; }
+    public GameTime_t StartTime { get; }
 
-  public void StartTimeUpdated();
-  public void WindSeedUpdated();
-  public void MinWindUpdated();
-  public void MaxWindUpdated();
-  public void WindRadiusUpdated();
-  public void MinGustUpdated();
-  public void MaxGustUpdated();
-  public void MinGustDelayUpdated();
-  public void MaxGustDelayUpdated();
-  public void GustDurationUpdated();
-  public void GustDirChangeUpdated();
-  public void InitialWindDirUpdated();
-  public void InitialWindSpeedUpdated();
-  public void LocationUpdated();
+    public ref uint WindSeed { get; }
+
+    public ref ushort MinWind { get; }
+
+    public ref ushort MaxWind { get; }
+
+    public ref int WindRadius { get; }
+
+    public ref ushort MinGust { get; }
+
+    public ref ushort MaxGust { get; }
+
+    public ref float MinGustDelay { get; }
+
+    public ref float MaxGustDelay { get; }
+
+    public ref float GustDuration { get; }
+
+    public ref ushort GustDirChange { get; }
+
+    public ref ushort InitialWindDir { get; }
+
+    public ref float InitialWindSpeed { get; }
+
+    public ref Vector Location { get; }
+
+    public ref CEntityIOOutput OnGustStart { get; }
+
+    public ref CEntityIOOutput OnGustEnd { get; }
+
+    public ref CHandle<CBaseEntity> EntOwner { get; }
+
+    public void StartTimeUpdated();
+    public void WindSeedUpdated();
+    public void MinWindUpdated();
+    public void MaxWindUpdated();
+    public void WindRadiusUpdated();
+    public void MinGustUpdated();
+    public void MaxGustUpdated();
+    public void MinGustDelayUpdated();
+    public void MaxGustDelayUpdated();
+    public void GustDurationUpdated();
+    public void GustDirChangeUpdated();
+    public void InitialWindDirUpdated();
+    public void InitialWindSpeedUpdated();
+    public void LocationUpdated();
 }

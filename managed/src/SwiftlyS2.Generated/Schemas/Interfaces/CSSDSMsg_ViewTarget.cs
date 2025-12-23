@@ -8,32 +8,32 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSSDSMsg_ViewTarget : ISchemaClass<CSSDSMsg_ViewTarget> {
+public partial interface CSSDSMsg_ViewTarget : ISchemaClass<CSSDSMsg_ViewTarget>
+{
+    static CSSDSMsg_ViewTarget ISchemaClass<CSSDSMsg_ViewTarget>.From(nint handle) => new CSSDSMsg_ViewTargetImpl(handle);
+    static int ISchemaClass<CSSDSMsg_ViewTarget>.Size => 48;
+    static string? ISchemaClass<CSSDSMsg_ViewTarget>.ClassName => null;
 
-  static CSSDSMsg_ViewTarget ISchemaClass<CSSDSMsg_ViewTarget>.From(nint handle) => new CSSDSMsg_ViewTargetImpl(handle);
-  static int ISchemaClass<CSSDSMsg_ViewTarget>.Size => 48;
-  static string? ISchemaClass<CSSDSMsg_ViewTarget>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref ulong TextureId { get; }
-  
-  public ref int Width { get; }
-  
-  public ref int Height { get; }
-  
-  public ref int RequestedWidth { get; }
-  
-  public ref int RequestedHeight { get; }
-  
-  public ref int NumMipLevels { get; }
-  
-  public ref int Depth { get; }
-  
-  public ref int MultisampleNumSamples { get; }
-  
-  public ref int Format { get; }
+    public string Name { get; set; }
+
+    public ref ulong TextureId { get; }
+
+    public ref int Width { get; }
+
+    public ref int Height { get; }
+
+    public ref int RequestedWidth { get; }
+
+    public ref int RequestedHeight { get; }
+
+    public ref int NumMipLevels { get; }
+
+    public ref int Depth { get; }
+
+    public ref int MultisampleNumSamples { get; }
+
+    public ref int Format { get; }
 
 
 }

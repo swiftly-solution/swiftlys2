@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CLogicNPCCounterOBB : CLogicNPCCounterAABB, ISchemaClass<CLogicNPCCounterOBB> {
-
-  static CLogicNPCCounterOBB ISchemaClass<CLogicNPCCounterOBB>.From(nint handle) => new CLogicNPCCounterOBBImpl(handle);
-  static int ISchemaClass<CLogicNPCCounterOBB>.Size => 2144;
-  static string? ISchemaClass<CLogicNPCCounterOBB>.ClassName => "logic_npc_counter_obb";
+public partial interface CLogicNPCCounterOBB : CLogicNPCCounterAABB, ISchemaClass<CLogicNPCCounterOBB>
+{
+    static CLogicNPCCounterOBB ISchemaClass<CLogicNPCCounterOBB>.From(nint handle) => new CLogicNPCCounterOBBImpl(handle);
+    static int ISchemaClass<CLogicNPCCounterOBB>.Size => 2144;
+    static string? ISchemaClass<CLogicNPCCounterOBB>.ClassName => "logic_npc_counter_obb";
 
 
 

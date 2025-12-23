@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_SoundEventStart : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_SoundEventStart> {
+public partial interface CPulseCell_SoundEventStart : CPulseCell_BaseFlow, ISchemaClass<CPulseCell_SoundEventStart>
+{
+    static CPulseCell_SoundEventStart ISchemaClass<CPulseCell_SoundEventStart>.From(nint handle) => new CPulseCell_SoundEventStartImpl(handle);
+    static int ISchemaClass<CPulseCell_SoundEventStart>.Size => 80;
+    static string? ISchemaClass<CPulseCell_SoundEventStart>.ClassName => null;
 
-  static CPulseCell_SoundEventStart ISchemaClass<CPulseCell_SoundEventStart>.From(nint handle) => new CPulseCell_SoundEventStartImpl(handle);
-  static int ISchemaClass<CPulseCell_SoundEventStart>.Size => 80;
-  static string? ISchemaClass<CPulseCell_SoundEventStart>.ClassName => null;
 
-  
-  public ref SoundEventStartType_t Type { get; }
+    public ref SoundEventStartType_t Type { get; }
 
 
 }

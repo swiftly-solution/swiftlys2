@@ -6,117 +6,96 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimUpdateSharedDataImpl : SchemaClass, CAnimUpdateSharedData {
+internal partial class CAnimUpdateSharedDataImpl : SchemaClass, CAnimUpdateSharedData
+{
+    public CAnimUpdateSharedDataImpl(nint handle) : base(handle) { }
 
-  public CAnimUpdateSharedDataImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NodesOffset;
 
-  private static nint? _NodesOffset;
-
-  public ref CUtlVector<SchemaUntypedField> Nodes {
-    get {
-      if (_NodesOffset == null) {
-        _NodesOffset = Schema.GetOffset(0xA294DB47780F027A);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_NodesOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> Nodes {
+        get {
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0xA294DB47780F027A);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_NodesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodeIndexMapOffset;
+    private static nint? _NodeIndexMapOffset;
 
-  public SchemaUntypedField NodeIndexMap {
-    get {
-      if (_NodeIndexMapOffset == null) {
-        _NodeIndexMapOffset = Schema.GetOffset(0xA294DB47D3B3E7A3);
-      }
-      return new SchemaUntypedField(_Handle + _NodeIndexMapOffset!.Value);
+    public SchemaUntypedField NodeIndexMap {
+        get {
+            _NodeIndexMapOffset = _NodeIndexMapOffset ?? Schema.GetOffset(0xA294DB47D3B3E7A3);
+            return new SchemaUntypedField(_Handle + _NodeIndexMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComponentsOffset;
+    private static nint? _ComponentsOffset;
 
-  public ref CUtlVector<SchemaUntypedField> Components {
-    get {
-      if (_ComponentsOffset == null) {
-        _ComponentsOffset = Schema.GetOffset(0xA294DB47F87FC409);
-      }
-      return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ComponentsOffset!.Value);
+    public ref CUtlVector<SchemaUntypedField> Components {
+        get {
+            _ComponentsOffset = _ComponentsOffset ?? Schema.GetOffset(0xA294DB47F87FC409);
+            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_ComponentsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamListUpdaterOffset;
+    private static nint? _ParamListUpdaterOffset;
 
-  public SchemaUntypedField ParamListUpdater {
-    get {
-      if (_ParamListUpdaterOffset == null) {
-        _ParamListUpdaterOffset = Schema.GetOffset(0xA294DB4784AA7F15);
-      }
-      return new SchemaUntypedField(_Handle + _ParamListUpdaterOffset!.Value);
+    public SchemaUntypedField ParamListUpdater {
+        get {
+            _ParamListUpdaterOffset = _ParamListUpdaterOffset ?? Schema.GetOffset(0xA294DB4784AA7F15);
+            return new SchemaUntypedField(_Handle + _ParamListUpdaterOffset!.Value);
+        }
     }
-  }
-  private static nint? _TagManagerUpdaterOffset;
+    private static nint? _TagManagerUpdaterOffset;
 
-  public SchemaUntypedField TagManagerUpdater {
-    get {
-      if (_TagManagerUpdaterOffset == null) {
-        _TagManagerUpdaterOffset = Schema.GetOffset(0xA294DB47432E460D);
-      }
-      return new SchemaUntypedField(_Handle + _TagManagerUpdaterOffset!.Value);
+    public SchemaUntypedField TagManagerUpdater {
+        get {
+            _TagManagerUpdaterOffset = _TagManagerUpdaterOffset ?? Schema.GetOffset(0xA294DB47432E460D);
+            return new SchemaUntypedField(_Handle + _TagManagerUpdaterOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScriptManagerOffset;
+    private static nint? _ScriptManagerOffset;
 
-  public SchemaUntypedField ScriptManager {
-    get {
-      if (_ScriptManagerOffset == null) {
-        _ScriptManagerOffset = Schema.GetOffset(0xA294DB47F4257D31);
-      }
-      return new SchemaUntypedField(_Handle + _ScriptManagerOffset!.Value);
+    public SchemaUntypedField ScriptManager {
+        get {
+            _ScriptManagerOffset = _ScriptManagerOffset ?? Schema.GetOffset(0xA294DB47F4257D31);
+            return new SchemaUntypedField(_Handle + _ScriptManagerOffset!.Value);
+        }
     }
-  }
-  private static nint? _SettingsOffset;
+    private static nint? _SettingsOffset;
 
-  public CAnimGraphSettingsManager Settings {
-    get {
-      if (_SettingsOffset == null) {
-        _SettingsOffset = Schema.GetOffset(0xA294DB47B3DE33A8);
-      }
-      return new CAnimGraphSettingsManagerImpl(_Handle + _SettingsOffset!.Value);
+    public CAnimGraphSettingsManager Settings {
+        get {
+            _SettingsOffset = _SettingsOffset ?? Schema.GetOffset(0xA294DB47B3DE33A8);
+            return new CAnimGraphSettingsManagerImpl(_Handle + _SettingsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StaticPoseCacheOffset;
+    private static nint? _StaticPoseCacheOffset;
 
-  public SchemaUntypedField StaticPoseCache {
-    get {
-      if (_StaticPoseCacheOffset == null) {
-        _StaticPoseCacheOffset = Schema.GetOffset(0xA294DB475BFC0C1E);
-      }
-      return new SchemaUntypedField(_Handle + _StaticPoseCacheOffset!.Value);
+    public SchemaUntypedField StaticPoseCache {
+        get {
+            _StaticPoseCacheOffset = _StaticPoseCacheOffset ?? Schema.GetOffset(0xA294DB475BFC0C1E);
+            return new SchemaUntypedField(_Handle + _StaticPoseCacheOffset!.Value);
+        }
     }
-  }
-  private static nint? _SkeletonOffset;
+    private static nint? _SkeletonOffset;
 
-  public SchemaUntypedField Skeleton {
-    get {
-      if (_SkeletonOffset == null) {
-        _SkeletonOffset = Schema.GetOffset(0xA294DB4744BBF688);
-      }
-      return new SchemaUntypedField(_Handle + _SkeletonOffset!.Value);
+    public SchemaUntypedField Skeleton {
+        get {
+            _SkeletonOffset = _SkeletonOffset ?? Schema.GetOffset(0xA294DB4744BBF688);
+            return new SchemaUntypedField(_Handle + _SkeletonOffset!.Value);
+        }
     }
-  }
-  private static nint? _RootNodePathOffset;
+    private static nint? _RootNodePathOffset;
 
-  public CAnimNodePath RootNodePath {
-    get {
-      if (_RootNodePathOffset == null) {
-        _RootNodePathOffset = Schema.GetOffset(0xA294DB476893B9EE);
-      }
-      return new CAnimNodePathImpl(_Handle + _RootNodePathOffset!.Value);
+    public CAnimNodePath RootNodePath {
+        get {
+            _RootNodePathOffset = _RootNodePathOffset ?? Schema.GetOffset(0xA294DB476893B9EE);
+            return new CAnimNodePathImpl(_Handle + _RootNodePathOffset!.Value);
+        }
     }
-  }
 
 
 }

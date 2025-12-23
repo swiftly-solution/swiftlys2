@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathSimpleAPI : ISchemaClass<CPathSimpleAPI> {
-
-  static CPathSimpleAPI ISchemaClass<CPathSimpleAPI>.From(nint handle) => new CPathSimpleAPIImpl(handle);
-  static int ISchemaClass<CPathSimpleAPI>.Size => 8;
-  static string? ISchemaClass<CPathSimpleAPI>.ClassName => null;
+public partial interface CPathSimpleAPI : ISchemaClass<CPathSimpleAPI>
+{
+    static CPathSimpleAPI ISchemaClass<CPathSimpleAPI>.From(nint handle) => new CPathSimpleAPIImpl(handle);
+    static int ISchemaClass<CPathSimpleAPI>.Size => 8;
+    static string? ISchemaClass<CPathSimpleAPI>.ClassName => null;
 
 
 

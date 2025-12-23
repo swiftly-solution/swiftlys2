@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBodyGroupAnimTagImpl : CAnimTagBaseImpl, CBodyGroupAnimTag {
+internal partial class CBodyGroupAnimTagImpl : CAnimTagBaseImpl, CBodyGroupAnimTag
+{
+    public CBodyGroupAnimTagImpl(nint handle) : base(handle) { }
 
-  public CBodyGroupAnimTagImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PriorityOffset;
 
-  private static nint? _PriorityOffset;
-
-  public ref int Priority {
-    get {
-      if (_PriorityOffset == null) {
-        _PriorityOffset = Schema.GetOffset(0x4FBB343CE7EFB335);
-      }
-      return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+    public ref int Priority {
+        get {
+            _PriorityOffset = _PriorityOffset ?? Schema.GetOffset(0x4FBB343CE7EFB335);
+            return ref _Handle.AsRef<int>(_PriorityOffset!.Value);
+        }
     }
-  }
-  private static nint? _BodyGroupSettingsOffset;
+    private static nint? _BodyGroupSettingsOffset;
 
-  public ref CUtlVector<CBodyGroupSetting> BodyGroupSettings {
-    get {
-      if (_BodyGroupSettingsOffset == null) {
-        _BodyGroupSettingsOffset = Schema.GetOffset(0x4FBB343C3BE7BAE1);
-      }
-      return ref _Handle.AsRef<CUtlVector<CBodyGroupSetting>>(_BodyGroupSettingsOffset!.Value);
+    public ref CUtlVector<CBodyGroupSetting> BodyGroupSettings {
+        get {
+            _BodyGroupSettingsOffset = _BodyGroupSettingsOffset ?? Schema.GetOffset(0x4FBB343C3BE7BAE1);
+            return ref _Handle.AsRef<CUtlVector<CBodyGroupSetting>>(_BodyGroupSettingsOffset!.Value);
+        }
     }
-  }
 
 
 }

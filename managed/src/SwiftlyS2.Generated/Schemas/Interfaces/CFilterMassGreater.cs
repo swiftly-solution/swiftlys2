@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFilterMassGreater : CBaseFilter, ISchemaClass<CFilterMassGreater> {
+public partial interface CFilterMassGreater : CBaseFilter, ISchemaClass<CFilterMassGreater>
+{
+    static CFilterMassGreater ISchemaClass<CFilterMassGreater>.From(nint handle) => new CFilterMassGreaterImpl(handle);
+    static int ISchemaClass<CFilterMassGreater>.Size => 1360;
+    static string? ISchemaClass<CFilterMassGreater>.ClassName => "filter_activator_mass_greater";
 
-  static CFilterMassGreater ISchemaClass<CFilterMassGreater>.From(nint handle) => new CFilterMassGreaterImpl(handle);
-  static int ISchemaClass<CFilterMassGreater>.Size => 1360;
-  static string? ISchemaClass<CFilterMassGreater>.ClassName => "filter_activator_mass_greater";
 
-  
-  public ref float FilterMass { get; }
+    public ref float FilterMass { get; }
 
 
 }

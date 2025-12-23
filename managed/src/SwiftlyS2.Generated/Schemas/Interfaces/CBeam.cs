@@ -8,80 +8,79 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBeam : CBaseModelEntity, ISchemaClass<CBeam> {
+public partial interface CBeam : CBaseModelEntity, ISchemaClass<CBeam>
+{
+    static CBeam ISchemaClass<CBeam>.From(nint handle) => new CBeamImpl(handle);
+    static int ISchemaClass<CBeam>.Size => 2168;
+    static string? ISchemaClass<CBeam>.ClassName => "beam";
 
-  static CBeam ISchemaClass<CBeam>.From(nint handle) => new CBeamImpl(handle);
-  static int ISchemaClass<CBeam>.Size => 2168;
-  static string? ISchemaClass<CBeam>.ClassName => "beam";
 
-  
-  public ref float FrameRate { get; }
-  
-  public ref float HDRColorScale { get; }
-  
-  public GameTime_t FireTime { get; }
-  
-  public ref float Damage { get; }
-  
-  public ref byte NumBeamEnts { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> BaseMaterial { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> HaloIndex { get; }
-  
-  public ref BeamType_t BeamType { get; }
-  
-  public ref uint BeamFlags { get; }
-  
-  public ISchemaFixedArray<CHandle<CBaseEntity>> AttachEntity { get; }
-  
-  // AttachmentHandle_t
-  public SchemaUntypedField AttachIndex { get; }
-  
-  public ref float Width { get; }
-  
-  public ref float EndWidth { get; }
-  
-  public ref float FadeLength { get; }
-  
-  public ref float HaloScale { get; }
-  
-  public ref float Amplitude { get; }
-  
-  public ref float StartFrame { get; }
-  
-  public ref float Speed { get; }
-  
-  public ref float Frame { get; }
-  
-  public ref BeamClipStyle_t ClipStyle { get; }
-  
-  public ref bool TurnedOff { get; }
-  
-  public ref Vector EndPos { get; }
-  
-  public ref CHandle<CBaseEntity> EndEntity { get; }
-  
-  public ref int DissolveType { get; }
+    public ref float FrameRate { get; }
 
-  public void FrameRateUpdated();
-  public void HDRColorScaleUpdated();
-  public void NumBeamEntsUpdated();
-  public void BaseMaterialUpdated();
-  public void HaloIndexUpdated();
-  public void BeamTypeUpdated();
-  public void BeamFlagsUpdated();
-  public void AttachEntityUpdated();
-  public void AttachIndexUpdated();
-  public void WidthUpdated();
-  public void EndWidthUpdated();
-  public void FadeLengthUpdated();
-  public void HaloScaleUpdated();
-  public void AmplitudeUpdated();
-  public void StartFrameUpdated();
-  public void SpeedUpdated();
-  public void FrameUpdated();
-  public void ClipStyleUpdated();
-  public void TurnedOffUpdated();
-  public void EndPosUpdated();
+    public ref float HDRColorScale { get; }
+
+    public GameTime_t FireTime { get; }
+
+    public ref float Damage { get; }
+
+    public ref byte NumBeamEnts { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> BaseMaterial { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> HaloIndex { get; }
+
+    public ref BeamType_t BeamType { get; }
+
+    public ref uint BeamFlags { get; }
+
+    public ISchemaFixedArray<CHandle<CBaseEntity>> AttachEntity { get; }
+
+    public ISchemaClassFixedArray<AttachmentHandle_t> AttachIndex { get; }
+
+    public ref float Width { get; }
+
+    public ref float EndWidth { get; }
+
+    public ref float FadeLength { get; }
+
+    public ref float HaloScale { get; }
+
+    public ref float Amplitude { get; }
+
+    public ref float StartFrame { get; }
+
+    public ref float Speed { get; }
+
+    public ref float Frame { get; }
+
+    public ref BeamClipStyle_t ClipStyle { get; }
+
+    public ref bool TurnedOff { get; }
+
+    public ref Vector EndPos { get; }
+
+    public ref CHandle<CBaseEntity> EndEntity { get; }
+
+    public ref int DissolveType { get; }
+
+    public void FrameRateUpdated();
+    public void HDRColorScaleUpdated();
+    public void NumBeamEntsUpdated();
+    public void BaseMaterialUpdated();
+    public void HaloIndexUpdated();
+    public void BeamTypeUpdated();
+    public void BeamFlagsUpdated();
+    public void AttachEntityUpdated();
+    public void AttachIndexUpdated();
+    public void WidthUpdated();
+    public void EndWidthUpdated();
+    public void FadeLengthUpdated();
+    public void HaloScaleUpdated();
+    public void AmplitudeUpdated();
+    public void StartFrameUpdated();
+    public void SpeedUpdated();
+    public void FrameUpdated();
+    public void ClipStyleUpdated();
+    public void TurnedOffUpdated();
+    public void EndPosUpdated();
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeTri_t : ISchemaClass<FeTri_t> {
+public partial interface FeTri_t : ISchemaClass<FeTri_t>
+{
+    static FeTri_t ISchemaClass<FeTri_t>.From(nint handle) => new FeTri_tImpl(handle);
+    static int ISchemaClass<FeTri_t>.Size => 28;
+    static string? ISchemaClass<FeTri_t>.ClassName => null;
 
-  static FeTri_t ISchemaClass<FeTri_t>.From(nint handle) => new FeTri_tImpl(handle);
-  static int ISchemaClass<FeTri_t>.Size => 28;
-  static string? ISchemaClass<FeTri_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Node { get; }
-  
-  public ref float W1 { get; }
-  
-  public ref float W2 { get; }
-  
-  public ref float V1x { get; }
-  
-  public ref Vector2D V2 { get; }
+    public ISchemaFixedArray<ushort> Node { get; }
+
+    public ref float W1 { get; }
+
+    public ref float W2 { get; }
+
+    public ref float V1x { get; }
+
+    public ref Vector2D V2 { get; }
 
 
 }

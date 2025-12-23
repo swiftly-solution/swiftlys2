@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticleParentSetMode_t : uint {
-
+public enum ParticleParentSetMode_t : uint
+{
  PARTICLE_SET_PARENT_NO = 0,
 
  PARTICLE_SET_PARENT_IMMEDIATE = 1,

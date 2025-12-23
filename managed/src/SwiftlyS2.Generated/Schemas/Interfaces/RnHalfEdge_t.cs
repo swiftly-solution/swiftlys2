@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnHalfEdge_t : ISchemaClass<RnHalfEdge_t> {
+public partial interface RnHalfEdge_t : ISchemaClass<RnHalfEdge_t>
+{
+    static RnHalfEdge_t ISchemaClass<RnHalfEdge_t>.From(nint handle) => new RnHalfEdge_tImpl(handle);
+    static int ISchemaClass<RnHalfEdge_t>.Size => 4;
+    static string? ISchemaClass<RnHalfEdge_t>.ClassName => null;
 
-  static RnHalfEdge_t ISchemaClass<RnHalfEdge_t>.From(nint handle) => new RnHalfEdge_tImpl(handle);
-  static int ISchemaClass<RnHalfEdge_t>.Size => 4;
-  static string? ISchemaClass<RnHalfEdge_t>.ClassName => null;
 
-  
-  public ref byte Next { get; }
-  
-  public ref byte Twin { get; }
-  
-  public ref byte Origin { get; }
-  
-  public ref byte Face { get; }
+    public ref byte Next { get; }
+
+    public ref byte Twin { get; }
+
+    public ref byte Origin { get; }
+
+    public ref byte Face { get; }
 
 
 }

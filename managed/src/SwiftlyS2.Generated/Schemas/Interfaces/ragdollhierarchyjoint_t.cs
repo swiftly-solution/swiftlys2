@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ragdollhierarchyjoint_t : ISchemaClass<ragdollhierarchyjoint_t> {
+public partial interface ragdollhierarchyjoint_t : ISchemaClass<ragdollhierarchyjoint_t>
+{
+    static ragdollhierarchyjoint_t ISchemaClass<ragdollhierarchyjoint_t>.From(nint handle) => new ragdollhierarchyjoint_tImpl(handle);
+    static int ISchemaClass<ragdollhierarchyjoint_t>.Size => 16;
+    static string? ISchemaClass<ragdollhierarchyjoint_t>.ClassName => null;
 
-  static ragdollhierarchyjoint_t ISchemaClass<ragdollhierarchyjoint_t>.From(nint handle) => new ragdollhierarchyjoint_tImpl(handle);
-  static int ISchemaClass<ragdollhierarchyjoint_t>.Size => 16;
-  static string? ISchemaClass<ragdollhierarchyjoint_t>.ClassName => null;
 
-  
-  public ref int ParentIndex { get; }
-  
-  public ref int ChildIndex { get; }
+    public ref int ParentIndex { get; }
+
+    public ref int ChildIndex { get; }
 
 
 }

@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_DistanceBetweenVecs : CParticleFunctionOperator, ISchemaClass<C_OP_DistanceBetweenVecs> {
+public partial interface C_OP_DistanceBetweenVecs : CParticleFunctionOperator, ISchemaClass<C_OP_DistanceBetweenVecs>
+{
+    static C_OP_DistanceBetweenVecs ISchemaClass<C_OP_DistanceBetweenVecs>.From(nint handle) => new C_OP_DistanceBetweenVecsImpl(handle);
+    static int ISchemaClass<C_OP_DistanceBetweenVecs>.Size => 5392;
+    static string? ISchemaClass<C_OP_DistanceBetweenVecs>.ClassName => null;
 
-  static C_OP_DistanceBetweenVecs ISchemaClass<C_OP_DistanceBetweenVecs>.From(nint handle) => new C_OP_DistanceBetweenVecsImpl(handle);
-  static int ISchemaClass<C_OP_DistanceBetweenVecs>.Size => 5392;
-  static string? ISchemaClass<C_OP_DistanceBetweenVecs>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public CPerParticleVecInput Point1 { get; }
-  
-  public CPerParticleVecInput Point2 { get; }
-  
-  public CPerParticleFloatInput InputMin { get; }
-  
-  public CPerParticleFloatInput InputMax { get; }
-  
-  public CPerParticleFloatInput OutputMin { get; }
-  
-  public CPerParticleFloatInput OutputMax { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool DeltaTime { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public CPerParticleVecInput Point1 { get; }
+
+    public CPerParticleVecInput Point2 { get; }
+
+    public CPerParticleFloatInput InputMin { get; }
+
+    public CPerParticleFloatInput InputMax { get; }
+
+    public CPerParticleFloatInput OutputMin { get; }
+
+    public CPerParticleFloatInput OutputMax { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool DeltaTime { get; }
 
 
 }

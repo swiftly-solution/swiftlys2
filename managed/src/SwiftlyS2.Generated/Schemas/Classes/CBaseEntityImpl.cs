@@ -6,962 +6,714 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity {
-
-  public CBaseEntityImpl(nint handle) : base(handle) {
-  }
-
-  private static nint? _CBodyComponentOffset;
-
-  public CBodyComponent? CBodyComponent {
-    get {
-      if (_CBodyComponentOffset == null) {
-        _CBodyComponentOffset = Schema.GetOffset(0x9DC483B8D116E3C5);
-      }
-      var ptr = _Handle.Read<nint>(_CBodyComponentOffset!.Value);
-      return ptr.IsValidPtr() ? new CBodyComponentImpl(ptr) : null;
-    }
-  }
-  private static nint? _NetworkTransmitComponentOffset;
-
-  public CNetworkTransmitComponent NetworkTransmitComponent {
-    get {
-      if (_NetworkTransmitComponentOffset == null) {
-        _NetworkTransmitComponentOffset = Schema.GetOffset(0x9DC483B8FF010CE4);
-      }
-      return new CNetworkTransmitComponentImpl(_Handle + _NetworkTransmitComponentOffset!.Value);
-    }
-  }
-  private static nint? _ThinkFunctionsOffset;
-
-  public ref CUtlVector<thinkfunc_t> ThinkFunctions {
-    get {
-      if (_ThinkFunctionsOffset == null) {
-        _ThinkFunctionsOffset = Schema.GetOffset(0x9DC483B8D2C79415);
-      }
-      return ref _Handle.AsRef<CUtlVector<thinkfunc_t>>(_ThinkFunctionsOffset!.Value);
-    }
-  }
-  private static nint? _CurrentThinkContextOffset;
-
-  public ref int CurrentThinkContext {
-    get {
-      if (_CurrentThinkContextOffset == null) {
-        _CurrentThinkContextOffset = Schema.GetOffset(0x9DC483B8B04F8BF6);
-      }
-      return ref _Handle.AsRef<int>(_CurrentThinkContextOffset!.Value);
-    }
-  }
-  private static nint? _LastThinkTickOffset;
-
-  public GameTick_t LastThinkTick {
-    get {
-      if (_LastThinkTickOffset == null) {
-        _LastThinkTickOffset = Schema.GetOffset(0x9DC483B8CE8FE7F2);
-      }
-      return new GameTick_tImpl(_Handle + _LastThinkTickOffset!.Value);
-    }
-  }
-  private static nint? _DisabledContextThinksOffset;
-
-  public ref bool DisabledContextThinks {
-    get {
-      if (_DisabledContextThinksOffset == null) {
-        _DisabledContextThinksOffset = Schema.GetOffset(0x9DC483B8C2C22BED);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledContextThinksOffset!.Value);
-    }
-  }
-  private static nint? _IsSteadyStateOffset;
-
-  public SchemaUntypedField IsSteadyState {
-    get {
-      if (_IsSteadyStateOffset == null) {
-        _IsSteadyStateOffset = Schema.GetOffset(0x9DC483B84626D6B4);
-      }
-      return new SchemaUntypedField(_Handle + _IsSteadyStateOffset!.Value);
-    }
-  }
-  private static nint? _LastNetworkChangeOffset;
-
-  public ref float LastNetworkChange {
-    get {
-      if (_LastNetworkChangeOffset == null) {
-        _LastNetworkChangeOffset = Schema.GetOffset(0x9DC483B80351D699);
-      }
-      return ref _Handle.AsRef<float>(_LastNetworkChangeOffset!.Value);
-    }
-  }
-  private static nint? _ResponseContextsOffset;
-
-  public ref CUtlVector<ResponseContext_t> ResponseContexts {
-    get {
-      if (_ResponseContextsOffset == null) {
-        _ResponseContextsOffset = Schema.GetOffset(0x9DC483B85120C9AE);
-      }
-      return ref _Handle.AsRef<CUtlVector<ResponseContext_t>>(_ResponseContextsOffset!.Value);
-    }
-  }
-  private static nint? _ResponseContextOffset;
-
-  public string ResponseContext {
-    get {
-      if (_ResponseContextOffset == null) {
-        _ResponseContextOffset = Schema.GetOffset(0x9DC483B8ECDEFE61);
-      }
-      var ptr = _Handle.Read<nint>(_ResponseContextOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ResponseContextOffset == null) {
-        _ResponseContextOffset = Schema.GetOffset(0x9DC483B8ECDEFE61);
-      }
-      Schema.SetString(_Handle, _ResponseContextOffset!.Value, value);
-    }
-  } 
-  private static nint? _HealthOffset;
-
-  public ref int Health {
-    get {
-      if (_HealthOffset == null) {
-        _HealthOffset = Schema.GetOffset(0x9DC483B8084CDAD2);
-      }
-      return ref _Handle.AsRef<int>(_HealthOffset!.Value);
-    }
-  }
-  private static nint? _MaxHealthOffset;
-
-  public ref int MaxHealth {
-    get {
-      if (_MaxHealthOffset == null) {
-        _MaxHealthOffset = Schema.GetOffset(0x9DC483B80D159178);
-      }
-      return ref _Handle.AsRef<int>(_MaxHealthOffset!.Value);
-    }
-  }
-  private static nint? _LifeStateOffset;
-
-  public ref byte LifeState {
-    get {
-      if (_LifeStateOffset == null) {
-        _LifeStateOffset = Schema.GetOffset(0x9DC483B81C93BCF0);
-      }
-      return ref _Handle.AsRef<byte>(_LifeStateOffset!.Value);
-    }
-  }
-  private static nint? _DamageAccumulatorOffset;
-
-  public ref float DamageAccumulator {
-    get {
-      if (_DamageAccumulatorOffset == null) {
-        _DamageAccumulatorOffset = Schema.GetOffset(0x9DC483B85B3DCE98);
-      }
-      return ref _Handle.AsRef<float>(_DamageAccumulatorOffset!.Value);
-    }
-  }
-  private static nint? _TakesDamageOffset;
-
-  public ref bool TakesDamage {
-    get {
-      if (_TakesDamageOffset == null) {
-        _TakesDamageOffset = Schema.GetOffset(0x9DC483B8FFF5420E);
-      }
-      return ref _Handle.AsRef<bool>(_TakesDamageOffset!.Value);
-    }
-  }
-  private static nint? _TakeDamageFlagsOffset;
-
-  public ref TakeDamageFlags_t TakeDamageFlags {
-    get {
-      if (_TakeDamageFlagsOffset == null) {
-        _TakeDamageFlagsOffset = Schema.GetOffset(0x9DC483B81C16CB56);
-      }
-      return ref _Handle.AsRef<TakeDamageFlags_t>(_TakeDamageFlagsOffset!.Value);
-    }
-  }
-  private static nint? _PlatformTypeOffset;
-
-  public ref EntityPlatformTypes_t PlatformType {
-    get {
-      if (_PlatformTypeOffset == null) {
-        _PlatformTypeOffset = Schema.GetOffset(0x9DC483B818698BA6);
-      }
-      return ref _Handle.AsRef<EntityPlatformTypes_t>(_PlatformTypeOffset!.Value);
-    }
-  }
-  private static nint? _MoveCollideOffset;
-
-  public ref MoveCollide_t MoveCollide {
-    get {
-      if (_MoveCollideOffset == null) {
-        _MoveCollideOffset = Schema.GetOffset(0x9DC483B8C32EF192);
-      }
-      return ref _Handle.AsRef<MoveCollide_t>(_MoveCollideOffset!.Value);
-    }
-  }
-  private static nint? _MoveTypeOffset;
-
-  public ref MoveType_t MoveType {
-    get {
-      if (_MoveTypeOffset == null) {
-        _MoveTypeOffset = Schema.GetOffset(0x9DC483B890BCCC1C);
-      }
-      return ref _Handle.AsRef<MoveType_t>(_MoveTypeOffset!.Value);
-    }
-  }
-  private static nint? _ActualMoveTypeOffset;
-
-  public ref MoveType_t ActualMoveType {
-    get {
-      if (_ActualMoveTypeOffset == null) {
-        _ActualMoveTypeOffset = Schema.GetOffset(0x9DC483B85600AA92);
-      }
-      return ref _Handle.AsRef<MoveType_t>(_ActualMoveTypeOffset!.Value);
-    }
-  }
-  private static nint? _WaterTouchOffset;
-
-  public ref byte WaterTouch {
-    get {
-      if (_WaterTouchOffset == null) {
-        _WaterTouchOffset = Schema.GetOffset(0x9DC483B86FDAC663);
-      }
-      return ref _Handle.AsRef<byte>(_WaterTouchOffset!.Value);
-    }
-  }
-  private static nint? _SlimeTouchOffset;
-
-  public ref byte SlimeTouch {
-    get {
-      if (_SlimeTouchOffset == null) {
-        _SlimeTouchOffset = Schema.GetOffset(0x9DC483B849519DFE);
-      }
-      return ref _Handle.AsRef<byte>(_SlimeTouchOffset!.Value);
-    }
-  }
-  private static nint? _RestoreInHierarchyOffset;
-
-  public ref bool RestoreInHierarchy {
-    get {
-      if (_RestoreInHierarchyOffset == null) {
-        _RestoreInHierarchyOffset = Schema.GetOffset(0x9DC483B8D3622095);
-      }
-      return ref _Handle.AsRef<bool>(_RestoreInHierarchyOffset!.Value);
-    }
-  }
-  private static nint? _TargetOffset;
-
-  public string Target {
-    get {
-      if (_TargetOffset == null) {
-        _TargetOffset = Schema.GetOffset(0x9DC483B8FA08A9E8);
-      }
-      var ptr = _Handle.Read<nint>(_TargetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_TargetOffset == null) {
-        _TargetOffset = Schema.GetOffset(0x9DC483B8FA08A9E8);
-      }
-      Schema.SetString(_Handle, _TargetOffset!.Value, value);
-    }
-  } 
-  private static nint? _DamageFilterOffset;
-
-  public ref CHandle<CBaseFilter> DamageFilter {
-    get {
-      if (_DamageFilterOffset == null) {
-        _DamageFilterOffset = Schema.GetOffset(0x9DC483B831E01230);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseFilter>>(_DamageFilterOffset!.Value);
-    }
-  }
-  private static nint? _DamageFilterNameOffset;
-
-  public string DamageFilterName {
-    get {
-      if (_DamageFilterNameOffset == null) {
-        _DamageFilterNameOffset = Schema.GetOffset(0x9DC483B8F58A21C1);
-      }
-      var ptr = _Handle.Read<nint>(_DamageFilterNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DamageFilterNameOffset == null) {
-        _DamageFilterNameOffset = Schema.GetOffset(0x9DC483B8F58A21C1);
-      }
-      Schema.SetString(_Handle, _DamageFilterNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _MoveDoneTimeOffset;
-
-  public ref float MoveDoneTime {
-    get {
-      if (_MoveDoneTimeOffset == null) {
-        _MoveDoneTimeOffset = Schema.GetOffset(0x9DC483B860639E87);
-      }
-      return ref _Handle.AsRef<float>(_MoveDoneTimeOffset!.Value);
-    }
-  }
-  private static nint? _SubclassIDOffset;
-
-  public ref CUtlStringToken SubclassID {
-    get {
-      if (_SubclassIDOffset == null) {
-        _SubclassIDOffset = Schema.GetOffset(0x9DC483B8C02CE796);
-      }
-      return ref _Handle.AsRef<CUtlStringToken>(_SubclassIDOffset!.Value);
-    }
-  }
-  private static nint? _AnimTimeOffset;
-
-  public ref float AnimTime {
-    get {
-      if (_AnimTimeOffset == null) {
-        _AnimTimeOffset = Schema.GetOffset(0x9DC483B882735D4F);
-      }
-      return ref _Handle.AsRef<float>(_AnimTimeOffset!.Value);
-    }
-  }
-  private static nint? _SimulationTimeOffset;
-
-  public ref float SimulationTime {
-    get {
-      if (_SimulationTimeOffset == null) {
-        _SimulationTimeOffset = Schema.GetOffset(0x9DC483B87FCB378D);
-      }
-      return ref _Handle.AsRef<float>(_SimulationTimeOffset!.Value);
-    }
-  }
-  private static nint? _CreateTimeOffset;
-
-  public GameTime_t CreateTime {
-    get {
-      if (_CreateTimeOffset == null) {
-        _CreateTimeOffset = Schema.GetOffset(0x9DC483B875C91626);
-      }
-      return new GameTime_tImpl(_Handle + _CreateTimeOffset!.Value);
-    }
-  }
-  private static nint? _ClientSideRagdollOffset;
-
-  public ref bool ClientSideRagdoll {
-    get {
-      if (_ClientSideRagdollOffset == null) {
-        _ClientSideRagdollOffset = Schema.GetOffset(0x9DC483B8F1B9C3D0);
-      }
-      return ref _Handle.AsRef<bool>(_ClientSideRagdollOffset!.Value);
-    }
-  }
-  private static nint? _InterpolationFrameOffset;
-
-  public ref byte InterpolationFrame {
-    get {
-      if (_InterpolationFrameOffset == null) {
-        _InterpolationFrameOffset = Schema.GetOffset(0x9DC483B8937E9619);
-      }
-      return ref _Handle.AsRef<byte>(_InterpolationFrameOffset!.Value);
-    }
-  }
-  private static nint? _PrevVPhysicsUpdatePosOffset;
-
-  public ref Vector PrevVPhysicsUpdatePos {
-    get {
-      if (_PrevVPhysicsUpdatePosOffset == null) {
-        _PrevVPhysicsUpdatePosOffset = Schema.GetOffset(0x9DC483B825F6A1B4);
-      }
-      return ref _Handle.AsRef<Vector>(_PrevVPhysicsUpdatePosOffset!.Value);
-    }
-  }
-  private static nint? _TeamNumOffset;
-
-  public ref byte TeamNum {
-    get {
-      if (_TeamNumOffset == null) {
-        _TeamNumOffset = Schema.GetOffset(0x9DC483B8A5BFEFB3);
-      }
-      return ref _Handle.AsRef<byte>(_TeamNumOffset!.Value);
-    }
-  }
-  private static nint? _GlobalnameOffset;
-
-  public string Globalname {
-    get {
-      if (_GlobalnameOffset == null) {
-        _GlobalnameOffset = Schema.GetOffset(0x9DC483B82F8B8190);
-      }
-      var ptr = _Handle.Read<nint>(_GlobalnameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_GlobalnameOffset == null) {
-        _GlobalnameOffset = Schema.GetOffset(0x9DC483B82F8B8190);
-      }
-      Schema.SetString(_Handle, _GlobalnameOffset!.Value, value);
-    }
-  } 
-  private static nint? _SentToClientsOffset;
-
-  public ref int SentToClients {
-    get {
-      if (_SentToClientsOffset == null) {
-        _SentToClientsOffset = Schema.GetOffset(0x9DC483B81C68C809);
-      }
-      return ref _Handle.AsRef<int>(_SentToClientsOffset!.Value);
-    }
-  }
-  private static nint? _SpeedOffset;
-
-  public ref float Speed {
-    get {
-      if (_SpeedOffset == null) {
-        _SpeedOffset = Schema.GetOffset(0x9DC483B8C631B7EA);
-      }
-      return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
-    }
-  }
-  private static nint? _UniqueHammerIDOffset;
-
-  public string UniqueHammerID {
-    get {
-      if (_UniqueHammerIDOffset == null) {
-        _UniqueHammerIDOffset = Schema.GetOffset(0x9DC483B84A371EB2);
-      }
-      var ptr = _Handle.Read<nint>(_UniqueHammerIDOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_UniqueHammerIDOffset == null) {
-        _UniqueHammerIDOffset = Schema.GetOffset(0x9DC483B84A371EB2);
-      }
-      Schema.SetString(_Handle, _UniqueHammerIDOffset!.Value, value);
-    }
-  } 
-  private static nint? _SpawnflagsOffset;
-
-  public ref uint Spawnflags {
-    get {
-      if (_SpawnflagsOffset == null) {
-        _SpawnflagsOffset = Schema.GetOffset(0x9DC483B83A4BBF6B);
-      }
-      return ref _Handle.AsRef<uint>(_SpawnflagsOffset!.Value);
-    }
-  }
-  private static nint? _NextThinkTickOffset;
-
-  public GameTick_t NextThinkTick {
-    get {
-      if (_NextThinkTickOffset == null) {
-        _NextThinkTickOffset = Schema.GetOffset(0x9DC483B8B7CEF021);
-      }
-      return new GameTick_tImpl(_Handle + _NextThinkTickOffset!.Value);
-    }
-  }
-  private static nint? _SimulationTickOffset;
-
-  public ref int SimulationTick {
-    get {
-      if (_SimulationTickOffset == null) {
-        _SimulationTickOffset = Schema.GetOffset(0x9DC483B8144F0737);
-      }
-      return ref _Handle.AsRef<int>(_SimulationTickOffset!.Value);
-    }
-  }
-  private static nint? _OnKilledOffset;
-
-  public CEntityIOOutput OnKilled {
-    get {
-      if (_OnKilledOffset == null) {
-        _OnKilledOffset = Schema.GetOffset(0x9DC483B8A64A5BF1);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnKilledOffset!.Value);
-    }
-  }
-  private static nint? _FlagsOffset;
-
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x9DC483B8A4A37590);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
-    }
-  }
-  private static nint? _AbsVelocityOffset;
-
-  public ref Vector AbsVelocity {
-    get {
-      if (_AbsVelocityOffset == null) {
-        _AbsVelocityOffset = Schema.GetOffset(0x9DC483B816C096CC);
-      }
-      return ref _Handle.AsRef<Vector>(_AbsVelocityOffset!.Value);
-    }
-  }
-  private static nint? _VelocityOffset;
-
-  public CNetworkVelocityVector Velocity {
-    get {
-      if (_VelocityOffset == null) {
-        _VelocityOffset = Schema.GetOffset(0x9DC483B87CF77892);
-      }
-      return new CNetworkVelocityVectorImpl(_Handle + _VelocityOffset!.Value);
-    }
-  }
-  private static nint? _BaseVelocityOffset;
-
-  public ref Vector BaseVelocity {
-    get {
-      if (_BaseVelocityOffset == null) {
-        _BaseVelocityOffset = Schema.GetOffset(0x9DC483B813B19DCB);
-      }
-      return ref _Handle.AsRef<Vector>(_BaseVelocityOffset!.Value);
-    }
-  }
-  private static nint? _PushEnumCountOffset;
-
-  public ref int PushEnumCount {
-    get {
-      if (_PushEnumCountOffset == null) {
-        _PushEnumCountOffset = Schema.GetOffset(0x9DC483B87BDCED73);
-      }
-      return ref _Handle.AsRef<int>(_PushEnumCountOffset!.Value);
-    }
-  }
-  private static nint? _CollisionOffset;
-
-  public CCollisionProperty? Collision {
-    get {
-      if (_CollisionOffset == null) {
-        _CollisionOffset = Schema.GetOffset(0x9DC483B8C1E3AAA1);
-      }
-      var ptr = _Handle.Read<nint>(_CollisionOffset!.Value);
-      return ptr.IsValidPtr() ? new CCollisionPropertyImpl(ptr) : null;
-    }
-  }
-  private static nint? _EffectEntityOffset;
-
-  public ref CHandle<CBaseEntity> EffectEntity {
-    get {
-      if (_EffectEntityOffset == null) {
-        _EffectEntityOffset = Schema.GetOffset(0x9DC483B86BA85951);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EffectEntityOffset!.Value);
-    }
-  }
-  private static nint? _OwnerEntityOffset;
-
-  public ref CHandle<CBaseEntity> OwnerEntity {
-    get {
-      if (_OwnerEntityOffset == null) {
-        _OwnerEntityOffset = Schema.GetOffset(0x9DC483B86D279C31);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OwnerEntityOffset!.Value);
-    }
-  }
-  private static nint? _EffectsOffset;
-
-  public ref uint Effects {
-    get {
-      if (_EffectsOffset == null) {
-        _EffectsOffset = Schema.GetOffset(0x9DC483B8DF272D79);
-      }
-      return ref _Handle.AsRef<uint>(_EffectsOffset!.Value);
-    }
-  }
-  private static nint? _GroundEntityOffset;
-
-  public ref CHandle<CBaseEntity> GroundEntity {
-    get {
-      if (_GroundEntityOffset == null) {
-        _GroundEntityOffset = Schema.GetOffset(0x9DC483B8253120D3);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_GroundEntityOffset!.Value);
-    }
-  }
-  private static nint? _GroundBodyIndexOffset;
-
-  public ref int GroundBodyIndex {
-    get {
-      if (_GroundBodyIndexOffset == null) {
-        _GroundBodyIndexOffset = Schema.GetOffset(0x9DC483B81D1BA62A);
-      }
-      return ref _Handle.AsRef<int>(_GroundBodyIndexOffset!.Value);
-    }
-  }
-  private static nint? _FrictionOffset;
-
-  public ref float Friction {
-    get {
-      if (_FrictionOffset == null) {
-        _FrictionOffset = Schema.GetOffset(0x9DC483B86F5FEBA1);
-      }
-      return ref _Handle.AsRef<float>(_FrictionOffset!.Value);
-    }
-  }
-  private static nint? _ElasticityOffset;
-
-  public ref float Elasticity {
-    get {
-      if (_ElasticityOffset == null) {
-        _ElasticityOffset = Schema.GetOffset(0x9DC483B84EC38DF6);
-      }
-      return ref _Handle.AsRef<float>(_ElasticityOffset!.Value);
-    }
-  }
-  private static nint? _GravityScaleOffset;
-
-  public ref float GravityScale {
-    get {
-      if (_GravityScaleOffset == null) {
-        _GravityScaleOffset = Schema.GetOffset(0x9DC483B8328A3947);
-      }
-      return ref _Handle.AsRef<float>(_GravityScaleOffset!.Value);
-    }
-  }
-  private static nint? _TimeScaleOffset;
-
-  public ref float TimeScale {
-    get {
-      if (_TimeScaleOffset == null) {
-        _TimeScaleOffset = Schema.GetOffset(0x9DC483B8B49D735C);
-      }
-      return ref _Handle.AsRef<float>(_TimeScaleOffset!.Value);
-    }
-  }
-  private static nint? _WaterLevelOffset;
-
-  public ref float WaterLevel {
-    get {
-      if (_WaterLevelOffset == null) {
-        _WaterLevelOffset = Schema.GetOffset(0x9DC483B86CC4285C);
-      }
-      return ref _Handle.AsRef<float>(_WaterLevelOffset!.Value);
-    }
-  }
-  private static nint? _GravityDisabledOffset;
-
-  public ref bool GravityDisabled {
-    get {
-      if (_GravityDisabledOffset == null) {
-        _GravityDisabledOffset = Schema.GetOffset(0x9DC483B86489B245);
-      }
-      return ref _Handle.AsRef<bool>(_GravityDisabledOffset!.Value);
-    }
-  }
-  private static nint? _AnimatedEveryTickOffset;
-
-  public ref bool AnimatedEveryTick {
-    get {
-      if (_AnimatedEveryTickOffset == null) {
-        _AnimatedEveryTickOffset = Schema.GetOffset(0x9DC483B8FC757D7E);
-      }
-      return ref _Handle.AsRef<bool>(_AnimatedEveryTickOffset!.Value);
-    }
-  }
-  private static nint? _ActualGravityScaleOffset;
-
-  public ref float ActualGravityScale {
-    get {
-      if (_ActualGravityScaleOffset == null) {
-        _ActualGravityScaleOffset = Schema.GetOffset(0x9DC483B8386AD491);
-      }
-      return ref _Handle.AsRef<float>(_ActualGravityScaleOffset!.Value);
-    }
-  }
-  private static nint? _GravityActuallyDisabledOffset;
-
-  public ref bool GravityActuallyDisabled {
-    get {
-      if (_GravityActuallyDisabledOffset == null) {
-        _GravityActuallyDisabledOffset = Schema.GetOffset(0x9DC483B842E715B0);
-      }
-      return ref _Handle.AsRef<bool>(_GravityActuallyDisabledOffset!.Value);
-    }
-  }
-  private static nint? _DisableLowViolenceOffset;
-
-  public ref bool DisableLowViolence {
-    get {
-      if (_DisableLowViolenceOffset == null) {
-        _DisableLowViolenceOffset = Schema.GetOffset(0x9DC483B8DE0FB0EE);
-      }
-      return ref _Handle.AsRef<bool>(_DisableLowViolenceOffset!.Value);
-    }
-  }
-  private static nint? _WaterTypeOffset;
-
-  public ref byte WaterType {
-    get {
-      if (_WaterTypeOffset == null) {
-        _WaterTypeOffset = Schema.GetOffset(0x9DC483B81053FF74);
-      }
-      return ref _Handle.AsRef<byte>(_WaterTypeOffset!.Value);
-    }
-  }
-  private static nint? _EFlagsOffset;
-
-  public ref int EFlags {
-    get {
-      if (_EFlagsOffset == null) {
-        _EFlagsOffset = Schema.GetOffset(0x9DC483B8466C684A);
-      }
-      return ref _Handle.AsRef<int>(_EFlagsOffset!.Value);
-    }
-  }
-  private static nint? _OnUser1Offset;
-
-  public CEntityIOOutput OnUser1 {
-    get {
-      if (_OnUser1Offset == null) {
-        _OnUser1Offset = Schema.GetOffset(0x9DC483B8183E0806);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnUser1Offset!.Value);
-    }
-  }
-  private static nint? _OnUser2Offset;
-
-  public CEntityIOOutput OnUser2 {
-    get {
-      if (_OnUser2Offset == null) {
-        _OnUser2Offset = Schema.GetOffset(0x9DC483B8173E0673);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnUser2Offset!.Value);
-    }
-  }
-  private static nint? _OnUser3Offset;
-
-  public CEntityIOOutput OnUser3 {
-    get {
-      if (_OnUser3Offset == null) {
-        _OnUser3Offset = Schema.GetOffset(0x9DC483B8163E04E0);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnUser3Offset!.Value);
-    }
-  }
-  private static nint? _OnUser4Offset;
-
-  public CEntityIOOutput OnUser4 {
-    get {
-      if (_OnUser4Offset == null) {
-        _OnUser4Offset = Schema.GetOffset(0x9DC483B81D3E0FE5);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnUser4Offset!.Value);
-    }
-  }
-  private static nint? _InitialTeamNumOffset;
-
-  public ref int InitialTeamNum {
-    get {
-      if (_InitialTeamNumOffset == null) {
-        _InitialTeamNumOffset = Schema.GetOffset(0x9DC483B807D42CFF);
-      }
-      return ref _Handle.AsRef<int>(_InitialTeamNumOffset!.Value);
-    }
-  }
-  private static nint? _NavIgnoreUntilTimeOffset;
-
-  public GameTime_t NavIgnoreUntilTime {
-    get {
-      if (_NavIgnoreUntilTimeOffset == null) {
-        _NavIgnoreUntilTimeOffset = Schema.GetOffset(0x9DC483B88228BC8B);
-      }
-      return new GameTime_tImpl(_Handle + _NavIgnoreUntilTimeOffset!.Value);
-    }
-  }
-  private static nint? _AngVelocityOffset;
-
-  public ref QAngle AngVelocity {
-    get {
-      if (_AngVelocityOffset == null) {
-        _AngVelocityOffset = Schema.GetOffset(0x9DC483B8022592E4);
-      }
-      return ref _Handle.AsRef<QAngle>(_AngVelocityOffset!.Value);
-    }
-  }
-  private static nint? _NetworkQuantizeOriginAndAnglesOffset;
-
-  public ref bool NetworkQuantizeOriginAndAngles {
-    get {
-      if (_NetworkQuantizeOriginAndAnglesOffset == null) {
-        _NetworkQuantizeOriginAndAnglesOffset = Schema.GetOffset(0x9DC483B89E12171D);
-      }
-      return ref _Handle.AsRef<bool>(_NetworkQuantizeOriginAndAnglesOffset!.Value);
-    }
-  }
-  private static nint? _LagCompensateOffset;
-
-  public ref bool LagCompensate {
-    get {
-      if (_LagCompensateOffset == null) {
-        _LagCompensateOffset = Schema.GetOffset(0x9DC483B835099A18);
-      }
-      return ref _Handle.AsRef<bool>(_LagCompensateOffset!.Value);
-    }
-  }
-  private static nint? _BlockerOffset;
-
-  public ref CHandle<CBaseEntity> Blocker {
-    get {
-      if (_BlockerOffset == null) {
-        _BlockerOffset = Schema.GetOffset(0x9DC483B840B754B7);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_BlockerOffset!.Value);
-    }
-  }
-  private static nint? _LocalTimeOffset;
-
-  public ref float LocalTime {
-    get {
-      if (_LocalTimeOffset == null) {
-        _LocalTimeOffset = Schema.GetOffset(0x9DC483B8E23DEFC7);
-      }
-      return ref _Handle.AsRef<float>(_LocalTimeOffset!.Value);
-    }
-  }
-  private static nint? _VPhysicsUpdateLocalTimeOffset;
-
-  public ref float VPhysicsUpdateLocalTime {
-    get {
-      if (_VPhysicsUpdateLocalTimeOffset == null) {
-        _VPhysicsUpdateLocalTimeOffset = Schema.GetOffset(0x9DC483B8CEAEBFA5);
-      }
-      return ref _Handle.AsRef<float>(_VPhysicsUpdateLocalTimeOffset!.Value);
-    }
-  }
-  private static nint? _BloodTypeOffset;
-
-  public ref BloodType BloodType {
-    get {
-      if (_BloodTypeOffset == null) {
-        _BloodTypeOffset = Schema.GetOffset(0x9DC483B8E472F393);
-      }
-      return ref _Handle.AsRef<BloodType>(_BloodTypeOffset!.Value);
-    }
-  }
-  private static nint? _PulseGraphInstanceOffset;
-
-  public CPulseGraphInstance_ServerEntity? PulseGraphInstance {
-    get {
-      if (_PulseGraphInstanceOffset == null) {
-        _PulseGraphInstanceOffset = Schema.GetOffset(0x9DC483B87D608947);
-      }
-      var ptr = _Handle.Read<nint>(_PulseGraphInstanceOffset!.Value);
-      return ptr.IsValidPtr() ? new CPulseGraphInstance_ServerEntityImpl(ptr) : null;
-    }
-  }
-
-  public void CBodyComponentUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8D116E3C5);
-  }
-  public void HealthUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8084CDAD2);
-  }
-  public void MaxHealthUpdated() {
-    Schema.Update(_Handle, 0x9DC483B80D159178);
-  }
-  public void LifeStateUpdated() {
-    Schema.Update(_Handle, 0x9DC483B81C93BCF0);
-  }
-  public void TakesDamageUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8FFF5420E);
-  }
-  public void TakeDamageFlagsUpdated() {
-    Schema.Update(_Handle, 0x9DC483B81C16CB56);
-  }
-  public void PlatformTypeUpdated() {
-    Schema.Update(_Handle, 0x9DC483B818698BA6);
-  }
-  public void MoveCollideUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8C32EF192);
-  }
-  public void MoveTypeUpdated() {
-    Schema.Update(_Handle, 0x9DC483B890BCCC1C);
-  }
-  public void SubclassIDUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8C02CE796);
-  }
-  public void AnimTimeUpdated() {
-    Schema.Update(_Handle, 0x9DC483B882735D4F);
-  }
-  public void SimulationTimeUpdated() {
-    Schema.Update(_Handle, 0x9DC483B87FCB378D);
-  }
-  public void CreateTimeUpdated() {
-    Schema.Update(_Handle, 0x9DC483B875C91626);
-  }
-  public void ClientSideRagdollUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8F1B9C3D0);
-  }
-  public void InterpolationFrameUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8937E9619);
-  }
-  public void TeamNumUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8A5BFEFB3);
-  }
-  public void SpeedUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8C631B7EA);
-  }
-  public void SpawnflagsUpdated() {
-    Schema.Update(_Handle, 0x9DC483B83A4BBF6B);
-  }
-  public void NextThinkTickUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8B7CEF021);
-  }
-  public void FlagsUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8A4A37590);
-  }
-  public void VelocityUpdated() {
-    Schema.Update(_Handle, 0x9DC483B87CF77892);
-  }
-  public void BaseVelocityUpdated() {
-    Schema.Update(_Handle, 0x9DC483B813B19DCB);
-  }
-  public void EffectEntityUpdated() {
-    Schema.Update(_Handle, 0x9DC483B86BA85951);
-  }
-  public void OwnerEntityUpdated() {
-    Schema.Update(_Handle, 0x9DC483B86D279C31);
-  }
-  public void EffectsUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8DF272D79);
-  }
-  public void GroundEntityUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8253120D3);
-  }
-  public void GroundBodyIndexUpdated() {
-    Schema.Update(_Handle, 0x9DC483B81D1BA62A);
-  }
-  public void FrictionUpdated() {
-    Schema.Update(_Handle, 0x9DC483B86F5FEBA1);
-  }
-  public void ElasticityUpdated() {
-    Schema.Update(_Handle, 0x9DC483B84EC38DF6);
-  }
-  public void GravityScaleUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8328A3947);
-  }
-  public void TimeScaleUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8B49D735C);
-  }
-  public void WaterLevelUpdated() {
-    Schema.Update(_Handle, 0x9DC483B86CC4285C);
-  }
-  public void GravityDisabledUpdated() {
-    Schema.Update(_Handle, 0x9DC483B86489B245);
-  }
-  public void AnimatedEveryTickUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8FC757D7E);
-  }
-  public void NavIgnoreUntilTimeUpdated() {
-    Schema.Update(_Handle, 0x9DC483B88228BC8B);
-  }
-  public void BloodTypeUpdated() {
-    Schema.Update(_Handle, 0x9DC483B8E472F393);
-  }
+internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
+{
+    public CBaseEntityImpl(nint handle) : base(handle) { }
+
+    private static nint? _CBodyComponentOffset;
+
+    public CBodyComponent? CBodyComponent {
+        get {
+            _CBodyComponentOffset = _CBodyComponentOffset ?? Schema.GetOffset(0x9DC483B8D116E3C5);
+            var ptr = _Handle.Read<nint>(_CBodyComponentOffset!.Value);
+            return ptr.IsValidPtr() ? new CBodyComponentImpl(ptr) : null;
+        }
+    }
+    private static nint? _NetworkTransmitComponentOffset;
+
+    public CNetworkTransmitComponent NetworkTransmitComponent {
+        get {
+            _NetworkTransmitComponentOffset = _NetworkTransmitComponentOffset ?? Schema.GetOffset(0x9DC483B8FF010CE4);
+            return new CNetworkTransmitComponentImpl(_Handle + _NetworkTransmitComponentOffset!.Value);
+        }
+    }
+    private static nint? _ThinkFunctionsOffset;
+
+    public ref CUtlVector<thinkfunc_t> ThinkFunctions {
+        get {
+            _ThinkFunctionsOffset = _ThinkFunctionsOffset ?? Schema.GetOffset(0x9DC483B8D2C79415);
+            return ref _Handle.AsRef<CUtlVector<thinkfunc_t>>(_ThinkFunctionsOffset!.Value);
+        }
+    }
+    private static nint? _CurrentThinkContextOffset;
+
+    public ref int CurrentThinkContext {
+        get {
+            _CurrentThinkContextOffset = _CurrentThinkContextOffset ?? Schema.GetOffset(0x9DC483B8B04F8BF6);
+            return ref _Handle.AsRef<int>(_CurrentThinkContextOffset!.Value);
+        }
+    }
+    private static nint? _LastThinkTickOffset;
+
+    public GameTick_t LastThinkTick {
+        get {
+            _LastThinkTickOffset = _LastThinkTickOffset ?? Schema.GetOffset(0x9DC483B8CE8FE7F2);
+            return new GameTick_tImpl(_Handle + _LastThinkTickOffset!.Value);
+        }
+    }
+    private static nint? _DisabledContextThinksOffset;
+
+    public ref bool DisabledContextThinks {
+        get {
+            _DisabledContextThinksOffset = _DisabledContextThinksOffset ?? Schema.GetOffset(0x9DC483B8C2C22BED);
+            return ref _Handle.AsRef<bool>(_DisabledContextThinksOffset!.Value);
+        }
+    }
+    private static nint? _IsSteadyStateOffset;
+
+    public SchemaUntypedField IsSteadyState {
+        get {
+            _IsSteadyStateOffset = _IsSteadyStateOffset ?? Schema.GetOffset(0x9DC483B84626D6B4);
+            return new SchemaUntypedField(_Handle + _IsSteadyStateOffset!.Value);
+        }
+    }
+    private static nint? _LastNetworkChangeOffset;
+
+    public ref float LastNetworkChange {
+        get {
+            _LastNetworkChangeOffset = _LastNetworkChangeOffset ?? Schema.GetOffset(0x9DC483B80351D699);
+            return ref _Handle.AsRef<float>(_LastNetworkChangeOffset!.Value);
+        }
+    }
+    private static nint? _ResponseContextsOffset;
+
+    public ref CUtlVector<ResponseContext_t> ResponseContexts {
+        get {
+            _ResponseContextsOffset = _ResponseContextsOffset ?? Schema.GetOffset(0x9DC483B85120C9AE);
+            return ref _Handle.AsRef<CUtlVector<ResponseContext_t>>(_ResponseContextsOffset!.Value);
+        }
+    }
+    private static nint? _ResponseContextOffset;
+
+    public string ResponseContext {
+        get {
+            _ResponseContextOffset = _ResponseContextOffset ?? Schema.GetOffset(0x9DC483B8ECDEFE61);
+            return Schema.GetString(_Handle.Read<nint>(_ResponseContextOffset!.Value));
+        }
+        set {
+            _ResponseContextOffset = _ResponseContextOffset ?? Schema.GetOffset(0x9DC483B8ECDEFE61);
+            Schema.SetString(_Handle, _ResponseContextOffset!.Value, value);
+        }
+    } 
+    private static nint? _HealthOffset;
+
+    public ref int Health {
+        get {
+            _HealthOffset = _HealthOffset ?? Schema.GetOffset(0x9DC483B8084CDAD2);
+            return ref _Handle.AsRef<int>(_HealthOffset!.Value);
+        }
+    }
+    private static nint? _MaxHealthOffset;
+
+    public ref int MaxHealth {
+        get {
+            _MaxHealthOffset = _MaxHealthOffset ?? Schema.GetOffset(0x9DC483B80D159178);
+            return ref _Handle.AsRef<int>(_MaxHealthOffset!.Value);
+        }
+    }
+    private static nint? _LifeStateOffset;
+
+    public ref byte LifeState {
+        get {
+            _LifeStateOffset = _LifeStateOffset ?? Schema.GetOffset(0x9DC483B81C93BCF0);
+            return ref _Handle.AsRef<byte>(_LifeStateOffset!.Value);
+        }
+    }
+    private static nint? _DamageAccumulatorOffset;
+
+    public ref float DamageAccumulator {
+        get {
+            _DamageAccumulatorOffset = _DamageAccumulatorOffset ?? Schema.GetOffset(0x9DC483B85B3DCE98);
+            return ref _Handle.AsRef<float>(_DamageAccumulatorOffset!.Value);
+        }
+    }
+    private static nint? _TakesDamageOffset;
+
+    public ref bool TakesDamage {
+        get {
+            _TakesDamageOffset = _TakesDamageOffset ?? Schema.GetOffset(0x9DC483B8FFF5420E);
+            return ref _Handle.AsRef<bool>(_TakesDamageOffset!.Value);
+        }
+    }
+    private static nint? _TakeDamageFlagsOffset;
+
+    public ref TakeDamageFlags_t TakeDamageFlags {
+        get {
+            _TakeDamageFlagsOffset = _TakeDamageFlagsOffset ?? Schema.GetOffset(0x9DC483B81C16CB56);
+            return ref _Handle.AsRef<TakeDamageFlags_t>(_TakeDamageFlagsOffset!.Value);
+        }
+    }
+    private static nint? _PlatformTypeOffset;
+
+    public ref EntityPlatformTypes_t PlatformType {
+        get {
+            _PlatformTypeOffset = _PlatformTypeOffset ?? Schema.GetOffset(0x9DC483B818698BA6);
+            return ref _Handle.AsRef<EntityPlatformTypes_t>(_PlatformTypeOffset!.Value);
+        }
+    }
+    private static nint? _MoveCollideOffset;
+
+    public ref MoveCollide_t MoveCollide {
+        get {
+            _MoveCollideOffset = _MoveCollideOffset ?? Schema.GetOffset(0x9DC483B8C32EF192);
+            return ref _Handle.AsRef<MoveCollide_t>(_MoveCollideOffset!.Value);
+        }
+    }
+    private static nint? _MoveTypeOffset;
+
+    public ref MoveType_t MoveType {
+        get {
+            _MoveTypeOffset = _MoveTypeOffset ?? Schema.GetOffset(0x9DC483B890BCCC1C);
+            return ref _Handle.AsRef<MoveType_t>(_MoveTypeOffset!.Value);
+        }
+    }
+    private static nint? _ActualMoveTypeOffset;
+
+    public ref MoveType_t ActualMoveType {
+        get {
+            _ActualMoveTypeOffset = _ActualMoveTypeOffset ?? Schema.GetOffset(0x9DC483B85600AA92);
+            return ref _Handle.AsRef<MoveType_t>(_ActualMoveTypeOffset!.Value);
+        }
+    }
+    private static nint? _WaterTouchOffset;
+
+    public ref byte WaterTouch {
+        get {
+            _WaterTouchOffset = _WaterTouchOffset ?? Schema.GetOffset(0x9DC483B86FDAC663);
+            return ref _Handle.AsRef<byte>(_WaterTouchOffset!.Value);
+        }
+    }
+    private static nint? _SlimeTouchOffset;
+
+    public ref byte SlimeTouch {
+        get {
+            _SlimeTouchOffset = _SlimeTouchOffset ?? Schema.GetOffset(0x9DC483B849519DFE);
+            return ref _Handle.AsRef<byte>(_SlimeTouchOffset!.Value);
+        }
+    }
+    private static nint? _RestoreInHierarchyOffset;
+
+    public ref bool RestoreInHierarchy {
+        get {
+            _RestoreInHierarchyOffset = _RestoreInHierarchyOffset ?? Schema.GetOffset(0x9DC483B8D3622095);
+            return ref _Handle.AsRef<bool>(_RestoreInHierarchyOffset!.Value);
+        }
+    }
+    private static nint? _TargetOffset;
+
+    public string Target {
+        get {
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x9DC483B8FA08A9E8);
+            return Schema.GetString(_Handle.Read<nint>(_TargetOffset!.Value));
+        }
+        set {
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x9DC483B8FA08A9E8);
+            Schema.SetString(_Handle, _TargetOffset!.Value, value);
+        }
+    } 
+    private static nint? _DamageFilterOffset;
+
+    public ref CHandle<CBaseFilter> DamageFilter {
+        get {
+            _DamageFilterOffset = _DamageFilterOffset ?? Schema.GetOffset(0x9DC483B831E01230);
+            return ref _Handle.AsRef<CHandle<CBaseFilter>>(_DamageFilterOffset!.Value);
+        }
+    }
+    private static nint? _DamageFilterNameOffset;
+
+    public string DamageFilterName {
+        get {
+            _DamageFilterNameOffset = _DamageFilterNameOffset ?? Schema.GetOffset(0x9DC483B8F58A21C1);
+            return Schema.GetString(_Handle.Read<nint>(_DamageFilterNameOffset!.Value));
+        }
+        set {
+            _DamageFilterNameOffset = _DamageFilterNameOffset ?? Schema.GetOffset(0x9DC483B8F58A21C1);
+            Schema.SetString(_Handle, _DamageFilterNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _MoveDoneTimeOffset;
+
+    public ref float MoveDoneTime {
+        get {
+            _MoveDoneTimeOffset = _MoveDoneTimeOffset ?? Schema.GetOffset(0x9DC483B860639E87);
+            return ref _Handle.AsRef<float>(_MoveDoneTimeOffset!.Value);
+        }
+    }
+    private static nint? _SubclassIDOffset;
+
+    public ref CUtlStringToken SubclassID {
+        get {
+            _SubclassIDOffset = _SubclassIDOffset ?? Schema.GetOffset(0x9DC483B8C02CE796);
+            return ref _Handle.AsRef<CUtlStringToken>(_SubclassIDOffset!.Value);
+        }
+    }
+    private static nint? _AnimTimeOffset;
+
+    public ref float AnimTime {
+        get {
+            _AnimTimeOffset = _AnimTimeOffset ?? Schema.GetOffset(0x9DC483B882735D4F);
+            return ref _Handle.AsRef<float>(_AnimTimeOffset!.Value);
+        }
+    }
+    private static nint? _SimulationTimeOffset;
+
+    public ref float SimulationTime {
+        get {
+            _SimulationTimeOffset = _SimulationTimeOffset ?? Schema.GetOffset(0x9DC483B87FCB378D);
+            return ref _Handle.AsRef<float>(_SimulationTimeOffset!.Value);
+        }
+    }
+    private static nint? _CreateTimeOffset;
+
+    public GameTime_t CreateTime {
+        get {
+            _CreateTimeOffset = _CreateTimeOffset ?? Schema.GetOffset(0x9DC483B875C91626);
+            return new GameTime_tImpl(_Handle + _CreateTimeOffset!.Value);
+        }
+    }
+    private static nint? _ClientSideRagdollOffset;
+
+    public ref bool ClientSideRagdoll {
+        get {
+            _ClientSideRagdollOffset = _ClientSideRagdollOffset ?? Schema.GetOffset(0x9DC483B8F1B9C3D0);
+            return ref _Handle.AsRef<bool>(_ClientSideRagdollOffset!.Value);
+        }
+    }
+    private static nint? _InterpolationFrameOffset;
+
+    public ref byte InterpolationFrame {
+        get {
+            _InterpolationFrameOffset = _InterpolationFrameOffset ?? Schema.GetOffset(0x9DC483B8937E9619);
+            return ref _Handle.AsRef<byte>(_InterpolationFrameOffset!.Value);
+        }
+    }
+    private static nint? _PrevVPhysicsUpdatePosOffset;
+
+    public ref Vector PrevVPhysicsUpdatePos {
+        get {
+            _PrevVPhysicsUpdatePosOffset = _PrevVPhysicsUpdatePosOffset ?? Schema.GetOffset(0x9DC483B825F6A1B4);
+            return ref _Handle.AsRef<Vector>(_PrevVPhysicsUpdatePosOffset!.Value);
+        }
+    }
+    private static nint? _TeamNumOffset;
+
+    public ref byte TeamNum {
+        get {
+            _TeamNumOffset = _TeamNumOffset ?? Schema.GetOffset(0x9DC483B8A5BFEFB3);
+            return ref _Handle.AsRef<byte>(_TeamNumOffset!.Value);
+        }
+    }
+    private static nint? _GlobalnameOffset;
+
+    public string Globalname {
+        get {
+            _GlobalnameOffset = _GlobalnameOffset ?? Schema.GetOffset(0x9DC483B82F8B8190);
+            return Schema.GetString(_Handle.Read<nint>(_GlobalnameOffset!.Value));
+        }
+        set {
+            _GlobalnameOffset = _GlobalnameOffset ?? Schema.GetOffset(0x9DC483B82F8B8190);
+            Schema.SetString(_Handle, _GlobalnameOffset!.Value, value);
+        }
+    } 
+    private static nint? _SentToClientsOffset;
+
+    public ref int SentToClients {
+        get {
+            _SentToClientsOffset = _SentToClientsOffset ?? Schema.GetOffset(0x9DC483B81C68C809);
+            return ref _Handle.AsRef<int>(_SentToClientsOffset!.Value);
+        }
+    }
+    private static nint? _SpeedOffset;
+
+    public ref float Speed {
+        get {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0x9DC483B8C631B7EA);
+            return ref _Handle.AsRef<float>(_SpeedOffset!.Value);
+        }
+    }
+    private static nint? _UniqueHammerIDOffset;
+
+    public string UniqueHammerID {
+        get {
+            _UniqueHammerIDOffset = _UniqueHammerIDOffset ?? Schema.GetOffset(0x9DC483B84A371EB2);
+            return Schema.GetString(_Handle.Read<nint>(_UniqueHammerIDOffset!.Value));
+        }
+        set {
+            _UniqueHammerIDOffset = _UniqueHammerIDOffset ?? Schema.GetOffset(0x9DC483B84A371EB2);
+            Schema.SetString(_Handle, _UniqueHammerIDOffset!.Value, value);
+        }
+    } 
+    private static nint? _SpawnflagsOffset;
+
+    public ref uint Spawnflags {
+        get {
+            _SpawnflagsOffset = _SpawnflagsOffset ?? Schema.GetOffset(0x9DC483B83A4BBF6B);
+            return ref _Handle.AsRef<uint>(_SpawnflagsOffset!.Value);
+        }
+    }
+    private static nint? _NextThinkTickOffset;
+
+    public GameTick_t NextThinkTick {
+        get {
+            _NextThinkTickOffset = _NextThinkTickOffset ?? Schema.GetOffset(0x9DC483B8B7CEF021);
+            return new GameTick_tImpl(_Handle + _NextThinkTickOffset!.Value);
+        }
+    }
+    private static nint? _SimulationTickOffset;
+
+    public ref int SimulationTick {
+        get {
+            _SimulationTickOffset = _SimulationTickOffset ?? Schema.GetOffset(0x9DC483B8144F0737);
+            return ref _Handle.AsRef<int>(_SimulationTickOffset!.Value);
+        }
+    }
+    private static nint? _OnKilledOffset;
+
+    public ref CEntityIOOutput OnKilled {
+        get {
+            _OnKilledOffset = _OnKilledOffset ?? Schema.GetOffset(0x9DC483B8A64A5BF1);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnKilledOffset!.Value);
+        }
+    }
+    private static nint? _FlagsOffset;
+
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x9DC483B8A4A37590);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
+    }
+    private static nint? _AbsVelocityOffset;
+
+    public ref Vector AbsVelocity {
+        get {
+            _AbsVelocityOffset = _AbsVelocityOffset ?? Schema.GetOffset(0x9DC483B816C096CC);
+            return ref _Handle.AsRef<Vector>(_AbsVelocityOffset!.Value);
+        }
+    }
+    private static nint? _VelocityOffset;
+
+    public CNetworkVelocityVector Velocity {
+        get {
+            _VelocityOffset = _VelocityOffset ?? Schema.GetOffset(0x9DC483B87CF77892);
+            return new CNetworkVelocityVectorImpl(_Handle + _VelocityOffset!.Value);
+        }
+    }
+    private static nint? _BaseVelocityOffset;
+
+    public ref Vector BaseVelocity {
+        get {
+            _BaseVelocityOffset = _BaseVelocityOffset ?? Schema.GetOffset(0x9DC483B813B19DCB);
+            return ref _Handle.AsRef<Vector>(_BaseVelocityOffset!.Value);
+        }
+    }
+    private static nint? _PushEnumCountOffset;
+
+    public ref int PushEnumCount {
+        get {
+            _PushEnumCountOffset = _PushEnumCountOffset ?? Schema.GetOffset(0x9DC483B87BDCED73);
+            return ref _Handle.AsRef<int>(_PushEnumCountOffset!.Value);
+        }
+    }
+    private static nint? _CollisionOffset;
+
+    public CCollisionProperty? Collision {
+        get {
+            _CollisionOffset = _CollisionOffset ?? Schema.GetOffset(0x9DC483B8C1E3AAA1);
+            var ptr = _Handle.Read<nint>(_CollisionOffset!.Value);
+            return ptr.IsValidPtr() ? new CCollisionPropertyImpl(ptr) : null;
+        }
+    }
+    private static nint? _EffectEntityOffset;
+
+    public ref CHandle<CBaseEntity> EffectEntity {
+        get {
+            _EffectEntityOffset = _EffectEntityOffset ?? Schema.GetOffset(0x9DC483B86BA85951);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EffectEntityOffset!.Value);
+        }
+    }
+    private static nint? _OwnerEntityOffset;
+
+    public ref CHandle<CBaseEntity> OwnerEntity {
+        get {
+            _OwnerEntityOffset = _OwnerEntityOffset ?? Schema.GetOffset(0x9DC483B86D279C31);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_OwnerEntityOffset!.Value);
+        }
+    }
+    private static nint? _EffectsOffset;
+
+    public ref uint Effects {
+        get {
+            _EffectsOffset = _EffectsOffset ?? Schema.GetOffset(0x9DC483B8DF272D79);
+            return ref _Handle.AsRef<uint>(_EffectsOffset!.Value);
+        }
+    }
+    private static nint? _GroundEntityOffset;
+
+    public ref CHandle<CBaseEntity> GroundEntity {
+        get {
+            _GroundEntityOffset = _GroundEntityOffset ?? Schema.GetOffset(0x9DC483B8253120D3);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_GroundEntityOffset!.Value);
+        }
+    }
+    private static nint? _GroundBodyIndexOffset;
+
+    public ref int GroundBodyIndex {
+        get {
+            _GroundBodyIndexOffset = _GroundBodyIndexOffset ?? Schema.GetOffset(0x9DC483B81D1BA62A);
+            return ref _Handle.AsRef<int>(_GroundBodyIndexOffset!.Value);
+        }
+    }
+    private static nint? _FrictionOffset;
+
+    public ref float Friction {
+        get {
+            _FrictionOffset = _FrictionOffset ?? Schema.GetOffset(0x9DC483B86F5FEBA1);
+            return ref _Handle.AsRef<float>(_FrictionOffset!.Value);
+        }
+    }
+    private static nint? _ElasticityOffset;
+
+    public ref float Elasticity {
+        get {
+            _ElasticityOffset = _ElasticityOffset ?? Schema.GetOffset(0x9DC483B84EC38DF6);
+            return ref _Handle.AsRef<float>(_ElasticityOffset!.Value);
+        }
+    }
+    private static nint? _GravityScaleOffset;
+
+    public ref float GravityScale {
+        get {
+            _GravityScaleOffset = _GravityScaleOffset ?? Schema.GetOffset(0x9DC483B8328A3947);
+            return ref _Handle.AsRef<float>(_GravityScaleOffset!.Value);
+        }
+    }
+    private static nint? _TimeScaleOffset;
+
+    public ref float TimeScale {
+        get {
+            _TimeScaleOffset = _TimeScaleOffset ?? Schema.GetOffset(0x9DC483B8B49D735C);
+            return ref _Handle.AsRef<float>(_TimeScaleOffset!.Value);
+        }
+    }
+    private static nint? _WaterLevelOffset;
+
+    public ref float WaterLevel {
+        get {
+            _WaterLevelOffset = _WaterLevelOffset ?? Schema.GetOffset(0x9DC483B86CC4285C);
+            return ref _Handle.AsRef<float>(_WaterLevelOffset!.Value);
+        }
+    }
+    private static nint? _GravityDisabledOffset;
+
+    public ref bool GravityDisabled {
+        get {
+            _GravityDisabledOffset = _GravityDisabledOffset ?? Schema.GetOffset(0x9DC483B86489B245);
+            return ref _Handle.AsRef<bool>(_GravityDisabledOffset!.Value);
+        }
+    }
+    private static nint? _AnimatedEveryTickOffset;
+
+    public ref bool AnimatedEveryTick {
+        get {
+            _AnimatedEveryTickOffset = _AnimatedEveryTickOffset ?? Schema.GetOffset(0x9DC483B8FC757D7E);
+            return ref _Handle.AsRef<bool>(_AnimatedEveryTickOffset!.Value);
+        }
+    }
+    private static nint? _ActualGravityScaleOffset;
+
+    public ref float ActualGravityScale {
+        get {
+            _ActualGravityScaleOffset = _ActualGravityScaleOffset ?? Schema.GetOffset(0x9DC483B8386AD491);
+            return ref _Handle.AsRef<float>(_ActualGravityScaleOffset!.Value);
+        }
+    }
+    private static nint? _GravityActuallyDisabledOffset;
+
+    public ref bool GravityActuallyDisabled {
+        get {
+            _GravityActuallyDisabledOffset = _GravityActuallyDisabledOffset ?? Schema.GetOffset(0x9DC483B842E715B0);
+            return ref _Handle.AsRef<bool>(_GravityActuallyDisabledOffset!.Value);
+        }
+    }
+    private static nint? _DisableLowViolenceOffset;
+
+    public ref bool DisableLowViolence {
+        get {
+            _DisableLowViolenceOffset = _DisableLowViolenceOffset ?? Schema.GetOffset(0x9DC483B8DE0FB0EE);
+            return ref _Handle.AsRef<bool>(_DisableLowViolenceOffset!.Value);
+        }
+    }
+    private static nint? _WaterTypeOffset;
+
+    public ref byte WaterType {
+        get {
+            _WaterTypeOffset = _WaterTypeOffset ?? Schema.GetOffset(0x9DC483B81053FF74);
+            return ref _Handle.AsRef<byte>(_WaterTypeOffset!.Value);
+        }
+    }
+    private static nint? _EFlagsOffset;
+
+    public ref int EFlags {
+        get {
+            _EFlagsOffset = _EFlagsOffset ?? Schema.GetOffset(0x9DC483B8466C684A);
+            return ref _Handle.AsRef<int>(_EFlagsOffset!.Value);
+        }
+    }
+    private static nint? _OnUser1Offset;
+
+    public ref CEntityIOOutput OnUser1 {
+        get {
+            _OnUser1Offset = _OnUser1Offset ?? Schema.GetOffset(0x9DC483B8183E0806);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUser1Offset!.Value);
+        }
+    }
+    private static nint? _OnUser2Offset;
+
+    public ref CEntityIOOutput OnUser2 {
+        get {
+            _OnUser2Offset = _OnUser2Offset ?? Schema.GetOffset(0x9DC483B8173E0673);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUser2Offset!.Value);
+        }
+    }
+    private static nint? _OnUser3Offset;
+
+    public ref CEntityIOOutput OnUser3 {
+        get {
+            _OnUser3Offset = _OnUser3Offset ?? Schema.GetOffset(0x9DC483B8163E04E0);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUser3Offset!.Value);
+        }
+    }
+    private static nint? _OnUser4Offset;
+
+    public ref CEntityIOOutput OnUser4 {
+        get {
+            _OnUser4Offset = _OnUser4Offset ?? Schema.GetOffset(0x9DC483B81D3E0FE5);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnUser4Offset!.Value);
+        }
+    }
+    private static nint? _InitialTeamNumOffset;
+
+    public ref int InitialTeamNum {
+        get {
+            _InitialTeamNumOffset = _InitialTeamNumOffset ?? Schema.GetOffset(0x9DC483B807D42CFF);
+            return ref _Handle.AsRef<int>(_InitialTeamNumOffset!.Value);
+        }
+    }
+    private static nint? _NavIgnoreUntilTimeOffset;
+
+    public GameTime_t NavIgnoreUntilTime {
+        get {
+            _NavIgnoreUntilTimeOffset = _NavIgnoreUntilTimeOffset ?? Schema.GetOffset(0x9DC483B88228BC8B);
+            return new GameTime_tImpl(_Handle + _NavIgnoreUntilTimeOffset!.Value);
+        }
+    }
+    private static nint? _AngVelocityOffset;
+
+    public ref QAngle AngVelocity {
+        get {
+            _AngVelocityOffset = _AngVelocityOffset ?? Schema.GetOffset(0x9DC483B8022592E4);
+            return ref _Handle.AsRef<QAngle>(_AngVelocityOffset!.Value);
+        }
+    }
+    private static nint? _NetworkQuantizeOriginAndAnglesOffset;
+
+    public ref bool NetworkQuantizeOriginAndAngles {
+        get {
+            _NetworkQuantizeOriginAndAnglesOffset = _NetworkQuantizeOriginAndAnglesOffset ?? Schema.GetOffset(0x9DC483B89E12171D);
+            return ref _Handle.AsRef<bool>(_NetworkQuantizeOriginAndAnglesOffset!.Value);
+        }
+    }
+    private static nint? _LagCompensateOffset;
+
+    public ref bool LagCompensate {
+        get {
+            _LagCompensateOffset = _LagCompensateOffset ?? Schema.GetOffset(0x9DC483B835099A18);
+            return ref _Handle.AsRef<bool>(_LagCompensateOffset!.Value);
+        }
+    }
+    private static nint? _BlockerOffset;
+
+    public ref CHandle<CBaseEntity> Blocker {
+        get {
+            _BlockerOffset = _BlockerOffset ?? Schema.GetOffset(0x9DC483B840B754B7);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_BlockerOffset!.Value);
+        }
+    }
+    private static nint? _LocalTimeOffset;
+
+    public ref float LocalTime {
+        get {
+            _LocalTimeOffset = _LocalTimeOffset ?? Schema.GetOffset(0x9DC483B8E23DEFC7);
+            return ref _Handle.AsRef<float>(_LocalTimeOffset!.Value);
+        }
+    }
+    private static nint? _VPhysicsUpdateLocalTimeOffset;
+
+    public ref float VPhysicsUpdateLocalTime {
+        get {
+            _VPhysicsUpdateLocalTimeOffset = _VPhysicsUpdateLocalTimeOffset ?? Schema.GetOffset(0x9DC483B8CEAEBFA5);
+            return ref _Handle.AsRef<float>(_VPhysicsUpdateLocalTimeOffset!.Value);
+        }
+    }
+    private static nint? _BloodTypeOffset;
+
+    public ref BloodType BloodType {
+        get {
+            _BloodTypeOffset = _BloodTypeOffset ?? Schema.GetOffset(0x9DC483B8E472F393);
+            return ref _Handle.AsRef<BloodType>(_BloodTypeOffset!.Value);
+        }
+    }
+    private static nint? _PulseGraphInstanceOffset;
+
+    public CPulseGraphInstance_ServerEntity? PulseGraphInstance {
+        get {
+            _PulseGraphInstanceOffset = _PulseGraphInstanceOffset ?? Schema.GetOffset(0x9DC483B87D608947);
+            var ptr = _Handle.Read<nint>(_PulseGraphInstanceOffset!.Value);
+            return ptr.IsValidPtr() ? new CPulseGraphInstance_ServerEntityImpl(ptr) : null;
+        }
+    }
+
+    public void CBodyComponentUpdated() => Schema.Update(_Handle, 0x9DC483B8D116E3C5);
+    public void HealthUpdated() => Schema.Update(_Handle, 0x9DC483B8084CDAD2);
+    public void MaxHealthUpdated() => Schema.Update(_Handle, 0x9DC483B80D159178);
+    public void LifeStateUpdated() => Schema.Update(_Handle, 0x9DC483B81C93BCF0);
+    public void TakesDamageUpdated() => Schema.Update(_Handle, 0x9DC483B8FFF5420E);
+    public void TakeDamageFlagsUpdated() => Schema.Update(_Handle, 0x9DC483B81C16CB56);
+    public void PlatformTypeUpdated() => Schema.Update(_Handle, 0x9DC483B818698BA6);
+    public void MoveCollideUpdated() => Schema.Update(_Handle, 0x9DC483B8C32EF192);
+    public void MoveTypeUpdated() => Schema.Update(_Handle, 0x9DC483B890BCCC1C);
+    public void SubclassIDUpdated() => Schema.Update(_Handle, 0x9DC483B8C02CE796);
+    public void AnimTimeUpdated() => Schema.Update(_Handle, 0x9DC483B882735D4F);
+    public void SimulationTimeUpdated() => Schema.Update(_Handle, 0x9DC483B87FCB378D);
+    public void CreateTimeUpdated() => Schema.Update(_Handle, 0x9DC483B875C91626);
+    public void ClientSideRagdollUpdated() => Schema.Update(_Handle, 0x9DC483B8F1B9C3D0);
+    public void InterpolationFrameUpdated() => Schema.Update(_Handle, 0x9DC483B8937E9619);
+    public void TeamNumUpdated() => Schema.Update(_Handle, 0x9DC483B8A5BFEFB3);
+    public void SpeedUpdated() => Schema.Update(_Handle, 0x9DC483B8C631B7EA);
+    public void SpawnflagsUpdated() => Schema.Update(_Handle, 0x9DC483B83A4BBF6B);
+    public void NextThinkTickUpdated() => Schema.Update(_Handle, 0x9DC483B8B7CEF021);
+    public void FlagsUpdated() => Schema.Update(_Handle, 0x9DC483B8A4A37590);
+    public void VelocityUpdated() => Schema.Update(_Handle, 0x9DC483B87CF77892);
+    public void BaseVelocityUpdated() => Schema.Update(_Handle, 0x9DC483B813B19DCB);
+    public void EffectEntityUpdated() => Schema.Update(_Handle, 0x9DC483B86BA85951);
+    public void OwnerEntityUpdated() => Schema.Update(_Handle, 0x9DC483B86D279C31);
+    public void EffectsUpdated() => Schema.Update(_Handle, 0x9DC483B8DF272D79);
+    public void GroundEntityUpdated() => Schema.Update(_Handle, 0x9DC483B8253120D3);
+    public void GroundBodyIndexUpdated() => Schema.Update(_Handle, 0x9DC483B81D1BA62A);
+    public void FrictionUpdated() => Schema.Update(_Handle, 0x9DC483B86F5FEBA1);
+    public void ElasticityUpdated() => Schema.Update(_Handle, 0x9DC483B84EC38DF6);
+    public void GravityScaleUpdated() => Schema.Update(_Handle, 0x9DC483B8328A3947);
+    public void TimeScaleUpdated() => Schema.Update(_Handle, 0x9DC483B8B49D735C);
+    public void WaterLevelUpdated() => Schema.Update(_Handle, 0x9DC483B86CC4285C);
+    public void GravityDisabledUpdated() => Schema.Update(_Handle, 0x9DC483B86489B245);
+    public void AnimatedEveryTickUpdated() => Schema.Update(_Handle, 0x9DC483B8FC757D7E);
+    public void NavIgnoreUntilTimeUpdated() => Schema.Update(_Handle, 0x9DC483B88228BC8B);
+    public void BloodTypeUpdated() => Schema.Update(_Handle, 0x9DC483B8E472F393);
 }

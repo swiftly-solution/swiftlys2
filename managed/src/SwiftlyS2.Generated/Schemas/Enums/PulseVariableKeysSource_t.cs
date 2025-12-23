@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PulseVariableKeysSource_t : uint {
-
+public enum PulseVariableKeysSource_t : uint
+{
  PRIVATE = 0,
 
  CPP = 1,

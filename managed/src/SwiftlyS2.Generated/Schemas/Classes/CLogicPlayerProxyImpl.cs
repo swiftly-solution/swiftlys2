@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicPlayerProxyImpl : CLogicalEntityImpl, CLogicPlayerProxy {
+internal partial class CLogicPlayerProxyImpl : CLogicalEntityImpl, CLogicPlayerProxy
+{
+    public CLogicPlayerProxyImpl(nint handle) : base(handle) { }
 
-  public CLogicPlayerProxyImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PlayerOffset;
 
-  private static nint? _PlayerOffset;
-
-  public ref CHandle<CBaseEntity> Player {
-    get {
-      if (_PlayerOffset == null) {
-        _PlayerOffset = Schema.GetOffset(0x81D444EB68856C16);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PlayerOffset!.Value);
+    public ref CHandle<CBaseEntity> Player {
+        get {
+            _PlayerOffset = _PlayerOffset ?? Schema.GetOffset(0x81D444EB68856C16);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PlayerOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayerHasAmmoOffset;
+    private static nint? _PlayerHasAmmoOffset;
 
-  public CEntityIOOutput PlayerHasAmmo {
-    get {
-      if (_PlayerHasAmmoOffset == null) {
-        _PlayerHasAmmoOffset = Schema.GetOffset(0x81D444EB6A23AB96);
-      }
-      return new CEntityIOOutputImpl(_Handle + _PlayerHasAmmoOffset!.Value);
+    public ref CEntityIOOutput PlayerHasAmmo {
+        get {
+            _PlayerHasAmmoOffset = _PlayerHasAmmoOffset ?? Schema.GetOffset(0x81D444EB6A23AB96);
+            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerHasAmmoOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayerHasNoAmmoOffset;
+    private static nint? _PlayerHasNoAmmoOffset;
 
-  public CEntityIOOutput PlayerHasNoAmmo {
-    get {
-      if (_PlayerHasNoAmmoOffset == null) {
-        _PlayerHasNoAmmoOffset = Schema.GetOffset(0x81D444EB06CA340D);
-      }
-      return new CEntityIOOutputImpl(_Handle + _PlayerHasNoAmmoOffset!.Value);
+    public ref CEntityIOOutput PlayerHasNoAmmo {
+        get {
+            _PlayerHasNoAmmoOffset = _PlayerHasNoAmmoOffset ?? Schema.GetOffset(0x81D444EB06CA340D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerHasNoAmmoOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayerDiedOffset;
+    private static nint? _PlayerDiedOffset;
 
-  public CEntityIOOutput PlayerDied {
-    get {
-      if (_PlayerDiedOffset == null) {
-        _PlayerDiedOffset = Schema.GetOffset(0x81D444EBB440E03E);
-      }
-      return new CEntityIOOutputImpl(_Handle + _PlayerDiedOffset!.Value);
+    public ref CEntityIOOutput PlayerDied {
+        get {
+            _PlayerDiedOffset = _PlayerDiedOffset ?? Schema.GetOffset(0x81D444EBB440E03E);
+            return ref _Handle.AsRef<CEntityIOOutput>(_PlayerDiedOffset!.Value);
+        }
     }
-  }
-  private static nint? _RequestedPlayerHealthOffset;
+    private static nint? _RequestedPlayerHealthOffset;
 
-  public SchemaUntypedField RequestedPlayerHealth {
-    get {
-      if (_RequestedPlayerHealthOffset == null) {
-        _RequestedPlayerHealthOffset = Schema.GetOffset(0x81D444EBF1F83D58);
-      }
-      return new SchemaUntypedField(_Handle + _RequestedPlayerHealthOffset!.Value);
+    public SchemaUntypedField RequestedPlayerHealth {
+        get {
+            _RequestedPlayerHealthOffset = _RequestedPlayerHealthOffset ?? Schema.GetOffset(0x81D444EBF1F83D58);
+            return new SchemaUntypedField(_Handle + _RequestedPlayerHealthOffset!.Value);
+        }
     }
-  }
 
 
 }

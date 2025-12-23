@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncWall : CBaseModelEntity, ISchemaClass<CFuncWall> {
+public partial interface CFuncWall : CBaseModelEntity, ISchemaClass<CFuncWall>
+{
+    static CFuncWall ISchemaClass<CFuncWall>.From(nint handle) => new CFuncWallImpl(handle);
+    static int ISchemaClass<CFuncWall>.Size => 2016;
+    static string? ISchemaClass<CFuncWall>.ClassName => "func_wall";
 
-  static CFuncWall ISchemaClass<CFuncWall>.From(nint handle) => new CFuncWallImpl(handle);
-  static int ISchemaClass<CFuncWall>.Size => 2016;
-  static string? ISchemaClass<CFuncWall>.ClassName => "func_wall";
 
-  
-  public ref int State { get; }
+    public ref int State { get; }
 
 
 }

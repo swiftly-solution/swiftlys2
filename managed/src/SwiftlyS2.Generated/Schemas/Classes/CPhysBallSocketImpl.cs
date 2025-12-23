@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysBallSocketImpl : CPhysConstraintImpl, CPhysBallSocket {
+internal partial class CPhysBallSocketImpl : CPhysConstraintImpl, CPhysBallSocket
+{
+    public CPhysBallSocketImpl(nint handle) : base(handle) { }
 
-  public CPhysBallSocketImpl(nint handle) : base(handle) {
-  }
+    private static nint? _JointFrictionOffset;
 
-  private static nint? _JointFrictionOffset;
-
-  public ref float JointFriction {
-    get {
-      if (_JointFrictionOffset == null) {
-        _JointFrictionOffset = Schema.GetOffset(0xDE2408965CA9FD47);
-      }
-      return ref _Handle.AsRef<float>(_JointFrictionOffset!.Value);
+    public ref float JointFriction {
+        get {
+            _JointFrictionOffset = _JointFrictionOffset ?? Schema.GetOffset(0xDE2408965CA9FD47);
+            return ref _Handle.AsRef<float>(_JointFrictionOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnableSwingLimitOffset;
+    private static nint? _EnableSwingLimitOffset;
 
-  public ref bool EnableSwingLimit {
-    get {
-      if (_EnableSwingLimitOffset == null) {
-        _EnableSwingLimitOffset = Schema.GetOffset(0xDE240896DADAC14B);
-      }
-      return ref _Handle.AsRef<bool>(_EnableSwingLimitOffset!.Value);
+    public ref bool EnableSwingLimit {
+        get {
+            _EnableSwingLimitOffset = _EnableSwingLimitOffset ?? Schema.GetOffset(0xDE240896DADAC14B);
+            return ref _Handle.AsRef<bool>(_EnableSwingLimitOffset!.Value);
+        }
     }
-  }
-  private static nint? _SwingLimitOffset;
+    private static nint? _SwingLimitOffset;
 
-  public ref float SwingLimit {
-    get {
-      if (_SwingLimitOffset == null) {
-        _SwingLimitOffset = Schema.GetOffset(0xDE240896279A44C2);
-      }
-      return ref _Handle.AsRef<float>(_SwingLimitOffset!.Value);
+    public ref float SwingLimit {
+        get {
+            _SwingLimitOffset = _SwingLimitOffset ?? Schema.GetOffset(0xDE240896279A44C2);
+            return ref _Handle.AsRef<float>(_SwingLimitOffset!.Value);
+        }
     }
-  }
-  private static nint? _EnableTwistLimitOffset;
+    private static nint? _EnableTwistLimitOffset;
 
-  public ref bool EnableTwistLimit {
-    get {
-      if (_EnableTwistLimitOffset == null) {
-        _EnableTwistLimitOffset = Schema.GetOffset(0xDE2408967DBEA570);
-      }
-      return ref _Handle.AsRef<bool>(_EnableTwistLimitOffset!.Value);
+    public ref bool EnableTwistLimit {
+        get {
+            _EnableTwistLimitOffset = _EnableTwistLimitOffset ?? Schema.GetOffset(0xDE2408967DBEA570);
+            return ref _Handle.AsRef<bool>(_EnableTwistLimitOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinTwistAngleOffset;
+    private static nint? _MinTwistAngleOffset;
 
-  public ref float MinTwistAngle {
-    get {
-      if (_MinTwistAngleOffset == null) {
-        _MinTwistAngleOffset = Schema.GetOffset(0xDE240896B6E6BB7F);
-      }
-      return ref _Handle.AsRef<float>(_MinTwistAngleOffset!.Value);
+    public ref float MinTwistAngle {
+        get {
+            _MinTwistAngleOffset = _MinTwistAngleOffset ?? Schema.GetOffset(0xDE240896B6E6BB7F);
+            return ref _Handle.AsRef<float>(_MinTwistAngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxTwistAngleOffset;
+    private static nint? _MaxTwistAngleOffset;
 
-  public ref float MaxTwistAngle {
-    get {
-      if (_MaxTwistAngleOffset == null) {
-        _MaxTwistAngleOffset = Schema.GetOffset(0xDE24089690C63AD5);
-      }
-      return ref _Handle.AsRef<float>(_MaxTwistAngleOffset!.Value);
+    public ref float MaxTwistAngle {
+        get {
+            _MaxTwistAngleOffset = _MaxTwistAngleOffset ?? Schema.GetOffset(0xDE24089690C63AD5);
+            return ref _Handle.AsRef<float>(_MaxTwistAngleOffset!.Value);
+        }
     }
-  }
 
 
 }

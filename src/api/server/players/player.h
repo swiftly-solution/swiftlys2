@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -55,6 +55,7 @@ public:
     virtual void SendMsg(MessageType type, const std::string& message, int duration) = 0;
 
     virtual bool IsFakeClient() = 0;
+    virtual void SetFakeClient(bool state) = 0;
     virtual bool IsAuthorized() = 0;
 
     virtual uint32_t GetConnectedTime() = 0;

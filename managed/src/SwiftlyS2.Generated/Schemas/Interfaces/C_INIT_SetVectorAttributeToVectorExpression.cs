@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_SetVectorAttributeToVectorExpression : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression> {
+public partial interface C_INIT_SetVectorAttributeToVectorExpression : CParticleFunctionInitializer, ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression>
+{
+    static C_INIT_SetVectorAttributeToVectorExpression ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression>.From(nint handle) => new C_INIT_SetVectorAttributeToVectorExpressionImpl(handle);
+    static int ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression>.Size => 4400;
+    static string? ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression>.ClassName => null;
 
-  static C_INIT_SetVectorAttributeToVectorExpression ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression>.From(nint handle) => new C_INIT_SetVectorAttributeToVectorExpressionImpl(handle);
-  static int ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression>.Size => 4400;
-  static string? ISchemaClass<C_INIT_SetVectorAttributeToVectorExpression>.ClassName => null;
 
-  
-  public ref VectorExpressionType_t Expression { get; }
-  
-  public CPerParticleVecInput Input1 { get; }
-  
-  public CPerParticleVecInput Input2 { get; }
-  
-  public CPerParticleFloatInput Lerp { get; }
-  
-  public ParticleAttributeIndex_t OutputField { get; }
-  
-  public ref ParticleSetMethod_t SetMethod { get; }
-  
-  public ref bool NormalizedOutput { get; }
+    public ref VectorExpressionType_t Expression { get; }
+
+    public CPerParticleVecInput Input1 { get; }
+
+    public CPerParticleVecInput Input2 { get; }
+
+    public CPerParticleFloatInput Lerp { get; }
+
+    public ParticleAttributeIndex_t OutputField { get; }
+
+    public ref ParticleSetMethod_t SetMethod { get; }
+
+    public ref bool NormalizedOutput { get; }
 
 
 }

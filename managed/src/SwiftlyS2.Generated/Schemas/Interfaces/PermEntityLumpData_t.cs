@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PermEntityLumpData_t : ISchemaClass<PermEntityLumpData_t> {
+public partial interface PermEntityLumpData_t : ISchemaClass<PermEntityLumpData_t>
+{
+    static PermEntityLumpData_t ISchemaClass<PermEntityLumpData_t>.From(nint handle) => new PermEntityLumpData_tImpl(handle);
+    static int ISchemaClass<PermEntityLumpData_t>.Size => 56;
+    static string? ISchemaClass<PermEntityLumpData_t>.ClassName => null;
 
-  static PermEntityLumpData_t ISchemaClass<PermEntityLumpData_t>.From(nint handle) => new PermEntityLumpData_tImpl(handle);
-  static int ISchemaClass<PermEntityLumpData_t>.Size => 56;
-  static string? ISchemaClass<PermEntityLumpData_t>.ClassName => null;
 
-  
-  public string Name { get; set; }
-  
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> ChildLumps { get; }
-  
-  public ref CUtlLeanVector<EntityKeyValueData_t, int> EntityKeyValues { get; }
+    public string Name { get; set; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCEntityLump>> ChildLumps { get; }
+
+    public ref CUtlLeanVector<EntityKeyValueData_t, int> EntityKeyValues { get; }
 
 
 }

@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFlexDescImpl : SchemaClass, CFlexDesc {
+internal partial class CFlexDescImpl : SchemaClass, CFlexDesc
+{
+    public CFlexDescImpl(nint handle) : base(handle) { }
 
-  public CFlexDescImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FacsOffset;
 
-  private static nint? _FacsOffset;
-
-  public string Facs {
-    get {
-      if (_FacsOffset == null) {
-        _FacsOffset = Schema.GetOffset(0xF8B9C4900514A8FF);
-      }
-      var ptr = _Handle.Read<nint>(_FacsOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_FacsOffset == null) {
-        _FacsOffset = Schema.GetOffset(0xF8B9C4900514A8FF);
-      }
-      Schema.SetString(_Handle, _FacsOffset!.Value, value);
-    }
-  } 
+    public string Facs {
+        get {
+            _FacsOffset = _FacsOffset ?? Schema.GetOffset(0xF8B9C4900514A8FF);
+            return Schema.GetString(_Handle.Read<nint>(_FacsOffset!.Value));
+        }
+        set {
+            _FacsOffset = _FacsOffset ?? Schema.GetOffset(0xF8B9C4900514A8FF);
+            Schema.SetString(_Handle, _FacsOffset!.Value, value);
+        }
+    } 
 
 
 }

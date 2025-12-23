@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class DestructibleHitGroupToDestroy_tImpl : SchemaClass, DestructibleHitGroupToDestroy_t {
+internal partial class DestructibleHitGroupToDestroy_tImpl : SchemaClass, DestructibleHitGroupToDestroy_t
+{
+    public DestructibleHitGroupToDestroy_tImpl(nint handle) : base(handle) { }
 
-  public DestructibleHitGroupToDestroy_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _HitGroupOffset;
 
-  private static nint? _HitGroupOffset;
-
-  public ref HitGroup_t HitGroup {
-    get {
-      if (_HitGroupOffset == null) {
-        _HitGroupOffset = Schema.GetOffset(0xD162E34F9C854D19);
-      }
-      return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset!.Value);
+    public ref HitGroup_t HitGroup {
+        get {
+            _HitGroupOffset = _HitGroupOffset ?? Schema.GetOffset(0xD162E34F9C854D19);
+            return ref _Handle.AsRef<HitGroup_t>(_HitGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxDamageLevelOffset;
+    private static nint? _MaxDamageLevelOffset;
 
-  public ref int MaxDamageLevel {
-    get {
-      if (_MaxDamageLevelOffset == null) {
-        _MaxDamageLevelOffset = Schema.GetOffset(0xD162E34FBEC9C376);
-      }
-      return ref _Handle.AsRef<int>(_MaxDamageLevelOffset!.Value);
+    public ref int MaxDamageLevel {
+        get {
+            _MaxDamageLevelOffset = _MaxDamageLevelOffset ?? Schema.GetOffset(0xD162E34FBEC9C376);
+            return ref _Handle.AsRef<int>(_MaxDamageLevelOffset!.Value);
+        }
     }
-  }
 
 
 }

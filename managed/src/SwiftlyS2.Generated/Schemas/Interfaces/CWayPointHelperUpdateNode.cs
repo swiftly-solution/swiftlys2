@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CWayPointHelperUpdateNode : CUnaryUpdateNode, ISchemaClass<CWayPointHelperUpdateNode> {
+public partial interface CWayPointHelperUpdateNode : CUnaryUpdateNode, ISchemaClass<CWayPointHelperUpdateNode>
+{
+    static CWayPointHelperUpdateNode ISchemaClass<CWayPointHelperUpdateNode>.From(nint handle) => new CWayPointHelperUpdateNodeImpl(handle);
+    static int ISchemaClass<CWayPointHelperUpdateNode>.Size => 128;
+    static string? ISchemaClass<CWayPointHelperUpdateNode>.ClassName => null;
 
-  static CWayPointHelperUpdateNode ISchemaClass<CWayPointHelperUpdateNode>.From(nint handle) => new CWayPointHelperUpdateNodeImpl(handle);
-  static int ISchemaClass<CWayPointHelperUpdateNode>.Size => 128;
-  static string? ISchemaClass<CWayPointHelperUpdateNode>.ClassName => null;
 
-  
-  public ref float StartCycle { get; }
-  
-  public ref float EndCycle { get; }
-  
-  public ref bool OnlyGoals { get; }
-  
-  public ref bool PreventOvershoot { get; }
-  
-  public ref bool PreventUndershoot { get; }
+    public ref float StartCycle { get; }
+
+    public ref float EndCycle { get; }
+
+    public ref bool OnlyGoals { get; }
+
+    public ref bool PreventOvershoot { get; }
+
+    public ref bool PreventUndershoot { get; }
 
 
 }

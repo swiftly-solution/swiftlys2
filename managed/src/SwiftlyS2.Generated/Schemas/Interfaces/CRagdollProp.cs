@@ -8,67 +8,67 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRagdollProp : CBaseAnimGraph, ISchemaClass<CRagdollProp> {
+public partial interface CRagdollProp : CBaseAnimGraph, ISchemaClass<CRagdollProp>
+{
+    static CRagdollProp ISchemaClass<CRagdollProp>.From(nint handle) => new CRagdollPropImpl(handle);
+    static int ISchemaClass<CRagdollProp>.Size => 3040;
+    static string? ISchemaClass<CRagdollProp>.ClassName => "prop_ragdoll";
 
-  static CRagdollProp ISchemaClass<CRagdollProp>.From(nint handle) => new CRagdollPropImpl(handle);
-  static int ISchemaClass<CRagdollProp>.Size => 3040;
-  static string? ISchemaClass<CRagdollProp>.ClassName => "prop_ragdoll";
 
-  
-  public ragdoll_t Ragdoll { get; }
-  
-  public ref bool StartDisabled { get; }
-  
-  public ref CUtlVector<bool> RagEnabled { get; }
-  
-  public ref CUtlVector<Vector> RagPos { get; }
-  
-  public ref CUtlVector<QAngle> RagAngles { get; }
-  
-  public ref uint LastUpdateTickCount { get; }
-  
-  public ref bool AllAsleep { get; }
-  
-  public ref bool FirstCollisionAfterLaunch { get; }
-  
-  public ref CHandle<CBaseEntity> DamageEntity { get; }
-  
-  public ref CHandle<CBaseEntity> Killer { get; }
-  
-  public ref CHandle<CBasePlayerPawn> PhysicsAttacker { get; }
-  
-  public GameTime_t LastPhysicsInfluenceTime { get; }
-  
-  public GameTime_t FadeOutStartTime { get; }
-  
-  public ref float FadeTime { get; }
-  
-  public ref Vector LastOrigin { get; }
-  
-  public GameTime_t AwakeTime { get; }
-  
-  public GameTime_t LastOriginChangeTime { get; }
-  
-  public string StrOriginClassName { get; set; }
-  
-  public string StrSourceClassName { get; set; }
-  
-  public ref bool HasBeenPhysgunned { get; }
-  
-  public ref bool AllowStretch { get; }
-  
-  public ref float BlendWeight { get; }
-  
-  public ref float DefaultFadeScale { get; }
-  
-  public ref CUtlVector<Vector> RagdollMins { get; }
-  
-  public ref CUtlVector<Vector> RagdollMaxs { get; }
-  
-  public ref bool ShouldDeleteActivationRecord { get; }
+    public ragdoll_t Ragdoll { get; }
 
-  public void RagEnabledUpdated();
-  public void RagPosUpdated();
-  public void RagAnglesUpdated();
-  public void BlendWeightUpdated();
+    public ref bool StartDisabled { get; }
+
+    public ref CUtlVector<bool> RagEnabled { get; }
+
+    public ref CUtlVector<Vector> RagPos { get; }
+
+    public ref CUtlVector<QAngle> RagAngles { get; }
+
+    public ref uint LastUpdateTickCount { get; }
+
+    public ref bool AllAsleep { get; }
+
+    public ref bool FirstCollisionAfterLaunch { get; }
+
+    public ref CHandle<CBaseEntity> DamageEntity { get; }
+
+    public ref CHandle<CBaseEntity> Killer { get; }
+
+    public ref CHandle<CBasePlayerPawn> PhysicsAttacker { get; }
+
+    public GameTime_t LastPhysicsInfluenceTime { get; }
+
+    public GameTime_t FadeOutStartTime { get; }
+
+    public ref float FadeTime { get; }
+
+    public ref Vector LastOrigin { get; }
+
+    public GameTime_t AwakeTime { get; }
+
+    public GameTime_t LastOriginChangeTime { get; }
+
+    public string StrOriginClassName { get; set; }
+
+    public string StrSourceClassName { get; set; }
+
+    public ref bool HasBeenPhysgunned { get; }
+
+    public ref bool AllowStretch { get; }
+
+    public ref float BlendWeight { get; }
+
+    public ref float DefaultFadeScale { get; }
+
+    public ref CUtlVector<Vector> RagdollMins { get; }
+
+    public ref CUtlVector<Vector> RagdollMaxs { get; }
+
+    public ref bool ShouldDeleteActivationRecord { get; }
+
+    public void RagEnabledUpdated();
+    public void RagPosUpdated();
+    public void RagAnglesUpdated();
+    public void BlendWeightUpdated();
 }

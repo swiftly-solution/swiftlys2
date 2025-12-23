@@ -8,35 +8,35 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSGO_TeamPreviewCharacterPosition : CBaseEntity, ISchemaClass<CCSGO_TeamPreviewCharacterPosition> {
+public partial interface CCSGO_TeamPreviewCharacterPosition : CBaseEntity, ISchemaClass<CCSGO_TeamPreviewCharacterPosition>
+{
+    static CCSGO_TeamPreviewCharacterPosition ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.From(nint handle) => new CCSGO_TeamPreviewCharacterPositionImpl(handle);
+    static int ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.Size => 3336;
+    static string? ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.ClassName => null;
 
-  static CCSGO_TeamPreviewCharacterPosition ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.From(nint handle) => new CCSGO_TeamPreviewCharacterPositionImpl(handle);
-  static int ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.Size => 3336;
-  static string? ISchemaClass<CCSGO_TeamPreviewCharacterPosition>.ClassName => null;
 
-  
-  public ref int Variant { get; }
-  
-  public ref int Random { get; }
-  
-  public ref int Ordinal { get; }
-  
-  public string WeaponName { get; set; }
-  
-  public ref ulong Xuid { get; }
-  
-  public CEconItemView AgentItem { get; }
-  
-  public CEconItemView GlovesItem { get; }
-  
-  public CEconItemView WeaponItem { get; }
+    public ref int Variant { get; }
 
-  public void VariantUpdated();
-  public void RandomUpdated();
-  public void OrdinalUpdated();
-  public void WeaponNameUpdated();
-  public void XuidUpdated();
-  public void AgentItemUpdated();
-  public void GlovesItemUpdated();
-  public void WeaponItemUpdated();
+    public ref int Random { get; }
+
+    public ref int Ordinal { get; }
+
+    public string WeaponName { get; set; }
+
+    public ref ulong Xuid { get; }
+
+    public CEconItemView AgentItem { get; }
+
+    public CEconItemView GlovesItem { get; }
+
+    public CEconItemView WeaponItem { get; }
+
+    public void VariantUpdated();
+    public void RandomUpdated();
+    public void OrdinalUpdated();
+    public void WeaponNameUpdated();
+    public void XuidUpdated();
+    public void AgentItemUpdated();
+    public void GlovesItemUpdated();
+    public void WeaponItemUpdated();
 }

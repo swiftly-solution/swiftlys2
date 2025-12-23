@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class constraint_hingeparams_tImpl : SchemaClass, constraint_hingeparams_t {
+internal partial class constraint_hingeparams_tImpl : SchemaClass, constraint_hingeparams_t
+{
+    public constraint_hingeparams_tImpl(nint handle) : base(handle) { }
 
-  public constraint_hingeparams_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WorldPositionOffset;
 
-  private static nint? _WorldPositionOffset;
-
-  public ref Vector WorldPosition {
-    get {
-      if (_WorldPositionOffset == null) {
-        _WorldPositionOffset = Schema.GetOffset(0x790804C3F16C2360);
-      }
-      return ref _Handle.AsRef<Vector>(_WorldPositionOffset!.Value);
+    public ref Vector WorldPosition {
+        get {
+            _WorldPositionOffset = _WorldPositionOffset ?? Schema.GetOffset(0x790804C3F16C2360);
+            return ref _Handle.AsRef<Vector>(_WorldPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldAxisDirectionOffset;
+    private static nint? _WorldAxisDirectionOffset;
 
-  public ref Vector WorldAxisDirection {
-    get {
-      if (_WorldAxisDirectionOffset == null) {
-        _WorldAxisDirectionOffset = Schema.GetOffset(0x790804C3637CEB43);
-      }
-      return ref _Handle.AsRef<Vector>(_WorldAxisDirectionOffset!.Value);
+    public ref Vector WorldAxisDirection {
+        get {
+            _WorldAxisDirectionOffset = _WorldAxisDirectionOffset ?? Schema.GetOffset(0x790804C3637CEB43);
+            return ref _Handle.AsRef<Vector>(_WorldAxisDirectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _HingeAxisOffset;
+    private static nint? _HingeAxisOffset;
 
-  public constraint_axislimit_t HingeAxis {
-    get {
-      if (_HingeAxisOffset == null) {
-        _HingeAxisOffset = Schema.GetOffset(0x790804C33BD096FD);
-      }
-      return new constraint_axislimit_tImpl(_Handle + _HingeAxisOffset!.Value);
+    public constraint_axislimit_t HingeAxis {
+        get {
+            _HingeAxisOffset = _HingeAxisOffset ?? Schema.GetOffset(0x790804C33BD096FD);
+            return new constraint_axislimit_tImpl(_Handle + _HingeAxisOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConstraintOffset;
+    private static nint? _ConstraintOffset;
 
-  public constraint_breakableparams_t Constraint {
-    get {
-      if (_ConstraintOffset == null) {
-        _ConstraintOffset = Schema.GetOffset(0x790804C3B822E25A);
-      }
-      return new constraint_breakableparams_tImpl(_Handle + _ConstraintOffset!.Value);
+    public constraint_breakableparams_t Constraint {
+        get {
+            _ConstraintOffset = _ConstraintOffset ?? Schema.GetOffset(0x790804C3B822E25A);
+            return new constraint_breakableparams_tImpl(_Handle + _ConstraintOffset!.Value);
+        }
     }
-  }
 
 
 }

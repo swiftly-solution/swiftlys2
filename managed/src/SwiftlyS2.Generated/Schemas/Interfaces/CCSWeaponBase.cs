@@ -8,139 +8,139 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeaponBase> {
+public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeaponBase>
+{
+    static CCSWeaponBase ISchemaClass<CCSWeaponBase>.From(nint handle) => new CCSWeaponBaseImpl(handle);
+    static int ISchemaClass<CCSWeaponBase>.Size => 4560;
+    static string? ISchemaClass<CCSWeaponBase>.ClassName => "weapon_cs_base";
 
-  static CCSWeaponBase ISchemaClass<CCSWeaponBase>.From(nint handle) => new CCSWeaponBaseImpl(handle);
-  static int ISchemaClass<CCSWeaponBase>.Size => 4560;
-  static string? ISchemaClass<CCSWeaponBase>.ClassName => "weapon_cs_base";
 
-  
-  public ref bool Removeable { get; }
-  
-  public ref bool PlayerAmmoStockOnPickup { get; }
-  
-  public ref bool RequireUseToTouch { get; }
-  
-  public ref WeaponGameplayAnimState WeaponGameplayAnimState { get; }
-  
-  public GameTime_t WeaponGameplayAnimStateTimestamp { get; }
-  
-  public GameTime_t InspectCancelCompleteTime { get; }
-  
-  public ref bool InspectPending { get; }
-  
-  public ref bool InspectShouldLoop { get; }
-  
-  public ref int LastEmptySoundCmdNum { get; }
-  
-  public ref bool FireOnEmpty { get; }
-  
-  public CEntityIOOutput OnPlayerPickup { get; }
-  
-  public ref CSWeaponMode WeaponMode { get; }
-  
-  public ref float TurningInaccuracyDelta { get; }
-  
-  public ref Vector TurningInaccuracyEyeDirLast { get; }
-  
-  public ref float TurningInaccuracy { get; }
-  
-  public ref float AccuracyPenalty { get; }
-  
-  public GameTime_t LastAccuracyUpdateTime { get; }
-  
-  public ref float AccuracySmoothedForZoom { get; }
-  
-  public ref int RecoilIndex { get; }
-  
-  public ref float RecoilIndex1 { get; }
-  
-  public ref bool BurstMode { get; }
-  
-  public GameTick_t PostponeFireReadyTicks { get; }
-  
-  public ref float PostponeFireReadyFrac { get; }
-  
-  public ref bool InReload { get; }
-  
-  public GameTime_t DroppedAtTime { get; }
-  
-  public ref bool IsHauledBack { get; }
-  
-  public ref bool SilencerOn { get; }
-  
-  public GameTime_t TimeSilencerSwitchComplete { get; }
-  
-  public ref int OriginalTeamNumber { get; }
-  
-  public ref int MostRecentTeamNumber { get; }
-  
-  public ref bool DroppedNearBuyZone { get; }
-  
-  public ref float NextAttackRenderTimeOffset { get; }
-  
-  public ref bool CanBePickedUp { get; }
-  
-  public ref bool UseCanOverrideNextOwnerTouchTime { get; }
-  
-  public GameTime_t NextOwnerTouchTime { get; }
-  
-  public GameTime_t NextPrevOwnerTouchTime { get; }
-  
-  public GameTime_t NextPrevOwnerUseTime { get; }
-  
-  public ref CHandle<CCSPlayerPawn> PrevOwner { get; }
-  
-  public GameTick_t DropTick { get; }
-  
-  public ref bool WasActiveWeaponWhenDropped { get; }
-  
-  public ref bool Donated { get; }
-  
-  public GameTime_t LastShotTime { get; }
-  
-  public ref bool WasOwnedByCT { get; }
-  
-  public ref bool WasOwnedByTerrorist { get; }
-  
-  public ref int NumRemoveUnownedWeaponThink { get; }
-  
-  public CIronSightController IronSightController { get; }
-  
-  public ref int IronSightMode { get; }
-  
-  public GameTime_t LastLOSTraceFailureTime { get; }
-  
-  public ref float WatTickOffset { get; }
-  
-  public GameTime_t LastShakeTime { get; }
+    public ref bool Removeable { get; }
 
-  public void WeaponGameplayAnimStateUpdated();
-  public void WeaponGameplayAnimStateTimestampUpdated();
-  public void InspectCancelCompleteTimeUpdated();
-  public void InspectPendingUpdated();
-  public void InspectShouldLoopUpdated();
-  public void WeaponModeUpdated();
-  public void AccuracyPenaltyUpdated();
-  public void RecoilIndexUpdated();
-  public void RecoilIndex1Updated();
-  public void BurstModeUpdated();
-  public void PostponeFireReadyTicksUpdated();
-  public void PostponeFireReadyFracUpdated();
-  public void InReloadUpdated();
-  public void DroppedAtTimeUpdated();
-  public void IsHauledBackUpdated();
-  public void SilencerOnUpdated();
-  public void TimeSilencerSwitchCompleteUpdated();
-  public void OriginalTeamNumberUpdated();
-  public void MostRecentTeamNumberUpdated();
-  public void DroppedNearBuyZoneUpdated();
-  public void NextPrevOwnerUseTimeUpdated();
-  public void PrevOwnerUpdated();
-  public void DropTickUpdated();
-  public void WasActiveWeaponWhenDroppedUpdated();
-  public void LastShotTimeUpdated();
-  public void IronSightModeUpdated();
-  public void WatTickOffsetUpdated();
-  public void LastShakeTimeUpdated();
+    public ref bool PlayerAmmoStockOnPickup { get; }
+
+    public ref bool RequireUseToTouch { get; }
+
+    public ref WeaponGameplayAnimState WeaponGameplayAnimState { get; }
+
+    public GameTime_t WeaponGameplayAnimStateTimestamp { get; }
+
+    public GameTime_t InspectCancelCompleteTime { get; }
+
+    public ref bool InspectPending { get; }
+
+    public ref bool InspectShouldLoop { get; }
+
+    public ref int LastEmptySoundCmdNum { get; }
+
+    public ref bool FireOnEmpty { get; }
+
+    public ref CEntityIOOutput OnPlayerPickup { get; }
+
+    public ref CSWeaponMode WeaponMode { get; }
+
+    public ref float TurningInaccuracyDelta { get; }
+
+    public ref Vector TurningInaccuracyEyeDirLast { get; }
+
+    public ref float TurningInaccuracy { get; }
+
+    public ref float AccuracyPenalty { get; }
+
+    public GameTime_t LastAccuracyUpdateTime { get; }
+
+    public ref float AccuracySmoothedForZoom { get; }
+
+    public ref int RecoilIndex { get; }
+
+    public ref float RecoilIndex1 { get; }
+
+    public ref bool BurstMode { get; }
+
+    public GameTick_t PostponeFireReadyTicks { get; }
+
+    public ref float PostponeFireReadyFrac { get; }
+
+    public ref bool InReload { get; }
+
+    public GameTime_t DroppedAtTime { get; }
+
+    public ref bool IsHauledBack { get; }
+
+    public ref bool SilencerOn { get; }
+
+    public GameTime_t TimeSilencerSwitchComplete { get; }
+
+    public ref int OriginalTeamNumber { get; }
+
+    public ref int MostRecentTeamNumber { get; }
+
+    public ref bool DroppedNearBuyZone { get; }
+
+    public ref float NextAttackRenderTimeOffset { get; }
+
+    public ref bool CanBePickedUp { get; }
+
+    public ref bool UseCanOverrideNextOwnerTouchTime { get; }
+
+    public GameTime_t NextOwnerTouchTime { get; }
+
+    public GameTime_t NextPrevOwnerTouchTime { get; }
+
+    public GameTime_t NextPrevOwnerUseTime { get; }
+
+    public ref CHandle<CCSPlayerPawn> PrevOwner { get; }
+
+    public GameTick_t DropTick { get; }
+
+    public ref bool WasActiveWeaponWhenDropped { get; }
+
+    public ref bool Donated { get; }
+
+    public GameTime_t LastShotTime { get; }
+
+    public ref bool WasOwnedByCT { get; }
+
+    public ref bool WasOwnedByTerrorist { get; }
+
+    public ref int NumRemoveUnownedWeaponThink { get; }
+
+    public CIronSightController IronSightController { get; }
+
+    public ref int IronSightMode { get; }
+
+    public GameTime_t LastLOSTraceFailureTime { get; }
+
+    public ref float WatTickOffset { get; }
+
+    public GameTime_t LastShakeTime { get; }
+
+    public void WeaponGameplayAnimStateUpdated();
+    public void WeaponGameplayAnimStateTimestampUpdated();
+    public void InspectCancelCompleteTimeUpdated();
+    public void InspectPendingUpdated();
+    public void InspectShouldLoopUpdated();
+    public void WeaponModeUpdated();
+    public void AccuracyPenaltyUpdated();
+    public void RecoilIndexUpdated();
+    public void RecoilIndex1Updated();
+    public void BurstModeUpdated();
+    public void PostponeFireReadyTicksUpdated();
+    public void PostponeFireReadyFracUpdated();
+    public void InReloadUpdated();
+    public void DroppedAtTimeUpdated();
+    public void IsHauledBackUpdated();
+    public void SilencerOnUpdated();
+    public void TimeSilencerSwitchCompleteUpdated();
+    public void OriginalTeamNumberUpdated();
+    public void MostRecentTeamNumberUpdated();
+    public void DroppedNearBuyZoneUpdated();
+    public void NextPrevOwnerUseTimeUpdated();
+    public void PrevOwnerUpdated();
+    public void DropTickUpdated();
+    public void WasActiveWeaponWhenDroppedUpdated();
+    public void LastShotTimeUpdated();
+    public void IronSightModeUpdated();
+    public void WatTickOffsetUpdated();
+    public void LastShakeTimeUpdated();
 }

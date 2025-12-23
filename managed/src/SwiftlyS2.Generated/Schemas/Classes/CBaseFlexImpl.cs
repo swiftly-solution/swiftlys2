@@ -6,95 +6,74 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseFlexImpl : CBaseAnimGraphImpl, CBaseFlex {
+internal partial class CBaseFlexImpl : CBaseAnimGraphImpl, CBaseFlex
+{
+    public CBaseFlexImpl(nint handle) : base(handle) { }
 
-  public CBaseFlexImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FlexWeightOffset;
 
-  private static nint? _FlexWeightOffset;
-
-  public ref CUtlVector<float> FlexWeight {
-    get {
-      if (_FlexWeightOffset == null) {
-        _FlexWeightOffset = Schema.GetOffset(0xEE4FEF48AB868EDA);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_FlexWeightOffset!.Value);
+    public ref CUtlVector<float> FlexWeight {
+        get {
+            _FlexWeightOffset = _FlexWeightOffset ?? Schema.GetOffset(0xEE4FEF48AB868EDA);
+            return ref _Handle.AsRef<CUtlVector<float>>(_FlexWeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _LookTargetPositionOffset;
+    private static nint? _LookTargetPositionOffset;
 
-  public ref Vector LookTargetPosition {
-    get {
-      if (_LookTargetPositionOffset == null) {
-        _LookTargetPositionOffset = Schema.GetOffset(0xEE4FEF480DCD7B00);
-      }
-      return ref _Handle.AsRef<Vector>(_LookTargetPositionOffset!.Value);
+    public ref Vector LookTargetPosition {
+        get {
+            _LookTargetPositionOffset = _LookTargetPositionOffset ?? Schema.GetOffset(0xEE4FEF480DCD7B00);
+            return ref _Handle.AsRef<Vector>(_LookTargetPositionOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlinktoggleOffset;
+    private static nint? _BlinktoggleOffset;
 
-  public ref bool Blinktoggle {
-    get {
-      if (_BlinktoggleOffset == null) {
-        _BlinktoggleOffset = Schema.GetOffset(0xEE4FEF48CA230309);
-      }
-      return ref _Handle.AsRef<bool>(_BlinktoggleOffset!.Value);
+    public ref bool Blinktoggle {
+        get {
+            _BlinktoggleOffset = _BlinktoggleOffset ?? Schema.GetOffset(0xEE4FEF48CA230309);
+            return ref _Handle.AsRef<bool>(_BlinktoggleOffset!.Value);
+        }
     }
-  }
-  private static nint? _AllowResponsesEndTimeOffset;
+    private static nint? _AllowResponsesEndTimeOffset;
 
-  public GameTime_t AllowResponsesEndTime {
-    get {
-      if (_AllowResponsesEndTimeOffset == null) {
-        _AllowResponsesEndTimeOffset = Schema.GetOffset(0xEE4FEF4858EB0248);
-      }
-      return new GameTime_tImpl(_Handle + _AllowResponsesEndTimeOffset!.Value);
+    public GameTime_t AllowResponsesEndTime {
+        get {
+            _AllowResponsesEndTimeOffset = _AllowResponsesEndTimeOffset ?? Schema.GetOffset(0xEE4FEF4858EB0248);
+            return new GameTime_tImpl(_Handle + _AllowResponsesEndTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastFlexAnimationTimeOffset;
+    private static nint? _LastFlexAnimationTimeOffset;
 
-  public GameTime_t LastFlexAnimationTime {
-    get {
-      if (_LastFlexAnimationTimeOffset == null) {
-        _LastFlexAnimationTimeOffset = Schema.GetOffset(0xEE4FEF48D5ADEDFF);
-      }
-      return new GameTime_tImpl(_Handle + _LastFlexAnimationTimeOffset!.Value);
+    public GameTime_t LastFlexAnimationTime {
+        get {
+            _LastFlexAnimationTimeOffset = _LastFlexAnimationTimeOffset ?? Schema.GetOffset(0xEE4FEF48D5ADEDFF);
+            return new GameTime_tImpl(_Handle + _LastFlexAnimationTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextSceneEventIdOffset;
+    private static nint? _NextSceneEventIdOffset;
 
-  public SceneEventId_t NextSceneEventId {
-    get {
-      if (_NextSceneEventIdOffset == null) {
-        _NextSceneEventIdOffset = Schema.GetOffset(0xEE4FEF483756F461);
-      }
-      return new SceneEventId_tImpl(_Handle + _NextSceneEventIdOffset!.Value);
+    public SceneEventId_t NextSceneEventId {
+        get {
+            _NextSceneEventIdOffset = _NextSceneEventIdOffset ?? Schema.GetOffset(0xEE4FEF483756F461);
+            return new SceneEventId_tImpl(_Handle + _NextSceneEventIdOffset!.Value);
+        }
     }
-  }
-  private static nint? _UpdateLayerPrioritiesOffset;
+    private static nint? _UpdateLayerPrioritiesOffset;
 
-  public ref bool UpdateLayerPriorities {
-    get {
-      if (_UpdateLayerPrioritiesOffset == null) {
-        _UpdateLayerPrioritiesOffset = Schema.GetOffset(0xEE4FEF48446AC3B9);
-      }
-      return ref _Handle.AsRef<bool>(_UpdateLayerPrioritiesOffset!.Value);
+    public ref bool UpdateLayerPriorities {
+        get {
+            _UpdateLayerPrioritiesOffset = _UpdateLayerPrioritiesOffset ?? Schema.GetOffset(0xEE4FEF48446AC3B9);
+            return ref _Handle.AsRef<bool>(_UpdateLayerPrioritiesOffset!.Value);
+        }
     }
-  }
 
-  public void FlexWeightUpdated() {
-    Schema.Update(_Handle, 0xEE4FEF48AB868EDA);
-  }
-  public void LookTargetPositionUpdated() {
-    Schema.Update(_Handle, 0xEE4FEF480DCD7B00);
-  }
-  public void BlinktoggleUpdated() {
-    Schema.Update(_Handle, 0xEE4FEF48CA230309);
-  }
+    public void FlexWeightUpdated() => Schema.Update(_Handle, 0xEE4FEF48AB868EDA);
+    public void LookTargetPositionUpdated() => Schema.Update(_Handle, 0xEE4FEF480DCD7B00);
+    public void BlinktoggleUpdated() => Schema.Update(_Handle, 0xEE4FEF48CA230309);
 }

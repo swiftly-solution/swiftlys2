@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmStateNode__TimedEvent_t : ISchemaClass<CNmStateNode__TimedEvent_t> {
+public partial interface CNmStateNode__TimedEvent_t : ISchemaClass<CNmStateNode__TimedEvent_t>
+{
+    static CNmStateNode__TimedEvent_t ISchemaClass<CNmStateNode__TimedEvent_t>.From(nint handle) => new CNmStateNode__TimedEvent_tImpl(handle);
+    static int ISchemaClass<CNmStateNode__TimedEvent_t>.Size => 16;
+    static string? ISchemaClass<CNmStateNode__TimedEvent_t>.ClassName => null;
 
-  static CNmStateNode__TimedEvent_t ISchemaClass<CNmStateNode__TimedEvent_t>.From(nint handle) => new CNmStateNode__TimedEvent_tImpl(handle);
-  static int ISchemaClass<CNmStateNode__TimedEvent_t>.Size => 16;
-  static string? ISchemaClass<CNmStateNode__TimedEvent_t>.ClassName => null;
 
-  
-  public ref CGlobalSymbol ID { get; }
-  
-  public ref float TimeValueSeconds { get; }
-  
-  public ref CNmStateNode__TimedEvent_t__Comparison_t ComparisionOperator { get; }
+    public ref CGlobalSymbol ID { get; }
+
+    public ref float TimeValueSeconds { get; }
+
+    public ref CNmStateNode__TimedEvent_t__Comparison_t ComparisionOperator { get; }
 
 
 }

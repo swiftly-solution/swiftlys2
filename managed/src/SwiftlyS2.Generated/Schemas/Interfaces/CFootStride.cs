@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootStride : ISchemaClass<CFootStride> {
+public partial interface CFootStride : ISchemaClass<CFootStride>
+{
+    static CFootStride ISchemaClass<CFootStride>.From(nint handle) => new CFootStrideImpl(handle);
+    static int ISchemaClass<CFootStride>.Size => 88;
+    static string? ISchemaClass<CFootStride>.ClassName => null;
 
-  static CFootStride ISchemaClass<CFootStride>.From(nint handle) => new CFootStrideImpl(handle);
-  static int ISchemaClass<CFootStride>.Size => 88;
-  static string? ISchemaClass<CFootStride>.ClassName => null;
 
-  
-  public CFootCycleDefinition Definition { get; }
-  
-  public CFootTrajectories Trajectories { get; }
+    public CFootCycleDefinition Definition { get; }
+
+    public CFootTrajectories Trajectories { get; }
 
 
 }

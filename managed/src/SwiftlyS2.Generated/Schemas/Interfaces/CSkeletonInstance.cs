@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSkeletonInstance : CGameSceneNode, ISchemaClass<CSkeletonInstance> {
+public partial interface CSkeletonInstance : CGameSceneNode, ISchemaClass<CSkeletonInstance>
+{
+    static CSkeletonInstance ISchemaClass<CSkeletonInstance>.From(nint handle) => new CSkeletonInstanceImpl(handle);
+    static int ISchemaClass<CSkeletonInstance>.Size => 1168;
+    static string? ISchemaClass<CSkeletonInstance>.ClassName => null;
 
-  static CSkeletonInstance ISchemaClass<CSkeletonInstance>.From(nint handle) => new CSkeletonInstanceImpl(handle);
-  static int ISchemaClass<CSkeletonInstance>.Size => 1168;
-  static string? ISchemaClass<CSkeletonInstance>.ClassName => null;
 
-  
-  public CModelState ModelState { get; }
-  
-  public ref bool IsAnimationEnabled { get; }
-  
-  public ref bool UseParentRenderBounds { get; }
-  
-  public ref bool DisableSolidCollisionsForHierarchy { get; }
-  
-  // bitfield
-  public SchemaUntypedField DirtyMotionType { get; }
-  
-  // bitfield
-  public SchemaUntypedField IsGeneratingLatchedParentSpaceState { get; }
-  
-  public ref CUtlStringToken MaterialGroup { get; }
-  
-  public ref byte HitboxSet { get; }
+    public CModelState ModelState { get; }
 
-  public void ModelStateUpdated();
-  public void IsAnimationEnabledUpdated();
-  public void UseParentRenderBoundsUpdated();
-  public void MaterialGroupUpdated();
-  public void HitboxSetUpdated();
+    public ref bool IsAnimationEnabled { get; }
+
+    public ref bool UseParentRenderBounds { get; }
+
+    public ref bool DisableSolidCollisionsForHierarchy { get; }
+
+    // bitfield
+    public SchemaUntypedField DirtyMotionType { get; }
+
+    // bitfield
+    public SchemaUntypedField IsGeneratingLatchedParentSpaceState { get; }
+
+    public ref CUtlStringToken MaterialGroup { get; }
+
+    public ref byte HitboxSet { get; }
+
+    public void ModelStateUpdated();
+    public void IsAnimationEnabledUpdated();
+    public void UseParentRenderBoundsUpdated();
+    public void MaterialGroupUpdated();
+    public void HitboxSetUpdated();
 }

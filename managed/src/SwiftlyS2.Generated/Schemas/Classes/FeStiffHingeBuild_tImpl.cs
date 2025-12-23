@@ -6,43 +6,38 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeStiffHingeBuild_tImpl : SchemaClass, FeStiffHingeBuild_t {
+internal partial class FeStiffHingeBuild_tImpl : SchemaClass, FeStiffHingeBuild_t
+{
+    public FeStiffHingeBuild_tImpl(nint handle) : base(handle) { }
 
-  public FeStiffHingeBuild_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaxAngleOffset;
 
-  private static nint? _MaxAngleOffset;
-
-  public ref float MaxAngle {
-    get {
-      if (_MaxAngleOffset == null) {
-        _MaxAngleOffset = Schema.GetOffset(0x41A81A5876FE0F8E);
-      }
-      return ref _Handle.AsRef<float>(_MaxAngleOffset!.Value);
+    public ref float MaxAngle {
+        get {
+            _MaxAngleOffset = _MaxAngleOffset ?? Schema.GetOffset(0x41A81A5876FE0F8E);
+            return ref _Handle.AsRef<float>(_MaxAngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrengthOffset;
+    private static nint? _StrengthOffset;
 
-  public ref float Strength {
-    get {
-      if (_StrengthOffset == null) {
-        _StrengthOffset = Schema.GetOffset(0x41A81A58AFA3323A);
-      }
-      return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+    public ref float Strength {
+        get {
+            _StrengthOffset = _StrengthOffset ?? Schema.GetOffset(0x41A81A58AFA3323A);
+            return ref _Handle.AsRef<float>(_StrengthOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<float> MotionBias {
-    get => new SchemaFixedArray<float>(_Handle, 0x41A81A582CDDBF14, 3, 4, 4);
-  }
-  public ISchemaFixedArray<ushort> Node {
-    get => new SchemaFixedArray<ushort>(_Handle, 0x41A81A58CD6694B9, 3, 2, 2);
-  }
+    public ISchemaFixedArray<float> MotionBias {
+        get => new SchemaFixedArray<float>(_Handle, 0x41A81A582CDDBF14, 3, 4, 4);
+    }
+    public ISchemaFixedArray<ushort> Node {
+        get => new SchemaFixedArray<ushort>(_Handle, 0x41A81A58CD6694B9, 3, 2, 2);
+    }
 
 
 }

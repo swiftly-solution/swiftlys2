@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAudioMorphData : ISchemaClass<CAudioMorphData> {
+public partial interface CAudioMorphData : ISchemaClass<CAudioMorphData>
+{
+    static CAudioMorphData ISchemaClass<CAudioMorphData>.From(nint handle) => new CAudioMorphDataImpl(handle);
+    static int ISchemaClass<CAudioMorphData>.Size => 104;
+    static string? ISchemaClass<CAudioMorphData>.ClassName => null;
 
-  static CAudioMorphData ISchemaClass<CAudioMorphData>.From(nint handle) => new CAudioMorphDataImpl(handle);
-  static int ISchemaClass<CAudioMorphData>.Size => 104;
-  static string? ISchemaClass<CAudioMorphData>.ClassName => null;
 
-  
-  public ref CUtlVector<float> Times { get; }
-  
-  public ref CUtlVector<uint> NameHashCodes { get; }
-  
-  public ref CUtlVector<CUtlString> NameStrings { get; }
-  
-  public ref CUtlVector<CUtlVector<float>> Samples { get; }
-  
-  public ref float EaseIn { get; }
-  
-  public ref float EaseOut { get; }
+    public ref CUtlVector<float> Times { get; }
+
+    public ref CUtlVector<uint> NameHashCodes { get; }
+
+    public ref CUtlVector<CUtlString> NameStrings { get; }
+
+    public ref CUtlVector<CUtlVector<float>> Samples { get; }
+
+    public ref float EaseIn { get; }
+
+    public ref float EaseOut { get; }
 
 
 }

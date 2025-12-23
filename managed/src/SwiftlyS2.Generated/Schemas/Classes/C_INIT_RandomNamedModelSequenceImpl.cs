@@ -6,16 +6,15 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomNamedModelSequenceImpl : C_INIT_RandomNamedModelElementImpl, C_INIT_RandomNamedModelSequence {
-
-  public C_INIT_RandomNamedModelSequenceImpl(nint handle) : base(handle) {
-  }
+internal partial class C_INIT_RandomNamedModelSequenceImpl : C_INIT_RandomNamedModelElementImpl, C_INIT_RandomNamedModelSequence
+{
+    public C_INIT_RandomNamedModelSequenceImpl(nint handle) : base(handle) { }
 
 
 

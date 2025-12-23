@@ -6,146 +6,116 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseTriggerImpl : CBaseToggleImpl, CBaseTrigger {
+internal partial class CBaseTriggerImpl : CBaseToggleImpl, CBaseTrigger
+{
+    public CBaseTriggerImpl(nint handle) : base(handle) { }
 
-  public CBaseTriggerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnStartTouchOffset;
 
-  private static nint? _OnStartTouchOffset;
-
-  public CEntityIOOutput OnStartTouch {
-    get {
-      if (_OnStartTouchOffset == null) {
-        _OnStartTouchOffset = Schema.GetOffset(0x96DE10B1B4E38193);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnStartTouchOffset!.Value);
+    public ref CEntityIOOutput OnStartTouch {
+        get {
+            _OnStartTouchOffset = _OnStartTouchOffset ?? Schema.GetOffset(0x96DE10B1B4E38193);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartTouchOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnStartTouchAllOffset;
+    private static nint? _OnStartTouchAllOffset;
 
-  public CEntityIOOutput OnStartTouchAll {
-    get {
-      if (_OnStartTouchAllOffset == null) {
-        _OnStartTouchAllOffset = Schema.GetOffset(0x96DE10B1BE1133C6);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnStartTouchAllOffset!.Value);
+    public ref CEntityIOOutput OnStartTouchAll {
+        get {
+            _OnStartTouchAllOffset = _OnStartTouchAllOffset ?? Schema.GetOffset(0x96DE10B1BE1133C6);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartTouchAllOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnEndTouchOffset;
+    private static nint? _OnEndTouchOffset;
 
-  public CEntityIOOutput OnEndTouch {
-    get {
-      if (_OnEndTouchOffset == null) {
-        _OnEndTouchOffset = Schema.GetOffset(0x96DE10B15D181B48);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnEndTouchOffset!.Value);
+    public ref CEntityIOOutput OnEndTouch {
+        get {
+            _OnEndTouchOffset = _OnEndTouchOffset ?? Schema.GetOffset(0x96DE10B15D181B48);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndTouchOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnEndTouchAllOffset;
+    private static nint? _OnEndTouchAllOffset;
 
-  public CEntityIOOutput OnEndTouchAll {
-    get {
-      if (_OnEndTouchAllOffset == null) {
-        _OnEndTouchAllOffset = Schema.GetOffset(0x96DE10B1A5526E0B);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnEndTouchAllOffset!.Value);
+    public ref CEntityIOOutput OnEndTouchAll {
+        get {
+            _OnEndTouchAllOffset = _OnEndTouchAllOffset ?? Schema.GetOffset(0x96DE10B1A5526E0B);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndTouchAllOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnTouchingOffset;
+    private static nint? _OnTouchingOffset;
 
-  public CEntityIOOutput OnTouching {
-    get {
-      if (_OnTouchingOffset == null) {
-        _OnTouchingOffset = Schema.GetOffset(0x96DE10B1CD69EB01);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnTouchingOffset!.Value);
+    public ref CEntityIOOutput OnTouching {
+        get {
+            _OnTouchingOffset = _OnTouchingOffset ?? Schema.GetOffset(0x96DE10B1CD69EB01);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchingOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnTouchingEachEntityOffset;
+    private static nint? _OnTouchingEachEntityOffset;
 
-  public CEntityIOOutput OnTouchingEachEntity {
-    get {
-      if (_OnTouchingEachEntityOffset == null) {
-        _OnTouchingEachEntityOffset = Schema.GetOffset(0x96DE10B1CBC29227);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnTouchingEachEntityOffset!.Value);
+    public ref CEntityIOOutput OnTouchingEachEntity {
+        get {
+            _OnTouchingEachEntityOffset = _OnTouchingEachEntityOffset ?? Schema.GetOffset(0x96DE10B1CBC29227);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTouchingEachEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnNotTouchingOffset;
+    private static nint? _OnNotTouchingOffset;
 
-  public CEntityIOOutput OnNotTouching {
-    get {
-      if (_OnNotTouchingOffset == null) {
-        _OnNotTouchingOffset = Schema.GetOffset(0x96DE10B19603AF34);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnNotTouchingOffset!.Value);
+    public ref CEntityIOOutput OnNotTouching {
+        get {
+            _OnNotTouchingOffset = _OnNotTouchingOffset ?? Schema.GetOffset(0x96DE10B19603AF34);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnNotTouchingOffset!.Value);
+        }
     }
-  }
-  private static nint? _TouchingEntitiesOffset;
+    private static nint? _TouchingEntitiesOffset;
 
-  public ref CUtlVector<CHandle<CBaseEntity>> TouchingEntities {
-    get {
-      if (_TouchingEntitiesOffset == null) {
-        _TouchingEntitiesOffset = Schema.GetOffset(0x96DE10B1070A5E2D);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_TouchingEntitiesOffset!.Value);
+    public ref CUtlVector<CHandle<CBaseEntity>> TouchingEntities {
+        get {
+            _TouchingEntitiesOffset = _TouchingEntitiesOffset ?? Schema.GetOffset(0x96DE10B1070A5E2D);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_TouchingEntitiesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FilterNameOffset;
+    private static nint? _FilterNameOffset;
 
-  public string FilterName {
-    get {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0x96DE10B109C86445);
-      }
-      var ptr = _Handle.Read<nint>(_FilterNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_FilterNameOffset == null) {
-        _FilterNameOffset = Schema.GetOffset(0x96DE10B109C86445);
-      }
-      Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _FilterOffset;
+    public string FilterName {
+        get {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x96DE10B109C86445);
+            return Schema.GetString(_Handle.Read<nint>(_FilterNameOffset!.Value));
+        }
+        set {
+            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x96DE10B109C86445);
+            Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FilterOffset;
 
-  public ref CHandle<CBaseFilter> Filter {
-    get {
-      if (_FilterOffset == null) {
-        _FilterOffset = Schema.GetOffset(0x96DE10B145D9E0B1);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset!.Value);
+    public ref CHandle<CBaseFilter> Filter {
+        get {
+            _FilterOffset = _FilterOffset ?? Schema.GetOffset(0x96DE10B145D9E0B1);
+            return ref _Handle.AsRef<CHandle<CBaseFilter>>(_FilterOffset!.Value);
+        }
     }
-  }
-  private static nint? _DisabledOffset;
+    private static nint? _DisabledOffset;
 
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0x96DE10B13A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x96DE10B13A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseAsyncQueriesOffset;
+    private static nint? _UseAsyncQueriesOffset;
 
-  public ref bool UseAsyncQueries {
-    get {
-      if (_UseAsyncQueriesOffset == null) {
-        _UseAsyncQueriesOffset = Schema.GetOffset(0x96DE10B1DDD8EB18);
-      }
-      return ref _Handle.AsRef<bool>(_UseAsyncQueriesOffset!.Value);
+    public ref bool UseAsyncQueries {
+        get {
+            _UseAsyncQueriesOffset = _UseAsyncQueriesOffset ?? Schema.GetOffset(0x96DE10B1DDD8EB18);
+            return ref _Handle.AsRef<bool>(_UseAsyncQueriesOffset!.Value);
+        }
     }
-  }
 
-  public void DisabledUpdated() {
-    Schema.Update(_Handle, 0x96DE10B13A7C5965);
-  }
+    public void DisabledUpdated() => Schema.Update(_Handle, 0x96DE10B13A7C5965);
 }

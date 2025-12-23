@@ -6,137 +6,112 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysMagnetImpl : CBaseAnimGraphImpl, CPhysMagnet {
+internal partial class CPhysMagnetImpl : CBaseAnimGraphImpl, CPhysMagnet
+{
+    public CPhysMagnetImpl(nint handle) : base(handle) { }
 
-  public CPhysMagnetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnMagnetAttachOffset;
 
-  private static nint? _OnMagnetAttachOffset;
-
-  public CEntityIOOutput OnMagnetAttach {
-    get {
-      if (_OnMagnetAttachOffset == null) {
-        _OnMagnetAttachOffset = Schema.GetOffset(0x5772891055B6907B);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnMagnetAttachOffset!.Value);
+    public ref CEntityIOOutput OnMagnetAttach {
+        get {
+            _OnMagnetAttachOffset = _OnMagnetAttachOffset ?? Schema.GetOffset(0x5772891055B6907B);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMagnetAttachOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnMagnetDetachOffset;
+    private static nint? _OnMagnetDetachOffset;
 
-  public CEntityIOOutput OnMagnetDetach {
-    get {
-      if (_OnMagnetDetachOffset == null) {
-        _OnMagnetDetachOffset = Schema.GetOffset(0x57728910FA716045);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnMagnetDetachOffset!.Value);
+    public ref CEntityIOOutput OnMagnetDetach {
+        get {
+            _OnMagnetDetachOffset = _OnMagnetDetachOffset ?? Schema.GetOffset(0x57728910FA716045);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnMagnetDetachOffset!.Value);
+        }
     }
-  }
-  private static nint? _MassScaleOffset;
+    private static nint? _MassScaleOffset;
 
-  public ref float MassScale {
-    get {
-      if (_MassScaleOffset == null) {
-        _MassScaleOffset = Schema.GetOffset(0x5772891001B9E905);
-      }
-      return ref _Handle.AsRef<float>(_MassScaleOffset!.Value);
+    public ref float MassScale {
+        get {
+            _MassScaleOffset = _MassScaleOffset ?? Schema.GetOffset(0x5772891001B9E905);
+            return ref _Handle.AsRef<float>(_MassScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceLimitOffset;
+    private static nint? _ForceLimitOffset;
 
-  public ref float ForceLimit {
-    get {
-      if (_ForceLimitOffset == null) {
-        _ForceLimitOffset = Schema.GetOffset(0x57728910BA45B8F7);
-      }
-      return ref _Handle.AsRef<float>(_ForceLimitOffset!.Value);
+    public ref float ForceLimit {
+        get {
+            _ForceLimitOffset = _ForceLimitOffset ?? Schema.GetOffset(0x57728910BA45B8F7);
+            return ref _Handle.AsRef<float>(_ForceLimitOffset!.Value);
+        }
     }
-  }
-  private static nint? _TorqueLimitOffset;
+    private static nint? _TorqueLimitOffset;
 
-  public ref float TorqueLimit {
-    get {
-      if (_TorqueLimitOffset == null) {
-        _TorqueLimitOffset = Schema.GetOffset(0x577289106D51FE3E);
-      }
-      return ref _Handle.AsRef<float>(_TorqueLimitOffset!.Value);
+    public ref float TorqueLimit {
+        get {
+            _TorqueLimitOffset = _TorqueLimitOffset ?? Schema.GetOffset(0x577289106D51FE3E);
+            return ref _Handle.AsRef<float>(_TorqueLimitOffset!.Value);
+        }
     }
-  }
-  private static nint? _MagnettedEntitiesOffset;
+    private static nint? _MagnettedEntitiesOffset;
 
-  public ref CUtlVector<magnetted_objects_t> MagnettedEntities {
-    get {
-      if (_MagnettedEntitiesOffset == null) {
-        _MagnettedEntitiesOffset = Schema.GetOffset(0x57728910E39284F3);
-      }
-      return ref _Handle.AsRef<CUtlVector<magnetted_objects_t>>(_MagnettedEntitiesOffset!.Value);
+    public ref CUtlVector<magnetted_objects_t> MagnettedEntities {
+        get {
+            _MagnettedEntitiesOffset = _MagnettedEntitiesOffset ?? Schema.GetOffset(0x57728910E39284F3);
+            return ref _Handle.AsRef<CUtlVector<magnetted_objects_t>>(_MagnettedEntitiesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ActiveOffset;
+    private static nint? _ActiveOffset;
 
-  public ref bool Active {
-    get {
-      if (_ActiveOffset == null) {
-        _ActiveOffset = Schema.GetOffset(0x577289108334208F);
-      }
-      return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+    public ref bool Active {
+        get {
+            _ActiveOffset = _ActiveOffset ?? Schema.GetOffset(0x577289108334208F);
+            return ref _Handle.AsRef<bool>(_ActiveOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasHitSomethingOffset;
+    private static nint? _HasHitSomethingOffset;
 
-  public ref bool HasHitSomething {
-    get {
-      if (_HasHitSomethingOffset == null) {
-        _HasHitSomethingOffset = Schema.GetOffset(0x577289109E7903E0);
-      }
-      return ref _Handle.AsRef<bool>(_HasHitSomethingOffset!.Value);
+    public ref bool HasHitSomething {
+        get {
+            _HasHitSomethingOffset = _HasHitSomethingOffset ?? Schema.GetOffset(0x577289109E7903E0);
+            return ref _Handle.AsRef<bool>(_HasHitSomethingOffset!.Value);
+        }
     }
-  }
-  private static nint? _TotalMassOffset;
+    private static nint? _TotalMassOffset;
 
-  public ref float TotalMass {
-    get {
-      if (_TotalMassOffset == null) {
-        _TotalMassOffset = Schema.GetOffset(0x57728910A3F382DB);
-      }
-      return ref _Handle.AsRef<float>(_TotalMassOffset!.Value);
+    public ref float TotalMass {
+        get {
+            _TotalMassOffset = _TotalMassOffset ?? Schema.GetOffset(0x57728910A3F382DB);
+            return ref _Handle.AsRef<float>(_TotalMassOffset!.Value);
+        }
     }
-  }
-  private static nint? _RadiusOffset;
+    private static nint? _RadiusOffset;
 
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0x577289105ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0x577289105ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _NextSuckTimeOffset;
+    private static nint? _NextSuckTimeOffset;
 
-  public GameTime_t NextSuckTime {
-    get {
-      if (_NextSuckTimeOffset == null) {
-        _NextSuckTimeOffset = Schema.GetOffset(0x577289102E3592CD);
-      }
-      return new GameTime_tImpl(_Handle + _NextSuckTimeOffset!.Value);
+    public GameTime_t NextSuckTime {
+        get {
+            _NextSuckTimeOffset = _NextSuckTimeOffset ?? Schema.GetOffset(0x577289102E3592CD);
+            return new GameTime_tImpl(_Handle + _NextSuckTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxObjectsAttachedOffset;
+    private static nint? _MaxObjectsAttachedOffset;
 
-  public ref int MaxObjectsAttached {
-    get {
-      if (_MaxObjectsAttachedOffset == null) {
-        _MaxObjectsAttachedOffset = Schema.GetOffset(0x57728910326F6EB6);
-      }
-      return ref _Handle.AsRef<int>(_MaxObjectsAttachedOffset!.Value);
+    public ref int MaxObjectsAttached {
+        get {
+            _MaxObjectsAttachedOffset = _MaxObjectsAttachedOffset ?? Schema.GetOffset(0x57728910326F6EB6);
+            return ref _Handle.AsRef<int>(_MaxObjectsAttachedOffset!.Value);
+        }
     }
-  }
 
 
 }

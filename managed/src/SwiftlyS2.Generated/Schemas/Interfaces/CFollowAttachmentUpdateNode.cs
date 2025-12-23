@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFollowAttachmentUpdateNode : CUnaryUpdateNode, ISchemaClass<CFollowAttachmentUpdateNode> {
+public partial interface CFollowAttachmentUpdateNode : CUnaryUpdateNode, ISchemaClass<CFollowAttachmentUpdateNode>
+{
+    static CFollowAttachmentUpdateNode ISchemaClass<CFollowAttachmentUpdateNode>.From(nint handle) => new CFollowAttachmentUpdateNodeImpl(handle);
+    static int ISchemaClass<CFollowAttachmentUpdateNode>.Size => 272;
+    static string? ISchemaClass<CFollowAttachmentUpdateNode>.ClassName => null;
 
-  static CFollowAttachmentUpdateNode ISchemaClass<CFollowAttachmentUpdateNode>.From(nint handle) => new CFollowAttachmentUpdateNodeImpl(handle);
-  static int ISchemaClass<CFollowAttachmentUpdateNode>.Size => 272;
-  static string? ISchemaClass<CFollowAttachmentUpdateNode>.ClassName => null;
 
-  
-  public FollowAttachmentSettings_t OpFixedData { get; }
+    public FollowAttachmentSettings_t OpFixedData { get; }
 
 
 }

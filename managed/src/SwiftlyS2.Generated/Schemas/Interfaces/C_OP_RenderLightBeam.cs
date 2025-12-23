@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderLightBeam : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderLightBeam> {
+public partial interface C_OP_RenderLightBeam : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderLightBeam>
+{
+    static C_OP_RenderLightBeam ISchemaClass<C_OP_RenderLightBeam>.From(nint handle) => new C_OP_RenderLightBeamImpl(handle);
+    static int ISchemaClass<C_OP_RenderLightBeam>.Size => 3752;
+    static string? ISchemaClass<C_OP_RenderLightBeam>.ClassName => null;
 
-  static C_OP_RenderLightBeam ISchemaClass<C_OP_RenderLightBeam>.From(nint handle) => new C_OP_RenderLightBeamImpl(handle);
-  static int ISchemaClass<C_OP_RenderLightBeam>.Size => 3752;
-  static string? ISchemaClass<C_OP_RenderLightBeam>.ClassName => null;
 
-  
-  public CParticleCollectionVecInput ColorBlend { get; }
-  
-  public ref ParticleColorBlendType_t ColorBlendType { get; }
-  
-  public CParticleCollectionFloatInput BrightnessLumensPerMeter { get; }
-  
-  public ref bool CastShadows { get; }
-  
-  public CParticleCollectionFloatInput Skirt { get; }
-  
-  public CParticleCollectionFloatInput Range { get; }
-  
-  public CParticleCollectionFloatInput Thickness { get; }
+    public CParticleCollectionVecInput ColorBlend { get; }
+
+    public ref ParticleColorBlendType_t ColorBlendType { get; }
+
+    public CParticleCollectionFloatInput BrightnessLumensPerMeter { get; }
+
+    public ref bool CastShadows { get; }
+
+    public CParticleCollectionFloatInput Skirt { get; }
+
+    public CParticleCollectionFloatInput Range { get; }
+
+    public CParticleCollectionFloatInput Thickness { get; }
 
 
 }

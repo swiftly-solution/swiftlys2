@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeTwistConstraint_t : ISchemaClass<FeTwistConstraint_t> {
+public partial interface FeTwistConstraint_t : ISchemaClass<FeTwistConstraint_t>
+{
+    static FeTwistConstraint_t ISchemaClass<FeTwistConstraint_t>.From(nint handle) => new FeTwistConstraint_tImpl(handle);
+    static int ISchemaClass<FeTwistConstraint_t>.Size => 12;
+    static string? ISchemaClass<FeTwistConstraint_t>.ClassName => null;
 
-  static FeTwistConstraint_t ISchemaClass<FeTwistConstraint_t>.From(nint handle) => new FeTwistConstraint_tImpl(handle);
-  static int ISchemaClass<FeTwistConstraint_t>.Size => 12;
-  static string? ISchemaClass<FeTwistConstraint_t>.ClassName => null;
 
-  
-  public ref ushort NodeOrient { get; }
-  
-  public ref ushort NodeEnd { get; }
-  
-  public ref float TwistRelax { get; }
-  
-  public ref float SwingRelax { get; }
+    public ref ushort NodeOrient { get; }
+
+    public ref ushort NodeEnd { get; }
+
+    public ref float TwistRelax { get; }
+
+    public ref float SwingRelax { get; }
 
 
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMotionNodeBlend1DImpl : CMotionNodeImpl, CMotionNodeBlend1D {
+internal partial class CMotionNodeBlend1DImpl : CMotionNodeImpl, CMotionNodeBlend1D
+{
+    public CMotionNodeBlend1DImpl(nint handle) : base(handle) { }
 
-  public CMotionNodeBlend1DImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BlendItemsOffset;
 
-  private static nint? _BlendItemsOffset;
-
-  public ref CUtlVector<MotionBlendItem> BlendItems {
-    get {
-      if (_BlendItemsOffset == null) {
-        _BlendItemsOffset = Schema.GetOffset(0xB34B43D2BCCB1A7C);
-      }
-      return ref _Handle.AsRef<CUtlVector<MotionBlendItem>>(_BlendItemsOffset!.Value);
+    public ref CUtlVector<MotionBlendItem> BlendItems {
+        get {
+            _BlendItemsOffset = _BlendItemsOffset ?? Schema.GetOffset(0xB34B43D2BCCB1A7C);
+            return ref _Handle.AsRef<CUtlVector<MotionBlendItem>>(_BlendItemsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ParamIndexOffset;
+    private static nint? _ParamIndexOffset;
 
-  public ref int ParamIndex {
-    get {
-      if (_ParamIndexOffset == null) {
-        _ParamIndexOffset = Schema.GetOffset(0xB34B43D2CA6E6F52);
-      }
-      return ref _Handle.AsRef<int>(_ParamIndexOffset!.Value);
+    public ref int ParamIndex {
+        get {
+            _ParamIndexOffset = _ParamIndexOffset ?? Schema.GetOffset(0xB34B43D2CA6E6F52);
+            return ref _Handle.AsRef<int>(_ParamIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

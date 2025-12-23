@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetSimulationRate : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetSimulationRate> {
+public partial interface C_OP_SetSimulationRate : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetSimulationRate>
+{
+    static C_OP_SetSimulationRate ISchemaClass<C_OP_SetSimulationRate>.From(nint handle) => new C_OP_SetSimulationRateImpl(handle);
+    static int ISchemaClass<C_OP_SetSimulationRate>.Size => 840;
+    static string? ISchemaClass<C_OP_SetSimulationRate>.ClassName => null;
 
-  static C_OP_SetSimulationRate ISchemaClass<C_OP_SetSimulationRate>.From(nint handle) => new C_OP_SetSimulationRateImpl(handle);
-  static int ISchemaClass<C_OP_SetSimulationRate>.Size => 840;
-  static string? ISchemaClass<C_OP_SetSimulationRate>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput SimulationScale { get; }
+    public CParticleCollectionFloatInput SimulationScale { get; }
 
 
 }

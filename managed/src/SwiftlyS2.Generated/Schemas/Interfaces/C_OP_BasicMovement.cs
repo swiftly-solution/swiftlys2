@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_BasicMovement : CParticleFunctionOperator, ISchemaClass<C_OP_BasicMovement> {
+public partial interface C_OP_BasicMovement : CParticleFunctionOperator, ISchemaClass<C_OP_BasicMovement>
+{
+    static C_OP_BasicMovement ISchemaClass<C_OP_BasicMovement>.From(nint handle) => new C_OP_BasicMovementImpl(handle);
+    static int ISchemaClass<C_OP_BasicMovement>.Size => 3672;
+    static string? ISchemaClass<C_OP_BasicMovement>.ClassName => null;
 
-  static C_OP_BasicMovement ISchemaClass<C_OP_BasicMovement>.From(nint handle) => new C_OP_BasicMovementImpl(handle);
-  static int ISchemaClass<C_OP_BasicMovement>.Size => 3672;
-  static string? ISchemaClass<C_OP_BasicMovement>.ClassName => null;
 
-  
-  public CParticleCollectionVecInput Gravity { get; }
-  
-  public CParticleCollectionFloatInput Drag { get; }
-  
-  public CParticleMassCalculationParameters MassControls { get; }
-  
-  public ref int MaxConstraintPasses { get; }
-  
-  public ref bool UseNewCode { get; }
+    public CParticleCollectionVecInput Gravity { get; }
+
+    public CParticleCollectionFloatInput Drag { get; }
+
+    public CParticleMassCalculationParameters MassControls { get; }
+
+    public ref int MaxConstraintPasses { get; }
+
+    public ref bool UseNewCode { get; }
 
 
 }

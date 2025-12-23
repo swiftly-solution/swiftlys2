@@ -6,92 +6,73 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseIssueImpl : SchemaClass, CBaseIssue {
+internal partial class CBaseIssueImpl : SchemaClass, CBaseIssue
+{
+    public CBaseIssueImpl(nint handle) : base(handle) { }
 
-  public CBaseIssueImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeStringOffset;
 
-  private static nint? _TypeStringOffset;
-
-  public string TypeString {
-    get {
-        if (_TypeStringOffset == null) {
-            _TypeStringOffset = Schema.GetOffset(0xE0727D1E2E3EE7A9);
+    public string TypeString {
+        get {
+            _TypeStringOffset = _TypeStringOffset ?? Schema.GetOffset(0xE0727D1E2E3EE7A9);
+            return Schema.GetString(_Handle + _TypeStringOffset!.Value);
         }
-        var ptr = _Handle + _TypeStringOffset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_TypeStringOffset == null) {
-            _TypeStringOffset = Schema.GetOffset(0xE0727D1E2E3EE7A9);
+        set {
+            _TypeStringOffset = _TypeStringOffset ?? Schema.GetOffset(0xE0727D1E2E3EE7A9);
+            Schema.SetFixedString(_Handle, _TypeStringOffset!.Value, value, 64);
         }
-        Schema.SetFixedString(_Handle, _TypeStringOffset!.Value, value, 64);
-    }
-  } 
-  private static nint? _DetailsStringOffset;
+    } 
+    private static nint? _DetailsStringOffset;
 
-  public string DetailsString {
-    get {
-        if (_DetailsStringOffset == null) {
-            _DetailsStringOffset = Schema.GetOffset(0xE0727D1ECCE4C9BF);
+    public string DetailsString {
+        get {
+            _DetailsStringOffset = _DetailsStringOffset ?? Schema.GetOffset(0xE0727D1ECCE4C9BF);
+            return Schema.GetString(_Handle + _DetailsStringOffset!.Value);
         }
-        var ptr = _Handle + _DetailsStringOffset!.Value;
-        return Schema.GetString(ptr);
-    }
-    set {
-        if (_DetailsStringOffset == null) {
-            _DetailsStringOffset = Schema.GetOffset(0xE0727D1ECCE4C9BF);
+        set {
+            _DetailsStringOffset = _DetailsStringOffset ?? Schema.GetOffset(0xE0727D1ECCE4C9BF);
+            Schema.SetFixedString(_Handle, _DetailsStringOffset!.Value, value, 260);
         }
-        Schema.SetFixedString(_Handle, _DetailsStringOffset!.Value, value, 260);
-    }
-  } 
-  private static nint? _NumYesVotesOffset;
+    } 
+    private static nint? _NumYesVotesOffset;
 
-  public ref int NumYesVotes {
-    get {
-      if (_NumYesVotesOffset == null) {
-        _NumYesVotesOffset = Schema.GetOffset(0xE0727D1E7ED4202C);
-      }
-      return ref _Handle.AsRef<int>(_NumYesVotesOffset!.Value);
+    public ref int NumYesVotes {
+        get {
+            _NumYesVotesOffset = _NumYesVotesOffset ?? Schema.GetOffset(0xE0727D1E7ED4202C);
+            return ref _Handle.AsRef<int>(_NumYesVotesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumNoVotesOffset;
+    private static nint? _NumNoVotesOffset;
 
-  public ref int NumNoVotes {
-    get {
-      if (_NumNoVotesOffset == null) {
-        _NumNoVotesOffset = Schema.GetOffset(0xE0727D1E54F18188);
-      }
-      return ref _Handle.AsRef<int>(_NumNoVotesOffset!.Value);
+    public ref int NumNoVotes {
+        get {
+            _NumNoVotesOffset = _NumNoVotesOffset ?? Schema.GetOffset(0xE0727D1E54F18188);
+            return ref _Handle.AsRef<int>(_NumNoVotesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumPotentialVotesOffset;
+    private static nint? _NumPotentialVotesOffset;
 
-  public ref int NumPotentialVotes {
-    get {
-      if (_NumPotentialVotesOffset == null) {
-        _NumPotentialVotesOffset = Schema.GetOffset(0xE0727D1E61EC9307);
-      }
-      return ref _Handle.AsRef<int>(_NumPotentialVotesOffset!.Value);
+    public ref int NumPotentialVotes {
+        get {
+            _NumPotentialVotesOffset = _NumPotentialVotesOffset ?? Schema.GetOffset(0xE0727D1E61EC9307);
+            return ref _Handle.AsRef<int>(_NumPotentialVotesOffset!.Value);
+        }
     }
-  }
-  private static nint? _VoteControllerOffset;
+    private static nint? _VoteControllerOffset;
 
-  public CVoteController? VoteController {
-    get {
-      if (_VoteControllerOffset == null) {
-        _VoteControllerOffset = Schema.GetOffset(0xE0727D1ECB818C7B);
-      }
-      var ptr = _Handle.Read<nint>(_VoteControllerOffset!.Value);
-      return ptr.IsValidPtr() ? new CVoteControllerImpl(ptr) : null;
+    public CVoteController? VoteController {
+        get {
+            _VoteControllerOffset = _VoteControllerOffset ?? Schema.GetOffset(0xE0727D1ECB818C7B);
+            var ptr = _Handle.Read<nint>(_VoteControllerOffset!.Value);
+            return ptr.IsValidPtr() ? new CVoteControllerImpl(ptr) : null;
+        }
     }
-  }
 
 
 }

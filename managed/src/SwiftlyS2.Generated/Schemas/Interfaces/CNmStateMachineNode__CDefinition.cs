@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmStateMachineNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmStateMachineNode__CDefinition> {
+public partial interface CNmStateMachineNode__CDefinition : CNmPoseNode__CDefinition, ISchemaClass<CNmStateMachineNode__CDefinition>
+{
+    static CNmStateMachineNode__CDefinition ISchemaClass<CNmStateMachineNode__CDefinition>.From(nint handle) => new CNmStateMachineNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmStateMachineNode__CDefinition>.Size => 312;
+    static string? ISchemaClass<CNmStateMachineNode__CDefinition>.ClassName => null;
 
-  static CNmStateMachineNode__CDefinition ISchemaClass<CNmStateMachineNode__CDefinition>.From(nint handle) => new CNmStateMachineNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmStateMachineNode__CDefinition>.Size => 312;
-  static string? ISchemaClass<CNmStateMachineNode__CDefinition>.ClassName => null;
 
-  
-  // CUtlLeanVectorFixedGrowable< CNmStateMachineNode::StateDefinition_t, 5 >
-  public SchemaUntypedField StateDefinitions { get; }
-  
-  public ref short DefaultStateIndex { get; }
+    // CUtlLeanVectorFixedGrowable< CNmStateMachineNode::StateDefinition_t, 5 >
+    public SchemaUntypedField StateDefinitions { get; }
+
+    public ref short DefaultStateIndex { get; }
 
 
 }

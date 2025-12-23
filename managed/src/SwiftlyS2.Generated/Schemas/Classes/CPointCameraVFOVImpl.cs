@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointCameraVFOVImpl : CPointCameraImpl, CPointCameraVFOV {
+internal partial class CPointCameraVFOVImpl : CPointCameraImpl, CPointCameraVFOV
+{
+    public CPointCameraVFOVImpl(nint handle) : base(handle) { }
 
-  public CPointCameraVFOVImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VerticalFOVOffset;
 
-  private static nint? _VerticalFOVOffset;
-
-  public ref float VerticalFOV {
-    get {
-      if (_VerticalFOVOffset == null) {
-        _VerticalFOVOffset = Schema.GetOffset(0xBDB1254E910A1908);
-      }
-      return ref _Handle.AsRef<float>(_VerticalFOVOffset!.Value);
+    public ref float VerticalFOV {
+        get {
+            _VerticalFOVOffset = _VerticalFOVOffset ?? Schema.GetOffset(0xBDB1254E910A1908);
+            return ref _Handle.AsRef<float>(_VerticalFOVOffset!.Value);
+        }
     }
-  }
 
 
 }

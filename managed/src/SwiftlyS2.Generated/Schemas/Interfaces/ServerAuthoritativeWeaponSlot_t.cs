@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ServerAuthoritativeWeaponSlot_t : ISchemaClass<ServerAuthoritativeWeaponSlot_t> {
+public partial interface ServerAuthoritativeWeaponSlot_t : ISchemaClass<ServerAuthoritativeWeaponSlot_t>
+{
+    static ServerAuthoritativeWeaponSlot_t ISchemaClass<ServerAuthoritativeWeaponSlot_t>.From(nint handle) => new ServerAuthoritativeWeaponSlot_tImpl(handle);
+    static int ISchemaClass<ServerAuthoritativeWeaponSlot_t>.Size => 56;
+    static string? ISchemaClass<ServerAuthoritativeWeaponSlot_t>.ClassName => null;
 
-  static ServerAuthoritativeWeaponSlot_t ISchemaClass<ServerAuthoritativeWeaponSlot_t>.From(nint handle) => new ServerAuthoritativeWeaponSlot_tImpl(handle);
-  static int ISchemaClass<ServerAuthoritativeWeaponSlot_t>.Size => 56;
-  static string? ISchemaClass<ServerAuthoritativeWeaponSlot_t>.ClassName => null;
 
-  
-  public ref ushort Class { get; }
-  
-  public ref ushort Slot { get; }
-  
-  public ref ushort ItemDefIdx { get; }
+    public ref ushort Class { get; }
 
-  public void ClassUpdated();
-  public void SlotUpdated();
-  public void ItemDefIdxUpdated();
+    public ref ushort Slot { get; }
+
+    public ref ushort ItemDefIdx { get; }
+
+    public void ClassUpdated();
+    public void SlotUpdated();
+    public void ItemDefIdxUpdated();
 }

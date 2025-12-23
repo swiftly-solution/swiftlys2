@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatAngleMathNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatAngleMathNode__CDefinition> {
+public partial interface CNmFloatAngleMathNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatAngleMathNode__CDefinition>
+{
+    static CNmFloatAngleMathNode__CDefinition ISchemaClass<CNmFloatAngleMathNode__CDefinition>.From(nint handle) => new CNmFloatAngleMathNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFloatAngleMathNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmFloatAngleMathNode__CDefinition>.ClassName => null;
 
-  static CNmFloatAngleMathNode__CDefinition ISchemaClass<CNmFloatAngleMathNode__CDefinition>.From(nint handle) => new CNmFloatAngleMathNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFloatAngleMathNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmFloatAngleMathNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref CNmFloatAngleMathNode__Operation_t Operation { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    public ref CNmFloatAngleMathNode__Operation_t Operation { get; }
 
 
 }

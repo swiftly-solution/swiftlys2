@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_CPOffsetToPercentageBetweenCPs : CParticleFunctionOperator, ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs> {
+public partial interface C_OP_CPOffsetToPercentageBetweenCPs : CParticleFunctionOperator, ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs>
+{
+    static C_OP_CPOffsetToPercentageBetweenCPs ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs>.From(nint handle) => new C_OP_CPOffsetToPercentageBetweenCPsImpl(handle);
+    static int ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs>.Size => 512;
+    static string? ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs>.ClassName => null;
 
-  static C_OP_CPOffsetToPercentageBetweenCPs ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs>.From(nint handle) => new C_OP_CPOffsetToPercentageBetweenCPsImpl(handle);
-  static int ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs>.Size => 512;
-  static string? ISchemaClass<C_OP_CPOffsetToPercentageBetweenCPs>.ClassName => null;
 
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float InputBias { get; }
-  
-  public ref int StartCP { get; }
-  
-  public ref int EndCP { get; }
-  
-  public ref int OffsetCP { get; }
-  
-  public ref int OuputCP { get; }
-  
-  public ref int InputCP { get; }
-  
-  public ref bool RadialCheck { get; }
-  
-  public ref bool ScaleOffset { get; }
-  
-  public ref Vector Offset { get; }
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float InputBias { get; }
+
+    public ref int StartCP { get; }
+
+    public ref int EndCP { get; }
+
+    public ref int OffsetCP { get; }
+
+    public ref int OuputCP { get; }
+
+    public ref int InputCP { get; }
+
+    public ref bool RadialCheck { get; }
+
+    public ref bool ScaleOffset { get; }
+
+    public ref Vector Offset { get; }
 
 
 }

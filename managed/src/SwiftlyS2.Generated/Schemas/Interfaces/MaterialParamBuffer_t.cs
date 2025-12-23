@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface MaterialParamBuffer_t : MaterialParam_t, ISchemaClass<MaterialParamBuffer_t> {
+public partial interface MaterialParamBuffer_t : MaterialParam_t, ISchemaClass<MaterialParamBuffer_t>
+{
+    static MaterialParamBuffer_t ISchemaClass<MaterialParamBuffer_t>.From(nint handle) => new MaterialParamBuffer_tImpl(handle);
+    static int ISchemaClass<MaterialParamBuffer_t>.Size => 24;
+    static string? ISchemaClass<MaterialParamBuffer_t>.ClassName => null;
 
-  static MaterialParamBuffer_t ISchemaClass<MaterialParamBuffer_t>.From(nint handle) => new MaterialParamBuffer_tImpl(handle);
-  static int ISchemaClass<MaterialParamBuffer_t>.Size => 24;
-  static string? ISchemaClass<MaterialParamBuffer_t>.ClassName => null;
 
-  
-  public ref CUtlBinaryBlock Value { get; }
+    public ref CUtlBinaryBlock Value { get; }
 
 
 }

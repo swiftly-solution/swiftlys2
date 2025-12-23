@@ -352,6 +352,22 @@ public interface IPlayer : IEquatable<IPlayer>
     public Task TakeDamageAsync( CTakeDamageInfo damageInfo );
 
     /// <summary>
+    /// Applies damage to the entity based on the specified damage information.
+    /// 
+    /// Thread unsafe, use async variant instead for non-main thread context.
+    /// </summary>
+    /// <param name="damage">The amount of damage to apply.</param>
+    /// <param name="damageType">The type of damage to apply.</param>
+    [ThreadUnsafe]
+    public void TakeDamage( float damage, DamageTypes_t damageType, CBaseEntity? inflictor = null, CBaseEntity? attacker = null, CBaseEntity? ability = null );
+    
+    /// <summary>
+    /// Applies damage to the entity based on the specified damage information asynchronously.
+    /// </summary>
+    /// <param name="damage">The amount of damage to apply.</param>
+    /// <param name="damageType">The type of damage to apply.</param>
+    public Task TakeDamageAsync( float damage, DamageTypes_t damageType, CBaseEntity? inflictor = null, CBaseEntity? attacker = null, CBaseEntity? ability = null );
+
     /// Teleports the entity to the specified position, orientation, and velocity.
     /// 
     /// Thread unsafe, use async variant instead for non-main thread context.

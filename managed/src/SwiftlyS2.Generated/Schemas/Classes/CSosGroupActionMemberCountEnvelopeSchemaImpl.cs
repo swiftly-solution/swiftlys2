@@ -6,104 +6,84 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSosGroupActionMemberCountEnvelopeSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionMemberCountEnvelopeSchema {
+internal partial class CSosGroupActionMemberCountEnvelopeSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionMemberCountEnvelopeSchema
+{
+    public CSosGroupActionMemberCountEnvelopeSchemaImpl(nint handle) : base(handle) { }
 
-  public CSosGroupActionMemberCountEnvelopeSchemaImpl(nint handle) : base(handle) {
-  }
+    private static nint? _BaseCountOffset;
 
-  private static nint? _BaseCountOffset;
-
-  public ref int BaseCount {
-    get {
-      if (_BaseCountOffset == null) {
-        _BaseCountOffset = Schema.GetOffset(0x5C85206CE09342E3);
-      }
-      return ref _Handle.AsRef<int>(_BaseCountOffset!.Value);
+    public ref int BaseCount {
+        get {
+            _BaseCountOffset = _BaseCountOffset ?? Schema.GetOffset(0x5C85206CE09342E3);
+            return ref _Handle.AsRef<int>(_BaseCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetCountOffset;
+    private static nint? _TargetCountOffset;
 
-  public ref int TargetCount {
-    get {
-      if (_TargetCountOffset == null) {
-        _TargetCountOffset = Schema.GetOffset(0x5C85206CFEA8571B);
-      }
-      return ref _Handle.AsRef<int>(_TargetCountOffset!.Value);
+    public ref int TargetCount {
+        get {
+            _TargetCountOffset = _TargetCountOffset ?? Schema.GetOffset(0x5C85206CFEA8571B);
+            return ref _Handle.AsRef<int>(_TargetCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _BaseValueOffset;
+    private static nint? _BaseValueOffset;
 
-  public ref float BaseValue {
-    get {
-      if (_BaseValueOffset == null) {
-        _BaseValueOffset = Schema.GetOffset(0x5C85206CB5B71A9B);
-      }
-      return ref _Handle.AsRef<float>(_BaseValueOffset!.Value);
+    public ref float BaseValue {
+        get {
+            _BaseValueOffset = _BaseValueOffset ?? Schema.GetOffset(0x5C85206CB5B71A9B);
+            return ref _Handle.AsRef<float>(_BaseValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetValueOffset;
+    private static nint? _TargetValueOffset;
 
-  public ref float TargetValue {
-    get {
-      if (_TargetValueOffset == null) {
-        _TargetValueOffset = Schema.GetOffset(0x5C85206C1584D0BB);
-      }
-      return ref _Handle.AsRef<float>(_TargetValueOffset!.Value);
+    public ref float TargetValue {
+        get {
+            _TargetValueOffset = _TargetValueOffset ?? Schema.GetOffset(0x5C85206C1584D0BB);
+            return ref _Handle.AsRef<float>(_TargetValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttackOffset;
+    private static nint? _AttackOffset;
 
-  public ref float Attack {
-    get {
-      if (_AttackOffset == null) {
-        _AttackOffset = Schema.GetOffset(0x5C85206C0A6A5BE7);
-      }
-      return ref _Handle.AsRef<float>(_AttackOffset!.Value);
+    public ref float Attack {
+        get {
+            _AttackOffset = _AttackOffset ?? Schema.GetOffset(0x5C85206C0A6A5BE7);
+            return ref _Handle.AsRef<float>(_AttackOffset!.Value);
+        }
     }
-  }
-  private static nint? _DecayOffset;
+    private static nint? _DecayOffset;
 
-  public ref float Decay {
-    get {
-      if (_DecayOffset == null) {
-        _DecayOffset = Schema.GetOffset(0x5C85206CE24ABC67);
-      }
-      return ref _Handle.AsRef<float>(_DecayOffset!.Value);
+    public ref float Decay {
+        get {
+            _DecayOffset = _DecayOffset ?? Schema.GetOffset(0x5C85206CE24ABC67);
+            return ref _Handle.AsRef<float>(_DecayOffset!.Value);
+        }
     }
-  }
-  private static nint? _ResultVarNameOffset;
+    private static nint? _ResultVarNameOffset;
 
-  public string ResultVarName {
-    get {
-      if (_ResultVarNameOffset == null) {
-        _ResultVarNameOffset = Schema.GetOffset(0x5C85206CF566E926);
-      }
-      var ptr = _Handle.Read<nint>(_ResultVarNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ResultVarNameOffset == null) {
-        _ResultVarNameOffset = Schema.GetOffset(0x5C85206CF566E926);
-      }
-      Schema.SetString(_Handle, _ResultVarNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _SaveToGroupOffset;
+    public string ResultVarName {
+        get {
+            _ResultVarNameOffset = _ResultVarNameOffset ?? Schema.GetOffset(0x5C85206CF566E926);
+            return Schema.GetString(_Handle.Read<nint>(_ResultVarNameOffset!.Value));
+        }
+        set {
+            _ResultVarNameOffset = _ResultVarNameOffset ?? Schema.GetOffset(0x5C85206CF566E926);
+            Schema.SetString(_Handle, _ResultVarNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _SaveToGroupOffset;
 
-  public ref bool SaveToGroup {
-    get {
-      if (_SaveToGroupOffset == null) {
-        _SaveToGroupOffset = Schema.GetOffset(0x5C85206C6ED720F8);
-      }
-      return ref _Handle.AsRef<bool>(_SaveToGroupOffset!.Value);
+    public ref bool SaveToGroup {
+        get {
+            _SaveToGroupOffset = _SaveToGroupOffset ?? Schema.GetOffset(0x5C85206C6ED720F8);
+            return ref _Handle.AsRef<bool>(_SaveToGroupOffset!.Value);
+        }
     }
-  }
 
 
 }

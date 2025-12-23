@@ -8,34 +8,34 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapAverageHitboxSpeedtoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP> {
+public partial interface C_OP_RemapAverageHitboxSpeedtoCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>
+{
+    static C_OP_RemapAverageHitboxSpeedtoCP ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.From(nint handle) => new C_OP_RemapAverageHitboxSpeedtoCPImpl(handle);
+    static int ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.Size => 3816;
+    static string? ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.ClassName => null;
 
-  static C_OP_RemapAverageHitboxSpeedtoCP ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.From(nint handle) => new C_OP_RemapAverageHitboxSpeedtoCPImpl(handle);
-  static int ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.Size => 3816;
-  static string? ISchemaClass<C_OP_RemapAverageHitboxSpeedtoCP>.ClassName => null;
 
-  
-  public ref int InControlPointNumber { get; }
-  
-  public ref int OutControlPointNumber { get; }
-  
-  public ref int Field { get; }
-  
-  public ref ParticleHitboxDataSelection_t HitboxDataType { get; }
-  
-  public CParticleCollectionFloatInput InputMin { get; }
-  
-  public CParticleCollectionFloatInput InputMax { get; }
-  
-  public CParticleCollectionFloatInput OutputMin { get; }
-  
-  public CParticleCollectionFloatInput OutputMax { get; }
-  
-  public ref int HeightControlPointNumber { get; }
-  
-  public CParticleCollectionVecInput ComparisonVelocity { get; }
-  
-  public string HitboxSetName { get; set; }
+    public ref int InControlPointNumber { get; }
+
+    public ref int OutControlPointNumber { get; }
+
+    public ref int Field { get; }
+
+    public ref ParticleHitboxDataSelection_t HitboxDataType { get; }
+
+    public CParticleCollectionFloatInput InputMin { get; }
+
+    public CParticleCollectionFloatInput InputMax { get; }
+
+    public CParticleCollectionFloatInput OutputMin { get; }
+
+    public CParticleCollectionFloatInput OutputMax { get; }
+
+    public ref int HeightControlPointNumber { get; }
+
+    public CParticleCollectionVecInput ComparisonVelocity { get; }
+
+    public string HitboxSetName { get; set; }
 
 
 }

@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNavLinkAreaEntity : CPointEntity, ISchemaClass<CNavLinkAreaEntity> {
+public partial interface CNavLinkAreaEntity : CPointEntity, ISchemaClass<CNavLinkAreaEntity>
+{
+    static CNavLinkAreaEntity ISchemaClass<CNavLinkAreaEntity>.From(nint handle) => new CNavLinkAreaEntityImpl(handle);
+    static int ISchemaClass<CNavLinkAreaEntity>.Size => 1472;
+    static string? ISchemaClass<CNavLinkAreaEntity>.ClassName => "ai_nav_link_area";
 
-  static CNavLinkAreaEntity ISchemaClass<CNavLinkAreaEntity>.From(nint handle) => new CNavLinkAreaEntityImpl(handle);
-  static int ISchemaClass<CNavLinkAreaEntity>.Size => 1472;
-  static string? ISchemaClass<CNavLinkAreaEntity>.ClassName => "ai_nav_link_area";
 
-  
-  public ref float Width { get; }
-  
-  public ref Vector LocatorOffset { get; }
-  
-  public ref QAngle LocatorAnglesOffset { get; }
-  
-  public string StrMovementForward { get; set; }
-  
-  public string StrMovementReverse { get; set; }
-  
-  public ref bool Enabled { get; }
-  
-  public ref bool AllowCrossMovableConnections { get; }
-  
-  public string StrFilterName { get; set; }
-  
-  public ref CHandle<CBaseFilter> Filter { get; }
-  
-  public CEntityIOOutput OnNavLinkStart { get; }
-  
-  public CEntityIOOutput OnNavLinkFinish { get; }
-  
-  public ref bool IsTerminus { get; }
-  
-  public ref int Splits { get; }
+    public ref float Width { get; }
+
+    public ref Vector LocatorOffset { get; }
+
+    public ref QAngle LocatorAnglesOffset { get; }
+
+    public string StrMovementForward { get; set; }
+
+    public string StrMovementReverse { get; set; }
+
+    public ref bool Enabled { get; }
+
+    public ref bool AllowCrossMovableConnections { get; }
+
+    public string StrFilterName { get; set; }
+
+    public ref CHandle<CBaseFilter> Filter { get; }
+
+    public ref CEntityIOOutput OnNavLinkStart { get; }
+
+    public ref CEntityIOOutput OnNavLinkFinish { get; }
+
+    public ref bool IsTerminus { get; }
+
+    public ref int Splits { get; }
 
 
 }

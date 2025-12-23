@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EngineCountdownTimer : ISchemaClass<EngineCountdownTimer> {
+public partial interface EngineCountdownTimer : ISchemaClass<EngineCountdownTimer>
+{
+    static EngineCountdownTimer ISchemaClass<EngineCountdownTimer>.From(nint handle) => new EngineCountdownTimerImpl(handle);
+    static int ISchemaClass<EngineCountdownTimer>.Size => 24;
+    static string? ISchemaClass<EngineCountdownTimer>.ClassName => null;
 
-  static EngineCountdownTimer ISchemaClass<EngineCountdownTimer>.From(nint handle) => new EngineCountdownTimerImpl(handle);
-  static int ISchemaClass<EngineCountdownTimer>.Size => 24;
-  static string? ISchemaClass<EngineCountdownTimer>.ClassName => null;
 
-  
-  public ref float Duration { get; }
-  
-  public ref float Timestamp { get; }
-  
-  public ref float Timescale { get; }
+    public ref float Duration { get; }
 
-  public void DurationUpdated();
-  public void TimestampUpdated();
-  public void TimescaleUpdated();
+    public ref float Timestamp { get; }
+
+    public ref float Timescale { get; }
+
+    public void DurationUpdated();
+    public void TimestampUpdated();
+    public void TimescaleUpdated();
 }

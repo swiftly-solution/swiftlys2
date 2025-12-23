@@ -37,6 +37,8 @@ public record class MenuConfiguration
     /// </summary>
     public bool PlaySound { get; set; } = true;
 
+    public bool HideTitleItemCount { get; set; } = false;
+
     /// <summary>
     /// Maximum number of menu options displayed on screen at once.
     /// </summary>
@@ -289,7 +291,23 @@ public interface IMenuAPI : IDisposable
     /// <summary>
     /// Fired when the selection pointer is hovering over an option.
     /// </summary>
+    /// <remarks>
+    /// This event is fired once per render frame.
+    /// </remarks>
     public event EventHandler<MenuEventArgs>? OptionHovering;
+
+    /// <summary>
+    /// Fired when a different option is hovered.
+    /// </summary>
+    /// <remarks>
+    /// This event is only fired when the hovered option changes.
+    /// </remarks>
+    public event EventHandler<MenuEventArgs>? OptionHovered;
+
+    /// <summary>
+    /// Fired when a menu option is selected (activated) by the player.
+    /// </summary>
+    public event EventHandler<MenuEventArgs>? OptionSelected;
 
     // /// <summary>
     // /// Fired when an option is about to enter the visible viewport.

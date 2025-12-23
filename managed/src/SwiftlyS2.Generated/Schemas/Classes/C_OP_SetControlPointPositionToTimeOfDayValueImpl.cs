@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetControlPointPositionToTimeOfDayValueImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointPositionToTimeOfDayValue {
+internal partial class C_OP_SetControlPointPositionToTimeOfDayValueImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointPositionToTimeOfDayValue
+{
+    public C_OP_SetControlPointPositionToTimeOfDayValueImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetControlPointPositionToTimeOfDayValueImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ControlPointNumberOffset;
 
-  private static nint? _ControlPointNumberOffset;
-
-  public ref int ControlPointNumber {
-    get {
-      if (_ControlPointNumberOffset == null) {
-        _ControlPointNumberOffset = Schema.GetOffset(0x976831CB3F31A6BD);
-      }
-      return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
-    }
-  }
-  private static nint? _TimeOfDayParameterOffset;
-
-  public string TimeOfDayParameter {
-    get {
-        if (_TimeOfDayParameterOffset == null) {
-            _TimeOfDayParameterOffset = Schema.GetOffset(0x976831CB5B5E9DD3);
+    public ref int ControlPointNumber {
+        get {
+            _ControlPointNumberOffset = _ControlPointNumberOffset ?? Schema.GetOffset(0x976831CB3F31A6BD);
+            return ref _Handle.AsRef<int>(_ControlPointNumberOffset!.Value);
         }
-        var ptr = _Handle + _TimeOfDayParameterOffset!.Value;
-        return Schema.GetString(ptr);
     }
-    set {
-        if (_TimeOfDayParameterOffset == null) {
-            _TimeOfDayParameterOffset = Schema.GetOffset(0x976831CB5B5E9DD3);
-        }
-        Schema.SetFixedString(_Handle, _TimeOfDayParameterOffset!.Value, value, 128);
-    }
-  } 
-  private static nint? _DefaultValueOffset;
+    private static nint? _TimeOfDayParameterOffset;
 
-  public ref Vector DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0x976831CB0A18BFDF);
-      }
-      return ref _Handle.AsRef<Vector>(_DefaultValueOffset!.Value);
+    public string TimeOfDayParameter {
+        get {
+            _TimeOfDayParameterOffset = _TimeOfDayParameterOffset ?? Schema.GetOffset(0x976831CB5B5E9DD3);
+            return Schema.GetString(_Handle + _TimeOfDayParameterOffset!.Value);
+        }
+        set {
+            _TimeOfDayParameterOffset = _TimeOfDayParameterOffset ?? Schema.GetOffset(0x976831CB5B5E9DD3);
+            Schema.SetFixedString(_Handle, _TimeOfDayParameterOffset!.Value, value, 128);
+        }
+    } 
+    private static nint? _DefaultValueOffset;
+
+    public ref Vector DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x976831CB0A18BFDF);
+            return ref _Handle.AsRef<Vector>(_DefaultValueOffset!.Value);
+        }
     }
-  }
 
 
 }

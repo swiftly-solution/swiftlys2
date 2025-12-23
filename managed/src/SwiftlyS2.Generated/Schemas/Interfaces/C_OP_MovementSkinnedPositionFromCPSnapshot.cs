@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_MovementSkinnedPositionFromCPSnapshot : CParticleFunctionOperator, ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot> {
+public partial interface C_OP_MovementSkinnedPositionFromCPSnapshot : CParticleFunctionOperator, ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>
+{
+    static C_OP_MovementSkinnedPositionFromCPSnapshot ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.From(nint handle) => new C_OP_MovementSkinnedPositionFromCPSnapshotImpl(handle);
+    static int ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.Size => 2328;
+    static string? ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.ClassName => null;
 
-  static C_OP_MovementSkinnedPositionFromCPSnapshot ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.From(nint handle) => new C_OP_MovementSkinnedPositionFromCPSnapshotImpl(handle);
-  static int ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.Size => 2328;
-  static string? ISchemaClass<C_OP_MovementSkinnedPositionFromCPSnapshot>.ClassName => null;
 
-  
-  public ref int SnapshotControlPointNumber { get; }
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref bool Random { get; }
-  
-  public ref int RandomSeed { get; }
-  
-  public ref bool SetNormal { get; }
-  
-  public ref bool SetRadius { get; }
-  
-  public ref SnapshotIndexType_t IndexType { get; }
-  
-  public CPerParticleFloatInput ReadIndex { get; }
-  
-  public CParticleCollectionFloatInput Increment { get; }
-  
-  public CParticleCollectionFloatInput FullLoopIncrement { get; }
-  
-  public CParticleCollectionFloatInput SnapShotStartPoint { get; }
-  
-  public CPerParticleFloatInput Interpolation { get; }
+    public ref int SnapshotControlPointNumber { get; }
+
+    public ref int ControlPointNumber { get; }
+
+    public ref bool Random { get; }
+
+    public ref int RandomSeed { get; }
+
+    public ref bool SetNormal { get; }
+
+    public ref bool SetRadius { get; }
+
+    public ref SnapshotIndexType_t IndexType { get; }
+
+    public CPerParticleFloatInput ReadIndex { get; }
+
+    public CParticleCollectionFloatInput Increment { get; }
+
+    public CParticleCollectionFloatInput FullLoopIncrement { get; }
+
+    public CParticleCollectionFloatInput SnapShotStartPoint { get; }
+
+    public CPerParticleFloatInput Interpolation { get; }
 
 
 }

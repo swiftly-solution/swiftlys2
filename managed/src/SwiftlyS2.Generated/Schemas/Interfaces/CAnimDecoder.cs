@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimDecoder : ISchemaClass<CAnimDecoder> {
+public partial interface CAnimDecoder : ISchemaClass<CAnimDecoder>
+{
+    static CAnimDecoder ISchemaClass<CAnimDecoder>.From(nint handle) => new CAnimDecoderImpl(handle);
+    static int ISchemaClass<CAnimDecoder>.Size => 24;
+    static string? ISchemaClass<CAnimDecoder>.ClassName => null;
 
-  static CAnimDecoder ISchemaClass<CAnimDecoder>.From(nint handle) => new CAnimDecoderImpl(handle);
-  static int ISchemaClass<CAnimDecoder>.Size => 24;
-  static string? ISchemaClass<CAnimDecoder>.ClassName => null;
 
-  
-  public ref CBufferString Name { get; }
-  
-  public ref int Version { get; }
-  
-  public ref int Type { get; }
+    public ref CBufferString Name { get; }
+
+    public ref int Version { get; }
+
+    public ref int Type { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSkillDamage : ISchemaClass<CSkillDamage> {
+public partial interface CSkillDamage : ISchemaClass<CSkillDamage>
+{
+    static CSkillDamage ISchemaClass<CSkillDamage>.From(nint handle) => new CSkillDamageImpl(handle);
+    static int ISchemaClass<CSkillDamage>.Size => 24;
+    static string? ISchemaClass<CSkillDamage>.ClassName => null;
 
-  static CSkillDamage ISchemaClass<CSkillDamage>.From(nint handle) => new CSkillDamageImpl(handle);
-  static int ISchemaClass<CSkillDamage>.Size => 24;
-  static string? ISchemaClass<CSkillDamage>.ClassName => null;
 
-  
-  public CSkillFloat Damage { get; }
-  
-  public ref float NPCDamageScalarVsNPC { get; }
-  
-  public ref float PhysicsForceDamage { get; }
+    public CSkillFloat Damage { get; }
+
+    public ref float NPCDamageScalarVsNPC { get; }
+
+    public ref float PhysicsForceDamage { get; }
 
 
 }

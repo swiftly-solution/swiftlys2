@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatRemapNode__RemapRange_t : ISchemaClass<CNmFloatRemapNode__RemapRange_t> {
+public partial interface CNmFloatRemapNode__RemapRange_t : ISchemaClass<CNmFloatRemapNode__RemapRange_t>
+{
+    static CNmFloatRemapNode__RemapRange_t ISchemaClass<CNmFloatRemapNode__RemapRange_t>.From(nint handle) => new CNmFloatRemapNode__RemapRange_tImpl(handle);
+    static int ISchemaClass<CNmFloatRemapNode__RemapRange_t>.Size => 8;
+    static string? ISchemaClass<CNmFloatRemapNode__RemapRange_t>.ClassName => null;
 
-  static CNmFloatRemapNode__RemapRange_t ISchemaClass<CNmFloatRemapNode__RemapRange_t>.From(nint handle) => new CNmFloatRemapNode__RemapRange_tImpl(handle);
-  static int ISchemaClass<CNmFloatRemapNode__RemapRange_t>.Size => 8;
-  static string? ISchemaClass<CNmFloatRemapNode__RemapRange_t>.ClassName => null;
 
-  
-  public ref float Begin { get; }
-  
-  public ref float End { get; }
+    public ref float Begin { get; }
+
+    public ref float End { get; }
 
 
 }

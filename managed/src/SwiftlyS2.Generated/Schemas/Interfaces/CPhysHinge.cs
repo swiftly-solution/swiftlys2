@@ -8,48 +8,48 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysHinge : CPhysConstraint, ISchemaClass<CPhysHinge> {
+public partial interface CPhysHinge : CPhysConstraint, ISchemaClass<CPhysHinge>
+{
+    static CPhysHinge ISchemaClass<CPhysHinge>.From(nint handle) => new CPhysHingeImpl(handle);
+    static int ISchemaClass<CPhysHinge>.Size => 1808;
+    static string? ISchemaClass<CPhysHinge>.ClassName => "phys_hinge";
 
-  static CPhysHinge ISchemaClass<CPhysHinge>.From(nint handle) => new CPhysHingeImpl(handle);
-  static int ISchemaClass<CPhysHinge>.Size => 1808;
-  static string? ISchemaClass<CPhysHinge>.ClassName => "phys_hinge";
 
-  
-  public ConstraintSoundInfo SoundInfo { get; }
-  
-  public CEntityIOOutput NotifyMinLimitReached { get; }
-  
-  public CEntityIOOutput NotifyMaxLimitReached { get; }
-  
-  public ref bool AtMinLimit { get; }
-  
-  public ref bool AtMaxLimit { get; }
-  
-  public constraint_hingeparams_t Hinge { get; }
-  
-  public ref float HingeFriction { get; }
-  
-  public ref float SystemLoadScale { get; }
-  
-  public ref bool IsAxisLocal { get; }
-  
-  public ref float MinRotation { get; }
-  
-  public ref float MaxRotation { get; }
-  
-  public ref float InitialRotation { get; }
-  
-  public ref float MotorFrequency { get; }
-  
-  public ref float MotorDampingRatio { get; }
-  
-  public ref float AngleSpeed { get; }
-  
-  public ref float AngleSpeedThreshold { get; }
-  
-  public CEntityIOOutput OnStartMoving { get; }
-  
-  public CEntityIOOutput OnStopMoving { get; }
+    public ConstraintSoundInfo SoundInfo { get; }
+
+    public ref CEntityIOOutput NotifyMinLimitReached { get; }
+
+    public ref CEntityIOOutput NotifyMaxLimitReached { get; }
+
+    public ref bool AtMinLimit { get; }
+
+    public ref bool AtMaxLimit { get; }
+
+    public constraint_hingeparams_t Hinge { get; }
+
+    public ref float HingeFriction { get; }
+
+    public ref float SystemLoadScale { get; }
+
+    public ref bool IsAxisLocal { get; }
+
+    public ref float MinRotation { get; }
+
+    public ref float MaxRotation { get; }
+
+    public ref float InitialRotation { get; }
+
+    public ref float MotorFrequency { get; }
+
+    public ref float MotorDampingRatio { get; }
+
+    public ref float AngleSpeed { get; }
+
+    public ref float AngleSpeedThreshold { get; }
+
+    public ref CEntityIOOutput OnStartMoving { get; }
+
+    public ref CEntityIOOutput OnStopMoving { get; }
 
 
 }

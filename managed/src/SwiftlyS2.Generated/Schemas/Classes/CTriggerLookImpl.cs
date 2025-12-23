@@ -6,172 +6,137 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTriggerLookImpl : CTriggerOnceImpl, CTriggerLook {
+internal partial class CTriggerLookImpl : CTriggerOnceImpl, CTriggerLook
+{
+    public CTriggerLookImpl(nint handle) : base(handle) { }
 
-  public CTriggerLookImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LookTargetOffset;
 
-  private static nint? _LookTargetOffset;
-
-  public ref CHandle<CBaseEntity> LookTarget {
-    get {
-      if (_LookTargetOffset == null) {
-        _LookTargetOffset = Schema.GetOffset(0x400CA6913361F745);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LookTargetOffset!.Value);
+    public ref CHandle<CBaseEntity> LookTarget {
+        get {
+            _LookTargetOffset = _LookTargetOffset ?? Schema.GetOffset(0x400CA6913361F745);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_LookTargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOfViewOffset;
+    private static nint? _FieldOfViewOffset;
 
-  public ref float FieldOfView {
-    get {
-      if (_FieldOfViewOffset == null) {
-        _FieldOfViewOffset = Schema.GetOffset(0x400CA69157C8F26D);
-      }
-      return ref _Handle.AsRef<float>(_FieldOfViewOffset!.Value);
+    public ref float FieldOfView {
+        get {
+            _FieldOfViewOffset = _FieldOfViewOffset ?? Schema.GetOffset(0x400CA69157C8F26D);
+            return ref _Handle.AsRef<float>(_FieldOfViewOffset!.Value);
+        }
     }
-  }
-  private static nint? _LookTimeOffset;
+    private static nint? _LookTimeOffset;
 
-  public ref float LookTime {
-    get {
-      if (_LookTimeOffset == null) {
-        _LookTimeOffset = Schema.GetOffset(0x400CA69104D9B055);
-      }
-      return ref _Handle.AsRef<float>(_LookTimeOffset!.Value);
+    public ref float LookTime {
+        get {
+            _LookTimeOffset = _LookTimeOffset ?? Schema.GetOffset(0x400CA69104D9B055);
+            return ref _Handle.AsRef<float>(_LookTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LookTimeTotalOffset;
+    private static nint? _LookTimeTotalOffset;
 
-  public ref float LookTimeTotal {
-    get {
-      if (_LookTimeTotalOffset == null) {
-        _LookTimeTotalOffset = Schema.GetOffset(0x400CA6910EF1464D);
-      }
-      return ref _Handle.AsRef<float>(_LookTimeTotalOffset!.Value);
+    public ref float LookTimeTotal {
+        get {
+            _LookTimeTotalOffset = _LookTimeTotalOffset ?? Schema.GetOffset(0x400CA6910EF1464D);
+            return ref _Handle.AsRef<float>(_LookTimeTotalOffset!.Value);
+        }
     }
-  }
-  private static nint? _LookTimeLastOffset;
+    private static nint? _LookTimeLastOffset;
 
-  public GameTime_t LookTimeLast {
-    get {
-      if (_LookTimeLastOffset == null) {
-        _LookTimeLastOffset = Schema.GetOffset(0x400CA691C3304509);
-      }
-      return new GameTime_tImpl(_Handle + _LookTimeLastOffset!.Value);
+    public GameTime_t LookTimeLast {
+        get {
+            _LookTimeLastOffset = _LookTimeLastOffset ?? Schema.GetOffset(0x400CA691C3304509);
+            return new GameTime_tImpl(_Handle + _LookTimeLastOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeoutDurationOffset;
+    private static nint? _TimeoutDurationOffset;
 
-  public ref float TimeoutDuration {
-    get {
-      if (_TimeoutDurationOffset == null) {
-        _TimeoutDurationOffset = Schema.GetOffset(0x400CA6919AF6CDFE);
-      }
-      return ref _Handle.AsRef<float>(_TimeoutDurationOffset!.Value);
+    public ref float TimeoutDuration {
+        get {
+            _TimeoutDurationOffset = _TimeoutDurationOffset ?? Schema.GetOffset(0x400CA6919AF6CDFE);
+            return ref _Handle.AsRef<float>(_TimeoutDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _TimeoutFiredOffset;
+    private static nint? _TimeoutFiredOffset;
 
-  public ref bool TimeoutFired {
-    get {
-      if (_TimeoutFiredOffset == null) {
-        _TimeoutFiredOffset = Schema.GetOffset(0x400CA69169DF01E8);
-      }
-      return ref _Handle.AsRef<bool>(_TimeoutFiredOffset!.Value);
+    public ref bool TimeoutFired {
+        get {
+            _TimeoutFiredOffset = _TimeoutFiredOffset ?? Schema.GetOffset(0x400CA69169DF01E8);
+            return ref _Handle.AsRef<bool>(_TimeoutFiredOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsLookingOffset;
+    private static nint? _IsLookingOffset;
 
-  public ref bool IsLooking {
-    get {
-      if (_IsLookingOffset == null) {
-        _IsLookingOffset = Schema.GetOffset(0x400CA691983E8E2A);
-      }
-      return ref _Handle.AsRef<bool>(_IsLookingOffset!.Value);
+    public ref bool IsLooking {
+        get {
+            _IsLookingOffset = _IsLookingOffset ?? Schema.GetOffset(0x400CA691983E8E2A);
+            return ref _Handle.AsRef<bool>(_IsLookingOffset!.Value);
+        }
     }
-  }
-  private static nint? _B2DFOVOffset;
+    private static nint? _B2DFOVOffset;
 
-  public ref bool B2DFOV {
-    get {
-      if (_B2DFOVOffset == null) {
-        _B2DFOVOffset = Schema.GetOffset(0x400CA6919C4430D2);
-      }
-      return ref _Handle.AsRef<bool>(_B2DFOVOffset!.Value);
+    public ref bool B2DFOV {
+        get {
+            _B2DFOVOffset = _B2DFOVOffset ?? Schema.GetOffset(0x400CA6919C4430D2);
+            return ref _Handle.AsRef<bool>(_B2DFOVOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseVelocityOffset;
+    private static nint? _UseVelocityOffset;
 
-  public ref bool UseVelocity {
-    get {
-      if (_UseVelocityOffset == null) {
-        _UseVelocityOffset = Schema.GetOffset(0x400CA6915E806BAF);
-      }
-      return ref _Handle.AsRef<bool>(_UseVelocityOffset!.Value);
+    public ref bool UseVelocity {
+        get {
+            _UseVelocityOffset = _UseVelocityOffset ?? Schema.GetOffset(0x400CA6915E806BAF);
+            return ref _Handle.AsRef<bool>(_UseVelocityOffset!.Value);
+        }
     }
-  }
-  private static nint? _TestOcclusionOffset;
+    private static nint? _TestOcclusionOffset;
 
-  public ref bool TestOcclusion {
-    get {
-      if (_TestOcclusionOffset == null) {
-        _TestOcclusionOffset = Schema.GetOffset(0x400CA6912AB3E7C2);
-      }
-      return ref _Handle.AsRef<bool>(_TestOcclusionOffset!.Value);
+    public ref bool TestOcclusion {
+        get {
+            _TestOcclusionOffset = _TestOcclusionOffset ?? Schema.GetOffset(0x400CA6912AB3E7C2);
+            return ref _Handle.AsRef<bool>(_TestOcclusionOffset!.Value);
+        }
     }
-  }
-  private static nint? _TestAllVisibleOcclusionOffset;
+    private static nint? _TestAllVisibleOcclusionOffset;
 
-  public ref bool TestAllVisibleOcclusion {
-    get {
-      if (_TestAllVisibleOcclusionOffset == null) {
-        _TestAllVisibleOcclusionOffset = Schema.GetOffset(0x400CA691FBAABAEB);
-      }
-      return ref _Handle.AsRef<bool>(_TestAllVisibleOcclusionOffset!.Value);
+    public ref bool TestAllVisibleOcclusion {
+        get {
+            _TestAllVisibleOcclusionOffset = _TestAllVisibleOcclusionOffset ?? Schema.GetOffset(0x400CA691FBAABAEB);
+            return ref _Handle.AsRef<bool>(_TestAllVisibleOcclusionOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnTimeoutOffset;
+    private static nint? _OnTimeoutOffset;
 
-  public CEntityIOOutput OnTimeout {
-    get {
-      if (_OnTimeoutOffset == null) {
-        _OnTimeoutOffset = Schema.GetOffset(0x400CA691C5301603);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnTimeoutOffset!.Value);
+    public ref CEntityIOOutput OnTimeout {
+        get {
+            _OnTimeoutOffset = _OnTimeoutOffset ?? Schema.GetOffset(0x400CA691C5301603);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnTimeoutOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnStartLookOffset;
+    private static nint? _OnStartLookOffset;
 
-  public CEntityIOOutput OnStartLook {
-    get {
-      if (_OnStartLookOffset == null) {
-        _OnStartLookOffset = Schema.GetOffset(0x400CA6914E36D787);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnStartLookOffset!.Value);
+    public ref CEntityIOOutput OnStartLook {
+        get {
+            _OnStartLookOffset = _OnStartLookOffset ?? Schema.GetOffset(0x400CA6914E36D787);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartLookOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnEndLookOffset;
+    private static nint? _OnEndLookOffset;
 
-  public CEntityIOOutput OnEndLook {
-    get {
-      if (_OnEndLookOffset == null) {
-        _OnEndLookOffset = Schema.GetOffset(0x400CA6914D4626E6);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnEndLookOffset!.Value);
+    public ref CEntityIOOutput OnEndLook {
+        get {
+            _OnEndLookOffset = _OnEndLookOffset ?? Schema.GetOffset(0x400CA6914D4626E6);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEndLookOffset!.Value);
+        }
     }
-  }
 
-  public void TestOcclusionUpdated() {
-    Schema.Update(_Handle, 0x400CA6912AB3E7C2);
-  }
-  public void TestAllVisibleOcclusionUpdated() {
-    Schema.Update(_Handle, 0x400CA691FBAABAEB);
-  }
+    public void TestOcclusionUpdated() => Schema.Update(_Handle, 0x400CA6912AB3E7C2);
+    public void TestAllVisibleOcclusionUpdated() => Schema.Update(_Handle, 0x400CA691FBAABAEB);
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface constraint_axislimit_t : ISchemaClass<constraint_axislimit_t> {
+public partial interface constraint_axislimit_t : ISchemaClass<constraint_axislimit_t>
+{
+    static constraint_axislimit_t ISchemaClass<constraint_axislimit_t>.From(nint handle) => new constraint_axislimit_tImpl(handle);
+    static int ISchemaClass<constraint_axislimit_t>.Size => 16;
+    static string? ISchemaClass<constraint_axislimit_t>.ClassName => null;
 
-  static constraint_axislimit_t ISchemaClass<constraint_axislimit_t>.From(nint handle) => new constraint_axislimit_tImpl(handle);
-  static int ISchemaClass<constraint_axislimit_t>.Size => 16;
-  static string? ISchemaClass<constraint_axislimit_t>.ClassName => null;
 
-  
-  public ref float MinRotation { get; }
-  
-  public ref float MaxRotation { get; }
-  
-  public ref float MotorTargetAngSpeed { get; }
-  
-  public ref float MotorMaxTorque { get; }
+    public ref float MinRotation { get; }
+
+    public ref float MaxRotation { get; }
+
+    public ref float MotorTargetAngSpeed { get; }
+
+    public ref float MotorMaxTorque { get; }
 
 
 }

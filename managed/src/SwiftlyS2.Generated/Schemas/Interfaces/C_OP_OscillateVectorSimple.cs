@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_OscillateVectorSimple : CParticleFunctionOperator, ISchemaClass<C_OP_OscillateVectorSimple> {
+public partial interface C_OP_OscillateVectorSimple : CParticleFunctionOperator, ISchemaClass<C_OP_OscillateVectorSimple>
+{
+    static C_OP_OscillateVectorSimple ISchemaClass<C_OP_OscillateVectorSimple>.From(nint handle) => new C_OP_OscillateVectorSimpleImpl(handle);
+    static int ISchemaClass<C_OP_OscillateVectorSimple>.Size => 504;
+    static string? ISchemaClass<C_OP_OscillateVectorSimple>.ClassName => null;
 
-  static C_OP_OscillateVectorSimple ISchemaClass<C_OP_OscillateVectorSimple>.From(nint handle) => new C_OP_OscillateVectorSimpleImpl(handle);
-  static int ISchemaClass<C_OP_OscillateVectorSimple>.Size => 504;
-  static string? ISchemaClass<C_OP_OscillateVectorSimple>.ClassName => null;
 
-  
-  public ref Vector Rate { get; }
-  
-  public ref Vector Frequency { get; }
-  
-  public ParticleAttributeIndex_t Field { get; }
-  
-  public ref float OscMult { get; }
-  
-  public ref float OscAdd { get; }
-  
-  public ref bool Offset { get; }
+    public ref Vector Rate { get; }
+
+    public ref Vector Frequency { get; }
+
+    public ParticleAttributeIndex_t Field { get; }
+
+    public ref float OscMult { get; }
+
+    public ref float OscAdd { get; }
+
+    public ref bool Offset { get; }
 
 
 }

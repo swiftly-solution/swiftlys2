@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmEntityAttributeIntEventImpl : CNmEntityAttributeEventBaseImpl, CNmEntityAttributeIntEvent {
+internal partial class CNmEntityAttributeIntEventImpl : CNmEntityAttributeEventBaseImpl, CNmEntityAttributeIntEvent
+{
+    public CNmEntityAttributeIntEventImpl(nint handle) : base(handle) { }
 
-  public CNmEntityAttributeIntEventImpl(nint handle) : base(handle) {
-  }
+    private static nint? _IntValueOffset;
 
-  private static nint? _IntValueOffset;
-
-  public ref int IntValue {
-    get {
-      if (_IntValueOffset == null) {
-        _IntValueOffset = Schema.GetOffset(0x22C4DC17BF67A7DB);
-      }
-      return ref _Handle.AsRef<int>(_IntValueOffset!.Value);
+    public ref int IntValue {
+        get {
+            _IntValueOffset = _IntValueOffset ?? Schema.GetOffset(0x22C4DC17BF67A7DB);
+            return ref _Handle.AsRef<int>(_IntValueOffset!.Value);
+        }
     }
-  }
 
 
 }

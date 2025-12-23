@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_InheritFromPeerSystem : CParticleFunctionOperator, ISchemaClass<C_OP_InheritFromPeerSystem> {
+public partial interface C_OP_InheritFromPeerSystem : CParticleFunctionOperator, ISchemaClass<C_OP_InheritFromPeerSystem>
+{
+    static C_OP_InheritFromPeerSystem ISchemaClass<C_OP_InheritFromPeerSystem>.From(nint handle) => new C_OP_InheritFromPeerSystemImpl(handle);
+    static int ISchemaClass<C_OP_InheritFromPeerSystem>.Size => 480;
+    static string? ISchemaClass<C_OP_InheritFromPeerSystem>.ClassName => null;
 
-  static C_OP_InheritFromPeerSystem ISchemaClass<C_OP_InheritFromPeerSystem>.From(nint handle) => new C_OP_InheritFromPeerSystemImpl(handle);
-  static int ISchemaClass<C_OP_InheritFromPeerSystem>.Size => 480;
-  static string? ISchemaClass<C_OP_InheritFromPeerSystem>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ref int Increment { get; }
-  
-  public ref int GroupID { get; }
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ref int Increment { get; }
+
+    public ref int GroupID { get; }
 
 
 }

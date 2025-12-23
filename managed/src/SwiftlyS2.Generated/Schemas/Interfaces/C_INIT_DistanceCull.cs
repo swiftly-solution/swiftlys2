@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_DistanceCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_DistanceCull> {
+public partial interface C_INIT_DistanceCull : CParticleFunctionInitializer, ISchemaClass<C_INIT_DistanceCull>
+{
+    static C_INIT_DistanceCull ISchemaClass<C_INIT_DistanceCull>.From(nint handle) => new C_INIT_DistanceCullImpl(handle);
+    static int ISchemaClass<C_INIT_DistanceCull>.Size => 856;
+    static string? ISchemaClass<C_INIT_DistanceCull>.ClassName => null;
 
-  static C_INIT_DistanceCull ISchemaClass<C_INIT_DistanceCull>.From(nint handle) => new C_INIT_DistanceCullImpl(handle);
-  static int ISchemaClass<C_INIT_DistanceCull>.Size => 856;
-  static string? ISchemaClass<C_INIT_DistanceCull>.ClassName => null;
 
-  
-  public ref int ControlPoint { get; }
-  
-  public CParticleCollectionFloatInput Distance { get; }
-  
-  public ref bool CullInside { get; }
+    public ref int ControlPoint { get; }
+
+    public CParticleCollectionFloatInput Distance { get; }
+
+    public ref bool CullInside { get; }
 
 
 }

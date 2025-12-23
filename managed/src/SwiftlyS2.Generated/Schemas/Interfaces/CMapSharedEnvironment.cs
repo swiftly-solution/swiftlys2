@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMapSharedEnvironment : CLogicalEntity, ISchemaClass<CMapSharedEnvironment> {
+public partial interface CMapSharedEnvironment : CLogicalEntity, ISchemaClass<CMapSharedEnvironment>
+{
+    static CMapSharedEnvironment ISchemaClass<CMapSharedEnvironment>.From(nint handle) => new CMapSharedEnvironmentImpl(handle);
+    static int ISchemaClass<CMapSharedEnvironment>.Size => 1280;
+    static string? ISchemaClass<CMapSharedEnvironment>.ClassName => "map_shared_environment";
 
-  static CMapSharedEnvironment ISchemaClass<CMapSharedEnvironment>.From(nint handle) => new CMapSharedEnvironmentImpl(handle);
-  static int ISchemaClass<CMapSharedEnvironment>.Size => 1280;
-  static string? ISchemaClass<CMapSharedEnvironment>.ClassName => "map_shared_environment";
 
-  
-  public string TargetMapName { get; set; }
+    public string TargetMapName { get; set; }
 
 
 }

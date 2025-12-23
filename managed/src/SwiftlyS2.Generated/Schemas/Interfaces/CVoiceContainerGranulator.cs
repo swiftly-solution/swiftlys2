@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerGranulator : CVoiceContainerBase, ISchemaClass<CVoiceContainerGranulator> {
+public partial interface CVoiceContainerGranulator : CVoiceContainerBase, ISchemaClass<CVoiceContainerGranulator>
+{
+    static CVoiceContainerGranulator ISchemaClass<CVoiceContainerGranulator>.From(nint handle) => new CVoiceContainerGranulatorImpl(handle);
+    static int ISchemaClass<CVoiceContainerGranulator>.Size => 400;
+    static string? ISchemaClass<CVoiceContainerGranulator>.ClassName => null;
 
-  static CVoiceContainerGranulator ISchemaClass<CVoiceContainerGranulator>.From(nint handle) => new CVoiceContainerGranulatorImpl(handle);
-  static int ISchemaClass<CVoiceContainerGranulator>.Size => 400;
-  static string? ISchemaClass<CVoiceContainerGranulator>.ClassName => null;
 
-  
-  public ref float GrainLength { get; }
-  
-  public ref float GrainCrossfadeAmount { get; }
-  
-  public ref float StartJitter { get; }
-  
-  public ref float PlaybackJitter { get; }
-  
-  public ref bool ShouldWraparound { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SourceAudio { get; }
+    public ref float GrainLength { get; }
+
+    public ref float GrainCrossfadeAmount { get; }
+
+    public ref float StartJitter { get; }
+
+    public ref float PlaybackJitter { get; }
+
+    public ref bool ShouldWraparound { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCVoiceContainerBase> SourceAudio { get; }
 
 
 }

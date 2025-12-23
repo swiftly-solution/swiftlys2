@@ -6,264 +6,212 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundOpvarSetPointEntityImpl : CSoundOpvarSetPointBaseImpl, CSoundOpvarSetPointEntity {
+internal partial class CSoundOpvarSetPointEntityImpl : CSoundOpvarSetPointBaseImpl, CSoundOpvarSetPointEntity
+{
+    public CSoundOpvarSetPointEntityImpl(nint handle) : base(handle) { }
 
-  public CSoundOpvarSetPointEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnEnterOffset;
 
-  private static nint? _OnEnterOffset;
-
-  public CEntityIOOutput OnEnter {
-    get {
-      if (_OnEnterOffset == null) {
-        _OnEnterOffset = Schema.GetOffset(0x20C7B9D2BEFE0C56);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnEnterOffset!.Value);
+    public ref CEntityIOOutput OnEnter {
+        get {
+            _OnEnterOffset = _OnEnterOffset ?? Schema.GetOffset(0x20C7B9D2BEFE0C56);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEnterOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnExitOffset;
+    private static nint? _OnExitOffset;
 
-  public CEntityIOOutput OnExit {
-    get {
-      if (_OnExitOffset == null) {
-        _OnExitOffset = Schema.GetOffset(0x20C7B9D2DBE3B800);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnExitOffset!.Value);
+    public ref CEntityIOOutput OnExit {
+        get {
+            _OnExitOffset = _OnExitOffset ?? Schema.GetOffset(0x20C7B9D2DBE3B800);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnExitOffset!.Value);
+        }
     }
-  }
-  private static nint? _AutoDisableOffset;
+    private static nint? _AutoDisableOffset;
 
-  public ref bool AutoDisable {
-    get {
-      if (_AutoDisableOffset == null) {
-        _AutoDisableOffset = Schema.GetOffset(0x20C7B9D2EB2D561E);
-      }
-      return ref _Handle.AsRef<bool>(_AutoDisableOffset!.Value);
+    public ref bool AutoDisable {
+        get {
+            _AutoDisableOffset = _AutoDisableOffset ?? Schema.GetOffset(0x20C7B9D2EB2D561E);
+            return ref _Handle.AsRef<bool>(_AutoDisableOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceMinOffset;
+    private static nint? _DistanceMinOffset;
 
-  public ref float DistanceMin {
-    get {
-      if (_DistanceMinOffset == null) {
-        _DistanceMinOffset = Schema.GetOffset(0x20C7B9D2EFD80FE4);
-      }
-      return ref _Handle.AsRef<float>(_DistanceMinOffset!.Value);
+    public ref float DistanceMin {
+        get {
+            _DistanceMinOffset = _DistanceMinOffset ?? Schema.GetOffset(0x20C7B9D2EFD80FE4);
+            return ref _Handle.AsRef<float>(_DistanceMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceMaxOffset;
+    private static nint? _DistanceMaxOffset;
 
-  public ref float DistanceMax {
-    get {
-      if (_DistanceMaxOffset == null) {
-        _DistanceMaxOffset = Schema.GetOffset(0x20C7B9D2FDEBADA6);
-      }
-      return ref _Handle.AsRef<float>(_DistanceMaxOffset!.Value);
+    public ref float DistanceMax {
+        get {
+            _DistanceMaxOffset = _DistanceMaxOffset ?? Schema.GetOffset(0x20C7B9D2FDEBADA6);
+            return ref _Handle.AsRef<float>(_DistanceMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceMapMinOffset;
+    private static nint? _DistanceMapMinOffset;
 
-  public ref float DistanceMapMin {
-    get {
-      if (_DistanceMapMinOffset == null) {
-        _DistanceMapMinOffset = Schema.GetOffset(0x20C7B9D20597EACA);
-      }
-      return ref _Handle.AsRef<float>(_DistanceMapMinOffset!.Value);
+    public ref float DistanceMapMin {
+        get {
+            _DistanceMapMinOffset = _DistanceMapMinOffset ?? Schema.GetOffset(0x20C7B9D20597EACA);
+            return ref _Handle.AsRef<float>(_DistanceMapMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceMapMaxOffset;
+    private static nint? _DistanceMapMaxOffset;
 
-  public ref float DistanceMapMax {
-    get {
-      if (_DistanceMapMaxOffset == null) {
-        _DistanceMapMaxOffset = Schema.GetOffset(0x20C7B9D20FAB8240);
-      }
-      return ref _Handle.AsRef<float>(_DistanceMapMaxOffset!.Value);
+    public ref float DistanceMapMax {
+        get {
+            _DistanceMapMaxOffset = _DistanceMapMaxOffset ?? Schema.GetOffset(0x20C7B9D20FAB8240);
+            return ref _Handle.AsRef<float>(_DistanceMapMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _OcclusionRadiusOffset;
+    private static nint? _OcclusionRadiusOffset;
 
-  public ref float OcclusionRadius {
-    get {
-      if (_OcclusionRadiusOffset == null) {
-        _OcclusionRadiusOffset = Schema.GetOffset(0x20C7B9D289718616);
-      }
-      return ref _Handle.AsRef<float>(_OcclusionRadiusOffset!.Value);
+    public ref float OcclusionRadius {
+        get {
+            _OcclusionRadiusOffset = _OcclusionRadiusOffset ?? Schema.GetOffset(0x20C7B9D289718616);
+            return ref _Handle.AsRef<float>(_OcclusionRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _OcclusionMinOffset;
+    private static nint? _OcclusionMinOffset;
 
-  public ref float OcclusionMin {
-    get {
-      if (_OcclusionMinOffset == null) {
-        _OcclusionMinOffset = Schema.GetOffset(0x20C7B9D262E6EDCC);
-      }
-      return ref _Handle.AsRef<float>(_OcclusionMinOffset!.Value);
+    public ref float OcclusionMin {
+        get {
+            _OcclusionMinOffset = _OcclusionMinOffset ?? Schema.GetOffset(0x20C7B9D262E6EDCC);
+            return ref _Handle.AsRef<float>(_OcclusionMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _OcclusionMaxOffset;
+    private static nint? _OcclusionMaxOffset;
 
-  public ref float OcclusionMax {
-    get {
-      if (_OcclusionMaxOffset == null) {
-        _OcclusionMaxOffset = Schema.GetOffset(0x20C7B9D270D37C1E);
-      }
-      return ref _Handle.AsRef<float>(_OcclusionMaxOffset!.Value);
+    public ref float OcclusionMax {
+        get {
+            _OcclusionMaxOffset = _OcclusionMaxOffset ?? Schema.GetOffset(0x20C7B9D270D37C1E);
+            return ref _Handle.AsRef<float>(_OcclusionMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValSetOnDisableOffset;
+    private static nint? _ValSetOnDisableOffset;
 
-  public ref float ValSetOnDisable {
-    get {
-      if (_ValSetOnDisableOffset == null) {
-        _ValSetOnDisableOffset = Schema.GetOffset(0x20C7B9D2B0981239);
-      }
-      return ref _Handle.AsRef<float>(_ValSetOnDisableOffset!.Value);
+    public ref float ValSetOnDisable {
+        get {
+            _ValSetOnDisableOffset = _ValSetOnDisableOffset ?? Schema.GetOffset(0x20C7B9D2B0981239);
+            return ref _Handle.AsRef<float>(_ValSetOnDisableOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetValueOnDisableOffset;
+    private static nint? _SetValueOnDisableOffset;
 
-  public ref bool SetValueOnDisable {
-    get {
-      if (_SetValueOnDisableOffset == null) {
-        _SetValueOnDisableOffset = Schema.GetOffset(0x20C7B9D2C65C0E77);
-      }
-      return ref _Handle.AsRef<bool>(_SetValueOnDisableOffset!.Value);
+    public ref bool SetValueOnDisable {
+        get {
+            _SetValueOnDisableOffset = _SetValueOnDisableOffset ?? Schema.GetOffset(0x20C7B9D2C65C0E77);
+            return ref _Handle.AsRef<bool>(_SetValueOnDisableOffset!.Value);
+        }
     }
-  }
-  private static nint? _ReloadingOffset;
+    private static nint? _ReloadingOffset;
 
-  public ref bool Reloading {
-    get {
-      if (_ReloadingOffset == null) {
-        _ReloadingOffset = Schema.GetOffset(0x20C7B9D2214BCD0C);
-      }
-      return ref _Handle.AsRef<bool>(_ReloadingOffset!.Value);
+    public ref bool Reloading {
+        get {
+            _ReloadingOffset = _ReloadingOffset ?? Schema.GetOffset(0x20C7B9D2214BCD0C);
+            return ref _Handle.AsRef<bool>(_ReloadingOffset!.Value);
+        }
     }
-  }
-  private static nint? _SimulationModeOffset;
+    private static nint? _SimulationModeOffset;
 
-  public ref int SimulationMode {
-    get {
-      if (_SimulationModeOffset == null) {
-        _SimulationModeOffset = Schema.GetOffset(0x20C7B9D2F03B8CF9);
-      }
-      return ref _Handle.AsRef<int>(_SimulationModeOffset!.Value);
+    public ref int SimulationMode {
+        get {
+            _SimulationModeOffset = _SimulationModeOffset ?? Schema.GetOffset(0x20C7B9D2F03B8CF9);
+            return ref _Handle.AsRef<int>(_SimulationModeOffset!.Value);
+        }
     }
-  }
-  private static nint? _VisibilitySamplesOffset;
+    private static nint? _VisibilitySamplesOffset;
 
-  public ref int VisibilitySamples {
-    get {
-      if (_VisibilitySamplesOffset == null) {
-        _VisibilitySamplesOffset = Schema.GetOffset(0x20C7B9D26F7CDB90);
-      }
-      return ref _Handle.AsRef<int>(_VisibilitySamplesOffset!.Value);
+    public ref int VisibilitySamples {
+        get {
+            _VisibilitySamplesOffset = _VisibilitySamplesOffset ?? Schema.GetOffset(0x20C7B9D26F7CDB90);
+            return ref _Handle.AsRef<int>(_VisibilitySamplesOffset!.Value);
+        }
     }
-  }
-  private static nint? _DynamicProxyPointOffset;
+    private static nint? _DynamicProxyPointOffset;
 
-  public ref Vector DynamicProxyPoint {
-    get {
-      if (_DynamicProxyPointOffset == null) {
-        _DynamicProxyPointOffset = Schema.GetOffset(0x20C7B9D27E7B7DE0);
-      }
-      return ref _Handle.AsRef<Vector>(_DynamicProxyPointOffset!.Value);
+    public ref Vector DynamicProxyPoint {
+        get {
+            _DynamicProxyPointOffset = _DynamicProxyPointOffset ?? Schema.GetOffset(0x20C7B9D27E7B7DE0);
+            return ref _Handle.AsRef<Vector>(_DynamicProxyPointOffset!.Value);
+        }
     }
-  }
-  private static nint? _DynamicMaximumOcclusionOffset;
+    private static nint? _DynamicMaximumOcclusionOffset;
 
-  public ref float DynamicMaximumOcclusion {
-    get {
-      if (_DynamicMaximumOcclusionOffset == null) {
-        _DynamicMaximumOcclusionOffset = Schema.GetOffset(0x20C7B9D22C356E6F);
-      }
-      return ref _Handle.AsRef<float>(_DynamicMaximumOcclusionOffset!.Value);
+    public ref float DynamicMaximumOcclusion {
+        get {
+            _DynamicMaximumOcclusionOffset = _DynamicMaximumOcclusionOffset ?? Schema.GetOffset(0x20C7B9D22C356E6F);
+            return ref _Handle.AsRef<float>(_DynamicMaximumOcclusionOffset!.Value);
+        }
     }
-  }
-  private static nint? _DynamicEntityOffset;
+    private static nint? _DynamicEntityOffset;
 
-  public ref CHandle<CEntityInstance> DynamicEntity {
-    get {
-      if (_DynamicEntityOffset == null) {
-        _DynamicEntityOffset = Schema.GetOffset(0x20C7B9D235753447);
-      }
-      return ref _Handle.AsRef<CHandle<CEntityInstance>>(_DynamicEntityOffset!.Value);
+    public ref CHandle<CEntityInstance> DynamicEntity {
+        get {
+            _DynamicEntityOffset = _DynamicEntityOffset ?? Schema.GetOffset(0x20C7B9D235753447);
+            return ref _Handle.AsRef<CHandle<CEntityInstance>>(_DynamicEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _DynamicEntityNameOffset;
+    private static nint? _DynamicEntityNameOffset;
 
-  public string DynamicEntityName {
-    get {
-      if (_DynamicEntityNameOffset == null) {
-        _DynamicEntityNameOffset = Schema.GetOffset(0x20C7B9D28FB78B06);
-      }
-      var ptr = _Handle.Read<nint>(_DynamicEntityNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_DynamicEntityNameOffset == null) {
-        _DynamicEntityNameOffset = Schema.GetOffset(0x20C7B9D28FB78B06);
-      }
-      Schema.SetString(_Handle, _DynamicEntityNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _PathingDistanceNormFactorOffset;
+    public string DynamicEntityName {
+        get {
+            _DynamicEntityNameOffset = _DynamicEntityNameOffset ?? Schema.GetOffset(0x20C7B9D28FB78B06);
+            return Schema.GetString(_Handle.Read<nint>(_DynamicEntityNameOffset!.Value));
+        }
+        set {
+            _DynamicEntityNameOffset = _DynamicEntityNameOffset ?? Schema.GetOffset(0x20C7B9D28FB78B06);
+            Schema.SetString(_Handle, _DynamicEntityNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _PathingDistanceNormFactorOffset;
 
-  public ref float PathingDistanceNormFactor {
-    get {
-      if (_PathingDistanceNormFactorOffset == null) {
-        _PathingDistanceNormFactorOffset = Schema.GetOffset(0x20C7B9D25735CE5A);
-      }
-      return ref _Handle.AsRef<float>(_PathingDistanceNormFactorOffset!.Value);
+    public ref float PathingDistanceNormFactor {
+        get {
+            _PathingDistanceNormFactorOffset = _PathingDistanceNormFactorOffset ?? Schema.GetOffset(0x20C7B9D25735CE5A);
+            return ref _Handle.AsRef<float>(_PathingDistanceNormFactorOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathingSourcePosOffset;
+    private static nint? _PathingSourcePosOffset;
 
-  public ref Vector PathingSourcePos {
-    get {
-      if (_PathingSourcePosOffset == null) {
-        _PathingSourcePosOffset = Schema.GetOffset(0x20C7B9D209C40953);
-      }
-      return ref _Handle.AsRef<Vector>(_PathingSourcePosOffset!.Value);
+    public ref Vector PathingSourcePos {
+        get {
+            _PathingSourcePosOffset = _PathingSourcePosOffset ?? Schema.GetOffset(0x20C7B9D209C40953);
+            return ref _Handle.AsRef<Vector>(_PathingSourcePosOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathingListenerPosOffset;
+    private static nint? _PathingListenerPosOffset;
 
-  public ref Vector PathingListenerPos {
-    get {
-      if (_PathingListenerPosOffset == null) {
-        _PathingListenerPosOffset = Schema.GetOffset(0x20C7B9D271BDE848);
-      }
-      return ref _Handle.AsRef<Vector>(_PathingListenerPosOffset!.Value);
+    public ref Vector PathingListenerPos {
+        get {
+            _PathingListenerPosOffset = _PathingListenerPosOffset ?? Schema.GetOffset(0x20C7B9D271BDE848);
+            return ref _Handle.AsRef<Vector>(_PathingListenerPosOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathingDirectionOffset;
+    private static nint? _PathingDirectionOffset;
 
-  public ref Vector PathingDirection {
-    get {
-      if (_PathingDirectionOffset == null) {
-        _PathingDirectionOffset = Schema.GetOffset(0x20C7B9D2CFA4D6D3);
-      }
-      return ref _Handle.AsRef<Vector>(_PathingDirectionOffset!.Value);
+    public ref Vector PathingDirection {
+        get {
+            _PathingDirectionOffset = _PathingDirectionOffset ?? Schema.GetOffset(0x20C7B9D2CFA4D6D3);
+            return ref _Handle.AsRef<Vector>(_PathingDirectionOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathingSourceIndexOffset;
+    private static nint? _PathingSourceIndexOffset;
 
-  public ref int PathingSourceIndex {
-    get {
-      if (_PathingSourceIndexOffset == null) {
-        _PathingSourceIndexOffset = Schema.GetOffset(0x20C7B9D2830DE611);
-      }
-      return ref _Handle.AsRef<int>(_PathingSourceIndexOffset!.Value);
+    public ref int PathingSourceIndex {
+        get {
+            _PathingSourceIndexOffset = _PathingSourceIndexOffset ?? Schema.GetOffset(0x20C7B9D2830DE611);
+            return ref _Handle.AsRef<int>(_PathingSourceIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

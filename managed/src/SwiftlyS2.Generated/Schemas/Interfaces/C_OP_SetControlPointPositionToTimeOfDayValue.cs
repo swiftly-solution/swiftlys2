@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointPositionToTimeOfDayValue : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue> {
+public partial interface C_OP_SetControlPointPositionToTimeOfDayValue : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>
+{
+    static C_OP_SetControlPointPositionToTimeOfDayValue ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.From(nint handle) => new C_OP_SetControlPointPositionToTimeOfDayValueImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.Size => 624;
+    static string? ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.ClassName => null;
 
-  static C_OP_SetControlPointPositionToTimeOfDayValue ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.From(nint handle) => new C_OP_SetControlPointPositionToTimeOfDayValueImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.Size => 624;
-  static string? ISchemaClass<C_OP_SetControlPointPositionToTimeOfDayValue>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public string TimeOfDayParameter { get; set; }
-  
-  public ref Vector DefaultValue { get; }
+    public ref int ControlPointNumber { get; }
+
+    public string TimeOfDayParameter { get; set; }
+
+    public ref Vector DefaultValue { get; }
 
 
 }

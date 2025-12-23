@@ -8,23 +8,23 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvGlobal : CLogicalEntity, ISchemaClass<CEnvGlobal> {
+public partial interface CEnvGlobal : CLogicalEntity, ISchemaClass<CEnvGlobal>
+{
+    static CEnvGlobal ISchemaClass<CEnvGlobal>.From(nint handle) => new CEnvGlobalImpl(handle);
+    static int ISchemaClass<CEnvGlobal>.Size => 1328;
+    static string? ISchemaClass<CEnvGlobal>.ClassName => "env_global";
 
-  static CEnvGlobal ISchemaClass<CEnvGlobal>.From(nint handle) => new CEnvGlobalImpl(handle);
-  static int ISchemaClass<CEnvGlobal>.Size => 1328;
-  static string? ISchemaClass<CEnvGlobal>.ClassName => "env_global";
 
-  
-  // CEntityOutputTemplate< int32 >
-  public SchemaUntypedField OutCounter { get; }
-  
-  public string Globalstate { get; set; }
-  
-  public ref int Triggermode { get; }
-  
-  public ref int Initialstate { get; }
-  
-  public ref int Counter { get; }
+    // CEntityOutputTemplate< int32 >
+    public SchemaUntypedField OutCounter { get; }
+
+    public string Globalstate { get; set; }
+
+    public ref int Triggermode { get; }
+
+    public ref int Initialstate { get; }
+
+    public ref int Counter { get; }
 
 
 }

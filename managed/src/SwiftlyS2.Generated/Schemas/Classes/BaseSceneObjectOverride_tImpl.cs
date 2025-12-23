@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class BaseSceneObjectOverride_tImpl : SchemaClass, BaseSceneObjectOverride_t {
+internal partial class BaseSceneObjectOverride_tImpl : SchemaClass, BaseSceneObjectOverride_t
+{
+    public BaseSceneObjectOverride_tImpl(nint handle) : base(handle) { }
 
-  public BaseSceneObjectOverride_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SceneObjectIndexOffset;
 
-  private static nint? _SceneObjectIndexOffset;
-
-  public ref uint SceneObjectIndex {
-    get {
-      if (_SceneObjectIndexOffset == null) {
-        _SceneObjectIndexOffset = Schema.GetOffset(0xDC119FF44026A3B8);
-      }
-      return ref _Handle.AsRef<uint>(_SceneObjectIndexOffset!.Value);
+    public ref uint SceneObjectIndex {
+        get {
+            _SceneObjectIndexOffset = _SceneObjectIndexOffset ?? Schema.GetOffset(0xDC119FF44026A3B8);
+            return ref _Handle.AsRef<uint>(_SceneObjectIndexOffset!.Value);
+        }
     }
-  }
 
 
 }

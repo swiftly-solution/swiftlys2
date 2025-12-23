@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCPPScriptComponentUpdater : CAnimComponentUpdater, ISchemaClass<CCPPScriptComponentUpdater> {
+public partial interface CCPPScriptComponentUpdater : CAnimComponentUpdater, ISchemaClass<CCPPScriptComponentUpdater>
+{
+    static CCPPScriptComponentUpdater ISchemaClass<CCPPScriptComponentUpdater>.From(nint handle) => new CCPPScriptComponentUpdaterImpl(handle);
+    static int ISchemaClass<CCPPScriptComponentUpdater>.Size => 96;
+    static string? ISchemaClass<CCPPScriptComponentUpdater>.ClassName => null;
 
-  static CCPPScriptComponentUpdater ISchemaClass<CCPPScriptComponentUpdater>.From(nint handle) => new CCPPScriptComponentUpdaterImpl(handle);
-  static int ISchemaClass<CCPPScriptComponentUpdater>.Size => 96;
-  static string? ISchemaClass<CCPPScriptComponentUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<CGlobalSymbol> ScriptsToRun { get; }
+    public ref CUtlVector<CGlobalSymbol> ScriptsToRun { get; }
 
 
 }

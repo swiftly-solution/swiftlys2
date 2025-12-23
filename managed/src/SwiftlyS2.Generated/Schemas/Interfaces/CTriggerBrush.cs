@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerBrush : CBaseModelEntity, ISchemaClass<CTriggerBrush> {
+public partial interface CTriggerBrush : CBaseModelEntity, ISchemaClass<CTriggerBrush>
+{
+    static CTriggerBrush ISchemaClass<CTriggerBrush>.From(nint handle) => new CTriggerBrushImpl(handle);
+    static int ISchemaClass<CTriggerBrush>.Size => 2136;
+    static string? ISchemaClass<CTriggerBrush>.ClassName => "trigger_brush";
 
-  static CTriggerBrush ISchemaClass<CTriggerBrush>.From(nint handle) => new CTriggerBrushImpl(handle);
-  static int ISchemaClass<CTriggerBrush>.Size => 2136;
-  static string? ISchemaClass<CTriggerBrush>.ClassName => "trigger_brush";
 
-  
-  public CEntityIOOutput OnStartTouch { get; }
-  
-  public CEntityIOOutput OnEndTouch { get; }
-  
-  public CEntityIOOutput OnUse { get; }
-  
-  public ref int InputFilter { get; }
-  
-  public ref int DontMessageParent { get; }
+    public ref CEntityIOOutput OnStartTouch { get; }
+
+    public ref CEntityIOOutput OnEndTouch { get; }
+
+    public ref CEntityIOOutput OnUse { get; }
+
+    public ref int InputFilter { get; }
+
+    public ref int DontMessageParent { get; }
 
 
 }

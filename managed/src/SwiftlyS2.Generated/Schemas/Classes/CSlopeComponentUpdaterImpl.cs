@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSlopeComponentUpdaterImpl : CAnimComponentUpdaterImpl, CSlopeComponentUpdater {
+internal partial class CSlopeComponentUpdaterImpl : CAnimComponentUpdaterImpl, CSlopeComponentUpdater
+{
+    public CSlopeComponentUpdaterImpl(nint handle) : base(handle) { }
 
-  public CSlopeComponentUpdaterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TraceDistanceOffset;
 
-  private static nint? _TraceDistanceOffset;
-
-  public ref float TraceDistance {
-    get {
-      if (_TraceDistanceOffset == null) {
-        _TraceDistanceOffset = Schema.GetOffset(0xC0FC4829B2F3B0F7);
-      }
-      return ref _Handle.AsRef<float>(_TraceDistanceOffset!.Value);
+    public ref float TraceDistance {
+        get {
+            _TraceDistanceOffset = _TraceDistanceOffset ?? Schema.GetOffset(0xC0FC4829B2F3B0F7);
+            return ref _Handle.AsRef<float>(_TraceDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlopeAngleOffset;
+    private static nint? _SlopeAngleOffset;
 
-  public CAnimParamHandle SlopeAngle {
-    get {
-      if (_SlopeAngleOffset == null) {
-        _SlopeAngleOffset = Schema.GetOffset(0xC0FC4829ED49556D);
-      }
-      return new CAnimParamHandleImpl(_Handle + _SlopeAngleOffset!.Value);
+    public CAnimParamHandle SlopeAngle {
+        get {
+            _SlopeAngleOffset = _SlopeAngleOffset ?? Schema.GetOffset(0xC0FC4829ED49556D);
+            return new CAnimParamHandleImpl(_Handle + _SlopeAngleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlopeAngleFrontOffset;
+    private static nint? _SlopeAngleFrontOffset;
 
-  public CAnimParamHandle SlopeAngleFront {
-    get {
-      if (_SlopeAngleFrontOffset == null) {
-        _SlopeAngleFrontOffset = Schema.GetOffset(0xC0FC48291ED54070);
-      }
-      return new CAnimParamHandleImpl(_Handle + _SlopeAngleFrontOffset!.Value);
+    public CAnimParamHandle SlopeAngleFront {
+        get {
+            _SlopeAngleFrontOffset = _SlopeAngleFrontOffset ?? Schema.GetOffset(0xC0FC48291ED54070);
+            return new CAnimParamHandleImpl(_Handle + _SlopeAngleFrontOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlopeAngleSideOffset;
+    private static nint? _SlopeAngleSideOffset;
 
-  public CAnimParamHandle SlopeAngleSide {
-    get {
-      if (_SlopeAngleSideOffset == null) {
-        _SlopeAngleSideOffset = Schema.GetOffset(0xC0FC4829E6ADA076);
-      }
-      return new CAnimParamHandleImpl(_Handle + _SlopeAngleSideOffset!.Value);
+    public CAnimParamHandle SlopeAngleSide {
+        get {
+            _SlopeAngleSideOffset = _SlopeAngleSideOffset ?? Schema.GetOffset(0xC0FC4829E6ADA076);
+            return new CAnimParamHandleImpl(_Handle + _SlopeAngleSideOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlopeHeadingOffset;
+    private static nint? _SlopeHeadingOffset;
 
-  public CAnimParamHandle SlopeHeading {
-    get {
-      if (_SlopeHeadingOffset == null) {
-        _SlopeHeadingOffset = Schema.GetOffset(0xC0FC482945A85028);
-      }
-      return new CAnimParamHandleImpl(_Handle + _SlopeHeadingOffset!.Value);
+    public CAnimParamHandle SlopeHeading {
+        get {
+            _SlopeHeadingOffset = _SlopeHeadingOffset ?? Schema.GetOffset(0xC0FC482945A85028);
+            return new CAnimParamHandleImpl(_Handle + _SlopeHeadingOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlopeNormalOffset;
+    private static nint? _SlopeNormalOffset;
 
-  public CAnimParamHandle SlopeNormal {
-    get {
-      if (_SlopeNormalOffset == null) {
-        _SlopeNormalOffset = Schema.GetOffset(0xC0FC48292A185DE5);
-      }
-      return new CAnimParamHandleImpl(_Handle + _SlopeNormalOffset!.Value);
+    public CAnimParamHandle SlopeNormal {
+        get {
+            _SlopeNormalOffset = _SlopeNormalOffset ?? Schema.GetOffset(0xC0FC48292A185DE5);
+            return new CAnimParamHandleImpl(_Handle + _SlopeNormalOffset!.Value);
+        }
     }
-  }
-  private static nint? _SlopeNormal_WorldSpaceOffset;
+    private static nint? _SlopeNormal_WorldSpaceOffset;
 
-  public CAnimParamHandle SlopeNormal_WorldSpace {
-    get {
-      if (_SlopeNormal_WorldSpaceOffset == null) {
-        _SlopeNormal_WorldSpaceOffset = Schema.GetOffset(0xC0FC48290CCD648C);
-      }
-      return new CAnimParamHandleImpl(_Handle + _SlopeNormal_WorldSpaceOffset!.Value);
+    public CAnimParamHandle SlopeNormal_WorldSpace {
+        get {
+            _SlopeNormal_WorldSpaceOffset = _SlopeNormal_WorldSpaceOffset ?? Schema.GetOffset(0xC0FC48290CCD648C);
+            return new CAnimParamHandleImpl(_Handle + _SlopeNormal_WorldSpaceOffset!.Value);
+        }
     }
-  }
 
 
 }

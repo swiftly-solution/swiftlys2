@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CIntAnimParameterImpl : CConcreteAnimParameterImpl, CIntAnimParameter {
+internal partial class CIntAnimParameterImpl : CConcreteAnimParameterImpl, CIntAnimParameter
+{
+    public CIntAnimParameterImpl(nint handle) : base(handle) { }
 
-  public CIntAnimParameterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DefaultValueOffset;
 
-  private static nint? _DefaultValueOffset;
-
-  public ref int DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0xD1AA42D5BBE0341F);
-      }
-      return ref _Handle.AsRef<int>(_DefaultValueOffset!.Value);
+    public ref int DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0xD1AA42D5BBE0341F);
+            return ref _Handle.AsRef<int>(_DefaultValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinValueOffset;
+    private static nint? _MinValueOffset;
 
-  public ref int MinValue {
-    get {
-      if (_MinValueOffset == null) {
-        _MinValueOffset = Schema.GetOffset(0xD1AA42D503F1334C);
-      }
-      return ref _Handle.AsRef<int>(_MinValueOffset!.Value);
+    public ref int MinValue {
+        get {
+            _MinValueOffset = _MinValueOffset ?? Schema.GetOffset(0xD1AA42D503F1334C);
+            return ref _Handle.AsRef<int>(_MinValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxValueOffset;
+    private static nint? _MaxValueOffset;
 
-  public ref int MaxValue {
-    get {
-      if (_MaxValueOffset == null) {
-        _MaxValueOffset = Schema.GetOffset(0xD1AA42D5857E5426);
-      }
-      return ref _Handle.AsRef<int>(_MaxValueOffset!.Value);
+    public ref int MaxValue {
+        get {
+            _MaxValueOffset = _MaxValueOffset ?? Schema.GetOffset(0xD1AA42D5857E5426);
+            return ref _Handle.AsRef<int>(_MaxValueOffset!.Value);
+        }
     }
-  }
 
 
 }

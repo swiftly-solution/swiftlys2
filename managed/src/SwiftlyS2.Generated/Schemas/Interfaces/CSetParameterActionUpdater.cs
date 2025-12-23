@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSetParameterActionUpdater : CAnimActionUpdater, ISchemaClass<CSetParameterActionUpdater> {
+public partial interface CSetParameterActionUpdater : CAnimActionUpdater, ISchemaClass<CSetParameterActionUpdater>
+{
+    static CSetParameterActionUpdater ISchemaClass<CSetParameterActionUpdater>.From(nint handle) => new CSetParameterActionUpdaterImpl(handle);
+    static int ISchemaClass<CSetParameterActionUpdater>.Size => 48;
+    static string? ISchemaClass<CSetParameterActionUpdater>.ClassName => null;
 
-  static CSetParameterActionUpdater ISchemaClass<CSetParameterActionUpdater>.From(nint handle) => new CSetParameterActionUpdaterImpl(handle);
-  static int ISchemaClass<CSetParameterActionUpdater>.Size => 48;
-  static string? ISchemaClass<CSetParameterActionUpdater>.ClassName => null;
 
-  
-  public CAnimParamHandle Param { get; }
-  
-  // CAnimVariant
-  public SchemaUntypedField Value { get; }
+    public CAnimParamHandle Param { get; }
+
+    // CAnimVariant
+    public SchemaUntypedField Value { get; }
 
 
 }

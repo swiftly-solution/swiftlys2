@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulse_ChunkImpl : SchemaClass, CPulse_Chunk {
+internal partial class CPulse_ChunkImpl : SchemaClass, CPulse_Chunk
+{
+    public CPulse_ChunkImpl(nint handle) : base(handle) { }
 
-  public CPulse_ChunkImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InstructionsOffset;
 
-  private static nint? _InstructionsOffset;
-
-  public ref CUtlLeanVector<PGDInstruction_t, int> Instructions {
-    get {
-      if (_InstructionsOffset == null) {
-        _InstructionsOffset = Schema.GetOffset(0x816932094D358BC4);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<PGDInstruction_t, int>>(_InstructionsOffset!.Value);
+    public ref CUtlLeanVector<PGDInstruction_t, int> Instructions {
+        get {
+            _InstructionsOffset = _InstructionsOffset ?? Schema.GetOffset(0x816932094D358BC4);
+            return ref _Handle.AsRef<CUtlLeanVector<PGDInstruction_t, int>>(_InstructionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _RegistersOffset;
+    private static nint? _RegistersOffset;
 
-  public ref CUtlLeanVector<CPulse_RegisterInfo, int> Registers {
-    get {
-      if (_RegistersOffset == null) {
-        _RegistersOffset = Schema.GetOffset(0x81693209BB828A49);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<CPulse_RegisterInfo, int>>(_RegistersOffset!.Value);
+    public ref CUtlLeanVector<CPulse_RegisterInfo, int> Registers {
+        get {
+            _RegistersOffset = _RegistersOffset ?? Schema.GetOffset(0x81693209BB828A49);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulse_RegisterInfo, int>>(_RegistersOffset!.Value);
+        }
     }
-  }
-  private static nint? _InstructionEditorIDsOffset;
+    private static nint? _InstructionEditorIDsOffset;
 
-  public ref CUtlLeanVector<PulseDocNodeID_t, int> InstructionEditorIDs {
-    get {
-      if (_InstructionEditorIDsOffset == null) {
-        _InstructionEditorIDsOffset = Schema.GetOffset(0x81693209236D8B64);
-      }
-      return ref _Handle.AsRef<CUtlLeanVector<PulseDocNodeID_t, int>>(_InstructionEditorIDsOffset!.Value);
+    public ref CUtlLeanVector<PulseDocNodeID_t, int> InstructionEditorIDs {
+        get {
+            _InstructionEditorIDsOffset = _InstructionEditorIDsOffset ?? Schema.GetOffset(0x81693209236D8B64);
+            return ref _Handle.AsRef<CUtlLeanVector<PulseDocNodeID_t, int>>(_InstructionEditorIDsOffset!.Value);
+        }
     }
-  }
 
 
 }

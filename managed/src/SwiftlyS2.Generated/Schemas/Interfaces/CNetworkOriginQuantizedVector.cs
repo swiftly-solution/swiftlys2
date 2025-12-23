@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNetworkOriginQuantizedVector : ISchemaClass<CNetworkOriginQuantizedVector> {
+public partial interface CNetworkOriginQuantizedVector : ISchemaClass<CNetworkOriginQuantizedVector>
+{
+    static CNetworkOriginQuantizedVector ISchemaClass<CNetworkOriginQuantizedVector>.From(nint handle) => new CNetworkOriginQuantizedVectorImpl(handle);
+    static int ISchemaClass<CNetworkOriginQuantizedVector>.Size => 40;
+    static string? ISchemaClass<CNetworkOriginQuantizedVector>.ClassName => null;
 
-  static CNetworkOriginQuantizedVector ISchemaClass<CNetworkOriginQuantizedVector>.From(nint handle) => new CNetworkOriginQuantizedVectorImpl(handle);
-  static int ISchemaClass<CNetworkOriginQuantizedVector>.Size => 40;
-  static string? ISchemaClass<CNetworkOriginQuantizedVector>.ClassName => null;
 
-  
-  public ref CNetworkedQuantizedFloat X { get; }
-  
-  public ref CNetworkedQuantizedFloat Y { get; }
-  
-  public ref CNetworkedQuantizedFloat Z { get; }
+    public ref CNetworkedQuantizedFloat X { get; }
 
-  public void XUpdated();
-  public void YUpdated();
-  public void ZUpdated();
+    public ref CNetworkedQuantizedFloat Y { get; }
+
+    public ref CNetworkedQuantizedFloat Z { get; }
+
+    public void XUpdated();
+    public void YUpdated();
+    public void ZUpdated();
 }

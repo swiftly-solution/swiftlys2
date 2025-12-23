@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRotatorTarget : CPointEntity, ISchemaClass<CRotatorTarget> {
+public partial interface CRotatorTarget : CPointEntity, ISchemaClass<CRotatorTarget>
+{
+    static CRotatorTarget ISchemaClass<CRotatorTarget>.From(nint handle) => new CRotatorTargetImpl(handle);
+    static int ISchemaClass<CRotatorTarget>.Size => 1312;
+    static string? ISchemaClass<CRotatorTarget>.ClassName => "rotator_target";
 
-  static CRotatorTarget ISchemaClass<CRotatorTarget>.From(nint handle) => new CRotatorTargetImpl(handle);
-  static int ISchemaClass<CRotatorTarget>.Size => 1312;
-  static string? ISchemaClass<CRotatorTarget>.ClassName => "rotator_target";
 
-  
-  public CEntityIOOutput OnArrivedAt { get; }
-  
-  public ref RotatorTargetSpace_t Space { get; }
+    public ref CEntityIOOutput OnArrivedAt { get; }
+
+    public ref RotatorTargetSpace_t Space { get; }
 
 
 }

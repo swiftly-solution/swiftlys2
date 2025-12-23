@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventSimulate_t : ISchemaClass<EventSimulate_t> {
+public partial interface EventSimulate_t : ISchemaClass<EventSimulate_t>
+{
+    static EventSimulate_t ISchemaClass<EventSimulate_t>.From(nint handle) => new EventSimulate_tImpl(handle);
+    static int ISchemaClass<EventSimulate_t>.Size => 48;
+    static string? ISchemaClass<EventSimulate_t>.ClassName => null;
 
-  static EventSimulate_t ISchemaClass<EventSimulate_t>.From(nint handle) => new EventSimulate_tImpl(handle);
-  static int ISchemaClass<EventSimulate_t>.Size => 48;
-  static string? ISchemaClass<EventSimulate_t>.ClassName => null;
 
-  
-  public EngineLoopState_t LoopState { get; }
-  
-  public ref bool FirstTick { get; }
-  
-  public ref bool LastTick { get; }
+    public EngineLoopState_t LoopState { get; }
+
+    public ref bool FirstTick { get; }
+
+    public ref bool LastTick { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysImpact : CPointEntity, ISchemaClass<CPhysImpact> {
+public partial interface CPhysImpact : CPointEntity, ISchemaClass<CPhysImpact>
+{
+    static CPhysImpact ISchemaClass<CPhysImpact>.From(nint handle) => new CPhysImpactImpl(handle);
+    static int ISchemaClass<CPhysImpact>.Size => 1280;
+    static string? ISchemaClass<CPhysImpact>.ClassName => "env_physimpact";
 
-  static CPhysImpact ISchemaClass<CPhysImpact>.From(nint handle) => new CPhysImpactImpl(handle);
-  static int ISchemaClass<CPhysImpact>.Size => 1280;
-  static string? ISchemaClass<CPhysImpact>.ClassName => "env_physimpact";
 
-  
-  public ref float Damage { get; }
-  
-  public ref float Distance { get; }
-  
-  public string DirectionEntityName { get; set; }
+    public ref float Damage { get; }
+
+    public ref float Distance { get; }
+
+    public string DirectionEntityName { get; set; }
 
 
 }

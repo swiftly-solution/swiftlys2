@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvSplash : CPointEntity, ISchemaClass<CEnvSplash> {
+public partial interface CEnvSplash : CPointEntity, ISchemaClass<CEnvSplash>
+{
+    static CEnvSplash ISchemaClass<CEnvSplash>.From(nint handle) => new CEnvSplashImpl(handle);
+    static int ISchemaClass<CEnvSplash>.Size => 1272;
+    static string? ISchemaClass<CEnvSplash>.ClassName => "env_splash";
 
-  static CEnvSplash ISchemaClass<CEnvSplash>.From(nint handle) => new CEnvSplashImpl(handle);
-  static int ISchemaClass<CEnvSplash>.Size => 1272;
-  static string? ISchemaClass<CEnvSplash>.ClassName => "env_splash";
 
-  
-  public ref float Scale { get; }
+    public ref float Scale { get; }
 
 
 }

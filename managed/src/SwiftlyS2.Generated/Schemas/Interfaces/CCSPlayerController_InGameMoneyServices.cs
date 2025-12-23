@@ -8,27 +8,27 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayerController_InGameMoneyServices : CPlayerControllerComponent, ISchemaClass<CCSPlayerController_InGameMoneyServices> {
+public partial interface CCSPlayerController_InGameMoneyServices : CPlayerControllerComponent, ISchemaClass<CCSPlayerController_InGameMoneyServices>
+{
+    static CCSPlayerController_InGameMoneyServices ISchemaClass<CCSPlayerController_InGameMoneyServices>.From(nint handle) => new CCSPlayerController_InGameMoneyServicesImpl(handle);
+    static int ISchemaClass<CCSPlayerController_InGameMoneyServices>.Size => 88;
+    static string? ISchemaClass<CCSPlayerController_InGameMoneyServices>.ClassName => null;
 
-  static CCSPlayerController_InGameMoneyServices ISchemaClass<CCSPlayerController_InGameMoneyServices>.From(nint handle) => new CCSPlayerController_InGameMoneyServicesImpl(handle);
-  static int ISchemaClass<CCSPlayerController_InGameMoneyServices>.Size => 88;
-  static string? ISchemaClass<CCSPlayerController_InGameMoneyServices>.ClassName => null;
 
-  
-  public ref bool ReceivesMoneyNextRound { get; }
-  
-  public ref int MoneyEarnedForNextRound { get; }
-  
-  public ref int Account { get; }
-  
-  public ref int StartAccount { get; }
-  
-  public ref int TotalCashSpent { get; }
-  
-  public ref int CashSpentThisRound { get; }
+    public ref bool ReceivesMoneyNextRound { get; }
 
-  public void AccountUpdated();
-  public void StartAccountUpdated();
-  public void TotalCashSpentUpdated();
-  public void CashSpentThisRoundUpdated();
+    public ref int MoneyEarnedForNextRound { get; }
+
+    public ref int Account { get; }
+
+    public ref int StartAccount { get; }
+
+    public ref int TotalCashSpent { get; }
+
+    public ref int CashSpentThisRound { get; }
+
+    public void AccountUpdated();
+    public void StartAccountUpdated();
+    public void TotalCashSpentUpdated();
+    public void CashSpentThisRoundUpdated();
 }

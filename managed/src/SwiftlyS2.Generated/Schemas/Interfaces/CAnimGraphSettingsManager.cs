@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimGraphSettingsManager : ISchemaClass<CAnimGraphSettingsManager> {
+public partial interface CAnimGraphSettingsManager : ISchemaClass<CAnimGraphSettingsManager>
+{
+    static CAnimGraphSettingsManager ISchemaClass<CAnimGraphSettingsManager>.From(nint handle) => new CAnimGraphSettingsManagerImpl(handle);
+    static int ISchemaClass<CAnimGraphSettingsManager>.Size => 48;
+    static string? ISchemaClass<CAnimGraphSettingsManager>.ClassName => null;
 
-  static CAnimGraphSettingsManager ISchemaClass<CAnimGraphSettingsManager>.From(nint handle) => new CAnimGraphSettingsManagerImpl(handle);
-  static int ISchemaClass<CAnimGraphSettingsManager>.Size => 48;
-  static string? ISchemaClass<CAnimGraphSettingsManager>.ClassName => null;
 
-  
-  public ref CUtlVector<SchemaUntypedField> SettingsGroups { get; }
+    public ref CUtlVector<SchemaUntypedField> SettingsGroups { get; }
 
 
 }

@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSubtractUpdateNodeImpl : CBinaryUpdateNodeImpl, CSubtractUpdateNode {
+internal partial class CSubtractUpdateNodeImpl : CBinaryUpdateNodeImpl, CSubtractUpdateNode
+{
+    public CSubtractUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CSubtractUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FootMotionTimingOffset;
 
-  private static nint? _FootMotionTimingOffset;
-
-  public ref BinaryNodeChildOption FootMotionTiming {
-    get {
-      if (_FootMotionTimingOffset == null) {
-        _FootMotionTimingOffset = Schema.GetOffset(0x108B5B3FBB17F13D);
-      }
-      return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset!.Value);
+    public ref BinaryNodeChildOption FootMotionTiming {
+        get {
+            _FootMotionTimingOffset = _FootMotionTimingOffset ?? Schema.GetOffset(0x108B5B3FBB17F13D);
+            return ref _Handle.AsRef<BinaryNodeChildOption>(_FootMotionTimingOffset!.Value);
+        }
     }
-  }
-  private static nint? _ApplyToFootMotionOffset;
+    private static nint? _ApplyToFootMotionOffset;
 
-  public ref bool ApplyToFootMotion {
-    get {
-      if (_ApplyToFootMotionOffset == null) {
-        _ApplyToFootMotionOffset = Schema.GetOffset(0x108B5B3F3D831E94);
-      }
-      return ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset!.Value);
+    public ref bool ApplyToFootMotion {
+        get {
+            _ApplyToFootMotionOffset = _ApplyToFootMotionOffset ?? Schema.GetOffset(0x108B5B3F3D831E94);
+            return ref _Handle.AsRef<bool>(_ApplyToFootMotionOffset!.Value);
+        }
     }
-  }
-  private static nint? _ApplyChannelsSeparatelyOffset;
+    private static nint? _ApplyChannelsSeparatelyOffset;
 
-  public ref bool ApplyChannelsSeparately {
-    get {
-      if (_ApplyChannelsSeparatelyOffset == null) {
-        _ApplyChannelsSeparatelyOffset = Schema.GetOffset(0x108B5B3FFF2DBB45);
-      }
-      return ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset!.Value);
+    public ref bool ApplyChannelsSeparately {
+        get {
+            _ApplyChannelsSeparatelyOffset = _ApplyChannelsSeparatelyOffset ?? Schema.GetOffset(0x108B5B3FFF2DBB45);
+            return ref _Handle.AsRef<bool>(_ApplyChannelsSeparatelyOffset!.Value);
+        }
     }
-  }
-  private static nint? _UseModelSpaceOffset;
+    private static nint? _UseModelSpaceOffset;
 
-  public ref bool UseModelSpace {
-    get {
-      if (_UseModelSpaceOffset == null) {
-        _UseModelSpaceOffset = Schema.GetOffset(0x108B5B3F48863521);
-      }
-      return ref _Handle.AsRef<bool>(_UseModelSpaceOffset!.Value);
+    public ref bool UseModelSpace {
+        get {
+            _UseModelSpaceOffset = _UseModelSpaceOffset ?? Schema.GetOffset(0x108B5B3F48863521);
+            return ref _Handle.AsRef<bool>(_UseModelSpaceOffset!.Value);
+        }
     }
-  }
 
 
 }

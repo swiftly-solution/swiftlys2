@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSosGroupActionSoundeventCountSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionSoundeventCountSchema {
+internal partial class CSosGroupActionSoundeventCountSchemaImpl : CSosGroupActionSchemaImpl, CSosGroupActionSoundeventCountSchema
+{
+    public CSosGroupActionSoundeventCountSchemaImpl(nint handle) : base(handle) { }
 
-  public CSosGroupActionSoundeventCountSchemaImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ExcludeStoppedSoundsOffset;
 
-  private static nint? _ExcludeStoppedSoundsOffset;
-
-  public ref bool ExcludeStoppedSounds {
-    get {
-      if (_ExcludeStoppedSoundsOffset == null) {
-        _ExcludeStoppedSoundsOffset = Schema.GetOffset(0x6A0D82691BDF6FB6);
-      }
-      return ref _Handle.AsRef<bool>(_ExcludeStoppedSoundsOffset!.Value);
+    public ref bool ExcludeStoppedSounds {
+        get {
+            _ExcludeStoppedSoundsOffset = _ExcludeStoppedSoundsOffset ?? Schema.GetOffset(0x6A0D82691BDF6FB6);
+            return ref _Handle.AsRef<bool>(_ExcludeStoppedSoundsOffset!.Value);
+        }
     }
-  }
-  private static nint? _StrCountKeyNameOffset;
+    private static nint? _StrCountKeyNameOffset;
 
-  public string StrCountKeyName {
-    get {
-      if (_StrCountKeyNameOffset == null) {
-        _StrCountKeyNameOffset = Schema.GetOffset(0x6A0D8269463A7AA5);
-      }
-      var ptr = _Handle.Read<nint>(_StrCountKeyNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrCountKeyNameOffset == null) {
-        _StrCountKeyNameOffset = Schema.GetOffset(0x6A0D8269463A7AA5);
-      }
-      Schema.SetString(_Handle, _StrCountKeyNameOffset!.Value, value);
-    }
-  } 
+    public string StrCountKeyName {
+        get {
+            _StrCountKeyNameOffset = _StrCountKeyNameOffset ?? Schema.GetOffset(0x6A0D8269463A7AA5);
+            return Schema.GetString(_Handle.Read<nint>(_StrCountKeyNameOffset!.Value));
+        }
+        set {
+            _StrCountKeyNameOffset = _StrCountKeyNameOffset ?? Schema.GetOffset(0x6A0D8269463A7AA5);
+            Schema.SetString(_Handle, _StrCountKeyNameOffset!.Value, value);
+        }
+    } 
 
 
 }

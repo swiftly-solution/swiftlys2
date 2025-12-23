@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CModelConfigElement_RandomPickImpl : CModelConfigElementImpl, CModelConfigElement_RandomPick {
+internal partial class CModelConfigElement_RandomPickImpl : CModelConfigElementImpl, CModelConfigElement_RandomPick
+{
+    public CModelConfigElement_RandomPickImpl(nint handle) : base(handle) { }
 
-  public CModelConfigElement_RandomPickImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ChoicesOffset;
 
-  private static nint? _ChoicesOffset;
-
-  public ref CUtlVector<CUtlString> Choices {
-    get {
-      if (_ChoicesOffset == null) {
-        _ChoicesOffset = Schema.GetOffset(0x31F9AEEA9E9959BF);
-      }
-      return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ChoicesOffset!.Value);
+    public ref CUtlVector<CUtlString> Choices {
+        get {
+            _ChoicesOffset = _ChoicesOffset ?? Schema.GetOffset(0x31F9AEEA9E9959BF);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_ChoicesOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChoiceWeightsOffset;
+    private static nint? _ChoiceWeightsOffset;
 
-  public ref CUtlVector<float> ChoiceWeights {
-    get {
-      if (_ChoiceWeightsOffset == null) {
-        _ChoiceWeightsOffset = Schema.GetOffset(0x31F9AEEA379579F7);
-      }
-      return ref _Handle.AsRef<CUtlVector<float>>(_ChoiceWeightsOffset!.Value);
+    public ref CUtlVector<float> ChoiceWeights {
+        get {
+            _ChoiceWeightsOffset = _ChoiceWeightsOffset ?? Schema.GetOffset(0x31F9AEEA379579F7);
+            return ref _Handle.AsRef<CUtlVector<float>>(_ChoiceWeightsOffset!.Value);
+        }
     }
-  }
 
 
 }

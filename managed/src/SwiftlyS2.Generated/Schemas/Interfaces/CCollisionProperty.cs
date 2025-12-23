@@ -8,59 +8,59 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCollisionProperty : ISchemaClass<CCollisionProperty> {
+public partial interface CCollisionProperty : ISchemaClass<CCollisionProperty>
+{
+    static CCollisionProperty ISchemaClass<CCollisionProperty>.From(nint handle) => new CCollisionPropertyImpl(handle);
+    static int ISchemaClass<CCollisionProperty>.Size => 176;
+    static string? ISchemaClass<CCollisionProperty>.ClassName => null;
 
-  static CCollisionProperty ISchemaClass<CCollisionProperty>.From(nint handle) => new CCollisionPropertyImpl(handle);
-  static int ISchemaClass<CCollisionProperty>.Size => 176;
-  static string? ISchemaClass<CCollisionProperty>.ClassName => null;
 
-  
-  public VPhysicsCollisionAttribute_t CollisionAttribute { get; }
-  
-  public ref Vector Mins { get; }
-  
-  public ref Vector Maxs { get; }
-  
-  public ref byte SolidFlags { get; }
-  
-  public ref SolidType_t SolidType { get; }
-  
-  public ref byte TriggerBloat { get; }
-  
-  public ref SurroundingBoundsType_t SurroundType { get; }
-  
-  public ref byte CollisionGroup { get; }
-  
-  public ref byte EnablePhysics { get; }
-  
-  public ref float BoundingRadius { get; }
-  
-  public ref Vector SpecifiedSurroundingMins { get; }
-  
-  public ref Vector SpecifiedSurroundingMaxs { get; }
-  
-  public ref Vector SurroundingMaxs { get; }
-  
-  public ref Vector SurroundingMins { get; }
-  
-  public ref Vector CapsuleCenter1 { get; }
-  
-  public ref Vector CapsuleCenter2 { get; }
-  
-  public ref float CapsuleRadius { get; }
+    public VPhysicsCollisionAttribute_t CollisionAttribute { get; }
 
-  public void CollisionAttributeUpdated();
-  public void MinsUpdated();
-  public void MaxsUpdated();
-  public void SolidFlagsUpdated();
-  public void SolidTypeUpdated();
-  public void TriggerBloatUpdated();
-  public void SurroundTypeUpdated();
-  public void CollisionGroupUpdated();
-  public void EnablePhysicsUpdated();
-  public void SpecifiedSurroundingMinsUpdated();
-  public void SpecifiedSurroundingMaxsUpdated();
-  public void CapsuleCenter1Updated();
-  public void CapsuleCenter2Updated();
-  public void CapsuleRadiusUpdated();
+    public ref Vector Mins { get; }
+
+    public ref Vector Maxs { get; }
+
+    public ref byte SolidFlags { get; }
+
+    public ref SolidType_t SolidType { get; }
+
+    public ref byte TriggerBloat { get; }
+
+    public ref SurroundingBoundsType_t SurroundType { get; }
+
+    public ref byte CollisionGroup { get; }
+
+    public ref byte EnablePhysics { get; }
+
+    public ref float BoundingRadius { get; }
+
+    public ref Vector SpecifiedSurroundingMins { get; }
+
+    public ref Vector SpecifiedSurroundingMaxs { get; }
+
+    public ref Vector SurroundingMaxs { get; }
+
+    public ref Vector SurroundingMins { get; }
+
+    public ref Vector CapsuleCenter1 { get; }
+
+    public ref Vector CapsuleCenter2 { get; }
+
+    public ref float CapsuleRadius { get; }
+
+    public void CollisionAttributeUpdated();
+    public void MinsUpdated();
+    public void MaxsUpdated();
+    public void SolidFlagsUpdated();
+    public void SolidTypeUpdated();
+    public void TriggerBloatUpdated();
+    public void SurroundTypeUpdated();
+    public void CollisionGroupUpdated();
+    public void EnablePhysicsUpdated();
+    public void SpecifiedSurroundingMinsUpdated();
+    public void SpecifiedSurroundingMaxsUpdated();
+    public void CapsuleCenter1Updated();
+    public void CapsuleCenter2Updated();
+    public void CapsuleRadiusUpdated();
 }

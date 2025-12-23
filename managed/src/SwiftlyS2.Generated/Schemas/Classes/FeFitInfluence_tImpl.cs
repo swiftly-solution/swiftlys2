@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FeFitInfluence_tImpl : SchemaClass, FeFitInfluence_t {
+internal partial class FeFitInfluence_tImpl : SchemaClass, FeFitInfluence_t
+{
+    public FeFitInfluence_tImpl(nint handle) : base(handle) { }
 
-  public FeFitInfluence_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VertexNodeOffset;
 
-  private static nint? _VertexNodeOffset;
-
-  public ref uint VertexNode {
-    get {
-      if (_VertexNodeOffset == null) {
-        _VertexNodeOffset = Schema.GetOffset(0xF8271D2105342743);
-      }
-      return ref _Handle.AsRef<uint>(_VertexNodeOffset!.Value);
+    public ref uint VertexNode {
+        get {
+            _VertexNodeOffset = _VertexNodeOffset ?? Schema.GetOffset(0xF8271D2105342743);
+            return ref _Handle.AsRef<uint>(_VertexNodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _WeightOffset;
+    private static nint? _WeightOffset;
 
-  public ref float Weight {
-    get {
-      if (_WeightOffset == null) {
-        _WeightOffset = Schema.GetOffset(0xF8271D21CFFC66CB);
-      }
-      return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+    public ref float Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0xF8271D21CFFC66CB);
+            return ref _Handle.AsRef<float>(_WeightOffset!.Value);
+        }
     }
-  }
-  private static nint? _MatrixNodeOffset;
+    private static nint? _MatrixNodeOffset;
 
-  public ref uint MatrixNode {
-    get {
-      if (_MatrixNodeOffset == null) {
-        _MatrixNodeOffset = Schema.GetOffset(0xF8271D2189590174);
-      }
-      return ref _Handle.AsRef<uint>(_MatrixNodeOffset!.Value);
+    public ref uint MatrixNode {
+        get {
+            _MatrixNodeOffset = _MatrixNodeOffset ?? Schema.GetOffset(0xF8271D2189590174);
+            return ref _Handle.AsRef<uint>(_MatrixNodeOffset!.Value);
+        }
     }
-  }
 
 
 }

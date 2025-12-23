@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface IChoreoServices : ISchemaClass<IChoreoServices> {
-
-  static IChoreoServices ISchemaClass<IChoreoServices>.From(nint handle) => new IChoreoServicesImpl(handle);
-  static int ISchemaClass<IChoreoServices>.Size => 8;
-  static string? ISchemaClass<IChoreoServices>.ClassName => null;
+public partial interface IChoreoServices : ISchemaClass<IChoreoServices>
+{
+    static IChoreoServices ISchemaClass<IChoreoServices>.From(nint handle) => new IChoreoServicesImpl(handle);
+    static int ISchemaClass<IChoreoServices>.Size => 8;
+    static string? ISchemaClass<IChoreoServices>.ClassName => null;
 
 
 

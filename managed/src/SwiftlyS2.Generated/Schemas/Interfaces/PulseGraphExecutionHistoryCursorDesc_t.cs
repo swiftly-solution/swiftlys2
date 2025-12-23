@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PulseGraphExecutionHistoryCursorDesc_t : ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t> {
+public partial interface PulseGraphExecutionHistoryCursorDesc_t : ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t>
+{
+    static PulseGraphExecutionHistoryCursorDesc_t ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t>.From(nint handle) => new PulseGraphExecutionHistoryCursorDesc_tImpl(handle);
+    static int ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t>.Size => 40;
+    static string? ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t>.ClassName => null;
 
-  static PulseGraphExecutionHistoryCursorDesc_t ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t>.From(nint handle) => new PulseGraphExecutionHistoryCursorDesc_tImpl(handle);
-  static int ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t>.Size => 40;
-  static string? ISchemaClass<PulseGraphExecutionHistoryCursorDesc_t>.ClassName => null;
 
-  
-  public ref CUtlVector<PulseCursorID_t> AncestorCursorIDs { get; }
-  
-  public PulseDocNodeID_t SpawnNodeID { get; }
-  
-  public PulseDocNodeID_t RetiredAtNodeID { get; }
-  
-  public ref float LastReferenced { get; }
-  
-  public ref int LastValidEntryIdx { get; }
+    public ref CUtlVector<PulseCursorID_t> AncestorCursorIDs { get; }
+
+    public PulseDocNodeID_t SpawnNodeID { get; }
+
+    public PulseDocNodeID_t RetiredAtNodeID { get; }
+
+    public ref float LastReferenced { get; }
+
+    public ref int LastValidEntryIdx { get; }
 
 
 }

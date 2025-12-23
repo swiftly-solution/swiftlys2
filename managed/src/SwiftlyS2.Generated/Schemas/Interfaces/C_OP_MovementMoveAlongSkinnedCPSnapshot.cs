@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_MovementMoveAlongSkinnedCPSnapshot : CParticleFunctionOperator, ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot> {
+public partial interface C_OP_MovementMoveAlongSkinnedCPSnapshot : CParticleFunctionOperator, ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot>
+{
+    static C_OP_MovementMoveAlongSkinnedCPSnapshot ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot>.From(nint handle) => new C_OP_MovementMoveAlongSkinnedCPSnapshotImpl(handle);
+    static int ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot>.Size => 1216;
+    static string? ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot>.ClassName => null;
 
-  static C_OP_MovementMoveAlongSkinnedCPSnapshot ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot>.From(nint handle) => new C_OP_MovementMoveAlongSkinnedCPSnapshotImpl(handle);
-  static int ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot>.Size => 1216;
-  static string? ISchemaClass<C_OP_MovementMoveAlongSkinnedCPSnapshot>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public ref int SnapshotControlPointNumber { get; }
-  
-  public ref bool SetNormal { get; }
-  
-  public ref bool SetRadius { get; }
-  
-  public CPerParticleFloatInput Interpolation { get; }
-  
-  public CPerParticleFloatInput TValue { get; }
+    public ref int ControlPointNumber { get; }
+
+    public ref int SnapshotControlPointNumber { get; }
+
+    public ref bool SetNormal { get; }
+
+    public ref bool SetRadius { get; }
+
+    public CPerParticleFloatInput Interpolation { get; }
+
+    public CPerParticleFloatInput TValue { get; }
 
 
 }

@@ -8,36 +8,36 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseTrigger : CBaseToggle, ISchemaClass<CBaseTrigger> {
+public partial interface CBaseTrigger : CBaseToggle, ISchemaClass<CBaseTrigger>
+{
+    static CBaseTrigger ISchemaClass<CBaseTrigger>.From(nint handle) => new CBaseTriggerImpl(handle);
+    static int ISchemaClass<CBaseTrigger>.Size => 2472;
+    static string? ISchemaClass<CBaseTrigger>.ClassName => "trigger";
 
-  static CBaseTrigger ISchemaClass<CBaseTrigger>.From(nint handle) => new CBaseTriggerImpl(handle);
-  static int ISchemaClass<CBaseTrigger>.Size => 2472;
-  static string? ISchemaClass<CBaseTrigger>.ClassName => "trigger";
 
-  
-  public CEntityIOOutput OnStartTouch { get; }
-  
-  public CEntityIOOutput OnStartTouchAll { get; }
-  
-  public CEntityIOOutput OnEndTouch { get; }
-  
-  public CEntityIOOutput OnEndTouchAll { get; }
-  
-  public CEntityIOOutput OnTouching { get; }
-  
-  public CEntityIOOutput OnTouchingEachEntity { get; }
-  
-  public CEntityIOOutput OnNotTouching { get; }
-  
-  public ref CUtlVector<CHandle<CBaseEntity>> TouchingEntities { get; }
-  
-  public string FilterName { get; set; }
-  
-  public ref CHandle<CBaseFilter> Filter { get; }
-  
-  public ref bool Disabled { get; }
-  
-  public ref bool UseAsyncQueries { get; }
+    public ref CEntityIOOutput OnStartTouch { get; }
 
-  public void DisabledUpdated();
+    public ref CEntityIOOutput OnStartTouchAll { get; }
+
+    public ref CEntityIOOutput OnEndTouch { get; }
+
+    public ref CEntityIOOutput OnEndTouchAll { get; }
+
+    public ref CEntityIOOutput OnTouching { get; }
+
+    public ref CEntityIOOutput OnTouchingEachEntity { get; }
+
+    public ref CEntityIOOutput OnNotTouching { get; }
+
+    public ref CUtlVector<CHandle<CBaseEntity>> TouchingEntities { get; }
+
+    public string FilterName { get; set; }
+
+    public ref CHandle<CBaseFilter> Filter { get; }
+
+    public ref bool Disabled { get; }
+
+    public ref bool UseAsyncQueries { get; }
+
+    public void DisabledUpdated();
 }

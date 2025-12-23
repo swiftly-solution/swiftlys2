@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CItem_Healthshot : CWeaponBaseItem, ISchemaClass<CItem_Healthshot> {
-
-  static CItem_Healthshot ISchemaClass<CItem_Healthshot>.From(nint handle) => new CItem_HealthshotImpl(handle);
-  static int ISchemaClass<CItem_Healthshot>.Size => 4576;
-  static string? ISchemaClass<CItem_Healthshot>.ClassName => "weapon_healthshot";
+public partial interface CItem_Healthshot : CWeaponBaseItem, ISchemaClass<CItem_Healthshot>
+{
+    static CItem_Healthshot ISchemaClass<CItem_Healthshot>.From(nint handle) => new CItem_HealthshotImpl(handle);
+    static int ISchemaClass<CItem_Healthshot>.Size => 4576;
+    static string? ISchemaClass<CItem_Healthshot>.ClassName => "weapon_healthshot";
 
 
 

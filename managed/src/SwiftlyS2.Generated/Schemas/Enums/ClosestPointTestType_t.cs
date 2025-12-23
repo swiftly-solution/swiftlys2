@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ClosestPointTestType_t : uint {
-
+public enum ClosestPointTestType_t : uint
+{
  PARTICLE_CLOSEST_TYPE_BOX = 0,
 
  PARTICLE_CLOSEST_TYPE_CAPSULE = 1,

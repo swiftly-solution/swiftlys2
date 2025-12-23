@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_FadeAndKillForTracers : CParticleFunctionOperator, ISchemaClass<C_OP_FadeAndKillForTracers> {
+public partial interface C_OP_FadeAndKillForTracers : CParticleFunctionOperator, ISchemaClass<C_OP_FadeAndKillForTracers>
+{
+    static C_OP_FadeAndKillForTracers ISchemaClass<C_OP_FadeAndKillForTracers>.From(nint handle) => new C_OP_FadeAndKillForTracersImpl(handle);
+    static int ISchemaClass<C_OP_FadeAndKillForTracers>.Size => 488;
+    static string? ISchemaClass<C_OP_FadeAndKillForTracers>.ClassName => null;
 
-  static C_OP_FadeAndKillForTracers ISchemaClass<C_OP_FadeAndKillForTracers>.From(nint handle) => new C_OP_FadeAndKillForTracersImpl(handle);
-  static int ISchemaClass<C_OP_FadeAndKillForTracers>.Size => 488;
-  static string? ISchemaClass<C_OP_FadeAndKillForTracers>.ClassName => null;
 
-  
-  public ref float StartFadeInTime { get; }
-  
-  public ref float EndFadeInTime { get; }
-  
-  public ref float StartFadeOutTime { get; }
-  
-  public ref float EndFadeOutTime { get; }
-  
-  public ref float StartAlpha { get; }
-  
-  public ref float EndAlpha { get; }
+    public ref float StartFadeInTime { get; }
+
+    public ref float EndFadeInTime { get; }
+
+    public ref float StartFadeOutTime { get; }
+
+    public ref float EndFadeOutTime { get; }
+
+    public ref float StartAlpha { get; }
+
+    public ref float EndAlpha { get; }
 
 
 }

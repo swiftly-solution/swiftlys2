@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulsePhysicsConstraintsFuncs : ISchemaClass<CPulsePhysicsConstraintsFuncs> {
-
-  static CPulsePhysicsConstraintsFuncs ISchemaClass<CPulsePhysicsConstraintsFuncs>.From(nint handle) => new CPulsePhysicsConstraintsFuncsImpl(handle);
-  static int ISchemaClass<CPulsePhysicsConstraintsFuncs>.Size => 1;
-  static string? ISchemaClass<CPulsePhysicsConstraintsFuncs>.ClassName => null;
+public partial interface CPulsePhysicsConstraintsFuncs : ISchemaClass<CPulsePhysicsConstraintsFuncs>
+{
+    static CPulsePhysicsConstraintsFuncs ISchemaClass<CPulsePhysicsConstraintsFuncs>.From(nint handle) => new CPulsePhysicsConstraintsFuncsImpl(handle);
+    static int ISchemaClass<CPulsePhysicsConstraintsFuncs>.Size => 1;
+    static string? ISchemaClass<CPulsePhysicsConstraintsFuncs>.ClassName => null;
 
 
 

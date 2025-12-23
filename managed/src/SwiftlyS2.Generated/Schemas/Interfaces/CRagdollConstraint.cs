@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRagdollConstraint : CPhysConstraint, ISchemaClass<CRagdollConstraint> {
+public partial interface CRagdollConstraint : CPhysConstraint, ISchemaClass<CRagdollConstraint>
+{
+    static CRagdollConstraint ISchemaClass<CRagdollConstraint>.From(nint handle) => new CRagdollConstraintImpl(handle);
+    static int ISchemaClass<CRagdollConstraint>.Size => 1416;
+    static string? ISchemaClass<CRagdollConstraint>.ClassName => "phys_ragdollconstraint";
 
-  static CRagdollConstraint ISchemaClass<CRagdollConstraint>.From(nint handle) => new CRagdollConstraintImpl(handle);
-  static int ISchemaClass<CRagdollConstraint>.Size => 1416;
-  static string? ISchemaClass<CRagdollConstraint>.ClassName => "phys_ragdollconstraint";
 
-  
-  public ref float Xmin { get; }
-  
-  public ref float Xmax { get; }
-  
-  public ref float Ymin { get; }
-  
-  public ref float Ymax { get; }
-  
-  public ref float Zmin { get; }
-  
-  public ref float Zmax { get; }
-  
-  public ref float Xfriction { get; }
-  
-  public ref float Yfriction { get; }
-  
-  public ref float Zfriction { get; }
+    public ref float Xmin { get; }
+
+    public ref float Xmax { get; }
+
+    public ref float Ymin { get; }
+
+    public ref float Ymax { get; }
+
+    public ref float Zmin { get; }
+
+    public ref float Zmax { get; }
+
+    public ref float Xfriction { get; }
+
+    public ref float Yfriction { get; }
+
+    public ref float Zfriction { get; }
 
 
 }

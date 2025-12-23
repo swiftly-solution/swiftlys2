@@ -1,104 +1,109 @@
-using System.Buffers;
-using System.Diagnostics;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
-using SwiftlyS2.Core.Extensions;
-using SwiftlyS2.Core.GameEvents;
-using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.Natives.NativeObjects;
-using SwiftlyS2.Core.NetMessages;
-using SwiftlyS2.Core.ProtobufDefinitions;
-using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared;
-using SwiftlyS2.Shared.Convars;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Events;
-using SwiftlyS2.Shared.GameEventDefinitions;
-using SwiftlyS2.Shared.GameEvents;
-using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.ProtobufDefinitions;
+using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.Services;
 
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-internal delegate nint DispatchSpawnHook( nint entity, nint kv );
-
 internal class TestService
 {
+    // [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    // internal delegate nint DispatchSpawnHook( nint entity, nint kv );
 
-  private ILogger<TestService> _Logger { get; init; }
-  private ProfileService _ProfileService { get; init; }
-  private ISwiftlyCore _Core { get; init; }
-  public unsafe TestService(
-    ILogger<TestService> logger,
-    ProfileService profileService,
-    ISwiftlyCore core
-  )
-  {
-    _ProfileService = profileService;
-    _Core = core;
-    _Logger = logger;
+    private readonly ILogger<TestService> logger;
+    private readonly ProfileService profile;
+    private readonly ISwiftlyCore core;
 
-    _Logger.LogWarning("TestService created");
-    _Logger.LogWarning("TestService created");
-    _Logger.LogWarning("TestService created");
-    _Logger.LogWarning("TestService created");
-    _Logger.LogWarning("TestService created");
-    _Logger.LogWarning("TestService created");
-    _Logger.LogWarning("TestService created");
-    _Logger.LogWarning("TestService created");
-    _Logger.LogWarning("TestService created");
-
-    Test();
-  }
-
-  static void PrintStructFields<T>( T obj ) where T : struct
-  {
-    Type type = typeof(T);
-    FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
-
-    foreach (FieldInfo field in fields)
+    public unsafe TestService( ILogger<TestService> logger, ProfileService profileService, ISwiftlyCore core )
     {
-      object value = field.GetValue(obj);
-      Console.WriteLine($"{field.Name}: {value}");
+        this.profile = profileService;
+        this.core = core;
+        this.logger = logger;
+
+        logger.LogWarning("TestService created");
+        logger.LogWarning("TestService created");
+        logger.LogWarning("TestService created");
+        logger.LogWarning("TestService created");
+        logger.LogWarning("TestService created");
+        logger.LogWarning("TestService created");
+        logger.LogWarning("TestService created");
+        logger.LogWarning("TestService created");
+        logger.LogWarning("TestService created");
+
+        core.Registrator.Register(this);
+        Test2();
     }
-  }
 
-
-  public void Test()
-  {
-    _ = _Core.Scheduler.RepeatBySeconds(1.0f, () =>
+    private static void PrintStructFields<T>( T obj ) where T : struct
     {
-      var gameServer = NativeEngineHelpers.GetNetworkGameServer();
-      unsafe
-      {
-        ref var array = ref gameServer.AsRef<CUtlVector<nint>>(624);
-        foreach (var client in array)
+        var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+        foreach (var field in fields)
         {
-          if (client == 0)
-            continue;
-
-          ref var serversideClient = ref client.AsRef<CServerSideClient>();
-          PrintStructFields(serversideClient.Base);
+            var value = field.GetValue(obj);
+            Console.WriteLine($"{field.Name}: {value}");
         }
-      }
-    });
-  }
-  public void Test2()
-  {
-    _Core.Event.OnMovementServicesRunCommandHook += ( @event ) =>
+    }
+
+    public void Test()
     {
-      @event.UserCmdPB.Base.ClientTick -= 100;
-    };
-    // _Core.Event.OnItemServicesCanAcquireHook += (@event) => {
-    //   Console.WriteLine(@event.EconItemView.ItemDefinitionIndex);
+        _ = core.Scheduler.RepeatBySeconds(1.0f, () =>
+        {
+            var gameServer = NativeEngineHelpers.GetNetworkGameServer();
+            unsafe
+            {
+                ref var array = ref gameServer.AsRef<CUtlVector<nint>>(624);
+                foreach (var client in array)
+                {
+                    if (client == 0)
+                    {
+                        continue;
+                    }
+                    ref var serversideClient = ref client.AsRef<CServerSideClient>();
+                    PrintStructFields(serversideClient.Base);
+                }
+            }
+        });
+    }
 
-    //   @event.SetAcquireResult(AcquireResult.NotAllowedByProhibition);
-    // };
+    public void Test2()
+    {
+        var variant = new CVariant<CVariantDefaultAllocator>(100);
+        Console.WriteLine(variant.ToString());
+        variant.SetString("LOL");
+        Console.WriteLine(variant.ToString());
+        variant.SetVector(new(1, 1, 1));
+        Console.WriteLine(variant.ToString());
+    }
 
+    // [EntityOutputHandler("*", "*")]
+    // public void Test3( IOnEntityFireOutputHookEvent @event )
+    // {
+    //     Console.WriteLine("MFMFMFMFMFMFMFMFMF");
+    //     Console.WriteLine($"HookEntityOutput -> designerName: {@event.DesignerName} output: {@event.OutputName}, activator: {@event.Activator?.As<CBaseEntity>()?.DesignerName}, caller: {@event.Caller?.As<CBaseEntity>()?.DesignerName}, value: {@event.VariantValue}, delay: {@event.Delay}");
+    // }
 
-  }
+    // [EntityInputHandler("*", "*")]
+    // public void Test4( IOnEntityIdentityAcceptInputHookEvent @event )
+    // {
+    //     Console.WriteLine("FMFMFMFMFMFMFMFMFM");
+    //     Console.WriteLine($"HookEntityInput -> designerName: {@event.DesignerName} output: {@event.InputName}, activator: {@event.Activator?.As<CBaseEntity>()?.DesignerName}, caller: {@event.Caller?.As<CBaseEntity>()?.DesignerName}, value: {@event.VariantValue}");
+    // }
+
+    [EntityOutputHandler<CPropDoorRotating>("*")]
+    public void Test3( IOnEntityFireOutputHookEvent @event )
+    {
+        Console.WriteLine($"HookEntityOutput -> designerName: {@event.DesignerName} output: {@event.OutputName}, activator: {@event.Activator?.As<CBaseEntity>()?.DesignerName}, caller: {@event.Caller?.As<CBaseEntity>()?.DesignerName}, value: {@event.VariantValue}, delay: {@event.Delay}");
+    }
+
+    [EntityInputHandler<CCSPlayerPawn>("*")]
+    public void Test4( IOnEntityIdentityAcceptInputHookEvent @event )
+    {
+        Console.WriteLine($"HookEntityInput -> designerName: {@event.DesignerName} output: {@event.InputName}, activator: {@event.Activator?.As<CBaseEntity>()?.DesignerName}, caller: {@event.Caller?.As<CBaseEntity>()?.DesignerName}, value: {@event.VariantValue}");
+    }
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface EventPostAdvanceTick_t : EventSimulate_t, ISchemaClass<EventPostAdvanceTick_t> {
+public partial interface EventPostAdvanceTick_t : EventSimulate_t, ISchemaClass<EventPostAdvanceTick_t>
+{
+    static EventPostAdvanceTick_t ISchemaClass<EventPostAdvanceTick_t>.From(nint handle) => new EventPostAdvanceTick_tImpl(handle);
+    static int ISchemaClass<EventPostAdvanceTick_t>.Size => 64;
+    static string? ISchemaClass<EventPostAdvanceTick_t>.ClassName => null;
 
-  static EventPostAdvanceTick_t ISchemaClass<EventPostAdvanceTick_t>.From(nint handle) => new EventPostAdvanceTick_tImpl(handle);
-  static int ISchemaClass<EventPostAdvanceTick_t>.Size => 64;
-  static string? ISchemaClass<EventPostAdvanceTick_t>.ClassName => null;
 
-  
-  public ref int CurrentTick { get; }
-  
-  public ref int CurrentTickThisFrame { get; }
-  
-  public ref int TotalTicksThisFrame { get; }
-  
-  public ref int TotalTicks { get; }
+    public ref int CurrentTick { get; }
+
+    public ref int CurrentTickThisFrame { get; }
+
+    public ref int TotalTicksThisFrame { get; }
+
+    public ref int TotalTicks { get; }
 
 
 }

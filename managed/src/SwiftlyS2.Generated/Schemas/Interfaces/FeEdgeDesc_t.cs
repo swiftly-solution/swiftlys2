@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeEdgeDesc_t : ISchemaClass<FeEdgeDesc_t> {
+public partial interface FeEdgeDesc_t : ISchemaClass<FeEdgeDesc_t>
+{
+    static FeEdgeDesc_t ISchemaClass<FeEdgeDesc_t>.From(nint handle) => new FeEdgeDesc_tImpl(handle);
+    static int ISchemaClass<FeEdgeDesc_t>.Size => 16;
+    static string? ISchemaClass<FeEdgeDesc_t>.ClassName => null;
 
-  static FeEdgeDesc_t ISchemaClass<FeEdgeDesc_t>.From(nint handle) => new FeEdgeDesc_tImpl(handle);
-  static int ISchemaClass<FeEdgeDesc_t>.Size => 16;
-  static string? ISchemaClass<FeEdgeDesc_t>.ClassName => null;
 
-  
-  public ISchemaFixedArray<ushort> Edge { get; }
-  
-  // uint16[2]
-  public SchemaUntypedField Side { get; }
-  
-  public ISchemaFixedArray<ushort> VirtElem { get; }
+    public ISchemaFixedArray<ushort> Edge { get; }
+
+    // uint16[2]
+    public SchemaUntypedField Side { get; }
+
+    public ISchemaFixedArray<ushort> VirtElem { get; }
 
 
 }

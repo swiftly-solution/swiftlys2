@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBoneConstraintRbf : CBoneConstraintBase, ISchemaClass<CBoneConstraintRbf> {
+public partial interface CBoneConstraintRbf : CBoneConstraintBase, ISchemaClass<CBoneConstraintRbf>
+{
+    static CBoneConstraintRbf ISchemaClass<CBoneConstraintRbf>.From(nint handle) => new CBoneConstraintRbfImpl(handle);
+    static int ISchemaClass<CBoneConstraintRbf>.Size => 200;
+    static string? ISchemaClass<CBoneConstraintRbf>.ClassName => null;
 
-  static CBoneConstraintRbf ISchemaClass<CBoneConstraintRbf>.From(nint handle) => new CBoneConstraintRbfImpl(handle);
-  static int ISchemaClass<CBoneConstraintRbf>.Size => 200;
-  static string? ISchemaClass<CBoneConstraintRbf>.ClassName => null;
 
-  
-  public ref CUtlVector<SchemaUntypedField> InputBones { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> OutputBones { get; }
+    public ref CUtlVector<SchemaUntypedField> InputBones { get; }
+
+    public ref CUtlVector<SchemaUntypedField> OutputBones { get; }
 
 
 }

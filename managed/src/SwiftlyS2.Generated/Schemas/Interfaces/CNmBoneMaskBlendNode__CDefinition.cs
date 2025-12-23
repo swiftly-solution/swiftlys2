@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmBoneMaskBlendNode__CDefinition : CNmBoneMaskValueNode__CDefinition, ISchemaClass<CNmBoneMaskBlendNode__CDefinition> {
+public partial interface CNmBoneMaskBlendNode__CDefinition : CNmBoneMaskValueNode__CDefinition, ISchemaClass<CNmBoneMaskBlendNode__CDefinition>
+{
+    static CNmBoneMaskBlendNode__CDefinition ISchemaClass<CNmBoneMaskBlendNode__CDefinition>.From(nint handle) => new CNmBoneMaskBlendNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmBoneMaskBlendNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmBoneMaskBlendNode__CDefinition>.ClassName => null;
 
-  static CNmBoneMaskBlendNode__CDefinition ISchemaClass<CNmBoneMaskBlendNode__CDefinition>.From(nint handle) => new CNmBoneMaskBlendNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmBoneMaskBlendNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmBoneMaskBlendNode__CDefinition>.ClassName => null;
 
-  
-  public ref short SourceMaskNodeIdx { get; }
-  
-  public ref short TargetMaskNodeIdx { get; }
-  
-  public ref short BlendWeightValueNodeIdx { get; }
+    public ref short SourceMaskNodeIdx { get; }
+
+    public ref short TargetMaskNodeIdx { get; }
+
+    public ref short BlendWeightValueNodeIdx { get; }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSlowDownOnSlopesUpdateNode : CUnaryUpdateNode, ISchemaClass<CSlowDownOnSlopesUpdateNode> {
+public partial interface CSlowDownOnSlopesUpdateNode : CUnaryUpdateNode, ISchemaClass<CSlowDownOnSlopesUpdateNode>
+{
+    static CSlowDownOnSlopesUpdateNode ISchemaClass<CSlowDownOnSlopesUpdateNode>.From(nint handle) => new CSlowDownOnSlopesUpdateNodeImpl(handle);
+    static int ISchemaClass<CSlowDownOnSlopesUpdateNode>.Size => 120;
+    static string? ISchemaClass<CSlowDownOnSlopesUpdateNode>.ClassName => null;
 
-  static CSlowDownOnSlopesUpdateNode ISchemaClass<CSlowDownOnSlopesUpdateNode>.From(nint handle) => new CSlowDownOnSlopesUpdateNodeImpl(handle);
-  static int ISchemaClass<CSlowDownOnSlopesUpdateNode>.Size => 120;
-  static string? ISchemaClass<CSlowDownOnSlopesUpdateNode>.ClassName => null;
 
-  
-  public ref float SlowDownStrength { get; }
+    public ref float SlowDownStrength { get; }
 
 
 }

@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum C4LightEffect_t : uint {
-
+public enum C4LightEffect_t : uint
+{
  eLightEffectNone = 0,
 
  eLightEffectDropped = 1,

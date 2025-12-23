@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFixedWeightBoneMaskNode__CDefinition : CNmBoneMaskValueNode__CDefinition, ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition> {
+public partial interface CNmFixedWeightBoneMaskNode__CDefinition : CNmBoneMaskValueNode__CDefinition, ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition>
+{
+    static CNmFixedWeightBoneMaskNode__CDefinition ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition>.From(nint handle) => new CNmFixedWeightBoneMaskNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition>.Size => 24;
+    static string? ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition>.ClassName => null;
 
-  static CNmFixedWeightBoneMaskNode__CDefinition ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition>.From(nint handle) => new CNmFixedWeightBoneMaskNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition>.Size => 24;
-  static string? ISchemaClass<CNmFixedWeightBoneMaskNode__CDefinition>.ClassName => null;
 
-  
-  public ref float BoneWeight { get; }
+    public ref float BoneWeight { get; }
 
 
 }

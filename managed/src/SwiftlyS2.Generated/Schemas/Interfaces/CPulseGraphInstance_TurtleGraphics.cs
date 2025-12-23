@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseGraphInstance_TurtleGraphics : CBasePulseGraphInstance, ISchemaClass<CPulseGraphInstance_TurtleGraphics> {
-
-  static CPulseGraphInstance_TurtleGraphics ISchemaClass<CPulseGraphInstance_TurtleGraphics>.From(nint handle) => new CPulseGraphInstance_TurtleGraphicsImpl(handle);
-  static int ISchemaClass<CPulseGraphInstance_TurtleGraphics>.Size => 320;
-  static string? ISchemaClass<CPulseGraphInstance_TurtleGraphics>.ClassName => null;
+public partial interface CPulseGraphInstance_TurtleGraphics : CBasePulseGraphInstance, ISchemaClass<CPulseGraphInstance_TurtleGraphics>
+{
+    static CPulseGraphInstance_TurtleGraphics ISchemaClass<CPulseGraphInstance_TurtleGraphics>.From(nint handle) => new CPulseGraphInstance_TurtleGraphicsImpl(handle);
+    static int ISchemaClass<CPulseGraphInstance_TurtleGraphics>.Size => 320;
+    static string? ISchemaClass<CPulseGraphInstance_TurtleGraphics>.ClassName => null;
 
 
 

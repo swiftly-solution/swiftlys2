@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointPositionToRandomActiveCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP> {
+public partial interface C_OP_SetControlPointPositionToRandomActiveCP : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP>
+{
+    static C_OP_SetControlPointPositionToRandomActiveCP ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP>.From(nint handle) => new C_OP_SetControlPointPositionToRandomActiveCPImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP>.Size => 856;
+    static string? ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP>.ClassName => null;
 
-  static C_OP_SetControlPointPositionToRandomActiveCP ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP>.From(nint handle) => new C_OP_SetControlPointPositionToRandomActiveCPImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP>.Size => 856;
-  static string? ISchemaClass<C_OP_SetControlPointPositionToRandomActiveCP>.ClassName => null;
 
-  
-  public ref int CP1 { get; }
-  
-  public ref int HeadLocationMin { get; }
-  
-  public ref int HeadLocationMax { get; }
-  
-  public CParticleCollectionFloatInput ResetRate { get; }
+    public ref int CP1 { get; }
+
+    public ref int HeadLocationMin { get; }
+
+    public ref int HeadLocationMax { get; }
+
+    public CParticleCollectionFloatInput ResetRate { get; }
 
 
 }

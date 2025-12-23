@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface InfoForResourceTypeCPanoramaDynamicImages : ISchemaClass<InfoForResourceTypeCPanoramaDynamicImages> {
-
-  static InfoForResourceTypeCPanoramaDynamicImages ISchemaClass<InfoForResourceTypeCPanoramaDynamicImages>.From(nint handle) => new InfoForResourceTypeCPanoramaDynamicImagesImpl(handle);
-  static int ISchemaClass<InfoForResourceTypeCPanoramaDynamicImages>.Size => 1;
-  static string? ISchemaClass<InfoForResourceTypeCPanoramaDynamicImages>.ClassName => null;
+public partial interface InfoForResourceTypeCPanoramaDynamicImages : ISchemaClass<InfoForResourceTypeCPanoramaDynamicImages>
+{
+    static InfoForResourceTypeCPanoramaDynamicImages ISchemaClass<InfoForResourceTypeCPanoramaDynamicImages>.From(nint handle) => new InfoForResourceTypeCPanoramaDynamicImagesImpl(handle);
+    static int ISchemaClass<InfoForResourceTypeCPanoramaDynamicImages>.Size => 1;
+    static string? ISchemaClass<InfoForResourceTypeCPanoramaDynamicImages>.ClassName => null;
 
 
 

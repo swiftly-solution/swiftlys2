@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum TOGGLE_STATE : uint {
-
+public enum TOGGLE_STATE : uint
+{
  TS_AT_TOP = 0,
 
  TS_AT_BOTTOM = 1,

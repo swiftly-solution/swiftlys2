@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_StopAfterCPDuration : CParticleFunctionPreEmission, ISchemaClass<C_OP_StopAfterCPDuration> {
+public partial interface C_OP_StopAfterCPDuration : CParticleFunctionPreEmission, ISchemaClass<C_OP_StopAfterCPDuration>
+{
+    static C_OP_StopAfterCPDuration ISchemaClass<C_OP_StopAfterCPDuration>.From(nint handle) => new C_OP_StopAfterCPDurationImpl(handle);
+    static int ISchemaClass<C_OP_StopAfterCPDuration>.Size => 848;
+    static string? ISchemaClass<C_OP_StopAfterCPDuration>.ClassName => null;
 
-  static C_OP_StopAfterCPDuration ISchemaClass<C_OP_StopAfterCPDuration>.From(nint handle) => new C_OP_StopAfterCPDurationImpl(handle);
-  static int ISchemaClass<C_OP_StopAfterCPDuration>.Size => 848;
-  static string? ISchemaClass<C_OP_StopAfterCPDuration>.ClassName => null;
 
-  
-  public CParticleCollectionFloatInput Duration { get; }
-  
-  public ref bool DestroyImmediately { get; }
-  
-  public ref bool PlayEndCap { get; }
+    public CParticleCollectionFloatInput Duration { get; }
+
+    public ref bool DestroyImmediately { get; }
+
+    public ref bool PlayEndCap { get; }
 
 
 }

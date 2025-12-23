@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ uint64_t Bridge_ConsoleOutput_AddConsoleListener(void* callback)
     auto consoleOutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
     return consoleOutput->AddConsoleListener([callback](const std::string& text) {
         reinterpret_cast<void(*)(const char*)>(callback)(text.c_str());
-    });
+        });
 }
 
 void Bridge_ConsoleOutput_RemoveConsoleListener(uint64_t listenerId)

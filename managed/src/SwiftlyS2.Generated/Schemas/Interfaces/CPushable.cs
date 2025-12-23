@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPushable : CBreakable, ISchemaClass<CPushable> {
-
-  static CPushable ISchemaClass<CPushable>.From(nint handle) => new CPushableImpl(handle);
-  static int ISchemaClass<CPushable>.Size => 2224;
-  static string? ISchemaClass<CPushable>.ClassName => "func_pushable";
+public partial interface CPushable : CBreakable, ISchemaClass<CPushable>
+{
+    static CPushable ISchemaClass<CPushable>.From(nint handle) => new CPushableImpl(handle);
+    static int ISchemaClass<CPushable>.Size => 2224;
+    static string? ISchemaClass<CPushable>.ClassName => "func_pushable";
 
 
 

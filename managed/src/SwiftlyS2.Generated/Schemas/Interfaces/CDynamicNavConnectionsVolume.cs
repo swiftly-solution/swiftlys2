@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CDynamicNavConnectionsVolume : CTriggerMultiple, ISchemaClass<CDynamicNavConnectionsVolume> {
+public partial interface CDynamicNavConnectionsVolume : CTriggerMultiple, ISchemaClass<CDynamicNavConnectionsVolume>
+{
+    static CDynamicNavConnectionsVolume ISchemaClass<CDynamicNavConnectionsVolume>.From(nint handle) => new CDynamicNavConnectionsVolumeImpl(handle);
+    static int ISchemaClass<CDynamicNavConnectionsVolume>.Size => 2568;
+    static string? ISchemaClass<CDynamicNavConnectionsVolume>.ClassName => "func_nav_dynamic_connections";
 
-  static CDynamicNavConnectionsVolume ISchemaClass<CDynamicNavConnectionsVolume>.From(nint handle) => new CDynamicNavConnectionsVolumeImpl(handle);
-  static int ISchemaClass<CDynamicNavConnectionsVolume>.Size => 2568;
-  static string? ISchemaClass<CDynamicNavConnectionsVolume>.ClassName => "func_nav_dynamic_connections";
 
-  
-  public string ConnectionTarget { get; set; }
-  
-  public ref CUtlVector<DynamicVolumeDef_t> Connections { get; }
-  
-  public ref CGlobalSymbol TransitionType { get; }
-  
-  public ref bool ConnectionsEnabled { get; }
-  
-  public ref float TargetAreaSearchRadius { get; }
-  
-  public ref float UpdateDistance { get; }
-  
-  public ref float MaxConnectionDistance { get; }
+    public string ConnectionTarget { get; set; }
+
+    public ref CUtlVector<DynamicVolumeDef_t> Connections { get; }
+
+    public ref CGlobalSymbol TransitionType { get; }
+
+    public ref bool ConnectionsEnabled { get; }
+
+    public ref float TargetAreaSearchRadius { get; }
+
+    public ref float UpdateDistance { get; }
+
+    public ref float MaxConnectionDistance { get; }
 
 
 }

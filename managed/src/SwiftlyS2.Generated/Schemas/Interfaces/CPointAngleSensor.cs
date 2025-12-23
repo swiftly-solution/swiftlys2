@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointAngleSensor : CPointEntity, ISchemaClass<CPointAngleSensor> {
+public partial interface CPointAngleSensor : CPointEntity, ISchemaClass<CPointAngleSensor>
+{
+    static CPointAngleSensor ISchemaClass<CPointAngleSensor>.From(nint handle) => new CPointAngleSensorImpl(handle);
+    static int ISchemaClass<CPointAngleSensor>.Size => 1464;
+    static string? ISchemaClass<CPointAngleSensor>.ClassName => "point_anglesensor";
 
-  static CPointAngleSensor ISchemaClass<CPointAngleSensor>.From(nint handle) => new CPointAngleSensorImpl(handle);
-  static int ISchemaClass<CPointAngleSensor>.Size => 1464;
-  static string? ISchemaClass<CPointAngleSensor>.ClassName => "point_anglesensor";
 
-  
-  public ref bool Disabled { get; }
-  
-  public string LookAtName { get; set; }
-  
-  public ref CHandle<CBaseEntity> TargetEntity { get; }
-  
-  public ref CHandle<CBaseEntity> LookAtEntity { get; }
-  
-  public ref float Duration { get; }
-  
-  public ref float DotTolerance { get; }
-  
-  public GameTime_t FacingTime { get; }
-  
-  public ref bool Fired { get; }
-  
-  public CEntityIOOutput OnFacingLookat { get; }
-  
-  public CEntityIOOutput OnNotFacingLookat { get; }
-  
-  // CEntityOutputTemplate< Vector >
-  public SchemaUntypedField TargetDir { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField FacingPercentage { get; }
+    public ref bool Disabled { get; }
+
+    public string LookAtName { get; set; }
+
+    public ref CHandle<CBaseEntity> TargetEntity { get; }
+
+    public ref CHandle<CBaseEntity> LookAtEntity { get; }
+
+    public ref float Duration { get; }
+
+    public ref float DotTolerance { get; }
+
+    public GameTime_t FacingTime { get; }
+
+    public ref bool Fired { get; }
+
+    public ref CEntityIOOutput OnFacingLookat { get; }
+
+    public ref CEntityIOOutput OnNotFacingLookat { get; }
+
+    // CEntityOutputTemplate< Vector >
+    public SchemaUntypedField TargetDir { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField FacingPercentage { get; }
 
 
 }

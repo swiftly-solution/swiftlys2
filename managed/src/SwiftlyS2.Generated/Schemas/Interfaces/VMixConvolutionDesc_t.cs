@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixConvolutionDesc_t : ISchemaClass<VMixConvolutionDesc_t> {
+public partial interface VMixConvolutionDesc_t : ISchemaClass<VMixConvolutionDesc_t>
+{
+    static VMixConvolutionDesc_t ISchemaClass<VMixConvolutionDesc_t>.From(nint handle) => new VMixConvolutionDesc_tImpl(handle);
+    static int ISchemaClass<VMixConvolutionDesc_t>.Size => 32;
+    static string? ISchemaClass<VMixConvolutionDesc_t>.ClassName => null;
 
-  static VMixConvolutionDesc_t ISchemaClass<VMixConvolutionDesc_t>.From(nint handle) => new VMixConvolutionDesc_tImpl(handle);
-  static int ISchemaClass<VMixConvolutionDesc_t>.Size => 32;
-  static string? ISchemaClass<VMixConvolutionDesc_t>.ClassName => null;
 
-  
-  public ref float FldbGain { get; }
-  
-  public ref float PreDelayMS { get; }
-  
-  public ref float WetMix { get; }
-  
-  public ref float FldbLow { get; }
-  
-  public ref float FldbMid { get; }
-  
-  public ref float FldbHigh { get; }
-  
-  public ref float LowCutoffFreq { get; }
-  
-  public ref float HighCutoffFreq { get; }
+    public ref float FldbGain { get; }
+
+    public ref float PreDelayMS { get; }
+
+    public ref float WetMix { get; }
+
+    public ref float FldbLow { get; }
+
+    public ref float FldbMid { get; }
+
+    public ref float FldbHigh { get; }
+
+    public ref float LowCutoffFreq { get; }
+
+    public ref float HighCutoffFreq { get; }
 
 
 }

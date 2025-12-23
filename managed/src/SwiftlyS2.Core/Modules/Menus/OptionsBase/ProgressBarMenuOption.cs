@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Spectre.Console;
 using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.Menus.OptionsBase;
@@ -78,32 +79,45 @@ public sealed class ProgressBarMenuOption : MenuOptionBase
         string filledChar = "█",
         string emptyChar = "░",
         int updateIntervalMs = 120,
-        int pauseIntervalMs = 1000 ) : this(progressProvider, multiLine, showPercentage, filledChar, emptyChar, updateIntervalMs, pauseIntervalMs)
+        int pauseIntervalMs = 1000 ) : this(progressProvider, multiLine, showPercentage, filledChar, emptyChar,
+        updateIntervalMs, pauseIntervalMs)
     {
         Text = text;
     }
 
     public override string GetDisplayText( IPlayer player, int displayLine = 0 )
     {
-        var provider = progressProviders.GetOrAdd(player.PlayerID, defaultProgressProvider);
-        var progress = Math.Clamp(provider(), 0f, 1f);
-        var filledCount = (int)(progress * BarWidth);
-        var emptyCount = BarWidth - filledCount;
+        try
+        {
+            var provider = progressProviders.GetOrAdd(player.PlayerID, defaultProgressProvider);
+            var progress = Math.Clamp(provider(), 0f, 1f);
+            var filledCount = (int)(progress * BarWidth);
+            var emptyCount = BarWidth - filledCount;
 
-        var bar = string.Concat(
-            Enumerable.Range(0, filledCount).Select(_ => $"<font color='#FFFFFF'>{filledChar}</font>")
-                .Concat(Enumerable.Range(0, emptyCount).Select(_ => $"<font color='{Menu?.Configuration.DisabledColor ?? "#666666"}'>{emptyChar}</font>"))
-        );
+            var bar = string.Concat(
+                Enumerable.Range(0, filledCount).Select(_ => $"<font color='#FFFFFF'>{filledChar}</font>")
+                    .Concat(Enumerable.Range(0, emptyCount).Select(_ =>
+                        $"<font color='{Menu?.Configuration.DisabledColor ?? "#666666"}'>{emptyChar}</font>"))
+            );
 
-        var progressBar = $"<font color='#FFFFFF'>(</font>{bar}<font color='#FF3333'>)</font>{(ShowPercentage ? $" <font color='#FFFFFF'>{(int)(progress * 100)}%</font>" : string.Empty)}";
+            var progressBar =
+                $"<font color='#FFFFFF'>(</font>{bar}<font color='#FF3333'>)</font>{(ShowPercentage ? $" <font color='#FFFFFF'>{(int)(progress * 100)}%</font>" : string.Empty)}";
 
-        return multiLine
-            ? displayLine switch {
-                1 => base.GetDisplayText(player, displayLine),
-                2 => progressBar,
-                _ => $"{base.GetDisplayText(player, displayLine)}:<br>{progressBar}"
-            }
-            : $"{base.GetDisplayText(player, displayLine)}: {progressBar}";
+            return multiLine
+                ? displayLine switch {
+                    1 => base.GetDisplayText(player, displayLine),
+                    2 => progressBar,
+                    _ => $"{base.GetDisplayText(player, displayLine)}:<br>{progressBar}"
+                }
+                : $"{base.GetDisplayText(player, displayLine)}: {progressBar}";
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return string.Empty;
+            AnsiConsole.WriteException(e);
+        }
+
+        return string.Empty;
     }
 
     /// <summary>

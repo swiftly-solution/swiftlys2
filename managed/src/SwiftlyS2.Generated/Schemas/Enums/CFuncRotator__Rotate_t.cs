@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CFuncRotator__Rotate_t : uint {
-
+public enum CFuncRotator__Rotate_t : uint
+{
  ROTATE_LOOP = 0,
 
  ROTATE_OSCILLATE = 1,

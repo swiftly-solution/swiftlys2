@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetPerChildControlPoint : CParticleFunctionOperator, ISchemaClass<C_OP_SetPerChildControlPoint> {
+public partial interface C_OP_SetPerChildControlPoint : CParticleFunctionOperator, ISchemaClass<C_OP_SetPerChildControlPoint>
+{
+    static C_OP_SetPerChildControlPoint ISchemaClass<C_OP_SetPerChildControlPoint>.From(nint handle) => new C_OP_SetPerChildControlPointImpl(handle);
+    static int ISchemaClass<C_OP_SetPerChildControlPoint>.Size => 1232;
+    static string? ISchemaClass<C_OP_SetPerChildControlPoint>.ClassName => null;
 
-  static C_OP_SetPerChildControlPoint ISchemaClass<C_OP_SetPerChildControlPoint>.From(nint handle) => new C_OP_SetPerChildControlPointImpl(handle);
-  static int ISchemaClass<C_OP_SetPerChildControlPoint>.Size => 1232;
-  static string? ISchemaClass<C_OP_SetPerChildControlPoint>.ClassName => null;
 
-  
-  public ref int ChildGroupID { get; }
-  
-  public ref int FirstControlPoint { get; }
-  
-  public ref int NumControlPoints { get; }
-  
-  public CParticleCollectionFloatInput ParticleIncrement { get; }
-  
-  public CParticleCollectionFloatInput FirstSourcePoint { get; }
-  
-  public ref bool SetOrientation { get; }
-  
-  public ParticleAttributeIndex_t OrientationField { get; }
-  
-  public ref bool NumBasedOnParticleCount { get; }
+    public ref int ChildGroupID { get; }
+
+    public ref int FirstControlPoint { get; }
+
+    public ref int NumControlPoints { get; }
+
+    public CParticleCollectionFloatInput ParticleIncrement { get; }
+
+    public CParticleCollectionFloatInput FirstSourcePoint { get; }
+
+    public ref bool SetOrientation { get; }
+
+    public ParticleAttributeIndex_t OrientationField { get; }
+
+    public ref bool NumBasedOnParticleCount { get; }
 
 
 }

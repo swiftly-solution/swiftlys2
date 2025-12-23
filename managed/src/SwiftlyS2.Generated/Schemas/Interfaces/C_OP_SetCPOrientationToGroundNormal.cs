@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetCPOrientationToGroundNormal : CParticleFunctionOperator, ISchemaClass<C_OP_SetCPOrientationToGroundNormal> {
+public partial interface C_OP_SetCPOrientationToGroundNormal : CParticleFunctionOperator, ISchemaClass<C_OP_SetCPOrientationToGroundNormal>
+{
+    static C_OP_SetCPOrientationToGroundNormal ISchemaClass<C_OP_SetCPOrientationToGroundNormal>.From(nint handle) => new C_OP_SetCPOrientationToGroundNormalImpl(handle);
+    static int ISchemaClass<C_OP_SetCPOrientationToGroundNormal>.Size => 640;
+    static string? ISchemaClass<C_OP_SetCPOrientationToGroundNormal>.ClassName => null;
 
-  static C_OP_SetCPOrientationToGroundNormal ISchemaClass<C_OP_SetCPOrientationToGroundNormal>.From(nint handle) => new C_OP_SetCPOrientationToGroundNormalImpl(handle);
-  static int ISchemaClass<C_OP_SetCPOrientationToGroundNormal>.Size => 640;
-  static string? ISchemaClass<C_OP_SetCPOrientationToGroundNormal>.ClassName => null;
 
-  
-  public ref float InterpRate { get; }
-  
-  public ref float MaxTraceLength { get; }
-  
-  public ref float Tolerance { get; }
-  
-  public ref float TraceOffset { get; }
-  
-  public string CollisionGroupName { get; set; }
-  
-  public ref ParticleTraceSet_t TraceSet { get; }
-  
-  public ref int InputCP { get; }
-  
-  public ref int OutputCP { get; }
-  
-  public ref bool IncludeWater { get; }
+    public ref float InterpRate { get; }
+
+    public ref float MaxTraceLength { get; }
+
+    public ref float Tolerance { get; }
+
+    public ref float TraceOffset { get; }
+
+    public string CollisionGroupName { get; set; }
+
+    public ref ParticleTraceSet_t TraceSet { get; }
+
+    public ref int InputCP { get; }
+
+    public ref int OutputCP { get; }
+
+    public ref bool IncludeWater { get; }
 
 
 }

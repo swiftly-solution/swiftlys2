@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGameRules : ISchemaClass<CGameRules> {
+public partial interface CGameRules : ISchemaClass<CGameRules>
+{
+    static CGameRules ISchemaClass<CGameRules>.From(nint handle) => new CGameRulesImpl(handle);
+    static int ISchemaClass<CGameRules>.Size => 192;
+    static string? ISchemaClass<CGameRules>.ClassName => null;
 
-  static CGameRules ISchemaClass<CGameRules>.From(nint handle) => new CGameRulesImpl(handle);
-  static int ISchemaClass<CGameRules>.Size => 192;
-  static string? ISchemaClass<CGameRules>.ClassName => null;
 
-  
-  public ref CNetworkVarChainer __m_pChainEntity { get; }
-  
-  public string QuestName { get; set; }
-  
-  public ref int QuestPhase { get; }
-  
-  public ref int TotalPausedTicks { get; }
-  
-  public ref int PauseStartTick { get; }
-  
-  public ref bool GamePaused { get; }
+    public ref CNetworkVarChainer __m_pChainEntity { get; }
 
-  public void TotalPausedTicksUpdated();
-  public void PauseStartTickUpdated();
-  public void GamePausedUpdated();
+    public string QuestName { get; set; }
+
+    public ref int QuestPhase { get; }
+
+    public ref int TotalPausedTicks { get; }
+
+    public ref int PauseStartTick { get; }
+
+    public ref bool GamePaused { get; }
+
+    public void TotalPausedTicksUpdated();
+    public void PauseStartTickUpdated();
+    public void GamePausedUpdated();
 }

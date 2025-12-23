@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicAutosaveImpl : CLogicalEntityImpl, CLogicAutosave {
+internal partial class CLogicAutosaveImpl : CLogicalEntityImpl, CLogicAutosave
+{
+    public CLogicAutosaveImpl(nint handle) : base(handle) { }
 
-  public CLogicAutosaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ForceNewLevelUnitOffset;
 
-  private static nint? _ForceNewLevelUnitOffset;
-
-  public ref bool ForceNewLevelUnit {
-    get {
-      if (_ForceNewLevelUnitOffset == null) {
-        _ForceNewLevelUnitOffset = Schema.GetOffset(0xE30CCBF21473BFDE);
-      }
-      return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset!.Value);
+    public ref bool ForceNewLevelUnit {
+        get {
+            _ForceNewLevelUnitOffset = _ForceNewLevelUnitOffset ?? Schema.GetOffset(0xE30CCBF21473BFDE);
+            return ref _Handle.AsRef<bool>(_ForceNewLevelUnitOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinHitPointsOffset;
+    private static nint? _MinHitPointsOffset;
 
-  public ref int MinHitPoints {
-    get {
-      if (_MinHitPointsOffset == null) {
-        _MinHitPointsOffset = Schema.GetOffset(0xE30CCBF22C7E0C57);
-      }
-      return ref _Handle.AsRef<int>(_MinHitPointsOffset!.Value);
+    public ref int MinHitPoints {
+        get {
+            _MinHitPointsOffset = _MinHitPointsOffset ?? Schema.GetOffset(0xE30CCBF22C7E0C57);
+            return ref _Handle.AsRef<int>(_MinHitPointsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MinHitPointsToCommitOffset;
+    private static nint? _MinHitPointsToCommitOffset;
 
-  public ref int MinHitPointsToCommit {
-    get {
-      if (_MinHitPointsToCommitOffset == null) {
-        _MinHitPointsToCommitOffset = Schema.GetOffset(0xE30CCBF23AAC1C7F);
-      }
-      return ref _Handle.AsRef<int>(_MinHitPointsToCommitOffset!.Value);
+    public ref int MinHitPointsToCommit {
+        get {
+            _MinHitPointsToCommitOffset = _MinHitPointsToCommitOffset ?? Schema.GetOffset(0xE30CCBF23AAC1C7F);
+            return ref _Handle.AsRef<int>(_MinHitPointsToCommitOffset!.Value);
+        }
     }
-  }
 
 
 }

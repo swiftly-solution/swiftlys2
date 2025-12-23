@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmStateMachineNode__TransitionDefinition_t : ISchemaClass<CNmStateMachineNode__TransitionDefinition_t> {
+public partial interface CNmStateMachineNode__TransitionDefinition_t : ISchemaClass<CNmStateMachineNode__TransitionDefinition_t>
+{
+    static CNmStateMachineNode__TransitionDefinition_t ISchemaClass<CNmStateMachineNode__TransitionDefinition_t>.From(nint handle) => new CNmStateMachineNode__TransitionDefinition_tImpl(handle);
+    static int ISchemaClass<CNmStateMachineNode__TransitionDefinition_t>.Size => 8;
+    static string? ISchemaClass<CNmStateMachineNode__TransitionDefinition_t>.ClassName => null;
 
-  static CNmStateMachineNode__TransitionDefinition_t ISchemaClass<CNmStateMachineNode__TransitionDefinition_t>.From(nint handle) => new CNmStateMachineNode__TransitionDefinition_tImpl(handle);
-  static int ISchemaClass<CNmStateMachineNode__TransitionDefinition_t>.Size => 8;
-  static string? ISchemaClass<CNmStateMachineNode__TransitionDefinition_t>.ClassName => null;
 
-  
-  public ref short TargetStateIdx { get; }
-  
-  public ref short ConditionNodeIdx { get; }
-  
-  public ref short TransitionNodeIdx { get; }
-  
-  public ref bool CanBeForced { get; }
+    public ref short TargetStateIdx { get; }
+
+    public ref short ConditionNodeIdx { get; }
+
+    public ref short TransitionNodeIdx { get; }
+
+    public ref bool CanBeForced { get; }
 
 
 }

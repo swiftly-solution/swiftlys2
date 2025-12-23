@@ -8,27 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface FeNodeBase_t : ISchemaClass<FeNodeBase_t> {
+public partial interface FeNodeBase_t : ISchemaClass<FeNodeBase_t>
+{
+    static FeNodeBase_t ISchemaClass<FeNodeBase_t>.From(nint handle) => new FeNodeBase_tImpl(handle);
+    static int ISchemaClass<FeNodeBase_t>.Size => 32;
+    static string? ISchemaClass<FeNodeBase_t>.ClassName => null;
 
-  static FeNodeBase_t ISchemaClass<FeNodeBase_t>.From(nint handle) => new FeNodeBase_tImpl(handle);
-  static int ISchemaClass<FeNodeBase_t>.Size => 32;
-  static string? ISchemaClass<FeNodeBase_t>.ClassName => null;
 
-  
-  public ref ushort Node { get; }
-  
-  public ISchemaFixedArray<ushort> Dummy { get; }
-  
-  public ref ushort NodeX0 { get; }
-  
-  public ref ushort NodeX1 { get; }
-  
-  public ref ushort NodeY0 { get; }
-  
-  public ref ushort NodeY1 { get; }
-  
-  // QuaternionStorage
-  public SchemaUntypedField Adjust { get; }
+    public ref ushort Node { get; }
+
+    public ISchemaFixedArray<ushort> Dummy { get; }
+
+    public ref ushort NodeX0 { get; }
+
+    public ref ushort NodeX1 { get; }
+
+    public ref ushort NodeY0 { get; }
+
+    public ref ushort NodeY1 { get; }
+
+    public ref QuaternionStorage Adjust { get; }
 
 
 }

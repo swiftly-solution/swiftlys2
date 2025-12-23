@@ -18,6 +18,10 @@ public interface IOnEntityIdentityAcceptInputHookEvent
     /// </summary>
     public CEntityInstance EntityInstance { get; }
     /// <summary>
+    /// The designer name of the caller.
+    /// </summary>
+    public string DesignerName { get; }
+    /// <summary>
     /// The name of the input being accepted.
     /// </summary>
     public string InputName { get; }
@@ -32,7 +36,7 @@ public interface IOnEntityIdentityAcceptInputHookEvent
     /// <summary>
     /// The variant value of the input being accepted.
     /// </summary>
-    public CVariant VariantValue { get; }
+    public ref CVariant<CVariantDefaultAllocator> VariantValue { get; }
     /// <summary>
     /// The output ID of the input being accepted.
     /// </summary>

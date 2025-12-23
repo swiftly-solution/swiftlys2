@@ -1,4 +1,5 @@
-﻿using SwiftlyS2.Shared.Natives;
+using SwiftlyS2.Shared.Misc;
+using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
@@ -34,6 +35,32 @@ public partial interface CBaseEntity
     /// <param name="velocity">The velocity to apply to the entity after teleportation. If null, the entity's velocity is not changed.</param>
     public void Teleport( Vector? position, QAngle? angle, Vector? velocity );
 
+    /// <summary>
+    /// Applies damage to the entity based on the specified damage information.
+    /// 
+    /// Thread unsafe, use async variant instead for non-main thread context.
+    /// </summary>
+    /// <param name="dmgInfo">An object containing details about the damage to be applied, including the amount, type, and source. Cannot be null.</param>
+    [ThreadUnsafe]
+    public void TakeDamage( CTakeDamageInfo dmgInfo );
+
+    /// <summary>
+    /// Applies damage to the entity based on the specified damage information asynchronously.
+    /// </summary>
+    public Task TakeDamageAsync( CTakeDamageInfo dmgInfo );
+
+    /// <summary>
+    /// Applies damage to the entity based on the specified damage information.
+    /// 
+    /// Thread unsafe, use async variant instead for non-main thread context.
+    /// </summary>
+    [ThreadUnsafe]
+    public void TakeDamage( float flDamage, DamageTypes_t bitsDamageType, CBaseEntity? inflictor = null,  CBaseEntity? attacker = null, CBaseEntity? ability = null );
+
+    /// <summary>
+    /// Applies damage to the entity based on the specified damage information asynchronously.
+    /// </summary>
+    public Task TakeDamageAsync( float flDamage, DamageTypes_t bitsDamageType, CBaseEntity? inflictor = null,  CBaseEntity? attacker = null, CBaseEntity? ability = null );
 
     /// <summary>
     /// Notify the game that the collision rules of the entity have changed.

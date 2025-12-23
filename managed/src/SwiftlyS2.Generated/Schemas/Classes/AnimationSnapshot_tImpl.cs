@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AnimationSnapshot_tImpl : AnimationSnapshotBase_tImpl, AnimationSnapshot_t {
+internal partial class AnimationSnapshot_tImpl : AnimationSnapshotBase_tImpl, AnimationSnapshot_t
+{
+    public AnimationSnapshot_tImpl(nint handle) : base(handle) { }
 
-  public AnimationSnapshot_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EntIndexOffset;
 
-  private static nint? _EntIndexOffset;
-
-  public ref int EntIndex {
-    get {
-      if (_EntIndexOffset == null) {
-        _EntIndexOffset = Schema.GetOffset(0xAC640D3E5558C54A);
-      }
-      return ref _Handle.AsRef<int>(_EntIndexOffset!.Value);
+    public ref int EntIndex {
+        get {
+            _EntIndexOffset = _EntIndexOffset ?? Schema.GetOffset(0xAC640D3E5558C54A);
+            return ref _Handle.AsRef<int>(_EntIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModelNameOffset;
+    private static nint? _ModelNameOffset;
 
-  public string ModelName {
-    get {
-      if (_ModelNameOffset == null) {
-        _ModelNameOffset = Schema.GetOffset(0xAC640D3E5D35B6E1);
-      }
-      var ptr = _Handle.Read<nint>(_ModelNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ModelNameOffset == null) {
-        _ModelNameOffset = Schema.GetOffset(0xAC640D3E5D35B6E1);
-      }
-      Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
-    }
-  } 
+    public string ModelName {
+        get {
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xAC640D3E5D35B6E1);
+            return Schema.GetString(_Handle.Read<nint>(_ModelNameOffset!.Value));
+        }
+        set {
+            _ModelNameOffset = _ModelNameOffset ?? Schema.GetOffset(0xAC640D3E5D35B6E1);
+            Schema.SetString(_Handle, _ModelNameOffset!.Value, value);
+        }
+    } 
 
 
 }

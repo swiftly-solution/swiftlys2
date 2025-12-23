@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_RandomTrailLength : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomTrailLength> {
+public partial interface C_INIT_RandomTrailLength : CParticleFunctionInitializer, ISchemaClass<C_INIT_RandomTrailLength>
+{
+    static C_INIT_RandomTrailLength ISchemaClass<C_INIT_RandomTrailLength>.From(nint handle) => new C_INIT_RandomTrailLengthImpl(handle);
+    static int ISchemaClass<C_INIT_RandomTrailLength>.Size => 488;
+    static string? ISchemaClass<C_INIT_RandomTrailLength>.ClassName => null;
 
-  static C_INIT_RandomTrailLength ISchemaClass<C_INIT_RandomTrailLength>.From(nint handle) => new C_INIT_RandomTrailLengthImpl(handle);
-  static int ISchemaClass<C_INIT_RandomTrailLength>.Size => 488;
-  static string? ISchemaClass<C_INIT_RandomTrailLength>.ClassName => null;
 
-  
-  public ref float MinLength { get; }
-  
-  public ref float MaxLength { get; }
-  
-  public ref float LengthRandExponent { get; }
+    public ref float MinLength { get; }
+
+    public ref float MaxLength { get; }
+
+    public ref float LengthRandExponent { get; }
 
 
 }

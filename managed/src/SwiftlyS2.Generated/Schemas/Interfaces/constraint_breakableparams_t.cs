@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface constraint_breakableparams_t : ISchemaClass<constraint_breakableparams_t> {
+public partial interface constraint_breakableparams_t : ISchemaClass<constraint_breakableparams_t>
+{
+    static constraint_breakableparams_t ISchemaClass<constraint_breakableparams_t>.From(nint handle) => new constraint_breakableparams_tImpl(handle);
+    static int ISchemaClass<constraint_breakableparams_t>.Size => 24;
+    static string? ISchemaClass<constraint_breakableparams_t>.ClassName => null;
 
-  static constraint_breakableparams_t ISchemaClass<constraint_breakableparams_t>.From(nint handle) => new constraint_breakableparams_tImpl(handle);
-  static int ISchemaClass<constraint_breakableparams_t>.Size => 24;
-  static string? ISchemaClass<constraint_breakableparams_t>.ClassName => null;
 
-  
-  public ref float Strength { get; }
-  
-  public ref float ForceLimit { get; }
-  
-  public ref float TorqueLimit { get; }
-  
-  public ISchemaFixedArray<float> BodyMassScale { get; }
-  
-  public ref bool IsActive { get; }
+    public ref float Strength { get; }
+
+    public ref float ForceLimit { get; }
+
+    public ref float TorqueLimit { get; }
+
+    public ISchemaFixedArray<float> BodyMassScale { get; }
+
+    public ref bool IsActive { get; }
 
 
 }

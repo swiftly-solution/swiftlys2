@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSymbolAnimParameter : CConcreteAnimParameter, ISchemaClass<CSymbolAnimParameter> {
+public partial interface CSymbolAnimParameter : CConcreteAnimParameter, ISchemaClass<CSymbolAnimParameter>
+{
+    static CSymbolAnimParameter ISchemaClass<CSymbolAnimParameter>.From(nint handle) => new CSymbolAnimParameterImpl(handle);
+    static int ISchemaClass<CSymbolAnimParameter>.Size => 136;
+    static string? ISchemaClass<CSymbolAnimParameter>.ClassName => null;
 
-  static CSymbolAnimParameter ISchemaClass<CSymbolAnimParameter>.From(nint handle) => new CSymbolAnimParameterImpl(handle);
-  static int ISchemaClass<CSymbolAnimParameter>.Size => 136;
-  static string? ISchemaClass<CSymbolAnimParameter>.ClassName => null;
 
-  
-  public ref CGlobalSymbol DefaultValue { get; }
+    public ref CGlobalSymbol DefaultValue { get; }
 
 
 }

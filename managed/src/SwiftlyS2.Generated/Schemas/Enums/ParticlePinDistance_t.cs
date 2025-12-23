@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ParticlePinDistance_t : uint {
-
+public enum ParticlePinDistance_t : uint
+{
  PARTICLE_PIN_DISTANCE_NONE = uint.MaxValue,
 
  PARTICLE_PIN_DISTANCE_NEIGHBOR = 0,

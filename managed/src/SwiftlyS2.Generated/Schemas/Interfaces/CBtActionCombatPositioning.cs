@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBtActionCombatPositioning : CBtNode, ISchemaClass<CBtActionCombatPositioning> {
+public partial interface CBtActionCombatPositioning : CBtNode, ISchemaClass<CBtActionCombatPositioning>
+{
+    static CBtActionCombatPositioning ISchemaClass<CBtActionCombatPositioning>.From(nint handle) => new CBtActionCombatPositioningImpl(handle);
+    static int ISchemaClass<CBtActionCombatPositioning>.Size => 176;
+    static string? ISchemaClass<CBtActionCombatPositioning>.ClassName => null;
 
-  static CBtActionCombatPositioning ISchemaClass<CBtActionCombatPositioning>.From(nint handle) => new CBtActionCombatPositioningImpl(handle);
-  static int ISchemaClass<CBtActionCombatPositioning>.Size => 176;
-  static string? ISchemaClass<CBtActionCombatPositioning>.ClassName => null;
 
-  
-  public string SensorInputKey { get; set; }
-  
-  public string IsAttackingKey { get; set; }
-  
-  public CountdownTimer ActionTimer { get; }
-  
-  public ref bool Crouching { get; }
+    public string SensorInputKey { get; set; }
+
+    public string IsAttackingKey { get; set; }
+
+    public CountdownTimer ActionTimer { get; }
+
+    public ref bool Crouching { get; }
 
 
 }

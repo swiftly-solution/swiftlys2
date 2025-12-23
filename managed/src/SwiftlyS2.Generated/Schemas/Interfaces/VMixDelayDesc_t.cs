@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface VMixDelayDesc_t : ISchemaClass<VMixDelayDesc_t> {
+public partial interface VMixDelayDesc_t : ISchemaClass<VMixDelayDesc_t>
+{
+    static VMixDelayDesc_t ISchemaClass<VMixDelayDesc_t>.From(nint handle) => new VMixDelayDesc_tImpl(handle);
+    static int ISchemaClass<VMixDelayDesc_t>.Size => 40;
+    static string? ISchemaClass<VMixDelayDesc_t>.ClassName => null;
 
-  static VMixDelayDesc_t ISchemaClass<VMixDelayDesc_t>.From(nint handle) => new VMixDelayDesc_tImpl(handle);
-  static int ISchemaClass<VMixDelayDesc_t>.Size => 40;
-  static string? ISchemaClass<VMixDelayDesc_t>.ClassName => null;
 
-  
-  public VMixFilterDesc_t FeedbackFilter { get; }
-  
-  public ref bool EnableFilter { get; }
-  
-  public ref float Delay { get; }
-  
-  public ref float DirectGain { get; }
-  
-  public ref float DelayGain { get; }
-  
-  public ref float FeedbackGain { get; }
-  
-  public ref float Width { get; }
+    public VMixFilterDesc_t FeedbackFilter { get; }
+
+    public ref bool EnableFilter { get; }
+
+    public ref float Delay { get; }
+
+    public ref float DirectGain { get; }
+
+    public ref float DelayGain { get; }
+
+    public ref float FeedbackGain { get; }
+
+    public ref float Width { get; }
 
 
 }

@@ -8,27 +8,27 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CRenderMesh : ISchemaClass<CRenderMesh> {
+public partial interface CRenderMesh : ISchemaClass<CRenderMesh>
+{
+    static CRenderMesh ISchemaClass<CRenderMesh>.From(nint handle) => new CRenderMeshImpl(handle);
+    static int ISchemaClass<CRenderMesh>.Size => 496;
+    static string? ISchemaClass<CRenderMesh>.ClassName => null;
 
-  static CRenderMesh ISchemaClass<CRenderMesh>.From(nint handle) => new CRenderMeshImpl(handle);
-  static int ISchemaClass<CRenderMesh>.Size => 496;
-  static string? ISchemaClass<CRenderMesh>.ClassName => null;
 
-  
-  // CUtlLeanVectorFixedGrowable< CSceneObjectData, 1 >
-  public SchemaUntypedField SceneObjects { get; }
-  
-  public ref CUtlLeanVector<PointerTo<CBaseConstraint>, int> Constraints { get; }
-  
-  public CRenderSkeleton Skeleton { get; }
-  
-  public ref bool UseUV2ForCharting { get; }
-  
-  public ref bool EmbeddedMapMesh { get; }
-  
-  public DynamicMeshDeformParams_t MeshDeformParams { get; }
-  
-  public CRenderGroom? GroomData { get; }
+    // CUtlLeanVectorFixedGrowable< CSceneObjectData, 1 >
+    public SchemaUntypedField SceneObjects { get; }
+
+    public ref CUtlLeanVector<PointerTo<CBaseConstraint>, int> Constraints { get; }
+
+    public CRenderSkeleton Skeleton { get; }
+
+    public ref bool UseUV2ForCharting { get; }
+
+    public ref bool EmbeddedMapMesh { get; }
+
+    public DynamicMeshDeformParams_t MeshDeformParams { get; }
+
+    public CRenderGroom? GroomData { get; }
 
 
 }

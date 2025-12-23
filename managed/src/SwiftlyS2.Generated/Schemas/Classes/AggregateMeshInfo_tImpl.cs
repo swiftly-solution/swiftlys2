@@ -6,137 +6,112 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AggregateMeshInfo_tImpl : SchemaClass, AggregateMeshInfo_t {
+internal partial class AggregateMeshInfo_tImpl : SchemaClass, AggregateMeshInfo_t
+{
+    public AggregateMeshInfo_tImpl(nint handle) : base(handle) { }
 
-  public AggregateMeshInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _VisClusterMemberOffsetOffset;
 
-  private static nint? _VisClusterMemberOffsetOffset;
-
-  public ref uint VisClusterMemberOffset {
-    get {
-      if (_VisClusterMemberOffsetOffset == null) {
-        _VisClusterMemberOffsetOffset = Schema.GetOffset(0x609E946C6C3F158);
-      }
-      return ref _Handle.AsRef<uint>(_VisClusterMemberOffsetOffset!.Value);
+    public ref uint VisClusterMemberOffset {
+        get {
+            _VisClusterMemberOffsetOffset = _VisClusterMemberOffsetOffset ?? Schema.GetOffset(0x609E946C6C3F158);
+            return ref _Handle.AsRef<uint>(_VisClusterMemberOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _VisClusterMemberCountOffset;
+    private static nint? _VisClusterMemberCountOffset;
 
-  public ref byte VisClusterMemberCount {
-    get {
-      if (_VisClusterMemberCountOffset == null) {
-        _VisClusterMemberCountOffset = Schema.GetOffset(0x609E946C42DC1CA);
-      }
-      return ref _Handle.AsRef<byte>(_VisClusterMemberCountOffset!.Value);
+    public ref byte VisClusterMemberCount {
+        get {
+            _VisClusterMemberCountOffset = _VisClusterMemberCountOffset ?? Schema.GetOffset(0x609E946C42DC1CA);
+            return ref _Handle.AsRef<byte>(_VisClusterMemberCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _HasTransformOffset;
+    private static nint? _HasTransformOffset;
 
-  public ref bool HasTransform {
-    get {
-      if (_HasTransformOffset == null) {
-        _HasTransformOffset = Schema.GetOffset(0x609E9467D1E0F35);
-      }
-      return ref _Handle.AsRef<bool>(_HasTransformOffset!.Value);
+    public ref bool HasTransform {
+        get {
+            _HasTransformOffset = _HasTransformOffset ?? Schema.GetOffset(0x609E9467D1E0F35);
+            return ref _Handle.AsRef<bool>(_HasTransformOffset!.Value);
+        }
     }
-  }
-  private static nint? _LODGroupMaskOffset;
+    private static nint? _LODGroupMaskOffset;
 
-  public ref byte LODGroupMask {
-    get {
-      if (_LODGroupMaskOffset == null) {
-        _LODGroupMaskOffset = Schema.GetOffset(0x609E94672482103);
-      }
-      return ref _Handle.AsRef<byte>(_LODGroupMaskOffset!.Value);
+    public ref byte LODGroupMask {
+        get {
+            _LODGroupMaskOffset = _LODGroupMaskOffset ?? Schema.GetOffset(0x609E94672482103);
+            return ref _Handle.AsRef<byte>(_LODGroupMaskOffset!.Value);
+        }
     }
-  }
-  private static nint? _DrawCallIndexOffset;
+    private static nint? _DrawCallIndexOffset;
 
-  public ref short DrawCallIndex {
-    get {
-      if (_DrawCallIndexOffset == null) {
-        _DrawCallIndexOffset = Schema.GetOffset(0x609E946FA5614D5);
-      }
-      return ref _Handle.AsRef<short>(_DrawCallIndexOffset!.Value);
+    public ref short DrawCallIndex {
+        get {
+            _DrawCallIndexOffset = _DrawCallIndexOffset ?? Schema.GetOffset(0x609E946FA5614D5);
+            return ref _Handle.AsRef<short>(_DrawCallIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _LODSetupIndexOffset;
+    private static nint? _LODSetupIndexOffset;
 
-  public ref short LODSetupIndex {
-    get {
-      if (_LODSetupIndexOffset == null) {
-        _LODSetupIndexOffset = Schema.GetOffset(0x609E946FDC9C6B7);
-      }
-      return ref _Handle.AsRef<short>(_LODSetupIndexOffset!.Value);
+    public ref short LODSetupIndex {
+        get {
+            _LODSetupIndexOffset = _LODSetupIndexOffset ?? Schema.GetOffset(0x609E946FDC9C6B7);
+            return ref _Handle.AsRef<short>(_LODSetupIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _TintColorOffset;
+    private static nint? _TintColorOffset;
 
-  public ref Color TintColor {
-    get {
-      if (_TintColorOffset == null) {
-        _TintColorOffset = Schema.GetOffset(0x609E94650AFF21F);
-      }
-      return ref _Handle.AsRef<Color>(_TintColorOffset!.Value);
+    public ref Color TintColor {
+        get {
+            _TintColorOffset = _TintColorOffset ?? Schema.GetOffset(0x609E94650AFF21F);
+            return ref _Handle.AsRef<Color>(_TintColorOffset!.Value);
+        }
     }
-  }
-  private static nint? _ObjectFlagsOffset;
+    private static nint? _ObjectFlagsOffset;
 
-  public ref ObjectTypeFlags_t ObjectFlags {
-    get {
-      if (_ObjectFlagsOffset == null) {
-        _ObjectFlagsOffset = Schema.GetOffset(0x609E946E93821F5);
-      }
-      return ref _Handle.AsRef<ObjectTypeFlags_t>(_ObjectFlagsOffset!.Value);
+    public ref ObjectTypeFlags_t ObjectFlags {
+        get {
+            _ObjectFlagsOffset = _ObjectFlagsOffset ?? Schema.GetOffset(0x609E946E93821F5);
+            return ref _Handle.AsRef<ObjectTypeFlags_t>(_ObjectFlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _LightProbeVolumePrecomputedHandshakeOffset;
+    private static nint? _LightProbeVolumePrecomputedHandshakeOffset;
 
-  public ref int LightProbeVolumePrecomputedHandshake {
-    get {
-      if (_LightProbeVolumePrecomputedHandshakeOffset == null) {
-        _LightProbeVolumePrecomputedHandshakeOffset = Schema.GetOffset(0x609E946C6233022);
-      }
-      return ref _Handle.AsRef<int>(_LightProbeVolumePrecomputedHandshakeOffset!.Value);
+    public ref int LightProbeVolumePrecomputedHandshake {
+        get {
+            _LightProbeVolumePrecomputedHandshakeOffset = _LightProbeVolumePrecomputedHandshakeOffset ?? Schema.GetOffset(0x609E946C6233022);
+            return ref _Handle.AsRef<int>(_LightProbeVolumePrecomputedHandshakeOffset!.Value);
+        }
     }
-  }
-  private static nint? _InstanceStreamOffsetOffset;
+    private static nint? _InstanceStreamOffsetOffset;
 
-  public ref uint InstanceStreamOffset {
-    get {
-      if (_InstanceStreamOffsetOffset == null) {
-        _InstanceStreamOffsetOffset = Schema.GetOffset(0x609E946DD604379);
-      }
-      return ref _Handle.AsRef<uint>(_InstanceStreamOffsetOffset!.Value);
+    public ref uint InstanceStreamOffset {
+        get {
+            _InstanceStreamOffsetOffset = _InstanceStreamOffsetOffset ?? Schema.GetOffset(0x609E946DD604379);
+            return ref _Handle.AsRef<uint>(_InstanceStreamOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _VertexAlbedoStreamOffsetOffset;
+    private static nint? _VertexAlbedoStreamOffsetOffset;
 
-  public ref uint VertexAlbedoStreamOffset {
-    get {
-      if (_VertexAlbedoStreamOffsetOffset == null) {
-        _VertexAlbedoStreamOffsetOffset = Schema.GetOffset(0x609E94644E636B9);
-      }
-      return ref _Handle.AsRef<uint>(_VertexAlbedoStreamOffsetOffset!.Value);
+    public ref uint VertexAlbedoStreamOffset {
+        get {
+            _VertexAlbedoStreamOffsetOffset = _VertexAlbedoStreamOffsetOffset ?? Schema.GetOffset(0x609E94644E636B9);
+            return ref _Handle.AsRef<uint>(_VertexAlbedoStreamOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _InstanceStreamsOffset;
+    private static nint? _InstanceStreamsOffset;
 
-  public ref AggregateInstanceStream_t InstanceStreams {
-    get {
-      if (_InstanceStreamsOffset == null) {
-        _InstanceStreamsOffset = Schema.GetOffset(0x609E94630D081BB);
-      }
-      return ref _Handle.AsRef<AggregateInstanceStream_t>(_InstanceStreamsOffset!.Value);
+    public ref AggregateInstanceStream_t InstanceStreams {
+        get {
+            _InstanceStreamsOffset = _InstanceStreamsOffset ?? Schema.GetOffset(0x609E94630D081BB);
+            return ref _Handle.AsRef<AggregateInstanceStream_t>(_InstanceStreamsOffset!.Value);
+        }
     }
-  }
 
 
 }

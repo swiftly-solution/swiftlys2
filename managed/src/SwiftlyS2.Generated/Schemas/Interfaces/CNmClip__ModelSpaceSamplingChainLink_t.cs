@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmClip__ModelSpaceSamplingChainLink_t : ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t> {
+public partial interface CNmClip__ModelSpaceSamplingChainLink_t : ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t>
+{
+    static CNmClip__ModelSpaceSamplingChainLink_t ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t>.From(nint handle) => new CNmClip__ModelSpaceSamplingChainLink_tImpl(handle);
+    static int ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t>.Size => 12;
+    static string? ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t>.ClassName => null;
 
-  static CNmClip__ModelSpaceSamplingChainLink_t ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t>.From(nint handle) => new CNmClip__ModelSpaceSamplingChainLink_tImpl(handle);
-  static int ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t>.Size => 12;
-  static string? ISchemaClass<CNmClip__ModelSpaceSamplingChainLink_t>.ClassName => null;
 
-  
-  public ref int BoneIdx { get; }
-  
-  public ref int ParentBoneIdx { get; }
-  
-  public ref int ParentChainLinkIdx { get; }
+    public ref int BoneIdx { get; }
+
+    public ref int ParentBoneIdx { get; }
+
+    public ref int ParentChainLinkIdx { get; }
 
 
 }

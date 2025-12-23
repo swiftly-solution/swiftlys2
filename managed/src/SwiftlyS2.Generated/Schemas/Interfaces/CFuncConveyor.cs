@@ -8,35 +8,35 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncConveyor : CBaseModelEntity, ISchemaClass<CFuncConveyor> {
+public partial interface CFuncConveyor : CBaseModelEntity, ISchemaClass<CFuncConveyor>
+{
+    static CFuncConveyor ISchemaClass<CFuncConveyor>.From(nint handle) => new CFuncConveyorImpl(handle);
+    static int ISchemaClass<CFuncConveyor>.Size => 2088;
+    static string? ISchemaClass<CFuncConveyor>.ClassName => "func_conveyor";
 
-  static CFuncConveyor ISchemaClass<CFuncConveyor>.From(nint handle) => new CFuncConveyorImpl(handle);
-  static int ISchemaClass<CFuncConveyor>.Size => 2088;
-  static string? ISchemaClass<CFuncConveyor>.ClassName => "func_conveyor";
 
-  
-  public string ConveyorModels { get; set; }
-  
-  public ref float TransitionDurationSeconds { get; }
-  
-  public ref QAngle MoveEntitySpace { get; }
-  
-  public ref Vector MoveDirEntitySpace { get; }
-  
-  public ref float TargetSpeed { get; }
-  
-  public GameTick_t TransitionStartTick { get; }
-  
-  public ref int TransitionDurationTicks { get; }
-  
-  public ref float TransitionStartSpeed { get; }
-  
-  public ref CUtlVector<CHandle<CBaseEntity>> ConveyorModels1 { get; }
+    public string ConveyorModels { get; set; }
 
-  public void MoveDirEntitySpaceUpdated();
-  public void TargetSpeedUpdated();
-  public void TransitionStartTickUpdated();
-  public void TransitionDurationTicksUpdated();
-  public void TransitionStartSpeedUpdated();
-  public void ConveyorModels1Updated();
+    public ref float TransitionDurationSeconds { get; }
+
+    public ref QAngle MoveEntitySpace { get; }
+
+    public ref Vector MoveDirEntitySpace { get; }
+
+    public ref float TargetSpeed { get; }
+
+    public GameTick_t TransitionStartTick { get; }
+
+    public ref int TransitionDurationTicks { get; }
+
+    public ref float TransitionStartSpeed { get; }
+
+    public ref CUtlVector<CHandle<CBaseEntity>> ConveyorModels1 { get; }
+
+    public void MoveDirEntitySpaceUpdated();
+    public void TargetSpeedUpdated();
+    public void TransitionStartTickUpdated();
+    public void TransitionDurationTicksUpdated();
+    public void TransitionStartSpeedUpdated();
+    public void ConveyorModels1Updated();
 }

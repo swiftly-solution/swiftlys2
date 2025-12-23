@@ -6,30 +6,25 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLightEntityImpl : CBaseModelEntityImpl, CLightEntity {
+internal partial class CLightEntityImpl : CBaseModelEntityImpl, CLightEntity
+{
+    public CLightEntityImpl(nint handle) : base(handle) { }
 
-  public CLightEntityImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CLightComponentOffset;
 
-  private static nint? _CLightComponentOffset;
-
-  public CLightComponent? CLightComponent {
-    get {
-      if (_CLightComponentOffset == null) {
-        _CLightComponentOffset = Schema.GetOffset(0xA3C95F05104F0185);
-      }
-      var ptr = _Handle.Read<nint>(_CLightComponentOffset!.Value);
-      return ptr.IsValidPtr() ? new CLightComponentImpl(ptr) : null;
+    public CLightComponent? CLightComponent {
+        get {
+            _CLightComponentOffset = _CLightComponentOffset ?? Schema.GetOffset(0xA3C95F05104F0185);
+            var ptr = _Handle.Read<nint>(_CLightComponentOffset!.Value);
+            return ptr.IsValidPtr() ? new CLightComponentImpl(ptr) : null;
+        }
     }
-  }
 
-  public void CLightComponentUpdated() {
-    Schema.Update(_Handle, 0xA3C95F05104F0185);
-  }
+    public void CLightComponentUpdated() => Schema.Update(_Handle, 0xA3C95F05104F0185);
 }

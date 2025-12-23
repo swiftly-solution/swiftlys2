@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_Outflow_ListenForEntityOutput__CursorState_tImpl : SchemaClass, CPulseCell_Outflow_ListenForEntityOutput__CursorState_t {
+internal partial class CPulseCell_Outflow_ListenForEntityOutput__CursorState_tImpl : SchemaClass, CPulseCell_Outflow_ListenForEntityOutput__CursorState_t
+{
+    public CPulseCell_Outflow_ListenForEntityOutput__CursorState_tImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_Outflow_ListenForEntityOutput__CursorState_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EntityOffset;
 
-  private static nint? _EntityOffset;
-
-  public ref CHandle<CBaseEntity> Entity {
-    get {
-      if (_EntityOffset == null) {
-        _EntityOffset = Schema.GetOffset(0xC31517AD2F3BEB7A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+    public ref CHandle<CBaseEntity> Entity {
+        get {
+            _EntityOffset = _EntityOffset ?? Schema.GetOffset(0xC31517AD2F3BEB7A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntityOffset!.Value);
+        }
     }
-  }
 
 
 }

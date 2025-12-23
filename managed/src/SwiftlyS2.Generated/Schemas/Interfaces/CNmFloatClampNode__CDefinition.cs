@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatClampNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatClampNode__CDefinition> {
+public partial interface CNmFloatClampNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatClampNode__CDefinition>
+{
+    static CNmFloatClampNode__CDefinition ISchemaClass<CNmFloatClampNode__CDefinition>.From(nint handle) => new CNmFloatClampNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFloatClampNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmFloatClampNode__CDefinition>.ClassName => null;
 
-  static CNmFloatClampNode__CDefinition ISchemaClass<CNmFloatClampNode__CDefinition>.From(nint handle) => new CNmFloatClampNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFloatClampNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmFloatClampNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  // Range_t
-  public SchemaUntypedField ClampRange { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    // Range_t
+    public SchemaUntypedField ClampRange { get; }
 
 
 }

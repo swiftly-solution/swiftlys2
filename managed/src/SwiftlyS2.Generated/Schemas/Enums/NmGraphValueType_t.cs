@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum NmGraphValueType_t : byte {
-
+public enum NmGraphValueType_t : byte
+{
  Unknown = 0,
 
  Bool = 1,

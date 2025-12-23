@@ -8,35 +8,35 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMathRemap : CLogicalEntity, ISchemaClass<CMathRemap> {
+public partial interface CMathRemap : CLogicalEntity, ISchemaClass<CMathRemap>
+{
+    static CMathRemap ISchemaClass<CMathRemap>.From(nint handle) => new CMathRemapImpl(handle);
+    static int ISchemaClass<CMathRemap>.Size => 1488;
+    static string? ISchemaClass<CMathRemap>.ClassName => "math_remap";
 
-  static CMathRemap ISchemaClass<CMathRemap>.From(nint handle) => new CMathRemapImpl(handle);
-  static int ISchemaClass<CMathRemap>.Size => 1488;
-  static string? ISchemaClass<CMathRemap>.ClassName => "math_remap";
 
-  
-  public ref float InMin { get; }
-  
-  public ref float InMax { get; }
-  
-  public ref float Out1 { get; }
-  
-  public ref float Out2 { get; }
-  
-  public ref float OldInValue { get; }
-  
-  public ref bool Enabled { get; }
-  
-  // CEntityOutputTemplate< float32 >
-  public SchemaUntypedField OutValue { get; }
-  
-  public CEntityIOOutput OnRoseAboveMin { get; }
-  
-  public CEntityIOOutput OnRoseAboveMax { get; }
-  
-  public CEntityIOOutput OnFellBelowMin { get; }
-  
-  public CEntityIOOutput OnFellBelowMax { get; }
+    public ref float InMin { get; }
+
+    public ref float InMax { get; }
+
+    public ref float Out1 { get; }
+
+    public ref float Out2 { get; }
+
+    public ref float OldInValue { get; }
+
+    public ref bool Enabled { get; }
+
+    // CEntityOutputTemplate< float32 >
+    public SchemaUntypedField OutValue { get; }
+
+    public ref CEntityIOOutput OnRoseAboveMin { get; }
+
+    public ref CEntityIOOutput OnRoseAboveMax { get; }
+
+    public ref CEntityIOOutput OnFellBelowMin { get; }
+
+    public ref CEntityIOOutput OnFellBelowMax { get; }
 
 
 }

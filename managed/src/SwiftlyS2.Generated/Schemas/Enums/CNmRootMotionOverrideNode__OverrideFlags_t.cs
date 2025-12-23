@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CNmRootMotionOverrideNode__OverrideFlags_t : byte {
-
+public enum CNmRootMotionOverrideNode__OverrideFlags_t : byte
+{
  AllowMoveX = 0,
 
  AllowMoveY = 1,

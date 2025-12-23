@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapExternalWindToCPImpl : CParticleFunctionPreEmissionImpl, C_OP_RemapExternalWindToCP {
+internal partial class C_OP_RemapExternalWindToCPImpl : CParticleFunctionPreEmissionImpl, C_OP_RemapExternalWindToCP
+{
+    public C_OP_RemapExternalWindToCPImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapExternalWindToCPImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CPOffset;
 
-  private static nint? _CPOffset;
-
-  public ref int CP {
-    get {
-      if (_CPOffset == null) {
-        _CPOffset = Schema.GetOffset(0x19366DF9EB661472);
-      }
-      return ref _Handle.AsRef<int>(_CPOffset!.Value);
+    public ref int CP {
+        get {
+            _CPOffset = _CPOffset ?? Schema.GetOffset(0x19366DF9EB661472);
+            return ref _Handle.AsRef<int>(_CPOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPOutputOffset;
+    private static nint? _CPOutputOffset;
 
-  public ref int CPOutput {
-    get {
-      if (_CPOutputOffset == null) {
-        _CPOutputOffset = Schema.GetOffset(0x19366DF92077C953);
-      }
-      return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+    public ref int CPOutput {
+        get {
+            _CPOutputOffset = _CPOutputOffset ?? Schema.GetOffset(0x19366DF92077C953);
+            return ref _Handle.AsRef<int>(_CPOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _ScaleOffset;
 
-  public CParticleCollectionVecInput Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x19366DF95F596B51);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset!.Value);
+    public CParticleCollectionVecInput Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x19366DF95F596B51);
+            return new CParticleCollectionVecInputImpl(_Handle + _ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetMagnitudeOffset;
+    private static nint? _SetMagnitudeOffset;
 
-  public ref bool SetMagnitude {
-    get {
-      if (_SetMagnitudeOffset == null) {
-        _SetMagnitudeOffset = Schema.GetOffset(0x19366DF9B87FB05F);
-      }
-      return ref _Handle.AsRef<bool>(_SetMagnitudeOffset!.Value);
+    public ref bool SetMagnitude {
+        get {
+            _SetMagnitudeOffset = _SetMagnitudeOffset ?? Schema.GetOffset(0x19366DF9B87FB05F);
+            return ref _Handle.AsRef<bool>(_SetMagnitudeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutVectorFieldOffset;
+    private static nint? _OutVectorFieldOffset;
 
-  public ref int OutVectorField {
-    get {
-      if (_OutVectorFieldOffset == null) {
-        _OutVectorFieldOffset = Schema.GetOffset(0x19366DF9F9041E74);
-      }
-      return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
+    public ref int OutVectorField {
+        get {
+            _OutVectorFieldOffset = _OutVectorFieldOffset ?? Schema.GetOffset(0x19366DF9F9041E74);
+            return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
+        }
     }
-  }
 
 
 }

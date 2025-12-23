@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSosGroupActionMemberCountEnvelopeSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema> {
+public partial interface CSosGroupActionMemberCountEnvelopeSchema : CSosGroupActionSchema, ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema>
+{
+    static CSosGroupActionMemberCountEnvelopeSchema ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema>.From(nint handle) => new CSosGroupActionMemberCountEnvelopeSchemaImpl(handle);
+    static int ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema>.Size => 48;
+    static string? ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema>.ClassName => null;
 
-  static CSosGroupActionMemberCountEnvelopeSchema ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema>.From(nint handle) => new CSosGroupActionMemberCountEnvelopeSchemaImpl(handle);
-  static int ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema>.Size => 48;
-  static string? ISchemaClass<CSosGroupActionMemberCountEnvelopeSchema>.ClassName => null;
 
-  
-  public ref int BaseCount { get; }
-  
-  public ref int TargetCount { get; }
-  
-  public ref float BaseValue { get; }
-  
-  public ref float TargetValue { get; }
-  
-  public ref float Attack { get; }
-  
-  public ref float Decay { get; }
-  
-  public string ResultVarName { get; set; }
-  
-  public ref bool SaveToGroup { get; }
+    public ref int BaseCount { get; }
+
+    public ref int TargetCount { get; }
+
+    public ref float BaseValue { get; }
+
+    public ref float TargetValue { get; }
+
+    public ref float Attack { get; }
+
+    public ref float Decay { get; }
+
+    public string ResultVarName { get; set; }
+
+    public ref bool SaveToGroup { get; }
 
 
 }

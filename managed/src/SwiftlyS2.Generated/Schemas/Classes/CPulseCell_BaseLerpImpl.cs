@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseCell_BaseLerpImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_BaseLerp {
+internal partial class CPulseCell_BaseLerpImpl : CPulseCell_BaseYieldingInflowImpl, CPulseCell_BaseLerp
+{
+    public CPulseCell_BaseLerpImpl(nint handle) : base(handle) { }
 
-  public CPulseCell_BaseLerpImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WakeResumeOffset;
 
-  private static nint? _WakeResumeOffset;
-
-  public CPulse_ResumePoint WakeResume {
-    get {
-      if (_WakeResumeOffset == null) {
-        _WakeResumeOffset = Schema.GetOffset(0x8AF2C31831F86DC2);
-      }
-      return new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset!.Value);
+    public CPulse_ResumePoint WakeResume {
+        get {
+            _WakeResumeOffset = _WakeResumeOffset ?? Schema.GetOffset(0x8AF2C31831F86DC2);
+            return new CPulse_ResumePointImpl(_Handle + _WakeResumeOffset!.Value);
+        }
     }
-  }
 
 
 }

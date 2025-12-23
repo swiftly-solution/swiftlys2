@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CCycleBaseImpl : SchemaClass, CCycleBase {
+internal partial class CCycleBaseImpl : SchemaClass, CCycleBase
+{
+    public CCycleBaseImpl(nint handle) : base(handle) { }
 
-  public CCycleBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CycleOffset;
 
-  private static nint? _CycleOffset;
-
-  public ref float Cycle {
-    get {
-      if (_CycleOffset == null) {
-        _CycleOffset = Schema.GetOffset(0x8FBE16990C77829F);
-      }
-      return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+    public ref float Cycle {
+        get {
+            _CycleOffset = _CycleOffset ?? Schema.GetOffset(0x8FBE16990C77829F);
+            return ref _Handle.AsRef<float>(_CycleOffset!.Value);
+        }
     }
-  }
 
 
 }

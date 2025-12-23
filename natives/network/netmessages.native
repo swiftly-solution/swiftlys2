@@ -74,6 +74,7 @@ ptr GetRepeatedNestedMessage = ptr netmsg, string fieldName, int32 index
 ptr AddNestedMessage = ptr netmsg, string fieldName
 int32 GetRepeatedFieldSize = ptr netmsg, string fieldName
 void ClearRepeatedField = ptr netmsg, string fieldName
+void Clear = ptr netmsg
 sync void SendMessage = ptr netmsg, int32 msgid, int32 playerid
 sync void SendMessageToPlayers = ptr netmsg, int32 msgid, uint64 playermask // each bit in player_mask represents a playerid
 uint64 AddNetMessageServerHook = ptr callback // the callback should receive the following: uint64* playermask_ptr, int netmessage_id, void* netmsg, return bool (true -> ignored, false -> supercede)

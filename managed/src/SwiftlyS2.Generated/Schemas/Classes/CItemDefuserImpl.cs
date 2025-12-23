@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CItemDefuserImpl : CItemImpl, CItemDefuser {
+internal partial class CItemDefuserImpl : CItemImpl, CItemDefuser
+{
+    public CItemDefuserImpl(nint handle) : base(handle) { }
 
-  public CItemDefuserImpl(nint handle) : base(handle) {
-  }
+    private static nint? _EntitySpottedStateOffset;
 
-  private static nint? _EntitySpottedStateOffset;
-
-  public EntitySpottedState_t EntitySpottedState {
-    get {
-      if (_EntitySpottedStateOffset == null) {
-        _EntitySpottedStateOffset = Schema.GetOffset(0xC9362933032B547C);
-      }
-      return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+    public EntitySpottedState_t EntitySpottedState {
+        get {
+            _EntitySpottedStateOffset = _EntitySpottedStateOffset ?? Schema.GetOffset(0xC9362933032B547C);
+            return new EntitySpottedState_tImpl(_Handle + _EntitySpottedStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpotRulesOffset;
+    private static nint? _SpotRulesOffset;
 
-  public ref int SpotRules {
-    get {
-      if (_SpotRulesOffset == null) {
-        _SpotRulesOffset = Schema.GetOffset(0xC9362933776CCE44);
-      }
-      return ref _Handle.AsRef<int>(_SpotRulesOffset!.Value);
+    public ref int SpotRules {
+        get {
+            _SpotRulesOffset = _SpotRulesOffset ?? Schema.GetOffset(0xC9362933776CCE44);
+            return ref _Handle.AsRef<int>(_SpotRulesOffset!.Value);
+        }
     }
-  }
 
 
 }

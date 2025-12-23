@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBoneConstraintPoseSpaceBone : CBaseConstraint, ISchemaClass<CBoneConstraintPoseSpaceBone> {
+public partial interface CBoneConstraintPoseSpaceBone : CBaseConstraint, ISchemaClass<CBoneConstraintPoseSpaceBone>
+{
+    static CBoneConstraintPoseSpaceBone ISchemaClass<CBoneConstraintPoseSpaceBone>.From(nint handle) => new CBoneConstraintPoseSpaceBoneImpl(handle);
+    static int ISchemaClass<CBoneConstraintPoseSpaceBone>.Size => 136;
+    static string? ISchemaClass<CBoneConstraintPoseSpaceBone>.ClassName => null;
 
-  static CBoneConstraintPoseSpaceBone ISchemaClass<CBoneConstraintPoseSpaceBone>.From(nint handle) => new CBoneConstraintPoseSpaceBoneImpl(handle);
-  static int ISchemaClass<CBoneConstraintPoseSpaceBone>.Size => 136;
-  static string? ISchemaClass<CBoneConstraintPoseSpaceBone>.ClassName => null;
 
-  
-  public ref CUtlVector<CBoneConstraintPoseSpaceBone__Input_t> InputList { get; }
+    public ref CUtlVector<CBoneConstraintPoseSpaceBone__Input_t> InputList { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_MaxVelocity : CParticleFunctionOperator, ISchemaClass<C_OP_MaxVelocity> {
+public partial interface C_OP_MaxVelocity : CParticleFunctionOperator, ISchemaClass<C_OP_MaxVelocity>
+{
+    static C_OP_MaxVelocity ISchemaClass<C_OP_MaxVelocity>.From(nint handle) => new C_OP_MaxVelocityImpl(handle);
+    static int ISchemaClass<C_OP_MaxVelocity>.Size => 480;
+    static string? ISchemaClass<C_OP_MaxVelocity>.ClassName => null;
 
-  static C_OP_MaxVelocity ISchemaClass<C_OP_MaxVelocity>.From(nint handle) => new C_OP_MaxVelocityImpl(handle);
-  static int ISchemaClass<C_OP_MaxVelocity>.Size => 480;
-  static string? ISchemaClass<C_OP_MaxVelocity>.ClassName => null;
 
-  
-  public ref float MaxVelocity { get; }
-  
-  public ref float MinVelocity { get; }
-  
-  public ref int OverrideCP { get; }
-  
-  public ref int OverrideCPField { get; }
+    public ref float MaxVelocity { get; }
+
+    public ref float MinVelocity { get; }
+
+    public ref int OverrideCP { get; }
+
+    public ref int OverrideCPField { get; }
 
 
 }

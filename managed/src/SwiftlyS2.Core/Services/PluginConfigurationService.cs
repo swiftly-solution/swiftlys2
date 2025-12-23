@@ -57,7 +57,6 @@ internal class PluginConfigurationService : IPluginConfigurationService
     {
       Directory.CreateDirectory(dir);
     }
-    File.Create(configPath).Close();
 
     var templateAbsPath = Path.Combine(_Id.BaseDirectory, "resources", "templates", templatePath);
 
@@ -127,7 +126,8 @@ internal class PluginConfigurationService : IPluginConfigurationService
     };
 
     var tomlModelOptions = new TomlModelOptions {
-      ConvertPropertyName = name => name
+      ConvertPropertyName = name => name,
+      IgnoreMissingProperties = true
     };
 
     var tomlString = Toml.FromModel(wrapped, tomlModelOptions);

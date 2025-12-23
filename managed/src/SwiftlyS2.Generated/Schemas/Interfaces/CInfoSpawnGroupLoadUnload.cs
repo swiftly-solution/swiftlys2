@@ -8,38 +8,38 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoSpawnGroupLoadUnload : CLogicalEntity, ISchemaClass<CInfoSpawnGroupLoadUnload> {
+public partial interface CInfoSpawnGroupLoadUnload : CLogicalEntity, ISchemaClass<CInfoSpawnGroupLoadUnload>
+{
+    static CInfoSpawnGroupLoadUnload ISchemaClass<CInfoSpawnGroupLoadUnload>.From(nint handle) => new CInfoSpawnGroupLoadUnloadImpl(handle);
+    static int ISchemaClass<CInfoSpawnGroupLoadUnload>.Size => 1544;
+    static string? ISchemaClass<CInfoSpawnGroupLoadUnload>.ClassName => "info_spawngroup_load_unload";
 
-  static CInfoSpawnGroupLoadUnload ISchemaClass<CInfoSpawnGroupLoadUnload>.From(nint handle) => new CInfoSpawnGroupLoadUnloadImpl(handle);
-  static int ISchemaClass<CInfoSpawnGroupLoadUnload>.Size => 1544;
-  static string? ISchemaClass<CInfoSpawnGroupLoadUnload>.ClassName => "info_spawngroup_load_unload";
 
-  
-  public CEntityIOOutput OnSpawnGroupLoadStarted { get; }
-  
-  public CEntityIOOutput OnSpawnGroupLoadFinished { get; }
-  
-  public CEntityIOOutput OnSpawnGroupUnloadStarted { get; }
-  
-  public CEntityIOOutput OnSpawnGroupUnloadFinished { get; }
-  
-  public string SpawnGroupName { get; set; }
-  
-  public string SpawnGroupFilterName { get; set; }
-  
-  public string LandmarkName { get; set; }
-  
-  public string FixedSpawnGroupName { get; set; }
-  
-  public ref float TimeoutInterval { get; }
-  
-  public ref bool AutoActivate { get; }
-  
-  public ref bool UnloadingStarted { get; }
-  
-  public ref bool QueueActiveSpawnGroupChange { get; }
-  
-  public ref bool QueueFinishLoading { get; }
+    public ref CEntityIOOutput OnSpawnGroupLoadStarted { get; }
+
+    public ref CEntityIOOutput OnSpawnGroupLoadFinished { get; }
+
+    public ref CEntityIOOutput OnSpawnGroupUnloadStarted { get; }
+
+    public ref CEntityIOOutput OnSpawnGroupUnloadFinished { get; }
+
+    public string SpawnGroupName { get; set; }
+
+    public string SpawnGroupFilterName { get; set; }
+
+    public string LandmarkName { get; set; }
+
+    public string FixedSpawnGroupName { get; set; }
+
+    public ref float TimeoutInterval { get; }
+
+    public ref bool AutoActivate { get; }
+
+    public ref bool UnloadingStarted { get; }
+
+    public ref bool QueueActiveSpawnGroupChange { get; }
+
+    public ref bool QueueFinishLoading { get; }
 
 
 }

@@ -6,137 +6,112 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class PGDInstruction_tImpl : SchemaClass, PGDInstruction_t {
+internal partial class PGDInstruction_tImpl : SchemaClass, PGDInstruction_t
+{
+    public PGDInstruction_tImpl(nint handle) : base(handle) { }
 
-  public PGDInstruction_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CodeOffset;
 
-  private static nint? _CodeOffset;
-
-  public ref PulseInstructionCode_t Code {
-    get {
-      if (_CodeOffset == null) {
-        _CodeOffset = Schema.GetOffset(0xE64AC70782D034B8);
-      }
-      return ref _Handle.AsRef<PulseInstructionCode_t>(_CodeOffset!.Value);
+    public ref PulseInstructionCode_t Code {
+        get {
+            _CodeOffset = _CodeOffset ?? Schema.GetOffset(0xE64AC70782D034B8);
+            return ref _Handle.AsRef<PulseInstructionCode_t>(_CodeOffset!.Value);
+        }
     }
-  }
-  private static nint? _VarOffset;
+    private static nint? _VarOffset;
 
-  public PulseRuntimeVarIndex_t Var {
-    get {
-      if (_VarOffset == null) {
-        _VarOffset = Schema.GetOffset(0xE64AC707FD79AE3A);
-      }
-      return new PulseRuntimeVarIndex_tImpl(_Handle + _VarOffset!.Value);
+    public PulseRuntimeVarIndex_t Var {
+        get {
+            _VarOffset = _VarOffset ?? Schema.GetOffset(0xE64AC707FD79AE3A);
+            return new PulseRuntimeVarIndex_tImpl(_Handle + _VarOffset!.Value);
+        }
     }
-  }
-  private static nint? _Reg0Offset;
+    private static nint? _Reg0Offset;
 
-  public PulseRuntimeRegisterIndex_t Reg0 {
-    get {
-      if (_Reg0Offset == null) {
-        _Reg0Offset = Schema.GetOffset(0xE64AC707203A137B);
-      }
-      return new PulseRuntimeRegisterIndex_tImpl(_Handle + _Reg0Offset!.Value);
+    public PulseRuntimeRegisterIndex_t Reg0 {
+        get {
+            _Reg0Offset = _Reg0Offset ?? Schema.GetOffset(0xE64AC707203A137B);
+            return new PulseRuntimeRegisterIndex_tImpl(_Handle + _Reg0Offset!.Value);
+        }
     }
-  }
-  private static nint? _Reg1Offset;
+    private static nint? _Reg1Offset;
 
-  public PulseRuntimeRegisterIndex_t Reg1 {
-    get {
-      if (_Reg1Offset == null) {
-        _Reg1Offset = Schema.GetOffset(0xE64AC7071F3A11E8);
-      }
-      return new PulseRuntimeRegisterIndex_tImpl(_Handle + _Reg1Offset!.Value);
+    public PulseRuntimeRegisterIndex_t Reg1 {
+        get {
+            _Reg1Offset = _Reg1Offset ?? Schema.GetOffset(0xE64AC7071F3A11E8);
+            return new PulseRuntimeRegisterIndex_tImpl(_Handle + _Reg1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Reg2Offset;
+    private static nint? _Reg2Offset;
 
-  public PulseRuntimeRegisterIndex_t Reg2 {
-    get {
-      if (_Reg2Offset == null) {
-        _Reg2Offset = Schema.GetOffset(0xE64AC707223A16A1);
-      }
-      return new PulseRuntimeRegisterIndex_tImpl(_Handle + _Reg2Offset!.Value);
+    public PulseRuntimeRegisterIndex_t Reg2 {
+        get {
+            _Reg2Offset = _Reg2Offset ?? Schema.GetOffset(0xE64AC707223A16A1);
+            return new PulseRuntimeRegisterIndex_tImpl(_Handle + _Reg2Offset!.Value);
+        }
     }
-  }
-  private static nint? _InvokeBindingIndexOffset;
+    private static nint? _InvokeBindingIndexOffset;
 
-  public PulseRuntimeInvokeIndex_t InvokeBindingIndex {
-    get {
-      if (_InvokeBindingIndexOffset == null) {
-        _InvokeBindingIndexOffset = Schema.GetOffset(0xE64AC707758774C2);
-      }
-      return new PulseRuntimeInvokeIndex_tImpl(_Handle + _InvokeBindingIndexOffset!.Value);
+    public PulseRuntimeInvokeIndex_t InvokeBindingIndex {
+        get {
+            _InvokeBindingIndexOffset = _InvokeBindingIndexOffset ?? Schema.GetOffset(0xE64AC707758774C2);
+            return new PulseRuntimeInvokeIndex_tImpl(_Handle + _InvokeBindingIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ChunkOffset;
+    private static nint? _ChunkOffset;
 
-  public PulseRuntimeChunkIndex_t Chunk {
-    get {
-      if (_ChunkOffset == null) {
-        _ChunkOffset = Schema.GetOffset(0xE64AC7071B1DB366);
-      }
-      return new PulseRuntimeChunkIndex_tImpl(_Handle + _ChunkOffset!.Value);
+    public PulseRuntimeChunkIndex_t Chunk {
+        get {
+            _ChunkOffset = _ChunkOffset ?? Schema.GetOffset(0xE64AC7071B1DB366);
+            return new PulseRuntimeChunkIndex_tImpl(_Handle + _ChunkOffset!.Value);
+        }
     }
-  }
-  private static nint? _DestInstructionOffset;
+    private static nint? _DestInstructionOffset;
 
-  public ref int DestInstruction {
-    get {
-      if (_DestInstructionOffset == null) {
-        _DestInstructionOffset = Schema.GetOffset(0xE64AC7071C9BCE7B);
-      }
-      return ref _Handle.AsRef<int>(_DestInstructionOffset!.Value);
+    public ref int DestInstruction {
+        get {
+            _DestInstructionOffset = _DestInstructionOffset ?? Schema.GetOffset(0xE64AC7071C9BCE7B);
+            return ref _Handle.AsRef<int>(_DestInstructionOffset!.Value);
+        }
     }
-  }
-  private static nint? _CallInfoIndexOffset;
+    private static nint? _CallInfoIndexOffset;
 
-  public PulseRuntimeCallInfoIndex_t CallInfoIndex {
-    get {
-      if (_CallInfoIndexOffset == null) {
-        _CallInfoIndexOffset = Schema.GetOffset(0xE64AC7075A5CA29B);
-      }
-      return new PulseRuntimeCallInfoIndex_tImpl(_Handle + _CallInfoIndexOffset!.Value);
+    public PulseRuntimeCallInfoIndex_t CallInfoIndex {
+        get {
+            _CallInfoIndexOffset = _CallInfoIndexOffset ?? Schema.GetOffset(0xE64AC7075A5CA29B);
+            return new PulseRuntimeCallInfoIndex_tImpl(_Handle + _CallInfoIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConstIdxOffset;
+    private static nint? _ConstIdxOffset;
 
-  public PulseRuntimeConstantIndex_t ConstIdx {
-    get {
-      if (_ConstIdxOffset == null) {
-        _ConstIdxOffset = Schema.GetOffset(0xE64AC707800942FF);
-      }
-      return new PulseRuntimeConstantIndex_tImpl(_Handle + _ConstIdxOffset!.Value);
+    public PulseRuntimeConstantIndex_t ConstIdx {
+        get {
+            _ConstIdxOffset = _ConstIdxOffset ?? Schema.GetOffset(0xE64AC707800942FF);
+            return new PulseRuntimeConstantIndex_tImpl(_Handle + _ConstIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _DomainValueIdxOffset;
+    private static nint? _DomainValueIdxOffset;
 
-  public PulseRuntimeDomainValueIndex_t DomainValueIdx {
-    get {
-      if (_DomainValueIdxOffset == null) {
-        _DomainValueIdxOffset = Schema.GetOffset(0xE64AC70716115525);
-      }
-      return new PulseRuntimeDomainValueIndex_tImpl(_Handle + _DomainValueIdxOffset!.Value);
+    public PulseRuntimeDomainValueIndex_t DomainValueIdx {
+        get {
+            _DomainValueIdxOffset = _DomainValueIdxOffset ?? Schema.GetOffset(0xE64AC70716115525);
+            return new PulseRuntimeDomainValueIndex_tImpl(_Handle + _DomainValueIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _BlackboardReferenceIdxOffset;
+    private static nint? _BlackboardReferenceIdxOffset;
 
-  public PulseRuntimeBlackboardReferenceIndex_t BlackboardReferenceIdx {
-    get {
-      if (_BlackboardReferenceIdxOffset == null) {
-        _BlackboardReferenceIdxOffset = Schema.GetOffset(0xE64AC70727CB71C0);
-      }
-      return new PulseRuntimeBlackboardReferenceIndex_tImpl(_Handle + _BlackboardReferenceIdxOffset!.Value);
+    public PulseRuntimeBlackboardReferenceIndex_t BlackboardReferenceIdx {
+        get {
+            _BlackboardReferenceIdxOffset = _BlackboardReferenceIdxOffset ?? Schema.GetOffset(0xE64AC70727CB71C0);
+            return new PulseRuntimeBlackboardReferenceIndex_tImpl(_Handle + _BlackboardReferenceIdxOffset!.Value);
+        }
     }
-  }
 
 
 }

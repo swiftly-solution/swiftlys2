@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncVPhysicsClip : CBaseModelEntity, ISchemaClass<CFuncVPhysicsClip> {
+public partial interface CFuncVPhysicsClip : CBaseModelEntity, ISchemaClass<CFuncVPhysicsClip>
+{
+    static CFuncVPhysicsClip ISchemaClass<CFuncVPhysicsClip>.From(nint handle) => new CFuncVPhysicsClipImpl(handle);
+    static int ISchemaClass<CFuncVPhysicsClip>.Size => 2016;
+    static string? ISchemaClass<CFuncVPhysicsClip>.ClassName => "func_clip_vphysics";
 
-  static CFuncVPhysicsClip ISchemaClass<CFuncVPhysicsClip>.From(nint handle) => new CFuncVPhysicsClipImpl(handle);
-  static int ISchemaClass<CFuncVPhysicsClip>.Size => 2016;
-  static string? ISchemaClass<CFuncVPhysicsClip>.ClassName => "func_clip_vphysics";
 
-  
-  public ref bool Disabled { get; }
+    public ref bool Disabled { get; }
 
 
 }

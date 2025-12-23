@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMotionSearchNode : ISchemaClass<CMotionSearchNode> {
+public partial interface CMotionSearchNode : ISchemaClass<CMotionSearchNode>
+{
+    static CMotionSearchNode ISchemaClass<CMotionSearchNode>.From(nint handle) => new CMotionSearchNodeImpl(handle);
+    static int ISchemaClass<CMotionSearchNode>.Size => 128;
+    static string? ISchemaClass<CMotionSearchNode>.ClassName => null;
 
-  static CMotionSearchNode ISchemaClass<CMotionSearchNode>.From(nint handle) => new CMotionSearchNodeImpl(handle);
-  static int ISchemaClass<CMotionSearchNode>.Size => 128;
-  static string? ISchemaClass<CMotionSearchNode>.ClassName => null;
 
-  
-  public ref CUtlVector<PointerTo<CMotionSearchNode>> Children { get; }
-  
-  public CVectorQuantizer Quantizer { get; }
-  
-  public ref CUtlVector<CUtlVector<SampleCode>> SampleCodes { get; }
-  
-  public ref CUtlVector<CUtlVector<int>> SampleIndices { get; }
-  
-  public ref CUtlVector<int> SelectableSamples { get; }
+    public ref CUtlVector<PointerTo<CMotionSearchNode>> Children { get; }
+
+    public CVectorQuantizer Quantizer { get; }
+
+    public ref CUtlVector<CUtlVector<SampleCode>> SampleCodes { get; }
+
+    public ref CUtlVector<CUtlVector<int>> SampleIndices { get; }
+
+    public ref CUtlVector<int> SelectableSamples { get; }
 
 
 }

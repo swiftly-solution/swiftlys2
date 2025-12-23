@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_OffsetVectorToVector : CParticleFunctionInitializer, ISchemaClass<C_INIT_OffsetVectorToVector> {
+public partial interface C_INIT_OffsetVectorToVector : CParticleFunctionInitializer, ISchemaClass<C_INIT_OffsetVectorToVector>
+{
+    static C_INIT_OffsetVectorToVector ISchemaClass<C_INIT_OffsetVectorToVector>.From(nint handle) => new C_INIT_OffsetVectorToVectorImpl(handle);
+    static int ISchemaClass<C_INIT_OffsetVectorToVector>.Size => 512;
+    static string? ISchemaClass<C_INIT_OffsetVectorToVector>.ClassName => null;
 
-  static C_INIT_OffsetVectorToVector ISchemaClass<C_INIT_OffsetVectorToVector>.From(nint handle) => new C_INIT_OffsetVectorToVectorImpl(handle);
-  static int ISchemaClass<C_INIT_OffsetVectorToVector>.Size => 512;
-  static string? ISchemaClass<C_INIT_OffsetVectorToVector>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref Vector OutputMin { get; }
-  
-  public ref Vector OutputMax { get; }
-  
-  public CRandomNumberGeneratorParameters RandomnessParameters { get; }
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref Vector OutputMin { get; }
+
+    public ref Vector OutputMax { get; }
+
+    public CRandomNumberGeneratorParameters RandomnessParameters { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncInteractionLayerClip : CBaseModelEntity, ISchemaClass<CFuncInteractionLayerClip> {
+public partial interface CFuncInteractionLayerClip : CBaseModelEntity, ISchemaClass<CFuncInteractionLayerClip>
+{
+    static CFuncInteractionLayerClip ISchemaClass<CFuncInteractionLayerClip>.From(nint handle) => new CFuncInteractionLayerClipImpl(handle);
+    static int ISchemaClass<CFuncInteractionLayerClip>.Size => 2032;
+    static string? ISchemaClass<CFuncInteractionLayerClip>.ClassName => null;
 
-  static CFuncInteractionLayerClip ISchemaClass<CFuncInteractionLayerClip>.From(nint handle) => new CFuncInteractionLayerClipImpl(handle);
-  static int ISchemaClass<CFuncInteractionLayerClip>.Size => 2032;
-  static string? ISchemaClass<CFuncInteractionLayerClip>.ClassName => null;
 
-  
-  public ref bool Disabled { get; }
-  
-  public string InteractsAs { get; set; }
-  
-  public string InteractsWith { get; set; }
+    public ref bool Disabled { get; }
+
+    public string InteractsAs { get; set; }
+
+    public string InteractsWith { get; set; }
 
 
 }

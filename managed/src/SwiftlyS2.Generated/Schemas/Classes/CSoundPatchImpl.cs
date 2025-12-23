@@ -6,161 +6,128 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSoundPatchImpl : SchemaClass, CSoundPatch {
+internal partial class CSoundPatchImpl : SchemaClass, CSoundPatch
+{
+    public CSoundPatchImpl(nint handle) : base(handle) { }
 
-  public CSoundPatchImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PitchOffset;
 
-  private static nint? _PitchOffset;
+    public CSoundEnvelope Pitch {
+        get {
+            _PitchOffset = _PitchOffset ?? Schema.GetOffset(0xBE66ED3D12AC36D1);
+            return new CSoundEnvelopeImpl(_Handle + _PitchOffset!.Value);
+        }
+    }
+    private static nint? _VolumeOffset;
 
-  public CSoundEnvelope Pitch {
-    get {
-      if (_PitchOffset == null) {
-        _PitchOffset = Schema.GetOffset(0xBE66ED3D12AC36D1);
-      }
-      return new CSoundEnvelopeImpl(_Handle + _PitchOffset!.Value);
+    public CSoundEnvelope Volume {
+        get {
+            _VolumeOffset = _VolumeOffset ?? Schema.GetOffset(0xBE66ED3DE3962F2F);
+            return new CSoundEnvelopeImpl(_Handle + _VolumeOffset!.Value);
+        }
     }
-  }
-  private static nint? _VolumeOffset;
+    private static nint? _ShutdownTimeOffset;
 
-  public CSoundEnvelope Volume {
-    get {
-      if (_VolumeOffset == null) {
-        _VolumeOffset = Schema.GetOffset(0xBE66ED3DE3962F2F);
-      }
-      return new CSoundEnvelopeImpl(_Handle + _VolumeOffset!.Value);
+    public ref float ShutdownTime {
+        get {
+            _ShutdownTimeOffset = _ShutdownTimeOffset ?? Schema.GetOffset(0xBE66ED3DFA135362);
+            return ref _Handle.AsRef<float>(_ShutdownTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ShutdownTimeOffset;
+    private static nint? _LastTimeOffset;
 
-  public ref float ShutdownTime {
-    get {
-      if (_ShutdownTimeOffset == null) {
-        _ShutdownTimeOffset = Schema.GetOffset(0xBE66ED3DFA135362);
-      }
-      return ref _Handle.AsRef<float>(_ShutdownTimeOffset!.Value);
+    public ref float LastTime {
+        get {
+            _LastTimeOffset = _LastTimeOffset ?? Schema.GetOffset(0xBE66ED3D2E79549E);
+            return ref _Handle.AsRef<float>(_LastTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastTimeOffset;
+    private static nint? _SoundScriptNameOffset;
 
-  public ref float LastTime {
-    get {
-      if (_LastTimeOffset == null) {
-        _LastTimeOffset = Schema.GetOffset(0xBE66ED3D2E79549E);
-      }
-      return ref _Handle.AsRef<float>(_LastTimeOffset!.Value);
-    }
-  }
-  private static nint? _SoundScriptNameOffset;
+    public string SoundScriptName {
+        get {
+            _SoundScriptNameOffset = _SoundScriptNameOffset ?? Schema.GetOffset(0xBE66ED3D6486B844);
+            return Schema.GetString(_Handle.Read<nint>(_SoundScriptNameOffset!.Value));
+        }
+        set {
+            _SoundScriptNameOffset = _SoundScriptNameOffset ?? Schema.GetOffset(0xBE66ED3D6486B844);
+            Schema.SetString(_Handle, _SoundScriptNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _EntOffset;
 
-  public string SoundScriptName {
-    get {
-      if (_SoundScriptNameOffset == null) {
-        _SoundScriptNameOffset = Schema.GetOffset(0xBE66ED3D6486B844);
-      }
-      var ptr = _Handle.Read<nint>(_SoundScriptNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CHandle<CBaseEntity> Ent {
+        get {
+            _EntOffset = _EntOffset ?? Schema.GetOffset(0xBE66ED3D8BBDB334);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOffset!.Value);
+        }
     }
-    set {
-      if (_SoundScriptNameOffset == null) {
-        _SoundScriptNameOffset = Schema.GetOffset(0xBE66ED3D6486B844);
-      }
-      Schema.SetString(_Handle, _SoundScriptNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _EntOffset;
+    private static nint? _SoundEntityIndexOffset;
 
-  public ref CHandle<CBaseEntity> Ent {
-    get {
-      if (_EntOffset == null) {
-        _EntOffset = Schema.GetOffset(0xBE66ED3D8BBDB334);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_EntOffset!.Value);
+    public ref uint SoundEntityIndex {
+        get {
+            _SoundEntityIndexOffset = _SoundEntityIndexOffset ?? Schema.GetOffset(0xBE66ED3DEC098195);
+            return ref _Handle.AsRef<uint>(_SoundEntityIndexOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundEntityIndexOffset;
+    private static nint? _SoundOriginOffset;
 
-  public ref uint SoundEntityIndex {
-    get {
-      if (_SoundEntityIndexOffset == null) {
-        _SoundEntityIndexOffset = Schema.GetOffset(0xBE66ED3DEC098195);
-      }
-      return ref _Handle.AsRef<uint>(_SoundEntityIndexOffset!.Value);
+    public ref Vector SoundOrigin {
+        get {
+            _SoundOriginOffset = _SoundOriginOffset ?? Schema.GetOffset(0xBE66ED3D384D083E);
+            return ref _Handle.AsRef<Vector>(_SoundOriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _SoundOriginOffset;
+    private static nint? _IsPlayingOffset;
 
-  public ref Vector SoundOrigin {
-    get {
-      if (_SoundOriginOffset == null) {
-        _SoundOriginOffset = Schema.GetOffset(0xBE66ED3D384D083E);
-      }
-      return ref _Handle.AsRef<Vector>(_SoundOriginOffset!.Value);
+    public ref int IsPlaying {
+        get {
+            _IsPlayingOffset = _IsPlayingOffset ?? Schema.GetOffset(0xBE66ED3D71CADDE5);
+            return ref _Handle.AsRef<int>(_IsPlayingOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsPlayingOffset;
+    private static nint? _FilterOffset;
 
-  public ref int IsPlaying {
-    get {
-      if (_IsPlayingOffset == null) {
-        _IsPlayingOffset = Schema.GetOffset(0xBE66ED3D71CADDE5);
-      }
-      return ref _Handle.AsRef<int>(_IsPlayingOffset!.Value);
+    public CCopyRecipientFilter Filter {
+        get {
+            _FilterOffset = _FilterOffset ?? Schema.GetOffset(0xBE66ED3D368220F7);
+            return new CCopyRecipientFilterImpl(_Handle + _FilterOffset!.Value);
+        }
     }
-  }
-  private static nint? _FilterOffset;
+    private static nint? _CloseCaptionDurationOffset;
 
-  public CCopyRecipientFilter Filter {
-    get {
-      if (_FilterOffset == null) {
-        _FilterOffset = Schema.GetOffset(0xBE66ED3D368220F7);
-      }
-      return new CCopyRecipientFilterImpl(_Handle + _FilterOffset!.Value);
+    public ref float CloseCaptionDuration {
+        get {
+            _CloseCaptionDurationOffset = _CloseCaptionDurationOffset ?? Schema.GetOffset(0xBE66ED3D71B7507D);
+            return ref _Handle.AsRef<float>(_CloseCaptionDurationOffset!.Value);
+        }
     }
-  }
-  private static nint? _CloseCaptionDurationOffset;
+    private static nint? _UpdatedSoundOriginOffset;
 
-  public ref float CloseCaptionDuration {
-    get {
-      if (_CloseCaptionDurationOffset == null) {
-        _CloseCaptionDurationOffset = Schema.GetOffset(0xBE66ED3D71B7507D);
-      }
-      return ref _Handle.AsRef<float>(_CloseCaptionDurationOffset!.Value);
+    public ref bool UpdatedSoundOrigin {
+        get {
+            _UpdatedSoundOriginOffset = _UpdatedSoundOriginOffset ?? Schema.GetOffset(0xBE66ED3DACCF22F1);
+            return ref _Handle.AsRef<bool>(_UpdatedSoundOriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _UpdatedSoundOriginOffset;
+    private static nint? _ClassNameOffset;
 
-  public ref bool UpdatedSoundOrigin {
-    get {
-      if (_UpdatedSoundOriginOffset == null) {
-        _UpdatedSoundOriginOffset = Schema.GetOffset(0xBE66ED3DACCF22F1);
-      }
-      return ref _Handle.AsRef<bool>(_UpdatedSoundOriginOffset!.Value);
-    }
-  }
-  private static nint? _ClassNameOffset;
-
-  public string ClassName {
-    get {
-      if (_ClassNameOffset == null) {
-        _ClassNameOffset = Schema.GetOffset(0xBE66ED3D71BB2314);
-      }
-      var ptr = _Handle.Read<nint>(_ClassNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ClassNameOffset == null) {
-        _ClassNameOffset = Schema.GetOffset(0xBE66ED3D71BB2314);
-      }
-      Schema.SetString(_Handle, _ClassNameOffset!.Value, value);
-    }
-  } 
+    public string ClassName {
+        get {
+            _ClassNameOffset = _ClassNameOffset ?? Schema.GetOffset(0xBE66ED3D71BB2314);
+            return Schema.GetString(_Handle.Read<nint>(_ClassNameOffset!.Value));
+        }
+        set {
+            _ClassNameOffset = _ClassNameOffset ?? Schema.GetOffset(0xBE66ED3D71BB2314);
+            Schema.SetString(_Handle, _ClassNameOffset!.Value, value);
+        }
+    } 
 
 
 }

@@ -8,19 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimationGraphVisualizerPrimitiveBase : ISchemaClass<CAnimationGraphVisualizerPrimitiveBase> {
+public partial interface CAnimationGraphVisualizerPrimitiveBase : ISchemaClass<CAnimationGraphVisualizerPrimitiveBase>
+{
+    static CAnimationGraphVisualizerPrimitiveBase ISchemaClass<CAnimationGraphVisualizerPrimitiveBase>.From(nint handle) => new CAnimationGraphVisualizerPrimitiveBaseImpl(handle);
+    static int ISchemaClass<CAnimationGraphVisualizerPrimitiveBase>.Size => 64;
+    static string? ISchemaClass<CAnimationGraphVisualizerPrimitiveBase>.ClassName => null;
 
-  static CAnimationGraphVisualizerPrimitiveBase ISchemaClass<CAnimationGraphVisualizerPrimitiveBase>.From(nint handle) => new CAnimationGraphVisualizerPrimitiveBaseImpl(handle);
-  static int ISchemaClass<CAnimationGraphVisualizerPrimitiveBase>.Size => 64;
-  static string? ISchemaClass<CAnimationGraphVisualizerPrimitiveBase>.ClassName => null;
 
-  
-  public ref CAnimationGraphVisualizerPrimitiveType Type { get; }
-  
-  // AnimNodeID
-  public SchemaUntypedField OwningAnimNodePaths { get; }
-  
-  public ref int OwningAnimNodePathCount { get; }
+    public ref CAnimationGraphVisualizerPrimitiveType Type { get; }
+
+    public ISchemaClassFixedArray<AnimNodeID> OwningAnimNodePaths { get; }
+
+    public ref int OwningAnimNodePathCount { get; }
 
 
 }

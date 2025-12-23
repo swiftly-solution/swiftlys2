@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PointDefinitionWithTimeValues_t : PointDefinition_t, ISchemaClass<PointDefinitionWithTimeValues_t> {
+public partial interface PointDefinitionWithTimeValues_t : PointDefinition_t, ISchemaClass<PointDefinitionWithTimeValues_t>
+{
+    static PointDefinitionWithTimeValues_t ISchemaClass<PointDefinitionWithTimeValues_t>.From(nint handle) => new PointDefinitionWithTimeValues_tImpl(handle);
+    static int ISchemaClass<PointDefinitionWithTimeValues_t>.Size => 24;
+    static string? ISchemaClass<PointDefinitionWithTimeValues_t>.ClassName => null;
 
-  static PointDefinitionWithTimeValues_t ISchemaClass<PointDefinitionWithTimeValues_t>.From(nint handle) => new PointDefinitionWithTimeValues_tImpl(handle);
-  static int ISchemaClass<PointDefinitionWithTimeValues_t>.Size => 24;
-  static string? ISchemaClass<PointDefinitionWithTimeValues_t>.ClassName => null;
 
-  
-  public ref float TimeDuration { get; }
+    public ref float TimeDuration { get; }
 
 
 }

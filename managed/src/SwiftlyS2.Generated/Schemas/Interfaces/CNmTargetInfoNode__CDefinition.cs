@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmTargetInfoNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmTargetInfoNode__CDefinition> {
+public partial interface CNmTargetInfoNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmTargetInfoNode__CDefinition>
+{
+    static CNmTargetInfoNode__CDefinition ISchemaClass<CNmTargetInfoNode__CDefinition>.From(nint handle) => new CNmTargetInfoNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmTargetInfoNode__CDefinition>.Size => 32;
+    static string? ISchemaClass<CNmTargetInfoNode__CDefinition>.ClassName => null;
 
-  static CNmTargetInfoNode__CDefinition ISchemaClass<CNmTargetInfoNode__CDefinition>.From(nint handle) => new CNmTargetInfoNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmTargetInfoNode__CDefinition>.Size => 32;
-  static string? ISchemaClass<CNmTargetInfoNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public ref CNmTargetInfoNode__Info_t InfoType { get; }
-  
-  public ref bool IsWorldSpaceTarget { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    public ref CNmTargetInfoNode__Info_t InfoType { get; }
+
+    public ref bool IsWorldSpaceTarget { get; }
 
 
 }

@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_ExampleCriteria__Criteria_t : ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t> {
+public partial interface CPulseCell_ExampleCriteria__Criteria_t : ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t>
+{
+    static CPulseCell_ExampleCriteria__Criteria_t ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t>.From(nint handle) => new CPulseCell_ExampleCriteria__Criteria_tImpl(handle);
+    static int ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t>.Size => 12;
+    static string? ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t>.ClassName => null;
 
-  static CPulseCell_ExampleCriteria__Criteria_t ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t>.From(nint handle) => new CPulseCell_ExampleCriteria__Criteria_tImpl(handle);
-  static int ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t>.Size => 12;
-  static string? ISchemaClass<CPulseCell_ExampleCriteria__Criteria_t>.ClassName => null;
 
-  
-  public ref float FloatValue1 { get; }
-  
-  public ref float FloatValue2 { get; }
-  
-  public ref bool MyBool { get; }
+    public ref float FloatValue1 { get; }
+
+    public ref float FloatValue2 { get; }
+
+    public ref bool MyBool { get; }
 
 
 }

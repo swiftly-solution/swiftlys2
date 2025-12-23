@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum SpriteCardPerParticleScale_t : uint {
-
+public enum SpriteCardPerParticleScale_t : uint
+{
  SPRITECARD_TEXTURE_PP_SCALE_NONE = 0,
 
  SPRITECARD_TEXTURE_PP_SCALE_PARTICLE_AGE = 1,

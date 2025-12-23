@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class AmmoTypeInfo_tImpl : SchemaClass, AmmoTypeInfo_t {
+internal partial class AmmoTypeInfo_tImpl : SchemaClass, AmmoTypeInfo_t
+{
+    public AmmoTypeInfo_tImpl(nint handle) : base(handle) { }
 
-  public AmmoTypeInfo_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaxCarryOffset;
 
-  private static nint? _MaxCarryOffset;
-
-  public ref int MaxCarry {
-    get {
-      if (_MaxCarryOffset == null) {
-        _MaxCarryOffset = Schema.GetOffset(0xFC774B09B708280);
-      }
-      return ref _Handle.AsRef<int>(_MaxCarryOffset!.Value);
+    public ref int MaxCarry {
+        get {
+            _MaxCarryOffset = _MaxCarryOffset ?? Schema.GetOffset(0xFC774B09B708280);
+            return ref _Handle.AsRef<int>(_MaxCarryOffset!.Value);
+        }
     }
-  }
-  private static nint? _SplashSizeOffset;
+    private static nint? _SplashSizeOffset;
 
-  public CRangeInt SplashSize {
-    get {
-      if (_SplashSizeOffset == null) {
-        _SplashSizeOffset = Schema.GetOffset(0xFC774B045E320D3);
-      }
-      return new CRangeIntImpl(_Handle + _SplashSizeOffset!.Value);
+    public CRangeInt SplashSize {
+        get {
+            _SplashSizeOffset = _SplashSizeOffset ?? Schema.GetOffset(0xFC774B045E320D3);
+            return new CRangeIntImpl(_Handle + _SplashSizeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref AmmoFlags_t Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0xFC774B0CE6E9C28);
-      }
-      return ref _Handle.AsRef<AmmoFlags_t>(_FlagsOffset!.Value);
+    public ref AmmoFlags_t Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0xFC774B0CE6E9C28);
+            return ref _Handle.AsRef<AmmoFlags_t>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MassOffset;
+    private static nint? _MassOffset;
 
-  public ref float Mass {
-    get {
-      if (_MassOffset == null) {
-        _MassOffset = Schema.GetOffset(0xFC774B0CD83D263);
-      }
-      return ref _Handle.AsRef<float>(_MassOffset!.Value);
+    public ref float Mass {
+        get {
+            _MassOffset = _MassOffset ?? Schema.GetOffset(0xFC774B0CD83D263);
+            return ref _Handle.AsRef<float>(_MassOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpeedOffset;
+    private static nint? _SpeedOffset;
 
-  public CRangeFloat Speed {
-    get {
-      if (_SpeedOffset == null) {
-        _SpeedOffset = Schema.GetOffset(0xFC774B0C631B7EA);
-      }
-      return new CRangeFloatImpl(_Handle + _SpeedOffset!.Value);
+    public CRangeFloat Speed {
+        get {
+            _SpeedOffset = _SpeedOffset ?? Schema.GetOffset(0xFC774B0C631B7EA);
+            return new CRangeFloatImpl(_Handle + _SpeedOffset!.Value);
+        }
     }
-  }
 
 
 }

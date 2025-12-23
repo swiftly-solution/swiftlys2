@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RnSoftbodyParticle_t : ISchemaClass<RnSoftbodyParticle_t> {
+public partial interface RnSoftbodyParticle_t : ISchemaClass<RnSoftbodyParticle_t>
+{
+    static RnSoftbodyParticle_t ISchemaClass<RnSoftbodyParticle_t>.From(nint handle) => new RnSoftbodyParticle_tImpl(handle);
+    static int ISchemaClass<RnSoftbodyParticle_t>.Size => 4;
+    static string? ISchemaClass<RnSoftbodyParticle_t>.ClassName => null;
 
-  static RnSoftbodyParticle_t ISchemaClass<RnSoftbodyParticle_t>.From(nint handle) => new RnSoftbodyParticle_tImpl(handle);
-  static int ISchemaClass<RnSoftbodyParticle_t>.Size => 4;
-  static string? ISchemaClass<RnSoftbodyParticle_t>.ClassName => null;
 
-  
-  public ref float MassInv { get; }
+    public ref float MassInv { get; }
 
 
 }

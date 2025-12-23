@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_Step_CallExternalMethod : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Step_CallExternalMethod> {
+public partial interface CPulseCell_Step_CallExternalMethod : CPulseCell_BaseYieldingInflow, ISchemaClass<CPulseCell_Step_CallExternalMethod>
+{
+    static CPulseCell_Step_CallExternalMethod ISchemaClass<CPulseCell_Step_CallExternalMethod>.From(nint handle) => new CPulseCell_Step_CallExternalMethodImpl(handle);
+    static int ISchemaClass<CPulseCell_Step_CallExternalMethod>.Size => 200;
+    static string? ISchemaClass<CPulseCell_Step_CallExternalMethod>.ClassName => null;
 
-  static CPulseCell_Step_CallExternalMethod ISchemaClass<CPulseCell_Step_CallExternalMethod>.From(nint handle) => new CPulseCell_Step_CallExternalMethodImpl(handle);
-  static int ISchemaClass<CPulseCell_Step_CallExternalMethod>.Size => 200;
-  static string? ISchemaClass<CPulseCell_Step_CallExternalMethod>.ClassName => null;
 
-  
-  // PulseSymbol_t
-  public SchemaUntypedField MethodName { get; }
-  
-  // PulseSymbol_t
-  public SchemaUntypedField GameBlackboard { get; }
-  
-  public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> ExpectedArgs { get; }
-  
-  public ref PulseMethodCallMode_t AsyncCallMode { get; }
-  
-  public CPulse_ResumePoint OnFinished { get; }
+    // PulseSymbol_t
+    public SchemaUntypedField MethodName { get; }
+
+    // PulseSymbol_t
+    public SchemaUntypedField GameBlackboard { get; }
+
+    public ref CUtlLeanVector<CPulseRuntimeMethodArg, int> ExpectedArgs { get; }
+
+    public ref PulseMethodCallMode_t AsyncCallMode { get; }
+
+    public CPulse_ResumePoint OnFinished { get; }
 
 
 }

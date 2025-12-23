@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPointHurt : CPointEntity, ISchemaClass<CPointHurt> {
+public partial interface CPointHurt : CPointEntity, ISchemaClass<CPointHurt>
+{
+    static CPointHurt ISchemaClass<CPointHurt>.From(nint handle) => new CPointHurtImpl(handle);
+    static int ISchemaClass<CPointHurt>.Size => 1296;
+    static string? ISchemaClass<CPointHurt>.ClassName => "point_hurt";
 
-  static CPointHurt ISchemaClass<CPointHurt>.From(nint handle) => new CPointHurtImpl(handle);
-  static int ISchemaClass<CPointHurt>.Size => 1296;
-  static string? ISchemaClass<CPointHurt>.ClassName => "point_hurt";
 
-  
-  public ref int Damage { get; }
-  
-  public ref DamageTypes_t BitsDamageType { get; }
-  
-  public ref float Radius { get; }
-  
-  public ref float Delay { get; }
-  
-  public string StrTarget { get; set; }
-  
-  public ref CHandle<CBaseEntity> Activator { get; }
+    public ref int Damage { get; }
+
+    public ref DamageTypes_t BitsDamageType { get; }
+
+    public ref float Radius { get; }
+
+    public ref float Delay { get; }
+
+    public string StrTarget { get; set; }
+
+    public ref CHandle<CBaseEntity> Activator { get; }
 
 
 }

@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_LifespanFromVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_LifespanFromVelocity> {
+public partial interface C_INIT_LifespanFromVelocity : CParticleFunctionInitializer, ISchemaClass<C_INIT_LifespanFromVelocity>
+{
+    static C_INIT_LifespanFromVelocity ISchemaClass<C_INIT_LifespanFromVelocity>.From(nint handle) => new C_INIT_LifespanFromVelocityImpl(handle);
+    static int ISchemaClass<C_INIT_LifespanFromVelocity>.Size => 656;
+    static string? ISchemaClass<C_INIT_LifespanFromVelocity>.ClassName => null;
 
-  static C_INIT_LifespanFromVelocity ISchemaClass<C_INIT_LifespanFromVelocity>.From(nint handle) => new C_INIT_LifespanFromVelocityImpl(handle);
-  static int ISchemaClass<C_INIT_LifespanFromVelocity>.Size => 656;
-  static string? ISchemaClass<C_INIT_LifespanFromVelocity>.ClassName => null;
 
-  
-  public ref Vector ComponentScale { get; }
-  
-  public ref float TraceOffset { get; }
-  
-  public ref float MaxTraceLength { get; }
-  
-  public ref float TraceTolerance { get; }
-  
-  public ref int MaxPlanes { get; }
-  
-  public string CollisionGroupName { get; set; }
-  
-  public ref ParticleTraceSet_t TraceSet { get; }
-  
-  public ref bool IncludeWater { get; }
+    public ref Vector ComponentScale { get; }
+
+    public ref float TraceOffset { get; }
+
+    public ref float MaxTraceLength { get; }
+
+    public ref float TraceTolerance { get; }
+
+    public ref int MaxPlanes { get; }
+
+    public string CollisionGroupName { get; set; }
+
+    public ref ParticleTraceSet_t TraceSet { get; }
+
+    public ref bool IncludeWater { get; }
 
 
 }

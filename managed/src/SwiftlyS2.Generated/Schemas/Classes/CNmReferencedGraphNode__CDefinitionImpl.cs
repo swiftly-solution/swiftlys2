@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmReferencedGraphNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmReferencedGraphNode__CDefinition {
+internal partial class CNmReferencedGraphNode__CDefinitionImpl : CNmPoseNode__CDefinitionImpl, CNmReferencedGraphNode__CDefinition
+{
+    public CNmReferencedGraphNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmReferencedGraphNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ReferencedGraphIdxOffset;
 
-  private static nint? _ReferencedGraphIdxOffset;
-
-  public ref short ReferencedGraphIdx {
-    get {
-      if (_ReferencedGraphIdxOffset == null) {
-        _ReferencedGraphIdxOffset = Schema.GetOffset(0x44045ED427B00199);
-      }
-      return ref _Handle.AsRef<short>(_ReferencedGraphIdxOffset!.Value);
+    public ref short ReferencedGraphIdx {
+        get {
+            _ReferencedGraphIdxOffset = _ReferencedGraphIdxOffset ?? Schema.GetOffset(0x44045ED427B00199);
+            return ref _Handle.AsRef<short>(_ReferencedGraphIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _FallbackNodeIdxOffset;
+    private static nint? _FallbackNodeIdxOffset;
 
-  public ref short FallbackNodeIdx {
-    get {
-      if (_FallbackNodeIdxOffset == null) {
-        _FallbackNodeIdxOffset = Schema.GetOffset(0x44045ED4AFA8F89E);
-      }
-      return ref _Handle.AsRef<short>(_FallbackNodeIdxOffset!.Value);
+    public ref short FallbackNodeIdx {
+        get {
+            _FallbackNodeIdxOffset = _FallbackNodeIdxOffset ?? Schema.GetOffset(0x44045ED4AFA8F89E);
+            return ref _Handle.AsRef<short>(_FallbackNodeIdxOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_ForceControlPointStub : CParticleFunctionPreEmission, ISchemaClass<C_OP_ForceControlPointStub> {
+public partial interface C_OP_ForceControlPointStub : CParticleFunctionPreEmission, ISchemaClass<C_OP_ForceControlPointStub>
+{
+    static C_OP_ForceControlPointStub ISchemaClass<C_OP_ForceControlPointStub>.From(nint handle) => new C_OP_ForceControlPointStubImpl(handle);
+    static int ISchemaClass<C_OP_ForceControlPointStub>.Size => 480;
+    static string? ISchemaClass<C_OP_ForceControlPointStub>.ClassName => null;
 
-  static C_OP_ForceControlPointStub ISchemaClass<C_OP_ForceControlPointStub>.From(nint handle) => new C_OP_ForceControlPointStubImpl(handle);
-  static int ISchemaClass<C_OP_ForceControlPointStub>.Size => 480;
-  static string? ISchemaClass<C_OP_ForceControlPointStub>.ClassName => null;
 
-  
-  public ref int ControlPoint { get; }
+    public ref int ControlPoint { get; }
 
 
 }

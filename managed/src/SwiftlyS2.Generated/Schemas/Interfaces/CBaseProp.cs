@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseProp : CBaseAnimGraph, ISchemaClass<CBaseProp> {
+public partial interface CBaseProp : CBaseAnimGraph, ISchemaClass<CBaseProp>
+{
+    static CBaseProp ISchemaClass<CBaseProp>.From(nint handle) => new CBasePropImpl(handle);
+    static int ISchemaClass<CBaseProp>.Size => 2752;
+    static string? ISchemaClass<CBaseProp>.ClassName => null;
 
-  static CBaseProp ISchemaClass<CBaseProp>.From(nint handle) => new CBasePropImpl(handle);
-  static int ISchemaClass<CBaseProp>.Size => 2752;
-  static string? ISchemaClass<CBaseProp>.ClassName => null;
 
-  
-  public ref bool ModelOverrodeBlockLOS { get; }
-  
-  public ref int ShapeType { get; }
-  
-  public ref bool ConformToCollisionBounds { get; }
-  
-  public ref CTransform MPreferredCatchTransform { get; }
+    public ref bool ModelOverrodeBlockLOS { get; }
+
+    public ref int ShapeType { get; }
+
+    public ref bool ConformToCollisionBounds { get; }
+
+    public ref CTransform MPreferredCatchTransform { get; }
 
 
 }

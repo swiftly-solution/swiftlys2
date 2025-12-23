@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RenderFlattenGrass : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderFlattenGrass> {
+public partial interface C_OP_RenderFlattenGrass : CParticleFunctionRenderer, ISchemaClass<C_OP_RenderFlattenGrass>
+{
+    static C_OP_RenderFlattenGrass ISchemaClass<C_OP_RenderFlattenGrass>.From(nint handle) => new C_OP_RenderFlattenGrassImpl(handle);
+    static int ISchemaClass<C_OP_RenderFlattenGrass>.Size => 560;
+    static string? ISchemaClass<C_OP_RenderFlattenGrass>.ClassName => null;
 
-  static C_OP_RenderFlattenGrass ISchemaClass<C_OP_RenderFlattenGrass>.From(nint handle) => new C_OP_RenderFlattenGrassImpl(handle);
-  static int ISchemaClass<C_OP_RenderFlattenGrass>.Size => 560;
-  static string? ISchemaClass<C_OP_RenderFlattenGrass>.ClassName => null;
 
-  
-  public ref float FlattenStrength { get; }
-  
-  public ParticleAttributeIndex_t StrengthFieldOverride { get; }
-  
-  public ref float RadiusScale { get; }
+    public ref float FlattenStrength { get; }
+
+    public ParticleAttributeIndex_t StrengthFieldOverride { get; }
+
+    public ref float RadiusScale { get; }
 
 
 }

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CStopAtGoalUpdateNode : CUnaryUpdateNode, ISchemaClass<CStopAtGoalUpdateNode> {
+public partial interface CStopAtGoalUpdateNode : CUnaryUpdateNode, ISchemaClass<CStopAtGoalUpdateNode>
+{
+    static CStopAtGoalUpdateNode ISchemaClass<CStopAtGoalUpdateNode>.From(nint handle) => new CStopAtGoalUpdateNodeImpl(handle);
+    static int ISchemaClass<CStopAtGoalUpdateNode>.Size => 160;
+    static string? ISchemaClass<CStopAtGoalUpdateNode>.ClassName => null;
 
-  static CStopAtGoalUpdateNode ISchemaClass<CStopAtGoalUpdateNode>.From(nint handle) => new CStopAtGoalUpdateNodeImpl(handle);
-  static int ISchemaClass<CStopAtGoalUpdateNode>.Size => 160;
-  static string? ISchemaClass<CStopAtGoalUpdateNode>.ClassName => null;
 
-  
-  public ref float OuterRadius { get; }
-  
-  public ref float InnerRadius { get; }
-  
-  public ref float MaxScale { get; }
-  
-  public ref float MinScale { get; }
-  
-  public CAnimInputDamping Damping { get; }
+    public ref float OuterRadius { get; }
+
+    public ref float InnerRadius { get; }
+
+    public ref float MaxScale { get; }
+
+    public ref float MinScale { get; }
+
+    public CAnimInputDamping Damping { get; }
 
 
 }

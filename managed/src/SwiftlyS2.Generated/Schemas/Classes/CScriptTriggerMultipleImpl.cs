@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CScriptTriggerMultipleImpl : CTriggerMultipleImpl, CScriptTriggerMultiple {
+internal partial class CScriptTriggerMultipleImpl : CTriggerMultipleImpl, CScriptTriggerMultiple
+{
+    public CScriptTriggerMultipleImpl(nint handle) : base(handle) { }
 
-  public CScriptTriggerMultipleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ExtentOffset;
 
-  private static nint? _ExtentOffset;
-
-  public ref Vector Extent {
-    get {
-      if (_ExtentOffset == null) {
-        _ExtentOffset = Schema.GetOffset(0xE1F82C9B7AB1ED15);
-      }
-      return ref _Handle.AsRef<Vector>(_ExtentOffset!.Value);
+    public ref Vector Extent {
+        get {
+            _ExtentOffset = _ExtentOffset ?? Schema.GetOffset(0xE1F82C9B7AB1ED15);
+            return ref _Handle.AsRef<Vector>(_ExtentOffset!.Value);
+        }
     }
-  }
 
 
 }

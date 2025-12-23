@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVectorAnimParameterImpl : CConcreteAnimParameterImpl, CVectorAnimParameter {
+internal partial class CVectorAnimParameterImpl : CConcreteAnimParameterImpl, CVectorAnimParameter
+{
+    public CVectorAnimParameterImpl(nint handle) : base(handle) { }
 
-  public CVectorAnimParameterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DefaultValueOffset;
 
-  private static nint? _DefaultValueOffset;
-
-  public ref Vector DefaultValue {
-    get {
-      if (_DefaultValueOffset == null) {
-        _DefaultValueOffset = Schema.GetOffset(0x74346C8BBBE0341F);
-      }
-      return ref _Handle.AsRef<Vector>(_DefaultValueOffset!.Value);
+    public ref Vector DefaultValue {
+        get {
+            _DefaultValueOffset = _DefaultValueOffset ?? Schema.GetOffset(0x74346C8BBBE0341F);
+            return ref _Handle.AsRef<Vector>(_DefaultValueOffset!.Value);
+        }
     }
-  }
-  private static nint? _InterpolateOffset;
+    private static nint? _InterpolateOffset;
 
-  public ref bool Interpolate {
-    get {
-      if (_InterpolateOffset == null) {
-        _InterpolateOffset = Schema.GetOffset(0x74346C8BF6607650);
-      }
-      return ref _Handle.AsRef<bool>(_InterpolateOffset!.Value);
+    public ref bool Interpolate {
+        get {
+            _InterpolateOffset = _InterpolateOffset ?? Schema.GetOffset(0x74346C8BF6607650);
+            return ref _Handle.AsRef<bool>(_InterpolateOffset!.Value);
+        }
     }
-  }
-  private static nint? _VectorTypeOffset;
+    private static nint? _VectorTypeOffset;
 
-  public ref AnimParamVectorType_t VectorType {
-    get {
-      if (_VectorTypeOffset == null) {
-        _VectorTypeOffset = Schema.GetOffset(0x74346C8BF251F9D2);
-      }
-      return ref _Handle.AsRef<AnimParamVectorType_t>(_VectorTypeOffset!.Value);
+    public ref AnimParamVectorType_t VectorType {
+        get {
+            _VectorTypeOffset = _VectorTypeOffset ?? Schema.GetOffset(0x74346C8BF251F9D2);
+            return ref _Handle.AsRef<AnimParamVectorType_t>(_VectorTypeOffset!.Value);
+        }
     }
-  }
 
 
 }

@@ -6,120 +6,87 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VPhysicsCollisionAttribute_tImpl : SchemaClass, VPhysicsCollisionAttribute_t {
+internal partial class VPhysicsCollisionAttribute_tImpl : SchemaClass, VPhysicsCollisionAttribute_t
+{
+    public VPhysicsCollisionAttribute_tImpl(nint handle) : base(handle) { }
 
-  public VPhysicsCollisionAttribute_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InteractsAsOffset;
 
-  private static nint? _InteractsAsOffset;
-
-  public ref ulong InteractsAs {
-    get {
-      if (_InteractsAsOffset == null) {
-        _InteractsAsOffset = Schema.GetOffset(0x7E9FC931062B2708);
-      }
-      return ref _Handle.AsRef<ulong>(_InteractsAsOffset!.Value);
+    public ref ulong InteractsAs {
+        get {
+            _InteractsAsOffset = _InteractsAsOffset ?? Schema.GetOffset(0x7E9FC931062B2708);
+            return ref _Handle.AsRef<ulong>(_InteractsAsOffset!.Value);
+        }
     }
-  }
-  private static nint? _InteractsWithOffset;
+    private static nint? _InteractsWithOffset;
 
-  public ref ulong InteractsWith {
-    get {
-      if (_InteractsWithOffset == null) {
-        _InteractsWithOffset = Schema.GetOffset(0x7E9FC93139179720);
-      }
-      return ref _Handle.AsRef<ulong>(_InteractsWithOffset!.Value);
+    public ref ulong InteractsWith {
+        get {
+            _InteractsWithOffset = _InteractsWithOffset ?? Schema.GetOffset(0x7E9FC93139179720);
+            return ref _Handle.AsRef<ulong>(_InteractsWithOffset!.Value);
+        }
     }
-  }
-  private static nint? _InteractsExcludeOffset;
+    private static nint? _InteractsExcludeOffset;
 
-  public ref ulong InteractsExclude {
-    get {
-      if (_InteractsExcludeOffset == null) {
-        _InteractsExcludeOffset = Schema.GetOffset(0x7E9FC9314D765732);
-      }
-      return ref _Handle.AsRef<ulong>(_InteractsExcludeOffset!.Value);
+    public ref ulong InteractsExclude {
+        get {
+            _InteractsExcludeOffset = _InteractsExcludeOffset ?? Schema.GetOffset(0x7E9FC9314D765732);
+            return ref _Handle.AsRef<ulong>(_InteractsExcludeOffset!.Value);
+        }
     }
-  }
-  private static nint? _EntityIdOffset;
+    private static nint? _EntityIdOffset;
 
-  public ref uint EntityId {
-    get {
-      if (_EntityIdOffset == null) {
-        _EntityIdOffset = Schema.GetOffset(0x7E9FC9312E71588B);
-      }
-      return ref _Handle.AsRef<uint>(_EntityIdOffset!.Value);
+    public ref uint EntityId {
+        get {
+            _EntityIdOffset = _EntityIdOffset ?? Schema.GetOffset(0x7E9FC9312E71588B);
+            return ref _Handle.AsRef<uint>(_EntityIdOffset!.Value);
+        }
     }
-  }
-  private static nint? _OwnerIdOffset;
+    private static nint? _OwnerIdOffset;
 
-  public ref uint OwnerId {
-    get {
-      if (_OwnerIdOffset == null) {
-        _OwnerIdOffset = Schema.GetOffset(0x7E9FC931DD9F9E45);
-      }
-      return ref _Handle.AsRef<uint>(_OwnerIdOffset!.Value);
+    public ref uint OwnerId {
+        get {
+            _OwnerIdOffset = _OwnerIdOffset ?? Schema.GetOffset(0x7E9FC931DD9F9E45);
+            return ref _Handle.AsRef<uint>(_OwnerIdOffset!.Value);
+        }
     }
-  }
-  private static nint? _HierarchyIdOffset;
+    private static nint? _HierarchyIdOffset;
 
-  public ref ushort HierarchyId {
-    get {
-      if (_HierarchyIdOffset == null) {
-        _HierarchyIdOffset = Schema.GetOffset(0x7E9FC931E2479899);
-      }
-      return ref _Handle.AsRef<ushort>(_HierarchyIdOffset!.Value);
+    public ref ushort HierarchyId {
+        get {
+            _HierarchyIdOffset = _HierarchyIdOffset ?? Schema.GetOffset(0x7E9FC931E2479899);
+            return ref _Handle.AsRef<ushort>(_HierarchyIdOffset!.Value);
+        }
     }
-  }
-  private static nint? _CollisionGroupOffset;
+    private static nint? _CollisionGroupOffset;
 
-  public ref byte CollisionGroup {
-    get {
-      if (_CollisionGroupOffset == null) {
-        _CollisionGroupOffset = Schema.GetOffset(0x7E9FC9310AC0C752);
-      }
-      return ref _Handle.AsRef<byte>(_CollisionGroupOffset!.Value);
+    public ref byte CollisionGroup {
+        get {
+            _CollisionGroupOffset = _CollisionGroupOffset ?? Schema.GetOffset(0x7E9FC9310AC0C752);
+            return ref _Handle.AsRef<byte>(_CollisionGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _CollisionFunctionMaskOffset;
+    private static nint? _CollisionFunctionMaskOffset;
 
-  public ref byte CollisionFunctionMask {
-    get {
-      if (_CollisionFunctionMaskOffset == null) {
-        _CollisionFunctionMaskOffset = Schema.GetOffset(0x7E9FC931FC7E6DAF);
-      }
-      return ref _Handle.AsRef<byte>(_CollisionFunctionMaskOffset!.Value);
+    public ref byte CollisionFunctionMask {
+        get {
+            _CollisionFunctionMaskOffset = _CollisionFunctionMaskOffset ?? Schema.GetOffset(0x7E9FC931FC7E6DAF);
+            return ref _Handle.AsRef<byte>(_CollisionFunctionMaskOffset!.Value);
+        }
     }
-  }
 
-  public void InteractsAsUpdated() {
-    Schema.Update(_Handle, 0x7E9FC931062B2708);
-  }
-  public void InteractsWithUpdated() {
-    Schema.Update(_Handle, 0x7E9FC93139179720);
-  }
-  public void InteractsExcludeUpdated() {
-    Schema.Update(_Handle, 0x7E9FC9314D765732);
-  }
-  public void EntityIdUpdated() {
-    Schema.Update(_Handle, 0x7E9FC9312E71588B);
-  }
-  public void OwnerIdUpdated() {
-    Schema.Update(_Handle, 0x7E9FC931DD9F9E45);
-  }
-  public void HierarchyIdUpdated() {
-    Schema.Update(_Handle, 0x7E9FC931E2479899);
-  }
-  public void CollisionGroupUpdated() {
-    Schema.Update(_Handle, 0x7E9FC9310AC0C752);
-  }
-  public void CollisionFunctionMaskUpdated() {
-    Schema.Update(_Handle, 0x7E9FC931FC7E6DAF);
-  }
+    public void InteractsAsUpdated() => Schema.Update(_Handle, 0x7E9FC931062B2708);
+    public void InteractsWithUpdated() => Schema.Update(_Handle, 0x7E9FC93139179720);
+    public void InteractsExcludeUpdated() => Schema.Update(_Handle, 0x7E9FC9314D765732);
+    public void EntityIdUpdated() => Schema.Update(_Handle, 0x7E9FC9312E71588B);
+    public void OwnerIdUpdated() => Schema.Update(_Handle, 0x7E9FC931DD9F9E45);
+    public void HierarchyIdUpdated() => Schema.Update(_Handle, 0x7E9FC931E2479899);
+    public void CollisionGroupUpdated() => Schema.Update(_Handle, 0x7E9FC9310AC0C752);
+    public void CollisionFunctionMaskUpdated() => Schema.Update(_Handle, 0x7E9FC931FC7E6DAF);
 }

@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFishPool : CBaseEntity, ISchemaClass<CFishPool> {
+public partial interface CFishPool : CBaseEntity, ISchemaClass<CFishPool>
+{
+    static CFishPool ISchemaClass<CFishPool>.From(nint handle) => new CFishPoolImpl(handle);
+    static int ISchemaClass<CFishPool>.Size => 1352;
+    static string? ISchemaClass<CFishPool>.ClassName => "func_fish_pool";
 
-  static CFishPool ISchemaClass<CFishPool>.From(nint handle) => new CFishPoolImpl(handle);
-  static int ISchemaClass<CFishPool>.Size => 1352;
-  static string? ISchemaClass<CFishPool>.ClassName => "func_fish_pool";
 
-  
-  public ref int FishCount { get; }
-  
-  public ref float MaxRange { get; }
-  
-  public ref float SwimDepth { get; }
-  
-  public ref float WaterLevel { get; }
-  
-  public ref bool IsDormant { get; }
-  
-  public ref CUtlVector<CHandle<CFish>> Fishes { get; }
-  
-  public CountdownTimer VisTimer { get; }
+    public ref int FishCount { get; }
+
+    public ref float MaxRange { get; }
+
+    public ref float SwimDepth { get; }
+
+    public ref float WaterLevel { get; }
+
+    public ref bool IsDormant { get; }
+
+    public ref CUtlVector<CHandle<CFish>> Fishes { get; }
+
+    public CountdownTimer VisTimer { get; }
 
 
 }

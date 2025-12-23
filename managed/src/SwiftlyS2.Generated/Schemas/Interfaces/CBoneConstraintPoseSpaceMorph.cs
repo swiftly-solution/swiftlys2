@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBoneConstraintPoseSpaceMorph : CBoneConstraintBase, ISchemaClass<CBoneConstraintPoseSpaceMorph> {
+public partial interface CBoneConstraintPoseSpaceMorph : CBoneConstraintBase, ISchemaClass<CBoneConstraintPoseSpaceMorph>
+{
+    static CBoneConstraintPoseSpaceMorph ISchemaClass<CBoneConstraintPoseSpaceMorph>.From(nint handle) => new CBoneConstraintPoseSpaceMorphImpl(handle);
+    static int ISchemaClass<CBoneConstraintPoseSpaceMorph>.Size => 160;
+    static string? ISchemaClass<CBoneConstraintPoseSpaceMorph>.ClassName => null;
 
-  static CBoneConstraintPoseSpaceMorph ISchemaClass<CBoneConstraintPoseSpaceMorph>.From(nint handle) => new CBoneConstraintPoseSpaceMorphImpl(handle);
-  static int ISchemaClass<CBoneConstraintPoseSpaceMorph>.Size => 160;
-  static string? ISchemaClass<CBoneConstraintPoseSpaceMorph>.ClassName => null;
 
-  
-  public string BoneName { get; set; }
-  
-  public string AttachmentName { get; set; }
-  
-  public ref CUtlVector<CUtlString> OutputMorph { get; }
-  
-  public ref CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t> InputList { get; }
-  
-  public ref bool Clamp { get; }
+    public string BoneName { get; set; }
+
+    public string AttachmentName { get; set; }
+
+    public ref CUtlVector<CUtlString> OutputMorph { get; }
+
+    public ref CUtlVector<CBoneConstraintPoseSpaceMorph__Input_t> InputList { get; }
+
+    public ref bool Clamp { get; }
 
 
 }

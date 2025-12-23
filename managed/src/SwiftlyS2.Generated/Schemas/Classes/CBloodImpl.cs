@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBloodImpl : CPointEntityImpl, CBlood {
+internal partial class CBloodImpl : CPointEntityImpl, CBlood
+{
+    public CBloodImpl(nint handle) : base(handle) { }
 
-  public CBloodImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SprayAnglesOffset;
 
-  private static nint? _SprayAnglesOffset;
-
-  public ref QAngle SprayAngles {
-    get {
-      if (_SprayAnglesOffset == null) {
-        _SprayAnglesOffset = Schema.GetOffset(0x68CF460A2BDF444E);
-      }
-      return ref _Handle.AsRef<QAngle>(_SprayAnglesOffset!.Value);
+    public ref QAngle SprayAngles {
+        get {
+            _SprayAnglesOffset = _SprayAnglesOffset ?? Schema.GetOffset(0x68CF460A2BDF444E);
+            return ref _Handle.AsRef<QAngle>(_SprayAnglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _SprayDirOffset;
+    private static nint? _SprayDirOffset;
 
-  public ref Vector SprayDir {
-    get {
-      if (_SprayDirOffset == null) {
-        _SprayDirOffset = Schema.GetOffset(0x68CF460A0A8A2531);
-      }
-      return ref _Handle.AsRef<Vector>(_SprayDirOffset!.Value);
+    public ref Vector SprayDir {
+        get {
+            _SprayDirOffset = _SprayDirOffset ?? Schema.GetOffset(0x68CF460A0A8A2531);
+            return ref _Handle.AsRef<Vector>(_SprayDirOffset!.Value);
+        }
     }
-  }
-  private static nint? _AmountOffset;
+    private static nint? _AmountOffset;
 
-  public ref float Amount {
-    get {
-      if (_AmountOffset == null) {
-        _AmountOffset = Schema.GetOffset(0x68CF460A187D1B1B);
-      }
-      return ref _Handle.AsRef<float>(_AmountOffset!.Value);
+    public ref float Amount {
+        get {
+            _AmountOffset = _AmountOffset ?? Schema.GetOffset(0x68CF460A187D1B1B);
+            return ref _Handle.AsRef<float>(_AmountOffset!.Value);
+        }
     }
-  }
-  private static nint? _ColorOffset;
+    private static nint? _ColorOffset;
 
-  public ref BloodType Color {
-    get {
-      if (_ColorOffset == null) {
-        _ColorOffset = Schema.GetOffset(0x68CF460AD7D017D8);
-      }
-      return ref _Handle.AsRef<BloodType>(_ColorOffset!.Value);
+    public ref BloodType Color {
+        get {
+            _ColorOffset = _ColorOffset ?? Schema.GetOffset(0x68CF460AD7D017D8);
+            return ref _Handle.AsRef<BloodType>(_ColorOffset!.Value);
+        }
     }
-  }
 
 
 }

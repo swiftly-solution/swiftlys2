@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulseGraphInstance_TestDomain_DerivedImpl : CPulseGraphInstance_TestDomainImpl, CPulseGraphInstance_TestDomain_Derived {
+internal partial class CPulseGraphInstance_TestDomain_DerivedImpl : CPulseGraphInstance_TestDomainImpl, CPulseGraphInstance_TestDomain_Derived
+{
+    public CPulseGraphInstance_TestDomain_DerivedImpl(nint handle) : base(handle) { }
 
-  public CPulseGraphInstance_TestDomain_DerivedImpl(nint handle) : base(handle) {
-  }
+    private static nint? _InstanceValueXOffset;
 
-  private static nint? _InstanceValueXOffset;
-
-  public ref int InstanceValueX {
-    get {
-      if (_InstanceValueXOffset == null) {
-        _InstanceValueXOffset = Schema.GetOffset(0x439D00CDD2DC0135);
-      }
-      return ref _Handle.AsRef<int>(_InstanceValueXOffset!.Value);
+    public ref int InstanceValueX {
+        get {
+            _InstanceValueXOffset = _InstanceValueXOffset ?? Schema.GetOffset(0x439D00CDD2DC0135);
+            return ref _Handle.AsRef<int>(_InstanceValueXOffset!.Value);
+        }
     }
-  }
 
 
 }

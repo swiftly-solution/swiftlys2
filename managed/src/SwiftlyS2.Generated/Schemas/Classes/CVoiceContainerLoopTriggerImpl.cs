@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerLoopTriggerImpl : CVoiceContainerBaseImpl, CVoiceContainerLoopTrigger {
+internal partial class CVoiceContainerLoopTriggerImpl : CVoiceContainerBaseImpl, CVoiceContainerLoopTrigger
+{
+    public CVoiceContainerLoopTriggerImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerLoopTriggerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SoundOffset;
 
-  private static nint? _SoundOffset;
-
-  public CSoundContainerReference Sound {
-    get {
-      if (_SoundOffset == null) {
-        _SoundOffset = Schema.GetOffset(0x1A1BEAF4E1C4FB4);
-      }
-      return new CSoundContainerReferenceImpl(_Handle + _SoundOffset!.Value);
+    public CSoundContainerReference Sound {
+        get {
+            _SoundOffset = _SoundOffset ?? Schema.GetOffset(0x1A1BEAF4E1C4FB4);
+            return new CSoundContainerReferenceImpl(_Handle + _SoundOffset!.Value);
+        }
     }
-  }
-  private static nint? _RetriggerTimeMinOffset;
+    private static nint? _RetriggerTimeMinOffset;
 
-  public ref float RetriggerTimeMin {
-    get {
-      if (_RetriggerTimeMinOffset == null) {
-        _RetriggerTimeMinOffset = Schema.GetOffset(0x1A1BEAFE6138381);
-      }
-      return ref _Handle.AsRef<float>(_RetriggerTimeMinOffset!.Value);
+    public ref float RetriggerTimeMin {
+        get {
+            _RetriggerTimeMinOffset = _RetriggerTimeMinOffset ?? Schema.GetOffset(0x1A1BEAFE6138381);
+            return ref _Handle.AsRef<float>(_RetriggerTimeMinOffset!.Value);
+        }
     }
-  }
-  private static nint? _RetriggerTimeMaxOffset;
+    private static nint? _RetriggerTimeMaxOffset;
 
-  public ref float RetriggerTimeMax {
-    get {
-      if (_RetriggerTimeMaxOffset == null) {
-        _RetriggerTimeMaxOffset = Schema.GetOffset(0x1A1BEAFD828882F);
-      }
-      return ref _Handle.AsRef<float>(_RetriggerTimeMaxOffset!.Value);
+    public ref float RetriggerTimeMax {
+        get {
+            _RetriggerTimeMaxOffset = _RetriggerTimeMaxOffset ?? Schema.GetOffset(0x1A1BEAFD828882F);
+            return ref _Handle.AsRef<float>(_RetriggerTimeMaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _FadeTimeOffset;
+    private static nint? _FadeTimeOffset;
 
-  public ref float FadeTime {
-    get {
-      if (_FadeTimeOffset == null) {
-        _FadeTimeOffset = Schema.GetOffset(0x1A1BEAF00BEDB08);
-      }
-      return ref _Handle.AsRef<float>(_FadeTimeOffset!.Value);
+    public ref float FadeTime {
+        get {
+            _FadeTimeOffset = _FadeTimeOffset ?? Schema.GetOffset(0x1A1BEAF00BEDB08);
+            return ref _Handle.AsRef<float>(_FadeTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _CrossFadeOffset;
+    private static nint? _CrossFadeOffset;
 
-  public ref bool CrossFade {
-    get {
-      if (_CrossFadeOffset == null) {
-        _CrossFadeOffset = Schema.GetOffset(0x1A1BEAF64BEC665);
-      }
-      return ref _Handle.AsRef<bool>(_CrossFadeOffset!.Value);
+    public ref bool CrossFade {
+        get {
+            _CrossFadeOffset = _CrossFadeOffset ?? Schema.GetOffset(0x1A1BEAF64BEC665);
+            return ref _Handle.AsRef<bool>(_CrossFadeOffset!.Value);
+        }
     }
-  }
 
 
 }

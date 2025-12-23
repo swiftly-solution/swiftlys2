@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CGamePlayerZoneImpl : CRuleBrushEntityImpl, CGamePlayerZone {
+internal partial class CGamePlayerZoneImpl : CRuleBrushEntityImpl, CGamePlayerZone
+{
+    public CGamePlayerZoneImpl(nint handle) : base(handle) { }
 
-  public CGamePlayerZoneImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnPlayerInZoneOffset;
 
-  private static nint? _OnPlayerInZoneOffset;
-
-  public CEntityIOOutput OnPlayerInZone {
-    get {
-      if (_OnPlayerInZoneOffset == null) {
-        _OnPlayerInZoneOffset = Schema.GetOffset(0x35811C97FBD22730);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnPlayerInZoneOffset!.Value);
+    public ref CEntityIOOutput OnPlayerInZone {
+        get {
+            _OnPlayerInZoneOffset = _OnPlayerInZoneOffset ?? Schema.GetOffset(0x35811C97FBD22730);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerInZoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnPlayerOutZoneOffset;
+    private static nint? _OnPlayerOutZoneOffset;
 
-  public CEntityIOOutput OnPlayerOutZone {
-    get {
-      if (_OnPlayerOutZoneOffset == null) {
-        _OnPlayerOutZoneOffset = Schema.GetOffset(0x35811C97E3DE880D);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnPlayerOutZoneOffset!.Value);
+    public ref CEntityIOOutput OnPlayerOutZone {
+        get {
+            _OnPlayerOutZoneOffset = _OnPlayerOutZoneOffset ?? Schema.GetOffset(0x35811C97E3DE880D);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPlayerOutZoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayersInCountOffset;
+    private static nint? _PlayersInCountOffset;
 
-  public SchemaUntypedField PlayersInCount {
-    get {
-      if (_PlayersInCountOffset == null) {
-        _PlayersInCountOffset = Schema.GetOffset(0x35811C9706A59501);
-      }
-      return new SchemaUntypedField(_Handle + _PlayersInCountOffset!.Value);
+    public SchemaUntypedField PlayersInCount {
+        get {
+            _PlayersInCountOffset = _PlayersInCountOffset ?? Schema.GetOffset(0x35811C9706A59501);
+            return new SchemaUntypedField(_Handle + _PlayersInCountOffset!.Value);
+        }
     }
-  }
-  private static nint? _PlayersOutCountOffset;
+    private static nint? _PlayersOutCountOffset;
 
-  public SchemaUntypedField PlayersOutCount {
-    get {
-      if (_PlayersOutCountOffset == null) {
-        _PlayersOutCountOffset = Schema.GetOffset(0x35811C976894D862);
-      }
-      return new SchemaUntypedField(_Handle + _PlayersOutCountOffset!.Value);
+    public SchemaUntypedField PlayersOutCount {
+        get {
+            _PlayersOutCountOffset = _PlayersOutCountOffset ?? Schema.GetOffset(0x35811C976894D862);
+            return new SchemaUntypedField(_Handle + _PlayersOutCountOffset!.Value);
+        }
     }
-  }
 
 
 }

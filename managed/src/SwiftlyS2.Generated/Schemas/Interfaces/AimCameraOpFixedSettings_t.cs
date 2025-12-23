@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AimCameraOpFixedSettings_t : ISchemaClass<AimCameraOpFixedSettings_t> {
+public partial interface AimCameraOpFixedSettings_t : ISchemaClass<AimCameraOpFixedSettings_t>
+{
+    static AimCameraOpFixedSettings_t ISchemaClass<AimCameraOpFixedSettings_t>.From(nint handle) => new AimCameraOpFixedSettings_tImpl(handle);
+    static int ISchemaClass<AimCameraOpFixedSettings_t>.Size => 48;
+    static string? ISchemaClass<AimCameraOpFixedSettings_t>.ClassName => null;
 
-  static AimCameraOpFixedSettings_t ISchemaClass<AimCameraOpFixedSettings_t>.From(nint handle) => new AimCameraOpFixedSettings_tImpl(handle);
-  static int ISchemaClass<AimCameraOpFixedSettings_t>.Size => 48;
-  static string? ISchemaClass<AimCameraOpFixedSettings_t>.ClassName => null;
 
-  
-  public ref int ChainIndex { get; }
-  
-  public ref int CameraJointIndex { get; }
-  
-  public ref int PelvisJointIndex { get; }
-  
-  public ref int ClavicleLeftJointIndex { get; }
-  
-  public ref int ClavicleRightJointIndex { get; }
-  
-  public ref int DepenetrationJointIndex { get; }
-  
-  public ref CUtlVector<int> PropJoints { get; }
+    public ref int ChainIndex { get; }
+
+    public ref int CameraJointIndex { get; }
+
+    public ref int PelvisJointIndex { get; }
+
+    public ref int ClavicleLeftJointIndex { get; }
+
+    public ref int ClavicleRightJointIndex { get; }
+
+    public ref int DepenetrationJointIndex { get; }
+
+    public ref CUtlVector<int> PropJoints { get; }
 
 
 }

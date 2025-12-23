@@ -29,6 +29,12 @@ internal sealed class MenuDesignAPI : IMenuDesignAPI
         return builder;
     }
 
+    public IMenuBuilderAPI SetMenuTitleItemCountVisible( bool visible = true )
+    {
+        configuration.HideTitleItemCount = !visible;
+        return builder;
+    }
+
     public IMenuBuilderAPI SetMenuFooterVisible( bool visible = true )
     {
         configuration.HideFooter = !visible;

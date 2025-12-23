@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SpringToVectorConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_SpringToVectorConstraint> {
+public partial interface C_OP_SpringToVectorConstraint : CParticleFunctionConstraint, ISchemaClass<C_OP_SpringToVectorConstraint>
+{
+    static C_OP_SpringToVectorConstraint ISchemaClass<C_OP_SpringToVectorConstraint>.From(nint handle) => new C_OP_SpringToVectorConstraintImpl(handle);
+    static int ISchemaClass<C_OP_SpringToVectorConstraint>.Size => 3656;
+    static string? ISchemaClass<C_OP_SpringToVectorConstraint>.ClassName => null;
 
-  static C_OP_SpringToVectorConstraint ISchemaClass<C_OP_SpringToVectorConstraint>.From(nint handle) => new C_OP_SpringToVectorConstraintImpl(handle);
-  static int ISchemaClass<C_OP_SpringToVectorConstraint>.Size => 3656;
-  static string? ISchemaClass<C_OP_SpringToVectorConstraint>.ClassName => null;
 
-  
-  public CPerParticleFloatInput RestLength { get; }
-  
-  public CPerParticleFloatInput MinDistance { get; }
-  
-  public CPerParticleFloatInput MaxDistance { get; }
-  
-  public CPerParticleFloatInput RestingLength { get; }
-  
-  public CPerParticleVecInput AnchorVector { get; }
+    public CPerParticleFloatInput RestLength { get; }
+
+    public CPerParticleFloatInput MinDistance { get; }
+
+    public CPerParticleFloatInput MaxDistance { get; }
+
+    public CPerParticleFloatInput RestingLength { get; }
+
+    public CPerParticleVecInput AnchorVector { get; }
 
 
 }

@@ -6,34 +6,28 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CScriptComponentImpl : CEntityComponentImpl, CScriptComponent {
+internal partial class CScriptComponentImpl : CEntityComponentImpl, CScriptComponent
+{
+    public CScriptComponentImpl(nint handle) : base(handle) { }
 
-  public CScriptComponentImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ScriptClassNameOffset;
 
-  private static nint? _ScriptClassNameOffset;
-
-  public string ScriptClassName {
-    get {
-      if (_ScriptClassNameOffset == null) {
-        _ScriptClassNameOffset = Schema.GetOffset(0xC922CE544F9B6681);
-      }
-      var ptr = _Handle.Read<nint>(_ScriptClassNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_ScriptClassNameOffset == null) {
-        _ScriptClassNameOffset = Schema.GetOffset(0xC922CE544F9B6681);
-      }
-      Schema.SetString(_Handle, _ScriptClassNameOffset!.Value, value);
-    }
-  } 
+    public string ScriptClassName {
+        get {
+            _ScriptClassNameOffset = _ScriptClassNameOffset ?? Schema.GetOffset(0xC922CE544F9B6681);
+            return Schema.GetString(_Handle.Read<nint>(_ScriptClassNameOffset!.Value));
+        }
+        set {
+            _ScriptClassNameOffset = _ScriptClassNameOffset ?? Schema.GetOffset(0xC922CE544F9B6681);
+            Schema.SetString(_Handle, _ScriptClassNameOffset!.Value, value);
+        }
+    } 
 
 
 }

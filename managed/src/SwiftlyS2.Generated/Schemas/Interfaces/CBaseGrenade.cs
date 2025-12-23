@@ -8,44 +8,44 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseGrenade : CBaseFlex, ISchemaClass<CBaseGrenade> {
+public partial interface CBaseGrenade : CBaseFlex, ISchemaClass<CBaseGrenade>
+{
+    static CBaseGrenade ISchemaClass<CBaseGrenade>.From(nint handle) => new CBaseGrenadeImpl(handle);
+    static int ISchemaClass<CBaseGrenade>.Size => 3024;
+    static string? ISchemaClass<CBaseGrenade>.ClassName => "grenade";
 
-  static CBaseGrenade ISchemaClass<CBaseGrenade>.From(nint handle) => new CBaseGrenadeImpl(handle);
-  static int ISchemaClass<CBaseGrenade>.Size => 3024;
-  static string? ISchemaClass<CBaseGrenade>.ClassName => "grenade";
 
-  
-  public CEntityIOOutput OnPlayerPickup { get; }
-  
-  public CEntityIOOutput OnExplode { get; }
-  
-  public ref bool HasWarnedAI { get; }
-  
-  public ref bool IsSmokeGrenade { get; }
-  
-  public ref bool IsLive { get; }
-  
-  public ref float DmgRadius { get; }
-  
-  public GameTime_t DetonateTime { get; }
-  
-  public ref float WarnAITime { get; }
-  
-  public ref float Damage { get; }
-  
-  public string BounceSound { get; set; }
-  
-  public string ExplosionSound { get; set; }
-  
-  public ref CHandle<CCSPlayerPawn> Thrower { get; }
-  
-  public GameTime_t NextAttack { get; }
-  
-  public ref CHandle<CCSPlayerPawn> OriginalThrower { get; }
+    public ref CEntityIOOutput OnPlayerPickup { get; }
 
-  public void IsLiveUpdated();
-  public void DmgRadiusUpdated();
-  public void DetonateTimeUpdated();
-  public void DamageUpdated();
-  public void ThrowerUpdated();
+    public ref CEntityIOOutput OnExplode { get; }
+
+    public ref bool HasWarnedAI { get; }
+
+    public ref bool IsSmokeGrenade { get; }
+
+    public ref bool IsLive { get; }
+
+    public ref float DmgRadius { get; }
+
+    public GameTime_t DetonateTime { get; }
+
+    public ref float WarnAITime { get; }
+
+    public ref float Damage { get; }
+
+    public string BounceSound { get; set; }
+
+    public string ExplosionSound { get; set; }
+
+    public ref CHandle<CCSPlayerPawn> Thrower { get; }
+
+    public GameTime_t NextAttack { get; }
+
+    public ref CHandle<CCSPlayerPawn> OriginalThrower { get; }
+
+    public void IsLiveUpdated();
+    public void DmgRadiusUpdated();
+    public void DetonateTimeUpdated();
+    public void DamageUpdated();
+    public void ThrowerUpdated();
 }

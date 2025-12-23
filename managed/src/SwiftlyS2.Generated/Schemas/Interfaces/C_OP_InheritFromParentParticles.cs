@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_InheritFromParentParticles : CParticleFunctionOperator, ISchemaClass<C_OP_InheritFromParentParticles> {
+public partial interface C_OP_InheritFromParentParticles : CParticleFunctionOperator, ISchemaClass<C_OP_InheritFromParentParticles>
+{
+    static C_OP_InheritFromParentParticles ISchemaClass<C_OP_InheritFromParentParticles>.From(nint handle) => new C_OP_InheritFromParentParticlesImpl(handle);
+    static int ISchemaClass<C_OP_InheritFromParentParticles>.Size => 480;
+    static string? ISchemaClass<C_OP_InheritFromParentParticles>.ClassName => null;
 
-  static C_OP_InheritFromParentParticles ISchemaClass<C_OP_InheritFromParentParticles>.From(nint handle) => new C_OP_InheritFromParentParticlesImpl(handle);
-  static int ISchemaClass<C_OP_InheritFromParentParticles>.Size => 480;
-  static string? ISchemaClass<C_OP_InheritFromParentParticles>.ClassName => null;
 
-  
-  public ref float Scale { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref int Increment { get; }
-  
-  public ref bool RandomDistribution { get; }
+    public ref float Scale { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref int Increment { get; }
+
+    public ref bool RandomDistribution { get; }
 
 
 }

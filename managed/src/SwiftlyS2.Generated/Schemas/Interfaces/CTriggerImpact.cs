@@ -8,21 +8,21 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerImpact : CTriggerMultiple, ISchemaClass<CTriggerImpact> {
+public partial interface CTriggerImpact : CTriggerMultiple, ISchemaClass<CTriggerImpact>
+{
+    static CTriggerImpact ISchemaClass<CTriggerImpact>.From(nint handle) => new CTriggerImpactImpl(handle);
+    static int ISchemaClass<CTriggerImpact>.Size => 2568;
+    static string? ISchemaClass<CTriggerImpact>.ClassName => "trigger_impact";
 
-  static CTriggerImpact ISchemaClass<CTriggerImpact>.From(nint handle) => new CTriggerImpactImpl(handle);
-  static int ISchemaClass<CTriggerImpact>.Size => 2568;
-  static string? ISchemaClass<CTriggerImpact>.ClassName => "trigger_impact";
 
-  
-  public ref float Magnitude { get; }
-  
-  public ref float Noise { get; }
-  
-  public ref float Viewkick { get; }
-  
-  // CEntityOutputTemplate< Vector >
-  public SchemaUntypedField OutputForce { get; }
+    public ref float Magnitude { get; }
+
+    public ref float Noise { get; }
+
+    public ref float Viewkick { get; }
+
+    // CEntityOutputTemplate< Vector >
+    public SchemaUntypedField OutputForce { get; }
 
 
 }

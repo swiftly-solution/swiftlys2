@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ScriptedMoveTo_t : uint {
-
+public enum ScriptedMoveTo_t : uint
+{
  eWait = 0,
 
  eMoveWithGait = 3,

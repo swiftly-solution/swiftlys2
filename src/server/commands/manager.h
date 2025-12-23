@@ -1,6 +1,6 @@
 /************************************************************************************************
  * SwiftlyS2 is a scripting framework for Source2-based games.
- * Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ * Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ public:
     virtual void Initialize() override;
     virtual void Shutdown() override;
 
-    virtual int HandleCommand(int playerid, const std::string& text) override;
+    virtual int HandleCommand(int playerid, const std::string& text, bool dryrun) override;
     virtual bool HandleClientCommand(int playerid, const std::string& text) override;
     virtual bool HandleClientChat(int playerid, const std::string& text, bool teamonly) override;
 

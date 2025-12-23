@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AABB_t : ISchemaClass<AABB_t> {
+public partial interface AABB_t : ISchemaClass<AABB_t>
+{
+    static AABB_t ISchemaClass<AABB_t>.From(nint handle) => new AABB_tImpl(handle);
+    static int ISchemaClass<AABB_t>.Size => 24;
+    static string? ISchemaClass<AABB_t>.ClassName => null;
 
-  static AABB_t ISchemaClass<AABB_t>.From(nint handle) => new AABB_tImpl(handle);
-  static int ISchemaClass<AABB_t>.Size => 24;
-  static string? ISchemaClass<AABB_t>.ClassName => null;
 
-  
-  public ref Vector MinBounds { get; }
-  
-  public ref Vector MaxBounds { get; }
+    public ref Vector MinBounds { get; }
 
-  public void MinBoundsUpdated();
-  public void MaxBoundsUpdated();
+    public ref Vector MaxBounds { get; }
+
+    public void MinBoundsUpdated();
+    public void MaxBoundsUpdated();
 }

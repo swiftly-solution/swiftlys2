@@ -8,142 +8,142 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CParticleSystemDefinition : IParticleSystemDefinition, ISchemaClass<CParticleSystemDefinition> {
+public partial interface CParticleSystemDefinition : IParticleSystemDefinition, ISchemaClass<CParticleSystemDefinition>
+{
+    static CParticleSystemDefinition ISchemaClass<CParticleSystemDefinition>.From(nint handle) => new CParticleSystemDefinitionImpl(handle);
+    static int ISchemaClass<CParticleSystemDefinition>.Size => 1088;
+    static string? ISchemaClass<CParticleSystemDefinition>.ClassName => null;
 
-  static CParticleSystemDefinition ISchemaClass<CParticleSystemDefinition>.From(nint handle) => new CParticleSystemDefinitionImpl(handle);
-  static int ISchemaClass<CParticleSystemDefinition>.Size => 1088;
-  static string? ISchemaClass<CParticleSystemDefinition>.ClassName => null;
 
-  
-  public ref int BehaviorVersion { get; }
-  
-  public ref CUtlVector<PointerTo<CParticleFunctionPreEmission>> PreEmissionOperators { get; }
-  
-  public ref CUtlVector<PointerTo<CParticleFunctionEmitter>> Emitters { get; }
-  
-  public ref CUtlVector<PointerTo<CParticleFunctionInitializer>> Initializers { get; }
-  
-  public ref CUtlVector<PointerTo<CParticleFunctionOperator>> Operators { get; }
-  
-  public ref CUtlVector<PointerTo<CParticleFunctionForce>> ForceGenerators { get; }
-  
-  public ref CUtlVector<PointerTo<CParticleFunctionConstraint>> Constraints { get; }
-  
-  public ref CUtlVector<PointerTo<CParticleFunctionRenderer>> Renderers { get; }
-  
-  public ref CUtlVector<ParticleChildrenInfo_t> Children { get; }
-  
-  public ref int FirstMultipleOverride_BackwardCompat { get; }
-  
-  public ref int InitialParticles { get; }
-  
-  public ref int MaxParticles { get; }
-  
-  public ref int GroupID { get; }
-  
-  public ref Vector BoundingBoxMin { get; }
-  
-  public ref Vector BoundingBoxMax { get; }
-  
-  public ref float DepthSortBias { get; }
-  
-  public ref int SortOverridePositionCP { get; }
-  
-  public ref bool InfiniteBounds { get; }
-  
-  public ref bool EnableNamedValues { get; }
-  
-  public string NamedValueDomain { get; set; }
-  
-  public ref CUtlVector<PointerTo<ParticleNamedValueSource_t>> NamedValueLocals { get; }
-  
-  public ref Color ConstantColor { get; }
-  
-  public ref Vector ConstantNormal { get; }
-  
-  public ref float ConstantRadius { get; }
-  
-  public ref float ConstantRotation { get; }
-  
-  public ref float ConstantRotationSpeed { get; }
-  
-  public ref float ConstantLifespan { get; }
-  
-  public ref int ConstantSequenceNumber { get; }
-  
-  public ref int ConstantSequenceNumber1 { get; }
-  
-  public ref int SnapshotControlPoint { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIParticleSnapshot> Snapshot { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> CullReplacementName { get; }
-  
-  public ref float CullRadius { get; }
-  
-  public ref float CullFillCost { get; }
-  
-  public ref int CullControlPoint { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> Fallback { get; }
-  
-  public ref int FallbackMaxCount { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> LowViolenceDef { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ReferenceReplacement { get; }
-  
-  public ref float PreSimulationTime { get; }
-  
-  public ref float StopSimulationAfterTime { get; }
-  
-  public ref float MaximumTimeStep { get; }
-  
-  public ref float MaximumSimTime { get; }
-  
-  public ref float MinimumSimTime { get; }
-  
-  public ref float MinimumTimeStep { get; }
-  
-  public ref int MinimumFrames { get; }
-  
-  public ref int MinCPULevel { get; }
-  
-  public ref int MinGPULevel { get; }
-  
-  public ref float NoDrawTimeToGoToSleep { get; }
-  
-  public ref float MaxDrawDistance { get; }
-  
-  public ref float StartFadeDistance { get; }
-  
-  public ref float MaxCreationDistance { get; }
-  
-  public ref int AggregationMinAvailableParticles { get; }
-  
-  public ref float AggregateRadius { get; }
-  
-  public ref bool ShouldBatch { get; }
-  
-  public ref bool ShouldHitboxesFallbackToRenderBounds { get; }
-  
-  public ref bool ShouldHitboxesFallbackToSnapshot { get; }
-  
-  public ref bool ShouldHitboxesFallbackToCollisionHulls { get; }
-  
-  public ref InheritableBoolType_t ViewModelEffect { get; }
-  
-  public ref bool ScreenSpaceEffect { get; }
-  
-  public string TargetLayerID { get; set; }
-  
-  public ref int SkipRenderControlPoint { get; }
-  
-  public ref int AllowRenderControlPoint { get; }
-  
-  public ref bool ShouldSort { get; }
-  
-  public ref CUtlVector<ParticleControlPointConfiguration_t> ControlPointConfigurations { get; }
+    public ref int BehaviorVersion { get; }
+
+    public ref CUtlVector<PointerTo<CParticleFunctionPreEmission>> PreEmissionOperators { get; }
+
+    public ref CUtlVector<PointerTo<CParticleFunctionEmitter>> Emitters { get; }
+
+    public ref CUtlVector<PointerTo<CParticleFunctionInitializer>> Initializers { get; }
+
+    public ref CUtlVector<PointerTo<CParticleFunctionOperator>> Operators { get; }
+
+    public ref CUtlVector<PointerTo<CParticleFunctionForce>> ForceGenerators { get; }
+
+    public ref CUtlVector<PointerTo<CParticleFunctionConstraint>> Constraints { get; }
+
+    public ref CUtlVector<PointerTo<CParticleFunctionRenderer>> Renderers { get; }
+
+    public ref CUtlVector<ParticleChildrenInfo_t> Children { get; }
+
+    public ref int FirstMultipleOverride_BackwardCompat { get; }
+
+    public ref int InitialParticles { get; }
+
+    public ref int MaxParticles { get; }
+
+    public ref int GroupID { get; }
+
+    public ref Vector BoundingBoxMin { get; }
+
+    public ref Vector BoundingBoxMax { get; }
+
+    public ref float DepthSortBias { get; }
+
+    public ref int SortOverridePositionCP { get; }
+
+    public ref bool InfiniteBounds { get; }
+
+    public ref bool EnableNamedValues { get; }
+
+    public string NamedValueDomain { get; set; }
+
+    public ref CUtlVector<PointerTo<ParticleNamedValueSource_t>> NamedValueLocals { get; }
+
+    public ref Color ConstantColor { get; }
+
+    public ref Vector ConstantNormal { get; }
+
+    public ref float ConstantRadius { get; }
+
+    public ref float ConstantRotation { get; }
+
+    public ref float ConstantRotationSpeed { get; }
+
+    public ref float ConstantLifespan { get; }
+
+    public ref int ConstantSequenceNumber { get; }
+
+    public ref int ConstantSequenceNumber1 { get; }
+
+    public ref int SnapshotControlPoint { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIParticleSnapshot> Snapshot { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> CullReplacementName { get; }
+
+    public ref float CullRadius { get; }
+
+    public ref float CullFillCost { get; }
+
+    public ref int CullControlPoint { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> Fallback { get; }
+
+    public ref int FallbackMaxCount { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> LowViolenceDef { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeIParticleSystemDefinition> ReferenceReplacement { get; }
+
+    public ref float PreSimulationTime { get; }
+
+    public ref float StopSimulationAfterTime { get; }
+
+    public ref float MaximumTimeStep { get; }
+
+    public ref float MaximumSimTime { get; }
+
+    public ref float MinimumSimTime { get; }
+
+    public ref float MinimumTimeStep { get; }
+
+    public ref int MinimumFrames { get; }
+
+    public ref int MinCPULevel { get; }
+
+    public ref int MinGPULevel { get; }
+
+    public ref float NoDrawTimeToGoToSleep { get; }
+
+    public ref float MaxDrawDistance { get; }
+
+    public ref float StartFadeDistance { get; }
+
+    public ref float MaxCreationDistance { get; }
+
+    public ref int AggregationMinAvailableParticles { get; }
+
+    public ref float AggregateRadius { get; }
+
+    public ref bool ShouldBatch { get; }
+
+    public ref bool ShouldHitboxesFallbackToRenderBounds { get; }
+
+    public ref bool ShouldHitboxesFallbackToSnapshot { get; }
+
+    public ref bool ShouldHitboxesFallbackToCollisionHulls { get; }
+
+    public ref InheritableBoolType_t ViewModelEffect { get; }
+
+    public ref bool ScreenSpaceEffect { get; }
+
+    public string TargetLayerID { get; set; }
+
+    public ref int SkipRenderControlPoint { get; }
+
+    public ref int AllowRenderControlPoint { get; }
+
+    public ref bool ShouldSort { get; }
+
+    public ref CUtlVector<ParticleControlPointConfiguration_t> ControlPointConfigurations { get; }
 
 
 }

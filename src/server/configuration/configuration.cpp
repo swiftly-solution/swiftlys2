@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -463,6 +463,7 @@ bool Configuration::Load()
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "CommandPrefixes", { "!" }, true, " ");
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "CommandSilentPrefixes", { "/" }, true, " ");
         RegisterConfiguration(wasEdited, config_json, "core", "core", "AutoHotReload", true);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "EnableProfiler", false);
         RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleFilter", true);
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "PatchesToPerform", {}, true, " ");
 
@@ -517,6 +518,8 @@ bool Configuration::Load()
 
         RegisterConfiguration(wasEdited, config_json, "core", "core", "SteamAuth.Mode", "flexible");
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "SteamAuth.AvailableModes", { "flexible", "strict" }, true, " ");
+
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "DotnetCrashTracerLevel", 0);
 
         if (wasEdited) {
             WriteJSONFile(g_SwiftlyCore.GetCorePath() + "configs/core.jsonc", config_json);

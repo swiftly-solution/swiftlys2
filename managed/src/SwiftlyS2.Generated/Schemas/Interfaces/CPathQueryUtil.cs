@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPathQueryUtil : ISchemaClass<CPathQueryUtil> {
+public partial interface CPathQueryUtil : ISchemaClass<CPathQueryUtil>
+{
+    static CPathQueryUtil ISchemaClass<CPathQueryUtil>.From(nint handle) => new CPathQueryUtilImpl(handle);
+    static int ISchemaClass<CPathQueryUtil>.Size => 128;
+    static string? ISchemaClass<CPathQueryUtil>.ClassName => null;
 
-  static CPathQueryUtil ISchemaClass<CPathQueryUtil>.From(nint handle) => new CPathQueryUtilImpl(handle);
-  static int ISchemaClass<CPathQueryUtil>.Size => 128;
-  static string? ISchemaClass<CPathQueryUtil>.ClassName => null;
 
-  
-  public ref CTransform PathToEntityTransform { get; }
-  
-  public ref CUtlVector<Vector> PathSamplePositions { get; }
-  
-  public ref CUtlVector<float> PathSampleParameters { get; }
-  
-  public ref CUtlVector<float> PathSampleDistances { get; }
-  
-  public ref bool IsClosedLoop { get; }
+    public ref CTransform PathToEntityTransform { get; }
+
+    public ref CUtlVector<Vector> PathSamplePositions { get; }
+
+    public ref CUtlVector<float> PathSampleParameters { get; }
+
+    public ref CUtlVector<float> PathSampleDistances { get; }
+
+    public ref bool IsClosedLoop { get; }
 
 
 }

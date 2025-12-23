@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMovementStatsProperty : ISchemaClass<CMovementStatsProperty> {
+public partial interface CMovementStatsProperty : ISchemaClass<CMovementStatsProperty>
+{
+    static CMovementStatsProperty ISchemaClass<CMovementStatsProperty>.From(nint handle) => new CMovementStatsPropertyImpl(handle);
+    static int ISchemaClass<CMovementStatsProperty>.Size => 64;
+    static string? ISchemaClass<CMovementStatsProperty>.ClassName => null;
 
-  static CMovementStatsProperty ISchemaClass<CMovementStatsProperty>.From(nint handle) => new CMovementStatsPropertyImpl(handle);
-  static int ISchemaClass<CMovementStatsProperty>.Size => 64;
-  static string? ISchemaClass<CMovementStatsProperty>.ClassName => null;
 
-  
-  public ref int UseCounter { get; }
-  
-  public CVectorExponentialMovingAverage EmaMovementDirection { get; }
+    public ref int UseCounter { get; }
+
+    public CVectorExponentialMovingAverage EmaMovementDirection { get; }
 
 
 }

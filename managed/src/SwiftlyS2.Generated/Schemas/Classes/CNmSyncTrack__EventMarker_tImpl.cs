@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmSyncTrack__EventMarker_tImpl : SchemaClass, CNmSyncTrack__EventMarker_t {
+internal partial class CNmSyncTrack__EventMarker_tImpl : SchemaClass, CNmSyncTrack__EventMarker_t
+{
+    public CNmSyncTrack__EventMarker_tImpl(nint handle) : base(handle) { }
 
-  public CNmSyncTrack__EventMarker_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StartTimeOffset;
 
-  private static nint? _StartTimeOffset;
-
-  public NmPercent_t StartTime {
-    get {
-      if (_StartTimeOffset == null) {
-        _StartTimeOffset = Schema.GetOffset(0x1BCC69006330E7EE);
-      }
-      return new NmPercent_tImpl(_Handle + _StartTimeOffset!.Value);
+    public NmPercent_t StartTime {
+        get {
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0x1BCC69006330E7EE);
+            return new NmPercent_tImpl(_Handle + _StartTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _IDOffset;
+    private static nint? _IDOffset;
 
-  public ref CGlobalSymbol ID {
-    get {
-      if (_IDOffset == null) {
-        _IDOffset = Schema.GetOffset(0x1BCC690095066900);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+    public ref CGlobalSymbol ID {
+        get {
+            _IDOffset = _IDOffset ?? Schema.GetOffset(0x1BCC690095066900);
+            return ref _Handle.AsRef<CGlobalSymbol>(_IDOffset!.Value);
+        }
     }
-  }
 
 
 }

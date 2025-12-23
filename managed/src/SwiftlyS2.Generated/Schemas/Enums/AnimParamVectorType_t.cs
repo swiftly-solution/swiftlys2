@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum AnimParamVectorType_t : uint {
-
+public enum AnimParamVectorType_t : uint
+{
  ANIMPARAM_VECTOR_TYPE_NONE = 0,
 
  ANIMPARAM_VECTOR_TYPE_POSITION_WS = 1,

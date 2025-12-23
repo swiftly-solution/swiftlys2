@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum DestructiblePartDestructionDeathBehavior_t : uint {
-
+public enum DestructiblePartDestructionDeathBehavior_t : uint
+{
  eDoNotKill = 0,
 
  eKill = 1,

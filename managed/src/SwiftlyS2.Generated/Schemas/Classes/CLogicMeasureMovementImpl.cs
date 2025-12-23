@@ -6,128 +6,100 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicMeasureMovementImpl : CLogicalEntityImpl, CLogicMeasureMovement {
+internal partial class CLogicMeasureMovementImpl : CLogicalEntityImpl, CLogicMeasureMovement
+{
+    public CLogicMeasureMovementImpl(nint handle) : base(handle) { }
 
-  public CLogicMeasureMovementImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StrMeasureTargetOffset;
 
-  private static nint? _StrMeasureTargetOffset;
+    public string StrMeasureTarget {
+        get {
+            _StrMeasureTargetOffset = _StrMeasureTargetOffset ?? Schema.GetOffset(0x11EA274585646A89);
+            return Schema.GetString(_Handle.Read<nint>(_StrMeasureTargetOffset!.Value));
+        }
+        set {
+            _StrMeasureTargetOffset = _StrMeasureTargetOffset ?? Schema.GetOffset(0x11EA274585646A89);
+            Schema.SetString(_Handle, _StrMeasureTargetOffset!.Value, value);
+        }
+    } 
+    private static nint? _StrMeasureReferenceOffset;
 
-  public string StrMeasureTarget {
-    get {
-      if (_StrMeasureTargetOffset == null) {
-        _StrMeasureTargetOffset = Schema.GetOffset(0x11EA274585646A89);
-      }
-      var ptr = _Handle.Read<nint>(_StrMeasureTargetOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrMeasureTargetOffset == null) {
-        _StrMeasureTargetOffset = Schema.GetOffset(0x11EA274585646A89);
-      }
-      Schema.SetString(_Handle, _StrMeasureTargetOffset!.Value, value);
-    }
-  } 
-  private static nint? _StrMeasureReferenceOffset;
+    public string StrMeasureReference {
+        get {
+            _StrMeasureReferenceOffset = _StrMeasureReferenceOffset ?? Schema.GetOffset(0x11EA2745CF4AF1BD);
+            return Schema.GetString(_Handle.Read<nint>(_StrMeasureReferenceOffset!.Value));
+        }
+        set {
+            _StrMeasureReferenceOffset = _StrMeasureReferenceOffset ?? Schema.GetOffset(0x11EA2745CF4AF1BD);
+            Schema.SetString(_Handle, _StrMeasureReferenceOffset!.Value, value);
+        }
+    } 
+    private static nint? _StrTargetReferenceOffset;
 
-  public string StrMeasureReference {
-    get {
-      if (_StrMeasureReferenceOffset == null) {
-        _StrMeasureReferenceOffset = Schema.GetOffset(0x11EA2745CF4AF1BD);
-      }
-      var ptr = _Handle.Read<nint>(_StrMeasureReferenceOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrMeasureReferenceOffset == null) {
-        _StrMeasureReferenceOffset = Schema.GetOffset(0x11EA2745CF4AF1BD);
-      }
-      Schema.SetString(_Handle, _StrMeasureReferenceOffset!.Value, value);
-    }
-  } 
-  private static nint? _StrTargetReferenceOffset;
+    public string StrTargetReference {
+        get {
+            _StrTargetReferenceOffset = _StrTargetReferenceOffset ?? Schema.GetOffset(0x11EA27453E928D56);
+            return Schema.GetString(_Handle.Read<nint>(_StrTargetReferenceOffset!.Value));
+        }
+        set {
+            _StrTargetReferenceOffset = _StrTargetReferenceOffset ?? Schema.GetOffset(0x11EA27453E928D56);
+            Schema.SetString(_Handle, _StrTargetReferenceOffset!.Value, value);
+        }
+    } 
+    private static nint? _MeasureTargetOffset;
 
-  public string StrTargetReference {
-    get {
-      if (_StrTargetReferenceOffset == null) {
-        _StrTargetReferenceOffset = Schema.GetOffset(0x11EA27453E928D56);
-      }
-      var ptr = _Handle.Read<nint>(_StrTargetReferenceOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CHandle<CBaseEntity> MeasureTarget {
+        get {
+            _MeasureTargetOffset = _MeasureTargetOffset ?? Schema.GetOffset(0x11EA2745F81BC1A8);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureTargetOffset!.Value);
+        }
     }
-    set {
-      if (_StrTargetReferenceOffset == null) {
-        _StrTargetReferenceOffset = Schema.GetOffset(0x11EA27453E928D56);
-      }
-      Schema.SetString(_Handle, _StrTargetReferenceOffset!.Value, value);
-    }
-  } 
-  private static nint? _MeasureTargetOffset;
+    private static nint? _MeasureReferenceOffset;
 
-  public ref CHandle<CBaseEntity> MeasureTarget {
-    get {
-      if (_MeasureTargetOffset == null) {
-        _MeasureTargetOffset = Schema.GetOffset(0x11EA2745F81BC1A8);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureTargetOffset!.Value);
+    public ref CHandle<CBaseEntity> MeasureReference {
+        get {
+            _MeasureReferenceOffset = _MeasureReferenceOffset ?? Schema.GetOffset(0x11EA274567F65D7A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureReferenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _MeasureReferenceOffset;
+    private static nint? _TargetOffset;
 
-  public ref CHandle<CBaseEntity> MeasureReference {
-    get {
-      if (_MeasureReferenceOffset == null) {
-        _MeasureReferenceOffset = Schema.GetOffset(0x11EA274567F65D7A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_MeasureReferenceOffset!.Value);
+    public ref CHandle<CBaseEntity> Target {
+        get {
+            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x11EA2745CE35901A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetOffset;
+    private static nint? _TargetReferenceOffset;
 
-  public ref CHandle<CBaseEntity> Target {
-    get {
-      if (_TargetOffset == null) {
-        _TargetOffset = Schema.GetOffset(0x11EA2745CE35901A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetOffset!.Value);
+    public ref CHandle<CBaseEntity> TargetReference {
+        get {
+            _TargetReferenceOffset = _TargetReferenceOffset ?? Schema.GetOffset(0x11EA2745EB33504F);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetReferenceOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetReferenceOffset;
+    private static nint? _ScaleOffset;
 
-  public ref CHandle<CBaseEntity> TargetReference {
-    get {
-      if (_TargetReferenceOffset == null) {
-        _TargetReferenceOffset = Schema.GetOffset(0x11EA2745EB33504F);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetReferenceOffset!.Value);
+    public ref float Scale {
+        get {
+            _ScaleOffset = _ScaleOffset ?? Schema.GetOffset(0x11EA2745B731A42F);
+            return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+        }
     }
-  }
-  private static nint? _ScaleOffset;
+    private static nint? _MeasureTypeOffset;
 
-  public ref float Scale {
-    get {
-      if (_ScaleOffset == null) {
-        _ScaleOffset = Schema.GetOffset(0x11EA2745B731A42F);
-      }
-      return ref _Handle.AsRef<float>(_ScaleOffset!.Value);
+    public ref int MeasureType {
+        get {
+            _MeasureTypeOffset = _MeasureTypeOffset ?? Schema.GetOffset(0x11EA274593190C1B);
+            return ref _Handle.AsRef<int>(_MeasureTypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _MeasureTypeOffset;
-
-  public ref int MeasureType {
-    get {
-      if (_MeasureTypeOffset == null) {
-        _MeasureTypeOffset = Schema.GetOffset(0x11EA274593190C1B);
-      }
-      return ref _Handle.AsRef<int>(_MeasureTypeOffset!.Value);
-    }
-  }
 
 
 }

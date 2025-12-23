@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootMotionImpl : SchemaClass, CFootMotion {
+internal partial class CFootMotionImpl : SchemaClass, CFootMotion
+{
+    public CFootMotionImpl(nint handle) : base(handle) { }
 
-  public CFootMotionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StridesOffset;
 
-  private static nint? _StridesOffset;
-
-  public ref CUtlVector<CFootStride> Strides {
-    get {
-      if (_StridesOffset == null) {
-        _StridesOffset = Schema.GetOffset(0xA4A598B8AE9C97F1);
-      }
-      return ref _Handle.AsRef<CUtlVector<CFootStride>>(_StridesOffset!.Value);
+    public ref CUtlVector<CFootStride> Strides {
+        get {
+            _StridesOffset = _StridesOffset ?? Schema.GetOffset(0xA4A598B8AE9C97F1);
+            return ref _Handle.AsRef<CUtlVector<CFootStride>>(_StridesOffset!.Value);
+        }
     }
-  }
-  private static nint? _NameOffset;
+    private static nint? _NameOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xA4A598B84D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0xA4A598B84D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _AdditiveOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA4A598B84D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0xA4A598B84D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _AdditiveOffset;
 
-  public ref bool Additive {
-    get {
-      if (_AdditiveOffset == null) {
-        _AdditiveOffset = Schema.GetOffset(0xA4A598B80FA86105);
-      }
-      return ref _Handle.AsRef<bool>(_AdditiveOffset!.Value);
+    public ref bool Additive {
+        get {
+            _AdditiveOffset = _AdditiveOffset ?? Schema.GetOffset(0xA4A598B80FA86105);
+            return ref _Handle.AsRef<bool>(_AdditiveOffset!.Value);
+        }
     }
-  }
 
 
 }

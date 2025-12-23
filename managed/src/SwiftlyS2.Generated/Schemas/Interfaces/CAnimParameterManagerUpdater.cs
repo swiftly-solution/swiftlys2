@@ -8,27 +8,27 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimParameterManagerUpdater : ISchemaClass<CAnimParameterManagerUpdater> {
+public partial interface CAnimParameterManagerUpdater : ISchemaClass<CAnimParameterManagerUpdater>
+{
+    static CAnimParameterManagerUpdater ISchemaClass<CAnimParameterManagerUpdater>.From(nint handle) => new CAnimParameterManagerUpdaterImpl(handle);
+    static int ISchemaClass<CAnimParameterManagerUpdater>.Size => 256;
+    static string? ISchemaClass<CAnimParameterManagerUpdater>.ClassName => null;
 
-  static CAnimParameterManagerUpdater ISchemaClass<CAnimParameterManagerUpdater>.From(nint handle) => new CAnimParameterManagerUpdaterImpl(handle);
-  static int ISchemaClass<CAnimParameterManagerUpdater>.Size => 256;
-  static string? ISchemaClass<CAnimParameterManagerUpdater>.ClassName => null;
 
-  
-  public ref CUtlVector<SchemaUntypedField> Parameters { get; }
-  
-  // CUtlHashtable< AnimParamID, int32 >
-  public SchemaUntypedField IdToIndexMap { get; }
-  
-  // CUtlHashtable< CUtlString, int32 >
-  public SchemaUntypedField NameToIndexMap { get; }
-  
-  public ref CUtlVector<CAnimParamHandle> IndexToHandle { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> AutoResetParams { get; }
-  
-  // CUtlHashtable< CAnimParamHandle, int16 >
-  public SchemaUntypedField AutoResetMap { get; }
+    public ref CUtlVector<SchemaUntypedField> Parameters { get; }
+
+    // CUtlHashtable< AnimParamID, int32 >
+    public SchemaUntypedField IdToIndexMap { get; }
+
+    // CUtlHashtable< CUtlString, int32 >
+    public SchemaUntypedField NameToIndexMap { get; }
+
+    public ref CUtlVector<CAnimParamHandle> IndexToHandle { get; }
+
+    public ref CUtlVector<SchemaUntypedField> AutoResetParams { get; }
+
+    // CUtlHashtable< CAnimParamHandle, int16 >
+    public SchemaUntypedField AutoResetMap { get; }
 
 
 }

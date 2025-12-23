@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CTriggerDetectBulletFire : CBaseTrigger, ISchemaClass<CTriggerDetectBulletFire> {
+public partial interface CTriggerDetectBulletFire : CBaseTrigger, ISchemaClass<CTriggerDetectBulletFire>
+{
+    static CTriggerDetectBulletFire ISchemaClass<CTriggerDetectBulletFire>.From(nint handle) => new CTriggerDetectBulletFireImpl(handle);
+    static int ISchemaClass<CTriggerDetectBulletFire>.Size => 2520;
+    static string? ISchemaClass<CTriggerDetectBulletFire>.ClassName => "trigger_detect_bullet_fire";
 
-  static CTriggerDetectBulletFire ISchemaClass<CTriggerDetectBulletFire>.From(nint handle) => new CTriggerDetectBulletFireImpl(handle);
-  static int ISchemaClass<CTriggerDetectBulletFire>.Size => 2520;
-  static string? ISchemaClass<CTriggerDetectBulletFire>.ClassName => "trigger_detect_bullet_fire";
 
-  
-  public ref bool PlayerFireOnly { get; }
-  
-  public CEntityIOOutput OnDetectedBulletFire { get; }
+    public ref bool PlayerFireOnly { get; }
+
+    public ref CEntityIOOutput OnDetectedBulletFire { get; }
 
 
 }

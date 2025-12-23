@@ -6,175 +6,136 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInfoSpawnGroupLoadUnloadImpl : CLogicalEntityImpl, CInfoSpawnGroupLoadUnload {
+internal partial class CInfoSpawnGroupLoadUnloadImpl : CLogicalEntityImpl, CInfoSpawnGroupLoadUnload
+{
+    public CInfoSpawnGroupLoadUnloadImpl(nint handle) : base(handle) { }
 
-  public CInfoSpawnGroupLoadUnloadImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnSpawnGroupLoadStartedOffset;
 
-  private static nint? _OnSpawnGroupLoadStartedOffset;
+    public ref CEntityIOOutput OnSpawnGroupLoadStarted {
+        get {
+            _OnSpawnGroupLoadStartedOffset = _OnSpawnGroupLoadStartedOffset ?? Schema.GetOffset(0x2537640F52B8B787);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSpawnGroupLoadStartedOffset!.Value);
+        }
+    }
+    private static nint? _OnSpawnGroupLoadFinishedOffset;
 
-  public CEntityIOOutput OnSpawnGroupLoadStarted {
-    get {
-      if (_OnSpawnGroupLoadStartedOffset == null) {
-        _OnSpawnGroupLoadStartedOffset = Schema.GetOffset(0x2537640F52B8B787);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnSpawnGroupLoadStartedOffset!.Value);
+    public ref CEntityIOOutput OnSpawnGroupLoadFinished {
+        get {
+            _OnSpawnGroupLoadFinishedOffset = _OnSpawnGroupLoadFinishedOffset ?? Schema.GetOffset(0x2537640FF5DA3EA8);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSpawnGroupLoadFinishedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnSpawnGroupLoadFinishedOffset;
+    private static nint? _OnSpawnGroupUnloadStartedOffset;
 
-  public CEntityIOOutput OnSpawnGroupLoadFinished {
-    get {
-      if (_OnSpawnGroupLoadFinishedOffset == null) {
-        _OnSpawnGroupLoadFinishedOffset = Schema.GetOffset(0x2537640FF5DA3EA8);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnSpawnGroupLoadFinishedOffset!.Value);
+    public ref CEntityIOOutput OnSpawnGroupUnloadStarted {
+        get {
+            _OnSpawnGroupUnloadStartedOffset = _OnSpawnGroupUnloadStartedOffset ?? Schema.GetOffset(0x2537640F89E6672A);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSpawnGroupUnloadStartedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnSpawnGroupUnloadStartedOffset;
+    private static nint? _OnSpawnGroupUnloadFinishedOffset;
 
-  public CEntityIOOutput OnSpawnGroupUnloadStarted {
-    get {
-      if (_OnSpawnGroupUnloadStartedOffset == null) {
-        _OnSpawnGroupUnloadStartedOffset = Schema.GetOffset(0x2537640F89E6672A);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnSpawnGroupUnloadStartedOffset!.Value);
+    public ref CEntityIOOutput OnSpawnGroupUnloadFinished {
+        get {
+            _OnSpawnGroupUnloadFinishedOffset = _OnSpawnGroupUnloadFinishedOffset ?? Schema.GetOffset(0x2537640F1268C477);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnSpawnGroupUnloadFinishedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnSpawnGroupUnloadFinishedOffset;
+    private static nint? _SpawnGroupNameOffset;
 
-  public CEntityIOOutput OnSpawnGroupUnloadFinished {
-    get {
-      if (_OnSpawnGroupUnloadFinishedOffset == null) {
-        _OnSpawnGroupUnloadFinishedOffset = Schema.GetOffset(0x2537640F1268C477);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnSpawnGroupUnloadFinishedOffset!.Value);
-    }
-  }
-  private static nint? _SpawnGroupNameOffset;
+    public string SpawnGroupName {
+        get {
+            _SpawnGroupNameOffset = _SpawnGroupNameOffset ?? Schema.GetOffset(0x2537640FBEEECC58);
+            return Schema.GetString(_Handle.Read<nint>(_SpawnGroupNameOffset!.Value));
+        }
+        set {
+            _SpawnGroupNameOffset = _SpawnGroupNameOffset ?? Schema.GetOffset(0x2537640FBEEECC58);
+            Schema.SetString(_Handle, _SpawnGroupNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _SpawnGroupFilterNameOffset;
 
-  public string SpawnGroupName {
-    get {
-      if (_SpawnGroupNameOffset == null) {
-        _SpawnGroupNameOffset = Schema.GetOffset(0x2537640FBEEECC58);
-      }
-      var ptr = _Handle.Read<nint>(_SpawnGroupNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SpawnGroupNameOffset == null) {
-        _SpawnGroupNameOffset = Schema.GetOffset(0x2537640FBEEECC58);
-      }
-      Schema.SetString(_Handle, _SpawnGroupNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _SpawnGroupFilterNameOffset;
+    public string SpawnGroupFilterName {
+        get {
+            _SpawnGroupFilterNameOffset = _SpawnGroupFilterNameOffset ?? Schema.GetOffset(0x2537640FE9A4A47E);
+            return Schema.GetString(_Handle.Read<nint>(_SpawnGroupFilterNameOffset!.Value));
+        }
+        set {
+            _SpawnGroupFilterNameOffset = _SpawnGroupFilterNameOffset ?? Schema.GetOffset(0x2537640FE9A4A47E);
+            Schema.SetString(_Handle, _SpawnGroupFilterNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _LandmarkNameOffset;
 
-  public string SpawnGroupFilterName {
-    get {
-      if (_SpawnGroupFilterNameOffset == null) {
-        _SpawnGroupFilterNameOffset = Schema.GetOffset(0x2537640FE9A4A47E);
-      }
-      var ptr = _Handle.Read<nint>(_SpawnGroupFilterNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_SpawnGroupFilterNameOffset == null) {
-        _SpawnGroupFilterNameOffset = Schema.GetOffset(0x2537640FE9A4A47E);
-      }
-      Schema.SetString(_Handle, _SpawnGroupFilterNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _LandmarkNameOffset;
+    public string LandmarkName {
+        get {
+            _LandmarkNameOffset = _LandmarkNameOffset ?? Schema.GetOffset(0x2537640F3207F70E);
+            return Schema.GetString(_Handle.Read<nint>(_LandmarkNameOffset!.Value));
+        }
+        set {
+            _LandmarkNameOffset = _LandmarkNameOffset ?? Schema.GetOffset(0x2537640F3207F70E);
+            Schema.SetString(_Handle, _LandmarkNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FixedSpawnGroupNameOffset;
 
-  public string LandmarkName {
-    get {
-      if (_LandmarkNameOffset == null) {
-        _LandmarkNameOffset = Schema.GetOffset(0x2537640F3207F70E);
-      }
-      var ptr = _Handle.Read<nint>(_LandmarkNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_LandmarkNameOffset == null) {
-        _LandmarkNameOffset = Schema.GetOffset(0x2537640F3207F70E);
-      }
-      Schema.SetString(_Handle, _LandmarkNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _FixedSpawnGroupNameOffset;
+    public string FixedSpawnGroupName {
+        get {
+            _FixedSpawnGroupNameOffset = _FixedSpawnGroupNameOffset ?? Schema.GetOffset(0x2537640FB094CD41);
+            return Schema.GetString(_Handle.Read<nint>(_FixedSpawnGroupNameOffset!.Value));
+        }
+        set {
+            _FixedSpawnGroupNameOffset = _FixedSpawnGroupNameOffset ?? Schema.GetOffset(0x2537640FB094CD41);
+            Schema.SetString(_Handle, _FixedSpawnGroupNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _TimeoutIntervalOffset;
 
-  public string FixedSpawnGroupName {
-    get {
-      if (_FixedSpawnGroupNameOffset == null) {
-        _FixedSpawnGroupNameOffset = Schema.GetOffset(0x2537640FB094CD41);
-      }
-      var ptr = _Handle.Read<nint>(_FixedSpawnGroupNameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float TimeoutInterval {
+        get {
+            _TimeoutIntervalOffset = _TimeoutIntervalOffset ?? Schema.GetOffset(0x2537640F354D6687);
+            return ref _Handle.AsRef<float>(_TimeoutIntervalOffset!.Value);
+        }
     }
-    set {
-      if (_FixedSpawnGroupNameOffset == null) {
-        _FixedSpawnGroupNameOffset = Schema.GetOffset(0x2537640FB094CD41);
-      }
-      Schema.SetString(_Handle, _FixedSpawnGroupNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _TimeoutIntervalOffset;
+    private static nint? _AutoActivateOffset;
 
-  public ref float TimeoutInterval {
-    get {
-      if (_TimeoutIntervalOffset == null) {
-        _TimeoutIntervalOffset = Schema.GetOffset(0x2537640F354D6687);
-      }
-      return ref _Handle.AsRef<float>(_TimeoutIntervalOffset!.Value);
+    public ref bool AutoActivate {
+        get {
+            _AutoActivateOffset = _AutoActivateOffset ?? Schema.GetOffset(0x2537640F8DAF22D7);
+            return ref _Handle.AsRef<bool>(_AutoActivateOffset!.Value);
+        }
     }
-  }
-  private static nint? _AutoActivateOffset;
+    private static nint? _UnloadingStartedOffset;
 
-  public ref bool AutoActivate {
-    get {
-      if (_AutoActivateOffset == null) {
-        _AutoActivateOffset = Schema.GetOffset(0x2537640F8DAF22D7);
-      }
-      return ref _Handle.AsRef<bool>(_AutoActivateOffset!.Value);
+    public ref bool UnloadingStarted {
+        get {
+            _UnloadingStartedOffset = _UnloadingStartedOffset ?? Schema.GetOffset(0x2537640F11D7B43F);
+            return ref _Handle.AsRef<bool>(_UnloadingStartedOffset!.Value);
+        }
     }
-  }
-  private static nint? _UnloadingStartedOffset;
+    private static nint? _QueueActiveSpawnGroupChangeOffset;
 
-  public ref bool UnloadingStarted {
-    get {
-      if (_UnloadingStartedOffset == null) {
-        _UnloadingStartedOffset = Schema.GetOffset(0x2537640F11D7B43F);
-      }
-      return ref _Handle.AsRef<bool>(_UnloadingStartedOffset!.Value);
+    public ref bool QueueActiveSpawnGroupChange {
+        get {
+            _QueueActiveSpawnGroupChangeOffset = _QueueActiveSpawnGroupChangeOffset ?? Schema.GetOffset(0x2537640FC2B29DC8);
+            return ref _Handle.AsRef<bool>(_QueueActiveSpawnGroupChangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _QueueActiveSpawnGroupChangeOffset;
+    private static nint? _QueueFinishLoadingOffset;
 
-  public ref bool QueueActiveSpawnGroupChange {
-    get {
-      if (_QueueActiveSpawnGroupChangeOffset == null) {
-        _QueueActiveSpawnGroupChangeOffset = Schema.GetOffset(0x2537640FC2B29DC8);
-      }
-      return ref _Handle.AsRef<bool>(_QueueActiveSpawnGroupChangeOffset!.Value);
+    public ref bool QueueFinishLoading {
+        get {
+            _QueueFinishLoadingOffset = _QueueFinishLoadingOffset ?? Schema.GetOffset(0x2537640F39EC1459);
+            return ref _Handle.AsRef<bool>(_QueueFinishLoadingOffset!.Value);
+        }
     }
-  }
-  private static nint? _QueueFinishLoadingOffset;
-
-  public ref bool QueueFinishLoading {
-    get {
-      if (_QueueFinishLoadingOffset == null) {
-        _QueueFinishLoadingOffset = Schema.GetOffset(0x2537640F39EC1459);
-      }
-      return ref _Handle.AsRef<bool>(_QueueFinishLoadingOffset!.Value);
-    }
-  }
 
 
 }

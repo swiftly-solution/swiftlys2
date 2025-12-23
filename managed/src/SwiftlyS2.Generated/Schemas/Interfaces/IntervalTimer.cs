@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface IntervalTimer : ISchemaClass<IntervalTimer> {
+public partial interface IntervalTimer : ISchemaClass<IntervalTimer>
+{
+    static IntervalTimer ISchemaClass<IntervalTimer>.From(nint handle) => new IntervalTimerImpl(handle);
+    static int ISchemaClass<IntervalTimer>.Size => 16;
+    static string? ISchemaClass<IntervalTimer>.ClassName => null;
 
-  static IntervalTimer ISchemaClass<IntervalTimer>.From(nint handle) => new IntervalTimerImpl(handle);
-  static int ISchemaClass<IntervalTimer>.Size => 16;
-  static string? ISchemaClass<IntervalTimer>.ClassName => null;
 
-  
-  public GameTime_t Timestamp { get; }
-  
-  public ref uint WorldGroupId { get; }
+    public GameTime_t Timestamp { get; }
 
-  public void TimestampUpdated();
-  public void WorldGroupIdUpdated();
+    public ref uint WorldGroupId { get; }
+
+    public void TimestampUpdated();
+    public void WorldGroupIdUpdated();
 }

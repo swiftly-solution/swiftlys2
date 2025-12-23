@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RenderProjectedMaterial_t : ISchemaClass<RenderProjectedMaterial_t> {
+public partial interface RenderProjectedMaterial_t : ISchemaClass<RenderProjectedMaterial_t>
+{
+    static RenderProjectedMaterial_t ISchemaClass<RenderProjectedMaterial_t>.From(nint handle) => new RenderProjectedMaterial_tImpl(handle);
+    static int ISchemaClass<RenderProjectedMaterial_t>.Size => 8;
+    static string? ISchemaClass<RenderProjectedMaterial_t>.ClassName => null;
 
-  static RenderProjectedMaterial_t ISchemaClass<RenderProjectedMaterial_t>.From(nint handle) => new RenderProjectedMaterial_tImpl(handle);
-  static int ISchemaClass<RenderProjectedMaterial_t>.Size => 8;
-  static string? ISchemaClass<RenderProjectedMaterial_t>.ClassName => null;
 
-  
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material { get; }
 
 
 }

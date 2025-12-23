@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume : CEnvCombinedLightProbeVolume, ISchemaClass<CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume> {
-
-  static CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume ISchemaClass<CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.From(nint handle) => new CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volumeImpl(handle);
-  static int ISchemaClass<CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.Size => 5688;
-  static string? ISchemaClass<CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.ClassName => null;
+public partial interface CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume : CEnvCombinedLightProbeVolume, ISchemaClass<CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>
+{
+    static CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume ISchemaClass<CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.From(nint handle) => new CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volumeImpl(handle);
+    static int ISchemaClass<CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.Size => 5688;
+    static string? ISchemaClass<CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume>.ClassName => null;
 
 
 

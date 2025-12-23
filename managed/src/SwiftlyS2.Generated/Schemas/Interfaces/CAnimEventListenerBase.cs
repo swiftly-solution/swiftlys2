@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimEventListenerBase : ISchemaClass<CAnimEventListenerBase> {
-
-  static CAnimEventListenerBase ISchemaClass<CAnimEventListenerBase>.From(nint handle) => new CAnimEventListenerBaseImpl(handle);
-  static int ISchemaClass<CAnimEventListenerBase>.Size => 32;
-  static string? ISchemaClass<CAnimEventListenerBase>.ClassName => null;
+public partial interface CAnimEventListenerBase : ISchemaClass<CAnimEventListenerBase>
+{
+    static CAnimEventListenerBase ISchemaClass<CAnimEventListenerBase>.From(nint handle) => new CAnimEventListenerBaseImpl(handle);
+    static int ISchemaClass<CAnimEventListenerBase>.Size => 32;
+    static string? ISchemaClass<CAnimEventListenerBase>.ClassName => null;
 
 
 

@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface RsDepthStencilStateDesc_t : ISchemaClass<RsDepthStencilStateDesc_t> {
+public partial interface RsDepthStencilStateDesc_t : ISchemaClass<RsDepthStencilStateDesc_t>
+{
+    static RsDepthStencilStateDesc_t ISchemaClass<RsDepthStencilStateDesc_t>.From(nint handle) => new RsDepthStencilStateDesc_tImpl(handle);
+    static int ISchemaClass<RsDepthStencilStateDesc_t>.Size => 8;
+    static string? ISchemaClass<RsDepthStencilStateDesc_t>.ClassName => null;
 
-  static RsDepthStencilStateDesc_t ISchemaClass<RsDepthStencilStateDesc_t>.From(nint handle) => new RsDepthStencilStateDesc_tImpl(handle);
-  static int ISchemaClass<RsDepthStencilStateDesc_t>.Size => 8;
-  static string? ISchemaClass<RsDepthStencilStateDesc_t>.ClassName => null;
 
-  
-  // bitfield
-  public SchemaUntypedField DepthTestEnable { get; }
-  
-  // bitfield
-  public SchemaUntypedField DepthWriteEnable { get; }
-  
-  public ref RsComparison_t DepthFunc { get; }
-  
-  public RsStencilStateDesc_t StencilState { get; }
+    // bitfield
+    public SchemaUntypedField DepthTestEnable { get; }
+
+    // bitfield
+    public SchemaUntypedField DepthWriteEnable { get; }
+
+    public ref RsComparison_t DepthFunc { get; }
+
+    public RsStencilStateDesc_t StencilState { get; }
 
 
 }

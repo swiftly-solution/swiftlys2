@@ -6,71 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAI_ChangeHintGroupImpl : CBaseEntityImpl, CAI_ChangeHintGroup {
+internal partial class CAI_ChangeHintGroupImpl : CBaseEntityImpl, CAI_ChangeHintGroup
+{
+    public CAI_ChangeHintGroupImpl(nint handle) : base(handle) { }
 
-  public CAI_ChangeHintGroupImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SearchTypeOffset;
 
-  private static nint? _SearchTypeOffset;
+    public ref int SearchType {
+        get {
+            _SearchTypeOffset = _SearchTypeOffset ?? Schema.GetOffset(0xE2F9617B09088830);
+            return ref _Handle.AsRef<int>(_SearchTypeOffset!.Value);
+        }
+    }
+    private static nint? _StrSearchNameOffset;
 
-  public ref int SearchType {
-    get {
-      if (_SearchTypeOffset == null) {
-        _SearchTypeOffset = Schema.GetOffset(0xE2F9617B09088830);
-      }
-      return ref _Handle.AsRef<int>(_SearchTypeOffset!.Value);
-    }
-  }
-  private static nint? _StrSearchNameOffset;
+    public string StrSearchName {
+        get {
+            _StrSearchNameOffset = _StrSearchNameOffset ?? Schema.GetOffset(0xE2F9617B8A77B967);
+            return Schema.GetString(_Handle.Read<nint>(_StrSearchNameOffset!.Value));
+        }
+        set {
+            _StrSearchNameOffset = _StrSearchNameOffset ?? Schema.GetOffset(0xE2F9617B8A77B967);
+            Schema.SetString(_Handle, _StrSearchNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _StrNewHintGroupOffset;
 
-  public string StrSearchName {
-    get {
-      if (_StrSearchNameOffset == null) {
-        _StrSearchNameOffset = Schema.GetOffset(0xE2F9617B8A77B967);
-      }
-      var ptr = _Handle.Read<nint>(_StrSearchNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_StrSearchNameOffset == null) {
-        _StrSearchNameOffset = Schema.GetOffset(0xE2F9617B8A77B967);
-      }
-      Schema.SetString(_Handle, _StrSearchNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _StrNewHintGroupOffset;
+    public string StrNewHintGroup {
+        get {
+            _StrNewHintGroupOffset = _StrNewHintGroupOffset ?? Schema.GetOffset(0xE2F9617BD4585F62);
+            return Schema.GetString(_Handle.Read<nint>(_StrNewHintGroupOffset!.Value));
+        }
+        set {
+            _StrNewHintGroupOffset = _StrNewHintGroupOffset ?? Schema.GetOffset(0xE2F9617BD4585F62);
+            Schema.SetString(_Handle, _StrNewHintGroupOffset!.Value, value);
+        }
+    } 
+    private static nint? _RadiusOffset;
 
-  public string StrNewHintGroup {
-    get {
-      if (_StrNewHintGroupOffset == null) {
-        _StrNewHintGroupOffset = Schema.GetOffset(0xE2F9617BD4585F62);
-      }
-      var ptr = _Handle.Read<nint>(_StrNewHintGroupOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Radius {
+        get {
+            _RadiusOffset = _RadiusOffset ?? Schema.GetOffset(0xE2F9617B5ACFC08D);
+            return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
+        }
     }
-    set {
-      if (_StrNewHintGroupOffset == null) {
-        _StrNewHintGroupOffset = Schema.GetOffset(0xE2F9617BD4585F62);
-      }
-      Schema.SetString(_Handle, _StrNewHintGroupOffset!.Value, value);
-    }
-  } 
-  private static nint? _RadiusOffset;
-
-  public ref float Radius {
-    get {
-      if (_RadiusOffset == null) {
-        _RadiusOffset = Schema.GetOffset(0xE2F9617B5ACFC08D);
-      }
-      return ref _Handle.AsRef<float>(_RadiusOffset!.Value);
-    }
-  }
 
 
 }

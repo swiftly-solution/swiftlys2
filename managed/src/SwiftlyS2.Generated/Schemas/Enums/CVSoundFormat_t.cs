@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum CVSoundFormat_t : byte {
-
+public enum CVSoundFormat_t : byte
+{
  PCM16 = 0,
 
  PCM8 = 1,

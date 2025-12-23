@@ -6,87 +6,72 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerStaticAdditiveSynth__CHarmonicImpl : SchemaClass, CVoiceContainerStaticAdditiveSynth__CHarmonic {
+internal partial class CVoiceContainerStaticAdditiveSynth__CHarmonicImpl : SchemaClass, CVoiceContainerStaticAdditiveSynth__CHarmonic
+{
+    public CVoiceContainerStaticAdditiveSynth__CHarmonicImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerStaticAdditiveSynth__CHarmonicImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WaveformOffset;
 
-  private static nint? _WaveformOffset;
-
-  public ref EWaveform Waveform {
-    get {
-      if (_WaveformOffset == null) {
-        _WaveformOffset = Schema.GetOffset(0xC47956E906E0A8DE);
-      }
-      return ref _Handle.AsRef<EWaveform>(_WaveformOffset!.Value);
+    public ref EWaveform Waveform {
+        get {
+            _WaveformOffset = _WaveformOffset ?? Schema.GetOffset(0xC47956E906E0A8DE);
+            return ref _Handle.AsRef<EWaveform>(_WaveformOffset!.Value);
+        }
     }
-  }
-  private static nint? _FundamentalOffset;
+    private static nint? _FundamentalOffset;
 
-  public ref EMidiNote Fundamental {
-    get {
-      if (_FundamentalOffset == null) {
-        _FundamentalOffset = Schema.GetOffset(0xC47956E9C45D876C);
-      }
-      return ref _Handle.AsRef<EMidiNote>(_FundamentalOffset!.Value);
+    public ref EMidiNote Fundamental {
+        get {
+            _FundamentalOffset = _FundamentalOffset ?? Schema.GetOffset(0xC47956E9C45D876C);
+            return ref _Handle.AsRef<EMidiNote>(_FundamentalOffset!.Value);
+        }
     }
-  }
-  private static nint? _OctaveOffset;
+    private static nint? _OctaveOffset;
 
-  public ref int Octave {
-    get {
-      if (_OctaveOffset == null) {
-        _OctaveOffset = Schema.GetOffset(0xC47956E937F03859);
-      }
-      return ref _Handle.AsRef<int>(_OctaveOffset!.Value);
+    public ref int Octave {
+        get {
+            _OctaveOffset = _OctaveOffset ?? Schema.GetOffset(0xC47956E937F03859);
+            return ref _Handle.AsRef<int>(_OctaveOffset!.Value);
+        }
     }
-  }
-  private static nint? _CentsOffset;
+    private static nint? _CentsOffset;
 
-  public ref float Cents {
-    get {
-      if (_CentsOffset == null) {
-        _CentsOffset = Schema.GetOffset(0xC47956E98E027DCE);
-      }
-      return ref _Handle.AsRef<float>(_CentsOffset!.Value);
+    public ref float Cents {
+        get {
+            _CentsOffset = _CentsOffset ?? Schema.GetOffset(0xC47956E98E027DCE);
+            return ref _Handle.AsRef<float>(_CentsOffset!.Value);
+        }
     }
-  }
-  private static nint? _PhaseOffset;
+    private static nint? _PhaseOffset;
 
-  public ref float Phase {
-    get {
-      if (_PhaseOffset == null) {
-        _PhaseOffset = Schema.GetOffset(0xC47956E93C22A9CA);
-      }
-      return ref _Handle.AsRef<float>(_PhaseOffset!.Value);
+    public ref float Phase {
+        get {
+            _PhaseOffset = _PhaseOffset ?? Schema.GetOffset(0xC47956E93C22A9CA);
+            return ref _Handle.AsRef<float>(_PhaseOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurveOffset;
+    private static nint? _CurveOffset;
 
-  public SchemaUntypedField Curve {
-    get {
-      if (_CurveOffset == null) {
-        _CurveOffset = Schema.GetOffset(0xC47956E9BFFA0B34);
-      }
-      return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+    public SchemaUntypedField Curve {
+        get {
+            _CurveOffset = _CurveOffset ?? Schema.GetOffset(0xC47956E9BFFA0B34);
+            return new SchemaUntypedField(_Handle + _CurveOffset!.Value);
+        }
     }
-  }
-  private static nint? _VolumeScalingOffset;
+    private static nint? _VolumeScalingOffset;
 
-  public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance VolumeScaling {
-    get {
-      if (_VolumeScalingOffset == null) {
-        _VolumeScalingOffset = Schema.GetOffset(0xC47956E9820320D8);
-      }
-      return new CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(_Handle + _VolumeScalingOffset!.Value);
+    public CVoiceContainerStaticAdditiveSynth__CGainScalePerInstance VolumeScaling {
+        get {
+            _VolumeScalingOffset = _VolumeScalingOffset ?? Schema.GetOffset(0xC47956E9820320D8);
+            return new CVoiceContainerStaticAdditiveSynth__CGainScalePerInstanceImpl(_Handle + _VolumeScalingOffset!.Value);
+        }
     }
-  }
 
 
 }

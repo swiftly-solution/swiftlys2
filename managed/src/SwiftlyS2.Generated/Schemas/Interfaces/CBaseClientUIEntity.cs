@@ -8,43 +8,43 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBaseClientUIEntity : CBaseModelEntity, ISchemaClass<CBaseClientUIEntity> {
+public partial interface CBaseClientUIEntity : CBaseModelEntity, ISchemaClass<CBaseClientUIEntity>
+{
+    static CBaseClientUIEntity ISchemaClass<CBaseClientUIEntity>.From(nint handle) => new CBaseClientUIEntityImpl(handle);
+    static int ISchemaClass<CBaseClientUIEntity>.Size => 2440;
+    static string? ISchemaClass<CBaseClientUIEntity>.ClassName => null;
 
-  static CBaseClientUIEntity ISchemaClass<CBaseClientUIEntity>.From(nint handle) => new CBaseClientUIEntityImpl(handle);
-  static int ISchemaClass<CBaseClientUIEntity>.Size => 2440;
-  static string? ISchemaClass<CBaseClientUIEntity>.ClassName => null;
 
-  
-  public ref bool Enabled { get; }
-  
-  public string DialogXMLName { get; set; }
-  
-  public string PanelClassName { get; set; }
-  
-  public string PanelID { get; set; }
-  
-  public CEntityIOOutput CustomOutput0 { get; }
-  
-  public CEntityIOOutput CustomOutput1 { get; }
-  
-  public CEntityIOOutput CustomOutput2 { get; }
-  
-  public CEntityIOOutput CustomOutput3 { get; }
-  
-  public CEntityIOOutput CustomOutput4 { get; }
-  
-  public CEntityIOOutput CustomOutput5 { get; }
-  
-  public CEntityIOOutput CustomOutput6 { get; }
-  
-  public CEntityIOOutput CustomOutput7 { get; }
-  
-  public CEntityIOOutput CustomOutput8 { get; }
-  
-  public CEntityIOOutput CustomOutput9 { get; }
+    public ref bool Enabled { get; }
 
-  public void EnabledUpdated();
-  public void DialogXMLNameUpdated();
-  public void PanelClassNameUpdated();
-  public void PanelIDUpdated();
+    public string DialogXMLName { get; set; }
+
+    public string PanelClassName { get; set; }
+
+    public string PanelID { get; set; }
+
+    public ref CEntityIOOutput CustomOutput0 { get; }
+
+    public ref CEntityIOOutput CustomOutput1 { get; }
+
+    public ref CEntityIOOutput CustomOutput2 { get; }
+
+    public ref CEntityIOOutput CustomOutput3 { get; }
+
+    public ref CEntityIOOutput CustomOutput4 { get; }
+
+    public ref CEntityIOOutput CustomOutput5 { get; }
+
+    public ref CEntityIOOutput CustomOutput6 { get; }
+
+    public ref CEntityIOOutput CustomOutput7 { get; }
+
+    public ref CEntityIOOutput CustomOutput8 { get; }
+
+    public ref CEntityIOOutput CustomOutput9 { get; }
+
+    public void EnabledUpdated();
+    public void DialogXMLNameUpdated();
+    public void PanelClassNameUpdated();
+    public void PanelIDUpdated();
 }

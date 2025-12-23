@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPhysBallSocket : CPhysConstraint, ISchemaClass<CPhysBallSocket> {
+public partial interface CPhysBallSocket : CPhysConstraint, ISchemaClass<CPhysBallSocket>
+{
+    static CPhysBallSocket ISchemaClass<CPhysBallSocket>.From(nint handle) => new CPhysBallSocketImpl(handle);
+    static int ISchemaClass<CPhysBallSocket>.Size => 1400;
+    static string? ISchemaClass<CPhysBallSocket>.ClassName => "phys_ballsocket";
 
-  static CPhysBallSocket ISchemaClass<CPhysBallSocket>.From(nint handle) => new CPhysBallSocketImpl(handle);
-  static int ISchemaClass<CPhysBallSocket>.Size => 1400;
-  static string? ISchemaClass<CPhysBallSocket>.ClassName => "phys_ballsocket";
 
-  
-  public ref float JointFriction { get; }
-  
-  public ref bool EnableSwingLimit { get; }
-  
-  public ref float SwingLimit { get; }
-  
-  public ref bool EnableTwistLimit { get; }
-  
-  public ref float MinTwistAngle { get; }
-  
-  public ref float MaxTwistAngle { get; }
+    public ref float JointFriction { get; }
+
+    public ref bool EnableSwingLimit { get; }
+
+    public ref float SwingLimit { get; }
+
+    public ref bool EnableTwistLimit { get; }
+
+    public ref float MinTwistAngle { get; }
+
+    public ref float MaxTwistAngle { get; }
 
 
 }

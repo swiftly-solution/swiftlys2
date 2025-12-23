@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum VMixGraphCommandID_t : uint {
-
+public enum VMixGraphCommandID_t : uint
+{
  CMD_INVALID = uint.MaxValue,
 
  CMD_CONTROL_INPUT_STORE = 1,

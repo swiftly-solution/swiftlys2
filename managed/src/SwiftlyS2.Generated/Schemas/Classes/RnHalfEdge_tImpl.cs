@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnHalfEdge_tImpl : SchemaClass, RnHalfEdge_t {
+internal partial class RnHalfEdge_tImpl : SchemaClass, RnHalfEdge_t
+{
+    public RnHalfEdge_tImpl(nint handle) : base(handle) { }
 
-  public RnHalfEdge_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NextOffset;
 
-  private static nint? _NextOffset;
-
-  public ref byte Next {
-    get {
-      if (_NextOffset == null) {
-        _NextOffset = Schema.GetOffset(0xB67DE42E8D575D9C);
-      }
-      return ref _Handle.AsRef<byte>(_NextOffset!.Value);
+    public ref byte Next {
+        get {
+            _NextOffset = _NextOffset ?? Schema.GetOffset(0xB67DE42E8D575D9C);
+            return ref _Handle.AsRef<byte>(_NextOffset!.Value);
+        }
     }
-  }
-  private static nint? _TwinOffset;
+    private static nint? _TwinOffset;
 
-  public ref byte Twin {
-    get {
-      if (_TwinOffset == null) {
-        _TwinOffset = Schema.GetOffset(0xB67DE42EF8C9A257);
-      }
-      return ref _Handle.AsRef<byte>(_TwinOffset!.Value);
+    public ref byte Twin {
+        get {
+            _TwinOffset = _TwinOffset ?? Schema.GetOffset(0xB67DE42EF8C9A257);
+            return ref _Handle.AsRef<byte>(_TwinOffset!.Value);
+        }
     }
-  }
-  private static nint? _OriginOffset;
+    private static nint? _OriginOffset;
 
-  public ref byte Origin {
-    get {
-      if (_OriginOffset == null) {
-        _OriginOffset = Schema.GetOffset(0xB67DE42E57B6C543);
-      }
-      return ref _Handle.AsRef<byte>(_OriginOffset!.Value);
+    public ref byte Origin {
+        get {
+            _OriginOffset = _OriginOffset ?? Schema.GetOffset(0xB67DE42E57B6C543);
+            return ref _Handle.AsRef<byte>(_OriginOffset!.Value);
+        }
     }
-  }
-  private static nint? _FaceOffset;
+    private static nint? _FaceOffset;
 
-  public ref byte Face {
-    get {
-      if (_FaceOffset == null) {
-        _FaceOffset = Schema.GetOffset(0xB67DE42EABBCFB38);
-      }
-      return ref _Handle.AsRef<byte>(_FaceOffset!.Value);
+    public ref byte Face {
+        get {
+            _FaceOffset = _FaceOffset ?? Schema.GetOffset(0xB67DE42EABBCFB38);
+            return ref _Handle.AsRef<byte>(_FaceOffset!.Value);
+        }
     }
-  }
 
 
 }

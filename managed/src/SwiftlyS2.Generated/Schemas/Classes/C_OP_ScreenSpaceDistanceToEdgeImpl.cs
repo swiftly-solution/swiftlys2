@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_ScreenSpaceDistanceToEdgeImpl : CParticleFunctionOperatorImpl, C_OP_ScreenSpaceDistanceToEdge {
+internal partial class C_OP_ScreenSpaceDistanceToEdgeImpl : CParticleFunctionOperatorImpl, C_OP_ScreenSpaceDistanceToEdge
+{
+    public C_OP_ScreenSpaceDistanceToEdgeImpl(nint handle) : base(handle) { }
 
-  public C_OP_ScreenSpaceDistanceToEdgeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldOutputOffset;
 
-  private static nint? _FieldOutputOffset;
-
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x5525036EE5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x5525036EE5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxDistFromEdgeOffset;
+    private static nint? _MaxDistFromEdgeOffset;
 
-  public CPerParticleFloatInput MaxDistFromEdge {
-    get {
-      if (_MaxDistFromEdgeOffset == null) {
-        _MaxDistFromEdgeOffset = Schema.GetOffset(0x5525036E3E73EC16);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _MaxDistFromEdgeOffset!.Value);
+    public CPerParticleFloatInput MaxDistFromEdge {
+        get {
+            _MaxDistFromEdgeOffset = _MaxDistFromEdgeOffset ?? Schema.GetOffset(0x5525036E3E73EC16);
+            return new CPerParticleFloatInputImpl(_Handle + _MaxDistFromEdgeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputRemapOffset;
+    private static nint? _OutputRemapOffset;
 
-  public CParticleRemapFloatInput OutputRemap {
-    get {
-      if (_OutputRemapOffset == null) {
-        _OutputRemapOffset = Schema.GetOffset(0x5525036E1239396F);
-      }
-      return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+    public CParticleRemapFloatInput OutputRemap {
+        get {
+            _OutputRemapOffset = _OutputRemapOffset ?? Schema.GetOffset(0x5525036E1239396F);
+            return new CParticleRemapFloatInputImpl(_Handle + _OutputRemapOffset!.Value);
+        }
     }
-  }
-  private static nint? _SetMethodOffset;
+    private static nint? _SetMethodOffset;
 
-  public ref ParticleSetMethod_t SetMethod {
-    get {
-      if (_SetMethodOffset == null) {
-        _SetMethodOffset = Schema.GetOffset(0x5525036EFB53C31E);
-      }
-      return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+    public ref ParticleSetMethod_t SetMethod {
+        get {
+            _SetMethodOffset = _SetMethodOffset ?? Schema.GetOffset(0x5525036EFB53C31E);
+            return ref _Handle.AsRef<ParticleSetMethod_t>(_SetMethodOffset!.Value);
+        }
     }
-  }
 
 
 }

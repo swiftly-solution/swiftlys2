@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGameMoney : CRulePointEntity, ISchemaClass<CGameMoney> {
+public partial interface CGameMoney : CRulePointEntity, ISchemaClass<CGameMoney>
+{
+    static CGameMoney ISchemaClass<CGameMoney>.From(nint handle) => new CGameMoneyImpl(handle);
+    static int ISchemaClass<CGameMoney>.Size => 2120;
+    static string? ISchemaClass<CGameMoney>.ClassName => "game_money";
 
-  static CGameMoney ISchemaClass<CGameMoney>.From(nint handle) => new CGameMoneyImpl(handle);
-  static int ISchemaClass<CGameMoney>.Size => 2120;
-  static string? ISchemaClass<CGameMoney>.ClassName => "game_money";
 
-  
-  public CEntityIOOutput OnMoneySpent { get; }
-  
-  public CEntityIOOutput OnMoneySpentFail { get; }
-  
-  public ref int Money { get; }
-  
-  public string StrAwardText { get; set; }
+    public ref CEntityIOOutput OnMoneySpent { get; }
+
+    public ref CEntityIOOutput OnMoneySpentFail { get; }
+
+    public ref int Money { get; }
+
+    public string StrAwardText { get; set; }
 
 
 }

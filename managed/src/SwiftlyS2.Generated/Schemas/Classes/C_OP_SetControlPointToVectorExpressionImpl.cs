@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_SetControlPointToVectorExpressionImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointToVectorExpression {
+internal partial class C_OP_SetControlPointToVectorExpressionImpl : CParticleFunctionPreEmissionImpl, C_OP_SetControlPointToVectorExpression
+{
+    public C_OP_SetControlPointToVectorExpressionImpl(nint handle) : base(handle) { }
 
-  public C_OP_SetControlPointToVectorExpressionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ExpressionOffset;
 
-  private static nint? _ExpressionOffset;
-
-  public ref VectorExpressionType_t Expression {
-    get {
-      if (_ExpressionOffset == null) {
-        _ExpressionOffset = Schema.GetOffset(0x67E9EFDE160B2427);
-      }
-      return ref _Handle.AsRef<VectorExpressionType_t>(_ExpressionOffset!.Value);
+    public ref VectorExpressionType_t Expression {
+        get {
+            _ExpressionOffset = _ExpressionOffset ?? Schema.GetOffset(0x67E9EFDE160B2427);
+            return ref _Handle.AsRef<VectorExpressionType_t>(_ExpressionOffset!.Value);
+        }
     }
-  }
-  private static nint? _OutputCPOffset;
+    private static nint? _OutputCPOffset;
 
-  public ref int OutputCP {
-    get {
-      if (_OutputCPOffset == null) {
-        _OutputCPOffset = Schema.GetOffset(0x67E9EFDE50DF5703);
-      }
-      return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
+    public ref int OutputCP {
+        get {
+            _OutputCPOffset = _OutputCPOffset ?? Schema.GetOffset(0x67E9EFDE50DF5703);
+            return ref _Handle.AsRef<int>(_OutputCPOffset!.Value);
+        }
     }
-  }
-  private static nint? _Input1Offset;
+    private static nint? _Input1Offset;
 
-  public CParticleCollectionVecInput Input1 {
-    get {
-      if (_Input1Offset == null) {
-        _Input1Offset = Schema.GetOffset(0x67E9EFDEE17F27DA);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _Input1Offset!.Value);
+    public CParticleCollectionVecInput Input1 {
+        get {
+            _Input1Offset = _Input1Offset ?? Schema.GetOffset(0x67E9EFDEE17F27DA);
+            return new CParticleCollectionVecInputImpl(_Handle + _Input1Offset!.Value);
+        }
     }
-  }
-  private static nint? _Input2Offset;
+    private static nint? _Input2Offset;
 
-  public CParticleCollectionVecInput Input2 {
-    get {
-      if (_Input2Offset == null) {
-        _Input2Offset = Schema.GetOffset(0x67E9EFDEE07F2647);
-      }
-      return new CParticleCollectionVecInputImpl(_Handle + _Input2Offset!.Value);
+    public CParticleCollectionVecInput Input2 {
+        get {
+            _Input2Offset = _Input2Offset ?? Schema.GetOffset(0x67E9EFDEE07F2647);
+            return new CParticleCollectionVecInputImpl(_Handle + _Input2Offset!.Value);
+        }
     }
-  }
-  private static nint? _LerpOffset;
+    private static nint? _LerpOffset;
 
-  public CPerParticleFloatInput Lerp {
-    get {
-      if (_LerpOffset == null) {
-        _LerpOffset = Schema.GetOffset(0x67E9EFDE622FAB06);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _LerpOffset!.Value);
+    public CPerParticleFloatInput Lerp {
+        get {
+            _LerpOffset = _LerpOffset ?? Schema.GetOffset(0x67E9EFDE622FAB06);
+            return new CPerParticleFloatInputImpl(_Handle + _LerpOffset!.Value);
+        }
     }
-  }
-  private static nint? _NormalizedOutputOffset;
+    private static nint? _NormalizedOutputOffset;
 
-  public ref bool NormalizedOutput {
-    get {
-      if (_NormalizedOutputOffset == null) {
-        _NormalizedOutputOffset = Schema.GetOffset(0x67E9EFDE0AA98C55);
-      }
-      return ref _Handle.AsRef<bool>(_NormalizedOutputOffset!.Value);
+    public ref bool NormalizedOutput {
+        get {
+            _NormalizedOutputOffset = _NormalizedOutputOffset ?? Schema.GetOffset(0x67E9EFDE0AA98C55);
+            return ref _Handle.AsRef<bool>(_NormalizedOutputOffset!.Value);
+        }
     }
-  }
 
 
 }

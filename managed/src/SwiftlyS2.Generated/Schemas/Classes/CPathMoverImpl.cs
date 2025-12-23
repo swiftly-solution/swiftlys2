@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPathMoverImpl : CPathSimpleImpl, CPathMover {
+internal partial class CPathMoverImpl : CPathSimpleImpl, CPathMover
+{
+    public CPathMoverImpl(nint handle) : base(handle) { }
 
-  public CPathMoverImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PathNodesOffset;
 
-  private static nint? _PathNodesOffset;
-
-  public ref CUtlVector<CHandle<CMoverPathNode>> PathNodes {
-    get {
-      if (_PathNodesOffset == null) {
-        _PathNodesOffset = Schema.GetOffset(0x459CE4C6FD746CE3);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CMoverPathNode>>>(_PathNodesOffset!.Value);
+    public ref CUtlVector<CHandle<CMoverPathNode>> PathNodes {
+        get {
+            _PathNodesOffset = _PathNodesOffset ?? Schema.GetOffset(0x459CE4C6FD746CE3);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CMoverPathNode>>>(_PathNodesOffset!.Value);
+        }
     }
-  }
-  private static nint? _MoversOffset;
+    private static nint? _MoversOffset;
 
-  public ref CUtlVector<CHandle<CFuncMover>> Movers {
-    get {
-      if (_MoversOffset == null) {
-        _MoversOffset = Schema.GetOffset(0x459CE4C65C9C4C93);
-      }
-      return ref _Handle.AsRef<CUtlVector<CHandle<CFuncMover>>>(_MoversOffset!.Value);
+    public ref CUtlVector<CHandle<CFuncMover>> Movers {
+        get {
+            _MoversOffset = _MoversOffset ?? Schema.GetOffset(0x459CE4C65C9C4C93);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CFuncMover>>>(_MoversOffset!.Value);
+        }
     }
-  }
-  private static nint? _XInitialPathWorldToLocalOffset;
+    private static nint? _XInitialPathWorldToLocalOffset;
 
-  public ref CTransform XInitialPathWorldToLocal {
-    get {
-      if (_XInitialPathWorldToLocalOffset == null) {
-        _XInitialPathWorldToLocalOffset = Schema.GetOffset(0x459CE4C6FE5D385E);
-      }
-      return ref _Handle.AsRef<CTransform>(_XInitialPathWorldToLocalOffset!.Value);
+    public ref CTransform XInitialPathWorldToLocal {
+        get {
+            _XInitialPathWorldToLocalOffset = _XInitialPathWorldToLocalOffset ?? Schema.GetOffset(0x459CE4C6FE5D385E);
+            return ref _Handle.AsRef<CTransform>(_XInitialPathWorldToLocalOffset!.Value);
+        }
     }
-  }
 
 
 }

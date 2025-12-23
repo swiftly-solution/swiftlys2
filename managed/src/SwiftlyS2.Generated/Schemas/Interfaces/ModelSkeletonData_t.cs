@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ModelSkeletonData_t : ISchemaClass<ModelSkeletonData_t> {
+public partial interface ModelSkeletonData_t : ISchemaClass<ModelSkeletonData_t>
+{
+    static ModelSkeletonData_t ISchemaClass<ModelSkeletonData_t>.From(nint handle) => new ModelSkeletonData_tImpl(handle);
+    static int ISchemaClass<ModelSkeletonData_t>.Size => 168;
+    static string? ISchemaClass<ModelSkeletonData_t>.ClassName => null;
 
-  static ModelSkeletonData_t ISchemaClass<ModelSkeletonData_t>.From(nint handle) => new ModelSkeletonData_tImpl(handle);
-  static int ISchemaClass<ModelSkeletonData_t>.Size => 168;
-  static string? ISchemaClass<ModelSkeletonData_t>.ClassName => null;
 
-  
-  public ref CUtlVector<CUtlString> BoneName { get; }
-  
-  public ref CUtlVector<short> Parent { get; }
-  
-  public ref CUtlVector<float> BoneSphere { get; }
-  
-  public ref CUtlVector<uint> Flag { get; }
-  
-  public ref CUtlVector<Vector> BonePosParent { get; }
-  
-  public ref CUtlVector<SchemaUntypedField> BoneRotParent { get; }
-  
-  public ref CUtlVector<float> BoneScaleParent { get; }
+    public ref CUtlVector<CUtlString> BoneName { get; }
+
+    public ref CUtlVector<short> Parent { get; }
+
+    public ref CUtlVector<float> BoneSphere { get; }
+
+    public ref CUtlVector<uint> Flag { get; }
+
+    public ref CUtlVector<Vector> BonePosParent { get; }
+
+    public ref CUtlVector<QuaternionStorage> BoneRotParent { get; }
+
+    public ref CUtlVector<float> BoneScaleParent { get; }
 
 
 }

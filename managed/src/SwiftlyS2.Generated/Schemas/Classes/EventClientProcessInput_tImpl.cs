@@ -6,57 +6,48 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventClientProcessInput_tImpl : SchemaClass, EventClientProcessInput_t {
+internal partial class EventClientProcessInput_tImpl : SchemaClass, EventClientProcessInput_t
+{
+    public EventClientProcessInput_tImpl(nint handle) : base(handle) { }
 
-  public EventClientProcessInput_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _LoopStateOffset;
 
-  private static nint? _LoopStateOffset;
-
-  public EngineLoopState_t LoopState {
-    get {
-      if (_LoopStateOffset == null) {
-        _LoopStateOffset = Schema.GetOffset(0x406EC290F928A2EC);
-      }
-      return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+    public EngineLoopState_t LoopState {
+        get {
+            _LoopStateOffset = _LoopStateOffset ?? Schema.GetOffset(0x406EC290F928A2EC);
+            return new EngineLoopState_tImpl(_Handle + _LoopStateOffset!.Value);
+        }
     }
-  }
-  private static nint? _RealTimeOffset;
+    private static nint? _RealTimeOffset;
 
-  public ref float RealTime {
-    get {
-      if (_RealTimeOffset == null) {
-        _RealTimeOffset = Schema.GetOffset(0x406EC2901168EC02);
-      }
-      return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+    public ref float RealTime {
+        get {
+            _RealTimeOffset = _RealTimeOffset ?? Schema.GetOffset(0x406EC2901168EC02);
+            return ref _Handle.AsRef<float>(_RealTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _TickIntervalOffset;
+    private static nint? _TickIntervalOffset;
 
-  public ref float TickInterval {
-    get {
-      if (_TickIntervalOffset == null) {
-        _TickIntervalOffset = Schema.GetOffset(0x406EC290D279D07B);
-      }
-      return ref _Handle.AsRef<float>(_TickIntervalOffset!.Value);
+    public ref float TickInterval {
+        get {
+            _TickIntervalOffset = _TickIntervalOffset ?? Schema.GetOffset(0x406EC290D279D07B);
+            return ref _Handle.AsRef<float>(_TickIntervalOffset!.Value);
+        }
     }
-  }
-  private static nint? _TickStartTimeOffset;
+    private static nint? _TickStartTimeOffset;
 
-  public ref double TickStartTime {
-    get {
-      if (_TickStartTimeOffset == null) {
-        _TickStartTimeOffset = Schema.GetOffset(0x406EC29068A38BE7);
-      }
-      return ref _Handle.AsRef<double>(_TickStartTimeOffset!.Value);
+    public ref double TickStartTime {
+        get {
+            _TickStartTimeOffset = _TickStartTimeOffset ?? Schema.GetOffset(0x406EC29068A38BE7);
+            return ref _Handle.AsRef<double>(_TickStartTimeOffset!.Value);
+        }
     }
-  }
 
 
 }

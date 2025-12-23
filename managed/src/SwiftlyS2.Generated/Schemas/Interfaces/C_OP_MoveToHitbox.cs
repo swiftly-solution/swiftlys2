@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_MoveToHitbox : CParticleFunctionOperator, ISchemaClass<C_OP_MoveToHitbox> {
+public partial interface C_OP_MoveToHitbox : CParticleFunctionOperator, ISchemaClass<C_OP_MoveToHitbox>
+{
+    static C_OP_MoveToHitbox ISchemaClass<C_OP_MoveToHitbox>.From(nint handle) => new C_OP_MoveToHitboxImpl(handle);
+    static int ISchemaClass<C_OP_MoveToHitbox>.Size => 1184;
+    static string? ISchemaClass<C_OP_MoveToHitbox>.ClassName => null;
 
-  static C_OP_MoveToHitbox ISchemaClass<C_OP_MoveToHitbox>.From(nint handle) => new C_OP_MoveToHitboxImpl(handle);
-  static int ISchemaClass<C_OP_MoveToHitbox>.Size => 1184;
-  static string? ISchemaClass<C_OP_MoveToHitbox>.ClassName => null;
 
-  
-  public CParticleModelInput ModelInput { get; }
-  
-  public CParticleTransformInput TransformInput { get; }
-  
-  public ref float LifeTimeLerpStart { get; }
-  
-  public ref float LifeTimeLerpEnd { get; }
-  
-  public ref float PrevPosScale { get; }
-  
-  public string HitboxSetName { get; set; }
-  
-  public ref bool UseBones { get; }
-  
-  public ref HitboxLerpType_t LerpType { get; }
-  
-  public CPerParticleFloatInput Interpolation { get; }
+    public CParticleModelInput ModelInput { get; }
+
+    public CParticleTransformInput TransformInput { get; }
+
+    public ref float LifeTimeLerpStart { get; }
+
+    public ref float LifeTimeLerpEnd { get; }
+
+    public ref float PrevPosScale { get; }
+
+    public string HitboxSetName { get; set; }
+
+    public ref bool UseBones { get; }
+
+    public ref HitboxLerpType_t LerpType { get; }
+
+    public CPerParticleFloatInput Interpolation { get; }
 
 
 }

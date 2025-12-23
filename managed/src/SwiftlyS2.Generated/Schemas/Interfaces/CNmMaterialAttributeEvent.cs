@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmMaterialAttributeEvent : CNmEvent, ISchemaClass<CNmMaterialAttributeEvent> {
+public partial interface CNmMaterialAttributeEvent : CNmEvent, ISchemaClass<CNmMaterialAttributeEvent>
+{
+    static CNmMaterialAttributeEvent ISchemaClass<CNmMaterialAttributeEvent>.From(nint handle) => new CNmMaterialAttributeEventImpl(handle);
+    static int ISchemaClass<CNmMaterialAttributeEvent>.Size => 304;
+    static string? ISchemaClass<CNmMaterialAttributeEvent>.ClassName => null;
 
-  static CNmMaterialAttributeEvent ISchemaClass<CNmMaterialAttributeEvent>.From(nint handle) => new CNmMaterialAttributeEventImpl(handle);
-  static int ISchemaClass<CNmMaterialAttributeEvent>.Size => 304;
-  static string? ISchemaClass<CNmMaterialAttributeEvent>.ClassName => null;
 
-  
-  public string AttributeName { get; set; }
-  
-  public ref CUtlStringToken AttributeNameToken { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField X { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Y { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Z { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField W { get; }
+    public string AttributeName { get; set; }
+
+    public ref CUtlStringToken AttributeNameToken { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField X { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Y { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Z { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField W { get; }
 
 
 }

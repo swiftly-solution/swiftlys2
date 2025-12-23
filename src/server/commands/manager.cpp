@@ -1,6 +1,6 @@
 /************************************************************************************************
  * SwiftlyS2 is a scripting framework for Source2-based games.
- * Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ * Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -112,7 +112,7 @@ void CServerCommands::Shutdown()
 // @returns 2 - command is silent
 // @returns -1 - invalid controller
 // @returns 0 - is not command
-int CServerCommands::HandleCommand(int playerid, const std::string& text)
+int CServerCommands::HandleCommand(int playerid, const std::string& text, bool dryrun)
 {
     if (text == "" || text.size() == 0)
     {
@@ -432,7 +432,7 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
                 }
             }
 
-            int handleCommandReturn = servercommands->HandleCommand(slot.Get(), text);
+            int handleCommandReturn = servercommands->HandleCommand(slot.Get(), text, false);
             if (handleCommandReturn == 2 || !servercommands->HandleClientChat(slot.Get(), text, teamonly))
             {
                 return;

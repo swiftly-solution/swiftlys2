@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum DoorState_t : uint {
-
+public enum DoorState_t : uint
+{
  DOOR_STATE_CLOSED = 0,
 
  DOOR_STATE_OPENING = 1,

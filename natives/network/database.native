@@ -1,6 +1,13 @@
 class Database
 
-string GetDefaultConnection = void
-string GetDefaultConnectionCredentials = void
-string GetCredentials = string connectionName
+string GetDefaultDriver = void
+string GetDefaultConnectionName = void
+string GetConnectionDriver = string connectionName
+string GetConnectionHost = string connectionName
+string GetConnectionDatabase = string connectionName
+string GetConnectionUser = string connectionName
+string GetConnectionPass = string connectionName
+uint32 GetConnectionTimeout = string connectionName
+uint16 GetConnectionPort = string connectionName
+string GetConnectionRawUri = string connectionName
 bool ConnectionExists = string connectionName

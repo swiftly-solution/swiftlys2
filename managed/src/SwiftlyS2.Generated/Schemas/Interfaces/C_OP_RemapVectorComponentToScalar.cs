@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapVectorComponentToScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapVectorComponentToScalar> {
+public partial interface C_OP_RemapVectorComponentToScalar : CParticleFunctionOperator, ISchemaClass<C_OP_RemapVectorComponentToScalar>
+{
+    static C_OP_RemapVectorComponentToScalar ISchemaClass<C_OP_RemapVectorComponentToScalar>.From(nint handle) => new C_OP_RemapVectorComponentToScalarImpl(handle);
+    static int ISchemaClass<C_OP_RemapVectorComponentToScalar>.Size => 480;
+    static string? ISchemaClass<C_OP_RemapVectorComponentToScalar>.ClassName => null;
 
-  static C_OP_RemapVectorComponentToScalar ISchemaClass<C_OP_RemapVectorComponentToScalar>.From(nint handle) => new C_OP_RemapVectorComponentToScalarImpl(handle);
-  static int ISchemaClass<C_OP_RemapVectorComponentToScalar>.Size => 480;
-  static string? ISchemaClass<C_OP_RemapVectorComponentToScalar>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref int Component { get; }
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref int Component { get; }
 
 
 }

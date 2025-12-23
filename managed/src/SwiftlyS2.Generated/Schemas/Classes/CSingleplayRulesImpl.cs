@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CSingleplayRulesImpl : CGameRulesImpl, CSingleplayRules {
+internal partial class CSingleplayRulesImpl : CGameRulesImpl, CSingleplayRules
+{
+    public CSingleplayRulesImpl(nint handle) : base(handle) { }
 
-  public CSingleplayRulesImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SinglePlayerGameEndingOffset;
 
-  private static nint? _SinglePlayerGameEndingOffset;
-
-  public ref bool SinglePlayerGameEnding {
-    get {
-      if (_SinglePlayerGameEndingOffset == null) {
-        _SinglePlayerGameEndingOffset = Schema.GetOffset(0x633D071BAD9EAF1D);
-      }
-      return ref _Handle.AsRef<bool>(_SinglePlayerGameEndingOffset!.Value);
+    public ref bool SinglePlayerGameEnding {
+        get {
+            _SinglePlayerGameEndingOffset = _SinglePlayerGameEndingOffset ?? Schema.GetOffset(0x633D071BAD9EAF1D);
+            return ref _Handle.AsRef<bool>(_SinglePlayerGameEndingOffset!.Value);
+        }
     }
-  }
 
 
 }

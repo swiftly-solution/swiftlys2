@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class MaterialGroup_tImpl : SchemaClass, MaterialGroup_t {
+internal partial class MaterialGroup_tImpl : SchemaClass, MaterialGroup_t
+{
+    public MaterialGroup_tImpl(nint handle) : base(handle) { }
 
-  public MaterialGroup_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x702431604D8F5786);
+            return Schema.GetString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x702431604D8F5786);
+            Schema.SetString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _MaterialsOffset;
 
-  public string Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x702431604D8F5786);
-      }
-      var ptr = _Handle.Read<nint>(_NameOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>> Materials {
+        get {
+            _MaterialsOffset = _MaterialsOffset ?? Schema.GetOffset(0x7024316060E46909);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>>>(_MaterialsOffset!.Value);
+        }
     }
-    set {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x702431604D8F5786);
-      }
-      Schema.SetString(_Handle, _NameOffset!.Value, value);
-    }
-  } 
-  private static nint? _MaterialsOffset;
-
-  public ref CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>> Materials {
-    get {
-      if (_MaterialsOffset == null) {
-        _MaterialsOffset = Schema.GetOffset(0x7024316060E46909);
-      }
-      return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeIMaterial2>>>(_MaterialsOffset!.Value);
-    }
-  }
 
 
 }

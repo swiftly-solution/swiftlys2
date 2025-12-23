@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface ParticlePreviewBodyGroup_t : ISchemaClass<ParticlePreviewBodyGroup_t> {
+public partial interface ParticlePreviewBodyGroup_t : ISchemaClass<ParticlePreviewBodyGroup_t>
+{
+    static ParticlePreviewBodyGroup_t ISchemaClass<ParticlePreviewBodyGroup_t>.From(nint handle) => new ParticlePreviewBodyGroup_tImpl(handle);
+    static int ISchemaClass<ParticlePreviewBodyGroup_t>.Size => 16;
+    static string? ISchemaClass<ParticlePreviewBodyGroup_t>.ClassName => null;
 
-  static ParticlePreviewBodyGroup_t ISchemaClass<ParticlePreviewBodyGroup_t>.From(nint handle) => new ParticlePreviewBodyGroup_tImpl(handle);
-  static int ISchemaClass<ParticlePreviewBodyGroup_t>.Size => 16;
-  static string? ISchemaClass<ParticlePreviewBodyGroup_t>.ClassName => null;
 
-  
-  public string BodyGroupName { get; set; }
-  
-  public ref int Value { get; }
+    public string BodyGroupName { get; set; }
+
+    public ref int Value { get; }
 
 
 }

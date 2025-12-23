@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 #else
 #include <dlfcn.h>
 #endif
-#include <map>
 #include <fmt/format.h>
+#include <map>
 
 #include "functions.h"
 #include <api/shared/files.h>
@@ -38,14 +38,7 @@ const char* dlerror()
 
     num = GetLastError();
 
-    if (FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-        NULL,
-        num,
-        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-        buf,
-        sizeof(buf),
-        NULL)
-        == 0)
+    if (FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, num, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buf, sizeof(buf), NULL) == 0)
     {
         _snprintf(buf, sizeof(buf), "unknown error %x", num);
     }
@@ -56,7 +49,7 @@ const char* dlerror()
 
 void* GetBinaryFunction(std::string binary_relative_path, const std::string& function_name, std::string& error)
 {
-    binary_relative_path = GeneratePath(binary_relative_path);
+    binary_relative_path = Files::GeneratePath(binary_relative_path);
 
     if (loaded_functions.contains(binary_relative_path) && loaded_functions[binary_relative_path].contains(function_name))
     {
@@ -117,10 +110,12 @@ void* GetBinaryFunction(std::string binary_relative_path, const std::string& fun
 
 void ClearBinaryCache(std::string binary_relative_path)
 {
-    std::string path = GeneratePath(binary_relative_path);
+    std::string path = Files::GeneratePath(binary_relative_path);
 
     if (loaded_functions.contains(path))
+    {
         loaded_functions.erase(path);
+    }
 
     if (loaded_handles.contains(path))
     {
@@ -128,7 +123,7 @@ void ClearBinaryCache(std::string binary_relative_path)
         FreeLibrary(static_cast<HMODULE>(loaded_handles[path]));
 #else
         dlclose(loaded_handles[path]);
-#endif 
+#endif
         loaded_handles.erase(path);
     }
 }

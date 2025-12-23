@@ -6,27 +6,19 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class VMixEQ8Desc_tImpl : SchemaClass, VMixEQ8Desc_t {
+internal partial class VMixEQ8Desc_tImpl : SchemaClass, VMixEQ8Desc_t
+{
+    public VMixEQ8Desc_tImpl(nint handle) : base(handle) { }
 
-  public VMixEQ8Desc_tImpl(nint handle) : base(handle) {
-  }
-
-  private static nint? _StagesOffset;
-
-  public SchemaUntypedField Stages {
-    get {
-      if (_StagesOffset == null) {
-        _StagesOffset = Schema.GetOffset(0xBF8A6F07B955349A);
-      }
-      return new SchemaUntypedField(_Handle + _StagesOffset!.Value);
+    public ISchemaClassFixedArray<VMixFilterDesc_t> Stages {
+        get => new SchemaClassFixedArray<VMixFilterDesc_t>(_Handle, 0xBF8A6F07B955349A, 8, 16, 4);
     }
-  }
 
 
 }

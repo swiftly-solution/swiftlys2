@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPulse_ConstantImpl : SchemaClass, CPulse_Constant {
+internal partial class CPulse_ConstantImpl : SchemaClass, CPulse_Constant
+{
+    public CPulse_ConstantImpl(nint handle) : base(handle) { }
 
-  public CPulse_ConstantImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TypeOffset;
 
-  private static nint? _TypeOffset;
-
-  public SchemaUntypedField Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x28B1B9F08ED6D5CD);
-      }
-      return new SchemaUntypedField(_Handle + _TypeOffset!.Value);
+    public SchemaUntypedField Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x28B1B9F08ED6D5CD);
+            return new SchemaUntypedField(_Handle + _TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ValueOffset;
+    private static nint? _ValueOffset;
 
-  public SchemaUntypedField Value {
-    get {
-      if (_ValueOffset == null) {
-        _ValueOffset = Schema.GetOffset(0x28B1B9F0DCB0894A);
-      }
-      return new SchemaUntypedField(_Handle + _ValueOffset!.Value);
+    public SchemaUntypedField Value {
+        get {
+            _ValueOffset = _ValueOffset ?? Schema.GetOffset(0x28B1B9F0DCB0894A);
+            return new SchemaUntypedField(_Handle + _ValueOffset!.Value);
+        }
     }
-  }
 
 
 }

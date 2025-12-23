@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_SetControlPointToCPVelocity : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToCPVelocity> {
+public partial interface C_OP_SetControlPointToCPVelocity : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointToCPVelocity>
+{
+    static C_OP_SetControlPointToCPVelocity ISchemaClass<C_OP_SetControlPointToCPVelocity>.From(nint handle) => new C_OP_SetControlPointToCPVelocityImpl(handle);
+    static int ISchemaClass<C_OP_SetControlPointToCPVelocity>.Size => 2216;
+    static string? ISchemaClass<C_OP_SetControlPointToCPVelocity>.ClassName => null;
 
-  static C_OP_SetControlPointToCPVelocity ISchemaClass<C_OP_SetControlPointToCPVelocity>.From(nint handle) => new C_OP_SetControlPointToCPVelocityImpl(handle);
-  static int ISchemaClass<C_OP_SetControlPointToCPVelocity>.Size => 2216;
-  static string? ISchemaClass<C_OP_SetControlPointToCPVelocity>.ClassName => null;
 
-  
-  public ref int CPInput { get; }
-  
-  public ref int CPOutputVel { get; }
-  
-  public ref bool Normalize { get; }
-  
-  public ref int CPOutputMag { get; }
-  
-  public ref int CPField { get; }
-  
-  public CParticleCollectionVecInput ComparisonVelocity { get; }
+    public ref int CPInput { get; }
+
+    public ref int CPOutputVel { get; }
+
+    public ref bool Normalize { get; }
+
+    public ref int CPOutputMag { get; }
+
+    public ref int CPField { get; }
+
+    public CParticleCollectionVecInput ComparisonVelocity { get; }
 
 
 }

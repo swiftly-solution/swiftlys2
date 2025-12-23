@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMorphRectData : ISchemaClass<CMorphRectData> {
+public partial interface CMorphRectData : ISchemaClass<CMorphRectData>
+{
+    static CMorphRectData ISchemaClass<CMorphRectData>.From(nint handle) => new CMorphRectDataImpl(handle);
+    static int ISchemaClass<CMorphRectData>.Size => 40;
+    static string? ISchemaClass<CMorphRectData>.ClassName => null;
 
-  static CMorphRectData ISchemaClass<CMorphRectData>.From(nint handle) => new CMorphRectDataImpl(handle);
-  static int ISchemaClass<CMorphRectData>.Size => 40;
-  static string? ISchemaClass<CMorphRectData>.ClassName => null;
 
-  
-  public ref short XLeftDst { get; }
-  
-  public ref short YTopDst { get; }
-  
-  public ref float UWidthSrc { get; }
-  
-  public ref float VHeightSrc { get; }
-  
-  public ref CUtlVector<CMorphBundleData> BundleDatas { get; }
+    public ref short XLeftDst { get; }
+
+    public ref short YTopDst { get; }
+
+    public ref float UWidthSrc { get; }
+
+    public ref float VHeightSrc { get; }
+
+    public ref CUtlVector<CMorphBundleData> BundleDatas { get; }
 
 
 }

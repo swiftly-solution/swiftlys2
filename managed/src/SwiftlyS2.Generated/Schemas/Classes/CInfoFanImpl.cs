@@ -6,75 +6,55 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInfoFanImpl : CPointEntityImpl, CInfoFan {
+internal partial class CInfoFanImpl : CPointEntityImpl, CInfoFan
+{
+    public CInfoFanImpl(nint handle) : base(handle) { }
 
-  public CInfoFanImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FanForceMaxRadiusOffset;
 
-  private static nint? _FanForceMaxRadiusOffset;
-
-  public ref float FanForceMaxRadius {
-    get {
-      if (_FanForceMaxRadiusOffset == null) {
-        _FanForceMaxRadiusOffset = Schema.GetOffset(0x1372EEA33EA45A67);
-      }
-      return ref _Handle.AsRef<float>(_FanForceMaxRadiusOffset!.Value);
+    public ref float FanForceMaxRadius {
+        get {
+            _FanForceMaxRadiusOffset = _FanForceMaxRadiusOffset ?? Schema.GetOffset(0x1372EEA33EA45A67);
+            return ref _Handle.AsRef<float>(_FanForceMaxRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _FanForceMinRadiusOffset;
+    private static nint? _FanForceMinRadiusOffset;
 
-  public ref float FanForceMinRadius {
-    get {
-      if (_FanForceMinRadiusOffset == null) {
-        _FanForceMinRadiusOffset = Schema.GetOffset(0x1372EEA352CA71C5);
-      }
-      return ref _Handle.AsRef<float>(_FanForceMinRadiusOffset!.Value);
+    public ref float FanForceMinRadius {
+        get {
+            _FanForceMinRadiusOffset = _FanForceMinRadiusOffset ?? Schema.GetOffset(0x1372EEA352CA71C5);
+            return ref _Handle.AsRef<float>(_FanForceMinRadiusOffset!.Value);
+        }
     }
-  }
-  private static nint? _CurveDistRangeOffset;
+    private static nint? _CurveDistRangeOffset;
 
-  public ref float CurveDistRange {
-    get {
-      if (_CurveDistRangeOffset == null) {
-        _CurveDistRangeOffset = Schema.GetOffset(0x1372EEA3EE91456F);
-      }
-      return ref _Handle.AsRef<float>(_CurveDistRangeOffset!.Value);
+    public ref float CurveDistRange {
+        get {
+            _CurveDistRangeOffset = _CurveDistRangeOffset ?? Schema.GetOffset(0x1372EEA3EE91456F);
+            return ref _Handle.AsRef<float>(_CurveDistRangeOffset!.Value);
+        }
     }
-  }
-  private static nint? _FanForceCurveStringOffset;
+    private static nint? _FanForceCurveStringOffset;
 
-  public string FanForceCurveString {
-    get {
-      if (_FanForceCurveStringOffset == null) {
-        _FanForceCurveStringOffset = Schema.GetOffset(0x1372EEA3CC493A61);
-      }
-      var ptr = _Handle.Read<nint>(_FanForceCurveStringOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_FanForceCurveStringOffset == null) {
-        _FanForceCurveStringOffset = Schema.GetOffset(0x1372EEA3CC493A61);
-      }
-      Schema.SetString(_Handle, _FanForceCurveStringOffset!.Value, value);
-    }
-  } 
+    public string FanForceCurveString {
+        get {
+            _FanForceCurveStringOffset = _FanForceCurveStringOffset ?? Schema.GetOffset(0x1372EEA3CC493A61);
+            return Schema.GetString(_Handle.Read<nint>(_FanForceCurveStringOffset!.Value));
+        }
+        set {
+            _FanForceCurveStringOffset = _FanForceCurveStringOffset ?? Schema.GetOffset(0x1372EEA3CC493A61);
+            Schema.SetString(_Handle, _FanForceCurveStringOffset!.Value, value);
+        }
+    } 
 
-  public void FanForceMaxRadiusUpdated() {
-    Schema.Update(_Handle, 0x1372EEA33EA45A67);
-  }
-  public void FanForceMinRadiusUpdated() {
-    Schema.Update(_Handle, 0x1372EEA352CA71C5);
-  }
-  public void CurveDistRangeUpdated() {
-    Schema.Update(_Handle, 0x1372EEA3EE91456F);
-  }
-  public void FanForceCurveStringUpdated() {
-    Schema.Update(_Handle, 0x1372EEA3CC493A61);
-  }
+    public void FanForceMaxRadiusUpdated() => Schema.Update(_Handle, 0x1372EEA33EA45A67);
+    public void FanForceMinRadiusUpdated() => Schema.Update(_Handle, 0x1372EEA352CA71C5);
+    public void CurveDistRangeUpdated() => Schema.Update(_Handle, 0x1372EEA3EE91456F);
+    public void FanForceCurveStringUpdated() => Schema.Update(_Handle, 0x1372EEA3CC493A61);
 }

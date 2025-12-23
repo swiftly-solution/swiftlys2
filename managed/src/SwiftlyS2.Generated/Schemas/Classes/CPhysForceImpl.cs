@@ -6,84 +6,68 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysForceImpl : CPointEntityImpl, CPhysForce {
+internal partial class CPhysForceImpl : CPointEntityImpl, CPhysForce
+{
+    public CPhysForceImpl(nint handle) : base(handle) { }
 
-  public CPhysForceImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameAttachOffset;
 
-  private static nint? _NameAttachOffset;
+    public string NameAttach {
+        get {
+            _NameAttachOffset = _NameAttachOffset ?? Schema.GetOffset(0x29E850D5BECAEF3F);
+            return Schema.GetString(_Handle.Read<nint>(_NameAttachOffset!.Value));
+        }
+        set {
+            _NameAttachOffset = _NameAttachOffset ?? Schema.GetOffset(0x29E850D5BECAEF3F);
+            Schema.SetString(_Handle, _NameAttachOffset!.Value, value);
+        }
+    } 
+    private static nint? _ForceOffset;
 
-  public string NameAttach {
-    get {
-      if (_NameAttachOffset == null) {
-        _NameAttachOffset = Schema.GetOffset(0x29E850D5BECAEF3F);
-      }
-      var ptr = _Handle.Read<nint>(_NameAttachOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref float Force {
+        get {
+            _ForceOffset = _ForceOffset ?? Schema.GetOffset(0x29E850D5B9B6AFA4);
+            return ref _Handle.AsRef<float>(_ForceOffset!.Value);
+        }
     }
-    set {
-      if (_NameAttachOffset == null) {
-        _NameAttachOffset = Schema.GetOffset(0x29E850D5BECAEF3F);
-      }
-      Schema.SetString(_Handle, _NameAttachOffset!.Value, value);
-    }
-  } 
-  private static nint? _ForceOffset;
+    private static nint? _ForceTimeOffset;
 
-  public ref float Force {
-    get {
-      if (_ForceOffset == null) {
-        _ForceOffset = Schema.GetOffset(0x29E850D5B9B6AFA4);
-      }
-      return ref _Handle.AsRef<float>(_ForceOffset!.Value);
+    public ref float ForceTime {
+        get {
+            _ForceTimeOffset = _ForceTimeOffset ?? Schema.GetOffset(0x29E850D58835FD05);
+            return ref _Handle.AsRef<float>(_ForceTimeOffset!.Value);
+        }
     }
-  }
-  private static nint? _ForceTimeOffset;
+    private static nint? _AttachedObjectOffset;
 
-  public ref float ForceTime {
-    get {
-      if (_ForceTimeOffset == null) {
-        _ForceTimeOffset = Schema.GetOffset(0x29E850D58835FD05);
-      }
-      return ref _Handle.AsRef<float>(_ForceTimeOffset!.Value);
+    public ref CHandle<CBaseEntity> AttachedObject {
+        get {
+            _AttachedObjectOffset = _AttachedObjectOffset ?? Schema.GetOffset(0x29E850D51AE8F30A);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset!.Value);
+        }
     }
-  }
-  private static nint? _AttachedObjectOffset;
+    private static nint? _WasRestoredOffset;
 
-  public ref CHandle<CBaseEntity> AttachedObject {
-    get {
-      if (_AttachedObjectOffset == null) {
-        _AttachedObjectOffset = Schema.GetOffset(0x29E850D51AE8F30A);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_AttachedObjectOffset!.Value);
+    public ref bool WasRestored {
+        get {
+            _WasRestoredOffset = _WasRestoredOffset ?? Schema.GetOffset(0x29E850D500C1E774);
+            return ref _Handle.AsRef<bool>(_WasRestoredOffset!.Value);
+        }
     }
-  }
-  private static nint? _WasRestoredOffset;
+    private static nint? _IntegratorOffset;
 
-  public ref bool WasRestored {
-    get {
-      if (_WasRestoredOffset == null) {
-        _WasRestoredOffset = Schema.GetOffset(0x29E850D500C1E774);
-      }
-      return ref _Handle.AsRef<bool>(_WasRestoredOffset!.Value);
+    public CConstantForceController Integrator {
+        get {
+            _IntegratorOffset = _IntegratorOffset ?? Schema.GetOffset(0x29E850D5BC2E3924);
+            return new CConstantForceControllerImpl(_Handle + _IntegratorOffset!.Value);
+        }
     }
-  }
-  private static nint? _IntegratorOffset;
-
-  public CConstantForceController Integrator {
-    get {
-      if (_IntegratorOffset == null) {
-        _IntegratorOffset = Schema.GetOffset(0x29E850D5BC2E3924);
-      }
-      return new CConstantForceControllerImpl(_Handle + _IntegratorOffset!.Value);
-    }
-  }
 
 
 }

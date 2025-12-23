@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CItemGenericTriggerHelperImpl : CBaseModelEntityImpl, CItemGenericTriggerHelper {
+internal partial class CItemGenericTriggerHelperImpl : CBaseModelEntityImpl, CItemGenericTriggerHelper
+{
+    public CItemGenericTriggerHelperImpl(nint handle) : base(handle) { }
 
-  public CItemGenericTriggerHelperImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ParentItemOffset;
 
-  private static nint? _ParentItemOffset;
-
-  public ref CHandle<CItemGeneric> ParentItem {
-    get {
-      if (_ParentItemOffset == null) {
-        _ParentItemOffset = Schema.GetOffset(0x9E59EC5AEA0B7250);
-      }
-      return ref _Handle.AsRef<CHandle<CItemGeneric>>(_ParentItemOffset!.Value);
+    public ref CHandle<CItemGeneric> ParentItem {
+        get {
+            _ParentItemOffset = _ParentItemOffset ?? Schema.GetOffset(0x9E59EC5AEA0B7250);
+            return ref _Handle.AsRef<CHandle<CItemGeneric>>(_ParentItemOffset!.Value);
+        }
     }
-  }
 
 
 }

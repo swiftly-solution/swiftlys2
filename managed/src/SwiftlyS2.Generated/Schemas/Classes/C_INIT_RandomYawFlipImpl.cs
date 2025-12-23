@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_RandomYawFlipImpl : CParticleFunctionInitializerImpl, C_INIT_RandomYawFlip {
+internal partial class C_INIT_RandomYawFlipImpl : CParticleFunctionInitializerImpl, C_INIT_RandomYawFlip
+{
+    public C_INIT_RandomYawFlipImpl(nint handle) : base(handle) { }
 
-  public C_INIT_RandomYawFlipImpl(nint handle) : base(handle) {
-  }
+    private static nint? _PercentOffset;
 
-  private static nint? _PercentOffset;
-
-  public ref float Percent {
-    get {
-      if (_PercentOffset == null) {
-        _PercentOffset = Schema.GetOffset(0x86C3C253183D7FC4);
-      }
-      return ref _Handle.AsRef<float>(_PercentOffset!.Value);
+    public ref float Percent {
+        get {
+            _PercentOffset = _PercentOffset ?? Schema.GetOffset(0x86C3C253183D7FC4);
+            return ref _Handle.AsRef<float>(_PercentOffset!.Value);
+        }
     }
-  }
 
 
 }

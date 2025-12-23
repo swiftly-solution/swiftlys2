@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface SkeletonAnimCapture_t__FrameStamp_t : ISchemaClass<SkeletonAnimCapture_t__FrameStamp_t> {
+public partial interface SkeletonAnimCapture_t__FrameStamp_t : ISchemaClass<SkeletonAnimCapture_t__FrameStamp_t>
+{
+    static SkeletonAnimCapture_t__FrameStamp_t ISchemaClass<SkeletonAnimCapture_t__FrameStamp_t>.From(nint handle) => new SkeletonAnimCapture_t__FrameStamp_tImpl(handle);
+    static int ISchemaClass<SkeletonAnimCapture_t__FrameStamp_t>.Size => 28;
+    static string? ISchemaClass<SkeletonAnimCapture_t__FrameStamp_t>.ClassName => null;
 
-  static SkeletonAnimCapture_t__FrameStamp_t ISchemaClass<SkeletonAnimCapture_t__FrameStamp_t>.From(nint handle) => new SkeletonAnimCapture_t__FrameStamp_tImpl(handle);
-  static int ISchemaClass<SkeletonAnimCapture_t__FrameStamp_t>.Size => 28;
-  static string? ISchemaClass<SkeletonAnimCapture_t__FrameStamp_t>.ClassName => null;
 
-  
-  public ref float Time { get; }
-  
-  public ref float EntitySimTime { get; }
-  
-  public ref bool TeleportTick { get; }
-  
-  public ref bool Predicted { get; }
-  
-  public ref float CurTime { get; }
-  
-  public ref float RealTime { get; }
-  
-  public ref int FrameCount { get; }
-  
-  public ref int TickCount { get; }
+    public ref float Time { get; }
+
+    public ref float EntitySimTime { get; }
+
+    public ref bool TeleportTick { get; }
+
+    public ref bool Predicted { get; }
+
+    public ref float CurTime { get; }
+
+    public ref float RealTime { get; }
+
+    public ref int FrameCount { get; }
+
+    public ref int TickCount { get; }
 
 
 }

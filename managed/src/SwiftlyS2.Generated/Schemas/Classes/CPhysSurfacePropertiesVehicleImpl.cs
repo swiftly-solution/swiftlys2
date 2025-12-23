@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPhysSurfacePropertiesVehicleImpl : SchemaClass, CPhysSurfacePropertiesVehicle {
+internal partial class CPhysSurfacePropertiesVehicleImpl : SchemaClass, CPhysSurfacePropertiesVehicle
+{
+    public CPhysSurfacePropertiesVehicleImpl(nint handle) : base(handle) { }
 
-  public CPhysSurfacePropertiesVehicleImpl(nint handle) : base(handle) {
-  }
+    private static nint? _WheelDragOffset;
 
-  private static nint? _WheelDragOffset;
-
-  public ref float WheelDrag {
-    get {
-      if (_WheelDragOffset == null) {
-        _WheelDragOffset = Schema.GetOffset(0x5B1104DCC04986AE);
-      }
-      return ref _Handle.AsRef<float>(_WheelDragOffset!.Value);
+    public ref float WheelDrag {
+        get {
+            _WheelDragOffset = _WheelDragOffset ?? Schema.GetOffset(0x5B1104DCC04986AE);
+            return ref _Handle.AsRef<float>(_WheelDragOffset!.Value);
+        }
     }
-  }
-  private static nint? _WheelFrictionScaleOffset;
+    private static nint? _WheelFrictionScaleOffset;
 
-  public ref float WheelFrictionScale {
-    get {
-      if (_WheelFrictionScaleOffset == null) {
-        _WheelFrictionScaleOffset = Schema.GetOffset(0x5B1104DC7A6D9A4C);
-      }
-      return ref _Handle.AsRef<float>(_WheelFrictionScaleOffset!.Value);
+    public ref float WheelFrictionScale {
+        get {
+            _WheelFrictionScaleOffset = _WheelFrictionScaleOffset ?? Schema.GetOffset(0x5B1104DC7A6D9A4C);
+            return ref _Handle.AsRef<float>(_WheelFrictionScaleOffset!.Value);
+        }
     }
-  }
 
 
 }

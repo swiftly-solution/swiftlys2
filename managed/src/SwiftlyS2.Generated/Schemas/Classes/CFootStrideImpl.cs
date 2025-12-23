@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootStrideImpl : SchemaClass, CFootStride {
+internal partial class CFootStrideImpl : SchemaClass, CFootStride
+{
+    public CFootStrideImpl(nint handle) : base(handle) { }
 
-  public CFootStrideImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DefinitionOffset;
 
-  private static nint? _DefinitionOffset;
-
-  public CFootCycleDefinition Definition {
-    get {
-      if (_DefinitionOffset == null) {
-        _DefinitionOffset = Schema.GetOffset(0x6093B6FA95E6F40);
-      }
-      return new CFootCycleDefinitionImpl(_Handle + _DefinitionOffset!.Value);
+    public CFootCycleDefinition Definition {
+        get {
+            _DefinitionOffset = _DefinitionOffset ?? Schema.GetOffset(0x6093B6FA95E6F40);
+            return new CFootCycleDefinitionImpl(_Handle + _DefinitionOffset!.Value);
+        }
     }
-  }
-  private static nint? _TrajectoriesOffset;
+    private static nint? _TrajectoriesOffset;
 
-  public CFootTrajectories Trajectories {
-    get {
-      if (_TrajectoriesOffset == null) {
-        _TrajectoriesOffset = Schema.GetOffset(0x6093B6F7964C78C);
-      }
-      return new CFootTrajectoriesImpl(_Handle + _TrajectoriesOffset!.Value);
+    public CFootTrajectories Trajectories {
+        get {
+            _TrajectoriesOffset = _TrajectoriesOffset ?? Schema.GetOffset(0x6093B6F7964C78C);
+            return new CFootTrajectoriesImpl(_Handle + _TrajectoriesOffset!.Value);
+        }
     }
-  }
 
 
 }

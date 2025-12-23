@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface PermModelExtPart_t : ISchemaClass<PermModelExtPart_t> {
+public partial interface PermModelExtPart_t : ISchemaClass<PermModelExtPart_t>
+{
+    static PermModelExtPart_t ISchemaClass<PermModelExtPart_t>.From(nint handle) => new PermModelExtPart_tImpl(handle);
+    static int ISchemaClass<PermModelExtPart_t>.Size => 64;
+    static string? ISchemaClass<PermModelExtPart_t>.ClassName => null;
 
-  static PermModelExtPart_t ISchemaClass<PermModelExtPart_t>.From(nint handle) => new PermModelExtPart_tImpl(handle);
-  static int ISchemaClass<PermModelExtPart_t>.Size => 64;
-  static string? ISchemaClass<PermModelExtPart_t>.ClassName => null;
 
-  
-  public ref CTransform Transform { get; }
-  
-  public string Name { get; set; }
-  
-  public ref int Parent { get; }
-  
-  public ref CStrongHandle<InfoForResourceTypeCModel> RefModel { get; }
+    public ref CTransform Transform { get; }
+
+    public string Name { get; set; }
+
+    public ref int Parent { get; }
+
+    public ref CStrongHandle<InfoForResourceTypeCModel> RefModel { get; }
 
 
 }

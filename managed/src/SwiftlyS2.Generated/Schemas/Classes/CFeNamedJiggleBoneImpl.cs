@@ -6,64 +6,52 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFeNamedJiggleBoneImpl : SchemaClass, CFeNamedJiggleBone {
+internal partial class CFeNamedJiggleBoneImpl : SchemaClass, CFeNamedJiggleBone
+{
+    public CFeNamedJiggleBoneImpl(nint handle) : base(handle) { }
 
-  public CFeNamedJiggleBoneImpl(nint handle) : base(handle) {
-  }
+    private static nint? _StrParentBoneOffset;
 
-  private static nint? _StrParentBoneOffset;
+    public string StrParentBone {
+        get {
+            _StrParentBoneOffset = _StrParentBoneOffset ?? Schema.GetOffset(0x51055B3A22DD827E);
+            return Schema.GetString(_Handle.Read<nint>(_StrParentBoneOffset!.Value));
+        }
+        set {
+            _StrParentBoneOffset = _StrParentBoneOffset ?? Schema.GetOffset(0x51055B3A22DD827E);
+            Schema.SetString(_Handle, _StrParentBoneOffset!.Value, value);
+        }
+    } 
+    private static nint? _TransformOffset;
 
-  public string StrParentBone {
-    get {
-      if (_StrParentBoneOffset == null) {
-        _StrParentBoneOffset = Schema.GetOffset(0x51055B3A22DD827E);
-      }
-      var ptr = _Handle.Read<nint>(_StrParentBoneOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref CTransform Transform {
+        get {
+            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0x51055B3A3A9A393B);
+            return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+        }
     }
-    set {
-      if (_StrParentBoneOffset == null) {
-        _StrParentBoneOffset = Schema.GetOffset(0x51055B3A22DD827E);
-      }
-      Schema.SetString(_Handle, _StrParentBoneOffset!.Value, value);
-    }
-  } 
-  private static nint? _TransformOffset;
+    private static nint? _JiggleParentOffset;
 
-  public ref CTransform Transform {
-    get {
-      if (_TransformOffset == null) {
-        _TransformOffset = Schema.GetOffset(0x51055B3A3A9A393B);
-      }
-      return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+    public ref uint JiggleParent {
+        get {
+            _JiggleParentOffset = _JiggleParentOffset ?? Schema.GetOffset(0x51055B3A8AABF3B9);
+            return ref _Handle.AsRef<uint>(_JiggleParentOffset!.Value);
+        }
     }
-  }
-  private static nint? _JiggleParentOffset;
+    private static nint? _JiggleBoneOffset;
 
-  public ref uint JiggleParent {
-    get {
-      if (_JiggleParentOffset == null) {
-        _JiggleParentOffset = Schema.GetOffset(0x51055B3A8AABF3B9);
-      }
-      return ref _Handle.AsRef<uint>(_JiggleParentOffset!.Value);
+    public CFeJiggleBone JiggleBone {
+        get {
+            _JiggleBoneOffset = _JiggleBoneOffset ?? Schema.GetOffset(0x51055B3A6038C557);
+            return new CFeJiggleBoneImpl(_Handle + _JiggleBoneOffset!.Value);
+        }
     }
-  }
-  private static nint? _JiggleBoneOffset;
-
-  public CFeJiggleBone JiggleBone {
-    get {
-      if (_JiggleBoneOffset == null) {
-        _JiggleBoneOffset = Schema.GetOffset(0x51055B3A6038C557);
-      }
-      return new CFeJiggleBoneImpl(_Handle + _JiggleBoneOffset!.Value);
-    }
-  }
 
 
 }

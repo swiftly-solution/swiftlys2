@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CNmFloatRemapNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatRemapNode__CDefinition> {
+public partial interface CNmFloatRemapNode__CDefinition : CNmFloatValueNode__CDefinition, ISchemaClass<CNmFloatRemapNode__CDefinition>
+{
+    static CNmFloatRemapNode__CDefinition ISchemaClass<CNmFloatRemapNode__CDefinition>.From(nint handle) => new CNmFloatRemapNode__CDefinitionImpl(handle);
+    static int ISchemaClass<CNmFloatRemapNode__CDefinition>.Size => 40;
+    static string? ISchemaClass<CNmFloatRemapNode__CDefinition>.ClassName => null;
 
-  static CNmFloatRemapNode__CDefinition ISchemaClass<CNmFloatRemapNode__CDefinition>.From(nint handle) => new CNmFloatRemapNode__CDefinitionImpl(handle);
-  static int ISchemaClass<CNmFloatRemapNode__CDefinition>.Size => 40;
-  static string? ISchemaClass<CNmFloatRemapNode__CDefinition>.ClassName => null;
 
-  
-  public ref short InputValueNodeIdx { get; }
-  
-  public CNmFloatRemapNode__RemapRange_t InputRange { get; }
-  
-  public CNmFloatRemapNode__RemapRange_t OutputRange { get; }
+    public ref short InputValueNodeIdx { get; }
+
+    public CNmFloatRemapNode__RemapRange_t InputRange { get; }
+
+    public CNmFloatRemapNode__RemapRange_t OutputRange { get; }
 
 
 }

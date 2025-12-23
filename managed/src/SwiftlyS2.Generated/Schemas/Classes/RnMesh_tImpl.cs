@@ -6,127 +6,104 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RnMesh_tImpl : SchemaClass, RnMesh_t {
+internal partial class RnMesh_tImpl : SchemaClass, RnMesh_t
+{
+    public RnMesh_tImpl(nint handle) : base(handle) { }
 
-  public RnMesh_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MinOffset;
 
-  private static nint? _MinOffset;
-
-  public ref Vector Min {
-    get {
-      if (_MinOffset == null) {
-        _MinOffset = Schema.GetOffset(0x5F23FA63F4B0AA63);
-      }
-      return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
+    public ref Vector Min {
+        get {
+            _MinOffset = _MinOffset ?? Schema.GetOffset(0x5F23FA63F4B0AA63);
+            return ref _Handle.AsRef<Vector>(_MinOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaxOffset;
+    private static nint? _MaxOffset;
 
-  public ref Vector Max {
-    get {
-      if (_MaxOffset == null) {
-        _MaxOffset = Schema.GetOffset(0x5F23FA63EAC4225D);
-      }
-      return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
+    public ref Vector Max {
+        get {
+            _MaxOffset = _MaxOffset ?? Schema.GetOffset(0x5F23FA63EAC4225D);
+            return ref _Handle.AsRef<Vector>(_MaxOffset!.Value);
+        }
     }
-  }
-  private static nint? _NodesOffset;
+    private static nint? _NodesOffset;
 
-  public ref CUtlVector<RnNode_t> Nodes {
-    get {
-      if (_NodesOffset == null) {
-        _NodesOffset = Schema.GetOffset(0x5F23FA63EBA045DA);
-      }
-      return ref _Handle.AsRef<CUtlVector<RnNode_t>>(_NodesOffset!.Value);
+    public ref CUtlVector<RnNode_t> Nodes {
+        get {
+            _NodesOffset = _NodesOffset ?? Schema.GetOffset(0x5F23FA63EBA045DA);
+            return ref _Handle.AsRef<CUtlVector<RnNode_t>>(_NodesOffset!.Value);
+        }
     }
-  }
-  private static nint? _VerticesOffset;
+    private static nint? _VerticesOffset;
 
-  public SchemaUntypedField Vertices {
-    get {
-      if (_VerticesOffset == null) {
-        _VerticesOffset = Schema.GetOffset(0x5F23FA63E4F9760E);
-      }
-      return new SchemaUntypedField(_Handle + _VerticesOffset!.Value);
+    public SchemaUntypedField Vertices {
+        get {
+            _VerticesOffset = _VerticesOffset ?? Schema.GetOffset(0x5F23FA63E4F9760E);
+            return new SchemaUntypedField(_Handle + _VerticesOffset!.Value);
+        }
     }
-  }
-  private static nint? _TrianglesOffset;
+    private static nint? _TrianglesOffset;
 
-  public ref CUtlVector<RnTriangle_t> Triangles {
-    get {
-      if (_TrianglesOffset == null) {
-        _TrianglesOffset = Schema.GetOffset(0x5F23FA6365BD00C2);
-      }
-      return ref _Handle.AsRef<CUtlVector<RnTriangle_t>>(_TrianglesOffset!.Value);
+    public ref CUtlVector<RnTriangle_t> Triangles {
+        get {
+            _TrianglesOffset = _TrianglesOffset ?? Schema.GetOffset(0x5F23FA6365BD00C2);
+            return ref _Handle.AsRef<CUtlVector<RnTriangle_t>>(_TrianglesOffset!.Value);
+        }
     }
-  }
-  private static nint? _WingsOffset;
+    private static nint? _WingsOffset;
 
-  public ref CUtlVector<RnWing_t> Wings {
-    get {
-      if (_WingsOffset == null) {
-        _WingsOffset = Schema.GetOffset(0x5F23FA63B34C1A4B);
-      }
-      return ref _Handle.AsRef<CUtlVector<RnWing_t>>(_WingsOffset!.Value);
+    public ref CUtlVector<RnWing_t> Wings {
+        get {
+            _WingsOffset = _WingsOffset ?? Schema.GetOffset(0x5F23FA63B34C1A4B);
+            return ref _Handle.AsRef<CUtlVector<RnWing_t>>(_WingsOffset!.Value);
+        }
     }
-  }
-  private static nint? _TriangleEdgeFlagsOffset;
+    private static nint? _TriangleEdgeFlagsOffset;
 
-  public ref CUtlVector<byte> TriangleEdgeFlags {
-    get {
-      if (_TriangleEdgeFlagsOffset == null) {
-        _TriangleEdgeFlagsOffset = Schema.GetOffset(0x5F23FA6379FF46EF);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_TriangleEdgeFlagsOffset!.Value);
+    public ref CUtlVector<byte> TriangleEdgeFlags {
+        get {
+            _TriangleEdgeFlagsOffset = _TriangleEdgeFlagsOffset ?? Schema.GetOffset(0x5F23FA6379FF46EF);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_TriangleEdgeFlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _MaterialsOffset;
+    private static nint? _MaterialsOffset;
 
-  public ref CUtlVector<byte> Materials {
-    get {
-      if (_MaterialsOffset == null) {
-        _MaterialsOffset = Schema.GetOffset(0x5F23FA639E4B1B69);
-      }
-      return ref _Handle.AsRef<CUtlVector<byte>>(_MaterialsOffset!.Value);
+    public ref CUtlVector<byte> Materials {
+        get {
+            _MaterialsOffset = _MaterialsOffset ?? Schema.GetOffset(0x5F23FA639E4B1B69);
+            return ref _Handle.AsRef<CUtlVector<byte>>(_MaterialsOffset!.Value);
+        }
     }
-  }
-  private static nint? _OrthographicAreasOffset;
+    private static nint? _OrthographicAreasOffset;
 
-  public ref Vector OrthographicAreas {
-    get {
-      if (_OrthographicAreasOffset == null) {
-        _OrthographicAreasOffset = Schema.GetOffset(0x5F23FA63B74855D3);
-      }
-      return ref _Handle.AsRef<Vector>(_OrthographicAreasOffset!.Value);
+    public ref Vector OrthographicAreas {
+        get {
+            _OrthographicAreasOffset = _OrthographicAreasOffset ?? Schema.GetOffset(0x5F23FA63B74855D3);
+            return ref _Handle.AsRef<Vector>(_OrthographicAreasOffset!.Value);
+        }
     }
-  }
-  private static nint? _FlagsOffset;
+    private static nint? _FlagsOffset;
 
-  public ref uint Flags {
-    get {
-      if (_FlagsOffset == null) {
-        _FlagsOffset = Schema.GetOffset(0x5F23FA63CE6E9C28);
-      }
-      return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+    public ref uint Flags {
+        get {
+            _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x5F23FA63CE6E9C28);
+            return ref _Handle.AsRef<uint>(_FlagsOffset!.Value);
+        }
     }
-  }
-  private static nint? _DebugFlagsOffset;
+    private static nint? _DebugFlagsOffset;
 
-  public ref uint DebugFlags {
-    get {
-      if (_DebugFlagsOffset == null) {
-        _DebugFlagsOffset = Schema.GetOffset(0x5F23FA6321AEBFEF);
-      }
-      return ref _Handle.AsRef<uint>(_DebugFlagsOffset!.Value);
+    public ref uint DebugFlags {
+        get {
+            _DebugFlagsOffset = _DebugFlagsOffset ?? Schema.GetOffset(0x5F23FA6321AEBFEF);
+            return ref _Handle.AsRef<uint>(_DebugFlagsOffset!.Value);
+        }
     }
-  }
 
 
 }

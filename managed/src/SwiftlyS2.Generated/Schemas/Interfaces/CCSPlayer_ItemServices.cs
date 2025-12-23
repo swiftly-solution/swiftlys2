@@ -8,17 +8,17 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CCSPlayer_ItemServices : CPlayer_ItemServices, ISchemaClass<CCSPlayer_ItemServices> {
+public partial interface CCSPlayer_ItemServices : CPlayer_ItemServices, ISchemaClass<CCSPlayer_ItemServices>
+{
+    static CCSPlayer_ItemServices ISchemaClass<CCSPlayer_ItemServices>.From(nint handle) => new CCSPlayer_ItemServicesImpl(handle);
+    static int ISchemaClass<CCSPlayer_ItemServices>.Size => 72;
+    static string? ISchemaClass<CCSPlayer_ItemServices>.ClassName => null;
 
-  static CCSPlayer_ItemServices ISchemaClass<CCSPlayer_ItemServices>.From(nint handle) => new CCSPlayer_ItemServicesImpl(handle);
-  static int ISchemaClass<CCSPlayer_ItemServices>.Size => 72;
-  static string? ISchemaClass<CCSPlayer_ItemServices>.ClassName => null;
 
-  
-  public ref bool HasDefuser { get; }
-  
-  public ref bool HasHelmet { get; }
+    public ref bool HasDefuser { get; }
 
-  public void HasDefuserUpdated();
-  public void HasHelmetUpdated();
+    public ref bool HasHelmet { get; }
+
+    public void HasDefuserUpdated();
+    public void HasHelmetUpdated();
 }

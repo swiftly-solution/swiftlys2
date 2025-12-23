@@ -6,67 +6,56 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CNmTimeConditionNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmTimeConditionNode__CDefinition {
+internal partial class CNmTimeConditionNode__CDefinitionImpl : CNmBoolValueNode__CDefinitionImpl, CNmTimeConditionNode__CDefinition
+{
+    public CNmTimeConditionNode__CDefinitionImpl(nint handle) : base(handle) { }
 
-  public CNmTimeConditionNode__CDefinitionImpl(nint handle) : base(handle) {
-  }
+    private static nint? _SourceStateNodeIdxOffset;
 
-  private static nint? _SourceStateNodeIdxOffset;
-
-  public ref short SourceStateNodeIdx {
-    get {
-      if (_SourceStateNodeIdxOffset == null) {
-        _SourceStateNodeIdxOffset = Schema.GetOffset(0x421E2145D1DB8128);
-      }
-      return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+    public ref short SourceStateNodeIdx {
+        get {
+            _SourceStateNodeIdxOffset = _SourceStateNodeIdxOffset ?? Schema.GetOffset(0x421E2145D1DB8128);
+            return ref _Handle.AsRef<short>(_SourceStateNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _InputValueNodeIdxOffset;
+    private static nint? _InputValueNodeIdxOffset;
 
-  public ref short InputValueNodeIdx {
-    get {
-      if (_InputValueNodeIdxOffset == null) {
-        _InputValueNodeIdxOffset = Schema.GetOffset(0x421E214595E89F27);
-      }
-      return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+    public ref short InputValueNodeIdx {
+        get {
+            _InputValueNodeIdxOffset = _InputValueNodeIdxOffset ?? Schema.GetOffset(0x421E214595E89F27);
+            return ref _Handle.AsRef<short>(_InputValueNodeIdxOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComparandOffset;
+    private static nint? _ComparandOffset;
 
-  public ref float Comparand {
-    get {
-      if (_ComparandOffset == null) {
-        _ComparandOffset = Schema.GetOffset(0x421E21450CF10B48);
-      }
-      return ref _Handle.AsRef<float>(_ComparandOffset!.Value);
+    public ref float Comparand {
+        get {
+            _ComparandOffset = _ComparandOffset ?? Schema.GetOffset(0x421E21450CF10B48);
+            return ref _Handle.AsRef<float>(_ComparandOffset!.Value);
+        }
     }
-  }
-  private static nint? _TypeOffset;
+    private static nint? _TypeOffset;
 
-  public ref CNmTimeConditionNode__ComparisonType_t Type {
-    get {
-      if (_TypeOffset == null) {
-        _TypeOffset = Schema.GetOffset(0x421E21450F04B4ED);
-      }
-      return ref _Handle.AsRef<CNmTimeConditionNode__ComparisonType_t>(_TypeOffset!.Value);
+    public ref CNmTimeConditionNode__ComparisonType_t Type {
+        get {
+            _TypeOffset = _TypeOffset ?? Schema.GetOffset(0x421E21450F04B4ED);
+            return ref _Handle.AsRef<CNmTimeConditionNode__ComparisonType_t>(_TypeOffset!.Value);
+        }
     }
-  }
-  private static nint? _OperatorOffset;
+    private static nint? _OperatorOffset;
 
-  public ref CNmTimeConditionNode__Operator_t Operator {
-    get {
-      if (_OperatorOffset == null) {
-        _OperatorOffset = Schema.GetOffset(0x421E21458ABE049D);
-      }
-      return ref _Handle.AsRef<CNmTimeConditionNode__Operator_t>(_OperatorOffset!.Value);
+    public ref CNmTimeConditionNode__Operator_t Operator {
+        get {
+            _OperatorOffset = _OperatorOffset ?? Schema.GetOffset(0x421E21458ABE049D);
+            return ref _Handle.AsRef<CNmTimeConditionNode__Operator_t>(_OperatorOffset!.Value);
+        }
     }
-  }
 
 
 }

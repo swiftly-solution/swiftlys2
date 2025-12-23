@@ -23,6 +23,8 @@ internal class ConVar : IConVar
 
     public EConVarType Type => (EConVarType)NativeConvars.GetConvarType(Name);
 
+    public string HelpText => NativeConvars.GetDescription(Name);
+
     public bool HasDefaultValue => NativeConvars.HasDefaultValue(Name);
 
     public bool HasMinValue => _minValuePtrPtr.Read<nint>() != 0;

@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CItemGenericTriggerHelper : CBaseModelEntity, ISchemaClass<CItemGenericTriggerHelper> {
+public partial interface CItemGenericTriggerHelper : CBaseModelEntity, ISchemaClass<CItemGenericTriggerHelper>
+{
+    static CItemGenericTriggerHelper ISchemaClass<CItemGenericTriggerHelper>.From(nint handle) => new CItemGenericTriggerHelperImpl(handle);
+    static int ISchemaClass<CItemGenericTriggerHelper>.Size => 2016;
+    static string? ISchemaClass<CItemGenericTriggerHelper>.ClassName => "item_generic_trigger_helper";
 
-  static CItemGenericTriggerHelper ISchemaClass<CItemGenericTriggerHelper>.From(nint handle) => new CItemGenericTriggerHelperImpl(handle);
-  static int ISchemaClass<CItemGenericTriggerHelper>.Size => 2016;
-  static string? ISchemaClass<CItemGenericTriggerHelper>.ClassName => "item_generic_trigger_helper";
 
-  
-  public ref CHandle<CItemGeneric> ParentItem { get; }
+    public ref CHandle<CItemGeneric> ParentItem { get; }
 
 
 }

@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_OP_RemapVectorComponentToScalarImpl : CParticleFunctionOperatorImpl, C_OP_RemapVectorComponentToScalar {
+internal partial class C_OP_RemapVectorComponentToScalarImpl : CParticleFunctionOperatorImpl, C_OP_RemapVectorComponentToScalar
+{
+    public C_OP_RemapVectorComponentToScalarImpl(nint handle) : base(handle) { }
 
-  public C_OP_RemapVectorComponentToScalarImpl(nint handle) : base(handle) {
-  }
+    private static nint? _FieldInputOffset;
 
-  private static nint? _FieldInputOffset;
-
-  public ParticleAttributeIndex_t FieldInput {
-    get {
-      if (_FieldInputOffset == null) {
-        _FieldInputOffset = Schema.GetOffset(0x39413771AE775669);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+    public ParticleAttributeIndex_t FieldInput {
+        get {
+            _FieldInputOffset = _FieldInputOffset ?? Schema.GetOffset(0x39413771AE775669);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldInputOffset!.Value);
+        }
     }
-  }
-  private static nint? _FieldOutputOffset;
+    private static nint? _FieldOutputOffset;
 
-  public ParticleAttributeIndex_t FieldOutput {
-    get {
-      if (_FieldOutputOffset == null) {
-        _FieldOutputOffset = Schema.GetOffset(0x39413771E5729606);
-      }
-      return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+    public ParticleAttributeIndex_t FieldOutput {
+        get {
+            _FieldOutputOffset = _FieldOutputOffset ?? Schema.GetOffset(0x39413771E5729606);
+            return new ParticleAttributeIndex_tImpl(_Handle + _FieldOutputOffset!.Value);
+        }
     }
-  }
-  private static nint? _ComponentOffset;
+    private static nint? _ComponentOffset;
 
-  public ref int Component {
-    get {
-      if (_ComponentOffset == null) {
-        _ComponentOffset = Schema.GetOffset(0x39413771BFD0952C);
-      }
-      return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+    public ref int Component {
+        get {
+            _ComponentOffset = _ComponentOffset ?? Schema.GetOffset(0x39413771BFD0952C);
+            return ref _Handle.AsRef<int>(_ComponentOffset!.Value);
+        }
     }
-  }
 
 
 }

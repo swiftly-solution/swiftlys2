@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum ObjectTypeFlags_t : uint {
-
+public enum ObjectTypeFlags_t : uint
+{
  OBJECT_TYPE_NONE = 0,
 
  OBJECT_TYPE_MODEL = 8,

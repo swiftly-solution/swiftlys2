@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum PulseInstructionCode_t : ushort {
-
+public enum PulseInstructionCode_t : ushort
+{
  INVALID = 0,
 
  IMMEDIATE_HALT = 1,

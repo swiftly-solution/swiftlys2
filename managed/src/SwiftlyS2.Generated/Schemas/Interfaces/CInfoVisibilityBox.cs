@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CInfoVisibilityBox : CBaseEntity, ISchemaClass<CInfoVisibilityBox> {
+public partial interface CInfoVisibilityBox : CBaseEntity, ISchemaClass<CInfoVisibilityBox>
+{
+    static CInfoVisibilityBox ISchemaClass<CInfoVisibilityBox>.From(nint handle) => new CInfoVisibilityBoxImpl(handle);
+    static int ISchemaClass<CInfoVisibilityBox>.Size => 1288;
+    static string? ISchemaClass<CInfoVisibilityBox>.ClassName => "info_visibility_box";
 
-  static CInfoVisibilityBox ISchemaClass<CInfoVisibilityBox>.From(nint handle) => new CInfoVisibilityBoxImpl(handle);
-  static int ISchemaClass<CInfoVisibilityBox>.Size => 1288;
-  static string? ISchemaClass<CInfoVisibilityBox>.ClassName => "info_visibility_box";
 
-  
-  public ref int Mode { get; }
-  
-  public ref Vector BoxSize { get; }
-  
-  public ref bool Enabled { get; }
+    public ref int Mode { get; }
 
-  public void ModeUpdated();
-  public void BoxSizeUpdated();
-  public void EnabledUpdated();
+    public ref Vector BoxSize { get; }
+
+    public ref bool Enabled { get; }
+
+    public void ModeUpdated();
+    public void BoxSizeUpdated();
+    public void EnabledUpdated();
 }

@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class FourVectors2DImpl : SchemaClass, FourVectors2D {
+internal partial class FourVectors2DImpl : SchemaClass, FourVectors2D
+{
+    public FourVectors2DImpl(nint handle) : base(handle) { }
 
-  public FourVectors2DImpl(nint handle) : base(handle) {
-  }
+    private static nint? _XOffset;
 
-  private static nint? _XOffset;
-
-  public ref fltx4 X {
-    get {
-      if (_XOffset == null) {
-        _XOffset = Schema.GetOffset(0x7A817FA5FD0C5087);
-      }
-      return ref _Handle.AsRef<fltx4>(_XOffset!.Value);
+    public ref fltx4 X {
+        get {
+            _XOffset = _XOffset ?? Schema.GetOffset(0x7A817FA5FD0C5087);
+            return ref _Handle.AsRef<fltx4>(_XOffset!.Value);
+        }
     }
-  }
-  private static nint? _YOffset;
+    private static nint? _YOffset;
 
-  public ref fltx4 Y {
-    get {
-      if (_YOffset == null) {
-        _YOffset = Schema.GetOffset(0x7A817FA5FC0C4EF4);
-      }
-      return ref _Handle.AsRef<fltx4>(_YOffset!.Value);
+    public ref fltx4 Y {
+        get {
+            _YOffset = _YOffset ?? Schema.GetOffset(0x7A817FA5FC0C4EF4);
+            return ref _Handle.AsRef<fltx4>(_YOffset!.Value);
+        }
     }
-  }
 
 
 }

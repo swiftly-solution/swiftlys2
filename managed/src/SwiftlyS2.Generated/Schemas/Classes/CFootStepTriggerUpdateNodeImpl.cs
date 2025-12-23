@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFootStepTriggerUpdateNodeImpl : CUnaryUpdateNodeImpl, CFootStepTriggerUpdateNode {
+internal partial class CFootStepTriggerUpdateNodeImpl : CUnaryUpdateNodeImpl, CFootStepTriggerUpdateNode
+{
+    public CFootStepTriggerUpdateNodeImpl(nint handle) : base(handle) { }
 
-  public CFootStepTriggerUpdateNodeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TriggersOffset;
 
-  private static nint? _TriggersOffset;
-
-  public ref CUtlVector<FootStepTrigger> Triggers {
-    get {
-      if (_TriggersOffset == null) {
-        _TriggersOffset = Schema.GetOffset(0x799A3B55684C6AF0);
-      }
-      return ref _Handle.AsRef<CUtlVector<FootStepTrigger>>(_TriggersOffset!.Value);
+    public ref CUtlVector<FootStepTrigger> Triggers {
+        get {
+            _TriggersOffset = _TriggersOffset ?? Schema.GetOffset(0x799A3B55684C6AF0);
+            return ref _Handle.AsRef<CUtlVector<FootStepTrigger>>(_TriggersOffset!.Value);
+        }
     }
-  }
-  private static nint? _ToleranceOffset;
+    private static nint? _ToleranceOffset;
 
-  public ref float Tolerance {
-    get {
-      if (_ToleranceOffset == null) {
-        _ToleranceOffset = Schema.GetOffset(0x799A3B558C29728E);
-      }
-      return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
+    public ref float Tolerance {
+        get {
+            _ToleranceOffset = _ToleranceOffset ?? Schema.GetOffset(0x799A3B558C29728E);
+            return ref _Handle.AsRef<float>(_ToleranceOffset!.Value);
+        }
     }
-  }
 
 
 }

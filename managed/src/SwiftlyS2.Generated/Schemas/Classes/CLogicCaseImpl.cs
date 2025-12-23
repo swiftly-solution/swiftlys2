@@ -6,77 +6,58 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicCaseImpl : CLogicalEntityImpl, CLogicCase {
+internal partial class CLogicCaseImpl : CLogicalEntityImpl, CLogicCase
+{
+    public CLogicCaseImpl(nint handle) : base(handle) { }
 
-  public CLogicCaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CaseOffset;
 
-  private static nint? _CaseOffset;
+    public string Case {
+        get {
+            _CaseOffset = _CaseOffset ?? Schema.GetOffset(0x4B6BB20CBD726255);
+            return Schema.GetString(_Handle.Read<nint>(_CaseOffset!.Value));
+        }
+        set {
+            _CaseOffset = _CaseOffset ?? Schema.GetOffset(0x4B6BB20CBD726255);
+            Schema.SetString(_Handle, _CaseOffset!.Value, value);
+        }
+    } 
+    private static nint? _ShuffleCasesOffset;
 
-  public string Case {
-    get {
-      if (_CaseOffset == null) {
-        _CaseOffset = Schema.GetOffset(0x4B6BB20CBD726255);
-      }
-      var ptr = _Handle.Read<nint>(_CaseOffset!.Value);
-      return Schema.GetString(ptr);
+    public ref int ShuffleCases {
+        get {
+            _ShuffleCasesOffset = _ShuffleCasesOffset ?? Schema.GetOffset(0x4B6BB20C3441354F);
+            return ref _Handle.AsRef<int>(_ShuffleCasesOffset!.Value);
+        }
     }
-    set {
-      if (_CaseOffset == null) {
-        _CaseOffset = Schema.GetOffset(0x4B6BB20CBD726255);
-      }
-      Schema.SetString(_Handle, _CaseOffset!.Value, value);
-    }
-  } 
-  private static nint? _ShuffleCasesOffset;
+    private static nint? _LastShuffleCaseOffset;
 
-  public ref int ShuffleCases {
-    get {
-      if (_ShuffleCasesOffset == null) {
-        _ShuffleCasesOffset = Schema.GetOffset(0x4B6BB20C3441354F);
-      }
-      return ref _Handle.AsRef<int>(_ShuffleCasesOffset!.Value);
+    public ref int LastShuffleCase {
+        get {
+            _LastShuffleCaseOffset = _LastShuffleCaseOffset ?? Schema.GetOffset(0x4B6BB20C053CE392);
+            return ref _Handle.AsRef<int>(_LastShuffleCaseOffset!.Value);
+        }
     }
-  }
-  private static nint? _LastShuffleCaseOffset;
+    public ISchemaFixedArray<byte> UchShuffleCaseMap {
+        get => new SchemaFixedArray<byte>(_Handle, 0x4B6BB20CF9FC41AE, 32, 1, 1);
+    }
+    public ISchemaFixedArray<CEntityIOOutput> OnCase {
+        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0x4B6BB20CF8743C7C, 32, 40, 8);
+    }
+    private static nint? _OnDefaultOffset;
 
-  public ref int LastShuffleCase {
-    get {
-      if (_LastShuffleCaseOffset == null) {
-        _LastShuffleCaseOffset = Schema.GetOffset(0x4B6BB20C053CE392);
-      }
-      return ref _Handle.AsRef<int>(_LastShuffleCaseOffset!.Value);
+    public SchemaUntypedField OnDefault {
+        get {
+            _OnDefaultOffset = _OnDefaultOffset ?? Schema.GetOffset(0x4B6BB20C4B03C3CD);
+            return new SchemaUntypedField(_Handle + _OnDefaultOffset!.Value);
+        }
     }
-  }
-  public ISchemaFixedArray<byte> UchShuffleCaseMap {
-    get => new SchemaFixedArray<byte>(_Handle, 0x4B6BB20CF9FC41AE, 32, 1, 1);
-  }
-  private static nint? _OnCaseOffset;
-
-  public SchemaUntypedField OnCase {
-    get {
-      if (_OnCaseOffset == null) {
-        _OnCaseOffset = Schema.GetOffset(0x4B6BB20CF8743C7C);
-      }
-      return new SchemaUntypedField(_Handle + _OnCaseOffset!.Value);
-    }
-  }
-  private static nint? _OnDefaultOffset;
-
-  public SchemaUntypedField OnDefault {
-    get {
-      if (_OnDefaultOffset == null) {
-        _OnDefaultOffset = Schema.GetOffset(0x4B6BB20C4B03C3CD);
-      }
-      return new SchemaUntypedField(_Handle + _OnDefaultOffset!.Value);
-    }
-  }
 
 
 }

@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using Spectre.Console;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Shared.Players;
 
@@ -107,13 +108,20 @@ public sealed class ToggleMenuOption : MenuOptionBase
 
         _ = toggled.AddOrUpdate(player.PlayerID, value, ( _, _ ) => value);
 
-        ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<bool> {
-            Player = player,
-            Option = this,
-            OldValue = oldValue,
-            NewValue = value
-        });
-
+        try
+        {
+            ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<bool> {
+                Player = player,
+                Option = this,
+                OldValue = oldValue,
+                NewValue = value
+            });
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(e)) return false;
+            AnsiConsole.WriteException(e);
+        }
         return true;
     }
 

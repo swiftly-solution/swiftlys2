@@ -8,19 +8,19 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerStaticAdditiveSynth__CTone : ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone> {
+public partial interface CVoiceContainerStaticAdditiveSynth__CTone : ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone>
+{
+    static CVoiceContainerStaticAdditiveSynth__CTone ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone>.From(nint handle) => new CVoiceContainerStaticAdditiveSynth__CToneImpl(handle);
+    static int ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone>.Size => 96;
+    static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone>.ClassName => null;
 
-  static CVoiceContainerStaticAdditiveSynth__CTone ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone>.From(nint handle) => new CVoiceContainerStaticAdditiveSynth__CToneImpl(handle);
-  static int ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone>.Size => 96;
-  static string? ISchemaClass<CVoiceContainerStaticAdditiveSynth__CTone>.ClassName => null;
 
-  
-  public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic> Harmonics { get; }
-  
-  // CPiecewiseCurve
-  public SchemaUntypedField Curve { get; }
-  
-  public ref bool SyncInstances { get; }
+    public ref CUtlVector<CVoiceContainerStaticAdditiveSynth__CHarmonic> Harmonics { get; }
+
+    // CPiecewiseCurve
+    public SchemaUntypedField Curve { get; }
+
+    public ref bool SyncInstances { get; }
 
 
 }

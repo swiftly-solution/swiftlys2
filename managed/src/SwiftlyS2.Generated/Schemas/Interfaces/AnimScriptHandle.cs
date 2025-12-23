@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface AnimScriptHandle : ISchemaClass<AnimScriptHandle> {
+public partial interface AnimScriptHandle : ISchemaClass<AnimScriptHandle>
+{
+    static AnimScriptHandle ISchemaClass<AnimScriptHandle>.From(nint handle) => new AnimScriptHandleImpl(handle);
+    static int ISchemaClass<AnimScriptHandle>.Size => 4;
+    static string? ISchemaClass<AnimScriptHandle>.ClassName => null;
 
-  static AnimScriptHandle ISchemaClass<AnimScriptHandle>.From(nint handle) => new AnimScriptHandleImpl(handle);
-  static int ISchemaClass<AnimScriptHandle>.Size => 4;
-  static string? ISchemaClass<AnimScriptHandle>.ClassName => null;
 
-  
-  public ref uint Id { get; }
+    public ref uint Id { get; }
 
 
 }

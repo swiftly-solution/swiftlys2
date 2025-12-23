@@ -6,74 +6,60 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CAnimTagBaseImpl : SchemaClass, CAnimTagBase {
+internal partial class CAnimTagBaseImpl : SchemaClass, CAnimTagBase
+{
+    public CAnimTagBaseImpl(nint handle) : base(handle) { }
 
-  public CAnimTagBaseImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NameOffset;
 
-  private static nint? _NameOffset;
-
-  public ref CGlobalSymbol Name {
-    get {
-      if (_NameOffset == null) {
-        _NameOffset = Schema.GetOffset(0x8F7709C44D8F5786);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_NameOffset!.Value);
+    public ref CGlobalSymbol Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x8F7709C44D8F5786);
+            return ref _Handle.AsRef<CGlobalSymbol>(_NameOffset!.Value);
+        }
     }
-  }
-  private static nint? _CommentOffset;
+    private static nint? _CommentOffset;
 
-  public string Comment {
-    get {
-      if (_CommentOffset == null) {
-        _CommentOffset = Schema.GetOffset(0x8F7709C488A0B4DF);
-      }
-      var ptr = _Handle.Read<nint>(_CommentOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_CommentOffset == null) {
-        _CommentOffset = Schema.GetOffset(0x8F7709C488A0B4DF);
-      }
-      Schema.SetString(_Handle, _CommentOffset!.Value, value);
-    }
-  } 
-  private static nint? _GroupOffset;
+    public string Comment {
+        get {
+            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x8F7709C488A0B4DF);
+            return Schema.GetString(_Handle.Read<nint>(_CommentOffset!.Value));
+        }
+        set {
+            _CommentOffset = _CommentOffset ?? Schema.GetOffset(0x8F7709C488A0B4DF);
+            Schema.SetString(_Handle, _CommentOffset!.Value, value);
+        }
+    } 
+    private static nint? _GroupOffset;
 
-  public ref CGlobalSymbol Group {
-    get {
-      if (_GroupOffset == null) {
-        _GroupOffset = Schema.GetOffset(0x8F7709C49FC645AC);
-      }
-      return ref _Handle.AsRef<CGlobalSymbol>(_GroupOffset!.Value);
+    public ref CGlobalSymbol Group {
+        get {
+            _GroupOffset = _GroupOffset ?? Schema.GetOffset(0x8F7709C49FC645AC);
+            return ref _Handle.AsRef<CGlobalSymbol>(_GroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _TagIDOffset;
+    private static nint? _TagIDOffset;
 
-  public AnimTagID TagID {
-    get {
-      if (_TagIDOffset == null) {
-        _TagIDOffset = Schema.GetOffset(0x8F7709C41F65DDFE);
-      }
-      return new AnimTagIDImpl(_Handle + _TagIDOffset!.Value);
+    public AnimTagID TagID {
+        get {
+            _TagIDOffset = _TagIDOffset ?? Schema.GetOffset(0x8F7709C41F65DDFE);
+            return new AnimTagIDImpl(_Handle + _TagIDOffset!.Value);
+        }
     }
-  }
-  private static nint? _IsReferencedOffset;
+    private static nint? _IsReferencedOffset;
 
-  public ref bool IsReferenced {
-    get {
-      if (_IsReferencedOffset == null) {
-        _IsReferencedOffset = Schema.GetOffset(0x8F7709C4CEABFB2A);
-      }
-      return ref _Handle.AsRef<bool>(_IsReferencedOffset!.Value);
+    public ref bool IsReferenced {
+        get {
+            _IsReferencedOffset = _IsReferencedOffset ?? Schema.GetOffset(0x8F7709C4CEABFB2A);
+            return ref _Handle.AsRef<bool>(_IsReferencedOffset!.Value);
+        }
     }
-  }
 
 
 }

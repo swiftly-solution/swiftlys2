@@ -8,52 +8,52 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootLockUpdateNode : CUnaryUpdateNode, ISchemaClass<CFootLockUpdateNode> {
+public partial interface CFootLockUpdateNode : CUnaryUpdateNode, ISchemaClass<CFootLockUpdateNode>
+{
+    static CFootLockUpdateNode ISchemaClass<CFootLockUpdateNode>.From(nint handle) => new CFootLockUpdateNodeImpl(handle);
+    static int ISchemaClass<CFootLockUpdateNode>.Size => 344;
+    static string? ISchemaClass<CFootLockUpdateNode>.ClassName => null;
 
-  static CFootLockUpdateNode ISchemaClass<CFootLockUpdateNode>.From(nint handle) => new CFootLockUpdateNodeImpl(handle);
-  static int ISchemaClass<CFootLockUpdateNode>.Size => 344;
-  static string? ISchemaClass<CFootLockUpdateNode>.ClassName => null;
 
-  
-  public FootLockPoseOpFixedSettings OpFixedSettings { get; }
-  
-  public ref CUtlVector<FootFixedSettings> FootSettings { get; }
-  
-  public CAnimInputDamping HipShiftDamping { get; }
-  
-  public CAnimInputDamping RootHeightDamping { get; }
-  
-  public ref float StrideCurveScale { get; }
-  
-  public ref float StrideCurveLimitScale { get; }
-  
-  public ref float StepHeightIncreaseScale { get; }
-  
-  public ref float StepHeightDecreaseScale { get; }
-  
-  public ref float HipShiftScale { get; }
-  
-  public ref float BlendTime { get; }
-  
-  public ref float MaxRootHeightOffset { get; }
-  
-  public ref float MinRootHeightOffset { get; }
-  
-  public ref float TiltPlanePitchSpringStrength { get; }
-  
-  public ref float TiltPlaneRollSpringStrength { get; }
-  
-  public ref bool ApplyFootRotationLimits { get; }
-  
-  public ref bool ApplyHipShift { get; }
-  
-  public ref bool ModulateStepHeight { get; }
-  
-  public ref bool ResetChild { get; }
-  
-  public ref bool EnableVerticalCurvedPaths { get; }
-  
-  public ref bool EnableRootHeightDamping { get; }
+    public FootLockPoseOpFixedSettings OpFixedSettings { get; }
+
+    public ref CUtlVector<FootFixedSettings> FootSettings { get; }
+
+    public CAnimInputDamping HipShiftDamping { get; }
+
+    public CAnimInputDamping RootHeightDamping { get; }
+
+    public ref float StrideCurveScale { get; }
+
+    public ref float StrideCurveLimitScale { get; }
+
+    public ref float StepHeightIncreaseScale { get; }
+
+    public ref float StepHeightDecreaseScale { get; }
+
+    public ref float HipShiftScale { get; }
+
+    public ref float BlendTime { get; }
+
+    public ref float MaxRootHeightOffset { get; }
+
+    public ref float MinRootHeightOffset { get; }
+
+    public ref float TiltPlanePitchSpringStrength { get; }
+
+    public ref float TiltPlaneRollSpringStrength { get; }
+
+    public ref bool ApplyFootRotationLimits { get; }
+
+    public ref bool ApplyHipShift { get; }
+
+    public ref bool ModulateStepHeight { get; }
+
+    public ref bool ResetChild { get; }
+
+    public ref bool EnableVerticalCurvedPaths { get; }
+
+    public ref bool EnableRootHeightDamping { get; }
 
 
 }

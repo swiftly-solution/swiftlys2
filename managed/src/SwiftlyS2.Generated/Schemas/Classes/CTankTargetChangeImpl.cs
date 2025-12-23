@@ -6,44 +6,36 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CTankTargetChangeImpl : CPointEntityImpl, CTankTargetChange {
+internal partial class CTankTargetChangeImpl : CPointEntityImpl, CTankTargetChange
+{
+    public CTankTargetChangeImpl(nint handle) : base(handle) { }
 
-  public CTankTargetChangeImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NewTargetOffset;
 
-  private static nint? _NewTargetOffset;
-
-  public SchemaUntypedField NewTarget {
-    get {
-      if (_NewTargetOffset == null) {
-        _NewTargetOffset = Schema.GetOffset(0xC9633A4FC35D87C4);
-      }
-      return new SchemaUntypedField(_Handle + _NewTargetOffset!.Value);
+    public ref CVariant<CVariantDefaultAllocator> NewTarget {
+        get {
+            _NewTargetOffset = _NewTargetOffset ?? Schema.GetOffset(0xC9633A4FC35D87C4);
+            return ref _Handle.AsRef<CVariant<CVariantDefaultAllocator>>(_NewTargetOffset!.Value);
+        }
     }
-  }
-  private static nint? _NewTargetNameOffset;
+    private static nint? _NewTargetNameOffset;
 
-  public string NewTargetName {
-    get {
-      if (_NewTargetNameOffset == null) {
-        _NewTargetNameOffset = Schema.GetOffset(0xC9633A4FFCD3FD1F);
-      }
-      var ptr = _Handle.Read<nint>(_NewTargetNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_NewTargetNameOffset == null) {
-        _NewTargetNameOffset = Schema.GetOffset(0xC9633A4FFCD3FD1F);
-      }
-      Schema.SetString(_Handle, _NewTargetNameOffset!.Value, value);
-    }
-  } 
+    public string NewTargetName {
+        get {
+            _NewTargetNameOffset = _NewTargetNameOffset ?? Schema.GetOffset(0xC9633A4FFCD3FD1F);
+            return Schema.GetString(_Handle.Read<nint>(_NewTargetNameOffset!.Value));
+        }
+        set {
+            _NewTargetNameOffset = _NewTargetNameOffset ?? Schema.GetOffset(0xC9633A4FFCD3FD1F);
+            Schema.SetString(_Handle, _NewTargetNameOffset!.Value, value);
+        }
+    } 
 
 
 }

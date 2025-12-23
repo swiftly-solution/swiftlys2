@@ -8,42 +8,42 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CAnimDemoCaptureSettings : ISchemaClass<CAnimDemoCaptureSettings> {
+public partial interface CAnimDemoCaptureSettings : ISchemaClass<CAnimDemoCaptureSettings>
+{
+    static CAnimDemoCaptureSettings ISchemaClass<CAnimDemoCaptureSettings>.From(nint handle) => new CAnimDemoCaptureSettingsImpl(handle);
+    static int ISchemaClass<CAnimDemoCaptureSettings>.Size => 128;
+    static string? ISchemaClass<CAnimDemoCaptureSettings>.ClassName => null;
 
-  static CAnimDemoCaptureSettings ISchemaClass<CAnimDemoCaptureSettings>.From(nint handle) => new CAnimDemoCaptureSettingsImpl(handle);
-  static int ISchemaClass<CAnimDemoCaptureSettings>.Size => 128;
-  static string? ISchemaClass<CAnimDemoCaptureSettings>.ClassName => null;
 
-  
-  public ref Vector2D ErrorRangeSplineRotation { get; }
-  
-  public ref Vector2D ErrorRangeSplineTranslation { get; }
-  
-  public ref Vector2D ErrorRangeSplineScale { get; }
-  
-  public ref float IkRotation_MaxSplineError { get; }
-  
-  public ref float IkTranslation_MaxSplineError { get; }
-  
-  public ref Vector2D ErrorRangeQuantizationRotation { get; }
-  
-  public ref Vector2D ErrorRangeQuantizationTranslation { get; }
-  
-  public ref Vector2D ErrorRangeQuantizationScale { get; }
-  
-  public ref float IkRotation_MaxQuantizationError { get; }
-  
-  public ref float IkTranslation_MaxQuantizationError { get; }
-  
-  public string BaseSequence { get; set; }
-  
-  public ref int BaseSequenceFrame { get; }
-  
-  public ref EDemoBoneSelectionMode BoneSelectionMode { get; }
-  
-  public ref CUtlVector<BoneDemoCaptureSettings_t> Bones { get; }
-  
-  public ref CUtlVector<IKDemoCaptureSettings_t> IkChains { get; }
+    public ref Vector2D ErrorRangeSplineRotation { get; }
+
+    public ref Vector2D ErrorRangeSplineTranslation { get; }
+
+    public ref Vector2D ErrorRangeSplineScale { get; }
+
+    public ref float IkRotation_MaxSplineError { get; }
+
+    public ref float IkTranslation_MaxSplineError { get; }
+
+    public ref Vector2D ErrorRangeQuantizationRotation { get; }
+
+    public ref Vector2D ErrorRangeQuantizationTranslation { get; }
+
+    public ref Vector2D ErrorRangeQuantizationScale { get; }
+
+    public ref float IkRotation_MaxQuantizationError { get; }
+
+    public ref float IkTranslation_MaxQuantizationError { get; }
+
+    public string BaseSequence { get; set; }
+
+    public ref int BaseSequenceFrame { get; }
+
+    public ref EDemoBoneSelectionMode BoneSelectionMode { get; }
+
+    public ref CUtlVector<BoneDemoCaptureSettings_t> Bones { get; }
+
+    public ref CUtlVector<IKDemoCaptureSettings_t> IkChains { get; }
 
 
 }

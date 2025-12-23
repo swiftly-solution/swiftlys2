@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CDSPPresetMixgroupModifierTableImpl : SchemaClass, CDSPPresetMixgroupModifierTable {
+internal partial class CDSPPresetMixgroupModifierTableImpl : SchemaClass, CDSPPresetMixgroupModifierTable
+{
+    public CDSPPresetMixgroupModifierTableImpl(nint handle) : base(handle) { }
 
-  public CDSPPresetMixgroupModifierTableImpl(nint handle) : base(handle) {
-  }
+    private static nint? _TableOffset;
 
-  private static nint? _TableOffset;
-
-  public ref CUtlVector<CDspPresetModifierList> Table {
-    get {
-      if (_TableOffset == null) {
-        _TableOffset = Schema.GetOffset(0xB4266D22715EA0FF);
-      }
-      return ref _Handle.AsRef<CUtlVector<CDspPresetModifierList>>(_TableOffset!.Value);
+    public ref CUtlVector<CDspPresetModifierList> Table {
+        get {
+            _TableOffset = _TableOffset ?? Schema.GetOffset(0xB4266D22715EA0FF);
+            return ref _Handle.AsRef<CUtlVector<CDspPresetModifierList>>(_TableOffset!.Value);
+        }
     }
-  }
 
 
 }

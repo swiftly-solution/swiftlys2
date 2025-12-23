@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CBreakableStageHelper : ISchemaClass<CBreakableStageHelper> {
+public partial interface CBreakableStageHelper : ISchemaClass<CBreakableStageHelper>
+{
+    static CBreakableStageHelper ISchemaClass<CBreakableStageHelper>.From(nint handle) => new CBreakableStageHelperImpl(handle);
+    static int ISchemaClass<CBreakableStageHelper>.Size => 24;
+    static string? ISchemaClass<CBreakableStageHelper>.ClassName => null;
 
-  static CBreakableStageHelper ISchemaClass<CBreakableStageHelper>.From(nint handle) => new CBreakableStageHelperImpl(handle);
-  static int ISchemaClass<CBreakableStageHelper>.Size => 24;
-  static string? ISchemaClass<CBreakableStageHelper>.ClassName => null;
 
-  
-  public ref int CurrentStage { get; }
-  
-  public ref int StageCount { get; }
+    public ref int CurrentStage { get; }
+
+    public ref int StageCount { get; }
 
 
 }

@@ -8,20 +8,20 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSubtractUpdateNode : CBinaryUpdateNode, ISchemaClass<CSubtractUpdateNode> {
+public partial interface CSubtractUpdateNode : CBinaryUpdateNode, ISchemaClass<CSubtractUpdateNode>
+{
+    static CSubtractUpdateNode ISchemaClass<CSubtractUpdateNode>.From(nint handle) => new CSubtractUpdateNodeImpl(handle);
+    static int ISchemaClass<CSubtractUpdateNode>.Size => 160;
+    static string? ISchemaClass<CSubtractUpdateNode>.ClassName => null;
 
-  static CSubtractUpdateNode ISchemaClass<CSubtractUpdateNode>.From(nint handle) => new CSubtractUpdateNodeImpl(handle);
-  static int ISchemaClass<CSubtractUpdateNode>.Size => 160;
-  static string? ISchemaClass<CSubtractUpdateNode>.ClassName => null;
 
-  
-  public ref BinaryNodeChildOption FootMotionTiming { get; }
-  
-  public ref bool ApplyToFootMotion { get; }
-  
-  public ref bool ApplyChannelsSeparately { get; }
-  
-  public ref bool UseModelSpace { get; }
+    public ref BinaryNodeChildOption FootMotionTiming { get; }
+
+    public ref bool ApplyToFootMotion { get; }
+
+    public ref bool ApplyChannelsSeparately { get; }
+
+    public ref bool UseModelSpace { get; }
 
 
 }

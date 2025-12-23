@@ -6,27 +6,24 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class RenderProjectedMaterial_tImpl : SchemaClass, RenderProjectedMaterial_t {
+internal partial class RenderProjectedMaterial_tImpl : SchemaClass, RenderProjectedMaterial_t
+{
+    public RenderProjectedMaterial_tImpl(nint handle) : base(handle) { }
 
-  public RenderProjectedMaterial_tImpl(nint handle) : base(handle) {
-  }
+    private static nint? _MaterialOffset;
 
-  private static nint? _MaterialOffset;
-
-  public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material {
-    get {
-      if (_MaterialOffset == null) {
-        _MaterialOffset = Schema.GetOffset(0x62AF09D5888CE42E);
-      }
-      return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+    public ref CStrongHandle<InfoForResourceTypeIMaterial2> Material {
+        get {
+            _MaterialOffset = _MaterialOffset ?? Schema.GetOffset(0x62AF09D5888CE42E);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeIMaterial2>>(_MaterialOffset!.Value);
+        }
     }
-  }
 
 
 }

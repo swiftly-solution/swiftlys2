@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVPhysXSurfacePropertiesList : ISchemaClass<CVPhysXSurfacePropertiesList> {
+public partial interface CVPhysXSurfacePropertiesList : ISchemaClass<CVPhysXSurfacePropertiesList>
+{
+    static CVPhysXSurfacePropertiesList ISchemaClass<CVPhysXSurfacePropertiesList>.From(nint handle) => new CVPhysXSurfacePropertiesListImpl(handle);
+    static int ISchemaClass<CVPhysXSurfacePropertiesList>.Size => 24;
+    static string? ISchemaClass<CVPhysXSurfacePropertiesList>.ClassName => null;
 
-  static CVPhysXSurfacePropertiesList ISchemaClass<CVPhysXSurfacePropertiesList>.From(nint handle) => new CVPhysXSurfacePropertiesListImpl(handle);
-  static int ISchemaClass<CVPhysXSurfacePropertiesList>.Size => 24;
-  static string? ISchemaClass<CVPhysXSurfacePropertiesList>.ClassName => null;
 
-  
-  public ref CUtlVector<PointerTo<CPhysSurfaceProperties>> SurfacePropertiesList { get; }
+    public ref CUtlVector<PointerTo<CPhysSurfaceProperties>> SurfacePropertiesList { get; }
 
 
 }

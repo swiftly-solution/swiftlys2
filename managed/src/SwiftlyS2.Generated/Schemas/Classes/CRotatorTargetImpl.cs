@@ -6,37 +6,32 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CRotatorTargetImpl : CPointEntityImpl, CRotatorTarget {
+internal partial class CRotatorTargetImpl : CPointEntityImpl, CRotatorTarget
+{
+    public CRotatorTargetImpl(nint handle) : base(handle) { }
 
-  public CRotatorTargetImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnArrivedAtOffset;
 
-  private static nint? _OnArrivedAtOffset;
-
-  public CEntityIOOutput OnArrivedAt {
-    get {
-      if (_OnArrivedAtOffset == null) {
-        _OnArrivedAtOffset = Schema.GetOffset(0x448D6B2611C20554);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnArrivedAtOffset!.Value);
+    public ref CEntityIOOutput OnArrivedAt {
+        get {
+            _OnArrivedAtOffset = _OnArrivedAtOffset ?? Schema.GetOffset(0x448D6B2611C20554);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnArrivedAtOffset!.Value);
+        }
     }
-  }
-  private static nint? _SpaceOffset;
+    private static nint? _SpaceOffset;
 
-  public ref RotatorTargetSpace_t Space {
-    get {
-      if (_SpaceOffset == null) {
-        _SpaceOffset = Schema.GetOffset(0x448D6B26A8FD0676);
-      }
-      return ref _Handle.AsRef<RotatorTargetSpace_t>(_SpaceOffset!.Value);
+    public ref RotatorTargetSpace_t Space {
+        get {
+            _SpaceOffset = _SpaceOffset ?? Schema.GetOffset(0x448D6B26A8FD0676);
+            return ref _Handle.AsRef<RotatorTargetSpace_t>(_SpaceOffset!.Value);
+        }
     }
-  }
 
 
 }

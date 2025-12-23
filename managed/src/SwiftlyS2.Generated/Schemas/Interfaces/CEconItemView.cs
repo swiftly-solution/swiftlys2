@@ -8,48 +8,48 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEconItemView : IEconItemInterface, ISchemaClass<CEconItemView> {
+public partial interface CEconItemView : IEconItemInterface, ISchemaClass<CEconItemView>
+{
+    static CEconItemView ISchemaClass<CEconItemView>.From(nint handle) => new CEconItemViewImpl(handle);
+    static int ISchemaClass<CEconItemView>.Size => 680;
+    static string? ISchemaClass<CEconItemView>.ClassName => null;
 
-  static CEconItemView ISchemaClass<CEconItemView>.From(nint handle) => new CEconItemViewImpl(handle);
-  static int ISchemaClass<CEconItemView>.Size => 680;
-  static string? ISchemaClass<CEconItemView>.ClassName => null;
 
-  
-  public ref ushort ItemDefinitionIndex { get; }
-  
-  public ref int EntityQuality { get; }
-  
-  public ref uint EntityLevel { get; }
-  
-  public ref ulong ItemID { get; }
-  
-  public ref uint ItemIDHigh { get; }
-  
-  public ref uint ItemIDLow { get; }
-  
-  public ref uint AccountID { get; }
-  
-  public ref uint InventoryPosition { get; }
-  
-  public ref bool Initialized { get; }
-  
-  public CAttributeList AttributeList { get; }
-  
-  public CAttributeList NetworkedDynamicAttributes { get; }
-  
-  public string CustomName { get; set; }
-  
-  public string CustomNameOverride { get; set; }
+    public ref ushort ItemDefinitionIndex { get; }
 
-  public void ItemDefinitionIndexUpdated();
-  public void EntityQualityUpdated();
-  public void EntityLevelUpdated();
-  public void ItemIDHighUpdated();
-  public void ItemIDLowUpdated();
-  public void AccountIDUpdated();
-  public void InventoryPositionUpdated();
-  public void InitializedUpdated();
-  public void AttributeListUpdated();
-  public void NetworkedDynamicAttributesUpdated();
-  public void CustomNameUpdated();
+    public ref int EntityQuality { get; }
+
+    public ref uint EntityLevel { get; }
+
+    public ref ulong ItemID { get; }
+
+    public ref uint ItemIDHigh { get; }
+
+    public ref uint ItemIDLow { get; }
+
+    public ref uint AccountID { get; }
+
+    public ref uint InventoryPosition { get; }
+
+    public ref bool Initialized { get; }
+
+    public CAttributeList AttributeList { get; }
+
+    public CAttributeList NetworkedDynamicAttributes { get; }
+
+    public string CustomName { get; set; }
+
+    public string CustomNameOverride { get; set; }
+
+    public void ItemDefinitionIndexUpdated();
+    public void EntityQualityUpdated();
+    public void EntityLevelUpdated();
+    public void ItemIDHighUpdated();
+    public void ItemIDLowUpdated();
+    public void AccountIDUpdated();
+    public void InventoryPositionUpdated();
+    public void InitializedUpdated();
+    public void AttributeListUpdated();
+    public void NetworkedDynamicAttributesUpdated();
+    public void CustomNameUpdated();
 }

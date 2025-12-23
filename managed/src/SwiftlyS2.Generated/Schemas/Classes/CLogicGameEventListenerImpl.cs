@@ -6,83 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicGameEventListenerImpl : CLogicalEntityImpl, CLogicGameEventListener {
+internal partial class CLogicGameEventListenerImpl : CLogicalEntityImpl, CLogicGameEventListener
+{
+    public CLogicGameEventListenerImpl(nint handle) : base(handle) { }
 
-  public CLogicGameEventListenerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OnEventFiredOffset;
 
-  private static nint? _OnEventFiredOffset;
-
-  public CEntityIOOutput OnEventFired {
-    get {
-      if (_OnEventFiredOffset == null) {
-        _OnEventFiredOffset = Schema.GetOffset(0xB18EF22E84EA158);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnEventFiredOffset!.Value);
+    public ref CEntityIOOutput OnEventFired {
+        get {
+            _OnEventFiredOffset = _OnEventFiredOffset ?? Schema.GetOffset(0xB18EF22E84EA158);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnEventFiredOffset!.Value);
+        }
     }
-  }
-  private static nint? _GameEventNameOffset;
+    private static nint? _GameEventNameOffset;
 
-  public string GameEventName {
-    get {
-      if (_GameEventNameOffset == null) {
-        _GameEventNameOffset = Schema.GetOffset(0xB18EF22C6581BAE);
-      }
-      var ptr = _Handle.Read<nint>(_GameEventNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_GameEventNameOffset == null) {
-        _GameEventNameOffset = Schema.GetOffset(0xB18EF22C6581BAE);
-      }
-      Schema.SetString(_Handle, _GameEventNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _GameEventItemOffset;
+    public string GameEventName {
+        get {
+            _GameEventNameOffset = _GameEventNameOffset ?? Schema.GetOffset(0xB18EF22C6581BAE);
+            return Schema.GetString(_Handle.Read<nint>(_GameEventNameOffset!.Value));
+        }
+        set {
+            _GameEventNameOffset = _GameEventNameOffset ?? Schema.GetOffset(0xB18EF22C6581BAE);
+            Schema.SetString(_Handle, _GameEventNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _GameEventItemOffset;
 
-  public string GameEventItem {
-    get {
-      if (_GameEventItemOffset == null) {
-        _GameEventItemOffset = Schema.GetOffset(0xB18EF22ACB669EE);
-      }
-      var ptr = _Handle.Read<nint>(_GameEventItemOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_GameEventItemOffset == null) {
-        _GameEventItemOffset = Schema.GetOffset(0xB18EF22ACB669EE);
-      }
-      Schema.SetString(_Handle, _GameEventItemOffset!.Value, value);
-    }
-  } 
-  private static nint? _EnabledOffset;
+    public string GameEventItem {
+        get {
+            _GameEventItemOffset = _GameEventItemOffset ?? Schema.GetOffset(0xB18EF22ACB669EE);
+            return Schema.GetString(_Handle.Read<nint>(_GameEventItemOffset!.Value));
+        }
+        set {
+            _GameEventItemOffset = _GameEventItemOffset ?? Schema.GetOffset(0xB18EF22ACB669EE);
+            Schema.SetString(_Handle, _GameEventItemOffset!.Value, value);
+        }
+    } 
+    private static nint? _EnabledOffset;
 
-  public ref bool Enabled {
-    get {
-      if (_EnabledOffset == null) {
-        _EnabledOffset = Schema.GetOffset(0xB18EF226154EB7E);
-      }
-      return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+    public ref bool Enabled {
+        get {
+            _EnabledOffset = _EnabledOffset ?? Schema.GetOffset(0xB18EF226154EB7E);
+            return ref _Handle.AsRef<bool>(_EnabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _StartDisabledOffset;
+    private static nint? _StartDisabledOffset;
 
-  public ref bool StartDisabled {
-    get {
-      if (_StartDisabledOffset == null) {
-        _StartDisabledOffset = Schema.GetOffset(0xB18EF2261ED0C4F);
-      }
-      return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+    public ref bool StartDisabled {
+        get {
+            _StartDisabledOffset = _StartDisabledOffset ?? Schema.GetOffset(0xB18EF2261ED0C4F);
+            return ref _Handle.AsRef<bool>(_StartDisabledOffset!.Value);
+        }
     }
-  }
 
-  public void EnabledUpdated() {
-    Schema.Update(_Handle, 0xB18EF226154EB7E);
-  }
+    public void EnabledUpdated() => Schema.Update(_Handle, 0xB18EF226154EB7E);
 }

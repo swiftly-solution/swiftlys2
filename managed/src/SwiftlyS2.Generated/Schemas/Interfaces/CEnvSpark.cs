@@ -8,22 +8,22 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvSpark : CPointEntity, ISchemaClass<CEnvSpark> {
+public partial interface CEnvSpark : CPointEntity, ISchemaClass<CEnvSpark>
+{
+    static CEnvSpark ISchemaClass<CEnvSpark>.From(nint handle) => new CEnvSparkImpl(handle);
+    static int ISchemaClass<CEnvSpark>.Size => 1320;
+    static string? ISchemaClass<CEnvSpark>.ClassName => "env_spark";
 
-  static CEnvSpark ISchemaClass<CEnvSpark>.From(nint handle) => new CEnvSparkImpl(handle);
-  static int ISchemaClass<CEnvSpark>.Size => 1320;
-  static string? ISchemaClass<CEnvSpark>.ClassName => "env_spark";
 
-  
-  public ref float Delay { get; }
-  
-  public ref int Magnitude { get; }
-  
-  public ref int TrailLength { get; }
-  
-  public ref int Type { get; }
-  
-  public CEntityIOOutput OnSpark { get; }
+    public ref float Delay { get; }
+
+    public ref int Magnitude { get; }
+
+    public ref int TrailLength { get; }
+
+    public ref int Type { get; }
+
+    public ref CEntityIOOutput OnSpark { get; }
 
 
 }

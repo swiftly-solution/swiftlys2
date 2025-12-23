@@ -1,6 +1,6 @@
 /************************************************************************************************
  *  SwiftlyS2 is a scripting framework for Source2-based games.
- *  Copyright (C) 2025 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
+ *  Copyright (C) 2023-2026 Swiftly Solution SRL via Sava Andrei-Sebastian and it's contributors
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -54,9 +54,9 @@ private:
     bool ShouldLog(LogType type);
     LogType GetMinLogLevelFromEnv();
 
-    bool m_bShouldOutputToConsole[7] = {true, true, true, true, true, true, false};
-    bool m_bShouldOutputToFile[7] = {false, false, false, false, false, false, false};
-    std::string m_sLogFilePaths[7] = {"", "", "", "", "", "", ""};
+    bool m_bShouldOutputToConsole[7] = { true, true, true, true, true, true, false };
+    bool m_bShouldOutputToFile[7] = { false, false, false, false, false, false, false };
+    std::string m_sLogFilePaths[7] = { "", "", "", "", "", "", "" };
     std::set<std::string> m_sNonColoredCategories;
 };
 

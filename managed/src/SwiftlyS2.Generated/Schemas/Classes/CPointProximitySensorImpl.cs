@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPointProximitySensorImpl : CPointEntityImpl, CPointProximitySensor {
+internal partial class CPointProximitySensorImpl : CPointEntityImpl, CPointProximitySensor
+{
+    public CPointProximitySensorImpl(nint handle) : base(handle) { }
 
-  public CPointProximitySensorImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DisabledOffset;
 
-  private static nint? _DisabledOffset;
-
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0x769A8B133A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0x769A8B133A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _TargetEntityOffset;
+    private static nint? _TargetEntityOffset;
 
-  public ref CHandle<CBaseEntity> TargetEntity {
-    get {
-      if (_TargetEntityOffset == null) {
-        _TargetEntityOffset = Schema.GetOffset(0x769A8B1325D042A9);
-      }
-      return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset!.Value);
+    public ref CHandle<CBaseEntity> TargetEntity {
+        get {
+            _TargetEntityOffset = _TargetEntityOffset ?? Schema.GetOffset(0x769A8B1325D042A9);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_TargetEntityOffset!.Value);
+        }
     }
-  }
-  private static nint? _DistanceOffset;
+    private static nint? _DistanceOffset;
 
-  public SchemaUntypedField Distance {
-    get {
-      if (_DistanceOffset == null) {
-        _DistanceOffset = Schema.GetOffset(0x769A8B13978BC0E2);
-      }
-      return new SchemaUntypedField(_Handle + _DistanceOffset!.Value);
+    public SchemaUntypedField Distance {
+        get {
+            _DistanceOffset = _DistanceOffset ?? Schema.GetOffset(0x769A8B13978BC0E2);
+            return new SchemaUntypedField(_Handle + _DistanceOffset!.Value);
+        }
     }
-  }
 
 
 }

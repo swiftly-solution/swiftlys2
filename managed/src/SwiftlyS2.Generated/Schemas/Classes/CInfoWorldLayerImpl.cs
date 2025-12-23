@@ -6,112 +6,83 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CInfoWorldLayerImpl : CBaseEntityImpl, CInfoWorldLayer {
+internal partial class CInfoWorldLayerImpl : CBaseEntityImpl, CInfoWorldLayer
+{
+    public CInfoWorldLayerImpl(nint handle) : base(handle) { }
 
-  public CInfoWorldLayerImpl(nint handle) : base(handle) {
-  }
+    private static nint? _OutputOnEntitiesSpawnedOffset;
 
-  private static nint? _OutputOnEntitiesSpawnedOffset;
-
-  public CEntityIOOutput OutputOnEntitiesSpawned {
-    get {
-      if (_OutputOnEntitiesSpawnedOffset == null) {
-        _OutputOnEntitiesSpawnedOffset = Schema.GetOffset(0x74C9C61B31420D1E);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OutputOnEntitiesSpawnedOffset!.Value);
+    public ref CEntityIOOutput OutputOnEntitiesSpawned {
+        get {
+            _OutputOnEntitiesSpawnedOffset = _OutputOnEntitiesSpawnedOffset ?? Schema.GetOffset(0x74C9C61B31420D1E);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OutputOnEntitiesSpawnedOffset!.Value);
+        }
     }
-  }
-  private static nint? _WorldNameOffset;
+    private static nint? _WorldNameOffset;
 
-  public string WorldName {
-    get {
-      if (_WorldNameOffset == null) {
-        _WorldNameOffset = Schema.GetOffset(0x74C9C61B29890DD8);
-      }
-      var ptr = _Handle.Read<nint>(_WorldNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_WorldNameOffset == null) {
-        _WorldNameOffset = Schema.GetOffset(0x74C9C61B29890DD8);
-      }
-      Schema.SetString(_Handle, _WorldNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _LayerNameOffset;
+    public string WorldName {
+        get {
+            _WorldNameOffset = _WorldNameOffset ?? Schema.GetOffset(0x74C9C61B29890DD8);
+            return Schema.GetString(_Handle.Read<nint>(_WorldNameOffset!.Value));
+        }
+        set {
+            _WorldNameOffset = _WorldNameOffset ?? Schema.GetOffset(0x74C9C61B29890DD8);
+            Schema.SetString(_Handle, _WorldNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _LayerNameOffset;
 
-  public string LayerName {
-    get {
-      if (_LayerNameOffset == null) {
-        _LayerNameOffset = Schema.GetOffset(0x74C9C61BEABDA295);
-      }
-      var ptr = _Handle.Read<nint>(_LayerNameOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_LayerNameOffset == null) {
-        _LayerNameOffset = Schema.GetOffset(0x74C9C61BEABDA295);
-      }
-      Schema.SetString(_Handle, _LayerNameOffset!.Value, value);
-    }
-  } 
-  private static nint? _WorldLayerVisibleOffset;
+    public string LayerName {
+        get {
+            _LayerNameOffset = _LayerNameOffset ?? Schema.GetOffset(0x74C9C61BEABDA295);
+            return Schema.GetString(_Handle.Read<nint>(_LayerNameOffset!.Value));
+        }
+        set {
+            _LayerNameOffset = _LayerNameOffset ?? Schema.GetOffset(0x74C9C61BEABDA295);
+            Schema.SetString(_Handle, _LayerNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _WorldLayerVisibleOffset;
 
-  public ref bool WorldLayerVisible {
-    get {
-      if (_WorldLayerVisibleOffset == null) {
-        _WorldLayerVisibleOffset = Schema.GetOffset(0x74C9C61BA9B3715E);
-      }
-      return ref _Handle.AsRef<bool>(_WorldLayerVisibleOffset!.Value);
+    public ref bool WorldLayerVisible {
+        get {
+            _WorldLayerVisibleOffset = _WorldLayerVisibleOffset ?? Schema.GetOffset(0x74C9C61BA9B3715E);
+            return ref _Handle.AsRef<bool>(_WorldLayerVisibleOffset!.Value);
+        }
     }
-  }
-  private static nint? _EntitiesSpawnedOffset;
+    private static nint? _EntitiesSpawnedOffset;
 
-  public ref bool EntitiesSpawned {
-    get {
-      if (_EntitiesSpawnedOffset == null) {
-        _EntitiesSpawnedOffset = Schema.GetOffset(0x74C9C61BAEF9D6C8);
-      }
-      return ref _Handle.AsRef<bool>(_EntitiesSpawnedOffset!.Value);
+    public ref bool EntitiesSpawned {
+        get {
+            _EntitiesSpawnedOffset = _EntitiesSpawnedOffset ?? Schema.GetOffset(0x74C9C61BAEF9D6C8);
+            return ref _Handle.AsRef<bool>(_EntitiesSpawnedOffset!.Value);
+        }
     }
-  }
-  private static nint? _CreateAsChildSpawnGroupOffset;
+    private static nint? _CreateAsChildSpawnGroupOffset;
 
-  public ref bool CreateAsChildSpawnGroup {
-    get {
-      if (_CreateAsChildSpawnGroupOffset == null) {
-        _CreateAsChildSpawnGroupOffset = Schema.GetOffset(0x74C9C61B6D553CD3);
-      }
-      return ref _Handle.AsRef<bool>(_CreateAsChildSpawnGroupOffset!.Value);
+    public ref bool CreateAsChildSpawnGroup {
+        get {
+            _CreateAsChildSpawnGroupOffset = _CreateAsChildSpawnGroupOffset ?? Schema.GetOffset(0x74C9C61B6D553CD3);
+            return ref _Handle.AsRef<bool>(_CreateAsChildSpawnGroupOffset!.Value);
+        }
     }
-  }
-  private static nint? _LayerSpawnGroupOffset;
+    private static nint? _LayerSpawnGroupOffset;
 
-  public ref uint LayerSpawnGroup {
-    get {
-      if (_LayerSpawnGroupOffset == null) {
-        _LayerSpawnGroupOffset = Schema.GetOffset(0x74C9C61B56D4B70E);
-      }
-      return ref _Handle.AsRef<uint>(_LayerSpawnGroupOffset!.Value);
+    public ref uint LayerSpawnGroup {
+        get {
+            _LayerSpawnGroupOffset = _LayerSpawnGroupOffset ?? Schema.GetOffset(0x74C9C61B56D4B70E);
+            return ref _Handle.AsRef<uint>(_LayerSpawnGroupOffset!.Value);
+        }
     }
-  }
 
-  public void WorldNameUpdated() {
-    Schema.Update(_Handle, 0x74C9C61B29890DD8);
-  }
-  public void LayerNameUpdated() {
-    Schema.Update(_Handle, 0x74C9C61BEABDA295);
-  }
-  public void WorldLayerVisibleUpdated() {
-    Schema.Update(_Handle, 0x74C9C61BA9B3715E);
-  }
-  public void EntitiesSpawnedUpdated() {
-    Schema.Update(_Handle, 0x74C9C61BAEF9D6C8);
-  }
+    public void WorldNameUpdated() => Schema.Update(_Handle, 0x74C9C61B29890DD8);
+    public void LayerNameUpdated() => Schema.Update(_Handle, 0x74C9C61BEABDA295);
+    public void WorldLayerVisibleUpdated() => Schema.Update(_Handle, 0x74C9C61BA9B3715E);
+    public void EntitiesSpawnedUpdated() => Schema.Update(_Handle, 0x74C9C61BAEF9D6C8);
 }

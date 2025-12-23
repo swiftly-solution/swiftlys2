@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CBaseFilterImpl : CLogicalEntityImpl, CBaseFilter {
+internal partial class CBaseFilterImpl : CLogicalEntityImpl, CBaseFilter
+{
+    public CBaseFilterImpl(nint handle) : base(handle) { }
 
-  public CBaseFilterImpl(nint handle) : base(handle) {
-  }
+    private static nint? _NegatedOffset;
 
-  private static nint? _NegatedOffset;
-
-  public ref bool Negated {
-    get {
-      if (_NegatedOffset == null) {
-        _NegatedOffset = Schema.GetOffset(0x2D59B2893803BF0D);
-      }
-      return ref _Handle.AsRef<bool>(_NegatedOffset!.Value);
+    public ref bool Negated {
+        get {
+            _NegatedOffset = _NegatedOffset ?? Schema.GetOffset(0x2D59B2893803BF0D);
+            return ref _Handle.AsRef<bool>(_NegatedOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnPassOffset;
+    private static nint? _OnPassOffset;
 
-  public CEntityIOOutput OnPass {
-    get {
-      if (_OnPassOffset == null) {
-        _OnPassOffset = Schema.GetOffset(0x2D59B2899B527249);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnPassOffset!.Value);
+    public ref CEntityIOOutput OnPass {
+        get {
+            _OnPassOffset = _OnPassOffset ?? Schema.GetOffset(0x2D59B2899B527249);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassOffset!.Value);
+        }
     }
-  }
-  private static nint? _OnFailOffset;
+    private static nint? _OnFailOffset;
 
-  public CEntityIOOutput OnFail {
-    get {
-      if (_OnFailOffset == null) {
-        _OnFailOffset = Schema.GetOffset(0x2D59B289794EF854);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnFailOffset!.Value);
+    public ref CEntityIOOutput OnFail {
+        get {
+            _OnFailOffset = _OnFailOffset ?? Schema.GetOffset(0x2D59B289794EF854);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFailOffset!.Value);
+        }
     }
-  }
 
 
 }

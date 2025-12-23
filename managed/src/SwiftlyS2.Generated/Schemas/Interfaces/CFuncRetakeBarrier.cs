@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFuncRetakeBarrier : CDynamicProp, ISchemaClass<CFuncRetakeBarrier> {
-
-  static CFuncRetakeBarrier ISchemaClass<CFuncRetakeBarrier>.From(nint handle) => new CFuncRetakeBarrierImpl(handle);
-  static int ISchemaClass<CFuncRetakeBarrier>.Size => 3440;
-  static string? ISchemaClass<CFuncRetakeBarrier>.ClassName => "func_retakebarrier";
+public partial interface CFuncRetakeBarrier : CDynamicProp, ISchemaClass<CFuncRetakeBarrier>
+{
+    static CFuncRetakeBarrier ISchemaClass<CFuncRetakeBarrier>.From(nint handle) => new CFuncRetakeBarrierImpl(handle);
+    static int ISchemaClass<CFuncRetakeBarrier>.Size => 3440;
+    static string? ISchemaClass<CFuncRetakeBarrier>.ClassName => "func_retakebarrier";
 
 
 

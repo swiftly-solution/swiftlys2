@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CFuseSymbolTableImpl : SchemaClass, CFuseSymbolTable {
+internal partial class CFuseSymbolTableImpl : SchemaClass, CFuseSymbolTable
+{
+    public CFuseSymbolTableImpl(nint handle) : base(handle) { }
 
-  public CFuseSymbolTableImpl(nint handle) : base(handle) {
-  }
+    private static nint? _ConstantsOffset;
 
-  private static nint? _ConstantsOffset;
-
-  public ref CUtlVector<ConstantInfo_t> Constants {
-    get {
-      if (_ConstantsOffset == null) {
-        _ConstantsOffset = Schema.GetOffset(0xD8A03B41460C1382);
-      }
-      return ref _Handle.AsRef<CUtlVector<ConstantInfo_t>>(_ConstantsOffset!.Value);
+    public ref CUtlVector<ConstantInfo_t> Constants {
+        get {
+            _ConstantsOffset = _ConstantsOffset ?? Schema.GetOffset(0xD8A03B41460C1382);
+            return ref _Handle.AsRef<CUtlVector<ConstantInfo_t>>(_ConstantsOffset!.Value);
+        }
     }
-  }
-  private static nint? _VariablesOffset;
+    private static nint? _VariablesOffset;
 
-  public ref CUtlVector<VariableInfo_t> Variables {
-    get {
-      if (_VariablesOffset == null) {
-        _VariablesOffset = Schema.GetOffset(0xD8A03B4106AE7DE2);
-      }
-      return ref _Handle.AsRef<CUtlVector<VariableInfo_t>>(_VariablesOffset!.Value);
+    public ref CUtlVector<VariableInfo_t> Variables {
+        get {
+            _VariablesOffset = _VariablesOffset ?? Schema.GetOffset(0xD8A03B4106AE7DE2);
+            return ref _Handle.AsRef<CUtlVector<VariableInfo_t>>(_VariablesOffset!.Value);
+        }
     }
-  }
-  private static nint? _FunctionsOffset;
+    private static nint? _FunctionsOffset;
 
-  public ref CUtlVector<FunctionInfo_t> Functions {
-    get {
-      if (_FunctionsOffset == null) {
-        _FunctionsOffset = Schema.GetOffset(0xD8A03B41F6EF246E);
-      }
-      return ref _Handle.AsRef<CUtlVector<FunctionInfo_t>>(_FunctionsOffset!.Value);
+    public ref CUtlVector<FunctionInfo_t> Functions {
+        get {
+            _FunctionsOffset = _FunctionsOffset ?? Schema.GetOffset(0xD8A03B41F6EF246E);
+            return ref _Handle.AsRef<CUtlVector<FunctionInfo_t>>(_FunctionsOffset!.Value);
+        }
     }
-  }
-  private static nint? _ConstantMapOffset;
+    private static nint? _ConstantMapOffset;
 
-  public SchemaUntypedField ConstantMap {
-    get {
-      if (_ConstantMapOffset == null) {
-        _ConstantMapOffset = Schema.GetOffset(0xD8A03B4198BF6E51);
-      }
-      return new SchemaUntypedField(_Handle + _ConstantMapOffset!.Value);
+    public SchemaUntypedField ConstantMap {
+        get {
+            _ConstantMapOffset = _ConstantMapOffset ?? Schema.GetOffset(0xD8A03B4198BF6E51);
+            return new SchemaUntypedField(_Handle + _ConstantMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _VariableMapOffset;
+    private static nint? _VariableMapOffset;
 
-  public SchemaUntypedField VariableMap {
-    get {
-      if (_VariableMapOffset == null) {
-        _VariableMapOffset = Schema.GetOffset(0xD8A03B410FDE3671);
-      }
-      return new SchemaUntypedField(_Handle + _VariableMapOffset!.Value);
+    public SchemaUntypedField VariableMap {
+        get {
+            _VariableMapOffset = _VariableMapOffset ?? Schema.GetOffset(0xD8A03B410FDE3671);
+            return new SchemaUntypedField(_Handle + _VariableMapOffset!.Value);
+        }
     }
-  }
-  private static nint? _FunctionMapOffset;
+    private static nint? _FunctionMapOffset;
 
-  public SchemaUntypedField FunctionMap {
-    get {
-      if (_FunctionMapOffset == null) {
-        _FunctionMapOffset = Schema.GetOffset(0xD8A03B4147A33EC5);
-      }
-      return new SchemaUntypedField(_Handle + _FunctionMapOffset!.Value);
+    public SchemaUntypedField FunctionMap {
+        get {
+            _FunctionMapOffset = _FunctionMapOffset ?? Schema.GetOffset(0xD8A03B4147A33EC5);
+            return new SchemaUntypedField(_Handle + _FunctionMapOffset!.Value);
+        }
     }
-  }
 
 
 }

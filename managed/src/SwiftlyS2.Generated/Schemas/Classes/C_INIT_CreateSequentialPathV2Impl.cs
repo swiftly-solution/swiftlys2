@@ -6,77 +6,64 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class C_INIT_CreateSequentialPathV2Impl : CParticleFunctionInitializerImpl, C_INIT_CreateSequentialPathV2 {
+internal partial class C_INIT_CreateSequentialPathV2Impl : CParticleFunctionInitializerImpl, C_INIT_CreateSequentialPathV2
+{
+    public C_INIT_CreateSequentialPathV2Impl(nint handle) : base(handle) { }
 
-  public C_INIT_CreateSequentialPathV2Impl(nint handle) : base(handle) {
-  }
+    private static nint? _MaxDistanceOffset;
 
-  private static nint? _MaxDistanceOffset;
-
-  public CPerParticleFloatInput MaxDistance {
-    get {
-      if (_MaxDistanceOffset == null) {
-        _MaxDistanceOffset = Schema.GetOffset(0xEC06632A844E396A);
-      }
-      return new CPerParticleFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+    public CPerParticleFloatInput MaxDistance {
+        get {
+            _MaxDistanceOffset = _MaxDistanceOffset ?? Schema.GetOffset(0xEC06632A844E396A);
+            return new CPerParticleFloatInputImpl(_Handle + _MaxDistanceOffset!.Value);
+        }
     }
-  }
-  private static nint? _NumToAssignOffset;
+    private static nint? _NumToAssignOffset;
 
-  public CParticleCollectionFloatInput NumToAssign {
-    get {
-      if (_NumToAssignOffset == null) {
-        _NumToAssignOffset = Schema.GetOffset(0xEC06632AF73366BD);
-      }
-      return new CParticleCollectionFloatInputImpl(_Handle + _NumToAssignOffset!.Value);
+    public CParticleCollectionFloatInput NumToAssign {
+        get {
+            _NumToAssignOffset = _NumToAssignOffset ?? Schema.GetOffset(0xEC06632AF73366BD);
+            return new CParticleCollectionFloatInputImpl(_Handle + _NumToAssignOffset!.Value);
+        }
     }
-  }
-  private static nint? _LoopOffset;
+    private static nint? _LoopOffset;
 
-  public ref bool Loop {
-    get {
-      if (_LoopOffset == null) {
-        _LoopOffset = Schema.GetOffset(0xEC06632AC668A4CB);
-      }
-      return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+    public ref bool Loop {
+        get {
+            _LoopOffset = _LoopOffset ?? Schema.GetOffset(0xEC06632AC668A4CB);
+            return ref _Handle.AsRef<bool>(_LoopOffset!.Value);
+        }
     }
-  }
-  private static nint? _CPPairsOffset;
+    private static nint? _CPPairsOffset;
 
-  public ref bool CPPairs {
-    get {
-      if (_CPPairsOffset == null) {
-        _CPPairsOffset = Schema.GetOffset(0xEC06632AA5D36D0F);
-      }
-      return ref _Handle.AsRef<bool>(_CPPairsOffset!.Value);
+    public ref bool CPPairs {
+        get {
+            _CPPairsOffset = _CPPairsOffset ?? Schema.GetOffset(0xEC06632AA5D36D0F);
+            return ref _Handle.AsRef<bool>(_CPPairsOffset!.Value);
+        }
     }
-  }
-  private static nint? _SaveOffsetOffset;
+    private static nint? _SaveOffsetOffset;
 
-  public ref bool SaveOffset {
-    get {
-      if (_SaveOffsetOffset == null) {
-        _SaveOffsetOffset = Schema.GetOffset(0xEC06632A43F64E5B);
-      }
-      return ref _Handle.AsRef<bool>(_SaveOffsetOffset!.Value);
+    public ref bool SaveOffset {
+        get {
+            _SaveOffsetOffset = _SaveOffsetOffset ?? Schema.GetOffset(0xEC06632A43F64E5B);
+            return ref _Handle.AsRef<bool>(_SaveOffsetOffset!.Value);
+        }
     }
-  }
-  private static nint? _PathParamsOffset;
+    private static nint? _PathParamsOffset;
 
-  public CPathParameters PathParams {
-    get {
-      if (_PathParamsOffset == null) {
-        _PathParamsOffset = Schema.GetOffset(0xEC06632A3C10092C);
-      }
-      return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+    public CPathParameters PathParams {
+        get {
+            _PathParamsOffset = _PathParamsOffset ?? Schema.GetOffset(0xEC06632A3C10092C);
+            return new CPathParametersImpl(_Handle + _PathParamsOffset!.Value);
+        }
     }
-  }
 
 
 }

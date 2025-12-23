@@ -4,8 +4,8 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public enum loadout_slot_t : uint {
-
+public enum loadout_slot_t : uint
+{
  LOADOUT_SLOT_PROMOTED = uint.MaxValue - 1,
 
  LOADOUT_SLOT_INVALID = uint.MaxValue,

@@ -8,28 +8,28 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CSeqAutoLayerFlag : ISchemaClass<CSeqAutoLayerFlag> {
+public partial interface CSeqAutoLayerFlag : ISchemaClass<CSeqAutoLayerFlag>
+{
+    static CSeqAutoLayerFlag ISchemaClass<CSeqAutoLayerFlag>.From(nint handle) => new CSeqAutoLayerFlagImpl(handle);
+    static int ISchemaClass<CSeqAutoLayerFlag>.Size => 8;
+    static string? ISchemaClass<CSeqAutoLayerFlag>.ClassName => null;
 
-  static CSeqAutoLayerFlag ISchemaClass<CSeqAutoLayerFlag>.From(nint handle) => new CSeqAutoLayerFlagImpl(handle);
-  static int ISchemaClass<CSeqAutoLayerFlag>.Size => 8;
-  static string? ISchemaClass<CSeqAutoLayerFlag>.ClassName => null;
 
-  
-  public ref bool Post { get; }
-  
-  public ref bool Spline { get; }
-  
-  public ref bool XFade { get; }
-  
-  public ref bool NoBlend { get; }
-  
-  public ref bool Local { get; }
-  
-  public ref bool Pose { get; }
-  
-  public ref bool FetchFrame { get; }
-  
-  public ref bool Subtract { get; }
+    public ref bool Post { get; }
+
+    public ref bool Spline { get; }
+
+    public ref bool XFade { get; }
+
+    public ref bool NoBlend { get; }
+
+    public ref bool Local { get; }
+
+    public ref bool Pose { get; }
+
+    public ref bool FetchFrame { get; }
+
+    public ref bool Subtract { get; }
 
 
 }

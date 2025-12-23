@@ -8,26 +8,26 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_INIT_VelocityRandom : CParticleFunctionInitializer, ISchemaClass<C_INIT_VelocityRandom> {
+public partial interface C_INIT_VelocityRandom : CParticleFunctionInitializer, ISchemaClass<C_INIT_VelocityRandom>
+{
+    static C_INIT_VelocityRandom ISchemaClass<C_INIT_VelocityRandom>.From(nint handle) => new C_INIT_VelocityRandomImpl(handle);
+    static int ISchemaClass<C_INIT_VelocityRandom>.Size => 4672;
+    static string? ISchemaClass<C_INIT_VelocityRandom>.ClassName => null;
 
-  static C_INIT_VelocityRandom ISchemaClass<C_INIT_VelocityRandom>.From(nint handle) => new C_INIT_VelocityRandomImpl(handle);
-  static int ISchemaClass<C_INIT_VelocityRandom>.Size => 4672;
-  static string? ISchemaClass<C_INIT_VelocityRandom>.ClassName => null;
 
-  
-  public ref int ControlPointNumber { get; }
-  
-  public CPerParticleFloatInput SpeedMin { get; }
-  
-  public CPerParticleFloatInput SpeedMax { get; }
-  
-  public CPerParticleVecInput LocalCoordinateSystemSpeedMin { get; }
-  
-  public CPerParticleVecInput LocalCoordinateSystemSpeedMax { get; }
-  
-  public ref bool IgnoreDT { get; }
-  
-  public CRandomNumberGeneratorParameters RandomnessParameters { get; }
+    public ref int ControlPointNumber { get; }
+
+    public CPerParticleFloatInput SpeedMin { get; }
+
+    public CPerParticleFloatInput SpeedMax { get; }
+
+    public CPerParticleVecInput LocalCoordinateSystemSpeedMin { get; }
+
+    public CPerParticleVecInput LocalCoordinateSystemSpeedMax { get; }
+
+    public ref bool IgnoreDT { get; }
+
+    public CRandomNumberGeneratorParameters RandomnessParameters { get; }
 
 
 }

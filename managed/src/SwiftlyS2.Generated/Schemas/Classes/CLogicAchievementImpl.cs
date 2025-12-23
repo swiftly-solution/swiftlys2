@@ -6,54 +6,44 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CLogicAchievementImpl : CLogicalEntityImpl, CLogicAchievement {
+internal partial class CLogicAchievementImpl : CLogicalEntityImpl, CLogicAchievement
+{
+    public CLogicAchievementImpl(nint handle) : base(handle) { }
 
-  public CLogicAchievementImpl(nint handle) : base(handle) {
-  }
+    private static nint? _DisabledOffset;
 
-  private static nint? _DisabledOffset;
-
-  public ref bool Disabled {
-    get {
-      if (_DisabledOffset == null) {
-        _DisabledOffset = Schema.GetOffset(0xE8C4579F3A7C5965);
-      }
-      return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+    public ref bool Disabled {
+        get {
+            _DisabledOffset = _DisabledOffset ?? Schema.GetOffset(0xE8C4579F3A7C5965);
+            return ref _Handle.AsRef<bool>(_DisabledOffset!.Value);
+        }
     }
-  }
-  private static nint? _AchievementEventIDOffset;
+    private static nint? _AchievementEventIDOffset;
 
-  public string AchievementEventID {
-    get {
-      if (_AchievementEventIDOffset == null) {
-        _AchievementEventIDOffset = Schema.GetOffset(0xE8C4579F12AB7E15);
-      }
-      var ptr = _Handle.Read<nint>(_AchievementEventIDOffset!.Value);
-      return Schema.GetString(ptr);
-    }
-    set {
-      if (_AchievementEventIDOffset == null) {
-        _AchievementEventIDOffset = Schema.GetOffset(0xE8C4579F12AB7E15);
-      }
-      Schema.SetString(_Handle, _AchievementEventIDOffset!.Value, value);
-    }
-  } 
-  private static nint? _OnFiredOffset;
+    public string AchievementEventID {
+        get {
+            _AchievementEventIDOffset = _AchievementEventIDOffset ?? Schema.GetOffset(0xE8C4579F12AB7E15);
+            return Schema.GetString(_Handle.Read<nint>(_AchievementEventIDOffset!.Value));
+        }
+        set {
+            _AchievementEventIDOffset = _AchievementEventIDOffset ?? Schema.GetOffset(0xE8C4579F12AB7E15);
+            Schema.SetString(_Handle, _AchievementEventIDOffset!.Value, value);
+        }
+    } 
+    private static nint? _OnFiredOffset;
 
-  public CEntityIOOutput OnFired {
-    get {
-      if (_OnFiredOffset == null) {
-        _OnFiredOffset = Schema.GetOffset(0xE8C4579F84825730);
-      }
-      return new CEntityIOOutputImpl(_Handle + _OnFiredOffset!.Value);
+    public ref CEntityIOOutput OnFired {
+        get {
+            _OnFiredOffset = _OnFiredOffset ?? Schema.GetOffset(0xE8C4579F84825730);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnFiredOffset!.Value);
+        }
     }
-  }
 
 
 }

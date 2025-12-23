@@ -8,24 +8,24 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface C_OP_RemapScalarEndCap : CParticleFunctionOperator, ISchemaClass<C_OP_RemapScalarEndCap> {
+public partial interface C_OP_RemapScalarEndCap : CParticleFunctionOperator, ISchemaClass<C_OP_RemapScalarEndCap>
+{
+    static C_OP_RemapScalarEndCap ISchemaClass<C_OP_RemapScalarEndCap>.From(nint handle) => new C_OP_RemapScalarEndCapImpl(handle);
+    static int ISchemaClass<C_OP_RemapScalarEndCap>.Size => 488;
+    static string? ISchemaClass<C_OP_RemapScalarEndCap>.ClassName => null;
 
-  static C_OP_RemapScalarEndCap ISchemaClass<C_OP_RemapScalarEndCap>.From(nint handle) => new C_OP_RemapScalarEndCapImpl(handle);
-  static int ISchemaClass<C_OP_RemapScalarEndCap>.Size => 488;
-  static string? ISchemaClass<C_OP_RemapScalarEndCap>.ClassName => null;
 
-  
-  public ParticleAttributeIndex_t FieldInput { get; }
-  
-  public ParticleAttributeIndex_t FieldOutput { get; }
-  
-  public ref float InputMin { get; }
-  
-  public ref float InputMax { get; }
-  
-  public ref float OutputMin { get; }
-  
-  public ref float OutputMax { get; }
+    public ParticleAttributeIndex_t FieldInput { get; }
+
+    public ParticleAttributeIndex_t FieldOutput { get; }
+
+    public ref float InputMin { get; }
+
+    public ref float InputMax { get; }
+
+    public ref float OutputMin { get; }
+
+    public ref float OutputMax { get; }
 
 
 }

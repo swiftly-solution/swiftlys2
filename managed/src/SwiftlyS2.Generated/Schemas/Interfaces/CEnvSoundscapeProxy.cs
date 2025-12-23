@@ -8,14 +8,14 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnvSoundscapeProxy : CEnvSoundscape, ISchemaClass<CEnvSoundscapeProxy> {
+public partial interface CEnvSoundscapeProxy : CEnvSoundscape, ISchemaClass<CEnvSoundscapeProxy>
+{
+    static CEnvSoundscapeProxy ISchemaClass<CEnvSoundscapeProxy>.From(nint handle) => new CEnvSoundscapeProxyImpl(handle);
+    static int ISchemaClass<CEnvSoundscapeProxy>.Size => 1432;
+    static string? ISchemaClass<CEnvSoundscapeProxy>.ClassName => "env_soundscape_proxy";
 
-  static CEnvSoundscapeProxy ISchemaClass<CEnvSoundscapeProxy>.From(nint handle) => new CEnvSoundscapeProxyImpl(handle);
-  static int ISchemaClass<CEnvSoundscapeProxy>.Size => 1432;
-  static string? ISchemaClass<CEnvSoundscapeProxy>.ClassName => "env_soundscape_proxy";
 
-  
-  public string MainSoundscapeName { get; set; }
+    public string MainSoundscapeName { get; set; }
 
 
 }

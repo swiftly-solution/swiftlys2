@@ -12,6 +12,7 @@
     "Language": "en",
     "ManualLoadPlugins": false,
     "PluginLoadOrder": [],
+    "DotnetCrashTracerLevel": 0,
     "Menu": {
         "AvailableInputModes": [
             "button",

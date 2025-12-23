@@ -8,11 +8,11 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CEnableMotionFixup : CBaseEntity, ISchemaClass<CEnableMotionFixup> {
-
-  static CEnableMotionFixup ISchemaClass<CEnableMotionFixup>.From(nint handle) => new CEnableMotionFixupImpl(handle);
-  static int ISchemaClass<CEnableMotionFixup>.Size => 1264;
-  static string? ISchemaClass<CEnableMotionFixup>.ClassName => "point_enable_motion_fixup";
+public partial interface CEnableMotionFixup : CBaseEntity, ISchemaClass<CEnableMotionFixup>
+{
+    static CEnableMotionFixup ISchemaClass<CEnableMotionFixup>.From(nint handle) => new CEnableMotionFixupImpl(handle);
+    static int ISchemaClass<CEnableMotionFixup>.Size => 1264;
+    static string? ISchemaClass<CEnableMotionFixup>.ClassName => "point_enable_motion_fixup";
 
 
 

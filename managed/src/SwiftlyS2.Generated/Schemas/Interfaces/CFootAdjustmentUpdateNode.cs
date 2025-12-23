@@ -8,30 +8,30 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CFootAdjustmentUpdateNode : CUnaryUpdateNode, ISchemaClass<CFootAdjustmentUpdateNode> {
+public partial interface CFootAdjustmentUpdateNode : CUnaryUpdateNode, ISchemaClass<CFootAdjustmentUpdateNode>
+{
+    static CFootAdjustmentUpdateNode ISchemaClass<CFootAdjustmentUpdateNode>.From(nint handle) => new CFootAdjustmentUpdateNodeImpl(handle);
+    static int ISchemaClass<CFootAdjustmentUpdateNode>.Size => 176;
+    static string? ISchemaClass<CFootAdjustmentUpdateNode>.ClassName => null;
 
-  static CFootAdjustmentUpdateNode ISchemaClass<CFootAdjustmentUpdateNode>.From(nint handle) => new CFootAdjustmentUpdateNodeImpl(handle);
-  static int ISchemaClass<CFootAdjustmentUpdateNode>.Size => 176;
-  static string? ISchemaClass<CFootAdjustmentUpdateNode>.ClassName => null;
 
-  
-  public ref CUtlVector<HSequence> Clips { get; }
-  
-  public CPoseHandle BasePoseCacheHandle { get; }
-  
-  public CAnimParamHandle FacingTarget { get; }
-  
-  public ref float TurnTimeMin { get; }
-  
-  public ref float TurnTimeMax { get; }
-  
-  public ref float StepHeightMax { get; }
-  
-  public ref float StepHeightMaxAngle { get; }
-  
-  public ref bool ResetChild { get; }
-  
-  public ref bool AnimationDriven { get; }
+    public ref CUtlVector<HSequence> Clips { get; }
+
+    public CPoseHandle BasePoseCacheHandle { get; }
+
+    public CAnimParamHandle FacingTarget { get; }
+
+    public ref float TurnTimeMin { get; }
+
+    public ref float TurnTimeMax { get; }
+
+    public ref float StepHeightMax { get; }
+
+    public ref float StepHeightMaxAngle { get; }
+
+    public ref bool ResetChild { get; }
+
+    public ref bool AnimationDriven { get; }
 
 
 }

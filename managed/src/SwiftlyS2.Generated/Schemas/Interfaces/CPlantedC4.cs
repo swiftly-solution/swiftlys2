@@ -8,79 +8,79 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPlantedC4 : CBaseAnimGraph, ISchemaClass<CPlantedC4> {
+public partial interface CPlantedC4 : CBaseAnimGraph, ISchemaClass<CPlantedC4>
+{
+    static CPlantedC4 ISchemaClass<CPlantedC4>.From(nint handle) => new CPlantedC4Impl(handle);
+    static int ISchemaClass<CPlantedC4>.Size => 3728;
+    static string? ISchemaClass<CPlantedC4>.ClassName => "planted_c4";
 
-  static CPlantedC4 ISchemaClass<CPlantedC4>.From(nint handle) => new CPlantedC4Impl(handle);
-  static int ISchemaClass<CPlantedC4>.Size => 3728;
-  static string? ISchemaClass<CPlantedC4>.ClassName => "planted_c4";
 
-  
-  public ref bool BombTicking { get; }
-  
-  public GameTime_t C4Blow { get; }
-  
-  public ref int BombSite { get; }
-  
-  public ref int SourceSoundscapeHash { get; }
-  
-  public ref bool AbortDetonationBecauseWorldIsFrozen { get; }
-  
-  public CAttributeContainer AttributeManager { get; }
-  
-  public CEntityIOOutput OnBombDefused { get; }
-  
-  public CEntityIOOutput OnBombBeginDefuse { get; }
-  
-  public CEntityIOOutput OnBombDefuseAborted { get; }
-  
-  public ref bool CannotBeDefused { get; }
-  
-  public EntitySpottedState_t EntitySpottedState { get; }
-  
-  public ref int SpotRules { get; }
-  
-  public ref bool TrainingPlacedByPlayer { get; }
-  
-  public ref bool HasExploded { get; }
-  
-  public ref float TimerLength { get; }
-  
-  public ref bool BeingDefused { get; }
-  
-  public GameTime_t LastDefuseTime { get; }
-  
-  public ref float DefuseLength { get; }
-  
-  public GameTime_t DefuseCountDown { get; }
-  
-  public ref bool BombDefused { get; }
-  
-  public ref CHandle<CCSPlayerPawn> BombDefuser { get; }
-  
-  public ref int ProgressBarTime { get; }
-  
-  public ref bool VoiceAlertFired { get; }
-  
-  public ISchemaFixedArray<bool> VoiceAlertPlayed { get; }
-  
-  public GameTime_t NextBotBeepTime { get; }
-  
-  public ref QAngle CatchUpToPlayerEye { get; }
-  
-  public GameTime_t LastSpinDetectionTime { get; }
+    public ref bool BombTicking { get; }
 
-  public void BombTickingUpdated();
-  public void C4BlowUpdated();
-  public void BombSiteUpdated();
-  public void SourceSoundscapeHashUpdated();
-  public void AttributeManagerUpdated();
-  public void CannotBeDefusedUpdated();
-  public void EntitySpottedStateUpdated();
-  public void HasExplodedUpdated();
-  public void TimerLengthUpdated();
-  public void BeingDefusedUpdated();
-  public void DefuseLengthUpdated();
-  public void DefuseCountDownUpdated();
-  public void BombDefusedUpdated();
-  public void BombDefuserUpdated();
+    public GameTime_t C4Blow { get; }
+
+    public ref int BombSite { get; }
+
+    public ref int SourceSoundscapeHash { get; }
+
+    public ref bool AbortDetonationBecauseWorldIsFrozen { get; }
+
+    public CAttributeContainer AttributeManager { get; }
+
+    public ref CEntityIOOutput OnBombDefused { get; }
+
+    public ref CEntityIOOutput OnBombBeginDefuse { get; }
+
+    public ref CEntityIOOutput OnBombDefuseAborted { get; }
+
+    public ref bool CannotBeDefused { get; }
+
+    public EntitySpottedState_t EntitySpottedState { get; }
+
+    public ref int SpotRules { get; }
+
+    public ref bool TrainingPlacedByPlayer { get; }
+
+    public ref bool HasExploded { get; }
+
+    public ref float TimerLength { get; }
+
+    public ref bool BeingDefused { get; }
+
+    public GameTime_t LastDefuseTime { get; }
+
+    public ref float DefuseLength { get; }
+
+    public GameTime_t DefuseCountDown { get; }
+
+    public ref bool BombDefused { get; }
+
+    public ref CHandle<CCSPlayerPawn> BombDefuser { get; }
+
+    public ref int ProgressBarTime { get; }
+
+    public ref bool VoiceAlertFired { get; }
+
+    public ISchemaFixedArray<bool> VoiceAlertPlayed { get; }
+
+    public GameTime_t NextBotBeepTime { get; }
+
+    public ref QAngle CatchUpToPlayerEye { get; }
+
+    public GameTime_t LastSpinDetectionTime { get; }
+
+    public void BombTickingUpdated();
+    public void C4BlowUpdated();
+    public void BombSiteUpdated();
+    public void SourceSoundscapeHashUpdated();
+    public void AttributeManagerUpdated();
+    public void CannotBeDefusedUpdated();
+    public void EntitySpottedStateUpdated();
+    public void HasExplodedUpdated();
+    public void TimerLengthUpdated();
+    public void BeingDefusedUpdated();
+    public void DefuseLengthUpdated();
+    public void DefuseCountDownUpdated();
+    public void BombDefusedUpdated();
+    public void BombDefuserUpdated();
 }

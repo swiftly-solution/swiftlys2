@@ -8,18 +8,18 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CGeneralSpin : CParticleFunctionOperator, ISchemaClass<CGeneralSpin> {
+public partial interface CGeneralSpin : CParticleFunctionOperator, ISchemaClass<CGeneralSpin>
+{
+    static CGeneralSpin ISchemaClass<CGeneralSpin>.From(nint handle) => new CGeneralSpinImpl(handle);
+    static int ISchemaClass<CGeneralSpin>.Size => 488;
+    static string? ISchemaClass<CGeneralSpin>.ClassName => null;
 
-  static CGeneralSpin ISchemaClass<CGeneralSpin>.From(nint handle) => new CGeneralSpinImpl(handle);
-  static int ISchemaClass<CGeneralSpin>.Size => 488;
-  static string? ISchemaClass<CGeneralSpin>.ClassName => null;
 
-  
-  public ref int SpinRateDegrees { get; }
-  
-  public ref int SpinRateMinDegrees { get; }
-  
-  public ref float SpinRateStopTime { get; }
+    public ref int SpinRateDegrees { get; }
+
+    public ref int SpinRateMinDegrees { get; }
+
+    public ref float SpinRateStopTime { get; }
 
 
 }

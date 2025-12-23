@@ -6,47 +6,40 @@ using System;
 using System.Threading;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.Schemas;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerRealtimeFMSineWaveImpl : CVoiceContainerBaseImpl, CVoiceContainerRealtimeFMSineWave {
+internal partial class CVoiceContainerRealtimeFMSineWaveImpl : CVoiceContainerBaseImpl, CVoiceContainerRealtimeFMSineWave
+{
+    public CVoiceContainerRealtimeFMSineWaveImpl(nint handle) : base(handle) { }
 
-  public CVoiceContainerRealtimeFMSineWaveImpl(nint handle) : base(handle) {
-  }
+    private static nint? _CarrierFrequencyOffset;
 
-  private static nint? _CarrierFrequencyOffset;
-
-  public ref float CarrierFrequency {
-    get {
-      if (_CarrierFrequencyOffset == null) {
-        _CarrierFrequencyOffset = Schema.GetOffset(0x3AB0D193041DC311);
-      }
-      return ref _Handle.AsRef<float>(_CarrierFrequencyOffset!.Value);
+    public ref float CarrierFrequency {
+        get {
+            _CarrierFrequencyOffset = _CarrierFrequencyOffset ?? Schema.GetOffset(0x3AB0D193041DC311);
+            return ref _Handle.AsRef<float>(_CarrierFrequencyOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModulatorFrequencyOffset;
+    private static nint? _ModulatorFrequencyOffset;
 
-  public ref float ModulatorFrequency {
-    get {
-      if (_ModulatorFrequencyOffset == null) {
-        _ModulatorFrequencyOffset = Schema.GetOffset(0x3AB0D193656A8FFE);
-      }
-      return ref _Handle.AsRef<float>(_ModulatorFrequencyOffset!.Value);
+    public ref float ModulatorFrequency {
+        get {
+            _ModulatorFrequencyOffset = _ModulatorFrequencyOffset ?? Schema.GetOffset(0x3AB0D193656A8FFE);
+            return ref _Handle.AsRef<float>(_ModulatorFrequencyOffset!.Value);
+        }
     }
-  }
-  private static nint? _ModulatorAmountOffset;
+    private static nint? _ModulatorAmountOffset;
 
-  public ref float ModulatorAmount {
-    get {
-      if (_ModulatorAmountOffset == null) {
-        _ModulatorAmountOffset = Schema.GetOffset(0x3AB0D1939B320E5C);
-      }
-      return ref _Handle.AsRef<float>(_ModulatorAmountOffset!.Value);
+    public ref float ModulatorAmount {
+        get {
+            _ModulatorAmountOffset = _ModulatorAmountOffset ?? Schema.GetOffset(0x3AB0D1939B320E5C);
+            return ref _Handle.AsRef<float>(_ModulatorAmountOffset!.Value);
+        }
     }
-  }
 
 
 }

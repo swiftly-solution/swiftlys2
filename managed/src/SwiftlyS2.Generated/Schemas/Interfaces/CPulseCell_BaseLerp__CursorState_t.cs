@@ -8,16 +8,16 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CPulseCell_BaseLerp__CursorState_t : ISchemaClass<CPulseCell_BaseLerp__CursorState_t> {
+public partial interface CPulseCell_BaseLerp__CursorState_t : ISchemaClass<CPulseCell_BaseLerp__CursorState_t>
+{
+    static CPulseCell_BaseLerp__CursorState_t ISchemaClass<CPulseCell_BaseLerp__CursorState_t>.From(nint handle) => new CPulseCell_BaseLerp__CursorState_tImpl(handle);
+    static int ISchemaClass<CPulseCell_BaseLerp__CursorState_t>.Size => 8;
+    static string? ISchemaClass<CPulseCell_BaseLerp__CursorState_t>.ClassName => null;
 
-  static CPulseCell_BaseLerp__CursorState_t ISchemaClass<CPulseCell_BaseLerp__CursorState_t>.From(nint handle) => new CPulseCell_BaseLerp__CursorState_tImpl(handle);
-  static int ISchemaClass<CPulseCell_BaseLerp__CursorState_t>.Size => 8;
-  static string? ISchemaClass<CPulseCell_BaseLerp__CursorState_t>.ClassName => null;
 
-  
-  public GameTime_t StartTime { get; }
-  
-  public GameTime_t EndTime { get; }
+    public GameTime_t StartTime { get; }
+
+    public GameTime_t EndTime { get; }
 
 
 }
