@@ -10,11 +10,9 @@ namespace SwiftlyS2.Core.Scheduler;
 
 internal class Timer
 {
-    public required int PeriodTick { get; set; }
-    public required int DelayTick { get; set; }
-    public required Action Task { get; set; }
+    public TimerContext Context { get; set; } = new();
+    public required Func<TimerContext, TimerStep> Task { get; set; }
     public required CancellationTokenSource CancellationTokenSource { get; set; }
-    public long DueTick { get; set; }
     public CancellationToken OwnerToken { get; set; }
 }
 
@@ -22,12 +20,14 @@ internal static class SchedulerManager
 {
     private static readonly Lock _lock = new();
     private static long _currentTick = 0;
+    private static long _currentTimeMs = 0;
 
     private static readonly ConcurrentQueue<Action> _asyncOnTickTaskQueue = new();
     private static readonly ConcurrentQueue<Action> _asyncOnWorldUpdateTaskQueue = new();
 
     // Min-heap keyed by DueTick
     private static readonly PriorityQueue<Timer, long> _timerQueue = new();
+    private static readonly PriorityQueue<Timer, long> _timerQueueMs = new();
 
     // Next-tick tasks keyed by guid so services can remove them before they run
     private static readonly List<(Action action, CancellationToken ownerToken)> _nextTickTasks = new();
@@ -88,6 +88,7 @@ internal static class SchedulerManager
 
     public static void OnTick()
     {
+        _currentTimeMs = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         ExecuteOnTickAsyncTasks();
         ExecuteOnTickTimers();
     }
@@ -112,7 +113,7 @@ internal static class SchedulerManager
     private static void ExecuteOnTickTimers()
     {
         List<(Action action, CancellationToken ownerToken)> nextTickActions;
-        List<Timer> dueTimers = new();
+        List<Timer> dueTimers = [];
 
         lock (_lock)
         {
@@ -128,6 +129,21 @@ internal static class SchedulerManager
                 if (!_timerQueue.TryPeek(out var timer, out var due)) break;
                 if (due > _currentTick) break;
                 _timerQueue.Dequeue();
+
+                // Skip canceled/owner-disposed timers
+                if (timer.CancellationTokenSource.IsCancellationRequested || timer.OwnerToken.IsCancellationRequested)
+                {
+                    continue;
+                }
+
+                dueTimers.Add(timer);
+            }
+
+            while (_timerQueueMs.Count > 0)
+            {
+                if (!_timerQueueMs.TryPeek(out var timer, out var due)) break;
+                if (due > _currentTimeMs) break;
+                _timerQueueMs.Dequeue();
 
                 // Skip canceled/owner-disposed timers
                 if (timer.CancellationTokenSource.IsCancellationRequested || timer.OwnerToken.IsCancellationRequested)
@@ -164,40 +180,43 @@ internal static class SchedulerManager
             {
                 try
                 {
-                    timer.Task();
+                    ExecuteTimer(timer);
                 }
                 catch (Exception ex)
                 {
                     if (!GlobalExceptionHandler.Handle(ex)) return;
                     AnsiConsole.WriteException(ex);
                 }
-
-                // If not repeating or canceled/owner disposed after callback, don't reschedule
-                if (timer.PeriodTick == 0)
-                {
-                    try
-                    {
-                        timer.CancellationTokenSource.Cancel();
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                    }
-
-                    continue;
-                }
-
-                if (timer.CancellationTokenSource.IsCancellationRequested || timer.OwnerToken.IsCancellationRequested)
-                {
-                    continue;
-                }
-
-                // Reschedule
-                timer.DueTick = Interlocked.Read(ref _currentTick) + timer.PeriodTick;
-                lock (_lock)
-                {
-                    _timerQueue.Enqueue(timer, timer.DueTick);
-                }
             }
+        }
+    }
+
+    private static void ExecuteTimer( Timer timer )
+    {
+        var step = timer.Task(timer.Context);
+
+        switch (step)
+        {
+            case TimerStep.SpinStep:
+                timer.Context.IncrementExecutionCount();
+                timer.Context.ExpectedNextTimeMs = _currentTimeMs;
+                _timerQueue.Enqueue(timer, _currentTick);
+                break;
+            case TimerStep.WaitForTicksStep(var ticks):
+                timer.Context.IncrementExecutionCount();
+                timer.Context.ExpectedNextTimeMs = _currentTimeMs;
+                _timerQueue.Enqueue(timer, _currentTick + ticks);
+                break;
+            case TimerStep.WaitForMillisecondsStep(var milliseconds):
+                timer.Context.IncrementExecutionCount();
+                timer.Context.ExpectedNextTimeMs += milliseconds;
+                _timerQueueMs.Enqueue(timer, timer.Context.ExpectedNextTimeMs);
+                break;
+            case TimerStep.StopStep:
+                timer.CancellationTokenSource.Cancel();
+                break;
+            default:
+                break;
         }
     }
 
@@ -217,23 +236,19 @@ internal static class SchedulerManager
         }
     }
 
-    public static CancellationTokenSource AddTimer( int delayTick, int periodTick, Action task,
-        CancellationToken ownerToken )
+    public static CancellationTokenSource AddTimer( Func<TimerContext, TimerStep> task, CancellationToken ownerToken )
     {
-        var cancellationTokenSource = new CancellationTokenSource();
-        var timer = new Timer {
-            DelayTick = delayTick,
-            PeriodTick = periodTick,
-            Task = task,
-            CancellationTokenSource = cancellationTokenSource,
-            OwnerToken = ownerToken,
-            DueTick = Interlocked.Read(ref _currentTick) + delayTick
-        };
 
-        lock (_lock)
-        {
-            _timerQueue.Enqueue(timer, timer.DueTick);
-        }
+        var cancellationTokenSource = new CancellationTokenSource();
+
+        var _ = NextTickAsync(() => {
+            var timer = new Timer {
+                Task = task,
+                CancellationTokenSource = cancellationTokenSource,
+                OwnerToken = ownerToken,
+            };
+            ExecuteTimer(timer);
+        });
 
         return cancellationTokenSource;
     }

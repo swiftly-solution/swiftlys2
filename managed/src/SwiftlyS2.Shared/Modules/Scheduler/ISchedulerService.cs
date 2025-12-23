@@ -162,6 +162,14 @@ public interface ISchedulerService
   /// <returns>A CancellationTokenSource that can be used to cancel the timer.</returns>
   public CancellationTokenSource DelayAndRepeatBySeconds( float delaySeconds, float periodSeconds, Action task );
 
+
+  /// <summary>
+  /// Add an advanced timer to the scheduler.
+  /// </summary>
+  /// <param name="task">The task to execute.</param>
+  /// <returns>A CancellationTokenSource that can be used to cancel the timer.</returns>
+  public CancellationTokenSource AddTimer( Func<ITimerContext, TimerStep> task );
+
   /// <summary>
   /// Stop a timer when the map changes.
   /// </summary>
