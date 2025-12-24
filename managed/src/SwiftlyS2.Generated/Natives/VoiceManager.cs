@@ -9,7 +9,6 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeVoiceManager {
-  private static int _MainThreadID;
 
   private unsafe static delegate* unmanaged<int, int, int, void> _SetClientListenOverride;
 

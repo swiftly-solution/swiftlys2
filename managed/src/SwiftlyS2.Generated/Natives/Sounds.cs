@@ -9,7 +9,6 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeSounds {
-  private static int _MainThreadID;
 
   private unsafe static delegate* unmanaged<nint> _CreateSoundEvent;
 
@@ -27,7 +26,7 @@ internal static class NativeSounds {
   private unsafe static delegate* unmanaged<nint, uint> _Emit;
 
   public unsafe static uint Emit(nint soundEvent) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     var ret = _Emit(soundEvent);

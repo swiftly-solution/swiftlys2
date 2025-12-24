@@ -152,10 +152,20 @@ internal class Player : IPlayer
 
     public void Teleport( Vector pos, QAngle angle, Vector velocity )
     {
-        NativePlayer.Teleport(Slot, pos, angle, velocity);
+        Pawn!.Teleport(pos, angle, velocity);
+    }
+
+    public void Teleport( Vector? pos = null, QAngle? angle = null, Vector? velocity = null )
+    {
+        Pawn!.Teleport(pos, angle, velocity);
     }
 
     public Task TeleportAsync( Vector pos, QAngle angle, Vector velocity )
+    {
+        return SchedulerManager.QueueOrNow(() => Teleport(pos, angle, velocity));
+    }
+
+    public Task TeleportAsync( Vector? pos = null, QAngle? angle = null, Vector? velocity = null )
     {
         return SchedulerManager.QueueOrNow(() => Teleport(pos, angle, velocity));
     }

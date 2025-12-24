@@ -9,7 +9,7 @@ internal class NativeBinding
 {
     public static int MainThreadID { get; private set; }
 
-    public static bool IsMainThread => Thread.CurrentThread.ManagedThreadId == MainThreadID;
+    public static bool IsMainThread => Environment.CurrentManagedThreadId == MainThreadID;
 
     public static void ThrowIfNonMainThread()
     {
@@ -21,6 +21,7 @@ internal class NativeBinding
 
     public static void BindNatives( IntPtr nativeTable, int nativeTableSize )
     {
+        MainThreadID = Environment.CurrentManagedThreadId;
         unsafe
         {
             try
@@ -42,10 +43,6 @@ internal class NativeBinding
                     var nativeStaticField = nativeClass.GetField("_" + funcName,
                         BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
                     nativeStaticField!.SetValue(null, pNativeTables[i].Function);
-                    var mainThreadIDStaticField = nativeClass.GetField("_MainThreadID",
-                        BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-                    mainThreadIDStaticField!.SetValue(null, Thread.CurrentThread.ManagedThreadId);
-                    MainThreadID = Thread.CurrentThread.ManagedThreadId;
                 }
             }
             catch (Exception e)

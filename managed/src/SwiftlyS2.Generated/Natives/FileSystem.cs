@@ -9,7 +9,6 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeFileSystem {
-  private static int _MainThreadID;
 
   private unsafe static delegate* unmanaged<byte*, byte*, int, int, int> _GetSearchPath;
 
@@ -35,7 +34,7 @@ internal static class NativeFileSystem {
   private unsafe static delegate* unmanaged<byte*, byte*, int, int, void> _AddSearchPath;
 
   public unsafe static void AddSearchPath(string path, string pathId, int searchPathAdd, int searchPathPriority) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     var pool = ArrayPool<byte>.Shared;
@@ -159,7 +158,7 @@ internal static class NativeFileSystem {
   private unsafe static delegate* unmanaged<byte*, byte*, byte*, byte> _WriteFile;
 
   public unsafe static bool WriteFile(string fileName, string pathId, string content) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     var pool = ArrayPool<byte>.Shared;
@@ -257,7 +256,7 @@ internal static class NativeFileSystem {
   private unsafe static delegate* unmanaged<byte*, byte*, byte, byte> _SetFileWritable;
 
   public unsafe static bool SetFileWritable(string fileName, string pathId, bool writable) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     var pool = ArrayPool<byte>.Shared;

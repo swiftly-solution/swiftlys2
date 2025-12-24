@@ -84,7 +84,15 @@ internal class SchedulerService : ISchedulerService, IDisposable
     public CancellationTokenSource Delay( int delayTick, Action task )
     {
         CleanFinishedTimers();
-        var cts = SchedulerManager.AddTimer(delayTick, 0, task, _lifecycleCts.Token);
+        var cts = SchedulerManager.AddTimer(( ctx ) =>
+        {
+            if (ctx.ExecutionCount == 0)
+            {
+                return TimerStep.WaitForTicks(delayTick);
+            }
+            task();
+            return TimerStep.Stop();
+        }, _lifecycleCts.Token);
         lock (_lock)
         {
             _timers.Add(cts);
@@ -95,7 +103,11 @@ internal class SchedulerService : ISchedulerService, IDisposable
 
     public CancellationTokenSource Repeat( int periodTick, Action task )
     {
-        var cts = SchedulerManager.AddTimer(0, periodTick, task, _lifecycleCts.Token);
+        var cts = SchedulerManager.AddTimer(( ctx ) =>
+        {
+            task();
+            return TimerStep.WaitForTicks(periodTick);
+        }, _lifecycleCts.Token);
         lock (_lock)
         {
             _timers.Add(cts);
@@ -106,7 +118,15 @@ internal class SchedulerService : ISchedulerService, IDisposable
 
     public CancellationTokenSource DelayAndRepeat( int delayTick, int periodTick, Action task )
     {
-        var cts = SchedulerManager.AddTimer(delayTick, periodTick, task, _lifecycleCts.Token);
+        var cts = SchedulerManager.AddTimer(( ctx ) =>
+        {
+            if (ctx.ExecutionCount == 0)
+            {
+                return TimerStep.WaitForTicks(delayTick);
+            }
+            task();
+            return TimerStep.WaitForTicks(periodTick);
+        }, _lifecycleCts.Token);
         lock (_lock)
         {
             _timers.Add(cts);
@@ -117,17 +137,42 @@ internal class SchedulerService : ISchedulerService, IDisposable
 
     public CancellationTokenSource DelayBySeconds( float delaySeconds, Action task )
     {
-        return Delay((int)(delaySeconds * tickPerSecond), task);
+        return SchedulerManager.AddTimer(( ctx ) =>
+        {
+            if (ctx.ExecutionCount == 0)
+            {
+                return TimerStep.WaitForSeconds(delaySeconds);
+            }
+            task();
+            return TimerStep.Stop();
+        }, _lifecycleCts.Token);
     }
 
     public CancellationTokenSource RepeatBySeconds( float periodSeconds, Action task )
     {
-        return Repeat((int)(periodSeconds * tickPerSecond), task);
+        return SchedulerManager.AddTimer(( ctx ) =>
+        {
+            task();
+            return TimerStep.WaitForSeconds(periodSeconds);
+        }, _lifecycleCts.Token);
     }
 
     public CancellationTokenSource DelayAndRepeatBySeconds( float delaySeconds, float periodSeconds, Action task )
     {
-        return DelayAndRepeat((int)(delaySeconds * tickPerSecond), (int)(periodSeconds * tickPerSecond), task);
+        return SchedulerManager.AddTimer(( ctx ) =>
+        {
+            if (ctx.ExecutionCount == 0)
+            {
+                return TimerStep.WaitForSeconds(delaySeconds);
+            }
+            task();
+            return TimerStep.WaitForSeconds(periodSeconds);
+        }, _lifecycleCts.Token);
+    }
+
+    public CancellationTokenSource AddTimer( Func<ITimerContext, TimerStep> task)
+    {
+        return SchedulerManager.AddTimer(task, _lifecycleCts.Token);
     }
 
     public void StopOnMapChange( CancellationTokenSource cts )

@@ -9,7 +9,6 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeSchema {
-  private static int _MainThreadID;
 
   private unsafe static delegate* unmanaged<nint, ulong, void> _SetStateChanged;
 
@@ -79,7 +78,7 @@ internal static class NativeSchema {
   private unsafe static delegate* unmanaged<nint, ulong, nint, uint, void> _WritePropPtr;
 
   public unsafe static void WritePropPtr(nint entity, ulong hash, nint value, uint size) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     _WritePropPtr(entity, hash, value, size);

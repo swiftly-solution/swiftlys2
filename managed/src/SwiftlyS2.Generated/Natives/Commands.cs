@@ -9,7 +9,6 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeCommands {
-  private static int _MainThreadID;
 
   private unsafe static delegate* unmanaged<int, byte*, int> _HandleCommandForPlayer;
 
@@ -17,7 +16,7 @@ internal static class NativeCommands {
   /// 1 -> not silent, 2 -> silent, -1 -> invalid player, 0 -> no command
   /// </summary>
   public unsafe static int HandleCommandForPlayer(int playerid, string command) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     var pool = ArrayPool<byte>.Shared;

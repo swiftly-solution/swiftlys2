@@ -103,7 +103,6 @@ def parse_native(lines: list[str]):
     writer.add_line()
 
     def write_class_content():
-        writer.add_line("private static int _MainThreadID;")
         
         for raw_line in native_lines:
             if raw_line.strip() == "":
@@ -156,7 +155,7 @@ def parse_native(lines: list[str]):
             
             def write_method_content():
                 if is_marked_sync:
-                    writer.add_block("if (Thread.CurrentThread.ManagedThreadId != _MainThreadID)", lambda: writer.add_line('throw new InvalidOperationException("This method can only be called from the main thread.");'))
+                    writer.add_block("if (!NativeBinding.IsMainThread)", lambda: writer.add_line('throw new InvalidOperationException("This method can only be called from the main thread.");'))
 
                 string_params = []
                 bytes_params = []

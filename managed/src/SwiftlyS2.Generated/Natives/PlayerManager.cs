@@ -9,7 +9,6 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class NativePlayerManager {
-  private static int _MainThreadID;
 
   private unsafe static delegate* unmanaged<int, byte> _IsPlayerOnline;
 
@@ -35,7 +34,7 @@ internal static class NativePlayerManager {
   private unsafe static delegate* unmanaged<int, byte*, int, void> _SendMessage;
 
   public unsafe static void SendMessage(int kind, string message, int duration) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     var pool = ArrayPool<byte>.Shared;

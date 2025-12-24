@@ -311,7 +311,7 @@ public struct CVariant<TAllocator> where TAllocator : IVariantAllocator
     public void SetString( string value )
     {
         Free();
-        DataType = VariantFieldType.FIELD_STRING;
+        DataType = VariantFieldType.FIELD_CSTRING;
         var len = Encoding.UTF8.GetByteCount(value);
         var buffer = TAllocator.Alloc((ulong)(len + 1));
         buffer.CopyFrom(Encoding.UTF8.GetBytes(value));
@@ -545,7 +545,7 @@ public struct CVariant<TAllocator> where TAllocator : IVariantAllocator
     }
     public bool TryGetString( [MaybeNullWhen(false)] out string value )
     {
-        if (TryGetUnmanaged(out nint ptr, VariantFieldType.FIELD_STRING))
+        if (TryGetUnmanaged(out nint ptr, VariantFieldType.FIELD_CSTRING))
         {
             value = Marshal.PtrToStringUTF8(ptr)!;
             return true;

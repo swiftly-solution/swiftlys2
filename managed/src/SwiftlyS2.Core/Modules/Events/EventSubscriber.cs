@@ -14,6 +14,8 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     private volatile bool disposed;
 
+    public bool Disposed => disposed;
+
     public EventSubscriber( IContextedProfilerService profiler, ILogger<EventSubscriber> logger )
     {
         this.profiler = profiler;

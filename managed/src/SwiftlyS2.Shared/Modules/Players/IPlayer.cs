@@ -378,6 +378,16 @@ public interface IPlayer : IEquatable<IPlayer>
     [ThreadUnsafe]
     public void Teleport( Vector pos, QAngle angle, Vector velocity );
 
+    /// Teleports the entity to the specified position, orientation, and velocity.
+    /// 
+    /// Thread unsafe, use async variant instead for non-main thread context.
+    /// </summary>
+    /// <param name="pos">The target position to teleport the entity to, represented as a <see cref="Vector"/>.</param>
+    /// <param name="angle">The orientation to apply to the entity after teleportation, represented as a <see cref="QAngle"/>.</param>
+    /// <param name="velocity">The velocity to assign to the entity upon arrival, represented as a <see cref="Vector"/>.</param>
+    [ThreadUnsafe]
+    public void Teleport( Vector? pos = null, QAngle? angle = null, Vector? velocity = null );
+
     /// <summary>
     /// Teleports the entity to the specified position, orientation, and velocity asynchronously.
     /// </summary>
@@ -385,6 +395,15 @@ public interface IPlayer : IEquatable<IPlayer>
     /// <param name="angle">The orientation to apply to the entity after teleportation, represented as a <see cref="QAngle"/>.</param>
     /// <param name="velocity">The velocity to assign to the entity upon arrival, represented as a <see cref="Vector"/>.</param>
     public Task TeleportAsync( Vector pos, QAngle angle, Vector velocity );
+
+
+    /// <summary>
+    /// Teleports the entity to the specified position, orientation, and velocity asynchronously.
+    /// </summary>
+    /// <param name="pos">The target position to teleport the entity to, represented as a <see cref="Vector"/>.</param>
+    /// <param name="angle">The orientation to apply to the entity after teleportation, represented as a <see cref="QAngle"/>.</param>
+    /// <param name="velocity">The velocity to assign to the entity upon arrival, represented as a <see cref="Vector"/>.</param>
+    public Task TeleportAsync( Vector? pos = null, QAngle? angle = null, Vector? velocity = null );
 
     /// <summary>
     /// Switches the player's team.

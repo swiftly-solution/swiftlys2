@@ -9,7 +9,6 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeServerHelpers {
-  private static int _MainThreadID;
 
   private unsafe static delegate* unmanaged<byte*, int> _GetServerLanguage;
 

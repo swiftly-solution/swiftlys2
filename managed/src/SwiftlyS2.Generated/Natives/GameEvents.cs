@@ -9,7 +9,6 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeGameEvents {
-  private static int _MainThreadID;
 
   private unsafe static delegate* unmanaged<nint, byte*, byte> _GetBool;
 
@@ -465,7 +464,7 @@ internal static class NativeGameEvents {
   private unsafe static delegate* unmanaged<nint, byte, void> _FireEvent;
 
   public unsafe static void FireEvent(nint _event, bool dontBroadcast) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     _FireEvent(_event, dontBroadcast ? (byte)1 : (byte)0);
@@ -474,7 +473,7 @@ internal static class NativeGameEvents {
   private unsafe static delegate* unmanaged<nint, int, void> _FireEventToClient;
 
   public unsafe static void FireEventToClient(nint _event, int playerid) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     _FireEventToClient(_event, playerid);

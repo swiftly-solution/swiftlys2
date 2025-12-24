@@ -9,12 +9,11 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Core.Natives;
 
 internal static class NativeConvars {
-  private static int _MainThreadID;
 
   private unsafe static delegate* unmanaged<int, byte*, void> _QueryClientConvar;
 
   public unsafe static void QueryClientConvar(int playerid, string cvarName) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     var pool = ArrayPool<byte>.Shared;
@@ -461,7 +460,7 @@ internal static class NativeConvars {
   private unsafe static delegate* unmanaged<int, byte*, byte*, void> _SetClientConvarValueString;
 
   public unsafe static void SetClientConvarValueString(int playerid, string cvarName, string defaultValue) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     var pool = ArrayPool<byte>.Shared;
@@ -500,7 +499,7 @@ internal static class NativeConvars {
   private unsafe static delegate* unmanaged<byte*, ulong, void> _SetFlags;
 
   public unsafe static void SetFlags(string cvarName, ulong flags) {
-    if (Thread.CurrentThread.ManagedThreadId != _MainThreadID) {
+    if (!NativeBinding.IsMainThread) {
       throw new InvalidOperationException("This method can only be called from the main thread.");
     }
     var pool = ArrayPool<byte>.Shared;
