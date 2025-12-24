@@ -46,7 +46,7 @@ internal class UnmanagedMemory : NativeHandle, IUnmanagedMemory, IDisposable
     {
         lock (hooksLock)
         {
-            hookManager.Remove(Hooks);
+            hookManager.RemoveMidHook(Hooks);
             Hooks.Clear();
         }
     }
