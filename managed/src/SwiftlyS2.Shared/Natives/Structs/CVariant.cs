@@ -1,12 +1,12 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+
 using System.Text;
-using SwiftlyS2.Core.Extensions;
+using System.Runtime.InteropServices;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Schemas;
+using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.Natives;
 
@@ -138,14 +138,14 @@ internal unsafe struct CVariantData
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public struct CVariant<TAllocator> where TAllocator : IVariantAllocator
 {
-    private CVariantData Data;            // 8 bytes (union)
-    public VariantFieldType DataType;    // 1 byte (uint8 enum)
-    private byte _padding;
-    public CVFlags Flags;                 // 2 bytes
+    private CVariantData Data;          // 8 bytes (union)
+    public VariantFieldType DataType;   // 1 byte (uint8 enum)
+    private readonly byte padding1;
+    public CVFlags Flags;               // 2 bytes
     // 4 bytes padding for alignment
-    private unsafe fixed byte _padding2[4];
+    private unsafe fixed byte padding2[4];
 
-    public CVariant() : this(null)
+    public CVariant() : this(string.Empty)
     {
     }
 
@@ -155,73 +155,9 @@ public struct CVariant<TAllocator> where TAllocator : IVariantAllocator
         Set(value);
     }
 
-    private void Free()
-    {
-        if (Flags.HasFlag(CVFlags.FREE))
-        {
-            if (Data.TryGetInnerPointer(out nint ptr))
-            {
-                TAllocator.Free(ptr);
-            }
-        }
-        Data.ThisPointer.Write(0);
-        Flags &= ~CVFlags.FREE;
-        DataType = VariantFieldType.FIELD_VOID;
-    }
-
-    private void SetAllocated()
-    {
-        Flags |= CVFlags.FREE;
-    }
-    private void CopyData<T>( T value ) where T : unmanaged
-    {
-        unsafe
-        {
-            var memory = TAllocator.Alloc((ulong)sizeof(T));
-            memory.Write(value);
-            Data.ThisPointer.Write(memory);
-            SetAllocated();
-        }
-    }
-
     public readonly bool IsVoid()
     {
         return DataType == VariantFieldType.FIELD_VOID;
-    }
-    private bool TryGetUnmanaged<T>( [MaybeNullWhen(false)] out T value, VariantFieldType targetType ) where T : unmanaged
-    {
-        if (IsVoid())
-        {
-            value = default;
-            return false;
-        }
-        if (DataType != targetType)
-        {
-            value = default;
-            return false;
-        }
-        value = Data.ThisPointer.Read<T>();
-        return true;
-    }
-    private bool TryGetAllocated<T>( [MaybeNullWhen(false)] out T value, VariantFieldType targetType ) where T : unmanaged
-    {
-        if (IsVoid())
-        {
-            value = default;
-            return false;
-        }
-        if (DataType != targetType)
-        {
-            value = default;
-            return false;
-        }
-        if (Data.TryGetInnerPointer(out var ptr))
-        {
-            value = ptr.Read<T>();
-            return true;
-        }
-        value = default;
-        return false;
     }
 
     public void SetBool( bool value )
@@ -360,7 +296,6 @@ public struct CVariant<TAllocator> where TAllocator : IVariantAllocator
     {
         unsafe
         {
-
             if (value is bool boolValue)
             {
                 SetBool(boolValue);
@@ -511,13 +446,17 @@ public struct CVariant<TAllocator> where TAllocator : IVariantAllocator
             value = default;
             return false;
         }
+
         if (DataType != VariantFieldType.FIELD_EHANDLE)
         {
             value = default;
             return false;
         }
-        value = new CHandle<T>(Data.ThisPointer.Read<uint>());
-        return true;
+        else
+        {
+            value = new CHandle<T>(Data.ThisPointer.Read<uint>());
+            return true;
+        }
     }
     public bool TryGetVector2D( [MaybeNullWhen(false)] out Vector2D value )
     {
@@ -550,8 +489,11 @@ public struct CVariant<TAllocator> where TAllocator : IVariantAllocator
             value = Marshal.PtrToStringUTF8(ptr)!;
             return true;
         }
-        value = default;
-        return false;
+        else
+        {
+            value = default;
+            return false;
+        }
     }
 
     public override string? ToString()
@@ -641,5 +583,81 @@ public struct CVariant<TAllocator> where TAllocator : IVariantAllocator
             return $"CVariant(Type={DataType}, Value={stringValue}, Flags={Flags})";
         }
         return $"CVariant(Type={DataType}, Flags={Flags}, UnknownValue)";
+    }
+
+    private void Free()
+    {
+        if (Flags.HasFlag(CVFlags.FREE))
+        {
+            if (Data.TryGetInnerPointer(out var ptr))
+            {
+                TAllocator.Free(ptr);
+            }
+        }
+        Data.ThisPointer.Write(0);
+        Flags &= ~CVFlags.FREE;
+        DataType = VariantFieldType.FIELD_VOID;
+    }
+
+    private void SetAllocated()
+    {
+        Flags |= CVFlags.FREE;
+    }
+
+    private void CopyData<T>( T value ) where T : unmanaged
+    {
+        unsafe
+        {
+            var memory = TAllocator.Alloc((ulong)sizeof(T));
+            memory.Write(value);
+            Data.ThisPointer.Write(memory);
+            SetAllocated();
+        }
+    }
+
+    private bool TryGetUnmanaged<T>( [MaybeNullWhen(false)] out T value, VariantFieldType targetType ) where T : unmanaged
+    {
+        if (IsVoid())
+        {
+            value = default;
+            return false;
+        }
+
+        if (DataType != targetType)
+        {
+            value = default;
+            return false;
+        }
+        else
+        {
+            value = Data.ThisPointer.Read<T>();
+            return true;
+        }
+    }
+
+    private bool TryGetAllocated<T>( [MaybeNullWhen(false)] out T value, VariantFieldType targetType ) where T : unmanaged
+    {
+        if (IsVoid())
+        {
+            value = default;
+            return false;
+        }
+
+        if (DataType != targetType)
+        {
+            value = default;
+            return false;
+        }
+
+        if (Data.TryGetInnerPointer(out var ptr))
+        {
+            value = ptr.Read<T>();
+            return true;
+        }
+        else
+        {
+            value = default;
+            return false;
+        }
     }
 }
