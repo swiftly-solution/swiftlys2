@@ -145,13 +145,14 @@ public struct CVariant<TAllocator> where TAllocator : IVariantAllocator
     // 4 bytes padding for alignment
     private unsafe fixed byte padding2[4];
 
-    public CVariant() : this(string.Empty)
-    {
-    }
-
-    public CVariant( object? value )
+    public CVariant()
     {
         Data = new();
+        DataType = VariantFieldType.FIELD_VOID;
+    }
+
+    public CVariant( object? value ) : this()
+    {
         Set(value);
     }
 
