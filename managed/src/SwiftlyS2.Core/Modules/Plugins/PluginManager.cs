@@ -139,7 +139,13 @@ internal class PluginManager : IPluginManager
                     {
                         try
                         {
+                            await Task.Delay(300, cts.Token);
                             await WaitForFileAccess(cts.Token, e.FullPath, logger: logger);
+                            var pdbFile = Path.ChangeExtension(e.FullPath, ".pdb");
+                            if (File.Exists(pdbFile))
+                            {
+                                await WaitForFileAccess(cts.Token, pdbFile, logger: logger);
+                            }
                             Console.WriteLine("\n");
                             if (ReloadPluginByDllName(directoryName, true))
                             {
