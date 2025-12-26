@@ -58,11 +58,6 @@ internal class PluginManager : IPluginManager
         {
             static async Task WaitForFileAccess( CancellationToken token, string filePath, int maxRetries = 10, int initialDelayMs = 50, ILogger<PluginManager> logger = null )
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    logger.LogWarning("Detected Linux OS, a 5 second delay for reload.");
-                    await Task.Delay(5000, token);
-                }
                 for (var i = 1; i <= maxRetries && !token.IsCancellationRequested; i++)
                 {
                     try
@@ -139,13 +134,20 @@ internal class PluginManager : IPluginManager
                     {
                         try
                         {
-                            await Task.Delay(300, cts.Token);
+                            var wait = 300;
+                            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                            {
+                                logger.LogWarning("Detected Linux OS, a 5 second delay for reload.");
+                            }
+                            await Task.Delay(wait, cts.Token);
+
                             await WaitForFileAccess(cts.Token, e.FullPath, logger: logger);
                             var pdbFile = Path.ChangeExtension(e.FullPath, ".pdb");
                             if (File.Exists(pdbFile))
                             {
                                 await WaitForFileAccess(cts.Token, pdbFile, logger: logger);
                             }
+
                             Console.WriteLine("\n");
                             if (ReloadPluginByDllName(directoryName, true))
                             {
