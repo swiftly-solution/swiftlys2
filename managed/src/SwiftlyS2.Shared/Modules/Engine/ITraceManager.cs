@@ -64,4 +64,27 @@ public interface ITraceManager
     /// <param name="filterEntity">An optional entity to exclude from the trace.</param>
     /// <param name="filterSecondEntity">An optional second entity to exclude from the trace.</param>
     public void SimpleTrace( Vector start, QAngle angle, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null );
+
+    /// <summary>
+    /// Performs a simple trace line operation from the specified start point in the direction defined by the given angle.   
+    /// Most params are ignored, so this function would hit every entity in game,  
+    /// use customFilter function to select what entities you want to hit or not.
+    /// </summary>
+    /// <param name="start">The starting position of the trace</param>
+    /// <param name="end">The ending position of the trace</param>
+    /// <param name="customFilter">A custom filter, return true to hit it. return false to bypass it.</param>
+    /// <param name="trace">A reference to a CGameTrace structure that receives the results of the trace, including hit information and surface details.</param>
+    public void SimpleTraceLineFilter( Vector start, Vector end, ref CGameTrace trace, Func<CBaseEntity, bool> customFilter );
+
+    /// <summary>
+    /// Performs a simple trace line operation from the specified start point in the direction defined by the given angle.   
+    /// Most params are ignored, so this function would hit every entity in game,  
+    /// use customFilter function to select what entities you want to hit or not.
+    /// </summary>
+    /// <param name="start">The starting position of the trace</param>
+    /// <param name="angle">The direction of the trace</param>
+    /// <param name="customFilter">A custom filter, return true to hit it. return false to bypass it.</param>
+    /// <param name="trace">A reference to a CGameTrace structure that receives the results of the trace, including hit information and surface details.</param>
+    public void SimpleTraceLineFilter( Vector start, QAngle angle, ref CGameTrace trace, Func<CBaseEntity, bool> customFilter );
+
 }

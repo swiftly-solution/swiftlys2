@@ -1,8 +1,8 @@
-﻿using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.Services;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.Services;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -29,6 +29,7 @@ internal class TraceManager : ITraceManager
                 GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &filter, tracePtr);
             }
         }
+        CTraceFilterVTable.CustomFilterFunc = null;
     }
 
     public static void SimpleTrace( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, nint filterEntity, nint filterSecondEntity )
@@ -67,6 +68,7 @@ internal class TraceManager : ITraceManager
                 GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &filter, tracePtr);
             }
         }
+        CTraceFilterVTable.CustomFilterFunc = null;
     }
 
     public void SimpleTrace( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null )
@@ -86,4 +88,44 @@ internal class TraceManager : ITraceManager
         );
         SimpleTrace(start, end, rayKind, objectQuery, interactWith, interactExclude, interactAs, collision, ref trace, filterEntity, filterSecondEntity);
     }
+
+    public void SimpleTraceLineFilter( Vector start, Vector end, ref CGameTrace trace, Func<CBaseEntity, bool> customFilter )
+    {
+        var filter = new CTraceFilter(customFilter) {
+            IterateEntities = true,
+            QueryShapeAttributes = new RnQueryShapeAttr_t {
+                ObjectSetMask = RnQueryObjectSet.All,
+                InteractsWith = 0,
+                InteractsExclude = 0,
+                InteractsAs = 0,
+                CollisionGroup = CollisionGroup.Always,
+                HitSolid = true
+            }
+        };
+
+        var ray = new Ray_t {
+            Type = RayType_t.RAY_TYPE_LINE
+        };
+
+        unsafe
+        {
+            fixed (CGameTrace* tracePtr = &trace)
+            {
+                GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &filter, tracePtr);
+            }
+        }
+        CTraceFilterVTable.CustomFilterFunc = null;
+    }
+
+    public void SimpleTraceLineFilter( Vector start, QAngle angle, ref CGameTrace trace, Func<CBaseEntity, bool> customFilter )
+    {
+        angle.ToDirectionVectors(out var fwd, out var _, out var _);
+        var end = start + new Vector(
+            fwd.X * 8192f,
+            fwd.Y * 8192f,
+            fwd.Z * 8192f
+        );
+        SimpleTraceLineFilter(start, end, ref trace, customFilter);
+    }
+
 }
