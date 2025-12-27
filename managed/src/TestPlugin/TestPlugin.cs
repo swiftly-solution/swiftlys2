@@ -1080,6 +1080,8 @@ public class TestPlugin : BasePlugin
             .CreateBuilder()
             .EnableExit()
             .SetPlayerFrozen(false)
+            .Design.SetCommentVisible(true)
+            .Design.SetDefaultComment("sw_rmt")
             .Design.SetMaxVisibleItems(5)
             .Design.SetMenuTitle($"{HtmlGradient.GenerateGradientText("SwiftlyS2", "#00FA9A", "#F5FFFA")}")
             .Design.SetMenuTitleVisible(true)

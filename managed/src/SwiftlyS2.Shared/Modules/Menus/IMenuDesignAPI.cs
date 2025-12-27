@@ -31,6 +31,13 @@ public interface IMenuDesignAPI
     public IMenuBuilderAPI SetMenuFooterVisible( bool visible = true );
 
     /// <summary>
+    /// Controls the visibility of menu option comments.
+    /// </summary>
+    /// <param name="visible">True to show comments, false to hide them. Default is true.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetCommentVisible( bool visible = true );
+
+    /// <summary>
     /// Sets the maximum number of menu options visible on screen at once.
     /// </summary>
     /// <param name="count">The maximum visible item count. Valid range is 1-5. Default is 5.</param>

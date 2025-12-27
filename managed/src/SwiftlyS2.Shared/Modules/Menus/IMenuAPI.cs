@@ -78,6 +78,11 @@ public record class MenuConfiguration
     public bool DisableExit { get; set; } = false;
 
     /// <summary>
+    /// Whether to show comments for menu options.
+    /// </summary>
+    public bool ShowComment { get; set; } = true;
+
+    /// <summary>
     /// Time in seconds before the menu automatically closes. Set to 0 or less to disable auto-close.
     /// </summary>
     public float AutoCloseAfter { get; set; } = 0f;
