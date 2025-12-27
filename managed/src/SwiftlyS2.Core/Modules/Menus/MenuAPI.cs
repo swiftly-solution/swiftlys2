@@ -47,6 +47,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
     /// <summary>
     /// Gets or sets the default comment text to use when a menu option's Comment is not set.
     /// </summary>
+    [Obsolete("Use Configuration.DefaultComment instead.")]
     public string DefaultComment { get; set; } = $"Powered by <font color='#ff3c00'>❤️</font> {HtmlGradient.GenerateGradientText("SwiftlyS2", "#ffffff", "#96d5ff")}";
 
     /// <summary>
@@ -456,7 +457,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 "<br>",
                 guideLine,
                 "<br>",
-                $"<font class='fontSize-s'>{DefaultComment}</font><br>"
+                $"<font class='fontSize-s'>{Configuration.DefaultComment}</font><br>"
             );
 
         var claimInfo = optionBase?.InputClaimInfo ?? MenuInputClaimInfo.Empty;

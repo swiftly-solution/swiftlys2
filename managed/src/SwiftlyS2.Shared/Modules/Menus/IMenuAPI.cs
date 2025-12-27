@@ -165,6 +165,11 @@ public record class MenuConfiguration
             }
         }
     } = null;
+
+    /// <summary>
+    /// The default comment text to use when a menu option's Comment is not set.
+    /// </summary>
+    public string DefaultComment { get; set; } = $"Powered by <font color='#ff3c00'>❤️</font> {HtmlGradient.GenerateGradientText("SwiftlyS2", "#ffffff", "#96d5ff")}";
 }
 
 /// <summary>
@@ -251,6 +256,7 @@ public interface IMenuAPI : IDisposable
     /// <summary>
     /// Gets or sets the default comment text to use when a menu option's <see cref="IMenuOption.Comment"/> is not set.
     /// </summary>
+    [Obsolete("Use Configuration.DefaultComment instead.")]
     public string DefaultComment { get; set; }
 
     /// <summary>

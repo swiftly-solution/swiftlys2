@@ -151,6 +151,13 @@ public interface IMenuDesignAPI
     /// <returns>The menu builder for method chaining.</returns>
     public IMenuBuilderAPI SetDisabledColor( System.Drawing.Color color );
 
+    /// <summary>
+    /// Sets the default comment text to use when a menu option's Comment is not set.
+    /// </summary>
+    /// <param name="comment">The default comment text.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetDefaultComment( string comment );
+
     // /// <summary>
     // /// Sets the global option text style for the menu.
     // /// </summary>

@@ -137,6 +137,12 @@ internal sealed class MenuDesignAPI : IMenuDesignAPI
         return builder;
     }
 
+    public IMenuBuilderAPI SetDefaultComment( string comment )
+    {
+        configuration.DefaultComment = comment;
+        return builder;
+    }
+
     // public IMenuBuilderAPI SetGlobalOptionTextStyle( MenuOptionTextStyle style )
     // {
     //     setTextStyle(style);

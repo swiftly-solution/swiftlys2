@@ -16,7 +16,6 @@ internal sealed class MenuBuilderAPI : IMenuBuilderAPI
     private MenuKeybindOverrides keybindOverrides = new();
     private MenuOptionScrollStyle optionScrollStyle = MenuOptionScrollStyle.CenterFixed;
     // private MenuOptionTextStyle optionTextStyle = MenuOptionTextStyle.TruncateEnd;
-    private string? defaultComment = null;
     private IMenuAPI? parent = null;
 
     public MenuBuilderAPI( ISwiftlyCore core )
@@ -97,18 +96,9 @@ internal sealed class MenuBuilderAPI : IMenuBuilderAPI
         return this;
     }
 
-    public IMenuBuilderAPI SetDefaultComment( string? comment = null )
-    {
-        defaultComment = comment;
-        return this;
-    }
-
     public IMenuAPI Build()
     {
-        var menu = new MenuAPI(core, configuration, keybindOverrides, this/*, parent*/, optionScrollStyle/*, optionTextStyle*/) {
-            Parent = (parent, null),
-            DefaultComment = defaultComment ?? $"Powered by <font color='#ff3c00'>❤️</font> {HtmlGradient.GenerateGradientText("SwiftlyS2", "#ffffff", "#96d5ff")}"
-        };
+        var menu = new MenuAPI(core, configuration, keybindOverrides, this/*, parent*/, optionScrollStyle/*, optionTextStyle*/) { Parent = (parent, null) };
 
         if (options.Count > 0)
         {
