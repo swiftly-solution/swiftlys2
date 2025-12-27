@@ -22,16 +22,24 @@ public record class MenuConfiguration
     public bool HideTitle { get; set; } = false;
 
     /// <summary>
+    /// Whether to hide the item count in the menu title.
+    /// </summary>
+    public bool HideTitleItemCount { get; set; } = false;
+
+    /// <summary>
     /// Whether to hide the menu footer.
     /// </summary>
     public bool HideFooter { get; set; } = false;
 
     /// <summary>
+    /// Whether to hide comments for menu options.
+    /// </summary>
+    public bool HideComment { get; set; } = false;
+
+    /// <summary>
     /// Whether to play sounds when players interact with the menu.
     /// </summary>
     public bool PlaySound { get; set; } = true;
-
-    public bool HideTitleItemCount { get; set; } = false;
 
     /// <summary>
     /// Maximum number of menu options displayed on screen at once.
@@ -76,11 +84,6 @@ public record class MenuConfiguration
     /// Whether to disable the exit button for this menu.
     /// </summary>
     public bool DisableExit { get; set; } = false;
-
-    /// <summary>
-    /// Whether to show comments for menu options.
-    /// </summary>
-    public bool ShowComment { get; set; } = true;
 
     /// <summary>
     /// Time in seconds before the menu automatically closes. Set to 0 or less to disable auto-close.

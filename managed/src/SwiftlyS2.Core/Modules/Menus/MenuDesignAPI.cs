@@ -43,7 +43,7 @@ internal sealed class MenuDesignAPI : IMenuDesignAPI
 
     public IMenuBuilderAPI SetCommentVisible( bool visible = true )
     {
-        configuration.ShowComment = visible;
+        configuration.HideComment = !visible;
         return builder;
     }
 
