@@ -1,6 +1,6 @@
 using System.Globalization;
-using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.Schemas;
+using SwiftlyS2.Shared.NetMessages;
 
 namespace SwiftlyS2.Shared;
 
@@ -97,7 +97,7 @@ public static class Helper
     /// <returns>The protobuf class.</returns>
     public static T AsProtobuf<T>( nint ptr, bool manuallyAllocated ) where T : ITypedProtobuf<T>
     {
-        return T.Wrap(ptr, false);
+        return T.Wrap(ptr, manuallyAllocated);
     }
 
     /// <summary>
@@ -173,8 +173,7 @@ public static class Helper
             var groupSize = hexPart.Length / groupCount;
             var groups = Enumerable.Range(0, groupCount)
                 .Select(i => hexPart.Substring(i * groupSize, groupSize))
-                .Select(g =>
-                    int.TryParse(g, NumberStyles.HexNumber, null, out var v) && v is >= 0 and <= 255 ? v : (int?)null)
+                .Select(g => int.TryParse(g, NumberStyles.HexNumber, null, out var v) && v is >= 0 and <= 255 ? v : (int?)null)
                 .ToArray();
 
             if (groups.All(g => g.HasValue))
