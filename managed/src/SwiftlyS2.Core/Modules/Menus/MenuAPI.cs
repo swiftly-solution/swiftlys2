@@ -2,8 +2,8 @@ using System.Collections.Concurrent;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Menus;
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared.Players;
+using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.Menus;
@@ -12,7 +12,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
 {
     private (IMenuAPI? ParentMenu, IMenuOption? TriggerOption) parent;
 
-    internal static readonly IMenuOption noOptionsOption = new TextMenuOption("No options");
+    internal static readonly IMenuOption defaultOption = new TextMenuOption("No options");
 
     /// <summary>
     /// The menu manager that this menu belongs to.
@@ -445,8 +445,6 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
         var currentOption = visibleOptions.Count > 0 ? visibleOptions[arrowPosition] : null;
         var optionBase = currentOption as MenuOptionBase;
 
-        var defaultComment = Configuration.DefaultComment ?? DefaultComment;
-
         var comment = !string.IsNullOrWhiteSpace(optionBase?.Comment)
             ? string.Concat(
                 "<br>",
@@ -458,7 +456,7 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 "<br>",
                 guideLine,
                 "<br>",
-                $"<font class='fontSize-s'>{defaultComment}</font><br>"
+                $"<font class='fontSize-s'>{DefaultComment}</font><br>"
             );
 
         var claimInfo = optionBase?.InputClaimInfo ?? MenuInputClaimInfo.Empty;
@@ -646,7 +644,10 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             {
                 baseOption.Menu = this;
             }
-            if (option != noOptionsOption && maxOptions == 1) _ = RemoveOption(noOptionsOption);
+            if (option != defaultOption && maxOptions == 1)
+            {
+                _ = RemoveOption(defaultOption);
+            }
             options.Add(option);
             maxOptions = options.Count;
             // maxDisplayLines = options.Sum(option => option.LineCount);
@@ -663,7 +664,10 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
             // {
             //     submenuOption.SubmenuRequested -= OnSubmenuRequested;
             // }
-            if (option != noOptionsOption && maxOptions == 1) AddOption(noOptionsOption);
+            if (option != defaultOption && maxOptions == 1)
+            {
+                AddOption(defaultOption);
+            }
             var result = options.Remove(option);
             maxOptions = options.Count;
             // maxDisplayLines = options.Sum(option => option.LineCount);

@@ -1,4 +1,3 @@
-using SwiftlyS2.Core.Menus.OptionsBase;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Shared.Menus;
 
@@ -17,6 +16,7 @@ internal sealed class MenuBuilderAPI : IMenuBuilderAPI
     private MenuKeybindOverrides keybindOverrides = new();
     private MenuOptionScrollStyle optionScrollStyle = MenuOptionScrollStyle.CenterFixed;
     // private MenuOptionTextStyle optionTextStyle = MenuOptionTextStyle.TruncateEnd;
+    private string? defaultComment = null;
     private IMenuAPI? parent = null;
 
     public MenuBuilderAPI( ISwiftlyCore core )
@@ -97,17 +97,28 @@ internal sealed class MenuBuilderAPI : IMenuBuilderAPI
         return this;
     }
 
+    public IMenuBuilderAPI SetDefaultComment( string? comment = null )
+    {
+        defaultComment = comment;
+        return this;
+    }
+
     public IMenuAPI Build()
     {
-        var menu = new MenuAPI(core, configuration, keybindOverrides, this/*, parent*/, optionScrollStyle/*, optionTextStyle*/) { Parent = (parent, null) };
+        var menu = new MenuAPI(core, configuration, keybindOverrides, this/*, parent*/, optionScrollStyle/*, optionTextStyle*/) {
+            Parent = (parent, null),
+            DefaultComment = defaultComment ?? $"Powered by <font color='#ff3c00'>❤️</font> {HtmlGradient.GenerateGradientText("SwiftlyS2", "#ffffff", "#96d5ff")}"
+        };
+
         if (options.Count > 0)
         {
             options.ForEach(menu.AddOption);
         }
         else
         {
-            menu.AddOption(MenuAPI.noOptionsOption);
+            menu.AddOption(MenuAPI.defaultOption);
         }
+
         return menu;
     }
 }

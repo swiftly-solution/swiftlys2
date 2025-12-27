@@ -11,13 +11,6 @@ namespace SwiftlyS2.Shared.Menus;
 /// </summary>
 public record class MenuConfiguration
 {
-    private int maxVisibleItems = -1;
-    private string? navigationMarkerColor = null;
-    private string? footerColor = null;
-    private string? visualGuideLineColor = null;
-    private string? disabledColor = null;
-    private string? defaultComment = null;
-
     /// <summary>
     /// The title of the menu.
     /// </summary>
@@ -50,19 +43,19 @@ public record class MenuConfiguration
     /// </para>
     /// </remarks>
     public int MaxVisibleItems {
-        get => maxVisibleItems;
+        get;
         set {
             if (value < 1 || value > 5)
             {
                 Spectre.Console.AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(value), $"MaxVisibleItems: value {value} is out of range [1, 5]."));
-                maxVisibleItems = -1;
+                field = -1;
             }
             else
             {
-                maxVisibleItems = value;
+                field = value;
             }
         }
-    }
+    } = -1;
 
     /// <summary>
     /// Whether to automatically increase <see cref="MaxVisibleItems"/> when <see cref="HideTitle"/> or <see cref="HideFooter"/> is enabled.
@@ -96,19 +89,19 @@ public record class MenuConfiguration
     /// Supports "#RGB", "#RGBA", "#RRGGBB", and "#RRGGBBAA" formats.
     /// </remarks>
     public string? NavigationMarkerColor {
-        get => navigationMarkerColor;
+        get;
         set {
             if (string.IsNullOrWhiteSpace(value) || Helper.ParseHexColor(value) is not (not null, not null, not null, _))
             {
                 Spectre.Console.AnsiConsole.WriteException(new ArgumentException($"NavigationMarkerColor: '{value}' is not a valid hex color format. Expected '#RRGGBB'.", nameof(value)));
-                navigationMarkerColor = null;
+                field = null;
             }
             else
             {
-                navigationMarkerColor = value;
+                field = value;
             }
         }
-    }
+    } = null;
 
     /// <summary>
     /// The color of the menu footer in hex format.
@@ -117,19 +110,19 @@ public record class MenuConfiguration
     /// Supports "#RGB", "#RGBA", "#RRGGBB", and "#RRGGBBAA" formats.
     /// </remarks>
     public string? FooterColor {
-        get => footerColor;
+        get;
         set {
             if (string.IsNullOrWhiteSpace(value) || Helper.ParseHexColor(value) is not (not null, not null, not null, _))
             {
                 Spectre.Console.AnsiConsole.WriteException(new ArgumentException($"FooterColor: '{value}' is not a valid hex color format. Expected '#RRGGBB'.", nameof(value)));
-                footerColor = null;
+                field = null;
             }
             else
             {
-                footerColor = value;
+                field = value;
             }
         }
-    }
+    } = null;
 
     /// <summary>
     /// The color of visual guide lines in hex format.
@@ -138,19 +131,19 @@ public record class MenuConfiguration
     /// Supports "#RGB", "#RGBA", "#RRGGBB", and "#RRGGBBAA" formats.
     /// </remarks>
     public string? VisualGuideLineColor {
-        get => visualGuideLineColor;
+        get;
         set {
             if (string.IsNullOrWhiteSpace(value) || Helper.ParseHexColor(value) is not (not null, not null, not null, _))
             {
                 Spectre.Console.AnsiConsole.WriteException(new ArgumentException($"VisualGuideLineColor: '{value}' is not a valid hex color format. Expected '#RRGGBB'.", nameof(value)));
-                visualGuideLineColor = null;
+                field = null;
             }
             else
             {
-                visualGuideLineColor = value;
+                field = value;
             }
         }
-    }
+    } = null;
 
     /// <summary>
     /// The color of disabled menu options in hex format.
@@ -159,27 +152,19 @@ public record class MenuConfiguration
     /// Supports "#RGB", "#RGBA", "#RRGGBB", and "#RRGGBBAA" formats.
     /// </remarks>
     public string? DisabledColor {
-        get => disabledColor;
+        get;
         set {
             if (string.IsNullOrWhiteSpace(value) || Helper.ParseHexColor(value) is not (not null, not null, not null, _))
             {
                 Spectre.Console.AnsiConsole.WriteException(new ArgumentException($"DisabledColor: '{value}' is not a valid hex color format. Expected '#RRGGBB'.", nameof(value)));
-                disabledColor = null;
+                field = null;
             }
             else
             {
-                disabledColor = value;
+                field = value;
             }
         }
-    }
-
-    /// <summary>
-    /// The default comment text to use when a menu option's Comment is not set.
-    /// </summary>
-    public string? DefaultComment {
-        get => defaultComment;
-        set => defaultComment = value;
-    }
+    } = null;
 }
 
 /// <summary>

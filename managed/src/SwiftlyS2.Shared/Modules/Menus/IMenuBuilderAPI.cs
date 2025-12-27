@@ -112,6 +112,13 @@ public interface IMenuBuilderAPI
     public IMenuBuilderAPI SetExitButton( KeyBind keyBind );
 
     /// <summary>
+    /// Sets the default comment text to use when a menu option's Comment is not set.
+    /// </summary>
+    /// <param name="comment">The default comment text. Pass null to reset to default.</param>
+    /// <returns>The menu builder for method chaining.</returns>
+    public IMenuBuilderAPI SetDefaultComment( string? comment );
+
+    /// <summary>
     /// Builds the menu and returns the final menu instance.
     /// </summary>
     /// <returns>The built menu instance.</returns>
