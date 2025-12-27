@@ -457,7 +457,9 @@ internal sealed class MenuAPI : IMenuAPI, IDisposable
                 "<br>",
                 guideLine,
                 "<br>",
-                Configuration.ShowComment ? $"<font class='fontSize-s'>{Configuration.DefaultComment}</font><br>" : string.Empty
+                Configuration.ShowComment
+                    ? string.IsNullOrWhiteSpace(Configuration.DefaultComment) ? $"<font class='fontSize-s'>\u00A0\u00A0\u00A0 </font><br>" : $"<font class='fontSize-s'>{Configuration.DefaultComment}</font><br>"
+                    : string.Empty
             );
 
         var claimInfo = optionBase?.InputClaimInfo ?? MenuInputClaimInfo.Empty;
