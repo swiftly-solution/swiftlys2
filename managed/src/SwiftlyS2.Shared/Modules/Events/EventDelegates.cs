@@ -148,7 +148,7 @@ public class EventDelegates
     public delegate void OnConsoleOutput( IOnConsoleOutputEvent @event );
 
     /// <summary>
-    /// Called when a server command (concommand) is executed.
+    /// Called when a server command (ConCommand) is executed.
     /// </summary>
     public delegate void OnCommandExecuteHook( IOnCommandExecuteHookEvent @event );
 

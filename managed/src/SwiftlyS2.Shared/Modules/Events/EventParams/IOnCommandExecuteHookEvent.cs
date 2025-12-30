@@ -4,7 +4,7 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Shared.Events;
 
 /// <summary>
-/// Called when a server command (concommand) is executed.
+/// Called when a server command (ConCommand) is executed.
 /// </summary>
 public interface IOnCommandExecuteHookEvent
 {

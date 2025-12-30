@@ -130,7 +130,7 @@ public interface IEventSubscriber
     public event EventDelegates.OnConsoleOutput? OnConsoleOutput;
 
     /// <summary>
-    /// Called when a command is executed.
+    /// Called when a server command (ConCommand) is executed.
     /// </summary>
     public event EventDelegates.OnCommandExecuteHook? OnCommandExecuteHook;
 
