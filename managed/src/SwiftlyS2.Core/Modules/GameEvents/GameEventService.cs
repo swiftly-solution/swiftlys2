@@ -193,9 +193,14 @@ internal class GameEventService : IGameEventService, IDisposable
         return SchedulerManager.QueueOrNow(() => FireToServer(configureEvent));
     }
 
-    public bool IsListeningToEventName( int slot, string eventName )
+    public bool IsListeningToEvent( int slot, string eventName )
     {
         return NativeGameEvents.IsPlayerListeningToEventName(slot, eventName);
+    }
+
+    public bool IsListeningToEvent<T>( int slot ) where T : IGameEvent<T>
+    {
+        return IsListeningToEvent(slot, T.GetName());
     }
 
     public void Dispose()

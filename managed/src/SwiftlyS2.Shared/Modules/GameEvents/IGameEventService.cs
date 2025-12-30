@@ -154,5 +154,12 @@ public interface IGameEventService
     /// </summary>
     /// <param name="slot">The player slot.</param>
     /// <param name="eventName">The event name.</param>
-    bool IsListeningToEventName( int slot, string eventName );
+    bool IsListeningToEvent( int slot, string eventName );
+
+    /// <summary>
+    /// Check if the player is Listening this event.
+    /// </summary>
+    /// <typeparam name="T">The event type.</typeparam>
+    /// <param name="slot">The player slot.</param>
+    bool IsListeningToEvent<T>( int slot ) where T : IGameEvent<T>;
 }
