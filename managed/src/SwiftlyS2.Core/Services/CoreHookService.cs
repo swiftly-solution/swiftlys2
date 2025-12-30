@@ -300,7 +300,6 @@ internal class CoreHookService : IDisposable
             {
                 return ( pICvar, pRet, pConCommandName, unk1 ) =>
                 {
-                    // Console.WriteLine($"pICvar->{pICvar:X}(VEngineCvar007->{core.Memory.GetInterfaceByName("VEngineCvar007"):X}), pRet->{pRet}, pConCommandName->{pConCommandName}");
                     var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
                     if (commandName.StartsWith("ecwb", StringComparison.OrdinalIgnoreCase))
                     {

@@ -387,7 +387,9 @@ std::string current_map = "";
 bool LoopInitHook(void* _this, KeyValues* pKeyValues, void* pRegistry)
 {
     if (current_map != "")
+    {
         g_SwiftlyCore.OnMapUnload();
+    }
 
     bool ret = reinterpret_cast<decltype(&LoopInitHook)>(g_pLoopInitHook->GetOriginal())(_this, pKeyValues, pRegistry);
 

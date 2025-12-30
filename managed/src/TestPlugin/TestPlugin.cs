@@ -1346,8 +1346,6 @@ public class TestPlugin : BasePlugin
     [Command("ecwb")]
     public void ECWBCommand( ICommandContext _ )
     {
-        // var cvar = Core.ConVar.Find<bool>("cs2f_use_old_push");
-        // Console.WriteLine($"cs2f_use_old_push: {cvar!.HasDefaultValue}");
         Core.Engine.ExecuteCommandWithBuffer("cs2f_use_old_push 1", ( buffer ) => Core.Logger.LogWarning($"cs2f_use_old_push:\n{buffer}"));
         Core.Scheduler.NextTick(() => Core.Engine.ExecuteCommandWithBuffer("map_showbombradius", ( buffer ) => Core.Logger.LogWarning($"map_showbombradius:\n{buffer}")));
     }
