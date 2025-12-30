@@ -87,10 +87,6 @@
         "linux": 21
     },
     /* From sdk */
-    "ICvar::FindConVar": {
-        "windows": 11,
-        "linux": 11
-    },
     "ICvar::FindConCommand": {
         "windows": 17,
         "linux": 17

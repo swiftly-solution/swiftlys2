@@ -30,7 +30,6 @@ internal class CoreHookService : IDisposable
         this.core = core;
 
         HookExecuteCommand();
-        HookICvarFindConVarTemplate();
         HookICvarFindConCommandTemplate();
         HookCCSPlayerItemServicesCanAcquire();
         HookCCSPlayerWeaponServicesCanUse();
@@ -82,9 +81,6 @@ internal class CoreHookService : IDisposable
 
     private IUnmanagedFunction<ExecuteCommand>? executeCommand;
     private Guid executeCommandGuid;
-    private IUnmanagedFunction<ICvarFindConVarWindows>? findConVarWindows;
-    private IUnmanagedFunction<ICvarFindConVarLinux>? findConVarLinux;
-    private Guid findConVarGuid;
     private IUnmanagedFunction<ICvarFindConCommandWindows>? findConCommandWindows;
     private IUnmanagedFunction<ICvarFindConCommandLinux>? findConCommandLinux;
     private Guid findConCommandGuid;
@@ -229,64 +225,6 @@ internal class CoreHookService : IDisposable
                 }
             };
         });
-    }
-
-    private void HookICvarFindConVarTemplate()
-    {
-        if (IsWindows)
-        {
-            var offset = core.GameData.GetOffset("ICvar::FindConVar");
-            findConVarWindows = core.Memory.GetUnmanagedFunctionByVTable<ICvarFindConVarWindows>(core.Memory.GetVTableAddress(Library.Tier0, "CCvar")!.Value, offset);
-            logger.LogInformation("Hooking ICvar::FindConVar at {Address}", findConVarWindows.Address);
-            findConVarGuid = findConVarWindows.AddHook(( next ) =>
-            {
-                return ( pICvar, pRet, pConCommandName, unk1 ) =>
-                {
-                    var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
-                    if (commandName.StartsWith("ecwb", StringComparison.OrdinalIgnoreCase))
-                    {
-                        commandName = commandName.Substring(4);
-                        var bytes = Encoding.UTF8.GetBytes(commandName);
-                        unsafe
-                        {
-                            var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
-                            pStr.CopyFrom(bytes);
-                            var result = next()(pICvar, pRet, pStr, unk1);
-                            NativeMemory.Free((void*)pStr);
-                            return result;
-                        }
-                    }
-                    return next()(pICvar, pRet, pConCommandName, unk1);
-                };
-            });
-        }
-        else
-        {
-            var offset = core.GameData.GetOffset("ICvar::FindConVar");
-            findConVarLinux = core.Memory.GetUnmanagedFunctionByVTable<ICvarFindConVarLinux>(core.Memory.GetVTableAddress(Library.Tier0, "CCvar")!.Value, offset);
-            logger.LogInformation("Hooking ICvar::FindConVar at {Address}", findConVarLinux.Address);
-            findConVarGuid = findConVarLinux.AddHook(( next ) =>
-            {
-                return ( pICvar, pConCommandName, unk1 ) =>
-                {
-                    var commandName = Marshal.PtrToStringUTF8(pConCommandName)!;
-                    if (commandName.StartsWith("ecwb", StringComparison.OrdinalIgnoreCase))
-                    {
-                        commandName = commandName.Substring(4);
-                        var bytes = Encoding.UTF8.GetBytes(commandName);
-                        unsafe
-                        {
-                            var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
-                            pStr.CopyFrom(bytes);
-                            var result = next()(pICvar, pStr, unk1);
-                            NativeMemory.Free((void*)pStr);
-                            return result;
-                        }
-                    }
-                    return next()(pICvar, pConCommandName, unk1);
-                };
-            });
-        }
     }
 
     private void HookICvarFindConCommandTemplate()
@@ -537,8 +475,6 @@ internal class CoreHookService : IDisposable
     public void Dispose()
     {
         executeCommand?.RemoveHook(executeCommandGuid);
-        findConVarWindows?.RemoveHook(findConVarGuid);
-        findConVarLinux?.RemoveHook(findConVarGuid);
         findConCommandWindows?.RemoveHook(findConCommandGuid);
         findConCommandLinux?.RemoveHook(findConCommandGuid);
         itemServicesCanAcquire?.RemoveHook(itemServicesCanAcquireGuid);
