@@ -10,3 +10,5 @@ uint64 RegisterClientCommandsListener = ptr callback // callback should receive:
 void UnregisterClientCommandsListener = uint64 callbackID
 uint64 RegisterClientChatListener = ptr callback // callback should receive: int32 playerid, string text, bool teamonly, return true -> ignored, return false -> supercede, when superceded it's not gonna send the message
 void UnregisterClientChatListener = uint64 callbackID
+uint64 RegisterServerCommandsListener = ptr callback // callback should receive: string commandline, return true -> ignored, return false -> supercede
+void UnregisterServerCommandsListener = uint64 callbackID
