@@ -1,12 +1,14 @@
-using System.Diagnostics.CodeAnalysis;
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8601 // Possible null reference assignment.
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
+using System.Collections.Concurrent;
+using System.Runtime.InteropServices;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
-using SwiftlyS2.Core.Scheduler;
-using SwiftlyS2.Core.Services;
 
 namespace SwiftlyS2.Core.Convars;
 
@@ -14,22 +16,16 @@ internal delegate void ConVarCallbackDelegate( int playerId, nint name, nint val
 
 internal class ConVar : IConVar
 {
-    private Dictionary<int, ConVarCallbackDelegate> _callbacks = new();
-    private Lock _lock = new();
-    protected nint _minValuePtrPtr => NativeConvars.GetMinValuePtrPtr(Name);
-    protected nint _maxValuePtrPtr => NativeConvars.GetMaxValuePtrPtr(Name);
-
-    public string Name { get; set; }
+    private readonly ConcurrentDictionary<int, ConVarCallbackDelegate> callbacks = new();
+    protected nint MinValuePtrPtr => NativeConvars.GetMinValuePtrPtr(Name);
+    protected nint MaxValuePtrPtr => NativeConvars.GetMaxValuePtrPtr(Name);
 
     public EConVarType Type => (EConVarType)NativeConvars.GetConvarType(Name);
-
+    public string Name { get; set; }
     public string HelpText => NativeConvars.GetDescription(Name);
-
     public bool HasDefaultValue => NativeConvars.HasDefaultValue(Name);
-
-    public bool HasMinValue => _minValuePtrPtr.Read<nint>() != 0;
-
-    public bool HasMaxValue => _maxValuePtrPtr.Read<nint>() != 0;
+    public bool HasMinValue => MinValuePtrPtr.Read<nint>() != 0;
+    public bool HasMaxValue => MaxValuePtrPtr.Read<nint>() != 0;
 
     public string ValueAsString {
         get => GetValueAsString();
@@ -58,6 +54,7 @@ internal class ConVar : IConVar
 
     internal ConVar( string name )
     {
+        callbacks.Clear();
         Name = name;
     }
 
@@ -68,8 +65,7 @@ internal class ConVar : IConVar
 
     private void SetValueAsString( string value )
     {
-        var success = NativeConvars.SetValueAsString(Name, value);
-        if (!success)
+        if (!NativeConvars.SetValueAsString(Name, value))
         {
             throw new ArgumentException($"Failed to set value of convar {Name} (type {Type}) to {value}.");
         }
@@ -82,8 +78,7 @@ internal class ConVar : IConVar
 
     private void SetDefaultValueAsString( string value )
     {
-        var success = NativeConvars.SetDefaultValueAsString(Name, value);
-        if (!success)
+        if (!NativeConvars.SetDefaultValueAsString(Name, value))
         {
             throw new ArgumentException($"Failed to set default value of convar {Name} (type {Type}) to {value}.");
         }
@@ -97,8 +92,7 @@ internal class ConVar : IConVar
 
     private void SetMinValueAsString( string value )
     {
-        var success = NativeConvars.SetMinValueAsString(Name, value);
-        if (!success)
+        if (!NativeConvars.SetMinValueAsString(Name, value))
         {
             throw new ArgumentException($"Failed to set min value of convar {Name} (type {Type}) to {value}.");
         }
@@ -111,8 +105,7 @@ internal class ConVar : IConVar
 
     private void SetMaxValueAsString( string value )
     {
-        var success = NativeConvars.SetMaxValueAsString(Name, value);
-        if (!success)
+        if (!NativeConvars.SetMaxValueAsString(Name, value))
         {
             throw new ArgumentException($"Failed to set max value of convar {Name} (type {Type}) to {value}.");
         }
@@ -126,47 +119,47 @@ internal class ConVar : IConVar
     public void QueryClient( int clientId, Action<string> callback )
     {
         Action? removeSelf = null;
-        ConVarCallbackDelegate nativeCallback = ( playerId, namePtr, valuePtr ) =>
+        void nativeCallback( int playerId, nint namePtr, nint valuePtr )
         {
-            if (clientId != playerId) return;
+            if (clientId != playerId)
+            {
+                return;
+            }
             var name = Marshal.PtrToStringAnsi(namePtr);
-            if (name != Name) return;
+
+            if (name != Name)
+            {
+                return;
+            }
             var value = Marshal.PtrToStringAnsi(valuePtr)!;
 
             // var convertedValue = (T)Convert.ChangeType(value, typeof(T))!;
             callback(value);
-            if (removeSelf != null) removeSelf();
-        };
-
-
-        var callbackPtr = Marshal.GetFunctionPointerForDelegate(nativeCallback);
-
-        var listenerId = NativeConvars.AddQueryClientCvarCallback(callbackPtr);
-        lock (_lock)
-        {
-            _callbacks[listenerId] = nativeCallback;
+            removeSelf?.Invoke();
         }
+
+        var callbackPtr = Marshal.GetFunctionPointerForDelegate((ConVarCallbackDelegate)nativeCallback);
+        var listenerId = NativeConvars.AddQueryClientCvarCallback(callbackPtr);
+        _ = callbacks.AddOrUpdate(listenerId, nativeCallback, ( key, oldValue ) => nativeCallback);
 
         removeSelf = () =>
         {
-            lock (_lock)
-            {
-                _callbacks.Remove(listenerId);
-                NativeConvars.RemoveQueryClientCvarCallback(listenerId);
-            }
+            _ = callbacks.TryRemove(listenerId, out _);
+            NativeConvars.RemoveQueryClientCvarCallback(listenerId);
         };
 
-        SchedulerManager.QueueOrNow(() => NativeConvars.QueryClientConvar(clientId, Name));
+        _ = SchedulerManager.QueueOrNow(() => NativeConvars.QueryClientConvar(clientId, Name));
     }
 
     public void ReplicateToClientAsString( int clientId, string value )
     {
-        SchedulerManager.QueueOrNow(() => NativeConvars.SetClientConvarValueString(clientId, Name, value));
+        _ = SchedulerManager.QueueOrNow(() => NativeConvars.SetClientConvarValueString(clientId, Name, value));
     }
 
     public bool TryGetDefaultValueAsString( out string defaultValue )
     {
-        defaultValue = "";
+        defaultValue = string.Empty;
+
         if (!HasDefaultValue)
         {
             return false;
@@ -178,7 +171,8 @@ internal class ConVar : IConVar
 
     public bool TryGetMinValueAsString( out string minValue )
     {
-        minValue = "";
+        minValue = string.Empty;
+
         if (!HasMinValue)
         {
             return false;
@@ -190,7 +184,8 @@ internal class ConVar : IConVar
 
     public bool TryGetMaxValueAsString( out string maxValue )
     {
-        maxValue = "";
+        maxValue = string.Empty;
+
         if (!HasMaxValue)
         {
             return false;
@@ -206,8 +201,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
     private bool IsValidType => Type > EConVarType.EConVarType_Invalid && Type < EConVarType.EConVarType_MAX;
 
     // im not sure
-    private bool IsMinMaxType =>
-        IsValidType && Type != EConVarType.EConVarType_String && Type != EConVarType.EConVarType_Color;
+    private bool IsMinMaxType => IsValidType && Type != EConVarType.EConVarType_String && Type != EConVarType.EConVarType_Color;
 
     public T MinValue {
         get => GetMinValue();
@@ -223,7 +217,6 @@ internal class ConVar<T> : ConVar, IConVar<T>
         get => GetDefaultValue();
         set => SetDefaultValue(value);
     }
-
 
     internal ConVar( string name ) : base(name)
     {
@@ -261,7 +254,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
 
     public void ReplicateToClient( int clientId, T value )
     {
-        var val = "";
+        var val = string.Empty;
         if (value is bool boolValue)
         {
             val = boolValue ? "1" : "0";
@@ -322,9 +315,12 @@ internal class ConVar<T> : ConVar, IConVar<T>
         {
             val = stringValue;
         }
-        else throw new ArgumentException($"Invalid type {typeof(T).Name}");
+        else
+        {
+            throw new ArgumentException($"Invalid type {typeof(T).Name}");
+        }
 
-        SchedulerManager.QueueOrNow(() => NativeConvars.SetClientConvarValueString(clientId, Name, val));
+        _ = SchedulerManager.QueueOrNow(() => NativeConvars.SetClientConvarValueString(clientId, Name, val));
     }
 
 
@@ -332,14 +328,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
     {
         unsafe
         {
-            if (Type != EConVarType.EConVarType_String)
-            {
-                return *(T*)NativeConvars.GetValuePtr(Name);
-            }
-            else
-            {
-                return (T)(object)(*(CUtlString*)NativeConvars.GetValuePtr(Name)).Value;
-            }
+            return Type != EConVarType.EConVarType_String ? *(T*)NativeConvars.GetValuePtr(Name) : (T)(object)(*(CUtlString*)NativeConvars.GetValuePtr(Name)).Value;
         }
     }
 
@@ -353,8 +342,8 @@ internal class ConVar<T> : ConVar, IConVar<T>
             }
             else
             {
-                CUtlString str = new();
-                str.Value = (string)(object)value;
+
+                CUtlString str = new() { Value = (string)(object)value };
                 NativeConvars.SetValuePtr(Name, (nint)(&str));
             }
         }
@@ -371,8 +360,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
             }
             else
             {
-                CUtlString str = new();
-                str.Value = (string)(object)value;
+                CUtlString str = new() { Value = (string)(object)value };
                 NativeConvars.SetValueInternalPtr(Name, (nint)(&str));
             }
         }
@@ -393,7 +381,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
 
         unsafe
         {
-            return **(T**)_minValuePtrPtr;
+            return **(T**)MinValuePtrPtr;
         }
     }
 
@@ -411,7 +399,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
 
         unsafe
         {
-            return **(T**)_maxValuePtrPtr;
+            return **(T**)MaxValuePtrPtr;
         }
     }
 
@@ -424,12 +412,12 @@ internal class ConVar<T> : ConVar, IConVar<T>
 
         unsafe
         {
-            if (_minValuePtrPtr.Read<nint>() == nint.Zero)
+            if (MinValuePtrPtr.Read<nint>() == nint.Zero)
             {
-                _minValuePtrPtr.Write(NativeAllocator.Alloc(16));
+                MinValuePtrPtr.Write(NativeAllocator.Alloc(16));
             }
 
-            **(T**)_minValuePtrPtr = minValue;
+            **(T**)MinValuePtrPtr = minValue;
         }
     }
 
@@ -442,12 +430,12 @@ internal class ConVar<T> : ConVar, IConVar<T>
 
         unsafe
         {
-            if (_maxValuePtrPtr.Read<nint>() == nint.Zero)
+            if (MaxValuePtrPtr.Read<nint>() == nint.Zero)
             {
-                _maxValuePtrPtr.Write(NativeAllocator.Alloc(16));
+                MaxValuePtrPtr.Write(NativeAllocator.Alloc(16));
             }
 
-            **(T**)_maxValuePtrPtr = maxValue;
+            **(T**)MaxValuePtrPtr = maxValue;
         }
     }
 
@@ -461,14 +449,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
                 throw new Exception($"Convar {Name} doesn't have a default value.");
             }
 
-            if (Type != EConVarType.EConVarType_String)
-            {
-                return *(T*)ptr;
-            }
-            else
-            {
-                return (T)(object)(*(CUtlString*)ptr).Value;
-            }
+            return Type != EConVarType.EConVarType_String ? *(T*)ptr : (T)(object)(*(CUtlString*)ptr).Value;
         }
     }
 
@@ -533,6 +514,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
     {
         if (!HasDefaultValue)
         {
+
             defaultValue = default;
             return false;
         }
@@ -541,3 +523,7 @@ internal class ConVar<T> : ConVar, IConVar<T>
         return true;
     }
 }
+#pragma warning restore CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning restore CS8601 // Possible null reference assignment.
+#pragma warning restore CS8604 // Possible null reference argument.

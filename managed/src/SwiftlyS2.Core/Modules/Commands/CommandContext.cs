@@ -49,7 +49,6 @@ internal class CommandContext : ICommandContext
 
     public override string ToString()
     {
-        return
-            $"CommandContext {{ Sender: {(IsSentByPlayer ? $"Player: {Sender?.Controller.PlayerName ?? "Unknown"}" : "Console")}, Command: {Prefix}{CommandName}, Args: [{(Args.Length > 0 ? string.Join(" ", Args) : "None")}], Mode: {(IsSlient ? "Silent" : "Normal")} }}";
+        return $"CommandContext {{ Sender: {(IsSentByPlayer ? $"Player: {Sender?.Controller.PlayerName ?? "Unknown"}" : "Console")}, Command: {Prefix}{CommandName}, Args: [{(Args.Length > 0 ? string.Join(" ", Args) : "None")}], Mode: {(IsSlient ? "Silent" : "Normal")} }}";
     }
 }

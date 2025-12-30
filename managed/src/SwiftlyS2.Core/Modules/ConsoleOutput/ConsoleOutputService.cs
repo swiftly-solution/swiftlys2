@@ -1,7 +1,5 @@
-using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.ConsoleOutput;
-using SwiftlyS2.Shared.Profiler;
 
 namespace SwiftlyS2.Core.ConsoleOutput;
 

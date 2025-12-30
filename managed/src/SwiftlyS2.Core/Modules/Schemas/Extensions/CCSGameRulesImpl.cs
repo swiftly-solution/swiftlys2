@@ -1,10 +1,9 @@
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Natives;
+using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.Schemas;
 using SwiftlyS2.Shared.SchemaDefinitions;
 using EndReason = SwiftlyS2.Shared.Natives.RoundEndReason;
-using System.Runtime.CompilerServices;
-using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 

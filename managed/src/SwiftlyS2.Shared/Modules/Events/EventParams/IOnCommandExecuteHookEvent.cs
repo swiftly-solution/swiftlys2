@@ -4,7 +4,7 @@ using SwiftlyS2.Shared.Natives;
 namespace SwiftlyS2.Shared.Events;
 
 /// <summary>
-/// Called when a server command (ConCommand) is executed.
+/// Called when a command is executed.
 /// </summary>
 public interface IOnCommandExecuteHookEvent
 {
@@ -22,5 +22,4 @@ public interface IOnCommandExecuteHookEvent
     /// The hook result. You can change it only in Pre event.  
     /// </summary>
     public HookResult Result { get; set; } 
-
 }

@@ -20,9 +20,9 @@ namespace SwiftlyS2.Core.Services;
 
 internal class CoreHookService : IDisposable
 {
-
     private readonly ISwiftlyCore core;
     private readonly ILogger<CoreHookService> logger;
+    private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     public CoreHookService( ILogger<CoreHookService> logger, ISwiftlyCore core )
     {
@@ -30,7 +30,8 @@ internal class CoreHookService : IDisposable
         this.core = core;
 
         HookExecuteCommand();
-        HookFindConCommandTemplate();
+        HookICvarFindConVarTemplate();
+        HookICvarFindConCommandTemplate();
         HookCCSPlayerItemServicesCanAcquire();
         HookCCSPlayerWeaponServicesCanUse();
         HookCBaseEntityTouchTemplate();
@@ -42,32 +43,34 @@ internal class CoreHookService : IDisposable
     }
 
     /*
-      Original function in engine2.dll: __int64 sub_1C0CD0(__int64 a1, int a2, unsigned int a3, ...)
-      This is a variadic function, but we only need the first two variable arguments (v55, v57)
+        Original function in engine2.dll: __int64 sub_1C0CD0(__int64 a1, int a2, unsigned int a3, ...)
+        This is a variadic function, but we only need the first two variable arguments (v55, v57)
 
-      __int64 sub_1C0CD0(__int64 a1, int a2, unsigned int a3, ...)
-      {
-          ...
+        __int64 sub_1C0CD0(__int64 a1, int a2, unsigned int a3, ...)
+        {
+            ...
 
-          va_list va; // [rsp+D28h] [rbp+D28h]
-          __int64 v55; // [rsp+E28h] [rbp+D28h] BYREF
-          va_list va1; // [rsp+E28h] [rbp+D28h]
+            va_list va; // [rsp+D28h] [rbp+D28h]
+            __int64 v55; // [rsp+E28h] [rbp+D28h] BYREF
+            va_list va1; // [rsp+E28h] [rbp+D28h]
 
-          ...
+            ...
 
-          va_start(va1, a3);
-          va_start(va, a3);
-          v55 = va_arg(va1, _QWORD);
-          v57 = va_arg(va1, _QWORD);
+            va_start(va1, a3);
+            va_start(va, a3);
+            v55 = va_arg(va1, _QWORD);
+            v57 = va_arg(va1, _QWORD);
 
-          ...
-      }
+            ...
+        }
 
-      So we model it as a fixed 5-parameter function for interop purposes
+        So we model it as a fixed 5-parameter function for interop purposes
     */
     private delegate nint ExecuteCommand( nint a1, int a2, uint a3, nint a4, nint a5 );
-    private delegate nint FindConCommandWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
-    private delegate nint FindConCommandLinux( nint pICvar, nint pConCommandName, int unk1 );
+    private delegate nint ICvarFindConVarWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
+    private delegate nint ICvarFindConVarLinux( nint pICvar, nint pConCommandName, int unk1 );
+    private delegate nint ICvarFindConCommandWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
+    private delegate nint ICvarFindConCommandLinux( nint pICvar, nint pConCommandName, int unk1 );
     private delegate int CCSPlayerItemServicesCanAcquire( nint pItemServices, nint pEconItemView, nint acquireMethod, nint unk1 );
     private delegate byte CCSPlayerWeaponServicesCanUse( nint pWeaponServices, nint pBasePlayerWeapon );
     private delegate nint CBaseEntityTouchTemplate( nint pBaseEntity, nint pOtherEntity );
@@ -79,8 +82,11 @@ internal class CoreHookService : IDisposable
 
     private IUnmanagedFunction<ExecuteCommand>? executeCommand;
     private Guid executeCommandGuid;
-    private IUnmanagedFunction<FindConCommandWindows>? findConCommandWindows;
-    private IUnmanagedFunction<FindConCommandLinux>? findConCommandLinux;
+    private IUnmanagedFunction<ICvarFindConVarWindows>? findConVarWindows;
+    private IUnmanagedFunction<ICvarFindConVarLinux>? findConVarLinux;
+    private Guid findConVarGuid;
+    private IUnmanagedFunction<ICvarFindConCommandWindows>? findConCommandWindows;
+    private IUnmanagedFunction<ICvarFindConCommandLinux>? findConCommandLinux;
     private Guid findConCommandGuid;
     private IUnmanagedFunction<CCSPlayerItemServicesCanAcquire>? itemServicesCanAcquire;
     private Guid itemServicesCanAcquireGuid;
@@ -225,21 +231,46 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookFindConCommandTemplate()
+    private void HookICvarFindConVarTemplate()
     {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        if (IsWindows)
         {
-            var offset = core.GameData.GetOffset("ICvar::FindConCommand");
-            findConCommandLinux = core.Memory.GetUnmanagedFunctionByVTable<FindConCommandLinux>(core.Memory.GetVTableAddress("tier0", "CCvar")!.Value, offset);
-
-            logger.LogInformation("Hooking ICvar::FindConCommand at {Address}", findConCommandLinux.Address);
-
-            findConCommandGuid = findConCommandLinux.AddHook(( next ) =>
+            var offset = core.GameData.GetOffset("ICvar::FindConVar");
+            findConVarWindows = core.Memory.GetUnmanagedFunctionByVTable<ICvarFindConVarWindows>(core.Memory.GetVTableAddress(Library.Tier0, "CCvar")!.Value, offset);
+            logger.LogInformation("Hooking ICvar::FindConVar at {Address}", findConVarWindows.Address);
+            findConVarGuid = findConVarWindows.AddHook(( next ) =>
+            {
+                return ( pICvar, pRet, pConCommandName, unk1 ) =>
+                {
+                    var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
+                    if (commandName.StartsWith("ecwb", StringComparison.OrdinalIgnoreCase))
+                    {
+                        commandName = commandName.Substring(4);
+                        var bytes = Encoding.UTF8.GetBytes(commandName);
+                        unsafe
+                        {
+                            var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
+                            pStr.CopyFrom(bytes);
+                            var result = next()(pICvar, pRet, pStr, unk1);
+                            NativeMemory.Free((void*)pStr);
+                            return result;
+                        }
+                    }
+                    return next()(pICvar, pRet, pConCommandName, unk1);
+                };
+            });
+        }
+        else
+        {
+            var offset = core.GameData.GetOffset("ICvar::FindConVar");
+            findConVarLinux = core.Memory.GetUnmanagedFunctionByVTable<ICvarFindConVarLinux>(core.Memory.GetVTableAddress(Library.Tier0, "CCvar")!.Value, offset);
+            logger.LogInformation("Hooking ICvar::FindConVar at {Address}", findConVarLinux.Address);
+            findConVarGuid = findConVarLinux.AddHook(( next ) =>
             {
                 return ( pICvar, pConCommandName, unk1 ) =>
                 {
-                    var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
-                    if (commandName.StartsWith("^wb^"))
+                    var commandName = Marshal.PtrToStringUTF8(pConCommandName)!;
+                    if (commandName.StartsWith("ecwb", StringComparison.OrdinalIgnoreCase))
                     {
                         commandName = commandName.Substring(4);
                         var bytes = Encoding.UTF8.GetBytes(commandName);
@@ -256,19 +287,22 @@ internal class CoreHookService : IDisposable
                 };
             });
         }
-        else
+    }
+
+    private void HookICvarFindConCommandTemplate()
+    {
+        if (IsWindows)
         {
             var offset = core.GameData.GetOffset("ICvar::FindConCommand");
-            findConCommandWindows = core.Memory.GetUnmanagedFunctionByVTable<FindConCommandWindows>(core.Memory.GetVTableAddress("tier0", "CCvar")!.Value, offset);
-
+            findConCommandWindows = core.Memory.GetUnmanagedFunctionByVTable<ICvarFindConCommandWindows>(core.Memory.GetVTableAddress(Library.Tier0, "CCvar")!.Value, offset);
             logger.LogInformation("Hooking ICvar::FindConCommand at {Address}", findConCommandWindows.Address);
-
             findConCommandGuid = findConCommandWindows.AddHook(( next ) =>
             {
                 return ( pICvar, pRet, pConCommandName, unk1 ) =>
                 {
+                    // Console.WriteLine($"pICvar->{pICvar:X}(VEngineCvar007->{core.Memory.GetInterfaceByName("VEngineCvar007"):X}), pRet->{pRet}, pConCommandName->{pConCommandName}");
                     var commandName = Marshal.PtrToStringAnsi(pConCommandName)!;
-                    if (commandName.StartsWith("^wb^"))
+                    if (commandName.StartsWith("ecwb", StringComparison.OrdinalIgnoreCase))
                     {
                         commandName = commandName.Substring(4);
                         var bytes = Encoding.UTF8.GetBytes(commandName);
@@ -282,6 +316,33 @@ internal class CoreHookService : IDisposable
                         }
                     }
                     return next()(pICvar, pRet, pConCommandName, unk1);
+                };
+            });
+        }
+        else
+        {
+            var offset = core.GameData.GetOffset("ICvar::FindConCommand");
+            findConCommandLinux = core.Memory.GetUnmanagedFunctionByVTable<ICvarFindConCommandLinux>(core.Memory.GetVTableAddress(Library.Tier0, "CCvar")!.Value, offset);
+            logger.LogInformation("Hooking ICvar::FindConCommand at {Address}", findConCommandLinux.Address);
+            findConCommandGuid = findConCommandLinux.AddHook(( next ) =>
+            {
+                return ( pICvar, pConCommandName, unk1 ) =>
+                {
+                    var commandName = Marshal.PtrToStringUTF8(pConCommandName)!;
+                    if (commandName.StartsWith("ecwb", StringComparison.OrdinalIgnoreCase))
+                    {
+                        commandName = commandName.Substring(4);
+                        var bytes = Encoding.UTF8.GetBytes(commandName);
+                        unsafe
+                        {
+                            var pStr = (nint)NativeMemory.AllocZeroed((nuint)bytes.Length);
+                            pStr.CopyFrom(bytes);
+                            var result = next()(pICvar, pStr, unk1);
+                            NativeMemory.Free((void*)pStr);
+                            return result;
+                        }
+                    }
+                    return next()(pICvar, pConCommandName, unk1);
                 };
             });
         }
@@ -332,14 +393,7 @@ internal class CoreHookService : IDisposable
     private void HookCCSPlayerWeaponServicesCanUse()
     {
         var offset = core.GameData.GetOffset("CCSPlayer_WeaponServices::CanUse");
-        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CCSPlayer_WeaponServices");
-
-        if (pVtable == null)
-        {
-            logger.LogError("Failed to get CCSPlayer_WeaponServices vtable.");
-            return;
-        }
-        weaponServicesCanUse = core.Memory.GetUnmanagedFunctionByVTable<CCSPlayerWeaponServicesCanUse>(pVtable!.Value, offset);
+        weaponServicesCanUse = core.Memory.GetUnmanagedFunctionByVTable<CCSPlayerWeaponServicesCanUse>(core.Memory.GetVTableAddress(Library.Server, "CCSPlayer_WeaponServices")!.Value, offset);
         logger.LogInformation("Hooking CCSPlayer_WeaponServices::CanUse at {Address}", weaponServicesCanUse.Address);
         weaponServicesCanUseGuid = weaponServicesCanUse.AddHook(next =>
         {
@@ -367,16 +421,9 @@ internal class CoreHookService : IDisposable
         var touchOffset = core.GameData.GetOffset("CBaseEntity::Touch");
         var startTouchOffset = core.GameData.GetOffset("CBaseEntity::StartTouch");
         var endTouchOffset = core.GameData.GetOffset("CBaseEntity::EndTouch");
-        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CBaseEntity");
-
-        if (pVtable == null)
-        {
-            logger.LogError("Failed to get CBaseEntity vtable.");
-            return;
-        }
-        entityStartTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(pVtable!.Value, startTouchOffset);
-        entityTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(pVtable!.Value, touchOffset);
-        entityEndTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(pVtable!.Value, endTouchOffset);
+        entityStartTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, startTouchOffset);
+        entityTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, touchOffset);
+        entityEndTouch = core.Memory.GetUnmanagedFunctionByVTable<CBaseEntityTouchTemplate>(core.Memory.GetVTableAddress(Library.Server, "CBaseEntity")!.Value, endTouchOffset);
         logger.LogInformation("Hooking CBaseEntity::StartTouch at {Address}", entityStartTouch.Address);
         logger.LogInformation("Hooking CBaseEntity::Touch at {Address}", entityTouch.Address);
         logger.LogInformation("Hooking CBaseEntity::EndTouch at {Address}", entityEndTouch.Address);
@@ -421,15 +468,7 @@ internal class CoreHookService : IDisposable
     private void HookSteamServerAPIActivated()
     {
         var offset = core.GameData.GetOffset("IServerGameDLL::GameServerSteamAPIActivated");
-        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CSource2Server");
-
-        if (pVtable == null)
-        {
-            logger.LogError("Failed to get CSource2Server vtable.");
-            return;
-        }
-
-        steamServerAPIActivated = core.Memory.GetUnmanagedFunctionByVTable<SteamServerAPIActivated>(pVtable!.Value, offset);
+        steamServerAPIActivated = core.Memory.GetUnmanagedFunctionByVTable<SteamServerAPIActivated>(core.Memory.GetVTableAddress(Library.Server, "CSource2Server")!.Value, offset);
         logger.LogInformation("Hooking IServerGameDLL::GameServerSteamAPIActivated at {Address}", steamServerAPIActivated.Address);
         steamServerAPIActivatedGuid = steamServerAPIActivated.AddHook(next =>
         {
@@ -450,13 +489,7 @@ internal class CoreHookService : IDisposable
     private void HookCPlayerMovementServicesRunCommand()
     {
         var offset = core.GameData.GetOffset("CPlayer_MovementServices::RunCommand");
-        var pVtable = core.Memory.GetVTableAddress(Library.Server, "CPlayer_MovementServices");
-        if (pVtable == null)
-        {
-            logger.LogError("Failed to get CPlayer_MovementServices vtable.");
-            return;
-        }
-        movementServiceRunCommand = core.Memory.GetUnmanagedFunctionByVTable<CPlayerMovementServicesRunCommand>(pVtable!.Value, offset);
+        movementServiceRunCommand = core.Memory.GetUnmanagedFunctionByVTable<CPlayerMovementServicesRunCommand>(core.Memory.GetVTableAddress(Library.Server, "CPlayer_MovementServices")!.Value, offset);
         logger.LogInformation("Hooking CPlayer_MovementServices::RunCommand at {Address}", movementServiceRunCommand.Address);
         movementServiceRunCommandGuid = movementServiceRunCommand.AddHook(( next ) =>
         {
@@ -505,6 +538,8 @@ internal class CoreHookService : IDisposable
     public void Dispose()
     {
         executeCommand?.RemoveHook(executeCommandGuid);
+        findConVarWindows?.RemoveHook(findConVarGuid);
+        findConVarLinux?.RemoveHook(findConVarGuid);
         findConCommandWindows?.RemoveHook(findConCommandGuid);
         findConCommandLinux?.RemoveHook(findConCommandGuid);
         itemServicesCanAcquire?.RemoveHook(itemServicesCanAcquireGuid);
