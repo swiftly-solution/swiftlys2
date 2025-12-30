@@ -143,6 +143,32 @@ internal class CommandService : ICommandService, IDisposable
         }
     }
 
+    public Guid HookServerCommand( ICommandService.ServerCommandHandler handler )
+    {
+        var callback = new ServerCommandListenerCallback(handler, loggerFactory, profiler);
+        lock (commandLock)
+        {
+            commandCallbacks.Add(callback);
+        }
+        return callback.Guid;
+    }
+
+    public void UnhookServerCommand( Guid guid )
+    {
+        lock (commandLock)
+        {
+            _ = commandCallbacks.RemoveAll(callback =>
+            {
+                if (callback is ServerCommandListenerCallback serverCommandCallback && serverCommandCallback.Guid == guid)
+                {
+                    serverCommandCallback.Dispose();
+                    return true;
+                }
+                return false;
+            });
+        }
+    }
+
     public void Dispose()
     {
         lock (commandLock)

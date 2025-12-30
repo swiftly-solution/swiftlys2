@@ -33,6 +33,7 @@ public:
     virtual int HandleCommand(int playerid, const std::string& text, bool dryrun) = 0;
     virtual bool HandleClientCommand(int playerid, const std::string& text) = 0;
     virtual bool HandleClientChat(int playerid, const std::string& text, bool teamonly) = 0;
+    virtual bool HandleServerCommand(const std::string& text) = 0;
 
     // playerid, args, command_name, prefix, silent
     virtual uint64_t RegisterCommand(std::string command_name, std::function<void(int, std::vector<std::string>, std::string, std::string, bool)> handler, bool registerRaw) = 0;
@@ -49,6 +50,11 @@ public:
     // playerid, text, teamonly
     virtual uint64_t RegisterClientChatListener(std::function<int(int, const std::string&, bool)> listener) = 0;
     virtual void UnregisterClientChatListener(uint64_t listener_id) = 0;
+    
+    // command
+    virtual uint64_t RegisterServerCommandsListener(std::function<int(const std::string&)> listener) = 0;
+    virtual void UnregisterServerCommandsListener(uint64_t listener_id) = 0;
+
 };
 
 #endif

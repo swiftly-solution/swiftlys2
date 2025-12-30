@@ -8,128 +8,164 @@ using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Core.Natives;
 
-internal static class NativeCommands {
+internal static class NativeCommands
+{
 
-  private unsafe static delegate* unmanaged<int, byte*, int> _HandleCommandForPlayer;
+    private unsafe static delegate* unmanaged< int, byte*, int > _HandleCommandForPlayer;
 
-  /// <summary>
-  /// 1 -> not silent, 2 -> silent, -1 -> invalid player, 0 -> no command
-  /// </summary>
-  public unsafe static int HandleCommandForPlayer(int playerid, string command) {
-    if (!NativeBinding.IsMainThread) {
-      throw new InvalidOperationException("This method can only be called from the main thread.");
+    /// <summary>
+    /// 1 -> not silent, 2 -> silent, -1 -> invalid player, 0 -> no command
+    /// </summary>
+    public unsafe static int HandleCommandForPlayer( int playerid, string command )
+    {
+        if (!NativeBinding.IsMainThread)
+        {
+            throw new InvalidOperationException("This method can only be called from the main thread.");
+        }
+        var pool = ArrayPool<byte>.Shared;
+        var commandLength = Encoding.UTF8.GetByteCount(command);
+        var commandBuffer = pool.Rent(commandLength + 1);
+        Encoding.UTF8.GetBytes(command, commandBuffer);
+        commandBuffer[commandLength] = 0;
+        fixed (byte* commandBufferPtr = commandBuffer)
+        {
+            var ret = _HandleCommandForPlayer(playerid, commandBufferPtr);
+            pool.Return(commandBuffer);
+            return ret;
+        }
     }
-    var pool = ArrayPool<byte>.Shared;
-    var commandLength = Encoding.UTF8.GetByteCount(command);
-    var commandBuffer = pool.Rent(commandLength + 1);
-    Encoding.UTF8.GetBytes(command, commandBuffer);
-    commandBuffer[commandLength] = 0;
-    fixed (byte* commandBufferPtr = commandBuffer) {
-      var ret = _HandleCommandForPlayer(playerid, commandBufferPtr);
-      pool.Return(commandBuffer);
-      return ret;
+
+    private unsafe static delegate* unmanaged< byte*, nint, byte, ulong > _RegisterCommand;
+
+    /// <summary>
+    /// callback should receive (int32 playerid, string arguments_list (separated by \x01), string commandName, string prefix, bool silent), if registerRaw is false, it will not put "sw_" before the command name
+    /// </summary>
+    public unsafe static ulong RegisterCommand( string commandName, nint callback, bool registerRaw )
+    {
+        var pool = ArrayPool<byte>.Shared;
+        var commandNameLength = Encoding.UTF8.GetByteCount(commandName);
+        var commandNameBuffer = pool.Rent(commandNameLength + 1);
+        Encoding.UTF8.GetBytes(commandName, commandNameBuffer);
+        commandNameBuffer[commandNameLength] = 0;
+        fixed (byte* commandNameBufferPtr = commandNameBuffer)
+        {
+            var ret = _RegisterCommand(commandNameBufferPtr, callback, registerRaw ? (byte)1 : (byte)0);
+            pool.Return(commandNameBuffer);
+            return ret;
+        }
     }
-  }
 
-  private unsafe static delegate* unmanaged<byte*, nint, byte, ulong> _RegisterCommand;
+    private unsafe static delegate* unmanaged< ulong, void > _UnregisterCommand;
 
-  /// <summary>
-  /// callback should receive (int32 playerid, string arguments_list (separated by \x01), string commandName, string prefix, bool silent), if registerRaw is false, it will not put "sw_" before the command name
-  /// </summary>
-  public unsafe static ulong RegisterCommand(string commandName, nint callback, bool registerRaw) {
-    var pool = ArrayPool<byte>.Shared;
-    var commandNameLength = Encoding.UTF8.GetByteCount(commandName);
-    var commandNameBuffer = pool.Rent(commandNameLength + 1);
-    Encoding.UTF8.GetBytes(commandName, commandNameBuffer);
-    commandNameBuffer[commandNameLength] = 0;
-    fixed (byte* commandNameBufferPtr = commandNameBuffer) {
-      var ret = _RegisterCommand(commandNameBufferPtr, callback, registerRaw ? (byte)1 : (byte)0);
-      pool.Return(commandNameBuffer);
-      return ret;
+    public unsafe static void UnregisterCommand( ulong callbackID )
+    {
+        _UnregisterCommand(callbackID);
     }
-  }
 
-  private unsafe static delegate* unmanaged<ulong, void> _UnregisterCommand;
+    private unsafe static delegate* unmanaged< byte*, byte > _IsCommandRegistered;
 
-  public unsafe static void UnregisterCommand(ulong callbackID) {
-    _UnregisterCommand(callbackID);
-  }
-
-  private unsafe static delegate* unmanaged<byte*, byte> _IsCommandRegistered;
-
-  public unsafe static bool IsCommandRegistered(string commandName) {
-    var pool = ArrayPool<byte>.Shared;
-    var commandNameLength = Encoding.UTF8.GetByteCount(commandName);
-    var commandNameBuffer = pool.Rent(commandNameLength + 1);
-    Encoding.UTF8.GetBytes(commandName, commandNameBuffer);
-    commandNameBuffer[commandNameLength] = 0;
-    fixed (byte* commandNameBufferPtr = commandNameBuffer) {
-      var ret = _IsCommandRegistered(commandNameBufferPtr);
-      pool.Return(commandNameBuffer);
-      return ret == 1;
+    public unsafe static bool IsCommandRegistered( string commandName )
+    {
+        var pool = ArrayPool<byte>.Shared;
+        var commandNameLength = Encoding.UTF8.GetByteCount(commandName);
+        var commandNameBuffer = pool.Rent(commandNameLength + 1);
+        Encoding.UTF8.GetBytes(commandName, commandNameBuffer);
+        commandNameBuffer[commandNameLength] = 0;
+        fixed (byte* commandNameBufferPtr = commandNameBuffer)
+        {
+            var ret = _IsCommandRegistered(commandNameBufferPtr);
+            pool.Return(commandNameBuffer);
+            return ret == 1;
+        }
     }
-  }
 
-  private unsafe static delegate* unmanaged<byte*, byte*, byte, ulong> _RegisterAlias;
+    private unsafe static delegate* unmanaged< byte*, byte*, byte, ulong > _RegisterAlias;
 
-  /// <summary>
-  /// registerRaw behaves the same as on RegisterCommand, for commandName you need to also put the "sw_" prefix if the command is registered without raw mode
-  /// </summary>
-  public unsafe static ulong RegisterAlias(string aliasName, string commandName, bool registerRaw) {
-    var pool = ArrayPool<byte>.Shared;
-    var aliasNameLength = Encoding.UTF8.GetByteCount(aliasName);
-    var aliasNameBuffer = pool.Rent(aliasNameLength + 1);
-    Encoding.UTF8.GetBytes(aliasName, aliasNameBuffer);
-    aliasNameBuffer[aliasNameLength] = 0;
-    var commandNameLength = Encoding.UTF8.GetByteCount(commandName);
-    var commandNameBuffer = pool.Rent(commandNameLength + 1);
-    Encoding.UTF8.GetBytes(commandName, commandNameBuffer);
-    commandNameBuffer[commandNameLength] = 0;
-    fixed (byte* aliasNameBufferPtr = aliasNameBuffer) {
-      fixed (byte* commandNameBufferPtr = commandNameBuffer) {
-        var ret = _RegisterAlias(aliasNameBufferPtr, commandNameBufferPtr, registerRaw ? (byte)1 : (byte)0);
-        pool.Return(aliasNameBuffer);
-        pool.Return(commandNameBuffer);
+    /// <summary>
+    /// registerRaw behaves the same as on RegisterCommand, for commandName you need to also put the "sw_" prefix if the command is registered without raw mode
+    /// </summary>
+    public unsafe static ulong RegisterAlias( string aliasName, string commandName, bool registerRaw )
+    {
+        var pool = ArrayPool<byte>.Shared;
+        var aliasNameLength = Encoding.UTF8.GetByteCount(aliasName);
+        var aliasNameBuffer = pool.Rent(aliasNameLength + 1);
+        Encoding.UTF8.GetBytes(aliasName, aliasNameBuffer);
+        aliasNameBuffer[aliasNameLength] = 0;
+        var commandNameLength = Encoding.UTF8.GetByteCount(commandName);
+        var commandNameBuffer = pool.Rent(commandNameLength + 1);
+        Encoding.UTF8.GetBytes(commandName, commandNameBuffer);
+        commandNameBuffer[commandNameLength] = 0;
+        fixed (byte* aliasNameBufferPtr = aliasNameBuffer)
+        {
+            fixed (byte* commandNameBufferPtr = commandNameBuffer)
+            {
+                var ret = _RegisterAlias(aliasNameBufferPtr, commandNameBufferPtr, registerRaw ? (byte)1 : (byte)0);
+                pool.Return(aliasNameBuffer);
+                pool.Return(commandNameBuffer);
+                return ret;
+            }
+        }
+    }
+
+    private unsafe static delegate* unmanaged< ulong, void > _UnregisterAlias;
+
+    public unsafe static void UnregisterAlias( ulong callbackID )
+    {
+        _UnregisterAlias(callbackID);
+    }
+
+    private unsafe static delegate* unmanaged< nint, ulong > _RegisterClientCommandsListener;
+
+    /// <summary>
+    /// callback should receive: int32 playerid, string commandline, return true -> ignored, return false -> supercede
+    /// </summary>
+    public unsafe static ulong RegisterClientCommandsListener( nint callback )
+    {
+        var ret = _RegisterClientCommandsListener(callback);
         return ret;
-      }
     }
-  }
 
-  private unsafe static delegate* unmanaged<ulong, void> _UnregisterAlias;
+    private unsafe static delegate* unmanaged< ulong, void > _UnregisterClientCommandsListener;
 
-  public unsafe static void UnregisterAlias(ulong callbackID) {
-    _UnregisterAlias(callbackID);
-  }
+    public unsafe static void UnregisterClientCommandsListener( ulong callbackID )
+    {
+        _UnregisterClientCommandsListener(callbackID);
+    }
 
-  private unsafe static delegate* unmanaged<nint, ulong> _RegisterClientCommandsListener;
+    private unsafe static delegate* unmanaged< nint, ulong > _RegisterClientChatListener;
 
-  /// <summary>
-  /// callback should receive: int32 playerid, string commandline, return true -> ignored, return false -> supercede
-  /// </summary>
-  public unsafe static ulong RegisterClientCommandsListener(nint callback) {
-    var ret = _RegisterClientCommandsListener(callback);
-    return ret;
-  }
+    /// <summary>
+    /// callback should receive: int32 playerid, string text, bool teamonly, return true -> ignored, return false -> supercede, when superceded it's not gonna send the message
+    /// </summary>
+    public unsafe static ulong RegisterClientChatListener( nint callback )
+    {
+        var ret = _RegisterClientChatListener(callback);
+        return ret;
+    }
 
-  private unsafe static delegate* unmanaged<ulong, void> _UnregisterClientCommandsListener;
+    private unsafe static delegate* unmanaged< ulong, void > _UnregisterClientChatListener;
 
-  public unsafe static void UnregisterClientCommandsListener(ulong callbackID) {
-    _UnregisterClientCommandsListener(callbackID);
-  }
+    public unsafe static void UnregisterClientChatListener( ulong callbackID )
+    {
+        _UnregisterClientChatListener(callbackID);
+    }
 
-  private unsafe static delegate* unmanaged<nint, ulong> _RegisterClientChatListener;
+    private unsafe static delegate* unmanaged< nint, ulong > _RegisterServerCommandsListener;
 
-  /// <summary>
-  /// callback should receive: int32 playerid, string text, bool teamonly, return true -> ignored, return false -> supercede, when superceded it's not gonna send the message
-  /// </summary>
-  public unsafe static ulong RegisterClientChatListener(nint callback) {
-    var ret = _RegisterClientChatListener(callback);
-    return ret;
-  }
+    /// <summary>
+    /// callback should receive: string commandline, return true -> ignored, return false -> supercede
+    /// </summary>
+    public unsafe static ulong RegisterServerCommandsListener( nint callback )
+    {
+        var ret = _RegisterServerCommandsListener(callback);
+        return ret;
+    }
 
-  private unsafe static delegate* unmanaged<ulong, void> _UnregisterClientChatListener;
+    private unsafe static delegate* unmanaged< ulong, void > _UnregisterServerCommandsListener;
 
-  public unsafe static void UnregisterClientChatListener(ulong callbackID) {
-    _UnregisterClientChatListener(callbackID);
-  }
+    public unsafe static void UnregisterServerCommandsListener( ulong callbackID )
+    {
+        _UnregisterServerCommandsListener(callbackID);
+    }
+
 }

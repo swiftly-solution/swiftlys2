@@ -15,6 +15,8 @@ internal delegate HookResult ClientCommandListenerCallbackDelegate( int playerId
 
 internal delegate HookResult ClientChatListenerCallbackDelegate( int playerId, nint text, byte teamonly );
 
+internal delegate HookResult ServerCommandListenerCallbackDelegate( nint commandLine );
+
 internal abstract class CommandCallbackBase : IDisposable
 {
     public Guid Guid { get; protected init; }
@@ -173,5 +175,48 @@ internal class ClientChatListenerCallback : CommandCallbackBase
     public override void Dispose()
     {
         NativeCommands.UnregisterClientChatListener(nativeListenerId);
+    }
+}
+
+internal class ServerCommandListenerCallback : CommandCallbackBase
+{
+    private readonly ICommandService.ServerCommandHandler commandHandle;
+    private readonly ServerCommandListenerCallbackDelegate commandCallback;
+    private readonly nint commandCallbackPtr;
+    private readonly ulong nativeListenerId;
+    private readonly ILogger<ServerCommandListenerCallback> logger;
+
+    public ServerCommandListenerCallback( ICommandService.ServerCommandHandler handler, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
+    {
+        logger = LoggerFactory.CreateLogger<ServerCommandListenerCallback>();
+        Guid = Guid.NewGuid();
+
+        commandHandle = handler;
+        commandCallback = ( commandLinePtr ) =>
+        {
+            try
+            {
+                var category = "ServerCommandListenerCallbackDelegate";
+                Profiler.StartRecording(category);
+                var commandLineString = Marshal.PtrToStringUTF8(commandLinePtr)!;
+                var result = commandHandle(commandLineString);
+                Profiler.StopRecording(category);
+                return result;
+            }
+            catch (Exception e)
+            {
+                if (!GlobalExceptionHandler.Handle(e)) return HookResult.Continue;
+                logger.LogError(e, "Failed to handle server command listener.");
+                return HookResult.Continue;
+            }
+        };
+
+        commandCallbackPtr = Marshal.GetFunctionPointerForDelegate(commandCallback);
+        nativeListenerId = NativeCommands.RegisterServerCommandsListener(commandCallbackPtr);
+    }
+
+    public override void Dispose()
+    {
+        NativeCommands.UnregisterServerCommandsListener(nativeListenerId);
     }
 }

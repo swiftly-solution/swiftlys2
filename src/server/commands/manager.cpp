@@ -34,6 +34,7 @@ std::map<uint64_t, std::string> conCommandMapping;
 std::map<std::string, std::function<void(int, std::vector<std::string>, std::string, std::string, bool)>> commandHandlers;
 
 std::map<uint64_t, std::function<int(int, const std::string&)>> clientCommandListeners;
+std::map<uint64_t, std::function<int(const std::string&)>> serverCommandListeners;
 std::map<uint64_t, std::function<int(int, const std::string&, bool)>> clientChatListeners;
 
 std::set<std::string> commandPrefixes;
@@ -240,6 +241,24 @@ bool CServerCommands::HandleClientCommand(int playerid, const std::string& text)
     return true;
 }
 
+bool CServerCommands::HandleServerCommand(const std::string& text)
+{
+    for (const auto& [id, listener] : serverCommandListeners)
+    {
+        auto res = listener(text);
+        if (res == 1)
+        {
+            return false;
+        }
+        else if (res == 2)
+        {
+            break;
+        }
+    }
+
+    return true;
+}
+
 bool CServerCommands::HandleClientChat(int playerid, const std::string& text, bool teamonly)
 {
     for (const auto& [id, listener] : clientChatListeners)
@@ -379,6 +398,18 @@ void CServerCommands::UnregisterClientChatListener(uint64_t listenerId)
     clientChatListeners.erase(listenerId);
 }
 
+uint64_t CServerCommands::RegisterServerCommandsListener(std::function<int(const std::string&)> listener)
+{
+    static uint64_t listenerId = 0;
+    serverCommandListeners[++listenerId] = listener;
+    return listenerId;
+}
+
+void CServerCommands::UnregisterServerCommandsListener(uint64_t listenerId)
+{
+    serverCommandListeners.erase(listenerId);
+}
+
 void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)
 {
     static auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
@@ -392,6 +423,7 @@ void ClientCommandHook2(void* thisPtr, CPlayerSlot slot, const CCommand& args)
 void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext& ctx, const CCommand& args)
 {
     CPlayerSlot slot = ctx.GetPlayerSlot();
+    
     static auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
     static auto playermanager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
     static auto eventmanager = g_ifaceService.FetchInterface<IEventManager>(GAMEEVENTMANAGER_INTERFACE_VERSION);
@@ -437,6 +469,13 @@ void DispatchConCommand(void* thisPtr, ConCommandRef cmd, const CCommandContext&
             {
                 return;
             }
+        }
+    }
+    else
+    {
+        if (!servercommands->HandleServerCommand(args.GetCommandString()))
+        {
+            return;
         }
     }
 

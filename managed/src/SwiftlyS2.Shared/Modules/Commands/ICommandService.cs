@@ -28,6 +28,13 @@ public interface ICommandService
     public delegate HookResult ClientChatHandler( int playerId, string text, bool teamonly );
 
     /// <summary>
+    /// The handler for the server command hook.
+    /// </summary>
+    /// <param name="commandLine">The command line.</param>
+    /// <returns>Whether the command should continue to be sent.</returns>
+    public delegate HookResult ServerCommandHandler( string commandLine );
+
+    /// <summary>
     /// Registers a command.
     /// </summary>
     /// <param name="commandName">The command name.</param>
@@ -87,4 +94,17 @@ public interface ICommandService
     /// </summary>
     /// <param name="guid">The guid of the client chat.</param>
     public void UnhookClientChat( Guid guid );
+
+    /// <summary>
+    /// Hooks server commands, will be fired when server sends any command.
+    /// </summary>
+    /// <param name="handler">The handler callback for the server command.</param>
+    public Guid HookServerCommand( ServerCommandHandler handler );
+
+    /// <summary>
+    /// Unhooks a server command.
+    /// </summary>
+    /// <param name="guid">The guid of the server command.</param>
+    public void UnhookServerCommand( Guid guid );
+
 }
