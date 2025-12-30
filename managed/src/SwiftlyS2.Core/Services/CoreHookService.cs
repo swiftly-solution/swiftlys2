@@ -66,8 +66,6 @@ internal class CoreHookService : IDisposable
         So we model it as a fixed 5-parameter function for interop purposes
     */
     private delegate nint ExecuteCommand( nint a1, int a2, uint a3, nint a4, nint a5 );
-    private delegate nint ICvarFindConVarWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
-    private delegate nint ICvarFindConVarLinux( nint pICvar, nint pConCommandName, int unk1 );
     private delegate nint ICvarFindConCommandWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
     private delegate nint ICvarFindConCommandLinux( nint pICvar, nint pConCommandName, int unk1 );
     private delegate int CCSPlayerItemServicesCanAcquire( nint pItemServices, nint pEconItemView, nint acquireMethod, nint unk1 );
