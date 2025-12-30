@@ -6,15 +6,17 @@ namespace SwiftlyS2.Core.Events;
 
 internal class OnCommandExecuteHookEvent : IOnCommandExecuteHookEvent
 {
-  private CCommand _command;
+    private CCommand _command;
 
-  public ref CCommand Command => ref _command;
+    public ref CCommand Command => ref _command;
 
-  public HookMode HookMode { get; init; }
+    public HookMode HookMode { get; init; }
 
-  public OnCommandExecuteHookEvent(ref CCommand command, HookMode hookMode)
-  {
-    _command = command;
-    HookMode = hookMode;
-  }
+    public HookResult Result { get; set; } = HookResult.Continue;
+
+    public OnCommandExecuteHookEvent( ref CCommand command, HookMode hookMode )
+    {
+        _command = command;
+        HookMode = hookMode;
+    }
 }

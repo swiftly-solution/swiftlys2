@@ -1,20 +1,20 @@
 
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
 using Microsoft.Extensions.Logging;
-using SwiftlyS2.Shared;
-using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Core.Events;
-using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.Schemas;
-using SwiftlyS2.Shared.Memory;
-using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Extensions;
-using SwiftlyS2.Shared.SteamAPI;
-using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.ProtobufDefinitions;
+using SwiftlyS2.Core.SchemaDefinitions;
+using SwiftlyS2.Core.Schemas;
+using SwiftlyS2.Shared;
+using SwiftlyS2.Shared.Memory;
+using SwiftlyS2.Shared.Misc;
+using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.SteamAPI;
 
 namespace SwiftlyS2.Core.Services;
 
@@ -207,6 +207,11 @@ internal class CoreHookService : IDisposable
                         ref var command = ref Unsafe.AsRef<CCommand>((void*)a5);
                         var @eventPre = new OnCommandExecuteHookEvent(ref command, HookMode.Pre);
                         EventPublisher.InvokeOnCommandExecuteHook(@eventPre);
+
+                        if (@eventPre.Result == HookResult.Stop)
+                        {
+                            return 0;
+                        }
 
                         var result = next()(a1, a2, a3, a4, a5);
 
