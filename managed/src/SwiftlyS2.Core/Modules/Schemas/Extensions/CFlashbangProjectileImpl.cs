@@ -12,7 +12,7 @@ internal partial class CFlashbangProjectileImpl : CFlashbangProjectile
     {
         NativeBinding.ThrowIfNonMainThread();
         return new CFlashbangProjectileImpl(GameFunctions.CFlashbangProjectile_EmitGrenade(pos, angle, velocity,
-            owner?.Address ?? nint.Zero, (uint)HelpersService.WeaponItemDefinitionIndices["weapon_decoy"]));
+            owner?.Address ?? nint.Zero, (uint)HelpersService.WeaponItemDefinitionIndices["weapon_flashbang"]));
     }
 
     public static Task<CFlashbangProjectile> EmitGrenadeAsync( Vector pos, QAngle angle, Vector velocity,

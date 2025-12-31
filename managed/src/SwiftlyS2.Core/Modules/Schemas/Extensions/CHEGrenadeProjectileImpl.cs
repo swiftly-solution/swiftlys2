@@ -12,7 +12,7 @@ internal partial class CHEGrenadeProjectileImpl : CHEGrenadeProjectile
     {
         NativeBinding.ThrowIfNonMainThread();
         return new CHEGrenadeProjectileImpl(GameFunctions.CHEGrenadeProjectile_EmitGrenade(pos, angle, velocity,
-            owner?.Address ?? nint.Zero, (uint)HelpersService.WeaponItemDefinitionIndices["weapon_decoy"]));
+            owner?.Address ?? nint.Zero, (uint)HelpersService.WeaponItemDefinitionIndices["weapon_hegrenade"]));
     }
 
     public static Task<CHEGrenadeProjectile> EmitGrenadeAsync( Vector pos, QAngle angle, Vector velocity,
