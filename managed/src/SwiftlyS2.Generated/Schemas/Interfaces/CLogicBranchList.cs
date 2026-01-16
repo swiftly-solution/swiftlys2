@@ -15,7 +15,7 @@ public partial interface CLogicBranchList : CLogicalEntity, ISchemaClass<CLogicB
     static string? ISchemaClass<CLogicBranchList>.ClassName => "logic_branch_listener";
 
 
-    public string LogicBranchNames { get; set; }
+    public ISchemaStringFixedArray LogicBranchNames { get; }
 
     public ref CUtlVector<CHandle<CBaseEntity>> LogicBranchList { get; }
 

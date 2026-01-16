@@ -16,18 +16,9 @@ internal partial class CLogicBranchListImpl : CLogicalEntityImpl, CLogicBranchLi
 {
     public CLogicBranchListImpl(nint handle) : base(handle) { }
 
-    private static nint? _LogicBranchNamesOffset;
-
-    public string LogicBranchNames {
-        get {
-            _LogicBranchNamesOffset = _LogicBranchNamesOffset ?? Schema.GetOffset(0xB21E12B82C1677D7);
-            return Schema.GetString(_Handle.Read<nint>(_LogicBranchNamesOffset!.Value));
-        }
-        set {
-            _LogicBranchNamesOffset = _LogicBranchNamesOffset ?? Schema.GetOffset(0xB21E12B82C1677D7);
-            Schema.SetString(_Handle, _LogicBranchNamesOffset!.Value, value);
-        }
-    } 
+    public ISchemaStringFixedArray LogicBranchNames {
+        get => new SchemaStringFixedArray(_Handle, 0xB21E12B82C1677D7, 16, 8, 8);
+    }
     private static nint? _LogicBranchListOffset;
 
     public ref CUtlVector<CHandle<CBaseEntity>> LogicBranchList {

@@ -81,7 +81,7 @@ public partial interface CPhysicsProp : CBreakableProp, ISchemaClass<CPhysicsPro
 
     public ref CPhysicsProp__CrateType_t CrateType { get; }
 
-    public string StrItemClass { get; set; }
+    public ISchemaStringFixedArray StrItemClass { get; }
 
     public ISchemaFixedArray<int> ItemCount { get; }
 

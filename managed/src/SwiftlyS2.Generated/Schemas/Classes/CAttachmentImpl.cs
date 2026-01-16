@@ -28,18 +28,9 @@ internal partial class CAttachmentImpl : SchemaClass, CAttachment
             Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
         }
     } 
-    private static nint? _InfluenceNamesOffset;
-
-    public string InfluenceNames {
-        get {
-            _InfluenceNamesOffset = _InfluenceNamesOffset ?? Schema.GetOffset(0x5F09808FFD9B3CB8);
-            return Schema.GetCUtlString(_Handle.Read<nint>(_InfluenceNamesOffset!.Value));
-        }
-        set {
-            _InfluenceNamesOffset = _InfluenceNamesOffset ?? Schema.GetOffset(0x5F09808FFD9B3CB8);
-            Schema.SetCUtlString(_Handle, _InfluenceNamesOffset!.Value, value);
-        }
-    } 
+    public ISchemaUtlStringFixedArray InfluenceNames {
+        get => new SchemaUtlStringFixedArray(_Handle, 0x5F09808FFD9B3CB8, 3, 8, 8);
+    }
     public ISchemaFixedArray<Quaternion> InfluenceRotations {
         get => new SchemaFixedArray<Quaternion>(_Handle, 0x5F09808FD277168B, 3, 16, 16);
     }

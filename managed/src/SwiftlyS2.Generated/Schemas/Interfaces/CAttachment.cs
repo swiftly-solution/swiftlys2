@@ -17,7 +17,7 @@ public partial interface CAttachment : ISchemaClass<CAttachment>
 
     public string Name { get; set; }
 
-    public string InfluenceNames { get; set; }
+    public ISchemaUtlStringFixedArray InfluenceNames { get; }
 
     public ISchemaFixedArray<Quaternion> InfluenceRotations { get; }
 

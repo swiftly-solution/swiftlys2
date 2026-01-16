@@ -68,18 +68,9 @@ internal partial class CEnvSoundscapeImpl : CBaseEntityImpl, CEnvSoundscape
             return ref _Handle.AsRef<int>(_SoundscapeEntityListIdOffset!.Value);
         }
     }
-    private static nint? _PositionNamesOffset;
-
-    public string PositionNames {
-        get {
-            _PositionNamesOffset = _PositionNamesOffset ?? Schema.GetOffset(0x4C8F896A53DB5F86);
-            return Schema.GetString(_Handle.Read<nint>(_PositionNamesOffset!.Value));
-        }
-        set {
-            _PositionNamesOffset = _PositionNamesOffset ?? Schema.GetOffset(0x4C8F896A53DB5F86);
-            Schema.SetString(_Handle, _PositionNamesOffset!.Value, value);
-        }
-    } 
+    public ISchemaStringFixedArray PositionNames {
+        get => new SchemaStringFixedArray(_Handle, 0x4C8F896A53DB5F86, 8, 8, 8);
+    }
     private static nint? _ProxySoundscapeOffset;
 
     public ref CHandle<CEnvSoundscape> ProxySoundscape {

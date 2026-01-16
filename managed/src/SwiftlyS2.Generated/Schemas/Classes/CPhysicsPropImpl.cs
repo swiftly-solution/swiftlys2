@@ -280,18 +280,9 @@ internal partial class CPhysicsPropImpl : CBreakablePropImpl, CPhysicsProp
             return ref _Handle.AsRef<CPhysicsProp__CrateType_t>(_CrateTypeOffset!.Value);
         }
     }
-    private static nint? _StrItemClassOffset;
-
-    public string StrItemClass {
-        get {
-            _StrItemClassOffset = _StrItemClassOffset ?? Schema.GetOffset(0xC3FD37FE35D963A1);
-            return Schema.GetString(_Handle.Read<nint>(_StrItemClassOffset!.Value));
-        }
-        set {
-            _StrItemClassOffset = _StrItemClassOffset ?? Schema.GetOffset(0xC3FD37FE35D963A1);
-            Schema.SetString(_Handle, _StrItemClassOffset!.Value, value);
-        }
-    } 
+    public ISchemaStringFixedArray StrItemClass {
+        get => new SchemaStringFixedArray(_Handle, 0xC3FD37FE35D963A1, 4, 8, 8);
+    }
     public ISchemaFixedArray<int> ItemCount {
         get => new SchemaFixedArray<int>(_Handle, 0xC3FD37FEA5886501, 4, 4, 4);
     }

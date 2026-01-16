@@ -15,7 +15,7 @@ public partial interface CLogicCase : CLogicalEntity, ISchemaClass<CLogicCase>
     static string? ISchemaClass<CLogicCase>.ClassName => "logic_case";
 
 
-    public string Case { get; set; }
+    public ISchemaStringFixedArray Case { get; }
 
     public ref int ShuffleCases { get; }
 

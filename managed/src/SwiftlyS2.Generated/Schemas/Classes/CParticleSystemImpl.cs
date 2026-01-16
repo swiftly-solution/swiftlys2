@@ -145,18 +145,9 @@ internal partial class CParticleSystemImpl : CBaseModelEntityImpl, CParticleSyst
             Schema.SetString(_Handle, _EffectNameOffset!.Value, value);
         }
     } 
-    private static nint? _ControlPointNamesOffset;
-
-    public string ControlPointNames {
-        get {
-            _ControlPointNamesOffset = _ControlPointNamesOffset ?? Schema.GetOffset(0x8F6D2B258DBFEC78);
-            return Schema.GetString(_Handle.Read<nint>(_ControlPointNamesOffset!.Value));
-        }
-        set {
-            _ControlPointNamesOffset = _ControlPointNamesOffset ?? Schema.GetOffset(0x8F6D2B258DBFEC78);
-            Schema.SetString(_Handle, _ControlPointNamesOffset!.Value, value);
-        }
-    } 
+    public ISchemaStringFixedArray ControlPointNames {
+        get => new SchemaStringFixedArray(_Handle, 0x8F6D2B258DBFEC78, 64, 8, 8);
+    }
     private static nint? _DataCPOffset;
 
     public ref int DataCP {

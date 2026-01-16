@@ -27,7 +27,7 @@ public partial interface CEnvSoundscape : CBaseEntity, ISchemaClass<CEnvSoundsca
 
     public ref int SoundscapeEntityListId { get; }
 
-    public string PositionNames { get; set; }
+    public ISchemaStringFixedArray PositionNames { get; }
 
     public ref CHandle<CEnvSoundscape> ProxySoundscape { get; }
 

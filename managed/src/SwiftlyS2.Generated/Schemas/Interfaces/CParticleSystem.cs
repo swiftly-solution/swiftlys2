@@ -49,7 +49,7 @@ public partial interface CParticleSystem : CBaseModelEntity, ISchemaClass<CParti
 
     public string EffectName { get; set; }
 
-    public string ControlPointNames { get; set; }
+    public ISchemaStringFixedArray ControlPointNames { get; }
 
     public ref int DataCP { get; }
 

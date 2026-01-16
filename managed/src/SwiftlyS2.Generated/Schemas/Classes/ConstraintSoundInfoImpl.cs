@@ -64,18 +64,9 @@ internal partial class ConstraintSoundInfoImpl : SchemaClass, ConstraintSoundInf
             Schema.SetString(_Handle, _TravelSoundBackOffset!.Value, value);
         }
     } 
-    private static nint? _ReversalSoundsOffset;
-
-    public string ReversalSounds {
-        get {
-            _ReversalSoundsOffset = _ReversalSoundsOffset ?? Schema.GetOffset(0x79068C49F5164187);
-            return Schema.GetString(_Handle.Read<nint>(_ReversalSoundsOffset!.Value));
-        }
-        set {
-            _ReversalSoundsOffset = _ReversalSoundsOffset ?? Schema.GetOffset(0x79068C49F5164187);
-            Schema.SetString(_Handle, _ReversalSoundsOffset!.Value, value);
-        }
-    } 
+    public ISchemaStringFixedArray ReversalSounds {
+        get => new SchemaStringFixedArray(_Handle, 0x79068C49F5164187, 3, 8, 8);
+    }
     private static nint? _PlayTravelSoundOffset;
 
     public ref bool PlayTravelSound {

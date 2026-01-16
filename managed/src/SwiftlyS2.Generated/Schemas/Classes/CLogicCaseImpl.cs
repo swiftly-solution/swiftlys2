@@ -16,18 +16,9 @@ internal partial class CLogicCaseImpl : CLogicalEntityImpl, CLogicCase
 {
     public CLogicCaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _CaseOffset;
-
-    public string Case {
-        get {
-            _CaseOffset = _CaseOffset ?? Schema.GetOffset(0x4B6BB20CBD726255);
-            return Schema.GetString(_Handle.Read<nint>(_CaseOffset!.Value));
-        }
-        set {
-            _CaseOffset = _CaseOffset ?? Schema.GetOffset(0x4B6BB20CBD726255);
-            Schema.SetString(_Handle, _CaseOffset!.Value, value);
-        }
-    } 
+    public ISchemaStringFixedArray Case {
+        get => new SchemaStringFixedArray(_Handle, 0x4B6BB20CBD726255, 32, 8, 8);
+    }
     private static nint? _ShuffleCasesOffset;
 
     public ref int ShuffleCases {

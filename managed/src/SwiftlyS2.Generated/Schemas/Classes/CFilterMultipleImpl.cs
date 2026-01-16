@@ -24,18 +24,9 @@ internal partial class CFilterMultipleImpl : CBaseFilterImpl, CFilterMultiple
             return ref _Handle.AsRef<filter_t>(_FilterTypeOffset!.Value);
         }
     }
-    private static nint? _FilterNameOffset;
-
-    public string FilterName {
-        get {
-            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x6EA0578009C86445);
-            return Schema.GetString(_Handle.Read<nint>(_FilterNameOffset!.Value));
-        }
-        set {
-            _FilterNameOffset = _FilterNameOffset ?? Schema.GetOffset(0x6EA0578009C86445);
-            Schema.SetString(_Handle, _FilterNameOffset!.Value, value);
-        }
-    } 
+    public ISchemaStringFixedArray FilterName {
+        get => new SchemaStringFixedArray(_Handle, 0x6EA0578009C86445, 10, 8, 8);
+    }
     public ISchemaFixedArray<CHandle<CBaseEntity>> Filter {
         get => new SchemaFixedArray<CHandle<CBaseEntity>>(_Handle, 0x6EA0578045D9E0B1, 10, 4, 4);
     }

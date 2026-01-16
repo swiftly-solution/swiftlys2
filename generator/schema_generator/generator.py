@@ -590,9 +590,19 @@ class Writer():
           fields.append(render_template(self.class_fixed_string_field_template, field_info))
           continue
         if field_info["IS_UTL_STRING_HANDLE"]:
+          if field_info["KIND"] == "fixed_array":
+            field_info["IMPL_TYPE"] = "SchemaUtlStringFixedArray"
+            field_info["INTERFACE_TYPE"] = "ISchemaUtlStringFixedArray"
+            fields.append(render_template(self.class_fixed_array_field_template, field_info))
+            continue
           fields.append(render_template(self.class_utl_string_field_template, field_info))
           continue
         if field_info["IS_CHAR_PTR_STRING"] or field_info["IS_STRING_HANDLE"]:
+          if field_info["KIND"] == "fixed_array":
+            field_info["IMPL_TYPE"] = "SchemaStringFixedArray"
+            field_info["INTERFACE_TYPE"] = "ISchemaStringFixedArray"
+            fields.append(render_template(self.class_fixed_array_field_template, field_info))
+            continue
           fields.append(render_template(self.class_string_field_template, field_info))
           continue
 
@@ -652,6 +662,9 @@ class Writer():
           field_info["INTERFACE_TYPE"] = "string"
           field_info["NULLABLE"] = ""
           field_info["SETTER"] = " set;"
+          if field_info["KIND"] == "fixed_array" and (field_info["IS_STRING_HANDLE"] or field_info["IS_UTL_STRING_HANDLE"]):
+            field_info["INTERFACE_TYPE"] = "ISchemaStringFixedArray" if field_info["IS_STRING_HANDLE"] else "ISchemaUtlStringFixedArray"
+            field_info["SETTER"] = ""
         else:
           field_info["REF"] = "ref " if field_info["IS_VALUE_TYPE"] else ""
           field_info["NULLABLE"] = "?" if field_info["KIND"] == "ptr" and not field_info["IS_VALUE_TYPE"] and field_info["IMPL_TYPE"] != "SchemaUntypedField" else ""
