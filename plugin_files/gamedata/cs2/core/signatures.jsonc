@@ -85,7 +85,7 @@
     // The function contains "#SFUI_Notice_Terrorists_Surrender", "#SFUI_Notice_CTs_Surrender" and other SFUI messages
     "CGameRules::TerminateRound": {
         "lib": "server",
-        "windows": "48 8B C4 4C 89 48 ? 48 89 48 ? 55 56 41 56-",
+        "windows": "48 8B C4 4C 89 48 ? 48 89 48 ? 55 56 41 56",
         "linux": "55 48 89 E5 41 57 41 56 49 89 FE 41 55 41 54 53 48 81 EC ? ? ? ? 48 8D 05 ? ? ? ? F3 0F 11 85"
     },
     // Search for "CBaseEntity::TakeDamageOld"
