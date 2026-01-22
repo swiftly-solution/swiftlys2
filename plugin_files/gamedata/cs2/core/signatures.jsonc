@@ -8,8 +8,8 @@
     // called by the above one
     "CEntityIdentity::AcceptInput": {
         "lib": "server",
-        "windows": "55 48 89 F0 48 89 E5 41 57 49 89 FF 41 56 48 8D 7D",
-        "linux": "55 49 89 D3 48 89 E5 41 57 45 89 CF 41 56"
+        "windows": "48 89 5C 24 ? 48 89 54 24 ? 48 89 4C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ? ? ? ? 48 81 EC ? ? ? ? 48 8B 02",
+        "linux": "55 49 89 D3 48 89 E5 41 57 45 89 CF"
     },
     // search for "CCSPlayerPawnBase::SwitchTeam" (not sure why it has this) or "CCSPlayerController::SwitchTeam"
     "CCSPlayerController::SwitchTeam": {
