@@ -100,6 +100,8 @@ blacklisted_types = [
   "std::pair",
   "CCompressor",
   "CUtlVectorSIMDPaddedVector",
+  "ParticleParamID_t",
+  "CAnimGraph2ParamAutoResetOptionalRef",
 ]
 
 def convert_handle_type(type, interface=False):

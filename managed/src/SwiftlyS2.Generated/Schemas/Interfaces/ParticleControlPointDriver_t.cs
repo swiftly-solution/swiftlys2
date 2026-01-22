@@ -15,7 +15,8 @@ public partial interface ParticleControlPointDriver_t : ISchemaClass<ParticleCon
     static string? ISchemaClass<ParticleControlPointDriver_t>.ClassName => null;
 
 
-    public UNKNOWN ControlPoint { get; }
+    // ParticleParamID_t
+    public SchemaUntypedField ControlPoint { get; }
 
     public ref ParticleAttachment_t AttachType { get; }
 

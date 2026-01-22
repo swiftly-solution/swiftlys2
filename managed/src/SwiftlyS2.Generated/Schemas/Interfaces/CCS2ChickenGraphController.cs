@@ -21,7 +21,8 @@ public partial interface CCS2ChickenGraphController : CAnimGraphControllerBase, 
     // CAnimGraph2ParamOptionalRef< CGlobalSymbol >
     public SchemaUntypedField ActionSubtype { get; }
 
-    public UNKNOWN ActionReset { get; }
+    // CAnimGraph2ParamAutoResetOptionalRef
+    public SchemaUntypedField ActionReset { get; }
 
     // CAnimGraph2ParamOptionalRef< float32 >
     public SchemaUntypedField IdleVariation { get; }

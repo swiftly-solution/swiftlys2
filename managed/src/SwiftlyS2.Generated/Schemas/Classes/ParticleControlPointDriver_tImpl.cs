@@ -18,10 +18,10 @@ internal partial class ParticleControlPointDriver_tImpl : SchemaClass, ParticleC
 
     private static nint? _ControlPointOffset;
 
-    public UNKNOWN ControlPoint {
+    public SchemaUntypedField ControlPoint {
         get {
             _ControlPointOffset = _ControlPointOffset ?? Schema.GetOffset(0xB7C66843E9EC8FF5);
-            return new UNKNOWN(_Handle + _ControlPointOffset!.Value);
+            return new SchemaUntypedField(_Handle + _ControlPointOffset!.Value);
         }
     }
     private static nint? _AttachTypeOffset;
