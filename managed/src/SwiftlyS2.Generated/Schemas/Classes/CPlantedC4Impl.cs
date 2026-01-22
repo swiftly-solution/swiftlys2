@@ -112,20 +112,28 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
             return ref _Handle.AsRef<int>(_SpotRulesOffset!.Value);
         }
     }
-    private static nint? _TrainingPlacedByPlayerOffset;
-
-    public ref bool TrainingPlacedByPlayer {
-        get {
-            _TrainingPlacedByPlayerOffset = _TrainingPlacedByPlayerOffset ?? Schema.GetOffset(0xE1614C818D8A976E);
-            return ref _Handle.AsRef<bool>(_TrainingPlacedByPlayerOffset!.Value);
-        }
-    }
     private static nint? _HasExplodedOffset;
 
     public ref bool HasExploded {
         get {
             _HasExplodedOffset = _HasExplodedOffset ?? Schema.GetOffset(0xE1614C814F35E7B0);
             return ref _Handle.AsRef<bool>(_HasExplodedOffset!.Value);
+        }
+    }
+    private static nint? _BombDefusedOffset;
+
+    public ref bool BombDefused {
+        get {
+            _BombDefusedOffset = _BombDefusedOffset ?? Schema.GetOffset(0xE1614C81CA9F868D);
+            return ref _Handle.AsRef<bool>(_BombDefusedOffset!.Value);
+        }
+    }
+    private static nint? _TrainingPlacedByPlayerOffset;
+
+    public ref bool TrainingPlacedByPlayer {
+        get {
+            _TrainingPlacedByPlayerOffset = _TrainingPlacedByPlayerOffset ?? Schema.GetOffset(0xE1614C818D8A976E);
+            return ref _Handle.AsRef<bool>(_TrainingPlacedByPlayerOffset!.Value);
         }
     }
     private static nint? _TimerLengthOffset;
@@ -166,14 +174,6 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
         get {
             _DefuseCountDownOffset = _DefuseCountDownOffset ?? Schema.GetOffset(0xE1614C81BCF3DB7C);
             return new GameTime_tImpl(_Handle + _DefuseCountDownOffset!.Value);
-        }
-    }
-    private static nint? _BombDefusedOffset;
-
-    public ref bool BombDefused {
-        get {
-            _BombDefusedOffset = _BombDefusedOffset ?? Schema.GetOffset(0xE1614C81CA9F868D);
-            return ref _Handle.AsRef<bool>(_BombDefusedOffset!.Value);
         }
     }
     private static nint? _BombDefuserOffset;
@@ -236,10 +236,10 @@ internal partial class CPlantedC4Impl : CBaseAnimGraphImpl, CPlantedC4
     public void CannotBeDefusedUpdated() => Schema.Update(_Handle, 0xE1614C81AF7C9CFF);
     public void EntitySpottedStateUpdated() => Schema.Update(_Handle, 0xE1614C81032B547C);
     public void HasExplodedUpdated() => Schema.Update(_Handle, 0xE1614C814F35E7B0);
+    public void BombDefusedUpdated() => Schema.Update(_Handle, 0xE1614C81CA9F868D);
     public void TimerLengthUpdated() => Schema.Update(_Handle, 0xE1614C815758DBE8);
     public void BeingDefusedUpdated() => Schema.Update(_Handle, 0xE1614C81E52E1146);
     public void DefuseLengthUpdated() => Schema.Update(_Handle, 0xE1614C8164CC4751);
     public void DefuseCountDownUpdated() => Schema.Update(_Handle, 0xE1614C81BCF3DB7C);
-    public void BombDefusedUpdated() => Schema.Update(_Handle, 0xE1614C81CA9F868D);
     public void BombDefuserUpdated() => Schema.Update(_Handle, 0xE1614C8174E01381);
 }

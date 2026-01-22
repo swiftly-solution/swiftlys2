@@ -80,6 +80,15 @@ internal partial class CEntityIdentityImpl : SchemaClass, CEntityIdentity
             return ref _Handle.AsRef<ChangeAccessorFieldPathIndex_t>(_PathIndexOffset!.Value);
         }
     }
+    private static nint? _AttributesOffset;
+
+    public CEntityAttributeTable? Attributes {
+        get {
+            _AttributesOffset = _AttributesOffset ?? Schema.GetOffset(0xAE42345F1DCF7962);
+            var ptr = _Handle.Read<nint>(_AttributesOffset!.Value);
+            return ptr.IsValidPtr() ? new CEntityAttributeTableImpl(ptr) : null;
+        }
+    }
     private static nint? _PrevOffset;
 
     public CEntityIdentity? Prev {

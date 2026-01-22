@@ -13,4 +13,6 @@ public enum NmTargetWarpRule_t : byte
  WarpXYZ = 2,
 
  RotationOnly = 3,
+
+ FixedSection = 4,
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CAmbientGeneric : CPointEntity, ISchemaClass<CAmbientGeneric>
 {
     static CAmbientGeneric ISchemaClass<CAmbientGeneric>.From(nint handle) => new CAmbientGenericImpl(handle);
-    static int ISchemaClass<CAmbientGeneric>.Size => 1432;
+    static int ISchemaClass<CAmbientGeneric>.Size => 1360;
     static string? ISchemaClass<CAmbientGeneric>.ClassName => "ambient_generic";
 
 

@@ -59,8 +59,6 @@ public partial interface CBaseRendererSource2 : CParticleFunctionRenderer, ISche
 
     public ref int LightingControlPoint { get; }
 
-    public ParticleAttributeIndex_t SelfIllumPerParticle { get; }
-
     public ref ParticleOutputBlendMode_t OutputBlendMode { get; }
 
     public ref bool GammaCorrectVertexColors { get; }

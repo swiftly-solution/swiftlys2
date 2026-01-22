@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMapInfo : CPointEntity, ISchemaClass<CMapInfo>
 {
     static CMapInfo ISchemaClass<CMapInfo>.From(nint handle) => new CMapInfoImpl(handle);
-    static int ISchemaClass<CMapInfo>.Size => 1312;
+    static int ISchemaClass<CMapInfo>.Size => 1240;
     static string? ISchemaClass<CMapInfo>.ClassName => "info_map_parameters";
 
 

@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerShapedNoiseImpl : CVoiceContainerBaseImpl, CVoiceContainerShapedNoise
+internal partial class CVoiceContainerShapedNoiseImpl : CVoiceContainerGeneratorImpl, CVoiceContainerShapedNoise
 {
     public CVoiceContainerShapedNoiseImpl(nint handle) : base(handle) { }
 

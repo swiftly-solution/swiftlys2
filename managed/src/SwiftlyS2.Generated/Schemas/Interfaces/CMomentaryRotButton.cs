@@ -11,11 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMomentaryRotButton : CRotButton, ISchemaClass<CMomentaryRotButton>
 {
     static CMomentaryRotButton ISchemaClass<CMomentaryRotButton>.From(nint handle) => new CMomentaryRotButtonImpl(handle);
-    static int ISchemaClass<CMomentaryRotButton>.Size => 2728;
+    static int ISchemaClass<CMomentaryRotButton>.Size => 2408;
     static string? ISchemaClass<CMomentaryRotButton>.ClassName => "momentary_rot_button";
 
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField Position { get; }
 
     public ref CEntityIOOutput OnUnpressed { get; }

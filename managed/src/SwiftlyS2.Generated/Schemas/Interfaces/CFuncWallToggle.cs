@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncWallToggle : CFuncWall, ISchemaClass<CFuncWallToggle>
 {
     static CFuncWallToggle ISchemaClass<CFuncWallToggle>.From(nint handle) => new CFuncWallToggleImpl(handle);
-    static int ISchemaClass<CFuncWallToggle>.Size => 2016;
+    static int ISchemaClass<CFuncWallToggle>.Size => 1848;
     static string? ISchemaClass<CFuncWallToggle>.ClassName => "func_wall_toggle";
 
 

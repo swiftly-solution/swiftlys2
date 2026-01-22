@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLogicScript : CPointEntity, ISchemaClass<CLogicScript>
 {
     static CLogicScript ISchemaClass<CLogicScript>.From(nint handle) => new CLogicScriptImpl(handle);
-    static int ISchemaClass<CLogicScript>.Size => 1264;
+    static int ISchemaClass<CLogicScript>.Size => 1192;
     static string? ISchemaClass<CLogicScript>.ClassName => "logic_script";
 
 

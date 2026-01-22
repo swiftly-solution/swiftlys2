@@ -48,6 +48,14 @@ internal partial class CNmOrientationWarpNode__CDefinitionImpl : CNmPoseNode__CD
             return ref _Handle.AsRef<bool>(_IsOffsetRelativeToCharacterOffset!.Value);
         }
     }
+    private static nint? _WarpTranslationOffset;
+
+    public ref bool WarpTranslation {
+        get {
+            _WarpTranslationOffset = _WarpTranslationOffset ?? Schema.GetOffset(0x12655257AF94D4C6);
+            return ref _Handle.AsRef<bool>(_WarpTranslationOffset!.Value);
+        }
+    }
     private static nint? _SamplingModeOffset;
 
     public ref CNmRootMotionData__SamplingMode_t SamplingMode {

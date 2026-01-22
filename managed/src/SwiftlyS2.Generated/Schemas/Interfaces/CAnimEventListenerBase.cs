@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CAnimEventListenerBase : ISchemaClass<CAnimEventListenerBase>
 {
     static CAnimEventListenerBase ISchemaClass<CAnimEventListenerBase>.From(nint handle) => new CAnimEventListenerBaseImpl(handle);
-    static int ISchemaClass<CAnimEventListenerBase>.Size => 32;
+    static int ISchemaClass<CAnimEventListenerBase>.Size => 24;
     static string? ISchemaClass<CAnimEventListenerBase>.ClassName => null;
 
 

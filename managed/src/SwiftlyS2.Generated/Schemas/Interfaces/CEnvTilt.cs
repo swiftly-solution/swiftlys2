@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvTilt : CPointEntity, ISchemaClass<CEnvTilt>
 {
     static CEnvTilt ISchemaClass<CEnvTilt>.From(nint handle) => new CEnvTiltImpl(handle);
-    static int ISchemaClass<CEnvTilt>.Size => 1280;
+    static int ISchemaClass<CEnvTilt>.Size => 1208;
     static string? ISchemaClass<CEnvTilt>.ClassName => "env_tilt";
 
 

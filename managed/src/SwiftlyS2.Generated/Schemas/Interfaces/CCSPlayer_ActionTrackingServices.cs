@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayer_ActionTrackingServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_ActionTrackingServices>
 {
     static CCSPlayer_ActionTrackingServices ISchemaClass<CCSPlayer_ActionTrackingServices>.From(nint handle) => new CCSPlayer_ActionTrackingServicesImpl(handle);
-    static int ISchemaClass<CCSPlayer_ActionTrackingServices>.Size => 776;
+    static int ISchemaClass<CCSPlayer_ActionTrackingServices>.Size => 784;
     static string? ISchemaClass<CCSPlayer_ActionTrackingServices>.ClassName => null;
 
 

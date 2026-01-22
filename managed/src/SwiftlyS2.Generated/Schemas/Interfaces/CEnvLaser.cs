@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvLaser : CBeam, ISchemaClass<CEnvLaser>
 {
     static CEnvLaser ISchemaClass<CEnvLaser>.From(nint handle) => new CEnvLaserImpl(handle);
-    static int ISchemaClass<CEnvLaser>.Size => 2208;
+    static int ISchemaClass<CEnvLaser>.Size => 2040;
     static string? ISchemaClass<CEnvLaser>.ClassName => "env_laser";
 
 

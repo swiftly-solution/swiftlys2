@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCS2WeaponGraphController : CAnimGraphControllerBase, ISchemaClass<CCS2WeaponGraphController>
 {
     static CCS2WeaponGraphController ISchemaClass<CCS2WeaponGraphController>.From(nint handle) => new CCS2WeaponGraphControllerImpl(handle);
-    static int ISchemaClass<CCS2WeaponGraphController>.Size => 1536;
+    static int ISchemaClass<CCS2WeaponGraphController>.Size => 1496;
     static string? ISchemaClass<CCS2WeaponGraphController>.ClassName => null;
 
 

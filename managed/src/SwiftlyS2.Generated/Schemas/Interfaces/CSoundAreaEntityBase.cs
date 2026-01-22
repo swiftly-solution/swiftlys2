@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundAreaEntityBase : CBaseEntity, ISchemaClass<CSoundAreaEntityBase>
 {
     static CSoundAreaEntityBase ISchemaClass<CSoundAreaEntityBase>.From(nint handle) => new CSoundAreaEntityBaseImpl(handle);
-    static int ISchemaClass<CSoundAreaEntityBase>.Size => 1296;
+    static int ISchemaClass<CSoundAreaEntityBase>.Size => 1224;
     static string? ISchemaClass<CSoundAreaEntityBase>.ClassName => "snd_sound_area_base";
 
 

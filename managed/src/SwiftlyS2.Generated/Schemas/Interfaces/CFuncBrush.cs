@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncBrush : CBaseModelEntity, ISchemaClass<CFuncBrush>
 {
     static CFuncBrush ISchemaClass<CFuncBrush>.From(nint handle) => new CFuncBrushImpl(handle);
-    static int ISchemaClass<CFuncBrush>.Size => 2040;
+    static int ISchemaClass<CFuncBrush>.Size => 1872;
     static string? ISchemaClass<CFuncBrush>.ClassName => "func_brush";
 
 

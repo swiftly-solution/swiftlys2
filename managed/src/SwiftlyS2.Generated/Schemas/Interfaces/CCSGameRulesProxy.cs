@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSGameRulesProxy : CGameRulesProxy, ISchemaClass<CCSGameRulesProxy>
 {
     static CCSGameRulesProxy ISchemaClass<CCSGameRulesProxy>.From(nint handle) => new CCSGameRulesProxyImpl(handle);
-    static int ISchemaClass<CCSGameRulesProxy>.Size => 1272;
+    static int ISchemaClass<CCSGameRulesProxy>.Size => 1200;
     static string? ISchemaClass<CCSGameRulesProxy>.ClassName => "cs_gamerules";
 
 

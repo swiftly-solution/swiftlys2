@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvEntityMaker : CPointEntity, ISchemaClass<CEnvEntityMaker>
 {
     static CEnvEntityMaker ISchemaClass<CEnvEntityMaker>.From(nint handle) => new CEnvEntityMakerImpl(handle);
-    static int ISchemaClass<CEnvEntityMaker>.Size => 1424;
+    static int ISchemaClass<CEnvEntityMaker>.Size => 1320;
     static string? ISchemaClass<CEnvEntityMaker>.ClassName => "env_entity_maker";
 
 

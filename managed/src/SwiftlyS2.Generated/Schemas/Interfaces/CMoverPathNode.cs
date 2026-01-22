@@ -8,34 +8,27 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CMoverPathNode : CPointEntity, ISchemaClass<CMoverPathNode>
+public partial interface CMoverPathNode : CPathNode, ISchemaClass<CMoverPathNode>
 {
     static CMoverPathNode ISchemaClass<CMoverPathNode>.From(nint handle) => new CMoverPathNodeImpl(handle);
-    static int ISchemaClass<CMoverPathNode>.Size => 1552;
+    static int ISchemaClass<CMoverPathNode>.Size => 1440;
     static string? ISchemaClass<CMoverPathNode>.ClassName => "path_node_mover";
 
 
-    public ref Vector InTangentLocal { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField OnStartFromOrInSegment { get; }
 
-    public ref Vector OutTangentLocal { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField OnStoppedAtOrInSegment { get; }
 
-    public string ParentPathUniqueID { get; set; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField OnPassThrough { get; }
 
-    public string PathNodeParameter { get; set; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField OnPassThroughForward { get; }
 
-    public ref CEntityIOOutput OnStartFromOrInSegment { get; }
-
-    public ref CEntityIOOutput OnStoppedAtOrInSegment { get; }
-
-    public ref CEntityIOOutput OnPassThrough { get; }
-
-    public ref CEntityIOOutput OnPassThroughForward { get; }
-
-    public ref CEntityIOOutput OnPassThroughReverse { get; }
-
-    public ref CHandle<CPathMover> Mover { get; }
-
-    public ref CTransform XWSPrevParent { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField OnPassThroughReverse { get; }
 
 
 }

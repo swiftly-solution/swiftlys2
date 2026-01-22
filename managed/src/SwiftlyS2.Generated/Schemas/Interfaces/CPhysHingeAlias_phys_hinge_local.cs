@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPhysHingeAlias_phys_hinge_local : CPhysHinge, ISchemaClass<CPhysHingeAlias_phys_hinge_local>
 {
     static CPhysHingeAlias_phys_hinge_local ISchemaClass<CPhysHingeAlias_phys_hinge_local>.From(nint handle) => new CPhysHingeAlias_phys_hinge_localImpl(handle);
-    static int ISchemaClass<CPhysHingeAlias_phys_hinge_local>.Size => 1808;
+    static int ISchemaClass<CPhysHingeAlias_phys_hinge_local>.Size => 1656;
     static string? ISchemaClass<CPhysHingeAlias_phys_hinge_local>.ClassName => null;
 
 

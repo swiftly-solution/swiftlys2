@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvViewPunch : CPointEntity, ISchemaClass<CEnvViewPunch>
 {
     static CEnvViewPunch ISchemaClass<CEnvViewPunch>.From(nint handle) => new CEnvViewPunchImpl(handle);
-    static int ISchemaClass<CEnvViewPunch>.Size => 1280;
+    static int ISchemaClass<CEnvViewPunch>.Size => 1208;
     static string? ISchemaClass<CEnvViewPunch>.ClassName => "env_viewpunch";
 
 

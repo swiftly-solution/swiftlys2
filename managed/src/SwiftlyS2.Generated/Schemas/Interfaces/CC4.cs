@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CC4 : CCSWeaponBase, ISchemaClass<CC4>
 {
     static CC4 ISchemaClass<CC4>.From(nint handle) => new CC4Impl(handle);
-    static int ISchemaClass<CC4>.Size => 4688;
+    static int ISchemaClass<CC4>.Size => 4528;
     static string? ISchemaClass<CC4>.ClassName => "weapon_c4";
 
 

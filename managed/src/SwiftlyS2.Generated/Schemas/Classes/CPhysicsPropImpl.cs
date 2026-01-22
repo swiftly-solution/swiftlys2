@@ -256,6 +256,30 @@ internal partial class CPhysicsPropImpl : CBreakablePropImpl, CPhysicsProp
             return ref _Handle.AsRef<bool>(_MuteImpactEffectsOffset!.Value);
         }
     }
+    private static nint? _UpdateNavWhenMovingOffset;
+
+    public ref bool UpdateNavWhenMoving {
+        get {
+            _UpdateNavWhenMovingOffset = _UpdateNavWhenMovingOffset ?? Schema.GetOffset(0xC3FD37FEBD48B1CF);
+            return ref _Handle.AsRef<bool>(_UpdateNavWhenMovingOffset!.Value);
+        }
+    }
+    private static nint? _ForceNavObstacleCutOffset;
+
+    public ref bool ForceNavObstacleCut {
+        get {
+            _ForceNavObstacleCutOffset = _ForceNavObstacleCutOffset ?? Schema.GetOffset(0xC3FD37FE56F775A0);
+            return ref _Handle.AsRef<bool>(_ForceNavObstacleCutOffset!.Value);
+        }
+    }
+    private static nint? _AllowObstacleConvexHullMergingOffset;
+
+    public ref bool AllowObstacleConvexHullMerging {
+        get {
+            _AllowObstacleConvexHullMergingOffset = _AllowObstacleConvexHullMergingOffset ?? Schema.GetOffset(0xC3FD37FE5C40BB56);
+            return ref _Handle.AsRef<bool>(_AllowObstacleConvexHullMergingOffset!.Value);
+        }
+    }
     private static nint? _AcceptDamageFromHeldObjectsOffset;
 
     public ref bool AcceptDamageFromHeldObjects {

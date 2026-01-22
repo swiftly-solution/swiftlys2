@@ -15,11 +15,15 @@ public partial interface SimpleConstraintSoundProfile : ISchemaClass<SimpleConst
     static string? ISchemaClass<SimpleConstraintSoundProfile>.ClassName => null;
 
 
-    public ref SimpleConstraintSoundProfile__SimpleConstraintsSoundProfileKeypoints_t Keypoints { get; }
+    public ref float KeyPointMinSoundThreshold { get; }
 
-    public ISchemaFixedArray<float> KeyPoints { get; }
+    public ref float KeyPointMaxSoundThreshold { get; }
 
-    public ISchemaFixedArray<float> ReversalSoundThresholds { get; }
+    public ref float ReversalSoundThresholdSmall { get; }
+
+    public ref float ReversalSoundThresholdMedium { get; }
+
+    public ref float ReversalSoundThresholdLarge { get; }
 
 
 }

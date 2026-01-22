@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInferno : CBaseModelEntity, ISchemaClass<CInferno>
 {
     static CInferno ISchemaClass<CInferno>.From(nint handle) => new CInfernoImpl(handle);
-    static int ISchemaClass<CInferno>.Size => 5216;
+    static int ISchemaClass<CInferno>.Size => 5056;
     static string? ISchemaClass<CInferno>.ClassName => "inferno";
 
 

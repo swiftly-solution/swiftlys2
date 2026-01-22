@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CGameGibManager : CBaseEntity, ISchemaClass<CGameGibManager>
 {
     static CGameGibManager ISchemaClass<CGameGibManager>.From(nint handle) => new CGameGibManagerImpl(handle);
-    static int ISchemaClass<CGameGibManager>.Size => 1304;
+    static int ISchemaClass<CGameGibManager>.Size => 1232;
     static string? ISchemaClass<CGameGibManager>.ClassName => "game_gib_manager";
 
 

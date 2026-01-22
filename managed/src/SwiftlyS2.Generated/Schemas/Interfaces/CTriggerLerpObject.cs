@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerLerpObject : CBaseTrigger, ISchemaClass<CTriggerLerpObject>
 {
     static CTriggerLerpObject ISchemaClass<CTriggerLerpObject>.From(nint handle) => new CTriggerLerpObjectImpl(handle);
-    static int ISchemaClass<CTriggerLerpObject>.Size => 2680;
+    static int ISchemaClass<CTriggerLerpObject>.Size => 2352;
     static string? ISchemaClass<CTriggerLerpObject>.ClassName => "trigger_lerp_object";
 
 
@@ -24,6 +24,8 @@ public partial interface CTriggerLerpObject : CBaseTrigger, ISchemaClass<CTrigge
     public AttachmentHandle_t LerpTargetAttachment2 { get; }
 
     public ref float LerpDuration { get; }
+
+    public ref bool AttachedEntityWasParented { get; }
 
     public ref bool LerpRestoreMoveType { get; }
 

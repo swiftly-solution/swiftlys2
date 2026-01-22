@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInfoOffscreenPanoramaTexture : CPointEntity, ISchemaClass<CInfoOffscreenPanoramaTexture>
 {
     static CInfoOffscreenPanoramaTexture ISchemaClass<CInfoOffscreenPanoramaTexture>.From(nint handle) => new CInfoOffscreenPanoramaTextureImpl(handle);
-    static int ISchemaClass<CInfoOffscreenPanoramaTexture>.Size => 1384;
+    static int ISchemaClass<CInfoOffscreenPanoramaTexture>.Size => 1320;
     static string? ISchemaClass<CInfoOffscreenPanoramaTexture>.ClassName => "info_offscreen_panorama_texture";
 
 
@@ -20,6 +20,8 @@ public partial interface CInfoOffscreenPanoramaTexture : CPointEntity, ISchemaCl
     public ref int ResolutionX { get; }
 
     public ref int ResolutionY { get; }
+
+    public string PanelType { get; set; }
 
     public string LayoutFileName { get; set; }
 
@@ -38,6 +40,7 @@ public partial interface CInfoOffscreenPanoramaTexture : CPointEntity, ISchemaCl
     public void DisabledUpdated();
     public void ResolutionXUpdated();
     public void ResolutionYUpdated();
+    public void PanelTypeUpdated();
     public void LayoutFileNameUpdated();
     public void RenderAttrNameUpdated();
     public void TargetEntitiesUpdated();

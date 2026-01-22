@@ -29,6 +29,8 @@ public partial interface CEntityIdentity : ISchemaClass<CEntityIdentity>
 
     public ref ChangeAccessorFieldPathIndex_t PathIndex { get; }
 
+    public CEntityAttributeTable? Attributes { get; }
+
     public CEntityIdentity? Prev { get; }
 
     public CEntityIdentity? Next { get; }

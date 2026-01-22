@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSAdditionalPerRoundStats_t : ISchemaClass<CSAdditionalPerRoundStats_t>
 {
     static CSAdditionalPerRoundStats_t ISchemaClass<CSAdditionalPerRoundStats_t>.From(nint handle) => new CSAdditionalPerRoundStats_tImpl(handle);
-    static int ISchemaClass<CSAdditionalPerRoundStats_t>.Size => 24;
+    static int ISchemaClass<CSAdditionalPerRoundStats_t>.Size => 184;
     static string? ISchemaClass<CSAdditionalPerRoundStats_t>.ClassName => null;
 
 
@@ -26,6 +26,16 @@ public partial interface CSAdditionalPerRoundStats_t : ISchemaClass<CSAdditional
     public ref float BlastDamageInflicted { get; }
 
     public ref int Dinks { get; }
+
+    public ref bool FreshStartThisRound { get; }
+
+    public ref bool BombPlantedAndAlive { get; }
+
+    public ref int DefuseStarts { get; }
+
+    public ref int HostagePickUps { get; }
+
+    public ref int NumTeammatesFlashed { get; }
 
 
 }

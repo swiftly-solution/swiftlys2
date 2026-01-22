@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRagdollProp : CBaseAnimGraph, ISchemaClass<CRagdollProp>
 {
     static CRagdollProp ISchemaClass<CRagdollProp>.From(nint handle) => new CRagdollPropImpl(handle);
-    static int ISchemaClass<CRagdollProp>.Size => 3040;
+    static int ISchemaClass<CRagdollProp>.Size => 2928;
     static string? ISchemaClass<CRagdollProp>.ClassName => "prop_ragdoll";
 
 

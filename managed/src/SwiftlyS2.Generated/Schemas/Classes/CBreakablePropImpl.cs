@@ -184,6 +184,14 @@ internal partial class CBreakablePropImpl : CBasePropImpl, CBreakableProp
             return ref _Handle.AsRef<float>(_ExplodeRadiusOffset!.Value);
         }
     }
+    private static nint? _ExplosionTypeOffset;
+
+    public ref BaseExplosionTypes_t ExplosionType {
+        get {
+            _ExplosionTypeOffset = _ExplosionTypeOffset ?? Schema.GetOffset(0xD9F5AF34D39F3394);
+            return ref _Handle.AsRef<BaseExplosionTypes_t>(_ExplosionTypeOffset!.Value);
+        }
+    }
     private static nint? _ExplosionDelayOffset;
 
     public ref float ExplosionDelay {

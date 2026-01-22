@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFilterClass : CBaseFilter, ISchemaClass<CFilterClass>
 {
     static CFilterClass ISchemaClass<CFilterClass>.From(nint handle) => new CFilterClassImpl(handle);
-    static int ISchemaClass<CFilterClass>.Size => 1360;
+    static int ISchemaClass<CFilterClass>.Size => 1256;
     static string? ISchemaClass<CFilterClass>.ClassName => "filter_activator_class";
 
 

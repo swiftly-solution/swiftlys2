@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CServerOnlyPointEntity : CServerOnlyEntity, ISchemaClass<CServerOnlyPointEntity>
 {
     static CServerOnlyPointEntity ISchemaClass<CServerOnlyPointEntity>.From(nint handle) => new CServerOnlyPointEntityImpl(handle);
-    static int ISchemaClass<CServerOnlyPointEntity>.Size => 1264;
+    static int ISchemaClass<CServerOnlyPointEntity>.Size => 1192;
     static string? ISchemaClass<CServerOnlyPointEntity>.ClassName => null;
 
 

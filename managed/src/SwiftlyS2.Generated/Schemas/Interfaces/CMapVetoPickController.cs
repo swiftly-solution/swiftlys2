@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMapVetoPickController : CBaseEntity, ISchemaClass<CMapVetoPickController>
 {
     static CMapVetoPickController ISchemaClass<CMapVetoPickController>.From(nint handle) => new CMapVetoPickControllerImpl(handle);
-    static int ISchemaClass<CMapVetoPickController>.Size => 3864;
+    static int ISchemaClass<CMapVetoPickController>.Size => 3752;
     static string? ISchemaClass<CMapVetoPickController>.ClassName => "mapvetopick_controller";
 
 
@@ -53,19 +53,19 @@ public partial interface CMapVetoPickController : CBaseEntity, ISchemaClass<CMap
 
     public ref int PhaseDurationTicks { get; }
 
-    // CEntityOutputTemplate< CUtlSymbolLarge >
+    // CEntityOutputTemplate< CUtlSymbolLarge, CUtlSymbolLarge >
     public SchemaUntypedField OnMapVetoed { get; }
 
-    // CEntityOutputTemplate< CUtlSymbolLarge >
+    // CEntityOutputTemplate< CUtlSymbolLarge, CUtlSymbolLarge >
     public SchemaUntypedField OnMapPicked { get; }
 
-    // CEntityOutputTemplate< int32 >
+    // CEntityOutputTemplate< int32, int32 >
     public SchemaUntypedField OnSidesPicked { get; }
 
-    // CEntityOutputTemplate< int32 >
+    // CEntityOutputTemplate< int32, int32 >
     public SchemaUntypedField OnNewPhaseStarted { get; }
 
-    // CEntityOutputTemplate< int32 >
+    // CEntityOutputTemplate< int32, int32 >
     public SchemaUntypedField OnLevelTransition { get; }
 
     public void DraftTypeUpdated();

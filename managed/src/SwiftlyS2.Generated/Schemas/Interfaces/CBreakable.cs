@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBreakable : CBaseModelEntity, ISchemaClass<CBreakable>
 {
     static CBreakable ISchemaClass<CBreakable>.From(nint handle) => new CBreakableImpl(handle);
-    static int ISchemaClass<CBreakable>.Size => 2224;
+    static int ISchemaClass<CBreakable>.Size => 2056;
     static string? ISchemaClass<CBreakable>.ClassName => "func_breakable";
 
 
@@ -35,9 +35,11 @@ public partial interface CBreakable : CBaseModelEntity, ISchemaClass<CBreakable>
 
     public ref EOverrideBlockLOS_t OverrideBlockLOS { get; }
 
+    public ref CEntityIOOutput OnStartDeath { get; }
+
     public ref CEntityIOOutput OnBreak { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField OnHealthChanged { get; }
 
     public ref PerformanceMode_t PerformanceMode { get; }

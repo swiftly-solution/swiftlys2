@@ -96,6 +96,14 @@ internal partial class ModelMeshBufferData_tImpl : SchemaClass, ModelMeshBufferD
             return ref _Handle.AsRef<bool>(_CreatePooledBufferOffset!.Value);
         }
     }
+    private static nint? _BufferUsageOffset;
+
+    public ref byte BufferUsage {
+        get {
+            _BufferUsageOffset = _BufferUsageOffset ?? Schema.GetOffset(0xA75611C2A25EB2A6);
+            return ref _Handle.AsRef<byte>(_BufferUsageOffset!.Value);
+        }
+    }
     private static nint? _InputLayoutFieldsOffset;
 
     public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields {

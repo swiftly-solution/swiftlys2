@@ -128,6 +128,14 @@ internal partial class CDecalInstanceImpl : SchemaClass, CDecalInstance
             return ref _Handle.AsRef<float>(_DepthOffset!.Value);
         }
     }
+    private static nint? _TransformOffset;
+
+    public ref CTransform Transform {
+        get {
+            _TransformOffset = _TransformOffset ?? Schema.GetOffset(0x88CA447C3A9A393B);
+            return ref _Handle.AsRef<CTransform>(_TransformOffset!.Value);
+        }
+    }
     private static nint? _AnimationScaleOffset;
 
     public ref float AnimationScale {
@@ -208,12 +216,20 @@ internal partial class CDecalInstanceImpl : SchemaClass, CDecalInstance
             return ref _Handle.AsRef<bool>(_DoDecalLightmappingOffset!.Value);
         }
     }
-    private static nint? _SkinnedModelModeOffset;
+    private static nint? _DecalRtEncodingOffset;
 
-    public ref DecalMode_t SkinnedModelMode {
+    public ref DecalRtEncoding_t DecalRtEncoding {
         get {
-            _SkinnedModelModeOffset = _SkinnedModelModeOffset ?? Schema.GetOffset(0x88CA447CFB03C3D7);
-            return ref _Handle.AsRef<DecalMode_t>(_SkinnedModelModeOffset!.Value);
+            _DecalRtEncodingOffset = _DecalRtEncodingOffset ?? Schema.GetOffset(0x88CA447C192CDE51);
+            return ref _Handle.AsRef<DecalRtEncoding_t>(_DecalRtEncodingOffset!.Value);
+        }
+    }
+    private static nint? _ProjectToBackfacesOffset;
+
+    public ref bool ProjectToBackfaces {
+        get {
+            _ProjectToBackfacesOffset = _ProjectToBackfacesOffset ?? Schema.GetOffset(0x88CA447C78F8B7EA);
+            return ref _Handle.AsRef<bool>(_ProjectToBackfacesOffset!.Value);
         }
     }
 

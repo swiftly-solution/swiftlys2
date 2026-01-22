@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPhysHinge : CPhysConstraint, ISchemaClass<CPhysHinge>
 {
     static CPhysHinge ISchemaClass<CPhysHinge>.From(nint handle) => new CPhysHingeImpl(handle);
-    static int ISchemaClass<CPhysHinge>.Size => 1808;
+    static int ISchemaClass<CPhysHinge>.Size => 1656;
     static string? ISchemaClass<CPhysHinge>.ClassName => "phys_hinge";
 
 
@@ -46,6 +46,8 @@ public partial interface CPhysHinge : CPhysConstraint, ISchemaClass<CPhysHinge>
     public ref float AngleSpeed { get; }
 
     public ref float AngleSpeedThreshold { get; }
+
+    public ref float LimitsDebugVisRotation { get; }
 
     public ref CEntityIOOutput OnStartMoving { get; }
 

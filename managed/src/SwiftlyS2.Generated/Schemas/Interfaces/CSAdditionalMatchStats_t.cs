@@ -11,13 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSAdditionalMatchStats_t : CSAdditionalPerRoundStats_t, ISchemaClass<CSAdditionalMatchStats_t>
 {
     static CSAdditionalMatchStats_t ISchemaClass<CSAdditionalMatchStats_t>.From(nint handle) => new CSAdditionalMatchStats_tImpl(handle);
-    static int ISchemaClass<CSAdditionalMatchStats_t>.Size => 72;
+    static int ISchemaClass<CSAdditionalMatchStats_t>.Size => 232;
     static string? ISchemaClass<CSAdditionalMatchStats_t>.ClassName => null;
 
 
-    public ref int NumRoundsSurvived { get; }
+    public ref int NumRoundsSurvivedStreak { get; }
 
-    public ref int MaxNumRoundsSurvived { get; }
+    public ref int MaxNumRoundsSurvivedStreak { get; }
 
     public ref int NumRoundsSurvivedTotal { get; }
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CGameText : CRulePointEntity, ISchemaClass<CGameText>
 {
     static CGameText ISchemaClass<CGameText>.From(nint handle) => new CGameTextImpl(handle);
-    static int ISchemaClass<CGameText>.Size => 2056;
+    static int ISchemaClass<CGameText>.Size => 1888;
     static string? ISchemaClass<CGameText>.ClassName => "game_text";
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLightSpotEntity : CLightEntity, ISchemaClass<CLightSpotEntity>
 {
     static CLightSpotEntity ISchemaClass<CLightSpotEntity>.From(nint handle) => new CLightSpotEntityImpl(handle);
-    static int ISchemaClass<CLightSpotEntity>.Size => 2016;
+    static int ISchemaClass<CLightSpotEntity>.Size => 1848;
     static string? ISchemaClass<CLightSpotEntity>.ClassName => "light_spot";
 
 

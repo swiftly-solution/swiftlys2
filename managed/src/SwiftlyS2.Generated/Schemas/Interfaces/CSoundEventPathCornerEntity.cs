@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundEventPathCornerEntity : CSoundEventEntity, ISchemaClass<CSoundEventPathCornerEntity>
 {
     static CSoundEventPathCornerEntity ISchemaClass<CSoundEventPathCornerEntity>.From(nint handle) => new CSoundEventPathCornerEntityImpl(handle);
-    static int ISchemaClass<CSoundEventPathCornerEntity>.Size => 1624;
+    static int ISchemaClass<CSoundEventPathCornerEntity>.Size => 1528;
     static string? ISchemaClass<CSoundEventPathCornerEntity>.ClassName => "snd_event_path_corner";
 
 

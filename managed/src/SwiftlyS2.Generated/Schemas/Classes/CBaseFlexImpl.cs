@@ -32,14 +32,6 @@ internal partial class CBaseFlexImpl : CBaseAnimGraphImpl, CBaseFlex
             return ref _Handle.AsRef<Vector>(_LookTargetPositionOffset!.Value);
         }
     }
-    private static nint? _BlinktoggleOffset;
-
-    public ref bool Blinktoggle {
-        get {
-            _BlinktoggleOffset = _BlinktoggleOffset ?? Schema.GetOffset(0xEE4FEF48CA230309);
-            return ref _Handle.AsRef<bool>(_BlinktoggleOffset!.Value);
-        }
-    }
     private static nint? _AllowResponsesEndTimeOffset;
 
     public GameTime_t AllowResponsesEndTime {
@@ -75,5 +67,4 @@ internal partial class CBaseFlexImpl : CBaseAnimGraphImpl, CBaseFlex
 
     public void FlexWeightUpdated() => Schema.Update(_Handle, 0xEE4FEF48AB868EDA);
     public void LookTargetPositionUpdated() => Schema.Update(_Handle, 0xEE4FEF480DCD7B00);
-    public void BlinktoggleUpdated() => Schema.Update(_Handle, 0xEE4FEF48CA230309);
 }

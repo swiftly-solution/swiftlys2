@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface WorldNode_t : ISchemaClass<WorldNode_t>
 {
     static WorldNode_t ISchemaClass<WorldNode_t>.From(nint handle) => new WorldNode_tImpl(handle);
-    static int ISchemaClass<WorldNode_t>.Size => 352;
+    static int ISchemaClass<WorldNode_t>.Size => 376;
     static string? ISchemaClass<WorldNode_t>.ClassName => null;
 
 
@@ -22,6 +22,8 @@ public partial interface WorldNode_t : ISchemaClass<WorldNode_t>
     public ref CUtlVector<AggregateSceneObject_t> AggregateSceneObjects { get; }
 
     public ref CUtlVector<ClutterSceneObject_t> ClutterSceneObjects { get; }
+
+    public ref CUtlVector<AggregateRTProxySceneObject_t> RtProxies { get; }
 
     public ref CUtlVector<ExtraVertexStreamOverride_t> ExtraVertexStreamOverrides { get; }
 

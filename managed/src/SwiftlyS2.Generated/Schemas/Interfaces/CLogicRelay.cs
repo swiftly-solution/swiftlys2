@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLogicRelay : CLogicalEntity, ISchemaClass<CLogicRelay>
 {
     static CLogicRelay ISchemaClass<CLogicRelay>.From(nint handle) => new CLogicRelayImpl(handle);
-    static int ISchemaClass<CLogicRelay>.Size => 1272;
+    static int ISchemaClass<CLogicRelay>.Size => 1200;
     static string? ISchemaClass<CLogicRelay>.ClassName => "logic_relay";
 
 

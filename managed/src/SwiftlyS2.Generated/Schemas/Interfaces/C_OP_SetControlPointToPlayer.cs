@@ -21,5 +21,7 @@ public partial interface C_OP_SetControlPointToPlayer : CParticleFunctionPreEmis
 
     public ref bool OrientToEyes { get; }
 
+    public ref ParticleEntityPos_t Position { get; }
+
 
 }

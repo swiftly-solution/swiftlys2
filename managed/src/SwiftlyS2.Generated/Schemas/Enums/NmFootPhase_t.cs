@@ -13,4 +13,6 @@ public enum NmFootPhase_t : byte
  RightFootDown = 2,
 
  LeftFootPassing = 3,
+
+ None = 4,
 }

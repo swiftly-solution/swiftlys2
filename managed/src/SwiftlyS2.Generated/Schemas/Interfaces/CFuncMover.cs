@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 {
     static CFuncMover ISchemaClass<CFuncMover>.From(nint handle) => new CFuncMoverImpl(handle);
-    static int ISchemaClass<CFuncMover>.Size => 2696;
+    static int ISchemaClass<CFuncMover>.Size => 2456;
     static string? ISchemaClass<CFuncMover>.ClassName => "func_mover";
 
 
@@ -28,8 +28,6 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
     public ref CFuncMover__Move_t MoveType { get; }
 
     public ref bool IsReversing { get; }
-
-    public ref Vector Target { get; }
 
     public ref float StartSpeed { get; }
 
@@ -51,6 +49,14 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public ref float TimeToReachZeroSpeed { get; }
 
+    public ref float ComputedDistanceToReachMaxSpeed { get; }
+
+    public ref float ComputedDistanceToReachZeroSpeed { get; }
+
+    public ref float StartCurveScale { get; }
+
+    public ref float StopCurveScale { get; }
+
     public ref float DistanceToReachZeroSpeed { get; }
 
     public GameTime_t TimeMovementStart { get; }
@@ -60,6 +66,10 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
     public ref CHandle<CMoverPathNode> StopAtNode { get; }
 
     public ref float PathLocationToBeginStop { get; }
+
+    public ref float PathLocationStart { get; }
+
+    public ref float BeginStopT { get; }
 
     public string StartForwardSound { get; set; }
 
@@ -81,6 +91,8 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public ref bool StartAtEnd { get; }
 
+    public ref bool StartFollowingClosestMover { get; }
+
     public ref CFuncMover__OrientationUpdate_t OrientationUpdate { get; }
 
     public GameTime_t TimeStartOrientationChange { get; }
@@ -95,7 +107,8 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public ref bool AllowMovableNavMeshDockingOnEntireEntity { get; }
 
-    public ref CEntityIOOutput OnNodePassed { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField OnNodePassed { get; }
 
     public string OrientationMatchEntityName { get; set; }
 
@@ -150,6 +163,26 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
     public ref bool StartedMoving { get; }
 
     public ref CFuncMover__FollowEntityDirection_t FollowEntityDirection { get; }
+
+    public ref CHandle<CFuncMover> FollowMover { get; }
+
+    public string FollowMoverEntityName { get; set; }
+
+    public ref float FollowMoverDistance { get; }
+
+    public ref float FollowMoverCalculatedDistance { get; }
+
+    public ref float FollowMoverSpringStrength { get; }
+
+    public ref bool FollowConstraintsInitialized { get; }
+
+    public ref CFuncMover__FollowConstraint_t FollowConstraint { get; }
+
+    public ref float FollowMoverSpeed { get; }
+
+    public ref float FollowMoverVelocity { get; }
+
+    public GameTick_t TickMovementRan { get; }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFootstepLandedAnimTag : CAnimTagBase, ISchemaClass<CFootstepLandedAnimTag>
 {
     static CFootstepLandedAnimTag ISchemaClass<CFootstepLandedAnimTag>.From(nint handle) => new CFootstepLandedAnimTagImpl(handle);
-    static int ISchemaClass<CFootstepLandedAnimTag>.Size => 120;
+    static int ISchemaClass<CFootstepLandedAnimTag>.Size => 128;
     static string? ISchemaClass<CFootstepLandedAnimTag>.ClassName => null;
 
 
@@ -22,6 +22,8 @@ public partial interface CFootstepLandedAnimTag : CAnimTagBase, ISchemaClass<CFo
     public string DebugAnimSourceString { get; set; }
 
     public string BoneName { get; set; }
+
+    public ref FootstepJumpPhase_t FootstepJumpPhase { get; }
 
 
 }

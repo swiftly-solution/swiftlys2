@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMathColorBlend : CLogicalEntity, ISchemaClass<CMathColorBlend>
 {
     static CMathColorBlend ISchemaClass<CMathColorBlend>.From(nint handle) => new CMathColorBlendImpl(handle);
-    static int ISchemaClass<CMathColorBlend>.Size => 1320;
+    static int ISchemaClass<CMathColorBlend>.Size => 1240;
     static string? ISchemaClass<CMathColorBlend>.ClassName => "math_colorblend";
 
 
@@ -23,7 +23,7 @@ public partial interface CMathColorBlend : CLogicalEntity, ISchemaClass<CMathCol
 
     public ref Color OutColor2 { get; }
 
-    // CEntityOutputTemplate< Color >
+    // CEntityOutputTemplate< Color, Color >
     public SchemaUntypedField OutValue { get; }
 
 

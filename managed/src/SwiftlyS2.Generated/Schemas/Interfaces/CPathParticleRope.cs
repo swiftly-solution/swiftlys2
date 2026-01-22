@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathParticleRope : CBaseEntity, ISchemaClass<CPathParticleRope>
 {
     static CPathParticleRope ISchemaClass<CPathParticleRope>.From(nint handle) => new CPathParticleRopeImpl(handle);
-    static int ISchemaClass<CPathParticleRope>.Size => 1496;
+    static int ISchemaClass<CPathParticleRope>.Size => 1424;
     static string? ISchemaClass<CPathParticleRope>.ClassName => "path_particle_rope";
 
 

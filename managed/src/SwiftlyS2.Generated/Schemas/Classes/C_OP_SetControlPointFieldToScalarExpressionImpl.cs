@@ -64,6 +64,14 @@ internal partial class C_OP_SetControlPointFieldToScalarExpressionImpl : CPartic
             return ref _Handle.AsRef<int>(_OutVectorFieldOffset!.Value);
         }
     }
+    private static nint? _InterpolationOffset;
+
+    public CParticleCollectionFloatInput Interpolation {
+        get {
+            _InterpolationOffset = _InterpolationOffset ?? Schema.GetOffset(0x6A8A3411CF55B987);
+            return new CParticleCollectionFloatInputImpl(_Handle + _InterpolationOffset!.Value);
+        }
+    }
 
 
 }

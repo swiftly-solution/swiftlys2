@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncTrackTrain : CBaseModelEntity, ISchemaClass<CFuncTrackTrain>
 {
     static CFuncTrackTrain ISchemaClass<CFuncTrackTrain>.From(nint handle) => new CFuncTrackTrainImpl(handle);
-    static int ISchemaClass<CFuncTrackTrain>.Size => 2352;
+    static int ISchemaClass<CFuncTrackTrain>.Size => 2136;
     static string? ISchemaClass<CFuncTrackTrain>.ClassName => "func_tracktrain";
 
 

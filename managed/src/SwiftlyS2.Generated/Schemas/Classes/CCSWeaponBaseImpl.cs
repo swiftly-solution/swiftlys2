@@ -240,6 +240,14 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
             return new GameTime_tImpl(_Handle + _TimeSilencerSwitchCompleteOffset!.Value);
         }
     }
+    private static nint? _WeaponActionPlaybackRateOffset;
+
+    public ref float WeaponActionPlaybackRate {
+        get {
+            _WeaponActionPlaybackRateOffset = _WeaponActionPlaybackRateOffset ?? Schema.GetOffset(0x8102BA5114C24AAE);
+            return ref _Handle.AsRef<float>(_WeaponActionPlaybackRateOffset!.Value);
+        }
+    }
     private static nint? _OriginalTeamNumberOffset;
 
     public ref int OriginalTeamNumber {
@@ -434,6 +442,7 @@ internal partial class CCSWeaponBaseImpl : CBasePlayerWeaponImpl, CCSWeaponBase
     public void IsHauledBackUpdated() => Schema.Update(_Handle, 0x8102BA51D8C240B9);
     public void SilencerOnUpdated() => Schema.Update(_Handle, 0x8102BA5168D3A353);
     public void TimeSilencerSwitchCompleteUpdated() => Schema.Update(_Handle, 0x8102BA51DCB190FA);
+    public void WeaponActionPlaybackRateUpdated() => Schema.Update(_Handle, 0x8102BA5114C24AAE);
     public void OriginalTeamNumberUpdated() => Schema.Update(_Handle, 0x8102BA515DB51597);
     public void MostRecentTeamNumberUpdated() => Schema.Update(_Handle, 0x8102BA51D818821C);
     public void DroppedNearBuyZoneUpdated() => Schema.Update(_Handle, 0x8102BA511DC5989F);

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CDestructiblePartsComponent : ISchemaClass<CDestructiblePartsComponent>
 {
     static CDestructiblePartsComponent ISchemaClass<CDestructiblePartsComponent>.From(nint handle) => new CDestructiblePartsComponentImpl(handle);
-    static int ISchemaClass<CDestructiblePartsComponent>.Size => 104;
+    static int ISchemaClass<CDestructiblePartsComponent>.Size => 112;
     static string? ISchemaClass<CDestructiblePartsComponent>.ClassName => null;
 
 
@@ -21,8 +21,5 @@ public partial interface CDestructiblePartsComponent : ISchemaClass<CDestructibl
 
     public ref CHandle<CBaseModelEntity> Owner { get; }
 
-    public ref int LastHitDamageLevel { get; }
-
     public void OwnerUpdated();
-    public void LastHitDamageLevelUpdated();
 }

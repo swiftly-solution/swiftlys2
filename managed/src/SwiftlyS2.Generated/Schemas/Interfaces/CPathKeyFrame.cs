@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathKeyFrame : CLogicalEntity, ISchemaClass<CPathKeyFrame>
 {
     static CPathKeyFrame ISchemaClass<CPathKeyFrame>.From(nint handle) => new CPathKeyFrameImpl(handle);
-    static int ISchemaClass<CPathKeyFrame>.Size => 1360;
+    static int ISchemaClass<CPathKeyFrame>.Size => 1280;
     static string? ISchemaClass<CPathKeyFrame>.ClassName => "keyframe_track";
 
 

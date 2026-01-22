@@ -41,19 +41,19 @@ public partial interface RnBodyDesc_t : ISchemaClass<RnBodyDesc_t>
 
     public ref float AngularDamping { get; }
 
-    public ref float LinearDrag { get; }
+    public ref float LinearDragScale { get; }
 
-    public ref float AngularDrag { get; }
+    public ref float AngularDragScale { get; }
 
-    public ref float LinearBuoyancyDrag { get; }
+    public ref float LinearFluidDragScale { get; }
 
-    public ref float AngularBuoyancyDrag { get; }
+    public ref float AngularFluidDragScale { get; }
 
     public ref Vector LastAwakeForceAccum { get; }
 
     public ref Vector LastAwakeTorqueAccum { get; }
 
-    public ref float BuoyancyFactor { get; }
+    public ref float BuoyancyScale { get; }
 
     public ref float GravityScale { get; }
 
@@ -78,8 +78,6 @@ public partial interface RnBodyDesc_t : ISchemaClass<RnBodyDesc_t>
     public ref bool IsContinuousEnabled { get; }
 
     public ref bool DragEnabled { get; }
-
-    public ref bool BuoyancyDragEnabled { get; }
 
     public ref Vector Gravity { get; }
 

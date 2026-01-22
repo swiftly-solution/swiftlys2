@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSTeam : CTeam, ISchemaClass<CCSTeam>
 {
     static CCSTeam ISchemaClass<CCSTeam>.From(nint handle) => new CCSTeamImpl(handle);
-    static int ISchemaClass<CCSTeam>.Size => 2152;
+    static int ISchemaClass<CCSTeam>.Size => 2080;
     static string? ISchemaClass<CCSTeam>.ClassName => "cs_team_manager";
 
 

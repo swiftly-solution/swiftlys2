@@ -34,8 +34,6 @@ public enum Flags_t : uint
 
  FL_AIMTARGET = 65536,
 
- FL_STATICPROP = 262144,
-
  FL_GRENADE = 1048576,
 
  FL_DONTTOUCH = 4194304,

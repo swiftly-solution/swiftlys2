@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CDecoyProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CDecoyProjectile>
 {
     static CDecoyProjectile ISchemaClass<CDecoyProjectile>.From(nint handle) => new CDecoyProjectileImpl(handle);
-    static int ISchemaClass<CDecoyProjectile>.Size => 3200;
+    static int ISchemaClass<CDecoyProjectile>.Size => 3056;
     static string? ISchemaClass<CDecoyProjectile>.ClassName => "decoy_projectile";
 
 

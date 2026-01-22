@@ -80,6 +80,14 @@ internal partial class CSkeletonInstanceImpl : CGameSceneNodeImpl, CSkeletonInst
             return ref _Handle.AsRef<byte>(_HitboxSetOffset!.Value);
         }
     }
+    private static nint? _ForceServerConstraintsEnabledOffset;
+
+    public ref bool ForceServerConstraintsEnabled {
+        get {
+            _ForceServerConstraintsEnabledOffset = _ForceServerConstraintsEnabledOffset ?? Schema.GetOffset(0xD6C6252E44ADABC6);
+            return ref _Handle.AsRef<bool>(_ForceServerConstraintsEnabledOffset!.Value);
+        }
+    }
 
     public void ModelStateUpdated() => Schema.Update(_Handle, 0xD6C6252E52AC8C4F);
     public void IsAnimationEnabledUpdated() => Schema.Update(_Handle, 0xD6C6252E44F0C816);

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCredits : CPointEntity, ISchemaClass<CCredits>
 {
     static CCredits ISchemaClass<CCredits>.From(nint handle) => new CCreditsImpl(handle);
-    static int ISchemaClass<CCredits>.Size => 1312;
+    static int ISchemaClass<CCredits>.Size => 1224;
     static string? ISchemaClass<CCredits>.ClassName => "env_credits";
 
 

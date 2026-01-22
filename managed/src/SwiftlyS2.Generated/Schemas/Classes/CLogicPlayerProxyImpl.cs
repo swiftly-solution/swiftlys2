@@ -16,14 +16,6 @@ internal partial class CLogicPlayerProxyImpl : CLogicalEntityImpl, CLogicPlayerP
 {
     public CLogicPlayerProxyImpl(nint handle) : base(handle) { }
 
-    private static nint? _PlayerOffset;
-
-    public ref CHandle<CBaseEntity> Player {
-        get {
-            _PlayerOffset = _PlayerOffset ?? Schema.GetOffset(0x81D444EB68856C16);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PlayerOffset!.Value);
-        }
-    }
     private static nint? _PlayerHasAmmoOffset;
 
     public ref CEntityIOOutput PlayerHasAmmo {
@@ -54,6 +46,14 @@ internal partial class CLogicPlayerProxyImpl : CLogicalEntityImpl, CLogicPlayerP
         get {
             _RequestedPlayerHealthOffset = _RequestedPlayerHealthOffset ?? Schema.GetOffset(0x81D444EBF1F83D58);
             return new SchemaUntypedField(_Handle + _RequestedPlayerHealthOffset!.Value);
+        }
+    }
+    private static nint? _PlayerOffset;
+
+    public ref CHandle<CBaseEntity> Player {
+        get {
+            _PlayerOffset = _PlayerOffset ?? Schema.GetOffset(0x81D444EB68856C16);
+            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_PlayerOffset!.Value);
         }
     }
 

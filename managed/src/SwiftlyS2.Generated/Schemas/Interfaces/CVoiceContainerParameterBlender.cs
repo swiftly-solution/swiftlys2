@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerParameterBlender : CVoiceContainerBase, ISchemaClass<CVoiceContainerParameterBlender>
 {
     static CVoiceContainerParameterBlender ISchemaClass<CVoiceContainerParameterBlender>.From(nint handle) => new CVoiceContainerParameterBlenderImpl(handle);
-    static int ISchemaClass<CVoiceContainerParameterBlender>.Size => 504;
+    static int ISchemaClass<CVoiceContainerParameterBlender>.Size => 488;
     static string? ISchemaClass<CVoiceContainerParameterBlender>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvWindShared : ISchemaClass<CEnvWindShared>
 {
     static CEnvWindShared ISchemaClass<CEnvWindShared>.From(nint handle) => new CEnvWindSharedImpl(handle);
-    static int ISchemaClass<CEnvWindShared>.Size => 336;
+    static int ISchemaClass<CEnvWindShared>.Size => 304;
     static string? ISchemaClass<CEnvWindShared>.ClassName => null;
 
 

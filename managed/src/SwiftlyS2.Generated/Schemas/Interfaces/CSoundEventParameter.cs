@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundEventParameter : CBaseEntity, ISchemaClass<CSoundEventParameter>
 {
     static CSoundEventParameter ISchemaClass<CSoundEventParameter>.From(nint handle) => new CSoundEventParameterImpl(handle);
-    static int ISchemaClass<CSoundEventParameter>.Size => 1304;
+    static int ISchemaClass<CSoundEventParameter>.Size => 1232;
     static string? ISchemaClass<CSoundEventParameter>.ClassName => "snd_event_param";
 
 

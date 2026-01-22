@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNetworkTransmitComponent : ISchemaClass<CNetworkTransmitComponent>
 {
     static CNetworkTransmitComponent ISchemaClass<CNetworkTransmitComponent>.From(nint handle) => new CNetworkTransmitComponentImpl(handle);
-    static int ISchemaClass<CNetworkTransmitComponent>.Size => 456;
+    static int ISchemaClass<CNetworkTransmitComponent>.Size => 464;
     static string? ISchemaClass<CNetworkTransmitComponent>.ClassName => null;
 
 

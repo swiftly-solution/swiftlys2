@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLogicDistanceAutosave : CLogicalEntity, ISchemaClass<CLogicDistanceAutosave>
 {
     static CLogicDistanceAutosave ISchemaClass<CLogicDistanceAutosave>.From(nint handle) => new CLogicDistanceAutosaveImpl(handle);
-    static int ISchemaClass<CLogicDistanceAutosave>.Size => 1288;
+    static int ISchemaClass<CLogicDistanceAutosave>.Size => 1216;
     static string? ISchemaClass<CLogicDistanceAutosave>.ClassName => "logic_distance_autosave";
 
 

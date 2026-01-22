@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSObserverPawn : CCSPlayerPawnBase, ISchemaClass<CCSObserverPawn>
 {
     static CCSObserverPawn ISchemaClass<CCSObserverPawn>.From(nint handle) => new CCSObserverPawnImpl(handle);
-    static int ISchemaClass<CCSObserverPawn>.Size => 3856;
+    static int ISchemaClass<CCSObserverPawn>.Size => 3744;
     static string? ISchemaClass<CCSObserverPawn>.ClassName => "observer";
 
 

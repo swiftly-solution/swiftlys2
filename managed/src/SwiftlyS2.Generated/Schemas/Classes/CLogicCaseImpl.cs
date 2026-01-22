@@ -39,7 +39,7 @@ internal partial class CLogicCaseImpl : CLogicalEntityImpl, CLogicCase
         get => new SchemaFixedArray<byte>(_Handle, 0x4B6BB20CF9FC41AE, 32, 1, 1);
     }
     public ISchemaFixedArray<CEntityIOOutput> OnCase {
-        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0x4B6BB20CF8743C7C, 32, 40, 8);
+        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0x4B6BB20CF8743C7C, 32, 24, 8);
     }
     private static nint? _OnDefaultOffset;
 

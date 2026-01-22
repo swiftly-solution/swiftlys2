@@ -64,6 +64,46 @@ internal partial class CSAdditionalPerRoundStats_tImpl : SchemaClass, CSAddition
             return ref _Handle.AsRef<int>(_DinksOffset!.Value);
         }
     }
+    private static nint? _FreshStartThisRoundOffset;
+
+    public ref bool FreshStartThisRound {
+        get {
+            _FreshStartThisRoundOffset = _FreshStartThisRoundOffset ?? Schema.GetOffset(0x719C617970D4A3AF);
+            return ref _Handle.AsRef<bool>(_FreshStartThisRoundOffset!.Value);
+        }
+    }
+    private static nint? _BombPlantedAndAliveOffset;
+
+    public ref bool BombPlantedAndAlive {
+        get {
+            _BombPlantedAndAliveOffset = _BombPlantedAndAliveOffset ?? Schema.GetOffset(0x719C61794FD0C1E9);
+            return ref _Handle.AsRef<bool>(_BombPlantedAndAliveOffset!.Value);
+        }
+    }
+    private static nint? _DefuseStartsOffset;
+
+    public ref int DefuseStarts {
+        get {
+            _DefuseStartsOffset = _DefuseStartsOffset ?? Schema.GetOffset(0x719C61791903FF7E);
+            return ref _Handle.AsRef<int>(_DefuseStartsOffset!.Value);
+        }
+    }
+    private static nint? _HostagePickUpsOffset;
+
+    public ref int HostagePickUps {
+        get {
+            _HostagePickUpsOffset = _HostagePickUpsOffset ?? Schema.GetOffset(0x719C6179FD0E2017);
+            return ref _Handle.AsRef<int>(_HostagePickUpsOffset!.Value);
+        }
+    }
+    private static nint? _NumTeammatesFlashedOffset;
+
+    public ref int NumTeammatesFlashed {
+        get {
+            _NumTeammatesFlashedOffset = _NumTeammatesFlashedOffset ?? Schema.GetOffset(0x719C61795A41A67F);
+            return ref _Handle.AsRef<int>(_NumTeammatesFlashedOffset!.Value);
+        }
+    }
 
 
 }

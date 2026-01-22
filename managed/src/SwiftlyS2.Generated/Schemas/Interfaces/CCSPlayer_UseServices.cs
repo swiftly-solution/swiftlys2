@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayer_UseServices : CPlayer_UseServices, ISchemaClass<CCSPlayer_UseServices>
 {
     static CCSPlayer_UseServices ISchemaClass<CCSPlayer_UseServices>.From(nint handle) => new CCSPlayer_UseServicesImpl(handle);
-    static int ISchemaClass<CCSPlayer_UseServices>.Size => 80;
+    static int ISchemaClass<CCSPlayer_UseServices>.Size => 88;
     static string? ISchemaClass<CCSPlayer_UseServices>.ClassName => null;
 
 

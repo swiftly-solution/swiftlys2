@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTonemapController2 : CBaseEntity, ISchemaClass<CTonemapController2>
 {
     static CTonemapController2 ISchemaClass<CTonemapController2>.From(nint handle) => new CTonemapController2Impl(handle);
-    static int ISchemaClass<CTonemapController2>.Size => 1288;
+    static int ISchemaClass<CTonemapController2>.Size => 1216;
     static string? ISchemaClass<CTonemapController2>.ClassName => "env_tonemap_controller2";
 
 

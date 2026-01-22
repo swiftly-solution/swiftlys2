@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerDecayingSineWaveImpl : CVoiceContainerBaseImpl, CVoiceContainerDecayingSineWave
+internal partial class CVoiceContainerDecayingSineWaveImpl : CVoiceContainerGeneratorImpl, CVoiceContainerDecayingSineWave
 {
     public CVoiceContainerDecayingSineWaveImpl(nint handle) : base(handle) { }
 

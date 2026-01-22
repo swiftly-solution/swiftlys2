@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerStaticAdditiveSynthImpl : CVoiceContainerBaseImpl, CVoiceContainerStaticAdditiveSynth
+internal partial class CVoiceContainerStaticAdditiveSynthImpl : CVoiceContainerAsyncGeneratorImpl, CVoiceContainerStaticAdditiveSynth
 {
     public CVoiceContainerStaticAdditiveSynthImpl(nint handle) : base(handle) { }
 

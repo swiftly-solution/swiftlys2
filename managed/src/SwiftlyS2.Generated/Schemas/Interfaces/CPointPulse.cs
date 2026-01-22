@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPointPulse : CBaseEntity, ISchemaClass<CPointPulse>
 {
     static CPointPulse ISchemaClass<CPointPulse>.From(nint handle) => new CPointPulseImpl(handle);
-    static int ISchemaClass<CPointPulse>.Size => 1264;
+    static int ISchemaClass<CPointPulse>.Size => 1192;
     static string? ISchemaClass<CPointPulse>.ClassName => "point_pulse";
 
 

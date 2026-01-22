@@ -266,6 +266,11 @@ internal partial class DatamapFunctionService : IDatamapFunctionService
     IDatamapFunctionOperator<CEntityFlame, IDHookCEntityFlameFlameThink> IDatamapFunctionService.CEntityFlameFlameThink => CEntityFlameFlameThink;
 
 
+    public IDatamapFunctionOperator<CSoundEventConeEntity, DHookCSoundEventConeEntitySoundEventConeThink> CSoundEventConeEntitySoundEventConeThink { get; } = manager.CSoundEventConeEntitySoundEventConeThink.Get(ctx.Name, profiler);
+
+    IDatamapFunctionOperator<CSoundEventConeEntity, IDHookCSoundEventConeEntitySoundEventConeThink> IDatamapFunctionService.CSoundEventConeEntitySoundEventConeThink => CSoundEventConeEntitySoundEventConeThink;
+
+
     public IDatamapFunctionOperator<CFuncMoveLinear, DHookCFuncMoveLinearNavObstacleThink> CFuncMoveLinearNavObstacleThink { get; } = manager.CFuncMoveLinearNavObstacleThink.Get(ctx.Name, profiler);
 
     IDatamapFunctionOperator<CFuncMoveLinear, IDHookCFuncMoveLinearNavObstacleThink> IDatamapFunctionService.CFuncMoveLinearNavObstacleThink => CFuncMoveLinearNavObstacleThink;
@@ -751,11 +756,6 @@ internal partial class DatamapFunctionService : IDatamapFunctionService
     IDatamapFunctionOperator<CBreakable, IDHookCBreakableDie> IDatamapFunctionService.CBreakableDie => CBreakableDie;
 
 
-    public IDatamapFunctionOperator<CMoverPathNode, DHookCMoverPathNodeParentedMoveThink> CMoverPathNodeParentedMoveThink { get; } = manager.CMoverPathNodeParentedMoveThink.Get(ctx.Name, profiler);
-
-    IDatamapFunctionOperator<CMoverPathNode, IDHookCMoverPathNodeParentedMoveThink> IDatamapFunctionService.CMoverPathNodeParentedMoveThink => CMoverPathNodeParentedMoveThink;
-
-
     public IDatamapFunctionOperator<CTriggerHurt, DHookCTriggerHurtRadiationThink> CTriggerHurtRadiationThink { get; } = manager.CTriggerHurtRadiationThink.Get(ctx.Name, profiler);
 
     IDatamapFunctionOperator<CTriggerHurt, IDHookCTriggerHurtRadiationThink> IDatamapFunctionService.CTriggerHurtRadiationThink => CTriggerHurtRadiationThink;
@@ -1021,6 +1021,11 @@ internal partial class DatamapFunctionService : IDatamapFunctionService
     IDatamapFunctionOperator<CTriggerLerpObject, IDHookCTriggerLerpObjectAttachedEntityThink> IDatamapFunctionService.CTriggerLerpObjectAttachedEntityThink => CTriggerLerpObjectAttachedEntityThink;
 
 
+    public IDatamapFunctionOperator<CPathMoverEntitySpawner, DHookCPathMoverEntitySpawnerSpawnThink> CPathMoverEntitySpawnerSpawnThink { get; } = manager.CPathMoverEntitySpawnerSpawnThink.Get(ctx.Name, profiler);
+
+    IDatamapFunctionOperator<CPathMoverEntitySpawner, IDHookCPathMoverEntitySpawnerSpawnThink> IDatamapFunctionService.CPathMoverEntitySpawnerSpawnThink => CPathMoverEntitySpawnerSpawnThink;
+
+
     public IDatamapFunctionOperator<CPointCommentaryNode, DHookCPointCommentaryNodeSpinThink> CPointCommentaryNodeSpinThink { get; } = manager.CPointCommentaryNodeSpinThink.Get(ctx.Name, profiler);
 
     IDatamapFunctionOperator<CPointCommentaryNode, IDHookCPointCommentaryNodeSpinThink> IDatamapFunctionService.CPointCommentaryNodeSpinThink => CPointCommentaryNodeSpinThink;
@@ -1039,6 +1044,11 @@ internal partial class DatamapFunctionService : IDatamapFunctionService
     public IDatamapFunctionOperator<CPointCommentaryNode, DHookCPointCommentaryNodeAcculumatePlayTimeThink> CPointCommentaryNodeAcculumatePlayTimeThink { get; } = manager.CPointCommentaryNodeAcculumatePlayTimeThink.Get(ctx.Name, profiler);
 
     IDatamapFunctionOperator<CPointCommentaryNode, IDHookCPointCommentaryNodeAcculumatePlayTimeThink> IDatamapFunctionService.CPointCommentaryNodeAcculumatePlayTimeThink => CPointCommentaryNodeAcculumatePlayTimeThink;
+
+
+    public IDatamapFunctionOperator<CPathNode, DHookCPathNodeParentedMoveThink> CPathNodeParentedMoveThink { get; } = manager.CPathNodeParentedMoveThink.Get(ctx.Name, profiler);
+
+    IDatamapFunctionOperator<CPathNode, IDHookCPathNodeParentedMoveThink> IDatamapFunctionService.CPathNodeParentedMoveThink => CPathNodeParentedMoveThink;
 
 
     public IDatamapFunctionOperator<CPhysicalButton, DHookCPhysicalButtonPhysicsThink> CPhysicalButtonPhysicsThink { get; } = manager.CPhysicalButtonPhysicsThink.Get(ctx.Name, profiler);

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathParticleRopeAlias_path_particle_rope_clientside : CPathParticleRope, ISchemaClass<CPathParticleRopeAlias_path_particle_rope_clientside>
 {
     static CPathParticleRopeAlias_path_particle_rope_clientside ISchemaClass<CPathParticleRopeAlias_path_particle_rope_clientside>.From(nint handle) => new CPathParticleRopeAlias_path_particle_rope_clientsideImpl(handle);
-    static int ISchemaClass<CPathParticleRopeAlias_path_particle_rope_clientside>.Size => 1496;
+    static int ISchemaClass<CPathParticleRopeAlias_path_particle_rope_clientside>.Size => 1424;
     static string? ISchemaClass<CPathParticleRopeAlias_path_particle_rope_clientside>.ClassName => null;
 
 

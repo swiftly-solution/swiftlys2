@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundEventEntity : CBaseEntity, ISchemaClass<CSoundEventEntity>
 {
     static CSoundEventEntity ISchemaClass<CSoundEventEntity>.From(nint handle) => new CSoundEventEntityImpl(handle);
-    static int ISchemaClass<CSoundEventEntity>.Size => 1464;
+    static int ISchemaClass<CSoundEventEntity>.Size => 1368;
     static string? ISchemaClass<CSoundEventEntity>.ClassName => "snd_event_point";
 
 
@@ -31,7 +31,7 @@ public partial interface CSoundEventEntity : CBaseEntity, ISchemaClass<CSoundEve
 
     public string AttachmentName { get; set; }
 
-    // CEntityOutputTemplate< uint64 >
+    // CEntityOutputTemplate< uint64, uint64 >
     public SchemaUntypedField OnGUIDChanged { get; }
 
     public ref CEntityIOOutput OnSoundFinished { get; }

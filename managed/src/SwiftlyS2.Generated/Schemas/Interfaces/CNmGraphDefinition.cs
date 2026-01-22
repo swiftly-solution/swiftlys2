@@ -11,13 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CNmGraphDefinition : ISchemaClass<CNmGraphDefinition>
 {
     static CNmGraphDefinition ISchemaClass<CNmGraphDefinition>.From(nint handle) => new CNmGraphDefinitionImpl(handle);
-    static int ISchemaClass<CNmGraphDefinition>.Size => 384;
+    static int ISchemaClass<CNmGraphDefinition>.Size => 416;
     static string? ISchemaClass<CNmGraphDefinition>.ClassName => null;
 
 
     public ref CGlobalSymbol VariationID { get; }
 
     public ref CStrongHandle<InfoForResourceTypeCNmSkeleton> Skeleton { get; }
+
+    public CNmGraphVariationUserData? UserData { get; }
 
     public ref CUtlVector<short> PersistentNodeIndices { get; }
 
@@ -32,6 +34,8 @@ public partial interface CNmGraphDefinition : ISchemaClass<CNmGraphDefinition>
     public ref CUtlVector<CNmGraphDefinition__ReferencedGraphSlot_t> ReferencedGraphSlots { get; }
 
     public ref CUtlVector<CNmGraphDefinition__ExternalGraphSlot_t> ExternalGraphSlots { get; }
+
+    public ref CUtlVector<CNmGraphDefinition__ExternalPoseSlot_t> ExternalPoseSlots { get; }
 
     public ref CUtlVector<CUtlString> NodePaths { get; }
 

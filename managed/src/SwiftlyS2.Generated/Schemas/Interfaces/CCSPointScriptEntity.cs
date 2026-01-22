@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPointScriptEntity : CBaseEntity, ISchemaClass<CCSPointScriptEntity>
 {
     static CCSPointScriptEntity ISchemaClass<CCSPointScriptEntity>.From(nint handle) => new CCSPointScriptEntityImpl(handle);
-    static int ISchemaClass<CCSPointScriptEntity>.Size => 1624;
+    static int ISchemaClass<CCSPointScriptEntity>.Size => 1552;
     static string? ISchemaClass<CCSPointScriptEntity>.ClassName => null;
 
 

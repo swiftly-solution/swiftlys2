@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CHEGrenadeProjectile : CBaseCSGrenadeProjectile, ISchemaClass<CHEGrenadeProjectile>
 {
     static CHEGrenadeProjectile ISchemaClass<CHEGrenadeProjectile>.From(nint handle) => new CHEGrenadeProjectileImpl(handle);
-    static int ISchemaClass<CHEGrenadeProjectile>.Size => 3136;
+    static int ISchemaClass<CHEGrenadeProjectile>.Size => 2992;
     static string? ISchemaClass<CHEGrenadeProjectile>.ClassName => "hegrenade_projectile";
 
 

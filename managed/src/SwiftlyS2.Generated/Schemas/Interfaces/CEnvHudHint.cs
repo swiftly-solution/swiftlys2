@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvHudHint : CPointEntity, ISchemaClass<CEnvHudHint>
 {
     static CEnvHudHint ISchemaClass<CEnvHudHint>.From(nint handle) => new CEnvHudHintImpl(handle);
-    static int ISchemaClass<CEnvHudHint>.Size => 1272;
+    static int ISchemaClass<CEnvHudHint>.Size => 1200;
     static string? ISchemaClass<CEnvHudHint>.ClassName => "env_hudhint";
 
 

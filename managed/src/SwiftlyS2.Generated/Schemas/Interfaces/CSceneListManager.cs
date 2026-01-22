@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSceneListManager : CLogicalEntity, ISchemaClass<CSceneListManager>
 {
     static CSceneListManager ISchemaClass<CSceneListManager>.From(nint handle) => new CSceneListManagerImpl(handle);
-    static int ISchemaClass<CSceneListManager>.Size => 1480;
+    static int ISchemaClass<CSceneListManager>.Size => 1408;
     static string? ISchemaClass<CSceneListManager>.ClassName => "logic_scene_list_manager";
 
 

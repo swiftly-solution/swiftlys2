@@ -64,6 +64,30 @@ internal partial class VPhysicsCollisionAttribute_tImpl : SchemaClass, VPhysicsC
             return ref _Handle.AsRef<ushort>(_HierarchyIdOffset!.Value);
         }
     }
+    private static nint? _DetailLayerMaskOffset;
+
+    public ref ushort DetailLayerMask {
+        get {
+            _DetailLayerMaskOffset = _DetailLayerMaskOffset ?? Schema.GetOffset(0x7E9FC931BB814B49);
+            return ref _Handle.AsRef<ushort>(_DetailLayerMaskOffset!.Value);
+        }
+    }
+    private static nint? _DetailLayerMaskTypeOffset;
+
+    public ref byte DetailLayerMaskType {
+        get {
+            _DetailLayerMaskTypeOffset = _DetailLayerMaskTypeOffset ?? Schema.GetOffset(0x7E9FC9313D8944C1);
+            return ref _Handle.AsRef<byte>(_DetailLayerMaskTypeOffset!.Value);
+        }
+    }
+    private static nint? _TargetDetailLayerOffset;
+
+    public ref byte TargetDetailLayer {
+        get {
+            _TargetDetailLayerOffset = _TargetDetailLayerOffset ?? Schema.GetOffset(0x7E9FC9312E46F786);
+            return ref _Handle.AsRef<byte>(_TargetDetailLayerOffset!.Value);
+        }
+    }
     private static nint? _CollisionGroupOffset;
 
     public ref byte CollisionGroup {
@@ -87,6 +111,9 @@ internal partial class VPhysicsCollisionAttribute_tImpl : SchemaClass, VPhysicsC
     public void EntityIdUpdated() => Schema.Update(_Handle, 0x7E9FC9312E71588B);
     public void OwnerIdUpdated() => Schema.Update(_Handle, 0x7E9FC931DD9F9E45);
     public void HierarchyIdUpdated() => Schema.Update(_Handle, 0x7E9FC931E2479899);
+    public void DetailLayerMaskUpdated() => Schema.Update(_Handle, 0x7E9FC931BB814B49);
+    public void DetailLayerMaskTypeUpdated() => Schema.Update(_Handle, 0x7E9FC9313D8944C1);
+    public void TargetDetailLayerUpdated() => Schema.Update(_Handle, 0x7E9FC9312E46F786);
     public void CollisionGroupUpdated() => Schema.Update(_Handle, 0x7E9FC9310AC0C752);
     public void CollisionFunctionMaskUpdated() => Schema.Update(_Handle, 0x7E9FC931FC7E6DAF);
 }

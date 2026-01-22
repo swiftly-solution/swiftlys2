@@ -40,6 +40,18 @@ internal partial class CInfoOffscreenPanoramaTextureImpl : CPointEntityImpl, CIn
             return ref _Handle.AsRef<int>(_ResolutionYOffset!.Value);
         }
     }
+    private static nint? _PanelTypeOffset;
+
+    public string PanelType {
+        get {
+            _PanelTypeOffset = _PanelTypeOffset ?? Schema.GetOffset(0x584660AFE57D8536);
+            return Schema.GetString(_Handle.Read<nint>(_PanelTypeOffset!.Value));
+        }
+        set {
+            _PanelTypeOffset = _PanelTypeOffset ?? Schema.GetOffset(0x584660AFE57D8536);
+            Schema.SetString(_Handle, _PanelTypeOffset!.Value, value);
+        }
+    } 
     private static nint? _LayoutFileNameOffset;
 
     public string LayoutFileName {
@@ -112,6 +124,7 @@ internal partial class CInfoOffscreenPanoramaTextureImpl : CPointEntityImpl, CIn
     public void DisabledUpdated() => Schema.Update(_Handle, 0x584660AF3A7C5965);
     public void ResolutionXUpdated() => Schema.Update(_Handle, 0x584660AF6C22DC51);
     public void ResolutionYUpdated() => Schema.Update(_Handle, 0x584660AF6B22DABE);
+    public void PanelTypeUpdated() => Schema.Update(_Handle, 0x584660AFE57D8536);
     public void LayoutFileNameUpdated() => Schema.Update(_Handle, 0x584660AF5D1172FB);
     public void RenderAttrNameUpdated() => Schema.Update(_Handle, 0x584660AFE624CDC1);
     public void TargetEntitiesUpdated() => Schema.Update(_Handle, 0x584660AFA0100A93);

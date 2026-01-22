@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBlood : CPointEntity, ISchemaClass<CBlood>
 {
     static CBlood ISchemaClass<CBlood>.From(nint handle) => new CBloodImpl(handle);
-    static int ISchemaClass<CBlood>.Size => 1296;
+    static int ISchemaClass<CBlood>.Size => 1224;
     static string? ISchemaClass<CBlood>.ClassName => "env_blood";
 
 

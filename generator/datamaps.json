@@ -117,6 +117,18 @@
         },
         {
             "base_data_class_name": "",
+            "class_name": "DestructiblePartDestructionRequest_t",
+            "data_class_name": "DestructiblePartDestructionRequest_t",
+            "fields": []
+        },
+        {
+            "base_data_class_name": "",
+            "class_name": "CSceneRequest",
+            "data_class_name": "CSceneRequest",
+            "fields": []
+        },
+        {
+            "base_data_class_name": "",
             "class_name": "SummaryTakeDamageInfo_t",
             "data_class_name": "SummaryTakeDamageInfo_t",
             "fields": []
@@ -576,7 +588,7 @@
                 },
                 {
                     "externalName": "reversalsoundSmall",
-                    "fieldName": "m_iszReversalSounds[0]",
+                    "fieldName": "m_iszReversalSoundSmall",
                     "fieldType": "FIELD_STRING",
                     "functionHash": 0,
                     "isFunction": false,
@@ -585,7 +597,7 @@
                 },
                 {
                     "externalName": "reversalsoundMedium",
-                    "fieldName": "m_iszReversalSounds[1]",
+                    "fieldName": "m_iszReversalSoundMedium",
                     "fieldType": "FIELD_STRING",
                     "functionHash": 0,
                     "isFunction": false,
@@ -594,7 +606,7 @@
                 },
                 {
                     "externalName": "reversalsoundLarge",
-                    "fieldName": "m_iszReversalSounds[2]",
+                    "fieldName": "m_iszReversalSoundLarge",
                     "fieldType": "FIELD_STRING",
                     "functionHash": 0,
                     "isFunction": false,
@@ -625,6 +637,12 @@
             "base_data_class_name": "",
             "class_name": "CAI_Expresser",
             "data_class_name": "CAI_Expresser",
+            "fields": []
+        },
+        {
+            "base_data_class_name": "",
+            "class_name": "CPathMoverEntitySpawn",
+            "data_class_name": "CPathMoverEntitySpawn",
             "fields": []
         },
         {
@@ -694,7 +712,7 @@
             "fields": [
                 {
                     "externalName": "minSoundThreshold",
-                    "fieldName": "m_keyPoints[0]",
+                    "fieldName": "m_flKeyPointMinSoundThreshold",
                     "fieldType": "FIELD_FLOAT32",
                     "functionHash": 0,
                     "isFunction": false,
@@ -703,7 +721,7 @@
                 },
                 {
                     "externalName": "maxSoundThreshold",
-                    "fieldName": "m_keyPoints[1]",
+                    "fieldName": "m_flKeyPointMaxSoundThreshold",
                     "fieldType": "FIELD_FLOAT32",
                     "functionHash": 0,
                     "isFunction": false,
@@ -712,7 +730,7 @@
                 },
                 {
                     "externalName": "reversalsoundthresholdSmall",
-                    "fieldName": "m_reversalSoundThresholds[0]",
+                    "fieldName": "m_reversalSoundThresholdSmall",
                     "fieldType": "FIELD_FLOAT32",
                     "functionHash": 0,
                     "isFunction": false,
@@ -721,7 +739,7 @@
                 },
                 {
                     "externalName": "reversalsoundthresholdMedium",
-                    "fieldName": "m_reversalSoundThresholds[1]",
+                    "fieldName": "m_reversalSoundThresholdMedium",
                     "fieldType": "FIELD_FLOAT32",
                     "functionHash": 0,
                     "isFunction": false,
@@ -730,7 +748,7 @@
                 },
                 {
                     "externalName": "reversalsoundthresholdLarge",
-                    "fieldName": "m_reversalSoundThresholds[2]",
+                    "fieldName": "m_reversalSoundThresholdLarge",
                     "fieldType": "FIELD_FLOAT32",
                     "functionHash": 0,
                     "isFunction": false,
@@ -1717,40 +1735,13 @@
                     "isOutput": false
                 },
                 {
-                    "externalName": "OnStyleEvent0",
-                    "fieldName": "m_StyleEvent[0]",
+                    "externalName": "OnStyleEvent%u",
+                    "fieldName": "m_StyleEvent",
                     "fieldType": "FIELD_CUSTOM",
                     "functionHash": 0,
                     "isFunction": false,
                     "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnStyleEvent1",
-                    "fieldName": "m_StyleEvent[1]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnStyleEvent2",
-                    "fieldName": "m_StyleEvent[2]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnStyleEvent3",
-                    "fieldName": "m_StyleEvent[3]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
+                    "isOutput": false
                 },
                 {
                     "externalName": "lightcookie",
@@ -1881,6 +1872,15 @@
                 {
                     "externalName": "contactshadow",
                     "fieldName": "m_bContactShadow",
+                    "fieldType": "FIELD_BOOLEAN",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "dynamicbounce",
+                    "fieldName": "m_bDynamicBounce",
                     "fieldType": "FIELD_BOOLEAN",
                     "functionHash": 0,
                     "isFunction": false,
@@ -2298,6 +2298,12 @@
             "base_data_class_name": "CCSPlayerBase_CameraServices",
             "class_name": "CCSPlayer_CameraServices",
             "data_class_name": "CCSPlayer_CameraServices",
+            "fields": []
+        },
+        {
+            "base_data_class_name": "CPathSimple",
+            "class_name": "CPathWithDynamicNodes",
+            "data_class_name": "CPathWithDynamicNodes",
             "fields": []
         },
         {
@@ -3528,6 +3534,15 @@
                     "isOutput": false
                 },
                 {
+                    "externalName": "entityUseFastRefreshRate",
+                    "fieldName": "m_bFastRefresh",
+                    "fieldType": "FIELD_BOOLEAN",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
                     "externalName": "sourceEntityName",
                     "fieldName": "m_iszSourceEntityName",
                     "fieldType": "FIELD_STRING",
@@ -4624,6 +4639,15 @@
                     "isOutput": false
                 },
                 {
+                    "externalName": "dynamicbounce",
+                    "fieldName": "m_bDynamicBounce",
+                    "fieldType": "FIELD_BOOLEAN",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
                     "externalName": "fademindist",
                     "fieldName": "m_flFadeMinDist",
                     "fieldType": "FIELD_FLOAT32",
@@ -5660,15 +5684,6 @@
                     "externalName": "attachpoint",
                     "fieldName": "m_vecAttach",
                     "fieldType": "FIELD_POSITION_VECTOR",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "enablecollision",
-                    "fieldName": "m_bEnableCollision",
-                    "fieldType": "FIELD_BOOLEAN",
                     "functionHash": 0,
                     "isFunction": false,
                     "isInput": false,
@@ -7329,15 +7344,6 @@
                     "isOutput": false
                 },
                 {
-                    "externalName": "SetScale",
-                    "fieldName": "m_flSpriteScale",
-                    "fieldType": "FIELD_FLOAT32",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": true,
-                    "isOutput": false
-                },
-                {
                     "externalName": "HideSprite",
                     "fieldName": "InputHideSprite",
                     "fieldType": "FIELD_VOID",
@@ -7623,6 +7629,67 @@
             ]
         },
         {
+            "base_data_class_name": "CSoundEventEntity",
+            "class_name": "CSoundEventConeEntity",
+            "data_class_name": "CSoundEventConeEntity",
+            "fields": [
+                {
+                    "externalName": "",
+                    "fieldName": "CSoundEventConeEntitySoundEventConeThink",
+                    "fieldType": "FIELD_VOID",
+                    "functionHash": 3250820479,
+                    "isFunction": true,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "parameterName",
+                    "fieldName": "m_iszParameterName",
+                    "fieldType": "FIELD_STRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "emitterAngle",
+                    "fieldName": "m_flEmitterAngle",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "sweetSpotAngle",
+                    "fieldName": "m_flSweetSpotAngle",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "attenMin",
+                    "fieldName": "m_flAttenMin",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "attenMax",
+                    "fieldName": "m_flAttenMax",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                }
+            ]
+        },
+        {
             "base_data_class_name": "CLogicalEntity",
             "class_name": "CMathColorBlend",
             "data_class_name": "CMathColorBlend",
@@ -7884,6 +7951,40 @@
                     "isFunction": false,
                     "isInput": false,
                     "isOutput": true
+                }
+            ]
+        },
+        {
+            "base_data_class_name": "CPointEntity",
+            "class_name": "CInfoInteraction",
+            "data_class_name": "CInfoInteraction",
+            "fields": [
+                {
+                    "externalName": "slot_entity_name%d",
+                    "fieldName": "m_strSlotEntityName",
+                    "fieldType": "FIELD_STRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "interact_radius",
+                    "fieldName": "m_flInteractRadius",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "interact_vdata",
+                    "fieldName": "m_strInteractVData",
+                    "fieldType": "FIELD_STRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
                 }
             ]
         },
@@ -8992,7 +9093,7 @@
                 },
                 {
                     "externalName": "SetSolid",
-                    "fieldName": "InputEnable",
+                    "fieldName": "InputSetSolid",
                     "fieldType": "FIELD_VOID",
                     "functionHash": 0,
                     "isFunction": false,
@@ -9001,7 +9102,7 @@
                 },
                 {
                     "externalName": "SetNonsolid",
-                    "fieldName": "InputDisable",
+                    "fieldName": "InputSetNonsolid",
                     "fieldType": "FIELD_VOID",
                     "functionHash": 0,
                     "isFunction": false,
@@ -11098,6 +11199,15 @@
                     "isFunction": false,
                     "isInput": false,
                     "isOutput": false
+                },
+                {
+                    "externalName": "useParentedPath",
+                    "fieldName": "m_bUseParentedPath",
+                    "fieldType": "FIELD_BOOLEAN",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
                 }
             ]
         },
@@ -12439,12 +12549,6 @@
                     "isOutput": false
                 }
             ]
-        },
-        {
-            "base_data_class_name": "CEnvCombinedLightProbeVolume",
-            "class_name": "CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume",
-            "data_class_name": "CEnvCombinedLightProbeVolumeAlias_func_combined_light_probe_volume",
-            "fields": []
         },
         {
             "base_data_class_name": "CPlayer_MovementServices",
@@ -15396,15 +15500,6 @@
                     "isOutput": false
                 },
                 {
-                    "externalName": "ResumeSceneFile",
-                    "fieldName": "m_iszResumeSceneFile",
-                    "fieldType": "FIELD_STRING",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
                     "externalName": "target1",
                     "fieldName": "m_iszTarget1",
                     "fieldType": "FIELD_STRING",
@@ -15585,15 +15680,6 @@
                     "isOutput": false
                 },
                 {
-                    "externalName": "Trigger",
-                    "fieldName": "InputTriggerEvent",
-                    "fieldType": "FIELD_INT32",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": true,
-                    "isOutput": false
-                },
-                {
                     "externalName": "SetTarget1",
                     "fieldName": "InputSetTarget1",
                     "fieldType": "FIELD_STRING",
@@ -15677,150 +15763,6 @@
                 {
                     "externalName": "OnResumed",
                     "fieldName": "m_OnResumed",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger1",
-                    "fieldName": "m_OnTrigger[ 0 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger2",
-                    "fieldName": "m_OnTrigger[ 1 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger3",
-                    "fieldName": "m_OnTrigger[ 2 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger4",
-                    "fieldName": "m_OnTrigger[ 3 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger5",
-                    "fieldName": "m_OnTrigger[ 4 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger6",
-                    "fieldName": "m_OnTrigger[ 5 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger7",
-                    "fieldName": "m_OnTrigger[ 6 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger8",
-                    "fieldName": "m_OnTrigger[ 7 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger9",
-                    "fieldName": "m_OnTrigger[ 8 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger10",
-                    "fieldName": "m_OnTrigger[ 9 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger11",
-                    "fieldName": "m_OnTrigger[ 10 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger12",
-                    "fieldName": "m_OnTrigger[ 11 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger13",
-                    "fieldName": "m_OnTrigger[ 12 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger14",
-                    "fieldName": "m_OnTrigger[ 13 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger15",
-                    "fieldName": "m_OnTrigger[ 14 ]",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnTrigger16",
-                    "fieldName": "m_OnTrigger[ 15 ]",
                     "fieldType": "FIELD_CUSTOM",
                     "functionHash": 0,
                     "isFunction": false,
@@ -16204,6 +16146,15 @@
                     "isOutput": false
                 },
                 {
+                    "externalName": "starts_following_closest_mover",
+                    "fieldName": "m_bStartFollowingClosestMover",
+                    "fieldType": "FIELD_BOOLEAN",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
                     "externalName": "time_to_reach_max_speed",
                     "fieldName": "m_flTimeToReachMaxSpeed",
                     "fieldType": "FIELD_FLOAT32",
@@ -16348,6 +16299,42 @@
                     "isOutput": false
                 },
                 {
+                    "externalName": "follow_other_mover_entity",
+                    "fieldName": "m_iszFollowMoverEntityName",
+                    "fieldType": "FIELD_STRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "follow_other_mover_distance",
+                    "fieldName": "m_flFollowMoverDistance",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "follow_other_mover_spring_strength",
+                    "fieldName": "m_flFollowMoverSpringStrength",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "follow_other_mover_constraint",
+                    "fieldName": "m_eFollowConstraint",
+                    "fieldType": "FIELD_INT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
                     "externalName": "solid",
                     "fieldName": "m_eSolidType",
                     "fieldType": "FIELD_UINT8",
@@ -16413,6 +16400,15 @@
                 {
                     "externalName": "Stop",
                     "fieldName": "InputStop",
+                    "fieldType": "FIELD_VOID",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "StopImmediate",
+                    "fieldName": "InputStopImmediate",
                     "fieldType": "FIELD_VOID",
                     "functionHash": 0,
                     "isFunction": false,
@@ -16528,6 +16524,15 @@
                     "isOutput": false
                 },
                 {
+                    "externalName": "SetTimeToReachZeroSpeed",
+                    "fieldName": "InputSetTimeToReachZeroSpeed",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                },
+                {
                     "externalName": "SetTimeToBlendToNewOrientation",
                     "fieldName": "InputSetTimeToBlendToNewOrientation",
                     "fieldType": "FIELD_FLOAT32",
@@ -16603,6 +16608,42 @@
                     "externalName": "SetTimeToTraverseToNextNode",
                     "fieldName": "InputSetTimeToTraverseToNextNode",
                     "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "SetMoveType",
+                    "fieldName": "InputSetMoveType",
+                    "fieldType": "FIELD_INT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "SetFollowMoverEntity",
+                    "fieldName": "InputSetFollowMoverEntity",
+                    "fieldType": "FIELD_STRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "SetFollowMoverEntityToClosestOnSpline",
+                    "fieldName": "InputSetFollowMoverEntityToClosestOnSpline",
+                    "fieldType": "FIELD_VOID",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "DeleteFollowMoverSpringConstraint",
+                    "fieldName": "InputDeleteFollowMoverSpringConstraint",
+                    "fieldType": "FIELD_VOID",
                     "functionHash": 0,
                     "isFunction": false,
                     "isInput": true,
@@ -17930,6 +17971,15 @@
                     "isOutput": false
                 },
                 {
+                    "externalName": "panel_type",
+                    "fieldName": "m_szPanelType",
+                    "fieldType": "FIELD_STRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
                     "externalName": "layout_file",
                     "fieldName": "m_szLayoutFileName",
                     "fieldType": "FIELD_STRING",
@@ -18807,6 +18857,15 @@
             "data_class_name": "CFuncRotator",
             "fields": [
                 {
+                    "externalName": "solid",
+                    "fieldName": "m_eSolidType",
+                    "fieldType": "FIELD_UINT8",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
                     "externalName": "starts_rotating",
                     "fieldName": "m_bIsRotating",
                     "fieldType": "FIELD_BOOLEAN",
@@ -18879,6 +18938,42 @@
                     "isOutput": false
                 },
                 {
+                    "externalName": "speed_scale",
+                    "fieldName": "m_flSpeedScale",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "speed_from_mover",
+                    "fieldName": "m_iszSpeedFromMover",
+                    "fieldType": "FIELD_STRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "min_yaw_rotation",
+                    "fieldName": "m_flMinYawRotation",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "max_yaw_rotation",
+                    "fieldName": "m_flMaxYawRotation",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
                     "externalName": "rotate_type",
                     "fieldName": "m_eRotateType",
                     "fieldType": "FIELD_INT32",
@@ -18936,6 +19031,15 @@
                     "externalName": "ReturnToInitialOrientation",
                     "fieldName": "InputReturnToInitialOrientation",
                     "fieldType": "FIELD_VOID",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "SetRotateType",
+                    "fieldName": "InputSetRotateType",
+                    "fieldType": "FIELD_INT32",
                     "functionHash": 0,
                     "isFunction": false,
                     "isInput": true,
@@ -19423,6 +19527,12 @@
             "fields": []
         },
         {
+            "base_data_class_name": "",
+            "class_name": "CCSPlayerModernJump",
+            "data_class_name": "CCSPlayerModernJump",
+            "fields": []
+        },
+        {
             "base_data_class_name": "CInfoDynamicShadowHint",
             "class_name": "CInfoDynamicShadowHintBox",
             "data_class_name": "CInfoDynamicShadowHintBox",
@@ -19824,7 +19934,7 @@
                 },
                 {
                     "externalName": "SetDefaultAnimationLooping",
-                    "fieldName": "InputSetIdleAnimationLooping",
+                    "fieldName": "InputSetDefaultAnimationLooping",
                     "fieldType": "FIELD_STRING",
                     "functionHash": 0,
                     "isFunction": false,
@@ -19833,7 +19943,7 @@
                 },
                 {
                     "externalName": "SetDefaultAnimationNotLooping",
-                    "fieldName": "InputSetIdleAnimationNotLooping",
+                    "fieldName": "InputSetDefaultAnimationNotLooping",
                     "fieldType": "FIELD_STRING",
                     "functionHash": 0,
                     "isFunction": false,
@@ -19860,7 +19970,7 @@
                 },
                 {
                     "externalName": "Enable",
-                    "fieldName": "InputTurnOn",
+                    "fieldName": "InputEnable",
                     "fieldType": "FIELD_VOID",
                     "functionHash": 0,
                     "isFunction": false,
@@ -19869,7 +19979,7 @@
                 },
                 {
                     "externalName": "Disable",
-                    "fieldName": "InputTurnOff",
+                    "fieldName": "InputDisable",
                     "fieldType": "FIELD_VOID",
                     "functionHash": 0,
                     "isFunction": false,
@@ -21574,6 +21684,15 @@
                     "isFunction": false,
                     "isInput": false,
                     "isOutput": false
+                },
+                {
+                    "externalName": "animgraph2_identifier",
+                    "fieldName": "m_sAnimGraph2Identifier",
+                    "fieldType": "FIELD_GLOBALSYMBOL",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
                 }
             ]
         },
@@ -22504,6 +22623,15 @@
                     "isOutput": false
                 },
                 {
+                    "externalName": "OnStartDeath",
+                    "fieldName": "m_OnStartDeath",
+                    "fieldType": "FIELD_CUSTOM",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": true
+                },
+                {
                     "externalName": "OnBreak",
                     "fieldName": "m_OnBreak",
                     "fieldType": "FIELD_CUSTOM",
@@ -22530,46 +22658,10 @@
             "fields": []
         },
         {
-            "base_data_class_name": "CPointEntity",
+            "base_data_class_name": "CPathNode",
             "class_name": "CMoverPathNode",
             "data_class_name": "CMoverPathNode",
             "fields": [
-                {
-                    "externalName": "in_tangent_local",
-                    "fieldName": "m_vInTangentLocal",
-                    "fieldType": "FIELD_VECTOR",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "out_tangent_local",
-                    "fieldName": "m_vOutTangentLocal",
-                    "fieldType": "FIELD_VECTOR",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "path_uniqueid",
-                    "fieldName": "m_szParentPathUniqueID",
-                    "fieldType": "FIELD_STRING",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "path_parameter_string",
-                    "fieldName": "m_szPathNodeParameter",
-                    "fieldType": "FIELD_STRING",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
                 {
                     "externalName": "OnStartFromOrInSegment",
                     "fieldName": "m_OnStartFromOrInSegment",
@@ -22614,15 +22706,6 @@
                     "isFunction": false,
                     "isInput": false,
                     "isOutput": true
-                },
-                {
-                    "externalName": "",
-                    "fieldName": "CMoverPathNodeParentedMoveThink",
-                    "fieldType": "FIELD_VOID",
-                    "functionHash": 2846177876,
-                    "isFunction": true,
-                    "isInput": false,
-                    "isOutput": false
                 }
             ]
         },
@@ -24583,6 +24666,12 @@
             ]
         },
         {
+            "base_data_class_name": "",
+            "class_name": "CCSPlayerLegacyJump",
+            "data_class_name": "CCSPlayerLegacyJump",
+            "fields": []
+        },
+        {
             "base_data_class_name": "CCSPlayerPawnBase",
             "class_name": "CCSPlayerPawn",
             "data_class_name": "CCSPlayerPawn",
@@ -24878,6 +24967,12 @@
             "base_data_class_name": "CCSWeaponBaseGun",
             "class_name": "CWeaponP250",
             "data_class_name": "CWeaponP250",
+            "fields": []
+        },
+        {
+            "base_data_class_name": "CPointEntity",
+            "class_name": "CChoreoInfoTarget",
+            "data_class_name": "CChoreoInfoTarget",
             "fields": []
         },
         {
@@ -25820,10 +25915,20 @@
             "fields": []
         },
         {
-            "base_data_class_name": "CPathSimple",
+            "base_data_class_name": "CPathWithDynamicNodes",
             "class_name": "CPathMover",
             "data_class_name": "CPathMover",
-            "fields": []
+            "fields": [
+                {
+                    "externalName": "path_mover_spawner_name",
+                    "fieldName": "m_iszMoverSpawnerName",
+                    "fieldType": "FIELD_STRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                }
+            ]
         },
         {
             "base_data_class_name": "CBaseModelEntity",
@@ -27137,7 +27242,7 @@
                 },
                 {
                     "externalName": "IgniteNumHitboxFires",
-                    "fieldName": "InputIgnite",
+                    "fieldName": "InputIgniteNumHitboxFires",
                     "fieldType": "FIELD_INT32",
                     "functionHash": 0,
                     "isFunction": false,
@@ -27146,7 +27251,7 @@
                 },
                 {
                     "externalName": "IgniteHitboxFireScale",
-                    "fieldName": "InputIgnite",
+                    "fieldName": "InputIgniteHitboxFireScale",
                     "fieldType": "FIELD_FLOAT32",
                     "functionHash": 0,
                     "isFunction": false,
@@ -29616,130 +29721,6 @@
             ]
         },
         {
-            "base_data_class_name": "CPointEntity",
-            "class_name": "CNavLinkAreaEntity",
-            "data_class_name": "CNavLinkAreaEntity",
-            "fields": [
-                {
-                    "externalName": "width",
-                    "fieldName": "m_flWidth",
-                    "fieldType": "FIELD_FLOAT32",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "locatoroffset",
-                    "fieldName": "m_vLocatorOffset",
-                    "fieldType": "FIELD_POSITION_VECTOR",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "locatorangles",
-                    "fieldName": "m_qLocatorAnglesOffset",
-                    "fieldType": "FIELD_QANGLE",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "nav_link_movement",
-                    "fieldName": "m_strMovementForward",
-                    "fieldType": "FIELD_STRING",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "nav_link_movement_reverse",
-                    "fieldName": "m_strMovementReverse",
-                    "fieldType": "FIELD_STRING",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "filter_name",
-                    "fieldName": "m_strFilterName",
-                    "fieldType": "FIELD_STRING",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "AllowCrossMovableConnections",
-                    "fieldName": "m_bAllowCrossMovableConnections",
-                    "fieldType": "FIELD_BOOLEAN",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "Enable",
-                    "fieldName": "InputEnable",
-                    "fieldType": "FIELD_VOID",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": true,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "Disable",
-                    "fieldName": "InputDisable",
-                    "fieldType": "FIELD_VOID",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": true,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "Update",
-                    "fieldName": "InputUpdate",
-                    "fieldType": "FIELD_VOID",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": true,
-                    "isOutput": false
-                },
-                {
-                    "externalName": "OnNavLinkStart",
-                    "fieldName": "m_OnNavLinkStart",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "OnNavLinkFinish",
-                    "fieldName": "m_OnNavLinkFinish",
-                    "fieldType": "FIELD_CUSTOM",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": true
-                },
-                {
-                    "externalName": "IsTerminus",
-                    "fieldName": "m_bIsTerminus",
-                    "fieldType": "FIELD_BOOLEAN",
-                    "functionHash": 0,
-                    "isFunction": false,
-                    "isInput": false,
-                    "isOutput": false
-                }
-            ]
-        },
-        {
             "base_data_class_name": "CServerOnlyModelEntity",
             "class_name": "CFogVolume",
             "data_class_name": "CFogVolume",
@@ -30430,6 +30411,94 @@
             ]
         },
         {
+            "base_data_class_name": "CLogicalEntity",
+            "class_name": "CPathMoverEntitySpawner",
+            "data_class_name": "CPathMoverEntitySpawner",
+            "fields": [
+                {
+                    "externalName": "enabled",
+                    "fieldName": "m_bEnabled",
+                    "fieldType": "FIELD_BOOLEAN",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "spawn_frequency_seconds",
+                    "fieldName": "m_flSpawnFrequencySeconds",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "spawn_frequency_dist_to_nearest",
+                    "fieldName": "m_flSpawnFrequencyDistToNearestMover",
+                    "fieldType": "FIELD_FLOAT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "max_active",
+                    "fieldName": "m_nMaxActive",
+                    "fieldType": "FIELD_INT32",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "entity_template%02d",
+                    "fieldName": "m_szSpawnTemplates",
+                    "fieldType": "FIELD_STRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "",
+                    "fieldName": "CPathMoverEntitySpawnerSpawnThink",
+                    "fieldType": "FIELD_VOID",
+                    "functionHash": 1954646118,
+                    "isFunction": true,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "Enable",
+                    "fieldName": "InputEnable",
+                    "fieldType": "FIELD_VOID",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "Disable",
+                    "fieldName": "InputDisable",
+                    "fieldType": "FIELD_VOID",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "Toggle",
+                    "fieldName": "InputToggle",
+                    "fieldType": "FIELD_VOID",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": true,
+                    "isOutput": false
+                }
+            ]
+        },
+        {
             "base_data_class_name": "CBaseAnimGraph",
             "class_name": "CPointCommentaryNode",
             "data_class_name": "CPointCommentaryNode",
@@ -30695,6 +30764,58 @@
                     "fieldType": "FIELD_UINT8",
                     "functionHash": 0,
                     "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                }
+            ]
+        },
+        {
+            "base_data_class_name": "CPointEntity",
+            "class_name": "CPathNode",
+            "data_class_name": "CPathNode",
+            "fields": [
+                {
+                    "externalName": "in_tangent_local",
+                    "fieldName": "m_vInTangentLocal",
+                    "fieldType": "FIELD_VECTOR",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "out_tangent_local",
+                    "fieldName": "m_vOutTangentLocal",
+                    "fieldType": "FIELD_VECTOR",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "path_uniqueid",
+                    "fieldName": "m_strParentPathUniqueID",
+                    "fieldType": "FIELD_UTLSTRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "path_parameter_string",
+                    "fieldName": "m_strPathNodeParameter",
+                    "fieldType": "FIELD_UTLSTRING",
+                    "functionHash": 0,
+                    "isFunction": false,
+                    "isInput": false,
+                    "isOutput": false
+                },
+                {
+                    "externalName": "",
+                    "fieldName": "CPathNodeParentedMoveThink",
+                    "fieldType": "FIELD_VOID",
+                    "functionHash": 2864393235,
+                    "isFunction": true,
                     "isInput": false,
                     "isOutput": false
                 }

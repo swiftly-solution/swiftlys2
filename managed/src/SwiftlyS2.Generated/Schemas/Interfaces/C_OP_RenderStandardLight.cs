@@ -21,7 +21,7 @@ public partial interface C_OP_RenderStandardLight : CParticleFunctionRenderer, I
 
     public ref ParticleColorBlendType_t ColorBlendType { get; }
 
-    public CParticleCollectionFloatInput Intensity { get; }
+    public CPerParticleFloatInput Intensity { get; }
 
     public ref bool CastShadows { get; }
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLogicMeasureMovement : CLogicalEntity, ISchemaClass<CLogicMeasureMovement>
 {
     static CLogicMeasureMovement ISchemaClass<CLogicMeasureMovement>.From(nint handle) => new CLogicMeasureMovementImpl(handle);
-    static int ISchemaClass<CLogicMeasureMovement>.Size => 1312;
+    static int ISchemaClass<CLogicMeasureMovement>.Size => 1240;
     static string? ISchemaClass<CLogicMeasureMovement>.ClassName => "logic_measure_movement";
 
 

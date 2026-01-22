@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSObserver_ObserverServices : CPlayer_ObserverServices, ISchemaClass<CCSObserver_ObserverServices>
 {
     static CCSObserver_ObserverServices ISchemaClass<CCSObserver_ObserverServices>.From(nint handle) => new CCSObserver_ObserverServicesImpl(handle);
-    static int ISchemaClass<CCSObserver_ObserverServices>.Size => 120;
+    static int ISchemaClass<CCSObserver_ObserverServices>.Size => 128;
     static string? ISchemaClass<CCSObserver_ObserverServices>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRotButton : CBaseButton, ISchemaClass<CRotButton>
 {
     static CRotButton ISchemaClass<CRotButton>.From(nint handle) => new CRotButtonImpl(handle);
-    static int ISchemaClass<CRotButton>.Size => 2472;
+    static int ISchemaClass<CRotButton>.Size => 2224;
     static string? ISchemaClass<CRotButton>.ClassName => "func_rot_button";
 
 

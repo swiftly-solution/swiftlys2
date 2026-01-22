@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayer_RadioServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_RadioServices>
 {
     static CCSPlayer_RadioServices ISchemaClass<CCSPlayer_RadioServices>.From(nint handle) => new CCSPlayer_RadioServicesImpl(handle);
-    static int ISchemaClass<CCSPlayer_RadioServices>.Size => 96;
+    static int ISchemaClass<CCSPlayer_RadioServices>.Size => 104;
     static string? ISchemaClass<CCSPlayer_RadioServices>.ClassName => null;
 
 

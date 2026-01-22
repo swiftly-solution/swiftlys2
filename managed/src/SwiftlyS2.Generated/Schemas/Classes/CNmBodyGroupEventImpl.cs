@@ -28,6 +28,14 @@ internal partial class CNmBodyGroupEventImpl : CNmEventImpl, CNmBodyGroupEvent
             Schema.SetCUtlString(_Handle, _GroupNameOffset!.Value, value);
         }
     } 
+    private static nint? _GroupValueOffset;
+
+    public ref int GroupValue {
+        get {
+            _GroupValueOffset = _GroupValueOffset ?? Schema.GetOffset(0xBC3A00162501A499);
+            return ref _Handle.AsRef<int>(_GroupValueOffset!.Value);
+        }
+    }
 
 
 }

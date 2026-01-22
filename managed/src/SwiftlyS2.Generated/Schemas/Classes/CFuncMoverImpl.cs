@@ -84,14 +84,6 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
             return ref _Handle.AsRef<bool>(_IsReversingOffset!.Value);
         }
     }
-    private static nint? _TargetOffset;
-
-    public ref Vector Target {
-        get {
-            _TargetOffset = _TargetOffset ?? Schema.GetOffset(0x320E8B69C61225FC);
-            return ref _Handle.AsRef<Vector>(_TargetOffset!.Value);
-        }
-    }
     private static nint? _StartSpeedOffset;
 
     public ref float StartSpeed {
@@ -172,6 +164,38 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
             return ref _Handle.AsRef<float>(_TimeToReachZeroSpeedOffset!.Value);
         }
     }
+    private static nint? _ComputedDistanceToReachMaxSpeedOffset;
+
+    public ref float ComputedDistanceToReachMaxSpeed {
+        get {
+            _ComputedDistanceToReachMaxSpeedOffset = _ComputedDistanceToReachMaxSpeedOffset ?? Schema.GetOffset(0x320E8B69359FD260);
+            return ref _Handle.AsRef<float>(_ComputedDistanceToReachMaxSpeedOffset!.Value);
+        }
+    }
+    private static nint? _ComputedDistanceToReachZeroSpeedOffset;
+
+    public ref float ComputedDistanceToReachZeroSpeed {
+        get {
+            _ComputedDistanceToReachZeroSpeedOffset = _ComputedDistanceToReachZeroSpeedOffset ?? Schema.GetOffset(0x320E8B694037DD4A);
+            return ref _Handle.AsRef<float>(_ComputedDistanceToReachZeroSpeedOffset!.Value);
+        }
+    }
+    private static nint? _StartCurveScaleOffset;
+
+    public ref float StartCurveScale {
+        get {
+            _StartCurveScaleOffset = _StartCurveScaleOffset ?? Schema.GetOffset(0x320E8B6933788D4E);
+            return ref _Handle.AsRef<float>(_StartCurveScaleOffset!.Value);
+        }
+    }
+    private static nint? _StopCurveScaleOffset;
+
+    public ref float StopCurveScale {
+        get {
+            _StopCurveScaleOffset = _StopCurveScaleOffset ?? Schema.GetOffset(0x320E8B69507BDED4);
+            return ref _Handle.AsRef<float>(_StopCurveScaleOffset!.Value);
+        }
+    }
     private static nint? _DistanceToReachZeroSpeedOffset;
 
     public ref float DistanceToReachZeroSpeed {
@@ -210,6 +234,22 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         get {
             _PathLocationToBeginStopOffset = _PathLocationToBeginStopOffset ?? Schema.GetOffset(0x320E8B69976C5777);
             return ref _Handle.AsRef<float>(_PathLocationToBeginStopOffset!.Value);
+        }
+    }
+    private static nint? _PathLocationStartOffset;
+
+    public ref float PathLocationStart {
+        get {
+            _PathLocationStartOffset = _PathLocationStartOffset ?? Schema.GetOffset(0x320E8B692C806F55);
+            return ref _Handle.AsRef<float>(_PathLocationStartOffset!.Value);
+        }
+    }
+    private static nint? _BeginStopTOffset;
+
+    public ref float BeginStopT {
+        get {
+            _BeginStopTOffset = _BeginStopTOffset ?? Schema.GetOffset(0x320E8B69BCC3AE54);
+            return ref _Handle.AsRef<float>(_BeginStopTOffset!.Value);
         }
     }
     private static nint? _StartForwardSoundOffset;
@@ -320,6 +360,14 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
             return ref _Handle.AsRef<bool>(_StartAtEndOffset!.Value);
         }
     }
+    private static nint? _StartFollowingClosestMoverOffset;
+
+    public ref bool StartFollowingClosestMover {
+        get {
+            _StartFollowingClosestMoverOffset = _StartFollowingClosestMoverOffset ?? Schema.GetOffset(0x320E8B69AAD3ACDA);
+            return ref _Handle.AsRef<bool>(_StartFollowingClosestMoverOffset!.Value);
+        }
+    }
     private static nint? _OrientationUpdateOffset;
 
     public ref CFuncMover__OrientationUpdate_t OrientationUpdate {
@@ -378,10 +426,10 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
     }
     private static nint? _OnNodePassedOffset;
 
-    public ref CEntityIOOutput OnNodePassed {
+    public SchemaUntypedField OnNodePassed {
         get {
             _OnNodePassedOffset = _OnNodePassedOffset ?? Schema.GetOffset(0x320E8B69709328FC);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnNodePassedOffset!.Value);
+            return new SchemaUntypedField(_Handle + _OnNodePassedOffset!.Value);
         }
     }
     private static nint? _OrientationMatchEntityNameOffset;
@@ -606,6 +654,90 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
         get {
             _FollowEntityDirectionOffset = _FollowEntityDirectionOffset ?? Schema.GetOffset(0x320E8B69E14C9BB7);
             return ref _Handle.AsRef<CFuncMover__FollowEntityDirection_t>(_FollowEntityDirectionOffset!.Value);
+        }
+    }
+    private static nint? _FollowMoverOffset;
+
+    public ref CHandle<CFuncMover> FollowMover {
+        get {
+            _FollowMoverOffset = _FollowMoverOffset ?? Schema.GetOffset(0x320E8B69F740ACBF);
+            return ref _Handle.AsRef<CHandle<CFuncMover>>(_FollowMoverOffset!.Value);
+        }
+    }
+    private static nint? _FollowMoverEntityNameOffset;
+
+    public string FollowMoverEntityName {
+        get {
+            _FollowMoverEntityNameOffset = _FollowMoverEntityNameOffset ?? Schema.GetOffset(0x320E8B69C148B6E1);
+            return Schema.GetString(_Handle.Read<nint>(_FollowMoverEntityNameOffset!.Value));
+        }
+        set {
+            _FollowMoverEntityNameOffset = _FollowMoverEntityNameOffset ?? Schema.GetOffset(0x320E8B69C148B6E1);
+            Schema.SetString(_Handle, _FollowMoverEntityNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _FollowMoverDistanceOffset;
+
+    public ref float FollowMoverDistance {
+        get {
+            _FollowMoverDistanceOffset = _FollowMoverDistanceOffset ?? Schema.GetOffset(0x320E8B6997F8FE00);
+            return ref _Handle.AsRef<float>(_FollowMoverDistanceOffset!.Value);
+        }
+    }
+    private static nint? _FollowMoverCalculatedDistanceOffset;
+
+    public ref float FollowMoverCalculatedDistance {
+        get {
+            _FollowMoverCalculatedDistanceOffset = _FollowMoverCalculatedDistanceOffset ?? Schema.GetOffset(0x320E8B6956A2C074);
+            return ref _Handle.AsRef<float>(_FollowMoverCalculatedDistanceOffset!.Value);
+        }
+    }
+    private static nint? _FollowMoverSpringStrengthOffset;
+
+    public ref float FollowMoverSpringStrength {
+        get {
+            _FollowMoverSpringStrengthOffset = _FollowMoverSpringStrengthOffset ?? Schema.GetOffset(0x320E8B695CE8CC87);
+            return ref _Handle.AsRef<float>(_FollowMoverSpringStrengthOffset!.Value);
+        }
+    }
+    private static nint? _FollowConstraintsInitializedOffset;
+
+    public ref bool FollowConstraintsInitialized {
+        get {
+            _FollowConstraintsInitializedOffset = _FollowConstraintsInitializedOffset ?? Schema.GetOffset(0x320E8B692E4782E2);
+            return ref _Handle.AsRef<bool>(_FollowConstraintsInitializedOffset!.Value);
+        }
+    }
+    private static nint? _FollowConstraintOffset;
+
+    public ref CFuncMover__FollowConstraint_t FollowConstraint {
+        get {
+            _FollowConstraintOffset = _FollowConstraintOffset ?? Schema.GetOffset(0x320E8B6997B1D7F2);
+            return ref _Handle.AsRef<CFuncMover__FollowConstraint_t>(_FollowConstraintOffset!.Value);
+        }
+    }
+    private static nint? _FollowMoverSpeedOffset;
+
+    public ref float FollowMoverSpeed {
+        get {
+            _FollowMoverSpeedOffset = _FollowMoverSpeedOffset ?? Schema.GetOffset(0x320E8B69C50E41B2);
+            return ref _Handle.AsRef<float>(_FollowMoverSpeedOffset!.Value);
+        }
+    }
+    private static nint? _FollowMoverVelocityOffset;
+
+    public ref float FollowMoverVelocity {
+        get {
+            _FollowMoverVelocityOffset = _FollowMoverVelocityOffset ?? Schema.GetOffset(0x320E8B69141496E0);
+            return ref _Handle.AsRef<float>(_FollowMoverVelocityOffset!.Value);
+        }
+    }
+    private static nint? _TickMovementRanOffset;
+
+    public GameTick_t TickMovementRan {
+        get {
+            _TickMovementRanOffset = _TickMovementRanOffset ?? Schema.GetOffset(0x320E8B694A0C4C8E);
+            return new GameTick_tImpl(_Handle + _TickMovementRanOffset!.Value);
         }
     }
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPointAngleSensor : CPointEntity, ISchemaClass<CPointAngleSensor>
 {
     static CPointAngleSensor ISchemaClass<CPointAngleSensor>.From(nint handle) => new CPointAngleSensorImpl(handle);
-    static int ISchemaClass<CPointAngleSensor>.Size => 1464;
+    static int ISchemaClass<CPointAngleSensor>.Size => 1352;
     static string? ISchemaClass<CPointAngleSensor>.ClassName => "point_anglesensor";
 
 
@@ -35,10 +35,10 @@ public partial interface CPointAngleSensor : CPointEntity, ISchemaClass<CPointAn
 
     public ref CEntityIOOutput OnNotFacingLookat { get; }
 
-    // CEntityOutputTemplate< Vector >
+    // CEntityOutputTemplate< Vector, Vector >
     public SchemaUntypedField TargetDir { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField FacingPercentage { get; }
 
 

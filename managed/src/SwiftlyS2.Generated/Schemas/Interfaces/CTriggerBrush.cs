@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerBrush : CBaseModelEntity, ISchemaClass<CTriggerBrush>
 {
     static CTriggerBrush ISchemaClass<CTriggerBrush>.From(nint handle) => new CTriggerBrushImpl(handle);
-    static int ISchemaClass<CTriggerBrush>.Size => 2136;
+    static int ISchemaClass<CTriggerBrush>.Size => 1920;
     static string? ISchemaClass<CTriggerBrush>.ClassName => "trigger_brush";
 
 

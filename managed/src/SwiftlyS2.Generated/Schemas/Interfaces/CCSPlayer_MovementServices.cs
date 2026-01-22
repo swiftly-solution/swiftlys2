@@ -11,13 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_Humanoid, ISchemaClass<CCSPlayer_MovementServices>
 {
     static CCSPlayer_MovementServices ISchemaClass<CCSPlayer_MovementServices>.From(nint handle) => new CCSPlayer_MovementServicesImpl(handle);
-    static int ISchemaClass<CCSPlayer_MovementServices>.Size => 3600;
+    static int ISchemaClass<CCSPlayer_MovementServices>.Size => 3680;
     static string? ISchemaClass<CCSPlayer_MovementServices>.ClassName => null;
 
 
     public ref Vector LadderNormal { get; }
 
     public ref int LadderSurfacePropIndex { get; }
+
+    public ref bool Ducked { get; }
 
     public ref float DuckAmount { get; }
 
@@ -26,6 +28,8 @@ public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_H
     public ref bool DuckOverride { get; }
 
     public ref bool DesiresDuck { get; }
+
+    public ref bool Ducking { get; }
 
     public ref float DuckOffset { get; }
 
@@ -67,10 +71,6 @@ public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_H
 
     public ref int Footsteps { get; }
 
-    public ref bool OldJumpPressed { get; }
-
-    public ref float JumpPressedTime { get; }
-
     public GameTime_t StashGrenadeParameterWhen { get; }
 
     public ref ulong ButtonDownMaskPrev { get; }
@@ -89,7 +89,21 @@ public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_H
 
     public ref float StaminaAtJumpStart { get; }
 
+    public ref float VelMulAtJumpStart { get; }
+
     public ref float AccumulatedJumpError { get; }
+
+    public CCSPlayerLegacyJump LegacyJump { get; }
+
+    public CCSPlayerModernJump ModernJump { get; }
+
+    public GameTick_t LastJumpTick { get; }
+
+    public ref float LastJumpFrac { get; }
+
+    public ref float LastJumpVelocityZ { get; }
+
+    public ref bool JumpApexPending { get; }
 
     public ref float TicksSinceLastSurfingDetected { get; }
 
@@ -97,26 +111,29 @@ public partial interface CCSPlayer_MovementServices : CPlayer_MovementServices_H
 
     public ref Vector InputRotated { get; }
 
-    public ref bool JumpApexPending { get; }
-
-    public void LadderNormalUpdated();
     public void LadderSurfacePropIndexUpdated();
+    public void DuckedUpdated();
     public void DuckAmountUpdated();
     public void DuckSpeedUpdated();
     public void DuckOverrideUpdated();
     public void DesiresDuckUpdated();
+    public void DuckingUpdated();
     public void DuckOffsetUpdated();
     public void DuckTimeMsecsUpdated();
     public void DuckJumpTimeMsecsUpdated();
     public void JumpTimeMsecsUpdated();
     public void LastDuckTimeUpdated();
     public void GameCodeHasMovedPlayerAfterCommandUpdated();
-    public void OldJumpPressedUpdated();
     public void StashGrenadeParameterWhenUpdated();
     public void ButtonDownMaskPrevUpdated();
     public void OffsetTickCompleteTimeUpdated();
     public void OffsetTickStashedSpeedUpdated();
     public void StaminaUpdated();
-    public void WasSurfingUpdated();
+    public void LegacyJumpUpdated();
+    public void ModernJumpUpdated();
+    public void LastJumpTickUpdated();
+    public void LastJumpFracUpdated();
+    public void LastJumpVelocityZUpdated();
     public void JumpApexPendingUpdated();
+    public void WasSurfingUpdated();
 }

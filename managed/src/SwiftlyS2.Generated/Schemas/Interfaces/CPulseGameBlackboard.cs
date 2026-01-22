@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPulseGameBlackboard : CBaseEntity, ISchemaClass<CPulseGameBlackboard>
 {
     static CPulseGameBlackboard ISchemaClass<CPulseGameBlackboard>.From(nint handle) => new CPulseGameBlackboardImpl(handle);
-    static int ISchemaClass<CPulseGameBlackboard>.Size => 1288;
+    static int ISchemaClass<CPulseGameBlackboard>.Size => 1216;
     static string? ISchemaClass<CPulseGameBlackboard>.ClassName => "pulse_game_blackboard";
 
 

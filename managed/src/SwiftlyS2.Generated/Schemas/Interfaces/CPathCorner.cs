@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathCorner : CPointEntity, ISchemaClass<CPathCorner>
 {
     static CPathCorner ISchemaClass<CPathCorner>.From(nint handle) => new CPathCornerImpl(handle);
-    static int ISchemaClass<CPathCorner>.Size => 1312;
+    static int ISchemaClass<CPathCorner>.Size => 1224;
     static string? ISchemaClass<CPathCorner>.ClassName => "path_corner";
 
 

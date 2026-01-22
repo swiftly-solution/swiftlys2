@@ -144,6 +144,14 @@ internal partial class CPhysHingeImpl : CPhysConstraintImpl, CPhysHinge
             return ref _Handle.AsRef<float>(_AngleSpeedThresholdOffset!.Value);
         }
     }
+    private static nint? _LimitsDebugVisRotationOffset;
+
+    public ref float LimitsDebugVisRotation {
+        get {
+            _LimitsDebugVisRotationOffset = _LimitsDebugVisRotationOffset ?? Schema.GetOffset(0xFCB149B1EB6B39D2);
+            return ref _Handle.AsRef<float>(_LimitsDebugVisRotationOffset!.Value);
+        }
+    }
     private static nint? _OnStartMovingOffset;
 
     public ref CEntityIOOutput OnStartMoving {

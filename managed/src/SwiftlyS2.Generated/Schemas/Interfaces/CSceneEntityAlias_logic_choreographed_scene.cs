@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSceneEntityAlias_logic_choreographed_scene : CSceneEntity, ISchemaClass<CSceneEntityAlias_logic_choreographed_scene>
 {
     static CSceneEntityAlias_logic_choreographed_scene ISchemaClass<CSceneEntityAlias_logic_choreographed_scene>.From(nint handle) => new CSceneEntityAlias_logic_choreographed_sceneImpl(handle);
-    static int ISchemaClass<CSceneEntityAlias_logic_choreographed_scene>.Size => 2640;
+    static int ISchemaClass<CSceneEntityAlias_logic_choreographed_scene>.Size => 1840;
     static string? ISchemaClass<CSceneEntityAlias_logic_choreographed_scene>.ClassName => null;
 
 

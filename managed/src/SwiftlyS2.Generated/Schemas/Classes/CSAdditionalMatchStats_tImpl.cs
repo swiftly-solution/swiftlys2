@@ -16,20 +16,20 @@ internal partial class CSAdditionalMatchStats_tImpl : CSAdditionalPerRoundStats_
 {
     public CSAdditionalMatchStats_tImpl(nint handle) : base(handle) { }
 
-    private static nint? _NumRoundsSurvivedOffset;
+    private static nint? _NumRoundsSurvivedStreakOffset;
 
-    public ref int NumRoundsSurvived {
+    public ref int NumRoundsSurvivedStreak {
         get {
-            _NumRoundsSurvivedOffset = _NumRoundsSurvivedOffset ?? Schema.GetOffset(0x22CBC1150E685E90);
-            return ref _Handle.AsRef<int>(_NumRoundsSurvivedOffset!.Value);
+            _NumRoundsSurvivedStreakOffset = _NumRoundsSurvivedStreakOffset ?? Schema.GetOffset(0x22CBC11586C59622);
+            return ref _Handle.AsRef<int>(_NumRoundsSurvivedStreakOffset!.Value);
         }
     }
-    private static nint? _MaxNumRoundsSurvivedOffset;
+    private static nint? _MaxNumRoundsSurvivedStreakOffset;
 
-    public ref int MaxNumRoundsSurvived {
+    public ref int MaxNumRoundsSurvivedStreak {
         get {
-            _MaxNumRoundsSurvivedOffset = _MaxNumRoundsSurvivedOffset ?? Schema.GetOffset(0x22CBC115C3CE99BC);
-            return ref _Handle.AsRef<int>(_MaxNumRoundsSurvivedOffset!.Value);
+            _MaxNumRoundsSurvivedStreakOffset = _MaxNumRoundsSurvivedStreakOffset ?? Schema.GetOffset(0x22CBC1153C4DCEFE);
+            return ref _Handle.AsRef<int>(_MaxNumRoundsSurvivedStreakOffset!.Value);
         }
     }
     private static nint? _NumRoundsSurvivedTotalOffset;

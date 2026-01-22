@@ -27,6 +27,12 @@ public partial interface VPhysicsCollisionAttribute_t : ISchemaClass<VPhysicsCol
 
     public ref ushort HierarchyId { get; }
 
+    public ref ushort DetailLayerMask { get; }
+
+    public ref byte DetailLayerMaskType { get; }
+
+    public ref byte TargetDetailLayer { get; }
+
     public ref byte CollisionGroup { get; }
 
     public ref byte CollisionFunctionMask { get; }
@@ -37,6 +43,9 @@ public partial interface VPhysicsCollisionAttribute_t : ISchemaClass<VPhysicsCol
     public void EntityIdUpdated();
     public void OwnerIdUpdated();
     public void HierarchyIdUpdated();
+    public void DetailLayerMaskUpdated();
+    public void DetailLayerMaskTypeUpdated();
+    public void TargetDetailLayerUpdated();
     public void CollisionGroupUpdated();
     public void CollisionFunctionMaskUpdated();
 }

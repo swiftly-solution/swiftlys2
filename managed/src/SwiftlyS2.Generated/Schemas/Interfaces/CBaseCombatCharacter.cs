@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseCombatCharacter : CBaseFlex, ISchemaClass<CBaseCombatCharacter>
 {
     static CBaseCombatCharacter ISchemaClass<CBaseCombatCharacter>.From(nint handle) => new CBaseCombatCharacterImpl(handle);
-    static int ISchemaClass<CBaseCombatCharacter>.Size => 3040;
+    static int ISchemaClass<CBaseCombatCharacter>.Size => 2928;
     static string? ISchemaClass<CBaseCombatCharacter>.ClassName => null;
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundEventEntityAlias_snd_event_point : CSoundEventEntity, ISchemaClass<CSoundEventEntityAlias_snd_event_point>
 {
     static CSoundEventEntityAlias_snd_event_point ISchemaClass<CSoundEventEntityAlias_snd_event_point>.From(nint handle) => new CSoundEventEntityAlias_snd_event_pointImpl(handle);
-    static int ISchemaClass<CSoundEventEntityAlias_snd_event_point>.Size => 1464;
+    static int ISchemaClass<CSoundEventEntityAlias_snd_event_point>.Size => 1368;
     static string? ISchemaClass<CSoundEventEntityAlias_snd_event_point>.ClassName => null;
 
 

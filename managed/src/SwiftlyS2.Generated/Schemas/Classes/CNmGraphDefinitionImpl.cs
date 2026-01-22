@@ -32,6 +32,15 @@ internal partial class CNmGraphDefinitionImpl : SchemaClass, CNmGraphDefinition
             return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmSkeleton>>(_SkeletonOffset!.Value);
         }
     }
+    private static nint? _UserDataOffset;
+
+    public CNmGraphVariationUserData? UserData {
+        get {
+            _UserDataOffset = _UserDataOffset ?? Schema.GetOffset(0xE028E08CBDF39484);
+            var ptr = _Handle.Read<nint>(_UserDataOffset!.Value);
+            return ptr.IsValidPtr() ? new CNmGraphVariationUserDataImpl(ptr) : null;
+        }
+    }
     private static nint? _PersistentNodeIndicesOffset;
 
     public ref CUtlVector<short> PersistentNodeIndices {
@@ -86,6 +95,14 @@ internal partial class CNmGraphDefinitionImpl : SchemaClass, CNmGraphDefinition
         get {
             _ExternalGraphSlotsOffset = _ExternalGraphSlotsOffset ?? Schema.GetOffset(0xE028E08CECBCD94F);
             return ref _Handle.AsRef<CUtlVector<CNmGraphDefinition__ExternalGraphSlot_t>>(_ExternalGraphSlotsOffset!.Value);
+        }
+    }
+    private static nint? _ExternalPoseSlotsOffset;
+
+    public ref CUtlVector<CNmGraphDefinition__ExternalPoseSlot_t> ExternalPoseSlots {
+        get {
+            _ExternalPoseSlotsOffset = _ExternalPoseSlotsOffset ?? Schema.GetOffset(0xE028E08CC2BA12A0);
+            return ref _Handle.AsRef<CUtlVector<CNmGraphDefinition__ExternalPoseSlot_t>>(_ExternalPoseSlotsOffset!.Value);
         }
     }
     private static nint? _NodePathsOffset;

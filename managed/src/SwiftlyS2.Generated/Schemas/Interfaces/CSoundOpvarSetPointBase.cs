@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundOpvarSetPointBase : CBaseEntity, ISchemaClass<CSoundOpvarSetPointBase>
 {
     static CSoundOpvarSetPointBase ISchemaClass<CSoundOpvarSetPointBase>.From(nint handle) => new CSoundOpvarSetPointBaseImpl(handle);
-    static int ISchemaClass<CSoundOpvarSetPointBase>.Size => 1432;
+    static int ISchemaClass<CSoundOpvarSetPointBase>.Size => 1360;
     static string? ISchemaClass<CSoundOpvarSetPointBase>.ClassName => "snd_opvar_set_point_base";
 
 
@@ -23,6 +23,8 @@ public partial interface CSoundOpvarSetPointBase : CBaseEntity, ISchemaClass<CSo
 
     public ref Vector LastPosition { get; }
 
+    public ref float RefreshTime { get; }
+
     public string StackName { get; set; }
 
     public string OperatorName { get; set; }
@@ -33,9 +35,12 @@ public partial interface CSoundOpvarSetPointBase : CBaseEntity, ISchemaClass<CSo
 
     public ref bool UseAutoCompare { get; }
 
+    public ref bool FastRefresh { get; }
+
     public void StackNameUpdated();
     public void OperatorNameUpdated();
     public void OpvarNameUpdated();
     public void OpvarIndexUpdated();
     public void UseAutoCompareUpdated();
+    public void FastRefreshUpdated();
 }

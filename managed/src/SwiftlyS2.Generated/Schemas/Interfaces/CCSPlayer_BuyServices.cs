@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayer_BuyServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_BuyServices>
 {
     static CCSPlayer_BuyServices ISchemaClass<CCSPlayer_BuyServices>.From(nint handle) => new CCSPlayer_BuyServicesImpl(handle);
-    static int ISchemaClass<CCSPlayer_BuyServices>.Size => 336;
+    static int ISchemaClass<CCSPlayer_BuyServices>.Size => 344;
     static string? ISchemaClass<CCSPlayer_BuyServices>.ClassName => null;
 
 

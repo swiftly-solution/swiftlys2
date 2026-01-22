@@ -40,6 +40,30 @@ internal partial class CNmAimCSNode__CDefinitionImpl : CNmPassthroughNode__CDefi
             return ref _Handle.AsRef<short>(_WeaponCategoryNodeIdxOffset!.Value);
         }
     }
+    private static nint? _WeaponTypeNodeIdxOffset;
+
+    public ref short WeaponTypeNodeIdx {
+        get {
+            _WeaponTypeNodeIdxOffset = _WeaponTypeNodeIdxOffset ?? Schema.GetOffset(0xE1CD14C247A17C20);
+            return ref _Handle.AsRef<short>(_WeaponTypeNodeIdxOffset!.Value);
+        }
+    }
+    private static nint? _IsWeaponActionActiveNodeIdxOffset;
+
+    public ref short IsWeaponActionActiveNodeIdx {
+        get {
+            _IsWeaponActionActiveNodeIdxOffset = _IsWeaponActionActiveNodeIdxOffset ?? Schema.GetOffset(0xE1CD14C25E2B07E4);
+            return ref _Handle.AsRef<short>(_IsWeaponActionActiveNodeIdxOffset!.Value);
+        }
+    }
+    private static nint? _WeaponDropNodeIdxOffset;
+
+    public ref short WeaponDropNodeIdx {
+        get {
+            _WeaponDropNodeIdxOffset = _WeaponDropNodeIdxOffset ?? Schema.GetOffset(0xE1CD14C202143DDF);
+            return ref _Handle.AsRef<short>(_WeaponDropNodeIdxOffset!.Value);
+        }
+    }
     private static nint? _EnabledNodeIdxOffset;
 
     public ref short EnabledNodeIdx {
@@ -54,6 +78,14 @@ internal partial class CNmAimCSNode__CDefinitionImpl : CNmPassthroughNode__CDefi
         get {
             _BlendTimeSecondsOffset = _BlendTimeSecondsOffset ?? Schema.GetOffset(0xE1CD14C26D3A08FC);
             return ref _Handle.AsRef<float>(_BlendTimeSecondsOffset!.Value);
+        }
+    }
+    private static nint? _ReduceRangeTimeSecondsOffset;
+
+    public ref float ReduceRangeTimeSeconds {
+        get {
+            _ReduceRangeTimeSecondsOffset = _ReduceRangeTimeSecondsOffset ?? Schema.GetOffset(0xE1CD14C237BD9774);
+            return ref _Handle.AsRef<float>(_ReduceRangeTimeSecondsOffset!.Value);
         }
     }
 

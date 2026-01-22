@@ -48,6 +48,14 @@ internal partial class WorldNode_tImpl : SchemaClass, WorldNode_t
             return ref _Handle.AsRef<CUtlVector<ClutterSceneObject_t>>(_ClutterSceneObjectsOffset!.Value);
         }
     }
+    private static nint? _RtProxiesOffset;
+
+    public ref CUtlVector<AggregateRTProxySceneObject_t> RtProxies {
+        get {
+            _RtProxiesOffset = _RtProxiesOffset ?? Schema.GetOffset(0xFC310480EC4824A1);
+            return ref _Handle.AsRef<CUtlVector<AggregateRTProxySceneObject_t>>(_RtProxiesOffset!.Value);
+        }
+    }
     private static nint? _ExtraVertexStreamOverridesOffset;
 
     public ref CUtlVector<ExtraVertexStreamOverride_t> ExtraVertexStreamOverrides {

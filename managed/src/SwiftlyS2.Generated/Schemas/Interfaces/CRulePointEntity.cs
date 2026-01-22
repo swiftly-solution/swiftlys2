@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRulePointEntity : CRuleEntity, ISchemaClass<CRulePointEntity>
 {
     static CRulePointEntity ISchemaClass<CRulePointEntity>.From(nint handle) => new CRulePointEntityImpl(handle);
-    static int ISchemaClass<CRulePointEntity>.Size => 2024;
+    static int ISchemaClass<CRulePointEntity>.Size => 1856;
     static string? ISchemaClass<CRulePointEntity>.ClassName => null;
 
 

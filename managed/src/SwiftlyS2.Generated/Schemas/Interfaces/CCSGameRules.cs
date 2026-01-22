@@ -111,6 +111,8 @@ public partial interface CCSGameRules : CTeamplayRules, ISchemaClass<CCSGameRule
 
     public ref bool IsHltvActive { get; }
 
+    public ref bool BombPlanted { get; }
+
     public ISchemaFixedArray<ushort> ProhibitedItemIndices { get; }
 
     public ISchemaFixedArray<uint> TournamentActiveCasterAccounts { get; }
@@ -120,8 +122,6 @@ public partial interface CCSGameRules : CTeamplayRules, ISchemaClass<CCSGameRule
     public ref int HalloweenMaskListSeed { get; }
 
     public ref bool BombDropped { get; }
-
-    public ref bool BombPlanted { get; }
 
     public ref int RoundWinStatus { get; }
 
@@ -442,12 +442,12 @@ public partial interface CCSGameRules : CTeamplayRules, ISchemaClass<CCSGameRule
     public void IsDroppingItemsUpdated();
     public void IsQuestEligibleUpdated();
     public void IsHltvActiveUpdated();
+    public void BombPlantedUpdated();
     public void ProhibitedItemIndicesUpdated();
     public void TournamentActiveCasterAccountsUpdated();
     public void NumBestOfMapsUpdated();
     public void HalloweenMaskListSeedUpdated();
     public void BombDroppedUpdated();
-    public void BombPlantedUpdated();
     public void RoundWinStatusUpdated();
     public void RoundWinReasonUpdated();
     public void TCantBuyUpdated();

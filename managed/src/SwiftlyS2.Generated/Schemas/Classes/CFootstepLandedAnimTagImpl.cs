@@ -60,6 +60,14 @@ internal partial class CFootstepLandedAnimTagImpl : CAnimTagBaseImpl, CFootstepL
             Schema.SetCUtlString(_Handle, _BoneNameOffset!.Value, value);
         }
     } 
+    private static nint? _FootstepJumpPhaseOffset;
+
+    public ref FootstepJumpPhase_t FootstepJumpPhase {
+        get {
+            _FootstepJumpPhaseOffset = _FootstepJumpPhaseOffset ?? Schema.GetOffset(0xD5058C67F3E99D9A);
+            return ref _Handle.AsRef<FootstepJumpPhase_t>(_FootstepJumpPhaseOffset!.Value);
+        }
+    }
 
 
 }

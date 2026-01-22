@@ -11,9 +11,15 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface VMixSubgraphSwitchDesc_t : ISchemaClass<VMixSubgraphSwitchDesc_t>
 {
     static VMixSubgraphSwitchDesc_t ISchemaClass<VMixSubgraphSwitchDesc_t>.From(nint handle) => new VMixSubgraphSwitchDesc_tImpl(handle);
-    static int ISchemaClass<VMixSubgraphSwitchDesc_t>.Size => 12;
+    static int ISchemaClass<VMixSubgraphSwitchDesc_t>.Size => 56;
     static string? ISchemaClass<VMixSubgraphSwitchDesc_t>.ClassName => null;
 
+
+    public string Name { get; set; }
+
+    public string EffectName { get; set; }
+
+    public ref CUtlVector<CUtlString> Subgraphs { get; }
 
     public ref VMixSubgraphSwitchInterpolationType_t InterpolationMode { get; }
 

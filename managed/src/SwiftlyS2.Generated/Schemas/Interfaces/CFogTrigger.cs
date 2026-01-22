@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFogTrigger : CBaseTrigger, ISchemaClass<CFogTrigger>
 {
     static CFogTrigger ISchemaClass<CFogTrigger>.From(nint handle) => new CFogTriggerImpl(handle);
-    static int ISchemaClass<CFogTrigger>.Size => 2576;
+    static int ISchemaClass<CFogTrigger>.Size => 2296;
     static string? ISchemaClass<CFogTrigger>.ClassName => "trigger_fog";
 
 

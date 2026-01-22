@@ -32,12 +32,12 @@ internal partial class CPulse_ChunkImpl : SchemaClass, CPulse_Chunk
             return ref _Handle.AsRef<CUtlLeanVector<CPulse_RegisterInfo, int>>(_RegistersOffset!.Value);
         }
     }
-    private static nint? _InstructionEditorIDsOffset;
+    private static nint? _InstructionDebugInfosOffset;
 
-    public ref CUtlLeanVector<PulseDocNodeID_t, int> InstructionEditorIDs {
+    public ref CUtlLeanVector<CPulse_InstructionDebug, int> InstructionDebugInfos {
         get {
-            _InstructionEditorIDsOffset = _InstructionEditorIDsOffset ?? Schema.GetOffset(0x81693209236D8B64);
-            return ref _Handle.AsRef<CUtlLeanVector<PulseDocNodeID_t, int>>(_InstructionEditorIDsOffset!.Value);
+            _InstructionDebugInfosOffset = _InstructionDebugInfosOffset ?? Schema.GetOffset(0x816932095788D5D7);
+            return ref _Handle.AsRef<CUtlLeanVector<CPulse_InstructionDebug, int>>(_InstructionDebugInfosOffset!.Value);
         }
     }
 

@@ -8,7 +8,7 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerRandomSampler : CVoiceContainerBase, ISchemaClass<CVoiceContainerRandomSampler>
+public partial interface CVoiceContainerRandomSampler : CVoiceContainerAsyncGenerator, ISchemaClass<CVoiceContainerRandomSampler>
 {
     static CVoiceContainerRandomSampler ISchemaClass<CVoiceContainerRandomSampler>.From(nint handle) => new CVoiceContainerRandomSamplerImpl(handle);
     static int ISchemaClass<CVoiceContainerRandomSampler>.Size => 480;

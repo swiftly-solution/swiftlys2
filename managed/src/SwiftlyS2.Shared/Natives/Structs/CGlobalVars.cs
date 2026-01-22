@@ -34,6 +34,8 @@ public struct CGlobalVars
     private int _unk09;
     private int _unk10;
     public float SubtickFraction;
+    public float IntervalPerTick;
+    private float Unknown;
     public CString MapName;
     public CString StartSpot;
     public MapLoadType_t MapLoadType;

@@ -104,6 +104,14 @@ internal partial class CBreakableImpl : CBaseModelEntityImpl, CBreakable
             return ref _Handle.AsRef<EOverrideBlockLOS_t>(_OverrideBlockLOSOffset!.Value);
         }
     }
+    private static nint? _OnStartDeathOffset;
+
+    public ref CEntityIOOutput OnStartDeath {
+        get {
+            _OnStartDeathOffset = _OnStartDeathOffset ?? Schema.GetOffset(0xC5CDE329F3ED4C8E);
+            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartDeathOffset!.Value);
+        }
+    }
     private static nint? _OnBreakOffset;
 
     public ref CEntityIOOutput OnBreak {

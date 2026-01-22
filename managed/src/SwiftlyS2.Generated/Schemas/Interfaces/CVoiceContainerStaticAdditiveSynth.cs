@@ -8,7 +8,7 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerStaticAdditiveSynth : CVoiceContainerBase, ISchemaClass<CVoiceContainerStaticAdditiveSynth>
+public partial interface CVoiceContainerStaticAdditiveSynth : CVoiceContainerAsyncGenerator, ISchemaClass<CVoiceContainerStaticAdditiveSynth>
 {
     static CVoiceContainerStaticAdditiveSynth ISchemaClass<CVoiceContainerStaticAdditiveSynth>.From(nint handle) => new CVoiceContainerStaticAdditiveSynthImpl(handle);
     static int ISchemaClass<CVoiceContainerStaticAdditiveSynth>.Size => 232;

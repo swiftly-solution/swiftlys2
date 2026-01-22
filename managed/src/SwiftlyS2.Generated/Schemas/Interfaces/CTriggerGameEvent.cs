@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerGameEvent : CBaseTrigger, ISchemaClass<CTriggerGameEvent>
 {
     static CTriggerGameEvent ISchemaClass<CTriggerGameEvent>.From(nint handle) => new CTriggerGameEventImpl(handle);
-    static int ISchemaClass<CTriggerGameEvent>.Size => 2496;
+    static int ISchemaClass<CTriggerGameEvent>.Size => 2216;
     static string? ISchemaClass<CTriggerGameEvent>.ClassName => "trigger_game_event";
 
 

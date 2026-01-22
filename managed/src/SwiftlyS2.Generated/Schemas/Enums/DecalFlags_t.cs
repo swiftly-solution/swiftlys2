@@ -10,6 +10,8 @@ public enum DecalFlags_t : uint
 
  eCannotClear = 1,
 
+ eDecalProjectToBackfaces = 2,
+
  eAll = 4294967295,
 
  eAllButCannotClear = 4294967294,

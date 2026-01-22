@@ -178,13 +178,13 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
         }
     }
 
-    auto sdkclass = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    sdkclass->Load();
-
     auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
     gamedata->GetOffsets()->Load(GetCurrentGame());
     gamedata->GetSignatures()->Load(GetCurrentGame());
     gamedata->GetPatches()->Load(GetCurrentGame());
+
+    auto sdkclass = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
+    sdkclass->Load();
 
     if (std::string* s = std::get_if<std::string>(&configuration->GetValue("core.PatchesToPerform")))
     {

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CDebugHistory : CBaseEntity, ISchemaClass<CDebugHistory>
 {
     static CDebugHistory ISchemaClass<CDebugHistory>.From(nint handle) => new CDebugHistoryImpl(handle);
-    static int ISchemaClass<CDebugHistory>.Size => 4101336;
+    static int ISchemaClass<CDebugHistory>.Size => 4101264;
     static string? ISchemaClass<CDebugHistory>.ClassName => "env_debughistory";
 
 

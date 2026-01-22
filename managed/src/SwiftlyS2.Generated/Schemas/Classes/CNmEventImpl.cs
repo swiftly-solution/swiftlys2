@@ -16,20 +16,20 @@ internal partial class CNmEventImpl : SchemaClass, CNmEvent
 {
     public CNmEventImpl(nint handle) : base(handle) { }
 
-    private static nint? _StartTimeSecondsOffset;
+    private static nint? _StartTimeOffset;
 
-    public ref float StartTimeSeconds {
+    public NmPercent_t StartTime {
         get {
-            _StartTimeSecondsOffset = _StartTimeSecondsOffset ?? Schema.GetOffset(0xF9871009C1FCF499);
-            return ref _Handle.AsRef<float>(_StartTimeSecondsOffset!.Value);
+            _StartTimeOffset = _StartTimeOffset ?? Schema.GetOffset(0xF987100967FE9DC4);
+            return new NmPercent_tImpl(_Handle + _StartTimeOffset!.Value);
         }
     }
-    private static nint? _DurationSecondsOffset;
+    private static nint? _DurationOffset;
 
-    public ref float DurationSeconds {
+    public NmPercent_t Duration {
         get {
-            _DurationSecondsOffset = _DurationSecondsOffset ?? Schema.GetOffset(0xF9871009917797C0);
-            return ref _Handle.AsRef<float>(_DurationSecondsOffset!.Value);
+            _DurationOffset = _DurationOffset ?? Schema.GetOffset(0xF9871009BC5E3BAB);
+            return new NmPercent_tImpl(_Handle + _DurationOffset!.Value);
         }
     }
     private static nint? _SyncIDOffset;

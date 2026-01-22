@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CItemSoda : CBaseAnimGraph, ISchemaClass<CItemSoda>
 {
     static CItemSoda ISchemaClass<CItemSoda>.From(nint handle) => new CItemSodaImpl(handle);
-    static int ISchemaClass<CItemSoda>.Size => 2704;
+    static int ISchemaClass<CItemSoda>.Size => 2592;
     static string? ISchemaClass<CItemSoda>.ClassName => "item_sodacan";
 
 

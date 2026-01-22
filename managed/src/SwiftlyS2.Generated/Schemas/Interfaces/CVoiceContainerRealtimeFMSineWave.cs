@@ -8,10 +8,10 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerRealtimeFMSineWave : CVoiceContainerBase, ISchemaClass<CVoiceContainerRealtimeFMSineWave>
+public partial interface CVoiceContainerRealtimeFMSineWave : CVoiceContainerGenerator, ISchemaClass<CVoiceContainerRealtimeFMSineWave>
 {
     static CVoiceContainerRealtimeFMSineWave ISchemaClass<CVoiceContainerRealtimeFMSineWave>.From(nint handle) => new CVoiceContainerRealtimeFMSineWaveImpl(handle);
-    static int ISchemaClass<CVoiceContainerRealtimeFMSineWave>.Size => 200;
+    static int ISchemaClass<CVoiceContainerRealtimeFMSineWave>.Size => 184;
     static string? ISchemaClass<CVoiceContainerRealtimeFMSineWave>.ClassName => null;
 
 

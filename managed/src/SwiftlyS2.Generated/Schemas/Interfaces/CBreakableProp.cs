@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBreakableProp : CBaseProp, ISchemaClass<CBreakableProp>
 {
     static CBreakableProp ISchemaClass<CBreakableProp>.From(nint handle) => new CBreakablePropImpl(handle);
-    static int ISchemaClass<CBreakableProp>.Size => 3152;
+    static int ISchemaClass<CBreakableProp>.Size => 2976;
     static string? ISchemaClass<CBreakableProp>.ClassName => null;
 
 
@@ -21,7 +21,7 @@ public partial interface CBreakableProp : CBaseProp, ISchemaClass<CBreakableProp
 
     public ref CEntityIOOutput OnBreak { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField OnHealthChanged { get; }
 
     public ref CEntityIOOutput OnTakeDamage { get; }
@@ -55,6 +55,8 @@ public partial interface CBreakableProp : CBaseProp, ISchemaClass<CBreakableProp
     public ref float ExplodeDamage { get; }
 
     public ref float ExplodeRadius { get; }
+
+    public ref BaseExplosionTypes_t ExplosionType { get; }
 
     public ref float ExplosionDelay { get; }
 

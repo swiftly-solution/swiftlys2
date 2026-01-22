@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMathCounter : CLogicalEntity, ISchemaClass<CMathCounter>
 {
     static CMathCounter ISchemaClass<CMathCounter>.From(nint handle) => new CMathCounterImpl(handle);
-    static int ISchemaClass<CMathCounter>.Size => 1520;
+    static int ISchemaClass<CMathCounter>.Size => 1368;
     static string? ISchemaClass<CMathCounter>.ClassName => "math_counter";
 
 
@@ -25,10 +25,10 @@ public partial interface CMathCounter : CLogicalEntity, ISchemaClass<CMathCounte
 
     public ref bool Disabled { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField OutValue { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField OnGetValue { get; }
 
     public ref CEntityIOOutput OnHitMin { get; }

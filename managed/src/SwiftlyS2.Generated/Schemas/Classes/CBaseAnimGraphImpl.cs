@@ -16,6 +16,23 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
 {
     public CBaseAnimGraphImpl(nint handle) : base(handle) { }
 
+    private static nint? _GraphControllerManagerOffset;
+
+    public CAnimGraphControllerManager GraphControllerManager {
+        get {
+            _GraphControllerManagerOffset = _GraphControllerManagerOffset ?? Schema.GetOffset(0xE501DB1EF1B20F5A);
+            return new CAnimGraphControllerManagerImpl(_Handle + _GraphControllerManagerOffset!.Value);
+        }
+    }
+    private static nint? _MainGraphControllerOffset;
+
+    public CAnimGraphControllerBase? MainGraphController {
+        get {
+            _MainGraphControllerOffset = _MainGraphControllerOffset ?? Schema.GetOffset(0xE501DB1E655CC5F6);
+            var ptr = _Handle.Read<nint>(_MainGraphControllerOffset!.Value);
+            return ptr.IsValidPtr() ? new CAnimGraphControllerBaseImpl(ptr) : null;
+        }
+    }
     private static nint? _InitiallyPopulateInterpHistoryOffset;
 
     public ref bool InitiallyPopulateInterpHistory {
@@ -55,6 +72,14 @@ internal partial class CBaseAnimGraphImpl : CBaseModelEntityImpl, CBaseAnimGraph
         get {
             _LastSlopeCheckPosOffset = _LastSlopeCheckPosOffset ?? Schema.GetOffset(0xE501DB1E586A5E32);
             return ref _Handle.AsRef<Vector>(_LastSlopeCheckPosOffset!.Value);
+        }
+    }
+    private static nint? _AnimGraphUpdateIdOffset;
+
+    public ref uint AnimGraphUpdateId {
+        get {
+            _AnimGraphUpdateIdOffset = _AnimGraphUpdateIdOffset ?? Schema.GetOffset(0xE501DB1E07E69554);
+            return ref _Handle.AsRef<uint>(_AnimGraphUpdateIdOffset!.Value);
         }
     }
     private static nint? _AnimationUpdateScheduledOffset;

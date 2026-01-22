@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMessage : CPointEntity, ISchemaClass<CMessage>
 {
     static CMessage ISchemaClass<CMessage>.From(nint handle) => new CMessageImpl(handle);
-    static int ISchemaClass<CMessage>.Size => 1336;
+    static int ISchemaClass<CMessage>.Size => 1248;
     static string? ISchemaClass<CMessage>.ClassName => "env_message";
 
 

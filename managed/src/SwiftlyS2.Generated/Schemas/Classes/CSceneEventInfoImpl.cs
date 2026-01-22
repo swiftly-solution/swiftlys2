@@ -48,6 +48,30 @@ internal partial class CSceneEventInfoImpl : SchemaClass, CSceneEventInfo
             return ref _Handle.AsRef<float>(_WeightOffset!.Value);
         }
     }
+    private static nint? _AnimClipOffset;
+
+    public ref CStrongHandle<InfoForResourceTypeCNmClip> AnimClip {
+        get {
+            _AnimClipOffset = _AnimClipOffset ?? Schema.GetOffset(0x38A9D25E42BBBF98);
+            return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmClip>>(_AnimClipOffset!.Value);
+        }
+    }
+    private static nint? _AnimClipSlotOffset;
+
+    public ref CGlobalSymbol AnimClipSlot {
+        get {
+            _AnimClipSlotOffset = _AnimClipSlotOffset ?? Schema.GetOffset(0x38A9D25E41485B29);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AnimClipSlotOffset!.Value);
+        }
+    }
+    private static nint? _AnimClipSlotWeightOffset;
+
+    public ref CGlobalSymbol AnimClipSlotWeight {
+        get {
+            _AnimClipSlotWeightOffset = _AnimClipSlotWeightOffset ?? Schema.GetOffset(0x38A9D25E9394D7FD);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AnimClipSlotWeightOffset!.Value);
+        }
+    }
     private static nint? _HasArrivedOffset;
 
     public ref bool HasArrived {

@@ -11,16 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSWeaponBaseVData : CBasePlayerWeaponVData, ISchemaClass<CCSWeaponBaseVData>
 {
     static CCSWeaponBaseVData ISchemaClass<CCSWeaponBaseVData>.From(nint handle) => new CCSWeaponBaseVDataImpl(handle);
-    static int ISchemaClass<CCSWeaponBaseVData>.Size => 2208;
+    static int ISchemaClass<CCSWeaponBaseVData>.Size => 1984;
     static string? ISchemaClass<CCSWeaponBaseVData>.ClassName => null;
 
 
     public ref CSWeaponType WeaponType { get; }
 
     public ref CSWeaponCategory WeaponCategory { get; }
-
-    // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCModel > >
-    public SchemaUntypedField Model_AG2 { get; }
 
     // CResourceNameTyped< CWeakHandle< InfoForResourceTypeCNmSkeleton > >
     public SchemaUntypedField AnimSkeleton { get; }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMarkupVolume : CBaseModelEntity, ISchemaClass<CMarkupVolume>
 {
     static CMarkupVolume ISchemaClass<CMarkupVolume>.From(nint handle) => new CMarkupVolumeImpl(handle);
-    static int ISchemaClass<CMarkupVolume>.Size => 2016;
+    static int ISchemaClass<CMarkupVolume>.Size => 1848;
     static string? ISchemaClass<CMarkupVolume>.ClassName => "markup_volume";
 
 

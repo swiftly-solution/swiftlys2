@@ -119,36 +119,36 @@ internal partial class RnBodyDesc_tImpl : SchemaClass, RnBodyDesc_t
             return ref _Handle.AsRef<float>(_AngularDampingOffset!.Value);
         }
     }
-    private static nint? _LinearDragOffset;
+    private static nint? _LinearDragScaleOffset;
 
-    public ref float LinearDrag {
+    public ref float LinearDragScale {
         get {
-            _LinearDragOffset = _LinearDragOffset ?? Schema.GetOffset(0xB8BC9637B3D686BC);
-            return ref _Handle.AsRef<float>(_LinearDragOffset!.Value);
+            _LinearDragScaleOffset = _LinearDragScaleOffset ?? Schema.GetOffset(0xB8BC96373DE1DCF6);
+            return ref _Handle.AsRef<float>(_LinearDragScaleOffset!.Value);
         }
     }
-    private static nint? _AngularDragOffset;
+    private static nint? _AngularDragScaleOffset;
 
-    public ref float AngularDrag {
+    public ref float AngularDragScale {
         get {
-            _AngularDragOffset = _AngularDragOffset ?? Schema.GetOffset(0xB8BC9637DCE9A7D1);
-            return ref _Handle.AsRef<float>(_AngularDragOffset!.Value);
+            _AngularDragScaleOffset = _AngularDragScaleOffset ?? Schema.GetOffset(0xB8BC9637FEDD3A25);
+            return ref _Handle.AsRef<float>(_AngularDragScaleOffset!.Value);
         }
     }
-    private static nint? _LinearBuoyancyDragOffset;
+    private static nint? _LinearFluidDragScaleOffset;
 
-    public ref float LinearBuoyancyDrag {
+    public ref float LinearFluidDragScale {
         get {
-            _LinearBuoyancyDragOffset = _LinearBuoyancyDragOffset ?? Schema.GetOffset(0xB8BC963766B37CD2);
-            return ref _Handle.AsRef<float>(_LinearBuoyancyDragOffset!.Value);
+            _LinearFluidDragScaleOffset = _LinearFluidDragScaleOffset ?? Schema.GetOffset(0xB8BC96370C2698F6);
+            return ref _Handle.AsRef<float>(_LinearFluidDragScaleOffset!.Value);
         }
     }
-    private static nint? _AngularBuoyancyDragOffset;
+    private static nint? _AngularFluidDragScaleOffset;
 
-    public ref float AngularBuoyancyDrag {
+    public ref float AngularFluidDragScale {
         get {
-            _AngularBuoyancyDragOffset = _AngularBuoyancyDragOffset ?? Schema.GetOffset(0xB8BC963731B6B8C7);
-            return ref _Handle.AsRef<float>(_AngularBuoyancyDragOffset!.Value);
+            _AngularFluidDragScaleOffset = _AngularFluidDragScaleOffset ?? Schema.GetOffset(0xB8BC9637BF9342E7);
+            return ref _Handle.AsRef<float>(_AngularFluidDragScaleOffset!.Value);
         }
     }
     private static nint? _LastAwakeForceAccumOffset;
@@ -167,12 +167,12 @@ internal partial class RnBodyDesc_tImpl : SchemaClass, RnBodyDesc_t
             return ref _Handle.AsRef<Vector>(_LastAwakeTorqueAccumOffset!.Value);
         }
     }
-    private static nint? _BuoyancyFactorOffset;
+    private static nint? _BuoyancyScaleOffset;
 
-    public ref float BuoyancyFactor {
+    public ref float BuoyancyScale {
         get {
-            _BuoyancyFactorOffset = _BuoyancyFactorOffset ?? Schema.GetOffset(0xB8BC96374A0360BE);
-            return ref _Handle.AsRef<float>(_BuoyancyFactorOffset!.Value);
+            _BuoyancyScaleOffset = _BuoyancyScaleOffset ?? Schema.GetOffset(0xB8BC963789160299);
+            return ref _Handle.AsRef<float>(_BuoyancyScaleOffset!.Value);
         }
     }
     private static nint? _GravityScaleOffset;
@@ -269,14 +269,6 @@ internal partial class RnBodyDesc_tImpl : SchemaClass, RnBodyDesc_t
         get {
             _DragEnabledOffset = _DragEnabledOffset ?? Schema.GetOffset(0xB8BC96370FDF5278);
             return ref _Handle.AsRef<bool>(_DragEnabledOffset!.Value);
-        }
-    }
-    private static nint? _BuoyancyDragEnabledOffset;
-
-    public ref bool BuoyancyDragEnabled {
-        get {
-            _BuoyancyDragEnabledOffset = _BuoyancyDragEnabledOffset ?? Schema.GetOffset(0xB8BC96378B215DDA);
-            return ref _Handle.AsRef<bool>(_BuoyancyDragEnabledOffset!.Value);
         }
     }
     private static nint? _GravityOffset;

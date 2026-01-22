@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseButton : CBaseToggle, ISchemaClass<CBaseButton>
 {
     static CBaseButton ISchemaClass<CBaseButton>.From(nint handle) => new CBaseButtonImpl(handle);
-    static int ISchemaClass<CBaseButton>.Size => 2472;
+    static int ISchemaClass<CBaseButton>.Size => 2224;
     static string? ISchemaClass<CBaseButton>.ClassName => "func_button";
 
 

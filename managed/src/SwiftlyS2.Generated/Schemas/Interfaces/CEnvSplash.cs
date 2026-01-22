@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvSplash : CPointEntity, ISchemaClass<CEnvSplash>
 {
     static CEnvSplash ISchemaClass<CEnvSplash>.From(nint handle) => new CEnvSplashImpl(handle);
-    static int ISchemaClass<CEnvSplash>.Size => 1272;
+    static int ISchemaClass<CEnvSplash>.Size => 1200;
     static string? ISchemaClass<CEnvSplash>.ClassName => "env_splash";
 
 

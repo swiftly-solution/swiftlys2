@@ -16,12 +16,12 @@ internal partial class CAnimGraphControllerBaseImpl : SchemaClass, CAnimGraphCon
 {
     public CAnimGraphControllerBaseImpl(nint handle) : base(handle) { }
 
-    private static nint? _ParamsToResetInPostGraphUpdateOffset;
+    private static nint? _ExternalGraphOffset;
 
-    public SchemaUntypedField ParamsToResetInPostGraphUpdate {
+    public ExternalAnimGraphHandle_t ExternalGraph {
         get {
-            _ParamsToResetInPostGraphUpdateOffset = _ParamsToResetInPostGraphUpdateOffset ?? Schema.GetOffset(0x1AA25B60A3E3A289);
-            return new SchemaUntypedField(_Handle + _ParamsToResetInPostGraphUpdateOffset!.Value);
+            _ExternalGraphOffset = _ExternalGraphOffset ?? Schema.GetOffset(0x1AA25B609FE82D60);
+            return new ExternalAnimGraphHandle_tImpl(_Handle + _ExternalGraphOffset!.Value);
         }
     }
 

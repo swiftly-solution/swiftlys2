@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CItemGeneric : CItem, ISchemaClass<CItemGeneric>
 {
     static CItemGeneric ISchemaClass<CItemGeneric>.From(nint handle) => new CItemGenericImpl(handle);
-    static int ISchemaClass<CItemGeneric>.Size => 3312;
+    static int ISchemaClass<CItemGeneric>.Size => 3056;
     static string? ISchemaClass<CItemGeneric>.ClassName => "item_generic";
 
 

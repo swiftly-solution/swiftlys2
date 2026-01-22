@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerDetectExplosion : CBaseTrigger, ISchemaClass<CTriggerDetectExplosion>
 {
     static CTriggerDetectExplosion ISchemaClass<CTriggerDetectExplosion>.From(nint handle) => new CTriggerDetectExplosionImpl(handle);
-    static int ISchemaClass<CTriggerDetectExplosion>.Size => 2544;
+    static int ISchemaClass<CTriggerDetectExplosion>.Size => 2256;
     static string? ISchemaClass<CTriggerDetectExplosion>.ClassName => "trigger_detect_explosion";
 
 

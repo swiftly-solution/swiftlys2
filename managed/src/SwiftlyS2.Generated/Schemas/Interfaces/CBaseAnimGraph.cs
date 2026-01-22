@@ -11,9 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseAnimGraph : CBaseModelEntity, ISchemaClass<CBaseAnimGraph>
 {
     static CBaseAnimGraph ISchemaClass<CBaseAnimGraph>.From(nint handle) => new CBaseAnimGraphImpl(handle);
-    static int ISchemaClass<CBaseAnimGraph>.Size => 2704;
+    static int ISchemaClass<CBaseAnimGraph>.Size => 2592;
     static string? ISchemaClass<CBaseAnimGraph>.ClassName => "baseanimgraph";
 
+
+    public CAnimGraphControllerManager GraphControllerManager { get; }
+
+    public CAnimGraphControllerBase? MainGraphController { get; }
 
     public ref bool InitiallyPopulateInterpHistory { get; }
 
@@ -24,6 +28,8 @@ public partial interface CBaseAnimGraph : CBaseModelEntity, ISchemaClass<CBaseAn
     public ref float MaxSlopeDistance { get; }
 
     public ref Vector LastSlopeCheckPos { get; }
+
+    public ref uint AnimGraphUpdateId { get; }
 
     public ref bool AnimationUpdateScheduled { get; }
 

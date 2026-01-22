@@ -165,7 +165,7 @@ internal partial class CBarnLightImpl : CBaseModelEntityImpl, CBarnLight
         }
     }
     public ISchemaFixedArray<CEntityIOOutput> StyleEvent {
-        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0xB5E331D15EEF4062, 4, 40, 8);
+        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0xB5E331D15EEF4062, 4, 24, 8);
     }
     private static nint? _LightCookieOffset;
 
@@ -309,6 +309,14 @@ internal partial class CBarnLightImpl : CBaseModelEntityImpl, CBarnLight
         get {
             _BounceScaleOffset = _BounceScaleOffset ?? Schema.GetOffset(0xB5E331D1918AF747);
             return ref _Handle.AsRef<float>(_BounceScaleOffset!.Value);
+        }
+    }
+    private static nint? _DynamicBounceOffset;
+
+    public ref bool DynamicBounce {
+        get {
+            _DynamicBounceOffset = _DynamicBounceOffset ?? Schema.GetOffset(0xB5E331D146B4298E);
+            return ref _Handle.AsRef<bool>(_DynamicBounceOffset!.Value);
         }
     }
     private static nint? _MinRoughnessOffset;
@@ -660,6 +668,7 @@ internal partial class CBarnLightImpl : CBaseModelEntityImpl, CBarnLight
     public void ForceShadowsEnabledUpdated() => Schema.Update(_Handle, 0xB5E331D179F7B762);
     public void BounceLightUpdated() => Schema.Update(_Handle, 0xB5E331D17A8E13D3);
     public void BounceScaleUpdated() => Schema.Update(_Handle, 0xB5E331D1918AF747);
+    public void DynamicBounceUpdated() => Schema.Update(_Handle, 0xB5E331D146B4298E);
     public void MinRoughnessUpdated() => Schema.Update(_Handle, 0xB5E331D1B3A6FDC9);
     public void AlternateColorUpdated() => Schema.Update(_Handle, 0xB5E331D1A6BAD29C);
     public void AlternateColorBrightnessUpdated() => Schema.Update(_Handle, 0xB5E331D14C877943);

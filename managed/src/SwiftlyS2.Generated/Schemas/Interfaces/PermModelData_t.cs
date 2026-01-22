@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface PermModelData_t : ISchemaClass<PermModelData_t>
 {
     static PermModelData_t ISchemaClass<PermModelData_t>.From(nint handle) => new PermModelData_tImpl(handle);
-    static int ISchemaClass<PermModelData_t>.Size => 712;
+    static int ISchemaClass<PermModelData_t>.Size => 760;
     static string? ISchemaClass<PermModelData_t>.ClassName => null;
 
 
@@ -60,6 +60,10 @@ public partial interface PermModelData_t : ISchemaClass<PermModelData_t>
     public ref CUtlVector<CStrongHandle<InfoForResourceTypeCModel>> RefAnimIncludeModels { get; }
 
     public ref CUtlVector<PermModelDataAnimatedMaterialAttribute_t> AnimatedMaterialAttributes { get; }
+
+    public ref CUtlVector<ModelAnimGraph2Ref_t> AnimGraph2Refs { get; }
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCNmSkeleton>> NmSkeletonRefs { get; }
 
 
 }

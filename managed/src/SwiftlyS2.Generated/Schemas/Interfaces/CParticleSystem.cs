@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CParticleSystem : CBaseModelEntity, ISchemaClass<CParticleSystem>
 {
     static CParticleSystem ISchemaClass<CParticleSystem>.From(nint handle) => new CParticleSystemImpl(handle);
-    static int ISchemaClass<CParticleSystem>.Size => 3408;
+    static int ISchemaClass<CParticleSystem>.Size => 3240;
     static string? ISchemaClass<CParticleSystem>.ClassName => "info_particle_system";
 
 

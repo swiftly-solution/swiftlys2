@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 namespace SwiftlyS2.Shared.Natives;
 
 [StructLayout(LayoutKind.Sequential)]
-public struct CUtlSlot
+public unsafe struct CUtlSlot
 {
-    public CCopyableLock<CThreadSpinMutex> Mutex;
+    public fixed byte Mutex[16];
     public CUtlVector<nint> ConnectedSignalers;
 }

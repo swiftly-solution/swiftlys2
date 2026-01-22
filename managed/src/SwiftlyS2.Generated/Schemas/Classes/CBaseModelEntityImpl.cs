@@ -122,30 +122,6 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
             return ptr.IsValidPtr() ? new CDestructiblePartsComponentImpl(ptr) : null;
         }
     }
-    private static nint? _LastHitGroupOffset;
-
-    public ref HitGroup_t LastHitGroup {
-        get {
-            _LastHitGroupOffset = _LastHitGroupOffset ?? Schema.GetOffset(0x517849F7EE206371);
-            return ref _Handle.AsRef<HitGroup_t>(_LastHitGroupOffset!.Value);
-        }
-    }
-    private static nint? _LastDamageSourceNameOffset;
-
-    public ref CGlobalSymbol LastDamageSourceName {
-        get {
-            _LastDamageSourceNameOffset = _LastDamageSourceNameOffset ?? Schema.GetOffset(0x517849F704D101A5);
-            return ref _Handle.AsRef<CGlobalSymbol>(_LastDamageSourceNameOffset!.Value);
-        }
-    }
-    private static nint? _LastDamagePositionOffset;
-
-    public ref Vector LastDamagePosition {
-        get {
-            _LastDamagePositionOffset = _LastDamagePositionOffset ?? Schema.GetOffset(0x517849F772774B0B);
-            return ref _Handle.AsRef<Vector>(_LastDamagePositionOffset!.Value);
-        }
-    }
     private static nint? _DissolveStartTimeOffset;
 
     public GameTime_t DissolveStartTime {
@@ -282,54 +258,6 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
             return ref _Handle.AsRef<byte>(_ObjectCullingOffset!.Value);
         }
     }
-    private static nint? _AddDecalOffset;
-
-    public ref int AddDecal {
-        get {
-            _AddDecalOffset = _AddDecalOffset ?? Schema.GetOffset(0x517849F75E07F29D);
-            return ref _Handle.AsRef<int>(_AddDecalOffset!.Value);
-        }
-    }
-    private static nint? _DecalPositionOffset;
-
-    public ref Vector DecalPosition {
-        get {
-            _DecalPositionOffset = _DecalPositionOffset ?? Schema.GetOffset(0x517849F7939EEE2D);
-            return ref _Handle.AsRef<Vector>(_DecalPositionOffset!.Value);
-        }
-    }
-    private static nint? _DecalForwardAxisOffset;
-
-    public ref Vector DecalForwardAxis {
-        get {
-            _DecalForwardAxisOffset = _DecalForwardAxisOffset ?? Schema.GetOffset(0x517849F78CF4767A);
-            return ref _Handle.AsRef<Vector>(_DecalForwardAxisOffset!.Value);
-        }
-    }
-    private static nint? _DecalModeOffset;
-
-    public ref DecalMode_t DecalMode {
-        get {
-            _DecalModeOffset = _DecalModeOffset ?? Schema.GetOffset(0x517849F7C6AE5101);
-            return ref _Handle.AsRef<DecalMode_t>(_DecalModeOffset!.Value);
-        }
-    }
-    private static nint? _RequiredDecalModeOffset;
-
-    public ref DecalMode_t RequiredDecalMode {
-        get {
-            _RequiredDecalModeOffset = _RequiredDecalModeOffset ?? Schema.GetOffset(0x517849F7CBD7293E);
-            return ref _Handle.AsRef<DecalMode_t>(_RequiredDecalModeOffset!.Value);
-        }
-    }
-    private static nint? _ConfigEntitiesToPropagateMaterialDecalsToOffset;
-
-    public ref CUtlVector<CHandle<CBaseModelEntity>> ConfigEntitiesToPropagateMaterialDecalsTo {
-        get {
-            _ConfigEntitiesToPropagateMaterialDecalsToOffset = _ConfigEntitiesToPropagateMaterialDecalsToOffset ?? Schema.GetOffset(0x517849F75FD9715A);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseModelEntity>>>(_ConfigEntitiesToPropagateMaterialDecalsToOffset!.Value);
-        }
-    }
     private static nint? _ViewOffsetOffset;
 
     public CNetworkViewOffsetVector ViewOffset {
@@ -342,7 +270,6 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
         get => new SchemaFixedArray<uint>(_Handle, 0x517849F7DDB01736, 1, 4, 4);
     }
 
-    public void CRenderComponentUpdated() => Schema.Update(_Handle, 0x517849F7E8F59505);
     public void CHitboxComponentUpdated() => Schema.Update(_Handle, 0x517849F70E786123);
     public void DestructiblePartsSystemComponentUpdated() => Schema.Update(_Handle, 0x517849F77992C14B);
     public void RenderModeUpdated() => Schema.Update(_Handle, 0x517849F7679967A6);
@@ -359,12 +286,6 @@ internal partial class CBaseModelEntityImpl : CBaseEntityImpl, CBaseModelEntity
     public void FadeScaleUpdated() => Schema.Update(_Handle, 0x517849F786B56425);
     public void ShadowStrengthUpdated() => Schema.Update(_Handle, 0x517849F73F1ED282);
     public void ObjectCullingUpdated() => Schema.Update(_Handle, 0x517849F71A0D757A);
-    public void AddDecalUpdated() => Schema.Update(_Handle, 0x517849F75E07F29D);
-    public void DecalPositionUpdated() => Schema.Update(_Handle, 0x517849F7939EEE2D);
-    public void DecalForwardAxisUpdated() => Schema.Update(_Handle, 0x517849F78CF4767A);
-    public void DecalModeUpdated() => Schema.Update(_Handle, 0x517849F7C6AE5101);
-    public void RequiredDecalModeUpdated() => Schema.Update(_Handle, 0x517849F7CBD7293E);
-    public void ConfigEntitiesToPropagateMaterialDecalsToUpdated() => Schema.Update(_Handle, 0x517849F75FD9715A);
     public void ViewOffsetUpdated() => Schema.Update(_Handle, 0x517849F739DB834B);
     public void DisabledHitGroupsUpdated() => Schema.Update(_Handle, 0x517849F7DDB01736);
 }

@@ -46,10 +46,10 @@ internal partial class CLogicEventListenerImpl : CLogicalEntityImpl, CLogicEvent
     }
     private static nint? _OnEventFiredOffset;
 
-    public ref CEntityIOOutput OnEventFired {
+    public SchemaUntypedField OnEventFired {
         get {
             _OnEventFiredOffset = _OnEventFiredOffset ?? Schema.GetOffset(0xD797C990E84EA158);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnEventFiredOffset!.Value);
+            return new SchemaUntypedField(_Handle + _OnEventFiredOffset!.Value);
         }
     }
 

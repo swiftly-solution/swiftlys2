@@ -64,6 +64,14 @@ internal partial class CTriggerLerpObjectImpl : CBaseTriggerImpl, CTriggerLerpOb
             return ref _Handle.AsRef<float>(_LerpDurationOffset!.Value);
         }
     }
+    private static nint? _AttachedEntityWasParentedOffset;
+
+    public ref bool AttachedEntityWasParented {
+        get {
+            _AttachedEntityWasParentedOffset = _AttachedEntityWasParentedOffset ?? Schema.GetOffset(0x42FE8EA4C001B69A);
+            return ref _Handle.AsRef<bool>(_AttachedEntityWasParentedOffset!.Value);
+        }
+    }
     private static nint? _LerpRestoreMoveTypeOffset;
 
     public ref bool LerpRestoreMoveType {

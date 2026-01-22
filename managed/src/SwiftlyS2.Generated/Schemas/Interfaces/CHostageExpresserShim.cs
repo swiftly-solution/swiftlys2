@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CHostageExpresserShim : CBaseCombatCharacter, ISchemaClass<CHostageExpresserShim>
 {
     static CHostageExpresserShim ISchemaClass<CHostageExpresserShim>.From(nint handle) => new CHostageExpresserShimImpl(handle);
-    static int ISchemaClass<CHostageExpresserShim>.Size => 3056;
+    static int ISchemaClass<CHostageExpresserShim>.Size => 2944;
     static string? ISchemaClass<CHostageExpresserShim>.ClassName => null;
 
 

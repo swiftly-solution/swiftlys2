@@ -32,6 +32,14 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
             return ref _Handle.AsRef<int>(_LadderSurfacePropIndexOffset!.Value);
         }
     }
+    private static nint? _DuckedOffset;
+
+    public ref bool Ducked {
+        get {
+            _DuckedOffset = _DuckedOffset ?? Schema.GetOffset(0xD20D9A0314A05A59);
+            return ref _Handle.AsRef<bool>(_DuckedOffset!.Value);
+        }
+    }
     private static nint? _DuckAmountOffset;
 
     public ref float DuckAmount {
@@ -62,6 +70,14 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
         get {
             _DesiresDuckOffset = _DesiresDuckOffset ?? Schema.GetOffset(0xD20D9A03A4034739);
             return ref _Handle.AsRef<bool>(_DesiresDuckOffset!.Value);
+        }
+    }
+    private static nint? _DuckingOffset;
+
+    public ref bool Ducking {
+        get {
+            _DuckingOffset = _DuckingOffset ?? Schema.GetOffset(0xD20D9A038B221170);
+            return ref _Handle.AsRef<bool>(_DuckingOffset!.Value);
         }
     }
     private static nint? _DuckOffsetOffset;
@@ -224,22 +240,6 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
             return ref _Handle.AsRef<int>(_FootstepsOffset!.Value);
         }
     }
-    private static nint? _OldJumpPressedOffset;
-
-    public ref bool OldJumpPressed {
-        get {
-            _OldJumpPressedOffset = _OldJumpPressedOffset ?? Schema.GetOffset(0xD20D9A03030FC474);
-            return ref _Handle.AsRef<bool>(_OldJumpPressedOffset!.Value);
-        }
-    }
-    private static nint? _JumpPressedTimeOffset;
-
-    public ref float JumpPressedTime {
-        get {
-            _JumpPressedTimeOffset = _JumpPressedTimeOffset ?? Schema.GetOffset(0xD20D9A0321A2A38A);
-            return ref _Handle.AsRef<float>(_JumpPressedTimeOffset!.Value);
-        }
-    }
     private static nint? _StashGrenadeParameterWhenOffset;
 
     public GameTime_t StashGrenadeParameterWhen {
@@ -312,12 +312,68 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
             return ref _Handle.AsRef<float>(_StaminaAtJumpStartOffset!.Value);
         }
     }
+    private static nint? _VelMulAtJumpStartOffset;
+
+    public ref float VelMulAtJumpStart {
+        get {
+            _VelMulAtJumpStartOffset = _VelMulAtJumpStartOffset ?? Schema.GetOffset(0xD20D9A03B873F5D3);
+            return ref _Handle.AsRef<float>(_VelMulAtJumpStartOffset!.Value);
+        }
+    }
     private static nint? _AccumulatedJumpErrorOffset;
 
     public ref float AccumulatedJumpError {
         get {
             _AccumulatedJumpErrorOffset = _AccumulatedJumpErrorOffset ?? Schema.GetOffset(0xD20D9A032700AC7F);
             return ref _Handle.AsRef<float>(_AccumulatedJumpErrorOffset!.Value);
+        }
+    }
+    private static nint? _LegacyJumpOffset;
+
+    public CCSPlayerLegacyJump LegacyJump {
+        get {
+            _LegacyJumpOffset = _LegacyJumpOffset ?? Schema.GetOffset(0xD20D9A03316C1A66);
+            return new CCSPlayerLegacyJumpImpl(_Handle + _LegacyJumpOffset!.Value);
+        }
+    }
+    private static nint? _ModernJumpOffset;
+
+    public CCSPlayerModernJump ModernJump {
+        get {
+            _ModernJumpOffset = _ModernJumpOffset ?? Schema.GetOffset(0xD20D9A03552BD122);
+            return new CCSPlayerModernJumpImpl(_Handle + _ModernJumpOffset!.Value);
+        }
+    }
+    private static nint? _LastJumpTickOffset;
+
+    public GameTick_t LastJumpTick {
+        get {
+            _LastJumpTickOffset = _LastJumpTickOffset ?? Schema.GetOffset(0xD20D9A03B2C4EE6C);
+            return new GameTick_tImpl(_Handle + _LastJumpTickOffset!.Value);
+        }
+    }
+    private static nint? _LastJumpFracOffset;
+
+    public ref float LastJumpFrac {
+        get {
+            _LastJumpFracOffset = _LastJumpFracOffset ?? Schema.GetOffset(0xD20D9A035A88108B);
+            return ref _Handle.AsRef<float>(_LastJumpFracOffset!.Value);
+        }
+    }
+    private static nint? _LastJumpVelocityZOffset;
+
+    public ref float LastJumpVelocityZ {
+        get {
+            _LastJumpVelocityZOffset = _LastJumpVelocityZOffset ?? Schema.GetOffset(0xD20D9A031736B002);
+            return ref _Handle.AsRef<float>(_LastJumpVelocityZOffset!.Value);
+        }
+    }
+    private static nint? _JumpApexPendingOffset;
+
+    public ref bool JumpApexPending {
+        get {
+            _JumpApexPendingOffset = _JumpApexPendingOffset ?? Schema.GetOffset(0xD20D9A03B2669F50);
+            return ref _Handle.AsRef<bool>(_JumpApexPendingOffset!.Value);
         }
     }
     private static nint? _TicksSinceLastSurfingDetectedOffset;
@@ -344,33 +400,30 @@ internal partial class CCSPlayer_MovementServicesImpl : CPlayer_MovementServices
             return ref _Handle.AsRef<Vector>(_InputRotatedOffset!.Value);
         }
     }
-    private static nint? _JumpApexPendingOffset;
 
-    public ref bool JumpApexPending {
-        get {
-            _JumpApexPendingOffset = _JumpApexPendingOffset ?? Schema.GetOffset(0xD20D9A03B2669F50);
-            return ref _Handle.AsRef<bool>(_JumpApexPendingOffset!.Value);
-        }
-    }
-
-    public void LadderNormalUpdated() => Schema.Update(_Handle, 0xD20D9A0308F3CAF6);
     public void LadderSurfacePropIndexUpdated() => Schema.Update(_Handle, 0xD20D9A03149CA20B);
+    public void DuckedUpdated() => Schema.Update(_Handle, 0xD20D9A0314A05A59);
     public void DuckAmountUpdated() => Schema.Update(_Handle, 0xD20D9A03E4F7740E);
     public void DuckSpeedUpdated() => Schema.Update(_Handle, 0xD20D9A03A8A12375);
     public void DuckOverrideUpdated() => Schema.Update(_Handle, 0xD20D9A03BD1EB2E8);
     public void DesiresDuckUpdated() => Schema.Update(_Handle, 0xD20D9A03A4034739);
+    public void DuckingUpdated() => Schema.Update(_Handle, 0xD20D9A038B221170);
     public void DuckOffsetUpdated() => Schema.Update(_Handle, 0xD20D9A031A34E0A5);
     public void DuckTimeMsecsUpdated() => Schema.Update(_Handle, 0xD20D9A0311815EAA);
     public void DuckJumpTimeMsecsUpdated() => Schema.Update(_Handle, 0xD20D9A038342B0C6);
     public void JumpTimeMsecsUpdated() => Schema.Update(_Handle, 0xD20D9A03D5CB15F1);
     public void LastDuckTimeUpdated() => Schema.Update(_Handle, 0xD20D9A038F382A43);
     public void GameCodeHasMovedPlayerAfterCommandUpdated() => Schema.Update(_Handle, 0xD20D9A032045380F);
-    public void OldJumpPressedUpdated() => Schema.Update(_Handle, 0xD20D9A03030FC474);
     public void StashGrenadeParameterWhenUpdated() => Schema.Update(_Handle, 0xD20D9A03FCB5208F);
     public void ButtonDownMaskPrevUpdated() => Schema.Update(_Handle, 0xD20D9A03FA4E9DC4);
     public void OffsetTickCompleteTimeUpdated() => Schema.Update(_Handle, 0xD20D9A034CAE24AF);
     public void OffsetTickStashedSpeedUpdated() => Schema.Update(_Handle, 0xD20D9A03FA676BF2);
     public void StaminaUpdated() => Schema.Update(_Handle, 0xD20D9A03EE725C8C);
-    public void WasSurfingUpdated() => Schema.Update(_Handle, 0xD20D9A03C30201EE);
+    public void LegacyJumpUpdated() => Schema.Update(_Handle, 0xD20D9A03316C1A66);
+    public void ModernJumpUpdated() => Schema.Update(_Handle, 0xD20D9A03552BD122);
+    public void LastJumpTickUpdated() => Schema.Update(_Handle, 0xD20D9A03B2C4EE6C);
+    public void LastJumpFracUpdated() => Schema.Update(_Handle, 0xD20D9A035A88108B);
+    public void LastJumpVelocityZUpdated() => Schema.Update(_Handle, 0xD20D9A031736B002);
     public void JumpApexPendingUpdated() => Schema.Update(_Handle, 0xD20D9A03B2669F50);
+    public void WasSurfingUpdated() => Schema.Update(_Handle, 0xD20D9A03C30201EE);
 }

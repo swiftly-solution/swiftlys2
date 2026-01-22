@@ -56,6 +56,14 @@ internal partial class CSceneObjectDataImpl : SchemaClass, CSceneObjectData
             return ref _Handle.AsRef<CUtlLeanVector<CMeshletDescriptor, int>>(_MeshletsOffset!.Value);
         }
     }
+    private static nint? _RtProxyDrawCallsOffset;
+
+    public ref CUtlLeanVector<CSceneObjectData__RTProxyDrawDescriptor_t, int> RtProxyDrawCalls {
+        get {
+            _RtProxyDrawCallsOffset = _RtProxyDrawCallsOffset ?? Schema.GetOffset(0x628AC6A9A12A5FC8);
+            return ref _Handle.AsRef<CUtlLeanVector<CSceneObjectData__RTProxyDrawDescriptor_t, int>>(_RtProxyDrawCallsOffset!.Value);
+        }
+    }
     private static nint? _TintColorOffset;
 
     public ref Vector4D TintColor {

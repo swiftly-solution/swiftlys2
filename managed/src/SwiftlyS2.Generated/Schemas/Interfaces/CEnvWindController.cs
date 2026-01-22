@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvWindController : CBaseEntity, ISchemaClass<CEnvWindController>
 {
     static CEnvWindController ISchemaClass<CEnvWindController>.From(nint handle) => new CEnvWindControllerImpl(handle);
-    static int ISchemaClass<CEnvWindController>.Size => 1640;
+    static int ISchemaClass<CEnvWindController>.Size => 1536;
     static string? ISchemaClass<CEnvWindController>.ClassName => "env_wind_controller";
 
 

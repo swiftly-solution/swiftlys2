@@ -8,10 +8,10 @@ using SwiftlyS2.Core.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.SchemaDefinitions;
 
-public partial interface CVoiceContainerNull : CVoiceContainerBase, ISchemaClass<CVoiceContainerNull>
+public partial interface CVoiceContainerNull : CVoiceContainerGenerator, ISchemaClass<CVoiceContainerNull>
 {
     static CVoiceContainerNull ISchemaClass<CVoiceContainerNull>.From(nint handle) => new CVoiceContainerNullImpl(handle);
-    static int ISchemaClass<CVoiceContainerNull>.Size => 184;
+    static int ISchemaClass<CVoiceContainerNull>.Size => 168;
     static string? ISchemaClass<CVoiceContainerNull>.ClassName => null;
 
 

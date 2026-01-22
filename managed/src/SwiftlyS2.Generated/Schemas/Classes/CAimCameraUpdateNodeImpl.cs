@@ -32,28 +32,12 @@ internal partial class CAimCameraUpdateNodeImpl : CUnaryUpdateNodeImpl, CAimCame
             return new CAnimParamHandleImpl(_Handle + _ParameterOrientationOffset!.Value);
         }
     }
-    private static nint? _ParameterSpineRotationWeightOffset;
-
-    public CAnimParamHandle ParameterSpineRotationWeight {
-        get {
-            _ParameterSpineRotationWeightOffset = _ParameterSpineRotationWeightOffset ?? Schema.GetOffset(0xE8DD6D013A4DC0C7);
-            return new CAnimParamHandleImpl(_Handle + _ParameterSpineRotationWeightOffset!.Value);
-        }
-    }
     private static nint? _ParameterPelvisOffsetOffset;
 
     public CAnimParamHandle ParameterPelvisOffset {
         get {
             _ParameterPelvisOffsetOffset = _ParameterPelvisOffsetOffset ?? Schema.GetOffset(0xE8DD6D01C4C67FA8);
             return new CAnimParamHandleImpl(_Handle + _ParameterPelvisOffsetOffset!.Value);
-        }
-    }
-    private static nint? _ParameterUseIKOffset;
-
-    public CAnimParamHandle ParameterUseIK {
-        get {
-            _ParameterUseIKOffset = _ParameterUseIKOffset ?? Schema.GetOffset(0xE8DD6D01C8F88C49);
-            return new CAnimParamHandleImpl(_Handle + _ParameterUseIKOffset!.Value);
         }
     }
     private static nint? _ParameterCameraOnlyOffset;

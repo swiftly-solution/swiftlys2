@@ -16,7 +16,14 @@ internal partial class EventServerPostAdvanceTick_tImpl : EventPostAdvanceTick_t
 {
     public EventServerPostAdvanceTick_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _LastTickBeforeClientUpdateOffset;
 
+    public ref bool LastTickBeforeClientUpdate {
+        get {
+            _LastTickBeforeClientUpdateOffset = _LastTickBeforeClientUpdateOffset ?? Schema.GetOffset(0x78790D061F345D8D);
+            return ref _Handle.AsRef<bool>(_LastTickBeforeClientUpdateOffset!.Value);
+        }
+    }
 
 
 }

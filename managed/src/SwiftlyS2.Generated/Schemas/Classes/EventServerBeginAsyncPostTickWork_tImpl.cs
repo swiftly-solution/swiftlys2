@@ -12,11 +12,18 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class EventServerBeginAsyncPostTickWork_tImpl : EventPostAdvanceTick_tImpl, EventServerBeginAsyncPostTickWork_t
+internal partial class EventServerBeginAsyncPostTickWork_tImpl : SchemaClass, EventServerBeginAsyncPostTickWork_t
 {
     public EventServerBeginAsyncPostTickWork_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _IsOncePerFrameAsyncWorkPhaseOffset;
 
+    public ref bool IsOncePerFrameAsyncWorkPhase {
+        get {
+            _IsOncePerFrameAsyncWorkPhaseOffset = _IsOncePerFrameAsyncWorkPhaseOffset ?? Schema.GetOffset(0x2113CA2A1908E5C4);
+            return ref _Handle.AsRef<bool>(_IsOncePerFrameAsyncWorkPhaseOffset!.Value);
+        }
+    }
 
 
 }

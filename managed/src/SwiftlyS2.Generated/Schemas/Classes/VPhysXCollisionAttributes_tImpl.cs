@@ -16,6 +16,14 @@ internal partial class VPhysXCollisionAttributes_tImpl : SchemaClass, VPhysXColl
 {
     public VPhysXCollisionAttributes_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _IncludeDetailLayerCountOffset;
+
+    public ref int IncludeDetailLayerCount {
+        get {
+            _IncludeDetailLayerCountOffset = _IncludeDetailLayerCountOffset ?? Schema.GetOffset(0xBD3263AF3D5E4EA6);
+            return ref _Handle.AsRef<int>(_IncludeDetailLayerCountOffset!.Value);
+        }
+    }
     private static nint? _CollisionGroupOffset;
 
     public ref uint CollisionGroup {
@@ -46,6 +54,14 @@ internal partial class VPhysXCollisionAttributes_tImpl : SchemaClass, VPhysXColl
         get {
             _InteractExcludeOffset = _InteractExcludeOffset ?? Schema.GetOffset(0xBD3263AFC5ECE843);
             return ref _Handle.AsRef<CUtlVector<uint>>(_InteractExcludeOffset!.Value);
+        }
+    }
+    private static nint? _DetailLayersOffset;
+
+    public ref CUtlVector<uint> DetailLayers {
+        get {
+            _DetailLayersOffset = _DetailLayersOffset ?? Schema.GetOffset(0xBD3263AF91DFEF36);
+            return ref _Handle.AsRef<CUtlVector<uint>>(_DetailLayersOffset!.Value);
         }
     }
     private static nint? _CollisionGroupStringOffset;
@@ -82,6 +98,14 @@ internal partial class VPhysXCollisionAttributes_tImpl : SchemaClass, VPhysXColl
         get {
             _InteractExcludeStringsOffset = _InteractExcludeStringsOffset ?? Schema.GetOffset(0xBD3263AF97DC23CF);
             return ref _Handle.AsRef<CUtlVector<CUtlString>>(_InteractExcludeStringsOffset!.Value);
+        }
+    }
+    private static nint? _DetailLayerStringsOffset;
+
+    public ref CUtlVector<CUtlString> DetailLayerStrings {
+        get {
+            _DetailLayerStringsOffset = _DetailLayerStringsOffset ?? Schema.GetOffset(0xBD3263AF9B970BFD);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_DetailLayerStringsOffset!.Value);
         }
     }
 

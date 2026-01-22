@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMultiSource : CLogicalEntity, ISchemaClass<CMultiSource>
 {
     static CMultiSource ISchemaClass<CMultiSource>.From(nint handle) => new CMultiSourceImpl(handle);
-    static int ISchemaClass<CMultiSource>.Size => 1576;
+    static int ISchemaClass<CMultiSource>.Size => 1488;
     static string? ISchemaClass<CMultiSource>.ClassName => "multisource";
 
 

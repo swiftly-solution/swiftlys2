@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPlantedC4 : CBaseAnimGraph, ISchemaClass<CPlantedC4>
 {
     static CPlantedC4 ISchemaClass<CPlantedC4>.From(nint handle) => new CPlantedC4Impl(handle);
-    static int ISchemaClass<CPlantedC4>.Size => 3728;
+    static int ISchemaClass<CPlantedC4>.Size => 3568;
     static string? ISchemaClass<CPlantedC4>.ClassName => "planted_c4";
 
 
@@ -39,9 +39,11 @@ public partial interface CPlantedC4 : CBaseAnimGraph, ISchemaClass<CPlantedC4>
 
     public ref int SpotRules { get; }
 
-    public ref bool TrainingPlacedByPlayer { get; }
-
     public ref bool HasExploded { get; }
+
+    public ref bool BombDefused { get; }
+
+    public ref bool TrainingPlacedByPlayer { get; }
 
     public ref float TimerLength { get; }
 
@@ -52,8 +54,6 @@ public partial interface CPlantedC4 : CBaseAnimGraph, ISchemaClass<CPlantedC4>
     public ref float DefuseLength { get; }
 
     public GameTime_t DefuseCountDown { get; }
-
-    public ref bool BombDefused { get; }
 
     public ref CHandle<CCSPlayerPawn> BombDefuser { get; }
 
@@ -77,10 +77,10 @@ public partial interface CPlantedC4 : CBaseAnimGraph, ISchemaClass<CPlantedC4>
     public void CannotBeDefusedUpdated();
     public void EntitySpottedStateUpdated();
     public void HasExplodedUpdated();
+    public void BombDefusedUpdated();
     public void TimerLengthUpdated();
     public void BeingDefusedUpdated();
     public void DefuseLengthUpdated();
     public void DefuseCountDownUpdated();
-    public void BombDefusedUpdated();
     public void BombDefuserUpdated();
 }

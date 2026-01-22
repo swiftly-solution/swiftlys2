@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvCubemapBox : CEnvCubemap, ISchemaClass<CEnvCubemapBox>
 {
     static CEnvCubemapBox ISchemaClass<CEnvCubemapBox>.From(nint handle) => new CEnvCubemapBoxImpl(handle);
-    static int ISchemaClass<CEnvCubemapBox>.Size => 1496;
+    static int ISchemaClass<CEnvCubemapBox>.Size => 1424;
     static string? ISchemaClass<CEnvCubemapBox>.ClassName => "env_cubemap_box";
 
 

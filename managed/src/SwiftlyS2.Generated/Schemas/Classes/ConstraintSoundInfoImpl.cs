@@ -64,9 +64,42 @@ internal partial class ConstraintSoundInfoImpl : SchemaClass, ConstraintSoundInf
             Schema.SetString(_Handle, _TravelSoundBackOffset!.Value, value);
         }
     } 
-    public ISchemaStringFixedArray ReversalSounds {
-        get => new SchemaStringFixedArray(_Handle, 0x79068C49F5164187, 3, 8, 8);
-    }
+    private static nint? _ReversalSoundSmallOffset;
+
+    public string ReversalSoundSmall {
+        get {
+            _ReversalSoundSmallOffset = _ReversalSoundSmallOffset ?? Schema.GetOffset(0x79068C4920E822CD);
+            return Schema.GetString(_Handle.Read<nint>(_ReversalSoundSmallOffset!.Value));
+        }
+        set {
+            _ReversalSoundSmallOffset = _ReversalSoundSmallOffset ?? Schema.GetOffset(0x79068C4920E822CD);
+            Schema.SetString(_Handle, _ReversalSoundSmallOffset!.Value, value);
+        }
+    } 
+    private static nint? _ReversalSoundMediumOffset;
+
+    public string ReversalSoundMedium {
+        get {
+            _ReversalSoundMediumOffset = _ReversalSoundMediumOffset ?? Schema.GetOffset(0x79068C49B6EF1B25);
+            return Schema.GetString(_Handle.Read<nint>(_ReversalSoundMediumOffset!.Value));
+        }
+        set {
+            _ReversalSoundMediumOffset = _ReversalSoundMediumOffset ?? Schema.GetOffset(0x79068C49B6EF1B25);
+            Schema.SetString(_Handle, _ReversalSoundMediumOffset!.Value, value);
+        }
+    } 
+    private static nint? _ReversalSoundLargeOffset;
+
+    public string ReversalSoundLarge {
+        get {
+            _ReversalSoundLargeOffset = _ReversalSoundLargeOffset ?? Schema.GetOffset(0x79068C493C3D3869);
+            return Schema.GetString(_Handle.Read<nint>(_ReversalSoundLargeOffset!.Value));
+        }
+        set {
+            _ReversalSoundLargeOffset = _ReversalSoundLargeOffset ?? Schema.GetOffset(0x79068C493C3D3869);
+            Schema.SetString(_Handle, _ReversalSoundLargeOffset!.Value, value);
+        }
+    } 
     private static nint? _PlayTravelSoundOffset;
 
     public ref bool PlayTravelSound {

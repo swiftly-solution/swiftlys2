@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPhysicsProp : CBreakableProp, ISchemaClass<CPhysicsProp>
 {
     static CPhysicsProp ISchemaClass<CPhysicsProp>.From(nint handle) => new CPhysicsPropImpl(handle);
-    static int ISchemaClass<CPhysicsProp>.Size => 3584;
+    static int ISchemaClass<CPhysicsProp>.Size => 3296;
     static string? ISchemaClass<CPhysicsProp>.ClassName => "prop_physics";
 
 
@@ -74,6 +74,12 @@ public partial interface CPhysicsProp : CBreakableProp, ISchemaClass<CPhysicsPro
     public ref bool ShouldAutoConvertBackFromDebris { get; }
 
     public ref bool MuteImpactEffects { get; }
+
+    public ref bool UpdateNavWhenMoving { get; }
+
+    public ref bool ForceNavObstacleCut { get; }
+
+    public ref bool AllowObstacleConvexHullMerging { get; }
 
     public ref bool AcceptDamageFromHeldObjects { get; }
 

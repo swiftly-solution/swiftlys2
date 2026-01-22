@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRotDoor : CBaseDoor, ISchemaClass<CRotDoor>
 {
     static CRotDoor ISchemaClass<CRotDoor>.From(nint handle) => new CRotDoorImpl(handle);
-    static int ISchemaClass<CRotDoor>.Size => 2672;
+    static int ISchemaClass<CRotDoor>.Size => 2360;
     static string? ISchemaClass<CRotDoor>.ClassName => "func_door_rotating";
 
 

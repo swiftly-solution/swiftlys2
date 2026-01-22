@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModelEntity>
 {
     static CBaseModelEntity ISchemaClass<CBaseModelEntity>.From(nint handle) => new CBaseModelEntityImpl(handle);
-    static int ISchemaClass<CBaseModelEntity>.Size => 2008;
+    static int ISchemaClass<CBaseModelEntity>.Size => 1840;
     static string? ISchemaClass<CBaseModelEntity>.ClassName => "basemodelentity";
 
 
@@ -40,12 +40,6 @@ public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModel
     public ref int DestructiblePartInitialStateDestructed4_PartIndex { get; }
 
     public CDestructiblePartsComponent? DestructiblePartsSystemComponent { get; }
-
-    public ref HitGroup_t LastHitGroup { get; }
-
-    public ref CGlobalSymbol LastDamageSourceName { get; }
-
-    public ref Vector LastDamagePosition { get; }
 
     public GameTime_t DissolveStartTime { get; }
 
@@ -81,23 +75,10 @@ public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModel
 
     public ref byte ObjectCulling { get; }
 
-    public ref int AddDecal { get; }
-
-    public ref Vector DecalPosition { get; }
-
-    public ref Vector DecalForwardAxis { get; }
-
-    public ref DecalMode_t DecalMode { get; }
-
-    public ref DecalMode_t RequiredDecalMode { get; }
-
-    public ref CUtlVector<CHandle<CBaseModelEntity>> ConfigEntitiesToPropagateMaterialDecalsTo { get; }
-
     public CNetworkViewOffsetVector ViewOffset { get; }
 
     public ISchemaFixedArray<uint> DisabledHitGroups { get; }
 
-    public void CRenderComponentUpdated();
     public void CHitboxComponentUpdated();
     public void DestructiblePartsSystemComponentUpdated();
     public void RenderModeUpdated();
@@ -114,12 +95,6 @@ public partial interface CBaseModelEntity : CBaseEntity, ISchemaClass<CBaseModel
     public void FadeScaleUpdated();
     public void ShadowStrengthUpdated();
     public void ObjectCullingUpdated();
-    public void AddDecalUpdated();
-    public void DecalPositionUpdated();
-    public void DecalForwardAxisUpdated();
-    public void DecalModeUpdated();
-    public void RequiredDecalModeUpdated();
-    public void ConfigEntitiesToPropagateMaterialDecalsToUpdated();
     public void ViewOffsetUpdated();
     public void DisabledHitGroupsUpdated();
 }

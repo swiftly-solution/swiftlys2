@@ -25,5 +25,7 @@ public partial interface DynamicMeshDeformParams_t : ISchemaClass<DynamicMeshDef
 
     public ref bool SmoothNormalsAcrossUvSeams { get; }
 
+    public ref bool EnableEyeBulgeDeformation { get; }
+
 
 }

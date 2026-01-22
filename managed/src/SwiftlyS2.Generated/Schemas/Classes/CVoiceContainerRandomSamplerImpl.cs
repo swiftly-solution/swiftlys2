@@ -12,7 +12,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CVoiceContainerRandomSamplerImpl : CVoiceContainerBaseImpl, CVoiceContainerRandomSampler
+internal partial class CVoiceContainerRandomSamplerImpl : CVoiceContainerAsyncGeneratorImpl, CVoiceContainerRandomSampler
 {
     public CVoiceContainerRandomSamplerImpl(nint handle) : base(handle) { }
 

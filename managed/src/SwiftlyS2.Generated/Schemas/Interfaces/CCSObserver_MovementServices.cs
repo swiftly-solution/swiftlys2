@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSObserver_MovementServices : CPlayer_MovementServices, ISchemaClass<CCSObserver_MovementServices>
 {
     static CCSObserver_MovementServices ISchemaClass<CCSObserver_MovementServices>.From(nint handle) => new CCSObserver_MovementServicesImpl(handle);
-    static int ISchemaClass<CCSObserver_MovementServices>.Size => 568;
+    static int ISchemaClass<CCSObserver_MovementServices>.Size => 576;
     static string? ISchemaClass<CCSObserver_MovementServices>.ClassName => null;
 
 

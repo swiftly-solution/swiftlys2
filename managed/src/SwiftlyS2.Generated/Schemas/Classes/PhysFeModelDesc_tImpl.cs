@@ -296,6 +296,14 @@ internal partial class PhysFeModelDesc_tImpl : SchemaClass, PhysFeModelDesc_t
             return ref _Handle.AsRef<CUtlVector<ushort>>(_AntiTunnelTargetNodesOffset!.Value);
         }
     }
+    private static nint? _NodeStrayBoxesOffset;
+
+    public ref CUtlVector<FeNodeStrayBox_t> NodeStrayBoxes {
+        get {
+            _NodeStrayBoxesOffset = _NodeStrayBoxesOffset ?? Schema.GetOffset(0x1BA43927CCED9EB3);
+            return ref _Handle.AsRef<CUtlVector<FeNodeStrayBox_t>>(_NodeStrayBoxesOffset!.Value);
+        }
+    }
     private static nint? _AxialEdgesOffset;
 
     public ref CUtlVector<FeAxialEdgeBend_t> AxialEdges {
@@ -726,6 +734,14 @@ internal partial class PhysFeModelDesc_tImpl : SchemaClass, PhysFeModelDesc_t
         get {
             _DynNodeWindBasesOffset = _DynNodeWindBasesOffset ?? Schema.GetOffset(0x1BA439271ABAB644);
             return ref _Handle.AsRef<CUtlVector<FeNodeWindBase_t>>(_DynNodeWindBasesOffset!.Value);
+        }
+    }
+    private static nint? _SelfCollisionLayersOffset;
+
+    public ref CUtlVector<FeModelSelfCollisionLayer_t> SelfCollisionLayers {
+        get {
+            _SelfCollisionLayersOffset = _SelfCollisionLayersOffset ?? Schema.GetOffset(0x1BA43927476C3053);
+            return ref _Handle.AsRef<CUtlVector<FeModelSelfCollisionLayer_t>>(_SelfCollisionLayersOffset!.Value);
         }
     }
     private static nint? _InternalPressureOffset;

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSPlayer_PingServices : CPlayerPawnComponent, ISchemaClass<CCSPlayer_PingServices>
 {
     static CCSPlayer_PingServices ISchemaClass<CCSPlayer_PingServices>.From(nint handle) => new CCSPlayer_PingServicesImpl(handle);
-    static int ISchemaClass<CCSPlayer_PingServices>.Size => 88;
+    static int ISchemaClass<CCSPlayer_PingServices>.Size => 96;
     static string? ISchemaClass<CCSPlayer_PingServices>.ClassName => null;
 
 

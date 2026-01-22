@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInfoLandmark : CPointEntity, ISchemaClass<CInfoLandmark>
 {
     static CInfoLandmark ISchemaClass<CInfoLandmark>.From(nint handle) => new CInfoLandmarkImpl(handle);
-    static int ISchemaClass<CInfoLandmark>.Size => 1264;
+    static int ISchemaClass<CInfoLandmark>.Size => 1192;
     static string? ISchemaClass<CInfoLandmark>.ClassName => "info_landmark";
 
 

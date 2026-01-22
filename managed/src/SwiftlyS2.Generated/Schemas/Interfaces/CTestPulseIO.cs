@@ -11,23 +11,29 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTestPulseIO : CLogicalEntity, ISchemaClass<CTestPulseIO>
 {
     static CTestPulseIO ISchemaClass<CTestPulseIO>.From(nint handle) => new CTestPulseIOImpl(handle);
-    static int ISchemaClass<CTestPulseIO>.Size => 1552;
+    static int ISchemaClass<CTestPulseIO>.Size => 1424;
     static string? ISchemaClass<CTestPulseIO>.ClassName => "test_io_combinations";
 
 
     public ref CEntityIOOutput OnVariantVoid { get; }
 
-    public ref CEntityIOOutput OnVariantBool { get; }
+    // CEntityOutputTemplate< bool, bool >
+    public SchemaUntypedField OnVariantBool { get; }
 
-    public ref CEntityIOOutput OnVariantInt { get; }
+    // CEntityOutputTemplate< int32, int32 >
+    public SchemaUntypedField OnVariantInt { get; }
 
-    public ref CEntityIOOutput OnVariantFloat { get; }
+    // CEntityOutputTemplate< float32, float32 >
+    public SchemaUntypedField OnVariantFloat { get; }
 
-    public ref CEntityIOOutput OnVariantString { get; }
+    // CEntityOutputTemplate< CUtlSymbolLarge, CUtlSymbolLarge >
+    public SchemaUntypedField OnVariantString { get; }
 
-    public ref CEntityIOOutput OnVariantColor { get; }
+    // CEntityOutputTemplate< Color, Color >
+    public SchemaUntypedField OnVariantColor { get; }
 
-    public ref CEntityIOOutput OnVariantVector { get; }
+    // CEntityOutputTemplate< Vector, Vector >
+    public SchemaUntypedField OnVariantVector { get; }
 
     public ref bool AllowEmptyInputs { get; }
 

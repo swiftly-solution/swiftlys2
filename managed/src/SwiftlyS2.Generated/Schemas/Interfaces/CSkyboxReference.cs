@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSkyboxReference : CBaseEntity, ISchemaClass<CSkyboxReference>
 {
     static CSkyboxReference ISchemaClass<CSkyboxReference>.From(nint handle) => new CSkyboxReferenceImpl(handle);
-    static int ISchemaClass<CSkyboxReference>.Size => 1272;
+    static int ISchemaClass<CSkyboxReference>.Size => 1200;
     static string? ISchemaClass<CSkyboxReference>.ClassName => "skybox_reference";
 
 

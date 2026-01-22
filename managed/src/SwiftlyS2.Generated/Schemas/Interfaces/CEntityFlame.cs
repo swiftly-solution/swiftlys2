@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEntityFlame : CBaseEntity, ISchemaClass<CEntityFlame>
 {
     static CEntityFlame ISchemaClass<CEntityFlame>.From(nint handle) => new CEntityFlameImpl(handle);
-    static int ISchemaClass<CEntityFlame>.Size => 1328;
+    static int ISchemaClass<CEntityFlame>.Size => 1256;
     static string? ISchemaClass<CEntityFlame>.ClassName => "entityflame";
 
 

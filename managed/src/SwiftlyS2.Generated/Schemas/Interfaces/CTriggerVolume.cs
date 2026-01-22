@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerVolume : CBaseModelEntity, ISchemaClass<CTriggerVolume>
 {
     static CTriggerVolume ISchemaClass<CTriggerVolume>.From(nint handle) => new CTriggerVolumeImpl(handle);
-    static int ISchemaClass<CTriggerVolume>.Size => 2024;
+    static int ISchemaClass<CTriggerVolume>.Size => 1856;
     static string? ISchemaClass<CTriggerVolume>.ClassName => "trigger_transition";
 
 

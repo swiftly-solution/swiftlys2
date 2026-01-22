@@ -32,14 +32,6 @@ internal partial class CCSWeaponBaseVDataImpl : CBasePlayerWeaponVDataImpl, CCSW
             return ref _Handle.AsRef<CSWeaponCategory>(_WeaponCategoryOffset!.Value);
         }
     }
-    private static nint? _Model_AG2Offset;
-
-    public SchemaUntypedField Model_AG2 {
-        get {
-            _Model_AG2Offset = _Model_AG2Offset ?? Schema.GetOffset(0x62FB77057CDF7624);
-            return new SchemaUntypedField(_Handle + _Model_AG2Offset!.Value);
-        }
-    }
     private static nint? _AnimSkeletonOffset;
 
     public SchemaUntypedField AnimSkeleton {

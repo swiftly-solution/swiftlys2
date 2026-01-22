@@ -11,9 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundOpvarSetPathCornerEntity : CSoundOpvarSetPointEntity, ISchemaClass<CSoundOpvarSetPathCornerEntity>
 {
     static CSoundOpvarSetPathCornerEntity ISchemaClass<CSoundOpvarSetPathCornerEntity>.From(nint handle) => new CSoundOpvarSetPathCornerEntityImpl(handle);
-    static int ISchemaClass<CSoundOpvarSetPathCornerEntity>.Size => 1744;
+    static int ISchemaClass<CSoundOpvarSetPathCornerEntity>.Size => 1648;
     static string? ISchemaClass<CSoundOpvarSetPathCornerEntity>.ClassName => "snd_opvar_set_path_corner";
 
+
+    public ref bool UseParentedPath { get; }
 
     public ref float DistMinSqr { get; }
 

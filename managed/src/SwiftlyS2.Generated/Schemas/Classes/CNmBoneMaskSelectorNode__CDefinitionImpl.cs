@@ -36,7 +36,7 @@ internal partial class CNmBoneMaskSelectorNode__CDefinitionImpl : CNmBoneMaskVal
 
     public ref bool SwitchDynamically {
         get {
-            _SwitchDynamicallyOffset = _SwitchDynamicallyOffset ?? Schema.GetOffset(0xA9015870461869F8);
+            _SwitchDynamicallyOffset = _SwitchDynamicallyOffset ?? Schema.GetOffset(0xA901587046047CB8);
             return ref _Handle.AsRef<bool>(_SwitchDynamicallyOffset!.Value);
         }
     }

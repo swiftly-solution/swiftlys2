@@ -16,6 +16,14 @@ internal partial class CSoundOpvarSetPathCornerEntityImpl : CSoundOpvarSetPointE
 {
     public CSoundOpvarSetPathCornerEntityImpl(nint handle) : base(handle) { }
 
+    private static nint? _UseParentedPathOffset;
+
+    public ref bool UseParentedPath {
+        get {
+            _UseParentedPathOffset = _UseParentedPathOffset ?? Schema.GetOffset(0x368409545340666E);
+            return ref _Handle.AsRef<bool>(_UseParentedPathOffset!.Value);
+        }
+    }
     private static nint? _DistMinSqrOffset;
 
     public ref float DistMinSqr {

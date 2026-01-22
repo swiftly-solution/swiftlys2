@@ -196,14 +196,6 @@ internal partial class CBaseRendererSource2Impl : CParticleFunctionRendererImpl,
             return ref _Handle.AsRef<int>(_LightingControlPointOffset!.Value);
         }
     }
-    private static nint? _SelfIllumPerParticleOffset;
-
-    public ParticleAttributeIndex_t SelfIllumPerParticle {
-        get {
-            _SelfIllumPerParticleOffset = _SelfIllumPerParticleOffset ?? Schema.GetOffset(0xA732A57513479BAD);
-            return new ParticleAttributeIndex_tImpl(_Handle + _SelfIllumPerParticleOffset!.Value);
-        }
-    }
     private static nint? _OutputBlendModeOffset;
 
     public ref ParticleOutputBlendMode_t OutputBlendMode {

@@ -28,18 +28,6 @@ internal partial class CSceneEntityImpl : CPointEntityImpl, CSceneEntity
             Schema.SetString(_Handle, _SceneFileOffset!.Value, value);
         }
     } 
-    private static nint? _ResumeSceneFileOffset;
-
-    public string ResumeSceneFile {
-        get {
-            _ResumeSceneFileOffset = _ResumeSceneFileOffset ?? Schema.GetOffset(0x1099B701B722F1C4);
-            return Schema.GetString(_Handle.Read<nint>(_ResumeSceneFileOffset!.Value));
-        }
-        set {
-            _ResumeSceneFileOffset = _ResumeSceneFileOffset ?? Schema.GetOffset(0x1099B701B722F1C4);
-            Schema.SetString(_Handle, _ResumeSceneFileOffset!.Value, value);
-        }
-    } 
     private static nint? _Target1Offset;
 
     public string Target1 {
@@ -324,22 +312,6 @@ internal partial class CSceneEntityImpl : CPointEntityImpl, CSceneEntity
             return ref _Handle.AsRef<int>(_SpeechPriorityOffset!.Value);
         }
     }
-    private static nint? _WaitingForThisResumeSceneOffset;
-
-    public ref CHandle<CBaseEntity> WaitingForThisResumeScene {
-        get {
-            _WaitingForThisResumeSceneOffset = _WaitingForThisResumeSceneOffset ?? Schema.GetOffset(0x1099B7011B4B617A);
-            return ref _Handle.AsRef<CHandle<CBaseEntity>>(_WaitingForThisResumeSceneOffset!.Value);
-        }
-    }
-    private static nint? _WaitingForResumeSceneOffset;
-
-    public ref bool WaitingForResumeScene {
-        get {
-            _WaitingForResumeSceneOffset = _WaitingForResumeSceneOffset ?? Schema.GetOffset(0x1099B701F33D29C4);
-            return ref _Handle.AsRef<bool>(_WaitingForResumeSceneOffset!.Value);
-        }
-    }
     private static nint? _PausedViaInputOffset;
 
     public ref bool PausedViaInput {
@@ -412,14 +384,6 @@ internal partial class CSceneEntityImpl : CPointEntityImpl, CSceneEntity
             return ref _Handle.AsRef<CUtlVector<CHandle<CBaseEntity>>>(_RemoveActorListOffset!.Value);
         }
     }
-    private static nint? _SceneFlushCounterOffset;
-
-    public ref int SceneFlushCounter {
-        get {
-            _SceneFlushCounterOffset = _SceneFlushCounterOffset ?? Schema.GetOffset(0x1099B701E744BD85);
-            return ref _Handle.AsRef<int>(_SceneFlushCounterOffset!.Value);
-        }
-    }
     private static nint? _SceneStringIndexOffset;
 
     public ref ushort SceneStringIndex {
@@ -467,9 +431,6 @@ internal partial class CSceneEntityImpl : CPointEntityImpl, CSceneEntity
             _OnResumedOffset = _OnResumedOffset ?? Schema.GetOffset(0x1099B701CCA87325);
             return ref _Handle.AsRef<CEntityIOOutput>(_OnResumedOffset!.Value);
         }
-    }
-    public ISchemaFixedArray<CEntityIOOutput> OnTrigger {
-        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0x1099B70181E0BFEC, 16, 40, 8);
     }
     private static nint? _InterruptSceneOffset;
 

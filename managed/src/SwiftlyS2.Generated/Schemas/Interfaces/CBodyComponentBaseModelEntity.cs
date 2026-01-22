@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBodyComponentBaseModelEntity : CBodyComponentSkeletonInstance, ISchemaClass<CBodyComponentBaseModelEntity>
 {
     static CBodyComponentBaseModelEntity ISchemaClass<CBodyComponentBaseModelEntity>.From(nint handle) => new CBodyComponentBaseModelEntityImpl(handle);
-    static int ISchemaClass<CBodyComponentBaseModelEntity>.Size => 1296;
+    static int ISchemaClass<CBodyComponentBaseModelEntity>.Size => 1200;
     static string? ISchemaClass<CBodyComponentBaseModelEntity>.ClassName => null;
 
 

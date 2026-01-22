@@ -108,6 +108,14 @@ internal partial class CBasePlayerWeaponVDataImpl : CEntitySubclassVDataBaseImpl
             return ref _Handle.AsRef<float>(_MuzzleSmokeDecrementRateOffset!.Value);
         }
     }
+    private static nint? _GenerateMuzzleLightOffset;
+
+    public ref bool GenerateMuzzleLight {
+        get {
+            _GenerateMuzzleLightOffset = _GenerateMuzzleLightOffset ?? Schema.GetOffset(0x64E418A0F958D801);
+            return ref _Handle.AsRef<bool>(_GenerateMuzzleLightOffset!.Value);
+        }
+    }
     private static nint? _LinkedCooldownsOffset;
 
     public ref bool LinkedCooldowns {
@@ -122,6 +130,30 @@ internal partial class CBasePlayerWeaponVDataImpl : CEntitySubclassVDataBaseImpl
         get {
             _FlagsOffset = _FlagsOffset ?? Schema.GetOffset(0x64E418A01873A1F7);
             return ref _Handle.AsRef<ItemFlagTypes_t>(_FlagsOffset!.Value);
+        }
+    }
+    private static nint? _WeightOffset;
+
+    public ref int Weight {
+        get {
+            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x64E418A054A5EA14);
+            return ref _Handle.AsRef<int>(_WeightOffset!.Value);
+        }
+    }
+    private static nint? _AutoSwitchToOffset;
+
+    public ref bool AutoSwitchTo {
+        get {
+            _AutoSwitchToOffset = _AutoSwitchToOffset ?? Schema.GetOffset(0x64E418A01E225763);
+            return ref _Handle.AsRef<bool>(_AutoSwitchToOffset!.Value);
+        }
+    }
+    private static nint? _AutoSwitchFromOffset;
+
+    public ref bool AutoSwitchFrom {
+        get {
+            _AutoSwitchFromOffset = _AutoSwitchFromOffset ?? Schema.GetOffset(0x64E418A01E5E509A);
+            return ref _Handle.AsRef<bool>(_AutoSwitchFromOffset!.Value);
         }
     }
     private static nint? _PrimaryAmmoTypeOffset;
@@ -194,30 +226,6 @@ internal partial class CBasePlayerWeaponVDataImpl : CEntitySubclassVDataBaseImpl
         get {
             _KeepLoadedAmmoOffset = _KeepLoadedAmmoOffset ?? Schema.GetOffset(0x64E418A0C9C228BF);
             return ref _Handle.AsRef<bool>(_KeepLoadedAmmoOffset!.Value);
-        }
-    }
-    private static nint? _WeightOffset;
-
-    public ref int Weight {
-        get {
-            _WeightOffset = _WeightOffset ?? Schema.GetOffset(0x64E418A054A5EA14);
-            return ref _Handle.AsRef<int>(_WeightOffset!.Value);
-        }
-    }
-    private static nint? _AutoSwitchToOffset;
-
-    public ref bool AutoSwitchTo {
-        get {
-            _AutoSwitchToOffset = _AutoSwitchToOffset ?? Schema.GetOffset(0x64E418A01E225763);
-            return ref _Handle.AsRef<bool>(_AutoSwitchToOffset!.Value);
-        }
-    }
-    private static nint? _AutoSwitchFromOffset;
-
-    public ref bool AutoSwitchFrom {
-        get {
-            _AutoSwitchFromOffset = _AutoSwitchFromOffset ?? Schema.GetOffset(0x64E418A01E5E509A);
-            return ref _Handle.AsRef<bool>(_AutoSwitchFromOffset!.Value);
         }
     }
     private static nint? _RumbleEffectOffset;

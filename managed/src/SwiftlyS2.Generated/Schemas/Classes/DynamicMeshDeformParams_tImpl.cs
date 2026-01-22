@@ -56,6 +56,14 @@ internal partial class DynamicMeshDeformParams_tImpl : SchemaClass, DynamicMeshD
             return ref _Handle.AsRef<bool>(_SmoothNormalsAcrossUvSeamsOffset!.Value);
         }
     }
+    private static nint? _EnableEyeBulgeDeformationOffset;
+
+    public ref bool EnableEyeBulgeDeformation {
+        get {
+            _EnableEyeBulgeDeformationOffset = _EnableEyeBulgeDeformationOffset ?? Schema.GetOffset(0xBC2B1F5B9F75C2EC);
+            return ref _Handle.AsRef<bool>(_EnableEyeBulgeDeformationOffset!.Value);
+        }
+    }
 
 
 }

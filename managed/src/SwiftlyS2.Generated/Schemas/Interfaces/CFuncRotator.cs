@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRotator>
 {
     static CFuncRotator ISchemaClass<CFuncRotator>.From(nint handle) => new CFuncRotatorImpl(handle);
-    static int ISchemaClass<CFuncRotator>.Size => 2576;
+    static int ISchemaClass<CFuncRotator>.Size => 2320;
     static string? ISchemaClass<CFuncRotator>.ClassName => "func_rotator";
 
 
@@ -84,6 +84,18 @@ public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRota
     public ref CUtlVector<RotatorQueueEntry_t> RotatorQueue { get; }
 
     public ref CUtlVector<RotatorHistoryEntry_t> RotatorQueueHistory { get; }
+
+    public ref SolidType_t SolidType { get; }
+
+    public ref CHandle<CFuncMover> SpeedFromMover { get; }
+
+    public string SpeedFromMover1 { get; set; }
+
+    public ref float SpeedScale { get; }
+
+    public ref float MinYawRotation { get; }
+
+    public ref float MaxYawRotation { get; }
 
 
 }

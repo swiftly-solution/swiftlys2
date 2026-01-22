@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CHandleDummy : CBaseEntity, ISchemaClass<CHandleDummy>
 {
     static CHandleDummy ISchemaClass<CHandleDummy>.From(nint handle) => new CHandleDummyImpl(handle);
-    static int ISchemaClass<CHandleDummy>.Size => 1264;
+    static int ISchemaClass<CHandleDummy>.Size => 1192;
     static string? ISchemaClass<CHandleDummy>.ClassName => "handle_dummy";
 
 

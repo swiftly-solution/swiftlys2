@@ -32,8 +32,8 @@ internal partial class CTestEffectImpl : CBaseEntityImpl, CTestEffect
             return ref _Handle.AsRef<int>(_BeamOffset!.Value);
         }
     }
-    public ISchemaClassFixedArray<CBeam> Beam1 {
-        get => new SchemaClassFixedArray<CBeam>(_Handle, 0xF4103FBFC4017428, 24, 8, 8);
+    public ISchemaFixedArray<CHandle<CBeam>> Beam1 {
+        get => new SchemaFixedArray<CHandle<CBeam>>(_Handle, 0xF4103FBFC4017428, 24, 4, 4);
     }
     public ISchemaClassFixedArray<GameTime_t> BeamTime {
         get => new SchemaClassFixedArray<GameTime_t>(_Handle, 0xF4103FBF60293F01, 24, 4, 4);

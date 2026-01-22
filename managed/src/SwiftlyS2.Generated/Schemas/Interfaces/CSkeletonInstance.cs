@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSkeletonInstance : CGameSceneNode, ISchemaClass<CSkeletonInstance>
 {
     static CSkeletonInstance ISchemaClass<CSkeletonInstance>.From(nint handle) => new CSkeletonInstanceImpl(handle);
-    static int ISchemaClass<CSkeletonInstance>.Size => 1168;
+    static int ISchemaClass<CSkeletonInstance>.Size => 1072;
     static string? ISchemaClass<CSkeletonInstance>.ClassName => null;
 
 
@@ -32,6 +32,8 @@ public partial interface CSkeletonInstance : CGameSceneNode, ISchemaClass<CSkele
     public ref CUtlStringToken MaterialGroup { get; }
 
     public ref byte HitboxSet { get; }
+
+    public ref bool ForceServerConstraintsEnabled { get; }
 
     public void ModelStateUpdated();
     public void IsAnimationEnabledUpdated();

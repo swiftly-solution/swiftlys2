@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CVoiceContainerSwitch : CVoiceContainerBase, ISchemaClass<CVoiceContainerSwitch>
 {
     static CVoiceContainerSwitch ISchemaClass<CVoiceContainerSwitch>.From(nint handle) => new CVoiceContainerSwitchImpl(handle);
-    static int ISchemaClass<CVoiceContainerSwitch>.Size => 208;
+    static int ISchemaClass<CVoiceContainerSwitch>.Size => 192;
     static string? ISchemaClass<CVoiceContainerSwitch>.ClassName => null;
 
 

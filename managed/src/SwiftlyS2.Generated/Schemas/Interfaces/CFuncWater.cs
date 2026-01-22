@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncWater : CBaseModelEntity, ISchemaClass<CFuncWater>
 {
     static CFuncWater ISchemaClass<CFuncWater>.From(nint handle) => new CFuncWaterImpl(handle);
-    static int ISchemaClass<CFuncWater>.Size => 2288;
+    static int ISchemaClass<CFuncWater>.Size => 2120;
     static string? ISchemaClass<CFuncWater>.ClassName => "func_water";
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPathSimple : CBaseEntity, ISchemaClass<CPathSimple>
 {
     static CPathSimple ISchemaClass<CPathSimple>.From(nint handle) => new CPathSimpleImpl(handle);
-    static int ISchemaClass<CPathSimple>.Size => 1536;
+    static int ISchemaClass<CPathSimple>.Size => 1456;
     static string? ISchemaClass<CPathSimple>.ClassName => "path_simple";
 
 

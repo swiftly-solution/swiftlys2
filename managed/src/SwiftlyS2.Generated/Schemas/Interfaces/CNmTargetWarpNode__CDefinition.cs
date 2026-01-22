@@ -23,6 +23,8 @@ public partial interface CNmTargetWarpNode__CDefinition : CNmPoseNode__CDefiniti
 
     public ref bool AllowTargetUpdate { get; }
 
+    public ref bool AlignWithTargetAtLastWarpEvent { get; }
+
     public ref float SamplingPositionErrorThresholdSq { get; }
 
     public ref float MaxTangentLength { get; }

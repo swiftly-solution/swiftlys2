@@ -40,15 +40,6 @@ internal partial class CDestructiblePartsComponentImpl : SchemaClass, CDestructi
             return ref _Handle.AsRef<CHandle<CBaseModelEntity>>(_OwnerOffset!.Value);
         }
     }
-    private static nint? _LastHitDamageLevelOffset;
-
-    public ref int LastHitDamageLevel {
-        get {
-            _LastHitDamageLevelOffset = _LastHitDamageLevelOffset ?? Schema.GetOffset(0xE69A9E51042B0657);
-            return ref _Handle.AsRef<int>(_LastHitDamageLevelOffset!.Value);
-        }
-    }
 
     public void OwnerUpdated() => Schema.Update(_Handle, 0xE69A9E51F6D89572);
-    public void LastHitDamageLevelUpdated() => Schema.Update(_Handle, 0xE69A9E51042B0657);
 }

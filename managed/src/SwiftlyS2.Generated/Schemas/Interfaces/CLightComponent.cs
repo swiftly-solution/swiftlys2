@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLightComponent : CEntityComponent, ISchemaClass<CLightComponent>
 {
     static CLightComponent ISchemaClass<CLightComponent>.From(nint handle) => new CLightComponentImpl(handle);
-    static int ISchemaClass<CLightComponent>.Size => 440;
+    static int ISchemaClass<CLightComponent>.Size => 448;
     static string? ISchemaClass<CLightComponent>.ClassName => null;
 
 
@@ -104,6 +104,8 @@ public partial interface CLightComponent : CEntityComponent, ISchemaClass<CLight
     public ref int DirectLight { get; }
 
     public ref int IndirectLight { get; }
+
+    public ref bool DynamicBounce { get; }
 
     public ref float FadeMinDist { get; }
 
@@ -199,6 +201,7 @@ public partial interface CLightComponent : CEntityComponent, ISchemaClass<CLight
     public void AllowSSTGenerationUpdated();
     public void DirectLightUpdated();
     public void IndirectLightUpdated();
+    public void DynamicBounceUpdated();
     public void FadeMinDistUpdated();
     public void FadeMaxDistUpdated();
     public void ShadowFadeMinDistUpdated();

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CRagdollConstraint : CPhysConstraint, ISchemaClass<CRagdollConstraint>
 {
     static CRagdollConstraint ISchemaClass<CRagdollConstraint>.From(nint handle) => new CRagdollConstraintImpl(handle);
-    static int ISchemaClass<CRagdollConstraint>.Size => 1416;
+    static int ISchemaClass<CRagdollConstraint>.Size => 1328;
     static string? ISchemaClass<CRagdollConstraint>.ClassName => "phys_ragdollconstraint";
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvMuzzleFlash : CPointEntity, ISchemaClass<CEnvMuzzleFlash>
 {
     static CEnvMuzzleFlash ISchemaClass<CEnvMuzzleFlash>.From(nint handle) => new CEnvMuzzleFlashImpl(handle);
-    static int ISchemaClass<CEnvMuzzleFlash>.Size => 1280;
+    static int ISchemaClass<CEnvMuzzleFlash>.Size => 1208;
     static string? ISchemaClass<CEnvMuzzleFlash>.ClassName => "env_muzzleflash";
 
 

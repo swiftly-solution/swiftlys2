@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFilterTeam : CBaseFilter, ISchemaClass<CFilterTeam>
 {
     static CFilterTeam ISchemaClass<CFilterTeam>.From(nint handle) => new CFilterTeamImpl(handle);
-    static int ISchemaClass<CFilterTeam>.Size => 1360;
+    static int ISchemaClass<CFilterTeam>.Size => 1256;
     static string? ISchemaClass<CFilterTeam>.ClassName => "filter_activator_team";
 
 

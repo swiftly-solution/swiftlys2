@@ -25,7 +25,11 @@ public partial interface ConstraintSoundInfo : ISchemaClass<ConstraintSoundInfo>
 
     public string TravelSoundBack { get; set; }
 
-    public ISchemaStringFixedArray ReversalSounds { get; }
+    public string ReversalSoundSmall { get; set; }
+
+    public string ReversalSoundMedium { get; set; }
+
+    public string ReversalSoundLarge { get; set; }
 
     public ref bool PlayTravelSound { get; }
 

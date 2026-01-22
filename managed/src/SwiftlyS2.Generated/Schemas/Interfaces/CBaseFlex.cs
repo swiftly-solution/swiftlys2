@@ -11,15 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseFlex : CBaseAnimGraph, ISchemaClass<CBaseFlex>
 {
     static CBaseFlex ISchemaClass<CBaseFlex>.From(nint handle) => new CBaseFlexImpl(handle);
-    static int ISchemaClass<CBaseFlex>.Size => 2848;
+    static int ISchemaClass<CBaseFlex>.Size => 2736;
     static string? ISchemaClass<CBaseFlex>.ClassName => "baseflex";
 
 
     public ref CUtlVector<float> FlexWeight { get; }
 
     public ref Vector LookTargetPosition { get; }
-
-    public ref bool Blinktoggle { get; }
 
     public GameTime_t AllowResponsesEndTime { get; }
 
@@ -31,5 +29,4 @@ public partial interface CBaseFlex : CBaseAnimGraph, ISchemaClass<CBaseFlex>
 
     public void FlexWeightUpdated();
     public void LookTargetPositionUpdated();
-    public void BlinktoggleUpdated();
 }

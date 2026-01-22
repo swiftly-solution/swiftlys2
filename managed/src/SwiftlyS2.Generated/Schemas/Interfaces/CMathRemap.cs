@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CMathRemap : CLogicalEntity, ISchemaClass<CMathRemap>
 {
     static CMathRemap ISchemaClass<CMathRemap>.From(nint handle) => new CMathRemapImpl(handle);
-    static int ISchemaClass<CMathRemap>.Size => 1488;
+    static int ISchemaClass<CMathRemap>.Size => 1344;
     static string? ISchemaClass<CMathRemap>.ClassName => "math_remap";
 
 
@@ -27,7 +27,7 @@ public partial interface CMathRemap : CLogicalEntity, ISchemaClass<CMathRemap>
 
     public ref bool Enabled { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField OutValue { get; }
 
     public ref CEntityIOOutput OnRoseAboveMin { get; }

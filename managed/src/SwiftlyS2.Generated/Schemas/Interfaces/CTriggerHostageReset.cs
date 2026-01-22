@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerHostageReset : CBaseTrigger, ISchemaClass<CTriggerHostageReset>
 {
     static CTriggerHostageReset ISchemaClass<CTriggerHostageReset>.From(nint handle) => new CTriggerHostageResetImpl(handle);
-    static int ISchemaClass<CTriggerHostageReset>.Size => 2472;
+    static int ISchemaClass<CTriggerHostageReset>.Size => 2192;
     static string? ISchemaClass<CTriggerHostageReset>.ClassName => "trigger_hostage_reset";
 
 

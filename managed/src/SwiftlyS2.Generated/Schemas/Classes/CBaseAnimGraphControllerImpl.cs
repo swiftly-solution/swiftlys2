@@ -16,6 +16,14 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
 {
     public CBaseAnimGraphControllerImpl(nint handle) : base(handle) { }
 
+    private static nint? _AnimationAlgorithmOffset;
+
+    public ref AnimationAlgorithm_t AnimationAlgorithm {
+        get {
+            _AnimationAlgorithmOffset = _AnimationAlgorithmOffset ?? Schema.GetOffset(0xFA1FB81E9E954FFE);
+            return ref _Handle.AsRef<AnimationAlgorithm_t>(_AnimationAlgorithmOffset!.Value);
+        }
+    }
     private static nint? _AnimGraphNetworkedVarsOffset;
 
     public CAnimGraphNetworkedVariables AnimGraphNetworkedVars {
@@ -24,12 +32,44 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
             return new CAnimGraphNetworkedVariablesImpl(_Handle + _AnimGraphNetworkedVarsOffset!.Value);
         }
     }
-    private static nint? _SequenceFinishedOffset;
+    private static nint? _AnimGraphInstanceOffset;
 
-    public ref bool SequenceFinished {
+    public SchemaUntypedField AnimGraphInstance {
         get {
-            _SequenceFinishedOffset = _SequenceFinishedOffset ?? Schema.GetOffset(0xFA1FB81E5DB8EB16);
-            return ref _Handle.AsRef<bool>(_SequenceFinishedOffset!.Value);
+            _AnimGraphInstanceOffset = _AnimGraphInstanceOffset ?? Schema.GetOffset(0xFA1FB81E4E1FC8C9);
+            return new SchemaUntypedField(_Handle + _AnimGraphInstanceOffset!.Value);
+        }
+    }
+    private static nint? _NextExternalGraphHandleOffset;
+
+    public ExternalAnimGraphHandle_t NextExternalGraphHandle {
+        get {
+            _NextExternalGraphHandleOffset = _NextExternalGraphHandleOffset ?? Schema.GetOffset(0xFA1FB81E8F65A277);
+            return new ExternalAnimGraphHandle_tImpl(_Handle + _NextExternalGraphHandleOffset!.Value);
+        }
+    }
+    private static nint? _SecondarySkeletonNamesOffset;
+
+    public ref CUtlVector<CGlobalSymbol> SecondarySkeletonNames {
+        get {
+            _SecondarySkeletonNamesOffset = _SecondarySkeletonNamesOffset ?? Schema.GetOffset(0xFA1FB81E42B8BAD6);
+            return ref _Handle.AsRef<CUtlVector<CGlobalSymbol>>(_SecondarySkeletonNamesOffset!.Value);
+        }
+    }
+    private static nint? _SecondarySkeletonsOffset;
+
+    public ref CUtlVector<CHandle<CBaseAnimGraph>> SecondarySkeletons {
+        get {
+            _SecondarySkeletonsOffset = _SecondarySkeletonsOffset ?? Schema.GetOffset(0xFA1FB81E1648EB2B);
+            return ref _Handle.AsRef<CUtlVector<CHandle<CBaseAnimGraph>>>(_SecondarySkeletonsOffset!.Value);
+        }
+    }
+    private static nint? _SecondarySkeletonMasterCountOffset;
+
+    public ref int SecondarySkeletonMasterCount {
+        get {
+            _SecondarySkeletonMasterCountOffset = _SecondarySkeletonMasterCountOffset ?? Schema.GetOffset(0xFA1FB81E33016DEB);
+            return ref _Handle.AsRef<int>(_SecondarySkeletonMasterCountOffset!.Value);
         }
     }
     private static nint? _SoundSyncTimeOffset;
@@ -120,12 +160,20 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
             return ref _Handle.AsRef<bool>(_LastUpdateSkippedOffset!.Value);
         }
     }
-    private static nint? _PrevAnimUpdateTimeOffset;
+    private static nint? _SequenceFinishedOffset;
 
-    public GameTime_t PrevAnimUpdateTime {
+    public ref bool SequenceFinished {
         get {
-            _PrevAnimUpdateTimeOffset = _PrevAnimUpdateTimeOffset ?? Schema.GetOffset(0xFA1FB81E724643D3);
-            return new GameTime_tImpl(_Handle + _PrevAnimUpdateTimeOffset!.Value);
+            _SequenceFinishedOffset = _SequenceFinishedOffset ?? Schema.GetOffset(0xFA1FB81E5DB8EB16);
+            return ref _Handle.AsRef<bool>(_SequenceFinishedOffset!.Value);
+        }
+    }
+    private static nint? _PrevAnimUpdateTickOffset;
+
+    public GameTick_t PrevAnimUpdateTick {
+        get {
+            _PrevAnimUpdateTickOffset = _PrevAnimUpdateTickOffset ?? Schema.GetOffset(0xFA1FB81EF7E0158D);
+            return new GameTick_tImpl(_Handle + _PrevAnimUpdateTickOffset!.Value);
         }
     }
     private static nint? _GraphDefinitionAG2Offset;
@@ -134,14 +182,6 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
         get {
             _GraphDefinitionAG2Offset = _GraphDefinitionAG2Offset ?? Schema.GetOffset(0xFA1FB81EBE14922A);
             return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCNmGraphDefinition>>(_GraphDefinitionAG2Offset!.Value);
-        }
-    }
-    private static nint? _IsUsingAG2Offset;
-
-    public ref bool IsUsingAG2 {
-        get {
-            _IsUsingAG2Offset = _IsUsingAG2Offset ?? Schema.GetOffset(0xFA1FB81EB54DDF17);
-            return ref _Handle.AsRef<bool>(_IsUsingAG2Offset!.Value);
         }
     }
     private static nint? _SerializedPoseRecipeAG2Offset;
@@ -168,20 +208,12 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
             return ref _Handle.AsRef<int>(_SerializePoseRecipeVersionAG2Offset!.Value);
         }
     }
-    private static nint? _GraphCreationFlagsAG2Offset;
+    private static nint? _ServerGraphInstanceIterationOffset;
 
-    public ref byte GraphCreationFlagsAG2 {
+    public ref int ServerGraphInstanceIteration {
         get {
-            _GraphCreationFlagsAG2Offset = _GraphCreationFlagsAG2Offset ?? Schema.GetOffset(0xFA1FB81EA3781101);
-            return ref _Handle.AsRef<byte>(_GraphCreationFlagsAG2Offset!.Value);
-        }
-    }
-    private static nint? _ServerGraphDefReloadCountAG2Offset;
-
-    public ref int ServerGraphDefReloadCountAG2 {
-        get {
-            _ServerGraphDefReloadCountAG2Offset = _ServerGraphDefReloadCountAG2Offset ?? Schema.GetOffset(0xFA1FB81E6A8D1A13);
-            return ref _Handle.AsRef<int>(_ServerGraphDefReloadCountAG2Offset!.Value);
+            _ServerGraphInstanceIterationOffset = _ServerGraphInstanceIterationOffset ?? Schema.GetOffset(0xFA1FB81E86F9DE00);
+            return ref _Handle.AsRef<int>(_ServerGraphInstanceIterationOffset!.Value);
         }
     }
     private static nint? _ServerSerializationContextIterationOffset;
@@ -192,19 +224,63 @@ internal partial class CBaseAnimGraphControllerImpl : CSkeletonAnimationControll
             return ref _Handle.AsRef<int>(_ServerSerializationContextIterationOffset!.Value);
         }
     }
+    private static nint? _PrimaryGraphIdOffset;
 
+    public ResourceId_t PrimaryGraphId {
+        get {
+            _PrimaryGraphIdOffset = _PrimaryGraphIdOffset ?? Schema.GetOffset(0xFA1FB81E1B851336);
+            return new ResourceId_tImpl(_Handle + _PrimaryGraphIdOffset!.Value);
+        }
+    }
+    private static nint? _ExternalGraphIdsOffset;
+
+    public ref CUtlVector<ResourceId_t> ExternalGraphIds {
+        get {
+            _ExternalGraphIdsOffset = _ExternalGraphIdsOffset ?? Schema.GetOffset(0xFA1FB81E7C340F74);
+            return ref _Handle.AsRef<CUtlVector<ResourceId_t>>(_ExternalGraphIdsOffset!.Value);
+        }
+    }
+    private static nint? _ExternalClipIdsOffset;
+
+    public ref CUtlVector<ResourceId_t> ExternalClipIds {
+        get {
+            _ExternalClipIdsOffset = _ExternalClipIdsOffset ?? Schema.GetOffset(0xFA1FB81E8916FFC6);
+            return ref _Handle.AsRef<CUtlVector<ResourceId_t>>(_ExternalClipIdsOffset!.Value);
+        }
+    }
+    private static nint? _AnimGraph2IdentifierOffset;
+
+    public ref CGlobalSymbol AnimGraph2Identifier {
+        get {
+            _AnimGraph2IdentifierOffset = _AnimGraph2IdentifierOffset ?? Schema.GetOffset(0xFA1FB81E5B44850A);
+            return ref _Handle.AsRef<CGlobalSymbol>(_AnimGraph2IdentifierOffset!.Value);
+        }
+    }
+    private static nint? _ExternalGraphsOffset;
+
+    public ref CUtlVector<ExternalAnimGraph_t> ExternalGraphs {
+        get {
+            _ExternalGraphsOffset = _ExternalGraphsOffset ?? Schema.GetOffset(0xFA1FB81E932F0BC3);
+            return ref _Handle.AsRef<CUtlVector<ExternalAnimGraph_t>>(_ExternalGraphsOffset!.Value);
+        }
+    }
+
+    public void AnimationAlgorithmUpdated() => Schema.Update(_Handle, 0xFA1FB81E9E954FFE);
     public void AnimGraphNetworkedVarsUpdated() => Schema.Update(_Handle, 0xFA1FB81EA83A7C39);
+    public void SecondarySkeletonsUpdated() => Schema.Update(_Handle, 0xFA1FB81E1648EB2B);
+    public void SecondarySkeletonMasterCountUpdated() => Schema.Update(_Handle, 0xFA1FB81E33016DEB);
     public void SequenceUpdated() => Schema.Update(_Handle, 0xFA1FB81EE0A0598E);
     public void SeqStartTimeUpdated() => Schema.Update(_Handle, 0xFA1FB81E9120356F);
     public void SeqFixedCycleUpdated() => Schema.Update(_Handle, 0xFA1FB81E77103EAE);
     public void AnimLoopModeUpdated() => Schema.Update(_Handle, 0xFA1FB81E9C9688D9);
     public void PlaybackRateUpdated() => Schema.Update(_Handle, 0xFA1FB81EC396F9D8);
     public void GraphDefinitionAG2Updated() => Schema.Update(_Handle, 0xFA1FB81EBE14922A);
-    public void IsUsingAG2Updated() => Schema.Update(_Handle, 0xFA1FB81EB54DDF17);
     public void SerializedPoseRecipeAG2Updated() => Schema.Update(_Handle, 0xFA1FB81E61B92D46);
     public void SerializePoseRecipeSizeAG2Updated() => Schema.Update(_Handle, 0xFA1FB81E0121F373);
     public void SerializePoseRecipeVersionAG2Updated() => Schema.Update(_Handle, 0xFA1FB81EC099725C);
-    public void GraphCreationFlagsAG2Updated() => Schema.Update(_Handle, 0xFA1FB81EA3781101);
-    public void ServerGraphDefReloadCountAG2Updated() => Schema.Update(_Handle, 0xFA1FB81E6A8D1A13);
+    public void ServerGraphInstanceIterationUpdated() => Schema.Update(_Handle, 0xFA1FB81E86F9DE00);
     public void ServerSerializationContextIterationUpdated() => Schema.Update(_Handle, 0xFA1FB81ED9F8A6D4);
+    public void PrimaryGraphIdUpdated() => Schema.Update(_Handle, 0xFA1FB81E1B851336);
+    public void ExternalGraphIdsUpdated() => Schema.Update(_Handle, 0xFA1FB81E7C340F74);
+    public void ExternalClipIdsUpdated() => Schema.Update(_Handle, 0xFA1FB81E8916FFC6);
 }

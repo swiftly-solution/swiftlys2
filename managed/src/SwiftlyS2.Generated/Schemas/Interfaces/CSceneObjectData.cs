@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSceneObjectData : ISchemaClass<CSceneObjectData>
 {
     static CSceneObjectData ISchemaClass<CSceneObjectData>.From(nint handle) => new CSceneObjectDataImpl(handle);
-    static int ISchemaClass<CSceneObjectData>.Size => 144;
+    static int ISchemaClass<CSceneObjectData>.Size => 160;
     static string? ISchemaClass<CSceneObjectData>.ClassName => null;
 
 
@@ -24,6 +24,8 @@ public partial interface CSceneObjectData : ISchemaClass<CSceneObjectData>
     public ref CUtlLeanVector<AABB_t, int> DrawBounds { get; }
 
     public ref CUtlLeanVector<CMeshletDescriptor, int> Meshlets { get; }
+
+    public ref CUtlLeanVector<CSceneObjectData__RTProxyDrawDescriptor_t, int> RtProxyDrawCalls { get; }
 
     public ref Vector4D TintColor { get; }
 

@@ -11,13 +11,13 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_PlaneCull : CParticleFunctionOperator, ISchemaClass<C_OP_PlaneCull>
 {
     static C_OP_PlaneCull ISchemaClass<C_OP_PlaneCull>.From(nint handle) => new C_OP_PlaneCullImpl(handle);
-    static int ISchemaClass<C_OP_PlaneCull>.Size => 488;
+    static int ISchemaClass<C_OP_PlaneCull>.Size => 2200;
     static string? ISchemaClass<C_OP_PlaneCull>.ClassName => null;
 
 
     public ref int PlaneControlPoint { get; }
 
-    public ref Vector PlaneDirection { get; }
+    public CParticleCollectionVecInput PlaneDirection { get; }
 
     public ref bool LocalSpace { get; }
 

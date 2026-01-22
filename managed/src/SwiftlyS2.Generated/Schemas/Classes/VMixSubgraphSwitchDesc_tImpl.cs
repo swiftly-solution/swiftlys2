@@ -16,6 +16,38 @@ internal partial class VMixSubgraphSwitchDesc_tImpl : SchemaClass, VMixSubgraphS
 {
     public VMixSubgraphSwitchDesc_tImpl(nint handle) : base(handle) { }
 
+    private static nint? _NameOffset;
+
+    public string Name {
+        get {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9671DF894D8F5786);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_NameOffset!.Value));
+        }
+        set {
+            _NameOffset = _NameOffset ?? Schema.GetOffset(0x9671DF894D8F5786);
+            Schema.SetCUtlString(_Handle, _NameOffset!.Value, value);
+        }
+    } 
+    private static nint? _EffectNameOffset;
+
+    public string EffectName {
+        get {
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x9671DF894DF4F5CF);
+            return Schema.GetCUtlString(_Handle.Read<nint>(_EffectNameOffset!.Value));
+        }
+        set {
+            _EffectNameOffset = _EffectNameOffset ?? Schema.GetOffset(0x9671DF894DF4F5CF);
+            Schema.SetCUtlString(_Handle, _EffectNameOffset!.Value, value);
+        }
+    } 
+    private static nint? _SubgraphsOffset;
+
+    public ref CUtlVector<CUtlString> Subgraphs {
+        get {
+            _SubgraphsOffset = _SubgraphsOffset ?? Schema.GetOffset(0x9671DF89ECCF80EC);
+            return ref _Handle.AsRef<CUtlVector<CUtlString>>(_SubgraphsOffset!.Value);
+        }
+    }
     private static nint? _InterpolationModeOffset;
 
     public ref VMixSubgraphSwitchInterpolationType_t InterpolationMode {

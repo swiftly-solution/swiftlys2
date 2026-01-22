@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvCubemapFog : CBaseEntity, ISchemaClass<CEnvCubemapFog>
 {
     static CEnvCubemapFog ISchemaClass<CEnvCubemapFog>.From(nint handle) => new CEnvCubemapFogImpl(handle);
-    static int ISchemaClass<CEnvCubemapFog>.Size => 1344;
+    static int ISchemaClass<CEnvCubemapFog>.Size => 1272;
     static string? ISchemaClass<CEnvCubemapFog>.ClassName => "env_cubemap_fog";
 
 

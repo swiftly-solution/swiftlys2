@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInfoTeleportDestination : CPointEntity, ISchemaClass<CInfoTeleportDestination>
 {
     static CInfoTeleportDestination ISchemaClass<CInfoTeleportDestination>.From(nint handle) => new CInfoTeleportDestinationImpl(handle);
-    static int ISchemaClass<CInfoTeleportDestination>.Size => 1264;
+    static int ISchemaClass<CInfoTeleportDestination>.Size => 1192;
     static string? ISchemaClass<CInfoTeleportDestination>.ClassName => "info_teleport_destination";
 
 

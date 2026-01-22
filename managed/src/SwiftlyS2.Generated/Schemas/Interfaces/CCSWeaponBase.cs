@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeaponBase>
 {
     static CCSWeaponBase ISchemaClass<CCSWeaponBase>.From(nint handle) => new CCSWeaponBaseImpl(handle);
-    static int ISchemaClass<CCSWeaponBase>.Size => 4560;
+    static int ISchemaClass<CCSWeaponBase>.Size => 4400;
     static string? ISchemaClass<CCSWeaponBase>.ClassName => "weapon_cs_base";
 
 
@@ -70,6 +70,8 @@ public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeap
     public ref bool SilencerOn { get; }
 
     public GameTime_t TimeSilencerSwitchComplete { get; }
+
+    public ref float WeaponActionPlaybackRate { get; }
 
     public ref int OriginalTeamNumber { get; }
 
@@ -132,6 +134,7 @@ public partial interface CCSWeaponBase : CBasePlayerWeapon, ISchemaClass<CCSWeap
     public void IsHauledBackUpdated();
     public void SilencerOnUpdated();
     public void TimeSilencerSwitchCompleteUpdated();
+    public void WeaponActionPlaybackRateUpdated();
     public void OriginalTeamNumberUpdated();
     public void MostRecentTeamNumberUpdated();
     public void DroppedNearBuyZoneUpdated();

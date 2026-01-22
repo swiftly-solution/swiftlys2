@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLightDirectionalEntity : CLightEntity, ISchemaClass<CLightDirectionalEntity>
 {
     static CLightDirectionalEntity ISchemaClass<CLightDirectionalEntity>.From(nint handle) => new CLightDirectionalEntityImpl(handle);
-    static int ISchemaClass<CLightDirectionalEntity>.Size => 2016;
+    static int ISchemaClass<CLightDirectionalEntity>.Size => 1848;
     static string? ISchemaClass<CLightDirectionalEntity>.ClassName => "light_directional";
 
 

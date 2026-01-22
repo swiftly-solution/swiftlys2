@@ -34,10 +34,10 @@ internal partial class CCS2ChickenGraphControllerImpl : CAnimGraphControllerBase
     }
     private static nint? _ActionResetOffset;
 
-    public SchemaUntypedField ActionReset {
+    public UNKNOWN ActionReset {
         get {
             _ActionResetOffset = _ActionResetOffset ?? Schema.GetOffset(0xC887F157580F422E);
-            return new SchemaUntypedField(_Handle + _ActionResetOffset!.Value);
+            return new UNKNOWN(_Handle + _ActionResetOffset!.Value);
         }
     }
     private static nint? _IdleVariationOffset;

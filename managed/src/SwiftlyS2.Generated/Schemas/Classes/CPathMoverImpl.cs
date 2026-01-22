@@ -12,18 +12,10 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CPathMoverImpl : CPathSimpleImpl, CPathMover
+internal partial class CPathMoverImpl : CPathWithDynamicNodesImpl, CPathMover
 {
     public CPathMoverImpl(nint handle) : base(handle) { }
 
-    private static nint? _PathNodesOffset;
-
-    public ref CUtlVector<CHandle<CMoverPathNode>> PathNodes {
-        get {
-            _PathNodesOffset = _PathNodesOffset ?? Schema.GetOffset(0x459CE4C6FD746CE3);
-            return ref _Handle.AsRef<CUtlVector<CHandle<CMoverPathNode>>>(_PathNodesOffset!.Value);
-        }
-    }
     private static nint? _MoversOffset;
 
     public ref CUtlVector<CHandle<CFuncMover>> Movers {
@@ -32,14 +24,26 @@ internal partial class CPathMoverImpl : CPathSimpleImpl, CPathMover
             return ref _Handle.AsRef<CUtlVector<CHandle<CFuncMover>>>(_MoversOffset!.Value);
         }
     }
-    private static nint? _XInitialPathWorldToLocalOffset;
+    private static nint? _MoverSpawnerOffset;
 
-    public ref CTransform XInitialPathWorldToLocal {
+    public ref CHandle<CPathMoverEntitySpawner> MoverSpawner {
         get {
-            _XInitialPathWorldToLocalOffset = _XInitialPathWorldToLocalOffset ?? Schema.GetOffset(0x459CE4C6FE5D385E);
-            return ref _Handle.AsRef<CTransform>(_XInitialPathWorldToLocalOffset!.Value);
+            _MoverSpawnerOffset = _MoverSpawnerOffset ?? Schema.GetOffset(0x459CE4C689A8C6A8);
+            return ref _Handle.AsRef<CHandle<CPathMoverEntitySpawner>>(_MoverSpawnerOffset!.Value);
         }
     }
+    private static nint? _MoverSpawnerNameOffset;
+
+    public string MoverSpawnerName {
+        get {
+            _MoverSpawnerNameOffset = _MoverSpawnerNameOffset ?? Schema.GetOffset(0x459CE4C65C6B2861);
+            return Schema.GetString(_Handle.Read<nint>(_MoverSpawnerNameOffset!.Value));
+        }
+        set {
+            _MoverSpawnerNameOffset = _MoverSpawnerNameOffset ?? Schema.GetOffset(0x459CE4C65C6B2861);
+            Schema.SetString(_Handle, _MoverSpawnerNameOffset!.Value, value);
+        }
+    } 
 
 
 }

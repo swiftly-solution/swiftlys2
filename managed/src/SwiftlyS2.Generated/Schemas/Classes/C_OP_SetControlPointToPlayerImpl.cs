@@ -40,6 +40,14 @@ internal partial class C_OP_SetControlPointToPlayerImpl : CParticleFunctionPreEm
             return ref _Handle.AsRef<bool>(_OrientToEyesOffset!.Value);
         }
     }
+    private static nint? _PositionOffset;
+
+    public ref ParticleEntityPos_t Position {
+        get {
+            _PositionOffset = _PositionOffset ?? Schema.GetOffset(0xD877DC8EBC4CDBD6);
+            return ref _Handle.AsRef<ParticleEntityPos_t>(_PositionOffset!.Value);
+        }
+    }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundOpvarSetOBBEntity : CSoundOpvarSetAABBEntity, ISchemaClass<CSoundOpvarSetOBBEntity>
 {
     static CSoundOpvarSetOBBEntity ISchemaClass<CSoundOpvarSetOBBEntity>.From(nint handle) => new CSoundOpvarSetOBBEntityImpl(handle);
-    static int ISchemaClass<CSoundOpvarSetOBBEntity>.Size => 1808;
+    static int ISchemaClass<CSoundOpvarSetOBBEntity>.Size => 1704;
     static string? ISchemaClass<CSoundOpvarSetOBBEntity>.ClassName => "snd_opvar_set_obb";
 
 

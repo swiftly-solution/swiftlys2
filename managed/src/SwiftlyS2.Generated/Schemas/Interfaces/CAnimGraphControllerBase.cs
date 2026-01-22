@@ -11,12 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CAnimGraphControllerBase : ISchemaClass<CAnimGraphControllerBase>
 {
     static CAnimGraphControllerBase ISchemaClass<CAnimGraphControllerBase>.From(nint handle) => new CAnimGraphControllerBaseImpl(handle);
-    static int ISchemaClass<CAnimGraphControllerBase>.Size => 128;
+    static int ISchemaClass<CAnimGraphControllerBase>.Size => 144;
     static string? ISchemaClass<CAnimGraphControllerBase>.ClassName => null;
 
 
-    // CUtlVectorFixedGrowable< CGlobalSymbol, 8 >
-    public SchemaUntypedField ParamsToResetInPostGraphUpdate { get; }
+    public ExternalAnimGraphHandle_t ExternalGraph { get; }
 
 
 }

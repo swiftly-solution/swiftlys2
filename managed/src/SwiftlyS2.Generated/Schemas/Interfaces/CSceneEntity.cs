@@ -11,13 +11,11 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
 {
     static CSceneEntity ISchemaClass<CSceneEntity>.From(nint handle) => new CSceneEntityImpl(handle);
-    static int ISchemaClass<CSceneEntity>.Size => 2640;
+    static int ISchemaClass<CSceneEntity>.Size => 1840;
     static string? ISchemaClass<CSceneEntity>.ClassName => "scripted_scene";
 
 
     public string SceneFile { get; set; }
-
-    public string ResumeSceneFile { get; set; }
 
     public string Target1 { get; set; }
 
@@ -81,10 +79,6 @@ public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
 
     public ref int SpeechPriority { get; }
 
-    public ref CHandle<CBaseEntity> WaitingForThisResumeScene { get; }
-
-    public ref bool WaitingForResumeScene { get; }
-
     public ref bool PausedViaInput { get; }
 
     public ref bool PauseAtNextInterrupt { get; }
@@ -103,8 +97,6 @@ public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
 
     public ref CUtlVector<CHandle<CBaseEntity>> RemoveActorList { get; }
 
-    public ref int SceneFlushCounter { get; }
-
     public ref ushort SceneStringIndex { get; }
 
     public ref CEntityIOOutput OnStart { get; }
@@ -116,8 +108,6 @@ public partial interface CSceneEntity : CPointEntity, ISchemaClass<CSceneEntity>
     public ref CEntityIOOutput OnPaused { get; }
 
     public ref CEntityIOOutput OnResumed { get; }
-
-    public ISchemaFixedArray<CEntityIOOutput> OnTrigger { get; }
 
     public ref CHandle<CSceneEntity> InterruptScene { get; }
 

@@ -42,9 +42,17 @@ public partial interface CBasePlayerWeaponVData : CEntitySubclassVDataBase, ISch
 
     public ref float MuzzleSmokeDecrementRate { get; }
 
+    public ref bool GenerateMuzzleLight { get; }
+
     public ref bool LinkedCooldowns { get; }
 
     public ref ItemFlagTypes_t Flags { get; }
+
+    public ref int Weight { get; }
+
+    public ref bool AutoSwitchTo { get; }
+
+    public ref bool AutoSwitchFrom { get; }
 
     public AmmoIndex_t PrimaryAmmoType { get; }
 
@@ -63,12 +71,6 @@ public partial interface CBasePlayerWeaponVData : CEntitySubclassVDataBase, ISch
     public ref bool TreatAsSingleClip { get; }
 
     public ref bool KeepLoadedAmmo { get; }
-
-    public ref int Weight { get; }
-
-    public ref bool AutoSwitchTo { get; }
-
-    public ref bool AutoSwitchFrom { get; }
 
     public ref RumbleEffect_t RumbleEffect { get; }
 

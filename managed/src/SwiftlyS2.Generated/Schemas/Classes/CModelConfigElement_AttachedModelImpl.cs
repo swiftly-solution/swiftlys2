@@ -120,14 +120,6 @@ internal partial class CModelConfigElement_AttachedModelImpl : CModelConfigEleme
             return ref _Handle.AsRef<bool>(_UserSpecifiedMaterialGroupOffset!.Value);
         }
     }
-    private static nint? _AcceptParentMaterialDrivenDecalsOffset;
-
-    public ref bool AcceptParentMaterialDrivenDecals {
-        get {
-            _AcceptParentMaterialDrivenDecalsOffset = _AcceptParentMaterialDrivenDecalsOffset ?? Schema.GetOffset(0x82D04A996A2FFA80);
-            return ref _Handle.AsRef<bool>(_AcceptParentMaterialDrivenDecalsOffset!.Value);
-        }
-    }
     private static nint? _BodygroupOnOtherModelsOffset;
 
     public string BodygroupOnOtherModels {

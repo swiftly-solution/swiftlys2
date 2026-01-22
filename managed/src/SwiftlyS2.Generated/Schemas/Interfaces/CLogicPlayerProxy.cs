@@ -11,11 +11,9 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLogicPlayerProxy : CLogicalEntity, ISchemaClass<CLogicPlayerProxy>
 {
     static CLogicPlayerProxy ISchemaClass<CLogicPlayerProxy>.From(nint handle) => new CLogicPlayerProxyImpl(handle);
-    static int ISchemaClass<CLogicPlayerProxy>.Size => 1432;
+    static int ISchemaClass<CLogicPlayerProxy>.Size => 1304;
     static string? ISchemaClass<CLogicPlayerProxy>.ClassName => "logic_playerproxy";
 
-
-    public ref CHandle<CBaseEntity> Player { get; }
 
     public ref CEntityIOOutput PlayerHasAmmo { get; }
 
@@ -23,8 +21,10 @@ public partial interface CLogicPlayerProxy : CLogicalEntity, ISchemaClass<CLogic
 
     public ref CEntityIOOutput PlayerDied { get; }
 
-    // CEntityOutputTemplate< int32 >
+    // CEntityOutputTemplate< int32, int32 >
     public SchemaUntypedField RequestedPlayerHealth { get; }
+
+    public ref CHandle<CBaseEntity> Player { get; }
 
 
 }

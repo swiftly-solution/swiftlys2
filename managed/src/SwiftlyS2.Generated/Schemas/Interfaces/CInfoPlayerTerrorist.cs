@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInfoPlayerTerrorist : SpawnPoint, ISchemaClass<CInfoPlayerTerrorist>
 {
     static CInfoPlayerTerrorist ISchemaClass<CInfoPlayerTerrorist>.From(nint handle) => new CInfoPlayerTerroristImpl(handle);
-    static int ISchemaClass<CInfoPlayerTerrorist>.Size => 1280;
+    static int ISchemaClass<CInfoPlayerTerrorist>.Size => 1208;
     static string? ISchemaClass<CInfoPlayerTerrorist>.ClassName => "info_player_terrorist";
 
 

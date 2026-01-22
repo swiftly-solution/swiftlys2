@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInfoData : CServerOnlyEntity, ISchemaClass<CInfoData>
 {
     static CInfoData ISchemaClass<CInfoData>.From(nint handle) => new CInfoDataImpl(handle);
-    static int ISchemaClass<CInfoData>.Size => 2176;
+    static int ISchemaClass<CInfoData>.Size => 2112;
     static string? ISchemaClass<CInfoData>.ClassName => "info_data";
 
 

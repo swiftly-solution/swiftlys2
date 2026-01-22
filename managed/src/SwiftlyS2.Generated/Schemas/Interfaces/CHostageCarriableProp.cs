@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CHostageCarriableProp : CBaseAnimGraph, ISchemaClass<CHostageCarriableProp>
 {
     static CHostageCarriableProp ISchemaClass<CHostageCarriableProp>.From(nint handle) => new CHostageCarriablePropImpl(handle);
-    static int ISchemaClass<CHostageCarriableProp>.Size => 2704;
+    static int ISchemaClass<CHostageCarriableProp>.Size => 2592;
     static string? ISchemaClass<CHostageCarriableProp>.ClassName => null;
 
 

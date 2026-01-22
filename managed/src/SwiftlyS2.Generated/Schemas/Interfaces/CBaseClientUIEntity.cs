@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseClientUIEntity : CBaseModelEntity, ISchemaClass<CBaseClientUIEntity>
 {
     static CBaseClientUIEntity ISchemaClass<CBaseClientUIEntity>.From(nint handle) => new CBaseClientUIEntityImpl(handle);
-    static int ISchemaClass<CBaseClientUIEntity>.Size => 2440;
+    static int ISchemaClass<CBaseClientUIEntity>.Size => 2192;
     static string? ISchemaClass<CBaseClientUIEntity>.ClassName => null;
 
 
@@ -23,25 +23,35 @@ public partial interface CBaseClientUIEntity : CBaseModelEntity, ISchemaClass<CB
 
     public string PanelID { get; set; }
 
-    public ref CEntityIOOutput CustomOutput0 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput0 { get; }
 
-    public ref CEntityIOOutput CustomOutput1 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput1 { get; }
 
-    public ref CEntityIOOutput CustomOutput2 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput2 { get; }
 
-    public ref CEntityIOOutput CustomOutput3 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput3 { get; }
 
-    public ref CEntityIOOutput CustomOutput4 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput4 { get; }
 
-    public ref CEntityIOOutput CustomOutput5 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput5 { get; }
 
-    public ref CEntityIOOutput CustomOutput6 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput6 { get; }
 
-    public ref CEntityIOOutput CustomOutput7 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput7 { get; }
 
-    public ref CEntityIOOutput CustomOutput8 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput8 { get; }
 
-    public ref CEntityIOOutput CustomOutput9 { get; }
+    // CEntityOutputTemplate< CUtlString, char* >
+    public SchemaUntypedField CustomOutput9 { get; }
 
     public void EnabledUpdated();
     public void DialogXMLNameUpdated();

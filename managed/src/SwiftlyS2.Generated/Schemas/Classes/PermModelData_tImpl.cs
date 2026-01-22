@@ -205,6 +205,22 @@ internal partial class PermModelData_tImpl : SchemaClass, PermModelData_t
             return ref _Handle.AsRef<CUtlVector<PermModelDataAnimatedMaterialAttribute_t>>(_AnimatedMaterialAttributesOffset!.Value);
         }
     }
+    private static nint? _AnimGraph2RefsOffset;
+
+    public ref CUtlVector<ModelAnimGraph2Ref_t> AnimGraph2Refs {
+        get {
+            _AnimGraph2RefsOffset = _AnimGraph2RefsOffset ?? Schema.GetOffset(0x3E367D0BE5400138);
+            return ref _Handle.AsRef<CUtlVector<ModelAnimGraph2Ref_t>>(_AnimGraph2RefsOffset!.Value);
+        }
+    }
+    private static nint? _NmSkeletonRefsOffset;
+
+    public ref CUtlVector<CStrongHandle<InfoForResourceTypeCNmSkeleton>> NmSkeletonRefs {
+        get {
+            _NmSkeletonRefsOffset = _NmSkeletonRefsOffset ?? Schema.GetOffset(0x3E367D0BC058F8C5);
+            return ref _Handle.AsRef<CUtlVector<CStrongHandle<InfoForResourceTypeCNmSkeleton>>>(_NmSkeletonRefsOffset!.Value);
+        }
+    }
 
 
 }

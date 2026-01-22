@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPointValueRemapper : CBaseEntity, ISchemaClass<CPointValueRemapper>
 {
     static CPointValueRemapper ISchemaClass<CPointValueRemapper>.From(nint handle) => new CPointValueRemapperImpl(handle);
-    static int ISchemaClass<CPointValueRemapper>.Size => 1784;
+    static int ISchemaClass<CPointValueRemapper>.Size => 1616;
     static string? ISchemaClass<CPointValueRemapper>.ClassName => "point_value_remapper";
 
 
@@ -89,10 +89,10 @@ public partial interface CPointValueRemapper : CBaseEntity, ISchemaClass<CPointV
 
     public string SoundMovingLoop { get; set; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField Position { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField PositionDelta { get; }
 
     public ref CEntityIOOutput OnReachedValueZero { get; }

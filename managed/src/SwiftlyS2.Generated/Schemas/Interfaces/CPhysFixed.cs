@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPhysFixed : CPhysConstraint, ISchemaClass<CPhysFixed>
 {
     static CPhysFixed ISchemaClass<CPhysFixed>.From(nint handle) => new CPhysFixedImpl(handle);
-    static int ISchemaClass<CPhysFixed>.Size => 1416;
+    static int ISchemaClass<CPhysFixed>.Size => 1328;
     static string? ISchemaClass<CPhysFixed>.ClassName => "phys_constraint";
 
 

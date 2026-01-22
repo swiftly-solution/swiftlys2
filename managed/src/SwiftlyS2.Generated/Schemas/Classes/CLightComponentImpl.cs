@@ -380,6 +380,14 @@ internal partial class CLightComponentImpl : CEntityComponentImpl, CLightCompone
             return ref _Handle.AsRef<int>(_IndirectLightOffset!.Value);
         }
     }
+    private static nint? _DynamicBounceOffset;
+
+    public ref bool DynamicBounce {
+        get {
+            _DynamicBounceOffset = _DynamicBounceOffset ?? Schema.GetOffset(0x15B1C6A546B4298E);
+            return ref _Handle.AsRef<bool>(_DynamicBounceOffset!.Value);
+        }
+    }
     private static nint? _FadeMinDistOffset;
 
     public ref float FadeMinDist {
@@ -625,6 +633,7 @@ internal partial class CLightComponentImpl : CEntityComponentImpl, CLightCompone
     public void AllowSSTGenerationUpdated() => Schema.Update(_Handle, 0x15B1C6A54E93C4FA);
     public void DirectLightUpdated() => Schema.Update(_Handle, 0x15B1C6A5DEC0AAB4);
     public void IndirectLightUpdated() => Schema.Update(_Handle, 0x15B1C6A5E5EAAFBD);
+    public void DynamicBounceUpdated() => Schema.Update(_Handle, 0x15B1C6A546B4298E);
     public void FadeMinDistUpdated() => Schema.Update(_Handle, 0x15B1C6A545D2BAAB);
     public void FadeMaxDistUpdated() => Schema.Update(_Handle, 0x15B1C6A5ACCE9CB9);
     public void ShadowFadeMinDistUpdated() => Schema.Update(_Handle, 0x15B1C6A589AB0803);

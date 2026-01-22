@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface C_OP_SetControlPointFieldToScalarExpression : CParticleFunctionPreEmission, ISchemaClass<C_OP_SetControlPointFieldToScalarExpression>
 {
     static C_OP_SetControlPointFieldToScalarExpression ISchemaClass<C_OP_SetControlPointFieldToScalarExpression>.From(nint handle) => new C_OP_SetControlPointFieldToScalarExpressionImpl(handle);
-    static int ISchemaClass<C_OP_SetControlPointFieldToScalarExpression>.Size => 1592;
+    static int ISchemaClass<C_OP_SetControlPointFieldToScalarExpression>.Size => 1960;
     static string? ISchemaClass<C_OP_SetControlPointFieldToScalarExpression>.ClassName => null;
 
 
@@ -26,6 +26,8 @@ public partial interface C_OP_SetControlPointFieldToScalarExpression : CParticle
     public ref int OutputCP { get; }
 
     public ref int OutVectorField { get; }
+
+    public CParticleCollectionFloatInput Interpolation { get; }
 
 
 }

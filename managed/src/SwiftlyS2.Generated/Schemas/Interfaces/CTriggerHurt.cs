@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerHurt : CBaseTrigger, ISchemaClass<CTriggerHurt>
 {
     static CTriggerHurt ISchemaClass<CTriggerHurt>.From(nint handle) => new CTriggerHurtImpl(handle);
-    static int ISchemaClass<CTriggerHurt>.Size => 2632;
+    static int ISchemaClass<CTriggerHurt>.Size => 2320;
     static string? ISchemaClass<CTriggerHurt>.ClassName => "trigger_hurt";
 
 

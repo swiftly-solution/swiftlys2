@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLogicCase : CLogicalEntity, ISchemaClass<CLogicCase>
 {
     static CLogicCase ISchemaClass<CLogicCase>.From(nint handle) => new CLogicCaseImpl(handle);
-    static int ISchemaClass<CLogicCase>.Size => 2880;
+    static int ISchemaClass<CLogicCase>.Size => 2288;
     static string? ISchemaClass<CLogicCase>.ClassName => "logic_case";
 
 
@@ -25,7 +25,7 @@ public partial interface CLogicCase : CLogicalEntity, ISchemaClass<CLogicCase>
 
     public ISchemaFixedArray<CEntityIOOutput> OnCase { get; }
 
-    // CEntityOutputTemplate< CVariantBase< CVariantDefaultAllocator > >
+    // CEntityOutputTemplate< CUtlString, char* >
     public SchemaUntypedField OnDefault { get; }
 
 

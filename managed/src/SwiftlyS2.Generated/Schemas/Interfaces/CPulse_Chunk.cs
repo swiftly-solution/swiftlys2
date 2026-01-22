@@ -19,7 +19,7 @@ public partial interface CPulse_Chunk : ISchemaClass<CPulse_Chunk>
 
     public ref CUtlLeanVector<CPulse_RegisterInfo, int> Registers { get; }
 
-    public ref CUtlLeanVector<PulseDocNodeID_t, int> InstructionEditorIDs { get; }
+    public ref CUtlLeanVector<CPulse_InstructionDebug, int> InstructionDebugInfos { get; }
 
 
 }

@@ -35,6 +35,8 @@ public partial interface ModelMeshBufferData_t : ISchemaClass<ModelMeshBufferDat
 
     public ref bool CreatePooledBuffer { get; }
 
+    public ref byte BufferUsage { get; }
+
     public ref CUtlVector<RenderInputLayoutField_t> InputLayoutFields { get; }
 
 

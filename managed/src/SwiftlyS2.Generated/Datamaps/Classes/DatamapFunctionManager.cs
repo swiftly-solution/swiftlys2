@@ -111,6 +111,8 @@ internal partial class DatamapFunctionManager
 
     public BaseDatamapFunction<CEntityFlame, DHookCEntityFlameFlameThink> CEntityFlameFlameThink { get; init; }
 
+    public BaseDatamapFunction<CSoundEventConeEntity, DHookCSoundEventConeEntitySoundEventConeThink> CSoundEventConeEntitySoundEventConeThink { get; init; }
+
     public BaseDatamapFunction<CFuncMoveLinear, DHookCFuncMoveLinearNavObstacleThink> CFuncMoveLinearNavObstacleThink { get; init; }
 
     public BaseDatamapFunction<CFuncMoveLinear, DHookCFuncMoveLinearNavMovableThink> CFuncMoveLinearNavMovableThink { get; init; }
@@ -305,8 +307,6 @@ internal partial class DatamapFunctionManager
 
     public BaseDatamapFunction<CBreakable, DHookCBreakableDie> CBreakableDie { get; init; }
 
-    public BaseDatamapFunction<CMoverPathNode, DHookCMoverPathNodeParentedMoveThink> CMoverPathNodeParentedMoveThink { get; init; }
-
     public BaseDatamapFunction<CTriggerHurt, DHookCTriggerHurtRadiationThink> CTriggerHurtRadiationThink { get; init; }
 
     public BaseDatamapFunction<CTriggerHurt, DHookCTriggerHurtHurtThink> CTriggerHurtHurtThink { get; init; }
@@ -413,6 +413,8 @@ internal partial class DatamapFunctionManager
 
     public BaseDatamapFunction<CTriggerLerpObject, DHookCTriggerLerpObjectAttachedEntityThink> CTriggerLerpObjectAttachedEntityThink { get; init; }
 
+    public BaseDatamapFunction<CPathMoverEntitySpawner, DHookCPathMoverEntitySpawnerSpawnThink> CPathMoverEntitySpawnerSpawnThink { get; init; }
+
     public BaseDatamapFunction<CPointCommentaryNode, DHookCPointCommentaryNodeSpinThink> CPointCommentaryNodeSpinThink { get; init; }
 
     public BaseDatamapFunction<CPointCommentaryNode, DHookCPointCommentaryNodeUpdateViewThink> CPointCommentaryNodeUpdateViewThink { get; init; }
@@ -420,6 +422,8 @@ internal partial class DatamapFunctionManager
     public BaseDatamapFunction<CPointCommentaryNode, DHookCPointCommentaryNodeUpdateViewPostThink> CPointCommentaryNodeUpdateViewPostThink { get; init; }
 
     public BaseDatamapFunction<CPointCommentaryNode, DHookCPointCommentaryNodeAcculumatePlayTimeThink> CPointCommentaryNodeAcculumatePlayTimeThink { get; init; }
+
+    public BaseDatamapFunction<CPathNode, DHookCPathNodeParentedMoveThink> CPathNodeParentedMoveThink { get; init; }
 
     public BaseDatamapFunction<CPhysicalButton, DHookCPhysicalButtonPhysicsThink> CPhysicalButtonPhysicsThink { get; init; }
 
@@ -485,6 +489,7 @@ internal partial class DatamapFunctionManager
         CSpriteBeginFadeOutThink = new(this, 3382773562);
         CPhysSlideConstraintSoundThink = new(this, 961481177);
         CEntityFlameFlameThink = new(this, 85144681);
+        CSoundEventConeEntitySoundEventConeThink = new(this, 3250820479);
         CFuncMoveLinearNavObstacleThink = new(this, 4084335944);
         CFuncMoveLinearNavMovableThink = new(this, 705562651);
         CFuncMoveLinearStopMoveSound = new(this, 927952112);
@@ -582,7 +587,6 @@ internal partial class DatamapFunctionManager
         CAmbientGenericRampThink = new(this, 3257029041);
         CSoundEventSphereEntitySoundEventSphereThink = new(this, 1390234487);
         CBreakableDie = new(this, 3544444333);
-        CMoverPathNodeParentedMoveThink = new(this, 2846177876);
         CTriggerHurtRadiationThink = new(this, 3253529214);
         CTriggerHurtHurtThink = new(this, 1096455314);
         CTriggerHurtNavThink = new(this, 268962832);
@@ -636,10 +640,12 @@ internal partial class DatamapFunctionManager
         CTriggerLerpObjectLerpThink = new(this, 2032094099);
         CTriggerLerpObjectUnsetWaitForEntity = new(this, 2557540000);
         CTriggerLerpObjectAttachedEntityThink = new(this, 2115356301);
+        CPathMoverEntitySpawnerSpawnThink = new(this, 1954646118);
         CPointCommentaryNodeSpinThink = new(this, 892464231);
         CPointCommentaryNodeUpdateViewThink = new(this, 2856636899);
         CPointCommentaryNodeUpdateViewPostThink = new(this, 3862575177);
         CPointCommentaryNodeAcculumatePlayTimeThink = new(this, 4107731308);
+        CPathNodeParentedMoveThink = new(this, 2864393235);
         CPhysicalButtonPhysicsThink = new(this, 1818335420);
         CPhysicalButtonButtonTouch = new(this, 1827702710);
         CPhysicalButtonTriggerAndWait = new(this, 1029534207);

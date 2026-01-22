@@ -300,6 +300,58 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
             return ref _Handle.AsRef<CUtlVector<RotatorHistoryEntry_t>>(_RotatorQueueHistoryOffset!.Value);
         }
     }
+    private static nint? _SolidTypeOffset;
+
+    public ref SolidType_t SolidType {
+        get {
+            _SolidTypeOffset = _SolidTypeOffset ?? Schema.GetOffset(0x73DA1BB95B4C380F);
+            return ref _Handle.AsRef<SolidType_t>(_SolidTypeOffset!.Value);
+        }
+    }
+    private static nint? _SpeedFromMoverOffset;
+
+    public ref CHandle<CFuncMover> SpeedFromMover {
+        get {
+            _SpeedFromMoverOffset = _SpeedFromMoverOffset ?? Schema.GetOffset(0x73DA1BB959FB1753);
+            return ref _Handle.AsRef<CHandle<CFuncMover>>(_SpeedFromMoverOffset!.Value);
+        }
+    }
+    private static nint? _SpeedFromMover1Offset;
+
+    public string SpeedFromMover1 {
+        get {
+            _SpeedFromMover1Offset = _SpeedFromMover1Offset ?? Schema.GetOffset(0x73DA1BB983F38C75);
+            return Schema.GetString(_Handle.Read<nint>(_SpeedFromMover1Offset!.Value));
+        }
+        set {
+            _SpeedFromMover1Offset = _SpeedFromMover1Offset ?? Schema.GetOffset(0x73DA1BB983F38C75);
+            Schema.SetString(_Handle, _SpeedFromMover1Offset!.Value, value);
+        }
+    } 
+    private static nint? _SpeedScaleOffset;
+
+    public ref float SpeedScale {
+        get {
+            _SpeedScaleOffset = _SpeedScaleOffset ?? Schema.GetOffset(0x73DA1BB95E957F80);
+            return ref _Handle.AsRef<float>(_SpeedScaleOffset!.Value);
+        }
+    }
+    private static nint? _MinYawRotationOffset;
+
+    public ref float MinYawRotation {
+        get {
+            _MinYawRotationOffset = _MinYawRotationOffset ?? Schema.GetOffset(0x73DA1BB9F5B7F71A);
+            return ref _Handle.AsRef<float>(_MinYawRotationOffset!.Value);
+        }
+    }
+    private static nint? _MaxYawRotationOffset;
+
+    public ref float MaxYawRotation {
+        get {
+            _MaxYawRotationOffset = _MaxYawRotationOffset ?? Schema.GetOffset(0x73DA1BB991340C90);
+            return ref _Handle.AsRef<float>(_MaxYawRotationOffset!.Value);
+        }
+    }
 
 
 }

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPlayer_CameraServices : CPlayerPawnComponent, ISchemaClass<CPlayer_CameraServices>
 {
     static CPlayer_CameraServices ISchemaClass<CPlayer_CameraServices>.From(nint handle) => new CPlayer_CameraServicesImpl(handle);
-    static int ISchemaClass<CPlayer_CameraServices>.Size => 368;
+    static int ISchemaClass<CPlayer_CameraServices>.Size => 376;
     static string? ISchemaClass<CPlayer_CameraServices>.ClassName => null;
 
 

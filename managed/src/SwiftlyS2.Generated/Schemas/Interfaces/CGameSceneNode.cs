@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CGameSceneNode : ISchemaClass<CGameSceneNode>
 {
     static CGameSceneNode ISchemaClass<CGameSceneNode>.From(nint handle) => new CGameSceneNodeImpl(handle);
-    static int ISchemaClass<CGameSceneNode>.Size => 352;
+    static int ISchemaClass<CGameSceneNode>.Size => 304;
     static string? ISchemaClass<CGameSceneNode>.ClassName => null;
 
 

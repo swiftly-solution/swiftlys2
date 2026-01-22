@@ -162,6 +162,9 @@ public partial interface IDatamapFunctionService
     public IDatamapFunctionOperator<CEntityFlame, IDHookCEntityFlameFlameThink> CEntityFlameFlameThink { get; }
 
 
+    public IDatamapFunctionOperator<CSoundEventConeEntity, IDHookCSoundEventConeEntitySoundEventConeThink> CSoundEventConeEntitySoundEventConeThink { get; }
+
+
     public IDatamapFunctionOperator<CFuncMoveLinear, IDHookCFuncMoveLinearNavObstacleThink> CFuncMoveLinearNavObstacleThink { get; }
 
 
@@ -453,9 +456,6 @@ public partial interface IDatamapFunctionService
     public IDatamapFunctionOperator<CBreakable, IDHookCBreakableDie> CBreakableDie { get; }
 
 
-    public IDatamapFunctionOperator<CMoverPathNode, IDHookCMoverPathNodeParentedMoveThink> CMoverPathNodeParentedMoveThink { get; }
-
-
     public IDatamapFunctionOperator<CTriggerHurt, IDHookCTriggerHurtRadiationThink> CTriggerHurtRadiationThink { get; }
 
 
@@ -615,6 +615,9 @@ public partial interface IDatamapFunctionService
     public IDatamapFunctionOperator<CTriggerLerpObject, IDHookCTriggerLerpObjectAttachedEntityThink> CTriggerLerpObjectAttachedEntityThink { get; }
 
 
+    public IDatamapFunctionOperator<CPathMoverEntitySpawner, IDHookCPathMoverEntitySpawnerSpawnThink> CPathMoverEntitySpawnerSpawnThink { get; }
+
+
     public IDatamapFunctionOperator<CPointCommentaryNode, IDHookCPointCommentaryNodeSpinThink> CPointCommentaryNodeSpinThink { get; }
 
 
@@ -625,6 +628,9 @@ public partial interface IDatamapFunctionService
 
 
     public IDatamapFunctionOperator<CPointCommentaryNode, IDHookCPointCommentaryNodeAcculumatePlayTimeThink> CPointCommentaryNodeAcculumatePlayTimeThink { get; }
+
+
+    public IDatamapFunctionOperator<CPathNode, IDHookCPathNodeParentedMoveThink> CPathNodeParentedMoveThink { get; }
 
 
     public IDatamapFunctionOperator<CPhysicalButton, IDHookCPhysicalButtonPhysicsThink> CPhysicalButtonPhysicsThink { get; }

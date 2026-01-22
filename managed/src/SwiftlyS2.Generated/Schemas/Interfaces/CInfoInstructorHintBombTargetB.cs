@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInfoInstructorHintBombTargetB : CPointEntity, ISchemaClass<CInfoInstructorHintBombTargetB>
 {
     static CInfoInstructorHintBombTargetB ISchemaClass<CInfoInstructorHintBombTargetB>.From(nint handle) => new CInfoInstructorHintBombTargetBImpl(handle);
-    static int ISchemaClass<CInfoInstructorHintBombTargetB>.Size => 1264;
+    static int ISchemaClass<CInfoInstructorHintBombTargetB>.Size => 1192;
     static string? ISchemaClass<CInfoInstructorHintBombTargetB>.ClassName => "info_bomb_target_hint_B";
 
 

@@ -51,14 +51,6 @@ internal partial class CPhysLengthImpl : CPhysConstraintImpl, CPhysLength
             return ref _Handle.AsRef<float>(_TotalLengthOffset!.Value);
         }
     }
-    private static nint? _EnableCollisionOffset;
-
-    public ref bool EnableCollision {
-        get {
-            _EnableCollisionOffset = _EnableCollisionOffset ?? Schema.GetOffset(0x9203A50A1E5412CE);
-            return ref _Handle.AsRef<bool>(_EnableCollisionOffset!.Value);
-        }
-    }
 
 
 }

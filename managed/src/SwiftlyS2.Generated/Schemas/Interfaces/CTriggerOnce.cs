@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerOnce : CTriggerMultiple, ISchemaClass<CTriggerOnce>
 {
     static CTriggerOnce ISchemaClass<CTriggerOnce>.From(nint handle) => new CTriggerOnceImpl(handle);
-    static int ISchemaClass<CTriggerOnce>.Size => 2512;
+    static int ISchemaClass<CTriggerOnce>.Size => 2216;
     static string? ISchemaClass<CTriggerOnce>.ClassName => "trigger_once";
 
 

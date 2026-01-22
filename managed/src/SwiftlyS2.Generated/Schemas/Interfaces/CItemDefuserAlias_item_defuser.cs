@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CItemDefuserAlias_item_defuser : CItemDefuser, ISchemaClass<CItemDefuserAlias_item_defuser>
 {
     static CItemDefuserAlias_item_defuser ISchemaClass<CItemDefuserAlias_item_defuser>.From(nint handle) => new CItemDefuserAlias_item_defuserImpl(handle);
-    static int ISchemaClass<CItemDefuserAlias_item_defuser>.Size => 2960;
+    static int ISchemaClass<CItemDefuserAlias_item_defuser>.Size => 2784;
     static string? ISchemaClass<CItemDefuserAlias_item_defuser>.ClassName => null;
 
 

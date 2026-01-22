@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerProximity : CBaseTrigger, ISchemaClass<CTriggerProximity>
 {
     static CTriggerProximity ISchemaClass<CTriggerProximity>.From(nint handle) => new CTriggerProximityImpl(handle);
-    static int ISchemaClass<CTriggerProximity>.Size => 2536;
+    static int ISchemaClass<CTriggerProximity>.Size => 2248;
     static string? ISchemaClass<CTriggerProximity>.ClassName => "trigger_proximity";
 
 
@@ -23,7 +23,7 @@ public partial interface CTriggerProximity : CBaseTrigger, ISchemaClass<CTrigger
 
     public ref int Touchers { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField NearestEntityDistance { get; }
 
 

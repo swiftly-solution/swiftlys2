@@ -48,6 +48,14 @@ internal partial class CNmTargetWarpNode__CDefinitionImpl : CNmPoseNode__CDefini
             return ref _Handle.AsRef<bool>(_AllowTargetUpdateOffset!.Value);
         }
     }
+    private static nint? _AlignWithTargetAtLastWarpEventOffset;
+
+    public ref bool AlignWithTargetAtLastWarpEvent {
+        get {
+            _AlignWithTargetAtLastWarpEventOffset = _AlignWithTargetAtLastWarpEventOffset ?? Schema.GetOffset(0xEA16BCF06D2BBBD0);
+            return ref _Handle.AsRef<bool>(_AlignWithTargetAtLastWarpEventOffset!.Value);
+        }
+    }
     private static nint? _SamplingPositionErrorThresholdSqOffset;
 
     public ref float SamplingPositionErrorThresholdSq {

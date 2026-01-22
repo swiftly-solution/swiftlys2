@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncConveyor : CBaseModelEntity, ISchemaClass<CFuncConveyor>
 {
     static CFuncConveyor ISchemaClass<CFuncConveyor>.From(nint handle) => new CFuncConveyorImpl(handle);
-    static int ISchemaClass<CFuncConveyor>.Size => 2088;
+    static int ISchemaClass<CFuncConveyor>.Size => 1920;
     static string? ISchemaClass<CFuncConveyor>.ClassName => "func_conveyor";
 
 

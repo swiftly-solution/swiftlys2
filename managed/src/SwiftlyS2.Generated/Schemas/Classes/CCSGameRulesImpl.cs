@@ -416,6 +416,14 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
             return ref _Handle.AsRef<bool>(_IsHltvActiveOffset!.Value);
         }
     }
+    private static nint? _BombPlantedOffset;
+
+    public ref bool BombPlanted {
+        get {
+            _BombPlantedOffset = _BombPlantedOffset ?? Schema.GetOffset(0x6295CF653C00B55F);
+            return ref _Handle.AsRef<bool>(_BombPlantedOffset!.Value);
+        }
+    }
     public ISchemaFixedArray<ushort> ProhibitedItemIndices {
         get => new SchemaFixedArray<ushort>(_Handle, 0x6295CF65BFE8D026, 100, 2, 2);
     }
@@ -444,14 +452,6 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
         get {
             _BombDroppedOffset = _BombDroppedOffset ?? Schema.GetOffset(0x6295CF65D690B299);
             return ref _Handle.AsRef<bool>(_BombDroppedOffset!.Value);
-        }
-    }
-    private static nint? _BombPlantedOffset;
-
-    public ref bool BombPlanted {
-        get {
-            _BombPlantedOffset = _BombPlantedOffset ?? Schema.GetOffset(0x6295CF653C00B55F);
-            return ref _Handle.AsRef<bool>(_BombPlantedOffset!.Value);
         }
     }
     private static nint? _RoundWinStatusOffset;
@@ -1546,12 +1546,12 @@ internal partial class CCSGameRulesImpl : CTeamplayRulesImpl, CCSGameRules
     public void IsDroppingItemsUpdated() => Schema.Update(_Handle, 0x6295CF65A3EB7908);
     public void IsQuestEligibleUpdated() => Schema.Update(_Handle, 0x6295CF65814483B8);
     public void IsHltvActiveUpdated() => Schema.Update(_Handle, 0x6295CF657F4E0DA5);
+    public void BombPlantedUpdated() => Schema.Update(_Handle, 0x6295CF653C00B55F);
     public void ProhibitedItemIndicesUpdated() => Schema.Update(_Handle, 0x6295CF65BFE8D026);
     public void TournamentActiveCasterAccountsUpdated() => Schema.Update(_Handle, 0x6295CF6525481301);
     public void NumBestOfMapsUpdated() => Schema.Update(_Handle, 0x6295CF6581B0F2D7);
     public void HalloweenMaskListSeedUpdated() => Schema.Update(_Handle, 0x6295CF65EDB3E1E1);
     public void BombDroppedUpdated() => Schema.Update(_Handle, 0x6295CF65D690B299);
-    public void BombPlantedUpdated() => Schema.Update(_Handle, 0x6295CF653C00B55F);
     public void RoundWinStatusUpdated() => Schema.Update(_Handle, 0x6295CF6538E1FC04);
     public void RoundWinReasonUpdated() => Schema.Update(_Handle, 0x6295CF65879CEBD2);
     public void TCantBuyUpdated() => Schema.Update(_Handle, 0x6295CF65E60964EF);

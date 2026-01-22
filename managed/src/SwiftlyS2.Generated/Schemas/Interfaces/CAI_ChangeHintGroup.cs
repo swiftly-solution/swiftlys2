@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CAI_ChangeHintGroup : CBaseEntity, ISchemaClass<CAI_ChangeHintGroup>
 {
     static CAI_ChangeHintGroup ISchemaClass<CAI_ChangeHintGroup>.From(nint handle) => new CAI_ChangeHintGroupImpl(handle);
-    static int ISchemaClass<CAI_ChangeHintGroup>.Size => 1296;
+    static int ISchemaClass<CAI_ChangeHintGroup>.Size => 1224;
     static string? ISchemaClass<CAI_ChangeHintGroup>.ClassName => "ai_changehintgroup";
 
 

@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CDEagle : CCSWeaponBaseGun, ISchemaClass<CDEagle>
 {
     static CDEagle ISchemaClass<CDEagle>.From(nint handle) => new CDEagleImpl(handle);
-    static int ISchemaClass<CDEagle>.Size => 4592;
+    static int ISchemaClass<CDEagle>.Size => 4432;
     static string? ISchemaClass<CDEagle>.ClassName => "weapon_deagle";
 
 

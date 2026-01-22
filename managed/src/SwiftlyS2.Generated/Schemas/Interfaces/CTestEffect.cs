@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTestEffect : CBaseEntity, ISchemaClass<CTestEffect>
 {
     static CTestEffect ISchemaClass<CTestEffect>.From(nint handle) => new CTestEffectImpl(handle);
-    static int ISchemaClass<CTestEffect>.Size => 1568;
+    static int ISchemaClass<CTestEffect>.Size => 1400;
     static string? ISchemaClass<CTestEffect>.ClassName => "test_effect";
 
 
@@ -19,7 +19,7 @@ public partial interface CTestEffect : CBaseEntity, ISchemaClass<CTestEffect>
 
     public ref int Beam { get; }
 
-    public ISchemaClassFixedArray<CBeam> Beam1 { get; }
+    public ISchemaFixedArray<CHandle<CBeam>> Beam1 { get; }
 
     public ISchemaClassFixedArray<GameTime_t> BeamTime { get; }
 

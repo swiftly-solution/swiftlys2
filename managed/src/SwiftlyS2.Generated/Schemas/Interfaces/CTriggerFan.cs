@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CTriggerFan : CBaseTrigger, ISchemaClass<CTriggerFan>
 {
     static CTriggerFan ISchemaClass<CTriggerFan>.From(nint handle) => new CTriggerFanImpl(handle);
-    static int ISchemaClass<CTriggerFan>.Size => 2672;
+    static int ISchemaClass<CTriggerFan>.Size => 2384;
     static string? ISchemaClass<CTriggerFan>.ClassName => "trigger_fan";
 
 

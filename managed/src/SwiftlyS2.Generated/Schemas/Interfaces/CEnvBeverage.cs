@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvBeverage : CBaseEntity, ISchemaClass<CEnvBeverage>
 {
     static CEnvBeverage ISchemaClass<CEnvBeverage>.From(nint handle) => new CEnvBeverageImpl(handle);
-    static int ISchemaClass<CEnvBeverage>.Size => 1272;
+    static int ISchemaClass<CEnvBeverage>.Size => 1200;
     static string? ISchemaClass<CEnvBeverage>.ClassName => "env_beverage";
 
 

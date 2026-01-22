@@ -15,9 +15,9 @@ public partial interface CNmEvent : ISchemaClass<CNmEvent>
     static string? ISchemaClass<CNmEvent>.ClassName => null;
 
 
-    public ref float StartTimeSeconds { get; }
+    public NmPercent_t StartTime { get; }
 
-    public ref float DurationSeconds { get; }
+    public NmPercent_t Duration { get; }
 
     public ref CGlobalSymbol SyncID { get; }
 

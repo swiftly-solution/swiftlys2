@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLogicCompare : CLogicalEntity, ISchemaClass<CLogicCompare>
 {
     static CLogicCompare ISchemaClass<CLogicCompare>.From(nint handle) => new CLogicCompareImpl(handle);
-    static int ISchemaClass<CLogicCompare>.Size => 1432;
+    static int ISchemaClass<CLogicCompare>.Size => 1328;
     static string? ISchemaClass<CLogicCompare>.ClassName => "logic_compare";
 
 
@@ -19,16 +19,16 @@ public partial interface CLogicCompare : CLogicalEntity, ISchemaClass<CLogicComp
 
     public ref float CompareValue { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField OnLessThan { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField OnEqualTo { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField OnNotEqualTo { get; }
 
-    // CEntityOutputTemplate< float32 >
+    // CEntityOutputTemplate< float32, float32 >
     public SchemaUntypedField OnGreaterThan { get; }
 
 

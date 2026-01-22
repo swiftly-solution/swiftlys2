@@ -52,6 +52,14 @@ internal partial class CSoundOpvarSetPointBaseImpl : CBaseEntityImpl, CSoundOpva
             return ref _Handle.AsRef<Vector>(_LastPositionOffset!.Value);
         }
     }
+    private static nint? _RefreshTimeOffset;
+
+    public ref float RefreshTime {
+        get {
+            _RefreshTimeOffset = _RefreshTimeOffset ?? Schema.GetOffset(0x6C95A3E09B6FB413);
+            return ref _Handle.AsRef<float>(_RefreshTimeOffset!.Value);
+        }
+    }
     private static nint? _StackNameOffset;
 
     public string StackName {
@@ -104,10 +112,19 @@ internal partial class CSoundOpvarSetPointBaseImpl : CBaseEntityImpl, CSoundOpva
             return ref _Handle.AsRef<bool>(_UseAutoCompareOffset!.Value);
         }
     }
+    private static nint? _FastRefreshOffset;
+
+    public ref bool FastRefresh {
+        get {
+            _FastRefreshOffset = _FastRefreshOffset ?? Schema.GetOffset(0x6C95A3E02C26B032);
+            return ref _Handle.AsRef<bool>(_FastRefreshOffset!.Value);
+        }
+    }
 
     public void StackNameUpdated() => Schema.Update(_Handle, 0x6C95A3E03B3E9CD4);
     public void OperatorNameUpdated() => Schema.Update(_Handle, 0x6C95A3E0F6140996);
     public void OpvarNameUpdated() => Schema.Update(_Handle, 0x6C95A3E02CAEFF3C);
     public void OpvarIndexUpdated() => Schema.Update(_Handle, 0x6C95A3E0BC170C34);
     public void UseAutoCompareUpdated() => Schema.Update(_Handle, 0x6C95A3E0E8C88ED2);
+    public void FastRefreshUpdated() => Schema.Update(_Handle, 0x6C95A3E02C26B032);
 }

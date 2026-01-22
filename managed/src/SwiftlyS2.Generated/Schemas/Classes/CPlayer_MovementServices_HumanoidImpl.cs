@@ -32,54 +32,6 @@ internal partial class CPlayer_MovementServices_HumanoidImpl : CPlayer_MovementS
             return ref _Handle.AsRef<float>(_FallVelocityOffset!.Value);
         }
     }
-    private static nint? _InCrouchOffset;
-
-    public ref bool InCrouch {
-        get {
-            _InCrouchOffset = _InCrouchOffset ?? Schema.GetOffset(0xB65FEA79CF28FE64);
-            return ref _Handle.AsRef<bool>(_InCrouchOffset!.Value);
-        }
-    }
-    private static nint? _CrouchStateOffset;
-
-    public ref uint CrouchState {
-        get {
-            _CrouchStateOffset = _CrouchStateOffset ?? Schema.GetOffset(0xB65FEA7988282338);
-            return ref _Handle.AsRef<uint>(_CrouchStateOffset!.Value);
-        }
-    }
-    private static nint? _CrouchTransitionStartTimeOffset;
-
-    public GameTime_t CrouchTransitionStartTime {
-        get {
-            _CrouchTransitionStartTimeOffset = _CrouchTransitionStartTimeOffset ?? Schema.GetOffset(0xB65FEA79E89CEC2B);
-            return new GameTime_tImpl(_Handle + _CrouchTransitionStartTimeOffset!.Value);
-        }
-    }
-    private static nint? _DuckedOffset;
-
-    public ref bool Ducked {
-        get {
-            _DuckedOffset = _DuckedOffset ?? Schema.GetOffset(0xB65FEA7914A05A59);
-            return ref _Handle.AsRef<bool>(_DuckedOffset!.Value);
-        }
-    }
-    private static nint? _DuckingOffset;
-
-    public ref bool Ducking {
-        get {
-            _DuckingOffset = _DuckingOffset ?? Schema.GetOffset(0xB65FEA798B221170);
-            return ref _Handle.AsRef<bool>(_DuckingOffset!.Value);
-        }
-    }
-    private static nint? _InDuckJumpOffset;
-
-    public ref bool InDuckJump {
-        get {
-            _InDuckJumpOffset = _InDuckJumpOffset ?? Schema.GetOffset(0xB65FEA7917ADB523);
-            return ref _Handle.AsRef<bool>(_InDuckJumpOffset!.Value);
-        }
-    }
     private static nint? _GroundNormalOffset;
 
     public ref Vector GroundNormal {
@@ -122,10 +74,4 @@ internal partial class CPlayer_MovementServices_HumanoidImpl : CPlayer_MovementS
     }
 
     public void FallVelocityUpdated() => Schema.Update(_Handle, 0xB65FEA796D8D7D9D);
-    public void InCrouchUpdated() => Schema.Update(_Handle, 0xB65FEA79CF28FE64);
-    public void CrouchStateUpdated() => Schema.Update(_Handle, 0xB65FEA7988282338);
-    public void CrouchTransitionStartTimeUpdated() => Schema.Update(_Handle, 0xB65FEA79E89CEC2B);
-    public void DuckedUpdated() => Schema.Update(_Handle, 0xB65FEA7914A05A59);
-    public void DuckingUpdated() => Schema.Update(_Handle, 0xB65FEA798B221170);
-    public void InDuckJumpUpdated() => Schema.Update(_Handle, 0xB65FEA7917ADB523);
 }

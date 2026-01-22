@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFlashbang : CBaseCSGrenade, ISchemaClass<CFlashbang>
 {
     static CFlashbang ISchemaClass<CFlashbang>.From(nint handle) => new CFlashbangImpl(handle);
-    static int ISchemaClass<CFlashbang>.Size => 4624;
+    static int ISchemaClass<CFlashbang>.Size => 4464;
     static string? ISchemaClass<CFlashbang>.ClassName => "weapon_flashbang";
 
 

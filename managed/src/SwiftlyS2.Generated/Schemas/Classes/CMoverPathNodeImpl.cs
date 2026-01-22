@@ -12,104 +12,48 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
-internal partial class CMoverPathNodeImpl : CPointEntityImpl, CMoverPathNode
+internal partial class CMoverPathNodeImpl : CPathNodeImpl, CMoverPathNode
 {
     public CMoverPathNodeImpl(nint handle) : base(handle) { }
 
-    private static nint? _InTangentLocalOffset;
-
-    public ref Vector InTangentLocal {
-        get {
-            _InTangentLocalOffset = _InTangentLocalOffset ?? Schema.GetOffset(0x5847AABC46C1388A);
-            return ref _Handle.AsRef<Vector>(_InTangentLocalOffset!.Value);
-        }
-    }
-    private static nint? _OutTangentLocalOffset;
-
-    public ref Vector OutTangentLocal {
-        get {
-            _OutTangentLocalOffset = _OutTangentLocalOffset ?? Schema.GetOffset(0x5847AABC788EFFFB);
-            return ref _Handle.AsRef<Vector>(_OutTangentLocalOffset!.Value);
-        }
-    }
-    private static nint? _ParentPathUniqueIDOffset;
-
-    public string ParentPathUniqueID {
-        get {
-            _ParentPathUniqueIDOffset = _ParentPathUniqueIDOffset ?? Schema.GetOffset(0x5847AABCC2958DE1);
-            return Schema.GetString(_Handle.Read<nint>(_ParentPathUniqueIDOffset!.Value));
-        }
-        set {
-            _ParentPathUniqueIDOffset = _ParentPathUniqueIDOffset ?? Schema.GetOffset(0x5847AABCC2958DE1);
-            Schema.SetString(_Handle, _ParentPathUniqueIDOffset!.Value, value);
-        }
-    } 
-    private static nint? _PathNodeParameterOffset;
-
-    public string PathNodeParameter {
-        get {
-            _PathNodeParameterOffset = _PathNodeParameterOffset ?? Schema.GetOffset(0x5847AABC5B2492DE);
-            return Schema.GetString(_Handle.Read<nint>(_PathNodeParameterOffset!.Value));
-        }
-        set {
-            _PathNodeParameterOffset = _PathNodeParameterOffset ?? Schema.GetOffset(0x5847AABC5B2492DE);
-            Schema.SetString(_Handle, _PathNodeParameterOffset!.Value, value);
-        }
-    } 
     private static nint? _OnStartFromOrInSegmentOffset;
 
-    public ref CEntityIOOutput OnStartFromOrInSegment {
+    public SchemaUntypedField OnStartFromOrInSegment {
         get {
             _OnStartFromOrInSegmentOffset = _OnStartFromOrInSegmentOffset ?? Schema.GetOffset(0x5847AABC6622BECB);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnStartFromOrInSegmentOffset!.Value);
+            return new SchemaUntypedField(_Handle + _OnStartFromOrInSegmentOffset!.Value);
         }
     }
     private static nint? _OnStoppedAtOrInSegmentOffset;
 
-    public ref CEntityIOOutput OnStoppedAtOrInSegment {
+    public SchemaUntypedField OnStoppedAtOrInSegment {
         get {
             _OnStoppedAtOrInSegmentOffset = _OnStoppedAtOrInSegmentOffset ?? Schema.GetOffset(0x5847AABCBF4204DB);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnStoppedAtOrInSegmentOffset!.Value);
+            return new SchemaUntypedField(_Handle + _OnStoppedAtOrInSegmentOffset!.Value);
         }
     }
     private static nint? _OnPassThroughOffset;
 
-    public ref CEntityIOOutput OnPassThrough {
+    public SchemaUntypedField OnPassThrough {
         get {
             _OnPassThroughOffset = _OnPassThroughOffset ?? Schema.GetOffset(0x5847AABC3A5F20B6);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassThroughOffset!.Value);
+            return new SchemaUntypedField(_Handle + _OnPassThroughOffset!.Value);
         }
     }
     private static nint? _OnPassThroughForwardOffset;
 
-    public ref CEntityIOOutput OnPassThroughForward {
+    public SchemaUntypedField OnPassThroughForward {
         get {
             _OnPassThroughForwardOffset = _OnPassThroughForwardOffset ?? Schema.GetOffset(0x5847AABCA62F443B);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassThroughForwardOffset!.Value);
+            return new SchemaUntypedField(_Handle + _OnPassThroughForwardOffset!.Value);
         }
     }
     private static nint? _OnPassThroughReverseOffset;
 
-    public ref CEntityIOOutput OnPassThroughReverse {
+    public SchemaUntypedField OnPassThroughReverse {
         get {
             _OnPassThroughReverseOffset = _OnPassThroughReverseOffset ?? Schema.GetOffset(0x5847AABC37667FA8);
-            return ref _Handle.AsRef<CEntityIOOutput>(_OnPassThroughReverseOffset!.Value);
-        }
-    }
-    private static nint? _MoverOffset;
-
-    public ref CHandle<CPathMover> Mover {
-        get {
-            _MoverOffset = _MoverOffset ?? Schema.GetOffset(0x5847AABC3629FA74);
-            return ref _Handle.AsRef<CHandle<CPathMover>>(_MoverOffset!.Value);
-        }
-    }
-    private static nint? _XWSPrevParentOffset;
-
-    public ref CTransform XWSPrevParent {
-        get {
-            _XWSPrevParentOffset = _XWSPrevParentOffset ?? Schema.GetOffset(0x5847AABC2AEC980C);
-            return ref _Handle.AsRef<CTransform>(_XWSPrevParentOffset!.Value);
+            return new SchemaUntypedField(_Handle + _OnPassThroughReverseOffset!.Value);
         }
     }
 

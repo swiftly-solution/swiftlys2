@@ -625,7 +625,7 @@ internal partial class CScriptedSequenceImpl : CBaseEntityImpl, CScriptedSequenc
         }
     }
     public ISchemaFixedArray<CEntityIOOutput> OnScriptEvent {
-        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0xBB0C45ED8A68F621, 8, 40, 8);
+        get => new SchemaFixedArray<CEntityIOOutput>(_Handle, 0xBB0C45ED8A68F621, 8, 24, 8);
     }
     private static nint? _MatOtherToMainOffset;
 

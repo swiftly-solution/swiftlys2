@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CEnvSoundscape : CBaseEntity, ISchemaClass<CEnvSoundscape>
 {
     static CEnvSoundscape ISchemaClass<CEnvSoundscape>.From(nint handle) => new CEnvSoundscapeImpl(handle);
-    static int ISchemaClass<CEnvSoundscape>.Size => 1424;
+    static int ISchemaClass<CEnvSoundscape>.Size => 1336;
     static string? ISchemaClass<CEnvSoundscape>.ClassName => "env_soundscape";
 
 

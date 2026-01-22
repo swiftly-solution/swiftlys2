@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundEventOBBEntity : CSoundEventEntity, ISchemaClass<CSoundEventOBBEntity>
 {
     static CSoundEventOBBEntity ISchemaClass<CSoundEventOBBEntity>.From(nint handle) => new CSoundEventOBBEntityImpl(handle);
-    static int ISchemaClass<CSoundEventOBBEntity>.Size => 1504;
+    static int ISchemaClass<CSoundEventOBBEntity>.Size => 1408;
     static string? ISchemaClass<CSoundEventOBBEntity>.ClassName => "snd_event_orientedbox";
 
 

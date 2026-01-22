@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CKeepUpright : CPointEntity, ISchemaClass<CKeepUpright>
 {
     static CKeepUpright ISchemaClass<CKeepUpright>.From(nint handle) => new CKeepUprightImpl(handle);
-    static int ISchemaClass<CKeepUpright>.Size => 1328;
+    static int ISchemaClass<CKeepUpright>.Size => 1256;
     static string? ISchemaClass<CKeepUpright>.ClassName => "phys_keepupright";
 
 

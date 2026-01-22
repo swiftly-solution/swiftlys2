@@ -37,8 +37,6 @@ public partial interface CModelConfigElement_AttachedModel : CModelConfigElement
 
     public ref bool UserSpecifiedMaterialGroup { get; }
 
-    public ref bool AcceptParentMaterialDrivenDecals { get; }
-
     public string BodygroupOnOtherModels { get; set; }
 
     public string MaterialGroupOnOtherModels { get; set; }

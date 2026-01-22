@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CLogicCollisionPair : CLogicalEntity, ISchemaClass<CLogicCollisionPair>
 {
     static CLogicCollisionPair ISchemaClass<CLogicCollisionPair>.From(nint handle) => new CLogicCollisionPairImpl(handle);
-    static int ISchemaClass<CLogicCollisionPair>.Size => 1288;
+    static int ISchemaClass<CLogicCollisionPair>.Size => 1216;
     static string? ISchemaClass<CLogicCollisionPair>.ClassName => "logic_collision_pair";
 
 

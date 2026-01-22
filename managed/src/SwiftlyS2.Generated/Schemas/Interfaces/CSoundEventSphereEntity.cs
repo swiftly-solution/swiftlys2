@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CSoundEventSphereEntity : CSoundEventEntity, ISchemaClass<CSoundEventSphereEntity>
 {
     static CSoundEventSphereEntity ISchemaClass<CSoundEventSphereEntity>.From(nint handle) => new CSoundEventSphereEntityImpl(handle);
-    static int ISchemaClass<CSoundEventSphereEntity>.Size => 1472;
+    static int ISchemaClass<CSoundEventSphereEntity>.Size => 1376;
     static string? ISchemaClass<CSoundEventSphereEntity>.ClassName => "snd_event_sphere";
 
 

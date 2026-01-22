@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPlayerPawnComponent : ISchemaClass<CPlayerPawnComponent>
 {
     static CPlayerPawnComponent ISchemaClass<CPlayerPawnComponent>.From(nint handle) => new CPlayerPawnComponentImpl(handle);
-    static int ISchemaClass<CPlayerPawnComponent>.Size => 64;
+    static int ISchemaClass<CPlayerPawnComponent>.Size => 72;
     static string? ISchemaClass<CPlayerPawnComponent>.ClassName => null;
 
 

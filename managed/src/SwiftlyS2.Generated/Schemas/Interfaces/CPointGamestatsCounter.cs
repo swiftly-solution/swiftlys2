@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPointGamestatsCounter : CPointEntity, ISchemaClass<CPointGamestatsCounter>
 {
     static CPointGamestatsCounter ISchemaClass<CPointGamestatsCounter>.From(nint handle) => new CPointGamestatsCounterImpl(handle);
-    static int ISchemaClass<CPointGamestatsCounter>.Size => 1280;
+    static int ISchemaClass<CPointGamestatsCounter>.Size => 1208;
     static string? ISchemaClass<CPointGamestatsCounter>.ClassName => "point_gamestats_counter";
 
 

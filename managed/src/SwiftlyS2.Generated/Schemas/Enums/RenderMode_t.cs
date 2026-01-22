@@ -8,27 +8,9 @@ public enum RenderMode_t : byte
 {
  kRenderNormal = 0,
 
- kRenderTransColor = 1,
+ kRenderTransAlpha = 1,
 
- kRenderTransTexture = 2,
+ kRenderNone = 2,
 
- kRenderGlow = 3,
-
- kRenderTransAlpha = 4,
-
- kRenderTransAdd = 5,
-
- kRenderEnvironmental = 6,
-
- kRenderTransAddFrameBlend = 7,
-
- kRenderTransAlphaAdd = 8,
-
- kRenderWorldGlow = 9,
-
- kRenderNone = 10,
-
- kRenderDevVisualizer = 11,
-
- kRenderModeCount = 12,
+ kRenderModeCount = 3,
 }

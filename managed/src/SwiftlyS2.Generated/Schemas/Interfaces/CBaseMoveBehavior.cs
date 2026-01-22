@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseMoveBehavior : CPathKeyFrame, ISchemaClass<CBaseMoveBehavior>
 {
     static CBaseMoveBehavior ISchemaClass<CBaseMoveBehavior>.From(nint handle) => new CBaseMoveBehaviorImpl(handle);
-    static int ISchemaClass<CBaseMoveBehavior>.Size => 1424;
+    static int ISchemaClass<CBaseMoveBehavior>.Size => 1344;
     static string? ISchemaClass<CBaseMoveBehavior>.ClassName => "move_keyframed";
 
 

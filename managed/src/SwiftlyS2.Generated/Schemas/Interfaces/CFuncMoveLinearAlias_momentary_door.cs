@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncMoveLinearAlias_momentary_door : CFuncMoveLinear, ISchemaClass<CFuncMoveLinearAlias_momentary_door>
 {
     static CFuncMoveLinearAlias_momentary_door ISchemaClass<CFuncMoveLinearAlias_momentary_door>.From(nint handle) => new CFuncMoveLinearAlias_momentary_doorImpl(handle);
-    static int ISchemaClass<CFuncMoveLinearAlias_momentary_door>.Size => 2304;
+    static int ISchemaClass<CFuncMoveLinearAlias_momentary_door>.Size => 2104;
     static string? ISchemaClass<CFuncMoveLinearAlias_momentary_door>.ClassName => null;
 
 

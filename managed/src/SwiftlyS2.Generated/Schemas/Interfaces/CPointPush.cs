@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CPointPush : CPointEntity, ISchemaClass<CPointPush>
 {
     static CPointPush ISchemaClass<CPointPush>.From(nint handle) => new CPointPushImpl(handle);
-    static int ISchemaClass<CPointPush>.Size => 1304;
+    static int ISchemaClass<CPointPush>.Size => 1232;
     static string? ISchemaClass<CPointPush>.ClassName => "point_push";
 
 

@@ -42,10 +42,10 @@ internal partial class C_OP_RenderStandardLightImpl : CParticleFunctionRendererI
     }
     private static nint? _IntensityOffset;
 
-    public CParticleCollectionFloatInput Intensity {
+    public CPerParticleFloatInput Intensity {
         get {
             _IntensityOffset = _IntensityOffset ?? Schema.GetOffset(0x40395A8467B5578C);
-            return new CParticleCollectionFloatInputImpl(_Handle + _IntensityOffset!.Value);
+            return new CPerParticleFloatInputImpl(_Handle + _IntensityOffset!.Value);
         }
     }
     private static nint? _CastShadowsOffset;

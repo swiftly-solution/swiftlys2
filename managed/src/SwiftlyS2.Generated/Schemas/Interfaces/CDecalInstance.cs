@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CDecalInstance : ISchemaClass<CDecalInstance>
 {
     static CDecalInstance ISchemaClass<CDecalInstance>.From(nint handle) => new CDecalInstanceImpl(handle);
-    static int ISchemaClass<CDecalInstance>.Size => 136;
+    static int ISchemaClass<CDecalInstance>.Size => 176;
     static string? ISchemaClass<CDecalInstance>.ClassName => null;
 
 
@@ -43,6 +43,8 @@ public partial interface CDecalInstance : ISchemaClass<CDecalInstance>
 
     public ref float Depth { get; }
 
+    public ref CTransform Transform { get; }
+
     public ref float AnimationScale { get; }
 
     public ref float AnimationStartTime { get; }
@@ -63,7 +65,9 @@ public partial interface CDecalInstance : ISchemaClass<CDecalInstance>
 
     public ref bool DoDecalLightmapping { get; }
 
-    public ref DecalMode_t SkinnedModelMode { get; }
+    public ref DecalRtEncoding_t DecalRtEncoding { get; }
+
+    public ref bool ProjectToBackfaces { get; }
 
 
 }

@@ -34,15 +34,11 @@ public enum RenderFx_t : byte
 
  kRenderFxFlickerFast = 13,
 
- kRenderFxNoDissipation = 14,
+ kRenderFxFadeOut = 14,
 
- kRenderFxFadeOut = 15,
+ kRenderFxFadeIn = 15,
 
- kRenderFxFadeIn = 16,
+ kRenderFxPulseFastWider = 16,
 
- kRenderFxPulseFastWider = 17,
-
- kRenderFxGlowShell = 18,
-
- kRenderFxMax = 19,
+ kRenderFxMax = 17,
 }

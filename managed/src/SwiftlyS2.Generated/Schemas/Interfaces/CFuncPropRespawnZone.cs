@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncPropRespawnZone : CBaseEntity, ISchemaClass<CFuncPropRespawnZone>
 {
     static CFuncPropRespawnZone ISchemaClass<CFuncPropRespawnZone>.From(nint handle) => new CFuncPropRespawnZoneImpl(handle);
-    static int ISchemaClass<CFuncPropRespawnZone>.Size => 1264;
+    static int ISchemaClass<CFuncPropRespawnZone>.Size => 1192;
     static string? ISchemaClass<CFuncPropRespawnZone>.ClassName => "func_proprrespawnzone";
 
 

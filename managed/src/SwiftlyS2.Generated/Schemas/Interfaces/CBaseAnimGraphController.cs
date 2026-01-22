@@ -11,13 +11,24 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CBaseAnimGraphController : CSkeletonAnimationController, ISchemaClass<CBaseAnimGraphController>
 {
     static CBaseAnimGraphController ISchemaClass<CBaseAnimGraphController>.From(nint handle) => new CBaseAnimGraphControllerImpl(handle);
-    static int ISchemaClass<CBaseAnimGraphController>.Size => 1968;
+    static int ISchemaClass<CBaseAnimGraphController>.Size => 2136;
     static string? ISchemaClass<CBaseAnimGraphController>.ClassName => null;
 
 
+    public ref AnimationAlgorithm_t AnimationAlgorithm { get; }
+
     public CAnimGraphNetworkedVariables AnimGraphNetworkedVars { get; }
 
-    public ref bool SequenceFinished { get; }
+    // CSmartPtr< IAnimationGraphInstance >
+    public SchemaUntypedField AnimGraphInstance { get; }
+
+    public ExternalAnimGraphHandle_t NextExternalGraphHandle { get; }
+
+    public ref CUtlVector<CGlobalSymbol> SecondarySkeletonNames { get; }
+
+    public ref CUtlVector<CHandle<CBaseAnimGraph>> SecondarySkeletons { get; }
+
+    public ref int SecondarySkeletonMasterCount { get; }
 
     public ref float SoundSyncTime { get; }
 
@@ -41,11 +52,11 @@ public partial interface CBaseAnimGraphController : CSkeletonAnimationController
 
     public ref bool LastUpdateSkipped { get; }
 
-    public GameTime_t PrevAnimUpdateTime { get; }
+    public ref bool SequenceFinished { get; }
+
+    public GameTick_t PrevAnimUpdateTick { get; }
 
     public ref CStrongHandle<InfoForResourceTypeCNmGraphDefinition> GraphDefinitionAG2 { get; }
-
-    public ref bool IsUsingAG2 { get; }
 
     public ref CUtlVector<byte> SerializedPoseRecipeAG2 { get; }
 
@@ -53,24 +64,36 @@ public partial interface CBaseAnimGraphController : CSkeletonAnimationController
 
     public ref int SerializePoseRecipeVersionAG2 { get; }
 
-    public ref byte GraphCreationFlagsAG2 { get; }
-
-    public ref int ServerGraphDefReloadCountAG2 { get; }
+    public ref int ServerGraphInstanceIteration { get; }
 
     public ref int ServerSerializationContextIteration { get; }
 
+    public ResourceId_t PrimaryGraphId { get; }
+
+    public ref CUtlVector<ResourceId_t> ExternalGraphIds { get; }
+
+    public ref CUtlVector<ResourceId_t> ExternalClipIds { get; }
+
+    public ref CGlobalSymbol AnimGraph2Identifier { get; }
+
+    public ref CUtlVector<ExternalAnimGraph_t> ExternalGraphs { get; }
+
+    public void AnimationAlgorithmUpdated();
     public void AnimGraphNetworkedVarsUpdated();
+    public void SecondarySkeletonsUpdated();
+    public void SecondarySkeletonMasterCountUpdated();
     public void SequenceUpdated();
     public void SeqStartTimeUpdated();
     public void SeqFixedCycleUpdated();
     public void AnimLoopModeUpdated();
     public void PlaybackRateUpdated();
     public void GraphDefinitionAG2Updated();
-    public void IsUsingAG2Updated();
     public void SerializedPoseRecipeAG2Updated();
     public void SerializePoseRecipeSizeAG2Updated();
     public void SerializePoseRecipeVersionAG2Updated();
-    public void GraphCreationFlagsAG2Updated();
-    public void ServerGraphDefReloadCountAG2Updated();
+    public void ServerGraphInstanceIterationUpdated();
     public void ServerSerializationContextIterationUpdated();
+    public void PrimaryGraphIdUpdated();
+    public void ExternalGraphIdsUpdated();
+    public void ExternalClipIdsUpdated();
 }

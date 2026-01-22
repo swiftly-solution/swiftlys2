@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CWorld : CBaseModelEntity, ISchemaClass<CWorld>
 {
     static CWorld ISchemaClass<CWorld>.From(nint handle) => new CWorldImpl(handle);
-    static int ISchemaClass<CWorld>.Size => 2008;
+    static int ISchemaClass<CWorld>.Size => 1840;
     static string? ISchemaClass<CWorld>.ClassName => "worldent";
 
 

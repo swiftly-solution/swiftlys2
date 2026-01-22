@@ -24,6 +24,22 @@ internal partial class CPulseCell_Outflow_PlayVCDImpl : CPulseCell_Outflow_PlayS
             return ref _Handle.AsRef<CStrongHandle<InfoForResourceTypeCChoreoSceneResource>>(_ChoreoSceneOffset!.Value);
         }
     }
+    private static nint? _OnPausedOffset;
+
+    public CPulse_OutflowConnection OnPaused {
+        get {
+            _OnPausedOffset = _OnPausedOffset ?? Schema.GetOffset(0xB095B41491D78012);
+            return new CPulse_OutflowConnectionImpl(_Handle + _OnPausedOffset!.Value);
+        }
+    }
+    private static nint? _OnResumedOffset;
+
+    public CPulse_OutflowConnection OnResumed {
+        get {
+            _OnResumedOffset = _OnResumedOffset ?? Schema.GetOffset(0xB095B414CCA87325);
+            return new CPulse_OutflowConnectionImpl(_Handle + _OnResumedOffset!.Value);
+        }
+    }
 
 
 }

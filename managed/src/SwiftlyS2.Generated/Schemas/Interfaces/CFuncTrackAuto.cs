@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CFuncTrackAuto : CFuncTrackChange, ISchemaClass<CFuncTrackAuto>
 {
     static CFuncTrackAuto ISchemaClass<CFuncTrackAuto>.From(nint handle) => new CFuncTrackAutoImpl(handle);
-    static int ISchemaClass<CFuncTrackAuto>.Size => 2272;
+    static int ISchemaClass<CFuncTrackAuto>.Size => 2104;
     static string? ISchemaClass<CFuncTrackAuto>.ClassName => "func_trackautochange";
 
 

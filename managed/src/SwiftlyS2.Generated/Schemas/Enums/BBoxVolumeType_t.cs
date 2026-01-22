@@ -11,4 +11,6 @@ public enum BBoxVolumeType_t : uint
  BBOX_DIMENSIONS = 1,
 
  BBOX_MINS_MAXS = 2,
+
+ BBOX_RADIUS = 3,
 }

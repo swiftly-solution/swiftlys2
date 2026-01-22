@@ -11,7 +11,7 @@ namespace SwiftlyS2.Shared.SchemaDefinitions;
 public partial interface CInfoDynamicShadowHint : CPointEntity, ISchemaClass<CInfoDynamicShadowHint>
 {
     static CInfoDynamicShadowHint ISchemaClass<CInfoDynamicShadowHint>.From(nint handle) => new CInfoDynamicShadowHintImpl(handle);
-    static int ISchemaClass<CInfoDynamicShadowHint>.Size => 1288;
+    static int ISchemaClass<CInfoDynamicShadowHint>.Size => 1216;
     static string? ISchemaClass<CInfoDynamicShadowHint>.ClassName => "info_dynamic_shadow_hint";
 
 
