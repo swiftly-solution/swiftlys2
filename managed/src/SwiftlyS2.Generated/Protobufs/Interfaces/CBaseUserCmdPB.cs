@@ -63,4 +63,7 @@ public interface CBaseUserCmdPB : ITypedProtobuf<CBaseUserCmdPB>
 
   public int CmdFlags { get; set; }
 
+
+  public CBaseUserCmdExecutionNotes ExecutionNotes { get; }
+
 }

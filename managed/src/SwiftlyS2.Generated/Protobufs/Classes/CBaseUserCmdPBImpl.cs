@@ -85,4 +85,8 @@ internal class CBaseUserCmdPBImpl : TypedProtobuf<CBaseUserCmdPB>, CBaseUserCmdP
   public int CmdFlags
   { get => Accessor.GetInt32("cmd_flags"); set => Accessor.SetInt32("cmd_flags", value); }
 
+
+  public CBaseUserCmdExecutionNotes ExecutionNotes
+  { get => new CBaseUserCmdExecutionNotesImpl(NativeNetMessages.GetNestedMessage(Address, "execution_notes"), false); }
+
 }
