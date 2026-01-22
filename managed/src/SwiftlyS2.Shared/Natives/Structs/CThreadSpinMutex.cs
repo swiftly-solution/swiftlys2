@@ -7,4 +7,5 @@ public struct CThreadSpinMutex
 {
     public uint OwnerID;
     public int Depth;
+    public ulong SomePadding;
 }
