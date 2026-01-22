@@ -7,7 +7,7 @@ namespace SwiftlyS2.Shared.SteamAPI
 	{
 		public const string STEAMAPPS_INTERFACE_VERSION = "STEAMAPPS_INTERFACE_VERSION008";
 		public const string STEAMAPPTICKET_INTERFACE_VERSION = "STEAMAPPTICKET_INTERFACE_VERSION001";
-		public const string STEAMCLIENT_INTERFACE_VERSION = "SteamClient021";
+		public const string STEAMCLIENT_INTERFACE_VERSION = "SteamClient023";
 		public const string STEAMFRIENDS_INTERFACE_VERSION = "SteamFriends018";
 		public const string STEAMGAMECOORDINATOR_INTERFACE_VERSION = "SteamGameCoordinator001";
 		public const string STEAMGAMESERVER_INTERFACE_VERSION = "SteamGameServer015";
