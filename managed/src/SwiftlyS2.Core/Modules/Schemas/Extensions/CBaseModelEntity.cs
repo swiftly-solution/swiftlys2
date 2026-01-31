@@ -7,33 +7,25 @@ public partial interface CBaseModelEntity
     /// <summary>
     /// Gets the skeletance instance of the entity.
     /// 
-    /// Thread unsafe
     /// </summary>
-    [ThreadUnsafe]
     public CSkeletonInstance? GetSkeletonInstance();
 
     /// <summary>
     /// Gets the model of the entity.
     /// 
-    /// Thread unsafe
     /// </summary>
-    [ThreadUnsafe]
     public string? GetModel();
 
     /// <summary>
     /// Gets the model meshgroupmask of the entity.
     /// 
-    /// /// Thread unsafe
     /// </summary>
-    [ThreadUnsafe]
     public ulong? GetMeshGroupMask();
 
     /// <summary>
     /// Sets the model meshgroupmask of the entity.
     /// 
-    /// Thread unsafe, use async variant instead for non-main thread context.
     /// </summary>
-    [ThreadUnsafe]
     public void SetMeshGroupMask(ulong meshGroupMask);
 
     /// <summary>

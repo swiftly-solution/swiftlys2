@@ -30,6 +30,7 @@ internal static class GameFunctions
     private static Lazy<int> CreateOffset(string name) => new(() => NativeOffsets.Fetch(name));
     private static readonly Lazy<int> _teleportOffset = CreateOffset("CBaseEntity::Teleport");
     private static readonly Lazy<int> _commitSuicideOffset = CreateOffset("CBasePlayerPawn::CommitSuicide");
+    private static readonly Lazy<int> _getSkeletonInstanceOffset = CreateOffset("CGameSceneNode::GetSkeletonInstance");
     private static readonly Lazy<int> _findPickerEntityOffset = CreateOffset("CGameRules::FindPickerEntity");
     private static readonly Lazy<int> _removeWeaponsOffset = CreateOffset("CCSPlayer_ItemServices::RemoveWeapons");
     private static readonly Lazy<int> _giveNamedItemOffset = CreateOffset("CCSPlayer_ItemServices::GiveNamedItem");
@@ -43,6 +44,7 @@ internal static class GameFunctions
 
     public static int TeleportOffset => _teleportOffset.Value;
     public static int CommitSuicideOffset => _commitSuicideOffset.Value;
+    public static int GetSkeletonInstanceOffset => _getSkeletonInstanceOffset.Value;
     public static int FindPickerEntityOffset => _findPickerEntityOffset.Value;
     public static int RemoveWeaponsOffset => _removeWeaponsOffset.Value;
     public static int GiveNamedItemOffset => _giveNamedItemOffset.Value;
@@ -174,6 +176,24 @@ internal static class GameFunctions
                 CheckPtr(controller, nameof(controller));
                 var vfunc = (delegate* unmanaged<nint, nint, nint, nint>)GetVirtualFunction(handle, FindPickerEntityOffset);
                 return vfunc(handle, controller, IntPtr.Zero);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+        return 0;
+    }
+
+    public static nint GetSkeletonInstance(nint handle)
+    {
+        try
+        {
+            CheckPtr(handle, nameof(handle));
+            unsafe
+            {
+                var pSkeletonInstance = (delegate* unmanaged<nint, nint>)GetVirtualFunction(handle, GetSkeletonInstanceOffset);
+                return pSkeletonInstance(handle);
             }
         }
         catch (Exception e)

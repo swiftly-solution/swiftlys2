@@ -8,13 +8,11 @@ internal partial class CBaseModelEntityImpl : CBaseModelEntity
 {
     public CSkeletonInstance? GetSkeletonInstance()
     {
-        NativeBinding.ThrowIfNonMainThread();
-        return CBodyComponent?.SceneNode?.As<CSkeletonInstance>();
+        return CBodyComponent?.SceneNode?.GetSkeletonInstance();
     }
 
     public string? GetModel()
     {
-        NativeBinding.ThrowIfNonMainThread();
         return GetSkeletonInstance()?.ModelState.ModelName;
     }
 
@@ -42,7 +40,6 @@ internal partial class CBaseModelEntityImpl : CBaseModelEntity
 
     public ulong? GetMeshGroupMask()
     {
-        NativeBinding.ThrowIfNonMainThread();
         return GetSkeletonInstance()?.ModelState.MeshGroupMask;
     }
 
