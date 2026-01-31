@@ -52,11 +52,6 @@ internal partial class CBaseModelEntityImpl : CBaseModelEntity
         CBodyComponentUpdated();
     }
 
-    public Task SetMeshGroupMaskAsync(ulong meshGroupMask)
-    {
-        return SchedulerManager.QueueOrNow(() => SetMeshGroupMask(meshGroupMask));
-    }
-
     public void SetScale(float scale)
     {
         var skeletonInstance = GetSkeletonInstance();

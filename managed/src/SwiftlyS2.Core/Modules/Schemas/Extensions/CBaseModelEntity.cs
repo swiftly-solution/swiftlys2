@@ -29,12 +29,6 @@ public partial interface CBaseModelEntity
     public void SetMeshGroupMask(ulong meshGroupMask);
 
     /// <summary>
-    /// Sets the model meshgroupmask of the entity asynchronously.
-    /// 
-    /// </summary>
-    public Task SetMeshGroupMaskAsync(ulong meshGroupMask);
-
-    /// <summary>
     /// Sets the model to the entity.
     /// 
     /// Thread unsafe, use async variant instead for non-main thread context.
