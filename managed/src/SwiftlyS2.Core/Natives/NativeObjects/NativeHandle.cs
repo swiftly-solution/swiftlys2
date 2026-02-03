@@ -13,5 +13,10 @@ internal class NativeHandle : INativeHandle {
     _Handle = handle;
   }
 
+  internal void DangerousSetHandle(nint ptr)
+  {
+        _Handle = ptr;
+  }
+
   public nint Address => _Handle;
 }

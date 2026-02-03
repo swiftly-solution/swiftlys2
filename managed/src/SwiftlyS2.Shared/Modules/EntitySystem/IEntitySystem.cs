@@ -53,7 +53,7 @@ public interface IEntitySystemService
     /// <returns>Created entity.</returns>
     /// <exception cref="ArgumentException">Thrown when failed to create entity by designer name or designer name is invalid.</exception>
     /// <exception cref="InvalidOperationException">Thrown when called too early that entity system is not valid at this moment.</exception>
-    public T CreateEntityByDesignerName<T>( string designerName ) where T : ISchemaClass<T>;
+    public T CreateEntityByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>;
 
     /// <summary>
     /// Get a reference handle to the entity.

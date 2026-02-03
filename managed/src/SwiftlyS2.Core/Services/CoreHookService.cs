@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using Spectre.Console;
 using SwiftlyS2.Core.Datamaps;
+using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Core.Natives;
@@ -129,7 +130,7 @@ internal class CoreHookService : IDisposable
                 unsafe
                 {
                     var entityIdentity = core.Memory.ToSchemaClass<CEntityIdentity>(pEntityIdentity);
-                    if (!entityIdentity.IsValid)
+                    if (!entityIdentity.IsValid || !entityIdentity.EntityInstance.IsValid)
                     {
                         next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
                         return;
@@ -140,7 +141,7 @@ internal class CoreHookService : IDisposable
 
                     var @event = new OnEntityIdentityAcceptInputHookEvent {
                         Identity = entityIdentity,
-                        EntityInstance = entityIdentity.EntityInstance,
+                        EntityInstance = EntityManager.GetEntityByIndex(entityIdentity.EntityInstance.Index)!,
                         DesignerName = entityIdentity.DesignerName,
                         InputName = inputName,
                         Activator = activator,
@@ -176,8 +177,8 @@ internal class CoreHookService : IDisposable
                 var entityIO = pEntityIO.AsRef<CEntityIOOutput>();
 
                 var outputName = entityIO.Desc.Name.Value;
-                var activator = pActivator != nint.Zero ? core.Memory.ToSchemaClass<CEntityInstance>(pActivator) : null;
-                var caller = pCaller != nint.Zero ? core.Memory.ToSchemaClass<CEntityInstance>(pCaller) : null;
+                var activator = pActivator != nint.Zero ? EntityManager.GetEntityByAddress(pActivator) : null;
+                var caller = pCaller != nint.Zero ? EntityManager.GetEntityByAddress(pCaller) : null;
 
                 var variant = pVariant.AsRef<CVariant<CVariantDefaultAllocator>>();
 

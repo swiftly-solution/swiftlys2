@@ -51,13 +51,13 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
             : CreateEntityByDesignerName<T>(T.ClassName);
     }
 
-    public T CreateEntityByDesignerName<T>( string designerName ) where T : ISchemaClass<T>
+    public T CreateEntityByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>
     {
         ThrowIfEntitySystemInvalid();
         var handle = NativeEntitySystem.CreateEntityByName(designerName);
         return handle == nint.Zero
             ? throw new ArgumentException($"Failed to create entity by designer name: {designerName}, probably invalid designer name.")
-            : T.From(handle);
+            : EntityManager.GetEntityByAddress(handle)! as T;
     }
 
     public CHandle<T> GetRefEHandle<T>( T entity ) where T : class, ISchemaClass<T>
@@ -76,13 +76,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
     public IEnumerable<CEntityInstance> GetAllEntities()
     {
         ThrowIfEntitySystemInvalid();
-        CEntityIdentity? pFirst = new CEntityIdentityImpl(NativeEntitySystem.GetFirstActiveEntity());
-
-        while (pFirst != null && pFirst.IsValid)
-        {
-            yield return new CEntityInstanceImpl(pFirst.Address.Read<nint>());
-            pFirst = pFirst.Next;
-        }
+        return EntityManager.GetAllEntities();
     }
 
     public IEnumerable<T> GetAllEntitiesByClass<T>() where T : class, ISchemaClass<T>
@@ -90,7 +84,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
         ThrowIfEntitySystemInvalid();
         return string.IsNullOrWhiteSpace(T.ClassName)
             ? throw new ArgumentException($"Can't get entities with class {typeof(T).Name}, which doesn't have a designer name")
-            : GetAllEntities().Where(( entity ) => entity.Entity?.DesignerName == T.ClassName).Select(( entity ) => T.From(entity.Address));
+            : GetAllEntities().Where(( entity ) => entity.Entity?.DesignerName == T.ClassName).Select(entity => (entity as T)!);
     }
 
     public IEnumerable<T> GetAllEntitiesByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>
@@ -98,14 +92,13 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
         ThrowIfEntitySystemInvalid();
         return GetAllEntities()
             .Where(entity => entity.Entity?.DesignerName == designerName)
-            .Select(entity => T.From(entity.Address));
+            .Select(entity => (entity as T)!);
     }
 
     public T? GetEntityByIndex<T>( uint index ) where T : class, ISchemaClass<T>
     {
         ThrowIfEntitySystemInvalid();
-        var handle = NativeEntitySystem.GetEntityByIndex(index);
-        return handle == nint.Zero ? null : T.From(handle);
+        return EntityManager.GetEntityByIndex(index) as T;
     }
 
     [Obsolete("Use HookEntityOutput(string outputName, Action<IOnEntityFireOutputHookEvent> callback) instead.")]

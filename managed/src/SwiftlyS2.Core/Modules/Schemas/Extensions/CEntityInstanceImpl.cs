@@ -3,6 +3,7 @@ using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Core.EntitySystem;
 
 namespace SwiftlyS2.Core.SchemaDefinitions;
 
@@ -11,11 +12,20 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
     public uint Index => Entity?.EntityHandle.EntityIndex ?? uint.MaxValue;
     public string DesignerName => Entity?.DesignerName ?? string.Empty;
 
-    public bool IsValidEntity => NativeEntitySystem.IsValidEntity(Address);
+    public bool IsValidEntity => EntityManager.IsAddressValid(Address);
+
+    private void ThrowIfInvalidEntity()
+    {
+        if (!IsValidEntity)
+        {
+            throw new InvalidOperationException("The entity instance is no longer valid.");
+        }
+    }
 
     public unsafe void AcceptInput<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0 )
     {
         NativeBinding.ThrowIfNonMainThread();
+        ThrowIfInvalidEntity();
 
         using var variant = new CVariant<CVariantDefaultAllocator>(value);
 
@@ -30,6 +40,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
     public unsafe void AddEntityIOEvent<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, float delay = 0f )
     {
         NativeBinding.ThrowIfNonMainThread();
+        ThrowIfInvalidEntity();
 
         using var variant = new CVariant<CVariantDefaultAllocator>(value);
 
@@ -43,21 +54,25 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
 
     public void SetTransmitState( bool transmitting, int playerId )
     {
+        ThrowIfInvalidEntity();
         NativePlayer.ShouldBlockTransmitEntity(playerId, (int)Index, !transmitting);
     }
 
     public void SetTransmitState( bool transmitting )
     {
+        ThrowIfInvalidEntity();
         NativePlayerManager.ShouldBlockTransmitEntity((int)Index, !transmitting);
     }
 
     public bool IsTransmitting( int playerId )
     {
+        ThrowIfInvalidEntity();
         return !NativePlayer.IsTransmitEntityBlocked(playerId, (int)Index);
     }
 
     public void DispatchSpawn( CEntityKeyValues? entityKV = null )
     {
+        ThrowIfInvalidEntity();
         NativeEntitySystem.Spawn(Address, entityKV?.Address ?? nint.Zero);
     }
 
@@ -68,6 +83,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
 
     public void Despawn()
     {
+        ThrowIfInvalidEntity();
         NativeEntitySystem.Despawn(Address);
     }
 
