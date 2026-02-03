@@ -422,6 +422,7 @@ internal static class EventPublisher
     {
         if (subscribers.Count == 0)
         {
+            EntityManager.OnEntityDeleted(entityPtr);
             return;
         }
 
@@ -442,6 +443,10 @@ internal static class EventPublisher
                 return;
             }
             AnsiConsole.WriteException(e);
+        }
+        finally
+        {
+            EntityManager.OnEntityDeleted(entityPtr);
         }
     }
 
