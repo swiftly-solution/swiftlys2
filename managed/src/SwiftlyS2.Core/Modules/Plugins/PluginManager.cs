@@ -922,7 +922,8 @@ internal class PluginManager : IPluginManager
         var path = GetBlocklistPath();
         if (!File.Exists(path))
         {
-            logger.LogDebug("No blocklist file found at {Path}, all plugins allowed", path);
+            logger.LogInformation("No blocklist file found, creating default at {Path}", path);
+            SaveBlocklist();
             return;
         }
 
