@@ -35,7 +35,9 @@ internal class PluginManager : IPluginManager
     private static readonly JsonSerializerOptions BlocklistJsonOptions = new()
     {
         WriteIndented = true,
-        PropertyNameCaseInsensitive = true
+        PropertyNameCaseInsensitive = true,
+        ReadCommentHandling = JsonCommentHandling.Skip,
+        AllowTrailingCommas = true
     };
 
     public PluginManager(
@@ -914,7 +916,7 @@ internal class PluginManager : IPluginManager
 
     private string GetBlocklistPath()
     {
-        return Path.Combine(rootDirService.GetConfigRoot(), "blocked_plugins.json");
+        return Path.Combine(rootDirService.GetConfigRoot(), "blocked_plugins.jsonc");
     }
 
     private void LoadBlocklist()
@@ -961,7 +963,10 @@ internal class PluginManager : IPluginManager
                 Directory.CreateDirectory(dir);
             }
             var json = JsonSerializer.Serialize(blockedPlugins.Order().ToList(), BlocklistJsonOptions);
-            File.WriteAllText(path, json);
+            var content = "// Blocked plugins - these plugin IDs will be prevented from loading.\n"
+                        + "// Example: [\"sw2-unwanted-plugin\", \"sw2-another-blocked\"]\n"
+                        + json;
+            File.WriteAllText(path, content);
             logger.LogInformation("Saved plugin blocklist to {Path}", path);
         }
         catch (Exception ex)
