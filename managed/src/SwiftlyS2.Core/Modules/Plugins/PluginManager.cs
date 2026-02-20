@@ -963,8 +963,20 @@ internal class PluginManager : IPluginManager
                 Directory.CreateDirectory(dir);
             }
             var json = JsonSerializer.Serialize(blockedPlugins.Order().ToList(), BlocklistJsonOptions);
-            var content = "// Blocked plugins - these plugin IDs will be prevented from loading.\n"
+            var content = "// SwiftlyS2 Plugin Blocklist\n"
+                        + "// ─────────────────────────────────────────────────────────────\n"
+                        + "// Plugins listed here will be prevented from loading at startup.\n"
+                        + "// Add the plugin ID (from its [PluginMetadata] attribute) to block it.\n"
+                        + "//\n"
+                        + "// How it works:\n"
+                        + "//   - Blocked plugins are detected before Load() is called\n"
+                        + "//   - Their assemblies are never loaded into the runtime\n"
+                        + "//   - Hot-reloaded plugins are also checked against this list\n"
+                        + "//   - Use IPluginManager.BlockPlugin() / UnblockPlugin() at runtime\n"
+                        + "//     to modify this list (changes are persisted automatically)\n"
+                        + "//\n"
                         + "// Example: [\"sw2-unwanted-plugin\", \"sw2-another-blocked\"]\n"
+                        + "// ─────────────────────────────────────────────────────────────\n"
                         + json;
             File.WriteAllText(path, content);
             logger.LogInformation("Saved plugin blocklist to {Path}", path);
