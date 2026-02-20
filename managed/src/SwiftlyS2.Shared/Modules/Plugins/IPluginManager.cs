@@ -63,4 +63,28 @@ public interface IPluginManager
     /// Gets a list of all plugin IDs.
     /// </summary>
     public IEnumerable<string> GetAllPlugins();
+
+    /// <summary>
+    /// Returns true if the specified plugin is blocked from loading.
+    /// </summary>
+    /// <param name="pluginId">The ID of the plugin.</param>
+    public bool IsPluginBlocked( string pluginId );
+
+    /// <summary>
+    /// Adds a plugin to the blocklist, preventing it from loading.
+    /// If the plugin is already loaded, it will NOT be unloaded — only future loads are prevented.
+    /// </summary>
+    /// <param name="pluginId">The ID of the plugin to block.</param>
+    public void BlockPlugin( string pluginId );
+
+    /// <summary>
+    /// Removes a plugin from the blocklist, allowing it to load again.
+    /// </summary>
+    /// <param name="pluginId">The ID of the plugin to unblock.</param>
+    public void UnblockPlugin( string pluginId );
+
+    /// <summary>
+    /// Gets the set of all blocked plugin IDs.
+    /// </summary>
+    public IReadOnlySet<string> GetBlockedPlugins();
 }

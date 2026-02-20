@@ -1,8 +1,10 @@
 using System.Reflection;
 using System.Runtime.Loader;
 using System.Collections.Concurrent;
+using System.Text.Json;
 using McMaster.NETCore.Plugins;
 using Microsoft.Extensions.Logging;
+using Mono.Cecil;
 using Spectre.Console;
 using SwiftlyS2.Shared;
 using SwiftlyS2.Core.Natives;
@@ -28,6 +30,13 @@ internal class PluginManager : IPluginManager
     private readonly ConcurrentDictionary<string, CancellationTokenSource> fileReloadTokens;
 
     private readonly FileSystemWatcher? fileWatcher;
+    private readonly HashSet<string> blockedPlugins = new(StringComparer.OrdinalIgnoreCase);
+
+    private static readonly JsonSerializerOptions BlocklistJsonOptions = new()
+    {
+        WriteIndented = true,
+        PropertyNameCaseInsensitive = true
+    };
 
     public PluginManager(
         IServiceProvider provider,
@@ -220,6 +229,14 @@ internal class PluginManager : IPluginManager
                     return;
                 }
 
+                // Check if this plugin is blocked before attempting to load
+                var peekId = PeekPluginId(pluginDirectory);
+                if (peekId != null && IsPluginBlocked(peekId))
+                {
+                    logger.LogInformation("Blocked plugin detected during hot-load, skipping: {Id}", peekId);
+                    return;
+                }
+
                 // Check if this plugin already exists
                 var existingContext = plugins.Find(x => pluginDirectory.Equals(x.PluginDirectory, StringComparison.CurrentCultureIgnoreCase));
                 if (existingContext != null)
@@ -330,6 +347,7 @@ internal class PluginManager : IPluginManager
     /// </summary>
     internal void Initialize()
     {
+        LoadBlocklist();
         LoadExports();
         if (!NativeCore.PluginManualLoadState()) LoadPlugins();
         else
@@ -588,14 +606,24 @@ internal class PluginManager : IPluginManager
     }
     private void LoadPlugins()
     {
-        EnumeratePluginDirectories(rootDirService.GetPluginsRoot(), pluginDir =>
+        // Collect all plugin directories first
+        var pluginDirs = new List<string>();
+        EnumeratePluginDirectories(rootDirService.GetPluginsRoot(), pluginDirs.Add);
+
+        // Peek LoadPriority from each plugin's DLL metadata using Cecil (no runtime load)
+        var prioritized = pluginDirs
+            .Select(dir => (Dir: dir, Priority: PeekLoadPriority(dir)))
+            .OrderBy(x => x.Priority)
+            .ToList();
+
+        foreach (var (pluginDir, priority) in prioritized)
         {
             var relativePath = Path.GetRelativePath(rootDirService.GetRoot(), pluginDir);
             var displayPath = Path.Join("(swRoot)", relativePath);
             var dllName = Path.GetFileName(pluginDir);
             var fullDisplayPath = string.IsNullOrWhiteSpace(displayPath) ? string.Empty : $"{Path.Join(displayPath, dllName)}.dll";
 
-            logger.LogInformation("Loading plugin: {Path}", fullDisplayPath);
+            logger.LogInformation("Loading plugin (priority {Priority}): {Path}", priority, fullDisplayPath);
 
             try
             {
@@ -607,15 +635,17 @@ internal class PluginManager : IPluginManager
                             "Loaded Plugin",
                             "├─  {Id} {Version}",
                             "├─  Author: {Author}",
+                            "├─  Priority: {Priority}",
                             "└─  Path: {RelativePath}"
                         ]),
                         context.Metadata!.Id,
                         context.Metadata!.Version,
                         context.Metadata!.Author,
+                        context.Metadata!.LoadPriority,
                         displayPath
                     );
                 }
-                else
+                else if (context?.Status != PluginStatus.Unloaded) // Unloaded = blocked, already logged
                 {
                     logger.LogWarning("Failed to load plugin: {Path}", fullDisplayPath);
                 }
@@ -624,11 +654,11 @@ internal class PluginManager : IPluginManager
             {
                 if (!GlobalExceptionHandler.Handle(e))
                 {
-                    return;
+                    continue;
                 }
                 logger.LogWarning(e, "Failed to load plugin: {Path}", fullDisplayPath);
             }
-        });
+        }
 
         RebuildSharedServices();
 
@@ -685,6 +715,15 @@ internal class PluginManager : IPluginManager
         }
 
         context.Metadata = metadata;
+
+        if (IsPluginBlocked(metadata.Id))
+        {
+            logger.LogInformation("Plugin is blocked, skipping: {Id}", metadata.Id);
+            context.Status = PluginStatus.Unloaded;
+            loader?.Dispose();
+            return context;
+        }
+
         dataDirectoryService.EnsurePluginDataDirectory(metadata.Id);
 
         var pluginDir = Path.GetDirectoryName(entrypointDll)!;
@@ -869,5 +908,169 @@ internal class PluginManager : IPluginManager
                 yield return plugin.Metadata.Id;
             }
         }
+    }
+
+    // ───────────────────────── Plugin Blocklist ─────────────────────────
+
+    private string GetBlocklistPath()
+    {
+        return Path.Combine(rootDirService.GetConfigRoot(), "blocked_plugins.json");
+    }
+
+    private void LoadBlocklist()
+    {
+        var path = GetBlocklistPath();
+        if (!File.Exists(path))
+        {
+            logger.LogDebug("No blocklist file found at {Path}, all plugins allowed", path);
+            return;
+        }
+
+        try
+        {
+            var json = File.ReadAllText(path);
+            var list = JsonSerializer.Deserialize<List<string>>(json, BlocklistJsonOptions);
+            if (list != null)
+            {
+                foreach (var id in list)
+                {
+                    blockedPlugins.Add(id);
+                }
+            }
+            logger.LogInformation("Loaded plugin blocklist ({Count} entries): {Plugins}", blockedPlugins.Count, string.Join(", ", blockedPlugins));
+        }
+        catch (Exception ex)
+        {
+            if (GlobalExceptionHandler.Handle(ex))
+            {
+                logger.LogError(ex, "Failed to load plugin blocklist from {Path}", path);
+            }
+        }
+    }
+
+    private void SaveBlocklist()
+    {
+        var path = GetBlocklistPath();
+        try
+        {
+            var dir = Path.GetDirectoryName(path);
+            if (dir != null && !Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            File.WriteAllText(path, JsonSerializer.Serialize(blockedPlugins.ToList(), BlocklistJsonOptions));
+        }
+        catch (Exception ex)
+        {
+            if (GlobalExceptionHandler.Handle(ex))
+            {
+                logger.LogError(ex, "Failed to save plugin blocklist to {Path}", path);
+            }
+        }
+    }
+
+    public bool IsPluginBlocked( string pluginId )
+    {
+        return blockedPlugins.Contains(pluginId);
+    }
+
+    public void BlockPlugin( string pluginId )
+    {
+        if (blockedPlugins.Add(pluginId))
+        {
+            logger.LogInformation("Blocked plugin: {Id}", pluginId);
+            SaveBlocklist();
+        }
+    }
+
+    public void UnblockPlugin( string pluginId )
+    {
+        if (blockedPlugins.Remove(pluginId))
+        {
+            logger.LogInformation("Unblocked plugin: {Id}", pluginId);
+            SaveBlocklist();
+        }
+    }
+
+    public IReadOnlySet<string> GetBlockedPlugins()
+    {
+        return blockedPlugins;
+    }
+
+    // ───────────────────────── Cecil Helpers ─────────────────────────
+
+    /// <summary>
+    /// Reads the LoadPriority value from a plugin's PluginMetadata attribute
+    /// without loading the assembly into the runtime. Falls back to 1000 on error.
+    /// </summary>
+    private int PeekLoadPriority( string pluginDir )
+    {
+        var dllName = Path.GetFileName(pluginDir);
+        var entrypointDll = Path.Combine(pluginDir, dllName + ".dll");
+        if (!File.Exists(entrypointDll))
+        {
+            return 1000;
+        }
+
+        try
+        {
+            using var assembly = AssemblyDefinition.ReadAssembly(entrypointDll, new ReaderParameters { ReadSymbols = false });
+            foreach (var type in assembly.MainModule.Types)
+            {
+                var attr = type.CustomAttributes
+                    .FirstOrDefault(a => a.AttributeType.Name == nameof(PluginMetadata));
+                if (attr == null) continue;
+
+                var priorityProp = attr.Properties
+                    .FirstOrDefault(p => p.Name == nameof(PluginMetadata.LoadPriority));
+                if (priorityProp.Name != null && priorityProp.Argument.Value is int priority)
+                {
+                    return priority;
+                }
+                return 1000; // attribute found but no priority set — use default
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogDebug(ex, "Failed to peek LoadPriority for {Plugin}, using default", dllName);
+        }
+        return 1000;
+    }
+
+    /// <summary>
+    /// Reads the plugin Id from a plugin's PluginMetadata attribute via Cecil
+    /// without loading the assembly into the runtime. Returns null on error.
+    /// </summary>
+    private string? PeekPluginId( string pluginDir )
+    {
+        var dllName = Path.GetFileName(pluginDir);
+        var entrypointDll = Path.Combine(pluginDir, dllName + ".dll");
+        if (!File.Exists(entrypointDll))
+        {
+            return null;
+        }
+
+        try
+        {
+            using var assembly = AssemblyDefinition.ReadAssembly(entrypointDll, new ReaderParameters { ReadSymbols = false });
+            foreach (var type in assembly.MainModule.Types)
+            {
+                var attr = type.CustomAttributes
+                    .FirstOrDefault(a => a.AttributeType.Name == nameof(PluginMetadata));
+                if (attr == null) continue;
+
+                var idProp = attr.Properties
+                    .FirstOrDefault(p => p.Name == nameof(PluginMetadata.Id));
+                if (idProp.Name != null && idProp.Argument.Value is string id)
+                {
+                    return id;
+                }
+            }
+        }
+        catch
+        {
+            // Silently fail — the real LoadPlugin will handle errors
+        }
+        return null;
     }
 }
