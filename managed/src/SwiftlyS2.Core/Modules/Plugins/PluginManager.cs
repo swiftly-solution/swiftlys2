@@ -952,21 +952,21 @@ internal class PluginManager : IPluginManager
     private void SaveBlocklist()
     {
         var path = GetBlocklistPath();
+        logger.LogDebug("Saving blocklist to {Path}", path);
         try
         {
             var dir = Path.GetDirectoryName(path);
-            if (dir != null && !Directory.Exists(dir))
+            if (!string.IsNullOrWhiteSpace(dir))
             {
                 Directory.CreateDirectory(dir);
             }
-            File.WriteAllText(path, JsonSerializer.Serialize(blockedPlugins.ToList(), BlocklistJsonOptions));
+            var json = JsonSerializer.Serialize(blockedPlugins.Order().ToList(), BlocklistJsonOptions);
+            File.WriteAllText(path, json);
+            logger.LogInformation("Saved plugin blocklist to {Path}", path);
         }
         catch (Exception ex)
         {
-            if (GlobalExceptionHandler.Handle(ex))
-            {
-                logger.LogError(ex, "Failed to save plugin blocklist to {Path}", path);
-            }
+            logger.LogError(ex, "Failed to save plugin blocklist to {Path}", path);
         }
     }
 
