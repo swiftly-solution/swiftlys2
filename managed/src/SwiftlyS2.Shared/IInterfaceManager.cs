@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace SwiftlyS2.Shared;
 
 public interface IInterfaceManager {
@@ -29,4 +31,12 @@ public interface IInterfaceManager {
   /// <returns>The implementation of the interface.</returns>
   public TInterface GetSharedInterface<TInterface>(string key) where TInterface : class;
 
+    /// <summary>
+    /// Attempts to get a shared interface implementation by key.
+    /// </summary>
+    /// <typeparam name="TInterface">The type of the interface to get.</typeparam>
+    /// <param name="key">The key of the interface implementation.</param>
+    /// <param name="instance">The implementation of the interface, or <see langword="null"/> if the implementation wasn't found.</param>
+    /// <returns><see langword="true"/> if the implementation was found, otherwise <see langword="false"/></returns>
+    public bool TryGetSharedInterface<TInterface>(string key, [NotNullWhen(true)] out TInterface? instance) where TInterface : class;
 }

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using SwiftlyS2.Shared;
 
@@ -34,7 +35,18 @@ internal class InterfaceManager : IInterfaceManager, IDisposable
     return _ServiceProvider!.GetRequiredKeyedService<TInterface>(key);
   }
 
-  public void Build()
+    public bool TryGetSharedInterface<TInterface>(string key, [NotNullWhen(true)] out TInterface? instance) where TInterface : class
+    {
+        if (_ServiceProvider == null)
+        {
+            throw new Exception("InterfaceManager is not built.");
+        }
+
+        instance = _ServiceProvider.GetKeyedService<TInterface>(key);
+        return instance != null;
+    }
+
+    public void Build()
   {
     _ServiceProvider = _ServiceCollection.BuildServiceProvider();
   }
