@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Schemas;
 
@@ -21,7 +22,10 @@ public struct CHandle<T>( uint raw ) : ICHandle where T : class, ISchemaClass<T>
         readonly get {
             unsafe
             {
-                return IsValid ? (T?)T.From(NativeEntitySystem.EntityHandleGet(Raw)) : null;
+                if (!IsValid) return null;
+
+                var entityHandleGet = NativeEntitySystem.EntityHandleGet(Raw);
+                return EntityManager.GetEntityByAddress(entityHandleGet) is T entity ? entity : T.From(entityHandleGet);
             }
         }
         set {

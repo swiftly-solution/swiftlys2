@@ -116,4 +116,19 @@ public struct Ray_t
         Mesh.NumVertices = NumVertices;
         Type = RayType_t.RAY_TYPE_MESH;
     }
+
+    public override string ToString()
+    {
+        unsafe
+        {
+            return Type switch {
+                RayType_t.RAY_TYPE_LINE => $"Ray_t {{ Type: {Type}, Line: {{ StartOffset: {Line.StartOffset}, Radius: {Line.Radius} }} }}",
+                RayType_t.RAY_TYPE_SPHERE => $"Ray_t {{ Type: {Type}, Sphere: {{ Center: {Sphere.Center}, Radius: {Sphere.Radius} }} }}",
+                RayType_t.RAY_TYPE_HULL => $"Ray_t {{ Type: {Type}, Hull: {{ Mins: {Hull.Mins}, Maxs: {Hull.Maxs} }} }}",
+                RayType_t.RAY_TYPE_CAPSULE => $"Ray_t {{ Type: {Type}, Capsule: {{ Center0: {Capsule.Center0}, Center1: {Capsule.Center1}, Radius: {Capsule.Radius} }} }}",
+                RayType_t.RAY_TYPE_MESH => $"Ray_t {{ Type: {Type}, Mesh: {{ Mins: {Mesh.Mins}, Maxs: {Mesh.Maxs}, Vertices: {(nint)Mesh.Vertices:X}, NumVertices: {Mesh.NumVertices} }} }}",
+                _ => $"Ray_t {{ Type: {Type} }}"
+            };
+        }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Shared.SchemaDefinitions;
+using SwiftlyS2.Shared.Trace;
 using System.Runtime.InteropServices;
 
 namespace SwiftlyS2.Shared.Natives;
@@ -31,6 +32,7 @@ public struct CTraceFilter
         QueryShapeAttributes = new RnQueryShapeAttr_t();
     }
 
+    [Obsolete("To be removed when removing old methods for TracePlayerBBox and TraceShape")]
     internal void EnsureValid()
     {
         if (this._pVTable == 0)
@@ -43,12 +45,25 @@ public struct CTraceFilter
             _IterateEntitiesLinux = IterateEntities;
         }
     }
+
+    internal void EnsureValidNewFormat()
+    {
+        _pVTable = CTraceFilterVTable.pCTraceFilterCustomHitFunctionCall;
+
+        if (!IsWindows)
+        {
+            _IterateEntitiesLinux = IterateEntities;
+        }
+    }
 }
 
 internal static class CTraceFilterVTable
 {
     public static nint pCTraceFilterVTable;
     public static nint pCTraceFilterShouldHitFunctionCall;
+    public static nint pCTraceFilterCustomHitFunctionCall;
+
+    public static TraceFilter? CustomTraceFilter = null;
 
     [UnmanagedCallersOnly]
     public unsafe static void Destructor( CTraceFilter* filter, byte unk01 )
@@ -79,6 +94,35 @@ internal static class CTraceFilterVTable
             : filter->QueryShapeAttributes.EntityIdsToIgnore[0] != entityIndex && filter->QueryShapeAttributes.EntityIdsToIgnore[1] != entityIndex ? (byte)1 : (byte)0;
     }
 
+    [UnmanagedCallersOnly]
+    public unsafe static byte ShouldHitEntityCustomCallback( CTraceFilter* filter, nint entity )
+    {
+        if (CustomTraceFilter != null)
+        {
+            var ent = EntityManager.GetEntityByAddress(entity) ?? Helper.AsSchema<CEntityInstance>(entity);
+
+            if (CustomTraceFilter.EntitiesToIgnore.Count > 0)
+            {
+                if (CustomTraceFilter.EntitiesToIgnore.Contains(ent)) return 0;
+            }
+
+            if (CustomTraceFilter.OwnersToIgnore.Count > 0)
+            {
+                if (ent is CBaseEntity baseEnt)
+                {
+                    var ownerEntity = baseEnt.OwnerEntity.Value;
+                    if (ownerEntity != null && CustomTraceFilter.OwnersToIgnore.Contains(ownerEntity)) return 0;
+                }
+            }
+
+            if (CustomTraceFilter.ShouldHitEntity != null)
+                if (!CustomTraceFilter.ShouldHitEntity(ent))
+                    return 0;
+        }
+
+        return 1;
+    }
+
     static unsafe CTraceFilterVTable()
     {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -92,6 +136,11 @@ internal static class CTraceFilterVTable
             Span<nint> funcTable = new((void*)pCTraceFilterShouldHitFunctionCall, 2);
             funcTable[0] = (nint)(delegate* unmanaged< CTraceFilter*, byte, void >)(&Destructor);
             funcTable[1] = (nint)(delegate* unmanaged< CTraceFilter*, nint, byte >)(&ShouldHitEntity);
+
+            pCTraceFilterCustomHitFunctionCall = Marshal.AllocHGlobal(sizeof(nint) * 2);
+            Span<nint> vTable2 = new((void*)pCTraceFilterCustomHitFunctionCall, 2);
+            vTable2[0] = (nint)(delegate* unmanaged< CTraceFilter*, byte, void >)(&Destructor);
+            vTable2[1] = (nint)(delegate* unmanaged< CTraceFilter*, nint, byte >)(&ShouldHitEntityCustomCallback);
         }
         else
         {
@@ -106,6 +155,12 @@ internal static class CTraceFilterVTable
             funcTable[0] = (nint)(delegate* unmanaged< CTraceFilter*, byte, void >)(&Destructor);
             funcTable[1] = (nint)(delegate* unmanaged< CTraceFilter*, nint >)(&SomeLinuxFunction);
             funcTable[2] = (nint)(delegate* unmanaged< CTraceFilter*, nint, byte >)(&ShouldHitEntity);
+
+            pCTraceFilterCustomHitFunctionCall = Marshal.AllocHGlobal(sizeof(nint) * 3);
+            Span<nint> vTable2 = new((void*)pCTraceFilterCustomHitFunctionCall, 3);
+            vTable2[0] = (nint)(delegate* unmanaged< CTraceFilter*, byte, void >)(&Destructor);
+            vTable2[1] = (nint)(delegate* unmanaged< CTraceFilter*, nint >)(&SomeLinuxFunction);
+            vTable2[2] = (nint)(delegate* unmanaged< CTraceFilter*, nint, byte >)(&ShouldHitEntityCustomCallback);
         }
     }
 }

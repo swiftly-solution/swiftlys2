@@ -106,7 +106,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
 
     public override bool Equals( object? obj )
     {
-        return obj is CEntityInstance v && this.Equals(v);
+        return obj is CEntityInstance v && Equals(v);
     }
 
     public override int GetHashCode()

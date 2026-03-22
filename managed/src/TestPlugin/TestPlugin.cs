@@ -29,6 +29,7 @@ using SwiftlyS2.Shared.SteamAPI;
 using SwiftlyS2.Core.Menus.OptionsBase;
 using System.Diagnostics;
 using SwiftlyS2.Shared.Convars;
+using SwiftlyS2.Shared.Trace;
 
 namespace TestPlugin;
 
@@ -538,19 +539,23 @@ public class TestPlugin : BasePlugin
         var coords = player.Pawn!.AbsOrigin;
         var otherCoords = targetPlayer!.Pawn!.AbsOrigin;
 
-        var trace = new CGameTrace();
-        Core.Trace.SimpleTrace(coords!.Value, otherCoords!.Value, RayType_t.RAY_TYPE_LINE, RnQueryObjectSet.AllGameEntities, MaskTrace.Player | MaskTrace.Solid, MaskTrace.Empty, MaskTrace.Solid, CollisionGroup.Player, ref trace);
+        var result = Core.Trace.SimpleTrace(new SimpleTrace() {
+            Start = coords!.Value,
+            End = otherCoords!.Value,
+            RayKind = RayType_t.RAY_TYPE_LINE,
+            ObjectQuery = RnQueryObjectSet.AllGameEntities,
+            InteractWith = MaskTrace.Player | MaskTrace.Solid,
+            InteractExclude = MaskTrace.Empty,
+            InteractAs = MaskTrace.Solid,
+            Collision = CollisionGroup.Player,
+            ShouldHitEntity = ( entity ) =>
+            {
+                Console.WriteLine($"ShouldHitEntity: {entity.DesignerName}");
+                return true;
+            }
+        });
 
-        Console.WriteLine(trace.pEntity != null ? $"! Hit Entity: {trace.Entity.DesignerName}" : "! No entity hit");
-        Console.WriteLine(
-            $"! SurfaceProperties: {(nint)trace.SurfaceProperties}, pEntity: {(nint)trace.pEntity}, HitBox: {(nint)trace.HitBox}({trace.HitBox->m_name.Value}), Body: {(nint)trace.Body}, Shape: {(nint)trace.Shape}, Contents: {trace.Contents}");
-        Console.WriteLine(
-            $"! StartPos: {trace.StartPos}, EndPos: {trace.EndPos}, HitNormal: {trace.HitNormal}, HitPoint: {trace.HitPoint}");
-        Console.WriteLine(
-            $"! HitOffset: {trace.HitOffset}, Fraction: {trace.Fraction}, Triangle: {trace.Triangle}, HitboxBoneIndex: {trace.HitboxBoneIndex}");
-        Console.WriteLine(
-            $"! RayType: {trace.RayType}, StartInSolid: {trace.StartInSolid}, ExactHitPoint: {trace.ExactHitPoint}");
-        Console.WriteLine("\n");
+        Console.WriteLine(result);
     }
 
     [Command("tt")]
@@ -794,29 +799,32 @@ public class TestPlugin : BasePlugin
             Maxs = new Vector(16.0f, 16.0f, 72.0f)
         };
 
-        var filter = new CTraceFilter() {
-            IterateEntities = true,
-        };
-        var trace = new CGameTrace();
+        var result = Core.Trace.TracePlayerBBox(new TracePlayerBBox() {
+            Start = start,
+            End = end,
+            Bounds = bbox,
+            Filter = new SwiftlyS2.Shared.Trace.TraceFilter {
+                IterateEntities = true
+            }
+        });
 
-        unsafe
-        {
-            var filterRef = &filter;
-            Console.WriteLine($"Filter at: {(nint)filterRef:X}");
-        }
+        Console.WriteLine(result.ToString());
 
-        Core.Trace.TracePlayerBBox(start, end, bbox, filter, ref trace);
+        var result2 = Core.Trace.TracePlayerBBox(new TracePlayerBBox() {
+            Start = start,
+            End = end,
+            Bounds = bbox,
+            Filter = new SwiftlyS2.Shared.Trace.TraceFilter {
+                IterateEntities = true,
+                ShouldHitEntity = ( entity ) =>
+                {
+                    Console.WriteLine($"ShouldHitEntity: {entity.DesignerName}");
+                    return true;
+                }
+            }
+        });
 
-        var filter2 = new CTraceFilter() {
-            IterateEntities = true,
-            // ShouldHitEntity = ( ent ) =>
-            // {
-            // Console.WriteLine($"ShouldHitEntity: {(ent != null ? ent.DesignerName : "null")}");
-            // return true;
-            // }
-        };
-
-        Core.Trace.TracePlayerBBox(start, end, bbox, filter2, ref trace);
+        Console.WriteLine(result2.ToString());
     }
 
 
@@ -1604,6 +1612,7 @@ public class TestPlugin : BasePlugin
 
     public override void Unload()
     {
+
         Console.WriteLine("TestPlugin unloaded");
     }
 }

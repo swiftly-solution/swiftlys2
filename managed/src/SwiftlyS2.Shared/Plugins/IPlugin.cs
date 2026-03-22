@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-
 namespace SwiftlyS2.Shared.Plugins;
 
 public interface IPlugin
