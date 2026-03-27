@@ -18,7 +18,7 @@ public interface ITraceManager
     /// <param name="filter">The trace filter used to determine which entities or surfaces are considered during the trace operation.</param>
     /// <param name="trace">A reference to a CGameTrace object that receives the results of the trace, including collision information and
     /// hit details.</param>
-    [Obsolete("Use TracePlayerBBox method with TracePlayerBBox request object instead.")]
+    [Obsolete("Use TracePlayerBBox method with TraceParams instead.")]
     public void TracePlayerBBox( Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace );
 
     /// <summary>
@@ -26,39 +26,34 @@ public interface ITraceManager
     /// using the given filter and bounding box dimensions. The result of the trace is stored in the provided trace
     /// object.
     /// </summary>
-    public TraceResult TracePlayerBBox( TracePlayerBBox request );
+    public TraceResult TracePlayerBBox( Vector start, Vector end, BBox_t bounds, in TraceParams? param = default );
 
     /// <summary>
-    /// Performs a collision trace of a player-sized bounding box from the specified start position to the end position,
-    /// using the given filter and bounding box dimensions. The result of the trace is stored in the provided trace
-    /// object.
+    /// Traces from <paramref name="start"/> to <paramref name="end"/> with the provided shape options.
     /// </summary>
-    public TraceResult TracePlayerBBox( ref TracePlayerBBox request );
+    /// <param name="start">Trace start position.</param>
+    /// <param name="end">Trace end position.</param>
+    /// <param name="param">Optional trace params for ray type and filtering.</param>
+    public TraceResult TraceShapeLine( Vector start, Vector end, in TraceParams? param = default );
 
     /// <summary>
-    /// Performs a trace operation from the specified start point to the end point using the given ray and filter, and
-    /// populates the trace result with collision information.
+    /// Traces from <paramref name="start"/> towards <paramref name="angle"/> with the provided shape options.
     /// </summary>
-    /// <param name="start">The starting position of the trace, represented as a vector.</param>
-    /// <param name="end">The ending position of the trace, represented as a vector.</param>
-    /// <param name="ray">The ray definition used for the trace, specifying direction and other ray properties.</param>
-    /// <param name="filter">The filter that determines which entities or surfaces are considered during the trace.</param>
-    /// <param name="trace">A reference to a CGameTrace structure that receives the results of the trace, including hit information and
-    /// surface details.</param>
-    [Obsolete("Use TraceShape method with TraceShape request object instead.")]
-    public void TraceShape( Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace );
+    /// <param name="start">Trace start position.</param>
+    /// <param name="angle">Trace direction.</param>
+    /// <param name="param">Optional trace params for ray type and filtering.</param>
+    public TraceResult TraceShapeAngle( Vector start, QAngle angle, in TraceParams? param = default );
 
     /// <summary>
-    /// Performs a trace operation from the specified start point to the end point using the given ray and filter, and
-    /// populates the trace result with collision information.
+    /// Traces from <paramref name="start"/> towards <paramref name="angle"/> with the provided shape options.
     /// </summary>
-    public TraceResult TraceShape( TraceShape request );
+    /// <param name="start">Trace start position.</param>
+    /// <param name="angle">Trace direction.</param>
+    /// <param name="maxDistance">Maximum distance to trace.</param>
+    /// <param name="param">Optional trace params for ray type and filtering.</param>
+    public TraceResult TraceShapeAngle( Vector start, QAngle angle, float maxDistance = 8192f, in TraceParams? param = default );
 
-    /// <summary>
-    /// Performs a trace operation from the specified start point to the end point using the given ray and filter, and
-    /// populates the trace result with collision information.
-    /// </summary>
-    public TraceResult TraceShape( ref TraceShape request );
+
 
     /// <summary>
     /// Performs a simple trace shape operation from the specified start point to the end point, using the provided
@@ -76,20 +71,8 @@ public interface ITraceManager
     /// surface details.</param>
     /// <param name="filterEntity">An optional entity to exclude from the trace.</param>
     /// <param name="filterSecondEntity">An optional second entity to exclude from the trace.</param>
-    [Obsolete("Use SimpleTrace method with SimpleTrace request object instead.")]
+    [Obsolete("Use other TraceShape methods instead.")]
     public void SimpleTrace( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null );
-
-    /// <summary>
-    /// Performs a simple trace shape operation from the specified start point to the end point, using the provided
-    /// object query and trace mask. The result of the trace is stored in the provided trace object.
-    /// </summary>
-    public TraceResult SimpleTrace( SimpleTrace request );
-
-    /// <summary>
-    /// Performs a simple trace shape operation from the specified start point to the end point, using the provided
-    /// object query and trace mask. The result of the trace is stored in the provided trace object.
-    /// </summary>
-    public TraceResult SimpleTrace( ref SimpleTrace request );
 
     /// <summary>
     /// Performs a simple trace shape operation from the specified start point in the direction defined by the given angle,
@@ -107,18 +90,7 @@ public interface ITraceManager
     /// surface details.</param>
     /// <param name="filterEntity">An optional entity to exclude from the trace.</param>
     /// <param name="filterSecondEntity">An optional second entity to exclude from the trace.</param>
-    [Obsolete("Use SimpleTrace method with SimpleTraceAngle request object instead.")]
+    [Obsolete("Use other TraceShape methods instead.")]
     public void SimpleTrace( Vector start, QAngle angle, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null );
 
-    /// <summary>
-    /// Performs a simple trace shape operation from the specified start point in the direction defined by the given angle,
-    /// using the provided object query and trace mask. The result of the trace is stored in the provided trace object.
-    /// </summary>
-    public TraceResult SimpleTrace( SimpleTraceAngle request );
-
-    /// <summary>
-    /// Performs a simple trace shape operation from the specified start point in the direction defined by the given angle,
-    /// using the provided object query and trace mask. The result of the trace is stored in the provided trace object.
-    /// </summary>
-    public TraceResult SimpleTrace( ref SimpleTraceAngle request );
 }

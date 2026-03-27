@@ -10,34 +10,16 @@ namespace SwiftlyS2.Core.Services;
 
 internal class TraceManager : ITraceManager
 {
-    internal CTraceFilter FromTraceFilter( TraceFilter filter )
+    private static TraceParams ResolveOptionsOrDefault( in TraceParams? options )
     {
-        var _traceFilter = new CTraceFilter {
-            IterateEntities = filter.IterateEntities
-        };
+        return options?.Clone() ?? new TraceParams();
+    }
 
-        _traceFilter.QueryShapeAttributes.InteractsWith = filter.InteractsWith;
-        _traceFilter.QueryShapeAttributes.InteractsExclude = filter.InteractsExclude;
-        _traceFilter.QueryShapeAttributes.InteractsAs = filter.InteractsAs;
-        unsafe
-        {
-            _traceFilter.QueryShapeAttributes.HierarchyIds[0] = filter.HierarchyIds.Count < 1 ? (ushort)0 : filter.HierarchyIds[0];
-            _traceFilter.QueryShapeAttributes.HierarchyIds[1] = filter.HierarchyIds.Count < 2 ? (ushort)0 : filter.HierarchyIds[1];
-        }
-        _traceFilter.QueryShapeAttributes.IncludedDetailLayers = filter.IncludedDetailLayers;
-        _traceFilter.QueryShapeAttributes.TargetDetailLayer = filter.TargetDetailLayer;
-        _traceFilter.QueryShapeAttributes.ObjectSetMask = filter.ObjectSetMask;
-        _traceFilter.QueryShapeAttributes.CollisionGroup = filter.CollisionGroup;
-        _traceFilter.QueryShapeAttributes.HitSolid = filter.HitSolid;
-        _traceFilter.QueryShapeAttributes.HitSolidRequiresGenerateContacts = filter.HitSolidRequiresGenerateContacts;
-        _traceFilter.QueryShapeAttributes.HitTrigger = filter.HitTrigger;
-        _traceFilter.QueryShapeAttributes.ShouldIgnoreDisabledPairs = filter.ShouldIgnoreDisabledPairs;
-        _traceFilter.QueryShapeAttributes.IgnoreIfBothInteractWithHitboxes = filter.IgnoreIfBothInteractWithHitboxes;
-        _traceFilter.QueryShapeAttributes.ForceHitEverything = filter.ForceHitEverything;
-
-        _traceFilter.EnsureValidNewFormat();
-
-        return _traceFilter;
+    internal CTraceFilter FromTraceOptions( TraceParams options, out TraceParams callbackOptions, out Ray_t ray )
+    {
+        callbackOptions = options;
+        ray = options.Ray;
+        return options.ToCTraceFilter();
     }
 
     internal TraceResult FromCGameTrace( ref CGameTrace _traceResult )
@@ -150,24 +132,22 @@ internal class TraceManager : ITraceManager
         }
     }
 
-    public TraceResult TracePlayerBBox( TracePlayerBBox request )
-    {
-        return TracePlayerBBox(ref request);
-    }
 
-    public TraceResult TracePlayerBBox( ref TracePlayerBBox request )
+
+    public TraceResult TracePlayerBBox( Vector start, Vector end, BBox_t bounds, in TraceParams? options = default )
     {
         CGameTrace _traceResult = new();
-        var _traceFilter = FromTraceFilter(request.Filter);
+        var resolvedOptions = ResolveOptionsOrDefault(in options);
+        var _traceFilter = FromTraceOptions(resolvedOptions, out var callbackFilter, out _);
 
         unsafe
         {
             _traceFilter.EnsureValidNewFormat();
 
             var oldCustomTraceFilter = CTraceFilterVTable.CustomTraceFilter;
-            CTraceFilterVTable.CustomTraceFilter = request.Filter;
+            CTraceFilterVTable.CustomTraceFilter = callbackFilter;
 
-            GameFunctions.TracePlayerBBox(request.Start, request.End, request.Bounds, &_traceFilter, &_traceResult);
+            GameFunctions.TracePlayerBBox(start, end, bounds, &_traceFilter, &_traceResult);
 
             CTraceFilterVTable.CustomTraceFilter = oldCustomTraceFilter;
         }
@@ -175,45 +155,45 @@ internal class TraceManager : ITraceManager
         return FromCGameTrace(ref _traceResult);
     }
 
-    public void TraceShape( Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace )
+    public TraceResult TraceShapeLine( Vector start, Vector end, in TraceParams? options = default )
     {
+        var resolvedOptions = ResolveOptionsOrDefault(in options);
+        CGameTrace traceResult = new();
+        var traceFilter = FromTraceOptions(resolvedOptions, out var callbackFilter, out var ray);
+
         unsafe
         {
-            fixed (CGameTrace* tracePtr = &trace)
+            traceFilter.EnsureValidNewFormat();
+
+            var oldCustomTraceFilter = CTraceFilterVTable.CustomTraceFilter;
+            CTraceFilterVTable.CustomTraceFilter = callbackFilter;
+
+            try
             {
-                filter.EnsureValid();
-                GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &filter, tracePtr);
+                GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &traceFilter, &traceResult);
+            }
+            finally
+            {
+                CTraceFilterVTable.CustomTraceFilter = oldCustomTraceFilter;
             }
         }
+
+        return FromCGameTrace(ref traceResult);
     }
 
-    public TraceResult TraceShape( TraceShape request )
+    public TraceResult TraceShapeAngle( Vector start, QAngle angle, in TraceParams? options = default )
     {
-        return TraceShape(ref request);
+        return TraceShapeAngle(start, angle, 8192f, in options);
     }
 
-    public TraceResult TraceShape( ref TraceShape request )
+    public TraceResult TraceShapeAngle( Vector start, QAngle angle, float maxDistance = 8192f, in TraceParams? options = default )  
     {
-        CGameTrace _traceResult = new();
-        var _traceFilter = FromTraceFilter(request.Filter);
-        var ray = request.Ray;
-
-        unsafe
-        {
-            _traceFilter.EnsureValidNewFormat();
-
-            var oldCustomTraceFilter = CTraceFilterVTable.CustomTraceFilter;
-            CTraceFilterVTable.CustomTraceFilter = request.Filter;
-
-            GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, request.Start, request.End, &_traceFilter, &_traceResult);
-
-            CTraceFilterVTable.CustomTraceFilter = oldCustomTraceFilter;
-        }
-
-        return FromCGameTrace(ref _traceResult);
+        var resolvedOptions = ResolveOptionsOrDefault(in options);
+        var end = resolvedOptions.ComputeAngleEndPoint(start, angle, maxDistance);
+        return TraceShapeLine(start, end, resolvedOptions);
     }
 
-    public static void SimpleTrace( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, nint filterEntity, nint filterSecondEntity )
+    private static void SimpleTraceNative( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, nint filterEntity, nint filterSecondEntity )
     {
         var filter = new CTraceFilter(true) {
             IterateEntities = true,
@@ -251,11 +231,16 @@ internal class TraceManager : ITraceManager
         }
     }
 
+    public static void SimpleTrace( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, nint filterEntity, nint filterSecondEntity )
+    {
+        SimpleTraceNative(start, end, rayKind, objectQuery, interactWith, interactExclude, interactAs, collision, ref trace, filterEntity, filterSecondEntity);
+    }
+
     public void SimpleTrace( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null )
     {
         var entityPtr = filterEntity?.Address ?? nint.Zero;
         var entitySecondPtr = filterSecondEntity?.Address ?? nint.Zero;
-        SimpleTrace(start, end, rayKind, objectQuery, interactWith, interactExclude, interactAs, collision, ref trace, entityPtr, entitySecondPtr);
+        SimpleTraceNative(start, end, rayKind, objectQuery, interactWith, interactExclude, interactAs, collision, ref trace, entityPtr, entitySecondPtr);
     }
 
     public void SimpleTrace( Vector start, QAngle angle, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, CBaseEntity? filterEntity = null, CBaseEntity? filterSecondEntity = null )
@@ -266,80 +251,9 @@ internal class TraceManager : ITraceManager
             fwd.Y * 8192f,
             fwd.Z * 8192f
         );
-        SimpleTrace(start, end, rayKind, objectQuery, interactWith, interactExclude, interactAs, collision, ref trace, filterEntity, filterSecondEntity);
+        var entityPtr = filterEntity?.Address ?? nint.Zero;
+        var entitySecondPtr = filterSecondEntity?.Address ?? nint.Zero;
+        SimpleTraceNative(start, end, rayKind, objectQuery, interactWith, interactExclude, interactAs, collision, ref trace, entityPtr, entitySecondPtr);
     }
 
-    public TraceResult SimpleTrace( SimpleTrace request )
-    {
-        return SimpleTrace(ref request);
-    }
-
-    public TraceResult SimpleTrace( ref SimpleTrace request )
-    {
-        var filter = new CTraceFilter() {
-            IterateEntities = true,
-            QueryShapeAttributes = new RnQueryShapeAttr_t() {
-                ObjectSetMask = request.ObjectQuery,
-                InteractsWith = request.InteractWith,
-                InteractsExclude = request.InteractExclude,
-                InteractsAs = request.InteractAs,
-                CollisionGroup = request.Collision,
-                HitSolid = true
-            }
-        };
-
-        var ray = new Ray_t {
-            Type = request.RayKind
-        };
-
-        CGameTrace _traceResult = new();
-
-        unsafe
-        {
-            var traceFilter = new TraceFilter() {
-                EntitiesToIgnore = request.EntitiesToIgnore,
-                ShouldHitEntity = request.ShouldHitEntity
-            };
-
-            var oldCustomTraceFilter = CTraceFilterVTable.CustomTraceFilter;
-            CTraceFilterVTable.CustomTraceFilter = traceFilter;
-
-            filter.EnsureValidNewFormat();
-
-            GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, request.Start, request.End, &filter, &_traceResult);
-
-            CTraceFilterVTable.CustomTraceFilter = oldCustomTraceFilter;
-        }
-
-        return FromCGameTrace(ref _traceResult);
-    }
-
-    public TraceResult SimpleTrace( SimpleTraceAngle request )
-    {
-        return SimpleTrace(ref request);
-    }
-
-    public TraceResult SimpleTrace( ref SimpleTraceAngle request )
-    {
-        request.Angle.ToDirectionVectors(out var fwd, out var _, out var _);
-        var end = request.Start + new Vector(
-            fwd.X * 8192f,
-            fwd.Y * 8192f,
-            fwd.Z * 8192f
-        );
-
-        var newTrace = new SimpleTrace() {
-            Start = request.Start,
-            End = end,
-            RayKind = request.RayKind,
-            ObjectQuery = request.ObjectQuery,
-            InteractWith = request.InteractWith,
-            InteractExclude = request.InteractExclude,
-            InteractAs = request.InteractAs,
-            Collision = request.Collision,
-            EntitiesToIgnore = request.EntitiesToIgnore
-        };
-
-        return SimpleTrace(ref newTrace);
-    }
 }

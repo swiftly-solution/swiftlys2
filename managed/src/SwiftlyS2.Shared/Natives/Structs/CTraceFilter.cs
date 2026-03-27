@@ -1,4 +1,4 @@
-﻿using SwiftlyS2.Core.EntitySystem;
+using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.Trace;
 using System.Runtime.InteropServices;
@@ -63,7 +63,7 @@ internal static class CTraceFilterVTable
     public static nint pCTraceFilterShouldHitFunctionCall;
     public static nint pCTraceFilterCustomHitFunctionCall;
 
-    public static TraceFilter? CustomTraceFilter = null;
+    public static TraceParams? CustomTraceFilter = null;
 
     [UnmanagedCallersOnly]
     public unsafe static void Destructor( CTraceFilter* filter, byte unk01 )
@@ -97,26 +97,26 @@ internal static class CTraceFilterVTable
     [UnmanagedCallersOnly]
     public unsafe static byte ShouldHitEntityCustomCallback( CTraceFilter* filter, nint entity )
     {
-        if (CustomTraceFilter != null)
+        if (CustomTraceFilter is { } param)
         {
             var ent = EntityManager.GetEntityByAddress(entity) ?? Helper.AsSchema<CEntityInstance>(entity);
 
-            if (CustomTraceFilter.EntitiesToIgnore.Count > 0)
+            if (param.EntitiesToIgnore.Count > 0)
             {
-                if (CustomTraceFilter.EntitiesToIgnore.Contains(ent)) return 0;
+                if (param.EntitiesToIgnore.Contains(ent)) return 0;
             }
 
-            if (CustomTraceFilter.OwnersToIgnore.Count > 0)
+            if (param.OwnersToIgnore.Count > 0)
             {
                 if (ent is CBaseEntity baseEnt)
                 {
                     var ownerEntity = baseEnt.OwnerEntity.Value;
-                    if (ownerEntity != null && CustomTraceFilter.OwnersToIgnore.Contains(ownerEntity)) return 0;
+                    if (ownerEntity != null && CustomTraceFilter.Value.OwnersToIgnore.Contains(ownerEntity)) return 0;
                 }
             }
 
-            if (CustomTraceFilter.ShouldHitEntity != null)
-                if (!CustomTraceFilter.ShouldHitEntity(ent))
+            if (param.ShouldHitEntity != null)
+                if (!param.ShouldHitEntity(ent))
                     return 0;
         }
 
