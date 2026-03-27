@@ -26,7 +26,7 @@ public interface ITraceManager
     /// using the given filter and bounding box dimensions. The result of the trace is stored in the provided trace
     /// object.
     /// </summary>
-    public TraceResult TracePlayerBBox( Vector start, Vector end, BBox_t bounds, in TraceParams? param = default );
+    public TraceResult TracePlayerBBox( in Vector start, in Vector end, in BBox_t bounds, in TraceParams? param = default );
 
     /// <summary>
     /// Traces from <paramref name="start"/> to <paramref name="end"/> with the provided shape options.
@@ -34,7 +34,7 @@ public interface ITraceManager
     /// <param name="start">Trace start position.</param>
     /// <param name="end">Trace end position.</param>
     /// <param name="param">Optional trace params for ray type and filtering.</param>
-    public TraceResult TraceShapeLine( Vector start, Vector end, in TraceParams? param = default );
+    public TraceResult TraceShapeLine( in Vector start, in Vector end, in TraceParams? param = default );
 
     /// <summary>
     /// Traces from <paramref name="start"/> towards <paramref name="angle"/> with the provided shape options.
@@ -42,7 +42,7 @@ public interface ITraceManager
     /// <param name="start">Trace start position.</param>
     /// <param name="angle">Trace direction.</param>
     /// <param name="param">Optional trace params for ray type and filtering.</param>
-    public TraceResult TraceShapeAngle( Vector start, QAngle angle, in TraceParams? param = default );
+    public TraceResult TraceShapeAngle( in Vector start, in QAngle angle, in TraceParams? param = default );
 
     /// <summary>
     /// Traces from <paramref name="start"/> towards <paramref name="angle"/> with the provided shape options.
@@ -51,7 +51,7 @@ public interface ITraceManager
     /// <param name="angle">Trace direction.</param>
     /// <param name="maxDistance">Maximum distance to trace.</param>
     /// <param name="param">Optional trace params for ray type and filtering.</param>
-    public TraceResult TraceShapeAngle( Vector start, QAngle angle, float maxDistance = 8192f, in TraceParams? param = default );
+    public TraceResult TraceShapeAngle( in Vector start, in QAngle angle, float maxDistance = 8192f, in TraceParams? param = default );
 
 
 

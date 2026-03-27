@@ -120,7 +120,7 @@ internal class TraceManager : ITraceManager
         }
     }
 
-    public void TracePlayerBBox( Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace )
+    public void TracePlayerBBox( Vector start,  Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace )
     {
         unsafe
         {
@@ -134,10 +134,10 @@ internal class TraceManager : ITraceManager
 
 
 
-    public TraceResult TracePlayerBBox( Vector start, Vector end, BBox_t bounds, in TraceParams? options = default )
+    public TraceResult TracePlayerBBox( in Vector start, in Vector end, in BBox_t bounds, in TraceParams? options = default )
     {
         CGameTrace _traceResult = new();
-        var resolvedOptions = ResolveOptionsOrDefault(in options);
+        var resolvedOptions = ResolveOptionsOrDefault(options);
         var _traceFilter = FromTraceOptions(resolvedOptions, out var callbackFilter, out _);
 
         unsafe
@@ -155,9 +155,9 @@ internal class TraceManager : ITraceManager
         return FromCGameTrace(ref _traceResult);
     }
 
-    public TraceResult TraceShapeLine( Vector start, Vector end, in TraceParams? options = default )
+    public TraceResult TraceShapeLine( in Vector start, in Vector end, in TraceParams? options = default )
     {
-        var resolvedOptions = ResolveOptionsOrDefault(in options);
+        var resolvedOptions = ResolveOptionsOrDefault(options);
         CGameTrace traceResult = new();
         var traceFilter = FromTraceOptions(resolvedOptions, out var callbackFilter, out var ray);
 
@@ -181,14 +181,14 @@ internal class TraceManager : ITraceManager
         return FromCGameTrace(ref traceResult);
     }
 
-    public TraceResult TraceShapeAngle( Vector start, QAngle angle, in TraceParams? options = default )
+    public TraceResult TraceShapeAngle( in Vector start, in QAngle angle, in TraceParams? options = default )
     {
-        return TraceShapeAngle(start, angle, 8192f, in options);
+        return TraceShapeAngle(start, angle, 8192f, options);
     }
 
-    public TraceResult TraceShapeAngle( Vector start, QAngle angle, float maxDistance = 8192f, in TraceParams? options = default )  
+    public TraceResult TraceShapeAngle( in Vector start, in QAngle angle, float maxDistance = 8192f, in TraceParams? options = default )  
     {
-        var resolvedOptions = ResolveOptionsOrDefault(in options);
+        var resolvedOptions = ResolveOptionsOrDefault(options);
         var end = resolvedOptions.ComputeAngleEndPoint(start, angle, maxDistance);
         return TraceShapeLine(start, end, resolvedOptions);
     }
