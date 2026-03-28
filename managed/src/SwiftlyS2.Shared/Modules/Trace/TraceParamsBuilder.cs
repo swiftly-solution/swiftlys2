@@ -70,14 +70,6 @@ public sealed class TraceParamsBuilder
         return this;
     }
 
-    public unsafe TraceParamsBuilder WithMeshRay( Vector mins, Vector maxs, Vector* vertices, int numVertices )
-    {
-        var ray = new Ray_t();
-        ray.Init(mins, maxs, vertices, numVertices);
-        _params.Ray = ray;
-        return this;
-    }
-
     /// <summary>
     /// Which object groups should be included by the query.
     /// </summary>

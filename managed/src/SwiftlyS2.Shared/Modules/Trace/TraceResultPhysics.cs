@@ -1,6 +1,6 @@
 namespace SwiftlyS2.Shared.Trace;
 
-public class PhysSurfacePropertiesPhysicsTrace
+public struct PhysSurfacePropertiesPhysicsTrace
 {
     /// <summary>
     /// The friction coefficient of the surface, affecting how objects slide on it.
@@ -45,8 +45,12 @@ public class PhysSurfacePropertiesPhysicsTrace
     }
 }
 
-public class PhysSurfacePropertiesSoundNamesTrace
+public struct PhysSurfacePropertiesSoundNamesTrace
 {
+    public PhysSurfacePropertiesSoundNamesTrace()
+    {
+    }
+
     /// <summary>
     /// The sound to play for soft impacts on this surface.
     /// </summary>
@@ -98,7 +102,7 @@ public class PhysSurfacePropertiesSoundNamesTrace
     }
 }
 
-public class PhysSurfacePropertiesAudioTrace
+public struct PhysSurfacePropertiesAudioTrace
 {
     /// <summary>
     /// The reflectivity of the surface for audio, affecting how sound bounces off it.

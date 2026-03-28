@@ -2,8 +2,11 @@ using SwiftlyS2.Shared.Natives;
 
 namespace SwiftlyS2.Shared.Trace;
 
-public class TraceCollisionAttributes
+public struct TraceCollisionAttributes
 {
+    public TraceCollisionAttributes()
+    {
+    }
     /// <summary>
     /// The interaction layer mask defining the types of surfaces or entities that this object interacts as during collision.
     /// </summary>

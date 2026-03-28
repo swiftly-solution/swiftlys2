@@ -3,8 +3,11 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.Trace;
 
-public class HitBoxTrace
+public struct HitBoxTrace
 {
+    public HitBoxTrace()
+    {
+    }
     /// <summary>
     /// The name of the hitbox.
     /// </summary>

@@ -5,8 +5,11 @@ using SwiftlyS2.Shared.Schemas;
 
 namespace SwiftlyS2.Shared.Trace;
 
-public class TraceResult
+public struct TraceResult
 {
+    public TraceResult()
+    {
+    }
     /// <summary>
     /// The physical surface properties of the surface that was hit by the trace.
     /// </summary>
