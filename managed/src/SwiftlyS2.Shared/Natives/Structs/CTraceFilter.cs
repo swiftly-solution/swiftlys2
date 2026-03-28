@@ -111,7 +111,7 @@ internal static class CTraceFilterVTable
                 if (ent is CBaseEntity baseEnt)
                 {
                     var ownerEntity = baseEnt.OwnerEntity.Value;
-                    if (ownerEntity != null && CustomTraceFilter.Value.OwnersToIgnore.Contains(ownerEntity)) return 0;
+                    if (ownerEntity != null && param.OwnersToIgnore.Contains(ownerEntity)) return 0;
                 }
             }
 

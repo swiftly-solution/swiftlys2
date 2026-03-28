@@ -12,14 +12,14 @@ internal class TraceManager : ITraceManager
 {
     private static TraceParams ResolveOptionsOrDefault( in TraceParams? options )
     {
-        return options?.Clone() ?? new TraceParams();
+        return options ?? new TraceParams();
     }
 
     internal CTraceFilter FromTraceOptions( TraceParams options, out TraceParams callbackOptions, out Ray_t ray )
     {
         callbackOptions = options;
         ray = options.Ray;
-        return options.ToCTraceFilter();
+        return options.GetTraceFilter();
     }
 
     internal TraceResult FromCGameTrace( ref CGameTrace _traceResult )
@@ -137,19 +137,22 @@ internal class TraceManager : ITraceManager
     public TraceResult TracePlayerBBox( in Vector start, in Vector end, in BBox_t bounds, in TraceParams? options = default )
     {
         CGameTrace _traceResult = new();
-        var resolvedOptions = ResolveOptionsOrDefault(options);
+        var resolvedOptions = ResolveOptionsOrDefault(in options);
         var _traceFilter = FromTraceOptions(resolvedOptions, out var callbackFilter, out _);
 
         unsafe
         {
-            _traceFilter.EnsureValidNewFormat();
-
             var oldCustomTraceFilter = CTraceFilterVTable.CustomTraceFilter;
             CTraceFilterVTable.CustomTraceFilter = callbackFilter;
 
-            GameFunctions.TracePlayerBBox(start, end, bounds, &_traceFilter, &_traceResult);
-
-            CTraceFilterVTable.CustomTraceFilter = oldCustomTraceFilter;
+            try
+            {
+                GameFunctions.TracePlayerBBox(start, end, bounds, &_traceFilter, &_traceResult);
+            }
+            finally
+            {
+                CTraceFilterVTable.CustomTraceFilter = oldCustomTraceFilter;
+            }
         }
 
         return FromCGameTrace(ref _traceResult);
@@ -157,14 +160,12 @@ internal class TraceManager : ITraceManager
 
     public TraceResult TraceShapeLine( in Vector start, in Vector end, in TraceParams? options = default )
     {
-        var resolvedOptions = ResolveOptionsOrDefault(options);
+        var resolvedOptions = ResolveOptionsOrDefault(in options);
         CGameTrace traceResult = new();
         var traceFilter = FromTraceOptions(resolvedOptions, out var callbackFilter, out var ray);
 
         unsafe
         {
-            traceFilter.EnsureValidNewFormat();
-
             var oldCustomTraceFilter = CTraceFilterVTable.CustomTraceFilter;
             CTraceFilterVTable.CustomTraceFilter = callbackFilter;
 
@@ -183,14 +184,14 @@ internal class TraceManager : ITraceManager
 
     public TraceResult TraceShapeAngle( in Vector start, in QAngle angle, in TraceParams? options = default )
     {
-        return TraceShapeAngle(start, angle, 8192f, options);
+        return TraceShapeAngle(in start, in angle, 8192f, in options);
     }
 
     public TraceResult TraceShapeAngle( in Vector start, in QAngle angle, float maxDistance = 8192f, in TraceParams? options = default )  
     {
-        var resolvedOptions = ResolveOptionsOrDefault(options);
+        var resolvedOptions = ResolveOptionsOrDefault(in options);
         var end = resolvedOptions.ComputeAngleEndPoint(start, angle, maxDistance);
-        return TraceShapeLine(start, end, resolvedOptions);
+        return TraceShapeLine(in start, in end, resolvedOptions);
     }
 
     private static void SimpleTraceNative( Vector start, Vector end, RayType_t rayKind, RnQueryObjectSet objectQuery, MaskTrace interactWith, MaskTrace interactExclude, MaskTrace interactAs, CollisionGroup collision, ref CGameTrace trace, nint filterEntity, nint filterSecondEntity )
