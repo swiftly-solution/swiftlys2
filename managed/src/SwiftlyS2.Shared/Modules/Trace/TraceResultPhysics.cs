@@ -176,15 +176,15 @@ public class PhysSurfacePropertiesTrace
     /// <summary>
     /// The physics properties of this surface.
     /// </summary>
-    public PhysSurfacePropertiesPhysicsTrace Physics { get; internal set; } = new();
+    public PhysSurfacePropertiesPhysicsTrace? Physics { get; internal set; } = null;
     /// <summary>
     /// The sound names associated with interactions on this surface.
     /// </summary>
-    public PhysSurfacePropertiesSoundNamesTrace AudioSounds { get; internal set; } = new();
+    public PhysSurfacePropertiesSoundNamesTrace? AudioSounds { get; internal set; } = null;
     /// <summary>
     /// The audio processing parameters for this surface.
     /// </summary>
-    public PhysSurfacePropertiesAudioTrace AudioParams { get; internal set; } = new();
+    public PhysSurfacePropertiesAudioTrace? AudioParams { get; internal set; } = null;
 
     public override string ToString()
     {

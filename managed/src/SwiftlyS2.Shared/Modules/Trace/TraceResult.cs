@@ -13,11 +13,11 @@ public struct TraceResult
     /// <summary>
     /// The physical surface properties of the surface that was hit by the trace.
     /// </summary>
-    public PhysSurfacePropertiesTrace SurfaceProperties { get; internal set; } = new();
+    public PhysSurfacePropertiesTrace? SurfaceProperties { get; internal set; } = null;
     /// <summary>
     /// Information about the hitbox that was hit by the trace, if applicable.
     /// </summary>
-    public HitBoxTrace HitBox { get; internal set; } = new();
+    public HitBoxTrace? HitBox { get; internal set; } = null;
     /// <summary>
     /// The contents mask of the surface or volume that was hit.
     /// </summary>

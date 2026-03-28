@@ -27,7 +27,7 @@ internal class TraceManager : ITraceManager
         unsafe
         {
             TraceResult traceResult = new() {
-                SurfaceProperties = new() {
+                SurfaceProperties = _traceResult.SurfaceProperties != null ? new() {
                     Name = _traceResult.SurfaceProperties->Name,
                     NameHash = _traceResult.SurfaceProperties->NameHash,
                     BaseNameHash = _traceResult.SurfaceProperties->BaseNameHash,
@@ -69,8 +69,8 @@ internal class TraceManager : ITraceManager
                         StaticImpactVolume = _traceResult.SurfaceProperties->AudioParams.StaticImpactVolume,
                         OcclusionFactor = _traceResult.SurfaceProperties->AudioParams.OcclusionFactor,
                     },
-                },
-                HitBox = new() {
+                } : null,
+                HitBox = _traceResult.HitBox != null ? new() {
                     Name = _traceResult.HitBox->m_name,
                     SurfaceProperty = _traceResult.HitBox->m_sSurfaceProperty,
                     BoneName = _traceResult.HitBox->m_sBoneName,
@@ -86,7 +86,7 @@ internal class TraceManager : ITraceManager
                     HitBoxIndex = _traceResult.HitBox->m_nHitBoxIndex,
                     ForcedTransform = _traceResult.HitBox->m_bForcedTransform,
                     ForcedTransformObject = _traceResult.HitBox->m_forcedTransform,
-                },
+                } : null,
                 Contents = _traceResult.Contents,
                 BodyTransform = _traceResult.BodyTransform,
                 ShapeAttributes = new() {
