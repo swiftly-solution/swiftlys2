@@ -120,7 +120,7 @@ internal class TraceManager : ITraceManager
         }
     }
 
-    public void TracePlayerBBox( Vector start,  Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace )
+    public void TracePlayerBBox( Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace )
     {
         unsafe
         {
@@ -132,7 +132,17 @@ internal class TraceManager : ITraceManager
         }
     }
 
-
+    public void TraceShape( Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace )
+    {
+        unsafe
+        {
+            fixed (CGameTrace* tracePtr = &trace)
+            {
+                filter.EnsureValid();
+                GameFunctions.TraceShape(NativeEngineHelpers.GetTraceManager(), &ray, start, end, &filter, tracePtr);
+            }
+        }
+    }
 
     public TraceResult TracePlayerBBox( in Vector start, in Vector end, in BBox_t bounds, in TraceParams? options = default )
     {
@@ -187,7 +197,7 @@ internal class TraceManager : ITraceManager
         return TraceShapeAngle(in start, in angle, 8192f, in options);
     }
 
-    public TraceResult TraceShapeAngle( in Vector start, in QAngle angle, float maxDistance = 8192f, in TraceParams? options = default )  
+    public TraceResult TraceShapeAngle( in Vector start, in QAngle angle, float maxDistance = 8192f, in TraceParams? options = default )
     {
         var resolvedOptions = ResolveOptionsOrDefault(in options);
         var end = resolvedOptions.ComputeAngleEndPoint(start, angle, maxDistance);

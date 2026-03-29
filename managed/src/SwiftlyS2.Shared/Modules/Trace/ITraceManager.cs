@@ -53,7 +53,18 @@ public interface ITraceManager
     /// <param name="param">Optional trace params for ray type and filtering.</param>
     public TraceResult TraceShapeAngle( in Vector start, in QAngle angle, float maxDistance = 8192f, in TraceParams? param = default );
 
-
+    /// <summary>
+    /// Performs a trace operation from the specified start point to the end point using the given ray and filter, and
+    /// populates the trace result with collision information.
+    /// </summary>
+    /// <param name="start">The starting position of the trace, represented as a vector.</param>
+    /// <param name="end">The ending position of the trace, represented as a vector.</param>
+    /// <param name="ray">The ray definition used for the trace, specifying direction and other ray properties.</param>
+    /// <param name="filter">The filter that determines which entities or surfaces are considered during the trace.</param>
+    /// <param name="trace">A reference to a CGameTrace structure that receives the results of the trace, including hit information and
+    /// surface details.</param>
+    [Obsolete("Use TraceShapeLine method with TraceParams instead.")]
+    public void TraceShape( Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace );
 
     /// <summary>
     /// Performs a simple trace shape operation from the specified start point to the end point, using the provided
