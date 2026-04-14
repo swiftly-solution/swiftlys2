@@ -30,6 +30,11 @@ internal partial class CCSGameRulesImpl : CCSGameRules
     {
         GameFunctions.TerminateRound(Address, (uint)reason, delay, teamId);
     }
+    
+    public void GoToIntermission(bool bAbortedMatch)
+    {
+        GameFunctions.GoToIntermission(Address, bAbortedMatch);
+    }
 
     public ref CViewVectors GetViewVectors()
     {

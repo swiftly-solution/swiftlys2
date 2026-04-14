@@ -41,6 +41,7 @@ internal static class GameFunctions
     private static readonly Lazy<int> _collisionRulesChangedOffset = CreateOffset("CBaseEntity::CollisionRulesChanged");
     private static readonly Lazy<int> _respawnOffset = CreateOffset("CCSPlayerController::Respawn");
     private static readonly Lazy<int> _getViewVectorsOffset = CreateOffset("CGameRules::GetViewVectors");
+    private static readonly Lazy<int> _goToIntermissionOffset = CreateOffset("CGameRules::GoToIntermission");
 
     public static int TeleportOffset => _teleportOffset.Value;
     public static int CommitSuicideOffset => _commitSuicideOffset.Value;
@@ -55,6 +56,7 @@ internal static class GameFunctions
     public static int CollisionRulesChangedOffset => _collisionRulesChangedOffset.Value;
     public static int RespawnOffset => _respawnOffset.Value;
     public static int GetViewVectorsOffset => _getViewVectorsOffset.Value;
+    public static int GoToIntermissionOffset => _goToIntermissionOffset.Value;
 
     private static void CheckPtr( nint ptr, string name )
     {
@@ -132,6 +134,23 @@ internal static class GameFunctions
                 {
                     pTerminateRoundLinux(gameRules, reason, teamId > 0 ? (nint)(&teamId) : 0, delay);
                 }
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+    
+    public static void GoToIntermission( nint gameRules, bool bAbortedMatch )
+    {
+        try
+        {
+            CheckPtr(gameRules, nameof(gameRules));
+            unsafe
+            {
+                var pGoToIntermission = (delegate* unmanaged< nint, byte, void >)GetVirtualFunction(gameRules, GoToIntermissionOffset);
+                pGoToIntermission(gameRules, (byte)(bAbortedMatch ? 1 : 0));
             }
         }
         catch (Exception e)

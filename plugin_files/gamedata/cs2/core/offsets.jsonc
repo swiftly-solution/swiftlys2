@@ -61,6 +61,10 @@
         "windows": 25,
         "linux": 26
     },
+    "CGameRules::GoToIntermission": {
+        "windows": 128,
+        "linux": 129
+    },
     "CCSPlayer_ItemServices::DropActiveItem": {
         "windows": 22,
         "linux": 23

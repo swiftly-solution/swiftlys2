@@ -30,6 +30,12 @@ public partial interface CCSGameRules
     /// <param name="teamId">The team id to end the round for</param>
     /// <param name="unk01">Unknown parameter</param>
     public void TerminateRound( RoundEndReason reason, float delay, uint teamId, uint unk01 = 0 );
+    
+    /// <summary>
+    /// Go to the intermission phase of the game.
+    /// </summary>
+    /// <param name="bAbortedMatch">Indicates whether the match was aborted</param>
+    public void GoToIntermission(bool bAbortedMatch = false);
 
     /// <summary>
     /// 
