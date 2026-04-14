@@ -739,6 +739,12 @@ public class TestPlugin : BasePlugin
         Core.EntitySystem.GetGameRules()!.TerminateRound(RoundEndReason.BombDefused, 10.0f);
     }
 
+    [Command("intermission")]
+    public void TestIntermissionCommand( ICommandContext context )
+    {
+        Core.EntitySystem.GetGameRules()!.GoToIntermission();
+    }
+
     [Command("tt8")]
     public unsafe void TestCommand8( ICommandContext context )
     {
