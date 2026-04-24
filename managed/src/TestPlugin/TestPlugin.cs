@@ -480,6 +480,7 @@ public class TestPlugin : BasePlugin
         // Core.Event.OnEntityTakeDamage += ( @event ) =>
         // {
         //     Console.WriteLine(@event.Entity.DesignerName);
+        //     Console.WriteLine($"OnEntityTakeDamage>> DamageResult.DamageDealt[{@event.DamageResult.DamageDealt}]");
         //     @event.Info.DamageFlags = TakeDamageFlags_t.DFLAG_SUPPRESS_BREAKABLES;
         //     @event.Result = HookResult.Stop;
         // };

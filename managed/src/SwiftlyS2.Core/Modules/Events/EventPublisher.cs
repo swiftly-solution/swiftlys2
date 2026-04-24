@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using Spectre.Console;
 using SwiftlyS2.Shared.Misc;
+using SwiftlyS2.Shared.Natives;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Core.Scheduler;
@@ -637,6 +638,21 @@ internal static class EventPublisher
         {
             unsafe
             {
+                var newTakeDamageResult = new CTakeDamageResult();
+                if (takeDamageResultPtr == 0 && takeDamageInfoPtr != 0)
+                {
+                    var damageInfo = (CTakeDamageInfo*)takeDamageInfoPtr;
+                    newTakeDamageResult.OriginatingInfo = damageInfo;
+                    newTakeDamageResult.HealthLost = (int)damageInfo->Damage;
+                    newTakeDamageResult.DamageDealt = damageInfo->Damage;
+                    newTakeDamageResult.PreModifiedDamage = damageInfo->Damage;
+                    newTakeDamageResult.TotalledDamageDealt = damageInfo->Damage;
+                    newTakeDamageResult.TotalledHealthLost = (int)damageInfo->Damage;
+                    newTakeDamageResult.TotalledPreModifiedDamage = damageInfo->Damage;
+                    newTakeDamageResult.DamageFlags = damageInfo->DamageFlags;
+                    takeDamageResultPtr = (nint)(&newTakeDamageResult);
+                }
+
                 OnEntityTakeDamageEvent @event = new() {
                     Entity = EntityManager.GetEntityByAddress(entityPtr) ?? new CEntityInstanceImpl(entityPtr),
                     _infoPtr = takeDamageInfoPtr,
