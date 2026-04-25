@@ -638,9 +638,9 @@ internal static class EventPublisher
         {
             unsafe
             {
-                var newTakeDamageResult = new CTakeDamageResult();
                 if (takeDamageResultPtr == 0 && takeDamageInfoPtr != 0)
                 {
+                    var newTakeDamageResult = new CTakeDamageResult();
                     var damageInfo = (CTakeDamageInfo*)takeDamageInfoPtr;
                     newTakeDamageResult.OriginatingInfo = damageInfo;
                     newTakeDamageResult.HealthLost = (int)damageInfo->Damage;
