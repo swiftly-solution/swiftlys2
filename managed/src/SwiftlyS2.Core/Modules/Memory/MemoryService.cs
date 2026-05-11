@@ -190,4 +190,9 @@ internal class MemoryService : IMemoryService, IDisposable
         serverSideClient.SetDangerousHandle(address);
         return serverSideClient;
     }
+
+    public string GetEntityFields( nint entity, string className )
+    {
+        return NativeSchema.GetEntityFields( entity, className );
+    }
 }

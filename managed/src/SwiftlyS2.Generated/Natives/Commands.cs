@@ -123,4 +123,23 @@ internal static class NativeCommands
     {
         _UnregisterClientChatListener(callbackID);
     }
+
+    private unsafe static delegate* unmanaged<int*, byte*> _EnumerateAll;
+
+    public unsafe static string EnumerateAll()
+    {
+        var length = 0;
+        var returnedPtr = _EnumerateAll(&length);
+        var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
+        NativeAllocator.Free((nint)returnedPtr);
+        return outString;
+    }
+
+    private unsafe static delegate* unmanaged<ulong, int> _UnlockAll;
+
+    public unsafe static int UnlockAll(ulong flagsToRemove)
+    {
+        var ret = _UnlockAll(flagsToRemove);
+        return ret;
+    }
 }

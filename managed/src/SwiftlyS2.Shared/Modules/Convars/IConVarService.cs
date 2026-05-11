@@ -84,4 +84,28 @@ public interface IConVarService
     /// <param name="name">The name of the convar.</param>
     /// <param name="value">The value to replicate.</param>
     public void ReplicateToAll(string name, string value);
+
+    /// <summary>
+    /// Enumerate all registered convars and return them as a JSON array.
+    /// Each entry has name, type, default, flags (raw uint64), and desc fields.
+    /// </summary>
+    public string EnumerateAllConVars();
+
+    /// <summary>
+    /// Enumerate all registered concommands and return them as a JSON array.
+    /// Each entry has name, flags (raw uint64), and desc fields.
+    /// </summary>
+    public string EnumerateAllCommands();
+
+    /// <summary>
+    /// Remove the specified flags from all convars. Returns count of convars unlocked.
+    /// Default: HIDDEN | DEVELOPMENT_ONLY | CLIENTDLL | DEFENSIVE.
+    /// </summary>
+    public int UnlockAllConVars(ConvarFlags flagsToRemove = ConvarFlags.HIDDEN | ConvarFlags.DEVELOPMENT_ONLY | ConvarFlags.CLIENTDLL | ConvarFlags.DEFENSIVE);
+
+    /// <summary>
+    /// Remove the specified flags from all concommands. Returns count of commands unlocked.
+    /// Default: HIDDEN | DEVELOPMENT_ONLY | CLIENTDLL | DEFENSIVE.
+    /// </summary>
+    public int UnlockAllCommands(ConvarFlags flagsToRemove = ConvarFlags.HIDDEN | ConvarFlags.DEVELOPMENT_ONLY | ConvarFlags.CLIENTDLL | ConvarFlags.DEFENSIVE);
 }

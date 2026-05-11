@@ -300,4 +300,32 @@ internal class ConVarService : IConVarService
             msg.Recipients.AddAllPlayers();
         });
     }
+
+    public string EnumerateAllConVars()
+    {
+        try { return NativeConvars.EnumerateAll(); }
+        catch (NullReferenceException) { return "[]"; }
+        catch (AccessViolationException) { return "[]"; }
+    }
+
+    public string EnumerateAllCommands()
+    {
+        try { return NativeCommands.EnumerateAll(); }
+        catch (NullReferenceException) { return "[]"; }
+        catch (AccessViolationException) { return "[]"; }
+    }
+
+    public int UnlockAllConVars(ConvarFlags flagsToRemove = ConvarFlags.HIDDEN | ConvarFlags.DEVELOPMENT_ONLY | ConvarFlags.CLIENTDLL | ConvarFlags.DEFENSIVE)
+    {
+        try { return NativeConvars.UnlockAll((ulong)flagsToRemove); }
+        catch (NullReferenceException) { return 0; }
+        catch (AccessViolationException) { return 0; }
+    }
+
+    public int UnlockAllCommands(ConvarFlags flagsToRemove = ConvarFlags.HIDDEN | ConvarFlags.DEVELOPMENT_ONLY | ConvarFlags.CLIENTDLL | ConvarFlags.DEFENSIVE)
+    {
+        try { return NativeCommands.UnlockAll((ulong)flagsToRemove); }
+        catch (NullReferenceException) { return 0; }
+        catch (AccessViolationException) { return 0; }
+    }
 }

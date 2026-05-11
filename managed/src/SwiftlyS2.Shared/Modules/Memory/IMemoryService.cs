@@ -115,4 +115,13 @@ public interface IMemoryService
     /// <param name="newSize">The new size of the memory block.</param>
     /// <returns>The address of the resized memory block.</returns>
     public nint Resize( nint pointer, ulong newSize );
+
+    /// <summary>
+    /// Walk all schema fields of an entity and return them as a JSON array.
+    /// Each field has name, type, offset, value, and children (for nested types).
+    /// </summary>
+    /// <param name="entity">The entity pointer.</param>
+    /// <param name="className">The vtable/schema class name of the entity (for schema lookup).</param>
+    /// <returns>JSON string of schema fields, or "[]" if schema not found.</returns>
+    public string GetEntityFields( nint entity, string className );
 }

@@ -93,4 +93,18 @@ internal static class NativeSchema
         var ret = _GetDatamapFunction(hash);
         return ret;
     }
+
+    private unsafe static delegate* unmanaged<int*, nint, byte*, byte*> _GetEntityFields;
+
+    public unsafe static string GetEntityFields(nint entity, string className)
+    {
+        return StringAlloc.CreateCString(className, classNameBufferPtr =>
+        {
+            var length = 0;
+            var returnedPtr = _GetEntityFields(&length, entity, (byte*)classNameBufferPtr);
+            var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
+            NativeAllocator.Free((nint)returnedPtr);
+            return outString;
+        });
+    }
 }

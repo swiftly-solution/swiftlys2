@@ -475,3 +475,158 @@ DEFINE_NATIVE("Convars.SetMaxValueAsString", Bridge_Convars_SetMaxValueAsString)
 DEFINE_NATIVE("Convars.GetMaxValueAsString", Bridge_Convars_GetMaxValueAsString);
 DEFINE_NATIVE("Convars.SetValueInternalAsString", Bridge_Convars_SetValueInternalAsString);
 DEFINE_NATIVE("Convars.GetDescription", Bridge_Convars_GetDescription);
+
+// --- ConVar/ConCommand full enumeration and bulk unlock ---
+
+static char* Bridge_Convars_EnumerateAll(int* outSize)
+{
+    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
+    static auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
+
+    std::string json = "[";
+    bool first = true;
+
+    for (ConVarRef ref = cvars->FindFirstConVar(); ref.IsValidRef(); ref = cvars->FindNextConVar(ref))
+    {
+        ConVarRefAbstract abstract(ref);
+        auto* data = abstract.GetConVarData();
+        if (!data || !data->m_pszName) continue;
+
+        const char* typeName = "?";
+        switch (data->m_eVarType)
+        {
+            case EConVarType_Bool:       typeName = "bool"; break;
+            case EConVarType_Int16:      typeName = "int16"; break;
+            case EConVarType_UInt16:     typeName = "uint16"; break;
+            case EConVarType_Int32:      typeName = "int32"; break;
+            case EConVarType_UInt32:     typeName = "uint32"; break;
+            case EConVarType_Int64:      typeName = "int64"; break;
+            case EConVarType_UInt64:     typeName = "uint64"; break;
+            case EConVarType_Float32:    typeName = "float32"; break;
+            case EConVarType_Float64:    typeName = "float64"; break;
+            case EConVarType_String:     typeName = "string"; break;
+            case EConVarType_Color:      typeName = "color"; break;
+            case EConVarType_Vector2:    typeName = "vector2"; break;
+            case EConVarType_Vector3:    typeName = "vector3"; break;
+            case EConVarType_Vector4:    typeName = "vector4"; break;
+            case EConVarType_Qangle:     typeName = "qangle"; break;
+            default: break;
+        }
+
+        CBufferString buf;
+        std::string defaultVal = "\"\"";
+        if (data->m_defaultValue)
+        {
+            data->DefaultValueToString(buf);
+            defaultVal = "\"" + std::string(buf.Get()) + "\"";
+        }
+
+        std::string desc = abstract.GetHelpText();
+
+        // Simple manual JSON escaping for name/desc
+        auto esc = [](const std::string& s) -> std::string {
+            std::string out;
+            for (char c : s)
+            {
+                if (c == '"') out += "\\\"";
+                else if (c == '\\') out += "\\\\";
+                else if (c == '\n') out += "\\n";
+                else if (c == '\r') out += "\\r";
+                else if (c == '\t') out += "\\t";
+                else out += c;
+            }
+            return out;
+        };
+
+        if (!first) json += ","; first = false;
+        json += "{\"name\":\"" + esc(data->m_pszName) + "\",\"type\":\"" + typeName +
+                "\",\"default\":" + defaultVal + ",\"flags\":" + std::to_string(data->m_nFlags) +
+                ",\"desc\":\"" + esc(desc) + "\"}";
+    }
+    json += "]";
+
+    int len = (int)json.size();
+    *outSize = len;
+    char* out = (char*)memory->Alloc(len + 1);
+    memory->Copy(out, (void*)json.data(), len);
+    out[len] = '\0';
+    return out;
+}
+
+static char* Bridge_Commands_EnumerateAll(int* outSize)
+{
+    static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
+    static auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
+
+    std::string json = "[";
+    bool first = true;
+
+    for (ConCommandRef ref = cvars->FindFirstConCommand(); ref.IsValidRef(); ref = cvars->FindNextConCommand(ref))
+    {
+        auto* data = cvars->GetConCommandData(ref);
+        if (!data || !data->m_pszName) continue;
+
+        auto esc = [](const std::string& s) -> std::string {
+            std::string out;
+            for (char c : s)
+            {
+                if (c == '"') out += "\\\"";
+                else if (c == '\\') out += "\\\\";
+                else if (c == '\n') out += "\\n";
+                else if (c == '\r') out += "\\r";
+                else if (c == '\t') out += "\\t";
+                else out += c;
+            }
+            return out;
+        };
+
+        if (!first) json += ","; first = false;
+        json += "{\"name\":\"" + esc(data->m_pszName) + "\",\"flags\":" +
+                std::to_string(data->m_nFlags) + ",\"desc\":\"" +
+                esc(data->m_pszHelpString ? data->m_pszHelpString : "") + "\"}";
+    }
+    json += "]";
+
+    int len = (int)json.size();
+    *outSize = len;
+    char* out = (char*)memory->Alloc(len + 1);
+    memory->Copy(out, (void*)json.data(), len);
+    out[len] = '\0';
+    return out;
+}
+
+static int Bridge_Convars_UnlockAll(uint64_t flagsToRemove)
+{
+    if (flagsToRemove == 0) return 0;
+    static auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
+
+    int unlocked = 0;
+    for (ConVarRef ref = cvars->FindFirstConVar(); ref.IsValidRef(); ref = cvars->FindNextConVar(ref))
+    {
+        ConVarRefAbstract abstract(ref);
+        if (!abstract.IsFlagSet(flagsToRemove)) continue;
+        abstract.RemoveFlags(flagsToRemove);
+        unlocked++;
+    }
+    return unlocked;
+}
+
+static int Bridge_Commands_UnlockAll(uint64_t flagsToRemove)
+{
+    if (flagsToRemove == 0) return 0;
+    static auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
+
+    int unlocked = 0;
+    for (ConCommandRef ref = cvars->FindFirstConCommand(); ref.IsValidRef(); ref = cvars->FindNextConCommand(ref))
+    {
+        if (!ref.IsFlagSet(flagsToRemove)) continue;
+        ref.RemoveFlags(flagsToRemove);
+        unlocked++;
+    }
+    return unlocked;
+}
+
+DEFINE_NATIVE("Convars.EnumerateAll", Bridge_Convars_EnumerateAll);
+DEFINE_NATIVE("Commands.EnumerateAll", Bridge_Commands_EnumerateAll);
+DEFINE_NATIVE("Convars.UnlockAll", Bridge_Convars_UnlockAll);
+DEFINE_NATIVE("Commands.UnlockAll", Bridge_Commands_UnlockAll);
