@@ -124,4 +124,14 @@ public interface IMemoryService
     /// <param name="className">The vtable/schema class name of the entity (for schema lookup).</param>
     /// <returns>JSON string of schema fields, or "[]" if schema not found.</returns>
     public string GetEntityFields( nint entity, string className );
+
+    /// <summary>
+    /// Get the protobuf DebugString for a message pointer (Address from ITypedProtobuf).
+    /// </summary>
+    public string DebugProtobuf( nint protoMsgPtr );
+
+    /// <summary>
+    /// Parse CCLCMsg_Move.data as CSGOUserCmdPB. Returns formatted string with command details.
+    /// </summary>
+    public string FormatMoveDetail( nint moveMsgPtr );
 }

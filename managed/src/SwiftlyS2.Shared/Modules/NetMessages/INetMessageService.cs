@@ -32,6 +32,38 @@ public interface INetMessageService
   /// <returns>The hook result.</returns>
   delegate HookResult ClientNetMessageHandler<T>( T msg, int playerId ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable;
 
+  // ── Raw (untyped) handlers ──────────────────────────────────────
+
+  /// <summary>
+  /// Raw handler for ALL client net messages (untyped).
+  /// Receives the message as a google::protobuf::Message* pointer (already offset from CNetMessage*).
+  /// Use <see cref="GetMessageNameById"/> to resolve the message name,
+  /// and <see cref="SwiftlyS2.Shared.Memory.IMemoryService.DebugProtobuf"/> to get its DebugString.
+  /// </summary>
+  delegate HookResult RawClientNetMessageHandler( int playerId, int msgId, nint pMessage );
+
+  /// <summary>
+  /// Raw handler for ALL server net messages (untyped).
+  /// pPlayerMask is a pointer to a uint64 bitmap of recipients.
+  /// pMessage is a google::protobuf::Message* pointer (already offset from CNetMessage*).
+  /// </summary>
+  delegate HookResult RawServerNetMessageHandler( nint pPlayerMask, int msgId, nint pMessage );
+
+  /// <summary>
+  /// Raw handler for ALL server net internal messages (untyped).
+  /// pMessage is a google::protobuf::Message* pointer (already offset from CNetMessage*).
+  /// </summary>
+  delegate HookResult RawServerNetMessageInternalHandler( int playerId, int msgId, nint pMessage );
+
+  /// <summary>
+  /// Get the unscoped name of a net message by its ID.
+  /// </summary>
+  /// <param name="msgId">The net message ID.</param>
+  /// <returns>The unscoped message name, or empty string if not found.</returns>
+  public string GetMessageNameById( int msgId );
+
+  // ── Typed hooks ──────────────────────────────────────────────────
+
   /// <summary>
   /// Hooks a client net message.
   /// </summary>
@@ -55,6 +87,38 @@ public interface INetMessageService
   /// <param name="callback"></param>
   /// <returns></returns>
   public Guid HookServerMessageInternal<T>( ServerNetMessageInternalHandler<T> callback ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable;
+
+  // ── Raw hooks (untyped — catch ALL messages) ─────────────────────
+
+  /// <summary>
+  /// Hooks ALL client net messages without type filtering.
+  /// </summary>
+  /// <param name="callback">
+  /// Called for every incoming client → server message.
+  /// Parameters: playerId, msgId, pMessage (raw protobuf pointer).
+  /// </param>
+  /// <returns>Hook identifier for later unhook.</returns>
+  public Guid HookClientMessageRaw( RawClientNetMessageHandler callback );
+
+  /// <summary>
+  /// Hooks ALL server net messages without type filtering.
+  /// </summary>
+  /// <param name="callback">
+  /// Called for every outgoing server → client broadcast message.
+  /// Parameters: pPlayerMask (uint64* recipients bitmap), msgId, pMessage.
+  /// </param>
+  /// <returns>Hook identifier for later unhook.</returns>
+  public Guid HookServerMessageRaw( RawServerNetMessageHandler callback );
+
+  /// <summary>
+  /// Hooks ALL server net internal (unicast) messages without type filtering.
+  /// </summary>
+  /// <param name="callback">
+  /// Called for every outgoing server → client unicast message.
+  /// Parameters: playerId, msgId, pMessage.
+  /// </param>
+  /// <returns>Hook identifier for later unhook.</returns>
+  public Guid HookServerMessageInternalRaw( RawServerNetMessageInternalHandler callback );
 
   /// <summary>
   /// Unhooks a net message handler.

@@ -179,3 +179,135 @@ internal class NetMessageServerInternalHookCallback<T> : NetMessageHookCallback 
     }
 
 }
+
+// ── Raw (untyped) hooks – catch ALL messages ──────────────────────
+
+internal class NetMessageClientRawHookCallback : NetMessageHookCallback
+{
+
+    private INetMessageService.RawClientNetMessageHandler _callback;
+    private NetMessageClientHookCallbackDelegate _unmanagedCallback;
+    private nint _unmanagedCallbackPtr;
+    private ulong _nativeListenerId;
+    private ILogger<NetMessageClientRawHookCallback> _logger;
+    private readonly int _cnetMsgSize;
+
+    public NetMessageClientRawHookCallback( INetMessageService.RawClientNetMessageHandler callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
+    {
+        Guid = Guid.NewGuid();
+        _logger = LoggerFactory.CreateLogger<NetMessageClientRawHookCallback>();
+        _cnetMsgSize = NativeNetMessages.GetCNetMessageSize();
+
+        _callback = callback;
+
+        _unmanagedCallback = ( playerId, msgId, pMessage ) =>
+        {
+            try
+            {
+                // pMessage is CNetMessage*; shift by sizeof(CNetMessage) to get google::protobuf::Message*
+                var result = _callback(playerId, msgId, pMessage + _cnetMsgSize);
+                return result;
+            }
+            catch (Exception e)
+            {
+                if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
+                _logger.LogError(e, "Error in raw client net message hook callback (msgId={MsgId})", msgId);
+                return HookResult.Continue;
+            }
+        };
+        _unmanagedCallbackPtr = Marshal.GetFunctionPointerForDelegate(_unmanagedCallback);
+        _nativeListenerId = NativeNetMessages.AddNetMessageClientHook(_unmanagedCallbackPtr);
+    }
+
+    public override void Dispose()
+    {
+        NativeNetMessages.RemoveNetMessageClientHook(_nativeListenerId);
+    }
+
+}
+
+internal class NetMessageServerRawHookCallback : NetMessageHookCallback
+{
+
+    private INetMessageService.RawServerNetMessageHandler _callback;
+    private NetMessageServerHookCallbackDelegate _unmanagedCallback;
+    private nint _unmanagedCallbackPtr;
+    private ulong _nativeListenerId;
+    private ILogger<NetMessageServerRawHookCallback> _logger;
+    private readonly int _cnetMsgSize;
+
+    public NetMessageServerRawHookCallback( INetMessageService.RawServerNetMessageHandler callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
+    {
+        Guid = Guid.NewGuid();
+        _logger = LoggerFactory.CreateLogger<NetMessageServerRawHookCallback>();
+        _cnetMsgSize = NativeNetMessages.GetCNetMessageSize();
+
+        _callback = callback;
+
+        _unmanagedCallback = ( pPlayerMask, msgId, pMessage ) =>
+        {
+            try
+            {
+                var result = _callback(pPlayerMask, msgId, pMessage + _cnetMsgSize);
+                return result;
+            }
+            catch (Exception e)
+            {
+                if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
+                _logger.LogError(e, "Error in raw server net message hook callback (msgId={MsgId})", msgId);
+                return HookResult.Continue;
+            }
+        };
+        _unmanagedCallbackPtr = Marshal.GetFunctionPointerForDelegate(_unmanagedCallback);
+        _nativeListenerId = NativeNetMessages.AddNetMessageServerHook(_unmanagedCallbackPtr);
+    }
+
+    public override void Dispose()
+    {
+        NativeNetMessages.RemoveNetMessageServerHook(_nativeListenerId);
+    }
+
+}
+
+internal class NetMessageServerInternalRawHookCallback : NetMessageHookCallback
+{
+
+    private INetMessageService.RawServerNetMessageInternalHandler _callback;
+    private NetMessageClientHookCallbackDelegate _unmanagedCallback;
+    private nint _unmanagedCallbackPtr;
+    private ulong _nativeListenerId;
+    private ILogger<NetMessageServerInternalRawHookCallback> _logger;
+    private readonly int _cnetMsgSize;
+
+    public NetMessageServerInternalRawHookCallback( INetMessageService.RawServerNetMessageInternalHandler callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
+    {
+        Guid = Guid.NewGuid();
+        _logger = LoggerFactory.CreateLogger<NetMessageServerInternalRawHookCallback>();
+        _cnetMsgSize = NativeNetMessages.GetCNetMessageSize();
+
+        _callback = callback;
+
+        _unmanagedCallback = ( playerId, msgId, pMessage ) =>
+        {
+            try
+            {
+                var result = _callback(playerId, msgId, pMessage + _cnetMsgSize);
+                return result;
+            }
+            catch (Exception e)
+            {
+                if (!GlobalExceptionHandler.Handle(ref e)) return HookResult.Continue;
+                _logger.LogError(e, "Error in raw server net internal hook callback (msgId={MsgId})", msgId);
+                return HookResult.Continue;
+            }
+        };
+        _unmanagedCallbackPtr = Marshal.GetFunctionPointerForDelegate(_unmanagedCallback);
+        _nativeListenerId = NativeNetMessages.AddNetMessageServerHookInternal(_unmanagedCallbackPtr);
+    }
+
+    public override void Dispose()
+    {
+        NativeNetMessages.RemoveNetMessageServerHookInternal(_nativeListenerId);
+    }
+
+}

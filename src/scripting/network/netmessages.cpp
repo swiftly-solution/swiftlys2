@@ -21,12 +21,19 @@
 
 #include <public/engine/igameeventsystem.h>
 #include <public/networksystem/inetworkmessages.h>
+#include <tier1/bitbuf.h>
 
 #include <api/sdk/recipientfilter.h>
+#include <vector>
 
 #ifdef GetMessage
 #undef GetMessage
 #endif
+
+#include <google/protobuf/message.h>
+#include "usercmd.pb.h"
+#include "cs_usercmd.pb.h"
+#include "netmessages.pb.h"
 
 #define GETCHECK_FIELD(return_value)                                                                                                                                                                                                                           \
     if (!msg)                                                                                                                                                                                                                                                  \
@@ -1022,6 +1029,109 @@ void Bridge_NetMessages_RemoveNetMessageServerHookInternal(uint64_t callbackID)
     netmessages->RemoveServerMessageInternalSendCallback(callbackID);
 }
 
+// ── Protobuf debug helpers ─────────────────────────────────────────────
+
+int Bridge_NetMessages_GetCNetMessageSize()
+{
+    return sizeof(CNetMessage);
+}
+
+char* Bridge_NetMessages_GetMessageNameById(int* outSize, int msgid)
+{
+    auto netmsg = networkMessages->FindNetworkMessageById(msgid);
+    if (!netmsg) { return Bridge_NetMessages_CopyString("", outSize); }
+    return Bridge_NetMessages_CopyString(netmsg->GetUnscopedName(), outSize);
+}
+
+char* Bridge_NetMessages_DebugString(int* outSize, void* pProtoMsg)
+{
+    if (!pProtoMsg) { return Bridge_NetMessages_CopyString("", outSize); }
+    auto* msg = (google::protobuf::Message*)pProtoMsg;
+    return Bridge_NetMessages_CopyString(msg->DebugString(), outSize);
+}
+
+void* Bridge_NetMessages_ParseUserCmdFromMove(void* pMoveMsg)
+{
+    if (!pMoveMsg) return nullptr;
+    auto* msg = (google::protobuf::Message*)pMoveMsg;
+    const auto* desc = msg->GetDescriptor();
+    const auto* field = desc->FindFieldByName("data");
+    if (!field) return nullptr;
+    if (!msg->GetReflection()->HasField(*msg, field)) return nullptr;
+
+    std::string raw = msg->GetReflection()->GetString(*msg, field);
+    bf_read buffer(raw.data(), raw.size());
+
+    auto size = buffer.ReadVarInt32();
+    if (size < 0 || size > 262140) return nullptr;
+    if (size > buffer.GetNumBytesLeft()) return nullptr;
+
+    auto* cmd = new CSGOUserCmdPB();
+
+    if ((buffer.GetNumBitsRead() % 8) == 0)
+    {
+        if (!cmd->ParseFromArray(buffer.GetBasePointer() + buffer.GetNumBytesRead(), size)) { delete cmd; return nullptr; }
+    }
+    else
+    {
+        std::vector<uint8_t> parseBuffer(size);
+        if (!buffer.ReadBytes(parseBuffer.data(), size)) { delete cmd; return nullptr; }
+        if (!cmd->ParseFromArray(parseBuffer.data(), size)) { delete cmd; return nullptr; }
+    }
+
+    return cmd;
+}
+
+// Direct parse from CCLCMsg_Move protobuf to formatted string, using bf_read (matching original CS2ServerGUI)
+char* Bridge_NetMessages_FormatMoveDebugString(int* outSize, void* pProtoMsg)
+{
+    if (!pProtoMsg) { return Bridge_NetMessages_CopyString("", outSize); }
+
+    auto* msg = (google::protobuf::Message*)pProtoMsg;
+    const auto* desc = msg->GetDescriptor();
+    const auto* field = desc->FindFieldByName("data");
+    if (!field) { return Bridge_NetMessages_CopyString("no data field", outSize); }
+    if (!msg->GetReflection()->HasField(*msg, field)) { return Bridge_NetMessages_CopyString("no data", outSize); }
+
+    std::string raw = msg->GetReflection()->GetString(*msg, field);
+    bf_read buffer(raw.data(), raw.size());
+    std::string result;
+
+    while (buffer.GetNumBytesLeft() > 0)
+    {
+        auto size = buffer.ReadVarInt32();
+        if (size <= 0 || size > 262140 || size > buffer.GetNumBytesLeft())
+            break;
+
+        CSGOUserCmdPB userCmd;
+
+        if ((buffer.GetNumBitsRead() % 8) == 0)
+        {
+            if (!userCmd.ParseFromArray(buffer.GetBasePointer() + buffer.GetNumBytesRead(), size))
+                break;
+            buffer.SeekRelative(size * 8);
+        }
+        else
+        {
+            std::vector<uint8_t> parseBuffer(size);
+            if (!buffer.ReadBytes(parseBuffer.data(), size))
+                break;
+            if (!userCmd.ParseFromArray(parseBuffer.data(), size))
+                break;
+        }
+
+        if (!result.empty()) result += "\n";
+        result += userCmd.DebugString();
+    }
+
+    return Bridge_NetMessages_CopyString(result, outSize);
+}
+
+void Bridge_NetMessages_FreeUserCmd(void* pCmd)
+{
+    if (pCmd) delete (CSGOUserCmdPB*)pCmd;
+}
+
 DEFINE_NATIVE("NetMessages.AllocateNetMessageByID", Bridge_NetMessages_AllocateNetMessageByID);
 DEFINE_NATIVE("NetMessages.AllocateNetMessageByPartialName", Bridge_NetMessages_AllocateNetMessageByPartialName);
 DEFINE_NATIVE("NetMessages.DeallocateNetMessage", Bridge_NetMessages_DeallocateNetMessage);
@@ -1105,3 +1215,9 @@ DEFINE_NATIVE("NetMessages.AddNetMessageClientHook", Bridge_NetMessages_AddNetMe
 DEFINE_NATIVE("NetMessages.RemoveNetMessageClientHook", Bridge_NetMessages_RemoveNetMessageClientHook);
 DEFINE_NATIVE("NetMessages.AddNetMessageServerHookInternal", Bridge_NetMessages_AddNetMessageServerHookInternal);
 DEFINE_NATIVE("NetMessages.RemoveNetMessageServerHookInternal", Bridge_NetMessages_RemoveNetMessageServerHookInternal);
+DEFINE_NATIVE("NetMessages.GetCNetMessageSize", Bridge_NetMessages_GetCNetMessageSize);
+DEFINE_NATIVE("NetMessages.GetMessageNameById", Bridge_NetMessages_GetMessageNameById);
+DEFINE_NATIVE("NetMessages.DebugString", Bridge_NetMessages_DebugString);
+DEFINE_NATIVE("NetMessages.ParseUserCmdFromMove", Bridge_NetMessages_ParseUserCmdFromMove);
+DEFINE_NATIVE("NetMessages.FormatMoveDebugString", Bridge_NetMessages_FormatMoveDebugString);
+DEFINE_NATIVE("NetMessages.FreeUserCmd", Bridge_NetMessages_FreeUserCmd);

@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Hooks;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Extensions;
+using SwiftlyS2.Core.ProtobufDefinitions;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Schemas;
 using SwiftlyS2.Shared.Engine;
@@ -194,5 +195,15 @@ internal class MemoryService : IMemoryService, IDisposable
     public string GetEntityFields( nint entity, string className )
     {
         return NativeSchema.GetEntityFields( entity, className );
+    }
+
+    public string DebugProtobuf( nint protoMsgPtr )
+    {
+        return NativeNetMessages.DebugString( protoMsgPtr );
+    }
+
+    public string FormatMoveDetail( nint moveMsgPtr )
+    {
+        return NativeNetMessages.FormatMoveDebugString( moveMsgPtr );
     }
 }

@@ -908,4 +908,60 @@ internal static class NativeNetMessages
     {
         _RemoveNetMessageServerHookInternal(callbackID);
     }
+
+    private unsafe static delegate* unmanaged<int*, nint, byte*> _DebugString;
+
+    public unsafe static string DebugString(nint protoMsgPtr)
+    {
+        var length = 0;
+        var returnedPtr = _DebugString(&length, protoMsgPtr);
+        var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
+        NativeAllocator.Free((nint)returnedPtr);
+        return outString;
+    }
+
+    private unsafe static delegate* unmanaged<nint, nint> _ParseUserCmdFromMove;
+
+    public unsafe static nint ParseUserCmdFromMove(nint moveMsgPtr)
+    {
+        var ret = _ParseUserCmdFromMove(moveMsgPtr);
+        return ret;
+    }
+
+    private unsafe static delegate* unmanaged<nint, void> _FreeUserCmd;
+
+    public unsafe static void FreeUserCmd(nint cmdPtr)
+    {
+        _FreeUserCmd(cmdPtr);
+    }
+
+    private unsafe static delegate* unmanaged<int*, nint, byte*> _FormatMoveDebugString;
+
+    public unsafe static string FormatMoveDebugString(nint moveMsgPtr)
+    {
+        var length = 0;
+        var returnedPtr = _FormatMoveDebugString(&length, moveMsgPtr);
+        var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
+        NativeAllocator.Free((nint)returnedPtr);
+        return outString;
+    }
+
+    private unsafe static delegate* unmanaged<int*, int, byte*> _GetMessageNameById;
+
+    public unsafe static string GetMessageNameById(int msgId)
+    {
+        var length = 0;
+        var returnedPtr = _GetMessageNameById(&length, msgId);
+        var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
+        NativeAllocator.Free((nint)returnedPtr);
+        return outString;
+    }
+
+    private unsafe static delegate* unmanaged<int> _GetCNetMessageSize;
+
+    /// <summary>Compile-time sizeof(CNetMessage). Offset from CNetMessage* to google::protobuf::Message*.</summary>
+    public unsafe static int GetCNetMessageSize()
+    {
+        return _GetCNetMessageSize();
+    }
 }

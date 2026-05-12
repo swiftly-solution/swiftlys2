@@ -6,6 +6,23 @@ using SwiftlyS2.Shared.NetMessages;
 
 namespace SwiftlyS2.Core.NetMessages;
 
+internal static class NetMessageOffsets
+{
+    /*
+     
+    Evil hack to convert a CNetMessagePB<>* to google::protobuf::Message*
+    
+    CNetMessage memory layout:
+    vtable -> 8 bytes
+    members -> 40 bytes
+    
+    and CNetMessagePB inheritance: public CNetMessage, public PROTO_TYPE
+    so we can cast to PROTO_TYPE* by adding 48 bytes to the handle
+    
+    */
+    public const int CNetMessageToProtobuf = 48;
+}
+
 internal class NetMessage<T> : TypedProtobuf<T>, INativeHandle, IDisposable
     where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable
 {
@@ -17,19 +34,7 @@ internal class NetMessage<T> : TypedProtobuf<T>, INativeHandle, IDisposable
         get => ref _filter;
     }
 
-    /*
-
-    Evil hack to convert a CNetMessagePB<>* to google::protobuf::Message*
-
-    CNetMessage memory layout:
-    vtable -> 8 bytes
-    members -> 40 bytes
-
-    and CNetMessagePB inheritance: public CNetMessage, public PROTO_TYPE
-    so we can cast to PROTO_TYPE* by adding 48 bytes to the handle
-
-    */
-    public NetMessage( nint handle, bool isManuallyAllocated ) : base(handle + 48)
+    public NetMessage( nint handle, bool isManuallyAllocated ) : base(handle + NetMessageOffsets.CNetMessageToProtobuf)
     {
         if (isManuallyAllocated)
         {

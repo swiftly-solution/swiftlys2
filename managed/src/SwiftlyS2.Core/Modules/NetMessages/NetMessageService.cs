@@ -51,6 +51,41 @@ internal class NetMessageService : INetMessageService, IDisposable
         return hook.Guid;
     }
 
+    public string GetMessageNameById( int msgId )
+    {
+        return NativeNetMessages.GetMessageNameById(msgId);
+    }
+
+    public Guid HookClientMessageRaw( INetMessageService.RawClientNetMessageHandler callback )
+    {
+        var hook = new NetMessageClientRawHookCallback(callback, _loggerFactory, _profiler);
+        lock (_lock)
+        {
+            _callbacks.Add(hook);
+        }
+        return hook.Guid;
+    }
+
+    public Guid HookServerMessageRaw( INetMessageService.RawServerNetMessageHandler callback )
+    {
+        var hook = new NetMessageServerRawHookCallback(callback, _loggerFactory, _profiler);
+        lock (_lock)
+        {
+            _callbacks.Add(hook);
+        }
+        return hook.Guid;
+    }
+
+    public Guid HookServerMessageInternalRaw( INetMessageService.RawServerNetMessageInternalHandler callback )
+    {
+        var hook = new NetMessageServerInternalRawHookCallback(callback, _loggerFactory, _profiler);
+        lock (_lock)
+        {
+            _callbacks.Add(hook);
+        }
+        return hook.Guid;
+    }
+
     public void Unhook( Guid guid )
     {
         lock (_lock)

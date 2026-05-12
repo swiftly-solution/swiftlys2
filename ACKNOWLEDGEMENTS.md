@@ -194,3 +194,23 @@ Credits to @ipsvn for the `bf_write` fix and StringTable serialization method fo
 Related links:
 - https://github.com/alliedmodders/hl2sdk/pull/364
 - https://github.com/ipsvn/ReplicateStringTableValue
+
+## CS2ServerGUI
+
+Raw (untyped) net message hooks (`HookClientMessageRaw` / `HookServerMessageRaw`) and the
+`bf_read`-based parsing of `CCLCMsg_Move.data` via `CSGOUserCmdPB` were inspired by the
+`FilterMessage` / `SendNetMessage` vtable hook architecture in
+[Source2ZE/CS2ServerGUI](https://github.com/Source2ZE/CS2ServerGUI) by Poggu.
+
+```
+/**
+ * =============================================================================
+ * CS2ServerGUI
+ * Copyright (C) 2024 Poggu
+ * =============================================================================
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, version 3.0, as published by the
+ * Free Software Foundation.
+ */
+```
