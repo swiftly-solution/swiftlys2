@@ -116,7 +116,7 @@ internal class CoreHookService : IDisposable
     private IUnmanagedFunction<DropWeaponLinux>? dropWeaponLinux;
     private Guid dropWeaponGuid;
 
-    private void HookEntityIdentityAcceptInput()
+    internal void HookEntityIdentityAcceptInput()
     {
         var address = core.GameData.GetSignature("CEntityIdentity::AcceptInput");
 
@@ -163,7 +163,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private unsafe void HookEntityIOOutputFireOutputInternal()
+    internal void UnhookEntityIdentityAcceptInput()
+    {
+        if (entityIdentityAcceptInput == null) return;
+        entityIdentityAcceptInput.RemoveHook(entityIdentityAcceptInputGuid);
+        entityIdentityAcceptInput = null;
+    }
+
+    internal unsafe void HookEntityIOOutputFireOutputInternal()
     {
         var address = core.GameData.GetSignature("CEntityIOOutput::FireOutputInternal");
 
@@ -205,7 +212,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookExecuteCommand()
+    internal void UnhookEntityIOOutputFireOutputInternal()
+    {
+        if (entityIOOutputFireOutputInternal == null) return;
+        entityIOOutputFireOutputInternal.RemoveHook(entityIOOutputFireOutputInternalGuid);
+        entityIOOutputFireOutputInternal = null;
+    }
+
+    internal void HookExecuteCommand()
     {
         var address = core.GameData.GetSignature("Cmd_ExecuteCommand");
 
@@ -241,7 +255,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookWeaponServicesDropWeapon()
+    internal void UnhookExecuteCommand()
+    {
+        if (executeCommand == null) return;
+        executeCommand.RemoveHook(executeCommandGuid);
+        executeCommand = null;
+    }
+
+    internal void HookWeaponServicesDropWeapon()
     {
         var sig = core.GameData.GetSignature("CCSPlayer_WeaponServices::DropWeapon");
         if (IsWindows)
@@ -292,7 +313,23 @@ internal class CoreHookService : IDisposable
         }
     }
 
-    private void HookICvarFindConCommandTemplate()
+    internal void UnhookWeaponServicesDropWeapon()
+    {
+        if (IsWindows)
+        {
+            if (dropWeaponWindows == null) return;
+            dropWeaponWindows.RemoveHook(dropWeaponGuid);
+            dropWeaponWindows = null;
+        }
+        else
+        {
+            if (dropWeaponLinux == null) return;
+            dropWeaponLinux.RemoveHook(dropWeaponGuid);
+            dropWeaponLinux = null;
+        }
+    }
+
+    internal void HookICvarFindConCommandTemplate()
     {
         var offset = core.GameData.GetOffset("ICvar::FindConCommand");
         if (IsWindows)
@@ -349,7 +386,23 @@ internal class CoreHookService : IDisposable
         }
     }
 
-    private void HookCCSPlayerItemServicesCanAcquire()
+    internal void UnhookICvarFindConCommandTemplate()
+    {
+        if (IsWindows)
+        {
+            if (findConCommandWindows == null) return;
+            findConCommandWindows.RemoveHook(findConCommandGuid);
+            findConCommandWindows = null;
+        }
+        else
+        {
+            if (findConCommandLinux == null) return;
+            findConCommandLinux.RemoveHook(findConCommandGuid);
+            findConCommandLinux = null;
+        }
+    }
+
+    internal void HookCCSPlayerItemServicesCanAcquire()
     {
         var address = core.GameData.GetSignature("CCSPlayer_ItemServices::CanAcquire");
 
@@ -391,7 +444,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookCCSPlayerWeaponServicesCanUse()
+    internal void UnhookCCSPlayerItemServicesCanAcquire()
+    {
+        if (itemServicesCanAcquire == null) return;
+        itemServicesCanAcquire.RemoveHook(itemServicesCanAcquireGuid);
+        itemServicesCanAcquire = null;
+    }
+
+    internal void HookCCSPlayerWeaponServicesCanUse()
     {
         var offset = core.GameData.GetOffset("CCSPlayer_WeaponServices::CanUse");
         weaponServicesCanUse = core.Memory.GetUnmanagedFunctionByVTable<CCSPlayerWeaponServicesCanUse>(core.Memory.GetVTableAddress(Library.Server, "CCSPlayer_WeaponServices")!.Value, offset);
@@ -417,7 +477,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookCBaseEntityTouchTemplate()
+    internal void UnhookCCSPlayerWeaponServicesCanUse()
+    {
+        if (weaponServicesCanUse == null) return;
+        weaponServicesCanUse.RemoveHook(weaponServicesCanUseGuid);
+        weaponServicesCanUse = null;
+    }
+
+    internal void HookCBaseEntityTouchTemplate()
     {
         var touchOffset = core.GameData.GetOffset("CBaseEntity::Touch");
         var startTouchOffset = core.GameData.GetOffset("CBaseEntity::StartTouch");
@@ -475,7 +542,26 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookSteamServerAPIActivated()
+    internal void UnhookCBaseEntityTouchTemplate()
+    {
+        if (entityStartTouch != null)
+        {
+            entityStartTouch.RemoveHook(entityStartTouchGuid);
+            entityStartTouch = null;
+        }
+        if (entityTouch != null)
+        {
+            entityTouch.RemoveHook(entityTouchGuid);
+            entityTouch = null;
+        }
+        if (entityEndTouch != null)
+        {
+            entityEndTouch.RemoveHook(entityEndTouchGuid);
+            entityEndTouch = null;
+        }
+    }
+
+    internal void HookSteamServerAPIActivated()
     {
         var offset = core.GameData.GetOffset("IServerGameDLL::GameServerSteamAPIActivated");
         steamServerAPIActivated = core.Memory.GetUnmanagedFunctionByVTable<SteamServerAPIActivated>(core.Memory.GetVTableAddress(Library.Server, "CSource2Server")!.Value, offset);
@@ -496,7 +582,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookCPlayerMovementServicesRunCommand()
+    internal void UnhookSteamServerAPIActivated()
+    {
+        if (steamServerAPIActivated == null) return;
+        steamServerAPIActivated.RemoveHook(steamServerAPIActivatedGuid);
+        steamServerAPIActivated = null;
+    }
+
+    internal void HookCPlayerMovementServicesRunCommand()
     {
         var offset = core.GameData.GetOffset("CPlayer_MovementServices::RunCommand");
         movementServiceRunCommand = core.Memory.GetUnmanagedFunctionByVTable<CPlayerMovementServicesRunCommand>(core.Memory.GetVTableAddress(Library.Server, "CPlayer_MovementServices")!.Value, offset);
@@ -522,7 +615,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookCCSPlayerPawnPostThink()
+    internal void UnhookCPlayerMovementServicesRunCommand()
+    {
+        if (movementServiceRunCommand == null) return;
+        movementServiceRunCommand.RemoveHook(movementServiceRunCommandGuid);
+        movementServiceRunCommand = null;
+    }
+
+    internal void HookCCSPlayerPawnPostThink()
     {
         var address = core.GameData.GetSignature("CCSPlayerPawn::PostThink");
 
@@ -545,7 +645,14 @@ internal class CoreHookService : IDisposable
         });
     }
 
-    private void HookDispatchDatamapFunction()
+    internal void UnhookCCSPlayerPawnPostThink()
+    {
+        if (playerPawnPostThink == null) return;
+        playerPawnPostThink.RemoveHook(playerPawnPostThinkGuid);
+        playerPawnPostThink = null;
+    }
+
+    internal void HookDispatchDatamapFunction()
     {
         var address = core.GameData.GetSignature("DispatchDatamapFunction");
         dispatchDatamapFunction = core.Memory.GetUnmanagedFunctionByAddress<DispatchDatamapFunction>(address);
@@ -571,23 +678,26 @@ internal class CoreHookService : IDisposable
         });
     }
 
+    internal void UnhookDispatchDatamapFunction()
+    {
+        if (dispatchDatamapFunction == null) return;
+        dispatchDatamapFunction.RemoveHook(dispatchDatamapFunctionGuid);
+        dispatchDatamapFunction = null;
+    }
+
     public void Dispose()
     {
-        executeCommand?.RemoveHook(executeCommandGuid);
-        findConCommandWindows?.RemoveHook(findConCommandGuid);
-        findConCommandLinux?.RemoveHook(findConCommandGuid);
-        itemServicesCanAcquire?.RemoveHook(itemServicesCanAcquireGuid);
-        weaponServicesCanUse?.RemoveHook(weaponServicesCanUseGuid);
-        entityStartTouch?.RemoveHook(entityStartTouchGuid);
-        entityTouch?.RemoveHook(entityTouchGuid);
-        entityEndTouch?.RemoveHook(entityEndTouchGuid);
-        steamServerAPIActivated?.RemoveHook(steamServerAPIActivatedGuid);
-        movementServiceRunCommand?.RemoveHook(movementServiceRunCommandGuid);
-        playerPawnPostThink?.RemoveHook(playerPawnPostThinkGuid);
-        entityIdentityAcceptInput?.RemoveHook(entityIdentityAcceptInputGuid);
-        entityIOOutputFireOutputInternal?.RemoveHook(entityIOOutputFireOutputInternalGuid);
-        dispatchDatamapFunction?.RemoveHook(dispatchDatamapFunctionGuid);
-        dropWeaponWindows?.RemoveHook(dropWeaponGuid);
-        dropWeaponLinux?.RemoveHook(dropWeaponGuid);
+        UnhookExecuteCommand();
+        UnhookICvarFindConCommandTemplate();
+        UnhookCCSPlayerItemServicesCanAcquire();
+        UnhookCCSPlayerWeaponServicesCanUse();
+        UnhookCBaseEntityTouchTemplate();
+        UnhookSteamServerAPIActivated();
+        UnhookEntityIdentityAcceptInput();
+        UnhookEntityIOOutputFireOutputInternal();
+        UnhookWeaponServicesDropWeapon();
+        UnhookDispatchDatamapFunction();
+        UnhookCCSPlayerPawnPostThink();
+        UnhookCPlayerMovementServicesRunCommand();
     }
 }
