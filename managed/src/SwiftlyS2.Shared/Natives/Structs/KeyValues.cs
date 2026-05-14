@@ -134,7 +134,9 @@ public unsafe struct KeyValues
         var key = FindKey(keyName);
         return key == null || key->DataType != KeyValuesDataType.TYPE_STRING
             ? defaultValue
-            : key->StringValue == nint.Zero ? string.Empty : Marshal.PtrToStringUTF8(key->StringValue)!;
+            : key->AllocatedExternalMemory
+            ? key->StringValue == nint.Zero ? string.Empty : Marshal.PtrToStringUTF8(key->StringValue)!
+            : Marshal.PtrToStringUTF8((nint)key)!;
     }
 
     public nint GetPtr( string keyName, nint defaultValue = 0 )
@@ -191,6 +193,7 @@ public unsafe struct KeyValues
 
         key->DataType = KeyValuesDataType.TYPE_STRING;
         key->StringValue = StringPool.Allocate(value);
+        key->AllocatedExternalMemory = true;
     }
 
     public void SetInt( string keyName, int value )
