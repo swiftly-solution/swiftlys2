@@ -15,7 +15,7 @@ public interface IOnClientConnectedEvent
 
   /// <summary>
   /// The result of the event.
-  /// Set this to <see cref="HookResult.Stop"/> or <see cref="HookResult.Cancel"/> to prevent player from joining in.
+  /// Set this to <see cref="HookResult.Stop"/> or <see cref="HookResult.CancelOriginal"/> to prevent player from joining in.
   /// </summary>
   public HookResult Result { get; set; }
 

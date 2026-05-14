@@ -231,7 +231,7 @@ internal static class EventPublisher
                 }
             }
 
-            if (@event.Result == HookResult.Cancel) return 0;
+            if (@event.Result == HookResult.CancelOriginal) return 0;
 
             return 1;
         }
@@ -686,7 +686,7 @@ internal static class EventPublisher
                     }
                 }
 
-                if (@event.Result == HookResult.Cancel) return 0;
+                if (@event.Result == HookResult.CancelOriginal) return 0;
 
                 return 1;
             }

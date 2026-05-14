@@ -29,5 +29,5 @@ public enum HookResult : uint
     /// <summary>
     /// The executions of following hooks will continue and original function will be cancelled.
     /// </summary>
-    Cancel = 3,
+    CancelOriginal = 3,
 }
