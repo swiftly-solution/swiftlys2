@@ -225,6 +225,7 @@ int CServerCommands::HandleCommand(int playerid, const std::string& text, bool d
 
 bool CServerCommands::HandleClientCommand(int playerid, const std::string& text)
 {
+    bool stopOriginal = false;
     for (const auto& [id, listener] : clientCommandListeners)
     {
         auto res = listener(playerid, text);
@@ -236,13 +237,19 @@ bool CServerCommands::HandleClientCommand(int playerid, const std::string& text)
         {
             break;
         }
+        else if (res == 3)
+        {
+            stopOriginal = true;
+        }
     }
 
+    if (stopOriginal) return false;
     return true;
 }
 
 bool CServerCommands::HandleClientChat(int playerid, const std::string& text, bool teamonly)
 {
+    bool stopOriginal = false;
     for (const auto& [id, listener] : clientChatListeners)
     {
         auto res = listener(playerid, text, teamonly);
@@ -254,8 +261,13 @@ bool CServerCommands::HandleClientChat(int playerid, const std::string& text, bo
         {
             break;
         }
+        else if (res == 3)
+        {
+            stopOriginal = true;
+        }
     }
 
+    if (stopOriginal) return false;
     return true;
 }
 

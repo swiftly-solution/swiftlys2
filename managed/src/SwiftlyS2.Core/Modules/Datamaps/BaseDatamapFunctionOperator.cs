@@ -39,7 +39,7 @@ internal class BaseDatamapFunctionOperator<T, K> : IDatamapFunctionOperator<T, K
             if (ctx.HookResult == HookResult.Handled) return true;
             if (ctx.HookResult == HookResult.Stop) return false;
         }
-        return true;
+        return ctx.HookResult != HookResult.Cancel;
     }
 
     internal void CallbackPost( nint ptr )

@@ -193,6 +193,8 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
     std::string event_name = event->GetName();
     bool shouldBroadcast = bDontBroadcast;
     uint32_t event_hash = hash_32_fnv1a_const(event_name.c_str());
+    bool stopOriginal = false;
+
     for (const auto& [id, callback] : g_mEventListeners) {
         auto res = callback(event_name, event, shouldBroadcast, event_hash);
         if (res == 1) {
@@ -200,6 +202,13 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
             return false;
         }
         else if (res == 2) break;
+        else if (res == 3) stopOriginal = true;
+    }
+
+    if (stopOriginal)
+    {
+        g_gameEventManager->FreeEvent(event);
+        return false;
     }
 
     IGameEvent* dupEvent = g_gameEventManager->DuplicateEvent(event);
@@ -213,11 +222,12 @@ bool FireEventHook(IGameEventManager2* _this, IGameEvent* event, bool bDontBroad
             return false;
         }
         else if (res == 2) break;
+        else if (res == 3) stopOriginal = true;
     }
 
     g_gameEventManager->FreeEvent(dupEvent);
 
-    return result;
+    return stopOriginal ? false : result;
 }
 
 void StartupServerEventHook(void* _this, const GameSessionConfiguration_t& config, ISource2WorldSession* a, const char* b)

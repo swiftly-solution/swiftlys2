@@ -152,7 +152,7 @@ internal class CoreHookService : IDisposable
                     };
                     EventPublisher.InvokeOnEntityIdentityAcceptInputHook(@event);
 
-                    if (@event.Result == HookResult.Stop)
+                    if (@event.Result == HookResult.Stop || @event.Result == HookResult.Cancel)
                     {
                         return;
                     }
@@ -195,7 +195,7 @@ internal class CoreHookService : IDisposable
                 };
                 EventPublisher.InvokeEntityFireOutputHook(@event);
 
-                if (@event.Result == HookResult.Stop)
+                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Cancel)
                 {
                     return;
                 }
@@ -224,7 +224,7 @@ internal class CoreHookService : IDisposable
                         var @eventPre = new OnCommandExecuteHookEvent(ref command, HookMode.Pre);
                         EventPublisher.InvokeOnCommandExecuteHook(@eventPre);
 
-                        if (@eventPre.Result == HookResult.Stop)
+                        if (@eventPre.Result == HookResult.Stop || @eventPre.Result == HookResult.Cancel)
                         {
                             return 0;
                         }
@@ -263,7 +263,7 @@ internal class CoreHookService : IDisposable
                     };
                     EventPublisher.InvokeOnWeaponServicesDropWeaponHook(@event);
 
-                    return @event.Result == HookResult.Stop ? (byte)0 : next()(pWeaponServices, pPlayerWeapon, swapping);
+                    return (@event.Result == HookResult.Stop || @event.Result == HookResult.Cancel) ? (byte)0 : next()(pWeaponServices, pPlayerWeapon, swapping);
                 };
             });
         }
@@ -286,7 +286,7 @@ internal class CoreHookService : IDisposable
                     };
                     EventPublisher.InvokeOnWeaponServicesDropWeaponHook(@event);
 
-                    return @event.Result == HookResult.Stop ? 0 : next()(pWeaponServices, pPlayerWeapon, swapping);
+                    return (@event.Result == HookResult.Stop || @event.Result == HookResult.Cancel) ? 0 : next()(pWeaponServices, pPlayerWeapon, swapping);
                 };
             });
         }

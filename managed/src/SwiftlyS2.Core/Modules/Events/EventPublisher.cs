@@ -231,6 +231,8 @@ internal static class EventPublisher
                 }
             }
 
+            if (@event.Result == HookResult.Cancel) return 0;
+
             return 1;
         }
         catch (Exception e)
@@ -683,6 +685,9 @@ internal static class EventPublisher
                         return 0;
                     }
                 }
+
+                if (@event.Result == HookResult.Cancel) return 0;
+
                 return 1;
             }
         }

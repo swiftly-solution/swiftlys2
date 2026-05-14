@@ -86,12 +86,15 @@ bool SendNetMessage(CServerSideClient* client, CNetMessage* pData, NetChannelBuf
     auto playerid = client->GetPlayerSlot().Get();
     int msgid = pData->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
 
+    bool stopOriginal = false;
     for (const auto& [id, callback] : g_mServerMessageInternalSendCallbacks) {
         auto res = callback(playerid, msgid, pData);
         if (res == 1) return true;
         else if (res == 2) break;
+        else if (res == 3) stopOriginal = true;
     }
 
+    if (stopOriginal) return true;
     return reinterpret_cast<decltype(&SendNetMessage)>(g_pSendNetMessageHook->GetOriginal())(client, pData, bufType);
 }
 
@@ -103,12 +106,15 @@ bool FilterMessage(INetworkMessageProcessingPreFilterCustom* client, CNetMessage
     auto playerid = client->GetPlayerSlot().Get();
     int msgid = cMsg->GetNetMessage()->GetNetMessageInfo()->m_MessageId;
 
+    bool stopOriginal = false;
     for (const auto& [id, callback] : g_mClientMessageSendCallbacks) {
         auto res = callback(playerid, msgid, cMsg);
         if (res == 1) return true;
         else if (res == 2) break;
+        else if (res == 3) stopOriginal = true;
     }
 
+    if (stopOriginal) return true;
     return reinterpret_cast<decltype(&FilterMessage)>(g_pFilterMessageHook->GetOriginal())(client, cMsg, netchan);
 }
 
@@ -120,11 +126,15 @@ void PostEventAbstractHook(void* _this, CSplitScreenSlot nSlot, bool bLocalOnly,
     CNetMessage* msg = const_cast<CNetMessage*>(pData);
     uint64_t* playermask = (uint64_t*)(clients);
 
+    bool stopOriginal = false;
     for (const auto& [id, callback] : g_mServerMessageSendCallbacks) {
         auto res = callback(playermask, msgid, msg);
         if (res == 1) return;
         else if (res == 2) break;
+        else if (res == 3) stopOriginal = true;
     }
+
+    if (stopOriginal) return;
 
     reinterpret_cast<decltype(&PostEventAbstractHook)>(g_pPostEventAbstractHook->GetOriginal())(_this, nSlot, bLocalOnly, nClientCount, clients, pEvent, pData, nSize, bufType);
 }

@@ -21,8 +21,13 @@ public enum HookResult : uint
 
     /// <summary>
     /// The executions of following hooks will be cancelled, but the original function will continue.
-    /// 
+    ///
     /// Won't work for post hooks.
     /// </summary>
     Handled = 2,
+
+    /// <summary>
+    /// The executions of following hooks will continue and original function will be cancelled.
+    /// </summary>
+    Cancel = 3,
 }

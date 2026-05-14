@@ -89,6 +89,7 @@ void CEntityIOOutput_FireOutputInternal_Hook(CEntityIOOutput* pThis, CEntityInst
         searchOutputs.push_back(((uint64_t)classHash << 32 | hashStar));
     }
 
+    bool stopOriginal = false;
     for (auto& output : searchOutputs)
     {
         bool shouldStop = false;
@@ -104,12 +105,18 @@ void CEntityIOOutput_FireOutputInternal_Hook(CEntityIOOutput* pThis, CEntityInst
                 shouldStop = true;
                 break;
             }
+            else if (result == 3)
+            {
+                stopOriginal = true;
+            }
         }
         if (shouldStop)
         {
             break;
         }
     }
+
+    if (stopOriginal) return;
 
     reinterpret_cast<decltype(&CEntityIOOutput_FireOutputInternal_Hook)>(g_pFireOutputHook->GetOriginal())(pThis, pActivator, pCaller, variantValue, delay, unk01, unk02);
 }
