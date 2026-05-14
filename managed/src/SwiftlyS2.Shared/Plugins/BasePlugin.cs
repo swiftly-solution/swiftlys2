@@ -1,5 +1,3 @@
-using SwiftlyS2.Shared.Misc;
-
 namespace SwiftlyS2.Shared.Plugins;
 
 public abstract class BasePlugin : IPlugin
@@ -22,7 +20,4 @@ public abstract class BasePlugin : IPlugin
     public abstract void Load( bool hotReload );
 
     public abstract void Unload();
-
-    [Obsolete("Not supported.")]
-    public virtual PluginReloadMethod ReloadMethod { get; set; } = PluginReloadMethod.Auto;
 }
