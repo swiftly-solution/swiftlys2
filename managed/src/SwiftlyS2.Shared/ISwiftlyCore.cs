@@ -9,6 +9,7 @@ using SwiftlyS2.Shared.EntitySystem;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.FileSystem;
 using SwiftlyS2.Shared.GameEvents;
+using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Helpers;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Menus;
@@ -53,6 +54,11 @@ public interface ISwiftlyCore
     /// Helpers service.
     /// </summary>
     public IHelpers Helpers { get; }
+
+    /// <summary>
+    /// Game hooks service.
+    /// </summary>
+    public IGameHooks GameHooks { get; }
 
     /// <summary>
     /// Game service.

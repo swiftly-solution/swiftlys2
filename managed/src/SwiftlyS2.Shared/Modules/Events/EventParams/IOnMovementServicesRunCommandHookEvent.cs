@@ -6,6 +6,7 @@ namespace SwiftlyS2.Shared.Events;
 /// <summary>
 /// Called when the movement services run command hook is triggered.
 /// </summary>
+[Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks instead.")]
 public interface IOnMovementServicesRunCommandHookEvent
 {
   /// <summary>
@@ -15,7 +16,7 @@ public interface IOnMovementServicesRunCommandHookEvent
   /// <summary>
   /// The button state.
   /// </summary>
-  public CInButtonState ButtonState { get;  }
+  public CInButtonState ButtonState { get; }
   /// <summary>
   /// The user command protobuf.
   /// </summary>

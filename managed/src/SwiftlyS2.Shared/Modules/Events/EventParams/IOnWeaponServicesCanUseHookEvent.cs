@@ -2,8 +2,10 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.Events;
 
-public interface IOnWeaponServicesCanUseHookEvent {
-  
+[Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks instead.")]
+public interface IOnWeaponServicesCanUseHookEvent
+{
+
   /// <summary>
   /// The weapon services.
   /// </summary>
@@ -22,5 +24,5 @@ public interface IOnWeaponServicesCanUseHookEvent {
   /// This will modify the can use result and stop the following hooks and original function.
   /// </summary>
   /// <param name="result">The result to modify.</param>
-  public void SetResult(bool result);
+  public void SetResult( bool result );
 }

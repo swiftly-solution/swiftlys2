@@ -3,6 +3,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.Events;
 
+[Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks instead.")]
 public interface IOnWeaponServicesDropWeaponHook
 {
 
