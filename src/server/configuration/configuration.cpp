@@ -492,6 +492,16 @@ bool Configuration::Load()
         RegisterConfiguration(wasEdited, config_json, "core", "core", "Menu.Buttons.ScrollBack", "f");
         RegisterConfiguration(wasEdited, config_json, "core", "core", "Menu.Buttons.Exit", "tab");
 
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Enable", true);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Mode", "daily");
+        RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "ConsoleLogger.AvailableModes", { "daily", "map" }, true, " ");
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.Enable", true);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.Mode", "FileCycle", true, " ");
+        RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.AvailableModes", { "FileCycle", "Size", "TimeInterval" }, true, " ");
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.MaximumFiles", 60);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.MaximumSize", 512);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.DeleteOlderThan", 168);
+
         RegisterConfiguration(wasEdited, config_json, "core", "core", "ManualLoadPlugins", false);
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "PluginLoadOrder", {}, true, "\x01");
 
