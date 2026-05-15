@@ -478,121 +478,122 @@ DEFINE_NATIVE("Convars.GetDescription", Bridge_Convars_GetDescription);
 
 // --- ConVar/ConCommand full enumeration and bulk unlock ---
 
-static char* Bridge_Convars_EnumerateAll(int* outSize)
+#pragma pack(push, 1)
+struct ConVarFlatInfo {
+    char name[128];
+    char type[16];
+    char default_value[256];
+    char description[512];
+    uint64_t flags;
+};
+
+struct ConCommandFlatInfo {
+    char name[128];
+    char description[512];
+    uint64_t flags;
+};
+#pragma pack(pop)
+
+static void CopyStr(char* dst, int dstSize, const char* src)
+{
+    if (!src) { dst[0] = '\0'; return; }
+    strncpy(dst, src, dstSize - 1);
+    dst[dstSize - 1] = '\0';
+}
+
+static const char* VarTypeName(EConVarType t)
+{
+    switch (t)
+    {
+        case EConVarType_Bool:       return "bool";
+        case EConVarType_Int16:      return "int16";
+        case EConVarType_UInt16:     return "uint16";
+        case EConVarType_Int32:      return "int32";
+        case EConVarType_UInt32:     return "uint32";
+        case EConVarType_Int64:      return "int64";
+        case EConVarType_UInt64:     return "uint64";
+        case EConVarType_Float32:    return "float32";
+        case EConVarType_Float64:    return "float64";
+        case EConVarType_String:     return "string";
+        case EConVarType_Color:      return "color";
+        case EConVarType_Vector2:    return "vector2";
+        case EConVarType_Vector3:    return "vector3";
+        case EConVarType_Vector4:    return "vector4";
+        case EConVarType_Qangle:     return "qangle";
+        default:                     return "?";
+    }
+}
+
+static void* Bridge_Convars_EnumerateAll(int* outCount)
 {
     static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
     static auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
 
-    std::string json = "[";
-    bool first = true;
+    int count = 0;
+    for (ConVarRef ref = cvars->FindFirstConVar(); ref.IsValidRef(); ref = cvars->FindNextConVar(ref))
+    {
+        ConVarRefAbstract abstract(ref);
+        if (abstract.GetConVarData() && abstract.GetConVarData()->m_pszName) count++;
+    }
 
+    auto* arr = (ConVarFlatInfo*)memory->Alloc(count * sizeof(ConVarFlatInfo));
+    memset(arr, 0, count * sizeof(ConVarFlatInfo));
+
+    int i = 0;
     for (ConVarRef ref = cvars->FindFirstConVar(); ref.IsValidRef(); ref = cvars->FindNextConVar(ref))
     {
         ConVarRefAbstract abstract(ref);
         auto* data = abstract.GetConVarData();
         if (!data || !data->m_pszName) continue;
 
-        const char* typeName = "?";
-        switch (data->m_eVarType)
-        {
-            case EConVarType_Bool:       typeName = "bool"; break;
-            case EConVarType_Int16:      typeName = "int16"; break;
-            case EConVarType_UInt16:     typeName = "uint16"; break;
-            case EConVarType_Int32:      typeName = "int32"; break;
-            case EConVarType_UInt32:     typeName = "uint32"; break;
-            case EConVarType_Int64:      typeName = "int64"; break;
-            case EConVarType_UInt64:     typeName = "uint64"; break;
-            case EConVarType_Float32:    typeName = "float32"; break;
-            case EConVarType_Float64:    typeName = "float64"; break;
-            case EConVarType_String:     typeName = "string"; break;
-            case EConVarType_Color:      typeName = "color"; break;
-            case EConVarType_Vector2:    typeName = "vector2"; break;
-            case EConVarType_Vector3:    typeName = "vector3"; break;
-            case EConVarType_Vector4:    typeName = "vector4"; break;
-            case EConVarType_Qangle:     typeName = "qangle"; break;
-            default: break;
-        }
+        CopyStr(arr[i].name, sizeof(arr[i].name), data->m_pszName);
+        CopyStr(arr[i].type, sizeof(arr[i].type), VarTypeName(data->m_eVarType));
 
-        CBufferString buf;
-        std::string defaultVal = "\"\"";
         if (data->m_defaultValue)
         {
+            CBufferString buf;
             data->DefaultValueToString(buf);
-            defaultVal = "\"" + std::string(buf.Get()) + "\"";
+            CopyStr(arr[i].default_value, sizeof(arr[i].default_value), buf.Get());
         }
 
-        std::string desc = abstract.GetHelpText();
-
-        // Simple manual JSON escaping for name/desc
-        auto esc = [](const std::string& s) -> std::string {
-            std::string out;
-            for (char c : s)
-            {
-                if (c == '"') out += "\\\"";
-                else if (c == '\\') out += "\\\\";
-                else if (c == '\n') out += "\\n";
-                else if (c == '\r') out += "\\r";
-                else if (c == '\t') out += "\\t";
-                else out += c;
-            }
-            return out;
-        };
-
-        if (!first) json += ","; first = false;
-        json += "{\"name\":\"" + esc(data->m_pszName) + "\",\"type\":\"" + typeName +
-                "\",\"default\":" + defaultVal + ",\"flags\":" + std::to_string(data->m_nFlags) +
-                ",\"desc\":\"" + esc(desc) + "\"}";
+        CopyStr(arr[i].description, sizeof(arr[i].description), abstract.GetHelpText());
+        arr[i].flags = data->m_nFlags;
+        i++;
     }
-    json += "]";
 
-    int len = (int)json.size();
-    *outSize = len;
-    char* out = (char*)memory->Alloc(len + 1);
-    memory->Copy(out, (void*)json.data(), len);
-    out[len] = '\0';
-    return out;
+    *outCount = count;
+    return arr;
 }
 
-static char* Bridge_Commands_EnumerateAll(int* outSize)
+static void* Bridge_Commands_EnumerateAll(int* outCount)
 {
     static auto memory = g_ifaceService.FetchInterface<IMemoryAllocator>(MEMORYALLOCATOR_INTERFACE_VERSION);
     static auto cvars = g_ifaceService.FetchInterface<ICvar>(CVAR_INTERFACE_VERSION);
 
-    std::string json = "[";
-    bool first = true;
+    int count = 0;
+    for (ConCommandRef ref = cvars->FindFirstConCommand(); ref.IsValidRef(); ref = cvars->FindNextConCommand(ref))
+    {
+        auto* data = cvars->GetConCommandData(ref);
+        if (data && data->m_pszName) count++;
+    }
 
+    auto* arr = (ConCommandFlatInfo*)memory->Alloc(count * sizeof(ConCommandFlatInfo));
+    memset(arr, 0, count * sizeof(ConCommandFlatInfo));
+
+    int i = 0;
     for (ConCommandRef ref = cvars->FindFirstConCommand(); ref.IsValidRef(); ref = cvars->FindNextConCommand(ref))
     {
         auto* data = cvars->GetConCommandData(ref);
         if (!data || !data->m_pszName) continue;
 
-        auto esc = [](const std::string& s) -> std::string {
-            std::string out;
-            for (char c : s)
-            {
-                if (c == '"') out += "\\\"";
-                else if (c == '\\') out += "\\\\";
-                else if (c == '\n') out += "\\n";
-                else if (c == '\r') out += "\\r";
-                else if (c == '\t') out += "\\t";
-                else out += c;
-            }
-            return out;
-        };
-
-        if (!first) json += ","; first = false;
-        json += "{\"name\":\"" + esc(data->m_pszName) + "\",\"flags\":" +
-                std::to_string(data->m_nFlags) + ",\"desc\":\"" +
-                esc(data->m_pszHelpString ? data->m_pszHelpString : "") + "\"}";
+        CopyStr(arr[i].name, sizeof(arr[i].name), data->m_pszName);
+        CopyStr(arr[i].description, sizeof(arr[i].description), data->m_pszHelpString ? data->m_pszHelpString : "");
+        arr[i].flags = data->m_nFlags;
+        i++;
     }
-    json += "]";
 
-    int len = (int)json.size();
-    *outSize = len;
-    char* out = (char*)memory->Alloc(len + 1);
-    memory->Copy(out, (void*)json.data(), len);
-    out[len] = '\0';
-    return out;
+    *outCount = count;
+    return arr;
 }
 
 static int Bridge_Convars_UnlockAll(uint64_t flagsToRemove)

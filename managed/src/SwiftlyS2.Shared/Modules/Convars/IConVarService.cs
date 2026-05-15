@@ -86,16 +86,14 @@ public interface IConVarService
     public void ReplicateToAll(string name, string value);
 
     /// <summary>
-    /// Enumerate all registered convars and return them as a JSON array.
-    /// Each entry has name, type, default, flags (raw uint64), and desc fields.
+    /// Enumerate all registered convars.
     /// </summary>
-    public string EnumerateAllConVars();
+    public IReadOnlyList<ConVarInfo> EnumerateAllConVars();
 
     /// <summary>
-    /// Enumerate all registered concommands and return them as a JSON array.
-    /// Each entry has name, flags (raw uint64), and desc fields.
+    /// Enumerate all registered concommands.
     /// </summary>
-    public string EnumerateAllCommands();
+    public IReadOnlyList<ConCommandInfo> EnumerateAllCommands();
 
     /// <summary>
     /// Remove the specified flags from all convars. Returns count of convars unlocked.
@@ -108,4 +106,20 @@ public interface IConVarService
     /// Default: HIDDEN | DEVELOPMENT_ONLY | CLIENTDLL | DEFENSIVE.
     /// </summary>
     public int UnlockAllCommands(ConvarFlags flagsToRemove = ConvarFlags.HIDDEN | ConvarFlags.DEVELOPMENT_ONLY | ConvarFlags.CLIENTDLL | ConvarFlags.DEFENSIVE);
+}
+
+public record ConVarInfo
+{
+    public required string Name { get; init; }
+    public required string Type { get; init; }
+    public required string Default { get; init; }
+    public required ulong Flags { get; init; }
+    public required string Description { get; init; }
+}
+
+public record ConCommandInfo
+{
+    public required string Name { get; init; }
+    public required ulong Flags { get; init; }
+    public required string Description { get; init; }
 }

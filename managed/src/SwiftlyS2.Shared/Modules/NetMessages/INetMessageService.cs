@@ -36,24 +36,27 @@ public interface INetMessageService
 
   /// <summary>
   /// Raw handler for ALL client net messages (untyped).
-  /// Receives the message as a google::protobuf::Message* pointer (already offset from CNetMessage*).
-  /// Use <see cref="GetMessageNameById"/> to resolve the message name,
-  /// and <see cref="SwiftlyS2.Shared.Memory.IMemoryService.DebugProtobuf"/> to get its DebugString.
   /// </summary>
-  delegate HookResult RawClientNetMessageHandler( int playerId, int msgId, nint pMessage );
+  /// <param name="playerId">The player that sent the message.</param>
+  /// <param name="msg">The untyped net message with MessageId, MessageName, Accessor, and GetDebugString().</param>
+  /// <returns>The hook result.</returns>
+  delegate HookResult RawClientNetMessageHandler( int playerId, IUntypedNetMessage msg );
 
   /// <summary>
   /// Raw handler for ALL server net messages (untyped).
-  /// pPlayerMask is a pointer to a uint64 bitmap of recipients.
-  /// pMessage is a google::protobuf::Message* pointer (already offset from CNetMessage*).
   /// </summary>
-  delegate HookResult RawServerNetMessageHandler( nint pPlayerMask, int msgId, nint pMessage );
+  /// <param name="msg">The untyped net message with MessageId, MessageName, Accessor, and GetDebugString().</param>
+  /// <param name="pPlayerMask">Pointer to a uint64 bitmap of recipients.</param>
+  /// <returns>The hook result.</returns>
+  delegate HookResult RawServerNetMessageHandler( IUntypedNetMessage msg, nint pPlayerMask );
 
   /// <summary>
   /// Raw handler for ALL server net internal messages (untyped).
-  /// pMessage is a google::protobuf::Message* pointer (already offset from CNetMessage*).
   /// </summary>
-  delegate HookResult RawServerNetMessageInternalHandler( int playerId, int msgId, nint pMessage );
+  /// <param name="playerId">The target player ID.</param>
+  /// <param name="msg">The untyped net message with MessageId, MessageName, Accessor, and GetDebugString().</param>
+  /// <returns>The hook result.</returns>
+  delegate HookResult RawServerNetMessageInternalHandler( int playerId, IUntypedNetMessage msg );
 
   /// <summary>
   /// Get the unscoped name of a net message by its ID.
@@ -95,7 +98,8 @@ public interface INetMessageService
   /// </summary>
   /// <param name="callback">
   /// Called for every incoming client → server message.
-  /// Parameters: playerId, msgId, pMessage (raw protobuf pointer).
+  /// The message is encapsulated in <see cref="IUntypedNetMessage"/> which provides
+  /// MessageId, MessageName, an <see cref="IProtobufAccessor"/> for field access, and GetDebugString().
   /// </param>
   /// <returns>Hook identifier for later unhook.</returns>
   public Guid HookClientMessageRaw( RawClientNetMessageHandler callback );
@@ -105,7 +109,7 @@ public interface INetMessageService
   /// </summary>
   /// <param name="callback">
   /// Called for every outgoing server → client broadcast message.
-  /// Parameters: pPlayerMask (uint64* recipients bitmap), msgId, pMessage.
+  /// The message is encapsulated in <see cref="IUntypedNetMessage"/>.
   /// </param>
   /// <returns>Hook identifier for later unhook.</returns>
   public Guid HookServerMessageRaw( RawServerNetMessageHandler callback );
@@ -115,7 +119,7 @@ public interface INetMessageService
   /// </summary>
   /// <param name="callback">
   /// Called for every outgoing server → client unicast message.
-  /// Parameters: playerId, msgId, pMessage.
+  /// The message is encapsulated in <see cref="IUntypedNetMessage"/>.
   /// </param>
   /// <returns>Hook identifier for later unhook.</returns>
   public Guid HookServerMessageInternalRaw( RawServerNetMessageInternalHandler callback );
@@ -157,4 +161,12 @@ public interface INetMessageService
   /// <typeparam name="T">Net message type.</typeparam>
   /// <param name="configureMessage">The action to configure the net message and recipient filter.</param>
   public void Send<T>( Action<T> configureMessage ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable;
+}
+
+public interface IUntypedNetMessage
+{
+    int MessageId { get; }
+    string MessageName { get; }
+    IProtobufAccessor Accessor { get; }
+    string GetDebugString();
 }

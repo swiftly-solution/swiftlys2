@@ -124,15 +124,13 @@ internal static class NativeCommands
         _UnregisterClientChatListener(callbackID);
     }
 
-    private unsafe static delegate* unmanaged<int*, byte*> _EnumerateAll;
+    private unsafe static delegate* unmanaged<int*, nint> _EnumerateAll;
 
-    public unsafe static string EnumerateAll()
+    public unsafe static (nint ptr, int count) EnumerateAll()
     {
-        var length = 0;
-        var returnedPtr = _EnumerateAll(&length);
-        var outString = StringAlloc.CreateCSharpString((nint)returnedPtr, length);
-        NativeAllocator.Free((nint)returnedPtr);
-        return outString;
+        var count = 0;
+        var ptr = _EnumerateAll(&count);
+        return (ptr, count);
     }
 
     private unsafe static delegate* unmanaged<ulong, int> _UnlockAll;

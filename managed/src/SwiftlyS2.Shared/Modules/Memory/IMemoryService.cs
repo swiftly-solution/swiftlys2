@@ -117,13 +117,12 @@ public interface IMemoryService
     public nint Resize( nint pointer, ulong newSize );
 
     /// <summary>
-    /// Walk all schema fields of an entity and return them as a JSON array.
-    /// Each field has name, type, offset, value, and children (for nested types).
+    /// Walk all schema fields of an entity.
     /// </summary>
     /// <param name="entity">The entity pointer.</param>
     /// <param name="className">The vtable/schema class name of the entity (for schema lookup).</param>
-    /// <returns>JSON string of schema fields, or "[]" if schema not found.</returns>
-    public string GetEntityFields( nint entity, string className );
+    /// <returns>Schema fields with nested children, or an empty list if schema not found.</returns>
+    public IReadOnlyList<EntityFieldInfo> GetEntityFields( nint entity, string className );
 
     /// <summary>
     /// Get the protobuf DebugString for a message pointer (Address from ITypedProtobuf).

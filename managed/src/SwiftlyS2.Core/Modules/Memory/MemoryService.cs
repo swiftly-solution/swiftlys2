@@ -192,9 +192,40 @@ internal class MemoryService : IMemoryService, IDisposable
         return serverSideClient;
     }
 
-    public string GetEntityFields( nint entity, string className )
+    public IReadOnlyList<EntityFieldInfo> GetEntityFields( nint entity, string className )
     {
-        return NativeSchema.GetEntityFields( entity, className );
+        var raw = NativeSchema.GetEntityFields( entity, className );
+        if (string.IsNullOrEmpty(raw)) return [];
+
+        var root = new List<EntityFieldInfo>();
+        var stack = new List<List<EntityFieldInfo>>();
+
+        foreach (var line in raw.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+        {
+            var parts = line.Split('\t');
+            if (parts.Length < 5) continue;
+
+            var depth = int.Parse(parts[0]);
+            var field = new EntityFieldInfo
+            {
+                Name = parts[1],
+                Type = parts[2],
+                Offset = int.Parse(parts[3]),
+                Value = string.Join("\t", parts.Skip(4))
+            };
+
+            while (stack.Count > depth)
+                stack.RemoveAt(stack.Count - 1);
+
+            var target = depth == 0 ? root : stack[depth - 1];
+            target.Add(field);
+
+            while (stack.Count <= depth)
+                stack.Add(field.Children);
+            stack[depth] = field.Children;
+        }
+
+        return root;
     }
 
     public string DebugProtobuf( nint protoMsgPtr )

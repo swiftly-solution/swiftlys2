@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Natives;
@@ -5,6 +6,24 @@ using SwiftlyS2.Shared.NetMessages;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 
 namespace SwiftlyS2.Core.Convars;
+
+[StructLayout(LayoutKind.Sequential, Pack = 1)]
+internal unsafe struct ConVarFlatInfo
+{
+    public fixed byte _name[128];
+    public fixed byte _type[16];
+    public fixed byte _defaultValue[256];
+    public fixed byte _description[512];
+    public ulong _flags;
+}
+
+[StructLayout(LayoutKind.Sequential, Pack = 1)]
+internal unsafe struct ConCommandFlatInfo
+{
+    public fixed byte _name[128];
+    public fixed byte _description[512];
+    public ulong _flags;
+}
 
 internal enum EConVarType : int
 {
@@ -301,18 +320,52 @@ internal class ConVarService : IConVarService
         });
     }
 
-    public string EnumerateAllConVars()
+    private static unsafe string ReadFlatStr(byte* ptr) => Marshal.PtrToStringUTF8((nint)ptr) ?? string.Empty;
+
+    public unsafe IReadOnlyList<ConVarInfo> EnumerateAllConVars()
     {
-        try { return NativeConvars.EnumerateAll(); }
-        catch (NullReferenceException) { return "[]"; }
-        catch (AccessViolationException) { return "[]"; }
+        var (ptr, count) = NativeConvars.EnumerateAll();
+        if (count == 0) return [];
+        try
+        {
+            var result = new ConVarInfo[count];
+            var flat = (ConVarFlatInfo*)ptr;
+            for (int i = 0; i < count; i++)
+            {
+                result[i] = new ConVarInfo
+                {
+                    Name = ReadFlatStr(flat[i]._name),
+                    Type = ReadFlatStr(flat[i]._type),
+                    Default = ReadFlatStr(flat[i]._defaultValue),
+                    Description = ReadFlatStr(flat[i]._description),
+                    Flags = flat[i]._flags
+                };
+            }
+            return result;
+        }
+        finally { NativeAllocator.Free(ptr); }
     }
 
-    public string EnumerateAllCommands()
+    public unsafe IReadOnlyList<ConCommandInfo> EnumerateAllCommands()
     {
-        try { return NativeCommands.EnumerateAll(); }
-        catch (NullReferenceException) { return "[]"; }
-        catch (AccessViolationException) { return "[]"; }
+        var (ptr, count) = NativeCommands.EnumerateAll();
+        if (count == 0) return [];
+        try
+        {
+            var result = new ConCommandInfo[count];
+            var flat = (ConCommandFlatInfo*)ptr;
+            for (int i = 0; i < count; i++)
+            {
+                result[i] = new ConCommandInfo
+                {
+                    Name = ReadFlatStr(flat[i]._name),
+                    Description = ReadFlatStr(flat[i]._description),
+                    Flags = flat[i]._flags
+                };
+            }
+            return result;
+        }
+        finally { NativeAllocator.Free(ptr); }
     }
 
     public int UnlockAllConVars(ConvarFlags flagsToRemove = ConvarFlags.HIDDEN | ConvarFlags.DEVELOPMENT_ONLY | ConvarFlags.CLIENTDLL | ConvarFlags.DEFENSIVE)

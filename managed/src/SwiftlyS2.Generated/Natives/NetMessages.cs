@@ -959,8 +959,7 @@ internal static class NativeNetMessages
 
     private unsafe static delegate* unmanaged<int> _GetCNetMessageSize;
 
-    /// <summary>Compile-time sizeof(CNetMessage). Offset from CNetMessage* to google::protobuf::Message*.</summary>
-    public unsafe static int GetCNetMessageSize()
+    internal unsafe static int GetCNetMessageSize()
     {
         return _GetCNetMessageSize();
     }

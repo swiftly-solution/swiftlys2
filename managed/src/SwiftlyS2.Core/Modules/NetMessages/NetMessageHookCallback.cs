@@ -180,6 +180,26 @@ internal class NetMessageServerInternalHookCallback<T> : NetMessageHookCallback 
 
 }
 
+internal sealed class UntypedNetMessage : IUntypedNetMessage
+{
+    private readonly IProtobufAccessor _accessor;
+    private readonly int _msgId;
+
+    public int MessageId => _msgId;
+
+    public string MessageName => NativeNetMessages.GetMessageNameById(_msgId);
+
+    public IProtobufAccessor Accessor => _accessor;
+
+    public string GetDebugString() => NativeNetMessages.DebugString(_accessor.Address);
+
+    internal UntypedNetMessage(nint protoPtr, int msgId)
+    {
+        _accessor = new ProtobufAccessor(protoPtr);
+        _msgId = msgId;
+    }
+}
+
 // ── Raw (untyped) hooks – catch ALL messages ──────────────────────
 
 internal class NetMessageClientRawHookCallback : NetMessageHookCallback
@@ -190,13 +210,12 @@ internal class NetMessageClientRawHookCallback : NetMessageHookCallback
     private nint _unmanagedCallbackPtr;
     private ulong _nativeListenerId;
     private ILogger<NetMessageClientRawHookCallback> _logger;
-    private readonly int _cnetMsgSize;
+    private static readonly int CNetMsgOffset = NativeNetMessages.GetCNetMessageSize();
 
     public NetMessageClientRawHookCallback( INetMessageService.RawClientNetMessageHandler callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
     {
         Guid = Guid.NewGuid();
         _logger = LoggerFactory.CreateLogger<NetMessageClientRawHookCallback>();
-        _cnetMsgSize = NativeNetMessages.GetCNetMessageSize();
 
         _callback = callback;
 
@@ -204,8 +223,8 @@ internal class NetMessageClientRawHookCallback : NetMessageHookCallback
         {
             try
             {
-                // pMessage is CNetMessage*; shift by sizeof(CNetMessage) to get google::protobuf::Message*
-                var result = _callback(playerId, msgId, pMessage + _cnetMsgSize);
+                var msg = new UntypedNetMessage(pMessage + CNetMsgOffset, msgId);
+                var result = _callback(playerId, msg);
                 return result;
             }
             catch (Exception e)
@@ -234,13 +253,12 @@ internal class NetMessageServerRawHookCallback : NetMessageHookCallback
     private nint _unmanagedCallbackPtr;
     private ulong _nativeListenerId;
     private ILogger<NetMessageServerRawHookCallback> _logger;
-    private readonly int _cnetMsgSize;
+    private static readonly int CNetMsgOffset = NativeNetMessages.GetCNetMessageSize();
 
     public NetMessageServerRawHookCallback( INetMessageService.RawServerNetMessageHandler callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
     {
         Guid = Guid.NewGuid();
         _logger = LoggerFactory.CreateLogger<NetMessageServerRawHookCallback>();
-        _cnetMsgSize = NativeNetMessages.GetCNetMessageSize();
 
         _callback = callback;
 
@@ -248,7 +266,8 @@ internal class NetMessageServerRawHookCallback : NetMessageHookCallback
         {
             try
             {
-                var result = _callback(pPlayerMask, msgId, pMessage + _cnetMsgSize);
+                var msg = new UntypedNetMessage(pMessage + CNetMsgOffset, msgId);
+                var result = _callback(msg, pPlayerMask);
                 return result;
             }
             catch (Exception e)
@@ -277,13 +296,12 @@ internal class NetMessageServerInternalRawHookCallback : NetMessageHookCallback
     private nint _unmanagedCallbackPtr;
     private ulong _nativeListenerId;
     private ILogger<NetMessageServerInternalRawHookCallback> _logger;
-    private readonly int _cnetMsgSize;
+    private static readonly int CNetMsgOffset = NativeNetMessages.GetCNetMessageSize();
 
     public NetMessageServerInternalRawHookCallback( INetMessageService.RawServerNetMessageInternalHandler callback, ILoggerFactory loggerFactory, IContextedProfilerService profiler ) : base(loggerFactory, profiler)
     {
         Guid = Guid.NewGuid();
         _logger = LoggerFactory.CreateLogger<NetMessageServerInternalRawHookCallback>();
-        _cnetMsgSize = NativeNetMessages.GetCNetMessageSize();
 
         _callback = callback;
 
@@ -291,7 +309,8 @@ internal class NetMessageServerInternalRawHookCallback : NetMessageHookCallback
         {
             try
             {
-                var result = _callback(playerId, msgId, pMessage + _cnetMsgSize);
+                var msg = new UntypedNetMessage(pMessage + CNetMsgOffset, msgId);
+                var result = _callback(playerId, msg);
                 return result;
             }
             catch (Exception e)
