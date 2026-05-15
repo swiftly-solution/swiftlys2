@@ -110,16 +110,24 @@ public interface IConVarService
 
 public record ConVarInfo
 {
+    /// <summary>The convar name (e.g. "sv_cheats").</summary>
     public required string Name { get; init; }
+    /// <summary>Value type: "bool", "int32", "float64", "string", "vector3", etc.</summary>
     public required string Type { get; init; }
-    public required string Default { get; init; }
+    /// <summary>Default value as a string, or empty if none.</summary>
+    public required string DefaultValue { get; init; }
+    /// <summary>Raw flags bitmask (see <see cref="ConvarFlags"/>).</summary>
     public required ulong Flags { get; init; }
+    /// <summary>Help/description text.</summary>
     public required string Description { get; init; }
 }
 
 public record ConCommandInfo
 {
+    /// <summary>The command name (e.g. "give").</summary>
     public required string Name { get; init; }
+    /// <summary>Raw flags bitmask (see <see cref="ConvarFlags"/>).</summary>
     public required ulong Flags { get; init; }
+    /// <summary>Help/description text.</summary>
     public required string Description { get; init; }
 }

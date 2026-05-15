@@ -150,6 +150,54 @@ internal class NetMessageService : INetMessageService, IDisposable
         }
     }
 
+    public void UnhookClientMessageRaw()
+    {
+        lock (_lock)
+        {
+            _ = _callbacks.RemoveAll(callback =>
+            {
+                if (callback is NetMessageClientRawHookCallback raw)
+                {
+                    raw.Dispose();
+                    return true;
+                }
+                return false;
+            });
+        }
+    }
+
+    public void UnhookServerMessageRaw()
+    {
+        lock (_lock)
+        {
+            _ = _callbacks.RemoveAll(callback =>
+            {
+                if (callback is NetMessageServerRawHookCallback raw)
+                {
+                    raw.Dispose();
+                    return true;
+                }
+                return false;
+            });
+        }
+    }
+
+    public void UnhookServerMessageInternalRaw()
+    {
+        lock (_lock)
+        {
+            _ = _callbacks.RemoveAll(callback =>
+            {
+                if (callback is NetMessageServerInternalRawHookCallback raw)
+                {
+                    raw.Dispose();
+                    return true;
+                }
+                return false;
+            });
+        }
+    }
+
     private nint AllocateNetMessage( int msgId )
     {
         var handle = NativeNetMessages.AllocateNetMessageByID(msgId);

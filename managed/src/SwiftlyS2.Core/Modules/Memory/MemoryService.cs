@@ -206,12 +206,15 @@ internal class MemoryService : IMemoryService, IDisposable
             if (parts.Length < 5) continue;
 
             var depth = int.Parse(parts[0]);
+            var children = new List<EntityFieldInfo>();
             var field = new EntityFieldInfo
             {
                 Name = parts[1],
                 Type = parts[2],
                 Offset = int.Parse(parts[3]),
-                Value = string.Join("\t", parts.Skip(4))
+                Value = string.Join("\t", parts.Skip(4)),
+                Depth = depth,
+                Children = children
             };
 
             while (stack.Count > depth)
@@ -221,8 +224,8 @@ internal class MemoryService : IMemoryService, IDisposable
             target.Add(field);
 
             while (stack.Count <= depth)
-                stack.Add(field.Children);
-            stack[depth] = field.Children;
+                stack.Add(children);
+            stack[depth] = children;
         }
 
         return root;

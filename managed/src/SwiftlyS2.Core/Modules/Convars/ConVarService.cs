@@ -336,7 +336,7 @@ internal class ConVarService : IConVarService
                 {
                     Name = ReadFlatStr(flat[i]._name),
                     Type = ReadFlatStr(flat[i]._type),
-                    Default = ReadFlatStr(flat[i]._defaultValue),
+                    DefaultValue = ReadFlatStr(flat[i]._defaultValue),
                     Description = ReadFlatStr(flat[i]._description),
                     Flags = flat[i]._flags
                 };

@@ -148,6 +148,23 @@ public interface INetMessageService
   /// <typeparam name="T">Server net message type.</typeparam>
   public void UnhookServerMessageInternal<T>() where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable;
 
+  // ── Raw unhook ────────────────────────────────────────────────────
+
+  /// <summary>
+  /// Unhooks all raw client net message handlers.
+  /// </summary>
+  public void UnhookClientMessageRaw();
+
+  /// <summary>
+  /// Unhooks all raw server net message handlers.
+  /// </summary>
+  public void UnhookServerMessageRaw();
+
+  /// <summary>
+  /// Unhooks all raw server net internal message handlers.
+  /// </summary>
+  public void UnhookServerMessageInternalRaw();
+
   /// <summary>
   /// Creates a new net message of specified type.
   /// </summary>
@@ -163,10 +180,19 @@ public interface INetMessageService
   public void Send<T>( Action<T> configureMessage ) where T : ITypedProtobuf<T>, INetMessage<T>, IDisposable;
 }
 
+/// <summary>
+/// Represents an intercepted network message whose concrete type is not known at compile time.
+/// Provides access to the message identity, raw protobuf fields via <see cref="IProtobufAccessor"/>,
+/// and a human-readable <see cref="GetDebugString"/>.
+/// </summary>
 public interface IUntypedNetMessage
 {
+    /// <summary>The network message ID (e.g. 21 for CCLCMsg_Move).</summary>
     int MessageId { get; }
+    /// <summary>The unscoped message name (e.g. "CCLCMsg_Move").</summary>
     string MessageName { get; }
+    /// <summary>Accessor for reading and writing protobuf fields by name.</summary>
     IProtobufAccessor Accessor { get; }
+    /// <summary>Returns the protobuf message's DebugString (human-readable multi-line text).</summary>
     string GetDebugString();
 }
