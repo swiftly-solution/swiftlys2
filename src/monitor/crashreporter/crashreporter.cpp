@@ -78,6 +78,8 @@ static bool g_dumpWritten = false;
 void RegisterCrashHandlers();
 void UnregisterCrashHandlers();
 
+extern void ConsoleLogger_FlushForCrash();
+
 void CrashReporter::Init()
 {
     auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
@@ -172,6 +174,8 @@ void CrashReporter::ReportPreventionIncident(std::string category, std::string r
 
 inline void ReportCrashIncident(const std::string& crashDir, void* exceptionInfo, uint64_t processIdOverride = 0, uint64_t threadIdOverride = 0)
 {
+    ConsoleLogger_FlushForCrash();
+
     auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
     auto tracerLevel = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION)->GetDotnetCrashTracerLevel();
     if (tracerLevel > 0)

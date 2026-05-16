@@ -53,6 +53,8 @@
 #include <public/tier1/convar.h>
 #include <thread>
 
+#include <monitor/consolelogger/consolelogger.h>
+
 SwiftlyCore g_SwiftlyCore;
 InterfacesManager g_ifaceService;
 std::thread::id g_mainThreadId;
@@ -214,6 +216,9 @@ bool SwiftlyCore::Load(BridgeKind_t kind)
 
     auto consoleoutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
     consoleoutput->Initialize();
+
+    g_ConsoleLogger.Initialize();
+
     if (bool* b = std::get_if<bool>(&configuration->GetValue("core.ConsoleFilter")))
     {
         if (*b)
@@ -339,6 +344,8 @@ bool SwiftlyCore::Unload()
     StopFixes();
 
     ShutdownGameSystem();
+
+    g_ConsoleLogger.Shutdown();
 
     auto crashreporter = g_ifaceService.FetchInterface<ICrashReporter>(CRASHREPORTER_INTERFACE_VERSION);
     crashreporter->Shutdown();
