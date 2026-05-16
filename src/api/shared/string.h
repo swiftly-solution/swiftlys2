@@ -56,6 +56,7 @@ std::string str_toupper(std::string s);
 std::string get_uuid();
 std::string TerminalProcessColor(std::string str);
 std::string ClearTerminalColors(std::string str);
+std::string StripAnsiEscapes(std::string str);
 std::string GetTerminalStringColor(std::string plugin_name);
 std::vector<std::string> TokenizeCommand(std::string cmd);
 std::string RemoveHtmlTags(std::string input);
