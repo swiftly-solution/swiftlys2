@@ -79,12 +79,13 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnTick()
     {
+        if (OnTick == null)
+        {
+            return;
+        }
+
         try
         {
-            if (OnTick == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnTick");
             OnTick.Invoke();
         }
@@ -103,12 +104,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnWorldUpdate()
     {
+        if (OnWorldUpdate == null)
+        {
+            return;
+        }
         try
         {
-            if (OnWorldUpdate == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnWorldUpdate");
             OnWorldUpdate.Invoke();
         }
@@ -127,12 +128,13 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnClientConnected( ref OnClientConnectedEvent @event )
     {
+        if (OnClientConnected == null)
+        {
+            return;
+        }
+
         try
         {
-            if (OnClientConnected == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnClientConnected");
             OnClientConnected.Invoke(@event);
         }
@@ -151,12 +153,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnClientDisconnected( ref OnClientDisconnectedEvent @event )
     {
+        if (OnClientDisconnected == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientDisconnected == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnClientDisconnected");
             OnClientDisconnected.Invoke(@event);
         }
@@ -175,12 +177,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnClientKeyStateChanged( ref OnClientKeyStateChangedEvent @event )
     {
+        if (OnClientKeyStateChanged == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientKeyStateChanged == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnClientKeyStateChanged");
             OnClientKeyStateChanged.Invoke(@event);
         }
@@ -199,12 +201,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnClientPutInServer( ref OnClientPutInServerEvent @event )
     {
+        if (OnClientPutInServer == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientPutInServer == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnClientPutInServer");
             OnClientPutInServer.Invoke(@event);
         }
@@ -223,12 +225,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnClientSteamAuthorize( ref OnClientSteamAuthorizeEvent @event )
     {
+        if (OnClientSteamAuthorize == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientSteamAuthorize == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnClientSteamAuthorize");
             OnClientSteamAuthorize.Invoke(@event);
         }
@@ -247,12 +249,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnClientSteamAuthorizeFail( ref OnClientSteamAuthorizeFailEvent @event )
     {
+        if (OnClientSteamAuthorizeFail == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientSteamAuthorizeFail == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnClientSteamAuthorizeFail");
             OnClientSteamAuthorizeFail.Invoke(@event);
         }
@@ -271,12 +273,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityCreated( ref OnEntityCreatedEvent @event )
     {
+        if (OnEntityCreated == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityCreated == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntityCreated");
             OnEntityCreated.Invoke(@event);
         }
@@ -295,12 +297,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnClientVoice( ref OnClientVoiceEvent @event )
     {
+        if (OnClientVoice == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientVoice == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnClientVoice");
             OnClientVoice.Invoke(@event);
         }
@@ -319,12 +321,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityDeleted( ref OnEntityDeletedEvent @event )
     {
+        if (OnEntityDeleted == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityDeleted == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntityDeleted");
             OnEntityDeleted.Invoke(@event);
         }
@@ -343,12 +345,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityParentChanged( ref OnEntityParentChangedEvent @event )
     {
+        if (OnEntityParentChanged == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityParentChanged == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntityParentChanged");
             OnEntityParentChanged.Invoke(@event);
         }
@@ -367,12 +369,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntitySpawned( ref OnEntitySpawnedEvent @event )
     {
+        if (OnEntitySpawned == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntitySpawned == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntitySpawned");
             OnEntitySpawned.Invoke(@event);
         }
@@ -391,12 +393,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnMapLoad( ref OnMapLoadEvent @event )
     {
+        if (OnMapLoad == null)
+        {
+            return;
+        }
         try
         {
-            if (OnMapLoad == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnMapLoad");
             OnMapLoad.Invoke(@event);
         }
@@ -415,12 +417,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnMapUnload( ref OnMapUnloadEvent @event )
     {
+        if (OnMapUnload == null)
+        {
+            return;
+        }
         try
         {
-            if (OnMapUnload == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnMapUnload");
             OnMapUnload.Invoke(@event);
         }
@@ -439,12 +441,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnClientProcessUsercmds( ref OnClientProcessUsercmdsEvent @event )
     {
+        if (OnClientProcessUsercmds == null)
+        {
+            return;
+        }
         try
         {
-            if (OnClientProcessUsercmds == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnClientProcessUsercmds");
             OnClientProcessUsercmds.Invoke(@event);
         }
@@ -463,12 +465,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityTakeDamage( ref OnEntityTakeDamageEvent @event )
     {
+        if (OnEntityTakeDamage == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityTakeDamage == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntityTakeDamage");
             OnEntityTakeDamage.Invoke(@event);
         }
@@ -487,12 +489,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnPrecacheResource( ref OnPrecacheResourceEvent @event )
     {
+        if (OnPrecacheResource == null)
+        {
+            return;
+        }
         try
         {
-            if (OnPrecacheResource == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnPrecacheResource");
             OnPrecacheResource.Invoke(@event);
         }
@@ -511,12 +513,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityStartTouch( ref OnEntityStartTouchEvent @event )
     {
+        if (OnEntityStartTouch == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityStartTouch == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntityStartTouch");
             OnEntityStartTouch.Invoke(@event);
         }
@@ -535,12 +537,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityTouch( ref OnEntityTouchEvent @event )
     {
+        if (OnEntityTouch == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityTouch == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntityTouch");
             OnEntityTouch.Invoke(@event);
         }
@@ -559,12 +561,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityEndTouch( ref OnEntityEndTouchEvent @event )
     {
+        if (OnEntityEndTouch == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityEndTouch == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntityEndTouch");
             OnEntityEndTouch.Invoke(@event);
         }
@@ -583,12 +585,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnSteamAPIActivatedHook()
     {
+        if (OnSteamAPIActivated == null)
+        {
+            return;
+        }
         try
         {
-            if (OnSteamAPIActivated == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnSteamAPIActivatedHook");
             OnSteamAPIActivated.Invoke();
         }
@@ -607,12 +609,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnItemServicesCanAcquireHook( ref OnItemServicesCanAcquireHookEvent @event )
     {
+        if (OnItemServicesCanAcquireHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnItemServicesCanAcquireHook == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnItemServicesCanAcquireHook");
             OnItemServicesCanAcquireHook.Invoke(@event);
         }
@@ -631,12 +633,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnWeaponServicesCanUseHook( ref OnWeaponServicesCanUseHookEvent @event )
     {
+        if (OnWeaponServicesCanUseHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnWeaponServicesCanUseHook == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnWeaponServicesCanUseHook");
             OnWeaponServicesCanUseHook.Invoke(@event);
         }
@@ -655,12 +657,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnConsoleOutput( ref OnConsoleOutputEvent @event )
     {
+        if (OnConsoleOutput == null)
+        {
+            return;
+        }
         try
         {
-            if (OnConsoleOutput == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnConsoleOutput");
             OnConsoleOutput.Invoke(@event);
         }
@@ -679,12 +681,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnConVarValueChanged( ref OnConVarValueChanged @event )
     {
+        if (OnConVarValueChanged == null)
+        {
+            return;
+        }
         try
         {
-            if (OnConVarValueChanged == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnConVarValueChanged");
             OnConVarValueChanged.Invoke(@event);
         }
@@ -703,12 +705,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnConCommandCreated( ref OnConCommandCreated @event )
     {
+        if (OnConCommandCreated == null)
+        {
+            return;
+        }
         try
         {
-            if (OnConCommandCreated == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnConCommandCreated");
             OnConCommandCreated.Invoke(@event);
         }
@@ -727,12 +729,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnConVarCreated( ref OnConVarCreated @event )
     {
+        if (OnConVarCreated == null)
+        {
+            return;
+        }
         try
         {
-            if (OnConVarCreated == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnConVarCreated");
             OnConVarCreated.Invoke(@event);
         }
@@ -751,12 +753,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnCommandExecuteHook( ref OnCommandExecuteHookEvent @event )
     {
+        if (OnCommandExecuteHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnCommandExecuteHook == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnCommandExecuteHook");
             OnCommandExecuteHook.Invoke(@event);
         }
@@ -775,12 +777,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnMovementServicesRunCommandHook( ref OnMovementServicesRunCommandHookEvent @event )
     {
+        if (OnMovementServicesRunCommandHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnMovementServicesRunCommandHook == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnMovementServicesRunCommandHook");
             OnMovementServicesRunCommandHook.Invoke(@event);
         }
@@ -799,12 +801,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnPlayerPawnPostThinkHook( ref OnPlayerPawnPostThinkHookEvent @event )
     {
+        if (OnPlayerPawnPostThink == null)
+        {
+            return;
+        }
         try
         {
-            if (OnPlayerPawnPostThink == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnPlayerPawnPostThink");
             OnPlayerPawnPostThink.Invoke(@event);
         }
@@ -823,12 +825,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityIdentityAcceptInputHook( ref OnEntityIdentityAcceptInputHookEvent @event )
     {
+        if (OnEntityIdentityAcceptInputHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityIdentityAcceptInputHook == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntityIdentityAcceptInput");
             OnEntityIdentityAcceptInputHook.Invoke(@event);
         }
@@ -847,12 +849,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnWeaponServicesDropWeaponHook( ref OnWeaponServicesDropWeaponHook @event )
     {
+        if (OnWeaponServicesDropWeaponHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnWeaponServicesDropWeaponHook == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnWeaponServicesDropWeaponHook");
             OnWeaponServicesDropWeaponHook.Invoke(@event);
         }
@@ -871,12 +873,12 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnEntityFireOutputHook( ref OnEntityFireOutputHookEvent @event )
     {
+        if (OnEntityFireOutputHook == null)
+        {
+            return;
+        }
         try
         {
-            if (OnEntityFireOutputHook == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnEntityFireOutputHook");
             OnEntityFireOutputHook.Invoke(@event);
         }
@@ -895,12 +897,13 @@ internal class EventSubscriber : IEventSubscriber, IDisposable
 
     public void InvokeOnStartupServer()
     {
+        if (OnStartupServer == null)
+        {
+            return;
+        }
+
         try
         {
-            if (OnStartupServer == null)
-            {
-                return;
-            }
             profiler.StartRecording("Event::OnStartupServer");
             OnStartupServer.Invoke();
         }
