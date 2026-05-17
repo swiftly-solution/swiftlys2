@@ -16,29 +16,23 @@ internal sealed class RunCommandMovementData : IRunCommandMovement
 
 internal sealed class RunCommandMovementEvents : IRunCommandMovementEvents
 {
-    private event OnRunCommandMovementDelegate? _Pre;
-    private event OnRunCommandMovementDelegate? _Post;
+    internal event OnRunCommandMovementDelegate? _Pre;
+    internal event OnRunCommandMovementDelegate? _Post;
 
-    public event OnRunCommandMovementDelegate Pre
-    {
-        add
-        {
+    public event OnRunCommandMovementDelegate Pre {
+        add {
             _Pre += value;
         }
-        remove
-        {
+        remove {
             _Pre -= value;
         }
     }
 
-    public event OnRunCommandMovementDelegate Post
-    {
-        add
-        {
+    public event OnRunCommandMovementDelegate Post {
+        add {
             _Post += value;
         }
-        remove
-        {
+        remove {
             _Post -= value;
         }
     }

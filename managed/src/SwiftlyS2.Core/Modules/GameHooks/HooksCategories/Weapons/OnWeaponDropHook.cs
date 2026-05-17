@@ -15,29 +15,23 @@ internal sealed class OnWeaponDropData : IOnWeaponDrop
 
 internal sealed class OnWeaponDropEvents : IOnWeaponDropEvents
 {
-    private event OnWeaponDropDelegate? _Pre;
-    private event OnWeaponDropDelegate? _Post;
+    internal event OnWeaponDropDelegate? _Pre;
+    internal event OnWeaponDropDelegate? _Post;
 
-    public event OnWeaponDropDelegate Pre
-    {
-        add
-        {
+    public event OnWeaponDropDelegate Pre {
+        add {
             _Pre += value;
         }
-        remove
-        {
+        remove {
             _Pre -= value;
         }
     }
 
-    public event OnWeaponDropDelegate Post
-    {
-        add
-        {
+    public event OnWeaponDropDelegate Post {
+        add {
             _Post += value;
         }
-        remove
-        {
+        remove {
             _Post -= value;
         }
     }

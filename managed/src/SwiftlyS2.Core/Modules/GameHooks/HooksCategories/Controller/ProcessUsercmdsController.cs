@@ -26,19 +26,39 @@ internal sealed class ProcessUsercmdsEvents : IProcessUsercmdsEvents
 
     public event OnProcessUsercmdsDelegate Pre {
         add {
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
             _Pre += value;
         }
         remove {
             _Pre -= value;
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
         }
     }
 
     public event OnProcessUsercmdsDelegate Post {
         add {
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
             _Post += value;
         }
         remove {
             _Post -= value;
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
         }
+    }
+
+    public void InvokePre( ref IProcessUsercmdsController data )
+    {
+        _Pre?.Invoke(ref data);
+    }
+
+    public void InvokePost( ref IProcessUsercmdsController data )
+    {
+        _Post?.Invoke(ref data);
+    }
+
+    public void UnregisterListeners()
+    {
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.ProcessUsercmds);
     }
 }

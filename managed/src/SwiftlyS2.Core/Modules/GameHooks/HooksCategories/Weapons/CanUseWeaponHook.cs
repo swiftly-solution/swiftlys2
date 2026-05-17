@@ -12,7 +12,7 @@ internal sealed class CanUseWeaponData : ICanUseWeapon
 
     private bool _intercepted;
 
-    public void SetResult(bool result)
+    public void SetResult( bool result )
     {
         OriginalResult = result;
         _intercepted = true;
@@ -23,29 +23,23 @@ internal sealed class CanUseWeaponData : ICanUseWeapon
 
 internal sealed class CanUseWeaponEvents : ICanUseWeaponEvents
 {
-    private event OnCanUseWeaponDelegate? _Pre;
-    private event OnCanUseWeaponDelegate? _Post;
+    internal event OnCanUseWeaponDelegate? _Pre;
+    internal event OnCanUseWeaponDelegate? _Post;
 
-    public event OnCanUseWeaponDelegate Pre
-    {
-        add
-        {
+    public event OnCanUseWeaponDelegate Pre {
+        add {
             _Pre += value;
         }
-        remove
-        {
+        remove {
             _Pre -= value;
         }
     }
 
-    public event OnCanUseWeaponDelegate Post
-    {
-        add
-        {
+    public event OnCanUseWeaponDelegate Post {
+        add {
             _Post += value;
         }
-        remove
-        {
+        remove {
             _Post -= value;
         }
     }

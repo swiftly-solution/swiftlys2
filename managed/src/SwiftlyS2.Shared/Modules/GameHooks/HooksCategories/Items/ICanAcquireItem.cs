@@ -36,6 +36,11 @@ public interface ICanAcquireItem
     /// </summary>
     /// <param name="result">The result to modify.</param>
     public void SetAcquireResult( AcquireResult result );
+
+    /// <summary>
+    /// If the event has been intercepted (the result has been changed).
+    /// </summary>
+    public bool Intercepted { get; set; }
 }
 
 public delegate void OnCanAcquireItemDelegate( ref ICanAcquireItem canAcquire );

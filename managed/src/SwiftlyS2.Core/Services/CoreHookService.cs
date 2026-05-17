@@ -13,6 +13,7 @@ using SwiftlyS2.Core.ProtobufDefinitions;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared;
+using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
@@ -73,7 +74,6 @@ internal class CoreHookService : IDisposable
     private delegate nint ExecuteCommand( nint a1, int a2, uint a3, nint a4, nint a5 );
     private delegate nint ICvarFindConCommandWindows( nint pICvar, nint pRet, nint pConCommandName, int unk1 );
     private delegate nint ICvarFindConCommandLinux( nint pICvar, nint pConCommandName, int unk1 );
-    private delegate nint CCSPlayerItemServicesCanAcquire( nint pItemServices, nint pEconItemView, int acquireMethod, nint unk1 );
     private delegate byte CCSPlayerWeaponServicesCanUse( nint pWeaponServices, nint pBasePlayerWeapon );
     private delegate nint CBaseEntityTouchTemplate( nint pBaseEntity, nint pOtherEntity );
     private delegate void SteamServerAPIActivated( nint pServer );
@@ -90,8 +90,6 @@ internal class CoreHookService : IDisposable
     private IUnmanagedFunction<ICvarFindConCommandWindows>? findConCommandWindows;
     private IUnmanagedFunction<ICvarFindConCommandLinux>? findConCommandLinux;
     private Guid findConCommandGuid;
-    private IUnmanagedFunction<CCSPlayerItemServicesCanAcquire>? itemServicesCanAcquire;
-    private Guid itemServicesCanAcquireGuid;
     private IUnmanagedFunction<CCSPlayerWeaponServicesCanUse>? weaponServicesCanUse;
     private Guid weaponServicesCanUseGuid;
     private IUnmanagedFunction<CBaseEntityTouchTemplate>? entityStartTouch;
@@ -402,53 +400,30 @@ internal class CoreHookService : IDisposable
         }
     }
 
+    internal void CanAcquireEventPost( ref ICanAcquireItem @event )
+    {
+        var @e = new OnItemServicesCanAcquireHookEvent {
+            ItemServices = @event.Player.PlayerPawn!.ItemServices!,
+            EconItemView = @event.EconItemView,
+            WeaponVData = @event.WeaponVData,
+            AcquireMethod = @event.AcquireMethod,
+            OriginalResult = @event.OriginalResult
+        };
+
+        EventPublisher.InvokeOnCanAcquireHook(@e);
+
+        @event.SetAcquireResult(@e.OriginalResult);
+        @event.Intercepted = @e.Intercepted;
+    }
+
     internal void HookCCSPlayerItemServicesCanAcquire()
     {
-        var address = core.GameData.GetSignature("CCSPlayer_ItemServices::CanAcquire");
-
-        logger.LogInformation("Hooking CCSPlayer_ItemServices::CanAcquire at {Address:X}", address);
-
-        itemServicesCanAcquire = core.Memory.GetUnmanagedFunctionByAddress<CCSPlayerItemServicesCanAcquire>(address);
-        itemServicesCanAcquireGuid = itemServicesCanAcquire.AddHook(next =>
-        {
-            return ( pItemServices, pEconItemView, acquireMethod, unk1 ) =>
-            {
-                var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
-
-                var itemServices = core.Memory.ToSchemaClass<CCSPlayer_ItemServices>(pItemServices);
-
-                Schema.isFollowingServerGuidelines = false;
-
-                var econItemView = core.Memory.ToSchemaClass<CEconItemView>(pEconItemView);
-
-                var @event = new OnItemServicesCanAcquireHookEvent {
-                    ItemServices = itemServices,
-                    EconItemView = econItemView,
-                    WeaponVData = core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
-                    AcquireMethod = (AcquireMethod)acquireMethod,
-                    OriginalResult = (AcquireResult)result
-                };
-
-                Schema.isFollowingServerGuidelines = NativeServerHelpers.IsFollowingServerGuidelines();
-
-                EventPublisher.InvokeOnCanAcquireHook(@event);
-
-                if (@event.Intercepted)
-                {
-                    // original result is modified here.
-                    return (int)@event.OriginalResult;
-                }
-
-                return result;
-            };
-        });
+        core.GameHooks.Items.CanAcquire.Post += CanAcquireEventPost;
     }
 
     internal void UnhookCCSPlayerItemServicesCanAcquire()
     {
-        if (itemServicesCanAcquire == null) return;
-        itemServicesCanAcquire.RemoveHook(itemServicesCanAcquireGuid);
-        itemServicesCanAcquire = null;
+        core.GameHooks.Items.CanAcquire.Post -= CanAcquireEventPost;
     }
 
     internal void HookCCSPlayerWeaponServicesCanUse()

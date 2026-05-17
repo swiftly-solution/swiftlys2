@@ -12,29 +12,23 @@ internal sealed class PostThinkPawnData : IPostThinkPawn
 
 internal sealed class PostThinkPawnEvents : IPostThinkPawnEvents
 {
-    private event OnPostThinkPawnDelegate? _Pre;
-    private event OnPostThinkPawnDelegate? _Post;
+    internal event OnPostThinkPawnDelegate? _Pre;
+    internal event OnPostThinkPawnDelegate? _Post;
 
-    public event OnPostThinkPawnDelegate Pre
-    {
-        add
-        {
+    public event OnPostThinkPawnDelegate Pre {
+        add {
             _Pre += value;
         }
-        remove
-        {
+        remove {
             _Pre -= value;
         }
     }
 
-    public event OnPostThinkPawnDelegate Post
-    {
-        add
-        {
+    public event OnPostThinkPawnDelegate Post {
+        add {
             _Post += value;
         }
-        remove
-        {
+        remove {
             _Post -= value;
         }
     }

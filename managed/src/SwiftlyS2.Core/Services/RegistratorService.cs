@@ -20,5 +20,6 @@ internal class RegistratorService : IRegistratorService
         core.NetMessageService.ParseFromObject(instance);
         core.EntitySystemService.ParseFromObject(instance);
         core.DatamapService.Functions.ParseFromObject(instance);
+        core.GameHooksService.ParseFromObject(instance);
     }
 }

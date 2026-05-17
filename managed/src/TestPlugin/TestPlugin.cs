@@ -30,6 +30,7 @@ using SwiftlyS2.Core.Menus.OptionsBase;
 using System.Diagnostics;
 using SwiftlyS2.Shared.Convars;
 using SwiftlyS2.Shared.Trace;
+using SwiftlyS2.Shared.GameHooks;
 
 namespace TestPlugin;
 
@@ -151,12 +152,8 @@ public class TestPlugin : BasePlugin
     {
         _autobunnyhopping = Core.ConVar.Find<bool>("sv_autobunnyhopping");
         Console.WriteLine("[TestPlugin] TestPlugin constructed successfully!");
-        // Console.WriteLine($"sizeof(bool): {sizeof(bool)}");
-        // Console.WriteLine($"Marshal.SizeOf<bool>: {Marshal.SizeOf<bool>()}");
-        Core.Event.OnWeaponServicesCanUseHook += ( @event ) =>
-        {
-            // Console.WriteLine($"WeaponServicesCanUse: {@event.Weapon.WeaponBaseVData.AttackMovespeedFactor} {@event.OriginalResult}");
-        };
+
+        Core.GameHooks.Items.CanAcquire.Post += CanAcquireGameHook;
 
         // throw new InvalidOperationException("TestPlugin constructor exception");
 
@@ -181,6 +178,12 @@ public class TestPlugin : BasePlugin
         //         return ret;
         //     };
         // });
+    }
+
+    [GameHookHandler(HookMode.Pre)]
+    public void CanAcquireGameHook( ref ICanAcquireItem @event )
+    {
+        Console.WriteLine($"Player: {@event.Player.Name}, Weapon: {@event.EconItemView.ItemDefinitionIndex}, AcquireMethod {@event.AcquireMethod}");
     }
 
     [Command("selfmute")]

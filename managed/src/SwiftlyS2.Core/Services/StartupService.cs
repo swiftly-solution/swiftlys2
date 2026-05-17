@@ -13,8 +13,9 @@ internal class StartupService : IHostedService
     {
         // JIT warmup
         var _ = ClassConvertor.ConvertEntityByDesignerName(0, "abc");
-        
+
         // this.provider = provider;
+        provider.UseGameHooksPublisher();
         provider.UseCoreHookService();
         provider.UsePermissionManager();
         provider.UseCommandTrackerService();
