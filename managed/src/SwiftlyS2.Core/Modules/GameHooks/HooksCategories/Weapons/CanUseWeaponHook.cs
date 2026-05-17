@@ -10,15 +10,13 @@ internal sealed class CanUseWeaponData : ICanUseWeapon
     public required CCSWeaponBase Weapon { get; init; }
     public required bool OriginalResult { get; set; }
 
-    private bool _intercepted;
-
     public void SetResult( bool result )
     {
         OriginalResult = result;
-        _intercepted = true;
+        Intercepted = true;
     }
 
-    public bool Intercepted => _intercepted;
+    public bool Intercepted { get; set; } = false;
 }
 
 internal sealed class CanUseWeaponEvents : ICanUseWeaponEvents

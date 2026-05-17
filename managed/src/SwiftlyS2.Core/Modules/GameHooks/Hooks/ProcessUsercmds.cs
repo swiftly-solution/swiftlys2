@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
@@ -9,8 +8,7 @@ internal static partial class GameHooksPublisher
 {
     private delegate nint CCSPlayerControllerProcessUsercmds( nint controller, nint userCmds, int numCmds, byte paused, float margin );
     private static CCSPlayerControllerImpl _dummyController = new(0);
-
-    private static int CUserCmdPlatformPadding => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? 0x8 : 0x0;
+    private static readonly int CUserCmdPlatformPadding = IsWindows ? 0x8 : 0x0;
 
     internal static Guid HookProcessUsercmds()
     {

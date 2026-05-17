@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using SwiftlyS2.Shared;
 
 namespace SwiftlyS2.Core.GameHooks;
@@ -28,6 +29,7 @@ internal static partial class GameHooksPublisher
     private static readonly Lock hookListenersLock = new();
 
     private static readonly Dictionary<HookListener, Guid> hookIds = [];
+    private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     internal static void Subscribe( GameHooksService subscriber )
     {
@@ -80,6 +82,8 @@ internal static partial class GameHooksPublisher
             HookListener.CanAcquire => HookCanAcquire(),
             HookListener.RunCommand => HookRunCommand(),
             HookListener.PostThink => HookPostThink(),
+            HookListener.CanUse => HookCanUse(),
+            HookListener.WeaponDrop => HookDropWeapon(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
 
@@ -92,8 +96,9 @@ internal static partial class GameHooksPublisher
             HookListener.CanAcquire => UnhookCanAcquire(),
             HookListener.RunCommand => UnhookRunCommand(),
             HookListener.PostThink => UnhookPostThink(),
+            HookListener.CanUse => UnhookCanUse(),
+            HookListener.WeaponDrop => UnhookDropWeapon(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
-
     }
 }
