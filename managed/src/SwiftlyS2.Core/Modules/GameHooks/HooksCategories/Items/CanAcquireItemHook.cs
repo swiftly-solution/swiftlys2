@@ -1,4 +1,3 @@
-using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Players;
@@ -14,15 +13,13 @@ internal sealed class CanAcquireItemData : ICanAcquireItem
     public required AcquireMethod AcquireMethod { get; init; }
     public required AcquireResult OriginalResult { get; set; }
 
-    private bool _intercepted;
-
-    public void SetAcquireResult(AcquireResult result)
+    public void SetAcquireResult( AcquireResult result )
     {
         OriginalResult = result;
-        _intercepted = true;
+        Intercepted = true;
     }
 
-    public bool Intercepted => _intercepted;
+    public bool Intercepted { get; private set; } = false;
 }
 
 internal sealed class CanAcquireItemEvents : ICanAcquireItemEvents
@@ -30,26 +27,20 @@ internal sealed class CanAcquireItemEvents : ICanAcquireItemEvents
     private event OnCanAcquireItemDelegate? _Pre;
     private event OnCanAcquireItemDelegate? _Post;
 
-    public event OnCanAcquireItemDelegate Pre
-    {
-        add
-        {
+    public event OnCanAcquireItemDelegate Pre {
+        add {
             _Pre += value;
         }
-        remove
-        {
+        remove {
             _Pre -= value;
         }
     }
 
-    public event OnCanAcquireItemDelegate Post
-    {
-        add
-        {
+    public event OnCanAcquireItemDelegate Post {
+        add {
             _Post += value;
         }
-        remove
-        {
+        remove {
             _Post -= value;
         }
     }

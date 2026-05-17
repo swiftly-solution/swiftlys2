@@ -75,7 +75,7 @@ internal static class EventPublisher
 
         try
         {
-            OnConVarCreated @event = new() { ConVarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty };
+            OnConVarCreated @event = new() { ConVarName = StringAlloc.CreateCSharpString(convarNamePtr) };
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnConVarCreated(ref @event);
@@ -101,7 +101,7 @@ internal static class EventPublisher
 
         try
         {
-            OnConCommandCreated @event = new() { CommandName = Marshal.PtrToStringUTF8(commandNamePtr) ?? string.Empty };
+            OnConCommandCreated @event = new() { CommandName = StringAlloc.CreateCSharpString(commandNamePtr) };
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnConCommandCreated(ref @event);
@@ -129,9 +129,9 @@ internal static class EventPublisher
         {
             OnConVarValueChanged @event = new() {
                 PlayerId = playerid,
-                ConVarName = Marshal.PtrToStringUTF8(convarNamePtr) ?? string.Empty,
-                NewValue = Marshal.PtrToStringUTF8(newValuePtr) ?? string.Empty,
-                OldValue = Marshal.PtrToStringUTF8(oldValuePtr) ?? string.Empty,
+                ConVarName = StringAlloc.CreateCSharpString(convarNamePtr),
+                NewValue = StringAlloc.CreateCSharpString(newValuePtr),
+                OldValue = StringAlloc.CreateCSharpString(oldValuePtr),
             };
             for (var i = 0; i < subscribers.Count; i++)
             {
@@ -152,7 +152,6 @@ internal static class EventPublisher
     public static void OnTick( byte simulating, byte first, byte last )
     {
         SchedulerManager.OnTick();
-        // CallbackDispatcher.RunFrame(true);
 
         if (subscribers.Count == 0)
         {
@@ -519,7 +518,7 @@ internal static class EventPublisher
 
         try
         {
-            OnMapLoadEvent @event = new() { MapName = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty };
+            OnMapLoadEvent @event = new() { MapName = StringAlloc.CreateCSharpString(mapNamePtr) };
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnMapLoad(ref @event);
@@ -571,7 +570,7 @@ internal static class EventPublisher
 
         try
         {
-            OnMapUnloadEvent @event = new() { MapName = Marshal.PtrToStringUTF8(mapNamePtr) ?? string.Empty };
+            OnMapUnloadEvent @event = new() { MapName = StringAlloc.CreateCSharpString(mapNamePtr) };
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnMapUnload(ref @event);

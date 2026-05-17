@@ -3,6 +3,11 @@ namespace SwiftlyS2.Shared.GameHooks;
 public interface IGameHooks
 {
     /// <summary>
+    /// Hooks related to controller.
+    /// </summary>
+    public IGameHookController Controller { get; }
+
+    /// <summary>
     /// Hooks related to items.
     /// </summary>
     public IGameHookItems Items { get; }
