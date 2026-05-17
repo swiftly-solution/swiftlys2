@@ -20,19 +20,39 @@ internal sealed class OnWeaponDropEvents : IOnWeaponDropEvents
 
     public event OnWeaponDropDelegate Pre {
         add {
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop);
             _Pre += value;
         }
         remove {
             _Pre -= value;
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
         }
     }
 
     public event OnWeaponDropDelegate Post {
         add {
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop);
             _Post += value;
         }
         remove {
             _Post -= value;
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
         }
+    }
+
+    public void InvokePre( ref IOnWeaponDrop data )
+    {
+        _Pre?.Invoke(ref data);
+    }
+
+    public void InvokePost( ref IOnWeaponDrop data )
+    {
+        _Post?.Invoke(ref data);
+    }
+
+    public void UnregisterListeners()
+    {
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.WeaponDrop);
     }
 }

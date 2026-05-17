@@ -40,6 +40,10 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
 
         ControllerHook.ProcessUsercmdsEvents.UnregisterListeners();
         ItemsHook.CanAcquireEvents.UnregisterListeners();
+        MovementHook.RunCommandEvents.UnregisterListeners();
+        PawnHook.PostThinkEvents.UnregisterListeners();
+        WeaponsHook.CanUseEvents.UnregisterListeners();
+        WeaponsHook.OnDropEvents.UnregisterListeners();
 
         _disposed = true;
         GameHooksPublisher.Unsubscribe(this);
@@ -123,6 +127,166 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         finally
         {
             profiler.StopRecording("GameHooks::Items::CanAcquire::Post");
+        }
+    }
+
+    internal void InvokeRunCommandPre( ref IRunCommandMovement @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Movement::RunCommand::Pre");
+            MovementHook.RunCommandEvents.InvokePre(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Movement::RunCommand::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Movement::RunCommand::Pre");
+        }
+    }
+
+    internal void InvokeRunCommandPost( ref IRunCommandMovement @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Movement::RunCommand::Post");
+            MovementHook.RunCommandEvents.InvokePost(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Movement::RunCommand::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Movement::RunCommand::Post");
+        }
+    }
+
+    internal void InvokePostThinkPre( ref IPostThinkPawn @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Pawn::PostThink::Pre");
+            PawnHook.PostThinkEvents.InvokePre(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Pawn::PostThink::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Pawn::PostThink::Pre");
+        }
+    }
+
+    internal void InvokePostThinkPost( ref IPostThinkPawn @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Pawn::PostThink::Post");
+            PawnHook.PostThinkEvents.InvokePost(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Pawn::PostThink::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Pawn::PostThink::Post");
+        }
+    }
+
+    internal void InvokeCanUsePre( ref ICanUseWeapon @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Weapons::CanUse::Pre");
+            WeaponsHook.CanUseEvents.InvokePre(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Weapons::CanUse::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Weapons::CanUse::Pre");
+        }
+    }
+
+    internal void InvokeCanUsePost( ref ICanUseWeapon @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Weapons::CanUse::Post");
+            WeaponsHook.CanUseEvents.InvokePost(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Weapons::CanUse::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Weapons::CanUse::Post");
+        }
+    }
+
+    internal void InvokeOnWeaponDropPre( ref IOnWeaponDrop @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Weapons::OnWeaponDrop::Pre");
+            WeaponsHook.OnDropEvents.InvokePre(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Weapons::OnWeaponDrop::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Weapons::OnWeaponDrop::Pre");
+        }
+    }
+
+    internal void InvokeOnWeaponDropPost( ref IOnWeaponDrop @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Weapons::OnWeaponDrop::Post");
+            WeaponsHook.OnDropEvents.InvokePost(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Weapons::OnWeaponDrop::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Weapons::OnWeaponDrop::Post");
         }
     }
 }

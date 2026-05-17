@@ -6,6 +6,10 @@ internal enum HookListener
 {
     ProcessUsercmds,
     CanAcquire,
+    RunCommand,
+    PostThink,
+    CanUse,
+    WeaponDrop
 }
 
 internal static partial class GameHooksPublisher

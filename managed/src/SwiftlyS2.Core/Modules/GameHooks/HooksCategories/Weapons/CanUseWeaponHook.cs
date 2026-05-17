@@ -28,19 +28,39 @@ internal sealed class CanUseWeaponEvents : ICanUseWeaponEvents
 
     public event OnCanUseWeaponDelegate Pre {
         add {
+            if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanUse);
             _Pre += value;
         }
         remove {
             _Pre -= value;
+            if (_Pre == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
         }
     }
 
     public event OnCanUseWeaponDelegate Post {
         add {
+            if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanUse);
             _Post += value;
         }
         remove {
             _Post -= value;
+            if (_Post == null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
         }
+    }
+
+    public void InvokePre( ref ICanUseWeapon data )
+    {
+        _Pre?.Invoke(ref data);
+    }
+
+    public void InvokePost( ref ICanUseWeapon data )
+    {
+        _Post?.Invoke(ref data);
+    }
+
+    public void UnregisterListeners()
+    {
+        if (_Pre != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
+        if (_Post != null) GameHooksPublisher.RemoveHookListener(HookListener.CanUse);
     }
 }

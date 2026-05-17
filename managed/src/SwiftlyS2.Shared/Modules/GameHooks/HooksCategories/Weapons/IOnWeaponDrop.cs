@@ -36,5 +36,5 @@ public interface IOnWeaponDropEvents
     /// <summary>
     /// Event triggered after a weapon is dropped.
     /// </summary>
-    public event OnWeaponDropDelegate? Post;
+    public event OnWeaponDropDelegate Post;
 }
