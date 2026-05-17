@@ -497,13 +497,21 @@ public class TestPlugin : BasePlugin
         //     }
         // };
 
-        // Core.Event.OnClientProcessUsercmds += (@event) => {
-        //   foreach(var usercmd in @event.Usercmds) {
-        //     usercmd.Base.ButtonsPb.Buttonstate1 &= 1UL << (int)GameButtons.Ctrl;
-        //     usercmd.Base.ButtonsPb.Buttonstate2 &= 1UL << (int)GameButtons.Ctrl;
-        //     usercmd.Base.ButtonsPb.Buttonstate3 &= 1UL << (int)GameButtons.Ctrl;
-        //   }
+        // Core.GameHooks.Controller.ProcessUsercmds.Pre += ( ref @event ) =>
+        // {
+        //     foreach (var usercmd in @event.Usercmds)
+        //     {
+        //         Console.WriteLine($"Player: {@event.Player.Name}, Buttons: {usercmd.Base.ButtonsPb.Buttonstate1}");
+        //     }
         // };
+        //
+        Core.GameHooks.Controller.ProcessUsercmds.Pre += ( ref @event ) =>
+        {
+            foreach (var usercmd in @event.Usercmds)
+            {
+                Console.WriteLine($"Player: {@event.Player.Name}, ButtonState1: {usercmd.CSGOUserCmd.Base.ButtonsPb.Buttonstate1}");
+            }
+        };
 
         // Core.NetMessage.HookClientMessage<CCLCMsg_Move>((msg, id) => {
         //   Console.WriteLine("TestPlugin OnClientMove ");

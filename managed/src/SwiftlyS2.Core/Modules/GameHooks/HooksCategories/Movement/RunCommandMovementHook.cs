@@ -1,16 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.ProtobufDefinitions;
-using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class RunCommandMovementData : IRunCommandMovement
 {
     public required IPlayer Player { get; set; }
-    public required CInButtonState ButtonState { get; init; }
-    public required CSGOUserCmdPB UserCmdPB { get; init; }
+    public required IUserCmd UserCmd { get; init; }
     public HookResult Result { get; set; } = HookResult.Continue;
 }
 

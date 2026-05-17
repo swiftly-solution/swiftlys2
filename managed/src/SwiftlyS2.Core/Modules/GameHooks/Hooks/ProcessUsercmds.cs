@@ -1,8 +1,7 @@
-using SwiftlyS2.Core.ProtobufDefinitions;
+using System.Runtime.InteropServices;
 using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.ProtobufDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
@@ -10,6 +9,8 @@ internal static partial class GameHooksPublisher
 {
     private delegate nint CCSPlayerControllerProcessUsercmds( nint controller, nint userCmds, int numCmds, byte paused, float margin );
     private static CCSPlayerControllerImpl _dummyController = new(0);
+
+    private static int CUserCmdPlatformPadding => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? 0x8 : 0x0;
 
     internal static Guid HookProcessUsercmds()
     {
@@ -28,11 +29,10 @@ internal static partial class GameHooksPublisher
                 var player = _dummyController.ToPlayer();
                 if (player == null) return next()(controller, userCmds, numCmds, paused, margin);
 
-                var cmdsList = new List<CSGOUserCmdPB>(numCmds);
+                var cmdsList = new List<IUserCmd>(numCmds);
+
                 for (var i = 0; i < numCmds; i++)
-                {
-                    cmdsList.Add(new CSGOUserCmdPBImpl(userCmds + (i * 8) + 0x10, false));
-                }
+                    cmdsList.Add(new CUserCmd { Address = userCmds + (i * (144 + CUserCmdPlatformPadding)) });
 
                 IProcessUsercmdsController @event = new ProcessUsercmdsController {
                     Player = player,

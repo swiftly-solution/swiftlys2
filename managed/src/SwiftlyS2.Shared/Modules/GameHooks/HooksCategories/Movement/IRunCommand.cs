@@ -1,7 +1,5 @@
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.ProtobufDefinitions;
-using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
@@ -13,13 +11,9 @@ public interface IRunCommandMovement
     public IPlayer Player { get; set; }
 
     /// <summary>
-    /// The button state.
+    /// The user command.
     /// </summary>
-    public CInButtonState ButtonState { get; }
-    /// <summary>
-    /// The user command protobuf.
-    /// </summary>
-    public CSGOUserCmdPB UserCmdPB { get; }
+    public IUserCmd UserCmd { get; }
 
     /// <summary>
     /// The result of the hook. Can be used to prevent the drop by returning <see cref="HookResult.Stop"/> or <see cref="HookResult.CancelOriginal"/> .

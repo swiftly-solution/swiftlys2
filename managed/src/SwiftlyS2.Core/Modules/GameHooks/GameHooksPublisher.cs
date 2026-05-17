@@ -78,6 +78,8 @@ internal static partial class GameHooksPublisher
         return hookName switch {
             HookListener.ProcessUsercmds => HookProcessUsercmds(),
             HookListener.CanAcquire => HookCanAcquire(),
+            HookListener.RunCommand => HookRunCommand(),
+            HookListener.PostThink => HookPostThink(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
 
@@ -88,6 +90,8 @@ internal static partial class GameHooksPublisher
         return hookName switch {
             HookListener.ProcessUsercmds => UnhookProcessUsercmds(),
             HookListener.CanAcquire => UnhookCanAcquire(),
+            HookListener.RunCommand => UnhookRunCommand(),
+            HookListener.PostThink => UnhookPostThink(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
 

@@ -77,8 +77,6 @@ internal class CoreHookService : IDisposable
     private delegate byte CCSPlayerWeaponServicesCanUse( nint pWeaponServices, nint pBasePlayerWeapon );
     private delegate nint CBaseEntityTouchTemplate( nint pBaseEntity, nint pOtherEntity );
     private delegate void SteamServerAPIActivated( nint pServer );
-    private delegate nint CPlayerMovementServicesRunCommand( nint pMovementServices, nint pUserCmd );
-    private delegate nint CCSPlayerPawnPostThink( nint pPlayerPawn );
     private delegate void CEntityIdentityAcceptInput( nint pEntityIdentity, nint inputName, nint activator, nint caller, nint variant, int outputId, nint unk1, nint unk2 );
     private delegate void CEntityIOOutputFireOutputInternal( nint pEntityIO, nint pActivator, nint pCaller, nint pVariant, float flDelay, nint unk1, nint unk2 );
     private delegate void DispatchDatamapFunction( nint a1, nint pDatamapFunc, nint a3, uint a4, nint a5, double a6 /* unknown */ );
@@ -100,10 +98,6 @@ internal class CoreHookService : IDisposable
     private Guid entityEndTouchGuid;
     private IUnmanagedFunction<SteamServerAPIActivated>? steamServerAPIActivated;
     private Guid steamServerAPIActivatedGuid;
-    private IUnmanagedFunction<CPlayerMovementServicesRunCommand>? movementServiceRunCommand;
-    private Guid movementServiceRunCommandGuid;
-    private IUnmanagedFunction<CCSPlayerPawnPostThink>? playerPawnPostThink;
-    private Guid playerPawnPostThinkGuid;
     private IUnmanagedFunction<CEntityIdentityAcceptInput>? entityIdentityAcceptInput;
     private Guid entityIdentityAcceptInputGuid;
     private IUnmanagedFunction<CEntityIOOutputFireOutputInternal>? entityIOOutputFireOutputInternal;
@@ -564,67 +558,42 @@ internal class CoreHookService : IDisposable
         steamServerAPIActivated = null;
     }
 
+    internal void MovementServicesRunCommandHookPre( ref IRunCommandMovement @event )
+    {
+        using var @ev = new OnMovementServicesRunCommandHookEvent {
+            MovementServices = @event.Player.PlayerPawn!.MovementServices!,
+            ButtonState = @event.UserCmd.ButtonState,
+            UserCmdPB = @event.UserCmd.CSGOUserCmd
+        };
+        EventPublisher.InvokeOnMovementServicesRunCommandHook(@ev);
+    }
+
     internal void HookCPlayerMovementServicesRunCommand()
     {
-        var offset = core.GameData.GetOffset("CPlayer_MovementServices::RunCommand");
-        movementServiceRunCommand = core.Memory.GetUnmanagedFunctionByVTable<CPlayerMovementServicesRunCommand>(core.Memory.GetVTableAddress(Library.Server, "CPlayer_MovementServices")!.Value, offset);
-        logger.LogInformation("Hooking CPlayer_MovementServices::RunCommand at {Address:X}", movementServiceRunCommand.Address);
-        movementServiceRunCommandGuid = movementServiceRunCommand.AddHook(( next ) =>
-        {
-            return ( pMovementServices, pUserCmd ) =>
-            {
-                var movementService = core.Memory.ToSchemaClass<CCSPlayer_MovementServices>(pMovementServices);
-                var userCmdPb = new CSGOUserCmdPBImpl(pUserCmd + 0x10, false);
-                var buttonState = new CInButtonStateImpl(pUserCmd + 0x58);
-
-                using var @event = new OnMovementServicesRunCommandHookEvent {
-                    MovementServices = movementService,
-                    ButtonState = buttonState,
-                    UserCmdPB = userCmdPb
-                };
-                EventPublisher.InvokeOnMovementServicesRunCommandHook(@event);
-
-                var result = next()(pMovementServices, pUserCmd);
-                return result;
-            };
-        });
+        core.GameHooks.Movement.RunCommand.Pre += MovementServicesRunCommandHookPre;
     }
 
     internal void UnhookCPlayerMovementServicesRunCommand()
     {
-        if (movementServiceRunCommand == null) return;
-        movementServiceRunCommand.RemoveHook(movementServiceRunCommandGuid);
-        movementServiceRunCommand = null;
+        core.GameHooks.Movement.RunCommand.Pre -= MovementServicesRunCommandHookPre;
+    }
+
+    internal void CCSPlayerPostPostThinkPre( ref IPostThinkPawn @event )
+    {
+        using var @ev = new OnPlayerPawnPostThinkHookEvent {
+            PlayerPawn = @event.Player.PlayerPawn!
+        };
+        EventPublisher.InvokeOnPlayerPawnPostThinkHook(@ev);
     }
 
     internal void HookCCSPlayerPawnPostThink()
     {
-        var address = core.GameData.GetSignature("CCSPlayerPawn::PostThink");
-
-        logger.LogInformation("Hooking CCSPlayerPawn::PostThink at {Address:X}", address);
-
-        playerPawnPostThink = core.Memory.GetUnmanagedFunctionByAddress<CCSPlayerPawnPostThink>(address);
-        playerPawnPostThinkGuid = playerPawnPostThink.AddHook(( next ) =>
-        {
-            return ( pPlayerPawn ) =>
-            {
-                var playerPawn = EntityManager.GetEntityByAddress(pPlayerPawn) as CCSPlayerPawn;
-
-                using var @event = new OnPlayerPawnPostThinkHookEvent {
-                    PlayerPawn = playerPawn ?? core.Memory.ToSchemaClass<CCSPlayerPawn>(pPlayerPawn)
-                };
-                EventPublisher.InvokeOnPlayerPawnPostThinkHook(@event);
-
-                return next()(pPlayerPawn);
-            };
-        });
+        core.GameHooks.Pawn.PostThink.Pre += CCSPlayerPostPostThinkPre;
     }
 
     internal void UnhookCCSPlayerPawnPostThink()
     {
-        if (playerPawnPostThink == null) return;
-        playerPawnPostThink.RemoveHook(playerPawnPostThinkGuid);
-        playerPawnPostThink = null;
+        core.GameHooks.Pawn.PostThink.Pre -= CCSPlayerPostPostThinkPre;
     }
 
     internal void HookDispatchDatamapFunction()

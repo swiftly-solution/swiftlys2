@@ -201,8 +201,9 @@ void* ProcessUsercmdsHook(void* pController, CUserCmd* cmds, int numcmds, bool p
     auto playerid = ((CEntityInstance*)pController)->m_pEntity->m_EHandle.GetEntryIndex() - 1;
 
     google::protobuf::Message** pMsg = new google::protobuf::Message * [numcmds];
-    for (int i = 0; i < numcmds; i++)
+    for (int i = 0; i < numcmds; i++) {
         pMsg[i] = (google::protobuf::Message*)&cmds[i].cmd;
+    }
 
     if (g_pOnClientProcessUsercmdsCallback)
         reinterpret_cast<void (*)(int, void*, int, bool, float)>(g_pOnClientProcessUsercmdsCallback)(playerid, pMsg, numcmds, paused, margin);

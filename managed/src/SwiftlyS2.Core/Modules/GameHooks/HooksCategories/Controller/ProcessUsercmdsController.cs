@@ -1,7 +1,6 @@
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.ProtobufDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
@@ -9,7 +8,7 @@ internal sealed class ProcessUsercmdsController : IProcessUsercmdsController
 {
     public required IPlayer Player { get; set; }
 
-    public required List<CSGOUserCmdPB> Usercmds { get; init; }
+    public required List<IUserCmd> Usercmds { get; init; }
 
     public required bool Paused { get; init; }
 

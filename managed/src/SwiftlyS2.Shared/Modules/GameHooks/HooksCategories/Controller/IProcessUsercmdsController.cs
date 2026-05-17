@@ -1,6 +1,5 @@
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.ProtobufDefinitions;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
@@ -14,7 +13,7 @@ public interface IProcessUsercmdsController
     /// <summary>
     /// The user commands that the client processed.
     /// </summary>
-    public List<CSGOUserCmdPB> Usercmds { get; }
+    public List<IUserCmd> Usercmds { get; }
 
     /// <summary>
     /// Whether the client is paused.
