@@ -31,7 +31,7 @@ internal static partial class GameHooksPublisher
 
                     var basePlayerWeapon = playerWeapon != nint.Zero ? EntityManager.GetEntityByAddress(playerWeapon) as CBasePlayerWeapon ?? _core.Memory.ToSchemaClass<CBasePlayerWeapon>(playerWeapon) : null;
 
-                    IOnWeaponDrop @event = new OnWeaponDropData {
+                    IWeaponDrop @event = new WeaponDropData {
                         Player = player,
                         Weapon = basePlayerWeapon,
                         SwappingWeapon = swapping == 1,
@@ -64,7 +64,7 @@ internal static partial class GameHooksPublisher
 
                     var basePlayerWeapon = playerWeapon != nint.Zero ? EntityManager.GetEntityByAddress(playerWeapon) as CBasePlayerWeapon ?? _core.Memory.ToSchemaClass<CBasePlayerWeapon>(playerWeapon) : null;
 
-                    IOnWeaponDrop @event = new OnWeaponDropData {
+                    IWeaponDrop @event = new WeaponDropData {
                         Player = player,
                         Weapon = basePlayerWeapon,
                         SwappingWeapon = swapping == 1,
@@ -111,25 +111,25 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeDropWeaponPre( ref IOnWeaponDrop @event )
+    internal static void InvokeDropWeaponPre( ref IWeaponDrop @event )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeOnWeaponDropPre(ref @event);
+                subscribers[i].InvokeWeaponDropPre(ref @event);
                 if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeDropWeaponPost( ref IOnWeaponDrop @event )
+    internal static void InvokeDropWeaponPost( ref IWeaponDrop @event )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeOnWeaponDropPost(ref @event);
+                subscribers[i].InvokeWeaponDropPost(ref @event);
                 if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
             }
         }

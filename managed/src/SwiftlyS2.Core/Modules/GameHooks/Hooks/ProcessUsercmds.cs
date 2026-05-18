@@ -32,7 +32,7 @@ internal static partial class GameHooksPublisher
                 for (var i = 0; i < numCmds; i++)
                     cmdsList.Add(new CUserCmd { Address = userCmds + (i * (144 + CUserCmdPlatformPadding)) });
 
-                IProcessUsercmdsController @event = new ProcessUsercmdsController {
+                IProcessUsercmdsController @event = new ProcessUsercmdsControllerData {
                     Player = player,
                     Usercmds = cmdsList,
                     Paused = paused != 0,

@@ -6,19 +6,19 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class GameHooksService : IGameHooks, IDisposable
 {
-    internal readonly GameHookItems ItemsHook = new();
+    internal readonly GameHookItem ItemsHook = new();
     internal readonly GameHookMovement MovementHook = new();
     internal readonly GameHookPawn PawnHook = new();
-    internal readonly GameHookWeapons WeaponsHook = new();
+    internal readonly GameHookWeapon WeaponsHook = new();
     internal readonly GameHookController ControllerHook = new();
     private bool _disposed = false;
     private readonly IContextedProfilerService profiler;
     private readonly ILogger<GameHooksService> logger;
 
-    public IGameHookItems Items => ItemsHook;
+    public IGameHookItem Items => ItemsHook;
     public IGameHookMovement Movement => MovementHook;
     public IGameHookPawn Pawn => PawnHook;
-    public IGameHookWeapons Weapons => WeaponsHook;
+    public IGameHookWeapon Weapons => WeaponsHook;
     public IGameHookController Controller => ControllerHook;
 
     public GameHooksService( IContextedProfilerService profiler, ILogger<GameHooksService> logger )
@@ -43,7 +43,7 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         MovementHook.RunCommandEvents.UnregisterListeners();
         PawnHook.PostThinkEvents.UnregisterListeners();
         WeaponsHook.CanUseEvents.UnregisterListeners();
-        WeaponsHook.OnDropEvents.UnregisterListeners();
+        WeaponsHook.DropEvents.UnregisterListeners();
 
         _disposed = true;
         GameHooksPublisher.Unsubscribe(this);
@@ -250,43 +250,43 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         }
     }
 
-    internal void InvokeOnWeaponDropPre( ref IOnWeaponDrop @event )
+    internal void InvokeWeaponDropPre( ref IWeaponDrop @event )
     {
         try
         {
-            profiler.StartRecording("GameHooks::Weapons::OnWeaponDrop::Pre");
-            WeaponsHook.OnDropEvents.InvokePre(ref @event);
+            profiler.StartRecording("GameHooks::Weapons::Drop::Pre");
+            WeaponsHook.DropEvents.InvokePre(ref @event);
         }
         catch (Exception e)
         {
             if (GlobalExceptionHandler.Handle(ref e))
             {
-                logger.LogError(e, "Error invoking GameHooks::Weapons::OnWeaponDrop::Pre.");
+                logger.LogError(e, "Error invoking GameHooks::Weapons::Drop::Pre.");
             }
         }
         finally
         {
-            profiler.StopRecording("GameHooks::Weapons::OnWeaponDrop::Pre");
+            profiler.StopRecording("GameHooks::Weapons::Drop::Pre");
         }
     }
 
-    internal void InvokeOnWeaponDropPost( ref IOnWeaponDrop @event )
+    internal void InvokeWeaponDropPost( ref IWeaponDrop @event )
     {
         try
         {
-            profiler.StartRecording("GameHooks::Weapons::OnWeaponDrop::Post");
-            WeaponsHook.OnDropEvents.InvokePost(ref @event);
+            profiler.StartRecording("GameHooks::Weapons::Drop::Post");
+            WeaponsHook.DropEvents.InvokePost(ref @event);
         }
         catch (Exception e)
         {
             if (GlobalExceptionHandler.Handle(ref e))
             {
-                logger.LogError(e, "Error invoking GameHooks::Weapons::OnWeaponDrop::Post.");
+                logger.LogError(e, "Error invoking GameHooks::Weapons::Drop::Post.");
             }
         }
         finally
         {
-            profiler.StopRecording("GameHooks::Weapons::OnWeaponDrop::Post");
+            profiler.StopRecording("GameHooks::Weapons::Drop::Post");
         }
     }
 }

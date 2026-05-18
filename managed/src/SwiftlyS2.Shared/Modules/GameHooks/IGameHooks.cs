@@ -10,7 +10,7 @@ public interface IGameHooks
     /// <summary>
     /// Hooks related to items.
     /// </summary>
-    public IGameHookItems Items { get; }
+    public IGameHookItem Items { get; }
 
     /// <summary>
     /// Hooks related to movement.
@@ -25,5 +25,5 @@ public interface IGameHooks
     /// <summary>
     /// Hooks related to weapons.
     /// </summary>
-    public IGameHookWeapons Weapons { get; }
+    public IGameHookWeapon Weapons { get; }
 }

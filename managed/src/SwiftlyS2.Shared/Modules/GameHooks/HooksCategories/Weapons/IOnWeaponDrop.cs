@@ -4,7 +4,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IOnWeaponDrop
+public interface IWeaponDrop
 {
     /// <summary>
     /// The player who dropped the weapon.
@@ -24,9 +24,9 @@ public interface IOnWeaponDrop
     public HookResult Result { get; set; }
 }
 
-public delegate void OnWeaponDropDelegate( ref IOnWeaponDrop drop );
+public delegate void OnWeaponDropDelegate( ref IWeaponDrop drop );
 
-public interface IOnWeaponDropEvents
+public interface IWeaponDropEvents
 {
     /// <summary>
     /// Event triggered before a weapon is dropped.

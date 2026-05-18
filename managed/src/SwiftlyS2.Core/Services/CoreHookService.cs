@@ -242,7 +242,7 @@ internal class CoreHookService : IDisposable
         executeCommand = null;
     }
 
-    internal void WeaponDropPre( ref IOnWeaponDrop @event )
+    internal void WeaponDropPre( ref IWeaponDrop @event )
     {
         var @e = new OnWeaponServicesDropWeaponHook {
             WeaponServices = @event.Player.PlayerPawn!.WeaponServices!,
@@ -256,12 +256,12 @@ internal class CoreHookService : IDisposable
 
     internal void HookWeaponServicesDropWeapon()
     {
-        core.GameHooks.Weapons.OnDrop.Pre += WeaponDropPre;
+        core.GameHooks.Weapons.Drop.Pre += WeaponDropPre;
     }
 
     internal void UnhookWeaponServicesDropWeapon()
     {
-        core.GameHooks.Weapons.OnDrop.Pre -= WeaponDropPre;
+        core.GameHooks.Weapons.Drop.Pre -= WeaponDropPre;
     }
 
     internal void HookICvarFindConCommandTemplate()

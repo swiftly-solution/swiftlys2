@@ -4,7 +4,7 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class ProcessUsercmdsController : IProcessUsercmdsController
+internal sealed class ProcessUsercmdsControllerData : IProcessUsercmdsController
 {
     public required IPlayer Player { get; set; }
 

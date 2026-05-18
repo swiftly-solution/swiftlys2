@@ -2,7 +2,7 @@ using SwiftlyS2.Shared.GameHooks;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GameHookItems : IGameHookItems
+internal sealed class GameHookItem : IGameHookItem
 {
     internal readonly CanAcquireItemEvents CanAcquireEvents = new();
 

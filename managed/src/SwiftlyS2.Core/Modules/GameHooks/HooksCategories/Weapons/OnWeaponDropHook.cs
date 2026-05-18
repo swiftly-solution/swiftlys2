@@ -5,7 +5,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class OnWeaponDropData : IOnWeaponDrop
+internal sealed class WeaponDropData : IWeaponDrop
 {
     public required IPlayer Player { get; set; }
     public required CBasePlayerWeapon? Weapon { get; init; }
@@ -13,7 +13,7 @@ internal sealed class OnWeaponDropData : IOnWeaponDrop
     public HookResult Result { get; set; } = HookResult.Continue;
 }
 
-internal sealed class OnWeaponDropEvents : IOnWeaponDropEvents
+internal sealed class WeaponDropEvents : IWeaponDropEvents
 {
     internal event OnWeaponDropDelegate? _Pre;
     internal event OnWeaponDropDelegate? _Post;
@@ -40,12 +40,12 @@ internal sealed class OnWeaponDropEvents : IOnWeaponDropEvents
         }
     }
 
-    public void InvokePre( ref IOnWeaponDrop data )
+    public void InvokePre( ref IWeaponDrop data )
     {
         _Pre?.Invoke(ref data);
     }
 
-    public void InvokePost( ref IOnWeaponDrop data )
+    public void InvokePost( ref IWeaponDrop data )
     {
         _Post?.Invoke(ref data);
     }
