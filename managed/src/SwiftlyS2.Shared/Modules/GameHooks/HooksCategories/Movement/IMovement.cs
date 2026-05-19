@@ -11,4 +11,9 @@ public interface IGameHookMovement
     /// Event triggered when the player movement data is set up.
     /// </summary>
     public ISetupMoveMovementEvents SetupMove { get; }
+
+    /// <summary>
+    /// Event triggered when the player movement data is being processed.
+    /// </summary>
+    public IProcessMovementMovementEvents ProcessMovement { get; }
 }

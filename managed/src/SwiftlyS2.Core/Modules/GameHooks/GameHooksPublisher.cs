@@ -13,6 +13,7 @@ internal enum HookListener
     WeaponDrop,
     SimulateUserCommands,
     SetupMove,
+    ProcessMovement,
 }
 
 internal static partial class GameHooksPublisher
@@ -88,6 +89,7 @@ internal static partial class GameHooksPublisher
             HookListener.WeaponDrop => HookDropWeapon(),
             HookListener.SimulateUserCommands => HookSimulateUserCommands(),
             HookListener.SetupMove => HookSetupMove(),
+            HookListener.ProcessMovement => HookProcessMovement(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
 
@@ -104,6 +106,7 @@ internal static partial class GameHooksPublisher
             HookListener.WeaponDrop => UnhookDropWeapon(),
             HookListener.SimulateUserCommands => UnhookSimulateUserCommands(),
             HookListener.SetupMove => UnhookSetupMove(),
+            HookListener.ProcessMovement => UnhookProcessMovement(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
     }

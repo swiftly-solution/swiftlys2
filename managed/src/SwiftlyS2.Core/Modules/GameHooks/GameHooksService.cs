@@ -45,6 +45,7 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
 
         MovementHook.RunCommandEvents.UnregisterListeners();
         MovementHook.SetupMoveEvents.UnregisterListeners();
+        MovementHook.ProcessMovementEvents.UnregisterListeners();
 
         PawnHook.PostThinkEvents.UnregisterListeners();
 
@@ -213,6 +214,46 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         finally
         {
             profiler.StopRecording("GameHooks::Movement::SetupMove::Post");
+        }
+    }
+
+    internal void InvokeProcessMovementPre( ref IProcessMovementMovement @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Movement::ProcessMovement::Pre");
+            MovementHook.ProcessMovementEvents.InvokePre(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Movement::ProcessMovement::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Movement::ProcessMovement::Pre");
+        }
+    }
+
+    internal void InvokeProcessMovementPost( ref IProcessMovementMovement @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Movement::ProcessMovement::Post");
+            MovementHook.ProcessMovementEvents.InvokePost(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Movement::ProcessMovement::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Movement::ProcessMovement::Post");
         }
     }
 
