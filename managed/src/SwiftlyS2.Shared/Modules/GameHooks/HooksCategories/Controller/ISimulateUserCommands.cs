@@ -20,13 +20,7 @@ public delegate void OnSimulateUserCommandsDelegate( ref ISimulateUserCommandsCo
 
 public interface ISimulateUserCommandsEvents
 {
-    /// <summary>
-    /// Event triggered before the simulation of user commands happen.
-    /// </summary>
     public event OnSimulateUserCommandsDelegate Pre;
 
-    /// <summary>
-    /// Event triggered after the simulation of user commands has been finished.
-    /// </summary>
     public event OnSimulateUserCommandsDelegate Post;
 }

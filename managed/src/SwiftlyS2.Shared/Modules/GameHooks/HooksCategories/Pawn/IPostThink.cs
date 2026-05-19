@@ -20,13 +20,7 @@ public delegate void OnPostThinkPawnDelegate( ref IPostThinkPawn postThink );
 
 public interface IPostThinkPawnEvents
 {
-    /// <summary>
-    /// Event triggered before a weapon can use logic is ran by game.
-    /// </summary>
     public event OnPostThinkPawnDelegate Pre;
 
-    /// <summary>
-    /// Event triggered after the weapon can use logic is ran by game.
-    /// </summary>
     public event OnPostThinkPawnDelegate Post;
 }

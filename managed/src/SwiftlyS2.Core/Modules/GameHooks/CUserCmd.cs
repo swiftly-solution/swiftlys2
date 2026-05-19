@@ -7,7 +7,7 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-public class CUserCmd : IUserCmd, IDisposable
+internal class CUserCmd : IUserCmd, IDisposable
 {
     private bool _disposed = false;
     private CSGOUserCmdPBImpl? _csgoUserCmd = null;
@@ -47,6 +47,11 @@ public class CUserCmd : IUserCmd, IDisposable
             }
             return _buttonState;
         }
+    }
+
+    ~CUserCmd()
+    {
+        Dispose();
     }
 
     public void Dispose()

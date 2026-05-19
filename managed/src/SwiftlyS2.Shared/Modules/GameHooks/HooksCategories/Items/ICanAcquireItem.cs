@@ -52,13 +52,7 @@ public delegate void OnCanAcquireItemDelegate( ref ICanAcquireItem canAcquire );
 
 public interface ICanAcquireItemEvents
 {
-    /// <summary>
-    /// Event triggered before an item can be acquired.
-    /// </summary>
     public event OnCanAcquireItemDelegate Pre;
 
-    /// <summary>
-    /// Event triggered after an item can be acquired.
-    /// </summary>
     public event OnCanAcquireItemDelegate Post;
 }

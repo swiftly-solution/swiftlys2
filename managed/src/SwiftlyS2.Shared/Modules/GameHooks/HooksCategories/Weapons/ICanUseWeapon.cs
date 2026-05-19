@@ -41,13 +41,7 @@ public delegate void OnCanUseWeaponDelegate( ref ICanUseWeapon canUse );
 
 public interface ICanUseWeaponEvents
 {
-    /// <summary>
-    /// Event triggered before a weapon can use logic is ran by game.
-    /// </summary>
     public event OnCanUseWeaponDelegate Pre;
 
-    /// <summary>
-    /// Event triggered after the weapon can use logic is ran by game.
-    /// </summary>
     public event OnCanUseWeaponDelegate Post;
 }

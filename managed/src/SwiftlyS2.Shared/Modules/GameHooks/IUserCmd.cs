@@ -1,3 +1,4 @@
+using SwiftlyS2.Core.GameHooks;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
@@ -12,4 +13,6 @@ public interface IUserCmd
     public CSGOUserCmdPB CSGOUserCmd { get; }
 
     public CInButtonState ButtonState { get; }
+
+    public static IUserCmd From( nint address ) => new CUserCmd { Address = address };
 }

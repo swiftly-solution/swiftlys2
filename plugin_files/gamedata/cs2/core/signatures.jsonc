@@ -265,7 +265,7 @@
     "CCSPlayer_MovementServices::WalkMove": {
         "lib": "server",
         "windows": "48 8B C4 48 89 70 ? 48 89 78 ? 55 41 54 41 55 41 56 41 57 48 8D A8",
-        "linux": "55 66 0F EF C0 48 89 E5 41 57 41 56 4C 8D BD ? ? ? ? 41 55 4C 8D B5"
+        "linux": "55 66 0F EF C0 48 89 E5 41 57 41 56 4C 8D BD ? ? ? ? 41 55 4C 8D AD ? ? ? ? 41 54 4C 8D B5"
     },
     // In the function containing "PreWalkMove", exactly the function above the one containing the string as an argument
     "CCSPlayer_MovementServices::Friction": {

@@ -28,13 +28,7 @@ public delegate void OnWeaponDropDelegate( ref IWeaponDrop drop );
 
 public interface IWeaponDropEvents
 {
-    /// <summary>
-    /// Event triggered before a weapon is dropped.
-    /// </summary>
     public event OnWeaponDropDelegate Pre;
 
-    /// <summary>
-    /// Event triggered after a weapon is dropped.
-    /// </summary>
     public event OnWeaponDropDelegate Post;
 }
