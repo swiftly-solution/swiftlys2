@@ -10,7 +10,8 @@ internal enum HookListener
     RunCommand,
     PostThink,
     CanUse,
-    WeaponDrop
+    WeaponDrop,
+    SimulateUserCommands,
 }
 
 internal static partial class GameHooksPublisher
@@ -84,6 +85,7 @@ internal static partial class GameHooksPublisher
             HookListener.PostThink => HookPostThink(),
             HookListener.CanUse => HookCanUse(),
             HookListener.WeaponDrop => HookDropWeapon(),
+            HookListener.SimulateUserCommands => HookSimulateUserCommands(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
 
@@ -98,6 +100,7 @@ internal static partial class GameHooksPublisher
             HookListener.PostThink => UnhookPostThink(),
             HookListener.CanUse => UnhookCanUse(),
             HookListener.WeaponDrop => UnhookDropWeapon(),
+            HookListener.SimulateUserCommands => UnhookSimulateUserCommands(),
             _ => throw new ArgumentOutOfRangeException(nameof(hookName), $"No hook found for {hookName}"),
         };
     }

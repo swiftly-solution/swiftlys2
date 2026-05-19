@@ -1,4 +1,5 @@
 using SwiftlyS2.Shared.GameHooks;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Players;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
@@ -17,6 +18,7 @@ internal sealed class CanUseWeaponData : ICanUseWeapon
     }
 
     public bool Intercepted { get; set; } = false;
+    public HookResult Result { get; set; } = HookResult.Continue;
 }
 
 internal sealed class CanUseWeaponEvents : ICanUseWeaponEvents

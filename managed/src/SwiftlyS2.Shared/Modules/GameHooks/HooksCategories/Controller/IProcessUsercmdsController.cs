@@ -36,12 +36,12 @@ public delegate void OnProcessUsercmdsDelegate( ref IProcessUsercmdsController c
 public interface IProcessUsercmdsEvents
 {
     /// <summary>
-    /// Event triggered before an item can be acquired.
+    /// Event triggered before the user commands are processed.
     /// </summary>
     public event OnProcessUsercmdsDelegate Pre;
 
     /// <summary>
-    /// Event triggered after an item can be acquired.
+    /// Event triggered after the user commands are processed.
     /// </summary>
     public event OnProcessUsercmdsDelegate Post;
 }

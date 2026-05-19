@@ -44,7 +44,10 @@ internal static partial class GameHooksPublisher
                 Schema.isFollowingServerGuidelines = NativeServerHelpers.IsFollowingServerGuidelines();
 
                 InvokeCanAcquirePre(ref @event);
-                if (@event.Intercepted) return (int)@event.OriginalResult;
+                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
+                {
+                    return (int)@event.OriginalResult;
+                }
 
                 var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
 
@@ -82,6 +85,7 @@ internal static partial class GameHooksPublisher
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeCanAcquirePre(ref @event);
+                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
             }
         }
     }
@@ -93,6 +97,7 @@ internal static partial class GameHooksPublisher
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeCanAcquirePost(ref @event);
+                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
             }
         }
     }

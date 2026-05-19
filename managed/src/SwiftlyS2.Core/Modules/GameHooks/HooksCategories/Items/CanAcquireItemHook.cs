@@ -20,6 +20,7 @@ internal sealed class CanAcquireItemData : ICanAcquireItem
     }
 
     public bool Intercepted { get; set; } = false;
+    public HookResult Result { get; set; } = HookResult.Continue;
 }
 
 internal sealed class CanAcquireItemEvents : ICanAcquireItemEvents

@@ -39,9 +39,14 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
             return;
 
         ControllerHook.ProcessUsercmdsEvents.UnregisterListeners();
+        ControllerHook.SimulateUserCommandsEvents.UnregisterListeners();
+
         ItemsHook.CanAcquireEvents.UnregisterListeners();
+
         MovementHook.RunCommandEvents.UnregisterListeners();
+
         PawnHook.PostThinkEvents.UnregisterListeners();
+
         WeaponsHook.CanUseEvents.UnregisterListeners();
         WeaponsHook.DropEvents.UnregisterListeners();
 
@@ -287,6 +292,46 @@ internal sealed class GameHooksService : IGameHooks, IDisposable
         finally
         {
             profiler.StopRecording("GameHooks::Weapons::Drop::Post");
+        }
+    }
+
+    internal void InvokeSimulateUserCommandsPre( ref ISimulateUserCommandsController @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Controller::SimulateUserCommands::Pre");
+            ControllerHook.SimulateUserCommandsEvents.InvokePre(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Controller::SimulateUserCommands::Pre.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Controller::SimulateUserCommands::Pre");
+        }
+    }
+
+    internal void InvokeSimulateUserCommandsPost( ref ISimulateUserCommandsController @event )
+    {
+        try
+        {
+            profiler.StartRecording("GameHooks::Controller::SimulateUserCommands::Post");
+            ControllerHook.SimulateUserCommandsEvents.InvokePost(ref @event);
+        }
+        catch (Exception e)
+        {
+            if (GlobalExceptionHandler.Handle(ref e))
+            {
+                logger.LogError(e, "Error invoking GameHooks::Controller::SimulateUserCommands::Post.");
+            }
+        }
+        finally
+        {
+            profiler.StopRecording("GameHooks::Controller::SimulateUserCommands::Post");
         }
     }
 }

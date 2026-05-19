@@ -41,6 +41,11 @@ public interface ICanAcquireItem
     /// If the event has been intercepted (the result has been changed).
     /// </summary>
     public bool Intercepted { get; set; }
+
+    /// <summary>
+    /// The result of the hook, used to determine whether to block the original function or not.
+    /// </summary>
+    public HookResult Result { get; set; }
 }
 
 public delegate void OnCanAcquireItemDelegate( ref ICanAcquireItem canAcquire );

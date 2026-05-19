@@ -1,6 +1,7 @@
 using SwiftlyS2.Core.EntitySystem;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Memory;
+using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
@@ -36,7 +37,11 @@ internal static partial class GameHooksPublisher
                 };
 
                 InvokeCanUsePre(ref @event);
-                if (@event.Intercepted) return @event.OriginalResult ? (byte)1 : (byte)0;
+
+                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
+                {
+                    return @event.OriginalResult ? (byte)1 : (byte)0;
+                }
 
                 var result = next()(pWeaponServices, pBasePlayerWeapon);
 
@@ -74,6 +79,7 @@ internal static partial class GameHooksPublisher
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeCanUsePre(ref @event);
+                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
             }
         }
     }
@@ -85,6 +91,7 @@ internal static partial class GameHooksPublisher
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeCanUsePost(ref @event);
+                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
             }
         }
     }
