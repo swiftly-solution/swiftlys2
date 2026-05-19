@@ -26,4 +26,6 @@ internal class CMsgPlayerBulletHitImpl : TypedProtobuf<CMsgPlayerBulletHit>, CMs
     { get => Accessor.GetInt32("penetration_count"); set => Accessor.SetInt32("penetration_count", value); }
     public bool IsKill
     { get => Accessor.GetBool("is_kill"); set => Accessor.SetBool("is_kill", value); }
+    public bool ThroughSmoke
+    { get => Accessor.GetBool("through_smoke"); set => Accessor.SetBool("through_smoke", value); }
 }

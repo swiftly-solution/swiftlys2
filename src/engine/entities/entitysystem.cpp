@@ -39,9 +39,6 @@ typedef void (*CEntitySystem_AddEntityIOEvent)(void*, void*, const char*, void*,
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
-void* g_pGameRules = nullptr;
-ankerl::unordered_dense::set<CEntityInstance*> g_entitySet;
-
 extern void* g_pOnEntityTakeDamageCallback;
 extern void* g_pTraceManager;
 extern void* g_pOnStartupServerCallback;
@@ -226,11 +223,6 @@ void CEntSystem::AddEntityIOEvent(void* pEntity, const char* input, void* activa
     reinterpret_cast<CEntitySystem_AddEntityIOEvent>(sig)(g_pGameEntitySystem, pEntity, input, activator, caller, &var, delay, 0, nullptr, nullptr);
 }
 
-bool CEntSystem::IsValidEntity(void* pEntity)
-{
-    return pEntity != nullptr && g_entitySet.contains((CEntityInstance*)pEntity);
-}
-
 void CEntSystem::AddEntityListener(IEntityListener* listener)
 {
     g_pGameEntitySystem->AddListenerEntity(listener);
@@ -239,11 +231,6 @@ void CEntSystem::AddEntityListener(IEntityListener* listener)
 void CEntSystem::RemoveEntityListener(IEntityListener* listener)
 {
     g_pGameEntitySystem->RemoveListenerEntity(listener);
-}
-
-void* CEntSystem::GetGameRules()
-{
-    return g_pGameRules;
 }
 
 CEntitySystem* CEntSystem::GetEntitySystem()

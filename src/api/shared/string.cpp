@@ -167,6 +167,26 @@ std::string ClearTerminalColors(std::string str)
     return str;
 }
 
+std::string StripAnsiEscapes(std::string str)
+{
+    std::string out;
+    out.reserve(str.size());
+    for (std::size_t i = 0; i < str.size(); ++i)
+    {
+        if (str[i] == '\x1b' && i + 1 < str.size() && str[i + 1] == '[')
+        {
+            i += 2;
+            while (i < str.size() && !(str[i] >= 0x40 && str[i] <= 0x7E))
+                ++i;
+        }
+        else
+        {
+            out += str[i];
+        }
+    }
+    return out;
+}
+
 std::string GetTerminalStringColor(std::string plugin_name)
 {
     auto hash = hash_64_fnv1a_const(plugin_name.c_str());

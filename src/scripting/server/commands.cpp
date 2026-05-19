@@ -87,7 +87,7 @@ void Bridge_Commands_UnregisterAlias(uint64_t callbackID)
 uint64_t Bridge_Commands_RegisterClientCommandsListener(void* callback)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    return servercommands->RegisterClientCommandsListener([callback](int playerid, const std::string& command) -> bool { return reinterpret_cast<bool (*)(int, const char*)>(callback)(playerid, command.c_str()); });
+    return servercommands->RegisterClientCommandsListener([callback](int playerid, const std::string& command) -> int { return reinterpret_cast<int (*)(int, const char*)>(callback)(playerid, command.c_str()); });
 }
 
 void Bridge_Commands_UnregisterClientCommandsListener(uint64_t callbackID)
@@ -99,7 +99,7 @@ void Bridge_Commands_UnregisterClientCommandsListener(uint64_t callbackID)
 uint64_t Bridge_Commands_RegisterClientChatListener(void* callback)
 {
     auto servercommands = g_ifaceService.FetchInterface<IServerCommands>(SERVERCOMMANDS_INTERFACE_VERSION);
-    return servercommands->RegisterClientChatListener([callback](int playerid, const std::string& text, bool teamonly) -> bool { return reinterpret_cast<int (*)(int, const char*, uint8_t)>(callback)(playerid, text.c_str(), teamonly ? 1 : 0); });
+    return servercommands->RegisterClientChatListener([callback](int playerid, const std::string& text, bool teamonly) -> int { return reinterpret_cast<int (*)(int, const char*, uint8_t)>(callback)(playerid, text.c_str(), teamonly ? 1 : 0); });
 }
 
 void Bridge_Commands_UnregisterClientChatListener(uint64_t callbackID)

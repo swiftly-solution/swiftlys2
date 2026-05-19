@@ -103,7 +103,7 @@ internal class PermissionManager : IPermissionManager
         {
             return true;
         }
-        if (!from.Contains("*"))
+        if (!from.Contains('*'))
         {
             return string.Equals(from, target, StringComparison.OrdinalIgnoreCase);
         }
@@ -217,12 +217,14 @@ internal class PermissionManager : IPermissionManager
     {
         lock (_lock)
         {
-            if (_temporaryPlayerPermissions.TryGetValue(playerId, out var permissions))
+            if (_temporaryPlayerPermissions.TryGetValue(playerId, out var tempPermissions))
             {
-                if (permissions.Contains(permission))
-                {
-                    _ = permissions.Remove(permission);
-                }
+                _ = tempPermissions.Remove(permission);
+            }
+
+            if (_playerPermissions.TryGetValue(playerId, out var basePermissions))
+            {
+                _ = basePermissions.Remove(permission);
             }
         }
 
@@ -264,11 +266,12 @@ internal class PermissionManager : IPermissionManager
         _queryCache = _queryCache.Clear();
     }
 
-    public void ClearPermission( ulong playerId )
+    public void ClearPermissions( ulong playerId )
     {
         lock (_lock)
         {
             _ = _temporaryPlayerPermissions.Remove(playerId);
+            _ = _playerPermissions.Remove(playerId);
         }
 
         _queryCache = _queryCache.Clear();

@@ -15,4 +15,5 @@ public interface CMsgPlayerBulletHit : ITypedProtobuf<CMsgPlayerBulletHit>
     public int Damage { get; set; }
     public int PenetrationCount { get; set; }
     public bool IsKill { get; set; }
+    public bool ThroughSmoke { get; set; }
 }

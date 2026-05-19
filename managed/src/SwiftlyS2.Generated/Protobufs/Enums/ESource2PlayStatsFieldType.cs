@@ -19,4 +19,5 @@ public enum ESource2PlayStatsFieldType
     Source2PlayStats_UTCDateTime = 14,
     Source2PlayStats_SteamIDTrustBucket = 15,
     Source2PlayStats_SteamIDTrustBucketMin = 16,
+    Source2PlayStats_SteamID = 17,
 }

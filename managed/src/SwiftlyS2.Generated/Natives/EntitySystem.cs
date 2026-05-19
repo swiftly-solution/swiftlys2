@@ -72,59 +72,11 @@ internal static class NativeEntitySystem
         });
     }
 
-    private unsafe static delegate* unmanaged<nint, byte> _IsValidEntity;
-
-    public unsafe static bool IsValidEntity(nint entity)
-    {
-        var ret = _IsValidEntity(entity);
-        return ret == 1;
-    }
-
-    private unsafe static delegate* unmanaged<nint> _GetGameRules;
-
-    public unsafe static nint GetGameRules()
-    {
-        var ret = _GetGameRules();
-        return ret;
-    }
-
     private unsafe static delegate* unmanaged<nint> _GetEntitySystem;
 
     public unsafe static nint GetEntitySystem()
     {
         var ret = _GetEntitySystem();
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<uint, byte> _EntityHandleIsValid;
-
-    public unsafe static bool EntityHandleIsValid(uint handle)
-    {
-        var ret = _EntityHandleIsValid(handle);
-        return ret == 1;
-    }
-
-    private unsafe static delegate* unmanaged<uint, nint> _EntityHandleGet;
-
-    public unsafe static nint EntityHandleGet(uint handle)
-    {
-        var ret = _EntityHandleGet(handle);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<nint, uint> _GetEntityHandleFromEntity;
-
-    public unsafe static uint GetEntityHandleFromEntity(nint entity)
-    {
-        var ret = _GetEntityHandleFromEntity(entity);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<nint> _GetFirstActiveEntity;
-
-    public unsafe static nint GetFirstActiveEntity()
-    {
-        var ret = _GetFirstActiveEntity();
         return ret;
     }
 
@@ -150,14 +102,6 @@ internal static class NativeEntitySystem
     public unsafe static void UnhookEntityOutput(ulong hookid)
     {
         _UnhookEntityOutput(hookid);
-    }
-
-    private unsafe static delegate* unmanaged<uint, nint> _GetEntityByIndex;
-
-    public unsafe static nint GetEntityByIndex(uint index)
-    {
-        var ret = _GetEntityByIndex(index);
-        return ret;
     }
 
     private unsafe static delegate* unmanaged<byte> _IsValid;

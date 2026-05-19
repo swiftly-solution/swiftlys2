@@ -359,6 +359,12 @@ public class TestPlugin : BasePlugin
         //     @event.LocToken = "test";
         //     return HookResult.Continue;
         // });
+        //
+        Core.Command.HookClientChat(( playerId, text, teamOnly ) =>
+        {
+            Console.WriteLine($"[TestPlugin] ClientChat: {playerId} said '{text}' (teamOnly: {teamOnly})");
+            return HookResult.CancelOriginal;
+        });
 
         _ = Core.Configuration
             .InitializeJsonWithModel<PluginConfig>("test.jsonc", "Main")
@@ -689,8 +695,17 @@ public class TestPlugin : BasePlugin
     {
         var ent = Core.EntitySystem.CreateEntity<CPointWorldText>();
         ent.DispatchSpawn();
-        ent.Collision.MaxsUpdated();
-        ent.Collision.CollisionAttribute.OwnerIdUpdated();
+
+        var handle = new CHandle<CPointWorldText> {
+            Value = ent
+        };
+
+        Console.WriteLine($"Entity pointer: 0x{ent.Address:X}");
+        Console.WriteLine($"Handle value pointer: 0x{handle.Value?.Address:X}");
+
+        Console.WriteLine($"Entity index: {ent.Index}");
+        Console.WriteLine($"Handle value index: {handle.EntityIndex}");
+        Console.WriteLine($"Entity identity index: {ent.Entity!.EntityHandle.EntityIndex}");
     }
 
     [Command("tt3")]
@@ -1296,6 +1311,26 @@ public class TestPlugin : BasePlugin
         // menu.DefaultComment = "No specific comment";
         Core.MenusAPI.OpenMenu(menu);
         // Core.MenusAPI.OpenMenuForPlayer(player, menu);
+    }
+
+    [Command("menutest")]
+    public void MenuTestCommand( ICommandContext context )
+    {
+        var player = context.Sender!;
+        var menu = Core.MenusAPI
+            .CreateBuilder()
+            .Design.SetMenuTitle("Test Menu")
+            .AddOption(new InputMenuOption("123456", 16, ( val ) =>
+            {
+                Console.WriteLine($"Input received: {val}");
+                return true;
+            }))
+            .Build();
+
+        Core.MenusAPI.OpenMenuForPlayer(player, menu, ( p, m ) =>
+        {
+            Console.WriteLine($"{m.Configuration.Title} closed for player: {p.Controller.PlayerName}");
+        });
     }
 
     // [Command("mt")]

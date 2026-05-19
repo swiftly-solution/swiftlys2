@@ -73,22 +73,6 @@ internal static class NativePlayer
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<int, nint> _GetPawn;
-
-    public unsafe static nint GetPawn(int playerid)
-    {
-        var ret = _GetPawn(playerid);
-        return ret;
-    }
-
-    private unsafe static delegate* unmanaged<int, nint> _GetPlayerPawn;
-
-    public unsafe static nint GetPlayerPawn(int playerid)
-    {
-        var ret = _GetPlayerPawn(playerid);
-        return ret;
-    }
-
     private unsafe static delegate* unmanaged<int, ulong> _GetPressedButtons;
 
     public unsafe static ulong GetPressedButtons(int playerid)

@@ -24,6 +24,7 @@
 #include <ctime>
 #include <time.h>
 
+#include <algorithm>
 #include <filesystem>
 #include <fmt/format.h>
 
@@ -54,6 +55,7 @@ std::string Files::Read(std::string path)
     s.resize(size);
     std::fread(&s[0], 1u, size, fp);
     std::fclose(fp);
+    s.erase(std::remove(s.begin(), s.end(), '\r'), s.end());
     return s;
 }
 

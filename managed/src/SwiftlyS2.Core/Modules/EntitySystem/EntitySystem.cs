@@ -60,7 +60,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
     public CHandle<T> GetRefEHandle<T>( T entity ) where T : class, ISchemaClass<T>
     {
         ThrowIfEntitySystemInvalid();
-        return new CHandle<T> { Raw = NativeEntitySystem.GetEntityHandleFromEntity(entity.Address) };
+        return new CHandle<T> { Value = entity };
     }
 
     public CCSGameRules? GetGameRules()
@@ -72,7 +72,7 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
         }
         cachedGameRules = null;
         cachedGameRulesProxy = null;
-            
+
         if (GetAllEntitiesByClass<CCSGameRulesProxy>().FirstOrDefault() is CCSGameRulesProxy proxy)
         {
             cachedGameRulesProxy = proxy;

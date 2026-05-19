@@ -27,4 +27,5 @@ public interface CMsgSource2PlayStatsPackedRecordList : ITypedProtobuf<CMsgSourc
     public IProtobufRepeatedFieldValueType<uint> UtcdatetimeVals { get; }
     public IProtobufRepeatedFieldValueType<ulong> SteamidtrustbucketVals { get; }
     public IProtobufRepeatedFieldSubMessageType<CMsgSource2PlayStatsPackedRecordList_SteamIDList> TrustbucketVals { get; }
+    public IProtobufRepeatedFieldValueType<ulong> SteamidVals { get; }
 }

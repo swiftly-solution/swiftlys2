@@ -52,5 +52,6 @@ public enum EBaseUserMessages
     UM_ExtraUserData = 164,
     UM_NotifyResponseFound = 165,
     UM_PlayResponseConditional = 166,
+    UM_UserSentBugBug = 167,
     UM_MAX_BASE = 200,
 }

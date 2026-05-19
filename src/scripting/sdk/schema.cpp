@@ -25,43 +25,10 @@ void Bridge_SDK_Schema_SetStateChanged(void* pEntity, uint64_t uHash)
     schema->SetStateChanged(pEntity, uHash);
 }
 
-uint32_t Bridge_SDK_Schema_FindChainOffset(const char* sClassName)
-{
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    return schema->FindChainOffset(sClassName);
-}
-
 int32_t Bridge_SDK_Schema_GetOffset(uint64_t uHash)
 {
     static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
     return schema->GetOffset(uHash);
-}
-
-bool Bridge_SDK_Schema_IsStruct(const char* sClassName)
-{
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    return schema->IsStruct(sClassName);
-}
-
-bool Bridge_SDK_Schema_IsClassLoaded(const char* sClassName)
-{
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    return schema->IsClassLoaded(sClassName);
-}
-
-void* Bridge_SDK_Schema_GetPropPtr(void* pEntity, uint64_t uHash)
-{
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    if (!schema)
-        return nullptr;
-
-    return schema->GetPropPtr(pEntity, uHash);
-}
-
-void Bridge_SDK_Schema_WritePropPtr(void* pEntity, uint64_t uHash, void* pValue, uint32_t size)
-{
-    static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-    schema->WritePropPtr(pEntity, uHash, pValue, size);
 }
 
 void* Bridge_SDK_Schema_GetVData(void* pEntity)
@@ -77,11 +44,6 @@ void* Bridge_SDK_Schema_GetDatamapFunction(uint32_t uHash)
 }
 
 DEFINE_NATIVE("Schema.SetStateChanged", Bridge_SDK_Schema_SetStateChanged);
-DEFINE_NATIVE("Schema.FindChainOffset", Bridge_SDK_Schema_FindChainOffset);
 DEFINE_NATIVE("Schema.GetOffset", Bridge_SDK_Schema_GetOffset);
-DEFINE_NATIVE("Schema.IsStruct", Bridge_SDK_Schema_IsStruct);
-DEFINE_NATIVE("Schema.IsClassLoaded", Bridge_SDK_Schema_IsClassLoaded);
-DEFINE_NATIVE("Schema.GetPropPtr", Bridge_SDK_Schema_GetPropPtr);
-DEFINE_NATIVE("Schema.WritePropPtr", Bridge_SDK_Schema_WritePropPtr);
 DEFINE_NATIVE("Schema.GetVData", Bridge_SDK_Schema_GetVData);
 DEFINE_NATIVE("Schema.GetDatamapFunction", Bridge_SDK_Schema_GetDatamapFunction);

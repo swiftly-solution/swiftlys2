@@ -31,7 +31,6 @@ extern void* g_pOnEntityCreatedCallback;
 extern void* g_pOnEntityDeletedCallback;
 extern void* g_pOnEntityParentChangedCallback;
 extern void* g_pOnEntitySpawnedCallback;
-extern ankerl::unordered_dense::set<CEntityInstance*> g_entitySet;
 
 void CEntityListener::OnEntitySpawned(CEntityInstance* pEntity)
 {
@@ -47,15 +46,8 @@ void CEntityListener::OnEntityParentChanged(CEntityInstance* pEntity, CEntityIns
 
 void CEntityListener::OnEntityCreated(CEntityInstance* pEntity)
 {
-    g_entitySet.insert(pEntity);
-
     if (g_pOnEntityCreatedCallback)
         reinterpret_cast<void(*)(void*)>(g_pOnEntityCreatedCallback)(pEntity);
-
-    if (std::string(pEntity->GetClassname()) == "cs_gamerules") {
-        static auto schema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
-        g_pGameRules = *(void**)(schema->GetPropPtr(pEntity, CCSGameRulesProxy_m_pGameRules));
-    }
 }
 
 void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
@@ -81,6 +73,4 @@ void CEntityListener::OnEntityDeleted(CEntityInstance* pEntity)
 
     if (g_pOnEntityDeletedCallback)
         reinterpret_cast<void(*)(void*)>(g_pOnEntityDeletedCallback)(pEntity);
-
-    g_entitySet.erase(pEntity);
 }

@@ -60,47 +60,10 @@ void Bridge_EntitySystem_AddEntityIOEvent(void* pEntity, const char* input, void
     reinterpret_cast<CEntitySystem_AddEntityIOEvent>(sig)(entsystem->GetEntitySystem(), pEntity, input, pActivator, pCaller, variant, delay, 0, nullptr, nullptr);
 }
 
-bool Bridge_EntitySystem_IsValidEntity(void* pEntity)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    return entsystem->IsValidEntity(pEntity);
-}
-
-void* Bridge_EntitySystem_GetGameRules()
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    return entsystem->GetGameRules();
-}
-
 void* Bridge_EntitySystem_GetEntitySystem()
 {
     static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
     return entsystem->GetEntitySystem();
-}
-
-
-void* Bridge_EntitySystem_GetFirstActiveEntity()
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    return entsystem->GetEntitySystem()->m_EntityList.m_pFirstActiveEntity;
-}
-
-
-bool Bridge_EntitySystem_EntityHandleIsValid(uint32 ihandle)
-{
-    CEntityHandle handle(ihandle);
-    return handle.IsValid() && handle.Get() != nullptr;
-}
-
-void* Bridge_EntitySystem_EntityHandleGet(uint32 ihandle)
-{
-    CEntityHandle handle(ihandle);
-    return handle.Get();
-}
-
-int Bridge_EntitySystem_GetEntityHandleFromEntity(CEntityInstance* pEntity)
-{
-    return pEntity->GetRefEHandle().ToInt();
 }
 
 uint64_t Bridge_EntitySystem_HookEntityOutput(const char* className, const char* outputName, void* callback)
@@ -115,13 +78,6 @@ void Bridge_EntitySystem_UnhookEntityOutput(uint64_t hookid)
     hooksystem->DestroyEntityHookOutput(hookid);
 }
 
-
-void* Bridge_EntitySystem_GetEntityByIndex(uint32_t index)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    return entsystem->GetEntitySystem()->GetEntityInstance(CEntityIndex(index));
-}
-
 bool Bridge_EntitySystem_IsValid()
 {
     static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
@@ -133,14 +89,7 @@ DEFINE_NATIVE("EntitySystem.Despawn", Bridge_EntitySystem_Despawn);
 DEFINE_NATIVE("EntitySystem.CreateEntityByName", Bridge_EntitySystem_CreateEntityByName);
 DEFINE_NATIVE("EntitySystem.AcceptInput", Bridge_EntitySystem_AcceptInput);
 DEFINE_NATIVE("EntitySystem.AddEntityIOEvent", Bridge_EntitySystem_AddEntityIOEvent);
-DEFINE_NATIVE("EntitySystem.IsValidEntity", Bridge_EntitySystem_IsValidEntity);
-DEFINE_NATIVE("EntitySystem.GetGameRules", Bridge_EntitySystem_GetGameRules);
 DEFINE_NATIVE("EntitySystem.GetEntitySystem", Bridge_EntitySystem_GetEntitySystem);
-DEFINE_NATIVE("EntitySystem.EntityHandleIsValid", Bridge_EntitySystem_EntityHandleIsValid);
-DEFINE_NATIVE("EntitySystem.EntityHandleGet", Bridge_EntitySystem_EntityHandleGet);
-DEFINE_NATIVE("EntitySystem.GetEntityHandleFromEntity", Bridge_EntitySystem_GetEntityHandleFromEntity);
-DEFINE_NATIVE("EntitySystem.GetFirstActiveEntity", Bridge_EntitySystem_GetFirstActiveEntity);
 DEFINE_NATIVE("EntitySystem.HookEntityOutput", Bridge_EntitySystem_HookEntityOutput);
 DEFINE_NATIVE("EntitySystem.UnhookEntityOutput", Bridge_EntitySystem_UnhookEntityOutput);
-DEFINE_NATIVE("EntitySystem.GetEntityByIndex", Bridge_EntitySystem_GetEntityByIndex);
 DEFINE_NATIVE("EntitySystem.IsValid", Bridge_EntitySystem_IsValid);

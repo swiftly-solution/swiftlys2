@@ -29,7 +29,6 @@
 #include <fmt/format.h>
 
 #include <nlohmann/json.hpp>
-#include <variant>
 #include <type_traits>
 
 using json = nlohmann::json;
@@ -491,6 +490,13 @@ bool Configuration::Load()
         RegisterConfiguration(wasEdited, config_json, "core", "core", "Menu.Buttons.Scroll", "shift");
         RegisterConfiguration(wasEdited, config_json, "core", "core", "Menu.Buttons.ScrollBack", "f");
         RegisterConfiguration(wasEdited, config_json, "core", "core", "Menu.Buttons.Exit", "tab");
+
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Enable", true);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.Enable", true);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.Mode", "file_count");
+        RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.AvailableModes", { "file_count", "time_interval" }, true, " ");
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.MaximumFiles", 60);
+        RegisterConfiguration(wasEdited, config_json, "core", "core", "ConsoleLogger.Rotation.DeleteOlderThanHours", 168);
 
         RegisterConfiguration(wasEdited, config_json, "core", "core", "ManualLoadPlugins", false);
         RegisterConfigurationVector<std::string>(wasEdited, config_json, "core", "core", "PluginLoadOrder", {}, true, "\x01");

@@ -50,10 +50,14 @@ public interface IPermissionManager
     public void RemoveSubPermission( string permission, string subPermission );
 
     /// <summary>
-    /// Clear all permission from a player.
+    /// Clears all permissions from a player (both base and temporary).
     /// </summary>
     /// <param name="steamId"> The Steam ID of the player. </param>
-    public void ClearPermission( ulong steamId );
+    public void ClearPermissions( ulong steamId );
+
+    /// <inheritdoc cref="ClearPermissions"/>
+    [Obsolete("Use ClearPermissions instead.")]
+    public void ClearPermission( ulong steamId ) => ClearPermissions(steamId);
 
     /// <summary>
     /// Gets all permissions of a player, including inherited permissions from sub-permissions.

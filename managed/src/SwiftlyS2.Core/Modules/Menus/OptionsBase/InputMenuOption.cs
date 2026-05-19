@@ -45,7 +45,7 @@ public sealed class InputMenuOption : MenuOptionBase
         string defaultValue = "",
         string? hintMessage = null,
         int updateIntervalMs = 120,
-        int pauseIntervalMs = 1000 ) : base(updateIntervalMs, pauseIntervalMs)
+        int pauseIntervalMs = 1000) : base(updateIntervalMs, pauseIntervalMs)
     {
         if (maxLength <= 0)
         {
@@ -80,12 +80,12 @@ public sealed class InputMenuOption : MenuOptionBase
         string defaultValue = "",
         string? hintMessage = null,
         int updateIntervalMs = 120,
-        int pauseIntervalMs = 1000 ) : this(maxLength, validator, defaultValue, hintMessage, updateIntervalMs, pauseIntervalMs)
+        int pauseIntervalMs = 1000) : this(maxLength, validator, defaultValue, hintMessage, updateIntervalMs, pauseIntervalMs)
     {
         Text = text;
     }
 
-    public override string GetDisplayText( IPlayer player, int displayLine = 0 )
+    public override string GetDisplayText(IPlayer player, int displayLine = 0)
     {
         if (inputStates.TryGetValue(player.PlayerID, out var state))
         {
@@ -103,7 +103,7 @@ public sealed class InputMenuOption : MenuOptionBase
     /// </summary>
     /// <param name="player">The player whose value to retrieve.</param>
     /// <returns>The current input value.</returns>
-    public string GetValue( IPlayer player )
+    public string GetValue(IPlayer player)
     {
         return values.GetOrAdd(player.PlayerID, defaultValue);
     }
@@ -114,7 +114,7 @@ public sealed class InputMenuOption : MenuOptionBase
     /// <param name="player">The player whose value to set.</param>
     /// <param name="value">The value to set.</param>
     /// <returns>True if the value is valid and was set, false otherwise.</returns>
-    public bool SetValue( IPlayer player, string value )
+    public bool SetValue(IPlayer player, string value)
     {
         if (value.Length > maxLength)
         {
@@ -127,11 +127,12 @@ public sealed class InputMenuOption : MenuOptionBase
         }
 
         var oldValue = values.GetOrAdd(player.PlayerID, defaultValue);
-        _ = values.AddOrUpdate(player.PlayerID, value, ( _, _ ) => value);
+        _ = values.AddOrUpdate(player.PlayerID, value, (_, _) => value);
 
         try
         {
-            ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<string> {
+            ValueChanged?.Invoke(this, new MenuOptionValueChangedEventArgs<string>
+            {
                 Player = player,
                 Option = this,
                 OldValue = oldValue,
@@ -147,7 +148,7 @@ public sealed class InputMenuOption : MenuOptionBase
         return true;
     }
 
-    private ValueTask OnInputClick( object? sender, MenuOptionClickEventArgs args )
+    private ValueTask OnInputClick(object? sender, MenuOptionClickEventArgs args)
     {
         if (Menu?.MenuManager.Core != null && chatHookGuid == Guid.Empty)
         {
@@ -169,15 +170,15 @@ public sealed class InputMenuOption : MenuOptionBase
         }
 
         var waitingState = $"<font color='#C0FF3E'>{GlobalLocalization.MenuInputWaiting()}</font> ({GlobalLocalization.MenuInputCancelHint()})";
-        _ = inputStates.AddOrUpdate(args.Player.PlayerID, waitingState, ( _, _ ) => waitingState);
+        _ = inputStates.AddOrUpdate(args.Player.PlayerID, waitingState, (_, _) => waitingState);
         _ = args.Player.SendMessageAsync(MessageType.Chat, hintMessage);
 
-        _ = waitingForInput.AddOrUpdate(args.Player.PlayerID, true, ( _, _ ) => true);
+        _ = waitingForInput.AddOrUpdate(args.Player.PlayerID, true, (_, _) => true);
 
         return ValueTask.CompletedTask;
     }
 
-    private HookResult OnChatInput( int playerId, string text, bool teamonly )
+    private HookResult OnChatInput(int playerId, string text, bool teamonly)
     {
         var player = Menu?.MenuManager.Core.PlayerManager.GetPlayer(playerId);
         if (player == null || !waitingForInput.ContainsKey(player.PlayerID))
@@ -193,7 +194,7 @@ public sealed class InputMenuOption : MenuOptionBase
             ? $"<font color='#FF0000'>{GlobalLocalization.MenuInputInvalid()}</font>"
             : $"<font color='#00FF00'>{GlobalLocalization.MenuInputAccepted()}</font>";
 
-        _ = inputStates.AddOrUpdate(player.PlayerID, statusMessage, ( _, _ ) => statusMessage);
+        _ = inputStates.AddOrUpdate(player.PlayerID, statusMessage, (_, _) => statusMessage);
 
         if (statusClearTasks.TryGetValue(player.PlayerID, out var oldCts))
         {
@@ -202,7 +203,7 @@ public sealed class InputMenuOption : MenuOptionBase
         }
 
         var cts = new CancellationTokenSource();
-        _ = statusClearTasks.AddOrUpdate(player.PlayerID, cts, ( _, _ ) => cts);
+        _ = statusClearTasks.AddOrUpdate(player.PlayerID, cts, (_, _) => cts);
 
         _ = Task.Run(async () =>
         {

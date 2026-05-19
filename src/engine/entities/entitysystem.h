@@ -35,18 +35,12 @@ public:
     virtual void AcceptInput(void* pEntity, const char* input, void* activator, void* caller, InputType value, int outputID) override;
     virtual void AddEntityIOEvent(void* pEntity, const char* input, void* activator, void* caller, InputType value, float delay) override;
 
-    virtual bool IsValidEntity(void* pEntity) override;
-
     virtual void AddEntityListener(IEntityListener* listener) override;
     virtual void RemoveEntityListener(IEntityListener* listener) override;
 
     virtual CEntitySystem* GetEntitySystem() override;
 
-    virtual void* GetGameRules() override;
-
     void StartupServer(const GameSessionConfiguration_t& config, ISource2WorldSession*, const char*);
 };
-
-extern void* g_pGameRules;
 
 #endif

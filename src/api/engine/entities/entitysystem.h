@@ -39,14 +39,10 @@ public:
     virtual void AcceptInput(void* pEntity, const char* input, void* activator, void* caller, InputType value, int outputID) = 0;
     virtual void AddEntityIOEvent(void* pEntity, const char* input, void* activator, void* caller, InputType value, float delay) = 0;
 
-    virtual bool IsValidEntity(void* pEntity) = 0;
-
     virtual void AddEntityListener(IEntityListener* listener) = 0;
     virtual void RemoveEntityListener(IEntityListener* listener) = 0;
 
     virtual CEntitySystem* GetEntitySystem() = 0;
-
-    virtual void* GetGameRules() = 0;
 };
 
 #endif

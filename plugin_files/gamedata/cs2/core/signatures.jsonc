@@ -105,19 +105,19 @@
     "BotNavIgnore1": {
         "lib": "server",
         "windows": "0F 84 ? ? ? ? 80 B8 ? ? ? ? ? 0F 84 ? ? ? ? 80 3D ? ? ? ? ? 74",
-        "linux": "0F 84 ? ? ? ? 44 0F B6 B0"
+        "linux": "0F 84 ? ? ? ? 44 0F B6 B8 ? ? ? ? 45 84 FF 0F 84"
     },
     // "Error - cannot add bots after game is over."
     "BotNavIgnore2": {
         "lib": "server",
         "windows": "0F 84 ? ? ? ? 80 B8 ? ? ? ? ? 0F 84 ? ? ? ? 80 3D ? ? ? ? ? 74",
-        "linux": "0F 84 ? ? ? ? 44 0F B6 B0"
+        "linux": "0F 84 ? ? ? ? 44 0F B6 B8 ? ? ? ? 45 84 FF 0F 84"
     },
     // "Error - cannot add bots after game is over."
     "BotNavIgnore3": {
         "lib": "server",
         "windows": "0F 84 ? ? ? ? 80 B8 ? ? ? ? ? 0F 84 ? ? ? ? 80 3D ? ? ? ? ? 74",
-        "linux": "0F 84 ? ? ? ? 44 0F B6 B0"
+        "linux": "0F 84 ? ? ? ? 44 0F B6 B8 ? ? ? ? 45 84 FF 0F 84"
     },
     // Search "Game System %s is defined twice!\n" and get the sig to the first qword referenced
     "IGameSystem::InitAllSystems->pFirst": {

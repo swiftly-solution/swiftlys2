@@ -50,4 +50,6 @@ internal class CMsgSource2PlayStatsPackedRecordListImpl : TypedProtobuf<CMsgSour
     { get => new ProtobufRepeatedFieldValueType<ulong>(Accessor, "steamidtrustbucket_vals"); }
     public IProtobufRepeatedFieldSubMessageType<CMsgSource2PlayStatsPackedRecordList_SteamIDList> TrustbucketVals
     { get => new ProtobufRepeatedFieldSubMessageType<CMsgSource2PlayStatsPackedRecordList_SteamIDList>(Accessor, "trustbucket_vals"); }
+    public IProtobufRepeatedFieldValueType<ulong> SteamidVals
+    { get => new ProtobufRepeatedFieldValueType<ulong>(Accessor, "steamid_vals"); }
 }
