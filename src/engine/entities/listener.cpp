@@ -21,7 +21,6 @@
 
 #include <api/interfaces/manager.h>
 #include <api/shared/plat.h>
-#include <unordered_dense/include/ankerl/unordered_dense.h>
 
 #define CCSGameRulesProxy_m_pGameRules 0x242D3ADB925C1F40
 

@@ -6,7 +6,6 @@ using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Shared.Events;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
-using SwiftlyS2.Core.ProtobufDefinitions;
 using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Core.Players;
 using SwiftlyS2.Core.EntitySystem;
@@ -53,7 +52,6 @@ internal static class EventPublisher
             NativeEvents.RegisterOnEntitySpawnedCallback((nint)(delegate* unmanaged< nint, void >)&OnEntitySpawned);
             NativeEvents.RegisterOnMapLoadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapLoad);
             NativeEvents.RegisterOnMapUnloadCallback((nint)(delegate* unmanaged< nint, void >)&OnMapUnload);
-            NativeEvents.RegisterOnClientProcessUsercmdsCallback((nint)(delegate* unmanaged< int, nint, int, byte, float, void >)&OnClientProcessUsercmds);
             NativeEvents.RegisterOnEntityTakeDamageCallback((nint)(delegate* unmanaged< nint, nint, nint, byte >)&OnEntityTakeDamage);
             NativeEvents.RegisterOnPrecacheResourceCallback((nint)(delegate* unmanaged< nint, void >)&OnPrecacheResource);
             NativeEvents.RegisterOnStartupServerCallback((nint)(delegate* unmanaged< void >)&OnStartupServer);
@@ -586,8 +584,7 @@ internal static class EventPublisher
         }
     }
 
-    [UnmanagedCallersOnly]
-    public static void OnClientProcessUsercmds( int playerId, nint usercmdsPtr, int numcmds, byte paused, float margin )
+    public static void OnClientProcessUsercmds( ref OnClientProcessUsercmdsEvent @event )
     {
         if (subscribers.Count == 0)
         {
@@ -596,23 +593,6 @@ internal static class EventPublisher
 
         try
         {
-            List<CSGOUserCmdPB> usercmds = new(numcmds);
-
-            unsafe
-            {
-                var usercmdPtrs = (nint*)usercmdsPtr;
-                for (var i = 0; i < numcmds; i++)
-                {
-                    usercmds.Add(new CSGOUserCmdPBImpl(usercmdPtrs[i], false));
-                }
-            }
-
-            OnClientProcessUsercmdsEvent @event = new() {
-                PlayerId = playerId,
-                Usercmds = usercmds,
-                Paused = paused != 0,
-                Margin = margin
-            };
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnClientProcessUsercmds(ref @event);

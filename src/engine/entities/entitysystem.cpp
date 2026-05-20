@@ -29,7 +29,6 @@
 
 #include <api/interfaces/manager.h>
 #include <s2binlib/s2binlib.h>
-#include <unordered_dense/include/ankerl/unordered_dense.h>
 
 typedef void (*CBaseEntity_DispatchSpawn)(void*, void*);
 typedef void (*UTIL_Remove)(void*);

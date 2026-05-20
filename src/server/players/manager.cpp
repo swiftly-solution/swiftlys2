@@ -45,7 +45,6 @@ public:
 #endif
 };
 
-IFunctionHook* g_pProcessUserCmdsHook = nullptr;
 IVFunctionHook* g_pOnGameFramePlayerHook = nullptr;
 
 IVFunctionHook* g_pClientConnectHook = nullptr;
@@ -55,7 +54,6 @@ IVFunctionHook* g_pClientPutInServerHook = nullptr;
 
 IVFunctionHook* g_pCheckTransmitHook = nullptr;
 
-void* ProcessUsercmdsHook(void* pController, CUserCmd* cmds, int numcmds, bool paused, float margin);
 void OnGameFramePlayerHook(void* _this, bool simulate, bool first, bool last);
 
 void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName, int type, uint64 xuid);
@@ -101,18 +99,12 @@ void CPlayerManager::Initialize()
     g_pCheckTransmitHook->SetHookFunction(gameentitiesvtable, gamedata->GetOffsets()->Fetch("ISource2GameEntities::CheckTransmit"), reinterpret_cast<void*>(CheckTransmitHook), true);
     g_pCheckTransmitHook->Enable();
 
-    auto processusercmds = gamedata->GetSignatures()->Fetch("CCSPlayerController::ProcessUserCmd");
-
     void* serverGameDLLVTable;
     s2binlib_find_vtable("server", "CSource2Server", &serverGameDLLVTable);
 
     g_pOnGameFramePlayerHook = hooksmanager->CreateVFunctionHook();
     g_pOnGameFramePlayerHook->SetHookFunction(serverGameDLLVTable, gamedata->GetOffsets()->Fetch("IServerGameDLL::GameFrame"), reinterpret_cast<void*>(OnGameFramePlayerHook), true);
     g_pOnGameFramePlayerHook->Enable();
-
-    g_pProcessUserCmdsHook = hooksmanager->CreateFunctionHook();
-    g_pProcessUserCmdsHook->SetHookFunction(processusercmds, reinterpret_cast<void*>(ProcessUsercmdsHook));
-    g_pProcessUserCmdsHook->Enable();
 }
 
 void CPlayerManager::Shutdown()
@@ -133,13 +125,6 @@ void CPlayerManager::Shutdown()
         g_pOnGameFramePlayerHook->Disable();
         hooksmanager->DestroyVFunctionHook(g_pOnGameFramePlayerHook);
         g_pOnGameFramePlayerHook = nullptr;
-    }
-
-    if (g_pProcessUserCmdsHook)
-    {
-        g_pProcessUserCmdsHook->Disable();
-        hooksmanager->DestroyFunctionHook(g_pProcessUserCmdsHook);
-        g_pProcessUserCmdsHook = nullptr;
     }
 
     if (g_pClientConnectHook)
@@ -192,25 +177,6 @@ void OnClientPutInServerHook(void* _this, CPlayerSlot slot, char const* pszName,
 
     if (g_pOnClientPutInServerCallback)
         reinterpret_cast<void (*)(int, int)>(g_pOnClientPutInServerCallback)(slot.Get(), type);
-}
-
-extern void* g_pOnClientProcessUsercmdsCallback;
-
-void* ProcessUsercmdsHook(void* pController, CUserCmd* cmds, int numcmds, bool paused, float margin)
-{
-    auto playerid = ((CEntityInstance*)pController)->m_pEntity->m_EHandle.GetEntryIndex() - 1;
-
-    google::protobuf::Message** pMsg = new google::protobuf::Message * [numcmds];
-    for (int i = 0; i < numcmds; i++) {
-        pMsg[i] = (google::protobuf::Message*)&cmds[i].cmd;
-    }
-
-    if (g_pOnClientProcessUsercmdsCallback)
-        reinterpret_cast<void (*)(int, void*, int, bool, float)>(g_pOnClientProcessUsercmdsCallback)(playerid, pMsg, numcmds, paused, margin);
-
-    delete[] pMsg;
-
-    return reinterpret_cast<void* (*)(void*, CUserCmd*, int, bool, float)>(g_pProcessUserCmdsHook->GetOriginal())(pController, cmds, numcmds, paused, margin);
 }
 
 void CheckTransmitHook(void* _this, CCheckTransmitInfo** ppInfoList, int infoCount, CBitVec<16384>& unionTransmitEdicts, CBitVec<16384>& unk, const Entity2Networkable_t** pNetworkables, const uint16_t* pEntityIndicies, int nEntities)

@@ -51,16 +51,6 @@ internal static class NativeEvents
         _RegisterOnClientKeyStateChangedCallback(callback);
     }
 
-    private unsafe static delegate* unmanaged<nint, void> _RegisterOnClientProcessUsercmdsCallback;
-
-    /// <summary>
-    /// int32 playerid, ptr* usercmds, int numcmds, bool paused, float margin -> void
-    /// </summary>
-    public unsafe static void RegisterOnClientProcessUsercmdsCallback(nint callback)
-    {
-        _RegisterOnClientProcessUsercmdsCallback(callback);
-    }
-
     private unsafe static delegate* unmanaged<nint, void> _RegisterOnClientPutInServerCallback;
 
     /// <summary>

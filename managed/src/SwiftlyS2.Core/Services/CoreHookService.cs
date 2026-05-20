@@ -13,6 +13,7 @@ using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Memory;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
+using SwiftlyS2.Shared.ProtobufDefinitions;
 using SwiftlyS2.Shared.SchemaDefinitions;
 using SwiftlyS2.Shared.SteamAPI;
 
@@ -41,6 +42,7 @@ internal class CoreHookService : IDisposable
         HookEntityIOOutputFireOutputInternal();
         HookDispatchDatamapFunction();
         HookWeaponServicesDropWeapon();
+        HookOnClientProcessUsercmds();
     }
 
     /*
@@ -561,6 +563,27 @@ internal class CoreHookService : IDisposable
         dispatchDatamapFunction = null;
     }
 
+    internal void OnClientProcessUsercmds( ref IProcessUsercmdsController @event )
+    {
+        var @ev = new OnClientProcessUsercmdsEvent {
+            PlayerId = @event.Player.PlayerID,
+            Paused = @event.Paused,
+            Margin = @event.Margin,
+            Usercmds = (List<CSGOUserCmdPB>)@event.Usercmds.Select(@e => @e.CSGOUserCmd)
+        };
+        EventPublisher.OnClientProcessUsercmds(ref @ev);
+    }
+
+    internal void HookOnClientProcessUsercmds()
+    {
+        core.GameHooks.Controller.ProcessUsercmds.Pre += OnClientProcessUsercmds;
+    }
+
+    internal void UnhookOnClientProcessUsercmds()
+    {
+        core.GameHooks.Controller.ProcessUsercmds.Pre -= OnClientProcessUsercmds;
+    }
+
     public void Dispose()
     {
         UnhookExecuteCommand();
@@ -575,5 +598,6 @@ internal class CoreHookService : IDisposable
         UnhookDispatchDatamapFunction();
         UnhookCCSPlayerPawnPostThink();
         UnhookCPlayerMovementServicesRunCommand();
+        UnhookOnClientProcessUsercmds();
     }
 }
