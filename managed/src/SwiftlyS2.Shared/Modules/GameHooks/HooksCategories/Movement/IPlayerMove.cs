@@ -3,20 +3,42 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IPlayerMoveMovement
+public struct PlayerMoveMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
-    public bool OriginalResult { get; }
-    public void SetResult( bool result );
-    public bool Intercepted { get; set; }
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
 }
 
-public delegate void OnPlayerMoveMovementDelegate( ref IPlayerMoveMovement data );
-
-public interface IPlayerMoveMovementEvents
+public ref struct PlayerMoveMovementPreContext
 {
-    public event OnPlayerMoveMovementDelegate Pre;
-    public event OnPlayerMoveMovementDelegate Post;
+    public PlayerMoveMovementParams Params;
+    private bool _return;
+    private bool _returnSet;
+    private HookResult _hookResult;
+
+    public void SetReturn( bool result ) { _return = result; _returnSet = true; }
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+
+    internal bool IsReturnSet => _returnSet;
+    internal bool Return => _return;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct PlayerMoveMovementPostContext
+{
+    public PlayerMoveMovementParams Params;
+    public bool Return { get; set; }
+    private HookResult _hookResult;
+
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnPlayerMoveMovementPreDelegate( ref PlayerMoveMovementPreContext ctx );
+public delegate void OnPlayerMoveMovementPostDelegate( ref PlayerMoveMovementPostContext ctx );
+
+public interface IPlayerMoveMovementHook
+{
+    public event OnPlayerMoveMovementPreDelegate Pre;
+    public event OnPlayerMoveMovementPostDelegate Post;
 }

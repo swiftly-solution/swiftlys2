@@ -1,31 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CheckWaterMovementData : ICheckWaterMovement
+internal sealed class CheckWaterMovementHook : ICheckWaterMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public required bool OriginalResult { get; set; }
+    internal event OnCheckWaterMovementPreDelegate? _Pre;
+    internal event OnCheckWaterMovementPostDelegate? _Post;
 
-    public void SetResult( bool result )
-    {
-        OriginalResult = result;
-        Intercepted = true;
-    }
-
-    public bool Intercepted { get; set; } = false;
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
-
-internal sealed class CheckWaterMovementEvents : ICheckWaterMovementEvents
-{
-    internal event OnCheckWaterMovementDelegate? _Pre;
-    internal event OnCheckWaterMovementDelegate? _Post;
-
-    public event OnCheckWaterMovementDelegate Pre {
+    public event OnCheckWaterMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckWater);
             _Pre += value;
@@ -36,7 +18,7 @@ internal sealed class CheckWaterMovementEvents : ICheckWaterMovementEvents
         }
     }
 
-    public event OnCheckWaterMovementDelegate Post {
+    public event OnCheckWaterMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckWater);
             _Post += value;
@@ -47,8 +29,8 @@ internal sealed class CheckWaterMovementEvents : ICheckWaterMovementEvents
         }
     }
 
-    public void InvokePre( ref ICheckWaterMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref ICheckWaterMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref CheckWaterMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref CheckWaterMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

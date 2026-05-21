@@ -3,34 +3,34 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface ISetupMoveMovement
+public struct SetupMoveMovementParams
 {
-    /// <summary>
-    /// The player who dropped the weapon.
-    /// </summary>
-    public IPlayer Player { get; set; }
-
-    /// <summary>
-    /// The user command.
-    /// </summary>
-    public IUserCmd UserCmd { get; }
-
-    /// <summary>
-    /// The movement data.
-    /// </summary>
-    public IMoveData MoveData { get; }
-
-    /// <summary>
-    /// The result of the hook. Can be used to prevent the drop by returning <see cref="HookResult.Stop"/> or <see cref="HookResult.CancelOriginal"/> .
-    /// </summary>
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IUserCmd UserCmd { get; init; }
+    public required IMoveData MoveData { get; init; }
 }
 
-public delegate void OnSetupMoveMovementDelegate( ref ISetupMoveMovement postThink );
-
-public interface ISetupMoveMovementEvents
+public ref struct SetupMoveMovementPreContext
 {
-    public event OnSetupMoveMovementDelegate Pre;
+    public SetupMoveMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
 
-    public event OnSetupMoveMovementDelegate Post;
+public ref struct SetupMoveMovementPostContext
+{
+    public SetupMoveMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnSetupMoveMovementPreDelegate( ref SetupMoveMovementPreContext ctx );
+public delegate void OnSetupMoveMovementPostDelegate( ref SetupMoveMovementPostContext ctx );
+
+public interface ISetupMoveMovementHook
+{
+    public event OnSetupMoveMovementPreDelegate Pre;
+    public event OnSetupMoveMovementPostDelegate Post;
 }

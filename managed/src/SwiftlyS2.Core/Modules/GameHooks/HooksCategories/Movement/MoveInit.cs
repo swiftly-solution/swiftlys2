@@ -1,31 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class MoveInitMovementData : IMoveInitMovement
+internal sealed class MoveInitMovementHook : IMoveInitMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public required bool OriginalResult { get; set; }
+    internal event OnMoveInitMovementPreDelegate? _Pre;
+    internal event OnMoveInitMovementPostDelegate? _Post;
 
-    public void SetResult( bool result )
-    {
-        OriginalResult = result;
-        Intercepted = true;
-    }
-
-    public bool Intercepted { get; set; } = false;
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
-
-internal sealed class MoveInitMovementEvents : IMoveInitMovementEvents
-{
-    internal event OnMoveInitMovementDelegate? _Pre;
-    internal event OnMoveInitMovementDelegate? _Post;
-
-    public event OnMoveInitMovementDelegate Pre {
+    public event OnMoveInitMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.MoveInit);
             _Pre += value;
@@ -36,7 +18,7 @@ internal sealed class MoveInitMovementEvents : IMoveInitMovementEvents
         }
     }
 
-    public event OnMoveInitMovementDelegate Post {
+    public event OnMoveInitMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.MoveInit);
             _Post += value;
@@ -47,8 +29,8 @@ internal sealed class MoveInitMovementEvents : IMoveInitMovementEvents
         }
     }
 
-    public void InvokePre( ref IMoveInitMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref IMoveInitMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref MoveInitMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref MoveInitMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

@@ -1,24 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class WeaponDropData : IWeaponDrop
+internal sealed class WeaponDropHook : IWeaponDropHook
 {
-    public required IPlayer Player { get; set; }
-    public required CBasePlayerWeapon? Weapon { get; init; }
-    public required bool SwappingWeapon { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnWeaponDropPreDelegate? _Pre;
+    internal event OnWeaponDropPostDelegate? _Post;
 
-internal sealed class WeaponDropEvents : IWeaponDropEvents
-{
-    internal event OnWeaponDropDelegate? _Pre;
-    internal event OnWeaponDropDelegate? _Post;
-
-    public event OnWeaponDropDelegate Pre {
+    public event OnWeaponDropPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop);
             _Pre += value;
@@ -29,7 +18,7 @@ internal sealed class WeaponDropEvents : IWeaponDropEvents
         }
     }
 
-    public event OnWeaponDropDelegate Post {
+    public event OnWeaponDropPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.WeaponDrop);
             _Post += value;
@@ -40,15 +29,8 @@ internal sealed class WeaponDropEvents : IWeaponDropEvents
         }
     }
 
-    public void InvokePre( ref IWeaponDrop data )
-    {
-        _Pre?.Invoke(ref data);
-    }
-
-    public void InvokePost( ref IWeaponDrop data )
-    {
-        _Post?.Invoke(ref data);
-    }
+    public void InvokePre( ref WeaponDropPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref WeaponDropPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

@@ -24,21 +24,22 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) { next()(movementServices, moveData, ground); return; }
 
-                IFullWalkMoveMovement @event = new FullWalkMoveMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    Ground = ground != 0,
-                    Result = HookResult.Continue
+                var preCtx = new FullWalkMoveMovementPreContext {
+                    Params = new FullWalkMoveMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData },
+                        Ground = ground != 0
+                    }
                 };
 
-                InvokeFullWalkMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeFullWalkMovePre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
-                next()(movementServices, moveData, (byte)(@event.Ground ? 1 : 0));
+                next()(movementServices, moveData, (byte)(preCtx.Params.Ground ? 1 : 0));
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new FullWalkMoveMovementPostContext { Params = preCtx.Params };
 
-                InvokeFullWalkMovePost(ref @event);
+                InvokeFullWalkMovePost(ref postCtx);
             };
         });
     }
@@ -60,26 +61,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeFullWalkMovePre( ref IFullWalkMoveMovement @event )
+    internal static void InvokeFullWalkMovePre( ref FullWalkMoveMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeFullWalkMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeFullWalkMovePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeFullWalkMovePost( ref IFullWalkMoveMovement @event )
+    internal static void InvokeFullWalkMovePost( ref FullWalkMoveMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeFullWalkMovePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeFullWalkMovePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

@@ -1,23 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class SetupMoveMovementData : ISetupMoveMovement
+internal sealed class SetupMoveMovementHook : ISetupMoveMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IUserCmd UserCmd { get; init; }
-    public required IMoveData MoveData { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnSetupMoveMovementPreDelegate? _Pre;
+    internal event OnSetupMoveMovementPostDelegate? _Post;
 
-internal sealed class SetupMoveMovementEvents : ISetupMoveMovementEvents
-{
-    internal event OnSetupMoveMovementDelegate? _Pre;
-    internal event OnSetupMoveMovementDelegate? _Post;
-
-    public event OnSetupMoveMovementDelegate Pre {
+    public event OnSetupMoveMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.SetupMove);
             _Pre += value;
@@ -28,7 +18,7 @@ internal sealed class SetupMoveMovementEvents : ISetupMoveMovementEvents
         }
     }
 
-    public event OnSetupMoveMovementDelegate Post {
+    public event OnSetupMoveMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.SetupMove);
             _Post += value;
@@ -39,15 +29,8 @@ internal sealed class SetupMoveMovementEvents : ISetupMoveMovementEvents
         }
     }
 
-    public void InvokePre( ref ISetupMoveMovement data )
-    {
-        _Pre?.Invoke(ref data);
-    }
-
-    public void InvokePost( ref ISetupMoveMovement data )
-    {
-        _Post?.Invoke(ref data);
-    }
+    public void InvokePre( ref SetupMoveMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref SetupMoveMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

@@ -3,12 +3,12 @@ namespace SwiftlyS2.Shared.GameHooks;
 public interface IGameHookController
 {
     /// <summary>
-    /// Hooks related to processing user commands.
+    /// Hook triggered when processing user commands.
     /// </summary>
-    public IProcessUsercmdsEvents ProcessUsercmds { get; }
+    public IProcessUsercmdsHook ProcessUsercmds { get; }
 
     /// <summary>
-    /// Hooks related to simulating the user commands, or processing the movement (?)
+    /// Hook triggered when simulating user commands.
     /// </summary>
-    public ISimulateUserCommandsEvents SimulateUserCommands { get; }
+    public ISimulateUserCommandsHook SimulateUserCommands { get; }
 }

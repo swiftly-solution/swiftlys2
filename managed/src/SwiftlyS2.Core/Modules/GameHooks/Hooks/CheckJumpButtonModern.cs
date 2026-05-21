@@ -27,20 +27,21 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) { next()(ccsPlayerModernJump, moveData); return; }
 
-                ICheckJumpButtonModernMovement @event = new CheckJumpButtonModernMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    Result = HookResult.Continue
+                var preCtx = new CheckJumpButtonModernMovementPreContext {
+                    Params = new CheckJumpButtonModernMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokeCheckJumpButtonModernPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeCheckJumpButtonModernPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
                 next()(ccsPlayerModernJump, moveData);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new CheckJumpButtonModernMovementPostContext { Params = preCtx.Params };
 
-                InvokeCheckJumpButtonModernPost(ref @event);
+                InvokeCheckJumpButtonModernPost(ref postCtx);
             };
         });
     }
@@ -62,26 +63,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeCheckJumpButtonModernPre( ref ICheckJumpButtonModernMovement @event )
+    internal static void InvokeCheckJumpButtonModernPre( ref CheckJumpButtonModernMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCheckJumpButtonModernPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCheckJumpButtonModernPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeCheckJumpButtonModernPost( ref ICheckJumpButtonModernMovement @event )
+    internal static void InvokeCheckJumpButtonModernPost( ref CheckJumpButtonModernMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCheckJumpButtonModernPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCheckJumpButtonModernPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

@@ -24,20 +24,21 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) { next()(movementServices, moveData); return; }
 
-                IFrictionMovement @event = new FrictionMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    Result = HookResult.Continue
+                var preCtx = new FrictionMovementPreContext {
+                    Params = new FrictionMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokeFrictionPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeFrictionPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
                 next()(movementServices, moveData);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new FrictionMovementPostContext { Params = preCtx.Params };
 
-                InvokeFrictionPost(ref @event);
+                InvokeFrictionPost(ref postCtx);
             };
         });
     }
@@ -59,26 +60,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeFrictionPre( ref IFrictionMovement @event )
+    internal static void InvokeFrictionPre( ref FrictionMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeFrictionPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeFrictionPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeFrictionPost( ref IFrictionMovement @event )
+    internal static void InvokeFrictionPost( ref FrictionMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeFrictionPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeFrictionPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

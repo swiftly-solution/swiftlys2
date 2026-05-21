@@ -28,24 +28,26 @@ internal static partial class GameHooksPublisher
                     var player = _dummyPawnComponent.ToPlayer();
                     if (player == null) { next()(movementServices, moveData, frameTime, wishDirection, wishSpeed, acceleration); return; }
 
-                    IGroundAccelerateMovement @event = new GroundAccelerateMovementData {
-                        Player = player,
-                        MoveData = new CMoveDataImpl { Address = moveData },
-                        WishDirectionPtr = (nint)wishDirection,
-                        FrameTime = frameTime,
-                        WishSpeed = wishSpeed,
-                        Acceleration = acceleration,
-                        Result = HookResult.Continue
+                    var preCtx = new GroundAccelerateMovementPreContext {
+                        Params = new GroundAccelerateMovementParams {
+                            Player = player,
+                            MoveData = new CMoveDataImpl { Address = moveData },
+                            FrameTime = frameTime,
+                            WishDirection = wishDirection != null ? *wishDirection : default,
+                            WishSpeed = wishSpeed,
+                            Acceleration = acceleration
+                        }
                     };
 
-                    InvokeGroundAcceleratePre(ref @event);
-                    if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                    InvokeGroundAcceleratePre(ref preCtx);
+                    if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
-                    next()(movementServices, moveData, frameTime, wishDirection, @event.WishSpeed, @event.Acceleration);
+                    if (wishDirection != null) *wishDirection = preCtx.Params.WishDirection;
+                    next()(movementServices, moveData, preCtx.Params.FrameTime, wishDirection, preCtx.Params.WishSpeed, preCtx.Params.Acceleration);
 
-                    @event.Result = HookResult.Continue;
+                    var postCtx = new GroundAccelerateMovementPostContext { Params = preCtx.Params };
 
-                    InvokeGroundAcceleratePost(ref @event);
+                    InvokeGroundAcceleratePost(ref postCtx);
                 };
             });
         }
@@ -60,24 +62,26 @@ internal static partial class GameHooksPublisher
                     var player = _dummyPawnComponent.ToPlayer();
                     if (player == null) { next()(movementServices, moveData, wishDirection, frameTime, wishSpeed, acceleration); return; }
 
-                    IGroundAccelerateMovement @event = new GroundAccelerateMovementData {
-                        Player = player,
-                        MoveData = new CMoveDataImpl { Address = moveData },
-                        WishDirectionPtr = (nint)wishDirection,
-                        FrameTime = frameTime,
-                        WishSpeed = wishSpeed,
-                        Acceleration = acceleration,
-                        Result = HookResult.Continue
+                    var preCtx = new GroundAccelerateMovementPreContext {
+                        Params = new GroundAccelerateMovementParams {
+                            Player = player,
+                            MoveData = new CMoveDataImpl { Address = moveData },
+                            FrameTime = frameTime,
+                            WishDirection = wishDirection != null ? *wishDirection : default,
+                            WishSpeed = wishSpeed,
+                            Acceleration = acceleration
+                        }
                     };
 
-                    InvokeGroundAcceleratePre(ref @event);
-                    if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                    InvokeGroundAcceleratePre(ref preCtx);
+                    if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
-                    next()(movementServices, moveData, wishDirection, frameTime, @event.WishSpeed, @event.Acceleration);
+                    if (wishDirection != null) *wishDirection = preCtx.Params.WishDirection;
+                    next()(movementServices, moveData, wishDirection, preCtx.Params.FrameTime, preCtx.Params.WishSpeed, preCtx.Params.Acceleration);
 
-                    @event.Result = HookResult.Continue;
+                    var postCtx = new GroundAccelerateMovementPostContext { Params = preCtx.Params };
 
-                    InvokeGroundAcceleratePost(ref @event);
+                    InvokeGroundAcceleratePost(ref postCtx);
                 };
             });
         }
@@ -108,26 +112,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeGroundAcceleratePre( ref IGroundAccelerateMovement @event )
+    internal static void InvokeGroundAcceleratePre( ref GroundAccelerateMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeGroundAcceleratePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeGroundAcceleratePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeGroundAcceleratePost( ref IGroundAccelerateMovement @event )
+    internal static void InvokeGroundAcceleratePost( ref GroundAccelerateMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeGroundAcceleratePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeGroundAcceleratePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

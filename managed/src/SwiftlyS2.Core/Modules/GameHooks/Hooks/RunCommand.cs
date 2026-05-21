@@ -25,20 +25,21 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) return next()(pMovementServices, pUserCmd);
 
-                IRunCommandMovement @event = new RunCommandMovementData {
-                    Player = player,
-                    UserCmd = new CUserCmd { Address = pUserCmd },
-                    Result = HookResult.Continue
+                var preCtx = new RunCommandMovementPreContext {
+                    Params = new RunCommandMovementParams {
+                        Player = player,
+                        UserCmd = new CUserCmd { Address = pUserCmd }
+                    }
                 };
 
-                InvokeRunCommandPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return 0;
+                InvokeRunCommandPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;
 
                 var result = next()(pMovementServices, pUserCmd);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new RunCommandMovementPostContext { Params = preCtx.Params };
 
-                InvokeRunCommandPost(ref @event);
+                InvokeRunCommandPost(ref postCtx);
                 return result;
             };
         });
@@ -61,26 +62,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeRunCommandPre( ref IRunCommandMovement @event )
+    internal static void InvokeRunCommandPre( ref RunCommandMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeRunCommandPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeRunCommandPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeRunCommandPost( ref IRunCommandMovement @event )
+    internal static void InvokeRunCommandPost( ref RunCommandMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeRunCommandPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeRunCommandPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

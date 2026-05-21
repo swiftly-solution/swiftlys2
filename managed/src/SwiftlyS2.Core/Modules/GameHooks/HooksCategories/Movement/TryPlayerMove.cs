@@ -1,39 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.Trace;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class TryPlayerMoveMovementData : ITryPlayerMoveMovement
+internal sealed class TryPlayerMoveMovementHook : ITryPlayerMoveMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public required nint FirstDestPtr { get; init; }
-    public required TraceResult FirstTrace { get; init; }
-    public required nint IsSurfingPtr { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
+    internal event OnTryPlayerMoveMovementPreDelegate? _Pre;
+    internal event OnTryPlayerMoveMovementPostDelegate? _Post;
 
-    public unsafe Vector FirstDest
-    {
-        get => *(Vector*)FirstDestPtr;
-        set => *(Vector*)FirstDestPtr = value;
-    }
-
-    public unsafe bool IsSurfing
-    {
-        get => *(byte*)IsSurfingPtr != 0;
-        set => *(byte*)IsSurfingPtr = value ? (byte)1 : (byte)0;
-    }
-}
-
-internal sealed class TryPlayerMoveMovementEvents : ITryPlayerMoveMovementEvents
-{
-    internal event OnTryPlayerMoveMovementDelegate? _Pre;
-    internal event OnTryPlayerMoveMovementDelegate? _Post;
-
-    public event OnTryPlayerMoveMovementDelegate Pre {
+    public event OnTryPlayerMoveMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.TryPlayerMove);
             _Pre += value;
@@ -44,7 +18,7 @@ internal sealed class TryPlayerMoveMovementEvents : ITryPlayerMoveMovementEvents
         }
     }
 
-    public event OnTryPlayerMoveMovementDelegate Post {
+    public event OnTryPlayerMoveMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.TryPlayerMove);
             _Post += value;
@@ -55,8 +29,8 @@ internal sealed class TryPlayerMoveMovementEvents : ITryPlayerMoveMovementEvents
         }
     }
 
-    public void InvokePre( ref ITryPlayerMoveMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref ITryPlayerMoveMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref TryPlayerMoveMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref TryPlayerMoveMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

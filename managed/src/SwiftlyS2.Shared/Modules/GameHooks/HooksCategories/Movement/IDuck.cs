@@ -3,17 +3,33 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IDuckMovement
+public struct DuckMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
 }
 
-public delegate void OnDuckMovementDelegate( ref IDuckMovement data );
-
-public interface IDuckMovementEvents
+public ref struct DuckMovementPreContext
 {
-    public event OnDuckMovementDelegate Pre;
-    public event OnDuckMovementDelegate Post;
+    public DuckMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct DuckMovementPostContext
+{
+    public DuckMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnDuckMovementPreDelegate( ref DuckMovementPreContext ctx );
+public delegate void OnDuckMovementPostDelegate( ref DuckMovementPostContext ctx );
+
+public interface IDuckMovementHook
+{
+    public event OnDuckMovementPreDelegate Pre;
+    public event OnDuckMovementPostDelegate Post;
 }

@@ -5,29 +5,45 @@ using SwiftlyS2.Shared.Trace;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface ITryPlayerMoveMovement
+public struct TryPlayerMoveMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
     /// <summary>
     /// The first destination vector. Wraps a native pointer — modifications are written back to native memory.
     /// </summary>
-    public Vector FirstDest { get; set; }
+    public required Vector FirstDest { get; set; }
     /// <summary>
     /// The first trace result. Read-only snapshot of the native CGameTrace.
     /// </summary>
-    public TraceResult FirstTrace { get; }
+    public required TraceResult FirstTrace { get; init; }
     /// <summary>
     /// Whether the player is surfing. Wraps a native pointer — modifications are written back to native memory.
     /// </summary>
-    public bool IsSurfing { get; set; }
-    public HookResult Result { get; set; }
+    public required bool IsSurfing { get; set; }
 }
 
-public delegate void OnTryPlayerMoveMovementDelegate( ref ITryPlayerMoveMovement data );
-
-public interface ITryPlayerMoveMovementEvents
+public ref struct TryPlayerMoveMovementPreContext
 {
-    public event OnTryPlayerMoveMovementDelegate Pre;
-    public event OnTryPlayerMoveMovementDelegate Post;
+    public TryPlayerMoveMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct TryPlayerMoveMovementPostContext
+{
+    public TryPlayerMoveMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnTryPlayerMoveMovementPreDelegate( ref TryPlayerMoveMovementPreContext ctx );
+public delegate void OnTryPlayerMoveMovementPostDelegate( ref TryPlayerMoveMovementPostContext ctx );
+
+public interface ITryPlayerMoveMovementHook
+{
+    public event OnTryPlayerMoveMovementPreDelegate Pre;
+    public event OnTryPlayerMoveMovementPostDelegate Post;
 }

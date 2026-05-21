@@ -24,25 +24,24 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) return next()(movementServices, moveData);
 
-                ICheckWaterMovement @event = new CheckWaterMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    OriginalResult = false,
-                    Result = HookResult.Continue
+                var preCtx = new CheckWaterMovementPreContext {
+                    Params = new CheckWaterMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokeCheckWaterPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                    return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : (byte)0;
+                InvokeCheckWaterPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                    return preCtx.IsReturnSet ? (preCtx.Return ? (byte)1 : (byte)0) : (byte)0;
 
                 var result = next()(movementServices, moveData);
 
-                @event.SetResult(result != 0);
-                @event.Intercepted = false;
+                var postCtx = new CheckWaterMovementPostContext { Params = preCtx.Params, Return = result != 0 };
 
-                InvokeCheckWaterPost(ref @event);
+                InvokeCheckWaterPost(ref postCtx);
 
-                return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : result;
+                return postCtx.Return ? (byte)1 : (byte)0;
             };
         });
     }
@@ -64,26 +63,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeCheckWaterPre( ref ICheckWaterMovement @event )
+    internal static void InvokeCheckWaterPre( ref CheckWaterMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCheckWaterPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCheckWaterPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeCheckWaterPost( ref ICheckWaterMovement @event )
+    internal static void InvokeCheckWaterPost( ref CheckWaterMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCheckWaterPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCheckWaterPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

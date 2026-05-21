@@ -1,31 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CanUnduckMovementData : ICanUnduckMovement
+internal sealed class CanUnduckMovementHook : ICanUnduckMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public required bool OriginalResult { get; set; }
+    internal event OnCanUnduckMovementPreDelegate? _Pre;
+    internal event OnCanUnduckMovementPostDelegate? _Post;
 
-    public void SetResult( bool result )
-    {
-        OriginalResult = result;
-        Intercepted = true;
-    }
-
-    public bool Intercepted { get; set; } = false;
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
-
-internal sealed class CanUnduckMovementEvents : ICanUnduckMovementEvents
-{
-    internal event OnCanUnduckMovementDelegate? _Pre;
-    internal event OnCanUnduckMovementDelegate? _Post;
-
-    public event OnCanUnduckMovementDelegate Pre {
+    public event OnCanUnduckMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanUnduck);
             _Pre += value;
@@ -36,7 +18,7 @@ internal sealed class CanUnduckMovementEvents : ICanUnduckMovementEvents
         }
     }
 
-    public event OnCanUnduckMovementDelegate Post {
+    public event OnCanUnduckMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanUnduck);
             _Post += value;
@@ -47,8 +29,8 @@ internal sealed class CanUnduckMovementEvents : ICanUnduckMovementEvents
         }
     }
 
-    public void InvokePre( ref ICanUnduckMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref ICanUnduckMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref CanUnduckMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref CanUnduckMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

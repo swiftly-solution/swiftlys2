@@ -24,21 +24,22 @@ internal static partial class GameHooksPublisher
                 var player = _dummyController.ToPlayer();
                 if (player == null) { next()(movementServices, userCmd, moveData); return; }
 
-                ISetupMoveMovement @event = new SetupMoveMovementData {
-                    Player = player,
-                    UserCmd = new CUserCmd { Address = userCmd },
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    Result = HookResult.Continue
+                var preCtx = new SetupMoveMovementPreContext {
+                    Params = new SetupMoveMovementParams {
+                        Player = player,
+                        UserCmd = new CUserCmd { Address = userCmd },
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokeSetupMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeSetupMovePre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
                 next()(movementServices, userCmd, moveData);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new SetupMoveMovementPostContext { Params = preCtx.Params };
 
-                InvokeSetupMovePost(ref @event);
+                InvokeSetupMovePost(ref postCtx);
             };
         });
     }
@@ -61,26 +62,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeSetupMovePre( ref ISetupMoveMovement @event )
+    internal static void InvokeSetupMovePre( ref SetupMoveMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeSetupMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeSetupMovePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeSetupMovePost( ref ISetupMoveMovement @event )
+    internal static void InvokeSetupMovePost( ref SetupMoveMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeSetupMovePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeSetupMovePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

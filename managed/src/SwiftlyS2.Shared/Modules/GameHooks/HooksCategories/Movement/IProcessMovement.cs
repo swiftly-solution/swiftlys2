@@ -3,29 +3,33 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IProcessMovementMovement
+public struct ProcessMovementMovementParams
 {
-    /// <summary>
-    /// The player who dropped the weapon.
-    /// </summary>
-    public IPlayer Player { get; set; }
-
-    /// <summary>
-    /// The movement data.
-    /// </summary>
-    public IMoveData MoveData { get; }
-
-    /// <summary>
-    /// The result of the hook. Can be used to prevent the drop by returning <see cref="HookResult.Stop"/> or <see cref="HookResult.CancelOriginal"/> .
-    /// </summary>
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
 }
 
-public delegate void OnProcessMovementMovementDelegate( ref IProcessMovementMovement postThink );
-
-public interface IProcessMovementMovementEvents
+public ref struct ProcessMovementMovementPreContext
 {
-    public event OnProcessMovementMovementDelegate Pre;
+    public ProcessMovementMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
 
-    public event OnProcessMovementMovementDelegate Post;
+public ref struct ProcessMovementMovementPostContext
+{
+    public ProcessMovementMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnProcessMovementMovementPreDelegate( ref ProcessMovementMovementPreContext ctx );
+public delegate void OnProcessMovementMovementPostDelegate( ref ProcessMovementMovementPostContext ctx );
+
+public interface IProcessMovementMovementHook
+{
+    public event OnProcessMovementMovementPreDelegate Pre;
+    public event OnProcessMovementMovementPostDelegate Post;
 }

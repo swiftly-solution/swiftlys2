@@ -1,23 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class FullWalkMoveMovementData : IFullWalkMoveMovement
+internal sealed class FullWalkMoveMovementHook : IFullWalkMoveMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public bool Ground { get; set; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnFullWalkMoveMovementPreDelegate? _Pre;
+    internal event OnFullWalkMoveMovementPostDelegate? _Post;
 
-internal sealed class FullWalkMoveMovementEvents : IFullWalkMoveMovementEvents
-{
-    internal event OnFullWalkMoveMovementDelegate? _Pre;
-    internal event OnFullWalkMoveMovementDelegate? _Post;
-
-    public event OnFullWalkMoveMovementDelegate Pre {
+    public event OnFullWalkMoveMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.FullWalkMove);
             _Pre += value;
@@ -28,7 +18,7 @@ internal sealed class FullWalkMoveMovementEvents : IFullWalkMoveMovementEvents
         }
     }
 
-    public event OnFullWalkMoveMovementDelegate Post {
+    public event OnFullWalkMoveMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.FullWalkMove);
             _Post += value;
@@ -39,8 +29,8 @@ internal sealed class FullWalkMoveMovementEvents : IFullWalkMoveMovementEvents
         }
     }
 
-    public void InvokePre( ref IFullWalkMoveMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref IFullWalkMoveMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref FullWalkMoveMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref FullWalkMoveMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

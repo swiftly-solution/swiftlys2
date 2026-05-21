@@ -26,19 +26,16 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawn.ToPlayer();
                 if (player == null) return next()(pawn);
 
-                IPostThinkPawn @event = new PostThinkPawnData {
-                    Player = player,
-                    Result = HookResult.Continue
-                };
+                var preCtx = new PostThinkPawnPreContext { Params = new PostThinkPawnParams { Player = player } };
 
-                InvokePostThinkPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return 0;
+                InvokePostThinkPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;
 
                 var result = next()(pawn);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new PostThinkPawnPostContext { Params = preCtx.Params };
 
-                InvokePostThinkPost(ref @event);
+                InvokePostThinkPost(ref postCtx);
                 return result;
             };
         });
@@ -62,26 +59,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokePostThinkPre( ref IPostThinkPawn @event )
+    internal static void InvokePostThinkPre( ref PostThinkPawnPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokePostThinkPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokePostThinkPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokePostThinkPost( ref IPostThinkPawn @event )
+    internal static void InvokePostThinkPost( ref PostThinkPawnPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokePostThinkPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokePostThinkPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

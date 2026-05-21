@@ -4,33 +4,49 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IGroundAccelerateMovement
+public struct GroundAccelerateMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
     /// <summary>
     /// The wish direction vector. Wraps a native pointer — modifications are written back to native memory.
     /// </summary>
-    public Vector WishDirection { get; set; }
+    public required Vector WishDirection { get; set; }
     /// <summary>
     /// The frame time. Read-only.
     /// </summary>
-    public float FrameTime { get; }
+    public required float FrameTime { get; init; }
     /// <summary>
     /// The wish speed. Modifications are passed to the original function.
     /// </summary>
-    public float WishSpeed { get; set; }
+    public required float WishSpeed { get; set; }
     /// <summary>
     /// The acceleration value. Modifications are passed to the original function.
     /// </summary>
-    public float Acceleration { get; set; }
-    public HookResult Result { get; set; }
+    public required float Acceleration { get; set; }
 }
 
-public delegate void OnGroundAccelerateMovementDelegate( ref IGroundAccelerateMovement data );
-
-public interface IGroundAccelerateMovementEvents
+public ref struct GroundAccelerateMovementPreContext
 {
-    public event OnGroundAccelerateMovementDelegate Pre;
-    public event OnGroundAccelerateMovementDelegate Post;
+    public GroundAccelerateMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct GroundAccelerateMovementPostContext
+{
+    public GroundAccelerateMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnGroundAccelerateMovementPreDelegate( ref GroundAccelerateMovementPreContext ctx );
+public delegate void OnGroundAccelerateMovementPostDelegate( ref GroundAccelerateMovementPostContext ctx );
+
+public interface IGroundAccelerateMovementHook
+{
+    public event OnGroundAccelerateMovementPreDelegate Pre;
+    public event OnGroundAccelerateMovementPostDelegate Post;
 }

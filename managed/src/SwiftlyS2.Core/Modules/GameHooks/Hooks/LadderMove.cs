@@ -24,25 +24,24 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) return next()(movementServices, moveData);
 
-                ILadderMoveMovement @event = new LadderMoveMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    OriginalResult = false,
-                    Result = HookResult.Continue
+                var preCtx = new LadderMoveMovementPreContext {
+                    Params = new LadderMoveMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokeLadderMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                    return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : (byte)0;
+                InvokeLadderMovePre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                    return preCtx.IsReturnSet ? (preCtx.Return ? (byte)1 : (byte)0) : (byte)0;
 
                 var result = next()(movementServices, moveData);
 
-                @event.SetResult(result != 0);
-                @event.Intercepted = false;
+                var postCtx = new LadderMoveMovementPostContext { Params = preCtx.Params, Return = result != 0 };
 
-                InvokeLadderMovePost(ref @event);
+                InvokeLadderMovePost(ref postCtx);
 
-                return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : result;
+                return postCtx.Return ? (byte)1 : (byte)0;
             };
         });
     }
@@ -64,26 +63,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeLadderMovePre( ref ILadderMoveMovement @event )
+    internal static void InvokeLadderMovePre( ref LadderMoveMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeLadderMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeLadderMovePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeLadderMovePost( ref ILadderMoveMovement @event )
+    internal static void InvokeLadderMovePost( ref LadderMoveMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeLadderMovePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeLadderMovePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

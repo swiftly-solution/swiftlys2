@@ -24,19 +24,16 @@ internal static partial class GameHooksPublisher
                 var player = _dummyController.ToPlayer();
                 if (player == null) { next()(controller); return; }
 
-                ISimulateUserCommandsController @event = new SimulateUserCommands {
-                    Player = player,
-                    Result = HookResult.Continue
-                };
+                var preCtx = new SimulateUserCommandsPreContext { Params = new SimulateUserCommandsParams { Player = player } };
 
-                InvokeSimulateUserCommandsPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeSimulateUserCommandsPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
                 next()(controller);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new SimulateUserCommandsPostContext { Params = preCtx.Params };
 
-                InvokeSimulateUserCommandsPost(ref @event);
+                InvokeSimulateUserCommandsPost(ref postCtx);
             };
         });
     }
@@ -59,26 +56,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeSimulateUserCommandsPre( ref ISimulateUserCommandsController @event )
+    internal static void InvokeSimulateUserCommandsPre( ref SimulateUserCommandsPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeSimulateUserCommandsPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeSimulateUserCommandsPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeSimulateUserCommandsPost( ref ISimulateUserCommandsController @event )
+    internal static void InvokeSimulateUserCommandsPost( ref SimulateUserCommandsPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeSimulateUserCommandsPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeSimulateUserCommandsPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

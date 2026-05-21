@@ -1,32 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CanUseWeaponData : ICanUseWeapon
+internal sealed class CanUseWeaponHook : ICanUseWeaponHook
 {
-    public required IPlayer Player { get; set; }
-    public required CCSWeaponBase Weapon { get; init; }
-    public required bool OriginalResult { get; set; }
+    internal event OnCanUseWeaponPreDelegate? _Pre;
+    internal event OnCanUseWeaponPostDelegate? _Post;
 
-    public void SetResult( bool result )
-    {
-        OriginalResult = result;
-        Intercepted = true;
-    }
-
-    public bool Intercepted { get; set; } = false;
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
-
-internal sealed class CanUseWeaponEvents : ICanUseWeaponEvents
-{
-    internal event OnCanUseWeaponDelegate? _Pre;
-    internal event OnCanUseWeaponDelegate? _Post;
-
-    public event OnCanUseWeaponDelegate Pre {
+    public event OnCanUseWeaponPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanUse);
             _Pre += value;
@@ -37,7 +18,7 @@ internal sealed class CanUseWeaponEvents : ICanUseWeaponEvents
         }
     }
 
-    public event OnCanUseWeaponDelegate Post {
+    public event OnCanUseWeaponPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanUse);
             _Post += value;
@@ -48,15 +29,8 @@ internal sealed class CanUseWeaponEvents : ICanUseWeaponEvents
         }
     }
 
-    public void InvokePre( ref ICanUseWeapon data )
-    {
-        _Pre?.Invoke(ref data);
-    }
-
-    public void InvokePost( ref ICanUseWeapon data )
-    {
-        _Post?.Invoke(ref data);
-    }
+    public void InvokePre( ref CanUseWeaponPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref CanUseWeaponPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

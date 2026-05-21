@@ -4,9 +4,9 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class GameHookPawn : IGameHookPawn
 {
-    internal readonly PostThinkPawnEvents PostThinkEvents = new();
-    internal readonly CanMovePawnEvents CanMoveEvents = new();
+    internal readonly PostThinkPawnHook PostThinkHook = new();
+    internal readonly CanMovePawnHook CanMoveHook = new();
 
-    public IPostThinkPawnEvents PostThink => PostThinkEvents;
-    public ICanMovePawnEvents CanMove => CanMoveEvents;
+    public IPostThinkPawnHook PostThink => PostThinkHook;
+    public ICanMovePawnHook CanMove => CanMoveHook;
 }

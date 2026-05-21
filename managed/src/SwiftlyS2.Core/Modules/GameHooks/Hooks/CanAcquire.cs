@@ -33,30 +33,28 @@ internal static partial class GameHooksPublisher
 
                 var econItemView = _core.Memory.ToSchemaClass<CEconItemView>(pEconItemView);
 
-                ICanAcquireItem @event = new CanAcquireItemData {
-                    Player = player,
-                    EconItemView = econItemView,
-                    WeaponVData = _core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
-                    AcquireMethod = (AcquireMethod)acquireMethod,
-                    OriginalResult = AcquireResult.Allowed
+                var preCtx = new CanAcquireItemPreContext {
+                    Params = new CanAcquireItemParams {
+                        Player = player,
+                        EconItemView = econItemView,
+                        WeaponVData = _core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
+                        AcquireMethod = (AcquireMethod)acquireMethod
+                    }
                 };
 
                 Schema.isFollowingServerGuidelines = NativeServerHelpers.IsFollowingServerGuidelines();
 
-                InvokeCanAcquirePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                {
-                    return (int)@event.OriginalResult;
-                }
+                InvokeCanAcquirePre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                    return (int)(preCtx.IsReturnSet ? preCtx.Return : AcquireResult.Allowed);
 
                 var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
 
-                @event.SetAcquireResult((AcquireResult)result);
-                @event.Intercepted = false;
+                var postCtx = new CanAcquireItemPostContext { Params = preCtx.Params, Return = (AcquireResult)result };
 
-                InvokeCanAcquirePost(ref @event);
+                InvokeCanAcquirePost(ref postCtx);
 
-                return @event.Intercepted ? (int)@event.OriginalResult : result;
+                return (int)postCtx.Return;
             };
         });
     }
@@ -78,26 +76,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeCanAcquirePre( ref ICanAcquireItem @event )
+    internal static void InvokeCanAcquirePre( ref CanAcquireItemPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCanAcquirePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCanAcquirePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeCanAcquirePost( ref ICanAcquireItem @event )
+    internal static void InvokeCanAcquirePost( ref CanAcquireItemPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCanAcquirePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCanAcquirePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

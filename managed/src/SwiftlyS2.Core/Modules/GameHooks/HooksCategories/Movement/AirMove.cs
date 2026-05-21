@@ -1,22 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class AirMoveMovementData : IAirMoveMovement
+internal sealed class AirMoveMovementHook : IAirMoveMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnAirMoveMovementPreDelegate? _Pre;
+    internal event OnAirMoveMovementPostDelegate? _Post;
 
-internal sealed class AirMoveMovementEvents : IAirMoveMovementEvents
-{
-    internal event OnAirMoveMovementDelegate? _Pre;
-    internal event OnAirMoveMovementDelegate? _Post;
-
-    public event OnAirMoveMovementDelegate Pre {
+    public event OnAirMoveMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.AirMove);
             _Pre += value;
@@ -27,7 +18,7 @@ internal sealed class AirMoveMovementEvents : IAirMoveMovementEvents
         }
     }
 
-    public event OnAirMoveMovementDelegate Post {
+    public event OnAirMoveMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.AirMove);
             _Post += value;
@@ -38,8 +29,8 @@ internal sealed class AirMoveMovementEvents : IAirMoveMovementEvents
         }
     }
 
-    public void InvokePre( ref IAirMoveMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref IAirMoveMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref AirMoveMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref AirMoveMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

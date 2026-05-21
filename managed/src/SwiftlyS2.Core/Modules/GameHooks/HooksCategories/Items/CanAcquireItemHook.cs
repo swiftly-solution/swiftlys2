@@ -1,34 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
-using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CanAcquireItemData : ICanAcquireItem
+internal sealed class CanAcquireItemHook : ICanAcquireItemHook
 {
-    public required IPlayer Player { get; set; }
-    public required CEconItemView EconItemView { get; init; }
-    public required CCSWeaponBaseVData? WeaponVData { get; init; }
-    public required AcquireMethod AcquireMethod { get; init; }
-    public required AcquireResult OriginalResult { get; set; }
+    internal event OnCanAcquireItemPreDelegate? _Pre;
+    internal event OnCanAcquireItemPostDelegate? _Post;
 
-    public void SetAcquireResult( AcquireResult result )
-    {
-        OriginalResult = result;
-        Intercepted = true;
-    }
-
-    public bool Intercepted { get; set; } = false;
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
-
-internal sealed class CanAcquireItemEvents : ICanAcquireItemEvents
-{
-    internal event OnCanAcquireItemDelegate? _Pre;
-    internal event OnCanAcquireItemDelegate? _Post;
-
-    public event OnCanAcquireItemDelegate Pre {
+    public event OnCanAcquireItemPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanAcquire);
             _Pre += value;
@@ -39,7 +18,7 @@ internal sealed class CanAcquireItemEvents : ICanAcquireItemEvents
         }
     }
 
-    public event OnCanAcquireItemDelegate Post {
+    public event OnCanAcquireItemPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanAcquire);
             _Post += value;
@@ -50,15 +29,8 @@ internal sealed class CanAcquireItemEvents : ICanAcquireItemEvents
         }
     }
 
-    public void InvokePre( ref ICanAcquireItem data )
-    {
-        _Pre?.Invoke(ref data);
-    }
-
-    public void InvokePost( ref ICanAcquireItem data )
-    {
-        _Post?.Invoke(ref data);
-    }
+    public void InvokePre( ref CanAcquireItemPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref CanAcquireItemPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

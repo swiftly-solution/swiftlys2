@@ -3,24 +3,32 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface ISimulateUserCommandsController
+public struct SimulateUserCommandsParams
 {
-    /// <summary>
-    /// The player who received usercmds.
-    /// </summary>
-    public IPlayer Player { get; set; }
-
-    /// <summary>
-    /// The result of the hook, used to determine whether to block the original function or not.
-    /// </summary>
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
 }
 
-public delegate void OnSimulateUserCommandsDelegate( ref ISimulateUserCommandsController controller );
-
-public interface ISimulateUserCommandsEvents
+public ref struct SimulateUserCommandsPreContext
 {
-    public event OnSimulateUserCommandsDelegate Pre;
+    public SimulateUserCommandsParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
 
-    public event OnSimulateUserCommandsDelegate Post;
+public ref struct SimulateUserCommandsPostContext
+{
+    public SimulateUserCommandsParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnSimulateUserCommandsPreDelegate( ref SimulateUserCommandsPreContext ctx );
+public delegate void OnSimulateUserCommandsPostDelegate( ref SimulateUserCommandsPostContext ctx );
+
+public interface ISimulateUserCommandsHook
+{
+    public event OnSimulateUserCommandsPreDelegate Pre;
+    public event OnSimulateUserCommandsPostDelegate Post;
 }

@@ -24,25 +24,24 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) return next()(movementServices, moveData);
 
-                IMoveInitMovement @event = new MoveInitMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    OriginalResult = false,
-                    Result = HookResult.Continue
+                var preCtx = new MoveInitMovementPreContext {
+                    Params = new MoveInitMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokeMoveInitPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                    return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : (byte)0;
+                InvokeMoveInitPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                    return preCtx.IsReturnSet ? (preCtx.Return ? (byte)1 : (byte)0) : (byte)0;
 
                 var result = next()(movementServices, moveData);
 
-                @event.SetResult(result != 0);
-                @event.Intercepted = false;
+                var postCtx = new MoveInitMovementPostContext { Params = preCtx.Params, Return = result != 0 };
 
-                InvokeMoveInitPost(ref @event);
+                InvokeMoveInitPost(ref postCtx);
 
-                return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : result;
+                return postCtx.Return ? (byte)1 : (byte)0;
             };
         });
     }
@@ -64,26 +63,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeMoveInitPre( ref IMoveInitMovement @event )
+    internal static void InvokeMoveInitPre( ref MoveInitMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeMoveInitPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeMoveInitPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeMoveInitPost( ref IMoveInitMovement @event )
+    internal static void InvokeMoveInitPost( ref MoveInitMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeMoveInitPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeMoveInitPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

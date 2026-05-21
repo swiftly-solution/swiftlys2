@@ -3,17 +3,33 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface ICheckParametersMovement
+public struct CheckParametersMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
 }
 
-public delegate void OnCheckParametersMovementDelegate( ref ICheckParametersMovement data );
-
-public interface ICheckParametersMovementEvents
+public ref struct CheckParametersMovementPreContext
 {
-    public event OnCheckParametersMovementDelegate Pre;
-    public event OnCheckParametersMovementDelegate Post;
+    public CheckParametersMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct CheckParametersMovementPostContext
+{
+    public CheckParametersMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnCheckParametersMovementPreDelegate( ref CheckParametersMovementPreContext ctx );
+public delegate void OnCheckParametersMovementPostDelegate( ref CheckParametersMovementPostContext ctx );
+
+public interface ICheckParametersMovementHook
+{
+    public event OnCheckParametersMovementPreDelegate Pre;
+    public event OnCheckParametersMovementPostDelegate Post;
 }

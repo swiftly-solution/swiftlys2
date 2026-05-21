@@ -3,127 +3,127 @@ namespace SwiftlyS2.Shared.GameHooks;
 public interface IGameHookMovement
 {
     /// <summary>
-    /// Event triggered when the player movement tick is being processed.
+    /// Hook triggered when the player movement tick is being processed.
     /// </summary>
-    public IRunCommandMovementEvents RunCommand { get; }
+    public IRunCommandMovementHook RunCommand { get; }
 
     /// <summary>
-    /// Event triggered when the player movement data is set up.
+    /// Hook triggered when the player movement data is set up.
     /// </summary>
-    public ISetupMoveMovementEvents SetupMove { get; }
+    public ISetupMoveMovementHook SetupMove { get; }
 
     /// <summary>
-    /// Event triggered when the player movement data is being processed.
+    /// Hook triggered when the player movement data is being processed.
     /// </summary>
-    public IProcessMovementMovementEvents ProcessMovement { get; }
+    public IProcessMovementMovementHook ProcessMovement { get; }
 
     /// <summary>
-    /// Event triggered when the player falling check is performed.
+    /// Hook triggered when the player falling check is performed.
     /// </summary>
-    public ICheckFallingMovementEvents CheckFalling { get; }
+    public ICheckFallingMovementHook CheckFalling { get; }
 
     /// <summary>
-    /// Event triggered when the player position is categorized.
+    /// Hook triggered when the player position is categorized.
     /// </summary>
-    public ICategorizePositionMovementEvents CategorizePosition { get; }
+    public ICategorizePositionMovementHook CategorizePosition { get; }
 
     /// <summary>
-    /// Event triggered when the player tries to move.
+    /// Hook triggered when the player tries to move.
     /// </summary>
-    public ITryPlayerMoveMovementEvents TryPlayerMove { get; }
+    public ITryPlayerMoveMovementHook TryPlayerMove { get; }
 
     /// <summary>
-    /// Event triggered when the player performs a walk move.
+    /// Hook triggered when the player performs a walk move.
     /// </summary>
-    public IWalkMoveMovementEvents WalkMove { get; }
+    public IWalkMoveMovementHook WalkMove { get; }
 
     /// <summary>
-    /// Event triggered when friction is applied to the player.
+    /// Hook triggered when friction is applied to the player.
     /// </summary>
-    public IFrictionMovementEvents Friction { get; }
+    public IFrictionMovementHook Friction { get; }
 
     /// <summary>
-    /// Event triggered when the player performs an air accelerate.
+    /// Hook triggered when the player performs an air accelerate.
     /// </summary>
-    public IAirAccelerateMovementEvents AirAccelerate { get; }
+    public IAirAccelerateMovementHook AirAccelerate { get; }
 
     /// <summary>
-    /// Event triggered when the player performs an air move.
+    /// Hook triggered when the player performs an air move.
     /// </summary>
-    public IAirMoveMovementEvents AirMove { get; }
+    public IAirMoveMovementHook AirMove { get; }
 
     /// <summary>
-    /// Event triggered when the player performs a modern jump.
+    /// Hook triggered when the player performs a modern jump.
     /// </summary>
-    public IOnJumpModernMovementEvents OnJumpModern { get; }
+    public IOnJumpModernMovementHook OnJumpModern { get; }
 
     /// <summary>
-    /// Event triggered when the player performs a legacy jump.
+    /// Hook triggered when the player performs a legacy jump.
     /// </summary>
-    public IOnJumpLegacyMovementEvents OnJumpLegacy { get; }
+    public IOnJumpLegacyMovementHook OnJumpLegacy { get; }
 
     /// <summary>
-    /// Event triggered when the modern jump button is checked.
+    /// Hook triggered when the modern jump button is checked.
     /// </summary>
-    public ICheckJumpButtonModernMovementEvents CheckJumpButtonModern { get; }
+    public ICheckJumpButtonModernMovementHook CheckJumpButtonModern { get; }
 
     /// <summary>
-    /// Event triggered when the legacy jump button is checked.
+    /// Hook triggered when the legacy jump button is checked.
     /// </summary>
-    public ICheckJumpButtonLegacyMovementEvents CheckJumpButtonLegacy { get; }
+    public ICheckJumpButtonLegacyMovementHook CheckJumpButtonLegacy { get; }
 
     /// <summary>
-    /// Event triggered when the player performs a ladder move.
+    /// Hook triggered when the player performs a ladder move.
     /// </summary>
-    public ILadderMoveMovementEvents LadderMove { get; }
+    public ILadderMoveMovementHook LadderMove { get; }
 
     /// <summary>
-    /// Event triggered when the player unduck check is performed.
+    /// Hook triggered when the player unduck check is performed.
     /// </summary>
-    public ICanUnduckMovementEvents CanUnduck { get; }
+    public ICanUnduckMovementHook CanUnduck { get; }
 
     /// <summary>
-    /// Event triggered when the player performs a duck.
+    /// Hook triggered when the player performs a duck.
     /// </summary>
-    public IDuckMovementEvents Duck { get; }
+    public IDuckMovementHook Duck { get; }
 
     /// <summary>
-    /// Event triggered when the player velocity is checked.
+    /// Hook triggered when the player velocity is checked.
     /// </summary>
-    public ICheckVelocityMovementEvents CheckVelocity { get; }
+    public ICheckVelocityMovementHook CheckVelocity { get; }
 
     /// <summary>
-    /// Event triggered when the player performs a water move.
+    /// Hook triggered when the player performs a water move.
     /// </summary>
-    public IWaterMoveMovementEvents WaterMove { get; }
+    public IWaterMoveMovementHook WaterMove { get; }
 
     /// <summary>
-    /// Event triggered when the player water check is performed.
+    /// Hook triggered when the player water check is performed.
     /// </summary>
-    public ICheckWaterMovementEvents CheckWater { get; }
+    public ICheckWaterMovementHook CheckWater { get; }
 
     /// <summary>
-    /// Event triggered when the player move is initialized.
+    /// Hook triggered when the player move is initialized.
     /// </summary>
-    public IMoveInitMovementEvents MoveInit { get; }
+    public IMoveInitMovementHook MoveInit { get; }
 
     /// <summary>
-    /// Event triggered when the player performs a full walk move.
+    /// Hook triggered when the player performs a full walk move.
     /// </summary>
-    public IFullWalkMoveMovementEvents FullWalkMove { get; }
+    public IFullWalkMoveMovementHook FullWalkMove { get; }
 
     /// <summary>
-    /// Event triggered when the player movement parameters are checked.
+    /// Hook triggered when the player movement parameters are checked.
     /// </summary>
-    public ICheckParametersMovementEvents CheckParameters { get; }
+    public ICheckParametersMovementHook CheckParameters { get; }
 
     /// <summary>
-    /// Event triggered when the player move is processed.
+    /// Hook triggered when the player move is processed.
     /// </summary>
-    public IPlayerMoveMovementEvents PlayerMove { get; }
+    public IPlayerMoveMovementHook PlayerMove { get; }
 
     /// <summary>
-    /// Event triggered when ground acceleration is applied to the player.
+    /// Hook triggered when ground acceleration is applied to the player.
     /// </summary>
-    public IGroundAccelerateMovementEvents GroundAccelerate { get; }
+    public IGroundAccelerateMovementHook GroundAccelerate { get; }
 }

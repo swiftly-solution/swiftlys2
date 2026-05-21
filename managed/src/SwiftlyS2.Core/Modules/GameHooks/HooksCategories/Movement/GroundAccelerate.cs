@@ -1,33 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class GroundAccelerateMovementData : IGroundAccelerateMovement
+internal sealed class GroundAccelerateMovementHook : IGroundAccelerateMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public required nint WishDirectionPtr { get; init; }
-    public float FrameTime { get; init; }
-    public float WishSpeed { get; set; }
-    public float Acceleration { get; set; }
-    public HookResult Result { get; set; } = HookResult.Continue;
+    internal event OnGroundAccelerateMovementPreDelegate? _Pre;
+    internal event OnGroundAccelerateMovementPostDelegate? _Post;
 
-    public unsafe Vector WishDirection
-    {
-        get => *(Vector*)WishDirectionPtr;
-        set => *(Vector*)WishDirectionPtr = value;
-    }
-}
-
-internal sealed class GroundAccelerateMovementEvents : IGroundAccelerateMovementEvents
-{
-    internal event OnGroundAccelerateMovementDelegate? _Pre;
-    internal event OnGroundAccelerateMovementDelegate? _Post;
-
-    public event OnGroundAccelerateMovementDelegate Pre {
+    public event OnGroundAccelerateMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.GroundAccelerate);
             _Pre += value;
@@ -38,7 +18,7 @@ internal sealed class GroundAccelerateMovementEvents : IGroundAccelerateMovement
         }
     }
 
-    public event OnGroundAccelerateMovementDelegate Post {
+    public event OnGroundAccelerateMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.GroundAccelerate);
             _Post += value;
@@ -49,8 +29,8 @@ internal sealed class GroundAccelerateMovementEvents : IGroundAccelerateMovement
         }
     }
 
-    public void InvokePre( ref IGroundAccelerateMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref IGroundAccelerateMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref GroundAccelerateMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref GroundAccelerateMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

@@ -4,31 +4,34 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IWeaponDrop
+public struct WeaponDropParams
 {
-    /// <summary>
-    /// The player who dropped the weapon.
-    /// </summary>
-    public IPlayer Player { get; set; }
-    /// <summary>
-    /// The weapon.
-    /// </summary>
-    public CBasePlayerWeapon? Weapon { get; }
-    /// <summary>
-    /// Swapping weapon with one from the ground.
-    /// </summary>
-    public bool SwappingWeapon { get; }
-    /// <summary>
-    /// The result of the hook.
-    /// </summary>
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required CBasePlayerWeapon? Weapon { get; init; }
+    public required bool SwappingWeapon { get; init; }
 }
 
-public delegate void OnWeaponDropDelegate( ref IWeaponDrop drop );
-
-public interface IWeaponDropEvents
+public ref struct WeaponDropPreContext
 {
-    public event OnWeaponDropDelegate Pre;
+    public WeaponDropParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
 
-    public event OnWeaponDropDelegate Post;
+public ref struct WeaponDropPostContext
+{
+    public WeaponDropParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnWeaponDropPreDelegate( ref WeaponDropPreContext ctx );
+public delegate void OnWeaponDropPostDelegate( ref WeaponDropPostContext ctx );
+
+public interface IWeaponDropHook
+{
+    public event OnWeaponDropPreDelegate Pre;
+    public event OnWeaponDropPostDelegate Post;
 }

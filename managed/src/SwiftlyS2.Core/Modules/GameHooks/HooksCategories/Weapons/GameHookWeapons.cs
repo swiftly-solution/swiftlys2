@@ -4,9 +4,9 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class GameHookWeapon : IGameHookWeapon
 {
-    internal readonly WeaponDropEvents DropEvents = new();
-    internal readonly CanUseWeaponEvents CanUseEvents = new();
+    internal readonly WeaponDropHook DropHook = new();
+    internal readonly CanUseWeaponHook CanUseHook = new();
 
-    public IWeaponDropEvents Drop => DropEvents;
-    public ICanUseWeaponEvents CanUse => CanUseEvents;
+    public IWeaponDropHook Drop => DropHook;
+    public ICanUseWeaponHook CanUse => CanUseHook;
 }

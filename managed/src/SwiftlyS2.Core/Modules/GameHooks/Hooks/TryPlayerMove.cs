@@ -26,23 +26,26 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) { next()(movementServices, moveData, firstDest, firstTrace, isSurfing); return; }
 
-                ITryPlayerMoveMovement @event = new TryPlayerMoveMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    FirstDestPtr = (nint)firstDest,
-                    FirstTrace = ConvertGameTrace(firstTrace),
-                    IsSurfingPtr = (nint)isSurfing,
-                    Result = HookResult.Continue
+                var preCtx = new TryPlayerMoveMovementPreContext {
+                    Params = new TryPlayerMoveMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData },
+                        FirstDest = firstDest != null ? *firstDest : default,
+                        FirstTrace = ConvertGameTrace(firstTrace),
+                        IsSurfing = isSurfing != null && *isSurfing != 0
+                    }
                 };
 
-                InvokeTryPlayerMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeTryPlayerMovePre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
+                if (firstDest != null) *firstDest = preCtx.Params.FirstDest;
+                if (isSurfing != null) *isSurfing = preCtx.Params.IsSurfing ? (byte)1 : (byte)0;
                 next()(movementServices, moveData, firstDest, firstTrace, isSurfing);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new TryPlayerMoveMovementPostContext { Params = preCtx.Params };
 
-                InvokeTryPlayerMovePost(ref @event);
+                InvokeTryPlayerMovePost(ref postCtx);
             };
         });
     }
@@ -171,26 +174,26 @@ internal static partial class GameHooksPublisher
         return result;
     }
 
-    internal static void InvokeTryPlayerMovePre( ref ITryPlayerMoveMovement @event )
+    internal static void InvokeTryPlayerMovePre( ref TryPlayerMoveMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeTryPlayerMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeTryPlayerMovePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeTryPlayerMovePost( ref ITryPlayerMoveMovement @event )
+    internal static void InvokeTryPlayerMovePost( ref TryPlayerMoveMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeTryPlayerMovePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeTryPlayerMovePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

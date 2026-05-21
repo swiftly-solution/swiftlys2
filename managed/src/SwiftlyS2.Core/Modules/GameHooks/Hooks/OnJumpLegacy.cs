@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
 
@@ -29,20 +28,21 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) { next()(ccsPlayerLegacyJump, moveData); return; }
 
-                IOnJumpLegacyMovement @event = new OnJumpLegacyMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    Result = HookResult.Continue
+                var preCtx = new OnJumpLegacyMovementPreContext {
+                    Params = new OnJumpLegacyMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokeOnJumpLegacyPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeOnJumpLegacyPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
                 next()(ccsPlayerLegacyJump, moveData);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new OnJumpLegacyMovementPostContext { Params = preCtx.Params };
 
-                InvokeOnJumpLegacyPost(ref @event);
+                InvokeOnJumpLegacyPost(ref postCtx);
             };
         });
     }
@@ -64,26 +64,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeOnJumpLegacyPre( ref IOnJumpLegacyMovement @event )
+    internal static void InvokeOnJumpLegacyPre( ref OnJumpLegacyMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeOnJumpLegacyPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeOnJumpLegacyPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeOnJumpLegacyPost( ref IOnJumpLegacyMovement @event )
+    internal static void InvokeOnJumpLegacyPost( ref OnJumpLegacyMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeOnJumpLegacyPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeOnJumpLegacyPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

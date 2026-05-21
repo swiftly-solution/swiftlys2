@@ -3,17 +3,33 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface ICheckJumpButtonModernMovement
+public struct CheckJumpButtonModernMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
 }
 
-public delegate void OnCheckJumpButtonModernMovementDelegate( ref ICheckJumpButtonModernMovement data );
-
-public interface ICheckJumpButtonModernMovementEvents
+public ref struct CheckJumpButtonModernMovementPreContext
 {
-    public event OnCheckJumpButtonModernMovementDelegate Pre;
-    public event OnCheckJumpButtonModernMovementDelegate Post;
+    public CheckJumpButtonModernMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct CheckJumpButtonModernMovementPostContext
+{
+    public CheckJumpButtonModernMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnCheckJumpButtonModernMovementPreDelegate( ref CheckJumpButtonModernMovementPreContext ctx );
+public delegate void OnCheckJumpButtonModernMovementPostDelegate( ref CheckJumpButtonModernMovementPostContext ctx );
+
+public interface ICheckJumpButtonModernMovementHook
+{
+    public event OnCheckJumpButtonModernMovementPreDelegate Pre;
+    public event OnCheckJumpButtonModernMovementPostDelegate Post;
 }

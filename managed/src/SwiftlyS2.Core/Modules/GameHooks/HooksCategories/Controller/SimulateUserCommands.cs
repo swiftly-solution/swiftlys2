@@ -1,23 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class SimulateUserCommands : ISimulateUserCommandsController
+internal sealed class SimulateUserCommandsHook : ISimulateUserCommandsHook
 {
-    public required IPlayer Player { get; set; }
+    private event OnSimulateUserCommandsPreDelegate? _Pre;
+    private event OnSimulateUserCommandsPostDelegate? _Post;
 
-    public required HookResult Result { get; set; } = HookResult.Continue;
-
-}
-
-internal sealed class SimulateUserCommandsEvents : ISimulateUserCommandsEvents
-{
-    private event OnSimulateUserCommandsDelegate? _Pre;
-    private event OnSimulateUserCommandsDelegate? _Post;
-
-    public event OnSimulateUserCommandsDelegate Pre {
+    public event OnSimulateUserCommandsPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.SimulateUserCommands);
             _Pre += value;
@@ -28,7 +18,7 @@ internal sealed class SimulateUserCommandsEvents : ISimulateUserCommandsEvents
         }
     }
 
-    public event OnSimulateUserCommandsDelegate Post {
+    public event OnSimulateUserCommandsPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.SimulateUserCommands);
             _Post += value;
@@ -39,15 +29,8 @@ internal sealed class SimulateUserCommandsEvents : ISimulateUserCommandsEvents
         }
     }
 
-    public void InvokePre( ref ISimulateUserCommandsController data )
-    {
-        _Pre?.Invoke(ref data);
-    }
-
-    public void InvokePost( ref ISimulateUserCommandsController data )
-    {
-        _Post?.Invoke(ref data);
-    }
+    public void InvokePre( ref SimulateUserCommandsPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref SimulateUserCommandsPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

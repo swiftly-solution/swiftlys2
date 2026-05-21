@@ -24,20 +24,21 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) { next()(movementServices, moveData); return; }
 
-                ICheckFallingMovement @event = new CheckFallingMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    Result = HookResult.Continue
+                var preCtx = new CheckFallingMovementPreContext {
+                    Params = new CheckFallingMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokeCheckFallingPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeCheckFallingPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
                 next()(movementServices, moveData);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new CheckFallingMovementPostContext { Params = preCtx.Params };
 
-                InvokeCheckFallingPost(ref @event);
+                InvokeCheckFallingPost(ref postCtx);
             };
         });
     }
@@ -59,26 +60,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeCheckFallingPre( ref ICheckFallingMovement @event )
+    internal static void InvokeCheckFallingPre( ref CheckFallingMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCheckFallingPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCheckFallingPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeCheckFallingPost( ref ICheckFallingMovement @event )
+    internal static void InvokeCheckFallingPost( ref CheckFallingMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCheckFallingPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCheckFallingPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

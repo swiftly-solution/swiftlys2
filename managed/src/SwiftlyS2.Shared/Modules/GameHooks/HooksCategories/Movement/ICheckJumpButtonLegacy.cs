@@ -3,17 +3,33 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface ICheckJumpButtonLegacyMovement
+public struct CheckJumpButtonLegacyMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
 }
 
-public delegate void OnCheckJumpButtonLegacyMovementDelegate( ref ICheckJumpButtonLegacyMovement data );
-
-public interface ICheckJumpButtonLegacyMovementEvents
+public ref struct CheckJumpButtonLegacyMovementPreContext
 {
-    public event OnCheckJumpButtonLegacyMovementDelegate Pre;
-    public event OnCheckJumpButtonLegacyMovementDelegate Post;
+    public CheckJumpButtonLegacyMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct CheckJumpButtonLegacyMovementPostContext
+{
+    public CheckJumpButtonLegacyMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnCheckJumpButtonLegacyMovementPreDelegate( ref CheckJumpButtonLegacyMovementPreContext ctx );
+public delegate void OnCheckJumpButtonLegacyMovementPostDelegate( ref CheckJumpButtonLegacyMovementPostContext ctx );
+
+public interface ICheckJumpButtonLegacyMovementHook
+{
+    public event OnCheckJumpButtonLegacyMovementPreDelegate Pre;
+    public event OnCheckJumpButtonLegacyMovementPostDelegate Post;
 }

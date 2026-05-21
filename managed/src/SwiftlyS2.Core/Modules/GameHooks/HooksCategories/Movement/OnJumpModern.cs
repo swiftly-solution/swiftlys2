@@ -1,22 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class OnJumpModernMovementData : IOnJumpModernMovement
+internal sealed class OnJumpModernMovementHook : IOnJumpModernMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnOnJumpModernMovementPreDelegate? _Pre;
+    internal event OnOnJumpModernMovementPostDelegate? _Post;
 
-internal sealed class OnJumpModernMovementEvents : IOnJumpModernMovementEvents
-{
-    internal event OnOnJumpModernMovementDelegate? _Pre;
-    internal event OnOnJumpModernMovementDelegate? _Post;
-
-    public event OnOnJumpModernMovementDelegate Pre {
+    public event OnOnJumpModernMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.OnJumpModern);
             _Pre += value;
@@ -27,7 +18,7 @@ internal sealed class OnJumpModernMovementEvents : IOnJumpModernMovementEvents
         }
     }
 
-    public event OnOnJumpModernMovementDelegate Post {
+    public event OnOnJumpModernMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.OnJumpModern);
             _Post += value;
@@ -38,8 +29,8 @@ internal sealed class OnJumpModernMovementEvents : IOnJumpModernMovementEvents
         }
     }
 
-    public void InvokePre( ref IOnJumpModernMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref IOnJumpModernMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref OnJumpModernMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref OnJumpModernMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

@@ -24,25 +24,24 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) return next()(movementServices, moveData);
 
-                IPlayerMoveMovement @event = new PlayerMoveMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    OriginalResult = false,
-                    Result = HookResult.Continue
+                var preCtx = new PlayerMoveMovementPreContext {
+                    Params = new PlayerMoveMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokePlayerMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                    return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : (byte)0;
+                InvokePlayerMovePre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                    return preCtx.IsReturnSet ? (preCtx.Return ? (byte)1 : (byte)0) : (byte)0;
 
                 var result = next()(movementServices, moveData);
 
-                @event.SetResult(result != 0);
-                @event.Intercepted = false;
+                var postCtx = new PlayerMoveMovementPostContext { Params = preCtx.Params, Return = result != 0 };
 
-                InvokePlayerMovePost(ref @event);
+                InvokePlayerMovePost(ref postCtx);
 
-                return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : result;
+                return postCtx.Return ? (byte)1 : (byte)0;
             };
         });
     }
@@ -64,26 +63,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokePlayerMovePre( ref IPlayerMoveMovement @event )
+    internal static void InvokePlayerMovePre( ref PlayerMoveMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokePlayerMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokePlayerMovePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokePlayerMovePost( ref IPlayerMoveMovement @event )
+    internal static void InvokePlayerMovePost( ref PlayerMoveMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokePlayerMovePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokePlayerMovePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

@@ -25,23 +25,25 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) { next()(movementServices, moveData, wishDirection, wishSpeed, acceleration); return; }
 
-                IAirAccelerateMovement @event = new AirAccelerateMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    WishDirectionPtr = (nint)wishDirection,
-                    WishSpeed = wishSpeed,
-                    Acceleration = acceleration,
-                    Result = HookResult.Continue
+                var preCtx = new AirAccelerateMovementPreContext {
+                    Params = new AirAccelerateMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData },
+                        WishDirection = wishDirection != null ? *wishDirection : default,
+                        WishSpeed = wishSpeed,
+                        Acceleration = acceleration
+                    }
                 };
 
-                InvokeAirAcceleratePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeAirAcceleratePre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
-                next()(movementServices, moveData, wishDirection, @event.WishSpeed, @event.Acceleration);
+                if (wishDirection != null) *wishDirection = preCtx.Params.WishDirection;
+                next()(movementServices, moveData, wishDirection, preCtx.Params.WishSpeed, preCtx.Params.Acceleration);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new AirAccelerateMovementPostContext { Params = preCtx.Params };
 
-                InvokeAirAcceleratePost(ref @event);
+                InvokeAirAcceleratePost(ref postCtx);
             };
         });
     }
@@ -63,26 +65,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeAirAcceleratePre( ref IAirAccelerateMovement @event )
+    internal static void InvokeAirAcceleratePre( ref AirAccelerateMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeAirAcceleratePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeAirAcceleratePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeAirAcceleratePost( ref IAirAccelerateMovement @event )
+    internal static void InvokeAirAcceleratePost( ref AirAccelerateMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeAirAcceleratePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeAirAcceleratePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

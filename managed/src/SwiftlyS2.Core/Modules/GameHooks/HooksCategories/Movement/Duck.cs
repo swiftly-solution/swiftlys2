@@ -1,22 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class DuckMovementData : IDuckMovement
+internal sealed class DuckMovementHook : IDuckMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnDuckMovementPreDelegate? _Pre;
+    internal event OnDuckMovementPostDelegate? _Post;
 
-internal sealed class DuckMovementEvents : IDuckMovementEvents
-{
-    internal event OnDuckMovementDelegate? _Pre;
-    internal event OnDuckMovementDelegate? _Post;
-
-    public event OnDuckMovementDelegate Pre {
+    public event OnDuckMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.Duck);
             _Pre += value;
@@ -27,7 +18,7 @@ internal sealed class DuckMovementEvents : IDuckMovementEvents
         }
     }
 
-    public event OnDuckMovementDelegate Post {
+    public event OnDuckMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.Duck);
             _Post += value;
@@ -38,8 +29,8 @@ internal sealed class DuckMovementEvents : IDuckMovementEvents
         }
     }
 
-    public void InvokePre( ref IDuckMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref IDuckMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref DuckMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref DuckMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

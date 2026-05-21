@@ -24,20 +24,21 @@ internal static partial class GameHooksPublisher
                 var player = _dummyController.ToPlayer();
                 if (player == null) { next()(movementServices, moveData); return; }
 
-                IProcessMovementMovement @event = new ProcessMovementMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    Result = HookResult.Continue
+                var preCtx = new ProcessMovementMovementPreContext {
+                    Params = new ProcessMovementMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData }
+                    }
                 };
 
-                InvokeProcessMovementPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeProcessMovementPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
                 next()(movementServices, moveData);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new ProcessMovementMovementPostContext { Params = preCtx.Params };
 
-                InvokeProcessMovementPost(ref @event);
+                InvokeProcessMovementPost(ref postCtx);
             };
         });
     }
@@ -60,26 +61,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeProcessMovementPre( ref IProcessMovementMovement @event )
+    internal static void InvokeProcessMovementPre( ref ProcessMovementMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeProcessMovementPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeProcessMovementPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeProcessMovementPost( ref IProcessMovementMovement @event )
+    internal static void InvokeProcessMovementPost( ref ProcessMovementMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeProcessMovementPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeProcessMovementPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

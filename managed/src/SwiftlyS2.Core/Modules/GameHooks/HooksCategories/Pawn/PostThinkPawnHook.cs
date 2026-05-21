@@ -1,21 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class PostThinkPawnData : IPostThinkPawn
+internal sealed class PostThinkPawnHook : IPostThinkPawnHook
 {
-    public required IPlayer Player { get; set; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnPostThinkPawnPreDelegate? _Pre;
+    internal event OnPostThinkPawnPostDelegate? _Post;
 
-internal sealed class PostThinkPawnEvents : IPostThinkPawnEvents
-{
-    internal event OnPostThinkPawnDelegate? _Pre;
-    internal event OnPostThinkPawnDelegate? _Post;
-
-    public event OnPostThinkPawnDelegate Pre {
+    public event OnPostThinkPawnPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.PostThink);
             _Pre += value;
@@ -26,7 +18,7 @@ internal sealed class PostThinkPawnEvents : IPostThinkPawnEvents
         }
     }
 
-    public event OnPostThinkPawnDelegate Post {
+    public event OnPostThinkPawnPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.PostThink);
             _Post += value;
@@ -37,15 +29,8 @@ internal sealed class PostThinkPawnEvents : IPostThinkPawnEvents
         }
     }
 
-    public void InvokePre( ref IPostThinkPawn data )
-    {
-        _Pre?.Invoke(ref data);
-    }
-
-    public void InvokePost( ref IPostThinkPawn data )
-    {
-        _Post?.Invoke(ref data);
-    }
+    public void InvokePre( ref PostThinkPawnPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref PostThinkPawnPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

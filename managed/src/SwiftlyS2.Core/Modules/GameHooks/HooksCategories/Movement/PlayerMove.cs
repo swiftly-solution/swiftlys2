@@ -1,31 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class PlayerMoveMovementData : IPlayerMoveMovement
+internal sealed class PlayerMoveMovementHook : IPlayerMoveMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public required bool OriginalResult { get; set; }
+    internal event OnPlayerMoveMovementPreDelegate? _Pre;
+    internal event OnPlayerMoveMovementPostDelegate? _Post;
 
-    public void SetResult( bool result )
-    {
-        OriginalResult = result;
-        Intercepted = true;
-    }
-
-    public bool Intercepted { get; set; } = false;
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
-
-internal sealed class PlayerMoveMovementEvents : IPlayerMoveMovementEvents
-{
-    internal event OnPlayerMoveMovementDelegate? _Pre;
-    internal event OnPlayerMoveMovementDelegate? _Post;
-
-    public event OnPlayerMoveMovementDelegate Pre {
+    public event OnPlayerMoveMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.PlayerMove);
             _Pre += value;
@@ -36,7 +18,7 @@ internal sealed class PlayerMoveMovementEvents : IPlayerMoveMovementEvents
         }
     }
 
-    public event OnPlayerMoveMovementDelegate Post {
+    public event OnPlayerMoveMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.PlayerMove);
             _Post += value;
@@ -47,8 +29,8 @@ internal sealed class PlayerMoveMovementEvents : IPlayerMoveMovementEvents
         }
     }
 
-    public void InvokePre( ref IPlayerMoveMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref IPlayerMoveMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref PlayerMoveMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref PlayerMoveMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

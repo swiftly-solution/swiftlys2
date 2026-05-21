@@ -4,55 +4,44 @@ using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface ICanAcquireItem
+public struct CanAcquireItemParams
 {
-    /// <summary>
-    /// The player who dropped the weapon.
-    /// </summary>
-    public IPlayer Player { get; set; }
-    /// <summary>
-    /// The econ item view.
-    /// </summary>
-    public CEconItemView EconItemView { get; }
-
-    /// <summary>
-    /// The weapon vdata if found, otherwise null.
-    /// </summary>
-    public CCSWeaponBaseVData? WeaponVData { get; }
-
-    /// <summary>
-    /// The acquire method.
-    /// </summary>
-    public AcquireMethod AcquireMethod { get; }
-
-    /// <summary>
-    /// The original result of the CanAcquire call.
-    /// </summary>
-    public AcquireResult OriginalResult { get; }
-
-    /// <summary>
-    /// Intercept and modify the acquire result.
-    /// This will modify the acquire result and stop the following hooks and original function.
-    /// </summary>
-    /// <param name="result">The result to modify.</param>
-    public void SetAcquireResult( AcquireResult result );
-
-    /// <summary>
-    /// If the event has been intercepted (the result has been changed).
-    /// </summary>
-    public bool Intercepted { get; set; }
-
-    /// <summary>
-    /// The result of the hook, used to determine whether to block the original function or not.
-    /// </summary>
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required CEconItemView EconItemView { get; init; }
+    public required CCSWeaponBaseVData? WeaponVData { get; init; }
+    public required AcquireMethod AcquireMethod { get; init; }
 }
 
-public delegate void OnCanAcquireItemDelegate( ref ICanAcquireItem canAcquire );
-
-public interface ICanAcquireItemEvents
+public ref struct CanAcquireItemPreContext
 {
-    public event OnCanAcquireItemDelegate Pre;
+    public CanAcquireItemParams Params;
+    private AcquireResult _return;
+    private bool _returnSet;
+    private HookResult _hookResult;
 
-    public event OnCanAcquireItemDelegate Post;
+    public void SetReturn( AcquireResult result ) { _return = result; _returnSet = true; }
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+
+    internal bool IsReturnSet => _returnSet;
+    internal AcquireResult Return => _return;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct CanAcquireItemPostContext
+{
+    public CanAcquireItemParams Params;
+    public AcquireResult Return { get; set; }
+    private HookResult _hookResult;
+
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnCanAcquireItemPreDelegate( ref CanAcquireItemPreContext ctx );
+public delegate void OnCanAcquireItemPostDelegate( ref CanAcquireItemPostContext ctx );
+
+public interface ICanAcquireItemHook
+{
+    public event OnCanAcquireItemPreDelegate Pre;
+    public event OnCanAcquireItemPostDelegate Post;
 }

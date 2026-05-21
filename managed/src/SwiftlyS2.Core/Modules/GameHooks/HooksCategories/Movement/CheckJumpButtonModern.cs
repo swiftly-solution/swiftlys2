@@ -1,22 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CheckJumpButtonModernMovementData : ICheckJumpButtonModernMovement
+internal sealed class CheckJumpButtonModernMovementHook : ICheckJumpButtonModernMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnCheckJumpButtonModernMovementPreDelegate? _Pre;
+    internal event OnCheckJumpButtonModernMovementPostDelegate? _Post;
 
-internal sealed class CheckJumpButtonModernMovementEvents : ICheckJumpButtonModernMovementEvents
-{
-    internal event OnCheckJumpButtonModernMovementDelegate? _Pre;
-    internal event OnCheckJumpButtonModernMovementDelegate? _Post;
-
-    public event OnCheckJumpButtonModernMovementDelegate Pre {
+    public event OnCheckJumpButtonModernMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonModern);
             _Pre += value;
@@ -27,7 +18,7 @@ internal sealed class CheckJumpButtonModernMovementEvents : ICheckJumpButtonMode
         }
     }
 
-    public event OnCheckJumpButtonModernMovementDelegate Post {
+    public event OnCheckJumpButtonModernMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckJumpButtonModern);
             _Post += value;
@@ -38,8 +29,8 @@ internal sealed class CheckJumpButtonModernMovementEvents : ICheckJumpButtonMode
         }
     }
 
-    public void InvokePre( ref ICheckJumpButtonModernMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref ICheckJumpButtonModernMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref CheckJumpButtonModernMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref CheckJumpButtonModernMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

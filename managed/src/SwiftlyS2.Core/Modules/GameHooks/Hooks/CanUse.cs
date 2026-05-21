@@ -29,28 +29,25 @@ internal static partial class GameHooksPublisher
 
                 var basePlayerWeapon = EntityManager.GetEntityByAddress(pBasePlayerWeapon) as CCSWeaponBase ?? _core.Memory.ToSchemaClass<CCSWeaponBase>(pBasePlayerWeapon);
 
-                ICanUseWeapon @event = new CanUseWeaponData {
-                    Player = player,
-                    Weapon = basePlayerWeapon,
-                    OriginalResult = true,
-                    Intercepted = false
+                var preCtx = new CanUseWeaponPreContext {
+                    Params = new CanUseWeaponParams {
+                        Player = player,
+                        Weapon = basePlayerWeapon
+                    }
                 };
 
-                InvokeCanUsePre(ref @event);
+                InvokeCanUsePre(ref preCtx);
 
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                {
-                    return @event.OriginalResult ? (byte)1 : (byte)0;
-                }
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                    return preCtx.IsReturnSet ? (preCtx.Return ? (byte)1 : (byte)0) : (byte)1;
 
                 var result = next()(pWeaponServices, pBasePlayerWeapon);
 
-                @event.SetResult(result != 0);
-                @event.Intercepted = false;
+                var postCtx = new CanUseWeaponPostContext { Params = preCtx.Params, Return = result != 0 };
 
-                InvokeCanUsePost(ref @event);
+                InvokeCanUsePost(ref postCtx);
 
-                return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : result;
+                return postCtx.Return ? (byte)1 : (byte)0;
             };
         });
     }
@@ -72,26 +69,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeCanUsePre( ref ICanUseWeapon @event )
+    internal static void InvokeCanUsePre( ref CanUseWeaponPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCanUsePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCanUsePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeCanUsePost( ref ICanUseWeapon @event )
+    internal static void InvokeCanUsePost( ref CanUseWeaponPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCanUsePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCanUsePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

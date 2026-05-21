@@ -1,22 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class RunCommandMovementData : IRunCommandMovement
+internal sealed class RunCommandMovementHook : IRunCommandMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IUserCmd UserCmd { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnRunCommandMovementPreDelegate? _Pre;
+    internal event OnRunCommandMovementPostDelegate? _Post;
 
-internal sealed class RunCommandMovementEvents : IRunCommandMovementEvents
-{
-    internal event OnRunCommandMovementDelegate? _Pre;
-    internal event OnRunCommandMovementDelegate? _Post;
-
-    public event OnRunCommandMovementDelegate Pre {
+    public event OnRunCommandMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.RunCommand);
             _Pre += value;
@@ -27,7 +18,7 @@ internal sealed class RunCommandMovementEvents : IRunCommandMovementEvents
         }
     }
 
-    public event OnRunCommandMovementDelegate Post {
+    public event OnRunCommandMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.RunCommand);
             _Post += value;
@@ -38,15 +29,8 @@ internal sealed class RunCommandMovementEvents : IRunCommandMovementEvents
         }
     }
 
-    public void InvokePre( ref IRunCommandMovement data )
-    {
-        _Pre?.Invoke(ref data);
-    }
-
-    public void InvokePost( ref IRunCommandMovement data )
-    {
-        _Post?.Invoke(ref data);
-    }
+    public void InvokePre( ref RunCommandMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref RunCommandMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

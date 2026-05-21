@@ -24,24 +24,19 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawn.ToPlayer();
                 if (player == null) return next()(pawn);
 
-                ICanMovePawn @event = new CanMovePawnData {
-                    Player = player,
-                    OriginalResult = false,
-                    Result = HookResult.Continue
-                };
+                var preCtx = new CanMovePawnPreContext { Params = new CanMovePawnParams { Player = player } };
 
-                InvokeCanMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal)
-                    return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : (byte)0;
+                InvokeCanMovePre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                    return preCtx.IsReturnSet ? (preCtx.Return ? (byte)1 : (byte)0) : (byte)0;
 
                 var result = next()(pawn);
 
-                @event.SetResult(result != 0);
-                @event.Intercepted = false;
+                var postCtx = new CanMovePawnPostContext { Params = preCtx.Params, Return = result != 0 };
 
-                InvokeCanMovePost(ref @event);
+                InvokeCanMovePost(ref postCtx);
 
-                return @event.Intercepted ? (@event.OriginalResult ? (byte)1 : (byte)0) : result;
+                return postCtx.Return ? (byte)1 : (byte)0;
             };
         });
     }
@@ -63,26 +58,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeCanMovePre( ref ICanMovePawn @event )
+    internal static void InvokeCanMovePre( ref CanMovePawnPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCanMovePre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCanMovePre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeCanMovePost( ref ICanMovePawn @event )
+    internal static void InvokeCanMovePost( ref CanMovePawnPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCanMovePost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCanMovePost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

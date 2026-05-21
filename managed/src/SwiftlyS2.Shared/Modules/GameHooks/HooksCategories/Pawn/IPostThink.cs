@@ -3,24 +3,32 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IPostThinkPawn
+public struct PostThinkPawnParams
 {
-    /// <summary>
-    /// The player who dropped the weapon.
-    /// </summary>
-    public IPlayer Player { get; set; }
-
-    /// <summary>
-    /// The result of the hook. Can be used to prevent the drop by returning <see cref="HookResult.Stop"/> or <see cref="HookResult.CancelOriginal"/> .
-    /// </summary>
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
 }
 
-public delegate void OnPostThinkPawnDelegate( ref IPostThinkPawn postThink );
-
-public interface IPostThinkPawnEvents
+public ref struct PostThinkPawnPreContext
 {
-    public event OnPostThinkPawnDelegate Pre;
+    public PostThinkPawnParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
 
-    public event OnPostThinkPawnDelegate Post;
+public ref struct PostThinkPawnPostContext
+{
+    public PostThinkPawnParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnPostThinkPawnPreDelegate( ref PostThinkPawnPreContext ctx );
+public delegate void OnPostThinkPawnPostDelegate( ref PostThinkPawnPostContext ctx );
+
+public interface IPostThinkPawnHook
+{
+    public event OnPostThinkPawnPreDelegate Pre;
+    public event OnPostThinkPawnPostDelegate Post;
 }

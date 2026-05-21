@@ -1,29 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class ProcessUsercmdsControllerData : IProcessUsercmdsController
+internal sealed class ProcessUsercmdsHook : IProcessUsercmdsHook
 {
-    public required IPlayer Player { get; set; }
+    private event OnProcessUsercmdsPreDelegate? _Pre;
+    private event OnProcessUsercmdsPostDelegate? _Post;
 
-    public required List<IUserCmd> Usercmds { get; init; }
-
-    public required bool Paused { get; init; }
-
-    public required float Margin { get; init; }
-
-    public required HookResult Result { get; set; } = HookResult.Continue;
-
-}
-
-internal sealed class ProcessUsercmdsEvents : IProcessUsercmdsEvents
-{
-    private event OnProcessUsercmdsDelegate? _Pre;
-    private event OnProcessUsercmdsDelegate? _Post;
-
-    public event OnProcessUsercmdsDelegate Pre {
+    public event OnProcessUsercmdsPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
             _Pre += value;
@@ -34,7 +18,7 @@ internal sealed class ProcessUsercmdsEvents : IProcessUsercmdsEvents
         }
     }
 
-    public event OnProcessUsercmdsDelegate Post {
+    public event OnProcessUsercmdsPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.ProcessUsercmds);
             _Post += value;
@@ -45,15 +29,8 @@ internal sealed class ProcessUsercmdsEvents : IProcessUsercmdsEvents
         }
     }
 
-    public void InvokePre( ref IProcessUsercmdsController data )
-    {
-        _Pre?.Invoke(ref data);
-    }
-
-    public void InvokePost( ref IProcessUsercmdsController data )
-    {
-        _Post?.Invoke(ref data);
-    }
+    public void InvokePre( ref ProcessUsercmdsPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref ProcessUsercmdsPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

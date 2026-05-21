@@ -24,21 +24,22 @@ internal static partial class GameHooksPublisher
                 var player = _dummyPawnComponent.ToPlayer();
                 if (player == null) { next()(movementServices, moveData, stayOnGround); return; }
 
-                ICategorizePositionMovement @event = new CategorizePositionMovementData {
-                    Player = player,
-                    MoveData = new CMoveDataImpl { Address = moveData },
-                    StayOnGround = stayOnGround != 0,
-                    Result = HookResult.Continue
+                var preCtx = new CategorizePositionMovementPreContext {
+                    Params = new CategorizePositionMovementParams {
+                        Player = player,
+                        MoveData = new CMoveDataImpl { Address = moveData },
+                        StayOnGround = stayOnGround != 0
+                    }
                 };
 
-                InvokeCategorizePositionPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return;
+                InvokeCategorizePositionPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return;
 
-                next()(movementServices, moveData, (byte)(@event.StayOnGround ? 1 : 0));
+                next()(movementServices, moveData, (byte)(preCtx.Params.StayOnGround ? 1 : 0));
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new CategorizePositionMovementPostContext { Params = preCtx.Params };
 
-                InvokeCategorizePositionPost(ref @event);
+                InvokeCategorizePositionPost(ref postCtx);
             };
         });
     }
@@ -60,26 +61,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeCategorizePositionPre( ref ICategorizePositionMovement @event )
+    internal static void InvokeCategorizePositionPre( ref CategorizePositionMovementPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCategorizePositionPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCategorizePositionPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeCategorizePositionPost( ref ICategorizePositionMovement @event )
+    internal static void InvokeCategorizePositionPost( ref CategorizePositionMovementPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeCategorizePositionPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeCategorizePositionPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

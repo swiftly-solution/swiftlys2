@@ -3,17 +3,33 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IAirMoveMovement
+public struct AirMoveMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
 }
 
-public delegate void OnAirMoveMovementDelegate( ref IAirMoveMovement data );
-
-public interface IAirMoveMovementEvents
+public ref struct AirMoveMovementPreContext
 {
-    public event OnAirMoveMovementDelegate Pre;
-    public event OnAirMoveMovementDelegate Post;
+    public AirMoveMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct AirMoveMovementPostContext
+{
+    public AirMoveMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnAirMoveMovementPreDelegate( ref AirMoveMovementPreContext ctx );
+public delegate void OnAirMoveMovementPostDelegate( ref AirMoveMovementPostContext ctx );
+
+public interface IAirMoveMovementHook
+{
+    public event OnAirMoveMovementPreDelegate Pre;
+    public event OnAirMoveMovementPostDelegate Post;
 }

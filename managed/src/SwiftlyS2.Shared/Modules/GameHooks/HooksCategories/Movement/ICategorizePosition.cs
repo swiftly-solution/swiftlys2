@@ -3,18 +3,34 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface ICategorizePositionMovement
+public struct CategorizePositionMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
-    public bool StayOnGround { get; set; }
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
+    public required bool StayOnGround { get; set; }
 }
 
-public delegate void OnCategorizePositionMovementDelegate( ref ICategorizePositionMovement data );
-
-public interface ICategorizePositionMovementEvents
+public ref struct CategorizePositionMovementPreContext
 {
-    public event OnCategorizePositionMovementDelegate Pre;
-    public event OnCategorizePositionMovementDelegate Post;
+    public CategorizePositionMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct CategorizePositionMovementPostContext
+{
+    public CategorizePositionMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnCategorizePositionMovementPreDelegate( ref CategorizePositionMovementPreContext ctx );
+public delegate void OnCategorizePositionMovementPostDelegate( ref CategorizePositionMovementPostContext ctx );
+
+public interface ICategorizePositionMovementHook
+{
+    public event OnCategorizePositionMovementPreDelegate Pre;
+    public event OnCategorizePositionMovementPostDelegate Post;
 }

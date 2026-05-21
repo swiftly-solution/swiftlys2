@@ -4,7 +4,7 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class GameHookItem : IGameHookItem
 {
-    internal readonly CanAcquireItemEvents CanAcquireEvents = new();
+    internal readonly CanAcquireItemHook CanAcquireHook = new();
 
-    public ICanAcquireItemEvents CanAcquire => CanAcquireEvents;
+    public ICanAcquireItemHook CanAcquire => CanAcquireHook;
 }

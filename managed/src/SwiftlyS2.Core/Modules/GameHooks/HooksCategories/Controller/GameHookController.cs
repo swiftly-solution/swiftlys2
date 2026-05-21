@@ -4,9 +4,9 @@ namespace SwiftlyS2.Core.GameHooks;
 
 internal sealed class GameHookController : IGameHookController
 {
-    internal readonly ProcessUsercmdsEvents ProcessUsercmdsEvents = new();
-    internal readonly SimulateUserCommandsEvents SimulateUserCommandsEvents = new();
+    internal readonly ProcessUsercmdsHook ProcessUsercmdsHook = new();
+    internal readonly SimulateUserCommandsHook SimulateUserCommandsHook = new();
 
-    public IProcessUsercmdsEvents ProcessUsercmds => ProcessUsercmdsEvents;
-    public ISimulateUserCommandsEvents SimulateUserCommands => SimulateUserCommandsEvents;
+    public IProcessUsercmdsHook ProcessUsercmds => ProcessUsercmdsHook;
+    public ISimulateUserCommandsHook SimulateUserCommands => SimulateUserCommandsHook;
 }

@@ -1,22 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CheckParametersMovementData : ICheckParametersMovement
+internal sealed class CheckParametersMovementHook : ICheckParametersMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnCheckParametersMovementPreDelegate? _Pre;
+    internal event OnCheckParametersMovementPostDelegate? _Post;
 
-internal sealed class CheckParametersMovementEvents : ICheckParametersMovementEvents
-{
-    internal event OnCheckParametersMovementDelegate? _Pre;
-    internal event OnCheckParametersMovementDelegate? _Post;
-
-    public event OnCheckParametersMovementDelegate Pre {
+    public event OnCheckParametersMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CheckParameters);
             _Pre += value;
@@ -27,7 +18,7 @@ internal sealed class CheckParametersMovementEvents : ICheckParametersMovementEv
         }
     }
 
-    public event OnCheckParametersMovementDelegate Post {
+    public event OnCheckParametersMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CheckParameters);
             _Post += value;
@@ -38,8 +29,8 @@ internal sealed class CheckParametersMovementEvents : ICheckParametersMovementEv
         }
     }
 
-    public void InvokePre( ref ICheckParametersMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref ICheckParametersMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref CheckParametersMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref CheckParametersMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

@@ -32,22 +32,23 @@ internal static partial class GameHooksPublisher
                 for (var i = 0; i < numCmds; i++)
                     cmdsList.Add(new CUserCmd { Address = userCmds + (i * (144 + CUserCmdPlatformPadding)) });
 
-                IProcessUsercmdsController @event = new ProcessUsercmdsControllerData {
-                    Player = player,
-                    Usercmds = cmdsList,
-                    Paused = paused != 0,
-                    Margin = margin,
-                    Result = HookResult.Continue
+                var preCtx = new ProcessUsercmdsPreContext {
+                    Params = new ProcessUsercmdsParams {
+                        Player = player,
+                        Usercmds = cmdsList,
+                        Paused = paused != 0,
+                        Margin = margin
+                    }
                 };
 
-                InvokeProcessUsercmdsPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.CancelOriginal) return 0;
+                InvokeProcessUsercmdsPre(ref preCtx);
+                if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal) return 0;
 
                 var result = next()(controller, userCmds, numCmds, paused, margin);
 
-                @event.Result = HookResult.Continue;
+                var postCtx = new ProcessUsercmdsPostContext { Params = preCtx.Params };
 
-                InvokeProcessUsercmdsPost(ref @event);
+                InvokeProcessUsercmdsPost(ref postCtx);
                 return result;
             };
         });
@@ -71,26 +72,26 @@ internal static partial class GameHooksPublisher
         else return Guid.Empty;
     }
 
-    internal static void InvokeProcessUsercmdsPre( ref IProcessUsercmdsController @event )
+    internal static void InvokeProcessUsercmdsPre( ref ProcessUsercmdsPreContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeProcessUsercmdsPre(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeProcessUsercmdsPre(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }
 
-    internal static void InvokeProcessUsercmdsPost( ref IProcessUsercmdsController @event )
+    internal static void InvokeProcessUsercmdsPost( ref ProcessUsercmdsPostContext ctx )
     {
         lock (subscribersLock)
         {
             for (var i = 0; i < subscribers.Count; i++)
             {
-                subscribers[i].InvokeProcessUsercmdsPost(ref @event);
-                if (@event.Result == HookResult.Stop || @event.Result == HookResult.Handled) return;
+                subscribers[i].InvokeProcessUsercmdsPost(ref ctx);
+                if (ctx.HookResult == HookResult.Stop || ctx.HookResult == HookResult.Handled) return;
             }
         }
     }

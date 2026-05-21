@@ -1,22 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class FrictionMovementData : IFrictionMovement
+internal sealed class FrictionMovementHook : IFrictionMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnFrictionMovementPreDelegate? _Pre;
+    internal event OnFrictionMovementPostDelegate? _Post;
 
-internal sealed class FrictionMovementEvents : IFrictionMovementEvents
-{
-    internal event OnFrictionMovementDelegate? _Pre;
-    internal event OnFrictionMovementDelegate? _Post;
-
-    public event OnFrictionMovementDelegate Pre {
+    public event OnFrictionMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.Friction);
             _Pre += value;
@@ -27,7 +18,7 @@ internal sealed class FrictionMovementEvents : IFrictionMovementEvents
         }
     }
 
-    public event OnFrictionMovementDelegate Post {
+    public event OnFrictionMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.Friction);
             _Post += value;
@@ -38,8 +29,8 @@ internal sealed class FrictionMovementEvents : IFrictionMovementEvents
         }
     }
 
-    public void InvokePre( ref IFrictionMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref IFrictionMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref FrictionMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref FrictionMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

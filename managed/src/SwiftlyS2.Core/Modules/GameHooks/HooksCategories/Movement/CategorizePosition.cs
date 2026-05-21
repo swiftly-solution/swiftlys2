@@ -1,23 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CategorizePositionMovementData : ICategorizePositionMovement
+internal sealed class CategorizePositionMovementHook : ICategorizePositionMovementHook
 {
-    public required IPlayer Player { get; set; }
-    public required IMoveData MoveData { get; init; }
-    public bool StayOnGround { get; set; }
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
+    internal event OnCategorizePositionMovementPreDelegate? _Pre;
+    internal event OnCategorizePositionMovementPostDelegate? _Post;
 
-internal sealed class CategorizePositionMovementEvents : ICategorizePositionMovementEvents
-{
-    internal event OnCategorizePositionMovementDelegate? _Pre;
-    internal event OnCategorizePositionMovementDelegate? _Post;
-
-    public event OnCategorizePositionMovementDelegate Pre {
+    public event OnCategorizePositionMovementPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CategorizePosition);
             _Pre += value;
@@ -28,7 +18,7 @@ internal sealed class CategorizePositionMovementEvents : ICategorizePositionMove
         }
     }
 
-    public event OnCategorizePositionMovementDelegate Post {
+    public event OnCategorizePositionMovementPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CategorizePosition);
             _Post += value;
@@ -39,8 +29,8 @@ internal sealed class CategorizePositionMovementEvents : ICategorizePositionMove
         }
     }
 
-    public void InvokePre( ref ICategorizePositionMovement data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref ICategorizePositionMovement data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref CategorizePositionMovementPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref CategorizePositionMovementPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

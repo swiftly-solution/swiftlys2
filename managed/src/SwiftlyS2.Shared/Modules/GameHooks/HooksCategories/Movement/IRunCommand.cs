@@ -3,29 +3,33 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IRunCommandMovement
+public struct RunCommandMovementParams
 {
-    /// <summary>
-    /// The player who dropped the weapon.
-    /// </summary>
-    public IPlayer Player { get; set; }
-
-    /// <summary>
-    /// The user command.
-    /// </summary>
-    public IUserCmd UserCmd { get; }
-
-    /// <summary>
-    /// The result of the hook. Can be used to prevent the drop by returning <see cref="HookResult.Stop"/> or <see cref="HookResult.CancelOriginal"/> .
-    /// </summary>
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IUserCmd UserCmd { get; init; }
 }
 
-public delegate void OnRunCommandMovementDelegate( ref IRunCommandMovement postThink );
-
-public interface IRunCommandMovementEvents
+public ref struct RunCommandMovementPreContext
 {
-    public event OnRunCommandMovementDelegate Pre;
+    public RunCommandMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
 
-    public event OnRunCommandMovementDelegate Post;
+public ref struct RunCommandMovementPostContext
+{
+    public RunCommandMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnRunCommandMovementPreDelegate( ref RunCommandMovementPreContext ctx );
+public delegate void OnRunCommandMovementPostDelegate( ref RunCommandMovementPostContext ctx );
+
+public interface IRunCommandMovementHook
+{
+    public event OnRunCommandMovementPreDelegate Pre;
+    public event OnRunCommandMovementPostDelegate Post;
 }

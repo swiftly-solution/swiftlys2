@@ -1,30 +1,13 @@
 using SwiftlyS2.Shared.GameHooks;
-using SwiftlyS2.Shared.Misc;
-using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Core.GameHooks;
 
-internal sealed class CanMovePawnData : ICanMovePawn
+internal sealed class CanMovePawnHook : ICanMovePawnHook
 {
-    public required IPlayer Player { get; set; }
-    public required bool OriginalResult { get; set; }
+    internal event OnCanMovePawnPreDelegate? _Pre;
+    internal event OnCanMovePawnPostDelegate? _Post;
 
-    public void SetResult( bool result )
-    {
-        OriginalResult = result;
-        Intercepted = true;
-    }
-
-    public bool Intercepted { get; set; } = false;
-    public HookResult Result { get; set; } = HookResult.Continue;
-}
-
-internal sealed class CanMovePawnEvents : ICanMovePawnEvents
-{
-    internal event OnCanMovePawnDelegate? _Pre;
-    internal event OnCanMovePawnDelegate? _Post;
-
-    public event OnCanMovePawnDelegate Pre {
+    public event OnCanMovePawnPreDelegate Pre {
         add {
             if (_Pre == null) GameHooksPublisher.AddHookListener(HookListener.CanMove);
             _Pre += value;
@@ -35,7 +18,7 @@ internal sealed class CanMovePawnEvents : ICanMovePawnEvents
         }
     }
 
-    public event OnCanMovePawnDelegate Post {
+    public event OnCanMovePawnPostDelegate Post {
         add {
             if (_Post == null) GameHooksPublisher.AddHookListener(HookListener.CanMove);
             _Post += value;
@@ -46,8 +29,8 @@ internal sealed class CanMovePawnEvents : ICanMovePawnEvents
         }
     }
 
-    public void InvokePre( ref ICanMovePawn data ) => _Pre?.Invoke(ref data);
-    public void InvokePost( ref ICanMovePawn data ) => _Post?.Invoke(ref data);
+    public void InvokePre( ref CanMovePawnPreContext ctx ) => _Pre?.Invoke(ref ctx);
+    public void InvokePost( ref CanMovePawnPostContext ctx ) => _Post?.Invoke(ref ctx);
 
     public void UnregisterListeners()
     {

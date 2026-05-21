@@ -3,39 +3,35 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IProcessUsercmdsController
+public struct ProcessUsercmdsParams
 {
-    /// <summary>
-    /// The player who received usercmds.
-    /// </summary>
-    public IPlayer Player { get; set; }
-
-    /// <summary>
-    /// The user commands that the client processed.
-    /// </summary>
-    public List<IUserCmd> Usercmds { get; }
-
-    /// <summary>
-    /// Whether the client is paused.
-    /// </summary>
-    public bool Paused { get; }
-
-    /// <summary>
-    /// The margin of the client, milliseconds.
-    /// </summary>
-    public float Margin { get; }
-
-    /// <summary>
-    /// The result of the hook, used to determine whether to block the original function or not.
-    /// </summary>
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required List<IUserCmd> Usercmds { get; init; }
+    public required bool Paused { get; init; }
+    public required float Margin { get; init; }
 }
 
-public delegate void OnProcessUsercmdsDelegate( ref IProcessUsercmdsController controller );
-
-public interface IProcessUsercmdsEvents
+public ref struct ProcessUsercmdsPreContext
 {
-    public event OnProcessUsercmdsDelegate Pre;
+    public ProcessUsercmdsParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
 
-    public event OnProcessUsercmdsDelegate Post;
+public ref struct ProcessUsercmdsPostContext
+{
+    public ProcessUsercmdsParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnProcessUsercmdsPreDelegate( ref ProcessUsercmdsPreContext ctx );
+public delegate void OnProcessUsercmdsPostDelegate( ref ProcessUsercmdsPostContext ctx );
+
+public interface IProcessUsercmdsHook
+{
+    public event OnProcessUsercmdsPreDelegate Pre;
+    public event OnProcessUsercmdsPostDelegate Post;
 }

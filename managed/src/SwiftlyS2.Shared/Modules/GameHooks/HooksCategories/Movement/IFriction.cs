@@ -3,17 +3,33 @@ using SwiftlyS2.Shared.Players;
 
 namespace SwiftlyS2.Shared.GameHooks;
 
-public interface IFrictionMovement
+public struct FrictionMovementParams
 {
-    public IPlayer Player { get; set; }
-    public IMoveData MoveData { get; }
-    public HookResult Result { get; set; }
+    public required IPlayer Player { get; set; }
+    public required IMoveData MoveData { get; init; }
 }
 
-public delegate void OnFrictionMovementDelegate( ref IFrictionMovement data );
-
-public interface IFrictionMovementEvents
+public ref struct FrictionMovementPreContext
 {
-    public event OnFrictionMovementDelegate Pre;
-    public event OnFrictionMovementDelegate Post;
+    public FrictionMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public ref struct FrictionMovementPostContext
+{
+    public FrictionMovementParams Params;
+    private HookResult _hookResult;
+    public void SetHookResult( HookResult result ) => _hookResult = result;
+    internal HookResult HookResult => _hookResult;
+}
+
+public delegate void OnFrictionMovementPreDelegate( ref FrictionMovementPreContext ctx );
+public delegate void OnFrictionMovementPostDelegate( ref FrictionMovementPostContext ctx );
+
+public interface IFrictionMovementHook
+{
+    public event OnFrictionMovementPreDelegate Pre;
+    public event OnFrictionMovementPostDelegate Post;
 }
