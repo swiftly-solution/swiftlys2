@@ -220,65 +220,6 @@ void Bridge_Player_ClearTransmitEntityBlocked(int playerid)
     bv.activeMasks.clear();
 }
 
-void Bridge_Player_ChangeTeam(int playerid, int newteam)
-{
-    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto player = playerManager->GetPlayer(playerid);
-    if (!player)
-        return;
-
-    auto controller = player->GetController();
-    if (!controller) return;
-
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    CALL_VIRTUAL(void, gamedata->GetOffsets()->Fetch("CCSPlayerController::ChangeTeam"), controller, newteam);
-}
-
-void Bridge_Player_SwitchTeam(int playerid, int newteam)
-{
-    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto player = playerManager->GetPlayer(playerid);
-    if (!player)
-        return;
-
-    auto controller = player->GetController();
-    if (!controller) return;
-
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    if (newteam == 0 || newteam == 1)
-        CALL_VIRTUAL(void, gamedata->GetOffsets()->Fetch("CCSPlayerController::ChangeTeam"), controller, newteam);
-    else
-        reinterpret_cast<void (*)(void*, int)>(gamedata->GetSignatures()->Fetch("CCSPlayerController::SwitchTeam"))(controller, newteam);
-}
-
-void Bridge_Player_TakeDamage(int playerid, void* dmginfo)
-{
-    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto player = playerManager->GetPlayer(playerid);
-    if (!player)
-        return;
-
-    auto pawn = player->GetPawn();
-    if (!pawn) return;
-
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    reinterpret_cast<int64_t(*)(void*, void*, void*)>(gamedata->GetSignatures()->Fetch("CBaseEntity::TakeDamage"))(pawn, dmginfo, 0);
-}
-
-void Bridge_Player_Teleport(int playerid, Vector pos, QAngle angle, Vector vel)
-{
-    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
-    auto player = playerManager->GetPlayer(playerid);
-    if (!player)
-        return;
-
-    auto pawn = player->GetPawn();
-    if (!pawn) return;
-
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    CALL_VIRTUAL(void, gamedata->GetOffsets()->Fetch("CBaseEntity::Teleport"), pawn, &pos, &angle, &vel);
-}
-
 char* Bridge_Player_GetLanguage(int* size, int playerid)
 {
     static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
@@ -412,10 +353,6 @@ DEFINE_NATIVE("Player.Kick", Bridge_Player_Kick);
 DEFINE_NATIVE("Player.ShouldBlockTransmitEntity", Bridge_Player_ShouldBlockTransmitEntity);
 DEFINE_NATIVE("Player.IsTransmitEntityBlocked", Bridge_Player_IsTransmitEntityBlocked);
 DEFINE_NATIVE("Player.ClearTransmitEntityBlocked", Bridge_Player_ClearTransmitEntityBlocked);
-DEFINE_NATIVE("Player.ChangeTeam", Bridge_Player_ChangeTeam);
-DEFINE_NATIVE("Player.SwitchTeam", Bridge_Player_SwitchTeam);
-DEFINE_NATIVE("Player.TakeDamage", Bridge_Player_TakeDamage);
-DEFINE_NATIVE("Player.Teleport", Bridge_Player_Teleport);
 DEFINE_NATIVE("Player.GetLanguage", Bridge_Player_GetLanguage);
 DEFINE_NATIVE("Player.SetCenterMenuRender", Bridge_Player_SetCenterMenuRender);
 DEFINE_NATIVE("Player.ClearCenterMenuRender", Bridge_Player_ClearCenterMenuRender);

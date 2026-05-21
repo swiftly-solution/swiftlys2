@@ -81,7 +81,8 @@ internal class Player : IPlayer, IDisposable
     public void ChangeTeam( Team team )
     {
         ThrowIfDisposed();
-        NativePlayer.ChangeTeam(Slot, (byte)team);
+        if (Controller == null || !Controller.IsValid) return;
+        GameFunctions.CCSPlayerControllerChangeTeam(Controller.Address, team);
     }
 
     public Task ChangeTeamAsync( Team team )
@@ -158,21 +159,24 @@ internal class Player : IPlayer, IDisposable
     public void SwitchTeam( Team team )
     {
         ThrowIfDisposed();
-        NativePlayer.SwitchTeam(Slot, (byte)team);
+        if (Controller == null || !Controller.IsValid) return;
+
+        if (team == Team.None || team == Team.Spectator) ChangeTeam(team);
+        else GameFunctions.CCSPlayerControllerSwitchTeam(Controller.Address, team);
     }
 
     public Task SwitchTeamAsync( Team team )
     {
-        return SchedulerManager.QueueOrNow(() => SwitchTeam(team));
+        if (team == Team.None || team == Team.Spectator) return ChangeTeamAsync(team);
+        else return SchedulerManager.QueueOrNow(() => SwitchTeam(team));
     }
 
     public void TakeDamage( CTakeDamageInfo damageInfo )
     {
         ThrowIfDisposed();
-        unsafe
-        {
-            NativePlayer.TakeDamage(Slot, (nint)(&damageInfo));
-        }
+
+        if (Pawn == null || !Pawn.IsValid) return;
+        Pawn.TakeDamage(damageInfo);
     }
 
     public Task TakeDamageAsync( CTakeDamageInfo damageInfo )

@@ -26,6 +26,7 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCHEGrenadeProjectileEmitGrenade;
     public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCDecoyProjectileEmitGrenade;
     public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCMolotovProjectileEmitGrenade;
+    public static unsafe delegate* unmanaged< nint, int, void > pSwitchTeam;
     private static Lazy<int> CreateOffset( string name ) => new(() => NativeOffsets.Fetch(name));
     private static readonly Lazy<int> _teleportOffset = CreateOffset("CBaseEntity::Teleport");
     private static readonly Lazy<int> _commitSuicideOffset = CreateOffset("CBasePlayerPawn::CommitSuicide");
@@ -41,6 +42,7 @@ internal static class GameFunctions
     private static readonly Lazy<int> _respawnOffset = CreateOffset("CCSPlayerController::Respawn");
     private static readonly Lazy<int> _getViewVectorsOffset = CreateOffset("CGameRules::GetViewVectors");
     private static readonly Lazy<int> _goToIntermissionOffset = CreateOffset("CGameRules::GoToIntermission");
+    private static readonly Lazy<int> _changeTeamOffset = CreateOffset("CCSPlayerController::ChangeTeam");
 
     public static int TeleportOffset => _teleportOffset.Value;
     public static int CommitSuicideOffset => _commitSuicideOffset.Value;
@@ -56,6 +58,7 @@ internal static class GameFunctions
     public static int RespawnOffset => _respawnOffset.Value;
     public static int GetViewVectorsOffset => _getViewVectorsOffset.Value;
     public static int GoToIntermissionOffset => _goToIntermissionOffset.Value;
+    public static int ChangeTeamOffset => _changeTeamOffset.Value;
 
     private static void CheckPtr( nint ptr, string name )
     {
@@ -88,6 +91,7 @@ internal static class GameFunctions
             pCHEGrenadeProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint >)NativeSignatures.Fetch("CHEGrenadeProjectile::EmitGrenade");
             pCDecoyProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint >)NativeSignatures.Fetch("CDecoyProjectile::EmitGrenade");
             pCMolotovProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint >)NativeSignatures.Fetch("CMolotovProjectile::EmitGrenade");
+            pSwitchTeam = (delegate* unmanaged< nint, int, void >)NativeSignatures.Fetch("CCSPlayerController::SwitchTeam");
             if (IsWindows)
             {
                 pTerminateRoundWindows = (delegate* unmanaged< nint, float, uint, nint, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
@@ -382,6 +386,39 @@ internal static class GameFunctions
             {
                 CheckPtr(pThis, nameof(pThis));
                 pCTakeDamageInfo_Constructor(pThis, pInflictor, pAttacker, pAbility, vecDamageForce, vecDamagePosition, flDamage, bitsDamageType, iCustomDamage, a10);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void CCSPlayerControllerChangeTeam( nint controller, Team team )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(controller, nameof(controller));
+                var pChangeTeam = (delegate* unmanaged< nint, int, void >)GetVirtualFunction(controller, ChangeTeamOffset);
+                pChangeTeam(controller, (int)team);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void CCSPlayerControllerSwitchTeam( nint controller, Team team )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(controller, nameof(controller));
+                pSwitchTeam(controller, (int)team);
             }
         }
         catch (Exception e)
