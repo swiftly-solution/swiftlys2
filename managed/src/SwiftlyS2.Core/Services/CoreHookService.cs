@@ -244,16 +244,16 @@ internal class CoreHookService : IDisposable
         executeCommand = null;
     }
 
-    internal void WeaponDropPre( ref IWeaponDrop @event )
+    internal void WeaponDropPre( ref WeaponDropPreContext @event )
     {
         var @e = new OnWeaponServicesDropWeaponHook {
-            WeaponServices = @event.Player.PlayerPawn!.WeaponServices!,
-            Weapon = @event.Weapon,
-            SwappingWeapon = @event.SwappingWeapon,
-            Result = @event.Result
+            WeaponServices = @event.Params.Player.PlayerPawn!.WeaponServices!,
+            Weapon = @event.Params.Weapon,
+            SwappingWeapon = @event.Params.SwappingWeapon,
+            Result = @event.HookResult
         };
         EventPublisher.InvokeOnWeaponServicesDropWeaponHook(@e);
-        @event.Result = @e.Result;
+        @event.SetHookResult(@e.Result);
     }
 
     internal void HookWeaponServicesDropWeapon()
@@ -339,20 +339,18 @@ internal class CoreHookService : IDisposable
         }
     }
 
-    internal void CanAcquireEventPost( ref ICanAcquireItem @event )
+    internal void CanAcquireEventPost( ref CanAcquireItemPostContext @event )
     {
         var @e = new OnItemServicesCanAcquireHookEvent {
-            ItemServices = @event.Player.PlayerPawn!.ItemServices!,
-            EconItemView = @event.EconItemView,
-            WeaponVData = @event.WeaponVData,
-            AcquireMethod = @event.AcquireMethod,
-            OriginalResult = @event.OriginalResult
+            ItemServices = @event.Params.Player.PlayerPawn!.ItemServices!,
+            EconItemView = @event.Params.EconItemView,
+            WeaponVData = @event.Params.WeaponVData,
+            AcquireMethod = @event.Params.AcquireMethod,
+            OriginalResult = @event.Return
         };
 
         EventPublisher.InvokeOnCanAcquireHook(@e);
-
-        @event.SetAcquireResult(@e.OriginalResult);
-        @event.Intercepted = @e.Intercepted;
+        @event.Return = @e.OriginalResult;
     }
 
     internal void HookCCSPlayerItemServicesCanAcquire()
@@ -365,16 +363,16 @@ internal class CoreHookService : IDisposable
         core.GameHooks.Items.CanAcquire.Post -= CanAcquireEventPost;
     }
 
-    internal void CanUseEventPost( ref ICanUseWeapon @event )
+    internal void CanUseEventPost( ref CanUseWeaponPostContext @event )
     {
         var @e = new OnWeaponServicesCanUseHookEvent {
-            WeaponServices = @event.Player.PlayerPawn!.WeaponServices!,
-            Weapon = @event.Weapon,
-            OriginalResult = @event.OriginalResult
+            WeaponServices = @event.Params.Player.PlayerPawn!.WeaponServices!,
+            Weapon = @event.Params.Weapon,
+            OriginalResult = @event.Return
         };
-        EventPublisher.InvokeOnWeaponServicesCanUseHook(@e);
 
-        if (@e.Intercepted) @event.SetResult(@e.OriginalResult);
+        EventPublisher.InvokeOnWeaponServicesCanUseHook(@e);
+        @event.Return = @e.OriginalResult;
     }
 
     internal void HookCCSPlayerWeaponServicesCanUse()
@@ -492,12 +490,12 @@ internal class CoreHookService : IDisposable
         steamServerAPIActivated = null;
     }
 
-    internal void MovementServicesRunCommandHookPre( ref IRunCommandMovement @event )
+    internal void MovementServicesRunCommandHookPre( ref RunCommandMovementPreContext @event )
     {
         using var @ev = new OnMovementServicesRunCommandHookEvent {
-            MovementServices = @event.Player.PlayerPawn!.MovementServices!,
-            ButtonState = @event.UserCmd.ButtonState,
-            UserCmdPB = @event.UserCmd.CSGOUserCmd
+            MovementServices = @event.Params.Player.PlayerPawn!.MovementServices!,
+            ButtonState = @event.Params.UserCmd.ButtonState,
+            UserCmdPB = @event.Params.UserCmd.CSGOUserCmd
         };
         EventPublisher.InvokeOnMovementServicesRunCommandHook(@ev);
     }
@@ -512,10 +510,10 @@ internal class CoreHookService : IDisposable
         core.GameHooks.Movement.RunCommand.Pre -= MovementServicesRunCommandHookPre;
     }
 
-    internal void CCSPlayerPostPostThinkPre( ref IPostThinkPawn @event )
+    internal void CCSPlayerPostPostThinkPre( ref PostThinkPawnPreContext @event )
     {
         using var @ev = new OnPlayerPawnPostThinkHookEvent {
-            PlayerPawn = @event.Player.PlayerPawn!
+            PlayerPawn = @event.Params.Player.PlayerPawn!
         };
         EventPublisher.InvokeOnPlayerPawnPostThinkHook(@ev);
     }
@@ -563,13 +561,13 @@ internal class CoreHookService : IDisposable
         dispatchDatamapFunction = null;
     }
 
-    internal void OnClientProcessUsercmds( ref IProcessUsercmdsController @event )
+    internal void OnClientProcessUsercmds( ref ProcessUsercmdsPreContext @event )
     {
         var @ev = new OnClientProcessUsercmdsEvent {
-            PlayerId = @event.Player.PlayerID,
-            Paused = @event.Paused,
-            Margin = @event.Margin,
-            Usercmds = (List<CSGOUserCmdPB>)@event.Usercmds.Select(@e => @e.CSGOUserCmd)
+            PlayerId = @event.Params.Player.PlayerID,
+            Paused = @event.Params.Paused,
+            Margin = @event.Params.Margin,
+            Usercmds = (List<CSGOUserCmdPB>)@event.Params.Usercmds.Select(@e => @e.CSGOUserCmd)
         };
         EventPublisher.OnClientProcessUsercmds(ref @ev);
     }

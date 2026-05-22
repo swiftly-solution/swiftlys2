@@ -153,12 +153,12 @@ public class TestPlugin : BasePlugin
 
         core.GameHooks.Movement.PlayerMove.Pre += ( ref @event ) =>
         {
-            @event.MoveData.MaxSpeed = 2000f;
+            @event.Params.MoveData.MaxSpeed = 2000f;
         };
 
         core.GameHooks.Movement.GroundAccelerate.Pre += ( ref @event ) =>
         {
-            @event.Acceleration = 69f;
+            @event.Params.Acceleration = 69f;
         };
     }
 
