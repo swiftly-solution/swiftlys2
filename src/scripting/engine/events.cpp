@@ -22,6 +22,7 @@
 void* g_pOnGameTickCallback = nullptr;
 void* g_pOnClientConnectCallback = nullptr;
 void* g_pOnClientDisconnectCallback = nullptr;
+void* g_pOnClientKeyStateChangedCallback = nullptr;
 void* g_pOnClientPutInServerCallback = nullptr;
 void* g_pOnClientSteamAuthorizeCallback = nullptr;
 void* g_pOnClientSteamAuthorizeFailCallback = nullptr;
@@ -50,6 +51,11 @@ void Bridge_Events_RegisterOnClientConnectCallback(void* callback)
 void Bridge_Events_RegisterOnClientDisconnectCallback(void* callback)
 {
     g_pOnClientDisconnectCallback = callback;
+}
+
+void Bridge_Events_RegisterOnClientKeyStateChangedCallback(void* callback)
+{
+    g_pOnClientKeyStateChangedCallback = callback;
 }
 
 void Bridge_Events_RegisterOnClientPutInServerCallback(void* callback)
@@ -125,6 +131,7 @@ void Bridge_Events_RegisterOnClientVoiceCallback(void* callback)
 DEFINE_NATIVE("Events.RegisterOnGameTickCallback", Bridge_Events_RegisterOnGameTickCallback);
 DEFINE_NATIVE("Events.RegisterOnClientConnectCallback", Bridge_Events_RegisterOnClientConnectCallback);
 DEFINE_NATIVE("Events.RegisterOnClientDisconnectCallback", Bridge_Events_RegisterOnClientDisconnectCallback);
+DEFINE_NATIVE("Events.RegisterOnClientKeyStateChangedCallback", Bridge_Events_RegisterOnClientKeyStateChangedCallback);
 DEFINE_NATIVE("Events.RegisterOnClientPutInServerCallback", Bridge_Events_RegisterOnClientPutInServerCallback);
 DEFINE_NATIVE("Events.RegisterOnClientSteamAuthorizeCallback", Bridge_Events_RegisterOnClientSteamAuthorizeCallback);
 DEFINE_NATIVE("Events.RegisterOnClientSteamAuthorizeFailCallback", Bridge_Events_RegisterOnClientSteamAuthorizeFailCallback);

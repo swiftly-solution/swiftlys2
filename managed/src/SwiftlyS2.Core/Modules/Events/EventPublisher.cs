@@ -42,6 +42,7 @@ internal static class EventPublisher
             NativeEvents.RegisterOnPreworldUpdateCallback((nint)(delegate* unmanaged< byte, void >)&OnPreworldUpdate);
             NativeEvents.RegisterOnClientConnectCallback((nint)(delegate* unmanaged< int, byte >)&OnClientConnected);
             NativeEvents.RegisterOnClientDisconnectCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientDisconnected);
+            NativeEvents.RegisterOnClientKeyStateChangedCallback((nint)(delegate* unmanaged< int, GameButtons, byte, void >)&OnClientKeyStateChanged);
             NativeEvents.RegisterOnClientPutInServerCallback((nint)(delegate* unmanaged< int, int, void >)&OnClientPutInServer);
             NativeEvents.RegisterOnClientSteamAuthorizeCallback((nint)(delegate* unmanaged< int, void >)&OnClientSteamAuthorize);
             NativeEvents.RegisterOnClientSteamAuthorizeFailCallback((nint)(delegate* unmanaged< int, void >)&OnClientSteamAuthorizeFail);
@@ -149,7 +150,6 @@ internal static class EventPublisher
     public static void OnTick( byte simulating, byte first, byte last )
     {
         SchedulerManager.OnTick();
-        PlayerManagerService.Think();
 
         if (subscribers.Count == 0)
         {
@@ -278,6 +278,7 @@ internal static class EventPublisher
         }
     }
 
+    [UnmanagedCallersOnly]
     public static void OnClientKeyStateChanged( int playerId, GameButtons key, byte pressed )
     {
         if (subscribers.Count == 0)

@@ -32,9 +32,81 @@
 #include <public/iserver.h>
 
 #define CBaseEntity_m_iTeamNum 0x9DC483B8A5BFEFB3
+#define CBaseEntity_m_fFlags 0x9DC483B8A4A37590
 
 #define CBasePlayerController_m_hPawn 0x3979FF6E7C628C1D
 #define CCSPlayerController_m_hPlayerPawn 0x28ECD7A1D6C93E7C
+
+#define CBasePlayerPawn_m_pMovementServices 0xCA2EED04CF73E28A
+#define CPlayer_MovementServices_m_nButtons 0xD5BDF28998CCEF82
+#define CInButtonState_m_pButtonStates 0x6C8AF06A00121DF9
+
+static const std::vector<std::string> g_vButtons = {
+    "mouse1",
+    "space",
+    "ctrl",
+    "w",
+    "s",
+    "e",
+    "esc",
+    "a",
+    "d",
+    "a",
+    "d",
+    "mouse2",
+    "unknown_key_run",
+    "r",
+    "alt",
+    "alt",
+    "shift",
+    "unknown_key_speed",
+    "shift",
+    "unknown_key_hudzoom",
+    "unknown_key_weapon1",
+    "unknown_key_weapon2",
+    "unknown_key_bullrush",
+    "unknown_key_grenade1",
+    "unknown_key_grenade2",
+    "unknown_key_lookspin",
+    "unknown_key_26",
+    "unknown_key_27",
+    "unknown_key_28",
+    "unknown_key_29",
+    "unknown_key_30",
+    "unknown_key_31",
+    "unknown_key_32",
+    "tab",
+    "unknown_key_34",
+    "f",
+    "unknown_key_36",
+    "unknown_key_37",
+    "unknown_key_38",
+    "unknown_key_39",
+    "unknown_key_40",
+    "unknown_key_41",
+    "unknown_key_42",
+    "unknown_key_43",
+    "unknown_key_44",
+    "unknown_key_45",
+    "unknown_key_46",
+    "unknown_key_47",
+    "unknown_key_48",
+    "unknown_key_49",
+    "unknown_key_50",
+    "unknown_key_51",
+    "unknown_key_52",
+    "unknown_key_53",
+    "unknown_key_54",
+    "unknown_key_55",
+    "unknown_key_56",
+    "unknown_key_57",
+    "unknown_key_58",
+    "unknown_key_59",
+    "unknown_key_60",
+    "unknown_key_61",
+    "unknown_key_62",
+    "unknown_key_63",
+};
 
 uint64_t sessionId = 1000;
 
@@ -340,6 +412,11 @@ CPlayerBitVec& CPlayer::GetSelfMutes()
     return m_bvSelfMutes;
 }
 
+uint64_t& CPlayer::GetPressedButtons()
+{
+    return m_uPressedButtons;
+}
+
 void CPlayer::PerformCommand(const std::string& command)
 {
     auto engine = g_ifaceService.FetchInterface<IVEngineServer2>(INTERFACEVERSION_VENGINESERVER);
@@ -387,6 +464,7 @@ void CPlayer::SetFirstSpawn(bool state)
     m_bFirstSpawn = state;
 }
 
+extern void* g_pOnClientKeyStateChangedCallback;
 typedef IGameEventListener2* (*GetLegacyGameEventListener)(CPlayerSlot slot);
 
 void CPlayer::Think()
@@ -426,6 +504,47 @@ void CPlayer::Think()
                     {
                         centerMessageEndTime = 0;
                     }
+                }
+            }
+        }
+    }
+
+    auto pawn = GetPawn();
+
+    static auto sdkschema = g_ifaceService.FetchInterface<ISDKSchema>(SDKSCHEMA_INTERFACE_VERSION);
+
+    if (pawn)
+    {
+        auto& movementServices = *(void**)sdkschema->GetPropPtr(pawn, CBasePlayerPawn_m_pMovementServices);
+        if (movementServices)
+        {
+            void* buttons = sdkschema->GetPropPtr(movementServices, CPlayer_MovementServices_m_nButtons);
+            if (buttons)
+            {
+                uint64_t* states = (uint64_t*)sdkschema->GetPropPtr(buttons, CInButtonState_m_pButtonStates);
+                uint64_t& newButtons = states[0];
+                if (newButtons != m_uPressedButtons)
+                {
+                    if (g_pOnClientKeyStateChangedCallback)
+                    {
+                        for (int i = 0; i < 64; i++)
+                        {
+                            uint64_t mask = (1ULL << i);
+                            uint64_t oldState = m_uPressedButtons & mask;
+                            uint64_t newState = newButtons & mask;
+
+                            if (oldState == 0 && newState != 0)
+                            {
+                                reinterpret_cast<void (*)(int, uint32_t, bool)>(g_pOnClientKeyStateChangedCallback)(m_iPlayerId, i, true);
+                            }
+                            else if (oldState != 0 && newState == 0)
+                            {
+                                reinterpret_cast<void (*)(int, uint32_t, bool)>(g_pOnClientKeyStateChangedCallback)(m_iPlayerId, i, false);
+                            }
+                        }
+                    }
+
+                    m_uPressedButtons = newButtons;
                 }
             }
         }

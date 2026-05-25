@@ -384,11 +384,4 @@ internal class PlayerManagerService : IPlayerManagerService
     {
         return SessionIdToPlayerObjects.TryGetValue(sessionId, out var player) ? player : null;
     }
-
-    public static void Think()
-    {
-        var players = PlayerObjects.Values;
-        foreach (var player in players)
-            ((Player)player).Think();
-    }
 }

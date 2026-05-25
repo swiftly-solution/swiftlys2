@@ -1,6 +1,5 @@
 ﻿using SwiftlyS2.Core.Engine;
 using SwiftlyS2.Core.EntitySystem;
-using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Scheduler;
 using SwiftlyS2.Core.SchemaDefinitions;
@@ -32,7 +31,6 @@ internal class Player : IPlayer, IDisposable
 
     public int PlayerID => Slot;
     public ulong SessionId { get; }
-    public ulong _pressedButtons { get; private set; }
 
     public int Slot { get; }
 
@@ -60,7 +58,7 @@ internal class Player : IPlayer, IDisposable
 
     public CCSPlayerPawn RequiredPlayerPawn => PlayerPawn is { IsValid: true } pawn ? pawn : throw new InvalidOperationException("PlayerPawn is not valid");
 
-    public GameButtonFlags PressedButtons { get { ThrowIfDisposed(); return (GameButtonFlags)_pressedButtons; } }
+    public GameButtonFlags PressedButtons { get { ThrowIfDisposed(); return (GameButtonFlags)NativePlayer.GetPressedButtons(Slot); } }
 
     public string IPAddress { get { ThrowIfDisposed(); return NativePlayer.GetIPAddress(Slot); } }
 
@@ -199,12 +197,12 @@ internal class Player : IPlayer, IDisposable
 
     public void Teleport( Vector pos, QAngle angle, Vector velocity )
     {
-        Pawn?.Teleport(pos, angle, velocity);
+        Pawn!.Teleport(pos, angle, velocity);
     }
 
     public void Teleport( Vector? pos = null, QAngle? angle = null, Vector? velocity = null )
     {
-        Pawn?.Teleport(pos, angle, velocity);
+        Pawn!.Teleport(pos, angle, velocity);
     }
 
     public Task TeleportAsync( Vector pos, QAngle angle, Vector velocity )
@@ -332,51 +330,13 @@ internal class Player : IPlayer, IDisposable
     public void Dispose()
     {
         _disposed = true;
-        GC.SuppressFinalize(this);
     }
 
     public void ThrowIfDisposed()
     {
-        if (!_disposed) return;
-        throw new ObjectDisposedException($"Player object (slot={Slot},sessionId={SessionId}) has been disposed.");
-    }
-
-    public void Think()
-    {
-        if (_disposed || Controller is not { IsValid: true, Connected: PlayerConnectedState.Connected }) return;
-
-        var pawn = PlayerPawn;
-        if (pawn == null || !pawn.IsValid) return;
-
-        var movementServices = pawn.MovementServices;
-        if (movementServices == null || !movementServices.IsValid) return;
-
-        var buttons = movementServices.Buttons;
-        if (buttons == null || !buttons.IsValid) return;
-
-        var states = buttons.ButtonStates;
-        if (states == null || !states.IsValid) return;
-
-        var newButtons = states[0];
-        if (newButtons != _pressedButtons)
+        if (_disposed)
         {
-            for (var i = 0; i < 64; i++)
-            {
-                var mask = 1UL << i;
-                var oldState = _pressedButtons & mask;
-                var newState = newButtons & mask;
-
-                if (oldState == 0 && newState != 0)
-                {
-                    EventPublisher.OnClientKeyStateChanged(PlayerID, (GameButtons)i, 1);
-                }
-                else if (oldState != 0 && newState == 0)
-                {
-                    EventPublisher.OnClientKeyStateChanged(PlayerID, (GameButtons)i, 0);
-                }
-            }
-
-            _pressedButtons = newButtons;
+            throw new ObjectDisposedException($"Player object (slot={Slot},sessionId={SessionId}) has been disposed.");
         }
     }
 

@@ -105,6 +105,16 @@ void* Bridge_Player_GetController(int playerid)
     return player->GetController();
 }
 
+uint64_t Bridge_Player_GetPressedButtons(int playerid)
+{
+    static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
+    auto player = playerManager->GetPlayer(playerid);
+    if (!player)
+        return 0;
+
+    return player->GetPressedButtons();
+}
+
 void Bridge_Player_PerformCommand(int playerid, const char* command)
 {
     static auto playerManager = g_ifaceService.FetchInterface<IPlayerManager>(PLAYERMANAGER_INTERFACE_VERSION);
@@ -336,6 +346,7 @@ DEFINE_NATIVE("Player.GetConnectedTime", Bridge_Player_GetConnectedTime);
 DEFINE_NATIVE("Player.GetUnauthorizedSteamID", Bridge_Player_GetUnauthorizedSteamID);
 DEFINE_NATIVE("Player.GetSteamID", Bridge_Player_GetSteamID);
 DEFINE_NATIVE("Player.GetController", Bridge_Player_GetController);
+DEFINE_NATIVE("Player.GetPressedButtons", Bridge_Player_GetPressedButtons);
 DEFINE_NATIVE("Player.PerformCommand", Bridge_Player_PerformCommand);
 DEFINE_NATIVE("Player.GetIPAddress", Bridge_Player_GetIPAddress);
 DEFINE_NATIVE("Player.Kick", Bridge_Player_Kick);

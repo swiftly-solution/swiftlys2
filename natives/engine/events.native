@@ -3,6 +3,7 @@ class Events
 void RegisterOnGameTickCallback = ptr callback // bool simulating, bool first, bool last -> void
 void RegisterOnClientConnectCallback = ptr callback // int32 playerid -> bool (true -> ignored, false -> supercede)
 void RegisterOnClientDisconnectCallback = ptr callback // int32 playerid, ENetworkDisconnectReason (int32) reason -> void
+void RegisterOnClientKeyStateChangedCallback = ptr callback // int32 playerid, string key, bool pressed -> void
 void RegisterOnClientPutInServerCallback = ptr callback // int32 playerid, int32 client_kind (0 -> player, 1 -> bot, 2 -> unknown) -> void
 void RegisterOnClientSteamAuthorizeCallback = ptr callback // int32 playerid -> void
 void RegisterOnClientSteamAuthorizeFailCallback = ptr callback // int32 playerid -> void

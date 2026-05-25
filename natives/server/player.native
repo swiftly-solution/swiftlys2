@@ -7,6 +7,7 @@ uint32 GetConnectedTime = int32 playerid
 uint64 GetUnauthorizedSteamID = int32 playerid
 uint64 GetSteamID = int32 playerid
 ptr GetController = int32 playerid
+uint64 GetPressedButtons = int32 playerid
 sync void PerformCommand = int32 playerid, string command
 string GetIPAddress = int32 playerid
 sync void Kick = int32 playerid, string reason, int32 gamereason

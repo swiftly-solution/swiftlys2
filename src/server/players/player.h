@@ -58,6 +58,7 @@ public:
     virtual VoiceFlagValue& GetVoiceFlags() override;
     virtual CPlayerBitVec& GetSelfMutes() override;
 
+    virtual uint64_t& GetPressedButtons() override;
     virtual void PerformCommand(const std::string& command) override;
     virtual std::string GetIPAddress() override;
     virtual void Kick(const std::string& sReason, int uReason) override;
@@ -85,6 +86,8 @@ private:
     CPlayerBitVec m_bvSelfMutes = {};
 
     BlockedTransmitInfo m_bvBlockedTransmittingEntities = {};
+
+    uint64_t m_uPressedButtons = 0;
 
     std::chrono::high_resolution_clock::time_point m_uConnectedTimeStart;
 

@@ -360,13 +360,7 @@ public class TestPlugin : BasePlugin
         //     return HookResult.Continue;
         // });
         //
-
-        Core.Event.OnClientKeyStateChanged += ( @event ) =>
-        {
-            Console.WriteLine($"ClientKeyStateChanged: PlayerId {@event.PlayerId} Button {@event.Key} Pressed {@event.Pressed}");
-        };
-
-        _ = Core.Command.HookClientChat(( playerId, text, teamOnly ) =>
+        Core.Command.HookClientChat(( playerId, text, teamOnly ) =>
         {
             Console.WriteLine($"[TestPlugin] ClientChat: {playerId} said '{text}' (teamOnly: {teamOnly})");
             return HookResult.CancelOriginal;
@@ -453,6 +447,10 @@ public class TestPlugin : BasePlugin
 
 
         // Entrypoint
+
+        // Core.Event.OnTick += () => {
+        //   Console.WriteLine("TestPlugin OnTick ");
+        // };
 
         // Core.Event.OnClientConnected += (@event) => {
         //   Console.WriteLine("TestPlugin OnClientConnected " + @event.PlayerId);
