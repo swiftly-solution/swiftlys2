@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -106,6 +107,15 @@ public class SwiftlyOptionsFactory<T> : IOptionsFactory<T> where T : class, new(
         ClearCollectionsRecursive(instance, config);
     }
 
+    private static string GetConfigKey( PropertyInfo prop )
+    {
+        var configKeyAttr = prop.GetCustomAttribute<ConfigurationKeyNameAttribute>();
+        if ( configKeyAttr != null ) return configKeyAttr.Name;
+
+        var jsonAttr = prop.GetCustomAttribute<JsonPropertyNameAttribute>();
+        return jsonAttr != null ? jsonAttr.Name : prop.Name;
+    }
+
     private static void ClearCollectionsRecursive( object current, IConfiguration config )
     {
         foreach (var prop in current.GetType().GetProperties())
@@ -115,7 +125,7 @@ public class SwiftlyOptionsFactory<T> : IOptionsFactory<T> where T : class, new(
             var currentValue = prop.GetValue(current);
             if (currentValue == null) continue;
 
-            var section = config.GetSection(prop.Name);
+            var section = config.GetSection(GetConfigKey(prop));
 
             var hasConfigValue = section.Exists() && (section.GetChildren().Any() || section.Value != null);
 
