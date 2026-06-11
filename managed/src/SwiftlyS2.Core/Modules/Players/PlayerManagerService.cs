@@ -109,10 +109,7 @@ internal class PlayerManagerService : IPlayerManagerService
             if (pickerEntity == null || !pickerEntity.IsValid || pickerEntity.DesignerName != "player")
                 return [];
 
-            if (pickerEntity.OriginalController.Value is not { IsValid: true } controller)
-                return [];
-
-            var aimedPlayer = GetPlayerFromController(controller);
+            var aimedPlayer = pickerEntity.ToPlayer();
             return aimedPlayer is { IsValid: true } && MatchesSearchMode(player, aimedPlayer, searchMode) ? [aimedPlayer] : [];
         }
 
