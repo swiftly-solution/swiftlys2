@@ -103,6 +103,19 @@ internal class PlayerManagerService : IPlayerManagerService
     public IEnumerable<IPlayer> FindTargettedPlayers( IPlayer player, string target, TargetSearchMode searchMode,
         StringComparison nameComparison = StringComparison.OrdinalIgnoreCase )
     {
+        if (target == "@aim")
+        {
+            var pickerEntity = _entitySystemService.GetGameRules()?.FindPickerEntity<CCSPlayerPawn>(player.Controller);
+            if (pickerEntity == null || !pickerEntity.IsValid || pickerEntity.DesignerName != "player")
+                return [];
+
+            if (pickerEntity.OriginalController.Value is not { IsValid: true } controller)
+                return [];
+
+            var aimedPlayer = GetPlayerFromController(controller);
+            return aimedPlayer is { IsValid: true } && MatchesSearchMode(player, aimedPlayer, searchMode) ? [aimedPlayer] : [];
+        }
+
         IEnumerable<IPlayer> allPlayers = [];
 
         var players = GetAllValidPlayers();
@@ -111,25 +124,7 @@ internal class PlayerManagerService : IPlayerManagerService
             if (searchMode.HasFlag(TargetSearchMode.NoMultipleTargets) && allPlayers.Any())
                 break;
 
-            if (searchMode.HasFlag(TargetSearchMode.NoBots) && targetPlayer.IsFakeClient)
-                continue;
-
-            if (searchMode.HasFlag(TargetSearchMode.IncludeSelf) == false && targetPlayer.PlayerID == player.PlayerID)
-                continue;
-
-            if (searchMode.HasFlag(TargetSearchMode.Alive) &&
-                targetPlayer.Pawn?.LifeState != (byte)LifeState_t.LIFE_ALIVE)
-                continue;
-
-            if (searchMode.HasFlag(TargetSearchMode.Dead) &&
-                targetPlayer.Pawn?.LifeState != (byte)LifeState_t.LIFE_DEAD)
-                continue;
-
-            if (searchMode.HasFlag(TargetSearchMode.TeamOnly) && targetPlayer.Pawn?.TeamNum != player.Pawn?.TeamNum)
-                continue;
-
-            if (searchMode.HasFlag(TargetSearchMode.OppositeTeamOnly) &&
-                targetPlayer.Pawn?.TeamNum == player.Pawn?.TeamNum)
+            if (!MatchesSearchMode(player, targetPlayer, searchMode))
                 continue;
 
             if (target == "@all")
@@ -159,19 +154,6 @@ internal class PlayerManagerService : IPlayerManagerService
             else if (target == "@dead" && targetPlayer.Pawn?.LifeState == (byte)LifeState_t.LIFE_DEAD)
             {
                 allPlayers = allPlayers.Append(targetPlayer);
-            }
-            else if (target == "@aim")
-            {
-                var pickerEntity = _entitySystemService.GetGameRules()!.FindPickerEntity<CCSPlayerPawn>(player.Controller);
-
-                if (pickerEntity != null && pickerEntity.IsValid && pickerEntity.DesignerName == "player")
-                {
-                    var entIndex = pickerEntity.OriginalController.Value?.Entity?.EntityHandle.EntityIndex;
-                    if (entIndex.HasValue)
-                    {
-                        allPlayers = allPlayers.Append(GetPlayer((int)entIndex.Value - 1)!);
-                    }
-                }
             }
             else if (target == "@ct" && targetPlayer.Pawn?.TeamNum == (int)Team.CT)
             {
@@ -204,6 +186,33 @@ internal class PlayerManagerService : IPlayerManagerService
         }
 
         return allPlayers;
+    }
+
+    private static bool MatchesSearchMode( IPlayer player, IPlayer targetPlayer, TargetSearchMode searchMode )
+    {
+        if (searchMode.HasFlag(TargetSearchMode.NoBots) && targetPlayer.IsFakeClient)
+            return false;
+
+        if (!searchMode.HasFlag(TargetSearchMode.IncludeSelf) && targetPlayer.PlayerID == player.PlayerID)
+            return false;
+
+        var targetLifeState = targetPlayer.Pawn?.LifeState;
+        var targetTeam = targetPlayer.Pawn?.TeamNum;
+        var playerTeam = player.Pawn?.TeamNum;
+
+        if (searchMode.HasFlag(TargetSearchMode.Alive) && targetLifeState != (byte)LifeState_t.LIFE_ALIVE)
+            return false;
+
+        if (searchMode.HasFlag(TargetSearchMode.Dead) && targetLifeState != (byte)LifeState_t.LIFE_DEAD)
+            return false;
+
+        if (searchMode.HasFlag(TargetSearchMode.TeamOnly) && targetTeam != playerTeam)
+            return false;
+
+        if (searchMode.HasFlag(TargetSearchMode.OppositeTeamOnly) && targetTeam == playerTeam)
+            return false;
+
+        return true;
     }
 
     public IEnumerable<IPlayer> GetBots()
