@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 using SwiftlyS2.Core.Natives;
 using SwiftlyS2.Core.Players;
@@ -22,49 +23,44 @@ internal class GameEventService : IGameEventService, IDisposable
         _Profiler = profiler;
     }
 
-    private static readonly List<GameEventCallback> s_globalCallbacks = [];
-    private static readonly Lock s_globalLock = new();
+    private static readonly ConcurrentDictionary<Guid, GameEventCallback> s_globalCallbacks = [];
 
     internal static void RegisterCallback( GameEventCallback callback )
     {
-        lock (s_globalLock) { s_globalCallbacks.Add(callback); }
+        _ = s_globalCallbacks.TryAdd(callback.Guid, callback);
     }
 
     internal static void UnregisterCallback( GameEventCallback callback )
     {
-        lock (s_globalLock) { _ = s_globalCallbacks.Remove(callback); }
+        _ = s_globalCallbacks.TryRemove(callback.Guid, out _);
     }
 
     public static int DispatchPreEvent( uint hash, nint pEvent, nint pDontBroadcast )
     {
-        lock (s_globalLock)
+        var stopOriginal = false;
+        var globalCallbacks = s_globalCallbacks.Values;
+        foreach (var cb in globalCallbacks)
         {
-            var stopOriginal = false;
-            foreach (var cb in s_globalCallbacks)
-            {
-                var result = cb.InvokeAsPre(hash, pEvent, pDontBroadcast);
-                if (result == HookResult.Stop) return (int)HookResult.Stop;
-                if (result == HookResult.Handled) return (int)HookResult.Handled;
-                if (result == HookResult.CancelOriginal) stopOriginal = true;
-            }
-            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
+            var result = cb.InvokeAsPre(hash, pEvent, pDontBroadcast);
+            if (result == HookResult.Stop) return (int)HookResult.Stop;
+            if (result == HookResult.Handled) return (int)HookResult.Handled;
+            if (result == HookResult.CancelOriginal) stopOriginal = true;
         }
+        return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
     }
 
     public static int DispatchPostEvent( uint hash, nint pEvent, nint pDontBroadcast )
     {
-        lock (s_globalLock)
+        var stopOriginal = false;
+        var globalCallbacks = s_globalCallbacks.Values;
+        foreach (var cb in globalCallbacks)
         {
-            var stopOriginal = false;
-            foreach (var cb in s_globalCallbacks)
-            {
-                var result = cb.InvokeAsPost(hash, pEvent, pDontBroadcast);
-                if (result == HookResult.Stop) return (int)HookResult.Stop;
-                if (result == HookResult.Handled) return (int)HookResult.Handled;
-                if (result == HookResult.CancelOriginal) stopOriginal = true;
-            }
-            return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
+            var result = cb.InvokeAsPost(hash, pEvent, pDontBroadcast);
+            if (result == HookResult.Stop) return (int)HookResult.Stop;
+            if (result == HookResult.Handled) return (int)HookResult.Handled;
+            if (result == HookResult.CancelOriginal) stopOriginal = true;
         }
+        return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
     }
 
     private readonly List<GameEventCallback> _callbacks = [];

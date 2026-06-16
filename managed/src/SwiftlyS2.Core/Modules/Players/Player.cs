@@ -50,11 +50,11 @@ internal class Player : IPlayer, IDisposable
     public CCSPlayerController Controller { get { ThrowIfDisposed(); var controllerPtr = NativePlayer.GetController(Slot); return EntityManager.GetEntityByAddress(controllerPtr) as CCSPlayerControllerImpl ?? new CCSPlayerControllerImpl(controllerPtr); } }
     public CCSPlayerController RequiredController => Controller is { IsValid: true } controller ? controller : throw new InvalidOperationException("Controller is not valid");
 
-    public CBasePlayerPawn? Pawn => Controller is { IsValid: true } ? (Controller.Pawn is { IsValid: true } pawn ? pawn.Value : null) : null;
+    public CBasePlayerPawn? Pawn => Controller is { IsValid: true } ? Controller.Pawn.Value : null;
 
     public CBasePlayerPawn RequiredPawn => Pawn is { IsValid: true } pawn ? pawn : throw new InvalidOperationException("Pawn is not valid");
 
-    public CCSPlayerPawn? PlayerPawn => Controller is { IsValid: true } ? (Controller.PlayerPawn is { IsValid: true } pawn ? pawn.Value : null) : null;
+    public CCSPlayerPawn? PlayerPawn => Controller is { IsValid: true } ? Controller.PlayerPawn.Value : null;
 
     public CCSPlayerPawn RequiredPlayerPawn => PlayerPawn is { IsValid: true } pawn ? pawn : throw new InvalidOperationException("PlayerPawn is not valid");
 

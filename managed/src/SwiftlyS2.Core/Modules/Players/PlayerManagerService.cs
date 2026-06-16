@@ -113,7 +113,7 @@ internal class PlayerManagerService : IPlayerManagerService
             return aimedPlayer is { IsValid: true } && MatchesSearchMode(player, aimedPlayer, searchMode) ? [aimedPlayer] : [];
         }
 
-        IEnumerable<IPlayer> allPlayers = [];
+        List<IPlayer> allPlayers = [];
 
         var players = GetAllValidPlayers();
         foreach (var targetPlayer in players)
@@ -126,59 +126,59 @@ internal class PlayerManagerService : IPlayerManagerService
 
             if (target == "@all")
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@me" && targetPlayer.PlayerID == player.PlayerID)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@!me" && targetPlayer.PlayerID != player.PlayerID)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if ((target == "@bots" || target == "@!human") && targetPlayer.IsFakeClient)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if ((target == "@!bots" || target == "@human") && !targetPlayer.IsFakeClient)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@alive" && targetPlayer.Pawn?.LifeState == (byte)LifeState_t.LIFE_ALIVE)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@dead" && targetPlayer.Pawn?.LifeState == (byte)LifeState_t.LIFE_DEAD)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@ct" && targetPlayer.Pawn?.TeamNum == (int)Team.CT)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@t" && targetPlayer.Pawn?.TeamNum == (int)Team.T)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target == "@spec" && targetPlayer.Pawn?.TeamNum == (int)Team.Spectator)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (target.StartsWith('#'))
             {
                 if (int.TryParse(target[1..], out var id) && (targetPlayer.PlayerID == id || targetPlayer.UserID == id))
                 {
-                    allPlayers = allPlayers.Append(targetPlayer);
+                    allPlayers.Add(targetPlayer);
                 }
             }
             else if (targetPlayer.Controller.PlayerName.Contains(target, nameComparison))
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
             else if (new CSteamID(target) is var steamId && steamId.IsValid() &&
                      steamId.GetSteamID64() == targetPlayer.SteamID)
             {
-                allPlayers = allPlayers.Append(targetPlayer);
+                allPlayers.Add(targetPlayer);
             }
         }
 
