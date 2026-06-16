@@ -19,7 +19,14 @@ internal class EngineService : IEngineService
 
     public string? ServerIP => NativeEngineHelpers.GetIP();
 
-    public ref CGlobalVars GlobalVars => ref NativeEngineHelpers.GetGlobalVars().AsRef<CGlobalVars>();
+    public ref CGlobalVars GlobalVars {
+        get {
+            var globalVarsPtr = NativeEngineHelpers.GetGlobalVars();
+            if (globalVarsPtr == nint.Zero) throw new InvalidOperationException("GlobalVars is null.");
+
+            return ref globalVarsPtr.AsRef<CGlobalVars>();
+        }
+    }
 
     public string Map => GlobalVars.MapName.Value;
 
