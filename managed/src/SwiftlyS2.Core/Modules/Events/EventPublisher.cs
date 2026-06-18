@@ -75,56 +75,131 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnCommandDispatch( nint commandNamePtr, int playerId, nint argsPtr, nint originalCommandNamePtr, nint prefixPtr, byte silent )
     {
-        var commandName = StringAlloc.CreateCSharpString(commandNamePtr);
-        var argsString = StringAlloc.CreateCSharpString(argsPtr);
-        var originalCommandName = StringAlloc.CreateCSharpString(originalCommandNamePtr);
-        var prefix = StringAlloc.CreateCSharpString(prefixPtr);
+        try
+        {
+            var commandName = StringAlloc.CreateCSharpString(commandNamePtr);
+            var argsString = StringAlloc.CreateCSharpString(argsPtr);
+            var originalCommandName = StringAlloc.CreateCSharpString(originalCommandNamePtr);
+            var prefix = StringAlloc.CreateCSharpString(prefixPtr);
 
-        var args = argsString.Split('\x01');
-        if (args.Length < 2) args = [.. args.Where(s => !string.IsNullOrWhiteSpace(s))];
+            var args = argsString.Split('\x01');
+            if (args.Length < 2) args = [.. args.Where(s => !string.IsNullOrWhiteSpace(s))];
 
-        CommandService.DispatchCommand(commandName, playerId, args, originalCommandName, prefix, silent == 1);
+            CommandService.DispatchCommand(commandName, playerId, args, originalCommandName, prefix, silent == 1);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return;
+            AnsiConsole.WriteException(e);
+        }
     }
 
     [UnmanagedCallersOnly]
     public static int OnClientCommandDispatch( int playerId, nint commandLinePtr )
     {
-        var commandLine = StringAlloc.CreateCSharpString(commandLinePtr);
-        return CommandService.DispatchClientCommand(playerId, commandLine);
+        try
+        {
+            var commandLine = StringAlloc.CreateCSharpString(commandLinePtr);
+            return CommandService.DispatchClientCommand(playerId, commandLine);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
     }
 
     [UnmanagedCallersOnly]
     public static int OnClientChatDispatch( int playerId, nint textPtr, byte teamonly )
     {
-        var text = StringAlloc.CreateCSharpString(textPtr);
-        return CommandService.DispatchClientChat(playerId, text, teamonly == 1);
+        try
+        {
+            var text = StringAlloc.CreateCSharpString(textPtr);
+            return CommandService.DispatchClientChat(playerId, text, teamonly == 1);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
     }
 
     [UnmanagedCallersOnly]
     public static int OnNetMessageServerDispatch( nint pPlayerMask, int msgId, nint pMessage )
     {
-        return NetMessageService.DispatchServerMessage(pPlayerMask, msgId, pMessage);
+        try
+        {
+            return NetMessageService.DispatchServerMessage(pPlayerMask, msgId, pMessage);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
     }
 
     [UnmanagedCallersOnly]
     public static int OnNetMessageClientDispatch( int playerId, int msgId, nint pMessage )
     {
-        return NetMessageService.DispatchClientMessage(playerId, msgId, pMessage);
+        try
+        {
+            return NetMessageService.DispatchClientMessage(playerId, msgId, pMessage);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
     }
 
     [UnmanagedCallersOnly]
     public static int OnNetMessageServerInternalDispatch( int playerId, int msgId, nint pMessage )
     {
-        return NetMessageService.DispatchServerInternalMessage(playerId, msgId, pMessage);
+        try
+        {
+            return NetMessageService.DispatchServerInternalMessage(playerId, msgId, pMessage);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
     }
 
     [UnmanagedCallersOnly]
     public static int OnGameEventPreDispatch( uint hash, nint pEvent, nint pDontBroadcast )
-        => GameEventService.DispatchPreEvent(hash, pEvent, pDontBroadcast);
+    {
+        try
+        {
+            return GameEventService.DispatchPreEvent(hash, pEvent, pDontBroadcast);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
+    }
 
     [UnmanagedCallersOnly]
     public static int OnGameEventPostDispatch( uint hash, nint pEvent, nint pDontBroadcast )
-        => GameEventService.DispatchPostEvent(hash, pEvent, pDontBroadcast);
+    {
+        try
+        {
+            return GameEventService.DispatchPostEvent(hash, pEvent, pDontBroadcast);
+        }
+        catch (Exception e)
+        {
+            if (!GlobalExceptionHandler.Handle(ref e)) return 0;
+            AnsiConsole.WriteException(e);
+            return 0;
+        }
+    }
 
     public static bool ListensToConVarCreated {
         get {
@@ -258,17 +333,17 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnTick( byte simulating, byte first, byte last )
     {
-        SchedulerManager.OnTick();
-
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToTick) return;
-
         try
         {
+            SchedulerManager.OnTick();
+
+            if (subscribers.Count == 0)
+            {
+                return;
+            }
+
+            if (!ListensToTick) return;
+
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnTick();
@@ -297,17 +372,17 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnPreworldUpdate( byte simulating )
     {
-        SchedulerManager.OnWorldUpdate();
-
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToWorldUpdate) return;
-
         try
         {
+            SchedulerManager.OnWorldUpdate();
+
+            if (subscribers.Count == 0)
+            {
+                return;
+            }
+
+            if (!ListensToWorldUpdate) return;
+
             for (var i = 0; i < subscribers.Count; i++)
             {
                 subscribers[i].InvokeOnWorldUpdate();
@@ -336,16 +411,16 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static byte OnClientConnected( int playerId )
     {
-        PlayerManagerService.RegisterPlayerObject(playerId);
-        if (subscribers.Count == 0)
-        {
-            return 1;
-        }
-
-        if (!ListensToClientConnected) return 1;
-
         try
         {
+            PlayerManagerService.RegisterPlayerObject(playerId);
+            if (subscribers.Count == 0)
+            {
+                return 1;
+            }
+
+            if (!ListensToClientConnected) return 1;
+
             OnClientConnectedEvent @event = new() { PlayerId = playerId };
             for (var i = 0; i < subscribers.Count; i++)
             {
@@ -480,17 +555,17 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnClientPutInServer( int playerId, int clientKind )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (clientKind == (int)ClientKind.Bot) PlayerManagerService.RegisterPlayerObject(playerId);
-
-        if (!ListensToClientPutInServer) return;
-
         try
         {
+            if (subscribers.Count == 0)
+            {
+                return;
+            }
+
+            if (clientKind == (int)ClientKind.Bot) PlayerManagerService.RegisterPlayerObject(playerId);
+
+            if (!ListensToClientPutInServer) return;
+
             OnClientPutInServerEvent @event = new() {
                 PlayerId = playerId,
                 Kind = (ClientKind)clientKind
@@ -599,16 +674,16 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnEntityCreated( nint entityPtr )
     {
-        var entity = EntityManager.OnEntityCreated(entityPtr);
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        if (!ListensToEntityCreated) return;
-
         try
         {
+            var entity = EntityManager.OnEntityCreated(entityPtr);
+            if (subscribers.Count == 0)
+            {
+                return;
+            }
+
+            if (!ListensToEntityCreated) return;
+
             OnEntityCreatedEvent @event = new() { Entity = entity };
             for (var i = 0; i < subscribers.Count; i++)
             {
@@ -638,22 +713,14 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnEntityDeleted( nint entityPtr )
     {
-        if (subscribers.Count == 0)
-        {
-            EntityManager.OnEntityDeleted(entityPtr);
-            return;
-        }
-
-        if (!ListensToEntityDeleted)
-        {
-            EntityManager.OnEntityDeleted(entityPtr);
-            return;
-        }
-
-        var entity = EntityManager.GetEntityByAddress(entityPtr);
-
         try
         {
+            if (subscribers.Count == 0 || !ListensToEntityDeleted)
+            {
+                return;
+            }
+
+            var entity = EntityManager.GetEntityByAddress(entityPtr);
             OnEntityDeletedEvent @event = new() { Entity = entity! };
             for (var i = 0; i < subscribers.Count; i++)
             {
@@ -662,10 +729,7 @@ internal static class EventPublisher
         }
         catch (Exception e)
         {
-            if (!GlobalExceptionHandler.Handle(ref e))
-            {
-                return;
-            }
+            if (!GlobalExceptionHandler.Handle(ref e)) return;
             AnsiConsole.WriteException(e);
         }
         finally
@@ -1223,24 +1287,24 @@ internal static class EventPublisher
     [UnmanagedCallersOnly]
     public static void OnConsoleOutput( nint messagePtr )
     {
-        if (subscribers.Count == 0)
-        {
-            return;
-        }
-
-        var message = string.Empty;
-        var setMessage = false;
-        if (CommandTrackerManager.IsTracking)
-        {
-            message = StringAlloc.CreateCSharpString(messagePtr);
-            setMessage = true;
-            CommandTrackerManager.ProcessOutput(message);
-        }
-
-        if (!ListensToConsoleOutput) return;
-
         try
         {
+            if (subscribers.Count == 0)
+            {
+                return;
+            }
+
+            var message = string.Empty;
+            var setMessage = false;
+            if (CommandTrackerManager.IsTracking)
+            {
+                message = StringAlloc.CreateCSharpString(messagePtr);
+                setMessage = true;
+                CommandTrackerManager.ProcessOutput(message);
+            }
+
+            if (!ListensToConsoleOutput) return;
+
             OnConsoleOutputEvent @event = new() { Message = setMessage ? message : StringAlloc.CreateCSharpString(messagePtr) };
             for (var i = 0; i < subscribers.Count; i++)
             {
