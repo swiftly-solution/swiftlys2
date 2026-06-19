@@ -32,13 +32,14 @@ internal static partial class GameHooksPublisher
 
                 Schema.isFollowingServerGuidelines = false;
 
-                var econItemView = _core.Memory.ToSchemaClass<CEconItemView>(pEconItemView);
+                var dummyEconItemView = _econItemViewPool.Rent();
+                dummyEconItemView.DangerousSetHandle(pEconItemView);
 
                 var preCtx = new CanAcquireItemPreContext {
                     Params = new CanAcquireItemParams {
                         Player = player,
-                        EconItemView = econItemView,
-                        WeaponVData = _core.Helpers.GetWeaponCSDataFromKey(econItemView.ItemDefinitionIndex),
+                        EconItemView = dummyEconItemView,
+                        WeaponVData = _core.Helpers.GetWeaponCSDataFromKey(dummyEconItemView.ItemDefinitionIndex),
                         AcquireMethod = (AcquireMethod)acquireMethod
                     }
                 };
@@ -47,7 +48,10 @@ internal static partial class GameHooksPublisher
 
                 InvokeCanAcquirePre(ref preCtx);
                 if (preCtx.HookResult == HookResult.Stop || preCtx.HookResult == HookResult.CancelOriginal)
+                {
+                    _econItemViewPool.Return(dummyEconItemView);
                     return (int)(preCtx.IsReturnSet ? preCtx.Return : AcquireResult.Allowed);
+                }
 
                 var result = next()(pItemServices, pEconItemView, acquireMethod, unk1);
 
@@ -67,6 +71,8 @@ internal static partial class GameHooksPublisher
                 }
 
                 InvokeCanAcquirePost(ref postCtx);
+
+                _econItemViewPool.Return(dummyEconItemView);
 
                 return (int)postCtx.Return;
             };
