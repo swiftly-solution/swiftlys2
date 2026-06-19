@@ -1,6 +1,5 @@
 using SwiftlyS2.Core.Events;
 using SwiftlyS2.Core.Natives;
-using SwiftlyS2.Core.SchemaDefinitions;
 using SwiftlyS2.Core.Schemas;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;

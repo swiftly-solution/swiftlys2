@@ -835,6 +835,8 @@ internal static class EventPublisher
             return;
         }
 
+        HelpersService.RenewVDataCache();
+
         if (!ListensToMapLoad) return;
 
         try

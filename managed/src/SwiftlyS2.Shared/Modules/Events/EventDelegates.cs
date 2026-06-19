@@ -118,31 +118,37 @@ public class EventDelegates
     /// <summary>
     /// Called when an entity starts touching another entity.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.StartTouch instead.")]
     public delegate void OnEntityStartTouch( IOnEntityStartTouchEvent @event );
 
     /// <summary>
     /// Called when an entity is touching another entity.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.Touch instead.")]
     public delegate void OnEntityTouch( IOnEntityTouchEvent @event );
 
     /// <summary>
     /// Called when an entity ends touching another entity.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.EndTouch instead.")]
     public delegate void OnEntityEndTouch( IOnEntityEndTouchEvent @event );
 
     /// <summary>
     /// Called when an item services can acquire hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Items.CanAcquire instead.")]
     public delegate void OnItemServicesCanAcquireHook( IOnItemServicesCanAcquireHookEvent @event );
 
     /// <summary>
     /// Called when a weapon services can use hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.CanUse instead.")]
     public delegate void OnWeaponServicesCanUseHook( IOnWeaponServicesCanUseHookEvent @event );
 
     /// <summary>
     /// Called when a weapon services drop weapon hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Weapons.DropWeapon instead.")]
     public delegate void OnWeaponServicesDropWeaponHook( IOnWeaponServicesDropWeaponHook @event );
 
     /// <summary>
@@ -163,21 +169,25 @@ public class EventDelegates
     /// <summary>
     /// Called when the movement services run command hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Movement.RunCommand instead.")]
     public delegate void OnMovementServicesRunCommandHook( IOnMovementServicesRunCommandHookEvent @event );
 
     /// <summary>
     /// Called when the player pawn post think hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Pawn.PostThink instead.")]
     public delegate void OnPlayerPawnPostThink( IOnPlayerPawnPostThinkHookEvent @event );
 
     /// <summary>
     /// Called when an entity identity accept input hook is triggered.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.AcceptInput instead.")]
     public delegate void OnEntityIdentityAcceptInputHook( IOnEntityIdentityAcceptInputHookEvent @event );
 
     /// <summary>
     /// Called when an entity fires output.
     /// </summary>
+    [Obsolete("This event is deprecated and will be removed in future versions. Use GameHooks.Entities.FireOutput instead.")]
     public delegate void OnEntityFireOutputHookEvent( IOnEntityFireOutputHookEvent @event );
 
     /// <summary>
