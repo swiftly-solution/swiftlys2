@@ -31,6 +31,7 @@ using json = nlohmann::json;
 
 std::map<uint64_t, std::function<void(const std::string&)>> g_ConsoleListeners;
 std::map<uint64_t, pcre2_code*> g_Filters;
+std::map<uint64_t, pcre2_match_data*> g_FiltersMatchData;
 
 bool g_bEnabled = false;
 uint64_t g_filterIds = 1;
@@ -54,7 +55,7 @@ int CLoggingSystem_LogDirectHook(void* loggingSystem, int channel, int severity,
     }
 
     static auto consoleoutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    if (consoleoutput->NeedsFiltering(args ? buf : str)) return 0;
+    if (consoleoutput->NeedsFiltering(args ? buf : (char*)str)) return 0;
 
     for (const auto& [id, callback] : g_ConsoleListeners)
         callback(args ? buf : str);
@@ -90,11 +91,18 @@ void CConsoleOutput::Shutdown()
 
 void CConsoleOutput::ReloadFilterConfiguration()
 {
+    static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
+ 
     for (auto it = g_Filters.begin(); it != g_Filters.end(); ++it)
         pcre2_code_free(it->second);
 
+    for(auto it = g_FiltersMatchData.begin(); it != g_FiltersMatchData.end(); ++it)
+        pcre2_match_data_free(it->second);
+
     g_Filters.clear();
+    g_FiltersMatchData.clear();
     g_FilteredMessages.clear();
+    g_FilterNames.clear();
 
     json filters = json::object();
     filters = parseJsonc(Files::Read(g_SwiftlyCore.GetCorePath() + "/configs/confilter.jsonc"));
@@ -106,13 +114,20 @@ void CConsoleOutput::ReloadFilterConfiguration()
 
         re = pcre2_compile((PCRE2_SPTR8)(value.get<std::string>().c_str()), PCRE2_ZERO_TERMINATED, 0, &errorcode, &erroffset, nullptr);
         if (!re) {
-            static auto logger = g_ifaceService.FetchInterface<ILogger>(LOGGER_INTERFACE_VERSION);
             logger->Error("Console Filter", fmt::format("The regex for \"{}\" is not valid.\n", key));
             logger->Error("Console Filter", fmt::format("Failed to compile at offset {}.\n", erroffset));
             continue;
         }
 
+        pcre2_match_data* match_data = pcre2_match_data_create_from_pattern(re, nullptr);
+        if(!match_data) {
+            logger->Error("Console Filter", fmt::format("Failed to create match data for \"{}\".\n", key));
+            pcre2_code_free(re);
+            continue;
+        }
+
         g_Filters.insert({ g_filterIds, re });
+        g_FiltersMatchData.insert({ g_filterIds, match_data });
         g_FilterNames.insert({ g_filterIds, key });
         g_FilteredMessages.insert({ g_filterIds, 0 });
         g_filterIds++;
@@ -129,27 +144,24 @@ bool CConsoleOutput::IsEnabled()
     return g_bEnabled;
 }
 
-bool CConsoleOutput::NeedsFiltering(const std::string& text)
+bool CConsoleOutput::NeedsFiltering(char* text)
 {
     if (!IsEnabled()) return false;
 
-    PCRE2_SPTR str = (PCRE2_SPTR)(text.c_str());
-    int len = text.size();
+    PCRE2_SPTR str = (PCRE2_SPTR)text;
+    PCRE2_SIZE len = (PCRE2_SIZE)strlen(text);
 
     for (auto it = g_Filters.begin(); it != g_Filters.end(); ++it)
     {
         pcre2_code* re = it->second;
-        pcre2_match_data* match_data = pcre2_match_data_create_from_pattern(re, nullptr);
+        pcre2_match_data* match_data = g_FiltersMatchData[it->first];
 
         if (pcre2_match(re, str, len, 0, 0, match_data, nullptr) > 0)
         {
             uint64_t key = it->first;
             g_FilteredMessages[key]++;
-            pcre2_match_data_free(match_data);
             return true;
         }
-
-        pcre2_match_data_free(match_data);
     }
 
     return false;

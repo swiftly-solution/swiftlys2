@@ -69,7 +69,7 @@ void Bridge_ConsoleOutput_ReloadFilterConfiguration()
 bool Bridge_ConsoleOutput_NeedsFiltering(const char* text)
 {
     auto consoleOutput = g_ifaceService.FetchInterface<IConsoleOutput>(CONSOLEOUTPUT_INTERFACE_VERSION);
-    return consoleOutput->NeedsFiltering(std::string(text));
+    return consoleOutput->NeedsFiltering((char*)text);
 }
 
 char* Bridge_ConsoleOutput_GetCounterText(int* size)

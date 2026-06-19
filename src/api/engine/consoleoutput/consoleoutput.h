@@ -32,7 +32,7 @@ public:
     virtual void ReloadFilterConfiguration() = 0;
     virtual void ToggleFilter() = 0;
     virtual bool IsEnabled() = 0;
-    virtual bool NeedsFiltering(const std::string& text) = 0;
+    virtual bool NeedsFiltering(char* text) = 0;
     virtual std::string GetCounterText() = 0;
 
     virtual uint64_t AddConsoleListener(std::function<void(const std::string&)> callback) = 0;
