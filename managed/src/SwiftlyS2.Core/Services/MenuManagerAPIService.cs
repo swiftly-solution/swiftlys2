@@ -17,6 +17,7 @@ internal class MenuManagerAPIService : IDisposable
         core.Event.OnClientKeyStateChanged += menuManager.OnClientKeyStateChanged;
         core.Event.OnClientDisconnected += menuManager.OnClientDisconnected;
         core.Event.OnMapUnload += menuManager.OnMapUnload;
+        core.Event.OnTick += menuManager.OnTick;
     }
 
     public void Dispose()
@@ -24,5 +25,6 @@ internal class MenuManagerAPIService : IDisposable
         core.Event.OnClientKeyStateChanged -= menuManager.OnClientKeyStateChanged;
         core.Event.OnClientDisconnected -= menuManager.OnClientDisconnected;
         core.Event.OnMapUnload -= menuManager.OnMapUnload;
+        core.Event.OnTick -= menuManager.OnTick;
     }
 }

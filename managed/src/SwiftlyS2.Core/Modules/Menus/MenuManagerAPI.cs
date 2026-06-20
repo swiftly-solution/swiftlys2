@@ -107,6 +107,23 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
         onClosedCallbacks.Clear();
     }
 
+    internal void OnTick()
+    {
+        if (openMenus.IsEmpty)
+        {
+            return;
+        }
+
+        var players = Core.PlayerManager.GetAllValidPlayers();
+        foreach(var player in players)
+        {
+            if(!openMenus.ContainsKey(player.PlayerID) && NativePlayer.HasMenuShown(player.PlayerID))
+            {
+                NativePlayer.ClearCenterMenuRender(player.PlayerID);
+            }
+        }
+    }
+
     internal void OnClientKeyStateChanged( IOnClientKeyStateChangedEvent @event )
     {
         if (openMenus.IsEmpty)
@@ -115,7 +132,7 @@ internal sealed class MenuManagerAPI : IMenuManagerAPI
         }
 
         var player = Core.PlayerManager.GetPlayer(@event.PlayerId);
-        if (player == null || !player.IsValid || player.IsFakeClient || player.IsFakeClient || !@event.Pressed)
+        if (player == null || !player.IsValid || player.IsFakeClient || !@event.Pressed)
         {
             return;
         }
