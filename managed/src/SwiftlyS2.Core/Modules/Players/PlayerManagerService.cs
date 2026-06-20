@@ -193,9 +193,15 @@ internal class PlayerManagerService : IPlayerManagerService
         if (!searchMode.HasFlag(TargetSearchMode.IncludeSelf) && targetPlayer.PlayerID == player.PlayerID)
             return false;
 
-        var targetLifeState = targetPlayer.Pawn?.LifeState;
-        var targetTeam = targetPlayer.Pawn?.TeamNum;
-        var playerTeam = player.Pawn?.TeamNum;
+        var targetPawn = targetPlayer.Pawn;
+        var playerPawn = player.Pawn;
+
+        if(targetPawn == null || !targetPawn.IsValid || playerPawn == null || !playerPawn.IsValid)
+            return false;
+
+        var targetLifeState = targetPawn.LifeState;
+        var targetTeam = targetPawn.TeamNum;
+        var playerTeam = playerPawn.TeamNum;
 
         if (searchMode.HasFlag(TargetSearchMode.Alive) && targetLifeState != (byte)LifeState_t.LIFE_ALIVE)
             return false;
