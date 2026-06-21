@@ -112,27 +112,23 @@ internal class PlayerManagerService : IPlayerManagerService
             var aimedPlayer = pickerEntity.ToPlayer();
             return aimedPlayer is { IsValid: true } && MatchesSearchMode(player, aimedPlayer, searchMode) ? [aimedPlayer] : [];
         }
+        else if(target == "@me")
+        {
+            return player != null && player.IsValid && MatchesSearchMode(player, player, searchMode) ? [player] : [];
+        }
 
         List<IPlayer> allPlayers = [];
 
         var players = GetAllValidPlayers();
         foreach (var targetPlayer in players)
         {
-            if (searchMode.HasFlag(TargetSearchMode.NoMultipleTargets) && allPlayers.Any())
+            if (searchMode.HasFlag(TargetSearchMode.NoMultipleTargets) && allPlayers.Count != 0)
                 break;
 
             if (!MatchesSearchMode(player, targetPlayer, searchMode))
                 continue;
 
             if (target == "@all")
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if (target == "@me" && targetPlayer.PlayerID == player.PlayerID)
-            {
-                allPlayers.Add(targetPlayer);
-            }
-            else if (target == "@!me" && targetPlayer.PlayerID != player.PlayerID)
             {
                 allPlayers.Add(targetPlayer);
             }
@@ -193,27 +189,30 @@ internal class PlayerManagerService : IPlayerManagerService
         if (!searchMode.HasFlag(TargetSearchMode.IncludeSelf) && targetPlayer.PlayerID == player.PlayerID)
             return false;
 
-        var targetPawn = targetPlayer.Pawn;
-        var playerPawn = player.Pawn;
+        if(player != null)
+        {
+            var targetPawn = targetPlayer.Pawn;
+            var playerPawn = player.Pawn;
 
-        if(targetPawn == null || !targetPawn.IsValid || playerPawn == null || !playerPawn.IsValid)
-            return false;
+            if(targetPawn == null || !targetPawn.IsValid || playerPawn == null || !playerPawn.IsValid)
+                return false;
 
-        var targetLifeState = targetPawn.LifeState;
-        var targetTeam = targetPawn.TeamNum;
-        var playerTeam = playerPawn.TeamNum;
+            var targetLifeState = targetPawn.LifeState;
+            var targetTeam = targetPawn.TeamNum;
+            var playerTeam = playerPawn.TeamNum;
 
-        if (searchMode.HasFlag(TargetSearchMode.Alive) && targetLifeState != (byte)LifeState_t.LIFE_ALIVE)
-            return false;
+            if (searchMode.HasFlag(TargetSearchMode.Alive) && targetLifeState != (byte)LifeState_t.LIFE_ALIVE)
+                return false;
 
-        if (searchMode.HasFlag(TargetSearchMode.Dead) && targetLifeState != (byte)LifeState_t.LIFE_DEAD)
-            return false;
+            if (searchMode.HasFlag(TargetSearchMode.Dead) && targetLifeState != (byte)LifeState_t.LIFE_DEAD)
+                return false;
 
-        if (searchMode.HasFlag(TargetSearchMode.TeamOnly) && targetTeam != playerTeam)
-            return false;
+            if (searchMode.HasFlag(TargetSearchMode.TeamOnly) && targetTeam != playerTeam)
+                return false;
 
-        if (searchMode.HasFlag(TargetSearchMode.OppositeTeamOnly) && targetTeam == playerTeam)
-            return false;
+            if (searchMode.HasFlag(TargetSearchMode.OppositeTeamOnly) && targetTeam == playerTeam)
+                return false;   
+        }
 
         return true;
     }
