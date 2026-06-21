@@ -62,12 +62,12 @@ internal class PlayerManagerService : IPlayerManagerService
 
     public IPlayer? GetPlayerFromController( CBasePlayerController controller )
     {
-        return GetPlayer((int)(controller.Index - 1));
+        return controller.ToPlayer();
     }
 
     public IPlayer? GetPlayerFromPawn( CBasePlayerPawn pawn )
     {
-        return pawn.Controller.Value is not { IsValid: true } controller ? null : GetPlayerFromController(controller);
+        return pawn.ToPlayer();
     }
 
     public bool IsPlayerOnline( int playerid )

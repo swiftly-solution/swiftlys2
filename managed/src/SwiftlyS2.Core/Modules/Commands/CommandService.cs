@@ -333,12 +333,17 @@ internal class CommandService : ICommandService, IDisposable
             commandAliases.Clear();
 
             foreach (var aliasName in commandAliasNames)
-                aliasToOriginal.Remove(aliasName);
+                _ = aliasToOriginal.Remove(aliasName);
             commandAliasNames.Clear();
 
             foreach (var callback in commandCallbacks)
                 callback.Dispose();
             commandCallbacks.Clear();
+
+            if(commandsByPlugin.TryGetValue(coreContext.Name, out var pluginCallbacks))
+            {
+                pluginCallbacks.Clear();
+            }
         }
     }
 
