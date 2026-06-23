@@ -96,22 +96,19 @@ internal class HelpersService : IHelpers
     public static void RenewVDataCache()
     {
         WeaponCSDataCache.Clear();
-
-        foreach(var kvp in WeaponItemDefinitionIndices)
-        {
-            var weaponData = GameFunctions.GetWeaponCSDataFromKey(-1, kvp.Value.ToString());
-            _ = WeaponCSDataCache.TryAdd(kvp.Value, weaponData == 0 ? null : new CCSWeaponBaseVDataImpl(weaponData));
-        }
     }
 
     public CCSWeaponBaseVData? GetWeaponCSDataFromKey( int unknown, string key )
     {
-        var weaponDataPtr = GameFunctions.GetWeaponCSDataFromKey(unknown, key);
-        if(!WeaponCSDataCache.ContainsKey(int.TryParse(key, out var itemDefIndex) ? itemDefIndex : -1))
+        if(WeaponCSDataCache.TryGetValue(int.TryParse(key, out var itemDefIndex) ? itemDefIndex : -1, out var cachedData))
         {
-            _ = WeaponCSDataCache.TryAdd(itemDefIndex, weaponDataPtr == 0 ? null : new CCSWeaponBaseVDataImpl(weaponDataPtr));
+            return cachedData;
         }
-        return weaponDataPtr == 0 ? null : (CCSWeaponBaseVData)new CCSWeaponBaseVDataImpl(weaponDataPtr);
+
+        var weaponDataPtr = GameFunctions.GetWeaponCSDataFromKey(unknown, key);
+        var result = weaponDataPtr == 0 ? null : new CCSWeaponBaseVDataImpl(weaponDataPtr);
+        _ = WeaponCSDataCache.TryAdd(itemDefIndex, result);
+        return result;
     }
 
     public CCSWeaponBaseVData? GetWeaponCSDataFromKey( int itemDefinitionIndex )
