@@ -41,7 +41,6 @@
     "Framerate_Header": "excl ms   excl %   incl ms   group",
     "Framerate_Values": "\\d+\\.\\d+ms\\s+\\d+\\.\\d+%\\s+\\d+\\.\\d+ms\\s+[A-Za-z\\s]+",
     "Framerate_Total": "FrameTotal:\\s+\\d+\\.\\d+ms,\\s+\\s*tolerance:\\s+\\d+\\.\\d+ms",
-    "ClientPutInServer": "ClientPutInServer",
     "IGameSystem": "IGameSystem::",
     "FLASHBANG": "FLASHBANG:"
 }
