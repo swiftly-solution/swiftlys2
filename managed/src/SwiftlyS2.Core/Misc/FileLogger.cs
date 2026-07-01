@@ -11,7 +11,7 @@ internal static class FileLogger
     private static Thread? _flushThread;
     private static volatile bool _running = false;
     private static string _logDirectory = string.Empty;
-    private static string _currentDate = string.Empty;
+    private static DateTime _currentDate;
 
     public static void Initialize( string basePath )
     {
@@ -27,8 +27,8 @@ internal static class FileLogger
         if (!Directory.Exists(_logDirectory))
             _ = Directory.CreateDirectory(_logDirectory);
 
-        _currentDate = DateTime.Now.ToString("yyyy-MM-dd");
-        _fileStream = new StreamWriter(Path.Combine(_logDirectory, $"{_currentDate}.log"), append: true);
+        _currentDate = DateTime.Now;
+        _fileStream = new StreamWriter(Path.Combine(_logDirectory, $"{_currentDate:yyyy-MM-dd_HH-mm-ss}.log"), append: true);
 
         _running = true;
         _flushThread = new Thread(() =>
@@ -48,15 +48,15 @@ internal static class FileLogger
 
     private static void RollDateIfNeeded()
     {
-        var today = DateTime.Now.ToString("yyyy-MM-dd");
-        if (today == _currentDate) return;
+        var now = DateTime.Now;
+        if (now.Date == _currentDate.Date) return;
         lock (_lock)
         {
-            if (today == _currentDate) return;
+            if (now.Date == _currentDate.Date) return;
             _fileStream?.Flush();
             _fileStream?.Dispose();
-            _currentDate = today;
-            _fileStream = new StreamWriter(Path.Combine(_logDirectory, $"{_currentDate}.log"), append: true);
+            _currentDate = now;
+            _fileStream = new StreamWriter(Path.Combine(_logDirectory, $"{now:yyyy-MM-dd_HH-mm-ss}.log"), append: true);
         }
     }
 
