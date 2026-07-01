@@ -59,15 +59,15 @@ static std::string GetTimestampString()
 static std::string GetDateString()
 {
     std::time_t now = std::time(nullptr);
-    char buf[16];
+    char buf[32];
 #ifdef _WIN32
     struct tm tm_info;
     localtime_s(&tm_info, &now);
-    std::strftime(buf, sizeof(buf), "%Y-%m-%d", &tm_info);
+    std::strftime(buf, sizeof(buf), "%Y-%m-%d_%H-%M-%S", &tm_info);
 #else
     struct tm tm_info;
     localtime_r(&now, &tm_info);
-    std::strftime(buf, sizeof(buf), "%Y-%m-%d", &tm_info);
+    std::strftime(buf, sizeof(buf), "%Y-%m-%d_%H-%M-%S", &tm_info);
 #endif
     return buf;
 }
@@ -195,7 +195,8 @@ void ConsoleLogger::WorkerThread()
             continue;
 
         std::string dayPath = GetDailyLogPath();
-        if (dayPath != m_currentLogFile)
+        // Compare only the yyyy-MM-dd prefix (10 chars after m_logDir)
+        if (dayPath.compare(m_logDir.size(), 10, m_currentLogFile, m_logDir.size(), 10) != 0)
             m_currentLogFile = dayPath;
 
         if (m_currentLogFile.empty())
