@@ -71,6 +71,27 @@ internal class PluginManager : IPluginManager
         }
         else
         {
+            EnumeratePluginDirectories(_rootDirService.GetPluginsRoot(), pluginDir =>
+            {
+                var folderName = Path.GetFileName(pluginDir);
+                var dllPath = Path.Combine(pluginDir, folderName + ".dll");
+                var metadata = (PluginMetadata?)null;
+                if (File.Exists(dllPath))
+                {
+                    metadata = ReadMetadataFromDll(dllPath);
+                }
+                if (metadata == null)
+                {
+                    metadata = new PluginMetadata { Id = folderName, Version = "0.0.0" };
+                }
+                var context = new PluginContext {
+                    PluginDirectory = pluginDir,
+                    Status = PluginStatus.Unloaded,
+                    Metadata = metadata
+                };
+                _plugins.Add(context);
+            });
+
             LoadPluginsInOrder(NativeCore.PluginLoadOrder());
         }
     }
@@ -240,6 +261,8 @@ internal class PluginManager : IPluginManager
         {
             _ = LoadPluginById(plugin, silent: false);
         }
+        RebuildSharedServices();
+        NotifyAllPluginsLoaded();
     }
 
     private void LoadPlugins()
@@ -756,7 +779,8 @@ internal class PluginManager : IPluginManager
         }
 
         return query.FirstOrDefault(p =>
-            p.Metadata?.Id.Trim().Equals(id.Trim(), StringComparison.OrdinalIgnoreCase) ?? false);
+            (p.Metadata?.Id.Trim().Equals(id.Trim(), StringComparison.OrdinalIgnoreCase) ?? false)
+            || (p.PluginDirectory != null && Path.GetFileName(p.PluginDirectory).Trim().Equals(id.Trim(), StringComparison.OrdinalIgnoreCase)));
     }
 
     private PluginContext? FindPluginByDirectory( string directory, PluginStatus[]? excludeStatuses = null )
@@ -944,6 +968,49 @@ internal class PluginManager : IPluginManager
             context.Metadata!.Version,
             context.Metadata!.Author,
             displayPath);
+    }
+
+    private PluginMetadata? ReadMetadataFromDll( string dllPath )
+    {
+        var tempLoader = new AssemblyLoadContext("TempMetadataLoader", isCollectible: true);
+        try
+        {
+            var assembly = tempLoader.LoadFromAssemblyPath(dllPath);
+            var types = new List<Type>();
+            try
+            {
+                types.AddRange(assembly.GetTypes());
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                types.AddRange(ex.Types.Where(t => t != null)!);
+            }
+
+            var pluginType = types.FirstOrDefault(t => t.IsSubclassOf(typeof(BasePlugin)));
+            if (pluginType != null)
+            {
+                var metadata = pluginType.GetCustomAttribute<PluginMetadata>();
+                if (metadata != null)
+                {
+                    return new PluginMetadata {
+                        Id = metadata.Id,
+                        Version = metadata.Version,
+                        Author = metadata.Author,
+                        Description = metadata.Description,
+                        Website = metadata.Website,
+                        Name = metadata.Name
+                    };
+                }
+            }
+        }
+        catch
+        {
+        }
+        finally
+        {
+            tempLoader.Unload();
+        }
+        return null;
     }
 }
 
