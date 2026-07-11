@@ -22,9 +22,6 @@
 #include <entityhandle.h>
 #include "ehandle.h"
 
-typedef void (*CEntityInstance_AcceptInput)(void*, const char*, void*, void*, void*, int, void*);
-typedef void (*CEntitySystem_AddEntityIOEvent)(void*, void*, const char*, void*, void*, void*, float, int, void*, void*);
-
 void Bridge_EntitySystem_Spawn(void* pEntity, void* pKeyValues)
 {
     static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
@@ -43,23 +40,6 @@ void* Bridge_EntitySystem_CreateEntityByName(const char* name)
     return entsystem->CreateEntityByName(name);
 }
 
-void Bridge_EntitySystem_AcceptInput(void* pEntity, const char* input, void* pActivator, void* pCaller, void* variant, int32_t outputID)
-{
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto sig = gamedata->GetSignatures()->Fetch("CEntityInstance::AcceptInput");
-
-    reinterpret_cast<CEntityInstance_AcceptInput>(sig)(pEntity, input, pActivator, pCaller, variant, outputID, nullptr);
-}
-
-void Bridge_EntitySystem_AddEntityIOEvent(void* pEntity, const char* input, void* pActivator, void* pCaller, void* variant, float delay)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto sig = gamedata->GetSignatures()->Fetch("CEntitySystem::AddEntityIOEvent");
-
-    reinterpret_cast<CEntitySystem_AddEntityIOEvent>(sig)(entsystem->GetEntitySystem(), pEntity, input, pActivator, pCaller, variant, delay, 0, nullptr, nullptr);
-}
-
 void* Bridge_EntitySystem_GetEntitySystem()
 {
     static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
@@ -75,7 +55,5 @@ bool Bridge_EntitySystem_IsValid()
 DEFINE_NATIVE("EntitySystem.Spawn", Bridge_EntitySystem_Spawn);
 DEFINE_NATIVE("EntitySystem.Despawn", Bridge_EntitySystem_Despawn);
 DEFINE_NATIVE("EntitySystem.CreateEntityByName", Bridge_EntitySystem_CreateEntityByName);
-DEFINE_NATIVE("EntitySystem.AcceptInput", Bridge_EntitySystem_AcceptInput);
-DEFINE_NATIVE("EntitySystem.AddEntityIOEvent", Bridge_EntitySystem_AddEntityIOEvent);
 DEFINE_NATIVE("EntitySystem.GetEntitySystem", Bridge_EntitySystem_GetEntitySystem);
 DEFINE_NATIVE("EntitySystem.IsValid", Bridge_EntitySystem_IsValid);

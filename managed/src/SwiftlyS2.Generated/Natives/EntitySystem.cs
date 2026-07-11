@@ -11,9 +11,9 @@ namespace SwiftlyS2.Core.Natives;
 internal static class NativeEntitySystem
 {
 
-    private unsafe static delegate* unmanaged<nint, nint, void> _Spawn;
+    private unsafe static delegate* unmanaged< nint, nint, void > _Spawn;
 
-    public unsafe static void Spawn(nint entity, nint keyvalues)
+    public unsafe static void Spawn( nint entity, nint keyvalues )
     {
         if (!NativeBinding.IsMainThread)
         {
@@ -22,9 +22,9 @@ internal static class NativeEntitySystem
         _Spawn(entity, keyvalues);
     }
 
-    private unsafe static delegate* unmanaged<nint, void> _Despawn;
+    private unsafe static delegate* unmanaged< nint, void > _Despawn;
 
-    public unsafe static void Despawn(nint entity)
+    public unsafe static void Despawn( nint entity )
     {
         if (!NativeBinding.IsMainThread)
         {
@@ -33,9 +33,9 @@ internal static class NativeEntitySystem
         _Despawn(entity);
     }
 
-    private unsafe static delegate* unmanaged<byte*, nint> _CreateEntityByName;
+    private unsafe static delegate* unmanaged< byte*, nint > _CreateEntityByName;
 
-    public unsafe static nint CreateEntityByName(string name)
+    public unsafe static nint CreateEntityByName( string name )
     {
         return StringAlloc.CreateCString(name, nameBufferPtr =>
         {
@@ -44,35 +44,7 @@ internal static class NativeEntitySystem
         });
     }
 
-    private unsafe static delegate* unmanaged<nint, byte*, nint, nint, nint, int, void> _AcceptInput;
-
-    public unsafe static void AcceptInput(nint entity, string input, nint activator, nint caller, nint value, int outputID)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        StringAlloc.CreateCString(input, inputBufferPtr =>
-        {
-            _AcceptInput(entity, (byte*)inputBufferPtr, activator, caller, value, outputID);
-        });
-    }
-
-    private unsafe static delegate* unmanaged<nint, byte*, nint, nint, nint, float, void> _AddEntityIOEvent;
-
-    public unsafe static void AddEntityIOEvent(nint entity, string input, nint activator, nint caller, nint value, float delay)
-    {
-        if (!NativeBinding.IsMainThread)
-        {
-            throw new InvalidOperationException("This method can only be called from the main thread.");
-        }
-        StringAlloc.CreateCString(input, inputBufferPtr =>
-        {
-            _AddEntityIOEvent(entity, (byte*)inputBufferPtr, activator, caller, value, delay);
-        });
-    }
-
-    private unsafe static delegate* unmanaged<nint> _GetEntitySystem;
+    private unsafe static delegate* unmanaged< nint > _GetEntitySystem;
 
     public unsafe static nint GetEntitySystem()
     {
@@ -80,7 +52,7 @@ internal static class NativeEntitySystem
         return ret;
     }
 
-    private unsafe static delegate* unmanaged<byte> _IsValid;
+    private unsafe static delegate* unmanaged< byte > _IsValid;
 
     public unsafe static bool IsValid()
     {

@@ -9,7 +9,9 @@ namespace SwiftlyS2.Core.Natives;
 
 internal static class GameFunctions
 {
+    private static nint entitySystemPtr = 0;
     private static readonly bool IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
     public static unsafe delegate* unmanaged< CTakeDamageInfo*, nint, nint, nint, Vector*, Vector*, float, int, int, void*, void > pCTakeDamageInfo_Constructor;
     public static unsafe delegate* unmanaged< nint, CTakeDamageInfo*, CTakeDamageResult*, void > pTakeDamage;
     public static unsafe delegate* unmanaged< nint, Ray_t*, Vector*, Vector*, CTraceFilter*, CGameTrace*, void > pTraceShape;
@@ -26,6 +28,8 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCHEGrenadeProjectileEmitGrenade;
     public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCDecoyProjectileEmitGrenade;
     public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCMolotovProjectileEmitGrenade;
+    public static unsafe delegate* unmanaged< nint, nint, nint, nint, nint, nint, float, nint, nint, void > pCEntitySystemAddEntityIOEvent;
+    public static unsafe delegate* unmanaged< nint, nint, nint, nint, nint, void > pCEntityInstaceAcceptInput;
     public static unsafe delegate* unmanaged< nint, int, void > pSwitchTeam;
     private static Lazy<int> CreateOffset( string name ) => new(() => NativeOffsets.Fetch(name));
     private static readonly Lazy<int> _teleportOffset = CreateOffset("CBaseEntity::Teleport");
@@ -92,6 +96,10 @@ internal static class GameFunctions
             pCDecoyProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint >)NativeSignatures.Fetch("CDecoyProjectile::EmitGrenade");
             pCMolotovProjectileEmitGrenade = (delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint >)NativeSignatures.Fetch("CMolotovProjectile::EmitGrenade");
             pSwitchTeam = (delegate* unmanaged< nint, int, void >)NativeSignatures.Fetch("CCSPlayerController::SwitchTeam");
+
+            pCEntitySystemAddEntityIOEvent = (delegate* unmanaged< nint, nint, nint, nint, nint, nint, float, nint, nint, void >)NativeSignatures.Fetch("CEntitySystem::AddEntityIOEvent");
+            pCEntityInstaceAcceptInput = (delegate* unmanaged< nint, nint, nint, nint, nint, void >)NativeSignatures.Fetch("CEntityInstance::AcceptInput");
+
             if (IsWindows)
             {
                 pTerminateRoundWindows = (delegate* unmanaged< nint, float, uint, nint, void >)NativeSignatures.Fetch("CGameRules::TerminateRound");
@@ -452,6 +460,55 @@ internal static class GameFunctions
                 CheckPtr(pThis, nameof(pThis));
                 var pRemoveWeapons = (delegate* unmanaged< nint, void >)GetVirtualFunction(pThis, RemoveWeaponsOffset);
                 pRemoveWeapons(pThis);
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void CEntityInstance_AcceptInput( nint pEntity, string input, nint pActivator, nint pCaller, nint pVariant, int outputID )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(pEntity, nameof(pEntity));
+                CheckPtr(pActivator, nameof(pActivator));
+                CheckPtr(pCaller, nameof(pCaller));
+                CheckPtr(pVariant, nameof(pVariant));
+
+                StringAlloc.CreateCString(input, pInput =>
+                {
+                    pCEntityInstaceAcceptInput(pEntity, pInput, pActivator, pCaller, pVariant);
+                });
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static void AddEntityIOEvent( nint pEntity, string input, nint pActivator, nint pCaller, nint pVariant, float delay )
+    {
+        try
+        {
+            unsafe
+            {
+                CheckPtr(pEntity, nameof(pEntity));
+                CheckPtr(pActivator, nameof(pActivator));
+                CheckPtr(pCaller, nameof(pCaller));
+                CheckPtr(pVariant, nameof(pVariant));
+
+                if (entitySystemPtr == 0)
+                    entitySystemPtr = NativeEntitySystem.GetEntitySystem();
+
+                StringAlloc.CreateCString(input, pInput =>
+                {
+                    pCEntitySystemAddEntityIOEvent(entitySystemPtr, pEntity, pInput, pActivator, pCaller, pVariant, delay, 0, 0);
+                });
             }
         }
         catch (Exception e)

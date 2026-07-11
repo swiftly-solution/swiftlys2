@@ -33,8 +33,6 @@
 typedef void (*CBaseEntity_DispatchSpawn)(void*, void*);
 typedef void (*UTIL_Remove)(void*);
 typedef void* (*UTIL_CreateEntityByName)(const char*, int);
-typedef void (*CEntityInstance_AcceptInput)(void*, const char*, void*, void*, variant_t*, int);
-typedef void (*CEntitySystem_AddEntityIOEvent)(void*, void*, const char*, void*, void*, variant_t*, float, int, void*, void*);
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
@@ -144,62 +142,6 @@ void* CEntSystem::CreateEntityByName(const char* name)
     static auto sig = gamedata->GetSignatures()->Fetch("UTIL::CreateEntityByName");
 
     return reinterpret_cast<UTIL_CreateEntityByName>(sig)(name, -1);
-}
-
-void CEntSystem::AcceptInput(void* pEntity, const char* input, void* activator, void* caller, InputType value, int outputID)
-{
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
-    variant_t var;
-    if (std::holds_alternative<int32_t>(value))
-        var = std::get<int32_t>(value);
-    else if (std::holds_alternative<uint32_t>(value))
-        var = std::get<uint32_t>(value);
-    else if (std::holds_alternative<int64_t>(value))
-        var = (int64)std::get<int64_t>(value);
-    else if (std::holds_alternative<uint64_t>(value))
-        var = (uint64)std::get<uint64_t>(value);
-    else if (std::holds_alternative<float>(value))
-        var = std::get<float>(value);
-    else if (std::holds_alternative<double>(value))
-        var = std::get<double>(value);
-    else if (std::holds_alternative<bool>(value))
-        var = std::get<bool>(value);
-    else if (std::holds_alternative<const char*>(value))
-        var = std::get<const char*>(value);
-    else
-        var = 0;
-
-    static auto sig = gamedata->GetSignatures()->Fetch("CEntityInstance::AcceptInput");
-    reinterpret_cast<CEntityInstance_AcceptInput>(sig)(pEntity, input, activator, caller, &var, outputID);
-}
-
-void CEntSystem::AddEntityIOEvent(void* pEntity, const char* input, void* activator, void* caller, InputType value, float delay)
-{
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-
-    variant_t var;
-    if (std::holds_alternative<int32_t>(value))
-        var = std::get<int32_t>(value);
-    else if (std::holds_alternative<uint32_t>(value))
-        var = std::get<uint32_t>(value);
-    else if (std::holds_alternative<int64_t>(value))
-        var = (int64)std::get<int64_t>(value);
-    else if (std::holds_alternative<uint64_t>(value))
-        var = (uint64)std::get<uint64_t>(value);
-    else if (std::holds_alternative<float>(value))
-        var = std::get<float>(value);
-    else if (std::holds_alternative<double>(value))
-        var = std::get<double>(value);
-    else if (std::holds_alternative<bool>(value))
-        var = std::get<bool>(value);
-    else if (std::holds_alternative<const char*>(value))
-        var = std::get<const char*>(value);
-    else
-        var = 0;
-
-    static auto sig = gamedata->GetSignatures()->Fetch("CEntitySystem::AddEntityIOEvent");
-    reinterpret_cast<CEntitySystem_AddEntityIOEvent>(sig)(g_pGameEntitySystem, pEntity, input, activator, caller, &var, delay, 0, nullptr, nullptr);
 }
 
 void CEntSystem::AddEntityListener(IEntityListener* listener)

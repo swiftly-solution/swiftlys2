@@ -4,13 +4,12 @@ using SwiftlyS2.Core.Extensions;
 using SwiftlyS2.Shared.GameHooks;
 using SwiftlyS2.Shared.Misc;
 using SwiftlyS2.Shared.Natives;
-using SwiftlyS2.Shared.SchemaDefinitions;
 
 namespace SwiftlyS2.Core.GameHooks;
 
 internal static partial class GameHooksPublisher
 {
-    private delegate void CEntityIdentityAcceptInput( nint pEntityIdentity, nint inputName, nint activator, nint caller, nint variant, int outputId, nint unk1, nint unk2 );
+    private delegate void CEntityIdentityAcceptInput( nint pEntityIdentity, nint inputName, nint activator, nint caller, nint variant, nint unk1, nint unk2 );
 
     internal static unsafe Guid HookAcceptInput()
     {
@@ -23,7 +22,7 @@ internal static partial class GameHooksPublisher
         var fn = _core.Memory.GetUnmanagedFunctionByAddress<CEntityIdentityAcceptInput>(address);
         return fn.AddHook(next =>
         {
-            return ( pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2 ) =>
+            return ( pEntityIdentity, pInputName, pActivator, pCaller, pVariant, unk1, unk2 ) =>
             {
                 var dummy = _entityIdentityPool.Rent();
                 dummy.DangerousSetHandle(pEntityIdentity);
@@ -32,7 +31,7 @@ internal static partial class GameHooksPublisher
                 if (!entityIdentity.IsValid || !entityIdentity.EntityInstance.IsValid)
                 {
                     _entityIdentityPool.Return(entityIdentity);
-                    next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
+                    next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, unk1, unk2);
                     return;
                 }
 
@@ -49,7 +48,7 @@ internal static partial class GameHooksPublisher
                         Activator = activator,
                         Caller = caller,
                         _variant = (CVariant<CVariantDefaultAllocator>*)pVariant,
-                        OutputId = outputId
+                        OutputId = 0
                     }
                 };
 
@@ -81,7 +80,7 @@ internal static partial class GameHooksPublisher
                     return;
                 }
 
-                next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, outputId, unk1, unk2);
+                next()(pEntityIdentity, pInputName, pActivator, pCaller, pVariant, unk1, unk2);
 
                 var postCtx = new AcceptInputEntityPostContext { Params = preCtx.Params };
                 InvokeAcceptInputPost(ref postCtx);

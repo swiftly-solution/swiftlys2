@@ -50,7 +50,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
 
         using var variant = new CVariant<CVariantDefaultAllocator>(value);
 
-        NativeEntitySystem.AcceptInput(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, new nint(&variant), outputID);
+        GameFunctions.CEntityInstance_AcceptInput(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, new nint(&variant), outputID);
     }
 
     public Task AcceptInputAsync<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0 )
@@ -65,7 +65,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
 
         using var variant = new CVariant<CVariantDefaultAllocator>(value);
 
-        NativeEntitySystem.AddEntityIOEvent(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, (nint)(&variant), delay);
+        GameFunctions.AddEntityIOEvent(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, (nint)(&variant), delay);
     }
 
     public Task AddEntityIOEventAsync<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, float delay = 0f )

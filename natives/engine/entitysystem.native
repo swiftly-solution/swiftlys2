@@ -3,7 +3,5 @@ class EntitySystem
 sync void Spawn = ptr entity, ptr keyvalues
 sync void Despawn = ptr entity
 ptr CreateEntityByName = string name
-sync void AcceptInput = ptr entity, string input, ptr activator, ptr caller, ptr value, int32 outputID
-sync void AddEntityIOEvent = ptr entity, string input, ptr activator, ptr caller, ptr value, float delay
 ptr GetEntitySystem = void
 bool IsValid = void
