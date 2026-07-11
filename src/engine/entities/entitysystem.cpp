@@ -32,7 +32,6 @@
 
 typedef void (*CBaseEntity_DispatchSpawn)(void*, void*);
 typedef void (*UTIL_Remove)(void*);
-typedef void* (*UTIL_CreateEntityByName)(const char*, int);
 
 CGameEntitySystem* g_pGameEntitySystem = nullptr;
 
@@ -134,14 +133,6 @@ void CEntSystem::Despawn(void* pEntity)
     static auto sig = gamedata->GetSignatures()->Fetch("UTIL::Remove");
 
     reinterpret_cast<UTIL_Remove>(sig)(pEntity);
-}
-
-void* CEntSystem::CreateEntityByName(const char* name)
-{
-    static auto gamedata = g_ifaceService.FetchInterface<IGameDataManager>(GAMEDATA_INTERFACE_VERSION);
-    static auto sig = gamedata->GetSignatures()->Fetch("UTIL::CreateEntityByName");
-
-    return reinterpret_cast<UTIL_CreateEntityByName>(sig)(name, -1);
 }
 
 void CEntSystem::AddEntityListener(IEntityListener* listener)

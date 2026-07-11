@@ -36,21 +36,36 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
 
     public T CreateEntity<T>() where T : class, ISchemaClass<T>
     {
+        return CreateEntity<T>(-1);
+    }
+
+    public T CreateEntity<T>( int forcedIndex ) where T : class, ISchemaClass<T>
+    {
         ThrowIfEntitySystemInvalid();
         return string.IsNullOrWhiteSpace(T.ClassName)
             ? throw new ArgumentException($"Can't create entity with class {typeof(T).Name}, which doesn't have a designer name.")
-            : CreateEntityByDesignerName<T>(T.ClassName);
+            : CreateEntityByDesignerName<T>(T.ClassName, forcedIndex);
     }
 
     public T CreateEntityByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>
     {
-        return (CreateEntityByDesignerName(designerName) as T)!;
+        return CreateEntityByDesignerName<T>(designerName, -1);
+    }
+
+    public T CreateEntityByDesignerName<T>( string designerName, int forcedIndex ) where T : class, ISchemaClass<T>
+    {
+        return (CreateEntityByDesignerName(designerName, forcedIndex) as T)!;
     }
 
     public CEntityInstance CreateEntityByDesignerName( string designerName )
     {
+        return CreateEntityByDesignerName(designerName, -1);
+    }
+
+    public CEntityInstance CreateEntityByDesignerName( string designerName, int forcedIndex )
+    {
         ThrowIfEntitySystemInvalid();
-        var handle = NativeEntitySystem.CreateEntityByName(designerName);
+        var handle = GameFunctions.CreateEntityByName(designerName, forcedIndex);
         if (handle == nint.Zero) throw new ArgumentException($"Failed to create entity by designer name: {designerName}, probably invalid designer name.");
 
         var entity = EntityManager.OnEntityCreated(handle);

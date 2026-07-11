@@ -31,6 +31,17 @@ public interface IEntitySystemService
     /// <exception cref="InvalidOperationException">Thrown when called too early that entity system is not valid at this moment.</exception>
     public T CreateEntity<T>() where T : class, ISchemaClass<T>;
 
+
+    /// <summary>
+    /// Create an entity by class.
+    /// </summary>
+    /// <typeparam name="T">Entity type.</typeparam>
+    /// <param name="forcedIndex">Forced entity index.</param>
+    /// <returns>Created entity.</returns>
+    /// <exception cref="ArgumentException">Thrown when failed to create entity by class or class doesn't have a designer name.</exception>
+    /// <exception cref="InvalidOperationException">Thrown when called too early that entity system is not valid at this moment.</exception>
+    public T CreateEntity<T>( int forcedIndex ) where T : class, ISchemaClass<T>;
+
     /// <summary>
     /// Create an entity by designer name.
     /// </summary>
@@ -40,6 +51,17 @@ public interface IEntitySystemService
     /// <exception cref="ArgumentException">Thrown when failed to create entity by designer name or designer name is invalid.</exception>
     /// <exception cref="InvalidOperationException">Thrown when called too early that entity system is not valid at this moment.</exception>
     public T CreateEntityByDesignerName<T>( string designerName ) where T : class, ISchemaClass<T>;
+
+    /// <summary>
+    /// Create an entity by designer name.
+    /// </summary>
+    /// <typeparam name="T">Entity type.</typeparam>
+    /// <param name="designerName">Designer name.</param>
+    /// <param name="forcedIndex">Forced entity index.</param>
+    /// <returns>Created entity.</returns>
+    /// <exception cref="ArgumentException">Thrown when failed to create entity by designer name or designer name is invalid.</exception>
+    /// <exception cref="InvalidOperationException">Thrown when called too early that entity system is not valid at this moment.</exception>
+    public T CreateEntityByDesignerName<T>( string designerName, int forcedIndex ) where T : class, ISchemaClass<T>;
 
     /// <summary>
     /// Get a reference handle to the entity.

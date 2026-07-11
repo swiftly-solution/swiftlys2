@@ -33,17 +33,6 @@ internal static class NativeEntitySystem
         _Despawn(entity);
     }
 
-    private unsafe static delegate* unmanaged< byte*, nint > _CreateEntityByName;
-
-    public unsafe static nint CreateEntityByName( string name )
-    {
-        return StringAlloc.CreateCString(name, nameBufferPtr =>
-        {
-            var ret = _CreateEntityByName((byte*)nameBufferPtr);
-            return ret;
-        });
-    }
-
     private unsafe static delegate* unmanaged< nint > _GetEntitySystem;
 
     public unsafe static nint GetEntitySystem()

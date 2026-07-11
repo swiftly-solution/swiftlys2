@@ -30,8 +30,6 @@ public:
     virtual void Spawn(void* pEntity, void* pKeyValues) override;
     virtual void Despawn(void* pEntity) override;
 
-    virtual void* CreateEntityByName(const char* name) override;
-
     virtual void AddEntityListener(IEntityListener* listener) override;
     virtual void RemoveEntityListener(IEntityListener* listener) override;
 

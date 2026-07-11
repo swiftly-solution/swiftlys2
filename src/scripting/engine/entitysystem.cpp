@@ -34,12 +34,6 @@ void Bridge_EntitySystem_Despawn(void* pEntity)
     entsystem->Despawn(pEntity);
 }
 
-void* Bridge_EntitySystem_CreateEntityByName(const char* name)
-{
-    static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
-    return entsystem->CreateEntityByName(name);
-}
-
 void* Bridge_EntitySystem_GetEntitySystem()
 {
     static auto entsystem = g_ifaceService.FetchInterface<IEntitySystem>(ENTITYSYSTEM_INTERFACE_VERSION);
@@ -54,6 +48,5 @@ bool Bridge_EntitySystem_IsValid()
 
 DEFINE_NATIVE("EntitySystem.Spawn", Bridge_EntitySystem_Spawn);
 DEFINE_NATIVE("EntitySystem.Despawn", Bridge_EntitySystem_Despawn);
-DEFINE_NATIVE("EntitySystem.CreateEntityByName", Bridge_EntitySystem_CreateEntityByName);
 DEFINE_NATIVE("EntitySystem.GetEntitySystem", Bridge_EntitySystem_GetEntitySystem);
 DEFINE_NATIVE("EntitySystem.IsValid", Bridge_EntitySystem_IsValid);

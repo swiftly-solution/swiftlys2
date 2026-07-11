@@ -29,6 +29,7 @@ internal static class GameFunctions
     public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCDecoyProjectileEmitGrenade;
     public static unsafe delegate* unmanaged< Vector*, QAngle*, Vector*, Vector*, nint, uint, nint > pCMolotovProjectileEmitGrenade;
     public static unsafe delegate* unmanaged< nint, nint, nint, nint, nint, nint, float, nint, nint, void > pCEntitySystemAddEntityIOEvent;
+    public static unsafe delegate* unmanaged< nint, int, nint > pCreateEntityByName;
     public static unsafe delegate* unmanaged< nint, nint, nint, nint, nint, void > pCEntityInstaceAcceptInput;
     public static unsafe delegate* unmanaged< nint, int, void > pSwitchTeam;
     private static Lazy<int> CreateOffset( string name ) => new(() => NativeOffsets.Fetch(name));
@@ -99,6 +100,7 @@ internal static class GameFunctions
 
             pCEntitySystemAddEntityIOEvent = (delegate* unmanaged< nint, nint, nint, nint, nint, nint, float, nint, nint, void >)NativeSignatures.Fetch("CEntitySystem::AddEntityIOEvent");
             pCEntityInstaceAcceptInput = (delegate* unmanaged< nint, nint, nint, nint, nint, void >)NativeSignatures.Fetch("CEntityInstance::AcceptInput");
+            pCreateEntityByName = (delegate* unmanaged< nint, int, nint >)NativeSignatures.Fetch("UTIL::CreateEntityByName");
 
             if (IsWindows)
             {
@@ -126,6 +128,25 @@ internal static class GameFunctions
         catch (Exception e)
         {
             AnsiConsole.WriteException(e);
+        }
+    }
+
+    public static nint CreateEntityByName( string name, int forcedIndex = -1 )
+    {
+        try
+        {
+            unsafe
+            {
+                return StringAlloc.CreateCString(name, pName =>
+                {
+                    return pCreateEntityByName(pName, forcedIndex);
+                });
+            }
+        }
+        catch (Exception e)
+        {
+            AnsiConsole.WriteException(e);
+            return 0;
         }
     }
 
