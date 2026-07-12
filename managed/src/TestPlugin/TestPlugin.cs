@@ -497,7 +497,7 @@ public class TestPlugin : BasePlugin
         // CMsgSos
 
 
-        Core.NetMessage.HookServerMessage<CMsgSosStartSoundEvent>((msg) =>
+        Core.NetMessage.HookServerMessage<CMsgSosStartSoundEvent>(( msg ) =>
         {
             Console.WriteLine(msg.SoundeventHash);
             return HookResult.Continue;
@@ -614,8 +614,13 @@ public class TestPlugin : BasePlugin
     [Command("w")]
     public void TestCommand1( ICommandContext context )
     {
-        var player = context.Sender!;
-        player.PlayerPawn!.SetModel("agents/models/ctm_fbi/ctm_fbi_varianta.vmdl");
+        Core.Command.UnregisterCommand("biusef");
+    }
+
+    [Command("biusef")]
+    public void TestCommands2( ICommandContext context )
+    {
+        Console.WriteLine("hello");
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

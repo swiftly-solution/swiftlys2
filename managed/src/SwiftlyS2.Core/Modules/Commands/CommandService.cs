@@ -51,16 +51,13 @@ internal class CommandService : ICommandService, IDisposable
         lock (dispatchLock)
         {
             var resolvedName = aliasToOriginal.TryGetValue(commandName, out var original) ? original : commandName;
-            foreach (var pluginCallbacks in commandsByPlugin.Values)
+            var callbacks = commandsByPlugin.Values.SelectMany(x => x).OfType<CommandCallback>().ToList();
+            foreach (var cc in callbacks)
             {
-                foreach (var cb in pluginCallbacks)
+                var normalizedName = cc.RegisterRaw ? cc.CommandName : "sw_" + cc.CommandName;
+                if (string.Equals(normalizedName, resolvedName, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (cb is not CommandCallback cc) continue;
-                    var normalizedName = cc.RegisterRaw ? cc.CommandName : "sw_" + cc.CommandName;
-                    if (string.Equals(normalizedName, resolvedName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        cc.Invoke(playerId, args, originalCommandName, prefix, silent);
-                    }
+                    cc.Invoke(playerId, args, originalCommandName, prefix, silent);
                 }
             }
         }
@@ -148,7 +145,9 @@ internal class CommandService : ICommandService, IDisposable
         {
             _ = commandCallbacks.RemoveAll(callback =>
             {
-                if (callback is CommandCallback commandCallback && commandCallback.CommandName == commandName)
+                if (callback is CommandCallback commandCallback &&
+                    (commandCallback.CommandName.Equals(commandName, StringComparison.OrdinalIgnoreCase) ||
+                     ("sw_" + commandCallback.CommandName).Equals(commandName, StringComparison.OrdinalIgnoreCase)))
                 {
                     commandCallback.Dispose();
 
@@ -178,19 +177,16 @@ internal class CommandService : ICommandService, IDisposable
         lock (dispatchLock)
         {
             var stopOriginal = false;
-            foreach (var pluginCallbacks in commandsByPlugin.Values)
+            var callbacks = commandsByPlugin.Values.SelectMany(x => x).OfType<ClientCommandListenerCallback>().ToList();
+            foreach (var cc in callbacks)
             {
-                foreach (var cb in pluginCallbacks)
-                {
-                    if (cb is not ClientCommandListenerCallback cc) continue;
-                    var result = cc.Invoke(playerId, commandLine);
-                    if (result == HookResult.Stop)
-                        return (int)HookResult.Stop;
-                    if (result == HookResult.Handled)
-                        return (int)HookResult.Handled;
-                    if (result == HookResult.CancelOriginal)
-                        stopOriginal = true;
-                }
+                var result = cc.Invoke(playerId, commandLine);
+                if (result == HookResult.Stop)
+                    return (int)HookResult.Stop;
+                if (result == HookResult.Handled)
+                    return (int)HookResult.Handled;
+                if (result == HookResult.CancelOriginal)
+                    stopOriginal = true;
             }
             return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
         }
@@ -245,19 +241,16 @@ internal class CommandService : ICommandService, IDisposable
         lock (dispatchLock)
         {
             var stopOriginal = false;
-            foreach (var pluginCallbacks in commandsByPlugin.Values)
+            var callbacks = commandsByPlugin.Values.SelectMany(x => x).OfType<ClientChatListenerCallback>().ToList();
+            foreach (var cc in callbacks)
             {
-                foreach (var cb in pluginCallbacks)
-                {
-                    if (cb is not ClientChatListenerCallback cc) continue;
-                    var result = cc.Invoke(playerId, text, teamonly);
-                    if (result == HookResult.Stop)
-                        return (int)HookResult.Stop;
-                    if (result == HookResult.Handled)
-                        return (int)HookResult.Handled;
-                    if (result == HookResult.CancelOriginal)
-                        stopOriginal = true;
-                }
+                var result = cc.Invoke(playerId, text, teamonly);
+                if (result == HookResult.Stop)
+                    return (int)HookResult.Stop;
+                if (result == HookResult.Handled)
+                    return (int)HookResult.Handled;
+                if (result == HookResult.CancelOriginal)
+                    stopOriginal = true;
             }
             return stopOriginal ? (int)HookResult.CancelOriginal : (int)HookResult.Continue;
         }
