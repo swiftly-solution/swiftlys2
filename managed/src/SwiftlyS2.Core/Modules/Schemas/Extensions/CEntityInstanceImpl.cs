@@ -50,7 +50,7 @@ internal partial class CEntityInstanceImpl : CEntityInstance, IEquatable<CEntity
 
         using var variant = new CVariant<CVariantDefaultAllocator>(value);
 
-        GameFunctions.CEntityInstance_AcceptInput(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, new nint(&variant), outputID);
+        GameFunctions.CEntityInstance_AcceptInput(Address, input, activator?.Address ?? nint.Zero, caller?.Address ?? nint.Zero, (nint)(&variant), outputID);
     }
 
     public Task AcceptInputAsync<T>( string input, T? value, CEntityInstance? activator = null, CEntityInstance? caller = null, int outputID = 0 )

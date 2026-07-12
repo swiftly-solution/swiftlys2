@@ -57,16 +57,11 @@ internal class EntitySystemService : IEntitySystemService, IDisposable
         return (CreateEntityByDesignerName(designerName, forcedIndex) as T)!;
     }
 
-    public CEntityInstance CreateEntityByDesignerName( string designerName )
-    {
-        return CreateEntityByDesignerName(designerName, -1);
-    }
-
     public CEntityInstance CreateEntityByDesignerName( string designerName, int forcedIndex )
     {
         ThrowIfEntitySystemInvalid();
         var handle = GameFunctions.CreateEntityByName(designerName, forcedIndex);
-        if (handle == nint.Zero) throw new ArgumentException($"Failed to create entity by designer name: {designerName}, probably invalid designer name.");
+        if (handle == nint.Zero) throw new ArgumentException($"Failed to create entity by designer name: {designerName}, probably invalid designer name or the forced index is already used.");
 
         var entity = EntityManager.OnEntityCreated(handle);
         return entity;
