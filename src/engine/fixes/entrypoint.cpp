@@ -21,6 +21,8 @@
 #include <api/shared/plat.h>
 #include <api/interfaces/manager.h>
 
+#include <core/entrypoint.h>
+
 #include <public/filesystem.h>
 
 #include <fmt/format.h>
@@ -32,7 +34,9 @@ void StartFixes()
     auto filesystem = g_ifaceService.FetchInterface<IFileSystem>(FILESYSTEM_INTERFACE_VERSION);
 
     std::string csgo_path = fmt::format("{}{}csgo", Plat_GetGameDirectory(), WIN_LINUX("\\", "/"));
+    std::string swiftly_path = fmt::format("{}{}{}", csgo_path, WIN_LINUX("\\", "/"), g_SwiftlyCore.GetCorePath());
 
+    filesystem->RemoveSearchPath(swiftly_path.c_str(), "GAME");
     filesystem->RemoveSearchPaths("DEFAULT_WRITE_PATH");
     filesystem->AddSearchPath(csgo_path.c_str(), "DEFAULT_WRITE_PATH", PATH_ADD_TO_TAIL, SEARCH_PATH_PRIORITY_DEFAULT, 0);
 
