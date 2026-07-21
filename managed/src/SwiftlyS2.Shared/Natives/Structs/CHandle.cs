@@ -29,10 +29,9 @@ public struct CHandle<T>( uint raw ) : ICHandle where T : class, ISchemaClass<T>
         readonly get {
             unsafe
             {
-                if (!IsValid) return null;
-
                 var ent = EntityManager.GetEntityByIndex(EntityIndex);
-                if (ent == null) return null;
+                if (ent == null || ent.Identity == null) return null;
+                if (ent.Identity.EntityHandle.Raw != Raw) return null;
 
                 return ent is T entity ? entity : T.From(ent.Address);
             }
@@ -40,7 +39,7 @@ public struct CHandle<T>( uint raw ) : ICHandle where T : class, ISchemaClass<T>
         set {
             if (value == null) Raw = 0xFFFFFFFF;
             else if (value is not CEntityInstance ent) throw new InvalidOperationException($"Value must be of type {typeof(T).Name} which implements CEntityInstance.");
-            else Raw = ent.Entity == null ? 0xFFFFFFFF : ent.Entity.EntityHandle.Raw;
+            else Raw = ent.Identity == null ? 0xFFFFFFFF : ent.Identity.EntityHandle.Raw;
         }
     }
 
