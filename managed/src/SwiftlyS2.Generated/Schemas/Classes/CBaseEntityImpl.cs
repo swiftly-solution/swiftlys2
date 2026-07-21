@@ -79,12 +79,12 @@ internal partial class CBaseEntityImpl : CEntityInstanceImpl, CBaseEntity
     }
     private static nint? _IsSteadyStateOffset;
 
-    public SchemaUntypedField IsSteadyState
+    public ref CBitVec64 IsSteadyState
     {
         get
         {
             _IsSteadyStateOffset = _IsSteadyStateOffset ?? Schema.GetOffset(0x9DC483B84626D6B4);
-            return new SchemaUntypedField(_Handle + _IsSteadyStateOffset!.Value);
+            return ref _Handle.AsRef<CBitVec64>(_IsSteadyStateOffset!.Value);
         }
     }
     private static nint? _LastNetworkChangeOffset;

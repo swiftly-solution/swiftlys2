@@ -23,14 +23,11 @@ public partial interface CBaseButton : CBaseToggle, ISchemaClass<CBaseButton>
 
     public locksound_t Ls { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField UseSound { get; }
+    public ref CGameSoundEventName UseSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField LockedSound { get; }
+    public ref CGameSoundEventName LockedSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField UnlockedSound { get; }
+    public ref CGameSoundEventName UnlockedSound { get; }
 
     public string OverrideAnticipationName { get; set; }
 

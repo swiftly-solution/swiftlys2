@@ -35,17 +35,13 @@ public partial interface CBaseDoor : CBaseToggle, ISchemaClass<CBaseDoor>
 
     public ref float BlockDamage { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField NoiseMoving { get; }
+    public ref CGameSoundEventName NoiseMoving { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField NoiseArrived { get; }
+    public ref CGameSoundEventName NoiseArrived { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField NoiseMovingClosed { get; }
+    public ref CGameSoundEventName NoiseMovingClosed { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField NoiseArrivedClosed { get; }
+    public ref CGameSoundEventName NoiseArrivedClosed { get; }
 
     public string ChainTarget { get; set; }
 

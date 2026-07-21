@@ -38,8 +38,7 @@ public partial interface CFuncRotating : CBaseModelEntity, ISchemaClass<CFuncRot
 
     public ref float BlockDamage { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField NoiseRunning { get; }
+    public ref CGameSoundEventName NoiseRunning { get; }
 
     public ref bool Reversed { get; }
 

@@ -47,20 +47,15 @@ public partial interface CFuncTrackTrain : CBaseModelEntity, ISchemaClass<CFuncT
 
     public ref float Dir { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundMove { get; }
+    public ref CGameSoundEventName SoundMove { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundMovePing { get; }
+    public ref CGameSoundEventName SoundMovePing { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundStart { get; }
+    public ref CGameSoundEventName SoundStart { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundStop { get; }
+    public ref CGameSoundEventName SoundStop { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField StrPathTarget { get; }
+    public ref CGameSoundEventName StrPathTarget { get; }
 
     public ref float MoveSoundMinDuration { get; }
 

@@ -63,12 +63,12 @@ internal partial class CMessageImpl : CPointEntityImpl, CMessage
     }
     private static nint? _NoiseOffset;
 
-    public SchemaUntypedField Noise
+    public ref CGameSoundEventName Noise
     {
         get
         {
             _NoiseOffset = _NoiseOffset ?? Schema.GetOffset(0xCCCF4991F22B8CC);
-            return new SchemaUntypedField(_Handle + _NoiseOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseOffset!.Value);
         }
     }
     private static nint? _OnShowMessageOffset;

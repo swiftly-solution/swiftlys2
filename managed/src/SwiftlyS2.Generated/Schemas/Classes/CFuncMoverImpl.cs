@@ -323,72 +323,72 @@ internal partial class CFuncMoverImpl : CBaseModelEntityImpl, CFuncMover
     }
     private static nint? _StartForwardSoundOffset;
 
-    public SchemaUntypedField StartForwardSound
+    public ref CGameSoundEventName StartForwardSound
     {
         get
         {
             _StartForwardSoundOffset = _StartForwardSoundOffset ?? Schema.GetOffset(0x320E8B69CBDFD56B);
-            return new SchemaUntypedField(_Handle + _StartForwardSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StartForwardSoundOffset!.Value);
         }
     }
     private static nint? _LoopForwardSoundOffset;
 
-    public SchemaUntypedField LoopForwardSound
+    public ref CGameSoundEventName LoopForwardSound
     {
         get
         {
             _LoopForwardSoundOffset = _LoopForwardSoundOffset ?? Schema.GetOffset(0x320E8B69C875F2F7);
-            return new SchemaUntypedField(_Handle + _LoopForwardSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_LoopForwardSoundOffset!.Value);
         }
     }
     private static nint? _StopForwardSoundOffset;
 
-    public SchemaUntypedField StopForwardSound
+    public ref CGameSoundEventName StopForwardSound
     {
         get
         {
             _StopForwardSoundOffset = _StopForwardSoundOffset ?? Schema.GetOffset(0x320E8B69B72A6EC9);
-            return new SchemaUntypedField(_Handle + _StopForwardSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StopForwardSoundOffset!.Value);
         }
     }
     private static nint? _StartReverseSoundOffset;
 
-    public SchemaUntypedField StartReverseSound
+    public ref CGameSoundEventName StartReverseSound
     {
         get
         {
             _StartReverseSoundOffset = _StartReverseSoundOffset ?? Schema.GetOffset(0x320E8B6927D9C282);
-            return new SchemaUntypedField(_Handle + _StartReverseSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StartReverseSoundOffset!.Value);
         }
     }
     private static nint? _LoopReverseSoundOffset;
 
-    public SchemaUntypedField LoopReverseSound
+    public ref CGameSoundEventName LoopReverseSound
     {
         get
         {
             _LoopReverseSoundOffset = _LoopReverseSoundOffset ?? Schema.GetOffset(0x320E8B69FC2C15CE);
-            return new SchemaUntypedField(_Handle + _LoopReverseSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_LoopReverseSoundOffset!.Value);
         }
     }
     private static nint? _StopReverseSoundOffset;
 
-    public SchemaUntypedField StopReverseSound
+    public ref CGameSoundEventName StopReverseSound
     {
         get
         {
             _StopReverseSoundOffset = _StopReverseSoundOffset ?? Schema.GetOffset(0x320E8B69B0EFF4BC);
-            return new SchemaUntypedField(_Handle + _StopReverseSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StopReverseSoundOffset!.Value);
         }
     }
     private static nint? _ArriveAtDestinationSoundOffset;
 
-    public SchemaUntypedField ArriveAtDestinationSound
+    public ref CGameSoundEventName ArriveAtDestinationSound
     {
         get
         {
             _ArriveAtDestinationSoundOffset = _ArriveAtDestinationSoundOffset ?? Schema.GetOffset(0x320E8B696350F6A0);
-            return new SchemaUntypedField(_Handle + _ArriveAtDestinationSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_ArriveAtDestinationSoundOffset!.Value);
         }
     }
     private static nint? _OnMovementEndOffset;

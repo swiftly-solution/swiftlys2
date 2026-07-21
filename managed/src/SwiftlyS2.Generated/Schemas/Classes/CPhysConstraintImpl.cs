@@ -109,12 +109,12 @@ internal partial class CPhysConstraintImpl : CLogicalEntityImpl, CPhysConstraint
     }
     private static nint? _BreakSoundOffset;
 
-    public SchemaUntypedField BreakSound
+    public ref CGameSoundEventName BreakSound
     {
         get
         {
             _BreakSoundOffset = _BreakSoundOffset ?? Schema.GetOffset(0xB17225456CFE49F7);
-            return new SchemaUntypedField(_Handle + _BreakSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_BreakSoundOffset!.Value);
         }
     }
     private static nint? _ForceLimitOffset;

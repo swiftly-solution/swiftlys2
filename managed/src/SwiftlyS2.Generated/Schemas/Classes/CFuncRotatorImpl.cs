@@ -333,32 +333,32 @@ internal partial class CFuncRotatorImpl : CBaseModelEntityImpl, CFuncRotator
     }
     private static nint? _StartSoundOffset;
 
-    public SchemaUntypedField StartSound
+    public ref CGameSoundEventName StartSound
     {
         get
         {
             _StartSoundOffset = _StartSoundOffset ?? Schema.GetOffset(0x73DA1BB9F9B2297E);
-            return new SchemaUntypedField(_Handle + _StartSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StartSoundOffset!.Value);
         }
     }
     private static nint? _LoopSoundOffset;
 
-    public SchemaUntypedField LoopSound
+    public ref CGameSoundEventName LoopSound
     {
         get
         {
             _LoopSoundOffset = _LoopSoundOffset ?? Schema.GetOffset(0x73DA1BB99B98C092);
-            return new SchemaUntypedField(_Handle + _LoopSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_LoopSoundOffset!.Value);
         }
     }
     private static nint? _StopSoundOffset;
 
-    public SchemaUntypedField StopSound
+    public ref CGameSoundEventName StopSound
     {
         get
         {
             _StopSoundOffset = _StopSoundOffset ?? Schema.GetOffset(0x73DA1BB9136BDCCC);
-            return new SchemaUntypedField(_Handle + _StopSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StopSoundOffset!.Value);
         }
     }
     private static nint? _TargetAngleOffset;

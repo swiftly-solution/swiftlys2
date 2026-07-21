@@ -47,32 +47,23 @@ public partial interface CBasePropDoor : CDynamicProp, ISchemaClass<CBasePropDoo
 
     public ref float Speed { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundMoving { get; }
+    public ref CGameSoundEventName SoundMoving { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundOpen { get; }
+    public ref CGameSoundEventName SoundOpen { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundClose { get; }
+    public ref CGameSoundEventName SoundClose { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundLock { get; }
+    public ref CGameSoundEventName SoundLock { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundUnlock { get; }
+    public ref CGameSoundEventName SoundUnlock { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundLatch { get; }
+    public ref CGameSoundEventName SoundLatch { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundPound { get; }
+    public ref CGameSoundEventName SoundPound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundJiggle { get; }
+    public ref CGameSoundEventName SoundJiggle { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundLockedAnim { get; }
+    public ref CGameSoundEventName SoundLockedAnim { get; }
 
     public ref int NumCloseAttempts { get; }
 

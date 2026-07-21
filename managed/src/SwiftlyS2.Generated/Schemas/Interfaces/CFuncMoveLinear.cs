@@ -21,11 +21,9 @@ public partial interface CFuncMoveLinear : CBaseToggle, ISchemaClass<CFuncMoveLi
 
     public ref Vector MoveDirParentSpace { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundStart { get; }
+    public ref CGameSoundEventName SoundStart { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundStop { get; }
+    public ref CGameSoundEventName SoundStop { get; }
 
     public string CurrentSound { get; set; }
 

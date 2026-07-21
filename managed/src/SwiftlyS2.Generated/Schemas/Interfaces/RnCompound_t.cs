@@ -15,7 +15,7 @@ public partial interface RnCompound_t : ISchemaClass<RnCompound_t>
     static string? ISchemaClass<RnCompound_t>.ClassName => null;
 
 
-    public ref CUtlVector<SchemaUntypedField> Spheres { get; }
+    public ref CUtlVector<RnSphere_t> Spheres { get; }
 
     public ref CUtlVector<RnCapsule_t> Capsules { get; }
 

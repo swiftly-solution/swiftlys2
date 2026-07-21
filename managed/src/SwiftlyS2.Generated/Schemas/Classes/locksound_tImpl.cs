@@ -18,22 +18,22 @@ internal partial class locksound_tImpl : SchemaClass, locksound_t
 
     private static nint? _LockedSoundOffset;
 
-    public SchemaUntypedField LockedSound
+    public ref CGameSoundEventName LockedSound
     {
         get
         {
             _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0xDAD0AE229881D7AB);
-            return new SchemaUntypedField(_Handle + _LockedSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_LockedSoundOffset!.Value);
         }
     }
     private static nint? _UnlockedSoundOffset;
 
-    public SchemaUntypedField UnlockedSound
+    public ref CGameSoundEventName UnlockedSound
     {
         get
         {
             _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0xDAD0AE227EE88276);
-            return new SchemaUntypedField(_Handle + _UnlockedSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_UnlockedSoundOffset!.Value);
         }
     }
     private static nint? _FlwaitSoundOffset;

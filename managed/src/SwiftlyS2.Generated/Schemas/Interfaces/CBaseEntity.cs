@@ -27,8 +27,7 @@ public partial interface CBaseEntity : CEntityInstance, ISchemaClass<CBaseEntity
 
     public ref bool DisabledContextThinks { get; }
 
-    // CTypedBitVec< 64 >
-    public SchemaUntypedField IsSteadyState { get; }
+    public ref CBitVec64 IsSteadyState { get; }
 
     public ref float LastNetworkChange { get; }
 

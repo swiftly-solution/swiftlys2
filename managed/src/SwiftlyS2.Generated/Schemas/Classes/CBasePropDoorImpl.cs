@@ -178,92 +178,92 @@ internal partial class CBasePropDoorImpl : CDynamicPropImpl, CBasePropDoor
     }
     private static nint? _SoundMovingOffset;
 
-    public SchemaUntypedField SoundMoving
+    public ref CGameSoundEventName SoundMoving
     {
         get
         {
             _SoundMovingOffset = _SoundMovingOffset ?? Schema.GetOffset(0x140EA8BE096B0232);
-            return new SchemaUntypedField(_Handle + _SoundMovingOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundMovingOffset!.Value);
         }
     }
     private static nint? _SoundOpenOffset;
 
-    public SchemaUntypedField SoundOpen
+    public ref CGameSoundEventName SoundOpen
     {
         get
         {
             _SoundOpenOffset = _SoundOpenOffset ?? Schema.GetOffset(0x140EA8BE736F2FD4);
-            return new SchemaUntypedField(_Handle + _SoundOpenOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundOpenOffset!.Value);
         }
     }
     private static nint? _SoundCloseOffset;
 
-    public SchemaUntypedField SoundClose
+    public ref CGameSoundEventName SoundClose
     {
         get
         {
             _SoundCloseOffset = _SoundCloseOffset ?? Schema.GetOffset(0x140EA8BE25C06648);
-            return new SchemaUntypedField(_Handle + _SoundCloseOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundCloseOffset!.Value);
         }
     }
     private static nint? _SoundLockOffset;
 
-    public SchemaUntypedField SoundLock
+    public ref CGameSoundEventName SoundLock
     {
         get
         {
             _SoundLockOffset = _SoundLockOffset ?? Schema.GetOffset(0x140EA8BE79ED369B);
-            return new SchemaUntypedField(_Handle + _SoundLockOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundLockOffset!.Value);
         }
     }
     private static nint? _SoundUnlockOffset;
 
-    public SchemaUntypedField SoundUnlock
+    public ref CGameSoundEventName SoundUnlock
     {
         get
         {
             _SoundUnlockOffset = _SoundUnlockOffset ?? Schema.GetOffset(0x140EA8BE784A9850);
-            return new SchemaUntypedField(_Handle + _SoundUnlockOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundUnlockOffset!.Value);
         }
     }
     private static nint? _SoundLatchOffset;
 
-    public SchemaUntypedField SoundLatch
+    public ref CGameSoundEventName SoundLatch
     {
         get
         {
             _SoundLatchOffset = _SoundLatchOffset ?? Schema.GetOffset(0x140EA8BE1128D286);
-            return new SchemaUntypedField(_Handle + _SoundLatchOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundLatchOffset!.Value);
         }
     }
     private static nint? _SoundPoundOffset;
 
-    public SchemaUntypedField SoundPound
+    public ref CGameSoundEventName SoundPound
     {
         get
         {
             _SoundPoundOffset = _SoundPoundOffset ?? Schema.GetOffset(0x140EA8BE100E3D8E);
-            return new SchemaUntypedField(_Handle + _SoundPoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundPoundOffset!.Value);
         }
     }
     private static nint? _SoundJiggleOffset;
 
-    public SchemaUntypedField SoundJiggle
+    public ref CGameSoundEventName SoundJiggle
     {
         get
         {
             _SoundJiggleOffset = _SoundJiggleOffset ?? Schema.GetOffset(0x140EA8BEA6C5140C);
-            return new SchemaUntypedField(_Handle + _SoundJiggleOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundJiggleOffset!.Value);
         }
     }
     private static nint? _SoundLockedAnimOffset;
 
-    public SchemaUntypedField SoundLockedAnim
+    public ref CGameSoundEventName SoundLockedAnim
     {
         get
         {
             _SoundLockedAnimOffset = _SoundLockedAnimOffset ?? Schema.GetOffset(0x140EA8BEF4D24043);
-            return new SchemaUntypedField(_Handle + _SoundLockedAnimOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundLockedAnimOffset!.Value);
         }
     }
     private static nint? _NumCloseAttemptsOffset;

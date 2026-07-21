@@ -6,7 +6,7 @@ using System.Text;
 namespace SwiftlyS2.Shared.Natives;
 
 [StructLayout(LayoutKind.Sequential, Size = 8)]
-public struct CUtlString
+public struct CGameSoundEventName
 {
 
     private nint _ptr;
@@ -16,7 +16,7 @@ public struct CUtlString
         set => Set(value);
     }
 
-    public CUtlString( string str )
+    public CGameSoundEventName( string str )
     {
         Set(str);
     }
@@ -52,6 +52,6 @@ public struct CUtlString
 
     }
 
-    public static implicit operator string( CUtlString str ) => str.Value;
-    public static implicit operator CUtlString( string str ) => new(str);
+    public static implicit operator string( CGameSoundEventName str ) => str.Value;
+    public static implicit operator CGameSoundEventName( string str ) => new(str);
 }

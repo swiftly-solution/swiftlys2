@@ -73,26 +73,19 @@ public partial interface CFuncMover : CBaseModelEntity, ISchemaClass<CFuncMover>
 
     public ref float BeginStopT { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField StartForwardSound { get; }
+    public ref CGameSoundEventName StartForwardSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField LoopForwardSound { get; }
+    public ref CGameSoundEventName LoopForwardSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField StopForwardSound { get; }
+    public ref CGameSoundEventName StopForwardSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField StartReverseSound { get; }
+    public ref CGameSoundEventName StartReverseSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField LoopReverseSound { get; }
+    public ref CGameSoundEventName LoopReverseSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField StopReverseSound { get; }
+    public ref CGameSoundEventName StopReverseSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField ArriveAtDestinationSound { get; }
+    public ref CGameSoundEventName ArriveAtDestinationSound { get; }
 
     public ref CEntityIOOutput OnMovementEnd { get; }
 

@@ -15,11 +15,9 @@ public partial interface CBasePlatTrain : CBaseToggle, ISchemaClass<CBasePlatTra
     static string? ISchemaClass<CBasePlatTrain>.ClassName => null;
 
 
-    // CGameSoundEventName
-    public SchemaUntypedField NoiseMoving { get; }
+    public ref CGameSoundEventName NoiseMoving { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField NoiseArrived { get; }
+    public ref CGameSoundEventName NoiseArrived { get; }
 
     public ref float Volume { get; }
 

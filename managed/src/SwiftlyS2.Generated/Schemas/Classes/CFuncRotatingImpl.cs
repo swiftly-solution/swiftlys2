@@ -128,12 +128,12 @@ internal partial class CFuncRotatingImpl : CBaseModelEntityImpl, CFuncRotating
     }
     private static nint? _NoiseRunningOffset;
 
-    public SchemaUntypedField NoiseRunning
+    public ref CGameSoundEventName NoiseRunning
     {
         get
         {
             _NoiseRunningOffset = _NoiseRunningOffset ?? Schema.GetOffset(0x1A29EA943C33F758);
-            return new SchemaUntypedField(_Handle + _NoiseRunningOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseRunningOffset!.Value);
         }
     }
     private static nint? _ReversedOffset;

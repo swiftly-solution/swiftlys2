@@ -118,42 +118,42 @@ internal partial class CBaseDoorImpl : CBaseToggleImpl, CBaseDoor
     }
     private static nint? _NoiseMovingOffset;
 
-    public SchemaUntypedField NoiseMoving
+    public ref CGameSoundEventName NoiseMoving
     {
         get
         {
             _NoiseMovingOffset = _NoiseMovingOffset ?? Schema.GetOffset(0x798B70E7415AB84B);
-            return new SchemaUntypedField(_Handle + _NoiseMovingOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseMovingOffset!.Value);
         }
     }
     private static nint? _NoiseArrivedOffset;
 
-    public SchemaUntypedField NoiseArrived
+    public ref CGameSoundEventName NoiseArrived
     {
         get
         {
             _NoiseArrivedOffset = _NoiseArrivedOffset ?? Schema.GetOffset(0x798B70E7D2CDE47A);
-            return new SchemaUntypedField(_Handle + _NoiseArrivedOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseArrivedOffset!.Value);
         }
     }
     private static nint? _NoiseMovingClosedOffset;
 
-    public SchemaUntypedField NoiseMovingClosed
+    public ref CGameSoundEventName NoiseMovingClosed
     {
         get
         {
             _NoiseMovingClosedOffset = _NoiseMovingClosedOffset ?? Schema.GetOffset(0x798B70E7ED56FC0F);
-            return new SchemaUntypedField(_Handle + _NoiseMovingClosedOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseMovingClosedOffset!.Value);
         }
     }
     private static nint? _NoiseArrivedClosedOffset;
 
-    public SchemaUntypedField NoiseArrivedClosed
+    public ref CGameSoundEventName NoiseArrivedClosed
     {
         get
         {
             _NoiseArrivedClosedOffset = _NoiseArrivedClosedOffset ?? Schema.GetOffset(0x798B70E78637F9A6);
-            return new SchemaUntypedField(_Handle + _NoiseArrivedClosedOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_NoiseArrivedClosedOffset!.Value);
         }
     }
     private static nint? _ChainTargetOffset;

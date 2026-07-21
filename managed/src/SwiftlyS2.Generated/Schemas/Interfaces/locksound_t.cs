@@ -15,11 +15,9 @@ public partial interface locksound_t : ISchemaClass<locksound_t>
     static string? ISchemaClass<locksound_t>.ClassName => null;
 
 
-    // CGameSoundEventName
-    public SchemaUntypedField LockedSound { get; }
+    public ref CGameSoundEventName LockedSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField UnlockedSound { get; }
+    public ref CGameSoundEventName UnlockedSound { get; }
 
     public GameTime_t FlwaitSound { get; }
 

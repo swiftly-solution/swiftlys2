@@ -58,32 +58,32 @@ internal partial class CBaseButtonImpl : CBaseToggleImpl, CBaseButton
     }
     private static nint? _UseSoundOffset;
 
-    public SchemaUntypedField UseSound
+    public ref CGameSoundEventName UseSound
     {
         get
         {
             _UseSoundOffset = _UseSoundOffset ?? Schema.GetOffset(0x1911FA7FCCC8AC24);
-            return new SchemaUntypedField(_Handle + _UseSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_UseSoundOffset!.Value);
         }
     }
     private static nint? _LockedSoundOffset;
 
-    public SchemaUntypedField LockedSound
+    public ref CGameSoundEventName LockedSound
     {
         get
         {
             _LockedSoundOffset = _LockedSoundOffset ?? Schema.GetOffset(0x1911FA7FB3FCB84B);
-            return new SchemaUntypedField(_Handle + _LockedSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_LockedSoundOffset!.Value);
         }
     }
     private static nint? _UnlockedSoundOffset;
 
-    public SchemaUntypedField UnlockedSound
+    public ref CGameSoundEventName UnlockedSound
     {
         get
         {
             _UnlockedSoundOffset = _UnlockedSoundOffset ?? Schema.GetOffset(0x1911FA7FDC697A96);
-            return new SchemaUntypedField(_Handle + _UnlockedSoundOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_UnlockedSoundOffset!.Value);
         }
     }
     private static nint? _OverrideAnticipationNameOffset;

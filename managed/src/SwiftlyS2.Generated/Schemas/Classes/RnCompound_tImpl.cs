@@ -18,12 +18,12 @@ internal partial class RnCompound_tImpl : SchemaClass, RnCompound_t
 
     private static nint? _SpheresOffset;
 
-    public ref CUtlVector<SchemaUntypedField> Spheres
+    public ref CUtlVector<RnSphere_t> Spheres
     {
         get
         {
             _SpheresOffset = _SpheresOffset ?? Schema.GetOffset(0xAFF8C613E56F78F1);
-            return ref _Handle.AsRef<CUtlVector<SchemaUntypedField>>(_SpheresOffset!.Value);
+            return ref _Handle.AsRef<CUtlVector<RnSphere_t>>(_SpheresOffset!.Value);
         }
     }
     private static nint? _CapsulesOffset;

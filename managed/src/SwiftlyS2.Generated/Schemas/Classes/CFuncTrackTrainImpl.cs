@@ -178,52 +178,52 @@ internal partial class CFuncTrackTrainImpl : CBaseModelEntityImpl, CFuncTrackTra
     }
     private static nint? _SoundMoveOffset;
 
-    public SchemaUntypedField SoundMove
+    public ref CGameSoundEventName SoundMove
     {
         get
         {
             _SoundMoveOffset = _SoundMoveOffset ?? Schema.GetOffset(0x416637FB73E14089);
-            return new SchemaUntypedField(_Handle + _SoundMoveOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundMoveOffset!.Value);
         }
     }
     private static nint? _SoundMovePingOffset;
 
-    public SchemaUntypedField SoundMovePing
+    public ref CGameSoundEventName SoundMovePing
     {
         get
         {
             _SoundMovePingOffset = _SoundMovePingOffset ?? Schema.GetOffset(0x416637FB68B489FD);
-            return new SchemaUntypedField(_Handle + _SoundMovePingOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundMovePingOffset!.Value);
         }
     }
     private static nint? _SoundStartOffset;
 
-    public SchemaUntypedField SoundStart
+    public ref CGameSoundEventName SoundStart
     {
         get
         {
             _SoundStartOffset = _SoundStartOffset ?? Schema.GetOffset(0x416637FB7CA15A30);
-            return new SchemaUntypedField(_Handle + _SoundStartOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundStartOffset!.Value);
         }
     }
     private static nint? _SoundStopOffset;
 
-    public SchemaUntypedField SoundStop
+    public ref CGameSoundEventName SoundStop
     {
         get
         {
             _SoundStopOffset = _SoundStopOffset ?? Schema.GetOffset(0x416637FB34D8E0B4);
-            return new SchemaUntypedField(_Handle + _SoundStopOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundStopOffset!.Value);
         }
     }
     private static nint? _StrPathTargetOffset;
 
-    public SchemaUntypedField StrPathTarget
+    public ref CGameSoundEventName StrPathTarget
     {
         get
         {
             _StrPathTargetOffset = _StrPathTargetOffset ?? Schema.GetOffset(0x416637FB7AF8129A);
-            return new SchemaUntypedField(_Handle + _StrPathTargetOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_StrPathTargetOffset!.Value);
         }
     }
     private static nint? _MoveSoundMinDurationOffset;

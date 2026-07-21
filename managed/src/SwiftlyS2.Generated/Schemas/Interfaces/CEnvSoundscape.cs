@@ -19,8 +19,7 @@ public partial interface CEnvSoundscape : CBaseEntity, ISchemaClass<CEnvSoundsca
 
     public ref float Radius { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField SoundEventName { get; }
+    public ref CGameSoundEventName SoundEventName { get; }
 
     public ref bool OverrideWithEvent { get; }
 

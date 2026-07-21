@@ -77,14 +77,11 @@ public partial interface CFuncRotator : CBaseModelEntity, ISchemaClass<CFuncRota
 
     public ref bool OscillationFromStart { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField StartSound { get; }
+    public ref CGameSoundEventName StartSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField LoopSound { get; }
+    public ref CGameSoundEventName LoopSound { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField StopSound { get; }
+    public ref CGameSoundEventName StopSound { get; }
 
     public ref float TargetAngle { get; }
 

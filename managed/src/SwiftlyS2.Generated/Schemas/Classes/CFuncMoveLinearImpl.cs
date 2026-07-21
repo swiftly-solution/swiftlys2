@@ -48,22 +48,22 @@ internal partial class CFuncMoveLinearImpl : CBaseToggleImpl, CFuncMoveLinear
     }
     private static nint? _SoundStartOffset;
 
-    public SchemaUntypedField SoundStart
+    public ref CGameSoundEventName SoundStart
     {
         get
         {
             _SoundStartOffset = _SoundStartOffset ?? Schema.GetOffset(0xDC0EE894E2756078);
-            return new SchemaUntypedField(_Handle + _SoundStartOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundStartOffset!.Value);
         }
     }
     private static nint? _SoundStopOffset;
 
-    public SchemaUntypedField SoundStop
+    public ref CGameSoundEventName SoundStop
     {
         get
         {
             _SoundStopOffset = _SoundStopOffset ?? Schema.GetOffset(0xDC0EE894E9EADD9C);
-            return new SchemaUntypedField(_Handle + _SoundStopOffset!.Value);
+            return ref _Handle.AsRef<CGameSoundEventName>(_SoundStopOffset!.Value);
         }
     }
     private static nint? _CurrentSoundOffset;

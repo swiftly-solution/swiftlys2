@@ -23,8 +23,7 @@ public partial interface CMessage : CPointEntity, ISchemaClass<CMessage>
 
     public ref float Radius { get; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField Noise { get; }
+    public ref CGameSoundEventName Noise { get; }
 
     public ref CEntityIOOutput OnShowMessage { get; }
 

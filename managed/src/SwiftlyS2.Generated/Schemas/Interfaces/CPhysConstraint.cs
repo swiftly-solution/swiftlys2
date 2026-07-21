@@ -29,8 +29,7 @@ public partial interface CPhysConstraint : CLogicalEntity, ISchemaClass<CPhysCon
 
     public string NameAttachment2 { get; set; }
 
-    // CGameSoundEventName
-    public SchemaUntypedField BreakSound { get; }
+    public ref CGameSoundEventName BreakSound { get; }
 
     public ref float ForceLimit { get; }
 
