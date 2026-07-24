@@ -122,14 +122,9 @@ internal class TraceManager : ITraceManager
 
     public void TracePlayerBBox( Vector start, Vector end, BBox_t bounds, CTraceFilter filter, ref CGameTrace trace )
     {
-        unsafe
-        {
-            fixed (CGameTrace* tracePtr = &trace)
-            {
-                filter.EnsureValid();
-                GameFunctions.TracePlayerBBox(start, end, bounds, &filter, tracePtr);
-            }
-        }
+        Ray_t ray = new();
+        ray.Init(bounds.Mins, bounds.Maxs);
+        TraceShape(start, end, ray, filter, ref trace);
     }
 
     public void TraceShape( Vector start, Vector end, Ray_t ray, CTraceFilter filter, ref CGameTrace trace )
@@ -146,26 +141,10 @@ internal class TraceManager : ITraceManager
 
     public TraceResult TracePlayerBBox( in Vector start, in Vector end, in BBox_t bounds, in TraceParams? options = default )
     {
-        CGameTrace _traceResult = new();
         var resolvedOptions = ResolveOptionsOrDefault(in options);
-        var _traceFilter = FromTraceOptions(resolvedOptions, out var callbackFilter, out _);
+        resolvedOptions.Ray.Init(bounds.Mins, bounds.Maxs);
 
-        unsafe
-        {
-            var oldCustomTraceFilter = CTraceFilterVTable.CustomTraceFilter;
-            CTraceFilterVTable.CustomTraceFilter = callbackFilter;
-
-            try
-            {
-                GameFunctions.TracePlayerBBox(start, end, bounds, &_traceFilter, &_traceResult);
-            }
-            finally
-            {
-                CTraceFilterVTable.CustomTraceFilter = oldCustomTraceFilter;
-            }
-        }
-
-        return FromCGameTrace(ref _traceResult);
+        return TraceShapeLine(in start, in end, resolvedOptions);
     }
 
     public TraceResult TraceShapeLine( in Vector start, in Vector end, in TraceParams? options = default )

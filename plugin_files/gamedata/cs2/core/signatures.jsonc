@@ -143,14 +143,6 @@
         "windows": "48 89 5C 24 18 4C 89 4C 24 20 48 89 4C 24 08 55 56 57 41 54 41 55 41 56 41 57 48 83 EC 20",
         "linux": "55 48 89 E5 41 55 49 89 CD 41 54 49 89 FC 53 BB"
     },
-    // Function with 5 arguments next to sv_walkable_normal references
-    // Alternative, search for "Stuck" text, above it you'll find something like `v5 = *(_DWORD *)sub_180A517A0(a1, (unsigned int)&v38, a2, (int)a2 + 200, 11, (__int64)v29);`
-    // Enter in that function, and you'll find a function called outside of any block with 6 arguments, enter in it and in there it's the 2nd function being called
-    "TracePlayerBBox": {
-        "lib": "server",
-        "windows": "48 8B C4 4C 89 40 ? 55 53 57",
-        "linux": "55 4D 89 CA 48 89 E5 41 57 49 89 CF"
-    },
     // Find string 'Physics/TraceShape (Server)'
     "TraceShape": {
         "lib": "server",
