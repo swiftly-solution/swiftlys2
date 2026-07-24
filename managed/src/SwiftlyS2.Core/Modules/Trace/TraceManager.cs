@@ -142,8 +142,11 @@ internal class TraceManager : ITraceManager
     public TraceResult TracePlayerBBox( in Vector start, in Vector end, in BBox_t bounds, in TraceParams? options = default )
     {
         var resolvedOptions = ResolveOptionsOrDefault(in options);
-        resolvedOptions.Ray.Init(bounds.Mins, bounds.Maxs);
-
+    
+        var ray = resolvedOptions.Ray;
+        ray.Init(bounds.Mins, bounds.Maxs);
+        resolvedOptions.Ray = ray;
+    
         return TraceShapeLine(in start, in end, resolvedOptions);
     }
 
