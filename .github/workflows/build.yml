@@ -476,4 +476,4 @@ jobs:
       run: |
         cd managed
         dotnet pack --include-symbols --output nupkgs -c Release -p:Version=${{ needs.versioning.outputs.semVer }}
-        dotnet nuget push nupkgs/SwiftlyS2.CS2.${{ needs.versioning.outputs.semVer }}.nupkg --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://nuget.org/api/v2/package
+        dotnet nuget push nupkgs/SwiftlyS2.CS2.${{ needs.versioning.outputs.semVer }}.nupkg --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
